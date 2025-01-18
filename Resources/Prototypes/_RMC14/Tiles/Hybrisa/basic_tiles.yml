@@ -71,6 +71,12 @@
 
 - type: tile
   parent: RMCFloorHybrisaBasicBase
+  id: RMCFloorHybrisaEngineerShip
+  name: strange metal floor
+  sprite: /Textures/_RMC14/Tiles/hybrisa/floor.png
+
+- type: tile
+  parent: RMCFloorHybrisaBasicBase
   id: RMCFloorHybrisaCementFlat
   name: cement
   sprite: /Textures/_RMC14/Tiles/hybrisa/cementflat.png

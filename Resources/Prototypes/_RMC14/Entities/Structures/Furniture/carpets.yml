@@ -29,6 +29,33 @@
             acts: [ "Destruction" ]
 
 - type: entity
+  id: RMCCarpetBaseNonIconsmooth
+  parent: BaseStructure
+  name: carpet
+  description: Fancy walking surface.
+  abstract: true
+  components:
+  - type: Sprite
+    drawdepth: FloorTiles
+  - type: Icon
+    state: full
+  - type: Tag
+    tags: [ Carpet ]
+  - type: Physics
+    canCollide: false
+  - type: Fixtures
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 10
+        behaviors:
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+
+- type: entity
   id: CMCarpetPrison
   parent: CarpetBase
   components:
@@ -38,3 +65,87 @@
   - type: Icon
     sprite: _RMC14/Structures/Furniture/Carpets/prison_carpet.rsi
 
+- type: entity
+  id: RMCCarpetBlue1
+  parent: RMCCarpetBaseNonIconsmooth
+  name: blue carpet
+  components:
+  - type: Clickable
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Carpets/blue_carpet.rsi
+    state: bcarpet01
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Carpets/blue_carpet.rsi
+    state: bcarpet01
+
+- type: entity
+  id: RMCCarpetBlue2
+  parent: RMCCarpetBlue1
+  components:
+  - type: Sprite
+    state: bcarpet02
+  - type: Icon
+    state: bcarpet02
+
+- type: entity
+  id: RMCCarpetBlue3
+  parent: RMCCarpetBlue1
+  components:
+  - type: Sprite
+    state: bcarpet03
+  - type: Icon
+    state: bcarpet03
+
+- type: entity
+  id: RMCCarpetBlue4
+  parent: RMCCarpetBlue1
+  components:
+  - type: Sprite
+    state: bcarpet04
+  - type: Icon
+    state: bcarpet04
+
+- type: entity
+  id: RMCCarpetBlue5
+  parent: RMCCarpetBlue1
+  components:
+  - type: Sprite
+    state: bcarpet05
+  - type: Icon
+    state: bcarpet05
+
+- type: entity
+  id: RMCCarpetBlue6
+  parent: RMCCarpetBlue1
+  components:
+  - type: Sprite
+    state: bcarpet06
+  - type: Icon
+    state: bcarpet06
+
+- type: entity
+  id: RMCCarpetBlue7
+  parent: RMCCarpetBlue1
+  components:
+  - type: Sprite
+    state: bcarpet07
+  - type: Icon
+    state: bcarpet07
+
+- type: entity
+  id: RMCCarpetBlue8
+  parent: RMCCarpetBlue1
+  components:
+  - type: Sprite
+    state: bcarpet08
+  - type: Icon
+    state: bcarpet08
+
+- type: entity
+  id: RMCCarpetBlue9
+  parent: RMCCarpetBlue1
+  components:
+  - type: Sprite
+    state: bcarpet09
+  - type: Icon
+    state: bcarpet09

@@ -213,6 +213,58 @@
     },
     {
       "name": "stone_edging_deco_4"
+    },
+    {
+      "name": "red_N"
+    },
+    {
+      "name": "red_W"
+    },
+    {
+      "name": "red_E"
+    },
+    {
+      "name": "red_S"
+    },
+    {
+      "name": "red_NW-out"
+    },
+    {
+      "name": "red_NE-out"
+    },
+    {
+      "name": "red_SW-out"
+    },
+    {
+      "name": "red_SE-out"
+    },
+    {
+      "name": "zhalfgrate1",
+      "directions": 4
+    },
+    {
+      "name": "engPlatform_corners",
+      "directions": 4
+    },
+    {
+      "name": "plating_angled",
+      "directions": 4
+    },
+    {
+      "name": "hull_angled",
+      "directions": 4
+    },
+    {
+      "name": "hull_angled2",
+      "directions": 4
+    },
+    {
+      "name": "warningstripes_angled",
+      "directions": 4
+    },
+    {
+      "name": "warningstripes_angled_corner",
+      "directions": 4
     }
   ]
 }

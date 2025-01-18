@@ -309,6 +309,62 @@
     sprite: _RMC14/Decals/hybrisa.rsi
     state: SW-out
 
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRedWarningWest
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: red_W
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRedWarningEast
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: red_E
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRedWarningNorth
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: red_N
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRedWarningSouth
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: red_S
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRedWarningNorthEast
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: red_NE-out
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRedWarningNorthWest
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: red_NW-out
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRedWarningSouthEast
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: red_SE-out
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRedWarningSouthWest
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: red_SW-out
+
 # Trash
 
 - type: decal
@@ -495,3 +551,57 @@
     sprite: _RMC14/Decals/hybrisa.rsi
     state: stone_edging_deco_4
     color: "#7e7d72"
+
+# Diagonal
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaHalfGrate
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: zhalfgrate1
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningStripesAngled
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: warningstripes_angled
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningStripesAngledCorner
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: warningstripes_angled_corner
+
+
+# Engineer Ship
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiPlatformCorners
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: engPlatform_corners
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiPlatingAngled
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: plating_angled
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiHullAngled
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: hull_angled
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiHullAngled2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: hull_angled2

@@ -138,20 +138,11 @@
     color: "#451e5eb8"
 
 - type: entity
-  parent: RMCPodDoor
-  id: RMCPodDoorHybrisa
+  parent: RMCPodDoorIndestructible
+  id: RMCPodDoorHybrisaIndestructibleUltra
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Doors/Shutters/Hybrisa/hybrisa_shutter.rsi
-  - type: MinimapColor
-    color: "#451e5eb8"
-
-- type: entity
-  parent: RMCPodDoorNonOccluder
-  id: RMCPodDoorHybrisaWindow
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Doors/Shutters/Hybrisa/window_shutter.rsi
+    sprite: _RMC14/Structures/Doors/Shutters/Hybrisa/ultra_reinforced.rsi
   - type: MinimapColor
     color: "#451e5eb8"
 

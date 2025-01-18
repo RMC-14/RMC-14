@@ -133,6 +133,23 @@
     graph: RMCWindowHybrisa
     node: windowHybrisa
 
+- type: entity
+  parent: CMBaseWindow
+  id: RMCWindowHybrisaHull
+  name: hull window
+  description: A glass window. Light refracts incorrectly when looking through. It looks rather strong. No way to get through here.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/hybrisa_window.rsi
+    state: strata_window0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/hybrisa_window.rsi
+    state: strata_window0
+  - type: IconSmooth
+    key: walls
+    base: strata_window
+    mode: CardinalFlags
+
 # Medical
 
 - type: entity

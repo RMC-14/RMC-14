@@ -22,6 +22,66 @@
     {
       "name": "white_cyan4",
       "directions": 4
+    },
+    {
+      "name": "orange_cover"
+    },
+    {
+      "name": "orange_tile"
+    },
+    {
+      "name": "orange_edge1"
+    },
+    {
+      "name": "orange_edge2"
+    },
+    {
+      "name": "orange_edge3"
+    },
+    {
+      "name": "orange_edge4"
+    },
+    {
+      "name": "orange_edge5"
+    },
+    {
+      "name": "orange_edge6"
+    },
+    {
+      "name": "orange_edge7"
+    },
+    {
+      "name": "orange_edge8"
+    },
+    {
+      "name": "orange_icorner1"
+    },
+    {
+      "name": "orange_icorner2"
+    },
+    {
+      "name": "orange_icorner3"
+    },
+    {
+      "name": "orange_icorner4"
+    },
+    {
+      "name": "multi_tiles1"
+    },
+    {
+      "name": "multi_tiles2"
+    },
+    {
+      "name": "multi_tiles3"
+    },
+    {
+      "name": "multi_tiles4"
+    },
+    {
+      "name": "multi_tiles5"
+    },
+    {
+      "name": "multi_tiles6"
     }
   ]
 }

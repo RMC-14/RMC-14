@@ -14,3 +14,8 @@
   parent: RMCFloorHybrisaWhite
   id: RMCFloorHybrisaWhiteCheck
   sprite: /Textures/_RMC14/Tiles/hybrisa/tilewhitecheck.png
+
+- type: tile
+  parent: RMCFloorHybrisaWhite
+  id: RMCFloorHybrisaWhiteFull
+  sprite: /Textures/_RMC14/Tiles/hybrisa/metalwhitefull.png

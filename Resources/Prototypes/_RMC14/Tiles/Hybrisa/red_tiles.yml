@@ -6,6 +6,17 @@
 
 - type: tile
   parent: RMCFloorHybrisaRedBase
+  id: RMCFloorHybrisaRedMetal
+  name: red metal tile
+  sprite: /Textures/_RMC14/Tiles/hybrisa/tilered.png
+
+- type: tile
+  parent: RMCFloorHybrisaRedMetal
+  id: RMCFloorHybrisaRedMetalCuppaJoe
+  sprite: /Textures/_RMC14/Tiles/hybrisa/cuppafloor.png
+
+- type: tile
+  parent: RMCFloorHybrisaRedBase
   id: RMCFloorHybrisaRedCarpet
   name: red carpet
   sprite: /Textures/_RMC14/Tiles/hybrisa/carpetred.png

@@ -1,0 +1,36 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorStrataMetalBase
+  name: tiles-cm-default-metal
+
+- type: tile
+  parent: CMFloorStrataMetalBase
+  id: CMFloorStrataMultitile1
+  name: metal tile
+  sprite: /Textures/_RMC14/Tiles/strata/multi_tiles1.png
+
+- type: tile
+  parent: CMFloorStrataMultitile1
+  id: CMFloorStrataMultitile2
+  sprite: /Textures/_RMC14/Tiles/strata/multi_tiles2.png
+
+- type: tile
+  parent: CMFloorStrataMultitile1
+  id: CMFloorStrataMultitile3
+  sprite: /Textures/_RMC14/Tiles/strata/multi_tiles3.png
+
+- type: tile
+  parent: CMFloorStrataMultitile1
+  id: CMFloorStrataMultitile4
+  sprite: /Textures/_RMC14/Tiles/strata/multi_tiles4.png
+
+- type: tile
+  parent: CMFloorStrataMultitile1
+  id: CMFloorStrataMultitile5
+  sprite: /Textures/_RMC14/Tiles/strata/multi_tiles5.png
+
+- type: tile
+  parent: CMFloorStrataMultitile1
+  id: CMFloorStrataMultitile6
+  sprite: /Textures/_RMC14/Tiles/strata/multi_tiles6.png

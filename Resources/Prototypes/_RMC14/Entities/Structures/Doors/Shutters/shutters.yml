@@ -107,3 +107,23 @@
     airBlocked: false
   - type: RadiationBlocker
     enabled: false
+
+- type: entity
+  parent: RMCShutterAlmayer
+  id: RMCShutterHybrisa
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Shutters/Hybrisa/hybrisa_shutter.rsi
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+
+- type: entity
+  parent: RMCShutterAlmayer
+  id: RMCShutterHybrisaWindow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Shutters/Hybrisa/window_shutter.rsi
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]

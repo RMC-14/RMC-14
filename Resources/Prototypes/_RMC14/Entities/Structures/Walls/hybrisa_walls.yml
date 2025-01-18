@@ -31,6 +31,24 @@
     key: walls
     base: rock_border
 
+# Engineer Ship
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallEngineer
+  name: strange metal wall
+  description: Nigh indestructible walls that make up the hull of an unknown ancient ship, looks like nothing you can do will penetrate the hull.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_engineership.rsi
+    state: metal
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_engineership.rsi
+    state: metal
+  - type: IconSmooth
+    key: walls
+    base: metal
+
 # Colony
 
 - type: entity
