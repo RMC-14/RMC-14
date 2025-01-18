@@ -161,6 +161,9 @@
   - type: StaticPrice
     price: 50
   - type: ItemSlots
+  - type: Construction
+    graph: RMCCrates
+    node: parts
 
 
 # Weldable
