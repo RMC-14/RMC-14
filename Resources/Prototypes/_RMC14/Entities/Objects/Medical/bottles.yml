@@ -55,6 +55,10 @@
     blacklist:
       components:
       - Xeno
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 - type: entity
   parent: CMBottleEmpty
