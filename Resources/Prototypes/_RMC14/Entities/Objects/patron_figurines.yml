@@ -1076,8 +1076,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronRinaShell-ShockedGensvil
   name: Rina 'Shell-Shocked' Gensvil figurine
-  description: "In front of you is a statuette of a noticeably battered and tired red-haired felinid. Her right eye is completely missing, in its place you see a black eye patch. She looks physically fit, her arms look strong. There's a medical HUD on her only surviving eye.
-There's a word, scratched with something sharp on the bottom of the small figurine. It says \"UNFAIR\"."
+  description: "In front of you is a statuette of a noticeably battered and tired red-haired felinid. Her right eye is completely missing, in its place you see a black eye patch. She looks physically fit, her arms look strong. There's a medical HUD on her only surviving eye. There's a word, scratched with something sharp on the bottom of the small figurine. It says \"UNFAIR\"."
   components:
   - type: Sprite
     state: rina_shell-shocked_gensvil
