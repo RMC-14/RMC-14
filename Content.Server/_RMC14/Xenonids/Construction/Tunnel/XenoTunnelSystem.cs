@@ -20,6 +20,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Hands;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Maps;
 using Content.Shared.Mobs;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
@@ -49,6 +50,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
     [Dependency] private readonly PlayerSystem _player = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
     public int NextTempTunnelId
     { get; private set; }
     public override void Initialize()
@@ -101,7 +103,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         if (_transform.GetGrid(location) is not { } gridId ||
             !TryComp(gridId, out MapGridComponent? grid))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-area"), xenoBuilder, xenoBuilder);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-area-tunnel"), xenoBuilder, xenoBuilder);
             return;
         }
 
@@ -110,7 +112,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 
         if (!Area.TryGetArea(location, out var area, out _, out _) || area.NoTunnel)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-area"), xenoBuilder, xenoBuilder);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-area-tunnel"), xenoBuilder, xenoBuilder);
             return;
         }
 
@@ -650,6 +652,20 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             _popup.PopupEntity(Loc.GetString(popupType), user, user, PopupType.SmallCaution);
             return false;
         }
+
+        if (Transform(user).GridUid is not EntityUid gridId ||
+            !TryComp(gridId, out MapGridComponent? gridComp))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-tile-tunnel"), user, user, PopupType.SmallCaution);
+            return false;
+        }
+        var tileRef = _map.GetTileRef(gridId, gridComp, coords);
+        if (!tileRef.GetContentTileDefinition().CanPlaceTunnel)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-tile-tunnel"), user, user, PopupType.SmallCaution);
+            return false;
+        }
+
         return true;
     }
 
