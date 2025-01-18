@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the hive core not getting automatically destroyed if not on the
-      dropship once it lifts off for hijack.
-    type: Fix
-  - message: Added the hive core's missing passive healing. It now heals 100 damage
-      every 10 seconds.
-    type: Fix
-  - message: Added the hive core's missing 5 minute cooldown if destroyed by damage.
-      The automatic destroy on hijack does not activate the cooldown.
-    type: Fix
-  id: 725
-  time: '2024-09-21T09:25:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4098
 - author: DummeHytteOst
   changes:
   - message: All squad roles can now buy smoke grenades.
@@ -5111,5 +5097,14 @@
   id: 1224
   time: '2025-01-18T03:42:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5416
+- author: Vermidia
+  changes:
+  - message: Added labcoats (for docs and CMO) that can be unbuttoned and medical
+      aprons (for docs, nurses, and CMO) to med equipment racks + CMO now gets their
+      peaked cap and special labcoat.
+    type: Add
+  id: 1225
+  time: '2025-01-18T03:43:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5405
 Name: RMC14
 Order: -1
