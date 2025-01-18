@@ -1071,3 +1071,15 @@
     state: william_spurs_crockett
   - type: PatronFigurine
     id: ac7102b0-d759-4e4d-bbef-1f68b9d2de9b
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRinaShell-ShockedGensvil
+  name: Rina 'Shell-Shocked' Gensvil figurine
+  description: "In front of you is a statuette of a noticeably battered and tired red-haired felinid. Her right eye is completely missing, in its place you see a black eye patch. She looks physically fit, her arms look strong. There's a medical HUD on her only surviving eye.
+There's a word, scratched with something sharp on the bottom of the small figurine. It says \"UNFAIR\"."
+  components:
+  - type: Sprite
+    state: rina_shell-shocked_gensvil
+  - type: PatronFigurine
+    id: 392b385b-5e99-446d-a81b-119ca1c90a6e
