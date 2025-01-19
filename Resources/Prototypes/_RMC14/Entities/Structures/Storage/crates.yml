@@ -134,6 +134,10 @@
         - SmallMobMask
         layer:
         - MachineLayer
+  - type: AccessReader
+    access: [["Captain"]]
+  - type: Lock
+    locked: true
   - type: EntityStorage
   - type: PlaceableSurface
     isPlaceable: false
@@ -256,7 +260,7 @@
       - id: RMCFlashlight
       - id: CMAPCElectronics
       - id: CMClipboard
-        prob: 0.5
+        prob: 0.05
       - id: RMCEngineerKit
         prob: 0.05
 
@@ -312,8 +316,9 @@
       - id: RMCD18Case
         prob: 0.005
       - id: RMCGrenadeMolotov
-        prob: 0.0005
-
+        prob: 0.005
+      - id: CMGrenadeFrag
+        prob: 0.005
 
 # Weldable
 - type: entity
