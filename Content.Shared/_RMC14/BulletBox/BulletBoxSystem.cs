@@ -1,4 +1,5 @@
 ﻿using Content.Shared.DoAfter;
+using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Components;
@@ -16,6 +17,7 @@ public sealed class BulletBoxSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<BulletBoxComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<BulletBoxComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<BulletBoxComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<BulletBoxComponent, BulletBoxTransferDoAfterEvent>(OnTransferDoAfter);
     }
@@ -23,6 +25,14 @@ public sealed class BulletBoxSystem : EntitySystem
     private void OnMapInit(Entity<BulletBoxComponent> ent, ref MapInitEvent args)
     {
         UpdateAppearance(ent);
+    }
+
+    private void OnExamined(Entity<BulletBoxComponent> ent, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(BulletBoxComponent)))
+        {
+            args.PushText(Loc.GetString("rmc-bullet-box-amount", ("amount", ent.Comp.Amount)));
+        }
     }
 
     private void OnInteractUsing(Entity<BulletBoxComponent> ent, ref InteractUsingEvent args)
