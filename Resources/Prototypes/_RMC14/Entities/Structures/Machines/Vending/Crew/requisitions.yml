@@ -496,8 +496,6 @@
       #  amount: 5
       - id: RMCAttachmentU1GrenadeLauncher
         amount: 10
-      #- id: RMCAttachmentMK1GrenadeLauncher # UNCOMMENT WHEN THE MK1 IS ADDED
-      #  amount: 10
       - id: RMCAttachmentVerticalGrip
         amount: 10
     - name: Stock

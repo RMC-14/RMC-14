@@ -260,11 +260,11 @@
       - cost: 10000
         crate: RMCCrateSmartGunSet
       - cost: 4000
-        crate: RMCCrateM54C
-      - cost: 4000
         crate: RMCCrateM54CE2
       - cost: 3000
         crate: RMCCrateMK80
+      - cost: 4000
+        crate: RMCCrateM54CMK1
       - cost: 4000
         crate: RMCCrateXM88
       - cost: 3000
