@@ -1,7 +1,7 @@
 ﻿- type: entity
   parent: AdminObserver
   id: RMCAdminObserver
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Loadout
     prototypes: [ RMCMobAghostGear ]

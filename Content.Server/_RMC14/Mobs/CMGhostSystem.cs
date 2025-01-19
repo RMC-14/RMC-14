@@ -31,6 +31,7 @@ namespace Content.Server._RMC14.Mobs
         {
             _actions.AddAction(uid, ref comp.ToggleMarineHudEntity, comp.ToggleMarineHud);
             _actions.AddAction(uid, ref comp.ToggleXenoHudEntity, comp.ToggleXenoHud);
+            _actions.AddAction(uid, ref comp.FindParasiteEntity, comp.FindParasite);
 
             EnsureComp<ShowMarineIconsComponent>(uid);
             EnsureComp<ShowHealthIconsComponent>(uid);

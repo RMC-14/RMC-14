@@ -19,6 +19,7 @@ using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
@@ -38,6 +39,8 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly INetManager _net = default!;
+
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
@@ -208,7 +211,8 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                     }
 
                     var msg = Loc.GetString("rmc-xeno-tail-stab-self", ("target", hit));
-                    _popup.PopupClient(msg, stab, stab);
+                    if (_net.IsServer)
+                        _popup.PopupEntity(msg, stab, stab);
 
                     msg = Loc.GetString("rmc-xeno-tail-stab-target", ("user", stab));
                     _popup.PopupEntity(msg, stab, hit, PopupType.MediumCaution);
@@ -228,7 +232,8 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
         DoLunge((stab, stab, transform), localPos, "WeaponArcThrust");
 
         var sound = actualResults.Count > 0 ? stab.Comp.SoundHit : stab.Comp.SoundMiss;
-        _audio.PlayPredicted(sound, stab, stab);
+        if (_net.IsServer)
+            _audio.PlayPvs(sound, stab);
 
         var attackEv = new MeleeAttackEvent(stab);
         RaiseLocalEvent(stab, ref attackEv);

@@ -5,11 +5,17 @@
   description: cm-job-description-rifleman
   playTimeTracker: CMJobRifleman
   startingGear: CMGearRifleman
+  dummyStartingGear: CMGearRiflemanEquipped
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - Rifleman
+  hasIcon: false
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: private
+  roleWeight: 1
   special:
   - !type:AddComponentSpecial
     components:
@@ -19,31 +25,28 @@
     - type: CMVendorUser
       points: 45
     - type: SquadArmorWearer
-  hasIcon: false
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: private
+    - type: JobPrefix
+      prefix: "RFN"
 
 - type: startingGear
   id: CMGearRifleman
   equipment:
-    back: CMSatchelMarine
     id: CMDogtagRifleman
 
 - type: startingGear
   id: CMGearRiflemanEquipped
   equipment:
     jumpsuit: JumpsuitMarine
-    back: CMSatchelMarine
     shoes: CMBootsBlackFilled
     head: ArmorHelmetM10
-    outerClothing: CMArmorM3Medium
+    outerClothing: RMCArmorM3MediumVariants
     gloves: CMHandsBlackMarine
     id: CMDogtagRifleman
     ears: CMHeadsetAlpha
 
 - type: playTimeTracker
   id: CMJobRifleman
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase

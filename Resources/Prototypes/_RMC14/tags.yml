@@ -5,6 +5,9 @@
   id: CMCartridgePistol9mm
 
 - type: Tag
+  id: CMCartridgePistol.22mm
+
+- type: Tag
   id: CMCartridgePistol9mmAP
 
 - type: Tag
@@ -13,7 +16,8 @@
 - type: Tag
   id: RCMCartridgePistol9mmSquashHead
 
-
+- type: Tag
+  id: RMCCartridge7x45mm
 
 - type: Tag
   id: RMCCartridgePistol45ACP
@@ -52,16 +56,10 @@
   id: LauncherCompatibleGrenade
 
 - type: Tag
-  id: CMAutoInjector
-
-- type: Tag
   id: CMFlarePack
 
 - type: Tag
   id: RMCSmartPistol
-
-- type: Tag
-  id: RMCSmartPistolHolster
 
 - type: Tag
   id: RMCMK80
@@ -76,6 +74,24 @@
   id: RMCRocketAmmo84mm
 
 - type: Tag
+  id: RMCDropshipWeaponPoint
+
+- type: Tag
+  id: RMCDropshipUtilityPoint
+
+- type: Tag
+  id: WeaponSMGM63
+
+- type: Tag
+  id: CMWeaponPistolM1984
+
+- type: Tag
+  id: CMWeaponPistolM77
+
+- type: Tag
+  id: RMCWeaponRevolverM44
+
+- type: Tag
   id: RMCGlass
 
 - type: Tag
@@ -85,4 +101,16 @@
   id: RMCMacheteScabbard
 
 - type: Tag
-  id: RMCG8Pouch
+  id: RMCScalpel
+
+- type: Tag
+  id: RMCScrewdriver
+
+- type: Tag
+  id: ThrowingKnife
+
+- type: Tag
+  id: RMCCircuitboard
+
+- type: Tag
+  id: RMCEngineerKit

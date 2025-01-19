@@ -18,9 +18,11 @@ mode = 1
 
 [game]
 maxplayers = 500
-soft_max_players = 250
+soft_max_players = 350
 panic_bunker.enabled = false
 round_end_pvs_overrides = false
+round_restart_time = 180
+lobbyduration = 180
 
 [ghost]
 kill_crit = false
@@ -47,17 +49,17 @@ discord = "https://discord.gg/rouny"
 github = "https://github.com/RMC-14/RMC-14"
 patreon = "https://www.patreon.com/RMC14"
 #website = ""
-#wiki = ""
+wiki = "https://wiki.rouny-ss14.com"
 
 [net]
-tickrate = 15
+tickrate = 25
 port = 1212
 bindto = "::,0.0.0.0"
 
 [physics]
 grid_splitting = false
-maxlinvelocity = 45 # TODO RMC14 62 when we don't get tunneling, change in GunComponent too
-target_minimum_tickrate = 90
+maxlinvelocity = 72
+target_minimum_tickrate = 120
 
 [replay]
 auto_record = true

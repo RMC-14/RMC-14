@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/items/items.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "lighter_c"
+    },
+    {
+      "name": "lighter_c_on"
+    },
+    {
+      "name": "lighter_r"
+    },
+    {
+      "name": "lighter_r_on"
+    },
+    {
+      "name": "lighter_g"
+    },
+    {
+      "name": "lighter_g_on"
+    },
+    {
+      "name": "lighter_y"
+    },
+    {
+      "name": "lighter_y_on"
+    },
+    {
+      "name": "lighter_flame",
+      "delays": [
+        [
+          0.1,
+          0.1,
+	  0.1
+        ]
+      ]
+    }
+  ]
+}

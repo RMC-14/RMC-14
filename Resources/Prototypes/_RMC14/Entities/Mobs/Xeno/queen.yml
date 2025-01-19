@@ -18,6 +18,10 @@
       sprite: _RMC14/Mobs/Xenonids/Queen/ovipositor.rsi
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
   - type: MobState
     allowedStates:
     - Alive
@@ -51,16 +55,13 @@
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
     - ActionXenoGrowOvipositor
-#    - ActionXenoBanishXenonid
-#    - ActionXenoReadmitXenonid
+    - ActionXenoManageHive
 #    - ActionXenoRoyalJelly
 #    - ActionXenoMarkResin
-    # Mature
-#    - ActionXenoSpit
-#    - ActionXenoToggleSpitType
     tier: 0
     bypassTierCount: true
     unlockAt: 0
+    hudOffset: -0.1,0
   - type: XenoHeavy
   - type: XenoAcid
   - type: XenoConstruction
@@ -82,15 +83,22 @@
     explosionArmor: 100
   - type: XenoWordQueen
   - type: XenoGut
+  - type: XenoClaws
+    clawType: VerySharp
   - type: MeleeWeapon
     damage:
       groups:
         Brute: 40
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 54
   - type: XenoOvipositorCapable
-  - type: Tackle # min: 2, max: 6
-    threshold: 4
-    stun: 11
+  - type: Tackle
     chance: 0.55
+    stunMin: 5
+    stunMax: 6
+  - type: TunnelRenamer
   - type: Fixtures
     fixtures:
       fix1:
@@ -168,8 +176,11 @@
     deadThreshold: 1100
     addComponents:
     - type: XenoScreech
+    - type: XenoToggleSpit
     addActions:
     - ActionXenoScreech
+    - ActionXenoSpitQueen
+    - ActionXenoToggleSpitType
   - type: RMCSize
     size: Immobile
   - type: RMCXenoDamageVisuals
@@ -189,6 +200,27 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: xenoqueen
+    background:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: xeno_ruler
   - type: AcidTrap
   - type: TacticalMapLiveUpdateOnOvi
     enabled: false
+  - type: RMCPointing
+    arrow: RMCPointingArrowBigQueen
+  - type: ManageHive
+  - type: HiveLeaderGranter
+  - type: XenoHeal
+  - type: StunOnExplosionReceived
+    weak: false
+  - type: XenoSpit
+    projectileId: XenoQueenNeuroSpitProjectile
+    plasmaCost: 50
+  - type: CommendationGiver
+  - type: XenoInhands
+    prefix: queen
+
+- type: entity
+  id: XenoLeaderPheromoneRelay
+  components:
+  - type: XenoPheromones

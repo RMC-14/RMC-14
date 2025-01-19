@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Movement;
@@ -136,6 +136,14 @@ public sealed class XenoVisualizerSystem : VisualizerSystem<XenoComponent>
                     rsi.TryGetState("crest", out _))
                 {
                     sprite.LayerSetState(layer, "crest");
+                    break;
+                }
+
+                if (AppearanceSystem.TryGetData(entity, XenoVisualLayers.Burrow, out bool burrowed, appearance) &&
+                    burrowed &&
+                    rsi.TryGetState("burrowed", out _))
+                {
+                    sprite.LayerSetState(layer, "burrowed");
                     break;
                 }
 

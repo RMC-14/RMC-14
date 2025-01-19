@@ -1,0 +1,24 @@
+- id: "GeneralBlacklist"
+  type: "Blacklist"
+  entityMatchers:
+  - "CMStamp.*" # All stamps.
+  - "CMIdCard.*" # All ID cards.
+  - "RMCAdminAccessConfigurator"
+  - "RMCAdminFax"
+  - "AdminPDA"
+  - "AdminHypo"
+
+- id: "AllowApprovedDeniedStamps" # These two stamps specifically are not a problem and should be left untouched.
+  type: "Whitelist"
+  entityMatchers:
+  - "CMStampApproved"
+  - "CMStampDenied"
+
+- id: "AllowAllOnAdminMaps"
+  type: "Whitelist"
+  on_paths:
+  - "admin_fax.yml"
+  - "dev_map.yml"
+  entityMatchers:
+  - ".*"
+

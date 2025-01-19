@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction;
+using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -34,6 +35,8 @@ using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -64,6 +67,7 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly TagSystem _tags = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
@@ -77,6 +81,8 @@ public sealed class XenoEggSystem : EntitySystem
     public override void Initialize()
     {
         _stepTriggerQuery = GetEntityQuery<StepTriggerComponent>();
+
+        SubscribeLocalEvent<DropshipHijackStartEvent>(OnDropshipHijackStart);
 
         SubscribeLocalEvent<XenoComponent, XenoGrowOvipositorActionEvent>(OnXenoGrowOvipositorAction);
         SubscribeLocalEvent<XenoComponent, XenoGrowOvipositorDoAfterEvent>(OnXenoGrowOvipositorDoAfter);
@@ -97,7 +103,19 @@ public sealed class XenoEggSystem : EntitySystem
         SubscribeLocalEvent<XenoEggComponent, StepTriggeredOffEvent>(OnXenoEggStepTriggered);
         SubscribeLocalEvent<XenoEggComponent, BeforeDamageChangedEvent>(OnXenoEggBeforeDamageChanged);
         SubscribeLocalEvent<XenoEggComponent, GetVerbsEvent<ActivationVerb>>(OnGetVerbs);
-        SubscribeLocalEvent<DropshipHijackStartEvent>(OnDropshipHijackStart);
+    }
+
+    private void OnDropshipHijackStart(ref DropshipHijackStartEvent ev)
+    {
+        var query = EntityQueryEnumerator<XenoOvipositorCapableComponent>();
+        while (query.MoveNext(out var uid, out _))
+        {
+            foreach (var (actionId, action) in _actions.GetActions(uid))
+            {
+                if (action.BaseEvent is XenoGrowOvipositorActionEvent)
+                    _actions.ClearCooldown(actionId);
+            }
+        }
     }
 
     private void OnXenoGrowOvipositorAction(Entity<XenoComponent> xeno, ref XenoGrowOvipositorActionEvent args)
@@ -129,6 +147,7 @@ public sealed class XenoEggSystem : EntitySystem
         var doAfterArgs = new DoAfterArgs(EntityManager, xeno, delay, ev, xeno)
         {
             BreakOnMove = true,
+            MovementThreshold = 0.001f
         };
 
         if (_doAfter.TryStartDoAfter(doAfterArgs))
@@ -158,16 +177,19 @@ public sealed class XenoEggSystem : EntitySystem
             _transform.AnchorEntity(attached, xform);
 
         var ev = new XenoOvipositorChangedEvent(true);
-        RaiseLocalEvent(ref ev);
+        RaiseLocalEvent(attached, ref ev, true);
     }
 
     private void OnXenoAttachedRemove(Entity<XenoAttachedOvipositorComponent> attached, ref ComponentRemove args)
     {
         if (!TerminatingOrDeleted(attached) && TryComp(attached, out TransformComponent? xform))
+        {
             _transform.Unanchor(attached, xform);
+            _physics.TrySetBodyType(attached, BodyType.KinematicController);
+        }
 
         var ev = new XenoOvipositorChangedEvent(false);
-        RaiseLocalEvent(ref ev);
+        RaiseLocalEvent(attached, ref ev, true);
     }
 
     private void OnXenoMobStateChanged(Entity<XenoAttachedOvipositorComponent> ent, ref MobStateChangedEvent args)
@@ -199,11 +221,8 @@ public sealed class XenoEggSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (egg.Comp.State != XenoEggState.Item ||
-            !TryComp(egg, out TransformComponent? xform))
-        {
+        if (egg.Comp.State != XenoEggState.Item || !HasComp<TransformComponent>(egg))
             return;
-        }
 
         if (!args.CanReach)
         {
@@ -368,24 +387,12 @@ public sealed class XenoEggSystem : EntitySystem
         args.Verbs.Add(parasiteVerb);
     }
 
-    private void OnDropshipHijackStart(ref DropshipHijackStartEvent ev)
-    {
-        var query = EntityQueryEnumerator<XenoOvipositorCapableComponent>();
-        while (query.MoveNext(out var uid, out _))
-        {
-            foreach (var (actionId, action) in _actions.GetActions(uid))
-            {
-                if (action.BaseEvent is XenoGrowOvipositorActionEvent)
-                    _actions.ClearCooldown(actionId);
-            }
-        }
-    }
-
     private bool CanTrigger(EntityUid user)
     {
-        return HasComp<InfectableComponent>(user) &&
-               !HasComp<VictimInfectedComponent>(user) &&
-               !_mobState.IsDead(user);
+        return TryComp<InfectableComponent>(user, out var infected)
+               && !infected.BeingInfected
+               && !_mobState.IsDead(user)
+               && !HasComp<VictimInfectedComponent>(user);
     }
 
     public bool Open(Entity<XenoEggComponent> egg, EntityUid? user, out EntityUid? spawned)
@@ -443,20 +450,20 @@ public sealed class XenoEggSystem : EntitySystem
         }
 
         SetEggState(egg, XenoEggState.Opening);
-        _audio.PlayPredicted(egg.Comp.OpenSound, egg, user);
+
+        if (_timing.IsFirstTimePredicted)
+            _audio.PlayPredicted(egg.Comp.OpenSound, egg, user);
 
         if (_net.IsClient)
             return true;
 
-        var coords = Transform(egg).Coordinates;
-        spawned = SpawnAtPosition(egg.Comp.Spawn, coords);
+        var eggContainer = _container.EnsureContainer<ContainerSlot>(egg.Owner, egg.Comp.CreatureContainerId);
+        spawned = SpawnInContainerOrDrop(egg.Comp.Spawn, egg.Owner, eggContainer.ID);
+
         _hive.SetSameHive(egg.Owner, spawned.Value);
 
         egg.Comp.SpawnedCreature = spawned;
         Dirty(egg);
-
-        var eggContainer = _container.EnsureContainer<ContainerSlot>(egg.Owner, egg.Comp.CreatureContainerId);
-        _container.Insert(spawned.Value, eggContainer);
 
         // TODO: create EggHatchedEvent to uncouple it from ai?
         if (TryComp<ParasiteAIComponent>(spawned, out var ai))
@@ -491,6 +498,16 @@ public sealed class XenoEggSystem : EntitySystem
                 _actions.SetToggled(actionId, true);
             }
         }
+
+        if (TryComp(xeno, out XenoOvipositorCapableComponent? capable))
+        {
+            RemoveOvipositorActions((xeno.Owner, capable));
+            foreach (var actionId in capable.ActionIds)
+            {
+                if (_actions.AddAction(xeno, actionId) is { } action)
+                    capable.Actions[actionId] = action;
+            }
+        }
     }
 
     private void DetachOvipositor(Entity<XenoAttachedOvipositorComponent> xeno)
@@ -507,6 +524,7 @@ public sealed class XenoEggSystem : EntitySystem
             }
         }
 
+        RemoveOvipositorActions(xeno.Owner);
         _popup.PopupClient(Loc.GetString("cm-xeno-ovipositor-detach"), xeno, xeno);
     }
 
@@ -565,7 +583,8 @@ public sealed class XenoEggSystem : EntitySystem
 
             if (HasComp<XenoConstructComponent>(uid) ||
                 _tags.HasAnyTag(uid.Value, StructureTag, AirlockTag) ||
-                HasComp<StrapComponent>(uid))
+                HasComp<StrapComponent>(uid) ||
+                HasComp<XenoTunnelComponent>(uid))
             {
                 var msg = Loc.GetString("cm-xeno-egg-blocked");
                 _popup.PopupClient(msg, uid.Value, user, PopupType.SmallCaution);
@@ -625,6 +644,19 @@ public sealed class XenoEggSystem : EntitySystem
     {
         if (ent.Comp.State == XenoEggState.Item) // cannot destroy in item form
             args.Cancelled = true;
+    }
+
+    private void RemoveOvipositorActions(Entity<XenoOvipositorCapableComponent?> capable)
+    {
+        if (!Resolve(capable, ref capable.Comp, false))
+            return;
+
+        foreach (var action in capable.Comp.Actions)
+        {
+            _actions.RemoveAction(action.Value);
+        }
+
+        capable.Comp.Actions.Clear();
     }
 
     public override void Update(float frameTime)

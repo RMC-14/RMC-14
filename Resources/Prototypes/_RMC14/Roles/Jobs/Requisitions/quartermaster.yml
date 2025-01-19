@@ -18,7 +18,11 @@
   - CMQM
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: ct
+    state: cargo
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -34,19 +38,21 @@
         RMCSkillPolice: 1
         RMCSkillPowerLoader: 2
     - type: MarineOrders
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: "QM"
 
 - type: startingGear
   id: CMGearQuartermaster
   equipment:
     jumpsuit: CMJumpsuitQM
-    back: CMSatchelMarineTech
     shoes: CMBootsBlack
-    head: CMHeadCapCargo
+    head: RMCHeadCapQuartermaster
     gloves: CMHandsInsulated
     id: CMIDCardQuartermaster
     ears: CMHeadsetQM
-    pocket1: RMCPouchGeneralMedium
-    pocket2: CMFlash
+    pocket1: CMFlash
+    pocket2: RMCPouchGeneralLarge
   inhand:
   - CMStampApproved
 
@@ -65,3 +71,4 @@
 
 - type: playTimeTracker
   id: CMJobQuartermaster
+  isHumanoid: true

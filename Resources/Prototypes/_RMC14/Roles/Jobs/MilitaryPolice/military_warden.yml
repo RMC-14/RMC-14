@@ -17,7 +17,11 @@
   - CMWarden
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: mp
+    state: warden
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_mp
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -28,18 +32,20 @@
         RMCSkillEndurance: 2
         RMCSkillEngineer: 2
         RMCSkillFirearms: 1
-        RMCSkillFireman: 1
+        RMCSkillFireman: 2
         RMCSkillLeadership: 1
         RMCSkillMedical: 1
         RMCSkillOverwatch: 1
         RMCSkillPolice: 2
     - type: MarineOrders
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: "MW"
 
 - type: startingGear
   id: CMGearMilitaryWarden
   equipment:
     jumpsuit: CMJumpsuitWarden
-    back: CMSatchelSecurity
     shoes: CMBootsBlackFilled
     head: CMHeadCapWarden
     eyes: CMGlassesSecurity
@@ -66,3 +72,4 @@
 
 - type: playTimeTracker
   id: CMJobMilitaryWarden
+  isHumanoid: true

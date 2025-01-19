@@ -9,7 +9,7 @@ namespace Content.Shared._RMC14.Xenonids.Brutalize;
 public sealed partial class XenoBrutalizeComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public int MaxTargets = 8;
+    public int? MaxTargets;
 
     [DataField, AutoNetworkedField]
     public float AOEDamageMult = 0.4f;
@@ -18,7 +18,7 @@ public sealed partial class XenoBrutalizeComponent : Component
     public EntProtoId Effect = "RMCEffectExtraSlash";
 
     [DataField, AutoNetworkedField]
-    public float Range = 1;
+    public float Range = 1.5f;
 
     [DataField, AutoNetworkedField]
     public TimeSpan BaseCooldownReduction = TimeSpan.FromSeconds(1.5);

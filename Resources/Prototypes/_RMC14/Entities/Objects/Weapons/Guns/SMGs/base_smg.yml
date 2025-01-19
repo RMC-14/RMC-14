@@ -24,14 +24,27 @@
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 4
   - type: WieldableSpeedModifiers
-    baseWalk: 0.92
-    baseSprint: 0.864
+    base: 0.725
+    light: 1
+    medium: 1
+    heavy: 1
   - type: WieldDelay
     baseDelay: 0.2
   - type: RMCNameItemOnVend
     item: PrimaryGun
   - type: GunUnskilledPenalty
     angleIncrease: 20
+  - type: Tag
+    tags:
+    - RMCWeaponSMG
+  - type: GunDualWielding
+    weaponGroup: Submachinegun
+  - type: GunPointBlank
+  - type: GunGroupPenalty
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/pistol_mouse.rsi
+      state: all
 
 - type: entity
   parent: BaseCartridgeCaselessRifle
@@ -40,6 +53,9 @@
   components:
   - type: CartridgeAmmo
     deleteOnSpawn: true
+
+- type: Tag
+  id: RMCWeaponSMG
 
 - type: Tag
   id: CMMagazineSmg

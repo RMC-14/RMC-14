@@ -14,6 +14,7 @@
       - Bible
       tags:
       - CMFirstAidKit
+      - RMCEngineerKit
       - RMCBoxStorage
 
 
@@ -44,9 +45,51 @@
     grid:
     - 0,0,5,1 #6 slot
 
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeBureauObserverFill
+  suffix: Bureau Observer, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMFireExtinguisherPortable
+    - id: CMRollerBedSpawnFolded # TODO RMC14 pepper spray
 
-# flamertank / fueltank.rsi
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeICBLiaison
+  suffix: Interstellar Commerce Bureau Liaison, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCCigarettePackWeYaGold
+    - id: RMCZippo
+    - id: RMCSpaceCash1000
+    - id: RMCSpaceCash1000 # TODO RMC14 tape recorder
 
+
+# Fuel Tank Pouch
+- type: entity
+  parent: [RMCPouchOpenClosed, RMCPouchStorage]
+  id: RMCPouchFuelTank
+  name: fuel tank strap pouch
+  description: Two ring straps to loop around M240-pattern napalm tanks. Handle with care.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/fueltank.rsi
+  - type: Storage
+    grid:
+    - 0,0,3,1 #2 slots
+    whitelist:
+      tags:
+      - FireExtinguisher
+      # - TODO RMC14 M240
+  - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - FireExtinguisher
+      # - TODO RMC14 M240
 
 # Survival Pouch
 - type: entity
@@ -135,7 +178,32 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/command.rsi
+    layers:
+    - state: cmateba
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      visible: false
+      offset: -0.19, 0
+    - state: icon
+    - state: command_pouch_binos
+      map: ["command_pouch_binos"]
+      visible: false
+    - state: command_pouch_tablet
+      map: ["command_pouch_tablet"]
+      visible: false
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: ItemMapper
+    mapLayers:
+      command_pouch_binos:
+        whitelist:
+          tags:
+          - Binoculars
+      command_pouch_tablet:
+        whitelist:
+          tags:
+          - CommandTablet
   - type: Storage
+    maxItemSize: Normal
     grid:
     - 0,0,5,1 #3 slots
     whitelist:
@@ -144,6 +212,28 @@
       - Binoculars
       - CommandTablet
   - type: FixedItemSizeStorage
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        tags:
+        - Sidearm
+    - popup: rmc-storage-limit-one-binoculars
+      whitelist:
+        tags:
+        - Binoculars
+    - popup: rmc-storage-limit-one-command-tablet
+      whitelist:
+        tags:
+        - CommandTablet
+  - type: CMHolster
+    whitelist:
+      tags:
+      - Sidearm
+  - type: RMCStorageEjectHand
+    whitelist:
+      tags:
+      - Sidearm
 
 
 # Magazine Pouch
@@ -232,6 +322,7 @@
     whitelist:
       tags:
       - RMCShellShotgun
+      - RMCCartridge458SOCOM
   - type: FixedItemSizeStorage
   - type: IgnoreContentsSize
     items:
@@ -254,6 +345,7 @@
     whitelist:
       tags:
       - RMCShellShotgun
+      - RMCCartridge458SOCOM
   - type: IgnoreContentsSize
     items:
       tags:
@@ -385,7 +477,6 @@
       components:
       - ComputerBoard
       - MachineBoard
-      - MachinePart
   - type: FixedItemSizeStorage
 
 - type: entity
@@ -466,7 +557,6 @@
       - Welder
       - ComputerBoard
       - MachineBoard
-      - MachinePart
       - LightReplacer
       - EntrenchingTool
   - type: FixedItemSizeStorage

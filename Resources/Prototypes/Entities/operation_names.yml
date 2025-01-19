@@ -1,5 +1,6 @@
 ﻿- type: entity
   id: RMCOperationNames
+  categories: [ HideSpawnMenu ]
   components:
   - type: RMCDistressSignalNames
     names:
@@ -21,6 +22,7 @@
 
 - type: entity
   id: RMCOperationPrefixes
+  categories: [ HideSpawnMenu ]
   components:
   - type: RMCDistressSignalPrefixes
     prefixes:
@@ -151,6 +153,7 @@
 
 - type: entity
   id: RMCOperationSuffixes
+  categories: [ HideSpawnMenu ]
   components:
   - type: RMCDistressSignalSuffixes
     suffixes:

@@ -46,7 +46,9 @@
       SoundTargetInLOS: !type:SoundPathSpecifier
         path: /Audio/Effects/double_beep.ogg
       VisionRadius: !type:Single
-        9.0
+        10.0
+      AggroVisionRadius: !type:Single
+        10.0
   - type: MouseRotator
     angleTolerance: 5
     rotationSpeed: 180
@@ -79,6 +81,7 @@
   - type: MarineIFF
   - type: SleepNPC
   - type: WakeNPCOnDropshipLanding
+  - type: BlockXenoConstruction
 
 - type: htnCompound
   id: RMCTurretCompound
@@ -126,4 +129,6 @@
   - !type:TargetAccessibleCon
     curve: !type:BoolCurve
   - !type:TargetInLOSOrCurrentCon
+    curve: !type:BoolCurve
+  - !type:CanFaceCon
     curve: !type:BoolCurve

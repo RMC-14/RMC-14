@@ -12,7 +12,11 @@
   - CMCargoTech
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: ct
+    state: cargo
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_shipside
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -20,13 +24,15 @@
       skills:
         RMCSkillConstruction: 1
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillPowerLoader: 2
+    - type: JobPrefix
+      prefix: "CT"
 
 - type: startingGear
   id: CMGearCargoTech
   equipment:
     jumpsuit: CMJumpsuitCargoTech
-    back: CMSatchelMarineTech
     shoes: CMBootsBlack
     head: CMHeadCapCargo
     gloves: CMHandsInsulated
@@ -34,7 +40,7 @@
     ears: CMHeadsetRequisition
     pocket1: RMCPouchGeneralMedium
     pocket2: CMStampApproved
-#    belt: TODO RMC14 M276 Pattern General Pistol Holster Rig Filled
+    belt: RMCM1984BeltFilled
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -51,3 +57,4 @@
 
 - type: playTimeTracker
   id: CMJobCargoTech
+  isHumanoid: true

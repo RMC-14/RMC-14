@@ -19,8 +19,8 @@
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
         points: 18
-    #- id: CMM40HIDPIncendiaryPacketx3
-    #  points: 18
+      - id: RMCPacketGrenadeIncendiaryFilled
+        points: 18
     #- id: CMM40HPDPWhitePhosphorusPacketx3
     #  points: 18
       - id: RMCPacketGrenadeSmokeFilled
@@ -81,8 +81,8 @@
         points: 5
       - id: RMCPouchMacheteFilled
         points: 15
-    #- id: CMMarineRadioTelephonePack
-    #  points: 5
+      - id: RMCBackpackRTO
+        points: 5
     #- id: CMWeldingGoggles
     #  points: 3
       - id: CMBeltUtilityCombat
@@ -91,8 +91,6 @@
         points: 15
       - id: CMHandsInsulated
         points: 3
-    #- id: CMNightVisionOptic
-    #  points: 30
     - name: Engineering Supplies
       entries:
 #      - id: Plastic Explosive
@@ -107,8 +105,9 @@
         points: 5
     - name: Utilities
       entries:
-    #- id: CMMotionDetector
-    #  points: 15
+      - id: RMCMotionDetector
+        points: 15
+        recommended: true
       - id: CMRollerBedSpawnFolded
         points: 5
     #- id: CMFultonDeviceStack
@@ -122,7 +121,10 @@
       - id: RMCBinoculars
         points: 5
     - name: Helmet Optics
-      entries: [ ]
+      entries:
+      - id: RMCVisorNightVision
+        points: 30
+        recommended: true
     #- id: CMMedicalHelmetOptic
     #  points: 15
     #- id: CMWeldingVisor
@@ -167,12 +169,14 @@
       - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
         recommended: true
-    #- id: CMM276GeneralPistolHolsterRig
-    #- id: CMM276M63HolsterRig
-    #- id: CMM276M44HolsterRig
-    #- id: CMM276M82FHolsterRig
+      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterRevolver
+      - id: RMCBeltHolsterSMG
+      - id: RMCBeltHolsterSMGPouch
+    #- id: RMCBeltHolsterFlareGun
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
+        name: M276 pattern toolbelt rig (Full)
         recommended: true
       - id: RMCBeltGrenade
     - name: Pouches
@@ -205,14 +209,15 @@
       - id: CMWebbingBlack
       - id: CMWebbingBrown
         recommended: true
-      #- id: CMShoulderHolster
       - id: CMWebbing
       - id: CMWebbingPouch
+      - id: CMWebbingHolster
     - name: Mask
       choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+      - id: RMCMaskRebreather
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel

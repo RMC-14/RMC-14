@@ -9,6 +9,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared;
 using Robust.Shared.Prototypes;
+using Content.Shared._RMC14.CCVar;
 
 namespace Content.Client.Options.UI.Tabs;
 
@@ -54,6 +55,8 @@ public sealed partial class MiscTab : Control
         Control.AddOptionCheckBox(CCVars.ChatEnableFancyBubbles, FancySpeechBubblesCheckBox);
         Control.AddOptionCheckBox(CCVars.ChatFancyNameBackground, FancyNameBackgroundsCheckBox);
         Control.AddOptionCheckBox(CCVars.StaticStorageUI, StaticStorageUI);
+
+        Control.AddOptionCheckBox(RMCCVars.RMCAutoPunctuate, RMCAutoPunctuate);
 
         Control.Initialize();
     }

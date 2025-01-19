@@ -91,30 +91,36 @@ public abstract partial class SharedGunSystem
         if (args.Handled)
             return;
 
-        if (_whitelistSystem.IsWhitelistFailOrNull(component.Whitelist, args.Used))
-            return;
+        if (TryAmmoInsert(uid, component, args.Used, args.User, args.Target, component.InsertDelay))
+            args.Handled = true;
+    }
+
+    public bool TryAmmoInsert(EntityUid uid, BallisticAmmoProviderComponent component, EntityUid ammo, EntityUid loader, EntityUid weapon, double insertDelay)
+    {
+        if (_whitelistSystem.IsWhitelistFailOrNull(component.Whitelist, ammo))
+            return false;
 
         //Prevent primed grenades or other primed ordanance from being loaded into weapons.
-        if (HasComp<ActiveTimerTriggerComponent>(args.Used))
+        if (HasComp<ActiveTimerTriggerComponent>(ammo))
         {
             Popup(
                 Loc.GetString("gun-ballistic-transfer-primed",
-                    ("ammoEntity", args.Used)),
+                    ("ammoEntity", ammo)),
                 uid,
-                args.User);
+                loader);
 
-            return;
+            return false;
         }
 
         if (GetBallisticShots(component) >= component.Capacity)
-            return;
+            return false;
 
         TimeSpan insertDelayConverted;
 
-        if (component.InsertDelay > 0)
+        if (insertDelay > 0)
         {
-            insertDelayConverted = TimeSpan.FromSeconds(component.InsertDelay);
-            _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, args.User, insertDelayConverted, new DelayedAmmoInsertDoAfterEvent(), used: args.Used, target: args.Target, eventTarget: uid)
+            insertDelayConverted = TimeSpan.FromSeconds(insertDelay);
+            _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, loader, insertDelayConverted, new DelayedAmmoInsertDoAfterEvent(), used: ammo, target: weapon, eventTarget: uid)
             {
                 BreakOnMove = true,
                 BreakOnDamage = false,
@@ -123,9 +129,10 @@ public abstract partial class SharedGunSystem
         }
         else // If there's no custom InsertDelay on this component, immediately load the ammo in. Shotguns and mag-filling.
         {
-            ManualLoad(uid, component, args.Used, args.User);
+            ManualLoad(uid, component, ammo, loader);
         }
-        args.Handled = true;
+        
+        return true;
     }
 
     /// <summary>

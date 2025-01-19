@@ -7,6 +7,7 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Requisitions;
 using Content.Shared._RMC14.Requisitions.Components;
+using Content.Shared._RMC14.Rules;
 using Content.Shared.Chasm;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
@@ -46,7 +47,6 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
 
     private int _starting;
     private int _gain;
-    private int _startingDollarsPerMarine;
 
     private readonly HashSet<Entity<MobStateComponent>> _toPit = new();
 
@@ -68,7 +68,6 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
 
         Subs.CVar(_config, RMCCVars.RMCRequisitionsStartingBalance, v => _starting = v, true);
         Subs.CVar(_config, RMCCVars.RMCRequisitionsBalanceGain, v => _gain = v, true);
-        Subs.CVar(_config, RMCCVars.RMCRequisitionsStartingDollarsPerMarine, v => _startingDollarsPerMarine = v, true);
     }
 
     private void OnComputerMapInit(Entity<RequisitionsComputerComponent> ent, ref MapInitEvent args)
@@ -175,74 +174,10 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         return (newAccount, newAccountComp);
     }
 
-    private Entity<RequisitionsElevatorComponent>? GetElevator(Entity<RequisitionsComputerComponent> computer)
-    {
-        var elevators = new List<Entity<RequisitionsElevatorComponent, TransformComponent>>();
-        var query = EntityQueryEnumerator<RequisitionsElevatorComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var elevator, out var xform))
-        {
-            elevators.Add((uid, elevator, xform));
-        }
-
-        if (elevators.Count == 0)
-            return null;
-
-        if (elevators.Count == 1)
-            return elevators[0];
-
-        var computerCoords = _transform.GetMapCoordinates(computer);
-        Entity<RequisitionsElevatorComponent>? closest = null;
-        var closestDistance = float.MaxValue;
-        foreach (var (uid, elevator, xform) in elevators)
-        {
-            var elevatorCoords = _transform.GetMapCoordinates(uid, xform);
-            if (computerCoords.MapId != elevatorCoords.MapId)
-                continue;
-
-            var distance = (elevatorCoords.Position - computerCoords.Position).LengthSquared();
-            if (closestDistance > distance)
-            {
-                closestDistance = distance;
-                closest = (uid, elevator);
-            }
-        }
-
-        if (closest == null)
-            return elevators[0];
-
-        return closest;
-    }
-
     private int GetElevatorCapacity(Entity<RequisitionsElevatorComponent> elevator)
     {
         var side = (int) MathF.Floor(elevator.Comp.Radius * 2 + 1);
         return side * side;
-    }
-
-    private bool IsFull(Entity<RequisitionsElevatorComponent> elevator)
-    {
-        return elevator.Comp.Orders.Count >= GetElevatorCapacity(elevator);
-    }
-
-    private void SendUIState(Entity<RequisitionsComputerComponent> computer)
-    {
-        var elevator = GetElevator(computer);
-        var mode = elevator?.Comp.NextMode ?? elevator?.Comp.Mode;
-        var busy = elevator?.Comp.Busy ?? false;
-        var balance = CompOrNull<RequisitionsAccountComponent>(computer.Comp.Account)?.Balance ?? 0;
-        var full = elevator != null && IsFull(elevator.Value);
-
-        var state = new RequisitionsBuiState(mode, busy, balance, full);
-        _ui.SetUiState(computer.Owner, RequisitionsUIKey.Key, state);
-    }
-
-    private void SendUIStateAll()
-    {
-        var query = EntityQueryEnumerator<RequisitionsComputerComponent>();
-        while (query.MoveNext(out var uid, out var computer))
-        {
-            SendUIState((uid, computer));
-        }
     }
 
     private void UpdateRailings(Entity<RequisitionsElevatorComponent> elevator, RequisitionsRailingMode mode)
@@ -477,8 +412,17 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
             if (!account.Started)
             {
                 account.Started = true;
-                var marines = Count<MarineComponent>();
-                account.Balance = _starting + marines * _startingDollarsPerMarine;
+                var marines = 0;
+                var marinesQuery = EntityQueryEnumerator<MarineComponent, TransformComponent>();
+                while (marinesQuery.MoveNext(out var marineId, out var xform))
+                {
+                    if (HasComp<RMCPlanetComponent>(xform.MapUid))
+                        continue;
+
+                    marines++;
+                }
+
+                account.Balance = _starting + marines * StartingDollarsPerMarine;
                 Dirty(uid, account);
 
                 updateUI = true;

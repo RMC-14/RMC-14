@@ -9,6 +9,7 @@
     department: CMSquad
     time: 28800 # 8 hours
   startingGear: CMGearFireteamLeader
+  dummyStartingGear: CMGearFireteamLeaderEquipped
   icon: "CMJobIconFireteamLeader"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
@@ -19,6 +20,7 @@
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: tl
+  roleWeight: 1
   special:
   - !type:AddComponentSpecial
     components:
@@ -27,31 +29,33 @@
         RMCSkillConstruction: 2
         RMCSkillEngineer: 2
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillJtac: 3
     - type: CMVendorUser
       points: 45
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: "FTL"
 
 - type: startingGear
   id: CMGearFireteamLeader
   equipment:
-    back: CMSatchelMarine
     id: CMDogtagFireteamLeader
 
 - type: startingGear
   id: CMGearFireteamLeaderEquipped
   equipment:
     jumpsuit: JumpsuitMarine
-    back: CMSatchelMarine
     shoes: CMBootsBlackFilled
     head: CMArmorHelmetM12
     outerClothing: CMArmorM4
-    gloves: CMHandsBlackMarine
+    gloves: CMHandsInsulated
     id: CMDogtagFireteamLeader
     ears: CMHeadsetAlphaTeamLeader
 
 - type: playTimeTracker
   id: CMJobFireteamLeader
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -101,4 +105,3 @@
   - type: SquadSpawner
     squad: SquadDelta
     role: CMFireteamLeader
-

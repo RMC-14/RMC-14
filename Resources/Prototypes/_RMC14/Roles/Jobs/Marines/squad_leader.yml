@@ -9,6 +9,7 @@
     department: CMSquad
     time: 36000 # 10 hours
   startingGear: CMGearSquadLeader
+  dummyStartingGear: CMGearSquadLeaderEquipped
   icon: "CMJobIconSquadLeader"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
@@ -20,6 +21,7 @@
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: leader
+  roleWeight: 1
   special:
   - !type:AddComponentSpecial
     components:
@@ -42,27 +44,29 @@
     - type: SquadArmorWearer
       leader: true
     - type: SquadLeader
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: "SL"
 
 - type: startingGear
   id: CMGearSquadLeader
   equipment:
-    back: CMSatchelMarine
     id: CMDogtagSquadLeader
 
 - type: startingGear
   id: CMGearSquadLeaderEquipped
   equipment:
     jumpsuit: JumpsuitMarine
-    back: CMSatchelMarine
     shoes: CMBootsBlackFilled
     head: CMArmorHelmetM11
-    outerClothing: CMArmorM3Medium
+    outerClothing: CMArmorB12
     gloves: CMHandsBlackMarine
     id: CMDogtagSquadLeader
     ears: CMHeadsetAlphaLeader
 
 - type: playTimeTracker
   id: CMJobSquadLeader
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase

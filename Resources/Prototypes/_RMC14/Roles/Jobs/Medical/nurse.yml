@@ -16,7 +16,11 @@
   - CMMedbay
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: medic
+    state: nurse
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_shipside
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -26,23 +30,22 @@
         RMCSkillMedical: 3
         RMCSkillSurgery: 1
     - type: RMCUserBulkyArmorIncapable
+    - type: JobPrefix
+      prefix: "Nurse"
 
 - type: startingGear
   id: CMGearNurse
   equipment:
     jumpsuit: RMCScrubsLightBlue
     neck: RMCNurseArmband
-    back: CMSatchelMarine
     shoes: ClothingShoesColorWhite
     id: CMIDCardNurse
-    ears: CMHeadsetMedical # TODO RMC14 Medical Vender
 
 - type: startingGear
   id: CMGearNurseEquipped
   equipment:
     jumpsuit: RMCScrubsLightBlue
     neck: RMCNurseArmband
-    back: CMSatchelMarine
     gloves: CMHandsLatex
     shoes: RMCShoesWhite
     head: CMHeadCapSurgOrange
@@ -65,3 +68,4 @@
 
 - type: playTimeTracker
   id: CMJobNurse
+  isHumanoid: true

@@ -1,4 +1,4 @@
-﻿# Light Tubes
+# Light Tubes
 
 # Light Tube, Always Powered
 - type: entity
@@ -32,6 +32,10 @@
     graph: CMLightFixture
     node: tubeLight
   - type: RMCBreakLightOnAttack
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMLightFixtureAlwaysPowered
@@ -278,34 +282,11 @@
       Broken: bulb-broken
       Burned: bulb-burned
   - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 200
-      behaviors: #excess damage, don't spawn entities.
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-    - trigger:
-        !type:DamageTrigger
-        damage: 9 # 9.15 for lesser drone
-      behaviors:
-      - !type:EmptyAllContainersBehaviour
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          CMSheetMetal1:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
+    thresholds: []
   - type: Construction
     graph: CMLightFixture
     node: bulbLight
+  - type: RMCBreakLightOnAttack
 
 - type: entity
   parent: CMLightFixtureSmallAlwaysPowered
@@ -346,12 +327,16 @@
     containers:
       light_bulb: !type:ContainerSlot
   - type: ApcPowerReceiver
+  - type: Appearance
+  - type: RMCPowerReceiver
+    idleLoad: 1
+    activeLoad: 40
+    channel: Lighting
   - type: DeviceLinkSink
     ports:
     - On
     - Off
     - Toggle
-  - type: Appearance
 
 - type: entity
   parent: CMLightFixtureSmallEmpty

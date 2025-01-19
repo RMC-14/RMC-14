@@ -1,0 +1,33 @@
+﻿<controls:SquadInfoRow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Tracker.SquadLeader"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    Orientation="Horizontal" HorizontalExpand="True">
+    <PanelContainer HorizontalExpand="True" MinWidth="64">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BorderColor="#9B9C9F" BorderThickness="1" />
+        </PanelContainer.PanelOverride>
+        <TextureRect Name="RoleIcon" Access="Public" MinWidth="64" />
+    </PanelContainer>
+    <PanelContainer HorizontalExpand="True" SizeFlagsStretchRatio="9">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BorderColor="#9B9C9F" BorderThickness="1" />
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" SizeFlagsStretchRatio="9"
+                      Margin="2">
+            <Control HorizontalExpand="True" />
+            <RichTextLabel Name="NameLabel" Access="Public" />
+            <Control HorizontalExpand="True" />
+        </BoxContainer>
+    </PanelContainer>
+    <PanelContainer HorizontalExpand="True" SizeFlagsStretchRatio="3">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BorderColor="#9B9C9F" BorderThickness="1" />
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" SizeFlagsStretchRatio="3">
+            <Control HorizontalExpand="True" />
+            <BoxContainer Name="ActionsContainer" Access="Public" Orientation="Horizontal" />
+            <Control HorizontalExpand="True" />
+        </BoxContainer>
+    </PanelContainer>
+</controls:SquadInfoRow>

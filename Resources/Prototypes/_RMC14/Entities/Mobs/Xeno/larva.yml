@@ -25,7 +25,7 @@
     - ActionXenoRest
     - ActionXenoWatch
     - ActionXenoHide
-    hudOffset: -0.1,0.125
+    hudOffset: -0.1,0.25
     tier: 0
     unlockAt: 0
     healOffWeeds: true

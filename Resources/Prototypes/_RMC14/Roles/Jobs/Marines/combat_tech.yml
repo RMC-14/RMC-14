@@ -9,6 +9,7 @@
     department: CMSquad
     time: 3600 # 1 hour
   startingGear: CMGearCombatTech
+  dummyStartingGear: CMGearCombatTechEquipped
   icon: "CMJobIconCombatTech"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
@@ -19,35 +20,36 @@
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: engi
+  roleWeight: 1
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
         RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
+        RMCSkillEngineer: 3
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillJtac: 1
         RMCSkillVehicles: 1
     - type: CMVendorUser
       points: 45
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: "ComTech"
 
 - type: startingGear
   id: CMGearCombatTech
   equipment:
-    back: CMSatchelMarineTech
     id: CMDogtagCombatTech
 
 - type: startingGear
   id: CMGearCombatTechEquipped
   equipment:
     jumpsuit: CMJumpsuitMarineEngineer
-    back: CMSatchelMarineTech
     shoes: CMBootsBlackFilled
-    eyes: ClothingEyesGlassesMeson
     head: CMArmorHelmetM10Tech
-    outerClothing: CMArmorM3Medium
+    outerClothing: RMCArmorM3MediumVariants
     gloves: CMHandsInsulated
     id: CMDogtagCombatTech
     ears: CMHeadsetAlphaEngineer
@@ -55,6 +57,7 @@
 
 - type: playTimeTracker
   id: CMJobCombatTech
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -104,4 +107,3 @@
   - type: SquadSpawner
     squad: SquadDelta
     role: CMCombatTech
-

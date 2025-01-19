@@ -1,0 +1,198 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/6b4eeea257437bd337dc64f006f2cf4411cfe0a7/icons/turf/floors/kutjevo/kutjevo_floor.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "floor"
+    },
+    {
+      "name": "floor2"
+    },
+    {
+      "name": "floor3"
+    },
+    {
+      "name": "orange1"
+    },
+    {
+      "name": "orange2"
+    },
+    {
+      "name": "orange3",
+      "directions": 8
+    },
+    {
+      "name": "orange4",
+      "directions": 4
+    },
+    {
+      "name": "blue1"
+    },
+    {
+      "name": "blue2"
+    },
+    {
+      "name": "blue3",
+      "directions": 8
+    },
+    {
+      "name": "blue4",
+      "directions": 4
+    },
+    {
+      "name": "purp1"
+    },
+    {
+      "name": "purp2"
+    },
+    {
+      "name": "purp3",
+      "directions": 8
+    },
+    {
+      "name": "purp4",
+      "directions": 4
+    },
+    {
+      "name": "green1"
+    },
+    {
+      "name": "green2"
+    },
+    {
+      "name": "green3",
+      "directions": 8
+    },
+    {
+      "name": "green4",
+      "directions": 4
+    },
+    {
+      "name": "cyan1"
+    },
+    {
+      "name": "cyan2"
+    },
+    {
+      "name": "cyan3",
+      "directions": 8
+    },
+    {
+      "name": "cyan4",
+      "directions": 4
+    },
+    {
+      "name": "yellow1"
+    },
+    {
+      "name": "yellow2"
+    },
+    {
+      "name": "yellow3",
+      "directions": 8
+    },
+    {
+      "name": "yellow4",
+      "directions": 4
+    },
+    {
+      "name": "red1"
+    },
+    {
+      "name": "red2"
+    },
+    {
+      "name": "red3",
+      "directions": 8
+    },
+    {
+      "name": "red4",
+      "directions": 4
+    },
+    {
+      "name": "multi_tiles",
+      "directions": 8
+    },
+    {
+      "name": "fake_wood",
+      "directions": 4
+    },
+    {
+      "name": "floorscorched1"
+    },
+    {
+      "name": "floorscorched2"
+    },
+    {
+      "name": "damaged4"
+    },
+    {
+      "name": "damaged5"
+    },
+    {
+      "name": "damaged1"
+    },
+    {
+      "name": "damaged3"
+    },
+    {
+      "name": "damaged2"
+    },
+    {
+      "name": "plating"
+    },
+    {
+      "name": "panelscorched"
+    },
+    {
+      "name": "platingdmg1"
+    },
+    {
+      "name": "platingdmg2"
+    },
+    {
+      "name": "platingdmg3"
+    },
+    {
+      "name": "floor_tan"
+    },
+    {
+      "name": "floor_tan2"
+    },
+    {
+      "name": "floor_tan_multi",
+      "directions": 8
+    },
+    {
+      "name": "floor_grey1"
+    },
+    {
+      "name": "floor_grey2"
+    },
+    {
+      "name": "floor_tan_grey3",
+      "directions": 8
+    },
+    {
+      "name": "floor_tan_grey4",
+      "directions": 4
+    },
+    {
+      "name": "floor_tan_alt3",
+      "directions": 8
+    },
+    {
+      "name": "floor_tan_alt4",
+      "directions": 4
+    },
+    {
+      "name": "catwalk",
+      "directions": 8
+    }
+  ]
+}

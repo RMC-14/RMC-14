@@ -81,4 +81,10 @@ public abstract class SharedMarineSystem : EntitySystem
         marine.Icon = icon;
         Dirty(uid, marine);
     }
+
+    public void ClearIcon(Entity<MarineComponent> marine)
+    {
+        marine.Comp.Icon = null;
+        Dirty(marine);
+    }
 }

@@ -28,6 +28,10 @@
     blacklist:
       components:
       - Xeno
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 - type: Tag
   id: PillPacket

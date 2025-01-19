@@ -31,6 +31,9 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetCivilian
     - type: Survivor
+    - type: MotionDetectorTracked
+    - type: UserIFF
+      faction: FactionSurvivor
   hasIcon: false
 
 - type: startingGear
@@ -40,7 +43,7 @@
     back: RMCSatchelCivilianFill
     shoes: RMCShoesBlack
     id: CMIDCardColonist
-    ears: CMHeadset # TODO RMC14 colony
+    ears: CMHeadsetColony
     pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchGeneral
 
@@ -59,3 +62,4 @@
 
 - type: playTimeTracker
   id: CMJobSurvivor
+  isHumanoid: true

@@ -21,8 +21,9 @@
   - type: Clothing
     quickEquip: false
     slots:
-    #TODO ear slot
+    - Ears
     - Suitstorage
+    - Mask
 
 - type: entity
   parent: Wirecutter

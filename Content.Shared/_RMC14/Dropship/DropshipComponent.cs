@@ -1,4 +1,3 @@
-using Content.Shared.Radio;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -15,9 +14,6 @@ public sealed partial class DropshipComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Crashed;
-
-    [DataField, AutoNetworkedField]
-    public ProtoId<RadioChannelPrototype> AnnounceHijackIn = "MarineCommon";
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier LocalHijackSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Shuttle/queen_alarm.ogg");
@@ -40,9 +36,39 @@ public sealed partial class DropshipComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan? RechargeTime;
 
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
+    public TimeSpan? HijackLandAt;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId FireId = "RMCTileFire";
+
+    [DataField, AutoNetworkedField]
+    public int FireRange = 11;
+
     [DataField, AutoNetworkedField]
     public SoundSpecifier CrashWarningSound = new SoundPathSpecifier("/Audio/_RMC14/Announcements/ARES/dropship_emergency.ogg", AudioParams.Default.WithVolume(-5));
 
     [DataField, AutoNetworkedField]
+    public SoundSpecifier CrashSound = new SoundPathSpecifier("/Audio/_RMC14/Dropship/dropship_crash.ogg", AudioParams.Default.WithVolume(-5));
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier IncomingSound = new SoundPathSpecifier("/Audio/_RMC14/Dropship/dropship_incoming.ogg", AudioParams.Default.WithVolume(-5));
+
+    [DataField, AutoNetworkedField]
     public bool AnnouncedCrash;
+
+    [DataField, AutoNetworkedField]
+    public bool DidIncomingSound;
+
+    [DataField, AutoNetworkedField]
+    public bool DidExplosion;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan AnnounceCrashTime = TimeSpan.FromSeconds(23);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan PlayIncomingSoundTime = TimeSpan.FromSeconds(10);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan ExplodeTime = TimeSpan.FromSeconds(3);
 }

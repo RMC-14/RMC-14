@@ -39,6 +39,7 @@ public abstract class SharedMindSystem : EntitySystem
         SubscribeLocalEvent<VisitingMindComponent, EntityTerminatingEvent>(OnVisitingTerminating);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnReset);
         SubscribeLocalEvent<MindComponent, ComponentStartup>(OnMindStartup);
+        SubscribeLocalEvent<MindComponent, EntityRenamedEvent>(OnRenamed);
     }
 
     public override void Shutdown()
@@ -181,6 +182,12 @@ public abstract class SharedMindSystem : EntitySystem
             args.Handled = true;
     }
 
+    private void OnRenamed(Entity<MindComponent> ent, ref EntityRenamedEvent args)
+    {
+        ent.Comp.CharacterName = args.NewName;
+        Dirty(ent);
+    }
+
     public EntityUid? GetMind(EntityUid uid, MindContainerComponent? mind = null)
     {
         if (!Resolve(uid, ref mind))
@@ -314,6 +321,10 @@ public abstract class SharedMindSystem : EntitySystem
     public virtual void TransferTo(EntityUid mindId, EntityUid? entity, bool ghostCheckOverride = false, bool createGhost = true, MindComponent? mind = null)
     {
     }
+
+    public virtual void ControlMob(EntityUid user, EntityUid target) {}
+
+    public virtual void ControlMob(NetUserId user, EntityUid target) {}
 
     /// <summary>
     /// Tries to create and add an objective from its prototype id.
@@ -470,19 +481,6 @@ public abstract class SharedMindSystem : EntitySystem
 
         mindId = default;
         return false;
-    }
-
-    /// <summary>
-    /// Gets a role component from a player's mind.
-    /// </summary>
-    /// <returns>Whether a role was found</returns>
-    public bool TryGetRole<T>(EntityUid user, [NotNullWhen(true)] out T? role) where T : IComponent
-    {
-        role = default;
-        if (!TryComp<MindContainerComponent>(user, out var mindContainer) || mindContainer.Mind == null)
-            return false;
-
-        return TryComp(mindContainer.Mind, out role);
     }
 
     /// <summary>

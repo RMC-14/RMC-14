@@ -181,6 +181,21 @@ public sealed class AreaSystem : EntitySystem
         return area.MortarPlacement;
     }
 
+    public bool CanOrbitalBombard(EntityCoordinates coordinates, out bool roofed)
+    {
+        roofed = false;
+        if (!TryGetArea(coordinates, out var area, out _, out _))
+            return false;
+
+        if (IsRoofed(coordinates, r => !r.Comp.CanOrbitalBombard))
+        {
+            roofed = true;
+            return false;
+        }
+
+        return area.OB;
+    }
+
     private bool IsRoofed(EntityCoordinates coordinates, Predicate<Entity<RoofingEntityComponent>> predicate)
     {
         var roofs = EntityQueryEnumerator<RoofingEntityComponent>();
@@ -215,6 +230,14 @@ public sealed class AreaSystem : EntitySystem
             _popup.PopupClient("It's too early to spread the hive this far.", user.Value, user.Value, PopupType.MediumCaution);
 
         return false;
+    }
+
+    public bool CanSupplyDrop(MapCoordinates mapCoordinates)
+    {
+        if (!TryGetArea(mapCoordinates, out var area, out _, out _))
+            return false;
+
+        return area.SupplyDrop;
     }
 
     public override void Update(float frameTime)
