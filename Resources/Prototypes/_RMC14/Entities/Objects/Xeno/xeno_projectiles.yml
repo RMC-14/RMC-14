@@ -49,7 +49,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
     layers:
-    - state: xeno_acid
+    - state: xeno_acid_weak
       shader: unshaded
   - type: Projectile
     impactEffect: null
@@ -72,7 +72,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
     layers:
-    - state: xeno_acid
+    - state: xeno_acid_strong
       shader: unshaded
   - type: Projectile
     impactEffect: null
@@ -283,6 +283,11 @@
   categories:
   - HideSpawnMenu
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: xeno_acid_normal
+      shader: unshaded
   - type: Projectile
     damage:
       types:
@@ -293,6 +298,8 @@
         Heat: 30
   - type: RMCProjectileAccuracy
     accuracy: 110
+  - type: ProjectileMaxRange
+    max: 3
 
 - type: entity
   parent: XenoAcidBallSpitProjectile
@@ -300,10 +307,21 @@
   categories:
   - HideSpawnMenu
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: xeno_acid_strong
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Heat: 30
   - type: XenoProjectileShieldOnHit
   - type: PreventCollideWithDead
   - type: RMCProjectileAccuracy
     accuracy: 160
+  - type: ProjectileMaxRange
+    max: 7
 
 - type: entity
   parent: XenoSpitProjectile
@@ -311,10 +329,15 @@
   categories:
   - HideSpawnMenu
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: xeno_acid_strong
+      shader: unshaded
   - type: Projectile
     damage:
       types:
-        Heat: 25
+        Heat: 30
 
 - type: entity
   id: XenoAcidBallProjectile

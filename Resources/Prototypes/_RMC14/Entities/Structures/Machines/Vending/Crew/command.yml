@@ -50,11 +50,17 @@
     - name: Personal Sidearm
       choices: { CMWeapon: 1 }
       entries:
-      - id: RMCWeaponRevolverM44
+      - id: RMCMK80BeltFilled
+        name: MK80 pistol
         recommended: true
-      - id: CMWeaponPistolM1984
+      - id: RMCM1984BeltFilled
+        name: M1984 service pistol
         recommended: true
-      - id: CMWeaponPistolMK80
+      - id: CMM77BeltFilled
+        name: M77 pistol
+        recommended: true
+      - id: RMCM44BeltFilled
+        name: M44 revolver
         recommended: true
     - name: Backpack
       choices: { CMBackpack: 1 }
@@ -123,8 +129,11 @@
       - id: CMBeltMarine
         recommended: true
       - id: CMBeltUtilityFilled
+        name: M276 pattern toolbelt rig (Full)
       - id: CMBeltMedicBagFilled
+        name: M276 lifesaver bag (Full)
       - id: CMBeltMedicalFilled
+        name: M276 medical storage rig (Full)
       - id: RMCBeltHolsterSMGPouch
       #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
       - id: RMCM276ShotgunShellLoadingRig
@@ -481,16 +490,16 @@
         recommended: true # TODO RMC14 Make choices: colour the options brown
     - name: Primary Ammunition
       entries:
-      - id: CMMagazineRifleM54C # TODO RMC14 Port MK1 Pulse Rifle
+      - id: CMMagazineRifleM54CMK1
         points: 30
         recommended: true
-      - id: CMMagazineRifleM54CAP # TODO RMC14 Port Mk1 Pulse Rifle
+      - id: CMMagazineRifleM54CMK1AP
         points: 40
         recommended: true
       - id: CMMagazineRifleM54CExt
         points: 20
-      # - id: CMMagazineRifleM54CAP # When MK1 is ported; replace first two mags with MK1 variants and uncomment this.
-      #   points: 20
+      - id: CMMagazineRifleM54CAP # When MK1 is ported; replace first two mags with MK1 variants and uncomment this.
+        points: 20
       - id: RMCMagazineSmartGun
         points: 20
     - name: Sidearm Ammunition
@@ -636,14 +645,14 @@
       choices: { CMWeapon: 1 }
       entries:
       - id: RMCMK80BeltFilled
-        name: MK80 Pistol
+        name: MK80 pistol
         recommended: true
       - id: RMCM1984BeltFilled
-        name: M1984 Pistol
+        name: M1984 service pistol
       - id: CMM77BeltFilled
-        name: M77 Pistol
+        name: M77 pistol
       - id: RMCM44BeltFilled
-        name: M44 Revolver
+        name: M44 revolver
     - name: Belt
       jobs:
       - CMExecutiveOfficer
@@ -677,7 +686,7 @@
       - id: RMCGlassesMedicalHUDGlasses
         recommended: true
       - id: CMGlassesSecurity
-      - id: RMCSunglasses
+      - id: RMCSunglassesBig
         recommended: true
       - id: RMCGlassesAviators
     # - name: Patches # TODO RMC14 Make Patches
@@ -761,7 +770,7 @@
       - CMChiefMP
       choices: { CMWeapon: 1 }
       entries:
-      - id: CMWeaponPistolMK80   # TODO ADD CASE.
+      - id: CMWeaponPistolM77   # TODO ADD CASE.
       - id: RMCWeaponRevolverM44  # TODO ADD CASE.
       - id: CMWeaponPistolM1984  # TODO ADD CASE.
     - name: Backpack
@@ -897,11 +906,14 @@
       - CMChiefEngineer
       choices: { CMWeapon: 1 }
       entries:
-      - id: CMWeaponPistolMK80 # Todo Pistol belt full
+      - id: RMCM1984BeltFilled
+        name: M1984 service pistol
         recommended: true
-      - id: CMWeaponPistolM1984 # TODO Pistol belt full
+      - id: CMM77BeltFilled
+        name: M77 pistol
         recommended: true
-      - id: RMCWeaponRevolverM44 # TODO pistol belt full
+      - id: RMCM44BeltFilled
+        name: M44 revolver
         recommended: true
     - name: Accessories
       jobs:
@@ -977,9 +989,9 @@
       - CMQuartermaster
       choices: { CMHelmet: 1 }
       entries:
-      # - id: CMHeadCapQM TODO
-          # recommended: true
-      - id: CMHeadBeretTan # TODO QM Beret
+      - id: RMCHeadCapQuartermaster
+        recommended: true
+      - id: RMCHeadBeretQuartermaster
         recommended: true
       - id: CMHeadCapCargo
     - name: Personal Sidearm
@@ -987,11 +999,14 @@
       - CMQuartermaster
       choices: { CMWeapon: 1 }
       entries:
-      - id: CMWeaponPistolM1984 # TODO Belt
+      - id: RMCM1984BeltFilled
+        name: M1984 service pistol
         recommended: true
-      - id: CMWeaponPistolMK80 # TODO BELT
+      - id: CMM77BeltFilled
+        name: M77 pistol
         recommended: true
-      - id: RMCWeaponRevolverM44 # TODO Belt
+      - id: RMCM44BeltFilled
+        name: M44 revolver
         recommended: true
     - name: Combat Equipment
       jobs:
@@ -1074,16 +1089,18 @@
       jobs:
       - CMCMO
       choices: { CMSuit: 1 }
-      entries: [ ]
-      # TODO - id: RMCSuitLabcoat
-        # recommended: true
-      # TODO - id: RMCSuitMedicalApron
+      entries:
+      - id: RMCLabcoatCMO
+        recommended: true
+      - id: RMCLabcoat
+        recommended: true
+      - id: RMCMedicalApron
     - name: Headwear
       jobs:
       - CMCMO
       choices: { CMHelmet: 1 }
       entries:
-      # - id: RMCCMOPeakedCap TODO
+      - id: CMHeadCapCMO
       - id: CMHeadCapSurgOrange
       - id: CMHeadCapSurgBlue
       - id: CMHeadCapSurgPurple
@@ -1194,11 +1211,14 @@
       - CMAuxiliarySupportOfficer
       choices: { CMWeapon: 1 }
       entries:
-      - id: CMWeaponPistolM1984
+      - id: RMCM1984BeltFilled
+        name: M1984 service pistol
         recommended: true
-      - id: CMWeaponPistolMK80 # TODO belt (all of them)
+      - id: CMM77BeltFilled
+        name: M77 pistol
         recommended: true
-      - id: RMCWeaponRevolverM44
+      - id: RMCM44BeltFilled
+        name: M44 revolver
         recommended: true
     - name: Hat
       jobs:

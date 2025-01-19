@@ -55,19 +55,36 @@
       "name": "drone_downed_3"
     },
     {
-      "name": "drone_egg"
+      "name": "drone_egg_left",
+      "directions": 4
     },
     {
-      "name": "drone_parasite_left"
+      "name": "drone_egg_right",
+      "directions": 4
     },
     {
-      "name": "drone_parasite_right"
+      "name": "drone_parasite_left",
+      "directions": 4
+    },
+    {
+      "name": "drone_parasite_right",
+      "directions": 4
     },
     {
       "name": "drone_rest_0"
     },
     {
       "name": "drone_rest_1"
+    },
+    {
+      "name": "salved",
+      "directions": 4
+    },
+    {
+      "name": "salved_downed"
+    },
+    {
+      "name": "salved_rest"
     }
   ]
 }

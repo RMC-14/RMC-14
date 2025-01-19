@@ -1,9 +1,8 @@
 ﻿using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Shields;
-using Content.Shared.Actions;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared.Coordinates;
 using Content.Shared.Movement.Systems;
-using Content.Shared.Popups;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
@@ -13,7 +12,6 @@ namespace Content.Shared._RMC14.Xenonids.Cleave;
 
 public sealed class XenoCleaveSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -23,11 +21,10 @@ public sealed class XenoCleaveSystem : EntitySystem
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
-    [Dependency] private readonly SharedPopupSystem _popups = default!;
+    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoCleaveComponent, XenoCleaveActionEvent>(OnCleaveAction);
-        SubscribeLocalEvent<XenoCleaveComponent, XenoToggleCleaveActionEvent>(OnCleaveToggleAction);
 
         SubscribeLocalEvent<CleaveRootedComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshCleaveRooted);
         SubscribeLocalEvent<CleaveRootedComponent, ComponentRemove>(OnCleaveRootedRemoved);
@@ -48,7 +45,9 @@ public sealed class XenoCleaveSystem : EntitySystem
 
         args.Handled = true;
 
-        if (xeno.Comp.Flings)
+        _rmcMelee.DoLunge(xeno, args.Target);
+
+        if (args.Flings)
         {
             var flingRange = buffed ? xeno.Comp.FlingDistanceBuffed : xeno.Comp.FlingDistance;
             _rmcPulling.TryStopAllPullsFromAndOn(args.Target);
@@ -80,19 +79,6 @@ public sealed class XenoCleaveSystem : EntitySystem
             }
         }
     }
-
-    private void OnCleaveToggleAction(Entity<XenoCleaveComponent> xeno, ref XenoToggleCleaveActionEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        args.Handled = true;
-        xeno.Comp.Flings = !xeno.Comp.Flings;
-        _actions.SetToggled(args.Action, xeno.Comp.Flings);
-        _popups.PopupClient(Loc.GetString(xeno.Comp.Flings ? "rmc-xeno-toggle-cleave-fling" : "rmc-xeno-toggle-cleave-root"), xeno, xeno);
-        Dirty(xeno);
-    }
-
     private void OnRefreshCleaveRooted(Entity<CleaveRootedComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
         args.ModifySpeed(0, 0);

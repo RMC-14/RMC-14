@@ -18,6 +18,10 @@
       sprite: _RMC14/Mobs/Xenonids/Queen/ovipositor.rsi
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
   - type: MobState
     allowedStates:
     - Alive
@@ -213,6 +217,8 @@
     projectileId: XenoQueenNeuroSpitProjectile
     plasmaCost: 50
   - type: CommendationGiver
+  - type: XenoInhands
+    prefix: queen
 
 - type: entity
   id: XenoLeaderPheromoneRelay

@@ -10,7 +10,7 @@ namespace Content.Shared._RMC14.NightVision;
 public sealed partial class NightVisionItemComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public EntProtoId ActionId = "CMActionToggleScoutVision";
+    public EntProtoId? ActionId = "CMActionToggleScoutVision";
 
     [DataField, AutoNetworkedField]
     public EntityUid? Action;
@@ -27,4 +27,10 @@ public sealed partial class NightVisionItemComponent : Component
 
     [DataField, AutoNetworkedField]
     public Dictionary<EntProtoId<SkillDefinitionComponent>, int>? Skills;
+
+    [DataField, AutoNetworkedField]
+    public bool Green;
+
+    [DataField, AutoNetworkedField]
+    public bool BlockScopes;
 }

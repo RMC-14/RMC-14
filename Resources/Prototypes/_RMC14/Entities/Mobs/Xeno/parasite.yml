@@ -30,7 +30,7 @@
     contributesToVictory: false
     countedInSlots: false
     unlockAt: 0
-    emoteSounds: null
+    emoteSounds: Larva
   - type: XenoPlasma
     maxPlasma: 10
     plasmaRegenOnWeeds: 0.1
@@ -74,12 +74,13 @@
   - type: Clothing
     quickEquip: false
     slots: [mask]
-    sprite: _RMC14/Mobs/Xenonids/Parasite/parasite_mask.rsi
+    sprite: _RMC14/Mobs/Xenonids/Parasite/parasite.rsi
   - type: HideLayerClothing
     slots:
     - Snout
   - type: Speech
-    allowedEmotes: []
+    speechSounds: XenonidLarva
+    allowedEmotes: [ "XenoRoar" ]
   - type: RMCSize
     size: Small
   - type: ParasiteAI
@@ -101,3 +102,5 @@
   - type: Blindfold
   - type: StandingState
     downSound: null
+  - type: XenoInhandSprite
+    stateName: parasite

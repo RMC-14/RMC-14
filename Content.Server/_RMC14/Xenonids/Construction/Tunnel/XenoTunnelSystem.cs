@@ -9,6 +9,7 @@ using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.ActionBlocker;
@@ -20,7 +21,9 @@ using Content.Shared.DoAfter;
 using Content.Shared.Hands;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Maps;
 using Content.Shared.Mobs;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
@@ -37,6 +40,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityManager _entities = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -49,6 +53,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
     [Dependency] private readonly PlayerSystem _player = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
     public int NextTempTunnelId
     { get; private set; }
     public override void Initialize()
@@ -72,6 +77,8 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         SubscribeLocalEvent<XenoTunnelComponent, GetVerbsEvent<ActivationVerb>>(OnGetRenameVerb);
         SubscribeLocalEvent<XenoTunnelComponent, InteractUsingEvent>(OnFillTunnel);
         SubscribeLocalEvent<XenoTunnelComponent, XenoCollapseTunnelDoAfterEvent>(OnColapseTunnelFinish);
+
+        SubscribeLocalEvent<XenoTunnelComponent, ContainerIsInsertingAttemptEvent>(OnInsertEntityIntoTunnel);
 
         SubscribeLocalEvent<InXenoTunnelComponent, RegurgitateEvent>(OnRegurgitateInTunnel);
         SubscribeLocalEvent<InXenoTunnelComponent, ComponentInit>(OnInTunnel);
@@ -101,7 +108,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         if (_transform.GetGrid(location) is not { } gridId ||
             !TryComp(gridId, out MapGridComponent? grid))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-area"), xenoBuilder, xenoBuilder);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-area-tunnel"), xenoBuilder, xenoBuilder);
             return;
         }
 
@@ -110,7 +117,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 
         if (!Area.TryGetArea(location, out var area, out _, out _) || area.NoTunnel)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-area"), xenoBuilder, xenoBuilder);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-area-tunnel"), xenoBuilder, xenoBuilder);
             return;
         }
 
@@ -180,7 +187,6 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 
         QueueDel(args.Target);
 
-        _xenoPlasma.TryRemovePlasma(xenoBuilder.Owner, args.PlasmaCost);
         var createTunnelEv = new XenoDigTunnelDoAfter(args.Prototype, args.PlasmaCost);
         var doAfterTunnelCreationArgs = new DoAfterArgs(EntityManager, xenoBuilder.Owner, args.CreateTunnelDelay, createTunnelEv, xenoBuilder.Owner)
         {
@@ -222,6 +228,8 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             _popup.PopupEntity(tunnelFailureMessage, xenoBuilder.Owner, xenoBuilder.Owner);
             return;
         }
+
+        _xenoPlasma.TryRemovePlasma(xenoBuilder.Owner, args.PlasmaCost);
 
         if (!TryPlaceTunnel(xenoBuilder.Owner, null, out var newTunnelEnt))
         {
@@ -565,6 +573,20 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 
         ColapseTunnel(xenoTunnel);
     }
+    private void OnInsertEntityIntoTunnel(Entity<XenoTunnelComponent> xenoTunnel, ref ContainerIsInsertingAttemptEvent args)
+    {
+        if (args.Cancelled)
+        {
+            return;
+        }
+
+        if (!HasComp<XenoComponent>(args.EntityUid) ||
+            !_mobState.IsAlive(args.EntityUid))
+        {
+            args.Cancel();
+        }
+    }
+
     /// <summary>
     /// Delete a tunnel and remove anything within it. CALLING DEL OR QUEUEDEL DIRECTLY ON THE TUNNEL IS NOT RECOMMENDED.
     /// </summary>
@@ -589,7 +611,6 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 
         QueueDel(xenoTunnel.Owner);
     }
-
     private void OnInTunnel(Entity<InXenoTunnelComponent> tunneledXeno, ref ComponentInit args)
     {
         DisableAllAbilities(tunneledXeno.Owner);
@@ -649,6 +670,20 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             _popup.PopupEntity(Loc.GetString(popupType), user, user, PopupType.SmallCaution);
             return false;
         }
+
+        if (Transform(user).GridUid is not EntityUid gridId ||
+            !TryComp(gridId, out MapGridComponent? gridComp))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-tile-tunnel"), user, user, PopupType.SmallCaution);
+            return false;
+        }
+        var tileRef = _map.GetTileRef(gridId, gridComp, coords);
+        if (!tileRef.GetContentTileDefinition().CanPlaceTunnel)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-tile-tunnel"), user, user, PopupType.SmallCaution);
+            return false;
+        }
+
         return true;
     }
 

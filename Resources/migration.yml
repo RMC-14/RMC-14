@@ -416,7 +416,7 @@ WeaponRifleM41A: WeaponRifleM54C
 CMCrateBoxMagazineRifleM41A: RMCCrateBoxMagazineRifleM54C
 CMCrateBoxMagazineRifleM41AAP: RMCCrateBoxMagazineRifleM54CAP
 CMCrateBoxMagazineRifleM41AExt: RMCCrateBoxMagazineRifleM54CExt
-CMCrateM41A: RMCCrateM54C
+#CMCrateM41A: RMCCrateM54C
 CMCrateM41AE2: RMCCrateM54CE2
 CMMagazineRifleM41AE2: CMMagazineRifleM54CE2
 WeaponRifleM41AE2: WeaponRifleM54CE2
@@ -729,7 +729,7 @@ CMCrateSupplyEvacuation: RMCCrateSupplyEvacuation
 CMCrateSuppliesBoxes: RMCCrateSuppliesBoxes
 CMCrateSupplyJanitor: RMCCrateSupplyJanitor
 CMCrateSuppliesCrayons: RMCCrateSuppliesCrayons
-CMCrateM54C: RMCCrateM54C
+#CMCrateM54C: RMCCrateM54C
 CMCrateM54CE2: RMCCrateM54CE2
 CMCrateSU6: RMCCrateSU6
 CMCrateMagazineM96SMixed: RMCCrateMagazineM96SMixed
@@ -945,3 +945,22 @@ WeaponLauncherM83Camo: WeaponLauncherM83
 RMCBinocularsCamo: RMCBinoculars
 RMCMortarKitCamo: RMCMortarKit
 ArmorHelmetM10Camo: ArmorHelmetM10
+
+# 2025-01-07
+FoodGoldenApple: RMCFoodGoldenApple
+
+# 2025-01-15
+CrayonBox: RMCCrayonBox
+CrayonRed: RMCCrayonRed
+CrayonOrange: RMCCrayonOrange
+CrayonYellow: RMCCrayonYellow
+CrayonGreen: RMCCrayonGreen
+CrayonBlue: RMCCrayonBlue
+CrayonPurple: RMCCrayonPurple
+
+# 2025-01-16
+RMCBoxMagazineRevolverMarksmanM44: RMCBoxMagazineRevolverM44Marksman
+RMCCrateBoxMagazineM44RevolverMarksman: RMCCrateBoxMagazineRevolverM44Marksman
+
+# 2025-01-19
+RMCCrateM54C: RMCCrateM54CMK1

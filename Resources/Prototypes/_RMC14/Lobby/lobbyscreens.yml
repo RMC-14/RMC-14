@@ -26,3 +26,14 @@
   id: Battered
   background: /Textures/_RMC14/Lobby/Battered.png
  
+- type: lobbyBackground
+  id: FriendlySkies
+  background: /Textures/_RMC14/Lobby/Fly_the_Friendly_Skies.png
+
+- type: lobbyBackground
+  id: LoneMedevac
+  background: /Textures/_RMC14/Lobby/Lone_Medevac.png
+
+- type: lobbyBackground
+  id: MoveOut
+  background: /Textures/_RMC14/Lobby/Move_Out.png

@@ -41,6 +41,10 @@
     blacklist:
       components:
       - Xeno
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 - type: entity
   parent: CMRollerBed
@@ -58,6 +62,8 @@
   name: portable surgical bed
   description: A collapsible surgical bed. It's not perfect, but it's the best you'll get short of an actual surgical table.
   components:
+  - type: Item
+    heldPrefix: surgical
   - type: Sprite
     layers:
     - state: surgical_down
@@ -89,6 +95,7 @@
   components:
   - type: Item
     size: Small
+    heldPrefix: stretcher
   - type: Clickable
   - type: InteractionOutline
   - type: CollisionWake

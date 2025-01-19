@@ -1,0 +1,37 @@
+﻿- type: entity
+  name: M81 Riot grenade launcher
+  parent: [ RMCBaseWeaponGrenadeLauncher ]
+  id: RMCWeaponLauncherM81
+  description: The M81 riot grenade launcher is a single-shot, shoulder-fired, break-action grenade launcher designed for police use with Less-lethal munitions.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m81.rsi
+    layers:
+    - state: base
+      map: [ "enum.BreechVisuals.Open" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m79.rsi
+    slots:
+    - Back
+    - suitStorage
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/m79_shoot.ogg
+  - type: RMCSelectiveFire
+    baseFireRate: 0.833
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCGrenadeRiot
+    capacity: 1
+    soundInsert:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/m79_reload.ogg
+  - type: GenericVisualizer
+    visuals:
+      enum.BreechVisuals.Open:
+        enum.BreechVisuals.Open:
+          True: { state: bolt-open }
+          False: { state: base }
+  - type: UniqueAction
+  - type: BreechLoaded
+    needOpenClose: false

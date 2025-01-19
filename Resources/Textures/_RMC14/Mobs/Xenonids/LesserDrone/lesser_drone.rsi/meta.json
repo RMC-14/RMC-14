@@ -45,7 +45,11 @@
       "name": "lesser_downed_3"
     },
     {
-      "name": "lesser_egg",
+      "name": "lesser_egg_left",
+      "directions": 4
+    },
+    {
+      "name": "lesser_egg_right",
       "directions": 4
     },
     {

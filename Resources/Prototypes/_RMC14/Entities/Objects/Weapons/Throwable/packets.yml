@@ -76,6 +76,45 @@
       amount: 3
 
 - type: entity
+  parent: BaseStorageItem
+  id: RMCPacketGrenadeFlashBang
+  name: flash-bang box
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/flashbangs.rsi
+    layers:
+    - state: flashbang
+      map: [ "closedLayer" ]
+    - state: flashbang_e
+      map: [ "openLayer", "emptyLayer" ]
+  - type: Item
+    size: Normal
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,5,1 # 3 slots
+    whitelist:
+      tags:
+      - RMCGrenadeFlashBang
+  - type: UseDelay
+    delay: 0.5
+  - type: FixedItemSizeStorage
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: Appearance
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer
+    storageEmpty: emptyLayer
+  - type: StorageFill
+    contents:
+    - id: RMCGrenadeFlashBang
+      amount: 8
+
+- type: entity
   parent: CMPacketBase
   id: RMCPacketGrenadeSmoke
   name: HSDP grenade packet

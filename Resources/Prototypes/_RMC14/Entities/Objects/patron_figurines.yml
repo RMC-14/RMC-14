@@ -961,3 +961,124 @@
     state: cyril_cloves_culkins
   - type: PatronFigurine
     id: 22d7b4a3-3635-4d69-9696-c91df2047fa9
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronHexatheleHasselti
+  name: Hexathele Hasselti figurine
+  description: "Womp Womp."
+  components:
+  - type: Sprite
+    state: hexathele_hasselti
+  - type: PatronFigurine
+    id: dc4f0fcb-3cfe-4229-9af8-532865e8a5f3
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronFaePetrovic
+  name: Fae Petrovic figurine
+  description: "A figurine of a very handsome* engineer. You feel like you've seen him around here before, but since when was he an engineer?"
+  components:
+  - type: Sprite
+    state: fae_petrovic
+  - type: PatronFigurine
+    id: 7e9f0b8b-c918-4482-b12f-ae4dd1c43d49
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKasumi
+  name: Kasumi figurine
+  description: "She's doing her part, are you?"
+  components:
+  - type: Sprite
+    state: kasumi
+  - type: PatronFigurine
+    id: 8cbef018-4e1b-48f8-b6e2-d830a02695a7
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMuz
+  name: Muz figurine
+  description: "\"Just look at these muscles!\""
+  components:
+  - type: Sprite
+    state: muz
+  - type: PatronFigurine
+    id: 9b71f867-1868-4528-9f90-9a9db58a86cf
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNovaStargazer
+  name: Nova Stargazer figurine
+  description: "Rumor says if you interact with it enough, it might squeak."
+  components:
+  - type: Sprite
+    state: nova_stargazer
+  - type: PatronFigurine
+    id: 421d0be9-1b66-41dd-9077-617a1f3c0d7f
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKippedKipper
+  name: Kipped Kipper figurine
+  description: "This thing is putting off a serious amount of heat, good for warming up on shiva's snowball."
+  components:
+  - type: Sprite
+    state: kipped_kipper
+  - type: PatronFigurine
+    id: f49eb544-509a-4991-a3f6-c05dec083389
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKyrus
+  name: Kyrus figurine
+  description: "Just a simple engineer doing engineer things."
+  components:
+  - type: Sprite
+    state: kyrus
+  - type: PatronFigurine
+    id: 60d42aa6-88d9-4322-b782-109e17d81620
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronTalerynVogsburg
+  name: Taleryn Vogsburg figurine
+  description: "\"My only crime was playing a saz.\" -Taleryn Vogsburg"
+  components:
+  - type: Sprite
+    state: taleryn_vogsburg
+  - type: PatronFigurine
+    id: 4424328e-e2fb-41a8-b572-045186b30245
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronPenelopeCyclopsDavid
+  name: Penelope 'Cyclops' David figurine
+  description: "Easy to spot, misses a lot."
+  components:
+  - type: Sprite
+    state: penelope_cyclops_david
+  - type: PatronFigurine
+    id: 422661bf-d453-4c3e-8aff-e319fd91af91
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronWilliamSpursCrockett
+  name: William 'Spurs' Crockett figurine
+  description: "He has spurs that jingle jangle jingle"
+  components:
+  - type: Sprite
+    state: william_spurs_crockett
+  - type: PatronFigurine
+    id: ac7102b0-d759-4e4d-bbef-1f68b9d2de9b
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRinaShell-ShockedGensvil
+  name: Rina 'Shell-Shocked' Gensvil figurine
+  description: "In front of you is a statuette of a noticeably battered and tired red-haired felinid. Her right eye is completely missing, in its place you see a black eye patch. She looks physically fit, her arms look strong. There's a medical HUD on her only surviving eye. There's a word, scratched with something sharp on the bottom of the small figurine. It says \"UNFAIR\"."
+  components:
+  - type: Sprite
+    state: rina_shell-shocked_gensvil
+  - type: PatronFigurine
+    id: 392b385b-5e99-446d-a81b-119ca1c90a6e

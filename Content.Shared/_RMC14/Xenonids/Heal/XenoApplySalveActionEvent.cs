@@ -31,16 +31,16 @@ public sealed partial class XenoApplySalveActionEvent : EntityTargetActionEvent
     public FixedPoint2 StandardHealAmount = 100F;
 
     [DataField]
-    public FixedPoint2 SmallHealAmount = 85F;
+    public FixedPoint2 SmallHealAmount = 15F;
 
     [DataField]
     public TimeSpan TimeBetweenHeals = TimeSpan.FromSeconds(1);
 
     [DataField]
-    public TimeSpan TotalHealDuration = TimeSpan.FromSeconds(10);
+    public TimeSpan TotalHealDuration = TimeSpan.FromSeconds(5);
 
     [DataField]
-    public EntProtoId HealEffect = "RMCEffectHeal";
+    public EntProtoId HealEffect = "RMCEffectHealHealer";
 
     [DataField]
     public SoundSpecifier HealSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_drool1.ogg");

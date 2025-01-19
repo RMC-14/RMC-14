@@ -60,6 +60,7 @@
         maxDuration: 570
         startValue: 7.0
         endValue: 1.0
+  - type: RMCNightVisionVisibleOnIgnite
 
 - type: entity
   parent: CMFlare
@@ -248,7 +249,7 @@
   components:
   - type: CMItemSlots
     startingItem: CMPackFlare
-   
+
 - type: entity
   parent: RMCBoxMagazineBase
   id: RMCBoxPackFlareCASEmpty
@@ -381,9 +382,9 @@
 
 - type: Tag
   id: RMCFlare
-  
+
 - type: Tag
   id: RMCFlareCAS
-  
+
 - type: Tag
   id: RMCPackFlareCAS

@@ -62,15 +62,16 @@
       - id: RMCLaserDesignator
         points: 5
     - name: Helmet Optics
-      entries: [ ]
+      entries:
     #- id: CMWeldingVisor
     #  points: 5
     #  recommended: true
     #- id: CMMedicalHelmetOptic
     #  points: 4
     #  recommended: true
-    #- id: CMNightVisionOptic
-    #  points: 20
+      - id: RMCVisorNightVision
+        points: 25
+        recommended: true
     - name: Engineering Supplies
       entries:
       - id: CMHandsInsulated
@@ -240,6 +241,7 @@
     #- id: RMCBeltHolsterFlareGun
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
+        name: M276 pattern toolbelt rig (Full)
       - id: RMCBeltGrenade
     - name: Pouches
       choices: { RMCPouch: 2 }

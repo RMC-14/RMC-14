@@ -9,6 +9,7 @@ using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Server.StationRecords;
 using Content.Server.StationRecords.Systems;
+using Content.Shared._RMC14.Cryostorage;
 using Content.Shared.Access.Systems;
 using Content.Shared.Bed.Cryostorage;
 using Content.Shared.Chat;
@@ -221,6 +222,8 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         UpdateCryostorageUIState((cryostorageEnt.Value, cryostorageComponent));
         AdminLog.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(ent):player} was entered into cryostorage inside of {ToPrettyString(cryostorageEnt.Value)}");
 
+        var ev = new EnteredCryostorageEvent();
+        RaiseLocalEvent(ent, ref ev);
         if (!TryComp<StationRecordsComponent>(station, out var stationRecords))
             return;
 
@@ -274,6 +277,9 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         cryostorageComponent.StoredPlayers.Remove(uid);
         AdminLog.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(entity):player} re-entered the game from cryostorage {ToPrettyString(cryostorage)}");
         UpdateCryostorageUIState((cryostorage, cryostorageComponent));
+
+        var ev = new LeftCryostorageEvent();
+        RaiseLocalEvent(entity, ref ev);
     }
 
     protected override void OnInsertedContainer(Entity<CryostorageComponent> ent, ref EntInsertedIntoContainerMessage args)

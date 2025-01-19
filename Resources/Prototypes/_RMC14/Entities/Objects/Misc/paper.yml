@@ -26,6 +26,7 @@
         type: PaperBoundUserInterface
   - type: Item
     size: Tiny
+    heldPrefix: paper
   - type: Tag
     tags:
     - Document
@@ -78,6 +79,10 @@
   - type: EmitSoundOnLand
     sound:
       path: /Audio/_RMC14/Handling/paper_drop.ogg
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 - type: entity
   abstract: true

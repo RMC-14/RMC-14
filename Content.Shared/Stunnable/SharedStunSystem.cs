@@ -1,12 +1,12 @@
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Bed.Sleep;
+using Content.Shared.Database;
+using Content.Shared.Hands;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
-using Content.Shared.Bed.Sleep;
-using Content.Shared.Database;
-using Content.Shared.Hands;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Events;
@@ -173,7 +173,7 @@ public abstract class SharedStunSystem : EntitySystem
     ///     Stuns the entity, disallowing it from doing many interactions temporarily.
     /// </summary>
     public bool TryStun(EntityUid uid, TimeSpan time, bool refresh,
-        StatusEffectsComponent? status = null)
+        StatusEffectsComponent? status = null, bool force = false)
     {
         if (time <= TimeSpan.Zero)
             return false;
@@ -181,7 +181,7 @@ public abstract class SharedStunSystem : EntitySystem
         if (!Resolve(uid, ref status, false))
             return false;
 
-        if (!_statusEffect.TryAddStatusEffect<StunnedComponent>(uid, "Stun", time, refresh))
+        if (!_statusEffect.TryAddStatusEffect<StunnedComponent>(uid, "Stun", time, refresh, force: force))
             return false;
 
         var ev = new StunnedEvent();
@@ -195,7 +195,7 @@ public abstract class SharedStunSystem : EntitySystem
     ///     Knocks down the entity, making it fall to the ground.
     /// </summary>
     public bool TryKnockdown(EntityUid uid, TimeSpan time, bool refresh,
-        StatusEffectsComponent? status = null)
+        StatusEffectsComponent? status = null, bool force = false)
     {
         if (time <= TimeSpan.Zero)
             return false;
@@ -203,7 +203,7 @@ public abstract class SharedStunSystem : EntitySystem
         if (!Resolve(uid, ref status, false))
             return false;
 
-        if (!_statusEffect.TryAddStatusEffect<KnockedDownComponent>(uid, "KnockedDown", time, refresh))
+        if (!_statusEffect.TryAddStatusEffect<KnockedDownComponent>(uid, "KnockedDown", time, refresh, force: force))
             return false;
 
         var ev = new KnockedDownEvent();
@@ -216,12 +216,12 @@ public abstract class SharedStunSystem : EntitySystem
     ///     Applies knockdown and stun to the entity temporarily.
     /// </summary>
     public bool TryParalyze(EntityUid uid, TimeSpan time, bool refresh,
-        StatusEffectsComponent? status = null)
+        StatusEffectsComponent? status = null, bool force = false)
     {
         if (!Resolve(uid, ref status, false))
             return false;
 
-        return TryKnockdown(uid, time, refresh, status) && TryStun(uid, time, refresh, status);
+        return TryKnockdown(uid, time, refresh, status, force) && TryStun(uid, time, refresh, status, force);
     }
 
     /// <summary>
