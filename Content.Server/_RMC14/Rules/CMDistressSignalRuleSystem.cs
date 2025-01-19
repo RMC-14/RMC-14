@@ -325,6 +325,18 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 _roles.MindAddJobRole(mind.Value, jobPrototype: comp.SurvivorJob);
 
                 _playTimeTracking.PlayerRolesChanged(player);
+
+                var spawnEv = new PlayerSpawnCompleteEvent(
+                    survivorMob,
+                    player,
+                    comp.SurvivorJob,
+                    false,
+                    true,
+                    0,
+                    default,
+                    profile
+                );
+                RaiseLocalEvent(survivorMob, spawnEv, true);
                 return playerId;
             }
 
