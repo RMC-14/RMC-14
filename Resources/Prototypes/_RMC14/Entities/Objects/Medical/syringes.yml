@@ -21,3 +21,7 @@
     storedRotation: 90
     size: Tiny
     sprite: _RMC14/Objects/Medical/syringe.rsi
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage

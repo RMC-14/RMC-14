@@ -1,4 +1,4 @@
-﻿# construction ui entries
+# construction ui entries
 
 # M54C
 - type: construction
@@ -144,19 +144,19 @@
     state: base_m1984
   objectType: Item
 
-#- type: construction
-#  parent: RMC
-#  name: Magazine Box (M1984 AP)
-#  id: RMCBoxMagazinePistolM1984AP
-#  graph: RMCBoxMagazine
-#  startNode: start
-#  targetNode: RMCBoxMagazinePistolM1984APEmpty
-#  category: construction-category-cm-box-magazine
-#  description: A magazine box that can contain armor piercing M1984 mags.
-#  icon:
-#    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-#    state: base_m1984
-#  objectType: Item
+- type: construction
+  parent: RMC
+  name: Magazine Box (M1984 AP)
+  id: RMCBoxMagazinePistolM1984AP
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazinePistolM1984APEmpty
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain armor piercing M1984 mags.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_m1984
+  objectType: Item
 
 # 88 mod 4 / 88m4
 - type: construction
@@ -473,11 +473,11 @@
         amount: 1
         doAfter: 0.25
 
-#    - to: RMCBoxMagazinePistolM1984APEmpty
-#      steps:
-#      - material: RMCSheetCardboard
-#        amount: 1
-#        doAfter: 0.25
+    - to: RMCBoxMagazinePistolM1984APEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
 
     # M77AP
     - to: RMCBoxMagazinePistolM77APEmpty
@@ -614,8 +614,8 @@
   # M1984
   - node: RMCBoxMagazinePistolM1984Empty
     entity: RMCBoxMagazinePistolM1984Empty
-#  - node: RMCBoxMagazinePistolM1984APEmpty
-#    entity: RMCBoxMagazinePistolM1984APEmpty
+  - node: RMCBoxMagazinePistolM1984APEmpty
+    entity: RMCBoxMagazinePistolM1984APEmpty
 
   # M77AP
   - node: RMCBoxMagazinePistolM77APEmpty

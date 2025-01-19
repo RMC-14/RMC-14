@@ -12,6 +12,10 @@
   # Inherited
   - type: StaticPrice
     price: 0
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 - type: entity
   parent: CMBaseHealingItem

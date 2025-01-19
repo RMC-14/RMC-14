@@ -508,7 +508,6 @@
 - type: entity
   parent: RMCBoxMagazinePistolM1984Empty
   id: RMCBoxMagazinePistolM1984
-  name: magazine box (M1984 x 16)
   components:
   - type: CMItemSlots
     startingItem: CMMagazinePistolM1984
@@ -518,32 +517,37 @@
         tags:
         - CMMagazinePistolM1984
 
-#- type: entity # TODO RMC14 this box is done but needs mags made, dont forget to add it to crafting and cargo
-#  parent: RMCBoxMagazineBase
-#  id: RMCBoxMagazinePistolM1984AP
-#  name: magazine box (AP M1984 x 16)
-#  components:
-#  - type: Construction
-#    graph: RMCBoxMagazine
-#    node: RMCBoxMagazinePistolM1984APEmpty
-#  - type: Sprite
-#    layers:
-#    - state: base_m1984
-#    - state: text_m1984
-#    - state: base_type_ap
-#    - state: magaz_ap
-#      map: [ "enum.CMItemSlotsLayers.Fill" ]
-#    - state: base_m1984_lid
-#      map: [ "lid" ]
-#    - state: lid_type_ap
-#      map: [ "lid_stripe" ]
-#  - type: CMItemSlots
-#    startingItem: CMMagazinePistolM1984AP
-#    count: 16
-#    slot:
-#      whitelist:
-#        tags:
-#        - CMMagazinePistolM1984AP
+- type: entity
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMagazinePistolM1984APEmpty
+  name: magazine box (AP M1984 x 16)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazinePistolM1984APEmpty
+  - type: Sprite
+    layers:
+    - state: base_m1984
+    - state: text_m1984
+    - state: base_type_ap
+    - state: magaz_ap
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: base_m1984_lid
+      map: [ "lid" ]
+    - state: lid_type_ap
+      map: [ "lid_stripe" ]
+
+- type: entity
+  parent: RMCBoxMagazinePistolM1984APEmpty
+  id: RMCBoxMagazinePistolM1984AP
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazinePistolM1984AP
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolM1984AP
 
 # M77
 - type: entity
