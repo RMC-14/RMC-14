@@ -77,6 +77,7 @@ public sealed class BulletBoxSystem : EntitySystem
         Dirty(ent);
 
         _popup.PopupClient(Loc.GetString("rmc-bullet-box-transfer-done", ("amount", transfer), ("used", used)), user);
+        UpdateAppearance(ent);
     }
 
     private bool CanTransferPopup(Entity<BulletBoxComponent> box, EntityUid user, ref Entity<RefillableByBulletBoxComponent?, BallisticAmmoProviderComponent?> used)
