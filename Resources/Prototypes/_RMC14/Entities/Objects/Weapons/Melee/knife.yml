@@ -140,6 +140,7 @@
     speedModifier: 0.8
     useSound:
       path: /Audio/Items/crowbar.ogg
+  - type: DeleteOnExplosion
 
 - type: Tag
   id: RMCM5Bayonet
