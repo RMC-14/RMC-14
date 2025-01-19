@@ -187,7 +187,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             return;
         }
 
-        if (!TryGetEntity(squad.Value.Id, out var squadEnt))
+        if (!TryGetEntity(squad.Value.Id, out var newSquadEnt))
         {
             _popup.PopupCursor("You can't transfer marines to that squad!", actor, PopupType.LargeCaution);
             return;
@@ -196,17 +196,30 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         if (_squad.TryGetMemberSquad(marineId.Value, out var currentSquad) &&
             currentSquad.Owner == GetEntity(args.Squad))
         {
-            _popup.PopupCursor($"{Name(marineId.Value)} is already in {Name(squadEnt.Value)}!", actor, PopupType.LargeCaution);
+            _popup.PopupCursor($"{Name(marineId.Value)} is already in {Name(newSquadEnt.Value)}!", actor, PopupType.LargeCaution);
             return;
         }
 
-        _squad.AssignSquad(marineId.Value, squadEnt.Value, null);
+        if (TryComp(newSquadEnt, out SquadTeamComponent? newSquadComp) &&
+            _originalRoleQuery.TryComp(marineId, out var role) &&
+            role.Job is { } job &&
+            !_squad.HasSpaceForRole((newSquadEnt.Value, newSquadComp), job))
+        {
+            var jobName = job.Id;
+            if (_prototypes.TryIndex(job, out var jobProto))
+                jobName = Loc.GetString(jobProto.Name);
 
-        var selfMsg = $"{Name(marineId.Value)} has been transfered from squad '{Name(currentSquad)}' to squad '{Name(squadEnt.Value)}'. Logging to enlistment file.";
+            _popup.PopupCursor($"Transfer aborted. {Name(newSquadEnt.Value)} can't have another {jobName}.", actor, PopupType.LargeCaution);
+            return;
+        }
+
+        _squad.AssignSquad(marineId.Value, newSquadEnt.Value, null);
+
+        var selfMsg = $"{Name(marineId.Value)} has been transfered from squad '{Name(currentSquad)}' to squad '{Name(newSquadEnt.Value)}'. Logging to enlistment file.";
         _marineAnnounce.AnnounceSingle(selfMsg, actor);
         _popup.PopupCursor(selfMsg, actor, PopupType.Large);
 
-        var targetMsg = $"You've been transfered to {Name(squadEnt.Value)}!";
+        var targetMsg = $"You've been transfered to {Name(newSquadEnt.Value)}!";
         _marineAnnounce.AnnounceSingle(targetMsg, marineId.Value);
         _popup.PopupEntity(targetMsg, marineId.Value, marineId.Value, PopupType.Large);
     }
