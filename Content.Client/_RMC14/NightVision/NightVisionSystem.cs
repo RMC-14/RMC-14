@@ -39,7 +39,7 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
 
     private void OnNightVisionDetached(Entity<NightVisionComponent> ent, ref LocalPlayerDetachedEvent args)
     {
-        Off(ent);
+        Off();
     }
 
     protected override void NightVisionChanged(Entity<NightVisionComponent> ent)
@@ -50,7 +50,7 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
         switch (ent.Comp.State)
         {
             case NightVisionState.Off:
-                Off(ent);
+                Off();
                 break;
             case NightVisionState.Half:
                 Half(ent);
@@ -68,10 +68,10 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
         if (ent != _player.LocalEntity)
             return;
 
-        Off(ent);
+        Off();
     }
 
-    private void SetMesons(Entity<NightVisionComponent> ent, bool on)
+    private void SetMesons(bool on)
     {
         if (_player.LocalEntity == null)
             return;
@@ -79,12 +79,12 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
         _eye.SetDrawFov(_player.LocalEntity.Value, !on);
     }
 
-    private void Off(Entity<NightVisionComponent> ent)
+    private void Off()
     {
         _overlay.RemoveOverlay<NightVisionOverlay>();
         _overlay.RemoveOverlay<NightVisionFilterOverlay>();
         _light.DrawLighting = true;
-        SetMesons(ent, false);
+        SetMesons(false);
         SetMesonSprites(false);
     }
 
@@ -97,7 +97,7 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
             _overlay.AddOverlay(new NightVisionFilterOverlay());
 
         _light.DrawLighting = true;
-        SetMesons(ent, ent.Comp.Mesons);
+        SetMesons(ent.Comp.Mesons);
     }
 
     private void Full(Entity<NightVisionComponent> ent)
@@ -109,7 +109,7 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
             _overlay.AddOverlay(new NightVisionFilterOverlay());
 
         _light.DrawLighting = false;
-        SetMesons(ent, ent.Comp.Mesons);
+        SetMesons(ent.Comp.Mesons);
     }
 
     private void SetMesonSprites(bool mesons)
