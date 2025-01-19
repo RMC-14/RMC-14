@@ -134,10 +134,7 @@
         - SmallMobMask
         layer:
         - MachineLayer
-  - type: AccessReader
-    access: [["Captain"]]
-  - type: Lock
-    locked: true
+  - type: CrateOpenable
   - type: EntityStorage
   - type: PlaceableSurface
     isPlaceable: false
