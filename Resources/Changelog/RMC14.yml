@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: FungiFellow
-  changes:
-  - message: Removed Wood from Trees
-    type: Remove
-  id: 735
-  time: '2024-09-25T06:28:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4121
 - author: DrSmugleaf
   changes:
   - message: Fixed a visual bug that made guns on semi-auto look like they were shooting
@@ -5105,5 +5098,13 @@
   id: 1234
   time: '2025-01-18T04:38:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5394
+- author: DummeHytteOst
+  changes:
+  - message: You can now as Xenonids hold down your attack, wide swing and tackle
+      keybinds, to continue the action.
+    type: Add
+  id: 1235
+  time: '2025-01-19T01:43:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5274
 Name: RMC14
 Order: -1
