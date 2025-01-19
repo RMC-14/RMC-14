@@ -47,8 +47,8 @@
         amount: 3
       - id: RMCM54CE2Case
         amount: 3
-      #- id: M41A Pulse Rifle MK1
-      #  amount: 3
+      - id: RMCM54CMK1Case
+        amount: 3
       #- id: M56D Heavy Machine Gun
       #  amount: 2
       #- id: M2C Heavy Machine Gun
@@ -329,26 +329,109 @@
       #  amount: 3
       - id: CMMagazineRifleM54CE2
         amount: 3
-      #- id: M41A MK1 Magazine (10x24mm)
-      #  amount: 5
-      #- id: M41A MK1 AP Magazine (10x24mm)
-      #  amount: 2
+      - id: CMMagazineRifleM54CMK1
+        amount: 5
+      - id: CMMagazineRifleM54CMK1AP
+        amount: 2
       #- id: M56D Drum Magazine
       #  amount: 2
       #- id: M2C Box Magazine
       #  amount: 2
       - id: RMCMagazineShotgunXM51
         amount: 3
-    - name: Shotgun shell boxes # I don't think we have those yet
-      entries: [ ]
-      #- id: Shotgun Shell Box (Buckshot x 100)
-      #  amount: 4
-      #- id: Shotgun Shell Box (Flechette x 100)
-      #  amount: 4
-      #- id: Shotgun Shell Box (Slugs x 100)
-      #  amount: 4
-      #- id: Shotgun Shell Box (16g) (Breaching x 120)
-      #  amount: 1
+    - name: Magazine Boxes
+      hasBoxes: true
+      entries:
+#      - name: Magazine Box (M10 x 22)
+#        box: RMCMagazine10
+#      - name: Magazine Box (Ext M10 x 14)
+#        box: RMCMagazineExtended10
+#      - name: Magazine Box (Drum M10 x 12)
+#        box: RMCMagazineDrum10
+      - id: RMCBoxMagazineSMGM63
+        name: Magazine Box (M63 x 12)
+        box: CMMagazineSMGM63
+      - id: RMCBoxMagazineSMGM63AP
+        name: Magazine Box (AP M63 x 12)
+        box: CMMagazineSMGM63AP
+      - id: RMCBoxMagazineSMGM63Ext
+        name: Magazine Box (Ext M63 x 10)
+        box: CMMagazineSMGM63Ext
+      - id: RMCBoxMagazineRifleM54C
+        name: Magazine Box (M54C x 10)
+        box: CMMagazineRifleM54C
+      - id: RMCBoxMagazineRifleM54CAP
+        name: Magazine Box (AP M54C x 10)
+        box: CMMagazineRifleM54CAP
+      - id: RMCBoxMagazineRifleM54CExt
+        name: Magazine Box (Ext M54C x 8)
+        box: CMMagazineRifleM54CExt
+      - id: RMCBoxMagazinePistolM1984
+        name: Magazine Box (M1984 x 16)
+        box: CMMagazinePistolM1984
+#      - name: Magazine Box (AP M1984 x 16)
+#        box: CMMagazinePistolM1984AP
+#      - name: Magazine Box (HP M1984 x 16)
+#        box: CMMagazineSMGM63
+      - id: RMCBoxMagazineRifleM4SPR
+        name: Magazine Box (M4SPR x 16)
+        box: CMMagazineRifleM4SPR
+      - id: RMCBoxMagazineRifleM4SPRAP
+        name: Magazine Box (AP M4SPR x 16)
+        box: CMMagazineRifleM4SPRAP
+#      - name: Magazine Box (M54CE2 x 8)
+#        box: RMCCrateMagazineRifleM54CE2
+#      - name: Magazine Box (M54CE2 Holo-Target x 8)
+#        box: CMMagazineSMGM63
+#      - name: Magazine Box (M54C MK1 x 8)
+#        box: CMMagazineSMGM63
+#      - name: Magazine Box (M54C MK1 AP x 8)
+#        box: CMMagazineSMGM63
+      - id: RMCBoxShellsBuckshot
+        name: Magazine Box (Buckshot x 100)
+        box: RMCBoxShotgunBuckshot
+        boxAmount: 4
+      - id: RMCBoxShellsFlechette
+        name: Magazine Box (Flechette x 100)
+        box: RMCBoxShotgunFlechette
+        boxAmount: 4
+      - id: RMCBoxShellsSlugs
+        name: Magazine Box (Slugs x 100)
+        box: RMCBoxShotgunSlugs
+        boxAmount: 4
+      - id: RMCBoxShellsBreaching
+        name: Magazine Box (16g) (Breaching x 120)
+        box: RMCBoxShotgunBreaching
+        boxAmount: 4
+      - id: RMCBoxMagazinePistolM77AP
+        name: Magazine Box (M77 AP x 16)
+        box: CMMagazinePistolM77AP
+      - id: RMCBoxMagazinePistolSU6
+        name: Magazine Box (SU-6 x 16)
+        box: RMCMagazinePistolSU6
+      - id: RMCBoxMagazinePistolMK80
+        name: Magazine Box (MK80 x 16)
+        box: CMMagazinePistolMK80
+#      - name: Magazine Box (XM51 x 8)
+#        box: RMCMagazineShotgunXM51
+#      - name: Magazine Box (.458 SOCOM x 300) # TODO RMC14
+#        box: RMCBox458SOCOM
+#      - name: Magazine Box (M2C x 8)
+#        box: CMMagazineSMGM63
+#      - name: Magazine Box (M56B x 8)
+#        box: CMMagazineSMGM63
+#      - name: Magazine Box (M56D x 8)
+#        box: CMMagazineSMGM63
+      - id: RMCBoxMagazineRevolverM44
+        name: Magazine Box (M44 x 16)
+        box: RMCSpeedLoaderM44
+      - id: RMCBoxMagazineRevolverM44Marksman
+        name: Magazine Box (Marksman M44 x 16)
+        box: RMCSpeedLoader44Marksman
+#      - name: Magazine Box (Heavy M44 x 16)
+#        box: CMMagazineSMGM63
+#      - name: Magazine Box (UT-Napthal Fuel x 8)
+#        box: CMMagazineSMGM63
 
  #ATTACHMENTS VENDOR
 
@@ -413,8 +496,6 @@
       #  amount: 5
       - id: RMCAttachmentU1GrenadeLauncher
         amount: 10
-      #- id: RMCAttachmentMK1GrenadeLauncher # UNCOMMENT WHEN THE MK1 IS ADDED
-      #  amount: 10
       - id: RMCAttachmentVerticalGrip
         amount: 10
     - name: Stock

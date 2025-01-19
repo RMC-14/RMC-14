@@ -1,5 +1,7 @@
 ﻿using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Requisitions;
+using Content.Shared._RMC14.Requisitions.Components;
 using Content.Shared._RMC14.Vendors;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.GameTicking;
@@ -20,15 +22,17 @@ public sealed class ScalingSystem : EntitySystem
     [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly SharedRequisitionsSystem _requisitions = default!;
+    [Dependency] private readonly SharedCMAutomatedVendorSystem _rmcAutomatedVendor = default!;
 
-    private float _marineScalingNormal;
+    public float MarineScalingNormal { get; private set; }
     private float _marineScalingBonus;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
 
-        Subs.CVar(_config, RMCCVars.RMCMarineScalingNormal, v => _marineScalingNormal = v, true);
+        Subs.CVar(_config, RMCCVars.RMCMarineScalingNormal, v => MarineScalingNormal = v, true);
         Subs.CVar(_config, RMCCVars.RMCMarineScalingBonus, v => _marineScalingBonus = v, true);
     }
 
@@ -48,7 +52,7 @@ public sealed class ScalingSystem : EntitySystem
         while (scalingQuery.MoveNext(out var uid, out var scaling))
         {
             var deciseconds = _gameTicker.RoundDuration().TotalSeconds * 10;
-            scaling.Scale += job.RoleWeight * (0.25 + 0.75 / (1 + deciseconds / 20000)) / _marineScalingNormal;
+            scaling.Scale += job.RoleWeight * (0.25 + 0.75 / (1 + deciseconds / 20000)) / MarineScalingNormal;
             var delta = scaling.Scale - scaling.MaxScale;
             if (delta > 0)
             {
@@ -59,6 +63,19 @@ public sealed class ScalingSystem : EntitySystem
 
             Dirty(uid, scaling);
         }
+    }
+
+    public bool TryGetScaling(out Entity<MarineScalingComponent> scaling)
+    {
+        var query = EntityQueryEnumerator<MarineScalingComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            scaling = (uid, comp);
+            return true;
+        }
+
+        scaling = default;
+        return false;
     }
 
     private Entity<MarineScalingComponent> EnsureScaling()
@@ -99,8 +116,14 @@ public sealed class ScalingSystem : EntitySystem
             marineCount += job.RoleWeight;
         }
 
-        scaling.Comp.Scale = Math.Max(1, marineCount / _marineScalingNormal);
+        scaling.Comp.Scale = Math.Max(1, marineCount / MarineScalingNormal);
         scaling.Comp.MaxScale = scaling.Comp.Scale;
+
+        var accounts = EntityQueryEnumerator<RequisitionsAccountComponent>();
+        while (accounts.MoveNext(out var uid, out var account))
+        {
+            _requisitions.StartAccount((uid, account), scaling.Comp.Scale, marineCount);
+        }
 
         var vendors = EntityQueryEnumerator<CMAutomatedVendorComponent>();
         while (vendors.MoveNext(out var vendorId, out var vendor))
@@ -110,7 +133,7 @@ public sealed class ScalingSystem : EntitySystem
                 for (var i = 0; i < section.Entries.Count; i++)
                 {
                     var entry = section.Entries[i];
-                    if (entry.Amount is not { } amount)
+                    if (entry.Amount is not { } amount || entry.Box != null)
                         continue;
 
                     amount = (int) Math.Round(amount * scaling.Comp.Scale);
@@ -119,6 +142,8 @@ public sealed class ScalingSystem : EntitySystem
                         Amount = amount,
                         Max = amount,
                     };
+
+                    _rmcAutomatedVendor.AmountUpdated((vendorId, vendor), entry);
                 }
             }
 

@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Inventory;
+﻿using Content.Shared._RMC14.BulletBox;
+using Content.Shared._RMC14.Inventory;
 using Content.Shared.Database;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
@@ -47,6 +48,12 @@ public sealed class RMCUnfoldCardboardSystem : EntitySystem
     private void UnfoldCardboard(Entity<RMCUnfoldCardboardComponent> ent, EntityUid user)
     {
         if (_cmInventory.GetItemSlotsFilled(ent.Owner).Filled != 0)
+        {
+            _popup.PopupClient(Loc.GetString(ent.Comp.FailedNotEmptyText, ("entityName", ent.Owner)), ent, user);
+            return;
+        }
+
+        if (TryComp(ent, out BulletBoxComponent? bulletBox) && bulletBox.Amount > 0)
         {
             _popup.PopupClient(Loc.GetString(ent.Comp.FailedNotEmptyText, ("entityName", ent.Owner)), ent, user);
             return;

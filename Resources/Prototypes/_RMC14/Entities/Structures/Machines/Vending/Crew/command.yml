@@ -490,16 +490,16 @@
         recommended: true # TODO RMC14 Make choices: colour the options brown
     - name: Primary Ammunition
       entries:
-      - id: CMMagazineRifleM54C # TODO RMC14 Port MK1 Pulse Rifle
+      - id: CMMagazineRifleM54CMK1
         points: 30
         recommended: true
-      - id: CMMagazineRifleM54CAP # TODO RMC14 Port Mk1 Pulse Rifle
+      - id: CMMagazineRifleM54CMK1AP
         points: 40
         recommended: true
       - id: CMMagazineRifleM54CExt
         points: 20
-      # - id: CMMagazineRifleM54CAP # When MK1 is ported; replace first two mags with MK1 variants and uncomment this.
-      #   points: 20
+      - id: CMMagazineRifleM54CAP # When MK1 is ported; replace first two mags with MK1 variants and uncomment this.
+        points: 20
       - id: RMCMagazineSmartGun
         points: 20
     - name: Sidearm Ammunition

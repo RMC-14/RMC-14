@@ -9,6 +9,16 @@
     - name: Ammo
       entries:
       - cost: 2000
+        crate: RMCCrateBoxBulletsSMG
+      - cost: 4000
+        crate: RMCCrateBoxBulletsSMGAP
+      - cost: 2000
+        crate: RMCCrateBoxBulletsRifle
+      - cost: 4000
+        crate: RMCCrateBoxBulletsRifleAP
+      - cost: 4000
+        crate: RMCCrateBoxAmmo458
+      - cost: 2000
         crate: RMCCrateBoxMagazineRifleM54C
       - cost: 4000
         crate: RMCCrateBoxMagazineRifleM54CAP
@@ -53,11 +63,9 @@
       - cost: 2000
         crate: RMCCrateBoxMagazineM44Revolver
       - cost: 3000
-        crate: RMCCrateBoxMagazineM44RevolverMarksman
+        crate: RMCCrateBoxMagazineRevolverM44Marksman
       - cost: 4000
         crate: RMCCrateBoxMagazineSentry
-      - cost: 4000
-        crate: RMCCrateBoxAmmo458
       - cost: 4000
         crate: RMCCrateBoxMagazineSentryShotgun
     - name: Attachments
@@ -252,11 +260,11 @@
       - cost: 10000
         crate: RMCCrateSmartGunSet
       - cost: 4000
-        crate: RMCCrateM54C
-      - cost: 4000
         crate: RMCCrateM54CE2
       - cost: 3000
         crate: RMCCrateMK80
+      - cost: 4000
+        crate: RMCCrateM54CMK1
       - cost: 4000
         crate: RMCCrateXM88
       - cost: 3000
