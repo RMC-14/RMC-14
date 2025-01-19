@@ -152,7 +152,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
         var totalHealAmount = args.StandardHealAmount;
         var damageTakenModifier = args.DamageTakenModifier;
         var healedHealerOrSmallXeno = false;
-        if (TryComp(target, out RMCSizeComponent? sizeComp) && sizeComp.Size == RMCSizes.Small)
+        if (TryComp(target, out RMCSizeComponent? sizeComp) && (sizeComp.Size == RMCSizes.Small || sizeComp.Size  == RMCSizes.VerySmallXeno))
         {
             totalHealAmount = args.SmallHealAmount;
             damageTakenModifier = 1;

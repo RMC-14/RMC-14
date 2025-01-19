@@ -320,6 +320,8 @@
   - type: Tag
     tags:
     - RMCWeldingGoggle
+  - type: Item
+    storedRotation: 0
 
 - type: Tag
   id: RMCWeldingGoggle

@@ -471,6 +471,10 @@ public sealed partial class ShuttleSystem
 
         _console.RefreshShuttleConsoles(entity.Owner);
         _dropship.RaiseUpdate(entity);
+
+        // RMC14
+        var audio = _audio.PlayPvs(_arrivalSound, entity.Owner);
+        _audio.SetGridAudio(audio);
     }
 
     /// <summary>
@@ -554,8 +558,8 @@ public sealed partial class ShuttleSystem
         _thruster.DisableLinearThrusters(entity.Comp2);
 
         comp.TravelStream = _audio.Stop(comp.TravelStream);
-        var audio = _audio.PlayPvs(_arrivalSound, uid);
-        _audio.SetGridAudio(audio);
+        // RMC14 var audio = _audio.PlayPvs(_arrivalSound, uid);
+        // RMC14 _audio.SetGridAudio(audio);
 
         if (TryComp<FTLDestinationComponent>(uid, out var dest))
         {

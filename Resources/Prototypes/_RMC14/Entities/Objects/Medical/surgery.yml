@@ -9,6 +9,10 @@
   - type: Item
     size: Small
   - type: CMSurgeryTool
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 # Retractor
 - type: entity
