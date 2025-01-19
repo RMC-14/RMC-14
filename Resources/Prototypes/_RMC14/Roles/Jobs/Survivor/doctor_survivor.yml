@@ -68,7 +68,7 @@
     layers:
     - sprite: Markers/jobs.rsi
       state: green
-    - state: survivor
+    - state: doctor
 
 - type: playTimeTracker
   id: RMCJobSurvivorMedical
