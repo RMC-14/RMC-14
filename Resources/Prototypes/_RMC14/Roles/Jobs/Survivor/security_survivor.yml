@@ -65,7 +65,7 @@
     layers:
     - sprite: Markers/jobs.rsi
       state: green
-    - state: survivor
+    - state: military_police
 
 - type: playTimeTracker
   id: RMCJobSurvivorSecurity
