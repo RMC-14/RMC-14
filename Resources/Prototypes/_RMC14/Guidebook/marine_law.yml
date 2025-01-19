@@ -176,7 +176,7 @@
   text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawSynthetics.xml"
   priority: 6
 
-# Commanding Officer provisions
+# Commanding Officer provisions and regulations
 - type: guideEntry
   parent: RMC
   id: RMCMarineLawCOProvisions
