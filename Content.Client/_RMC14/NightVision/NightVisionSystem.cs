@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Burrow;
 using Content.Shared.Examine;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -116,14 +117,19 @@ public sealed class NightVisionSystem : SharedNightVisionSystem
         if (_player.LocalEntity == null)
             return;
 
+        var isXeno = _xenoQuery.HasComp(_player.LocalEntity.Value);
+
         var query = EntityQueryEnumerator<RMCMesonsNonviewableComponent, SpriteComponent>();
         while (query.MoveNext(out var uid, out var viewable, out var sprite))
         {
-            if (_xenoQuery.HasComp(_player.LocalEntity.Value) && viewable.XenoVisible)
+            if (isXeno && viewable.XenoVisible)
             {
                 sprite.Visible = true;
                 continue;
             }
+
+            if (TryComp<XenoBurrowComponent>(uid, out var burrow) && burrow.Active)
+                continue;
 
             sprite.Visible = !mesons || _examine.InRangeUnOccluded(_player.LocalEntity.Value, uid);
         }
