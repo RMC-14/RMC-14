@@ -258,9 +258,13 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             Dirty(uid, terminal);
         }
 
-        foreach (var (_, eye) in ent.Comp.Eyes)
+
+        if (_net.IsServer)
         {
-            QueueDel(eye);
+            foreach (var (_, eye) in ent.Comp.Eyes)
+            {
+                QueueDel(eye);
+            }
         }
     }
 
@@ -334,7 +338,9 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         if (ent.Comp.Rounds <= 0)
         {
-            QueueDel(args.Used);
+            if (_net.IsServer)
+                QueueDel(args.Used);
+
             _container.TryRemoveFromContainer(args.Used, true);
             _powerloader.TrySyncHands(args.PowerLoader);
         }
@@ -857,7 +863,9 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
             if (flight.Marker != null)
             {
-                QueueDel(flight.Marker);
+                if (_net.IsServer)
+                    QueueDel(flight.Marker);
+
                 flight.Marker = null;
                 Dirty(uid, flight);
             }
@@ -875,8 +883,11 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
                 if (!TryComp(flight.Ammo, out ammo))
                 {
-                    QueueDel(flight.Marker);
-                    QueueDel(uid);
+                    if (_net.IsServer)
+                    {
+                        QueueDel(flight.Marker);
+                        QueueDel(uid);
+                    }
                     continue;
                 }
 
@@ -907,8 +918,11 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
             if (!TryComp(flight.Ammo, out ammo))
             {
-                QueueDel(flight.Marker);
-                QueueDel(uid);
+                if (_net.IsServer)
+                {
+                    QueueDel(flight.Marker);
+                    QueueDel(uid);
+                }
                 continue;
             }
 
@@ -918,7 +932,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             if (time >= flight.PlayGroundSoundAt)
             {
                 _audio.PlayPvs(ammo.SoundGround, flight.Target);
-                QueueDel(uid);
+                if (_net.IsServer)
+                    QueueDel(uid);
             }
         }
 

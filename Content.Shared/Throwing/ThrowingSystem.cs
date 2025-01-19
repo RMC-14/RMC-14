@@ -5,6 +5,7 @@ using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.Friction;
 using Content.Shared.Gravity;
+using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Melee;
@@ -43,6 +44,7 @@ public sealed class ThrowingSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _configManager = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private readonly RotateToFaceSystem _rotateToFace = default!;
 
     public override void Initialize()
     {
@@ -221,6 +223,7 @@ public sealed class ThrowingSystem : EntitySystem
         {
             // _recoil.KickCamera(user.Value, -direction * 0.04f);
             var localPos = Vector2.Transform(transform.LocalPosition + direction, _transform.GetInvWorldMatrix(transform));
+            _rotateToFace.TryFaceCoordinates(user.Value, _transform.ToMapCoordinates(transform.Coordinates.Offset(direction)).Position);
             localPos = transform.LocalRotation.RotateVec(localPos);
             _melee.DoLunge(user.Value, user.Value, Angle.Zero, localPos, null, predicted: false);
         }

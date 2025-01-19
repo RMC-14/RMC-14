@@ -139,6 +139,8 @@
       Snow: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/snow.rsi
       Classic: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/classic.rsi
       Urban: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/urban.rsi
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifle
 
 - type: Tag
   id: WeaponRifleM54CE2

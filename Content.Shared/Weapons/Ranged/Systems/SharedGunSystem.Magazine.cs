@@ -1,8 +1,10 @@
+using Content.Shared._RMC14.CCVar;
 using Content.Shared.Examine;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Containers;
+using Robust.Shared.Player;
 
 namespace Content.Shared.Weapons.Ranged.Systems;
 
@@ -147,6 +149,9 @@ public abstract partial class SharedGunSystem
     {
         // If no ammo then check for autoeject
         var ejectMag = component.AutoEject && count == 0;
+        if (ejectMag && TryComp(user, out ActorComponent? actor))
+            ejectMag = _netConfig.GetClientCVar(actor.PlayerSession.Channel, RMCCVars.RMCAutoEjectMagazines);
+
         if (ejectMag)
         {
             EjectMagazine(uid, component);

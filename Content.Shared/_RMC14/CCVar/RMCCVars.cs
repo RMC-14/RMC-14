@@ -42,6 +42,9 @@ public sealed class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCAutoPunctuate =
         CVarDef.Create("rmc.auto_punctuate", false, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
 
+    public static readonly CVarDef<bool> RMCAutoEjectMagazines =
+        CVarDef.Create("rmc.auto_eject_magazines", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
+
     public static readonly CVarDef<string> CMOocWebhook =
         CVarDef.Create("rmc.ooc_webhook", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
 
@@ -79,14 +82,20 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.discord_account_linking_message_link", "", CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCRequisitionsStartingBalance =
-        CVarDef.Create("rmc.requisitions_starting_balance", 0, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.requisitions_starting_balance", 20000, CVar.REPLICATED | CVar.SERVER);
 
+    // TODO RMC14 150
     public static readonly CVarDef<int> RMCRequisitionsBalanceGain =
         CVarDef.Create("rmc.requisitions_balance_gain", 550, CVar.REPLICATED | CVar.SERVER);
 
-    // TODO RMC14 400
     public static readonly CVarDef<int> RMCRequisitionsStartingDollarsPerMarine =
-        CVarDef.Create("rmc.requisitions_starting_dollars_per_marine", 1150, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.requisitions_starting_dollars_per_marine", 0, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCRequisitionsPointsScale =
+        CVarDef.Create("rmc.requisitions_points_scale", 12000, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCRequisitionsFreeCratesXenoDivider =
+        CVarDef.Create("rmc.requisitions_free_crates_xeno_divider", 4, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<string> RMCDiscordToken =
         CVarDef.Create("rmc.discord_token", "", CVar.SERVER | CVar.SERVERONLY | CVar.CONFIDENTIAL);

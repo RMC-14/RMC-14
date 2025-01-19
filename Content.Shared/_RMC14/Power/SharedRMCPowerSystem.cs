@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Numerics;
+﻿using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Sprite;
@@ -204,12 +203,13 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 
         if (TryComp(used, out AccessComponent? access))
         {
-            var hasAccess = access.Tags.Any(t => ent.Comp.Access.Contains(t));
-            if (!hasAccess)
-            {
-                _popup.PopupClient("Access denied.", ent, user, SmallCaution);
-                return;
-            }
+            // TODO RMC14 access wire
+            // var hasAccess = access.Tags.Any(t => ent.Comp.Access.Contains(t));
+            // if (!hasAccess)
+            // {
+            //     _popup.PopupClient("Access denied.", ent, user, SmallCaution);
+            //     return;
+            // }
 
             ent.Comp.Locked = !ent.Comp.Locked;
             Dirty(ent);
