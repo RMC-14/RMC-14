@@ -46,7 +46,7 @@ public abstract class SharedRequisitionsSystem : EntitySystem
         while (accounts.MoveNext(out var uid, out var account))
         {
             // TODO RMC14 initial money should depend on the scale too
-            account.Balance += (int) ev.Delta * StartingDollarsPerMarine;
+            account.Balance += (int) ev.Delta * PointsScale;
             Dirty(uid, account);
         }
     }
