@@ -41,14 +41,15 @@
     capacity: 3 #It's a lovely triple barrel
     soundInsert:
       path: /Audio/_RMC14/Weapons/Guns/Reload/gun_mou_reload.ogg
-      params:
-        volume: -2
   - type: RMCAmmoEject
     containerID: ballistic-ammo
-    ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mou_reload.ogg
+    ejectSound:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/gun_mou_reload.ogg
   - type: BreechLoaded
-    openSound: /Audio/_RMC14/Weapons/Guns/Breech/pkd_open_chamber.ogg
-    closeSound: /Audio/_RMC14/Weapons/Guns/Breech/pkd_close_chamber.ogg
+    openSound:
+      path: /Audio/_RMC14/Weapons/Guns/Breech/pkd_open_chamber.ogg
+    closeSound:
+      path: /Audio/_RMC14/Weapons/Guns/Breech/pkd_close_chamber.ogg
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
