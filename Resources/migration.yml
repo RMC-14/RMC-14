@@ -949,6 +949,15 @@ ArmorHelmetM10Camo: ArmorHelmetM10
 # 2025-01-07
 FoodGoldenApple: RMCFoodGoldenApple
 
+# 2025-01-15
+CrayonBox: RMCCrayonBox
+CrayonRed: RMCCrayonRed
+CrayonOrange: RMCCrayonOrange
+CrayonYellow: RMCCrayonYellow
+CrayonGreen: RMCCrayonGreen
+CrayonBlue: RMCCrayonBlue
+CrayonPurple: RMCCrayonPurple
+
 # 2025-01-16
 RMCBoxMagazineRevolverMarksmanM44: RMCBoxMagazineRevolverM44Marksman
 RMCCrateBoxMagazineM44RevolverMarksman: RMCCrateBoxMagazineRevolverM44Marksman

@@ -428,6 +428,7 @@ public abstract class SharedTelephoneSystem : EntitySystem
 
         RemCompDeferred<RotaryPhoneDialingComponent>(ent);
         ReturnPhone(ent.Owner, phone, user);
+        StopSound(ent.Owner);
 
         if (ent.Comp.Other is { } other)
         {
