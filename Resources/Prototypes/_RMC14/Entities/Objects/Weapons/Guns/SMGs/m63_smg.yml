@@ -136,6 +136,8 @@
     zeroVisible: false
     zeroOnlyOnEmpty: true
   - type: Appearance
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsSMG
 
 - type: entity
   parent: CMMagazineSMGM63
@@ -160,6 +162,8 @@
     tags:
     - CMMagazineSmg
     - CMMagazineSMGM63AP
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsSMGAP
 
 - type: entity
   parent: CMMagazineSMGM63

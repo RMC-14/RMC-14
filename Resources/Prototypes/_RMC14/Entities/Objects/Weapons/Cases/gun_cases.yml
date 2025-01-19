@@ -161,3 +161,43 @@
     contents:
     - id: WeaponShotgunMOU53
     - id: RMCAttachmentMOU53Stock
+
+- type: entity
+  parent: RMCBaseGunCase
+  id: RMCM54CMK1Case
+  name: M54C assault rifle MK1 case
+  description: A gun case containing the M54C assault rifle MK1. It can only use proprietary MK1 magazines.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,5,1
+    whitelist:
+      tags:
+      - RMCWeaponRifleM54CMK1
+      - CMMagazineRifleM54CMK1
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleM54CMK1
+    - id: CMMagazineRifleM54CMK1
+    - id: CMMagazineRifleM54CMK1
+
+- type: entity
+  parent: RMCBaseGunCase
+  id: RMCM54CMK1CaseAP
+  name: M54C assault rifle MK1 AP case
+  description: A gun case containing the M54C assault rifle MK1 loaded with AP rounds. It can only use proprietary MK1 magazines.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,5,1
+    whitelist:
+      tags:
+      - RMCWeaponRifleM54CMK1
+      - CMMagazineRifleM54CMK1AP
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleM54CMK1AP
+    - id: CMMagazineRifleM54CMK1AP
+    - id: CMMagazineRifleM54CMK1AP

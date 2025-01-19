@@ -735,7 +735,7 @@
 
 - type: entity
   parent: RMCBoxMagazineRevolverM44MarksmanEmpty
-  id: RMCBoxMagazineRevolverMarksmanM44
+  id: RMCBoxMagazineRevolverM44Marksman
   suffix: Filled
   components:
   - type: CMItemSlots
