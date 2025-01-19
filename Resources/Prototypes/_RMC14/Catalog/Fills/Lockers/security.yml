@@ -54,7 +54,7 @@
 
 - type: entity
   parent: RMCLockerGunRed
-  id: RMCArmoryLockerRedM890Filled
+  id: RMCArmoryLockerRedM890FilledSingle
   suffix: Filled 890Tactical, Single
   components:
   - type: StorageFill
