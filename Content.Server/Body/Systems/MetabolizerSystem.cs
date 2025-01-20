@@ -16,6 +16,7 @@ using Robust.Shared.Collections;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Shared._RMC14.Medical.Defibrillator;
 
 namespace Content.Server.Body.Systems
 {
@@ -186,8 +187,11 @@ namespace Content.Server.Body.Systems
                     // then we shouldn't process any effects or remove reagents
                     if (TryComp<MobStateComponent>(solutionEntityUid.Value, out var state))
                     {
-                        if (!proto.WorksOnTheDead && _mobStateSystem.IsDead(solutionEntityUid.Value, state))
-                            continue;
+                        if (!(HasComp<CMRecentlyDefibrillatedComponent>(solutionEntityUid.Value) && proto.ID == "CMEpinephrine")) // TODO change to PROPERTY_ELECTROGENETIC)
+                        {
+                            if (!proto.WorksOnTheDead && _mobStateSystem.IsDead(solutionEntityUid.Value, state))
+                                continue;
+                        }
                     }
 
                     var rate = entry.MetabolismRate * group.MetabolismRateModifier;
