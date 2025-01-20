@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/20db6e3fc344d59ed9502ee7626d9fea89674713/icons/mob/xenos/effects.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "secrete_base"
+    },
+    {
+      "name": "secrete_dir1"
+    },
+    {
+      "name": "secrete_dir2"
+    },
+    {
+      "name": "secrete_dir3"
+    },
+    {
+      "name": "secrete_dir4"
+    },
+    {
+      "name": "secrete_dir5"
+    },
+    {
+      "name": "secrete_dir6"
+    },
+    {
+      "name": "secrete_dir7"
+    },
+    {
+      "name": "secrete_dir8"
+    },
+    {
+      "name": "secrete_dir9"
+    },
+    {
+      "name": "secrete_dir10"
+    },
+    {
+      "name": "secrete_dir11"
+    },
+    {
+      "name": "secrete_dir12"
+    },
+    {
+      "name": "secrete_dir13"
+    },
+    {
+      "name": "secrete_dir14"
+    },
+    {
+      "name": "secrete0"
+    },
+    {
+      "name": "secrete1"
+    },
+    {
+      "name": "secrete2"
+    },
+    {
+      "name": "secrete3"
+    },
+    {
+      "name": "secrete4"
+    },
+    {
+      "name": "secrete5"
+    },
+    {
+      "name": "secrete6"
+    },
+    {
+      "name": "secrete7"
+    },
+    {
+      "name": "secrete8"
+    },
+    {
+      "name": "secrete9"
+    },
+    {
+      "name": "secrete10"
+    },
+    {
+      "name": "secrete11"
+    },
+    {
+      "name": "secrete12"
+    },
+    {
+      "name": "secrete13"
+    },
+    {
+      "name": "secrete14"
+    },
+    {
+      "name": "secrete15"
+    }
+  ]
+}

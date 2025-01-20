@@ -1,3 +1,4 @@
+using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -30,7 +31,14 @@ public sealed partial class XenoResinSurgeComponent : Component
     [DataField, AutoNetworkedField]
     public int StickyResinRadius = 1;
 
+    [DataField]
+    public DoAfterId? ResinDoafter;
+
     // Prototype for unstable wall to create
     [DataField, AutoNetworkedField]
     public EntProtoId UnstableWallId = "WallXenoResinWeak";
+
+    // Prototype for resin to create
+    [DataField, AutoNetworkedField]
+    public EntProtoId StickyResinId = "XenoStickyResinWeak";
 }
