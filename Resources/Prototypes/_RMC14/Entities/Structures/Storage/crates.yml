@@ -134,7 +134,6 @@
         - SmallMobMask
         layer:
         - MachineLayer
-  - type: CrateOpenable
   - type: EntityStorage
   - type: PlaceableSurface
     isPlaceable: false
