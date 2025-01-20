@@ -99,6 +99,8 @@
           - RMCAttachmentS84xTelescopicScope
           - RMCAttachmentS42xTelescopicMiniscope
       rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentM54CStockCollapsible
         whitelist:
           tags:
           - RMCAttachmentM54CStockCollapsible
