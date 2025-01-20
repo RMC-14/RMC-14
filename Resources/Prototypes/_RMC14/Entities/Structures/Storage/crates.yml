@@ -98,6 +98,80 @@
     virtualRight: RMCVirtualCrateRight
     virtualLeft: RMCVirtualCrateLeft
 
+#- type: entity
+#  parent: BaseStructureDynamic
+#  id: RMCCrateLarge
+#  name: supply crate
+#  description: A hefty wooden crate.
+#  components:
+#  - type: Sprite
+#    sprite: _RMC14/Structures/Storage/Crates/densecrate.rsi
+#    noRot: true
+#    layers:
+#    - state: base
+#      map: ["enum.StorageVisualLayers.Base"]
+#    - state: closed
+#      map: ["enum.StorageVisualLayers.Door"]
+#    - state: invoice
+#      sprite: _RMC14/Structures/Storage/Crates/labels.rsi
+#      visible: false
+#      map: ["enum.PaperLabelVisuals.Layer"]
+#  - type: Icon
+#    sprite: _RMC14/Structures/Storage/Crates/densecrate.rsi
+#    state: base
+#  - type: Transform
+#    noRot: true
+#  - type: InteractionOutline
+#  - type: Physics
+#  - type: Fixtures
+#    fixtures:
+#      fix1:
+#        shape:
+#          !type:PhysShapeAabb
+#          bounds: "-0.4,-0.4,0.4,0.29"
+#        density: 50
+#        mask:
+#        - SmallMobMask
+#        layer:
+#        - MachineLayer
+#  - type: EntityStorage
+#  - type: PlaceableSurface
+#    isPlaceable: false
+#  - type: Damageable
+#    damageContainer: Inorganic
+#    damageModifierSet: Wood
+#  - type: Destructible
+#    thresholds:
+#    - trigger:
+#        !type:DamageTrigger
+#        damage: 50
+#      behaviors:
+#      - !type:DoActsBehavior
+#        acts: ["Destruction"]
+#  - type: Appearance
+#  - type: PaperLabel
+#    labelSlot:
+#      insertVerbText: Attach Label
+#      ejectVerbText: Remove Label
+#      whitelist:
+#        components:
+#        - Paper
+#  - type: ContainerContainer
+#    containers:
+#      entity_storage: !type:Container
+#      paper_label: !type:ContainerSlot
+#  - type: EntityTableContainerFill
+#    containers:
+#      entity_storage: !type:NestedSelector
+#        tableId: RMCLargeCrateTable
+#        prob: 0.75
+#  - type: StaticPrice
+#    price: 50
+#  - type: ItemSlots
+#  - type: Construction
+#    graph: RMCCrates
+#    node: parts
+
 - type: entity
   parent: BaseStructureDynamic
   id: RMCCrateLarge
@@ -134,7 +208,6 @@
         - SmallMobMask
         layer:
         - MachineLayer
-  - type: EntityStorage
   - type: PlaceableSurface
     isPlaceable: false
   - type: Damageable
@@ -171,6 +244,9 @@
   - type: Construction
     graph: RMCCrates
     node: parts
+
+
+
 #  - type: StorageFill
 #    contents:
 #    - id: CMBeltUtilityFilled
