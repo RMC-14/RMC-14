@@ -664,3 +664,12 @@
     state: billboard4_b
   - type: Icon
     state: billboard4_b
+
+- type: entity
+  parent: RMCOverheadBillboardWallmount1
+  id: RMCOverheadBillboardWallmount16
+  components:
+  - type: Sprite
+    state: billboard3_g
+  - type: Icon
+    state: billboard3_g

@@ -239,32 +239,112 @@
       "name": "red_SE-out"
     },
     {
-      "name": "zhalfgrate1",
-      "directions": 4
+      "name": "engPlatform_corners"
     },
     {
-      "name": "engPlatform_corners",
-      "directions": 4
+      "name": "engPlatform_corners2"
     },
     {
-      "name": "plating_angled",
-      "directions": 4
+      "name": "engPlatform_corners3"
     },
     {
-      "name": "hull_angled",
-      "directions": 4
+      "name": "engPlatform_corners4"
     },
     {
-      "name": "hull_angled2",
-      "directions": 4
+      "name": "hull_angled"
     },
     {
-      "name": "warningstripes_angled",
-      "directions": 4
+      "name": "hull_angled2"
     },
     {
-      "name": "warningstripes_angled_corner",
-      "directions": 4
+      "name": "hull_angled3"
+    },
+    {
+      "name": "hull_angled4"
+    },
+    {
+      "name": "hull_angled_alt"
+    },
+    {
+      "name": "hull_angled_alt2"
+    },
+    {
+      "name": "hull_angled_alt3"
+    },
+    {
+      "name": "hull_angled_alt4"
+    },
+    {
+      "name": "plating_angled"
+    },
+    {
+      "name": "plating_angled2"
+    },
+    {
+      "name": "plating_angled3"
+    },
+    {
+      "name": "plating_angled4"
+    },
+    {
+      "name": "warningstripes_angled"
+    },
+    {
+      "name": "warningstripes_angled2"
+    },
+    {
+      "name": "warningstripes_angled3"
+    },
+    {
+      "name": "warningstripes_angled4"
+    },
+    {
+      "name": "warningstripes_angled_corner"
+    },
+    {
+      "name": "warningstripes_angled_corner2"
+    },
+    {
+      "name": "warningstripes_angled_corner3"
+    },
+    {
+      "name": "warningstripes_angled_corner4"
+    },
+    {
+      "name": "zhalfgrate1"
+    },
+    {
+      "name": "zhalfgrate2"
+    },
+    {
+      "name": "zhalfgrate3"
+    },
+    {
+      "name": "zhalfgrate4"
+    },
+    {
+      "name": "engineer_platform"
+    },
+    {
+      "name": "engineer_platform2"
+    },
+    {
+      "name": "engineer_platform3"
+    },
+    {
+      "name": "engineer_platform4"
+    },
+    {
+      "name": "engineer_platform_deco"
+    },
+    {
+      "name": "engineer_platform_deco2"
+    },
+    {
+      "name": "engineer_platform_deco3"
+    },
+    {
+      "name": "engineer_platform_deco4"
     }
   ]
 }

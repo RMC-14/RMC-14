@@ -200,6 +200,18 @@
     isCorrodible: false
   - type: Appearance
 
+# Engineer Ship Light
+
+- type: entity
+  parent: RMCLZFloodlight
+  id: RMCEngineerShipLight
+  name: circular light
+  description: A huge circular light
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Lights/engineer_ship.rsi
+    state: engineerlight_on
+
 # Street
 
 - type: entity
