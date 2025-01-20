@@ -115,8 +115,7 @@
 
 - files: ["gun_ml66a.ogg"]
   license: "CC-BY-4.0"
-  copyright: "Taken and modified from soundsnap/freesound, Pixabay usage terms at https://pixabay.com/service/terms/
-"
+  copyright: "Taken and modified from soundsnap/freesound, Pixabay usage terms at https://pixabay.com/service/terms/"
   source: "https://pixabay.com/sound-effects/battle-rifle-42734/" #, https://freesound.org/people/NoahBangs/sounds/607320/
 
 - files: ["m5_shoot.ogg"]
@@ -144,3 +143,7 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/32730c731936c6737668ead7bde83a6cf296010f/sound/weapons/gun_m60.ogg"
 
+- files: ["gun_mou53.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/32730c731936c6737668ead7bde83a6cf296010f/sound/weapons/gun_mou53.ogg"

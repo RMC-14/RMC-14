@@ -7,3 +7,13 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/weapons/handling/ugl_open.ogg"
+
+- files: ["pkd_open_chamber.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/weapons/handling/pkd_open_chamber.ogg"
+
+- files: ["pkd_close_chamber.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/weapons/handling/pkd_close_chamber.ogg"
