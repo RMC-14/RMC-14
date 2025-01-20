@@ -63,6 +63,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
 
+    private EntityQuery<BlockTileFireComponent> _blockTileFireQuery;
     private EntityQuery<DoorComponent> _doorQuery;
     private EntityQuery<FlammableComponent> _flammableQuery;
     private EntityQuery<RMCIgniteOnCollideComponent> _igniteOnCollideQuery;
@@ -71,6 +72,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
     public override void Initialize()
     {
+        _blockTileFireQuery = GetEntityQuery<BlockTileFireComponent>();
         _doorQuery = GetEntityQuery<DoorComponent>();
         _flammableQuery = GetEntityQuery<FlammableComponent>();
         _igniteOnCollideQuery = GetEntityQuery<RMCIgniteOnCollideComponent>();
@@ -393,6 +395,12 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(target);
             while (anchored.MoveNext(out var uid))
             {
+                if (_blockTileFireQuery.HasComp(uid))
+                {
+                    nextRange = 0;
+                    break;
+                }
+
                 if (_tag.HasAnyTag(uid, StructureTag, WallTag) &&
                     !_doorQuery.HasComp(uid))
                 {

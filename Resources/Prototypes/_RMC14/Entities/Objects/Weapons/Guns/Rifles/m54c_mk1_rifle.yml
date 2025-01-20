@@ -125,8 +125,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridgeRifle10x24mmMK1
-    proto: CMCartridgeRifle10x24mmMK1
+      - CMCartridgeRifle10x24mm
+    proto: CMCartridgeRifle10x24mm
     capacity: 95
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54cmk1.rsi
@@ -152,8 +152,8 @@
   - type: BallisticAmmoProvider
     whitelist:
       tags:
-      - CMCartridgeRifle10x24mmMK1AP
-    proto: CMCartridgeRifle10x24mmMK1AP
+      - CMCartridgeRifle10x24mmAP
+    proto: CMCartridgeRifle10x24mmAP
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54cmk1.rsi
     layers:
@@ -166,32 +166,6 @@
   - type: RefillableByBulletBox
     bulletType: RMCBoxBulletsRifleAP
 
-- type: entity
-  parent: CMBaseCartridgeRifle
-  id: CMCartridgeRifle10x24mmMK1
-  name: cartridge (10x24mm)
-  description: A 10x24mm cartridge. Fits in 10x24mm MK1 magazines.
-  components:
-  - type: Tag
-    tags:
-    - Cartridge
-    - CMCartridgeRifle10x24mm
-  - type: CartridgeAmmo
-    proto: BulletRifle10x24mm
-
-- type: entity
-  parent: CMCartridgeRifle10x24mmMK1
-  id: CMCartridgeRifle10x24mmMK1AP
-  name: AP cartridge (10x24mm)
-  description: An armor piercing 10x24mm cartridge. Fits in 10x24mm MK1 AP magazines.
-  components:
-  - type: Tag
-    tags:
-    - Cartridge
-    - CMCartridgeRifle10x24mmAP
-  - type: CartridgeAmmo
-    proto: BulletRifle10x24mmAP
-
 - type: Tag
   id: RMCWeaponRifleM54CMK1
 
@@ -200,9 +174,3 @@
 
 - type: Tag
   id: CMMagazineRifleM54CMK1AP
-
-- type: Tag
-  id: CMCartridgeRifle10x24mmMK1
-
-- type: Tag
-  id: CMCartridgeRifle10x24mmMK1AP
