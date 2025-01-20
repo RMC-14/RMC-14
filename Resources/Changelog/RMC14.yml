@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added Vella 'Mortician' Sakeao figurine
-    type: Add
-  id: 741
-  time: '2024-09-27T06:53:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4149
 - author: Vermidia
   changes:
   - message: fixed ammo stuns appearing to stun when they didn't
@@ -5177,5 +5170,16 @@
   id: 1240
   time: '2025-01-20T03:29:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5425
+- author: DrSmugleaf
+  changes:
+  - message: Fixed shooting both underbarrel grenade launchers launching grenades
+      everywhere except where you are actually aiming.
+    type: Fix
+  - message: Fixed the CO's M59A prototype rifle not starting with a locked M54C collapsible
+      stock.
+    type: Fix
+  id: 1241
+  time: '2025-01-20T03:32:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5426
 Name: RMC14
 Order: -1
