@@ -115,6 +115,8 @@
   - type: Foldable
     unfoldVerbText: rmc-pants-verb-unfold
     foldVerbText: rmc-pants-verb-fold
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 # MessTech / Chef
 - type: entity
@@ -157,6 +159,8 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Engineering/mt.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 # Command
 
