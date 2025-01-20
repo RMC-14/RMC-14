@@ -136,9 +136,9 @@
         points: 16
     - name: Restricted Firearms
       entries:
-      - id: RMCMK80Case
+      - id: RMCGunCasePistolMK80
         points: 8
-      - id: RMCSmartPistolCase
+      - id: RMCGunCasePistolSmart
         points: 12
     - name: Clothing Items
       entries:

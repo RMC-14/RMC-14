@@ -770,9 +770,9 @@
       - CMChiefMP
       choices: { CMWeapon: 1 }
       entries:
-      - id: CMWeaponPistolM77   # TODO ADD CASE.
-      - id: RMCWeaponRevolverM44  # TODO ADD CASE.
-      - id: CMWeaponPistolM1984  # TODO ADD CASE.
+      - id: RMCGunCasePistolM77
+      - id: RMCGunCasePistolM44
+      - id: RMCGunCasePistolM1984
     - name: Backpack
       jobs:
       - CMChiefMP
