@@ -62,7 +62,11 @@
     children:
     - !type:GroupSelector
       children:
+      - id: RMCPowerCell
+      - id: RMCPowerCellCrap
+        prob: 0.75
       - id: RMCPowerCellHigh
+        prob: 0.75
       - id: RMCCableCoil10
       - id: RMCFlashlight
       - id: CMAPCElectronics
