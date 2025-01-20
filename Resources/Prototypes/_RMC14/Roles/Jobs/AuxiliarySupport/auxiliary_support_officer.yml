@@ -17,6 +17,12 @@
   - !type:DepartmentTimeRequirement
     department: CMAuxiliarySupport
     time: 18000 # 5 hours
+  ranks:
+    RMCRankCaptain:
+    - !type:RoleTimeRequirement
+      role: CMJobAuxiliarySupportOfficer
+      time: 252000 # 70 hours
+    RMCRankFirstLT: []
   weight: 5
   startingGear: CMGearASO
   icon: "CMJobIconASO"
