@@ -1,18 +1,20 @@
 - type: constructionGraph
   parent: RMC
   id: RMCCrates
-  start: parts
+  start: start
   graph:
-  - node: parts
-    entity: RMCCrates
-    edges:
-    - to: parts
-      steps:
-      - tool: Prying
-        doAfter: 2
-      completed:
-      - !type:SpawnPrototype
-        prototype: RMCPlankWood
-        amount: 2
-      - !type:EmptyAllContainers
-      - !type:DeleteEntity
+    - node: start
+      actions:
+      - !type:DeleteEntity { }
+    - node: planks
+      edges:
+      - to: start
+        steps:
+        - tool: Prying
+          doAfter: 2
+        completed:
+        - !type:SpawnPrototype
+          prototype: RMCPlankWood
+          amount: 2
+        - !type:EmptyAllContainers
+

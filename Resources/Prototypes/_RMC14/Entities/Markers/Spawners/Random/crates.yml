@@ -1,0 +1,164 @@
+- type: entityTable
+  id: RMCLargeCrateTable
+  table: !type:GroupSelector
+    children:
+    - !type:NestedSelector
+      weight: 20
+      tableId: LargeCrateTools
+      rolls: !type:RangeNumberSelector
+        range: 0,1
+    - !type:NestedSelector
+      weight: 20
+      tableId: LargeCrateFood
+    - !type:NestedSelector
+      weight: 20
+      tableId: LargeCrateMeds
+      rolls: !type:RangeNumberSelector
+        range: 0,1
+    - !type:NestedSelector
+      weight: 20
+      tableId: LargeCratePower
+      rolls: !type:RangeNumberSelector
+        range: 0,1
+    - !type:NestedSelector
+      weight: 15
+      tableId: LargeCrateGear
+      rolls: !type:RangeNumberSelector
+        range: 0,3
+    - !type:NestedSelector
+      weight: 4.5
+      tableId: LargeCrateWeapons
+    - !type:NestedSelector
+      weight: 0.5
+      tableId: LargeCrateCLF
+
+- type: entityTable
+  id: LargeCrateTools
+  table: !type:GroupSelector
+    children:
+    - !type:GroupSelector
+      children:
+      - id: CMMultitool
+      - id: CMCrowbar
+      - id: CMHandLabeler
+      - id: CMPenClicky
+      - id: CMWirecutter
+      - id: CMPackFlare
+      - id: CMWelderSmall
+      - id: CMWelder
+        prob: 0.75
+      - id: CMBeltUtilityFilled
+        prob: 0.25
+      - id: ClothingHeadHatWelding
+        prob: 0.25
+      - id: CMClipboard
+        prob: 0.05
+      - id: ClothingEyesGlassesMeson
+        prob: 0.05
+
+- type: entityTable
+  id: LargeCratePower
+  table: !type:GroupSelector
+    children:
+    - !type:GroupSelector
+      children:
+      - id: RMCPowerCellHigh
+      - id: RMCCableCoil10
+      - id: RMCFlashlight
+      - id: CMAPCElectronics
+      - id: RMCFlashlightLantern
+      - id: RMCFlashlightPen
+      - id: RMCEngineerKit
+        prob: 0.5
+
+- type: entityTable
+  id: LargeCrateMeds
+  table: !type:GroupSelector
+    children:
+    - !type:GroupSelector
+      children:
+      - id: CMHealthAnalyzer
+      - id: CMGauze10
+      - id: CMOintment10
+      - id: CMFirstAidKitFilled
+        prob: 0.75
+      - id: CMAdvFirstAidKitFilled
+        prob: 0.5
+
+- type: entityTable
+  id: LargeCrateFood
+  table: !type:GroupSelector
+    children:
+    - !type:GroupSelector
+      children:
+      - id: FoodBoxDonkpocket
+      - id: CMMRE
+      - id: FoodTinMRE
+      - id: CMMarineProteinBar
+      - id: CMDrinkWEYAWaterBottle30
+      - id: FoodBreadMoldySlice
+      - id: FoodBoxDonkpocketPizza
+        prob: 0.75
+      - id: CMDrinkCanBeerLite
+        prob: 0.75
+      - id: CMDrinkCanAle
+        prob: 0.75
+      - id: RMCDrinkAlcoholRum
+        prob: 0.5
+      - id: RMCDrinkAlcoholWhiskey
+        prob: 0.5
+      - id: RMCDrinkAlcoholSake
+        prob: 0.5
+      - id: RMCDrinkAlcoholVodka
+        prob: 0.5
+
+- type: entityTable
+  id: LargeCrateGear
+  table: !type:GroupSelector
+    children:
+    - !type:GroupSelector
+      children:
+      - id: CMBootsBrown
+      - id: CMBootsBlack
+      - id: ClothingShoesBootsCowboyBlack
+      - id: ClothingShoesBootsCowboyBrown
+      - id: JumpsuitMarine
+      - id: RMCJumpsuitPizza
+      - id: RMCJumpsuitCivilian
+      - id: ClothingUniformJumpsuitChef
+      - id: CMJumpsuitColonist
+      - id: CMJumpsuitLiaisonField
+      - id: RMCShoesJackboots
+        prob: 0.5
+      - id: RMCJumpsuitFreelancer
+        prob: 0.5
+
+- type: entityTable
+  id: LargeCrateWeapons
+  table: !type:AllSelector
+    children:
+    - !type:GroupSelector
+      children:
+      - id: BaseBallBat
+      - id: RMCM5Bayonet
+      - id: RMCFireAxe
+        prob: 0.25
+      - id: CMGrenadeSmoke
+        prob: 0.25
+      - id: CMGrenadeFrag
+        prob: 0.05
+      - id: RMCGrenadeMolotov
+        prob: 0.05
+
+- type: entityTable
+  id: LargeCrateCLF
+  table: !type:AllSelector
+    children:
+    - !type:AllSelector
+      children:
+      - id: RMCD18Case
+      - id: RMCGrenadeMolotov
+      - id: RMCJumpsuitFreelancer
+
+
+
