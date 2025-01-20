@@ -59,7 +59,9 @@
   - type: TimerTriggerVisuals
     primingSound:
       path: /Audio/Effects/countdown.ogg
-  - type: Tag
+  - type: RequiresSkill
+    skills:
+      RMCSkillPolice: 2
     tags:
     - RMCGrenadeRiot
     - Grenade
