@@ -139,7 +139,7 @@
 
 - type: entityTable
   id: LargeCrateWeapons
-  table: !type:AllSelector
+  table: !type:GroupSelector
     children:
     - !type:GroupSelector
       children:
