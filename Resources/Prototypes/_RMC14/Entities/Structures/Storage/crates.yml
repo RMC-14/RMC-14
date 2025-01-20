@@ -168,7 +168,7 @@
     price: 50
   - type: ItemSlots
   - type: Construction
-    graph: RMCCrates
+    graph: RMCLargeCrates
     node: planks
 
 # Weldable

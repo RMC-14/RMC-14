@@ -1,6 +1,6 @@
 - type: constructionGraph
   parent: RMC
-  id: RMCCrates
+  id: RMCLargeCrates
   start: start
   graph:
     - node: start
