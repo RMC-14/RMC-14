@@ -62,6 +62,7 @@
   - type: RequiresSkill
     skills:
       RMCSkillPolice: 2
+  - type: Tag
     tags:
     - RMCGrenadeRiot
     - Grenade
