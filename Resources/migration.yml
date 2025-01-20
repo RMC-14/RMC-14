@@ -949,6 +949,7 @@ ArmorHelmetM10Camo: ArmorHelmetM10
 # 2024-12-29
 CMWeaponPistolMK80: RMCMK80
 CMWeaponPistolM77: RMCWeaponPistolM77
+CMWeaponPistolM77Empty: RMCWeaponPistolM77Empty
 
 # 2025-01-07
 FoodGoldenApple: RMCFoodGoldenApple

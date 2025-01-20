@@ -17,7 +17,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCM54CE2Case
+    - id: RMCGunCaseRifleM54CE2
       amount: 2
 
 - type: entity

@@ -165,7 +165,7 @@
 
 # XM88
 - type: entity
-  parent: RMCBaseGunCase
+  parent: RMCGunCaseBase
   id: RMCCaseXM88
   name: XM88 heavy rifle case
   description: A gun case containing the XM88 Heavy Rifle, a prototype weapon designed for use against heavily armored infantry targets and light vehicles. Contains an ammunition belt, two boxes of ammunition, the XS-9 Targeting Relay attachment, and the stock for the rifle.
@@ -195,7 +195,7 @@
 # Shotguns
 # XM51
 - type: entity
-  parent: RMCBaseGunCase
+  parent: RMCGunCaseBase
   id: RMCXM51Case
   name: XM51 breaching scattergun case
   description: A gun case containing the XM51 Breaching Scattergun. Comes with two spare magazines, two spare shell boxes, an optional stock and a belt to holster the weapon.
@@ -223,7 +223,7 @@
 
 # MOU53
 - type: entity
-  parent: RMCBaseGunCase
+  parent: RMCGunCaseBase
   id: RMCMOU53Case
   name: MOU53 shotgun case
   description: A gun case containing the MOU53 shotgun. It does come loaded, but you'll still have to find ammunition as you go.
@@ -242,7 +242,7 @@
     - id: RMCAttachmentMOU53Stock
 
 - type: entity
-  parent: RMCBaseGunCase
+  parent: RMCGunCaseBase
   id: RMCM54CMK1Case
   name: M54C assault rifle MK1 case
   description: A gun case containing the M54C assault rifle MK1. It can only use proprietary MK1 magazines.
@@ -262,7 +262,7 @@
     - id: CMMagazineRifleM54CMK1
 
 - type: entity
-  parent: RMCBaseGunCase
+  parent: RMCGunCaseBase
   id: RMCM54CMK1CaseAP
   name: M54C assault rifle MK1 AP case
   description: A gun case containing the M54C assault rifle MK1 loaded with AP rounds. It can only use proprietary MK1 magazines.

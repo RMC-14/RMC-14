@@ -81,8 +81,8 @@
       rmc-aslot-underbarrel: 0.25, -0.125
 
 - type: entity
-  parent: CMWeaponPistolM77
-  id: CMWeaponPistolM77Empty
+  parent: RMCWeaponPistolM77
+  id: RMCWeaponPistolM77Empty
   suffix: Empty
   components:
   - type: ItemSlots
