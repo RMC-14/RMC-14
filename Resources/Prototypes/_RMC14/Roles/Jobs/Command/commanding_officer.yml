@@ -67,7 +67,7 @@
       points: 120
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "CO"
+      prefix: cm-job-prefix-commanding-officer
     - type: CommendationGiver
 
 - type: startingGear

@@ -33,7 +33,7 @@
         RMCSkillSurgery: 2
     - type: RMCUserBulkyArmorIncapable
     - type: JobPrefix
-      prefix: "Rsr"
+      prefix: cm-job-prefix-researcher
   hidden: true # TODO RMC14
 
 - type: startingGear

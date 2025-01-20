@@ -36,7 +36,7 @@
       points: 45
     - type: SquadArmorWearer
     - type: JobPrefix
-      prefix: "ComTech"
+      prefix: cm-job-prefix-combat-tech
 
 - type: startingGear
   id: CMGearCombatTech

@@ -48,7 +48,7 @@
       points: 45
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "SO"
+      prefix: cm-job-prefix-staff-officer
 
 - type: startingGear
   id: CMGearStaffOfficer

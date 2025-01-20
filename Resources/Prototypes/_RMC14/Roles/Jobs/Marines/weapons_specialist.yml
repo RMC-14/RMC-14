@@ -42,7 +42,7 @@
         Specialist: 120
     - type: SquadArmorWearer
     - type: JobPrefix
-      prefix: "Spc"
+      prefix: cm-job-prefix-weapons-specialist
 
 - type: startingGear
   id: CMGearWeaponsSpecialist

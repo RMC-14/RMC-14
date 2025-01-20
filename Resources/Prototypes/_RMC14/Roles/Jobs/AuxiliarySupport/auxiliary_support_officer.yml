@@ -55,7 +55,7 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "ASO"
+      prefix: cm-job-prefix-aso
 
 - type: startingGear
   id: CMGearASO

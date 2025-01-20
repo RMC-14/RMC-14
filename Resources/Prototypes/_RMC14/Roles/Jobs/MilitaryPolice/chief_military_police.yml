@@ -47,7 +47,7 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "CMP"
+      prefix: cm-job-prefix-mp
 
 - type: startingGear
   id: CMGearChiefMP

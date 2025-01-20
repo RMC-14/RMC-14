@@ -63,7 +63,7 @@
       points: 45
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "SEA"
+      prefix: cm-job-prefix-senior-enlisted-advisor
     - type: SeeNewPlayers
 
 - type: startingGear

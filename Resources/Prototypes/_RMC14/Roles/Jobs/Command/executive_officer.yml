@@ -49,7 +49,7 @@
       points: 120
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "XO"
+      prefix: cm-job-prefix-executive-officer
 
 - type: startingGear
   id: CMGearExecutiveOfficer

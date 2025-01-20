@@ -28,7 +28,7 @@
         RMCSkillFirearms: 2
         RMCSkillFireman: 1
     - type: JobPrefix
-      prefix: "MST"
+      prefix: cm-job-prefix-messtech
   hidden: true # TODO RMC14
 
 - type: startingGear

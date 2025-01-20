@@ -26,7 +26,7 @@
       points: 45
     - type: SquadArmorWearer
     - type: JobPrefix
-      prefix: "RFN"
+      prefix: cm-job-prefix-rifleman
 
 - type: startingGear
   id: CMGearRifleman

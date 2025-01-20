@@ -31,7 +31,7 @@
         RMCSkillSurgery: 1
     - type: RMCUserBulkyArmorIncapable
     - type: JobPrefix
-      prefix: "Nurse"
+      prefix: cm-job-prefix-nurse
 
 - type: startingGear
   id: CMGearNurse

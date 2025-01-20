@@ -41,7 +41,7 @@
       points: 45
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "DP"
+      prefix: cm-job-prefix-dropship-pilot
 
 - type: startingGear
   id: CMGearPilotDropship

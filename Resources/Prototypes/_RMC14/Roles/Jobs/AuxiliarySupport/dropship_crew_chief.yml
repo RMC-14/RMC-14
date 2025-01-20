@@ -43,7 +43,7 @@
       points: 45
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "DCC"
+      prefix: cm-job-prefix-dcc
   hidden: false
 
 - type: startingGear

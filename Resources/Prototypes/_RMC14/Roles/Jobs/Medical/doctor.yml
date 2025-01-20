@@ -32,7 +32,7 @@
         RMCSkillSurgery: 2
     - type: RMCUserBulkyArmorIncapable
     - type: JobPrefix
-      prefix: "Doc"
+      prefix: cm-job-prefix-doctor
 
 - type: startingGear
   id: CMGearDoctor
