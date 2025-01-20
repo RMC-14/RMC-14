@@ -1,4 +1,4 @@
-﻿# Divide cm13 numbers by 37.5 to get an accurate conversion
+# Divide cm13 numbers by 37.5 to get an accurate conversion
 - type: latheRecipe
   id: RMCBucket
   result: RMCBucket
@@ -12,6 +12,27 @@
   completetime: 4
   materials:
     CMSteel: 107 # 4000
+
+- type: latheRecipe
+  id: CMLightTube
+  result: CMLightTube
+  completetime: 4
+  materials:
+    CMGlass: 3 # 125
+
+- type: latheRecipe
+  id: CMLightBulb
+  result: CMLightBulb
+  completetime: 4
+  materials:
+    CMGlass: 3 # 125
+
+- type: latheRecipe
+  id: CMHandLabeler
+  result: CMHandLabeler
+  completetime: 4
+  materials:
+    CMSteel: 4 # 156
 
 - type: latheRecipe
   id: CMFireExtinguisher
@@ -37,7 +58,7 @@
 
 - type: latheRecipe
   id: CMTRayScanner
-  result: trayScanner # TODO RMC14
+  result: CMTRayScanner
   completetime: 4
   materials:
     CMSteel: 5 # 187
@@ -70,6 +91,29 @@
   completetime: 4
   materials:
     CMSteel: 5 # 187
+
+- type: latheRecipe
+  id: CMRadioHandheld
+  result: CMRadioHandheld
+  completetime: 4
+  materials:
+    CMSteel: 3 # 93
+    CMGlass: 1 # 31
+
+- type: latheRecipe
+  id: CMHeadset
+  result: CMHeadset
+  completetime: 4
+  materials:
+    CMSteel: 3 # 93
+
+- type: latheRecipe
+  id: RMCFlashlight
+  result: RMCFlashlight
+  completetime: 4
+  materials:
+    CMSteel: 2 # 62
+    CMGlass: 1 # 25
 
 - type: latheRecipe
   id: CMSheetGlassReinforced
@@ -148,6 +192,13 @@
   materials:
     CMGlass: 167 # 6250
 
+#- type: latheRecipe
+#  id: CMDrinkingGlass
+#  result: DrinkGlass <- todo RMC14, rest is already complete
+#  completetime: 4
+#  materials:
+#  CMGlass: 13 # 500
+
 - type: latheRecipe
   id: RMCTablePartTan
   result: RMCTablePartTan
@@ -182,3 +233,4 @@
   completetime: 4
   materials:
     CMSteel: 400 # 15000
+
