@@ -1,7 +1,7 @@
 ﻿<Document>
   # RMC-14 Rules
 
-  [bold]If you are unable to click any links, use the in-game guidebook version, in the escape menu.[/bold]
+  [color=#ff0000][bold]If you are unable to click any links, use the in-game guidebook version, in the escape menu.[/bold][/color]
 
   [italic]RMC is a roleplaying game with team deathmatch elements. This means players are expected, to an extent, to pretend their character is part of this world in their actions and words. This is the intended experience, and the experience the players of RMC enjoy, and is not always about winning.[/italic]
 
@@ -11,22 +11,17 @@
   - Many sections of the rules have been changed. It's recommended to read everything.
 
   ## Admin Decisions Are Final.
-  - Rules are enforced as intended. Every example of a rule break cannot be written, thus enforcement is subject to admin interpretation of the rule’s intention.
+  - Rules are enforced as intended. Every example of a rule break cannot be written, thus enforcement is subject to admin interpretation of the rule's intention.
   - Admins may handle rule breaks through in-character consequences at their discretion. This does not apply to zero tolerance rules.
   - You may file a staff complaint with head staff if you find the decision to be incorrect.
 
   ## General Information
-  Disconnecting from or ignoring/evading admin-helps will result in an appeal only ban.
+  Disconnecting from or ignoring/evading admin-helps will result in action being taken.
   This is to prevent bad actors from avoiding issues. If you need to leave urgently, let us know and it will be considered in your appeal.
 
-
-  All of the below rules apply at all times, including between rounds.
-
-  These rules are neither exactly SS14 or CM13 and should be read in their entirety.
-
-  [textlink="[Ban Definitions]" link="RMCBanTypes"]
-
-  [textlink="[Ban Durations]" link="RMCBanDurations"]
+  - [bold]These rules are not the same as other servers, should be read in their entirety.[/bold]
+  - [textlink="Ban Definitions" link="RMCBanTypes"]
+  - [textlink="Ban Durations" link="RMCBanDurations"]
 
   ## Zero Tolerance Rules
   You are liable to be banned without warning for breaking these rules.
@@ -38,14 +33,11 @@
   - [textlink="2. Do not use multiple accounts, or alt accounts, and do not share accounts." link="RMCMultikey"]
   - [textlink="3. Follow the rules of escalation against non-hostiles." link="RMCRulesEscalation"]
   - [textlink="4. Don't use information gained from outside your character's knowledge." link="RMCMetaknowledge"]
-  - [textlink="5. Don't antagonize your team." link="RMCKindness"]
-  - [textlink="6. Don't harass or target players across rounds." link="RMCMetagrudging"]
-  - [textlink="7. Don't quit a command level role without notice." link="RMCCommandRoles"]
+  - [textlink="5. Don't antagonize your team, don't harass players." link="RMCKindness"]
+  - [textlink="6. Don't quit a command level role without notice." link="RMCCommandRoles"]
+  - [textlink="7. Mutinies, riots and similar activity require admin permission." link="RMCMutinies"]
   - 8. Don't disconnect if you do not get the role/kit you want, be considerate.
   - 9. Follow the roleplay rules and standards of the server. (Outlined at the bottom of this page)
-
-  ## Riots, Mutiny
-  - [textlink="1. Mutinies, riots and similar activity require admin permission." link="RMCMutinies"]
 
   ## Military and Command
   These rules also apply to any individual who is promoted or is acting in the place of a MP/Command role (unless they are a member of a hostile force).

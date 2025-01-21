@@ -19,4 +19,7 @@
   - [textlink="Medical" link="RMCMedical"]
   - [textlink="Medicines" link="RMCMedicine"]
   - [textlink="Requisitions" link="RMCRequisitions"]
+  - [textlink="Communications towers and senor towers" link="RMCGuideCommunicationsTowers"]
+  - [textlink="Combat Technician" link="RMCGuideRoleCombatTechnician"]
+  - [textlink="Maintenance Technician" link="RMCGuideRoleMaintenanceTechnician"]
 </Document>
