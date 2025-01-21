@@ -76,6 +76,13 @@
 
 - type: entity
   parent: CMCatwalk
+  id: RMCCatwalkStrata
+  components:
+  - type: Sprite
+    state: strata_catwalk
+
+- type: entity
+  parent: CMCatwalk
   id: RMCCatwalkHybrisa
   name: solid metal grate
   components:
