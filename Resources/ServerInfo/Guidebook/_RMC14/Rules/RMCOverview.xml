@@ -1,21 +1,21 @@
 ﻿<Document>
-  #RMC-14 Rules
+  # RMC-14 Rules
 
-  If you are unable to click any of the links, use the in-game guidebook version.
+  [bold]If you are unable to click any links, use the in-game guidebook version, in the escape menu.[/bold]
 
-  ##Recent Changes
+  [italic]RMC is a roleplaying game with team deathmatch elements. This means players are expected, to an extent, to pretend their character is part of this world in their actions and words. This is the intended experience, and the experience the players of RMC enjoy, and is not always about winning.[/italic]
+
+  ## Recent Changes
   Read the relevant sections for the entire text.
-  - Naming rule additions and clarifications.
-  - Marine law.
-  - (Protect Detainees) Removed all references to permabrig and executions in rules. Refer to marine law for punishments.
-  - (Military and Command) Further clarified the permissions of execution and the role of the CO.
+  - Marine Law and SOP has been added. Command level roles including Squad Leaders must follow this.
+  - Many sections of the rules have been changed. It's recommended to read everything.
 
-  ##Admin Decisions Are Final.
+  ## Admin Decisions Are Final.
   - Rules are enforced as intended. Every example of a rule break cannot be written, thus enforcement is subject to admin interpretation of the rule’s intention.
   - Admins may handle rule breaks through in-character consequences at their discretion. This does not apply to zero tolerance rules.
   - You may file a staff complaint with head staff if you find the decision to be incorrect.
 
-  ##General Information
+  ## General Information
   Disconnecting from or ignoring/evading admin-helps will result in an appeal only ban.
   This is to prevent bad actors from avoiding issues. If you need to leave urgently, let us know and it will be considered in your appeal.
 
@@ -40,7 +40,7 @@
   - [textlink="4. Don't use information gained from outside your character's knowledge." link="RMCMetaknowledge"]
   - [textlink="5. Don't antagonize your team." link="RMCKindness"]
   - [textlink="6. Don't harass or target players across rounds." link="RMCMetagrudging"]
-  - [textlink="7. Don't quit a head role without notice." link="RMCCommandRoles"]
+  - [textlink="7. Don't quit a command level role without notice." link="RMCCommandRoles"]
   - 8. Don't disconnect if you do not get the role/kit you want, be considerate.
   - 9. Follow the roleplay rules and standards of the server. (Outlined at the bottom of this page)
 
@@ -54,9 +54,7 @@
   - [textlink="3. MP should try to remain non-lethal and effect arrests, except in specific special circumstances." link="RMCLethalForce"]
   - [textlink="4. MP will be expected to answer for use of lethal force." link="RMCLethalForceConsequences"]
   - [textlink="5. MP are expected to protect detainees in their custody to the best of their ability." link="RMCProtectDetainees"]
-  - Only with the approval of a whitelisted CO, high command, or the approval of both the acting commander and CMP, may an execution may be approved.
-  - Only a whitelisted CO or high command may pardon a sentence.
-  - Permissions of a CO are not passed down. The acting commander is never a Commanding Officer.
+  - Only a whitelisted CO or Provost may pardon a sentence, but appeals can be done. See marine law.
 
   ## Roleplay Rules and Standards
 
