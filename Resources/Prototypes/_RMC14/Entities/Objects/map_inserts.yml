@@ -1,0 +1,11 @@
+﻿- type: entity
+  parent: MarkerBase
+  id: RMCSolarisSeCheckpoint
+  name: SE Checkpoint
+  suffix: Insert Solaris
+  components:
+  - type: Sprite
+    state: green
+  - type: MapInsert
+    spawn: "/Maps/_RMC14/inserts/se-checkpoint.yml"
+    clearEntities: true
