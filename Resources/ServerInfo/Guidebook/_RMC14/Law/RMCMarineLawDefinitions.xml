@@ -11,21 +11,21 @@
 
   [color=#008000][bold]Commander[/bold][/color]
   - The current [color=#008000][bold]Commander[/bold][/color] of an operation.
-  - Transferable to a new [color=#008000][bold]Commander[/bold][/color], per the Chain of Command.
+  - Transferable to a new [color=#008000][bold]Commander[/bold][/color], per the [textlink="Chain of Command" link="RMCCommandChain"].
 
   If the [color=#008000][bold]Commander[/bold][/color] is rendered incapable of command [bold]temporarily[/bold], the [color=#90EE90][bold]Duty Officer[/bold][/color] inherits [color=#008000][bold]Commander[/bold][/color] rights, but should the [color=#008000][bold]Commander[/bold][/color] return, they are still the [color=#008000][bold]Commander[/bold][/color]. This includes but is not limited to:
 
   - Prolonged communications outage.
   - The [color=#008000][bold]Commander[/bold][/color] deploying in the field.
 
-  If the [color=#008000][bold]Commander[/bold][/color] is rendered [bold]permanently[/bold] incapable of command, the next in the Chain of Command becomes the [color=#008000][bold]Commander[/bold][/color], rather than a [color=#90EE90][bold]Duty Officer[/bold][/color]. This includes but is not limited to:
+  If the [color=#008000][bold]Commander[/bold][/color] is rendered [bold]permanently[/bold] incapable of command, the next in the [textlink="Chain of Command" link="RMCCommandChain"] becomes the [color=#008000][bold]Commander[/bold][/color], rather than a [color=#90EE90][bold]Duty Officer[/bold][/color]. This includes but is not limited to:
   - The [color=#008000][bold]Commander[/bold][/color] is relieved of duty due to [bold]arrest[/bold] or [bold]mutiny[/bold].
   - The [color=#008000][bold]Commander[/bold][/color] becoming [bold]unrevivable[/bold].
 
   \n
 
   [color=#90EE90][bold]Duty Officer[/bold][/color]
-  - The ranking officer in the Chain of Command who, in the temporary absence of the [color=#008000][bold]Commander[/bold][/color], is placed in command of the warship.
+  - The ranking officer in the [textlink="Chain of Command" link="RMCCommandChain"] who, in the temporary absence of the [color=#008000][bold]Commander[/bold][/color], is placed in command of the warship.
   - Unless explicitly stated otherwise, the [color=#90EE90][bold]Duty Officer[/bold][/color] is interchangeable with, and inherits the rights of [color=#008000][bold]Commander[/bold][/color] in this case.
 
   \n
