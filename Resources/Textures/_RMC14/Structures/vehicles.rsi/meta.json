@@ -1,185 +1,185 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/8e8d26bbb4f1617ea1b1ffc17ffffca552ce8c11/icons/obj/structures/stairs, rampbottom taken from https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/obj/structures/props/vehicles/meridian_orange.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/obj/structures/props/vehicles",
   "size": {
     "x": 64,
     "y": 64
   },
   "states": [
     {
-      "name": "meridian_black"
+      "name": "mizutani_black"
     },
     {
-      "name": "meridian_black_f"
+      "name": "mizutani_black_f"
     },
     {
-      "name": "meridian_black_damage"
+      "name": "mizutani_black_damage"
     },
     {
-      "name": "meridian_black_damage_f"
+      "name": "mizutani_black_damage_f"
     },
     {
-      "name": "meridian_blue"
+      "name": "mizutani_blue"
     },
     {
-      "name": "meridian_blue_f"
+      "name": "mizutani_blue_f"
     },
     {
-      "name": "meridian_blue_damage"
+      "name": "mizutani_blue_damage"
     },
     {
-      "name": "meridian_blue_damage_f"
+      "name": "mizutani_blue_damage_f"
     },
     {
-      "name": "meridian_brown"
+      "name": "mizutani_brown"
     },
     {
-      "name": "meridian_brown_f"
+      "name": "mizutani_brown_f"
     },
     {
-      "name": "meridian_brown_damage"
+      "name": "mizutani_brown_damage"
     },
     {
-      "name": "meridian_brown_damage_f"
+      "name": "mizutani_brown_damage_f"
     },
     {
-      "name": "meridian_cop"
+      "name": "mizutani_cop"
     },
     {
-      "name": "meridian_cop_f"
+      "name": "mizutani_cop_f"
     },
     {
-      "name": "meridian_cop_damage"
+      "name": "mizutani_cop_damage"
     },
     {
-      "name": "meridian_cop_damage_f"
+      "name": "mizutani_cop_damage_f"
     },
     {
-      "name": "meridian_desatblue"
+      "name": "mizutani_desatblue"
     },
     {
-      "name": "meridian_desatblue_f"
+      "name": "mizutani_desatblue_f"
     },
     {
-      "name": "meridian_desatblue_damage"
+      "name": "mizutani_desatblue_damage"
     },
     {
-      "name": "meridian_desatblue_damage_f"
+      "name": "mizutani_desatblue_damage_f"
     },
     {
-      "name": "meridian_green"
+      "name": "mizutani_green"
     },
     {
-      "name": "meridian_green_f"
+      "name": "mizutani_green_f"
     },
     {
-      "name": "meridian_green_damage"
+      "name": "mizutani_green_damage"
     },
     {
-      "name": "meridian_green_damage_f"
+      "name": "mizutani_green_damage_f"
     },
     {
-      "name": "meridian_lightblue"
+      "name": "mizutani_lightblue"
     },
     {
-      "name": "meridian_lightblue_f"
+      "name": "mizutani_lightblue_f"
     },
     {
-      "name": "meridian_lightblue_damage"
+      "name": "mizutani_lightblue_damage"
     },
     {
-      "name": "meridian_lightblue_damage_f"
+      "name": "mizutani_lightblue_damage_f"
     },
     {
-      "name": "meridian_orange"
+      "name": "mizutani_orange"
     },
     {
-      "name": "meridian_orange_f"
+      "name": "mizutani_orange_f"
     },
     {
-      "name": "meridian_orange_damage"
+      "name": "mizutani_orange_damage"
     },
     {
-      "name": "meridian_orange_damage_f"
+      "name": "mizutani_orange_damage_f"
     },
     {
-      "name": "meridian_pink"
+      "name": "mizutani_pink"
     },
     {
-      "name": "meridian_pink_f"
+      "name": "mizutani_pink_f"
     },
     {
-      "name": "meridian_pink_damage"
+      "name": "mizutani_pink_damage"
     },
     {
-      "name": "meridian_pink_damage_f"
+      "name": "mizutani_pink_damage_f"
     },
     {
-      "name": "meridian_purple"
+      "name": "mizutani_purple"
     },
     {
-      "name": "meridian_purple_f"
+      "name": "mizutani_purple_f"
     },
     {
-      "name": "meridian_purple_damage"
+      "name": "mizutani_purple_damage"
     },
     {
-      "name": "meridian_purple_damage_f"
+      "name": "mizutani_purple_damage_f"
     },
     {
-      "name": "meridian_red"
+      "name": "mizutani_red"
     },
     {
-      "name": "meridian_red_f"
+      "name": "mizutani_red_f"
     },
     {
-      "name": "meridian_red_damage"
+      "name": "mizutani_red_damage"
     },
     {
-      "name": "meridian_red_damage_f"
+      "name": "mizutani_red_damage_f"
     },
     {
-      "name": "meridian_shell"
+      "name": "mizutani_shell"
     },
     {
-      "name": "meridian_shell_f"
+      "name": "mizutani_shell_f"
     },
     {
-      "name": "meridian_taxi"
+      "name": "mizutani_taxi"
     },
     {
-      "name": "meridian_taxi_f"
+      "name": "mizutani_taxi_f"
     },
     {
-      "name": "meridian_taxi_damage"
+      "name": "mizutani_taxi_damage"
     },
     {
-      "name": "meridian_taxi_damage_f"
+      "name": "mizutani_taxi_damage_f"
     },
     {
-      "name": "meridian_turquoise"
+      "name": "mizutani_turquoise"
     },
     {
-      "name": "meridian_turquoise_f"
+      "name": "mizutani_turquoise_f"
     },
     {
-      "name": "meridian_turquoise_damage"
+      "name": "mizutani_turquoise_damage"
     },
     {
-      "name": "meridian_turquoise_damage_f"
+      "name": "mizutani_turquoise_damage_f"
     },
     {
-      "name": "meridian_wy"
+      "name": "mizutani_wy"
     },
     {
-      "name": "meridian_wy_f"
+      "name": "mizutani_wy_f"
     },
     {
-      "name": "meridian_wy_damage"
+      "name": "mizutani_wy_damage"
     },
     {
-      "name": "meridian_wy_damage_f"
+      "name": "mizutani_wy_damage_f"
     }
   ]
 }

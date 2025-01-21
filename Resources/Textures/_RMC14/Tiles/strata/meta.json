@@ -82,6 +82,45 @@
     },
     {
       "name": "multi_tiles6"
+    },
+    {
+      "name": "floor3"
+    },
+    {
+      "name": "yellow_1"
+    },
+    {
+      "name": "yellow_2"
+    },
+    {
+      "name": "yellow_3"
+    },
+    {
+      "name": "yellow_4"
+    },
+    {
+      "name": "yellow_5"
+    },
+    {
+      "name": "yellow_6"
+    },
+    {
+      "name": "yellow_7"
+    },
+    {
+      "name": "yellow_8"
+    },
+    {
+      "name": "yellow_corner_1"
+    },
+    {
+      "name": "yellow_corner_2"
+    },
+    {
+      "name": "yellow_corner_3"
+    },
+    {
+      "name": "yellow_corner_4"
     }
   ]
 }

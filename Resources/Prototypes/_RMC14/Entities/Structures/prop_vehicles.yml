@@ -30,468 +30,468 @@
 
 - type: entity
   parent: RMCPropVehicleBase
-  id: RMCPropVehicleMonoSpectraOrange
+  id: RMCPropVehicleMonoSupronOrange
   suffix: Orange
-  name: Mono-Spectra
-  description: The 'Mono-Spectra', a mass-produced civilian vehicle for the colonial markets, in and outside of the United Americas. Produced by 'Meridian' a car marque and associated operating division of the Weston-Yamada Corporation.
+  name: Mono-Supron
+  description: The 'Mono-Supron', a mass-produced civilian vehicle for the colonial markets, in and outside of the United Americas. Produced by 'Mizutani' a car marque and associated operating division of the Weston-Yamada Corporation.
   components:
   - type: Sprite
-    state: meridian_orange
+    state: mizutani_orange
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraOrangeFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronOrangeFlipped
   suffix: Orange, Flipped
   components:
   - type: Sprite
-    state: meridian_orange_f
+    state: mizutani_orange_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraBlack
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronBlack
   suffix: Black
   components:
   - type: Sprite
-    state: meridian_black
+    state: mizutani_black
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraBlackFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronBlackFlipped
   suffix: Black, Flipped
   components:
   - type: Sprite
-    state: meridian_black_f
+    state: mizutani_black_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraBlue
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronBlue
   suffix: Blue
   components:
   - type: Sprite
-    state: meridian_blue
+    state: mizutani_blue
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraBlueFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronBlueFlipped
   suffix: Blue, Flipped
   components:
   - type: Sprite
-    state: meridian_blue_f
+    state: mizutani_blue_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraBrown
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronBrown
   suffix: Brown
   components:
   - type: Sprite
-    state: meridian_brown
+    state: mizutani_brown
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraBrownFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronBrownFlipped
   suffix: Brown, Flipped
   components:
   - type: Sprite
-    state: meridian_brown_f
+    state: mizutani_brown_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraCop
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronCop
   suffix: Cop
   components:
   - type: Sprite
-    state: meridian_cop
+    state: mizutani_cop
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraCopFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronCopFlipped
   suffix: Cop, Flipped
   components:
   - type: Sprite
-    state: meridian_cop_f
+    state: mizutani_cop_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraDesatBlue
-  suffix: Cop
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronDesatBlue
+  suffix: Desat Blue
   components:
   - type: Sprite
-    state: meridian_desatblue
+    state: mizutani_desatblue
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraDesatBlueFlipped
-  suffix: Cop, Flipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronDesatBlueFlipped
+  suffix: Desat Blue, Flipped
   components:
   - type: Sprite
-    state: meridian_desatblue_f
+    state: mizutani_desatblue_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraGreen
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronGreen
   suffix: Green
   components:
   - type: Sprite
-    state: meridian_green
+    state: mizutani_green
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraGreenFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronGreenFlipped
   suffix: Green, Flipped
   components:
   - type: Sprite
-    state: meridian_green_f
+    state: mizutani_green_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraLightBlue
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronLightBlue
   suffix: LightBlue
   components:
   - type: Sprite
-    state: meridian_lightblue
+    state: mizutani_lightblue
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraLightBlueFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronLightBlueFlipped
   suffix: LightBlue, Flipped
   components:
   - type: Sprite
-    state: meridian_lightblue_f
+    state: mizutani_lightblue_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraPink
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronPink
   suffix: Pink
   components:
   - type: Sprite
-    state: meridian_pink
+    state: mizutani_pink
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraPinkFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronPinkFlipped
   suffix: Pink, Flipped
   components:
   - type: Sprite
-    state: meridian_pink_f
+    state: mizutani_pink_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraPurple
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronPurple
   suffix: Purple
   components:
   - type: Sprite
-    state: meridian_purple
+    state: mizutani_purple
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraPurpleFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronPurpleFlipped
   suffix: Purple, Flipped
   components:
   - type: Sprite
-    state: meridian_purple_f
+    state: mizutani_purple_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraRed
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronRed
   suffix: Red
   components:
   - type: Sprite
-    state: meridian_red
+    state: mizutani_red
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraRedFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronRedFlipped
   suffix: Red, Flipped
   components:
   - type: Sprite
-    state: meridian_red_f
+    state: mizutani_red_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraShell
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronShell
   suffix: Shell
   components:
   - type: Sprite
-    state: meridian_shell
+    state: mizutani_shell
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraShellFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronShellFlipped
   suffix: Shell, Flipped
   components:
   - type: Sprite
-    state: meridian_shell_f
+    state: mizutani_shell_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraTaxi
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronTaxi
   suffix: Taxi
   components:
   - type: Sprite
-    state: meridian_taxi
+    state: mizutani_taxi
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraTaxiFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronTaxiFlipped
   suffix: Taxi, Flipped
   components:
   - type: Sprite
-    state: meridian_taxi_f
+    state: mizutani_taxi_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraTurquoise
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronTurquoise
   suffix: Turquoise
   components:
   - type: Sprite
-    state: meridian_turquoise
+    state: mizutani_turquoise
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraTurquoiseFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronTurquoiseFlipped
   suffix: Turquoise, Flipped
   components:
   - type: Sprite
-    state: meridian_turquoise_f
+    state: mizutani_turquoise_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraWY
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronWY
   suffix: WeYa
   components:
   - type: Sprite
-    state: meridian_wy
+    state: mizutani_wy
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraWYFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronWYFlipped
   suffix: WeYa, Flipped
   components:
   - type: Sprite
-    state: meridian_wy_f
+    state: mizutani_wy_f
 
 # Destroyed
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraOrangeDestroyed
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronOrangeDestroyed
   suffix: Orange, Destroyed
   components:
   - type: Sprite
-    state: meridian_orange_damage
+    state: mizutani_orange_damage
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraOrangeDestroyedFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronOrangeDestroyedFlipped
   suffix: Orange, Destroyed, Flipped
   components:
   - type: Sprite
-    state: meridian_orange_damage_f
+    state: mizutani_orange_damage_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraBlackDestroyed
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronBlackDestroyed
   suffix: Black, Destroyed
   components:
   - type: Sprite
-    state: meridian_black_damage
+    state: mizutani_black_damage
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraBlackDestroyedFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronBlackDestroyedFlipped
   suffix: Black, Destroyed, Flipped
   components:
   - type: Sprite
-    state: meridian_black_damage_f
+    state: mizutani_black_damage_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraBlueDestroyed
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronBlueDestroyed
   suffix: Blue, Destroyed
   components:
   - type: Sprite
-    state: meridian_blue_damage
+    state: mizutani_blue_damage
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraBlueDestroyedFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronBlueDestroyedFlipped
   suffix: Blue, Destroyed, Flipped
   components:
   - type: Sprite
-    state: meridian_blue_damage_f
+    state: mizutani_blue_damage_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraBrownDestroyed
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronBrownDestroyed
   suffix: Brown, Destroyed
   components:
   - type: Sprite
-    state: meridian_brown_damage
+    state: mizutani_brown_damage
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraBrownDestroyedFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronBrownDestroyedFlipped
   suffix: Brown, Destroyed, Flipped
   components:
   - type: Sprite
-    state: meridian_brown_damage_f
+    state: mizutani_brown_damage_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraCopDestroyed
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronCopDestroyed
   suffix: Cop, Destroyed
   components:
   - type: Sprite
-    state: meridian_cop_damage
+    state: mizutani_cop_damage
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraCopDestroyedFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronCopDestroyedFlipped
   suffix: Cop, Destroyed, Flipped
   components:
   - type: Sprite
-    state: meridian_cop_damage_f
+    state: mizutani_cop_damage_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraDesatBlueDestroyed
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronDesatBlueDestroyed
   suffix: DesatBlue, Destroyed
   components:
   - type: Sprite
-    state: meridian_desatblue_damage
+    state: mizutani_desatblue_damage
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraDesatBlueDestroyedFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronDesatBlueDestroyedFlipped
   suffix: DesatBlue, Destroyed, Flipped
   components:
   - type: Sprite
-    state: meridian_desatblue_damage_f
+    state: mizutani_desatblue_damage_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraGreenDestroyed
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronGreenDestroyed
   suffix: Green, Destroyed
   components:
   - type: Sprite
-    state: meridian_green_damage
+    state: mizutani_green_damage
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraGreenDestroyedFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronGreenDestroyedFlipped
   suffix: Green, Destroyed, Flipped
   components:
   - type: Sprite
-    state: meridian_green_damage_f
+    state: mizutani_green_damage_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraLightBlueDestroyed
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronLightBlueDestroyed
   suffix: LightBlue, Destroyed
   components:
   - type: Sprite
-    state: meridian_lightblue_damage
+    state: mizutani_lightblue_damage
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraLightBlueDestroyedFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronLightBlueDestroyedFlipped
   suffix: LightBlue, Destroyed, Flipped
   components:
   - type: Sprite
-    state: meridian_lightblue_damage_f
+    state: mizutani_lightblue_damage_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraPinkDestroyed
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronPinkDestroyed
   suffix: Pink, Destroyed
   components:
   - type: Sprite
-    state: meridian_pink_damage
+    state: mizutani_pink_damage
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraPinkDestroyedFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronPinkDestroyedFlipped
   suffix: Pink, Destroyed, Flipped
   components:
   - type: Sprite
-    state: meridian_pink_damage_f
+    state: mizutani_pink_damage_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraPurpleDestroyed
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronPurpleDestroyed
   suffix: Purple, Destroyed
   components:
   - type: Sprite
-    state: meridian_purple_damage
+    state: mizutani_purple_damage
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraPurpleDestroyedFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronPurpleDestroyedFlipped
   suffix: Purple, Destroyed, Flipped
   components:
   - type: Sprite
-    state: meridian_purple_damage_f
+    state: mizutani_purple_damage_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraRedDestroyed
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronRedDestroyed
   suffix: Red, Destroyed
   components:
   - type: Sprite
-    state: meridian_red_damage
+    state: mizutani_red_damage
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraRedDestroyedFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronRedDestroyedFlipped
   suffix: Red, Destroyed, Flipped
   components:
   - type: Sprite
-    state: meridian_red_damage_f
+    state: mizutani_red_damage_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraTaxiDestroyed
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronTaxiDestroyed
   suffix: Taxi, Destroyed
   components:
   - type: Sprite
-    state: meridian_taxi_damage
+    state: mizutani_taxi_damage
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraTaxiDestroyedFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronTaxiDestroyedFlipped
   suffix: Taxi, Destroyed, Flipped
   components:
   - type: Sprite
-    state: meridian_taxi_damage_f
+    state: mizutani_taxi_damage_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraTurquoiseDestroyed
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronTurquoiseDestroyed
   suffix: Turquoise, Destroyed
   components:
   - type: Sprite
-    state: meridian_turquoise_damage
+    state: mizutani_turquoise_damage
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraTurquoiseDestroyedFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronTurquoiseDestroyedFlipped
   suffix: Turquoise, Destroyed, Flipped
   components:
   - type: Sprite
-    state: meridian_turquoise_damage_f
+    state: mizutani_turquoise_damage_f
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraWYDestroyed
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronWYDestroyed
   suffix: WeYa, Destroyed
   components:
   - type: Sprite
-    state: meridian_wy_damage
+    state: mizutani_wy_damage
 
 - type: entity
-  parent: RMCPropVehicleMonoSpectraOrange
-  id: RMCPropVehicleMonoSpectraWYDestroyedFlipped
+  parent: RMCPropVehicleMonoSupronOrange
+  id: RMCPropVehicleMonoSupronWYDestroyedFlipped
   suffix: WeYa, Destroyed, Flipped
   components:
   - type: Sprite
-    state: meridian_wy_damage_f
+    state: mizutani_wy_damage_f

@@ -128,6 +128,57 @@
   suffix: west
   sprite: /Textures/_RMC14/Tiles/hybrisa/stripe_red_west.png
 
+- type: tile
+  parent: RMCFloorHybrisaBasicBase
+  id: RMCFloorHybrisaNSPAEmblem
+  name: metal floor
+  sprite: /Textures/_RMC14/Tiles/hybrisa/NSPAemblem.png
+
+- type: tile
+  parent: RMCFloorHybrisaNSPAEmblem
+  id: RMCFloorHybrisaNSPAEmblem64A
+  sprite: /Textures/_RMC14/Tiles/hybrisa/NSPA_emblem_concrete_2x2_a.png
+
+- type: tile
+  parent: RMCFloorHybrisaNSPAEmblem
+  id: RMCFloorHybrisaNSPAEmblem64B
+  sprite: /Textures/_RMC14/Tiles/hybrisa/NSPA_emblem_concrete_2x2_b.png
+
+- type: tile
+  parent: RMCFloorHybrisaNSPAEmblem
+  id: RMCFloorHybrisaNSPAEmblem64C
+  sprite: /Textures/_RMC14/Tiles/hybrisa/NSPA_emblem_concrete_2x2_c.png
+
+- type: tile
+  parent: RMCFloorHybrisaNSPAEmblem
+  id: RMCFloorHybrisaNSPAEmblem64D
+  sprite: /Textures/_RMC14/Tiles/hybrisa/NSPA_emblem_concrete_2x2_d.png
+
+- type: tile
+  parent: RMCFloorHybrisaNSPAEmblem
+  id: RMCFloorHybrisaMarshallEmblem
+  sprite: /Textures/_RMC14/Tiles/hybrisa/marshallsemblem.png
+
+- type: tile
+  parent: RMCFloorHybrisaNSPAEmblem
+  id: RMCFloorHybrisaMarshallEmblem64A
+  sprite: /Textures/_RMC14/Tiles/hybrisa/marshallsemblem_concrete_2x2_a.png
+
+- type: tile
+  parent: RMCFloorHybrisaNSPAEmblem
+  id: RMCFloorHybrisaMarshallEmblem64B
+  sprite: /Textures/_RMC14/Tiles/hybrisa/marshallsemblem_concrete_2x2_b.png
+
+- type: tile
+  parent: RMCFloorHybrisaNSPAEmblem
+  id: RMCFloorHybrisaMarshallEmblem64C
+  sprite: /Textures/_RMC14/Tiles/hybrisa/marshallsemblem_concrete_2x2_c.png
+
+- type: tile
+  parent: RMCFloorHybrisaNSPAEmblem
+  id: RMCFloorHybrisaMarshallEmblem64D
+  sprite: /Textures/_RMC14/Tiles/hybrisa/marshallsemblem_concrete_2x2_d.png
+
 # Road
 
 - type: tile

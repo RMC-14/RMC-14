@@ -34,3 +34,8 @@
   parent: CMFloorStrataMultitile1
   id: CMFloorStrataMultitile6
   sprite: /Textures/_RMC14/Tiles/strata/multi_tiles6.png
+
+- type: tile
+  parent: CMFloorStrataMultitile1
+  id: CMFloorStrata3
+  sprite: /Textures/_RMC14/Tiles/strata/floor3.png

@@ -21,6 +21,21 @@
   sprite: /Textures/_RMC14/Tiles/hybrisa/tilelightbeige.png
 
 - type: tile
+  parent: RMCFloorHybrisaBeige
+  id: RMCFloorHybrisaBeigeBig
+  sprite: /Textures/_RMC14/Tiles/hybrisa/beige_bigtile.png
+
+- type: tile
+  parent: RMCFloorHybrisaBeige
+  id: RMCFloorHybrisaBeigeBigLight
+  sprite: /Textures/_RMC14/Tiles/hybrisa/lightbeige_bigtile.png
+
+- type: tile
+  parent: RMCFloorHybrisaBeige
+  id: RMCFloorHybrisaBeigeSupermart
+  sprite: /Textures/_RMC14/Tiles/hybrisa/supermartfloor2.png
+
+- type: tile
   parent: RMCFloorHybrisaBeigeBase
   id: RMCFloorHybrisaBeigeCarpet
   name: beige carpet

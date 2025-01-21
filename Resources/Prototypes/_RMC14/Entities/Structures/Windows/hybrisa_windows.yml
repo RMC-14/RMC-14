@@ -10,7 +10,7 @@
     state: strata_frame0
   - type: IconSmooth
     key: walls
-    base: hybrisa_frame
+    base: strata_frame
     mode: CardinalFlags
   - type: Construction
     graph: RMCWindowHybrisa
@@ -28,7 +28,7 @@
     state: strata_frame0
   - type: IconSmooth
     key: walls
-    base: hybrisa_frame
+    base: strata_frame
     mode: CardinalFlags
   - type: Construction
     graph: RMCWindowHybrisaReinforced
@@ -165,7 +165,7 @@
     state: strata_frame0
   - type: IconSmooth
     key: walls
-    base: hybrisa_frame
+    base: strata_frame
     mode: CardinalFlags
   - type: Construction
     graph: RMCWindowHybrisaMedicalReinforced
@@ -205,7 +205,7 @@
     state: strata_frame0
   - type: IconSmooth
     key: walls
-    base: hybrisa_frame
+    base: strata_frame
     mode: CardinalFlags
   - type: Construction
     graph: RMCWindowHybrisaEngiReinforced
