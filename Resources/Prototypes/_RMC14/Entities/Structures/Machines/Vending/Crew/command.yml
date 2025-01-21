@@ -232,15 +232,17 @@
     sections:
     - name: Captain's Primary
       choices: { CMPrimary: 1 }
+      takeAll: CMStandard
       entries:
-      - id: WeaponRifleM54C # TODO RMC14 MK1 Pulse Rifle needs to replace this; as well as the magazines below.
-      - id: WeaponShotgunM42A2
+      - id: RMCM54CMK1CaseAP
+        name: M54C MK1 assault rifle
+      - id: RMCVendorBundleXOShotgun
     - name: Primary Ammunition
       entries:
-      - id: CMMagazineRifleM54C
+      - id: CMMagazineRifleM54CMK1
         points: 40
         recommended: true
-      - id: CMMagazineRifleM54CAP
+      - id: CMMagazineRifleM54CMK1AP
         points: 60
         recommended: true
       - id: RMCBoxShotgunBuckshot
@@ -583,6 +585,21 @@
     - CMHeadCapPeakedFormal
     - CMCoatXOFormal
     - CMJumpsuitXOFormal
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleXOShotgun
+  name: M890 tactical shotgun
+  description: Contains the M890 tactical shotgun and various shells.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m890.rsi
+    state: icon
+  - type: CMVendorBundle
+    bundle:
+    - WeaponShotgunM890
+    - CMShellShotgunBuckshot
+    - CMShellShotgunSlugs
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
