@@ -37,19 +37,14 @@ public sealed class RankSystem : SharedRankSystem
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
     {
         var uid = ev.Mob;
-        var jobId = ev.JobId;
 
-        if (jobId == null)
+        if (ev.JobId == null)
             return;
 
-        _prototypes.TryIndex<JobPrototype>(jobId, out var jobPrototype);
-
-        if (jobPrototype == null)
+        if (!_prototypes.TryIndex<JobPrototype>(ev.JobId, out var jobPrototype))
             return;
 
-        var ranks = jobPrototype.Ranks;
-
-        if (ranks == null)
+        if (jobPrototype.Ranks == null)
             return;
 
         if (!_tracking.TryGetTrackerTimes(ev.Player, out var playTimes))
@@ -59,7 +54,7 @@ public sealed class RankSystem : SharedRankSystem
             playTimes ??= new Dictionary<string, TimeSpan>();
         }
 
-        foreach (var rank in ranks)
+        foreach (var rank in jobPrototype.Ranks)
         {
             var failed = false;
             var jobRequirements = rank.Value;
