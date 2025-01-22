@@ -5,7 +5,8 @@
   suffix: Insert Solaris
   components:
   - type: Sprite
-    state: green
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: nightmare_insert
   - type: MapInsert
     spawn: "/Maps/_RMC14/inserts/se-checkpoint.yml"
     clearEntities: true
