@@ -36,8 +36,6 @@ public sealed class RankSystem : SharedRankSystem
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
     {
-        var uid = ev.Mob;
-
         if (ev.JobId == null)
             return;
 
@@ -72,7 +70,7 @@ public sealed class RankSystem : SharedRankSystem
 
                 if (!failed)
                 {
-                    SetRank(uid, rankPrototype);
+                    SetRank(ev.Mob, rankPrototype);
                     break;
                 }
             }
