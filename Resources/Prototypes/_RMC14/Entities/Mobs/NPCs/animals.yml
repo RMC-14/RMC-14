@@ -296,7 +296,7 @@
       sprite: _RMC14/Mobs/Animals/rat.rsi
   - type: ConditionalSpawner
     prototypes:
-    - RMCMobRatWhite
+    - RMCMobRat
 
 - type: entity
   parent: MarkerBase
