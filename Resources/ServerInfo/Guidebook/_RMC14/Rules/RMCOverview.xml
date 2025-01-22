@@ -8,20 +8,19 @@
   ## Recent Changes
   Read the relevant sections for the entire text.
   - Marine Law and SOP has been added. Command level roles including Squad Leaders must follow this.
-  - Many sections of the rules have been changed. It's recommended to read everything.
+  - Many sections of the rules have been changed in many places. It's recommended to read everything.
 
   ## Admin Decisions Are Final.
   - Rules are enforced as intended. Every example of a rule break cannot be written, thus enforcement is subject to admin interpretation of the rule's intention.
-  - Admins may handle rule breaks through in-character consequences at their discretion. This does not apply to zero tolerance rules.
-  - You may file a staff complaint with head staff if you find the decision to be incorrect.
+  - Admins may handle rule breaks through in-character consequences at their discretion. This does not apply to zero tolerance rules, and rule breaks may not be requested to be handled this way.
+  - Do not argue with the staff. You may file an appeal if you feel the decision to be incorrect, not ignore it.
 
   ## General Information
   Disconnecting from or ignoring/evading admin-helps will result in action being taken.
   This is to prevent bad actors from avoiding issues. If you need to leave urgently, let us know and it will be considered in your appeal.
 
   - [bold]These rules are not the same as other servers, should be read in their entirety.[/bold]
-  - [textlink="Ban Definitions" link="RMCBanTypes"]
-  - [textlink="Ban Durations" link="RMCBanDurations"]
+  - [textlink="Ban Types and Durations" link="RMCBanTypes"]
 
   ## Zero Tolerance Rules
   You are liable to be banned without warning for breaking these rules.
@@ -39,13 +38,12 @@
   - 8. Don't disconnect if you do not get the role/kit you want, be considerate.
   - 9. Follow the roleplay rules and standards of the server. (Outlined at the bottom of this page)
 
-  ## Military and Command
-  These rules also apply to any individual who is promoted or is acting in the place of a MP/Command role (unless they are a member of a hostile force).
-  - [textlink="1. Marine Law." link="RMCMarineLaw"]
+  ## Command and Military Police
+  These rules also apply to any individual who is promoted or is acting in the place of a MP/Command role (unless they are a member of a hostile force).\n[italic]Command roles are defined as; all heads, cic staff, mp, and squad leaders.[/italic]
+  - [textlink="1. Command and MP must follow Marine Law." link="RMCMarineLaw"]
   - [textlink="2. Command and MP are held to a higher standard of play." link="RMCHigherStandards"]
   - [textlink="3. MP should try to remain non-lethal and effect arrests, except in specific special circumstances." link="RMCLethalForce"]
   - [textlink="4. MP will be expected to answer for use of lethal force." link="RMCLethalForceConsequences"]
-  - [textlink="5. MP are expected to protect detainees in their custody to the best of their ability." link="RMCProtectDetainees"]
   - Only a whitelisted CO or Provost may pardon a sentence, but appeals can be done. See marine law.
 
   ## Roleplay Rules and Standards
@@ -53,10 +51,8 @@
   - [textlink="1. General Roleplay Standards." link="RMCGeneralRoleplayStandards"]
   - [textlink="2. Character Names." link="RMCCharacterNames"]
   - [textlink="3. Marines." link="RMCMarineRoleplayStandards"]
-  - [textlink="4. Deployment of Marines." link="RMCMarineDeployment"]
-  - [textlink="5. Command." link="RMCCommandRoleplay"]
-  - [textlink="6. Xenonids." link="RMCXenoRoleplay"]
-  - [textlink="7. Survivors." link="RMCSurvivorRoleplay"]
-  - [textlink="8. Hostile Factions." link="RMCHostileFactionRoleplay"]
-  - [textlink="9. Chain of Command." link="RMCCommandChain"]
+  - [textlink="4. Command." link="RMCCommandRoleplay"]
+  - [textlink="5. Xenonids." link="RMCXenoRoleplay"]
+  - [textlink="6. Survivors." link="RMCSurvivorRoleplay"]
+  - [textlink="7. Hostile Factions." link="RMCHostileFactionRoleplay"]
 </Document>

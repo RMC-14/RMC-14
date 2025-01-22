@@ -1,8 +1,6 @@
 ﻿rmc-guide-entry-rmc = RMC14 Guide
-
 rmc-guide-entry-rules = Rules
-rmc-guide-entry-rules-ban-types = Ban Types
-rmc-guide-entry-rules-ban-durations = Ban Durations
+rmc-guide-entry-rules-ban-types = Ban Types and Durations
 rmc-guide-entry-rules-zero-tolerance = Zero Tolerance
 rmc-guide-entry-rules-language = Server Language
 rmc-guide-entry-rules-multikey = Multiple Accounts
@@ -10,16 +8,12 @@ rmc-guide-entry-rules-escalation = Combat Escalation
 rmc-guide-entry-rules-metaknowledge = Use Character Knowledge
 rmc-guide-entry-rules-kindness = Be Nice
 rmc-guide-entry-rules-mutinies = Mutinies, Riots
-rmc-guide-entry-rules-role-rolling = Role Rolling
 rmc-guide-entry-rules-command-roles = Command Roles, Disconnection
 rmc-guide-entry-rules-marine-law = Marine Law
 rmc-guide-entry-rules-higher-standards = Command/MP Higher Standards
-rmc-guide-entry-rules-lethal-force = Lethal Force
-rmc-guide-entry-rules-protect-detainees = Protect Detainees
 rmc-guide-entry-rules-general-roleplay-standards = General Roleplay Standards
 rmc-guide-entry-rules-marine-character-names = Character Names
 rmc-guide-entry-rules-marine-roleplay-standards = Marine Roleplay Standards
-rmc-guide-entry-rules-marine-deployment = Marine Deployment
 rmc-guide-entry-rules-command-roleplay = Command Roleplay
 rmc-guide-entry-rules-xeno-roleplay = Xeno Roleplay
 rmc-guide-entry-rules-survivor-roleplay = Survivor Roleplay

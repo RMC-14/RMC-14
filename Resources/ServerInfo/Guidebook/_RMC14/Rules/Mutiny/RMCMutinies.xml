@@ -3,8 +3,8 @@
 
   [bold]General[/bold]
 
-  - All players, including hostile forces, must obtain admin permission before engaging riots, mutinies or similar activity.
-  - Strikes, revolutions, riots, cults, prison riots, and any other type of similar largely disruptive behavior are strictly forbidden without permission.
+  - All players, including hostile forces, must obtain admin permission before engaging in riots, mutinies or similar activity.
+  - Strikes, revolutions, riots, cults, prison riots (excluding hostile forces), and any other type of similar largely disruptive behavior are strictly forbidden without permission.
   - Staff reserve the right to grant or deny these, and to decide if the reason given is sufficient.
 
   [bold]Mutinies[/bold]
@@ -27,5 +27,13 @@
   - Not liking the commander.
   - Wanting to kill the commander.
   - Trying to take revenge against the commander or CIC.
+
+  [bold]Evacuation Mutinies[/bold]
+
+  - These can be done at any point a shipside evacuation (like during hijack) is allowed, but the Commander is refusing evacuation requests.
+  - They may be done by any number of people without permission, with the intent to evacuate from the ship and save their own lives and the lives of others that wish to evacuate.
+  - The Commander must still be given a chance to allow the evacuation through negotiation.
+  - The most minimal amount of force should be used to start the evacuation.
+  - Any roles may join and aid this mutiny, even those normally prevented.
 
 </Document>
