@@ -66,6 +66,7 @@ public sealed class MapInsertSystem : SharedMapInsertSystem
             return;
 
         var grid = grids[0];
+        var originalGridXform = _transform.GetMapCoordinates(grid);
         var xform = Transform(ent);
         var coordinates = _transform.GetMapCoordinates(ent, xform).Offset(new Vector2(-0.5f, -0.5f));
         coordinates = coordinates.Offset(ent.Comp.Offset);
@@ -76,16 +77,17 @@ public sealed class MapInsertSystem : SharedMapInsertSystem
         {
             MapInsertSmimsh(grid);
         }
-
-        if (TryComp(grid, out PhysicsComponent? physics) &&
-            TryComp(grid, out FixturesComponent? fixtures))
-        {
-            _physics.SetBodyType(grid, BodyType.Static, manager: fixtures, body: physics);
-            _physics.SetBodyStatus(grid, physics, BodyStatus.OnGround);
-            _physics.SetFixedRotation(grid, true, manager: fixtures, body: physics);
-        }
-
-        // Move all children from insert to map
+        // _transform.SetMapCoordinates(grid, originalGridXform);
+        //
+        // if (TryComp(grid, out PhysicsComponent? physics) &&
+        //     TryComp(grid, out FixturesComponent? fixtures))
+        // {
+        //     _physics.SetBodyType(grid, BodyType.Static, manager: fixtures, body: physics);
+        //     _physics.SetBodyStatus(grid, physics, BodyStatus.OnGround);
+        //     _physics.SetFixedRotation(grid, true, manager: fixtures, body: physics);
+        // }
+        //
+        // // Move all children from insert to map
         var parentGrid = xform.GridUid;
         if(parentGrid == null)
             return;
@@ -98,30 +100,24 @@ public sealed class MapInsertSystem : SharedMapInsertSystem
             {
                 while (childEnumerator.MoveNext(out var child))
                 {
-                    //Anchored entities are handled in grid merge
+                    //Anchored entities are properly handled in grid merge
                     if (TryComp(child, out TransformComponent? childTransform) && childTransform.Anchored == false)
                     {
                         children.Add(child);
-                        // var oldGridUid = childTransform.GridUid;
-                        // var oldPos = _transform.GetMapCoordinates(childTransform).Position;
-                        // var oldRot = _transform.GetWorldRotation(childTransform);
-                        // _transform.SetGridId(child, childTransform, parentGrid);
-                        // var meta = MetaData(child);
-                        // _transform.RaiseMoveEvent((child, childTransform, meta), grid, oldPos, oldRot, grid);
-                        // Dirty(child, childTransform, meta);
                     }
                 }
             }
 
             foreach (var child in children)
             {
-                _transform.SetParent(child, (EntityUid)parentGrid);
+                var childCoordinates = coordinates.Offset(_transform.GetMapCoordinates(child).Position);
+                _transform.SetMapCoordinates(child, childCoordinates);
             }
         }
 
         // Merge grids
-        var coordinatesi = new Vector2i((int)coordinates.X, (int)coordinates.Y);
-        _fixture.Merge((EntityUid)parentGrid, grid, coordinatesi, Angle.Zero);
+        // var coordinatesi = new Vector2i((int)coordinates.X, (int)coordinates.Y);
+        // _fixture.Merge((EntityUid)parentGrid, grid, coordinatesi, Angle.Zero);
         Logger.Debug("Merged grids.");
     }
 
