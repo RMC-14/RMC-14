@@ -101,9 +101,14 @@ public sealed class MapInsertSystem : SharedMapInsertSystem
                     //Anchored entities are handled in grid merge
                     if (TryComp(child, out TransformComponent? childTransform) && childTransform.Anchored == false)
                     {
-                        _transform.SetGridId(child, childTransform, parentGrid);
-                        var meta = MetaData(child);
-                        Dirty(child, childTransform, meta);
+                        children.Add(child);
+                        // var oldGridUid = childTransform.GridUid;
+                        // var oldPos = _transform.GetMapCoordinates(childTransform).Position;
+                        // var oldRot = _transform.GetWorldRotation(childTransform);
+                        // _transform.SetGridId(child, childTransform, parentGrid);
+                        // var meta = MetaData(child);
+                        // _transform.RaiseMoveEvent((child, childTransform, meta), grid, oldPos, oldRot, grid);
+                        // Dirty(child, childTransform, meta);
                     }
                 }
             }
