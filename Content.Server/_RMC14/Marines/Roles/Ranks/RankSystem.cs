@@ -1,6 +1,4 @@
-﻿using Content.Server.Chat.Systems;
-using Content.Server.GameTicking;
-using Content.Server.Players.PlayTimeTracking;
+﻿using Content.Server.Players.PlayTimeTracking;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared.Access.Systems;
 using Content.Shared.Chat;
@@ -13,7 +11,6 @@ namespace Content.Server._RMC14.Marines.Roles.Ranks;
 public sealed class RankSystem : SharedRankSystem
 {
     [Dependency] private readonly PlayTimeTrackingManager _tracking = default!;
-    [Dependency] private readonly SharedIdCardSystem _idCardSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
 
