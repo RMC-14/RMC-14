@@ -21,22 +21,6 @@
     department: CMCommand
     time: 18000 # 5 hours
   ranks:
-    RMCRankSergeantMajor:
-    - !type:RoleTimeRequirement
-      role: CMJobSeniorEnlistedAdvisor
-      time: 630000 # 175 hours
-    RMCRankMasterGunnerySergeant:
-    - !type:RoleTimeRequirement
-      role: CMJobSeniorEnlistedAdvisor
-      time: 252000 # 70 hours
-    RMCRankFirstSergeant:
-    - !type:RoleTimeRequirement
-      role: CMJobSeniorEnlistedAdvisor
-      time: 90000 # 25 hours
-    RMCRankMasterSergeant:
-    - !type:RoleTimeRequirement
-      role: CMJobSeniorEnlistedAdvisor
-      time: 36000 # 10 hours
     RMCRankGunnerySergeant: []
   weight: 5
   startingGear: CMGearSeniorEnlistedAdvisor
