@@ -34,10 +34,13 @@ public sealed class DeadGhostVisualsSystem : EntitySystem
         if (session == null)
             return;
 
-        if (!_netConfigManager.GetClientCVar(session.Channel, RMCCVars.RMCGhostAppearanceFromDeadCharacter))
+        // if (!_netConfigManager.GetClientCVar(session.Channel, RMCCVars.RMCGhostAppearanceFromDeadCharacter))
+            // return;
+
+        if (!_mind.TryGetMind(session, out var _, out var mindComponent))
             return;
 
-        if (!_mind.TryGetMind(session.UserId, out var _, out var mindComponent))
+        if (mindComponent.OwnedEntity == null)
             return;
 
         if (!TryComp(ent.Owner, out SpriteComponent? sprite))

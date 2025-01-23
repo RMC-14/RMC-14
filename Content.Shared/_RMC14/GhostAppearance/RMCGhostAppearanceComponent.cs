@@ -1,6 +1,6 @@
-﻿namespace Content.Shared._RMC14.GhostAppearance;
+﻿using Robust.Shared.GameStates;
 
-[RegisterComponent]
-public sealed partial class RMCGhostAppearanceComponent : Component
-{
-}
+namespace Content.Shared._RMC14.GhostAppearance;
+
+[RegisterComponent, NetworkedComponent]
+public sealed partial class RMCGhostAppearanceComponent : Component { }
