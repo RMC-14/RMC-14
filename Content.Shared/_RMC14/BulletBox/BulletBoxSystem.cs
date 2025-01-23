@@ -6,6 +6,7 @@ using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
+using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.BulletBox;
 
@@ -15,6 +16,7 @@ public sealed class BulletBoxSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     public override void Initialize()
     {
@@ -40,9 +42,15 @@ public sealed class BulletBoxSystem : EntitySystem
 
     private void OnGetAlternativeVerbs(Entity<BulletBoxComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
+        var user = args.User;
         var verb = new AlternativeVerb()
         {
-            Act = () => { ent.Comp.TransferToBox = !ent.Comp.TransferToBox; },
+            Act = () => { ent.Comp.TransferToBox = !ent.Comp.TransferToBox;
+                if (_net.IsServer)
+                {
+                    _popup.PopupEntity(Loc.GetString("rmc-bullet-box-refilling-" + ent.Comp.TransferToBox.ToString()), ent, user);
+                }
+            },
             Impact = LogImpact.Low,
             Text = Loc.GetString("rmc-bullet-box-toggle")
         };
@@ -56,7 +64,8 @@ public sealed class BulletBoxSystem : EntitySystem
             return;
 
         args.Handled = true;
-        if (!CanTransferPopup(ent, args.User, ref used))
+        var user = args.User;
+        if (!CanTransferPopup(ent, user, ref used))
             return;
 
         var ev = new BulletBoxTransferDoAfterEvent();
@@ -64,7 +73,7 @@ public sealed class BulletBoxSystem : EntitySystem
         if(ent.Comp.TransferToBox){
             delay = ent.Comp.DelayTransferToBox;
         }
-        var doAfter = new DoAfterArgs(EntityManager, args.User, delay, ev, ent, ent, args.Used)
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent, ent, args.Used)
         {
             BreakOnMove = true,
             BreakOnDropItem = true,
@@ -106,9 +115,11 @@ public sealed class BulletBoxSystem : EntitySystem
             _gun.SetBallisticUnspawned((used, used.Comp2), used.Comp2.UnspawnedCount - transfer);
             ent.Comp.Amount += transfer;
         }
+        if (_net.IsServer)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-bullet-box-transfer-done", ("amount", transfer), ("used", ent)), ent, user);
+        }
         Dirty(ent);
-
-        _popup.PopupClient(Loc.GetString("rmc-bullet-box-transfer-done", ("amount", transfer), ("used", ent)), user);
         UpdateAppearance(ent);
     }
 
@@ -117,39 +128,43 @@ public sealed class BulletBoxSystem : EntitySystem
         if (!Resolve(used, ref used.Comp1, ref used.Comp2, false))
             return false;
 
+        string? popup = null;
+
         if (box.Comp.BulletType != used.Comp1.BulletType)
         {
-            _popup.PopupClient(Loc.GetString("rmc-bullet-box-wrong-rounds"), box, user, PopupType.MediumCaution);
-            return false;
+            popup = Loc.GetString("rmc-bullet-box-wrong-rounds");
         }
         if (!box.Comp.TransferToBox)
         {
             if (used.Comp2.Count >= used.Comp2.Capacity)
             {
-                _popup.PopupClient(Loc.GetString("rmc-bullet-box-mag-full"), box, user, PopupType.MediumCaution);
-                return false;
+                popup = Loc.GetString("rmc-bullet-box-mag-full");
             }
             if (box.Comp.Amount <= 0)
             {
-                _popup.PopupClient(Loc.GetString("rmc-bullet-box-box-empty"), box, user, PopupType.MediumCaution);
-                return false;
+                popup = Loc.GetString("rmc-bullet-box-box-empty");
             }
         }
         else
         {
             if (used.Comp2.Count <= 0)
             {
-                _popup.PopupClient(Loc.GetString("rmc-bullet-box-mag-empty"), box, user, PopupType.MediumCaution);
-                return false;
+                popup = Loc.GetString("rmc-bullet-box-mag-empty");
             }
             if (box.Comp.Amount >= box.Comp.Max)
             {
-                _popup.PopupClient(Loc.GetString("rmc-bullet-box-box-full"), box, user, PopupType.MediumCaution);
-                return false;
+                popup = Loc.GetString("rmc-bullet-box-box-full");
             }
         }
-
-            return true;
+        if(popup is not null)
+        {
+            if (_net.IsServer)
+            {
+                _popup.PopupEntity(popup, box, user);
+            }
+            return false;
+        }
+        return true;
     }
 
     private void UpdateAppearance(Entity<BulletBoxComponent> ent)

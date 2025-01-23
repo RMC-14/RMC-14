@@ -6,5 +6,5 @@ rmc-bullet-box-mag-empty = Magazine has no bullets left to give.
 rmc-bullet-box-mag-full = Magazine has no more room to fil bullets.
 rmc-bullet-box-transfer-done = You have transferred {$amount} rounds to {THE($used)}
 rmc-bullet-box-toggle = Toggle Refilling.
-rmc-bullet-box-refilling-enabled = You may now fill the box with bullets.
-rmc-bullet-box-refilling-disabled = You may take bullets from the box.
+rmc-bullet-box-refilling-True = You may now fill the box with bullets.
+rmc-bullet-box-refilling-False = You may take bullets from the box.
