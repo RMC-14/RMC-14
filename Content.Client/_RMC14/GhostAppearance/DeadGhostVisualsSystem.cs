@@ -9,6 +9,7 @@ using Robust.Client.Graphics;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using DrawDepth = Content.Shared.DrawDepth.DrawDepth;
 
 namespace Content.Client._RMC14.GhostAppearance;
 
@@ -42,15 +43,24 @@ public sealed class DeadGhostVisualsSystem : EntitySystem
             if (!TryComp<MindComponent>(ghostAppearance.MindId, out var mind))
                 continue;
 
-            if (!TryComp<SpriteComponent>(mind.OwnedEntity, out var otherSprite))
+            var entity = mind.OwnedEntity;
+
+            if (entity == null && mind.OriginalOwnedEntity != null)
+                entity = GetEntity(mind.OriginalOwnedEntity); // incase they ghosted
+
+            if (!entity.HasValue)
+                continue;
+
+            if (!TryComp<SpriteComponent>(entity, out var otherSprite))
                 continue;
 
             sprite.CopyFrom(otherSprite);
             sprite.Rotation = Angle.Zero;
+            sprite.DrawDepth = (int)DrawDepth.Ghosts;
             sprite.PostShader = _prototypes.Index<ShaderPrototype>("RMCInvisible").InstanceUnique();
             sprite.PostShader.SetParameter("visibility", _opacity);
 
-            if (HasComp<XenoComponent>(mind.OwnedEntity)) // update xeno visuals
+            if (HasComp<XenoComponent>(entity)) // update xeno visuals
             {
                 if (sprite is { BaseRSI: { } rsi } && sprite.LayerMapTryGet(XenoVisualLayers.Base, out var layer))
                 {
