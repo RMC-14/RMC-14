@@ -1,19 +1,18 @@
 ﻿using Content.Server._RMC14.Rules;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
-using Content.Server.Mind;
+using Content.Server.Popups;
 using Content.Server.Radio.EntitySystems;
-using Content.Server.Roles.Jobs;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Survivor;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Ghost;
-using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Robust.Server.Audio;
 using Robust.Shared.Audio;
@@ -33,13 +32,12 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
     [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
     [Dependency] private readonly SharedDropshipSystem _dropship = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly JobSystem _job = default!;
-    [Dependency] private readonly MindSystem _mind = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly SharedRankSystem _rankSystem = default!;
 
     private int _characterLimit = 1000;
     public readonly SoundSpecifier DefaultAnnouncementSound = new SoundPathSpecifier("/Audio/_RMC14/Announcements/Marine/notice2.ogg");
@@ -182,17 +180,9 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         SoundSpecifier? sound = null
         )
     {
-        // TODO RMC14 rank
-        var job = string.Empty;
-        if (_mind.TryGetMind(sender, out var mindId, out _) &&
-            _job.MindTryGetJobName(mindId, out var jobName))
-        {
-            job = jobName;
-        }
-
         author ??= Loc.GetString("rmc-announcement-author"); // Get "Command" fluent string if author==null
-        var name = Name(sender);
-        var wrappedMessage = Loc.GetString("rmc-announcement-message-signed", ("author", author), ("message", message), ("job", job), ("name", name));
+        var name = _rankSystem.GetSpeakerFullRankName(sender) ?? Name(sender);
+        var wrappedMessage = Loc.GetString("rmc-announcement-message-signed", ("author", author), ("message", message), ("name", name));
 
         // TODO RMC14 receivers
         var filter = Filter.Empty()

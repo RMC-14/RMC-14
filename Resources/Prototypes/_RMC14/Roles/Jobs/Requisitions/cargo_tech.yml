@@ -4,6 +4,16 @@
   name: cm-job-name-cargotech
   description: cm-job-description-cargotech
   playTimeTracker: CMJobCargoTech
+  ranks:
+    RMCRankLanceCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobCargoTech
+      time: 252000 # 70 hours
+    RMCRankPrivateFirstClass:
+    - !type:RoleTimeRequirement
+      role: CMJobCargoTech
+      time: 36000 # 10 hours
+    RMCRankPrivate: []
   startingGear: CMGearCargoTech
   icon: "CMJobIconCargoTech"
   joinNotifyCrew: false
