@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.GhostAppearance;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Damage;
+using Content.Shared.Mind;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.Configuration;
@@ -15,6 +16,7 @@ public sealed class DeadGhostVisualsSystem : EntitySystem
     [Dependency] private readonly ActorSystem _actor = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly INetConfigurationManager _netConfigManager = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
 
     private readonly float _opacity = 0.5f;
 
@@ -35,12 +37,13 @@ public sealed class DeadGhostVisualsSystem : EntitySystem
         if (!_netConfigManager.GetClientCVar(session.Channel, RMCCVars.RMCGhostAppearanceFromDeadCharacter))
             return;
 
-        var attachedEntity = session.AttachedEntity;
+        if (!_mind.TryGetMind(session.UserId, out var _, out var mindComponent))
+            return;
 
         if (!TryComp(ent.Owner, out SpriteComponent? sprite))
             return;
 
-        if (!TryComp(attachedEntity, out SpriteComponent? attachedSprite))
+        if (!TryComp(mindComponent.OwnedEntity, out SpriteComponent? attachedSprite))
             return;
 
         sprite.CopyFrom(attachedSprite);
@@ -48,7 +51,7 @@ public sealed class DeadGhostVisualsSystem : EntitySystem
         sprite.PostShader = _prototypes.Index<ShaderPrototype>("RMCInvisible").InstanceUnique();
         sprite.PostShader.SetParameter("visibility", _opacity);
 
-        if (HasComp<XenoComponent>(attachedEntity)) // update xeno visuals
+        if (HasComp<XenoComponent>(mindComponent.OwnedEntity)) // update xeno visuals
         {
             if (sprite is not { BaseRSI: { } rsi } ||
                 !sprite.LayerMapTryGet(XenoVisualLayers.Base, out var layer))
