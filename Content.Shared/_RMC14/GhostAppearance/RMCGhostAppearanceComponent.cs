@@ -2,5 +2,9 @@
 
 namespace Content.Shared._RMC14.GhostAppearance;
 
-[RegisterComponent, NetworkedComponent]
-public sealed partial class RMCGhostAppearanceComponent : Component { }
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+public sealed partial class RMCGhostAppearanceComponent : Component
+{
+    [DataField, AutoNetworkedField]
+    public EntityUid? MindId;
+}

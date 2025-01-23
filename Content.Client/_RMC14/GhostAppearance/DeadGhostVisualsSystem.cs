@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.GhostAppearance;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Damage;
+using Content.Shared.Ghost;
 using Content.Shared.Mind;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -13,10 +14,8 @@ namespace Content.Client._RMC14.GhostAppearance;
 
 public sealed class DeadGhostVisualsSystem : EntitySystem
 {
-    [Dependency] private readonly ActorSystem _actor = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly INetConfigurationManager _netConfigManager = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
 
     private readonly float _opacity = 0.5f;
 
@@ -24,51 +23,44 @@ public sealed class DeadGhostVisualsSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RMCGhostAppearanceComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<GhostComponent, PlayerAttachedEvent>(OnPlayerAttached);
     }
 
-    private void OnStartup(Entity<RMCGhostAppearanceComponent> ent, ref ComponentStartup args)
+    private void OnPlayerAttached(Entity<GhostComponent> ent, ref PlayerAttachedEvent args)
     {
-        var session = _actor.GetSession(ent.Owner);
+        UpdateGhostSprites();
+    }
 
-        if (session == null)
-            return;
-
-        // if (!_netConfigManager.GetClientCVar(session.Channel, RMCCVars.RMCGhostAppearanceFromDeadCharacter))
-            // return;
-
-        if (!_mind.TryGetMind(session, out var _, out var mindComponent))
-            return;
-
-        if (mindComponent.OwnedEntity == null)
-            return;
-
-        if (!TryComp(ent.Owner, out SpriteComponent? sprite))
-            return;
-
-        if (!TryComp(mindComponent.OwnedEntity, out SpriteComponent? attachedSprite))
-            return;
-
-        sprite.CopyFrom(attachedSprite);
-        sprite.Rotation = Angle.Zero;
-        sprite.PostShader = _prototypes.Index<ShaderPrototype>("RMCInvisible").InstanceUnique();
-        sprite.PostShader.SetParameter("visibility", _opacity);
-
-        if (HasComp<XenoComponent>(mindComponent.OwnedEntity)) // update xeno visuals
+    private void UpdateGhostSprites()
+    {
+        var entities = EntityQueryEnumerator<RMCGhostAppearanceComponent, SpriteComponent, ActorComponent>();
+        while (entities.MoveNext(out var ghostAppearance, out var sprite, out var actor))
         {
-            if (sprite is not { BaseRSI: { } rsi } ||
-                !sprite.LayerMapTryGet(XenoVisualLayers.Base, out var layer))
+            if (!_netConfigManager.GetClientCVar(actor.PlayerSession.Channel, RMCCVars.RMCGhostAppearanceFromDeadCharacter))
+                continue;
+
+            if (!TryComp<MindComponent>(ghostAppearance.MindId, out var mind))
+                continue;
+
+            if (!TryComp<SpriteComponent>(mind.OwnedEntity, out var otherSprite))
+                continue;
+
+            sprite.CopyFrom(otherSprite);
+            sprite.Rotation = Angle.Zero;
+            sprite.PostShader = _prototypes.Index<ShaderPrototype>("RMCInvisible").InstanceUnique();
+            sprite.PostShader.SetParameter("visibility", _opacity);
+
+            if (HasComp<XenoComponent>(mind.OwnedEntity)) // update xeno visuals
             {
-                return;
+                if (sprite is { BaseRSI: { } rsi } && sprite.LayerMapTryGet(XenoVisualLayers.Base, out var layer))
+                {
+                    if (rsi.TryGetState("alive", out _))
+                        sprite.LayerSetState(layer, "alive");
+
+                    if (sprite.LayerMapTryGet(RMCDamageVisualLayers.Base, out var damageLayer))
+                        sprite.LayerSetVisible(damageLayer, false); // set damage visuals invisible
+                }
             }
-
-            if (rsi.TryGetState("alive", out _))
-                sprite.LayerSetState(layer, "alive");
-
-            if (!sprite.LayerMapTryGet(RMCDamageVisualLayers.Base, out var damageLayer))
-                return;
-
-            sprite.LayerSetVisible(damageLayer, false); // set damage visuals invisible
         }
     }
 }
