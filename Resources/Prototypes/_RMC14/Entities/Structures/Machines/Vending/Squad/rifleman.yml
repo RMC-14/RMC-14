@@ -59,6 +59,7 @@
       choices: { RMCPouch: 2 }
       entries:
       - id: RMCPouchBayonetFill
+        name: bayonet sheath (Full)
       - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
         recommended: true
@@ -161,8 +162,10 @@
       - id: CMWebbingHolster
         points: 15
       - id: RMCScabbardMacheteFilled
+        name: machete scabbard (Full)
         points: 15
       - id: RMCPouchMacheteFilled
+        name: machete pouch (Full)
         points: 15
       - id: RMCBackpackRTO
         points: 15
