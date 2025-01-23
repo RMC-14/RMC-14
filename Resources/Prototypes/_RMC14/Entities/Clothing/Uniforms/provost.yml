@@ -1,6 +1,6 @@
 
 - type: entity
-  parent: JumpsuitMarine
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitProvost
   name: provost uniform
   description: The crisp uniform of a Provost Officer.
@@ -10,8 +10,6 @@
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
-  - type: ItemCamouflage
-    camouflageVariations: { }
 
 - type: entity
   parent: CMJumpsuitProvost
@@ -21,8 +19,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Provost/ci.rsi
-  - type: ItemCamouflage
-    camouflageVariations: { }
 
 - type: entity
   parent: CMJumpsuitProvost
