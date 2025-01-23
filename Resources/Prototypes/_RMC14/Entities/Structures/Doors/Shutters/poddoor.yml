@@ -101,16 +101,6 @@
     canPry: false # TODO RMC14
 
 - type: entity
-  parent:
-  - RMCPodDoorNonOccluderIndestructible
-  - RMCShutterBase
-  id: RMCPodDoorNonOccluder
-  description: That looks like it doesn't open easily. Maybe look for a button or use a breaching charge?
-  components:
-  - type: Door
-    canPry: false # TODO RMC14
-
-- type: entity
   parent: RMCPodDoor
   id: RMCPodDoorAlmayer
   components:
@@ -142,9 +132,11 @@
   id: RMCPodDoorHybrisaIndestructibleUltra
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Doors/Shutters/Hybrisa/ultra_reinforced.rsi
+    sprite: _RMC14/Structures/Doors/Shutters/Hybrisa/ultra_reinforced.rsi # the sprites on these are a little fucked but ive spent 2 weeks porting this fucking map and im not wasting time fixing an animated sprite that is 1 tile too long someone else do this please im going mad
   - type: MinimapColor
     color: "#451e5eb8"
+  - type: TimedDespawn
+    lifetime: 3000
 
 - type: entity
   parent: RMCPodDoorAlmayer

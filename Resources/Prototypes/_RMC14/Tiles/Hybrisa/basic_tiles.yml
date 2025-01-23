@@ -36,7 +36,6 @@
     East: /Textures/_RMC14/Tiles/hybrisa/layer1_double_edge.png
     North: /Textures/_RMC14/Tiles/hybrisa/layer1_double_edge.png
     West: /Textures/_RMC14/Tiles/hybrisa/layer1_double_edge.png
-  weedsSpreadable: false
 
 - type: tile
   parent: RMCPlanetHybrisaShale2
