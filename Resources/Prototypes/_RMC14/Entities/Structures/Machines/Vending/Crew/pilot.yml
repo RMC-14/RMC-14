@@ -150,8 +150,9 @@
         points: 15
       - id: RMCPouchMagazineLarge
         points: 15
-      #- id: RMCMacheteScabbard # TODO RMC14 Machete Back Scabbard
-      #  points: 10
+      - id: RMCScabbardMacheteFilled
+        name: machete scabbard (Full)
+        points: 10
       - id: RMCPouchMacheteFilled
         name: machete pouch (Full)
         points: 15
