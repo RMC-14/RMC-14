@@ -175,12 +175,14 @@
       - id: RMCPouchExplosive
         amount: 2
       - id: RMCPouchFlareFilled
+        name: flare pouch (Full)
         amount: 5
       - id: RMCPouchDocument
         amount: 2
       #- id: RMCPouchSling
       #  amount: 2
       - id: RMCPouchMacheteFilled
+        name: machete pouch (Full)
         amount: 1
       - id: RMCPouchBayonet
         name: Bayonet Sheath (Full)

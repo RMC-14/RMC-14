@@ -31,8 +31,11 @@
       entries:
       - id: RMCBeltUtilityGeneral
       - id: CMBeltUtilityFilled
+        name: M276 pattern toolbelt rig (Full)
       - id: CMBeltMedicBagFilled
+        name: M276 pattern lifesaver bag (Full)
       - id: CMBeltUtilityCombatFilled
+        name: M276 pattern combat toolbelt rig (Full)
     - name: Pouches
       choices: { CMPouches: 2 }
       entries:

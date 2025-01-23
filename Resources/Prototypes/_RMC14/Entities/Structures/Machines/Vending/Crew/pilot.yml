@@ -41,8 +41,10 @@
       - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
       - id: CMBeltMedicBagFilled
+        name: M276 pattern lifesaver bag (Full)
         recommended: true
       - id: CMBeltMedicalFilled
+        name: M276 pattern medical storage rig (Full)
         recommended: true
       - id: RMCBeltHolsterSMGPouch
       - id: RMCBeltHolsterPistol
@@ -63,6 +65,7 @@
         recommended: true
       - id: RMCPouchFirstResponder
       - id: RMCPouchFlareFilled
+        name: flare pouch (Full)
       - id: RMCPouchGeneralLarge
       - id: RMCPouchMagazineLarge
       - id: RMCPouchMagazinePistolLarge
@@ -150,6 +153,7 @@
       #- id: RMCMacheteScabbard # TODO RMC14 Machete Back Scabbard
       #  points: 10
       - id: RMCPouchMacheteFilled
+        name: machete pouch (Full)
         points: 15
       - id: RMCMotionDetector
         points: 15
