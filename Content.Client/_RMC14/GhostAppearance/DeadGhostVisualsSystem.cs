@@ -60,9 +60,10 @@ public sealed class DeadGhostVisualsSystem : EntitySystem
             if (rsi.TryGetState("alive", out _))
                 sprite.LayerSetState(layer, "alive");
 
-            _appearance.SetData(ent, RMCDamageVisuals.Downed, false);
-            _appearance.SetData(ent, RMCDamageVisuals.Fortified, false);
-            _appearance.SetData(ent, RMCDamageVisuals.Resting, false);
+            if (!sprite.LayerMapTryGet(RMCDamageVisualLayers.Base, out var damageLayer))
+                return;
+
+            sprite.LayerSetVisible(damageLayer, false); // set damage visuals invisible
         }
     }
 }
