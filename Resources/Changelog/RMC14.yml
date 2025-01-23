@@ -1,38 +1,4 @@
 ﻿Entries:
-- author: crystalHex
-  changes:
-  - message: Added sunglasses, personal shades and aviators to the appropriate vendors.
-    type: Add
-  - message: Added five sets of uniforms and jackets, and some pieces of headgear
-      for special occasions.
-    type: Add
-  - message: Added several hats, uniforms and jackets to command vendors.
-    type: Add
-  - message: Added four provost uniforms, the special agent uniform, marine survivor
-      uniform.
-    type: Add
-  - message: Added eleven uniforms for various factions for special events.
-    type: Add
-  - message: Added ten sets of SPP uniforms, six sets of armor and three coats for
-      special events.
-    type: Add
-  - message: Added ten sets of PMC armor for special events.
-    type: Add
-  - message: Added a total of eighteen hats/helmets for PMCs and SPP.
-    type: Add
-  - message: Added another thirty sets of armor and headgear for the provost, mercenaries,
-      colonial militia, and other factions.
-    type: Add
-  id: 740
-  time: '2024-09-26T18:48:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3916
-- author: Whisper
-  changes:
-  - message: Added Vella 'Mortician' Sakeao figurine
-    type: Add
-  id: 741
-  time: '2024-09-27T06:53:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4149
 - author: Vermidia
   changes:
   - message: fixed ammo stuns appearing to stun when they didn't
@@ -5197,5 +5163,23 @@
   id: 1239
   time: '2025-01-20T00:19:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5424
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed hijack dropship sound not playing
+    type: Fix
+  id: 1240
+  time: '2025-01-20T03:29:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5425
+- author: DrSmugleaf
+  changes:
+  - message: Fixed shooting both underbarrel grenade launchers launching grenades
+      everywhere except where you are actually aiming.
+    type: Fix
+  - message: Fixed the CO's M59A prototype rifle not starting with a locked M54C collapsible
+      stock.
+    type: Fix
+  id: 1241
+  time: '2025-01-20T03:32:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5426
 Name: RMC14
 Order: -1
