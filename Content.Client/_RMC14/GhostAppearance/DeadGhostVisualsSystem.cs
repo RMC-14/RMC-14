@@ -13,7 +13,6 @@ namespace Content.Client._RMC14.GhostAppearance;
 public sealed class DeadGhostVisualsSystem : EntitySystem
 {
     [Dependency] private readonly ActorSystem _actor = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly INetConfigurationManager _netConfigManager = default!;
 
