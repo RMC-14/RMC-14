@@ -140,7 +140,7 @@
 
 # Ordnance Technician / OT
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitOrdnanceTech
   name: ordnance technician uniform
   description: Standard-issue Ordnance Technician uniform.
@@ -150,7 +150,7 @@
 
 # Maintenance Technician / MT
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitMaintTech
   name: maintenance technician uniform
   description: Standard-issue Maintenance Technician uniform.
