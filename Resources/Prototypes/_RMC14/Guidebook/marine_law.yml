@@ -6,6 +6,7 @@
   priority: 3
   children:
   - RMCCommandChain
+  - RMCMarineLawRanks
   - RMCMarineLawDefinitions
   - RMCMarineLawProcedures
   - RMCMarineLawCrimes
@@ -22,6 +23,13 @@
   name: rmc-guide-entry-rules-command-chain
   priority: 0
   text: "/ServerInfo/Guidebook/_RMC14/Rules/Roleplay/RMCCommandChain.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: RMCMarineLawRanks
+  name: rmc-guide-entry-marine-law-ranks
+  priority: 0
+  text: "/ServerInfo/Guidebook/_RMC14/Law/RMCMarineLawRanks.xml"
 
 - type: guideEntry
   parent: RMC
@@ -198,7 +206,7 @@
 - type: guideEntry
   parent: RMC
   id: RMCMarineSOP
-  name: rmc-guide-entry-rules-marine-sop
+  name: rmc-guide-entry-marine-sop
   text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOP.xml"
   priority: 9
   children:
@@ -214,7 +222,7 @@
 - type: guideEntry
   parent: RMC
   id: RMCMarineSOPGeneral
-  name: rmc-guide-entry-rules-marine-sop-general
+  name: rmc-guide-entry-marine-sop-general
   text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPGeneral.xml"
   priority: 1
 
@@ -222,7 +230,7 @@
 - type: guideEntry
   parent: RMC
   id: RMCMarineSOPEquipment
-  name: rmc-guide-entry-rules-marine-sop-equipment
+  name: rmc-guide-entry-marine-sop-equipment
   text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPEquipment.xml"
   priority: 2
 
@@ -230,7 +238,7 @@
 - type: guideEntry
   parent: RMC
   id: RMCMarineSOPDepartment
-  name: rmc-guide-entry-rules-marine-sop-department
+  name: rmc-guide-entry-marine-sop-department
   text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPDepartment.xml"
   priority: 3
 
@@ -240,7 +248,7 @@
 - type: guideEntry
   parent: RMC
   id: RMCMarineSOPNONModDepartment
-  name: rmc-guide-entry-rules-marine-sop-nonmod-department
+  name: rmc-guide-entry-marine-sop-nonmod-department
   text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPNONModDepartment.xml"
   priority: 4
 
@@ -248,7 +256,7 @@
 - type: guideEntry
   parent: RMC
   id: RMCMarineSOPNONModCommand
-  name: rmc-guide-entry-rules-marine-sop-nonmod-command
+  name: rmc-guide-entry-marine-sop-nonmod-command
   text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPNONModCommand.xml"
   priority: 5
 
@@ -256,7 +264,7 @@
 - type: guideEntry
   parent: RMC
   id: RMCMarineSOPNONModDeployment
-  name: rmc-guide-entry-rules-marine-sop-nonmod-deployment
+  name: rmc-guide-entry-marine-sop-nonmod-deployment
   text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPNONModDeployment.xml"
   priority: 6
 
@@ -264,6 +272,6 @@
 - type: guideEntry
   parent: RMC
   id: RMCMarineSOPNONModThirdparty
-  name: rmc-guide-entry-rules-marine-sop-nonmod-thirdparty
+  name: rmc-guide-entry-marine-sop-nonmod-thirdparty
   text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPNONModThirdparty.xml"
   priority: 7
