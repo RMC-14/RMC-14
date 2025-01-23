@@ -30,7 +30,7 @@ public sealed partial class CCVars
     ///     Goes from 0 (no recoil at all) to 1 (regular amounts of recoil)
     /// </summary>
     public static readonly CVarDef<float> ScreenShakeIntensity =
-        CVarDef.Create("accessibility.screen_shake_intensity", 1f, CVar.CLIENTONLY | CVar.ARCHIVE);
+        CVarDef.Create("accessibility.screen_shake_intensity", 1f, CVar.REPLICATED | CVar.SERVER); // TODO RMC14 leave this be then ignore it in code for people playing other servers
 
     /// <summary>
     ///     A generic toggle for various visual effects that are color sensitive.

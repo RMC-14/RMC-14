@@ -22,7 +22,7 @@
   isSubfloor: true
   footstepSounds:
     collection: FootstepPlating
-  friction: 0.2
+  friction: 0.3
   heatCapacity: 10000
 
 - type: tile

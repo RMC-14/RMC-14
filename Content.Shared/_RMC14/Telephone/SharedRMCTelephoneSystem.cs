@@ -15,7 +15,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Telephone;
 
-public abstract class SharedTelephoneSystem : EntitySystem
+public abstract class SharedRMCTelephoneSystem : EntitySystem
 {
     [Dependency] private readonly SharedAmbientSoundSystem _ambientSound = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -45,16 +45,16 @@ public abstract class SharedTelephoneSystem : EntitySystem
         SubscribeLocalEvent<RotaryPhoneReceivingComponent, InteractHandEvent>(OnRotaryPhoneReceivingInteractHand, before: [typeof(ActivatableUISystem)]);
         SubscribeLocalEvent<RotaryPhoneReceivingComponent, InteractUsingEvent>(OnRotaryPhoneReceivingInteractUsing);
 
-        SubscribeLocalEvent<TelephoneComponent, ComponentShutdown>(OnTelephoneTerminating);
-        SubscribeLocalEvent<TelephoneComponent, EntityTerminatingEvent>(OnTelephoneTerminating);
+        SubscribeLocalEvent<RMCTelephoneComponent, ComponentShutdown>(OnTelephoneTerminating);
+        SubscribeLocalEvent<RMCTelephoneComponent, EntityTerminatingEvent>(OnTelephoneTerminating);
 
         SubscribeLocalEvent<RotaryPhoneBackpackComponent, GetItemActionsEvent>(OnBackpackGetItemActions);
-        SubscribeLocalEvent<RotaryPhoneBackpackComponent, TelephoneActionEvent>(OnBackpackTelephoneAction);
+        SubscribeLocalEvent<RotaryPhoneBackpackComponent, RMCTelephoneActionEvent>(OnBackpackTelephoneAction);
 
-        Subs.BuiEvents<RotaryPhoneComponent>(TelephoneUiKey.Key,
+        Subs.BuiEvents<RotaryPhoneComponent>(RMCTelephoneUiKey.Key,
             subs =>
             {
-                subs.Event<TelephoneCallBuiMsg>(OnTelephoneCallMsg);
+                subs.Event<RMCTelephoneCallBuiMsg>(OnTelephoneCallMsg);
             });
     }
 
@@ -68,7 +68,7 @@ public abstract class SharedTelephoneSystem : EntitySystem
         ent.Comp.Phone = phone.Value;
         Dirty(ent);
 
-        if (TryComp(phone, out TelephoneComponent? phoneComp))
+        if (TryComp(phone, out RMCTelephoneComponent? phoneComp))
         {
             phoneComp.RotaryPhone = ent;
             Dirty(phone.Value, phoneComp);
@@ -82,7 +82,7 @@ public abstract class SharedTelephoneSystem : EntitySystem
 
     private void OnRotaryPhoneTerminating<T>(Entity<RotaryPhoneComponent> ent, ref T args)
     {
-        if (TryComp(ent.Comp.Phone, out TelephoneComponent? phone))
+        if (TryComp(ent.Comp.Phone, out RMCTelephoneComponent? phone))
         {
             phone.RotaryPhone = null;
             Dirty(ent.Comp.Phone.Value, phone);
@@ -110,7 +110,7 @@ public abstract class SharedTelephoneSystem : EntitySystem
             args.Handled = true;
     }
 
-    private void OnTelephoneTerminating<T>(Entity<TelephoneComponent> ent, ref T args)
+    private void OnTelephoneTerminating<T>(Entity<RMCTelephoneComponent> ent, ref T args)
     {
         if (TryComp(ent.Comp.RotaryPhone, out RotaryPhoneComponent? phone))
         {
@@ -127,7 +127,7 @@ public abstract class SharedTelephoneSystem : EntitySystem
         args.AddAction(ref ent.Comp.Action, ent.Comp.ActionId, ent);
     }
 
-    private void OnBackpackTelephoneAction(Entity<RotaryPhoneBackpackComponent> ent, ref TelephoneActionEvent args)
+    private void OnBackpackTelephoneAction(Entity<RotaryPhoneBackpackComponent> ent, ref RMCTelephoneActionEvent args)
     {
         args.Handled = true;
         if (HasComp<RotaryPhoneDialingComponent>(ent))
@@ -140,16 +140,16 @@ public abstract class SharedTelephoneSystem : EntitySystem
         }
 
         SendUIState(ent);
-        _ui.TryOpenUi(ent.Owner, TelephoneUiKey.Key, args.Performer);
+        _ui.TryOpenUi(ent.Owner, RMCTelephoneUiKey.Key, args.Performer);
     }
 
-    private void OnTelephoneCallMsg(Entity<RotaryPhoneComponent> ent, ref TelephoneCallBuiMsg args)
+    private void OnTelephoneCallMsg(Entity<RotaryPhoneComponent> ent, ref RMCTelephoneCallBuiMsg args)
     {
         var time = _timing.CurTime;
         if (time < ent.Comp.LastCall + ent.Comp.CallCooldown)
             return;
 
-        _ui.CloseUi(ent.Owner, TelephoneUiKey.Key);
+        _ui.CloseUi(ent.Owner, RMCTelephoneUiKey.Key);
 
         if (_net.IsClient)
             return;
@@ -253,7 +253,7 @@ public abstract class SharedTelephoneSystem : EntitySystem
             _container.Remove(telephone, container);
 
         _hands.TryPickupAnyHand(user, telephone);
-        EnsureComp<PickedUpPhoneComponent>(telephone);
+        EnsureComp<RMCPickedUpPhoneComponent>(telephone);
         PlayGrabSound(rotary);
     }
 
@@ -370,7 +370,7 @@ public abstract class SharedTelephoneSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var phones = new List<Phone>();
+        var phones = new List<RMCPhone>();
         var phonesQuery = EntityQueryEnumerator<RotaryPhoneComponent>();
         while (phonesQuery.MoveNext(out var otherId, out var otherComp))
         {
@@ -378,10 +378,10 @@ public abstract class SharedTelephoneSystem : EntitySystem
                 continue;
 
             var name = GetPhoneName((otherId, otherComp));
-            phones.Add(new Phone(GetNetEntity(otherId), otherComp.Category, name));
+            phones.Add(new RMCPhone(GetNetEntity(otherId), otherComp.Category, name));
         }
 
-        _ui.SetUiState(phone, TelephoneUiKey.Key, new TelephoneBuiState(phones));
+        _ui.SetUiState(phone, RMCTelephoneUiKey.Key, new RMCTelephoneBuiState(phones));
     }
 
     private void PickupReceiving(Entity<RotaryPhoneReceivingComponent> receiving, EntityUid user)
@@ -541,7 +541,7 @@ public abstract class SharedTelephoneSystem : EntitySystem
             }
         }
 
-        var pickedUpPhonesQuery = EntityQueryEnumerator<PickedUpPhoneComponent, TelephoneComponent>();
+        var pickedUpPhonesQuery = EntityQueryEnumerator<RMCPickedUpPhoneComponent, RMCTelephoneComponent>();
         while (pickedUpPhonesQuery.MoveNext(out var uid, out var pickedUp, out var telephone))
         {
             if (telephone.RotaryPhone is not { } rotary)

@@ -1,5 +1,6 @@
 ﻿using Content.Server.Explosion.Components;
 using Content.Server.Weapons.Ranged.Systems;
+using Content.Shared._RMC14.Explosion;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
@@ -14,6 +15,8 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly TransformSystem _transformSystem = default!;
 
+    // RMC14
+    private readonly List<EntityUid> _spawned = new();
 
     public override void Initialize()
     {
@@ -60,6 +63,7 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
         var totalCount = component.Container.ContainedEntities.Count + component.UnspawnedCount;
         var segmentAngle = 360 / totalCount;
 
+        _spawned.Clear();
         while (TrySpawnContents(grenadeCoord, component, out var contentUid))
         {
             Angle angle;
@@ -78,7 +82,12 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
             var direction = angle.ToVec().Normalized();
             var velocity = _random.NextVector2(component.MinVelocity, component.MaxVelocity);
             _gun.ShootProjectile(contentUid, direction, velocity, uid, null);
+            _spawned.Add(contentUid);
         }
+
+        var clusterEv = new CMClusterSpawnedEvent(_spawned);
+        RaiseLocalEvent(uid, ref clusterEv);
+        QueueDel(uid);
     }
 
     /// <summary>

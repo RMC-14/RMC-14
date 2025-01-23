@@ -1,14 +1,12 @@
 using System.Linq;
 using Content.Server.Body.Components;
-using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Server.Interaction;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
-using Content.Shared.Chemistry.Hypospray.Events;
-using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Chemistry.Hypospray.Events;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
@@ -19,11 +17,6 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Timing;
 using Content.Shared.Weapons.Melee.Events;
-using Content.Server.Interaction;
-using Content.Server.Body.Components;
-using Robust.Shared.GameStates;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using Robust.Server.Audio;
 
 namespace Content.Server.Chemistry.EntitySystems;
@@ -60,7 +53,7 @@ public sealed class HypospraySystem : SharedHypospraySystem
         string? msgFormat = null;
 
         // Self event
-        var selfEvent = new SelfBeforeHyposprayInjectsEvent(user, entity.Owner, target);
+        var selfEvent = new SelfBeforeHyposprayInjectsEvent(user, ent, target);
         RaiseLocalEvent(user, selfEvent);
 
         if (selfEvent.Cancelled)
@@ -75,7 +68,7 @@ public sealed class HypospraySystem : SharedHypospraySystem
             return;
 
         // Target event
-        var targetEvent = new TargetBeforeHyposprayInjectsEvent(user, entity.Owner, target);
+        var targetEvent = new TargetBeforeHyposprayInjectsEvent(user, ent, target);
         RaiseLocalEvent(target, targetEvent);
 
         if (targetEvent.Cancelled)

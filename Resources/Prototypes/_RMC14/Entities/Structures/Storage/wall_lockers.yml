@@ -15,6 +15,9 @@
     isCollidableWhenOpen: true
     enteringOffset: 0, -0.6
     enteringRange: 0.03
+    whitelist:
+      tags:
+      - CommandTablet
   - type: AccessReader
     access: [["CMAccessCommand"]]
 

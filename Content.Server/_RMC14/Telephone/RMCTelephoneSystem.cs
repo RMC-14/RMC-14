@@ -16,7 +16,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Telephone;
 
-public sealed class TelephoneSystem : SharedTelephoneSystem
+public sealed class RMCTelephoneSystem : SharedRMCTelephoneSystem
 {
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
@@ -32,7 +32,7 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
         SubscribeLocalEvent<RadioSendAttemptEvent>(OnRadioSendAttempt);
         SubscribeLocalEvent<RadioReceiveAttemptEvent>(OnRadioReceiveAttempt);
 
-        SubscribeLocalEvent<TelephoneComponent, ListenEvent>(OnListen);
+        SubscribeLocalEvent<RMCTelephoneComponent, ListenEvent>(OnListen);
     }
 
     private void OnRadioSendAttempt(ref RadioSendAttemptEvent ev)
@@ -71,9 +71,9 @@ public sealed class TelephoneSystem : SharedTelephoneSystem
         }
     }
 
-    private void OnListen(Entity<TelephoneComponent> ent, ref ListenEvent args)
+    private void OnListen(Entity<RMCTelephoneComponent> ent, ref ListenEvent args)
     {
-        if (HasComp<TelephoneComponent>(args.Source) || HasComp<XenoComponent>(args.Source))
+        if (HasComp<RMCTelephoneComponent>(args.Source) || HasComp<XenoComponent>(args.Source))
             return;
 
         if (!_hands.IsHolding(args.Source, ent))

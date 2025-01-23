@@ -6,7 +6,7 @@ using static Robust.Client.UserInterface.Controls.BoxContainer;
 
 namespace Content.Client._RMC14.Telephone;
 
-public sealed class TelephoneBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed class RMCTelephoneBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     private static readonly List<string> TabOrder = new() { "MP Dept.", "Almayer", "Command", "Offices", "ARES", "Dropship", "Marine" };
 
@@ -32,7 +32,7 @@ public sealed class TelephoneBui(EntityUid owner, Enum uiKey) : BoundUserInterfa
         if (_window is not { IsOpen: true })
             return;
 
-        if (State is not TelephoneBuiState state)
+        if (State is not RMCTelephoneBuiState state)
             return;
 
         _window.Tabs.DisposeAllChildren();
@@ -95,7 +95,7 @@ public sealed class TelephoneBui(EntityUid owner, Enum uiKey) : BoundUserInterfa
                         Text = phone.Name,
                         StyleClasses = { "OpenBoth" },
                     };
-                    phoneButton.OnPressed += _ => SendPredictedMessage(new TelephoneCallBuiMsg(phone.Id));
+                    phoneButton.OnPressed += _ => SendPredictedMessage(new RMCTelephoneCallBuiMsg(phone.Id));
                     category.AddChild(phoneButton);
                     break;
                 }

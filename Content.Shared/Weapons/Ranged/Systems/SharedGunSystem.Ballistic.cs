@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Stack;
+using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Explosion.Components;
@@ -484,21 +485,5 @@ public abstract partial class SharedGunSystem
 /// </summary>
 [Serializable, NetSerializable]
 public sealed partial class AmmoFillDoAfterEvent : SimpleDoAfterEvent
-{
-}
-
-/// <summary>
-/// DoAfter event for filling a ballistic ammo provider directly while InsertDelay > 0.
-/// </summary>
-[Serializable, NetSerializable]
-public sealed partial class DelayedAmmoInsertDoAfterEvent : SimpleDoAfterEvent
-{
-}
-
-/// <summary>
-/// DoAfter event for cycling a ballistic ammo provider while CycleDelay > 0.
-/// </summary>
-[Serializable, NetSerializable]
-public sealed partial class DelayedCycleDoAfterEvent : SimpleDoAfterEvent
 {
 }
