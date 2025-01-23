@@ -27,7 +27,7 @@
               amount: 1
           steps:
             - tool: Anchoring
-              doAfter: 1
+              doAfter: 0
 
 - type: constructionGraph
   parent: RMC
@@ -47,4 +47,4 @@
           amount: 1
         steps:
         - tool: Anchoring
-          doAfter: 1
+          doAfter: 0
