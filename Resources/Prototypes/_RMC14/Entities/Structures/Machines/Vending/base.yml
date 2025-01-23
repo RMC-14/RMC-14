@@ -56,3 +56,15 @@
     blacklist:
       components:
       - Xeno
+
+- type: entity
+  abstract: true
+  parent: ColMarTechBase
+  id: ColMarTechBaseAnchorable
+  components:
+  - type: Transform
+    anchored: true
+  - type: Anchorable
+  - type: Pullable
+  - type: Physics
+    bodyType: Dynamic

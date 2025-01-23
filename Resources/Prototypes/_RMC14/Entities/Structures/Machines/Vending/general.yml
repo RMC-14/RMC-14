@@ -1,7 +1,7 @@
 # GENERAL
 
 - type: entity
-  parent: ColMarTechBase
+  parent: ColMarTechBaseAnchorable
   id: CMVendorWalkman
   name: Rec-Vend
   description: Contains We-Ya approved recreational items, like Walkmans and Cards.
