@@ -37,3 +37,6 @@
   - type: GunPointBlank
   - type: GunDualWielding
     weaponGroup: Handgun
+  - type: RequiresSkill
+    skills:
+      RMCSkillPolice: 2
