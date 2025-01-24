@@ -345,6 +345,18 @@
     },
     {
       "name": "engineer_platform_deco4"
+    },
+    {
+      "name": "workers_decal1"
+    },
+    {
+      "name": "workers_decal2"
+    },
+    {
+      "name": "checkpoint_decal1"
+    },
+    {
+      "name": "checkpoint_decal2"
     }
   ]
 }

@@ -807,3 +807,31 @@
   sprite:
     sprite: _RMC14/Decals/hybrisa.rsi
     state: engineer_platform_deco4
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWorkerSign1
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: workers_decal1
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWorkerSign2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: workers_decal2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaCheckpointSign1
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: checkpoint_decal1
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaCheckpointSign2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: checkpoint_decal2
