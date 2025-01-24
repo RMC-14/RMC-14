@@ -17,6 +17,11 @@
 
 - type: tile
   parent: RMCFloorHybrisaBlueFull
+  id: RMCFloorHybrisaBlueTileCheck
+  sprite: /Textures/_RMC14/Tiles/hybrisa/tilebluecheck.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueFull
   id: RMCFloorHybrisaBlueSupermart
   sprite: /Textures/_RMC14/Tiles/hybrisa/supermartfloor1.png
 

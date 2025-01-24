@@ -700,3 +700,21 @@
     state: billboard4_c
   - type: Icon
     state: billboard4_c
+
+- type: entity
+  parent: RMCOverheadBillboardWallmount1
+  id: RMCOverheadBillboardWallmount20
+  components:
+  - type: Sprite
+    state: billboard5_b
+  - type: Icon
+    state: billboard5_b
+
+- type: entity
+  parent: RMCOverheadBillboardWallmount1
+  id: RMCOverheadBillboardWallmount21
+  components:
+  - type: Sprite
+    state: billboard_bigger_7
+  - type: Icon
+    state: billboard_bigger_7

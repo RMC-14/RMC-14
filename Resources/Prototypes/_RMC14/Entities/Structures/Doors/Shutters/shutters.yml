@@ -130,4 +130,4 @@
     - state: closed
       map: ["enum.DoorVisualLayers.Base"]
   - type: Occluder
-    enabled: false # why do not want to fucking disable
+    enabled: false
