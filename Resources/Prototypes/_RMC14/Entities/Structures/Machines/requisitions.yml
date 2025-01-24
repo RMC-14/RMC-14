@@ -4,6 +4,37 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: RequisitionsAccount
+    randomCrates:
+    - every: 600
+      minimum: 4
+      minimumFor: 5
+      choices:
+      - RMCCrateBoxBulletsRifle
+      - RMCCrateBoxBulletsRifleAP
+      - RMCCrateBoxAmmo458
+      - RMCCrateBoxMagazineM54CE2
+      - RMCCrateBoxMagazinePistolM1984
+      - RMCCrateBoxMagazinePistolM1984AP
+#      - RMCCrateBoxMagazinePistolM1984HP
+      - RMCCrateBoxMagazineRifleM54C
+      - RMCCrateBoxMagazineRifleM54CAP
+      - RMCCrateBoxMagazineRifleM4SPRAP
+      - RMCCrateBoxShellsShotgunSlugs
+      - RMCCrateBoxShellsShotgunBuckshot
+      - RMCCrateBoxShellsShotgunFlechette
+      - RMCCrateBoxShellsShotgunBreaching
+      - RMCCrateBoxMagazineBreaching
+      - RMCCrateMagazineSmartGun
+#      - RMCCrateMagazineNapalm
+#      - RMCCrateMagazineNapalmGel
+#      - RMCCrateMagazineFlamerMixed
+      - RMCCrateMortarShellHE
+      - RMCCrateMortarShellIncendiary
+      - RMCCrateMortarShellFlare
+      - RMCCrateGearPackFlare
+      - RMCCrateFoodMRE
+      - RMCCrateFlashlights
+      - RMCCrateHighCapacityPowerCell
 
 - type: entity
   parent: [ CMBaseStructureCorrodible, CMCargoCatalog ]

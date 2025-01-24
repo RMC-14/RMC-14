@@ -19,11 +19,15 @@ public sealed class RMCPlanetSystem : EntitySystem
 
     private int _coordinateVariance;
 
+    private EntityQuery<RMCPlanetComponent> _rmcPlanetQuery;
+
     public ImmutableDictionary<string, EntProtoId<RMCPlanetMapPrototypeComponent>> PlanetPaths { get; private set; } =
         ImmutableDictionary<string, EntProtoId<RMCPlanetMapPrototypeComponent>>.Empty;
 
     public override void Initialize()
     {
+        _rmcPlanetQuery = GetEntityQuery<RMCPlanetComponent>();
+
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
         SubscribeLocalEvent<RMCPlanetComponent, MapInitEvent>(OnPlanetMapInit);
@@ -48,10 +52,21 @@ public sealed class RMCPlanetSystem : EntitySystem
 
     public bool IsOnPlanet(EntityCoordinates coordinates)
     {
-        if (HasComp<RMCPlanetComponent>(_transform.GetGrid(coordinates)))
+        if (_rmcPlanetQuery.HasComp(_transform.GetGrid(coordinates)))
             return true;
 
-        if (HasComp<RMCPlanetComponent>(_transform.GetMap(coordinates)))
+        if (_rmcPlanetQuery.HasComp(_transform.GetMap(coordinates)))
+            return true;
+
+        return false;
+    }
+
+    public bool IsOnPlanet(TransformComponent xform)
+    {
+        if (_rmcPlanetQuery.HasComp(xform.GridUid))
+            return true;
+
+        if (_rmcPlanetQuery.HasComp(xform.MapUid))
             return true;
 
         return false;

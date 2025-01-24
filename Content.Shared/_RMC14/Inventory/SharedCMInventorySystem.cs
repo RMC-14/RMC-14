@@ -480,7 +480,6 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 _hands.TryDrop(user, item) &&
                 _storage.Insert(slot.Ent, item, out _, user, storage, playSound: false))
             {
-                holster.Contents.Add(item);
                 _audio.PlayPredicted(holster.InsertSound, item, user);
                 _adminLog.Add(LogType.RMCHolster, $"{ToPrettyString(user)} holstered {ToPrettyString(item)}");
                 return;

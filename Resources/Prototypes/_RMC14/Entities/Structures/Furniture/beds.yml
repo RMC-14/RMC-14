@@ -118,8 +118,6 @@
   - type: Construction
     graph: bed
     node: bed
-  - type: PlaceableSurface
-    placeCentered: true
   - type: Appearance
   - type: GenericVisualizer
     visuals:

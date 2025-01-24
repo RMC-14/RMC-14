@@ -28,6 +28,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Dropship;
@@ -35,7 +36,6 @@ namespace Content.Server._RMC14.Dropship;
 public sealed class DropshipSystem : SharedDropshipSystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private readonly ServerGlobalSoundSystem _sound = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DoorSystem _door = default!;
@@ -431,6 +431,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
             var destinationCoords = _transform.GetMapCoordinates(dropship.Destination.Value);
             var destinationEntityCoords = _transform.GetMoverCoordinates(dropship.Destination.Value);
+            var destinationFilter = Filter.BroadcastMap(destinationCoords.MapId);
 
             if (dropship.HijackLandAt - dropship.AnnounceCrashTime <= time && !dropship.AnnouncedCrash)
             {
@@ -446,7 +447,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 dropship.DidIncomingSound = true;
                 Dirty(uid, dropship);
 
-                _sound.PlayGlobalOnStation(dropship.Destination.Value, _audio.GetSound(dropship.IncomingSound));
+                _audio.PlayGlobal(dropship.IncomingSound, destinationFilter, true);
                 continue;
             }
 
@@ -455,7 +456,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 dropship.DidExplosion = true;
                 Dirty(uid, dropship);
 
-                _sound.PlayGlobalOnStation(dropship.Destination.Value, _audio.GetSound(dropship.CrashSound), new AudioParams { Volume = -5f });
+                _audio.PlayGlobal(dropship.CrashSound, destinationFilter, true);
                 _rmcFlammable.SpawnFireDiamond(dropship.FireId, destinationEntityCoords, dropship.FireRange, 11);
                 _rmcExplosion.QueueExplosion(destinationCoords, "RMCOB", 50000, 1500, 90, uid);
 
