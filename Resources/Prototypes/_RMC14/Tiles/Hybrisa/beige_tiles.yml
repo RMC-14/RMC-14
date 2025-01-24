@@ -17,6 +17,11 @@
 
 - type: tile
   parent: RMCFloorHybrisaBeige
+  id: RMCFloorHybrisaBeigeCheckAlt
+  sprite: /Textures/_RMC14/Tiles/hybrisa/tilebeigecheckalt.png
+
+- type: tile
+  parent: RMCFloorHybrisaBeige
   id: RMCFloorHybrisaBeigeLight
   sprite: /Textures/_RMC14/Tiles/hybrisa/tilelightbeige.png
 

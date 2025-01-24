@@ -691,3 +691,12 @@
     state: billboard_bigger_6
   - type: Icon
     state: billboard_bigger_6
+
+- type: entity
+  parent: RMCOverheadBillboardWallmount1
+  id: RMCOverheadBillboardWallmount19
+  components:
+  - type: Sprite
+    state: billboard4_c
+  - type: Icon
+    state: billboard4_c

@@ -109,7 +109,7 @@
 
 - type: entity
   parent: CMAirlock
-  id: CMAirlockHybrisa
+  id: RMCAirlockHybrisa
   name: airlock
   components:
   - type: Sprite
@@ -117,11 +117,27 @@
 
 - type: entity
   parent: CMAirlock
-  id: CMAirlockHybrisaPersonal
+  id: RMCAirlockHybrisaPersonal
   name: airlock
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/hybrisa_personal_door.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: RMCAirlockRusted
+  name: airlock
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/rusted_door.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: RMCAirlockRustedWhite
+  name: airlock
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/rusted_white_door.rsi
 
 # Glass
 - type: entity

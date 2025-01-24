@@ -60,3 +60,8 @@
   parent: RMCFloorHybrisaGreenCarpet
   id: RMCFloorHybrisaGreenCarpetDeco
   sprite: /Textures/_RMC14/Tiles/hybrisa/carpetgreen_deco.png
+
+- type: tile
+  parent: RMCFloorHybrisaGreenCarpet
+  id: RMCFloorHybrisaGreenDingy
+  sprite: /Textures/_RMC14/Tiles/hybrisa/grimy.png

@@ -48,6 +48,13 @@
 
 - type: entity
   parent: CMCatwalk
+  id: RMCCatwalkAI
+  components:
+  - type: Sprite
+    state: ai_catwalk
+
+- type: entity
+  parent: CMCatwalk
   id: RMCCatwalkAIWhite
   components:
   - type: Sprite

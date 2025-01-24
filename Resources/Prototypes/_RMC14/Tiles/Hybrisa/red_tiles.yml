@@ -35,3 +35,8 @@
   parent: RMCFloorHybrisaRedCarpet
   id: RMCFloorHybrisaRedCarpetOrange
   sprite: /Textures/_RMC14/Tiles/hybrisa/carpetorangered.png
+
+- type: tile
+  parent: RMCFloorHybrisaRedCarpet
+  id: RMCFloorHybrisaRedCarpetPink
+  sprite: /Textures/_RMC14/Tiles/hybrisa/carpet_deco_pink.png
