@@ -24,9 +24,9 @@ rmc-guide-entry-marine-sop = Standard Operating Procedure
 rmc-guide-entry-marine-sop-general = General SOP
 rmc-guide-entry-marine-sop-equipment = Equipment
 rmc-guide-entry-marine-sop-department = Department
-rmc-guide-entry-marine-sop-nonmod-department = Non-Modifyable; Department
-rmc-guide-entry-marine-sop-nonmod-command = Non-Modifyable; Command
-rmc-guide-entry-marine-sop-nonmod-deployment = Non-Modifyable; Deployment
-rmc-guide-entry-marine-sop-nonmod-thirdparty = Non-Modifyable; Third-Parties
+rmc-guide-entry-marine-sop-nonmod-department = Non-Modifiable; Department
+rmc-guide-entry-marine-sop-nonmod-command = Non-Modifiable; Command
+rmc-guide-entry-marine-sop-nonmod-deployment = Non-Modifiable; Deployment
+rmc-guide-entry-marine-sop-nonmod-thirdparty = Non-Modifiable; Third-Parties
 rmc-guide-entry-marine-law-ranks = Ranks
 
