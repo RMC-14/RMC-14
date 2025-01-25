@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Xenonids.Construction.FloorResin;
 using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
@@ -40,6 +41,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     [Dependency] private readonly ITileDefinitionManager _tile = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
     private readonly HashSet<EntityUid> _toUpdate = new();
 
@@ -47,7 +49,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     private EntityQuery<XenoWeedsComponent> _weedsQuery;
     private EntityQuery<FloorResinSpeedModifierComponent> _floorResinQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
-    private EntityQuery<BlockWeedsComponent> _blockWeedsQuery;    
+    private EntityQuery<BlockWeedsComponent> _blockWeedsQuery;
+    private EntityQuery<HiveMemberComponent> _hiveQuery;
 
     public override void Initialize()
     {
@@ -56,6 +59,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         _floorResinQuery = GetEntityQuery<FloorResinSpeedModifierComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
         _blockWeedsQuery = GetEntityQuery<BlockWeedsComponent>();
+        _hiveQuery = GetEntityQuery<HiveMemberComponent>();
 
         SubscribeLocalEvent<XenoWeedsComponent, AnchorStateChangedEvent>(OnWeedsAnchorChanged);
         SubscribeLocalEvent<XenoWeedsComponent, ComponentShutdown>(OnWeedsShutdown);
@@ -151,27 +155,36 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
         var speed = 0.0f;
         var isXeno = _xenoQuery.HasComp(ent);
+        //Checks hive for applying slows now
+        //Weed speedup only effects xenos, but slowdown does not hurt hive mems
+        //Fast resin speedup only effect xenos, but sticky also doesn't hurt hive mems
+        _hiveQuery.TryComp(ent, out var hive);
 
         var any = false;
         var entries = 0;
         foreach (var contacting in _physics.GetContactingEntities(ent, physicsComponent))
         {
             // Don't apply weed speed if floor resin is decreasing curr speed
+            var applied = false;
             if (_floorResinQuery.TryComp(contacting, out var resin))
             {
-                if (isXeno)
+                if (isXeno && hive != null && _hive.IsMember(contacting, hive.Hive))
+                {
                     speed += resin.HiveSpeedModifier ?? 0;
-                else if (resin.OutsiderSpeedModifier != null)
+                    if (resin.HiveSpeedModifier != null)
+                        applied = true;
+                }
+                else if (resin.OutsiderSpeedModifier != null && (hive == null || !_hive.IsMember(contacting, hive.Hive)))
                 {
                     if (HasComp<CMArmorUserComponent>(contacting) && resin.OutsiderSpeedModifierArmor != null)
                         speed += resin.OutsiderSpeedModifierArmor.Value;
                     else
                         speed += resin.OutsiderSpeedModifier.Value;
+                    applied = true;
                 }
 
                 //Don't divide the modifier if we didn't count
-                if ((isXeno && resin.HiveSpeedModifier != null) ||
-                    (resin.OutsiderSpeedModifier != null && !isXeno))
+                if (applied)
                 {
                     any = true;
                     entries++;
@@ -184,15 +197,23 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             if (!_weedsQuery.TryComp(contacting, out var weeds))
                 continue;
 
-            if (isXeno)
+            if (isXeno && hive != null && _hive.IsMember(contacting, hive.Hive))
+            {
                 speed += weeds.SpeedMultiplierXeno;
-            else
+                applied = true;
+            }
+            else if (hive == null || !_hive.IsMember(contacting, hive.Hive))
             {
                 if (HasComp<CMArmorUserComponent>(contacting))
                     speed += weeds.SpeedMultiplierOutsiderArmor;
                 else
                     speed += weeds.SpeedMultiplierOutsider;
+
+                applied = true;
             }
+
+            if (!applied)
+                continue;
 
             any = true;
             entries++;

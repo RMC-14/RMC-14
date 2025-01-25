@@ -110,13 +110,11 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
         if (xeno.Comp.ResinDoafter != null || !_xenoPlasma.TryRemovePlasmaPopup((xeno.Owner, null), args.PlasmaCost))
             return;
 
-        if (args.Entity is { } entity)
+        if (args.Entity is { } entity && _hive.FromSameHive(xeno.Owner, entity))
         {
             // Check if target is xeno wall or door
             if (TryComp(entity, out XenoConstructComponent? construct))
             {
-                // TODO: Check if structure is from our hive
-
                 // Check if target is already buffed
                 if (HasComp<XenoConstructReinforceComponent>(entity))
                 {
@@ -140,8 +138,6 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
             // Check if target is fruit
             if (TryComp(entity, out XenoFruitComponent? fruit))
             {
-                // TODO: Check if fruit is from our hive
-
                 // Check if fruit mature, try to fasten its growth if not
                 if (!_xenoFruit.TrySpeedupGrowth((entity, fruit), xeno.Comp.FruitGrowth))
                 {
@@ -159,8 +155,6 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
             // Check if target is on weeds
             if (TryComp(entity, out XenoWeedsComponent? weeds))
             {
-                // TODO: Check for hive
-
                 var popupSelf = Loc.GetString("rmc-xeno-resin-surge-wall-self");
                 var popupOthers = Loc.GetString("rmc-xeno-resin-surge-wall-others", ("xeno", xeno));
                 _popup.PopupPredicted(popupSelf, popupOthers, xeno, xeno);
