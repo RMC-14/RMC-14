@@ -17,7 +17,7 @@
   - type: MobsterAccent
 
 - type: trait
-  id: French
+  id: FrenchAccent
   name: rmc-trait-french-accent-name
   description: rmc-trait-french-accent-desc
   category: SpeechTraits
@@ -26,7 +26,7 @@
     - type: FrenchAccent
 
 - type: trait
-  id: Spanish
+  id: SpanishAccent
   name: rmc-trait-spanish-accent-name
   description: rmc-trait-spanish-accent-desc
   category: SpeechTraits
