@@ -273,5 +273,5 @@
   parent: RMC
   id: RMCMarineSOPNONModThirdparty
   name: rmc-guide-entry-marine-sop-nonmod-thirdparty
-  text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPNONModThirdparty.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/SOP/RMCMarineSOPNONModThirdParty.xml"
   priority: 7
