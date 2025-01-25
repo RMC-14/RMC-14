@@ -1,0 +1,202 @@
+﻿<Document>
+  # Major Crimes
+  - These crimes are high severity.
+  <Table Columns="3">
+    <ColorBox>
+      <Box>
+        Charge
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box>
+        Description
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box>
+        Punishment
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Disorderly Conduct
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Directly and intentionally disrupting primary operations of the ship. Fighting in the requisitions line, extensively or repeatedly disrupting the briefing.
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        [bold]10 Minutes.[/bold]
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Subterfuge
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Carrying out objectives or being tied to material that describe planned actions that go against the UNMC. Strong proof is required that the individual is working against UNMC.\n[italic]A major charge of Unauthorized use of a Listening Device when such a device is also tied to a foreign government or terror organisation is additionally considered Subterfuge.[/italic]
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        [bold]15 Minutes, removal of ID, and discharge to planet.[/bold]
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Neglect of duty
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Failure to perform one’s role to an acceptable standard.\n[italic]For example, a [color=#008000][bold]Commander[/bold][/color] failing to properly organize and ensure their personnel are given orders, failing to follow proper procedure in detriment of one’s duties, or ship crew leaving the ship or their post without authorization from the [color=#008000][bold]Commander[/bold][/color] or their Department Head.[/italic]
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        [bold]15 Minutes.[/bold]
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Assault
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        To threaten or use physical force against someone with ill intent, but without intent to kill.
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        [bold]15 Minutes.[/bold]
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Prevarication
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        To intentionally order the arrest of a person on false charges who is then found to be innocent, or to apply an improper or abusive NJP. This includes intentionally arresting a person on false charges, on ones own initiative without orders.
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        [bold]20 Minutes.[/bold]
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Manslaughter
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Killing someone without malicious intent. Manslaughter may be applied if someone dies as a result of a fight where the intent was not to kill.
+        \nThis also includes failing to revive someone without a reasonable attempt, not executed by the execution procedure.
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        [bold]20 Minutes, and/or demotion.[/bold]
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Assault with a deadly weapon
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        To threaten or use physical force against someone with ill intent and with a lethal weapon such as a sidearm, blade, or rifle but not attempting to murder them.
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        [bold]20 Minutes.[/bold]
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Illegal Confinement
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Unlawfully detaining a person against their will. Includes, kidnapping, hostage-taking, and confining people in cells without charging them for a crime. It does not apply to Prisoners of War.
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        [bold]20 Minutes.[/bold]
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Cruelty to Animals
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Injuring or killing any domestic animal or wild life with malicious intent. Research monkeys used for chemical research, scientific purposes or hostile wildlife are exempt.
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        [bold]30 Minutes.[/bold]
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Misuse of Authority
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        The exercising of power to a [bold]malicious extent[/bold] by [color=#ff000d][bold]MP[/bold][/color] or deputized personnel acting as an [color=#ff000d][bold]MP[/bold][/color].
+        \n[italic]Examples include beating a downed prisoner, excessive use of harmful or non-lethal force, or other abusive actions that led to the harm of a person in custody.[/italic]\nDetained suspects should not have more force used on them than necessary in order to pacify them.
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        [bold]20 Minutes.[/bold]
+      </Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        Unauthorised Deployment
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        To deploy into the area of operations without permission of the relevant head of department or [color=#008000][bold]Commander[/bold][/color] where appropriate whilst still performing assigned duties. (I.E A doctor deploying without permission, with the intentions to perform field surgery.) Deploying without intent to perform assigned duties remains desertion.
+        \n- The relevant Head of Department or the [color=#008000][bold]Commander[/bold][/color] where appropriate may retroactively authorize deployment. The [color=#008000][bold]Commander[/bold][/color] may overrule the Head of Department on this.
+        \n- The relevant Head of Department or the [color=#008000][bold]Commander[/bold][/color] may designate an alternate person to deploy in the stead of an unauthorized person, in which case [color=#ff000d][bold]MP[/bold][/color]s should coordinate with the designated person to reduce disruption in the field. The maximum delay for this period is five minutes.
+      </Box>
+    </ColorBox>
+    <ColorBox>
+      <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
+        [bold]10 Minutes.[/bold]
+      </Box>
+    </ColorBox>
+
+  </Table>
+</Document>

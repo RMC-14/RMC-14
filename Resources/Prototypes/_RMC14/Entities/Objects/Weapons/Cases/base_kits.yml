@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: RMCBaseGunCase
+  parent: RMCGunCaseBase
   id: RMCKitBase
   abstract: true
   name: kit

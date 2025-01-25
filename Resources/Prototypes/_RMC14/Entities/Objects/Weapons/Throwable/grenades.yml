@@ -64,6 +64,9 @@
     - RMCGrenadeRiot
     - Grenade
     - RMCGrenadeFlashBang
+  - type: RequiresSkill
+    skills:
+      RMCSkillPolice: 2
 
 - type: entity
   parent:
