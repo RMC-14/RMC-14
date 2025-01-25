@@ -25,11 +25,12 @@
     - ActionXenoRest
     - ActionXenoWatch
     - ActionXenoHide
-    hudOffset: -0.1,0.125
+    hudOffset: -0.1,0.25
     tier: 0
     unlockAt: 0
     healOffWeeds: true
     emoteSounds: Larva
+  - type: XenoLight
   - type: XenoPlasma
     maxPlasma: 10
     plasmaRegenOnWeeds: 0.1
@@ -52,6 +53,7 @@
         density: 185
         mask:
         - SmallMobMask
+        - BarbedBarricade
         layer:
         - SmallMobLayer
   - type: Flammable

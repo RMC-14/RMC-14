@@ -1,9 +1,9 @@
-﻿using Content.Server.DoAfter;
+﻿using Content.Server._RMC14.NPC.Components;
+using Content.Server.DoAfter;
 using Content.Server.Interaction;
-using Content.Server._RMC14.NPC.Components;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
-using Content.Shared._RMC14.Xenonids;
 using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.NPC.Systems;
@@ -134,7 +134,14 @@ public sealed partial class NPCLeapSystem : EntitySystem
                 if (action.Event != null)
                 {
                     action.Event.Performer = uid;
-                    action.Event.Action = xeno.Actions[comp.ActionId];
+
+                    var actions = xeno.Actions;
+                    if (actions.TryGetValue(comp.ActionId, out var actionId) &&
+                        _actions.TryGetActionData(actionId, out var actionComp))
+                    {
+                        action.Event.Action = (actionId, actionComp);
+                    }
+
                     action.Event.Target = destination;
                 }
 

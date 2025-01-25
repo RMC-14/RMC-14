@@ -5,7 +5,6 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
-
 namespace Content.Shared._RMC14.Attachable;
 
 [DataRecord, Serializable, NetSerializable]
@@ -34,8 +33,7 @@ public record struct AttachableWeaponMeleeModifierSet(
 [DataRecord, Serializable, NetSerializable]
 public record struct AttachableWeaponRangedModifierSet(
     AttachableModifierConditions? Conditions,
-    FixedPoint2 AccuracyAddMult, // Not implemented yet. Added to have all the values already on our attachments, so whoever implements this doesn't need to dig through CM13. Remove this comment once implemented.
-    FixedPoint2 AccuracyMovementPenaltyAddMult, // As above.
+    FixedPoint2 AccuracyAddMult, // Affects the accuracy of all shots fired by the weapon. Conversion from 13: accuracy_mod or accuracy_unwielded_mod
     FixedPoint2 DamageFalloffAddMult, // This affects the damage falloff of all shots fired by the weapon. Conversion to RMC: damage_falloff_mod
     double BurstScatterAddMult, // This affects scatter during burst and full-auto fire. Conversion to RMC: burst_scatter_mod
     int ShotsPerBurstFlat, // Modifies the maximum number of shots in a burst.
@@ -49,7 +47,8 @@ public record struct AttachableWeaponRangedModifierSet(
 [DataRecord, Serializable, NetSerializable]
 public record struct AttachableWeaponFireModesModifierSet(
     AttachableModifierConditions? Conditions,
-    SelectiveFire ExtraFireModes
+    SelectiveFire ExtraFireModes,
+    SelectiveFire SetFireMode
 );
 
 // SS13 has move delay instead of speed. Move delay isn't implemented here, and approximating it through maths like fire delay is scuffed because of how the events used to change speed work.

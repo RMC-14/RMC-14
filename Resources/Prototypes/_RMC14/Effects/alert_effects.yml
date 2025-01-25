@@ -1,0 +1,13 @@
+﻿- type: entity
+  id: RMCEffectAlert
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _RMC14/Effects/alert.rsi
+    noRot: true
+    state: techpod_lz_marker
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu

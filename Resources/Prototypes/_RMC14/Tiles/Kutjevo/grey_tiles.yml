@@ -1,0 +1,77 @@
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: RMCFloorKutjevoGreyBase
+  name: tiles-cm-default-grey
+  suffix: kutjevo
+  
+- type: tile
+  parent: RMCFloorKutjevoGreyBase
+  id: RMCFloorKutjevoGrey1
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_grey1.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreyBase
+  id: RMCFloorKutjevoGrey2
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_grey2.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreyBase
+  id: RMCFloorKutjevoGrey3_0
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_grey3_0.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreyBase
+  id: RMCFloorKutjevoGrey3_1
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_grey3_1.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreyBase
+  id: RMCFloorKutjevoGrey3_2
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_grey3_2.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreyBase
+  id: RMCFloorKutjevoGrey3_3
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_grey3_3.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreyBase
+  id: RMCFloorKutjevoGrey3_4
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_grey3_4.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreyBase
+  id: RMCFloorKutjevoGrey3_5
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_grey3_5.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreyBase
+  id: RMCFloorKutjevoGrey3_6
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_grey3_6.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreyBase
+  id: RMCFloorKutjevoGrey3_7
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_grey3_7.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreyBase
+  id: RMCFloorKutjevoGrey4_0
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_grey4_0.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreyBase
+  id: RMCFloorKutjevoGrey4_1
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_grey4_1.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreyBase
+  id: RMCFloorKutjevoGrey4_2
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_grey4_2.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreyBase
+  id: RMCFloorKutjevoGrey4_3
+  sprite: /Textures/_RMC14/Tiles/kutjevo/floor_tan_grey4_3.png
+  

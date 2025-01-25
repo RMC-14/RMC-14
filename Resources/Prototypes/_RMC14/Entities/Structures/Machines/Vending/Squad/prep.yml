@@ -40,11 +40,11 @@
         amount: 25
     - name: Sidearms
       entries:
-      - id: CMWeaponPistolM77
+      - id: CMWeaponPistolM77Empty
         amount: 25
-      - id: RMCWeaponRevolverM44
+      - id: RMCWeaponRevolverM44Empty
         amount: 25
-      - id: CMWeaponPistolM1984
+      - id: CMWeaponPistolM1984Empty
         amount: 25
       #- id: WeaponFlareM82F
       #  amount: 10
@@ -118,25 +118,25 @@
         amount: 2
       - id: CMWebbingPouch
         amount: 1
-#      - id: Shoulder Holster
-#        amount: 1
+      - id: CMWebbingHolster
+        amount: 1
     - name: Armor
       entries:
-#      - id: M3 Pattern Carrier Marine Armor
-#        amount: 15
-#      - id: M3 Pattern Padded Marine Armor
-#        amount: 15
-#      - id: M3 Pattern Padless Marine Armor
-#        amount: 15
-#      - id: M3 Pattern Ridged Marine Armor
-#        amount: 15
-#      - id: M3 Pattern Skull Marine Armor
-#        amount: 15
-#      - id: M3 Pattern Smooth Marine Armor
-#        amount: 15
-      - id: CMArmorM3Heavy
+      - id: RMCArmorM3MediumCarrier
+        amount: 15
+      - id: RMCArmorM3MediumPadded
+        amount: 15
+      - id: RMCArmorM3MediumPadless
+        amount: 15
+      - id: RMCArmorM3MediumRidged
+        amount: 15
+      - id: RMCArmorM3MediumSkull
+        amount: 15
+      - id: RMCArmorM3MediumSmooth
+        amount: 15
+      - id: RMCArmorM3HeavyPadded
         amount: 10
-      - id: CMArmorM3Light
+      - id: RMCArmorM3LightPadded
         amount: 10
     - name: Backpack
       entries:
@@ -164,8 +164,8 @@
         amount: 1
       - id: RMCSatchelWelder
         amount: 2
-#      - id: Radio Telephone Backpack
-#        amount: 1
+      - id: RMCBackpackRTO
+        amount: 1
     - name: Belts
       entries:
       - id: CMBeltMarine
@@ -174,14 +174,14 @@
         amount: 10
       - id: RMCM276ShotgunShellLoadingRig
         amount: 15
-#      - id: M276 Pattern General Pistol Holster Rig
-#        amount: 15
-#      - id: M276 Pattern M63 Holster Rig
-#        amount: 15
-#      - id: M276 Pattern M63 Holster Rig And Pouch
-#        amount: 10
-#      - id: M276 Pattern M44 Holster Rig
-#        amount: 15
+      - id: RMCBeltHolsterPistol
+        amount: 15
+      - id: RMCBeltHolsterRevolver
+        amount: 15
+      - id: RMCBeltHolsterSMG
+        amount: 15
+      - id: RMCBeltHolsterSMGPouch
+        amount: 10
 #      - id: M276 Pattern M82F Holster Rig
 #        amount: 5
       - id: CMBeltKnifeFilled
@@ -236,8 +236,8 @@
         amount: 15
       - id: CMMaskCoif
         amount: 10
-#      - id: Rebreather
-#        amount: 10
+      - id: RMCMaskRebreather
+        amount: 10
     - name: Miscellaneous
       entries:
       - id: RMCGogglesBallistic
@@ -283,6 +283,7 @@
   - type: AccessReader
     access:
     - [ "CMAccessMarinePrep" ]
+    - [ "CMAccessRequisitions" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_ammo.rsi
   - type: CMAutomatedVendor
@@ -321,8 +322,8 @@
       #  amount: 2
       #- id: CMMagazineBoxM2C
       #  amount: 2
-      #- id: Box of Breaching Shells (16g)
-      #  amount: 2
+      - id: RMCBoxShotgunBreaching
+        amount: 2
       #- id: CMBatonSlugsHIRR
       #  amount: 6
       #- id: CMStarShellN74AGMS
@@ -340,6 +341,7 @@
   - type: AccessReader
     access:
     - [ "CMAccessMarinePrep" ]
+    - [ "CMAccessRequisitions" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
   - type: CMAutomatedVendor
@@ -381,8 +383,8 @@
         amount: 1
     - name: Miscellaneous
       entries:
-      #- id: CMEngineerKit
-      #  amount: 1
+      - id: RMCEngineerKit
+        amount: 1
       #- id: CMMap
       #  amount: 5
       - id: CMFireExtinguisher
@@ -412,6 +414,7 @@
   - type: AccessReader
     access:
     - [ "CMAccessMarinePrep" ]
+    - [ "CMAccessRequisitions" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
   - type: CMAutomatedVendor
@@ -432,8 +435,8 @@
         amount: 5
       - id: RMCAttachmentS42xTelescopicMiniscope
         amount: 2
-#      - id: RMCAttachmentS5RedDotSight # UNCOMMENT THIS WHEN ACCURACY IS IMPLEMENTED
-#        amount: 4
+      - id: RMCAttachmentS5RedDotSight
+        amount: 4
       - id: RMCAttachmentS6ReflexSight
         amount: 4
       - id: RMCAttachmentS84xTelescopicScope

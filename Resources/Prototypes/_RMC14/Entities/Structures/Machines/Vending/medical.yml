@@ -275,6 +275,7 @@
         layer:
         - MachineLayer
         density: 200
+        hard: false
   - type: Sprite
     drawdepth: WallMountedItems
     sprite: _RMC14/Structures/Machines/VendingMachines/nanomed.rsi

@@ -9,6 +9,7 @@
     department: CMSquad
     time: 18000 # 5 hours
   startingGear: CMGearWeaponsSpecialist
+  dummyStartingGear: CMGearWeaponsSpecialistEquipped
   icon: "CMJobIconWeaponsSpecialist"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
@@ -20,6 +21,7 @@
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: spec
+  roleWeight: 1
   special:
   - !type:AddComponentSpecial
     components:
@@ -30,6 +32,7 @@
         RMCSkillEndurance: 2
         RMCSkillEngineer: 1
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillJtac: 1
         RMCSkillMeleeWeapons: 1
         RMCSkillSpecialistWeapons: 1
@@ -38,27 +41,27 @@
       extraPoints:
         Specialist: 120
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: "Spc"
 
 - type: startingGear
   id: CMGearWeaponsSpecialist
   equipment:
-    back: CMSatchelMarine
     id: CMDogtagWeaponsSpecialist
 
 - type: startingGear
   id: CMGearWeaponsSpecialistEquipped
   equipment:
     jumpsuit: JumpsuitMarine
-    back: CMSatchelMarine
     shoes: CMBootsBlackFilled
     head: ArmorHelmetM10
-    outerClothing: CMArmorM3Medium
     gloves: CMHandsBlackMarine
     id: CMDogtagWeaponsSpecialist
     ears: CMHeadsetAlpha
 
 - type: playTimeTracker
   id: CMJobWeaponsSpecialist
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase

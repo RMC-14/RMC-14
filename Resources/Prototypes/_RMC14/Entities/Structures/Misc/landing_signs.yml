@@ -36,8 +36,8 @@
 - type: entity
   parent: RMCBaseLandingSign
   id: RMCPrisonSign
-  name: UA Prison Docking sign
-  description: A large sign that reads 'UA Prison Docking -', the rest of it is obscured by claw marks.
+  name: UN Prison Docking sign
+  description: A large sign that reads 'UN Prison Docking -', the rest of it is obscured by claw marks.
   components:
   - type: Sprite
     state: prison_sign

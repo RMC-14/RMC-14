@@ -249,6 +249,8 @@ namespace Content.IntegrationTests.Tests
                 "SpawnOnTerminate",
                 "DropshipFabricator",
                 "GridSpawner",
+                "CorpseSpawner",
+                "ItemCamouflage",
             };
 
             Assert.That(server.CfgMan.GetCVar(CVars.NetPVS), Is.False);

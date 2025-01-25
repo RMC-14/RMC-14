@@ -3,7 +3,8 @@ using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Robust.Client.Player;
 using Robust.Shared.Player;
-
+using Content.Shared.Item;
+using Content.Shared.Item.ItemToggle.Components;
 namespace Content.Client.Overlays;
 
 /// <summary>
@@ -58,11 +59,17 @@ public abstract class EquipmentHudSystem<T> : EntitySystem where T : IComponent
     private void OnStartup(EntityUid uid, T component, ComponentStartup args)
     {
         RefreshOverlay(uid);
+
+        var user = Transform(uid).ParentUid;
+        RefreshOverlay(user);
     }
 
     private void OnRemove(EntityUid uid, T component, ComponentRemove args)
     {
         RefreshOverlay(uid);
+
+        var user = Transform(uid).ParentUid;
+        RefreshOverlay(user);
     }
 
     private void OnPlayerAttached(LocalPlayerAttachedEvent args)

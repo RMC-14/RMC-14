@@ -3,6 +3,8 @@
   parent: RMCBaseMeleeWeapon
   id: CMBaseWeaponGun
   components:
+  - type: UsableWhileDevoured
+    canUnequip: true
   - type: GunUnskilledPenalty
   - type: GunIFF
     enabled: false
@@ -18,7 +20,6 @@
   - type: WieldDelay
   - type: AltFireMelee
   - type: MeleeWeapon
-    resetOnHandSelected: false
     attackRate: 1
     damage:
       types:
@@ -34,3 +35,22 @@
   - type: Gun
     meleeCooldownOnShoot: false
     resetOnHandSelected: false
+  - type: RMCWeaponAccuracy
+  - type: GunSkilledAccuracy
+  - type: Appearance
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/pistol_mouse.rsi
+      state: all
+
+- type: entity
+  parent: BaseBullet
+  id: RMCBaseBullet
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    layers:
+    - state: bullet
+      shader: unshaded
+  - type: BulletholeGenerator
+  - type: RMCProjectileAccuracy

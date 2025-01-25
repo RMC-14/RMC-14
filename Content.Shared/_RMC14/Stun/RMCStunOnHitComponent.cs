@@ -10,7 +10,7 @@ public sealed partial class RMCStunOnHitComponent : Component
     public EntityCoordinates? ShotFrom;
 
     [DataField, AutoNetworkedField]
-    public float MaxRange = 2;
+    public float MaxRange = 2.5f;
 
     [DataField, AutoNetworkedField]
     public bool LosesEffectWithRange = false;

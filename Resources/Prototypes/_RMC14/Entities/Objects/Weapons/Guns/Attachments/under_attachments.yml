@@ -45,15 +45,15 @@
     - RMCAttachmentUnderbarrel
     - RMCAttachmentBipod
   - type: AttachableToggleable
-    needHand: true
     heldOnlyActivate: true
     userOnly: true
     doInterrupt: true
     attachedOnly: true
     breakOnMove: true
-    breakOnRotate: true
+    breakOnFullRotate: true
     doAfter: 1.5
     deactivateDoAfter: 0
+    doAfterNeedHand: false
     instantToggle: Brace
     useDelay: 0.5
     activatePopupText: attachable-popup-activate-deploy-on-ground
@@ -104,6 +104,7 @@
           tags:
           - RMCGunBipodFullAuto
       extraFireModes: FullAuto
+      setFireMode: FullAuto
     modifiers:
     - conditions:
         inactiveOnly: true
@@ -135,7 +136,12 @@
           tags:
           - CMM96SSniperRifle
       fireDelayFlat: -0.1
-
+    - conditions:
+        activeOnly: true
+        whitelist:
+          tags:
+          - RMCWeaponLMGM60
+      fireDelayFlat: -0.1
 - type: entity
   parent: RMCUnderAttachmentBase
   id: RMCAttachmentBurstFireAssembly
@@ -183,7 +189,6 @@
       burstScatterAddMult: -2
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -3
       scatterFlat: -10
     - conditions:
         unwieldedOnly: true
@@ -219,7 +224,6 @@
       scatterFlat: -2
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -1
       accuracyAddMult: 0.05
       scatterFlat: -4
 
@@ -276,16 +280,15 @@
       tags:
       - RMCShellShotgunBuckshot
     capacity: 5
-    proto: null
+    proto: CMShellShotgunBuckshot
     soundInsert:
       path: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
   - type: GunDamageMultipliers
     multipliers:
       Turf: 5
       Breaching: 10.8
-  - type: UniqueAction
-  - type: PumpAction
   - type: UseDelay
+  - type: RMCWeaponAccuracy
   - type: AttachableToggleable
     userOnly: true
     attachedOnly: true
@@ -353,13 +356,14 @@
       params:
         volume: -2
   - type: OnShootTriggerAmmoTimer
-    delay: 1
+    delay: 1.5
     beepInterval: 2
     initialBeepDelay: 0
     beepSound:
       path: "/Audio/Effects/beep1.ogg"
       params:
         volume: 5
+    timerStart: enum.TimerStartMode.OnHitGround
   - type: ShootAtFixedPoint
     maxFixedRange: 7
   - type: UniqueAction
@@ -424,6 +428,8 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
       state: grenade-mk1-on
+  - type: AttachableVisuals
+    offset: -0.1, 0.218
   - type: Tag
     tags:
     - RMCAttachmentUnderbarrel
@@ -457,7 +463,6 @@
       burstScatterAddMult: -2
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: 1
       accuracyAddMult: -0.15
       scatterFlat: 2
 
@@ -579,7 +584,6 @@
       scatterFlat: -2
     - conditions:
         unwieldedOnly: true
-      accuracyMovementPenaltyAddMult: -1
       scatterFlat: -4
 
 - type: Tag

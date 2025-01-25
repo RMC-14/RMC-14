@@ -17,8 +17,53 @@
 
 - type: entity
   parent: RMCEffectHeal
+  id: RMCEffectHealBusy
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 1.5
+  - type: Sprite
+    color: "#FFFFFF"
+    state: busy_medical
+
+- type: entity
+  parent: RMCEffectHeal
+  id: RMCEffectHealHealer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 5
+  - type: Sprite
+    color: "#00BE6F"
+
+- type: entity
+  parent: RMCEffectHeal
+  id: RMCEffectHealSacrifice
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    color: "#44253D"
+
+- type: entity
+  parent: RMCEffectHeal
   id: RMCEffectHealAilments
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     color: "#F5007A"
+
+- type: entity
+  parent: RMCEffectHeal
+  id: RMCEffectHealQueen
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    color: "#D9F500"
+
+- type: entity
+  parent: RMCEffectHeal
+  id: RMCEffectHealSoak
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    color: "#AD1313"

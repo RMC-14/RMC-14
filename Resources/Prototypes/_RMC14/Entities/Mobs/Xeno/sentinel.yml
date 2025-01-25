@@ -4,6 +4,7 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
   id: CMXenoSentinel
   name: Sentinel
   description: A slithery, spitting kind of alien.
@@ -35,11 +36,13 @@
     - ActionXenoParalyzingSlash
     - ActionXenoDevolve
     tier: 1
-    hudOffset: 0,0.157
+    hudOffset: -0.15,0.157
     unlockAt: 300 # 5 minutes
+  - type: XenoLight
   - type: XenoDevolve
     devolvesTo:
     - CMXenoLarva
+    canBeDevolvedByOther: false
   - type: XenoDevour
   - type: XenoPlasma
     plasma: 400
@@ -59,10 +62,16 @@
     damage:
       groups:
         Brute: 22.5
-  - type: Tackle # min: 4, max: 4
-    threshold: 4
-    stun: 8
-    chance: 0.50
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 30
+  - type: Tackle
+    min: 4
+    max: 4
+    chance: 0.5
+    stunMin: 4
+    stunMax: 4
   - type: RMCXenoDamageVisuals
     prefix: sentinel
   - type: TacticalMapIcon

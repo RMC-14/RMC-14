@@ -39,6 +39,9 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using static Content.Shared.Physics.CollisionGroup;
+using Content.Shared.Movement.Components;
+using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Marines;
 
 namespace Content.Shared._RMC14.Xenonids.Fruit;
 
@@ -70,11 +73,12 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedXenoPheromonesSystem _xenoPhero = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
     private static readonly ProtoId<DamageTypePrototype> FruitPlantDamageType = "Blunt";
 
-	private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
-	private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
+    private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
+    private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
 
     private EntityQuery<MobStateComponent> _mobStateQuery;
 
@@ -275,6 +279,13 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         }
 
         // TODO: check if weeds belong to our hive
+        var weed = _xenoWeeds.GetWeedsOnFloor((gridId, grid), target);
+
+        if(checkWeeds && weed != null && !_hive.FromSameHive(xeno.Owner, weed.Value))
+        {
+            popup = Loc.GetString("rmc-xeno-fruit-wrong-hive");
+            return false;
+        }
 
         // Target has fruit, resin hole, egg, xeno construct or other obstruction on it
         var tile = _mapSystem.CoordinatesToTile(gridId, grid, target);
@@ -370,6 +381,8 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             var fruit = EnsureComp<XenoFruitComponent>(entity);
             var xform = Transform(entity);
 
+            _hive.SetSameHive(xeno.Owner, entity);
+
             _transform.SetCoordinates(entity, coordinates);
             _transform.SetLocalRotation(entity, 0);
 
@@ -380,10 +393,10 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             if (!xeno.Comp.PlantedFruit.Contains(entity))
                 xeno.Comp.PlantedFruit.Add(entity);
 
-            // Increase growth time if on hardy weeds
+            // Decrease growth time if on hardy weeds
             var weeds = _xenoWeeds.GetWeedsOnFloor(coordinates, false);
             if (TryComp(weeds, out XenoWeedsComponent? weedsComp))
-                fruit.GrowTime = fruit.GrowTime / weedsComp.FruitGrowthMultiplier;
+                fruit.GrowTime *= weedsComp.FruitGrowthMultiplier;
 
             fruit.Planter = xeno.Owner;
 
@@ -416,24 +429,24 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     {
         // Check if fruit has already been harvested
         if (fruit.Comp.State == XenoFruitState.Item)
-        {
             return false;
-        }
 
         // Can't harvest without hands
         if (!HasComp<HandsComponent>(user))
+            return false;
+
+        if (!HasComp<MarineComponent>(user) && !_hive.FromSameHive(fruit.Owner, user))
         {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-wrong-hive"), user, user, PopupType.SmallCaution);
             return false;
         }
-
-        // TODO: check for hive as well
 
         // Non-planter xenos can't harvest growing fruit
         if (HasComp<XenoComponent>(user) &&
             !HasComp<XenoFruitPlanterComponent>(user) &&
             fruit.Comp.State == XenoFruitState.Growing)
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-pick-failed-not-mature"), user, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-pick-failed-not-mature", ("fruit", fruit)), user, user, PopupType.SmallCaution);
             return false;
         }
 
@@ -442,7 +455,9 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         {
             NeedHand = true,
             BreakOnMove = true,
-            RequireCanInteract = true
+            RequireCanInteract = true,
+            BlockDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameEvent
         };
 
         if (!_doAfter.TryStartDoAfter(doAfter))
@@ -522,6 +537,11 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         }
 
         // TODO: check for hive
+        if (!_hive.FromSameHive(fruit.Owner, user))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-wrong-hive"), user, user, PopupType.SmallCaution);
+            return false;
+        }
 
         // Check if user is already under the effects of consumed fruit
         if (HasComp<XenoFruitSpeedComponent>(fruit) && HasComp<XenoFruitEffectSpeedComponent>(user))
@@ -579,11 +599,21 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         // Check if target is alive
         if (_mobState.IsDead(target))
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-feed-dead", ("target",target), ("fruit", fruit)), user, user);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-feed-dead", ("target", target), ("fruit", fruit)), user, user);
             return false;
         }
 
         // TODO: check for hive
+        if(!_hive.FromSameHive(fruit.Owner, user))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-wrong-hive"), user, user, PopupType.SmallCaution);
+            return false;
+        }
+        else if(!_hive.FromSameHive(user, target))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-feed-wrong-hive", ("target", target)), user, user, PopupType.SmallCaution);
+            return false;
+        }
 
         // Check if xeno is already under the effects of a fruit
         if (HasComp<XenoFruitSpeedComponent>(fruit) && HasComp<XenoFruitEffectSpeedComponent>(target))
@@ -772,8 +802,13 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     private void OnXenoFruitSpeedRefresh(Entity<XenoFruitEffectSpeedComponent> xeno, ref RefreshMovementSpeedModifiersEvent args)
     {
         var comp = xeno.Comp;
-        var speed = 1 + comp.SpeedModifier.Float();
-        args.ModifySpeed(speed, speed);
+        if (!TryComp<MovementSpeedModifierComponent>(xeno, out var baseSpeed))
+            return;
+
+        var modSpeedWalk = baseSpeed.BaseWalkSpeed + comp.SpeedModifier.Float();
+        var modSpeedSprint = baseSpeed.BaseSprintSpeed + comp.SpeedModifier.Float();
+
+        args.ModifySpeed(modSpeedWalk / baseSpeed.BaseWalkSpeed, modSpeedSprint / baseSpeed.BaseSprintSpeed);
     }
 
     // Shield (unstable fruit)

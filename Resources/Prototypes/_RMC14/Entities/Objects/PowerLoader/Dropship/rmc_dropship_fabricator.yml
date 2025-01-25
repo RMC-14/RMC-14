@@ -30,3 +30,6 @@
         base:
           enum.DropshipFabricatorState.Idle: { state: drone_fab_idle }
           enum.DropshipFabricatorState.Fabricating: { state: drone_fab_active }
+  - type: Anchorable
+    flags:
+    - None

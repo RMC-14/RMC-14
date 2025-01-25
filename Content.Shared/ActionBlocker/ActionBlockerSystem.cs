@@ -3,6 +3,7 @@ using Content.Shared.Body.Events;
 using Content.Shared.Emoting;
 using Content.Shared.Hands;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Movement.Components;
@@ -23,9 +24,14 @@ namespace Content.Shared.ActionBlocker
     {
         [Dependency] private readonly SharedContainerSystem _container = default!;
 
+        private EntityQuery<ComplexInteractionComponent> _complexInteractionQuery;
+
         public override void Initialize()
         {
             base.Initialize();
+
+            _complexInteractionQuery = GetEntityQuery<ComplexInteractionComponent>();
+
             SubscribeLocalEvent<InputMoverComponent, ComponentStartup>(OnMoverStartup);
         }
 
@@ -52,6 +58,15 @@ namespace Content.Shared.ActionBlocker
 
             component.CanMove = !ev.Cancelled;
             return !ev.Cancelled;
+        }
+
+        /// <summary>
+        /// Checks if a given entity is able to do specific complex interactions.
+        /// This is used to gate manipulation to general humanoids. If a mouse shouldn't be able to do something, then it's complex.
+        /// </summary>
+        public bool CanComplexInteract(EntityUid user)
+        {
+            return _complexInteractionQuery.HasComp(user);
         }
 
         /// <summary>

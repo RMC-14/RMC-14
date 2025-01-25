@@ -15,6 +15,9 @@ public sealed partial class XenoCorrosiveAcidDoAfterEvent : DoAfterEvent
     public FixedPoint2 PlasmaCost = 100;
 
     [DataField]
+    public int EnergyCost = 0;
+
+    [DataField]
     public TimeSpan Time = TimeSpan.FromSeconds(225);
 
     [DataField]
@@ -30,6 +33,7 @@ public sealed partial class XenoCorrosiveAcidDoAfterEvent : DoAfterEvent
         Time = ev.Time;
         Dps = ev.Dps;
         ExpendableLightDps = ev.ExpendableLightDps;
+        EnergyCost = ev.EnergyCost;
     }
 
     public override DoAfterEvent Clone()

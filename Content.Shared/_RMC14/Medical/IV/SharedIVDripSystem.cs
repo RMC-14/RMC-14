@@ -224,7 +224,8 @@ public abstract class SharedIVDripSystem : EntitySystem
             BreakOnDamage = true,
             BreakOnHandChange = true,
             BlockDuplicate = true,
-            DuplicateCondition = DuplicateConditions.SameEvent
+            DuplicateCondition = DuplicateConditions.SameEvent,
+            TargetEffect = "RMCEffectHealBusy",
         };
         _doAfter.TryStartDoAfter(doAfter);
     }

@@ -1,3 +1,4 @@
+using Content.Server.Stack;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Map;
@@ -6,6 +7,8 @@ namespace Content.Server.Weapons.Ranged.Systems;
 
 public sealed partial class GunSystem
 {
+    [Dependency] private readonly StackSystem _stack = default!;
+
     protected override void Cycle(EntityUid uid, BallisticAmmoProviderComponent component, MapCoordinates coordinates)
     {
         EntityUid? ent = null;
@@ -23,6 +26,7 @@ public sealed partial class GunSystem
         {
             component.UnspawnedCount--;
             ent = Spawn(component.Proto, coordinates);
+            _stack.SetCount(ent.Value, 1);
             EnsureShootable(ent.Value);
         }
 

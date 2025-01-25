@@ -448,6 +448,8 @@
   components:
   - type: Sprite
     state: 24,2
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: RMCWallLifeboat00
@@ -455,6 +457,8 @@
   components:
   - type: Sprite
     state: 24,3
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: RMCWallLifeboat00
@@ -462,6 +466,8 @@
   components:
   - type: Sprite
     state: 24,4
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: RMCWallLifeboat00
@@ -497,6 +503,8 @@
   components:
   - type: Sprite
     state: 25,2
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: RMCWallLifeboat00
@@ -504,6 +512,8 @@
   components:
   - type: Sprite
     state: 25,3
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: RMCWallLifeboat00
@@ -511,6 +521,8 @@
   components:
   - type: Sprite
     state: 25,4
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: RMCWallLifeboat00
@@ -539,6 +551,8 @@
   components:
   - type: Sprite
     state: 26,2
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: RMCWallLifeboat00
@@ -546,6 +560,8 @@
   components:
   - type: Sprite
     state: 26,3
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: RMCWallLifeboat00
@@ -553,6 +569,8 @@
   components:
   - type: Sprite
     state: 26,4
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: RMCWallLifeboat00
@@ -567,6 +585,8 @@
   components:
   - type: Sprite
     state: window1
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: RMCWallLifeboat00
@@ -574,3 +594,5 @@
   components:
   - type: Sprite
     state: window2
+  - type: Occluder
+    enabled: false

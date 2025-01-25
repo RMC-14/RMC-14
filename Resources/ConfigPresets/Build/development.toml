@@ -2,7 +2,7 @@
 # Straight in-game baby
 lobbyenabled = false
 # Dev map for faster loading & convenience
-map = "CMDev"
+map = "RMCDev"
 role_timers = false
 
 [ghost]

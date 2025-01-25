@@ -26,11 +26,11 @@
     - ActionXenoHide
     - ActionXenoLeap
     tier: 0
-    hudOffset: 0,0.4
+    hudOffset: -0.1,0.1
     contributesToVictory: false
     countedInSlots: false
     unlockAt: 0
-    emoteSounds: null
+    emoteSounds: Larva
   - type: XenoPlasma
     maxPlasma: 10
     plasmaRegenOnWeeds: 0.1
@@ -44,6 +44,7 @@
         density: 185
         mask:
         - SmallMobMask
+        - BarbedBarricade
         layer:
         - SmallMobLayer
   - type: XenoAnimateMovement
@@ -73,12 +74,13 @@
   - type: Clothing
     quickEquip: false
     slots: [mask]
-    sprite: _RMC14/Mobs/Xenonids/Parasite/parasite_mask.rsi
+    sprite: _RMC14/Mobs/Xenonids/Parasite/parasite.rsi
   - type: HideLayerClothing
     slots:
     - Snout
   - type: Speech
-    allowedEmotes: []
+    speechSounds: XenonidLarva
+    allowedEmotes: [ "XenoRoar" ]
   - type: RMCSize
     size: Small
   - type: ParasiteAI
@@ -94,3 +96,11 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: parasite
+  - type: AddAccentClothing
+    accent: ReplacementAccent
+    replacement: mumble
+  - type: Blindfold
+  - type: StandingState
+    downSound: null
+  - type: XenoInhandSprite
+    stateName: parasite

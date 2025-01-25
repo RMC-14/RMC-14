@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Numerics;
+using Content.Client._RMC14.ItemPickup;
 using Content.Client.Animations;
 using Content.Client.Gameplay;
 using Content.Client.Items;
@@ -37,6 +38,7 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly InputSystem _inputSystem = default!;
     [Dependency] private readonly SharedMapSystem _maps = default!;
     [Dependency] private readonly PhysicsSystem _physics = default!;
+    [Dependency] private readonly ItemPickupSystem _itemPickup = default!;
 
     [ValidatePrototypeId<EntityPrototype>]
     public const string HitscanProto = "HitscanEffect";
@@ -185,6 +187,9 @@ public sealed partial class GunSystem : SharedGunSystem
             target = GetNetEntity(screen.GetClickedEntity(mousePos));
 
         if (_player.LocalSession is not { } session)
+            return;
+
+        if (_itemPickup.RecentItemPickUp)
             return;
 
         Log.Debug($"Sending shoot request tick {Timing.CurTick} / {Timing.CurTime}");

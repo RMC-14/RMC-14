@@ -4,6 +4,7 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
   id: CMXenoLurker
   name: Lurker
   description: A beefy, fast alien with sharp claws.
@@ -34,8 +35,9 @@
     - ActionXenoCripplingStrike
     - ActionXenoDevolve
     tier: 2
-    hudOffset: 0,0.16
+    hudOffset: -0.15,0.05
     unlockAt: 540 # 9 minutes
+  - type: XenoLight
   - type: XenoDevolve
     devolvesTo:
     - CMXenoRunner
@@ -53,24 +55,46 @@
   - type: XenoLeap
     plasmaCost: 20
     delay: 0
+    moveDelayTime: 1.5
     knockdownTime: 5
     leapSound: /Audio/_RMC14/Xeno/alien_pounce.ogg
     knockdownRequiresInvisibility: true
+    unrootOnMelee: true
   - type: XenoTurnInvisible
   - type: XenoCripplingStrike
   - type: XenoMeleeSlow
     requiresKnockDown: true
+  - type: XenoClaws
+    clawType: Sharp
   - type: MeleeWeapon
     attackRate: 0.75
     damage:
       groups:
         Brute: 35
-  - type: Tackle # min: 2, max: 6
-    threshold: 4
-    stun: 5
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 42
+  - type: Tackle
+    stunMin: 2
+    stunMax: 6
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.7
     baseSprintSpeed: 5
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.53
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.59
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.375
+      whitelist:
+        components:
+        - XenoHeavy
   - type: RMCXenoDamageVisuals
     prefix: lurker
   - type: TacticalMapIcon

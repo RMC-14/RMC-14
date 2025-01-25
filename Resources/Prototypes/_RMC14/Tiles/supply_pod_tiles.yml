@@ -1,0 +1,25 @@
+﻿- type: tile
+  parent: CMTileBase
+  id: RMCFloorSupplyPadAlpha
+  name: tiles-rmc-supply-pad
+  sprite: /Textures/_RMC14/Tiles/supply_drop/alphadrop.png
+
+- type: tile
+  parent: RMCFloorSupplyPadAlpha
+  id: RMCFloorSupplyPadBravo
+  sprite: /Textures/_RMC14/Tiles/supply_drop/bravodrop.png
+
+- type: tile
+  parent: RMCFloorSupplyPadAlpha
+  id: RMCFloorSupplyPadCharlie
+  sprite: /Textures/_RMC14/Tiles/supply_drop/charliedrop.png
+
+- type: tile
+  parent: RMCFloorSupplyPadAlpha
+  id: RMCFloorSupplyPadDelta
+  sprite: /Textures/_RMC14/Tiles/supply_drop/deltadrop.png
+
+- type: tile
+  parent: RMCFloorSupplyPadAlpha
+  id: RMCFloorSupplyPadEcho
+  sprite: /Textures/_RMC14/Tiles/supply_drop/echodrop.png

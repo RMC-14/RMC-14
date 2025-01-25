@@ -7,9 +7,12 @@ using Content.Server.Power.EntitySystems;
 using Content.Server.Radio.Components;
 using Content.Server.Speech;
 using Content.Server.Speech.Components;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
+using Content.Shared.Power;
 using Content.Shared.Radio;
+using Content.Shared.Chat;
 using Content.Shared.Radio.Components;
 using Robust.Shared.Prototypes;
 
@@ -189,6 +192,9 @@ public sealed class RadioDeviceSystem : EntitySystem
         if (HasComp<RadioSpeakerComponent>(args.Source))
             return; // no feedback loops please.
 
+        if (component.IgnoreXenos && HasComp<XenoComponent>(args.Source))
+            return;
+
         if (_recentlySent.Add((args.Message, args.Source)))
             _radio.SendRadioMessage(args.Source, args.Message, _protoMan.Index<RadioChannelPrototype>(component.BroadcastChannel), uid);
     }
@@ -212,10 +218,10 @@ public sealed class RadioDeviceSystem : EntitySystem
 
         var name = Loc.GetString("speech-name-relay",
             ("speaker", Name(uid)),
-            ("originalName", nameEv.Name));
+            ("originalName", nameEv.VoiceName));
 
         // log to chat so people can identity the speaker/source, but avoid clogging ghost chat if there are many radios
-        _chat.TrySendInGameICMessage(uid, args.Message, InGameICChatType.Whisper, ChatTransmitRange.GhostRangeLimit, nameOverride: name, checkRadioPrefix: false);
+        _chat.TrySendInGameICMessage(uid, args.Message, InGameICChatType.Whisper, ChatTransmitRange.GhostRangeLimit, nameOverride: name, checkRadioPrefix: false, ignoreXenos: true);
     }
 
     private void OnIntercomEncryptionChannelsChanged(Entity<IntercomComponent> ent, ref EncryptionChannelsChangedEvent args)

@@ -19,6 +19,34 @@
 
 - type: entity
   parent: RMCBaseGunCase
+  id: RMCCaseXM88
+  name: XM88 heavy rifle case
+  description: A gun case containing the XM88 Heavy Rifle, a prototype weapon designed for use against heavily armored infantry targets and light vehicles. Contains an ammunition belt, two boxes of ammunition, the XS-9 Targeting Relay attachment, and the stock for the rifle.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,11,1
+    whitelist:
+      components:
+      - Gun
+      tags:
+      - RMCAttachmentXM88Stock
+      - RMCAttachmentXS-9
+      - RMCBox458SOCOM
+      - RMCBox458SOCOM
+      - RMCBeltSOCOM
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleXM88
+    - id: RMCAttachmentXM88Stock
+    - id: RMCAttachmentXS-9
+    - id: RMCBox458SOCOM
+    - id: RMCBox458SOCOM
+    - id: RMCM300SOCOMBelt
+
+- type: entity
+  parent: RMCBaseGunCase
   id: RMCMK80Case
   name: MK80 pistol case
   description: A gun case containing the MK80. Comes with two magazines.
@@ -44,7 +72,7 @@
   description: A gun case containing the M54CE2 heavy assault rifle. You can get additional ammunition at requisitions.
   components:
   - type: Storage
-    maxItemSize: Huge
+    maxItemSize: Ginormous
     grid:
     - 0,0,7,1
     whitelist:
@@ -58,5 +86,118 @@
     - id: WeaponRifleM54CE2
     - id: CMMagazineRifleM54CE2
     - id: CMMagazineRifleM54CE2 # Replace with a holotargeting mag once that ammo is implemented.
-    - id: RMCAttachmentRailFlashlight
-    - id: RMCAttachmentBipod
+
+- type: entity
+  parent: BaseStorageItem
+  id: RMCD18Case
+  name: D18 pistol case
+  description: A fairly decorated and ceremonial box containing a CLF D18 and a single additional magazine for it. I guess those CLF folk really care about their craftsmanship and prose rather than practicality, eh?
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    noRot: false
+    sprite: _RMC14/Objects/Storage/D18case.rsi # Needs proper 'closed' Sprites, Open/Closed are identical atm
+    layers:
+    - state: closed
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/D18case.rsi
+    state: closed
+  - type: Storage
+    maxItemSize: Tiny
+    grid:
+    - 0,0,1,1
+    whitelist:
+      tags:
+      - RMCWeaponPistolD18
+      - RMCMagazinePistolD18
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolD18
+    - id: RMCMagazinePistolD18
+
+- type: entity
+  parent: RMCBaseGunCase
+  id: RMCXM51Case
+  name: XM51 breaching scattergun case
+  description: A gun case containing the XM51 Breaching Scattergun. Comes with two spare magazines, two spare shell boxes, an optional stock and a belt to holster the weapon.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,9,1
+    whitelist:
+      tags:
+      - RMCAttachmentXM51Stock
+      - RMCWeaponShotgunXM51
+      - RMCMagazineShotgunXM51
+      - RMCBoxShotgunBreaching
+      - RMCXM51Holster
+  - type: StorageFill
+    contents:
+    - id: RMCAttachmentXM51Stock
+    - id: RMCWeaponShotgunXM51
+    - id: RMCMagazineShotgunXM51
+      amount: 2
+    - id: RMCBoxShotgunBreaching
+      amount: 2
+    - id: RMCBeltXM51
+
+- type: entity
+  parent: RMCBaseGunCase
+  id: RMCMOU53Case
+  name: MOU53 shotgun case
+  description: A gun case containing the MOU53 shotgun. It does come loaded, but you'll still have to find ammunition as you go.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,2,1
+    whitelist:
+      tags:
+      - RMCWeaponShotgunMOU53
+      - RMCAttachmentMOU53Stock
+  - type: StorageFill
+    contents:
+    - id: WeaponShotgunMOU53
+    - id: RMCAttachmentMOU53Stock
+
+- type: entity
+  parent: RMCBaseGunCase
+  id: RMCM54CMK1Case
+  name: M54C assault rifle MK1 case
+  description: A gun case containing the M54C assault rifle MK1. It can only use proprietary MK1 magazines.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,5,1
+    whitelist:
+      tags:
+      - RMCWeaponRifleM54CMK1
+      - CMMagazineRifleM54CMK1
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleM54CMK1
+    - id: CMMagazineRifleM54CMK1
+    - id: CMMagazineRifleM54CMK1
+
+- type: entity
+  parent: RMCBaseGunCase
+  id: RMCM54CMK1CaseAP
+  name: M54C assault rifle MK1 AP case
+  description: A gun case containing the M54C assault rifle MK1 loaded with AP rounds. It can only use proprietary MK1 magazines.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,5,1
+    whitelist:
+      tags:
+      - RMCWeaponRifleM54CMK1
+      - CMMagazineRifleM54CMK1AP
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleM54CMK1AP
+    - id: CMMagazineRifleM54CMK1AP
+    - id: CMMagazineRifleM54CMK1AP

@@ -1,14 +1,17 @@
 ﻿<Document>
 
-  #New player guide
+  # New player guides
 
   - You can use the examine key (Shift + left mouse by default) to examine any entities in the guidebook.
   - Make sure to set up your keybinds the way you like, and check out RMC14 specific keybinds! CM13 players will find this very helpful.
 
-  ##Marine
+  ## Marine
   - [textlink="Your first day as a rifleman!" link="CMGuideRoleRifleman"]
+  - [textlink="Communications towers and senor towers" link="RMCGuideCommunicationsTowers"]
+  - [textlink="Combat Technician" link="RMCGuideRoleCombatTechnician"]
+  - [textlink="Maintenance Technician" link="RMCGuideRoleMaintenanceTechnician"]
 
-  ##Xeno
+  ## Xeno
   - [textlink="So you've just been born into the hive! Now what?" link="CMGuideRoleDrone"]
 
 </Document>

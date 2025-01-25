@@ -11,6 +11,7 @@
   children:
   - RMCGuideNewPlayer
   - RMCMedical
+  - RMCRequisitions
 
 - type: guideEntry
   parent: RMC
@@ -20,6 +21,9 @@
   children:
   - CMGuideRoleRifleman
   - CMGuideRoleDrone
+  - RMCGuideRoleCombatTechnician
+  - RMCGuideCommunicationsTowers
+  - RMCGuideRoleMaintenanceTechnician
 
 - type: guideEntry
   parent: RMC
@@ -37,9 +41,37 @@
 
 - type: guideEntry
   parent: RMC
+  id: RMCGuideRoleCombatTechnician
+  priority: 2
+  name: "Combat Technician"
+  text: "/ServerInfo/Guidebook/_RMC14/NewPlayerGuide/RMCGuideRoleCombatTechnician.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideCommunicationsTowers
+  priority: 3
+  name: "Communications Towers Guide"
+  text: "/ServerInfo/Guidebook/_RMC14/NewPlayerGuide/RMCGuideCommunicationsTowers.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideRoleMaintenanceTechnician
+  priority: 4
+  name: "Maintenance Technician"
+  text: "/ServerInfo/Guidebook/_RMC14/NewPlayerGuide/RMCGuideRoleMaintenanceTechnician.xml"
+
+- type: guideEntry
+  parent: RMC
   id: RMCMedical
   priority: 2
   name: "Medical"
   text: "/ServerInfo/Guidebook/_RMC14/Medical/RMCMedical.xml"
   children:
   - CMChemicals
+
+- type: guideEntry
+  parent: RMC
+  id: RMCRequisitions
+  priority: 3
+  name: "Requisitions"
+  text: "/ServerInfo/Guidebook/_RMC14/RMCRequisitions.xml"

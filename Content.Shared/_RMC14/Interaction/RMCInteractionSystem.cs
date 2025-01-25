@@ -1,4 +1,5 @@
 ﻿using Content.Shared.Interaction.Events;
+using Content.Shared.Light.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 
@@ -17,6 +18,9 @@ public sealed class RMCInteractionSystem : EntitySystem
     private void OnBlacklistInteractionAttempt(Entity<InteractedBlacklistComponent> ent, ref GettingInteractedWithAttemptEvent args)
     {
         if (args.Cancelled || ent.Comp.Blacklist == null)
+            return;
+
+        if (TryComp(ent, out HandheldLightComponent? handheldLight) && handheldLight.Activated)
             return;
 
         if (_whitelist.IsValid(ent.Comp.Blacklist, args.Uid))

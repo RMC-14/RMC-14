@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
@@ -23,6 +24,7 @@ public sealed class XenoFlingSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
 
     public override void Initialize()
     {
@@ -43,13 +45,15 @@ public sealed class XenoFlingSystem : EntitySystem
         if (attempt.Cancelled)
             return;
 
-        args.Handled = true;
-
         if (_net.IsServer)
+        {
+            args.Handled = true;
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
+        }
+
 
         var targetId = args.Target;
-        _rmcPulling.TryStopUserPullIfPulling(xeno, targetId);
+        _rmcPulling.TryStopAllPullsFromAndOn(targetId);
 
         var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage);
         if (damage?.GetTotal() > FixedPoint2.Zero)
@@ -61,13 +65,17 @@ public sealed class XenoFlingSystem : EntitySystem
         var origin = _transform.GetMapCoordinates(xeno);
         var target = _transform.GetMapCoordinates(targetId);
         var diff = target.Position - origin.Position;
-        var length = diff.Length();
-        diff *= xeno.Comp.Range / 3 / length;
+        diff = diff.Normalized() * xeno.Comp.Range;
 
-        _stun.TryParalyze(targetId, xeno.Comp.ParalyzeTime, true);
-        _throwing.TryThrow(targetId, diff, 10);
+        _rmcMelee.DoLunge(xeno, targetId);
+
 
         if (_net.IsServer)
+        {
+            _stun.TryParalyze(targetId, xeno.Comp.ParalyzeTime, true);
+            _throwing.TryThrow(targetId, diff, 10);
+
             SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());
+        } 
     }
 }

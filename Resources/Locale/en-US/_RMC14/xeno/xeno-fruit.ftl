@@ -89,3 +89,7 @@ rmc-xeno-fruit-examine-grown = [color=darkgreen]fully grown[/color]
 # UI text
 rmc-xeno-fruit-ui-title = Choose Resin Fruit
 rmc-xeno-fruit-ui-count = Planted fruit: {$count}/{$max}
+
+# Not-same hive
+rmc-xeno-fruit-wrong-hive = This isn't from our hive!
+rmc-xeno-fruit-feed-wrong-hive = {THE($target)} isn't from our hive!

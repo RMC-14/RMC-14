@@ -39,4 +39,10 @@ public sealed partial class XenoWeedsComponent : Component
 
     [DataField, AutoNetworkedField]
     public float FruitGrowthMultiplier = 1.0f;
+
+    [DataField, AutoNetworkedField]
+    public int Level = 1;
+
+    [DataField, AutoNetworkedField]
+    public bool BlockOtherWeeds;
 }

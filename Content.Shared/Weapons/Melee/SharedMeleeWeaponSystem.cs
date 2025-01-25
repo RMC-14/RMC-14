@@ -97,7 +97,10 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
     private void OnMeleeShotAttempted(EntityUid uid, MeleeWeaponComponent comp, ref ShotAttemptedEvent args)
     {
-        if (comp.NextAttack > Timing.CurTime)
+        if (!TryComp<GunComponent>(uid, out var gun))
+            return;
+
+        if (gun.MeleeCooldownOnShoot && comp.NextAttack > Timing.CurTime)
             args.Cancel();
     }
 
@@ -222,7 +225,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
             return new DamageSpecifier();
 
         var ev = new GetMeleeDamageEvent(uid, new(component.Damage), new(), user, component.ResistanceBypass);
-        RaiseLocalEvent(uid, ref ev);
+        RaiseLocalEvent(uid, ref ev, true);
 
         return DamageSpecifier.ApplyModifierSets(ev.Damage, ev.Modifiers);
     }
@@ -426,7 +429,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                     break;
                 case DisarmAttackEvent disarm:
                     if (!DoDisarm(user, disarm, weaponUid, weapon, session))
-                        return false;
+                        weapon.NextAttack = curTime + TimeSpan.FromSeconds(0.6);
 
                     animation = weapon.Animation;
                     break;
@@ -537,7 +540,8 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         }
 
-        _meleeSound.PlayHitSound(target.Value, user, GetHighestDamageSound(modifiedDamage, _protoManager), hitEvent.HitSoundOverride, component);
+        if (damageResult != null)
+        _meleeSound.PlayHitSound(target.Value, user, GetHighestDamageSound(damageResult, _protoManager), hitEvent.HitSoundOverride, component);
 
         if (damageResult?.GetTotal() > FixedPoint2.Zero)
         {
@@ -728,6 +732,9 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
     public static string? GetHighestDamageSound(DamageSpecifier modifiedDamage, IPrototypeManager protoManager)
     {
+        if (modifiedDamage.GetTotal() <= FixedPoint2.Zero)
+            return null;
+
         var groups = modifiedDamage.GetDamagePerGroup(protoManager);
 
         // Use group if it's exclusive, otherwise fall back to type.

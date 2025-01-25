@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Client.Gameplay;
+using Content.Shared._RMC14.Input;
 using Content.Shared._RMC14.Tackle;
 using Content.Shared.CombatMode;
 using Content.Shared.Effects;
@@ -74,8 +75,9 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
 
         var useDown = _inputSystem.CmdStates.GetState(EngineKeyFunctions.Use);
         var altDown = _inputSystem.CmdStates.GetState(EngineKeyFunctions.UseSecondary);
+        var wideDown = _inputSystem.CmdStates.GetState(CMKeyFunctions.CMXenoWideSwing);
 
-        if (weapon.AutoAttack || useDown != BoundKeyState.Down && altDown != BoundKeyState.Down)
+        if (weapon.AutoAttack || useDown != BoundKeyState.Down && altDown != BoundKeyState.Down && wideDown != BoundKeyState.Down)
         {
             if (weapon.Attacking)
             {
@@ -125,7 +127,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
                     break;
 
                 case AltFireAttackType.Disarm:
-                    ClientDisarm(entity, mousePos, coordinates);
+                    ClientDisarm(entity, mousePos, coordinates, weapon);
                     break;
             }
 
@@ -138,7 +140,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
             // If it's an unarmed attack then do a disarm
             if (weapon.AltDisarm && weaponUid == entity)
             {
-                ClientDisarm(entity, mousePos, coordinates);
+                ClientDisarm(entity, mousePos, coordinates, weapon);
                 return;
             }
 
@@ -149,6 +151,9 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
         // Light attack
         if (useDown == BoundKeyState.Down)
             ClientLightAttack(entity, mousePos, coordinates, weaponUid, weapon);
+        // Xeno WidePrimary
+        if (wideDown == BoundKeyState.Down)
+            ClientHeavyAttack(entity, coordinates, weaponUid, weapon);
     }
 
     protected override bool InRange(EntityUid user, EntityUid target, float range, ICommonSession? session)
@@ -230,8 +235,13 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
         RaisePredictiveEvent(new HeavyAttackEvent(GetNetEntity(meleeUid), entities.GetRange(0, Math.Min(MaxTargets, entities.Count)), GetNetCoordinates(coordinates)));
     }
 
-    private void ClientDisarm(EntityUid attacker, MapCoordinates mousePos, EntityCoordinates coordinates)
+    private void ClientDisarm(EntityUid attacker, MapCoordinates mousePos, EntityCoordinates coordinates, MeleeWeaponComponent meleeComponent)
     {
+        var attackerPos = TransformSystem.GetMapCoordinates(attacker);
+
+        if (mousePos.MapId != attackerPos.MapId || (attackerPos.Position - mousePos.Position).Length() > meleeComponent.Range)
+            return;
+
         EntityUid? target = null;
 
         if (_stateManager.CurrentState is GameplayStateBase screen)

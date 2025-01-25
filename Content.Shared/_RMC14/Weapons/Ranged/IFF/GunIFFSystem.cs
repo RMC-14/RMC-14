@@ -1,8 +1,7 @@
-﻿using Content.Shared._RMC14.Attachable.Systems;
+using Content.Shared._RMC14.Attachable.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
 using Content.Shared.Inventory;
-using Content.Shared.NPC.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Containers;
 using Robust.Shared.Physics.Events;
@@ -15,12 +14,10 @@ public sealed class GunIFFSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
 
-    private EntityQuery<NpcFactionMemberComponent> _npcFactionMemberQuery;
     private EntityQuery<UserIFFComponent> _userIFFQuery;
 
     public override void Initialize()
     {
-        _npcFactionMemberQuery = GetEntityQuery<NpcFactionMemberComponent>();
         _userIFFQuery = GetEntityQuery<UserIFFComponent>();
 
         SubscribeLocalEvent<UserIFFComponent, GetIFFFactionEvent>(OnUserIFFGetFaction);
@@ -97,6 +94,17 @@ public sealed class GunIFFSystem : EntitySystem
             args.Cancelled = true;
     }
 
+    public bool TryGetUserFaction(Entity<UserIFFComponent?> user, out EntProtoId<IFFFactionComponent> faction)
+    {
+        faction = default;
+        if (!_userIFFQuery.Resolve(user, ref user.Comp, false) ||
+            user.Comp.Faction is not { } userFaction)
+            return false;
+
+        faction = userFaction;
+        return true;
+    }
+
     public bool IsInFaction(Entity<UserIFFComponent?> user, EntProtoId<IFFFactionComponent> faction)
     {
         if (!_userIFFQuery.Resolve(user, ref user.Comp, false))
@@ -112,6 +120,15 @@ public sealed class GunIFFSystem : EntitySystem
         user.Comp = EnsureComp<UserIFFComponent>(user);
         user.Comp.Faction = faction;
         Dirty(user);
+    }
+
+    public void SetIFFState(EntityUid ent, bool enabled)
+    {
+        if (TryComp<GunIFFComponent>(ent, out var comp))
+        {
+            comp.Enabled = enabled;
+            Dirty(ent, comp);
+        }
     }
 
     public void GiveAmmoIFF(EntityUid gun, ref AmmoShotEvent args, bool intrinsic, bool enabled)

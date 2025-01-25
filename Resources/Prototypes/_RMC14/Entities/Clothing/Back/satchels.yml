@@ -22,10 +22,17 @@
   description: A specially-designed smock with pockets for all your sniper needs.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/smock.rsi
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/jungle-classic.rsi
   - type: Storage
     grid:
     - 0,0,20,1 # 21, Satchel but with backpack capacity
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/jungle-classic.rsi
+      Desert: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/snow-urban-desert.rsi
+      Snow: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/snow-urban-desert.rsi
+      Classic: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/jungle-classic.rsi
+      Urban: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/snow-urban-desert.rsi
 
 - type: entity
   parent: CMSatchel
@@ -55,8 +62,16 @@
     whitelist:
       components:
       - ScoutWhitelist
-    cloakSound: /Audio/_RMC14/Effects/Cloak/cloak_scout_on.ogg
-    uncloakSound: /Audio/_RMC14/Effects/Cloak/cloak_scout_off.ogg
+    cloakSound:
+      path: /Audio/_RMC14/Effects/Cloak/cloak_scout_on.ogg
+      params:
+        variation: 0.09
+    uncloakSound:
+      path: /Audio/_RMC14/Effects/Cloak/cloak_scout_off.ogg
+      params:
+        variation: 0.09
+  - type: Corrodible
+    isCorrodible: false
 
 - type: entity
   parent: CMSatchel
@@ -92,7 +107,14 @@
   description: A heavy-duty satchel carried by some Marine soldiers and support personnel.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/standard.rsi
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/standard/jungle-desert-classic.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Back/Satchels/Marines/standard/jungle-desert-classic.rsi
+      Desert: _RMC14/Objects/Clothing/Back/Satchels/Marines/standard/jungle-desert-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Back/Satchels/Marines/standard/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Back/Satchels/Marines/standard/jungle-desert-classic.rsi
+      Urban: _RMC14/Objects/Clothing/Back/Satchels/Marines/standard/snow-urban.rsi
 
 - type: entity
   parent: CMSatchelMarine
@@ -101,10 +123,17 @@
   description: A heavy-duty IMP based backpack that can be slung around the front or to the side, and can quickly be accessed with only one hand. Usually issued to Marine intelligence officers.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/big.rsi
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/big/jungle-desert-classic.rsi
   - type: Storage
     grid:
     - 0,0,19,1 # 20
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Back/Satchels/Marines/big/jungle-desert-classic.rsi
+      Desert: _RMC14/Objects/Clothing/Back/Satchels/Marines/big/jungle-desert-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Back/Satchels/Marines/big/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Back/Satchels/Marines/big/jungle-desert-classic.rsi
+      Urban: _RMC14/Objects/Clothing/Back/Satchels/Marines/big/snow-urban.rsi
 
 - type: entity
   parent: CMSatchelMarineIntel
@@ -123,7 +152,14 @@
   description: A heavy-duty satchel used by Marine medics. It sacrifices capacity for usability. A small patch is sewn to the top flap.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/medic.rsi
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/medic/jungle-desert-classic.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Back/Satchels/Marines/medic/jungle-desert-classic.rsi
+      Desert: _RMC14/Objects/Clothing/Back/Satchels/Marines/medic/jungle-desert-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Back/Satchels/Marines/medic/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Back/Satchels/Marines/medic/jungle-desert-classic.rsi
+      Urban: _RMC14/Objects/Clothing/Back/Satchels/Marines/medic/snow-urban.rsi
 
 - type: entity
   parent: CMSatchelMarine
@@ -132,7 +168,14 @@
   description: A heavy-duty chestrig used by some Marine technicians.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/techi.rsi
+    sprite: _RMC14/Objects/Clothing/Back/Chestrigs/tech/jungle-classic.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Back/Chestrigs/tech/jungle-classic.rsi
+      Desert: _RMC14/Objects/Clothing/Back/Chestrigs/tech/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Back/Chestrigs/tech/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Back/Chestrigs/tech/jungle-classic.rsi
+      Urban: _RMC14/Objects/Clothing/Back/Chestrigs/tech/snow-urban.rsi
 
 - type: entity
   parent: CMSatchel
@@ -212,3 +255,67 @@
     maxItemSize: Normal
     grid:
     - 0,0,20,1 # same as backpack, up to 7 normal size rockets
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelBureauObserverFill
+  suffix: Bureau Observer, Filled
+  components:
+  - type: StorageFill
+    contents: # TODO RMC14 film cartridge
+    - id: RMCBinoculars
+    - id: CMPaper
+    - id: CMFolderWhite
+    - id: CMPenClicky
+    - id: RMCRadioHandheldColonyOff
+    - id: CMClipboard # TODO RMC14 tape recorder
+    - id: CMCrowbar
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelICBLiaisonFill
+  suffix: Interstellar Commerce Bureau Liaison, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPenClicky
+    - id: CMPaper
+    - id: CMPaper
+    - id: RMCRadioHandheldColonyOff
+    - id: CMCrowbar
+
+- type: entity
+  parent: CMSatchel
+  id: RMCBackpackRTO
+  name: UNMC radio telephone pack
+  description: A heavy-duty pack, used for telecommunications between central command. Commonly carried by RTOs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto.rsi
+    layers:
+    - state: icon
+      map: [ "base" ]
+  - type: CMStorageVisualizer
+    storageClosed: null
+    storageOpen: null
+  - type: RotaryPhone
+    category: Marine
+  - type: RotaryPhoneBackpack
+  - type: UserInterface
+    interfaces:
+      enum.TelephoneUiKey.Key:
+        type: TelephoneBui
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: GenericVisualizer
+    visuals:
+      enum.RotaryPhoneLayers.Layer:
+        base:
+          Base: { state: icon }
+          Ring: { state: ring }
+          Ear: { state: ear }
+  - type: Undisposable

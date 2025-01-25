@@ -22,15 +22,15 @@
     - name: Gun Attachments
       choices: { CMGunAttachments: 1 }
       entries:
-#      - id: RMCAttachmentLaserSight # TODO RMC14 when other pistols are available here
-#      - id: RMCAttachmentS5RedDotSight # Uncomment when accuracy is implemented.
+      - id: RMCAttachmentLaserSight
+      - id: RMCAttachmentS5RedDotSight
       - id: RMCAttachmentS6ReflexSight
     - name: Explosives
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
         points: 30
-    #- id: CMM40HIDPIncendiaryPacketx3
-    #  points: 30
+      - id: RMCPacketGrenadeIncendiaryFilled
+        points: 30
     #- id: CMM40HPDPWhitePhosphorusPacketx3
     #  points: 30
       - id: RMCPacketGrenadeSmokeFilled
@@ -132,8 +132,8 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-     #- id: CMM802SmartGunOperatorSidearmBeltFilled
-      - id: CMBeltSmartGunOperatorFilled
+      - id: CMBeltSmartGunOperator
+      - id: RMCBeltSmartGunOperatorPistolFilled
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
@@ -163,11 +163,12 @@
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbingBlack
-    #- id: CMShoulderHolster
       - id: CMWebbing
       - id: CMWebbingPouch
+      - id: CMWebbingHolster
     - name: Mask
       choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+      - id: RMCMaskRebreather

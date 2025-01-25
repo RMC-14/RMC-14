@@ -17,6 +17,10 @@
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: correspondent
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_civillian
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -24,6 +28,8 @@
       skills:
         RMCSkillFirearms: 0
         RMCSkillVehicles: 1
+    - type: JobPrefix
+      prefix: "PRESS" # TODO RMC14 combat correspondent is CC
   hasIcon: false
 
 - type: startingGear
@@ -36,7 +42,7 @@
     ears: CMHeadsetReporter
     #    belt: CMCamera TODO RMC14
     pocket1: RMCPouchGeneralLarge
-    pocket2: MicrophoneInstrument
+    pocket2: RMCCorrespondentMicrophone
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -53,3 +59,4 @@
 
 - type: playTimeTracker
   id: CMJobCorrespondent
+  isHumanoid: true

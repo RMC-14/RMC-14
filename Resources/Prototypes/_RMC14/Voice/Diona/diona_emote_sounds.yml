@@ -1,7 +1,7 @@
 - type: emoteSounds
-  parent: [RMCBaseMaleSounds, UnisexDiona]
+  parent: [UnisexDiona, RMCMaleHuman]
   id: RMCMaleDiona
 
 - type: emoteSounds
-  parent: [RMCBaseFemaleSounds, UnisexDiona]
+  parent: [UnisexDiona, RMCFemaleHuman]
   id: RMCFemaleDiona

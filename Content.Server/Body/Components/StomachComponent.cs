@@ -39,7 +39,7 @@ namespace Content.Server.Body.Components
         ///     transferred to <see cref="BloodstreamComponent"/>
         /// </summary>
         [DataField]
-        public TimeSpan DigestionDelay = TimeSpan.FromSeconds(20);
+        public TimeSpan DigestionDelay = TimeSpan.FromSeconds(10);
 
         /// <summary>
         ///     A whitelist for what special-digestible-required foods this stomach is capable of eating.

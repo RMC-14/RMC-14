@@ -28,19 +28,24 @@
         RMCSkillConstruction: 1
         RMCSkillEndurance: 2
         RMCSkillFirearms: 1
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetCivilian
+    - type: Survivor
+    - type: MotionDetectorTracked
+    - type: UserIFF
+      faction: FactionSurvivor
   hasIcon: false
-  hidden: true # TODO RMC14
 
 - type: startingGear
   id: RMCGearSurvivor
   equipment:
     jumpsuit: CMJumpsuitColonist
-    back: CMSatchel
-    shoes: CMBootsBlack
+    back: RMCSatchelCivilianFill
+    shoes: RMCShoesBlack
     id: CMIDCardColonist
     ears: CMHeadsetColony
-    pocket1: RMCM5Bayonet
-    pocket2: RMCFlashlight
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchGeneral
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -57,3 +62,4 @@
 
 - type: playTimeTracker
   id: CMJobSurvivor
+  isHumanoid: true

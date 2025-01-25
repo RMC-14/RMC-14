@@ -1,9 +1,23 @@
 - type: entity
-  parent: hydroponicsTray
+  parent: hydroponicsSoil
   name: hydroponics tray
   id: CMHydroponicsTray
   description: Used for growing plants.
   components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.1"
+        density: 190
+        hard: true
+        mask:
+        - MachineMask
+        layer:
+        - BulletImpassable
+  - type: Anchorable
+  - type: Pullable
   - type: Destructible
     thresholds:
     - trigger:
@@ -34,6 +48,40 @@
     - state: over_harvest3
       map: [ "harvest_alert" ]
       visible: false
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PlantHolderVisuals.HealthLight:
+        health_alert:
+          True: { visible: true }
+          False: { visible: false }
+      enum.PlantHolderVisuals.WaterLight:
+        water_alert:
+          True: { visible: true }
+          False: { visible: false }
+      enum.PlantHolderVisuals.NutritionLight:
+        nutri_alert:
+          True: { visible: true }
+          False: { visible: false }
+      enum.PlantHolderVisuals.AlertLight:
+        undefined_alert:
+          True: { visible: true }
+          False: { visible: false }
+      enum.PlantHolderVisuals.HarvestLight:
+        harvest_alert:
+          True: { visible: true }
+          False: { visible: false }
+  - type: PlantHolder
+    drawWarnings: true
+  - type: AmbientSound
+    volume: -9
+    range: 5
+    sound:
+      path: /Audio/Ambience/Objects/flowing_water_open.ogg
+  - type: GuideHelp
+    guides:
+    - Botany
+    - Chemicals
   - type: InteractedBlacklist
     blacklist:
       components:

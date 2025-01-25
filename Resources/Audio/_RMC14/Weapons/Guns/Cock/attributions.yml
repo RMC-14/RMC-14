@@ -1,3 +1,8 @@
+- files: ["gun_pistol_cocked.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/8086109b2dbf8d1d98aec106a07d86b65fe63e1b/sound/weapons/gun_pistol_cocked.ogg"
+
 - files: ["m79_break_open.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"

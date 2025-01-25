@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/46d1d000640006d99b3ea99475fee4ba96890702/icons/obj/structures/props/96x96.dmi, https://github.com/cmss13-devs/cmss13/blob/46d1d000640006d99b3ea99475fee4ba96890702/icons/obj/structures/props/coagulation_arm.dmi",
+  "size": {
+    "x": 96,
+    "y": 96
+  },
+  "states": [
+    {
+      "name": "sedimentation"
+    },
+    {
+      "name": "filtration"
+    },
+    {
+      "name": "disinfection"
+    },
+    {
+      "name": "distribution"
+    },
+    {
+      "name": "distribution-damaged"
+    },
+    {
+      "name": "sedimentation_A_1"
+    },
+    {
+      "name": "coagulation_arm"
+    }
+  ]
+}

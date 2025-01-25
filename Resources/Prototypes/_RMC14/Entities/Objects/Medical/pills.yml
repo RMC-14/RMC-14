@@ -44,6 +44,10 @@
   - type: Tag
     tags:
     - Pill
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 # TODO RMC14 these need to have a random state per round
 - type: entity

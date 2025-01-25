@@ -24,6 +24,10 @@
   - type: Construction
     graph: CMRods
     node: CMRodMetal
+  - type: FloorTile
+    outputs:
+    - CMFloorSteelPlanetEngine
+    #RMC TODO: Lattice
 
 - type: entity
   parent: CMRodMetal

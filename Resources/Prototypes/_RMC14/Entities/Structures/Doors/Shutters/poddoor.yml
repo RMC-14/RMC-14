@@ -1,8 +1,8 @@
 ﻿- type: entity
-  parent: RMCShutterBase
-  id: RMCPodDoor
+  parent: RMCShutterBaseIndestructible
+  id: RMCPodDoorIndestructible
   name: podlock
-  description: That looks like it doesn't open easily. Maybe look for a button or use a breaching charge?
+  description: That looks like it doesn't open easily.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Shutters/poddoor.rsi
@@ -22,7 +22,7 @@
         - FullTileLayer
   - type: AccessReader
   - type: Door
-    canPry: false
+    canPry: false # TODO RMC14
     crushDamage:
       types:
         Blunt: 25 # yowch
@@ -45,6 +45,16 @@
   - type: RMCPodDoor
 
 - type: entity
+  parent:
+  - RMCPodDoorIndestructible
+  - RMCShutterBase
+  id: RMCPodDoor
+  description: That looks like it doesn't open easily. Maybe look for a button or use a breaching charge?
+  components:
+  - type: Door
+    canPry: false # TODO RMC14
+
+- type: entity
   parent: RMCPodDoor
   id: RMCPodDoorAlmayer
   components:
@@ -52,6 +62,24 @@
     sprite: _RMC14/Structures/Doors/Shutters/Almayer/poddoor.rsi
   - type: MinimapColor
     color: "#451e5eb8"
+
+- type: entity
+  parent: RMCPodDoorIndestructible
+  id: RMCPodDoorAlmayerIndestructible
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Shutters/Almayer/poddoor.rsi
+  - type: MinimapColor
+    color: "#451e5eb8"
+
+- type: entity
+  parent: RMCPodDoorAlmayer
+  id: RMCPodDoorAlmayerLocked
+  description: That looks like it doesn't open easily. Maybe look for a button or use a breaching charge?
+  suffix: Locked
+  components:
+  - type: Door
+    canPry: false
 
 - type: entity
   parent: RMCPodDoorAlmayer

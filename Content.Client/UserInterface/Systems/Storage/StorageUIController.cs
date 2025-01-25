@@ -27,7 +27,6 @@ public sealed class StorageUIController : UIController, IOnSystemChanged<Storage
     [Dependency] private readonly IEntityManager _entity = default!;
     [Dependency] private readonly IInputManager _input = default!;
     [Dependency] private readonly IUserInterfaceManager _ui = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
 
     private readonly DragDropHelper<ItemGridPiece> _menuDragHelper;
     public StorageContainer? _container;
@@ -203,12 +202,13 @@ public sealed class StorageUIController : UIController, IOnSystemChanged<Storage
             keyEvent.Handle();
     }
 
-    private void OnStorageUpdated(Entity<StorageComponent> uid)
+    private void OnStorageUpdated(Entity<StorageComponent>? uid)
     {
-        if (!_timing.IsFirstTimePredicted)
-            return;
+        if (uid == null)
+            _container?.BuildItemPieces();
 
-        if (_container?.StorageEntity != uid)
+        return; // RMC14
+        if (_container?.StorageEntity != uid.Value)
             return;
 
         _container.BuildItemPieces();
@@ -319,7 +319,6 @@ public sealed class StorageUIController : UIController, IOnSystemChanged<Storage
             }
 
             _menuDragHelper.EndDrag();
-            _container?.BuildItemPieces();
         }
         else if (control.Has((args.PointerLocation.Position - control.GlobalPixelPosition) / control.UIScale))
         {

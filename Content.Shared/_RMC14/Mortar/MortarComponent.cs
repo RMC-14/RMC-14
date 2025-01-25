@@ -73,7 +73,7 @@ public sealed partial class MortarComponent : Component
     public SoundSpecifier? ReloadSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/gun_mortar_reload.ogg");
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier? FireSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/gun_mortar_fire.ogg");
+    public SoundSpecifier? FireSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/gun_mortar_fire.ogg", AudioParams.Default.AddVolume(4));
 
     [DataField, AutoNetworkedField]
     public TimeSpan? Cooldown;

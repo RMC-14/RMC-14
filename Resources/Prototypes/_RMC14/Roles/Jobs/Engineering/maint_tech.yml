@@ -12,7 +12,11 @@
   - MaintTech
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: engi
+    state: mt
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_shipside
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -22,19 +26,17 @@
         RMCSkillConstruction: 3
         RMCSkillEngineer: 3
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillPowerLoader: 2
+    - type: JobPrefix
+      prefix: "MT"
 
 - type: startingGear
   id: CMGearMaintTech
   equipment:
     jumpsuit: CMJumpsuitMaintTech
-    back: CMSatchelMarineTech
     shoes: CMBootsBlack
-    gloves: CMHandsInsulated
     id: CMIDCardMaintTech
-    ears: CMHeadsetEngineer
-    #    belt: TODO RMC14 M276 Pattern General Pistol Holster Rig Filled
-    pocket2: RMCPouchGeneralMedium
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -51,3 +53,4 @@
 
 - type: playTimeTracker
   id: CMJobMaintTech
+  isHumanoid: true

@@ -217,3 +217,41 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+
+#misc
+
+- type: construction
+  parent: RMC
+  id: RMCBed
+  name: bed
+  description: A mattress seated on a rectangular metallic frame.
+  graph: RMCBed
+  startNode: start
+  targetNode: bed
+  category: construction-category-cm-furniture
+  icon:
+    sprite: _RMC14/Structures/Furniture/bed.rsi
+    state: bed
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  parent: RMC
+  name: rack
+  id: CMRack
+  graph: RMCRack
+  startNode: start
+  targetNode: rack
+  category: construction-category-cm-furniture
+  description: A bunch of metal shelves stacked on top of each other. Excellent for storage purposes, less so as cover.
+  icon:
+    sprite: _RMC14/Structures/Storage/rack.rsi
+    state: rack
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked

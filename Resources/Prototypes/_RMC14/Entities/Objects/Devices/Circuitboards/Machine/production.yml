@@ -79,7 +79,7 @@
   - type: Sprite
     state: blank_mod
   - type: MachineBoard
-    prototype: RMCDispenserChemEmpty
+    prototype: RMCChemDispenserGround
     # TODO RMC14 material requirements
 
 - type: entity

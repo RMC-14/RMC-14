@@ -1,0 +1,28 @@
+- type: entity
+  parent: BaseItem
+  id: RMCDigitalClock
+  name: digital clock
+  description: A battery powered clock, able to keep time within about 5 seconds... it was never that accurate.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/clocks.rsi
+    state: digital_clock
+  - type: RMCClock
+
+- type: entity
+  id: RMCCatClock
+  name: cat clock
+  description: An unbelievably creepy cat clock that surveys the room with every tick and every tock.
+  components:
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _RMC14/Objects/Devices/clocks.rsi
+    state: cat_clock_motion
+  - type: RMCClock
+  - type: WallMount
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static

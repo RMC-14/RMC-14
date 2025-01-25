@@ -4,6 +4,13 @@
   name: small floodlight
   description: A small bit of light in the darkness.
   components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Anchorable
+    flags:
+    - Anchorable
   - type: Sprite
     noRot: true
     sprite: _RMC14/Objects/Misc/Lights/floodlight.rsi

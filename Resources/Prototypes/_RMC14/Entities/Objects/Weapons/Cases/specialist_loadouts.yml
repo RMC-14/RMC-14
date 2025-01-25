@@ -10,7 +10,7 @@
     - id: CMArmorHelmetM45
     - id: CMGlassesM42ScoutSight
     - id: CMMagazineSniperM96S
-    - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SIncendiary
+    - id: CMMagazineSniperM96SIncendiary
       amount: 2
     - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
     - id: CMBackpackSniper
@@ -101,7 +101,7 @@
   parent: RMCBaseEquipmentCase
   id: RMCScoutSpecEquipmentCase
   name: scout equipment case
-  description: "A large case containing an M4RA battle rifle, M3-S light armor and helmet, M4RA battle sight, M68 thermal cloak, V3 reactive thermal tarp, ammunition and additional pieces of equipment.\nNOTE: You cannot put items back inside this case."
+  description: "A large case containing an M4SPR custom battle rifle, M3-S light armor and helmet, M4SPR battle sight, M68 thermal cloak, V3 reactive thermal tarp, ammunition and additional pieces of equipment.\nNOTE: You cannot put items back inside this case."
   components:
   - type: Sprite
     layers:
@@ -120,7 +120,7 @@
     - id: RMCGlassesM4SPRBattleSight
     - id: RMCMagazineRifleM4SPRA19
       amount: 4
-    - id: RMCMagazineRifleM4SPRA19 # TODO: RMCMagazineRifleM4SPRA19Incendiary
+    - id: RMCMagazineRifleM4SPRA19Incendiary
       amount: 2
     - id: RMCMagazineRifleM4SPRA19Impact
       amount: 2
@@ -132,6 +132,7 @@
     - id: RMCThermalTarpFolded
 #    - id: RMCPlasticExplosives
 #      amount: 2
+    - id: CMEncryptionKeyJTAC
     - id: RMCLaserDesignatorScout
     - id: RMCScoutShoes
   - type: CMChangeUserOnVend

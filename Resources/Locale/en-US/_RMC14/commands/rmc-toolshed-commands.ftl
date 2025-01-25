@@ -24,10 +24,17 @@ command-description-figurine-openslots = Opens up infinite slots for all jobs on
 
 command-description-hive-alldefault = Sets the hive of a xeno or group of xenos.
 
+command-description-icon-get_human_readable = Gets the human readable name of a player's job icon.
+command-description-icon-get = Gets the name of a player's job icon.
+command-description-icon-set = Sets a player's job icon.
+command-description-icon-del = Removes a player's job icon.
+
 command-description-marine-randomize = Deletes and then spawns a marine or group of marines in the same place with a randomized name, species and appearance.
 command-description-marine-randomizewithjob = Deletes and then spawns a marine or group of marines in the same place with a set job and a randomized name, species and appearance.
 
 command-description-removeinvalidweeds = Removes any weeds that should not have normally spread to where they are from the map.
+
+command-description-prototypecontains = Filters entities by whether or not their prototype ID contains the given text.
 
 command-description-skills-get = Gets the level of a specific skill for a marine.
 command-description-skills-set = Sets the level of a specific skill for a marine or group of marines.

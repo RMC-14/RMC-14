@@ -31,6 +31,9 @@ public sealed class DeployFoldableSystem : EntitySystem
 
     private void OnDragDropDragged(Entity<DeployFoldableComponent> ent, ref DragDropDraggedEvent args)
     {
+        if (args.User != args.Target)
+            return;
+
         if (!TryComp<FoldableComponent>(ent, out var foldable)
             || !_foldable.TrySetFolded(ent, foldable, true))
             return;

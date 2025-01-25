@@ -10,4 +10,7 @@ public sealed partial class XenoConstructionActionComponent : Component
 
     [DataField(required: true), AutoNetworkedField]
     public bool CheckWeeds;
+
+    [DataField, AutoNetworkedField]
+    public bool CanUpgrade;
 }

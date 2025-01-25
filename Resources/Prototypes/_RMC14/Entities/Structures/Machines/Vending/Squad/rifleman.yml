@@ -23,11 +23,12 @@
     - name: Armor
       choices: { CMArmour: 1 }
       entries:
-      - id: CMArmorM3Light
+      - id: RMCArmorM3LightVariants
         name: light armor
-      - id: CMArmorM3Medium
+      - id: RMCArmorM3MediumVariants
         name: medium armor
-      - id: CMArmorM3Heavy
+        recommended: true
+      - id: RMCArmorM3HeavyVariants
         name: heavy armor
     - name: Backpack
       choices: { CMBackpack: 1 }
@@ -43,12 +44,13 @@
       entries:
       - id: CMBeltMarine
         recommended: true
-      #    CMM276GeneralPistolHolsterRig #TODO: Make this
       - id: CMBeltKnifeFilled
         name: M276 knife rig (full)
-      #    CMM276M63HolsterRig #TODO: Make this
-      #    CMM276M44HolsterRig #TODO: Make this
-      #    CMM276M82FHolsterRig #TODO: Make this
+      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterRevolver
+      - id: RMCBeltHolsterSMG
+      - id: RMCBeltHolsterSMGPouch
+      #    RMCBeltHolsterFlareGun #TODO: Make this
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtility
       - id: RMCBeltUtilityGeneral
@@ -80,7 +82,7 @@
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
-    #    CMRebreather #TODO: Make this
+      - id: RMCMaskRebreather
     - name: Engineering Supplies
       entries:
       - id: CMEntrenchingTool
@@ -104,8 +106,8 @@
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
         points: 20
-    #- id: CMM40HIDPIncendiaryPacket3
-    #  points: 20
+      - id: RMCPacketGrenadeIncendiaryFilled
+        points: 20
     #- id: CMM40HPDPPhosphorusPacket3
     #  points: 20
       - id: RMCPacketGrenadeSmokeFilled
@@ -156,14 +158,14 @@
         points: 15
       - id: CMWebbingPouch
         points: 15
-    #- id: CMShoulderHolster
-    #  points: 15
+      - id: CMWebbingHolster
+        points: 15
       - id: RMCScabbardMacheteFilled
         points: 15
       - id: RMCPouchMacheteFilled
         points: 15
-    #- id: CMMarineRadioTelephonePack
-    #  points: 15
+      - id: RMCBackpackRTO
+        points: 15
     #- id: CMFuelTankStrapPouch
     #  points: 5
     #- id: CMWeldingGoggles
@@ -180,6 +182,8 @@
     #  points: 5
       - id: CMFireExtinguisherPortable
         points: 5
+      - id: RMCMotionDetector
+        points: 15
     #- id: CMMotionDetector
     #  points: 15
     #- id: CMDataDetector

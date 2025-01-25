@@ -9,4 +9,7 @@ public sealed partial class TacticalMapIconComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
     public SpriteSpecifier.Rsi? Icon;
+
+    [DataField, AutoNetworkedField]
+    public SpriteSpecifier.Rsi? Background;
 }

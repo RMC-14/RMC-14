@@ -28,6 +28,7 @@ namespace Content.Server.Database
         public DbSet<AdminLog> AdminLog { get; set; } = null!;
         public DbSet<AdminLogPlayer> AdminLogPlayer { get; set; } = null!;
         public DbSet<Whitelist> Whitelist { get; set; } = null!;
+        public DbSet<Blacklist> Blacklist { get; set; } = null!;
         public DbSet<ServerBan> Ban { get; set; } = default!;
         public DbSet<ServerUnban> Unban { get; set; } = default!;
         public DbSet<ServerBanExemption> BanExemption { get; set; } = default!;
@@ -55,6 +56,7 @@ namespace Content.Server.Database
         public DbSet<RMCPatronRoundEndXenoShoutout> RMCPatronRoundEndXenoShoutouts { get; set; } = default!;
         public DbSet<RMCRoleTimerExclude> RMCRoleTimerExcludes { get; set; } = default!;
         public DbSet<RMCSquadPreference> RMCSquadPreferences { get; set; } = default!;
+        public DbSet<RMCCommendation> RMCCommendations { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -65,6 +67,18 @@ namespace Content.Server.Database
             modelBuilder.Entity<Profile>()
                 .HasIndex(p => new {p.Slot, PrefsId = p.PreferenceId})
                 .IsUnique();
+
+            modelBuilder.Entity<Profile>()
+                .Property(p => p.PlaytimePerks)
+                .HasDefaultValue(true);
+
+            modelBuilder.Entity<Profile>()
+                .Property(p => p.XenoPrefix)
+                .HasDefaultValue(string.Empty);
+
+            modelBuilder.Entity<Profile>()
+                .Property(p => p.XenoPostfix)
+                .HasDefaultValue(string.Empty);
 
             modelBuilder.Entity<Antag>()
                 .HasIndex(p => new {HumanoidProfileId = p.ProfileId, p.AntagName})
@@ -400,6 +414,27 @@ namespace Content.Server.Database
                 .HasForeignKey(r => r.PlayerId)
                 .HasPrincipalKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RMCCommendation>()
+                .HasKey(c => c.Id);
+
+            modelBuilder.Entity<RMCCommendation>()
+                .Property(c => c.Id)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<RMCCommendation>()
+                .HasOne(r => r.Giver)
+                .WithMany(p => p.CommendationsGiven)
+                .HasForeignKey(r => r.GiverId)
+                .HasPrincipalKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<RMCCommendation>()
+                .HasOne(r => r.Receiver)
+                .WithMany(p => p.CommendationsReceived)
+                .HasForeignKey(r => r.ReceiverId)
+                .HasPrincipalKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public virtual IQueryable<AdminLog> SearchLogs(IQueryable<AdminLog> query, string searchText)
@@ -454,6 +489,10 @@ namespace Content.Server.Database
         public Preference Preference { get; set; } = null!;
         public RMCNamedItems? NamedItems { get; set; }
         public RMCSquadPreference? SquadPreference { get; set; }
+        public string ArmorPreference { get; set; } = null!;
+        public bool PlaytimePerks { get; set; } = true;
+        public string XenoPrefix { get; set; } = string.Empty;
+        public string XenoPostfix { get; set; } = string.Empty;
     }
 
     public class Job
@@ -626,10 +665,21 @@ namespace Content.Server.Database
         public RMCLinkingCodes? LinkingCodes { get; set; }
         public List<RMCLinkedAccountLogs> LinkedAccountLogs { get; set; } = default!;
         public List<RMCRoleTimerExclude> RoleTimerExcludes { get; set; } = default!;
+        public List<RMCCommendation> CommendationsGiven { get; set; } = default!;
+        public List<RMCCommendation> CommendationsReceived { get; set; } = default!;
     }
 
     [Table("whitelist")]
     public class Whitelist
+    {
+        [Required, Key] public Guid UserId { get; set; }
+    }
+
+    /// <summary>
+    /// List of users who are on the "blacklist". This is a list that may be used by Whitelist implementations to deny access to certain users.
+    /// </summary>
+    [Table("blacklist")]
+    public class Blacklist
     {
         [Required, Key] public Guid UserId { get; set; }
     }
@@ -685,6 +735,8 @@ namespace Content.Server.Database
 
         [ForeignKey("Server")] public int ServerId { get; set; }
         public Server Server { get; set; } = default!;
+
+        public List<RMCCommendation> Commendations { get; set; } = default!;
     }
 
     public class Server

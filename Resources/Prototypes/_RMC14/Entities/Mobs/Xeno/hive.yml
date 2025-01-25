@@ -5,3 +5,4 @@
   - HideSpawnMenu
   components:
   - type: Hive
+    lateJoinGainLarva: true

@@ -12,6 +12,7 @@
     department: CMSquad
     time: 3600 # 1 hour
   startingGear: CMGearHospitalCorpsman
+  dummyStartingGear: CMGearHospitalCorpsmanEquipped
   icon: "CMJobIconHospitalCorpsman"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
@@ -22,41 +23,43 @@
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: medic
+  roleWeight: 1
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillJtac: 1
         RMCSkillMedical: 2
         RMCSkillSurgery: 1
     - type: CMVendorUser
       points: 45
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: "HM"
 
 - type: startingGear
   id: CMGearHospitalCorpsman
   equipment:
-    back: CMSatchelMarineMedic
     id: CMDogtagHospitalCorpsman
 
 - type: startingGear
   id: CMGearHospitalCorpsmanEquipped
   equipment:
     jumpsuit: CMJumpsuitMarineMedic
-    back: CMSatchelMarineMedic
     shoes: CMBootsBlackFilled
-    gloves: CMHandsBlackMarine
-    eyes: RMCGlassesMedicalHUDGlasses
+    gloves: RMCHandsLatexMarine
     head: CMArmorHelmetM10Medic
-    outerClothing: CMArmorM3Medium
+    outerClothing: RMCArmorM3MediumVariants
     id: CMDogtagHospitalCorpsman
     ears: CMHeadsetAlphaMedic
     belt: CMBeltMedicBagFilled
 
 - type: playTimeTracker
   id: CMJobHospitalCorpsman
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase

@@ -16,13 +16,18 @@
   - Pilot
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: pilot
+    state: gp
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillIntel: 1
         RMCSkillJtac: 2
         RMCSkillLeadership: 1
@@ -34,12 +39,14 @@
     - type: MarineOrders
     - type: CMVendorUser
       points: 45
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: "GP"
 
 - type: startingGear
   id: CMGearPilotGunship
   equipment:
     jumpsuit: CMJumpsuitPilot
-    back: CMSatchel
     shoes: CMBootsBlackFilled
     id: CMIDCardPilotGunship
     ears: CMHeadsetPilot
@@ -59,3 +66,4 @@
 
 - type: playTimeTracker
   id: CMJobPilotGunship
+  isHumanoid: true

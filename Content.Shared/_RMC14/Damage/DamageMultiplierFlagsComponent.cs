@@ -15,5 +15,6 @@ public enum DamageMultiplierFlag : byte
 {
     None = 0,
     Turf = 1 << 0,
-    Breaching = 1 << 1
+    Breaching = 1 << 1,
+    Xeno = 1 << 2,
 }

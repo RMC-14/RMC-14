@@ -35,17 +35,25 @@
     - name: Uniform
       choices: { CMUniform: 1 }
       entries:
-      - id: RMCScrubsLightBlue
       - id: CMScrubsGreen
       - id: CMScrubsBlue
+      - id: RMCScrubsLightBlue
       - id: CMScrubsPurple
-      - id: CMScrubsOrange
       - id: RMCScrubsOlive
       - id: RMCScrubsGrey
-#    - name: Suit
-#      choices: { CMSuit: 1 }
-#      entries:
-#      - id: Medical's apron
+    - name: Suit
+      jobs:
+      - CMNurse
+      choices: { CMSuit: 1 }
+      entries:
+      - id: RMCMedicalApron
+    - name: Suit
+      jobs:
+      - CMDoctor
+      choices: { CMSuit: 1 }
+      entries:
+      - id: RMCLabcoat
+      - id: RMCMedicalApron
 #    - name: Snow gear (Snow use only)
 #      takeall: CMSnowgear
 #      entries:
@@ -85,12 +93,26 @@
         name: first-aid pouch (pills)
       - id: RMCPouchFirstResponder
       - id: RMCPouchMedical
-      #- id: CMMedicalKitPouch
-      #- id: CMPressurizedReagentCanisterPouchBicaridine
-      #- id: CMPressurizedReagentCanisterPouchKelotane
-      #- id: CMPressurizedReagentCanisterPouchRevivalMix
-      #- id: CMPressurizedReagentCanisterPouchTricordrazine
-      #- id: CMPressurizedReagentCanisterPouchEmpty
+      - id: RMCPouchMedkit
+        recommended: true
+      - id: RMCPouchReagentCanisterBicaridine
+        recommended: true
+        name: Pressurized Reagent Canister Pouch\n(Bicaridine)
+      - id: RMCPouchReagentCanisterKelotane
+        recommended: true
+        name: Pressurized Reagent Canister Pouch\n(Kelotane)
+      - id: RMCPouchReagentCanisterTricordrazineRevival
+        recommended: true
+        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
+      #      - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
+      #        recommended: true
+      #        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
+      - id: RMCPouchReagentCanisterTricordrazine
+        recommended: true
+        name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
+      - id: RMCPouchReagentCanister
+        recommended: true
+        name: Pressurized Reagent Canister Pouch\n(EMPTY)
       #- id: CMSlingPouch
     - name: Accessories
       choices: { CMAccessories: 1 }
