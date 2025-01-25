@@ -213,7 +213,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             any = true;
         }
         //Resin + Weed Speedups stack, but resin + weed slowdowns do not
-        var finalSpeed = 0.0f;
+        var finalSpeed = 1.0f;
 
         if (entriesWeeds > 0)
         {
@@ -226,11 +226,11 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         }
 
         //If Weeds is a speedup, let them stack, otherwise treat them as slowdownss
-        if (speedWeeds > 1)
+        if (speedWeeds > 1 && entriesResin > 0)
             finalSpeed = speedWeeds * speedResin;
         else if (entriesResin > 0)
             finalSpeed = speedResin;
-        else
+        else if (entriesWeeds > 0)
             finalSpeed = speedWeeds;
 
         args.ModifySpeed(finalSpeed, finalSpeed);
