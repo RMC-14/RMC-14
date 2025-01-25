@@ -1,4 +1,6 @@
+using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Xenonids.Construction;
+using Content.Shared._RMC14.Xenonids.Construction.FloorResin;
 using Content.Shared._RMC14.Xenonids.Fruit;
 using Content.Shared._RMC14.Xenonids.Fruit.Components;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -31,6 +33,7 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
 
     public override void Initialize()
     {
@@ -181,6 +184,8 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
     private void OnResinSurgeDoAfter(Entity<XenoResinSurgeComponent> xeno, ref ResinSurgeStickyResinDoafter args)
     {
         xeno.Comp.ResinDoafter = null;
+        if (args.Cancelled)
+            return;
         var coords = GetCoordinates(args.Coordinates);
         if (_transform.GetGrid(coords) is not { } gridId ||
             !TryComp(gridId, out MapGridComponent? grid))
@@ -190,9 +195,13 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
         var popupOthers = Loc.GetString("rmc-xeno-resin-surge-sticky-others", ("xeno", xeno));
         _popup.PopupPredicted(popupSelf, popupOthers, xeno, xeno);
 
-        foreach (var turf in _sharedMap.GetTilesIntersecting(gridId, grid, Box2.CenteredAround(coords.Position, new(xeno.Comp.StickyResinRadius * 2, xeno.Comp.StickyResinRadius * 2)), false))
+        if (_net.IsServer)
         {
-            SurgeStickyResin(xeno, _turf.GetTileCenter(turf));
+            foreach (var turf in _sharedMap.GetTilesIntersecting(gridId, grid, Box2.CenteredAround(coords.Position, new(xeno.Comp.StickyResinRadius * 2, xeno.Comp.StickyResinRadius * 2)), false))
+            {
+                if (!_rmcMap.HasAnchoredEntityEnumerator<StickyResinSurgeBlockerComponent>(_turf.GetTileCenter(turf), out _))
+                    SurgeStickyResin(xeno, _turf.GetTileCenter(turf));
+            }
         }
 
         SetSurgeCooldown(xeno);

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: XenoStickyResin
   name: sticky resin
   description: A layer of disgusting sticky slime.
@@ -44,7 +44,7 @@
   - type: MeleeSound
     soundGroups:
       Brute:
-        collection: XenoResinBreak
+        collection: XenoMove
   - type: XenoConstruct
     destroyWeeds: false
   - type: RMCNightVisionVisible
@@ -54,11 +54,16 @@
     plasma: 55
   - type: XenoConstructionBuildSpeed
     buildTimeMult: 0.5
-  - type: MeleeReceivedMultiplier
-    otherMultiplier: 10
+  - type: MeleeReceivedMultiplier # Supposed to be instantly destroyed by any melee
+    otherMultiplier: 50
     xenoDamage:
       types:
         Slash: 45
+  - type: StickyResinSurgeBlocker
+  - type: FloorResinSpeedModifier
+    outsiderSpeedModifier: 0.2053
+    outsiderSpeedModifierArmor: 0.2801
+
 
 - type: entity
   parent: XenoStickyResin
@@ -70,6 +75,9 @@
     state: sticky_weak
   - type: TimedDespawn
     lifetime: 20
+  - type: FloorResinSpeedModifier # Equal to Hive speed debuff
+    outsiderSpeedModifier: 0.338
+    outsiderSpeedModifierArmor: 0.4856
 
 - type: entity
   parent: XenoStickyResin
@@ -81,4 +89,8 @@
     state: fast
   - type: XenoConstructionPlasmaCost
     plasma: 35
+  - type: FloorResinSpeedModifier
+    outsiderSpeedModifier: null
+    outsiderSpeedModifierArmor: null
+    hiveSpeedModifier: 1.33 #MOVE_DELAY * 0.8 on CM, stacks with weed speed
 

@@ -1,5 +1,7 @@
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Xenonids.Construction.FloorResin;
 using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Rest;
@@ -43,13 +45,15 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
     private EntityQuery<AffectableByWeedsComponent> _affectedQuery;
     private EntityQuery<XenoWeedsComponent> _weedsQuery;
+    private EntityQuery<FloorResinSpeedModifierComponent> _floorResinQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
-    private EntityQuery<BlockWeedsComponent> _blockWeedsQuery;
+    private EntityQuery<BlockWeedsComponent> _blockWeedsQuery;    
 
     public override void Initialize()
     {
         _affectedQuery = GetEntityQuery<AffectableByWeedsComponent>();
         _weedsQuery = GetEntityQuery<XenoWeedsComponent>();
+        _floorResinQuery = GetEntityQuery<FloorResinSpeedModifierComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
         _blockWeedsQuery = GetEntityQuery<BlockWeedsComponent>();
 
@@ -67,6 +71,10 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         SubscribeLocalEvent<XenoWeedsComponent, EndCollideEvent>(OnWeedsEndCollide);
 
         SubscribeLocalEvent<XenoWeedsSpreadingComponent, MapInitEvent>(OnSpreadingMapInit);
+
+        SubscribeLocalEvent<FloorResinSpeedModifierComponent, ComponentShutdown>(OnResinShutdown);
+        SubscribeLocalEvent<FloorResinSpeedModifierComponent, StartCollideEvent>(OnResinStartCollide);
+        SubscribeLocalEvent<FloorResinSpeedModifierComponent, EndCollideEvent>(OnResinEndCollide);
 
         UpdatesAfter.Add(typeof(SharedPhysicsSystem));
     }
@@ -117,6 +125,14 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         _toUpdate.UnionWith(_physics.GetContactingEntities(ent, phys));
     }
 
+    private void OnResinShutdown(Entity<FloorResinSpeedModifierComponent> ent, ref ComponentShutdown args)
+    {
+        if (!TryComp(ent, out PhysicsComponent? phys))
+            return;
+
+        _toUpdate.UnionWith(_physics.GetContactingEntities(ent, phys));
+    }
+
     private void OnWeedableAnchorStateChanged(Entity<XenoWeedableComponent> weedable, ref AnchorStateChangedEvent args)
     {
         if (_net.IsServer && !args.Anchored)
@@ -140,10 +156,44 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         var entries = 0;
         foreach (var contacting in _physics.GetContactingEntities(ent, physicsComponent))
         {
+            // Don't apply weed speed if floor resin is decreasing curr speed
+            if (_floorResinQuery.TryComp(contacting, out var resin))
+            {
+                if (isXeno)
+                    speed += resin.HiveSpeedModifier ?? 0;
+                else if (resin.OutsiderSpeedModifier != null)
+                {
+                    if (HasComp<CMArmorUserComponent>(contacting) && resin.OutsiderSpeedModifierArmor != null)
+                        speed += resin.OutsiderSpeedModifierArmor.Value;
+                    else
+                        speed += resin.OutsiderSpeedModifier.Value;
+                }
+
+                //Don't divide the modifier if we didn't count
+                if ((isXeno && resin.HiveSpeedModifier != null) ||
+                    (resin.OutsiderSpeedModifier != null && !isXeno))
+                {
+                    any = true;
+                    entries++;
+                }
+
+                if (resin.OutsiderSpeedModifier != null)
+                    continue;
+            }
+
             if (!_weedsQuery.TryComp(contacting, out var weeds))
                 continue;
 
-            speed += isXeno ? weeds.SpeedMultiplierXeno : weeds.SpeedMultiplierOutsider;
+            if (isXeno)
+                speed += weeds.SpeedMultiplierXeno;
+            else
+            {
+                if (HasComp<CMArmorUserComponent>(contacting))
+                    speed += weeds.SpeedMultiplierOutsiderArmor;
+                else
+                    speed += weeds.SpeedMultiplierOutsider;
+            }
+
             any = true;
             entries++;
         }
@@ -220,6 +270,20 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     }
 
     private void OnWeedsEndCollide(Entity<XenoWeedsComponent> ent, ref EndCollideEvent args)
+    {
+        var other = args.OtherEntity;
+        if (_affectedQuery.TryComp(other, out var affected) && affected.OnXenoWeeds)
+            _toUpdate.Add(other);
+    }
+
+    private void OnResinStartCollide(Entity<FloorResinSpeedModifierComponent> ent, ref StartCollideEvent args)
+    {
+        var other = args.OtherEntity;
+        if (_affectedQuery.TryComp(other, out var affected) && !affected.OnXenoWeeds)
+            _toUpdate.Add(other);
+    }
+
+    private void OnResinEndCollide(Entity<FloorResinSpeedModifierComponent> ent, ref EndCollideEvent args)
     {
         var other = args.OtherEntity;
         if (_affectedQuery.TryComp(other, out var affected) && affected.OnXenoWeeds)
