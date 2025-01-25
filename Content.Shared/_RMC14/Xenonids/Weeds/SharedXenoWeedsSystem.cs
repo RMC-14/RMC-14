@@ -153,7 +153,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         if (!TryComp<PhysicsComponent>(ent, out var physicsComponent))
             return;
 
-        var speed = 0.0f;
+        var speedWeeds = 0.0f;
+        var speedResin = 0.0f;
         var isXeno = _xenoQuery.HasComp(ent);
         //Checks hive for applying slows now
         //Weed speedup only effects xenos, but slowdown does not hurt hive mems
@@ -161,62 +162,48 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         _hiveQuery.TryComp(ent, out var hive);
 
         var any = false;
-        var entries = 0;
+        var entriesResin = 0;
+        var entriesWeeds = 0;
         foreach (var contacting in _physics.GetContactingEntities(ent, physicsComponent))
         {
-            // Don't apply weed speed if floor resin is decreasing curr speed
-            var applied = false;
             if (_floorResinQuery.TryComp(contacting, out var resin))
             {
                 if (isXeno && hive != null && _hive.IsMember(contacting, hive.Hive))
                 {
-                    speed += resin.HiveSpeedModifier ?? 0;
+                    speedResin += resin.HiveSpeedModifier ?? 0;
                     if (resin.HiveSpeedModifier != null)
-                        applied = true;
+                        entriesResin++;
                 }
                 else if (resin.OutsiderSpeedModifier != null && (hive == null || !_hive.IsMember(contacting, hive.Hive)))
                 {
                     if (HasComp<CMArmorUserComponent>(contacting) && resin.OutsiderSpeedModifierArmor != null)
-                        speed += resin.OutsiderSpeedModifierArmor.Value;
+                        speedResin = resin.OutsiderSpeedModifierArmor.Value;
                     else
-                        speed += resin.OutsiderSpeedModifier.Value;
-                    applied = true;
-                }
+                        speedResin = resin.OutsiderSpeedModifier.Value;
 
-                //Don't divide the modifier if we didn't count
-                if (applied)
-                {
-                    any = true;
-                    entries++;
+                    entriesResin++;
                 }
-
-                if (resin.OutsiderSpeedModifier != null)
-                    continue;
             }
 
             if (!_weedsQuery.TryComp(contacting, out var weeds))
                 continue;
 
+            any = true;
+
             if (isXeno && hive != null && _hive.IsMember(contacting, hive.Hive))
             {
-                speed += weeds.SpeedMultiplierXeno;
-                applied = true;
+                speedWeeds += weeds.SpeedMultiplierXeno;
+                entriesWeeds++;
             }
             else if (hive == null || !_hive.IsMember(contacting, hive.Hive))
             {
                 if (HasComp<CMArmorUserComponent>(contacting))
-                    speed += weeds.SpeedMultiplierOutsiderArmor;
+                    speedWeeds = weeds.SpeedMultiplierOutsiderArmor;
                 else
-                    speed += weeds.SpeedMultiplierOutsider;
+                    speedWeeds = weeds.SpeedMultiplierOutsider;
 
-                applied = true;
+                entriesWeeds++;
             }
-
-            if (!applied)
-                continue;
-
-            any = true;
-            entries++;
         }
 
         if (!any &&
@@ -225,12 +212,27 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         {
             any = true;
         }
+        //Resin + Weed Speedups stack, but resin + weed slowdowns do not
+        var finalSpeed = 0.0f;
 
-        if (entries > 0)
+        if (entriesWeeds > 0)
         {
-            speed /= entries;
-            args.ModifySpeed(speed, speed);
+            speedWeeds /= entriesWeeds;
         }
+
+        if (entriesResin > 0)
+        {
+            speedResin /= entriesResin;
+        }
+
+        if (speedWeeds > 1 && speedResin > 1)
+            finalSpeed = speedWeeds + speedResin;
+        else if (entriesResin > 0)
+            finalSpeed = speedResin;
+        else
+            finalSpeed = speedWeeds;
+
+        args.ModifySpeed(finalSpeed, finalSpeed);
 
         ent.Comp.OnXenoWeeds = any;
         Dirty(ent);
