@@ -226,7 +226,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         }
 
         if (speedWeeds > 1 && speedResin > 1)
-            finalSpeed = speedWeeds + speedResin;
+            finalSpeed = speedWeeds * speedResin;
         else if (entriesResin > 0)
             finalSpeed = speedResin;
         else
