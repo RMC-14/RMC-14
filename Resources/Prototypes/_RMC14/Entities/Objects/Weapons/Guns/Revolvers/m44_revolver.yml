@@ -7,6 +7,7 @@
   - type: Tag
     tags:
     - Sidearm
+    - RMCRevolver
     - RMCWeaponRevolverM44
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/m44.rsi
