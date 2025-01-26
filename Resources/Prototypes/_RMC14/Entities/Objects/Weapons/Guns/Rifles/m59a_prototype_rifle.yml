@@ -75,7 +75,8 @@
           - CMMagazineRifleM54C
           - CMMagazineRifleM54CAP
           - CMMagazineRifleM54CExt
-          #TODO RMC: Add the MK1 mags here when they are added
+          - CMMagazineRifleM54CMK1
+          - CMMagazineRifleM54CMK1AP
         startingItem: CMMagazineRifleM54C #TODO RMC: Change to incend magazine when that is added, parity.
   - type: GunDamageModifier
     multiplier: 1.15
@@ -98,6 +99,8 @@
           - RMCAttachmentS84xTelescopicScope
           - RMCAttachmentS42xTelescopicMiniscope
       rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentM54CStockCollapsible
         whitelist:
           tags:
           - RMCAttachmentM54CStockCollapsible

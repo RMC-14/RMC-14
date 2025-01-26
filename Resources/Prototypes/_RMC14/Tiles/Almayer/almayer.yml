@@ -14,6 +14,7 @@
   id: CMFloorSteel
   name: tiles-cm-default
   sprite: /Textures/_RMC14/Tiles/almayer/default.png
+  canPlaceTunnel: false
 
 - type: tile
   parent: CMFloorSteel
@@ -64,6 +65,7 @@
   id: CMFloorPlate
   name: tiles-cm-plate
   sprite: /Textures/_RMC14/Tiles/almayer/plate.png
+  canPlaceTunnel: false
 
 - type: tile
   parent: CMFloorPlate
@@ -79,36 +81,42 @@
   id: RMCFloorMono
   name: tiles-rmc-mono
   sprite: /Textures/_RMC14/Tiles/almayer/mono.png
+  canPlaceTunnel: false
 
 - type: tile
   parent: CMTileBase
   id: CMFloorOffice
   name: tiles-cm-office
   sprite: /Textures/_RMC14/Tiles/almayer/office_tile.png
+  canPlaceTunnel: false
 
 - type: tile
   parent: CMTileBase
   id: CMFloorSterile
   name: tiles-cm-sterile
   sprite: /Textures/_RMC14/Tiles/almayer/sterile.png
+  canPlaceTunnel: false
 
 - type: tile
   parent: CMTileBase
   id: CMFloorWhite
   name: tiles-cm-white
   sprite: /Textures/_RMC14/Tiles/almayer/whitefull.png
+  canPlaceTunnel: false
 
 - type: tile
   parent: CMTileBase
   id: CMFloorWhiteSterile
   name: tiles-cm-white-sterile
   sprite: /Textures/_RMC14/Tiles/almayer/white_sterile.png
+  canPlaceTunnel: false
 
 - type: tile
   parent: CMTileBase
   id: CMFloorBlack
   name: tiles-cm-black
   sprite: /Textures/_RMC14/Tiles/almayer/blackfull.png
+  canPlaceTunnel: false
 
 - type: tile
   parent: CMTileBase
@@ -121,6 +129,7 @@
   id: CMFloorTComms1
   name: tiles-cm-tcomms
   sprite: /Textures/_RMC14/Tiles/almayer/tcomms_1.png
+  canPlaceTunnel: false
 
 - type: tile
   parent: CMFloorPlate

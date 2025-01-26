@@ -9,8 +9,7 @@ public enum BurstLayer
 }
 
 [Serializable, NetSerializable]
-public enum BurstVisualState
+public enum BurstVisuals
 {
-    Bursting,
-    Burst
+    Visuals
 }

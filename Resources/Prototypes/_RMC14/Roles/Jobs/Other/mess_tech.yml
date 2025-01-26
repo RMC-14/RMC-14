@@ -41,7 +41,7 @@
     shoes: CMBootsBlack
     id: CMIDCardMessTech
     ears: CMHeadsetChef
-#    belt: TODO RMC14 M276 Pattern General Pistol Holster Rig Filled
+    belt: RMCM1984BeltFilled
     pocket1: RMCPouchGeneralMedium
 
 - type: entity

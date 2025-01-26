@@ -235,6 +235,9 @@
   id: RMCCartridgeRifle10x24mmRubber
 
 - type: Tag
+  id: RMCMagazineRifleM4SPRRubber
+
+- type: Tag
   id: RMCMagazineSMGM63Rubber
 
 - type: Tag

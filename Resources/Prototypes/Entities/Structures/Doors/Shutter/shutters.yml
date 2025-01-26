@@ -94,7 +94,7 @@
       DoorStatus: false
   - type: InteractionPopup
     interactSuccessString: comp-window-knock
-    messagePerceivedByOthers: comp-window-knock
+    messagePerceivedByOthers: rmc-window-knock-others
     interactSuccessSound:
       path: /Audio/Effects/glass_knock.ogg
   - type: BlockWeather

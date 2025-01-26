@@ -303,8 +303,8 @@
   - type: RotaryPhoneBackpack
   - type: UserInterface
     interfaces:
-      enum.TelephoneUiKey.Key:
-        type: TelephoneBui
+      enum.RMCTelephoneUiKey.Key:
+        type: RMCTelephoneBui
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
   - type: ActivatableUIBlacklist

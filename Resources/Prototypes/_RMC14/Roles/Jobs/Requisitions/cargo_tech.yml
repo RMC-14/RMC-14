@@ -40,7 +40,7 @@
     ears: CMHeadsetRequisition
     pocket1: RMCPouchGeneralMedium
     pocket2: CMStampApproved
-#    belt: TODO RMC14 M276 Pattern General Pistol Holster Rig Filled
+    belt: RMCM1984BeltFilled
 
 - type: entity
   parent: CMSpawnPointJobBase

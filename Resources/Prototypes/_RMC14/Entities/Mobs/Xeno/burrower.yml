@@ -94,8 +94,8 @@
       whitelist:
         components:
         - XenoHeavy
-#  - type: RMCXenoDamageVisuals # TODO RMC14
-#    prefix: burrower
+  - type: RMCXenoDamageVisuals
+    prefix: burrower
   - type: TacticalMapIcon
     icon:
       sprite: _RMC14/Interface/map_blips.rsi

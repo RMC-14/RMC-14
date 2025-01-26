@@ -1,9 +1,8 @@
 ﻿using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Shields;
-using Content.Shared.Actions;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared.Coordinates;
 using Content.Shared.Movement.Systems;
-using Content.Shared.Popups;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
@@ -13,7 +12,6 @@ namespace Content.Shared._RMC14.Xenonids.Cleave;
 
 public sealed class XenoCleaveSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -23,7 +21,7 @@ public sealed class XenoCleaveSystem : EntitySystem
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
-    [Dependency] private readonly SharedPopupSystem _popups = default!;
+    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoCleaveComponent, XenoCleaveActionEvent>(OnCleaveAction);
@@ -46,6 +44,8 @@ public sealed class XenoCleaveSystem : EntitySystem
         var buffed = _vanguard.ShieldBuff(xeno);
 
         args.Handled = true;
+
+        _rmcMelee.DoLunge(xeno, args.Target);
 
         if (args.Flings)
         {
