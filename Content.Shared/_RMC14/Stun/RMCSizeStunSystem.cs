@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Content.Shared._RMC14.Pulling;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Movement.Systems;
@@ -26,6 +27,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
 
     public override void Initialize()
     {
@@ -98,11 +100,14 @@ public sealed class RMCSizeStunSystem : EntitySystem
             _physics.SetLinearVelocity(args.Target, Vector2.Zero);
             _physics.SetAngularVelocity(args.Target, 0f);
 
-            var direction = (_transform.GetMoverCoordinates(args.Target).Position - bullet.Comp.ShotFrom.Value.Position).Normalized();
-
-            _throwing.TryThrow(args.Target, direction, 1, animated: false, playSound: false, doSpin: false);
-
-            // RMC-14 TODO Thrown into obstacle mechanics
+            var vec = _transform.GetMoverCoordinates(args.Target).Position - bullet.Comp.ShotFrom.Value.Position;
+            if (vec.Length() != 0)
+            {
+                _rmcPulling.TryStopPullsOn(args.Target);
+                var direction = vec.Normalized();
+                _throwing.TryThrow(args.Target, direction, 1, animated: false, playSound: false, doSpin: false);
+                // RMC-14 TODO Thrown into obstacle mechanics
+            }
         }
 
         //Stun part

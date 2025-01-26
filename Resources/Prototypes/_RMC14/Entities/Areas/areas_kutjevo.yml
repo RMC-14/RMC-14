@@ -478,6 +478,9 @@
   components:
   - type: Sprite
     state: colony_caves_1
+  - type: Area
+    CAS: false
+    OB: false
 
 - type: entity
   parent: RMCAreaKutjevoInterior
@@ -486,6 +489,9 @@
   components:
   - type: Sprite
     state: colony_caves_2
+  - type: Area
+    CAS: false
+    OB: false
 
 - type: entity
   parent: RMCAreaKutjevoInterior
@@ -494,6 +500,9 @@
   components:
   - type: Sprite
     state: colony_caves_2
+  - type: Area
+    CAS: false
+    OB: false
 
 - type: entity
   parent: RMCAreaKutjevoInterior
@@ -502,6 +511,9 @@
   components:
   - type: Sprite
     state: colony_caves_3
+  - type: Area
+    CAS: false
+    OB: false
 
 - type: entity
   parent: RMCAreaKutjevoInteriorColonySouth
@@ -512,4 +524,6 @@
     state: colony_caves_3
   - type: Area
     minimapColor: '#5A4501E7'
+    CAS: false
+    OB: false
 

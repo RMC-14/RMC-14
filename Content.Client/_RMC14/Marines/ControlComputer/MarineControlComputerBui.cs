@@ -17,6 +17,8 @@ public sealed class MarineControlComputerBui(EntityUid owner, Enum uiKey) : Boun
         _window = this.CreateWindow<MarineControlComputerWindow>();
         Refresh();
 
+        _window.MedalButton.OnPressed += _ => SendPredictedMessage(new MarineControlComputerMedalMsg());
+
         _window.EvacuationButton.OnPressed += _ =>
         {
             if (_confirmingEvacuation)

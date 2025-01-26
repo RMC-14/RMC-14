@@ -62,12 +62,14 @@
   equipment:
     jumpsuit: CMJumpsuitBO
     outerClothing: CMCoatASO
-    back: CMSatchel
     shoes: CMBootsBlack
     id: CMIDCardASO
     ears: CMHeadsetSeniorCommand
     pocket1: RMCPouchGeneralLarge
     pocket2: RMCPouchGeneralLarge
+  storage:
+    pocket1:
+    - RMCRangefinder
 
 - type: entity
   parent: CMSpawnPointJobBase

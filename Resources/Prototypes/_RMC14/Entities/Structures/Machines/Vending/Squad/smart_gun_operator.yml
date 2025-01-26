@@ -29,8 +29,8 @@
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
         points: 30
-    #- id: CMM40HIDPIncendiaryPacketx3
-    #  points: 30
+      - id: RMCPacketGrenadeIncendiaryFilled
+        points: 30
     #- id: CMM40HPDPWhitePhosphorusPacketx3
     #  points: 30
       - id: RMCPacketGrenadeSmokeFilled
@@ -132,7 +132,7 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      - id: CMBeltSmartGunOperatorFilled
+      - id: CMBeltSmartGunOperator
       - id: RMCBeltSmartGunOperatorPistolFilled
     - name: Pouches
       choices: { RMCPouch: 2 }

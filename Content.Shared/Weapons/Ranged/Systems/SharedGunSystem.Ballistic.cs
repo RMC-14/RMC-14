@@ -91,8 +91,8 @@ public abstract partial class SharedGunSystem
         if (args.Handled)
             return;
 
-        TryAmmoInsert(uid, component, args.Used, args.User, args.Target, component.InsertDelay);
-        args.Handled = true;
+        if (TryAmmoInsert(uid, component, args.Used, args.User, args.Target, component.InsertDelay))
+            args.Handled = true;
     }
 
     public bool TryAmmoInsert(EntityUid uid, BallisticAmmoProviderComponent component, EntityUid ammo, EntityUid loader, EntityUid weapon, double insertDelay)

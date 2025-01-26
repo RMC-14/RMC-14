@@ -858,6 +858,9 @@
   - type: Sprite
     sprite: _RMC14/Objects/Flora/flora_plantalien.rsi
     state: alienplant1
+  - type: PointLight
+    castShadows: false
+    radius: 2
     
 # Stumps
 - type: entity

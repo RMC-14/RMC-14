@@ -7,11 +7,9 @@ using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
-using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
 using Content.Shared.Traits;
-using Linguini.Shared.Util;
 using Robust.Shared.Collections;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
@@ -146,7 +144,7 @@ namespace Content.Shared.Preferences
         public SharedRMCNamedItems NamedItems { get; private set; } = new();
 
         [DataField]
-        public bool PlaytimePerks { get; private set; }
+        public bool PlaytimePerks { get; private set; } = true;
 
         [DataField]
         public string XenoPrefix { get; private set; } = string.Empty;

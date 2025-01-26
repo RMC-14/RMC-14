@@ -97,7 +97,10 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
     private void OnMeleeShotAttempted(EntityUid uid, MeleeWeaponComponent comp, ref ShotAttemptedEvent args)
     {
-        if (comp.NextAttack > Timing.CurTime)
+        if (!TryComp<GunComponent>(uid, out var gun))
+            return;
+
+        if (gun.MeleeCooldownOnShoot && comp.NextAttack > Timing.CurTime)
             args.Cancel();
     }
 
@@ -426,10 +429,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                     break;
                 case DisarmAttackEvent disarm:
                     if (!DoDisarm(user, disarm, weaponUid, weapon, session))
-                    {
-                        // weapon.NextAttack = curTime;
-                        return false;
-                    }
+                        weapon.NextAttack = curTime + TimeSpan.FromSeconds(0.6);
 
                     animation = weapon.Animation;
                     break;

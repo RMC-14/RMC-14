@@ -29,7 +29,7 @@
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: retrieve_egg
+      state: place_resin
     event: !type:XenoChooseStructureActionEvent
   - type: XenoChooseConstructionAction
 
@@ -53,6 +53,27 @@
     checkStructureSelected: true
     checkWeeds: true
     canUpgrade: true
+
+- type: entity
+  id: ActionXenoCoerceResin
+  parent: ActionXenoBase
+  name: Coerce Resin
+  description: "Builds the structure chosen with the 'Choose Resin Structure' action. You may also build within line of sight if you are on weeds."
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: secrete_resin
+    event: !type:XenoSecreteStructureActionEvent
+    deselectOnMiss: false
+    range: 0
+    repeat: true
+    checkCanAccess: false
+  - type: XenoConstructionAction
+    checkStructureSelected: true
+    checkWeeds: true
+    canUpgrade: false
 
 - type: entity
   id: ActionXenoOrderConstruction
@@ -97,7 +118,7 @@
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: blank
+      state: gardener_plant_pick
     event: !type:XenoFruitChooseActionEvent
   - type: XenoFruitChooseAction
 
@@ -142,3 +163,18 @@
   - type: InstantAction
     event: !type:XenoFruitPlantActionEvent
       plasmaCost: 50
+
+- type: entity
+  id: ActionXenoDigTunnel
+  parent: ActionXenoBase
+  name: Dig Tunnel (200)
+  description: Dig a tunnel for speedy transportation across the hive.
+  components:
+  - type: InstantAction
+    event: !type:XenoDigTunnelActionEvent
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: build_tunnel
+    useDelay: 300
+

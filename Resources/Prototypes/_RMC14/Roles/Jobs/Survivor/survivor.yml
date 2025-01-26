@@ -46,7 +46,7 @@
     back: RMCSatchelCivilianFill
     shoes: RMCShoesBlack
     id: CMIDCardColonist
-    ears: CMHeadset
+    ears: CMHeadsetColony
     pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchGeneral
 

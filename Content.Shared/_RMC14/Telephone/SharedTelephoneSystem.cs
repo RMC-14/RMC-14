@@ -178,6 +178,13 @@ public abstract class SharedTelephoneSystem : EntitySystem
             return;
         }
 
+        // Emit the popup on a successful call.
+        // Check for the marine component cause we don't want walls calling phones.
+        if (TryComp<MarineComponent>(user, out var marine) && TryComp(user, out MetaDataComponent? marinemeta) && TryComp(ent, out MetaDataComponent? phonemeta))
+        {
+            _popup.PopupEntity($"{marinemeta.EntityName} dials a number on the {phonemeta.EntityName}.", ent);
+        }
+
         ent.Comp.Idle = false;
         ent.Comp.LastCall = time;
         Dirty(ent);
@@ -247,6 +254,7 @@ public abstract class SharedTelephoneSystem : EntitySystem
 
         _hands.TryPickupAnyHand(user, telephone);
         EnsureComp<PickedUpPhoneComponent>(telephone);
+        PlayGrabSound(rotary);
     }
 
     private void ReturnPhone(EntityUid rotary, EntityUid telephone, EntityUid? user)
@@ -259,9 +267,15 @@ public abstract class SharedTelephoneSystem : EntitySystem
         }
 
         if (user != null)
-            _hands.TryDropIntoContainer(user.Value, telephone, container);
+        {
+            if (_hands.TryDropIntoContainer(user.Value, telephone, container))
+                PlayGrabSound(rotary);
+        }
         else
-            _container.Insert(telephone, container);
+        {
+            if (_container.Insert(telephone, container))
+                PlayGrabSound(rotary);
+        }
     }
 
     private void HangUp(EntityUid self, EntityUid other)
@@ -291,6 +305,18 @@ public abstract class SharedTelephoneSystem : EntitySystem
     private void StopSound(EntityUid ent)
     {
         _ambientSound.SetSound(ent, new SoundPathSpecifier(""));
+    }
+
+    private void PlayGrabSound(EntityUid rotary)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryComp(rotary, out RotaryPhoneComponent? comp))
+            return;
+
+        _audio.PlayPvs(comp.GrabSound, rotary);
+        _audio.Stop(comp.VoicemailSoundEntity);
     }
 
     protected bool TryGetOtherPhone(EntityUid rotary, out EntityUid other)
@@ -402,6 +428,7 @@ public abstract class SharedTelephoneSystem : EntitySystem
 
         RemCompDeferred<RotaryPhoneDialingComponent>(ent);
         ReturnPhone(ent.Owner, phone, user);
+        StopSound(ent.Owner);
 
         if (ent.Comp.Other is { } other)
         {
@@ -431,6 +458,12 @@ public abstract class SharedTelephoneSystem : EntitySystem
 
         if (ent.Comp.Other is { } other)
         {
+            if (TryComp<RotaryPhoneDialingComponent>(other, out var dialing))
+            {
+                dialing.Other = null;
+                Dirty(other, dialing);
+            }
+
             HangUp(ent, other);
 
             if (!HasPickedUp(other))
@@ -450,25 +483,59 @@ public abstract class SharedTelephoneSystem : EntitySystem
         var dialingQuery = EntityQueryEnumerator<RotaryPhoneDialingComponent, RotaryPhoneComponent>();
         while (dialingQuery.MoveNext(out var uid, out var dialing, out var phone))
         {
-            if (phone.Idle)
+            if (phone.Phone == null)
                 continue;
 
-            phone.Idle = true;
-            Dirty(uid, phone);
+            // Play busy sound after voicemail ends
+            if (time > dialing.LastVoicemail + phone.VoicemailTimeoutDelay && dialing.DidVoicemail && !dialing.DidVoicemailTimeout)
+            {
+                dialing.DidVoicemailTimeout = true;
+                Dirty(uid, dialing);
+
+                _ambientSound.SetSound(uid, BusySound);
+                _ambientSound.SetVolume(uid, BusySound.Params.Volume);
+            }
 
             if (dialing.Other is not { } other)
                 continue;
 
-            if (!HasComp<RotaryPhoneDialingComponent>(other) ||
-                !HasComp<RotaryPhoneReceivingComponent>(other))
+            if (!TryComp<RotaryPhoneReceivingComponent>(other, out var receiving))
+                continue;
+
+            if (!TryComp<RotaryPhoneComponent>(other, out var receivingPhone))
+                continue;
+
+            if (receivingPhone.Phone == null)
+                continue;
+
+            if (HasPickedUp(other))
+                continue;
+
+            if (phone.Idle)
             {
+                if (time > phone.LastCall + phone.VoicemailDelay && !dialing.DidVoicemail)
+                {
+                    if (HangUpReceiving((other, receiving), receivingPhone.Phone.Value, null))
+                    {
+                        StopSound(other);
+                        StopSound(uid);
+                    }
+
+                    phone.VoicemailSoundEntity = _audio.PlayPvs(phone.VoicemailSound, phone.Phone.Value)?.Entity;
+                    dialing.DidVoicemail = true;
+                    dialing.LastVoicemail = time;
+                    Dirty(uid, dialing);
+                    Dirty(uid, phone);
+                }
+
                 continue;
             }
 
-            if (!HasPickedUp(other) &&
-                time > phone.LastCall + phone.DialingIdleDelay &&
-                phone.DialingIdleSound is { } sound)
+            if (time > phone.LastCall + phone.DialingIdleDelay && phone.DialingIdleSound is { } sound)
             {
+                phone.Idle = true;
+                Dirty(uid, phone);
+
                 _ambientSound.SetSound(uid, sound);
                 _ambientSound.SetVolume(uid, sound.Params.Volume);
             }

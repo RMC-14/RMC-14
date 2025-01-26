@@ -54,11 +54,14 @@
   id: CMGearStaffOfficer
   equipment:
     jumpsuit: CMJumpsuitBO
-    back: CMSatchelMarine
     shoes: RMCShoesLaceup
-    head: CMHeadCap
+    head: RMCHeadCapFlippable
     id: CMIDCardStaffOfficer
     ears: RMCHeadsetMarineCommand
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchGeneralLarge
+  inhand:
+    - RMCRangefinder
 
 - type: entity
   parent: CMSpawnPointJobBase

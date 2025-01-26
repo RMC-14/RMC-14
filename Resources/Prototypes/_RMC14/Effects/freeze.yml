@@ -13,3 +13,19 @@
   - type: Tag
     tags:
     - HideContextMenu
+
+- type: entity
+  parent: RMCEffectFreeze
+  id: RMCEffectFreezeVanguardRootBase
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 1
+
+- type: entity
+  parent: RMCEffectFreeze
+  id: RMCEffectFreezeVanguardRootBuffed
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 1.8

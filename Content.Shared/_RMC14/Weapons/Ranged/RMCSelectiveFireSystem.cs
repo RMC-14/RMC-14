@@ -228,4 +228,14 @@ public sealed class RMCSelectiveFireSystem : EntitySystem
         Dirty(gun);
     }
 #endregion
+    public void SetModifiers(Entity<RMCSelectiveFireComponent?> ent, Dictionary<SelectiveFire, SelectiveFireModifierSet> dict)
+    {
+        if (ent.Comp == null && !TryComp(ent.Owner, out ent.Comp))
+            return;
+
+        ent.Comp.Modifiers = new Dictionary<SelectiveFire, SelectiveFireModifierSet>(dict);
+        RefreshFireModes(ent, true);
+        Dirty(ent);
+
+    }
 }

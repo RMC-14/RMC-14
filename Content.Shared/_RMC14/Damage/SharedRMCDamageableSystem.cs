@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Content.Shared._RMC14.Armor;
+﻿using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Orders;
@@ -17,6 +16,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Projectiles;
 using Content.Shared.Silicons.Borgs;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
@@ -100,6 +100,13 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                 typeof(SharedMarineOrdersSystem), typeof(CMArmorSystem), typeof(SharedXenoPheromonesSystem)
             ]);
 
+        SubscribeLocalEvent<ProjectileDamageReceivedComponent, DamageModifyEvent>(OnProjectileDamageReceivedModify,
+            after:
+            [
+                typeof(SharedArmorSystem), typeof(BlockingSystem), typeof(InventorySystem), typeof(SharedBorgSystem),
+                typeof(SharedMarineOrdersSystem), typeof(CMArmorSystem), typeof(SharedXenoPheromonesSystem)
+            ]);
+
         _bruteTypes.Clear();
         _burnTypes.Clear();
 
@@ -118,6 +125,12 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                 _burnTypes.Add(type);
             }
         }
+    }
+
+    private void OnProjectileDamageReceivedModify(Entity<ProjectileDamageReceivedComponent> ent, ref DamageModifyEvent args)
+    {
+        if (HasComp<ProjectileComponent>(args.Tool))
+            args.Damage *= ent.Comp.Multiplier;
     }
 
     private void OnDamageMobStateMapInit(Entity<DamageMobStateComponent> ent, ref MapInitEvent args)
@@ -297,9 +310,12 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
             var total = equal?.GetTotal() ?? FixedPoint2.Zero;
             var left = amount - total;
             if (left <= FixedPoint2.Zero)
+            {
                 break;
+            }
 
             equal = DistributeHealing(damageable, group.ID, left, equal);
+            amount = left;
         }
 
         return equal ?? new DamageSpecifier();

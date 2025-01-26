@@ -45,4 +45,7 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
 
     [DataField]
     public float RoleWeight;
+
+    [DataField]
+    public ProtoId<StartingGearPrototype>? DummyStartingGear { get; private set; }
 }

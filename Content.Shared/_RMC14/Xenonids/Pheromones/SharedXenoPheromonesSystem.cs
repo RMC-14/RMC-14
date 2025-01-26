@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
 using Content.Shared.Coordinates;
@@ -7,6 +8,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
@@ -66,6 +68,9 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, ComponentRemove>(OnFrenzyRemove);
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, GetMeleeDamageEvent>(OnFrenzyGetMeleeDamage);
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, RefreshMovementSpeedModifiersEvent>(OnFrenzyMovementSpeedModifiers);
+        SubscribeLocalEvent<XenoFrenzyPheromonesComponent, PullStartedMessage>(OnFrenzyPullStarted, after: [typeof(RMCPullingSystem)] );
+        SubscribeLocalEvent<XenoFrenzyPheromonesComponent, PullStoppedMessage>(OnFrenzyPullStopped, after: [typeof(RMCPullingSystem)] );
+
 
         SubscribeLocalEvent<XenoActivePheromonesComponent, MobStateChangedEvent>(OnActiveMobStateChanged);
 
@@ -176,7 +181,20 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     private void OnFrenzyMovementSpeedModifiers(Entity<XenoFrenzyPheromonesComponent> frenzy, ref RefreshMovementSpeedModifiersEvent args)
     {
         var speed = 1 + (frenzy.Comp.MovementSpeedModifier * frenzy.Comp.Multiplier).Float();
+        if (HasComp<PullingSlowedComponent>(frenzy.Owner))
+            speed = 1 + (frenzy.Comp.PullMovementSpeedModifier * frenzy.Comp.Multiplier).Float();
+        
         args.ModifySpeed(speed, speed);
+    }
+
+    private void OnFrenzyPullStarted(Entity<XenoFrenzyPheromonesComponent> frenzy, ref PullStartedMessage args)
+    {
+        _movementSpeed.RefreshMovementSpeedModifiers(args.PullerUid);
+    }
+
+    private void OnFrenzyPullStopped(Entity<XenoFrenzyPheromonesComponent> frenzy, ref PullStoppedMessage args)
+    {
+        _movementSpeed.RefreshMovementSpeedModifiers(args.PullerUid);
     }
 
     private void AssignMaxMultiplier(ref FixedPoint2 a, FixedPoint2 b)

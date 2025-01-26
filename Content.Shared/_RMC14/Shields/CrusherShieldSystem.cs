@@ -7,6 +7,7 @@ using Content.Shared.Coordinates;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using Robust.Shared.Player;
+using Content.Shared._RMC14.Damage;
 
 namespace Content.Shared._RMC14.Shields;
 
@@ -22,8 +23,8 @@ public sealed partial class CrusherShieldSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<CrusherShieldComponent, DamageModifyEvent>(OnDamage, before: [typeof(XenoShieldSystem)], after: [typeof(CMArmorSystem)]);
-        SubscribeLocalEvent<CrusherShieldComponent, GetExplosionResistanceEvent>(OnGetExplosionResistance, after: [typeof(CMArmorSystem)]);
+        SubscribeLocalEvent<CrusherShieldComponent, DamageModifyAfterResistEvent>(OnDamage, before: [typeof(XenoShieldSystem)]);
+        SubscribeLocalEvent<CrusherShieldComponent, GetExplosionResistanceEvent>(OnGetExplosionResistance);
         SubscribeLocalEvent<CrusherShieldComponent, RemovedShieldEvent>(OnShieldRemove);
         SubscribeLocalEvent<CrusherShieldComponent, XenoDefensiveShieldActionEvent>(OnXenoDefensiveShieldAction);
     }
@@ -89,7 +90,7 @@ public sealed partial class CrusherShieldSystem : EntitySystem
         }
     }
 
-    public void OnDamage(Entity<CrusherShieldComponent> ent, ref DamageModifyEvent args)
+    public void OnDamage(Entity<CrusherShieldComponent> ent, ref DamageModifyAfterResistEvent args)
     {
         if (!TryComp<XenoShieldComponent>(ent, out var shield))
             return;
@@ -114,8 +115,7 @@ public sealed partial class CrusherShieldSystem : EntitySystem
         if (!ent.Comp.ExplosionResistApplying)
             return;
 
-        // TODO RMC14 halved like armor for now
-        var explosionResist = ent.Comp.ExplosionResistance / 2;
+        var explosionResist = ent.Comp.ExplosionResistance;
 
         var resist = (float) Math.Pow(1.1, explosionResist / 5.0); // From armor calcualtion
         args.DamageCoefficient /= resist;

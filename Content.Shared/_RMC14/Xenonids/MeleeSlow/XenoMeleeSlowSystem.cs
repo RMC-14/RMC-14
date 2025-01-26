@@ -70,6 +70,9 @@ public sealed class XenoMeleeSlowSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
+        if (_net.IsClient)
+            return;
+
         var time = _timing.CurTime;
 
         var victimQuery = EntityQueryEnumerator<XenoSlowedComponent>();

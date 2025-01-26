@@ -83,6 +83,8 @@ public abstract class SharedEvacuationSystem : EntitySystem
 
         SubscribeLocalEvent<LifeboatComputerComponent, ActivatableUIOpenAttemptEvent>(OnLifeboatComputerUIOpenAttempt);
 
+        SubscribeLocalEvent<EvacuationPumpComponent, ExaminedEvent>(OnEvacuationPumpExamined);
+
         Subs.BuiEvents<EvacuationComputerComponent>(EvacuationComputerUi.Key,
             subs =>
             {
@@ -238,6 +240,26 @@ public abstract class SharedEvacuationSystem : EntitySystem
         };
 
         _popup.PopupClient(msg, ent, args.User, PopupType.SmallCaution);
+    }
+
+    private void OnEvacuationPumpExamined(Entity<EvacuationPumpComponent> ent, ref ExaminedEvent args)
+    {
+        if (!IsEvacuationInProgress())
+            return;
+        using (args.PushGroup(nameof(EvacuationPumpComponent)))
+        {
+            var progress = GetEvacuationProgress();
+            if (progress < 25)
+                args.PushMarkup("It looks like it barely has any fuel yet.");
+            else if (progress < 50)
+                args.PushMarkup("It looks like it has accumulated some fuel.");
+            else if (progress < 75)
+                args.PushMarkup("It looks like the fuel tank is a little over half full.");
+            else if (progress < 100)
+                args.PushMarkup("It looks like the fuel tank is almost full.");
+            else
+                args.PushMarkup("It looks like the fuel tank is full.");
+        }
     }
 
     private void OnLifeboatComputerUIOpenAttempt(Entity<LifeboatComputerComponent> ent, ref ActivatableUIOpenAttemptEvent args)

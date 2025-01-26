@@ -21,7 +21,7 @@ maxplayers = 500
 soft_max_players = 350
 panic_bunker.enabled = false
 round_end_pvs_overrides = false
-round_restart_time = 300
+round_restart_time = 180
 lobbyduration = 180
 
 [ghost]
@@ -49,7 +49,7 @@ discord = "https://discord.gg/rouny"
 github = "https://github.com/RMC-14/RMC-14"
 patreon = "https://www.patreon.com/RMC14"
 #website = ""
-#wiki = ""
+wiki = "https://wiki.rouny-ss14.com"
 
 [net]
 tickrate = 25

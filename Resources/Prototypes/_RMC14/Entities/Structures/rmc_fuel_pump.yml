@@ -21,7 +21,38 @@
         layer:
         - MidImpassable
         - LowImpassable
+  - type: InteractionOutline
+  - type: Clickable
+  - type: EvacuationPump
+  - type: ApcPowerReceiver
+  - type: RMCPowerReceiver
+    idleLoad: 5
+    activeLoad: 10
+    channel: Equipment
   - type: Sprite
     sprite: _RMC14/Structures/Power/fuel_pump.rsi
-    state: fuelpump_off
     offset: -0.5,0
+    layers:
+    - state: fuelpump_off
+      map: [ "unpowered" ]
+    - state: fuelpump_off
+      map: [ "enum.EvacuationPumpLayers.Layer" ]
+      visible: false
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:      
+      enum.EvacuationPumpLayers.Layer:
+        enum.EvacuationPumpLayers.Layer:
+          Empty: { state: fuelpump_0 }
+          TwentyFive: { state: fuelpump_25 }
+          Fifty: { state: fuelpump_50 }
+          SeventyFive: { state: fuelpump_75 }
+          Full: { state: fuelpump_100 }
+      enum.PowerDeviceVisuals.Powered:
+        enum.EvacuationPumpLayers.Layer:
+          True: { visible: true }
+          False: { visible: false }
+        unpowered:
+          True: { visible: false }
+          False: { visible: true }
+        

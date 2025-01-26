@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CMBaseWeaponRifle
   id: WeaponRifleM16 # TODO: Make the M16 grenadier rifle when impact nades exist
   name: M16 rifle
@@ -121,7 +121,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 56
+        Piercing: 40
   - type: CMArmorPiercing
     amount: 5
 

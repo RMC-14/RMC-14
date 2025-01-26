@@ -107,10 +107,20 @@
   - type: XenoTailStabAction
 
 - type: entity
+  id: ActionXenoTailSlam
+  parent: ActionXenoTailStab
+  name: Tail Slam
+
+- type: entity
   parent: ActionXenoTailStab
   id: ActionXenoTailStabCorrosive
   name: Corrosive Tail Stab
   description: Launches an attack towards a given direction. The cooldown is faster if you miss. [color=red]It also injects diluted molecular acid into the target, dealing damage over time.[/color]
+  components:
+  - type: WorldTargetAction
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: tail_attack_acid
 
 - type: entity
   parent: ActionXenoTailStab
@@ -161,14 +171,14 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: prae_dash
     event: !type:XenoLeapActionEvent
-    useDelay: 11
+    useDelay: 10
     checkCanAccess: false
 
 - type: entity
   id: ActionXenoHeadbutt
   parent: ActionXenoBase
   name: Headbutt (10) # TODO RMC14 proper plasma costs
-  description: Charge towards the targeted enemy and push back the first enemy hit.
+  description: Charge towards the targeted enemy and push back the first enemy hit, piercing armor slightly. Does less damage but has more knockback when crest is lowered.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
@@ -256,7 +266,7 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: charge_spit
-    event: !type:XenoChargeSpitActionEvent # TODO RMC14 more armor, move faster
+    event: !type:XenoChargeSpitActionEvent
     useDelay: 12
 
 - type: entity
@@ -274,7 +284,7 @@
     useDelay: 8
     range: 6
   - type: ActionBlockIfResting
-  
+
 
 - type: entity
   parent: ActionXenoSprayAcid
@@ -420,7 +430,7 @@
   id: ActionXenoScreech
   parent: ActionXenoBase
   name: Screech (250)
-  description: A wide area of effect stun, screeches upon activation. [color=red]This is blocked by solid walls, smoke, and boiler gas, but not windows![/color]
+  description: A wide area of effect stun, screeches upon activation. [color=red]This will also stun parasites, and is blocked by solid walls, smoke, and boiler gas, but not windows![/color]
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -536,6 +546,20 @@
     onPerform: false
 
 - type: entity
+  id: ActionXenoTremor
+  parent: ActionXenoBase
+  name: Tremor (100)
+  description: Slam the ground with a 7x7 AOE, stunning all enemies in range for a short period of time.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: tremor
+    event: !type:XenoStompActionEvent
+    useDelay: 45
+
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoForTheHive
   name: For The Hive!
@@ -547,4 +571,153 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: screech
     event: !type:XenoForTheHiveActionEvent
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoImpale
+  name: Impale (80)
+  description: Impales an adjacent enemy with your tail. Hits twice on a marked target and removes the mark. Pierces some armor.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_impale
+    event: !type:XenoImpaleActionEvent
+    range: 1.5
+    useDelay: 13
+    deselectOnMiss: false
+  - type: XenoOffensiveAction
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoTailTrip
+  name: Tail Trip (30)
+  description: Disarms and dazes an unmarked enemy. Stuns and dazes for longer on a marked target, and removes the mark.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_tail_trip
+    event: !type:XenoTailTripActionEvent
+    range: 2
+    useDelay: 13
+    deselectOnMiss: false
+  - type: XenoOffensiveAction
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoPierce
+  name: Pierce (50)
+  description: Pierce through enemies in a line doing high damage and piercing some armor. Hitting 2 or more recharges your shield.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_pierce
+    event: !type:XenoPierceActionEvent
+    range: 15
+    useDelay: 3
+    checkCanAccess: false
+  - type: XenoOffensiveAction
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoDash
+  id: ActionXenoBlitz
+  name: Blitz (50)
+  description: Dash a short distance towards a given location. After 3 seconds or if you use it again before then, damages enemies around you. Hitting 1 or more recharges your shield.
+  components:
+  - type: WorldTargetAction
+    useDelay: 0
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoCleaveRoot
+  name: Cleave Root
+  description: Root an enemy for a second. The duration is higher if your shield is up.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_cleave_root
+    event: !type:XenoCleaveActionEvent
+    range: 1.5
+    useDelay: 12
+    deselectOnMiss: false
+  - type: ActionBlockIfResting
+  - type: ActionSharedCooldown
+    id: ActionXenoCleaveRoot
+    ids:
+    - ActionXenoCleaveFling
+    cooldown: 12
   
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoCleaveFling
+  name: Cleave Fling
+  description: Fling an enemy. The distance is doubled if your shield is up.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_cleave_fling
+    event: !type:XenoCleaveActionEvent
+      flings: true
+    range: 1.5
+    useDelay: 12
+    deselectOnMiss: false
+  - type: ActionBlockIfResting
+  - type: ActionSharedCooldown
+    id: ActionXenoCleaveFling
+    ids:
+    - ActionXenoCleaveRoot
+    cooldown: 12
+
+#- type: entity
+#  parent: ActionXenoBase
+#  id: ActionXenoToggleCleave
+#  name: Toggle Cleave Type
+#  description: Toggle between your Cleave rooting enemies or flinging enemies.
+#  components:
+#  - type: InstantAction
+#    itemIconStyle: NoItem
+#    backgroundOn: null
+#    icon:
+#      sprite: _RMC14/Actions/xeno_actions.rsi
+#      state: prae_cleave_root
+#    iconOn:
+#      sprite: _RMC14/Actions/xeno_actions.rsi
+#      state: prae_cleave_fling
+#    event: !type:XenoToggleCleaveActionEvent
+
+- type: entity
+  id: ActionXenoSpitQueen
+  parent: ActionXenoSpit
+  name: Xeno Spit (50/25)
+  description: Launches a projectile that will either paralyze the first enemy it hits or damage them and cover them in acid.
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoToggleSpitType
+  name: Toggle Spit Type
+  description: Toggle between Neurotoxic or Acidic spit. Neurotoxic has less range and costs 50 plasma, and knocks down the first enemy it hits. Acidic has more range and costs 25 plasma, and damages and covers in acid the first enemy it hits.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    backgroundOn: null
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: shift_spit_neurotoxin
+    iconOn:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: shift_spit_xeno_acid
+    event: !type:XenoSpitToggleActionEvent
+

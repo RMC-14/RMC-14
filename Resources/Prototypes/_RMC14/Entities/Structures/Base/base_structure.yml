@@ -121,6 +121,7 @@
     damageModifierSet: StructuralMarine
   - type: Corrodible
     isCorrodible: true
+    structure: true
   - type: Clickable
   - type: RMCWallExplosionDeletable
   - type: DestroyedByExplosionType

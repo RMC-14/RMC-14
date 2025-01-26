@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction;
+using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -34,6 +35,8 @@ using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -64,6 +67,7 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly TagSystem _tags = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
@@ -143,6 +147,7 @@ public sealed class XenoEggSystem : EntitySystem
         var doAfterArgs = new DoAfterArgs(EntityManager, xeno, delay, ev, xeno)
         {
             BreakOnMove = true,
+            MovementThreshold = 0.001f
         };
 
         if (_doAfter.TryStartDoAfter(doAfterArgs))
@@ -178,7 +183,10 @@ public sealed class XenoEggSystem : EntitySystem
     private void OnXenoAttachedRemove(Entity<XenoAttachedOvipositorComponent> attached, ref ComponentRemove args)
     {
         if (!TerminatingOrDeleted(attached) && TryComp(attached, out TransformComponent? xform))
+        {
             _transform.Unanchor(attached, xform);
+            _physics.TrySetBodyType(attached, BodyType.KinematicController);
+        }
 
         var ev = new XenoOvipositorChangedEvent(false);
         RaiseLocalEvent(attached, ref ev, true);
@@ -381,9 +389,10 @@ public sealed class XenoEggSystem : EntitySystem
 
     private bool CanTrigger(EntityUid user)
     {
-        return HasComp<InfectableComponent>(user) &&
-               !HasComp<VictimInfectedComponent>(user) &&
-               !_mobState.IsDead(user);
+        return TryComp<InfectableComponent>(user, out var infected)
+               && !infected.BeingInfected
+               && !_mobState.IsDead(user)
+               && !HasComp<VictimInfectedComponent>(user);
     }
 
     public bool Open(Entity<XenoEggComponent> egg, EntityUid? user, out EntityUid? spawned)
@@ -574,7 +583,8 @@ public sealed class XenoEggSystem : EntitySystem
 
             if (HasComp<XenoConstructComponent>(uid) ||
                 _tags.HasAnyTag(uid.Value, StructureTag, AirlockTag) ||
-                HasComp<StrapComponent>(uid))
+                HasComp<StrapComponent>(uid) ||
+                HasComp<XenoTunnelComponent>(uid))
             {
                 var msg = Loc.GetString("cm-xeno-egg-blocked");
                 _popup.PopupClient(msg, uid.Value, user, PopupType.SmallCaution);
