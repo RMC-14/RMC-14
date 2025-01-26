@@ -54,8 +54,8 @@
     plasma: 55
   - type: XenoConstructionBuildSpeed
     buildTimeMult: 0.5
-  - type: MeleeReceivedMultiplier # Supposed to be instantly destroyed by any melee
-    otherMultiplier: 50
+  - type: MeleeReceivedMultiplier
+    otherMultiplier: 8.2
     xenoDamage:
       types:
         Slash: 45
