@@ -48,7 +48,6 @@ using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Actions;
-using Content.Shared.Buckle.Components;
 using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
@@ -146,6 +145,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private TimeSpan _hijackStunTime = TimeSpan.FromSeconds(5);
 
     private readonly List<MapId> _almayerMaps = [];
+    private readonly List<EntityUid> _marineList = [];
 
     private EntityQuery<HyperSleepChamberComponent> _hyperSleepChamberQuery;
     private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
@@ -881,7 +881,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             var marines = EntityQueryEnumerator<ActorComponent, MarineComponent, MobStateComponent, TransformComponent>();
             var marinesAlive = false;
-            var marineList = new List<EntityUid>();
+            _marineList.Clear();
             while (marines.MoveNext(out var marineId, out _, out _, out var mobState, out var xform))
             {
                 if (HasComp<VictimInfectedComponent>(marineId) ||
@@ -901,7 +901,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                      _almayerMaps.Contains(xform.MapID)))
                 {
                     marinesAlive = true;
-                    marineList.Add(marineId);
+                    _marineList.Add(marineId);
                 }
 
                 if (marinesAlive)
@@ -935,10 +935,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 continue;
             }
 
-            if (marineList.Count == 1)
+            if (_marineList.Count == 1)
             {
                 // TODO add ghost alert for last human
-                var lastMarine = marineList.Last();
+                var lastMarine = _marineList.Last();
 
                 var cloak = _thermalCloak.FindWornCloak(lastMarine);
                 var ghillie = _ghillieSuit.FindSuit(lastMarine);
