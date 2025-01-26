@@ -44,9 +44,10 @@ public sealed class DeadGhostVisualsSystem : EntitySystem
                 continue;
 
             var entity = mind.OwnedEntity;
+            var originalEntity = GetEntity(mind.OriginalOwnedEntity);
 
-            if (entity == null && mind.OriginalOwnedEntity != null)
-                entity = GetEntity(mind.OriginalOwnedEntity); // incase they ghosted
+            if (HasComp<GhostComponent>(entity)) // incase they ghosted
+                entity = originalEntity;
 
             if (!entity.HasValue)
                 continue;
