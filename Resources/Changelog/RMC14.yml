@@ -1,41 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added the missing boost to evolution points when hijack starts. For 3
-      minutes, xenos will get 5 evolution points per second, 10 times the default.
-    type: Add
-  - message: Added the missing evolution point bonus to the hive core, when present
-      it will boost default evolution point gain by 50%. This change also resets default
-      evolution point gain to its intended value, 0.5 per second instead of 1 per
-      second. A hive core will bring it up to 0.75 per second.
-    type: Add
-  - message: Fixed some xenos requiring more evolution points than intended to evolve.
-      T1 > T2 now requires 200, down from 300. T2 > T3 now requires 500, down from
-      540.
-    type: Fix
-  - message: Pressing Tab will now switch to focusing the next input on the mortar
-      window.
-    type: Tweak
-  - message: Fixed the start of a hijack not resetting the Queen's grow ovipositor
-      cooldown.
-    type: Fix
-  - message: Fixed Req not being able to buy 20 plastic for 2000 dollars, primarily
-      used in the medilathe.
-    type: Fix
-  - message: Fixed the pump shotgun not being able to fit an extended barrel.
-    type: Fix
-  - message: Fixed putting a helmet in your pocket as a squad role giving you a colored
-      mohawk.
-    type: Fix
-  - message: Fixed equipping armor by pressing F having no delay.
-    type: Fix
-  - message: Fixed epinephrine healing 5 Brute/Burn/Toxin instead of 20.
-    type: Fix
-  id: 761
-  time: '2024-09-30T22:40:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4200
-- author: DrSmugleaf
-  changes:
   - message: Added Seeks-to-Fight and Stares-at-Stars figurine.
     type: Add
   id: 762
@@ -5112,5 +5077,23 @@
   id: 1260
   time: '2025-01-26T11:58:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3440
+- author: Vermidia
+  changes:
+  - message: Added sticky and fast resin. Building castes can make these faster than
+      walls and doors, and they're quite cheap. Sticky resin slows non-hivemembers
+      on it more than hive weeds. Fast resin speeds up hivemember xenos on it.
+    type: Add
+  - message: Fixed how much weeds slow marines down. Generally slow on normal weeds
+      for armored marines is slightly less now, but the penalty is heavier unarmored.
+      Hardy and Hive weeds now also have stronger slows compared to normal weeds.
+    type: Fix
+  - message: Fixed Resin Whisperer nodes not costing plasma. Placing a node now also
+      has an animation.
+    type: Fix
+  - message: Fixed Hive Core spawning hiveless hive weeds.
+    type: Fix
+  id: 1261
+  time: '2025-01-26T12:09:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5402
 Name: RMC14
 Order: -1
