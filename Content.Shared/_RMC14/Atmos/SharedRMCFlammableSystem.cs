@@ -56,12 +56,14 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly CMArmorSystem _armor = default!;
 
     private static readonly ProtoId<AlertPrototype> FireAlert = "Fire";
     private static readonly ProtoId<ReagentPrototype> WaterReagent = "Water";
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
 
+    private EntityQuery<BlockTileFireComponent> _blockTileFireQuery;
     private EntityQuery<DoorComponent> _doorQuery;
     private EntityQuery<FlammableComponent> _flammableQuery;
     private EntityQuery<RMCIgniteOnCollideComponent> _igniteOnCollideQuery;
@@ -70,6 +72,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
     public override void Initialize()
     {
+        _blockTileFireQuery = GetEntityQuery<BlockTileFireComponent>();
         _doorQuery = GetEntityQuery<DoorComponent>();
         _flammableQuery = GetEntityQuery<FlammableComponent>();
         _igniteOnCollideQuery = GetEntityQuery<RMCIgniteOnCollideComponent>();
@@ -94,6 +97,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         SubscribeLocalEvent<RMCIgniteOnCollideComponent, DamageCollideEvent>(OnIgniteDamageCollide);
 
         SubscribeLocalEvent<SteppingOnFireComponent, CMGetArmorEvent>(OnSteppingOnFireGetArmor);
+        SubscribeLocalEvent<SteppingOnFireComponent, ComponentRemove>(OnSteppingOnFireRemoved);
 
         SubscribeLocalEvent<CanBeFirePattedComponent, InteractHandEvent>(OnCanBeFirePattedInteractHand, before: [typeof(InteractionPopupSystem)]);
 
@@ -195,7 +199,10 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             return;
 
         var ev = new CraftMolotovDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.Delay, ev, ent, ent, args.Used);
+        var doAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.Delay, ev, ent, ent, args.Used)
+        {
+            BreakOnMove = true,
+        };
         _doAfter.TryStartDoAfter(doAfter);
     }
 
@@ -262,6 +269,11 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     private void OnIgniteDamageCollide(Entity<RMCIgniteOnCollideComponent> ent, ref DamageCollideEvent args)
     {
         Ignite(args.Target, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks);
+    }
+
+    private void OnSteppingOnFireRemoved(Entity<SteppingOnFireComponent> ent, ref ComponentRemove args)
+    {
+        _armor.UpdateArmorValue((ent, null));
     }
 
     private void OnSteppingOnFireGetArmor(Entity<SteppingOnFireComponent> ent, ref CMGetArmorEvent args)
@@ -386,6 +398,12 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(target);
             while (anchored.MoveNext(out var uid))
             {
+                if (_blockTileFireQuery.HasComp(uid))
+                {
+                    nextRange = 0;
+                    break;
+                }
+
                 if (_tag.HasAnyTag(uid, StructureTag, WallTag) &&
                     !_doorQuery.HasComp(uid))
                 {
@@ -529,6 +547,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
                     _entityWhitelist.IsWhitelistPassOrNull(ignite.ArmorWhitelist, uid))
                 {
                     stepping.ArmorMultiplier = ignite.ArmorMultiplier;
+                    _armor.UpdateArmorValue((uid, null));
                 }
 
                 isStepping = true;
@@ -543,6 +562,8 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
                         _damageable.TryChangeDamage(uid, tile * ignite.Intensity);
                     }
                 }
+
+                Ignite(uid, ignite.Intensity, ignite.Duration, ignite.MaxStacks);
 
                 stepping.LastPosition = coords;
                 break;

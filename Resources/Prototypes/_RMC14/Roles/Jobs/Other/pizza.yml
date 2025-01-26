@@ -36,6 +36,12 @@
         settings: short
     - type: Loadout
       prototypes: [ RMCGearPizzaDeliveryBoy ]
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillVehicles: 1
 
 - type: startingGear
   id: RMCGearPizzaDeliveryBoy

@@ -4,12 +4,16 @@ rmc-announcement-message = [font size=14][bold][color=white]{$author} Announceme
 
     {$message}
 
-rmc-announcement-message-signed = [font size=14][bold][color=white]{$author} Announcement[/color][/bold][/font][font size=12][color=red]
+rmc-announcement-message-signed = [font size=15][bold][color=white]{$author} Announcement[/color][/bold][/font][font size=13][color=red]
 
-    {$message}
+    {$message}[bolditalic]
 
     Signed by,
-    {$job} {$name}[/color][/font]
+    {$name}[/bolditalic][/color][/font]
+
+rmc-announcement-message-raw = [font size=14][bold][color=white]{$author}[/color][/bold][/font][font size=12][color=red]
+
+    {$message}
 
 rmc-announcement-ares-message = [color=white][font size=16][bold]ARES v3.2 Operation Staging Order[/bold][/font][/color][color=red][font size=14][bold]
 
@@ -36,3 +40,7 @@ rmc-announcement-dropship-message = [color=white][font size=16][bold]Dropship Al
 
 rmc-announcement-emergency-dropship-crash = [font size=14][bold][color=white]EMERGENCY[/color][/bold][/font][font size=12][color=red]
   DROPSHIP ON COLLISION COURSE. CRASH IMMINENT.[/color][/font]
+
+rmc-announcement-delta = [color=white][font size=16][bold]SELF-DESTRUCT SYSTEMS ACTIVE[/bold][/font][/color][color=red][font size=14][bold]
+
+     DANGER, THE EMERGENCY DESTRUCT SYSTEM IS NOW ACTIVATED. PROCEED TO THE SELF-DESTRUCT CHAMBER FOR CONTROL ROD INSERTION.[/bold][/font][/color]

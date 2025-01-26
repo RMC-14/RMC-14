@@ -2,7 +2,6 @@
   name: M54CE2 heavy assault rifle
   parent: CMBaseWeaponRifle
   id: WeaponRifleM54CE2
-  suffix: Desert
   description: A large squad support weapon capable of laying down sustained suppressing fire from a mounted position. While unstable and less accurate, it can be lugged and shot with two hands.
   components:
   - type: Sprite
@@ -91,12 +90,12 @@
           - RMCAttachmentBurstFireAssembly
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentVerticalGrip
-  - type: AttachableHolderVisuals # CHANGE THESE WHEN THIS THING GETS ITS OWN SPRITE
+  - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.81, 0.029
+      rmc-aslot-barrel: 0.75, 0.03125
       rmc-aslot-rail: 0.125, 0.185
       rmc-aslot-stock: -0.875, 0.0325
-      rmc-aslot-underbarrel: 0.35, -0.4
+      rmc-aslot-underbarrel: 0.37, -0.3125
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Weapons/Guns/Rifles/m54ce2/jungle.rsi
@@ -108,7 +107,6 @@
 - type: entity
   parent: CMMagazineRifleM54C
   id: CMMagazineRifleM54CE2
-  suffix: Desert
   name: "M54CE2 magazine (10x24mm)"
   components:
   - type: Tag
@@ -141,6 +139,8 @@
       Snow: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/snow.rsi
       Classic: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/classic.rsi
       Urban: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce2/urban.rsi
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifle
 
 - type: Tag
   id: WeaponRifleM54CE2

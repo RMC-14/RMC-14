@@ -4,11 +4,11 @@
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: JumpsuitMarine
   name: Marine uniform
-  suffix: Jungle
   description: Standard-issue Marine uniform. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/standard/jungle.rsi
+  - type: Appearance
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Uniforms/Marine/standard/jungle.rsi
@@ -30,7 +30,6 @@
   parent: JumpsuitMarine
   id: CMJumpsuitMarineEngineer
   name: Marine ComTech uniform
-  suffix: Jungle
   description: Standard-issue Marine combat technician fatigues. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
@@ -48,7 +47,6 @@
   parent: JumpsuitMarine
   id: CMJumpsuitMarineMedic
   name: Marine corpsman uniform
-  suffix: Jungle
   description: Standard-issue Marine hospital corpsman fatigues. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
@@ -66,7 +64,6 @@
   parent: JumpsuitMarine
   id: CMJumpsuitMarineRTO
   name: marine radio telephone operator uniform
-  suffix: Jungle
   description: Standard-issue RTO fatigues. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
@@ -90,7 +87,6 @@
   parent: RMCMarineUniformBase
   id: CMJumpsuitMarineTanker
   name: marine tanker uniform
-  suffix: Jungle
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/jungle.rsi
@@ -109,7 +105,7 @@
 
 # Cargotech
 - type: entity
-  parent: JumpsuitMarine
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitCargoTech
   name: cargo technician uniform
   description: A standard-issue cargo tech uniform.
@@ -144,7 +140,7 @@
 
 # Ordnance Technician / OT
 - type: entity
-  parent: JumpsuitMarine
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitOrdnanceTech
   name: ordnance technician uniform
   description: Standard-issue Ordnance Technician uniform.
@@ -154,7 +150,7 @@
 
 # Maintenance Technician / MT
 - type: entity
-  parent: JumpsuitMarine
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitMaintTech
   name: maintenance technician uniform
   description: Standard-issue Maintenance Technician uniform.
@@ -170,10 +166,10 @@
   id: CMJumpsuitCO
   name: commanding officer uniform
   description: Standard-issue Commanding Officer uniform.
-  suffix: Jungle
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard/jungle.rsi
+  - type: Appearance
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard/jungle.rsi
@@ -190,6 +186,8 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/formal_black.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: entity
   parent: CMJumpsuitCO
@@ -199,6 +197,8 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/formal_white.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: entity
   parent: CMJumpsuitCO
@@ -208,11 +208,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/service.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 # Executive officer
 
 - type: entity
-  parent: JumpsuitMarine
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitXOFormal
   name: marine formal service uniform
   description: A formal service uniform typically worn by marines of the UNMC. Still practicable while still being more formal than the standard service uniform.
@@ -225,7 +227,7 @@
 
 # Officer
 - type: entity
-  parent: JumpsuitMarine
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitBO
   name: marine service uniform
   description: A service uniform worn by members of the marines. Do the corps proud. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
@@ -240,7 +242,6 @@
   parent: JumpsuitMarine
   id: CMJumpsuitOperations
   name: marine operations uniform
-  suffix: Jungle
   description: An operations uniform worn by members of the marines. Do the corps proud. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
@@ -263,7 +264,6 @@
   parent: RMCMarineUniformBase
   id: CMJumpsuitIO
   name: marine intelligence officer uniform
-  suffix: Jungle
   description: Tighter than a vice. Slicker than beard oil. Covered from head to toe in pouches, pockets, bags, straps, and belts. Clearly, you are not only the most intelligent of intelligence officers, but the most fashionable as well. This suit took an entire R&D team five days to develop. It is more expensive than the entire Almayer... probably.
   components:
   - type: Sprite
@@ -273,10 +273,9 @@
 
 # Pilot
 - type: entity
-  parent: JumpsuitMarine
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitPilot
   name: pilot officer bodysuit
-  suffix: Jungle
   description: A bodysuit worn by pilot officers of the marines, and is meant for survival in inhospitable conditions. Fly the marines onwards to glory. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
@@ -337,7 +336,7 @@
 
 # Marine
 - type: entity
-  parent: JumpsuitMarine
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitSurvivorMarine
   name: UNMC uniform
   description: Torn, Burned and blood stained. This uniform has seen much more than you could possibly imagine.

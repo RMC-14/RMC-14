@@ -1,4 +1,7 @@
-﻿command-description-areas-load = Load all saved areas to the map as entities.
+﻿command-description-alertlevel-get = Prints the current alert level on the warship to the console.
+command-description-alertlevel-set = Changes the alert level on the warship.
+
+command-description-areas-load = Load all saved areas to the map as entities.
 command-description-areas-loadmortar = Load only mortarable saved areas to the map as entities.
 command-description-areas-save = Save all mapped areas to the map.
 

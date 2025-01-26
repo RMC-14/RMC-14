@@ -17,6 +17,47 @@
       - PillCanister
       - CMSurgicalCase
   - type: PlaytimeMedalHolder
+  
+- type: entity
+  abstract: True
+  parent: [RMCBaseJacket, BaseFoldable]
+  id: RMCBaseJacketButtonable
+  components:
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-button-up-verb
+    foldVerbText: rmc-unbutton-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: open
+    foldedHeldPrefix: open
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: true
+    - state: icon-open
+      map: ["foldedLayer"]
+      visible: false
+
+- type: entity
+  abstract: True
+  parent: RMCBaseJacketButtonable
+  id: RMCBaseJacketButtonableOpened
+  suffix: opened
+  components:
+  - type: Foldable
+    folded: true
+  - type: Clothing
+    equippedPrefix: open
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: icon-open
+      map: ["foldedLayer"]
+      visible: true
 
 - type: entity
   abstract: true
@@ -118,7 +159,69 @@
       - RMCMotionDetector
       #TODO Walkman
 
-# TODO RMC14 labcoat has it's own list
+- type: entity
+  abstract: true
+  id: RMCAllowSuitStorageClothingLabcoat
+  components:
+  - type: AllowSuitStorage
+    whitelist:
+      components:
+      - CMSurgeryTool
+      - RMCLighter
+      - Stunbaton
+      - Gun
+      tags:
+      - DiscreteHealthAnalyzer
+      - CMOintment
+      - CMTraumaKit
+      - CMBurnKit
+      - Gauze
+      - Brutepack
+# TODO RMC14 splints
+      - Dropper
+      - Syringe
+      - Hypospray
+      - GlassBeaker
+      - Pill
+      - PillCanister
+      - Paper
+      - CMSurgicalLine
+      - CMSynthGraft
+      - CMRollerBed
+      - CMBloodPack
+# TODO RMC14 spray bottle
+      - Handcuffs
+      - GasTank
+      - Flashlight
+      - CigPack
+      - Knife
+      - RMCG8Pouch
+      - Binoculars
+      - RMCMacheteScabbard
+      - Crowbar
+      - DiscreteHealthAnalyzer
+      - Pen
+      - Crowbar
+      - Radio
+      - RMCMotionDetector
+
+- type: entity
+  abstract: true
+  id: RMCAllowSuitStorageClothingChefApron
+  components:
+  - type: AllowSuitStorage
+    whitelist:
+      tags:
+      - Knife
+#TODO RMC kitchen knife
+      - Pen
+      - Crowbar
+      - Radio
+      - GasTank
+      - DiscreteHealthAnalyzer
+      - Flashlight
+      
+      
 
 # TODO RMC14 chef/medical apron have a shared list
 
@@ -175,13 +278,13 @@
   parent: RMCBaseJacket
   id: CMCoatASO
   name: auxiliary support officer jacket
-  suffix: Jungle
   description: A comfortable vest for officers who are expected to work long hours staring at rows of numbers and inspecting equipment from knives to torpedos to entire dropships.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/jungle.rsi
+  - type: Appearance
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/jungle.rsi
@@ -262,7 +365,6 @@
 - type: entity
   parent: CMCoatOfficer
   id: RMCCoatService
-  suffix: Jungle
   description: A service jacket typically worn by officers of the UNMC. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite

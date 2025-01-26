@@ -356,13 +356,14 @@
       params:
         volume: -2
   - type: OnShootTriggerAmmoTimer
-    delay: 1
+    delay: 1.5
     beepInterval: 2
     initialBeepDelay: 0
     beepSound:
       path: "/Audio/Effects/beep1.ogg"
       params:
         volume: 5
+    timerStart: enum.TimerStartMode.OnHitGround
   - type: ShootAtFixedPoint
     maxFixedRange: 7
   - type: UniqueAction
@@ -427,6 +428,8 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
       state: grenade-mk1-on
+  - type: AttachableVisuals
+    offset: -0.1, 0.218
   - type: Tag
     tags:
     - RMCAttachmentUnderbarrel

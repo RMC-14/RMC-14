@@ -59,6 +59,7 @@
       choices: { RMCPouch: 2 }
       entries:
       - id: RMCPouchBayonetFill
+        name: bayonet sheath (Full)
       - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
         recommended: true
@@ -96,9 +97,9 @@
         points: 5
     - name: Restricted Firearms
       entries:
-      - id: RMCMK80Case
+      - id: RMCGunCasePistolMK80
         points: 15
-      - id: RMCSmartPistolCase
+      - id: RMCGunCasePistolSmart
         points: 15
     #- id: CMM79GrenadeLauncher
     #  points: 30
@@ -161,8 +162,10 @@
       - id: CMWebbingHolster
         points: 15
       - id: RMCScabbardMacheteFilled
+        name: machete scabbard (Full)
         points: 15
       - id: RMCPouchMacheteFilled
+        name: machete pouch (Full)
         points: 15
       - id: RMCBackpackRTO
         points: 15

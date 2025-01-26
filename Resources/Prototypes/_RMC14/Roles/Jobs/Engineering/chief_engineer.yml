@@ -7,7 +7,13 @@
   requirements:
   - !type:TotalJobsTimeRequirement
     group: CMJobsEngineering
-    time: 36000 # 10 hours
+    time: 72000 # 20 hours
+  ranks:
+    RMCRankFirstLT:
+    - !type:RoleTimeRequirement
+      role: CMJobChiefEngineer
+      time: 252000 # 70 hours
+    RMCRankSecondLT: []
   weight: 5
   startingGear: CMGearChiefEngineer
   icon: "CMJobIconChiefEngineer"
@@ -42,7 +48,7 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "CE"
+      prefix: cm-job-prefix-chief-engineer
 
 - type: startingGear
   id: CMGearChiefEngineer
