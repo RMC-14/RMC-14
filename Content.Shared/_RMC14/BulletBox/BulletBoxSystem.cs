@@ -70,7 +70,8 @@ public sealed class BulletBoxSystem : EntitySystem
 
         var ev = new BulletBoxTransferDoAfterEvent();
         var delay = ent.Comp.DelayTransferFromBox;
-        if(ent.Comp.TransferToBox){
+        if (ent.Comp.TransferToBox)
+        {
             delay = ent.Comp.DelayTransferToBox;
         }
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent, ent, args.Used)
