@@ -473,7 +473,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             }
         }
 
-        var ev = new XenoStructureConstructionFinishedEvent();
+        var ev = new XenoHiveStructureConstructionFinishedEvent();
         RaiseLocalEvent(spawn, ref ev);
     }
 
