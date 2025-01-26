@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: TsjipTsjip
-  changes:
-  - message: High Command headset and encryption key exist now.
-    type: Add
-  id: 759
-  time: '2024-09-29T23:51:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4188
 - author: DrSmugleaf
   changes:
   - message: Fixed mortars being hit by bullets not targeted directly at them, and
@@ -5111,5 +5104,15 @@
   id: 1258
   time: '2025-01-26T07:00:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5435
+- author: Hyenh
+  changes:
+  - message: Added a lighter with an USA flag.
+    type: Add
+  - message: Fixed lighters not fitting into cigarette packs and some other storage
+      items.
+    type: Fix
+  id: 1259
+  time: '2025-01-26T07:07:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4773
 Name: RMC14
 Order: -1
