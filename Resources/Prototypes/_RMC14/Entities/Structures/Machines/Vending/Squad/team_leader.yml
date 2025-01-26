@@ -85,8 +85,8 @@
         points: 15
       - id: RMCBackpackRTO
         points: 5
-      - id: RMCWeldingGoggles
-        points: 3
+      #- id: RMCWeldingGoggles
+      #  points: 3
       - id: CMBeltUtilityCombat
         points: 15
       - id: RMCPouchAutoinjectorFill
