@@ -169,7 +169,6 @@ public sealed partial class GunSystem : SharedGunSystem
             return;
         }
 
-        Log.Info(gun.BurstActivated.ToString());
         var useKey = gun.UseKey ? EngineKeyFunctions.Use : EngineKeyFunctions.UseSecondary;
 
         if (_inputSystem.CmdStates.GetState(useKey) != BoundKeyState.Down && !gun.BurstActivated)

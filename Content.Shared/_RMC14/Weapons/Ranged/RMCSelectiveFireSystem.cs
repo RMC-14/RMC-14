@@ -116,7 +116,16 @@ public sealed class RMCSelectiveFireSystem : EntitySystem
             var mods = gun.Comp.Modifiers[gunComponent.SelectedMode];
             ev = new GunGetFireRateEvent(1f / (1f / gunComponent.FireRate + mods.FireDelay));
             RaiseLocalEvent(gun, ref ev);
-            gunComponent.FireRate = ev.FireRate;
+
+            switch (gunComponent.SelectedMode)
+            {
+                case SelectiveFire.Burst:
+                    gunComponent.BurstFireRate = ev.FireRate;
+                    break;
+                default:
+                    gunComponent.FireRate = ev.FireRate;
+                    break;
+            }
         }
 
         RefreshWieldableFireModeValues(gun);
