@@ -394,6 +394,7 @@
       - id: CMRollerBedSpawnFolded
         amount: 1
       - id: RMCScabbardMacheteFilled
+        name: machete scabbard (Full)
         amount: 5
       - id: RMCBinoculars
         amount: 1

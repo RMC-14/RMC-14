@@ -131,7 +131,7 @@
       - id: CMBeltUtilityFilled
         name: M276 pattern toolbelt rig (Full)
       - id: CMBeltMedicBagFilled
-        name: M276 lifesaver bag (Full)
+        name: M276 pattern lifesaver bag (Full)
       - id: CMBeltMedicalFilled
         name: M276 medical storage rig (Full)
       - id: RMCBeltHolsterSMGPouch
@@ -437,9 +437,10 @@
       - id: RMCBeltUtilityGeneral
         recommended: true
       - id: CMBeltSecurityMPFilled
+        name: M276 pattern security rig (Full)
         recommended: true
       - id: CMBeltMedicBagFilled
-        recommended: true
+        name: M276 pattern lifesaver bag (Full)
       - id: CMBeltMarine
         recommended: true
       - id: CMBeltUtilityCombat
@@ -678,8 +679,10 @@
       - id: RMCBeltUtilityGeneral
         recommended: true
       - id: CMBeltSecurityMPFilled
+        name: M276 pattern security rig (Full)
         recommended: true
       - id: CMBeltMedicBagFilled
+        name: M276 pattern lifesaver bag (Full)
         recommended: true
       - id: CMBeltMarine
         recommended: true
