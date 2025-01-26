@@ -69,6 +69,8 @@
     - WallXenoResin
     - WallXenoMembrane
     - DoorXenoResin
+    - XenoStickyResin
+    - XenoFastResin
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
   - type: XenoDevour

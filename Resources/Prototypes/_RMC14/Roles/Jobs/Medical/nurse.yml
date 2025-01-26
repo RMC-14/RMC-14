@@ -8,6 +8,12 @@
   - !type:TotalDepartmentsTimeRequirement
     group: CMDepartmentsHuman
     time: 3600 # 1 hour
+  ranks:
+    RMCRankSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobNurse
+      time: 36000 # 10 hours
+    RMCRankCorporal: []
   startingGear: CMGearNurse
   icon: "CMJobIconNurse"
   joinNotifyCrew: false
@@ -31,7 +37,7 @@
         RMCSkillSurgery: 1
     - type: RMCUserBulkyArmorIncapable
     - type: JobPrefix
-      prefix: "Nurse"
+      prefix: cm-job-prefix-nurse
 
 - type: startingGear
   id: CMGearNurse

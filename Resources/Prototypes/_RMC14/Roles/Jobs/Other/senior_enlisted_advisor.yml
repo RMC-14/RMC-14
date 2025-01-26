@@ -13,13 +13,26 @@
     time: 36000 # 10 hours
   - !type:DepartmentTimeRequirement
     department: CMMilitaryPolice
-    time: 36000 # 10 hours
+    time: 54000 # 15 hours
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
-    time: 36000 # 10 hours
+    time: 54000 # 15 hours
   - !type:DepartmentTimeRequirement
     department: CMCommand
-    time: 18000 # 5 hours
+    time: 54000 # 15 hours
+  - !type:DepartmentTimeRequirement
+    department: CMRequisitions
+    time: 36000 # 10 hours
+  ranks: # TODO Selectable Ranks for SEA
+    RMCRankSergeantMajor:
+    - !type:RoleTimeRequirement
+      role: CMJobSeniorEnlistedAdvisor
+      time: 252000 # 70 hours
+    RMCRankFirstSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobSeniorEnlistedAdvisor
+      time: 36000 # 10 hours
+    RMCRankGunnerySergeant: []
   weight: 5
   startingGear: CMGearSeniorEnlistedAdvisor
   icon: "CMJobIconSEA"
@@ -63,7 +76,7 @@
       points: 45
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "SEA"
+      prefix: cm-job-prefix-senior-enlisted-advisor
     - type: SeeNewPlayers
 
 - type: startingGear

@@ -87,6 +87,9 @@
     sprite: _RMC14/Structures/Storage/Lockers/armorylocker.rsi
   - type: AccessReader
     access: [["CMAccessArmory"]]
+  - type: RMCUnlockOnAlertLevel
+  - type: Destructible
+    thresholds: []
 
 - type: entity
   parent: CMLockerBase

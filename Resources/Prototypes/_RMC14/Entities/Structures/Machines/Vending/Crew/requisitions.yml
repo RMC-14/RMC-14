@@ -27,7 +27,7 @@
         amount: 20
     - name: Sidearms
       entries:
-      - id: CMWeaponPistolM77
+      - id: RMCWeaponPistolM77
         amount: 50
       - id: RMCWeaponRevolverM44
         amount: 50
@@ -37,15 +37,15 @@
       #  amount: 20
     - name: Restricted Firearms
       entries:
-      - id: RMCMK80Case
+      - id: RMCGunCasePistolMK80
         amount: 4
-      - id: RMCSmartPistolCase
+      - id: RMCGunCasePistolSmart
         amount: 3
       - id: RMCMOU53Case
         amount: 2
       - id: RMCCaseXM88
         amount: 3
-      - id: RMCM54CE2Case
+      - id: RMCGunCaseRifleM54CE2
         amount: 3
       - id: RMCM54CMK1Case
         amount: 3
@@ -175,12 +175,14 @@
       - id: RMCPouchExplosive
         amount: 2
       - id: RMCPouchFlareFilled
+        name: flare pouch (Full)
         amount: 5
       - id: RMCPouchDocument
         amount: 2
       #- id: RMCPouchSling
       #  amount: 2
       - id: RMCPouchMacheteFilled
+        name: machete pouch (Full)
         amount: 1
       - id: RMCPouchBayonet
         name: Bayonet Sheath (Full)
@@ -249,6 +251,12 @@
       #  amount: 4
       - id: RMCPowerCellCrap
         amount: 10
+      - id: RMCMagazineSMGNailgun
+        amount: 4
+    - name: Other Boxes
+      entries:
+      - id: RMCBoxMagazineSMGNailgun
+        amount: 2
 
 #AMMUNITION VENDOR
 

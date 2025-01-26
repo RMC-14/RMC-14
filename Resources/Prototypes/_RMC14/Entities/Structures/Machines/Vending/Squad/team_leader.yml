@@ -65,9 +65,9 @@
     #  points: 5
     - name: Restricted Firearms
       entries:
-      - id: RMCMK80Case
+      - id: RMCGunCasePistolMK80
         points: 10
-      - id: RMCSmartPistolCase
+      - id: RMCGunCasePistolSmart
         points: 15
     #- id: CMM79GrenadeLauncher
     #  points: 30
@@ -78,16 +78,19 @@
     - name: Clothing Items
       entries:
       - id: RMCScabbardMacheteFilled
+        name: machete scabbard (Full)
         points: 5
       - id: RMCPouchMacheteFilled
+        name: machete pouch (Full)
         points: 15
       - id: RMCBackpackRTO
         points: 5
-    #- id: CMWeldingGoggles
-    #  points: 3
+      #- id: RMCWeldingGoggles
+      #  points: 3
       - id: CMBeltUtilityCombat
         points: 15
       - id: RMCPouchAutoinjectorFill
+        name: autoinjector pouch (Full)
         points: 15
       - id: CMHandsInsulated
         points: 3
@@ -202,7 +205,7 @@
       - id: RMCPouchPistol
       - id: RMCPouchToolsFill
         recommended: true
-        name: Tools pouch (Filled)
+        name: Tools pouch (Full)
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
