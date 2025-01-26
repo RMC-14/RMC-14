@@ -3,7 +3,6 @@
   name: M42A2 Pump Shotgun
   id: WeaponShotgunM42A2
   description: An Aegis Battlefield Armaments classic design, the M42A2 combines close-range firepower with long term reliability. Needs to be pumped.
-  suffix: Desert
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/desert.rsi

@@ -56,21 +56,6 @@
 
 - type: entity
   parent: CMBaseMask
-  id: CMMaskCoif
-  name: heat absorbent coif
-  description: A close-fitting cap that covers the top, back, and sides of the head. Can also be adjusted to cover the lower part of the face so it keeps the user warm in harsh conditions.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Mask/coif.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Mask/coif.rsi
-  - type: IdentityBlocker
-    coverage: MOUTH
-  - type: Item
-    storedRotation: -90
-
-- type: entity
-  parent: CMBaseMask
   id: RMCMaskRebreather
   name: rebreather
   description: A close-fitting device that instantly heats or cools down air when you inhale so it doesn't damage your lungs.
@@ -83,3 +68,126 @@
     - Mask
   - type: Item
     size: Small
+
+# Coifs
+- type: entity
+  parent: [ClothingMaskBase, BaseFoldable]
+  id: CMMaskCoif
+  name: heat absorbent coif
+  description: A close-fitting cap that covers the top, back, and sides of the head. Can also be adjusted to cover the lower part of the face so it keeps the user warm in harsh conditions.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/coif.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon
+      map: ["foldedLayer"]
+      visible: false
+  - type: HideLayerClothing
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/coif.rsi
+  - type: IdentityBlocker
+    coverage: MOUTH
+  - type: Item
+    storedRotation: -90
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+  - type: FoldableClothing
+    foldedEquippedPrefix: up
+    foldedHeldPrefix: up
+    foldedHideLayers:
+    - Hair
+    - HeadTop
+    - HeadSide
+    unfoldedHideLayers:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Snout
+
+- type: entity
+  parent: CMMaskCoif
+  id: RMCMaskCoifGreen
+  name: UNMC green balaclava
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/green_coif.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/green_coif.rsi
+
+- type: entity
+  parent: CMMaskCoif
+  id: RMCMaskCoifGrey
+  name: UNMC grey balaclava
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/grey_coif.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/grey_coif.rsi
+
+- type: entity
+  parent: CMMaskCoif
+  id: RMCMaskCoifTan
+  name: UNMC tan balaclava
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/tan_coif.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/tan_coif.rsi
+
+# Balaclavas
+- type: entity
+  parent: CMBaseMask
+  id: RMCMaskBalaclava
+  name: balaclava
+  description: A basic single eye-hole balaclava, available in almost every sporting goods, outdoor supply, or military surplus store in existence, protects your face from the cold almost as well as it conceals it. This one is in a standard black color.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/balaclava.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/balaclava.rsi
+  - type: IdentityBlocker
+    coverage: MOUTH
+  - type: Item
+    storedRotation: -90
+  - type: HideLayerClothing
+    slots:
+    - HeadTop
+    - HeadSide
+    - Hair
+    - Snout
+
+- type: entity
+  parent: RMCMaskBalaclava
+  id: RMCMaskBalaclavaGreen
+  name: green balaclava
+  description: A basic single eye-hole balaclava, available in almost every sporting goods, outdoor supply, or military surplus store in existence, protects your face from the cold almost as well as it conceals it. This one is in a non-standard green color.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/swatclava.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/swatclava.rsi
+
+- type: entity
+  parent: RMCMaskBalaclava
+  id: RMCMaskBalaclavaSkullBlue
+  name: skull balaclava
+  description: The face of your nightmares. Or at least that's how you imagined it'd be. Additionally protects against the cold.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/skull_coif_blue.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/skull_coif_blue.rsi
+
+- type: entity
+  parent: RMCMaskBalaclavaSkullBlue
+  id: RMCMaskBalaclavaSkullBlack
+  description: The face of your nightmares. Or at least that's how you imagined it'd be. Now in black!
+  suffix: Black
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/skull_coif.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/skull_coif.rsi

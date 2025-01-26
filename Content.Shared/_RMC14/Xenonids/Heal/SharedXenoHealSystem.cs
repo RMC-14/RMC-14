@@ -14,12 +14,14 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
+using Content.Shared.Jittering;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -45,6 +47,8 @@ public abstract class SharedXenoHealSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
@@ -107,7 +111,8 @@ public abstract class SharedXenoHealSystem : EntitySystem
 
             heal.HealStacks.Add(healStack);
 
-            SpawnAttachedTo(ent.Comp.HealEffect, xeno.Owner.ToCoordinates());
+            if (_net.IsServer)
+                SpawnAttachedTo(ent.Comp.HealEffect, xeno.Owner.ToCoordinates());
         }
     }
 
@@ -147,7 +152,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
         var totalHealAmount = args.StandardHealAmount;
         var damageTakenModifier = args.DamageTakenModifier;
         var healedHealerOrSmallXeno = false;
-        if (TryComp(target, out RMCSizeComponent? sizeComp) && sizeComp.Size == RMCSizes.Small)
+        if (TryComp(target, out RMCSizeComponent? sizeComp) && (sizeComp.Size == RMCSizes.Small || sizeComp.Size  == RMCSizes.VerySmallXeno))
         {
             totalHealAmount = args.SmallHealAmount;
             damageTakenModifier = 1;
@@ -192,7 +197,10 @@ public abstract class SharedXenoHealSystem : EntitySystem
         var salved = EnsureComp<RecentlySalvedComponent>(ent);
         salved.ExpiresAt = _timing.CurTime + args.TotalHealDuration;
 
-        SpawnAttachedTo(args.HealEffect, target.ToCoordinates());
+        if(_net.IsServer)
+            SpawnAttachedTo(args.HealEffect, target.ToCoordinates());
+
+        _jitter.DoJitter(target, TimeSpan.FromSeconds(1), true, 80, 8, true);
 
         _audio.PlayPredicted(args.HealSound, target.ToCoordinates(), ent);
 
@@ -295,15 +303,20 @@ public abstract class SharedXenoHealSystem : EntitySystem
 
         Heal(target, healAmount);
 
-        SpawnAttachedTo(args.HealEffect, target.ToCoordinates());
+        _jitter.DoJitter(target, TimeSpan.FromSeconds(1), true, 80, 8, true);
+
+        if(_net.IsServer)
+         SpawnAttachedTo(args.HealEffect, target.ToCoordinates());
 
         var corpsePosition = _transform.GetMoverCoordinates(ent);
 
+        // This damage is completely arbitrary, just to ensure the drone dies EVEN WITH WARDING.
+        // TODO: Gib the healing xeno here
         var killDamageSpecifier = new DamageSpecifier
         {
             DamageDict =
             {
-                [BluntGroup] = remainingHealth + 100,
+                [BluntGroup] = remainingHealth * 100 + 3000,
             },
         };
         _damageable.TryChangeDamage(ent, killDamageSpecifier, ignoreResistances: true, interruptsDoAfters: false);

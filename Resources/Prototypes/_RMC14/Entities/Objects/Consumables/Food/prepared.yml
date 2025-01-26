@@ -8,19 +8,23 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 25
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
-          Quantity: 20
+          Quantity: 9
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+  - type: Extractable
+    grindableSolutionName: food
+  - type: InjectableSolution
+    solution: food
 
 - type: entity
   parent: CMMarinePreparedMealBase
   id: CMMarinePreparedMealCornbread
-  name: Marine prepared meal (cornbread)
-  description: A tray of standard Marine food. Stale cornbread, tomato paste and some green goop fill this tray.
+  name: UNMC prepared meal (cornbread)
+  description: A tray of standard UNMC food. Stale cornbread, tomato paste and some green goop fill this tray.
   components:
   - type: Sprite
     state: cornbread
@@ -29,7 +33,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 9
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 9
@@ -37,17 +41,17 @@
 - type: entity
   parent: CMMarinePreparedMealBase
   id: CMMarinePreparedMealChicken
-  name: Marine prepared meal (chicken)
-  description: A tray of standard Marine food. Moist chicken, dry rice and a mildly depressed piece of broccoli fill this tray.
+  name: UNMC prepared meal (chicken)
+  description: A tray of standard UNMC food. Moist chicken, dry rice and a mildly depressed piece of broccoli fill this tray.
   components:
   - type: Sprite
     state: chicken
   - type: Food
-    transferAmount: 3.33
+    transferAmount: 3
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 10
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 10
@@ -55,8 +59,8 @@
 - type: entity
   parent: CMMarinePreparedMealBase
   id: CMMarinePreparedMealPasta
-  name: Marine prepared meal (pasta)
-  description: A tray of standard Marine food. Overcooked spaghetti, waterlogged carrots and two french fries fill this tray.
+  name: UNMC prepared meal (pasta)
+  description: A tray of standard UNMC food. Overcooked spaghetti, waterlogged carrots and two french fries fill this tray.
   components:
   - type: Sprite
     state: pasta
@@ -65,7 +69,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 9
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 9
@@ -73,8 +77,8 @@
 - type: entity
   parent: CMMarinePreparedMealBase
   id: CMMarinePreparedMealPizza
-  name: Marine prepared meal (pizza)
-  description: A tray of standard Marine food. Cold pizza, wet green beans and a shitty egg fill this tray. Get something other than pizza, lardass.
+  name: UNMC prepared meal (pizza)
+  description: A tray of standard UNMC food. Cold pizza, wet green beans and a shitty egg fill this tray. Get something other than pizza, lardass.
   components:
   - type: Sprite
     state: pizza
@@ -83,7 +87,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 8
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 8
@@ -91,8 +95,8 @@
 - type: entity
   parent: CMMarinePreparedMealBase
   id: CMMarinePreparedMealPork
-  name: Marine prepared meal (pork)
-  description: A tray of standard Marine food. Partially raw pork, goopy corn and some watery mashed potatoes fill this tray.
+  name: UNMC prepared meal (pork)
+  description: A tray of standard UNMC food. Partially raw pork, goopy corn and some watery mashed potatoes fill this tray.
   components:
   - type: Sprite
     state: pork
@@ -101,7 +105,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 9
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 9
@@ -109,21 +113,23 @@
 - type: entity
   parent: CMMarinePreparedMealBase
   id: CMMarinePreparedMealTofu
-  name: Marine prepared meal (tofu)
+  name: UNMC prepared meal (tofu)
   description: The UNMC doesn't serve tofu you grass sucking hippie. The flag signifies your defeat.
   components:
   - type: Sprite
     state: tofu
   - type: Food
-    transferAmount: 2
+    transferAmount: 1
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 2
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 2
-          
+
+# Festive
+
 - type: entity
   parent: CMMarinePreparedMealBase
   id: RMCMarinePreparedMealCookies
@@ -137,7 +143,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 24
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 15
@@ -157,7 +163,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 24
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 15
@@ -177,7 +183,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 24
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 15

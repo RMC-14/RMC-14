@@ -42,6 +42,9 @@ public sealed class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCAutoPunctuate =
         CVarDef.Create("rmc.auto_punctuate", false, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
 
+    public static readonly CVarDef<bool> RMCAutoEjectMagazines =
+        CVarDef.Create("rmc.auto_eject_magazines", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
+
     public static readonly CVarDef<string> CMOocWebhook =
         CVarDef.Create("rmc.ooc_webhook", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
 
@@ -55,7 +58,7 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.bleed_time_multiplier", 1f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> CMMarinesPerXeno =
-        CVarDef.Create("rmc.marines_per_xeno", 4.5f, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.marines_per_xeno", 7f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<bool> RMCAutoBalance =
         CVarDef.Create("rmc.auto_balance", true, CVar.REPLICATED | CVar.SERVER);
@@ -79,14 +82,20 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.discord_account_linking_message_link", "", CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCRequisitionsStartingBalance =
-        CVarDef.Create("rmc.requisitions_starting_balance", 0, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.requisitions_starting_balance", 20000, CVar.REPLICATED | CVar.SERVER);
 
+    // TODO RMC14 150
     public static readonly CVarDef<int> RMCRequisitionsBalanceGain =
         CVarDef.Create("rmc.requisitions_balance_gain", 550, CVar.REPLICATED | CVar.SERVER);
 
-    // TODO RMC14 400
     public static readonly CVarDef<int> RMCRequisitionsStartingDollarsPerMarine =
-        CVarDef.Create("rmc.requisitions_starting_dollars_per_marine", 1150, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.requisitions_starting_dollars_per_marine", 0, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCRequisitionsPointsScale =
+        CVarDef.Create("rmc.requisitions_points_scale", 12000, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCRequisitionsFreeCratesXenoDivider =
+        CVarDef.Create("rmc.requisitions_free_crates_xeno_divider", 4, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<string> RMCDiscordToken =
         CVarDef.Create("rmc.discord_token", "", CVar.SERVER | CVar.SERVERONLY | CVar.CONFIDENTIAL);
@@ -254,10 +263,10 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.late_joins_per_burrowed_larva_early_threshold_minutes", 15f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCLateJoinsPerBurrowedLarvaEarly =
-        CVarDef.Create("rmc.late_joins_per_burrowed_larva_early", 5.5f, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.late_joins_per_burrowed_larva_early", 7.5f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCLateJoinsPerBurrowedLarva =
-        CVarDef.Create("rmc.late_joins_per_burrowed_larva", 4f, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.late_joins_per_burrowed_larva", 7f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCPlaytimeBronzeMedalTimeHours =
         CVarDef.Create("rmc.playtime_bronze_medal_time_hours", 10, CVar.REPLICATED | CVar.SERVER);
@@ -309,4 +318,25 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCCommendationMaxLength =
         CVarDef.Create("rmc.commendation_max_length", 1000, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
+
+    /// <summary>
+    /// Whether the no EORG popup is enabled.
+    /// </summary>
+    public static readonly CVarDef<bool> RMCRoundEndNoEorgPopup =
+        CVarDef.Create("game.round_end_eorg_popup_enabled", true, CVar.SERVER | CVar.REPLICATED);
+
+    /// <summary>
+    /// Skip the no EORG popup.
+    /// </summary>
+    public static readonly CVarDef<bool> RMCSkipRoundEndNoEorgPopup =
+        CVarDef.Create("game.skip_round_end_eorg_popup", false, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// How long to display the EORG popup for.
+    /// </summary>
+    public static readonly CVarDef<float> RMCRoundEndNoEorgPopupTime =
+        CVarDef.Create("game.round_end_eorg_popup_time", 5f, CVar.SERVER | CVar.REPLICATED);
+
+    public static readonly CVarDef<int> RMCXenoEvolveSameCasteCooldownSeconds =
+        CVarDef.Create("rmc.xeno_evolve_same_caste_cooldown_seconds", 300, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
 }

@@ -294,6 +294,7 @@
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto.rsi
     layers:
     - state: icon
+      map: [ "base" ]
   - type: CMStorageVisualizer
     storageClosed: null
     storageOpen: null

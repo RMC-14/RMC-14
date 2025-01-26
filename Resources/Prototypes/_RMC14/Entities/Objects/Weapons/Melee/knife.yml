@@ -60,6 +60,7 @@
         unwieldedOnly: true
       accuracyAddMult: -0.05
   - type: AttachablePrying
+  - type: DeleteOnExplosion
 
 - type: entity
   name: M11 throwing knife
@@ -96,6 +97,7 @@
   - type: Tag
     tags:
     - ThrowingKnife
+  - type: DeleteOnExplosion
 
 - type: entity
   parent: [ RMCBaseMeleeWeapon, BaseKnife]
@@ -138,6 +140,7 @@
     speedModifier: 0.8
     useSound:
       path: /Audio/Items/crowbar.ogg
+  - type: DeleteOnExplosion
 
 - type: Tag
   id: RMCM5Bayonet

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: [StorageTank, StructureWheeled]
   id: RMCTankReagentEmpty
   name: reagent tank
@@ -86,3 +86,20 @@
   - type: Explosive
     explosionType: Default
     totalIntensity: 60
+  - type: ReagentTank
+    tankType: Fuel
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:SolutionExplosionBehavior
+        solution: tank
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DamageOnToolInteract
+    tools: Welding
+    weldingDamage:
+      types:
+        Heat: 100
