@@ -1,33 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Removed akimbo shotguns.
-    type: Remove
-  id: 756
-  time: '2024-09-29T23:20:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4191
-- author: Rainbeon
-  changes:
-  - message: Xenos can now see their exact Health, Plasma, and Armor by hovering over
-      each respective alert on the right side of the screen.
-    type: Add
-  id: 757
-  time: '2024-09-29T23:46:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4150
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added pull animations
-    type: Add
-  id: 758
-  time: '2024-09-29T23:47:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4189
-- author: TsjipTsjip
-  changes:
-  - message: High Command headset and encryption key exist now.
-    type: Add
-  id: 759
-  time: '2024-09-29T23:51:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4188
 - author: DrSmugleaf
   changes:
   - message: Fixed mortars being hit by bullets not targeted directly at them, and
@@ -5107,5 +5078,41 @@
   id: 1255
   time: '2025-01-26T06:08:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5422
+- author: DummeHytteOst
+  changes:
+  - message: Fixed M4SPR A19 incendiary rounds having 95 accuracy instead of 105.
+    type: Fix
+  - message: Fixed incendiary slugs having 20 AP instead of 5, and regular buckshot
+      having 0 AP instead of 5.
+    type: Fix
+  id: 1256
+  time: '2025-01-26T06:47:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5328
+- author: SG6732
+  changes:
+  - message: Updated autolathe with new recipes.
+    type: Add
+  - message: Updated T-ray Scanner with CM sprites.
+    type: Add
+  id: 1257
+  time: '2025-01-26T06:53:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5341
+- author: SG6732
+  changes:
+  - message: Added the UNMC decal. Semper Fi!
+    type: Add
+  id: 1258
+  time: '2025-01-26T07:00:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5435
+- author: Hyenh
+  changes:
+  - message: Added a lighter with an USA flag.
+    type: Add
+  - message: Fixed lighters not fitting into cigarette packs and some other storage
+      items.
+    type: Fix
+  id: 1259
+  time: '2025-01-26T07:07:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4773
 Name: RMC14
 Order: -1
