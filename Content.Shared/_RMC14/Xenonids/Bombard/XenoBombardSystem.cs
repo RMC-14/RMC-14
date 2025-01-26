@@ -4,13 +4,13 @@ using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Xenonids.GasToggle;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Content.Shared.Actions;
 
 namespace Content.Shared._RMC14.Xenonids.Bombard;
 
@@ -57,7 +57,7 @@ public sealed class XenoBombardSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.Delay, ev, ent, args.Action) { BreakOnMove = true };
         if (_doAfter.TryStartDoAfter(doAfter))
         {
-            _rmcActions.DisableSharedCooldownEvents(args.Action, ent);
+            _rmcActions.DisableSharedCooldownEvents(args.Action.Owner, ent);
             var selfMessage = Loc.GetString("rmc-glob-start-self");
             _popup.PopupClient(selfMessage, ent, ent);
 
@@ -68,7 +68,7 @@ public sealed class XenoBombardSystem : EntitySystem
 
     private void OnBombardDoAfterAttempt(Entity<XenoBombardComponent> ent, ref DoAfterAttemptEvent<XenoBombardDoAfterEvent> args)
     {
-        if (args.Event.Target is EntityUid action &&
+        if (args.Event.Target is { } action &&
             TryComp(action, out InstantActionComponent? actionComponent) &&
             !actionComponent.Enabled)
         {
@@ -106,7 +106,7 @@ public sealed class XenoBombardSystem : EntitySystem
 
         _gun.ShootProjectile(projectile, direction, Vector2.Zero, ent, ent, speed: 7.5f);
         _audio.PlayEntity(ent.Comp.ShootSound, ent, ent);
-        
+
         _rmcActions.ActivateSharedCooldown(action, ent);
 
         var selfMessage = Loc.GetString("rmc-glob-shoot-self");

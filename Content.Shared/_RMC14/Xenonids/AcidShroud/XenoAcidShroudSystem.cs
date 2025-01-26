@@ -29,12 +29,12 @@ public sealed class XenoAcidShroudSystem : EntitySystem
         };
         _doAfter.TryStartDoAfter(doAfter);
 
-        _rmcActions.DisableSharedCooldownEvents(args.Action, ent);
+        _rmcActions.DisableSharedCooldownEvents(args.Action.Owner, ent);
     }
 
     private void OnAcidShroudDoAfterAttempt(Entity<XenoAcidShroudComponent> ent, ref DoAfterAttemptEvent<XenoAcidShroudDoAfterEvent> args)
     {
-        if (args.Event.Target is EntityUid action &&
+        if (args.Event.Target is { } action &&
             TryComp(action, out InstantActionComponent? actionComponent) &&
             !actionComponent.Enabled)
         {
