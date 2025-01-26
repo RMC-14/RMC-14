@@ -339,4 +339,14 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCXenoEvolveSameCasteCooldownSeconds =
         CVarDef.Create("rmc.xeno_evolve_same_caste_cooldown_seconds", 300, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
+
+    /// <summary>
+    ///     Whether or not to show a button that opens the guidebook when a player changes their species,
+    ///     explaining the difference between each.
+    /// </summary>
+    public static readonly CVarDef<bool> GuidebookShowEditorSpeciesButton =
+        CVarDef.Create("guidebook.show_editor_species_button", false, CVar.SERVER | CVar.REPLICATED);
+
+    public static readonly CVarDef<bool> RMCEnableSuicide =
+        CVarDef.Create("rmc.enable_suicide", false, CVar.SERVER | CVar.REPLICATED);
 }

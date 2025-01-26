@@ -8,6 +8,16 @@
   - !type:DepartmentTimeRequirement
     department: CMSquad
     time: 36000 # 10 hours
+  ranks:
+    RMCRankGunnerySergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 252000 # 70 hours
+    RMCRankStaffSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 36000 # 10 hours
+    RMCRankSergeant: []
   startingGear: CMGearSquadLeader
   dummyStartingGear: CMGearSquadLeaderEquipped
   icon: "CMJobIconSquadLeader"
@@ -46,7 +56,7 @@
     - type: SquadLeader
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "SL"
+      prefix: cm-job-prefix-squad-leader
 
 - type: startingGear
   id: CMGearSquadLeader

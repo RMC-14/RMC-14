@@ -25,6 +25,8 @@ using Content.Server.Stunnable;
 using Content.Server.Voting;
 using Content.Server.Voting.Managers;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Armor.Ghillie;
+using Content.Shared._RMC14.Armor.ThermalCloak;
 using Content.Shared._RMC14.Bioscan;
 using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.CCVar;
@@ -45,7 +47,7 @@ using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Parasite;
-using Content.Shared.Buckle.Components;
+using Content.Shared.Actions;
 using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
@@ -122,6 +124,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly XenoTunnelSystem _xenoTunnel = default!;
     [Dependency] private readonly StunSystem _stuns = default!;
     [Dependency] private readonly RMCCameraShakeSystem _rmcCameraShake = default!;
+    [Dependency] private readonly ThermalCloakSystem _thermalCloak = default!;
+    [Dependency] private readonly SharedGhillieSuitSystem _ghillieSuit = default!;
 
     private readonly HashSet<string> _operationNames = new();
     private readonly HashSet<string> _operationPrefixes = new();
@@ -141,6 +145,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private TimeSpan _hijackStunTime = TimeSpan.FromSeconds(5);
 
     private readonly List<MapId> _almayerMaps = [];
+    private readonly List<EntityUid> _marineList = [];
 
     private EntityQuery<HyperSleepChamberComponent> _hyperSleepChamberQuery;
     private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
@@ -876,6 +881,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             var marines = EntityQueryEnumerator<ActorComponent, MarineComponent, MobStateComponent, TransformComponent>();
             var marinesAlive = false;
+            _marineList.Clear();
             while (marines.MoveNext(out var marineId, out _, out _, out var mobState, out var xform))
             {
                 if (HasComp<VictimInfectedComponent>(marineId) ||
@@ -895,6 +901,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                      _almayerMaps.Contains(xform.MapID)))
                 {
                     marinesAlive = true;
+                    _marineList.Add(marineId);
                 }
 
                 if (marinesAlive)
@@ -926,6 +933,39 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             {
                 EndRound(distress, DistressSignalRuleResult.AllDied);
                 continue;
+            }
+
+            if (_marineList.Count == 1)
+            {
+                // TODO add ghost alert for last human
+                var lastMarine = _marineList.Last();
+
+                var cloak = _thermalCloak.FindWornCloak(lastMarine);
+                var ghillie = _ghillieSuit.FindSuit(lastMarine);
+
+                if (cloak != null && cloak.Value.Comp.Enabled)
+                {
+                    _thermalCloak.SetInvisibility(cloak.Value, lastMarine, false, true);
+
+                    if (TryComp<InstantActionComponent>(cloak.Value.Comp.Action, out var action))
+                    {
+                        action.Cooldown = (Timing.CurTime, Timing.CurTime + TimeSpan.FromHours(2)); // FUCK YOU
+                        action.UseDelay = TimeSpan.FromHours(2);
+                        Dirty(cloak.Value.Comp.Action.Value, action);
+                    }
+                }
+
+                if (ghillie != null && ghillie.Value.Comp.Enabled)
+                {
+                    _ghillieSuit.ToggleInvisibility(ghillie.Value, lastMarine, false);
+
+                    if (TryComp<InstantActionComponent>(ghillie.Value.Comp.Action, out var action))
+                    {
+                        action.Cooldown = (Timing.CurTime, Timing.CurTime + TimeSpan.FromHours(2)); // FUCK YOU
+                        action.UseDelay = TimeSpan.FromHours(2);
+                        Dirty(ghillie.Value.Comp.Action.Value, action);
+                    }
+                }
             }
 
             if (_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))

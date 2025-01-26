@@ -61,7 +61,7 @@
 
 # Dutch's Dozen
 - type: entity
-  parent: JumpsuitMarine
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: RMCJumpsuitDutch # This is technically originally split into two items, but only the sprites are different between them
   name: Dutch's Dozen uniform
   description: A comfortable uniform worn by the Dutch's Dozen mercenaries. It's seen some definite wear and tear, but is still in good condition.
@@ -123,7 +123,7 @@
 # Other factions
 
 - type: entity
-  parent: JumpsuitMarine
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: RMCJumpsuitMarsoc
   name: special operative uniform # TODO: find more appropriate name
   description: A black uniform for elite Marine personnel. Designed to be comfortable and help blend into dark environments.
@@ -135,8 +135,6 @@
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
-  - type: ItemCamouflage
-    camouflageVariations: { }
 
 - type: entity
   parent: RMCMarineUniformBase

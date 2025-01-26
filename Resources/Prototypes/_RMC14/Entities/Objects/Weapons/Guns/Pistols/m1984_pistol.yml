@@ -163,6 +163,7 @@
   components:
   - type: Tag
     tags:
+    - CMMagazinePistol
     - RMCMagazinePistolM1984AP
   - type: BallisticAmmoProvider
     whitelist:
