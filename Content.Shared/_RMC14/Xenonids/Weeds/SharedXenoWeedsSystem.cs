@@ -176,7 +176,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
                 }
                 else if (resin.OutsiderSpeedModifier != null && (hive == null || !_hive.IsMember(contacting, hive.Hive)))
                 {
-                    if (HasComp<CMArmorUserComponent>(contacting) && resin.OutsiderSpeedModifierArmor != null)
+                    if (HasComp<RMCArmorSpeedTierUserComponent>(contacting) && resin.OutsiderSpeedModifierArmor != null)
                         speedResin = resin.OutsiderSpeedModifierArmor.Value;
                     else
                         speedResin = resin.OutsiderSpeedModifier.Value;
@@ -197,7 +197,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             }
             else if (hive == null || !_hive.IsMember(contacting, hive.Hive))
             {
-                if (HasComp<CMArmorUserComponent>(contacting))
+                if (HasComp<RMCArmorSpeedTierUserComponent>(contacting))
                     speedWeeds = weeds.SpeedMultiplierOutsiderArmor;
                 else
                     speedWeeds = weeds.SpeedMultiplierOutsider;
