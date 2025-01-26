@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added scout invisibility effects
-    type: Add
-  - message: Fixed scout cloak sound playing more than once
-    type: Fix
-  id: 752
-  time: '2024-09-28T21:47:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4107
 - author: Vermidia
   changes:
   - message: Smartgun has falloff start at 7 tiles and loses 4 damage a tile
@@ -5139,5 +5130,13 @@
   id: 1251
   time: '2025-01-26T05:54:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5448
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the dropship incoming and crash sounds being too quiet compared
+      to the explosion sound.
+    type: Fix
+  id: 1252
+  time: '2025-01-26T05:58:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5441
 Name: RMC14
 Order: -1
