@@ -22,8 +22,6 @@
     - name: Equipment
       entries:
       - id: RMCFlashlight
-        amount: 15
-      - id: RMCFlashlight
         amount: 4
       - id: RMCHardhatBlue
         amount: 4
@@ -43,7 +41,7 @@
       #Demo scanner
       #Meson scanner
       #Reagent scanner
-      - id: trayScanner
+      - id: CMTRayScanner
         amount: 4
     - name: Tools
       entries:
@@ -59,7 +57,6 @@
         amount: 8
       - id: CMWrench
         amount: 8
-
 
 # Circuits
 - type: entity
