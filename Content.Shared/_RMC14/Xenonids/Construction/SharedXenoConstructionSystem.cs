@@ -117,7 +117,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         SubscribeLocalEvent<HiveConstructionNodeComponent, ExaminedEvent>(OnHiveConstructionNodeExamined);
         SubscribeLocalEvent<HiveConstructionNodeComponent, ActivateInWorldEvent>(OnHiveConstructionNodeActivated);
 
-        SubscribeLocalEvent<HiveCoreComponent, XenoStructureConstructionFinishedEvent>(OnHiveCoreConstructionFinished);
+        SubscribeLocalEvent<HiveCoreComponent, XenoHiveStructureConstructionFinishedEvent>(OnHiveCoreConstructionFinished);
 
         SubscribeLocalEvent<XenoConstructionSupportComponent, ComponentRemove>(OnCheckAdjacentCollapse);
         SubscribeLocalEvent<XenoConstructionSupportComponent, EntityTerminatingEvent>(OnCheckAdjacentCollapse);
@@ -547,7 +547,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfter);
     }
 
-    private void OnHiveCoreConstructionFinished(Entity<HiveCoreComponent> ent, ref XenoStructureConstructionFinishedEvent args)
+    private void OnHiveCoreConstructionFinished(Entity<HiveCoreComponent> ent, ref XenoHiveStructureConstructionFinishedEvent args)
     {
         if (_net.IsClient)
             return;
