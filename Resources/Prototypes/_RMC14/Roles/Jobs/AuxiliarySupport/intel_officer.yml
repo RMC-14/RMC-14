@@ -36,7 +36,7 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "IO"
+      prefix: cm-job-prefix-intel
   hidden: true # TODO RMC14
 
 - type: startingGear

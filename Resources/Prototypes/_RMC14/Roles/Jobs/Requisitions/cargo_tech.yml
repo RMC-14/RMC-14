@@ -27,7 +27,7 @@
         RMCSkillFireman: 1
         RMCSkillPowerLoader: 2
     - type: JobPrefix
-      prefix: "CT"
+      prefix: cm-job-prefix-cargotech
 
 - type: startingGear
   id: CMGearCargoTech

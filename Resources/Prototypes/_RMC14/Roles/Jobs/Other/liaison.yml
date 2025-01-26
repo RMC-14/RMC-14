@@ -43,7 +43,7 @@
     - type: CMVendorUser
       points: 50
     - type: JobPrefix
-      prefix: "CL"
+      prefix: cm-job-prefix-liaison
 
 - type: startingGear
   id: CMGearLiaison

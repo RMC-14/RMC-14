@@ -42,7 +42,7 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "CE"
+      prefix: cm-job-prefix-chief-engineer
 
 - type: startingGear
   id: CMGearChiefEngineer

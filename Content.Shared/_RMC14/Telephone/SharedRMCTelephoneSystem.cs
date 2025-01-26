@@ -413,7 +413,7 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
 
         name = Name(holder);
         if (TryComp(holder, out JobPrefixComponent? jobPrefix))
-            name = $"{jobPrefix.Prefix} {name}";
+            name = $"{Loc.GetString(jobPrefix.Prefix)} {name}";
 
         if (_squad.TryGetMemberSquad(holder, out var squad))
             name = $"{name} ({Name(squad)})";
