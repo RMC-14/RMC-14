@@ -4,12 +4,12 @@ rmc-announcement-message = [font size=14][bold][color=white]{$author} Announceme
 
     {$message}
 
-rmc-announcement-message-signed = [font size=14][bold][color=white]{$author} Announcement[/color][/bold][/font][font size=12][color=red]
+rmc-announcement-message-signed = [font size=15][bold][color=white]{$author} Announcement[/color][/bold][/font][font size=13][color=red]
 
-    {$message}
+    {$message}[bolditalic]
 
     Signed by,
-    {$job} {$name}[/color][/font]
+    {$name}[/bolditalic][/color][/font]
 
 rmc-announcement-message-raw = [font size=14][bold][color=white]{$author}[/color][/bold][/font][font size=12][color=red]
 

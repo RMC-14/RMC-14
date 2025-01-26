@@ -147,6 +147,8 @@
     capacity: 25
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4spr.rsi
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifle
 
 - type: entity
   parent: CMMagazineRifleM4SPR
@@ -173,6 +175,8 @@
       tags:
       - CMCartridgeRifle10x24mmAP
     proto: CMCartridgeRifle10x24mmAP
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifleAP
 
 - type: entity
   parent: CMMagazineRifleM4SPR

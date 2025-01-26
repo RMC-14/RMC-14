@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Client.Gameplay;
+using Content.Shared._RMC14.Input;
 using Content.Shared._RMC14.Tackle;
 using Content.Shared.CombatMode;
 using Content.Shared.Effects;
@@ -30,6 +31,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
     [Dependency] private readonly AnimationPlayerSystem _animation = default!;
     [Dependency] private readonly InputSystem _inputSystem = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private readonly MapSystem _map = default!;
 
     private EntityQuery<TransformComponent> _xformQuery;
 
@@ -74,8 +76,9 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
 
         var useDown = _inputSystem.CmdStates.GetState(EngineKeyFunctions.Use);
         var altDown = _inputSystem.CmdStates.GetState(EngineKeyFunctions.UseSecondary);
+        var wideDown = _inputSystem.CmdStates.GetState(CMKeyFunctions.CMXenoWideSwing);
 
-        if (weapon.AutoAttack || useDown != BoundKeyState.Down && altDown != BoundKeyState.Down)
+        if (weapon.AutoAttack || useDown != BoundKeyState.Down && altDown != BoundKeyState.Down && wideDown != BoundKeyState.Down)
         {
             if (weapon.Attacking)
             {
@@ -101,11 +104,11 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
 
         if (MapManager.TryFindGridAt(mousePos, out var gridUid, out _))
         {
-            coordinates = EntityCoordinates.FromMap(gridUid, mousePos, TransformSystem, EntityManager);
+            coordinates = TransformSystem.ToCoordinates(gridUid, mousePos);
         }
         else
         {
-            coordinates = EntityCoordinates.FromMap(MapManager.GetMapEntityId(mousePos.MapId), mousePos, TransformSystem, EntityManager);
+            coordinates = TransformSystem.ToCoordinates(_map.GetMap(mousePos.MapId), mousePos);
         }
 
         // If the gun has AltFireMeleeComponent, it can be used to attack.
@@ -149,6 +152,9 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
         // Light attack
         if (useDown == BoundKeyState.Down)
             ClientLightAttack(entity, mousePos, coordinates, weaponUid, weapon);
+        // Xeno WidePrimary
+        if (wideDown == BoundKeyState.Down)
+            ClientHeavyAttack(entity, coordinates, weaponUid, weapon);
     }
 
     protected override bool InRange(EntityUid user, EntityUid target, float range, ICommonSession? session)

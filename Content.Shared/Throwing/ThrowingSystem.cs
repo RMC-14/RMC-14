@@ -5,6 +5,7 @@ using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.Friction;
 using Content.Shared.Gravity;
+using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Melee;
@@ -43,6 +44,7 @@ public sealed class ThrowingSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _configManager = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private readonly RotateToFaceSystem _rotateToFace = default!;
 
     public override void Initialize()
     {
@@ -93,7 +95,8 @@ public sealed class ThrowingSystem : EntitySystem
         bool recoil = true,
         bool animated = true,
         bool playSound = true,
-        bool doSpin = true)
+        bool doSpin = true,
+        bool rotate = true)
     {
         var physicsQuery = GetEntityQuery<PhysicsComponent>();
         if (!physicsQuery.TryGetComponent(uid, out var physics))
@@ -110,7 +113,7 @@ public sealed class ThrowingSystem : EntitySystem
             baseThrowSpeed,
             user,
             pushbackRatio,
-            friction, compensateFriction: compensateFriction, recoil: recoil, animated: animated, playSound: playSound, doSpin: doSpin);
+            friction, compensateFriction: compensateFriction, recoil: recoil, animated: animated, playSound: playSound, doSpin: doSpin, rotate: rotate);
     }
 
     /// <summary>
@@ -136,7 +139,8 @@ public sealed class ThrowingSystem : EntitySystem
         bool recoil = true,
         bool animated = true,
         bool playSound = true,
-        bool doSpin = true)
+        bool doSpin = true,
+        bool rotate = true)
     {
         if (baseThrowSpeed <= 0 || direction == Vector2Helpers.Infinity || direction == Vector2Helpers.NaN || direction == Vector2.Zero || friction < 0)
             return;
@@ -221,6 +225,10 @@ public sealed class ThrowingSystem : EntitySystem
         {
             // _recoil.KickCamera(user.Value, -direction * 0.04f);
             var localPos = Vector2.Transform(transform.LocalPosition + direction, _transform.GetInvWorldMatrix(transform));
+
+            if (rotate)
+                _rotateToFace.TryFaceCoordinates(user.Value, _transform.ToMapCoordinates(transform.Coordinates.Offset(direction)).Position);
+
             localPos = transform.LocalRotation.RotateVec(localPos);
             _melee.DoLunge(user.Value, user.Value, Angle.Zero, localPos, null, predicted: false);
         }

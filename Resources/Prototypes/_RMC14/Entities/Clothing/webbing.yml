@@ -296,7 +296,7 @@
       - CableCoil
       - Multitool
       - PowerCell
-      # TODO nailgun
+      - RMCNailgunCompact
       components:
       - Welder
       - PowerCell
@@ -322,7 +322,7 @@
         - CableCoil
         - Multitool
         - PowerCell
-        # TODO nailgun
+        - RMCNailgunCompact
         components:
         - Welder
         - PowerCell

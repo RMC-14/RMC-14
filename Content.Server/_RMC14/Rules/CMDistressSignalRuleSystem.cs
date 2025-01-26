@@ -21,10 +21,14 @@ using Content.Server.Spawners.Components;
 using Content.Server.Spawners.EntitySystems;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Server.Stunnable;
 using Content.Server.Voting;
 using Content.Server.Voting.Managers;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Armor.Ghillie;
+using Content.Shared._RMC14.Armor.ThermalCloak;
 using Content.Shared._RMC14.Bioscan;
+using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Item;
@@ -43,6 +47,7 @@ using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.Actions;
 using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
@@ -56,11 +61,13 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
+using Content.Shared.StatusEffect;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
+using Robust.Shared.Collections;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -106,6 +113,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
     [Dependency] private readonly PlayTimeTrackingSystem _playTimeTracking = default!;
     [Dependency] private readonly ScalingSystem _scaling = default!;
+    [Dependency] private readonly ShuttleSystem _shuttle = default!;
     [Dependency] private readonly StationJobsSystem _stationJobs = default!;
     [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
@@ -114,6 +122,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
     [Dependency] private readonly XenoTunnelSystem _xenoTunnel = default!;
+    [Dependency] private readonly StunSystem _stuns = default!;
+    [Dependency] private readonly RMCCameraShakeSystem _rmcCameraShake = default!;
+    [Dependency] private readonly ThermalCloakSystem _thermalCloak = default!;
+    [Dependency] private readonly SharedGhillieSuitSystem _ghillieSuit = default!;
 
     private readonly HashSet<string> _operationNames = new();
     private readonly HashSet<string> _operationPrefixes = new();
@@ -130,8 +142,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private string _adminFaxAreaMap = string.Empty;
     private int _mapVoteExcludeLast;
     private bool _useCarryoverVoting;
+    private TimeSpan _hijackStunTime = TimeSpan.FromSeconds(5);
 
     private readonly List<MapId> _almayerMaps = [];
+    private readonly List<EntityUid> _marineList = [];
 
     private EntityQuery<HyperSleepChamberComponent> _hyperSleepChamberQuery;
     private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
@@ -325,6 +339,18 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 _roles.MindAddJobRole(mind.Value, jobPrototype: comp.SurvivorJob);
 
                 _playTimeTracking.PlayerRolesChanged(player);
+
+                var spawnEv = new PlayerSpawnCompleteEvent(
+                    survivorMob,
+                    player,
+                    comp.SurvivorJob,
+                    false,
+                    true,
+                    0,
+                    default,
+                    profile
+                );
+                RaiseLocalEvent(survivorMob, spawnEv, true);
                 return playerId;
             }
 
@@ -708,6 +734,21 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             _audio.PlayGlobal(rule.HijackSong, Filter.Broadcast(), true);
             break;
         }
+
+        var didCameraShake = false;
+        var warshipQuery = EntityQueryEnumerator<AlmayerComponent, TransformComponent>();
+        while (warshipQuery.MoveNext(out var uid, out _, out var xform)) // Stun everyone on the Almayer
+        {
+            if (!didCameraShake)
+            {
+                var map = _transform.GetMapId(uid);
+                var sameMap = Filter.BroadcastMap(map);
+                _rmcCameraShake.ShakeCamera(sameMap, 10, 2);
+                didCameraShake = true;
+            }
+
+            StunAllMarinesOnAlmayer(xform);
+        }
     }
 
     private void OnMobStateChanged<T>(Entity<T> ent, ref MobStateChangedEvent args) where T : IComponent?
@@ -840,6 +881,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             var marines = EntityQueryEnumerator<ActorComponent, MarineComponent, MobStateComponent, TransformComponent>();
             var marinesAlive = false;
+            _marineList.Clear();
             while (marines.MoveNext(out var marineId, out _, out _, out var mobState, out var xform))
             {
                 if (HasComp<VictimInfectedComponent>(marineId) ||
@@ -859,6 +901,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                      _almayerMaps.Contains(xform.MapID)))
                 {
                     marinesAlive = true;
+                    _marineList.Add(marineId);
                 }
 
                 if (marinesAlive)
@@ -890,6 +933,39 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             {
                 EndRound(distress, DistressSignalRuleResult.AllDied);
                 continue;
+            }
+
+            if (_marineList.Count == 1)
+            {
+                // TODO add ghost alert for last human
+                var lastMarine = _marineList.Last();
+
+                var cloak = _thermalCloak.FindWornCloak(lastMarine);
+                var ghillie = _ghillieSuit.FindSuit(lastMarine);
+
+                if (cloak != null && cloak.Value.Comp.Enabled)
+                {
+                    _thermalCloak.SetInvisibility(cloak.Value, lastMarine, false, true);
+
+                    if (TryComp<InstantActionComponent>(cloak.Value.Comp.Action, out var action))
+                    {
+                        action.Cooldown = (Timing.CurTime, Timing.CurTime + TimeSpan.FromHours(2)); // FUCK YOU
+                        action.UseDelay = TimeSpan.FromHours(2);
+                        Dirty(cloak.Value.Comp.Action.Value, action);
+                    }
+                }
+
+                if (ghillie != null && ghillie.Value.Comp.Enabled)
+                {
+                    _ghillieSuit.ToggleInvisibility(ghillie.Value, lastMarine, false);
+
+                    if (TryComp<InstantActionComponent>(ghillie.Value.Comp.Action, out var action))
+                    {
+                        action.Cooldown = (Timing.CurTime, Timing.CurTime + TimeSpan.FromHours(2)); // FUCK YOU
+                        action.UseDelay = TimeSpan.FromHours(2);
+                        Dirty(ghillie.Value.Comp.Action.Value, action);
+                    }
+                }
             }
 
             if (_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))
@@ -1441,6 +1517,40 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         {
             _xenoTunnel.TryPlaceTunnel(hive, null, tunnel.ToCoordinates(), out _);
             QueueDel(tunnel);
+        }
+    }
+
+    /// <summary>
+    /// Stuns all marines on the Almayer.
+    /// </summary>
+    private void StunAllMarinesOnAlmayer(TransformComponent xform)
+    {
+        // Get enumeration exceptions from people dropping things if we just paralyze as we go
+        var toKnock = new ValueList<EntityUid>();
+        GetMarinesOnAlmayer(xform, ref toKnock);
+
+        foreach (var child in toKnock)
+        {
+            if (!TryComp<StatusEffectsComponent>(child, out var status))
+                continue;
+
+            _stuns.TryParalyze(child, _hijackStunTime, true, status);
+        }
+    }
+
+    /// <summary>
+    /// Gets all marines on the Almayer.
+    /// </summary>
+    private void GetMarinesOnAlmayer(TransformComponent xform, ref ValueList<EntityUid> reference)
+    {
+        // Not recursive because probably not necessary? If we need it to be that's why this method is separate.
+        var childEnumerator = xform.ChildEnumerator;
+        while (childEnumerator.MoveNext(out var child))
+        {
+            if (HasComp<XenoComponent>(child))
+                continue;
+
+            reference.Add(child);
         }
     }
 }

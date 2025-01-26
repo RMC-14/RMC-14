@@ -48,7 +48,6 @@
   - type: Loadout
     prototypes: [ RMCGearCorpseDoctor ]
   - type: VictimBurst
-    state: Burst
 
 - type: startingGear
   id: RMCGearCorpseDoctor
@@ -72,7 +71,6 @@
   - type: Loadout
     prototypes: [ RMCGearCorpseEngineer ]
   - type: VictimBurst
-    state: Burst
 
 - type: startingGear
   id: RMCGearCorpseEngineer
@@ -99,7 +97,6 @@
   - type: Loadout
     prototypes: [ RMCGearCorpseScientist ]
   - type: VictimBurst
-    state: Burst
 
 - type: startingGear
   id: RMCGearCorpseScientist
@@ -125,7 +122,6 @@
   - type: Loadout
     prototypes: [ RMCGearCorpseMiner ]
   - type: VictimBurst
-    state: Burst
 
 - type: startingGear
   id: RMCGearCorpseMiner
@@ -151,7 +147,6 @@
   - type: Loadout
     prototypes: [ RMCGearCorpseSecurity ]
   - type: VictimBurst
-    state: Burst
 
 - type: startingGear
   id: RMCGearCorpseSecurity
@@ -177,7 +172,6 @@
   - type: Loadout
     prototypes: [ RMCGearCorpseDeputy ]
   - type: VictimBurst
-    state: Burst
 
 - type: startingGear
   id: RMCGearCorpseDeputy
@@ -199,7 +193,6 @@
   - type: Loadout
     prototypes: [ RMCGearCorpseLiaison ]
   - type: VictimBurst
-    state: Burst
 
 - type: startingGear
   id: RMCGearCorpseLiaison
@@ -258,7 +251,6 @@
   id: RMCHumanCorpseColonistBurst
   components:
   - type: VictimBurst
-    state: Burst
 
 # We-Ya Goon
 - type: entity
