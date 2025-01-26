@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fix some of the new outfits storage and suit storage whitelists
-    type: Fix
-  - message: MP armor can properly hold grenades in the suit slot now
-    type: Fix
-  id: 750
-  time: '2024-09-28T20:22:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4175
 - author: FungiFellow
   changes:
   - message: Flashlights can be turned into Attachments with a Screwdriver
@@ -5140,5 +5131,12 @@
   id: 1249
   time: '2025-01-26T05:27:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5452
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added marine playtime ranks!
+    type: Add
+  id: 1250
+  time: '2025-01-26T05:41:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3797
 Name: RMC14
 Order: -1
