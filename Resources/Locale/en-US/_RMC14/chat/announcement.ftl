@@ -40,3 +40,7 @@ rmc-announcement-dropship-message = [color=white][font size=16][bold]Dropship Al
 
 rmc-announcement-emergency-dropship-crash = [font size=14][bold][color=white]EMERGENCY[/color][/bold][/font][font size=12][color=red]
   DROPSHIP ON COLLISION COURSE. CRASH IMMINENT.[/color][/font]
+
+rmc-announcement-delta = [color=white][font size=16][bold]SELF-DESTRUCT SYSTEMS ACTIVE[/bold][/font][/color][color=red][font size=14][bold]
+
+     DANGER, THE EMERGENCY DESTRUCT SYSTEM IS NOW ACTIVATED. PROCEED TO THE SELF-DESTRUCT CHAMBER FOR CONTROL ROD INSERTION.[/bold][/font][/color]

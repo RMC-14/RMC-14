@@ -25,6 +25,7 @@ using Content.Server.Stunnable;
 using Content.Server.Voting;
 using Content.Server.Voting.Managers;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.ARES;
 using Content.Shared._RMC14.Armor.Ghillie;
 using Content.Shared._RMC14.Armor.ThermalCloak;
 using Content.Shared._RMC14.Bioscan;
@@ -80,6 +81,7 @@ namespace Content.Server._RMC14.Rules;
 
 public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignalRuleComponent>
 {
+    [Dependency] private readonly ARESSystem _ares = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IBanManager _bans = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
@@ -1474,15 +1476,14 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         switch (rule.Result)
         {
             case DistressSignalRuleResult.MajorMarineVictory:
-                var ent = Spawn();
-                _metaData.SetEntityName(ent, "ARES v3.2");
-                _marineAnnounce.AnnounceRadio(ent,
+                var ares = _ares.EnsureARES();
+                _marineAnnounce.AnnounceRadio(ares,
                     "Bioscan complete. No unknown lifeform signature detected.",
                     rule.AllClearChannel);
-                _marineAnnounce.AnnounceRadio(ent,
+                _marineAnnounce.AnnounceRadio(ares,
                     "Saving operational report to archive.",
                     rule.AllClearChannel);
-                _marineAnnounce.AnnounceRadio(ent,
+                _marineAnnounce.AnnounceRadio(ares,
                     "Commencing final systems scan in 3 minutes.",
                     rule.AllClearChannel);
                 rule.EndAtAllClear ??= Timing.CurTime + rule.AllClearEndDelay;
