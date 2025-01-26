@@ -18,6 +18,7 @@ namespace Content.Shared._RMC14.AlertLevel;
 public sealed class RMCAlertLevelSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly ARESSystem _ares = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoorSystem _door = default!;
@@ -145,6 +146,12 @@ public sealed class RMCAlertLevelSystem : EntitySystem
                 _door.TryOpen(uid, door);
             else
                 _door.TryClose(uid, door);
+        }
+
+        var displays = EntityQueryEnumerator<RMCAlertLevelDisplayComponent>();
+        while (displays.MoveNext(out var uid, out _))
+        {
+            _appearance.SetData(uid, RMCAlertLevelsVisuals.Alert, level);
         }
     }
 }
