@@ -1093,3 +1093,14 @@
     state: sips-on-puddles
   - type: PatronFigurine
     id: 00c3f0b0-eea8-45bb-aaaa-b2d8d5ce176e
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurineDukeBigBossMorris
+  name: Duke 'Big Boss' Morris figurine
+  description: "This MIGHT be the man who sold the round"
+  components:
+  - type: Sprite
+    state: duke_big_boss_morris
+  - type: PatronFigurine
+    id: acc78eb3-9639-4317-a89c-e921b5a999cb
