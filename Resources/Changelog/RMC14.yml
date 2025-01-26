@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: FungiFellow
-  changes:
-  - message: Flashlights can be turned into Attachments with a Screwdriver
-    type: Add
-  id: 751
-  time: '2024-09-28T20:37:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3821
 - author: Dutch-VanDerLinde
   changes:
   - message: Added scout invisibility effects
@@ -5138,5 +5131,13 @@
   id: 1250
   time: '2025-01-26T05:41:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3797
+- author: Tunguso4ka
+  changes:
+  - message: Fixed not being able to unwrench and pull medical vendors, food vendors,
+      booze-o-mats, chess-o-mats, and rec-vends.
+    type: Fix
+  id: 1251
+  time: '2025-01-26T05:54:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5448
 Name: RMC14
 Order: -1
