@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Removed akimbo shotguns.
-    type: Remove
-  id: 756
-  time: '2024-09-29T23:20:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4191
 - author: Rainbeon
   changes:
   - message: Xenos can now see their exact Health, Plasma, and Armor by hovering over
@@ -5107,5 +5100,15 @@
   id: 1255
   time: '2025-01-26T06:08:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5422
+- author: DummeHytteOst
+  changes:
+  - message: Fixed M4SPR A19 incendiary rounds having 95 accuracy instead of 105.
+    type: Fix
+  - message: Fixed incendiary slugs having 20 AP instead of 5, and regular buckshot
+      having 0 AP instead of 5.
+    type: Fix
+  id: 1256
+  time: '2025-01-26T06:47:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5328
 Name: RMC14
 Order: -1
