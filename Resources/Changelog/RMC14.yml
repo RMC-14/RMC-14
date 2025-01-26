@@ -1,23 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed some guns making it look like you are leaving a trail of bullets
-      for the shooter.
-    type: Fix
-  id: 746
-  time: '2024-09-27T21:04:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4158
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the armored shooting target being called a xenonid target.
-    type: Fix
-  - message: Added the medilathe and briefing podium windoor the Savannah.
-    type: Add
-  id: 747
-  time: '2024-09-27T21:33:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4159
-- author: DrSmugleaf
-  changes:
   - message: Fixed welded closets and crates not opening from xenonid melee attacks.
       Attacking one as a xenonid will now open it.
     type: Fix
@@ -5142,5 +5125,19 @@
   id: 1245
   time: '2025-01-26T04:31:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5450
+- author: Vermidia
+  changes:
+  - message: Lizards can now tail thump and Dionas can now chirp.
+    type: Add
+  id: 1246
+  time: '2025-01-26T04:38:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5463
+- author: Whisper
+  changes:
+  - message: Added Sips-On-Puddles figurine.
+    type: Add
+  id: 1247
+  time: '2025-01-26T04:37:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5449
 Name: RMC14
 Order: -1
