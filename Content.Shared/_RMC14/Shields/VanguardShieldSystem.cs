@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Damage;
 using Content.Shared.Damage;
 using Content.Shared.Explosion;
 using Content.Shared.Popups;
@@ -17,7 +18,7 @@ public sealed class VanguardShieldSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<VanguardShieldComponent, MapInitEvent>(OnVanguardShieldInit);
-        SubscribeLocalEvent<VanguardShieldComponent, DamageModifyEvent>(OnVanguardShieldHit, before: [typeof(XenoShieldSystem)], after: [typeof(CMArmorSystem)]);
+        SubscribeLocalEvent<VanguardShieldComponent, DamageModifyAfterResistEvent>(OnVanguardShieldHit, before: [typeof(XenoShieldSystem)]);
         SubscribeLocalEvent<VanguardShieldComponent, GetExplosionResistanceEvent>(OnVanguardShieldGetResistance);
         SubscribeLocalEvent<VanguardShieldComponent, RemovedShieldEvent>(OnVanguardShieldRemoved);
     }
@@ -27,7 +28,7 @@ public sealed class VanguardShieldSystem : EntitySystem
         RegenShield(xeno);
     }
 
-    private void OnVanguardShieldHit(Entity<VanguardShieldComponent> xeno, ref DamageModifyEvent args)
+    private void OnVanguardShieldHit(Entity<VanguardShieldComponent> xeno, ref DamageModifyAfterResistEvent args)
     {
         if (args.Damage.GetTotal() <= 0 || (!TryComp<XenoShieldComponent>(xeno, out var shield)) || shield.Shield != XenoShieldSystem.ShieldType.Vanguard)
             return;
@@ -52,8 +53,7 @@ public sealed class VanguardShieldSystem : EntitySystem
         if (shield.ShieldAmount <= 0)
             return;
 
-        // TODO RMC14 halved like armor for now
-        var explosionResist = xeno.Comp.ExplosionResistance / 2;
+        var explosionResist = xeno.Comp.ExplosionResistance;
 
         var resist = (float)Math.Pow(1.1, explosionResist / 5.0); // From armor calcualtion
         args.DamageCoefficient /= resist;

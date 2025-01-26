@@ -2,7 +2,6 @@
   parent: CMBaseWeaponRifle
   name: XM88 Heavy Rifle
   id: WeaponRifleXM88
-  suffix: Desert
   description: An experimental man-portable anti-materiel rifle chambered in .458 SOCOM. It must be manually chambered for every shot.
   components:
   - type: Sprite
@@ -27,9 +26,9 @@
     recoilUnwielded: 5
     scatterWielded: 6
     scatterUnwielded: 20
-    baseFireRate: 0.8
+    baseFireRate: 1
   - type: RMCWeaponAccuracy
-    accuracyMultiplier: 1.1
+    accuracyMultiplier: 1.25
     accuracyMultiplierUnwielded: 0.5
   - type: WieldDelay
     baseDelay: 0.4
@@ -80,10 +79,10 @@
           - RMCAttachmentXM88Stock
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.59375, 0.0
-      rmc-aslot-rail: -0.15625, 0.15625
+      rmc-aslot-barrel: 0.71875, 0.0
+      rmc-aslot-rail: -0.15625, 0.0625
       rmc-aslot-underbarrel: 0.24, -0.3
-      rmc-aslot-stock: -0.5625, 0.03125
+      rmc-aslot-stock: -0.56, 0.03
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Weapons/Guns/Rifles/xm88/jungle.rsi
@@ -91,6 +90,10 @@
       Desert: _RMC14/Objects/Weapons/Guns/Rifles/xm88/desert.rsi
       Urban: _RMC14/Objects/Weapons/Guns/Rifles/xm88/urban.rsi
       Classic: _RMC14/Objects/Weapons/Guns/Rifles/xm88/classic.rsi
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/XM88/xm88-0.rsi
+      state: all
 
 - type: entity
   parent: BulletRifle10x24mm
@@ -100,7 +103,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 104
+        Piercing: 80
   - type: CMArmorPiercing
     amount: 10
   - type: GunStacksProjectile

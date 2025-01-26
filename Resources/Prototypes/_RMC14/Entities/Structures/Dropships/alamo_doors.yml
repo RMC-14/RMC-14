@@ -48,6 +48,7 @@
         acts: ["Destruction"]
   - type: Corrodible
     isCorrodible: false
+  - type: BlockTileFire
 
 - type: entity
   parent: CMBaseDoor
@@ -85,3 +86,4 @@
     needsPower: false
   - type: AccessReader
     access: [["CMAccessPilot"]]
+  - type: BlockTileFire

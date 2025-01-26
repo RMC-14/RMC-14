@@ -1,7 +1,6 @@
 ﻿- type: entity
   parent: CMBaseWeaponSMG
   name: M63 submachine gun
-  suffix: Desert
   id: WeaponSMGM63
   description: The Aegis Battlefield Armaments M-63 submachinegun. Occasionally carried by light-infantry, scouts, engineers and medics.
   components:
@@ -56,6 +55,7 @@
           - CMMagazineSMGM63
           - CMMagazineSMGM63AP
           - CMMagazineSMGM63Ext
+          - RMCMagazineSMGM63Rubber
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -91,7 +91,7 @@
           - RMCAttachmentVerticalGrip
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.715, 0.092
+      rmc-aslot-barrel: 0.71875, 0.03125
       rmc-aslot-rail: 0.032, 0.155
       rmc-aslot-stock: -0.81, 0.032
       rmc-aslot-underbarrel: 0.25, -0.25
@@ -136,6 +136,8 @@
     zeroVisible: false
     zeroOnlyOnEmpty: true
   - type: Appearance
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsSMG
 
 - type: entity
   parent: CMMagazineSMGM63
@@ -160,6 +162,8 @@
     tags:
     - CMMagazineSmg
     - CMMagazineSMGM63AP
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsSMGAP
 
 - type: entity
   parent: CMMagazineSMGM63

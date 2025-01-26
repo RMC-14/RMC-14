@@ -312,14 +312,83 @@ cm-chatsan-replacement-ammo = spits
 # cm-chatsan-word-#tank = #tank
 # cm-chatsan-replacement-#tank = turtle
 
-# cm-chatsan-word-# laser = # laser
-# cm-chatsan-replacement-# laser = dot
+cm-chatsan-word-laser = laser
+cm-chatsan-replacement-laser = dot
 
-# cm-chatsan-word-# lazer = # lazer
-# cm-chatsan-replacement-# lazer = dot
+cm-chatsan-word-lazer = lazer
+cm-chatsan-replacement-lazer = dot
 
 # cm-chatsan-word-# flamer = # flamer
 # cm-chatsan-replacement-# flamer = fire spitter
 
 # cm-chatsan-word-# flamethrower = # flamethrower
 # cm-chatsan-replacement-# flamethrower =  fire spitter
+
+cm-chatsan-word-sadar = sadar
+cm-chatsan-replacement-sadar = tuber
+
+cm-chatsan-word-rocket = rocket
+cm-chatsan-replacement-rocket = boom spit
+
+cm-chatsan-word-grenadier = grenadier
+cm-chatsan-replacement-grenadier = boomstick spitter
+
+cm-chatsan-word-scout = scout
+cm-chatsan-replacement-scout = tall lurker
+
+cm-chatsan-word-mortar = mortar
+cm-chatsan-replacement-mortar = skyboom
+
+cm-chatsan-word-demo = demo
+cm-chatsan-replacement-demo = boom tuber
+
+cm-chatsan-word-demolitionist = demolitionist
+cm-chatsan-replacement-demolitionist = boom tuber
+
+cm-chatsan-word-ws = ws
+cm-chatsan-replacement-ws = special tall
+
+cm-chatsan-word-spec = spec
+cm-chatsan-replacement-spec = special tall
+
+cm-chatsan-word-cas = cas
+cm-chatsan-replacement-cas = skyspit
+
+cm-chatsan-word-sensors = sensors
+cm-chatsan-replacement-sensors = tall eye tower
+
+cm-chatsan-word-sensor-tower = sensor tower
+cm-chatsan-replacement-sensor-tower = tall eye tower
+
+cm-chatsan-word-comms = comms
+cm-chatsan-replacement-comms = tall hivemind tower
+
+cm-chatsan-word-communications-tower = communications tower
+cm-chatsan-replacement-communications-tower = tall hivemind tower
+
+cm-chatsan-word-smart-gun = smart gun
+cm-chatsan-replacement-smartgun = smart spitter
+
+cm-chatsan-word-smartgun = smartgun
+cm-chatsan-replacement-smart-gun = smart spitter
+
+cm-chatsan-word-smartgunner = smartgunner
+cm-chatsan-replacement-smartgunner = smart spitter
+
+cm-chatsan-word-smart-gunner = smart gunner
+cm-chatsan-replacement-smart-gunner = smart spitter
+
+cm-chatsan-word-sentry = sentry
+cm-chatsan-replacement-sentry = auto spitter
+
+cm-chatsan-word-sentries = sentries
+cm-chatsan-replacement-sentries = auto spitters
+
+cm-chatsan-word-squad = squad
+cm-chatsan-replacement-squad = caste
+
+cm-chatsan-word-squads = squads
+cm-chatsan-replacement-squads = castes
+
+cm-chatsan-word-shotgun = shotgun
+cm-chatsan-replacement-shotgun = scatter spitter

@@ -2,7 +2,6 @@
   parent: [ CMBaseWeaponGun, BaseItem, RMCBaseAttachableHolder ]
   id: RMCSmartGun
   name: ML66A smart gun
-  suffix: Jungle
   description: The actual firearm in the Smart Gun System. Essentially a heavy, mobile machinegun.
   components:
   - type: Wieldable
@@ -152,12 +151,15 @@
       Snow: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/snow.rsi
       Classic: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/classic.rsi
       Urban: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/urban.rsi
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/smartgun_mouse.rsi
+      state: all
 
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineSmartGun
   name: "ML66A drum magazine (10x30mm)"
-  suffix: Jungle
   components:
   - type: Tag
     tags:

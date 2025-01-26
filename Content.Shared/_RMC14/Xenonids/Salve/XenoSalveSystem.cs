@@ -17,10 +17,10 @@ public sealed class XenoSalveSystem : EntitySystem
     {
         SubscribeLocalEvent<RecentlySalvedComponent, ComponentStartup>(OnSalveAdded);
         SubscribeLocalEvent<RecentlySalvedComponent, ComponentShutdown>(OnSalveRemoved);
-        SubscribeLocalEvent<RecentlySalvedComponent, MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeLocalEvent<RecentlySalvedComponent, XenoRestEvent>(OnVisualsRest);
-        SubscribeLocalEvent<RecentlySalvedComponent, KnockedDownEvent>(OnVisualsKnockedDown);
-        SubscribeLocalEvent<RecentlySalvedComponent, StatusEffectEndedEvent>(OnVisualsStatusEffectEnded);
+        SubscribeLocalEvent<XenoSalveVisualsComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<XenoSalveVisualsComponent, XenoRestEvent>(OnVisualsRest);
+        SubscribeLocalEvent<XenoSalveVisualsComponent, KnockedDownEvent>(OnVisualsKnockedDown);
+        SubscribeLocalEvent<XenoSalveVisualsComponent, StatusEffectEndedEvent>(OnVisualsStatusEffectEnded);
     }
 
     private void OnSalveAdded(Entity<RecentlySalvedComponent> xeno, ref ComponentStartup args)
@@ -39,7 +39,7 @@ public sealed class XenoSalveSystem : EntitySystem
         _appearance.SetData(xeno, XenoHealerVisuals.Gooped, false);
     }
 
-    private void OnMobStateChanged(Entity<RecentlySalvedComponent> xeno, ref MobStateChangedEvent args)
+    private void OnMobStateChanged(Entity<XenoSalveVisualsComponent> xeno, ref MobStateChangedEvent args)
     {
         if (_timing.ApplyingState)
             return;
@@ -47,7 +47,7 @@ public sealed class XenoSalveSystem : EntitySystem
         _appearance.SetData(xeno, XenoHealerVisuals.Downed, args.NewMobState != MobState.Alive);
     }
 
-    private void OnVisualsRest(Entity<RecentlySalvedComponent> xeno, ref XenoRestEvent args)
+    private void OnVisualsRest(Entity<XenoSalveVisualsComponent> xeno, ref XenoRestEvent args)
     {
         if (_timing.ApplyingState)
             return;
@@ -55,7 +55,7 @@ public sealed class XenoSalveSystem : EntitySystem
         _appearance.SetData(xeno, XenoHealerVisuals.Resting, args.Resting);
     }
 
-    private void OnVisualsKnockedDown(Entity<RecentlySalvedComponent> xeno, ref KnockedDownEvent args)
+    private void OnVisualsKnockedDown(Entity<XenoSalveVisualsComponent> xeno, ref KnockedDownEvent args)
     {
         if (_timing.ApplyingState)
             return;
@@ -63,7 +63,7 @@ public sealed class XenoSalveSystem : EntitySystem
         _appearance.SetData(xeno, XenoHealerVisuals.Downed, true);
     }
 
-    private void OnVisualsStatusEffectEnded(Entity<RecentlySalvedComponent> xeno, ref StatusEffectEndedEvent args)
+    private void OnVisualsStatusEffectEnded(Entity<XenoSalveVisualsComponent> xeno, ref StatusEffectEndedEvent args)
     {
         if (_timing.ApplyingState)
             return;

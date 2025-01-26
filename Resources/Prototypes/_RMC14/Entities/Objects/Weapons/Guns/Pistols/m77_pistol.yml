@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CMWeaponPistolBase
   id: CMWeaponPistolM77
   name: M77 combat pistol # TODO RMC14 sounds
@@ -43,6 +43,7 @@
         priority: 2
         whitelist:
           tags:
+          - RMCMagazinePistolM77Rubber
           - CMMagazinePistolM77AP
         startingItem: CMMagazinePistolM77AP
   - type: GunDamageModifier
@@ -73,7 +74,7 @@
     offsets:
       rmc-aslot-barrel: 0.625, 0.125
       rmc-aslot-rail: -0.03, 0.185
-      rmc-aslot-underbarrel: 0.31, -0.186
+      rmc-aslot-underbarrel: 0.25, -0.125
 
 - type: entity
   parent: CMWeaponPistolM77
@@ -117,30 +118,6 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: base_ap
-
-- type: entity
-  id: CMCartridgePistolM77AP
-  name: cartridge (9mm AP)
-  parent: CMCartridgePistolBase
-  components:
-  - type: Tag
-    tags:
-    - Cartridge
-    - CMCartridgePistol9mmAP
-  - type: CartridgeAmmo
-    proto: CMBulletPistolM77AP
-
-- type: entity
-  parent: CMBulletBase
-  id: CMBulletPistolM77AP
-  name: bullet (M77 AP)
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 25
-  - type: CMArmorPiercing
-    amount: 40
 
 - type: Tag
   id: CMMagazinePistolM77AP

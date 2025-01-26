@@ -15,6 +15,9 @@
     isCollidableWhenOpen: true
     enteringOffset: 0, -0.6
     enteringRange: 0.03
+    whitelist:
+      tags:
+      - CommandTablet
   - type: AccessReader
     access: [["CMAccessCommand"]]
 
@@ -28,8 +31,11 @@
       entity_storage: !type:NestedSelector
         tableId: CMLockerFillCMDCabinet
 
+# there should be a variant for CL, but it's fill is not yet implemented
+
 - type: entityTable
   id: CMLockerFillCMDCabinet
   table: !type:AllSelector
     children:
     - id: RMCTabletCO
+
