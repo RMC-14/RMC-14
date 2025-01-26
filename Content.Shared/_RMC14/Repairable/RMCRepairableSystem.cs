@@ -63,10 +63,24 @@ public sealed class RMCRepairableSystem : EntitySystem
             return;
         }
 
-        if (!TryComp(repairable, out DamageableComponent? damageable) ||
-            damageable.TotalDamage <= FixedPoint2.Zero)
+        if (!TryComp(repairable, out DamageableComponent? damageable))
+            return;
+
+        if (damageable.TotalDamage <= FixedPoint2.Zero)
         {
-            _popup.PopupClient(Loc.GetString("rmc-repairable-not-damaged", ("target", repairable)), user, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-repairable-not-damaged", ("target", repairable)),
+                user,
+                user,
+                PopupType.SmallCaution);
+            return;
+        }
+
+        if (repairable.Comp.RepairableDamageLimit > 0 && damageable.TotalDamage > repairable.Comp.RepairableDamageLimit)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-repairable-too-damaged", ("target", repairable)),
+                user,
+                user,
+                PopupType.SmallCaution);
             return;
         }
 

@@ -251,6 +251,12 @@
       #  amount: 4
       - id: RMCPowerCellCrap
         amount: 10
+      - id: RMCMagazineSMGNailgun
+        amount: 4
+    - name: Other Boxes
+      entries:
+      - id: RMCBoxMagazineSMGNailgun
+        amount: 2
 
 #AMMUNITION VENDOR
 
