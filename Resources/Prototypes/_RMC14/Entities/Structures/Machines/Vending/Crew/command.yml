@@ -764,12 +764,13 @@
       entries:
       - id: CMArmorM3WO
       - id: CMArmorHelmetM10ChiefMP
-      - id: CMHeadBeretWO
+      - id: CMHeadBeretCMP
     - name: Handgun Case
       jobs:
       - CMChiefMP
       choices: { CMWeapon: 1 }
       entries:
+      - id: RMCGunCaseRevolverRSh9
       - id: RMCGunCasePistolM77
       - id: RMCGunCasePistolM44
       - id: RMCGunCasePistolM1984

@@ -54,7 +54,7 @@
   equipment:
     jumpsuit: CMJumpsuitWO
     shoes: CMBootsBlackFilled
-    head: CMHeadBeretWO
+    head: CMHeadBeretCMP
     eyes: CMGlassesSecurity
     gloves: CMHandsBlackMarine
     id: CMIDCardChiefMP
