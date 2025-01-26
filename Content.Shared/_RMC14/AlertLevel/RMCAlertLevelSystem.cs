@@ -1,9 +1,12 @@
 ﻿using Content.Shared._RMC14.ARES;
+using Content.Shared._RMC14.Doors;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
+using Content.Shared.Doors.Components;
+using Content.Shared.Doors.Systems;
 using Content.Shared.Ghost;
 using Content.Shared.Lock;
 using Robust.Shared.Audio.Systems;
@@ -17,19 +20,18 @@ public sealed class RMCAlertLevelSystem : EntitySystem
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly ARESSystem _ares = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly LockSystem _lock = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly INetManager _net = default!;
 
     private EntityQuery<GhostComponent> _ghostQuery;
-    private EntityQuery<LockComponent> _lockQuery;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<DropshipHijackLandedEvent>(OnDropshipHijackLanded);
 
         _ghostQuery = GetEntityQuery<GhostComponent>();
-        _lockQuery = GetEntityQuery<LockComponent>();
     }
 
     private void OnDropshipHijackLanded(ref DropshipHijackLandedEvent ev)
@@ -124,16 +126,25 @@ public sealed class RMCAlertLevelSystem : EntitySystem
             _marineAnnounce.AnnounceRadio(ares, Loc.GetString(message.Value), ent.Comp.RadioChannel);
         }
 
-        var unlockQuery = EntityQueryEnumerator<RMCUnlockOnAlertLevelComponent>();
-        while (unlockQuery.MoveNext(out var uid, out var comp))
+        var unlockQuery = EntityQueryEnumerator<RMCUnlockOnAlertLevelComponent, LockComponent>();
+        while (unlockQuery.MoveNext(out var uid, out var unlock, out var lockComp))
         {
-            if (!_lockQuery.TryComp(uid, out var lockComp))
-                continue;
-
-            if (comp.Level == level)
+            if (unlock.Level == level)
                 _lock.Unlock(uid, null, lockComp);
             else
                 _lock.Lock(uid, null, lockComp);
+        }
+
+        var openQuery = EntityQueryEnumerator<RMCOpenOnAlertLevelComponent, DoorComponent, RMCPodDoorComponent>();
+        while (openQuery.MoveNext(out var uid, out var unlock, out var door, out var podDoor))
+        {
+            if (unlock.Id != podDoor.Id)
+                continue;
+
+            if (unlock.Level == level)
+                _door.TryOpen(uid, door);
+            else
+                _door.TryClose(uid, door);
         }
     }
 }
