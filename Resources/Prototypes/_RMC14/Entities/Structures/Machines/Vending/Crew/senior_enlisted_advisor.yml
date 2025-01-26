@@ -1,5 +1,3 @@
-# Senior Enlisted Advisor
-#TODO Add Choices to SEA Vendors
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechEquipmentSEA
@@ -50,12 +48,11 @@
       - id: CMArmorM3VLBallistics
       - id: RMCArmorM3LightPadded
       - id: RMCArmorM3MediumVariants
-      - id: CMArmorM3VLBallistics
       - id: RMCCoatService
     - name: Eyewear
       choices: { CMEyewear: 1 }
       entries:
-      #Welding Goggles
+      - id: RMCWeldingGoggles
       - id: RMCGlassesMedicalHUDGlasses
       #Prescription Medical HUD Glasses
       - id: CMGlassesSecurity
@@ -66,7 +63,7 @@
       entries:
       - id: CMWebbingBrown
       - id: CMWebbingBlack
-      #Shoulder Holster
+      - id: CMWebbingHolster
       - id: CMWebbing
       - id: CMWebbingPouch
     - name: Headwear
