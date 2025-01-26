@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed xeno hud icons being visible while a scout is invisible.
-    type: Fix
-  - message: Fixed scout specialists not becoming visible on death.
-    type: Fix
-  id: 764
-  time: '2024-10-01T00:01:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4197
 - author: DrSmugleaf
   changes:
   - message: Fixed spray acid aciding too many cades, it will now correctly only acid
@@ -5076,5 +5067,13 @@
   id: 1263
   time: '2025-01-26T12:30:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3751
+- author: Djvarik
+  changes:
+  - message: Fixed riot armor being classified as light armor instead of heavy for
+      movement speed.
+    type: Fix
+  id: 1264
+  time: '2025-01-26T13:50:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5464
 Name: RMC14
 Order: -1
