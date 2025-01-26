@@ -76,6 +76,10 @@
         interactionRange: -1
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 
 - type: entity
@@ -84,6 +88,8 @@
   name: bicaridine pill bottle
   suffix: Bicaridine, 16
   components:
+  - type: Item
+    heldPrefix: 11
   - type: Sprite
     layers:
     - state: pill_canister11
@@ -105,6 +111,8 @@
   name: dexalin pill bottle
   suffix: Dexalin, 16
   components:
+  - type: Item
+    heldPrefix: 1
   - type: Sprite
     layers:
     - state: pill_canister1
@@ -126,6 +134,8 @@
   name: dylovene pill bottle
   suffix: Dylovene, 16
   components:
+  - type: Item
+    heldPrefix: 6
   - type: Sprite
     layers:
     - state: pill_canister6
@@ -147,6 +157,8 @@
   name: inaprovaline pill bottle
   suffix: Inaprovaline, 16
   components:
+  - type: Item
+    heldPrefix: 3
   - type: Sprite
     layers:
     - state: pill_canister3
@@ -168,6 +180,8 @@
   name: kelotane pill bottle
   suffix: Kelotane, 16
   components:
+  - type: Item
+    heldPrefix: 2
   - type: Sprite
     layers:
     - state: pill_canister2
@@ -189,6 +203,8 @@
   name: tricordrazine pill bottle
   suffix: Tricordrazine, 16
   components:
+  - type: Item
+    heldPrefix: 7
   - type: Sprite
     layers:
     - state: pill_canister7 # TODO RMC14 idk which canister this uses

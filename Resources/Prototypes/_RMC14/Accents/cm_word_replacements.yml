@@ -113,4 +113,30 @@
     cm-chatsan-word-rat: cm-chatsan-replacement-rat
     cm-chatsan-word-rats: cm-chatsan-replacement-rats
     cm-chatsan-word-mouse: cm-chatsan-replacement-mouse
-    cm-chatsan-word-mice: cm-chatsan-replacement-mice
+    cm-chatsan-word-mice: cm-chatsan-replacement-mice 
+    cm-chatsan-word-laser: cm-chatsan-replacement-laser
+    cm-chatsan-word-lazer: cm-chatsan-replacement-lazer
+    cm-chatsan-word-sadar: cm-chatsan-replacement-sadar
+    cm-chatsan-word-rocket: cm-chatsan-replacement-rocket
+    cm-chatsan-word-grenadier: cm-chatsan-replacement-grenadier
+    cm-chatsan-word-scout: cm-chatsan-replacement-scout
+    cm-chatsan-word-mortar: cm-chatsan-replacement-mortar
+    cm-chatsan-word-demo: cm-chatsan-replacement-demo
+    cm-chatsan-word-demolitionist: cm-chatsan-replacement-demolitionist
+    cm-chatsan-word-ws: cm-chatsan-replacement-ws
+    cm-chatsan-word-spec: cm-chatsan-replacement-spec
+    cm-chatsan-word-cas: cm-chatsan-replacement-cas
+    cm-chatsan-word-sensors: cm-chatsan-replacement-sensors
+    cm-chatsan-word-sensor-tower: cm-chatsan-replacement-sensor-tower
+    cm-chatsan-word-comms: cm-chatsan-replacement-comms
+    cm-chatsan-word-communications-tower: cm-chatsan-replacement-communications-tower
+    cm-chatsan-word-smart-gun: cm-chatsan-replacement-smart-gun
+    cm-chatsan-word-smartgun: cm-chatsan-replacement-smartgun
+    cm-chatsan-word-smart-gunner: cm-chatsan-replacement-smart-gunner
+    cm-chatsan-word-smartgunner: cm-chatsan-replacement-smartgunner
+    cm-chatsan-word-sentry: cm-chatsan-replacement-sentry
+    cm-chatsan-word-sentries: cm-chatsan-replacement-sentries
+    cm-chatsan-word-shotgun: cm-chatsan-replacement-shotgun
+    cm-chatsan-word-squad: cm-chatsan-replacement-squad
+    cm-chatsan-word-squads: cm-chatsan-replacement-squads
+

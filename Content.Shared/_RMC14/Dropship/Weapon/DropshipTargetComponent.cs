@@ -12,4 +12,7 @@ public sealed partial class DropshipTargetComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool IsTargetableByWeapons = true;
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<EntityUid, EntityUid> Eyes = new();
 }

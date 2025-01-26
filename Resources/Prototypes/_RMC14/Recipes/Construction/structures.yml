@@ -419,3 +419,23 @@
   conditions:
     - !type:TileNotBlocked
       failIfSpace: false
+
+- type: construction
+  parent: RMC
+  id: CMFence
+  name: fence
+  graph: CMFence
+  startNode: start
+  targetNode: fenceMetal
+  category: construction-category-cm-structures
+  description: A weak mesh fence.
+  icon:
+    sprite: _RMC14/Structures/fences.rsi
+    state: fence0
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
