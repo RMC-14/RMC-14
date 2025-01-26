@@ -13,7 +13,8 @@
                         <Button Name="DiscordButton" Access="Public" Text="{Loc 'rmc-ui-discord'}"
                                 Visible="False" StyleClasses="OpenRight" HorizontalExpand="True" />
                         <Button Name="PatreonButton" Access="Public" Text="{Loc 'rmc-ui-patreon'}"
-                                Visible="False" StyleClasses="OpenLeft" HorizontalExpand="True" />
+                                Visible="False" StyleClasses="OpenBoth" HorizontalExpand="True" />
+                        <Button Name="CreditsButton" Access="Public" Text="Credits" StyleClasses="OpenLeft" />
                     </BoxContainer>
                     <Label HorizontalExpand="True" Align="Right" VerticalAlignment="Bottom"
                            Text="*This is not an exhaustive list" />
@@ -36,15 +37,15 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Shivas Snowball" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Almayer" Text="Ship map for the marines" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="LV-624" Text="Planet map" />
-                    <controls:RoadmapItem ItemState="Partial" HeaderText="Weapon attachments" Text="Each weapon will be able to be customized with different attachments, changing the weapon's stats" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Specialist's Demolitionist Kit" Text="M5-ATL!!!" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Specialist's Sniper Kit" Text="Sniper loadout for the squad weapons specialist. On completion, its ghillie suit will let you become partially cloaked, and the rifle will have special actions" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Squad automated vendors" Text="Where the marine roles get their equipment at round start" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Requisitions" Text="Department that buys supplies for the rest of the marines" />
-                    <controls:RoadmapItem ItemState="Partial" HeaderText="Marine squad orders" Text="The move, focus and hold orders. These are orders that specific marine roles can use to give a temporary buff to every marine around them" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Firearms skill" Text="Each marine role has a different firearms skill. This impacts how accurate they are with guns" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Medical skill" Text="Allows more advanced medical procedures and increases their overall speed" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno Queen" Text="Head caste of the xenonids" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Marine squad orders" Text="The move, focus and hold orders. These are orders that specific marine roles can use to give a temporary buff to every marine around them" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Weapon attachments" Text="Each weapon will be able to be customized with different attachments, changing the weapon's stats" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Burrower" Text="Lay the foundations for resin traps in strategic locations or the Hive's flanks. Flank your way around the map with the tunnel ability and dig tunnels to allow for quick transportation of fellow Aliens from the hive to the frontlines" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Communications objective" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="New Varadero" Text="Planet map, ported by Aurallianz Star" />

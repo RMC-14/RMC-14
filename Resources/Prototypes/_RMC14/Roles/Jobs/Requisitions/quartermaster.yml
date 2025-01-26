@@ -10,6 +10,16 @@
     time: 36000 # 10 hours
   - !type:AgeRequirement
     requiredAge: 27
+  ranks:
+    RMCRankMasterSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobQuartermaster
+      time: 252000 # 70 hours
+    RMCRankGunnerySergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobQuartermaster
+      time: 36000 # 10 hours
+    RMCRankStaffSergeant: []
   weight: 5
   startingGear: CMGearQuartermaster
   icon: "CMJobIconQuartermaster"
@@ -42,19 +52,19 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "QM"
+      prefix: cm-job-prefix-quartermaster
 
 - type: startingGear
   id: CMGearQuartermaster
   equipment:
     jumpsuit: CMJumpsuitQM
     shoes: CMBootsBlack
-    head: CMHeadCapCargo
+    head: RMCHeadCapQuartermaster
     gloves: CMHandsInsulated
     id: CMIDCardQuartermaster
     ears: CMHeadsetQM
-    pocket1: RMCPouchGeneralMedium
-    pocket2: CMFlash
+    pocket1: CMFlash
+    pocket2: RMCPouchGeneralLarge
   inhand:
   - CMStampApproved
 

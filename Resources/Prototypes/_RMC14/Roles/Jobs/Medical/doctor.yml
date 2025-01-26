@@ -10,6 +10,8 @@
     time: 3600 # 1 hour
   - !type:AgeRequirement
     requiredAge: 20
+  ranks:
+    RMCRankSecondLT: []
   startingGear: CMGearDoctor
   icon: "CMJobIconDoctor"
   joinNotifyCrew: false
@@ -34,7 +36,7 @@
         RMCSkillSurgery: 2
     - type: RMCUserBulkyArmorIncapable
     - type: JobPrefix
-      prefix: "Doc"
+      prefix: cm-job-prefix-doctor
 
 - type: startingGear
   id: CMGearDoctor
@@ -42,7 +44,6 @@
     jumpsuit: CMScrubsBlue
     shoes: ClothingShoesColorWhite
     id: CMIDCardDoctor
-    ears: CMHeadsetMedical # TODO RMC14 Medical Vender
 
 - type: startingGear
   id: CMGearDoctorEquipped

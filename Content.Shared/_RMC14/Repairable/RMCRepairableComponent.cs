@@ -31,4 +31,7 @@ public sealed partial class RMCRepairableComponent : Component
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 FuelUsed = FixedPoint2.New(0);
+
+    [DataField, AutoNetworkedField]
+    public float RepairableDamageLimit;
 }

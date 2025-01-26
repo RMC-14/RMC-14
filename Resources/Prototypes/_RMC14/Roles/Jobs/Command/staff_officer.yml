@@ -13,6 +13,8 @@
     time: 54000 # 15 hours
   - !type:AgeRequirement
     requiredAge: 25
+  ranks:
+    RMCRankSecondLT: []
   weight: 5
   startingGear: CMGearStaffOfficer
   icon: "CMJobIconStaffOfficer"
@@ -50,7 +52,7 @@
       points: 45
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "SO"
+      prefix: cm-job-prefix-staff-officer
 
 - type: startingGear
   id: CMGearStaffOfficer
@@ -60,6 +62,10 @@
     head: RMCHeadCapFlippable
     id: CMIDCardStaffOfficer
     ears: RMCHeadsetMarineCommand
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchGeneralLarge
+  inhand:
+    - RMCRangefinder
 
 - type: entity
   parent: CMSpawnPointJobBase

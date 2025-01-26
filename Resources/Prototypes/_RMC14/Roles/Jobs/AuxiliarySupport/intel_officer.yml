@@ -10,6 +10,8 @@
     time: 18000 # 5 hours
   - !type:AgeRequirement
     requiredAge: 20
+  ranks:
+    RMCRankSecondLT: []
   startingGear: CMGearIntelOfficer
   icon: "CMJobIconIntelOfficer"
   joinNotifyCrew: false
@@ -38,7 +40,7 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "IO"
+      prefix: cm-job-prefix-intel
   hidden: true # TODO RMC14
 
 - type: startingGear

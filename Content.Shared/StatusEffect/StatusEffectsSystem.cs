@@ -106,13 +106,13 @@ namespace Content.Shared.StatusEffect
         /// <returns>False if the effect could not be added or the component already exists, true otherwise.</returns>
         /// <typeparam name="T">The component type to add and remove from the entity.</typeparam>
         public bool TryAddStatusEffect<T>(EntityUid uid, string key, TimeSpan time, bool refresh,
-            StatusEffectsComponent? status = null)
+            StatusEffectsComponent? status = null, bool force = false)
             where T : IComponent, new()
         {
             if (!Resolve(uid, ref status, false))
                 return false;
 
-            if (!TryAddStatusEffect(uid, key, time, refresh, status))
+            if (!TryAddStatusEffect(uid, key, time, refresh, status, force: force))
                 return false;
 
             if (HasComp<T>(uid))
@@ -168,11 +168,12 @@ namespace Content.Shared.StatusEffect
             TimeSpan time,
             bool refresh,
             StatusEffectsComponent? status = null,
-            TimeSpan? startTime = null)
+            TimeSpan? startTime = null,
+            bool force = false)
         {
             if (!Resolve(uid, ref status, false))
                 return false;
-            if (!CanApplyEffect(uid, key, status))
+            if (!CanApplyEffect(uid, key, status, force))
                 return false;
 
             var ev = new RMCStatusEffectTimeEvent(key, time);
@@ -343,16 +344,19 @@ namespace Content.Shared.StatusEffect
         /// <param name="uid">The entity to check on.</param>
         /// <param name="key">The status effect ID to check for</param>
         /// <param name="status">The status effect component, should you already have it.</param>
-        public bool CanApplyEffect(EntityUid uid, string key, StatusEffectsComponent? status = null)
+        public bool CanApplyEffect(EntityUid uid, string key, StatusEffectsComponent? status = null, bool force = false)
         {
             // don't log since stuff calling this prolly doesn't care if we don't actually have it
             if (!Resolve(uid, ref status, false))
                 return false;
 
-            var ev = new BeforeStatusEffectAddedEvent(key);
-            RaiseLocalEvent(uid, ref ev);
-            if (ev.Cancelled)
-                return false;
+            if (!force)
+            {
+                var ev = new BeforeStatusEffectAddedEvent(key);
+                RaiseLocalEvent(uid, ref ev);
+                if (ev.Cancelled)
+                    return false;
+            }
 
             if (!_prototypeManager.TryIndex<StatusEffectPrototype>(key, out var proto))
                 return false;

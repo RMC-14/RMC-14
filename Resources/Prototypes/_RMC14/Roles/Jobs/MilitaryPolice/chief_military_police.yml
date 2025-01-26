@@ -13,6 +13,12 @@
     time: 18000 # 5 hours
   - !type:AgeRequirement
     requiredAge: 27
+  ranks:
+    RMCRankFirstLT:
+    - !type:RoleTimeRequirement
+      role: CMJobChiefMP
+      time: 36000 # 10 hours
+    RMCRankSecondLT: []
   weight: 5
   startingGear: CMGearChiefMP
   icon: "CMJobIconChiefMP"
@@ -49,7 +55,7 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "CMP"
+      prefix: cm-job-prefix-mp
 
 - type: startingGear
   id: CMGearChiefMP

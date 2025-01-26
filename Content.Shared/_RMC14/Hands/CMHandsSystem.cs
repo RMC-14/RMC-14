@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Storage;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Mobs;
@@ -28,6 +29,7 @@ public sealed class CMHandsSystem : EntitySystem
         SubscribeLocalEvent<WhitelistPickupComponent, PickupAttemptEvent>(OnWhitelistPickUpAttempt);
         SubscribeLocalEvent<DropHeldOnIncapacitateComponent, MobStateChangedEvent>(OnDropMobStateChanged);
         SubscribeLocalEvent<RMCStorageEjectHandComponent, GetVerbsEvent<AlternativeVerb>>(OnStorageEjectHandVerbs);
+        SubscribeLocalEvent<DropOnUseInHandComponent, UseInHandEvent>(OnDropOnUseInHand);
     }
 
     private void OnXenoHandsMapInit(Entity<GiveHandsComponent> ent, ref MapInitEvent args)
@@ -94,6 +96,11 @@ public sealed class CMHandsSystem : EntitySystem
                 }
             },
         });
+    }
+
+    private void OnDropOnUseInHand(Entity<DropOnUseInHandComponent> ent, ref UseInHandEvent args)
+    {
+        _hands.TryDrop(args.User, ent);
     }
 
     public bool IsPickupByAllowed(Entity<WhitelistPickupByComponent?> item, Entity<WhitelistPickupComponent?> user)

@@ -94,6 +94,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         SubscribeLocalEvent<VictimInfectedComponent, RejuvenateEvent>(OnVictimInfectedRejuvenate);
         SubscribeLocalEvent<VictimInfectedComponent, LarvaBurstDoAfterEvent>(OnBurst);
 
+        SubscribeLocalEvent<VictimBurstComponent, MapInitEvent>(OnVictimBurstMapInit);
         SubscribeLocalEvent<VictimBurstComponent, UpdateMobStateEvent>(OnVictimUpdateMobState,
             after: [typeof(MobThresholdSystem), typeof(SharedXenoPheromonesSystem)]);
         SubscribeLocalEvent<VictimBurstComponent, RejuvenateEvent>(OnVictimBurstRejuvenate);
@@ -296,11 +297,13 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         RemCompDeferred<VictimInfectedComponent>(victim);
     }
 
+    private void OnVictimBurstMapInit(Entity<VictimBurstComponent> burst, ref MapInitEvent args)
+    {
+        _appearance.SetData(burst, BurstVisuals.Visuals, VictimBurstState.Burst);
+    }
+
     private void OnVictimUpdateMobState(Entity<VictimBurstComponent> burst, ref UpdateMobStateEvent args)
     {
-        if (burst.Comp.State != BurstVisualState.Burst)
-            return;
-
         args.State = MobState.Dead;
     }
 
@@ -541,6 +544,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         var query = EntityQueryEnumerator<VictimInfectedComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var infected, out var xform))
         {
+            if (_net.IsClient)
+                continue;
+
             if (infected.BurstAt + infected.AutoBurstTime <= time && infected.SpawnedLarva != null)
             {
                 TryBurst((uid, infected));
@@ -561,9 +567,6 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             // Stasis slows this, while nesting makes it happen sooner
             if (infected.IncubationMultiplier != 1)
                 infected.BurstAt += TimeSpan.FromSeconds(1 - infected.IncubationMultiplier) * frameTime;
-
-            if (_net.IsClient)
-                continue;
 
             // spawn the larva
             if (infected.BurstAt <= time && infected.SpawnedLarva == null)
@@ -747,6 +750,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             */
 
             EnsureComp<VictimBurstComponent>(burstFrom);
+            _appearance.SetData(burstFrom.Owner, BurstVisuals.Visuals, VictimBurstState.Bursting);
 
             var shakeFilter = Filter.PvsExcept(victim);
             shakeFilter.RemoveWhereAttachedEntity(HasComp<BursterComponent>); // not visible the larva
@@ -768,11 +772,14 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (args.Cancelled || args.Handled)
             return;
 
-        var victimBurst = EnsureComp<VictimBurstComponent>(ent);
-        SetVictimBurstState((ent.Owner, victimBurst), BurstVisualState.Burst);
-
         if (_net.IsClient)
             return;
+
+        EnsureComp<VictimBurstComponent>(ent.Owner);
+        _appearance.SetData(ent.Owner, BurstVisuals.Visuals, VictimBurstState.Burst);
+
+        if (TryComp(ent.Owner, out MobStateComponent? mobState))
+            _mobState.UpdateMobState(ent.Owner, mobState);
 
         var coords = _transform.GetMoverCoordinates(ent);
 
@@ -834,18 +841,6 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         }
 
         return true;
-    }
-
-    private void SetVictimBurstState(Entity<VictimBurstComponent> burst, BurstVisualState state)
-    {
-        burst.Comp.State = state;
-        Dirty(burst);
-
-        var ev = new VictimBurstStateChangedEvent();
-        RaiseLocalEvent(burst, ref ev);
-
-        if (TryComp(burst, out MobStateComponent? mobState))
-            _mobState.UpdateMobState(burst, mobState);
     }
 
     public void SetBurstSpawn(Entity<VictimInfectedComponent> burst, EntProtoId spawn)

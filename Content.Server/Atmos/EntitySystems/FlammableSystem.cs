@@ -415,7 +415,7 @@ namespace Content.Server.Atmos.EntitySystems
             Dirty(uid, flammable);
 
             _popup.PopupEntity(Loc.GetString("flammable-component-resist-message"), uid, uid);
-            _stunSystem.TryParalyze(uid, flammable.ResistDuration, true);
+            _stunSystem.TryParalyze(uid, flammable.ResistDuration, true, force: true);
 
             // TODO FLAMMABLE: Make this not use TimerComponent...
             uid.SpawnTimer(2000, () =>

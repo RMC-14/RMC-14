@@ -10,6 +10,8 @@
     time: 18000 # 5 hours
   - !type:AgeRequirement
     requiredAge: 35
+  ranks:
+    RMCRankCaptain: []
   weight: 5
   startingGear: CMGearExecutiveOfficer
   icon: "CMJobIconExecutiveOfficer"
@@ -51,7 +53,7 @@
       points: 120
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "XO"
+      prefix: cm-job-prefix-executive-officer
 
 - type: startingGear
   id: CMGearExecutiveOfficer
@@ -62,6 +64,11 @@
     outerClothing: RMCCoatService
     id: CMIDCardExecutiveOfficer
     ears: CMHeadsetSeniorCommand
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchGeneralLarge
+  storage:
+    pocket1:
+    - RMCRangefinder
 
 - type: entity
   parent: CMSpawnPointJobBase

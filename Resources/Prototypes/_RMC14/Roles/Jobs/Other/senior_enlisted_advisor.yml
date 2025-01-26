@@ -22,6 +22,16 @@
     time: 18000 # 5 hours
   - !type:AgeRequirement
     requiredAge: 40
+  ranks: # TODO Selectable Ranks for SEA
+    RMCRankSergeantMajor:
+    - !type:RoleTimeRequirement
+      role: CMJobSeniorEnlistedAdvisor
+      time: 252000 # 70 hours
+    RMCRankFirstSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobSeniorEnlistedAdvisor
+      time: 36000 # 10 hours
+    RMCRankGunnerySergeant: []
   weight: 5
   startingGear: CMGearSeniorEnlistedAdvisor
   icon: "CMJobIconSEA"
@@ -65,7 +75,7 @@
       points: 45
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "SEA"
+      prefix: cm-job-prefix-senior-enlisted-advisor
     - type: SeeNewPlayers
 
 - type: startingGear
@@ -76,6 +86,11 @@
     head: CMHeadCapDrill
     id: CMIDCardSeniorEnlistedAdvisor
     ears: RMCHeadsetSEA
+    pocket1: CMFlash
+    pocket2: RMCPouchGeneralLarge
+  inhand:
+  - RMCBinoculars
+  - RMCWhistle
 
 - type: entity
   parent: CMSpawnPointJobBase

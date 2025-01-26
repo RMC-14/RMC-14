@@ -10,6 +10,16 @@
     time: 36000 # 10 hours
   - !type:AgeRequirement
     requiredAge: 27
+  ranks:
+    RMCRankGunnerySergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobMilitaryWarden
+      time: 252000 # 70 hours
+    RMCRankStaffSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobMilitaryWarden
+      time: 36000 # 10 hours
+    RMCRankSergeant: []
   weight: 5
   startingGear: CMGearMilitaryWarden
   icon: "CMJobIconMilitaryWarden"
@@ -42,7 +52,7 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "MW"
+      prefix: cm-job-prefix-militarywarden
 
 - type: startingGear
   id: CMGearMilitaryWarden

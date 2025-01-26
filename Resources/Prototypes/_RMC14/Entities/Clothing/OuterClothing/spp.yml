@@ -19,6 +19,8 @@
   - type: Storage
     grid:
     - 0,0,1,1 # 1 slot
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: entity
   parent: RMCArmorSPP

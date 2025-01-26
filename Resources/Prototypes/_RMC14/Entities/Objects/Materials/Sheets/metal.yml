@@ -124,6 +124,17 @@
       stackType: CMSteel
       count: 1
 
+- type: entity
+  parent: CMSheetMetal
+  id: CMSheetMetal2
+  suffix: "2"
+  components:
+    - type: Sprite
+      state: metal
+    - type: Stack
+      stackType: CMSteel
+      count: 2
+
 # Plasteel
 
 - type: material
@@ -139,7 +150,7 @@
   name: plasteel
   icon: { sprite: /Textures/_RMC14/Objects/Materials/Sheets/plasteel.rsi, state: plasteel }
   spawn: CMSheetPlasteel
-  maxCount: 40
+  maxCount: 50
 
 - type: entity
   parent: CMSheetMetalBase

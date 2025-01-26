@@ -136,7 +136,7 @@
 
 - type: entity
   parent: ClothingEyesBase
-  id: RMCGlassesMarineRpg
+  id: RMCGlassesMarineRpg # TODO make this actually prescription
   name: Marine RPG glasses
   description: The Corps may call them Regulation Prescription Glasses but you know them as Rut Prevention Glasses.
   components:
@@ -147,11 +147,11 @@
     slots:
     - MASK
     - EYES
-    
+
 - type: entity
   parent: ClothingEyesBase
   id: RMCGogglesBallistic
-  name: Ballistic goggles
+  name: marine ballistic goggles
   description: Standard issue UNMC goggles. While commonly found mounted atop M10 pattern helmets, they are also capable of preventing insects, dust, and other things from getting into one's eyes.
   components:
   - type: Sprite
@@ -163,32 +163,43 @@
     - EYES
 
 - type: entity
-  parent: ClothingEyesBase
-  id: RMCGogglesM1A1Ballistic
-  name: M1A1 Ballistic goggles
+  parent: RMCGogglesBallistic
+  id: RMCGogglesBallisticBlack # TODO prescription variant
+  name: black marine ballistic goggles
+  description: Standard issue USCM goggles. While commonly found mounted atop M10 pattern helmets, they are also capable of preventing insects, dust, and other things from getting into one's eyes. This one has black tinted lenses.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/black_ballistic_goggles.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/black_ballistic_goggles.rsi
+
+- type: entity
+  parent: RMCGogglesBallistic
+  id: RMCGogglesBallisticOrange # TODO prescription variant
+  name: orange marine ballistic goggles
+  description: Standard issue USCM goggles. While commonly found mounted atop M10 pattern helmets, they are also capable of preventing insects, dust, and other things from getting into one's eyes. This one has amber colored day lenses.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/orange_ballistic_goggles.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/orange_ballistic_goggles.rsi
+
+- type: entity
+  parent: RMCGogglesBallistic
+  id: RMCGogglesM1A1Ballistic # TODO prescription variant
+  name: M1A1 marine ballistic goggles
   description: Newer issue UNMC goggles. While commonly found mounted atop M10 pattern helmets, they are also capable of preventing insects, dust, and other things from getting into one's eyes. This version has larger lenses.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles.rsi
-    slots:
-    - MASK
-    - EYES
 
 - type: entity
-  parent: ClothingEyesBase
-  id: RMCGogglesPrescriptionBallistic
-  name: Prescription ballistic goggles
+  parent: RMCGogglesBallistic
+  id: RMCGogglesPrescriptionBallistic # TODO make this actually prescription
+  name: prescription marine ballistic goggles
   description: Standard issue UNMC goggles. Mostly used to decorate one's helmet. Contains prescription lenses in case you weren't sure if they were lame or not.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Prescription_ballistic_goggles.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/Prescription_ballistic_goggles.rsi
-    slots:
-    - MASK
-    - EYES
 
 - type: entity
   parent: ClothingEyesBase
@@ -216,21 +227,21 @@
   id: RMCSunglasses
   suffix: RMC
   name: sunglasses
-  description: Generic off-brand eyewear, used to help provide rudimentary eye cover.  
+  description: Generic off-brand eyewear, used to help provide rudimentary eye cover.
   components:
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/sunglasses.rsi
     slots:
     - MASK
     - EYES
-    
+
 # Identical to upstream ones, sans the name and description
 - type: entity
   parent: ClothingEyesEyepatch
   id: RMCEyepatch
   suffix: RMC
   name: eyepatch
-  description: Once worn by swashbucklers of old, now more commonly associated with a figure of legend. They say he was big AND a boss. Impressive no? Don't let the MPs see you wearing this non-regulation attire.  
+  description: Once worn by swashbucklers of old, now more commonly associated with a figure of legend. They say he was big AND a boss. Impressive no? Don't let the MPs see you wearing this non-regulation attire.
   components:
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/eyepatch.rsi
@@ -266,7 +277,7 @@
     slots:
     - EYES
     - MASK
-    
+
 - type: entity
   parent: ClothingEyesBase
   id: RMCHipsterGlasses
@@ -309,6 +320,8 @@
   - type: Tag
     tags:
     - RMCWeldingGoggle
+  - type: Item
+    storedRotation: 0
 
 - type: Tag
   id: RMCWeldingGoggle

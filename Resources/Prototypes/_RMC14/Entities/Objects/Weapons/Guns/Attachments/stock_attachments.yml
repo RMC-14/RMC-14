@@ -42,11 +42,10 @@
   parent: RMCStockAttachmentBase
   id: RMCAttachmentM42A2WoodenStock
   name: M42A2 wooden stock
-  suffix: Desert
   description: A non-standard heavy wooden stock for the M42A2 Shotgun. More cumbersome than the standard issue stakeout, but reduces recoil and scatter. Allegedly makes a pretty good club in a fight too.
   components:
   - type: Sprite
-    state: d-stock
+    state: d_stock
   - type: AttachableVisuals
     suffix: ""
   - type: Tag
@@ -79,6 +78,7 @@
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 6
+  - type: Appearance
   - type: ItemCamouflage
     states:
       Jungle: stock
@@ -133,13 +133,13 @@
   parent: RMCStockAttachmentBase
   id: RMCAttachmentXM51Stock # TODO RMC14 burst
   name: XM51 stock
-  suffix: Jungle
   description: A specialized stock designed for XM51 breaching shotguns. Helps the user absorb the recoil of the weapon while also reducing scatter. Integrated mechanisms inside the stock allow use of a devastating two-shot burst. This comes at a cost of the gun becoming too unwieldy to holster, worse handling and mobility.
   components:
   - type: Sprite
     state: xm51_stock
   - type: AttachableVisuals
     suffix: ""
+  - type: Appearance
   - type: Tag
     tags:
     - RMCAttachmentStock
@@ -263,7 +263,6 @@
   parent: RMCStockAttachmentBase
   id: RMCAttachmentM54CStockSolid
   name: M54C solid stock
-  suffix: Desert
   description: A rare stock distributed in small numbers to UNMC forces. Compatible with the M54C, this stock reduces recoil and scatter, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle.
   components:
   - type: Sprite
@@ -300,6 +299,7 @@
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 6
+  - type: Appearance
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/jungle.rsi
@@ -659,7 +659,6 @@
   parent: RMCStockAttachmentBase
   id: RMCAttachmentXM88Stock
   name: XM88 padded stock
-  suffix: Desert
   description: A specially made compound polymer stock reinforced with aluminum rods and thick rubber padding to shield the user from recoil. Fitted specifically for the XM88 Heavy Rifle.
   components:
   - type: Sprite
@@ -697,6 +696,7 @@
       accuracyAddMult: -0.1
       recoilFlat: 1
       scatterFlat: 14
+  - type: Appearance
   - type: ItemCamouflage
     states:
       Jungle: boomslang-stock
