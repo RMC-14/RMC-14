@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: TeaTotalTemplar
-  changes:
-  - message: The M276 Utility Toolbelt and M276 Combat Utility Toolbelt now contain
-      cable coil (30 pieces)
-    type: Add
-  id: 766
-  time: '2024-10-03T22:06:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4229
 - author: CyberTropic
   changes:
   - message: Barbed sandbags now return the barbed wire when dismantled.
@@ -5071,5 +5063,12 @@
   id: 1265
   time: '2025-01-26T14:05:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5467
+- author: DrSmugleaf
+  changes:
+  - message: Added Duke 'Big Boss' Morris figurine.
+    type: Add
+  id: 1266
+  time: '2025-01-26T21:39:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5469
 Name: RMC14
 Order: -1
