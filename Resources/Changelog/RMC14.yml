@@ -1,29 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed mortars being hit by bullets not targeted directly at them, and
-      being damaged by marine melee.
-    type: Fix
-  - message: Removed shotgun fire delay on wield now that fire groups are in. Akimbo
-      shotguns still won't work, but wielding your shotgun will no longer put it on
-      a very long cooldown anymore.
-    type: Fix
-  - message: Fixed the M5-ATL (Demolitionist weapons spec rocket launcher) leaving
-      behind fake projectiles.
-    type: Fix
-  - message: Fixed placing eggs and returning parasites to them having no delay. Both
-      now have a 4 second delay.
-    type: Fix
-  - message: Fixed some shutters and podlocks not being acidable by xenos.
-    type: Fix
-  - message: Removed a lot of turrets from the landing zones of all four planet maps.
-      The poison gas remains, with some turrets still within it.
-    type: Tweak
-  id: 760
-  time: '2024-09-30T03:49:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4195
-- author: DrSmugleaf
-  changes:
   - message: Added the missing boost to evolution points when hijack starts. For 3
       minutes, xenos will get 5 evolution points per second, 10 times the default.
     type: Add
@@ -5114,5 +5091,26 @@
   id: 1259
   time: '2025-01-26T07:07:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4773
+- author: Whisper
+  changes:
+  - message: Marine law has been added. Ensure you read it before playing Command
+      and MP positions, even if you have read another version of it.
+    type: Add
+  - message: Squad Leaders have access to a ziptie box.
+    type: Add
+  - message: Added the RSH-9 Assault Revolver to the CMP vendor.
+    type: Add
+  - message: MP now have access to pistol cases in their vendors.
+    type: Fix
+  - message: MP now have access to additional policing equipment in their vendors.
+    type: Fix
+  - message: Various rule changes. Ensure you read them.
+    type: Tweak
+  - message: Many sections of the guidebook have been reworked and should be easier
+      to use.
+    type: Tweak
+  id: 1260
+  time: '2025-01-26T11:58:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/3440
 Name: RMC14
 Order: -1
