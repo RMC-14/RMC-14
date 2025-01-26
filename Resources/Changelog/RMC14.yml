@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed welded closets and crates not opening from xenonid melee attacks.
-      Attacking one as a xenonid will now open it.
-    type: Fix
-  id: 748
-  time: '2024-09-27T21:47:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4160
-- author: DrSmugleaf
-  changes:
   - message: Fixed shooting some guns lagging you to death.
     type: Fix
   id: 749
@@ -5139,5 +5131,12 @@
   id: 1247
   time: '2025-01-26T04:37:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5449
+- author: to4no_fix
+  changes:
+  - message: Added support for localization of job prefixes
+    type: Fix
+  id: 1248
+  time: '2025-01-26T05:02:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5367
 Name: RMC14
 Order: -1
