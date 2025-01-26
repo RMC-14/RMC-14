@@ -35,14 +35,14 @@
 
 # Any player with medium-low law understanding
 - type: rank
-  id: RMCRankProvostChiefInspector
+  id: RMCRankProvostInspector
   name: Provost Inspector
   prefix: PvI.
   paygrade: I
 
 # Any player with low law understanding, with guidance
 - type: rank
-  id: RMCRankProvostChiefInspector
+  id: RMCRankProvostAdvisor
   name: Sergeant Major
   prefix: SgtMaj.
   paygrade: E9E
