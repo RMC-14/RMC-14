@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Weeds;
@@ -11,10 +11,13 @@ public sealed partial class XenoWeedsComponent : Component
     public int Range = 5;
 
     [DataField]
-    public float SpeedMultiplierXeno = 1.05f;
+    public float SpeedMultiplierXeno = 1.05f; //MOVE_DELAY * 0.95
 
     [DataField]
-    public float SpeedMultiplierOutsider = 0.6f; // TODO RMC14
+    public float SpeedMultiplierOutsider = 0.5714f;
+
+    [DataField]
+    public float SpeedMultiplierOutsiderArmor = 0.6666f;
 
     [DataField, AutoNetworkedField]
     public bool IsSource = true;
