@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: fixed ammo stuns appearing to stun when they didn't
-    type: Fix
-  id: 742
-  time: '2024-09-27T06:52:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4145
-- author: Vermidia
-  changes:
-  - message: Fixed some tool doafters (mostly medical ones) being able to treat multiple
-      people at once
-    type: Fix
-  id: 743
-  time: '2024-09-27T09:51:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4151
 - author: DrSmugleaf
   changes:
   - message: Added the Praetorian, a tier 3 xenonid caste evolved to from both Spitter
@@ -5181,5 +5166,20 @@
   id: 1241
   time: '2025-01-20T03:32:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5426
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the M54C Mk1 and the tactical shotgun not being in the executive
+      officer's weapon vendor.
+    type: Fix
+  id: 1242
+  time: '2025-01-26T04:21:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5437
+- author: Tunguso4ka
+  changes:
+  - message: Fixed Kutjevo areas. Now you can mortar Colony and Hydro Dam buildings.
+    type: Fix
+  id: 1243
+  time: '2025-01-26T04:26:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5453
 Name: RMC14
 Order: -1
