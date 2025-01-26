@@ -273,6 +273,15 @@
   components:
   - type: Sprite
     state: kutjevo
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
 
 - type: entity
   parent: RMCAreaKutjevoInteriorComplex
@@ -404,6 +413,14 @@
     state: power
   - type: Area
     minimapColor: '#C19504E7'
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
 
 - type: entity
   parent: RMCAreaKutjevoInteriorPower
