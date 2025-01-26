@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed the Warden Praetorian showing an error sprite when wounded.
-    type: Fix
-  id: 745
-  time: '2024-09-27T21:04:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4157
-- author: DrSmugleaf
-  changes:
   - message: Fixed some guns making it look like you are leaving a trail of bullets
       for the shooter.
     type: Fix
@@ -5138,5 +5131,16 @@
   id: 1244
   time: '2025-01-26T04:28:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5457
+- author: Tunguso4ka
+  changes:
+  - message: Fixed table to table part deconstruction being too short (1 > 5 seconds).
+    type: Fix
+  - message: Fixed table part to metal deconstruction being too long (1 > 0 seconds).
+    type: Fix
+  - message: Fixed rack deconstruction being too long (1 > 0 seconds).
+    type: Fix
+  id: 1245
+  time: '2025-01-26T04:31:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5450
 Name: RMC14
 Order: -1
