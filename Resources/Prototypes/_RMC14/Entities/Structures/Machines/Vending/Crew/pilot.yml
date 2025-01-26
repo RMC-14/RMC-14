@@ -34,7 +34,7 @@
       choices: { CMSidearm: 1 }
       entries:
       - id: CMWeaponPistolM1984
-      - id: CMWeaponPistolMK80
+      - id: RMCMK80
     - name: Belts
       choices: { CMBelt: 1 }
       entries:
@@ -204,7 +204,7 @@
         amount: 24
     - name: Sidearms
       entries:
-      - id: CMWeaponPistolM77
+      - id: RMCWeaponPistolM77
         amount: 4
       - id: RMCWeaponRevolverM44
         amount: 4

@@ -17,7 +17,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCM54CE2Case
+    - id: RMCGunCaseRifleM54CE2
       amount: 2
 
 - type: entity
@@ -27,7 +27,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCMK80Case
+    - id: RMCGunCasePistolMK80
       amount: 2
     - id: CMMagazinePistolMK80
       amount: 4
@@ -59,7 +59,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCSmartPistolCase
+    - id: RMCGunCasePistolSmart
       amount: 2
 
 - type: entity

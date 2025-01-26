@@ -430,7 +430,7 @@ CMMagazinePistolM4A3: CMMagazinePistolM1984
 CMCrateBoxMagazinePistolM4A3: RMCCrateBoxMagazinePistolM1984
 CMBoxMagazinePistolM4A3: RMCBoxMagazinePistolM1984
 CMWeaponPistolM4A3: CMWeaponPistolM1984
-CMWeaponPistol88m4: CMWeaponPistolM77
+#CMWeaponPistol88m4: CMWeaponPistolM77
 CMCrateBoxMagazinePistol88m4AP: RMCCrateBoxMagazinePistolM77AP
 CMBoxMagazinePistol88m4AP: RMCBoxMagazinePistolM77AP
 CMCartridgePistol88m4AP: CMCartridgePistolM77AP
@@ -438,7 +438,7 @@ CMCrateBoxMagazinePistolVP78: RMCCrateBoxMagazinePistolMK80
 CMCrateVP78: RMCCrateMK80
 CMBoxMagazinePistolVP78: RMCBoxMagazinePistolMK80
 CMMagazinePistolVP78: CMMagazinePistolMK80
-CMWeaponPistolVP78: CMWeaponPistolMK80
+#CMWeaponPistolVP78: CMWeaponPistolMK80
 #CMCrateBoxMagazineRifleM4RA: RMCCrateBoxMagazineRifleM4DMR
 #CMCrateBoxMagazineRifleM4RAAP: RMCCrateBoxMagazineRifleM4DMRAP
 #CMCrateBoxMagazineRifleM4RAExt: RMCCrateBoxMagazineRifleM4DMRExt
@@ -1045,6 +1045,11 @@ WeaponLauncherM83Camo: WeaponLauncherM83
 RMCBinocularsCamo: RMCBinoculars
 RMCMortarKitCamo: RMCMortarKit
 ArmorHelmetM10Camo: ArmorHelmetM10
+
+# 2024-12-29
+CMWeaponPistolMK80: RMCMK80
+CMWeaponPistolM77: RMCWeaponPistolM77
+CMWeaponPistolM77Empty: RMCWeaponPistolM77Empty
 
 # 2025-01-07
 FoodGoldenApple: RMCFoodGoldenApple
