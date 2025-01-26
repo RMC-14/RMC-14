@@ -1,0 +1,48 @@
+name: Map checker
+
+on:
+  pull_request:
+    branches: [ "master" ]
+    paths:
+    # Run if maps are changed.
+    - "Resources/Maps/_RMC14/**/*.yml"
+    # Also run if the mapchecker itself or its config is changed.
+    - ".github/map_checker/**"
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+  RUST_LOG: Info # Avoid spamming the console.
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Rust
+      run: rustup update stable && rustup default stable
+
+    - name: Cache Cargo registry
+      uses: actions/cache@v4.1.2
+      with:
+        path: ~/.cargo/registry
+        key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.toml') }}
+        restore-keys: |
+          ${{ runner.os }}-cargo-registry-
+
+    - name: Cache Cargo build
+      uses: actions/cache@v4.1.2
+      with:
+        path: .github/map_checker/target
+        key: ${{ runner.os }}-cargo-build-${{ hashFiles('**/Cargo.toml') }}
+        restore-keys: |
+          ${{ runner.os }}-cargo-build-
+
+    - name: Build
+      run: cd .github/map_checker && cargo b --release
+
+    - name: Run
+      run: ./.github/map_checker/target/release/map_checker -c .github/map_checker/matchers.yml -m Resources/Maps/_RMC14

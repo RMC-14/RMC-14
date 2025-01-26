@@ -1,7 +1,5 @@
-using Content.Server.Atmos.Components;
 using System.Linq;
 using Content.Server._RMC14.NPC;
-using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.NPC.Queries;
 using Content.Server.NPC.Queries.Considerations;
@@ -10,12 +8,13 @@ using Content.Server.NPC.Queries.Queries;
 using Content.Server.Nutrition.Components;
 using Content.Server.Nutrition.EntitySystems;
 using Content.Server.Storage.Components;
-using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared._RMC14.Interaction;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.Atmos.Components;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.Fluids.Components;
@@ -391,7 +390,9 @@ public sealed class NPCUtilitySystem : EntitySystem
             }
             case TargetInfectableCon:
             {
-                return HasComp<InfectableComponent>(targetUid) && !HasComp<VictimInfectedComponent>(targetUid) ? 1f : 0f;
+                return TryComp<InfectableComponent>(targetUid, out var infectable)
+                        && !infectable.BeingInfected
+                        && !HasComp<VictimInfectedComponent>(targetUid) ? 1f : 0f;
             }
             case TargetOpenEggCon:
             {

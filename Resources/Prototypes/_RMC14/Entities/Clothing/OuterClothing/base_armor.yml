@@ -18,6 +18,8 @@
   - type: Clothing
     equipSound:
       path: /Audio/_RMC14/Machines/armor_equip.ogg
+  - type: PlaytimeMedalHolder
+  - type: MoveOrderArmor
 
 - type: entity
   abstract: true
@@ -43,8 +45,29 @@
       - RMCSMGPouchHolster
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
+      - RMCXM51Holster
       - RMCMotionDetector
+      - RMCMatebaHolster
       #TODO walkman
+
+- type: entity
+  abstract: true
+  id: RMCAllowSuitStorageClothingArmorVest
+  components:
+  - type: AllowSuitStorage
+    whitelist:
+      components:
+      - Gun
+      - Stunbaton
+      - BallisticAmmoProvider #Note should get all maganizes
+      tags:
+      - Handcuffs
+      - GasTank
+      - Flashlight
+      - RMCMacheteScabbard
+      - Binoculars
+      - RMCGeneralPistolHolster
+      - RMCGeneralRevolverHolster
 
 - type: entity
   abstract: true
@@ -118,6 +141,7 @@
       - RMCSMGPouchHolster
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
+      - RMCMatebaHolster
       #TODO Ceremonial Sword
       - RMCMotionDetector
       #TODO walkman
@@ -180,9 +204,8 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
-  - type: WieldSlowdownCompensation
-    walk: 0.08
-    sprint: 0.136
+  - type: RMCArmorSpeedTier
+    speedTier: medium
   - type: RMCNameItemOnVend
     item: Armor
   - type: CMHardArmor

@@ -6,6 +6,8 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Mobs;
+using Content.Shared.MouseRotator;
+using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
@@ -24,7 +26,7 @@ public sealed class FiremanCarrySystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
-    [Dependency] private readonly RMCSpriteSystem _rmcSprite = default!;
+    [Dependency] private readonly SharedRMCSpriteSystem _rmcSprite = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -112,6 +114,9 @@ public sealed class FiremanCarrySystem : EntitySystem
 
         carrier.Carrying = ent;
         Dirty(user, carrier);
+
+        if (!_timing.ApplyingState && !HasComp<MouseRotatorComponent>(user))
+            RemCompDeferred<NoRotateOnMoveComponent>(user);
 
         args.Handled = true;
 
@@ -214,7 +219,8 @@ public sealed class FiremanCarrySystem : EntitySystem
 
     private void OnCarrierPullStopped(Entity<CanFiremanCarryComponent> ent, ref PullStoppedMessage args)
     {
-        StopPull(ent, args.PulledUid);
+        if (ent.Owner == args.PullerUid && ent.Comp.Carrying == args.PulledUid)
+            StopPull(ent, args.PulledUid);
     }
 
     private void OnCarrierPullSlowdownAttempt(Entity<CanFiremanCarryComponent> ent, ref PullSlowdownAttemptEvent args)

@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared.Radio;
 using Content.Shared.Roles;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
@@ -12,6 +13,9 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 {
     [DataField]
     public List<EntProtoId> SquadIds = ["SquadAlpha", "SquadBravo", "SquadCharlie", "SquadDelta"];
+
+    [DataField]
+    public List<EntProtoId> ExtraSquadIds = ["SquadIntel"];
 
     [DataField]
     public Dictionary<EntProtoId, EntityUid> Squads = new();
@@ -54,7 +58,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public TimeSpan QueenDiedDelay = TimeSpan.FromMinutes(10);
 
     [DataField]
-    public DistressSignalRuleResult Result;
+    public DistressSignalRuleResult? Result;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan? NextCheck;
@@ -113,4 +117,25 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 
     [DataField]
     public TimeSpan? StartTime;
+
+    [DataField]
+    public bool ScalingDone;
+
+    [DataField]
+    public double Scale = 1;
+
+    [DataField]
+    public double MaxScale = 1;
+
+    [DataField]
+    public TimeSpan? EndAtAllClear;
+
+    [DataField]
+    public TimeSpan AllClearEndDelay = TimeSpan.FromMinutes(3);
+
+    [DataField]
+    public ProtoId<RadioChannelPrototype> AllClearChannel = "MarineCommand";
+
+    [DataField]
+    public TimeSpan RoundEndCheckDelay = TimeSpan.FromMinutes(1);
 }

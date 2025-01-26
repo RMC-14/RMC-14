@@ -134,13 +134,12 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         _ui.SetUiState(computer.Owner, MarineCommunicationsComputerUI.Key, state);
     }
 
-
     /// <summary>
     /// Dispatches already wrapped announcement to Marines.
     /// </summary>
     /// <param name="message">The content of the announcement.</param>
     /// <param name="sound">GlobalSound for announcement.</param>
-    public void AnnounceToMarines(
+    public override void AnnounceToMarines(
         string message,
         SoundSpecifier? sound = null
         )
@@ -157,13 +156,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         _audio.PlayGlobal(sound ?? DefaultAnnouncementSound, filter, true, AudioParams.Default.WithVolume(-2f));
     }
 
-    /// <summary>
-    /// Dispatches an unsigned announcement to Marines.
-    /// </summary>
-    /// <param name="message">The content of the announcement.</param>
-    /// <param name="author">The author of the message, UNMC High Command by default.</param>
-    /// <param name="sound">GlobalSound for announcement.</param>
-    public void AnnounceHighCommand(
+    public override void AnnounceHighCommand(
         string message,
         string? author = null,
         SoundSpecifier? sound = null
@@ -248,5 +241,25 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
 
         _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
         _audio.PlayGlobal(sound ?? DefaultSquadSound, filter, true, AudioParams.Default.WithVolume(-2f));
+    }
+
+    public override void AnnounceSquad(string message, EntityUid squad, SoundSpecifier? sound = null)
+    {
+        base.AnnounceSquad(message, squad, sound);
+
+        var filter = Filter.Empty().AddWhereAttachedEntity(e => _squad.IsInSquad(e, squad));
+
+        _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
+        _audio.PlayGlobal(sound ?? DefaultSquadSound, filter, true, AudioParams.Default.WithVolume(-2f));
+    }
+
+    public override void AnnounceSingle(string message, EntityUid receiver, SoundSpecifier? sound = null)
+    {
+        base.AnnounceSingle(message, receiver, sound);
+
+        if (TryComp(receiver, out ActorComponent? actor))
+            _chatManager.ChatMessageToOne(ChatChannel.Radio, message, message, default, false, actor.PlayerSession.Channel);
+
+        _audio.PlayEntity(sound, receiver, receiver, AudioParams.Default.WithVolume(-2f));
     }
 }

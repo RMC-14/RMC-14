@@ -32,6 +32,21 @@
 
 - type: entity
   parent: CMHandsBlackMarine
+  id: RMCHandsCOGloves
+  name: commanding officer's gloves
+  description: You may like these gloves, but THEY think you are unworthy of them.
+  components:
+  - type: Insulated
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/captain.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/captain.rsi
+  - type: Fiber
+    fiberMaterial: fibers-durathread
+    fiberColor: fibers-yellow
+
+- type: entity
+  parent: CMHandsBlackMarine
   id: RMCHandsM3G4
   name: M3-G4 grenadier gloves
   description: A pair of plated, but nimble, gloves.

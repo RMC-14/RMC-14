@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Barricade.Components;
+using Content.Shared._RMC14.Construction.Upgrades;
 using Content.Shared.Climbing.Events;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
@@ -43,6 +44,7 @@ public abstract class SharedBarbedSystem : EntitySystem
         SubscribeLocalEvent<BarbedComponent, DoorStateChangedEvent>(OnDoorStateChanged);
         SubscribeLocalEvent<BarbedComponent, AttemptClimbEvent>(OnClimbAttempt);
         SubscribeLocalEvent<BarbedComponent, CMGetArmorPiercingEvent>(OnGetArmorPiercing);
+        SubscribeLocalEvent<BarbedComponent, RMCConstructionUpgradedEvent>(OnConstructionUpgraded);
     }
 
     public void OnInteractUsing(EntityUid uid, BarbedComponent component, InteractUsingEvent args)
@@ -171,6 +173,15 @@ public abstract class SharedBarbedSystem : EntitySystem
     {
         if (barbed.Comp.IsBarbed)
             args.Piercing = 1000;
+    }
+
+    private void OnConstructionUpgraded(Entity<BarbedComponent> barbed, ref RMCConstructionUpgradedEvent args)
+    {
+        var newComp = EnsureComp<BarbedComponent>(args.New);
+        newComp.IsBarbed = barbed.Comp.IsBarbed;
+
+        Dirty(args.New, newComp);
+        UpdateAppearance((args.New, newComp));
     }
 
     protected void UpdateAppearance(Entity<BarbedComponent> barbed)

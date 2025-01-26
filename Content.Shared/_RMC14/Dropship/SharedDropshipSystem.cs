@@ -1,5 +1,6 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Rules;
@@ -30,6 +31,7 @@ public abstract class SharedDropshipSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     private TimeSpan _dropshipInitialDelay;
+    private TimeSpan _hijackInitialDelay;
 
     public override void Initialize()
     {
@@ -43,6 +45,9 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         SubscribeLocalEvent<DropshipWeaponPointComponent, MapInitEvent>(OnAttachmentPointMapInit);
         SubscribeLocalEvent<DropshipWeaponPointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
+
+        SubscribeLocalEvent<DropshipUtilityPointComponent, MapInitEvent>(OnAttachmentPointMapInit);
+        SubscribeLocalEvent<DropshipUtilityPointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
         SubscribeLocalEvent<DropshipWeaponPointComponent, ExaminedEvent>(OnAttachmentExamined);
 
         Subs.BuiEvents<DropshipNavigationComputerComponent>(DropshipNavigationUiKey.Key,
@@ -58,6 +63,7 @@ public abstract class SharedDropshipSystem : EntitySystem
             });
 
         Subs.CVar(_config, RMCCVars.RMCDropshipInitialDelayMinutes, v => _dropshipInitialDelay = TimeSpan.FromMinutes(v), true);
+        Subs.CVar(_config, RMCCVars.RMCDropshipHijackInitialDelayMinutes, v => _hijackInitialDelay = TimeSpan.FromMinutes(v), true);
     }
 
     private void OnDropshipMapInit(Entity<DropshipComponent> ent, ref MapInitEvent args)
@@ -69,6 +75,9 @@ public abstract class SharedDropshipSystem : EntitySystem
                 continue;
 
             if (HasComp<DropshipWeaponPointComponent>(uid))
+                ent.Comp.AttachmentPoints.Add(uid);
+
+            if (HasComp<DropshipUtilityPointComponent>(uid))
                 ent.Comp.AttachmentPoints.Add(uid);
         }
 
@@ -126,6 +135,9 @@ public abstract class SharedDropshipSystem : EntitySystem
         }
 
         if (!TryDropshipLaunchPopup(ent, user, false))
+            return;
+
+        if (!TryDropshipHijackPopup(ent, user, false))
             return;
 
         var userTransform = Transform(user);
@@ -204,7 +216,28 @@ public abstract class SharedDropshipSystem : EntitySystem
         }
     }
 
+    private void OnAttachmentPointMapInit(Entity<DropshipUtilityPointComponent> ent, ref MapInitEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (TryGetGridDropship(ent, out var dropship))
+        {
+            dropship.Comp.AttachmentPoints.Add(ent);
+            Dirty(dropship);
+        }
+    }
+
     private void OnAttachmentPointRemove<T>(Entity<DropshipWeaponPointComponent> ent, ref T args)
+    {
+        if (TryGetGridDropship(ent, out var dropship))
+        {
+            dropship.Comp.AttachmentPoints.Remove(ent);
+            Dirty(dropship);
+        }
+    }
+
+    private void OnAttachmentPointRemove<T>(Entity<DropshipUtilityPointComponent> ent, ref T args)
     {
         if (TryGetGridDropship(ent, out var dropship))
         {
@@ -320,8 +353,27 @@ public abstract class SharedDropshipSystem : EntitySystem
         var roundDuration = _gameTicker.RoundDuration();
         if (roundDuration < _dropshipInitialDelay)
         {
-            var minutesLeft = Math.Max(1, (int) (_dropshipInitialDelay- roundDuration).TotalMinutes);
+            var minutesLeft = Math.Max(1, (int)(_dropshipInitialDelay - roundDuration).TotalMinutes);
             var msg = Loc.GetString("rmc-dropship-pre-flight-fueling", ("minutes", minutesLeft));
+
+            if (predicted)
+                _popup.PopupClient(msg, computer, user, PopupType.MediumCaution);
+            else
+                _popup.PopupEntity(msg, computer, user, PopupType.MediumCaution);
+
+            return false;
+        }
+
+        return true;
+    }
+
+    protected bool TryDropshipHijackPopup(EntityUid computer, Entity<DropshipHijackerComponent?> user, bool predicted)
+    {
+        var roundDuration = _gameTicker.RoundDuration();
+        if (HasComp<DropshipHijackerComponent>(user) && roundDuration < _hijackInitialDelay)
+        {
+            var minutesLeft = Math.Max(1, (int)(_hijackInitialDelay - roundDuration).TotalMinutes);
+            var msg = Loc.GetString("rmc-dropship-pre-hijack", ("minutes", minutesLeft));
 
             if (predicted)
                 _popup.PopupClient(msg, computer, user, PopupType.MediumCaution);

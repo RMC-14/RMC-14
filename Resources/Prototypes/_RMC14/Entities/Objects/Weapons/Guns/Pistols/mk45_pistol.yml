@@ -11,6 +11,9 @@
     baseFireRate: 1.428
   - type: GunDamageModifier
     multiplier: 1.4
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.2
+    accuracyMultiplierUnwielded: 0.85
   - type: PumpAction
     sound:
       path: /Audio/_RMC14/Weapons/Guns/Cock/gun_pistol_cocked.ogg
@@ -117,6 +120,8 @@
         Piercing: 36
   - type: CMArmorPiercing
     amount: 25
+  - type: RMCProjectileAccuracy
+    accuracy: 100
 
 - type: Tag
   id: RMCMagazinePistolMK45

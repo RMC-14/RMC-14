@@ -45,3 +45,33 @@
   - type: IconSmooth
     key: walls
     base: strata_ribbed_outpost_
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallStrataIce
+  name: ice columns
+  description: An absolutely massive collection of columns made of ice. The longer you stare, the deeper the ice seems to go.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/strata_ice.rsi
+    state: strata_ice
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/strata_ice.rsi
+    state: strata_ice
+  - type: IconSmooth
+    key: walls
+    base: strata_ice
+
+- type: entity
+  parent: RMCWallStrataIce
+  id: RMCWallStrataIceDirty
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/strata_ice_dirty.rsi
+    state: strata_ice_dirty
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/strata_ice_dirty.rsi
+    state: strata_ice_dirty
+  - type: IconSmooth
+    key: walls
+    base: strata_ice_dirty

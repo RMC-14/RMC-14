@@ -13,15 +13,13 @@
       types:
         Blunt: 15
         Slash: 10
-        Structural: 10
     soundHit:
       collection: GenericHit
     wideAnimationRotation: 90
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Slash: 15
-        Blunt: 15
-        Structural: 40
+        Slash: 10
+        Blunt: 10
   - type: Prying
     speedModifier: 100000

@@ -1,0 +1,247 @@
+- type: entity
+  parent: CMMagazineRifleM54C
+  id: RMCMagazineRifleM54CRubber
+  name: "M54C rubber magazine (10x24mm)"
+  description: "A magazine of less-lethal rubber 10x24mm rounds for use in the M54C battle rifle."
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - CMMagazineRifleM54C
+    - RMCMagazineRifleM54CRubber
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmRubber
+    proto: RMCCartridgeRifle10x24mmRubber
+    capacity: 40
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ce.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineRifleM4SPRRubber
+  name: "M4SPR rubber magazine (10x24mm)"
+  description: "A magazine of less-lethal rubber 10x24mm rounds for use in the M4SPR battle rifle."
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - CMMagazineRifleM4SPR
+    - RMCMagazineRifleM4SPRRubber
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmRubber
+    proto: RMCCartridgeRifle10x24mmRubber
+    capacity: 25
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4spr.rsi
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifle10x24mmRubber
+  name: rubber cartridge (10x24mm)
+  description: A 10x24mm cartridge. Fits in 10x24mm magazines, this one is designed to be less lethal.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifle10x24mmRubber
+  - type: CartridgeAmmo
+    proto: BulletRifle10x24mmRubber
+
+- type: entity
+  parent: RMCBaseBullet
+  id: BulletRifle10x24mmRubber
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 3
+  - type: StaminaDamageOnCollide
+    damage: 12.5
+  - type: CMArmorPiercing
+    amount: 5
+  - type: RMCProjectileAccuracy
+    accuracy: 105
+    thresholds:
+    - range: 16
+      falloff: 10
+
+## SMG magazines
+
+- type: entity
+  parent: CMMagazineSMGM63
+  id: RMCMagazineSMGM63Rubber
+  name: "M63 rubber magazine (10x20mm)"
+  components:
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridge10x20mmRubber
+    proto: RMCCartridge10x20mmRubber
+    capacity: 48
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m63e.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - CMMagazineSMGM63
+    - RMCMagazineSMGM63Rubber
+
+- type: entity
+  parent: CMCartridgeSMGBase
+  id: RMCCartridge10x20mmRubber
+  name: rubber cartridge (10x20mm)
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridge10x20mmRubber
+  - type: CartridgeAmmo
+    proto: Bullet10x20mmRubber
+
+- type: entity
+  parent: RMCBaseBullet
+  id: Bullet10x20mmRubber
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 3
+  - type: StaminaDamageOnCollide
+    damage: 10
+  - type: CMArmorPiercing
+    amount: 5
+  - type: RMCProjectileAccuracy
+    accuracy: 100
+    thresholds:
+    - range: 4
+      falloff: 10
+
+## Pistol Magazines
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolM1984Rubber
+  name: M1984 rubber magazine (9mm)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolM1984Rubber
+    - CMMagazinePistolM1984
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgePistol9mmRubber
+    proto: RMCCartridgePistol9mmRubber
+    capacity: 12
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m1984.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolM77Rubber
+  name: M77 rubber magazine (9mm)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolM77Rubber
+    - CMMagazinePistolM77AP
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgePistol9mmRubber
+    proto: RMCCartridgePistol9mmRubber
+    capacity: 19
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m77.rsi
+    layers:
+    - state: base_ap
+      map: ["enum.GunVisualLayers.Base"]
+    - state: base_ap-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: base_ap
+
+- type: entity
+  id: RMCCartridgePistol9mmRubber
+  name: rubber cartridge (9mm)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistol9mmRubber
+  - type: CartridgeAmmo
+    proto: RMCBulletPistol9mmRubber
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletPistol9mmRubber
+  name: rubber bullet (9mm)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 3
+  - type: StaminaDamageOnCollide
+    damage: 10
+
+## Tags
+
+- type: Tag
+  id: RMCMagazinePistolM1984Rubber
+
+- type: Tag
+  id: RMCMagazinePistolM77Rubber
+
+- type: Tag
+  id: RMCMagazineRifleM54CRubber
+
+- type: Tag
+  id: RMCMagazineRifleM4SPRubber
+
+- type: Tag
+  id: RMCCartridgeRifle10x24mmRubber
+
+- type: Tag
+  id: RMCMagazineRifleM4SPRRubber
+
+- type: Tag
+  id: RMCMagazineSMGM63Rubber
+
+- type: Tag
+  id: RMCCartridge10x20mmRubber
+
+- type: Tag
+  id: RMCCartridgePistol9mmRubber

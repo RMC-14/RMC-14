@@ -98,7 +98,8 @@
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
         points: 18
-    #    CMM40HIDPIncendiaryPacketx3grenades: 18P
+      - id: RMCPacketGrenadeIncendiaryFilled
+        points: 18
     #    CMM40HPDPWhitePhosphorusPacketx3grenades: 18P
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
@@ -230,13 +231,13 @@
       choices: { RMCPouch: 2 }
       entries:
       - id: RMCPouchReagentCanisterTricordrazineRevival
-        recommended: true
-     #- id: RMCPouchMedkit
-#       recommended: true
         name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
+        recommended: true
+      - id: RMCPouchMedkit
+        recommended: true
 #     - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
 #       name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
-#       recommended: true  
+#       recommended: true
       - id: RMCPouchAutoinjector
       - id: RMCPouchFirstResponder
       - id: RMCPouchReagentCanisterBicaridine
@@ -249,7 +250,6 @@
         name: Pressurized Reagent Canister Pouch\n(EMPTY)
       - id: RMCPouchVialFill
       - id: RMCPouchMedical
-        recommended: true # TODO unrecommend when medkit pouch is real
       - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
       - id: RMCPouchFirstAidSplintsGauzeOintment

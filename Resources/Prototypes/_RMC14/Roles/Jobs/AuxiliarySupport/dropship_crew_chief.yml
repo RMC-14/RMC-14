@@ -50,7 +50,6 @@
   id: CMGearDCC
   equipment:
     jumpsuit: CMJumpsuitDCC
-    back: CMSatchel
     shoes: CMBootsBlackFilled
     id: CMIDCardDCC
     ears: CMHeadsetPilot

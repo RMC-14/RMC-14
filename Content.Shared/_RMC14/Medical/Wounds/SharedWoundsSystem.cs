@@ -369,7 +369,8 @@ public abstract class SharedWoundsSystem : EntitySystem
             BreakOnHandChange = true,
             NeedHand = true,
             CancelDuplicate = true,
-            DuplicateCondition = DuplicateConditions.SameEvent
+            DuplicateCondition = DuplicateConditions.SameEvent,
+            TargetEffect = "RMCEffectHealBusy",
         };
         _doAfter.TryStartDoAfter(doAfter);
         _audio.PlayPredicted(treater.Comp.TreatBeginSound, user, user);

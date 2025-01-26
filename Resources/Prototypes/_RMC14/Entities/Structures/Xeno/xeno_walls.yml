@@ -172,3 +172,5 @@
     destroyWeeds: false
   - type: TimedDespawn
     lifetime: 5.0
+  - type: XenoStructureUpgradeable
+    to: null

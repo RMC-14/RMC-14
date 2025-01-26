@@ -18,7 +18,7 @@ public sealed partial class XenoCripplingStrikeComponent : Component
     public TimeSpan ActiveDuration = TimeSpan.FromSeconds(5);
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 SpeedMultiplier = FixedPoint2.New(0.75);
+    public FixedPoint2 SpeedMultiplier = FixedPoint2.New(0.33);
 
     [DataField, AutoNetworkedField]
     public TimeSpan SlowDuration = TimeSpan.FromSeconds(5);

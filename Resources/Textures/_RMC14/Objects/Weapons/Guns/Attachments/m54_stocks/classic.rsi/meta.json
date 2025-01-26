@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "The RMC-14 development team",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "m54c-solid"
+    },
+    {
+      "name": "m54c-col"
+    },
+    {
+      "name": "m54c-col-on"
+    },
+    {
+      "name": "m54c-solid_a"
+    },
+    {
+      "name": "m54c-col_a"
+    },
+    {
+      "name": "m54c-col_a-on"
+    }
+  ]
+}

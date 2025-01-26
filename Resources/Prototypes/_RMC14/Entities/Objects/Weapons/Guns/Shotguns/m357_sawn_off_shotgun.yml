@@ -21,6 +21,9 @@
     scatterUnwielded: 20
     baseFireRate: 2
     burstScatterMult: 1
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 0.9
+    accuracyMultiplierUnwielded: 0.95
   - type: AttachableHolder
     slots:
       rmc-aslot-rail:

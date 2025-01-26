@@ -4,6 +4,7 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
   id: CMXenoRavager
   name: Ravager
   description: A huge, nasty red alien with enormous scythed claws.
@@ -56,10 +57,15 @@
     damage:
       groups:
         Brute: 45
-  - type: Tackle # min: 2, max: 5
-    threshold: 4
-    stun: 9
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 54
+  - type: Tackle
+    max: 5
     chance: 0.35
+    stunMin: 4
+    stunMax: 5
   - type: Flammable
     damage:
       types:

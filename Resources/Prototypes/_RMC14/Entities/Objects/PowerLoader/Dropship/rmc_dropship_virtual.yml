@@ -34,3 +34,75 @@
   - type: Sprite
     sprite: _RMC14/Interface/power_loader_clamps.rsi
     state: ds_gear
+
+- type: entity
+  parent: RMCVirtualPowerLoaderRight
+  id: RMCVirtualDropshipAmmoRight
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/power_loader_clamps.rsi
+    state: ds_ammo_right
+
+- type: entity
+  parent: RMCVirtualPowerLoaderLeft
+  id: RMCVirtualDropshipAmmoLeft
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/power_loader_clamps.rsi
+    state: ds_ammo
+
+- type: entity
+  parent: RMCVirtualPowerLoaderRight
+  id: RMCVirtualCrateRight
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/power_loader_clamps.rsi
+    state: crate_right
+
+- type: entity
+  parent: RMCVirtualPowerLoaderLeft
+  id: RMCVirtualCrateLeft
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/power_loader_clamps.rsi
+    state: crate
+
+- type: entity
+  parent: RMCVirtualPowerLoaderRight
+  id: RMCVirtualFuelRight
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/power_loader_clamps.rsi
+    state: ob_fuel_right
+
+- type: entity
+  parent: RMCVirtualPowerLoaderLeft
+  id: RMCVirtualFuelLeft
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/power_loader_clamps.rsi
+    state: ob_fuel
+
+- type: entity
+  parent: RMCVirtualPowerLoaderRight
+  id: RMCVirtualWarheadRight
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/power_loader_clamps.rsi
+    state: ob_warhead_right
+
+- type: entity
+  parent: RMCVirtualPowerLoaderLeft
+  id: RMCVirtualWarheadLeft
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/power_loader_clamps.rsi
+    state: ob_warhead

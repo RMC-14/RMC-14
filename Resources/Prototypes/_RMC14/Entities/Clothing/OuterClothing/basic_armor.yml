@@ -10,9 +10,11 @@
   - type: Clothing
     equipDelay: 2
     unequipDelay: 2
+  - type: RMCArmorSpeedTier
+    speedTier: light
   - type: ClothingSpeedModifier
-    walkModifier: 0.8
-    sprintModifier: 0.8
+    walkModifier: 0.725
+    sprintModifier: 0.725
   - type: CMArmor
     armor: 30
     explosionArmor: 10

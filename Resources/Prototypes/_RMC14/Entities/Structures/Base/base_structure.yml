@@ -16,6 +16,7 @@
   components:
   - type: Corrodible
     timeToApply: 4
+    structure: true
 
 - type: entity
   parent: BaseStructure
@@ -36,6 +37,7 @@
         collection: XenoResinBreak
   - type: XenoConstruct
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: NpcFactionMember
     factions:
     - RMCXeno
@@ -119,12 +121,16 @@
     damageModifierSet: StructuralMarine
   - type: Corrodible
     isCorrodible: true
+    structure: true
   - type: Clickable
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: DamageMultiplierFlags
     flags: Turf
   - type: ReceiverXenoClaws
     hitsToDestroy: 20
+  - type: Appearance
+  - type: Bullethole
 
 - type: entity
   parent:
@@ -145,7 +151,7 @@
   - type: PlacementReplacement
     key: walls
   - type: ExplosionResistance
-    damageCoefficient: 12.5 # Walls take 15x explosive damage, resin walls reduce that by 15%
+    damageCoefficient: 3.64
   - type: DamageMultiplierFlags
     flags:
     - Turf

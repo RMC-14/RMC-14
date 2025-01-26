@@ -13,6 +13,21 @@
     range: 2
 
 - type: entity
+  id: ActionXenoHealerDroneTransferPlasma
+  parent: ActionXenoBase
+  name: Transfer plasma (100) # TODO RMC14 proper plasma costs
+  description: Give plasma to a nearby xenonid.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: transfer_plasma
+    event: !type:XenoTransferPlasmaActionEvent
+      amount: 100
+    range: 2
+
+- type: entity
   id: ActionXenoResinSurge
   parent: ActionXenoBase
   name: Resin Surge (75)
@@ -56,39 +71,68 @@
 
 - type: entity
   parent: ActionXenoBase
-  id: ActionXenoAid
-  name: Aid Xenonid (100 plasma, 100 energy)
-  description: Heal a nearby ally Xeno or remove ailments and stuns from a further away ally Xeno. Healing another Xeno will also heal you, and half your remaning points will be consumed for extra healing.
+  id: ActionXenoAidHeal
+  name: Aid Xenonid Healing (100 plasma, 100+ health reserves)
+  description: Heals a nearby ally Xeno. Healing another Xeno will also heal you, and half your remaining health reserves will be consumed for extra healing. [color=red]This can't heal ignited xenonids![/color]
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: prae_aid
+      state: warden_heal
     event: !type:XenoAidActionEvent
+    range: 1.5
+    useDelay: 10
+  - type: XenoActionPlasma
+    cost: 100
+  - type: ActionBlockIfResting
+  - type: ActionSharedCooldown
+    id: ActionXenoAidHeal
+    ids:
+    - ActionXenoAidRejuvenate
+    cooldown: 10
+  
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoAidRejuvenate
+  name: Aid Xenonid Rejuvenate (100 plasma, 100 health reserves)
+  description: Remove ailments and stuns from a far away ally Xeno.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: warden_rejuvenate
+    event: !type:XenoAidActionEvent
+      aidType: Ailments
     range: 8
     useDelay: 10
   - type: XenoActionPlasma
     cost: 100
   - type: ActionBlockIfResting
+  - type: ActionSharedCooldown
+    id: ActionXenoAidRejuvenate
+    ids:
+    - ActionXenoAidHeal
+    cooldown: 10
 
-- type: entity
-  parent: ActionXenoBase
-  id: ActionXenoAidToggle
-  name: Toggle Aid Type
-  description: Toggles between healing or removing ailments with Aid Xenonid.
-  components:
-  - type: InstantAction
-    itemIconStyle: NoItem
-    backgroundOn: null
-    icon:
-      sprite: _RMC14/Actions/xeno_actions.rsi
-      state: warden_heal
-    iconOn:
-      sprite: _RMC14/Actions/xeno_actions.rsi
-      state: warden_rejuvenate
-    event: !type:XenoAidToggleActionEvent
-    useDelay: 0.5
+#- type: entity
+#  parent: ActionXenoBase
+#  id: ActionXenoAidToggle
+#  name: Toggle Aid Type
+#  description: Toggles between healing or removing ailments with Aid Xenonid.
+#  components:
+#  - type: InstantAction
+#    itemIconStyle: NoItem
+#    backgroundOn: null
+#    icon:
+#      sprite: _RMC14/Actions/xeno_actions.rsi
+#      state: warden_heal
+#    iconOn:
+#      sprite: _RMC14/Actions/xeno_actions.rsi
+#      state: warden_rejuvenate
+#    event: !type:XenoAidToggleActionEvent
+#    useDelay: 0.5
 
 - type: entity
   parent: ActionXenoBase
@@ -123,3 +167,32 @@
     range: -1
   - type: XenoActionPlasma
     cost: 600
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoApplySalve
+  name: Apply Salve (200)
+  description: Apply a salve to use some of your health to heal allied Xenos up to 100 health over 5 seconds. You can stack multiple salves.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    backgroundOn: null
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: apply_salve
+    event: !type:XenoApplySalveActionEvent
+    useDelay: 0.5
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoSacrifice
+  name: Sacrifice
+  description: Sacrifice your life to heal a sister. [color=red]YOU WILL ONLY RESPAWN IF YOU MAXED OUT YOUR TRANSFERRED HEALTH BY HEALING SISTERS.[/color]
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    backgroundOn: null
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: screech
+    event: !type:XenoSacrificeHealActionEvent

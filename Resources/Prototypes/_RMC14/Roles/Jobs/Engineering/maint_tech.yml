@@ -35,13 +35,8 @@
   id: CMGearMaintTech
   equipment:
     jumpsuit: CMJumpsuitMaintTech
-    back: CMSatchelMarineTech
     shoes: CMBootsBlack
-    gloves: CMHandsInsulated
     id: CMIDCardMaintTech
-    ears: CMHeadsetEngineer
-    #    belt: TODO RMC14 M276 Pattern General Pistol Holster Rig Filled
-    pocket2: RMCPouchGeneralMedium
 
 - type: entity
   parent: CMSpawnPointJobBase

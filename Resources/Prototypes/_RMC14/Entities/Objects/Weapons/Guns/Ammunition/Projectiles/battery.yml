@@ -26,3 +26,6 @@
     soundHit:
       path: /Audio/_RMC14/Bullets/energy_impact1.ogg
     forceSound: true
+  - type: RMCProjectileAccuracy
+    accuracy: 125
+    ignoreFriendlyEvasion: true

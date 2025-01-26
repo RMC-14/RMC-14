@@ -1,0 +1,31 @@
+- type: entity
+  parent: CMDoubleDoorPreparationsAlpha
+  id: CMDoubleDoorPreparationsAlphaLocked
+  suffix: Preparations, Alpha, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessMarinePrep" ], [ "CMAccessRequisitions" ], [ "CMAccessAlpha" ], [ "CMAccessBravo" ] ]
+
+- type: entity
+  parent: CMDoubleDoorPreparationsBravo
+  id: CMDoublCMDoubleDoorPreparationsBravoLocked
+  suffix: Preparations, Bravo, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessMarinePrep" ], [ "CMAccessRequisitions" ], [ "CMAccessAlpha" ], [ "CMAccessBravo" ] ]
+
+- type: entity
+  parent: CMDoubleDoorPreparationsCharlie
+  id: CMDoubleDoorPreparationsCharlieLocked
+  suffix: Preparations, Charlie, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessMarinePrep" ], [ "CMAccessRequisitions" ], [ "CMAccessCharlie" ], [ "CMAccessDelta" ] ]
+
+- type: entity
+  parent: CMDoubleDoorPreparationsDelta
+  id: CMDoublCMDoubleDoorPreparationsDeltaLocked
+  suffix: Preparations, Delta, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessMarinePrep" ], [ "CMAccessRequisitions" ], [ "CMAccessCharlie" ], [ "CMAccessDelta" ] ]

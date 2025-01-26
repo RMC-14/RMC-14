@@ -25,6 +25,9 @@
     scatterUnwielded: 20
     baseFireRate: 2
     burstScatterMult: 1
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.15
+    accuracyMultiplierUnwielded: 0.95
   - type: Construction
     graph: M357Sawn
     node: start

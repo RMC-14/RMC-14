@@ -13,12 +13,8 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ShowHealthBars
-    damageContainers:
-    - Biological
-  - type: HolocardScanner # TODO RMC14 add this to RMC14 medical hud instead
   - type: ShowHealthIcons
-    damageContainers:
-    - Biological
+  - type: HolocardScanner # TODO RMC14 add this to RMC14 medical hud instead
 
 - type: entity
   parent: ClothingEyesBase
@@ -224,8 +220,6 @@
     sprite: Clothing/Eyes/Hud/syndagent.rsi
   - type: ShowSyndicateIcons
   - type: ShowHealthBars
-    damageContainers:
-    - Biological
 
 - type: entity
   parent: [ClothingEyesGlassesSunglasses, ShowSecurityIcons]

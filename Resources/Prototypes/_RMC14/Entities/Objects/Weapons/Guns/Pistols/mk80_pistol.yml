@@ -31,7 +31,7 @@
     burstScatterMult: 4
     modifiers:
       Burst:
-        fireDelay: 0.1665
+        fireDelay: 0.08 # For some reason the intended value of 0.1665 is too slow because it has a burst cooldown
         maxScatterModifier: 10
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
@@ -133,6 +133,8 @@
       falloff: 5
   - type: CMArmorPiercing
     amount: 30
+  - type: RMCProjectileAccuracy
+    accuracy: 105
 
 - type: Tag
   id: CMMagazinePistolMK80

@@ -12,9 +12,20 @@
   icon: "CMJobIconLiaison"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-we-ya
-  accessGroups:
-  - MarineMain
-  - RMCWeYa
+  access:
+  - RMCAccessWeYa
+  - CMAccessCommand
+  - CMAccessResearch
+  - CMAccessMedical
+  - CMAccessMedPrep
+  - CMAccessColonyPublic
+  - CMAccessColonyResearch
+  - CMAccessColonyEngineering
+  - CMAccessColonyLogistics
+  - CMAccessColonyBrig
+  - CMAccessColonyMedbay
+#  - TODO RMC14 WeYa flight
+  - CMAccessColonyCommand
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: cl
@@ -38,7 +49,6 @@
   id: CMGearLiaison
   equipment:
     jumpsuit: CMJumpsuitLiaisonBlack
-    back: CMSatchel
     shoes: RMCShoesLaceup
     id: CMIDCardLiaison
     ears: RMCHeadsetLiaison

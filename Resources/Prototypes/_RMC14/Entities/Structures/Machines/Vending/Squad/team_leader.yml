@@ -19,8 +19,8 @@
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
         points: 18
-    #- id: CMM40HIDPIncendiaryPacketx3
-    #  points: 18
+      - id: RMCPacketGrenadeIncendiaryFilled
+        points: 18
     #- id: CMM40HPDPWhitePhosphorusPacketx3
     #  points: 18
       - id: RMCPacketGrenadeSmokeFilled
@@ -91,8 +91,6 @@
         points: 15
       - id: CMHandsInsulated
         points: 3
-    #- id: CMNightVisionOptic
-    #  points: 30
     - name: Engineering Supplies
       entries:
 #      - id: Plastic Explosive
@@ -123,7 +121,10 @@
       - id: RMCBinoculars
         points: 5
     - name: Helmet Optics
-      entries: [ ]
+      entries:
+      - id: RMCVisorNightVision
+        points: 30
+        recommended: true
     #- id: CMMedicalHelmetOptic
     #  points: 15
     #- id: CMWeldingVisor
@@ -175,6 +176,7 @@
     #- id: RMCBeltHolsterFlareGun
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
+        name: M276 pattern toolbelt rig (Full)
         recommended: true
       - id: RMCBeltGrenade
     - name: Pouches

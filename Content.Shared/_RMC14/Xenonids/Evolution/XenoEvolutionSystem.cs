@@ -58,6 +58,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
     private TimeSpan _evolutionPointsRequireOvipositorAfter;
     private TimeSpan _evolutionAccumulatePointsBefore;
+    private TimeSpan _evolveSameCasteCooldown;
 
     private readonly HashSet<EntityUid> _climbable = new();
     private readonly HashSet<EntityUid> _doors = new();
@@ -98,6 +99,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         Subs.CVar(_config, RMCCVars.RMCEvolutionPointsRequireOvipositorMinutes, v => _evolutionPointsRequireOvipositorAfter = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCEvolutionPointsAccumulateBeforeMinutes, v => _evolutionAccumulatePointsBefore = TimeSpan.FromMinutes(v), true);
+        Subs.CVar(_config, RMCCVars.RMCXenoEvolveSameCasteCooldownSeconds, v => _evolveSameCasteCooldown = TimeSpan.FromSeconds(v), true);
     }
 
     private void OnXenoOpenDevolveAction(Entity<XenoDevolveComponent> xeno, ref XenoOpenDevolveActionEvent args)
@@ -206,7 +208,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             return;
 
         var newXeno = TransferXeno(xeno, args.Choice);
-        var ev = new NewXenoEvolvedEvent(xeno, newXeno);
+        var ev = new NewXenoEvolvedEvent(xeno, newXeno, false);
         RaiseLocalEvent(newXeno, ref ev, true);
 
         _adminLog.Add(LogType.RMCEvolve, $"Xenonid {ToPrettyString(xeno)} chose strain {ToPrettyString(newXeno)}");
@@ -228,7 +230,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (_net.IsClient ||
             args.Handled ||
             args.Cancelled ||
-            !_mind.TryGetMind(xeno, out var mindId, out _) ||
+            !_mind.TryGetMind(xeno, out _, out _) ||
             !CanEvolvePopup(xeno, args.Choice))
         {
             return;
@@ -237,7 +239,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         args.Handled = true;
 
         var newXeno = TransferXeno(xeno, args.Choice);
-        var ev = new NewXenoEvolvedEvent(xeno, newXeno);
+        var ev = new NewXenoEvolvedEvent(xeno, newXeno, true);
         RaiseLocalEvent(newXeno, ref ev, true);
 
         _adminLog.Add(LogType.RMCEvolve, $"Xenonid {ToPrettyString(xeno)} evolved into {ToPrettyString(newXeno)}");
@@ -252,7 +254,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
     private void OnXenoEvolutionNewEvolved(Entity<XenoEvolutionComponent> xeno, ref NewXenoEvolvedEvent args)
     {
-        TransferPoints((args.OldXeno, args.OldXeno), xeno, true);
+        TransferPoints((args.OldXeno, args.OldXeno), xeno, args.SubtractPoints);
         _jitter.DoJitter(xeno, xeno.Comp.EvolutionJitterDuration, true, 80, 8, true);
     }
 
@@ -385,8 +387,11 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
             var current = EntityQueryEnumerator<XenoComponent, HiveMemberComponent>();
             var slotCount = oldHive.Comp.FreeSlots.ToDictionary();
-            while (current.MoveNext(out var existingComp, out var member))
+            while (current.MoveNext(out var uid, out var existingComp, out var member))
             {
+                if (_mobState.IsDead(uid))
+                    continue;
+
                 if (member.Hive != oldHive.Owner || !existingComp.CountedInSlots)
                     continue;
 
@@ -415,6 +420,21 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
                 return false;
             }
+        }
+
+        if (TryComp(xeno, out XenoRecentlyDevolvedComponent? recently) &&
+            recently.Recent.TryGetValue(newXeno, out var at) &&
+            at + _evolveSameCasteCooldown > _timing.CurTime)
+        {
+            var timeRemaining = at + _evolveSameCasteCooldown - _timing.CurTime;
+            var msg = Loc.GetString("rmc-xeno-evolution-cant-evolve-caste-cooldown",
+                ("minutes", timeRemaining.Minutes),
+                ("seconds", timeRemaining.Seconds));
+
+            if (doPopup)
+                _popup.PopupEntity(msg, xeno, xeno, PopupType.MediumCaution);
+
+            return false;
         }
 
         return true;
@@ -535,6 +555,18 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 comp.StopCollide.Add(id);
         }
 
+        var newRecently = EnsureComp<XenoRecentlyDevolvedComponent>(newXeno);
+        if (TryComp(xeno, out XenoRecentlyDevolvedComponent? oldRecently))
+        {
+            foreach (var (id, time) in oldRecently.Recent)
+            {
+                newRecently.Recent[id] = time;
+            }
+        }
+
+        if (Prototype(xeno)?.ID is { } oldId)
+            newRecently.Recent[oldId] = _timing.CurTime;
+
         return newXeno;
     }
 
@@ -556,8 +588,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
 
         var newXeno = TransferXeno(xeno, to);
-        var ev = new XenoDevolvedEvent(xeno);
-        RaiseLocalEvent(newXeno, ref ev);
+        var ev = new XenoDevolvedEvent(xeno, newXeno);
+        RaiseLocalEvent(newXeno, ref ev, true);
 
         _adminLog.Add(LogType.RMCDevolve, $"Xenonid {ToPrettyString(xeno)} devolved into {ToPrettyString(newXeno)}");
 

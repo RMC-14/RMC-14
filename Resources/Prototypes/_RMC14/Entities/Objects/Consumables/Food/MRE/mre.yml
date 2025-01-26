@@ -15,7 +15,6 @@
     state: closed
   - type: Item
     size: Small
-    sprite: _RMC14/Objects/Consumable/Food/bar.rsi
   - type: Storage
     grid:
     - 0,0,13,1
@@ -92,6 +91,7 @@
     - id: CMExecutiveWEYAMatchbook
       orGroup: matchbook
   - type: FixedItemSizeStorage
+  - type: RemoveOnlyStorage
   - type: InteractedBlacklist
     blacklist:
       components:

@@ -47,10 +47,18 @@
           - RMCAttachmentLaserSight
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.715, 0.125
+      rmc-aslot-barrel: 0.6875, 0.125
       rmc-aslot-rail: 0, 0.185
       rmc-aslot-stock: -0.59375, 0.09375
       rmc-aslot-underbarrel: 0.375, -0.155
+
+- type: entity
+  parent: RMCWeaponRevolverM44
+  id: RMCWeaponRevolverM44Empty
+  suffix: Empty
+  components:
+  - type: RevolverAmmoProvider
+    proto: null
 
 - type: entity
   id: RMCBaseSpeedLoader44
@@ -153,6 +161,8 @@
         Piercing: 72
   - type: CMArmorPiercing
     amount: 5
+  - type: RMCProjectileAccuracy
+    accuracy: 90
 
 - type: entity
   parent: CMBulletBase
@@ -170,6 +180,11 @@
       ignoreModifiers: true
   - type: CMArmorPiercing
     amount: 35
+  - type: RMCProjectileAccuracy
+    accuracy: 90
+    thresholds:
+    - range: 12
+      falloff: 10
 
 - type: Tag
   id: RMCSpeedLoaderM44

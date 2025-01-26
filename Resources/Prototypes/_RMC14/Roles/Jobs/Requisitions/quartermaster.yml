@@ -46,14 +46,13 @@
   id: CMGearQuartermaster
   equipment:
     jumpsuit: CMJumpsuitQM
-    back: CMSatchelMarineTech
     shoes: CMBootsBlack
-    head: CMHeadCapCargo
+    head: RMCHeadCapQuartermaster
     gloves: CMHandsInsulated
     id: CMIDCardQuartermaster
     ears: CMHeadsetQM
-    pocket1: RMCPouchGeneralMedium
-    pocket2: CMFlash
+    pocket1: CMFlash
+    pocket2: RMCPouchGeneralLarge
   inhand:
   - CMStampApproved
 
