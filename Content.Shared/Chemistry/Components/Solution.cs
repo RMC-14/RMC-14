@@ -1,11 +1,12 @@
+using System.Collections;
+using System.Linq;
+using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
-using System.Collections;
-using System.Linq;
 
 namespace Content.Shared.Chemistry.Components
 {
@@ -167,7 +168,7 @@ namespace Content.Shared.Chemistry.Components
             ValidateSolution();
         }
 
-        public Solution(Solution solution)
+        public Solution(Solution solution, IPrototypeManager? prototypes = null)
         {
             Contents = solution.Contents.ShallowClone();
             Volume = solution.Volume;
@@ -176,7 +177,7 @@ namespace Content.Shared.Chemistry.Components
             _heatCapacity = solution._heatCapacity;
             _heatCapacityDirty = solution._heatCapacityDirty;
             _heatCapacityUpdateCounter = solution._heatCapacityUpdateCounter;
-            ValidateSolution();
+            ValidateSolution(prototypes);
         }
 
         public Solution Clone()
@@ -185,7 +186,7 @@ namespace Content.Shared.Chemistry.Components
         }
 
         [AssertionMethod]
-        public void ValidateSolution()
+        public void ValidateSolution(IPrototypeManager? prototypes = null)
         {
             // sandbox forbids: [Conditional("DEBUG")]
     #if DEBUG
@@ -203,7 +204,7 @@ namespace Content.Shared.Chemistry.Components
             {
                 var cur = _heatCapacity;
                 _heatCapacityDirty = true;
-                UpdateHeatCapacity(null);
+                UpdateHeatCapacity(prototypes);
                 DebugTools.Assert(MathHelper.CloseTo(_heatCapacity, cur, tolerance: 0.01));
             }
     #endif
@@ -611,7 +612,7 @@ namespace Content.Shared.Chemistry.Components
         }
 
         /// <summary>
-        /// Splits a solution without the specified reagent prototypes.
+        /// Splits a solution with only the specified reagent prototypes.
         /// </summary>
         public Solution SplitSolutionWithOnly(FixedPoint2 toTake, params string[] includedPrototypes)
         {

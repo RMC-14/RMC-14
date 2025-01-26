@@ -8,6 +8,12 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsEngineering
     time: 72000 # 20 hours
+  ranks:
+    RMCRankFirstLT:
+    - !type:RoleTimeRequirement
+      role: CMJobChiefEngineer
+      time: 252000 # 70 hours
+    RMCRankSecondLT: []
   weight: 5
   startingGear: CMGearChiefEngineer
   icon: "CMJobIconChiefEngineer"
@@ -18,7 +24,11 @@
   - CMCE
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: engi
+    state: ce
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -36,12 +46,14 @@
         RMCSkillPolice: 1
         RMCSkillPowerLoader: 2
     - type: MarineOrders
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-chief-engineer
 
 - type: startingGear
   id: CMGearChiefEngineer
   equipment:
     jumpsuit: CMJumpsuitChiefEngineer
-    back: CMSatchelMarineTech
     shoes: CMBootsBlack
     gloves: CMHandsInsulated
     id: CMIDCardChiefEngineer
@@ -64,3 +76,4 @@
 
 - type: playTimeTracker
   id: CMJobChiefEngineer
+  isHumanoid: true

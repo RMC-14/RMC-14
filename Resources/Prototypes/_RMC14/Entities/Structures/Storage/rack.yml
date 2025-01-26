@@ -28,7 +28,6 @@
         - TableLayer
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Metallic
   - type: Destructible
     thresholds:
     - trigger:
@@ -51,5 +50,8 @@
   - type: Climbable
   - type: StaticPrice
     price: 22
+  - type: Construction
+    graph: RMCRack
+    node: rack
   - type: DamageMultiplierFlags
     flags: Breaching

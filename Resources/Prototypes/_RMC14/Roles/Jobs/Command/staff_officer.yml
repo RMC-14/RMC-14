@@ -11,6 +11,8 @@
   - !type:TotalDepartmentsTimeRequirement
     group: CMDepartmentsHuman
     time: 54000 # 15 hours
+  ranks:
+    RMCRankSecondLT: []
   weight: 5
   startingGear: CMGearStaffOfficer
   icon: "CMJobIconStaffOfficer"
@@ -21,7 +23,11 @@
   - MarineMain
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: cic
+    state: so
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -42,16 +48,22 @@
     - type: MarineOrders
     - type: CMVendorUser
       points: 45
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-staff-officer
 
 - type: startingGear
   id: CMGearStaffOfficer
   equipment:
     jumpsuit: CMJumpsuitBO
-    back: CMSatchelMarine
     shoes: RMCShoesLaceup
-    head: CMHeadCap
+    head: RMCHeadCapFlippable
     id: CMIDCardStaffOfficer
     ears: RMCHeadsetMarineCommand
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchGeneralLarge
+  inhand:
+    - RMCRangefinder
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -68,3 +80,4 @@
 
 - type: playTimeTracker
   id: CMJobStaffOfficer
+  isHumanoid: true

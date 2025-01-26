@@ -54,15 +54,15 @@
 #    - Autoinjector (C-S) (300 Plastic)
 #    - Autoinjector (C-M) (300 Plastic)
 #    - Autoinjector (C-L) (300 Plastic)
-#    - EZ Autoinjector (E-U) (300 Plastic)
-#    - EZ Autoinjector (E-VS) (300 Plastic)
-#    - EZ Autoinjector (E-S) (300 Plastic)
-#    - EZ Autoinjector (E-T) (300 Plastic)
-#    - EZ Autoinjector (E-M) (300 Plastic)
-#    - EZ Autoinjector (E-L) (300 Plastic)
-#    - EZ Autoinjector (E-XL) (300 Plastic)
-#    - Medic Autoinjector (M-M) (300 Plastic)
-#    - Medic Autoinjector (M-L) (300 Plastic)
+    - RMCMedicAutoInjectorEZ1
+    - RMCMedicAutoInjectorEZ5
+    - RMCMedicAutoInjectorEZ10
+    - RMCMedicAutoInjectorEZ15
+    - RMCMedicAutoInjectorEZ30
+    - RMCMedicAutoInjectorEZ45
+    - RMCMedicAutoInjectorEZ60
+    - RMCMedicAutoInjector15
+    - RMCMedicAutoInjector30
     - CMHypospray
     - CMBloodPack
     - RMCBeakerHighCapacity
@@ -78,11 +78,14 @@
     - CMFirstAidO2Kit
 #    - Radiation First Aid Kit (2000 Plastic)
 #    - Syringe Case (1000 Plastic)
-    - RMCSurgicalTrayEmpty 
+    - RMCSurgicalTrayEmpty
     - RMCVialBox
-#    - Pressurized Reagent Canister Pouch (2000 Plastic, 2000 Glass)
-#    - Pressurized Canister (2000 Glass)
+    - RMCPouchReagentCanister
+    - RMCPressurizedCanister
   - type: MaterialStorage
+    storage:
+      CMGlass: 533
+      RMCPlastic: 2000
     whitelist:
       tags:
       - Plastic
@@ -116,6 +119,9 @@
     blacklist:
       components:
       - Xeno
+  - type: Anchorable
+    flags:
+    - None
 
 - type: entity
   parent: RMCMedilathe
@@ -151,4 +157,3 @@
     runningState: medilathe_n_f
     unlitIdleState: medilathe_u_f
     unlitRunningState: medilathe_n_u_f
-    

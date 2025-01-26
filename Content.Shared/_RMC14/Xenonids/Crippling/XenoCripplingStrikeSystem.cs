@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Movement.Systems;
@@ -17,6 +18,7 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
 
@@ -38,6 +40,8 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
 
         args.Handled = true;
         var active = EnsureComp<XenoActiveCripplingStrikeComponent>(xeno);
+        var reset = EnsureComp<MeleeResetComponent>(xeno);
+        _rmcMelee.MeleeResetInit((xeno.Owner, reset));
 
         active.ExpireAt = _timing.CurTime + xeno.Comp.ActiveDuration;
         active.SpeedMultiplier = xeno.Comp.SpeedMultiplier;
@@ -74,10 +78,13 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
             _movementSpeed.RefreshMovementSpeedModifiers(entity);
 
             var message = Loc.GetString("cm-xeno-crippling-strike-hit", ("target", entity));
-            _popup.PopupClient(message, entity, xeno);
+            
 
             if (_net.IsServer)
+            {
+                _popup.PopupEntity(message, entity, xeno);
                 SpawnAttachedTo(xeno.Comp.Effect, entity.ToCoordinates());
+            }
 
             RemCompDeferred<XenoActiveCripplingStrikeComponent>(xeno);
             break;
@@ -119,6 +126,7 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
                     continue;
 
                 RemCompDeferred<XenoActiveCripplingStrikeComponent>(uid);
+                RemCompDeferred<MeleeResetComponent>(uid);
 
                 _popup.PopupEntity(Loc.GetString("cm-xeno-crippling-strike-expire"), uid, uid, PopupType.SmallCaution);
             }

@@ -24,10 +24,9 @@
         density: 1000
         hard: false
   - type: XenoWeeds
+    level: 1
   - type: Clickable
-  - type: EdgeSpreader
-    id: XenoWeeds
-  - type: ActiveEdgeSpreader
+  - type: XenoWeedsSpreading
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
     drawdepth: FloorTiles
@@ -93,6 +92,7 @@
     soundGroups:
       Brute:
         collection: XenoResinBreak
+  - type: ExplosionRandomResistance
 #  - type: Physics
 #    bodyType: Static
 #  - type: FootstepModifier
@@ -132,9 +132,10 @@
     - Wall
   components:
   - type: XenoWeeds
+    range: 7
     spawns: XenoHiveWeeds
-  - type: EdgeSpreader
-    id: XenoWeeds
+    level: 3
+    blockOtherWeeds: true
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
     drawdepth: FloorTiles
@@ -187,6 +188,7 @@
   parent: XenoHiveWeeds
   id: XenoHiveWeedsSource
   name: hive weed node
+  description: A weird, pulsating node
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
@@ -202,7 +204,8 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-
+  - type: XenoConstructionPlasmaCost
+    plasma: 75
 - type: entity
   id: XenoWeedsWall
   name: weeds
@@ -259,25 +262,32 @@
   parent: XenoWeeds
   id: XenoHardyWeeds
   components:
+  - type: Sprite
+    color: "#a1a1a1"
   - type: XenoWeeds
+    level: 2
     spawns: XenoHardyWeeds
     spreadsOnSemiWeedable: true
     fruitGrowthMultiplier: 0.8
-  - type: EdgeSpreader
-    id: XenoWeeds
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity # TODO RMC14 sound
   parent: XenoHardyWeeds
   id: XenoHardyWeedsSource
-  name: hive weed node
+  name: hardy weed node
+  description: A weird, pulsating node
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
     drawdepth: FloorTiles
+    color: "#a1a1a1"
     layers:
     - state: weed0
     - state: constructionnode
-
-- type: edgeSpreader
-  id: XenoWeeds
-  updatesPerSecond: 2

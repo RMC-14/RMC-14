@@ -3,6 +3,10 @@
   parent: CMBaseStructure
   id: RMCCommunicationsConsoleBase
   components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
   - type: Sprite
     drawdepth: SmallObjects
     sprite: _RMC14/Structures/Machines/rmc_groundside_communications_console.rsi
@@ -38,12 +42,21 @@
     interfaces:
       enum.MarineCommunicationsComputerUI.Key:
         type: MarineCommunicationsComputerBui
+      enum.OverwatchConsoleUI.Key:
+        type: OverwatchConsoleBui
+      enum.TacticalMapComputerUi.Key:
+        type: TacticalMapComputerBui
+      enum.DialogUiKey.Key:
+        type: DialogBui
   - type: MarineCommunicationsComputer
+  - type: OverwatchConsole
+    canMessageSquad: false
+  - type: TacticalMapComputer
 
 - type: entity
   parent: RMCCommunicationsConsoleBase
   id: RMCWarshipControlConsole
-  name: warship control console
+  name: almayer control console
   description: This is used for controlling ship and its related functions.
   components:
   - type: ActivatableUI
@@ -55,6 +68,8 @@
     interfaces:
       enum.MarineControlComputerUi.Key:
         type: MarineControlComputerBui
+      enum.DialogUiKey.Key:
+        type: DialogBui
   - type: MarineControlComputer
 
 - type: entity
@@ -70,6 +85,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
     state: overwatch
+    overrideDir: West
+    enableOverrideDir: true
   - type: InteractionOutline
   - type: ActivatableUI
     key: enum.OverwatchConsoleUI.Key
@@ -82,11 +99,14 @@
         type: OverwatchConsoleBui
       enum.TacticalMapComputerUi.Key:
         type: TacticalMapComputerBui
+      enum.DialogUiKey.Key:
+        type: DialogBui
   - type: RequiresSkill
     skills:
       RMCSkillOverwatch: 1
   - type: OverwatchConsole
   - type: TacticalMapComputer
+  - type: SupplyDropComputer
 
 - type: entity
   parent: RMCCommunicationsConsoleBase

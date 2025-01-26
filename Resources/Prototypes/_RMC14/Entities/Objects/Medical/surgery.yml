@@ -9,6 +9,10 @@
   - type: Item
     size: Small
   - type: CMSurgeryTool
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 # Retractor
 - type: entity
@@ -172,6 +176,9 @@
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: CMScalpel
+  - type: Tag
+    tags:
+    - RMCScalpel
 
 # - Predator
 - type: entity

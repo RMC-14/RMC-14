@@ -1,0 +1,50 @@
+- type: constructionGraph
+  parent: RMC
+  id: RMCWindowHunterReinforced
+  start: start
+  graph:
+  - node: start # not currently buildable
+
+  - node: windowFrameHunterReinforced
+    entity: RMCWindowFrameHunterReinforced
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMSheetMetal1
+        amount: 2
+      - !type:DeleteEntity
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - tool: Welding
+        doAfter: 2
+
+    - to: windowHunterReinforced
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - material: CMGlassReinforced
+        amount: 2
+        doAfter: 2
+
+  - node: windowHunterReinforced
+    entity: RMCHunterReinforcedWindow
+    edges:
+    - to: windowFrameHunterReinforced
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      - !type:SpawnPrototype
+        prototype: CMSheetGlassReinforced1
+        amount: 2
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - tool: Screwing
+        doAfter: 2
+      - tool: Prying
+        doAfter: 2

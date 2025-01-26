@@ -24,6 +24,9 @@
     color: "#E61919"
     accessLevels:
     - CMAccessAlpha
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_alpha
 
 - type: entity
   parent: SquadBase
@@ -35,6 +38,9 @@
     color: "#FFC32D"
     accessLevels:
     - CMAccessBravo
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_bravo
 
 - type: entity
   parent: SquadBase
@@ -46,6 +52,9 @@
     color: "#C864C8"
     accessLevels:
     - CMAccessCharlie
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_charlie
 
 - type: entity
   parent: SquadBase
@@ -57,19 +66,9 @@
     color: "#4148C8"
     accessLevels:
     - CMAccessDelta
-
-- type: entity
-  parent: SquadBase
-  id: SquadEcho
-  name: Echo
-  components:
-  - type: SquadTeam
-    color: "#67D692"
-    accessLevels:
-    - CMAccessAlpha
-    - CMAccessBravo
-    - CMAccessCharlie
-    - CMAccessDelta
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_delta
 
 - type: entity
   parent: SquadBase
@@ -83,3 +82,41 @@
     - CMAccessBravo
     - CMAccessCharlie
     - CMAccessDelta
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_foxtrot
+
+- type: entity
+  parent: SquadBase
+  id: SquadEcho
+  name: Echo
+  components:
+  - type: SquadTeam
+    color: "#67D692"
+    accessLevels:
+    - CMAccessAlpha
+    - CMAccessBravo
+    - CMAccessCharlie
+    - CMAccessDelta
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_echo
+
+- type: entity
+  parent: SquadBase
+  id: SquadIntel
+  name: Intel
+  components:
+  - type: SquadTeam
+    color: "#053818"
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_intel
+    canSupplyDrop: false
+    maxRoles:
+      CMCombatTech: 3
+      CMHospitalCorpsman: 4
+      CMSmartGunOperator: 0
+      CMWeaponsSpecialist: 0
+      CMFireteamLeader: 0
+      CMSquadLeader: 0

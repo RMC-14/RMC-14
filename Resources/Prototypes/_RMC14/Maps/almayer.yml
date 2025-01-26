@@ -14,7 +14,7 @@
       stationProto: StandardNanotrasenStation
       components:
       - type: StationNameSetup
-        mapNameTemplate: 'USS Almayer'
+        mapNameTemplate: 'UNS Almayer'
       - type: StationJobs
         availableJobs:
           #Command
@@ -26,7 +26,7 @@
           #Military Police
           CMChiefMP: [1, 1]
           CMMilitaryWarden: [1, 1]
-          CMMilitaryPolice: [5, 8]
+          CMMilitaryPolice: [7, 10]
 
           #Auxiliary
           CMAuxiliarySupportOfficer: [1, 1]

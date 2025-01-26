@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/bb00705387c77af87cf86b948e6b34441c60300c/icons/mob/xenonids/hivelord.dmi, modified by Vermidia",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "alive",
+      "directions": 4
+    },
+    {
+      "name": "sleeping"
+    },
+    {
+      "name": "crit"
+    },
+    {
+      "name": "dead"
+    },
+    {
+      "name": "hivelord_walk_3",
+      "directions": 4
+    },
+    {
+      "name": "hivelord_walk_2",
+      "directions": 4
+    },
+    {
+      "name": "hivelord_walk_1",
+      "directions": 4
+    },
+    {
+      "name": "hivelord_walk_0",
+      "directions": 4
+    },
+    {
+      "name": "hivelord_rest_3"
+    },
+    {
+      "name": "hivelord_rest_2"
+    },
+    {
+      "name": "hivelord_rest_1"
+    },
+    {
+      "name": "hivelord_rest_0"
+    },
+    {
+      "name": "hivelord_downed_3"
+    },
+    {
+      "name": "hivelord_downed_2"
+    },
+    {
+      "name": "hivelord_downed_1"
+    },
+    {
+      "name": "hivelord_downed_0"
+    },
+    {
+      "name": "hivelord_dissection"
+    }
+  ]
+}

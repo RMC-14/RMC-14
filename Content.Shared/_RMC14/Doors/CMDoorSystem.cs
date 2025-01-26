@@ -1,4 +1,4 @@
-using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Access.Systems;
 using Content.Shared.Directions;
@@ -7,6 +7,7 @@ using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Content.Shared.Prying.Components;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Map.Enumerators;
 using Robust.Shared.Network;
@@ -22,7 +23,7 @@ public sealed class CMDoorSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private EntityQuery<DoorComponent> _doorQuery;
@@ -37,6 +38,8 @@ public sealed class CMDoorSystem : EntitySystem
         SubscribeLocalEvent<CMDoubleDoorComponent, DoorStateChangedEvent>(OnDoorStateChanged);
 
         SubscribeLocalEvent<RMCDoorButtonComponent, ActivateInWorldEvent>(OnButtonActivateInWorld);
+
+        SubscribeLocalEvent<RMCPodDoorComponent, BeforePryEvent>(OnPodDoorBeforePry);
     }
 
     private void OnDoorStateChanged(Entity<CMDoubleDoorComponent> door, ref DoorStateChangedEvent args)
@@ -98,6 +101,18 @@ public sealed class CMDoorSystem : EntitySystem
 
         if (_net.IsServer)
             RaiseNetworkEvent(new RMCPodDoorButtonPressedEvent(GetNetEntity(button)), Filter.PvsExcept(button));
+    }
+
+    private void OnPodDoorBeforePry(Entity<RMCPodDoorComponent> ent, ref BeforePryEvent args)
+    {
+        if (TryComp(ent, out DoorComponent? door) && door.State != DoorState.Closed)
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        if (_rmcPower.IsPowered(ent))
+            args.Cancelled = true;
     }
 
     private AnchoredEntitiesEnumerator? GetAdjacentEnumerator(Entity<CMDoubleDoorComponent> ent)

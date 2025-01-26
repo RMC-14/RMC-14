@@ -8,77 +8,192 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 25
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
-          Quantity: 20
-        - ReagentId: Vitamin
-          Quantity: 5
+          Quantity: 9
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
-  - type: Food
-    trash:
-    - RMCTray_empty
+  - type: Extractable
+    grindableSolutionName: food
+  - type: InjectableSolution
+    solution: food
 
 - type: entity
   parent: CMMarinePreparedMealBase
   id: CMMarinePreparedMealCornbread
-  name: Marine prepared meal (cornbread)
-  description: A tray of standard Marine food. Stale cornbread, tomato paste and some green goop fill this tray.
+  name: UNMC prepared meal (cornbread)
+  description: A tray of standard UNMC food. Stale cornbread, tomato paste and some green goop fill this tray.
   components:
   - type: Sprite
     state: cornbread
+  - type: Food
+    transferAmount: 3
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9
 
 - type: entity
   parent: CMMarinePreparedMealBase
   id: CMMarinePreparedMealChicken
-  name: Marine prepared meal (chicken)
-  description: A tray of standard Marine food. Moist chicken, dry rice and a mildly depressed piece of broccoli fill this tray.
+  name: UNMC prepared meal (chicken)
+  description: A tray of standard UNMC food. Moist chicken, dry rice and a mildly depressed piece of broccoli fill this tray.
   components:
   - type: Sprite
     state: chicken
+  - type: Food
+    transferAmount: 3
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 10
 
 - type: entity
   parent: CMMarinePreparedMealBase
   id: CMMarinePreparedMealPasta
-  name: Marine prepared meal (pasta)
-  description: A tray of standard Marine food. Overcooked spaghetti, waterlogged carrots and two french fries fill this tray.
+  name: UNMC prepared meal (pasta)
+  description: A tray of standard UNMC food. Overcooked spaghetti, waterlogged carrots and two french fries fill this tray.
   components:
   - type: Sprite
     state: pasta
+  - type: Food
+    transferAmount: 3
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9
 
 - type: entity
   parent: CMMarinePreparedMealBase
   id: CMMarinePreparedMealPizza
-  name: Marine prepared meal (pizza)
-  description: A tray of standard Marine food. Cold pizza, wet green beans and a shitty egg fill this tray. Get something other than pizza, lardass.
+  name: UNMC prepared meal (pizza)
+  description: A tray of standard UNMC food. Cold pizza, wet green beans and a shitty egg fill this tray. Get something other than pizza, lardass.
   components:
   - type: Sprite
     state: pizza
+  - type: Food
+    transferAmount: 8
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
 
 - type: entity
   parent: CMMarinePreparedMealBase
   id: CMMarinePreparedMealPork
-  name: Marine prepared meal (pork)
-  description: A tray of standard Marine food. Partially raw pork, goopy corn and some watery mashed potatoes fill this tray.
+  name: UNMC prepared meal (pork)
+  description: A tray of standard UNMC food. Partially raw pork, goopy corn and some watery mashed potatoes fill this tray.
   components:
   - type: Sprite
     state: pork
+  - type: Food
+    transferAmount: 4.5
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 9
 
 - type: entity
   parent: CMMarinePreparedMealBase
   id: CMMarinePreparedMealTofu
-  name: Marine prepared meal (tofu)
+  name: UNMC prepared meal (tofu)
   description: The UNMC doesn't serve tofu you grass sucking hippie. The flag signifies your defeat.
   components:
   - type: Sprite
     state: tofu
+  - type: Food
+    transferAmount: 1
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+
+# Festive
+
+- type: entity
+  parent: CMMarinePreparedMealBase
+  id: RMCMarinePreparedMealCookies
+  name: "Marine 'X-MAS' Meal: Sugar Cookies"
+  description: The UNMC M25 Sugar Cookies Meal was designed to give marines a feeling of Christmas joy. But to the bemusement of superior officers, the costs-savings measure of simply fabricating protein bars in the shape of cookies with chocolate substitute chips and the replacement of the expected milk with artificially colored water did not go over well with most marines.
+  components:
+  - type: Sprite
+    state: cookies
+  - type: Food
+    transferAmount: 8
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+        - ReagentId: RMCSugar
+          Quantity: 9
+
+- type: entity
+  parent: CMMarinePreparedMealBase
+  id: RMCMarinePreparedMealGingerbread
+  name: "Marine 'X-MAS' Meal: Gingerbread Cookies"
+  description: The UNMC M25 Gingerbread Cookies Meal was designed to give marines convenient and cheap access to gingerbread cookies as a replacement for annual gingerbread making classes due to rising expenses and comically low success rates for the Basic Holidays Festivities Course. However, due to cost saving measures, these cookies seldom inspire happiness, nor holiday spirit.
+  components:
+  - type: Sprite
+    state: gingerbread
+  - type: Food
+    transferAmount: 8
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+        - ReagentId: RMCSugar
+          Quantity: 9
+
+- type: entity
+  parent: CMMarinePreparedMealBase
+  id: RMCMarinePreparedMealFruitcake
+  name: "Marine 'X-MAS' Meal: Fruitcake"
+  description: The UNMC M25 Fruitcake Meal was the third meal designed by an officers' committee as part of the M25 Project; this shows through the terrible hardness and tartness of the bread and raisined fruits. It can be logically deduced that the people who vended this option are worse than the Grinch and the Miser combined, along with the people who designed and prepared this fruitcake.
+  components:
+  - type: Sprite
+    state: fruit_cake
+  - type: Food
+    transferAmount: 8
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+        - ReagentId: RMCSugar
+          Quantity: 9
 
 # Empty Tray
 
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: BaseItem
   id: RMCTray_empty
   name: empty tray

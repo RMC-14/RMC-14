@@ -34,3 +34,9 @@
     tags:
     - Taser
     - Sidearm
+  - type: GunPointBlank
+  - type: GunDualWielding
+    weaponGroup: Handgun
+  - type: GunRequiresSkills
+    skills:
+      RMCSkillPolice: 2

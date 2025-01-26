@@ -18,8 +18,10 @@
   - type: WieldDelay
     baseDelay: 0.6
   - type: WieldableSpeedModifiers
-    baseWalk: 0.842
-    baseSprint: 0.748
+    base: 0.666
+    light: 0.921
+    medium: 0.865
+    heavy: 0.865
   - type: AmmoCounter
   - type: Gun
     selectedMode: SemiAuto
@@ -64,6 +66,44 @@
   - type: RMCFireGroup
     group: Shotgun
     delay: 4
+  - type: GunDualWielding
+    weaponGroup: Shotgun
+  - type: GunPointBlank
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.15
+    accuracyMultiplierUnwielded: 0.95
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/shotgun_mouse.rsi
+      state: all
+
+- type: entity
+  abstract: true
+  parent: RMCBaseWeaponShotgun
+  id: RMCBaseBreechloader
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Shotguns/db_shotgun.rsi
+    layers:
+    - state: base
+      map: [ "enum.BreechVisuals.Open" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.BreechVisuals.Open:
+        enum.BreechVisuals.Open:
+          True: { state: bolt-open }
+          False: { state: base }
+  - type: BallisticAmmoProvider
+    cycleable: true
+    capacity: 2
+    soundInsert:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/grenade_insert.ogg
+      params:
+        volume: -2
+  - type: UniqueAction
+  - type: BreechLoaded
+    needOpenClose: false
 
 - type: entity
   abstract: true

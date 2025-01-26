@@ -160,8 +160,8 @@
 - type: entity
   parent: CMPamphletLanguage
   id: CMPamphletLanguageSpanish
-  name: America Latina - A Quick Translation Guide for Southern UA states
-  description: This pamphlet was designed for Intelligence Officers operating on Earth to interact with the local populaces of the Latin American states, but only for IOs who managed to sleep through Dialects and Mannerisms Class.
+  name: America Latina - A Quick Translation Guide
+  description: This pamphlet was designed for Intelligence Officers to interact with the local populaces, but only for IOs who managed to sleep through Dialects and Mannerisms Class.
 
 
 # RESTRICTED LANGUAGES

@@ -3,19 +3,19 @@
   parent: CMJobIconBase
   id: CMJobIconChiefMP
   icon:
-    sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_cmp
 
 - type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconMilitaryWarden
   icon:
-    sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_warden
 
 - type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconMilitaryPolice
   icon:
-    sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_mp

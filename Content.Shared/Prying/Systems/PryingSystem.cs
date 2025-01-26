@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._RMC14.Prying;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
@@ -97,6 +98,12 @@ public sealed class PryingSystem : EntitySystem
             // If we have reached this point we want the event that caused this
             // to be marked as handled.
             return true;
+
+        if (HasComp<RMCUserPryingRequiresToolComponent>(user))
+        {
+            _popup.PopupClient("You can't pry that with your bare hands!", target, user, PopupType.SmallCaution);
+            return true;
+        }
 
         // hand-prying is much slower
         var modifier = CompOrNull<PryingComponent>(user)?.SpeedModifier ?? unpoweredComp.PryModifier;

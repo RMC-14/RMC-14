@@ -1,0 +1,16 @@
+﻿- type: reaction
+  id: RMCPotassiumExplosion
+  impact: High
+  priority: 20
+  reactants:
+    Water:
+      amount: 1
+    RMCPotassium:
+      amount: 1
+  effects:
+  - !type:ExplosionReactionEffect
+    explosionType: RMC
+    maxIntensity: 100
+    intensityPerUnit: 0.5 # 50+50 reagent for maximum explosion
+    intensitySlope: 4
+    maxTotalIntensity: 100

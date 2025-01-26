@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: [BaseItem, CMBaseWeaponGun, RMCBaseAttachableHolder]
   abstract: true
   id: CMWeaponPistolBase
@@ -61,6 +61,9 @@
     item: Sidearm
   - type: GunUnskilledPenalty
     angleIncrease: 5
+  - type: GunPointBlank
+  - type: GunDualWielding
+    weaponGroup: Handgun
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -86,6 +89,7 @@
   abstract: true
   parent: BaseMagazinePistol
   id: CMBaseMagazinePistol
+  description: A pistol magazine.
   components:
   - type: MagazineVisuals
     magState: mag
@@ -107,25 +111,15 @@
 
 - type: entity
   abstract: true
-  parent: BaseBullet
+  parent: RMCBaseBullet
   id: CMBulletBase
   categories:
   - HideSpawnMenu
   components:
   - type: Projectile
   - type: RMCProjectileDamageFalloff
-
-- type: entity
-  parent: CMBulletBase
-  id: CMBulletPistol9mm
-  name: bullet (9mm)
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 40
-  - type: CMArmorPiercing
-    amount: 10
+  - type: RMCProjectileAccuracy
+    accuracy: 60
 
 - type: Tag
   id: CMMagazinePistol

@@ -151,7 +151,7 @@ public sealed class XenoNestSystem : EntitySystem
 
         // TODO RMC14
         if (HasComp<KnockedDownComponent>(ent) || _mobState.IsIncapacitated(ent))
-            _standing.Down(ent);
+            _standing.Down(ent, changeCollision: true);
     }
 
     private void OnSurfaceDoAfterAttempt(Entity<XenoNestSurfaceComponent> ent, ref DoAfterAttemptEvent<XenoNestDoAfterEvent> args)

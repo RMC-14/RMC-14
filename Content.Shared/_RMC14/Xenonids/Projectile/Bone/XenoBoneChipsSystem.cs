@@ -17,19 +17,19 @@ public sealed class XenoBoneChipsSystem : EntitySystem
 
     private void OnXenoBoneSpursAction(Entity<XenoBoneChipsComponent> xeno, ref XenoBoneChipsActionEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || args.Coords == null)
             return;
 
-        args.Handled = _xenoProjectile.TryShootAt(
+        args.Handled = _xenoProjectile.TryShoot(
             xeno,
-            args.Entity,
-            args.Coords,
+            args.Coords.Value,
             FixedPoint2.Zero,
             xeno.Comp.ProjectileId,
             null,
             1,
             Angle.Zero,
-            xeno.Comp.Speed
+            xeno.Comp.Speed,
+            target: args.Entity
         );
     }
 

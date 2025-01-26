@@ -12,4 +12,7 @@ public sealed partial class UsableWhileDevouredComponent : Component
 
     [DataField, AutoNetworkedField]
     public float AttackRateMultiplier = 0.55f;
+
+    [DataField, AutoNetworkedField]
+    public bool CanUnequip = false;
 }

@@ -1,12 +1,12 @@
-using Robust.Shared.GameStates;
 using Content.Shared.FixedPoint;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Xenonids.Fruit.Components;
 
 // Overshield (unstable resin fruit)
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
 [Access(typeof(SharedXenoFruitSystem))]
-public sealed partial class XenoFruitShieldComponent : XenoFruitDurationComponent
+public sealed partial class XenoFruitShieldComponent : Component
 {
     // Max overshield granted
     [DataField, AutoNetworkedField]
@@ -19,4 +19,8 @@ public sealed partial class XenoFruitShieldComponent : XenoFruitDurationComponen
     // Overshield decay rate
     [DataField, AutoNetworkedField]
     public FixedPoint2 ShieldDecay = 10f;
+
+    // Duration of effect
+    [DataField]
+    public TimeSpan Duration = TimeSpan.FromSeconds(0);
 }

@@ -1,0 +1,765 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/b5a595ce32f9bb4fc8abde0efe21196b3862d8bf/icons/obj/objects.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "launcherbtt"
+    },
+    {
+      "name": "launcheract"
+    },
+    {
+      "name": "anom",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "shards"
+    },
+    {
+      "name": "bhole2",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "shieldon",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "shieldoff"
+    },
+    {
+      "name": "shieldonbr",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.4,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "shieldoffbr",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "oldshieldon",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "oldshieldoff"
+    },
+    {
+      "name": "oldshieldonbr",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "oldshieldoffbr"
+    },
+    {
+      "name": "ash"
+    },
+    {
+      "name": "weldtank_old"
+    },
+    {
+      "name": "watertank_old"
+    },
+    {
+      "name": "coolanttank"
+    },
+    {
+      "name": "stool"
+    },
+    {
+      "name": "stool_alt"
+    },
+    {
+      "name": "chair",
+      "directions": 4
+    },
+    {
+      "name": "chair_alt",
+      "directions": 4
+    },
+    {
+      "name": "echair0",
+      "directions": 4
+    },
+    {
+      "name": "echair1",
+      "directions": 4
+    },
+    {
+      "name": "echair_over",
+      "directions": 4
+    },
+    {
+      "name": "echair_shock",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "rack"
+    },
+    {
+      "name": "bed"
+    },
+    {
+      "name": "abed"
+    },
+    {
+      "name": "beertanktemp"
+    },
+    {
+      "name": "beertank_alt"
+    },
+    {
+      "name": "beertank_alt2"
+    },
+    {
+      "name": "navbeacon0"
+    },
+    {
+      "name": "navbeacon0-f"
+    },
+    {
+      "name": "navbeacon1"
+    },
+    {
+      "name": "navbeacon1-f"
+    },
+    {
+      "name": "floor_magnet",
+      "delays": [
+        [
+          2,
+          0.5,
+          0.4,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "floor_magnet-f"
+    },
+    {
+      "name": "floor_magnet0"
+    },
+    {
+      "name": "floor_magnet0-f"
+    },
+    {
+      "name": "floor_beacon",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "floor_beaconf"
+    },
+    {
+      "name": "boxingbell"
+    },
+    {
+      "name": "pews",
+      "directions": 8
+    },
+    {
+      "name": "barrier0"
+    },
+    {
+      "name": "barrier1",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.3,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "immrod",
+      "directions": 4
+    },
+    {
+      "name": "effigy",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "borgcharger0(old)"
+    },
+    {
+      "name": "borgcharger1(old)",
+      "delays": [
+        [
+          0.6,
+          0.1,
+          0.1,
+          0.6
+        ]
+      ]
+    },
+    {
+      "name": "borgcharger1",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "borgcharger0"
+    },
+    {
+      "name": "target_stake"
+    },
+    {
+      "name": "target_s"
+    },
+    {
+      "name": "target_q"
+    },
+    {
+      "name": "target_h"
+    },
+    {
+      "name": "dispenser"
+    },
+    {
+      "name": "phoron-1"
+    },
+    {
+      "name": "phoron-2"
+    },
+    {
+      "name": "phoron-3"
+    },
+    {
+      "name": "phoron-4"
+    },
+    {
+      "name": "phoron-5"
+    },
+    {
+      "name": "oxygen-1"
+    },
+    {
+      "name": "oxygen-2"
+    },
+    {
+      "name": "oxygen-3"
+    },
+    {
+      "name": "oxygen-4"
+    },
+    {
+      "name": "peppertank_old"
+    },
+    {
+      "name": "peppertank"
+    },
+    {
+      "name": "bhole3",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "officechair_white",
+      "directions": 4
+    },
+    {
+      "name": "officechair_dark",
+      "directions": 4
+    },
+    {
+      "name": "wooden_chair",
+      "directions": 4
+    },
+    {
+      "name": "wooden_chair_wings",
+      "directions": 4
+    },
+    {
+      "name": "virusfoodtank"
+    },
+    {
+      "name": "psychbed"
+    },
+    {
+      "name": "nymph"
+    },
+    {
+      "name": "drone"
+    },
+    {
+      "name": "wheelchair",
+      "directions": 4
+    },
+    {
+      "name": "w_overlay",
+      "directions": 4
+    },
+    {
+      "name": "cat",
+      "delays": [
+        [
+          0.1,
+          0.2,
+          0.1,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "cat2",
+      "delays": [
+        [
+          0.1,
+          0.2,
+          0.1,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "desk_bell"
+    },
+    {
+      "name": "desk_bell_activate",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "borer"
+    },
+    {
+      "name": "comfychair",
+      "directions": 4
+    },
+    {
+      "name": "comfychair_blue",
+      "directions": 4
+    },
+    {
+      "name": "comfychair_black",
+      "directions": 4
+    },
+    {
+      "name": "comfychair_beige",
+      "directions": 4
+    },
+    {
+      "name": "comfychair_orange",
+      "directions": 4
+    },
+    {
+      "name": "comfychair_lime",
+      "directions": 4
+    },
+    {
+      "name": "comfychair_teal",
+      "directions": 4
+    },
+    {
+      "name": "comfychair_alpha",
+      "directions": 4
+    },
+    {
+      "name": "comfychair_bravo",
+      "directions": 4
+    },
+    {
+      "name": "comfychair_charlie",
+      "directions": 4
+    },
+    {
+      "name": "comfychair_delta",
+      "directions": 4
+    },
+    {
+      "name": "comfychair_ares",
+      "directions": 4
+    },
+    {
+      "name": "statn_c0",
+      "delays": [
+        [
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "statn_c20"
+    },
+    {
+      "name": "statn_c40"
+    },
+    {
+      "name": "statn_c60"
+    },
+    {
+      "name": "statn_c80"
+    },
+    {
+      "name": "statn_c100"
+    },
+    {
+      "name": "pilot_chair",
+      "directions": 4
+    },
+    {
+      "name": "shuttle_chair",
+      "directions": 4
+    },
+    {
+      "name": "shuttle_chair_buckled",
+      "directions": 4
+    },
+    {
+      "name": "shuttle_bars",
+      "directions": 4
+    },
+    {
+      "name": "shuttle_chair_destroyed",
+      "directions": 4
+    },
+    {
+      "name": "shuttle_chair_old",
+      "directions": 4
+    },
+    {
+      "name": "shuttle_chair_old_buckled",
+      "directions": 4
+    },
+    {
+      "name": "shuttle_bars_old",
+      "directions": 4
+    },
+    {
+      "name": "hotseat",
+      "directions": 4
+    },
+    {
+      "name": "hotseat_buckled",
+      "directions": 4
+    },
+    {
+      "name": "hotseat_bars",
+      "directions": 4
+    },
+    {
+      "name": "hotseat_new_folding",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "hotseat_new_unfolding",
+      "directions": 4,
+      "delays": [
+        [
+          0.15,
+          0.15,
+          0.15,
+          0.15,
+          0.15
+        ],
+        [
+          0.15,
+          0.15,
+          0.15,
+          0.15,
+          0.15
+        ],
+        [
+          0.15,
+          0.15,
+          0.15,
+          0.15,
+          0.15
+        ],
+        [
+          0.15,
+          0.15,
+          0.15,
+          0.15,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "hotseat_new_folded",
+      "directions": 4
+    },
+    {
+      "name": "hotseat_destroyed",
+      "directions": 4
+    },
+    {
+      "name": ""
+    },
+    {
+      "name": "weldtank"
+    },
+    {
+      "name": "watertank"
+    },
+    {
+      "name": "ob_chair",
+      "directions": 4
+    },
+    {
+      "name": "target_a"
+    },
+    {
+      "name": "methanetank"
+    },
+    {
+      "name": "hydrogentank"
+    },
+    {
+      "name": "ammoniatank"
+    },
+    {
+      "name": "pacidtank"
+    },
+    {
+      "name": "oxygentank"
+    },
+    {
+      "name": "sacidtank"
+    },
+    {
+      "name": "ethanoltank"
+    },
+    {
+      "name": "tank_normal"
+    },
+    {
+      "name": "tank_explosive"
+    },
+    {
+      "name": "te_color"
+    },
+    {
+      "name": "tn_color"
+    },
+    {
+      "name": "t_inactive"
+    },
+    {
+      "name": "t_active",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "t_boom",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "t_signaller"
+    },
+    {
+      "name": "t_reinforced"
+    }
+  ]
+}

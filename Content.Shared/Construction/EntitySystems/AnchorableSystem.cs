@@ -1,20 +1,19 @@
 using Content.Shared.Administration.Logs;
-using Content.Shared.Examine;
 using Content.Shared.Construction.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
+using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
-using Content.Shared.Tools;
+using Content.Shared.Tag;
 using Content.Shared.Tools.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
-using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
@@ -31,6 +30,7 @@ public sealed partial class AnchorableSystem : EntitySystem
     [Dependency] private readonly SharedToolSystem _tool = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private   readonly TagSystem _tagSystem = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
@@ -47,6 +47,18 @@ public sealed partial class AnchorableSystem : EntitySystem
         SubscribeLocalEvent<AnchorableComponent, TryAnchorCompletedEvent>(OnAnchorComplete);
         SubscribeLocalEvent<AnchorableComponent, TryUnanchorCompletedEvent>(OnUnanchorComplete);
         SubscribeLocalEvent<AnchorableComponent, ExaminedEvent>(OnAnchoredExamine);
+        SubscribeLocalEvent<AnchorableComponent, ComponentStartup>(OnAnchorStartup);
+        SubscribeLocalEvent<AnchorableComponent, AnchorStateChangedEvent>(OnAnchorStateChange);
+    }
+
+    private void OnAnchorStartup(EntityUid uid, AnchorableComponent comp, ComponentStartup args)
+    {
+        _appearance.SetData(uid, AnchorVisuals.Anchored, Transform(uid).Anchored);
+    }
+
+    private void OnAnchorStateChange(EntityUid uid, AnchorableComponent comp, AnchorStateChangedEvent args)
+    {
+        _appearance.SetData(uid, AnchorVisuals.Anchored, args.Anchored);
     }
 
     /// <summary>
@@ -88,6 +100,12 @@ public sealed partial class AnchorableSystem : EntitySystem
 
     private void OnAnchoredExamine(EntityUid uid, AnchorableComponent component, ExaminedEvent args)
     {
+        if (component.Flags == AnchorableFlags.None)
+        {
+            args.PushText("It cannot be anchored nor unanchored.");
+            return;
+        }
+
         var isAnchored = Comp<TransformComponent>(uid).Anchored;
         var messageId = isAnchored ? "examinable-anchored" : "examinable-unanchored";
         args.PushMarkup(Loc.GetString(messageId, ("target", uid)));
@@ -342,4 +360,10 @@ public sealed partial class AnchorableSystem : EntitySystem
     private sealed partial class TryAnchorCompletedEvent : SimpleDoAfterEvent
     {
     }
+}
+
+[Serializable, NetSerializable]
+public enum AnchorVisuals : byte
+{
+    Anchored
 }

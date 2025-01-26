@@ -55,7 +55,7 @@
   id: CMMREFoodSide
   components:
   - type: Food
-    transferAmount: 4
+    transferAmount: 1.6
   - type: SolutionContainerManager
     solutions:
       food:
@@ -65,6 +65,10 @@
           Quantity: 6
         - ReagentId: TableSalt
           Quantity: 2
+  - type: Extractable
+    grindableSolutionName: food
+  - type: InjectableSolution
+    solution: food
 
 - type: entity
   parent: CMMREFoodSide

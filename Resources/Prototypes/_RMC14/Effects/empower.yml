@@ -1,6 +1,6 @@
 - type: entity
-  id: RMCEffectEmpowerBrown
-  noSpawn: true
+  id: RMCEffectEmpower
+  categories: [ HideSpawnMenu ]
   components:
   - type: TimedDespawn
     lifetime: 2
@@ -8,9 +8,25 @@
     sprite: _RMC14/Effects/xeno_empower.rsi
     noRot: true
     state: empower
-    color: "#574990"
     drawdepth: Effects
   - type: EffectVisuals
   - type: Tag
     tags:
     - HideContextMenu
+
+- type: entity
+  parent: RMCEffectEmpower
+  id: RMCEffectEmpowerBrown
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    color: "#574990"
+
+- type: entity
+  parent: RMCEffectEmpower
+  id: RMCEffectEmpowerGreen
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: empower_custom
+    color: "#93EC78C8"

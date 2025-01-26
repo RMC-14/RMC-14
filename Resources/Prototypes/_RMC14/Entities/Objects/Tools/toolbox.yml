@@ -21,7 +21,7 @@
     state: icon
   - type: Item
     sprite: _RMC14/Objects/Tools/Toolboxes/toolbox_red.rsi
-  suffix: RMC14 
+  suffix: RMC14
 
 - type: entity
   name: emergency toolbox
@@ -39,7 +39,7 @@
         orGroup: LightingItem
       - id: CMFlare
         orGroup: LightingItem
-  suffix: RMC14, Filled 
+  suffix: RMC14, Filled
 
 - type: entity
   name: electrical toolbox
@@ -69,7 +69,7 @@
         orGroup: GlovesOrWires
       - id: RMCCableCoil
         orGroup: GlovesOrWires
-  suffix: RMC14, Filled 
+  suffix: RMC14, Filled
 
 - type: entity
   name: mechanical toolbox
@@ -94,4 +94,50 @@
       - id: CMWelder
       - id: CMWirecutter
       - id: CMScrewdriver
-  suffix: RMC14, Filled 
+  suffix: RMC14, Filled
+
+- type: entity
+  parent: RMCToolboxMechanical
+  id: RMCToolboxMechanicalGreen
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/Toolboxes/toolbox_green.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Tools/Toolboxes/toolbox_green.rsi
+  suffix: RMC14, Green
+
+- type: entity
+  parent: [RMCToolboxMechanicalGreen, RMCToolboxMechanicalFilled]
+  id: RMCToolboxMechanicalGreenFilled
+  suffix: RMC14, Filled, Green
+
+- type: entity
+  name: suspicious toolbox
+  description: A compact and suspicious looking toolbox. This one is small enough to fit into a bag.
+  parent: RMCToolboxBase
+  id: RMCToolboxSyndicate
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/Toolboxes/toolbox_syndi.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Tools/Toolboxes/toolbox_syndi.rsi
+    size: Normal # same size as grenade packet
+  suffix: RMC14
+
+- type: entity
+  parent: RMCToolboxSyndicate
+  id: RMCToolboxSyndicateFilled
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMCrowbar
+      - id: CMWrench
+      - id: CMWelder
+      - id: CMWirecutter
+      - id: CMScrewdriver
+      - id: RMCCableCoil
+      - id: CMMultitool
+      # - id: RMCCodeSpeakPamphlet
+  suffix: RMC14, Filled

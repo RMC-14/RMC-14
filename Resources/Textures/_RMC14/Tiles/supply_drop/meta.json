@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f3e535d5e24f44bd2c4412913144ebe4427a17de/icons/effects/warning_stripes.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "alphadrop"
+    },
+    {
+      "name": "bravodrop"
+    },
+    {
+      "name": "deltadrop"
+    },
+    {
+      "name": "charliedrop"
+    },
+    {
+      "name": "echodrop"
+    }
+  ]
+}

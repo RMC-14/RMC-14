@@ -2,7 +2,7 @@
   id: ActionXenoRest
   parent: ActionXenoBase
   name: Rest
-  description: Lie down to regenerate health and plasma more quickly while on weeds.
+  description: Lie down to regenerate health more quickly while on weeds.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -16,7 +16,8 @@
   parent: CMGuidebookActionXenoBase
   id: CMGuidebookActionXenoRest
   name: Rest
-  description: Lie down to regenerate health and plasma more quickly while on weeds.
+  description: Lie down to regenerate health more quickly while on weeds.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: resting
@@ -37,7 +38,7 @@
   id: ActionXenoPheromones
   parent: ActionXenoBase
   name: Emit Pheromones (35) # TODO RMC14 proper plasma costs
-  description: Gives a buff to nearby xenonids.
+  description: Gives a buff to nearby xenonids. [color=cyan]Consumes 2.5 plasma per second.[/color]
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -65,7 +66,7 @@
   id: ActionXenoToggleCrest
   parent: ActionXenoBase
   name: Toggle Crest Defense
-  description: Increases your resistance to direct damage but slows you down.
+  description: Increases your resistance to direct damage but slows you down. You count as one size bigger while you're crest is lowered.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -74,15 +75,12 @@
       state: crest_defense
     event: !type:XenoToggleCrestActionEvent
     useDelay: 2
-  - type: ActionSharedCooldown
-    id: ActionXenoToggleCrest
-    cooldown: 2
 
 - type: entity
   id: ActionXenoFortify
   parent: ActionXenoBase
   name: Fortify
-  description: Become immobile and impassable to mobs, dramatically increasing your resistance to direct damage. Damage is further reduced from the direction you are facing.
+  description: Become immobile and impassable to mobs, dramatically increasing your resistance to direct damage and explosions. Damage is further reduced from the direction you are facing. You can't be stunned by minor explosions. You count as two sizes bigger while fortified and still can attack structures or use tail slam.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -91,15 +89,18 @@
       state: fortify
     event: !type:XenoFortifyActionEvent
     useDelay: 5
-  - type: ActionSharedCooldown
-    id: ActionXenoToggleCrest
-    cooldown: 5
+
+- type: entity
+  id: ActionXenoFortifySteelcrest
+  parent: ActionXenoFortify
+  name: Fortify
+  description: Become much slower, increasing your resistance to direct damage and explosions. Damage is greatly reduced from the direction you are facing. You count as two sizes bigger while fortified and still can attack strcutures or use tail slam, but your slashes do less damage.
 
 - type: entity
   id: ActionXenoResinWalker
   parent: ActionXenoBase
   name: Resin Walker (50) # TODO RMC14 proper plasma costs
-  description: Run faster on weeds.
+  description: Run faster on weeds. [color=cyan]Consumes 30 plasma per second.[/color]
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -155,7 +156,7 @@
   id: ActionXenoTurnInvisible
   parent: ActionXenoBase
   name: Turn Invisible (20) # TODO RMC14 proper plasma costs
-  description: Become partially invisible for 30 seconds or until you attack. Increases your movement speed until the ability expires.
+  description: Become partially invisible for 30 seconds, or until you either damage or attempt to devour an enemy. Can be toggled off to become visible again, with a refund of 90% remaining cloak time. Increases your movement speed by 15% until the ability expires.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -182,7 +183,7 @@
   id: ActionXenoRetrieveEgg
   parent: ActionXenoBase
   name: Retrieve Egg
-  description: Retrieves an egg from your storage if you have an empty hand. Using this on an unplanted egg will pick up all nearby unplanted eggs.
+  description: Retrieves an egg from your storage if you have an empty hand. Using this on an unplanted egg will pick up all nearby unplanted eggs. Using an egg in hand will put it into your storage.
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
@@ -198,7 +199,7 @@
   id: ActionXenoThrowParasite
   parent: ActionXenoBase
   name: Throw Parasite
-  description: Retrieves a parasite from your storage if you have an empty hand. Using this on a parasite on the ground will pickup all nearby parasites. Targeting a tile with a parasite in hand will throw it up to 4 tiles away, where the parasite will be stunned for 5 seconds. [color=green]Parasites won't die due to time while you hold or carry them.[/color]
+  description: Retrieves a parasite from your storage if you have an empty hand. Using this on a parasite on the ground will pickup all nearby parasites. Targeting a tile with a parasite in hand will throw it up to 4 tiles away, where the parasite will be stunned for 5 seconds. Using a parasite in hand will add it to your storage.[color=green]Parasites won't die due to time while you hold or carry them.[/color]
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
@@ -224,3 +225,64 @@
       state: reserve_parasite
     event: !type:XenoReserveParasiteActionEvent
     useDelay: 1
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoManageHive
+  name: Manage The Hive
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: xeno_readmit
+    event: !type:ManageHiveActionEvent
+    useDelay: 0.5
+
+- type: entity
+  id: ActionXenoDodge
+  parent: ActionXenoBase
+  name: Dodge (200)
+  description: Gain a speed boost for 7 seconds. Your speed is doubled near standing enemies.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_dodge
+    event: !type:XenoDodgeActionEvent
+    useDelay: 19
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoBurrow
+  name: Burrow
+  description: Burrow underground preventing you from getting hit from all sources. Once burrowed click a tile to move to it and resurface after a doafter that depends on distance.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: burrow
+    event: !type:XenoBurrowActionEvent
+    range: 15
+    repeat: true
+    deselectOnMiss: false
+    checkCanAccess: false
+    checkCanInteract: false
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoSoak
+  name: Soak (20)
+  description: Soak in damage for 6 seconds. If you take 140 damage or higher, you regen 75 health and your tail slam gets refreshed.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: soak
+    event: !type:XenoSoakActionEvent
+    useDelay: 17
+  - type: ActionBlockIfResting

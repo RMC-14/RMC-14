@@ -23,8 +23,6 @@ using Robust.Shared.Log;
 using Robust.Shared.Timing;
 using Robust.UnitTesting;
 
-[assembly: LevelOfParallelism(3)]
-
 namespace Content.IntegrationTests;
 
 /// <summary>

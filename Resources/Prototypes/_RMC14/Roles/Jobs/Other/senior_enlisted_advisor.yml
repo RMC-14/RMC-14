@@ -23,6 +23,16 @@
   - !type:DepartmentTimeRequirement
     department: CMRequisitions
     time: 36000 # 10 hours
+  ranks: # TODO Selectable Ranks for SEA
+    RMCRankSergeantMajor:
+    - !type:RoleTimeRequirement
+      role: CMJobSeniorEnlistedAdvisor
+      time: 252000 # 70 hours
+    RMCRankFirstSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobSeniorEnlistedAdvisor
+      time: 36000 # 10 hours
+    RMCRankGunnerySergeant: []
   weight: 5
   startingGear: CMGearSeniorEnlistedAdvisor
   icon: "CMJobIconSEA"
@@ -35,6 +45,10 @@
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: sea
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_medical
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -60,16 +74,24 @@
     - type: MarineOrders
     - type: CMVendorUser
       points: 45
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-senior-enlisted-advisor
+    - type: SeeNewPlayers
 
 - type: startingGear
   id: CMGearSeniorEnlistedAdvisor
   equipment:
     jumpsuit: CMJumpsuitBO
-    back: CMSatchelMarine
     shoes: CMBootsBrownFilled
     head: CMHeadCapDrill
     id: CMIDCardSeniorEnlistedAdvisor
     ears: RMCHeadsetSEA
+    pocket1: CMFlash
+    pocket2: RMCPouchGeneralLarge
+  inhand:
+  - RMCBinoculars
+  - RMCWhistle
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -89,10 +111,11 @@
   id: CMGuidebookRoleSEA
   name: Senior Enlisted Advisor
   description: Mentor for the Marines!
-  noSpawn: false
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: senior_enlisted_advisor
 
 - type: playTimeTracker
   id: CMJobSeniorEnlistedAdvisor
+  isHumanoid: true

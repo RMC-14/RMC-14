@@ -3,9 +3,9 @@ using Content.Server.Atmos.Components;
 using Content.Server.Damage.Components;
 using Content.Server.IgnitionSource;
 using Content.Server.Stunnable;
-using Content.Server.Temperature.Components;
 using Content.Server.Temperature.Systems;
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Alert;
@@ -30,6 +30,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
+using IgniteOnCollideComponent = Content.Server.Atmos.Components.IgniteOnCollideComponent;
 
 namespace Content.Server.Atmos.EntitySystems
 {
@@ -267,7 +268,7 @@ namespace Content.Server.Atmos.EntitySystems
 
         public void UpdateAppearance(EntityUid uid, FlammableComponent? flammable = null, AppearanceComponent? appearance = null)
         {
-            if (!Resolve(uid, ref flammable, ref appearance))
+            if (!Resolve(uid, ref flammable, ref appearance, false))
                 return;
 
             _appearance.SetData(uid, FireVisuals.OnFire, flammable.OnFire, appearance);
@@ -293,7 +294,16 @@ namespace Content.Server.Atmos.EntitySystems
             if (!Resolve(uid, ref flammable))
                 return;
 
+            var attemptEv = new RMCIgniteAttemptEvent();
+            RaiseLocalEvent(uid, attemptEv);
+
+            if (attemptEv.Cancelled)
+            {
+                return;
+            }
+
             flammable.FireStacks = MathF.Min(MathF.Max(flammable.MinimumFireStacks, stacks), flammable.MaximumFireStacks);
+            Dirty(uid, flammable);
 
             if (flammable.FireStacks <= 0)
             {
@@ -301,8 +311,19 @@ namespace Content.Server.Atmos.EntitySystems
             }
             else
             {
-                flammable.OnFire = ignite;
+                flammable.OnFire |= ignite;
                 UpdateAppearance(uid, flammable);
+
+                if (flammable.OnFire)
+                {
+                    var ev = new RMCIgniteEvent();
+                    RaiseLocalEvent(uid, ref ev);
+                }
+                else
+                {
+                    var ev = new RMCExtinguishedEvent();
+                    RaiseLocalEvent(uid, ref ev);
+                }
             }
         }
 
@@ -317,10 +338,16 @@ namespace Content.Server.Atmos.EntitySystems
             _adminLogger.Add(LogType.Flammable, $"{ToPrettyString(uid):entity} stopped being on fire damage");
             flammable.OnFire = false;
             flammable.FireStacks = 0;
+            flammable.Intensity = 0;
+            flammable.Duration = 0;
+            Dirty(uid, flammable);
 
             _ignitionSourceSystem.SetIgnited(uid, false);
 
             UpdateAppearance(uid, flammable);
+
+            var ev = new RMCExtinguishedEvent();
+            RaiseLocalEvent(uid, ref ev);
         }
 
         public void Ignite(EntityUid uid, EntityUid ignitionSource, FlammableComponent? flammable = null,
@@ -341,8 +368,12 @@ namespace Content.Server.Atmos.EntitySystems
                 else
                     _adminLogger.Add(LogType.Flammable, $"{ToPrettyString(uid):target} set on fire by {ToPrettyString(ignitionSource):actor}");
                 flammable.OnFire = true;
+
+                var ev = new RMCIgniteEvent();
+                RaiseLocalEvent(uid, ref ev);
             }
 
+            Dirty(uid, flammable);
             UpdateAppearance(uid, flammable);
         }
 
@@ -381,15 +412,16 @@ namespace Content.Server.Atmos.EntitySystems
                 return;
 
             flammable.Resisting = true;
+            Dirty(uid, flammable);
 
             _popup.PopupEntity(Loc.GetString("flammable-component-resist-message"), uid, uid);
-            _stunSystem.TryParalyze(uid, TimeSpan.FromSeconds(2f), true);
+            _stunSystem.TryParalyze(uid, flammable.ResistDuration, true, force: true);
 
             // TODO FLAMMABLE: Make this not use TimerComponent...
             uid.SpawnTimer(2000, () =>
             {
                 flammable.Resisting = false;
-                flammable.FireStacks -= 1f;
+                Dirty(uid, flammable);
                 UpdateAppearance(uid, flammable);
             });
         }
@@ -426,6 +458,7 @@ namespace Content.Server.Atmos.EntitySystems
                 if (flammable.FireStacks < 0)
                 {
                     flammable.FireStacks = MathF.Min(0, flammable.FireStacks + 1);
+                    Dirty(uid, flammable);
                 }
 
                 if (!flammable.OnFire)
@@ -438,20 +471,20 @@ namespace Content.Server.Atmos.EntitySystems
 
                 if (flammable.FireStacks > 0)
                 {
-                    var air = _atmosphereSystem.GetContainingMixture(uid);
+                    // var air = _atmosphereSystem.GetContainingMixture(uid);
 
                     // If we're in an oxygenless environment, put the fire out.
-                    if (air == null || air.GetMoles(Gas.Oxygen) < 1f)
-                    {
-                        Extinguish(uid, flammable);
-                        continue;
-                    }
+                    // if (air == null || air.GetMoles(Gas.Oxygen) < 1f)
+                    // {
+                    //     Extinguish(uid, flammable);
+                    //     continue;
+                    // }
 
-                    var source = EnsureComp<IgnitionSourceComponent>(uid);
-                    _ignitionSourceSystem.SetIgnited((uid, source));
+                    // var source = EnsureComp<IgnitionSourceComponent>(uid);
+                    // _ignitionSourceSystem.SetIgnited((uid, source));
 
-                    if (TryComp(uid, out TemperatureComponent? temp))
-                        _temperatureSystem.ChangeHeat(uid, 12500 * flammable.FireStacks, false, temp);
+                    // if (TryComp(uid, out TemperatureComponent? temp))
+                    //     _temperatureSystem.ChangeHeat(uid, 12500 * flammable.FireStacks, false, temp);
 
                     var ev = new GetFireProtectionEvent();
                     // let the thing on fire handle it
@@ -460,9 +493,15 @@ namespace Content.Server.Atmos.EntitySystems
                     if (_inventoryQuery.TryComp(uid, out var inv))
                         _inventory.RelayEvent((uid, inv), ref ev);
 
-                    _damageableSystem.TryChangeDamage(uid, flammable.Damage * flammable.FireStacks * ev.Multiplier, interruptsDoAfters: false);
+                    DamageSpecifier? damage;
+                    if (HasComp<XenoComponent>(uid))
+                        damage = flammable.Intensity * (flammable.FireStacks / flammable.Duration * 0.2 + 0.8) * ev.Multiplier * flammable.Damage / 2;
+                    else
+                        damage = flammable.Intensity / 5f * flammable.Damage;
 
-                    AdjustFireStacks(uid, flammable.FirestackFade * (flammable.Resisting ? 10f : 1f), flammable, flammable.OnFire);
+                    _damageableSystem.TryChangeDamage(uid, damage, true, false);
+
+                    AdjustFireStacks(uid, flammable.Resisting ? flammable.ResistStacks : -0.25f, flammable, flammable.OnFire);
                 }
                 else
                 {

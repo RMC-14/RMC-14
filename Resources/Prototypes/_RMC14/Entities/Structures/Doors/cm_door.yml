@@ -64,7 +64,10 @@
   - type: DoorBolt
   - type: Appearance
   - type: ApcPowerReceiver
-    powerLoad: 0 # TODO RMC14 20
+  - type: RMCPowerReceiver
+    idleLoad: 1
+    activeLoad: 20
+    channel: Environment
   - type: UserInterface
     interfaces:
       enum.WiresUiKey.Key:
@@ -93,6 +96,7 @@
   - type: RMCDropshipBlocked
   - type: Corrodible
     isCorrodible: false
+    structure: true
 
 - type: entity
   abstract: true
@@ -137,9 +141,9 @@
       Brute:
         path:
           "/Audio/Weapons/smash.ogg"
+  - type: AirlockReceiverXenoClaws
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Metallic
   - type: Destructible
     thresholds:
     - trigger:
@@ -149,10 +153,12 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: DamageMultiplierFlags
     flags: Breaching
   - type: Corrodible
     isCorrodible: true
+    timeToApply: 4
 
 - type: entity
   abstract: true

@@ -136,6 +136,11 @@ public partial class InventorySystem
             )
             return;
 
+        if (TryGetSlotContainer(entity, "belt", out var belt, out _)
+            && _containerSystem.Insert(itemToSpawn, belt)
+            )
+            return;
+
         //Try insert into hands, or drop on the floor
         _handsSystem.PickupOrDrop(entity, itemToSpawn, false);
     }

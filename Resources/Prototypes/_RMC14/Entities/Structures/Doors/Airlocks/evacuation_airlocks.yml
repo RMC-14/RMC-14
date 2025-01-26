@@ -7,10 +7,15 @@
     mode: SnapgridCenter
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/EscapePod/escape_pod_door.rsi
+    sprite: _RMC14/Structures/Doors/Airlocks/escape_pod_door.rsi
   - type: EvacuationDoor
   - type: Corrodible
     isCorrodible: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: Airlock
+    powered: true
 
 - type: entity
   parent: RMCBaseDoorInvincible
@@ -36,3 +41,8 @@
   - type: EvacuationDoor
   - type: Corrodible
     isCorrodible: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: Airlock
+    powered: true

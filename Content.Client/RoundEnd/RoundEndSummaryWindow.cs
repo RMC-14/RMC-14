@@ -19,7 +19,7 @@ namespace Content.Client.RoundEnd
         {
             _entityManager = entityManager;
 
-            MinSize = SetSize = new Vector2(520, 580);
+            MinSize = new Vector2(520, 580);
 
             Title = Loc.GetString("round-end-summary-window-title");
 
@@ -51,7 +51,8 @@ namespace Content.Client.RoundEnd
             var roundEndSummaryContainerScrollbox = new ScrollContainer
             {
                 VerticalExpand = true,
-                Margin = new Thickness(10)
+                Margin = new Thickness(10),
+                HScrollEnabled = false,
             };
             var roundEndSummaryContainer = new BoxContainer
             {
@@ -61,9 +62,9 @@ namespace Content.Client.RoundEnd
             //Gamemode Name
             var gamemodeLabel = new RichTextLabel();
             var gamemodeMessage = new FormattedMessage();
-            gamemodeMessage.AddMarkup(Loc.GetString("round-end-summary-window-round-id-label", ("roundId", roundId)));
+            gamemodeMessage.AddMarkupOrThrow(Loc.GetString("round-end-summary-window-round-id-label", ("roundId", roundId)));
             gamemodeMessage.AddText(" ");
-            gamemodeMessage.AddMarkup(Loc.GetString("round-end-summary-window-gamemode-name-label", ("gamemode", gamemode)));
+            gamemodeMessage.AddMarkupOrThrow(Loc.GetString("round-end-summary-window-gamemode-name-label", ("gamemode", gamemode)));
             gamemodeLabel.SetMessage(gamemodeMessage);
             roundEndSummaryContainer.AddChild(gamemodeLabel);
 

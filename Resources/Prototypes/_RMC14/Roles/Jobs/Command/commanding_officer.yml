@@ -35,6 +35,16 @@
   - !type:DepartmentTimeRequirement
     department: CMRequisitions
     time: 18000 # 5 hours
+  ranks:
+    RMCRankColonel:
+    - !type:RoleTimeRequirement
+      role: CMJobCommandingOfficer
+      time: 630000 # 175 hours
+    RMCRankLieutenantColonel:
+    - !type:RoleTimeRequirement
+      role: CMJobCommandingOfficer
+      time: 252000 # 70 hours
+    RMCRankMajor: []
   weight: 10
   startingGear: CMGearCommandingOfficer
   icon: "CMJobIconCommandingOfficer"
@@ -46,7 +56,11 @@
   - ShipMasterAccess
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: cic
+    state: co
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -73,17 +87,23 @@
     - type: MarineOrders
     - type: CMVendorUser
       points: 120
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-commanding-officer
+    - type: CommendationGiver
 
 - type: startingGear
   id: CMGearCommandingOfficer
   equipment:
-    jumpsuit: CMJumpsuitCO
-    back: CMSatchel
+    jumpsuit: CMJumpsuitBO
+    belt: RMCMatebaBeltFilled
     shoes: CMShoesLaceupCommander
     head: CMHeadBeretCO
-    outerClothing: CMCoatOfficer
+    outerClothing: RMCCoatService
     id: CMIDCardCommandingOfficer
     ears: CMHeadsetSeniorCommand
+    pocket1: RMCPouchCommand
+    pocket2: RMCPouchGeneralLarge
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -100,3 +120,4 @@
 
 - type: playTimeTracker
   id: CMJobCommandingOfficer
+  isHumanoid: true

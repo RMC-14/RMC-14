@@ -283,6 +283,9 @@ public sealed class RangefinderSystem : EntitySystem
             _useDelay.TryResetDelay(rangefinder, component: useDelay, id: delay);
         }
 
+        if (rangefinder.Comp.DoAfter != null && _doAfter.IsRunning(rangefinder.Comp.DoAfter.Id))
+            _doAfter.Cancel(rangefinder.Comp.DoAfter.Id);
+
         rangefinder.Comp.Mode = mode;
         Dirty(rangefinder);
         UpdateAppearance(rangefinder);
@@ -322,6 +325,8 @@ public sealed class RangefinderSystem : EntitySystem
             var msg = Loc.GetString("rmc-laser-designator-start");
             _popup.PopupClient(msg, coordinates, user, PopupType.Medium);
             _audio.PlayPredicted(rangefinder.Comp.TargetSound, rangefinder, user);
+
+            rangefinder.Comp.DoAfter = ev.DoAfter;
         }
     }
 }

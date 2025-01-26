@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Water;
 using Content.Shared.Movement.Components;
 using Robust.Shared.Physics.Events;
 
@@ -8,6 +9,8 @@ namespace Content.Shared.Movement.Systems;
 /// </summary>
 public abstract class SharedFloorOcclusionSystem : EntitySystem
 {
+    [Dependency] private readonly RMCWaterSystem _rmcWater = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -24,6 +27,9 @@ public abstract class SharedFloorOcclusionSystem : EntitySystem
         {
             return;
         }
+
+        if (!_rmcWater.CanCollide(entity.Owner, other))
+            return;
 
         occlusion.Colliding.Add(entity.Owner);
         Dirty(other, occlusion);
