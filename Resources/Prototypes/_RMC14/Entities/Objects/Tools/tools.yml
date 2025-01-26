@@ -108,6 +108,7 @@
     - state: tray-off
       map: [ "base" ]
   - type: TrayScanner
+    range: 1
   - type: Item
     sprite: _RMC14/Objects/Tools/t-ray.rsi
   - type: Appearance
