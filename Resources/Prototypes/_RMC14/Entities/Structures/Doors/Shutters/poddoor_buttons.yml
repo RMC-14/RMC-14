@@ -21,15 +21,3 @@
   - type: WallMount
     arc: 360
   - type: RMCDoorButton
-
-# Access Restricted
-
-- type: entity
-  id: RMCPodDoorButtonSeniorLocked
-  parent: RMCPodDoorButton
-  name: button
-  suffix: Senior, Locked
-  description: A remote control-switch for a door.
-  components:
-  - type: AccessReader
-    access: [ [ "CMAccessSenior" ] ]

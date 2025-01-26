@@ -20,7 +20,7 @@
   joinNotifyCrew: true
   supervisors: cm-job-supervisors-co
   accessGroups:
-  - MarineMainNoSenior
+  - MarineMain
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: so
