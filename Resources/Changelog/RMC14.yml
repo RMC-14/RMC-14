@@ -1,43 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Praetorian acid ball pushing marines around like a pinball.
-    type: Fix
-  - message: Fixed Warden Praetorian acid spray having no delay and not stunning for
-      2 seconds.
-    type: Fix
-  - message: Fixed job slot scaling with pop not working.
-    type: Fix
-  - message: Fixed shotguns having no delay to fire when swapping between them.
-    type: Fix
-  - message: Fixed Lurker pounce and Praetorian dash going on cooldown if you try
-      to use them without plasma.
-    type: Fix
-  - message: Fixed HE mortar shell damage being lower than intended, not even breaking
-      one regular wall. A single HE shell will now destroy a 3x3 of regular walls
-      (3000 hp), but only deal 6000 damage to a reinforced wall (9000 hp). This doesn't
-      change the damage it does to xenonids or marines, only structures.
-    type: Fix
-  - message: Fixed some Praetorian and Warden Praetorian abilities being usable while
-      resting. Spit, spray acid, acid ball, retrieve and aid xenonid now are correctly
-      no longer usable while the Praetorian is resting.
-    type: Fix
-  - message: Fixed the popup for the Warden Praetorian's aid xenonid being incorrect
-      for players other than the Praetorian and the target.
-    type: Fix
-  - message: Fixed the Warden Praetorian being able to gain internal hitpoints from
-      spitting at a wall.
-    type: Fix
-  - message: Ported 13's 20-second cooldown for emote sounds. Anyone angered by this
-      change should take it up with the hordes of people yawn and emote spamming during
-      briefing in the middle of a Brigadier-General aboard the Almayer, or those spamming
-      emotes in the dropship. Admins have better things to do than handle this dogshit
-      rp every round. The scream hotbar action will always bypass this cooldown, also
-      on a 20 second cooldown.
-    type: Fix
-  id: 754
-  time: '2024-09-29T23:18:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4187
 - author: Whisper
   changes:
   - message: Fixed missing sprites for the worn sniper spec weapon.
@@ -5137,5 +5098,14 @@
   id: 1253
   time: '2025-01-26T06:03:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/3752
+- author: CyberTropic
+  changes:
+  - message: Added compact and tactical nailguns. Tactical nailgun comes with the
+      essential engineer set. These must be used to repair a barricade if it is too
+      damaged, as welders won't be able to anymore.
+    type: Add
+  id: 1254
+  time: '2025-01-26T06:05:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5028
 Name: RMC14
 Order: -1
