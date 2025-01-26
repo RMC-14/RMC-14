@@ -187,7 +187,7 @@ namespace Content.Server.Body.Systems
                     // then we shouldn't process any effects or remove reagents
                     if (TryComp<MobStateComponent>(solutionEntityUid.Value, out var state))
                     {
-                        if (!(HasComp<CMRecentlyDefibrillatedComponent>(solutionEntityUid.Value) && proto.ID == "CMEpinephrine")) // TODO change to PROPERTY_ELECTROGENETIC)
+                        if (!(HasComp<CMRecentlyDefibrillatedComponent>(solutionEntityUid.Value) && proto.WorksAfterDefibrillation)) // TODO change to PROPERTY_ELECTROGENETIC
                         {
                             if (!proto.WorksOnTheDead && _mobStateSystem.IsDead(solutionEntityUid.Value, state))
                                 continue;
