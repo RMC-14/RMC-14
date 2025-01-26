@@ -5,6 +5,15 @@
   description: cm-job-description-squad-leader
   playTimeTracker: CMJobSquadLeader
   requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobHospitalCorpsman
+    time: 3600 # 1 hour
+  - !type:RoleTimeRequirement
+    role: CMJobCombatTech
+    time: 3600 # 1 hour
+  - !type:RoleTimeRequirement
+    role: CMJobFireteamLeader
+    time: 18000 # 5 hours
   - !type:DepartmentTimeRequirement
     department: CMSquad
     time: 36000 # 10 hours
