@@ -15,7 +15,7 @@
                         Text="Medals and Jellies"
                         StyleClasses="ButtonBig"
                         HorizontalAlignment="Right" />
-                <Button Name="StatsButton" HorizontalExpand="True"
+                <Button Name="StatsButton"
                         Text="{Loc 'character-setup-gui-character-setup-stats-button'}"
                         StyleClasses="ButtonBig"
                         HorizontalAlignment="Right" />
