@@ -10,5 +10,8 @@ public sealed partial class AffectableByWeedsComponent : Component
     public bool OnXenoWeeds;
 
     [DataField, AutoNetworkedField]
-    public bool OnXenoResin;
+    public bool OnXenoSlowResin;
+
+    [DataField, AutoNetworkedField]
+    public bool OnXenoFastResin;
 }
