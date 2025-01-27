@@ -12,6 +12,11 @@
 
 - type: tile
   parent: RMCFloorHybrisaGreenMetal
+  id: RMCFloorHybrisaGreenTile
+  sprite: /Textures/_RMC14/Tiles/hybrisa/tilegreen.png
+
+- type: tile
+  parent: RMCFloorHybrisaGreenMetal
   id: RMCFloorHybrisaGreenMetal1
   sprite: /Textures/_RMC14/Tiles/hybrisa/greenmetal1.png
 

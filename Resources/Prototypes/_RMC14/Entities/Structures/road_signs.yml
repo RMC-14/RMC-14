@@ -718,3 +718,48 @@
     state: billboard_bigger_7
   - type: Icon
     state: billboard_bigger_7
+
+- type: entity
+  parent: RMCOverheadBillboardWallmount1
+  id: RMCOverheadBillboardWallmount22
+  components:
+  - type: Sprite
+    state: billboard_bigger_3
+  - type: Icon
+    state: billboard_bigger_3
+
+- type: entity
+  parent: RMCOverheadBillboardWallmount1
+  id: RMCOverheadBillboardWallmount23
+  components:
+  - type: Sprite
+    state: billboard1_b
+  - type: Icon
+    state: billboard1_b
+
+- type: entity
+  parent: RMCOverheadBillboardWallmount1
+  id: RMCOverheadBillboardWallmount24
+  components:
+  - type: Sprite
+    state: billboard3_e
+  - type: Icon
+    state: billboard3_e
+
+- type: entity
+  parent: RMCOverheadBillboardWallmount1
+  id: RMCOverheadBillboardWallmount25
+  components:
+  - type: Sprite
+    state: billboard2_e
+  - type: Icon
+    state: billboard2_e
+
+- type: entity
+  parent: RMCOverheadBillboardWallmount1
+  id: RMCOverheadBillboardWallmount26
+  components:
+  - type: Sprite
+    state: billboard2_h
+  - type: Icon
+    state: billboard2_h
