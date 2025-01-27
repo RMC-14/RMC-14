@@ -233,7 +233,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         }
 
         //If Weeds is a speedup, let them stack, otherwise treat them as slowdownss
-        if (!(speedWeeds < 1 && speedResin < 1))
+        if ((speedWeeds > 1 || speedResin > 1) && entriesResin > 0 && entriesWeeds > 0)
             finalSpeed = speedWeeds * speedResin;
         else if (entriesResin > 0)
             finalSpeed = speedResin;
