@@ -169,12 +169,14 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         {
             if (_floorResinQuery.TryComp(contacting, out var resin))
             {
-                anyResin = true;
                 if (isXeno && hive != null && _hive.IsMember(contacting, hive.Hive))
                 {
                     speedResin += resin.HiveSpeedModifier ?? 0;
                     if (resin.HiveSpeedModifier != null)
+                    {
                         entriesResin++;
+                        anyResin = true;
+                    }
                 }
                 else if (resin.OutsiderSpeedModifier != null && (hive == null || !_hive.IsMember(contacting, hive.Hive)))
                 {
@@ -184,6 +186,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
                         speedResin += resin.OutsiderSpeedModifier.Value;
 
                     entriesResin++;
+                    anyResin = true;
                 }
             }
 
