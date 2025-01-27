@@ -124,6 +124,17 @@
       stackType: CMSteel
       count: 1
 
+- type: entity
+  parent: CMSheetMetal
+  id: CMSheetMetal2
+  suffix: "2"
+  components:
+    - type: Sprite
+      state: metal
+    - type: Stack
+      stackType: CMSteel
+      count: 2
+
 # Plasteel
 
 - type: material

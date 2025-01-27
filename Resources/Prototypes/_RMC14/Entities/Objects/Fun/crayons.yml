@@ -1,0 +1,162 @@
+- type: entity
+  parent: CrayonBox
+  id: RMCCrayonBox
+  name: box of crayons
+  description: A box of every flavor of crayon.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/paint.rsi
+    state: crayonbox
+  - type: Storage
+    grid:
+    - 0,0,4,0  #6 slots
+    whitelist:
+      tags:
+      - Crayon
+  - type: StorageFill
+    contents:
+    - id: RMCCrayonRed
+    - id: RMCCrayonOrange
+    - id: RMCCrayonYellow
+    - id: RMCCrayonGreen
+    - id: RMCCrayonBlue
+    - id: RMCCrayonPurple
+  - type: ItemMapper
+    mapLayers:
+      red:
+        whitelist:
+          tags:
+          - CrayonRed
+      orange:
+        whitelist:
+          tags:
+          - CrayonOrange
+      yellow:
+        whitelist:
+          tags:
+          - CrayonYellow
+      green:
+        whitelist:
+          tags:
+          - CrayonGreen
+      blue:
+        whitelist:
+          tags:
+          - CrayonBlue
+      purple:
+        whitelist:
+          tags:
+          - CrayonPurple
+#base   #Todo shade system for crayons.
+- type: entity
+  parent: Crayon
+  id: RMCBaseCrayon
+  abstract: true
+  description: A colorful crayon. Please refrain from eating it or putting it in your nose.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/paint.rsi
+  - type: Crayon
+    capacity: 30
+
+#red
+- type: entity
+  parent: RMCBaseCrayon
+  id: RMCCrayonRed
+  components:
+  - type: Sprite
+    state: crayonred
+  - type: Crayon
+    color: "#DA0000"
+  - type: Tag
+    tags:
+    - Write
+    - Crayon
+    - CrayonRed
+    - Recyclable
+    - Trash
+
+#orange
+- type: entity
+  parent: RMCBaseCrayon
+  id: RMCCrayonOrange
+  components:
+  - type: Sprite
+    state: crayonorange
+  - type: Crayon
+    color: "#FF9300"
+  - type: Tag
+    tags:
+    - Write
+    - Crayon
+    - CrayonOrange
+    - Recyclable
+    - Trash
+
+#yellow
+- type: entity
+  parent: RMCBaseCrayon
+  id: RMCCrayonYellow
+  components:
+  - type: Sprite
+    state: crayonyellow
+  - type: Crayon
+    color: "#FFF200"
+  - type: Tag
+    tags:
+    - Write
+    - Crayon
+    - CrayonYellow
+    - Recyclable
+    - Trash
+
+#green
+- type: entity
+  parent: RMCBaseCrayon
+  id: RMCCrayonGreen
+  components:
+  - type: Sprite
+    state: crayongreen
+  - type: Crayon
+    color: "#A8E61D"
+  - type: Tag
+    tags:
+    - Write
+    - Crayon
+    - CrayonGreen
+    - Recyclable
+    - Trash
+
+#blue
+- type: entity
+  parent: RMCBaseCrayon
+  id: RMCCrayonBlue
+  components:
+  - type: Sprite
+    state: crayonblue
+  - type: Crayon
+    color: "#00B7EF"
+  - type: Tag
+    tags:
+    - Write
+    - Crayon
+    - CrayonBlue
+    - Recyclable
+    - Trash
+
+#purple
+- type: entity
+  parent: RMCBaseCrayon
+  id: RMCCrayonPurple
+  components:
+  - type: Sprite
+    state: crayonpurple
+  - type: Crayon
+    color: "#DA00FF"
+  - type: Tag
+    tags:
+    - Write
+    - Crayon
+    - CrayonPurple
+    - Recyclable
+    - Trash

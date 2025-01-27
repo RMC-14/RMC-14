@@ -129,6 +129,7 @@
     skill: RMCSkillConstruction
     delay: 10
     fuelUsed: 2
+    repairableDamageLimit: 340
   - type: NailgunRepairable
     # cm13 max_health%: 0.3, 0.45
     repairMetal: 135
@@ -418,6 +419,7 @@
     skill: RMCSkillConstruction
     delay: 10
     fuelUsed: 2
+    repairableDamageLimit: 300
   - type: NailgunRepairable
     # cm13 max_health%: 0.3, 0.45
     repairMetal: 120

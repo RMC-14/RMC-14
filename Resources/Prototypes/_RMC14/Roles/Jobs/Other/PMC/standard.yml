@@ -38,6 +38,15 @@
         settings: short
     - type: Loadout
       prototypes: [ RMCGearPMCStandard ]
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 1
+        RMCSkillEndurance: 3
 
 - type: startingGear
   id: RMCGearPMCStandard
@@ -52,4 +61,4 @@
     id: RMCIDCardPMC
     ears: RMCHeadsetDistressPMC
     pocket1: RMCPouchFirstAidSplintsGauzeOintment
-    pocket2: CMWeaponPistolM77
+    pocket2: RMCWeaponPistolM77

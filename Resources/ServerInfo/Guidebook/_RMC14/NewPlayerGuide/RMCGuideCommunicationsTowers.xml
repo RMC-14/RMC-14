@@ -1,0 +1,47 @@
+﻿<Document>
+  Guide by Kynthos on Discord
+
+  [color=#5f698a]█    █ █▄ █[/color] [head=2][bold]UNITED NATIONS MARINE CORPS[/bold][/head]\n
+  [color=#5f698a]▀ ▄▀ █ ▀█ [/color]
+
+  #Telecommunication and Sensor Towers
+
+  On the Colony there are stationary towers that Marines will need to repair in order to bolster their communication and intelligence gathering capabilities. These are vital objectives that must be repaired and protected to maintain their functionality. To repair this vital equipment, you will need to be specifically trained. Only dedicated Engineers, [textlink="Combat Technicians" link="RMCGuideRoleCombatTechnician"], or Fireteam Leaders have such training.
+
+  ##Telecommunication Towers
+
+  Radio communication between Marines on the planet and the staff onboard the Almayer cannot be conducted until one of the two TC-3T Static Telecommunications Tower in the Colony has been repaired to boost the connection.
+
+  <Box>
+    <GuideEntityEmbed Entity="RMCCommunicationsTower"/>
+  </Box>
+
+The location of the Telecommunication Towers vary between Operations. The CIC will know their exact location, so ensure you communicate with Command to be informed of which towers need to be repaired.
+
+[bold]Repairing a Telecommunications Tower[/bold] is as simple as [bold]using a blowtorch[/bold] to weld all the panels back together. You may need to repeat this multiple times, so inspect the tower to see if more damage needs to be repaired.
+
+[bold]Once the tower is repaired[/bold], you will need to [bold]use a Security Access Tuner[/bold] to [bold]add your faction’s frequencies[/bold] to the network. Once this is done, the tower will begin broadcasting those radio frequencies to planetary and extra-planetary locations.
+
+[bold]The Telecommunication Tower will not function if it is not powered[/bold], so you will also need to repair the local APC and potentially the Colony’s Power grid.
+
+Once the Telecommunication Tower is repaired, tuned, and powered, radio communications will resume. The Tower becoming destroyed or depowered in any way will halt communications until the problem is fixed.
+
+##Sensor Tower
+
+The Experimental Sensor Tower found in each colony has been adjusted to track unknown biosignatures in the nearby area. With it repaired, the CIC will be able to [bold]track the exact location of all unknown biosignatures on their TACMAP[/bold] for as long as it is operational.
+
+The location of the Sensor Tower is predetermined for each AO, remaining the same between operations.
+
+  <Box>
+    <GuideEntityEmbed Entity="RMCSensorTower"/>
+  </Box>
+
+  If you are unsure on the next step for repairs, make sure to inspect the tower, but the steps are as follows:
+  -First, use a [bold]blowtorch[/bold] to weld the plates back together.
+  -Next, use [bold]wire cutters[/bold] to repair the wires.
+  -Then, use a [bold]wrench[/bold] to realign the tower properly.
+  -Finally, power the Sensor tower on to begin scanning.
+
+  Once the Sensor Tower has been repaired, it will stay operational for a small while until it [bold]randomly breaks down[/bold]. When this happens, the Sensor Tower must be repaired again to continue tracking unknown biosignatures.
+
+</Document>

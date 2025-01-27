@@ -8,6 +8,16 @@
   - !type:DepartmentTimeRequirement
     department: CMRequisitions
     time: 36000 # 10 hours
+  ranks:
+    RMCRankMasterSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobQuartermaster
+      time: 252000 # 70 hours
+    RMCRankGunnerySergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobQuartermaster
+      time: 36000 # 10 hours
+    RMCRankStaffSergeant: []
   weight: 5
   startingGear: CMGearQuartermaster
   icon: "CMJobIconQuartermaster"
@@ -40,7 +50,7 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "QM"
+      prefix: cm-job-prefix-quartermaster
 
 - type: startingGear
   id: CMGearQuartermaster

@@ -6,6 +6,8 @@
     <BoxContainer Orientation="Vertical">
         <RichTextLabel Text="{Loc rmc-almayer-control-ship-control-header}" />
         <ui:BlueHorizontalSeparator />
+        <Button Name="AlertButton" Access="Public" Text="{Loc rmc-alert-change-level}"
+                StyleClasses="OpenBoth" />
         <Button Name="MedalButton" Access="Public" Text="{Loc rmc-almayer-control-give-medal}"
                 StyleClasses="OpenBoth" />
         <RichTextLabel Text="{Loc rmc-almayer-control-emergency-measures-header}" Margin="0 20 0 0" />
