@@ -161,13 +161,15 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         //Fast resin speedup only effect xenos, but sticky also doesn't hurt hive mems
         _hiveQuery.TryComp(ent, out var hive);
 
-        var any = false;
+        var anyWeeds = false;
+        var anyResin = false;
         var entriesResin = 0;
         var entriesWeeds = 0;
         foreach (var contacting in _physics.GetContactingEntities(ent, physicsComponent))
         {
             if (_floorResinQuery.TryComp(contacting, out var resin))
             {
+                anyResin = true;
                 if (isXeno && hive != null && _hive.IsMember(contacting, hive.Hive))
                 {
                     speedResin += resin.HiveSpeedModifier ?? 0;
@@ -188,7 +190,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             if (!_weedsQuery.TryComp(contacting, out var weeds))
                 continue;
 
-            any = true;
+            anyWeeds = true;
 
             if (isXeno && hive != null && _hive.IsMember(contacting, hive.Hive))
             {
@@ -206,11 +208,11 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             }
         }
 
-        if (!any &&
+        if (!anyWeeds &&
             Transform(ent).Anchored &&
             _rmcMap.HasAnchoredEntityEnumerator<XenoWeedsComponent>(ent.Owner.ToCoordinates()))
         {
-            any = true;
+            anyWeeds = true;
         }
         //Resin + Weed Speedups stack, but resin + weed slowdowns do not
         var finalSpeed = 1.0f;
@@ -235,7 +237,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
         args.ModifySpeed(finalSpeed, finalSpeed);
 
-        ent.Comp.OnXenoWeeds = any;
+        ent.Comp.OnXenoWeeds = anyWeeds;
+        ent.Comp.OnXenoResin = anyResin;
         Dirty(ent);
     }
 
@@ -303,14 +306,14 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     private void OnResinStartCollide(Entity<FloorResinSpeedModifierComponent> ent, ref StartCollideEvent args)
     {
         var other = args.OtherEntity;
-        if (_affectedQuery.TryComp(other, out var affected) && !affected.OnXenoWeeds)
+        if (_affectedQuery.TryComp(other, out var affected) && !affected.OnXenoResin)
             _toUpdate.Add(other);
     }
 
     private void OnResinEndCollide(Entity<FloorResinSpeedModifierComponent> ent, ref EndCollideEvent args)
     {
         var other = args.OtherEntity;
-        if (_affectedQuery.TryComp(other, out var affected) && affected.OnXenoWeeds)
+        if (_affectedQuery.TryComp(other, out var affected) && affected.OnXenoResin)
             _toUpdate.Add(other);
     }
 
