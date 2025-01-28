@@ -43,15 +43,19 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
 
     private void OnRefillerInteractUsing(Entity<CMSolutionRefillerComponent> ent, ref InteractUsingEvent args)
     {
-        args.Handled = true;
         var fillable = args.Used;
-        if(TryComp<RMCHyposprayComponent>(args.Used, out var hypo) && _container.TryGetContainer(args.Used, hypo.SlotId, out var container) && container.ContainedEntities.Count != 0)
+        if (TryComp<RMCHyposprayComponent>(args.Used, out var hypo) &&
+            _container.TryGetContainer(args.Used, hypo.SlotId, out var container) &&
+            container.ContainedEntities.Count != 0)
         {
             fillable = container.ContainedEntities[0];
         }
 
-        if (!TryComp(fillable, out CMRefillableSolutionComponent? refillable) ||
-            !_whitelist.IsValid(ent.Comp.Whitelist, fillable))
+        if (!TryComp(fillable, out CMRefillableSolutionComponent? refillable))
+            return;
+
+        args.Handled = true;
+        if (!_whitelist.IsValid(ent.Comp.Whitelist, fillable))
         {
             _popup.PopupClient(Loc.GetString("cm-refillable-solution-cannot-refill", ("user", ent.Owner), ("target", fillable)), args.User, args.User, PopupType.SmallCaution);
             return;
