@@ -448,3 +448,21 @@
   components:
   - type: Sprite
     state: kutjevo_rock_decodark
+
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformHybrisaStone
+  name: raised metal platform
+  description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: stone
+
+- type: entity
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformHybrisaStoneCornerSmall
+  name: raised metal   corner
+  description: A raised level of metal, often used to elevate areas above others. This is the corner.
+  components:
+  - type: Sprite
+    state: stone_deco

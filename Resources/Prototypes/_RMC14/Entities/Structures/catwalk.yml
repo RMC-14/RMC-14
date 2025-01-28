@@ -104,6 +104,14 @@
   - type: Sprite
     state: latticefull
 
+- type: entity
+  parent: CMCatwalk
+  id: RMCCatwalkHybrisaElevator
+  name: solid metal grate
+  components:
+  - type: Sprite
+    state: solidgrate5
+
 # Monorail
 
 - type: entity
