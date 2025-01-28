@@ -103,3 +103,9 @@
     weldingDamage:
       types:
         Heat: 100
+  - type: Tag
+    tags:
+    - RMCTankFuel
+
+- type: Tag
+  id: RMCTankFuel
