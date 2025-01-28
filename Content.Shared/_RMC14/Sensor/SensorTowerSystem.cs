@@ -53,6 +53,11 @@ public sealed class SensorTowerSystem : EntitySystem
         }
     }
 
+    private void OnSensorTowerMapInit(Entity<SensorTowerComponent> ent, ref MapInitEvent args)
+    {
+        UpdateAppearance(ent);
+    }
+
     private void OnSensorTowerInteractUsing(Entity<SensorTowerComponent> ent, ref InteractUsingEvent args)
     {
         var user = args.User;
@@ -65,13 +70,18 @@ public sealed class SensorTowerSystem : EntitySystem
 
         var used = args.Used;
 
+        var correctQuality = ent.Comp.State switch
+        {
+            SensorTowerState.Weld => ent.Comp.WeldingQuality,
+            SensorTowerState.Wire => ent.Comp.CuttingQuality,
+            SensorTowerState.Wrench => ent.Comp.WrenchQuality,
+            _ => throw new ArgumentOutOfRangeException(),
+        };
+
         args.Handled = true;
-        if (_tool.HasQuality(used, ent.Comp.WrenchQuality))
-            TryRepair(ent, user, used, SensorTowerState.Wrench);
-        else if (_tool.HasQuality(used, ent.Comp.CuttingQuality))
-            TryRepair(ent, user, used, SensorTowerState.Wire);
-        else if (_tool.HasQuality(used, ent.Comp.WeldingQuality))
-            TryRepair(ent, user, used, SensorTowerState.Weld);
+
+        if (_tool.HasQuality(used, correctQuality))
+            TryRepair(ent, user, used, ent.Comp.State);
     }
 
     private void OnSensorTowerInteractHand(Entity<SensorTowerComponent> ent, ref InteractHandEvent args)

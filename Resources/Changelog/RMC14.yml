@@ -1,39 +1,4 @@
 ﻿Entries:
-- author: deltanedas
-  changes:
-  - message: Xenos are now told when the hive supports certain castes.
-    type: Add
-  id: 770
-  time: '2024-10-04T04:15:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4222
-- author: Tunguso4ka
-  changes:
-  - message: 'Ported new Distress Signal map: Trijent Dam.'
-    type: Add
-  id: 771
-  time: '2024-10-04T05:39:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3835
-- author: Vermidia
-  changes:
-  - message: Xenos no longer hear about non-Queen xeno deaths if there is no Queen
-    type: Fix
-  id: 772
-  time: '2024-10-04T06:15:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4216
-- author: CyberTropic
-  changes:
-  - message: Added washing machines.
-    type: Add
-  id: 773
-  time: '2024-10-04T06:19:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4236
-- author: FungiFellow
-  changes:
-  - message: Knives/Machetes can now pry unpowered doors
-    type: Add
-  id: 774
-  time: '2024-10-04T08:23:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4234
 - author: crystalHex
   changes:
   - message: Added the first-aid kit to the G8-A general utility belt blacklist until
@@ -5071,5 +5036,59 @@
   id: 1269
   time: '2025-01-28T00:40:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5472
+- author: CyberTropic
+  changes:
+  - message: Added time display to status screens when on green alert.
+    type: Add
+  id: 1270
+  time: '2025-01-28T20:38:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5482
+- author: Whisper
+  changes:
+  - message: Fixed water-filled reagent tanks not showing it's contents and always
+      being named a water tank.
+    type: Fix
+  - message: Fixed the CMP revolver not using mono audio, causing it to be VERY LOUD.
+    type: Fix
+  id: 1271
+  time: '2025-01-28T20:37:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5478
+- author: Vermidia
+  changes:
+  - message: Fixed xeno slowdowns from different abilities stacking.
+    type: Fix
+  - message: Fixed stronger slows stacking with smaller slows
+    type: Fix
+  - message: Fixed stomp not causing any slowdown
+    type: Fix
+  - message: Fixed slowing and stunning visual effects being visible to marines
+    type: Fix
+  - message: Fixed slows being applied to xenos in most cases not having 2/3rds of
+      the duration
+    type: Fix
+  - message: Fixed charge not slowing down marines in the area of impact.
+    type: Fix
+  - message: Fixed tail sweep having a lower range than all other melee abilities
+      (1.25 > 1.5). It and blitz can no longer hit through walls.
+    type: Fix
+  id: 1272
+  time: '2025-01-28T20:36:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5477
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the wrong tools being able to infinitely repair the sensor tower
+    type: Fix
+  - message: Fixed sensor tower appearing as fixed when spawning for the first time
+    type: Fix
+  id: 1273
+  time: '2025-01-28T20:37:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5476
+- author: Tunguso4ka
+  changes:
+  - message: Fixed not being able to reload M44 revolvers with M44 marksman speedloaders.
+    type: Fix
+  id: 1274
+  time: '2025-01-28T20:36:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5479
 Name: RMC14
 Order: -1
