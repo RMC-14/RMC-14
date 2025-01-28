@@ -189,3 +189,56 @@
   - type: Icon
     sprite: _RMC14/Structures/Walls/hybrisa_wall_office.rsi
     state: strata_bare_outpost_
+
+# Space Port
+
+- type: entity
+  parent: RMCWallHybrisa
+  id: RMCWallHybrisaSpacePort
+  name: metal wall
+  description: A huge chunk of metal used to separate rooms.
+  suffix: space port
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_spaceport.rsi
+    state: metal
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_spaceport.rsi
+    state: metal
+  - type: IconSmooth
+    key: walls
+    base: metal
+
+- type: entity
+  parent: RMCWallHybrisaReinforced
+  id: RMCWallHybrisaSpacePortReinforced
+  suffix: space port
+  name: reinforced metal wall
+  description: A huge chunk of metal used to separate rooms.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_spaceport_reinforced.rsi
+    state: rwall
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_spaceport_reinforced.rsi
+    state: rwall
+  - type: IconSmooth
+    key: walls
+    base: rwall
+
+- type: entity
+  parent: RMCWallHybrisaHull
+  id: RMCWallHybrisaSpacePortHull
+  suffix: space port, hull
+  name: heavy reinforced wall
+  description: A huge chunk of ultra-reinforced metal used to separate rooms. Looks virtually indestructible.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_spaceport_reinforced.rsi
+    state: rwall
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_spaceport_reinforced.rsi
+    state: hwall
+  - type: IconSmooth
+    key: walls
+    base: rwall
