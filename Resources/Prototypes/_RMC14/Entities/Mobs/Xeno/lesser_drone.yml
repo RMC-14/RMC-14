@@ -49,6 +49,8 @@
     - WallXenoResin
     - WallXenoMembrane
     - DoorXenoResin
+    - XenoStickyResin
+    - XenoFastResin
   - type: XenoDevour
   - type: XenoPheromones
   - type: XenoPlasma

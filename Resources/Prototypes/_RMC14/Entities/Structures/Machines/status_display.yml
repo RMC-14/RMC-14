@@ -1,0 +1,27 @@
+﻿- type: entity
+  id: RMCStatusDisplay
+  name: status display
+  description: A monitor depicting the ship's current status. It flickers every so often.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/status_display.rsi
+    drawdepth: WallMountedItems
+    layers:
+    - state: frame
+    - map: [ "screen" ]
+      state: bluealert
+      visible: false
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCAlertLevelsVisuals.Alert:
+        screen:
+          Green: { visible: false }
+          Blue: { state: bluealert, visible: true }
+          Red: { state: redalert, visible: true }
+          Delta: { state: evac, visible: true }
+  - type: RMCAlertLevelDisplay

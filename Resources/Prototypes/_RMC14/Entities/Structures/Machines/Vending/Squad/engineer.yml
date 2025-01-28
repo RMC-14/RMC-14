@@ -112,9 +112,9 @@
         points: 16
     - name: Restricted Firearms
       entries:
-      - id: RMCMK80Case
+      - id: RMCGunCasePistolMK80
         points: 8
-      - id: RMCSmartPistolCase
+      - id: RMCGunCasePistolSmart
         points: 12
     #- id: CMM240IncineratorUnit
     #  points: 12
@@ -125,8 +125,10 @@
     - name: Clothing Items
       entries:
       - id: RMCScabbardMacheteFilled
+        name: machete scabbard (Full)
         points: 6
       - id: RMCPouchMacheteFilled
+        name: machete pouch (Full)
         points: 8
       - id: RMCBackpackRTO
         points: 15
@@ -210,6 +212,7 @@
       choices: { CMBackpack: 1 }
       entries:
       - id: RMCScabbardMacheteFilled
+        name: machete scabbard (Full)
       - id: CMBackpackMarineTech
       - id: CMSatchelMarineTech
       - id: CMBackpackWelder
@@ -249,8 +252,8 @@
       - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
         recommended: true
-      # - id: RMCPouchElectronicsFill
-        # name: electronics pouch (Full)
+      - id: RMCPouchElectronicsFill
+        name: electronics pouch (Full)
       - id: RMCPouchExplosive
       - id: RMCPouchFlareFilled
         name: Flare pouch (Full)

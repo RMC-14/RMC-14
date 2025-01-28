@@ -117,7 +117,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         SubscribeLocalEvent<HiveConstructionNodeComponent, ExaminedEvent>(OnHiveConstructionNodeExamined);
         SubscribeLocalEvent<HiveConstructionNodeComponent, ActivateInWorldEvent>(OnHiveConstructionNodeActivated);
 
-        SubscribeLocalEvent<HiveCoreComponent, MapInitEvent>(OnHiveCoreMapInit);
+        SubscribeLocalEvent<HiveCoreComponent, XenoHiveStructureConstructionFinishedEvent>(OnHiveCoreConstructionFinished);
 
         SubscribeLocalEvent<XenoConstructionSupportComponent, ComponentRemove>(OnCheckAdjacentCollapse);
         SubscribeLocalEvent<XenoConstructionSupportComponent, EntityTerminatingEvent>(OnCheckAdjacentCollapse);
@@ -277,9 +277,11 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             RaiseNetworkEvent(new XenoConstructionAnimationStartEvent(GetNetEntity(effect.Value), GetNetEntity(xeno)), Filter.PvsExcept(effect.Value));
         }
 
+        var buildMult = GetBuildSpeed(choice) ?? 1;
+
         var ev = new XenoSecreteStructureDoAfterEvent(coordinates, choice, GetNetEntity(effect));
         args.Handled = true;
-        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.BuildDelay, ev, xeno)
+        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.BuildDelay * buildMult, ev, xeno)
         {
             BreakOnMove = true
         };
@@ -470,6 +472,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 QueueDel(uid);
             }
         }
+
+        var ev = new XenoHiveStructureConstructionFinishedEvent();
+        RaiseLocalEvent(spawn, ref ev);
     }
 
     private void OnActionConstructionChosen(Entity<XenoChooseConstructionActionComponent> xeno, ref XenoConstructionChosenEvent args)
@@ -542,13 +547,14 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfter);
     }
 
-    private void OnHiveCoreMapInit(Entity<HiveCoreComponent> ent, ref MapInitEvent args)
+    private void OnHiveCoreConstructionFinished(Entity<HiveCoreComponent> ent, ref XenoHiveStructureConstructionFinishedEvent args)
     {
         if (_net.IsClient)
             return;
 
         var coordinates = _transform.GetMoverCoordinates(ent).SnapToGrid(EntityManager, _map);
-        Spawn(ent.Comp.Spawns, coordinates);
+        var spawn = Spawn(ent.Comp.Spawns, coordinates);
+        _hive.SetSameHive(ent.Owner, spawn);
     }
 
     private void OnCheckAdjacentCollapse<T>(Entity<XenoConstructionSupportComponent> ent, ref T args)
@@ -593,6 +599,17 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             buildChoice.TryGetComponent(out XenoConstructionPlasmaCostComponent? cost, _compFactory))
         {
             return cost.Plasma;
+        }
+
+        return null;
+    }
+
+    public float? GetBuildSpeed(EntProtoId prototype)
+    {
+        if (_prototype.TryIndex(prototype, out var buildChoice) &&
+            buildChoice.TryGetComponent(out XenoConstructionBuildSpeedComponent? speed, _compFactory))
+        {
+            return speed.BuildTimeMult;
         }
 
         return null;

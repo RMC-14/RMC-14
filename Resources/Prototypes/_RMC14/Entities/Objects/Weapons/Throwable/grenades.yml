@@ -64,6 +64,9 @@
     - RMCGrenadeRiot
     - Grenade
     - RMCGrenadeFlashBang
+  - type: RequiresSkill
+    skills:
+      RMCSkillPolice: 2
 
 - type: entity
   parent:
@@ -151,11 +154,9 @@
     intensitySlope: 4
     totalIntensity: 110
     deleteAfterExplosion: false
-  - type: ClusterGrenade
+  - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
-    maxGrenadesCount: 48
-    grenadeType: enum.GrenadeType.Shoot
-    triggerGrenades: false
+    capacity: 48
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
@@ -179,11 +180,9 @@
     intensitySlope: 6
     totalIntensity: 240
     deleteAfterExplosion: false
-  - type: ClusterGrenade
+  - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
-    maxGrenadesCount: 48 #same as HEFA
-    grenadeType: enum.GrenadeType.Shoot
-    triggerGrenades: false
+    capacity: 48 #same as HEFA
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container

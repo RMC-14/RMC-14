@@ -62,8 +62,9 @@
 
 - type: entity
   parent: CMHeadBeret
-  id: CMHeadBeretWO
-  name: WO's beret
+  id: CMHeadBeretCMP
+  name: UNMC Chief MP beret
+  description: A beret with the UNMC Military Police insignia emblazoned on it. It shines with the glow of corrupt authority and a smudge of doughnut.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_wo.rsi

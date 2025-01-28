@@ -67,3 +67,9 @@
   files:
   - /Audio/_RMC14/Xeno/alien_bite1.ogg
   - /Audio/_RMC14/Xeno/alien_bite2.ogg
+
+- type: soundCollection
+  id: XenoMove
+  files:
+  - /Audio/_RMC14/Xeno/alien_resin_move1.ogg
+  - /Audio/_RMC14/Xeno/alien_resin_move2.ogg

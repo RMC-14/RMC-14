@@ -40,7 +40,7 @@
         amount: 25
     - name: Sidearms
       entries:
-      - id: CMWeaponPistolM77Empty
+      - id: RMCWeaponPistolM77Empty
         amount: 25
       - id: RMCWeaponRevolverM44Empty
         amount: 25
@@ -394,6 +394,7 @@
       - id: CMRollerBedSpawnFolded
         amount: 1
       - id: RMCScabbardMacheteFilled
+        name: machete scabbard (Full)
         amount: 5
       - id: RMCBinoculars
         amount: 1
@@ -402,6 +403,8 @@
       #- id: CMSparePDTLBattleBuddyKit
       #  amount: 3
       - id: RMCPowerCellCrap
+        amount: 2
+      - id: RMCMagazineSMGNailgun
         amount: 2
 
 
