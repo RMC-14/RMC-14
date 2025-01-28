@@ -222,6 +222,8 @@
   - type: RMCSolutionTransferWhitelist
     popup: rmc-solution-transfer-whitelist-failed-not-welding-tank
     whitelist:
+      components:
+      - Welder
       tags:
       - RMCTankFuel
   - type: ItemCamouflage
