@@ -25,3 +25,5 @@
           Red: { state: redalert, visible: true }
           Delta: { state: evac, visible: true }
   - type: RMCAlertLevelDisplay
+  - type: WallMount
+    arc: 360
