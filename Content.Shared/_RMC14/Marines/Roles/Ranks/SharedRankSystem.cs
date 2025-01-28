@@ -1,4 +1,5 @@
-﻿using Content.Shared.Examine;
+﻿using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Examine;
 using Content.Shared.Humanoid;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
@@ -18,6 +19,9 @@ public abstract class SharedRankSystem : EntitySystem
 
     private void OnRankExamined(Entity<RankComponent> ent, ref ExaminedEvent args)
     {
+        if (HasComp<XenoComponent>(args.Examiner))
+            return;
+
         using (args.PushGroup(nameof(SharedRankSystem), 1))
         {
             var user = ent.Owner;
