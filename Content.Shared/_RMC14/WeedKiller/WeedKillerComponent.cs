@@ -1,6 +1,7 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.WeedKiller;
@@ -25,7 +26,7 @@ public sealed partial class WeedKillerComponent : Component
     public SoundSpecifier? Sound = new SoundPathSpecifier("/Audio/_RMC14/Effects/rocketpod_fire.ogg");
 
     [DataField, AutoNetworkedField]
-    public string DropshipName = string.Empty;
+    public EntityUid Dropship;
 
     [DataField, AutoNetworkedField]
     public EntityCoordinates Destination;
@@ -37,5 +38,5 @@ public sealed partial class WeedKillerComponent : Component
     public List<EntityUid> LinkedAreas = new();
 
     [DataField]
-    public List<EntityCoordinates> Positions = new();
+    public List<(Entity<MapGridComponent> Grid, Vector2i Indices)> Positions = new();
 }

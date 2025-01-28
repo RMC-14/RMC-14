@@ -76,5 +76,6 @@ public sealed partial class AreaComponent : Component
     public bool LandingZone;
 
     [DataField, AutoNetworkedField]
+    [Access(typeof(AreaSystem), typeof(WeedKillerSystem))]
     public string? LinkedLz;
 }

@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
@@ -7,6 +8,7 @@ using Content.Shared.Coordinates;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -19,6 +21,7 @@ public sealed class WeedKillerSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -40,14 +43,17 @@ public sealed class WeedKillerSystem : EntitySystem
 
     private void OnDropshipLaunchedFromWarship(ref DropshipLaunchedFromWarshipEvent ev)
     {
+        if (_net.IsClient)
+            return;
+
         if (Count<WeedKillerComponent>() > 0)
             return;
 
-        var id = Spawn(WeedKiller, ev.Dropship.Owner.ToCoordinates());
+        var id = Spawn();
         var comp = EnsureComp<WeedKillerComponent>(id);
         comp.DeployAt = _timing.CurTime + _dropshipDelay;
-        comp.DeployAt = _timing.CurTime + _dropshipDelay + _disableDuration;
-        comp.DropshipName = Name(ev.Dropship);
+        comp.DisableAt = _timing.CurTime + _dropshipDelay + _disableDuration;
+        comp.Dropship = ev.Dropship;
         comp.Destination = ev.Dropship.Comp.Destination?.ToCoordinates() ?? default;
 
         if (_area.TryGetArea(comp.Destination, out var lzArea, out _, out _))
@@ -55,8 +61,15 @@ public sealed class WeedKillerSystem : EntitySystem
             var areas = EntityQueryEnumerator<AreaComponent>();
             while (areas.MoveNext(out var areaId, out var areaComp))
             {
-                if (areaComp.LinkedLz != lzArea.LinkedLz)
+                if (areaComp.LinkedLz?.Contains(',') ?? false)
+                {
+                    if (!areaComp.LinkedLz.Split(',').Select(x => x.Trim()).Contains(lzArea.LinkedLz))
+                        continue;
+                }
+                else if (areaComp.LinkedLz != lzArea.LinkedLz)
+                {
                     continue;
+                }
 
                 if (Prototype(areaId)?.ID is { } proto)
                     comp.AreaPrototypes.Add(proto);
@@ -64,14 +77,14 @@ public sealed class WeedKillerSystem : EntitySystem
                 comp.LinkedAreas.Add(areaId);
             }
 
-            var gridId = comp.Destination.EntityId;
+            var gridId = Transform(comp.Destination.EntityId).GridUid;
             if (TryComp(gridId, out MapGridComponent? grid) &&
                 TryComp(gridId, out AreaGridComponent? areaGrid))
             {
                 foreach (var (position, areaId) in areaGrid.Areas)
                 {
                     if (comp.AreaPrototypes.Contains(areaId))
-                        comp.Positions.Add(_map.GridTileToLocal(gridId, grid, position));
+                        comp.Positions.Add(((gridId.Value, grid), position));
                 }
             }
         }
@@ -81,13 +94,16 @@ public sealed class WeedKillerSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
+        if (_net.IsClient)
+            return;
+
         var time = _timing.CurTime;
         var killer = EntityQueryEnumerator<WeedKillerComponent>();
         while (killer.MoveNext(out var uid, out var comp))
         {
             if (!comp.Deployed)
             {
-                if (comp.DeployAt <= time)
+                if (time < comp.DeployAt)
                     continue;
 
                 comp.Deployed = true;
@@ -103,25 +119,25 @@ public sealed class WeedKillerSystem : EntitySystem
                 }
 
                 _audio.PlayPvs(comp.Sound, uid);
-                _marineAnnounce.AnnounceARES(null, Loc.GetString("rmc-weed-killer-deploying", ("dropship", comp.DropshipName)));
+                _marineAnnounce.AnnounceARES(null, Loc.GetString("rmc-weed-killer-deploying", ("dropship", Name(comp.Dropship))));
 
                 foreach (var position in comp.Positions)
                 {
-                    var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(position);
+                    Spawn(WeedKiller, _map.GridTileToLocal(position.Grid, position.Grid, position.Indices));
+                    var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(position.Grid, position.Indices);
                     while (anchored.MoveNext(out var anchoredId))
                     {
                         if (!_deletedByWeedKillerQuery.HasComp(anchoredId))
                             continue;
 
                         QueueDel(anchoredId);
-                        Spawn(WeedKiller, position);
                     }
                 }
             }
 
             if (!comp.Disabled)
             {
-                if (comp.DisableAt <= time)
+                if (time < comp.DeployAt)
                     continue;
 
                 comp.Disabled = true;
