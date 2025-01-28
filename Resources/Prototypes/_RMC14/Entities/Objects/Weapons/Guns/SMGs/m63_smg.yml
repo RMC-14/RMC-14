@@ -108,7 +108,7 @@
       Urban: _RMC14/Objects/Weapons/Guns/SMGs/m63/urban.rsi
 
 - type: entity
-  parent: BaseMagazineRifle
+  parent: CMMagazineRifleBase
   id: CMMagazineSMGM63
   name: "M63 magazine (10x20mm)"
   components:
