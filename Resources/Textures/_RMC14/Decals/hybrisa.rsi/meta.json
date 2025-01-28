@@ -203,6 +203,18 @@
       "name": "stone_edging_4"
     },
     {
+      "name": "stone_edging_alt_1"
+    },
+    {
+      "name": "stone_edging_alt_2"
+    },
+    {
+      "name": "stone_edging_alt_3"
+    },
+    {
+      "name": "stone_edging_alt_4"
+    },
+    {
       "name": "stone_edging_deco_1"
     },
     {
@@ -213,6 +225,18 @@
     },
     {
       "name": "stone_edging_deco_4"
+    },
+    {
+      "name": "stone_edging_deco_alt_1"
+    },
+    {
+      "name": "stone_edging_deco_alt_2"
+    },
+    {
+      "name": "stone_edging_deco_alt_3"
+    },
+    {
+      "name": "stone_edging_deco_alt_4"
     },
     {
       "name": "red_N"

@@ -494,7 +494,6 @@
   sprite:
     sprite: _RMC14/Decals/hybrisa.rsi
     state: stone_edging_1
-    color: "#7e7d72"
 
 - type: decal
   parent: RMCDecalHybrisaBase
@@ -502,7 +501,6 @@
   sprite:
     sprite: _RMC14/Decals/hybrisa.rsi
     state: stone_edging_2
-    color: "#7e7d72"
 
 - type: decal
   parent: RMCDecalHybrisaBase
@@ -510,7 +508,6 @@
   sprite:
     sprite: _RMC14/Decals/hybrisa.rsi
     state: stone_edging_3
-    color: "#7e7d72"
 
 - type: decal
   parent: RMCDecalHybrisaBase
@@ -518,7 +515,6 @@
   sprite:
     sprite: _RMC14/Decals/hybrisa.rsi
     state: stone_edging_4
-    color: "#7e7d72"
 
 - type: decal
   parent: RMCDecalHybrisaBase
@@ -526,7 +522,6 @@
   sprite:
     sprite: _RMC14/Decals/hybrisa.rsi
     state: stone_edging_deco_1
-    color: "#7e7d72"
 
 - type: decal
   parent: RMCDecalHybrisaBase
@@ -534,7 +529,6 @@
   sprite:
     sprite: _RMC14/Decals/hybrisa.rsi
     state: stone_edging_deco_2
-    color: "#7e7d72"
 
 - type: decal
   parent: RMCDecalHybrisaBase
@@ -542,7 +536,6 @@
   sprite:
     sprite: _RMC14/Decals/hybrisa.rsi
     state: stone_edging_deco_3
-    color: "#7e7d72"
 
 - type: decal
   parent: RMCDecalHybrisaBase
@@ -550,7 +543,62 @@
   sprite:
     sprite: _RMC14/Decals/hybrisa.rsi
     state: stone_edging_deco_4
-    color: "#7e7d72"
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStoneEdgeAlt1
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stone_edging_alt_1
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStoneEdgeAlt2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stone_edging_alt_2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStoneEdgeAlt3
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stone_edging_alt_3
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStoneEdgeAlt4
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stone_edging_alt_4
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStoneEdgeDecoAlt1
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stone_edging_deco_alt_1
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStoneEdgeDecoAlt2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stone_edging_deco_alt_2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStoneEdgeDecoAlt3
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stone_edging_deco_alt_3
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStoneEdgeDecoAlt4
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stone_edging_deco_alt_4
 
 # Diagonal
 

@@ -175,3 +175,17 @@
   - type: Icon
     sprite: _RMC14/Structures/Walls/hybrisa_rwall_engineering.rsi
     state: strata_hull
+
+# Office
+
+- type: entity
+  parent: RMCWallHybrisa
+  id: RMCWallHybrisaOffice
+  suffix: office
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_wall_office.rsi
+    state: strata_bare_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_wall_office.rsi
+    state: strata_bare_outpost_
