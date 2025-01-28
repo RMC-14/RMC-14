@@ -1,25 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Barbed sandbags now return the barbed wire when dismantled.
-    type: Fix
-  id: 767
-  time: '2024-10-04T04:14:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4211
-- author: TeaTotalTemplar
-  changes:
-  - message: Vending machines will now break down into RMC Steel instead of upstream
-    type: Fix
-  id: 768
-  time: '2024-10-04T04:13:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4233
-- author: CyberTropic
-  changes:
-  - message: Added showers
-    type: Add
-  id: 769
-  time: '2024-10-04T04:12:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4227
 - author: deltanedas
   changes:
   - message: Xenos are now told when the hive supports certain castes.
@@ -5070,5 +5049,27 @@
   id: 1266
   time: '2025-01-26T21:39:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5469
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed xenos being able to examine marine ranks
+    type: Fix
+  id: 1267
+  time: '2025-01-28T00:40:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5474
+- author: Vermidia
+  changes:
+  - message: Fixed weedless sticky resin slowing you down after leaving it
+    type: Fix
+  id: 1268
+  time: '2025-01-28T00:40:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5471
+- author: blueDev2
+  changes:
+  - message: Boiler bombard/shroud does not get stuck disabled after stun during a
+      doafter
+    type: Fix
+  id: 1269
+  time: '2025-01-28T00:40:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5472
 Name: RMC14
 Order: -1
