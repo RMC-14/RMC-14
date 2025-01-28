@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   id: RMCSmokeAcid
   name: acid gas
   categories: [ HideSpawnMenu ]
@@ -46,7 +46,7 @@
         Heat: 35
     barricadeDamage:
       types:
-        Heat: 11.5
+        Heat: 8.5
     whitelist:
       components:
       - Marine
