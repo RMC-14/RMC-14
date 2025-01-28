@@ -5,14 +5,9 @@ namespace Content.Shared._RMC14.Xenonids.Construction.FloorResin;
 
 [RegisterComponent, NetworkedComponent]
 [Access(typeof(SharedXenoWeedsSystem))]
-public sealed partial class FloorResinSpeedModifierComponent : Component
+public sealed partial class ResinSpeedupModifierComponent : Component
 {
-    [DataField]
-    public float? OutsiderSpeedModifier;
 
     [DataField]
-    public float? OutsiderSpeedModifierArmor;
-
-    [DataField]
-    public float? HiveSpeedModifier;
+    public float HiveSpeedModifier;
 }

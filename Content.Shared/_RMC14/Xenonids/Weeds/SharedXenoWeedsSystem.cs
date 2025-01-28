@@ -47,7 +47,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
     private EntityQuery<AffectableByWeedsComponent> _affectedQuery;
     private EntityQuery<XenoWeedsComponent> _weedsQuery;
-    private EntityQuery<FloorResinSpeedModifierComponent> _floorResinQuery;
+    private EntityQuery<ResinSlowdownModifierComponent> _slowResinQuery;
+    private EntityQuery<ResinSpeedupModifierComponent> _fastResinQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
     private EntityQuery<BlockWeedsComponent> _blockWeedsQuery;
     private EntityQuery<HiveMemberComponent> _hiveQuery;
@@ -56,13 +57,14 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     {
         _affectedQuery = GetEntityQuery<AffectableByWeedsComponent>();
         _weedsQuery = GetEntityQuery<XenoWeedsComponent>();
-        _floorResinQuery = GetEntityQuery<FloorResinSpeedModifierComponent>();
+        _slowResinQuery = GetEntityQuery<ResinSlowdownModifierComponent>();
+        _fastResinQuery = GetEntityQuery<ResinSpeedupModifierComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
         _blockWeedsQuery = GetEntityQuery<BlockWeedsComponent>();
         _hiveQuery = GetEntityQuery<HiveMemberComponent>();
 
         SubscribeLocalEvent<XenoWeedsComponent, AnchorStateChangedEvent>(OnWeedsAnchorChanged);
-        SubscribeLocalEvent<XenoWeedsComponent, ComponentShutdown>(OnWeedsShutdown);
+        SubscribeLocalEvent<XenoWeedsComponent, ComponentShutdown>(OnModifierShutdown);
         SubscribeLocalEvent<XenoWeedsComponent, EntityTerminatingEvent>(OnWeedsTerminating);
 
         SubscribeLocalEvent<XenoWeedableComponent, AnchorStateChangedEvent>(OnWeedableAnchorStateChanged);
@@ -76,9 +78,13 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
         SubscribeLocalEvent<XenoWeedsSpreadingComponent, MapInitEvent>(OnSpreadingMapInit);
 
-        SubscribeLocalEvent<FloorResinSpeedModifierComponent, ComponentShutdown>(OnResinShutdown);
-        SubscribeLocalEvent<FloorResinSpeedModifierComponent, StartCollideEvent>(OnResinStartCollide);
-        SubscribeLocalEvent<FloorResinSpeedModifierComponent, EndCollideEvent>(OnResinEndCollide);
+        SubscribeLocalEvent<ResinSlowdownModifierComponent, ComponentShutdown>(OnModifierShutdown);
+        SubscribeLocalEvent<ResinSlowdownModifierComponent, StartCollideEvent>(OnResinSlowdownStartCollide);
+        SubscribeLocalEvent<ResinSlowdownModifierComponent, EndCollideEvent>(OnResinSlowdownEndCollide);
+
+        SubscribeLocalEvent<ResinSpeedupModifierComponent, ComponentShutdown>(OnModifierShutdown);
+        SubscribeLocalEvent<ResinSpeedupModifierComponent, StartCollideEvent>(OnResinSpeedupStartCollide);
+        SubscribeLocalEvent<ResinSpeedupModifierComponent, EndCollideEvent>(OnResinSpeedupEndCollide);
 
         UpdatesAfter.Add(typeof(SharedPhysicsSystem));
     }
@@ -121,15 +127,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             QueueDel(weeds);
     }
 
-    private void OnWeedsShutdown(Entity<XenoWeedsComponent> ent, ref ComponentShutdown args)
-    {
-        if (!TryComp(ent, out PhysicsComponent? phys))
-            return;
-
-        _toUpdate.UnionWith(_physics.GetContactingEntities(ent, phys));
-    }
-
-    private void OnResinShutdown(Entity<FloorResinSpeedModifierComponent> ent, ref ComponentShutdown args)
+    private void OnModifierShutdown<T>(Entity<T> ent, ref ComponentShutdown args) where T : IComponent
     {
         if (!TryComp(ent, out PhysicsComponent? phys))
             return;
@@ -161,34 +159,43 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         //Fast resin speedup only effect xenos, but sticky also doesn't hurt hive mems
         _hiveQuery.TryComp(ent, out var hive);
 
-        var any = false;
+        var anyWeeds = false;
+        var anySlowResin = false;
+        var anyFastResin = false;
         var entriesResin = 0;
         var entriesWeeds = 0;
         foreach (var contacting in _physics.GetContactingEntities(ent, physicsComponent))
         {
-            if (_floorResinQuery.TryComp(contacting, out var resin))
+            if (_slowResinQuery.TryComp(contacting, out var slowResin))
             {
-                if (isXeno && hive != null && _hive.IsMember(contacting, hive.Hive))
+                if (hive == null || !_hive.IsMember(contacting, hive.Hive))
                 {
-                    speedResin += resin.HiveSpeedModifier ?? 0;
-                    if (resin.HiveSpeedModifier != null)
-                        entriesResin++;
-                }
-                else if (resin.OutsiderSpeedModifier != null && (hive == null || !_hive.IsMember(contacting, hive.Hive)))
-                {
-                    if (HasComp<RMCArmorSpeedTierUserComponent>(contacting) && resin.OutsiderSpeedModifierArmor != null)
-                        speedResin += resin.OutsiderSpeedModifierArmor.Value;
+                    if (HasComp<RMCArmorSpeedTierUserComponent>(contacting))
+                        speedResin += slowResin.OutsiderSpeedModifierArmor;
                     else
-                        speedResin += resin.OutsiderSpeedModifier.Value;
+                        speedResin += slowResin.OutsiderSpeedModifier;
 
                     entriesResin++;
                 }
+                anySlowResin = true;
+                continue;
+            }
+
+            if (_fastResinQuery.TryComp(contacting, out var fastResin))
+            {
+                if (isXeno && hive != null && _hive.IsMember(contacting, hive.Hive))
+                {
+                    speedResin += fastResin.HiveSpeedModifier;
+                    entriesResin++;
+                }
+                anyFastResin = true;
+                continue;
             }
 
             if (!_weedsQuery.TryComp(contacting, out var weeds))
                 continue;
 
-            any = true;
+            anyWeeds = true;
 
             if (isXeno && hive != null && _hive.IsMember(contacting, hive.Hive))
             {
@@ -206,11 +213,11 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             }
         }
 
-        if (!any &&
+        if (!anyWeeds &&
             Transform(ent).Anchored &&
             _rmcMap.HasAnchoredEntityEnumerator<XenoWeedsComponent>(ent.Owner.ToCoordinates()))
         {
-            any = true;
+            anyWeeds = true;
         }
         //Resin + Weed Speedups stack, but resin + weed slowdowns do not
         var finalSpeed = 1.0f;
@@ -226,7 +233,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         }
 
         //If Weeds is a speedup, let them stack, otherwise treat them as slowdownss
-        if (speedWeeds > 1 && entriesResin > 0)
+        if ((speedWeeds > 1 || speedResin > 1) && entriesResin > 0 && entriesWeeds > 0)
             finalSpeed = speedWeeds * speedResin;
         else if (entriesResin > 0)
             finalSpeed = speedResin;
@@ -235,7 +242,9 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
         args.ModifySpeed(finalSpeed, finalSpeed);
 
-        ent.Comp.OnXenoWeeds = any;
+        ent.Comp.OnXenoWeeds = anyWeeds;
+        ent.Comp.OnXenoSlowResin = anySlowResin;
+        ent.Comp.OnXenoFastResin = anyFastResin;
         Dirty(ent);
     }
 
@@ -300,17 +309,31 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             _toUpdate.Add(other);
     }
 
-    private void OnResinStartCollide(Entity<FloorResinSpeedModifierComponent> ent, ref StartCollideEvent args)
+    private void OnResinSlowdownStartCollide(Entity<ResinSlowdownModifierComponent> ent, ref StartCollideEvent args)
     {
         var other = args.OtherEntity;
-        if (_affectedQuery.TryComp(other, out var affected) && !affected.OnXenoWeeds)
+        if (_affectedQuery.TryComp(other, out var affected) && !affected.OnXenoSlowResin)
             _toUpdate.Add(other);
     }
 
-    private void OnResinEndCollide(Entity<FloorResinSpeedModifierComponent> ent, ref EndCollideEvent args)
+    private void OnResinSlowdownEndCollide(Entity<ResinSlowdownModifierComponent> ent, ref EndCollideEvent args)
     {
         var other = args.OtherEntity;
-        if (_affectedQuery.TryComp(other, out var affected) && affected.OnXenoWeeds)
+        if (_affectedQuery.TryComp(other, out var affected) && affected.OnXenoSlowResin)
+            _toUpdate.Add(other);
+    }
+
+    private void OnResinSpeedupStartCollide(Entity<ResinSpeedupModifierComponent> ent, ref StartCollideEvent args)
+    {
+        var other = args.OtherEntity;
+        if (_affectedQuery.TryComp(other, out var affected) && !affected.OnXenoFastResin)
+            _toUpdate.Add(other);
+    }
+
+    private void OnResinSpeedupEndCollide(Entity<ResinSpeedupModifierComponent> ent, ref EndCollideEvent args)
+    {
+        var other = args.OtherEntity;
+        if (_affectedQuery.TryComp(other, out var affected) && affected.OnXenoFastResin)
             _toUpdate.Add(other);
     }
 
