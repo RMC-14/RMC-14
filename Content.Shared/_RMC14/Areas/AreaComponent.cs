@@ -1,4 +1,5 @@
-﻿using Robust.Shared.GameStates;
+﻿using Content.Shared._RMC14.WeedKiller;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Areas;
 
@@ -43,6 +44,7 @@ public sealed partial class AreaComponent : Component
     public bool BuildSpecial;
 
     [DataField, AutoNetworkedField]
+    [Access(typeof(AreaSystem), typeof(WeedKillerSystem))]
     public bool ResinAllowed = true;
 
     [DataField, AutoNetworkedField]
@@ -72,4 +74,7 @@ public sealed partial class AreaComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool LandingZone;
+
+    [DataField, AutoNetworkedField]
+    public string? LinkedLz;
 }
