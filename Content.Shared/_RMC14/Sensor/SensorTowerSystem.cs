@@ -35,11 +35,6 @@ public sealed class SensorTowerSystem : EntitySystem
         SubscribeLocalEvent<SensorTowerComponent, SensorTowerDestroyDoAfterEvent>(OnSensorTowerDestroyDoAfter);
     }
 
-    private void OnSensorTowerMapInit(Entity<SensorTowerComponent> ent, ref MapInitEvent args)
-    {
-        UpdateAppearance(ent);
-    }
-
     private void OnTacticalMapIncludeXenos(ref TacticalMapIncludeXenosEvent ev)
     {
         var towers = EntityQueryEnumerator<SensorTowerComponent>();
