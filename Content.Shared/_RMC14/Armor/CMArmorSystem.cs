@@ -233,11 +233,20 @@ public sealed class CMArmorSystem : EntitySystem
         }
 
         args.Damage = new DamageSpecifier(args.Damage);
-        Resist(args.Damage, ev.Armor, ArmorGroup, false);
-        Resist(args.Damage, ev.Bio, BioGroup);
+        var meleeMod = 4;
+        var rangedMod = 4;
+
+        if (TryComp<RMCArmorModifierComponent>(ent, out var mod))
+        {
+            meleeMod = mod.MeleeArmorModifier;
+            rangedMod = mod.RangedArmorModifier;
+        }
+
+        Resist(args.Damage, ev.Armor, ArmorGroup, 5);
+        Resist(args.Damage, ev.Bio, BioGroup, 4);
     }
 
-    private void Resist(DamageSpecifier damage, int armor, ProtoId<DamageGroupPrototype> group, bool useRangeMult = true)
+    private void Resist(DamageSpecifier damage, int armor, ProtoId<DamageGroupPrototype> group, int mult)
     {
         armor = Math.Max(armor, 0);
         if (armor <= 0)
@@ -258,9 +267,6 @@ public sealed class CMArmorSystem : EntitySystem
         var newDamage = damage.GetTotal();
         if (newDamage != FixedPoint2.Zero && newDamage < armor * 2)
         {
-            var mult = 5;
-            if (useRangeMult)
-                mult = 4;
 
             var damageWithArmor = FixedPoint2.Max(0, newDamage * mult - armor);
 
