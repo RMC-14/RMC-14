@@ -17,7 +17,6 @@ grid_impulse = false
 max_process_time = 1
 
 [audio]
-ahelp_sound = "/Audio/_RMC14/Effects/Admin/adminhelp.ogg"
 alert.explosion_min_intensity = -1
 
 [auth]

@@ -93,6 +93,7 @@
       Brute:
         collection: XenoResinBreak
   - type: ExplosionRandomResistance
+  - type: DeletedByWeedKiller
 #  - type: Physics
 #    bodyType: Static
 #  - type: FootstepModifier
@@ -109,7 +110,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
-    drawdepth: FloorTiles
+    drawdepth: DeadMobs
     layers:
     - state: weed0
     - state: constructionnode

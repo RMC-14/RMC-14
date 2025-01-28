@@ -40,6 +40,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaBigredGround
@@ -621,7 +622,7 @@
     resinAllowed: false
     avoidBioscan: false
     noTunnel: true
-    unweedable: false
+    unweedable: true
     buildSpecial: false
 
 - type: entity
@@ -657,7 +658,7 @@
   - type: Sprite
     state: northwest
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaBigredv2OutsideNw
@@ -697,7 +698,7 @@
   - type: Sprite
     state: west
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -731,7 +732,7 @@
   - type: Sprite
     state: southwest
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaBigredv2
@@ -838,7 +839,7 @@
     medevac: false
     OB: true
     supplyDrop: true
-    resinAllowed: false
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -856,6 +857,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -874,6 +876,7 @@
     OB: true
     supplyDrop: true
     minimapColor: '#A22D2DEE'
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -892,6 +895,7 @@
     OB: true
     supplyDrop: true
     minimapColor: '#3DBF75EE'
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -946,6 +950,7 @@
     OB: true
     supplyDrop: false
     minimapColor: '#3DBF75EE'
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1065,7 +1070,7 @@
     medevac: true
     OB: true
     supplyDrop: true
-    resinAllowed: false
+    linkedLz: dropship_lz1
     landingZone: true
 
 - type: entity
@@ -1084,7 +1089,7 @@
     medevac: true
     OB: true
     supplyDrop: true
-    resinAllowed: false
+    linkedLz: dropship_lz2
     landingZone: true
     minimapColor: '#EBE5E5E3'
 
@@ -1105,7 +1110,7 @@
     medevac: false
     OB: true
     supplyDrop: false
-    resinAllowed: false
+    linkedLz: dropship_lz1
     landingZone: true
 
 - type: entity
@@ -1115,6 +1120,7 @@
   components:
   - type: Area
     landingZone: false
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaBigredv2OutsideTelecomm
@@ -1123,6 +1129,7 @@
   components:
   - type: Area
     landingZone: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaBigredv2OutsideTelecomm
@@ -1180,6 +1187,15 @@
     medevac: false
     OB: true
     supplyDrop: true
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaBigredv2OutsideEngineering
+  id: RMCAreaBigredv2OutsideEngineeringReactor
+  name: Main Reactor
+  components:
+  - type: Area
+    linkedLz: null
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1360,7 +1376,6 @@
     state: tcomsatcham
   - type: Area
     minimapColor: '#EBE5E5E3'
-    resinAllowed: false
 
 - type: entity
   parent: RMCAreaBigredv2Landing
@@ -1388,6 +1403,7 @@
     medevac: false
     OB: true
     supplyDrop: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1405,6 +1421,7 @@
     medevac: false
     OB: true
     supplyDrop: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1422,6 +1439,7 @@
     medevac: false
     OB: true
     supplyDrop: false
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1439,6 +1457,7 @@
     medevac: false
     OB: true
     supplyDrop: false
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaBigredv2Outside

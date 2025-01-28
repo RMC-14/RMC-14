@@ -15,6 +15,11 @@
     - map: [ "screen" ]
       state: bluealert
       visible: false
+    - map: [ "enum.RMCAlertLevelDisplayVisualLayers.HourTens" ]
+    - map: [ "enum.RMCAlertLevelDisplayVisualLayers.HourOnes" ]
+    - map: [ "enum.RMCAlertLevelDisplayVisualLayers.Separator" ]
+    - map: [ "enum.RMCAlertLevelDisplayVisualLayers.MinuteTens" ]
+    - map: [ "enum.RMCAlertLevelDisplayVisualLayers.MinuteOnes" ]
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -24,4 +29,31 @@
           Blue: { state: bluealert, visible: true }
           Red: { state: redalert, visible: true }
           Delta: { state: evac, visible: true }
+        enum.RMCAlertLevelDisplayVisualLayers.HourTens:
+          Green: { visible: true }
+          Blue: { visible: false }
+          Red: { visible: false }
+          Delta: { visible: false }
+        enum.RMCAlertLevelDisplayVisualLayers.HourOnes:
+          Green: { visible: true }
+          Blue: { visible: false }
+          Red: { visible: false }
+          Delta: { visible: false }
+        enum.RMCAlertLevelDisplayVisualLayers.Separator:
+          Green: { visible: true }
+          Blue: { visible: false }
+          Red: { visible: false }
+          Delta: { visible: false }
+        enum.RMCAlertLevelDisplayVisualLayers.MinuteTens:
+          Green: { visible: true }
+          Blue: { visible: false }
+          Red: { visible: false }
+          Delta: { visible: false }
+        enum.RMCAlertLevelDisplayVisualLayers.MinuteOnes:
+          Green: { visible: true }
+          Blue: { visible: false }
+          Red: { visible: false }
+          Delta: { visible: false }
   - type: RMCAlertLevelDisplay
+  - type: WallMount
+    arc: 360

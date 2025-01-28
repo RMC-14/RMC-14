@@ -68,3 +68,13 @@
   - type: Pullable
   - type: Physics
     bodyType: Dynamic
+  - type: Damageable
+    damageContainer: StructuralMarine
+  - type: Destructible # TODO RMC14 some of these should just be knocked over with a do after by xenos
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 500
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
