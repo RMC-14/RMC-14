@@ -242,8 +242,5 @@ public sealed class RMCSlowSystem : EntitySystem
 
             RemCompDeferred<RMCRootedComponent>(uid);
         }
-
-
     }
-
 }
