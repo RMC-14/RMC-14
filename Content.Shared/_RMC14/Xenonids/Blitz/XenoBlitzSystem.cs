@@ -1,4 +1,4 @@
-﻿using Content.Shared.Coordinates;
+using Content.Shared.Coordinates;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
@@ -13,6 +13,7 @@ using Robust.Shared.Timing;
 using Content.Shared._RMC14.Xenonids.Sweep;
 using Robust.Shared.Audio.Systems;
 using Content.Shared._RMC14.Shields;
+using Content.Shared.Examine;
 
 namespace Content.Shared._RMC14.Xenonids.Blitz;
 
@@ -30,6 +31,7 @@ public sealed class XenoBlitzSystem : EntitySystem
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly VanguardShieldSystem _vanguard = default!;
+    [Dependency] private readonly ExamineSystemShared _examine = default!;
 
     public override void Initialize()
     {
@@ -95,6 +97,9 @@ public sealed class XenoBlitzSystem : EntitySystem
         foreach (var hit in _lookup.GetEntitiesInRange<MobStateComponent>(_transform.GetMapCoordinates(xeno), xeno.Comp.Range))
         {
             if (!_xeno.CanAbilityAttackTarget(xeno, hit))
+                continue;
+
+            if (!_examine.InRangeUnOccluded(xeno, hit, xeno.Comp.Range))
                 continue;
 
             hits++;

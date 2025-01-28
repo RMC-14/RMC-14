@@ -1,9 +1,10 @@
-﻿using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
+using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
@@ -29,6 +30,7 @@ public sealed class XenoTailSweepSystem : EntitySystem
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private readonly ExamineSystemShared _examine = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _hit = new();
 
@@ -61,13 +63,16 @@ public sealed class XenoTailSweepSystem : EntitySystem
             return;
 
         _hit.Clear();
-        _entityLookup.GetEntitiesInRange(transform.Coordinates, 1.25f, _hit);
+        _entityLookup.GetEntitiesInRange(transform.Coordinates, xeno.Comp.Range, _hit);
 
         var origin = _transform.GetMapCoordinates(xeno);
         foreach (var marine in _hit)
         {
             if (!_xeno.CanAbilityAttackTarget(xeno, marine))
-                return;
+                continue;
+
+            if (!_examine.InRangeUnOccluded(xeno, marine, xeno.Comp.Range))
+                continue;
 
             _rmcPulling.TryStopAllPullsFromAndOn(marine);
 
