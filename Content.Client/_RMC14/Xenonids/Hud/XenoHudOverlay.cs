@@ -1,5 +1,4 @@
 using System.Numerics;
-using System.Linq;
 using Content.Client._RMC14.Medical.HUD;
 using Content.Client._RMC14.NightVision;
 using Content.Shared._RMC14.Mobs;
