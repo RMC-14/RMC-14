@@ -49,44 +49,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
         _xenoNestSurfaceQuery = GetEntityQuery<XenoNestSurfaceComponent>();
         _xenoWeedableQuery = GetEntityQuery<XenoWeedableComponent>();
         _xenoWeedsQuery = GetEntityQuery<XenoWeedsComponent>();
-
-        SubscribeLocalEvent<ReplaceWeedSourceOnWeedingComponent, AfterEntityWeedingEvent>(OnWeedOver);
     }
-
-    private void OnWeedOver(Entity<ReplaceWeedSourceOnWeedingComponent> weedSource, ref AfterEntityWeedingEvent args)
-    {
-        var (ent, comp) = weedSource;
-        var weededEntity = _entities.GetEntity(args.CoveredEntity);
-
-        if (!TryComp(ent, out XenoWeedsComponent? weedComp) ||
-            Prototype(weededEntity) is not EntityPrototype weededEntityProto ||
-            !comp.ReplacementPairs.TryGetValue(weededEntityProto.ID, out var replacementId))
-        {
-            return;
-        }
-
-        var newWeedSource = SpawnAtPosition(replacementId, weedSource.Owner.ToCoordinates());
-        if (!TryComp(newWeedSource, out XenoWeedsComponent? newWeedSourceComp))
-        {
-            QueueDel(newWeedSource);
-            return;
-        }
-
-        _hive.SetSameHive(ent, newWeedSource);
-
-        var curWeeds = weedComp.Spread;
-        foreach (var curWeed in curWeeds)
-        {
-            var curWeedComp = EnsureComp<XenoWeedsComponent>(curWeed);
-            curWeedComp.Range = newWeedSourceComp.Range;
-            curWeedComp.Source = newWeedSource;
-            newWeedSourceComp.Spread.Add(curWeed);
-        }
-        curWeeds.Clear();
-        RemComp<XenoWeedsSpreadingComponent>(newWeedSource);
-        QueueDel(ent);
-    }
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);

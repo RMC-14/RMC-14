@@ -1,7 +1,10 @@
+using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
@@ -41,6 +44,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     [Dependency] private readonly ITileDefinitionManager _tile = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly EntityManager _entities = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
     private readonly HashSet<EntityUid> _toUpdate = new();
 
@@ -72,6 +77,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         SubscribeLocalEvent<XenoWeedsComponent, EndCollideEvent>(OnWeedsEndCollide);
 
         SubscribeLocalEvent<XenoWeedsSpreadingComponent, MapInitEvent>(OnSpreadingMapInit);
+        SubscribeLocalEvent<ReplaceWeedSourceOnWeedingComponent, AfterEntityWeedingEvent>(OnWeedOver);
 
         UpdatesAfter.Add(typeof(SharedPhysicsSystem));
     }
@@ -255,6 +261,39 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         Dirty(ent);
     }
 
+    private void OnWeedOver(Entity<ReplaceWeedSourceOnWeedingComponent> weedSource, ref AfterEntityWeedingEvent args)
+    {
+        var (ent, comp) = weedSource;
+        var weededEntity = _entities.GetEntity(args.CoveredEntity);
+
+        if (!TryComp(ent, out XenoWeedsComponent? weedComp) ||
+            Prototype(weededEntity) is not EntityPrototype weededEntityProto ||
+            !comp.ReplacementPairs.TryGetValue(weededEntityProto.ID, out var replacementId))
+        {
+            return;
+        }
+
+        var newWeedSource = SpawnAtPosition(replacementId, weedSource.Owner.ToCoordinates());
+        if (!TryComp(newWeedSource, out XenoWeedsComponent? newWeedSourceComp))
+        {
+            QueueDel(newWeedSource);
+            return;
+        }
+
+        _hive.SetSameHive(ent, newWeedSource);
+
+        var curWeeds = weedComp.Spread;
+        foreach (var curWeed in curWeeds)
+        {
+            var curWeedComp = EnsureComp<XenoWeedsComponent>(curWeed);
+            curWeedComp.Range = newWeedSourceComp.Range;
+            curWeedComp.Source = newWeedSource;
+            newWeedSourceComp.Spread.Add(curWeed);
+        }
+        curWeeds.Clear();
+        RemComp<XenoWeedsSpreadingComponent>(newWeedSource);
+        QueueDel(ent);
+    }
     public bool CanPlaceWeedsPopup(Entity<MapGridComponent> grid, Vector2i tile, EntityUid? user, bool semiWeedable = false, bool source = false)
     {
         void GenericPopup()
