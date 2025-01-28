@@ -55,3 +55,5 @@
           Red: { visible: false }
           Delta: { visible: false }
   - type: RMCAlertLevelDisplay
+  - type: WallMount
+    arc: 360

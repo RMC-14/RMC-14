@@ -7,6 +7,7 @@ using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
+using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Network;
@@ -18,6 +19,7 @@ namespace Content.Shared._RMC14.Chemistry;
 public abstract class SharedRMCChemistrySystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -38,6 +40,8 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
 
         SubscribeLocalEvent<RMCToggleableSolutionTransferComponent, MapInitEvent>(OnToggleableSolutionTransferMapInit);
         SubscribeLocalEvent<RMCToggleableSolutionTransferComponent, GetVerbsEvent<AlternativeVerb>>(OnToggleableSolutionTransferVerbs);
+
+        SubscribeLocalEvent<RMCSolutionTransferWhitelistComponent, SolutionTransferAttemptEvent>(OnTransferWhitelistAttempt);
 
         Subs.BuiEvents<RMCChemicalDispenserComponent>(RMCChemicalDispenserUi.Key,
             subs =>
@@ -133,6 +137,13 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
                 }
             },
         });
+    }
+
+    private void OnTransferWhitelistAttempt(Entity<RMCSolutionTransferWhitelistComponent> ent, ref SolutionTransferAttemptEvent args)
+    {
+        var other = ent.Owner == args.From ? args.To : args.From;
+        if (_entityWhitelist.IsWhitelistFail(ent.Comp.Whitelist, other))
+            args.Cancel(Loc.GetString(ent.Comp.Popup));
     }
 
     private void OnChemicalDispenserSettingMsg(Entity<RMCChemicalDispenserComponent> ent, ref RMCChemicalDispenserDispenseSettingBuiMsg args)

@@ -231,6 +231,11 @@
     solution: tank
   - type: DrawableSolution
     solution: tank
+  - type: RMCSolutionTransferWhitelist
+    popup: rmc-solution-transfer-whitelist-failed-not-welding-tank
+    whitelist:
+      tags:
+      - RMCTankFuel
 
 - type: entity
   parent: RMCSatchelWelder

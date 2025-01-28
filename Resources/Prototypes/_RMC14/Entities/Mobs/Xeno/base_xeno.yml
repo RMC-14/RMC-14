@@ -302,9 +302,6 @@
   abstract: true
   id: CMXenoPrying
   components:
-  - type: Tool
-    qualities:
-    - Prying
   - type: Prying
     pryPowered: true
     speedModifier: 2.7

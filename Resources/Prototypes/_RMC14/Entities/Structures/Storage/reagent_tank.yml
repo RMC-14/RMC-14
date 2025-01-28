@@ -102,3 +102,9 @@
         Heat: 100
   - type: Label
     currentLabel: reagent-name-welding-fuel
+  - type: Tag
+    tags:
+    - RMCTankFuel
+
+- type: Tag
+  id: RMCTankFuel

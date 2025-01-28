@@ -59,6 +59,8 @@
           tags:
           - Sidearm
 #          - FlareGun
+          sizes:
+          - Medium
   - type: CMHolster
   - type: CMItemSlots
 
