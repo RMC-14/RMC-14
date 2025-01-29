@@ -1,4 +1,3 @@
-using Content.Server._RMC14.Xenonids.Construction.EggMorpher;
 using Content.Server.Ghost.Roles;
 using Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
 using Content.Shared._RMC14.Xenonids.Egg;
@@ -85,7 +84,7 @@ public sealed class XenoEggRoleSystem : EntitySystem
         if (!SharedChecks(ent, user))
             return;
 
-        if (_eggMorpherSystem.TryCreateParasiteFromEggMorpher(ent, out var parasite))
+        if (ent.Comp.CurParasites > ent.Comp.ReservedParasites && _eggMorpherSystem.TryCreateParasiteFromEggMorpher(ent, out var parasite))
         {
             if (_actor.TryGetSession(user, out var session) && session != null)
                 _ghostRole.GhostRoleInternalCreateMindAndTransfer(session, parasite.Value, parasite.Value);

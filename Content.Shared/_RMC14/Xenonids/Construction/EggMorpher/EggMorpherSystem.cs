@@ -1,11 +1,10 @@
-using Content.Shared._RMC14.Hands;
-using Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
+using Content.Shared.Examine;
 using Content.Shared.Ghost;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -21,27 +20,29 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Content.Server._RMC14.Xenonids.Construction.EggMorpher;
+namespace Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
 
-public sealed partial class EggMorpherSystem : SharedEggMorpherSystem
+public sealed partial class EggMorpherSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _time = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedHandsSystem _hand = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly INetManager _net = default!;
+
     public override void Initialize()
     {
         base.Initialize();
+
+        SubscribeLocalEvent<EggMorpherComponent, ExaminedEvent>(OnExamineEvent);
 
         SubscribeLocalEvent<EggMorpherComponent, InteractHandEvent>(OnInteractHand);
         SubscribeLocalEvent<EggMorpherComponent, InteractUsingEvent>(OnInteractUsing);
@@ -52,41 +53,29 @@ public sealed partial class EggMorpherSystem : SharedEggMorpherSystem
 
         SubscribeLocalEvent<EggMorpherComponent, StepTriggerAttemptEvent>(OnEggMorpherStepAttempt);
         SubscribeLocalEvent<EggMorpherComponent, StepTriggeredOffEvent>(OnEggMorpherStepTriggered);
-
     }
 
-    public override void Update(float frameTime)
+    private void OnExamineEvent(Entity<EggMorpherComponent> eggMorpher, ref ExaminedEvent args)
     {
-        base.Update(frameTime);
-
-        var curTime = _time.CurTime;
-        var eggMorpherQuery = EntityQueryEnumerator<EggMorpherComponent>();
-        while (eggMorpherQuery.MoveNext(out var eggMorpherEnt, out var eggMorpherComp))
+        if (!HasComp<XenoComponent>(args.Examiner))
         {
-            if (eggMorpherComp.GrowMaxParasites <= eggMorpherComp.CurParasites)
-            {
-                continue;
-            }
+            return;
+        }
 
-            var newSpawnTime = GetParasiteSpawnCooldown((eggMorpherEnt, eggMorpherComp)) + curTime;
-
-            if (eggMorpherComp.NextSpawnAt < curTime)
-            {
-                eggMorpherComp.CurParasites++;
-                eggMorpherComp.NextSpawnAt = newSpawnTime;
-                Dirty(eggMorpherEnt, eggMorpherComp);
-                continue;
-            }
-
-            if (newSpawnTime < eggMorpherComp.NextSpawnAt || eggMorpherComp.NextSpawnAt is null)
-            {
-                eggMorpherComp.NextSpawnAt = newSpawnTime;
-            }
+        using (args.PushGroup(nameof(EggMorpherComponent)))
+        {
+            args.PushMarkup(Loc.GetString("rmc-xeno-construction-egg-morpher-examine", ("cur_paras", eggMorpher.Comp.CurParasites), ("max_paras", eggMorpher.Comp.MaxParasites)));
         }
     }
 
     private void OnInteractHand(Entity<EggMorpherComponent> eggMorpher, ref InteractHandEvent args)
     {
+        if (_net.IsClient)
+        {
+            args.Handled = true;
+            return;
+        }
+
         var (ent, comp) = eggMorpher;
         var user = args.User;
 
@@ -123,6 +112,12 @@ public sealed partial class EggMorpherSystem : SharedEggMorpherSystem
     }
     private void OnInteractUsing(Entity<EggMorpherComponent> eggMorpher, ref InteractUsingEvent args)
     {
+        if (_net.IsClient)
+        {
+            args.Handled = true;
+            return;
+        }
+
         var (ent, comp) = eggMorpher;
 
         var user = args.User;
@@ -150,7 +145,6 @@ public sealed partial class EggMorpherSystem : SharedEggMorpherSystem
         QueueDel(used);
         comp.CurParasites++;
     }
-
 
     private void OnChangeParasiteReserve(Entity<EggMorpherComponent> eggMorpher, ref XenoChangeParasiteReserveMessage args)
     {
@@ -191,22 +185,6 @@ public sealed partial class EggMorpherSystem : SharedEggMorpherSystem
 
             args.Verbs.Add(parasiteVerb);
         }
-    }
-
-    public bool TryCreateParasiteFromEggMorpher(Entity<EggMorpherComponent> eggMorpher, [NotNullWhen(true)] out EntityUid? parasite)
-    {
-        parasite = null;
-
-        var (ent, comp) = eggMorpher;
-        if (comp.CurParasites <= comp.ReservedParasites || comp.CurParasites <= 0)
-        {
-            return false;
-        }
-        comp.CurParasites--;
-
-        parasite = SpawnAtPosition(EggMorpherComponent.ParasitePrototype, ent.ToCoordinates());
-        Dirty(eggMorpher);
-        return true;
     }
 
     private void OnEggMorpherStepAttempt(Entity<EggMorpherComponent> eggMorpher, ref StepTriggerAttemptEvent args)
@@ -250,6 +228,35 @@ public sealed partial class EggMorpherSystem : SharedEggMorpherSystem
 
         return true;
     }
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var curTime = _time.CurTime;
+        var eggMorpherQuery = EntityQueryEnumerator<EggMorpherComponent>();
+        while (eggMorpherQuery.MoveNext(out var eggMorpherEnt, out var eggMorpherComp))
+        {
+            if (eggMorpherComp.GrowMaxParasites <= eggMorpherComp.CurParasites)
+            {
+                continue;
+            }
+
+            var newSpawnTime = GetParasiteSpawnCooldown((eggMorpherEnt, eggMorpherComp)) + curTime;
+
+            if (eggMorpherComp.NextSpawnAt < curTime)
+            {
+                eggMorpherComp.CurParasites++;
+                eggMorpherComp.NextSpawnAt = newSpawnTime;
+                Dirty(eggMorpherEnt, eggMorpherComp);
+                continue;
+            }
+
+            if (newSpawnTime < eggMorpherComp.NextSpawnAt || eggMorpherComp.NextSpawnAt is null)
+            {
+                eggMorpherComp.NextSpawnAt = newSpawnTime;
+            }
+        }
+    }
 
     private TimeSpan GetParasiteSpawnCooldown(Entity<EggMorpherComponent> eggMorpher)
     {
@@ -265,5 +272,21 @@ public sealed partial class EggMorpherSystem : SharedEggMorpherSystem
         }
 
         return eggMorpher.Comp.StandardSpawnCooldown;
+    }
+
+    public bool TryCreateParasiteFromEggMorpher(Entity<EggMorpherComponent> eggMorpher, [NotNullWhen(true)] out EntityUid? parasite)
+    {
+        parasite = null;
+
+        var (ent, comp) = eggMorpher;
+        if (comp.CurParasites <= 0)
+        {
+            return false;
+        }
+        comp.CurParasites--;
+
+        parasite = SpawnAtPosition(EggMorpherComponent.ParasitePrototype, ent.ToCoordinates());
+        Dirty(eggMorpher);
+        return true;
     }
 }
