@@ -224,6 +224,8 @@
     whitelist:
       tags:
       - RMCTankFuel
+      components:
+      - Welder
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Back/Backpacks/Marines/welder/jungle-desert-classic.rsi

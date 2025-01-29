@@ -236,6 +236,8 @@
     whitelist:
       tags:
       - RMCTankFuel
+      components:
+      - Welder
 
 - type: entity
   parent: RMCSatchelWelder
