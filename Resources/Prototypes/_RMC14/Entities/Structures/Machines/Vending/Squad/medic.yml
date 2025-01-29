@@ -98,7 +98,8 @@
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
         points: 18
-    #    CMM40HIDPIncendiaryPacketx3grenades: 18P
+      - id: RMCPacketGrenadeIncendiaryFilled
+        points: 18
     #    CMM40HPDPWhitePhosphorusPacketx3grenades: 18P
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
@@ -135,13 +136,14 @@
         points: 16
     - name: Restricted Firearms
       entries:
-      - id: RMCMK80Case
+      - id: RMCGunCasePistolMK80
         points: 8
-      - id: RMCSmartPistolCase
+      - id: RMCGunCasePistolSmart
         points: 12
     - name: Clothing Items
       entries:
       - id: RMCPouchMacheteFilled
+        name: machete pouch (Full)
         points: 8
       - id: RMCBackpackRTO
         points: 15
@@ -230,13 +232,13 @@
       choices: { RMCPouch: 2 }
       entries:
       - id: RMCPouchReagentCanisterTricordrazineRevival
-        recommended: true
-     #- id: RMCPouchMedkit
-#       recommended: true
         name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
+        recommended: true
+      - id: RMCPouchMedkit
+        recommended: true
 #     - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
 #       name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
-#       recommended: true  
+#       recommended: true
       - id: RMCPouchAutoinjector
       - id: RMCPouchFirstResponder
       - id: RMCPouchReagentCanisterBicaridine
@@ -248,8 +250,8 @@
       - id: RMCPouchReagentCanister
         name: Pressurized Reagent Canister Pouch\n(EMPTY)
       - id: RMCPouchVialFill
+        name: vial pouch (Full)
       - id: RMCPouchMedical
-        recommended: true # TODO unrecommend when medkit pouch is real
       - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
       - id: RMCPouchFirstAidSplintsGauzeOintment

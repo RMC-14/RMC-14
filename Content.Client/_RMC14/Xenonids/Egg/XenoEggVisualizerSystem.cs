@@ -38,7 +38,8 @@ public sealed class XenoEggVisualizerSystem : EntitySystem
         if (string.IsNullOrWhiteSpace(state))
             return;
 
-        sprite.LayerSetState(XenoEggLayers.Base, state);
+        if (sprite.LayerMapTryGet(XenoEggLayers.Base, out var layer))
+            sprite.LayerSetState(layer, state);
     }
 
     private void OnStartup(Entity<DestroyedXenoEggComponent> ent, ref ComponentStartup args)

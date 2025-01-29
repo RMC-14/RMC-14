@@ -44,7 +44,7 @@
         Heat: 3
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_resin_trap.rsi
-    drawdepth: FloorTiles
+    drawdepth: FloorObjects
     layers:
     - state: trap
       map: [ "enum.XenoResinHoleLayers.Base" ]

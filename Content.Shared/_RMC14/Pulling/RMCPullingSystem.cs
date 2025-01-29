@@ -1,6 +1,7 @@
 ﻿using System.Numerics;
 using Content.Shared._RMC14.Fireman;
 using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
@@ -26,6 +27,7 @@ namespace Content.Shared._RMC14.Pulling;
 
 public sealed class RMCPullingSystem : EntitySystem
 {
+    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -49,8 +51,12 @@ public sealed class RMCPullingSystem : EntitySystem
 
     private const string PullEffect = "CMEffectGrab";
 
+    private EntityQuery<FiremanCarriableComponent> _firemanQuery;
+
     public override void Initialize()
     {
+        _firemanQuery = GetEntityQuery<FiremanCarriableComponent>();
+
         SubscribeLocalEvent<ParalyzeOnPullAttemptComponent, PullAttemptEvent>(OnParalyzeOnPullAttempt);
         SubscribeLocalEvent<InfectOnPullAttemptComponent, PullAttemptEvent>(OnInfectOnPullAttempt);
 
@@ -277,6 +283,30 @@ public sealed class RMCPullingSystem : EntitySystem
         _pulling.TryStopPull(puller.Pulling.Value, pullable, user);
     }
 
+    public void TryStopPullsOn(EntityUid puller)
+    {
+        if (!TryComp<PullableComponent>(puller, out var pullable) ||
+             pullable.Puller == null)
+        {
+            return;
+        }
+
+        _pulling.TryStopPull(puller, pullable);
+    }
+
+    public void TryStopAllPullsFromAndOn(EntityUid pullie)
+    {
+        TryStopPullsOn(pullie);
+
+       if (TryComp(pullie, out PullerComponent? puller) &&
+            puller.Pulling != null &&
+            TryComp(puller.Pulling, out PullableComponent? pullable2))
+        {
+            _pulling.TryStopPull(puller.Pulling.Value, pullable2, pullie);
+            return;
+        }
+    }
+
     private void OnPullAnimation(Entity<PullableComponent> ent, ref PullStartedMessage args)
     {
         if (args.PulledUid != ent.Owner)
@@ -378,18 +408,23 @@ public sealed class RMCPullingSystem : EntitySystem
             if ((input.HeldMoveButtons & MoveButtons.AnyDirection) == 0)
                 continue;
 
+            if (!_actionBlocker.CanMove(uid))
+                continue;
+
             _pulling.TryStopPull(uid, pullable);
         }
 
-        var pullableQuery = EntityQueryEnumerator<BeingPulledComponent, PullableComponent, TransformComponent, FiremanCarriableComponent>();
-        while (pullableQuery.MoveNext(out var uid, out _, out var pullable, out var xform, out var firemanCarry))
+        var pullableQuery = EntityQueryEnumerator<BeingPulledComponent, PullableComponent>();
+        while (pullableQuery.MoveNext(out var uid, out _, out var pullable))
         {
             if (pullable.Puller == null)
                 continue;
 
             var puller = pullable.Puller.Value;
+            if (!Exists(puller))
+                continue;
 
-            if (firemanCarry.BeingCarried)
+            if (_firemanQuery.TryComp(uid, out var fireman) && fireman.BeingCarried)
                 continue;
 
             if (HasComp<MouseRotatorComponent>(puller))
@@ -398,7 +433,7 @@ public sealed class RMCPullingSystem : EntitySystem
             if (!_timing.ApplyingState)
                 EnsureComp<NoRotateOnMoveComponent>(puller);
 
-            var pulledCoords = _transform.GetMapCoordinates(uid, xform: xform).Position;
+            var pulledCoords = _transform.GetMapCoordinates(uid).Position;
             var pullerCoords = _transform.GetMapCoordinates(puller).Position;
 
             var angle = (pulledCoords - pullerCoords).ToWorldAngle().GetCardinalDir().ToAngle();

@@ -181,6 +181,21 @@ public sealed class AreaSystem : EntitySystem
         return area.MortarPlacement;
     }
 
+    public bool CanOrbitalBombard(EntityCoordinates coordinates, out bool roofed)
+    {
+        roofed = false;
+        if (!TryGetArea(coordinates, out var area, out _, out _))
+            return false;
+
+        if (IsRoofed(coordinates, r => !r.Comp.CanOrbitalBombard))
+        {
+            roofed = true;
+            return false;
+        }
+
+        return area.OB;
+    }
+
     private bool IsRoofed(EntityCoordinates coordinates, Predicate<Entity<RoofingEntityComponent>> predicate)
     {
         var roofs = EntityQueryEnumerator<RoofingEntityComponent>();

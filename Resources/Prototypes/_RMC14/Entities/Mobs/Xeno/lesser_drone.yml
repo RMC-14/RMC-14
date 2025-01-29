@@ -63,15 +63,16 @@
     tailDamage:
       groups:
         Brute: 24
-  - type: Tackle  # min: 4, max: 5
-    threshold: 5
-    stun: 5
+  - type: Tackle
+    min: 4
+    max: 5
   - type: WhitelistPickup
     whitelist:
       components:
       - XenoParasite
       - XenoEgg
       - XenoFruit
+  - type: TunnelRenamer
   - type: MultiHandedHolder
     items:
     - hands: 2
@@ -97,3 +98,5 @@
     spray: XenoAcidSprayTrapWeak
   - type: Evasion
     evasion: 10
+  - type: XenoInhands
+    prefix: lesser

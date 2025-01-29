@@ -3,12 +3,14 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using Content.Server._RMC14.Discord;
 using Content.Server._RMC14.LinkAccount;
+using Content.Server._RMC14.Mentor;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Administration.Systems;
 using Content.Server.MoMMI;
 using Content.Server.Players.RateLimiting;
 using Content.Server.Preferences.Managers;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
@@ -48,6 +50,7 @@ internal sealed partial class ChatManager : IChatManager
     [Dependency] private readonly PlayerRateLimitManager _rateLimitManager = default!;
     [Dependency] private readonly LinkAccountManager _linkAccount = default!;
     [Dependency] private readonly RMCDiscordManager _discord = default!;
+    [Dependency] private readonly MentorManager _mentor = default!;
 
     /// <summary>
     /// The maximum length a player-sent message can be sent
@@ -227,6 +230,9 @@ internal sealed partial class ChatManager : IChatManager
             case OOCChatType.Admin:
                 SendAdminChat(player, message);
                 break;
+            case OOCChatType.Mentor:
+                SendMentorChat(player, message);
+                break;
         }
     }
 
@@ -298,6 +304,38 @@ internal sealed partial class ChatManager : IChatManager
         }
 
         _adminLogger.Add(LogType.Chat, $"Admin chat from {player:Player}: {message}");
+    }
+
+    private void SendMentorChat(ICommonSession player, string message)
+    {
+        if (!_mentor.IsMentor(player.UserId))
+        {
+            _adminLogger.Add(LogType.Chat, LogImpact.Extreme, $"{player:Player} attempted to send mentor chat message but was not mentor");
+            return;
+        }
+
+        var clients = _mentor.GetActiveMentors().Select(p => p.Channel);
+        var wrappedMessage = Loc.GetString("chat-manager-send-admin-chat-wrap-message",
+                                        ("adminChannelName", "MENTOR"),
+                                        ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
+
+        _discord.SendDiscordMentorMessage(player.Name, message);
+
+        foreach (var client in clients)
+        {
+            var isSource = client != player.Channel;
+            ChatMessageToOne(ChatChannel.MentorChat,
+                message,
+                wrappedMessage,
+                default,
+                false,
+                client,
+                audioPath: isSource ? _netConfigManager.GetClientCVar(client, RMCCVars.RMCMentorChatSound) : default,
+                audioVolume: isSource ? _netConfigManager.GetClientCVar(client, RMCCVars.RMCMentorChatVolume) : default,
+                author: player.UserId);
+        }
+
+        _adminLogger.Add(LogType.Chat, $"Mentor chat from {player:Player}: {message}");
     }
 
     #endregion
@@ -406,5 +444,6 @@ internal sealed partial class ChatManager : IChatManager
 public enum OOCChatType : byte
 {
     OOC,
-    Admin
+    Admin,
+    Mentor,
 }

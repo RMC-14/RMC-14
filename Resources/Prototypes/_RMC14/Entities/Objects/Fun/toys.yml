@@ -7,6 +7,40 @@
   - type: Sprite
     sprite: _RMC14/Objects/Fun/plushies.rsi
     state: debug
+  - type: UseDelay
+    delay: 120
+  - type: EmitSoundOnLand
+    sound:
+      collection: ToyFall
+  - type: EmitSoundOnCollide
+    sound:
+      collection: ToyFall
+
+- type: entity
+  parent: PlushieMoth
+  id: RMCPlushieMoth
+  components:
+  - type: UseDelay
+    delay: 120
+  - type: EmitSoundOnLand
+    sound:
+      collection: ToyFall
+  - type: EmitSoundOnCollide
+    sound:
+      collection: ToyFall
+
+- type: entity
+  parent: PlushieSharkGrey
+  id: RMCPlushieSharkGrey
+  components:
+  - type: UseDelay
+    delay: 120
+  - type: EmitSoundOnLand
+    sound:
+      collection: ToyFall
+  - type: EmitSoundOnCollide
+    sound:
+      collection: ToyFall
 
 - type: entity
   parent: CMPlushieBase

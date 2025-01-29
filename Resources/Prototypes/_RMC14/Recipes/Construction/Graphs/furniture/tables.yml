@@ -73,7 +73,7 @@
               amount: 1
           steps:
             - tool: Anchoring
-              doAfter: 1
+              doAfter: 5
 
     - node: Reinforced
       entity: CMTableReinforced
@@ -85,7 +85,7 @@
               amount: 1
           steps:
             - tool: Anchoring
-              doAfter: 1
+              doAfter: 5
 
     - node: Wood
       entity: CMTableWooden
@@ -97,7 +97,7 @@
               amount: 1
           steps:
             - tool: Anchoring
-              doAfter: 1
+              doAfter: 5
 
     - node: PoorWood
       entity: CMTableWoodenPoor
@@ -109,7 +109,7 @@
               amount: 1
           steps:
             - tool: Anchoring
-              doAfter: 1
+              doAfter: 5
 
     - node: FancyWood
       entity: CMTableWoodenFancy
@@ -121,7 +121,7 @@
               amount: 1
           steps:
             - tool: Anchoring
-              doAfter: 1
+              doAfter: 5
 
     - node: Gambling
       entity: CMTableWoodenGambling
@@ -133,7 +133,7 @@
               amount: 1
           steps:
             - tool: Anchoring
-              doAfter: 1
+              doAfter: 5
 
     - node: Almayer
       entity: CMTableAlmayer
@@ -145,4 +145,4 @@
               amount: 1
           steps:
             - tool: Anchoring
-              doAfter: 1
+              doAfter: 5

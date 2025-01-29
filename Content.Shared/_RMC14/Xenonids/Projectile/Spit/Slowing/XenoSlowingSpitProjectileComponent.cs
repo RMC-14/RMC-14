@@ -7,6 +7,9 @@ namespace Content.Shared._RMC14.Xenonids.Projectile.Spit.Slowing;
 public sealed partial class XenoSlowingSpitProjectileComponent : Component
 {
     [DataField, AutoNetworkedField]
+    public bool SuperSlow = true;
+
+    [DataField, AutoNetworkedField]
     public TimeSpan Slow = TimeSpan.FromSeconds(8);
 
     [DataField, AutoNetworkedField]

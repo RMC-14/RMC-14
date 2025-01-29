@@ -9,9 +9,7 @@
   - type: Physics
     bodyType: Static
   - type: Transform
-    anchored: true
-    noRot: true
-  - type: Anchorable
+    anchored: false
   - type: Fixtures
     fixtures:
       fix1:

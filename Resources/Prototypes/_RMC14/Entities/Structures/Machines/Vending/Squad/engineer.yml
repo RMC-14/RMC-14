@@ -66,8 +66,8 @@
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
         points: 18
-    #- id: CMM40HIDPIncendiaryPacket3
-    #  points: 18
+      - id: RMCPacketGrenadeIncendiaryFilled
+        points: 18
     #- id: CMM40HPDPPhosphorusPacket3
     #  points: 18
       - id: RMCPacketGrenadeSmokeFilled
@@ -112,9 +112,9 @@
         points: 16
     - name: Restricted Firearms
       entries:
-      - id: RMCMK80Case
+      - id: RMCGunCasePistolMK80
         points: 8
-      - id: RMCSmartPistolCase
+      - id: RMCGunCasePistolSmart
         points: 12
     #- id: CMM240IncineratorUnit
     #  points: 12
@@ -125,8 +125,10 @@
     - name: Clothing Items
       entries:
       - id: RMCScabbardMacheteFilled
+        name: machete scabbard (Full)
         points: 6
       - id: RMCPouchMacheteFilled
+        name: machete pouch (Full)
         points: 8
       - id: RMCBackpackRTO
         points: 15
@@ -210,6 +212,7 @@
       choices: { CMBackpack: 1 }
       entries:
       - id: RMCScabbardMacheteFilled
+        name: machete scabbard (Full)
       - id: CMBackpackMarineTech
       - id: CMSatchelMarineTech
       - id: CMBackpackWelder
@@ -230,8 +233,11 @@
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltMortar
       - id: CMBeltUtilityFilled
-        recommended: true
+        name: M276 pattern toolbelt rig (Full)
+        # mandatory: true, TODO allow vendors to mark entries as mandatory
       - id: RMCBeltGrenade
+      - id: RMCBeltConstruction
+        recommended: true
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
@@ -246,7 +252,8 @@
       - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
         recommended: true
-      #- id: CMElectronicsPouchFull
+      - id: RMCPouchElectronicsFill
+        name: electronics pouch (Full)
       - id: RMCPouchExplosive
       - id: RMCPouchFlareFilled
         name: Flare pouch (Full)
@@ -256,7 +263,7 @@
       - id: RMCPouchGeneralMedium
       - id: RMCPouchPistol
       - id: RMCPouchToolsFill
-        name: Tools pouch (Filled)
+        name: Tools pouch (Full)
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
@@ -266,9 +273,59 @@
       - id: CMWebbing
       - id: CMWebbingPouch
       - id: CMWebbingHolster
+      - id: RMCToolWebbingSmallFilled
+        name: small tool webbing (Full)
     - name: Mask
       choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
       - id: RMCMaskRebreather
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechSCTTools
+  name: ColMarTech squad comTech tools vendor
+  description: A vending machine that stores various extra tools that are useful on the field.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessCombatTechPrep" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/tool.rsi
+    layers:
+    - state: "off"
+      map: [ "enum.VendingMachineVisualLayers.Base" ]
+    - state: "normal-unshaded"
+      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+  - type: CMAutomatedVendor
+    jobs:
+    - CMCombatTech
+    sections:
+    - name: Equipment
+      entries:
+      - id: CMBeltUtility
+        name: utility tool belt
+        amount: 4
+      - id: RMCCableCoil
+        amount: 4
+      - id: ClothingEyesGlassesMeson # TODO RMC14 welding goggles
+        amount: 2
+      - id: RMCEngineerKit
+        amount: 2
+    - name: Tools
+      entries:
+      - id: CMWelder
+        amount: 4
+      - id: CMCrowbar
+        amount: 4
+      - id: CMScrewdriver
+        amount: 4
+      - id: CMWirecutter
+        amount: 4
+      - id: CMWrench
+        amount: 4
+      - id: CMMultitool
+        amount: 4
+      - id: CMWelderSmall
+        amount: 2

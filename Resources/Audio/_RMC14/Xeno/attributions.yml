@@ -357,3 +357,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/19c2300177ed8da4d25d111aa1a7f8d356552a21/sound/effects/xeno_newlarva.ogg"
+
+- files: ["alien_tail_attack.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/weapons/alien_tail_attack.ogg"

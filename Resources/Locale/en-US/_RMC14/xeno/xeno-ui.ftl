@@ -7,3 +7,11 @@ xeno-ui-find-parasite-title = Find Parasite
 xeno-ui-find-parasite-spawn-button = Take Parasite
 xeno-ui-find-parasite-item = {$itemName} ({$areaName})
 xeno-ui-default-area-name = Unknown
+
+xeno-ui-name-tunnel-title = Name Tunnel
+xeno-ui-name-tunnel-submit-text = Apply Name
+xeno-ui-rename-tunnel-verb = Rename Tunnel
+xeno-ui-enter-tunnel-verb = Enter Tunnel
+
+xeno-ui-select-destination-tunnel-title = Select Destination Tunnel
+xeno-ui-select-destination-tunnel-submit-text = Select Tunnel

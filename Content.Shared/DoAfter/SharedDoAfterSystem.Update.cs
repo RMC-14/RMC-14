@@ -3,6 +3,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Physics;
+using Robust.Shared.Network;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.DoAfter;
@@ -13,6 +14,7 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
     [Dependency] private readonly SharedGravitySystem _gravity = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     private DoAfter[] _doAfters = Array.Empty<DoAfter>();
 
@@ -68,6 +70,19 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
                     dirty = true;
                 }
                 continue;
+            }
+
+            if (!doAfter.Completed && !doAfter.Cancelled && doAfter.Args.TargetEffect != null)
+            {
+                if (doAfter.LastEffectSpawnTime == null || time - doAfter.LastEffectSpawnTime.Value >= TimeSpan.FromSeconds(1))
+                {
+                    if (xformQuery.TryGetComponent(doAfter.Args.Target, out var targetXform))
+                    {
+                        if (_net.IsServer)
+                            SpawnAttachedTo(doAfter.Args.TargetEffect, targetXform.Coordinates);
+                        doAfter.LastEffectSpawnTime = time;
+                    }
+                }
             }
 
             if (ShouldCancel(doAfter, xformQuery, handsQuery))

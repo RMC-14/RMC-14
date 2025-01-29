@@ -4,6 +4,7 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
   id: CMXenoCarrier
   name: Carrier
   description: A strange-looking alien creature. It carries a number of scuttling jointed crablike creatures.
@@ -24,6 +25,10 @@
     - map: [ "enum.ParasiteOverlayLayers.LeftArm" ]
       visible: false
     - map: [ "enum.ParasiteOverlayLayers.Back" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
       visible: false
   - type: MobState
     allowedStates:
@@ -77,10 +82,12 @@
     tailDamage:
       groups:
         Brute: 42
-  - type: Tackle # min: 2, max: 4
-    threshold: 4
-    stun: 9
-    chance: 0.50
+  - type: Tackle
+    max: 4
+    chance: 0.5
+    stunMin: 4
+    stunMax: 5
+  - type: TunnelRenamer
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
@@ -117,3 +124,5 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: carrier
+  - type: XenoInhands
+    prefix: carrier

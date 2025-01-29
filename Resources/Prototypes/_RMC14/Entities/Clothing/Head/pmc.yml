@@ -9,6 +9,8 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/cap.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/PMC/cap.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: entity
   parent: ArmorHelmetPMC

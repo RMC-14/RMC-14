@@ -1,8 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
-using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
@@ -17,7 +17,6 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Popups;
-using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
@@ -40,9 +39,9 @@ public sealed class XenoDevourSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly EntityManager _entManager = default!;
 
     private EntityQuery<DevouredComponent> _devouredQuery;
     private EntityQuery<XenoDevourComponent> _xenoDevourQuery;
@@ -269,9 +268,10 @@ public sealed class XenoDevourSystem : EntitySystem
         _audio.PlayPredicted(xeno.Comp.RegurgitateSound, xeno, xeno);
         foreach (var ent in ents)
         {
+            var ev = new RegurgitateEvent(_entManager.GetNetEntity(xeno.Owner), _entManager.GetNetEntity(ent));
+            RaiseLocalEvent(xeno, ev);
+
             _stun.TryStun(ent, xeno.Comp.RegurgitationStun, true);
-            if (_net.IsServer)
-                SpawnAttachedTo(xeno.Comp.RegurgitateEffect, ent.ToCoordinates());
         }
     }
 
@@ -330,7 +330,8 @@ public sealed class XenoDevourSystem : EntitySystem
             return false;
         }
 
-        if (_mobState.IsIncapacitated(xeno))
+        if (_mobState.IsIncapacitated(xeno) ||
+            HasComp<XenoNestedComponent>(victim))
         {
             if (popup)
                 _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-cant-now"), victim, xeno);
@@ -424,6 +425,9 @@ public sealed class XenoDevourSystem : EntitySystem
         {
             return true;
         }
+
+        var ev = new RegurgitateEvent(_entManager.GetNetEntity(xeno.Owner), _entManager.GetNetEntity(devoured.Owner));
+        RaiseLocalEvent(xeno, ev);
 
         if (doFeedback)
             DoFeedback((xeno, xeno.Comp));

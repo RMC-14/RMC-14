@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Item;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
@@ -96,7 +97,12 @@ public abstract class SharedItemSystem : EntitySystem
         if (args.Handled)
             return;
 
-        args.Handled = _handsSystem.TryPickup(args.User, uid, animateUser: false);
+        if (_handsSystem.TryPickup(args.User, uid, animateUser: false))
+        {
+            args.Handled = true;
+            var ev = new ItemPickedUpEvent(args.User, uid);
+            RaiseLocalEvent(ref ev);
+        }
     }
 
     private void AddPickupVerb(EntityUid uid, ItemComponent component, GetVerbsEvent<InteractionVerb> args)

@@ -18,6 +18,10 @@
       sprite: _RMC14/Mobs/Xenonids/Queen/ovipositor.rsi
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
   - type: MobState
     allowedStates:
     - Alive
@@ -54,12 +58,10 @@
     - ActionXenoManageHive
 #    - ActionXenoRoyalJelly
 #    - ActionXenoMarkResin
-    # Mature
-#    - ActionXenoSpit
-#    - ActionXenoToggleSpitType
     tier: 0
     bypassTierCount: true
     unlockAt: 0
+    hudOffset: -0.1,0
   - type: XenoHeavy
   - type: XenoAcid
   - type: XenoConstruction
@@ -67,6 +69,8 @@
     - WallXenoResin
     - WallXenoMembrane
     - DoorXenoResin
+    - XenoStickyResin
+    - XenoFastResin
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
   - type: XenoDevour
@@ -92,10 +96,11 @@
       groups:
         Brute: 54
   - type: XenoOvipositorCapable
-  - type: Tackle # min: 2, max: 6
-    threshold: 4
-    stun: 11
+  - type: Tackle
     chance: 0.55
+    stunMin: 5
+    stunMax: 6
+  - type: TunnelRenamer
   - type: Fixtures
     fixtures:
       fix1:
@@ -173,8 +178,11 @@
     deadThreshold: 1100
     addComponents:
     - type: XenoScreech
+    - type: XenoToggleSpit
     addActions:
     - ActionXenoScreech
+    - ActionXenoSpitQueen
+    - ActionXenoToggleSpitType
   - type: RMCSize
     size: Immobile
   - type: RMCXenoDamageVisuals
@@ -205,6 +213,14 @@
   - type: ManageHive
   - type: HiveLeaderGranter
   - type: XenoHeal
+  - type: StunOnExplosionReceived
+    weak: false
+  - type: XenoSpit
+    projectileId: XenoQueenNeuroSpitProjectile
+    plasmaCost: 50
+  - type: CommendationGiver
+  - type: XenoInhands
+    prefix: queen
 
 - type: entity
   id: XenoLeaderPheromoneRelay
