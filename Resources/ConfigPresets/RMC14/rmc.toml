@@ -2,6 +2,7 @@
 screen_shake_intensity = 1
 
 [admin]
+alert.explosion_min_intensity = -1
 deadmin_on_join = true
 see_own_notes = true
 server_ban_erase_player = true
@@ -15,9 +16,6 @@ space_wind = false
 monstermos_rip_tiles = false
 grid_impulse = false
 max_process_time = 1
-
-[audio]
-alert.explosion_min_intensity = -1
 
 [auth]
 mode = 1
