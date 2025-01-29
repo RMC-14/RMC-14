@@ -16,6 +16,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Shared.StepTrigger.Systems;
+using Content.Shared.Tag;
 
 namespace Content.Server._RMC14.Xenonids.Construction;
 
@@ -29,6 +30,7 @@ public sealed class XenoHiveCoreSystem : SharedXenoHiveCoreSystem
     [Dependency] private readonly RMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly TagSystem _tagSystem = default!;
 
     public override void Initialize()
     {
@@ -156,9 +158,7 @@ public sealed class XenoHiveCoreSystem : SharedXenoHiveCoreSystem
 
     private bool CanTrigger(EntityUid user)
     {
-        return TryComp<XenoComponent>(user, out var xeno)
-               && xeno.Role.Id == "CMXenoLarva"
-               && _mobState.IsDead(user);
+        return _tagSystem.HasTag(user, "RMCXenoLarva") && _mobState.IsDead(user);
     }
 
     private void OnHiveCoreStepTriggered(Entity<HiveCoreComponent> core, ref StepTriggeredOffEvent args)
