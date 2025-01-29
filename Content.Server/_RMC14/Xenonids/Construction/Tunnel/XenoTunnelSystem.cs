@@ -1,15 +1,11 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.Administration.Logs;
-using Content.Server.Players;
-using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction;
-using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Hive;
-using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.ActionBlocker;
@@ -46,16 +42,15 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
-    [Dependency] private readonly SharedXenoResinHoleSystem _xenoResinHole = default!;
     [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruct = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly PlayerSystem _player = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
-    public int NextTempTunnelId
-    { get; private set; }
+
+    public int NextTempTunnelId { get; private set; }
+
     public override void Initialize()
     {
         base.Initialize();
@@ -115,13 +110,13 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         if (!_xenoPlasma.HasPlasmaPopup(xenoBuilder.Owner, args.PlasmaCost, false))
             return;
 
-        if (!Area.TryGetArea(location, out var area, out _, out _) || area.NoTunnel)
+        if (!Area.TryGetArea(location, out var area, out _) || area.Value.Comp.NoTunnel)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-area-tunnel"), xenoBuilder, xenoBuilder);
             return;
         }
 
-        if (_xenoWeeds.GetWeedsOnFloor((gridId, grid), location, true) is EntityUid weedSource)
+        if (_xenoWeeds.GetWeedsOnFloor((gridId, grid), location, true) is { } weedSource)
         {
             XenoPlaceResinTunnelDestroyWeedSourceDoAfterEvent weedRemovalEv = new()
             {
