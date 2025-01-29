@@ -37,6 +37,7 @@
   components:
     - type: RMCConstructionItem
       buildable:
+      - RMCBarbedWireBuild
       - RMCMetalBarricadeBuild
       - RMCMetalBarricadeFoldableBuild
       - RMCHandrailBuild

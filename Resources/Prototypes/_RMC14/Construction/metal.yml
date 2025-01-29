@@ -5,6 +5,19 @@
   isDivider: true
 
 - type: rmcConstruction
+  id: RMCBarbedWireBuild
+  name: barbed wire
+  prototype: CMBarricadeMetal
+  doAfterTime: 1
+  doAfterTimeMin: 1
+  skill: RMCSkillConstruction
+  materialCost: 1
+  stackAmounts:
+  - 5
+  - 10
+  - 20
+
+- type: rmcConstruction
   id: RMCMetalBarricadeBuild
   name: metal barricade
   prototype: CMBarricadeMetal
@@ -31,6 +44,13 @@
   doAfterTime: 2
   doAfterTimeMin: 1
   materialCost: 2
+
+- type: rmcConstruction
+  parent: RMCReinforcedWindowFrameBuild
+  id: RMCWindowFrameBuild
+  name: window frame
+  prototype: RMCWindowFrameAlmayer
+  materialCost: 5
 
 - type: rmcConstruction
   id: RMCComfyChairList
@@ -79,10 +99,3 @@
   id: RMCComfyChairTealBuild
   name: teal comfy chair
   prototype: CMChairComfyTeal
-
-- type: rmcConstruction
-  parent: RMCReinforcedWindowFrameBuild
-  id: RMCWindowFrameBuild
-  name: window frame
-  prototype: RMCWindowFrameAlmayer
-  materialCost: 5
