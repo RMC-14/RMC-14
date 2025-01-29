@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added xenos seeing each others position live while the Queen is in ovi.
-    type: Add
-  id: 779
-  time: '2024-10-04T10:39:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4239
 - author: FungiFellow
   changes:
   - message: Added the M276 Shotgun Shell Loading Rig
@@ -5105,5 +5098,23 @@
   id: 1278
   time: '2025-01-29T17:23:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5487
+- author: DrSmugleaf
+  changes:
+  - message: Fixed weed killer not removing resin traps and sticky/fast resin in its
+      area.
+    type: Fix
+  - message: Fixed weed killer not also disabling weed node placement for 8 minutes.
+    type: Fix
+  - message: Fixed early heavy spread still being disabled.
+    type: Fix
+  - message: Fixed weed killer on Shiva's Snowball southern LZ not removing weeds
+      directly east of it.
+    type: Fix
+  - message: The popup on the ASRS console in Requisitions now also includes the money
+      you get back for selling a crate (200 per).
+    type: Tweak
+  id: 1279
+  time: '2025-01-29T18:03:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5490
 Name: RMC14
 Order: -1
