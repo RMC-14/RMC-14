@@ -147,7 +147,7 @@ public sealed class RMCConstructionSystem : EntitySystem
         {
             if (TryComp<StackComponent>(ent.Owner, out var stack))
             {
-                _stack.SetCount(ent.Owner, stack.Count + (args.MaterialCost * args.Amount), stack); // give back lost material
+                _stack.SetCount(ent.Owner, stack.Count + args.MaterialCost * args.Amount, stack); // give back lost material
                 UpdateStackAmountUI(ent);
             }
 
