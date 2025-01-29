@@ -42,7 +42,7 @@
               prototype: CMSheetMetal1
           steps:
             - tool: Screwing
-              doAfter: 1
+              doAfter: 0
 
     - node: stool
       entity: RMCStool
@@ -53,7 +53,7 @@
               prototype: CMSheetMetal1
           steps:
             - tool: Screwing
-              doAfter: 1
+              doAfter: 0
 
     - node: chairComfy
       entity: CMChairComfy
@@ -64,7 +64,7 @@
               prototype: CMSheetMetal1
           steps:
             - tool: Screwing
-              doAfter: 1
+              doAfter: 0
 
     - node: chairOfficeDark
       entity: CMChairOfficeDark
@@ -75,7 +75,7 @@
               prototype: CMSheetMetal1
           steps:
             - tool: Screwing
-              doAfter: 1
+              doAfter: 0
 
     - node: chairOfficeWhite
       entity: CMChairOfficeWhite
@@ -86,4 +86,4 @@
               prototype: CMSheetMetal1
           steps:
             - tool: Screwing
-              doAfter: 1
+              doAfter: 0
