@@ -1,4 +1,4 @@
-﻿using Content.Shared.Roles;
+﻿using Content.Shared._RMC14.Construction.Prototypes;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -8,5 +8,5 @@ namespace Content.Shared._RMC14.Construction;
 public sealed partial class RMCConstructionItemComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public ProtoId<JobPrototype>[]? Buildable;
+    public ProtoId<RMCConstructionPrototype>[]? Buildable;
 }

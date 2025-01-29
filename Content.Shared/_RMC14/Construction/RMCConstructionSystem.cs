@@ -1,15 +1,21 @@
-﻿using Content.Shared._RMC14.Dropship;
+﻿using Content.Shared._RMC14.Construction.Prototypes;
+using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Ladder;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Construction.Components;
 using Content.Shared.Coordinates;
+using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
+using Content.Shared.Stacks;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Network;
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
@@ -21,10 +27,16 @@ public sealed class RMCConstructionSystem : EntitySystem
 {
     [Dependency] private readonly FixtureSystem _fixture = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly SharedStackSystem _stack = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private static readonly EntProtoId Blocker = "RMCDropshipDoorBlocker";
 
@@ -37,6 +49,7 @@ public sealed class RMCConstructionSystem : EntitySystem
         _doorQuery = GetEntityQuery<DoorComponent>();
 
         SubscribeLocalEvent<RMCConstructionItemComponent, UseInHandEvent>(OnUseInHand);
+        SubscribeLocalEvent<RMCConstructionItemComponent, RMCConstructionBuildDoAfterEvent>(OnBuildDoAfter);
 
         SubscribeLocalEvent<RMCConstructionAttemptEvent>(OnConstructionAttempt);
 
@@ -45,6 +58,12 @@ public sealed class RMCConstructionSystem : EntitySystem
         SubscribeLocalEvent<RMCDropshipBlockedComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<RMCDropshipBlockedComponent, AnchorAttemptEvent>(OnAnchorAttempt);
         SubscribeLocalEvent<RMCDropshipBlockedComponent, UserAnchoredEvent>(OnUserAnchored);
+
+        Subs.BuiEvents<RMCConstructionItemComponent>(RMCConstructionUiKey.Key,
+            subs =>
+            {
+                subs.Event<RMCConstructionBuiMsg>(OnConstructionBuiMsg);
+            });
     }
 
     public void OnUseInHand(Entity<RMCConstructionItemComponent> ent, ref UseInHandEvent args)
@@ -54,6 +73,104 @@ public sealed class RMCConstructionSystem : EntitySystem
         args.Handled = true;
 
         _ui.OpenUi(ent.Owner, RMCConstructionUiKey.Key, user);
+    }
+
+    private void OnConstructionBuiMsg(Entity<RMCConstructionItemComponent> ent, ref RMCConstructionBuiMsg args)
+    {
+        Build(ent, args.Actor, args.Build, args.Amount);
+    }
+
+    private bool Build(Entity<RMCConstructionItemComponent> ent, EntityUid user, ProtoId<RMCConstructionPrototype> protoID, int amount)
+    {
+        if (!_prototype.TryIndex<RMCConstructionPrototype>(protoID, out var proto))
+            return false;
+
+        if (!TryComp(user, out TransformComponent? transform))
+            return false;
+
+        if (proto.Skill != null && !_skills.HasSkill(user, proto.Skill.Value, proto.SkillLevel))
+        {
+            var message = Loc.GetString("rmc-construction-untrained-build");
+            _popup.PopupClient(message, ent, user, PopupType.SmallCaution);
+            return false;
+        }
+
+        if (proto.MaterialCost is { } materialCost && TryComp<StackComponent>(ent.Owner, out var stack))
+        {
+            if (!_stack.Use(ent.Owner, materialCost, stack))
+            {
+                var message = Loc.GetString("rmc-construction-more-material");
+                _popup.PopupClient(message, ent, user, PopupType.SmallCaution);
+                return false;
+            }
+        }
+
+        var direction = transform.LocalRotation.GetCardinalDir();
+        var coordinates = transform.Coordinates;
+
+        if (proto.HasBuildRestriction && !CanBuildAt(coordinates, proto.Name, out var popup, direction: direction))
+        {
+            _popup.PopupClient(popup, ent, user, PopupType.SmallCaution);
+            return false;
+        }
+
+        var ev = new RMCConstructionBuildDoAfterEvent(
+            proto.Prototype,
+            amount,
+            proto.MaterialCost ?? 0,
+            GetNetCoordinates(coordinates),
+            direction
+        );
+
+        var delay = proto.Skill != null ? proto.DoAfterTime * _skills.GetSkillDelayMultiplier(user, proto.Skill.Value) : proto.DoAfterTime;
+        var doAfterTime = Math.Max(delay.TotalSeconds, proto.DoAfterTimeMin.TotalSeconds);
+
+        var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(doAfterTime), ev, ent, ent)
+        {
+            BreakOnMove = true,
+            BreakOnDamage = false
+        };
+
+        _doAfter.TryStartDoAfter(doAfter);
+        UpdateStackAmountUI(ent);
+        return true;
+    }
+
+    private void OnBuildDoAfter(Entity<RMCConstructionItemComponent> ent, ref RMCConstructionBuildDoAfterEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (args.Cancelled)
+        {
+            if (TryComp<StackComponent>(ent.Owner, out var stack))
+            {
+                _stack.SetCount(ent.Owner, stack.Count + args.MaterialCost, stack); // give back lost material
+                UpdateStackAmountUI(ent);
+            }
+
+            return;
+        }
+
+        if (args.Handled)
+            return;
+
+        var coordinates = GetCoordinates(args.Coordinates);
+        args.Handled = true;
+
+        for (var i = 0; i < args.Amount; i++)
+        {
+            var built = SpawnAtPosition(args.Prototype, coordinates);
+            _transform.SetLocalRotation(built, args.Direction.ToAngle());
+        }
+
+        UpdateStackAmountUI(ent);
+    }
+
+    private void UpdateStackAmountUI(Entity<RMCConstructionItemComponent> ent)
+    {
+        var state = new RMCConstructionBuiState(string.Empty);
+        _ui.SetUiState(ent.Owner, RMCConstructionUiKey.Key, state);
     }
 
     private void OnConstructionAttempt(ref RMCConstructionAttemptEvent ev)
@@ -128,11 +245,14 @@ public sealed class RMCConstructionSystem : EntitySystem
         return !HasComp<DisableConstructionComponent>(user);
     }
 
-    public bool CanBuildAt(EntityCoordinates coordinates, string prototypeName, out string? popup, bool anchoring = false)
+    public bool CanBuildAt(EntityCoordinates coordinates, string prototypeName, out string? popup, bool anchoring = false, Direction direction = Direction.Invalid)
     {
         popup = default;
         if (_transform.GetGrid(coordinates) is not { } gridId)
             return true;
+
+        if (!coordinates.TryGetTileRef(out var turf))
+            return false;
 
         if (HasComp<DropshipComponent>(gridId))
         {
@@ -157,6 +277,12 @@ public sealed class RMCConstructionSystem : EntitySystem
             return false;
         }
 
-        return true;
+        if (_rmcMap.HasAnchoredEntityEnumerator<BarricadeComponent>(coordinates, facing: direction.AsFlag()))
+        {
+            popup = Loc.GetString("rmc-construction-not-barricade-clear");
+            return false;
+        }
+
+        return !_turf.IsTileBlocked(turf.Value, CollisionGroup.Impassable);
     }
 }

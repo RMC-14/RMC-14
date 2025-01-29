@@ -1,0 +1,55 @@
+- type: rmcConstruction
+  parent: RMCMetalBarricadeBuild
+  id: RMCDividerConstruction
+  name: test
+  isDivider: true
+
+- type: rmcConstruction
+  id: RMCMetalBarricadeBuild
+  name: metal barricade
+  prototype: CMBarricadeMetal
+  doAfterTime: 2
+  doAfterTimeMin: 1
+  skill: RMCSkillConstruction
+  materialCost: 4
+
+- type: rmcConstruction
+  id: RMCComfyChairList
+  name: comfy chairs
+  prototype: CMChairComfy
+  listed:
+  - RMCComfyChairBeigeBuild
+  - RMCComfyChairBlackBuild
+  - RMCComfyChairBrownBuild
+  - RMCComfyChairLimeBuild
+  - RMCComfyChairTealBuild
+
+- type: rmcConstruction
+  id: RMCComfyChairBeigeBuild
+  name: beige comfy chair
+  prototype: CMChairComfyBeige
+  materialCost: 2
+
+- type: rmcConstruction
+  id: RMCComfyChairBlackBuild
+  name: black comfy chair
+  prototype: CMChairComfyBlack
+  materialCost: 2
+
+- type: rmcConstruction
+  id: RMCComfyChairBrownBuild
+  name: brown comfy chair
+  prototype: CMChairComfy
+  materialCost: 2
+
+- type: rmcConstruction
+  id: RMCComfyChairLimeBuild
+  name: lime comfy chair
+  prototype: CMChairComfyLime
+  materialCost: 2
+
+- type: rmcConstruction
+  id: RMCComfyChairTealBuild
+  name: teal comfy chair
+  prototype: CMChairComfyTeal
+  materialCost: 2

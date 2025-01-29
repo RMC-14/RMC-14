@@ -36,7 +36,10 @@
   suffix: Filled
   components:
     - type: RMCConstructionItem
-      buildable: null
+      buildable:
+      - RMCMetalBarricadeBuild
+      - RMCDividerConstruction
+      - RMCComfyChairList
     - type: RMCConstructionUpgradeItem
       whitelist:
         tags:
