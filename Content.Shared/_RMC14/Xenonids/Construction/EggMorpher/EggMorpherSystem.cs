@@ -284,9 +284,15 @@ public sealed partial class EggMorpherSystem : EntitySystem
             return false;
         }
         comp.CurParasites--;
+        Dirty(eggMorpher);
 
         parasite = SpawnAtPosition(EggMorpherComponent.ParasitePrototype, ent.ToCoordinates());
-        Dirty(eggMorpher);
-        return true;
+        if (parasite is not null)
+        {
+            _hive.SetSameHive(eggMorpher.Owner, parasite.Value);
+            return true;
+        }
+
+        return false;
     }
 }
