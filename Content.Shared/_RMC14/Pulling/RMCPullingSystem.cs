@@ -402,7 +402,7 @@ public sealed class RMCPullingSystem : EntitySystem
             var pullerCoords = _transform.GetMapCoordinates(puller).Position;
 
             var angle = (pulledCoords - pullerCoords).ToWorldAngle().GetCardinalDir().ToAngle();
-            _rotateTo.TryFaceAngle(puller, angle, xform);
+            _rotateTo.TryFaceAngle(puller, angle);
         }
     }
 }

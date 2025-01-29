@@ -35,6 +35,8 @@
   description: Sheets made out of metal. They have been dubbed Metal Sheets.
   suffix: Filled
   components:
+    - type: RMCConstructionItem
+      buildable: null
     - type: RMCConstructionUpgradeItem
       whitelist:
         tags:
@@ -57,6 +59,10 @@
       layers:
         - state: metal_4
           map: ["base"]
+    - type: UserInterface
+      interfaces:
+        enum.RMCConstructionUiKey.Key:
+          type: RMCConstructionBui
 
 - type: entity
   parent: CMSheetMetal

@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Map;
 using Content.Shared.Construction.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Doors.Components;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
@@ -23,6 +24,7 @@ public sealed class RMCConstructionSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     private static readonly EntProtoId Blocker = "RMCDropshipDoorBlocker";
 
@@ -34,6 +36,8 @@ public sealed class RMCConstructionSystem : EntitySystem
     {
         _doorQuery = GetEntityQuery<DoorComponent>();
 
+        SubscribeLocalEvent<RMCConstructionItemComponent, UseInHandEvent>(OnUseInHand);
+
         SubscribeLocalEvent<RMCConstructionAttemptEvent>(OnConstructionAttempt);
 
         SubscribeLocalEvent<DropshipComponent, DropshipMapInitEvent>(OnDropshipMapInit);
@@ -41,6 +45,15 @@ public sealed class RMCConstructionSystem : EntitySystem
         SubscribeLocalEvent<RMCDropshipBlockedComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<RMCDropshipBlockedComponent, AnchorAttemptEvent>(OnAnchorAttempt);
         SubscribeLocalEvent<RMCDropshipBlockedComponent, UserAnchoredEvent>(OnUserAnchored);
+    }
+
+    public void OnUseInHand(Entity<RMCConstructionItemComponent> ent, ref UseInHandEvent args)
+    {
+        var user = args.User;
+
+        args.Handled = true;
+
+        _ui.OpenUi(ent.Owner, RMCConstructionUiKey.Key, user);
     }
 
     private void OnConstructionAttempt(ref RMCConstructionAttemptEvent ev)
