@@ -2,7 +2,6 @@
 screen_shake_intensity = 1
 
 [admin]
-alert.explosion_min_intensity = -1
 deadmin_on_join = true
 see_own_notes = true
 server_ban_erase_player = true
