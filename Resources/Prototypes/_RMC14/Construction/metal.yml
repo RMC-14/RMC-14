@@ -25,31 +25,38 @@
   - RMCComfyChairTealBuild
 
 - type: rmcConstruction
+  abstract: true
+  id: RMCComfyChairBase
+  name: chair comfy
+  materialCost: 2
+  restrictedCollisionGroup: TableMask
+
+- type: rmcConstruction
+  parent: RMCComfyChairBase
   id: RMCComfyChairBeigeBuild
   name: beige comfy chair
   prototype: CMChairComfyBeige
-  materialCost: 2
 
 - type: rmcConstruction
+  parent: RMCComfyChairBase
   id: RMCComfyChairBlackBuild
   name: black comfy chair
   prototype: CMChairComfyBlack
-  materialCost: 2
 
 - type: rmcConstruction
+  parent: RMCComfyChairBase
   id: RMCComfyChairBrownBuild
   name: brown comfy chair
   prototype: CMChairComfy
-  materialCost: 2
 
 - type: rmcConstruction
+  parent: RMCComfyChairBase
   id: RMCComfyChairLimeBuild
   name: lime comfy chair
   prototype: CMChairComfyLime
-  materialCost: 2
 
 - type: rmcConstruction
+  parent: RMCComfyChairBase
   id: RMCComfyChairTealBuild
   name: teal comfy chair
   prototype: CMChairComfyTeal
-  materialCost: 2

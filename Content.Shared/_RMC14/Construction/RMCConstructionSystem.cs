@@ -95,9 +95,18 @@ public sealed class RMCConstructionSystem : EntitySystem
             return false;
         }
 
+        var direction = transform.LocalRotation.GetCardinalDir();
+        var coordinates = transform.Coordinates;
+
+        if (proto.HasBuildRestriction && !CanBuildAt(coordinates, proto.Name, out var popup, direction: direction, collision: proto.RestrictedCollisionGroup))
+        {
+            _popup.PopupClient(popup, ent, user, PopupType.SmallCaution);
+            return false;
+        }
+
         if (proto.MaterialCost is { } materialCost && TryComp<StackComponent>(ent.Owner, out var stack))
         {
-            if (!_stack.Use(ent.Owner, materialCost, stack))
+            if (!_stack.Use(ent.Owner, materialCost * amount, stack))
             {
                 var message = Loc.GetString("rmc-construction-more-material");
                 _popup.PopupClient(message, ent, user, PopupType.SmallCaution);
@@ -105,14 +114,7 @@ public sealed class RMCConstructionSystem : EntitySystem
             }
         }
 
-        var direction = transform.LocalRotation.GetCardinalDir();
-        var coordinates = transform.Coordinates;
-
-        if (proto.HasBuildRestriction && !CanBuildAt(coordinates, proto.Name, out var popup, direction: direction))
-        {
-            _popup.PopupClient(popup, ent, user, PopupType.SmallCaution);
-            return false;
-        }
+        // TODO add the ability to combine materials
 
         var ev = new RMCConstructionBuildDoAfterEvent(
             proto.Prototype,
@@ -145,7 +147,7 @@ public sealed class RMCConstructionSystem : EntitySystem
         {
             if (TryComp<StackComponent>(ent.Owner, out var stack))
             {
-                _stack.SetCount(ent.Owner, stack.Count + args.MaterialCost, stack); // give back lost material
+                _stack.SetCount(ent.Owner, stack.Count + (args.MaterialCost * args.Amount), stack); // give back lost material
                 UpdateStackAmountUI(ent);
             }
 
@@ -245,7 +247,7 @@ public sealed class RMCConstructionSystem : EntitySystem
         return !HasComp<DisableConstructionComponent>(user);
     }
 
-    public bool CanBuildAt(EntityCoordinates coordinates, string prototypeName, out string? popup, bool anchoring = false, Direction direction = Direction.Invalid)
+    public bool CanBuildAt(EntityCoordinates coordinates, string prototypeName, out string? popup, bool anchoring = false, Direction direction = Direction.Invalid, CollisionGroup collision = CollisionGroup.Impassable)
     {
         popup = default;
         if (_transform.GetGrid(coordinates) is not { } gridId)
@@ -283,6 +285,6 @@ public sealed class RMCConstructionSystem : EntitySystem
             return false;
         }
 
-        return !_turf.IsTileBlocked(turf.Value, CollisionGroup.Impassable);
+        return !_turf.IsTileBlocked(turf.Value, collision);
     }
 }
