@@ -60,7 +60,7 @@
           - Sidearm
 #          - FlareGun
           sizes:
-          - Medium
+          - Normal
   - type: CMHolster
   - type: CMItemSlots
 
