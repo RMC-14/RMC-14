@@ -1,24 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Parasites now show up on carriers
-    type: Add
-  - message: Eggs and parasites from a dead carrier are no longer guaranteed to all
-      drop
-    type: Fix
-  - message: Damage overlays respect being stunned now
-    type: Fix
-  id: 777
-  time: '2024-10-04T10:04:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4237
-- author: MACMAN2003
-  changes:
-  - message: The tactical map can now be opened from the alerts sidebar instead of
-      only the actions bar.
-    type: Tweak
-  id: 778
-  time: '2024-10-04T10:37:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4156
 - author: DrSmugleaf
   changes:
   - message: Added xenos seeing each others position live while the Queen is in ovi.
@@ -5111,5 +5091,19 @@
   id: 1276
   time: '2025-01-29T00:48:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5485
+- author: Tunguso4ka
+  changes:
+  - message: Welderpack and weldersatchel can refuel welder tools ones again!
+    type: Fix
+  id: 1277
+  time: '2025-01-29T17:24:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5489
+- author: blueDev2
+  changes:
+  - message: Fixed Boiler Ability locking after stun
+    type: Fix
+  id: 1278
+  time: '2025-01-29T17:23:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5487
 Name: RMC14
 Order: -1
