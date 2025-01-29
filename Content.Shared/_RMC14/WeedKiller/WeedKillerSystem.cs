@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Map;
@@ -10,6 +11,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -23,6 +25,7 @@ public sealed class WeedKillerSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly RMCCameraShakeSystem _rmcCameraShake = default!;
     [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -66,7 +69,7 @@ public sealed class WeedKillerSystem : EntitySystem
         comp.DropshipName = dropshipName;
         Dirty(id, comp);
 
-        if (!_area.TryGetArea(coordinates, out var lzArea, out _, out _))
+        if (!_area.TryGetArea(coordinates, out var lzArea, out _))
             return;
 
         var areas = EntityQueryEnumerator<AreaComponent>();
@@ -74,10 +77,10 @@ public sealed class WeedKillerSystem : EntitySystem
         {
             if (areaComp.LinkedLz?.Contains(',') ?? false)
             {
-                if (!areaComp.LinkedLz.Split(',').Select(x => x.Trim()).Contains(lzArea.LinkedLz))
+                if (!areaComp.LinkedLz.Split(',').Select(x => x.Trim()).Contains(lzArea.Value.Comp.LinkedLz))
                     continue;
             }
-            else if (areaComp.LinkedLz != lzArea.LinkedLz)
+            else if (areaComp.LinkedLz != lzArea.Value.Comp.LinkedLz)
             {
                 continue;
             }
@@ -107,12 +110,13 @@ public sealed class WeedKillerSystem : EntitySystem
             if (!TryComp(areaId, out AreaComponent? area))
                 continue;
 
-            area.ResinAllowed = false;
+            area.WeedKilling = true;
             Dirty(areaId, area);
         }
 
         _audio.PlayPvs(killer.Comp.Sound, killer);
         _marineAnnounce.AnnounceARES(null, Loc.GetString("rmc-weed-killer-deploying", ("dropship", killer.Comp.DropshipName)));
+        _rmcCameraShake.ShakeCamera(Filter.Pvs(killer), 3, 1);
 
         foreach (var position in killer.Comp.Positions)
         {
@@ -160,7 +164,7 @@ public sealed class WeedKillerSystem : EntitySystem
                     if (!TryComp(areaId, out AreaComponent? area))
                         continue;
 
-                    area.ResinAllowed = true;
+                    area.WeedKilling = false;
                     Dirty(areaId, area);
                 }
             }
