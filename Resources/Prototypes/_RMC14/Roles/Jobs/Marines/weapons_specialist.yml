@@ -7,7 +7,17 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMSquad
-    time: 18000 # 5 hours
+    time: 36000 # 10 hours
+  ranks:
+    RMCRankSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobWeaponsSpecialist
+      time: 252000 # 70 hours
+    RMCRankCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobWeaponsSpecialist
+      time: 36000 # 10 hours
+    RMCRankLanceCorporal: []
   startingGear: CMGearWeaponsSpecialist
   dummyStartingGear: CMGearWeaponsSpecialistEquipped
   icon: "CMJobIconWeaponsSpecialist"
@@ -42,7 +52,7 @@
         Specialist: 120
     - type: SquadArmorWearer
     - type: JobPrefix
-      prefix: "Spc"
+      prefix: cm-job-prefix-weapons-specialist
 
 - type: startingGear
   id: CMGearWeaponsSpecialist

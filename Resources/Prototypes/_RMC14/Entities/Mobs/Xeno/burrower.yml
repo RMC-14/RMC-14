@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
@@ -60,6 +60,7 @@
     range: 4
     plasmaCost: 100
     paralyzeTime: 2
+    slows: false
     sound: /Audio/_RMC14/Xeno/alien_footstep_charge1.ogg
   - type: XenoBurrow
   - type: MeleeWeapon
@@ -94,8 +95,8 @@
       whitelist:
         components:
         - XenoHeavy
-#  - type: RMCXenoDamageVisuals # TODO RMC14
-#    prefix: burrower
+  - type: RMCXenoDamageVisuals
+    prefix: burrower
   - type: TacticalMapIcon
     icon:
       sprite: _RMC14/Interface/map_blips.rsi

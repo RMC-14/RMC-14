@@ -119,6 +119,8 @@
     - WallXenoResinThick
     - WallXenoMembraneThick
     - DoorXenoResinThick
+    - XenoStickyResin
+    - XenoFastResin
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
     - HiveEggMorpherXenoConstructionNode
@@ -163,6 +165,8 @@
     - WallXenoResin
     - WallXenoMembrane
     - DoorXenoResin
+    - XenoStickyResin
+    - XenoFastResin
     - XenoWeedsSource
     canOrderConstruction:
     - HiveCoreXenoConstructionNode

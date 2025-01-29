@@ -8,6 +8,8 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
     time: 18000 # 5 hours
+  ranks:
+    RMCRankSecondLT: []
   startingGear: CMGearResearcher
   icon: "CMJobIconResearcher"
   joinNotifyCrew: false
@@ -33,7 +35,7 @@
         RMCSkillSurgery: 2
     - type: RMCUserBulkyArmorIncapable
     - type: JobPrefix
-      prefix: "Rsr"
+      prefix: cm-job-prefix-researcher
   hidden: true # TODO RMC14
 
 - type: startingGear

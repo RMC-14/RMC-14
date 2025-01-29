@@ -268,7 +268,7 @@ public sealed class ThermalCloakSystem : EntitySystem
         TrySetInvisibility(ent.Owner, false, true);
     }
 
-    private Entity<ThermalCloakComponent>? FindWornCloak(EntityUid player)
+    public Entity<ThermalCloakComponent>? FindWornCloak(EntityUid player)
     {
         var slots = _inventory.GetSlotEnumerator(player, SlotFlags.BACK);
         while (slots.MoveNext(out var slot))

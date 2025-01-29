@@ -26,6 +26,7 @@ public sealed class RMCSpawnerSystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<DropshipLaunchedFromWarshipEvent>(OnDropshipLaunchedFromWarship);
         SubscribeLocalEvent<DropshipLandedOnPlanetEvent>(OnDropshipLandedOnPlanet);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
@@ -37,6 +38,15 @@ public sealed class RMCSpawnerSystem : EntitySystem
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
         _corpsesSpawned = 0;
+    }
+
+    private void OnDropshipLaunchedFromWarship(ref DropshipLaunchedFromWarshipEvent ev)
+    {
+        var deleteQuery = EntityQueryEnumerator<DeleteOnDropshipLaunchFromWarshipComponent>();
+        while (deleteQuery.MoveNext(out var uid, out _))
+        {
+            QueueDel(uid);
+        }
     }
 
     private void OnDropshipLandedOnPlanet(ref DropshipLandedOnPlanetEvent ev)

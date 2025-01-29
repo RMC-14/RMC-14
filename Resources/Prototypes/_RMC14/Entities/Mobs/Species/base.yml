@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   save: false
   parent: BaseMobSpecies
   id: CMBaseMobSpeciesOrganic
@@ -139,6 +139,10 @@
         requireInputValidation: false
       enum.TacticalMapUserUi.Key:
         type: TacticalMapUserBui
+      enum.SquadLeaderTrackerUI.Key:
+        type: SquadInfoBui
+      enum.DialogUiKey.Key:
+        type: DialogBui
   - type: Infectable
   - type: Tackleable
   - type: Tackle
@@ -274,3 +278,6 @@
       - Xeno
   - type: RMCPickupDroppedItems
   - type: CommendationReceiver
+  - type: RMCSpeciesSlowdownModifier
+    slowMultiplier: 0.66
+    superSlowMultiplier: 0.33

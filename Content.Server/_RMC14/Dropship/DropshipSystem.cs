@@ -5,8 +5,10 @@ using Content.Server.GameTicking;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Shuttles.Systems;
+using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Rules;
@@ -23,6 +25,7 @@ using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Dropship;
@@ -42,6 +45,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
+    [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
 
     private EntityQuery<DockingComponent> _dockingQuery;
     private EntityQuery<DoorComponent> _doorQuery;
@@ -62,7 +67,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         SubscribeLocalEvent<DropshipNavigationComputerComponent, ActivateInWorldEvent>(OnActivateInWorld);
 
         SubscribeLocalEvent<DropshipComponent, FTLRequestEvent>(OnRefreshUI);
-        SubscribeLocalEvent<DropshipComponent, FTLStartedEvent>(OnRefreshUI);
+        SubscribeLocalEvent<DropshipComponent, FTLStartedEvent>(OnFTLStarted);
         SubscribeLocalEvent<DropshipComponent, FTLCompletedEvent>(OnFTLCompleted);
         SubscribeLocalEvent<DropshipComponent, FTLUpdatedEvent>(OnRefreshUI);
 
@@ -105,6 +110,18 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
         _ui.OpenUi(ent.Owner, DropshipHijackerUiKey.Key, args.User);
         _ui.SetUiState(ent.Owner, DropshipHijackerUiKey.Key, new DropshipHijackerBuiState(destinations));
+    }
+
+    private void OnFTLStarted(Entity<DropshipComponent> ent, ref FTLStartedEvent args)
+    {
+        OnRefreshUI(ent, ref args);
+
+        var map = args.FromMapUid;
+        if (HasComp<AlmayerComponent>(map))
+        {
+            var ev = new DropshipLaunchedFromWarshipEvent(ent);
+            RaiseLocalEvent(ent, ref ev, true);
+        }
     }
 
     private void OnFTLCompleted(Entity<DropshipComponent> ent, ref FTLCompletedEvent args)
@@ -252,14 +269,21 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
         _shuttle.FTLToCoordinates(dropshipId.Value, shuttleComp, destCoords, rotation, startupTime: startupTime, hyperspaceTime: hyperspaceTime);
 
-        if (user != null && hijack)
+        if (hijack)
         {
-            var xenoText = "The Queen has commanded the metal bird to depart for the metal hive in the sky! Rejoice!";
-            _xenoAnnounce.AnnounceSameHive(user.Value, xenoText);
-            _audio.PlayPvs(dropship.LocalHijackSound, dropshipId.Value);
+            if (user != null)
+            {
+                var xenoText = "The Queen has commanded the metal bird to depart for the metal hive in the sky! Rejoice!";
+                _xenoAnnounce.AnnounceSameHive(user.Value, xenoText);
+                _audio.PlayPvs(dropship.LocalHijackSound, dropshipId.Value);
 
-            var marineText = "Unscheduled dropship departure detected from operational area. Hijack likely. Shutting down autopilot.";
-            _marineAnnounce.AnnounceARES(dropshipId.Value, marineText, dropship.MarineHijackSound, new LocId("rmc-announcement-dropship-message"));
+                var marineText = "Unscheduled dropship departure detected from operational area. Hijack likely. Shutting down autopilot.";
+                _marineAnnounce.AnnounceARES(dropshipId.Value, marineText, dropship.MarineHijackSound, new LocId("rmc-announcement-dropship-message"));
+            }
+
+            // Add 10 seconds to compensate for the arriving times
+            dropship.HijackLandAt = _timing.CurTime + TimeSpan.FromSeconds(hyperspaceTime.Value) + TimeSpan.FromSeconds(10);
+            Dirty(dropshipId.Value, dropship);
         }
 
         _adminLog.Add(LogType.RMCDropshipLaunch,
@@ -401,19 +425,52 @@ public sealed class DropshipSystem : SharedDropshipSystem
     {
         base.Update(frameTime);
 
+        var time = _timing.CurTime;
+
         var dropships = EntityQueryEnumerator<DropshipComponent, FTLComponent>();
         while (dropships.MoveNext(out var uid, out var dropship, out var ftl))
         {
-            if (!dropship.Crashed || dropship.AnnouncedCrash)
+            if (!dropship.Crashed)
                 continue;
 
-            if (ftl.State != FTLState.Arriving)
+            ftl.VisualizerProto = null;
+
+            if (dropship.Destination == null)
                 continue;
 
-            dropship.AnnouncedCrash = true;
-            Dirty(uid, dropship);
+            var destinationCoords = _transform.GetMapCoordinates(dropship.Destination.Value);
+            var destinationEntityCoords = _transform.GetMoverCoordinates(dropship.Destination.Value);
+            var destinationFilter = Filter.BroadcastMap(destinationCoords.MapId);
 
-            _marineAnnounce.AnnounceToMarines(Loc.GetString("rmc-announcement-emergency-dropship-crash"), dropship.CrashWarningSound);
+            if (dropship.HijackLandAt - dropship.AnnounceCrashTime <= time && !dropship.AnnouncedCrash)
+            {
+                dropship.AnnouncedCrash = true;
+                Dirty(uid, dropship);
+
+                _marineAnnounce.AnnounceToMarines(Loc.GetString("rmc-announcement-emergency-dropship-crash"), dropship.CrashWarningSound);
+                continue;
+            }
+
+            if (dropship.HijackLandAt - dropship.PlayIncomingSoundTime <= time && !dropship.DidIncomingSound)
+            {
+                dropship.DidIncomingSound = true;
+                Dirty(uid, dropship);
+
+                _audio.PlayGlobal(dropship.IncomingSound, destinationFilter, true);
+                continue;
+            }
+
+            if (dropship.HijackLandAt - dropship.ExplodeTime <= time && !dropship.DidExplosion)
+            {
+                dropship.DidExplosion = true;
+                Dirty(uid, dropship);
+
+                _audio.PlayGlobal(dropship.CrashSound, destinationFilter, true);
+                _rmcFlammable.SpawnFireDiamond(dropship.FireId, destinationEntityCoords, dropship.FireRange, 11);
+                _rmcExplosion.QueueExplosion(destinationCoords, "RMCOB", 50000, 1500, 90, uid);
+
+                continue;
+            }
         }
 
         if (Count<PrimaryLandingZoneComponent>() > 0)

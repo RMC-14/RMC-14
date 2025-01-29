@@ -21,6 +21,7 @@
         sprite: Mobs/Effects/burn_damage.rsi
   - type: Speech
     speechVerb: Plant
+    allowedEmotes: ['Chirp']
   - type: Vocal
     sounds:
       Male: RMCMaleDiona
