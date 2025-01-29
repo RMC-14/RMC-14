@@ -14,6 +14,25 @@
   materialCost: 4
 
 - type: rmcConstruction
+  parent: RMCMetalBarricadeBuild
+  id: RMCMetalBarricadeFoldableBuild
+  name: folding metal barricade
+  prototype: CMBarricadeMetalDoor
+  doAfterTime: 3
+  doAfterTimeMin: 1.5
+  materialCost: 6
+  skillLevel: 2
+
+- type: rmcConstruction
+  parent: RMCMetalBarricadeBuild
+  id: RMCHandrailBuild
+  name: handrail
+  prototype: RMCBarricadeHandrail
+  doAfterTime: 2
+  doAfterTimeMin: 1
+  materialCost: 2
+
+- type: rmcConstruction
   id: RMCComfyChairList
   name: comfy chairs
   prototype: CMChairComfy

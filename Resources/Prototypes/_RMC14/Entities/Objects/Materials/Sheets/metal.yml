@@ -38,6 +38,8 @@
     - type: RMCConstructionItem
       buildable:
       - RMCMetalBarricadeBuild
+      - RMCMetalBarricadeFoldableBuild
+      - RMCHandrailBuild
       - RMCDividerConstruction
       - RMCComfyChairList
     - type: RMCConstructionUpgradeItem
@@ -168,6 +170,13 @@
   description: Plasteel is an expensive, durable material made from combining platinum, steel, and advanced polymers to create a metal that is corrosion-resistant, highly durable, and lightweight. The only reason this isn't used more often is because of how damn costly it is."
   suffix: Filled
   components:
+    - type: RMCConstructionItem
+      buildable:
+      - RMCPlasteelBarricadeFoldableBuild
+      - RMCPlasteelBarricadeBuild
+      - RMCDividerConstruction
+      - RMCReinforcedWindowFrameBuild
+      - RMCDividerConstruction
     - type: Material
     - type: PhysicalComposition
       materialComposition:
@@ -189,6 +198,10 @@
     - type: Item
       sprite: _RMC14/Objects/Materials/Sheets/plasteel.rsi
       heldPrefix: plasteel
+    - type: UserInterface
+      interfaces:
+        enum.RMCConstructionUiKey.Key:
+          type: RMCConstructionBui
 
 - type: entity
   parent: CMSheetPlasteel

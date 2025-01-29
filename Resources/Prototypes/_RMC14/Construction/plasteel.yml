@@ -1,0 +1,27 @@
+- type: rmcConstruction
+  parent: RMCMetalBarricadeBuild
+  id: RMCPlasteelBarricadeFoldableBuild
+  name: folding plasteel barricade
+  prototype: CMBarricadePlasteelDoor
+  doAfterTime: 4
+  doAfterTimeMin: 2
+  materialCost: 8
+  skillLevel: 2
+
+- type: rmcConstruction
+  parent: RMCPlasteelBarricadeFoldableBuild
+  id: RMCPlasteelBarricadeBuild
+  name: plasteel barricade
+  prototype: RMCBarricadePlasteel
+  doAfterTime: 8
+  doAfterTimeMin: 2
+  materialCost: 6
+
+- type: rmcConstruction
+  parent: RMCPlasteelBarricadeFoldableBuild
+  id: RMCReinforcedWindowFrameBuild
+  name: reinforced window frame
+  prototype: RMCWindowFrameColonyReinforced
+  doAfterTime: 10
+  doAfterTimeMin: 4
+  materialCost: 5
