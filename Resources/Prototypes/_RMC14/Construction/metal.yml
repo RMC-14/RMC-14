@@ -79,3 +79,10 @@
   id: RMCComfyChairTealBuild
   name: teal comfy chair
   prototype: CMChairComfyTeal
+
+- type: rmcConstruction
+  parent: RMCReinforcedWindowFrameBuild
+  id: RMCWindowFrameBuild
+  name: window frame
+  prototype: RMCWindowFrameAlmayer
+  materialCost: 5

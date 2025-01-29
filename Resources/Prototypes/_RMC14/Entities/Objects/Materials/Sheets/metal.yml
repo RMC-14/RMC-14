@@ -41,6 +41,8 @@
       - RMCMetalBarricadeFoldableBuild
       - RMCHandrailBuild
       - RMCDividerConstruction
+      - RMCWindowFrameBuild
+      - RMCDividerConstruction
       - RMCComfyChairList
     - type: RMCConstructionUpgradeItem
       whitelist:
