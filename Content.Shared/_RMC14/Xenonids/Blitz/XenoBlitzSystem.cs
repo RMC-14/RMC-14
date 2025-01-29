@@ -99,7 +99,7 @@ public sealed class XenoBlitzSystem : EntitySystem
             if (!_xeno.CanAbilityAttackTarget(xeno, hit))
                 continue;
 
-            if (_interact.InRangeUnobstructed(xeno.Owner, hit.Owner, xeno.Comp.Range))
+            if (!_interact.InRangeUnobstructed(xeno.Owner, hit.Owner, xeno.Comp.Range))
                 continue;
 
             hits++;
