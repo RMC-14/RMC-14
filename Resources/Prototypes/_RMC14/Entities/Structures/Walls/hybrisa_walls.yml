@@ -242,3 +242,41 @@
   - type: IconSmooth
     key: walls
     base: rwall
+
+# Research
+
+- type: entity
+  parent: RMCWallHybrisa
+  id: RMCWallHybrisaResearch
+  suffix: research
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_wall_research.rsi
+    state: strata_bare_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_wall_research.rsi
+    state: strata_bare_outpost_
+
+- type: entity
+  parent: RMCWallHybrisaReinforced
+  id: RMCWallHybrisaResearchReinforced
+  suffix: research
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall_research.rsi
+    state: strata_ribbed_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall_research.rsi
+    state: strata_ribbed_outpost_
+
+- type: entity
+  parent: RMCWallHybrisaHull
+  id: RMCWallHybrisaResearchHull
+  suffix: research, hull
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall_research.rsi
+    state: strata_ribbed_outpost_
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hybrisa_rwall_research.rsi
+    state: strata_hull

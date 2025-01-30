@@ -107,6 +107,16 @@
   sprite: /Textures/_RMC14/Tiles/hybrisa/carpetpatternblue.png
 
 - type: tile
+  parent: RMCFloorHybrisaBlueCarpet
+  id: RMCFloorHybrisaBlueSpacePort1
+  sprite: /Textures/_RMC14/Tiles/hybrisa/spaceport1.png
+
+- type: tile
+  parent: RMCFloorHybrisaBlueCarpet
+  id: RMCFloorHybrisaBlueSpacePort2
+  sprite: /Textures/_RMC14/Tiles/hybrisa/spaceport2.png
+
+- type: tile
   parent: RMCFloorHybrisaBlueFull
   id: RMCFloorHybrisaBlueDropship1
   sprite: /Textures/_RMC14/Tiles/hybrisa/dropshipfloor1.png

@@ -741,6 +741,15 @@
 
 - type: entity
   parent: RMCBaseWeyaWall
+  id: RMCWeyaWallStandard24
+  components:
+  - type: Sprite
+    state: 24
+  - type: Icon
+    state: 24
+
+- type: entity
+  parent: RMCBaseWeyaWall
   id: RMCWeyaWallStandard25
   components:
   - type: Sprite
