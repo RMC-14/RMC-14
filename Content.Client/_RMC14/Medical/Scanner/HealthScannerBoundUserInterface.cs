@@ -71,6 +71,10 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
 
         if (_entities.GetEntity(uiState.Target) is not { Valid: true } target)
             return;
+
+        if (!uiState.InHand)
+            return;
+
         _lastTarget = uiState.Target;
 
         _window.PatientLabel.Text = $"Patient: {Identity.Name(target, _entities, _player.LocalEntity)}";

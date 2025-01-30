@@ -16,7 +16,6 @@
   - type: ActivatableUI
     key: enum.HealthScannerUIKey.Key
     inHandsOnly: false
-    requireActiveHand: false
   - type: UserInterface
     interfaces:
       enum.HealthScannerUIKey.Key:

@@ -17,4 +17,7 @@ public sealed partial class HealthScannerComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan UpdateCooldown = TimeSpan.FromSeconds(1);
+
+    [DataField, AutoNetworkedField]
+    public bool InHand = false;
 }
