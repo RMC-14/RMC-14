@@ -18,10 +18,7 @@
   materialCost: 6
 
 - type: rmcConstruction
-  parent: RMCPlasteelBarricadeFoldableBuild
+  parent: RMCWindowFrameBuild
   id: RMCReinforcedWindowFrameBuild
   name: reinforced window frame
   prototype: RMCWindowFrameColonyReinforced
-  doAfterTime: 10
-  doAfterTimeMin: 4
-  materialCost: 5

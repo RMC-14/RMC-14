@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Physics;
+using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 
@@ -24,18 +25,22 @@ public sealed partial class RMCConstructionPrototype : IPrototype, IInheritingPr
     public string Name { get; set; } = default!;
 
     [DataField]
-    public bool IsDivider = false;
+    public bool IsDivider { get; set; } = false;
 
     [DataField]
     public ProtoId<RMCConstructionPrototype>[]? Listed { get; set; }
 
     [AlwaysPushInheritance]
     [DataField]
-    public bool HasBuildRestriction = true;
+    public bool HasBuildRestriction { get; set; } = true;
 
     [AlwaysPushInheritance]
     [DataField]
     public CollisionGroup RestrictedCollisionGroup = CollisionGroup.Impassable;
+
+    [AlwaysPushInheritance]
+    [DataField]
+    public ProtoId<TagPrototype>[]? RestrictedTags { get; set; }
 
     [DataField]
     public EntProtoId Prototype { get; set; } = default!;
@@ -57,9 +62,9 @@ public sealed partial class RMCConstructionPrototype : IPrototype, IInheritingPr
 
     [AlwaysPushInheritance]
     [DataField]
-    public TimeSpan DoAfterTime = TimeSpan.Zero;
+    public TimeSpan DoAfterTime { get; set; } = TimeSpan.Zero;
 
     [AlwaysPushInheritance]
     [DataField]
-    public TimeSpan DoAfterTimeMin = TimeSpan.Zero;
+    public TimeSpan DoAfterTimeMin { get; set; } = TimeSpan.Zero;
 }

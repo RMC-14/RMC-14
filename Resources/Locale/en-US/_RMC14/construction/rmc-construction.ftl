@@ -10,3 +10,6 @@ rmc-construction-upgrade-brute = You applied a reinforced upgrade.
 
 rmc-construction-untrained-build = You are not trained to build this...
 rmc-construction-more-material = You need more {$material} to build the {$object}!
+
+rmc-construction-list = {$name}
+rmc-construction-entry = {$name} ({$amount} {$material})

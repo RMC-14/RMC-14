@@ -7,11 +7,12 @@
 - type: rmcConstruction
   id: RMCBarbedWireBuild
   name: barbed wire
-  prototype: CMBarricadeMetal
+  prototype: BarbedWire1
   doAfterTime: 1
   doAfterTimeMin: 1
   skill: RMCSkillConstruction
   materialCost: 1
+  hasBuildRestriction: false
   stackAmounts:
   - 5
   - 10
@@ -46,11 +47,14 @@
   materialCost: 2
 
 - type: rmcConstruction
-  parent: RMCReinforcedWindowFrameBuild
+  parent: RMCMetalBarricadeFoldableBuild
   id: RMCWindowFrameBuild
   name: window frame
   prototype: RMCWindowFrameAlmayer
+  doAfterTime: 10
+  doAfterTimeMin: 4
   materialCost: 5
+  restrictedCollisionGroup: MidImpassable
 
 - type: rmcConstruction
   id: RMCComfyChairList
@@ -68,7 +72,7 @@
   id: RMCComfyChairBase
   name: chair comfy
   materialCost: 2
-  restrictedCollisionGroup: TableMask
+  restrictedTags: RMCSeat
 
 - type: rmcConstruction
   parent: RMCComfyChairBase

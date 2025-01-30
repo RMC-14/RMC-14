@@ -104,12 +104,19 @@ public sealed class RMCConstructionSystem : EntitySystem
             return false;
         }
 
+        if (proto.RestrictedTags is { } tags && _rmcMap.TileHasAnyTag(coordinates, tags))
+        {
+            var message = Loc.GetString("rmc-construction-not-proper-surface");
+            _popup.PopupClient(message, ent, user, PopupType.SmallCaution);
+            return false;
+        }
+
         if (proto.MaterialCost is { } materialCost && TryComp<StackComponent>(ent.Owner, out var stack))
         {
-            if (!_stack.Use(ent.Owner, materialCost * amount, stack))
+            if (stack.Count < materialCost * amount)
             {
-                var message = Loc.GetString("rmc-construction-more-material");
-                _popup.PopupClient(message, ent, user, PopupType.SmallCaution);
+                var message = Loc.GetString("rmc-construction-more-material", ("material", ent), ("object", proto.Name));
+                _popup.PopupClient(message, user, user, PopupType.SmallCaution);
                 return false;
             }
         }
@@ -140,33 +147,36 @@ public sealed class RMCConstructionSystem : EntitySystem
 
     private void OnBuildDoAfter(Entity<RMCConstructionItemComponent> ent, ref RMCConstructionBuildDoAfterEvent args)
     {
-        if (_net.IsClient)
-            return;
-
-        if (args.Cancelled)
-        {
-            if (TryComp<StackComponent>(ent.Owner, out var stack))
-            {
-                _stack.SetCount(ent.Owner, stack.Count + args.MaterialCost * args.Amount, stack); // give back lost material
-                UpdateStackAmountUI(ent);
-            }
-
-            return;
-        }
-
-        if (args.Handled)
+        if (args.Handled || args.Cancelled)
             return;
 
         var coordinates = GetCoordinates(args.Coordinates);
         args.Handled = true;
+
+        if (TryComp<StackComponent>(ent.Owner, out var stack))
+        {
+            if (!_stack.Use(ent.Owner, args.MaterialCost * args.Amount, stack))
+            {
+                var message = Loc.GetString("rmc-construction-more-material");
+                _popup.PopupClient(message, args.User, args.User, PopupType.SmallCaution);
+                return;
+            }
+        }
+        else if (_net.IsServer)
+        {
+            QueueDel(ent);
+        }
+
+        UpdateStackAmountUI(ent);
+
+        if (_net.IsClient)
+            return;
 
         for (var i = 0; i < args.Amount; i++)
         {
             var built = SpawnAtPosition(args.Prototype, coordinates);
             _transform.SetLocalRotation(built, args.Direction.ToAngle());
         }
-
-        UpdateStackAmountUI(ent);
     }
 
     private void UpdateStackAmountUI(Entity<RMCConstructionItemComponent> ent)
