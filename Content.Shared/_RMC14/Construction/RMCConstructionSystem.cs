@@ -172,11 +172,66 @@ public sealed class RMCConstructionSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        for (var i = 0; i < args.Amount; i++)
+        if (args.Amount > 1)
+        {
+            SpawnMultiple(args.Prototype, args.Amount, coordinates);
+        }
+        else
         {
             var built = SpawnAtPosition(args.Prototype, coordinates);
             _transform.SetLocalRotation(built, args.Direction.ToAngle());
         }
+    }
+
+    /// <summary>
+    ///     Say you want to spawn 97 units of something that has a max stack count of 30.
+    ///     This would spawn 3 stacks of 30 and 1 stack of 7.
+    /// </summary>
+    public List<EntityUid> SpawnMultiple(string entityPrototype, int amount, EntityCoordinates spawnPosition)
+    {
+        if (_net.IsClient)
+            return new();
+
+        if (amount <= 0)
+        {
+            Log.Error(
+                $"Attempted to spawn an invalid stack: {entityPrototype}, {amount}. Trace: {Environment.StackTrace}");
+            return new();
+        }
+
+        var spawns = CalculateSpawns(entityPrototype, amount);
+
+        var spawnedEnts = new List<EntityUid>();
+        foreach (var count in spawns)
+        {
+            var entity = SpawnAtPosition(entityPrototype, spawnPosition);
+            spawnedEnts.Add(entity);
+            _stack.SetCount(entity, count);
+        }
+
+        return spawnedEnts;
+    }
+
+    /// <summary>
+    /// Calculates how many stacks to spawn that total up to <paramref name="amount"/>.
+    /// </summary>
+    /// <param name="entityPrototype">The stack to spawn.</param>
+    /// <param name="amount">The amount of pieces across all stacks.</param>
+    /// <returns>The list of stack counts per entity.</returns>
+    public List<int> CalculateSpawns(string entityPrototype, int amount)
+    {
+        var proto = _prototype.Index<EntityPrototype>(entityPrototype);
+        proto.TryGetComponent<StackComponent>(out var stack, EntityManager.ComponentFactory);
+        var maxCountPerStack = _stack.GetMaxCount(stack);
+        var amounts = new List<int>();
+        while (amount > 0)
+        {
+            var countAmount = Math.Min(maxCountPerStack, amount);
+            amount -= countAmount;
+            amounts.Add(countAmount);
+        }
+
+        return amounts;
     }
 
     private void UpdateStackAmountUI(Entity<RMCConstructionItemComponent> ent)
