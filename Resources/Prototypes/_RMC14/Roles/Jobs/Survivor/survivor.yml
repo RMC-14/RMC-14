@@ -27,7 +27,7 @@
     components:
     - type: Skills
       skills:
-        RMCSkillConstruction: 1
+        RMCSkillConstruction: 2 # change to 1 after survivor jobs
         RMCSkillEndurance: 2
         RMCSkillFirearms: 1
     - type: EquipSurvivorPreset
