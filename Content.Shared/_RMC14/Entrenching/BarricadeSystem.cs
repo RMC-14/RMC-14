@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Barricade.Components;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
@@ -45,8 +46,7 @@ public sealed class BarricadeSystem : EntitySystem
 
         SubscribeLocalEvent<EmptySandbagComponent, InteractUsingEvent>(OnEmptyInteractUsing);
 
-        SubscribeLocalEvent<FullSandbagComponent, ActivateInWorldEvent>(OnFullActivateInWorld);
-        SubscribeLocalEvent<FullSandbagComponent, AfterInteractEvent>(OnFullAfterInteract);
+        SubscribeLocalEvent<FullSandbagComponent, UseInHandEvent>(OnUseInHand);
         SubscribeLocalEvent<FullSandbagComponent, SandbagBuildDoAfterEvent>(OnFullBuildDoAfter);
     }
 
@@ -209,26 +209,13 @@ public sealed class BarricadeSystem : EntitySystem
         _popup.PopupClient(Loc.GetString("cm-entrenching-begin-filling"), args.User, args.User);
     }
 
-    private void OnFullActivateInWorld(Entity<FullSandbagComponent> full, ref ActivateInWorldEvent args)
+    private void OnUseInHand(Entity<FullSandbagComponent> full, ref UseInHandEvent args)
     {
         if (args.Handled || !TryComp(args.User, out TransformComponent? transform))
-        {
-            return;
-        }
-
-        var coordinates = _transform.GetMoverCoordinates(args.User, transform);
-        var direction = transform.LocalRotation.GetCardinalDir();
-        if (Build(full, args.User, coordinates, direction))
-            args.Handled = true;
-    }
-
-    private void OnFullAfterInteract(Entity<FullSandbagComponent> full, ref AfterInteractEvent args)
-    {
-        if (args.Handled || !args.CanReach || !TryComp(args.User, out TransformComponent? transform))
             return;
 
         var direction = transform.LocalRotation.GetCardinalDir();
-        if (Build(full, args.User, args.ClickLocation, direction))
+        if (Build(full, args.User, transform.Coordinates, direction))
             args.Handled = true;
     }
 
