@@ -6,7 +6,9 @@ using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.Hands.EntitySystems;
 using Robust.Shared.Network;
+
 
 namespace Content.Shared._RMC14.BulletBox;
 
@@ -17,6 +19,7 @@ public sealed class BulletBoxSystem : EntitySystem
     [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {
@@ -43,36 +46,53 @@ public sealed class BulletBoxSystem : EntitySystem
     private void OnGetAlternativeVerbs(Entity<BulletBoxComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
         var user = args.User;
-        var verb = new AlternativeVerb()
+        //Checks to make sure the User has an item in their hand that holds bullets and can be refilled by boxes
+        if (!_hands.TryGetActiveItem(user, out var usedId))
         {
-            Act = () => { ent.Comp.TransferToBox = !ent.Comp.TransferToBox;
-                if (_net.IsServer)
+            return;
+        }
+        var used = new Entity<RefillableByBulletBoxComponent?, BallisticAmmoProviderComponent?>(usedId.Value, null, null);
+        if (!Resolve(used, ref used.Comp1, ref used.Comp2, false))
+            return;
+        
+        args.Verbs.Add(new AlternativeVerb
+        {
+            Act = () =>
+            {
+                //Passes some info to the CanTransferPopup function to check if it is possible to transfer bullets, passing true because this is an attempt to fill the box with bullets (TransferToBox is true)
+                if (!CanTransferPopup(ent, user, ref used, true))
+                    return;
+                //Constructs the doAfter event
+                var ev = new BulletBoxTransferDoAfterEvent(true);
+                var delay = ent.Comp.DelayTransferToBox;
+                var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent, ent, usedId)
                 {
-                    _popup.PopupEntity(Loc.GetString("rmc-bullet-box-refilling-" + ent.Comp.TransferToBox.ToString()), ent, user);
-                }
+                    BreakOnMove = true,
+                    BreakOnDropItem = true,
+                    NeedHand = true,
+                };
+                _doAfter.TryStartDoAfter(doAfter);
             },
+            Text = Loc.GetString("rmc-bullet-box-transferto"),
             Impact = LogImpact.Low,
-            Text = Loc.GetString("rmc-bullet-box-toggle")
-        };
-        args.Verbs.Add(verb);
+        });
     }
 
     private void OnInteractUsing(Entity<BulletBoxComponent> ent, ref InteractUsingEvent args)
     {
+        
         var used = new Entity<RefillableByBulletBoxComponent?, BallisticAmmoProviderComponent?>(args.Used, null, null);
         if (!Resolve(used, ref used.Comp1, ref used.Comp2, false))
             return;
 
         args.Handled = true;
         var user = args.User;
-        if (!CanTransferPopup(ent, user, ref used))
+        //Passes some info to the CanTransferPopup function to check if it is possible to transfer bullets, passing false because this is an attempt to take bullets from the box (TransferToBox is false)
+        if (!CanTransferPopup(ent, user, ref used, false))
             return;
 
-        var ev = new BulletBoxTransferDoAfterEvent();
+        var ev = new BulletBoxTransferDoAfterEvent(false);
         var delay = ent.Comp.DelayTransferFromBox;
-        if(ent.Comp.TransferToBox){
-            delay = ent.Comp.DelayTransferToBox;
-        }
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent, ent, args.Used)
         {
             BreakOnMove = true,
@@ -92,10 +112,11 @@ public sealed class BulletBoxSystem : EntitySystem
         var user = args.User;
         var transfer = 0;
         var used = new Entity<RefillableByBulletBoxComponent?, BallisticAmmoProviderComponent?>(usedId, null, null);
-        if (!CanTransferPopup(ent, user, ref used) || used.Comp2 == null)
+        var transferToBox = args.ToBox;
+        if (!CanTransferPopup(ent, user, ref used, transferToBox) || used.Comp2 == null)
             return;
 
-        if (!ent.Comp.TransferToBox)
+        if (!transferToBox)
         {
             transfer = used.Comp2.Capacity - used.Comp2.Count;
             if (transfer <= 0)
@@ -115,15 +136,12 @@ public sealed class BulletBoxSystem : EntitySystem
             _gun.SetBallisticUnspawned((used, used.Comp2), used.Comp2.UnspawnedCount - transfer);
             ent.Comp.Amount += transfer;
         }
-        if (_net.IsServer)
-        {
-            _popup.PopupEntity(Loc.GetString("rmc-bullet-box-transfer-done", ("amount", transfer), ("used", ent)), ent, user);
-        }
+        _popup.PopupClient(Loc.GetString("rmc-bullet-box-transfer-done", ("amount", transfer), ("used", ent)), ent, user);
         Dirty(ent);
         UpdateAppearance(ent);
     }
 
-    private bool CanTransferPopup(Entity<BulletBoxComponent> box, EntityUid user, ref Entity<RefillableByBulletBoxComponent?, BallisticAmmoProviderComponent?> used)
+    private bool CanTransferPopup(Entity<BulletBoxComponent> box, EntityUid user, ref Entity<RefillableByBulletBoxComponent?, BallisticAmmoProviderComponent?> used, bool TransferToBox)
     {
         if (!Resolve(used, ref used.Comp1, ref used.Comp2, false))
             return false;
@@ -134,7 +152,7 @@ public sealed class BulletBoxSystem : EntitySystem
         {
             popup = Loc.GetString("rmc-bullet-box-wrong-rounds");
         }
-        if (!box.Comp.TransferToBox)
+        if (!TransferToBox)
         {
             if (used.Comp2.Count >= used.Comp2.Capacity)
             {
@@ -158,10 +176,7 @@ public sealed class BulletBoxSystem : EntitySystem
         }
         if(popup is not null)
         {
-            if (_net.IsServer)
-            {
-                _popup.PopupEntity(popup, box, user);
-            }
+            _popup.PopupClient(popup, box, user);
             return false;
         }
         return true;

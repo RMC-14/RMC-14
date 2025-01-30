@@ -13,9 +13,6 @@ public sealed partial class BulletBoxComponent : Component
     [DataField, AutoNetworkedField]
     public int Max = 600;
 
-    [DataField, AutoNetworkedField]
-    public bool TransferToBox = false;
-
     [DataField(required: true), AutoNetworkedField]
     public EntProtoId BulletType;
 
