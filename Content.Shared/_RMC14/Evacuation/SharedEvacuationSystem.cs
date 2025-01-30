@@ -100,7 +100,8 @@ public abstract class SharedEvacuationSystem : EntitySystem
 
     private void OnDropshipHijackLanded(ref DropshipHijackLandedEvent ev)
     {
-        EnsureComp<EvacuationProgressComponent>(ev.Map);
+        var evacuationProgress = EnsureComp<EvacuationProgressComponent>(ev.Map);
+        evacuationProgress.DropShipCrashed = true;
 
         var doors = EntityQueryEnumerator<EvacuationDoorComponent>();
         while (doors.MoveNext(out var uid, out var door))
@@ -400,13 +401,15 @@ public abstract class SharedEvacuationSystem : EntitySystem
         return _rmcPower.IsAreaPowered(area, RMCPowerChannel.Equipment);
     }
 
-    public void ToggleEvacuation(SoundSpecifier? startSound, SoundSpecifier? cancelSound)
+    public void ToggleEvacuation(SoundSpecifier? startSound, SoundSpecifier? cancelSound, EntityUid? map)
     {
-        var query = EntityQueryEnumerator<EvacuationProgressComponent>();
-        while (query.MoveNext(out var uid, out var progress))
+        if (map == null)
+            return;
+
+        var progress = EnsureComp<EvacuationProgressComponent>(map.Value);
         {
             progress.Enabled = !progress.Enabled;
-            Dirty(uid, progress);
+            Dirty(map.Value, progress);
 
             if (progress.Enabled)
             {
@@ -416,16 +419,14 @@ public abstract class SharedEvacuationSystem : EntitySystem
                     startSound
                 );
                 var ev = new EvacuationEnabledEvent();
-                RaiseLocalEvent(uid, ref ev, true);
+                RaiseLocalEvent(map.Value, ref ev, true);
             }
             else
             {
                 _marineAnnounce.AnnounceARES(null, "Evacuation has been cancelled.", cancelSound);
                 var ev = new EvacuationDisabledEvent();
-                RaiseLocalEvent(uid, ref ev, true);
+                RaiseLocalEvent(map.Value, ref ev, true);
             }
-
-            break;
         }
     }
 
@@ -477,6 +478,10 @@ public abstract class SharedEvacuationSystem : EntitySystem
         var query = EntityQueryEnumerator<EvacuationProgressComponent>();
         while (query.MoveNext(out var uid, out var progress))
         {
+            //Only start fueling once the dropship has crashed into the Almayer and while an evacuation has been issued
+            if (!progress.DropShipCrashed || !progress.Enabled)
+                return;
+
             if (!progress.StartAnnounced)
             {
                 progress.StartAnnounced = true;
