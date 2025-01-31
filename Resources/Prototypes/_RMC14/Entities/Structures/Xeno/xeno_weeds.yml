@@ -110,10 +110,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
-    drawdepth: DeadMobs
+    drawdepth: FloorObjects
     layers:
     - state: weed0
-      drawdepth: FloorTiles
     - state: constructionnode
   - type: Destructible
     thresholds:
