@@ -4,7 +4,7 @@
   - CMXenoFlammable
   id: CMXenoParasiteBase
   name: Parasite
-  suffix: Base
+  abstract: true
   components:
   - type: GhostRole
     name: cm-job-name-xeno-parasite
@@ -131,7 +131,8 @@
     - ActionXenoRest
     - ActionXenoWatch
     - ActionXenoLeap
-    - ActionXenoZoom 
+    - ActionXenoZoom
+    hidden: true
   - type: XenoZoom
   - type: XenoStrain
     name: rmc-xeno-observer-name
