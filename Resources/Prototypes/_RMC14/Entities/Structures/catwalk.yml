@@ -23,10 +23,9 @@
         volume: 8
   - type: Tag
     tags:
-      - Catwalk
+    - Catwalk
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Metallic
   - type: Destructible
     thresholds:
     - trigger:
@@ -61,6 +60,13 @@
   - type: Sprite
     state: prison_catwalk
 
+- type: entity
+  parent: CMCatwalk
+  id: RMCCatwalkKutjevo
+  components:
+  - type: Sprite
+    state: kutjevo_catwalk
+
 # Monorail
 
 - type: entity
@@ -88,7 +94,7 @@
         volume: 8
   - type: Tag
     tags:
-      - Catwalk
+    - Catwalk
 
 - type: entity
   parent: RMCMonorailStraight

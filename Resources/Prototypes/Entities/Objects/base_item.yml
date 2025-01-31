@@ -43,6 +43,7 @@
     noRot: false
   - type: Pullable
   - type: DamageExaminable
+  - type: RMCItemPickup
 
 - type: entity
   name: "storage item"
@@ -67,11 +68,13 @@
   - type: Appearance
   - type: GenericVisualizer
     visuals:
-      enum.SharedBagOpenVisuals.BagState:
+      enum.SharedBagOpenVisuals.BagState: # You don't have to use both of these if its not necessary.
+        closeLayer:
+          Open: { visible: false }
+          Closed: { visible: true }
         openLayer:
           Open: { visible: true }
           Closed: { visible: false }
-
 
 # PowerCellSlot parents
 - type: entity

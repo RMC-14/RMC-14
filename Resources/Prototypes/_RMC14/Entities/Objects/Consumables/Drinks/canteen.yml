@@ -66,7 +66,7 @@
   parent: CMCanteenBase
   id: CMWEYAFlask
   name: We-Ya flask
-  description: A metal flask embossed with We-Ya's signature logo that some corporate bootlicker probably ordered to be stocked in USS military vessels' canteen vendors.
+  description: A metal flask embossed with We-Ya's signature logo that some corporate bootlicker probably ordered to be stocked in UNS military vessels' canteen vendors.
   components:
   - type: Sprite
     state: flask_we_ya

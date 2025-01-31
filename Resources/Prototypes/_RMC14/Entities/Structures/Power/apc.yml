@@ -1,80 +1,135 @@
 - type: entity
-  noSpawn: true
-  parent: BaseAPC
+  abstract: true
   id: CMApcBase
   name: area power controller
+  description: A control terminal for the area electrical systems.
+  categories: [ HideSpawnMenu ]
   components:
+  - type: Transform
+    anchored: true
   - type: AccessReader
-    access: [["CMAccessEngineering"]]
+    access: [ [ "CMAccessEngineering" ] ]
+  - type: Clickable
+  - type: InteractionOutline
   - type: Sprite
     drawdepth: WallMountedItems
     sprite: _RMC14/Structures/Power/apc.rsi
     layers:
     - state: base
+      map: [ "base" ]
     - state: panel
-      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
       visible: false
     - state: display-charging
       shader: unshaded
-      map: ["enum.ApcVisualLayers.ChargeState"]
+      map: [ "enum.ApcVisualLayers.ChargeState" ]
     - state: apcox-0
       shader: unshaded
-      map: ["enum.ApcVisualLayers.InterfaceLock"]
+      map: [ "enum.ApcVisualLayers.InterfaceLock" ]
     - state: apcox-1
       shader: unshaded
-      map: ["enum.ApcVisualLayers.PanelLock"]
+      map: [ "enum.ApcVisualLayers.PanelLock" ]
     - state: apco0-2
       shader: unshaded
-      map: ["enum.ApcVisualLayers.Equipment"]
+      map: [ "enum.ApcVisualLayers.Equipment" ]
     - state: apco1-2
       shader: unshaded
-      map: ["enum.ApcVisualLayers.Lighting"]
+      map: [ "enum.ApcVisualLayers.Lighting" ]
     - state: apco2-2
       shader: unshaded
-      map: ["enum.ApcVisualLayers.Environment"]
-  - type: PowerMonitoringDevice
-    sprite: _RMC14/Structures/Power/apc.rsi
-    state: base
-  - type: Construction
-    graph: CMApc
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 200
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          CMSheetMetal1:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: ContainerContainer
-    containers:
-      cell_slot: !type:ContainerSlot {}
-  - type: PowerCellSlot
-    cellSlotId: cell_slot
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
-  - type: Charger
-    slotId: cell_slot
+      map: [ "enum.ApcVisualLayers.Environment" ]
+  - type: Appearance
+  - type: WallMount
+    arc: 360
+  - type: UserInterface
+    interfaces:
+      enum.RMCApcUiKey.Key:
+        type: RMCApcBui
+  - type: ActivatableUI
+    key: enum.RMCApcUiKey.Key
+  - type: Corrodible
+    isCorrodible: false
+  - type: RMCApc
   - type: ActivatableUIBlacklist
     blacklist:
       components:
       - Xeno
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Breakage"]
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCApcVisualsLayers.Layer:
+        base:
+          Working: { state: base }
+          WiresExposed: { state: apcewires }
+          CoverOpenBattery: { state: apc2 }
+          CoverOpenNoBattery: { state: apc1 }
+        enum.WiresVisualLayers.MaintenancePanel: # TODO RMC14
+          Working: { visible: false }
+          WiresExposed: { visible: false }
+        enum.ApcVisualLayers.ChargeState: # TODO RMC14
+          Working: { visible: true }
+          WiresExposed: { visible: false }
+          CoverOpenBattery: { visible: false }
+          CoverOpenNoBattery: { visible: false }
+        enum.ApcVisualLayers.InterfaceLock:
+          Working: { visible: true }
+          WiresExposed: { visible: false }
+          CoverOpenBattery: { visible: false }
+          CoverOpenNoBattery: { visible: false }
+        enum.ApcVisualLayers.PanelLock:
+          Working: { visible: true }
+          WiresExposed: { visible: false }
+          CoverOpenBattery: { visible: false }
+          CoverOpenNoBattery: { visible: false }
+        enum.ApcVisualLayers.Equipment:
+          Working: { visible: true }
+          WiresExposed: { visible: false }
+          CoverOpenBattery: { visible: false }
+          CoverOpenNoBattery: { visible: false }
+        enum.ApcVisualLayers.Lighting:
+          Working: { visible: true }
+          WiresExposed: { visible: false }
+          CoverOpenBattery: { visible: false }
+          CoverOpenNoBattery: { visible: false }
+        enum.ApcVisualLayers.Environment:
+          Working: { visible: true }
+          WiresExposed: { visible: false }
+          CoverOpenBattery: { visible: false }
+          CoverOpenNoBattery: { visible: false }
+      enum.RMCApcVisualsLayers.Lock:
+        enum.ApcVisualLayers.InterfaceLock:
+          true: { state: apcox-1 }
+          false: { state: apcox-0 }
+#        enum.ApcVisualLayers.PanelLock: # TODO RMC14
+#          Working: { visible: false }
+#          Broken: { visible: false }
+#        enum.ApcVisualLayers.Equipment: # TODO RMC14
+#          Working: { visible: false }
+#          Broken: { visible: false }
+#        enum.ApcVisualLayers.Lighting: # TODO RMC14
+#          Working: { visible: false }
+#          Broken: { visible: false }
+#        enum.ApcVisualLayers.Environment: # TODO RMC14
+#          Working: { visible: false }
+#          Broken: { visible: false }
+      enum.RMCApcVisualsLayers.Power:
+        enum.ApcVisualLayers.ChargeState: # TODO RMC14
+          NotCharging: { state: display-lack }
+          Charging: { state: display-full }
+          FullCharge: { state: display-charging }
 
 # APC under construction
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: APCFrame
   id: CMApcFrame
   components:
@@ -107,7 +162,33 @@
 - type: entity
   parent: CMApcBase
   id: CMApcConstructed
-  suffix: APC, Open
+
+- type: entity
+  parent: CMApcBase
+  id: CMApc
+  suffix: No Power
+  components:
+  - type: RMCApc
+    startingCell: RMCPowerCellAPC
+
+- type: entity
+  parent: CMApcBase
+  id: CMApcNoPower
+  suffix: No Power
+  components:
+  - type: RMCApc
+    startingCell: RMCPowerCellAPCNoPower
+
+- type: entity
+  parent: CMApcBase
+  id: CMApcAlmayer
+  suffix: Almayer
+  components:
+  - type: RMCApc
+    startingCell: RMCPowerCellHigh
+  - type: ContainerContainer
+    containers:
+      rmc_apc_power_cell: !type:ContainerSlot
 
 # APCs in use
 - type: entity

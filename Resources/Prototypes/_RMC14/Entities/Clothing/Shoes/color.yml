@@ -9,10 +9,25 @@
     sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/black.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Shoes/Sneakers/black.rsi
+  - type: ContainerContainer
+    containers:
+      item: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      item:
+        name: holdout
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+        whitelist:
+          tags:
+          - Holdout
+        startingItem: RMCSpaceCash1
+  - type: CMItemSlots
+    startingItem: RMCSpaceCash1
 
 # Brown  
 - type: entity
-  parent: ClothingShoesBase
+  parent: RMCShoesBlack
   id: RMCShoesBrown
   name: brown shoes
   description: A pair of brown shoes.
@@ -24,7 +39,7 @@
 
 # Blue 
 - type: entity
-  parent: ClothingShoesBase
+  parent: RMCShoesBlack
   id: RMCShoesBlue
   name: blue shoes
   description: A pair of blue shoes.
@@ -36,7 +51,7 @@
 
 # Green 
 - type: entity
-  parent: ClothingShoesBase
+  parent: RMCShoesBlack
   id: RMCShoesGreen
   name: green shoes
   description: A pair of green shoes.
@@ -48,7 +63,7 @@
 
 # Yellow 
 - type: entity
-  parent: ClothingShoesBase
+  parent: RMCShoesBlack
   id: RMCShoesYellow
   name: yellow shoes
   description: A pair of yellow shoes.
@@ -60,7 +75,7 @@
 
 # Purple
 - type: entity
-  parent: ClothingShoesBase
+  parent: RMCShoesBlack
   id: RMCShoesPurple
   name: purple shoes
   description: A pair of purple shoes.
@@ -72,7 +87,7 @@
 
 # Red 
 - type: entity
-  parent: ClothingShoesBase
+  parent: RMCShoesBlack
   id: RMCShoesRed
   name: red shoes
   description: Stylish red shoes.
@@ -84,7 +99,7 @@
 
 # Orange  
 - type: entity
-  parent: ClothingShoesBase
+  parent: RMCShoesBlack
   id: RMCShoesOrange
   name: orange shoes
   description: A pair of orange shoes.
@@ -96,7 +111,7 @@
 
 # White
 - type: entity
-  parent: ClothingShoesBase
+  parent: RMCShoesBlack
   id: RMCShoesWhite
   name: white shoes
   description: A pair of white shoes.
@@ -108,7 +123,7 @@
 
 # Leather
 - type: entity
-  parent: ClothingShoesBase
+  parent: RMCShoesBlack
   id: RMCShoesLeather
   name: leather shoes
   description: A sturdy pair of leather shoes.

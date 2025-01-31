@@ -1,4 +1,5 @@
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Projectile.Parasite;
@@ -28,4 +29,28 @@ public sealed partial class XenoParasiteThrowerComponent : Component
 
     [DataField]
     public TimeSpan ThrownParasiteCooldown = TimeSpan.FromSeconds(2);
+
+    //Should equal visible position length
+    [DataField]
+    public int NumPositions = 4;
+
+    [DataField, AutoNetworkedField]
+    public bool[] VisiblePositions = [false, false, false, false];
+}
+
+[Serializable, NetSerializable]
+public enum ParasiteOverlayVisuals
+{
+	Resting,
+	Downed,
+	States
+}
+
+[Serializable, NetSerializable]
+public enum ParasiteOverlayLayers : int
+{
+	RightArm = 0,
+	Head = 1,
+	LeftArm = 2,
+	Back = 3
 }

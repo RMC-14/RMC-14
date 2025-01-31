@@ -1,13 +1,12 @@
 using System.Linq;
 using Content.Server.Body.Components;
-using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Server.Interaction;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
-using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Chemistry.Hypospray.Events;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
@@ -53,13 +52,43 @@ public sealed class HypospraySystem : SharedHypospraySystem
         var uid = ent.Owner;
         string? msgFormat = null;
 
-        if (target == user)
-            msgFormat = "hypospray-component-inject-self-message";
-        else if (EligibleEntity(user, EntityManager, component) && _interaction.TryRollClumsy(user, component.ClumsyFailChance))
+        // Self event
+        var selfEvent = new SelfBeforeHyposprayInjectsEvent(user, ent, target);
+        RaiseLocalEvent(user, selfEvent);
+
+        if (selfEvent.Cancelled)
         {
-            msgFormat = "hypospray-component-inject-self-clumsy-message";
-            target = user;
+            _popup.PopupEntity(Loc.GetString(selfEvent.InjectMessageOverride ?? "hypospray-cant-inject", ("owner", Identity.Entity(target, EntityManager))), target, user);
+            return;
         }
+
+        target = selfEvent.TargetGettingInjected;
+
+        if (!EligibleEntity(target, EntityManager, component))
+            return;
+
+        // Target event
+        var targetEvent = new TargetBeforeHyposprayInjectsEvent(user, ent, target);
+        RaiseLocalEvent(target, targetEvent);
+
+        if (targetEvent.Cancelled)
+        {
+            _popup.PopupEntity(Loc.GetString(targetEvent.InjectMessageOverride ?? "hypospray-cant-inject", ("owner", Identity.Entity(target, EntityManager))), target, user);
+            return;
+        }
+
+        target = targetEvent.TargetGettingInjected;
+
+        if (!EligibleEntity(target, EntityManager, component))
+            return;
+
+        // The target event gets priority for the overriden message.
+        if (targetEvent.InjectMessageOverride != null)
+            msgFormat = targetEvent.InjectMessageOverride;
+        else if (selfEvent.InjectMessageOverride != null)
+            msgFormat = selfEvent.InjectMessageOverride;
+        else if (target == user)
+            msgFormat = "hypospray-component-inject-self-message";
 
         if (!_solutionContainers.TryGetSolution(uid, component.SolutionName, out var hypoSpraySoln, out var hypoSpraySolution) || hypoSpraySolution.Volume == 0)
         {
@@ -110,7 +139,7 @@ public sealed class HypospraySystem : SharedHypospraySystem
         RaiseLocalEvent(target, ref ev);
 
         // same LogType as syringes...
-        _adminLogger.Add(LogType.ForceFeed, $"{EntityManager.ToPrettyString(user):user} injected {EntityManager.ToPrettyString(target):target} with a solution {SolutionContainerSystem.ToPrettyString(removedSolution):removedSolution} using a {EntityManager.ToPrettyString(uid):using}");
+        _adminLogger.Add(LogType.ForceFeed, $"{EntityManager.ToPrettyString(user):user} injected {EntityManager.ToPrettyString(target):target} with a solution {SharedSolutionContainerSystem.ToPrettyString(removedSolution):removedSolution} using a {EntityManager.ToPrettyString(uid):using}");
     }
 
     private bool TryUseHypospray(Entity<HyposprayComponent> entity, EntityUid target, EntityUid user)

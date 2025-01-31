@@ -59,6 +59,8 @@
     - conditions:
         unwieldedOnly: true
       accuracyAddMult: -0.05
+  - type: AttachablePrying
+  - type: DeleteOnExplosion
 
 - type: entity
   name: M11 throwing knife
@@ -95,9 +97,7 @@
   - type: Tag
     tags:
     - ThrowingKnife
-
-- type: Tag
-  id: ThrowingKnife
+  - type: DeleteOnExplosion
 
 - type: entity
   parent: [ RMCBaseMeleeWeapon, BaseKnife]
@@ -106,7 +106,7 @@
   description: Latest issue of the Marine Machete.
   components:
   - type: Clothing
-    slots: 
+    slots:
     - belt
     - suitstorage
   - type: Tag
@@ -132,6 +132,15 @@
     sprite: _RMC14/Objects/Weapons/Melee/machete.rsi
   - type: DisarmMalus
     malus: 0.225
+  - type: Tool
+    qualities:
+    - Prying
+  - type: Prying
+    pryPowered: false
+    speedModifier: 0.8
+    useSound:
+      path: /Audio/Items/crowbar.ogg
+  - type: DeleteOnExplosion
 
 - type: Tag
   id: RMCM5Bayonet

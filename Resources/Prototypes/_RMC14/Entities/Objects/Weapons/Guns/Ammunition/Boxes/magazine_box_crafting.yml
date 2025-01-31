@@ -1,4 +1,4 @@
-﻿# construction ui entries
+# construction ui entries
 
 # M54C
 - type: construction
@@ -144,19 +144,19 @@
     state: base_m1984
   objectType: Item
 
-#- type: construction
-#  parent: RMC
-#  name: Magazine Box (M1984 AP)
-#  id: RMCBoxMagazinePistolM1984AP
-#  graph: RMCBoxMagazine
-#  startNode: start
-#  targetNode: RMCBoxMagazinePistolM1984APEmpty
-#  category: construction-category-cm-box-magazine
-#  description: A magazine box that can contain armor piercing M1984 mags.
-#  icon:
-#    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-#    state: base_m1984
-#  objectType: Item
+- type: construction
+  parent: RMC
+  name: Magazine Box (M1984 AP)
+  id: RMCBoxMagazinePistolM1984AP
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazinePistolM1984APEmpty
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain armor piercing M1984 mags.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_m1984
+  objectType: Item
 
 # 88 mod 4 / 88m4
 - type: construction
@@ -232,8 +232,179 @@
     state: base_m54
   objectType: Item
 
+# Nailgun
+- type: construction
+  parent: RMC
+  name: Magazine Box (Nailgun)
+  id: RMCBoxMagazineSMGNailgunEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazineSMGNailgunEmpty
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain nailgun mags.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_nailgun
+  objectType: Item
 
-  # Construct graphs
+# Shotgun
+- type: construction
+  parent: RMC
+  name: Shell Box (Buckshot)
+  id: RMCBoxShellsBuckshotEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxShellsBuckshotEmpty
+  category: construction-category-cm-box-magazine
+  description: A box for holding shells.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_buck
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: Shell Box (Slugs)
+  id: RMCBoxShellsSlugsEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxShellsSlugsEmpty
+  category: construction-category-cm-box-magazine
+  description: A box for holding shells.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_slug
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: Shell Box (Flechette)
+  id: RMCBoxShellsFlechetteEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxShellsFlechetteEmpty
+  category: construction-category-cm-box-magazine
+  description: A box for holding shells.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_flech
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: Shell Box (Incendiary)
+  id: RMCBoxShellsIncendiaryEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxShellsIncendiaryEmpty
+  category: construction-category-cm-box-magazine
+  description: A box for holding shells.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_inc
+  objectType: Item
+
+# - type: construction
+  # parent: RMC
+  # name: Shell Box (Beanbag)
+  # id: RMCBoxShellsBeanbagEmpty
+  # graph: RMCBoxMagazine
+  # startNode: start
+  # targetNode: RMCBoxShellsBeanbagEmpty
+  # category: construction-category-cm-box-magazine
+  # description: A box for holding shells.
+  # icon:
+    # sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    # state: base_bean
+  # objectType: Item
+
+- type: construction
+  parent: RMC
+  name: Shell Box (Inc Buckshot)
+  id: RMCBoxShellsIncendiaryBuckshotEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxShellsIncendiaryBuckshotEmpty
+  category: construction-category-cm-box-magazine
+  description: A box for holding shells.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_incbuck
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: Shell Box (Breaching)
+  id: RMCBoxShellsBreachingEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxShellsBreachingEmpty
+  category: construction-category-cm-box-magazine
+  description: A box for holding shells.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: base_breach
+  objectType: Item
+
+# Misc
+
+- type: construction
+  parent: RMC
+  name: Supply Box (MRE)
+  id: RMCBoxMREEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMREEmpty
+  category: construction-category-cm-box-magazine
+  description: A box of MREs. Nutritious, but not delicious.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: supply_crate
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: Supply Box (M94)
+  id: RMCBoxPackFlareEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxPackFlareEmpty
+  category: construction-category-cm-box-magazine
+  description: A box of M94 marking flare packs, to brighten up your day.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: supply_crate
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: Supply Box (M89-S)
+  id: RMCBoxPackFlareCASEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxPackFlareCASEmpty
+  category: construction-category-cm-box-magazine
+  description: A box of M89 signal flare packs, to mark up the way.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: supply_crate
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: Supply Box (Flashlights)
+  id: RMCBoxFlashlightsEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxFlashlightsEmpty
+  category: construction-category-cm-box-magazine
+  description: A box of flashlights to brighten your day!
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: flashlightbox
+  objectType: Item
+
+# Construct graphs
 - type: constructionGraph
   parent: RMC
   id: RMCBoxMagazine
@@ -247,100 +418,172 @@
       steps:
       - material: RMCSheetCardboard
         amount: 1
-        doAfter: 1
+        doAfter: 0.25
     - to: RMCBoxMagazineRifleM54CAPEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
-        doAfter: 1
+        doAfter: 0.25
     - to: RMCBoxMagazineRifleM54CExtEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
-        doAfter: 1
+        doAfter: 0.25
 
     # M63
     - to: RMCBoxMagazineSMGM63Empty
       steps:
       - material: RMCSheetCardboard
         amount: 1
-        doAfter: 1
+        doAfter: 0.25
     - to: RMCBoxMagazineSMGM63APEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
-        doAfter: 1
+        doAfter: 0.25
     - to: RMCBoxMagazineSMGM63ExtEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
-        doAfter: 1
+        doAfter: 0.25
 
     # M4SPR
     - to: RMCBoxMagazineRifleM4SPREmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
-        doAfter: 1
+        doAfter: 0.25
 
     - to: RMCBoxMagazineRifleM4SPRAPEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
-        doAfter: 1
+        doAfter: 0.25
 
     - to: RMCBoxMagazineRifleM4SPRExtEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
-        doAfter: 1
+        doAfter: 0.25
 
     # M1984
     - to: RMCBoxMagazinePistolM1984Empty
       steps:
       - material: RMCSheetCardboard
         amount: 1
-        doAfter: 1
+        doAfter: 0.25
 
-#    - to: RMCBoxMagazinePistolM1984APEmpty
-#      steps:
-#      - material: RMCSheetCardboard
-#        amount: 1
-#        doAfter: 1
+    - to: RMCBoxMagazinePistolM1984APEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
 
     # M77AP
     - to: RMCBoxMagazinePistolM77APEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
-        doAfter: 1
+        doAfter: 0.25
 
     # MK80
     - to: RMCBoxMagazinePistolMK80Empty
       steps:
       - material: RMCSheetCardboard
         amount: 1
-        doAfter: 1
+        doAfter: 0.25
 
     # SU-6
     - to: RMCBoxMagazinePistolSU6Empty
       steps:
       - material: RMCSheetCardboard
         amount: 1
-        doAfter: 1
+        doAfter: 0.25
 
     # M44
     - to: RMCBoxMagazineRevolverM44Empty
       steps:
       - material: RMCSheetCardboard
         amount: 1
-        doAfter: 1
+        doAfter: 0.25
     - to: RMCBoxMagazineRevolverM44MarksmanEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
-        doAfter: 1
-    
+        doAfter: 0.25
+
+    # Nailgun
+    - to: RMCBoxMagazineSMGNailgunEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
+    # XM88
+    - to: RMCBoxBullets458Empty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
+    # Shotgun
+    - to: RMCBoxShellsBuckshotEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+    - to: RMCBoxShellsSlugsEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+    - to: RMCBoxShellsFlechetteEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+    - to: RMCBoxShellsIncendiaryEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+    # - to: RMCBoxShellsBeanbagEmpty
+      # steps:
+      # - material: RMCSheetCardboard
+        # amount: 1
+        # doAfter: 0.25
+    - to: RMCBoxShellsIncendiaryBuckshotEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+    - to: RMCBoxShellsBreachingEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
+    # Misc
+    - to: RMCBoxMREEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+    - to: RMCBoxPackFlareEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+    - to: RMCBoxPackFlareCASEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+    - to: RMCBoxFlashlightsEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
 
   # Why the fuck do you even need these nodes???
 
@@ -371,8 +614,8 @@
   # M1984
   - node: RMCBoxMagazinePistolM1984Empty
     entity: RMCBoxMagazinePistolM1984Empty
-#  - node: RMCBoxMagazinePistolM1984APEmpty
-#    entity: RMCBoxMagazinePistolM1984APEmpty
+  - node: RMCBoxMagazinePistolM1984APEmpty
+    entity: RMCBoxMagazinePistolM1984APEmpty
 
   # M77AP
   - node: RMCBoxMagazinePistolM77APEmpty
@@ -391,3 +634,37 @@
     entity: RMCBoxMagazineRevolverM44Empty
   - node: RMCBoxMagazineRevolverM44MarksmanEmpty
     entity: RMCBoxMagazineRevolverM44MarksmanEmpty
+
+  # Nailgun
+  - node: RMCBoxMagazineSMGNailgunEmpty
+    entity: RMCBoxMagazineSMGNailgunEmpty
+
+  # XM88
+  - node: RMCBoxBullets458Empty
+    entity: RMCBoxBullets458Empty
+
+  # Shotgun
+  - node: RMCBoxShellsBuckshotEmpty
+    entity: RMCBoxShellsBuckshotEmpty
+  - node: RMCBoxShellsSlugsEmpty
+    entity: RMCBoxShellsSlugsEmpty
+  - node: RMCBoxShellsFlechetteEmpty
+    entity: RMCBoxShellsFlechetteEmpty
+  - node: RMCBoxShellsIncendiaryEmpty
+    entity: RMCBoxShellsIncendiaryEmpty
+  # - node: RMCBoxShellsBeanbagEmpty
+    # entity: RMCBoxShellsBeanbagEmpty
+  - node: RMCBoxShellsIncendiaryBuckshotEmpty
+    entity: RMCBoxShellsIncendiaryBuckshotEmpty
+  - node: RMCBoxShellsBreachingEmpty
+    entity: RMCBoxShellsBreachingEmpty
+
+  # Misc
+  - node: RMCBoxMREEmpty
+    entity: RMCBoxMREEmpty
+  - node: RMCBoxPackFlareEmpty
+    entity: RMCBoxPackFlareEmpty
+  - node: RMCBoxPackFlareCASEmpty
+    entity: RMCBoxPackFlareCASEmpty
+  - node: RMCBoxFlashlightsEmpty
+    entity: RMCBoxFlashlightsEmpty

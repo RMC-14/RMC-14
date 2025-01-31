@@ -1,17 +1,15 @@
-﻿using Content.Shared.Damage;
+using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Dropship.Weapon;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedDropshipWeaponSystem))]
 public sealed partial class DropshipAmmoComponent : Component
 {
-    [DataField, AutoNetworkedField]
-    public TimeSpan AttachDelay = TimeSpan.FromSeconds(5);
-
     [DataField, AutoNetworkedField]
     public int TargetSpread = 3;
 
@@ -53,4 +51,13 @@ public sealed partial class DropshipAmmoComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId ImpactEffect = "RMCEffectExplosionParticle";
+
+    [DataField, AutoNetworkedField]
+    public string? AmmoType;
+}
+
+[Serializable, NetSerializable]
+public enum DropshipAmmoVisuals
+{
+    Fill,
 }

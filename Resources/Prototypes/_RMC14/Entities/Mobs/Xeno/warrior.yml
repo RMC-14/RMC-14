@@ -4,6 +4,7 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
   id: CMXenoWarrior
   name: Warrior
   description: A beefy alien with an armored carapace.
@@ -34,14 +35,13 @@
     - ActionXenoFling
     - ActionXenoDevolve
     tier: 2
-    hudOffset: 0,0.25
+    hudOffset: -0.15,0.25
     unlockAt: 540 # 9 minutes
+  - type: XenoLight
   - type: XenoDevolve
     devolvesTo:
     - CMXenoDefender
   - type: XenoDevour
-  - type: SlowOnPull
-    multiplier: 0.56
   - type: XenoPunch
     damage:
       types:
@@ -60,13 +60,32 @@
   - type: CMArmor
     armor: 20
     explosionArmor: 40
+  - type: XenoClaws
+    clawType: Sharp
   - type: MeleeWeapon
     damage:
       groups:
         Brute: 35
-  - type: Tackle # min: 2, max: 4
-    threshold: 4
-    stun: 5
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 48
+  - type: Tackle
+    max: 4
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.4525
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.5025
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.3625
+      whitelist:
+        components:
+        - XenoHeavy
   - type: XenoLifesteal
   - type: RMCXenoDamageVisuals
     prefix: warrior

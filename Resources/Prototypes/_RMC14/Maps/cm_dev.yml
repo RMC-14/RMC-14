@@ -1,6 +1,6 @@
 ﻿- type: gameMap
-  id: CMDev
-  mapName: CMDev
+  id: RMCDev
+  mapName: RMCDev
   mapPath: /Maps/_RMC14/dev_map.yml
   minPlayers: 0
   maxRandomOffset: 0

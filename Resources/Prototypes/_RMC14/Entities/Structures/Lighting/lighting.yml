@@ -1,4 +1,4 @@
-﻿# Light Tubes
+# Light Tubes
 
 # Light Tube, Always Powered
 - type: entity
@@ -8,6 +8,11 @@
   description: A lighting fixture that is fitted with a bright fluorescent light tube. Looking at it for too long makes your eyes go watery.
   suffix: Always powered
   components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+    canCollide: false
   - type: Sprite
     sprite: _RMC14/Structures/Wallmounts/Lighting/light_tube.rsi
     state: tube1
@@ -22,34 +27,15 @@
       Broken: tube-broken
       Burned: tube-burned
   - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 200
-      behaviors: #excess damage, don't spawn entities.
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-    - trigger:
-        !type:DamageTrigger
-        damage: 9 # 9.15 for lesser drone
-      behaviors:
-      - !type:EmptyAllContainersBehaviour
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          CMSheetMetal1:
-            min: 2
-            max: 2
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
+    thresholds: []
   - type: Construction
     graph: CMLightFixture
     node: tubeLight
+  - type: RMCBreakLightOnAttack
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMLightFixtureAlwaysPowered
@@ -124,18 +110,16 @@
     containers:
       light_bulb: !type:ContainerSlot
   - type: ApcPowerReceiver
-  - type: ExtensionCableReceiver
-  - type: DeviceNetwork
-    deviceNetId: Wireless
-    receiveFrequencyId: SmartLight
-  - type: WirelessNetworkConnection
-    range: 200
+  - type: Appearance
+  - type: RMCPowerReceiver
+    idleLoad: 1
+    activeLoad: 40
+    channel: Lighting
   - type: DeviceLinkSink
     ports:
-      - On
-      - Off
-      - Toggle
-  - type: Appearance
+    - On
+    - Off
+    - Toggle
 
 - type: entity
   parent: CMLightFixtureEmpty
@@ -212,6 +196,11 @@
     range: 2
     sound:
       path: /Audio/Ambience/Objects/light_hum.ogg
+  - type: DeviceLinkSink
+    ports:
+    - On
+    - Off
+    - Toggle
 
 - type: entity
   parent: CMLightFixture
@@ -293,34 +282,11 @@
       Broken: bulb-broken
       Burned: bulb-burned
   - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 200
-      behaviors: #excess damage, don't spawn entities.
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-    - trigger:
-        !type:DamageTrigger
-        damage: 9 # 9.15 for lesser drone
-      behaviors:
-      - !type:EmptyAllContainersBehaviour
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          CMSheetMetal1:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
+    thresholds: []
   - type: Construction
     graph: CMLightFixture
     node: bulbLight
+  - type: RMCBreakLightOnAttack
 
 - type: entity
   parent: CMLightFixtureSmallAlwaysPowered
@@ -361,18 +327,16 @@
     containers:
       light_bulb: !type:ContainerSlot
   - type: ApcPowerReceiver
-  - type: ExtensionCableReceiver
-  - type: DeviceNetwork
-    deviceNetId: Wireless
-    receiveFrequencyId: SmartLight
-  - type: WirelessNetworkConnection
-    range: 200
+  - type: Appearance
+  - type: RMCPowerReceiver
+    idleLoad: 1
+    activeLoad: 40
+    channel: Lighting
   - type: DeviceLinkSink
     ports:
-      - On
-      - Off
-      - Toggle
-  - type: Appearance
+    - On
+    - Off
+    - Toggle
 
 - type: entity
   parent: CMLightFixtureSmallEmpty
@@ -414,6 +378,11 @@
     range: 2
     sound:
       path: /Audio/Ambience/Objects/light_hum.ogg
+  - type: DeviceLinkSink
+    ports:
+    - On
+    - Off
+    - Toggle
 
 - type: entity
   parent: CMLightFixtureSmall

@@ -1,23 +1,30 @@
-using Content.Shared.Mobs.Systems;
+using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Hands;
+using Content.Shared._RMC14.Xenonids.Announce;
+using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
-using Content.Shared._RMC14.Xenonids.Parasite;
-using Content.Shared._RMC14.Hands;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
-using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 
-public abstract partial class SharedXenoResinHoleSystem : EntitySystem
+public abstract class SharedXenoResinHoleSystem : EntitySystem
 {
     [Dependency] protected readonly SharedAppearanceSystem _appearanceSystem = default!;
     [Dependency] protected readonly MobStateSystem _mobState = default!;
     [Dependency] protected readonly CMHandsSystem _rmcHands = default!;
+    [Dependency] protected readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] protected readonly INetManager _net = default!;
     [Dependency] protected readonly SharedPopupSystem _popup = default!;
     [Dependency] protected readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly AreaSystem _areas = default!;
+    [Dependency] private readonly SharedXenoAnnounceSystem _announce = default!;
 
     public override void Initialize()
     {
@@ -25,9 +32,18 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
 
         SubscribeLocalEvent<XenoResinHoleComponent, InteractUsingEvent>(OnPlaceParasiteInXenoResinHole);
         SubscribeLocalEvent<XenoResinHoleComponent, ActivateInWorldEvent>(OnActivateInWorldResinHole);
-    }
 
-    protected bool CanPlaceInHole(EntityUid uid, Entity<XenoResinHoleComponent> resinHole, EntityUid user)
+        SubscribeLocalEvent<XenoResinHoleComponent, XenoResinHoleActivationEvent>(OnResinHoleActivation);
+		SubscribeLocalEvent<XenoResinHoleComponent, GettingAttackedAttemptEvent>(OnXenoResinHoleAttacked);
+	}
+
+	private void OnXenoResinHoleAttacked(Entity<XenoResinHoleComponent> resinHole, ref GettingAttackedAttemptEvent args)
+	{
+		if (_hive.FromSameHive(args.Attacker, resinHole.Owner) && resinHole.Comp.TrapPrototype != null)
+			args.Cancelled = true;
+	}
+
+	protected bool CanPlaceInHole(EntityUid uid, Entity<XenoResinHoleComponent> resinHole, EntityUid user)
     {
         if (!HasComp<XenoParasiteComponent>(uid) ||
             _mobState.IsDead(uid))
@@ -44,7 +60,7 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
         if (!_rmcHands.IsPickupByAllowed(uid, user))
             return false;
 
-        if (HasComp<ParasiteAIComponent>(uid))
+        if (!HasComp<ParasiteAIComponent>(uid))
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-awake-child", ("parasite", uid)), user, user, PopupType.SmallCaution);
             return false;
@@ -93,25 +109,57 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
         if (resinHole.Comp.TrapPrototype != null)
             return;
 
-        if (!TryComp<XenoComponent>(args.User, out var xeno))
-            return;
-
         resinHole.Comp.TrapPrototype = XenoResinHoleComponent.ParasitePrototype;
+        Dirty(resinHole);
         _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-resin-hole-enter-parasite", ("parasite", args.User)), resinHole);
-        resinHole.Comp.Hive = xeno.Hive; // Yes, parasites claim any resin traps as their own
+        // Yes, parasites claim any resin traps as their own
+        _hive.SetSameHive(args.User, resinHole.Owner);
         QueueDel(args.User);
 
         _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Parasite);
+    }
+
+    private void OnResinHoleActivation(Entity<XenoResinHoleComponent> ent, ref XenoResinHoleActivationEvent args)
+    {
+        if (_hive.GetHive(ent.Owner) is not { } hive)
+            return;
+
+        var locationName = "Unknown";
+
+        if (_areas.TryGetArea(ent, out _, out var areaProto))
+            locationName = areaProto.Name;
+
+        var msg = Loc.GetString(args.message, ("location", locationName), ("type", GetTrapTypeName(ent)));
+        _announce.AnnounceToHive(ent.Owner, hive, msg, color: ent.Comp.MessageColor);
+    }
+
+    public string GetTrapTypeName(Entity<XenoResinHoleComponent> resinHole)
+    {
+        switch(resinHole.Comp.TrapPrototype)
+        {
+            case XenoResinHoleComponent.ParasitePrototype:
+                return Loc.GetString("rmc-xeno-construction-resin-hole-parasite-name");
+            case XenoResinHoleComponent.AcidGasPrototype:
+            case XenoResinHoleComponent.NeuroGasPrototype:
+                return Loc.GetString("rmc-xeno-construction-resin-hole-gas-name");
+            case XenoResinHoleComponent.WeakAcidPrototype:
+            case XenoResinHoleComponent.AcidPrototype:
+            case XenoResinHoleComponent.StrongAcidPrototype:
+                return Loc.GetString("rmc-xeno-construction-resin-hole-acid-name");
+            default:
+                return Loc.GetString("rmc-xeno-construction-resin-hole-empty-name");
+        }
     }
 }
 
 [Serializable, NetSerializable]
 public sealed partial class XenoResinHoleActivationEvent : EntityEventArgs
 {
-    public LocId LocMsg;
-    public XenoResinHoleActivationEvent(LocId locMsg)
+    public LocId message;
+
+    public XenoResinHoleActivationEvent(LocId msg)
     {
-        LocMsg = locMsg;
+        message = msg;
     }
 }
 

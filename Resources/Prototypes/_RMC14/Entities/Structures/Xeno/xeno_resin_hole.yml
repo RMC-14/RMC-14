@@ -44,7 +44,7 @@
         Heat: 3
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_resin_trap.rsi
-    drawdepth: FloorTiles
+    drawdepth: FloorObjects
     layers:
     - state: trap
       map: [ "enum.XenoResinHoleLayers.Base" ]
@@ -77,7 +77,6 @@
         damage: 10
       behaviors:
       - !type:BurnBodyBehavior { }
-  - type: XenoFriendly
   - type: StepTrigger
     requiredTriggeredSpeed: 0
     intersectRatio: 0.1
@@ -88,3 +87,4 @@
   - type: XenoConstruct
     destroyWeeds: false
   - type: RequireProjectileTarget
+  - type: DeletedByWeedKiller

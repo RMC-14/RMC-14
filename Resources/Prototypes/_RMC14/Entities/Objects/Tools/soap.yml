@@ -1,0 +1,96 @@
+- type: entity
+  parent: BaseItem
+  id: CMSoap
+  name: soap
+  description: A cheap bar of soap. Doesn't smell.
+  components:
+  - type: Tag
+    tags:
+    - Soap
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Janitorial/soap.rsi
+    state: soap
+  - type: Item
+    sprite: Objects/Specific/Janitorial/soap.rsi
+    size: Tiny  
+  - type: Physics
+    bodyType: Dynamic
+  - type: SolutionContainerManager
+    solutions:
+      soap:
+        maxVol: 50
+        reagents:
+        - ReagentId: SoapReagent
+          Quantity: 50
+  - type: SolutionTransfer
+    transferAmount: 10
+    minTransferAmount: 1
+    maxTransferAmount: 25
+    canReceive: false
+    canChangeTransferAmount: true
+  - type: DrainableSolution
+    solution: soap
+  - type: DeleteOnSolutionEmpty
+    solution: soap
+  - type: FlavorProfile
+    flavors:
+      - clean
+  - type: Food
+    solution: soap
+  - type: BadFood
+  - type: CleansForensics
+  - type: Residue
+    residueAdjective: residue-slippery
+    residueColor: residue-green
+    
+- type: entity
+  name: soap
+  id: CMSoapDeluxe
+  parent: CMSoap
+  description: A deluxe Waffle Co. brand bar of soap. Smells of strawberries.
+  components:
+  - type: Sprite
+    state: soap_deluxe
+  - type: SolutionContainerVisuals
+    fillBaseName: deluxe-
+  - type: Item
+    heldPrefix: deluxe
+  - type: Residue
+    residueAdjective: residue-slippery
+    residueColor: residue-brown
+    
+- type: entity
+  name: soap
+  id: CMSoapSyndie
+  parent: CMSoap
+  description: An untrustworthy bar of soap. Smells of fear.
+  components:
+  - type: Sprite
+    state: soap_syndie
+  - type: SolutionContainerVisuals
+    fillBaseName: syndie-
+  - type: Item
+    heldPrefix: syndie
+  - type: Residue
+    residueAdjective: residue-slippery
+    residueColor: residue-red
+  - type: FlavorProfile
+    flavors:
+      - clean
+      - punishment
+    
+- type: entity
+  name: soap
+  id: CMSoapNT
+  parent: CMSoap
+  description: A WeYa brand bar of soap. Smells of phoron.
+  components:
+  - type: Sprite
+    state: soap_nt
+  - type: SolutionContainerVisuals
+    fillBaseName: weya-
+  - type: Item
+    heldPrefix: weya
+  - type: Residue
+    residueAdjective: residue-slippery
+    residueColor: residue-grey

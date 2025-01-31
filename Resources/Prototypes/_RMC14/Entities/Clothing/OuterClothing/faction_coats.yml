@@ -2,7 +2,7 @@
 
 # Bureau Deputy
 - type: entity
-  parent: [RMCBaseJacket, RMCAllowSuitStorageClothingJacketMB]
+  parent: [RMCAllowSuitStorageClothingJacketMB, RMCBaseJacket]
   id: RMCCoatBureauDeputy
   name: bureau deputy jacket
   description: A thick and stylish black leather jacket with a Marshal's Deputy badge pinned to it. The back is enscribed with the powerful letters of 'DEPUTY' representing justice, authority, and protection in the outer rim. The laws of the Earth stretch beyond the Sol.

@@ -1,8 +1,13 @@
 ﻿using System.Numerics;
+using Content.Shared._RMC14.Fireman;
 using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
+using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.MouseRotator;
+using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Pulling.Systems;
@@ -16,11 +21,13 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Pulling;
 
 public sealed class RMCPullingSystem : EntitySystem
 {
+    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -32,21 +39,23 @@ public sealed class RMCPullingSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly RotateToFaceSystem _rotateTo = default!;
 
-    private readonly SoundSpecifier PullSound = new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg")
+    private readonly SoundSpecifier _pullSound = new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg")
     {
-        Params = AudioParams.Default.WithVariation(0.05f)
+        Params = AudioParams.Default.WithVariation(0.05f),
     };
 
     private const string PullEffect = "CMEffectGrab";
 
-    private EntityQuery<PreventPulledWhileAliveComponent> _preventPulledWhileAliveQuery;
+    private EntityQuery<FiremanCarriableComponent> _firemanQuery;
 
     public override void Initialize()
     {
-        _preventPulledWhileAliveQuery = GetEntityQuery<PreventPulledWhileAliveComponent>();
+        _firemanQuery = GetEntityQuery<FiremanCarriableComponent>();
 
         SubscribeLocalEvent<ParalyzeOnPullAttemptComponent, PullAttemptEvent>(OnParalyzeOnPullAttempt);
         SubscribeLocalEvent<InfectOnPullAttemptComponent, PullAttemptEvent>(OnInfectOnPullAttempt);
@@ -67,6 +76,10 @@ public sealed class RMCPullingSystem : EntitySystem
         SubscribeLocalEvent<PreventPulledWhileAliveComponent, PullStoppedMessage>(OnPreventPulledWhileAliveStop);
 
         SubscribeLocalEvent<PullableComponent, PullStartedMessage>(OnPullAnimation);
+
+        SubscribeLocalEvent<PullerComponent, PullStoppedMessage>(OnPullerPullStopped);
+
+        SubscribeLocalEvent<BeingPulledComponent, PullStoppedMessage>(OnBeingPulledPullStopped);
     }
 
     private void OnParalyzeOnPullAttempt(Entity<ParalyzeOnPullAttemptComponent> ent, ref PullAttemptEvent args)
@@ -128,7 +141,7 @@ public sealed class RMCPullingSystem : EntitySystem
 
     private void OnSlowPullStarted(Entity<SlowOnPullComponent> ent, ref PullStartedMessage args)
     {
-        if (ent.Owner == args.PulledUid)
+        if (ent.Owner == args.PullerUid)
         {
             EnsureComp<PullingSlowedComponent>(args.PullerUid);
             _movementSpeed.RefreshMovementSpeedModifiers(args.PullerUid);
@@ -137,9 +150,9 @@ public sealed class RMCPullingSystem : EntitySystem
 
     private void OnSlowPullStopped(Entity<SlowOnPullComponent> ent, ref PullStoppedMessage args)
     {
-        if (ent.Owner == args.PulledUid)
+        if (ent.Owner == args.PullerUid)
         {
-            RemCompDeferred<PullingSlowedComponent>(args.PullerUid);
+            RemComp<PullingSlowedComponent>(args.PullerUid);
             _movementSpeed.RefreshMovementSpeedModifiers(args.PullerUid);
         }
     }
@@ -148,14 +161,22 @@ public sealed class RMCPullingSystem : EntitySystem
     {
         if (HasComp<BypassInteractionChecksComponent>(ent) ||
             !TryComp(ent, out PullerComponent? puller) ||
-            !TryComp(puller.Pulling, out SlowOnPullComponent? slow))
+            !TryComp(ent, out SlowOnPullComponent? slow))
         {
             return;
         }
 
+        if (puller.Pulling == null)
+            return;
+
+        var ev = new PullSlowdownAttemptEvent(puller.Pulling.Value);
+        RaiseLocalEvent(ent, ref ev);
+        if (ev.Cancelled)
+            return;
+
         foreach (var slowdown in slow.Slowdowns)
         {
-            if (_whitelist.IsWhitelistPass(slowdown.Whitelist, ent))
+            if (_whitelist.IsWhitelistPass(slowdown.Whitelist, puller.Pulling.Value))
             {
                 args.ModifySpeed(slowdown.Multiplier, slowdown.Multiplier);
                 return;
@@ -262,21 +283,93 @@ public sealed class RMCPullingSystem : EntitySystem
         _pulling.TryStopPull(puller.Pulling.Value, pullable, user);
     }
 
+    public void TryStopPullsOn(EntityUid puller)
+    {
+        if (!TryComp<PullableComponent>(puller, out var pullable) ||
+             pullable.Puller == null)
+        {
+            return;
+        }
+
+        _pulling.TryStopPull(puller, pullable);
+    }
+
+    public void TryStopAllPullsFromAndOn(EntityUid pullie)
+    {
+        TryStopPullsOn(pullie);
+
+       if (TryComp(pullie, out PullerComponent? puller) &&
+            puller.Pulling != null &&
+            TryComp(puller.Pulling, out PullableComponent? pullable2))
+        {
+            _pulling.TryStopPull(puller.Pulling.Value, pullable2, pullie);
+            return;
+        }
+    }
+
     private void OnPullAnimation(Entity<PullableComponent> ent, ref PullStartedMessage args)
     {
         if (args.PulledUid != ent.Owner)
             return;
 
-        var pulled = args.PulledUid;
-        var puller = args.PullerUid;
+        if (!_timing.ApplyingState)
+            EnsureComp<BeingPulledComponent>(ent);
 
+        PlayPullEffect(args.PullerUid, args.PulledUid);
+    }
+
+    private void OnBeingPulledPullStopped(Entity<BeingPulledComponent> ent, ref PullStoppedMessage args)
+    {
+        if (args.PulledUid != ent.Owner)
+            return;
+
+        if (_timing.ApplyingState)
+            return;
+
+        RemCompDeferred<BeingPulledComponent>(ent);
+    }
+
+    private void OnPullerPullStopped(Entity<PullerComponent> ent, ref PullStoppedMessage args)
+    {
+        if (args.PulledUid == ent.Owner)
+            return;
+
+        if (!_timing.ApplyingState && !HasComp<MouseRotatorComponent>(ent))
+            RemCompDeferred<NoRotateOnMoveComponent>(ent);
+    }
+
+    public bool IsPulling(Entity<PullerComponent?> user, Entity<PullableComponent?> target)
+    {
+        if (!Resolve(user, ref user.Comp, false) ||
+            !Resolve(target, ref target.Comp, false))
+        {
+            return false;
+        }
+
+        return user.Comp.Pulling == target;
+    }
+
+    public bool IsBeingPulled(Entity<PullableComponent?> target, out EntityUid user)
+    {
+        user = default;
+        if (!Resolve(target, ref target.Comp, false))
+            return false;
+
+        if (target.Comp.Puller is { } puller)
+            user = puller;
+
+        return target.Comp.BeingPulled;
+    }
+
+    public void PlayPullEffect(EntityUid puller, EntityUid pulled)
+    {
         var userXform = Transform(puller);
         var targetPos = _transform.GetWorldPosition(pulled);
         var localPos = Vector2.Transform(targetPos, _transform.GetInvWorldMatrix(userXform));
         localPos = userXform.LocalRotation.RotateVec(localPos);
 
         _melee.DoLunge(puller, puller, Angle.Zero, localPos, null);
-        _audio.PlayPredicted(PullSound, pulled, puller);
+        _audio.PlayPredicted(_pullSound, pulled, puller);
 
         if (_net.IsServer)
             SpawnAttachedTo(PullEffect, pulled.ToCoordinates());
@@ -307,6 +400,44 @@ public sealed class RMCPullingSystem : EntitySystem
             }
 
             _pulling.TryStopPull(uid, pullable);
+        }
+
+        var pulledQuery = EntityQueryEnumerator<BeingPulledComponent, InputMoverComponent, PullableComponent>();
+        while (pulledQuery.MoveNext(out var uid, out _, out var input, out var pullable))
+        {
+            if ((input.HeldMoveButtons & MoveButtons.AnyDirection) == 0)
+                continue;
+
+            if (!_actionBlocker.CanMove(uid))
+                continue;
+
+            _pulling.TryStopPull(uid, pullable);
+        }
+
+        var pullableQuery = EntityQueryEnumerator<BeingPulledComponent, PullableComponent>();
+        while (pullableQuery.MoveNext(out var uid, out _, out var pullable))
+        {
+            if (pullable.Puller == null)
+                continue;
+
+            var puller = pullable.Puller.Value;
+            if (!Exists(puller))
+                continue;
+
+            if (_firemanQuery.TryComp(uid, out var fireman) && fireman.BeingCarried)
+                continue;
+
+            if (HasComp<MouseRotatorComponent>(puller))
+                continue;
+
+            if (!_timing.ApplyingState)
+                EnsureComp<NoRotateOnMoveComponent>(puller);
+
+            var pulledCoords = _transform.GetMapCoordinates(uid).Position;
+            var pullerCoords = _transform.GetMapCoordinates(puller).Position;
+
+            var angle = (pulledCoords - pullerCoords).ToWorldAngle().GetCardinalDir().ToAngle();
+            _rotateTo.TryFaceAngle(puller, angle);
         }
     }
 }

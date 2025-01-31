@@ -28,16 +28,16 @@ public sealed class HiveCommand : ToolshedCommand
 
         var amount = 0;
         var xenos = EntityManager.EntityQueryEnumerator<XenoComponent>();
-        var xenoSystem = EntityManager.System<XenoSystem>();
+        var hiveSystem = EntityManager.System<SharedXenoHiveSystem>();
         while (xenos.MoveNext(out var uid, out var xeno))
         {
-            if (xeno.Hive != null)
+            if (hiveSystem.HasHive(uid))
                 continue;
 
-            xenoSystem.SetHive(uid, firstHive);
+            hiveSystem.SetHive(uid, firstHive);
             amount++;
         }
 
-        ctx.WriteLine($"Set the hive of {amount} xenos to {firstHive}.");
+        ctx.WriteLine($"Set the hive of {amount} rogue xenos to {firstHive}.");
     }
 }

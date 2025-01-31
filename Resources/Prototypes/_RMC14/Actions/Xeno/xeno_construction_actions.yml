@@ -29,7 +29,7 @@
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: retrieve_egg
+      state: place_resin
     event: !type:XenoChooseStructureActionEvent
   - type: XenoChooseConstructionAction
 
@@ -48,9 +48,32 @@
     deselectOnMiss: false
     range: 20
     repeat: true
+    checkCanAccess: false
   - type: XenoConstructionAction
     checkStructureSelected: true
     checkWeeds: true
+    canUpgrade: true
+
+- type: entity
+  id: ActionXenoCoerceResin
+  parent: ActionXenoBase
+  name: Coerce Resin
+  description: "Builds the structure chosen with the 'Choose Resin Structure' action. You may also build within line of sight if you are on weeds."
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: secrete_resin
+    event: !type:XenoSecreteStructureActionEvent
+    deselectOnMiss: false
+    range: 0
+    repeat: true
+    checkCanAccess: false
+  - type: XenoConstructionAction
+    checkStructureSelected: true
+    checkWeeds: true
+    canUpgrade: false
 
 - type: entity
   id: ActionXenoOrderConstruction
@@ -73,7 +96,7 @@
 - type: entity
   id: ActionXenoResinHole
   parent: ActionXenoBase
-  name: Plant Resin Hole
+  name: Plant Resin Hole (200)
   description: Places a resin hole on weeds. It can be filled with boiler gas, acid, or parasites.
   components:
   - type: InstantAction
@@ -83,3 +106,75 @@
       state: place_trap
     event: !type:XenoPlaceResinHoleActionEvent
     useDelay: 1
+
+# For gardener drone
+- type: entity
+  id: ActionXenoFruitChoose
+  parent: ActionXenoBase
+  name: Change Fruit
+  description: Choose a fruit to be planted with 'Plant Resin Fruit' action.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: gardener_plant_pick
+    event: !type:XenoFruitChooseActionEvent
+  - type: XenoFruitChooseAction
+
+- type: entity
+  id: ActionXenoFruitPlant
+  parent: ActionXenoBase
+  name: Plant Resin Fruit (100)
+  description: Plant chosen resin fruit on weeds at the cost of health and plasma. Xenos can pick these fruits once they're mature, you can also pick a plant early to get rid of it. Xenos can use them in hand or eat them on the ground to gain their effects. They can also be used on other xenos to feed them. You can only have 6 fruits planted and picked at a time.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: gardener_plant
+    event: !type:XenoFruitPlantActionEvent
+    useDelay: 5
+
+- type: entity
+  id: ActionXenoPlantWeedsHardy
+  parent: ActionXenoBase
+  name: Plant Hardy Weeds (125) # TODO RMC14 proper plasma costs
+  description: Plant a weed node that will spread hardier weeds, which grow fruit 25% faster, have slightly more health, and can be spread on some surfaces where normal weeds won't grow.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: plant_gardener_weeds
+    event: !type:XenoPlantWeedsActionEvent
+      plasmaCost: 125
+      prototype: XenoHardyWeedsSource
+      useOnSemiWeedable: true
+    useDelay: 120
+
+# For healer drone
+- type: entity
+  id: ActionXenoFruitPlantLesser
+  parent: ActionXenoFruitPlant
+  name: Plant Resin Fruit (50)
+  description: Plant resin fruit on weeds at the cost of health and plasma.
+  components:
+  - type: InstantAction
+    event: !type:XenoFruitPlantActionEvent
+      plasmaCost: 50
+
+- type: entity
+  id: ActionXenoDigTunnel
+  parent: ActionXenoBase
+  name: Dig Tunnel (200)
+  description: Dig a tunnel for speedy transportation across the hive.
+  components:
+  - type: InstantAction
+    event: !type:XenoDigTunnelActionEvent
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: build_tunnel
+    useDelay: 300
+

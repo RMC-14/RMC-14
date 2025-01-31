@@ -1,10 +1,10 @@
 using System.Numerics;
 using Content.Server.Chemistry.Components;
-using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Shared._RMC14.Chemistry;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Content.Shared.Physics;
@@ -26,7 +26,7 @@ namespace Content.Server.Chemistry.EntitySystems
         [Dependency] private readonly IPrototypeManager _protoManager = default!;
         [Dependency] private readonly SharedMapSystem _map = default!;
         [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-        [Dependency] private readonly SolutionContainerSystem _solutionContainerSystem = default!;
+        [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
         [Dependency] private readonly ThrowingSystem _throwing = default!;
         [Dependency] private readonly ReactiveSystem _reactive = default!;
         [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
@@ -72,7 +72,7 @@ namespace Content.Server.Chemistry.EntitySystems
                 _physics.SetLinearDamping(vapor, physics, 0f);
                 _physics.SetAngularDamping(vapor, physics, 0f);
 
-                _throwing.TryThrow(vapor, dir, speed, user: user);
+                _throwing.TryThrow(vapor, dir, speed, user: user, recoil: false);
 
                 var distance = (target.Position - _transformSystem.GetWorldPosition(vaporXform)).Length();
                 var time = (distance / physics.LinearVelocity.Length());

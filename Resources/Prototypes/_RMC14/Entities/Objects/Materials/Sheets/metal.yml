@@ -35,6 +35,11 @@
   description: Sheets made out of metal. They have been dubbed Metal Sheets.
   suffix: Filled
   components:
+    - type: RMCConstructionUpgradeItem
+      whitelist:
+        tags:
+        - RMCMetalBarricade
+        - RMCPlasteelBarricade
     - type: Material
     - type: PhysicalComposition
       materialComposition:
@@ -63,6 +68,17 @@
     - type: Stack
       stackType: CMSteel
       count: 10
+
+- type: entity
+  parent: CMSheetMetal
+  id: CMSheetMetal20
+  suffix: "20"
+  components:
+    - type: Sprite
+      state: metal_3
+    - type: Stack
+      stackType: CMSteel
+      count: 20
 
 - type: entity
   parent: CMSheetMetal
@@ -108,6 +124,17 @@
       stackType: CMSteel
       count: 1
 
+- type: entity
+  parent: CMSheetMetal
+  id: CMSheetMetal2
+  suffix: "2"
+  components:
+    - type: Sprite
+      state: metal
+    - type: Stack
+      stackType: CMSteel
+      count: 2
+
 # Plasteel
 
 - type: material
@@ -123,7 +150,7 @@
   name: plasteel
   icon: { sprite: /Textures/_RMC14/Objects/Materials/Sheets/plasteel.rsi, state: plasteel }
   spawn: CMSheetPlasteel
-  maxCount: 40
+  maxCount: 50
 
 - type: entity
   parent: CMSheetMetalBase

@@ -1,9 +1,25 @@
 ﻿- type: entity
-  parent: CMBaseWeaponRifle
+  parent: [ CMBaseWeaponGun, BaseItem, RMCBaseAttachableHolder ]
   id: RMCSmartGun
   name: ML66A smart gun
   description: The actual firearm in the Smart Gun System. Essentially a heavy, mobile machinegun.
   components:
+  - type: Wieldable
+  - type: Item
+    size: Huge
+  - type: AmmoCounter
+  - type: StaticPrice
+    price: 500
+  - type: MagazineAmmoProvider
+    autoEject: true
+  - type: RMCAmmoEject
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
   - type: GunRequiresWield
   - type: Corrodible
     isCorrodible: false
@@ -12,17 +28,22 @@
   - type: WieldDelay
     baseDelay: 0.4
   - type: WieldableSpeedModifiers
-    baseWalk: 0.696
-    baseSprint: 0.559
+    base: 0.5
+    light: 0.69
+    medium: 0.75
+    heavy: 0.806
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/smart_gun.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/jungle.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/smart_gun.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/jungle.rsi
+    slots:
+    - suitStorage
+    - Back
   - type: MeleeWeapon
     damage:
       types:
@@ -48,6 +69,8 @@
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 80
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.05
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -69,6 +92,9 @@
       cell_slot:
         name: power-cell-slot-component-slot-name-default
         startingItem: RMCPowerCellSmartgun
+        whitelist:
+          components:
+          - SmartGunBattery
   - type: GunDamageModifier
     multiplier: 1
   - type: GunToggleableAmmo
@@ -103,6 +129,11 @@
       - SmartGunArmor
   - type: GunToggleableRecoil
   - type: GunToggleableAutoFire
+  - type: GunToggleableMotionDetector
+  - type: IFFToggle
+  - type: MotionDetector
+    handToggleable: false
+    toggleSound: null
   - type: SmartGun
   - type: AttachableHolder
     slots:
@@ -113,3 +144,98 @@
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-rail: -0.1875, 0.125
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/urban.rsi
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/smartgun_mouse.rsi
+      state: all
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineSmartGun
+  name: "ML66A drum magazine (10x30mm)"
+  components:
+  - type: Tag
+    tags:
+    - RMCMagazineSmartGun
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - CMCartridgeSmartGun10x30mm
+    proto: CMCartridgeSmartGun10x30mm
+    capacity: 500
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/jungle.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    slots:
+    - suitStorage
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/urban.rsi
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: CMCartridgeSmartGun10x30mm
+  name: cartridge (10x30mm)
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: CartridgeAmmo
+    proto: CMBulletSmartGun10x30mm
+  - type: Tag
+    tags:
+    - CMCartridgeSmartGun10x30mm
+
+- type: entity
+  parent: CMBulletBase
+  id: CMBulletSmartGun10x30mm
+  name: bullet (10x30mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    layers:
+    - state: bullet
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 30
+  - type: CMArmorPiercing
+    amount: 0
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 12
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 7
+      falloff: 4
+  - type: RMCProjectileAccuracy
+    accuracy: 105
+    thresholds:
+    - range: 5
+      falloff: 10
+
+- type: Tag
+  id: RMCMagazineSmartGun
+
+- type: Tag
+  id: CMCartridgeSmartGun10x30mm

@@ -87,8 +87,9 @@ chatsan-replacement-31 = shut the fuck up
 chatsan-word-32 = gtg
 chatsan-replacement-32 = got to go
 
-chatsan-word-33 = gl
-chatsan-replacement-33 = good luck
+#RMC14: Disabled for grenade launcher
+#chatsan-word-33 = gl
+#chatsan-replacement-33 = good luck
 
 chatsan-word-34 = hbu
 chatsan-replacement-34 = how about you

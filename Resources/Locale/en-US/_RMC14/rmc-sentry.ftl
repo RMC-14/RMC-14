@@ -58,3 +58,6 @@ health-examinable-sentry-Shock-10 = [color=yellow]{CAPITALIZE(SUBJECT($target))}
 health-examinable-sentry-Shock-25 = [color=orange]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} lightly charred.[/color]
 health-examinable-sentry-Shock-50 = [color=red]{CAPITALIZE(SUBJECT($target))} {CONJUGATE-BE($target)} letting off sparks![/color]
 health-examinable-sentry-Shock-75 = [color=crimson]{CAPITALIZE(SUBJECT($target))} can barely function![/color]
+
+rmc-sentry-not-emergency = {CAPITALIZE(THE($deployer))} can only be activated in emergencies.
+rmc-sentry-deploy = You deploy {THE($spawned)}

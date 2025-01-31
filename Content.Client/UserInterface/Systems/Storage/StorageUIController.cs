@@ -202,9 +202,13 @@ public sealed class StorageUIController : UIController, IOnSystemChanged<Storage
             keyEvent.Handle();
     }
 
-    private void OnStorageUpdated(Entity<StorageComponent> uid)
+    private void OnStorageUpdated(Entity<StorageComponent>? uid)
     {
-        if (_container?.StorageEntity != uid)
+        if (uid == null)
+            _container?.BuildItemPieces();
+
+        return; // RMC14
+        if (_container?.StorageEntity != uid.Value)
             return;
 
         _container.BuildItemPieces();
@@ -307,15 +311,8 @@ public sealed class StorageUIController : UIController, IOnSystemChanged<Storage
                     _entity.GetNetEntity(storageEnt),
                     new ItemStorageLocation(DraggingRotation, position)));
             }
-            else
-            {
-                _entity.RaisePredictiveEvent(new StorageRemoveItemEvent(
-                    _entity.GetNetEntity(draggingGhost.Entity),
-                    _entity.GetNetEntity(storageEnt)));
-            }
 
             _menuDragHelper.EndDrag();
-            _container?.BuildItemPieces();
         }
         else if (control.Has((args.PointerLocation.Position - control.GlobalPixelPosition) / control.UIScale))
         {

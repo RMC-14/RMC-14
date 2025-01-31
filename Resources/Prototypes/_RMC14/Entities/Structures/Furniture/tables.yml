@@ -5,6 +5,9 @@
   name: table
   description: A square metal surface resting on four legs. Useful to put stuff on.
   components:
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/Tables/standard.rsi
   - type: Icon

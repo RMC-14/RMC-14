@@ -1,5 +1,7 @@
 ﻿- type: entity
-  parent: CMXenoRunner
+  parent:
+  - CMXenoRunner
+  - RMCXenoCommendationReceiver
   id: RMCXenoRouny
   name: Rouny
   suffix: RMC14
@@ -10,9 +12,13 @@
   - type: XenoEvolution
     max: 200
     evolvesTo: [ ]
+  - type: Xeno
+    hidden: true
 
 - type: entity
-  parent: CMXenoRunner
+  parent:
+  - CMXenoRunner
+  - RMCXenoCommendationReceiver
   id: RMCXenoWehny
   name: Wehny
   description: A cruel, cruel joke made by some sick individual.
@@ -22,3 +28,5 @@
   - type: XenoEvolution
     max: 200
     evolvesTo: [ ]
+  - type: Xeno
+    hidden: true

@@ -1,6 +1,5 @@
 using System.Linq;
 using Content.Shared._RMC14.CCVar;
-using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -15,6 +14,7 @@ using Content.Shared.Doors.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.GameTicking;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Jittering;
 using Content.Shared.Mind;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -23,12 +23,10 @@ using Content.Shared.Prototypes;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
-using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Evolution;
@@ -44,6 +42,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
+    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -52,7 +51,6 @@ public sealed class XenoEvolutionSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly SharedXenoHiveSystem _xenoHive = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -60,6 +58,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
     private TimeSpan _evolutionPointsRequireOvipositorAfter;
     private TimeSpan _evolutionAccumulatePointsBefore;
+    private TimeSpan _evolveSameCasteCooldown;
 
     private readonly HashSet<EntityUid> _climbable = new();
     private readonly HashSet<EntityUid> _doors = new();
@@ -84,7 +83,6 @@ public sealed class XenoEvolutionSystem : EntitySystem
         SubscribeLocalEvent<XenoEvolutionGranterComponent, NewXenoEvolvedEvent>(OnGranterEvolved);
 
         SubscribeLocalEvent<XenoOvipositorChangedEvent>(OnOvipositorChanged);
-        SubscribeLocalEvent<DropshipHijackStartEvent>(OnDropshipHijackStart);
 
         Subs.BuiEvents<XenoEvolutionComponent>(XenoEvolutionUIKey.Key,
             subs =>
@@ -101,6 +99,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
         Subs.CVar(_config, RMCCVars.RMCEvolutionPointsRequireOvipositorMinutes, v => _evolutionPointsRequireOvipositorAfter = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCEvolutionPointsAccumulateBeforeMinutes, v => _evolutionAccumulatePointsBefore = TimeSpan.FromMinutes(v), true);
+        Subs.CVar(_config, RMCCVars.RMCXenoEvolveSameCasteCooldownSeconds, v => _evolveSameCasteCooldown = TimeSpan.FromSeconds(v), true);
     }
 
     private void OnXenoOpenDevolveAction(Entity<XenoDevolveComponent> xeno, ref XenoOpenDevolveActionEvent args)
@@ -108,7 +107,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!CanDevolvePopup(xeno))
+        if (!DamagedCheckPopup(xeno))
             return;
 
         args.Handled = true;
@@ -152,12 +151,11 @@ public sealed class XenoEvolutionSystem : EntitySystem
         var time = _timing.CurTime;
         if (_prototypes.TryIndex(args.Choice, out var choice) &&
             choice.HasComponent<XenoEvolutionGranterComponent>(_compFactory) &&
-            TryComp(xeno, out XenoComponent? xenoComp) &&
-            TryComp(xenoComp.Hive, out HiveComponent? hive) &&
-            hive.LastQueenDeath is { } lastQueenDeath &&
-            time < lastQueenDeath + hive.NewQueenCooldown)
+            _xenoHive.GetHive(xeno.Owner) is { } hive &&
+            hive.Comp.LastQueenDeath is { } lastQueenDeath &&
+            time < lastQueenDeath + hive.Comp.NewQueenCooldown)
         {
-            var left = lastQueenDeath + hive.NewQueenCooldown - time;
+            var left = lastQueenDeath + hive.Comp.NewQueenCooldown - time;
             var msg = Loc.GetString("rmc-xeno-evolution-cant-evolve-recent-queen-death-minutes",
                 ("minutes", left.Minutes),
                 ("seconds", left.Seconds));
@@ -177,7 +175,16 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (xeno.Comp.EvolutionDelay > TimeSpan.Zero)
             _popup.PopupClient(Loc.GetString("cm-xeno-evolution-start"), xeno, xeno);
 
-        _doAfter.TryStartDoAfter(doAfter);
+        if (_doAfter.TryStartDoAfter(doAfter))
+        {
+            _jitter.DoJitter(xeno, xeno.Comp.EvolutionDelay, true, 80, 8, true);
+
+            var popupOthers = Loc.GetString("rmc-xeno-evolution-start-others", ("xeno", xeno));
+            _popup.PopupEntity(popupOthers, xeno, Filter.PvsExcept(xeno), true, PopupType.Medium);
+
+            var popupSelf = Loc.GetString("rmc-xeno-evolution-start-self");
+            _popup.PopupEntity(popupSelf, xeno, xeno, PopupType.Medium);
+        }
     }
 
     private void OnXenoStrainBui(Entity<XenoEvolutionComponent> xeno, ref XenoStrainBuiMsg args)
@@ -201,8 +208,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
             return;
 
         var newXeno = TransferXeno(xeno, args.Choice);
-        var ev = new NewXenoEvolvedEvent(xeno);
-        RaiseLocalEvent(newXeno, ref ev);
+        var ev = new NewXenoEvolvedEvent(xeno, newXeno, false);
+        RaiseLocalEvent(newXeno, ref ev, true);
 
         _adminLog.Add(LogType.RMCEvolve, $"Xenonid {ToPrettyString(xeno)} chose strain {ToPrettyString(newXeno)}");
 
@@ -215,25 +222,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     private void OnXenoDevolveBui(Entity<XenoDevolveComponent> xeno, ref XenoDevolveBuiMsg args)
     {
         _ui.CloseUi(xeno.Owner, XenoEvolutionUIKey.Key, xeno);
-
-        if (!CanDevolvePopup(xeno))
-            return;
-
-        if (_net.IsClient ||
-            !xeno.Comp.DevolvesTo.Contains(args.Choice))
-        {
-            return;
-        }
-
-        var newXeno = TransferXeno(xeno, args.Choice);
-        var ev = new XenoDevolvedEvent(xeno);
-        RaiseLocalEvent(newXeno, ref ev);
-
-        _adminLog.Add(LogType.RMCDevolve, $"Xenonid {ToPrettyString(xeno)} devolved into {ToPrettyString(newXeno)}");
-
-        Del(xeno.Owner);
-
-        _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-devolve", ("xeno", newXeno)), newXeno, newXeno, PopupType.LargeCaution);
+        TryDevolve(xeno, args.Choice);
     }
 
     private void OnXenoEvolveDoAfter(Entity<XenoEvolutionComponent> xeno, ref XenoEvolutionDoAfterEvent args)
@@ -241,7 +230,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         if (_net.IsClient ||
             args.Handled ||
             args.Cancelled ||
-            !_mind.TryGetMind(xeno, out var mindId, out _) ||
+            !_mind.TryGetMind(xeno, out _, out _) ||
             !CanEvolvePopup(xeno, args.Choice))
         {
             return;
@@ -250,8 +239,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
         args.Handled = true;
 
         var newXeno = TransferXeno(xeno, args.Choice);
-        var ev = new NewXenoEvolvedEvent(xeno);
-        RaiseLocalEvent(newXeno, ref ev);
+        var ev = new NewXenoEvolvedEvent(xeno, newXeno, true);
+        RaiseLocalEvent(newXeno, ref ev, true);
 
         _adminLog.Add(LogType.RMCEvolve, $"Xenonid {ToPrettyString(xeno)} evolved into {ToPrettyString(newXeno)}");
 
@@ -265,7 +254,8 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
     private void OnXenoEvolutionNewEvolved(Entity<XenoEvolutionComponent> xeno, ref NewXenoEvolvedEvent args)
     {
-        TransferPoints((args.OldXeno, args.OldXeno), xeno, true);
+        TransferPoints((args.OldXeno, args.OldXeno), xeno, args.SubtractPoints);
+        _jitter.DoJitter(xeno, xeno.Comp.EvolutionJitterDuration, true, 80, 8, true);
     }
 
     private void OnXenoEvolutionDevolved(Entity<XenoEvolutionComponent> xeno, ref XenoDevolvedEvent args)
@@ -305,16 +295,6 @@ public sealed class XenoEvolutionSystem : EntitySystem
         {
             _ui.SetUiState(uid, XenoEvolutionUIKey.Key, state);
         }
-    }
-
-    private void OnDropshipHijackStart(ref DropshipHijackStartEvent ev)
-    {
-        var boost = Spawn(null, MapCoordinates.Nullspace);
-        var evoOverride = EnsureComp<EvolutionOverrideComponent>(boost);
-        evoOverride.Amount = 10;
-        Dirty(boost, evoOverride);
-
-        EnsureComp<TimedDespawnComponent>(boost).Lifetime = 180;
     }
 
     private bool ContainedCheckPopup(EntityUid xeno, bool doPopup = true)
@@ -393,21 +373,26 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 );
             }
 
-            // return false;
+            return false;
         }
 
         if (newXenoComp != null &&
             !newXenoComp.BypassTierCount &&
-            TryComp(xeno, out XenoComponent? oldXenoComp) &&
-            oldXenoComp.Hive is { } oldHive &&
-            _xenoHive.TryGetTierLimit(oldHive, newXenoComp.Tier, out var limit))
+            _xenoHive.GetHive(xeno.Owner) is { } oldHive &&
+            _xenoHive.TryGetTierLimit((oldHive, oldHive.Comp), newXenoComp.Tier, out var limit))
         {
             var existing = 0;
-            var total = 0;
-            var current = EntityQueryEnumerator<XenoComponent>();
-            while (current.MoveNext(out var existingComp))
+            var total = Math.Sqrt(oldHive.Comp.BurrowedLarva * oldHive.Comp.BurrowedLarvaSlotFactor);
+            total = Math.Min(total, oldHive.Comp.BurrowedLarva);
+
+            var current = EntityQueryEnumerator<XenoComponent, HiveMemberComponent>();
+            var slotCount = oldHive.Comp.FreeSlots.ToDictionary();
+            while (current.MoveNext(out var uid, out var existingComp, out var member))
             {
-                if (existingComp.Hive != oldHive || !existingComp.CountedInSlots)
+                if (_mobState.IsDead(uid))
+                    continue;
+
+                if (member.Hive != oldHive.Owner || !existingComp.CountedInSlots)
                     continue;
 
                 total++;
@@ -415,13 +400,13 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 if (existingComp.Tier < newXenoComp.Tier)
                     continue;
 
-                existing++;
+                if (slotCount.ContainsKey(existingComp.Role.Id) && slotCount[existingComp.Role.Id] > 0)
+                    slotCount[existingComp.Role.Id] -= 1;
+                else
+                    existing++;
             }
 
-            if (_xenoHive.TryGetFreeSlots(oldHive, newXeno, out var freeSlots))
-                existing -= freeSlots;
-
-            if (total != 0 && existing / (float) total >= limit)
+            if (total != 0 && existing / (float) total >= limit && (!slotCount.ContainsKey(newXeno) || slotCount[newXeno] <= 0))
             {
                 if (doPopup)
                 {
@@ -435,6 +420,21 @@ public sealed class XenoEvolutionSystem : EntitySystem
 
                 return false;
             }
+        }
+
+        if (TryComp(xeno, out XenoRecentlyDevolvedComponent? recently) &&
+            recently.Recent.TryGetValue(newXeno, out var at) &&
+            at + _evolveSameCasteCooldown > _timing.CurTime)
+        {
+            var timeRemaining = at + _evolveSameCasteCooldown - _timing.CurTime;
+            var msg = Loc.GetString("rmc-xeno-evolution-cant-evolve-caste-cooldown",
+                ("minutes", timeRemaining.Minutes),
+                ("seconds", timeRemaining.Seconds));
+
+            if (doPopup)
+                _popup.PopupEntity(msg, xeno, xeno, PopupType.MediumCaution);
+
+            return false;
         }
 
         return true;
@@ -452,11 +452,6 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
 
         return false;
-    }
-
-    private bool CanDevolvePopup(EntityUid xeno, bool predicted = true)
-    {
-        return DamagedCheckPopup(xeno, predicted);
     }
 
     // TODO RMC14 make this a property of the hive component
@@ -536,7 +531,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
     {
         var coordinates = _transform.GetMoverCoordinates(xeno);
         var newXeno = Spawn(proto, coordinates);
-        _xeno.SetSameHive(newXeno, xeno);
+        _xenoHive.SetSameHive(xeno, newXeno);
 
         if (_mind.TryGetMind(xeno, out var mindId, out _))
         {
@@ -559,6 +554,49 @@ public sealed class XenoEvolutionSystem : EntitySystem
             if (HasComp<DoorComponent>(id) || HasComp<AirlockComponent>(id))
                 comp.StopCollide.Add(id);
         }
+
+        var newRecently = EnsureComp<XenoRecentlyDevolvedComponent>(newXeno);
+        if (TryComp(xeno, out XenoRecentlyDevolvedComponent? oldRecently))
+        {
+            foreach (var (id, time) in oldRecently.Recent)
+            {
+                newRecently.Recent[id] = time;
+            }
+        }
+
+        if (Prototype(xeno)?.ID is { } oldId)
+            newRecently.Recent[oldId] = _timing.CurTime;
+
+        return newXeno;
+    }
+
+    private void TryDevolve(Entity<XenoDevolveComponent> xeno, EntProtoId to, bool damagedCheck = true)
+    {
+        if (damagedCheck && !DamagedCheckPopup(xeno))
+            return;
+
+        if (Devolve(xeno, to) is { } newXeno && _net.IsServer)
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-evolution-devolve", ("xeno", newXeno)), newXeno, newXeno, PopupType.LargeCaution);
+    }
+
+    public EntityUid? Devolve(Entity<XenoDevolveComponent> xeno, EntProtoId to)
+    {
+        if (_net.IsClient ||
+            !xeno.Comp.DevolvesTo.Contains(to))
+        {
+            return null;
+        }
+
+        var newXeno = TransferXeno(xeno, to);
+        var ev = new XenoDevolvedEvent(xeno, newXeno);
+        RaiseLocalEvent(newXeno, ref ev, true);
+
+        _adminLog.Add(LogType.RMCDevolve, $"Xenonid {ToPrettyString(xeno)} devolved into {ToPrettyString(newXeno)}");
+
+        Del(xeno.Owner);
+
+        var afterEv = new AfterNewXenoEvolvedEvent();
+        RaiseLocalEvent(newXeno, ref afterEv);
 
         return newXeno;
     }

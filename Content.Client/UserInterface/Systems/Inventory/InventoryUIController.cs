@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Numerics;
+using Content.Client._RMC14.Medal;
 using Content.Client._RMC14.Webbing;
 using Content.Client.Gameplay;
 using Content.Client.Hands.Systems;
@@ -28,7 +29,7 @@ using static Content.Client.Inventory.ClientInventorySystem;
 namespace Content.Client.UserInterface.Systems.Inventory;
 
 public sealed class InventoryUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>,
-    IOnSystemChanged<ClientInventorySystem>, IOnSystemChanged<HandsSystem>, IOnSystemChanged<WebbingSystem>
+    IOnSystemChanged<ClientInventorySystem>, IOnSystemChanged<HandsSystem>, IOnSystemChanged<WebbingSystem>, IOnSystemChanged<PlaytimeMedalSystem>
 {
     [Dependency] private readonly IEntityManager _entities = default!;
 
@@ -348,7 +349,7 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
 
         if (!fits && _entities.TryGetComponent<StorageComponent>(container.ContainedEntity, out var storage))
         {
-            fits = _entities.System<StorageSystem>().CanInsert(container.ContainedEntity.Value, held, out _, storage);
+            fits = _entities.System<StorageSystem>().CanInsert(container.ContainedEntity.Value, held, player.Value, out _, storage);
         }
         else if (!fits && _entities.TryGetComponent<ItemSlotsComponent>(container.ContainedEntity, out var itemSlots))
         {
@@ -401,6 +402,9 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
         foreach (var slotData in clientInv.SlotData.Values)
         {
             AddSlot(slotData);
+
+            if (_inventoryButton != null)
+                _inventoryButton.Visible = true;
         }
 
         UpdateInventoryHotbar(_playerInventory);
@@ -408,6 +412,9 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
 
     private void UnloadSlots()
     {
+        if (_inventoryButton != null)
+            _inventoryButton.Visible = false;
+
         _playerUid = null;
         _playerInventory = null;
         foreach (var slotGroup in _slotGroups.Values)
@@ -495,15 +502,25 @@ public sealed class InventoryUIController : UIController, IOnStateEntered<Gamepl
 
     public void OnSystemLoaded(WebbingSystem system)
     {
-        system.PlayerWebbingUpdated += OnWebbingUpdated;
+        system.PlayerWebbingUpdated += InventoryUpdated;
     }
 
     public void OnSystemUnloaded(WebbingSystem system)
     {
-        system.PlayerWebbingUpdated -= OnWebbingUpdated;
+        system.PlayerWebbingUpdated -= InventoryUpdated;
     }
 
-    private void OnWebbingUpdated()
+    public void OnSystemLoaded(PlaytimeMedalSystem system)
+    {
+        system.PlayerMedalUpdated += InventoryUpdated;
+    }
+
+    public void OnSystemUnloaded(PlaytimeMedalSystem system)
+    {
+        system.PlayerMedalUpdated -= InventoryUpdated;
+    }
+
+    private void InventoryUpdated()
     {
         UpdateInventoryHotbar(_playerInventory);
     }

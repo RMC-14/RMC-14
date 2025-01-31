@@ -9,6 +9,7 @@ using Content.Server.Spawners.Components;
 using Content.Server.Station.Components;
 using Content.Shared.CCVar;
 using Content.Shared.Roles;
+using Content.Shared.Station.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
@@ -61,9 +62,13 @@ namespace Content.IntegrationTests.Tests
             "Train",
             "Oasis",
             "Cog",
-            "Oasis",
-            "CMDev",
-            "Savannah",
+            "Gate",
+            "Amber",
+            "Loop",
+            "Plasma",
+            "Elkridge",
+            "RMCDev",
+            // "Savannah",
             "Almayer",
             "RMCAdminFax",
         };
@@ -253,10 +258,17 @@ namespace Content.IntegrationTests.Tests
                     var jobs = new HashSet<ProtoId<JobPrototype>>(comp.SetupAvailableJobs.Keys);
 
                     var spawnPoints = entManager.EntityQuery<SpawnPointComponent>()
-                        .Where(x => x.SpawnType == SpawnPointType.Job)
-                        .Select(x => x.Job!.Value);
+                        .Where(x => x.SpawnType == SpawnPointType.Job && x.Job != null)
+                        .Select(x => x.Job.Value);
 
                     jobs.ExceptWith(spawnPoints);
+
+                    spawnPoints = entManager.EntityQuery<ContainerSpawnPointComponent>()
+                        .Where(x => x.SpawnType is SpawnPointType.Job or SpawnPointType.Unset && x.Job != null)
+                        .Select(x => x.Job.Value);
+
+                    jobs.ExceptWith(spawnPoints);
+
                     Assert.That(jobs, Is.Empty, $"There is no spawnpoints for {string.Join(", ", jobs)} on {mapProto}.");
                 }
 

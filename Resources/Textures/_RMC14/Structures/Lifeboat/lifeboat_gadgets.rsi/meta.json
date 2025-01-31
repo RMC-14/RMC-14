@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/3461a34ae547ae5141c0dddc6022f766f862a4f4/icons/obj/structures/machinery/lifeboat.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "medcab"
+    },
+    {
+      "name": "medcab_vend",
+      "delays": [
+        [
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "medcab_deny",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "extinguisher"
+    },
+    {
+      "name": "extinguisher_closed"
+    },
+    {
+      "name": "extinguisher_full"
+    },
+    {
+      "name": "extinguisher_mini"
+    },
+    {
+      "name": "extinguisher_empty"
+    },
+    {
+      "name": "supplycab"
+    },
+    {
+      "name": "supplycab_vend",
+      "delays": [
+        [
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "supplycab_deny",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Attachable.Events;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared.Examine;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Timing;
 
@@ -18,6 +19,7 @@ public sealed class AttachableIFFSystem : EntitySystem
         SubscribeLocalEvent<AttachableIFFComponent, AttachableRelayedEvent<AttachableGrantIFFEvent>>(OnAttachableIFFGrant);
 
         SubscribeLocalEvent<GunAttachableIFFComponent, AmmoShotEvent>(OnGunAttachableIFFAmmoShot);
+        SubscribeLocalEvent<GunAttachableIFFComponent, ExaminedEvent>(OnGunAttachableIFFExamined);
     }
 
     private void OnAttachableIFFAltered(Entity<AttachableIFFComponent> ent, ref AttachableAlteredEvent args)
@@ -41,6 +43,14 @@ public sealed class AttachableIFFSystem : EntitySystem
     private void OnGunAttachableIFFAmmoShot(Entity<GunAttachableIFFComponent> ent, ref AmmoShotEvent args)
     {
         _gunIFF.GiveAmmoIFF(ent, ref args, false, true);
+    }
+
+    private void OnGunAttachableIFFExamined(Entity<GunAttachableIFFComponent> ent, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(GunAttachableIFFComponent)))
+        {
+            args.PushMarkup(Loc.GetString("rmc-examine-text-iff"));
+        }
     }
 
     private void UpdateGunIFF(EntityUid gun)

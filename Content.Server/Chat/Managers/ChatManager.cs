@@ -3,17 +3,20 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using Content.Server._RMC14.Discord;
 using Content.Server._RMC14.LinkAccount;
+using Content.Server._RMC14.Mentor;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Administration.Systems;
 using Content.Server.MoMMI;
 using Content.Server.Players.RateLimiting;
 using Content.Server.Preferences.Managers;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Mind;
+using Content.Shared.Players.RateLimiting;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -47,6 +50,7 @@ internal sealed partial class ChatManager : IChatManager
     [Dependency] private readonly PlayerRateLimitManager _rateLimitManager = default!;
     [Dependency] private readonly LinkAccountManager _linkAccount = default!;
     [Dependency] private readonly RMCDiscordManager _discord = default!;
+    [Dependency] private readonly MentorManager _mentor = default!;
 
     /// <summary>
     /// The maximum length a player-sent message can be sent
@@ -85,10 +89,10 @@ internal sealed partial class ChatManager : IChatManager
         DispatchServerAnnouncement(Loc.GetString(val ? "chat-manager-admin-ooc-chat-enabled-message" : "chat-manager-admin-ooc-chat-disabled-message"));
     }
 
-    public void DeleteMessagesBy(ICommonSession player)
-    {
-        if (!_players.TryGetValue(player.UserId, out var user))
-            return;
+        public void DeleteMessagesBy(NetUserId uid)
+        {
+            if (!_players.TryGetValue(uid, out var user))
+                return;
 
         var msg = new MsgDeleteChatMessagesBy { Key = user.Key, Entities = user.Entities };
         _netManager.ServerSendToAll(msg);
@@ -226,6 +230,9 @@ internal sealed partial class ChatManager : IChatManager
             case OOCChatType.Admin:
                 SendAdminChat(player, message);
                 break;
+            case OOCChatType.Mentor:
+                SendMentorChat(player, message);
+                break;
         }
     }
 
@@ -299,17 +306,49 @@ internal sealed partial class ChatManager : IChatManager
         _adminLogger.Add(LogType.Chat, $"Admin chat from {player:Player}: {message}");
     }
 
+    private void SendMentorChat(ICommonSession player, string message)
+    {
+        if (!_mentor.IsMentor(player.UserId))
+        {
+            _adminLogger.Add(LogType.Chat, LogImpact.Extreme, $"{player:Player} attempted to send mentor chat message but was not mentor");
+            return;
+        }
+
+        var clients = _mentor.GetActiveMentors().Select(p => p.Channel);
+        var wrappedMessage = Loc.GetString("chat-manager-send-admin-chat-wrap-message",
+                                        ("adminChannelName", "MENTOR"),
+                                        ("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
+
+        _discord.SendDiscordMentorMessage(player.Name, message);
+
+        foreach (var client in clients)
+        {
+            var isSource = client != player.Channel;
+            ChatMessageToOne(ChatChannel.MentorChat,
+                message,
+                wrappedMessage,
+                default,
+                false,
+                client,
+                audioPath: isSource ? _netConfigManager.GetClientCVar(client, RMCCVars.RMCMentorChatSound) : default,
+                audioVolume: isSource ? _netConfigManager.GetClientCVar(client, RMCCVars.RMCMentorChatVolume) : default,
+                author: player.UserId);
+        }
+
+        _adminLogger.Add(LogType.Chat, $"Mentor chat from {player:Player}: {message}");
+    }
+
     #endregion
 
     #region Utility
 
-    public void ChatMessageToOne(ChatChannel channel, string message, string wrappedMessage, EntityUid source, bool hideChat, INetChannel client, Color? colorOverride = null, bool recordReplay = false, string? audioPath = null, float audioVolume = 0, NetUserId? author = null)
+    public void ChatMessageToOne(ChatChannel channel, string message, string wrappedMessage, EntityUid source, bool hideChat, INetChannel client, Color? colorOverride = null, bool recordReplay = false, string? audioPath = null, float audioVolume = 0, NetUserId? author = null, bool hidePopup = false)
     {
         var user = author == null ? null : EnsurePlayer(author);
         var netSource = _entityManager.GetNetEntity(source);
         user?.AddEntity(netSource);
 
-        var msg = new ChatMessage(channel, message, wrappedMessage, netSource, user?.Key, hideChat, colorOverride, audioPath, audioVolume);
+        var msg = new ChatMessage(channel, message, wrappedMessage, netSource, user?.Key, hideChat, colorOverride, audioPath, audioVolume, hidePopup);
         _netManager.ServerSendMessage(new MsgChatMessage() { Message = msg }, client);
 
         if (!recordReplay)
@@ -405,5 +444,6 @@ internal sealed partial class ChatManager : IChatManager
 public enum OOCChatType : byte
 {
     OOC,
-    Admin
+    Admin,
+    Mentor,
 }

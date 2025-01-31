@@ -31,4 +31,10 @@ public sealed partial class XenoTailStabComponent : Component
 
     [DataField, AutoNetworkedField]
     public Dictionary<ProtoId<ReagentPrototype>, FixedPoint2>? Inject;
+
+    [DataField, AutoNetworkedField]
+    public bool Toggle = false;
+
+    [DataField, AutoNetworkedField]
+    public bool InjectNeuro = false;
 }

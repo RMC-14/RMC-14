@@ -1,6 +1,12 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.GameStates;
 using Content.Shared.Coordinates;
+using Content.Shared.GameTicking;
 using Content.Shared.Maps;
+using Content.Shared.Popups;
+using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
@@ -10,8 +16,12 @@ namespace Content.Shared._RMC14.Areas;
 public sealed class AreaSystem : EntitySystem
 {
     [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly SharedRMCPvsSystem _rmcPvs = default!;
     [Dependency] private readonly ITileDefinitionManager _tile = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -21,6 +31,8 @@ public sealed class AreaSystem : EntitySystem
 
     private readonly List<EntityUid> _toRender = new();
 
+    private TimeSpan _earlySpreadHiveTime;
+
     public override void Initialize()
     {
         _areaGridQuery = GetEntityQuery<AreaGridComponent>();
@@ -28,20 +40,63 @@ public sealed class AreaSystem : EntitySystem
         _minimapColorQuery = GetEntityQuery<MinimapColorComponent>();
 
         SubscribeLocalEvent<AreaGridComponent, MapInitEvent>(OnAreaGridMapInit);
+
+        Subs.CVar(_config, RMCCVars.RMCHiveSpreadEarlyMinutes, v => _earlySpreadHiveTime = TimeSpan.FromMinutes(v), true);
     }
 
     private void OnAreaGridMapInit(Entity<AreaGridComponent> ent, ref MapInitEvent args)
     {
         _toRender.Add(ent);
+
+        var areas = ent.Comp.Areas.Values.DistinctBy(a => a.Id);
+        foreach (var area in areas)
+        {
+            if (ent.Comp.AreaEntities.ContainsKey(area))
+            {
+                Log.Warning($"Duplicate area {area} found in entity {ToPrettyString(ent)}");
+                continue;
+            }
+
+            var areaEnt = Spawn(area, MapCoordinates.Nullspace);
+            ent.Comp.AreaEntities[area] = areaEnt;
+            _rmcPvs.AddGlobalOverride(areaEnt);
+        }
+    }
+
+    public bool TryGetArea(
+        Entity<MapGridComponent, AreaGridComponent?> grid,
+        Vector2i indices,
+        [NotNullWhen(true)] out Entity<AreaComponent>? area,
+        [NotNullWhen(true)] out EntityPrototype? areaPrototype)
+    {
+        area = default;
+        areaPrototype = default;
+        if (!Resolve(grid, ref grid.Comp2, false))
+            return false;
+
+        if (!grid.Comp2.Areas.TryGetValue(indices, out var areaProtoId))
+            return false;
+
+        if (!_prototypes.TryIndex(areaProtoId, out areaPrototype))
+            return false;
+
+        if (!grid.Comp2.AreaEntities.TryGetValue(areaProtoId, out var areaEnt) ||
+            !TryComp(areaEnt, out AreaComponent? areaComp))
+        {
+            return false;
+        }
+
+        area = (areaEnt, areaComp);
+        return true;
     }
 
     public bool TryGetArea(
         EntityCoordinates coordinates,
-        [NotNullWhen(true)] out EntityPrototype? areaProto,
-        [NotNullWhen(true)] out AreaComponent? area)
+        [NotNullWhen(true)] out Entity<AreaComponent>? area,
+        [NotNullWhen(true)] out EntityPrototype? areaPrototype)
     {
-        areaProto = default;
         area = default;
+        areaPrototype = default;
         if (_transform.GetGrid(coordinates) is not { } gridId ||
             !_mapGridQuery.TryComp(gridId, out var grid) ||
             !_areaGridQuery.TryComp(gridId, out var areaGrid))
@@ -50,73 +105,94 @@ public sealed class AreaSystem : EntitySystem
         }
 
         var indices = _map.CoordinatesToTile(gridId, grid, coordinates);
-        if (!areaGrid.Areas.TryGetValue(indices, out var areaProtoId))
-            return false;
-
-        if (!_prototypes.TryIndex(areaProtoId, out areaProto))
-            return false;
-
-        if (!areaProto.TryGetComponent(out area, _compFactory))
-            return false;
-
-        return true;
+        return TryGetArea((gridId, grid, areaGrid), indices, out area, out areaPrototype);
     }
 
     public bool TryGetArea(
         MapCoordinates coordinates,
-        [NotNullWhen(true)] out EntityPrototype? areaProto,
-        [NotNullWhen(true)] out AreaComponent? area)
+        [NotNullWhen(true)] out Entity<AreaComponent>? area,
+        [NotNullWhen(true)] out EntityPrototype? areaPrototype)
     {
-        return TryGetArea(_transform.ToCoordinates(coordinates), out areaProto, out area);
+        return TryGetArea(_transform.ToCoordinates(coordinates), out area, out areaPrototype);
     }
 
     public bool TryGetArea(
         EntityUid coordinates,
-        [NotNullWhen(true)] out EntityPrototype? areaProto,
-        [NotNullWhen(true)] out AreaComponent? area)
+        [NotNullWhen(true)] out Entity<AreaComponent>? area,
+        [NotNullWhen(true)] out EntityPrototype? areaPrototype)
     {
-        return TryGetArea(coordinates.ToCoordinates(), out areaProto, out area);
+        return TryGetArea(coordinates.ToCoordinates(), out area, out areaPrototype);
     }
 
-    public bool BioscanBlocked(EntityUid coordinates, out EntityPrototype? areaProto, out AreaComponent? area)
+    public bool TryGetAllAreas(EntityCoordinates coordinates, [NotNullWhen(true)] out Entity<AreaGridComponent>? areaGrid)
     {
-        if (!TryGetArea(coordinates, out areaProto, out area))
+        areaGrid = null;
+        if (_transform.GetMap(coordinates) is not { } mapId ||
+            !_areaGridQuery.TryComp(mapId, out var areaGridComp))
+        {
+            return false;
+        }
+
+        areaGrid = (mapId, areaGridComp);
+        return true;
+    }
+
+    public bool BioscanBlocked(EntityUid coordinates, out string? name)
+    {
+        name = default;
+        if (!TryGetArea(coordinates, out var area, out var areaProto))
             return false;
 
-        return area.AvoidBioscan;
+        name = areaProto.Name;
+        return area.Value.Comp.AvoidBioscan;
     }
 
     public bool CanCAS(EntityCoordinates coordinates)
     {
-        if (!TryGetArea(coordinates, out _, out var area))
+        if (!TryGetArea(coordinates, out var area, out _))
             return false;
 
         if (IsRoofed(coordinates, r => !r.Comp.CanCAS))
             return false;
 
-        return area.CAS;
+        return area.Value.Comp.CAS;
     }
 
     public bool CanMortarFire(EntityCoordinates coordinates)
     {
-        if (!TryGetArea(coordinates, out _, out var area))
+        if (!TryGetArea(coordinates, out var area, out _))
             return false;
 
         if (IsRoofed(coordinates, r => !r.Comp.CanMortar))
             return false;
 
-        return area.MortarFire;
+        return area.Value.Comp.MortarFire;
     }
 
     public bool CanMortarPlacement(EntityCoordinates coordinates)
     {
-        if (!TryGetArea(coordinates, out _, out var area))
+        if (!TryGetArea(coordinates, out var area, out _))
             return false;
 
         if (IsRoofed(coordinates, r => !r.Comp.CanMortar))
             return false;
 
-        return area.MortarPlacement;
+        return area.Value.Comp.MortarPlacement;
+    }
+
+    public bool CanOrbitalBombard(EntityCoordinates coordinates, out bool roofed)
+    {
+        roofed = false;
+        if (!TryGetArea(coordinates, out var area, out _))
+            return false;
+
+        if (IsRoofed(coordinates, r => !r.Comp.CanOrbitalBombard))
+        {
+            roofed = true;
+            return false;
+        }
+
+        return area.Value.Comp.OB;
     }
 
     private bool IsRoofed(EntityCoordinates coordinates, Predicate<Entity<RoofingEntityComponent>> predicate)
@@ -135,6 +211,40 @@ public sealed class AreaSystem : EntitySystem
         }
 
         return false;
+    }
+
+    public bool CanResinPopup(Entity<MapGridComponent, AreaGridComponent?> grid, Vector2i indices, EntityUid? user)
+    {
+        if (!TryGetArea(grid, indices, out var area, out _))
+            return true;
+
+        if (area.Value.Comp.WeedKilling)
+        {
+            if (user != null)
+                _popup.PopupClient("This area is unsuited to host the hive!", user.Value, user.Value, PopupType.MediumCaution);
+
+            return false;
+        }
+
+        if (area.Value.Comp.ResinAllowed)
+            return true;
+
+        var roundDuration = _gameTicker.RoundDuration();
+        if (roundDuration > _earlySpreadHiveTime)
+            return true;
+
+        if (user != null)
+            _popup.PopupClient("It's too early to spread the hive this far.", user.Value, user.Value, PopupType.MediumCaution);
+
+        return false;
+    }
+
+    public bool CanSupplyDrop(MapCoordinates mapCoordinates)
+    {
+        if (!TryGetArea(mapCoordinates, out var area, out _))
+            return false;
+
+        return area.Value.Comp.SupplyDrop;
     }
 
     public override void Update(float frameTime)

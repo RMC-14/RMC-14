@@ -2,7 +2,6 @@ using System.Numerics;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Camera;
-using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
@@ -88,7 +87,6 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
         var coordinates = Transform(projectile).Coordinates;
         var otherName = ToPrettyString(target);
-        var direction = ourBody.LinearVelocity.Normalized();
         var modifiedDamage = _netManager.IsServer
             ? _damageableSystem.TryChangeDamage(target,
                 ev.Damage,
@@ -124,8 +122,12 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         {
             _guns.PlayImpactSound(target, modifiedDamage, component.SoundHit, component.ForceSound, filter, projectile);
 
-            if (!float.IsNaN(direction.X))
-                _sharedCameraRecoil.KickCamera(target, direction);
+            if (!ourBody.LinearVelocity.IsLengthZero())
+            {
+                var direction = ourBody.LinearVelocity.Normalized();
+                if (!float.IsNaN(direction.X))
+                    _sharedCameraRecoil.KickCamera(target, direction);
+            }
         }
 
         component.DamagedEntity = true;
@@ -186,6 +188,8 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         TryComp<PhysicsComponent>(uid, out var physics);
         _physics.SetBodyType(uid, BodyType.Dynamic, body: physics, xform: xform);
         _transform.AttachToGridOrMap(uid, xform);
+        component.EmbeddedIntoUid = null;
+        Dirty(uid, component);
 
         // Reset whether the projectile has damaged anything if it successfully was removed
         if (TryComp<ProjectileComponent>(uid, out var projectile))
@@ -217,9 +221,11 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         Embed(uid, args.Target, args.Shooter, component);
 
         // Raise a specific event for projectiles.
-        if (TryComp(uid, out ProjectileComponent? projectile))
+        if (TryComp(uid, out ProjectileComponent? projectile) &&
+            projectile.Shooter is { } shooter &&
+            projectile.Weapon is { } weapon)
         {
-            var ev = new ProjectileEmbedEvent(projectile.Shooter!.Value, projectile.Weapon!.Value, args.Target);
+            var ev = new ProjectileEmbedEvent(shooter, weapon, args.Target);
             RaiseLocalEvent(uid, ref ev);
         }
     }
@@ -242,8 +248,10 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         }
 
         _audio.PlayPredicted(component.Sound, uid, null);
+        component.EmbeddedIntoUid = target;
         var ev = new EmbedEvent(user, target);
         RaiseLocalEvent(uid, ref ev);
+        Dirty(uid, component);
     }
 
     private void PreventCollision(EntityUid uid, ProjectileComponent component, ref PreventCollideEvent args)

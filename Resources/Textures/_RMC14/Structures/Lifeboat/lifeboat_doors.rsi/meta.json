@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/741d6be9dd5eb0abd5b26f9952dda3c9f6cad143/icons/obj/structures/doors/lifeboatdoors.dmi",
+  "size": {
+    "x": 96,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "closed"
+    },
+    {
+      "name": "opening",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "deny",
+      "delays": [
+        [
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "locked"
+    },
+    {
+      "name": "open"
+    },
+    {
+      "name": "closing",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "unlit"
+    },
+    {
+      "name": "welded"
+    },
+    {
+      "name": "panel_open"
+    },
+    {
+      "name": "spark"
+    }
+  ]
+}

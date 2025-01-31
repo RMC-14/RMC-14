@@ -8,6 +8,14 @@
   - /Audio/_RMC14/Explosion/explosion5.ogg
 
 - type: soundCollection
+  id: RMCExplosionBig
+  files:
+  - /Audio/_RMC14/Explosion/bigboom1.ogg
+  - /Audio/_RMC14/Explosion/bigboom2.ogg
+  - /Audio/_RMC14/Explosion/bigboom3.ogg
+  - /Audio/_RMC14/Explosion/bigboom4.ogg
+
+- type: soundCollection
   id: CMHumanFemaleGrenadeThrow
   files:
   - /Audio/_RMC14/Voice/Human/human_female_grenadethrow_1.ogg

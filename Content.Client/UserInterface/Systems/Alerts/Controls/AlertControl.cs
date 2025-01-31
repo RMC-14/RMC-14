@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Client.Actions.UI;
 using Content.Client.Cooldown;
 using Content.Shared.Alert;

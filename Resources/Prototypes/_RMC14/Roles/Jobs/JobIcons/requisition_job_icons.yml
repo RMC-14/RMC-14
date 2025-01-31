@@ -2,19 +2,19 @@
   parent: CMJobIconBase
   id: CMJobIconQuartermaster
   icon:
-    sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_ro
 
 - type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconCargoTech
   icon:
-    sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_ct
 
 - type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconMessTech
   icon:
-    sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_messtech

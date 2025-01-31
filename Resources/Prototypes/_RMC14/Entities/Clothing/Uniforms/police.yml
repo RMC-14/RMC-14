@@ -6,27 +6,38 @@
   description: Standard-issue Military Police uniform. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/standard.rsi
-
-- type: entity
-  parent: CMJumpsuitMP
-  id: CMJumpsuitMPBlack
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/black.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/standard/jungle.rsi
+  - type: FoldableClothing
+    foldedEquippedPrefix: sleeves
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/MP/standard/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/MP/standard/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/MP/standard/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/MP/standard/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/MP/standard/urban.rsi
 
 # Military Warden
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: JumpsuitMarine
   id: CMJumpsuitWarden
   name: military warden uniform
   description: Standard-issue Military Warden uniform. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/standard.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/warden/jungle.rsi
+  - type: FoldableClothing
+    foldedEquippedPrefix: sleeves
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/MP/warden/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/MP/warden/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/MP/warden/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/MP/warden/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/MP/warden/urban.rsi
 
 - type: entity
-  parent: CMJumpsuitWarden
+  parent: RMCMarineUniformBase
   id: CMJumpsuitWardenBlue
   name: blue warden uniform
   description: The insignia on this uniform tells you that this uniform belongs to the Warden..
@@ -35,7 +46,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/blue.rsi
 
 - type: entity
-  parent: CMJumpsuitWarden
+  parent: RMCMarineUniformBase
   id: CMJumpsuitWardenRed
   name: red warden uniform
   description: A standard-issue warden uniform.
@@ -44,7 +55,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/red.rsi
 
 - type: entity
-  parent: CMJumpsuitWarden
+  parent: RMCMarineUniformBase
   id: CMJumpsuitWardenCorporate
   name: corporate warden uniform
   description: A standard-issue warden uniform.
@@ -53,7 +64,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/corporate.rsi
 
 - type: entity
-  parent: CMJumpsuitWarden
+  parent: RMCMarineUniformBase
   id: CMJumpsuitWardenNavy
   name: navy warden uniform
   description: A navy variant of warden uniform.
@@ -62,7 +73,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/navy.rsi
 
 - type: entity
-  parent: CMJumpsuitWarden
+  parent: RMCMarineUniformBase
   id: CMJumpsuitWardenTan
   name: tan warden uniform
   description: A standard-issue warden uniform.
@@ -78,5 +89,11 @@
   description: A uniform typically worn by a Chief MP of the UNMC. It has shards of light Kevlar to help protect against stabbing weapons, bullets, and shrapnel from explosions. This uniform includes a small EMF distributor to help nullify energy-based weapon fire, along with a hazmat chemical filter woven throughout the material to ward off biological and radiation hazards.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/MP/wo.rsi
-
+    sprite: _RMC14/Objects/Clothing/Uniforms/MP/wo/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/MP/wo/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/MP/wo/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/MP/wo/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/MP/wo/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/MP/wo/urban.rsi

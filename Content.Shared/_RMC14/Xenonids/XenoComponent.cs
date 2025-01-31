@@ -48,9 +48,6 @@ public sealed partial class XenoComponent : Component
     public TimeSpan NextRegenTime;
 
     [DataField, AutoNetworkedField]
-    public EntityUid? Hive;
-
-    [DataField, AutoNetworkedField]
     public HashSet<ProtoId<AccessLevelPrototype>> AccessLevels = new() { "CMAccessXeno" };
 
     [DataField, AutoNetworkedField]
@@ -79,6 +76,13 @@ public sealed partial class XenoComponent : Component
 
     [DataField, AutoNetworkedField]
     public ProtoId<EmoteSoundsPrototype>? EmoteSounds = "Xeno";
+
+    /// <summary>
+    /// Hides this xeno from the caste unlock announcements.
+    /// Use for admeme or unimplemented castes that can't be evolved to.
+    /// </summary>
+    [DataField]
+    public bool Hidden;
 
     public EmoteSoundsPrototype? Sounds;
 }

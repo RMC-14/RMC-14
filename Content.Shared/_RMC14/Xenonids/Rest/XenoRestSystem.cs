@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Xenonids.Charge;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Crest;
@@ -17,6 +18,7 @@ using Content.Shared.Actions;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Rest;
 
@@ -26,6 +28,7 @@ public sealed class XenoRestSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -48,6 +51,8 @@ public sealed class XenoRestSystem : EntitySystem
         SubscribeLocalEvent<XenoRestingComponent, XenoStompAttemptEvent>(OnXenoRestingStompAttempt);
         SubscribeLocalEvent<XenoRestingComponent, XenoGutAttemptEvent>(OnXenoRestingGutAttempt);
         SubscribeLocalEvent<XenoRestingComponent, XenoScreechAttemptEvent>(OnXenoRestingScreechAttempt);
+        SubscribeLocalEvent<XenoRestingComponent, EvasionRefreshModifiersEvent>(OnXenoRestingEvasionRefresh);
+
         SubscribeLocalEvent<ActionBlockIfRestingComponent, RMCActionUseAttemptEvent>(OnXenoRestingActionUseAttempt);
     }
 
@@ -71,6 +76,9 @@ public sealed class XenoRestSystem : EntitySystem
 
     private void OnXenoRestAction(Entity<XenoComponent> xeno, ref XenoRestActionEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         var attempt = new XenoRestAttemptEvent();
         RaiseLocalEvent(xeno, ref attempt);
 
@@ -179,5 +187,13 @@ public sealed class XenoRestSystem : EntitySystem
     {
         _popup.PopupClient(Loc.GetString("rmc-xeno-rest-cant-screech"), xeno, xeno);
         args.Cancelled = true;
+    }
+
+    private void OnXenoRestingEvasionRefresh(Entity<XenoRestingComponent> xeno, ref EvasionRefreshModifiersEvent args)
+    {
+        if (xeno.Owner != args.Entity.Owner)
+            return;
+
+        args.Evasion += (int) EvasionModifiers.Rest;
     }
 }

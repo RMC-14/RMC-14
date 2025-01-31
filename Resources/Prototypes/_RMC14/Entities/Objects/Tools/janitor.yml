@@ -90,9 +90,9 @@
   - type: LightReplacer
     contents:
     - id: CMLightTube
-      amount: 8
+      amount: 50
     - id: CMLightBulb
-      amount: 5
+      amount: 50
   - type: StaticPrice
     price: 100
   - type: ContainerContainer

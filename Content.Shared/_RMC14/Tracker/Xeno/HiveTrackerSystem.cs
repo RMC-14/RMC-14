@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared.Alert;
 using Content.Shared.Mobs.Systems;
@@ -13,6 +14,7 @@ public sealed class HiveTrackerSystem : EntitySystem
 {
     [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly TrackerSystem _tracker = default!;
@@ -41,23 +43,18 @@ public sealed class HiveTrackerSystem : EntitySystem
 
     private void OnClickedAlert(Entity<HiveTrackerComponent> ent, ref HiveTrackerClickedAlertEvent args)
     {
-        if (!TryComp(ent, out XenoComponent? selfXeno) ||
-            selfXeno.Hive is not { } selfHive)
-        {
+        if (_hive.GetHive(ent.Owner) is not {} hive)
             return;
-        }
 
         args.Handled = true;
-        var granters = EntityQueryEnumerator<XenoEvolutionGranterComponent, XenoComponent>();
-        while (granters.MoveNext(out var uid, out var granter, out var granterXeno))
+        // TODO: if queen gets stored on the hive entity just use that instead of searching for it
+        var granters = EntityQueryEnumerator<XenoEvolutionGranterComponent, HiveMemberComponent, XenoComponent>();
+        while (granters.MoveNext(out var uid, out var granter, out var member, out var xeno))
         {
-            if (granterXeno.Hive is not { } granterHive ||
-                selfHive != granterHive)
-            {
+            if (member.Hive != hive.Owner)
                 continue;
-            }
 
-            _watchXeno.Watch((ent, selfXeno), (uid, granterXeno));
+            _watchXeno.Watch(ent.Owner, (uid, member));
         }
     }
 
@@ -66,11 +63,12 @@ public sealed class HiveTrackerSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        // TODO: replace this meme with a queen field on the hive that gets networked
         _hiveLeaders.Clear();
-        var granters = EntityQueryEnumerator<XenoEvolutionGranterComponent, XenoComponent>();
-        while (granters.MoveNext(out var uid, out _, out var xeno))
+        var granters = EntityQueryEnumerator<XenoEvolutionGranterComponent, HiveMemberComponent>();
+        while (granters.MoveNext(out var uid, out _, out var member))
         {
-            if (xeno.Hive is not { } hive)
+            if (member.Hive is not {} hive)
                 continue;
 
             if (_hiveLeaders.ContainsKey(hive))
@@ -83,16 +81,22 @@ public sealed class HiveTrackerSystem : EntitySystem
         }
 
         var time = _timing.CurTime;
-        var query = EntityQueryEnumerator<HiveTrackerComponent, XenoComponent>();
-        while (query.MoveNext(out var uid, out var tracker, out var xeno))
+        // not putting HiveMember in the query so it uses the center alert with no hive
+        var query = EntityQueryEnumerator<HiveTrackerComponent>();
+        while (query.MoveNext(out var uid, out var tracker))
         {
             if (time < tracker.UpdateAt)
                 continue;
 
             tracker.UpdateAt = time + tracker.UpdateEvery;
 
-            if (xeno.Hive is not { } hive ||
-                !_hiveLeaders.TryGetValue(hive, out var leader))
+            if (_hive.GetHive(uid) is not {} hive)
+            {
+                _alerts.ClearAlert(uid, tracker.Alert);
+                continue;
+            }
+
+            if (!_hiveLeaders.TryGetValue(hive, out var leader))
             {
                 _alerts.ShowAlert(uid, tracker.Alert, TrackerSystem.CenterSeverity);
                 continue;

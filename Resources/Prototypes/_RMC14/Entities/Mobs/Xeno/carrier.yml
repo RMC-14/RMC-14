@@ -4,6 +4,7 @@
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
   id: CMXenoCarrier
   name: Carrier
   description: A strange-looking alien creature. It carries a number of scuttling jointed crablike creatures.
@@ -12,6 +13,23 @@
     name: cm-job-name-xeno-carrier
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Carrier/carrier.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.RightArm" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.Head" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.LeftArm" ]
+      visible: false
+    - map: [ "enum.ParasiteOverlayLayers.Back" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
   - type: MobState
     allowedStates:
     - Alive
@@ -40,6 +58,7 @@
     tier: 2
     hudOffset: 0,0.19
     unlockAt: 300 # 5 minutes
+  - type: XenoHeavy
   - type: XenoDevolve
     devolvesTo:
     - CMXenoDrone
@@ -59,13 +78,33 @@
     damage:
       groups:
         Brute: 27.5
-  - type: Tackle # min: 2, max: 4
-    threshold: 3
-    stun: 9
-    chance: 0.50
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 42
+  - type: Tackle
+    max: 4
+    chance: 0.5
+    stunMin: 4
+    stunMax: 5
+  - type: TunnelRenamer
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.6375
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.7075
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.475
+      whitelist:
+        components:
+        - XenoHeavy
   - type: EggPlantTime
     plantTime: 1
   - type: WhitelistPickup
@@ -73,6 +112,7 @@
       components:
       - XenoParasite
       - XenoEgg
+      - XenoFruit
   - type: XenoParasiteThrower
   - type: XenoEggRetriever
   - type: XenoNurturing
@@ -84,3 +124,5 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: carrier
+  - type: XenoInhands
+    prefix: carrier

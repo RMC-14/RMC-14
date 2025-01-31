@@ -69,12 +69,14 @@ namespace Content.Server.Database
         /// </summary>
         /// <param name="address">The ip address of the user.</param>
         /// <param name="userId">The id of the user.</param>
-        /// <param name="hwId">The hardware ID of the user.</param>
+        /// <param name="hwId">The legacy HWID of the user.</param>
+        /// <param name="modernHWIds">The modern HWIDs of the user.</param>
         /// <returns>The user's latest received un-pardoned ban, or null if none exist.</returns>
         Task<ServerBanDef?> GetServerBanAsync(
             IPAddress? address,
             NetUserId? userId,
-            ImmutableArray<byte>? hwId);
+            ImmutableArray<byte>? hwId,
+            ImmutableArray<ImmutableArray<byte>>? modernHWIds);
 
         /// <summary>
         ///     Looks up an user's ban history.
@@ -82,13 +84,15 @@ namespace Content.Server.Database
         /// </summary>
         /// <param name="address">The ip address of the user.</param>
         /// <param name="userId">The id of the user.</param>
-        /// <param name="hwId">The HWId of the user.</param>
+        /// <param name="hwId">The legacy HWId of the user.</param>
+        /// <param name="modernHWIds">The modern HWIDs of the user.</param>
         /// <param name="includeUnbanned">If true, bans that have been expired or pardoned are also included.</param>
         /// <returns>The user's ban history.</returns>
         Task<List<ServerBanDef>> GetServerBansAsync(
             IPAddress? address,
             NetUserId? userId,
             ImmutableArray<byte>? hwId,
+            ImmutableArray<ImmutableArray<byte>>? modernHWIds,
             bool includeUnbanned=true);
 
         Task AddServerBanAsync(ServerBanDef serverBan);
@@ -137,12 +141,14 @@ namespace Content.Server.Database
         /// <param name="address">The IP address of the user.</param>
         /// <param name="userId">The NetUserId of the user.</param>
         /// <param name="hwId">The Hardware Id of the user.</param>
+        /// <param name="modernHWIds">The modern HWIDs of the user.</param>
         /// <param name="includeUnbanned">Whether expired and pardoned bans are included.</param>
         /// <returns>The user's role ban history.</returns>
         Task<List<ServerRoleBanDef>> GetServerRoleBansAsync(
             IPAddress? address,
             NetUserId? userId,
             ImmutableArray<byte>? hwId,
+            ImmutableArray<ImmutableArray<byte>>? modernHWIds,
             bool includeUnbanned = true);
 
         Task<ServerRoleBanDef> AddServerRoleBanAsync(ServerRoleBanDef serverBan);
@@ -180,7 +186,7 @@ namespace Content.Server.Database
             NetUserId userId,
             string userName,
             IPAddress address,
-            ImmutableArray<byte> hwId);
+            ImmutableTypedHwid? hwId);
         Task<PlayerRecord?> GetPlayerRecordByUserName(string userName, CancellationToken cancel = default);
         Task<PlayerRecord?> GetPlayerRecordByUserId(NetUserId userId, CancellationToken cancel = default);
         #endregion
@@ -191,7 +197,8 @@ namespace Content.Server.Database
             NetUserId userId,
             string userName,
             IPAddress address,
-            ImmutableArray<byte> hwId,
+            ImmutableTypedHwid? hwId,
+            float trust,
             ConnectionDenyReason? denied,
             int serverId);
 
@@ -209,6 +216,16 @@ namespace Content.Server.Database
         Task RemoveAdminAsync(NetUserId userId, CancellationToken cancel = default);
         Task AddAdminAsync(Admin admin, CancellationToken cancel = default);
         Task UpdateAdminAsync(Admin admin, CancellationToken cancel = default);
+
+        /// <summary>
+        /// Update whether an admin has voluntarily deadminned.
+        /// </summary>
+        /// <remarks>
+        /// This does nothing if the player is not an admin.
+        /// </remarks>
+        /// <param name="userId">The user ID of the admin.</param>
+        /// <param name="deadminned">Whether the admin is deadminned or not.</param>
+        Task UpdateAdminDeadminnedAsync(NetUserId userId, bool deadminned, CancellationToken cancel = default);
 
         Task RemoveAdminRankAsync(int rankId, CancellationToken cancel = default);
         Task AddAdminRankAsync(AdminRank rank, CancellationToken cancel = default);
@@ -241,6 +258,16 @@ namespace Content.Server.Database
         Task AddToWhitelistAsync(NetUserId player);
 
         Task RemoveFromWhitelistAsync(NetUserId player);
+
+        #endregion
+
+        #region Blacklist
+
+        Task<bool> GetBlacklistStatusAsync(NetUserId player);
+
+        Task AddToBlacklistAsync(NetUserId player);
+
+        Task RemoveFromBlacklistAsync(NetUserId player);
 
         #endregion
 
@@ -299,9 +326,17 @@ namespace Content.Server.Database
 
 
         Task<List<string>> GetJobWhitelists(Guid player, CancellationToken cancel = default);
-        Task<bool> IsJobWhitelisted(Guid player, ProtoId<JobPrototype> job);
+        Task<bool> IsJobWhitelisted(Guid player, ProtoId<JobPrototype> job, CancellationToken cancel = default);
 
         Task<bool> RemoveJobWhitelist(Guid player, ProtoId<JobPrototype> job);
+
+        #endregion
+
+        #region IPintel
+
+        Task<bool> UpsertIPIntelCache(DateTime time, IPAddress ip, float score);
+        Task<IPIntelCache?> GetIPIntelCache(IPAddress ip);
+        Task<bool> CleanIPIntelCache(TimeSpan range);
 
         #endregion
 
@@ -316,6 +351,8 @@ namespace Content.Server.Database
         Task<RMCPatron?> GetPatron(Guid player, CancellationToken cancel);
 
         Task<List<RMCPatron>> GetAllPatrons();
+
+        Task SetGhostColor(Guid player, System.Drawing.Color? color);
 
         Task SetLobbyMessage(Guid player, string message);
 
@@ -332,6 +369,17 @@ namespace Content.Server.Database
         Task<bool> ExcludeRoleTimer(Guid player, string tracker);
 
         Task<bool> RemoveRoleTimerExclusion(Guid player, string tracker);
+
+        Task AddCommendation(Guid giver,
+            Guid receiver,
+            string giverName,
+            string receiverName,
+            string name,
+            string text,
+            CommendationType type,
+            int round);
+
+        Task<List<RMCCommendation>> GetCommendationsReceived(Guid player);
 
         #endregion
 
@@ -500,20 +548,22 @@ namespace Content.Server.Database
         public Task<ServerBanDef?> GetServerBanAsync(
             IPAddress? address,
             NetUserId? userId,
-            ImmutableArray<byte>? hwId)
+            ImmutableArray<byte>? hwId,
+            ImmutableArray<ImmutableArray<byte>>? modernHWIds)
         {
             DbReadOpsMetric.Inc();
-            return RunDbCommand(() => _db.GetServerBanAsync(address, userId, hwId));
+            return RunDbCommand(() => _db.GetServerBanAsync(address, userId, hwId, modernHWIds));
         }
 
         public Task<List<ServerBanDef>> GetServerBansAsync(
             IPAddress? address,
             NetUserId? userId,
             ImmutableArray<byte>? hwId,
+            ImmutableArray<ImmutableArray<byte>>? modernHWIds,
             bool includeUnbanned=true)
         {
             DbReadOpsMetric.Inc();
-            return RunDbCommand(() => _db.GetServerBansAsync(address, userId, hwId, includeUnbanned));
+            return RunDbCommand(() => _db.GetServerBansAsync(address, userId, hwId, modernHWIds, includeUnbanned));
         }
 
         public Task AddServerBanAsync(ServerBanDef serverBan)
@@ -557,10 +607,11 @@ namespace Content.Server.Database
             IPAddress? address,
             NetUserId? userId,
             ImmutableArray<byte>? hwId,
+            ImmutableArray<ImmutableArray<byte>>? modernHWIds,
             bool includeUnbanned = true)
         {
             DbReadOpsMetric.Inc();
-            return RunDbCommand(() => _db.GetServerRoleBansAsync(address, userId, hwId, includeUnbanned));
+            return RunDbCommand(() => _db.GetServerRoleBansAsync(address, userId, hwId, modernHWIds, includeUnbanned));
         }
 
         public Task<ServerRoleBanDef> AddServerRoleBanAsync(ServerRoleBanDef serverRoleBan)
@@ -602,7 +653,7 @@ namespace Content.Server.Database
             NetUserId userId,
             string userName,
             IPAddress address,
-            ImmutableArray<byte> hwId)
+            ImmutableTypedHwid? hwId)
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.UpdatePlayerRecord(userId, userName, address, hwId));
@@ -624,12 +675,13 @@ namespace Content.Server.Database
             NetUserId userId,
             string userName,
             IPAddress address,
-            ImmutableArray<byte> hwId,
+            ImmutableTypedHwid? hwId,
+            float trust,
             ConnectionDenyReason? denied,
             int serverId)
         {
             DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.AddConnectionLogAsync(userId, userName, address, hwId, denied, serverId));
+            return RunDbCommand(() => _db.AddConnectionLogAsync(userId, userName, address, hwId, trust, denied, serverId));
         }
 
         public Task AddServerBanHitsAsync(int connection, IEnumerable<ServerBanDef> bans)
@@ -673,6 +725,12 @@ namespace Content.Server.Database
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.UpdateAdminAsync(admin, cancel));
+        }
+
+        public Task UpdateAdminDeadminnedAsync(NetUserId userId, bool deadminned, CancellationToken cancel = default)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.UpdateAdminDeadminnedAsync(userId, deadminned, cancel));
         }
 
         public Task RemoveAdminRankAsync(int rankId, CancellationToken cancel = default)
@@ -768,6 +826,24 @@ namespace Content.Server.Database
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.RemoveFromWhitelistAsync(player));
+        }
+
+        public Task<bool> GetBlacklistStatusAsync(NetUserId player)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetBlacklistStatusAsync(player));
+        }
+
+        public Task AddToBlacklistAsync(NetUserId player)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddToBlacklistAsync(player));
+        }
+
+        public Task RemoveFromBlacklistAsync(NetUserId player)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.RemoveFromBlacklistAsync(player));
         }
 
         public Task AddUploadedResourceLogAsync(NetUserId user, DateTimeOffset date, string path, byte[] data)
@@ -970,7 +1046,7 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.GetJobWhitelists(player, cancel));
         }
 
-        public Task<bool> IsJobWhitelisted(Guid player, ProtoId<JobPrototype> job)
+        public Task<bool> IsJobWhitelisted(Guid player, ProtoId<JobPrototype> job, CancellationToken cancel = default)
         {
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.IsJobWhitelisted(player, job));
@@ -980,6 +1056,23 @@ namespace Content.Server.Database
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.RemoveJobWhitelist(player, job));
+        }
+
+        public Task<bool> UpsertIPIntelCache(DateTime time, IPAddress ip, float score)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.UpsertIPIntelCache(time, ip, score));
+        }
+
+        public Task<IPIntelCache?> GetIPIntelCache(IPAddress ip)
+        {
+            return RunDbCommand(() => _db.GetIPIntelCache(ip));
+        }
+
+        public Task<bool> CleanIPIntelCache(TimeSpan range)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.CleanIPIntelCache(range));
         }
 
         public void SubscribeToNotifications(Action<DatabaseNotification> handler)
@@ -1036,6 +1129,12 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.GetAllPatrons());
         }
 
+        public Task SetGhostColor(Guid player, System.Drawing.Color? color)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetGhostColor(player, color));
+        }
+
         public Task SetLobbyMessage(Guid player, string message)
         {
             DbWriteOpsMetric.Inc();
@@ -1082,6 +1181,25 @@ namespace Content.Server.Database
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.RemoveRoleTimerExclusion(player, tracker));
+        }
+
+        public Task AddCommendation(Guid giver,
+            Guid receiver,
+            string giverName,
+            string receiverName,
+            string name,
+            string text,
+            CommendationType type,
+            int round)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddCommendation(giver, receiver, giverName, receiverName, name, text, type, round));
+        }
+
+        public Task<List<RMCCommendation>> GetCommendationsReceived(Guid player)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCommendations(player));
         }
 
         // Wrapper functions to run DB commands from the thread pool.

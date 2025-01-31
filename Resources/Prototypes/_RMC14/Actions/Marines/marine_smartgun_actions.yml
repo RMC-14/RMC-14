@@ -64,3 +64,17 @@
     event: !type:FarSightActionEvent
     useDelay: 0.25
     itemIconStyle: NoItem
+
+- type: entity
+  parent: ActionMarineToggleable
+  id: RMCActionToggleMotionDetector
+  name: Toggle Motion Detector
+  description: Periodically pings any unknown movement near you.
+  components:
+  - type: InstantAction
+    icon:
+      sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
+      state: motion_detector
+    event: !type:GunToggleableMotionDetectorActionEvent
+    useDelay: 0.25
+    itemIconStyle: NoItem

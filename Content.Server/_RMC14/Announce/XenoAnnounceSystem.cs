@@ -24,7 +24,9 @@ public sealed class XenoAnnounceSystem : SharedXenoAnnounceSystem
 
         filter.AddWhereAttachedEntity(HasComp<GhostComponent>);
 
-        _adminLogs.Add(LogType.RMCXenoAnnounce, $"{ToPrettyString(source):source} xeno announced message: {message}");
+        if (source.IsValid())
+            _adminLogs.Add(LogType.RMCXenoAnnounce, $"{ToPrettyString(source):source} xeno announced message: {message}");
+
         _chat.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, wrapped, source, false, true, null);
         _audio.PlayGlobal(sound, filter, true);
 

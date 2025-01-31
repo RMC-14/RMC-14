@@ -4,11 +4,41 @@ cm-chatsan-replacement-deltard = delta
 cm-chatsan-word-deltards = deltards
 cm-chatsan-replacement-deltards = deltas
 
+cm-chatsan-word-alphoid = alphoid
+cm-chatsan-replacement-alphoid = alpha
+
+cm-chatsan-word-alphoids = alphoids
+cm-chatsan-replacement-alphoids = alpha
+
+cm-chatsan-word-bravoid = bravoid
+cm-chatsan-replacement-bravoid = bravo
+
+cm-chatsan-word-bravoids = bravoids
+cm-chatsan-replacement-bravoids = bravo
+
+cm-chatsan-word-charloid = charloid
+cm-chatsan-replacement-charloid = charlie
+
+cm-chatsan-word-charloids = charloids
+cm-chatsan-replacement-charloids = charlie
+
+cm-chatsan-word-deltoid = deltoid
+cm-chatsan-replacement-deltoid = delta
+
+cm-chatsan-word-deltoids = deltoids
+cm-chatsan-replacement-deltoids = delta
+
 cm-chatsan-word-admins-marine = admins
 cm-chatsan-replacement-admins-marine = high command
 
 cm-chatsan-word-eorg-marine = eorg
 cm-chatsan-replacement-eorg-marine = warcrimes
+
+cm-chatsan-word-xenoid = xenoid
+cm-chatsan-replacement-xenoid = xenonid
+
+cm-chatsan-word-xenoids = xenoids
+cm-chatsan-replacement-xenoids = xenonids
 
 cm-chatsan-word-beno = beno
 cm-chatsan-replacement-beno = xeno
@@ -211,11 +241,62 @@ cm-chatsan-replacement-cat = feline host
 cm-chatsan-word-cats = cats
 cm-chatsan-replacement-cats = feline hosts
 
+cm-chatsan-word-vulpkanin = vulpkanin
+cm-chatsan-replacement-vulpkanin = canine host
+
+cm-chatsan-word-vulpkanins = vulpkanins
+cm-chatsan-replacement-vulpkanins = canine hosts
+
+cm-chatsan-word-vulp = vulp
+cm-chatsan-replacement-vulp = canine host
+
+cm-chatsan-word-vulps = vulps
+cm-chatsan-replacement-vulps = canine hosts
+
+cm-chatsan-word-dog = dog
+cm-chatsan-replacement-dog = canine host
+
+cm-chatsan-word-dogs = dogs
+cm-chatsan-replacement-dogs = canine hosts
+
+cm-chatsan-word-avali = avali
+cm-chatsan-replacement-avali = four-eared host
+
+cm-chatsan-word-avalis = avalis
+cm-chatsan-replacement-avalis = four-eared hosts
+
+cm-chatsan-word-rodentia = rodentia
+cm-chatsan-replacement-rodentia = squeaking host
+
+cm-chatsan-word-rodentias = rodentias
+cm-chatsan-replacement-rodentias = squeaking hosts
+
+cm-chatsan-word-rodentiae = rodentiae
+cm-chatsan-replacement-rodentiae = squeaking hosts
+
+cm-chatsan-word-rat = rat
+cm-chatsan-replacement-rat = squeaking host
+
+cm-chatsan-word-rats = rats
+cm-chatsan-replacement-rats = squeaking hosts
+
+cm-chatsan-word-mouse = mouse
+cm-chatsan-replacement-mouse = squeaking host
+
+cm-chatsan-word-mice = mice
+cm-chatsan-replacement-mice = squeaking hosts
+
 cm-chatsan-word-grenade = grenade
 cm-chatsan-replacement-grenade = boomstick
 
 cm-chatsan-word-grenades = grenades
 cm-chatsan-replacement-grenades = boomsticks
+
+cm-chatsan-word-gl = gl
+cm-chatsan-replacement-gl = boomstick launcher
+
+cm-chatsan-word-gls = gls
+cm-chatsan-replacement-gls = boomstick launchers
 
 cm-chatsan-word-bullet = bullet
 cm-chatsan-replacement-bullet = spit
@@ -231,14 +312,83 @@ cm-chatsan-replacement-ammo = spits
 # cm-chatsan-word-#tank = #tank
 # cm-chatsan-replacement-#tank = turtle
 
-# cm-chatsan-word-# laser = # laser
-# cm-chatsan-replacement-# laser = dot
+cm-chatsan-word-laser = laser
+cm-chatsan-replacement-laser = dot
 
-# cm-chatsan-word-# lazer = # lazer
-# cm-chatsan-replacement-# lazer = dot
+cm-chatsan-word-lazer = lazer
+cm-chatsan-replacement-lazer = dot
 
 # cm-chatsan-word-# flamer = # flamer
 # cm-chatsan-replacement-# flamer = fire spitter
 
 # cm-chatsan-word-# flamethrower = # flamethrower
 # cm-chatsan-replacement-# flamethrower =  fire spitter
+
+cm-chatsan-word-sadar = sadar
+cm-chatsan-replacement-sadar = tuber
+
+cm-chatsan-word-rocket = rocket
+cm-chatsan-replacement-rocket = boom spit
+
+cm-chatsan-word-grenadier = grenadier
+cm-chatsan-replacement-grenadier = boomstick spitter
+
+cm-chatsan-word-scout = scout
+cm-chatsan-replacement-scout = tall lurker
+
+cm-chatsan-word-mortar = mortar
+cm-chatsan-replacement-mortar = skyboom
+
+cm-chatsan-word-demo = demo
+cm-chatsan-replacement-demo = boom tuber
+
+cm-chatsan-word-demolitionist = demolitionist
+cm-chatsan-replacement-demolitionist = boom tuber
+
+cm-chatsan-word-ws = ws
+cm-chatsan-replacement-ws = special tall
+
+cm-chatsan-word-spec = spec
+cm-chatsan-replacement-spec = special tall
+
+cm-chatsan-word-cas = cas
+cm-chatsan-replacement-cas = skyspit
+
+cm-chatsan-word-sensors = sensors
+cm-chatsan-replacement-sensors = tall eye tower
+
+cm-chatsan-word-sensor-tower = sensor tower
+cm-chatsan-replacement-sensor-tower = tall eye tower
+
+cm-chatsan-word-comms = comms
+cm-chatsan-replacement-comms = tall hivemind tower
+
+cm-chatsan-word-communications-tower = communications tower
+cm-chatsan-replacement-communications-tower = tall hivemind tower
+
+cm-chatsan-word-smart-gun = smart gun
+cm-chatsan-replacement-smartgun = smart spitter
+
+cm-chatsan-word-smartgun = smartgun
+cm-chatsan-replacement-smart-gun = smart spitter
+
+cm-chatsan-word-smartgunner = smartgunner
+cm-chatsan-replacement-smartgunner = smart spitter
+
+cm-chatsan-word-smart-gunner = smart gunner
+cm-chatsan-replacement-smart-gunner = smart spitter
+
+cm-chatsan-word-sentry = sentry
+cm-chatsan-replacement-sentry = auto spitter
+
+cm-chatsan-word-sentries = sentries
+cm-chatsan-replacement-sentries = auto spitters
+
+cm-chatsan-word-squad = squad
+cm-chatsan-replacement-squad = caste
+
+cm-chatsan-word-squads = squads
+cm-chatsan-replacement-squads = castes
+
+cm-chatsan-word-shotgun = shotgun
+cm-chatsan-replacement-shotgun = scatter spitter

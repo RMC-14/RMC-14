@@ -27,7 +27,7 @@ public sealed class XenoHiveCoreSystem : SharedXenoHiveCoreSystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly RMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
     public override void Initialize()
     {
@@ -55,17 +55,13 @@ public sealed class XenoHiveCoreSystem : SharedXenoHiveCoreSystem
 
     private void OnHiveCoreDestruction(Entity<HiveCoreComponent> ent, ref DestructionEventArgs args)
     {
-        if (TryComp(ent, out HiveMemberComponent? member) &&
-            TryComp(member.Hive, out HiveComponent? hive))
-        {
-            hive.NewCoreAt = _timing.CurTime + hive.NewCoreCooldown;
-        }
+        if (_hive.GetHive(ent.Owner) is {} hive)
+            hive.Comp.NewCoreAt = _timing.CurTime + hive.Comp.NewCoreCooldown;
     }
 
     private void OnXenoSpawnerUsed(Entity<XenoComponent> xeno, ref GhostRoleSpawnerUsedEvent args)
     {
-        if (TryComp(args.Spawner, out HiveMemberComponent? member))
-            _xeno.SetHive((xeno, xeno), member.Hive);
+        _hive.SetSameHive(args.Spawner, xeno.Owner);
 
         if (TryComp(args.Spawner, out HiveCoreComponent? core))
             core.LiveLesserDrones.Add(xeno);

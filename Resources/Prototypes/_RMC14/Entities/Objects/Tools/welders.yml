@@ -54,6 +54,10 @@
     sound:
       path: /Audio/_RMC14/Handling/weldingtool_pickup.ogg
   - type: Blowtorch
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Suitstorage
 
 - type: entity
   parent: CMWelder # TODO doesn't need eye protection but can only weld vents

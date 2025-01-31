@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Body.Components;
 using Content.Shared.Destructible;
 using Content.Shared.Foldable;
@@ -17,7 +18,6 @@ using Content.Shared.Tools.Systems;
 using Content.Shared.Verbs;
 using Content.Shared.Wall;
 using Content.Shared.Whitelist;
-using Content.Shared.ActionBlocker;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
@@ -346,6 +346,14 @@ public abstract class SharedEntityStorageSystem : EntitySystem
         return true;
     }
 
+    public bool IsOpen(EntityUid target, SharedEntityStorageComponent? component = null)
+    {
+        if (!ResolveStorage(target, ref component))
+            return false;
+
+        return component.Open;
+    }
+
     public bool CanOpen(EntityUid user, EntityUid target, bool silent = false, SharedEntityStorageComponent? component = null)
     {
         if (!ResolveStorage(target, ref component))
@@ -429,7 +437,7 @@ public abstract class SharedEntityStorageSystem : EntitySystem
         // law prevents it
         // 6. if this is an item, then mobs must only be eaten if some other component prevents
         // pick-up interactions while a mob is inside (e.g. foldable)
-        var attemptEvent = new InsertIntoEntityStorageAttemptEvent();
+        var attemptEvent = new InsertIntoEntityStorageAttemptEvent(container);
         RaiseLocalEvent(toInsert, ref attemptEvent);
         if (attemptEvent.Cancelled)
             return false;
@@ -488,9 +496,6 @@ public abstract class SharedEntityStorageSystem : EntitySystem
                 component.RemovedMasks = 0;
             }
         }
-
-        if (TryComp<PlaceableSurfaceComponent>(uid, out var surface))
-            _placeableSurface.SetPlaceable(uid, component.Open, surface);
 
         _appearance.SetData(uid, StorageVisuals.Open, component.Open);
         _appearance.SetData(uid, StorageVisuals.HasContents, component.Contents.ContainedEntities.Count > 0);

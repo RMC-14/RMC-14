@@ -1,5 +1,4 @@
 ﻿using Content.Shared._RMC14.NamedItems;
-using Robust.Shared.GameStates;
 
 namespace Content.Server._RMC14.NamedItems;
 
@@ -7,9 +6,9 @@ namespace Content.Server._RMC14.NamedItems;
 [Access(typeof(RMCNamedItemSystem))]
 public sealed partial class RMCNameItemOnVendComponent : Component
 {
-    [DataField(required: true), AutoNetworkedField]
+    [DataField(required: true)]
     public RMCNamedItemType Item;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public string? Name;
 }

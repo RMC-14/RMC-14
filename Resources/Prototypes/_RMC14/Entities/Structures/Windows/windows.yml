@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: CMBaseStructureCorrodible
   id: CMBaseWindow # TODO RMC14 this needs to be 2 separate entities eventually
@@ -27,6 +27,14 @@
     price: 75
   - type: Physics
     bodyType: Static
+  - type: InteractionPopup
+    interactDelay: 10
+    interactSuccessString: comp-window-knock
+    messagePerceivedByOthers: rmc-window-knock-others
+    interactSuccessSound:
+      path: /Audio/Effects/glass_knock.ogg
+      params:
+        variation: 0.125
   - type: Fixtures
     fixtures:
       fix1:
@@ -106,6 +114,7 @@
           - !type:ChangeConstructionNodeBehavior
             node: windowFrameAlmayer
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: Construction
     graph: RMCWindowAlmayer
     node: windowAlmayerReinforced
@@ -175,6 +184,7 @@
           - !type:ChangeConstructionNodeBehavior
             node: windowFrameWhite
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: Construction
     graph: RMCWindowWhite
     node: windowWhiteReinforced
@@ -222,6 +232,7 @@
           - !type:ChangeConstructionNodeBehavior
             node: windowFrameColony
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: Construction
     graph: RMCWindowColony
     node: windowColony
@@ -272,9 +283,64 @@
           - !type:ChangeConstructionNodeBehavior
             node: windowFrameColonyReinforced
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: Construction
     graph: RMCWindowColonyReinforced
     node: windowColonyReinforced
+
+- type: entity
+  parent: CMBaseWindow
+  id: RMCHunterReinforcedWindow
+  suffix: hunter
+  name: reinforced window
+  description: A glass window with a special rod matrix inside a wall frame. It looks rather strong. Might take a few good hits to shatter it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/colony_rwindow.rsi
+    state: col_rwindow0
+    color: "#aba9a9"
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/colony_rwindow.rsi
+    state: col_rwindow0
+    color: "#aba9a9"
+  - type: IconSmooth
+    key: walls
+    base: col_rwindow
+    mode: CardinalFlags
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameHunterReinforced
+  - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
+  - type: Construction
+    graph: RMCWindowHunterReinforced
+    node: windowHunterReinforced
 
 - type: entity
   parent: CMBaseWindow
@@ -319,6 +385,7 @@
           - !type:ChangeConstructionNodeBehavior
             node: windowFrameWood
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: Construction
     graph: RMCWindowWood
     node: windowWood
@@ -369,6 +436,7 @@
           - !type:ChangeConstructionNodeBehavior
             node: windowFrameWood
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: Construction
     graph: RMCWindowWood
     node: windowWoodReinforced
@@ -419,6 +487,7 @@
           - !type:ChangeConstructionNodeBehavior
             node: windowFrameAI
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: Construction
     graph: RMCWindowAI
     node: windowAIReinforced

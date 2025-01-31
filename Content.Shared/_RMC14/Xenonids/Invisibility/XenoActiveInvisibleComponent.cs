@@ -12,7 +12,7 @@ public sealed partial class XenoActiveInvisibleComponent : Component
     public TimeSpan ExpiresAt;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan Cooldown = TimeSpan.FromSeconds(20);
+    public TimeSpan FullCooldown = TimeSpan.FromSeconds(20);
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 SpeedMultiplier = FixedPoint2.New(1.15);

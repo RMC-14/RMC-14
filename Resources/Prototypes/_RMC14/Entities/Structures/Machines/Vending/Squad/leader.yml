@@ -24,19 +24,13 @@
       entries:
       - id: RMCKitRifleM4SPR
       - id: RMCKitCM54C
-      - id: RMCKitEngineering
     #- id: CMM240PyrotechnicianSupportKit
-    #  points: 0
     #- id: CMM2CHeavyMachineGun
-    #  points: 0
     #- id: CMM56DHeavyMachineGun
-    #  points: 0
     #- id: CMM79GrenadeLauncher
-    #  points: 0
-    #- id: CMMOU-53Shotgun
-    #  points: 0
-    #- id: CMXM88HeavyRifle
-    #  points: 0
+      - id: RMCMOU53Case
+      - id: RMCCaseXM88
+      - id: RMCKitEngineering
     - name: Armors
       entries:
       - id: CMArmorM4
@@ -44,11 +38,13 @@
     - name: Clothing Items
       entries:
       - id: RMCScabbardMacheteFilled
+        name: machete scabbard (Full)
         points: 4
       - id: RMCPouchMacheteFilled
+        name: machete pouch (Full)
         points: 4
-    #- id: CMMarineRadioTelephonePack
-    #  points: 5
+      - id: RMCBackpackRTO
+        points: 5
       - id: CMBeltUtilityCombat
         points: 15
     - name: Utilities
@@ -57,8 +53,8 @@
         points: 3
       - id: CMFireExtinguisherPortable
         points: 3
-    #- id: CMMotionDetector
-    #  points: 5
+      - id: RMCMotionDetector
+        points: 5
     #- id: CMFultonDeviceStack
     #  points: 5
     - name: Binoculars
@@ -68,15 +64,16 @@
       - id: RMCLaserDesignator
         points: 5
     - name: Helmet Optics
-      entries: [ ]
+      entries:
     #- id: CMWeldingVisor
     #  points: 5
     #  recommended: true
     #- id: CMMedicalHelmetOptic
     #  points: 4
     #  recommended: true
-    #- id: CMNightVisionOptic
-    #  points: 20
+      - id: RMCVisorNightVision
+        points: 25
+        recommended: true
     - name: Engineering Supplies
       entries:
       - id: CMHandsInsulated
@@ -109,8 +106,8 @@
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
         points: 18
-    #- id: CMM40HIDPIncendiaryPacketx3
-    #  points: 18
+      - id: RMCPacketGrenadeIncendiaryFilled
+        points: 18
     #- id: CMM40HPDPWhitePhosphorusPacketx3
     #  points: 18
       - id: RMCPacketGrenadeSmokeFilled
@@ -185,9 +182,9 @@
       entries:
     #- id: CMM240IncineratorUnit
     #  points: 18
-      - id: RMCMK80Case
+      - id: RMCGunCasePistolMK80
         points: 8
-      - id: RMCSmartPistolCase
+      - id: RMCGunCasePistolSmart
         points: 12
     #- id: CMM79GrenadeLauncher
     #  points: 18
@@ -224,6 +221,7 @@
       - id: CMArmorB12
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
+      - id: RMCBoxZiptie
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
@@ -237,14 +235,16 @@
       - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
         recommended: true
-    #- id: CMM276GeneralPistolHolsterRig
       - id: CMBeltMedicBag
       - id: CMBeltMedical
-    #- id: CMM276M63HolsterRig
-    #- id: CMM276M44HolsterRig
-    #- id: CMM276M82FHolsterRig
-    #- id: CMM276ShotgunShellLoadingRig
+      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterRevolver
+      - id: RMCBeltHolsterSMG
+      - id: RMCBeltHolsterSMGPouch
+    #- id: RMCBeltHolsterFlareGun
+      - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
+        name: M276 pattern toolbelt rig (Full)
       - id: RMCBeltGrenade
     - name: Pouches
       choices: { RMCPouch: 2 }
@@ -265,7 +265,7 @@
         recommended: true
       #- id: CMSlingPouch
       - id: RMCPouchMagazineLarge
-      #- id: CMLargeShotgunShellPouch
+      - id: RMCPouchShotgunLarge
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchPistol
     - name: Accessories
@@ -274,14 +274,15 @@
       - id: CMWebbingBlack
       - id: CMWebbingBrown
         recommended: true
-      #- id: CMShoulderHolster
       - id: CMWebbing
       - id: CMWebbingPouch
+      - id: CMWebbingHolster
     - name: Mask
       choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+      - id: RMCMaskRebreather
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
@@ -347,6 +348,10 @@
     maxItemSize: Huge
     grid:
     - 0,0,9,1
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
   - type: StorageFill
     contents:
     - id: RMCPouchConstructionFillLowGrade

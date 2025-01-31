@@ -80,6 +80,7 @@
       state: mopbucket-1
       visible: false
   - type: Item
+    sprite: _RMC14/Objects/Misc/Janitorial/bucket.rsi
     size: Large
   - type: SolutionContainerVisuals
     fillBaseName: mopbucket-

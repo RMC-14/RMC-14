@@ -3,10 +3,10 @@ using System.Numerics;
 using Content.Server.Administration.Logs;
 using Content.Server.Atmos.Components;
 using Content.Server.Chat.Managers;
-using Content.Server.Explosion.Components;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NPC.Pathfinding;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Camera;
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
@@ -53,7 +53,6 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
 
-    private EntityQuery<TransformComponent> _transformQuery;
     private EntityQuery<FlammableComponent> _flammableQuery;
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ProjectileComponent> _projectileQuery;
@@ -104,7 +103,6 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
         InitAirtightMap();
         InitVisuals();
 
-        _transformQuery = GetEntityQuery<TransformComponent>();
         _flammableQuery = GetEntityQuery<FlammableComponent>();
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
         _projectileQuery = GetEntityQuery<ProjectileComponent>();
@@ -143,15 +141,8 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
             args.DamageCoefficient *= modifier;
     }
 
-    /// <summary>
-    ///     Given an entity with an explosive component, spawn the appropriate explosion.
-    /// </summary>
-    /// <remarks>
-    ///     Also accepts radius or intensity arguments. This is useful for explosives where the intensity is not
-    ///     specified in the yaml / by the component, but determined dynamically (e.g., by the quantity of a
-    ///     solution in a reaction).
-    /// </remarks>
-    public void TriggerExplosive(EntityUid uid, ExplosiveComponent? explosive = null, bool delete = true, float? totalIntensity = null, float? radius = null, EntityUid? user = null)
+    /// <inheritdoc/>
+    public override void TriggerExplosive(EntityUid uid, ExplosiveComponent? explosive = null, bool delete = true, float? totalIntensity = null, float? radius = null, EntityUid? user = null)
     {
         // log missing: false, because some entities (e.g. liquid tanks) attempt to trigger explosions when damaged,
         // but may not actually be explosive.
@@ -368,6 +359,11 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
         // + if the bomb is big enough, people outside of it too
         // this is capped to 30 because otherwise really huge bombs
         // will attempt to play regular audio for people who can't hear it anyway because the epicenter is so far away
+        //
+        // TODO EXPLOSION redo this.
+        // Use the Filter.Pvs range-multiplier option instead of AddInRange.
+        // Also the default PVS range is 25*2 = 50. So capping it at 30 makes no sense here.
+        // So actually maybe don't use Filter.Pvs at all and only use AddInRange?
         var audioRange = Math.Min(iterationIntensity.Count * 2, MaxExplosionAudioRange);
         var filter = Filter.Pvs(pos).AddInRange(pos, audioRange);
         var sound = iterationIntensity.Count < queued.Proto.SmallSoundIterationThreshold
@@ -401,11 +397,13 @@ public sealed partial class ExplosionSystem : SharedExplosionSystem
             EntityManager,
             _mapManager,
             visualEnt,
-            queued.Cause);
+            queued.Cause,
+            _map);
     }
 
     private void CameraShake(float range, MapCoordinates epicenter, float totalIntensity)
     {
+        return;
         var players = Filter.Empty();
         players.AddInRange(epicenter, range, _playerManager, EntityManager);
 

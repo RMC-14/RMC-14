@@ -1,0 +1,49 @@
+﻿- type: entity
+  parent: BaseItem
+  id: RMCMotionDetector
+  name: motion detector
+  description: A device that detects movement, but ignores marines. # Can also be used to scan a vehicle interior from outside, but accuracy of such scanning is low and there is no way to differentiate friends from foes. TODO RMC14
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/motion_detector.rsi
+    layers:
+    - state: detector
+    - state: detector_long_switch
+      map: [ "switch" ]
+    - state: detector_on_0
+      visible: false
+      map: [ "number" ]
+    state: detector
+  - type: Item
+    size: Normal
+  - type: Clothing
+    slots:
+    - suitstorage
+    - belt
+  - type: MotionDetector
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.MotionDetectorLayer.Setting:
+        switch:
+          Short: { state: detector_short_switch }
+          Long: { state: detector_long_switch }
+      enum.MotionDetectorLayer.Number:
+        number:
+          -1: { visible: false }
+          0: { state: detector_on_0, visible: true }
+          1: { state: detector_on_1, visible: true }
+          2: { state: detector_on_2, visible: true }
+          3: { state: detector_on_3, visible: true }
+          4: { state: detector_on_4, visible: true }
+          5: { state: detector_on_5, visible: true }
+          6: { state: detector_on_6, visible: true }
+          7: { state: detector_on_7, visible: true }
+          8: { state: detector_on_8, visible: true }
+          9: { state: detector_on_9, visible: true }
+  - type: Tag
+    tags:
+    - RMCMotionDetector
+
+- type: Tag
+  id: RMCMotionDetector

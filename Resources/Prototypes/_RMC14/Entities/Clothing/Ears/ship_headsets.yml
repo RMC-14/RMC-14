@@ -18,6 +18,8 @@
     state: generic_headset
   - type: Item
     size: Small
+  - type: ClothingLimit
+    id: CMHeadset
 
 - type: entity
   parent: CMHeadset
@@ -30,6 +32,7 @@
       key_slots:
       - CMEncryptionKeyCommon
   - type: GrantMarineIcons
+  - type: GrantTacMapAlert
 
 - type: entity
   parent: RMCHeadsetShip

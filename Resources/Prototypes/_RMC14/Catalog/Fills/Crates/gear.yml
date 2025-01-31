@@ -24,6 +24,16 @@
 
 - type: entity
   parent: RMCCrateAmmo
+  id: RMCCrateGearMotionDetector
+  name: motion detector crate (x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMotionDetector
+      amount: 2
+
+- type: entity
+  parent: RMCCrateAmmo
   id: RMCCrateGearPackFlareCAS
   name: signal flare packs crate (x4)
   components:
