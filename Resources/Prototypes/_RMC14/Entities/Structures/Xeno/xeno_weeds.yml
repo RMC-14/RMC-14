@@ -1,4 +1,4 @@
-﻿- type: entity # TODO RMC14 sound
+- type: entity # TODO RMC14 sound
   id: XenoWeeds
   name: weeds
   description: Weird black weeds...
@@ -113,6 +113,7 @@
     drawdepth: DeadMobs
     layers:
     - state: weed0
+      drawdepth: FloorTiles
     - state: constructionnode
   - type: Destructible
     thresholds:
