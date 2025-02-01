@@ -67,3 +67,9 @@
       Snow: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/snow.rsi
       Classic: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/classic.rsi
       Urban: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/urban.rsi
+  - type: Tag
+    tags:
+    - RMCWeaponShotgunM42A2
+
+- type: Tag
+  id: RMCWeaponShotgunM42A2
