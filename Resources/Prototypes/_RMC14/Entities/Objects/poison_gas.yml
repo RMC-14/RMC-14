@@ -51,7 +51,7 @@
     drawdepth: Effects
     sprite: _RMC14/Effects/smoke.rsi
     state: smoke
-    color: "#c2aac7"
+    color: "#c2aac799"
   - type: Tag
     tags:
     - HideContextMenu
