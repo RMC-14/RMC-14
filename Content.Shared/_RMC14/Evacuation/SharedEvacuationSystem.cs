@@ -478,8 +478,8 @@ public abstract class SharedEvacuationSystem : EntitySystem
         var query = EntityQueryEnumerator<EvacuationProgressComponent>();
         while (query.MoveNext(out var uid, out var progress))
         {
-            //Only start fueling once the dropship has crashed into the Almayer and while an evacuation has been issued
-            if (!progress.DropShipCrashed || !progress.Enabled)
+            //Only start fueling once the dropship has crashed into the Almayer
+            if (!progress.DropShipCrashed)
                 return;
 
             if (!progress.StartAnnounced)
