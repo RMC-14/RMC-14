@@ -22,6 +22,7 @@ public sealed class MapInsertSystem : SharedMapInsertSystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly GridFixtureSystem _fixture = default!;
+    [Dependency] private readonly SharedMapSystem _maps = default!;
 
     private MapId? _map;
     private int _index;
@@ -65,60 +66,29 @@ public sealed class MapInsertSystem : SharedMapInsertSystem
         if (grids == null || grids.Count == 0)
             return;
 
-        var grid = grids[0];
-        var originalGridXform = _transform.GetMapCoordinates(grid);
+        var insertGrid = grids[0];
+        var originalGridXform = _transform.GetMapCoordinates(insertGrid);
         var xform = Transform(ent);
+        var mainGrid = xform.GridUid;
         var coordinates = _transform.GetMapCoordinates(ent, xform).Offset(new Vector2(-0.5f, -0.5f));
         coordinates = coordinates.Offset(ent.Comp.Offset);
-        _transform.SetMapCoordinates(grid, coordinates);
+        _transform.SetMapCoordinates(insertGrid, coordinates);
 
         // Clear all entities on map in insert area
         if (ent.Comp.ClearEntities)
         {
-            MapInsertSmimsh(grid);
-        }
-        // _transform.SetMapCoordinates(grid, originalGridXform);
-        //
-        // if (TryComp(grid, out PhysicsComponent? physics) &&
-        //     TryComp(grid, out FixturesComponent? fixtures))
-        // {
-        //     _physics.SetBodyType(grid, BodyType.Static, manager: fixtures, body: physics);
-        //     _physics.SetBodyStatus(grid, physics, BodyStatus.OnGround);
-        //     _physics.SetFixedRotation(grid, true, manager: fixtures, body: physics);
-        // }
-        //
-        // // Move all children from insert to map
-        var parentGrid = xform.GridUid;
-        if(parentGrid == null)
-            return;
-
-        if (TryComp(grid, out TransformComponent? transform))
-        {
-            var children = new List<EntityUid>();
-
-            using (var childEnumerator = transform.ChildEnumerator)
-            {
-                while (childEnumerator.MoveNext(out var child))
-                {
-                    //Anchored entities are properly handled in grid merge
-                    if (TryComp(child, out TransformComponent? childTransform) && childTransform.Anchored == false)
-                    {
-                        children.Add(child);
-                    }
-                }
-            }
-
-            foreach (var child in children)
-            {
-                var childCoordinates = coordinates.Offset(_transform.GetMapCoordinates(child).Position);
-                _transform.SetMapCoordinates(child, childCoordinates);
-            }
+            MapInsertSmimsh(insertGrid);
         }
 
         // Merge grids
-        // var coordinatesi = new Vector2i((int)coordinates.X, (int)coordinates.Y);
-        // _fixture.Merge((EntityUid)parentGrid, grid, coordinatesi, Angle.Zero);
-        Logger.Debug("Merged grids.");
+        var coordinatesi = new Vector2i((int)coordinates.X, (int)coordinates.Y);
+
+
+        if (mainGrid == null)
+            return;
+        _transform.SetMapCoordinates(insertGrid, coordinates.Offset(new Vector2(999f)));
+        _fixture.Merge((EntityUid)mainGrid, insertGrid, coordinatesi, Angle.Zero);
+
     }
 
     private void MapInsertSmimsh(EntityUid uid,  FixturesComponent? manager = null, MapGridComponent? grid = null, TransformComponent? xform = null)
@@ -179,8 +149,5 @@ public sealed class MapInsertSystem : SharedMapInsertSystem
                 QueueDel(ent);
             }
         }
-
-
-
     }
 }
