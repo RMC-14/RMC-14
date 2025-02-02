@@ -8,7 +8,7 @@
     sprite: _RMC14/Markers/landmarks.rsi
     state: nightmare_insert
   - type: MapInsert
-    spawn: "/Maps/_RMC14/inserts/se-checkpoint.yml"
+    spawn: "/Maps/_RMC14/inserts/solaris/se-checkpoint.yml"
     probability: 0.7
     clearEntities: true
     replaceAreas: true
