@@ -7,6 +7,7 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
+using static Content.Shared.Fax.AdminFaxEuiMsg;
 
 namespace Content.Shared._RMC14.Slow;
 
@@ -221,6 +222,7 @@ public sealed class RMCSlowSystem : EntitySystem
                 continue;
 
             RemCompDeferred<RMCSlowdownComponent>(uid);
+            _speed.RefreshMovementSpeedModifiers(uid);
         }
 
         var superSlowQuery = EntityQueryEnumerator<RMCSuperSlowdownComponent>();
@@ -231,6 +233,7 @@ public sealed class RMCSlowSystem : EntitySystem
                 continue;
 
             RemCompDeferred<RMCSuperSlowdownComponent>(uid);
+            _speed.RefreshMovementSpeedModifiers(uid);
         }
 
         var rootQuery = EntityQueryEnumerator<RMCRootedComponent>();
@@ -241,6 +244,7 @@ public sealed class RMCSlowSystem : EntitySystem
                 continue;
 
             RemCompDeferred<RMCRootedComponent>(uid);
+            _speed.RefreshMovementSpeedModifiers(uid);
         }
     }
 }
