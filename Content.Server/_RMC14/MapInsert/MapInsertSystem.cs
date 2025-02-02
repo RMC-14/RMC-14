@@ -50,6 +50,9 @@ public sealed class MapInsertSystem : SharedMapInsertSystem
 
     private void OnMapInsertMapInit(Entity<MapInsertComponent> ent, ref MapInitEvent args)
     {
+        if (_net.IsClient)
+            return;
+
         if (!_random.Prob(ent.Comp.Probability))
         {
             QueueDel(ent);
@@ -57,9 +60,6 @@ public sealed class MapInsertSystem : SharedMapInsertSystem
         }
 
         if (ent.Comp.Spawn is not { } spawn)
-            return;
-
-        if (_net.IsClient)
             return;
 
         if (_map == null)

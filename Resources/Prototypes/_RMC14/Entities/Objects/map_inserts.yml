@@ -30,6 +30,6 @@
   components:
   - type: MapInsert
     spawn: "/Maps/_RMC14/inserts/kutjevo/communications.yml"
-    probability: 1
+    probability: 0.35
     clearEntities: true
     replaceAreas: false
