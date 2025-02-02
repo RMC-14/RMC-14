@@ -12,10 +12,8 @@ using Content.Shared._RMC14.Telephone;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chat;
 using Content.Shared.Coordinates;
-using Content.Shared.Radio;
 using Robust.Server.Audio;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Telephone;
@@ -28,7 +26,6 @@ public sealed class RMCTelephoneSystem : SharedRMCTelephoneSystem
     [Dependency] private readonly HandsSystem _hands = default!;
     [Dependency] private readonly CMHandsSystem _rmcHands = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
-    [Dependency] private readonly PopupSystem _popip = default!;
 
     public override void Initialize()
     {
