@@ -1,0 +1,69 @@
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCLF
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: 
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCLFStandard
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: clf_mil
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCLFMedic
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: clf_med
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCLFEngineer
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: clf_engi
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCLFSL
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: clf_sl
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCLFASL
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: clf_sl_a
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCLF
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: 
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCLFCellcom
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: clf_cellcom
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCLFSpec
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: clf_spec
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCLFSynth
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: clf_synth
