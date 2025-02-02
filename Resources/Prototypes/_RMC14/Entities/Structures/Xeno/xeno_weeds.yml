@@ -110,7 +110,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
-    drawdepth: FloorObjects
+    drawdepth: FloorTiles
     layers:
     - state: weed0
     - state: constructionnode
