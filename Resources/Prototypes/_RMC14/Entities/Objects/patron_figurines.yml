@@ -1082,3 +1082,25 @@
     state: rina_shell-shocked_gensvil
   - type: PatronFigurine
     id: 392b385b-5e99-446d-a81b-119ca1c90a6e
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSips-On-Puddles
+  name: Sips-On-Puddles figurine
+  description: "\"If only I could weld your wounds!\""
+  components:
+  - type: Sprite
+    state: sips-on-puddles
+  - type: PatronFigurine
+    id: 00c3f0b0-eea8-45bb-aaaa-b2d8d5ce176e
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurineDukeBigBossMorris
+  name: Duke 'Big Boss' Morris figurine
+  description: "This MIGHT be the man who sold the round"
+  components:
+  - type: Sprite
+    state: duke_big_boss_morris
+  - type: PatronFigurine
+    id: acc78eb3-9639-4317-a89c-e921b5a999cb

@@ -126,7 +126,7 @@ public abstract class SharedXenoResinHoleSystem : EntitySystem
 
         var locationName = "Unknown";
 
-        if (_areas.TryGetArea(ent, out _, out var areaProto, out _))
+        if (_areas.TryGetArea(ent, out _, out var areaProto))
             locationName = areaProto.Name;
 
         var msg = Loc.GetString(args.message, ("location", locationName), ("type", GetTrapTypeName(ent)));

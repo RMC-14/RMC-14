@@ -231,6 +231,13 @@
     solution: tank
   - type: DrawableSolution
     solution: tank
+  - type: RMCSolutionTransferWhitelist
+    popup: rmc-solution-transfer-whitelist-failed-not-welding-tank
+    whitelist:
+      components:
+      - Welder
+      tags:
+      - RMCTankFuel
 
 - type: entity
   parent: RMCSatchelWelder
@@ -303,8 +310,8 @@
   - type: RotaryPhoneBackpack
   - type: UserInterface
     interfaces:
-      enum.TelephoneUiKey.Key:
-        type: TelephoneBui
+      enum.RMCTelephoneUiKey.Key:
+        type: RMCTelephoneBui
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
   - type: ActivatableUIBlacklist

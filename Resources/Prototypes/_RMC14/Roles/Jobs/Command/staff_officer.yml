@@ -7,10 +7,12 @@
   requirements:
   - !type:RoleTimeRequirement
     role: CMJobSquadLeader
-    time: 3600 # 1 hours
+    time: 18000 # 5 hours
   - !type:TotalDepartmentsTimeRequirement
     group: CMDepartmentsHuman
     time: 54000 # 15 hours
+  ranks:
+    RMCRankSecondLT: []
   weight: 5
   startingGear: CMGearStaffOfficer
   icon: "CMJobIconStaffOfficer"
@@ -48,7 +50,7 @@
       points: 45
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "SO"
+      prefix: cm-job-prefix-staff-officer
 
 - type: startingGear
   id: CMGearStaffOfficer

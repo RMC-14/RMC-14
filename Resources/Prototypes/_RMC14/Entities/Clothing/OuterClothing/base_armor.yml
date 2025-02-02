@@ -254,10 +254,16 @@
   - type: RMCSuitLight
   - type: PointLight
     enabled: false
-    radius: 4
+    radius: 5
+    offset: 0,-0.85
+    rotation: 90
     softness: 5
     autoRot: true
     netsync: false
+    color: "#FFFFFF"
+    mask: /Textures/_RMC14/Effects/LightMasks/wide_ellipsis.png
+  - type: PointLightRotation
+    rotation: 90
   - type: HandheldLight
     addPrefix: true
     blinkingBehaviourId: blinking
