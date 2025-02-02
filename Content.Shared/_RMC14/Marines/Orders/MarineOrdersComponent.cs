@@ -31,12 +31,11 @@ public sealed partial class MarineOrdersComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     public int OrderRange = 7;
 
-    // TODO RMC14 implement focus order effects
-    // [DataField, AutoNetworkedField]
-    // public EntProtoId FocusAction = "ActionMarineFocus";
-    //
-    // [DataField, AutoNetworkedField]
-    // public EntityUid? FocusActionEntity;
+    [DataField, AutoNetworkedField]
+    public EntProtoId FocusAction = "ActionMarineFocus";
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? FocusActionEntity;
 
     [DataField, AutoNetworkedField]
     public EntProtoId HoldAction = "ActionMarineHold";

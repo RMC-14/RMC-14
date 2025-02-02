@@ -77,6 +77,7 @@
           - !type:ChangeConstructionNodeBehavior
             node: windowFrameSolaris
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: Construction
     graph: RMCWindowSolaris
     node: windowSolaris
@@ -127,6 +128,7 @@
           - !type:ChangeConstructionNodeBehavior
             node: windowFrameSolarisReinforced
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: Construction
     graph: RMCWindowSolarisReinforced
     node: windowSolarisReinforced

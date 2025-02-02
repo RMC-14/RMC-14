@@ -1,0 +1,61 @@
+- type: entity
+  parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
+  name: custom built shotgun
+  id: WeaponShotgunCustomBuilt
+  description: A cobbled-together pile of scrap and alien wood. Point end towards things you want to die. Has a burst fire feature, as if it needed it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/custombuilt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/custombuilt.rsi
+    slots:
+    - suitStorage
+    - belt
+  - type: Gun
+    shotsPerBurst: 2
+  - type: ShootUseDelay
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    recoilWielded: 2
+    recoilUnwielded: 4
+    scatterWielded: 10
+    scatterUnwielded: 20
+    baseFireRate: 0.85
+    burstScatterMult: 4
+  - type: GunDamageModifier
+    multiplier: 1
+  - type: BallisticAmmoProvider
+    cycleable: false
+    whitelist:
+      tags:
+      - RMCShellShotgun
+    capacity: 6
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentRecoilCompensator
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentLaserSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.780, 0.06 
+      rmc-aslot-rail: -0.025, 0.125 
+      rmc-aslot-underbarrel: 0.30, -0.31 
+
+# Theres a damaged version of this with worse stats, make sure to use the "busted" state as the base/icon for it

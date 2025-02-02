@@ -59,7 +59,7 @@
                                         ModulateSelfOverride="#D3B400" MinWidth="120" />
                                 <Button Name="TransferMarineButton" Access="Public"
                                         Text="Transfer marine" StyleClasses="OpenBoth"
-                                        ModulateSelfOverride="#D3B400" Visible="False" />
+                                        ModulateSelfOverride="#D3B400" />
                             </BoxContainer>
                         </PanelContainer>
                         <BoxContainer Orientation="Vertical" Margin="5"
@@ -189,13 +189,63 @@
                                         ModulateSelfOverride="#D3B400" TextAlign="Center" />
                             </BoxContainer>
                             <ui:BlueHorizontalSeparator SetWidth="2" Margin="5 0" />
-                            <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                            <BoxContainer Orientation="Vertical" HorizontalExpand="True" Visible="False">
                                 <Label Text="Max 3 stored coordinates. Will overwrite oldest first." />
                                 <BoxContainer Orientation="Horizontal">
                                     <BoxContainer Name="Longitudes" Access="Public" Orientation="Vertical" />
                                     <BoxContainer Name="Latitudes" Access="Public" Orientation="Vertical" />
                                     <BoxContainer Name="Comments" Access="Public" Orientation="Vertical" HorizontalExpand="True" />
                                     <BoxContainer Name="Saves" Access="Public" Orientation="Vertical" />
+                                </BoxContainer>
+                            </BoxContainer>
+                        </BoxContainer>
+                    </BoxContainer>
+                </PanelContainer>
+            </BoxContainer>
+            <BoxContainer Name="OrbitalBombardment" Access="Public" Orientation="Vertical"
+                          VerticalExpand="True">
+                <PanelContainer VerticalExpand="True">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />
+                    </PanelContainer.PanelOverride>
+                    <BoxContainer Orientation="Vertical" VerticalExpand="True" Margin="5">
+                        <PanelContainer>
+                            <PanelContainer.PanelOverride>
+                                <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="0 0 0 1" />
+                            </PanelContainer.PanelOverride>
+                            <Label Text="Orbital Bombardment" />
+                        </PanelContainer>
+                        <BoxContainer Orientation="Horizontal" Margin="5"
+                                      VerticalExpand="True">
+                            <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                                <BoxContainer Orientation="Horizontal">
+                                    <BoxContainer Name="OrbitalLongitudeContainer" Access="Public" Orientation="Vertical">
+                                        <Label Text="LONGITUDE" />
+                                    </BoxContainer>
+                                    <BoxContainer Name="OrbitalLatitudeContainer" Access="Public" Orientation="Vertical">
+                                        <Label Text="LATITUDE" />
+                                    </BoxContainer>
+                                    <BoxContainer Orientation="Vertical">
+                                        <RichTextLabel Name="OrbitalStatus" Access="Public"
+                                                       Text="[color=red][bold]No warhead loaded[/bold][/color]" />
+                                        <Label Text="STATUS" HorizontalAlignment="Center" />
+                                    </BoxContainer>
+                                </BoxContainer>
+                                <Button Name="OrbitalFireButton" Access="Public" Text="Fire"
+                                        HorizontalExpand="True" StyleClasses="OpenBoth"
+                                        ModulateSelfOverride="#BB1F1D" TextAlign="Center" />
+                                <Button Name="OrbitalSaveButton" Access="Public" Text="Save"
+                                        HorizontalExpand="True" StyleClasses="OpenBoth"
+                                        ModulateSelfOverride="#D3B400" TextAlign="Center" />
+                            </BoxContainer>
+                            <ui:BlueHorizontalSeparator SetWidth="2" Margin="5 0" />
+                            <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                                <Label Text="Max 3 stored coordinates. Will overwrite oldest first." />
+                                <BoxContainer Orientation="Horizontal">
+                                    <BoxContainer Name="OrbitalLongitudes" Access="Public" Orientation="Vertical" />
+                                    <BoxContainer Name="OrbitalLatitudes" Access="Public" Orientation="Vertical" />
+                                    <BoxContainer Name="OrbitalComments" Access="Public" Orientation="Vertical" HorizontalExpand="True" />
+                                    <BoxContainer Name="OrbitalSaves" Access="Public" Orientation="Vertical" />
                                 </BoxContainer>
                             </BoxContainer>
                         </BoxContainer>

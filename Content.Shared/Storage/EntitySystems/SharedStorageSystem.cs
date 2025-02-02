@@ -19,12 +19,11 @@ using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Lock;
 using Content.Shared.Materials;
-using Content.Shared.Placeable;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.Storage.Components;
-using Content.Shared.Timing;
 using Content.Shared.Storage.Events;
+using Content.Shared.Timing;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
@@ -132,7 +131,6 @@ public abstract class SharedStorageSystem : EntitySystem
         SubscribeAllEvent<StorageInteractWithItemEvent>(OnInteractWithItem);
         SubscribeAllEvent<StorageSetItemLocationEvent>(OnSetItemLocation);
         SubscribeAllEvent<StorageInsertItemIntoLocationEvent>(OnInsertItemIntoLocation);
-        SubscribeAllEvent<StorageRemoveItemEvent>(OnRemoveItem);
         SubscribeAllEvent<StorageSaveItemLocationEvent>(OnSaveItemLocation);
 
         SubscribeLocalEvent<StorageComponent, GotReclaimedEvent>(OnReclaimed);
@@ -368,7 +366,7 @@ public abstract class SharedStorageSystem : EntitySystem
     /// <returns>true if inserted, false otherwise</returns>
     private void OnInteractUsing(EntityUid uid, StorageComponent storageComp, InteractUsingEvent args)
     {
-        if (args.Handled || !CanInteract(args.User, (uid, storageComp), storageComp.ClickInsert, false))
+        if (args.Handled || !storageComp.ClickInsert || !CanInteract(args.User, (uid, storageComp), silent: false))
             return;
 
         var attemptEv = new StorageInteractUsingAttemptEvent();
@@ -388,7 +386,7 @@ public abstract class SharedStorageSystem : EntitySystem
     /// </summary>
     private void OnActivate(EntityUid uid, StorageComponent storageComp, ActivateInWorldEvent args)
     {
-        if (args.Handled || !args.Complex || !CanInteract(args.User, (uid, storageComp), storageComp.ClickInsert))
+        if (args.Handled || !args.Complex || !storageComp.OpenOnActivate || !CanInteract(args.User, (uid, storageComp)))
             return;
 
         // Toggle
@@ -446,7 +444,7 @@ public abstract class SharedStorageSystem : EntitySystem
                 if (entity == args.User
                     || !_itemQuery.TryGetComponent(entity, out var itemComp) // Need comp to get item size to get weight
                     || !_prototype.TryIndex(itemComp.Size, out var itemSize)
-                    || !CanInsert(uid, entity, out _, storageComp, item: itemComp)
+                    || !CanInsert(uid, entity, args.User, out _, storageComp, item: itemComp)
                     || !_interactionSystem.InRangeUnobstructed(args.User, entity))
                 {
                     continue;
@@ -647,19 +645,6 @@ public abstract class SharedStorageSystem : EntitySystem
         TrySetItemStorageLocation(item!, storage!, msg.Location);
     }
 
-    private void OnRemoveItem(StorageRemoveItemEvent msg, EntitySessionEventArgs args)
-    {
-        if (!ValidateInput(args, msg.StorageEnt, msg.ItemEnt, out var player, out var storage, out var item))
-            return;
-
-        _adminLog.Add(
-            LogType.Storage,
-            LogImpact.Low,
-            $"{ToPrettyString(player):player} is removing {ToPrettyString(item):item} from {ToPrettyString(storage):storage}");
-        TransformSystem.DropNextTo(item.Owner, player.Owner);
-        Audio.PlayPredicted(storage.Comp.StorageRemoveSound, storage, player, _audioParams);
-    }
-
     private void OnInsertItemIntoLocation(StorageInsertItemIntoLocationEvent msg, EntitySessionEventArgs args)
     {
         if (!ValidateInput(args, msg.StorageEnt, msg.ItemEnt, out var player, out var storage, out var item, held: true))
@@ -674,7 +659,7 @@ public abstract class SharedStorageSystem : EntitySystem
 
     private void OnSaveItemLocation(StorageSaveItemLocationEvent msg, EntitySessionEventArgs args)
     {
-        if (!ValidateInput(args, msg.Storage, msg.Item, out var player, out var storage, out var item, held: true))
+        if (!ValidateInput(args, msg.Storage, msg.Item, out var player, out var storage, out var item))
             return;
 
         SaveItemLocation(storage!, item.Owner);
@@ -732,6 +717,7 @@ public abstract class SharedStorageSystem : EntitySystem
         }
 
         items.Sort(static (a, b) => a.Location.Position.X.CompareTo(b.Location.Position.X));
+        items.Sort(static (a, b) => a.Location.Position.Y.CompareTo(b.Location.Position.Y));
 
         foreach (var (item, location) in items)
         {
@@ -752,7 +738,7 @@ public abstract class SharedStorageSystem : EntitySystem
         if (CheckingCanInsert)
             return;
 
-        if (!CanInsert(uid, args.EntityUid, out var reason, component, ignoreStacks: true))
+        if (!CanInsert(uid, args.EntityUid, null, out var reason, component, ignoreStacks: true))
         {
 #if DEBUG
             if (reason != null)
@@ -821,6 +807,7 @@ public abstract class SharedStorageSystem : EntitySystem
     /// </summary>
     /// <param name="uid">The entity to check</param>
     /// <param name="insertEnt"></param>
+    /// <param name="user"></param>
     /// <param name="reason">If returning false, the reason displayed to the player</param>
     /// <param name="storageComp"></param>
     /// <param name="item"></param>
@@ -830,6 +817,7 @@ public abstract class SharedStorageSystem : EntitySystem
     public bool CanInsert(
         EntityUid uid,
         EntityUid insertEnt,
+        EntityUid? user,
         out string? reason,
         StorageComponent? storageComp = null,
         ItemComponent? item = null,
@@ -888,7 +876,7 @@ public abstract class SharedStorageSystem : EntitySystem
             }
         }
 
-        if (!RMCStorage.CanInsertStorageLimit((uid, null, storageComp), insertEnt, out var popup))
+        if (!RMCStorage.CanInsert((uid, storageComp), insertEnt, user, out var popup))
         {
             reason = popup;
             return false;
@@ -1050,7 +1038,7 @@ public abstract class SharedStorageSystem : EntitySystem
 
         var toInsert = player.Comp.ActiveHandEntity;
 
-        if (!CanInsert(ent, toInsert.Value, out var reason, ent.Comp))
+        if (!CanInsert(ent, toInsert.Value, player.Owner, out var reason, ent.Comp))
         {
             _popupSystem.PopupClient(Loc.GetString(reason ?? "comp-storage-cant-insert"), ent, player);
             return false;

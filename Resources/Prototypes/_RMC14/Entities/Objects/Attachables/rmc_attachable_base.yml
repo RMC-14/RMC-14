@@ -6,6 +6,7 @@
   - type: Item
     size: Small
   - type: Attachable
+  - type: Appearance
 
 - type: entity
   parent: RMCAttachableBase

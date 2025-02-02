@@ -127,6 +127,23 @@
     heatDamageThreshold: 423
     coldDamageThreshold: 0
 
+- type: entity
+  parent: MobCat
+  id: RMCMobGarry
+  name: Garry
+  description: Her fur has the look and feel of velvet, and her tail quivers occasionally.
+  components:
+  - type: WarpPoint
+    follow: true
+    location: Garry
+  - type: CrashLandable
+  - type: PressureImmunity
+  - type: Respirator
+    minSaturation: 5.0
+  - type: Temperature
+    heatDamageThreshold: 423
+    coldDamageThreshold: 0
+
 # Spawners
 
 - type: entity
@@ -205,7 +222,7 @@
   parent: MarkerBase
   id: CMSpawnMobOrion
   name: Orion Spawner
-  suffix: RCM
+  suffix: RMC
   components:
   - type: Sprite
     layers:
@@ -215,3 +232,19 @@
   - type: ConditionalSpawner
     prototypes:
     - RMCMobOrion
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnMobGarry
+  name: Garry Spawner
+  suffix: RMC
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: cat
+      sprite: Mobs/Pets/cat.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobGarry
+

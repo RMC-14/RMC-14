@@ -1,10 +1,12 @@
-﻿using Content.Shared.Administration.Logs;
+﻿using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.Administration.Logs;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.Effects;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
+using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -22,8 +24,11 @@ public sealed class TackleSystem : EntitySystem
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+
+    private readonly List<EntityUid> _trackersToRemove = new();
 
     public override void Initialize()
     {
@@ -41,14 +46,19 @@ public sealed class TackleSystem : EntitySystem
         _colorFlash.RaiseEffect(Color.Aqua, new List<EntityUid> { target.Owner }, Filter.PvsExcept(user));
 
         var time = _timing.CurTime;
-        var recently = EnsureComp<TackledRecentlyComponent>(target);
-        recently.LastTackled = time;
-        recently.LastTackledDuration = target.Comp.ExpireAfter;
-        recently.Current += tackle.Strength;
+        var recently = EnsureComp<TackledRecentlyComponent>(user);
+        var tracker = recently.Trackers.GetValueOrDefault(target);
+        tracker.Count++;
+        tracker.Last = time;
 
-        Dirty(target, recently);
+        recently.Trackers[target] = tracker;
+        Dirty(user, recently);
 
-        if (recently.Current < tackle.Threshold)
+        if (_net.IsClient)
+            return;
+
+        if (tracker.Count < tackle.Min ||
+            tracker.Count < _random.Next(tackle.Min, tackle.Max + 1))
         {
             _adminLog.Add(LogType.RMCTackle, $"{ToPrettyString(user)} tried to tackle {ToPrettyString(target)}.");
 
@@ -71,8 +81,18 @@ public sealed class TackleSystem : EntitySystem
         else
         {
             _adminLog.Add(LogType.RMCTackle, $"{ToPrettyString(user)} tackled down {ToPrettyString(target)}.");
-            _popup.PopupClient(Loc.GetString("cm-tackle-success-self", ("target", target.Owner)), user, user);
 
+            if (_net.IsServer)
+            {
+                _popup.PopupEntity(Loc.GetString("cm-tackle-success-self", ("target", target.Owner)), user, user);
+
+                if (TryComp<StandingStateComponent>(target.Owner, out var standingState))
+                {
+                    if (!standingState.Standing)
+                        _audio.PlayPvs(standingState.DownSound, target);
+                }
+            }
+            
             foreach (var session in Filter.PvsExcept(user).Recipients)
             {
                 if (session.AttachedEntity is not { } recipient)
@@ -85,16 +105,21 @@ public sealed class TackleSystem : EntitySystem
             }
         }
 
-        if (_net.IsClient)
-            return;
-
         if (TryComp(user, out CombatModeComponent? combatMode))
         {
             var audioParams = AudioParams.Default.WithVariation(0.025f).WithVolume(5f);
             _audio.PlayPredicted(combatMode.DisarmSuccessSound, target, user, audioParams);
         }
 
-        _stun.TryParalyze(target, tackle.Stun, true);
+        if (!HasComp<VictimInfectedComponent>(target))
+            recently.Trackers.Remove(target);
+
+        var stun = tackle.StunMin;
+        if (tackle.StunMin < tackle.StunMax)
+            stun = _random.Next(tackle.StunMin, tackle.StunMax);
+
+        stun *= 2;
+        _stun.TryParalyze(target, stun, true);
     }
 
     public override void Update(float frameTime)
@@ -102,10 +127,22 @@ public sealed class TackleSystem : EntitySystem
         base.Update(frameTime);
 
         var time = _timing.CurTime;
-        var query = EntityQueryEnumerator<TackledRecentlyComponent, TackleableComponent>();
-        while (query.MoveNext(out var uid, out var recently, out _))
+        var query = EntityQueryEnumerator<TackledRecentlyComponent>();
+        while (query.MoveNext(out var uid, out var recently))
         {
-            if (time > recently.LastTackled + recently.LastTackledDuration)
+            _trackersToRemove.Clear();
+            foreach (var tracker in recently.Trackers)
+            {
+                if (time >= tracker.Value.Last + recently.ExpireAfter)
+                    _trackersToRemove.Add(tracker.Key);
+            }
+
+            foreach (var id in _trackersToRemove)
+            {
+                recently.Trackers.Remove(id);
+            }
+
+            if (recently.Trackers.Count == 0)
                 RemCompDeferred<TackledRecentlyComponent>(uid);
         }
     }

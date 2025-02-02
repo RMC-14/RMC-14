@@ -5,9 +5,12 @@
   description: An Aegis Battlefield Armaments classic design, the M42A2 combines close-range firepower with long term reliability. Needs to be pumped.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/desert.rsi
+    layers:
+    - state: icon
+      map: [ "enum.GunVisualLayers.Base" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/desert.rsi
   - type: Gun
     shotsPerBurst: 1
   - type: ShootUseDelay
@@ -20,6 +23,9 @@
     scatterUnwielded: 10
     baseFireRate: 0.5
     burstScatterMult: 5
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.15
+    accuracyMultiplierUnwielded: 0.95
   - type: PumpAction
   - type: AttachableHolder
     slots:
@@ -54,3 +60,10 @@
       rmc-aslot-rail: -0.025, 0.125
       rmc-aslot-stock: -0.375, -0.029
       rmc-aslot-underbarrel: 0.25, -0.31
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/urban.rsi

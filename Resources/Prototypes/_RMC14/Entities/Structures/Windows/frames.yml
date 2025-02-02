@@ -44,6 +44,7 @@
   - type: Clickable
   - type: Climbable
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: DamageMultiplierFlags
     flags: Breaching
   - type: MinimapColor

@@ -1,0 +1,292 @@
+- type: entity
+  parent: [ClothingMaskBaseButcherable, BaseFoldable]
+  id: RMCBaseScarfMask
+  abstract: true
+  components:
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+  - type: FoldableClothing
+    foldedEquippedPrefix: flipped
+    foldedHeldPrefix: flipped
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon
+      map: ["foldedLayer"]
+      visible: false
+
+- type: entity
+  parent: RMCBaseScarfMask
+  id: RMCBaseScarfDown
+  suffix: down
+  abstract: true
+  components:
+  - type: Foldable
+    folded: true
+  - type: Clothing
+    equippedPrefix: down
+  - type: Item
+    heldPrefix: down
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: icon
+      map: ["foldedLayer"]
+      visible: true
+
+# SQUADS
+
+- type: entity
+  parent: RMCMaskScarfAlpha
+  id: RMCMaskScarfSquad
+  name: UNMC squad tactical wrap
+  suffix: DO NOT MAP
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/squad.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/squad.rsi
+  - type: RMCMapToSquad
+    map:
+      SquadAlpha: RMCMaskScarfAlpha
+      SquadBravo: RMCMaskScarfBravo
+      SquadCharlie: RMCMaskScarfCharlie
+      SquadDelta: RMCMaskScarfDelta
+      SquadEcho: RMCMaskScarfEcho
+      SquadFoxtrot: RMCMaskScarfFoxtrot
+
+- type: entity
+  parent: RMCBaseScarfMask
+  id: RMCMaskScarfAlpha
+  name: alpha tactical wrap
+  description: A tactical wrap used by soldiers to conceal their face.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/alpha.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/alpha.rsi
+  - type: IdentityBlocker
+    coverage: MOUTH
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskScarfAlpha]
+  id: RMCMaskScarfAlphaDown
+  name: alpha tactical wrap
+
+- type: entity
+  parent: RMCMaskScarfAlpha
+  id: RMCMaskScarfBravo
+  name: bravo tactical wrap
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/bravo.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/bravo.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskScarfBravo]
+  id: RMCMaskScarfBravoDown
+  name: bravo tactical wrap
+
+- type: entity
+  parent: RMCMaskScarfAlpha
+  id: RMCMaskScarfCharlie
+  name: charlie tactical wrap
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/charlie.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/charlie.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskScarfCharlie]
+  id: RMCMaskScarfCharlieDown
+  name: charlie tactical wrap
+
+- type: entity
+  parent: RMCMaskScarfAlpha
+  id: RMCMaskScarfDelta
+  name: delta tactical wrap
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/delta.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/delta.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskScarfDelta]
+  id: RMCMaskScarfDeltaDown
+  name: delta tactical wrap
+
+- type: entity
+  parent: RMCMaskScarfAlpha
+  id: RMCMaskScarfEcho
+  name: echo tactical wrap
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/echo.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/echo.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskScarfEcho]
+  id: RMCMaskScarfEchoDown
+  name: echo tactical wrap
+
+- type: entity
+  parent: RMCMaskScarfAlpha
+  id: RMCMaskScarfFoxtrot
+  name: foxtrot tactical wrap
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/foxtrot.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/foxtrot.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskScarfFoxtrot]
+  id: RMCMaskScarfFoxtrotDown
+  name: foxtrot tactical wrap
+
+# COLOURS
+
+- type: entity
+  parent: RMCMaskScarfAlpha
+  id: RMCMaskScarfRed
+  name: red tactical wrap
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/alpha.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/alpha.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskScarfRed]
+  id: RMCMaskScarfRedDown
+  name: red tactical wrap
+
+- type: entity
+  parent: RMCMaskScarfAlpha
+  id: RMCMaskScarfBlack
+  name: black tactical wrap
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/black.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskScarfBlack]
+  id: RMCMaskScarfBlackDown
+  name: black tactical wrap
+
+- type: entity
+  parent: RMCMaskScarfAlpha
+  id: RMCMaskScarfGray
+  name: grey tactical wrap
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/gray.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/gray.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskScarfGray]
+  id: RMCMaskScarfGrayDown
+  name: grey tactical wrap
+
+- type: entity
+  parent: RMCMaskScarfAlpha
+  id: RMCMaskScarfGreen
+  name: green tactical wrap
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/green.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskScarfGreen]
+  id: RMCMaskScarfGreenDown
+  name: green tactical wrap
+
+- type: entity
+  parent: RMCMaskScarfAlpha
+  id: RMCMaskScarfTan
+  name: tan tactical wrap
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/tan.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Scarfs/tan.rsi
+
+- type: entity
+  parent: [RMCBaseScarfDown, RMCMaskScarfTan]
+  id: RMCMaskScarfTanDown
+  name: tan tactical wrap
+
+# Torn Scarf
+- type: entity
+  parent: ClothingMaskBaseButcherable
+  id: RMCMaskTornScarfBlack
+  name: tactical scarf
+  description: A tactical scarf used to keep warm in the cold.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/black.rsi
+
+- type: entity
+  parent: RMCMaskTornScarfBlack
+  id: RMCMaskTornScarfDesert
+  name: desert tactical scarf
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/desert.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/desert.rsi
+
+- type: entity
+  parent: RMCMaskTornScarfBlack
+  id: RMCMaskTornScarfGreen
+  name: green tactical scarf
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/green.rsi
+
+- type: entity
+  parent: RMCMaskTornScarfBlack
+  id: RMCMaskTornScarfGrey
+  name: grey tactical scarf
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/grey.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/grey.rsi
+
+- type: entity
+  parent: RMCMaskTornScarfBlack
+  id: RMCMaskTornScarfUrban
+  name: urban tactical scarf
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/urban.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/urban.rsi
+
+- type: entity
+  parent: RMCMaskTornScarfBlack
+  id: RMCMaskTornScarfSnow
+  name: snow tactical scarf
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/snow.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/snow.rsi

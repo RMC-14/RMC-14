@@ -16,6 +16,7 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetFireModeValuesEvent>>(OnRangedModsGetFireModeValues);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetDamageFalloffEvent>>(OnRangedModsGetDamageFalloff);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetGunDamageModifierEvent>>(OnRangedModsGetGunDamage);
+        SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GetWeaponAccuracyEvent>>(OnRangedModsGetWeaponAccuracy);
         SubscribeLocalEvent<AttachableWeaponRangedModsComponent, AttachableRelayedEvent<GunRefreshModifiersEvent>>(OnRangedModsRefreshModifiers);
     }
 
@@ -35,6 +36,10 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
     private List<string> GetEffectStrings(AttachableWeaponRangedModifierSet modSet)
     {
         var result = new List<string>();
+
+        if (modSet.AccuracyAddMult != 0)
+            result.Add(Loc.GetString("rmc-attachable-examine-ranged-accuracy",
+                ("colour", modifierExamineColour), ("sign", modSet.AccuracyAddMult > 0 ? '+' : ""), ("accuracy", modSet.AccuracyAddMult)));
 
         if (modSet.ScatterFlat != 0)
             result.Add(Loc.GetString("rmc-attachable-examine-ranged-scatter",
@@ -150,6 +155,17 @@ public sealed partial class AttachableModifiersSystem : EntitySystem
                 continue;
 
             args.Args.Multiplier += modSet.DamageAddMult;
+        }
+    }
+
+    private void OnRangedModsGetWeaponAccuracy(Entity<AttachableWeaponRangedModsComponent> attachable, ref AttachableRelayedEvent<GetWeaponAccuracyEvent> args)
+    {
+        foreach (var modSet in attachable.Comp.Modifiers)
+        {
+            if (!CanApplyModifiers(attachable.Owner, modSet.Conditions))
+                continue;
+
+            args.Args.AccuracyMultiplier += modSet.AccuracyAddMult;
         }
     }
 

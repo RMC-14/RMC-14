@@ -14,6 +14,8 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
     time: 18000 # 5 hours
+  ranks:
+    RMCRankCivilian: []
   startingGear: RMCGearSurvivor
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
@@ -43,7 +45,7 @@
     back: RMCSatchelCivilianFill
     shoes: RMCShoesBlack
     id: CMIDCardColonist
-    ears: CMHeadset # TODO RMC14 colony
+    ears: CMHeadsetColony
     pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchGeneral
 

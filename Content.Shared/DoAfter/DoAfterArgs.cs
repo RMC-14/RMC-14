@@ -1,5 +1,6 @@
 using Content.Shared.FixedPoint;
 using Robust.Shared.Serialization;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.DoAfter;
 
@@ -74,6 +75,12 @@ public sealed partial class DoAfterArgs
     /// </summary>
     [DataField]
     public bool Broadcast;
+
+    /// <summary>
+    ///     Prototype to spawn as an effect every second.
+    /// </summary>
+    [DataField]
+    public EntProtoId? TargetEffect;
     #endregion
 
     #region Break/Cancellation Options

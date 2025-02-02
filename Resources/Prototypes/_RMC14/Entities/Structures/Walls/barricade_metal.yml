@@ -12,6 +12,8 @@
   parent: CMBaseStructureCorrodible
   id: CMBarricadeBase
   components:
+  - type: Corrodible
+    structure: false
   - type: Rotatable
   - type: Appearance
   - type: Fixtures
@@ -102,7 +104,7 @@
   parent: CMBarricadeBase
   id: CMBarricadeMetal
   name: metal barricade
-  description: A metal barricade that keeps the unwanted out. Upgradable with metal, plasteel, or metal rods for different attributes. Repair with a welder.
+  description: A sturdy and easily assembled barricade made of metal plates, often used for quick fortifications. Use a blowtorch to repair.
   components:
   - type: Climbable
   - type: Anchorable
@@ -123,10 +125,15 @@
     interactSuccessSound:
       collection: FenceRattle
   - type: RMCRepairable
-    heal: -200
+    heal: 200
     skill: RMCSkillConstruction
     delay: 10
     fuelUsed: 2
+    repairableDamageLimit: 340
+  - type: NailgunRepairable
+    # cm13 max_health%: 0.3, 0.45
+    repairMetal: 135
+    repairPlasteel: 200
   - type: Destructible
     thresholds:
     - trigger:
@@ -292,17 +299,18 @@
       - map: [ "acided" ]
     - type: Physics
     - type: RMCRepairable
-      heal: -200
+      heal: 200
       skill: RMCSkillConstruction
       delay: 10
       fuelUsed: 2
     - type: Damageable
-      damageContainer: Inorganic
+      damageContainer: StructuralMarine
+      damageModifierSet: StructuralMarine
     - type: Destructible
       thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 100
+          damage: 30
         behaviors:
         - !type:PlaySoundBehavior
           sound:
@@ -374,6 +382,18 @@
       graph: BarricadeHandrailGraph
       node: nodeHandrail
 
+- type: entity
+  parent: RMCBarricadeHandrail
+  id: RMCBarricadeSmallWire
+  components:
+    - type: Sprite
+      layers:
+      - state: small_wire
+      - map: [ "acided" ]
+    - type: Construction
+      graph: BarricadeHandrailGraph
+      node: nodeHandrail
+
 # Metal Barricade Doors
 - type: entity
   parent: CMBarricadeBase
@@ -395,10 +415,15 @@
     - map: [ "acided" ]
     drawdepth: WallTops
   - type: RMCRepairable
-    heal: -200
+    heal: 200
     skill: RMCSkillConstruction
     delay: 10
     fuelUsed: 2
+    repairableDamageLimit: 300
+  - type: NailgunRepairable
+    # cm13 max_health%: 0.3, 0.45
+    repairMetal: 120
+    repairPlasteel: 180
   - type: Destructible
     thresholds:
     - trigger:

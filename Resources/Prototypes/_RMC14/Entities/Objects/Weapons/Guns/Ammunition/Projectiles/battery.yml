@@ -18,7 +18,7 @@
       params:
         volume: 5
   - type: StaminaDamageOnCollide
-    damage: 45
+    damage: 60
   - type: Projectile
     damage:
       types:
@@ -26,3 +26,6 @@
     soundHit:
       path: /Audio/_RMC14/Bullets/energy_impact1.ogg
     forceSound: true
+  - type: RMCProjectileAccuracy
+    accuracy: 125
+    ignoreFriendlyEvasion: true

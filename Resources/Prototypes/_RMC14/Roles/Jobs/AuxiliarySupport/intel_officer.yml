@@ -8,6 +8,8 @@
   - !type:DepartmentTimeRequirement
     department: CMSquad
     time: 18000 # 5 hours
+  ranks:
+    RMCRankSecondLT: []
   startingGear: CMGearIntelOfficer
   icon: "CMJobIconIntelOfficer"
   joinNotifyCrew: false
@@ -36,14 +38,13 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "IO"
+      prefix: cm-job-prefix-intel
   hidden: true # TODO RMC14
 
 - type: startingGear
   id: CMGearIntelOfficer
   equipment:
     jumpsuit: CMJumpsuitIO
-    back: CMSatchelMarine
     shoes: CMBootsBlackFilled
     id: CMIDCardIntelOfficer
 

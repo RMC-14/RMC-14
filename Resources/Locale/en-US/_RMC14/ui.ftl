@@ -58,3 +58,6 @@ rmc-ui-discord = Discord
 rmc-ui-patreon = Patreon
 
 rmc-other-credits-tab = Other
+
+rmc-ui-auto-punctuate = Automatically punctuate in-character messages
+rmc-ui-auto-eject-magazines = Automatically eject magazines from guns

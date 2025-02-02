@@ -23,6 +23,7 @@
     - buckshot_shell_5
   - type: Tag
     tags:
+    - RMCHandful
     - Cartridge
     - RMCShellShotgun
     - RMCShellShotgunBuckshot
@@ -60,6 +61,7 @@
     - breaching_shell_6
   - type: Tag
     tags:
+    - RMCHandful
     - Cartridge
     - RMCShellShotgun
     - RMCShellShotgunBreaching
@@ -96,6 +98,7 @@
     - slug_shell_5
   - type: Tag
     tags:
+    - RMCHandful
     - Cartridge
     - RMCShellShotgun
     - RMCShellShotgunSlugs
@@ -132,6 +135,7 @@
     - incendiary_slug_5
   - type: Tag
     tags:
+    - RMCHandful
     - Cartridge
     - RMCShellShotgun
     - RMCShellShotgunIncendiary
@@ -168,6 +172,7 @@
     - beanbag_slug_5
   - type: Tag
     tags:
+    - RMCHandful
     - Cartridge
     - RMCShellShotgun
     - RMCShellShotgunBeanbag
@@ -204,6 +209,7 @@
     - flechette_shell_5
   - type: Tag
     tags:
+    - RMCHandful
     - Cartridge
     - RMCShellShotgun
     - RMCShellShotgunFlechette
@@ -240,6 +246,7 @@
     - incen_buckshot_5
   - type: Tag
     tags:
+    - RMCHandful
     - Cartridge
     - RMCShellShotgun
     - RMCShellShotgunIncendiaryBuckshot
@@ -250,6 +257,9 @@
   icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: incen_buckshot_1 }
   spawn: CMShellShotgunIncendiaryBuckshot
   maxCount: 5
+
+- type: Tag
+  id: RMCHandful
 
 - type: Tag
   id: RMCShellShotgun

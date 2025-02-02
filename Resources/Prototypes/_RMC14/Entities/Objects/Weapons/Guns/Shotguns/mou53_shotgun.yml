@@ -5,14 +5,17 @@
   description: A limited production Kerchner MOU53 triple break action classic. Respectable damage output at medium ranges, while the Aegis M42 is the king of CQC, the Kerchner MOU53 is what hits the broadside of that barn. This specific model cannot safely fire buckshot shells.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mou53.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mou53/jungle.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mou53.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mou53/jungle.rsi
   - type: Tag
     tags:
     - RMCWeaponShotgunMOU53
   - type: Gun
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_mou53.ogg
     shotsPerBurst: 1
+  - type: Appearance
   - type: ShootUseDelay
   - type: RMCSelectiveFire
     baseFireModes:
@@ -23,6 +26,9 @@
     scatterUnwielded: 18
     baseFireRate: 2
     burstScatterMult: 1
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1
+    accuracyMultiplierUnwielded: 0.95
   - type: BallisticAmmoProvider
     cycleable: true
     whitelist:
@@ -34,9 +40,16 @@
     proto: CMShellShotgunSlugs
     capacity: 3 #It's a lovely triple barrel
     soundInsert:
-      path: /Audio/_RMC14/Weapons/Guns/Reload/grenade_insert.ogg
-      params:
-        volume: -2
+      path: /Audio/_RMC14/Weapons/Guns/Reload/gun_mou_reload.ogg
+  - type: RMCAmmoEject
+    containerID: ballistic-ammo
+    ejectSound:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/gun_mou_reload.ogg
+  - type: BreechLoaded
+    openSound:
+      path: /Audio/_RMC14/Weapons/Guns/Breech/pkd_open_chamber.ogg
+    closeSound:
+      path: /Audio/_RMC14/Weapons/Guns/Breech/pkd_close_chamber.ogg
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -69,6 +82,13 @@
       rmc-aslot-rail: -0.02, 0.15
       rmc-aslot-stock: -0.65, -0.18
       rmc-aslot-underbarrel: 0.5, -0.25
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Shotguns/mou53/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Shotguns/mou53/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Shotguns/mou53/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Shotguns/mou53/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Shotguns/mou53/urban.rsi
 
 - type: Tag
   id: RMCWeaponShotgunMOU53

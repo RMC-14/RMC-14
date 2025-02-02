@@ -18,10 +18,10 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly BatterySystem _battery = default!;
+    [Dependency] private readonly PowerCellSystem _cell = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PowerCellSystem _cell = default!;
 
     [ViewVariables]
     private TimeSpan _nextUpdate;
@@ -64,11 +64,12 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
         if (!_cell.TryGetBatteryFromSlot(ent, out var battery) || !TryComp<PowerCellDrawComponent>(ent, out var draw))
             return;
 
-        int maxUses = (int)(battery.MaxCharge / draw.UseRate);
-        int uses = (int)(battery.CurrentCharge / draw.UseRate);
+        var maxUses = (int)(battery.MaxCharge / draw.UseRate);
+        var uses = (int)(battery.CurrentCharge / draw.UseRate);
 
         args.PushMarkup(Loc.GetString(ent.Comp.PowerText, ("uses", uses), ("maxuses", maxUses)));
     }
+
     private void OnReceiverPowerChanged(Entity<RMCPowerReceiverComponent> ent, ref PowerChangedEvent args)
     {
         ent.Comp.Mode = args.Powered ? RMCPowerMode.Active : RMCPowerMode.Off;
@@ -225,7 +226,6 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
                     }
 
                     Dirty(apc, apcComp);
-                    continue;
                 }
 
                 if (!_areaPowerQuery.TryComp(apcComp.Area, out var areaComp))
@@ -249,24 +249,32 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
                     apcComp.Channels[i].Watts = load;
                 }
 
-                var battery = new Entity<BatteryComponent>(cell.Value, cell.Value.Comp);
-                var drawn = wattsPer;
-                drawn -= totalLoad;
-                if (drawn < 0)
+                if (cell == null)
                 {
-                    apcComp.ChargeStatus = RMCApcChargeStatus.NotCharging;
-                    _battery.UseCharge(battery, -drawn, battery);
+                    apcComp.ChargePercentage = 0;
                 }
                 else
                 {
-                    _battery.SetCharge(battery, battery.Comp.CurrentCharge + drawn, battery);
+                    var battery = new Entity<BatteryComponent>(cell.Value, cell.Value.Comp);
+                    var drawn = wattsPer;
+                    drawn -= totalLoad;
+                    if (drawn < 0)
+                    {
+                        apcComp.ChargeStatus = RMCApcChargeStatus.NotCharging;
+                        _battery.UseCharge(battery, -drawn, battery);
+                    }
+                    else
+                    {
+                        _battery.SetCharge(battery, battery.Comp.CurrentCharge + drawn, battery);
 
-                    apcComp.ChargeStatus = _battery.IsFull(battery, battery)
-                        ? RMCApcChargeStatus.FullCharge
-                        : RMCApcChargeStatus.Charging;
+                        apcComp.ChargeStatus = _battery.IsFull(battery, battery)
+                            ? RMCApcChargeStatus.FullCharge
+                            : RMCApcChargeStatus.Charging;
+                    }
+
+                    apcComp.ChargePercentage = battery.Comp.CurrentCharge / battery.Comp.MaxCharge;
                 }
 
-                apcComp.ChargePercentage = battery.Comp.CurrentCharge / battery.Comp.MaxCharge;
                 switch (apcComp.ChargePercentage)
                 {
                     case > 0.33f:

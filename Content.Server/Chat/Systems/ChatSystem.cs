@@ -7,11 +7,11 @@ using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
-using Content.Server.Players.RateLimiting;
 using Content.Server.Speech.Components;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration;
@@ -65,6 +65,8 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly ExamineSystemShared _examineSystem = default!;
     [Dependency] private readonly CMChatSystem _cmChat = default!;
     [Dependency] private readonly RMCEmoteSystem _rmcEmote = default!;
+    [Dependency] private readonly INetConfigurationManager _netConfigManager = default!;
+
 
     public const int VoiceRange = 10; // how far voice goes in world units
     public const int WhisperClearRange = 2; // how far whisper goes while still being understandable, in world units
@@ -222,7 +224,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
 
         bool shouldCapitalize = (desiredType != InGameICChatType.Emote);
-        bool shouldPunctuate = _configurationManager.GetCVar(CCVars.ChatPunctuation);
+        bool shouldPunctuate = _configurationManager.GetCVar(CCVars.ChatPunctuation) || player != null && _netConfigManager.GetClientCVar(player.Channel, RMCCVars.RMCAutoPunctuate);
         // Capitalizing the word I only happens in English, so we check language here
         bool shouldCapitalizeTheWordI = (!CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Parent.Name == "en")
             || (CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Name == "en");
@@ -753,8 +755,9 @@ public sealed partial class ChatSystem : SharedChatSystem
     // ReSharper disable once InconsistentNaming
     private string SanitizeInGameICMessage(EntityUid source, string message, out string? emoteStr, bool capitalize = true, bool punctuate = false, bool capitalizeTheWordI = true)
     {
-        var newMessage = message.Trim();
-        newMessage = SanitizeMessageReplaceWords(source, newMessage);
+        var newMessage = SanitizeMessageReplaceWords(source, message.Trim());
+
+        GetRadioKeycodePrefix(source, newMessage, out newMessage, out var prefix);
 
         if (capitalize)
             newMessage = SanitizeMessageCapital(newMessage);
@@ -763,9 +766,10 @@ public sealed partial class ChatSystem : SharedChatSystem
         if (punctuate)
             newMessage = SanitizeMessagePeriod(newMessage);
 
-        _sanitizer.TrySanitizeOutSmilies(newMessage, source, out newMessage, out emoteStr);
+        // For auto-punctuation such as 'Lol.'
+        _sanitizer.TrySanitizeEmoteShorthands(newMessage, source, out newMessage, out emoteStr);
 
-        return newMessage;
+        return prefix + newMessage;
     }
 
     private string SanitizeInGameOOCMessage(string message)

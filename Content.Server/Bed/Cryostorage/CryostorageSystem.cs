@@ -1,6 +1,6 @@
+using System.Globalization;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
-using Content.Server.GameTicking;
 using Content.Server.Ghost;
 using Content.Server.Hands.Systems;
 using Content.Server.Inventory;
@@ -9,11 +9,13 @@ using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Server.StationRecords;
 using Content.Server.StationRecords.Systems;
+using Content.Shared._RMC14.Cryostorage;
 using Content.Shared.Access.Systems;
 using Content.Shared.Bed.Cryostorage;
 using Content.Shared.Chat;
 using Content.Shared.Climbing.Systems;
 using Content.Shared.Database;
+using Content.Shared.GameTicking;
 using Content.Shared.Hands.Components;
 using Content.Shared.Mind.Components;
 using Content.Shared.StationRecords;
@@ -26,7 +28,6 @@ using Robust.Shared.Containers;
 using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using System.Globalization;
 
 namespace Content.Server.Bed.Cryostorage;
 
@@ -221,6 +222,8 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         UpdateCryostorageUIState((cryostorageEnt.Value, cryostorageComponent));
         AdminLog.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(ent):player} was entered into cryostorage inside of {ToPrettyString(cryostorageEnt.Value)}");
 
+        var ev = new EnteredCryostorageEvent();
+        RaiseLocalEvent(ent, ref ev);
         if (!TryComp<StationRecordsComponent>(station, out var stationRecords))
             return;
 
@@ -274,6 +277,9 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         cryostorageComponent.StoredPlayers.Remove(uid);
         AdminLog.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(entity):player} re-entered the game from cryostorage {ToPrettyString(cryostorage)}");
         UpdateCryostorageUIState((cryostorage, cryostorageComponent));
+
+        var ev = new LeftCryostorageEvent();
+        RaiseLocalEvent(entity, ref ev);
     }
 
     protected override void OnInsertedContainer(Entity<CryostorageComponent> ent, ref EntInsertedIntoContainerMessage args)

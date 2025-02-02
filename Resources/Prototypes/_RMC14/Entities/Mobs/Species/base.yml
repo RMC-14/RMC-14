@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   save: false
   parent: BaseMobSpecies
   id: CMBaseMobSpeciesOrganic
@@ -103,9 +103,10 @@
   - type: Flammable
     fireSpread: false
     canResistFire: true
+    firestackFade: 1
     damage:
       types:
-        Heat: 3
+        Heat: 1
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
     normalState: Generic_mob_burning
@@ -138,10 +139,13 @@
         requireInputValidation: false
       enum.TacticalMapUserUi.Key:
         type: TacticalMapUserBui
+      enum.SquadLeaderTrackerUI.Key:
+        type: SquadInfoBui
+      enum.DialogUiKey.Key:
+        type: DialogBui
   - type: Infectable
   - type: Tackleable
   - type: Tackle
-    stun: 10
   - type: XenoNestable
   - type: Devourable
   - type: ImmuneToClothingRequiredStepTrigger
@@ -183,24 +187,31 @@
   - type: UserIFF
   - type: UserLimitHits
   - type: MovementIgnoreGravity
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.7
+    baseSprintSpeed: 5
   - type: SlowOnPull
     slowdowns:
-    - multiplier: 0.7575
+    - multiplier: 0.745
       whitelist:
         components:
         - Marine
-    - multiplier: 0.8725
+    - multiplier: 0.855
       whitelist:
         components:
         - XenoLight
-    - multiplier: 0.59
+    - multiplier: 0.5775
       whitelist:
         components:
         - XenoHeavy
+    - multiplier: 0.645
+      whitelist:
+        tags:
+        - BodyBag
   - type: MobThresholds
     thresholds:
       0: Alive
-      125: Critical
+      150: Critical
       200: Dead
   - type: MobStateActions
     actions:
@@ -259,3 +270,14 @@
       - CanBeSupplyDropped
   - type: NewPlayerLabel
   - type: MarineMapTracked
+  - type: Evasion
+  - type: CanBeFirePatted
+  - type: FirePatter
+    blacklist:
+      components:
+      - Xeno
+  - type: RMCPickupDroppedItems
+  - type: CommendationReceiver
+  - type: RMCSpeciesSlowdownModifier
+    slowMultiplier: 0.66
+    superSlowMultiplier: 0.33

@@ -16,6 +16,11 @@
   - type: CMArmorPiercing
     amount: 100
   - type: DeleteXenoResinOnHit
+  - type: RMCProjectileAccuracy
+    accuracy: 110
+    thresholds:
+    - range: 22
+      falloff: 10
 
 - type: entity
   parent: RMCBaseBullet
@@ -34,3 +39,8 @@
         Piercing: 30
   - type: CMArmorPiercing
     amount: 35
+  - type: RMCProjectileAccuracy
+    accuracy: 110
+    thresholds:
+    - range: 22
+      falloff: 10
