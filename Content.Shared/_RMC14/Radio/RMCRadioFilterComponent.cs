@@ -5,6 +5,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Radio;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(SharedRMCRadioFilterSystem))]
 public sealed partial class RMCRadioFilterComponent : Component
 {
     [DataField, AutoNetworkedField]
