@@ -1,0 +1,16 @@
+- type: entity
+  parent: RMCCommunicationsConsoleBase
+  id: MCWWSurvivorConsole
+  name: База данных WE-YA
+  description: Консоль со всеми сотрудниками WE-YA
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: security_cam
+  - type: InteractionOutline
+  - type: ActivatableUI
+    key: enum.SurvivorComputerUi.Key
+  - type: UserInterface
+    interfaces:
+      enum.SurvivorComputerUi.Key:
+        type: SupplyDropComputerBui

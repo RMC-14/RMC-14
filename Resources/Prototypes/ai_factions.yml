@@ -7,6 +7,7 @@
     - PetsNT
     - Zombie
     - Revolutionary
+    - UNMC
 
 - type: npcFaction
   id: NanoTrasen
@@ -42,6 +43,7 @@
   - PetsNT
   - Zombie
   - Revolutionary
+  - UNMC
 
 - type: npcFaction
   id: SimpleNeutral
@@ -64,6 +66,7 @@
   - PetsNT
   - Zombie
   - Revolutionary
+  - UNMC
 
 - type: npcFaction
   id: Zombie
@@ -75,6 +78,7 @@
   - Passive
   - PetsNT
   - Revolutionary
+  - UNMC
 
 - type: npcFaction
   id: Revolutionary
@@ -83,3 +87,4 @@
   - Zombie
   - SimpleHostile
   - Dragon
+  - UNMC

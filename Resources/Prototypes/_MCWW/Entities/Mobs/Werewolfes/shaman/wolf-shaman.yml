@@ -1,0 +1,105 @@
+- type: entity
+  name: Волк
+  id: MCWWMobSummonedWolf
+  parent: [ SimpleMobBase, MobCombat ]
+  description: Полупрозрачный волк
+  categories: [ HideSpawnMenu ] #Must be configured to a King or the AI breaks.
+  components:
+  - type: CombatMode
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 3.5
+    baseSprintSpeed : 3.5
+  - type: InputMover
+  - type: MobMover
+  - type: HTN
+    rootTask:
+      task: RatServantCompound
+    blackboard:
+      IdleRange: !type:Single
+        3.5
+      FollowCloseRange: !type:Single
+        2.0
+      FollowRange: !type:Single
+        3.0
+  - type: Reactive
+    groups:
+      Flammable: [Touch]
+      Extinguish: [Touch]
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: Sprite
+    drawdepth: SmallMobs
+    sprite: _MCWW/Mobs/Animals/Wolf.rsi
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base", "movement"]
+      state: Wolf
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded"]
+      state: eyes
+      shader: unshaded
+
+  - type: SpriteMovement
+    movementLayers:
+      movement:
+        state: Wolf-moving
+    noMovementLayers:
+      movement:
+        state: Wolf
+  - type: Physics
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        density: 30 #Bulky by mouse standards...
+        mask:
+        - SmallMobMask
+        layer:
+        - SmallMobLayer
+  - type: MobState
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      15: Critical
+      30: Dead
+  - type: MeleeWeapon
+    soundHit:
+        path: /Audio/Weapons/bladeslice.ogg
+    angle: 0
+    animation: WeaponArcClaw
+    damage:
+      types:
+        Slash: 5
+        Piercing: 3
+  - type: Body
+    prototype: Wolf
+    requiredLegs: 1 # TODO: More than 1 leg
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: Wolf
+        BaseUnshaded: eyes
+      Critical:
+        Base: dead
+      Dead:
+        Base: splat
+  - type: Vocal
+    sounds:
+      Male: Mouse
+      Female: Mouse
+      Unsexed: Mouse
+    wilhelmProbability: 0.001
+  - type: Tag
+    tags:
+      - CannotSuicide
+      - FootstepSound
+  - type: NoSlip
+  - type: MobsterAccent
+    isBoss: false
+  - type: Speech
+    speechVerb: SmallMob
+  - type: FireVisuals
+    sprite: Mobs/Effects/onfire.rsi
+    normalState: Mouse_burning

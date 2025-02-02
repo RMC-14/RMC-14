@@ -1,0 +1,11 @@
+- type: entity
+  id: MCWWActionRatKingRaiseArmy
+  name: Призвать волка
+  description: Используя свою духовную энергию вы взываете к своей стае и призываете волка
+  components:
+  - type: InstantAction
+    useDelay: 0.1
+    icon:
+      sprite: Interface/Actions/actions_rat_king.rsi
+      state: ratKingArmy
+    event: !type:RatKingRaiseArmyActionEvent

@@ -1,7 +1,7 @@
-rmc-attachable-holder-strip-ui-title = strip attachables
-rmc-attachable-holder-strip-ui-empty-slot = nothing
+rmc-attachable-holder-strip-ui-title = Обвесы
+rmc-attachable-holder-strip-ui-empty-slot = пусто
 
-rmc-verb-strip-attachables = Strip Attachables
+rmc-verb-strip-attachables = Обвесы
 
 rmc-aslot-barrel = Ствол
 rmc-aslot-rail = Рельса
