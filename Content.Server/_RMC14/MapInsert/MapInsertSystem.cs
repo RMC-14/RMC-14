@@ -10,12 +10,15 @@ using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.MapInsert;
 
 public sealed class MapInsertSystem : SharedMapInsertSystem
 {
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -23,6 +26,7 @@ public sealed class MapInsertSystem : SharedMapInsertSystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly GridFixtureSystem _fixture = default!;
     [Dependency] private readonly SharedMapSystem _maps = default!;
+    [Dependency] private readonly AreaSystem _areas = default!;
 
     private MapId? _map;
     private int _index;
@@ -36,7 +40,7 @@ public sealed class MapInsertSystem : SharedMapInsertSystem
     {
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
-        SubscribeLocalEvent<MapInsertComponent, MapInitEvent>(OnMapInsertMapInit);
+        SubscribeLocalEvent<MapInsertComponent, MapInitEvent>(OnMapInsertMapInit, before: [typeof(AreaSystem)]);
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -67,11 +71,32 @@ public sealed class MapInsertSystem : SharedMapInsertSystem
             return;
 
         var insertGrid = grids[0];
-        var originalGridXform = _transform.GetMapCoordinates(insertGrid);
+        var originalGridXform = Transform(insertGrid);
         var xform = Transform(ent);
         var mainGrid = xform.GridUid;
         var coordinates = _transform.GetMapCoordinates(ent, xform).Offset(new Vector2(-0.5f, -0.5f));
         coordinates = coordinates.Offset(ent.Comp.Offset);
+        var coordinatesi = new Vector2i((int)coordinates.X, (int)coordinates.Y);
+
+        //Replace areas
+        if (ent.Comp.ReplaceAreas)
+        {
+            if (EntityManager.TryGetComponent(mainGrid, out AreaGridComponent? mainAreaGrid)
+                && EntityManager.TryGetComponent(insertGrid, out AreaGridComponent? insertAreaGrid))
+            {
+                foreach (var (position, protoId) in insertAreaGrid.Areas)
+                {
+                    if (!_prototypes.TryIndex(protoId, out var proto))
+                        continue;
+
+                    if (!proto.TryGetComponent(out AreaComponent? areaComp, _compFactory))
+                        continue;
+
+                    _areas.ReplaceArea(mainAreaGrid, coordinatesi + position, protoId);
+                }
+            }
+        }
+
         _transform.SetMapCoordinates(insertGrid, coordinates);
 
         // Clear all entities on map in insert area
@@ -81,17 +106,15 @@ public sealed class MapInsertSystem : SharedMapInsertSystem
         }
 
         // Merge grids
-        var coordinatesi = new Vector2i((int)coordinates.X, (int)coordinates.Y);
-
-
         if (mainGrid == null)
             return;
+        //Need to make sure the grid isn't overlapping where it's going to be merged to, otherwise exception
         _transform.SetMapCoordinates(insertGrid, coordinates.Offset(new Vector2(999f)));
         _fixture.Merge((EntityUid)mainGrid, insertGrid, coordinatesi, Angle.Zero);
 
     }
 
-    private void MapInsertSmimsh(EntityUid uid,  FixturesComponent? manager = null, MapGridComponent? grid = null, TransformComponent? xform = null)
+    private void MapInsertSmimsh(EntityUid uid,  FixturesComponent? manager = null, MapGridComponent? grid = null, TransformComponent? xform = null, bool ClearAreas = false)
     {
         if (!Resolve(uid, ref manager, ref grid, ref xform) || xform.MapUid == null)
             return;

@@ -17,4 +17,7 @@ public sealed partial class MapInsertComponent : Component
     [DataField, AutoNetworkedField]
     public bool ClearEntities;
 
+    [DataField, AutoNetworkedField]
+    public bool ReplaceAreas;
+
 }

@@ -10,3 +10,4 @@
   - type: MapInsert
     spawn: "/Maps/_RMC14/inserts/se-checkpoint.yml"
     clearEntities: true
+    replaceAreas: true

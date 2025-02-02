@@ -59,6 +59,11 @@ public sealed class AreaSystem : EntitySystem
         }
     }
 
+    public void ReplaceArea(AreaGridComponent areaGrid, Vector2i position, EntProtoId<AreaComponent> area)
+    {
+        areaGrid.Areas[position] = area;
+    }
+
     public bool TryGetArea(
         Entity<MapGridComponent, AreaGridComponent?> grid,
         Vector2i indices,
