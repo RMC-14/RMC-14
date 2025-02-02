@@ -7,7 +7,6 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
-using static Content.Shared.Fax.AdminFaxEuiMsg;
 
 namespace Content.Shared._RMC14.Slow;
 
