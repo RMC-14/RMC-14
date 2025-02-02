@@ -1,12 +1,5 @@
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconCLF
-  icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: 
-
-- type: jobIcon
-  parent: CMJobIconBase
   id: RMCJobIconCLFStandard
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
