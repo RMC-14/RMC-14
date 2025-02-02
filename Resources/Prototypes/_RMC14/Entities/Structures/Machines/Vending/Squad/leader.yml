@@ -38,8 +38,10 @@
     - name: Clothing Items
       entries:
       - id: RMCScabbardMacheteFilled
+        name: machete scabbard (Full)
         points: 4
       - id: RMCPouchMacheteFilled
+        name: machete pouch (Full)
         points: 4
       - id: RMCBackpackRTO
         points: 5
@@ -180,9 +182,9 @@
       entries:
     #- id: CMM240IncineratorUnit
     #  points: 18
-      - id: RMCMK80Case
+      - id: RMCGunCasePistolMK80
         points: 8
-      - id: RMCSmartPistolCase
+      - id: RMCGunCasePistolSmart
         points: 12
     #- id: CMM79GrenadeLauncher
     #  points: 18
@@ -219,6 +221,7 @@
       - id: CMArmorB12
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
+      - id: RMCBoxZiptie
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:

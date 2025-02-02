@@ -131,7 +131,7 @@
       - id: CMBeltUtilityFilled
         name: M276 pattern toolbelt rig (Full)
       - id: CMBeltMedicBagFilled
-        name: M276 lifesaver bag (Full)
+        name: M276 pattern lifesaver bag (Full)
       - id: CMBeltMedicalFilled
         name: M276 medical storage rig (Full)
       - id: RMCBeltHolsterSMGPouch
@@ -232,15 +232,17 @@
     sections:
     - name: Captain's Primary
       choices: { CMPrimary: 1 }
+      takeAll: CMStandard
       entries:
-      - id: WeaponRifleM54C # TODO RMC14 MK1 Pulse Rifle needs to replace this; as well as the magazines below.
-      - id: WeaponShotgunM42A2
+      - id: RMCM54CMK1CaseAP
+        name: M54C MK1 assault rifle
+      - id: RMCVendorBundleXOShotgun
     - name: Primary Ammunition
       entries:
-      - id: CMMagazineRifleM54C
+      - id: CMMagazineRifleM54CMK1
         points: 40
         recommended: true
-      - id: CMMagazineRifleM54CAP
+      - id: CMMagazineRifleM54CMK1AP
         points: 60
         recommended: true
       - id: RMCBoxShotgunBuckshot
@@ -435,9 +437,10 @@
       - id: RMCBeltUtilityGeneral
         recommended: true
       - id: CMBeltSecurityMPFilled
+        name: M276 pattern security rig (Full)
         recommended: true
       - id: CMBeltMedicBagFilled
-        recommended: true
+        name: M276 pattern lifesaver bag (Full)
       - id: CMBeltMarine
         recommended: true
       - id: CMBeltUtilityCombat
@@ -586,6 +589,21 @@
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleXOShotgun
+  name: M890 tactical shotgun
+  description: Contains the M890 tactical shotgun and various shells.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m890.rsi
+    state: icon
+  - type: CMVendorBundle
+    bundle:
+    - WeaponShotgunM890
+    - CMShellShotgunBuckshot
+    - CMShellShotgunSlugs
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleMilitaryPoliceApparelCMP
   name: Essential Police Set
   description: Contains security HUD-glasses and a filled security belt.
@@ -661,8 +679,10 @@
       - id: RMCBeltUtilityGeneral
         recommended: true
       - id: CMBeltSecurityMPFilled
+        name: M276 pattern security rig (Full)
         recommended: true
       - id: CMBeltMedicBagFilled
+        name: M276 pattern lifesaver bag (Full)
         recommended: true
       - id: CMBeltMarine
         recommended: true
@@ -764,15 +784,16 @@
       entries:
       - id: CMArmorM3WO
       - id: CMArmorHelmetM10ChiefMP
-      - id: CMHeadBeretWO
+      - id: CMHeadBeretCMP
     - name: Handgun Case
       jobs:
       - CMChiefMP
       choices: { CMWeapon: 1 }
       entries:
-      - id: CMWeaponPistolM77   # TODO ADD CASE.
-      - id: RMCWeaponRevolverM44  # TODO ADD CASE.
-      - id: CMWeaponPistolM1984  # TODO ADD CASE.
+      - id: RMCGunCaseRevolverRSh9
+      - id: RMCGunCasePistolM77
+      - id: RMCGunCasePistolM44
+      - id: RMCGunCasePistolM1984
     - name: Backpack
       jobs:
       - CMChiefMP

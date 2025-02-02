@@ -34,15 +34,17 @@
       choices: { CMSidearm: 1 }
       entries:
       - id: CMWeaponPistolM1984
-      - id: CMWeaponPistolMK80
+      - id: RMCMK80
     - name: Belts
       choices: { CMBelt: 1 }
       entries:
       - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
       - id: CMBeltMedicBagFilled
+        name: M276 pattern lifesaver bag (Full)
         recommended: true
       - id: CMBeltMedicalFilled
+        name: M276 pattern medical storage rig (Full)
         recommended: true
       - id: RMCBeltHolsterSMGPouch
       - id: RMCBeltHolsterPistol
@@ -63,6 +65,7 @@
         recommended: true
       - id: RMCPouchFirstResponder
       - id: RMCPouchFlareFilled
+        name: flare pouch (Full)
       - id: RMCPouchGeneralLarge
       - id: RMCPouchMagazineLarge
       - id: RMCPouchMagazinePistolLarge
@@ -147,9 +150,11 @@
         points: 15
       - id: RMCPouchMagazineLarge
         points: 15
-      #- id: RMCMacheteScabbard # TODO RMC14 Machete Back Scabbard
-      #  points: 10
+      - id: RMCScabbardMacheteFilled
+        name: machete scabbard (Full)
+        points: 10
       - id: RMCPouchMacheteFilled
+        name: machete pouch (Full)
         points: 15
       - id: RMCMotionDetector
         points: 15
@@ -199,7 +204,7 @@
         amount: 24
     - name: Sidearms
       entries:
-      - id: CMWeaponPistolM77
+      - id: RMCWeaponPistolM77
         amount: 4
       - id: RMCWeaponRevolverM44
         amount: 4

@@ -401,18 +401,17 @@ public sealed class SquadSystem : EntitySystem
 
         var member = EnsureComp<SquadMemberComponent>(marine);
         var oldSquadId = member.Squad;
+        var role = job ?? _originalRoleQuery.CompOrNull(marine)?.Job;
         if (_squadTeamQuery.TryComp(oldSquadId, out var oldSquad))
         {
             oldSquad.Members.Remove(marine);
 
-            if (_mind.TryGetMind(marine, out var mindId, out _) &&
-                _job.MindTryGetJobId(mindId, out var currentJob) &&
-                currentJob != null)
+            if (role != null)
             {
-                if (oldSquad.Roles.TryGetValue(currentJob.Value, out var oldJobs) &&
+                if (oldSquad.Roles.TryGetValue(role.Value, out var oldJobs) &&
                     oldJobs > 0)
                 {
-                    oldSquad.Roles[currentJob.Value] = oldJobs - 1;
+                    oldSquad.Roles[role.Value] = oldJobs - 1;
                 }
             }
         }
@@ -438,10 +437,10 @@ public sealed class SquadSystem : EntitySystem
         Dirty(marine, grant);
 
         team.Comp.Members.Add(marine);
-        if (job != null)
+        if (role != null)
         {
-            team.Comp.Roles.TryGetValue(job.Value, out var roles);
-            team.Comp.Roles[job.Value] = roles + 1;
+            team.Comp.Roles.TryGetValue(role.Value, out var roles);
+            team.Comp.Roles[role.Value] = roles + 1;
         }
 
         var ev = new SquadMemberUpdatedEvent(team);

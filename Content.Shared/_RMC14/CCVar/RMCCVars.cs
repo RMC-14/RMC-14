@@ -124,6 +124,9 @@ public sealed class RMCCVars : CVars
     public static readonly CVarDef<float> RMCLandingZonePrimaryAutoMinutes =
         CVarDef.Create("rmc.landing_zone_primary_auto_minutes", 25f, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<bool> RMCLandingZoneMiasmaEnabled =
+        CVarDef.Create("rmc.landing_zone_miasma_enabled", false, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<int> RMCCorrosiveAcidTickDelaySeconds =
         CVarDef.Create("rmc.corrosive_acid_tick_delay_seconds", 10, CVar.REPLICATED | CVar.SERVER);
 
@@ -251,7 +254,7 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.spawner_max_corpses", 25, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCHiveSpreadEarlyMinutes =
-        CVarDef.Create("rmc.hive_spread_early_minutes", 40, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.hive_spread_early_minutes", 0, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCNewPlayerTimeTotalHours =
         CVarDef.Create("rmc.new_player_time_total_hours", 25, CVar.REPLICATED | CVar.SERVER);
@@ -339,4 +342,20 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCXenoEvolveSameCasteCooldownSeconds =
         CVarDef.Create("rmc.xeno_evolve_same_caste_cooldown_seconds", 300, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
+
+    /// <summary>
+    ///     Whether or not to show a button that opens the guidebook when a player changes their species,
+    ///     explaining the difference between each.
+    /// </summary>
+    public static readonly CVarDef<bool> GuidebookShowEditorSpeciesButton =
+        CVarDef.Create("guidebook.show_editor_species_button", false, CVar.SERVER | CVar.REPLICATED);
+
+    public static readonly CVarDef<bool> RMCEnableSuicide =
+        CVarDef.Create("rmc.enable_suicide", false, CVar.SERVER | CVar.REPLICATED);
+
+    public static readonly CVarDef<int> RMCWeedKillerDropshipDelaySeconds =
+        CVarDef.Create("rmc.weed_killer_dropship_delay_seconds", 20, CVar.SERVER | CVar.REPLICATED);
+
+    public static readonly CVarDef<int> RMCWeedKillerDisableDurationMinutes =
+        CVarDef.Create("rmc.weed_killer_disable_duration_minutes", 8, CVar.SERVER | CVar.REPLICATED);
 }

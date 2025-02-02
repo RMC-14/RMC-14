@@ -87,7 +87,7 @@ tilemap:
   5: FloorShuttleBlack
   20: FloorSteel
   883: Plating
-  76: PlatingBurnt
+  76: PlatingDamaged
   654: RCMPlanetIce0
   655: RCMPlanetIce1
   656: RCMPlanetIce2
@@ -4873,63 +4873,63 @@ entities:
       areaEntities: {}
       colors: {}
       areas:
-        183,6: RMCAreaShivaInteriorWarehouseCaves
-        182,6: RMCAreaShivaInteriorWarehouseCaves
-        181,6: RMCAreaShivaInteriorWarehouseCaves
-        181,5: RMCAreaShivaInteriorWarehouseCaves
-        180,6: RMCAreaShivaInteriorWarehouseCaves
-        180,5: RMCAreaShivaInteriorWarehouseCaves
-        179,6: RMCAreaShivaInteriorWarehouseCaves
-        178,6: RMCAreaShivaInteriorWarehouseCaves
-        177,6: RMCAreaShivaInteriorWarehouseCaves
-        176,6: RMCAreaShivaInteriorWarehouseCaves
-        175,6: RMCAreaShivaInteriorWarehouseCaves
-        175,5: RMCAreaShivaInteriorWarehouseCaves
-        175,4: RMCAreaShivaInteriorWarehouseCaves
-        174,6: RMCAreaShivaInteriorWarehouseCaves
-        174,5: RMCAreaShivaInteriorWarehouseCaves
-        174,4: RMCAreaShivaInteriorWarehouseCaves
-        173,6: RMCAreaShivaInteriorWarehouseCaves
-        158,6: RMCAreaShivaInteriorWarehouseCaves
-        158,5: RMCAreaShivaInteriorWarehouseCaves
-        158,4: RMCAreaShivaInteriorWarehouseCaves
-        157,6: RMCAreaShivaInteriorWarehouseCaves
-        157,5: RMCAreaShivaInteriorWarehouseCaves
-        157,4: RMCAreaShivaInteriorWarehouseCaves
-        157,3: RMCAreaShivaInteriorWarehouseCaves
-        156,6: RMCAreaShivaInteriorWarehouseCaves
-        156,5: RMCAreaShivaInteriorWarehouseCaves
-        156,4: RMCAreaShivaInteriorWarehouseCaves
-        156,3: RMCAreaShivaInteriorWarehouseCaves
-        155,6: RMCAreaShivaInteriorWarehouseCaves
-        155,5: RMCAreaShivaInteriorWarehouseCaves
-        155,4: RMCAreaShivaInteriorWarehouseCaves
-        155,3: RMCAreaShivaInteriorWarehouseCaves
-        154,6: RMCAreaShivaInteriorWarehouseCaves
-        154,5: RMCAreaShivaInteriorWarehouseCaves
-        154,4: RMCAreaShivaInteriorWarehouseCaves
-        153,6: RMCAreaShivaInteriorWarehouseCaves
-        153,5: RMCAreaShivaInteriorWarehouseCaves
-        153,4: RMCAreaShivaInteriorWarehouseCaves
-        152,6: RMCAreaShivaInteriorWarehouseCaves
-        152,5: RMCAreaShivaInteriorWarehouseCaves
-        152,4: RMCAreaShivaInteriorWarehouseCaves
-        151,6: RMCAreaShivaInteriorWarehouseCaves
-        151,5: RMCAreaShivaInteriorWarehouseCaves
-        151,4: RMCAreaShivaInteriorWarehouseCaves
-        150,6: RMCAreaShivaInteriorWarehouseCaves
-        135,24: RMCAreaShivaInteriorWarehouseCaves
-        135,23: RMCAreaShivaInteriorWarehouseCaves
-        135,22: RMCAreaShivaInteriorWarehouseCaves
-        135,21: RMCAreaShivaInteriorWarehouseCaves
-        135,20: RMCAreaShivaInteriorWarehouseCaves
-        135,19: RMCAreaShivaInteriorWarehouseCaves
-        135,18: RMCAreaShivaInteriorWarehouseCaves
-        134,21: RMCAreaShivaInteriorWarehouseCaves
-        134,20: RMCAreaShivaInteriorWarehouseCaves
-        134,18: RMCAreaShivaInteriorWarehouseCaves
-        134,17: RMCAreaShivaInteriorWarehouseCaves
-        133,17: RMCAreaShivaInteriorWarehouseCaves
+        183,6: RMCAreaShivaInteriorCavesResearchCaves
+        182,6: RMCAreaShivaInteriorCavesResearchCaves
+        181,6: RMCAreaShivaInteriorCavesResearchCaves
+        181,5: RMCAreaShivaInteriorCavesResearchCaves
+        180,6: RMCAreaShivaInteriorCavesResearchCaves
+        180,5: RMCAreaShivaInteriorCavesResearchCaves
+        179,6: RMCAreaShivaInteriorCavesResearchCaves
+        178,6: RMCAreaShivaInteriorCavesResearchCaves
+        177,6: RMCAreaShivaInteriorCavesResearchCaves
+        176,6: RMCAreaShivaInteriorCavesResearchCaves
+        175,6: RMCAreaShivaInteriorCavesResearchCaves
+        175,5: RMCAreaShivaInteriorCavesResearchCaves
+        175,4: RMCAreaShivaInteriorOob
+        174,6: RMCAreaShivaInteriorCavesResearchCaves
+        174,5: RMCAreaShivaInteriorCavesResearchCaves
+        174,4: RMCAreaShivaInteriorOob
+        173,6: RMCAreaShivaInteriorCavesResearchCaves
+        158,6: RMCAreaShivaInteriorCavesResearchCaves
+        158,5: RMCAreaShivaInteriorCavesResearchCaves
+        158,4: RMCAreaShivaInteriorCavesResearchCaves
+        157,6: RMCAreaShivaInteriorCavesResearchCaves
+        157,5: RMCAreaShivaInteriorCavesResearchCaves
+        157,4: RMCAreaShivaInteriorCavesResearchCaves
+        157,3: RMCAreaShivaInteriorCavesResearchCaves
+        156,6: RMCAreaShivaInteriorCavesResearchCaves
+        156,5: RMCAreaShivaInteriorCavesResearchCaves
+        156,4: RMCAreaShivaInteriorCavesResearchCaves
+        156,3: RMCAreaShivaInteriorCavesResearchCaves
+        155,6: RMCAreaShivaInteriorCavesResearchCaves
+        155,5: RMCAreaShivaInteriorCavesResearchCaves
+        155,4: RMCAreaShivaInteriorCavesResearchCaves
+        155,3: RMCAreaShivaInteriorCavesResearchCaves
+        154,6: RMCAreaShivaInteriorCavesResearchCaves
+        154,5: RMCAreaShivaInteriorCavesResearchCaves
+        154,4: RMCAreaShivaInteriorCavesResearchCaves
+        153,6: RMCAreaShivaInteriorCavesResearchCaves
+        153,5: RMCAreaShivaInteriorCavesResearchCaves
+        153,4: RMCAreaShivaInteriorCavesResearchCaves
+        152,6: RMCAreaShivaInteriorCavesResearchCaves
+        152,5: RMCAreaShivaInteriorCavesResearchCaves
+        152,4: RMCAreaShivaInteriorCavesResearchCaves
+        151,6: RMCAreaShivaInteriorCavesResearchCaves
+        151,5: RMCAreaShivaInteriorCavesResearchCaves
+        151,4: RMCAreaShivaInteriorCavesResearchCaves
+        150,6: RMCAreaShivaInteriorCavesResearchCaves
+        135,24: RMCAreaShivaInteriorCavesResearchCaves
+        135,23: RMCAreaShivaInteriorCavesResearchCaves
+        135,22: RMCAreaShivaInteriorCavesResearchCaves
+        135,21: RMCAreaShivaInteriorCavesResearchCaves
+        135,20: RMCAreaShivaInteriorCavesResearchCaves
+        135,19: RMCAreaShivaInteriorCavesResearchCaves
+        135,18: RMCAreaShivaInteriorCavesResearchCaves
+        134,21: RMCAreaShivaInteriorCavesResearchCaves
+        134,20: RMCAreaShivaInteriorCavesResearchCaves
+        134,18: RMCAreaShivaInteriorCavesResearchCaves
+        134,17: RMCAreaShivaInteriorCavesResearchCaves
+        133,17: RMCAreaShivaInteriorCavesResearchCaves
         92,20: RMCAreaShivaInteriorWarehouseCaves
         92,19: RMCAreaShivaInteriorWarehouseCaves
         92,18: RMCAreaShivaInteriorWarehouseCaves
@@ -5030,7 +5030,7 @@ entities:
         83,14: RMCAreaShivaInteriorWarehouseCaves
         83,13: RMCAreaShivaInteriorWarehouseCaves
         83,12: RMCAreaShivaInteriorWarehouseCaves
-        82,25: RMCAreaShivaInteriorWarehouseCaves
+        82,25: RMCAreaShivaExteriorSouthwestValley
         82,24: RMCAreaShivaInteriorWarehouseCaves
         82,23: RMCAreaShivaInteriorWarehouseCaves
         82,22: RMCAreaShivaInteriorWarehouseCaves
@@ -5043,7 +5043,7 @@ entities:
         82,15: RMCAreaShivaInteriorWarehouseCaves
         82,14: RMCAreaShivaInteriorWarehouseCaves
         82,13: RMCAreaShivaInteriorWarehouseCaves
-        81,25: RMCAreaShivaInteriorWarehouseCaves
+        81,25: RMCAreaShivaExteriorSouthwestValley
         81,24: RMCAreaShivaInteriorWarehouseCaves
         81,23: RMCAreaShivaInteriorWarehouseCaves
         81,22: RMCAreaShivaInteriorWarehouseCaves
@@ -5057,7 +5057,7 @@ entities:
         81,14: RMCAreaShivaInteriorWarehouseCaves
         81,13: RMCAreaShivaInteriorWarehouseCaves
         81,12: RMCAreaShivaInteriorWarehouseCaves
-        80,25: RMCAreaShivaInteriorWarehouseCaves
+        80,25: RMCAreaShivaExteriorSouthwestValley
         80,24: RMCAreaShivaInteriorWarehouseCaves
         80,23: RMCAreaShivaInteriorWarehouseCaves
         80,22: RMCAreaShivaInteriorWarehouseCaves
@@ -5164,7 +5164,7 @@ entities:
         74,11: RMCAreaShivaInteriorWarehouseCaves
         74,10: RMCAreaShivaInteriorWarehouseCaves
         74,9: RMCAreaShivaInteriorWarehouseCaves
-        73,25: RMCAreaShivaInteriorWarehouseCaves
+        73,25: RMCAreaShivaExteriorSouthwestValley
         73,24: RMCAreaShivaInteriorWarehouseCaves
         73,23: RMCAreaShivaInteriorWarehouseCaves
         73,22: RMCAreaShivaInteriorWarehouseCaves
@@ -5182,7 +5182,7 @@ entities:
         73,10: RMCAreaShivaInteriorWarehouseCaves
         73,9: RMCAreaShivaInteriorWarehouseCaves
         73,8: RMCAreaShivaInteriorWarehouseCaves
-        72,25: RMCAreaShivaInteriorWarehouseCaves
+        72,25: RMCAreaShivaExteriorSouthwestValley
         72,24: RMCAreaShivaInteriorWarehouseCaves
         72,23: RMCAreaShivaInteriorWarehouseCaves
         72,22: RMCAreaShivaInteriorWarehouseCaves
@@ -5201,7 +5201,7 @@ entities:
         72,9: RMCAreaShivaInteriorWarehouseCaves
         72,8: RMCAreaShivaInteriorWarehouseCaves
         72,7: RMCAreaShivaInteriorWarehouseCaves
-        71,25: RMCAreaShivaInteriorWarehouseCaves
+        71,25: RMCAreaShivaExteriorSouthwestValley
         71,24: RMCAreaShivaInteriorWarehouseCaves
         71,23: RMCAreaShivaInteriorWarehouseCaves
         71,22: RMCAreaShivaInteriorWarehouseCaves
@@ -17418,214 +17418,214 @@ entities:
         148,129: RMCAreaShivaInteriorColonyMedseceng
         148,128: RMCAreaShivaInteriorColonyMedseceng
         148,127: RMCAreaShivaInteriorColonyMedseceng
-        199,119: RMCAreaShivaInteriorColonyDeck
-        199,118: RMCAreaShivaInteriorColonyDeck
-        199,117: RMCAreaShivaInteriorColonyDeck
-        199,116: RMCAreaShivaInteriorColonyDeck
-        199,115: RMCAreaShivaInteriorColonyDeck
-        199,114: RMCAreaShivaInteriorColonyDeck
-        198,119: RMCAreaShivaInteriorColonyDeck
-        198,118: RMCAreaShivaInteriorColonyDeck
-        198,117: RMCAreaShivaInteriorColonyDeck
-        198,116: RMCAreaShivaInteriorColonyDeck
-        198,115: RMCAreaShivaInteriorColonyDeck
-        198,114: RMCAreaShivaInteriorColonyDeck
-        197,119: RMCAreaShivaInteriorColonyDeck
-        197,118: RMCAreaShivaInteriorColonyDeck
-        197,117: RMCAreaShivaInteriorColonyDeck
-        197,116: RMCAreaShivaInteriorColonyDeck
-        197,115: RMCAreaShivaInteriorColonyDeck
-        197,114: RMCAreaShivaInteriorColonyDeck
-        196,119: RMCAreaShivaInteriorColonyDeck
-        196,118: RMCAreaShivaInteriorColonyDeck
-        196,117: RMCAreaShivaInteriorColonyDeck
-        196,116: RMCAreaShivaInteriorColonyDeck
-        196,115: RMCAreaShivaInteriorColonyDeck
-        196,114: RMCAreaShivaInteriorColonyDeck
-        195,126: RMCAreaShivaInteriorColonyDeck
-        195,125: RMCAreaShivaInteriorColonyDeck
-        195,124: RMCAreaShivaInteriorColonyDeck
-        195,123: RMCAreaShivaInteriorColonyDeck
-        195,122: RMCAreaShivaInteriorColonyDeck
-        195,121: RMCAreaShivaInteriorColonyDeck
-        195,120: RMCAreaShivaInteriorColonyDeck
-        195,119: RMCAreaShivaInteriorColonyDeck
-        195,118: RMCAreaShivaInteriorColonyDeck
-        195,117: RMCAreaShivaInteriorColonyDeck
-        195,116: RMCAreaShivaInteriorColonyDeck
-        195,115: RMCAreaShivaInteriorColonyDeck
-        195,114: RMCAreaShivaInteriorColonyDeck
-        194,126: RMCAreaShivaInteriorColonyDeck
-        194,125: RMCAreaShivaInteriorColonyDeck
-        194,124: RMCAreaShivaInteriorColonyDeck
-        194,123: RMCAreaShivaInteriorColonyDeck
-        194,122: RMCAreaShivaInteriorColonyDeck
-        194,121: RMCAreaShivaInteriorColonyDeck
-        194,120: RMCAreaShivaInteriorColonyDeck
-        194,119: RMCAreaShivaInteriorColonyDeck
-        194,118: RMCAreaShivaInteriorColonyDeck
-        194,117: RMCAreaShivaInteriorColonyDeck
-        194,116: RMCAreaShivaInteriorColonyDeck
-        194,115: RMCAreaShivaInteriorColonyDeck
-        193,126: RMCAreaShivaInteriorColonyDeck
-        193,125: RMCAreaShivaInteriorColonyDeck
-        193,124: RMCAreaShivaInteriorColonyDeck
-        193,123: RMCAreaShivaInteriorColonyDeck
-        193,122: RMCAreaShivaInteriorColonyDeck
-        192,126: RMCAreaShivaInteriorColonyDeck
-        192,125: RMCAreaShivaInteriorColonyDeck
-        192,124: RMCAreaShivaInteriorColonyDeck
-        192,123: RMCAreaShivaInteriorColonyDeck
-        192,122: RMCAreaShivaInteriorColonyDeck
-        191,126: RMCAreaShivaInteriorColonyDeck
-        191,125: RMCAreaShivaInteriorColonyDeck
-        191,124: RMCAreaShivaInteriorColonyDeck
-        191,123: RMCAreaShivaInteriorColonyDeck
-        191,122: RMCAreaShivaInteriorColonyDeck
-        190,126: RMCAreaShivaInteriorColonyDeck
-        190,125: RMCAreaShivaInteriorColonyDeck
-        190,124: RMCAreaShivaInteriorColonyDeck
-        190,123: RMCAreaShivaInteriorColonyDeck
-        190,122: RMCAreaShivaInteriorColonyDeck
-        189,126: RMCAreaShivaInteriorColonyDeck
-        189,125: RMCAreaShivaInteriorColonyDeck
-        189,124: RMCAreaShivaInteriorColonyDeck
-        189,123: RMCAreaShivaInteriorColonyDeck
-        189,122: RMCAreaShivaInteriorColonyDeck
-        188,126: RMCAreaShivaInteriorColonyDeck
-        188,125: RMCAreaShivaInteriorColonyDeck
-        188,124: RMCAreaShivaInteriorColonyDeck
-        188,123: RMCAreaShivaInteriorColonyDeck
-        188,122: RMCAreaShivaInteriorColonyDeck
-        148,126: RMCAreaShivaInteriorColonyDeck
-        148,125: RMCAreaShivaInteriorColonyDeck
-        148,124: RMCAreaShivaInteriorColonyDeck
-        148,123: RMCAreaShivaInteriorColonyDeck
-        148,122: RMCAreaShivaInteriorColonyDeck
-        148,121: RMCAreaShivaInteriorColonyDeck
-        147,126: RMCAreaShivaInteriorColonyDeck
-        147,125: RMCAreaShivaInteriorColonyDeck
-        147,124: RMCAreaShivaInteriorColonyDeck
-        147,123: RMCAreaShivaInteriorColonyDeck
-        147,122: RMCAreaShivaInteriorColonyDeck
-        147,121: RMCAreaShivaInteriorColonyDeck
-        146,126: RMCAreaShivaInteriorColonyDeck
-        146,125: RMCAreaShivaInteriorColonyDeck
-        146,124: RMCAreaShivaInteriorColonyDeck
-        146,123: RMCAreaShivaInteriorColonyDeck
-        146,122: RMCAreaShivaInteriorColonyDeck
-        146,121: RMCAreaShivaInteriorColonyDeck
-        145,126: RMCAreaShivaInteriorColonyDeck
-        145,125: RMCAreaShivaInteriorColonyDeck
-        145,124: RMCAreaShivaInteriorColonyDeck
-        145,123: RMCAreaShivaInteriorColonyDeck
-        145,122: RMCAreaShivaInteriorColonyDeck
-        145,121: RMCAreaShivaInteriorColonyDeck
-        144,126: RMCAreaShivaInteriorColonyDeck
-        144,125: RMCAreaShivaInteriorColonyDeck
-        144,124: RMCAreaShivaInteriorColonyDeck
-        144,123: RMCAreaShivaInteriorColonyDeck
-        144,122: RMCAreaShivaInteriorColonyDeck
-        144,121: RMCAreaShivaInteriorColonyDeck
-        143,123: RMCAreaShivaInteriorColonyDeck
-        143,122: RMCAreaShivaInteriorColonyDeck
-        143,121: RMCAreaShivaInteriorColonyDeck
-        142,123: RMCAreaShivaInteriorColonyDeck
-        142,122: RMCAreaShivaInteriorColonyDeck
-        142,121: RMCAreaShivaInteriorColonyDeck
-        141,123: RMCAreaShivaInteriorColonyDeck
-        141,122: RMCAreaShivaInteriorColonyDeck
-        141,121: RMCAreaShivaInteriorColonyDeck
-        141,120: RMCAreaShivaInteriorColonyDeck
-        140,123: RMCAreaShivaInteriorColonyDeck
-        140,122: RMCAreaShivaInteriorColonyDeck
-        140,121: RMCAreaShivaInteriorColonyDeck
-        140,120: RMCAreaShivaInteriorColonyDeck
-        139,123: RMCAreaShivaInteriorColonyDeck
-        139,122: RMCAreaShivaInteriorColonyDeck
-        139,121: RMCAreaShivaInteriorColonyDeck
-        139,120: RMCAreaShivaInteriorColonyDeck
-        138,123: RMCAreaShivaInteriorColonyDeck
-        138,122: RMCAreaShivaInteriorColonyDeck
-        138,121: RMCAreaShivaInteriorColonyDeck
-        138,120: RMCAreaShivaInteriorColonyDeck
-        137,123: RMCAreaShivaInteriorColonyDeck
-        137,122: RMCAreaShivaInteriorColonyDeck
-        137,121: RMCAreaShivaInteriorColonyDeck
-        137,120: RMCAreaShivaInteriorColonyDeck
-        136,123: RMCAreaShivaInteriorColonyDeck
-        136,122: RMCAreaShivaInteriorColonyDeck
-        136,121: RMCAreaShivaInteriorColonyDeck
-        136,120: RMCAreaShivaInteriorColonyDeck
-        135,123: RMCAreaShivaInteriorColonyDeck
-        135,122: RMCAreaShivaInteriorColonyDeck
-        135,121: RMCAreaShivaInteriorColonyDeck
-        134,123: RMCAreaShivaInteriorColonyDeck
-        134,122: RMCAreaShivaInteriorColonyDeck
-        134,121: RMCAreaShivaInteriorColonyDeck
-        133,123: RMCAreaShivaInteriorColonyDeck
-        133,122: RMCAreaShivaInteriorColonyDeck
-        133,121: RMCAreaShivaInteriorColonyDeck
-        132,128: RMCAreaShivaInteriorColonyDeck
-        132,127: RMCAreaShivaInteriorColonyDeck
-        132,126: RMCAreaShivaInteriorColonyDeck
-        132,125: RMCAreaShivaInteriorColonyDeck
-        132,124: RMCAreaShivaInteriorColonyDeck
-        132,123: RMCAreaShivaInteriorColonyDeck
-        132,122: RMCAreaShivaInteriorColonyDeck
-        132,121: RMCAreaShivaInteriorColonyDeck
-        131,128: RMCAreaShivaInteriorColonyDeck
-        131,127: RMCAreaShivaInteriorColonyDeck
-        131,126: RMCAreaShivaInteriorColonyDeck
-        131,125: RMCAreaShivaInteriorColonyDeck
-        131,124: RMCAreaShivaInteriorColonyDeck
-        131,123: RMCAreaShivaInteriorColonyDeck
-        131,122: RMCAreaShivaInteriorColonyDeck
-        131,121: RMCAreaShivaInteriorColonyDeck
-        130,128: RMCAreaShivaInteriorColonyDeck
-        130,127: RMCAreaShivaInteriorColonyDeck
-        130,126: RMCAreaShivaInteriorColonyDeck
-        130,125: RMCAreaShivaInteriorColonyDeck
-        130,124: RMCAreaShivaInteriorColonyDeck
-        130,123: RMCAreaShivaInteriorColonyDeck
-        130,122: RMCAreaShivaInteriorColonyDeck
-        130,121: RMCAreaShivaInteriorColonyDeck
-        129,128: RMCAreaShivaInteriorColonyDeck
-        129,127: RMCAreaShivaInteriorColonyDeck
-        129,126: RMCAreaShivaInteriorColonyDeck
-        129,125: RMCAreaShivaInteriorColonyDeck
-        128,128: RMCAreaShivaInteriorColonyDeck
-        128,127: RMCAreaShivaInteriorColonyDeck
-        128,126: RMCAreaShivaInteriorColonyDeck
-        128,125: RMCAreaShivaInteriorColonyDeck
-        127,128: RMCAreaShivaInteriorColonyDeck
-        127,127: RMCAreaShivaInteriorColonyDeck
-        127,126: RMCAreaShivaInteriorColonyDeck
-        127,125: RMCAreaShivaInteriorColonyDeck
-        126,128: RMCAreaShivaInteriorColonyDeck
-        126,127: RMCAreaShivaInteriorColonyDeck
-        126,126: RMCAreaShivaInteriorColonyDeck
-        126,125: RMCAreaShivaInteriorColonyDeck
-        125,128: RMCAreaShivaInteriorColonyDeck
-        125,127: RMCAreaShivaInteriorColonyDeck
-        125,126: RMCAreaShivaInteriorColonyDeck
-        125,125: RMCAreaShivaInteriorColonyDeck
-        124,128: RMCAreaShivaInteriorColonyDeck
-        124,127: RMCAreaShivaInteriorColonyDeck
-        124,126: RMCAreaShivaInteriorColonyDeck
-        124,125: RMCAreaShivaInteriorColonyDeck
-        123,128: RMCAreaShivaInteriorColonyDeck
-        123,127: RMCAreaShivaInteriorColonyDeck
-        123,126: RMCAreaShivaInteriorColonyDeck
-        123,125: RMCAreaShivaInteriorColonyDeck
-        122,128: RMCAreaShivaInteriorColonyDeck
-        122,127: RMCAreaShivaInteriorColonyDeck
-        122,126: RMCAreaShivaInteriorColonyDeck
-        122,125: RMCAreaShivaInteriorColonyDeck
-        121,128: RMCAreaShivaInteriorColonyDeck
-        121,127: RMCAreaShivaInteriorColonyDeck
-        121,126: RMCAreaShivaInteriorColonyDeck
-        121,125: RMCAreaShivaInteriorColonyDeck
+        199,119: RMCAreaShivaInteriorColonyMedseceng
+        199,118: RMCAreaShivaInteriorColonyMedseceng
+        199,117: RMCAreaShivaInteriorColonyMedseceng
+        199,116: RMCAreaShivaInteriorColonyMedseceng
+        199,115: RMCAreaShivaInteriorColonyMedseceng
+        199,114: RMCAreaShivaInteriorColonyMedseceng
+        198,119: RMCAreaShivaInteriorColonyMedseceng
+        198,118: RMCAreaShivaInteriorColonyMedseceng
+        198,117: RMCAreaShivaInteriorColonyMedseceng
+        198,116: RMCAreaShivaInteriorColonyMedseceng
+        198,115: RMCAreaShivaInteriorColonyMedseceng
+        198,114: RMCAreaShivaInteriorColonyMedseceng
+        197,119: RMCAreaShivaInteriorColonyMedseceng
+        197,118: RMCAreaShivaInteriorColonyMedseceng
+        197,117: RMCAreaShivaInteriorColonyMedseceng
+        197,116: RMCAreaShivaInteriorColonyMedseceng
+        197,115: RMCAreaShivaInteriorColonyMedseceng
+        197,114: RMCAreaShivaInteriorColonyMedseceng
+        196,119: RMCAreaShivaInteriorColonyMedseceng
+        196,118: RMCAreaShivaInteriorColonyMedseceng
+        196,117: RMCAreaShivaInteriorColonyMedseceng
+        196,116: RMCAreaShivaInteriorColonyMedseceng
+        196,115: RMCAreaShivaInteriorColonyMedseceng
+        196,114: RMCAreaShivaInteriorColonyMedseceng
+        195,126: RMCAreaShivaInteriorColonyMedseceng
+        195,125: RMCAreaShivaInteriorColonyMedseceng
+        195,124: RMCAreaShivaInteriorColonyMedseceng
+        195,123: RMCAreaShivaInteriorColonyMedseceng
+        195,122: RMCAreaShivaInteriorColonyMedseceng
+        195,121: RMCAreaShivaInteriorColonyMedseceng
+        195,120: RMCAreaShivaInteriorColonyMedseceng
+        195,119: RMCAreaShivaInteriorColonyMedseceng
+        195,118: RMCAreaShivaInteriorColonyMedseceng
+        195,117: RMCAreaShivaInteriorColonyMedseceng
+        195,116: RMCAreaShivaInteriorColonyMedseceng
+        195,115: RMCAreaShivaInteriorColonyMedseceng
+        195,114: RMCAreaShivaInteriorColonyMedseceng
+        194,126: RMCAreaShivaInteriorColonyMedseceng
+        194,125: RMCAreaShivaInteriorColonyMedseceng
+        194,124: RMCAreaShivaInteriorColonyMedseceng
+        194,123: RMCAreaShivaInteriorColonyMedseceng
+        194,122: RMCAreaShivaInteriorColonyMedseceng
+        194,121: RMCAreaShivaInteriorColonyMedseceng
+        194,120: RMCAreaShivaInteriorColonyMedseceng
+        194,119: RMCAreaShivaInteriorColonyMedseceng
+        194,118: RMCAreaShivaInteriorColonyMedseceng
+        194,117: RMCAreaShivaInteriorColonyMedseceng
+        194,116: RMCAreaShivaInteriorColonyMedseceng
+        194,115: RMCAreaShivaInteriorColonyMedseceng
+        193,126: RMCAreaShivaInteriorColonyMedseceng
+        193,125: RMCAreaShivaInteriorColonyMedseceng
+        193,124: RMCAreaShivaInteriorColonyMedseceng
+        193,123: RMCAreaShivaInteriorColonyMedseceng
+        193,122: RMCAreaShivaInteriorColonyMedseceng
+        192,126: RMCAreaShivaInteriorColonyMedseceng
+        192,125: RMCAreaShivaInteriorColonyMedseceng
+        192,124: RMCAreaShivaInteriorColonyMedseceng
+        192,123: RMCAreaShivaInteriorColonyMedseceng
+        192,122: RMCAreaShivaInteriorColonyMedseceng
+        191,126: RMCAreaShivaInteriorColonyMedseceng
+        191,125: RMCAreaShivaInteriorColonyMedseceng
+        191,124: RMCAreaShivaInteriorColonyMedseceng
+        191,123: RMCAreaShivaInteriorColonyMedseceng
+        191,122: RMCAreaShivaInteriorColonyMedseceng
+        190,126: RMCAreaShivaInteriorColonyMedseceng
+        190,125: RMCAreaShivaInteriorColonyMedseceng
+        190,124: RMCAreaShivaInteriorColonyMedseceng
+        190,123: RMCAreaShivaInteriorColonyMedseceng
+        190,122: RMCAreaShivaInteriorColonyMedseceng
+        189,126: RMCAreaShivaInteriorColonyMedseceng
+        189,125: RMCAreaShivaInteriorColonyMedseceng
+        189,124: RMCAreaShivaInteriorColonyMedseceng
+        189,123: RMCAreaShivaInteriorColonyMedseceng
+        189,122: RMCAreaShivaInteriorColonyMedseceng
+        188,126: RMCAreaShivaInteriorColonyMedseceng
+        188,125: RMCAreaShivaInteriorColonyMedseceng
+        188,124: RMCAreaShivaInteriorColonyMedseceng
+        188,123: RMCAreaShivaInteriorColonyMedseceng
+        188,122: RMCAreaShivaInteriorColonyMedseceng
+        148,126: RMCAreaShivaInteriorColonyCentral
+        148,125: RMCAreaShivaInteriorColonyCentral
+        148,124: RMCAreaShivaInteriorColonyCentral
+        148,123: RMCAreaShivaInteriorColonyCentral
+        148,122: RMCAreaShivaInteriorColonyCentral
+        148,121: RMCAreaShivaInteriorColonyCentral
+        147,126: RMCAreaShivaInteriorColonyCentral
+        147,125: RMCAreaShivaInteriorColonyCentral
+        147,124: RMCAreaShivaInteriorColonyCentral
+        147,123: RMCAreaShivaInteriorColonyCentral
+        147,122: RMCAreaShivaInteriorColonyCentral
+        147,121: RMCAreaShivaInteriorColonyCentral
+        146,126: RMCAreaShivaInteriorColonyCentral
+        146,125: RMCAreaShivaInteriorColonyCentral
+        146,124: RMCAreaShivaInteriorColonyCentral
+        146,123: RMCAreaShivaInteriorColonyCentral
+        146,122: RMCAreaShivaInteriorColonyCentral
+        146,121: RMCAreaShivaInteriorColonyCentral
+        145,126: RMCAreaShivaInteriorColonyCentral
+        145,125: RMCAreaShivaInteriorColonyCentral
+        145,124: RMCAreaShivaInteriorColonyCentral
+        145,123: RMCAreaShivaInteriorColonyCentral
+        145,122: RMCAreaShivaInteriorColonyCentral
+        145,121: RMCAreaShivaInteriorColonyCentral
+        144,126: RMCAreaShivaInteriorColonyCentral
+        144,125: RMCAreaShivaInteriorColonyCentral
+        144,124: RMCAreaShivaInteriorColonyCentral
+        144,123: RMCAreaShivaInteriorColonyCentral
+        144,122: RMCAreaShivaInteriorColonyCentral
+        144,121: RMCAreaShivaInteriorColonyCentral
+        143,123: RMCAreaShivaInteriorColonyCentral
+        143,122: RMCAreaShivaInteriorColonyCentral
+        143,121: RMCAreaShivaInteriorColonyCentral
+        142,123: RMCAreaShivaInteriorColonyCentral
+        142,122: RMCAreaShivaInteriorColonyCentral
+        142,121: RMCAreaShivaInteriorColonyCentral
+        141,123: RMCAreaShivaInteriorColonyCentral
+        141,122: RMCAreaShivaInteriorColonyCentral
+        141,121: RMCAreaShivaInteriorColonyCentral
+        141,120: RMCAreaShivaInteriorColonyCentral
+        140,123: RMCAreaShivaInteriorColonyCentral
+        140,122: RMCAreaShivaInteriorColonyCentral
+        140,121: RMCAreaShivaInteriorColonyCentral
+        140,120: RMCAreaShivaInteriorColonyCentral
+        139,123: RMCAreaShivaInteriorColonyCentral
+        139,122: RMCAreaShivaInteriorColonyCentral
+        139,121: RMCAreaShivaInteriorColonyCentral
+        139,120: RMCAreaShivaInteriorColonyCentral
+        138,123: RMCAreaShivaInteriorColonyCentral
+        138,122: RMCAreaShivaInteriorColonyCentral
+        138,121: RMCAreaShivaInteriorColonyCentral
+        138,120: RMCAreaShivaInteriorColonyCentral
+        137,123: RMCAreaShivaInteriorColonyCentral
+        137,122: RMCAreaShivaInteriorColonyCentral
+        137,121: RMCAreaShivaInteriorColonyCentral
+        137,120: RMCAreaShivaInteriorColonyCentral
+        136,123: RMCAreaShivaInteriorColonyCentral
+        136,122: RMCAreaShivaInteriorColonyCentral
+        136,121: RMCAreaShivaInteriorColonyCentral
+        136,120: RMCAreaShivaInteriorColonyCentral
+        135,123: RMCAreaShivaInteriorColonyCentral
+        135,122: RMCAreaShivaInteriorColonyCentral
+        135,121: RMCAreaShivaInteriorColonyCentral
+        134,123: RMCAreaShivaInteriorColonyCentral
+        134,122: RMCAreaShivaInteriorColonyCentral
+        134,121: RMCAreaShivaInteriorColonyCentral
+        133,123: RMCAreaShivaInteriorColonyCentral
+        133,122: RMCAreaShivaInteriorColonyCentral
+        133,121: RMCAreaShivaInteriorColonyCentral
+        132,128: RMCAreaShivaInteriorColonyCentral
+        132,127: RMCAreaShivaInteriorColonyCentral
+        132,126: RMCAreaShivaInteriorColonyCentral
+        132,125: RMCAreaShivaInteriorColonyCentral
+        132,124: RMCAreaShivaInteriorColonyCentral
+        132,123: RMCAreaShivaInteriorColonyCentral
+        132,122: RMCAreaShivaInteriorColonyCentral
+        132,121: RMCAreaShivaInteriorColonyCentral
+        131,128: RMCAreaShivaInteriorColonyCentral
+        131,127: RMCAreaShivaInteriorColonyCentral
+        131,126: RMCAreaShivaInteriorColonyCentral
+        131,125: RMCAreaShivaInteriorColonyCentral
+        131,124: RMCAreaShivaInteriorColonyCentral
+        131,123: RMCAreaShivaInteriorColonyCentral
+        131,122: RMCAreaShivaInteriorColonyCentral
+        131,121: RMCAreaShivaInteriorColonyCentral
+        130,128: RMCAreaShivaInteriorColonyCentral
+        130,127: RMCAreaShivaInteriorColonyCentral
+        130,126: RMCAreaShivaInteriorColonyCentral
+        130,125: RMCAreaShivaInteriorColonyCentral
+        130,124: RMCAreaShivaInteriorColonyCentral
+        130,123: RMCAreaShivaInteriorColonyCentral
+        130,122: RMCAreaShivaInteriorColonyCentral
+        130,121: RMCAreaShivaInteriorColonyCentral
+        129,128: RMCAreaShivaInteriorColonyCentral
+        129,127: RMCAreaShivaInteriorColonyCentral
+        129,126: RMCAreaShivaInteriorColonyCentral
+        129,125: RMCAreaShivaInteriorColonyCentral
+        128,128: RMCAreaShivaInteriorColonyCentral
+        128,127: RMCAreaShivaInteriorColonyCentral
+        128,126: RMCAreaShivaInteriorColonyCentral
+        128,125: RMCAreaShivaInteriorColonyCentral
+        127,128: RMCAreaShivaInteriorColonyCentral
+        127,127: RMCAreaShivaInteriorColonyCentral
+        127,126: RMCAreaShivaInteriorColonyCentral
+        127,125: RMCAreaShivaInteriorColonyCentral
+        126,128: RMCAreaShivaInteriorColonyCentral
+        126,127: RMCAreaShivaInteriorColonyCentral
+        126,126: RMCAreaShivaInteriorColonyCentral
+        126,125: RMCAreaShivaInteriorColonyCentral
+        125,128: RMCAreaShivaInteriorColonyCentral
+        125,127: RMCAreaShivaInteriorColonyCentral
+        125,126: RMCAreaShivaInteriorColonyCentral
+        125,125: RMCAreaShivaInteriorColonyCentral
+        124,128: RMCAreaShivaInteriorColonyCentral
+        124,127: RMCAreaShivaInteriorColonyCentral
+        124,126: RMCAreaShivaInteriorColonyCentral
+        124,125: RMCAreaShivaInteriorColonyCentral
+        123,128: RMCAreaShivaInteriorColonyCentral
+        123,127: RMCAreaShivaInteriorColonyCentral
+        123,126: RMCAreaShivaInteriorColonyCentral
+        123,125: RMCAreaShivaInteriorColonyCentral
+        122,128: RMCAreaShivaInteriorColonyCentral
+        122,127: RMCAreaShivaInteriorColonyCentral
+        122,126: RMCAreaShivaInteriorColonyCentral
+        122,125: RMCAreaShivaInteriorColonyCentral
+        121,128: RMCAreaShivaInteriorColonyCentral
+        121,127: RMCAreaShivaInteriorColonyCentral
+        121,126: RMCAreaShivaInteriorColonyCentral
+        121,125: RMCAreaShivaInteriorColonyCentral
         148,149: RMCAreaShivaInteriorColonyCentral
         148,148: RMCAreaShivaInteriorColonyCentral
         148,147: RMCAreaShivaInteriorColonyCentral
@@ -21128,7 +21128,7 @@ entities:
         194,23: RMCAreaShivaInteriorCavesResearchCaves
         194,22: RMCAreaShivaInteriorCavesResearchCaves
         194,21: RMCAreaShivaInteriorCavesResearchCaves
-        193,26: RMCAreaShivaInteriorCavesResearchCaves
+        193,26: RMCAreaShivaInteriorColonyResearchHab
         193,25: RMCAreaShivaInteriorCavesResearchCaves
         193,24: RMCAreaShivaInteriorCavesResearchCaves
         193,23: RMCAreaShivaInteriorCavesResearchCaves
@@ -22393,28 +22393,28 @@ entities:
         204,107: RMCAreaShivaInteriorCavesMedsecengCaves
         204,106: RMCAreaShivaInteriorCavesMedsecengCaves
         204,105: RMCAreaShivaInteriorCavesMedsecengCaves
-        185,66: RMCAreaShivaInteriorCavesCpCamp
-        185,65: RMCAreaShivaInteriorCavesCpCamp
-        185,64: RMCAreaShivaInteriorCavesCpCamp
-        185,63: RMCAreaShivaInteriorCavesCpCamp
-        185,62: RMCAreaShivaInteriorCavesCpCamp
-        184,67: RMCAreaShivaInteriorCavesCpCamp
-        184,66: RMCAreaShivaInteriorCavesCpCamp
-        184,65: RMCAreaShivaInteriorCavesCpCamp
-        184,64: RMCAreaShivaInteriorCavesCpCamp
-        184,63: RMCAreaShivaInteriorCavesCpCamp
-        184,62: RMCAreaShivaInteriorCavesCpCamp
-        183,67: RMCAreaShivaInteriorCavesCpCamp
-        183,66: RMCAreaShivaInteriorCavesCpCamp
-        183,65: RMCAreaShivaInteriorCavesCpCamp
-        183,64: RMCAreaShivaInteriorCavesCpCamp
-        183,63: RMCAreaShivaInteriorCavesCpCamp
-        183,62: RMCAreaShivaInteriorCavesCpCamp
-        182,66: RMCAreaShivaInteriorCavesCpCamp
-        182,65: RMCAreaShivaInteriorCavesCpCamp
-        182,64: RMCAreaShivaInteriorCavesCpCamp
-        182,63: RMCAreaShivaInteriorCavesCpCamp
-        182,62: RMCAreaShivaInteriorCavesCpCamp
+        185,66: RMCAreaShivaExteriorValley
+        185,65: RMCAreaShivaExteriorValley
+        185,64: RMCAreaShivaExteriorValley
+        185,63: RMCAreaShivaExteriorValley
+        185,62: RMCAreaShivaExteriorValley
+        184,67: RMCAreaShivaExteriorValley
+        184,66: RMCAreaShivaExteriorValley
+        184,65: RMCAreaShivaExteriorValley
+        184,64: RMCAreaShivaExteriorValley
+        184,63: RMCAreaShivaExteriorValley
+        184,62: RMCAreaShivaExteriorValley
+        183,67: RMCAreaShivaExteriorValley
+        183,66: RMCAreaShivaExteriorValley
+        183,65: RMCAreaShivaExteriorValley
+        183,64: RMCAreaShivaExteriorValley
+        183,63: RMCAreaShivaExteriorValley
+        183,62: RMCAreaShivaExteriorValley
+        182,66: RMCAreaShivaExteriorValley
+        182,65: RMCAreaShivaExteriorValley
+        182,64: RMCAreaShivaExteriorValley
+        182,63: RMCAreaShivaExteriorValley
+        182,62: RMCAreaShivaExteriorValley
         89,69: RMCAreaShivaInteriorCavesCpCamp
         89,68: RMCAreaShivaInteriorCavesCpCamp
         89,67: RMCAreaShivaInteriorCavesCpCamp
@@ -25709,136 +25709,136 @@ entities:
         49,151: RMCAreaShivaInteriorAuxPower
         49,150: RMCAreaShivaInteriorAuxPower
         49,149: RMCAreaShivaInteriorAuxPower
-        167,67: RMCAreaShivaInteriorAerodrome
-        167,66: RMCAreaShivaInteriorAerodrome
-        167,65: RMCAreaShivaInteriorAerodrome
-        167,64: RMCAreaShivaInteriorAerodrome
-        167,63: RMCAreaShivaInteriorAerodrome
-        167,62: RMCAreaShivaInteriorAerodrome
-        167,61: RMCAreaShivaInteriorAerodrome
-        167,60: RMCAreaShivaInteriorAerodrome
-        167,59: RMCAreaShivaInteriorAerodrome
-        167,58: RMCAreaShivaInteriorAerodrome
-        167,57: RMCAreaShivaInteriorAerodrome
-        166,67: RMCAreaShivaInteriorAerodrome
-        166,66: RMCAreaShivaInteriorAerodrome
-        166,65: RMCAreaShivaInteriorAerodrome
-        166,64: RMCAreaShivaInteriorAerodrome
-        166,63: RMCAreaShivaInteriorAerodrome
-        166,62: RMCAreaShivaInteriorAerodrome
-        166,61: RMCAreaShivaInteriorAerodrome
-        166,60: RMCAreaShivaInteriorAerodrome
-        166,59: RMCAreaShivaInteriorAerodrome
-        166,58: RMCAreaShivaInteriorAerodrome
-        166,57: RMCAreaShivaInteriorAerodrome
-        165,67: RMCAreaShivaInteriorAerodrome
-        165,66: RMCAreaShivaInteriorAerodrome
-        165,65: RMCAreaShivaInteriorAerodrome
-        165,64: RMCAreaShivaInteriorAerodrome
-        165,63: RMCAreaShivaInteriorAerodrome
-        165,62: RMCAreaShivaInteriorAerodrome
-        165,61: RMCAreaShivaInteriorAerodrome
-        165,60: RMCAreaShivaInteriorAerodrome
-        165,59: RMCAreaShivaInteriorAerodrome
-        165,58: RMCAreaShivaInteriorAerodrome
-        165,57: RMCAreaShivaInteriorAerodrome
-        164,66: RMCAreaShivaInteriorAerodrome
-        164,65: RMCAreaShivaInteriorAerodrome
-        164,64: RMCAreaShivaInteriorAerodrome
-        164,63: RMCAreaShivaInteriorAerodrome
-        164,62: RMCAreaShivaInteriorAerodrome
-        164,61: RMCAreaShivaInteriorAerodrome
-        164,60: RMCAreaShivaInteriorAerodrome
-        164,59: RMCAreaShivaInteriorAerodrome
-        164,58: RMCAreaShivaInteriorAerodrome
-        164,57: RMCAreaShivaInteriorAerodrome
-        163,66: RMCAreaShivaInteriorAerodrome
-        163,65: RMCAreaShivaInteriorAerodrome
-        163,64: RMCAreaShivaInteriorAerodrome
-        163,63: RMCAreaShivaInteriorAerodrome
-        163,62: RMCAreaShivaInteriorAerodrome
-        163,61: RMCAreaShivaInteriorAerodrome
-        163,60: RMCAreaShivaInteriorAerodrome
-        163,59: RMCAreaShivaInteriorAerodrome
-        163,58: RMCAreaShivaInteriorAerodrome
-        163,57: RMCAreaShivaInteriorAerodrome
-        162,66: RMCAreaShivaInteriorAerodrome
-        162,65: RMCAreaShivaInteriorAerodrome
-        162,64: RMCAreaShivaInteriorAerodrome
-        162,63: RMCAreaShivaInteriorAerodrome
-        162,62: RMCAreaShivaInteriorAerodrome
-        162,61: RMCAreaShivaInteriorAerodrome
-        162,60: RMCAreaShivaInteriorAerodrome
-        162,59: RMCAreaShivaInteriorAerodrome
-        162,58: RMCAreaShivaInteriorAerodrome
-        162,57: RMCAreaShivaInteriorAerodrome
-        161,67: RMCAreaShivaInteriorAerodrome
-        161,66: RMCAreaShivaInteriorAerodrome
-        161,65: RMCAreaShivaInteriorAerodrome
-        161,64: RMCAreaShivaInteriorAerodrome
-        161,63: RMCAreaShivaInteriorAerodrome
-        161,62: RMCAreaShivaInteriorAerodrome
-        161,61: RMCAreaShivaInteriorAerodrome
-        161,60: RMCAreaShivaInteriorAerodrome
-        161,59: RMCAreaShivaInteriorAerodrome
-        161,58: RMCAreaShivaInteriorAerodrome
-        161,57: RMCAreaShivaInteriorAerodrome
-        160,67: RMCAreaShivaInteriorAerodrome
-        160,66: RMCAreaShivaInteriorAerodrome
-        160,65: RMCAreaShivaInteriorAerodrome
-        160,64: RMCAreaShivaInteriorAerodrome
-        160,63: RMCAreaShivaInteriorAerodrome
-        160,62: RMCAreaShivaInteriorAerodrome
-        160,61: RMCAreaShivaInteriorAerodrome
-        160,60: RMCAreaShivaInteriorAerodrome
-        160,59: RMCAreaShivaInteriorAerodrome
-        160,58: RMCAreaShivaInteriorAerodrome
-        160,57: RMCAreaShivaInteriorAerodrome
-        159,67: RMCAreaShivaInteriorAerodrome
-        159,66: RMCAreaShivaInteriorAerodrome
-        159,65: RMCAreaShivaInteriorAerodrome
-        159,64: RMCAreaShivaInteriorAerodrome
-        159,63: RMCAreaShivaInteriorAerodrome
-        159,62: RMCAreaShivaInteriorAerodrome
-        159,61: RMCAreaShivaInteriorAerodrome
-        159,60: RMCAreaShivaInteriorAerodrome
-        159,59: RMCAreaShivaInteriorAerodrome
-        159,58: RMCAreaShivaInteriorAerodrome
-        159,57: RMCAreaShivaInteriorAerodrome
-        158,67: RMCAreaShivaInteriorAerodrome
-        158,66: RMCAreaShivaInteriorAerodrome
-        158,65: RMCAreaShivaInteriorAerodrome
-        158,64: RMCAreaShivaInteriorAerodrome
-        158,63: RMCAreaShivaInteriorAerodrome
-        158,62: RMCAreaShivaInteriorAerodrome
-        158,61: RMCAreaShivaInteriorAerodrome
-        158,60: RMCAreaShivaInteriorAerodrome
-        158,59: RMCAreaShivaInteriorAerodrome
-        158,58: RMCAreaShivaInteriorAerodrome
-        158,57: RMCAreaShivaInteriorAerodrome
-        157,67: RMCAreaShivaInteriorAerodrome
-        157,66: RMCAreaShivaInteriorAerodrome
-        157,65: RMCAreaShivaInteriorAerodrome
-        157,64: RMCAreaShivaInteriorAerodrome
-        157,63: RMCAreaShivaInteriorAerodrome
-        157,62: RMCAreaShivaInteriorAerodrome
-        157,61: RMCAreaShivaInteriorAerodrome
-        157,60: RMCAreaShivaInteriorAerodrome
-        157,59: RMCAreaShivaInteriorAerodrome
-        157,58: RMCAreaShivaInteriorAerodrome
-        157,57: RMCAreaShivaInteriorAerodrome
-        156,60: RMCAreaShivaInteriorAerodrome
-        156,59: RMCAreaShivaInteriorAerodrome
-        156,58: RMCAreaShivaInteriorAerodrome
-        156,57: RMCAreaShivaInteriorAerodrome
-        155,60: RMCAreaShivaInteriorAerodrome
-        155,59: RMCAreaShivaInteriorAerodrome
-        155,58: RMCAreaShivaInteriorAerodrome
-        155,57: RMCAreaShivaInteriorAerodrome
-        154,60: RMCAreaShivaInteriorAerodrome
-        154,59: RMCAreaShivaInteriorAerodrome
-        154,58: RMCAreaShivaInteriorAerodrome
-        154,57: RMCAreaShivaInteriorAerodrome
+        167,67: RMCAreaShivaExteriorJunkyardCpBar
+        167,66: RMCAreaShivaExteriorJunkyardCpBar
+        167,65: RMCAreaShivaExteriorJunkyardCpBar
+        167,64: RMCAreaShivaExteriorJunkyardCpBar
+        167,63: RMCAreaShivaExteriorJunkyardCpBar
+        167,62: RMCAreaShivaExteriorJunkyardCpBar
+        167,61: RMCAreaShivaExteriorJunkyardCpBar
+        167,60: RMCAreaShivaExteriorJunkyardCpBar
+        167,59: RMCAreaShivaExteriorJunkyardCpBar
+        167,58: RMCAreaShivaExteriorJunkyardCpBar
+        167,57: RMCAreaShivaExteriorJunkyardCpBar
+        166,67: RMCAreaShivaExteriorJunkyardCpBar
+        166,66: RMCAreaShivaExteriorJunkyardCpBar
+        166,65: RMCAreaShivaExteriorJunkyardCpBar
+        166,64: RMCAreaShivaExteriorJunkyardCpBar
+        166,63: RMCAreaShivaExteriorJunkyardCpBar
+        166,62: RMCAreaShivaExteriorJunkyardCpBar
+        166,61: RMCAreaShivaExteriorJunkyardCpBar
+        166,60: RMCAreaShivaExteriorJunkyardCpBar
+        166,59: RMCAreaShivaExteriorJunkyardCpBar
+        166,58: RMCAreaShivaExteriorJunkyardCpBar
+        166,57: RMCAreaShivaExteriorJunkyardCpBar
+        165,67: RMCAreaShivaExteriorJunkyardCpBar
+        165,66: RMCAreaShivaExteriorJunkyardCpBar
+        165,65: RMCAreaShivaExteriorJunkyardCpBar
+        165,64: RMCAreaShivaExteriorJunkyardCpBar
+        165,63: RMCAreaShivaExteriorJunkyardCpBar
+        165,62: RMCAreaShivaExteriorJunkyardCpBar
+        165,61: RMCAreaShivaExteriorJunkyardCpBar
+        165,60: RMCAreaShivaExteriorJunkyardCpBar
+        165,59: RMCAreaShivaExteriorJunkyardCpBar
+        165,58: RMCAreaShivaExteriorJunkyardCpBar
+        165,57: RMCAreaShivaExteriorJunkyardCpBar
+        164,66: RMCAreaShivaExteriorJunkyardCpBar
+        164,65: RMCAreaShivaExteriorJunkyardCpBar
+        164,64: RMCAreaShivaExteriorJunkyardCpBar
+        164,63: RMCAreaShivaExteriorJunkyardCpBar
+        164,62: RMCAreaShivaExteriorJunkyardCpBar
+        164,61: RMCAreaShivaExteriorJunkyardCpBar
+        164,60: RMCAreaShivaExteriorJunkyardCpBar
+        164,59: RMCAreaShivaExteriorJunkyardCpBar
+        164,58: RMCAreaShivaExteriorJunkyardCpBar
+        164,57: RMCAreaShivaExteriorJunkyardCpBar
+        163,66: RMCAreaShivaExteriorJunkyardCpBar
+        163,65: RMCAreaShivaExteriorJunkyardCpBar
+        163,64: RMCAreaShivaExteriorJunkyardCpBar
+        163,63: RMCAreaShivaExteriorJunkyardCpBar
+        163,62: RMCAreaShivaExteriorJunkyardCpBar
+        163,61: RMCAreaShivaExteriorJunkyardCpBar
+        163,60: RMCAreaShivaExteriorJunkyardCpBar
+        163,59: RMCAreaShivaExteriorJunkyardCpBar
+        163,58: RMCAreaShivaExteriorJunkyardCpBar
+        163,57: RMCAreaShivaExteriorJunkyardCpBar
+        162,66: RMCAreaShivaExteriorJunkyardCpBar
+        162,65: RMCAreaShivaExteriorJunkyardCpBar
+        162,64: RMCAreaShivaExteriorJunkyardCpBar
+        162,63: RMCAreaShivaExteriorJunkyardCpBar
+        162,62: RMCAreaShivaExteriorJunkyardCpBar
+        162,61: RMCAreaShivaExteriorJunkyardCpBar
+        162,60: RMCAreaShivaExteriorJunkyardCpBar
+        162,59: RMCAreaShivaExteriorJunkyardCpBar
+        162,58: RMCAreaShivaExteriorJunkyardCpBar
+        162,57: RMCAreaShivaExteriorJunkyardCpBar
+        161,67: RMCAreaShivaExteriorJunkyardCpBar
+        161,66: RMCAreaShivaExteriorJunkyardCpBar
+        161,65: RMCAreaShivaExteriorJunkyardCpBar
+        161,64: RMCAreaShivaExteriorJunkyardCpBar
+        161,63: RMCAreaShivaExteriorJunkyardCpBar
+        161,62: RMCAreaShivaExteriorJunkyardCpBar
+        161,61: RMCAreaShivaExteriorJunkyardCpBar
+        161,60: RMCAreaShivaExteriorJunkyardCpBar
+        161,59: RMCAreaShivaExteriorJunkyardCpBar
+        161,58: RMCAreaShivaExteriorJunkyardCpBar
+        161,57: RMCAreaShivaExteriorJunkyardCpBar
+        160,67: RMCAreaShivaExteriorJunkyardCpBar
+        160,66: RMCAreaShivaExteriorJunkyardCpBar
+        160,65: RMCAreaShivaExteriorJunkyardCpBar
+        160,64: RMCAreaShivaExteriorJunkyardCpBar
+        160,63: RMCAreaShivaExteriorJunkyardCpBar
+        160,62: RMCAreaShivaExteriorJunkyardCpBar
+        160,61: RMCAreaShivaExteriorJunkyardCpBar
+        160,60: RMCAreaShivaExteriorJunkyardCpBar
+        160,59: RMCAreaShivaExteriorJunkyardCpBar
+        160,58: RMCAreaShivaExteriorJunkyardCpBar
+        160,57: RMCAreaShivaExteriorJunkyardCpBar
+        159,67: RMCAreaShivaExteriorJunkyardCpBar
+        159,66: RMCAreaShivaExteriorJunkyardCpBar
+        159,65: RMCAreaShivaExteriorJunkyardCpBar
+        159,64: RMCAreaShivaExteriorJunkyardCpBar
+        159,63: RMCAreaShivaExteriorJunkyardCpBar
+        159,62: RMCAreaShivaExteriorJunkyardCpBar
+        159,61: RMCAreaShivaExteriorJunkyardCpBar
+        159,60: RMCAreaShivaExteriorJunkyardCpBar
+        159,59: RMCAreaShivaExteriorJunkyardCpBar
+        159,58: RMCAreaShivaExteriorJunkyardCpBar
+        159,57: RMCAreaShivaExteriorJunkyardCpBar
+        158,67: RMCAreaShivaExteriorJunkyardCpBar
+        158,66: RMCAreaShivaExteriorJunkyardCpBar
+        158,65: RMCAreaShivaExteriorJunkyardCpBar
+        158,64: RMCAreaShivaExteriorJunkyardCpBar
+        158,63: RMCAreaShivaExteriorJunkyardCpBar
+        158,62: RMCAreaShivaExteriorJunkyardCpBar
+        158,61: RMCAreaShivaExteriorJunkyardCpBar
+        158,60: RMCAreaShivaExteriorJunkyardCpBar
+        158,59: RMCAreaShivaExteriorJunkyardCpBar
+        158,58: RMCAreaShivaExteriorJunkyardCpBar
+        158,57: RMCAreaShivaExteriorJunkyardCpBar
+        157,67: RMCAreaShivaExteriorJunkyardCpBar
+        157,66: RMCAreaShivaExteriorJunkyardCpBar
+        157,65: RMCAreaShivaExteriorJunkyardCpBar
+        157,64: RMCAreaShivaExteriorJunkyardCpBar
+        157,63: RMCAreaShivaExteriorJunkyardCpBar
+        157,62: RMCAreaShivaExteriorJunkyardCpBar
+        157,61: RMCAreaShivaExteriorJunkyardCpBar
+        157,60: RMCAreaShivaExteriorJunkyardCpBar
+        157,59: RMCAreaShivaExteriorJunkyardCpBar
+        157,58: RMCAreaShivaExteriorJunkyardCpBar
+        157,57: RMCAreaShivaExteriorJunkyardCpBar
+        156,60: RMCAreaShivaExteriorJunkyardCpBar
+        156,59: RMCAreaShivaExteriorJunkyardCpBar
+        156,58: RMCAreaShivaExteriorJunkyardCpBar
+        156,57: RMCAreaShivaExteriorJunkyardCpBar
+        155,60: RMCAreaShivaExteriorJunkyardCpBar
+        155,59: RMCAreaShivaExteriorJunkyardCpBar
+        155,58: RMCAreaShivaExteriorJunkyardCpBar
+        155,57: RMCAreaShivaExteriorJunkyardCpBar
+        154,60: RMCAreaShivaExteriorJunkyardCpBar
+        154,59: RMCAreaShivaExteriorJunkyardCpBar
+        154,58: RMCAreaShivaExteriorJunkyardCpBar
+        154,57: RMCAreaShivaExteriorJunkyardCpBar
         76,51: RMCAreaShivaInteriorAerodrome
         76,50: RMCAreaShivaInteriorAerodrome
         76,49: RMCAreaShivaInteriorAerodrome
@@ -29404,20 +29404,20 @@ entities:
         7,151: RMCAreaShivaExteriorLz2Fortress
         7,150: RMCAreaShivaExteriorLz2Fortress
         7,149: RMCAreaShivaExteriorLz2Fortress
-        39,36: RMCAreaShivaExteriorLz1Valley
-        39,35: RMCAreaShivaExteriorLz1Valley
-        39,34: RMCAreaShivaExteriorLz1Valley
-        39,33: RMCAreaShivaExteriorLz1Valley
-        39,32: RMCAreaShivaExteriorLz1Valley
-        39,31: RMCAreaShivaExteriorLz1Valley
-        39,30: RMCAreaShivaExteriorLz1Valley
-        39,29: RMCAreaShivaExteriorLz1Valley
-        39,28: RMCAreaShivaExteriorLz1Valley
-        39,27: RMCAreaShivaExteriorLz1Valley
-        39,26: RMCAreaShivaExteriorLz1Valley
-        39,25: RMCAreaShivaExteriorLz1Valley
-        39,24: RMCAreaShivaExteriorLz1Valley
-        39,23: RMCAreaShivaExteriorLz1Valley
+        39,36: RMCAreaShivaExteriorSouthwestValley
+        39,35: RMCAreaShivaExteriorSouthwestValley
+        39,34: RMCAreaShivaExteriorSouthwestValley
+        39,33: RMCAreaShivaExteriorSouthwestValley
+        39,32: RMCAreaShivaExteriorSouthwestValley
+        39,31: RMCAreaShivaExteriorSouthwestValley
+        39,30: RMCAreaShivaExteriorSouthwestValley
+        39,29: RMCAreaShivaExteriorSouthwestValley
+        39,28: RMCAreaShivaExteriorSouthwestValley
+        39,27: RMCAreaShivaExteriorSouthwestValley
+        39,26: RMCAreaShivaExteriorSouthwestValley
+        39,25: RMCAreaShivaExteriorSouthwestValley
+        39,24: RMCAreaShivaExteriorSouthwestValley
+        39,23: RMCAreaShivaExteriorSouthwestValley
         39,22: RMCAreaShivaExteriorLz1Valley
         38,36: RMCAreaShivaExteriorLz1Valley
         38,35: RMCAreaShivaExteriorLz1Valley
@@ -32788,13 +32788,13 @@ entities:
         89,38: RMCAreaShivaExteriorJunkyard
         89,37: RMCAreaShivaExteriorJunkyard
         89,36: RMCAreaShivaExteriorJunkyard
-        89,35: RMCAreaShivaExteriorJunkyard
-        89,34: RMCAreaShivaExteriorJunkyard
-        89,33: RMCAreaShivaExteriorJunkyard
-        89,32: RMCAreaShivaExteriorJunkyard
-        89,31: RMCAreaShivaExteriorJunkyard
-        89,30: RMCAreaShivaExteriorJunkyard
-        89,29: RMCAreaShivaExteriorJunkyard
+        89,35: RMCAreaShivaExteriorSouthwestValley
+        89,34: RMCAreaShivaExteriorSouthwestValley
+        89,33: RMCAreaShivaExteriorSouthwestValley
+        89,32: RMCAreaShivaExteriorSouthwestValley
+        89,31: RMCAreaShivaExteriorSouthwestValley
+        89,30: RMCAreaShivaExteriorSouthwestValley
+        89,29: RMCAreaShivaExteriorSouthwestValley
         89,28: RMCAreaShivaExteriorJunkyard
         89,27: RMCAreaShivaExteriorJunkyard
         89,26: RMCAreaShivaExteriorJunkyard
@@ -32827,16 +32827,16 @@ entities:
         88,40: RMCAreaShivaExteriorJunkyard
         88,39: RMCAreaShivaExteriorJunkyard
         88,38: RMCAreaShivaExteriorJunkyard
-        88,37: RMCAreaShivaExteriorJunkyard
-        88,36: RMCAreaShivaExteriorJunkyard
-        88,35: RMCAreaShivaExteriorJunkyard
-        88,34: RMCAreaShivaExteriorJunkyard
-        88,33: RMCAreaShivaExteriorJunkyard
-        88,32: RMCAreaShivaExteriorJunkyard
-        88,31: RMCAreaShivaExteriorJunkyard
-        88,30: RMCAreaShivaExteriorJunkyard
-        88,29: RMCAreaShivaExteriorJunkyard
-        88,28: RMCAreaShivaExteriorJunkyard
+        88,37: RMCAreaShivaExteriorSouthwestValley
+        88,36: RMCAreaShivaExteriorSouthwestValley
+        88,35: RMCAreaShivaExteriorSouthwestValley
+        88,34: RMCAreaShivaExteriorSouthwestValley
+        88,33: RMCAreaShivaExteriorSouthwestValley
+        88,32: RMCAreaShivaExteriorSouthwestValley
+        88,31: RMCAreaShivaExteriorSouthwestValley
+        88,30: RMCAreaShivaExteriorSouthwestValley
+        88,29: RMCAreaShivaExteriorSouthwestValley
+        88,28: RMCAreaShivaExteriorSouthwestValley
         88,27: RMCAreaShivaExteriorJunkyard
         88,26: RMCAreaShivaExteriorJunkyard
         88,25: RMCAreaShivaExteriorJunkyard
@@ -32867,18 +32867,18 @@ entities:
         87,41: RMCAreaShivaExteriorJunkyard
         87,40: RMCAreaShivaExteriorJunkyard
         87,39: RMCAreaShivaExteriorJunkyard
-        87,38: RMCAreaShivaExteriorJunkyard
-        87,37: RMCAreaShivaExteriorJunkyard
-        87,36: RMCAreaShivaExteriorJunkyard
-        87,35: RMCAreaShivaExteriorJunkyard
-        87,34: RMCAreaShivaExteriorJunkyard
-        87,33: RMCAreaShivaExteriorJunkyard
-        87,32: RMCAreaShivaExteriorJunkyard
-        87,31: RMCAreaShivaExteriorJunkyard
-        87,30: RMCAreaShivaExteriorJunkyard
-        87,29: RMCAreaShivaExteriorJunkyard
-        87,28: RMCAreaShivaExteriorJunkyard
-        87,27: RMCAreaShivaExteriorJunkyard
+        87,38: RMCAreaShivaExteriorSouthwestValley
+        87,37: RMCAreaShivaExteriorSouthwestValley
+        87,36: RMCAreaShivaExteriorSouthwestValley
+        87,35: RMCAreaShivaExteriorSouthwestValley
+        87,34: RMCAreaShivaExteriorSouthwestValley
+        87,33: RMCAreaShivaExteriorSouthwestValley
+        87,32: RMCAreaShivaExteriorSouthwestValley
+        87,31: RMCAreaShivaExteriorSouthwestValley
+        87,30: RMCAreaShivaExteriorSouthwestValley
+        87,29: RMCAreaShivaExteriorSouthwestValley
+        87,28: RMCAreaShivaExteriorSouthwestValley
+        87,27: RMCAreaShivaExteriorSouthwestValley
         87,26: RMCAreaShivaExteriorJunkyard
         87,25: RMCAreaShivaExteriorJunkyard
         87,24: RMCAreaShivaExteriorJunkyard
@@ -32898,21 +32898,21 @@ entities:
         86,42: RMCAreaShivaExteriorJunkyard
         86,41: RMCAreaShivaExteriorJunkyard
         86,40: RMCAreaShivaExteriorJunkyard
-        86,39: RMCAreaShivaExteriorJunkyard
-        86,38: RMCAreaShivaExteriorJunkyard
-        86,37: RMCAreaShivaExteriorJunkyard
-        86,36: RMCAreaShivaExteriorJunkyard
-        86,35: RMCAreaShivaExteriorJunkyard
-        86,34: RMCAreaShivaExteriorJunkyard
-        86,33: RMCAreaShivaExteriorJunkyard
-        86,32: RMCAreaShivaExteriorJunkyard
-        86,31: RMCAreaShivaExteriorJunkyard
-        86,30: RMCAreaShivaExteriorJunkyard
-        86,29: RMCAreaShivaExteriorJunkyard
-        86,28: RMCAreaShivaExteriorJunkyard
-        86,27: RMCAreaShivaExteriorJunkyard
-        86,26: RMCAreaShivaExteriorJunkyard
-        86,25: RMCAreaShivaExteriorJunkyard
+        86,39: RMCAreaShivaExteriorSouthwestValley
+        86,38: RMCAreaShivaExteriorSouthwestValley
+        86,37: RMCAreaShivaExteriorSouthwestValley
+        86,36: RMCAreaShivaExteriorSouthwestValley
+        86,35: RMCAreaShivaExteriorSouthwestValley
+        86,34: RMCAreaShivaExteriorSouthwestValley
+        86,33: RMCAreaShivaExteriorSouthwestValley
+        86,32: RMCAreaShivaExteriorSouthwestValley
+        86,31: RMCAreaShivaExteriorSouthwestValley
+        86,30: RMCAreaShivaExteriorSouthwestValley
+        86,29: RMCAreaShivaExteriorSouthwestValley
+        86,28: RMCAreaShivaExteriorSouthwestValley
+        86,27: RMCAreaShivaExteriorSouthwestValley
+        86,26: RMCAreaShivaExteriorSouthwestValley
+        86,25: RMCAreaShivaExteriorSouthwestValley
         85,52: RMCAreaShivaExteriorJunkyard
         85,51: RMCAreaShivaExteriorJunkyard
         85,50: RMCAreaShivaExteriorJunkyard
@@ -32925,22 +32925,22 @@ entities:
         85,43: RMCAreaShivaExteriorJunkyard
         85,42: RMCAreaShivaExteriorJunkyard
         85,41: RMCAreaShivaExteriorJunkyard
-        85,40: RMCAreaShivaExteriorJunkyard
-        85,39: RMCAreaShivaExteriorJunkyard
-        85,38: RMCAreaShivaExteriorJunkyard
-        85,37: RMCAreaShivaExteriorJunkyard
-        85,36: RMCAreaShivaExteriorJunkyard
-        85,35: RMCAreaShivaExteriorJunkyard
-        85,34: RMCAreaShivaExteriorJunkyard
-        85,33: RMCAreaShivaExteriorJunkyard
-        85,32: RMCAreaShivaExteriorJunkyard
-        85,31: RMCAreaShivaExteriorJunkyard
-        85,30: RMCAreaShivaExteriorJunkyard
-        85,29: RMCAreaShivaExteriorJunkyard
-        85,28: RMCAreaShivaExteriorJunkyard
-        85,27: RMCAreaShivaExteriorJunkyard
-        85,26: RMCAreaShivaExteriorJunkyard
-        85,25: RMCAreaShivaExteriorJunkyard
+        85,40: RMCAreaShivaExteriorSouthwestValley
+        85,39: RMCAreaShivaExteriorSouthwestValley
+        85,38: RMCAreaShivaExteriorSouthwestValley
+        85,37: RMCAreaShivaExteriorSouthwestValley
+        85,36: RMCAreaShivaExteriorSouthwestValley
+        85,35: RMCAreaShivaExteriorSouthwestValley
+        85,34: RMCAreaShivaExteriorSouthwestValley
+        85,33: RMCAreaShivaExteriorSouthwestValley
+        85,32: RMCAreaShivaExteriorSouthwestValley
+        85,31: RMCAreaShivaExteriorSouthwestValley
+        85,30: RMCAreaShivaExteriorSouthwestValley
+        85,29: RMCAreaShivaExteriorSouthwestValley
+        85,28: RMCAreaShivaExteriorSouthwestValley
+        85,27: RMCAreaShivaExteriorSouthwestValley
+        85,26: RMCAreaShivaExteriorSouthwestValley
+        85,25: RMCAreaShivaExteriorSouthwestValley
         84,52: RMCAreaShivaExteriorJunkyard
         84,51: RMCAreaShivaExteriorJunkyard
         84,50: RMCAreaShivaExteriorJunkyard
@@ -32952,23 +32952,23 @@ entities:
         84,44: RMCAreaShivaExteriorJunkyard
         84,43: RMCAreaShivaExteriorJunkyard
         84,42: RMCAreaShivaExteriorJunkyard
-        84,41: RMCAreaShivaExteriorJunkyard
-        84,40: RMCAreaShivaExteriorJunkyard
-        84,39: RMCAreaShivaExteriorJunkyard
-        84,38: RMCAreaShivaExteriorJunkyard
-        84,37: RMCAreaShivaExteriorJunkyard
-        84,36: RMCAreaShivaExteriorJunkyard
-        84,35: RMCAreaShivaExteriorJunkyard
-        84,34: RMCAreaShivaExteriorJunkyard
-        84,33: RMCAreaShivaExteriorJunkyard
-        84,32: RMCAreaShivaExteriorJunkyard
-        84,31: RMCAreaShivaExteriorJunkyard
-        84,30: RMCAreaShivaExteriorJunkyard
-        84,29: RMCAreaShivaExteriorJunkyard
-        84,28: RMCAreaShivaExteriorJunkyard
-        84,27: RMCAreaShivaExteriorJunkyard
-        84,26: RMCAreaShivaExteriorJunkyard
-        84,25: RMCAreaShivaExteriorJunkyard
+        84,41: RMCAreaShivaExteriorSouthwestValley
+        84,40: RMCAreaShivaExteriorSouthwestValley
+        84,39: RMCAreaShivaExteriorSouthwestValley
+        84,38: RMCAreaShivaExteriorSouthwestValley
+        84,37: RMCAreaShivaExteriorSouthwestValley
+        84,36: RMCAreaShivaExteriorSouthwestValley
+        84,35: RMCAreaShivaExteriorSouthwestValley
+        84,34: RMCAreaShivaExteriorSouthwestValley
+        84,33: RMCAreaShivaExteriorSouthwestValley
+        84,32: RMCAreaShivaExteriorSouthwestValley
+        84,31: RMCAreaShivaExteriorSouthwestValley
+        84,30: RMCAreaShivaExteriorSouthwestValley
+        84,29: RMCAreaShivaExteriorSouthwestValley
+        84,28: RMCAreaShivaExteriorSouthwestValley
+        84,27: RMCAreaShivaExteriorSouthwestValley
+        84,26: RMCAreaShivaExteriorSouthwestValley
+        84,25: RMCAreaShivaExteriorSouthwestValley
         83,52: RMCAreaShivaExteriorJunkyard
         83,51: RMCAreaShivaExteriorJunkyard
         83,50: RMCAreaShivaExteriorJunkyard
@@ -32978,573 +32978,573 @@ entities:
         83,46: RMCAreaShivaExteriorJunkyard
         83,45: RMCAreaShivaExteriorJunkyard
         83,44: RMCAreaShivaExteriorJunkyard
-        83,43: RMCAreaShivaExteriorJunkyard
-        83,42: RMCAreaShivaExteriorJunkyard
-        83,41: RMCAreaShivaExteriorJunkyard
-        83,40: RMCAreaShivaExteriorJunkyard
-        83,39: RMCAreaShivaExteriorJunkyard
-        83,38: RMCAreaShivaExteriorJunkyard
-        83,37: RMCAreaShivaExteriorJunkyard
-        83,36: RMCAreaShivaExteriorJunkyard
-        83,35: RMCAreaShivaExteriorJunkyard
-        83,34: RMCAreaShivaExteriorJunkyard
-        83,33: RMCAreaShivaExteriorJunkyard
-        83,32: RMCAreaShivaExteriorJunkyard
-        83,31: RMCAreaShivaExteriorJunkyard
-        83,30: RMCAreaShivaExteriorJunkyard
-        83,29: RMCAreaShivaExteriorJunkyard
-        83,28: RMCAreaShivaExteriorJunkyard
-        83,27: RMCAreaShivaExteriorJunkyard
-        83,26: RMCAreaShivaExteriorJunkyard
-        83,25: RMCAreaShivaExteriorJunkyard
-        82,46: RMCAreaShivaExteriorJunkyard
-        82,45: RMCAreaShivaExteriorJunkyard
-        82,44: RMCAreaShivaExteriorJunkyard
-        82,43: RMCAreaShivaExteriorJunkyard
-        82,42: RMCAreaShivaExteriorJunkyard
-        82,41: RMCAreaShivaExteriorJunkyard
-        82,40: RMCAreaShivaExteriorJunkyard
-        82,39: RMCAreaShivaExteriorJunkyard
-        82,38: RMCAreaShivaExteriorJunkyard
-        82,37: RMCAreaShivaExteriorJunkyard
-        82,36: RMCAreaShivaExteriorJunkyard
-        82,35: RMCAreaShivaExteriorJunkyard
-        82,34: RMCAreaShivaExteriorJunkyard
-        82,33: RMCAreaShivaExteriorJunkyard
-        82,32: RMCAreaShivaExteriorJunkyard
-        82,31: RMCAreaShivaExteriorJunkyard
-        82,30: RMCAreaShivaExteriorJunkyard
-        82,29: RMCAreaShivaExteriorJunkyard
-        82,28: RMCAreaShivaExteriorJunkyard
-        82,27: RMCAreaShivaExteriorJunkyard
-        82,26: RMCAreaShivaExteriorJunkyard
-        81,46: RMCAreaShivaExteriorJunkyard
-        81,45: RMCAreaShivaExteriorJunkyard
-        81,44: RMCAreaShivaExteriorJunkyard
-        81,43: RMCAreaShivaExteriorJunkyard
-        81,42: RMCAreaShivaExteriorJunkyard
-        81,41: RMCAreaShivaExteriorJunkyard
-        81,40: RMCAreaShivaExteriorJunkyard
-        81,39: RMCAreaShivaExteriorJunkyard
-        81,38: RMCAreaShivaExteriorJunkyard
-        81,37: RMCAreaShivaExteriorJunkyard
-        81,36: RMCAreaShivaExteriorJunkyard
-        81,35: RMCAreaShivaExteriorJunkyard
-        81,34: RMCAreaShivaExteriorJunkyard
-        81,33: RMCAreaShivaExteriorJunkyard
-        81,32: RMCAreaShivaExteriorJunkyard
-        81,31: RMCAreaShivaExteriorJunkyard
-        81,30: RMCAreaShivaExteriorJunkyard
-        81,29: RMCAreaShivaExteriorJunkyard
-        81,28: RMCAreaShivaExteriorJunkyard
-        81,27: RMCAreaShivaExteriorJunkyard
-        81,26: RMCAreaShivaExteriorJunkyard
-        80,46: RMCAreaShivaExteriorJunkyard
-        80,45: RMCAreaShivaExteriorJunkyard
-        80,44: RMCAreaShivaExteriorJunkyard
-        80,43: RMCAreaShivaExteriorJunkyard
-        80,42: RMCAreaShivaExteriorJunkyard
-        80,41: RMCAreaShivaExteriorJunkyard
-        80,40: RMCAreaShivaExteriorJunkyard
-        80,39: RMCAreaShivaExteriorJunkyard
-        80,38: RMCAreaShivaExteriorJunkyard
-        80,37: RMCAreaShivaExteriorJunkyard
-        80,36: RMCAreaShivaExteriorJunkyard
-        80,35: RMCAreaShivaExteriorJunkyard
-        80,34: RMCAreaShivaExteriorJunkyard
-        80,33: RMCAreaShivaExteriorJunkyard
-        80,32: RMCAreaShivaExteriorJunkyard
-        80,31: RMCAreaShivaExteriorJunkyard
-        80,30: RMCAreaShivaExteriorJunkyard
-        80,29: RMCAreaShivaExteriorJunkyard
-        80,28: RMCAreaShivaExteriorJunkyard
-        80,27: RMCAreaShivaExteriorJunkyard
-        80,26: RMCAreaShivaExteriorJunkyard
-        79,46: RMCAreaShivaExteriorJunkyard
-        79,45: RMCAreaShivaExteriorJunkyard
-        79,44: RMCAreaShivaExteriorJunkyard
-        79,43: RMCAreaShivaExteriorJunkyard
-        79,42: RMCAreaShivaExteriorJunkyard
-        79,41: RMCAreaShivaExteriorJunkyard
-        79,40: RMCAreaShivaExteriorJunkyard
-        79,39: RMCAreaShivaExteriorJunkyard
-        79,38: RMCAreaShivaExteriorJunkyard
-        79,37: RMCAreaShivaExteriorJunkyard
-        79,36: RMCAreaShivaExteriorJunkyard
-        79,35: RMCAreaShivaExteriorJunkyard
-        79,34: RMCAreaShivaExteriorJunkyard
-        79,33: RMCAreaShivaExteriorJunkyard
-        79,32: RMCAreaShivaExteriorJunkyard
-        79,31: RMCAreaShivaExteriorJunkyard
-        79,30: RMCAreaShivaExteriorJunkyard
-        79,29: RMCAreaShivaExteriorJunkyard
-        79,28: RMCAreaShivaExteriorJunkyard
-        79,27: RMCAreaShivaExteriorJunkyard
-        79,26: RMCAreaShivaExteriorJunkyard
-        78,46: RMCAreaShivaExteriorJunkyard
-        78,45: RMCAreaShivaExteriorJunkyard
-        78,44: RMCAreaShivaExteriorJunkyard
-        78,43: RMCAreaShivaExteriorJunkyard
-        78,42: RMCAreaShivaExteriorJunkyard
-        78,41: RMCAreaShivaExteriorJunkyard
-        78,40: RMCAreaShivaExteriorJunkyard
-        78,39: RMCAreaShivaExteriorJunkyard
-        78,38: RMCAreaShivaExteriorJunkyard
-        78,37: RMCAreaShivaExteriorJunkyard
-        78,36: RMCAreaShivaExteriorJunkyard
-        78,35: RMCAreaShivaExteriorJunkyard
-        78,34: RMCAreaShivaExteriorJunkyard
-        78,33: RMCAreaShivaExteriorJunkyard
-        78,32: RMCAreaShivaExteriorJunkyard
-        78,31: RMCAreaShivaExteriorJunkyard
-        78,30: RMCAreaShivaExteriorJunkyard
-        78,29: RMCAreaShivaExteriorJunkyard
-        78,28: RMCAreaShivaExteriorJunkyard
-        78,27: RMCAreaShivaExteriorJunkyard
-        78,26: RMCAreaShivaExteriorJunkyard
-        77,46: RMCAreaShivaExteriorJunkyard
-        77,45: RMCAreaShivaExteriorJunkyard
-        77,44: RMCAreaShivaExteriorJunkyard
-        77,43: RMCAreaShivaExteriorJunkyard
-        77,42: RMCAreaShivaExteriorJunkyard
-        77,41: RMCAreaShivaExteriorJunkyard
-        77,40: RMCAreaShivaExteriorJunkyard
-        77,39: RMCAreaShivaExteriorJunkyard
-        77,38: RMCAreaShivaExteriorJunkyard
-        77,37: RMCAreaShivaExteriorJunkyard
-        77,36: RMCAreaShivaExteriorJunkyard
-        77,35: RMCAreaShivaExteriorJunkyard
-        77,34: RMCAreaShivaExteriorJunkyard
-        77,33: RMCAreaShivaExteriorJunkyard
-        77,32: RMCAreaShivaExteriorJunkyard
-        77,31: RMCAreaShivaExteriorJunkyard
-        77,30: RMCAreaShivaExteriorJunkyard
-        77,29: RMCAreaShivaExteriorJunkyard
-        77,28: RMCAreaShivaExteriorJunkyard
-        77,27: RMCAreaShivaExteriorJunkyard
-        77,26: RMCAreaShivaExteriorJunkyard
-        77,25: RMCAreaShivaExteriorJunkyard
-        76,46: RMCAreaShivaExteriorJunkyard
-        76,45: RMCAreaShivaExteriorJunkyard
-        76,44: RMCAreaShivaExteriorJunkyard
-        76,43: RMCAreaShivaExteriorJunkyard
-        76,42: RMCAreaShivaExteriorJunkyard
-        76,41: RMCAreaShivaExteriorJunkyard
-        76,40: RMCAreaShivaExteriorJunkyard
-        76,39: RMCAreaShivaExteriorJunkyard
-        76,38: RMCAreaShivaExteriorJunkyard
-        76,37: RMCAreaShivaExteriorJunkyard
-        76,36: RMCAreaShivaExteriorJunkyard
-        76,35: RMCAreaShivaExteriorJunkyard
-        76,34: RMCAreaShivaExteriorJunkyard
-        76,33: RMCAreaShivaExteriorJunkyard
-        76,32: RMCAreaShivaExteriorJunkyard
-        76,31: RMCAreaShivaExteriorJunkyard
-        76,30: RMCAreaShivaExteriorJunkyard
-        76,29: RMCAreaShivaExteriorJunkyard
-        76,28: RMCAreaShivaExteriorJunkyard
-        76,27: RMCAreaShivaExteriorJunkyard
-        76,26: RMCAreaShivaExteriorJunkyard
-        76,25: RMCAreaShivaExteriorJunkyard
-        75,37: RMCAreaShivaExteriorJunkyard
-        75,36: RMCAreaShivaExteriorJunkyard
-        75,35: RMCAreaShivaExteriorJunkyard
-        75,34: RMCAreaShivaExteriorJunkyard
-        75,33: RMCAreaShivaExteriorJunkyard
-        75,32: RMCAreaShivaExteriorJunkyard
-        75,31: RMCAreaShivaExteriorJunkyard
-        75,30: RMCAreaShivaExteriorJunkyard
-        75,29: RMCAreaShivaExteriorJunkyard
-        75,28: RMCAreaShivaExteriorJunkyard
-        75,27: RMCAreaShivaExteriorJunkyard
-        75,26: RMCAreaShivaExteriorJunkyard
-        74,37: RMCAreaShivaExteriorJunkyard
-        74,36: RMCAreaShivaExteriorJunkyard
-        74,35: RMCAreaShivaExteriorJunkyard
-        74,34: RMCAreaShivaExteriorJunkyard
-        74,33: RMCAreaShivaExteriorJunkyard
-        74,32: RMCAreaShivaExteriorJunkyard
-        74,31: RMCAreaShivaExteriorJunkyard
-        74,30: RMCAreaShivaExteriorJunkyard
-        74,29: RMCAreaShivaExteriorJunkyard
-        74,28: RMCAreaShivaExteriorJunkyard
-        74,27: RMCAreaShivaExteriorJunkyard
-        74,26: RMCAreaShivaExteriorJunkyard
-        73,37: RMCAreaShivaExteriorJunkyard
-        73,36: RMCAreaShivaExteriorJunkyard
-        73,35: RMCAreaShivaExteriorJunkyard
-        73,34: RMCAreaShivaExteriorJunkyard
-        73,33: RMCAreaShivaExteriorJunkyard
-        73,32: RMCAreaShivaExteriorJunkyard
-        73,31: RMCAreaShivaExteriorJunkyard
-        73,30: RMCAreaShivaExteriorJunkyard
-        73,29: RMCAreaShivaExteriorJunkyard
-        73,28: RMCAreaShivaExteriorJunkyard
-        73,27: RMCAreaShivaExteriorJunkyard
-        73,26: RMCAreaShivaExteriorJunkyard
-        72,37: RMCAreaShivaExteriorJunkyard
-        72,36: RMCAreaShivaExteriorJunkyard
-        72,35: RMCAreaShivaExteriorJunkyard
-        72,34: RMCAreaShivaExteriorJunkyard
-        72,33: RMCAreaShivaExteriorJunkyard
-        72,32: RMCAreaShivaExteriorJunkyard
-        72,31: RMCAreaShivaExteriorJunkyard
-        72,30: RMCAreaShivaExteriorJunkyard
-        72,29: RMCAreaShivaExteriorJunkyard
-        72,28: RMCAreaShivaExteriorJunkyard
-        72,27: RMCAreaShivaExteriorJunkyard
-        72,26: RMCAreaShivaExteriorJunkyard
-        71,37: RMCAreaShivaExteriorJunkyard
-        71,36: RMCAreaShivaExteriorJunkyard
-        71,35: RMCAreaShivaExteriorJunkyard
-        71,34: RMCAreaShivaExteriorJunkyard
-        71,33: RMCAreaShivaExteriorJunkyard
-        71,32: RMCAreaShivaExteriorJunkyard
-        71,31: RMCAreaShivaExteriorJunkyard
-        71,30: RMCAreaShivaExteriorJunkyard
-        71,29: RMCAreaShivaExteriorJunkyard
-        71,28: RMCAreaShivaExteriorJunkyard
-        71,27: RMCAreaShivaExteriorJunkyard
-        71,26: RMCAreaShivaExteriorJunkyard
-        70,37: RMCAreaShivaExteriorJunkyard
-        70,36: RMCAreaShivaExteriorJunkyard
-        70,35: RMCAreaShivaExteriorJunkyard
-        70,34: RMCAreaShivaExteriorJunkyard
-        70,33: RMCAreaShivaExteriorJunkyard
-        70,32: RMCAreaShivaExteriorJunkyard
-        70,31: RMCAreaShivaExteriorJunkyard
-        70,30: RMCAreaShivaExteriorJunkyard
-        70,29: RMCAreaShivaExteriorJunkyard
-        70,28: RMCAreaShivaExteriorJunkyard
-        70,27: RMCAreaShivaExteriorJunkyard
-        69,37: RMCAreaShivaExteriorJunkyard
-        69,36: RMCAreaShivaExteriorJunkyard
-        69,35: RMCAreaShivaExteriorJunkyard
-        69,34: RMCAreaShivaExteriorJunkyard
-        69,33: RMCAreaShivaExteriorJunkyard
-        69,32: RMCAreaShivaExteriorJunkyard
-        69,31: RMCAreaShivaExteriorJunkyard
-        69,30: RMCAreaShivaExteriorJunkyard
-        69,29: RMCAreaShivaExteriorJunkyard
-        69,28: RMCAreaShivaExteriorJunkyard
-        68,37: RMCAreaShivaExteriorJunkyard
-        68,36: RMCAreaShivaExteriorJunkyard
-        68,35: RMCAreaShivaExteriorJunkyard
-        68,34: RMCAreaShivaExteriorJunkyard
-        68,33: RMCAreaShivaExteriorJunkyard
-        68,32: RMCAreaShivaExteriorJunkyard
-        68,31: RMCAreaShivaExteriorJunkyard
-        68,30: RMCAreaShivaExteriorJunkyard
-        68,29: RMCAreaShivaExteriorJunkyard
-        68,28: RMCAreaShivaExteriorJunkyard
-        67,37: RMCAreaShivaExteriorJunkyard
-        67,36: RMCAreaShivaExteriorJunkyard
-        67,35: RMCAreaShivaExteriorJunkyard
-        67,34: RMCAreaShivaExteriorJunkyard
-        67,33: RMCAreaShivaExteriorJunkyard
-        67,32: RMCAreaShivaExteriorJunkyard
-        67,31: RMCAreaShivaExteriorJunkyard
-        67,30: RMCAreaShivaExteriorJunkyard
-        67,29: RMCAreaShivaExteriorJunkyard
-        67,28: RMCAreaShivaExteriorJunkyard
-        66,37: RMCAreaShivaExteriorJunkyard
-        66,36: RMCAreaShivaExteriorJunkyard
-        66,35: RMCAreaShivaExteriorJunkyard
-        66,34: RMCAreaShivaExteriorJunkyard
-        66,33: RMCAreaShivaExteriorJunkyard
-        66,32: RMCAreaShivaExteriorJunkyard
-        66,31: RMCAreaShivaExteriorJunkyard
-        66,30: RMCAreaShivaExteriorJunkyard
-        66,29: RMCAreaShivaExteriorJunkyard
-        66,28: RMCAreaShivaExteriorJunkyard
-        65,37: RMCAreaShivaExteriorJunkyard
-        65,36: RMCAreaShivaExteriorJunkyard
-        65,35: RMCAreaShivaExteriorJunkyard
-        65,34: RMCAreaShivaExteriorJunkyard
-        65,33: RMCAreaShivaExteriorJunkyard
-        65,32: RMCAreaShivaExteriorJunkyard
-        65,31: RMCAreaShivaExteriorJunkyard
-        65,30: RMCAreaShivaExteriorJunkyard
-        65,29: RMCAreaShivaExteriorJunkyard
-        65,28: RMCAreaShivaExteriorJunkyard
-        64,37: RMCAreaShivaExteriorJunkyard
-        64,36: RMCAreaShivaExteriorJunkyard
-        64,35: RMCAreaShivaExteriorJunkyard
-        64,34: RMCAreaShivaExteriorJunkyard
-        64,33: RMCAreaShivaExteriorJunkyard
-        64,32: RMCAreaShivaExteriorJunkyard
-        64,31: RMCAreaShivaExteriorJunkyard
-        64,30: RMCAreaShivaExteriorJunkyard
-        64,29: RMCAreaShivaExteriorJunkyard
-        64,28: RMCAreaShivaExteriorJunkyard
-        63,37: RMCAreaShivaExteriorJunkyard
-        63,36: RMCAreaShivaExteriorJunkyard
-        63,35: RMCAreaShivaExteriorJunkyard
-        63,34: RMCAreaShivaExteriorJunkyard
-        63,33: RMCAreaShivaExteriorJunkyard
-        63,32: RMCAreaShivaExteriorJunkyard
-        63,31: RMCAreaShivaExteriorJunkyard
-        63,30: RMCAreaShivaExteriorJunkyard
-        63,29: RMCAreaShivaExteriorJunkyard
-        63,28: RMCAreaShivaExteriorJunkyard
-        62,33: RMCAreaShivaExteriorJunkyard
-        62,32: RMCAreaShivaExteriorJunkyard
-        62,31: RMCAreaShivaExteriorJunkyard
-        62,30: RMCAreaShivaExteriorJunkyard
-        62,29: RMCAreaShivaExteriorJunkyard
-        62,28: RMCAreaShivaExteriorJunkyard
-        62,27: RMCAreaShivaExteriorJunkyard
-        61,33: RMCAreaShivaExteriorJunkyard
-        61,32: RMCAreaShivaExteriorJunkyard
-        61,31: RMCAreaShivaExteriorJunkyard
-        61,30: RMCAreaShivaExteriorJunkyard
-        61,29: RMCAreaShivaExteriorJunkyard
-        61,28: RMCAreaShivaExteriorJunkyard
-        61,27: RMCAreaShivaExteriorJunkyard
-        60,33: RMCAreaShivaExteriorJunkyard
-        60,32: RMCAreaShivaExteriorJunkyard
-        60,31: RMCAreaShivaExteriorJunkyard
-        60,30: RMCAreaShivaExteriorJunkyard
-        60,29: RMCAreaShivaExteriorJunkyard
-        60,28: RMCAreaShivaExteriorJunkyard
-        60,27: RMCAreaShivaExteriorJunkyard
-        59,33: RMCAreaShivaExteriorJunkyard
-        59,32: RMCAreaShivaExteriorJunkyard
-        59,31: RMCAreaShivaExteriorJunkyard
-        59,30: RMCAreaShivaExteriorJunkyard
-        59,29: RMCAreaShivaExteriorJunkyard
-        59,28: RMCAreaShivaExteriorJunkyard
-        59,27: RMCAreaShivaExteriorJunkyard
-        59,26: RMCAreaShivaExteriorJunkyard
-        58,33: RMCAreaShivaExteriorJunkyard
-        58,32: RMCAreaShivaExteriorJunkyard
-        58,31: RMCAreaShivaExteriorJunkyard
-        58,30: RMCAreaShivaExteriorJunkyard
-        58,29: RMCAreaShivaExteriorJunkyard
-        58,28: RMCAreaShivaExteriorJunkyard
-        58,27: RMCAreaShivaExteriorJunkyard
-        58,26: RMCAreaShivaExteriorJunkyard
-        57,33: RMCAreaShivaExteriorJunkyard
-        57,32: RMCAreaShivaExteriorJunkyard
-        57,31: RMCAreaShivaExteriorJunkyard
-        57,30: RMCAreaShivaExteriorJunkyard
-        57,29: RMCAreaShivaExteriorJunkyard
-        57,28: RMCAreaShivaExteriorJunkyard
-        57,27: RMCAreaShivaExteriorJunkyard
-        57,26: RMCAreaShivaExteriorJunkyard
-        56,33: RMCAreaShivaExteriorJunkyard
-        56,32: RMCAreaShivaExteriorJunkyard
-        56,31: RMCAreaShivaExteriorJunkyard
-        56,30: RMCAreaShivaExteriorJunkyard
-        56,29: RMCAreaShivaExteriorJunkyard
-        56,28: RMCAreaShivaExteriorJunkyard
-        56,27: RMCAreaShivaExteriorJunkyard
-        55,33: RMCAreaShivaExteriorJunkyard
-        55,32: RMCAreaShivaExteriorJunkyard
-        55,31: RMCAreaShivaExteriorJunkyard
-        55,30: RMCAreaShivaExteriorJunkyard
-        55,29: RMCAreaShivaExteriorJunkyard
-        55,28: RMCAreaShivaExteriorJunkyard
-        55,27: RMCAreaShivaExteriorJunkyard
-        54,33: RMCAreaShivaExteriorJunkyard
-        54,32: RMCAreaShivaExteriorJunkyard
-        54,31: RMCAreaShivaExteriorJunkyard
-        54,30: RMCAreaShivaExteriorJunkyard
-        54,29: RMCAreaShivaExteriorJunkyard
-        54,28: RMCAreaShivaExteriorJunkyard
-        54,27: RMCAreaShivaExteriorJunkyard
-        53,33: RMCAreaShivaExteriorJunkyard
-        53,32: RMCAreaShivaExteriorJunkyard
-        53,31: RMCAreaShivaExteriorJunkyard
-        53,30: RMCAreaShivaExteriorJunkyard
-        53,29: RMCAreaShivaExteriorJunkyard
-        53,28: RMCAreaShivaExteriorJunkyard
-        53,27: RMCAreaShivaExteriorJunkyard
-        52,33: RMCAreaShivaExteriorJunkyard
-        52,32: RMCAreaShivaExteriorJunkyard
-        52,31: RMCAreaShivaExteriorJunkyard
-        52,30: RMCAreaShivaExteriorJunkyard
-        52,29: RMCAreaShivaExteriorJunkyard
-        52,28: RMCAreaShivaExteriorJunkyard
-        52,27: RMCAreaShivaExteriorJunkyard
-        51,33: RMCAreaShivaExteriorJunkyard
-        51,32: RMCAreaShivaExteriorJunkyard
-        51,31: RMCAreaShivaExteriorJunkyard
-        51,30: RMCAreaShivaExteriorJunkyard
-        51,29: RMCAreaShivaExteriorJunkyard
-        51,28: RMCAreaShivaExteriorJunkyard
-        51,27: RMCAreaShivaExteriorJunkyard
-        50,37: RMCAreaShivaExteriorJunkyard
-        50,36: RMCAreaShivaExteriorJunkyard
-        50,35: RMCAreaShivaExteriorJunkyard
-        50,34: RMCAreaShivaExteriorJunkyard
-        50,33: RMCAreaShivaExteriorJunkyard
-        50,32: RMCAreaShivaExteriorJunkyard
-        50,31: RMCAreaShivaExteriorJunkyard
-        50,30: RMCAreaShivaExteriorJunkyard
-        50,29: RMCAreaShivaExteriorJunkyard
-        50,28: RMCAreaShivaExteriorJunkyard
-        50,27: RMCAreaShivaExteriorJunkyard
-        49,37: RMCAreaShivaExteriorJunkyard
-        49,36: RMCAreaShivaExteriorJunkyard
-        49,35: RMCAreaShivaExteriorJunkyard
-        49,34: RMCAreaShivaExteriorJunkyard
-        49,33: RMCAreaShivaExteriorJunkyard
-        49,32: RMCAreaShivaExteriorJunkyard
-        49,31: RMCAreaShivaExteriorJunkyard
-        49,30: RMCAreaShivaExteriorJunkyard
-        49,29: RMCAreaShivaExteriorJunkyard
-        49,28: RMCAreaShivaExteriorJunkyard
-        49,27: RMCAreaShivaExteriorJunkyard
-        49,26: RMCAreaShivaExteriorJunkyard
-        49,25: RMCAreaShivaExteriorJunkyard
-        49,24: RMCAreaShivaExteriorJunkyard
-        49,23: RMCAreaShivaExteriorJunkyard
-        49,22: RMCAreaShivaExteriorJunkyard
-        48,37: RMCAreaShivaExteriorJunkyard
-        48,36: RMCAreaShivaExteriorJunkyard
-        48,35: RMCAreaShivaExteriorJunkyard
-        48,34: RMCAreaShivaExteriorJunkyard
-        48,33: RMCAreaShivaExteriorJunkyard
-        48,32: RMCAreaShivaExteriorJunkyard
-        48,31: RMCAreaShivaExteriorJunkyard
-        48,30: RMCAreaShivaExteriorJunkyard
-        48,29: RMCAreaShivaExteriorJunkyard
-        48,28: RMCAreaShivaExteriorJunkyard
-        48,27: RMCAreaShivaExteriorJunkyard
-        48,26: RMCAreaShivaExteriorJunkyard
-        48,25: RMCAreaShivaExteriorJunkyard
-        48,24: RMCAreaShivaExteriorJunkyard
-        48,23: RMCAreaShivaExteriorJunkyard
-        48,22: RMCAreaShivaExteriorJunkyard
-        47,37: RMCAreaShivaExteriorJunkyard
-        47,36: RMCAreaShivaExteriorJunkyard
-        47,35: RMCAreaShivaExteriorJunkyard
-        47,34: RMCAreaShivaExteriorJunkyard
-        47,33: RMCAreaShivaExteriorJunkyard
-        47,32: RMCAreaShivaExteriorJunkyard
-        47,31: RMCAreaShivaExteriorJunkyard
-        47,30: RMCAreaShivaExteriorJunkyard
-        47,29: RMCAreaShivaExteriorJunkyard
-        47,28: RMCAreaShivaExteriorJunkyard
-        47,27: RMCAreaShivaExteriorJunkyard
-        47,26: RMCAreaShivaExteriorJunkyard
-        47,25: RMCAreaShivaExteriorJunkyard
-        47,24: RMCAreaShivaExteriorJunkyard
-        47,23: RMCAreaShivaExteriorJunkyard
-        47,22: RMCAreaShivaExteriorJunkyard
-        46,37: RMCAreaShivaExteriorJunkyard
-        46,36: RMCAreaShivaExteriorJunkyard
-        46,35: RMCAreaShivaExteriorJunkyard
-        46,34: RMCAreaShivaExteriorJunkyard
-        46,33: RMCAreaShivaExteriorJunkyard
-        46,32: RMCAreaShivaExteriorJunkyard
-        46,31: RMCAreaShivaExteriorJunkyard
-        46,30: RMCAreaShivaExteriorJunkyard
-        46,29: RMCAreaShivaExteriorJunkyard
-        46,28: RMCAreaShivaExteriorJunkyard
-        46,27: RMCAreaShivaExteriorJunkyard
-        46,26: RMCAreaShivaExteriorJunkyard
-        46,25: RMCAreaShivaExteriorJunkyard
-        46,24: RMCAreaShivaExteriorJunkyard
-        46,23: RMCAreaShivaExteriorJunkyard
-        46,22: RMCAreaShivaExteriorJunkyard
-        45,37: RMCAreaShivaExteriorJunkyard
-        45,36: RMCAreaShivaExteriorJunkyard
-        45,35: RMCAreaShivaExteriorJunkyard
-        45,34: RMCAreaShivaExteriorJunkyard
-        45,33: RMCAreaShivaExteriorJunkyard
-        45,32: RMCAreaShivaExteriorJunkyard
-        45,31: RMCAreaShivaExteriorJunkyard
-        45,30: RMCAreaShivaExteriorJunkyard
-        45,29: RMCAreaShivaExteriorJunkyard
-        45,28: RMCAreaShivaExteriorJunkyard
-        45,27: RMCAreaShivaExteriorJunkyard
-        45,26: RMCAreaShivaExteriorJunkyard
-        45,25: RMCAreaShivaExteriorJunkyard
-        45,24: RMCAreaShivaExteriorJunkyard
-        45,23: RMCAreaShivaExteriorJunkyard
-        45,22: RMCAreaShivaExteriorJunkyard
-        44,37: RMCAreaShivaExteriorJunkyard
-        44,36: RMCAreaShivaExteriorJunkyard
-        44,35: RMCAreaShivaExteriorJunkyard
-        44,34: RMCAreaShivaExteriorJunkyard
-        44,33: RMCAreaShivaExteriorJunkyard
-        44,32: RMCAreaShivaExteriorJunkyard
-        44,31: RMCAreaShivaExteriorJunkyard
-        44,30: RMCAreaShivaExteriorJunkyard
-        44,29: RMCAreaShivaExteriorJunkyard
-        44,28: RMCAreaShivaExteriorJunkyard
-        44,27: RMCAreaShivaExteriorJunkyard
-        44,26: RMCAreaShivaExteriorJunkyard
-        44,25: RMCAreaShivaExteriorJunkyard
-        44,24: RMCAreaShivaExteriorJunkyard
-        44,23: RMCAreaShivaExteriorJunkyard
-        44,22: RMCAreaShivaExteriorJunkyard
-        43,37: RMCAreaShivaExteriorJunkyard
-        43,36: RMCAreaShivaExteriorJunkyard
-        43,35: RMCAreaShivaExteriorJunkyard
-        43,34: RMCAreaShivaExteriorJunkyard
-        43,33: RMCAreaShivaExteriorJunkyard
-        43,32: RMCAreaShivaExteriorJunkyard
-        43,31: RMCAreaShivaExteriorJunkyard
-        43,30: RMCAreaShivaExteriorJunkyard
-        43,29: RMCAreaShivaExteriorJunkyard
-        43,28: RMCAreaShivaExteriorJunkyard
-        43,27: RMCAreaShivaExteriorJunkyard
-        43,26: RMCAreaShivaExteriorJunkyard
-        43,25: RMCAreaShivaExteriorJunkyard
-        43,24: RMCAreaShivaExteriorJunkyard
-        43,23: RMCAreaShivaExteriorJunkyard
-        43,22: RMCAreaShivaExteriorJunkyard
-        42,37: RMCAreaShivaExteriorJunkyard
-        42,36: RMCAreaShivaExteriorJunkyard
-        42,35: RMCAreaShivaExteriorJunkyard
-        42,34: RMCAreaShivaExteriorJunkyard
-        42,33: RMCAreaShivaExteriorJunkyard
-        42,32: RMCAreaShivaExteriorJunkyard
-        42,31: RMCAreaShivaExteriorJunkyard
-        42,30: RMCAreaShivaExteriorJunkyard
-        42,29: RMCAreaShivaExteriorJunkyard
-        42,28: RMCAreaShivaExteriorJunkyard
-        42,27: RMCAreaShivaExteriorJunkyard
-        42,26: RMCAreaShivaExteriorJunkyard
-        42,25: RMCAreaShivaExteriorJunkyard
-        42,24: RMCAreaShivaExteriorJunkyard
-        42,23: RMCAreaShivaExteriorJunkyard
-        42,22: RMCAreaShivaExteriorJunkyard
-        41,37: RMCAreaShivaExteriorJunkyard
-        41,36: RMCAreaShivaExteriorJunkyard
-        41,35: RMCAreaShivaExteriorJunkyard
-        41,34: RMCAreaShivaExteriorJunkyard
-        41,33: RMCAreaShivaExteriorJunkyard
-        41,32: RMCAreaShivaExteriorJunkyard
-        41,31: RMCAreaShivaExteriorJunkyard
-        41,30: RMCAreaShivaExteriorJunkyard
-        41,29: RMCAreaShivaExteriorJunkyard
-        41,28: RMCAreaShivaExteriorJunkyard
-        41,27: RMCAreaShivaExteriorJunkyard
-        41,26: RMCAreaShivaExteriorJunkyard
-        41,25: RMCAreaShivaExteriorJunkyard
-        41,24: RMCAreaShivaExteriorJunkyard
-        41,23: RMCAreaShivaExteriorJunkyard
-        41,22: RMCAreaShivaExteriorJunkyard
-        40,37: RMCAreaShivaExteriorJunkyard
-        40,36: RMCAreaShivaExteriorJunkyard
-        40,35: RMCAreaShivaExteriorJunkyard
-        40,34: RMCAreaShivaExteriorJunkyard
-        40,33: RMCAreaShivaExteriorJunkyard
-        40,32: RMCAreaShivaExteriorJunkyard
-        40,31: RMCAreaShivaExteriorJunkyard
-        40,30: RMCAreaShivaExteriorJunkyard
-        40,29: RMCAreaShivaExteriorJunkyard
-        40,28: RMCAreaShivaExteriorJunkyard
-        40,27: RMCAreaShivaExteriorJunkyard
-        40,26: RMCAreaShivaExteriorJunkyard
-        40,25: RMCAreaShivaExteriorJunkyard
-        40,24: RMCAreaShivaExteriorJunkyard
-        40,23: RMCAreaShivaExteriorJunkyard
-        40,22: RMCAreaShivaExteriorJunkyard
+        83,43: RMCAreaShivaExteriorSouthwestValley
+        83,42: RMCAreaShivaExteriorSouthwestValley
+        83,41: RMCAreaShivaExteriorSouthwestValley
+        83,40: RMCAreaShivaExteriorSouthwestValley
+        83,39: RMCAreaShivaExteriorSouthwestValley
+        83,38: RMCAreaShivaExteriorSouthwestValley
+        83,37: RMCAreaShivaExteriorSouthwestValley
+        83,36: RMCAreaShivaExteriorSouthwestValley
+        83,35: RMCAreaShivaExteriorSouthwestValley
+        83,34: RMCAreaShivaExteriorSouthwestValley
+        83,33: RMCAreaShivaExteriorSouthwestValley
+        83,32: RMCAreaShivaExteriorSouthwestValley
+        83,31: RMCAreaShivaExteriorSouthwestValley
+        83,30: RMCAreaShivaExteriorSouthwestValley
+        83,29: RMCAreaShivaExteriorSouthwestValley
+        83,28: RMCAreaShivaExteriorSouthwestValley
+        83,27: RMCAreaShivaExteriorSouthwestValley
+        83,26: RMCAreaShivaExteriorSouthwestValley
+        83,25: RMCAreaShivaExteriorSouthwestValley
+        82,46: RMCAreaShivaExteriorSouthwestValley
+        82,45: RMCAreaShivaExteriorSouthwestValley
+        82,44: RMCAreaShivaExteriorSouthwestValley
+        82,43: RMCAreaShivaExteriorSouthwestValley
+        82,42: RMCAreaShivaExteriorSouthwestValley
+        82,41: RMCAreaShivaExteriorSouthwestValley
+        82,40: RMCAreaShivaExteriorSouthwestValley
+        82,39: RMCAreaShivaExteriorSouthwestValley
+        82,38: RMCAreaShivaExteriorSouthwestValley
+        82,37: RMCAreaShivaExteriorSouthwestValley
+        82,36: RMCAreaShivaExteriorSouthwestValley
+        82,35: RMCAreaShivaExteriorSouthwestValley
+        82,34: RMCAreaShivaExteriorSouthwestValley
+        82,33: RMCAreaShivaExteriorSouthwestValley
+        82,32: RMCAreaShivaExteriorSouthwestValley
+        82,31: RMCAreaShivaExteriorSouthwestValley
+        82,30: RMCAreaShivaExteriorSouthwestValley
+        82,29: RMCAreaShivaExteriorSouthwestValley
+        82,28: RMCAreaShivaExteriorSouthwestValley
+        82,27: RMCAreaShivaExteriorSouthwestValley
+        82,26: RMCAreaShivaExteriorSouthwestValley
+        81,46: RMCAreaShivaExteriorSouthwestValley
+        81,45: RMCAreaShivaExteriorSouthwestValley
+        81,44: RMCAreaShivaExteriorSouthwestValley
+        81,43: RMCAreaShivaExteriorSouthwestValley
+        81,42: RMCAreaShivaExteriorSouthwestValley
+        81,41: RMCAreaShivaExteriorSouthwestValley
+        81,40: RMCAreaShivaExteriorSouthwestValley
+        81,39: RMCAreaShivaExteriorSouthwestValley
+        81,38: RMCAreaShivaExteriorSouthwestValley
+        81,37: RMCAreaShivaExteriorSouthwestValley
+        81,36: RMCAreaShivaExteriorSouthwestValley
+        81,35: RMCAreaShivaExteriorSouthwestValley
+        81,34: RMCAreaShivaExteriorSouthwestValley
+        81,33: RMCAreaShivaExteriorSouthwestValley
+        81,32: RMCAreaShivaExteriorSouthwestValley
+        81,31: RMCAreaShivaExteriorSouthwestValley
+        81,30: RMCAreaShivaExteriorSouthwestValley
+        81,29: RMCAreaShivaExteriorSouthwestValley
+        81,28: RMCAreaShivaExteriorSouthwestValley
+        81,27: RMCAreaShivaExteriorSouthwestValley
+        81,26: RMCAreaShivaExteriorSouthwestValley
+        80,46: RMCAreaShivaExteriorSouthwestValley
+        80,45: RMCAreaShivaExteriorSouthwestValley
+        80,44: RMCAreaShivaExteriorSouthwestValley
+        80,43: RMCAreaShivaExteriorSouthwestValley
+        80,42: RMCAreaShivaExteriorSouthwestValley
+        80,41: RMCAreaShivaExteriorSouthwestValley
+        80,40: RMCAreaShivaExteriorSouthwestValley
+        80,39: RMCAreaShivaExteriorSouthwestValley
+        80,38: RMCAreaShivaExteriorSouthwestValley
+        80,37: RMCAreaShivaExteriorSouthwestValley
+        80,36: RMCAreaShivaExteriorSouthwestValley
+        80,35: RMCAreaShivaExteriorSouthwestValley
+        80,34: RMCAreaShivaExteriorSouthwestValley
+        80,33: RMCAreaShivaExteriorSouthwestValley
+        80,32: RMCAreaShivaExteriorSouthwestValley
+        80,31: RMCAreaShivaExteriorSouthwestValley
+        80,30: RMCAreaShivaExteriorSouthwestValley
+        80,29: RMCAreaShivaExteriorSouthwestValley
+        80,28: RMCAreaShivaExteriorSouthwestValley
+        80,27: RMCAreaShivaExteriorSouthwestValley
+        80,26: RMCAreaShivaExteriorSouthwestValley
+        79,46: RMCAreaShivaExteriorSouthwestValley
+        79,45: RMCAreaShivaExteriorSouthwestValley
+        79,44: RMCAreaShivaExteriorSouthwestValley
+        79,43: RMCAreaShivaExteriorSouthwestValley
+        79,42: RMCAreaShivaExteriorSouthwestValley
+        79,41: RMCAreaShivaExteriorSouthwestValley
+        79,40: RMCAreaShivaExteriorSouthwestValley
+        79,39: RMCAreaShivaExteriorSouthwestValley
+        79,38: RMCAreaShivaExteriorSouthwestValley
+        79,37: RMCAreaShivaExteriorSouthwestValley
+        79,36: RMCAreaShivaExteriorSouthwestValley
+        79,35: RMCAreaShivaExteriorSouthwestValley
+        79,34: RMCAreaShivaExteriorSouthwestValley
+        79,33: RMCAreaShivaExteriorSouthwestValley
+        79,32: RMCAreaShivaExteriorSouthwestValley
+        79,31: RMCAreaShivaExteriorSouthwestValley
+        79,30: RMCAreaShivaExteriorSouthwestValley
+        79,29: RMCAreaShivaExteriorSouthwestValley
+        79,28: RMCAreaShivaExteriorSouthwestValley
+        79,27: RMCAreaShivaExteriorSouthwestValley
+        79,26: RMCAreaShivaExteriorSouthwestValley
+        78,46: RMCAreaShivaExteriorSouthwestValley
+        78,45: RMCAreaShivaExteriorSouthwestValley
+        78,44: RMCAreaShivaExteriorSouthwestValley
+        78,43: RMCAreaShivaExteriorSouthwestValley
+        78,42: RMCAreaShivaExteriorSouthwestValley
+        78,41: RMCAreaShivaExteriorSouthwestValley
+        78,40: RMCAreaShivaExteriorSouthwestValley
+        78,39: RMCAreaShivaExteriorSouthwestValley
+        78,38: RMCAreaShivaExteriorSouthwestValley
+        78,37: RMCAreaShivaExteriorSouthwestValley
+        78,36: RMCAreaShivaExteriorSouthwestValley
+        78,35: RMCAreaShivaExteriorSouthwestValley
+        78,34: RMCAreaShivaExteriorSouthwestValley
+        78,33: RMCAreaShivaExteriorSouthwestValley
+        78,32: RMCAreaShivaExteriorSouthwestValley
+        78,31: RMCAreaShivaExteriorSouthwestValley
+        78,30: RMCAreaShivaExteriorSouthwestValley
+        78,29: RMCAreaShivaExteriorSouthwestValley
+        78,28: RMCAreaShivaExteriorSouthwestValley
+        78,27: RMCAreaShivaExteriorSouthwestValley
+        78,26: RMCAreaShivaExteriorSouthwestValley
+        77,46: RMCAreaShivaExteriorSouthwestValley
+        77,45: RMCAreaShivaExteriorSouthwestValley
+        77,44: RMCAreaShivaExteriorSouthwestValley
+        77,43: RMCAreaShivaExteriorSouthwestValley
+        77,42: RMCAreaShivaExteriorSouthwestValley
+        77,41: RMCAreaShivaExteriorSouthwestValley
+        77,40: RMCAreaShivaExteriorSouthwestValley
+        77,39: RMCAreaShivaExteriorSouthwestValley
+        77,38: RMCAreaShivaExteriorSouthwestValley
+        77,37: RMCAreaShivaExteriorSouthwestValley
+        77,36: RMCAreaShivaExteriorSouthwestValley
+        77,35: RMCAreaShivaExteriorSouthwestValley
+        77,34: RMCAreaShivaExteriorSouthwestValley
+        77,33: RMCAreaShivaExteriorSouthwestValley
+        77,32: RMCAreaShivaExteriorSouthwestValley
+        77,31: RMCAreaShivaExteriorSouthwestValley
+        77,30: RMCAreaShivaExteriorSouthwestValley
+        77,29: RMCAreaShivaExteriorSouthwestValley
+        77,28: RMCAreaShivaExteriorSouthwestValley
+        77,27: RMCAreaShivaExteriorSouthwestValley
+        77,26: RMCAreaShivaExteriorSouthwestValley
+        77,25: RMCAreaShivaExteriorSouthwestValley
+        76,46: RMCAreaShivaExteriorSouthwestValley
+        76,45: RMCAreaShivaExteriorSouthwestValley
+        76,44: RMCAreaShivaExteriorSouthwestValley
+        76,43: RMCAreaShivaExteriorSouthwestValley
+        76,42: RMCAreaShivaExteriorSouthwestValley
+        76,41: RMCAreaShivaExteriorSouthwestValley
+        76,40: RMCAreaShivaExteriorSouthwestValley
+        76,39: RMCAreaShivaExteriorSouthwestValley
+        76,38: RMCAreaShivaExteriorSouthwestValley
+        76,37: RMCAreaShivaExteriorSouthwestValley
+        76,36: RMCAreaShivaExteriorSouthwestValley
+        76,35: RMCAreaShivaExteriorSouthwestValley
+        76,34: RMCAreaShivaExteriorSouthwestValley
+        76,33: RMCAreaShivaExteriorSouthwestValley
+        76,32: RMCAreaShivaExteriorSouthwestValley
+        76,31: RMCAreaShivaExteriorSouthwestValley
+        76,30: RMCAreaShivaExteriorSouthwestValley
+        76,29: RMCAreaShivaExteriorSouthwestValley
+        76,28: RMCAreaShivaExteriorSouthwestValley
+        76,27: RMCAreaShivaExteriorSouthwestValley
+        76,26: RMCAreaShivaExteriorSouthwestValley
+        76,25: RMCAreaShivaExteriorSouthwestValley
+        75,37: RMCAreaShivaExteriorSouthwestValley
+        75,36: RMCAreaShivaExteriorSouthwestValley
+        75,35: RMCAreaShivaExteriorSouthwestValley
+        75,34: RMCAreaShivaExteriorSouthwestValley
+        75,33: RMCAreaShivaExteriorSouthwestValley
+        75,32: RMCAreaShivaExteriorSouthwestValley
+        75,31: RMCAreaShivaExteriorSouthwestValley
+        75,30: RMCAreaShivaExteriorSouthwestValley
+        75,29: RMCAreaShivaExteriorSouthwestValley
+        75,28: RMCAreaShivaExteriorSouthwestValley
+        75,27: RMCAreaShivaExteriorSouthwestValley
+        75,26: RMCAreaShivaExteriorSouthwestValley
+        74,37: RMCAreaShivaExteriorSouthwestValley
+        74,36: RMCAreaShivaExteriorSouthwestValley
+        74,35: RMCAreaShivaExteriorSouthwestValley
+        74,34: RMCAreaShivaExteriorSouthwestValley
+        74,33: RMCAreaShivaExteriorSouthwestValley
+        74,32: RMCAreaShivaExteriorSouthwestValley
+        74,31: RMCAreaShivaExteriorSouthwestValley
+        74,30: RMCAreaShivaExteriorSouthwestValley
+        74,29: RMCAreaShivaExteriorSouthwestValley
+        74,28: RMCAreaShivaExteriorSouthwestValley
+        74,27: RMCAreaShivaExteriorSouthwestValley
+        74,26: RMCAreaShivaExteriorSouthwestValley
+        73,37: RMCAreaShivaExteriorSouthwestValley
+        73,36: RMCAreaShivaExteriorSouthwestValley
+        73,35: RMCAreaShivaExteriorSouthwestValley
+        73,34: RMCAreaShivaExteriorSouthwestValley
+        73,33: RMCAreaShivaExteriorSouthwestValley
+        73,32: RMCAreaShivaExteriorSouthwestValley
+        73,31: RMCAreaShivaExteriorSouthwestValley
+        73,30: RMCAreaShivaExteriorSouthwestValley
+        73,29: RMCAreaShivaExteriorSouthwestValley
+        73,28: RMCAreaShivaExteriorSouthwestValley
+        73,27: RMCAreaShivaExteriorSouthwestValley
+        73,26: RMCAreaShivaExteriorSouthwestValley
+        72,37: RMCAreaShivaExteriorSouthwestValley
+        72,36: RMCAreaShivaExteriorSouthwestValley
+        72,35: RMCAreaShivaExteriorSouthwestValley
+        72,34: RMCAreaShivaExteriorSouthwestValley
+        72,33: RMCAreaShivaExteriorSouthwestValley
+        72,32: RMCAreaShivaExteriorSouthwestValley
+        72,31: RMCAreaShivaExteriorSouthwestValley
+        72,30: RMCAreaShivaExteriorSouthwestValley
+        72,29: RMCAreaShivaExteriorSouthwestValley
+        72,28: RMCAreaShivaExteriorSouthwestValley
+        72,27: RMCAreaShivaExteriorSouthwestValley
+        72,26: RMCAreaShivaExteriorSouthwestValley
+        71,37: RMCAreaShivaExteriorSouthwestValley
+        71,36: RMCAreaShivaExteriorSouthwestValley
+        71,35: RMCAreaShivaExteriorSouthwestValley
+        71,34: RMCAreaShivaExteriorSouthwestValley
+        71,33: RMCAreaShivaExteriorSouthwestValley
+        71,32: RMCAreaShivaExteriorSouthwestValley
+        71,31: RMCAreaShivaExteriorSouthwestValley
+        71,30: RMCAreaShivaExteriorSouthwestValley
+        71,29: RMCAreaShivaExteriorSouthwestValley
+        71,28: RMCAreaShivaExteriorSouthwestValley
+        71,27: RMCAreaShivaExteriorSouthwestValley
+        71,26: RMCAreaShivaExteriorSouthwestValley
+        70,37: RMCAreaShivaExteriorSouthwestValley
+        70,36: RMCAreaShivaExteriorSouthwestValley
+        70,35: RMCAreaShivaExteriorSouthwestValley
+        70,34: RMCAreaShivaExteriorSouthwestValley
+        70,33: RMCAreaShivaExteriorSouthwestValley
+        70,32: RMCAreaShivaExteriorSouthwestValley
+        70,31: RMCAreaShivaExteriorSouthwestValley
+        70,30: RMCAreaShivaExteriorSouthwestValley
+        70,29: RMCAreaShivaExteriorSouthwestValley
+        70,28: RMCAreaShivaExteriorSouthwestValley
+        70,27: RMCAreaShivaExteriorSouthwestValley
+        69,37: RMCAreaShivaExteriorSouthwestValley
+        69,36: RMCAreaShivaExteriorSouthwestValley
+        69,35: RMCAreaShivaExteriorSouthwestValley
+        69,34: RMCAreaShivaExteriorSouthwestValley
+        69,33: RMCAreaShivaExteriorSouthwestValley
+        69,32: RMCAreaShivaExteriorSouthwestValley
+        69,31: RMCAreaShivaExteriorSouthwestValley
+        69,30: RMCAreaShivaExteriorSouthwestValley
+        69,29: RMCAreaShivaExteriorSouthwestValley
+        69,28: RMCAreaShivaExteriorSouthwestValley
+        68,37: RMCAreaShivaExteriorSouthwestValley
+        68,36: RMCAreaShivaExteriorSouthwestValley
+        68,35: RMCAreaShivaExteriorSouthwestValley
+        68,34: RMCAreaShivaExteriorSouthwestValley
+        68,33: RMCAreaShivaExteriorSouthwestValley
+        68,32: RMCAreaShivaExteriorSouthwestValley
+        68,31: RMCAreaShivaExteriorSouthwestValley
+        68,30: RMCAreaShivaExteriorSouthwestValley
+        68,29: RMCAreaShivaExteriorSouthwestValley
+        68,28: RMCAreaShivaExteriorSouthwestValley
+        67,37: RMCAreaShivaExteriorSouthwestValley
+        67,36: RMCAreaShivaExteriorSouthwestValley
+        67,35: RMCAreaShivaExteriorSouthwestValley
+        67,34: RMCAreaShivaExteriorSouthwestValley
+        67,33: RMCAreaShivaExteriorSouthwestValley
+        67,32: RMCAreaShivaExteriorSouthwestValley
+        67,31: RMCAreaShivaExteriorSouthwestValley
+        67,30: RMCAreaShivaExteriorSouthwestValley
+        67,29: RMCAreaShivaExteriorSouthwestValley
+        67,28: RMCAreaShivaExteriorSouthwestValley
+        66,37: RMCAreaShivaExteriorSouthwestValley
+        66,36: RMCAreaShivaExteriorSouthwestValley
+        66,35: RMCAreaShivaExteriorSouthwestValley
+        66,34: RMCAreaShivaExteriorSouthwestValley
+        66,33: RMCAreaShivaExteriorSouthwestValley
+        66,32: RMCAreaShivaExteriorSouthwestValley
+        66,31: RMCAreaShivaExteriorSouthwestValley
+        66,30: RMCAreaShivaExteriorSouthwestValley
+        66,29: RMCAreaShivaExteriorSouthwestValley
+        66,28: RMCAreaShivaExteriorSouthwestValley
+        65,37: RMCAreaShivaExteriorSouthwestValley
+        65,36: RMCAreaShivaExteriorSouthwestValley
+        65,35: RMCAreaShivaExteriorSouthwestValley
+        65,34: RMCAreaShivaExteriorSouthwestValley
+        65,33: RMCAreaShivaExteriorSouthwestValley
+        65,32: RMCAreaShivaExteriorSouthwestValley
+        65,31: RMCAreaShivaExteriorSouthwestValley
+        65,30: RMCAreaShivaExteriorSouthwestValley
+        65,29: RMCAreaShivaExteriorSouthwestValley
+        65,28: RMCAreaShivaExteriorSouthwestValley
+        64,37: RMCAreaShivaExteriorSouthwestValley
+        64,36: RMCAreaShivaExteriorSouthwestValley
+        64,35: RMCAreaShivaExteriorSouthwestValley
+        64,34: RMCAreaShivaExteriorSouthwestValley
+        64,33: RMCAreaShivaExteriorSouthwestValley
+        64,32: RMCAreaShivaExteriorSouthwestValley
+        64,31: RMCAreaShivaExteriorSouthwestValley
+        64,30: RMCAreaShivaExteriorSouthwestValley
+        64,29: RMCAreaShivaExteriorSouthwestValley
+        64,28: RMCAreaShivaExteriorSouthwestValley
+        63,37: RMCAreaShivaExteriorSouthwestValley
+        63,36: RMCAreaShivaExteriorSouthwestValley
+        63,35: RMCAreaShivaExteriorSouthwestValley
+        63,34: RMCAreaShivaExteriorSouthwestValley
+        63,33: RMCAreaShivaExteriorSouthwestValley
+        63,32: RMCAreaShivaExteriorSouthwestValley
+        63,31: RMCAreaShivaExteriorSouthwestValley
+        63,30: RMCAreaShivaExteriorSouthwestValley
+        63,29: RMCAreaShivaExteriorSouthwestValley
+        63,28: RMCAreaShivaExteriorSouthwestValley
+        62,33: RMCAreaShivaExteriorSouthwestValley
+        62,32: RMCAreaShivaExteriorSouthwestValley
+        62,31: RMCAreaShivaExteriorSouthwestValley
+        62,30: RMCAreaShivaExteriorSouthwestValley
+        62,29: RMCAreaShivaExteriorSouthwestValley
+        62,28: RMCAreaShivaExteriorSouthwestValley
+        62,27: RMCAreaShivaExteriorSouthwestValley
+        61,33: RMCAreaShivaExteriorSouthwestValley
+        61,32: RMCAreaShivaExteriorSouthwestValley
+        61,31: RMCAreaShivaExteriorSouthwestValley
+        61,30: RMCAreaShivaExteriorSouthwestValley
+        61,29: RMCAreaShivaExteriorSouthwestValley
+        61,28: RMCAreaShivaExteriorSouthwestValley
+        61,27: RMCAreaShivaExteriorSouthwestValley
+        60,33: RMCAreaShivaExteriorSouthwestValley
+        60,32: RMCAreaShivaExteriorSouthwestValley
+        60,31: RMCAreaShivaExteriorSouthwestValley
+        60,30: RMCAreaShivaExteriorSouthwestValley
+        60,29: RMCAreaShivaExteriorSouthwestValley
+        60,28: RMCAreaShivaExteriorSouthwestValley
+        60,27: RMCAreaShivaExteriorSouthwestValley
+        59,33: RMCAreaShivaExteriorSouthwestValley
+        59,32: RMCAreaShivaExteriorSouthwestValley
+        59,31: RMCAreaShivaExteriorSouthwestValley
+        59,30: RMCAreaShivaExteriorSouthwestValley
+        59,29: RMCAreaShivaExteriorSouthwestValley
+        59,28: RMCAreaShivaExteriorSouthwestValley
+        59,27: RMCAreaShivaExteriorSouthwestValley
+        59,26: RMCAreaShivaExteriorSouthwestValley
+        58,33: RMCAreaShivaExteriorSouthwestValley
+        58,32: RMCAreaShivaExteriorSouthwestValley
+        58,31: RMCAreaShivaExteriorSouthwestValley
+        58,30: RMCAreaShivaExteriorSouthwestValley
+        58,29: RMCAreaShivaExteriorSouthwestValley
+        58,28: RMCAreaShivaExteriorSouthwestValley
+        58,27: RMCAreaShivaExteriorSouthwestValley
+        58,26: RMCAreaShivaExteriorSouthwestValley
+        57,33: RMCAreaShivaExteriorSouthwestValley
+        57,32: RMCAreaShivaExteriorSouthwestValley
+        57,31: RMCAreaShivaExteriorSouthwestValley
+        57,30: RMCAreaShivaExteriorSouthwestValley
+        57,29: RMCAreaShivaExteriorSouthwestValley
+        57,28: RMCAreaShivaExteriorSouthwestValley
+        57,27: RMCAreaShivaExteriorSouthwestValley
+        57,26: RMCAreaShivaExteriorSouthwestValley
+        56,33: RMCAreaShivaExteriorSouthwestValley
+        56,32: RMCAreaShivaExteriorSouthwestValley
+        56,31: RMCAreaShivaExteriorSouthwestValley
+        56,30: RMCAreaShivaExteriorSouthwestValley
+        56,29: RMCAreaShivaExteriorSouthwestValley
+        56,28: RMCAreaShivaExteriorSouthwestValley
+        56,27: RMCAreaShivaExteriorSouthwestValley
+        55,33: RMCAreaShivaExteriorSouthwestValley
+        55,32: RMCAreaShivaExteriorSouthwestValley
+        55,31: RMCAreaShivaExteriorSouthwestValley
+        55,30: RMCAreaShivaExteriorSouthwestValley
+        55,29: RMCAreaShivaExteriorSouthwestValley
+        55,28: RMCAreaShivaExteriorSouthwestValley
+        55,27: RMCAreaShivaExteriorSouthwestValley
+        54,33: RMCAreaShivaExteriorSouthwestValley
+        54,32: RMCAreaShivaExteriorSouthwestValley
+        54,31: RMCAreaShivaExteriorSouthwestValley
+        54,30: RMCAreaShivaExteriorSouthwestValley
+        54,29: RMCAreaShivaExteriorSouthwestValley
+        54,28: RMCAreaShivaExteriorSouthwestValley
+        54,27: RMCAreaShivaExteriorSouthwestValley
+        53,33: RMCAreaShivaExteriorSouthwestValley
+        53,32: RMCAreaShivaExteriorSouthwestValley
+        53,31: RMCAreaShivaExteriorSouthwestValley
+        53,30: RMCAreaShivaExteriorSouthwestValley
+        53,29: RMCAreaShivaExteriorSouthwestValley
+        53,28: RMCAreaShivaExteriorSouthwestValley
+        53,27: RMCAreaShivaExteriorSouthwestValley
+        52,33: RMCAreaShivaExteriorSouthwestValley
+        52,32: RMCAreaShivaExteriorSouthwestValley
+        52,31: RMCAreaShivaExteriorSouthwestValley
+        52,30: RMCAreaShivaExteriorSouthwestValley
+        52,29: RMCAreaShivaExteriorSouthwestValley
+        52,28: RMCAreaShivaExteriorSouthwestValley
+        52,27: RMCAreaShivaExteriorSouthwestValley
+        51,33: RMCAreaShivaExteriorSouthwestValley
+        51,32: RMCAreaShivaExteriorSouthwestValley
+        51,31: RMCAreaShivaExteriorSouthwestValley
+        51,30: RMCAreaShivaExteriorSouthwestValley
+        51,29: RMCAreaShivaExteriorSouthwestValley
+        51,28: RMCAreaShivaExteriorSouthwestValley
+        51,27: RMCAreaShivaExteriorSouthwestValley
+        50,37: RMCAreaShivaExteriorSouthwestValley
+        50,36: RMCAreaShivaExteriorSouthwestValley
+        50,35: RMCAreaShivaExteriorSouthwestValley
+        50,34: RMCAreaShivaExteriorSouthwestValley
+        50,33: RMCAreaShivaExteriorSouthwestValley
+        50,32: RMCAreaShivaExteriorSouthwestValley
+        50,31: RMCAreaShivaExteriorSouthwestValley
+        50,30: RMCAreaShivaExteriorSouthwestValley
+        50,29: RMCAreaShivaExteriorSouthwestValley
+        50,28: RMCAreaShivaExteriorSouthwestValley
+        50,27: RMCAreaShivaExteriorSouthwestValley
+        49,37: RMCAreaShivaExteriorSouthwestValley
+        49,36: RMCAreaShivaExteriorSouthwestValley
+        49,35: RMCAreaShivaExteriorSouthwestValley
+        49,34: RMCAreaShivaExteriorSouthwestValley
+        49,33: RMCAreaShivaExteriorSouthwestValley
+        49,32: RMCAreaShivaExteriorSouthwestValley
+        49,31: RMCAreaShivaExteriorSouthwestValley
+        49,30: RMCAreaShivaExteriorSouthwestValley
+        49,29: RMCAreaShivaExteriorSouthwestValley
+        49,28: RMCAreaShivaExteriorSouthwestValley
+        49,27: RMCAreaShivaExteriorSouthwestValley
+        49,26: RMCAreaShivaExteriorSouthwestValley
+        49,25: RMCAreaShivaExteriorSouthwestValley
+        49,24: RMCAreaShivaExteriorSouthwestValley
+        49,23: RMCAreaShivaExteriorSouthwestValley
+        49,22: RMCAreaShivaExteriorSouthwestValley
+        48,37: RMCAreaShivaExteriorSouthwestValley
+        48,36: RMCAreaShivaExteriorSouthwestValley
+        48,35: RMCAreaShivaExteriorSouthwestValley
+        48,34: RMCAreaShivaExteriorSouthwestValley
+        48,33: RMCAreaShivaExteriorSouthwestValley
+        48,32: RMCAreaShivaExteriorSouthwestValley
+        48,31: RMCAreaShivaExteriorSouthwestValley
+        48,30: RMCAreaShivaExteriorSouthwestValley
+        48,29: RMCAreaShivaExteriorSouthwestValley
+        48,28: RMCAreaShivaExteriorSouthwestValley
+        48,27: RMCAreaShivaExteriorSouthwestValley
+        48,26: RMCAreaShivaExteriorSouthwestValley
+        48,25: RMCAreaShivaExteriorSouthwestValley
+        48,24: RMCAreaShivaExteriorSouthwestValley
+        48,23: RMCAreaShivaExteriorSouthwestValley
+        48,22: RMCAreaShivaExteriorSouthwestValley
+        47,37: RMCAreaShivaExteriorSouthwestValley
+        47,36: RMCAreaShivaExteriorSouthwestValley
+        47,35: RMCAreaShivaExteriorSouthwestValley
+        47,34: RMCAreaShivaExteriorSouthwestValley
+        47,33: RMCAreaShivaExteriorSouthwestValley
+        47,32: RMCAreaShivaExteriorSouthwestValley
+        47,31: RMCAreaShivaExteriorSouthwestValley
+        47,30: RMCAreaShivaExteriorSouthwestValley
+        47,29: RMCAreaShivaExteriorSouthwestValley
+        47,28: RMCAreaShivaExteriorSouthwestValley
+        47,27: RMCAreaShivaExteriorSouthwestValley
+        47,26: RMCAreaShivaExteriorSouthwestValley
+        47,25: RMCAreaShivaExteriorSouthwestValley
+        47,24: RMCAreaShivaExteriorSouthwestValley
+        47,23: RMCAreaShivaExteriorSouthwestValley
+        47,22: RMCAreaShivaExteriorSouthwestValley
+        46,37: RMCAreaShivaExteriorSouthwestValley
+        46,36: RMCAreaShivaExteriorSouthwestValley
+        46,35: RMCAreaShivaExteriorSouthwestValley
+        46,34: RMCAreaShivaExteriorSouthwestValley
+        46,33: RMCAreaShivaExteriorSouthwestValley
+        46,32: RMCAreaShivaExteriorSouthwestValley
+        46,31: RMCAreaShivaExteriorSouthwestValley
+        46,30: RMCAreaShivaExteriorSouthwestValley
+        46,29: RMCAreaShivaExteriorSouthwestValley
+        46,28: RMCAreaShivaExteriorSouthwestValley
+        46,27: RMCAreaShivaExteriorSouthwestValley
+        46,26: RMCAreaShivaExteriorSouthwestValley
+        46,25: RMCAreaShivaExteriorSouthwestValley
+        46,24: RMCAreaShivaExteriorSouthwestValley
+        46,23: RMCAreaShivaExteriorSouthwestValley
+        46,22: RMCAreaShivaExteriorSouthwestValley
+        45,37: RMCAreaShivaExteriorSouthwestValley
+        45,36: RMCAreaShivaExteriorSouthwestValley
+        45,35: RMCAreaShivaExteriorSouthwestValley
+        45,34: RMCAreaShivaExteriorSouthwestValley
+        45,33: RMCAreaShivaExteriorSouthwestValley
+        45,32: RMCAreaShivaExteriorSouthwestValley
+        45,31: RMCAreaShivaExteriorSouthwestValley
+        45,30: RMCAreaShivaExteriorSouthwestValley
+        45,29: RMCAreaShivaExteriorSouthwestValley
+        45,28: RMCAreaShivaExteriorSouthwestValley
+        45,27: RMCAreaShivaExteriorSouthwestValley
+        45,26: RMCAreaShivaExteriorSouthwestValley
+        45,25: RMCAreaShivaExteriorSouthwestValley
+        45,24: RMCAreaShivaExteriorSouthwestValley
+        45,23: RMCAreaShivaExteriorSouthwestValley
+        45,22: RMCAreaShivaExteriorSouthwestValley
+        44,37: RMCAreaShivaExteriorSouthwestValley
+        44,36: RMCAreaShivaExteriorSouthwestValley
+        44,35: RMCAreaShivaExteriorSouthwestValley
+        44,34: RMCAreaShivaExteriorSouthwestValley
+        44,33: RMCAreaShivaExteriorSouthwestValley
+        44,32: RMCAreaShivaExteriorSouthwestValley
+        44,31: RMCAreaShivaExteriorSouthwestValley
+        44,30: RMCAreaShivaExteriorSouthwestValley
+        44,29: RMCAreaShivaExteriorSouthwestValley
+        44,28: RMCAreaShivaExteriorSouthwestValley
+        44,27: RMCAreaShivaExteriorSouthwestValley
+        44,26: RMCAreaShivaExteriorSouthwestValley
+        44,25: RMCAreaShivaExteriorSouthwestValley
+        44,24: RMCAreaShivaExteriorSouthwestValley
+        44,23: RMCAreaShivaExteriorSouthwestValley
+        44,22: RMCAreaShivaExteriorSouthwestValley
+        43,37: RMCAreaShivaExteriorSouthwestValley
+        43,36: RMCAreaShivaExteriorSouthwestValley
+        43,35: RMCAreaShivaExteriorSouthwestValley
+        43,34: RMCAreaShivaExteriorSouthwestValley
+        43,33: RMCAreaShivaExteriorSouthwestValley
+        43,32: RMCAreaShivaExteriorSouthwestValley
+        43,31: RMCAreaShivaExteriorSouthwestValley
+        43,30: RMCAreaShivaExteriorSouthwestValley
+        43,29: RMCAreaShivaExteriorSouthwestValley
+        43,28: RMCAreaShivaExteriorSouthwestValley
+        43,27: RMCAreaShivaExteriorSouthwestValley
+        43,26: RMCAreaShivaExteriorSouthwestValley
+        43,25: RMCAreaShivaExteriorSouthwestValley
+        43,24: RMCAreaShivaExteriorSouthwestValley
+        43,23: RMCAreaShivaExteriorSouthwestValley
+        43,22: RMCAreaShivaExteriorSouthwestValley
+        42,37: RMCAreaShivaExteriorSouthwestValley
+        42,36: RMCAreaShivaExteriorSouthwestValley
+        42,35: RMCAreaShivaExteriorSouthwestValley
+        42,34: RMCAreaShivaExteriorSouthwestValley
+        42,33: RMCAreaShivaExteriorSouthwestValley
+        42,32: RMCAreaShivaExteriorSouthwestValley
+        42,31: RMCAreaShivaExteriorSouthwestValley
+        42,30: RMCAreaShivaExteriorSouthwestValley
+        42,29: RMCAreaShivaExteriorSouthwestValley
+        42,28: RMCAreaShivaExteriorSouthwestValley
+        42,27: RMCAreaShivaExteriorSouthwestValley
+        42,26: RMCAreaShivaExteriorSouthwestValley
+        42,25: RMCAreaShivaExteriorSouthwestValley
+        42,24: RMCAreaShivaExteriorSouthwestValley
+        42,23: RMCAreaShivaExteriorSouthwestValley
+        42,22: RMCAreaShivaExteriorSouthwestValley
+        41,37: RMCAreaShivaExteriorSouthwestValley
+        41,36: RMCAreaShivaExteriorSouthwestValley
+        41,35: RMCAreaShivaExteriorSouthwestValley
+        41,34: RMCAreaShivaExteriorSouthwestValley
+        41,33: RMCAreaShivaExteriorSouthwestValley
+        41,32: RMCAreaShivaExteriorSouthwestValley
+        41,31: RMCAreaShivaExteriorSouthwestValley
+        41,30: RMCAreaShivaExteriorSouthwestValley
+        41,29: RMCAreaShivaExteriorSouthwestValley
+        41,28: RMCAreaShivaExteriorSouthwestValley
+        41,27: RMCAreaShivaExteriorSouthwestValley
+        41,26: RMCAreaShivaExteriorSouthwestValley
+        41,25: RMCAreaShivaExteriorSouthwestValley
+        41,24: RMCAreaShivaExteriorSouthwestValley
+        41,23: RMCAreaShivaExteriorSouthwestValley
+        41,22: RMCAreaShivaExteriorSouthwestValley
+        40,37: RMCAreaShivaExteriorSouthwestValley
+        40,36: RMCAreaShivaExteriorSouthwestValley
+        40,35: RMCAreaShivaExteriorSouthwestValley
+        40,34: RMCAreaShivaExteriorSouthwestValley
+        40,33: RMCAreaShivaExteriorSouthwestValley
+        40,32: RMCAreaShivaExteriorSouthwestValley
+        40,31: RMCAreaShivaExteriorSouthwestValley
+        40,30: RMCAreaShivaExteriorSouthwestValley
+        40,29: RMCAreaShivaExteriorSouthwestValley
+        40,28: RMCAreaShivaExteriorSouthwestValley
+        40,27: RMCAreaShivaExteriorSouthwestValley
+        40,26: RMCAreaShivaExteriorSouthwestValley
+        40,25: RMCAreaShivaExteriorSouthwestValley
+        40,24: RMCAreaShivaExteriorSouthwestValley
+        40,23: RMCAreaShivaExteriorSouthwestValley
+        40,22: RMCAreaShivaExteriorSouthwestValley
         173,21: RMCAreaShivaExteriorCpSResearch
         173,20: RMCAreaShivaExteriorCpSResearch
         173,19: RMCAreaShivaExteriorCpSResearch
@@ -54704,16 +54704,22 @@ entities:
     - type: Transform
       pos: 205.5,134.5
       parent: 1
+    - type: Physics
+      bodyType: Static
   - uid: 14712
     components:
     - type: Transform
       pos: 217.5,149.5
       parent: 1
+    - type: Physics
+      bodyType: Static
   - uid: 14717
     components:
     - type: Transform
       pos: 209.5,157.5
       parent: 1
+    - type: Physics
+      bodyType: Static
 - proto: CMVendorChess
   entities:
   - uid: 7163
@@ -54721,6 +54727,8 @@ entities:
     - type: Transform
       pos: 100.5,123.5
       parent: 1
+    - type: Physics
+      bodyType: Static
 - proto: CMVendorCigs
   entities:
   - uid: 4668
@@ -54884,16 +54892,22 @@ entities:
     - type: Transform
       pos: 64.5,151.5
       parent: 1
+    - type: Physics
+      bodyType: Static
   - uid: 8995
     components:
     - type: Transform
       pos: 137.5,80.5
       parent: 1
+    - type: Physics
+      bodyType: Static
   - uid: 13924
     components:
     - type: Transform
       pos: 180.5,131.5
       parent: 1
+    - type: Physics
+      bodyType: Static
 - proto: CMVendorIngredients
   entities:
   - uid: 4669
@@ -54908,21 +54922,29 @@ entities:
     - type: Transform
       pos: 106.5,55.5
       parent: 1
+    - type: Physics
+      bodyType: Static
   - uid: 14704
     components:
     - type: Transform
       pos: 204.5,134.5
       parent: 1
+    - type: Physics
+      bodyType: Static
   - uid: 14713
     components:
     - type: Transform
       pos: 216.5,149.5
       parent: 1
+    - type: Physics
+      bodyType: Static
   - uid: 14718
     components:
     - type: Transform
       pos: 208.5,157.5
       parent: 1
+    - type: Physics
+      bodyType: Static
 - proto: CMVendorNutri
   entities:
   - uid: 7225
@@ -55015,21 +55037,29 @@ entities:
     - type: Transform
       pos: 137.5,79.5
       parent: 1
+    - type: Physics
+      bodyType: Static
   - uid: 13874
     components:
     - type: Transform
       pos: 185.5,118.5
       parent: 1
+    - type: Physics
+      bodyType: Static
   - uid: 13875
     components:
     - type: Transform
       pos: 186.5,118.5
       parent: 1
+    - type: Physics
+      bodyType: Static
   - uid: 13923
     components:
     - type: Transform
       pos: 179.5,131.5
       parent: 1
+    - type: Physics
+      bodyType: Static
 - proto: CMWardrobeBlack
   entities:
   - uid: 2259
@@ -57640,13 +57670,6 @@ entities:
     - type: Transform
       pos: 205.5,31.5
       parent: 1
-- proto: CrayonBox
-  entities:
-  - uid: 11100
-    components:
-    - type: Transform
-      pos: 166.5,49.5
-      parent: 1
 - proto: CryoPod
   entities:
   - uid: 14644
@@ -57954,13 +57977,6 @@ entities:
     components:
     - type: Transform
       pos: 106.5,119.5
-      parent: 1
-- proto: FoodGoldenApple
-  entities:
-  - uid: 16785
-    components:
-    - type: Transform
-      pos: 209.26895,37.587654
       parent: 1
 - proto: FoodNoodlesBoiled
   entities:
@@ -113291,6 +113307,13 @@ entities:
     - type: Transform
       pos: 172.5,142.5
       parent: 1
+- proto: RMCCrayonBox
+  entities:
+  - uid: 11100
+    components:
+    - type: Transform
+      pos: 166.5,49.5
+      parent: 1
 - proto: RMCCurtainMedical
   entities:
   - uid: 7240
@@ -114522,6 +114545,13 @@ entities:
     components:
     - type: Transform
       pos: 163.5,143.5
+      parent: 1
+- proto: RMCFoodGoldenApple
+  entities:
+  - uid: 16785
+    components:
+    - type: Transform
+      pos: 209.26895,37.587654
       parent: 1
 - proto: RMCGeneratorFusionColony
   entities:
@@ -124936,6 +124966,140 @@ entities:
     - type: Transform
       pos: 124.5,83.5
       parent: 1
+- proto: RMCTankReagentFuel
+  entities:
+  - uid: 1432
+    components:
+    - type: Transform
+      pos: 146.5,87.5
+      parent: 1
+  - uid: 12160
+    components:
+    - type: Transform
+      pos: 72.5,47.5
+      parent: 1
+  - uid: 12286
+    components:
+    - type: Transform
+      pos: 68.5,19.5
+      parent: 1
+  - uid: 12289
+    components:
+    - type: Transform
+      pos: 67.5,19.5
+      parent: 1
+  - uid: 14144
+    components:
+    - type: Transform
+      pos: 62.5,153.5
+      parent: 1
+  - uid: 14145
+    components:
+    - type: Transform
+      pos: 45.5,54.5
+      parent: 1
+  - uid: 14196
+    components:
+    - type: Transform
+      pos: 44.5,54.5
+      parent: 1
+  - uid: 14564
+    components:
+    - type: Transform
+      pos: 2.5,132.5
+      parent: 1
+  - uid: 15892
+    components:
+    - type: Transform
+      pos: 162.5,87.5
+      parent: 1
+  - uid: 15893
+    components:
+    - type: Transform
+      pos: 163.5,22.5
+      parent: 1
+  - uid: 15895
+    components:
+    - type: Transform
+      pos: 171.5,32.5
+      parent: 1
+  - uid: 15896
+    components:
+    - type: Transform
+      pos: 183.5,143.5
+      parent: 1
+  - uid: 15897
+    components:
+    - type: Transform
+      pos: 184.5,15.5
+      parent: 1
+  - uid: 15898
+    components:
+    - type: Transform
+      pos: 185.5,133.5
+      parent: 1
+  - uid: 15899
+    components:
+    - type: Transform
+      pos: 185.5,142.5
+      parent: 1
+- proto: RMCTankReagentWater
+  entities:
+  - uid: 989
+    components:
+    - type: Transform
+      pos: 68.5,17.5
+      parent: 1
+  - uid: 990
+    components:
+    - type: Transform
+      pos: 67.5,17.5
+      parent: 1
+  - uid: 991
+    components:
+    - type: Transform
+      pos: 66.5,17.5
+      parent: 1
+  - uid: 2650
+    components:
+    - type: Transform
+      pos: 117.5,46.5
+      parent: 1
+  - uid: 5432
+    components:
+    - type: Transform
+      pos: 2.5,132.5
+      parent: 1
+  - uid: 10826
+    components:
+    - type: Transform
+      pos: 187.5,46.5
+      parent: 1
+  - uid: 10830
+    components:
+    - type: Transform
+      pos: 188.5,46.5
+      parent: 1
+  - uid: 12214
+    components:
+    - type: Transform
+      pos: 197.5,37.5
+      parent: 1
+  - uid: 12215
+    components:
+    - type: Transform
+      pos: 196.5,36.5
+      parent: 1
+  - uid: 13873
+    components:
+    - type: Transform
+      pos: 183.5,118.5
+      parent: 1
+  - uid: 16056
+    components:
+    - type: Transform
+      pos: 2.5,133.5
+      parent: 1
 - proto: RMCTargetClown
   entities:
   - uid: 16240
@@ -126402,63 +126566,6 @@ entities:
     - type: Transform
       pos: 204.5,158.5
       parent: 1
-- proto: WaterTankFull
-  entities:
-  - uid: 989
-    components:
-    - type: Transform
-      pos: 68.5,17.5
-      parent: 1
-  - uid: 990
-    components:
-    - type: Transform
-      pos: 67.5,17.5
-      parent: 1
-  - uid: 991
-    components:
-    - type: Transform
-      pos: 66.5,17.5
-      parent: 1
-  - uid: 2650
-    components:
-    - type: Transform
-      pos: 117.5,46.5
-      parent: 1
-  - uid: 5432
-    components:
-    - type: Transform
-      pos: 2.5,132.5
-      parent: 1
-  - uid: 10826
-    components:
-    - type: Transform
-      pos: 187.5,46.5
-      parent: 1
-  - uid: 10830
-    components:
-    - type: Transform
-      pos: 188.5,46.5
-      parent: 1
-  - uid: 12214
-    components:
-    - type: Transform
-      pos: 197.5,37.5
-      parent: 1
-  - uid: 12215
-    components:
-    - type: Transform
-      pos: 196.5,36.5
-      parent: 1
-  - uid: 13873
-    components:
-    - type: Transform
-      pos: 183.5,118.5
-      parent: 1
-  - uid: 16056
-    components:
-    - type: Transform
-      pos: 2.5,133.5
-      parent: 1
 - proto: WeaponRifleAR10
   entities:
   - uid: 15713
@@ -126659,83 +126766,6 @@ entities:
     components:
     - type: Transform
       pos: 165.5,133.5
-      parent: 1
-- proto: WeldingFuelTankFull
-  entities:
-  - uid: 1432
-    components:
-    - type: Transform
-      pos: 146.5,87.5
-      parent: 1
-  - uid: 12160
-    components:
-    - type: Transform
-      pos: 72.5,47.5
-      parent: 1
-  - uid: 12286
-    components:
-    - type: Transform
-      pos: 68.5,19.5
-      parent: 1
-  - uid: 12289
-    components:
-    - type: Transform
-      pos: 67.5,19.5
-      parent: 1
-  - uid: 14144
-    components:
-    - type: Transform
-      pos: 62.5,153.5
-      parent: 1
-  - uid: 14145
-    components:
-    - type: Transform
-      pos: 45.5,54.5
-      parent: 1
-  - uid: 14196
-    components:
-    - type: Transform
-      pos: 44.5,54.5
-      parent: 1
-  - uid: 14564
-    components:
-    - type: Transform
-      pos: 2.5,132.5
-      parent: 1
-  - uid: 15892
-    components:
-    - type: Transform
-      pos: 162.5,87.5
-      parent: 1
-  - uid: 15893
-    components:
-    - type: Transform
-      pos: 163.5,22.5
-      parent: 1
-  - uid: 15895
-    components:
-    - type: Transform
-      pos: 171.5,32.5
-      parent: 1
-  - uid: 15896
-    components:
-    - type: Transform
-      pos: 183.5,143.5
-      parent: 1
-  - uid: 15897
-    components:
-    - type: Transform
-      pos: 184.5,15.5
-      parent: 1
-  - uid: 15898
-    components:
-    - type: Transform
-      pos: 185.5,133.5
-      parent: 1
-  - uid: 15899
-    components:
-    - type: Transform
-      pos: 185.5,142.5
       parent: 1
 - proto: XenoEgg
   entities:

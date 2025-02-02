@@ -25,6 +25,9 @@ using Content.Server.Stunnable;
 using Content.Server.Voting;
 using Content.Server.Voting.Managers;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.ARES;
+using Content.Shared._RMC14.Armor.Ghillie;
+using Content.Shared._RMC14.Armor.ThermalCloak;
 using Content.Shared._RMC14.Bioscan;
 using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.CCVar;
@@ -45,7 +48,7 @@ using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Parasite;
-using Content.Shared.Buckle.Components;
+using Content.Shared.Actions;
 using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
@@ -78,6 +81,7 @@ namespace Content.Server._RMC14.Rules;
 
 public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignalRuleComponent>
 {
+    [Dependency] private readonly ARESSystem _ares = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IBanManager _bans = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
@@ -122,6 +126,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly XenoTunnelSystem _xenoTunnel = default!;
     [Dependency] private readonly StunSystem _stuns = default!;
     [Dependency] private readonly RMCCameraShakeSystem _rmcCameraShake = default!;
+    [Dependency] private readonly ThermalCloakSystem _thermalCloak = default!;
+    [Dependency] private readonly SharedGhillieSuitSystem _ghillieSuit = default!;
 
     private readonly HashSet<string> _operationNames = new();
     private readonly HashSet<string> _operationPrefixes = new();
@@ -139,8 +145,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private int _mapVoteExcludeLast;
     private bool _useCarryoverVoting;
     private TimeSpan _hijackStunTime = TimeSpan.FromSeconds(5);
+    private bool _landingZoneMiasmaEnabled;
 
     private readonly List<MapId> _almayerMaps = [];
+    private readonly List<EntityUid> _marineList = [];
 
     private EntityQuery<HyperSleepChamberComponent> _hyperSleepChamberQuery;
     private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
@@ -193,6 +201,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         Subs.CVar(_config, RMCCVars.RMCAdminFaxAreaMap, v => _adminFaxAreaMap = v, true);
         Subs.CVar(_config, RMCCVars.RMCPlanetMapVoteExcludeLast, v => _mapVoteExcludeLast = v, true);
         Subs.CVar(_config, RMCCVars.RMCUseCarryoverVoting, v => _useCarryoverVoting = v, true);
+        Subs.CVar(_config, RMCCVars.RMCLandingZoneMiasmaEnabled, v => _landingZoneMiasmaEnabled = v, true);
 
         ReloadPrototypes();
     }
@@ -876,6 +885,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             var marines = EntityQueryEnumerator<ActorComponent, MarineComponent, MobStateComponent, TransformComponent>();
             var marinesAlive = false;
+            _marineList.Clear();
             while (marines.MoveNext(out var marineId, out _, out _, out var mobState, out var xform))
             {
                 if (HasComp<VictimInfectedComponent>(marineId) ||
@@ -895,6 +905,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                      _almayerMaps.Contains(xform.MapID)))
                 {
                     marinesAlive = true;
+                    _marineList.Add(marineId);
                 }
 
                 if (marinesAlive)
@@ -926,6 +937,39 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             {
                 EndRound(distress, DistressSignalRuleResult.AllDied);
                 continue;
+            }
+
+            if (_marineList.Count == 1)
+            {
+                // TODO add ghost alert for last human
+                var lastMarine = _marineList.Last();
+
+                var cloak = _thermalCloak.FindWornCloak(lastMarine);
+                var ghillie = _ghillieSuit.FindSuit(lastMarine);
+
+                if (cloak != null && cloak.Value.Comp.Enabled)
+                {
+                    _thermalCloak.SetInvisibility(cloak.Value, lastMarine, false, true);
+
+                    if (TryComp<InstantActionComponent>(cloak.Value.Comp.Action, out var action))
+                    {
+                        action.Cooldown = (Timing.CurTime, Timing.CurTime + TimeSpan.FromHours(2)); // FUCK YOU
+                        action.UseDelay = TimeSpan.FromHours(2);
+                        Dirty(cloak.Value.Comp.Action.Value, action);
+                    }
+                }
+
+                if (ghillie != null && ghillie.Value.Comp.Enabled)
+                {
+                    _ghillieSuit.ToggleInvisibility(ghillie.Value, lastMarine, false);
+
+                    if (TryComp<InstantActionComponent>(ghillie.Value.Comp.Action, out var action))
+                    {
+                        action.Cooldown = (Timing.CurTime, Timing.CurTime + TimeSpan.FromHours(2)); // FUCK YOU
+                        action.UseDelay = TimeSpan.FromHours(2);
+                        Dirty(ghillie.Value.Comp.Action.Value, action);
+                    }
+                }
             }
 
             if (_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))
@@ -981,7 +1025,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         _mapManager.SetMapPaused(mapId, false);
 
         // TODO RMC14 this should be delayed by 3 minutes + 13 second warning for immersion
-        if (rule.Comp.LandingZoneGas is { } gas && TryComp(rule.Comp.XenoMap, out AreaGridComponent? areaGrid))
+        if (_landingZoneMiasmaEnabled &&
+            rule.Comp.LandingZoneGas is { } gas &&
+            TryComp(rule.Comp.XenoMap, out AreaGridComponent? areaGrid))
         {
             foreach (var (indices, areaProto) in areaGrid.Areas)
             {
@@ -1434,15 +1480,14 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         switch (rule.Result)
         {
             case DistressSignalRuleResult.MajorMarineVictory:
-                var ent = Spawn();
-                _metaData.SetEntityName(ent, "ARES v3.2");
-                _marineAnnounce.AnnounceRadio(ent,
+                var ares = _ares.EnsureARES();
+                _marineAnnounce.AnnounceRadio(ares,
                     "Bioscan complete. No unknown lifeform signature detected.",
                     rule.AllClearChannel);
-                _marineAnnounce.AnnounceRadio(ent,
+                _marineAnnounce.AnnounceRadio(ares,
                     "Saving operational report to archive.",
                     rule.AllClearChannel);
-                _marineAnnounce.AnnounceRadio(ent,
+                _marineAnnounce.AnnounceRadio(ares,
                     "Commencing final systems scan in 3 minutes.",
                     rule.AllClearChannel);
                 rule.EndAtAllClear ??= Timing.CurTime + rule.AllClearEndDelay;

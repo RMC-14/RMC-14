@@ -18,6 +18,12 @@ public sealed partial class MindRoleComponent : BaseMindRoleComponent
     public bool Antag { get; set; } = false;
 
     /// <summary>
+    ///     The mind's current antagonist/special role, or lack thereof;
+    /// </summary>
+    [DataField]
+    public ProtoId<RoleTypePrototype>? RoleType;
+
+    /// <summary>
     ///     True if this mindrole is an exclusive antagonist. Antag setting is not checked if this is True.
     /// </summary>
     [DataField]
@@ -41,6 +47,9 @@ public sealed partial class MindRoleComponent : BaseMindRoleComponent
     public ProtoId<JobPrototype>? JobPrototype { get; set; }
 }
 
+// Why does this base component actually exist? It does make auto-categorization easy, but before that it was useless?
+// I used it for easy organisation/bookkeeping of what components are for mindroles
+[EntityCategory("Roles")]
 public abstract partial class BaseMindRoleComponent : Component
 {
 
