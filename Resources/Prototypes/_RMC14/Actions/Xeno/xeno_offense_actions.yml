@@ -732,3 +732,21 @@
       state: shift_spit_xeno_acid
     event: !type:XenoSpitToggleActionEvent
 
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoTailSeize
+  name: Tail Seize
+  description: Root an enemy for a second. The duration is higher if your shield is up.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: tail_seize
+    event: !type:XenoTailSeizeActionEvent
+    range: 3
+    useDelay: 15
+    deselectOnMiss: false
+  - type: ActionBlockIfResting
+  - type: XenoOffensiveAction
+

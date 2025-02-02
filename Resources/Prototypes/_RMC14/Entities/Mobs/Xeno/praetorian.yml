@@ -298,3 +298,57 @@
       groups:
         Brute: 40
   - type: XenoCleave
+
+- type: entity
+  parent: CMXenoPraetorianBase
+  id: RMCXenoPraetorianOppressor
+  suffix: Oppressor
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Praetorian/praetorian.rsi #TODO sprite
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    # - ActionXenoTailSeize
+    # - ActionXenoAbduct
+    # - ActionXenoDislocate
+    # - ActionXenoTailLash
+    - ActionXenoDevolve
+    hidden: true
+#TODO passive Smackdown
+# Does 15 extra damage to downed/slowed/stunned/rooted targets per melee hit, checks armor
+# Plays alien_tail_attack sound
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 30
+  - type: XenoStrain
+    name: rmc-xeno-oppressor-name
+    description: rmc-xeno-oppressor-description
+    popup: rmc-xeno-oppressor-popup
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.2
+    baseSprintSpeed: 3.5
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.64
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.7025
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.475
+      whitelist:
+        components:
+        - XenoHeavy
+  - type: XenoClaws
+    clawType: Sharp
+  - type: CMArmor
+    armor: 25
+    explosionArmor: 60
+  - type: StunOnExplosionReceived
+    weak: false
