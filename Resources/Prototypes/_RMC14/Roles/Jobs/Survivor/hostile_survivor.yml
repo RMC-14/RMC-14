@@ -15,7 +15,7 @@
     group: CMJobsMedical
     time: 18000 # 5 hours
   startingGear: RMCGearSurvivorHostile
-  icon: "CMJobIconEmpty"
+  icon: "RMCJobIconCLFStandard"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-nobody
   accessGroups:
