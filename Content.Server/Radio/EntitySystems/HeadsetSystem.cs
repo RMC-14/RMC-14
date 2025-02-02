@@ -20,7 +20,7 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
 
     private readonly SoundSpecifier _radioSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/radiostatic.ogg")
     {
-        Params = AudioParams.Default.WithVariation(0.05f),
+        Params = AudioParams.Default.WithVariation(0.09f),
     }; // RMC14
 
     public override void Initialize()
