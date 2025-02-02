@@ -20,4 +20,7 @@ public sealed partial class MapInsertComponent : Component
     [DataField, AutoNetworkedField]
     public bool ReplaceAreas;
 
+    [DataField, AutoNetworkedField]
+    public float Probability = 1.0f;
+
 }

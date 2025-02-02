@@ -9,5 +9,6 @@
     state: nightmare_insert
   - type: MapInsert
     spawn: "/Maps/_RMC14/inserts/se-checkpoint.yml"
+    probability: 0.7
     clearEntities: true
     replaceAreas: true

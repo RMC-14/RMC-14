@@ -11,6 +11,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.MapInsert;
 
@@ -25,16 +26,14 @@ public sealed class MapInsertSystem : SharedMapInsertSystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly GridFixtureSystem _fixture = default!;
-    [Dependency] private readonly SharedMapSystem _maps = default!;
     [Dependency] private readonly AreaSystem _areas = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     private MapId? _map;
     private int _index;
 
     private readonly HashSet<EntityUid> _lookupEnts = new();
     private readonly HashSet<EntityUid> _immuneEnts = new();
-
-    private EntityQuery<TransformComponent> _xformQuery;
 
     public override void Initialize()
     {
@@ -51,6 +50,12 @@ public sealed class MapInsertSystem : SharedMapInsertSystem
 
     private void OnMapInsertMapInit(Entity<MapInsertComponent> ent, ref MapInitEvent args)
     {
+        if (!_random.Prob(ent.Comp.Probability))
+        {
+            QueueDel(ent);
+            return;
+        }
+
         if (ent.Comp.Spawn is not { } spawn)
             return;
 
@@ -71,7 +76,6 @@ public sealed class MapInsertSystem : SharedMapInsertSystem
             return;
 
         var insertGrid = grids[0];
-        var originalGridXform = Transform(insertGrid);
         var xform = Transform(ent);
         var mainGrid = xform.GridUid;
         var coordinates = _transform.GetMapCoordinates(ent, xform).Offset(new Vector2(-0.5f, -0.5f));
@@ -97,9 +101,9 @@ public sealed class MapInsertSystem : SharedMapInsertSystem
             }
         }
 
-        _transform.SetMapCoordinates(insertGrid, coordinates);
 
         // Clear all entities on map in insert area
+        _transform.SetMapCoordinates(insertGrid, coordinates);
         if (ent.Comp.ClearEntities)
         {
             MapInsertSmimsh(insertGrid);
@@ -108,22 +112,21 @@ public sealed class MapInsertSystem : SharedMapInsertSystem
         // Merge grids
         if (mainGrid == null)
             return;
-        //Need to make sure the grid isn't overlapping where it's going to be merged to, otherwise exception
+        // Need to make sure the grid isn't overlapping where it's going to be merged to, otherwise exception
         _transform.SetMapCoordinates(insertGrid, coordinates.Offset(new Vector2(999f)));
         _fixture.Merge((EntityUid)mainGrid, insertGrid, coordinatesi, Angle.Zero);
 
+        QueueDel(ent);
     }
 
-    private void MapInsertSmimsh(EntityUid uid,  FixturesComponent? manager = null, MapGridComponent? grid = null, TransformComponent? xform = null, bool ClearAreas = false)
+    private void MapInsertSmimsh(EntityUid uid,  FixturesComponent? manager = null, MapGridComponent? grid = null, TransformComponent? xform = null)
     {
+        // This code is based on the Smimsh function for shuttle ftl, but we need some tweaks for our use-case
+
         if (!Resolve(uid, ref manager, ref grid, ref xform) || xform.MapUid == null)
             return;
 
-        if (!TryComp(xform.MapUid, out BroadphaseComponent? lookup))
-            return;
-
         // Flatten anything not parented to a grid.
-        var transform = _physics.GetRelativePhysicsTransform((uid, xform), xform.MapUid.Value);
         var aabbs = new List<Box2>(manager.Fixtures.Count);
         var tileSet = new List<(Vector2i, Tile)>();
 
