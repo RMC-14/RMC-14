@@ -1,25 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fix the dropship landing rotated at Trijent Dam's LZ2.
-    type: Fix
-  - message: Fix the Liaison's escape pod crashing if launched early.
-    type: Fix
-  - message: Fix a visual bug with laser designators always saying that you can't
-      use them there.
-    type: Fix
-  id: 788
-  time: '2024-10-06T22:58:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4302
-- author: deltanedas
-  changes:
-  - message: Fixed tail stab looking like you hurt your fellow xenos on your client.
-    type: Fix
-  id: 789
-  time: '2024-10-06T23:26:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4295
-- author: DrSmugleaf
-  changes:
   - message: Fixed the SEA not starting with 45 vendor points.
     type: Fix
   id: 790
@@ -5111,5 +5092,20 @@
   id: 1287
   time: '2025-02-03T11:23:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5505
+- author: Vermidia
+  changes:
+  - message: Avalis now have their own laugh sound.
+    type: Add
+  id: 1288
+  time: '2025-02-03T11:34:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5503
+- author: Whisper
+  changes:
+  - message: SOP clarification; The deconstruction of crates and barrels are not considered
+      ship modifications.
+    type: Tweak
+  id: 1289
+  time: '2025-02-03T11:33:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5510
 Name: RMC14
 Order: -1
