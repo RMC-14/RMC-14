@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Spray;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
+using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
 using Content.Shared.Maps;
@@ -34,6 +35,7 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
 
     public override void Initialize()
     {
@@ -110,10 +112,10 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
         if (xeno.Comp.ResinDoafter != null || !_xenoPlasma.TryRemovePlasmaPopup((xeno.Owner, null), args.PlasmaCost))
             return;
 
-        if (args.Entity is { } entity && _hive.FromSameHive(xeno.Owner, entity))
+        if (args.Entity is { } entity)
         {
             // Check if target is xeno wall or door
-            if (TryComp(entity, out XenoConstructComponent? construct))
+            if (TryComp(entity, out ResinSurgeReinforcableComponent? construct) && _hive.FromSameHive(xeno.Owner, entity))
             {
                 // Check if target is already buffed
                 if (HasComp<XenoConstructReinforceComponent>(entity))
@@ -136,7 +138,7 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
             }
 
             // Check if target is fruit
-            if (TryComp(entity, out XenoFruitComponent? fruit))
+            if (TryComp(entity, out XenoFruitComponent? fruit) && _hive.FromSameHive(xeno.Owner, entity))
             {
                 // Check if fruit mature, try to fasten its growth if not
                 if (!_xenoFruit.TrySpeedupGrowth((entity, fruit), xeno.Comp.FruitGrowth))
@@ -153,14 +155,28 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
             }
 
             // Check if target is on weeds
-            if (TryComp(entity, out XenoWeedsComponent? weeds))
+            if (TryComp(entity, out XenoWeedsComponent? weeds) || _weeds.IsOnWeeds(entity))
             {
-                var popupSelf = Loc.GetString("rmc-xeno-resin-surge-wall-self");
-                var popupOthers = Loc.GetString("rmc-xeno-resin-surge-wall-others", ("xeno", xeno));
-                _popup.PopupPredicted(popupSelf, popupOthers, xeno, xeno);
+                EntityUid weedEnt = entity;
+                if (weeds == null)
+                {
+                    var weedTempEnt = _weeds.GetWeedsOnFloor((gridId, grid), entity.ToCoordinates());
+                    if (weedTempEnt != null)
+                    {
+                        weedEnt = weedTempEnt.Value;
+                        TryComp(weedEnt, out weeds);
+                    }
+                }
 
-                SurgeUnstableWall(xeno, target);
-                return;
+                if (weeds != null && _hive.FromSameHive(xeno.Owner, weedEnt))
+                {
+                    var popupSelf = Loc.GetString("rmc-xeno-resin-surge-wall-self");
+                    var popupOthers = Loc.GetString("rmc-xeno-resin-surge-wall-others", ("xeno", xeno));
+                    _popup.PopupPredicted(popupSelf, popupOthers, xeno, xeno);
+
+                    SurgeUnstableWall(xeno, target);
+                    return;
+                }
             }
         }
 
