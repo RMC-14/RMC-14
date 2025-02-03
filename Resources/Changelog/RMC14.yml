@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fix parasites dying when manually being used to infect from their leap
-      limit
-    type: Fix
-  id: 786
-  time: '2024-10-05T22:14:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4275
 - author: deltanedas
   changes:
   - message: Wehny is not real. Rouny is not real. Ravager is not real. Burrower is
@@ -5108,5 +5100,17 @@
   id: 1285
   time: '2025-02-03T11:19:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5498
+- author: Vermidia
+  changes:
+  - message: Fixed resin surge reinforcing non-walls and doors
+    type: Fix
+  - message: Fixed resin surge making sticky weeds if a non-wall non-fruit entity
+      was targeted on weeds (it now makes a wall as intended)
+    type: Fix
+  - message: Reverted weed node layering changes for now.
+    type: Tweak
+  id: 1286
+  time: '2025-02-03T11:21:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5500
 Name: RMC14
 Order: -1
