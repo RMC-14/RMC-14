@@ -30,7 +30,8 @@
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
         RMCSkillPolice: 2
-        RMCSkillCqc: 2
+        RMCSkillCqc: 3
+        RMCSkillMedical: 1
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetCivilianCLF
     - type: Survivor
