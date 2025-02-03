@@ -41,7 +41,7 @@
             - !type:SpawnPrototype
               prototype: CMSheetMetal1
           steps:
-            - tool: Screwing
+            - tool: Anchoring
               doAfter: 0
 
     - node: stool
@@ -52,7 +52,7 @@
             - !type:SpawnPrototype
               prototype: CMSheetMetal1
           steps:
-            - tool: Screwing
+            - tool: Anchoring
               doAfter: 0
 
     - node: chairComfy
@@ -63,7 +63,7 @@
             - !type:SpawnPrototype
               prototype: CMSheetMetal1
           steps:
-            - tool: Screwing
+            - tool: Anchoring
               doAfter: 0
 
     - node: chairOfficeDark
@@ -74,7 +74,7 @@
             - !type:SpawnPrototype
               prototype: CMSheetMetal1
           steps:
-            - tool: Screwing
+            - tool: Anchoring
               doAfter: 0
 
     - node: chairOfficeWhite
@@ -85,5 +85,5 @@
             - !type:SpawnPrototype
               prototype: CMSheetMetal1
           steps:
-            - tool: Screwing
+            - tool: Anchoring
               doAfter: 0
