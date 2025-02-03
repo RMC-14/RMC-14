@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed parasites sometimes being hiveless
-    type: Fix
-  id: 781
-  time: '2024-10-04T21:56:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4251
 - author: DrSmugleaf
   changes:
   - message: Fixed Trijent Dam tactical map, mortar, CAS, power, bioscan and other
@@ -5116,5 +5109,12 @@
   id: 1280
   time: '2025-02-03T10:57:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5514
+- author: Vermidia
+  changes:
+  - message: Fixed ability slows rarely not wearing off.
+    type: Fix
+  id: 1281
+  time: '2025-02-03T11:00:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5509
 Name: RMC14
 Order: -1
