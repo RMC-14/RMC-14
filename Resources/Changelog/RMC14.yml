@@ -1,27 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed error spam when near a hive core.
-    type: Fix
-  - message: Hopefully fix players sometimes stuttering until they reconnect.
-    type: Fix
-  id: 783
-  time: '2024-10-04T22:19:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4253
-- author: DrSmugleaf
-  changes:
-  - message: Fixed bunker window frame sprites erroring in some cases.
-    type: Fix
-  id: 784
-  time: '2024-10-04T22:28:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4254
-- author: DrSmugleaf
-  changes:
-  - message: Fix armor and squad goggles not having squad coloring.
-    type: Fix
-  id: 785
-  time: '2024-10-05T21:10:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4269
 - author: Vermidia
   changes:
   - message: Fix parasites dying when manually being used to infect from their leap
@@ -5107,5 +5084,29 @@
   id: 1282
   time: '2025-02-03T11:14:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5495
+- author: whisper
+  changes:
+  - message: Kamiel Lancoaster, Eric Rasczak figurine
+    type: Add
+  id: 1283
+  time: '2025-02-03T11:20:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5492
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added radio tuning. This will allow you to select what channels you can
+      hear, useful for staff officers filtering out other squad chatter.
+    type: Add
+  id: 1284
+  time: '2025-02-03T11:19:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5511
+- author: UnicornOnLSD
+  changes:
+  - message: Gigantic shipments of a very conspicuous plushie have been received in
+      the almayer cargo holds. They are not accessible by any means yet. (Added conspicuous
+      plushie)
+    type: Add
+  id: 1285
+  time: '2025-02-03T11:19:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5498
 Name: RMC14
 Order: -1
