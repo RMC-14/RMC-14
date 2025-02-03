@@ -1,22 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed Trijent Dam tactical map, mortar, CAS, power, bioscan and other
-      area-related things.
-    type: Fix
-  - message: Fixed some areas on the Almayer being unpowered.
-    type: Fix
-  - message: Fixed being able to destroy or repair multiple fusion reactors at once.
-    type: Fix
-  - message: Fixed xenos being able to move while destroying a fusion reactor.
-    type: Fix
-  - message: Made water slightly less wide so it's harder to get slowed by it.
-    type: Tweak
-  id: 782
-  time: '2024-10-04T22:11:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4250
-- author: DrSmugleaf
-  changes:
   - message: Fixed error spam when near a hive core.
     type: Fix
   - message: Hopefully fix players sometimes stuttering until they reconnect.
@@ -5116,5 +5100,12 @@
   id: 1281
   time: '2025-02-03T11:00:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5509
+- author: blueDev2
+  changes:
+  - message: Ported Burrower Unburrow stunning marines in a 0.5 tile range for 4 seconds.
+    type: Add
+  id: 1282
+  time: '2025-02-03T11:14:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5495
 Name: RMC14
 Order: -1
