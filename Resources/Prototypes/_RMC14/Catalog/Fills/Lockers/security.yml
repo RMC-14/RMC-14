@@ -27,8 +27,6 @@
         amount: 3
       - id: ArmorHelmetRiot
         amount: 3
-      - id: RiotShield
-        amount: 6
       - id: RMCWeaponShotgunM890Riot
         amount: 3
       - id: RMCBoxShotgunBeanbag
@@ -41,12 +39,26 @@
 - type: entity
   id: RMCArmoryLockerRedM890Filled
   parent: RMCLockerGunRed
-  suffix: Filled 890Tactical
+  suffix: Filled 890Tactical, Three
   components:
   - type: StorageFill
     contents:
     - id: WeaponShotgunM890
       amount: 3
+    - id: RMCBoxShellsBuckshot
+      amount: 1
+    - id: RMCBoxShellsSlugs
+      amount: 1
+
+- type: entity
+  parent: RMCLockerGunRed
+  id: RMCArmoryLockerRedM890FilledSingle
+  suffix: Filled 890Tactical, Single
+  components:
+  - type: StorageFill
+    contents:
+    - id: WeaponShotgunM890
+      amount: 1
     - id: RMCBoxShellsBuckshot
       amount: 1
     - id: RMCBoxShellsSlugs
@@ -74,4 +86,26 @@
     - id: WeaponSMGM63
       amount: 4
     - id: RMCBoxMagazineSMGM63
+      amount: 1
+
+- type: entity
+  parent: RMCLockerGunRed
+  id: RMCArmoryLockerRedM54CMK1AP
+  suffix: Filled M54C MK1 AP
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCM54CMK1CaseAP
+      amount: 1
+
+- type: entity
+  parent: RMCLockerGunRed
+  id: RMCArmoryLockerRedM1984
+  suffix: Filled M1984
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCM1984BeltFilled
+      amount: 4
+    - id: RMCBoxMagazinePistolM1984
       amount: 1

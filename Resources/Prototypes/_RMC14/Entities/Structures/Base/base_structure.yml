@@ -51,6 +51,7 @@
     hitsToInvulnerability: 3
   - type: DamageMultiplierFlags
     flags: Breaching
+  - type: DeletedByWeedKiller
 
 - type: entity
   id: CMCorrodible

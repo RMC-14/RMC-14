@@ -9,6 +9,16 @@
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
+  ranks:
+    RMCRankLanceCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 252000 # 70 hours
+    RMCRankPrivateFirstClass:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 36000 # 10 hours
+    RMCRankPrivate: []
   accessGroups:
   - Rifleman
   hasIcon: false
@@ -26,7 +36,7 @@
       points: 45
     - type: SquadArmorWearer
     - type: JobPrefix
-      prefix: "RFN"
+      prefix: cm-job-prefix-rifleman
 
 - type: startingGear
   id: CMGearRifleman

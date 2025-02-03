@@ -136,13 +136,14 @@
         points: 16
     - name: Restricted Firearms
       entries:
-      - id: RMCMK80Case
+      - id: RMCGunCasePistolMK80
         points: 8
-      - id: RMCSmartPistolCase
+      - id: RMCGunCasePistolSmart
         points: 12
     - name: Clothing Items
       entries:
       - id: RMCPouchMacheteFilled
+        name: machete pouch (Full)
         points: 8
       - id: RMCBackpackRTO
         points: 15
@@ -249,6 +250,7 @@
       - id: RMCPouchReagentCanister
         name: Pressurized Reagent Canister Pouch\n(EMPTY)
       - id: RMCPouchVialFill
+        name: vial pouch (Full)
       - id: RMCPouchMedical
       - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)

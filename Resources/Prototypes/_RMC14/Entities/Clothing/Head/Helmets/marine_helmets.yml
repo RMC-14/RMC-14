@@ -3,7 +3,6 @@
   parent: [RMCMarineHelmetBase, RMCFoldableHelmetBase]
   id: ArmorHelmetM10
   name: M10 pattern marine helmet
-  suffix: Jungle
   description: A standard M10 Pattern Helmet. The inside label, along with washing information, reads, 'The difference between an open-casket and closed-casket funeral. Wear on head for best results.'. There is a built-in camera on the right side.
   components:
   - type: Sprite
@@ -22,7 +21,6 @@
   parent: ArmorHelmetM10
   id: CMArmorHelmetM10MP
   name: M10 helmet MP
-  suffix: Jungle
   description: A special variant of the M10 Pattern Helmet worn by the Military Police of the Marines.
   components:
   - type: Sprite
@@ -41,7 +39,6 @@
   parent: ArmorHelmetM10
   id: CMArmorHelmetM10ChiefMP
   name: M10 helmet chief MP
-  suffix: Jungle
   description: A special variant of the M10 Pattern Helmet worn by the Chief MP of the Marines.
   components:
   - type: Sprite
@@ -60,7 +57,6 @@
   parent: ArmorHelmetM10
   id: RMCArmorHelmetM10SO
   name: M10 pattern officer helmet
-  suffix: Jungle
   description: A special variant of the M10 Pattern Helmet worn by Officers of the UNMC, attracting the attention of the grunts and sniper fire alike.
   components:
   - type: Sprite
@@ -91,12 +87,13 @@
     explosionArmor: 10 #same as base m10 helmet
     #todo RMC: melee armor: 25
     #todo RMC: energy armor: 15
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: entity
   parent: ArmorHelmetM10
   id: CMArmorHelmetM10Medic
   name: M10 medic helmet
-  suffix: Jungle
   description: A special variant of the M10 Pattern Helmet worn by the medic marines of the Marines.
   components:
   - type: Sprite
@@ -131,7 +128,6 @@
   parent: ArmorHelmetM10
   id: CMArmorHelmetM10Tech
   name: M10 tech helmet
-  suffix: Jungle
   description: A special variant of the M10 Pattern Helmet worn by the engineer marines of the Marines.
   components:
   - type: Sprite
@@ -152,7 +148,6 @@
   parent: ArmorHelmetM10
   id: CMArmorHelmetM11
   name: M11 pattern leader helmet
-  suffix: Jungle
   description: A slightly fancier helmet for marine leaders. This one contains a small built-in camera and has cushioning to protect your fragile brain.
   components:
   - type: Sprite
@@ -172,7 +167,6 @@
   parent: ArmorHelmetM10
   id: CMArmorHelmetM12
   name: M12 pattern helmet
-  suffix: Jungle
   description: An experimental brain-bucket. A dust ruffle hangs from back. Moderately better at deflecting blunt objects at the cost of humiliation. But who will be laughing at the memorial? Not you, you'll be busy getting medals for your intel work or for your fantastic leadership.
   components:
   - type: Sprite
@@ -192,7 +186,6 @@
   parent: ArmorHelmetM10
   id: CMArmorHelmetM30
   name: M30 tactical helmet
-  suffix: Jungle
   description: The M30 tactical helmet has an left eyepiece filter used to filter tactical data.
   components:
   - type: Sprite
@@ -218,13 +211,14 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/press.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/press.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 # M3-S Scout Spec
 - type: entity
   parent: ArmorHelmetM10
   id: RMCArmorHelmetM3Scout
   name: M3-S helmet
-  suffix: Jungle
   description: A custom helmet from the M3 series designed to be lightweight and used for recon missions.
   components:
   - type: Sprite
@@ -244,7 +238,6 @@
   parent: RMCArmorHelmetM3Scout
   id: RMCArmorHelmetM3G4
   name: M3-G4 helmet
-  suffix: Jungle
   description: Pairs with the M3-G4 heavy grenadier plating. A distant cousin of the experimental B18 defensive helmet. # As such, it also resists some parasite latching attempts.
   components:
   - type: Sprite
@@ -269,7 +262,6 @@
   parent: ArmorHelmetM10
   id: CMArmorHelmetM35
   name: M35 helmet
-  suffix: Jungle
   description: A custom helmet from the M3 series designed to be highly flame retardant.
   components:
   - type: Sprite
@@ -289,7 +281,6 @@
   parent: RMCMarineHelmetBase
   id: CMArmorHelmetM45
   name: M45 ghillie helmet
-  suffix: Jungle
   description: A lightweight M45 helmet with ghillie coif used by Marine snipers on recon missions.
   components:
   - type: Sprite
@@ -315,7 +306,6 @@
   parent: ArmorHelmetM10
   id: RMCArmorHelmetM3TDemo
   name: M3-T bombardier helmet
-  suffix: Jungle
   description: A custom-built helmet for explosive weaponry users. Comes with inbuilt ear blast protection, firing a rocket launcher without this is not recommended.
   components:
   - type: Sprite

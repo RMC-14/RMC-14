@@ -48,7 +48,7 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         SubscribeLocalEvent<DropshipUtilityPointComponent, MapInitEvent>(OnAttachmentPointMapInit);
         SubscribeLocalEvent<DropshipUtilityPointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
-         SubscribeLocalEvent<DropshipWeaponPointComponent, ExaminedEvent>(OnAttachmentExamined);
+        SubscribeLocalEvent<DropshipWeaponPointComponent, ExaminedEvent>(OnAttachmentExamined);
 
         Subs.BuiEvents<DropshipNavigationComputerComponent>(DropshipNavigationUiKey.Key,
             subs =>

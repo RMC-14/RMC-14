@@ -8,9 +8,18 @@
   - !type:DepartmentTimeRequirement
     department: CMMilitaryPolice
     time: 54000 # 15 hours
+  - !type:RoleTimeRequirement
+    role: CMJobMilitaryWarden
+    time: 18000 # 5 hours
   - !type:DepartmentTimeRequirement
     department: CMCommand
     time: 18000 # 5 hours
+  ranks:
+    RMCRankFirstLT:
+    - !type:RoleTimeRequirement
+      role: CMJobChiefMP
+      time: 36000 # 10 hours
+    RMCRankSecondLT: []
   weight: 5
   startingGear: CMGearChiefMP
   icon: "CMJobIconChiefMP"
@@ -47,14 +56,14 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "CMP"
+      prefix: cm-job-prefix-mp
 
 - type: startingGear
   id: CMGearChiefMP
   equipment:
     jumpsuit: CMJumpsuitWO
     shoes: CMBootsBlackFilled
-    head: CMHeadBeretWO
+    head: CMHeadBeretCMP
     eyes: CMGlassesSecurity
     gloves: CMHandsBlackMarine
     id: CMIDCardChiefMP

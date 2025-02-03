@@ -219,6 +219,13 @@
     solution: tank
   - type: DrawableSolution
     solution: tank
+  - type: RMCSolutionTransferWhitelist
+    popup: rmc-solution-transfer-whitelist-failed-not-welding-tank
+    whitelist:
+      components:
+      - Welder
+      tags:
+      - RMCTankFuel
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Back/Backpacks/Marines/welder/jungle-desert-classic.rsi

@@ -1,5 +1,6 @@
-﻿using Content.Shared._RMC14.Emote;
+using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Shields;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -7,6 +8,7 @@ using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Physics;
+using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -14,7 +16,6 @@ using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
-using Robust.Shared.Timing;
 using System.Linq;
 using System.Numerics;
 
@@ -33,7 +34,7 @@ public sealed class XenoPierceSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly VanguardShieldSystem _vanguard = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
 
     private const int AttackMask = (int)(CollisionGroup.MobMask | CollisionGroup.Opaque);
 
@@ -44,9 +45,6 @@ public sealed class XenoPierceSystem : EntitySystem
 
     private void OnXenoPierceAction(Entity<XenoPierceComponent> xeno, ref XenoPierceActionEvent args)
     {
-        if (!_plasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
-            return;
-
         //Note below is mostly all tail stab code
         var transform = Transform(xeno);
 
@@ -113,10 +111,13 @@ public sealed class XenoPierceSystem : EntitySystem
                 SpawnAttachedTo(xeno.Comp.AttackEffect, hit.ToCoordinates());
         }
 
+        if (actualResults.Count > 0)
+            _rmcMelee.DoLunge(xeno, actualResults[0]);
+
         if (_net.IsServer)
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
 
-		if (actualResults.Count >= xeno.Comp.RechargeTargetsRequired)
-			_vanguard.RegenShield(xeno);
-	}
+        if (actualResults.Count >= xeno.Comp.RechargeTargetsRequired)
+            _vanguard.RegenShield(xeno);
+    }
 }

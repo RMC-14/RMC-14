@@ -28,7 +28,7 @@
         RMCSkillFirearms: 2
         RMCSkillFireman: 1
     - type: JobPrefix
-      prefix: "MST"
+      prefix: cm-job-prefix-messtech
   hidden: true # TODO RMC14
 
 - type: startingGear
@@ -41,7 +41,7 @@
     shoes: CMBootsBlack
     id: CMIDCardMessTech
     ears: CMHeadsetChef
-#    belt: TODO RMC14 M276 Pattern General Pistol Holster Rig Filled
+    belt: RMCM1984BeltFilled
     pocket1: RMCPouchGeneralMedium
 
 - type: entity

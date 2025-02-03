@@ -2,6 +2,7 @@
 using System.Linq;
 using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Chat;
+using Content.Shared._RMC14.Cryostorage;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Orders;
@@ -13,7 +14,6 @@ using Content.Shared.Chat;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
-using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Mind;
@@ -28,9 +28,9 @@ using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Marines.Squads;
 
@@ -64,17 +64,19 @@ public sealed class SquadSystem : EntitySystem
 
     private readonly HashSet<EntityUid> _membersToUpdate = new();
 
+    private EntityQuery<RMCMapToSquadComponent> _mapToSquadQuery;
+    private EntityQuery<OriginalRoleComponent> _originalRoleQuery;
     private EntityQuery<SquadArmorWearerComponent> _squadArmorWearerQuery;
     private EntityQuery<SquadMemberComponent> _squadMemberQuery;
     private EntityQuery<SquadTeamComponent> _squadTeamQuery;
-    private EntityQuery<RMCMapToSquadComponent> _mapToSquadQuery;
 
     public override void Initialize()
     {
+        _mapToSquadQuery = GetEntityQuery<RMCMapToSquadComponent>();
+        _originalRoleQuery = GetEntityQuery<OriginalRoleComponent>();
         _squadArmorWearerQuery = GetEntityQuery<SquadArmorWearerComponent>();
         _squadMemberQuery = GetEntityQuery<SquadMemberComponent>();
         _squadTeamQuery = GetEntityQuery<SquadTeamComponent>();
-        _mapToSquadQuery = GetEntityQuery<RMCMapToSquadComponent>();
 
         SubscribeLocalEvent<SquadArmorComponent, GetEquipmentVisualsEvent>(OnSquadArmorGetVisuals, after: [typeof(ClothingSystem)]);
 
@@ -85,6 +87,8 @@ public sealed class SquadSystem : EntitySystem
         SubscribeLocalEvent<SquadMemberComponent, PlayerAttachedEvent>(OnSquadMemberPlayerAttached);
         SubscribeLocalEvent<SquadMemberComponent, PlayerDetachedEvent>(OnSquadMemberPlayerDetached);
         SubscribeLocalEvent<SquadMemberComponent, GetMarineIconEvent>(OnSquadRoleGetIcon, after: [typeof(SharedMarineSystem)]);
+        SubscribeLocalEvent<SquadMemberComponent, EnteredCryostorageEvent>(OnSquadMemberEnteredCryo);
+        SubscribeLocalEvent<SquadMemberComponent, LeftCryostorageEvent>(OnSquadMemberLeftCryo);
 
         SubscribeLocalEvent<SquadLeaderComponent, EntityTerminatingEvent>(OnSquadLeaderTerminating);
         SubscribeLocalEvent<SquadLeaderComponent, GetMarineIconEvent>(OnSquadLeaderGetMarineIcon, after: [typeof(SharedMarineSystem)]);
@@ -173,6 +177,35 @@ public sealed class SquadSystem : EntitySystem
     {
         args.Background = member.Comp.Background;
         args.BackgroundColor = member.Comp.BackgroundColor;
+    }
+
+    private void OnSquadMemberEnteredCryo(Entity<SquadMemberComponent> ent, ref EnteredCryostorageEvent args)
+    {
+        if (!_originalRoleQuery.TryComp(ent, out var role) || role.Job is not { } jobId)
+            return;
+
+        if (!_squadTeamQuery.TryComp(ent.Comp.Squad, out var squad) ||
+            !squad.Roles.TryGetValue(jobId, out var roles) ||
+            roles <= 0)
+        {
+            return;
+        }
+
+        squad.Roles[jobId] = roles - 1;
+    }
+
+    private void OnSquadMemberLeftCryo(Entity<SquadMemberComponent> ent, ref LeftCryostorageEvent args)
+    {
+        if (!_originalRoleQuery.TryComp(ent, out var role) || role.Job is not { } jobId)
+            return;
+
+        if (!_squadTeamQuery.TryComp(ent.Comp.Squad, out var squad) ||
+            !squad.Roles.TryGetValue(jobId, out var roles))
+        {
+            return;
+        }
+
+        squad.Roles[jobId] = roles + 1;
     }
 
     private void OnSquadLeaderTerminating(Entity<SquadLeaderComponent> ent, ref EntityTerminatingEvent args)
@@ -368,18 +401,17 @@ public sealed class SquadSystem : EntitySystem
 
         var member = EnsureComp<SquadMemberComponent>(marine);
         var oldSquadId = member.Squad;
+        var role = job ?? _originalRoleQuery.CompOrNull(marine)?.Job;
         if (_squadTeamQuery.TryComp(oldSquadId, out var oldSquad))
         {
             oldSquad.Members.Remove(marine);
 
-            if (_mind.TryGetMind(marine, out var mindId, out _) &&
-                _job.MindTryGetJobId(mindId, out var currentJob) &&
-                currentJob != null)
+            if (role != null)
             {
-                if (oldSquad.Roles.TryGetValue(currentJob.Value, out var oldJobs) &&
+                if (oldSquad.Roles.TryGetValue(role.Value, out var oldJobs) &&
                     oldJobs > 0)
                 {
-                    oldSquad.Roles[currentJob.Value] = oldJobs - 1;
+                    oldSquad.Roles[role.Value] = oldJobs - 1;
                 }
             }
         }
@@ -405,10 +437,10 @@ public sealed class SquadSystem : EntitySystem
         Dirty(marine, grant);
 
         team.Comp.Members.Add(marine);
-        if (job != null)
+        if (role != null)
         {
-            team.Comp.Roles.TryGetValue(job.Value, out var roles);
-            team.Comp.Roles[job.Value] = roles + 1;
+            team.Comp.Roles.TryGetValue(role.Value, out var roles);
+            team.Comp.Roles[role.Value] = roles + 1;
         }
 
         var ev = new SquadMemberUpdatedEvent(team);
@@ -607,6 +639,15 @@ public sealed class SquadSystem : EntitySystem
     public bool IsSquadLeader(ProtoId<JobPrototype> job)
     {
         return job == SquadLeaderJob;
+    }
+
+    public bool HasSpaceForRole(Entity<SquadTeamComponent> squad, ProtoId<JobPrototype> job)
+    {
+        if (!squad.Comp.MaxRoles.TryGetValue(job, out var maxRoles))
+            return true;
+
+        squad.Comp.Roles.TryGetValue(job, out var currentRoles);
+        return currentRoles < maxRoles;
     }
 
     public override void Update(float frameTime)

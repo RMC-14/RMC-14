@@ -248,7 +248,7 @@
   id: CMVendorSec
   startingInventory: # TODO RMC14
     RMCHandcuffs: 8
-    Zipties: 10
+    RMCZipties: 10
     RMCGrenadeFlashBang: 4
     RMCWeaponTaser: 4
     # Pepper spray 4
@@ -322,7 +322,7 @@
     RMCMagazineRifleM4SPRRubber: 20
     CMShellShotgunBeanbag: 20
     CMFirstAidKitFilled: 2
-    CMBurnAidKitFilled: 2 #firstaid fire 2
+    CMBurnAidKitFilled: 2
     #MedkitRadiationFilled: 1 #firstaid rad 1
     # Crew Monitor
 
