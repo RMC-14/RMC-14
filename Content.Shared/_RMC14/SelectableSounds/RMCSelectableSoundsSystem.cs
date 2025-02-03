@@ -23,15 +23,11 @@ public sealed class RMCSelectableSoundsSystem : EntitySystem
             return;
 
         var user = args.User;
-
-        if (!TryComp<EmitSoundOnUseComponent>(ent.Owner, out var use))
-            return;
-
         var verbs = new ValueList<AlternativeVerb>();
 
         foreach (var soundEntry in ent.Comp.Sounds)
         {
-            var name = soundEntry.Key;
+            var name = Loc.GetString(soundEntry.Key);
             var sound = soundEntry.Value;
 
             var newVerb = new AlternativeVerb()
@@ -41,7 +37,8 @@ public sealed class RMCSelectableSoundsSystem : EntitySystem
                 Category = VerbCategory.SelectType,
                 Act = () =>
                 {
-                    use.Sound = sound;
+                    if (TryComp<EmitSoundOnUseComponent>(ent.Owner, out var use))
+                        use.Sound = sound;
 
                     if (TryComp<EmitSoundOnActionComponent>(ent.Owner, out var action))
                         action.Sound = sound;

@@ -11,9 +11,9 @@
     color: Blue
   - type: RMCSelectableSounds
     sounds:
-      Whistle:
+      rmc-sound-select-whistle: # Loc ID
         collection: TrenchWhistle
-      Crowbar:
+      rmc-sound-select-crowbar:
         path: /Audio/_RMC14/Handling/crowbar_pickup.ogg
-      Detector:
+      rmc-sound-select-detector:
         path: /Audio/_RMC14/Effects/motion_detector.ogg

@@ -10,5 +10,5 @@ namespace Content.Shared._RMC14.SelectableSounds;
 public sealed partial class RMCSelectableSoundsComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public Dictionary<string, SoundSpecifier> Sounds = new();
+    public Dictionary<LocId, SoundSpecifier> Sounds = new();
 }
