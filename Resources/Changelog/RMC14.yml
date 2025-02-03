@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: deltanedas
-  changes:
-  - message: Wehny is not real. Rouny is not real. Ravager is not real. Burrower is
-      not real.
-    type: Fix
-  id: 787
-  time: '2024-10-06T01:39:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4292
 - author: DrSmugleaf
   changes:
   - message: Fix the dropship landing rotated at Trijent Dam's LZ2.
@@ -5112,5 +5104,12 @@
   id: 1286
   time: '2025-02-03T11:21:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5500
+- author: Whisper
+  changes:
+  - message: Increased the volume of dropship startup and landing.
+    type: Tweak
+  id: 1287
+  time: '2025-02-03T11:23:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5505
 Name: RMC14
 Order: -1
