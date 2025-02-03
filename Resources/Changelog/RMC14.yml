@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: FungiFellow
-  changes:
-  - message: Added the M276 Shotgun Shell Loading Rig
-    type: Add
-  id: 780
-  time: '2024-10-04T10:39:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4154
 - author: Vermidia
   changes:
   - message: Fixed parasites sometimes being hiveless
@@ -5116,5 +5109,12 @@
   id: 1279
   time: '2025-01-29T18:03:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5490
+- author: Tunguso4ka
+  changes:
+  - message: Fixed Riflemen not being able to buy M1984 AP ammo in their vendor.
+    type: Fix
+  id: 1280
+  time: '2025-02-03T10:57:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5514
 Name: RMC14
 Order: -1
