@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: BaseStructure
   id: CMBaseStructure
   abstract: true
@@ -157,6 +157,7 @@
     flags:
     - Turf
     - Xeno
+  - type: ResinSurgeReinforcable
 
 # Invisible Wall
 
