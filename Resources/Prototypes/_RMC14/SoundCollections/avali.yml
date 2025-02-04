@@ -1,0 +1,27 @@
+- type: soundCollection
+  id: AvaliScreams
+  files:
+    - /Audio/_RMC14/Voice/Avali/avali_scream1.ogg
+    - /Audio/_RMC14/Voice/Avali/avali_scream2.ogg
+
+- type: soundCollection
+  id: AvaliLaugh
+  files:
+    - /Audio/_RMC14/Voice/Avali/avali_laugh1.ogg
+    - /Audio/_RMC14/Voice/Avali/avali_laugh2.ogg
+
+- type: soundCollection
+  id: AvaliCoughs
+  files:
+    - /Audio/_RMC14/Voice/Avali/avali_cough.ogg
+
+- type: soundCollection
+  id: AvaliCry
+  files:
+    - /Audio/_RMC14/Voice/Avali/avali_cry1.ogg
+    - /Audio/_RMC14/Voice/Avali/avali_cry2.ogg
+
+- type: soundCollection
+  id: AvaliWhistle
+  files:
+    - /Audio/_RMC14/Voice/Avali/avali_whistle.ogg

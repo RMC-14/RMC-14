@@ -7,7 +7,6 @@
   exclaimSound:
     path: /Audio/_RMC14/Voice/Avali/avali_1_exclaim.ogg
 
-# Unused but if we get diff supprot for it can add in
 - type: speechSounds
   id: FemaleAvali
   saySound:
