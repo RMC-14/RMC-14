@@ -2,7 +2,7 @@
   parent:
   - CMXenoUndeveloped
   - CMXenoFlammable
-  id: CMXenoParasite # TODO RMC14 slowly die off weeds
+  id: CMXenoParasiteBase 
   name: Parasite
   components:
   - type: GhostRole
@@ -23,7 +23,6 @@
     actionIds:
     - ActionXenoRest
     - ActionXenoWatch
-    - ActionXenoHide
     - ActionXenoLeap
     tier: 0
     hudOffset: -0.1,0.1
@@ -104,3 +103,37 @@
     downSound: null
   - type: XenoInhandSprite
     stateName: parasite
+
+
+
+- type: entity
+  parent: CMXenoParasiteBase
+  id: CMXenoParasite
+  components:
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoWatch
+    - ActionXenoHide
+    - ActionXenoLeap
+  - type: XenoHide
+  - type: XenoEvolution
+    strains:
+    - RMCXenoParasiteObserver
+
+- type: entity
+  parent: CMXenoParasiteBase
+  id: RMCXenoParasiteObserver # Observer Strain
+  suffix: Observer
+  components:
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoWatch
+    - ActionXenoLeap
+    - ActionXenoZoom 
+  - type: XenoZoom
+  - type: XenoStrain
+    name: rmc-xeno-observer-name
+    description: rmc-xeno-observer-description
+    popup: rmc-xeno-observer-popup

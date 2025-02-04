@@ -67,3 +67,11 @@ rmc-xeno-steelcrest-description = You trade your tail sweep and a small amount o
    - Headbutt while fortified. Headbutt doesn't lose damage and keeps it's higher range with high knockback.
    - Soak in damage for 6 seconds for a small heal that also refreshes your tail slam.
 rmc-xeno-steelcrest-popup = This one, like my will, is indomitable. It will become my steel crest against all that defy me.
+
+rmc-xeno-observer-name = Observer
+rmc-xeno-observer-description = You lose your ability to hide, but will be able to to see further into the distance. Stalk your prey for the best opportunity to infect or coordinate an ambush with your sisters.
+  You gain:
+  - An ability to Zoom out your field of view, like a Runner
+  You lose:
+  - Your ability to Hide
+rmc-xeno-observer-popup = This one will stalk prey from a distance, with a greater sight.
