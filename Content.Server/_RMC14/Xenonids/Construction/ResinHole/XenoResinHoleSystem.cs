@@ -302,11 +302,11 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
             return;
 
         var destroyed = false;
-        if (_destructible.TryGetDestroyedAt(resinHole, out var totalHealth))
+        if (_destructible.TryGetDestroyedAt(resinHole.Owner, out var totalHealth))
         {
             destroyed = args.Damageable.TotalDamage + args.DamageDelta.GetTotal() > totalHealth;
         }
-        
+
         ActivateTrap(resinHole, destroyed);
     }
 
