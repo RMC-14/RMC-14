@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Server.Destructible;
 using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Acid;
@@ -50,6 +51,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
     [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruct = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly DestructibleSystem _destructible = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
@@ -299,7 +301,12 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
         if (args.DamageDelta == null)
             return;
 
-        var destroyed = args.Damageable.TotalDamage + args.DamageDelta.GetTotal() > resinHole.Comp.TotalHealth;
+        var destroyed = false;
+        if (_destructible.TryGetDestroyedAt(resinHole, out var totalHealth))
+        {
+            destroyed = args.Damageable.TotalDamage + args.DamageDelta.GetTotal() > totalHealth;
+        }
+        
         ActivateTrap(resinHole, destroyed);
     }
 
@@ -470,10 +477,14 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
                 EnsureComp<TrapParasiteComponent>(trapEntity);
         }
 
-        string msg = destroyed ? "cm-xeno-construction-resin-hole-destroyed" : "rmc-xeno-construction-resin-hole-activate";
+        string msg = "rmc-xeno-construction-resin-hole-activate";
 
         var ev = new XenoResinHoleActivationEvent(msg);
-        RaiseLocalEvent(ent, ev);
+
+        // If the resin hole is destroyed, it's the XenoAnnounceStructureDestructionComponent job to announce
+        // the entity's destruction
+        if (!destroyed)
+            RaiseLocalEvent(ent, ev);
 
         comp.TrapPrototype = null;
         Dirty(resinHole);
