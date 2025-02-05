@@ -58,6 +58,7 @@
         - SmallMobLayer
   - type: Flammable
     canResistFire: false
+  - type: IgnoreBlockPullingDead
   - type: MovementSpeedModifier
     baseWalkSpeed: 3.7
     baseSprintSpeed: 6.7
@@ -85,6 +86,3 @@
       sprite: _RMC14/Mobs/Xenonids/Larva/larva.rsi
       noRot: true
       state: embryo
-
-- type: Tag
-  id: RMCXenoLarva

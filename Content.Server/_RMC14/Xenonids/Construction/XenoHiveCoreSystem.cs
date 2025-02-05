@@ -15,6 +15,8 @@ using Content.Shared.Mobs.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared.StepTrigger.Systems;
+using Content.Shared.Tag;
 
 namespace Content.Server._RMC14.Xenonids.Construction;
 
@@ -28,6 +30,7 @@ public sealed class XenoHiveCoreSystem : SharedXenoHiveCoreSystem
     [Dependency] private readonly RMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly TagSystem _tagSystem = default!;
 
     public override void Initialize()
     {
@@ -41,6 +44,9 @@ public sealed class XenoHiveCoreSystem : SharedXenoHiveCoreSystem
 
         SubscribeLocalEvent<XenoHiveCoreRoleComponent, MapInitEvent>(OnCoreRoleMapInit);
         SubscribeLocalEvent<XenoHiveCoreRoleComponent, GhostRoleSpawnerUsedEvent>(OnCoreRoleSpawnerUsed);
+
+        SubscribeLocalEvent<HiveCoreComponent, StepTriggerAttemptEvent>(OnHiveCoreStepTriggerAttempt);
+        SubscribeLocalEvent<HiveCoreComponent, StepTriggeredOffEvent>(OnHiveCoreStepTriggered);
     }
 
     private void OnDropshipHijackStart(ref DropshipHijackStartEvent ev)
@@ -143,4 +149,27 @@ public sealed class XenoHiveCoreSystem : SharedXenoHiveCoreSystem
             }
         }
     }
+
+    private void OnHiveCoreStepTriggerAttempt(Entity<HiveCoreComponent> core, ref StepTriggerAttemptEvent args)
+    {
+        if (CanTrigger(args.Tripper))
+            args.Continue = true;
+    }
+
+    private bool CanTrigger(EntityUid user)
+    {
+        return _tagSystem.HasTag(user, "RMCXenoLarva") && _mobState.IsDead(user);
+    }
+
+    private void OnHiveCoreStepTriggered(Entity<HiveCoreComponent> core, ref StepTriggeredOffEvent args)
+    {
+        var tripper = args.Tripper;
+        if (CanTrigger(tripper))
+        {
+            _hive.IncreaseBurrowedLarva(1);
+            QueueDel(tripper);
+        }
+    }
+
 }
+
