@@ -27,7 +27,7 @@
 - type: entity
   parent: CMArmorM4PMC
   id: CMArmorIronBear
-  name: H1 Iron Bears vest
+  name: H1 iron bears vest
   description: A protective vest worn by Iron Bears mercenaries.
   components:
   - type: Sprite
@@ -256,7 +256,7 @@
 - type: entity
   parent: RMCArmorM3G4
   id: RMCArmorMercenaryHEFA
-  name: HEFA Knight armor
+  name: HEFA knight armor
   description: A thick piece of armor adorning a HEFA. Usually seen on a HEFA knight.
   components:
   - type: Sprite
@@ -265,6 +265,8 @@
     armor: 40 # CLOTHING_ARMOR_VERYHIGH
     bio: 15
     explosionArmor: 70 # CLOTHING_ARMOR_GIGAHIGH
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 # Riot armor
 - type: entity
