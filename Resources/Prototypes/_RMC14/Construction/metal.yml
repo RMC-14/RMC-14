@@ -1,0 +1,105 @@
+- type: rmcConstruction
+  parent: RMCMetalBarricadeBuild
+  id: RMCDividerConstruction
+  name: test
+  isDivider: true
+
+- type: rmcConstruction
+  id: RMCBarbedWireBuild
+  name: barbed wire
+  prototype: BarbedWire1
+  doAfterTime: 1
+  doAfterTimeMin: 1
+  skill: RMCSkillConstruction
+  materialCost: 1
+  hasBuildRestriction: false
+  stackAmounts:
+  - 5
+  - 10
+  - 20
+
+- type: rmcConstruction
+  id: RMCMetalBarricadeBuild
+  name: metal barricade
+  prototype: CMBarricadeMetal
+  doAfterTime: 2
+  doAfterTimeMin: 1
+  skill: RMCSkillConstruction
+  materialCost: 4
+
+- type: rmcConstruction
+  parent: RMCMetalBarricadeBuild
+  id: RMCMetalBarricadeFoldableBuild
+  name: folding metal barricade
+  prototype: CMBarricadeMetalDoor
+  doAfterTime: 3
+  doAfterTimeMin: 1.5
+  materialCost: 6
+  skillLevel: 2
+
+- type: rmcConstruction
+  parent: RMCMetalBarricadeBuild
+  id: RMCHandrailBuild
+  name: handrail
+  prototype: RMCBarricadeHandrail
+  doAfterTime: 2
+  doAfterTimeMin: 1
+  materialCost: 2
+
+- type: rmcConstruction
+  parent: RMCMetalBarricadeFoldableBuild
+  id: RMCWindowFrameBuild
+  name: window frame
+  prototype: RMCWindowFrameAlmayer
+  doAfterTime: 10
+  doAfterTimeMin: 4
+  materialCost: 5
+  restrictedCollisionGroup: MidImpassable
+
+- type: rmcConstruction
+  id: RMCComfyChairList
+  name: comfy chairs
+  prototype: CMChairComfy
+  listed:
+  - RMCComfyChairBeigeBuild
+  - RMCComfyChairBlackBuild
+  - RMCComfyChairBrownBuild
+  - RMCComfyChairLimeBuild
+  - RMCComfyChairTealBuild
+
+- type: rmcConstruction
+  abstract: true
+  id: RMCComfyChairBase
+  name: chair comfy
+  materialCost: 2
+  restrictedTags: RMCSeat
+
+- type: rmcConstruction
+  parent: RMCComfyChairBase
+  id: RMCComfyChairBeigeBuild
+  name: beige comfy chair
+  prototype: CMChairComfyBeige
+
+- type: rmcConstruction
+  parent: RMCComfyChairBase
+  id: RMCComfyChairBlackBuild
+  name: black comfy chair
+  prototype: CMChairComfyBlack
+
+- type: rmcConstruction
+  parent: RMCComfyChairBase
+  id: RMCComfyChairBrownBuild
+  name: brown comfy chair
+  prototype: CMChairComfy
+
+- type: rmcConstruction
+  parent: RMCComfyChairBase
+  id: RMCComfyChairLimeBuild
+  name: lime comfy chair
+  prototype: CMChairComfyLime
+
+- type: rmcConstruction
+  parent: RMCComfyChairBase
+  id: RMCComfyChairTealBuild
+  name: teal comfy chair
+  prototype: CMChairComfyTeal
