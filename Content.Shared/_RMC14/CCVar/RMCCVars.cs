@@ -173,7 +173,7 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.bioscan_variance", 2, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCDropshipFabricatorStartingPoints =
-        CVarDef.Create("rmc.dropship_fabricator_starting_points", 20000, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.dropship_fabricator_starting_points", 10000, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCDropshipFabricatorGainEverySeconds =
         CVarDef.Create("rmc.dropship_fabricator_gain_every_seconds", 3.33333f, CVar.REPLICATED | CVar.SERVER);
@@ -358,4 +358,31 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCWeedKillerDisableDurationMinutes =
         CVarDef.Create("rmc.weed_killer_disable_duration_minutes", 8, CVar.SERVER | CVar.REPLICATED);
+
+    public static readonly CVarDef<int> RMCIntelPaperScraps =
+        CVarDef.Create("rmc.intel_paper_scraps", 45, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCIntelProgressReports =
+        CVarDef.Create("rmc.intel_progress_reports", 15, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCIntelFolders =
+        CVarDef.Create("rmc.intel_folders", 30, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCIntelTechnicalManuals =
+        CVarDef.Create("rmc.intel_technical_manuals", 10, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCIntelDisks =
+        CVarDef.Create("rmc.intel_disks", 30, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCIntelExperimentalDevices =
+        CVarDef.Create("rmc.intel_experimental_devices", 15, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCIntelResearchPapers =
+        CVarDef.Create("rmc.intel_research_papers", 15, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCIntelVialBoxes =
+        CVarDef.Create("rmc.intel_vial_boxes", 20, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCIntelMaxProcessTimeMilliseconds =
+        CVarDef.Create("rmc.intel_max_process_time_milliseconds", 2f, CVar.REPLICATED | CVar.SERVER);
 }

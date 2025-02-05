@@ -75,6 +75,7 @@
     state: corporatespace
   - type: Area
     zLevel: 1
+    retrieveItemObjective: true
 
 - type: entity
   parent: RMCAreaAlmayerCommand
@@ -85,6 +86,7 @@
     state: ceroom
   - type: Area
     zLevel: 1
+    retrieveItemObjective: true
 
 - type: entity
   parent: RMCAreaAlmayerCommand
@@ -1204,6 +1206,7 @@
     state: science
   - type: Area
     zLevel: 1
+    retrieveItemObjective: true
 
 - type: entity
   parent: RMCAreaAlmayerMedical

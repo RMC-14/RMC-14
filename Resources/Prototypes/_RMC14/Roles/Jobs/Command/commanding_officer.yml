@@ -91,6 +91,7 @@
     - type: JobPrefix
       prefix: cm-job-prefix-commanding-officer
     - type: CommendationGiver
+    - type: ViewIntelObjectives
 
 - type: startingGear
   id: CMGearCommandingOfficer

@@ -62,6 +62,7 @@
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-aso
+    - type: ViewIntelObjectives
 
 - type: startingGear
   id: CMGearASO
