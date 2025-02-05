@@ -140,9 +140,6 @@ public abstract class SharedRMCEmoteSystem : EntitySystem
 
     public void AttemptEmote(Entity<RMCHandEmotesComponent> ent, Entity<RMCHandEmotesComponent> target, RMCHandsEmoteState state)
     {
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
         var effect = state switch
         {
             RMCHandsEmoteState.Fistbump => ent.Comp.FistBumpEffect,
@@ -191,6 +188,9 @@ public abstract class SharedRMCEmoteSystem : EntitySystem
 
     public void PerformEmote(Entity<RMCHandEmotesComponent> ent, Entity<RMCHandEmotesComponent> target)
     {
+        if (!_timing.IsFirstTimePredicted)
+            return;
+
         var uid = ent.Owner;
         var targetUid = target.Owner;
 
