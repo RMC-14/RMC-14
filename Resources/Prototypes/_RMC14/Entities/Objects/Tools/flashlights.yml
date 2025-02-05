@@ -52,6 +52,7 @@
   - type: Clothing
     quickEquip: false
     slots:
+    - belt
     - suitstorage
   - type: NoHandsInteractionBlocked
 
