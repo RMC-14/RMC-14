@@ -33,7 +33,6 @@
       role: CMJobSeniorEnlistedAdvisor
       time: 36000 # 10 hours
     RMCRankGunnerySergeant: []
-  weight: 5
   startingGear: CMGearSeniorEnlistedAdvisor
   icon: "CMJobIconSEA"
   requireAdminNotify: true
@@ -48,7 +47,7 @@
   minimapBackground:
    sprite: _RMC14/Interface/map_blips.rsi
    state: background_medical
-  roleWeight: 0.2
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
