@@ -44,6 +44,18 @@ public sealed partial class XenoBurrowComponent : Component
 
     public TimeSpan? ForcedUnburrowAt;
 
+    /// <summary>
+    /// Distance from unburrow coordinates which entities will be stunned
+    /// </summary>
+    [DataField]
+    public float UnburrowStunRange = 0.5f;
+
+    /// <summary>
+    /// How long the entities in unburrow stun range will be stunned for
+    /// </summary>
+    [DataField]
+    public TimeSpan UnburrowStunLength = TimeSpan.FromSeconds(4);
+
     [DataField]
     public SoundSpecifier BurrowDownSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/burrowing_b.ogg");
 

@@ -221,6 +221,7 @@ public sealed class RMCSlowSystem : EntitySystem
                 continue;
 
             RemCompDeferred<RMCSlowdownComponent>(uid);
+            _speed.RefreshMovementSpeedModifiers(uid);
         }
 
         var superSlowQuery = EntityQueryEnumerator<RMCSuperSlowdownComponent>();
@@ -231,6 +232,7 @@ public sealed class RMCSlowSystem : EntitySystem
                 continue;
 
             RemCompDeferred<RMCSuperSlowdownComponent>(uid);
+            _speed.RefreshMovementSpeedModifiers(uid);
         }
 
         var rootQuery = EntityQueryEnumerator<RMCRootedComponent>();
@@ -241,6 +243,7 @@ public sealed class RMCSlowSystem : EntitySystem
                 continue;
 
             RemCompDeferred<RMCRootedComponent>(uid);
+            _speed.RefreshMovementSpeedModifiers(uid);
         }
     }
 }

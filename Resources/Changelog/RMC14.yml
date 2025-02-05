@@ -1,99 +1,4 @@
 ﻿Entries:
-- author: FungiFellow
-  changes:
-  - message: Added the M276 Shotgun Shell Loading Rig
-    type: Add
-  id: 780
-  time: '2024-10-04T10:39:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4154
-- author: Vermidia
-  changes:
-  - message: Fixed parasites sometimes being hiveless
-    type: Fix
-  id: 781
-  time: '2024-10-04T21:56:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4251
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Trijent Dam tactical map, mortar, CAS, power, bioscan and other
-      area-related things.
-    type: Fix
-  - message: Fixed some areas on the Almayer being unpowered.
-    type: Fix
-  - message: Fixed being able to destroy or repair multiple fusion reactors at once.
-    type: Fix
-  - message: Fixed xenos being able to move while destroying a fusion reactor.
-    type: Fix
-  - message: Made water slightly less wide so it's harder to get slowed by it.
-    type: Tweak
-  id: 782
-  time: '2024-10-04T22:11:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4250
-- author: DrSmugleaf
-  changes:
-  - message: Fixed error spam when near a hive core.
-    type: Fix
-  - message: Hopefully fix players sometimes stuttering until they reconnect.
-    type: Fix
-  id: 783
-  time: '2024-10-04T22:19:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4253
-- author: DrSmugleaf
-  changes:
-  - message: Fixed bunker window frame sprites erroring in some cases.
-    type: Fix
-  id: 784
-  time: '2024-10-04T22:28:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4254
-- author: DrSmugleaf
-  changes:
-  - message: Fix armor and squad goggles not having squad coloring.
-    type: Fix
-  id: 785
-  time: '2024-10-05T21:10:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4269
-- author: Vermidia
-  changes:
-  - message: Fix parasites dying when manually being used to infect from their leap
-      limit
-    type: Fix
-  id: 786
-  time: '2024-10-05T22:14:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4275
-- author: deltanedas
-  changes:
-  - message: Wehny is not real. Rouny is not real. Ravager is not real. Burrower is
-      not real.
-    type: Fix
-  id: 787
-  time: '2024-10-06T01:39:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4292
-- author: DrSmugleaf
-  changes:
-  - message: Fix the dropship landing rotated at Trijent Dam's LZ2.
-    type: Fix
-  - message: Fix the Liaison's escape pod crashing if launched early.
-    type: Fix
-  - message: Fix a visual bug with laser designators always saying that you can't
-      use them there.
-    type: Fix
-  id: 788
-  time: '2024-10-06T22:58:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4302
-- author: deltanedas
-  changes:
-  - message: Fixed tail stab looking like you hurt your fellow xenos on your client.
-    type: Fix
-  id: 789
-  time: '2024-10-06T23:26:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4295
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the SEA not starting with 45 vendor points.
-    type: Fix
-  id: 790
-  time: '2024-10-06T23:34:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4315
 - author: CyberTropic
   changes:
   - message: Added linen bins.
@@ -5116,5 +5021,91 @@
   id: 1279
   time: '2025-01-29T18:03:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5490
+- author: Tunguso4ka
+  changes:
+  - message: Fixed Riflemen not being able to buy M1984 AP ammo in their vendor.
+    type: Fix
+  id: 1280
+  time: '2025-02-03T10:57:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5514
+- author: Vermidia
+  changes:
+  - message: Fixed ability slows rarely not wearing off.
+    type: Fix
+  id: 1281
+  time: '2025-02-03T11:00:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5509
+- author: blueDev2
+  changes:
+  - message: Ported Burrower Unburrow stunning marines in a 0.5 tile range for 4 seconds.
+    type: Add
+  id: 1282
+  time: '2025-02-03T11:14:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5495
+- author: whisper
+  changes:
+  - message: Kamiel Lancoaster, Eric Rasczak figurine
+    type: Add
+  id: 1283
+  time: '2025-02-03T11:20:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5492
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added radio tuning. This will allow you to select what channels you can
+      hear, useful for staff officers filtering out other squad chatter.
+    type: Add
+  id: 1284
+  time: '2025-02-03T11:19:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5511
+- author: UnicornOnLSD
+  changes:
+  - message: Gigantic shipments of a very conspicuous plushie have been received in
+      the almayer cargo holds. They are not accessible by any means yet. (Added conspicuous
+      plushie)
+    type: Add
+  id: 1285
+  time: '2025-02-03T11:19:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5498
+- author: Vermidia
+  changes:
+  - message: Fixed resin surge reinforcing non-walls and doors
+    type: Fix
+  - message: Fixed resin surge making sticky weeds if a non-wall non-fruit entity
+      was targeted on weeds (it now makes a wall as intended)
+    type: Fix
+  - message: Reverted weed node layering changes for now.
+    type: Tweak
+  id: 1286
+  time: '2025-02-03T11:21:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5500
+- author: Whisper
+  changes:
+  - message: Increased the volume of dropship startup and landing.
+    type: Tweak
+  id: 1287
+  time: '2025-02-03T11:23:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5505
+- author: Vermidia
+  changes:
+  - message: Avalis now have their own laugh sound.
+    type: Add
+  id: 1288
+  time: '2025-02-03T11:34:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5503
+- author: Whisper
+  changes:
+  - message: SOP clarification; The deconstruction of crates and barrels are not considered
+      ship modifications.
+    type: Tweak
+  id: 1289
+  time: '2025-02-03T11:33:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5510
+- author: FungiFellow
+  changes:
+  - message: Fixed SG drum belt not having two drums
+    type: Fix
+  id: 1290
+  time: '2025-02-04T22:39:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5522
 Name: RMC14
 Order: -1
