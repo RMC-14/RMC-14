@@ -79,6 +79,9 @@ public abstract class SharedRMCEmoteSystem : EntitySystem
 
     private void OnInteractHand(Entity<RMCHandEmotesComponent> ent, ref InteractHandEvent args)
     {
+        if (args.Handled)
+            return;
+
         var user = args.User;
         if (user == args.Target || !TryComp(user, out RMCHandEmotesComponent? compUser))
             return;
@@ -228,6 +231,8 @@ public abstract class SharedRMCEmoteSystem : EntitySystem
         {
             var others = Filter.PvsExcept(uid).RemovePlayerByAttachedEntity(targetUid);
             _popup.PopupEntity(popup, uid, others, true);
+
+            _audio.PlayPvs(sound, uid);
         }
 
         _popup.PopupClient(popupSelf, uid, uid, PopupType.Medium);
@@ -238,8 +243,6 @@ public abstract class SharedRMCEmoteSystem : EntitySystem
 
         _melee.DoLunge(uid, targetUid);
         _melee.DoLunge(targetUid, uid);
-
-        _audio.PlayPredicted(sound, uid, null);
 
         CancelHandEmotes(ent);
         CancelHandEmotes(target);
