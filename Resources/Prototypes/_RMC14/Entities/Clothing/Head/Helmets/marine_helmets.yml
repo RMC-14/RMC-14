@@ -237,7 +237,7 @@
 - type: entity
   parent: RMCArmorHelmetM3Scout
   id: RMCArmorHelmetM3G4
-  name: M3-G4 helmet
+  name: M3-G4 grenadier helmet
   description: Pairs with the M3-G4 heavy grenadier plating. A distant cousin of the experimental B18 defensive helmet. # As such, it also resists some parasite latching attempts.
   components:
   - type: Sprite
@@ -256,6 +256,8 @@
       Snow: _RMC14/Objects/Clothing/Head/Helmets/m3/g4/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m3/g4/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m3/g4/urban.rsi
+  - type: Corrodible
+    isCorrodible: false
 
 # M35 Pyro Spec
 - type: entity
