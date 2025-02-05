@@ -108,10 +108,10 @@ public abstract class SharedRMCEmoteSystem : EntitySystem
         if (!args.CanAccess || !args.CanInteract || args.Hands is null)
             return;
 
-        if (ent.Comp.Active || ent.Owner == args.User)
+        if (!TryComp<RMCHandEmotesComponent>(args.User, out var selfComp))
             return;
 
-        if (!TryComp<RMCHandEmotesComponent>(args.User, out var selfComp))
+        if (ent.Comp.Active || selfComp.Active || ent.Owner == args.User)
             return;
 
         var user = args.User;
