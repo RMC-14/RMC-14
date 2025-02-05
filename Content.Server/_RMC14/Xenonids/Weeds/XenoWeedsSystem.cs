@@ -114,11 +114,6 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                 if (blocked)
                     continue;
 
-                // TODO RMC14
-                // There is an edge case right now where existing weeds can block new weeds
-                // from expanding further. If this is the case then the weeds should reassign
-                // their source to this one and reactivate if it is closer to them than their
-                // original source and only if it is still within range
                 var source = weeds.IsSource ? uid : weeds.Source;
                 var sourceWeeds = CompOrNull<XenoWeedsComponent>(source);
 
@@ -177,6 +172,10 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                         }
 
                         weedable.Entity = SpawnAtPosition(weedable.Spawn, anchoredId.ToCoordinates());
+                        var wallWeeds = EnsureComp<XenoWallWeedsComponent>(weedable.Entity.Value);
+                        wallWeeds.Weeds = source;
+                        Dirty(weedable.Entity.Value, wallWeeds);
+
                         if (_xenoNestSurfaceQuery.TryComp(weedable.Entity, out var surface))
                         {
                             surface.Weedable = anchoredId;
