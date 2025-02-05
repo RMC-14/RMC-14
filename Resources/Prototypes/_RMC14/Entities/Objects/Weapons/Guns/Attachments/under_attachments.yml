@@ -258,6 +258,8 @@
     tags:
     - RMCAttachmentUnderbarrel
     - RMCAttachmentU7UnderbarrelShotgun
+  - type: Item
+    size: Normal
   - type: Gun
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_u7.ogg
@@ -330,6 +332,8 @@
     layers:
     - state: grenade
       map: [ "enum.BreechVisuals.Open" ]
+  - type: Item
+    size: Normal
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
@@ -409,6 +413,8 @@
     layers:
       - state: grenade-mk1
         map: [ "enum.BreechVisuals.Open" ]
+  - type: Item
+    size: Normal
   - type: BallisticAmmoProvider
     capacity: 5
   - type: ShootAtFixedPoint

@@ -8,7 +8,7 @@ namespace Content.Shared._RMC14.Xenonids.Evolution;
 public sealed partial class XenoDevolveComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public EntProtoId[] DevolvesTo;
+    public EntProtoId[] DevolvesTo = Array.Empty<EntProtoId>();
 
     [DataField, AutoNetworkedField]
     public bool CanBeDevolvedByOther = true;
