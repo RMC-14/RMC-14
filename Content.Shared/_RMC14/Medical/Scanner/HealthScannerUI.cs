@@ -7,6 +7,7 @@ namespace Content.Shared._RMC14.Medical.Scanner;
 [Serializable, NetSerializable]
 public sealed class HealthScannerBuiState(
     NetEntity target,
+    bool inHand,
     FixedPoint2 blood,
     FixedPoint2 maxBlood,
     float? temperature,
@@ -15,6 +16,7 @@ public sealed class HealthScannerBuiState(
     : BoundUserInterfaceState
 {
     public readonly NetEntity Target = target;
+    public readonly bool InHand = inHand;
     public readonly FixedPoint2 Blood = blood;
     public readonly FixedPoint2 MaxBlood = maxBlood;
     public readonly float? Temperature = temperature;
