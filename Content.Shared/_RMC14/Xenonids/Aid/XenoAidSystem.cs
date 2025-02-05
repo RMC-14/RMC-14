@@ -34,7 +34,6 @@ public sealed class XenoAidSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoAidComponent, XenoAidActionEvent>(OnXenoAidAction);
-        SubscribeLocalEvent<XenoAidComponent, XenoAidToggleActionEvent>(OnXenoAidToggleAction);
     }
 
     private void OnXenoAidAction(Entity<XenoAidComponent> xeno, ref XenoAidActionEvent args)
@@ -69,10 +68,10 @@ public sealed class XenoAidSystem : EntitySystem
             return;
         }
 
-        switch (xeno.Comp.Mode)
+        switch (args.aidType)
         {
             case XenoAidMode.Healing:
-            {
+                {
                 if (!_interaction.InRangeUnobstructed(xeno.Owner, target))
                     return;
 
@@ -105,7 +104,7 @@ public sealed class XenoAidSystem : EntitySystem
                 var selfMsg = Loc.GetString("rmc-xeno-heal-self", ("target", target));
                 _popup.PopupClient(selfMsg, target, xeno);
 
-                var targetMsg = Loc.GetString("rmc-xeno-heal-target", ("target", target));
+                var targetMsg = Loc.GetString("rmc-xeno-heal-target", ("target", xeno));
                 _popup.PopupEntity(targetMsg, target, target);
 
                 var othersMsg = Loc.GetString("rmc-xeno-heal-others", ("user", xeno), ("target", target));
@@ -131,6 +130,8 @@ public sealed class XenoAidSystem : EntitySystem
                     _statusEffects.TryRemoveStatusEffect(target, status);
                 }
 
+                EntityManager.RemoveComponents(target, xeno.Comp.ComponentsRemove);
+
                 var selfMsg = Loc.GetString("rmc-xeno-heal-ailments-self", ("target", target));
                 _popup.PopupClient(selfMsg, target, xeno);
 
@@ -149,19 +150,6 @@ public sealed class XenoAidSystem : EntitySystem
                 break;
             }
         }
-    }
-
-    private void OnXenoAidToggleAction(Entity<XenoAidComponent> ent, ref XenoAidToggleActionEvent args)
-    {
-        ent.Comp.Mode = ent.Comp.Mode switch
-        {
-            XenoAidMode.Healing => XenoAidMode.Ailments,
-            XenoAidMode.Ailments => XenoAidMode.Healing,
-            _ => XenoAidMode.Healing,
-        };
-
-        Dirty(ent);
-        _actions.SetToggled(args.Action, ent.Comp.Mode == XenoAidMode.Ailments);
     }
 
     private void ActivateCooldown(EntityUid user)

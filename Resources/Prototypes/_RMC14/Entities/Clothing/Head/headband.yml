@@ -53,6 +53,26 @@
 # Squad headbands
 - type: entity
   parent: CMHeadBandGreen
+  id: RMCHeadBandSquad
+  name: UNMC squad headband
+  suffix: DO NOT MAP
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/headband/squad.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/headband/squad.rsi
+  - type: RMCMapToSquad
+    map:
+      SquadAlpha: CMHeadBandAlpha
+      SquadBravo: CMHeadBandBravo
+      SquadCharlie: CMHeadBandCharlie
+      SquadDelta: CMHeadBandDelta
+      SquadEcho: CMHeadBandEcho
+      SquadFoxtrot: CMHeadBandFoxtrot
+      # TODO SquadIntel: CMHeadBandIntel
+
+- type: entity
+  parent: CMHeadBandGreen
   id: CMHeadBandAlpha
   name: alpha headband
   description: Piece of cloth in colors of your squad.

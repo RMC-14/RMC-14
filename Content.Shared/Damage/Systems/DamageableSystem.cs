@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Shared._RMC14.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
@@ -162,6 +163,15 @@ namespace Content.Shared.Damage
                 {
                     return damage;
                 }
+            }
+
+            var evd = new DamageModifyAfterResistEvent(damage, origin, tool);
+            RaiseLocalEvent(uid.Value, evd);
+            damage = evd.Damage;
+
+            if (damage.Empty)
+            {
+                return damage;
             }
 
             // TODO DAMAGE PERFORMANCE

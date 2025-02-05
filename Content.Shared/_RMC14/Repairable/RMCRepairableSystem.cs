@@ -63,10 +63,24 @@ public sealed class RMCRepairableSystem : EntitySystem
             return;
         }
 
-        if (!TryComp(repairable, out DamageableComponent? damageable) ||
-            damageable.TotalDamage <= FixedPoint2.Zero)
+        if (!TryComp(repairable, out DamageableComponent? damageable))
+            return;
+
+        if (damageable.TotalDamage <= FixedPoint2.Zero)
         {
-            _popup.PopupClient(Loc.GetString("rmc-repairable-not-damaged", ("target", repairable)), user, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-repairable-not-damaged", ("target", repairable)),
+                user,
+                user,
+                PopupType.SmallCaution);
+            return;
+        }
+
+        if (repairable.Comp.RepairableDamageLimit > 0 && damageable.TotalDamage > repairable.Comp.RepairableDamageLimit)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-repairable-too-damaged", ("target", repairable)),
+                user,
+                user,
+                PopupType.SmallCaution);
             return;
         }
 
@@ -108,8 +122,8 @@ public sealed class RMCRepairableSystem : EntitySystem
         if (args.Used == null || !UseFuel(args.Used.Value, args.User, repairable.Comp.FuelUsed))
             return;
 
-        var heal = _rmcDamageable.DistributeTypes(repairable.Owner, repairable.Comp.Heal);
-        _damageable.TryChangeDamage(repairable, heal);
+        var heal = -_rmcDamageable.DistributeTypesTotal(repairable.Owner, repairable.Comp.Heal);
+        _damageable.TryChangeDamage(repairable, heal, true);
 
         var user = args.User;
         var selfMsg = Loc.GetString("rmc-repairable-finish-self", ("target", repairable));
@@ -182,7 +196,7 @@ public sealed class RMCRepairableSystem : EntitySystem
 
         var repairValue = GetRepairValue(repairable, handsComp, nailgunComp, out EntityUid? held);
 
-        if (held == null || repairValue >= FixedPoint2.Zero)
+        if (held == null || repairValue <= FixedPoint2.Zero)
         {
             _popup.PopupClient(Loc.GetString("rmc-nailgun-no-material-message",  ("target", repairable)), user, PopupType.SmallCaution);
             return;
@@ -236,15 +250,15 @@ public sealed class RMCRepairableSystem : EntitySystem
             return;
 
         var repairValue = GetRepairValue(repairable, handsComp, nailgunComponent, out EntityUid? held);
-        if (held == null || repairValue >= FixedPoint2.Zero)
+        if (held == null || repairValue <= FixedPoint2.Zero)
         {
             _popup.PopupClient(Loc.GetString("rmc-nailgun-lost-stack"), user, PopupType.SmallCaution);
             return;
         }
 
         //Checks passed, do repair actions
-        var heal = _rmcDamageable.DistributeTypes(repairable.Owner, repairValue);
-        _damageable.TryChangeDamage(repairable, heal);
+        var heal = -_rmcDamageable.DistributeTypesTotal(repairable.Owner, repairValue);
+        _damageable.TryChangeDamage(repairable, heal, true);
 
         if (TryComp(held, out StackComponent? stack))
         {

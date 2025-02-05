@@ -10,6 +10,7 @@ using Content.Shared.Administration;
 using Content.Shared.Players.RateLimiting;
 using Content.Shared.Roles;
 using Robust.Server.Player;
+using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -21,6 +22,7 @@ namespace Content.Server._RMC14.Mentor;
 public sealed class MentorManager : IPostInjectInit
 {
     [Dependency] private readonly IAdminManager _admin = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly ILogManager _log = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -32,7 +34,7 @@ public sealed class MentorManager : IPostInjectInit
     private const string RateLimitKey = "MentorHelp";
     private static readonly ProtoId<JobPrototype> MentorJob = "CMSeniorEnlistedAdvisor";
 
-    private readonly List<ICommonSession> _activeMentors = new();
+    private readonly HashSet<ICommonSession> _activeMentors = new();
     private readonly Dictionary<NetUserId, bool> _mentors = new();
     private readonly Dictionary<NetUserId, (TimeSpan Timestamp, bool Typing)> _typingUpdateTimestamps = new();
     private readonly Dictionary<NetUserId, List<NetUserId>> _destinationClaims = new();
@@ -361,7 +363,7 @@ public sealed class MentorManager : IPostInjectInit
 
     public IEnumerable<ICommonSession> GetActiveMentors()
     {
-        return _activeMentors.AsReadOnly();
+        return _activeMentors;
     }
 
     public void ReMentor(NetUserId user)
@@ -416,14 +418,18 @@ public sealed class MentorManager : IPostInjectInit
         _userDb.AddOnFinishLoad(FinishLoad);
         _userDb.AddOnPlayerDisconnect(ClientDisconnected);
 
-        _rateLimit.Register(
-            RateLimitKey,
-            new RateLimitRegistration(
-                RMCCVars.RMCMentorHelpRateLimitPeriod,
-                RMCCVars.RMCMentorHelpRateLimitCount,
-                _ => { }
-            )
-        );
+        if (_config.IsCVarRegistered(RMCCVars.RMCMentorHelpRateLimitPeriod.Name) &&
+            _config.IsCVarRegistered(RMCCVars.RMCMentorHelpRateLimitCount.Name))
+        {
+            _rateLimit.Register(
+                RateLimitKey,
+                new RateLimitRegistration(
+                    RMCCVars.RMCMentorHelpRateLimitPeriod,
+                    RMCCVars.RMCMentorHelpRateLimitCount,
+                    _ => { }
+                )
+            );
+        }
 
         _player.PlayerStatusChanged += OnPlayerStatusChanged;
     }

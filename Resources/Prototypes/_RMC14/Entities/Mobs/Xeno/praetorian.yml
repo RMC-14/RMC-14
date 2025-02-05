@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent:
   - CMXenoDeveloped
@@ -38,7 +38,7 @@
     - ActionXenoSprayAcidPraetorian
     - ActionXenoDevolve
     tier: 3
-    hudOffset: 0,0.16
+    hudOffset: -0.15,0.16
     unlockAt: 900 # 15 minutes
   - type: XenoHeavy
   - type: XenoDevolve
@@ -159,9 +159,9 @@
     - ActionXenoPheromones
     - ActionXenoSpit
     - ActionXenoSprayAcidWarden
-    - ActionXenoAid
+    - ActionXenoAidHeal
+    - ActionXenoAidRejuvenate
     - ActionXenoRetrieve
-    - ActionXenoAidToggle
     - ActionXenoDevolve
     hidden: true
   - type: XenoStrain
@@ -173,8 +173,15 @@
   - type: XenoSpit
     projectileId: XenoSpitProjectilePraetorianWarden
   - type: XenoEnergy
+    alert: XenoEnergyWarden
+    popupGain: rmc-xeno-internal-health-increase-user
+    popupNotEnough: rmc-xeno-not-enough-internal-health
   - type: XenoRetrieve
   - type: XenoAid
+    componentsRemove:
+    - type: RMCSlowdown
+    - type: RMCSuperSlowdown
+    - type: RMCRooted
   - type: XenoSprayAcid
     acid: XenoAcidSprayStrong
     plasmaCost: 130
@@ -222,7 +229,6 @@
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
-    - ActionXenoAcidNormal
     - ActionXenoImpale
     - ActionXenoDodge
     - ActionXenoTailTrip
@@ -265,8 +271,8 @@
     - ActionXenoTailStab
     - ActionXenoPierce
     - ActionXenoBlitz
-    - ActionXenoCleave
-    - ActionXenoToggleCleave
+    - ActionXenoCleaveRoot
+    - ActionXenoCleaveFling
     - ActionXenoDevolve
     hidden: true
   - type: XenoStrain

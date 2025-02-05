@@ -1,7 +1,6 @@
 ﻿- type: entity
   parent: CMBaseWeaponSMG
   name: M63 submachine gun
-  suffix: Desert
   id: WeaponSMGM63
   description: The Aegis Battlefield Armaments M-63 submachinegun. Occasionally carried by light-infantry, scouts, engineers and medics.
   components:
@@ -56,6 +55,7 @@
           - CMMagazineSMGM63
           - CMMagazineSMGM63AP
           - CMMagazineSMGM63Ext
+          - RMCMagazineSMGM63Rubber
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -91,7 +91,7 @@
           - RMCAttachmentVerticalGrip
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.715, 0.092
+      rmc-aslot-barrel: 0.71875, 0.03125
       rmc-aslot-rail: 0.032, 0.155
       rmc-aslot-stock: -0.81, 0.032
       rmc-aslot-underbarrel: 0.25, -0.25
@@ -99,83 +99,16 @@
     tags:
     - RMCWeaponSMG
     - RMCWeaponSMGM63
-
-#camo variations
-- type: entity
-  parent: WeaponSMGM63
-  id: WeaponSMGM63Camo
-  suffix: Camo Replace
-  components:
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: WeaponSMGM63Jungle
-      Desert: WeaponSMGM63
-      Classic: WeaponSMGM63Classic
-      Snow: WeaponSMGM63Snow
-      Urban: WeaponSMGM63Urban
+      Jungle: _RMC14/Objects/Weapons/Guns/SMGs/m63/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/SMGs/m63/desert.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/SMGs/m63/classic.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/SMGs/m63/snow.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/SMGs/m63/urban.rsi
 
 - type: entity
-  parent: WeaponSMGM63
-  id: WeaponSMGM63Jungle
-  suffix: Jungle
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/jungle.rsi
-    layers:
-    - state: bolt-open
-      map: [ "enum.GunVisualLayers.Base" ]
-    - state: mag-0
-      map: [ "enum.GunVisualLayers.Mag" ]
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/jungle.rsi
-
-- type: entity
-  parent: WeaponSMGM63
-  id: WeaponSMGM63Classic
-  suffix: Classic
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/classic.rsi
-    layers:
-    - state: bolt-open
-      map: [ "enum.GunVisualLayers.Base" ]
-    - state: mag-0
-      map: [ "enum.GunVisualLayers.Mag" ]
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/classic.rsi
-
-- type: entity
-  parent: WeaponSMGM63
-  id: WeaponSMGM63Urban
-  suffix: Urban
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/urban.rsi
-    layers:
-    - state: bolt-open
-      map: [ "enum.GunVisualLayers.Base" ]
-    - state: mag-0
-      map: [ "enum.GunVisualLayers.Mag" ]
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/urban.rsi
-
-- type: entity
-  parent: WeaponSMGM63
-  id: WeaponSMGM63Snow
-  suffix: Snow
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/snow.rsi
-    layers:
-    - state: bolt-open
-      map: [ "enum.GunVisualLayers.Base" ]
-    - state: mag-0
-      map: [ "enum.GunVisualLayers.Mag" ]
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/snow.rsi
-
-- type: entity
-  parent: BaseMagazineRifle
+  parent: CMMagazineRifleBase
   id: CMMagazineSMGM63
   name: "M63 magazine (10x20mm)"
   components:
@@ -203,6 +136,8 @@
     zeroVisible: false
     zeroOnlyOnEmpty: true
   - type: Appearance
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsSMG
 
 - type: entity
   parent: CMMagazineSMGM63
@@ -227,6 +162,8 @@
     tags:
     - CMMagazineSmg
     - CMMagazineSMGM63AP
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsSMGAP
 
 - type: entity
   parent: CMMagazineSMGM63

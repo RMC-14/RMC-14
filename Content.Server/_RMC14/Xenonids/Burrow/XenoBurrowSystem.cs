@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.DoAfter;
 using Content.Server.Popups;
+using Content.Server.Stunnable;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Xenonids;
@@ -38,6 +39,8 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly PhysicsSystem _physics = default!;
+    [Dependency] private readonly StunSystem _stun = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -164,8 +167,8 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
     {
         var coordinates = _transform.GetMoverCoordinates(ent.Owner).SnapToGrid();
 
-        if (!_area.TryGetArea(coordinates, out var area, out _, out _)  ||
-            area.NoTunnel)
+        if (!_area.TryGetArea(coordinates, out var area, out _)  ||
+            area.Value.Comp.NoTunnel)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-burrow-down-failure-bad-area"), ent, ent);
             return false;
@@ -201,8 +204,8 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
             return false;
         }
 
-        if (!_area.TryGetArea(target, out var area, out _, out _) ||
-            area.NoTunnel)
+        if (!_area.TryGetArea(target, out var area, out _) ||
+            area.Value.Comp.NoTunnel)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-burrow-move-failure-bad-area"), ent, ent);
             return false;
@@ -301,10 +304,15 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
             _physics.SetBodyType(ent, BodyType.KinematicController);
 
             _audio.PlayPvs(comp.BurrowUpSound, ent);
-        }
+            var entitiesToStun = _entityLookup.GetEntitiesInRange(ent, comp.UnburrowStunRange);
+            foreach (var entity in entitiesToStun)
+            {
+                _stun.TryParalyze(entity, comp.UnburrowStunLength, false);
+            }
 
         Dirty(xenoBurrower);
         if (nightVisionComp is RMCNightVisionVisibleComponent nightVisionCompValue)
             Dirty(ent, nightVisionCompValue);
+        }
     }
 }

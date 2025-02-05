@@ -1,7 +1,7 @@
 # FOOD
 
 - type: entity
-  parent: ColMarTechBase
+  parent: ColMarTechBaseAnchorable
   id: ColMarTechFood
   name: ColMarTech food vendor
   description: Marine Food Vendor, containing standard military Prepared Meals.
@@ -9,7 +9,17 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/food.rsi
   - type: CMAutomatedVendor
-    sections:
+    sections:    
+    - name: Festive Meals
+      holidays: 
+      - FestiveSeason
+      entries:
+      - id: RMCMarinePreparedMealCookies
+        amount: 25
+      - id: RMCMarinePreparedMealGingerbread
+        amount: 25
+      - id: RMCMarinePreparedMealFruitcake
+        amount: 25
     - name: Prepared Meals
       entries:
       - id: CMMRE
@@ -41,7 +51,7 @@
         amount: 5
 
 - type: entity
-  parent: ColMarTechBase
+  parent: ColMarTechBaseAnchorable
   id: CMVendorBooze
   name: Booze-O-Mat
   description: A technological marvel, supposedly able to mix just the mixture you'd like to drink the moment you ask for one.
@@ -117,7 +127,7 @@
         amount: 5
 
 - type: entity
-  parent: ColMarTechBase
+  parent: ColMarTechBaseAnchorable
   id: CMVendorChess
   name: Chess-o-mat
   description: In 2143 Red Star Drinks, a SPP-CA (Colony Administration) affiliated corporation ran a promotional sweepstakes for drinkers who had found special codes on the inside of the caps of a limited run of Red Star Vodka, shipping them a Chess-O-Mat with unlimited refills.

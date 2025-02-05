@@ -148,7 +148,7 @@ public sealed class RMCAdminEui : BaseEui
         foreach (var hive in s.Hives)
         {
             var list = _adminWindow.XenoTab.HiveList;
-            list.Add(new Item(list)
+            list.Add(new ItemList.Item(list)
             {
                 Text = hive.Name,
                 Metadata = hive,

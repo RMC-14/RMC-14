@@ -20,6 +20,11 @@
     size: Small
   - type: ClothingLimit
     id: CMHeadset
+  - type: RMCRadioFilter
+  - type: UserInterface
+    interfaces:
+      enum.RMCRadioFilterUI.Key:
+        type: RMCRadioFilterBui
 
 - type: entity
   parent: CMHeadset

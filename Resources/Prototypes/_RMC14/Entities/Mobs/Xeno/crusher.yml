@@ -35,7 +35,7 @@
     - ActionXenoDefensiveShield
     - ActionXenoDevolve
     tier: 3
-    hudOffset: 0,0.375
+    hudOffset: -0.15,0.1
     unlockAt: 900 # 15 minutes
   - type: XenoHeavy
   - type: XenoDevolve
@@ -47,7 +47,6 @@
       types:
         Blunt: 65
     selfEffect: CMEffectSelfStomp
-    effect: CMEffectStomp
   - type: XenoCharge
     damage:
       types:
@@ -75,7 +74,6 @@
   - type: XenoShield
   - type: XenoMeleeSlow
     slowTime: 2
-    effect: RMCEffectCrusherSlow
   - type: Tackle
     chance: 0.25
   - type: MovementSpeedModifier

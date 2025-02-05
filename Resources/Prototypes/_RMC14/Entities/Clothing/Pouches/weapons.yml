@@ -57,8 +57,11 @@
         ejectSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_draw.ogg
         whitelist:
           tags:
-          - Sidearm
+          - Sidearm #Pistols
+          - RMCRevolver
 #          - FlareGun
+  - type: Storage
+    maxItemSize: Normal
   - type: CMHolster
   - type: CMItemSlots
 

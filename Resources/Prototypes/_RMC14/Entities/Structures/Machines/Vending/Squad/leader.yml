@@ -33,13 +33,15 @@
       - id: RMCKitEngineering
     - name: Armors
       entries:
-      - id: RMCArmorM4Camo
+      - id: CMArmorM4
         points: 16
     - name: Clothing Items
       entries:
       - id: RMCScabbardMacheteFilled
+        name: machete scabbard (Full)
         points: 4
       - id: RMCPouchMacheteFilled
+        name: machete pouch (Full)
         points: 4
       - id: RMCBackpackRTO
         points: 5
@@ -57,20 +59,21 @@
     #  points: 5
     - name: Binoculars
       entries:
-      - id: RMCRangefinderCamo
+      - id: RMCRangefinder
         points: 3
-      - id: RMCLaserDesignatorCamo
+      - id: RMCLaserDesignator
         points: 5
     - name: Helmet Optics
-      entries: [ ]
+      entries:
     #- id: CMWeldingVisor
     #  points: 5
     #  recommended: true
     #- id: CMMedicalHelmetOptic
     #  points: 4
     #  recommended: true
-    #- id: CMNightVisionOptic
-    #  points: 20
+      - id: RMCVisorNightVision
+        points: 25
+        recommended: true
     - name: Engineering Supplies
       entries:
       - id: CMHandsInsulated
@@ -179,9 +182,9 @@
       entries:
     #- id: CMM240IncineratorUnit
     #  points: 18
-      - id: RMCMK80Case
+      - id: RMCGunCasePistolMK80
         points: 8
-      - id: RMCSmartPistolCase
+      - id: RMCGunCasePistolSmart
         points: 12
     #- id: CMM79GrenadeLauncher
     #  points: 18
@@ -215,23 +218,24 @@
       takeAll: CMStandard
       entries:
       - id: CMVendorBundleSquadLeaderApparel
-      - id: RMCArmorB12Camo
+      - id: CMArmorB12
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
+      - id: RMCBoxZiptie
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
-      - id: RMCBackpackMarineCamo
+      - id: CMBackpackMarine
       - id: RMCScabbardMacheteFilled
-      - id: RMCSatchelMarineCamo
+      - id: CMSatchelMarine
         recommended: true
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      - id: RMCBeltUtilityGeneralCamo
-      - id: RMCBeltMarineCamo
+      - id: RMCBeltUtilityGeneral
+      - id: CMBeltMarine
         recommended: true
-      - id: RMCBeltMedicBagCamo
+      - id: CMBeltMedicBag
       - id: CMBeltMedical
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterRevolver
@@ -240,6 +244,7 @@
     #- id: RMCBeltHolsterFlareGun
       - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
+        name: M276 pattern toolbelt rig (Full)
       - id: RMCBeltGrenade
     - name: Pouches
       choices: { RMCPouch: 2 }
@@ -292,7 +297,7 @@
     bundle:
     - RMCExplosiveBreachingCharge # TODO RMC14 plastic explosives
     - RMCPackFlareCAS
-    - RMCLaserDesignatorCamo
+    - RMCLaserDesignator
     - CMFireExtinguisher
 
 - type: entity
@@ -307,7 +312,7 @@
     - 0,0,9,1
   - type: StorageFill
     contents:
-    - id: WeaponRifleM4SPRCamo
+    - id: WeaponRifleM4SPR
     - id: RMCAttachmentS84xTelescopicScope
     - id: RMCAttachmentSuppressor
     - id: RMCAttachmentExtendedBarrel
@@ -326,7 +331,7 @@
     - 0,0,9,1
   - type: StorageFill
     contents:
-    - id: WeaponRifleM54CCamo
+    - id: WeaponRifleM54C
     - id: RMCAttachmentAngledGrip
     - id: RMCAttachmentSuppressor
     - id: RMCAttachmentExtendedBarrel

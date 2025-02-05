@@ -17,17 +17,17 @@
     sections:
     - name: Primary firearms
       entries:
-      - id: WeaponShotgunM42A2Camo
+      - id: WeaponShotgunM42A2
         amount: 30
-      - id: WeaponSMGM63Camo
+      - id: WeaponSMGM63
         amount: 60
-      - id: WeaponRifleM54CCamo
+      - id: WeaponRifleM54C
         amount: 60
-      - id: WeaponRifleM4SPRCamo
+      - id: WeaponRifleM4SPR
         amount: 20
     - name: Sidearms
       entries:
-      - id: CMWeaponPistolM77
+      - id: RMCWeaponPistolM77
         amount: 50
       - id: RMCWeaponRevolverM44
         amount: 50
@@ -37,18 +37,18 @@
       #  amount: 20
     - name: Restricted Firearms
       entries:
-      - id: RMCMK80Case
+      - id: RMCGunCasePistolMK80
         amount: 4
-      - id: RMCSmartPistolCase
+      - id: RMCGunCasePistolSmart
         amount: 3
       - id: RMCMOU53Case
         amount: 2
       - id: RMCCaseXM88
         amount: 3
-      - id: RMCM54CE2Case
+      - id: RMCGunCaseRifleM54CE2
         amount: 3
-      #- id: M41A Pulse Rifle MK1
-      #  amount: 3
+      - id: RMCM54CMK1Case
+        amount: 3
       #- id: M56D Heavy Machine Gun
       #  amount: 2
       #- id: M2C Heavy Machine Gun
@@ -107,15 +107,15 @@
         amount: 1
     - name: Backpacks
       entries:
-      - id: RMCBackpackMarineCamo
+      - id: CMBackpackMarine
         amount: 15
       - id: RMCScabbardShotgun
         amount: 10
       #- id: Pyrotechnician G4-1 Fueltank
       #  amount: 2
-      - id: RMCBackpackWelderCamo
+      - id: CMBackpackWelder
         amount: 2
-      - id: RMCBackpackMortarCamo
+      - id: CMBackpackMortar
         amount: 1
       - id: RMCSatchelWelder
         amount: 5
@@ -129,13 +129,13 @@
         amount: 2
     - name: Belts
       entries:
-      - id: RMCBeltUtilityGeneralCamo
+      - id: RMCBeltUtilityGeneral
         amount: 2
-      - id: RMCBeltMarineCamo
+      - id: CMBeltMarine
         amount: 15
       - id: RMCBeltHolsterPistol
         amount: 10
-      - id: RMCBeltKnifeCamoFilled
+      - id: CMBeltKnifeFilled
         name: M276 Knife Rig (Full)
         amount: 5
       - id: RMCBeltHolsterSMG
@@ -148,16 +148,16 @@
         amount: 5
       #- id: M276 M82F Holster Rig
       #  amount: 2
-      - id: RMCBeltShotgunCamo
+      - id: RMCM276ShotgunShellLoadingRig
         amount: 10
-      - id: RMCBeltMortarCamo
+      - id: CMBeltMortar
         amount: 2
     - name: Pouches
       entries:
       - id: RMCPouchAutoinjector
         amount: 1
-      #- id: RMCPouchMedkit
-      #  amount: 2
+      - id: RMCPouchMedkit
+        amount: 2
       - id: RMCPouchFirstAidInjectors
         amount: 5
       - id: RMCPouchFirstResponder
@@ -175,12 +175,14 @@
       - id: RMCPouchExplosive
         amount: 2
       - id: RMCPouchFlareFilled
+        name: flare pouch (Full)
         amount: 5
       - id: RMCPouchDocument
         amount: 2
       #- id: RMCPouchSling
       #  amount: 2
       - id: RMCPouchMacheteFilled
+        name: machete pouch (Full)
         amount: 1
       - id: RMCPouchBayonet
         name: Bayonet Sheath (Full)
@@ -223,11 +225,11 @@
         amount: 4
       #- id: Data Detector
       #  amount: 4
-      - id: RMCBinocularsCamo
+      - id: RMCBinoculars
         amount: 2
-      - id: RMCRangefinderCamo
+      - id: RMCRangefinder
         amount: 1
-      - id: RMCLaserDesignatorCamo
+      - id: RMCLaserDesignator
         amount: 1
       #- id: Welding Goggles
       #  amount: 3
@@ -249,6 +251,12 @@
       #  amount: 4
       - id: RMCPowerCellCrap
         amount: 10
+      - id: RMCMagazineSMGNailgun
+        amount: 4
+    - name: Other Boxes
+      entries:
+      - id: RMCBoxMagazineSMGNailgun
+        amount: 2
 
 #AMMUNITION VENDOR
 
@@ -307,7 +315,7 @@
       entries:
       - id: RMCPowerCellSmartgun
         amount: 4
-      - id: RMCMagazineSmartGunCamo
+      - id: RMCMagazineSmartGun
         amount: 4
       #- id: M44 Heavy Speed Loader (.44)
       #  amount: 10
@@ -327,28 +335,111 @@
         amount: 13
       #- id: M240 Incinerator Tank
       #  amount: 3
-      - id: CMMagazineRifleM54CE2Camo
+      - id: CMMagazineRifleM54CE2
         amount: 3
-      #- id: M41A MK1 Magazine (10x24mm)
-      #  amount: 5
-      #- id: M41A MK1 AP Magazine (10x24mm)
-      #  amount: 2
+      - id: CMMagazineRifleM54CMK1
+        amount: 5
+      - id: CMMagazineRifleM54CMK1AP
+        amount: 2
       #- id: M56D Drum Magazine
       #  amount: 2
       #- id: M2C Box Magazine
       #  amount: 2
       - id: RMCMagazineShotgunXM51
         amount: 3
-    - name: Shotgun shell boxes # I don't think we have those yet
-      entries: [ ]
-      #- id: Shotgun Shell Box (Buckshot x 100)
-      #  amount: 4
-      #- id: Shotgun Shell Box (Flechette x 100)
-      #  amount: 4
-      #- id: Shotgun Shell Box (Slugs x 100)
-      #  amount: 4
-      #- id: Shotgun Shell Box (16g) (Breaching x 120)
-      #  amount: 1
+    - name: Magazine Boxes
+      hasBoxes: true
+      entries:
+#      - name: Magazine Box (M10 x 22)
+#        box: RMCMagazine10
+#      - name: Magazine Box (Ext M10 x 14)
+#        box: RMCMagazineExtended10
+#      - name: Magazine Box (Drum M10 x 12)
+#        box: RMCMagazineDrum10
+      - id: RMCBoxMagazineSMGM63
+        name: Magazine Box (M63 x 12)
+        box: CMMagazineSMGM63
+      - id: RMCBoxMagazineSMGM63AP
+        name: Magazine Box (AP M63 x 12)
+        box: CMMagazineSMGM63AP
+      - id: RMCBoxMagazineSMGM63Ext
+        name: Magazine Box (Ext M63 x 10)
+        box: CMMagazineSMGM63Ext
+      - id: RMCBoxMagazineRifleM54C
+        name: Magazine Box (M54C x 10)
+        box: CMMagazineRifleM54C
+      - id: RMCBoxMagazineRifleM54CAP
+        name: Magazine Box (AP M54C x 10)
+        box: CMMagazineRifleM54CAP
+      - id: RMCBoxMagazineRifleM54CExt
+        name: Magazine Box (Ext M54C x 8)
+        box: CMMagazineRifleM54CExt
+      - id: RMCBoxMagazinePistolM1984
+        name: Magazine Box (M1984 x 16)
+        box: CMMagazinePistolM1984
+#      - name: Magazine Box (AP M1984 x 16)
+#        box: CMMagazinePistolM1984AP
+#      - name: Magazine Box (HP M1984 x 16)
+#        box: CMMagazineSMGM63
+      - id: RMCBoxMagazineRifleM4SPR
+        name: Magazine Box (M4SPR x 16)
+        box: CMMagazineRifleM4SPR
+      - id: RMCBoxMagazineRifleM4SPRAP
+        name: Magazine Box (AP M4SPR x 16)
+        box: CMMagazineRifleM4SPRAP
+#      - name: Magazine Box (M54CE2 x 8)
+#        box: RMCCrateMagazineRifleM54CE2
+#      - name: Magazine Box (M54CE2 Holo-Target x 8)
+#        box: CMMagazineSMGM63
+#      - name: Magazine Box (M54C MK1 x 8)
+#        box: CMMagazineSMGM63
+#      - name: Magazine Box (M54C MK1 AP x 8)
+#        box: CMMagazineSMGM63
+      - id: RMCBoxShellsBuckshot
+        name: Magazine Box (Buckshot x 100)
+        box: RMCBoxShotgunBuckshot
+        boxAmount: 4
+      - id: RMCBoxShellsFlechette
+        name: Magazine Box (Flechette x 100)
+        box: RMCBoxShotgunFlechette
+        boxAmount: 4
+      - id: RMCBoxShellsSlugs
+        name: Magazine Box (Slugs x 100)
+        box: RMCBoxShotgunSlugs
+        boxAmount: 4
+      - id: RMCBoxShellsBreaching
+        name: Magazine Box (16g) (Breaching x 120)
+        box: RMCBoxShotgunBreaching
+        boxAmount: 4
+      - id: RMCBoxMagazinePistolM77AP
+        name: Magazine Box (M77 AP x 16)
+        box: CMMagazinePistolM77AP
+      - id: RMCBoxMagazinePistolSU6
+        name: Magazine Box (SU-6 x 16)
+        box: RMCMagazinePistolSU6
+      - id: RMCBoxMagazinePistolMK80
+        name: Magazine Box (MK80 x 16)
+        box: CMMagazinePistolMK80
+#      - name: Magazine Box (XM51 x 8)
+#        box: RMCMagazineShotgunXM51
+#      - name: Magazine Box (.458 SOCOM x 300) # TODO RMC14
+#        box: RMCBox458SOCOM
+#      - name: Magazine Box (M2C x 8)
+#        box: CMMagazineSMGM63
+#      - name: Magazine Box (M56B x 8)
+#        box: CMMagazineSMGM63
+#      - name: Magazine Box (M56D x 8)
+#        box: CMMagazineSMGM63
+      - id: RMCBoxMagazineRevolverM44
+        name: Magazine Box (M44 x 16)
+        box: RMCSpeedLoaderM44
+      - id: RMCBoxMagazineRevolverM44Marksman
+        name: Magazine Box (Marksman M44 x 16)
+        box: RMCSpeedLoader44Marksman
+#      - name: Magazine Box (Heavy M44 x 16)
+#        box: CMMagazineSMGM63
+#      - name: Magazine Box (UT-Napthal Fuel x 8)
+#        box: CMMagazineSMGM63
 
  #ATTACHMENTS VENDOR
 
@@ -413,13 +504,11 @@
       #  amount: 5
       - id: RMCAttachmentU1GrenadeLauncher
         amount: 10
-      #- id: RMCAttachmentMK1GrenadeLauncher # UNCOMMENT WHEN THE MK1 IS ADDED
-      #  amount: 10
       - id: RMCAttachmentVerticalGrip
         amount: 10
     - name: Stock
       entries:
-      - id: RMCAttachmentM42A2WoodenStockCamo
+      - id: RMCAttachmentM42A2WoodenStock
         amount: 5
       - id: RMCAttachmentM63ArmBrace
         amount: 5
@@ -427,9 +516,9 @@
         amount: 5
       - id: RMCAttachmentM63Stock
         amount: 5
-      - id: RMCAttachmentM54CStockSolidCamo
+      - id: RMCAttachmentM54CStockSolid
         amount: 5
-      - id: RMCAttachmentM54CStockCollapsibleCamo
+      - id: RMCAttachmentM54CStockCollapsible
         amount: 5
       - id: RMCAttachmentM44MagnumSharpshooterStock
         amount: 5
@@ -451,41 +540,41 @@
     sections:
     - name: Uniform
       entries:
-      - id: RMCBackpackMarineCamo
+      - id: CMBackpackMarine
         amount: 20
       - id: CMBootsBlack
         amount: 20
-      - id: RMCBeltMarineCamo
+      - id: CMBeltMarine
         amount: 10
-      - id: RMCBeltShotgunCamo
+      - id: RMCM276ShotgunShellLoadingRig
         amount: 10
-      - id: RMCSatchelMarineCamo
+      - id: CMSatchelMarine
         amount: 20
-      - id: JumpsuitMarineCamo
+      - id: JumpsuitMarine
         amount: 20
     - name: Armor
       entries:
-      - id: ArmorHelmetM10Camo
+      - id: ArmorHelmetM10
         amount: 20
-      - id: RMCArmorHelmetM10TechCamo
+      - id: CMArmorHelmetM10Tech
         amount: 20
-      - id: RMCArmorHelmetM10MedicCamo
+      - id: CMArmorHelmetM10Medic
         amount: 20
-      - id: RMCArmorM3MediumCarrierCamo
+      - id: RMCArmorM3MediumCarrier
         amount: 15
-      - id: RMCArmorM3MediumPaddedCamo
+      - id: RMCArmorM3MediumPadded
         amount: 15
-      - id: RMCArmorM3MediumPadlessCamo
+      - id: RMCArmorM3MediumPadless
         amount: 15
-      - id: RMCArmorM3MediumRidgedCamo
+      - id: RMCArmorM3MediumRidged
         amount: 15
-      - id: RMCArmorM3MediumSkullCamo
+      - id: RMCArmorM3MediumSkull
         amount: 15
-      - id: RMCArmorM3MediumSmoothCamo
+      - id: RMCArmorM3MediumSmooth
         amount: 15
-      - id: RMCArmorM3HeavyPaddedCamo
+      - id: RMCArmorM3HeavyPadded
         amount: 10
-      - id: RMCArmorM3LightPaddedCamo
+      - id: RMCArmorM3LightPadded
         amount: 10
     - name: Gloves
       entries:
