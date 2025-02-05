@@ -11,7 +11,7 @@
 
 - type: entity
   parent: RMCUnderAttachmentBase
-  id: RMCAttachmentAngledGrip
+  id: RMCAttachmentAngledGrip # angledgrip
   name: angled grip
   description: "An angled foregrip that improves weapon ergonomics resulting in faster wielding time.
     However, it also increases weapon size."
@@ -142,9 +142,10 @@
           tags:
           - RMCWeaponLMGM60
       fireDelayFlat: -0.1
+
 - type: entity
   parent: RMCUnderAttachmentBase
-  id: RMCAttachmentBurstFireAssembly
+  id: RMCAttachmentBurstFireAssembly # burstfire_assembly
   name: burst fire assembly
   description: A small angled piece of fine machinery that increases the burst count on some weapons.
   components:
@@ -437,7 +438,7 @@
 
 - type: entity
   parent: RMCUnderAttachmentBase
-  id: RMCAttachmentVerticalGrip
+  id: RMCAttachmentVerticalGrip # verticalgrip
   name: vertical grip
   description: "A vertical foregrip that offers better accuracy, less recoil, and less scatter, especially during burst fire.
     However, it also increases weapon size."
@@ -468,7 +469,7 @@
 
 - type: entity
   parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
-  id: RMCAttachmentFlashlightGrip
+  id: RMCAttachmentFlashlightGrip # flashlight/grip
   name: underbarrel flashlight grip
   description: Holy smokes RO man, they put a grip on a flashlight! Reduces recoil and scatter by a tiny amount. Works as a light source. # Boosts accuracy by a tiny amount.
   components:
@@ -484,6 +485,7 @@
     addPrefix: false
     blinkingBehaviourId: blinking
     radiatingBehaviourId: radiating
+  - type: NoHandsInteractionBlocked
   - type: LightBehaviour
     behaviours:
     - !type:FadeBehaviour

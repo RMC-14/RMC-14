@@ -53,6 +53,7 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: NoHandsInteractionBlocked
 
 - type: entity
   parent: RMCBoxMagazineBase
