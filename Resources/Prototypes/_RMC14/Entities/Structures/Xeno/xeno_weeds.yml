@@ -114,6 +114,7 @@
     layers:
     - state: weed0
     - state: constructionnode
+  - type: XenoConstruct
   - type: Destructible
     thresholds:
     - trigger:
