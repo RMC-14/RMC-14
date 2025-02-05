@@ -1,10 +1,19 @@
+#Avali Sounds
 - type: emoteSounds
   id: RMCUnisexAvali
+  params:
+    variation: 0.125
   sounds:
     Scream:
-      path: /Audio/_RMC14/Voice/Avali/avali_scream.ogg
+      collection: AvaliScreams
     Laugh:
-      path: /Audio/_RMC14/Voice/Avali/avali_laugh.ogg
+      collection: AvaliLaugh
+    Cough:
+      collection: AvaliCoughs
+    Crying:
+      collection: AvaliCry
+    Whistle:
+      collection: AvaliWhistle
 
 - type: emoteSounds
   parent: [RMCUnisexAvali, RMCMaleHuman]
