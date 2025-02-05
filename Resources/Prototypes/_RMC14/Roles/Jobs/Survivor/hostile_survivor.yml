@@ -29,7 +29,7 @@
         RMCSkillEndurance: 2
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
-        RMCSkillPolice: 2
+        RMCSkillPolice: 1
         RMCSkillCqc: 3
         RMCSkillMedical: 1
     - type: EquipSurvivorPreset
