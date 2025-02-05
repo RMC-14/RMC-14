@@ -272,6 +272,7 @@
       path: /Audio/_RMC14/Machines/suitlight_off.ogg
     turnOnSound:
       path: /Audio/_RMC14/Machines/suitlight_on.ogg
+  - type: NoHandsInteractionBlocked
   - type: LightBehaviour
     behaviours:
     - !type:FadeBehaviour
