@@ -3,6 +3,7 @@ using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Tools.Systems;
@@ -84,6 +85,9 @@ public sealed class SensorTowerSystem : EntitySystem
         var user = args.User;
         if (HasComp<XenoComponent>(user))
         {
+            if (!HasComp<HandsComponent>(user))
+                return;
+
             Destroy(ent, user);
             return;
         }
