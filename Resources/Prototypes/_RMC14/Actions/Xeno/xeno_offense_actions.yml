@@ -736,17 +736,34 @@
   parent: ActionXenoBase
   id: ActionXenoTailSeize
   name: Tail Seize
-  description: Root an enemy for a second. The duration is higher if your shield is up.
+  description: Throw out your tail in front of you. Uses up your melee attack. Pulls in the first enemy hit to you and roots and slows them on arrival.
   components:
-  - type: EntityTargetAction
+  - type: EntityWorldTargetAction
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: tail_seize
     event: !type:XenoTailSeizeActionEvent
-    range: 3
+    range: 15
     useDelay: 15
     deselectOnMiss: false
   - type: ActionBlockIfResting
-  - type: XenoOffensiveAction
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoAbduct
+  name: Abduct
+  description: TODO
+  components:
+  - type: EntityWorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: abduct
+    event: !type:XenoAbductActionEvent
+    range: 7
+    useDelay: 15
+    deselectOnMiss: false
+    checkCanAccess: false
+  - type: ActionBlockIfResting
 

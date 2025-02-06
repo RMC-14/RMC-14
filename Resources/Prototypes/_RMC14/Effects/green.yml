@@ -7,9 +7,38 @@
   - type: Sprite
     drawdepth: Effects
     sprite: _RMC14/Effects/xeno_telegraph.rsi
-    color: "#008000"
     noRot: true
-    state: xeno_telegraph_base
+    state: xeno_telegraph_retrieve
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  id: RMCEffectXenoTelegraphAbduct
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _RMC14/Effects/xeno_telegraph.rsi
+    noRot: true
+    state: xeno_telegraph_abduct_hook_anim
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  id: RMCEffectXenoTelegraphLash
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.2
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _RMC14/Effects/xeno_telegraph.rsi
+    noRot: true
+    state: xeno_telegraph_lash
   - type: EffectVisuals
   - type: Tag
     tags:
