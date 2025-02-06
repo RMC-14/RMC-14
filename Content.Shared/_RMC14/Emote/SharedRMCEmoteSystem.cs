@@ -250,22 +250,22 @@ public abstract class SharedRMCEmoteSystem : EntitySystem
             _ => throw new ArgumentOutOfRangeException()
         };
 
+        _popup.PopupClient(popupSelf, uid, uid, PopupType.Medium);
+        _popup.PopupClient(popupSelfTarget, targetUid, targetUid, PopupType.Medium);
+
+        _melee.DoLunge(targetUid, uid);
+
+        _rotate.TryFaceCoordinates(uid, _transform.GetMapCoordinates(targetUid).Position);
+        _rotate.TryFaceCoordinates(targetUid, _transform.GetMapCoordinates(uid).Position);
+
         if (_net.IsServer)
         {
             var others = Filter.PvsExcept(uid).RemovePlayerByAttachedEntity(targetUid);
             _popup.PopupEntity(popup, uid, others, true);
 
             _audio.PlayPvs(sound, uid);
+            _melee.DoLunge(uid, targetUid);
         }
-
-        _popup.PopupClient(popupSelf, uid, uid, PopupType.Medium);
-        _popup.PopupClient(popupSelfTarget, targetUid, targetUid, PopupType.Medium);
-
-        _melee.DoLunge(uid, targetUid);
-        _melee.DoLunge(targetUid, uid);
-
-        _rotate.TryFaceCoordinates(uid, _transform.GetMapCoordinates(targetUid).Position);
-        _rotate.TryFaceCoordinates(targetUid, _transform.GetMapCoordinates(uid).Position);
 
         CancelHandEmotes(ent);
         CancelHandEmotes(target);
