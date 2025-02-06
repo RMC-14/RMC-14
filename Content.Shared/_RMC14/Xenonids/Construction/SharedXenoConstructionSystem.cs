@@ -39,6 +39,8 @@ using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using static Content.Shared.Physics.CollisionGroup;
 using Content.Shared.Tiles;
+using Content.Shared.Destructible;
+using Content.Shared._RMC14.Xenonids.Announce;
 
 
 namespace Content.Shared._RMC14.Xenonids.Construction;
@@ -46,9 +48,10 @@ namespace Content.Shared._RMC14.Xenonids.Construction;
 public sealed class SharedXenoConstructionSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly AreaSystem _area = default!;
+    [Dependency] private readonly SharedXenoAnnounceSystem _announce = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogs = default!;
-    [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
@@ -123,6 +126,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         SubscribeLocalEvent<XenoConstructionSupportComponent, ComponentRemove>(OnCheckAdjacentCollapse);
         SubscribeLocalEvent<XenoConstructionSupportComponent, EntityTerminatingEvent>(OnCheckAdjacentCollapse);
 
+        SubscribeLocalEvent<XenoAnnounceStructureDestructionComponent, DestructionEventArgs>(OnXenoStructureDestruction);
+
         SubscribeLocalEvent<DeleteXenoResinOnHitComponent, ProjectileHitEvent>(OnDeleteXenoResinHit);
 
         Subs.BuiEvents<XenoConstructionComponent>(XenoChooseStructureUI.Key, subs =>
@@ -138,6 +143,31 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         UpdatesAfter.Add(typeof(SharedPhysicsSystem));
     }
 
+    private void OnXenoStructureDestruction(Entity<XenoAnnounceStructureDestructionComponent> ent, ref DestructionEventArgs args)
+    {
+        var (entId, comp) = ent;
+        if (_hive.GetHive(ent.Owner) is not { } hive)
+            return;
+
+        var locationName = "Unknown";
+        var structureName = "Unknown";
+
+        if (_area.TryGetArea(ent, out _, out var areaProto, out _))
+            locationName = areaProto.Name;
+
+        if (comp.StructureName is null)
+        {
+            if (Prototype(ent.Owner) is EntityPrototype entProto)
+                structureName = entProto.Name;
+        }
+        else
+        {
+            structureName = comp.StructureName;
+        }
+
+        var msg = Loc.GetString(comp.MessageID, ("location", locationName), ("structureName", structureName), ("destructionVerb", comp.DestructionVerb));
+        _announce.AnnounceToHive(ent.Owner, hive, msg, color: comp.MessageColor);
+    }
     private void OnConstructMapInit(Entity<XenoConstructComponent> ent, ref MapInitEvent args)
     {
         if (!ent.Comp.DestroyWeedNodes)

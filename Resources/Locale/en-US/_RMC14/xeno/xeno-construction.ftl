@@ -15,8 +15,10 @@ rmc-xeno-construction-must-have-weeds-resin-hole = Resin holes must be built on 
 rmc-xeno-construction-blocked-resin-hole = There's something built here already.
 rmc-xeno-construction-similar-too-close-resin-hole = There are other resin holes nearby!
 
+rmc-xeno-construction-structure-destroyed = A {$structureName} has been {$destructionVerb} at {$location}!
+rmc-xeno-construction-resin-hole-destroyed = We sense one of our Hive's {$structureName} traps at {$location} has been {$destructionVerb}!
+
 cm-xeno-construction-resin-hole-burned-down = We sense one of our Hive's {$type} traps at {$location} has been burnt!
-cm-xeno-construction-resin-hole-destroyed = We sense one of our Hive's {$type} traps at {$location} has been destroyed!
 rmc-xeno-construction-resin-hole-activate = We sense one of our Hive's {$type} traps at {$location} has been triggered!
 rmc-xeno-construction-resin-hole-no-acid = We can't secrete any acid into the resin hole!
 rmc-xeno-construction-resin-hole-good-acid = It already has good acid in.
