@@ -81,7 +81,7 @@
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
       rmc-aslot-stock:
-        startingAttachable: RMCAttachmentM54CStockCollapsible
+        startingAttachable: RMCAttachmentM54CMK1StockCollapsible
         whitelist:
           tags:
           - RMCAttachmentM54CStockCollapsible
