@@ -24,6 +24,7 @@
     transparency: 0.2
   - type: XenoConstruct
     destroyWeedNodes: false
+  - type: XenoAnnounceStructureDestruction
 
 - type: entity
   abstract: true
