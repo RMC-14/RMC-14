@@ -23,6 +23,15 @@ public sealed partial class RMCHandEmotesComponent : Component
     public RMCHandsEmoteState State = RMCHandsEmoteState.Fistbump;
 
     [DataField, AutoNetworkedField]
+    public SoundSpecifier? TailSwipeSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_claw_block.ogg")
+    {
+        Params = AudioParams.Default.WithVariation(0.1f),
+    };
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId TailSwipeEffect = "RMCEffectTailswipe";
+
+    [DataField, AutoNetworkedField]
     public SoundSpecifier? FistBumpSound = new SoundPathSpecifier("/Audio/_RMC14/Entrenching/thud.ogg")
     {
         Params = AudioParams.Default.WithVariation(0.5f),
@@ -52,4 +61,5 @@ public enum RMCHandsEmoteState : byte
 {
     Fistbump = 0,
     Highfive = 1,
+    Tailswipe = 2
 }

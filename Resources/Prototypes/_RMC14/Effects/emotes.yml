@@ -30,3 +30,11 @@
   components:
   - type: Sprite
     state: emote_highfive
+
+- type: entity
+  parent: RMCEffectEmoteBase
+  id: RMCEffectTailswipe
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: emote_tailswipe

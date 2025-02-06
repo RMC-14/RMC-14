@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Weapons.Melee;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Coordinates;
 using Content.Shared.Interaction;
@@ -22,7 +23,6 @@ public abstract class SharedRMCEmoteSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly RotateToFaceSystem _rotate = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _melee = default!;
@@ -92,6 +92,9 @@ public abstract class SharedRMCEmoteSystem : EntitySystem
         if (user != ent.Comp.Target)
             return;
 
+        if (ent.Comp.State == RMCHandsEmoteState.Tailswipe && !HasComp<XenoComponent>(user))
+            return;
+
         if (!_interaction.InRangeUnobstructed(user, args.Target, _interactRange))
         {
             var msg = Loc.GetString("rmc-hands-emotes-get-closer");
@@ -116,21 +119,34 @@ public abstract class SharedRMCEmoteSystem : EntitySystem
 
         var user = args.User;
 
-        args.Verbs.Add(new()
+        if (HasComp<XenoComponent>(user) && HasComp<XenoComponent>(ent.Owner))
         {
-            Act = () => AttemptEmote((user, selfComp), ent, RMCHandsEmoteState.Fistbump),
-            Text = Loc.GetString("rmc-hands-emotes-fistbump-perform"),
-            Priority = -25,
-            Icon = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Effects/emotes.rsi"), "emote_fistbump")
-        });
+            args.Verbs.Add(new()
+            {
+                Act = () => AttemptEmote((user, selfComp), ent, RMCHandsEmoteState.Tailswipe),
+                Text = Loc.GetString("rmc-hands-emotes-tailswipe-perform"),
+                Priority = -27,
+                Icon = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Effects/emotes.rsi"), "emote_tailswipe")
+            });
+        }
+        else if (!HasComp<XenoComponent>(user) && !HasComp<XenoComponent>(ent.Owner))
+        {
+            args.Verbs.Add(new()
+            {
+                Act = () => AttemptEmote((user, selfComp), ent, RMCHandsEmoteState.Fistbump),
+                Text = Loc.GetString("rmc-hands-emotes-fistbump-perform"),
+                Priority = -25,
+                Icon = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Effects/emotes.rsi"), "emote_fistbump")
+            });
 
-        args.Verbs.Add(new()
-        {
-            Act = () => AttemptEmote((user, selfComp), ent, RMCHandsEmoteState.Highfive),
-            Text = Loc.GetString("rmc-hands-emotes-highfive-perform"),
-            Priority = -26,
-            Icon = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Effects/emotes.rsi"), "emote_highfive")
-        });
+            args.Verbs.Add(new()
+            {
+                Act = () => AttemptEmote((user, selfComp), ent, RMCHandsEmoteState.Highfive),
+                Text = Loc.GetString("rmc-hands-emotes-highfive-perform"),
+                Priority = -26,
+                Icon = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Effects/emotes.rsi"), "emote_highfive")
+            });
+        }
     }
 
     private void OnMove(Entity<RMCHandEmotesComponent> ent, ref MoveInputEvent args)
@@ -147,6 +163,7 @@ public abstract class SharedRMCEmoteSystem : EntitySystem
         {
             RMCHandsEmoteState.Fistbump => ent.Comp.FistBumpEffect,
             RMCHandsEmoteState.Highfive => ent.Comp.HighFiveEffect,
+            RMCHandsEmoteState.Tailswipe => ent.Comp.TailSwipeEffect,
             _ => throw new ArgumentOutOfRangeException()
         };
 
@@ -154,6 +171,7 @@ public abstract class SharedRMCEmoteSystem : EntitySystem
         {
             RMCHandsEmoteState.Fistbump => Loc.GetString("rmc-hands-emotes-fistbump-attempt", ("ent", ent), ("target", target)),
             RMCHandsEmoteState.Highfive => Loc.GetString("rmc-hands-emotes-highfive-attempt", ("ent", ent), ("target", target)),
+            RMCHandsEmoteState.Tailswipe => Loc.GetString("rmc-hands-emotes-tailswipe-attempt", ("ent", ent), ("target", target)),
             _ => throw new ArgumentOutOfRangeException()
         };
 
@@ -161,6 +179,7 @@ public abstract class SharedRMCEmoteSystem : EntitySystem
         {
             RMCHandsEmoteState.Fistbump => Loc.GetString("rmc-hands-emotes-fistbump-attempt-self", ("ent", ent), ("target", target)),
             RMCHandsEmoteState.Highfive => Loc.GetString("rmc-hands-emotes-highfive-attempt-self", ("ent", ent), ("target", target)),
+            RMCHandsEmoteState.Tailswipe => Loc.GetString("rmc-hands-emotes-tailswipe-attempt-self", ("ent", ent), ("target", target)),
             _ => throw new ArgumentOutOfRangeException()
         };
 
@@ -203,6 +222,7 @@ public abstract class SharedRMCEmoteSystem : EntitySystem
         {
             RMCHandsEmoteState.Fistbump => ent.Comp.FistBumpSound,
             RMCHandsEmoteState.Highfive => ent.Comp.HighFiveSound,
+            RMCHandsEmoteState.Tailswipe => ent.Comp.TailSwipeSound,
             _ => throw new ArgumentOutOfRangeException()
         };
 
@@ -210,6 +230,7 @@ public abstract class SharedRMCEmoteSystem : EntitySystem
         {
             RMCHandsEmoteState.Fistbump => Loc.GetString("rmc-hands-emotes-fistbump", ("ent", uid), ("target", targetUid)),
             RMCHandsEmoteState.Highfive => Loc.GetString("rmc-hands-emotes-highfive", ("ent", uid), ("target", targetUid)),
+            RMCHandsEmoteState.Tailswipe => Loc.GetString("rmc-hands-emotes-tailswipe", ("ent", uid), ("target", targetUid)),
             _ => throw new ArgumentOutOfRangeException()
         };
 
@@ -217,13 +238,15 @@ public abstract class SharedRMCEmoteSystem : EntitySystem
         {
             RMCHandsEmoteState.Fistbump => Loc.GetString("rmc-hands-emotes-fistbump-self", ("ent", uid), ("target", targetUid)),
             RMCHandsEmoteState.Highfive => Loc.GetString("rmc-hands-emotes-highfive-self", ("ent", uid), ("target", targetUid)),
+            RMCHandsEmoteState.Tailswipe => Loc.GetString("rmc-hands-emotes-tailswipe-self", ("ent", uid), ("target", targetUid)),
             _ => throw new ArgumentOutOfRangeException()
         };
 
         var popupSelfTarget = state switch
         {
-            RMCHandsEmoteState.Fistbump => Loc.GetString("rmc-hands-emotes-fistbump-self", ("ent", uid), ("target", uid)),
-            RMCHandsEmoteState.Highfive => Loc.GetString("rmc-hands-emotes-highfive-self", ("ent", uid), ("target", uid)),
+            RMCHandsEmoteState.Fistbump => Loc.GetString("rmc-hands-emotes-fistbump-self", ("ent", targetUid), ("target", uid)),
+            RMCHandsEmoteState.Highfive => Loc.GetString("rmc-hands-emotes-highfive-self", ("ent", targetUid), ("target", uid)),
+            RMCHandsEmoteState.Tailswipe => Loc.GetString("rmc-hands-emotes-tailswipe-self", ("ent", targetUid), ("target", uid)),
             _ => throw new ArgumentOutOfRangeException()
         };
 
@@ -238,11 +261,11 @@ public abstract class SharedRMCEmoteSystem : EntitySystem
         _popup.PopupClient(popupSelf, uid, uid, PopupType.Medium);
         _popup.PopupClient(popupSelfTarget, targetUid, targetUid, PopupType.Medium);
 
-        _rotate.TryFaceCoordinates(uid, _transform.GetMapCoordinates(targetUid).Position);
-        _rotate.TryFaceCoordinates(targetUid, _transform.GetMapCoordinates(uid).Position);
-
         _melee.DoLunge(uid, targetUid);
         _melee.DoLunge(targetUid, uid);
+
+        _rotate.TryFaceCoordinates(uid, _transform.GetMapCoordinates(targetUid).Position);
+        _rotate.TryFaceCoordinates(targetUid, _transform.GetMapCoordinates(uid).Position);
 
         CancelHandEmotes(ent);
         CancelHandEmotes(target);
