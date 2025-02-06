@@ -3,7 +3,7 @@
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: JumpsuitMarine
-  name: UNMC uniform
+  name: Marine uniform
   description: Standard-issue Marine uniform. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
@@ -29,7 +29,7 @@
 - type: entity
   parent: JumpsuitMarine
   id: CMJumpsuitMarineEngineer
-  name: UNMC ComTech uniform
+  name: Marine ComTech uniform
   description: Standard-issue Marine combat technician fatigues. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
@@ -46,7 +46,7 @@
 - type: entity
   parent: JumpsuitMarine
   id: CMJumpsuitMarineMedic
-  name: UNMC corpsman uniform
+  name: Marine corpsman uniform
   description: Standard-issue Marine hospital corpsman fatigues. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
@@ -63,7 +63,7 @@
 - type: entity
   parent: JumpsuitMarine
   id: CMJumpsuitMarineRTO
-  name: UNMC radio telephone operator uniform
+  name: marine radio telephone operator uniform
   description: Standard-issue RTO fatigues. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
@@ -80,13 +80,13 @@
 - type: entity
   parent: JumpsuitMarine
   id: CMJumpsuitMarineSniper
-  name: UNMC snipet uniform
+  name: marine snipet uniform
 
 # Tanker
 - type: entity
   parent: RMCMarineUniformBase
   id: CMJumpsuitMarineTanker
-  name: UNMC tanker uniform
+  name: marine tanker uniform
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/jungle.rsi
@@ -97,8 +97,8 @@
 - type: entity
   parent: RMCMarineUniformBase
   id: CMJumpsuitQM
-  name: quartermaster suit
-  description: A nicely-fitting military suit for a quartermaster. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  name: quartermaster uniform
+  description: Standard-issue quartermaster uniform.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Supply/ro.rsi
@@ -120,8 +120,8 @@
 - type: entity
   parent: RMCMarineUniformBase
   id: CMJumpsuitMessTech
-  name: UNMC Mess Technician uniform
-  description: Standard-issue Mess Technician uniform. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  name: mess technician uniform
+  description: Standard-issue Mess Technician uniform.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Supply/chef.rsi
@@ -133,7 +133,7 @@
   parent: RMCMarineUniformBase
   id: CMJumpsuitChiefEngineer
   name: chief engineer uniform
-  description: A uniform for a military engineer. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  description: Standard-issue Chief Engineer uniform.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Engineering/ec.rsi
@@ -142,8 +142,8 @@
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitOrdnanceTech
-  name: ordnance engineer uniform
-  description: A uniform for a professional bomb maker. It has shards of light Kevlar to help protect against stabbing weapons, bullets, and shrapnel from explosions. Padded with extra plates to take the brunt force of an explosion.
+  name: ordnance technician uniform
+  description: Standard-issue Ordnance Technician uniform.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Engineering/ot.rsi
@@ -152,8 +152,8 @@
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitMaintTech
-  name: engineer uniform
-  description: A uniform for a military engineer. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  name: maintenance technician uniform
+  description: Standard-issue Maintenance Technician uniform.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Engineering/mt.rsi
@@ -203,8 +203,8 @@
 - type: entity
   parent: CMJumpsuitCO
   id: CMJumpsuitCOService
-  name: commanding officer's dress shirt
-  description: The shirt and tie of a two-piece Navy service dress uniform for high-ranking officers. Wear with style and substance.
+  name: commanding officer uniform
+  description: Standard-issue commanding officer uniform.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/service.rsi
@@ -230,7 +230,7 @@
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitBO
   name: marine service uniform
-  description: A service uniform worn by members of the UNMC. Do the corps proud. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  description: A service uniform worn by members of the marines. Do the corps proud. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/bo.rsi
@@ -242,7 +242,7 @@
   parent: JumpsuitMarine
   id: CMJumpsuitOperations
   name: marine operations uniform
-  description: An operations uniform worn by members of the UNMC. Do the corps proud. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  description: An operations uniform worn by members of the marines. Do the corps proud. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/boiler/jungle.rsi
