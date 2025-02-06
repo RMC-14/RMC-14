@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Server.Destructible;
 using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Acid;
@@ -50,6 +51,8 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
     [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruct = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly DestructibleSystem _destructible = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
@@ -299,7 +302,17 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
         if (args.DamageDelta == null)
             return;
 
-        var destroyed = args.Damageable.TotalDamage + args.DamageDelta.GetTotal() > resinHole.Comp.TotalHealth;
+        var destroyed = false;
+        if (_destructible.TryGetDestroyedAt(resinHole.Owner, out var totalHealth))
+        {
+            destroyed = args.Damageable.TotalDamage + args.DamageDelta.GetTotal() > totalHealth;
+        }
+
+        if (TryComp(resinHole.Owner, out XenoAnnounceStructureDestructionComponent? structureDestructionComp))
+        {
+            structureDestructionComp.StructureName = GetTrapTypeName(resinHole);
+        }
+
         ActivateTrap(resinHole, destroyed);
     }
 
@@ -310,26 +323,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
         using (args.PushGroup(nameof(XenoResinHoleComponent)))
         {
-            if (resinHole.Comp.TrapPrototype == null)
-                args.PushMarkup(Loc.GetString("rmc-xeno-construction-resin-hole-empty"));
-            else
-            {
-                switch (resinHole.Comp.TrapPrototype)
-                {
-                    case XenoResinHoleComponent.AcidGasPrototype:
-                    case XenoResinHoleComponent.NeuroGasPrototype:
-                        args.PushMarkup(Loc.GetString("rmc-xeno-construction-resin-hole-gas"));
-                        break;
-                    case XenoResinHoleComponent.WeakAcidPrototype:
-                    case XenoResinHoleComponent.AcidPrototype:
-                    case XenoResinHoleComponent.StrongAcidPrototype:
-                        args.PushMarkup(Loc.GetString("rmc-xeno-construction-resin-hole-acid"));
-                        break;
-                    case XenoResinHoleComponent.ParasitePrototype:
-                        args.PushMarkup(Loc.GetString("rmc-xeno-construction-resin-hole-parasite"));
-                        break;
-                }
-            }
+            args.PushMarkup(GetTrapExamineMessage(resinHole));
         }
     }
 
@@ -470,16 +464,47 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
                 EnsureComp<TrapParasiteComponent>(trapEntity);
         }
 
-        string msg = destroyed ? "cm-xeno-construction-resin-hole-destroyed" : "rmc-xeno-construction-resin-hole-activate";
+        string msg = "rmc-xeno-construction-resin-hole-activate";
 
         var ev = new XenoResinHoleActivationEvent(msg);
-        RaiseLocalEvent(ent, ev);
+
+        // If the resin hole is destroyed, it's the XenoAnnounceStructureDestructionComponent job to announce
+        // the entity's destruction
+        if (!destroyed)
+            RaiseLocalEvent(ent, ev);
 
         comp.TrapPrototype = null;
         Dirty(resinHole);
         _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Empty);
 
         return true;
+    }
+
+    private string GetTrapExamineMessage(Entity<XenoResinHoleComponent> resinHole)
+    {
+        var msgID = "";
+        if (resinHole.Comp.TrapPrototype == null)
+            msgID = "rmc-xeno-construction-resin-hole-empty";
+        else
+        {
+            switch (resinHole.Comp.TrapPrototype)
+            {
+                case XenoResinHoleComponent.AcidGasPrototype:
+                case XenoResinHoleComponent.NeuroGasPrototype:
+                    msgID = "rmc-xeno-construction-resin-hole-gas";
+                    break;
+                case XenoResinHoleComponent.WeakAcidPrototype:
+                case XenoResinHoleComponent.AcidPrototype:
+                case XenoResinHoleComponent.StrongAcidPrototype:
+                    msgID = "rmc-xeno-construction-resin-hole-acid";
+                    break;
+                case XenoResinHoleComponent.ParasitePrototype:
+                    msgID = "rmc-xeno-construction-resin-hole-parasite";
+                    break;
+            }
+        }
+
+        return Loc.GetString(msgID);
     }
 
     private bool IsAcidPrototype(string proto, out int level)
