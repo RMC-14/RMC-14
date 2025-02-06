@@ -7,8 +7,6 @@ using Content.Shared.Radio.Components;
 using Content.Shared.Radio.EntitySystems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Audio;
-using Robust.Server.Audio;
 
 namespace Content.Server.Radio.EntitySystems;
 
@@ -16,12 +14,6 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
 {
     [Dependency] private readonly INetManager _netMan = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-
-    private readonly SoundSpecifier _radioSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/radiostatic.ogg")
-    {
-        Params = AudioParams.Default.WithVariation(0.09f),
-    }; // RMC14
 
     public override void Initialize()
     {
@@ -61,7 +53,6 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
             && keys.Channels.Contains(args.Channel.ID))
         {
             _radio.SendRadioMessage(uid, args.Message, args.Channel, component.Headset);
-            _audio.PlayPvs(_radioSound, uid); // RMC14
             args.Channel = null; // prevent duplicate messages from other listeners.
         }
     }
