@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
 using System.Text;
 using Content.Shared._RMC14.Areas;
@@ -553,7 +553,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
                     if (offAreas.Length == 0)
                         marineAnnounce += " All fueling areas operational.";
                     else
-                        marineAnnounce += $"To increase speed, restore power to the following areas: {offAreas}";
+                        marineAnnounce += $" To increase speed, restore power to the following areas: {offAreas}";
 
                     return marineAnnounce;
                 }
