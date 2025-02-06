@@ -14,9 +14,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Replays;
 using Robust.Shared.Utility;
-using Content.Shared._RMC14.Xenonids;
-using Robust.Shared.Audio;
-using Robust.Shared.Audio.Systems;
 
 namespace Content.Server.Radio.EntitySystems;
 
@@ -31,21 +28,11 @@ public sealed class RadioSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!; // RMC14
 
     // set used to prevent radio feedback loops.
     private readonly HashSet<string> _messages = new();
 
     private EntityQuery<TelecomExemptComponent> _exemptQuery;
-
-    private readonly SoundSpecifier _radioSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/radiostatic.ogg")
-    {
-        Params = new AudioParams
-        {
-            Volume = -2f,
-            Variation = 0.1f
-        }
-    }; // RMC14
 
     public override void Initialize()
     {
@@ -161,12 +148,6 @@ public sealed class RadioSystem : EntitySystem
 
             // send the message
             RaiseLocalEvent(receiver, ref ev);
-        }
-
-        if (canSend)
-        {
-            var filter = Filter.Pvs(messageSource).RemoveWhereAttachedEntity(HasComp<XenoComponent>);
-            _audio.PlayEntity(_radioSound, filter, messageSource, false); // RMC14
         }
 
         if (name != Name(messageSource))
