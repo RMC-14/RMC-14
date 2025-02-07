@@ -221,6 +221,7 @@
   - type: CommendationGiver
   - type: XenoInhands
     prefix: queen
+  - type: XenoOmitNumber
 
 - type: entity
   id: XenoLeaderPheromoneRelay
