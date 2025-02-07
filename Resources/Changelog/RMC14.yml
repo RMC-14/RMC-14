@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added Does-The-Dishes figurine
-    type: Add
-  id: 795
-  time: '2024-10-07T04:21:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4321
 - author: DrSmugleaf
   changes:
   - message: Fixed the underbarrel shotgun attachment doing too little damage to xeno
@@ -5096,5 +5089,13 @@
   id: 1294
   time: '2025-02-07T02:15:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5491
+- author: SG6732
+  changes:
+  - message: Made it possible to wear tactical wraps/scarves around the accessory
+      slot as well as mask slot.
+    type: Tweak
+  id: 1295
+  time: '2025-02-07T02:19:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5407
 Name: RMC14
 Order: -1
