@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Pulling any xeno that's big is now in general slower
-    type: Fix
-  - message: Runner and warriors are no longer super slow to drag
-    type: Fix
-  id: 799
-  time: '2024-10-07T23:26:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4332
-- author: Vermidia
-  changes:
   - message: Boiler neurotoxin applies 5 on direct hit, and boiler tailstabs now differ
       based on gas toggled, with neuro injecting 16 neuro instead of injecting acid.
     type: Fix
@@ -5096,5 +5087,12 @@
   id: 1298
   time: '2025-02-07T08:14:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5534
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Night vision visors now have their film grain overlay
+    type: Tweak
+  id: 1299
+  time: '2025-02-07T08:15:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5484
 Name: RMC14
 Order: -1
