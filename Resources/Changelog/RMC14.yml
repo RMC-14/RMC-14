@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed the underbarrel shotgun attachment doing too little damage to xeno
-      resin structures. It will now properly one shot both resin door types with one
-      buckshot shot at point-blank, and three shot thick resin walls.
-    type: Fix
-  id: 796
-  time: '2024-10-07T04:39:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4323
-- author: DrSmugleaf
-  changes:
   - message: Fixed the half-second delay to taking items out of storage.
     type: Fix
   id: 797
@@ -5097,5 +5088,12 @@
   id: 1295
   time: '2025-02-07T02:19:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5407
+- author: N0lim
+  changes:
+  - message: Now you can drag dead larva to hive core and turn it into burrowed larva.
+    type: Add
+  id: 1296
+  time: '2025-02-07T02:30:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5254
 Name: RMC14
 Order: -1
