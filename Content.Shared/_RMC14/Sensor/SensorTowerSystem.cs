@@ -259,6 +259,7 @@ public sealed class SensorTowerSystem : EntitySystem
             if (!_random.Prob(tower.BreakChance))
             {
                 tower.NextBreakAt = time + tower.BreakEvery;
+                Dirty(uid, tower);
                 continue;
             }
 
@@ -266,11 +267,13 @@ public sealed class SensorTowerSystem : EntitySystem
             {
                 _popup.PopupEntity($"The {Name(uid)} beeps wildly and sprays random pieces everywhere! Use a wrench to repair it.", uid, uid, PopupType.LargeCaution);
                 tower.State = SensorTowerState.Wrench;
+                Dirty(uid, tower);
             }
             else
             {
                 _popup.PopupEntity($"The {Name(uid)} beeps wildly and a fuse blows! Use wirecutters, then a wrench to repair it.", uid, uid, PopupType.LargeCaution);
                 tower.State = SensorTowerState.Wire;
+                Dirty(uid, tower);
             }
 
             UpdateAppearance((uid, tower));
