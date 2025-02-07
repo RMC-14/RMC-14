@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed 300u upstream jugs fitting into satchels.
-    type: Fix
-  id: 798
-  time: '2024-10-07T05:52:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4325
 - author: Vermidia
   changes:
   - message: Pulling any xeno that's big is now in general slower
@@ -5095,5 +5088,13 @@
   id: 1297
   time: '2025-02-07T07:26:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5535
+- author: Dutch-VanDerLinde
+  changes:
+  - message: The CE's, CMO's, QM's, CMP's and IO's headsets now correctly start with
+      some channels disabled by default. Right click the headset to configure them.
+    type: Tweak
+  id: 1298
+  time: '2025-02-07T08:14:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5534
 Name: RMC14
 Order: -1
