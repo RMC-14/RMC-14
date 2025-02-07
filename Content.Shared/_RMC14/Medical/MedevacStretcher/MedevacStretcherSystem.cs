@@ -178,13 +178,8 @@ public sealed class MedevacStretcherSystem : EntitySystem
             return;
 
         var name = GetName(stretcher);
-        var targetComp = new DropshipTargetComponent()
-        {
-            Abbreviation = name,
-            IsTargetableByWeapons = false,
-        };
+        _dropshipWeapon.MakeTarget(stretcher, name, false);
 
-        AddComp(stretcher, targetComp, true);
         _appearance.SetData(stretcher, MedevacStretcherVisuals.BeaconState, BeaconVisuals.On);
         _popup.PopupClient(Loc.GetString("rmc-medevac-activate-beacon"), stretcherCoords, user);
     }

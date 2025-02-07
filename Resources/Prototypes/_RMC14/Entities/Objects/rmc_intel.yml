@@ -5,6 +5,7 @@
   components:
   - type: Corrodible
     isCorrodible: false
+  - type: IntelDetectorTracked
 
 - type: entity
   parent: RMCIntelBase

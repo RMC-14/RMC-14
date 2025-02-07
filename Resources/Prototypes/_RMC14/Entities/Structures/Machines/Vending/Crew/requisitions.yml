@@ -90,7 +90,7 @@
       #- id: Plastic Explosives
       #  amount: 3
       - id: RMCExplosiveBreachingCharge
-        amount: 2
+        amount: 5 # TODO RMC14 2 when plastic explosivs are in
     - name: Webbings
       entries:
       - id: CMWebbingBrown
@@ -223,8 +223,8 @@
       #   amount: 3
       - id: RMCMotionDetector
         amount: 4
-      #- id: Data Detector
-      #  amount: 4
+      - id: RMCIntelDetector
+        amount: 4
       - id: RMCBinoculars
         amount: 2
       - id: RMCRangefinder

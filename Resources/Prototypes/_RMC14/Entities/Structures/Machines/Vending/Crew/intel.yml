@@ -16,7 +16,7 @@
     - name: Intelligence Set (Mandatory)
       takeAll: RMCIntelSet
       entries:
-      - id: RMCVendorBundleIntelEssential
+      - id: RMCVendorBundleIntel
     - name: Engineering Supplies
       entries:
 #      - id: TODO RMC14 power control module
@@ -62,14 +62,14 @@
       entries:
       - id: CMFireExtinguisherPortable
         points: 5
-#      - id: TODO RMC14 fultons
-#        points: 10
+      - id: RMCFulton20
+        points: 10
       - id: RMCMotionDetector
         points: 15
         recommended: true
-#      - id: TODO RMC14 data detector
-#        points: 5
-#        recommended: true
+      - id: RMCIntelDetector
+        points: 5
+        recommended: true
     - name: Binoculars
       entries:
       - id: RMCBinoculars
@@ -127,3 +127,19 @@
       entries:
       - id: CMSatchelMarineIntel
       - id: CMCoatOfficer
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleIntel
+  name: essential intel set
+  description: Contains a crowbar, fultons, an intel detector, and binoculars.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/intel_detector.rsi
+    state: datadetector
+  - type: CMVendorBundle
+    bundle:
+    - CMCrowbar
+    - RMCFulton20
+    - RMCIntelDetector
+    - RMCBinoculars

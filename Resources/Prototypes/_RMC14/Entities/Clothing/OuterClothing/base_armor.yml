@@ -46,7 +46,7 @@
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
       - RMCXM51Holster
-      - RMCMotionDetector
+      - RMCDetector
       - RMCMatebaHolster
       #TODO walkman
 
@@ -93,7 +93,7 @@
       - Crowbar
       - RMCMacheteScabbard
       #TODO katana scabbard
-      - RMCMotionDetector
+      - RMCDetector
       #TODO walkman
 
 - type: entity
@@ -111,7 +111,7 @@
       - Knife
       - RMCG8Pouch
       #TODO mines
-      - RMCMotionDetector
+      - RMCDetector
       #TODO walkman
 
 - type: entity
@@ -143,7 +143,7 @@
       - RMCGeneralRevolverHolster
       - RMCMatebaHolster
       #TODO Ceremonial Sword
-      - RMCMotionDetector
+      - RMCDetector
       #TODO walkman
 
 - type: entity
@@ -166,7 +166,7 @@
       - Grenade
       - Flashlight
       - Machete
-      - RMCMotionDetector
+      - RMCDetector
       #TODO walkman
 
 # TODO: Add separate whitelists for 'safari jacket' and 'bureau deputy jacket'

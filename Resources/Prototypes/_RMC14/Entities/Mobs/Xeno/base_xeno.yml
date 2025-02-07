@@ -297,6 +297,7 @@
     slowMultiplier: 0.87
     superSlowMultiplier: 0.75
     durationMultiplier: 0.666
+  - type: RMCCanBeFultoned
 
 - type: entity
   abstract: true
