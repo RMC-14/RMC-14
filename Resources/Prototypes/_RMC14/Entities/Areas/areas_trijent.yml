@@ -529,6 +529,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Areas/areas_dam.rsi
+    state: central_ss
   - type: Area
     minimapColor: '#C19504E7'
 

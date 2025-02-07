@@ -33,7 +33,6 @@
       role: CMJobSeniorEnlistedAdvisor
       time: 36000 # 10 hours
     RMCRankGunnerySergeant: []
-  weight: 5
   startingGear: CMGearSeniorEnlistedAdvisor
   icon: "CMJobIconSEA"
   requireAdminNotify: true

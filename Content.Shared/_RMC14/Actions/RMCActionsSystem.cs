@@ -89,9 +89,8 @@ public sealed class RMCActionsSystem : EntitySystem
             }
 
             comp.Enabled = newStatus;
+            Dirty(actionId, comp);
         }
-
-        Dirty(action);
     }
 
     private void OnReducedUseDelayEvent<T>(EntityUid uid, T component, ActionReducedUseDelayEvent args) where T : BaseActionComponent

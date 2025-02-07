@@ -16,9 +16,6 @@ monstermos_rip_tiles = false
 grid_impulse = false
 max_process_time = 1
 
-[audio]
-alert.explosion_min_intensity = -1
-
 [auth]
 mode = 1
 

@@ -4,6 +4,27 @@
   name: hive core # TODO RMC14 allow other structures to be built
   description: A giant pulsating mound of mass. It looks very much alive.
   components: # TODO RMC14 block ob
+  - type: Transform
+    anchored: true
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        layer:
+        - BulletImpassable
+        density: 200
+      xeno_hive_core:
+        shape:
+          !type:PhysShapeCircle
+          radius: 1
+        hard: false
+        mask:
+        - SmallMobLayer
+  - type: CollisionWake
+    enabled: false
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/hive_structures.rsi
     state: core
@@ -15,6 +36,9 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: StepTrigger
+    requiredTriggeredSpeed: 0
+    intersectRatio: 0.1
   - type: HivePylon
   - type: HiveCore
   - type: XenoWeedsSpreading
