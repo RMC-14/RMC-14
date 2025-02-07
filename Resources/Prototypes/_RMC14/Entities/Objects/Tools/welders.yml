@@ -1,6 +1,6 @@
 # Welding fuel amounts are multiplied by 2.5 from 13 until we make them work exactly the same
 - type: entity
-  parent: BaseItem
+  parent: [BaseItem, RMCBaseMeleeWeapon]
   id: RMCWelderBase
   name: blowtorch
   description: "Melts anything as long as it's fueled, don't forget your eye protection!"
@@ -54,7 +54,7 @@
       collection: MetalThud
     activatedDamage:
         types:
-            Heat: 8
+            Heat: 15
   - type: ItemToggleSize
     activatedSize: Large
   - type: ItemToggleHot
@@ -77,15 +77,15 @@
         reagents:
         - ReagentId: WeldingFuel
           Quantity: 100
-        maxVol: 100 # TODO RMC14 40 when welders are fixed
+        maxVol: 100
   - type: UseDelay
   - type: MeleeWeapon
     wideAnimationRotation: -90
     damage:
       types:
-        Blunt: 10
+        Blunt: 12
     soundHit:
-      collection: MetalThud
+      collection: GenericHit
   - type: RefillableSolution
     solution: Welder
   - type: Tool
@@ -115,6 +115,13 @@
   id: CMWelder
   components:
   - type: RequiresEyeProtection
+  - type: SolutionContainerManager
+    solutions:
+      Welder:
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 100
+        maxVol: 100 # TODO RMC14 40 when welders are fixed
 
 - type: entity
   parent: RMCWelderBase
