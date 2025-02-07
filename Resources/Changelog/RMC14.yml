@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: whisper
-  changes:
-  - message: Fixed lesser drones from the hive core not being raffled.
-    type: Fix
-  id: 794
-  time: '2024-10-07T04:16:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4268
 - author: Whisper
   changes:
   - message: Added Does-The-Dishes figurine
@@ -5096,5 +5089,12 @@
   id: 1293
   time: '2025-02-07T02:13:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5528
+- author: Dygon
+  changes:
+  - message: Chair are now instantly deconstructed with a wrench, instead of a screwdriver.
+    type: Tweak
+  id: 1294
+  time: '2025-02-07T02:15:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5491
 Name: RMC14
 Order: -1
