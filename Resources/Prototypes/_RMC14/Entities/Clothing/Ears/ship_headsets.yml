@@ -20,6 +20,11 @@
     size: Small
   - type: ClothingLimit
     id: CMHeadset
+  - type: RMCRadioFilter
+  - type: UserInterface
+    interfaces:
+      enum.RMCRadioFilterUI.Key:
+        type: RMCRadioFilterBui
 
 - type: entity
   parent: CMHeadset
@@ -47,6 +52,14 @@
       key_slots:
       - CMEncryptionKeyCommon
       - CMEncryptionKeyCE
+  - type: RMCRadioFilter
+    disabledChannels:
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
 
 - type: entity
   parent: RMCHeadsetShip
@@ -61,6 +74,14 @@
       key_slots:
       - CMEncryptionKeyCommon
       - CMEncryptionKeyCMO
+  - type: RMCRadioFilter
+    disabledChannels:
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
 
 - type: entity
   parent: RMCHeadsetShip
@@ -137,6 +158,15 @@
       key_slots:
       - CMEncryptionKeyCommon
       - RMCEncryptionKeyQuartermaster
+  - type: RMCRadioFilter
+    disabledChannels:
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineMedical
 
 - type: entity
   parent: RMCHeadsetShip
@@ -165,6 +195,14 @@
       key_slots:
       - CMEncryptionKeyCommon
       - CMEncryptionKeyCMP
+  - type: RMCRadioFilter
+    disabledChannels:
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
 
 - type: entity
   parent: RMCHeadsetShip
@@ -214,6 +252,14 @@
       key_slots:
       - CMEncryptionKeyIntel
       - CMEncryptionKeyIntelOfficer
+  - type: RMCRadioFilter
+    disabledChannels:
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
 
 - type: entity
   parent: RMCHeadsetShip
