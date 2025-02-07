@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Added Avali species
-    type: Add
-  id: 802
-  time: '2024-10-08T22:14:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4336
 - author: Rainbeon
   changes:
   - message: Bullets will now only hit Eggs when directly aimed at
@@ -5097,5 +5090,13 @@
   id: 1301
   time: '2025-02-07T21:47:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5525
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Some marine uniforms can now be toggled to roll sleeves and take off
+      the jacket. Right click on a uniform to toggle it.
+    type: Tweak
+  id: 1302
+  time: '2025-02-07T23:00:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5539
 Name: RMC14
 Order: -1
