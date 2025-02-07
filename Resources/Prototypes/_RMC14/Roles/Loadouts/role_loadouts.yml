@@ -19,6 +19,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMDropshipCrewChief
@@ -36,6 +37,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMPilotDropship
@@ -53,6 +55,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMPilotGunship
@@ -70,6 +73,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMIntelOfficer
@@ -87,6 +91,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 # Command
 - type: roleLoadout
@@ -106,6 +111,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMExecutiveOfficer
@@ -123,6 +129,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMStaffOfficer
@@ -140,6 +147,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 # Engineering
 - type: roleLoadout
@@ -158,6 +166,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMMaintTech
@@ -175,6 +184,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMOrdnanceTech
@@ -192,6 +202,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 # Squad Roles
 - type: roleLoadout
@@ -210,6 +221,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMFireteamLeader
@@ -227,6 +239,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMHospitalCorpsman
@@ -244,6 +257,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMRifleman
@@ -261,6 +275,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMSmartGunOperator
@@ -278,6 +293,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMSquadLeader
@@ -295,6 +311,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMWeaponsSpecialist
@@ -312,6 +329,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 # Medical
 - type: roleLoadout
@@ -330,6 +348,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMDoctor
@@ -347,6 +366,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMNurse
@@ -364,6 +384,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMResearcher
@@ -381,6 +402,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 # Military Police
 - type: roleLoadout
@@ -399,6 +421,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMMilitaryPolice
@@ -416,6 +439,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMMilitaryWarden
@@ -433,6 +457,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 # Other
 - type: roleLoadout
@@ -451,6 +476,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMLiaison
@@ -468,6 +494,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMMessTech
@@ -485,6 +512,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMSeniorEnlistedAdvisor
@@ -502,6 +530,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 # Requsitions
 - type: roleLoadout
@@ -520,6 +549,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMQuartermaster
@@ -537,3 +567,4 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
