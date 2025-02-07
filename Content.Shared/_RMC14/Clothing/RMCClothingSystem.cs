@@ -107,8 +107,6 @@ public sealed class RMCClothingSystem : EntitySystem
                 Act = () => TryToggleFold(ent, type, user),
                 Text = Loc.GetString(type.Name),
                 Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/fold.svg.192dpi.png")),
-
-                // If the object is unfolded and they click it, they want to fold it, if it's folded, they want to pick it up
                 Priority = type.Priority,
             };
 
