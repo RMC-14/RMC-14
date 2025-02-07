@@ -88,6 +88,16 @@
       Dead: 0
   - type: Thirst
     baseDecayRate: 0.01666666666
+  - type: Pain # TODO change to normal from testing
+    painLevels:
+      - !type:HealthChange
+        conditions:
+        - !type:PainPercentage
+          min: 0
+          max: 70
+        damage:
+          groups:
+            Brute: 10
   - type: Body
     prototype: Human
     requiredLegs: 2
