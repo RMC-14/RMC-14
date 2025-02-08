@@ -266,6 +266,8 @@
 #        amount: 15
       - id: BedrollFolded
         amount: 20
+      - id: RMCM5CameraGear
+        amount: 10
     - name: Optics
       entries: [ ]
 #      - id: Advanced Medical Optic (CORPSMAN ONLY)
