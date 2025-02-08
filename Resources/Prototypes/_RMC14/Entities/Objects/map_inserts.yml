@@ -16,7 +16,7 @@
   suffix: Insert Solaris
   components:
   - type: MapInsert
-    spawn: "/Maps/_RMC14/inserts/solaris/se-checkpoint.yml"
+    spawn: "/Maps/_RMC14/Inserts/Solaris/se-checkpoint.yml"
     probability: 0.7
     clearEntities: true
     replaceAreas: true
@@ -29,7 +29,7 @@
   suffix: Insert Kutjevo
   components:
   - type: MapInsert
-    spawn: "/Maps/_RMC14/inserts/kutjevo/communications.yml"
+    spawn: "/Maps/_RMC14/Inserts/Kutjevo/communications.yml"
     probability: 0.35
     clearEntities: true
     replaceAreas: false
