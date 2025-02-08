@@ -126,7 +126,7 @@ public sealed class IntelSystem : EntitySystem
 
     private readonly Dictionary<IntelSpawnerType, List<Entity<IntelSpawnerComponent>>> _spawners = new();
     private readonly Queue<Entity<IntelRetrieveItemObjectiveComponent>> _activePositionIntels = new();
-    private readonly Queue<Entity<IntelRecoverSurvivorObjectiveComponent>> _activeSurvivorIntels = new();
+    private readonly Queue<Entity<IntelRescueSurvivorObjectiveComponent>> _activeSurvivorIntels = new();
     private readonly Queue<Entity<IntelRecoverCorpseObjectiveComponent>> _activeCorpseIntels = new();
     private readonly HashSet<Entity<IntelContainerComponent>> _nearby = new();
 
@@ -852,13 +852,13 @@ public sealed class IntelSystem : EntitySystem
                     continue;
 
                 if (_area.TryGetArea(intel.Owner, out var area, out _) &&
-                    HasComp<IntelRecoverSurvivorAreaComponent>(area))
+                    HasComp<IntelRescueSurvivorAreaComponent>(area))
                 {
                     tree ??= EnsureTechTree();
                     tree.Value.Comp.Tree.RescueSurvivors++;
                     AddPoints(tree.Value, intel.Comp.Value);
 
-                    RemComp<IntelRecoverSurvivorObjectiveComponent>(intel);
+                    RemComp<IntelRescueSurvivorObjectiveComponent>(intel);
                 }
             }
         }
@@ -905,7 +905,7 @@ public sealed class IntelSystem : EntitySystem
                 _activePositionIntels.Enqueue((uid, retrieve));
         }
 
-        var survivorQuery = EntityQueryEnumerator<IntelRecoverSurvivorObjectiveComponent>();
+        var survivorQuery = EntityQueryEnumerator<IntelRescueSurvivorObjectiveComponent>();
         while (survivorQuery.MoveNext(out var uid, out var comp))
         {
             _activeSurvivorIntels.Enqueue((uid, comp));
