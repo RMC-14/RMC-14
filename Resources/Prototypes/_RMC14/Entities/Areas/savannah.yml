@@ -247,13 +247,19 @@
   parent:
   - RMCAreaSavannahCommand
   id: RMCAreaSavannahASO
-  name: ASO, IO and Command Cryo
+  name: ASO and Command Cryo
 
 - type: entity
   parent:
   - RMCAreaSavannahCommand
   id: RMCAreaSavannahTComms
   name: TComms
+
+- type: entity
+  parent:
+  - RMCAreaSavannahCommand
+  id: RMCAreaSavannahIO
+  name: IO office
 
 # MEDICAL
 
@@ -474,8 +480,8 @@
 - type: entity
   parent:
   - RMCAreaSavannah
-  id: RMCAreaSavannahPressSEA
-  name: Press and SEA Offices
+  id: RMCAreaSavannahSEA
+  name: Ordnance and SEA Offices
 
 - type: entity
   parent:
