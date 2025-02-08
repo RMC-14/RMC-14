@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: FungiFellow
-  changes:
-  - message: Added the missing stun on direct hit effect of the Boiler's Bombard.
-    type: Add
-  - message: Acid Bombard direct hits now properly applies the same effect as a Charged
-      Spit
-    type: Add
-  id: 805
-  time: '2024-10-09T02:07:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4214
-- author: CyberTropic
-  changes:
-  - message: Added soap
-    type: Add
-  id: 806
-  time: '2024-10-09T02:09:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4333
 - author: Vermidia
   changes:
   - message: Add hazard vests, hard hats, and rebreathers to maintenance tech vendors
@@ -5098,5 +5081,20 @@
   id: 1304
   time: '2025-02-08T08:15:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5548
+- author: Rainbeon
+  changes:
+  - message: Dragging dead bodies that are on top of Parasite traps no longer triggers
+      the trap.
+    type: Fix
+  id: 1305
+  time: '2025-02-08T11:58:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5549
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed welder packs not refueling by just clicking on them.
+    type: Fix
+  id: 1306
+  time: '2025-02-08T11:57:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5542
 Name: RMC14
 Order: -1
