@@ -1,143 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the SEA not starting with 45 vendor points.
-    type: Fix
-  id: 790
-  time: '2024-10-06T23:34:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4315
-- author: CyberTropic
-  changes:
-  - message: Added linen bins.
-    type: Add
-  id: 791
-  time: '2024-10-07T02:35:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4301
-- author: DrSmugleaf
-  changes:
-  - message: Added handfuls of shotgun shells. These are bundles of five shells which
-      can be used to quickly reload a shotgun, stored in the shotgun rig, shotgun
-      pouch, armor and regular ammo load rig.
-    type: Add
-  - message: Added the large shotgun shell pouch, available to squad leaders, some
-      command roles, pilots. Requisitions also starts with one in their vendor.
-    type: Add
-  - message: Updated the shotgun shell pouch and shotgun shell loading rig to fit
-      more handfuls instead of one or a few boxes.
-    type: Tweak
-  - message: Boxes of shotgun shells now properly eject a handful of shells when clicked
-      in hand with your other empty hand, and no longer load shotguns directly.
-    type: Tweak
-  id: 792
-  time: '2024-10-07T02:43:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4316
-- author: DrSmugleaf
-  changes:
-  - message: Fixed error sprites for some window frames in Trijent Dam.
-    type: Fix
-  id: 793
-  time: '2024-10-07T03:33:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4322
-- author: whisper
-  changes:
-  - message: Fixed lesser drones from the hive core not being raffled.
-    type: Fix
-  id: 794
-  time: '2024-10-07T04:16:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4268
-- author: Whisper
-  changes:
-  - message: Added Does-The-Dishes figurine
-    type: Add
-  id: 795
-  time: '2024-10-07T04:21:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4321
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the underbarrel shotgun attachment doing too little damage to xeno
-      resin structures. It will now properly one shot both resin door types with one
-      buckshot shot at point-blank, and three shot thick resin walls.
-    type: Fix
-  id: 796
-  time: '2024-10-07T04:39:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4323
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the half-second delay to taking items out of storage.
-    type: Fix
-  id: 797
-  time: '2024-10-07T05:26:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4324
-- author: DrSmugleaf
-  changes:
-  - message: Fixed 300u upstream jugs fitting into satchels.
-    type: Fix
-  id: 798
-  time: '2024-10-07T05:52:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4325
-- author: Vermidia
-  changes:
-  - message: Pulling any xeno that's big is now in general slower
-    type: Fix
-  - message: Runner and warriors are no longer super slow to drag
-    type: Fix
-  id: 799
-  time: '2024-10-07T23:26:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4332
-- author: Vermidia
-  changes:
-  - message: Boiler neurotoxin applies 5 on direct hit, and boiler tailstabs now differ
-      based on gas toggled, with neuro injecting 16 neuro instead of injecting acid.
-    type: Fix
-  id: 800
-  time: '2024-10-08T22:09:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4337
-- author: Rainbeon
-  changes:
-  - message: Fixed Xeno Health Regeneration being half of what it should be in 13.
-    type: Fix
-  id: 801
-  time: '2024-10-08T22:12:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4345
-- author: Vermidia
-  changes:
-  - message: Added Avali species
-    type: Add
-  id: 802
-  time: '2024-10-08T22:14:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4336
-- author: Rainbeon
-  changes:
-  - message: Bullets will now only hit Eggs when directly aimed at
-    type: Tweak
-  id: 803
-  time: '2024-10-08T22:15:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4329
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Cargo tech, warden, and maint tech uniform can now be folded for an alternate
-      style
-    type: Tweak
-  id: 804
-  time: '2024-10-08T22:16:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4276
-- author: FungiFellow
-  changes:
-  - message: Added the missing stun on direct hit effect of the Boiler's Bombard.
-    type: Add
-  - message: Acid Bombard direct hits now properly applies the same effect as a Charged
-      Spit
-    type: Add
-  id: 805
-  time: '2024-10-09T02:07:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4214
-- author: CyberTropic
-  changes:
-  - message: Added soap
-    type: Add
-  id: 806
-  time: '2024-10-09T02:09:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4333
 - author: Vermidia
   changes:
   - message: Add hazard vests, hard hats, and rebreathers to maintenance tech vendors
@@ -5107,5 +4968,133 @@
   id: 1289
   time: '2025-02-03T11:33:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5510
+- author: FungiFellow
+  changes:
+  - message: Fixed SG drum belt not having two drums
+    type: Fix
+  id: 1290
+  time: '2025-02-04T22:39:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5522
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed Executive Officer not starting with a marine service peaked cap.
+    type: Fix
+  id: 1291
+  time: '2025-02-07T02:11:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5532
+- author: Whisper
+  changes:
+  - message: Fixed MOU53 being too loud, the sound was not mono.
+    type: Fix
+  id: 1292
+  time: '2025-02-07T02:13:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5531
+- author: Vermidia
+  changes:
+  - message: Fixed hypospray tactical reloads not working in most cases
+    type: Fix
+  id: 1293
+  time: '2025-02-07T02:13:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5528
+- author: Dygon
+  changes:
+  - message: Chair are now instantly deconstructed with a wrench, instead of a screwdriver.
+    type: Tweak
+  id: 1294
+  time: '2025-02-07T02:15:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5491
+- author: SG6732
+  changes:
+  - message: Made it possible to wear tactical wraps/scarves around the accessory
+      slot as well as mask slot.
+    type: Tweak
+  id: 1295
+  time: '2025-02-07T02:19:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5407
+- author: N0lim
+  changes:
+  - message: Now you can drag dead larva to hive core and turn it into burrowed larva.
+    type: Add
+  id: 1296
+  time: '2025-02-07T02:30:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5254
+- author: Timemaster99
+  changes:
+  - message: Made rotary phones emote when ringing
+    type: Tweak
+  id: 1297
+  time: '2025-02-07T07:26:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5535
+- author: Dutch-VanDerLinde
+  changes:
+  - message: The CE's, CMO's, QM's, CMP's and IO's headsets now correctly start with
+      some channels disabled by default. Right click the headset to configure them.
+    type: Tweak
+  id: 1298
+  time: '2025-02-07T08:14:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5534
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Night vision visors now have their film grain overlay
+    type: Tweak
+  id: 1299
+  time: '2025-02-07T08:15:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5484
+- author: Tunguso4ka
+  changes:
+  - message: A somewhat unlucky UNS Savannah returns from her refit.
+    type: Add
+  id: 1300
+  time: '2025-02-07T11:50:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5097
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added fist-bumping and high-fiving emotes. Right click on a fellow marine
+      to initiate the action.
+    type: Add
+  - message: Added tailswiping with other xenos emotes. Right click on a fellow xeno
+      to initiate the action.
+    type: Add
+  id: 1301
+  time: '2025-02-07T21:47:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5525
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Some marine uniforms can now be toggled to roll sleeves and take off
+      the jacket. Right click on a uniform to toggle it.
+    type: Tweak
+  id: 1302
+  time: '2025-02-07T23:00:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5539
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed ME3 hand welder (the small one) blinding you without eye protection.
+    type: Fix
+  id: 1303
+  time: '2025-02-08T05:16:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5541
+- author: Rainbeon
+  changes:
+  - message: Fixed Acid Resin Traps not triggering around open corners. (Traps will
+      still not trigger if they are entirely obstructed)
+    type: Fix
+  id: 1304
+  time: '2025-02-08T08:15:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5548
+- author: Rainbeon
+  changes:
+  - message: Dragging dead bodies that are on top of Parasite traps no longer triggers
+      the trap.
+    type: Fix
+  id: 1305
+  time: '2025-02-08T11:58:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5549
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed welder packs not refueling by just clicking on them.
+    type: Fix
+  id: 1306
+  time: '2025-02-08T11:57:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5542
 Name: RMC14
 Order: -1
