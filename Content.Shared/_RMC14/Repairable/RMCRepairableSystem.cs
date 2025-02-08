@@ -340,14 +340,13 @@ public sealed class RMCRepairableSystem : EntitySystem
             && _solution.TryGetDrainableSolution(target, out var targetSoln, out var targetSolution)
             && _solution.TryGetSolution(used, welder.FuelSolutionName, out var solutionComp, out var welderSolution))
         {
+            var trans = FixedPoint2.Min(welderSolution.AvailableVolume, targetSolution.Volume);
+
             if (welder.Enabled)
             {
                 _popup.PopupClient(Loc.GetString("rmc-welder-component-danger"), used, args.User, PopupType.MediumCaution);
-                return;
             }
-
-            var trans = FixedPoint2.Min(welderSolution.AvailableVolume, targetSolution.Volume);
-            if (trans > 0)
+            else if (trans > 0)
             {
                 var drained = _solution.Drain(target, targetSoln.Value, trans);
                 _solution.TryAddSolution(solutionComp.Value, drained);
