@@ -283,3 +283,4 @@
   - type: RMCSpeciesSlowdownModifier
     slowMultiplier: 0.66
     superSlowMultiplier: 0.33
+  - type: RMCHandEmotes

@@ -382,6 +382,7 @@
       components:
       - XenoFruit
   - type: ParalyzeOnPullAttempt
+  - type: RMCHandEmotes
 
 - type: entity
   abstract: true
