@@ -32,7 +32,7 @@ namespace Content.Shared._RMC14.Medical.Pain
         public FixedPoint2 AirlossPainMultiplier = FixedPoint2.Zero;
 
         [DataField(required: true, serverOnly: true)]
-        public List<EntityEffect> PainLevels = [];
+        public EntityEffect[] PainLevels = default!;
     }
 
     [DataDefinition]
