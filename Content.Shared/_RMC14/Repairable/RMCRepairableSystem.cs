@@ -47,7 +47,7 @@ public sealed class RMCRepairableSystem : EntitySystem
         SubscribeLocalEvent<NailgunRepairableComponent, InteractUsingEvent>(OnNailgunRepairableInteractUsing);
         SubscribeLocalEvent<NailgunRepairableComponent, RMCNailgunRepairableDoAfterEvent>(OnNailgunRepairableDoAfter);
 
-        SubscribeLocalEvent<ReagentTankComponent, InteractUsingEvent>(OnWelderInteractUsing, before: [typeof(SharedStorageSystem)]);
+        SubscribeLocalEvent<ReagentTankComponent, InteractUsingEvent>(OnWelderInteractUsing);
     }
 
     private void OnRepairableInteractUsing(Entity<RMCRepairableComponent> repairable, ref InteractUsingEvent args)
