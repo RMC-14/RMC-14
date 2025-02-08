@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Cargo tech, warden, and maint tech uniform can now be folded for an alternate
-      style
-    type: Tweak
-  id: 804
-  time: '2024-10-08T22:16:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4276
 - author: FungiFellow
   changes:
   - message: Added the missing stun on direct hit effect of the Boiler's Bombard.
@@ -5098,5 +5090,13 @@
   id: 1303
   time: '2025-02-08T05:16:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5541
+- author: Rainbeon
+  changes:
+  - message: Fixed Acid Resin Traps not triggering around open corners. (Traps will
+      still not trigger if they are entirely obstructed)
+    type: Fix
+  id: 1304
+  time: '2025-02-08T08:15:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5548
 Name: RMC14
 Order: -1
