@@ -33,9 +33,9 @@
 
 - type: entity
   parent: RMCDrinkCoffee
-  id: RMCDrinkCoffeeJoe
-  name: Cuppa Joe's coffee
-  description: Have you got the CuppaJoe Smile? Stay perky! Freeze-dried CuppaJoe's Coffee.
+  id: RMCDrinkCoffeeBri
+  name: Bri's Brew coffee
+  description: Have you got the Bri Smile? Stay perky! Freeze-dried Bri's Brew Coffee.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Drinks/coffee_joe.rsi
