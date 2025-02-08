@@ -13,7 +13,7 @@
   name: objective landmark close
   components:
   - type: Sprite
-    state: close
+    state: intel_close
   - type: IntelSpawner
     intelType: Close
 
@@ -23,7 +23,7 @@
   name: objective landmark medium
   components:
   - type: Sprite
-    state: medium
+    state: intel_medium
   - type: IntelSpawner
     intelType: Medium
 
@@ -33,7 +33,7 @@
   name: objective landmark far
   components:
   - type: Sprite
-    state: far
+    state: intel_far
   - type: IntelSpawner
     intelType: Far
 
@@ -43,6 +43,6 @@
   name: objective landmark science
   components:
   - type: Sprite
-    state: science
+    state: intel_sci
   - type: IntelSpawner
     intelType: Science

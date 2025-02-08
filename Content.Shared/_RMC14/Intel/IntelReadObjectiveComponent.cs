@@ -13,7 +13,7 @@ public sealed partial class IntelReadObjectiveComponent : Component
     public IntelObjectiveState State = IntelObjectiveState.Inactive;
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 Value;
+    public FixedPoint2 Value = FixedPoint2.New(0.1);
 
     [DataField, AutoNetworkedField]
     public TimeSpan Delay = TimeSpan.FromSeconds(1);

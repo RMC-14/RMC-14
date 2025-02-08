@@ -107,3 +107,5 @@
   - type: XenoConstruction
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.2

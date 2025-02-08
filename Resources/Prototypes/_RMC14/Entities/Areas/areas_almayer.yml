@@ -19,6 +19,7 @@
     hijackEvacuationArea: false
     hijackEvacuationWeight: 0
     hijackEvacuationType: None
+  - type: IntelRescueSurvivorArea
 
 - type: entity
   parent: RMCAreaAlmayer
@@ -1156,6 +1157,7 @@
     state: operating
   - type: Area
     zLevel: 1
+  - type: IntelRecoverCorpsesArea
 
 - type: entity
   parent: RMCAreaAlmayerMedical
@@ -1227,6 +1229,7 @@
     state: science
   - type: Area
     zLevel: 1
+  - type: IntelRecoverCorpsesArea
 
 - type: entity
   parent: RMCAreaAlmayerMedicalContainment

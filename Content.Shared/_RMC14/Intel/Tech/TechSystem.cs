@@ -126,7 +126,7 @@ public sealed class TechSystem : EntitySystem
             RaiseLocalEvent(ev);
         }
 
-        _intel.UpdateTree();
+        _intel.UpdateTree(tree);
     }
 
     private MapId EnsurePurchasesMap()

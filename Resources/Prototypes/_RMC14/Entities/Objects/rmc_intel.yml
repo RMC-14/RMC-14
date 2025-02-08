@@ -8,10 +8,13 @@
   - type: IntelDetectorTracked
 
 - type: entity
+  abstract: true
   parent: RMCIntelBase
   id: RMCIntelReadableBase
   components:
   - type: IntelReadObjective
+    value: 0.1
+  - type: IntelRetrieveItemObjective
     value: 0.1
 
 - type: entity
@@ -27,6 +30,8 @@
     size: Tiny
   - type: IntelReadObjective
     state: Active
+  - type: IntelClues
+    clue: rmc-intel-clue-paper-scrap
 
 - type: entity
   parent: RMCIntelReadableBase
@@ -42,6 +47,8 @@
   - type: IntelReadObjective
     value: 0.2
     time: 6
+  - type: IntelClues
+    clue: rmc-intel-clue-progress-report
 
 - type: entity
   parent: RMCIntelReadableBase
@@ -59,6 +66,8 @@
     time: 4
   - type: IntelRequires
     requiresCount: 2
+  - type: IntelClues
+    clue: rmc-intel-clue-folder
 
 - type: entity
   parent: RMCIntelReadableBase
@@ -76,6 +85,28 @@
     time: 20
   - type: IntelRequires
     requiresCount: 2
+  - type: IntelClues
+    clue: rmc-intel-clue-technical-manual
+
+- type: entity
+  abstract: true
+  parent: RMCIntelBase
+  id: RMCIntelRetrieveDeviceBase
+  components:
+  - type: IntelRetrieveItemObjective
+    state: Active
+    value: 0.7
+  - type: IntelClues
+    clues: 8
+  - type: IntelSerial
+
+- type: entity
+  parent: [CMHealthAnalyzer, RMCIntelRetrieveDeviceBase]
+  id: RMCIntelRetrieveHealthAnalyzer
+  suffix: Intel, Experimental Device
+  components:
+  - type: IntelClues
+    clue: rmc-intel-experimental-device
 
 - type: entity
   parent: RMCCommunicationsConsoleBase
@@ -98,6 +129,18 @@
     blacklist:
       components:
       - Xeno
+
+- type: entity
+  parent: RMCCommunicationsConsoleBase
+  id: RMCComputerIntel
+  name: intel computer
+  description: An UNMC Intel Computer for data cataloguing and distribution.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: terminal1_old
+  - type: InteractionOutline
+  - type: IntelConsole
 
 - type: entity
   id: RMCIntelTechTree
