@@ -29,6 +29,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Evacuation;
 
@@ -403,8 +404,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
 
     public void ToggleEvacuation(SoundSpecifier? startSound, SoundSpecifier? cancelSound, EntityUid? map)
     {
-        if (map == null)
-            return;
+        DebugTools.Assert(map != null);
 
         var progress = EnsureComp<EvacuationProgressComponent>(map.Value);
         {
