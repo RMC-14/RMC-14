@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: crystalHex
-  changes:
-  - message: Added the gardener drone. The gardener drone sacrifices its resin constructions
-      and corrosive acid for the abilities to grow a variety of resin fruits, to plant
-      hardier weeds, and to surge resin. Resin surge allows you to speed up fruit
-      growth, create temporary walls, and make existing walls temporarily nigh unbreakable.
-    type: Add
-  - message: Added the gardener's fruits, the effects of which include instant healing,
-      health/plasma regeneration, overshield, movement speed increase, passive recovery
-      pheromones, and ability cooldown reduction.
-    type: Add
-  id: 812
-  time: '2024-10-09T21:55:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4100
 - author: TeaTotalTemplar
   changes:
   - message: Added the AR10, AR10 magazine and 7.62x51 cartridge
@@ -5238,5 +5224,12 @@
   id: 1311
   time: '2025-02-09T11:53:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5556
+- author: Ian321
+  changes:
+  - message: IO can now pick up armor and a backpack from their equipment vendor.
+    type: Fix
+  id: 1312
+  time: '2025-02-09T19:47:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5559
 Name: RMC14
 Order: -1
