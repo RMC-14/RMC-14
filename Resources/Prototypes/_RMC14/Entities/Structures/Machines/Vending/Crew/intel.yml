@@ -125,6 +125,7 @@
       - id: CMMRE
     - name: Armor
       choices: { CMArmor: 1 }
+      takeAll: RMCIntelArmor
       entries:
       - id: RMCArmorXM4
       - id: CMArmorM3Light
