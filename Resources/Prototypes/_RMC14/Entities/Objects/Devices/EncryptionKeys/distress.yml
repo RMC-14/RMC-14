@@ -17,12 +17,12 @@
 
 - type: entity
   parent: CMEncryptionKey
-  id: RMCEncryptionKeyDutch
-  name: dutch encryption Key
+  id: RMCEncryptionKeyFreelancer
+  name: freelancer encryption Key
   components:
   - type: EncryptionKey
     channels:
-    - MarineCommon # TODO RMC14 add Dutch channel
+    - MarineCommon # TODO RMC14 add Freelancer (Dutch) channel
     - Colony
     defaultChannel: Colony
   - type: Sprite
