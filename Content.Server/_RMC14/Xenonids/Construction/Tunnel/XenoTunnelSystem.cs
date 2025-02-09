@@ -71,7 +71,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 
         SubscribeLocalEvent<XenoTunnelComponent, GetVerbsEvent<ActivationVerb>>(OnGetRenameVerb);
         SubscribeLocalEvent<XenoTunnelComponent, InteractUsingEvent>(OnFillTunnel);
-        SubscribeLocalEvent<XenoTunnelComponent, XenoCollapseTunnelDoAfterEvent>(OnColapseTunnelFinish);
+        SubscribeLocalEvent<XenoTunnelComponent, XenoCollapseTunnelDoAfterEvent>(OnCollapseTunnelFinish);
 
         SubscribeLocalEvent<XenoTunnelComponent, ContainerIsInsertingAttemptEvent>(OnInsertEntityIntoTunnel);
 
@@ -193,6 +193,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-resin-tunnel-create-tunnel"), xenoBuilder.Owner, xenoBuilder.Owner);
         args.Handled = true;
     }
+
     private void OnFinishCreateTunnel(Entity<XenoComponent> xenoBuilder, ref XenoDigTunnelDoAfter args)
     {
         if (args.Cancelled)
@@ -292,6 +293,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 
         args.Verbs.Add(interactVerb);
     }
+
     private void OnInteract(Entity<XenoTunnelComponent> xenoTunnel, ref InteractHandEvent args)
     {
         var (ent, comp) = xenoTunnel;
@@ -368,6 +370,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 
         args.Handled = true;
     }
+
     private void OnMoveThroughTunnel(Entity<XenoTunnelComponent> xenoTunnel, ref TraverseXenoTunnelMessage args)
     {
         var (ent, comp) = xenoTunnel;
@@ -419,6 +422,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         };
         _doAfter.TryStartDoAfter(doAfterArgs);
     }
+
     private void OnAttemptMoveInTunnel(Entity<XenoTunnelComponent> xenoTunnel, ref ContainerRelayMovementEntityEvent args)
     {
         _transform.PlaceNextTo(args.Entity, xenoTunnel.Owner);
@@ -507,6 +511,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             args.Verbs.Add(renameTunnelVerb);
         }
     }
+
     private void GetAllAvailableTunnels(Entity<XenoTunnelComponent> destinationXenoTunnel, ref OpenBoundInterfaceMessage args)
     {
         var hive = Hive.GetHive(destinationXenoTunnel.Owner);
@@ -528,6 +533,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 
         _ui.SetUiState(destinationXenoTunnel.Owner, SelectDestinationTunnelUI.Key, newState);
     }
+
     private void OnFillTunnel(Entity<XenoTunnelComponent> xenoTunnel, ref InteractUsingEvent args)
     {
         if (args.Handled)
@@ -559,21 +565,24 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             _doAfter.TryStartDoAfter(doAfterArgs);
         }
     }
-    private void OnColapseTunnelFinish(Entity<XenoTunnelComponent> xenoTunnel, ref XenoCollapseTunnelDoAfterEvent args)
+
+    private void OnCollapseTunnelFinish(Entity<XenoTunnelComponent> xenoTunnel, ref XenoCollapseTunnelDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled)
         {
             return;
         }
 
-        ColapseTunnel(xenoTunnel);
+        CollapseTunnel(xenoTunnel);
     }
+
     private void OnInsertEntityIntoTunnel(Entity<XenoTunnelComponent> xenoTunnel, ref ContainerIsInsertingAttemptEvent args)
     {
         if (args.Cancelled)
-        {
             return;
-        }
+
+        if (args.Container.ID != XenoTunnelComponent.ContainedMobsContainerId)
+            return;
 
         if (!HasComp<XenoComponent>(args.EntityUid) ||
             !_mobState.IsAlive(args.EntityUid))
@@ -586,7 +595,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
     /// Delete a tunnel and remove anything within it. CALLING DEL OR QUEUEDEL DIRECTLY ON THE TUNNEL IS NOT RECOMMENDED.
     /// </summary>
     /// <param name="xenoTunnel"></param>
-    private void ColapseTunnel(Entity<XenoTunnelComponent> xenoTunnel)
+    private void CollapseTunnel(Entity<XenoTunnelComponent> xenoTunnel)
     {
         var mobContainer = _container.EnsureContainer<Container>(xenoTunnel.Owner, XenoTunnelComponent.ContainedMobsContainerId);
 

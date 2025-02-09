@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0525b5ada7da1afcd9b260e76d5fea01500d9c8d/icons/obj/items/marine-items.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "fulton_attached",
+      "delays": [
+        [
+          1,
+          0.08,
+          0.089999996,
+          0.1,
+          0.1,
+          0.089999996,
+          0.08
+        ]
+      ]
+    },
+    {
+      "name": "fulton_crate",
+      "delays": [
+        [
+          1,
+          0.08,
+          0.089999996,
+          0.1,
+          0.1,
+          0.089999996,
+          0.08
+        ]
+      ]
+    },
+    {
+      "name": "fulton"
+    }
+  ]
+}

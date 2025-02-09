@@ -40,3 +40,14 @@
     enabled: false
   - type: RadioSpeaker
     enabled: false
+
+- type: entity
+  parent: RMCRadioHandheldColonyBase
+  id: RMCRadioHandheldAlmayer
+  suffix: On
+  components:
+  - type: ActiveListener
+    range: 4
+  - type: ActiveRadio
+    channels:
+    - MarineCommon

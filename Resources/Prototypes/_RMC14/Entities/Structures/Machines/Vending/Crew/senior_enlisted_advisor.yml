@@ -10,6 +10,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
+    jobs:
+    - CMSeniorEnlistedAdvisor
     sections:
     - name: Standard Equipment
       takeAll: CMStandard
@@ -75,7 +77,6 @@
       - id: CMHeadCapDrill
       - id: ArmorHelmetM10
 
-
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechGunsSEA
@@ -88,6 +89,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
+    jobs:
+    - CMSeniorEnlistedAdvisor
     sections:
     - name: Personal Primary
       choices: { CMPrimary: 1 }

@@ -6,6 +6,8 @@ using Content.Shared._RMC14.Vendors;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Robust.Shared.Configuration;
@@ -149,5 +151,20 @@ public sealed class ScalingSystem : EntitySystem
 
             Dirty(vendorId, vendor);
         }
+    }
+
+    public int GetAliveHumanoids()
+    {
+        var alive = 0;
+        var query = EntityQueryEnumerator<MarineComponent, MobStateComponent>();
+        while (query.MoveNext(out _, out var mobState))
+        {
+            if (mobState.CurrentState == MobState.Dead)
+                continue;
+
+            alive++;
+        }
+
+        return alive;
     }
 }

@@ -419,6 +419,10 @@
     state: astor_debb
   - type: PatronFigurine
     id: 2dc63fb1-f830-4b0a-9eea-c8007fd09e6d
+  - type: PointLight
+    enabled: true
+    radius: 1.1
+    color: green
 
 - type: entity
   parent: RMCBaseFigurinePatron

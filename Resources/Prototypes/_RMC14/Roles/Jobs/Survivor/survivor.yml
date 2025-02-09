@@ -30,12 +30,14 @@
         RMCSkillConstruction: 1
         RMCSkillEndurance: 2
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetCivilian
     - type: Survivor
     - type: MotionDetectorTracked
     - type: UserIFF
       faction: FactionSurvivor
+    - type: IntelRescueSurvivorObjective
   hasIcon: false
 
 - type: startingGear

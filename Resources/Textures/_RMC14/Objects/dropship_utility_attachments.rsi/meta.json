@@ -1,38 +1,66 @@
 {
-    "version": 1,
-    "license": "CC-BY-SA-3.0",
-    "copyright": "Taken from cmss13 at  https://github.com/cmss13-devs/cmss13/blob/83239d4edde7b1e8d59e950d07d47b84ee7508e4/icons/obj/structures/props/almayer_props.dmi",
-    "size": {
-      "x": 32,
-      "y": 32
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/9d6826cfca155f055d1616ed287aaebe9196aae9/icons/obj/structures/props/almayer_props.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "medevac_system"
     },
-    "states": [
-        {
-        "name": "medevac_system"
-        },
-        {
-        "name": "medevac_system_deployed"
-        },
-        {
-        "name": "medevac_system_active",
-        "delays": [
-            [
-            0.1,
-            0.1,
-            0.1,
-            0.1,
-            0.1,
-            0.1,
-            0.1,
-            0.1,
-            0.1,
-            0.1,
-            0.5,
-            0.5,
-            0.5,
-            0.5
-            ]
+    {
+      "name": "medevac_system_deployed"
+    },
+    {
+      "name": "medevac_system_active",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.5,
+          0.5,
+          0.5,
+          0.5
         ]
-        }
-    ]
+      ]
+    },
+    {
+      "name": "fulton_system"
+    },
+    {
+      "name": "fulton_system_deployed"
+    },
+    {
+      "name": "fulton_system_active",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ]
+      ]
+    }
+  ]
 }

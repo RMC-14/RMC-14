@@ -221,6 +221,7 @@
     - DoorBumpOpener
     - AnomalyHost
   - type: MobGibbedByExplosionType
+  - type: RMCCanBeFultoned
 
 - type: entity
   save: false
