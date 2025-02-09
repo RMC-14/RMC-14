@@ -22,10 +22,11 @@
   children:
   - RMCGuideRoleRifleman
   - RMCGuideRoleDrone
+  - RMCGuideRoleQueen
   - RMCGuideRoleCombatTechnician
   - RMCGuideCommunicationsTowers
   - RMCGuideRoleMaintenanceTechnician
-
+  
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleRifleman
