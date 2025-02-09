@@ -46,4 +46,7 @@ public sealed partial class IntelTechTree
 
     [DataField]
     public List<List<TechOption>> Options = new();
+
+    [DataField]
+    public Dictionary<LocId, Dictionary<NetEntity, string>> Clues = new();
 }

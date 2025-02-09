@@ -52,6 +52,7 @@
     time: 6
   - type: IntelClues
     clue: rmc-intel-clue-progress-report
+    category: rmc-intel-reports
 
 - type: entity
   parent: RMCIntelReadableBase
@@ -71,6 +72,7 @@
     requiresCount: 2
   - type: IntelClues
     clue: rmc-intel-clue-folder
+    category: rmc-intel-folders
 
 - type: entity
   parent: RMCIntelReadableBase
@@ -90,6 +92,7 @@
     requiresCount: 2
   - type: IntelClues
     clue: rmc-intel-clue-technical-manual
+    category: rmc-intel-manuals
 
 - type: entity
   abstract: true

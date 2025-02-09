@@ -14,4 +14,7 @@ public sealed partial class IntelCluesComponent : Component
 
     [DataField, AutoNetworkedField]
     public LocId Clue = "rmc-intel-clue-paper-scrap";
+
+    [DataField, AutoNetworkedField]
+    public LocId? Category;
 }

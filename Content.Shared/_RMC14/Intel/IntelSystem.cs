@@ -469,11 +469,20 @@ public sealed class IntelSystem : EntitySystem
             }
         }
 
-        if (TryComp(unlock, out IntelCluesComponent? clues))
+        if (TryComp(unlock, out IntelCluesComponent? cluesComp))
         {
-            var msg = Loc.GetString(clues.Clue, ("intel", unlock), ("area", clues.InitialArea));
+            var msg = Loc.GetString(cluesComp.Clue, ("intel", unlock), ("area", cluesComp.InitialArea));
             _rmcChat.ChatMessageToOne(msg, args.User);
             _popup.PopupEntity(msg, ent, args.User, PopupType.Medium);
+
+            if (TryComp(unlock, out IntelRetrieveItemObjectiveComponent? retrieve) &&
+                retrieve.State != IntelObjectiveState.Complete &&
+                cluesComp.Category is { } category)
+            {
+                var tree = EnsureTechTree();
+                var clues = tree.Comp.Tree.Clues.GetOrNew(category);
+                clues[GetNetEntity(unlock.Value)] = msg;
+            }
         }
 
         unlocks.Unlocks.Remove(unlock.Value);
@@ -831,6 +840,13 @@ public sealed class IntelSystem : EntitySystem
 
                     tree ??= EnsureTechTree();
                     tree.Value.Comp.Tree.RetrieveItems.Current++;
+                    if (TryComp(intel, out IntelCluesComponent? cluesComp) &&
+                        cluesComp.Category is { } category &&
+                        tree.Value.Comp.Tree.Clues.TryGetValue(category, out var clues))
+                    {
+                        clues.Remove(GetNetEntity(intel));
+                    }
+
                     AddPoints(tree.Value, intel.Comp.Value);
 
                     RemComp<ActiveIntelPositionComponent>(intel);

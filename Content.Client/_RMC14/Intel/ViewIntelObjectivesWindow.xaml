@@ -50,5 +50,8 @@
             <RichTextLabel Text="[color=#5B88B0]Colony power:[/color]" MinWidth="200" />
             <Label Name="ColonyPowerLabel" Access="Public" />
         </BoxContainer>
+        <RichTextLabel Text="[bold]Objectives[/bold]" Margin="0 15 0 0" />
+        <ui:BlueHorizontalSeparator />
+        <TabContainer Name="CluesContainer" Access="Public" />
     </BoxContainer>
 </controls:ViewIntelObjectivesWindow>

@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Intel;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
+using Robust.Client.UserInterface.Controls;
 
 namespace Content.Client._RMC14.Intel;
 
@@ -35,5 +36,30 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
         _window.RecoverCorpsesLabel.Text = $"{tree.RecoverCorpses} / \u221e";
         _window.ColonyCommunicationsLabel.Text = tree.ColonyCommunications ? "Online" : "Offline";
         _window.ColonyPowerLabel.Text = tree.ColonyPower ? "Online" : "Offline";
+
+        _window.CluesContainer.DisposeAllChildren();
+        foreach (var (category, clues) in comp.Tree.Clues)
+        {
+            var scroll = new ScrollContainer
+            {
+                HScrollEnabled = false,
+                VScrollEnabled = true,
+            };
+
+            var container = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical };
+            scroll.AddChild(container);
+            foreach (var (_, clue) in clues)
+            {
+                container.AddChild(new Label
+                {
+                    Text = clue,
+                    Margin = new Thickness(2),
+                });
+            }
+
+            _window.CluesContainer.AddChild(scroll);
+            TabContainer.SetTabTitle(scroll, Loc.GetString(category));
+            TabContainer.SetTabVisible(scroll, true);
+        }
     }
 }
