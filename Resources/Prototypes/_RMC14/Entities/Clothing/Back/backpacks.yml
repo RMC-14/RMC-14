@@ -58,6 +58,7 @@
       skills:
         all:
           RMCSkillMedical: 2
+  - type: RMCStorageEjectHandComponent
 
 - type: entity
   parent: CMPersonalStorageBase

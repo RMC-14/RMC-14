@@ -7,6 +7,7 @@ using Content.Shared.Item;
 using Content.Shared.Mobs;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
+using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
@@ -22,6 +23,7 @@ public sealed class CMHandsSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCStorageSystem _rmcStorage = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedStorageSystem _storage = default!;
 
     public override void Initialize()
     {
@@ -101,6 +103,9 @@ public sealed class CMHandsSystem : EntitySystem
 
         args.Verbs.Add(unequipVerb);
 
+        if (!ent.Comp.CanToggleStorage)
+            return;
+
         AlternativeVerb switchStorageVerb = new()
         {
             Text = "Switch Storage Drawing Method",
@@ -108,18 +113,26 @@ public sealed class CMHandsSystem : EntitySystem
             Priority = -2,
             Act = () =>
             {
-                ent.Comp.Enabled = !ent.Comp.Enabled;
+                ent.Comp.State = GetNextState(ent.Comp.State);
                 Dirty(ent);
 
-                if (ent.Comp.Enabled)
-                    _popup.PopupClient(Loc.GetString("rmc-storage-hand-eject-enabled", ("storage", ent.Owner)), user, user, PopupType.Medium);
-                else
-                    _popup.PopupClient(Loc.GetString("rmc-storage-hand-eject-disabled", ("storage", ent.Owner)), user, user, PopupType.Medium);
+                var popup = ent.Comp.State switch
+                {
+                    RMCStorageEjectState.Last => "rmc-storage-hand-eject-last-item",
+                    RMCStorageEjectState.Unequip => "rmc-storage-hand-eject-unequips",
+                    RMCStorageEjectState.Open => "rmc-storage-hand-eject-open",
+                    _ => string.Empty
+                };
+
+                _popup.PopupClient(Loc.GetString(popup, ("storage", ent.Owner)), user, user, PopupType.Medium);
             },
         };
 
         args.Verbs.Add(switchStorageVerb);
     }
+
+    private static RMCStorageEjectState GetNextState(RMCStorageEjectState current) =>
+        (RMCStorageEjectState)(((int)current + 1) % Enum.GetValues<RMCStorageEjectState>().Length);
 
     private void OnDropOnUseInHand(Entity<DropOnUseInHandComponent> ent, ref UseInHandEvent args)
     {
@@ -172,9 +185,16 @@ public sealed class CMHandsSystem : EntitySystem
             return false;
         }
 
-        if (!storageEject.Enabled)
+        if (eject.State == RMCStorageEjectState.Unequip)
+        {
             return false;
-          
+        }
+        else if (eject.State == RMCStorageEjectState.Open)
+        {
+            _storage.OpenStorageUI(item, user, storage, false, false);
+            return true;
+        }
+
         if (eject.Whitelist != null)
         {
             foreach (var contained in storage.Container.ContainedEntities)
