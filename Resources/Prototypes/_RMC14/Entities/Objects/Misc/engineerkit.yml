@@ -11,7 +11,7 @@
     - state: toolkit_empty
       map: [ "openLayer" ]
       visible: false
-  - type: Storage # TODO RMC14 require medical skill for opening this while in another container
+  - type: Storage
     maxItemSize: Small
     grid:
     - 0,0,13,1 # 7 slots
@@ -28,6 +28,8 @@
       # - TODO RMC14 RMCAssembly
       # - TODO RMC14 RMCStockParts,
       # - TODO RMC14 RMCPlasticExplosive,
+      - RMCExplosiveBreachingCharge
+      - RMCWeldingGoggle
       components:
       - TrayScanner
   - type: FixedItemSizeStorage

@@ -38,6 +38,12 @@
       "name": "pamphlet_jtac"
     },
     {
+      "name": "pamphlet_k9_handler"
+    },
+    {
+      "name": "pamphlet_loader"
+    },
+    {
       "name": "pamphlet_spotter"
     },
     {
