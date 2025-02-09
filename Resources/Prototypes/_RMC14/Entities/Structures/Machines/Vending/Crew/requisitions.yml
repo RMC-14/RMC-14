@@ -197,7 +197,7 @@
         amount: 5
       - id: RMCPouchMagazinePistolLarge
         amount: 5
-      #- id: Fuel Tank Strap Pouch
+      #- id: TODO RMC14 Fuel Tank Strap Pouch
       #  amount: 4
       - id: RMCPouchGeneralLarge
         amount: 1
@@ -237,8 +237,8 @@
         amount: 3
       - id: RMCPowerCellHigh
         amount: 1
-      #- id: Fulton Device Stack
-      #  amount: 1
+      - id: RMCFulton20
+        amount: 1
       #- id: Sentry Gun Network Laptop
       #   amount: 4
       - id: CMPamphletJTAC

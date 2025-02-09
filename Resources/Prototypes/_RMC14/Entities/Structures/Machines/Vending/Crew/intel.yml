@@ -8,7 +8,7 @@
     access:
     - [ "CMAccessCommand" ]
   - type: Sprite
-    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/intel.rsi
   - type: CMAutomatedVendor
     jobs:
     - CMIntelOfficer
@@ -19,9 +19,12 @@
       - id: RMCVendorBundleIntel
     - name: Engineering Supplies
       entries:
-#      - id: TODO RMC14 power control module
+      - id: CMAPCElectronics
+        points: 5
       - id: RMCExplosiveBreachingCharge # TODO RMC14 plastic explosive
+        points: 10
       - id: RMCWeldingGoggles
+        points: 5
     - name: Primary Ammunition
       entries:
       - id: CMMagazineRifleM4SPRAP
@@ -37,7 +40,9 @@
     - name: Sidearm Ammunition
       entries:
       - id: RMCSpeedLoader44Marksman
-        points: 10
+        points: 10 # TODO RMC14 M1984 HP magazine
+      - id: RMCMagazinePistolM1984AP
+        points: 5
       - id: CMMagazinePistolMK80
         points: 10
       - id: RMCMagazinePistolSU6
@@ -56,6 +61,7 @@
         points: 10
       - id: RMCPouchAutoinjector
         points: 15
+        recommended: true
       - id: RMCPouchMachete
         points: 10
     - name: Utilities
@@ -69,7 +75,6 @@
         recommended: true
       - id: RMCIntelDetector
         points: 5
-        recommended: true
     - name: Binoculars
       entries:
       - id: RMCBinoculars
@@ -86,14 +91,16 @@
 #        points: 5
       - id: RMCVisorNightVision
         points: 25
+        recommended: true
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyIntel
         points: 5
-#    - name: Spare Intel Kit
-#      entries:
-#      - id: TODO RMC14 field intelligence support kit
-#        points: 20
+    - name: Spare Intel Kit
+      entries:
+      - id: RMCKitIntel
+        name: field intelligence support kit (for untrained personnel)
+        points: 20
 
 - type: entity
   parent: ColMarTechBase
@@ -119,14 +126,151 @@
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
-#      - id: TODO RMC14 XM4 pattern intel armor
+      - id: RMCArmorXM4
       - id: CMArmorM3Light
       - id: CMCoatOfficer
     - name: Backpack
       choices: { CMArmor: 1 }
       entries:
       - id: CMSatchelMarineIntel
-      - id: CMCoatOfficer
+        recommended: true
+      - id: RMCSatchelMarineIntelChestrig
+        recommended: true
+      - id: RMCBackpackRTO
+    - name: Helmet
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: RMCArmorHelmetM12Intel
+        recommended: true
+      - id: RMCHeadBeretGreen
+      - id: CMHeadBeretTan
+      - id: CMHeadCapOfficer
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries:
+      - id: RMCBeltUtilityGeneral
+      - id: CMBeltMarine
+        recommended: true
+      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterSMG
+      - id: RMCBeltHolsterRevolver
+      - id: CMBeltUtilityFilled
+        recommended: true
+    - name: Pouches
+      choices: { CMPouches: 2 }
+      entries:
+      - id: RMCPouchDocument
+        recommended: true
+      - id: RMCPouchFirstAidInjectors
+        name: first-aid pouch (refillable injectors)
+      - id: RMCPouchFirstAidSplintsGauzeOintment
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+      - id: RMCPouchFirstAidPills
+        name: first-aid pouch (pill packets)
+      - id: RMCPouchFlareFilled
+        name: flare pouch (full)
+      #- id: TODO RMC14 Fuel Tank Strap Pouch
+      - id: RMCPouchGeneralLarge
+      - id: RMCPouchMagazinePistolLarge
+      - id: RMCPouchMagazine
+      - id: RMCPouchShotgun
+      - id: RMCPouchPistol
+      - id: RMCPouchToolsFill
+        name: tools pouch (full)
+        recommended: true
+      #- id: RMCPouchSling # TODO RMC14 Sling Pouch
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBlack
+      - id: CMWebbingBrown
+        recommended: true
+      - id: CMWebbingHolster
+      - id: CMWebbing
+      - id: CMWebbingPouch
+    - name: Accessories
+      choices: { CMMask: 1 }
+      entries:
+      - id: CMMaskGas
+      - id: CMMaskCoif
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechIntelWeapons
+  name: ColMarTech intelligence officer weapons rack
+  description: An automated weapon rack hooked up to a small storage of standard-issue weapons. Can be accessed only by the Intelligence Officers.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessCommand" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMIntelOfficer
+    sections:
+    - name: Primary Firearms
+      entries:
+      - id: WeaponRifleM4SPR
+        amount: 4
+      - id: CMBaseWeaponSMG
+        amount: 4
+      - id: WeaponShotgunM42A2
+        amount: 4
+      - id: WeaponRifleM54C
+        amount: 4
+    - name: Primary Ammunition
+      entries:
+      - id: RMCBoxShotgunBuckshot
+        amount: 12
+      - id: RMCBoxShotgunFlechette
+        amount: 12
+      - id: RMCBoxShotgunSlugs
+        amount: 12
+      - id: CMMagazineRifleM4SPR
+        amount: 24
+      - id: CMMagazineSMGM63
+        amount: 24
+      - id: CMMagazineRifleM54C
+        amount: 24
+    - name: Sidearms
+      entries:
+      - id: RMCWeaponPistolM77
+        amount: 4
+      - id: RMCWeaponRevolverM44
+        amount: 4
+      - id: CMWeaponPistolM1984
+        amount: 4
+    - name: Sidearm Ammunition
+      entries:
+      - id: CMMagazinePistolM77AP
+        amount: 20
+      - id: RMCSpeedLoaderM44
+        amount: 20
+      - id: CMMagazinePistolM1984
+        amount: 20
+      - id: RMCMagazinePistolM1984AP
+        amount: 20 # TODO RMC14 M1984 HP magazine
+      - id: CMMagazinePistolMK80
+        amount: 20
+    - name: Attachments
+      entries:
+      - id: RMCAttachmentRailFlashlight
+        amount: 8
+      - id: RMCAttachmentFlashlightGrip
+        amount: 4
+        recommended: true
+    - name: Utilities
+      entries:
+      - id: CMM11Knife
+        amount: 18
+      - id: RMCM5Bayonet
+        amount: 4
+      - id: RMCPackFlareCAS
+        amount: 2
+      - id: CMPackFlare
+        amount: 20
+        recommended: true
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
@@ -143,3 +287,24 @@
     - RMCFulton20
     - RMCIntelDetector
     - RMCBinoculars
+
+- type: entity
+  parent: RMCKitBase
+  id: RMCKitIntel
+  name: field intelligence support kit
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,9,1
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi # TODO RMC14 jtac overlay icon
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+  - type: StorageFill
+    contents:
+    - id: RMCFulton20
+    - id: CMEncryptionKeyIntel
+    - id: CMPamphletIntel
+    - id: RMCIntelDetector
+    - id: RMCPouchDocument

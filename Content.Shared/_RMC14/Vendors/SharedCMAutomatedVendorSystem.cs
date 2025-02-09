@@ -488,7 +488,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             {
                 if (slot.ContainedEntity is { } contained &&
                     TryComp(contained, out WebbingClothingComponent? clothing) &&
-                    _webbing.Attach((contained, clothing), item))
+                    _webbing.Attach((contained, clothing), item, player, out _))
                 {
                     return true;
                 }

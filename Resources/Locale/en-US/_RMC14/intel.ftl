@@ -9,3 +9,4 @@ rmc-intel-clue-progress-report = A progress report in {$area}.
 rmc-intel-clue-folder = A {$intel} in {$area}.
 rmc-intel-clue-technical-manual = {$intel} in {$area}.
 rmc-intel-clue-experimental-device = Retrieve {$intel} in {$area}.
+rmc-intel-not-intel-jumpsuit = You cannot wear this without wearing a marine intelligence officer uniform.
