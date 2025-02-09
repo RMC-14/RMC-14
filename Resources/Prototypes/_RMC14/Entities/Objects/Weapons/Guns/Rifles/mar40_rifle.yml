@@ -15,8 +15,8 @@
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/mar40.rsi
   - type: Gun
-    shotsPerBurst: 3
-    selectedMode: SemiAuto
+    shotsPerBurst: 4
+    selectedMode: FullAuto
     availableModes:
     - SemiAuto
     - Burst
@@ -28,8 +28,9 @@
     - SemiAuto
     - Burst
     - FullAuto
+    recoilWielded: 1
     recoilUnwielded: 4
-    scatterWielded: 8
+    scatterWielded: 10
     scatterUnwielded: 20
     baseFireRate: 2
     burstScatterMult: 3
