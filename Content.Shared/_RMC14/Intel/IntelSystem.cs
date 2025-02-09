@@ -409,7 +409,7 @@ public sealed class IntelSystem : EntitySystem
 
         var delay = ent.Comp.Delay * _skills.GetSkillDelayMultiplier(args.User, ent.Comp.Skill);
         var ev = new IntelSubmitDoAfterEvent { Intel = GetNetEntity(read.Value) };
-        var doAfter = new DoAfterArgs(EntityManager, args.User, delay, ev, ent, ent, ent);
+        var doAfter = new DoAfterArgs(EntityManager, args.User, delay, ev, ent, ent, ent) { BreakOnMove = true };
         _doAfter.TryStartDoAfter(doAfter);
     }
 

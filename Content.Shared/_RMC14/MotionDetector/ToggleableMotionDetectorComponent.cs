@@ -1,13 +1,17 @@
-﻿using Robust.Shared.Audio;
+﻿using Content.Shared.Inventory;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._RMC14.Weapons.Ranged.MotionDetector;
+namespace Content.Shared._RMC14.MotionDetector;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(GunMotionDetectorSystem))]
-public sealed partial class GunToggleableMotionDetectorComponent : Component
+[Access(typeof(MotionDetectorSystem))]
+public sealed partial class ToggleableMotionDetectorComponent : Component
 {
+    [DataField, AutoNetworkedField]
+    public SlotFlags Slots = SlotFlags.All;
+
     [DataField, AutoNetworkedField]
     public float BatteryDrain = 0.45f;
 
