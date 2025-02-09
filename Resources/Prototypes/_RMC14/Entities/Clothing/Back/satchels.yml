@@ -101,6 +101,55 @@
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/security.rsi
 
 - type: entity
+  parent: CMSatchelSecurity
+  id: CMSatchelSecurityFilledProvost
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCArmorProvostFlexi # TODO RMC14 provost office handheld beacon
+    - id: CMFlash # TODO RMC14 remove once provost jacket has it
+    - id: RMCHandcuffs # TODO RMC14 remove once provost jacket has it
+
+- type: entity
+  parent: CMSatchelSecurity
+  id: CMSatchelSecurityFilledProvostDeputyMarshal
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
+    - id: CMFlash # TODO RMC14 remove once provost jacket has it
+    - id: RMCHandcuffs # TODO RMC14 remove once provost jacket has it
+
+- type: entity
+  parent: CMSatchelSecurity
+  id: CMSatchelSecurityFilledProvostMarshal
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
+    - id: RMCTabletCO
+    - id: CMFlash # TODO RMC14 remove once provost jacket has it
+    - id: RMCHandcuffs # TODO RMC14 remove once provost jacket has it
+
+- type: entity
+  parent: CMSatchelSecurity
+  id: CMSatchelSecurityFilledProvostTeamLeader
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
+    - id: RMCTabletCO
+
+- type: entity
+  parent: CMSatchelSecurity
+  id: CMSatchelSecurityFilledProvostEnforcer
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCPacketGrenadeFlashBang
+    - id: RMCWeaponTaser # TODO RMC14 4 tear gas grenades
+
+- type: entity
   parent: CMSatchel
   id: CMSatchelMarine
   name: Marine satchel
