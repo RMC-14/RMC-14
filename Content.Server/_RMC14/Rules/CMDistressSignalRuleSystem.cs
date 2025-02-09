@@ -244,7 +244,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             SetCamoType();
 
             SpawnSquads((uid, comp));
-            SpawnAdminFaxArea();
+            SpawnAdminAreas(comp);
 
             var bioscan = Spawn(null, MapCoordinates.Nullspace);
             EnsureComp<BioscanComponent>(bioscan);
@@ -589,7 +589,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         foreach (var id in rule.Comp.ExtraSquadIds)
         {
-            // Spawn(id);
+            Spawn(id);
         }
     }
 
@@ -1439,23 +1439,29 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     }
 
     // TODO RMC14 this would be literally anywhere else if the code for loading maps wasn't dogshit and broken upstream
-    private void SpawnAdminFaxArea()
+    private void SpawnAdminAreas(CMDistressSignalRuleComponent comp)
     {
-        try
+        void SpawnMap(ResPath path)
         {
-            if (string.IsNullOrWhiteSpace(_adminFaxAreaMap))
-                return;
+            try
+            {
+                if (string.IsNullOrWhiteSpace(path.ToString()))
+                    return;
 
-            var mapId = _mapManager.CreateMap();
-            if (!_mapLoader.TryLoad(mapId, _adminFaxAreaMap, out _))
-                return;
+                var mapId = _mapManager.CreateMap();
+                if (!_mapLoader.TryLoad(mapId, path.ToString(), out _))
+                    return;
 
-            _mapManager.SetMapPaused(mapId, false);
+                _mapManager.SetMapPaused(mapId, false);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Error loading admin fax area:\n{e}");
+            }
         }
-        catch (Exception e)
-        {
-            Log.Error($"Error loading admin fax area:\n{e}");
-        }
+
+        SpawnMap(new ResPath(_adminFaxAreaMap));
+        SpawnMap(comp.Thunderdome);
     }
 
     private void EndRound(CMDistressSignalRuleComponent rule, DistressSignalRuleResult result)

@@ -40,5 +40,5 @@
   icon:
     sprite: _RMC14/Objects/Tools/fulton.rsi
     state: fulton
-  spawn: RMCFulton1
+  spawn: RMCFulton
   maxCount: 20

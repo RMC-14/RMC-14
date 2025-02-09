@@ -13,6 +13,7 @@ public sealed class IntelCommand : ToolshedCommand
     {
         Sys<IntelSystem>().AddPoints(points);
     }
+
     [CommandImplementation("removepoints")]
     public async void RemovePoints([CommandArgument] int points)
     {

@@ -1130,3 +1130,17 @@
     state: eric_rasczak
   - type: PatronFigurine
     id: 759da7f1-be4b-41a5-98ee-8f42953a5635
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNanSnowBunnyMazu
+  name: Nan 'Snow Bunny' Mazu figurine
+  description: "The Way of Sunlight
+
+
+    The fifth of the Felinid Seven Ways of Trounce. This Way emphasizes choosing terrain that is best fit for you in combat, in order to minimize external factors, and then overcoming the enemy with superior strength and abilities. It gives weight to self-knowledge and perfecting oneself on a particular direction, assuming that a good warrior can always make any direction her preferred one, and by concentrating on a single one she can become the best. Its ritual weapon is a short naginata-like spear, although nowadays adepts of this Way are generally associated with large warships and armored forces."
+  components:
+  - type: Sprite
+    state: nan_snow_bunny_mazu
+  - type: PatronFigurine
+    id: 05443bd1-e84b-4782-9f03-c2b4af96b109

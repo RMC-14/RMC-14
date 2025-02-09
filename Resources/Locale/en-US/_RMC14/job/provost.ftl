@@ -7,14 +7,14 @@ rmc-ghost-role-information-provost-advisor-description = You do not hold any dir
 
 rmc-job-name-provost-chief-inspector = Provost Chief Inspector
 rmc-job-description-provost-chief-inspector = ""
-rmc-job-prefix-chief-inspector = Provost Chief Inspector
+rmc-job-prefix-provost-chief-inspector = Provost Chief Inspector
 CMProvostChiefInspector = Provost Chief Inspector
 rmc-ghost-role-information-provost-chief-inspector-name = Provost Chief Inspector
 rmc-ghost-role-information-provost-chief-inspector-description = You are the final word on Marine Law in your area of operations.
 
 rmc-job-name-provost-deputy-marshal = Provost Deputy Marshal
 rmc-job-description-provost-deputy-marshal = ""
-rmc-job-prefix-deputy-marshal = Provost Deputy Marshal
+rmc-job-prefix-provost-deputy-marshal = Provost Deputy Marshal
 CMProvostDeputyMarshal = Provost Deputy Marshal
 rmc-ghost-role-information-provost-deputy-marshal-name = Provost Deputy Marshal
 rmc-ghost-role-information-provost-deputy-marshal-description = ""

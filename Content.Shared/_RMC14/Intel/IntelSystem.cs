@@ -66,10 +66,10 @@ public sealed class IntelSystem : EntitySystem
     private static readonly EntProtoId ProgressReportProto = "RMCIntelProgressReport";
     private static readonly EntProtoId FolderProto = "RMCIntelFolder";
     private static readonly EntProtoId TechnicalManualProto = "RMCIntelTechnicalManual";
-    private static readonly EntProtoId DiskProto = "RMCIntelDisk";
+    // private static readonly EntProtoId DiskProto = "RMCIntelDisk";
     private static readonly EntProtoId ExperimentalDevicesProto = "RMCIntelRetrieveHealthAnalyzer";
-    private static readonly EntProtoId ResearchPaperProto = "RMCIntelExperimentalDevice";
-    private static readonly EntProtoId VialBoxProto = "RMCIntelVialBox";
+    // private static readonly EntProtoId ResearchPaperProto = "RMCIntelResearchPaper";
+    // private static readonly EntProtoId VialBoxProto = "RMCIntelVialBox";
 
     private readonly Dictionary<IntelSpawnerType, float> _paperScrapChances = new()
     {
@@ -622,7 +622,7 @@ public sealed class IntelSystem : EntitySystem
 
             tree.Comp.Tree.Documents.Total = _paperScraps + _progressReports + _folders + _technicalManuals;
             tree.Comp.Tree.UploadData.Total = _disks;
-            tree.Comp.Tree.RetrieveItems.Total = tree.Comp.Tree.Documents.Total + tree.Comp.Tree.UploadData.Total;
+            tree.Comp.Tree.RetrieveItems.Total = tree.Comp.Tree.Documents.Total + tree.Comp.Tree.UploadData.Total - _disks; // TODO RMC14 remove - disks
 
             if (mediums.Count > 0)
             {
