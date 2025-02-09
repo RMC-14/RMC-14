@@ -27,7 +27,7 @@
       - PowerCell
       # - TODO RMC14 RMCAssembly
       # - TODO RMC14 RMCStockParts,
-      # - TODO RMC14 RMCPlasticExplosive,
+      - RMCExplosivePlastic
       components:
       - TrayScanner
   - type: FixedItemSizeStorage

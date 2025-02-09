@@ -90,8 +90,8 @@
     - id: RMCMK80
     - id: CMMagazinePistolMK80
       amount: 2
-#    - id: RMCPlasticExplosives
-#      amount: 2
+    - id: RMCExplosivePlastic
+      amount: 2
     - id: RMCBinoculars
   - type: CMChangeUserOnVend
     addComponents:
@@ -130,8 +130,8 @@
       amount: 2
     - id: WeaponRifleM4SPRCustom
     - id: RMCThermalTarpFolded
-#    - id: RMCPlasticExplosives
-#      amount: 2
+    - id: RMCExplosivePlastic
+      amount: 2
     - id: CMEncryptionKeyJTAC
     - id: RMCLaserDesignatorScout
     - id: RMCScoutShoes

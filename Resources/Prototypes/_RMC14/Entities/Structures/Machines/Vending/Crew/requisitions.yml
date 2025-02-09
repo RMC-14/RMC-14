@@ -87,10 +87,10 @@
       #  amount: 8
       #- id: M40 MFHS Metal Foam Grenade
       #  amount: 6
-      #- id: Plastic Explosives
-      #  amount: 3
+      - id: RMCExplosivePlastic
+        amount: 3
       - id: RMCExplosiveBreachingCharge
-        amount: 5 # TODO RMC14 2 when plastic explosivs are in
+        amount: 2
     - name: Webbings
       entries:
       - id: CMWebbingBrown

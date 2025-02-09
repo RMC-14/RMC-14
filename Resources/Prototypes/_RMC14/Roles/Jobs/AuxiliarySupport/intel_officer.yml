@@ -36,6 +36,8 @@
         RMCSkillMeleeWeapons: 1
         RMCSkillOverwatch: 1
         RMCSkillResearch: 1
+    - type: CMVendorUser
+      points: 45
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix

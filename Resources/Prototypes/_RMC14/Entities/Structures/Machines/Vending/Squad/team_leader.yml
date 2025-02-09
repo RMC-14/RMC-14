@@ -96,8 +96,8 @@
         points: 3
     - name: Engineering Supplies
       entries:
-#      - id: Plastic Explosive
-#        points: 10
+      - id: RMCExplosivePlastic
+        points: 10
       - id: RMCPackFlareCAS
         points: 5
       - id: RMCExplosiveBreachingCharge

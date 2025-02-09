@@ -21,7 +21,7 @@
       entries:
       - id: CMAPCElectronics
         points: 5
-      - id: RMCExplosiveBreachingCharge # TODO RMC14 plastic explosive
+      - id: RMCExplosivePlastic
         points: 10
       - id: RMCWeldingGoggles
         points: 5
@@ -49,9 +49,9 @@
         points: 10
     - name: Personal Sidearm
       entries:
-      - id: RMCMK80Case
+      - id: RMCGunCasePistolMK80
         points: 15
-      - id: RMCSmartPistolCase
+      - id: RMCGunCasePistolSmart
         points: 15
     - name: Pouches
       entries:
@@ -213,7 +213,7 @@
       entries:
       - id: WeaponRifleM4SPR
         amount: 4
-      - id: CMBaseWeaponSMG
+      - id: WeaponSMGM63
         amount: 4
       - id: WeaponShotgunM42A2
         amount: 4

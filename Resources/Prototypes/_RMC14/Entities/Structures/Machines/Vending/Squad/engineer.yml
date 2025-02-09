@@ -49,8 +49,8 @@
         name: plasteel x10
         points: 7
         recommended: true
-    #- id: CMPlasticExplosive
-    #  points: 3
+      - id: RMCExplosivePlastic
+        points: 3
       - id: RMCExplosiveBreachingCharge
         points: 5
         recommended: true

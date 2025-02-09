@@ -27,7 +27,7 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
         _window.CurrentPointsLabel.Text = $"{tree.Points.Double():F1}";
         _window.TotalPointsLabel.Text = $"Total earned credits: {tree.TotalEarned.Double():F1}";
         _window.DocumentsLabel.Text = $"{tree.Documents.Current} / {tree.Documents.Total}";
-        _window.UploadDataLabel.Text = $"{tree.UploadData.Current} / {tree.UploadData.Total}";
+        // _window.UploadDataLabel.Text = $"{tree.UploadData.Current} / {tree.UploadData.Total}";
         _window.RetrieveItemsLabel.Text = $"{tree.RetrieveItems.Current} / {tree.RetrieveItems.Total}";
         // _window.MiscellaneousLabel.Text = $"{tree.Miscellaneous.Current} / {tree.Miscellaneous.Total}";
         // _window.AnalyzeChemicalsLabel.Text = $"{tree.AnalyzeChemicals} / \u221e";

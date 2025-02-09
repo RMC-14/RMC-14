@@ -16,6 +16,9 @@
     value: 0.1
   - type: IntelRetrieveItemObjective
     value: 0.1
+  - type: Tag
+    tags:
+    - RMCIntelItem
 
 - type: entity
   parent: RMCIntelReadableBase
@@ -237,3 +240,6 @@
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: ob_incend
+
+- type: Tag
+  id: RMCIntelItem

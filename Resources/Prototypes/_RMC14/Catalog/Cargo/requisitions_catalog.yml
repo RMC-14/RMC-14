@@ -177,6 +177,8 @@
       #  crate: RMCCrateGrenadesSmoke
       - cost: 4000
         crate: RMCCrateGrenadesFragOld
+      - cost: 3000
+        crate: RMCCratePlasticExplosives
       - cost: 4000
         crate: RMCCrateBreachingCharges
       - cost: 10000
