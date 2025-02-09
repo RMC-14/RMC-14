@@ -10,7 +10,9 @@ using Content.Server.Speech.Components;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
+using Content.Shared.Power;
 using Content.Shared.Radio;
+using Content.Shared.Chat;
 using Content.Shared.Radio.Components;
 using Robust.Shared.Prototypes;
 
@@ -29,7 +31,7 @@ public sealed class RadioDeviceSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
     // Used to prevent a shitter from using a bunch of radios to spam chat.
-    private HashSet<(string, EntityUid)> _recentlySent = new();
+    private HashSet<(string, EntityUid, RadioChannelPrototype)> _recentlySent = new();
 
     public override void Initialize()
     {
@@ -113,7 +115,7 @@ public sealed class RadioDeviceSystem : EntitySystem
     {
         if (args.Powered)
             return;
-        SetMicrophoneEnabled(uid, null, false,  true, component);
+        SetMicrophoneEnabled(uid, null, false, true, component);
     }
 
     public void SetMicrophoneEnabled(EntityUid uid, EntityUid? user, bool enabled, bool quiet = false, RadioMicrophoneComponent? component = null)
@@ -193,8 +195,9 @@ public sealed class RadioDeviceSystem : EntitySystem
         if (component.IgnoreXenos && HasComp<XenoComponent>(args.Source))
             return;
 
-        if (_recentlySent.Add((args.Message, args.Source)))
-            _radio.SendRadioMessage(args.Source, args.Message, _protoMan.Index<RadioChannelPrototype>(component.BroadcastChannel), uid);
+        var channel = _protoMan.Index<RadioChannelPrototype>(component.BroadcastChannel)!;
+        if (_recentlySent.Add((args.Message, args.Source, channel)))
+            _radio.SendRadioMessage(args.Source, args.Message, channel, uid);
     }
 
     private void OnAttemptListen(EntityUid uid, RadioMicrophoneComponent component, ListenAttemptEvent args)
@@ -216,7 +219,7 @@ public sealed class RadioDeviceSystem : EntitySystem
 
         var name = Loc.GetString("speech-name-relay",
             ("speaker", Name(uid)),
-            ("originalName", nameEv.Name));
+            ("originalName", nameEv.VoiceName));
 
         // log to chat so people can identity the speaker/source, but avoid clogging ghost chat if there are many radios
         _chat.TrySendInGameICMessage(uid, args.Message, InGameICChatType.Whisper, ChatTransmitRange.GhostRangeLimit, nameOverride: name, checkRadioPrefix: false, ignoreXenos: true);
@@ -281,7 +284,7 @@ public sealed class RadioDeviceSystem : EntitySystem
         if (TryComp<RadioMicrophoneComponent>(ent, out var mic))
             mic.BroadcastChannel = channel;
         if (TryComp<RadioSpeakerComponent>(ent, out var speaker))
-            speaker.Channels = new(){ channel };
+            speaker.Channels = new() { channel };
         Dirty(ent);
     }
 }

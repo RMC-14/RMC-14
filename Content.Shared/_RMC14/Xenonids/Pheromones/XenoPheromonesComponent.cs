@@ -1,11 +1,12 @@
-﻿using Content.Shared.FixedPoint;
+﻿using Content.Shared._RMC14.Xenonids.HiveLeader;
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Xenonids.Pheromones;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(SharedXenoPheromonesSystem))]
+[Access(typeof(SharedXenoPheromonesSystem), typeof(HiveLeaderSystem))]
 public sealed partial class XenoPheromonesComponent : Component
 {
     [DataField, AutoNetworkedField]

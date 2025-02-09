@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Map;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
@@ -14,33 +15,47 @@ namespace Content.Shared._RMC14.Medical.Refill;
 
 public sealed class CMRefillableSolutionSystem : EntitySystem
 {
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] protected readonly SharedContainerSystem _container = default!;
 
     public override void Initialize()
     {
         base.Initialize();
+        SubscribeLocalEvent<CMRefillableSolutionComponent, ExaminedEvent>(OnRefillableSolutionExamined);
 
         SubscribeLocalEvent<CMSolutionRefillerComponent, InteractUsingEvent>(OnRefillerInteractUsing);
+
         SubscribeLocalEvent<RMCRefillSolutionOnStoreComponent, EntInsertedIntoContainerMessage>(OnRefillSolutionOnStoreInserted);
+    }
+
+    private void OnRefillableSolutionExamined(Entity<CMRefillableSolutionComponent> ent, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(CMRefillableSolutionComponent)))
+        {
+            args.PushMarkup("[color=cyan]This can be refilled by clicking on a medical vendor with it![/color]");
+        }
     }
 
     private void OnRefillerInteractUsing(Entity<CMSolutionRefillerComponent> ent, ref InteractUsingEvent args)
     {
-        args.Handled = true;
         var fillable = args.Used;
-        if(TryComp<RMCHyposprayComponent>(args.Used, out var hypo) && _container.TryGetContainer(args.Used, hypo.SlotId, out var container) && container.ContainedEntities.Count != 0)
+        if (TryComp<RMCHyposprayComponent>(args.Used, out var hypo) &&
+            _container.TryGetContainer(args.Used, hypo.SlotId, out var container) &&
+            container.ContainedEntities.Count != 0)
         {
             fillable = container.ContainedEntities[0];
         }
 
-        if (!TryComp(fillable, out CMRefillableSolutionComponent? refillable) ||
-            !_whitelist.IsValid(ent.Comp.Whitelist, fillable))
+        if (!TryComp(fillable, out CMRefillableSolutionComponent? refillable))
+            return;
+
+        args.Handled = true;
+        if (!_whitelist.IsValid(ent.Comp.Whitelist, fillable))
         {
             _popup.PopupClient(Loc.GetString("cm-refillable-solution-cannot-refill", ("user", ent.Owner), ("target", fillable)), args.User, args.User, PopupType.SmallCaution);
             return;

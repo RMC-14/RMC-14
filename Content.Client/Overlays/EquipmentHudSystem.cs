@@ -3,7 +3,8 @@ using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Robust.Client.Player;
 using Robust.Shared.Player;
-
+using Content.Shared.Item;
+using Content.Shared.Item.ItemToggle.Components;
 namespace Content.Client.Overlays;
 
 /// <summary>
@@ -14,6 +15,7 @@ public abstract class EquipmentHudSystem<T> : EntitySystem where T : IComponent
 {
     [Dependency] private readonly IPlayerManager _player = default!;
 
+    [ViewVariables]
     protected bool IsActive;
     protected virtual SlotFlags TargetSlots => ~SlotFlags.POCKET;
 
@@ -58,11 +60,17 @@ public abstract class EquipmentHudSystem<T> : EntitySystem where T : IComponent
     private void OnStartup(EntityUid uid, T component, ComponentStartup args)
     {
         RefreshOverlay(uid);
+
+        var user = Transform(uid).ParentUid;
+        RefreshOverlay(user);
     }
 
     private void OnRemove(EntityUid uid, T component, ComponentRemove args)
     {
         RefreshOverlay(uid);
+
+        var user = Transform(uid).ParentUid;
+        RefreshOverlay(user);
     }
 
     private void OnPlayerAttached(LocalPlayerAttachedEvent args)
@@ -102,7 +110,7 @@ public abstract class EquipmentHudSystem<T> : EntitySystem where T : IComponent
         args.Components.Add(component);
     }
 
-    private void RefreshOverlay(EntityUid uid)
+    protected void RefreshOverlay(EntityUid uid)
     {
         if (uid != _player.LocalSession?.AttachedEntity)
             return;

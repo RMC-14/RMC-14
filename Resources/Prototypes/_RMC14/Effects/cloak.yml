@@ -20,7 +20,7 @@
   - type: Sprite
     state: cloak
   - type: TimedDespawn
-    lifetime: 0.8
+    lifetime: 0.75
 
 - type: entity
   parent: RMCEffectCloakBase
@@ -30,4 +30,4 @@
   - type: Sprite
     state: uncloak
   - type: TimedDespawn
-    lifetime: 0.7
+    lifetime: 0.65

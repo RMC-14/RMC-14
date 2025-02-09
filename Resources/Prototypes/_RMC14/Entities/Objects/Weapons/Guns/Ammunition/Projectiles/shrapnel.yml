@@ -2,9 +2,7 @@
   parent: RMCBaseBullet
   id: CMProjectileShrapnel
   name: shrapnel
-  noSpawn: true
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/shotgun_projectiles.rsi
@@ -39,3 +37,8 @@
     amount: 20
   - type: TimedDespawn
     lifetime: 0.25
+  - type: RMCProjectileAccuracy
+    accuracy: 100
+    thresholds:
+    - range: 32
+      falloff: 10

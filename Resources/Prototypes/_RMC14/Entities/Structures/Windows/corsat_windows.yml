@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: RMCBaseWindowFrame
+  parent: RMCWindowFrameColonyReinforced
   id: RMCWindowFrameCorsatReinforced
   components:
   - type: Sprite
@@ -62,6 +62,7 @@
           - !type:ChangeConstructionNodeBehavior
             node: windowFrameCorsatReinforced
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: Construction
     graph: RMCWindowCorsatReinforced
     node: windowCorsatReinforced

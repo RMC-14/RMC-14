@@ -1,0 +1,224 @@
+﻿- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RMCDrinkAlcoholBase
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/whiskey.rsi
+    state: icon
+  - type: Item
+    size: Small
+  - type: Drink
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+  - type: CraftsIntoMolotov
+
+- type: entity
+  parent: RMCDrinkAlcoholBase
+  id: RMCDrinkAlcoholAbsinthe
+  name: jailbreaker verte
+  description: One sip of this and you just know you're gonna have a good time.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/absinthe.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+        reagents:
+        - ReagentId: Absinthe
+          Quantity: 100
+
+- type: entity
+  parent: RMCDrinkAlcoholBase
+  id: RMCDrinkAlcoholCognac
+  name: chateau de baton premium cognac
+  description: A sweet and strongly alcoholic drink, made after numerous distillations and years of maturing. You might as well not scream 'SHITCURITY' this time.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/cognac.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+        reagents:
+        - ReagentId: Cognac
+          Quantity: 100
+
+- type: entity
+  parent: RMCDrinkAlcoholBase
+  id: RMCDrinkAlcoholDavenport
+  name: davenport rye whiskey
+  description: An expensive whiskey with a distinct flavor. The bottle proudly proclaims that it's, 'A True Classic.'
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/davenport.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 50
+        reagents:
+        - ReagentId: Whiskey # TODO RMC14
+          Quantity: 50
+
+- type: entity
+  parent: RMCDrinkAlcoholBase
+  id: RMCDrinkAlcoholGin
+  name: griffeater gin
+  description: A bottle of high-quality gin, produced in the New London Space Station.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/gin.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+        reagents:
+        - ReagentId: Gin
+          Quantity: 100
+
+- type: entity
+  parent: RMCDrinkAlcoholBase
+  id: RMCDrinkAlcoholGoldschlager
+  name: college girl goldschlager
+  description: Because they are the only ones who will drink 100 proof cinnamon schnapps.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/goldschlager.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+        reagents:
+        - ReagentId: Gildlager
+          Quantity: 100
+
+- type: entity
+  parent: RMCDrinkAlcoholBase
+  id: RMCDrinkAlcoholKahlua
+  name: robert robust's coffee liqueur
+  description: A widely known, Mexican coffee-flavoured liqueur. In production since 1936, HONK
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/kahlua.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+        reagents:
+        - ReagentId: Whiskey # TODO RMC14
+          Quantity: 100
+
+- type: entity
+  parent: RMCDrinkAlcoholBase
+  id: RMCDrinkAlcoholMelonLiquor
+  name: emeraldine melon liquor
+  description: A bottle of 46 proof Emeraldine Melon Liquor. Sweet and light.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/melon_liquor.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+        reagents:
+        - ReagentId: Whiskey # TODO RMC14
+          Quantity: 100
+
+- type: entity
+  parent: RMCDrinkAlcoholBase
+  id: RMCDrinkAlcoholPatron
+  name: wrapp artiste patron
+  description: Silver laced tequila, served in space night clubs across the galaxy.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/patron.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+        reagents:
+        - ReagentId: Patron
+          Quantity: 100
+
+- type: entity
+  parent: RMCDrinkAlcoholBase
+  id: RMCDrinkAlcoholPurpleWine
+  name: warlock's velvet
+  description: What a delightful packaging for a surely high-quality wine! The vintage must be amazing!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/purple_wine.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+        reagents:
+        - ReagentId: Wine
+          Quantity: 100
+
+- type: entity
+  parent: RMCDrinkAlcoholBase
+  id: RMCDrinkAlcoholRum
+  name: captain pete's cuban spiced rum
+  description: Named after the famed Captain 'Cuban' Pete, this rum is about as volatile as his final mission.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/rum.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+        reagents:
+        - ReagentId: Rum
+          Quantity: 100
+
+- type: entity
+  parent: RMCDrinkAlcoholBase
+  id: RMCDrinkAlcoholSake
+  name: weston-yamada sake
+  description: Sake made with ancient techniques passed down for thousands of years. Fermented in Iowa by the Weston-Yamada Corporation.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/sake.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+        reagents:
+        - ReagentId: Sake
+          Quantity: 100
+
+- type: entity
+  parent: RMCDrinkAlcoholBase
+  id: RMCDrinkAlcoholVodka
+  name: red star vodka
+  description: "Red Star Vodka: A staple of the enemy's diet. Who knew that liquid potato could smell this potent. The bottle reads, 'Ra Ra Red Star Man: Lover of the Finer Things.' Or at least that's what you assume...you can't read Russian."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/red_star_vodka.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+        reagents:
+        - ReagentId: Vodka
+          Quantity: 100
+
+- type: entity
+  parent: RMCDrinkAlcoholBase
+  id: RMCDrinkAlcoholWhiskey
+  name: uncle git's special reserve
+  description: A premium single-malt whiskey, gently matured for four years by hillbillies in the backwaters of Alabama.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/whiskey.rsi
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+        reagents:
+        - ReagentId: Whiskey
+          Quantity: 100

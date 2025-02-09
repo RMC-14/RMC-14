@@ -12,7 +12,14 @@ public abstract class SharedTacticalMapSystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<TacticalMapUserComponent, OpenTacticalMapActionEvent>(OnUserOpenAction);
+
         Subs.CVar(_config, RMCCVars.RMCTacticalMapLineLimit, v => LineLimit = v, true);
+    }
+
+    protected virtual void OnUserOpenAction(Entity<TacticalMapUserComponent> ent, ref OpenTacticalMapActionEvent args)
+    {
+        _ui.TryOpenUi(ent.Owner, TacticalMapUserUi.Key, ent);
     }
 
     protected bool TryGetTacticalMap(out Entity<TacticalMapComponent> map)

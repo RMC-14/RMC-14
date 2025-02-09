@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/bb2d86ea95d40a0b6d15855984a8240311deb110/icons/obj/items/weapons/guns/guns_by_map/jungle/back.dmi,https://github.com/cmss13-devs/cmss13/blob/bb2d86ea95d40a0b6d15855984a8240311deb110/icons/obj/items/weapons/guns/guns_by_map/jungle/guns_lefthand.dmi,https://github.com/cmss13-devs/cmss13/blob/bb2d86ea95d40a0b6d15855984a8240311deb110/icons/obj/items/weapons/guns/guns_by_map/jungle/guns_obj.dmi,https://github.com/cmss13-devs/cmss13/blob/bb2d86ea95d40a0b6d15855984a8240311deb110/icons/obj/items/weapons/guns/guns_by_map/jungle/guns_righthand.dmi,https://github.com/cmss13-devs/cmss13/blob/bb2d86ea95d40a0b6d15855984a8240311deb110/icons/obj/items/weapons/guns/guns_by_map/jungle/suit_slot.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "mag-0"
+    },
+    {
+      "name": "base"
+    },
+    {
+      "name": "bolt-open"
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "wielded-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "wielded-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "equipped-SUITSTORAGE",
+      "directions": 4
+    },
+    {
+      "name": "equipped-BACKPACK",
+      "directions": 4
+    },
+    {
+      "name": "icon"
+    }
+  ]
+}

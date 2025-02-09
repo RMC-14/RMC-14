@@ -8,6 +8,16 @@
   - !type:DepartmentTimeRequirement
     department: CMRequisitions
     time: 36000 # 10 hours
+  ranks:
+    RMCRankMasterSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobQuartermaster
+      time: 252000 # 70 hours
+    RMCRankGunnerySergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobQuartermaster
+      time: 36000 # 10 hours
+    RMCRankStaffSergeant: []
   weight: 5
   startingGear: CMGearQuartermaster
   icon: "CMJobIconQuartermaster"
@@ -18,7 +28,11 @@
   - CMQM
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: ct
+    state: cargo
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -35,19 +49,20 @@
         RMCSkillPowerLoader: 2
     - type: MarineOrders
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-quartermaster
 
 - type: startingGear
   id: CMGearQuartermaster
   equipment:
     jumpsuit: CMJumpsuitQM
-    back: CMSatchelMarineTech
     shoes: CMBootsBlack
-    head: CMHeadCapCargo
+    head: RMCHeadCapQuartermaster
     gloves: CMHandsInsulated
     id: CMIDCardQuartermaster
     ears: CMHeadsetQM
-    pocket1: RMCPouchGeneralMedium
-    pocket2: CMFlash
+    pocket1: CMFlash
+    pocket2: RMCPouchGeneralLarge
   inhand:
   - CMStampApproved
 
@@ -66,3 +81,4 @@
 
 - type: playTimeTracker
   id: CMJobQuartermaster
+  isHumanoid: true

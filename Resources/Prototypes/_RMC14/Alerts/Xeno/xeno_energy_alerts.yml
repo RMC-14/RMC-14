@@ -1,0 +1,63 @@
+- type: alert
+  id: XenoEnergyBase #used by default
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_energy.rsi
+    state: power_display_full
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_energy.rsi
+    state: power_display_16
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_energy.rsi
+    state: power_display_15
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_energy.rsi
+    state: power_display_14
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_energy.rsi
+    state: power_display_13
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_energy.rsi
+    state: power_display_12
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_energy.rsi
+    state: power_display_11
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_energy.rsi
+    state: power_display_10
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_energy.rsi
+    state: power_display_9
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_energy.rsi
+    state: power_display_8
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_energy.rsi
+    state: power_display_7
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_energy.rsi
+    state: power_display_6
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_energy.rsi
+    state: power_display_5
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_energy.rsi
+    state: power_display_4
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_energy.rsi
+    state: power_display_3
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_energy.rsi
+    state: power_display_2
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_energy.rsi
+    state: power_display_1
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_energy.rsi
+    state: power_display_0
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_energy.rsi
+    state: power_display_empty
+  name: Energy reserves
+  description: Your stored energy. Used by different abilities
+  minSeverity: 0
+  maxSeverity: 18
+
+- type: alert
+  parent: XenoEnergyBase
+  id: XenoEnergyAcider
+  name: Acid reserves
+  description: Your stored acid. Used by different abilities
+
+- type: alert
+  parent: XenoEnergyBase
+  id: XenoEnergyWarden
+  name: Health reserves
+  description: Your stored health. Used by different abilities.
+
+- type: alert
+  parent: XenoEnergyBase
+  id: XenoEnergyHealer
+  name: Transferred health
+  description: Your total health transferred. If full you'll revive after using sacrifice.

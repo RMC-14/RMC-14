@@ -1,0 +1,79 @@
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: RMCFloorKutjevoBlueBase
+  name: tiles-cm-default-blue
+  suffix: kutjevo
+
+- type: tile
+  parent: RMCFloorKutjevoBlueBase
+  id: RMCFloorKutjevoBlue1
+  sprite: /Textures/_RMC14/Tiles/kutjevo/blue1.png
+  
+- type: tile
+  parent: RMCFloorKutjevoBlueBase
+  id: RMCFloorKutjevoBlue2
+  sprite: /Textures/_RMC14/Tiles/kutjevo/blue2.png
+  
+- type: tile
+  parent: RMCFloorKutjevoBlueBase
+  id: RMCFloorKutjevoBlue3_0
+  sprite: /Textures/_RMC14/Tiles/kutjevo/blue3_0.png
+  
+- type: tile
+  parent: RMCFloorKutjevoBlueBase
+  id: RMCFloorKutjevoBlue3_1
+  sprite: /Textures/_RMC14/Tiles/kutjevo/blue3_1.png
+  
+- type: tile
+  parent: RMCFloorKutjevoBlueBase
+  id: RMCFloorKutjevoBlue3_2
+  sprite: /Textures/_RMC14/Tiles/kutjevo/blue3_2.png
+  
+- type: tile
+  parent: RMCFloorKutjevoBlueBase
+  id: RMCFloorKutjevoBlue3_3
+  sprite: /Textures/_RMC14/Tiles/kutjevo/blue3_3.png
+  
+- type: tile
+  parent: RMCFloorKutjevoBlueBase
+  id: RMCFloorKutjevoBlue3_4
+  sprite: /Textures/_RMC14/Tiles/kutjevo/blue3_4.png
+  
+- type: tile
+  parent: RMCFloorKutjevoBlueBase
+  id: RMCFloorKutjevoBlue3_5
+  sprite: /Textures/_RMC14/Tiles/kutjevo/blue3_5.png
+  
+- type: tile
+  parent: RMCFloorKutjevoBlueBase
+  id: RMCFloorKutjevoBlue3_6
+  sprite: /Textures/_RMC14/Tiles/kutjevo/blue3_6.png
+  
+- type: tile
+  parent: RMCFloorKutjevoBlueBase
+  id: RMCFloorKutjevoBlue3_7
+  sprite: /Textures/_RMC14/Tiles/kutjevo/blue3_7.png
+  
+- type: tile
+  parent: RMCFloorKutjevoBlueBase
+  id: RMCFloorKutjevoBlue4_0
+  sprite: /Textures/_RMC14/Tiles/kutjevo/blue4_0.png
+  
+- type: tile
+  parent: RMCFloorKutjevoBlueBase
+  id: RMCFloorKutjevoBlue4_1
+  sprite: /Textures/_RMC14/Tiles/kutjevo/blue4_1.png
+  
+- type: tile
+  parent: RMCFloorKutjevoBlueBase
+  id: RMCFloorKutjevoBlue4_2
+  sprite: /Textures/_RMC14/Tiles/kutjevo/blue4_2.png
+  
+- type: tile
+  parent: RMCFloorKutjevoBlueBase
+  id: RMCFloorKutjevoBlue4_3
+  sprite: /Textures/_RMC14/Tiles/kutjevo/blue4_3.png
+  
+  
+

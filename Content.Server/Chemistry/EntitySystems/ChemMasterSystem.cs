@@ -1,10 +1,11 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Server._RMC14.IconLabel;
 using Content.Server.Chemistry.Components;
-using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Server.Labels;
 using Content.Server.Popups;
 using Content.Server.Storage.EntitySystems;
+using Content.Shared._RMC14.IconLabel;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
@@ -33,12 +34,15 @@ namespace Content.Server.Chemistry.EntitySystems
     {
         [Dependency] private readonly PopupSystem _popupSystem = default!;
         [Dependency] private readonly AudioSystem _audioSystem = default!;
-        [Dependency] private readonly SolutionContainerSystem _solutionContainerSystem = default!;
+        [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
         [Dependency] private readonly ItemSlotsSystem _itemSlotsSystem = default!;
         [Dependency] private readonly UserInterfaceSystem _userInterfaceSystem = default!;
         [Dependency] private readonly StorageSystem _storageSystem = default!;
         [Dependency] private readonly LabelSystem _labelSystem = default!;
         [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+
+        // RMC - Add Icon labels to custom chemical containers
+        [Dependency] private readonly RMCIconLabelSystem _rmcIconLabel = default!;
 
         [ValidatePrototypeId<EntityPrototype>]
         private const string PillPrototypeId = "CMPill";
@@ -187,8 +191,11 @@ namespace Content.Server.Chemistry.EntitySystems
                 return; // output can't fit pills
             }
 
+            var number = message.Number;
+            number = Math.Clamp(number, 0, 30);
+
             // Ensure the number is valid.
-            if (message.Number == 0 || !_storageSystem.HasSpace((container, storage)))
+            if (number == 0 || !_storageSystem.HasSpace((container, storage)))
                 return;
 
             // Ensure the amount is valid.
@@ -199,20 +206,29 @@ namespace Content.Server.Chemistry.EntitySystems
             if (message.Label.Length > SharedChemMaster.LabelMaxLength)
                 return;
 
-            var needed = message.Dosage * message.Number;
+            var needed = message.Dosage * number;
             if (!WithdrawFromBuffer(chemMaster, needed, user, out var withdrawal))
                 return;
 
             _labelSystem.Label(container, message.Label);
 
-            for (var i = 0; i < message.Number; i++)
+            /// RMC - Add Icon Label Text to custom pill bottle
+            if (TryComp(container, out IconLabelComponent? iconLabel))
+            {
+                _rmcIconLabel.SetText((container, iconLabel), "rmc-custom-container-label-text", ("customLabel", message.Label));
+            }
+
+            for (var i = 0; i < number; i++)
             {
                 var item = Spawn(PillPrototypeId, Transform(container).Coordinates);
                 _storageSystem.Insert(container, item, out _, user: user, storage);
                 _labelSystem.Label(item, message.Label);
 
-                var itemSolution = _solutionContainerSystem.EnsureSolutionEntity(item, SharedChemMaster.PillSolutionName, message.Dosage, null, out _);
-                _solutionContainerSystem.TryAddSolution(itemSolution, withdrawal.SplitSolution(message.Dosage));
+                _solutionContainerSystem.EnsureSolutionEntity(item, SharedChemMaster.PillSolutionName,out var itemSolution ,message.Dosage);
+                if (!itemSolution.HasValue)
+                    return;
+
+                _solutionContainerSystem.TryAddSolution(itemSolution.Value, withdrawal.SplitSolution(message.Dosage));
 
                 var pill = EnsureComp<PillComponent>(item);
                 pill.PillType = chemMaster.Comp.PillType;
@@ -220,7 +236,7 @@ namespace Content.Server.Chemistry.EntitySystems
 
                 // Log pill creation by a user
                 _adminLogger.Add(LogType.Action, LogImpact.Low,
-                    $"{ToPrettyString(user):user} printed {ToPrettyString(item):pill} {SharedSolutionContainerSystem.ToPrettyString(itemSolution.Comp.Solution)}");
+                    $"{ToPrettyString(user):user} printed {ToPrettyString(item):pill} {SharedSolutionContainerSystem.ToPrettyString(itemSolution.Value.Comp.Solution)}");
             }
 
             UpdateUiState(chemMaster);
@@ -249,6 +265,13 @@ namespace Content.Server.Chemistry.EntitySystems
                 return;
 
             _labelSystem.Label(container, message.Label);
+
+            /// RMC - Add Icon Label Text to custom chemical bottle
+            if (TryComp(container, out IconLabelComponent? iconLabel))
+            {
+                _rmcIconLabel.SetText((container, iconLabel), "rmc-custom-container-label-text", ("customLabel", message.Label));
+            }
+
             _solutionContainerSystem.TryAddSolution(soln.Value, withdrawal);
 
             // Log bottle creation by a user

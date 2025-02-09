@@ -27,6 +27,7 @@ using Robust.Shared.Timing;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Damage.Components;
+using Content.Shared.Power;
 
 namespace Content.Server.Light.EntitySystems
 {
@@ -276,7 +277,7 @@ namespace Content.Server.Light.EntitySystems
                         if (time > light.LastThunk + ThunkDelay)
                         {
                             light.LastThunk = time;
-                            _audio.PlayEntity(light.TurnOnSound, Filter.Pvs(uid), uid, true, AudioParams.Default.WithVolume(-10f));
+                            _audio.PlayPvs(light.TurnOnSound, uid, light.TurnOnSound.Params.AddVolume(-10f));
                         }
                     }
                     else

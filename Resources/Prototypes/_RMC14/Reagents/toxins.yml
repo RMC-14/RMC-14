@@ -8,13 +8,14 @@
   unknown: true
   metabolisms:
     Poison:
-      metabolismRate: 0.01 # TODO RMC14 this is allegedly 0.05 in 13?
+      #TODO hurts on inject equal to amount
+      metabolismRate: 0.05
       effects:
       - !type:HealthChange
         damage:
           groups:
-            Burn: 0.26 # Toxic 1
-            Toxin: 0.50 # Corrosive 2
+            Burn: 0.5 # Corrosive 2
+            Toxin: 0.25 # Toxic 1
       - !type:PopupMessage
         type: Local
         visualType: SmallCaution

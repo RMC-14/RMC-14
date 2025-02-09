@@ -1,4 +1,5 @@
-﻿using Robust.Shared.GameStates;
+﻿using Content.Shared.Whitelist;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Hands;
 
@@ -8,4 +9,7 @@ public sealed partial class RMCStorageEjectHandComponent : Component
 {
     [DataField, AutoNetworkedField]
     public bool Enabled = false;
+    
+    [DataField, AutoNetworkedField]
+    public EntityWhitelist? Whitelist;
 }

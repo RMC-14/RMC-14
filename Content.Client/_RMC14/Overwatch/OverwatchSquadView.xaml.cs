@@ -18,7 +18,10 @@ public sealed partial class OverwatchSquadView : Control
     public event Action? OnStop;
     public readonly FloatSpinBox Longitude;
     public readonly FloatSpinBox Latitude;
+    public readonly FloatSpinBox OrbitalLongitude;
+    public readonly FloatSpinBox OrbitalLatitude;
     public bool HasCrate;
+    public bool HasOrbital;
     public TimeSpan NextLaunchAt;
 
     public OverwatchSquadView()
@@ -27,6 +30,7 @@ public sealed partial class OverwatchSquadView : Control
 
         TabContainer.SetTabTitle(SquadMonitor, "Squad Monitor");
         TabContainer.SetTabTitle(SupplyDrop, "Supply Drop");
+        TabContainer.SetTabTitle(OrbitalBombardment, "Orbital Bombardment");
 
         Longitude = UIExtensions.CreateDialSpinBox(buttons: false, minWidth: 100);
         LongitudeContainer.AddChild(Longitude);
@@ -54,9 +58,36 @@ public sealed partial class OverwatchSquadView : Control
             }
         };
 
+        OrbitalLongitude = UIExtensions.CreateDialSpinBox(buttons: false, minWidth: 100);
+        OrbitalLongitudeContainer.AddChild(OrbitalLongitude);
+        OrbitalLongitude.SetPositionFirst();
+
+        OrbitalLatitude = UIExtensions.CreateDialSpinBox(buttons: false, minWidth: 100);
+        OrbitalLatitudeContainer.AddChild(OrbitalLatitude);
+        OrbitalLatitude.SetPositionFirst();
+
+        OrbitalLongitude.OnKeyBindDown += args =>
+        {
+            if (args.Function == EngineKeyFunctions.GuiTabNavigateNext ||
+                args.Function == EngineKeyFunctions.GuiTabNavigatePrev)
+            {
+                OrbitalLatitude.GrabKeyboardFocus();
+            }
+        };
+
+        OrbitalLatitude.OnKeyBindDown += args =>
+        {
+            if (args.Function == EngineKeyFunctions.GuiTabNavigateNext ||
+                args.Function == EngineKeyFunctions.GuiTabNavigatePrev)
+            {
+                OrbitalLongitude.GrabKeyboardFocus();
+            }
+        };
+
         StopOverwatchButton.OnPressed += OnStopOverwatchPressed;
         LaunchButton.Label.ModulateSelfOverride = Color.Black;
         SaveButton.Label.ModulateSelfOverride = Color.Black;
+        OrbitalSaveButton.Label.ModulateSelfOverride = Color.Black;
     }
 
     private void OnStopOverwatchPressed(ButtonEventArgs obj)
@@ -146,7 +177,7 @@ public sealed partial class OverwatchSquadView : Control
             if (!showHidden)
             {
                 var hidden = console.Hidden;
-                if (i >= marines.Count || hidden.Contains(marines[i].Marine))
+                if (i >= marines.Count || hidden.Contains(marines[i].Id))
                 {
                     MakeViewVisible(i, false);
                     continue;
@@ -176,5 +207,9 @@ public sealed partial class OverwatchSquadView : Control
         {
             LaunchButton.Disabled = false;
         }
+
+        OrbitalStatus.Text = HasOrbital
+            ? "[color=green][bold]Ready[/bold][/color]"
+            : "[color=red][bold]Not ready[/bold][/color]";
     }
 }

@@ -34,14 +34,13 @@
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleSquadMedicalApparel
   name: standard marine apparel
-  description: Contains a corpsman jumpsuit, a M10 helmet, a headset, combat gloves and combat boots.
+  description: Contains a corpsman jumpsuit, a M10 helmet, a headset and combat boots.
   components:
   - type: CMVendorBundle
     bundle:
     - CMArmorHelmetM10Medic # TODO RMC14 M4
     - CMVendorHeadsetSquadCorpsman
     - CMJumpsuitMarineMedic
-    - CMHandsBlackMarine
     - CMBootsBlackFilled
 
 - type: entity
@@ -59,7 +58,7 @@
     - CMDefibrillator
     - CMAdvFirstAidKitFilled
     - CMHealthAnalyzer
-#    - TODO RMC14 medevac
+    - RMCMedevacStretcherFolded
     - CMRollerBedSpawnFolded
     - CMSurgicalLine
     - CMSynthGraft
@@ -86,7 +85,7 @@
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleCombatTechnicianEssentials
   name: essential engineer set
-  description: Contains 50 metal, 40 plasteel, 25 sandbags, a high-capacity power cell, an entrenching tool and a light replacer.
+  description: Contains 50 metal, 40 plasteel, 25 sandbags, a high-capacity power cell, an entrenching tool, a light replacer, and a nailgun.
   components:
   - type: Sprite
     sprite: Objects/Weapons/Bombs/c4.rsi
@@ -101,6 +100,7 @@
     - CMEntrenchingTool
     - CMLightReplacer
 #    - CMAPCElectronics # TODO RMC14 uncomment when power
+    - RMCNailgunTactical
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel

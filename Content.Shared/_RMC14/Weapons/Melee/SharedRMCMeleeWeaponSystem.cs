@@ -1,16 +1,21 @@
-﻿using Content.Shared._RMC14.Xenonids;
+﻿using System.Numerics;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Melee;
 
 public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
 {
+    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     private EntityQuery<MeleeWeaponComponent> _meleeWeaponQuery;
@@ -30,6 +35,27 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
         SubscribeLocalEvent<StunOnHitComponent, MeleeHitEvent>(OnStunOnHitMeleeHit);
 
         SubscribeLocalEvent<MeleeDamageMultiplierComponent, MeleeHitEvent>(OnMultiplierOnHitMeleeHit);
+
+        SubscribeAllEvent<LightAttackEvent>(OnLightAttack, before: new[] { typeof(SharedMeleeWeaponSystem) });
+
+        SubscribeAllEvent<HeavyAttackEvent>(OnHeavyAttack, before: new[] { typeof(SharedMeleeWeaponSystem) });
+
+        SubscribeAllEvent<DisarmAttackEvent>(OnDisarmAttack, before: new[] { typeof(SharedMeleeWeaponSystem) });
+    }
+
+    //Call this whenever you add MeleeResetComponent to anything
+    public void MeleeResetInit(Entity<MeleeResetComponent> ent)
+    {
+        if (!TryComp<MeleeWeaponComponent>(ent, out var weapon))
+        {
+            RemComp<MeleeResetComponent>(ent);
+            return;
+        }
+
+        ent.Comp.OriginalTime = weapon.NextAttack;
+        weapon.NextAttack = _timing.CurTime;
+        Dirty(ent, weapon);
+        Dirty(ent, ent.Comp);
     }
 
     private void OnStunOnHitMeleeHit(Entity<StunOnHitComponent> ent, ref MeleeHitEvent args)
@@ -89,5 +115,67 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
         }
 
         args.Damage = args.Damage * ent.Comp.OtherMultiplier;
+    }
+
+    private void OnLightAttack(LightAttackEvent msg, EntitySessionEventArgs args)
+    {
+        if (args.SenderSession.AttachedEntity is not {} user)
+            return;
+
+        if (!_melee.TryGetWeapon(user, out var weaponUid, out var weapon) ||
+            weaponUid != GetEntity(msg.Weapon))
+        {
+            return;
+        }
+
+        TryMeleeReset(weaponUid, weapon, false);
+    }
+
+    private void OnHeavyAttack(HeavyAttackEvent msg, EntitySessionEventArgs args)
+    {
+        if (args.SenderSession.AttachedEntity is not {} user)
+            return;
+
+        if (!_melee.TryGetWeapon(user, out var weaponUid, out var weapon) ||
+            weaponUid != GetEntity(msg.Weapon))
+        {
+            return;
+        }
+
+        TryMeleeReset(weaponUid, weapon, false);
+    }
+
+    private void OnDisarmAttack(DisarmAttackEvent msg, EntitySessionEventArgs args)
+    {
+        if (args.SenderSession.AttachedEntity is not {} user)
+            return;
+
+        if (!_melee.TryGetWeapon(user, out var weaponUid, out var weapon))
+        {
+            return;
+        }
+
+        TryMeleeReset(weaponUid, weapon, true);
+    }
+
+
+    private void TryMeleeReset(EntityUid weaponUid, MeleeWeaponComponent weapon, bool disarm){
+        if (!TryComp<MeleeResetComponent>(weaponUid, out var reset))
+            return;
+
+        if (disarm)
+            weapon.NextAttack = reset.OriginalTime;
+
+        RemComp<MeleeResetComponent>(weaponUid);
+        Dirty(weaponUid, weapon);
+    }
+
+    public void DoLunge(EntityUid user, EntityUid target)
+    {
+        var userXform = Transform(user);
+        var targetPos = _transform.GetWorldPosition(target);
+        var localPos = Vector2.Transform(targetPos, _transform.GetInvWorldMatrix(userXform));
+        localPos = userXform.LocalRotation.RotateVec(localPos);
+        _melee.DoLunge(user, target, Angle.Zero, localPos, null);
     }
 }

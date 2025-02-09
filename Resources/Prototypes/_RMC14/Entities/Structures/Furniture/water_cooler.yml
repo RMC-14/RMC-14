@@ -1,0 +1,60 @@
+- type: entity
+  parent: StorageTank
+  id: RMCWaterCooler
+  name: water cooler
+  description: A machine that dispenses water to drink. It has levers for hot and cold, but it only dispenses room-temperature water.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/water_cooler.rsi
+    state: water_cooler    
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.3
+        density: 155
+        mask:
+        - MachineMask
+        layer:
+        - MobMask
+        - BulletImpassable
+  - type: Appearance
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        reagents:
+        - ReagentId: Water
+          Quantity: 500
+  - type: ContainerContainer
+    containers:
+      bin-container: !type:Container
+  - type: Bin
+    initialContents:
+    - DrinkWaterCup
+    - DrinkWaterCup
+    - DrinkWaterCup
+    - DrinkWaterCup
+    - DrinkWaterCup
+    - DrinkWaterCup
+    - DrinkWaterCup
+    - DrinkWaterCup
+    - DrinkWaterCup
+    - DrinkWaterCup
+    whitelist:
+      requireAll: true
+      components:
+      - FitsInDispenser
+      tags:
+      - Trash
+  - type: ExaminableSolution
+    solution: tank
+  - type: StaticPrice
+    price: 500
+    
+- type: entity
+  parent: RMCWaterCooler
+  id: RMCWaterCoolerStacks
+  components:
+  - type: Sprite
+    state: water_cooler_2

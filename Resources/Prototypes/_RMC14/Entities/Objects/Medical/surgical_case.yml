@@ -25,6 +25,10 @@
       - CMScalpel
       - CMHemostat
       - CMRetractor
+      tags:
+      - CMSurgicalLine
+      - CMSynthGraft
+      #TODO FixoVein
   - type: FixedItemSizeStorage
   - type: Tag
     tags:

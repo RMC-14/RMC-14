@@ -147,3 +147,53 @@
   components:
   - type: RMCChemicalStorage
     network: RMCChemStorageResearch
+
+- type: entity
+  parent: RMCChemDispenserBase
+  id: RMCChemDispenserCorpsmanBase
+  name: pressurized chemical dispenser
+  description: A more basic chemical dispenser, designed for use with pressurized reagent canisters. A We-Ya product.
+  abstract: true
+  components:
+  - type: RequiresSkill
+    skills:
+      RMCSkillMedical: 2
+  - type: ItemSlots
+    slots:
+      chemical_dispenser_slot:
+        name: Chemical Dispenser
+        whitelist:
+          tags:
+          - PressurizedCanister
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/Science/chem_master.rsi
+    layers:
+    - state: mixer_empty
+    - state: mixer_screen
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    snapCardinals: true
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+  - type: RMCChemicalDispenser
+    reagents:
+      - CMBicaridine
+      - CMKelotane
+      - CMDylovene
+      - CMDexalin
+      - CMInaprovaline
+      - CMEpinephrine
+      # TODO RMC-14 Peridaxon and tramadol
+      - CMTricordrazine
+
+- type: entity
+  parent: RMCChemDispenserCorpsmanBase
+  id: RMCChemDispenserCorpsmanMedbay
+  suffix: Medbay
+  components:
+  - type: RMCChemicalDispenser
+    network: RMCChemStorageMedbay
+

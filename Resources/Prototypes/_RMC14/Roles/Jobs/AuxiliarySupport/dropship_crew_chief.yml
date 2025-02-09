@@ -11,6 +11,16 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
     time: 3600 # 1 hours
+  ranks:
+    RMCRankStaffSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobDropshipCrewChief
+      time: 252000 # 70 hours
+    RMCRankSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobDropshipCrewChief
+      time: 270000 # 10 hours
+    RMCRankCorporal: []
   startingGear: CMGearDCC
   icon: "CMJobIconDCC"
   joinNotifyCrew: false
@@ -19,7 +29,11 @@
   - DropshipCrewChief
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: pilot
+    state: dcc
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_shipside
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -38,13 +52,14 @@
     - type: CMVendorUser
       points: 45
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-dcc
   hidden: false
 
 - type: startingGear
   id: CMGearDCC
   equipment:
     jumpsuit: CMJumpsuitDCC
-    back: CMSatchel
     shoes: CMBootsBlackFilled
     id: CMIDCardDCC
     ears: CMHeadsetPilot
@@ -64,3 +79,4 @@
 
 - type: playTimeTracker
   id: CMJobDropshipCrewChief
+  isHumanoid: true

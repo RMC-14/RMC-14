@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using Content.Client.Lobby;
 using Content.Client._RMC14.PlayTimeTracking;
 using Content.Shared.CCVar;
@@ -54,15 +54,14 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
         {
             // Reset on disconnect, just in case.
             _roles.Clear();
+            _jobWhitelists.Clear();
+            _roleBans.Clear();
         }
     }
 
     private void RxRoleBans(MsgRoleBans message)
     {
         _sawmill.Debug($"Received roleban info containing {message.Bans.Count} entries.");
-
-        if (_roleBans.Equals(message.Bans))
-            return;
 
         _roleBans.Clear();
         _roleBans.AddRange(message.Bans);
@@ -140,7 +139,7 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
             reasons.Add(jobReason.ToMarkup());
         }
 
-        reason = reasons.Count == 0 ? null : FormattedMessage.FromMarkup(string.Join('\n', reasons));
+        reason = reasons.Count == 0 ? null : FormattedMessage.FromMarkupOrThrow(string.Join('\n', reasons));
         return reason == null;
     }
 

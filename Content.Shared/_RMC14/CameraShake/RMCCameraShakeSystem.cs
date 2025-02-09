@@ -1,4 +1,5 @@
 ﻿using Content.Shared.Camera;
+using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -20,6 +21,15 @@ public sealed class RMCCameraShakeSystem : EntitySystem
         shaking.Strength = strength;
 
         Dirty(user, shaking);
+    }
+
+    public void ShakeCamera(Filter filter, int shakes, int strength, TimeSpan? spacing = null)
+    {
+        foreach (var session in filter.Recipients)
+        {
+            if (session.AttachedEntity is { } recipient)
+                ShakeCamera(recipient, shakes, strength, spacing);
+        }
     }
 
     public override void Update(float frameTime)

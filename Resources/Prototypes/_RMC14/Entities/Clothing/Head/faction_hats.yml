@@ -122,3 +122,26 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/general.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/general.rsi
+
+# Quartermaster hats
+- type: entity
+  parent: CMHeadCapCargo
+  id: RMCHeadCapQuartermaster
+  name: UNMC quartermaster cap
+  description: It's a fancy hat for a not-so-fancy military supply clerk.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/quartermaster_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/quartermaster_cap.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeretQuartermaster
+  name: UNMC quartermaster beret
+  description: A beret with the sergeant insignia emblazoned on it. It symbolizes hard work and shady business.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_quartermaster.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_quartermaster.rsi

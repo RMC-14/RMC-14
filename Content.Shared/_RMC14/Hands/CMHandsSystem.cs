@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Storage;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Mobs;
@@ -29,6 +30,7 @@ public sealed class CMHandsSystem : EntitySystem
         SubscribeLocalEvent<WhitelistPickupComponent, PickupAttemptEvent>(OnWhitelistPickUpAttempt);
         SubscribeLocalEvent<DropHeldOnIncapacitateComponent, MobStateChangedEvent>(OnDropMobStateChanged);
         SubscribeLocalEvent<RMCStorageEjectHandComponent, GetVerbsEvent<AlternativeVerb>>(OnStorageEjectHandVerbs);
+        SubscribeLocalEvent<DropOnUseInHandComponent, UseInHandEvent>(OnDropOnUseInHand);
     }
 
     private void OnXenoHandsMapInit(Entity<GiveHandsComponent> ent, ref MapInitEvent args)
@@ -119,6 +121,11 @@ public sealed class CMHandsSystem : EntitySystem
         args.Verbs.Add(switchStorageVerb);
     }
 
+    private void OnDropOnUseInHand(Entity<DropOnUseInHandComponent> ent, ref UseInHandEvent args)
+    {
+        _hands.TryDrop(args.User, ent);
+    }
+
     public bool IsPickupByAllowed(Entity<WhitelistPickupByComponent?> item, Entity<WhitelistPickupComponent?> user)
     {
         Resolve(item, ref item.Comp, false);
@@ -159,7 +166,7 @@ public sealed class CMHandsSystem : EntitySystem
 
     public bool TryStorageEjectHand(EntityUid user, EntityUid item)
     {
-        if (!TryComp<RMCStorageEjectHandComponent>(item, out RMCStorageEjectHandComponent? storageEject) ||
+        if (!TryComp(item, out RMCStorageEjectHandComponent? eject) ||
             !TryComp(item, out StorageComponent? storage))
         {
             return false;
@@ -167,6 +174,18 @@ public sealed class CMHandsSystem : EntitySystem
 
         if (!storageEject.Enabled)
             return false;
+          
+        if (eject.Whitelist != null)
+        {
+            foreach (var contained in storage.Container.ContainedEntities)
+            {
+                if (_whitelist.IsWhitelistPass(eject.Whitelist, contained))
+                {
+                    _hands.TryPickupAnyHand(user, contained);
+                    return true;
+                }
+            }
+        }
 
         if (!_rmcStorage.TryGetLastItem((item, storage), out var last))
         {

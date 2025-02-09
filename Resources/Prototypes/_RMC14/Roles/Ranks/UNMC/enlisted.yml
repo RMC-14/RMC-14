@@ -1,0 +1,65 @@
+- type: rank
+  id: RMCRankSergeantMajor
+  name: Sergeant Major
+  prefix: SgtMaj.
+  paygrade: E9E
+
+- type: rank
+  id: RMCRankMasterGunnerySergeant
+  name: Master Gunnery Sergeant
+  prefix: MGySgt.
+  paygrade: E9
+
+- type: rank
+  id: RMCRankFirstSergeant
+  name: First Sergeant
+  prefix: 1Sgt.
+  paygrade: E8E
+
+- type: rank
+  id: RMCRankMasterSergeant
+  name: Master Sergeant
+  prefix: MSgt.
+  paygrade: E8
+
+- type: rank
+  id: RMCRankGunnerySergeant
+  name: Gunnery Sergeant
+  prefix: GySgt.
+  paygrade: E7
+
+- type: rank
+  id: RMCRankStaffSergeant
+  name: Staff Sergeant
+  prefix: SSgt.
+  paygrade: E6
+
+- type: rank
+  id: RMCRankSergeant
+  name: Sergeant
+  prefix: Sgt.
+  paygrade: E5
+
+- type: rank
+  id: RMCRankCorporal
+  name: Corporal
+  prefix: Cpl.
+  paygrade: E4
+
+- type: rank
+  id: RMCRankLanceCorporal
+  name: Lance Corporal
+  prefix: LCpl.
+  paygrade: E3
+
+- type: rank
+  id: RMCRankPrivateFirstClass
+  name: Private First Class
+  prefix: PFC.
+  paygrade: E2
+
+- type: rank
+  id: RMCRankPrivate
+  name: Private
+  prefix: PVT.
+  paygrade: E1

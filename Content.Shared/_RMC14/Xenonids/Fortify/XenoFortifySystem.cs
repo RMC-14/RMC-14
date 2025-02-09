@@ -1,4 +1,6 @@
-﻿using Content.Shared._RMC14.Armor;
+﻿using System.Linq;
+using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Crest;
 using Content.Shared._RMC14.Xenonids.Headbutt;
@@ -9,11 +11,14 @@ using Content.Shared.Actions;
 using Content.Shared.Explosion;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Events;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
+using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
-using System.Linq;
 using static Content.Shared._RMC14.Xenonids.Fortify.XenoFortifyComponent;
 using static Content.Shared.Physics.CollisionGroup;
 
@@ -25,8 +30,12 @@ public sealed class XenoFortifySystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly FixtureSystem _fixtures = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedRMCExplosionSystem _explode = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
+    [Dependency] private readonly CMArmorSystem _armor = default!;
 
     public override void Initialize()
     {
@@ -40,12 +49,14 @@ public sealed class XenoFortifySystem : EntitySystem
         SubscribeLocalEvent<XenoFortifyComponent, ChangeDirectionAttemptEvent>(OnXenoFortifyCancel);
         SubscribeLocalEvent<XenoFortifyComponent, UpdateCanMoveEvent>(OnXenoFortifyCancel);
 
-        SubscribeLocalEvent<XenoFortifyComponent, AttackAttemptEvent>(OnXenoFortifyCancel);
+        SubscribeLocalEvent<XenoFortifyComponent, AttackAttemptEvent>(OnXenoFortifyAttack);
         SubscribeLocalEvent<XenoFortifyComponent, XenoHeadbuttAttemptEvent>(OnXenoFortifyHeadbuttAttempt);
         SubscribeLocalEvent<XenoFortifyComponent, XenoRestAttemptEvent>(OnXenoFortifyRestAttempt);
         SubscribeLocalEvent<XenoFortifyComponent, XenoTailSweepAttemptEvent>(OnXenoFortifyTailSweepAttempt);
         SubscribeLocalEvent<XenoFortifyComponent, XenoToggleCrestAttemptEvent>(OnXenoFortifyToggleCrestAttempt);
         SubscribeLocalEvent<XenoFortifyComponent, MobStateChangedEvent>(OnXenoFortifyMobStateChanged);
+        SubscribeLocalEvent<XenoFortifyComponent, RefreshMovementSpeedModifiersEvent>(OnXenoFortifyRefreshSpeed);
+        SubscribeLocalEvent<XenoFortifyComponent, GetMeleeDamageEvent>(OnXenoFortifyGetMeleeDamage);
     }
 
     private void OnXenoFortifyAction(Entity<XenoFortifyComponent> xeno, ref XenoFortifyActionEvent args)
@@ -86,19 +97,38 @@ public sealed class XenoFortifySystem : EntitySystem
     {
         if (xeno.Comp.Fortified)
         {
-            args.DamageCoefficient *= xeno.Comp.ExplosionMultiplier;
+            var armor = xeno.Comp.ExplosionArmor;
+
+            if (armor <= 0)
+                return;
+
+            var resist = (float)Math.Pow(1.1, armor / 5.0);
+            args.DamageCoefficient /= resist;
         }
     }
 
     private void OnXenoFortifyCancel<T>(Entity<XenoFortifyComponent> xeno, ref T args) where T : CancellableEntityEventArgs
     {
-        if (xeno.Comp.Fortified)
+        if (xeno.Comp.Fortified && !xeno.Comp.CanMoveFortified)
             args.Cancel();
+    }
+
+    private void OnXenoFortifyAttack(Entity<XenoFortifyComponent> xeno, ref AttackAttemptEvent args)
+    {
+        if (xeno.Comp.Fortified)
+        {
+            if (args.Target is not { } target)
+                return;
+
+            //Cancel attacks to mobs
+            if (HasComp<MobStateComponent>(target))
+                args.Cancel();
+        }
     }
 
     private void OnXenoFortifyHeadbuttAttempt(Entity<XenoFortifyComponent> xeno, ref XenoHeadbuttAttemptEvent args)
     {
-        if (xeno.Comp.Fortified)
+        if (!xeno.Comp.CanHeadbuttFortified && xeno.Comp.Fortified)
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-fortify-cant-headbutt"), xeno, xeno);
             args.Cancelled = true;
@@ -138,6 +168,21 @@ public sealed class XenoFortifySystem : EntitySystem
             Unfortify(xeno);
     }
 
+    private void OnXenoFortifyRefreshSpeed(Entity<XenoFortifyComponent> xeno, ref RefreshMovementSpeedModifiersEvent args)
+    {
+        if (xeno.Comp.CanMoveFortified && xeno.Comp.Fortified)
+        {
+            var modifier = xeno.Comp.MoveSpeedModifier.Float();
+            args.ModifySpeed(modifier, modifier);
+        }
+    }
+
+    private void OnXenoFortifyGetMeleeDamage(Entity<XenoFortifyComponent> xeno, ref GetMeleeDamageEvent args)
+    {
+        if (xeno.Comp.Fortified)
+            args.Damage.ExclusiveAdd(xeno.Comp.DamageAddedFortified);
+    }
+
     private void Fortify(Entity<XenoFortifyComponent> xeno)
     {
         xeno.Comp.Fortified = true;
@@ -149,8 +194,16 @@ public sealed class XenoFortifySystem : EntitySystem
             Dirty(xeno.Owner, size);
         }
 
-        _fixtures.TryCreateFixture(xeno, xeno.Comp.Shape, FixtureId, hard: true, collisionLayer: (int) WallLayer);
-        _transform.AnchorEntity((xeno, Transform(xeno)));
+        if (xeno.Comp.ChangeExplosionWeakness && TryComp<StunOnExplosionReceivedComponent>(xeno, out var explode))
+            _explode.ChangeExplosionStunResistance(xeno, explode, false);
+
+        if (!xeno.Comp.CanMoveFortified)
+        {
+            _fixtures.TryCreateFixture(xeno, xeno.Comp.Shape, FixtureId, hard: true, collisionLayer: (int)WallLayer);
+            _transform.AnchorEntity((xeno, Transform(xeno)));
+        }
+        else
+            _speed.RefreshMovementSpeedModifiers(xeno);
 
         FortifyUpdated(xeno);
     }
@@ -165,8 +218,17 @@ public sealed class XenoFortifySystem : EntitySystem
             Dirty(xeno.Owner, size);
         }
 
-        _fixtures.DestroyFixture(xeno, FixtureId);
-        _transform.Unanchor(xeno, Transform(xeno));
+        if (xeno.Comp.ChangeExplosionWeakness && TryComp<StunOnExplosionReceivedComponent>(xeno, out var explode))
+            _explode.ChangeExplosionStunResistance(xeno, explode, xeno.Comp.BaseWeakToExplosionStuns);
+
+        if (!xeno.Comp.CanMoveFortified)
+        {
+            _fixtures.DestroyFixture(xeno, FixtureId);
+            _transform.Unanchor(xeno, Transform(xeno));
+            _physics.TrySetBodyType(xeno, BodyType.KinematicController);
+        }
+        else
+            _speed.RefreshMovementSpeedModifiers(xeno);
 
         FortifyUpdated(xeno);
     }
@@ -181,6 +243,9 @@ public sealed class XenoFortifySystem : EntitySystem
             if (action.BaseEvent is XenoFortifyActionEvent)
                 _actions.SetToggled(actionId, xeno.Comp.Fortified);
         }
+
+        _armor.UpdateArmorValue((xeno, null));
+
 
         Dirty(xeno);
 

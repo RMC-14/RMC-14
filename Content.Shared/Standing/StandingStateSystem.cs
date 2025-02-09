@@ -29,6 +29,7 @@ namespace Content.Shared.Standing
             bool playSound = true,
             bool dropHeldItems = true,
             bool force = false,
+            bool changeCollision = false,
             StandingStateComponent? standingState = null,
             AppearanceComponent? appearance = null,
             HandsComponent? hands = null)
@@ -69,7 +70,7 @@ namespace Content.Shared.Standing
             _appearance.SetData(uid, RotationVisuals.RotationState, RotationState.Horizontal, appearance);
 
             // Change collision masks to allow going under certain entities like flaps and tables
-            if (TryComp(uid, out FixturesComponent? fixtureComponent))
+            if (changeCollision && TryComp(uid, out FixturesComponent? fixtureComponent))
             {
                 foreach (var (key, fixture) in fixtureComponent.Fixtures)
                 {

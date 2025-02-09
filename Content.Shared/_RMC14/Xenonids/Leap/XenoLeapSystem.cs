@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+using System.Numerics;
+using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Invisibility;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -11,10 +12,12 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Pulling.Systems;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Pulling.Events;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
+using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
@@ -34,14 +37,16 @@ public sealed class XenoLeapSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -52,6 +57,7 @@ public sealed class XenoLeapSystem : EntitySystem
 
         SubscribeLocalEvent<XenoLeapComponent, XenoLeapActionEvent>(OnXenoLeapAction);
         SubscribeLocalEvent<XenoLeapComponent, XenoLeapDoAfterEvent>(OnXenoLeapDoAfter);
+        SubscribeLocalEvent<XenoLeapComponent, MeleeHitEvent>(OnXenoLeapMelee);
 
         SubscribeLocalEvent<XenoLeapingComponent, StartCollideEvent>(OnXenoLeapingDoHit);
         SubscribeLocalEvent<XenoLeapingComponent, ComponentRemove>(OnXenoLeapingRemove);
@@ -62,6 +68,9 @@ public sealed class XenoLeapSystem : EntitySystem
 
     private void OnXenoLeapAction(Entity<XenoLeapComponent> xeno, ref XenoLeapActionEvent args)
     {
+        if (args.Handled)
+            return;
+
         var attempt = new XenoLeapAttemptEvent();
         RaiseLocalEvent(xeno, ref attempt);
 
@@ -115,8 +124,7 @@ public sealed class XenoLeapSystem : EntitySystem
             return;
         }
 
-        if (TryComp(xeno, out PullerComponent? puller) && TryComp(puller.Pulling, out PullableComponent? pullable))
-            _pulling.TryStopPull(puller.Pulling.Value, pullable, xeno);
+        _rmcPulling.TryStopAllPullsFromAndOn(xeno);
 
         var origin = _transform.GetMapCoordinates(xeno);
         var target = _transform.ToMapCoordinates(args.Coordinates);
@@ -146,6 +154,28 @@ public sealed class XenoLeapSystem : EntitySystem
 
             if (ApplyLeapingHitEffects((xeno, leaping), ent))
                 return;
+        }
+    }
+
+    private void OnXenoLeapMelee(Entity<XenoLeapComponent> xeno, ref MeleeHitEvent args)
+    {
+        if (!xeno.Comp.UnrootOnMelee)
+            return;
+
+        if (!args.IsHit || args.HitEntities.Count == 0)
+            return;
+
+        foreach (var entity in args.HitEntities)
+        {
+            if (!_xeno.CanAbilityAttackTarget(xeno, entity))
+                return;
+        
+            if (TryComp<SlowedDownComponent>(xeno, out var root) && root.SprintSpeedModifier == 0f)
+            {
+                RemComp<SlowedDownComponent>(xeno);
+                _movementSpeed.RefreshMovementSpeedModifiers(xeno);
+            }
+            break;
         }
     }
 
@@ -219,11 +249,12 @@ public sealed class XenoLeapSystem : EntitySystem
             victim.RecoverAt = _timing.CurTime + xeno.Comp.ParalyzeTime;
             Dirty(target, victim);
 
+            _stun.TrySlowdown(xeno, xeno.Comp.MoveDelayTime, true, 0f, 0f);
+
             if (_net.IsServer)
                 _stun.TryParalyze(target, xeno.Comp.ParalyzeTime, true);
         }
 
-        _stun.TryStun(xeno, xeno.Comp.MoveDelayTime, true);
         var ev = new XenoLeapHitEvent(xeno, target);
         RaiseLocalEvent(xeno, ref ev);
 

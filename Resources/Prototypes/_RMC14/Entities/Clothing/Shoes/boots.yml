@@ -22,6 +22,10 @@
         whitelist:
           tags:
           - Knife
+          - Holdout
+          - Screwdriver
+          - RMCScalpel
+          - ThrowingKnife
         startingItem: RMCM5Bayonet
   - type: CMItemSlots
     startingItem: RMCM5Bayonet
@@ -39,7 +43,7 @@
     layers:
     - state: icon
     - state: filled
-      map: [ "enum.CMItemSlotsLayers.Filled" ]
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/black.rsi
   - type: ContainerContainer
@@ -54,6 +58,9 @@
         whitelist:
           tags:
           - Knife
+          - Holdout
+          - Screwdriver
+          - RMCScalpel
   - type: Matchbox
   - type: CMHolster
   - type: CMItemSlots
@@ -118,7 +125,19 @@
   description: These synth-leather boots seem high quality when first worn, but quickly detoriate, especially in the environments the corporate security members these are issued to operate in. Still, better than nothing.
 
 
-# PMC 
+# SPP
+- type: entity
+  parent: CMBootsBrown
+  id: RMCBootsSPP
+  name: military combat boots
+
+- type: entity
+  parent: [RMCItemSlotM5Bayonet, RMCBootsSPP] # TODO RMC14 SPP Bayonet
+  id: RMCBootsSPPFilled
+  suffix: Filled
+
+
+# PMC
 - type: entity
   parent: CMBootsBlack
   id: RMCBootsPMC

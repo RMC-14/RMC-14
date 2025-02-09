@@ -5,14 +5,14 @@
   description: The Aegis Battlefield Armaments M-63 submachinegun. Occasionally carried by light-infantry, scouts, engineers and medics.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/desert.rsi
     layers:
-    - state: base
+    - state: bolt-open
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/m63/desert.rsi
   - type: Gun
     shotsPerBurst: 3
     soundGunshot:
@@ -40,6 +40,9 @@
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 4
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1
+    accuracyMultiplierUnwielded: 0.75
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -52,6 +55,7 @@
           - CMMagazineSMGM63
           - CMMagazineSMGM63AP
           - CMMagazineSMGM63Ext
+          - RMCMagazineSMGM63Rubber
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -87,7 +91,7 @@
           - RMCAttachmentVerticalGrip
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.715, 0.092
+      rmc-aslot-barrel: 0.71875, 0.03125
       rmc-aslot-rail: 0.032, 0.155
       rmc-aslot-stock: -0.81, 0.032
       rmc-aslot-underbarrel: 0.25, -0.25
@@ -95,9 +99,16 @@
     tags:
     - RMCWeaponSMG
     - RMCWeaponSMGM63
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/SMGs/m63/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/SMGs/m63/desert.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/SMGs/m63/classic.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/SMGs/m63/snow.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/SMGs/m63/urban.rsi
 
 - type: entity
-  parent: BaseMagazineRifle
+  parent: CMMagazineRifleBase
   id: CMMagazineSMGM63
   name: "M63 magazine (10x20mm)"
   components:
@@ -125,6 +136,8 @@
     zeroVisible: false
     zeroOnlyOnEmpty: true
   - type: Appearance
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsSMG
 
 - type: entity
   parent: CMMagazineSMGM63
@@ -149,6 +162,8 @@
     tags:
     - CMMagazineSmg
     - CMMagazineSMGM63AP
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsSMGAP
 
 - type: entity
   parent: CMMagazineSMGM63
@@ -196,7 +211,7 @@
 - type: entity
   parent: RMCBaseBullet
   id: Bullet10x20mm
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
@@ -211,11 +226,16 @@
       falloff: 6
   - type: CMArmorPiercing
     amount: 5
+  - type: RMCProjectileAccuracy
+    accuracy: 100
+    thresholds:
+    - range: 4
+      falloff: 10
 
 - type: entity
   parent: Bullet10x20mm
   id: Bullet10x20mmAP
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
