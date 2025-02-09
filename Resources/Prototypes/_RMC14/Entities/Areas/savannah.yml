@@ -506,3 +506,15 @@
   - RMCAreaSavannahLifeboatAmidship
   id: RMCAreaSavannahLifeboatPort
   name: Lifeboat Docking Port
+
+- type: entity
+  parent:
+  - RMCAreaSavannah
+  id: RMCAreaSavannahMemorial
+  name: Memorial
+
+- type: entity
+  parent:
+  - RMCAreaSavannah
+  id: RMCAreaSavannahChurch
+  name: Church
