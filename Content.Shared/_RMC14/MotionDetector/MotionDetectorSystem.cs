@@ -46,8 +46,8 @@ public sealed class MotionDetectorSystem : EntitySystem
 
         SubscribeLocalEvent<MotionDetectorComponent, UseInHandEvent>(OnMotionDetectorUseInHand);
         SubscribeLocalEvent<MotionDetectorComponent, GetVerbsEvent<AlternativeVerb>>(OnMotionDetectorGetVerbs);
-        SubscribeLocalEvent<MotionDetectorComponent, DroppedEvent>(OnMotionDetectorDisable);
-        SubscribeLocalEvent<MotionDetectorComponent, RMCDroppedEvent>(OnMotionDetectorDisable);
+        SubscribeLocalEvent<MotionDetectorComponent, DroppedEvent>(OnMotionDetectorDropped);
+        SubscribeLocalEvent<MotionDetectorComponent, RMCDroppedEvent>(OnMotionDetectorDropped);
         SubscribeLocalEvent<MotionDetectorComponent, ExaminedEvent>(OnMotionDetectorExamined);
 
         SubscribeLocalEvent<ToggleableMotionDetectorComponent, GetItemActionsEvent>(OnGetItemActions);
@@ -107,8 +107,11 @@ public sealed class MotionDetectorSystem : EntitySystem
         });
     }
 
-    private void OnMotionDetectorDisable<T>(Entity<MotionDetectorComponent> ent, ref T args)
+    private void OnMotionDetectorDropped<T>(Entity<MotionDetectorComponent> ent, ref T args)
     {
+        if (!ent.Comp.DeactivateOnDrop)
+            return;
+
         ent.Comp.Enabled = false;
         Dirty(ent);
         UpdateAppearance(ent);

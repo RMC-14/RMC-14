@@ -57,6 +57,9 @@ public sealed partial class MotionDetectorComponent : Component, IDetectorCompon
 
     [DataField, AutoNetworkedField]
     public bool HandToggleable = true;
+
+    [DataField, AutoNetworkedField]
+    public bool DeactivateOnDrop = true;
 }
 
 [Serializable, NetSerializable]

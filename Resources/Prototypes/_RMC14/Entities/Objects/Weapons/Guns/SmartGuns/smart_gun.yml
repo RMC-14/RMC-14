@@ -133,6 +133,7 @@
   - type: IFFToggle
   - type: MotionDetector
     handToggleable: false
+    deactivateOnDrop: false
     toggleSound: null
   - type: SmartGun
   - type: AttachableHolder
