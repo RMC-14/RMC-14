@@ -45,7 +45,7 @@
 - type: entity
   parent: MarkerBase
   id: RMCSpawnerProvostMarshal
-  name: provost marshal spawner
+  name: provost spawner marshal
   suffix: Spawner, Admin, Low Law Understanding or Lower Rank
   components:
   - type: Sprite
@@ -57,7 +57,7 @@
 
 - type: entity
   id: RMCRandomHumanoidProvostMarshal
-  name: provost marshal ghost role
+  name: provost ghost role marshal
   suffix: Role, Admin, Low Law Understanding or Lower Rank
   components:
   - type: Sprite

@@ -29,7 +29,7 @@
 - type: entity
   parent: MarkerBase
   id: RMCSpawnerProvostChiefInspector
-  name: provost chief inspector spawner
+  name: provost spawner chief inspector
   suffix: Spawner, Player, High Law Understanding
   components:
   - type: Sprite
@@ -41,7 +41,7 @@
 
 - type: entity
   id: RMCRandomHumanoidProvostChiefInspector
-  name: provost chief inspector ghost role
+  name: provost ghost role chief inspector
   suffix: Role, Player, High Law Understanding
   components:
   - type: Sprite

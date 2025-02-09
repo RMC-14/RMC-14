@@ -45,7 +45,7 @@
 - type: entity
   parent: MarkerBase
   id: RMCSpawnerProvostDeputyMarshal
-  name: provost deputy marshal spawner
+  name: provost spawner deputy marshal
   suffix: Spawner, Whitelisted COs
   components:
   - type: Sprite
@@ -57,7 +57,7 @@
 
 - type: entity
   id: RMCRandomHumanoidProvostDeputyMarshal
-  name: provost deputy marshal ghost role
+  name: provost ghost role deputy marshal
   suffix: Role, Whitelisted COs
   components:
   - type: Sprite

@@ -38,7 +38,7 @@
 - type: entity
   parent: MarkerBase
   id: RMCSpawnerProvostTeamLeader
-  name: provost team leader spawner
+  name: provost spawner team leader
   suffix: Spawner, Player
   components:
   - type: Sprite
@@ -50,7 +50,7 @@
 
 - type: entity
   id: RMCRandomHumanoidProvostTeamLeader
-  name: provost team leader ghost role
+  name: provost ghost role team leader
   suffix: Role, Player
   components:
   - type: Sprite

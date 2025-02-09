@@ -29,7 +29,7 @@
 - type: entity
   parent: MarkerBase
   id: RMCSpawnerProvostAdvisor
-  name: provost advisor spawner
+  name: provost spawner advisor
   suffix: Spawner, Player, Low Law Understanding
   components:
   - type: Sprite
@@ -41,7 +41,7 @@
 
 - type: entity
   id: RMCRandomHumanoidProvostAdvisor
-  name: provost advisor ghost role
+  name: provost ghost role advisor
   suffix: Role, Player, Low Law Understanding
   components:
   - type: Sprite

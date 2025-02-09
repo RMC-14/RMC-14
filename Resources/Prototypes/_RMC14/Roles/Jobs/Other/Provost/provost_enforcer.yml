@@ -29,7 +29,7 @@
 - type: entity
   parent: MarkerBase
   id: RMCSpawnerProvostEnforcer
-  name: provost enforcer spawner
+  name: provost spawner enforcer
   suffix: Spawner, Player, Given Objective
   components:
   - type: Sprite
@@ -41,7 +41,7 @@
 
 - type: entity
   id: RMCRandomHumanoidProvostEnforcer
-  name: provost enforcer ghost role
+  name: provost ghost role enforcer
   suffix: Role, Player, Given Objective
   components:
   - type: Sprite
@@ -55,8 +55,8 @@
   id: RMCProvostEnforcer
   components:
   - type: GhostRole
-    name: rmc-ghost-role-information-enforcer-name
-    description: rmc-ghost-role-information-enforcer-description
+    name: rmc-ghost-role-information-provost-enforcer-name
+    description: rmc-ghost-role-information-provost-enforcer-description
     rules: ghost-role-information-nonantagonist-rules
     raffle:
       settings: short
