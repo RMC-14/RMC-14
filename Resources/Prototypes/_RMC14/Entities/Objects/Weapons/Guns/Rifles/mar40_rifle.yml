@@ -140,7 +140,7 @@
   components:
   - type: Tag
     tags:
-    - RMCMagazineRifle
+    - CMMagazineRifle
     - RMCMagazineRifleMAR40Ext
   - type: BallisticAmmoProvider
     mayTransfer: True
