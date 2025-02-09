@@ -65,6 +65,7 @@
     accuracyMultiplier: 1
     accuracyMultiplierUnwielded: 0.65
   - type: AttachableHolder
+    randomAttachmentChance: 0.38
     slots:
       rmc-aslot-barrel:
         whitelist:
@@ -73,10 +74,19 @@
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentSuppressor
           - RMCM5Bayonet
+        random:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCAttachmentRecoilCompensator
       rmc-aslot-rail:
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+        random:
           - RMCAttachmentMagneticHarness
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
@@ -85,6 +95,10 @@
           tags:
           - RMCAttachmentBipod
           - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentU7UnderbarrelShotgun
+        random:
+          - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentGyroscopicStabilizer
   - type: AttachableHolderVisuals
     offsets:
