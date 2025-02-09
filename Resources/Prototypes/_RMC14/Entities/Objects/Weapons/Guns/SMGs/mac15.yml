@@ -43,14 +43,14 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: CMMagazineSMGMAC15
+        startingItem: RMCMagazineSMGMAC15
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_reload.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
         priority: 2
         whitelist:
           tags:
-          - CMMagazineSMGMAC15
-          - CMMagazineSMGMAC15Ext
+          - RMCMagazineSMGMAC15
+          - RMCMagazineSMGMAC15Ext
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -86,20 +86,20 @@
 
 - type: entity
   parent: BaseMagazineRifle
-  id: CMMagazineSMGMAC15
+  id: RMCMagazineSMGMAC15
   name: MAC-15 magazine (9mm)
   description: A 9mm magazine for the MAC-15.
   components:
   - type: Tag
     tags:
-    - CMMagazineSmg
-    - CMMagazineSMGMAC15
+    - RMCMagazineSmg
+    - RMCMagazineSMGMAC15
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridge9mmSMGMAC15
-    proto: CMCartridge9mmSMGMAC15
+      - RMCCartridge9mmSMGMAC15
+    proto: RMCCartridge9mmSMGMAC15
     capacity: 25
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mac15.rsi
@@ -116,8 +116,8 @@
   - type: Appearance
 
 - type: entity
-  parent: CMMagazineSMGMAC15
-  id: CMMagazineSMGMAC15Ext
+  parent: RMCMagazineSMGMAC15
+  id: RMCMagazineSMGMAC15Ext
   name: MAC-15 extended magazine (9mm)
   components:
   - type: BallisticAmmoProvider
@@ -131,26 +131,26 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: Tag
     tags:
-    - CMMagazineSmg
-    - CMMagazineSMGMAC15Ext
+    - RMCMagazineSmg
+    - RMCMagazineSMGMAC15Ext
 
 - type: entity
   parent: CMCartridge9mmSMG
-  id: CMCartridge9mmSMGMAC15
+  id: RMCCartridge9mmSMGMAC15
   description: A 9mm cartridge for the mac-15 submachinegun.
   components:
   - type: Tag
     tags:
     - Cartridge
-    - CMCartridge9mmSMGMAC15
+    - RMCCartridge9mmSMGMAC15
   - type: CartridgeAmmo
     proto: Bullet10x20mm
 
 - type: Tag
-  id: CMMagazineSMGMAC15
+  id: RMCMagazineSMGMAC15
 
 - type: Tag
-  id: CMCartridge9mmSMGMAC15
+  id: RMCCartridge9mmSMGMAC15
 
 - type: Tag
-  id: CMMagazineSMGMAC15Ext
+  id: RMCMagazineSMGMAC15Ext
