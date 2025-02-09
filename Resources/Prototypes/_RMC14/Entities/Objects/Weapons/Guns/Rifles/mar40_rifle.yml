@@ -2,7 +2,7 @@
   parent: CMBaseWeaponRifle
   name: MAR-40 Assault Rifle
   id: WeaponRifleMAR40
-  description: A cheap, reliable assault rifle chambered in 7.62x39mm. Commonly found in the hands of criminals or mercenaries, or in the hands of the UPP or CLF.
+  description: A cheap, reliable assault rifle chambered in 7.62x39mm. Commonly found in the hands of criminals or mercenaries, or in the hands of the SPP or CLF.
   suffix: Filled
   components:
   - type: Sprite
