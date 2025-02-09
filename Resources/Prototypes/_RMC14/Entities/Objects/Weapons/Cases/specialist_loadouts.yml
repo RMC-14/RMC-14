@@ -88,7 +88,7 @@
     - id: RMCMK80
     - id: CMMagazinePistolMK80
       amount: 2
-    - id: RMCExplosiveBreachingCharge # TODO RMC14 RMCPlasticExplosives
+    - id: RMCExplosivePlastic
       amount: 2
     - id: RMCBinoculars
     - id: RMCKitLoader
@@ -133,7 +133,7 @@
       amount: 2
     - id: WeaponRifleM4SPRCustom
     - id: RMCThermalTarpFolded
-    - id: RMCExplosiveBreachingCharge # TODO RMC14 RMCPlasticExplosives
+    - id: RMCExplosivePlastic
       amount: 2
     - id: CMEncryptionKeyJTAC
     - id: RMCLaserDesignatorScout

@@ -87,8 +87,8 @@
       #  amount: 8
       #- id: M40 MFHS Metal Foam Grenade
       #  amount: 6
-      #- id: Plastic Explosives
-      #  amount: 3
+      - id: RMCExplosivePlastic
+        amount: 3
       - id: RMCExplosiveBreachingCharge
         amount: 2
     - name: Webbings
@@ -197,7 +197,7 @@
         amount: 5
       - id: RMCPouchMagazinePistolLarge
         amount: 5
-      #- id: Fuel Tank Strap Pouch
+      #- id: TODO RMC14 Fuel Tank Strap Pouch
       #  amount: 4
       - id: RMCPouchGeneralLarge
         amount: 1
@@ -213,8 +213,8 @@
         amount: 4
       - id: CMMaskGas
         amount: 10
-      #- id: M89-S Signal Flare Pack
-      #   amount: 2
+      - id: RMCPackFlareCAS
+        amount: 2
       - id: CMPackFlare
         amount: 10
       - id: RMCScabbardMacheteFilled
@@ -223,8 +223,8 @@
       #   amount: 3
       - id: RMCMotionDetector
         amount: 4
-      #- id: Data Detector
-      #  amount: 4
+      - id: RMCIntelDetector
+        amount: 4
       - id: RMCBinoculars
         amount: 2
       - id: RMCRangefinder
@@ -237,8 +237,8 @@
         amount: 3
       - id: RMCPowerCellHigh
         amount: 1
-      #- id: Fulton Device Stack
-      #  amount: 1
+      - id: RMCFulton20
+        amount: 1
       #- id: Sentry Gun Network Laptop
       #   amount: 4
       - id: CMPamphletJTAC
@@ -322,8 +322,8 @@
         amount: 12
       - id: CMMagazineRifleM54CAP
         amount: 10
-      #- id: M4A3 AP Magazine (9mm)
-      #  amount: 2
+      - id: RMCMagazinePistolM1984AP
+        amount: 2
     - name: Extended ammunition
       entries:
       - id: CMMagazineSMGM63Ext

@@ -222,6 +222,8 @@
   - type: XenoInhands
     prefix: queen
   - type: XenoOmitNumber
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 1.4
 
 - type: entity
   id: XenoLeaderPheromoneRelay

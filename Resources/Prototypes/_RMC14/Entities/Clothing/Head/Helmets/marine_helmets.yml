@@ -321,3 +321,30 @@
       Snow: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/urban.rsi
+
+- type: entity
+  parent: ArmorHelmetM10
+  id: RMCArmorHelmetM12Dust
+  name: M12 pattern dust helmet
+  description: An experimental brain-bucket. A dust ruffle hangs from back instead of the standard lobster shell design. Moderately better at deflecting blunt objects at the cost of humiliation, can also hold a second visor optic. But who will be laughing at the memorial? Not you, you'll be busy getting medals for your fantastic leadership.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m12/jungle.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m12/jungle.rsi
+  - type: CMArmor
+    armor: 25
+    bio: 25 # TODO RMC14 max 2 visors
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Helmets/m12/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Helmets/m12/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Helmets/m12/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Helmets/m12/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Helmets/m12/urban.rsi
+
+- type: entity
+  parent: RMCArmorHelmetM12Dust
+  id: RMCArmorHelmetM12Intel
+  name: XM12 pattern intelligence helmet
+  description: An experimental brain-bucket. A dust ruffle hangs from back. Moderately better at deflecting blunt objects at the cost of humiliation, can also hold a second visor optic. But who will be laughing at the memorial? Not you, you'll be busy getting medals for your intel work.

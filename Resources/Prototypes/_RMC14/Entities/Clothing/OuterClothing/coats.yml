@@ -17,7 +17,7 @@
       - PillCanister
       - CMSurgicalCase
   - type: PlaytimeMedalHolder
-  
+
 - type: entity
   abstract: True
   parent: [RMCBaseJacket, BaseFoldable]
@@ -123,7 +123,7 @@
       - Pen
       - RMCMacheteScabbard
       #TODO Katana scabbard
-      - RMCMotionDetector
+      - RMCDetector
 
 
 - type: entity
@@ -156,7 +156,7 @@
       - RMCMatebaHolster
       - RMCMacheteScabbard
       #TODO Katana scabbard
-      - RMCMotionDetector
+      - RMCMDetector
       #TODO Walkman
 
 - type: entity
@@ -203,7 +203,7 @@
       - Pen
       - Crowbar
       - Radio
-      - RMCMotionDetector
+      - RMCDetector
 
 - type: entity
   abstract: true
@@ -220,8 +220,8 @@
       - GasTank
       - DiscreteHealthAnalyzer
       - Flashlight
-      
-      
+
+
 
 # TODO RMC14 chef/medical apron have a shared list
 

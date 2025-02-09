@@ -292,6 +292,14 @@
       - CMMagazinePistol
       - RMCMagazineRevolver
 
+- type: entity
+  parent: RMCPouchMagazinePistol
+  id: RMCPouchMagazinePistolFilledMateba
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMateba
+      amount: 4
 
 # Large Pistol Magazine Pouch
 - type: entity
@@ -351,6 +359,23 @@
       tags:
       - RMCShellShotgun
 
+- type: entity
+  parent: RMCPouchShotgunLarge
+  id: RMCPouchShotgunLargeBeanbag
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBeanbag
+      amount: 7
+
+- type: entity
+  parent: RMCPouchShotgunLarge
+  id: RMCPouchShotgunLargeSlugs
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunSlugs
+      amount: 7
 
 # Expolosives Pouch
 - type: entity
@@ -382,16 +407,20 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/document.rsi
   - type: Storage
+    quickInsert: true
+    areaInsert: true
+    quickInsertCooldown: 0
     maxItemSize: Normal
     grid:
-    - 0,0,21,1 #21 slots
+    - 0,0,13,5 #21 slots
     whitelist:
       tags:
       - Document
       - Folder
       - Write
+      - RMCIntelItem
   - type: FixedItemSizeStorage
-    size: 1,2
+  - type: Dumpable
 
 
 # Small Documents Pouch

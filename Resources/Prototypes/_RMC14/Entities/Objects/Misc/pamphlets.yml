@@ -121,6 +121,8 @@
   - type: SkillPamphlet
     addSkills:
       RMCSkillIntel: 1
+    addComps:
+      - type: ViewIntelObjectives
     bypassLimit: true
 
 - type: entity
