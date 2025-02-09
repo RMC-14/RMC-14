@@ -72,7 +72,7 @@
       - id: RMCPouchFlareFilled
         name: Flare pouch (Full)
         recommended: true
-      #    CMSmallDocumentPouch #TODO: Make this
+      - id: RMCPouchDocumentSmall
       - id: RMCPouchMagazine
       - id: RMCPouchShotgun
       - id: RMCPouchGeneral
