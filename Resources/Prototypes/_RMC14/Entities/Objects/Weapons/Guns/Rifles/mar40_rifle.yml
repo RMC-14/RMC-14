@@ -53,14 +53,14 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: CMMagazineRifleMAR40
+        startingItem: RMCMagazineRifleMAR40
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_reload.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_unload.ogg
         priority: 2
         whitelist:
           tags:
-          - CMMagazineRifleMAR40
-          - CMMagazineRifleMAR40Ext
+          - RMCMagazineRifleMAR40
+          - RMCMagazineRifleMAR40Ext
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1
     accuracyMultiplierUnwielded: 0.65
@@ -94,20 +94,20 @@
 
 - type: entity
   parent: CMMagazineRifleBase
-  id: CMMagazineRifleMAR40
+  id: RMCMagazineRifleMAR40
   name: MAR magazine (7.62x39mm)
   description: A 7.62x39mm magazine for the MAR series of firearms.
   components:
   - type: Tag
     tags:
-    - CMMagazineRifle
-    - CMMagazineRifleMAR40
+    - RMCMagazineRifle
+    - RMCMagazineRifleMAR40
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridgeRifleMAR40
-    proto: CMCartridgeRifleMAR40
+      - RMCCartridgeRifleMAR40
+    proto: RMCCartridgeRifleMAR40
     capacity: 40
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mar40.rsi
@@ -119,21 +119,21 @@
   - type: Appearance
 
 - type: entity
-  parent: CMMagazineRifleMAR40
-  id: CMMagazineRifleMAR40Ext
+  parent: RMCMagazineRifleMAR40
+  id: RMCMagazineRifleMAR40Ext
   name: MAR extended magazine (7.62x39mm)
   description: A 7.62x39mm MAR magazine, this one carries more rounds than the average magazine.
   components:
   - type: Tag
     tags:
-    - CMMagazineRifle
-    - CMMagazineRifleMAR40Ext
+    - RMCMagazineRifle
+    - RMCMagazineRifleMAR40Ext
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridgeRifleMAR40
-    proto: CMCartridgeRifleMAR40
+      - RMCCartridgeRifleMAR40
+    proto: RMCCartridgeRifleMAR40
     capacity: 60
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mar40e.rsi
@@ -150,14 +150,14 @@
 
 - type: entity
   parent: CMBaseCartridgeRifle
-  id: CMCartridgeRifleMAR40
+  id: RMCCartridgeRifleMAR40
   name: Cartridge (7.62x39mm)
   description: A 7.62x39mm rifle cartridge
   components:
   - type: Tag
     tags:
     - Cartridge
-    - CMCartridgeRifleMAR40
+    - RMCCartridgeRifleMAR40
   - type: CartridgeAmmo
     proto: BulletRifleMAR40
 
@@ -172,10 +172,10 @@
         Piercing: 55
 
 - type: Tag
-  id: CMMagazineRifleMAR40
+  id: RMCMagazineRifleMAR40
 
 - type: Tag
-  id: CMCartridgeRifleMAR40
+  id: RMCCartridgeRifleMAR40
 
 - type: Tag
-  id: CMMagazineRifleMAR40Ext
+  id: RMCMagazineRifleMAR40Ext
