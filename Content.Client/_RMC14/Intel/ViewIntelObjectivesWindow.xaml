@@ -18,7 +18,7 @@
             <RichTextLabel Text="[color=#5B88B0]Documents:[/color]" MinWidth="200" />
             <Label Name="DocumentsLabel" Access="Public" />
         </BoxContainer>
-        <BoxContainer Orientation="Horizontal">
+        <BoxContainer Orientation="Horizontal" Visible="False"> <!-- TODO RMC14 -->
             <RichTextLabel Text="[color=#5B88B0]Upload data:[/color]" MinWidth="200" />
             <Label Name="UploadDataLabel" Access="Public" />
         </BoxContainer>

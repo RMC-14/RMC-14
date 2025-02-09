@@ -622,7 +622,7 @@ public sealed class IntelSystem : EntitySystem
 
             tree.Comp.Tree.Documents.Total = _paperScraps + _progressReports + _folders + _technicalManuals;
             tree.Comp.Tree.UploadData.Total = _disks;
-            tree.Comp.Tree.RetrieveItems.Total = tree.Comp.Tree.Documents.Total + tree.Comp.Tree.UploadData.Total;
+            tree.Comp.Tree.RetrieveItems.Total = tree.Comp.Tree.Documents.Total + tree.Comp.Tree.UploadData.Total - _disks; // TODO RMC14 remove - disks
 
             if (mediums.Count > 0)
             {
