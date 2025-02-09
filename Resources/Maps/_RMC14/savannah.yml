@@ -25065,12 +25065,6 @@ entities:
     - type: Transform
       pos: -9.5,-7.5
       parent: 1
-- proto: CMEffectGrab
-  entities:
-  - uid: 2898
-    components:
-    - type: Transform
-      parent: 5110
 - proto: CMEncryptionKeyCommand
   entities:
   - uid: 1381
