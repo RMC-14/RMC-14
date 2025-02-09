@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed boiler gas spreading one less tile than intended.
-    type: Fix
-  id: 808
-  time: '2024-10-09T05:17:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4361
 - author: CyberTropic
   changes:
   - message: Added magazine boxes for handfuls of shotgun shells.
@@ -5097,5 +5090,14 @@
   id: 1307
   time: '2025-02-09T01:52:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5444
+- author: Farrellka
+  changes:
+  - message: Removed the old long ears for human!
+    type: Remove
+  - message: Added more long ears for human!
+    type: Add
+  id: 1308
+  time: '2025-02-09T02:06:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5170
 Name: RMC14
 Order: -1
