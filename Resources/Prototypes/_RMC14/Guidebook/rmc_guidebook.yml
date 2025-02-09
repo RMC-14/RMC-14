@@ -42,29 +42,36 @@
 
 - type: guideEntry
   parent: RMC
-  id: RMCGuideRoleCombatTechnician
+  id: RMCGuideRoleQueen
   priority: 2
+  name: "Queen Guide"
+  text: "/ServerInfo/Guidebook/_RMC14/NewPlayerGuide/RMCGuideRoleQueen.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideRoleCombatTechnician
+  priority: 3
   name: "Combat Technician"
   text: "/ServerInfo/Guidebook/_RMC14/NewPlayerGuide/RMCGuideRoleCombatTechnician.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCGuideCommunicationsTowers
-  priority: 3
+  priority: 4
   name: "Communications Towers Guide"
   text: "/ServerInfo/Guidebook/_RMC14/NewPlayerGuide/RMCGuideCommunicationsTowers.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleMaintenanceTechnician
-  priority: 4
+  priority: 5
   name: "Maintenance Technician"
   text: "/ServerInfo/Guidebook/_RMC14/NewPlayerGuide/RMCGuideRoleMaintenanceTechnician.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCMedical
-  priority: 5
+  priority: 6
   name: "Medical"
   text: "/ServerInfo/Guidebook/_RMC14/Medical/RMCMedical.xml"
   children:
@@ -73,6 +80,6 @@
 - type: guideEntry
   parent: RMC
   id: RMCRequisitions
-  priority: 6
+  priority: 7
   name: "Requisitions"
   text: "/ServerInfo/Guidebook/_RMC14/RMCRequisitions.xml"
