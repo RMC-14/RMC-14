@@ -49,7 +49,7 @@
     size: Tiny
   - type: IntelReadObjective
     value: 0.2
-    time: 6
+    delay: 6
   - type: IntelClues
     clue: rmc-intel-clue-progress-report
     category: rmc-intel-reports
@@ -67,7 +67,7 @@
     size: Tiny
   - type: IntelReadObjective
     value: 0.2
-    time: 4
+    delay: 4
   - type: IntelRequires
     requiresCount: 2
   - type: IntelClues
@@ -87,7 +87,7 @@
     size: Tiny
   - type: IntelReadObjective
     value: 0.35
-    time: 20
+    delay: 20
   - type: IntelRequires
     requiresCount: 2
   - type: IntelClues
@@ -112,7 +112,7 @@
   suffix: Intel, Experimental Device
   components:
   - type: IntelClues
-    clue: rmc-intel-experimental-device
+    clue: rmc-intel-clue-experimental-device
 
 - type: entity
   parent: RMCCommunicationsConsoleBase

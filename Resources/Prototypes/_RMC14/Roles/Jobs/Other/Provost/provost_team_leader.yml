@@ -24,7 +24,7 @@
         RMCSkillFirearms: 1
         RMCSkillFireman: 2
         RMCSkillIntel: 1
-        RMCSkillJTAC: 3
+        RMCSkillJtac: 3
         RMCSkillLeadership: 2
         RMCSkillMedical: 1
         RMCSkillMeleeWeapons: 1
@@ -81,7 +81,7 @@
       RMCSkillFirearms: 1
       RMCSkillFireman: 2
       RMCSkillIntel: 2
-      RMCSkillJTAC: 4
+      RMCSkillJtac: 4
       RMCSkillLeadership: 3
       RMCSkillMedical: 3
       RMCSkillMeleeWeapons: 1
@@ -118,7 +118,7 @@
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconProvostTeamLeadeer
+  id: RMCJobIconProvostTeamLeader
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_pvtml

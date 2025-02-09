@@ -66,10 +66,10 @@ public sealed class IntelSystem : EntitySystem
     private static readonly EntProtoId ProgressReportProto = "RMCIntelProgressReport";
     private static readonly EntProtoId FolderProto = "RMCIntelFolder";
     private static readonly EntProtoId TechnicalManualProto = "RMCIntelTechnicalManual";
-    private static readonly EntProtoId DiskProto = "RMCIntelDisk";
+    // private static readonly EntProtoId DiskProto = "RMCIntelDisk";
     private static readonly EntProtoId ExperimentalDevicesProto = "RMCIntelRetrieveHealthAnalyzer";
-    private static readonly EntProtoId ResearchPaperProto = "RMCIntelExperimentalDevice";
-    private static readonly EntProtoId VialBoxProto = "RMCIntelVialBox";
+    // private static readonly EntProtoId ResearchPaperProto = "RMCIntelResearchPaper";
+    // private static readonly EntProtoId VialBoxProto = "RMCIntelVialBox";
 
     private readonly Dictionary<IntelSpawnerType, float> _paperScrapChances = new()
     {
