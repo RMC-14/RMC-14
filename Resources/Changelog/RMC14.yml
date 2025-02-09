@@ -1,16 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Add hazard vests, hard hats, and rebreathers to maintenance tech vendors
-    type: Add
-  - message: Flashlights, penlights, and tripods no longer use powercells and won't
-      run out of power
-    type: Fix
-  id: 807
-  time: '2024-10-09T02:08:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4328
-- author: Vermidia
-  changes:
   - message: Fixed boiler gas spreading one less tile than intended.
     type: Fix
   id: 808
@@ -5096,5 +5086,16 @@
   id: 1306
   time: '2025-02-08T11:57:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5542
+- author: Dicerson
+  changes:
+  - message: Spam cans are now available to be built in the construction menu, for
+      1 Cardboard per can.
+    type: Add
+  - message: Alt-Clicking on a spam can with a valid magazine in hand now load all
+      bullets from the magazine into the can after a 5 second doafter (Try HAR Magazines!)
+    type: Add
+  id: 1307
+  time: '2025-02-09T01:52:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5444
 Name: RMC14
 Order: -1
