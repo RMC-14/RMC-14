@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: FungiFellow
-  changes:
-  - message: Added the MOU53 Shotgun & the Double Barrel
-    type: Add
-  id: 814
-  time: '2024-10-10T01:00:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4141
 - author: Vermidia
   changes:
   - message: Fix shields blocking more damage on break than they should
@@ -5236,5 +5229,12 @@
   id: 1313
   time: '2025-02-09T21:57:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5562
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the small document pouch being half the intended size.
+    type: Fix
+  id: 1314
+  time: '2025-02-09T21:59:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5563
 Name: RMC14
 Order: -1
