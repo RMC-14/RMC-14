@@ -122,6 +122,13 @@
 - type: playTimeTracker
   id: CMJobProvostMarshal
 
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconProvostMarshal
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_pvm
+
 - type: entity
   parent: CMIDCardGold # TODO RMC14 provost id
   id: RMCIDCardProvostMarshal

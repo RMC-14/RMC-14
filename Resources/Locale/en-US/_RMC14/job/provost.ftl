@@ -36,7 +36,7 @@ rmc-ghost-role-information-inspector-description = ""
 rmc-job-name-provost-marshal = Provost Marshal
 rmc-job-description-provost-marshal = ""
 rmc-job-prefix-provost-marshal = Provost Marshal
-CMProvostDeputyMarshal = Provost Marshal
+CMProvostMarshal = Provost Marshal
 rmc-ghost-role-information-marshal-name = Provost Marshal
 rmc-ghost-role-information-marshal-description = ""
 

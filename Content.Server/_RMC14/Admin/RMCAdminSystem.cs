@@ -1,6 +1,8 @@
 ﻿using Content.Server._RMC14.TacticalMap;
 using Content.Server.EUI;
 using Content.Server.GameTicking;
+using Content.Server.Mind;
+using Content.Server.Popups;
 using Content.Server.Station.Systems;
 using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.CCVar;
@@ -19,7 +21,10 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly EuiManager _eui = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private readonly MindSystem _mind = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -32,6 +37,7 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
         base.Initialize();
 
         SubscribeLocalEvent<TacticalMapUpdatedEvent>(OnTacticalMapUpdated);
+        SubscribeLocalEvent<SpawnAsJobDialogEvent>(OnSpawnAsJobDialog);
 
         Subs.CVar(_config, RMCCVars.RMCTacticalMapAdminHistorySize, v => _tacticalMapAdminHistorySize = v, true);
     }
@@ -46,6 +52,32 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
         }
     }
 
+    private void OnSpawnAsJobDialog(SpawnAsJobDialogEvent ev)
+    {
+        if (GetEntity(ev.User) is not { Valid: true } user)
+            return;
+
+        if (GetEntity(ev.Target) is not { Valid: true } target ||
+            !TryComp(target, out ActorComponent? actor) ||
+            !_transform.TryGetMapOrGridCoordinates(target, out var coords))
+        {
+            _popup.PopupEntity(Loc.GetString("admin-player-spawn-failed"), user, user);
+            return;
+        }
+
+        var stationUid = _station.GetOwningStation(target);
+        var profile = _gameTicker.GetPlayerProfile(actor.PlayerSession);
+        var mobUid = _stationSpawning.SpawnPlayerCharacterOnStation(stationUid, ev.JobId, profile);
+
+        if (mobUid != null)
+            _transform.SetCoordinates(mobUid.Value, coords.Value);
+
+        var targetMind = _mind.GetMind(target);
+
+        if (targetMind != null)
+            _mind.TransferTo(targetMind.Value, mobUid, true);
+    }
+
     protected override void OpenBui(ICommonSession player, EntityUid target)
     {
         if (!CanUse(player))
@@ -54,7 +86,8 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
         _eui.OpenEui(new RMCAdminEui(target), player);
     }
 
-    public EntityUid RandomizeMarine(EntityUid entity,
+    public EntityUid
+        RandomizeMarine(EntityUid entity,
         ProtoId<SpeciesPrototype>? species = null,
         ProtoId<StartingGearPrototype>? gear = null,
         ProtoId<JobPrototype>? job = null)
