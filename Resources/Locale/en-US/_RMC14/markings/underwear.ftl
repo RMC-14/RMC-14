@@ -10,6 +10,9 @@ marking-RMCUnderwearBoxersJungle-j_boxers = Boxers
 marking-RMCUnderwearBoxersSnow = Boxers (Snow)
 marking-RMCUnderwearBoxersSnow-s_boxers = Boxers
 
+marking-RMCUnderwearBoxersUrban = Boxers (Urban)
+marking-RMCUnderwearBoxersUrban-urban_boxers = Boxers
+
 marking-RMCUnderwearBriefs = Briefs (Tan)
 marking-RMCUnderwearBriefs-c_briefs = Briefs
 
@@ -21,6 +24,9 @@ marking-RMCUnderwearBriefsJungle-j_briefs = Briefs
 
 marking-RMCUnderwearBriefsSnow = Briefs (Snow)
 marking-RMCUnderwearBriefsSnow-s_briefs = Briefs
+
+marking-RMCUnderwearBriefsUrban = Briefs (Urban)
+marking-RMCUnderwearBriefsUrban-urban_briefs = Briefs
 
 marking-RMCUnderwearLowriders = Lowrides (Tan)
 marking-RMCUnderwearLowriders-c_lowriders = Lowrides
@@ -34,6 +40,9 @@ marking-RMCUnderwearLowridersJungle-j_lowriders = Lowrides
 marking-RMCUnderwearLowridersSnow = Lowrides (Snow)
 marking-RMCUnderwearLowridersSnow-s_lowriders = Lowrides
 
+marking-RMCUnderwearLowridersUrban = Lowrides (Urban)
+marking-RMCUnderwearLowridersUrban-urban_lowriders = Lowrides
+
 marking-RMCUnderwearSatin = Satin (Tan)
 marking-RMCUnderwearSatin-c_satin = Satin
 
@@ -45,3 +54,6 @@ marking-RMCUnderwearSatinJungle-j_satin = Satin
 
 marking-RMCUnderwearSatinSnow = Satin (Snow)
 marking-RMCUnderwearSatinSnow-s_satin = Satin
+
+marking-RMCUnderwearSatinUrban = Satin (Urban)
+marking-RMCUnderwearSatinUrban-urban_satin = Satin

@@ -70,6 +70,26 @@
     {
       "name": "d_satin",
       "directions": 4
+    },
+    {
+      "name": "urban_boxers",
+      "directions": 4
+    },
+    {
+      "name": "urban_lowriders",
+      "directions": 4
+    },
+    {
+      "name": "urban_briefs",
+      "directions": 4
+    },
+    {
+      "name": "urban_satin",
+      "directions": 4
+    },
+    {
+      "name": "urban_tanga",
+      "directions": 4
     }
   ]
 }
