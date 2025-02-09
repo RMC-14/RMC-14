@@ -1,7 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
-using Content.Shared._RMC14.Xenonids.Hook;
 using Content.Shared.Beam.Components;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Doors.Components;
