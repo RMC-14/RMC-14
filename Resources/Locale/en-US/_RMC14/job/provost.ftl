@@ -17,7 +17,7 @@ rmc-job-description-provost-deputy-marshal = ""
 rmc-job-prefix-deputy-marshal = Provost Deputy Marshal
 CMProvostDeputyMarshal = Provost Deputy Marshal
 rmc-ghost-role-information-provost-deputy-marshal-name = Provost Deputy Marshal
-rmc-ghost-role-information-provost-deputy-marshal-description =
+rmc-ghost-role-information-provost-deputy-marshal-description = ""
 
 rmc-job-name-provost-enforcer = Provost Enforcer
 rmc-job-description-provost-enforcer = ""
@@ -38,7 +38,7 @@ rmc-job-description-provost-marshal = ""
 rmc-job-prefix-provost-marshal = Provost Marshal
 CMProvostMarshal = Provost Marshal
 rmc-ghost-role-information-provost-marshal-name = Provost Marshal
-rmc-ghost-role-information-provost-marshal-description =
+rmc-ghost-role-information-provost-marshal-description = ""
 
 rmc-job-name-provost-team-leader = Provost Team Leader
 rmc-job-description-provost-team-leader = ""
