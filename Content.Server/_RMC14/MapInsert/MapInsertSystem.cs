@@ -1,21 +1,19 @@
 ﻿using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Map;
-using Content.Shared._RMC14.MapInsert;
 using Content.Shared.GameTicking;
 using Robust.Server.Physics;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
-using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.MapInsert;
 
-public sealed class MapInsertSystem : SharedMapInsertSystem
+public sealed class MapInsertSystem : EntitySystem
 {
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
