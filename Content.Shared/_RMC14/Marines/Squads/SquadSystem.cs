@@ -27,7 +27,7 @@ using Content.Shared.Radio.EntitySystems;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Storage;
-using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Whitelist;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -40,6 +40,7 @@ public sealed class SquadSystem : EntitySystem
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly EncryptionKeySystem _encryptionKey = default!;
+    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly SharedIdCardSystem _id = default!;
     [Dependency] private readonly SharedCMInventorySystem _cmInventory = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
@@ -54,7 +55,6 @@ public sealed class SquadSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedRMCBanSystem _rmcBan = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
 
     private static readonly ProtoId<JobPrototype> SquadLeaderJob = "CMSquadLeader";
     public static readonly EntProtoId<SquadTeamComponent> EchoSquadId = "SquadEcho";
@@ -95,6 +95,8 @@ public sealed class SquadSystem : EntitySystem
 
         SubscribeLocalEvent<SquadLeaderHeadsetComponent, EncryptionChannelsChangedEvent>(OnSquadLeaderHeadsetChannelsChanged);
         SubscribeLocalEvent<SquadLeaderHeadsetComponent, EntityTerminatingEvent>(OnSquadLeaderHeadsetTerminating);
+
+        SubscribeLocalEvent<AssignSquadComponent, MapInitEvent>(OnAssignSquadMapInit);
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
@@ -233,6 +235,18 @@ public sealed class SquadSystem : EntitySystem
         {
             leader.Headset = null;
             Dirty(ent.Comp.Leader, leader);
+        }
+    }
+
+    private void OnAssignSquadMapInit(Entity<AssignSquadComponent> ent, ref MapInitEvent args)
+    {
+        var query = EntityQueryEnumerator<SquadTeamComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (!_entityWhitelist.IsWhitelistPass(ent.Comp.Whitelist, uid))
+                continue;
+
+            AssignSquad(ent, (uid, comp), null);
         }
     }
 

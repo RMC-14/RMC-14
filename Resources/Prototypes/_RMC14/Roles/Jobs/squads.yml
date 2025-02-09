@@ -13,6 +13,7 @@
       CMSmartGunOperator: 1
       CMCombatTech: 3
       CMHospitalCorpsman: 4
+      CMIntelOfficer: 0
 
 - type: entity
   parent: SquadBase
@@ -116,7 +117,14 @@
     maxRoles:
       CMCombatTech: 3
       CMHospitalCorpsman: 4
-      CMSmartGunOperator: 0
-      CMWeaponsSpecialist: 0
-      CMFireteamLeader: 0
+      CMSmartGunOperator: 1 # for astor
+      CMWeaponsSpecialist: 1
+      CMFireteamLeader: 1
       CMSquadLeader: 0
+      CMIntelOfficer: 999999
+  - type: Tag
+    tags:
+    - RMCSquadEcho
+
+- type: Tag
+  id: RMCSquadEcho

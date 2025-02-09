@@ -43,6 +43,10 @@
     - type: JobPrefix
       prefix: cm-job-prefix-intel
     - type: ViewIntelObjectives
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadEcho
 
 - type: startingGear
   id: CMGearIntelOfficer
