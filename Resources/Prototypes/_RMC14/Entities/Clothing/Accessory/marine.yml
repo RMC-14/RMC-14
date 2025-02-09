@@ -30,7 +30,6 @@
   - type: ComponentToggler
     components:
     - type: OverwatchCamera
-  - type: RMCItemToggleClothingVisuals
   - type: GenericVisualizer
     visuals:
       enum.ToggleVisuals.Toggled:
@@ -43,4 +42,3 @@
     - RipOffOnInfection
 
 # Make worn sprite work
-# Make RipOffOnInfection tag actually do something
