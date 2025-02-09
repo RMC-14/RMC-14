@@ -39,6 +39,20 @@
     },
     {
       "name": "xeno_telegraph_lash"
+    },
+    {
+      "name": "xeno_telegraph_lash_anim",
+      "delays": [
+        [
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05,
+          0.05
+        ]
+      ]
     }
   ]
 }

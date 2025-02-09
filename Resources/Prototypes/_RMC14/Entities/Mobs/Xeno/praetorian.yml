@@ -138,6 +138,7 @@
   - type: XenoEvolution
     strains:
     - RMCXenoPraetorianDancer
+    - RMCXenoPraetorianOppressor
     - RMCXenoPraetorianVanguard
     - RMCXenoPraetorianWarden
   - type: AcidTrap
@@ -305,7 +306,7 @@
   suffix: Oppressor
   components:
   - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Praetorian/praetorian.rsi #TODO sprite
+    sprite: _RMC14/Mobs/Xenonids/Praetorian/praetorian.rsi #TODO needs new sprite
   - type: Xeno
     actionIds:
     - ActionXenoRest
@@ -313,13 +314,10 @@
     - ActionXenoWatch
     - ActionXenoTailSeize
     - ActionXenoAbduct
-    # - ActionXenoDislocate
-    # - ActionXenoTailLash
+    - ActionXenoDislocate
+    - ActionXenoTailLash
     - ActionXenoDevolve
     hidden: true
-#TODO passive Smackdown
-# Does 15 extra damage to downed/slowed/stunned/rooted targets per melee hit, checks armor
-# Plays alien_tail_attack sound
   - type: MeleeWeapon
     damage:
       groups:
@@ -355,3 +353,12 @@
   - type: XenoHook
   - type: XenoTailSeize
   - type: XenoAbduct
+  - type: XenoTailLash
+  - type: XenoDislocate
+    damage:
+      groups:
+        Brute: 20
+  - type: XenoSmackdown
+    damage:
+      groups:
+        Brute: 15

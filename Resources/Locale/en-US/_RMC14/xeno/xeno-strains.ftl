@@ -1,14 +1,24 @@
 ﻿rmc-xeno-strain-specialized-into = It has specialized into {INDEFINITE($strain)} {$strain}.
 
 rmc-xeno-dancer-name = Dancer
-rmc-xeno-dancer-description = You trade your spit, acid ball, acid spray, dash, and a small bit of armor for high single-target damage.
+rmc-xeno-dancer-description = You trade your spit, acid ball, acid spray, corrosive acid, dash, and a small bit of armor for high single-target damage.
    You gain the ability to:
    - Break walls and other simple structures with your slash attack.
-   - Cause enemies to be marked on slash and tailstab hits which effects your other abilities.
+   - Cause enemies to be marked on slash and tail stab hits which effects your other abilities.
    - Impale an enemy for your base slash damage and pierce some armor, hitting twice on marked.
    - Trip an enemy to disarm them, or stun them if marked.
    - Gain a temporary speed boost thats doubled around your enemies.
 rmc-xeno-dancer-popup = A performance fit for a Queen, this one will become my instrument of death.
+
+rmc-xeno-oppressor-name = Oppressor
+rmc-xeno-oppressor-description = You trade your tail stab, spit, acid ball, acid spray, corrosive acid, dash, and a small bit of your slash damage and speed for higher explosive resistance and abilities to manipulate the battlefield.
+   You gain the ability to:
+   - Break walls and other simple structures with your slash attack.
+   - Do extra damage with your slash on downed, immobile, or slowed foes.
+   - Seize an enemy with your tail to pull them in, or Abduct a line of foes.
+   - Lash the foes in front of you pushing them back and slowing them.
+   - Punch an enemy, knocking them back, or rooting and piercing armor instead if they're downed, immobile, or slowed.
+rmc-xeno-oppressor-popup = My reach is endless, this one will pull down the heavens.
 
 rmc-xeno-vanguard-name = Vanguard
 rmc-xeno-vanguard-description = You trade your spit, acid ball, acid spray, corrosive acid, and some health for a strong one hit shield that recharges out of combat.
@@ -47,7 +57,7 @@ rmc-xeno-healer-description = You lose your choice of resin secretions, a chunk 
 rmc-xeno-healer-popup = Divided we fall, united we win. We live for the hive, we die for the hive.
 
 rmc-xeno-resin-whisperer-name = Resin Whisperer
-rmc-xeno-resin-whisperer-description = You lose your corrosive acid, your ability to secrete thick resin, your ability to reinforce resin secretions, sacrifice your ability to plant weed nodes outside of weeds, and you sacrifice a fifth of your plasma reserves to enhance your vision and gain a stronger connection to the resin. You can now remotely place resin secretions including weed nodes up to a distance of twelve paces!
+rmc-xeno-resin-whisperer-description = You lose your corrosive acid, your ability to secrete thick resin, your ability to reinforce resin secretions, sacrifice your ability to plant weed nodes outside of weeds, and you sacrifice a fifth of your plasma reserves to enhance your vision and gain a stronger connection to the resin.
   You gain the ability to:
   - Secrete Resin and Weeds Remotely
 rmc-xeno-resin-whisperer-popup = We let the resin guide us. It whispers, so listen closely.

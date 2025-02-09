@@ -287,3 +287,5 @@ rmc-xeno-abduct-one = Our tail catches and slows one target!
 rmc-xeno-abduct-two = Our tail catches and roots two targets!
 rmc-xeno-abduct-more = Our tail catches and stuns {$targets} targets!
 
+# Tail Lash
+rmc-xeno-tail-lash-no-room = We don't have any room to do our tail lash!

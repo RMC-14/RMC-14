@@ -43,3 +43,11 @@
   - type: Tag
     tags:
     - HideContextMenu
+
+- type: entity
+  parent: RMCEffectXenoTelegraphLash
+  id: RMCEffectXenoTelegraphLashAnim
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: xeno_telegraph_lash_anim

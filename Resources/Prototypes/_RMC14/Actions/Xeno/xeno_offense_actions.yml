@@ -393,7 +393,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: punch
     event: !type:XenoPunchActionEvent
-    range: 1
+    range: 1.5
     useDelay: 4.5
     deselectOnMiss: false
   - type: XenoOffensiveAction
@@ -410,7 +410,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: fling
     event: !type:XenoFlingActionEvent
-    range: 1
+    range: 1.5
     useDelay: 7
     deselectOnMiss: false
   - type: XenoOffensiveAction
@@ -747,13 +747,14 @@
     range: 15
     useDelay: 15
     deselectOnMiss: false
+    checkCanAccess: false
   - type: ActionBlockIfResting
 
 - type: entity
   parent: ActionXenoBase
   id: ActionXenoAbduct
-  name: Abduct
-  description: TODO
+  name: Abduct (180)
+  description: Cast out a line that after a small doafter pulls in enemies towards you, disarming them. Catching 1 target slows them, 2 roots them, and 3 or more stuns them.
   components:
   - type: EntityWorldTargetAction
     itemIconStyle: NoItem
@@ -766,4 +767,42 @@
     deselectOnMiss: false
     checkCanAccess: false
   - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoTailLash
+  name: Tail Lash (80)
+  description: Fling back foes in a 2x3 area in targeted direction after a very short doafter. Also slows.
+  components:
+  - type: EntityWorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_tail_lash
+    event: !type:XenoTailLashActionEvent
+    range: 15 
+    useDelay: 13
+    deselectOnMiss: false
+    checkCanAccess: false
+  - type: ActionBlockIfResting
+
+- type: entity
+  id: ActionXenoDislocate
+  parent: ActionXenoBase
+  name: Dislocate (55)
+  description: Punch a targeted enemy, doing some damage and pushing them back. If the target is slowed, stunned, downed, or rooted, instead roots and completely pierces armor. Reduces the cooldown of Abduct and Tail Lash.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: punch
+    event: !type:XenoDislocateActionEvent
+    range: 1.5
+    useDelay: 10
+    deselectOnMiss: false
+  - type: XenoOffensiveAction
+  - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 55
 
