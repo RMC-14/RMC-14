@@ -92,7 +92,7 @@
   components:
   - type: Tag
     tags:
-    - RMCMagazineSmg
+    - CMMagazineSmg
     - RMCMagazineSMGMAC15
   - type: BallisticAmmoProvider
     mayTransfer: True
