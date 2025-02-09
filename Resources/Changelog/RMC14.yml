@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: TeaTotalTemplar
-  changes:
-  - message: Added the missing plasma cost to the Carrier's "Plant Resin Hole" ability
-      tooltip
-    type: Fix
-  id: 811
-  time: '2024-10-09T21:03:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4369
 - author: crystalHex
   changes:
   - message: Added the gardener drone. The gardener drone sacrifices its resin constructions
@@ -5239,5 +5231,12 @@
   id: 1310
   time: '2025-02-09T11:33:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5554
+- author: DrSmugleaf
+  changes:
+  - message: Added Nan 'Snow Bunny' Mazu figurine
+    type: Add
+  id: 1311
+  time: '2025-02-09T11:53:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5556
 Name: RMC14
 Order: -1
