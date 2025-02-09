@@ -45,7 +45,7 @@
         maxScatterModifier: 13
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
-        shotsToMaxScatter: 15
+        shotsToMaxScatter: 4
   - type: MagazineAmmoProvider
     autoEject: false
     soundAutoEject: null
