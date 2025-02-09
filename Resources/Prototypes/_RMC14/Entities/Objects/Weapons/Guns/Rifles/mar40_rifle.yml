@@ -114,7 +114,7 @@
   components:
   - type: Tag
     tags:
-    - RMCMagazineRifle
+    - CMMagazineRifle
     - RMCMagazineRifleMAR40
   - type: BallisticAmmoProvider
     mayTransfer: True
