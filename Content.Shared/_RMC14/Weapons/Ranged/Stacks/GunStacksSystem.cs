@@ -30,35 +30,17 @@ public sealed class GunStacksSystem : EntitySystem
         _selectiveFireQuery = GetEntityQuery<RMCSelectiveFireComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
 
-        SubscribeLocalEvent<GunStacksComponent, GetGunDamageModifierEvent>(OnStacksGetGunDamageModifier);
-        SubscribeLocalEvent<GunStacksComponent, GunGetFireRateEvent>(OnStacksGetGunFireRate);
         SubscribeLocalEvent<GunStacksComponent, AmmoShotEvent>(OnStacksAmmoShot);
-        SubscribeLocalEvent<GunStacksComponent, DroppedEvent>(OnStacksDropped);
+
+        SubscribeLocalEvent<GunStacksActiveComponent, GetGunDamageModifierEvent>(OnStacksActiveGetGunDamageModifier);
+        SubscribeLocalEvent<GunStacksActiveComponent, GunGetFireRateEvent>(OnStacksActiveGetGunFireRate);
+        SubscribeLocalEvent<GunStacksActiveComponent, DroppedEvent>(OnStacksActiveDropped);
 
         SubscribeLocalEvent<GunStacksProjectileComponent, ProjectileHitEvent>(OnStacksProjectileHit);
     }
 
-    private void OnStacksGetGunDamageModifier(Entity<GunStacksComponent> ent, ref GetGunDamageModifierEvent args)
-    {
-        if (ent.Comp.Hits > 0)
-            args.Multiplier += ent.Comp.DamageIncrease;
-    }
-
-    private void OnStacksGetGunFireRate(Entity<GunStacksComponent> ent, ref GunGetFireRateEvent args)
-    {
-        if (ent.Comp.Hits > 0)
-            args.FireRate = ent.Comp.SetFireRate;
-    }
-
     private void OnStacksAmmoShot(Entity<GunStacksComponent> ent, ref AmmoShotEvent args)
     {
-        var time = _timing.CurTime;
-        if (ent.Comp.Hits > 0 && time >= ent.Comp.LastHitAt + ent.Comp.StacksExpire)
-        {
-            ent.Comp.Hits = 0;
-            Dirty(ent);
-        }
-
         foreach (var bullet in args.FiredProjectiles)
         {
             var stacks = EnsureComp<GunStacksProjectileComponent>(bullet);
@@ -66,19 +48,45 @@ public sealed class GunStacksSystem : EntitySystem
             Dirty(bullet, stacks);
 
             var piercing = EnsureComp<CMArmorPiercingComponent>(bullet);
-            var ap = Math.Min(ent.Comp.MaxAP, ent.Comp.IncreaseAP * ent.Comp.Hits);
+            var shotsHit = 0;
+
+            if (TryComp<GunStacksActiveComponent>(ent, out var active))
+                shotsHit = active.Hits;
+
+            var ap = Math.Min(ent.Comp.MaxAP, ent.Comp.IncreaseAP * shotsHit);
             _rmcArmor.SetArmorPiercing((bullet, piercing), ap);
         }
     }
 
-    private void OnStacksDropped(Entity<GunStacksComponent> ent, ref DroppedEvent args)
+    private void OnStacksActiveGetGunDamageModifier(Entity<GunStacksActiveComponent> ent, ref GetGunDamageModifierEvent args)
+    {
+        if (!TryComp<GunStacksComponent>(ent, out var gunStacks))
+            return;
+
+        if (ent.Comp.Hits > 0)
+            args.Multiplier += gunStacks.DamageIncrease;
+    }
+
+    private void OnStacksActiveGetGunFireRate(Entity<GunStacksActiveComponent> ent, ref GunGetFireRateEvent args)
+    {
+        if (!TryComp<GunStacksComponent>(ent, out var gunStacks))
+            return;
+
+        if (ent.Comp.Hits > 0)
+            args.FireRate = gunStacks.SetFireRate;
+    }
+
+    private void OnStacksActiveDropped(Entity<GunStacksActiveComponent> ent, ref DroppedEvent args)
     {
         Reset(ent);
     }
 
     private void OnStacksProjectileHit(Entity<GunStacksProjectileComponent> ent, ref ProjectileHitEvent args)
     {
-        if (!_gunStacksQuery.TryComp(ent.Comp.Gun, out var gun))
+        if (ent.Comp.Gun == null)
+            return;
+
+        if (!_gunStacksQuery.HasComp(ent.Comp.Gun))
             return;
 
         if (TryComp(ent, out ProjectileComponent? projectile) &&
@@ -90,39 +98,55 @@ public sealed class GunStacksSystem : EntitySystem
         var target = args.Target;
         if (_xenoQuery.HasComp(target) && !_mobState.IsDead(target))
         {
+            if (!TryComp<GunStacksActiveComponent>(ent.Comp.Gun, out var gun))
+                gun = EnsureComp<GunStacksActiveComponent>(ent.Comp.Gun.Value);
+
             gun.Hits++;
-            gun.LastHitAt = _timing.CurTime;
+            gun.ExpireAt = _timing.CurTime + gun.StacksExpire;
             if (args.Shooter is { } shooter &&
                 _net.IsServer)
             {
-                var msg = gun.Hits == 1 ? "Bullseye!" : $"Bullseye! {gun.Hits} hits in a row!";
+                var msg = gun.Hits == 1 ? Loc.GetString("rmc-gun-stacks-hit-single") : Loc.GetString("rmc-gun-stacks-hit-multiple", ("hits", gun.Hits));
                 _popup.PopupEntity(msg, shooter, shooter);
             }
         }
-        else
-        {
-            if (gun.Hits > 0 &&
-                args.Shooter is { } shooter &&
-                _net.IsServer)
-            {
-                var msg = $"The {Name(ent.Comp.Gun.Value)} beeps as it loses its targeting data, and returns to normal firing procedures.";
-                _popup.PopupEntity(msg, shooter, shooter);
-            }
 
-            gun.Hits = 0;
-        }
-
-        _rmcGun.RefreshGunDamageMultiplier(ent.Owner);
-
-        if (_selectiveFireQuery.TryComp(ent.Comp.Gun, out var selective))
-            _rmcSelectiveFire.RefreshFireModeGunValues((ent.Comp.Gun.Value, selective));
+        RefreshGunStats(ent.Comp.Gun.Value);
 
         Dirty(ent);
     }
 
-    private void Reset(Entity<GunStacksComponent> gun)
+    private void Reset(Entity<GunStacksActiveComponent> gun)
     {
-        gun.Comp.Hits = 0;
-        Dirty(gun);
+        RemComp<GunStacksActiveComponent>(gun.Owner);
+        if (_net.IsServer)
+            _popup.PopupEntity(Loc.GetString("rmc-gun-stacks-reset", ("weapon", gun.Owner)), gun, PopupType.SmallCaution);
+
+        RefreshGunStats(gun.Owner);
+    }
+
+    private void RefreshGunStats(EntityUid gun)
+    {
+        _rmcGun.RefreshGunDamageMultiplier(gun);
+
+        if (_selectiveFireQuery.TryComp(gun, out var selective))
+        {
+            _rmcSelectiveFire.RefreshFireModeGunValues((gun, selective));
+            Dirty(gun, selective);
+        }
+    }
+
+    public override void Update(float frameTime)
+    {
+        var time = _timing.CurTime;
+
+        var gunStackQuery = EntityQueryEnumerator<GunStacksActiveComponent>();
+        while (gunStackQuery.MoveNext(out var uid, out var active))
+        {
+            if (active.ExpireAt > time)
+                continue;
+
+            Reset((uid, active));
+        }
     }
 }

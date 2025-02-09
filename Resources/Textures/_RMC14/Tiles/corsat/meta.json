@@ -1,0 +1,255 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/6b4eeea257437bd337dc64f006f2cf4411cfe0a7/icons/turf/floors/corsat.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "sterileplate"
+    },
+    {
+      "name": "retrosquareslightrough"
+    },
+    {
+      "name": "retrosquares"
+    },
+    {
+      "name": "lightspiral"
+    },
+    {
+      "name": "lightplate"
+    },
+    {
+      "name": "spiralwoodalt"
+    },
+    {
+      "name": "box"
+    },
+    {
+      "name": "gamma"
+    },
+    {
+      "name": "omega"
+    },
+    {
+      "name": "sigma"
+    },
+    {
+      "name": "theta"
+    },
+    {
+      "name": "damaged2"
+    },
+    {
+      "name": "damaged4"
+    },
+    {
+      "name": "damaged3"
+    },
+    {
+      "name": "damaged5"
+    },
+    {
+      "name": "floorscorched2"
+    },
+    {
+      "name": "damaged1"
+    },
+    {
+      "name": "floorscorched1"
+    },
+    {
+      "name": "plating"
+    },
+    {
+      "name": "platingdmg1"
+    },
+    {
+      "name": "platingdmg2"
+    },
+    {
+      "name": "platingdmg3"
+    },
+    {
+      "name": "arrow_south"
+    },
+    {
+      "name": "arrow_north"
+    },
+    {
+      "name": "arrow_east"
+    },
+    {
+      "name": "arrow_west"
+    },
+    {
+      "name": "marked"
+    },
+    {
+      "name": "cargo"
+    },
+    {
+      "name": "panelscorched"
+    },
+    {
+      "name": "officetiles"
+    },
+    {
+      "name": "spiraloffice"
+    },
+    {
+      "name": "spiralplate"
+    },
+    {
+      "name": "spiralblueoffice"
+    },
+    {
+      "name": "officesquares"
+    },
+    {
+      "name": "retrosquareslight"
+    },
+    {
+      "name": "browncorner",
+      "directions": 4
+    },
+    {
+      "name": "brown",
+      "directions": 8
+    },
+    {
+      "name": "yellowcorner",
+      "directions": 4
+    },
+    {
+      "name": "yellow",
+      "directions": 8
+    },
+    {
+      "name": "greencorner",
+      "directions": 4
+    },
+    {
+      "name": "green",
+      "directions": 8
+    },
+    {
+      "name": "greenwhitecorner",
+      "directions": 4
+    },
+    {
+      "name": "greenwhite",
+      "directions": 8
+    },
+    {
+      "name": "bluegrey",
+      "directions": 8
+    },
+    {
+      "name": "bluegreycorner",
+      "directions": 4
+    },
+    {
+      "name": "darkgreencorner",
+      "directions": 4
+    },
+    {
+      "name": "darkgreen",
+      "directions": 8
+    },
+    {
+      "name": "whitecorner",
+      "directions": 4
+    },
+    {
+      "name": "white",
+      "directions": 8
+    },
+    {
+      "name": "purplecorner",
+      "directions": 4
+    },
+    {
+      "name": "purple",
+      "directions": 8
+    },
+    {
+      "name": "purplewhitecorner",
+      "directions": 4
+    },
+    {
+      "name": "purplewhite",
+      "directions": 8
+    },
+    {
+      "name": "redcorner",
+      "directions": 4
+    },
+    {
+      "name": "red",
+      "directions": 8
+    },
+    {
+      "name": "bluecorner",
+      "directions": 4
+    },
+    {
+      "name": "blue",
+      "directions": 8
+    },
+    {
+      "name": "whitetancorner",
+      "directions": 4
+    },
+    {
+      "name": "whitetan",
+      "directions": 8
+    },
+    {
+      "name": "corsat_teleporter_static"
+    },
+    {
+      "name": "corsat_teleporter_dynamic",
+      "delays": [
+        [
+          0.2,
+          0.1,
+          0.1,
+          0.1,
+          0.05,
+          0.060000002,
+          0.07,
+          0.08,
+          0.1,
+          0.1,
+          0.1,
+          0.030000001,
+          0.060000002,
+          0.2,
+          0.2,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "tcomms",
+      "delays": [
+        [
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "tan"
+    },
+    {
+      "name": "whitebluefull"
+      "name": "marked"
+    }
+  ]
+}

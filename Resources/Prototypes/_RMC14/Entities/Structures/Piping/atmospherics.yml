@@ -1,13 +1,13 @@
 - type: entity
   parent: GasUnaryBase
   id: CMVentPump
-  name: vent
+  name: air vent
   description: Has a valve and pump attached to it.
   placement:
     mode: SnapgridCenter
   components:
   - type: Sprite
-    drawdepth: FloorObjects
+    drawdepth: FloorTiles # TODO RMC14 draw over weeds, below traps
     sprite: _RMC14/Structures/Piping/Atmospherics/vent_pump.rsi
     layers:
         - sprite: Structures/Piping/Atmospherics/pipe.rsi

@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Xenonids;
+﻿using System.Numerics;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Stunnable;
@@ -11,10 +12,11 @@ namespace Content.Shared._RMC14.Weapons.Melee;
 
 public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
 {
+    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
 
     private EntityQuery<MeleeWeaponComponent> _meleeWeaponQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
@@ -160,11 +162,20 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
     private void TryMeleeReset(EntityUid weaponUid, MeleeWeaponComponent weapon, bool disarm){
         if (!TryComp<MeleeResetComponent>(weaponUid, out var reset))
             return;
-        
+
         if (disarm)
             weapon.NextAttack = reset.OriginalTime;
 
         RemComp<MeleeResetComponent>(weaponUid);
         Dirty(weaponUid, weapon);
+    }
+
+    public void DoLunge(EntityUid user, EntityUid target)
+    {
+        var userXform = Transform(user);
+        var targetPos = _transform.GetWorldPosition(target);
+        var localPos = Vector2.Transform(targetPos, _transform.GetInvWorldMatrix(userXform));
+        localPos = userXform.LocalRotation.RotateVec(localPos);
+        _melee.DoLunge(user, target, Angle.Zero, localPos, null);
     }
 }

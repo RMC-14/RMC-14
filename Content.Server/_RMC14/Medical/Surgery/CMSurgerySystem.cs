@@ -11,7 +11,6 @@ using Content.Shared._RMC14.Medical.Wounds;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Interaction;
 using Content.Shared.Prototypes;
-using Content.Shared.Resist;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
@@ -111,7 +110,7 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
 
     private void OnStepClampBleedComplete(Entity<CMSurgeryClampBleedEffectComponent> ent, ref CMSurgeryStepEvent args)
     {
-        _wounds.RemoveWounds(ent.Owner, WoundType.Surgery);
+        _wounds.RemoveWounds(args.Body, WoundType.Surgery);
     }
 
     private void OnStepScreamComplete(Entity<CMSurgeryStepEmoteEffectComponent> ent, ref CMSurgeryStepEvent args)

@@ -1,0 +1,25 @@
+# Marine
+- type: loadout
+  id: MarineSatchel
+  equipment:
+    back: CMSatchelMarine
+
+- type: loadout
+  id: MarineLeatherSatchel
+  equipment:
+    back: CMSatchel
+
+- type: loadout
+  id: MarineTechnicianSatchel
+  equipment:
+    back: CMSatchelMarineTech
+
+- type: loadout
+  id: MarineMedicSatchel
+  equipment:
+    back: CMSatchelMarineMedic
+
+- type: loadout
+  id: MarineSecuritySatchel
+  equipment:
+    back: CMSatchelSecurity

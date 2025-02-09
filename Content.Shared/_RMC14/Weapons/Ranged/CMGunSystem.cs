@@ -1,10 +1,12 @@
 ﻿using System.Numerics;
+using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Marines.Orders;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared._RMC14.Weapons.Ranged.Whitelist;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
@@ -32,6 +34,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
+using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
@@ -367,8 +370,13 @@ public sealed class CMGunSystem : EntitySystem
 
     private void OnGunPointBlankAmmoShot(Entity<GunPointBlankComponent> gun, ref AmmoShotEvent args)
     {
-        if (!TryComp(gun.Owner, out GunComponent? gunComp) || gunComp.Target == null || !HasComp<TransformComponent>(gunComp.Target))
+        if (!TryComp(gun.Owner, out GunComponent? gunComp) ||
+            gunComp.Target == null ||
+            !HasComp<TransformComponent>(gunComp.Target) ||
+            !HasComp<EvasionComponent>(gunComp.Target))
+        {
             return;
+        }
 
         if (gunComp.SelectedMode == SelectiveFire.FullAuto && TryGetGunUser(gun.Owner, out var user) && gunComp.Target.Value == user.Owner)
             return;
@@ -653,7 +661,7 @@ public sealed class CMGunSystem : EntitySystem
         return false;
     }
 
-    private bool TryGetGunUser(EntityUid gun, out Entity<HandsComponent> user)
+    public bool TryGetGunUser(EntityUid gun, out Entity<HandsComponent> user)
     {
         if (_container.TryGetContainingContainer((gun, null), out var container) &&
             TryComp(container.Owner, out HandsComponent? hands))
@@ -693,7 +701,7 @@ public sealed class CMGunSystem : EntitySystem
         var currentAngle = (userMapPos.Position - targetMapPos.Position).ToWorldAngle();
 
         var differenceFromBehindAngle = (behindAngle.Degrees - currentAngle.Degrees + 180 + 360) % 360 - 180;
-        
+
         if (differenceFromBehindAngle > -45 && differenceFromBehindAngle < 45)
             return true;
 
@@ -756,3 +764,15 @@ public sealed class CMGunSystem : EntitySystem
         RemCompDeferred<AssistedReloadReceiverComponent>(wielder);
     }
 }
+
+/// <summary>
+/// DoAfter event for filling a ballistic ammo provider directly while InsertDelay > 0.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed partial class DelayedAmmoInsertDoAfterEvent : SimpleDoAfterEvent;
+
+/// <summary>
+/// DoAfter event for cycling a ballistic ammo provider while CycleDelay > 0.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed partial class DelayedCycleDoAfterEvent : SimpleDoAfterEvent;

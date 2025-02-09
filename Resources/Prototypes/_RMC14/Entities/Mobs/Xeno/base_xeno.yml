@@ -116,6 +116,10 @@
       state: alive
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
   - type: Physics
     bodyType: KinematicController
   - type: Fixtures
@@ -281,14 +285,23 @@
     weak: true
   - type: AssignXenoName
   - type: MobGibbedByExplosionType
+  - type: TileFirePatter
+  - type: CanBeFirePatted
+  - type: FirePatter
+    blacklist:
+      components:
+      - Marine
+  - type: BlockIdExamine
+  - type: NoStunOnExit
+  - type: RMCSpeciesSlowdownModifier
+    slowMultiplier: 0.87
+    superSlowMultiplier: 0.75
+    durationMultiplier: 0.666
 
 - type: entity
   abstract: true
   id: CMXenoPrying
   components:
-  - type: Tool
-    qualities:
-    - Prying
   - type: Prying
     pryPowered: true
     speedModifier: 2.7
@@ -309,12 +322,13 @@
     canDisarm: true
     disarmFailChance: 0
   - type: MeleeWeapon
+    autoAttack: true
     widePrimary: true
     altDisarm: true
     angle: 60
     soundHit:
       collection: RCMXenoClaw
-    animation: WeaponArcBite
+    animation: RMCWeaponArcXenoClaw
     damage:
       groups:
         Brute: 12
@@ -367,6 +381,7 @@
       components:
       - XenoFruit
   - type: ParalyzeOnPullAttempt
+  - type: RMCHandEmotes
 
 - type: entity
   abstract: true
@@ -386,7 +401,13 @@
     canResistFire: true
     damage: #per second, scales with number of fire 'stacks'
       types:
-        Heat: 3
+        Heat: 1
+
+- type: entity
+  abstract: true
+  id: RMCXenoCommendationReceiver
+  components:
+  - type: CommendationReceiver
 
 - type: entity
   abstract: true

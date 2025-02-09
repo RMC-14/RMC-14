@@ -75,7 +75,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: CrayonBox
+      - id: RMCCrayonBox
         amount: 5
 
 # /datum/supply_packs/presents

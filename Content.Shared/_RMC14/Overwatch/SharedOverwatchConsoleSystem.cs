@@ -8,8 +8,10 @@ using Content.Shared._RMC14.Roles;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.SupplyDrop;
 using Content.Shared._RMC14.TacticalMap;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
@@ -18,7 +20,6 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
-using Content.Shared.Roles;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -29,6 +30,7 @@ namespace Content.Shared._RMC14.Overwatch;
 
 public abstract class SharedOverwatchConsoleSystem : EntitySystem
 {
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
@@ -56,8 +58,6 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     private readonly ProtoId<DamageGroupPrototype> _bruteGroup = "Brute";
     private readonly ProtoId<DamageGroupPrototype> _burnGroup = "Burn";
     private readonly ProtoId<DamageGroupPrototype> _toxinGroup = "Toxin";
-
-    private readonly ProtoId<DamageGroupPrototype> _squadLeaderJob = "CMSquadLeader";
 
     public override void Initialize()
     {
@@ -187,7 +187,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             return;
         }
 
-        if (!TryGetEntity(squad.Value.Id, out var squadEnt))
+        if (!TryGetEntity(squad.Value.Id, out var newSquadEnt))
         {
             _popup.PopupCursor("You can't transfer marines to that squad!", actor, PopupType.LargeCaution);
             return;
@@ -196,17 +196,30 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         if (_squad.TryGetMemberSquad(marineId.Value, out var currentSquad) &&
             currentSquad.Owner == GetEntity(args.Squad))
         {
-            _popup.PopupCursor($"{Name(marineId.Value)} is already in {Name(squadEnt.Value)}!", actor, PopupType.LargeCaution);
+            _popup.PopupCursor($"{Name(marineId.Value)} is already in {Name(newSquadEnt.Value)}!", actor, PopupType.LargeCaution);
             return;
         }
 
-        _squad.AssignSquad(marineId.Value, squadEnt.Value, null);
+        if (TryComp(newSquadEnt, out SquadTeamComponent? newSquadComp) &&
+            _originalRoleQuery.TryComp(marineId, out var role) &&
+            role.Job is { } job &&
+            !_squad.HasSpaceForRole((newSquadEnt.Value, newSquadComp), job))
+        {
+            var jobName = job.Id;
+            if (_prototypes.TryIndex(job, out var jobProto))
+                jobName = Loc.GetString(jobProto.Name);
 
-        var selfMsg = $"{Name(marineId.Value)} has been transfered from squad '{Name(currentSquad)}' to squad '{Name(squadEnt.Value)}'. Logging to enlistment file.";
+            _popup.PopupCursor($"Transfer aborted. {Name(newSquadEnt.Value)} can't have another {jobName}.", actor, PopupType.LargeCaution);
+            return;
+        }
+
+        _squad.AssignSquad(marineId.Value, newSquadEnt.Value, null);
+
+        var selfMsg = $"{Name(marineId.Value)} has been transfered from squad '{Name(currentSquad)}' to squad '{Name(newSquadEnt.Value)}'. Logging to enlistment file.";
         _marineAnnounce.AnnounceSingle(selfMsg, actor);
         _popup.PopupCursor(selfMsg, actor, PopupType.Large);
 
-        var targetMsg = $"You've been transfered to {Name(squadEnt.Value)}!";
+        var targetMsg = $"You've been transfered to {Name(newSquadEnt.Value)}!";
         _marineAnnounce.AnnounceSingle(targetMsg, marineId.Value);
         _popup.PopupEntity(targetMsg, marineId.Value, marineId.Value, PopupType.Large);
     }
@@ -503,6 +516,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         ent.Comp.LastMessage = time;
         Dirty(ent);
 
+        _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(args.Actor)} sent {squadProto.Name} squad message: {args.Message}");
         _marineAnnounce.AnnounceSquad($"[color=#3C70FF][bold]Overwatch:[/bold] {Name(args.Actor)} transmits: [font size=16][bold]{message}[/bold][/font][/color]", squadProto.ID);
     }
 
@@ -526,7 +540,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         while (query.MoveNext(out var uid, out var team))
         {
             var netUid = GetNetEntity(uid);
-            var squad = new OverwatchSquad(netUid, Name(uid), team.Color, null);
+            var squad = new OverwatchSquad(netUid, Name(uid), team.Color, null, team.CanSupplyDrop);
             var members = marines.GetOrNew(netUid);
             foreach (var member in team.Members)
             {
@@ -575,11 +589,6 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     public bool IsHidden(Entity<OverwatchConsoleComponent> console, NetEntity marine)
     {
         return console.Comp.Hidden.Contains(marine);
-    }
-
-    public bool IsSquadLeader(ProtoId<JobPrototype> job)
-    {
-        return job == _squadLeaderJob;
     }
 
     private void TryLocalUnwatch(Entity<OverwatchWatchingComponent> ent)

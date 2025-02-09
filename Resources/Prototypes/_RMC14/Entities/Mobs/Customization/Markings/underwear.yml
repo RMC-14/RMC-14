@@ -4,7 +4,7 @@
   markingCategory: Underwear
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
   sprites:
   - sprite: _RMC14/Mobs/Customization/underwear.rsi
     state: c_boxers
@@ -15,7 +15,7 @@
   markingCategory: Underwear
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
   sprites:
   - sprite: _RMC14/Mobs/Customization/underwear.rsi
     state: d_boxers
@@ -59,7 +59,7 @@
   markingCategory: Underwear
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
   sprites:
   - sprite: _RMC14/Mobs/Customization/underwear.rsi
     state: c_lowriders
@@ -114,7 +114,7 @@
   markingCategory: Underwear
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
   sprites:
   - sprite: _RMC14/Mobs/Customization/underwear.rsi
     state: c_briefs
@@ -169,7 +169,7 @@
   markingCategory: Underwear
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
   sprites:
   - sprite: _RMC14/Mobs/Customization/underwear.rsi
     state: c_satin
@@ -180,7 +180,7 @@
   markingCategory: Underwear
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
   sprites:
   - sprite: _RMC14/Mobs/Customization/underwear.rsi
     state: d_satin

@@ -50,3 +50,13 @@
   parent: CMFloorStripedBase
   id: CMFloorStriped7
   sprite: /Textures/_RMC14/Tiles/almayer/plating_striped_7.png
+
+- type: tile
+  parent: CMFloorStripedBase
+  id: CMFloorPlatingBot
+  sprite: /Textures/_RMC14/Tiles/floors/platebot.png
+
+- type: tile
+  parent: CMFloorStripedBase
+  id: CMFloorPlatingBotCyan
+  sprite: /Textures/_RMC14/Tiles/floors/platebotc.png
