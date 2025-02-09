@@ -15,13 +15,11 @@
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/SMGs/mac15.rsi
   - type: Gun
-    shotsPerBurst: 1
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/atreides.ogg
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
-    - Burst
     - FullAuto
     recoilWielded: 0
     recoilUnwielded: 0
@@ -30,12 +28,6 @@
     baseFireRate: 10
     burstScatterMult: 3
     modifiers:
-      Burst:
-        fireDelay: 0.0666
-        maxScatterModifier: 10
-        useBurstScatterMult: true
-        unwieldedScatterMultiplier: 2
-        shotsToMaxScatter: 8
       FullAuto:
         maxScatterModifier: 16
         useBurstScatterMult: true
