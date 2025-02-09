@@ -131,7 +131,7 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: Tag
     tags:
-    - RMCMagazineSmg
+    - CMMagazineSmg
     - RMCMagazineSMGMAC15Ext
 
 - type: entity
