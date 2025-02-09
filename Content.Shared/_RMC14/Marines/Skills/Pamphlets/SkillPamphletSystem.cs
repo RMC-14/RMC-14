@@ -19,6 +19,8 @@ public sealed class SkillPamphletSystem : EntitySystem
 
     private void OnUse(Entity<SkillPamphletComponent> ent, ref UseInHandEvent args)
     {
+        args.Handled = true;
+
         // Then see if they've reached the limit (or if it applies at all)
         if (!ent.Comp.BypassLimit && HasComp<UsedSkillPamphletComponent>(args.User))
         {

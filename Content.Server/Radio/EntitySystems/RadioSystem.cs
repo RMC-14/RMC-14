@@ -2,11 +2,14 @@ using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
 using Content.Server.Power.Components;
 using Content.Server.Radio.Components;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
 using Content.Shared.Speech;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -14,9 +17,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Replays;
 using Robust.Shared.Utility;
-using Content.Shared._RMC14.Xenonids;
-using Robust.Shared.Audio;
-using Robust.Shared.Audio.Systems;
 
 namespace Content.Server.Radio.EntitySystems;
 
@@ -42,9 +42,10 @@ public sealed class RadioSystem : EntitySystem
     {
         Params = new AudioParams
         {
-            Volume = -2f,
-            Variation = 0.1f
-        }
+            Volume = -8f,
+            Variation = 0.1f,
+            MaxDistance = 3.75f,
+        },
     }; // RMC14
 
     public override void Initialize()
@@ -163,7 +164,7 @@ public sealed class RadioSystem : EntitySystem
             RaiseLocalEvent(receiver, ref ev);
         }
 
-        if (canSend)
+        if (canSend && !HasComp<XenoComponent>(messageSource))
         {
             var filter = Filter.Pvs(messageSource).RemoveWhereAttachedEntity(HasComp<XenoComponent>);
             _audio.PlayEntity(_radioSound, filter, messageSource, false); // RMC14

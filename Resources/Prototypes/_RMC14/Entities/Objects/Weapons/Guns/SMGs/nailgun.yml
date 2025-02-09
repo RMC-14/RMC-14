@@ -60,6 +60,10 @@
   - type: GunDamageModifier
     multiplier: 1.2
   - type: Nailgun
+  - type: GunGroupPenalty
+    angleIncrease: 0
+    recoil: 0
+    damageMultiplier: 1
 
 - type: entity
   parent: BaseMagazineRifle
@@ -91,7 +95,7 @@
     zeroVisible: false
     zeroOnlyOnEmpty: true
   - type: Appearance
-  
+
 - type: entity
   parent: CMCartridgeSMGBase
   id: RMCCartridge7x45mm
