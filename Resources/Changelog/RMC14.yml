@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: TeaTotalTemplar
-  changes:
-  - message: Added the AR10, AR10 magazine and 7.62x51 cartridge
-    type: Add
-  id: 813
-  time: '2024-10-09T22:14:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4367
 - author: FungiFellow
   changes:
   - message: Added the MOU53 Shotgun & the Double Barrel
@@ -5231,5 +5224,17 @@
   id: 1312
   time: '2025-02-09T19:47:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5559
+- author: DrSmugleaf
+  changes:
+  - message: Fixed ghost roles crashing the server this code is a blight I hate it
+      here this shit is ass 100 years of pain give me RMC14 ERT system so we can forget
+      they exist
+    type: Fix
+  - message: Mortars now have more health until them only being knocked over by xenos
+      is implemented.
+    type: Tweak
+  id: 1313
+  time: '2025-02-09T21:57:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5562
 Name: RMC14
 Order: -1
