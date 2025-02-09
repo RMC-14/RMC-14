@@ -14,7 +14,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 
-public abstract partial class SharedXenoResinHoleSystem : EntitySystem
+public abstract class SharedXenoResinHoleSystem : EntitySystem
 {
     [Dependency] protected readonly SharedAppearanceSystem _appearanceSystem = default!;
     [Dependency] protected readonly MobStateSystem _mobState = default!;
@@ -126,7 +126,7 @@ public abstract partial class SharedXenoResinHoleSystem : EntitySystem
 
         var locationName = "Unknown";
 
-        if (_areas.TryGetArea(ent, out _, out var areaProto, out _))
+        if (_areas.TryGetArea(ent, out _, out var areaProto))
             locationName = areaProto.Name;
 
         var msg = Loc.GetString(args.message, ("location", locationName), ("type", GetTrapTypeName(ent)));

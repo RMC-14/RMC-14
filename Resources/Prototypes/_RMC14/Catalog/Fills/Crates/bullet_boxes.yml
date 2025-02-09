@@ -1,0 +1,35 @@
+﻿- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxBulletsRifle
+  name: rifle ammo box crate (10x24mm) (x600 rounds)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxBulletsRifle
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxBulletsRifleAP
+  name: rifle AP ammo box crate (10x24mm AP) (x600 rounds)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxBulletsRifleAP
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxBulletsSMG
+  name: smg ammo box crate (10x20mm AP) (x600 rounds)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxBulletsSMG
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxBulletsSMGAP
+  name: smg AP ammo box crate (10x20mm AP) (x600 rounds)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxBulletsSMGAP

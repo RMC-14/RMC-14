@@ -72,6 +72,7 @@
       - XenoParasite
       - XenoEgg
       - XenoFruit
+  - type: TunnelRenamer
   - type: MultiHandedHolder
     items:
     - hands: 2
@@ -97,3 +98,5 @@
     spray: XenoAcidSprayTrapWeak
   - type: Evasion
     evasion: 10
+  - type: XenoInhands
+    prefix: lesser

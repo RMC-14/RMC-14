@@ -10,6 +10,8 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/marsoc.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/marsoc.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 # Dutch's Dozen
 - type: entity
@@ -68,6 +70,8 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/skullcap.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/skullcap.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: entity
   parent: RMCArmorHelmetSkullcap
@@ -145,6 +149,8 @@
     sprite: _RMC14/Objects/Clothing/Head/Mercenary/hefa.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Mercenary/hefa.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 # CBRN
 - type: entity
@@ -157,4 +163,6 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/cbrn.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/cbrn.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
 # TODO: add advanced version of CBRN helmet

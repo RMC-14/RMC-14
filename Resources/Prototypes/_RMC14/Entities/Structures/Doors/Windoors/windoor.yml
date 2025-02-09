@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: BaseWindoor
   id: CMWindoor
   name: glass door
@@ -28,7 +28,30 @@
     timeToApply: 4
     structure: true
   - type: Damageable
-    damageModifierSet: null
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+          spawn:
+            CMShardGlass:
+              min: 1
+              max: 1
+            RMCCableCoil1: #dropping a cable coil more than was used to make it, because... parity!
+              min: 2
+              max: 2
+            DoorElectronics:
+              min: 1
+              mix: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
   - type: Construction
     graph: CMWindoor
     node: windoor
@@ -83,5 +106,30 @@
     needsPower: false
   - type: RMCDropshipBlocked
   - type: ImmuneToUnarmed
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
+      - !type:SpawnEntitiesBehavior
+          spawn:
+            CMShardGlass: #doesn't drop Reinforced glass shard, because parity.
+              min: 1
+              max: 1
+            RMCCableCoil1: #double cable coil again.
+              min: 2
+              max: 2
+            DoorElectronics:
+              min: 1
+              mix: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
   - type: AccessReader
     containerAccessProvider: null

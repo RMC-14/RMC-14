@@ -6,6 +6,7 @@
   components:
   - type: Item
     size: Small
+    heldPrefix: binoculars
   - type: Sprite
     sprite: _RMC14/Objects/Devices/binoculars.rsi
     state: binoculars
@@ -23,6 +24,14 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: Appearance
+  - type: ItemCamouflage
+    states:
+      Jungle: binoculars
+      Desert: d_binoculars
+      Snow: s_binoculars
+      Classic: c_binoculars
+      Urban: u_binoculars
 
 - type: entity
   parent: RMCBinoculars
@@ -30,10 +39,13 @@
   name: rangefinder
   description: "A pair of binoculars with a rangefinding function. Click a tile to acquire it's coordinates."
   components:
+  - type: Item
+    heldPrefix: rangefinders
   - type: Sprite
     sprite: _RMC14/Objects/Devices/binoculars.rsi
     layers:
     - state: rangefinder
+      map: [ "enum.ItemCamouflageLayers.Layer" ]
     - map: [ "light" ]
   - type: Rangefinder
   - type: UseDelay
@@ -49,6 +61,13 @@
         light:
           Rangefinder: { state: laser_range }
           Designator: { state: laser_cas }
+  - type: ItemCamouflage
+    states:
+      Jungle: rangefinder
+      Desert: d_rangefinder
+      Snow: s_rangefinder
+      Classic: c_rangefinder
+      Urban: u_rangefinder
 
 - type: entity
   parent: RMCRangefinder

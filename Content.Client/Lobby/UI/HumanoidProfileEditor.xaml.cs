@@ -10,6 +10,7 @@ using Content.Client.Players.PlayTimeTracking;
 using Content.Client.Sprite;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.Guidebook;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.LinkAccount;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.NamedItems;
@@ -1506,7 +1507,7 @@ namespace Content.Client.Lobby.UI
 
         public void UpdateSpeciesGuidebookIcon()
         {
-            if (!_cfgManager.GetCVar(CCVars.GuidebookShowEditorSpeciesButton))
+            if (!_cfgManager.GetCVar(RMCCVars.GuidebookShowEditorSpeciesButton))
                 return;
 
             SpeciesInfoButton.StyleClasses.Clear();

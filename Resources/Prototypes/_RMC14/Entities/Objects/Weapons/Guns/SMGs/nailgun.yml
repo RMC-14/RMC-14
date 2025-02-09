@@ -59,6 +59,7 @@
           - RMCMagazineSMGNailgun
   - type: GunDamageModifier
     multiplier: 1.2
+  - type: Nailgun
 
 - type: entity
   parent: BaseMagazineRifle
@@ -104,7 +105,7 @@
     proto: Nail7x45mm
 
 - type: entity
-  parent: BaseBullet
+  parent: RMCBaseBullet
   id: Nail7x45mm
   components:
   - type: Projectile

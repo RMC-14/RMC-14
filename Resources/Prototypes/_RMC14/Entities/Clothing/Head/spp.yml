@@ -9,6 +9,8 @@
     sprite: _RMC14/Objects/Clothing/Head/SPP/helmet.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/SPP/helmet.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: entity
   parent: CMArmorHelmetM10Tech
@@ -20,6 +22,8 @@
     sprite: _RMC14/Objects/Clothing/Head/SPP/engi.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/SPP/engi.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: entity
   parent: ArmorHelmetSPP

@@ -1,6 +1,6 @@
 
 - type: entity
-  parent: JumpsuitMarine
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitSPP
   name: SPP fatigues
   description: A set of SPP fatigues, mass produced for the armed-forces of the Socialist Progressive Peoples.

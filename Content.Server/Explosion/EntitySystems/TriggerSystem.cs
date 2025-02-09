@@ -1,17 +1,19 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Body.Systems;
+using Content.Server.Electrocution;
 using Content.Server.Explosion.Components;
 using Content.Server.Flash;
-using Content.Server.Electrocution;
 using Content.Server.Pinpointer;
-using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Flash.Components;
 using Content.Server.Radio.EntitySystems;
+using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Database;
 using Content.Shared.Explosion.Components;
 using Content.Shared.Explosion.Components.OnTrigger;
+using Content.Shared.Flash.Components;
 using Content.Shared.Implants.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
@@ -21,6 +23,7 @@ using Content.Shared.Payload.Components;
 using Content.Shared.Radio;
 using Content.Shared.Slippery;
 using Content.Shared.StepTrigger.Systems;
+using Content.Shared.Stunnable;
 using Content.Shared.Trigger;
 using Content.Shared.Weapons.Ranged.Events;
 using JetBrains.Annotations;
@@ -31,10 +34,7 @@ using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Player;
-using Content.Shared.Coordinates;
 using Robust.Shared.Utility;
-using Robust.Shared.Timing;
 
 namespace Content.Server.Explosion.EntitySystems
 {
@@ -78,6 +78,9 @@ namespace Content.Server.Explosion.EntitySystems
         [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
         [Dependency] private readonly InventorySystem _inventory = default!;
         [Dependency] private readonly ElectrocutionSystem _electrocution = default!;
+        [Dependency] private readonly SharedStunSystem _stun = default!;
+        [Dependency] private readonly EntityLookupSystem _lookup = default!;
+        [Dependency] private readonly SharedInteractionSystem _interaction = default!;
 
         public override void Initialize()
         {
@@ -103,6 +106,7 @@ namespace Content.Server.Explosion.EntitySystems
             SubscribeLocalEvent<DeleteOnTriggerComponent, TriggerEvent>(HandleDeleteTrigger);
             SubscribeLocalEvent<ExplodeOnTriggerComponent, TriggerEvent>(HandleExplodeTrigger);
             SubscribeLocalEvent<FlashOnTriggerComponent, TriggerEvent>(HandleFlashTrigger);
+            SubscribeLocalEvent<RMCStunOnTriggerComponent, TriggerEvent>(HandleStunOnTrigger);
             SubscribeLocalEvent<GibOnTriggerComponent, TriggerEvent>(HandleGibTrigger);
 
             SubscribeLocalEvent<AnchorOnTriggerComponent, TriggerEvent>(OnAnchorTrigger);
@@ -177,6 +181,28 @@ namespace Content.Server.Explosion.EntitySystems
         {
             // TODO Make flash durations sane ffs.
             _flashSystem.FlashArea(uid, args.User, component.Range, component.Duration * 1000f, probability: component.Probability);
+            args.Handled = true;
+        }
+
+        private void HandleStunOnTrigger(EntityUid uid, RMCStunOnTriggerComponent component, TriggerEvent args)
+        {
+            var query = _lookup.GetEntitiesInRange(uid, component.Range);
+
+            var stunTime = TimeSpan.FromSeconds(component.Duration);
+
+            foreach (var entity in query)
+            {
+                if (HasComp<XenoComponent>(entity))
+                    continue;
+
+                var transform = Transform(entity);
+                if (!_random.Prob(component.Probability) || !_interaction.InRangeUnobstructed(uid, transform.Coordinates, component.Range))
+                    continue;
+
+                _stun.TryStun(entity, stunTime, true);
+                _stun.TryKnockdown(entity, stunTime, true);
+            }
+
             args.Handled = true;
         }
 
@@ -354,7 +380,7 @@ namespace Content.Server.Explosion.EntitySystems
             active.TimeUntilBeep = initialBeepDelay == null ? active.BeepInterval : initialBeepDelay.Value;
 
             var ev = new ActiveTimerTriggerEvent(uid, user);
-            RaiseLocalEvent(uid, ref ev);
+            RaiseLocalEvent(uid, ref ev, true);
 
             if (TryComp<AppearanceComponent>(uid, out var appearance))
                 _appearance.SetData(uid, TriggerVisuals.VisualState, TriggerVisualState.Primed, appearance);

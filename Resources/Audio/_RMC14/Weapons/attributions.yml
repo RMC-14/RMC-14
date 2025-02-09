@@ -1,4 +1,9 @@
-﻿- files: ["gun_mortar_fire.ogg"]
+﻿- files: ["alien_claw_swipe.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/weapons/alien_claw_swipe.ogg"
+
+- files: ["gun_mortar_fire.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/ffb422a67f9bf44cec61e72ef275e48fe769e952/sound/weapons/gun_mortar_fire.ogg"

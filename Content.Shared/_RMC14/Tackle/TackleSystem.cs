@@ -6,6 +6,7 @@ using Content.Shared.Database;
 using Content.Shared.Effects;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
+using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -82,8 +83,16 @@ public sealed class TackleSystem : EntitySystem
             _adminLog.Add(LogType.RMCTackle, $"{ToPrettyString(user)} tackled down {ToPrettyString(target)}.");
 
             if (_net.IsServer)
+            {
                 _popup.PopupEntity(Loc.GetString("cm-tackle-success-self", ("target", target.Owner)), user, user);
 
+                if (TryComp<StandingStateComponent>(target.Owner, out var standingState))
+                {
+                    if (!standingState.Standing)
+                        _audio.PlayPvs(standingState.DownSound, target);
+                }
+            }
+            
             foreach (var session in Filter.PvsExcept(user).Recipients)
             {
                 if (session.AttachedEntity is not { } recipient)
