@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: BaseItem
   id: RMCMortarKit
   name: M402 mortar portable kit
@@ -47,10 +47,15 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 500
+        damage: 100
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+            spawn:
+              RMCMortarKit:
+                min: 1
+                max: 1
   - type: UserInterface
     interfaces:
       enum.MortarUiKey.Key:
@@ -89,6 +94,10 @@
       Snow: _RMC14/Objects/Weapons/mortar/snow.rsi
       Classic: _RMC14/Objects/Weapons/mortar/classic.rsi
       Urban: _RMC14/Objects/Weapons/mortar/urban.rsi
+  - type: ReceiverXenoClaws
+    maxHealth: 100
+    hitsToDestroy: 1
+    minimumClawStrength: Normal
 
 - type: entity
   abstract: true
