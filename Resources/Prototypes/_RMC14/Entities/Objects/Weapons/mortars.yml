@@ -98,6 +98,11 @@
     maxHealth: 100
     hitsToDestroy: 1
     minimumClawStrength: Normal
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/_RMC14/Structures/metalhit.ogg"
 
 - type: entity
   abstract: true
