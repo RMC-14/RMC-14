@@ -3,7 +3,7 @@
   parent: BaseToggleClothing
   id: RMCM5CameraGear
   name: M5 Camera Gear
-  description: A camera and associated headgear designed to allow marine commanders to see what their troops can see. A more robust version of this equipment is integrated into all standard UNMC combat helmets. Can be worn over the ear.
+  description: A camera and associated headgear designed to allow marine commanders to see what their troops can see. A more robust version of this equipment is integrated into all standard UNMC combat helmets. Can be worn over the ear or head.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/camera_gear.rsi
@@ -17,6 +17,7 @@
     quickEquip: false
     slots:
     - Ears
+    - Head
   - type: ItemToggle
     activated: true
     soundActivate:
@@ -40,5 +41,3 @@
   - type: Tag
     tags:
     - RipOffOnInfection
-
-# Make worn sprite work
