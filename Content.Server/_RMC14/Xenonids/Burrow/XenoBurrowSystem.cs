@@ -41,6 +41,7 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
     [Dependency] private readonly PhysicsSystem _physics = default!;
     [Dependency] private readonly StunSystem _stun = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -307,6 +308,9 @@ public sealed partial class XenoBurrowSystem : SharedXenoBurrowSystem
             var entitiesToStun = _entityLookup.GetEntitiesInRange(ent, comp.UnburrowStunRange);
             foreach (var entity in entitiesToStun)
             {
+                if (!_xeno.CanAbilityAttackTarget(xenoBurrower, entity))
+                    continue;
+
                 _stun.TryParalyze(entity, comp.UnburrowStunLength, false);
             }
 
