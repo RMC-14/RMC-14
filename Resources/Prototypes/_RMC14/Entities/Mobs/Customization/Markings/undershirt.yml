@@ -230,6 +230,41 @@
   - sprite: _RMC14/Mobs/Customization/undershirt.rsi
     state: s_strapless
 
+# Urban Bras
+
+- type: marking
+  id: RMCUndershirtClassicUrban
+  bodyPart: Undershirt
+  markingCategory: Undershirt
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/undershirt.rsi
+    state: u_bra
+
+- type: marking
+  id: RMCUndershirtSportsUrban
+  bodyPart: Undershirt
+  markingCategory: Undershirt
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/undershirt.rsi
+    state: u_sports
+
+- type: marking
+  id: RMCUndershirtStraplesUrban
+  bodyPart: Undershirt
+  markingCategory: Undershirt
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/undershirt.rsi
+    state: u_strapless
+
 # Misc
 
 - type: marking

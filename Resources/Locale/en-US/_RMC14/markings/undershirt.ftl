@@ -58,5 +58,14 @@ marking-RMCUndershirtSportsSnow-s_sports = Bra
 marking-RMCUndershirtStraplessSnow = Bra (Snow, Strapless)
 marking-RMCUndershirtStraplessSnow-s_strapless = Bra
 
+marking-RMCUndershirtClassicUrban = Bra (Urban, Classic)
+marking-RMCUndershirtClassicUrban-u_bra = Bra
+
+marking-RMCUndershirtSportsUrban = Bra (Urban, Sport)
+marking-RMCUndershirtSportsUrban-u_sports = Bra
+
+marking-RMCUndershirtStraplesUrban = Bra (Urban, Strapless)
+marking-RMCUndershirtStraplesUrban-u_strapless = Bra
+
 marking-RMCUndershirtNone = None
 marking-RMCUndershirtNone-blank = None
