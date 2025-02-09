@@ -381,6 +381,7 @@
     blacklist:
       components:
       - Marine
+  - type: RMCHandEmotes
 
 - type: entity
   abstract: true

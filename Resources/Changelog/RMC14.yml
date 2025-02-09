@@ -1,75 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Boiler neurotoxin applies 5 on direct hit, and boiler tailstabs now differ
-      based on gas toggled, with neuro injecting 16 neuro instead of injecting acid.
-    type: Fix
-  id: 800
-  time: '2024-10-08T22:09:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4337
-- author: Rainbeon
-  changes:
-  - message: Fixed Xeno Health Regeneration being half of what it should be in 13.
-    type: Fix
-  id: 801
-  time: '2024-10-08T22:12:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4345
-- author: Vermidia
-  changes:
-  - message: Added Avali species
-    type: Add
-  id: 802
-  time: '2024-10-08T22:14:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4336
-- author: Rainbeon
-  changes:
-  - message: Bullets will now only hit Eggs when directly aimed at
-    type: Tweak
-  id: 803
-  time: '2024-10-08T22:15:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4329
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Cargo tech, warden, and maint tech uniform can now be folded for an alternate
-      style
-    type: Tweak
-  id: 804
-  time: '2024-10-08T22:16:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4276
-- author: FungiFellow
-  changes:
-  - message: Added the missing stun on direct hit effect of the Boiler's Bombard.
-    type: Add
-  - message: Acid Bombard direct hits now properly applies the same effect as a Charged
-      Spit
-    type: Add
-  id: 805
-  time: '2024-10-09T02:07:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4214
-- author: CyberTropic
-  changes:
-  - message: Added soap
-    type: Add
-  id: 806
-  time: '2024-10-09T02:09:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4333
-- author: Vermidia
-  changes:
-  - message: Add hazard vests, hard hats, and rebreathers to maintenance tech vendors
-    type: Add
-  - message: Flashlights, penlights, and tripods no longer use powercells and won't
-      run out of power
-    type: Fix
-  id: 807
-  time: '2024-10-09T02:08:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4328
-- author: Vermidia
-  changes:
-  - message: Fixed boiler gas spreading one less tile than intended.
-    type: Fix
-  id: 808
-  time: '2024-10-09T05:17:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4361
 - author: CyberTropic
   changes:
   - message: Added magazine boxes for handfuls of shotgun shells.
@@ -5094,5 +5023,81 @@
   id: 1299
   time: '2025-02-07T08:15:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5484
+- author: Tunguso4ka
+  changes:
+  - message: A somewhat unlucky UNS Savannah returns from her refit.
+    type: Add
+  id: 1300
+  time: '2025-02-07T11:50:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5097
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added fist-bumping and high-fiving emotes. Right click on a fellow marine
+      to initiate the action.
+    type: Add
+  - message: Added tailswiping with other xenos emotes. Right click on a fellow xeno
+      to initiate the action.
+    type: Add
+  id: 1301
+  time: '2025-02-07T21:47:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5525
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Some marine uniforms can now be toggled to roll sleeves and take off
+      the jacket. Right click on a uniform to toggle it.
+    type: Tweak
+  id: 1302
+  time: '2025-02-07T23:00:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5539
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed ME3 hand welder (the small one) blinding you without eye protection.
+    type: Fix
+  id: 1303
+  time: '2025-02-08T05:16:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5541
+- author: Rainbeon
+  changes:
+  - message: Fixed Acid Resin Traps not triggering around open corners. (Traps will
+      still not trigger if they are entirely obstructed)
+    type: Fix
+  id: 1304
+  time: '2025-02-08T08:15:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5548
+- author: Rainbeon
+  changes:
+  - message: Dragging dead bodies that are on top of Parasite traps no longer triggers
+      the trap.
+    type: Fix
+  id: 1305
+  time: '2025-02-08T11:58:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5549
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed welder packs not refueling by just clicking on them.
+    type: Fix
+  id: 1306
+  time: '2025-02-08T11:57:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5542
+- author: Dicerson
+  changes:
+  - message: Spam cans are now available to be built in the construction menu, for
+      1 Cardboard per can.
+    type: Add
+  - message: Alt-Clicking on a spam can with a valid magazine in hand now load all
+      bullets from the magazine into the can after a 5 second doafter (Try HAR Magazines!)
+    type: Add
+  id: 1307
+  time: '2025-02-09T01:52:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5444
+- author: Farrellka
+  changes:
+  - message: Removed the old long ears for human!
+    type: Remove
+  - message: Added more long ears for human!
+    type: Add
+  id: 1308
+  time: '2025-02-09T02:06:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5170
 Name: RMC14
 Order: -1

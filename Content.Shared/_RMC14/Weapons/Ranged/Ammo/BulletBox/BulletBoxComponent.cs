@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.BulletBox;
@@ -17,5 +17,8 @@ public sealed partial class BulletBoxComponent : Component
     public EntProtoId BulletType;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan Delay = TimeSpan.FromSeconds(0.5);
+    public TimeSpan DelayTransferFromBox = TimeSpan.FromSeconds(0.5);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan DelayTransferToBox = TimeSpan.FromSeconds(5);
 }
