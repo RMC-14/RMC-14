@@ -55,8 +55,8 @@
         points: 3
       - id: RMCMotionDetector
         points: 5
-    #- id: CMFultonDeviceStack
-    #  points: 5
+      - id: RMCFulton20
+        points: 5
     - name: Binoculars
       entries:
       - id: RMCRangefinder
