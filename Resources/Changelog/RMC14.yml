@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Fixed some minor structures and objects having arbitrary damage reduction,
-      resulting in doors and floodlights taking more damage to destroy than intended.
-    type: Fix
-  id: 817
-  time: '2024-10-10T05:40:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4392
 - author: TeaTotalTemplar
   changes:
   - message: Adds the Beretta M92FS pistol and magazine
@@ -5238,5 +5230,14 @@
   id: 1316
   time: '2025-02-10T00:23:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5568
+- author: Vermidia
+  changes:
+  - message: Fixed xenos being able to destroy mortars. They now make them drop the
+      kit on the floor. Mortar health reverted back, and xenos now knock them over
+      in 1 hit.
+    type: Fix
+  id: 1317
+  time: '2025-02-10T00:24:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5564
 Name: RMC14
 Order: -1
