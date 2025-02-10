@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: TeaTotalTemplar
-  changes:
-  - message: Adds the Beretta M92FS pistol and magazine
-    type: Add
-  id: 818
-  time: '2024-10-10T05:41:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4397
 - author: Rainbeon
   changes:
   - message: Lurkers can now manually toggle off their invisibility, which refunds
@@ -5239,5 +5232,12 @@
   id: 1317
   time: '2025-02-10T00:24:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5564
+- author: DrSmugleaf
+  changes:
+  - message: Fixed CT, SL, SGO, Specs and FTLs not being able to buy fultons.
+    type: Fix
+  id: 1318
+  time: '2025-02-10T00:42:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5570
 Name: RMC14
 Order: -1
