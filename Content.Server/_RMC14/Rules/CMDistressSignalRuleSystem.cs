@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server._RMC14.Commendations;
 using Content.Server._RMC14.Dropship;
@@ -42,6 +43,7 @@ using Content.Shared._RMC14.Scaling;
 using Content.Shared._RMC14.Spawners;
 using Content.Shared._RMC14.Survivor;
 using Content.Shared._RMC14.TacticalMap;
+using Content.Shared._RMC14.Thunderdome;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
@@ -870,6 +872,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (!xeno.ContributesToVictory)
                     continue;
 
+                if (HasComp<ThunderdomeMapComponent>(xform.MapUid))
+                    continue;
+
                 if (_mobState.IsAlive(xenoId, mobState) &&
                     (distress.AbandonedAt == null ||
                      time < distress.AbandonedAt ||
@@ -896,6 +901,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 }
 
                 if (_containers.IsEntityInContainer(marineId))
+                    continue;
+
+                if (HasComp<ThunderdomeMapComponent>(xform.MapUid))
                     continue;
 
                 if (_mobState.IsAlive(marineId, mobState) &&
@@ -1441,27 +1449,34 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     // TODO RMC14 this would be literally anywhere else if the code for loading maps wasn't dogshit and broken upstream
     private void SpawnAdminAreas(CMDistressSignalRuleComponent comp)
     {
-        void SpawnMap(ResPath path)
+        bool SpawnMap(ResPath path, [NotNullWhen(true)] out EntityUid? mapEnt)
         {
+            mapEnt = default;
+
             try
             {
                 if (string.IsNullOrWhiteSpace(path.ToString()))
-                    return;
+                    return false;
 
                 var mapId = _mapManager.CreateMap();
                 if (!_mapLoader.TryLoad(mapId, path.ToString(), out _))
-                    return;
+                    return false;
 
                 _mapManager.SetMapPaused(mapId, false);
+                _mapSystem.TryGetMap(mapId, out mapEnt);
+                return mapEnt != null;
             }
             catch (Exception e)
             {
                 Log.Error($"Error loading admin fax area:\n{e}");
             }
+
+            return false;
         }
 
-        SpawnMap(new ResPath(_adminFaxAreaMap));
-        SpawnMap(comp.Thunderdome);
+        SpawnMap(new ResPath(_adminFaxAreaMap), out _);
+        if (SpawnMap(comp.Thunderdome, out var mapEnt))
+            EnsureComp<ThunderdomeMapComponent>(mapEnt.Value);
     }
 
     private void EndRound(CMDistressSignalRuleComponent rule, DistressSignalRuleResult result)

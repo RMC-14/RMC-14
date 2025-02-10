@@ -24,8 +24,6 @@ public sealed class MotionDetectorOverlaySystem : EntitySystem
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
-    private readonly SlotFlags _detectSlots = SlotFlags.SUITSTORAGE | SlotFlags.BELT;
-
     public override void Initialize()
     {
         if (!_overlay.HasOverlay<MotionDetectorOverlay>())
@@ -49,7 +47,7 @@ public sealed class MotionDetectorOverlaySystem : EntitySystem
         float vpWidth = _config.GetCVar(CCVars.ViewportWidth);
 
         var eye = _eye.CurrentEye;
-        var vpSize =eye.Zoom;
+        var vpSize = eye.Zoom;
         if (eye.Rotation.GetCardinalDir() is Direction.East or Direction.West)
         {
             (vpWidth, vpHeight) = (vpHeight, vpWidth);
@@ -60,7 +58,7 @@ public sealed class MotionDetectorOverlaySystem : EntitySystem
         var time = _timing.CurTime;
 
         var ents = hands.EnumerateHeld(player).ToList();
-        if (inventory.TryGetContainerSlotEnumerator(player, out var inv, _detectSlots))
+        if (inventory.TryGetContainerSlotEnumerator(player, out var inv))
         {
             while (inv.NextItem(out var item))
             {

@@ -148,8 +148,8 @@ public sealed class RMCFultonSystem : EntitySystem
             if (time < comp.ReturnAt)
                 continue;
 
+            RemComp<DropshipTargetComponent>(uid);
             RemCompDeferred<RMCActiveFultonComponent>(uid);
-            RemCompDeferred<DropshipTargetComponent>(uid);
 
             _transform.SetCoordinates(uid, comp.ReturnTo);
             _audio.PlayPvs(comp.ReturnSound, comp.ReturnTo);
