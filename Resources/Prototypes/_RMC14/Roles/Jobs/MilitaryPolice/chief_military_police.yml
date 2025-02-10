@@ -57,6 +57,7 @@
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-mp
+    - type: ViewIntelObjectives
 
 - type: startingGear
   id: CMGearChiefMP
@@ -81,10 +82,7 @@
   - type: SpawnPoint
     job_id: CMChiefMP
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: chief_military_police
+    state: cmp_spawn
 
 - type: playTimeTracker
   id: CMJobChiefMP

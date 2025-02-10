@@ -26,25 +26,32 @@
     - type: Skills
       skills:
         RMCSkillCqc: 1
+        RMCSkillEndurance: 1
         RMCSkillEngineer: 2
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
         RMCSkillIntel: 2
         RMCSkillJtac: 2
-        RMCSkillLeadership: 2
+        RMCSkillLeadership: 1
         RMCSkillMeleeWeapons: 1
         RMCSkillOverwatch: 1
         RMCSkillResearch: 1
+    - type: CMVendorUser
+      points: 45
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-intel
-  hidden: true # TODO RMC14
+    - type: ViewIntelObjectives
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadEcho
 
 - type: startingGear
   id: CMGearIntelOfficer
   equipment:
-    jumpsuit: CMJumpsuitIO
+    jumpsuit: RMCUniformIntel
     shoes: CMBootsBlackFilled
     id: CMIDCardIntelOfficer
 
@@ -56,10 +63,7 @@
   - type: SpawnPoint
     job_id: CMIntelOfficer
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: intel_officer
+    state: io_spawn
 
 - type: playTimeTracker
   isHumanoid: true

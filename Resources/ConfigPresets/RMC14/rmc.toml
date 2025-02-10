@@ -130,3 +130,4 @@ login_dataset = "CM_Tips"
 
 [vote]
 preset_enabled = false
+restart_ghost_percentage = 75

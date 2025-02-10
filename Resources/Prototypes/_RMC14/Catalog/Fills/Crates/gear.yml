@@ -41,3 +41,13 @@
     contents:
     - id: RMCPackFlareCAS
       amount: 4
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateGearFulton
+  name: fulton recovery device crate (x4)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCFulton20
+      amount: 4

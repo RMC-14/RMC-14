@@ -1,5 +1,4 @@
 using Content.Shared._RMC14.Attachable.Systems;
-using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Attachable.Components;
@@ -17,6 +16,9 @@ public sealed partial class AttachableHolderComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public Dictionary<string, AttachableSlot> Slots = new();
+
+    [DataField, AutoNetworkedField]
+    public float RandomAttachmentChance = 0.5f;
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *

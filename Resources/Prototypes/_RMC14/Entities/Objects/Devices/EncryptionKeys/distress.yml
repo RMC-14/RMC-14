@@ -14,3 +14,16 @@
     defaultChannel: Colony
   - type: Sprite
     state: cap_key
+
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyFreelancer
+  name: freelancer encryption Key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommon # TODO RMC14 add Freelancer (Dutch) channel
+    - Colony
+    defaultChannel: Colony
+  - type: Sprite
+    state: cap_key

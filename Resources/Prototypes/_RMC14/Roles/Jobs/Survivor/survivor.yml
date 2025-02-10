@@ -39,6 +39,7 @@
       faction: FactionSurvivor
     - type: SurvivorRoleBriefing
       survivorRoleBriefing: civilian-role-briefing
+    - type: IntelRescueSurvivorObjective
   hasIcon: false
 
 - type: startingGear

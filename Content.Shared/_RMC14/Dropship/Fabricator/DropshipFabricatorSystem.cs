@@ -118,6 +118,27 @@ public sealed class DropshipFabricatorSystem : EntitySystem
         Printables = printables.Select(e => new EntProtoId<DropshipFabricatorPrintableComponent>(e.ID)).ToImmutableArray();
     }
 
+    public void ChangeBudget(int amount)
+    {
+        var accountQuery = EntityQueryEnumerator<DropshipFabricatorPointsComponent>();
+        while (accountQuery.MoveNext(out var uid, out var comp))
+        {
+            comp.Points += amount;
+            Dirty(uid, comp);
+            SendUIStateAll(comp.Points);
+        }
+    }
+
+    private void SendUIStateAll(int points)
+    {
+        var fabricatorQuery = EntityQueryEnumerator<DropshipFabricatorComponent>();
+        while (fabricatorQuery.MoveNext(out var fabricatorId, out var fabricator))
+        {
+            fabricator.Points = points;
+            Dirty(fabricatorId, fabricator);
+        }
+    }
+
     public override void Update(float frameTime)
     {
         if (_net.IsClient)
@@ -153,12 +174,7 @@ public sealed class DropshipFabricatorSystem : EntitySystem
             points.Points++;
             Dirty(pointsId, points);
 
-            var fabricatorQuery = EntityQueryEnumerator<DropshipFabricatorComponent>();
-            while (fabricatorQuery.MoveNext(out var fabricatorId, out var fabricator))
-            {
-                fabricator.Points = points.Points;
-                Dirty(fabricatorId, fabricator);
-            }
+            SendUIStateAll(points.Points);
         }
     }
 }

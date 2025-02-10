@@ -44,6 +44,7 @@
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-gunship-pilot
+    - type: ViewIntelObjectives
 
 - type: startingGear
   id: CMGearPilotGunship
@@ -61,10 +62,7 @@
   - type: SpawnPoint
     job_id: CMPilotGunship
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: pilot
+    state: po_spawn
 
 - type: playTimeTracker
   id: CMJobPilotGunship

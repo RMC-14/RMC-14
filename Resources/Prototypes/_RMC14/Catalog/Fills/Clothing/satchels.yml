@@ -5,9 +5,11 @@
   components:
   - type: StorageFill
     contents:
+    - id: RMCWeaponPistolHoldout
     - id: CMCrowbar
-    - id: DrinkDrGibbCan
-    - id: DrinkFourteenLokoCan
+    - id: FoodBoxPizzaFilled # TODO RMC14
+      amount: 3
+    - id: CMDrinkCanDrGibb
   - type: IgnoreContentsSize
     items:
       tags:
