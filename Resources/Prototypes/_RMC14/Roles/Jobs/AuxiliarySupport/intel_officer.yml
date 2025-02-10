@@ -11,6 +11,7 @@
   ranks:
     RMCRankSecondLT: []
   startingGear: CMGearIntelOfficer
+  dummyStartingGear: RMCGearIntelOfficerEquipped
   icon: "CMJobIconIntelOfficer"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-aso
@@ -54,6 +55,23 @@
     jumpsuit: RMCUniformIntel
     shoes: CMBootsBlackFilled
     id: CMIDCardIntelOfficer
+
+- type: startingGear
+  id: RMCGearIntelOfficerEquipped
+  equipment:
+    jumpsuit: RMCUniformIntel
+    back: CMSatchelMarineIntel
+    shoes: CMBootsBlackFilled
+    head: RMCArmorHelmetM12Intel
+    outerClothing: RMCArmorXM4
+    gloves: CMHandsInsulated
+    id: CMIDCardIntelOfficer
+    ears: CMHeadsetIntel
+    belt: RMCMK80BeltFilled
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchDocument
+  inhand:
+    - RMCBinoculars
 
 - type: entity
   parent: CMSpawnPointJobBase
