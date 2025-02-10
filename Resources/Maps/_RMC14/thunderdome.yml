@@ -13315,6 +13315,142 @@ entities:
     - type: Transform
       pos: -30.5,-7.5
       parent: 1
+- proto: CMLightFixtureAlwaysPowered
+  entities:
+  - uid: 1116
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -32.5,37.5
+      parent: 1
+  - uid: 1117
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -26.5,37.5
+      parent: 1
+  - uid: 1118
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -21.5,36.5
+      parent: 1
+  - uid: 1119
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -37.5,36.5
+      parent: 1
+  - uid: 1120
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -38.5,35.5
+      parent: 1
+  - uid: 1121
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -38.5,29.5
+      parent: 1
+  - uid: 1122
+    components:
+    - type: Transform
+      pos: -37.5,28.5
+      parent: 1
+  - uid: 1123
+    components:
+    - type: Transform
+      pos: -32.5,27.5
+      parent: 1
+  - uid: 1124
+    components:
+    - type: Transform
+      pos: -21.5,28.5
+      parent: 1
+  - uid: 1125
+    components:
+    - type: Transform
+      pos: -26.5,27.5
+      parent: 1
+  - uid: 1126
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -18.5,35.5
+      parent: 1
+  - uid: 1127
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -18.5,29.5
+      parent: 1
+  - uid: 1128
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -14.5,29.5
+      parent: 1
+  - uid: 1129
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -14.5,35.5
+      parent: 1
+  - uid: 1130
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -13.5,32.5
+      parent: 1
+  - uid: 1131
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -40.5,35.5
+      parent: 1
+  - uid: 1132
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -40.5,29.5
+      parent: 1
+  - uid: 1133
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -45.5,32.5
+      parent: 1
+  - uid: 1134
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -44.5,35.5
+      parent: 1
+  - uid: 1135
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -44.5,29.5
+      parent: 1
+  - uid: 1136
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -29.5,43.5
+      parent: 1
+  - uid: 1137
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -31.5,41.5
+      parent: 1
+  - uid: 1138
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -27.5,41.5
+      parent: 1
 - proto: CMLinenBinFilled
   entities:
   - uid: 367
