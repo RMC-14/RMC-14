@@ -129,7 +129,7 @@ public sealed class RMCSlowSystem : EntitySystem
             return;
 
         //Don't apply slow when superslow is in effect
-        if (!HasComp<RMCSuperSlowdownComponent>(ent))
+        if (!TryComp<RMCSuperSlowdownComponent>(ent, out var comp) || !comp.Running)
             args.ModifySpeed(slow.SlowMultiplier, slow.SlowMultiplier);
     }
 
