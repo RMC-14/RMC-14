@@ -96,8 +96,8 @@
         points: 3
     - name: Engineering Supplies
       entries:
-#      - id: Plastic Explosive
-#        points: 10
+      - id: RMCExplosivePlastic
+        points: 10
       - id: RMCPackFlareCAS
         points: 5
       - id: RMCExplosiveBreachingCharge
@@ -113,8 +113,8 @@
         recommended: true
       - id: CMRollerBedSpawnFolded
         points: 5
-    #- id: CMFultonDeviceStack
-    #  points: 5
+      - id: RMCFulton20
+        points: 5
       - id: CMFireExtinguisherPortable
         points: 5
       - id: RMCWhistle

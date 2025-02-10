@@ -75,6 +75,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         SubscribeLocalEvent<XenoWeedsComponent, ComponentShutdown>(OnModifierShutdown);
         SubscribeLocalEvent<XenoWeedsComponent, EntityTerminatingEvent>(OnWeedsTerminating);
 
+        SubscribeLocalEvent<XenoWallWeedsComponent, EntityTerminatingEvent>(OnWallWeedsTerminating);
+
         SubscribeLocalEvent<XenoWeedableComponent, AnchorStateChangedEvent>(OnWeedableAnchorStateChanged);
 
         SubscribeLocalEvent<DamageOffWeedsComponent, MapInitEvent>(OnDamageOffWeedsMapInit);
@@ -134,6 +136,12 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         }
 
         ent.Comp.Spread.Clear();
+    }
+
+    private void OnWallWeedsTerminating(Entity<XenoWallWeedsComponent> ent, ref EntityTerminatingEvent args)
+    {
+        if (TryComp(ent.Comp.Weeds, out XenoWeedsComponent? weeds))
+            weeds.Spread.Remove(ent);
     }
 
     private void OnWeedsAnchorChanged(Entity<XenoWeedsComponent> weeds, ref AnchorStateChangedEvent args)

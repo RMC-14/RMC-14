@@ -135,6 +135,8 @@
   - type: XenoEvolution
     strains:
     - CMXenoHivelordResinWhisperer
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.2
 
 - type: entity
   parent: CMXenoHivelordBase

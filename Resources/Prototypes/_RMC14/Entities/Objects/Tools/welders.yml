@@ -1,9 +1,17 @@
 # Welding fuel amounts are multiplied by 2.5 from 13 until we make them work exactly the same
 - type: entity
-  parent: Welder
-  id: CMWelder
+  parent: [BaseItem, RMCBaseMeleeWeapon]
+  id: RMCWelderBase
   name: blowtorch
+  description: "Melts anything as long as it's fueled, don't forget your eye protection!"
+  abstract: true
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/welder_drop.ogg
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_RMC14/Handling/weldingtool_pickup.ogg
   - type: Sprite
     sprite: _RMC14/Objects/Tools/welder.rsi
     layers:
@@ -13,18 +21,6 @@
       map: ["enum.ToggleVisuals.Layer"]
       visible: false
       shader: unshaded
-  - type: Item
-    size: Small
-    sprite: _RMC14/Objects/Tools/welder.rsi
-  - type: Welder
-    fuelConsumption: 0.06 # TODO RMC14 chang ethis when welders are fixed
-    fuelLitCost: 0
-  - type: ItemToggle
-    predictable: false
-    soundActivate:
-      path: /Audio/_RMC14/Handling/weldingtool_on.ogg
-    soundDeactivate:
-      path: /Audio/_RMC14/Handling/weldingtool_off.ogg
   - type: GenericVisualizer
     visuals:
       enum.ToggleVisuals.Toggled:
@@ -34,6 +30,38 @@
         enum.ToggleVisuals.Layer:
           True: { visible: true }
           False: { visible: false }
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Tools/welder.rsi
+  - type: ItemToggle
+    predictable: false
+    soundActivate:
+      path: /Audio/_RMC14/Handling/weldingtool_on.ogg
+    soundDeactivate:
+      path: /Audio/_RMC14/Handling/weldingtool_off.ogg
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnHit:
+      path: /Audio/Weapons/Guns/Hits/energy_meat1.ogg
+      params:
+        variation: 0.250
+        volume: -10
+    activatedSoundOnHitNoDamage:
+      path: /Audio/Weapons/Guns/Hits/energy_meat1.ogg
+      params:
+        variation: 0.250
+        volume: -12
+    deactivatedSoundOnHitNoDamage:
+      collection: MetalThud
+    activatedDamage:
+        types:
+            Heat: 15
+  - type: ItemToggleSize
+    activatedSize: Large
+  - type: ItemToggleHot
+  - type: ComponentToggler
+    components:
+    - type: DisarmMalus
+      malus: 0.6
   - type: ToggleableLightVisuals
     spriteLayer: on
     inhandVisuals:
@@ -49,10 +77,33 @@
         reagents:
         - ReagentId: WeldingFuel
           Quantity: 100
-        maxVol: 100 # TODO RMC14 40 when welders are fixed
-  - type: EmitSoundOnPickup
-    sound:
-      path: /Audio/_RMC14/Handling/weldingtool_pickup.ogg
+        maxVol: 100
+  - type: UseDelay
+  - type: MeleeWeapon
+    wideAnimationRotation: -90
+    damage:
+      types:
+        Blunt: 12
+    soundHit:
+      collection: GenericHit
+  - type: RefillableSolution
+    solution: Welder
+  - type: Tool
+    useSound:
+      collection: Welder
+    qualities: Welding
+  - type: Welder
+    fuelConsumption: 0.06 # TODO RMC14 change this when welders are fixed
+    fuelLitCost: 0
+  - type: PointLight
+    enabled: false
+    radius: 1.5
+    color: orange
+    netsync: false
+  - type: ItemTogglePointLight
+  - type: Appearance
+  - type: IgnitionSource
+    temperature: 700
   - type: Blowtorch
   - type: Clothing
     quickEquip: false
@@ -60,7 +111,35 @@
     - Suitstorage
 
 - type: entity
-  parent: CMWelder # TODO doesn't need eye protection but can only weld vents
+  parent: RMCWelderBase
+  id: CMWelder
+  components:
+  - type: RequiresEyeProtection
+  - type: SolutionContainerManager
+    solutions:
+      Welder:
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 100
+        maxVol: 100 # TODO RMC14 40 when welders are fixed
+
+- type: entity
+  parent: RMCWelderBase
+  id: RMCWelderAdmin
+  name: admin blowtorch
+  description: Melts anything as long as it's fueled, forget your eye protection!
+  suffix: Admin, DO NOT MAP
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      Welder:
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 500
+        maxVol: 500
+
+- type: entity
+  parent: RMCWelderBase
   id: CMWelderSmall
   name: ME3 hand welder
   description: A compact, handheld welding torch used by the Marines for cutting and welding jobs on the field. Due to the small size and slow strength, its function is limited compared to a full-sized technician's blowtorch.
@@ -68,7 +147,6 @@
   - type: Sprite
     sprite: _RMC14/Objects/Tools/welder_hand.rsi
   - type: Item
-    size: Small
     sprite: _RMC14/Objects/Tools/welder_hand.rsi
   - type: SolutionContainerManager
     solutions:

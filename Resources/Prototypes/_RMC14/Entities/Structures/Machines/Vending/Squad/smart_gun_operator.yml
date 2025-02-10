@@ -73,8 +73,8 @@
         points: 5
       - id: CMRollerBedSpawnFolded
         points: 5
-    #- id: CMFultonDeviceStack
-    #  points: 5
+      - id: RMCFulton20
+        points: 5
       - id: RMCPowerCellSmartgun
         points: 15
     - name: Binoculars

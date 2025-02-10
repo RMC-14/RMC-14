@@ -61,6 +61,7 @@
   - type: RMCFusionReactor
     watts: 100000
     randomizeDamage: true
+  - type: IntelPowerObjective
 
 - type: entity
   parent: BaseItem

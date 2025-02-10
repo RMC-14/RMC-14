@@ -36,6 +36,7 @@
     - type: RMCUserBulkyArmorIncapable
     - type: JobPrefix
       prefix: cm-job-prefix-researcher
+    - type: ViewIntelObjectives
   hidden: true # TODO RMC14
 
 - type: startingGear

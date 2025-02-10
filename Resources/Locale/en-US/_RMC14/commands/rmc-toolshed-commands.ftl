@@ -37,6 +37,12 @@ command-description-marine-randomizewithjob = Deletes and then spawns a marine o
 
 command-description-removeinvalidweeds = Removes any weeds that should not have normally spread to where they are from the map.
 
+command-description-requisitions-addbudget = Adds budget to the default Requisitions account.
+command-description-requisitions-removebudget = Removes budget from the default Requisitions account.
+
+command-description-intel-addpoints = Adds points to the default Intel tech tree.
+command-description-intel-removepoints = Removes points from the default Intel tech tree.
+
 command-description-prototypecontains = Filters entities by whether or not their prototype ID contains the given text.
 
 command-description-skills-get = Gets the level of a specific skill for a marine.

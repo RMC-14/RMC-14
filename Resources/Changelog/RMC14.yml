@@ -1,172 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed 300u upstream jugs fitting into satchels.
-    type: Fix
-  id: 798
-  time: '2024-10-07T05:52:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4325
-- author: Vermidia
-  changes:
-  - message: Pulling any xeno that's big is now in general slower
-    type: Fix
-  - message: Runner and warriors are no longer super slow to drag
-    type: Fix
-  id: 799
-  time: '2024-10-07T23:26:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4332
-- author: Vermidia
-  changes:
-  - message: Boiler neurotoxin applies 5 on direct hit, and boiler tailstabs now differ
-      based on gas toggled, with neuro injecting 16 neuro instead of injecting acid.
-    type: Fix
-  id: 800
-  time: '2024-10-08T22:09:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4337
-- author: Rainbeon
-  changes:
-  - message: Fixed Xeno Health Regeneration being half of what it should be in 13.
-    type: Fix
-  id: 801
-  time: '2024-10-08T22:12:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4345
-- author: Vermidia
-  changes:
-  - message: Added Avali species
-    type: Add
-  id: 802
-  time: '2024-10-08T22:14:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4336
-- author: Rainbeon
-  changes:
-  - message: Bullets will now only hit Eggs when directly aimed at
-    type: Tweak
-  id: 803
-  time: '2024-10-08T22:15:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4329
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Cargo tech, warden, and maint tech uniform can now be folded for an alternate
-      style
-    type: Tweak
-  id: 804
-  time: '2024-10-08T22:16:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4276
-- author: FungiFellow
-  changes:
-  - message: Added the missing stun on direct hit effect of the Boiler's Bombard.
-    type: Add
-  - message: Acid Bombard direct hits now properly applies the same effect as a Charged
-      Spit
-    type: Add
-  id: 805
-  time: '2024-10-09T02:07:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4214
-- author: CyberTropic
-  changes:
-  - message: Added soap
-    type: Add
-  id: 806
-  time: '2024-10-09T02:09:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4333
-- author: Vermidia
-  changes:
-  - message: Add hazard vests, hard hats, and rebreathers to maintenance tech vendors
-    type: Add
-  - message: Flashlights, penlights, and tripods no longer use powercells and won't
-      run out of power
-    type: Fix
-  id: 807
-  time: '2024-10-09T02:08:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4328
-- author: Vermidia
-  changes:
-  - message: Fixed boiler gas spreading one less tile than intended.
-    type: Fix
-  id: 808
-  time: '2024-10-09T05:17:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4361
-- author: CyberTropic
-  changes:
-  - message: Added magazine boxes for handfuls of shotgun shells.
-    type: Add
-  id: 809
-  time: '2024-10-09T08:55:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4065
-- author: Rainbeon
-  changes:
-  - message: The Lurker and Runner Leap sound effect now correctly only plays when
-      hitting an enemy with the leap.
-    type: Fix
-  id: 810
-  time: '2024-10-09T08:55:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4362
-- author: TeaTotalTemplar
-  changes:
-  - message: Added the missing plasma cost to the Carrier's "Plant Resin Hole" ability
-      tooltip
-    type: Fix
-  id: 811
-  time: '2024-10-09T21:03:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4369
-- author: crystalHex
-  changes:
-  - message: Added the gardener drone. The gardener drone sacrifices its resin constructions
-      and corrosive acid for the abilities to grow a variety of resin fruits, to plant
-      hardier weeds, and to surge resin. Resin surge allows you to speed up fruit
-      growth, create temporary walls, and make existing walls temporarily nigh unbreakable.
-    type: Add
-  - message: Added the gardener's fruits, the effects of which include instant healing,
-      health/plasma regeneration, overshield, movement speed increase, passive recovery
-      pheromones, and ability cooldown reduction.
-    type: Add
-  id: 812
-  time: '2024-10-09T21:55:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4100
-- author: TeaTotalTemplar
-  changes:
-  - message: Added the AR10, AR10 magazine and 7.62x51 cartridge
-    type: Add
-  id: 813
-  time: '2024-10-09T22:14:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4367
-- author: FungiFellow
-  changes:
-  - message: Added the MOU53 Shotgun & the Double Barrel
-    type: Add
-  id: 814
-  time: '2024-10-10T01:00:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4141
-- author: Vermidia
-  changes:
-  - message: Fix shields blocking more damage on break than they should
-    type: Fix
-  id: 815
-  time: '2024-10-10T01:01:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4389
-- author: DrSmugleaf
-  changes:
-  - message: Fixed receiving acid damage resulting in examine test that said you have
-      cold and shock burns.
-    type: Fix
-  id: 816
-  time: '2024-10-10T01:02:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4390
-- author: Whisper
-  changes:
-  - message: Fixed some minor structures and objects having arbitrary damage reduction,
-      resulting in doors and floodlights taking more damage to destroy than intended.
-    type: Fix
-  id: 817
-  time: '2024-10-10T05:40:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4392
-- author: TeaTotalTemplar
-  changes:
-  - message: Adds the Beretta M92FS pistol and magazine
-    type: Add
-  id: 818
-  time: '2024-10-10T05:41:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4397
 - author: Rainbeon
   changes:
   - message: Lurkers can now manually toggle off their invisibility, which refunds
@@ -5095,5 +4927,317 @@
   id: 1297
   time: '2025-02-07T07:26:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5535
+- author: Dutch-VanDerLinde
+  changes:
+  - message: The CE's, CMO's, QM's, CMP's and IO's headsets now correctly start with
+      some channels disabled by default. Right click the headset to configure them.
+    type: Tweak
+  id: 1298
+  time: '2025-02-07T08:14:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5534
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Night vision visors now have their film grain overlay
+    type: Tweak
+  id: 1299
+  time: '2025-02-07T08:15:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5484
+- author: Tunguso4ka
+  changes:
+  - message: A somewhat unlucky UNS Savannah returns from her refit.
+    type: Add
+  id: 1300
+  time: '2025-02-07T11:50:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5097
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added fist-bumping and high-fiving emotes. Right click on a fellow marine
+      to initiate the action.
+    type: Add
+  - message: Added tailswiping with other xenos emotes. Right click on a fellow xeno
+      to initiate the action.
+    type: Add
+  id: 1301
+  time: '2025-02-07T21:47:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5525
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Some marine uniforms can now be toggled to roll sleeves and take off
+      the jacket. Right click on a uniform to toggle it.
+    type: Tweak
+  id: 1302
+  time: '2025-02-07T23:00:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5539
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed ME3 hand welder (the small one) blinding you without eye protection.
+    type: Fix
+  id: 1303
+  time: '2025-02-08T05:16:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5541
+- author: Rainbeon
+  changes:
+  - message: Fixed Acid Resin Traps not triggering around open corners. (Traps will
+      still not trigger if they are entirely obstructed)
+    type: Fix
+  id: 1304
+  time: '2025-02-08T08:15:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5548
+- author: Rainbeon
+  changes:
+  - message: Dragging dead bodies that are on top of Parasite traps no longer triggers
+      the trap.
+    type: Fix
+  id: 1305
+  time: '2025-02-08T11:58:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5549
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed welder packs not refueling by just clicking on them.
+    type: Fix
+  id: 1306
+  time: '2025-02-08T11:57:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5542
+- author: Dicerson
+  changes:
+  - message: Spam cans are now available to be built in the construction menu, for
+      1 Cardboard per can.
+    type: Add
+  - message: Alt-Clicking on a spam can with a valid magazine in hand now load all
+      bullets from the magazine into the can after a 5 second doafter (Try HAR Magazines!)
+    type: Add
+  id: 1307
+  time: '2025-02-09T01:52:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5444
+- author: Farrellka
+  changes:
+  - message: Removed the old long ears for human!
+    type: Remove
+  - message: Added more long ears for human!
+    type: Add
+  id: 1308
+  time: '2025-02-09T02:06:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5170
+- author: DrSmugleaf
+  changes:
+  - message: Added random attachments to M16s and AR10s.
+    type: Add
+  - message: Added pizza deliverer admin spawn role as its own job with playtime tracking,
+      and fixed its starting loadout to be correct.
+    type: Add
+  - message: Added demolitionist loader kit, to hand out to someone else. You can
+      also just keep the extra rockets for yourself.
+    type: Add
+  - message: Added squad colored arrows for Squad Leaders.
+    type: Add
+  - message: Fixed M16 bump stock modifying stats and being removeable.
+    type: Fix
+  - message: Fixed the M16 not being able to have any underbarrel attachments.
+    type: Fix
+  - message: Fixed Requisitions not being able to vend filled grenade packets. They
+      are at the bottom of the middle vendor.
+    type: Fix
+  - message: Fixed small visual delay when unwielding before unblocking other hand.
+    type: Fix
+  - message: Fixed weeds not spreading through closed resin doors.
+    type: Fix
+  - message: Fixed Praetorian being able to move while preparing acid ball.
+    type: Fix
+  - message: Fixed larva and parasites being able to break the sensor tower.
+    type: Fix
+  - message: Fixed feeding range being 1 tiles instead of 1.5.
+    type: Fix
+  - message: Fixed rubberband when exiting lockers before it stuns you.
+    type: Fix
+  - message: Fixed HEFA knight armor, PMC gun operator armor, provost armor and other
+      faction armors having incorrect sprites.
+    type: Fix
+  - message: Fixed larvas and parasites being able to turn off flashlights and other
+      light sources.
+    type: Fix
+  - message: FIxed curtains not having an interaction outline.
+    type: Fix
+  - message: Fixed elements not showing up on the chemicals guidebook page.
+    type: Fix
+  - message: Fixed iron overdoses dealing 2x the intended amount of toxin damage.
+    type: Fix
+  - message: Fixed canteens holding 50 units instead of 60, and the metal flask not
+      starting empty.
+    type: Fix
+  - message: Fixed wooden barricades not being vaultable.
+    type: Fix
+  - message: Fixed the nailgun dealing less damage if two are wielded at the same
+      time.
+    type: Fix
+  - message: Fixed the M3-G4 grenadier helmet being acidable.
+    type: Fix
+  - message: Fixed larva and parasites being able to pat out fires.
+    type: Fix
+  - message: Fixed directional windows deconstructing into upstream glass.
+    type: Fix
+  - message: Fixed not being able to syringe nutriment out of food.
+    type: Fix
+  - message: Fixed donuts and snacks not allowing chemicals to be injected and not
+      being grindable.
+    type: Fix
+  - message: Fixed tile stacks becoming different tiles when split.
+    type: Fix
+  - message: Fixed tiles stacking up to 30 tiles instead of 60.
+    type: Fix
+  - message: Fixed player job titles being delayed in examines.
+    type: Fix
+  - message: Fixed the right click verb menu bouncing on uniforms before the butcher
+      verb appears.
+    type: Fix
+  - message: Fixed underbarrel shotgun and underslung grenade launchers being small
+      instead of normal sized items.
+    type: Fix
+  - message: Fixed not being able to put flashlights into your belt slot.
+    type: Fix
+  - message: Fixed some items like helmets and night vision huds being rotated in
+      storage.
+    type: Fix
+  - message: Fixed mentorwho not working with more than 1 mentor.
+    type: Fix
+  - message: Fixed the Queen having numbers in her name.
+    type: Fix
+  - message: Fixed sometimes not being able to repair a sensor tower until reconnect.
+    type: Fix
+  - message: Fixed reconnecting causing your vendor to say access denied before opening
+      anyways.
+    type: Fix
+  - message: Fixed bottles not starting at 60 units transfered by default, and changed
+      the default settings that they can be changed to.
+    type: Fix
+  - message: Fixed breaching charges not fitting into the engineer kit storage item.
+    type: Fix
+  - message: Astor Debb's figurine now has a small glow like night vision goggles
+      do when turned on.
+    type: Tweak
+  id: 1309
+  time: '2025-02-09T05:08:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5553
+- author: DrSmugleaf
+  changes:
+  - message: Added intel. Intel spawns at random spots on the planet. Paper scraps,
+      progress reports, folders and technical manuals must be read and then stored
+      in the Almayer's intel room for points. They can be found by using the data
+      detector. Progress reports may require a paper scrap to be read first, and its
+      data submitted in the intel computer inside the intel room; these clues are
+      listed on the View Intel Objectives window available to all intel-trained personnel.
+      Other sources of intels are dead xenos, which can be fultoned, perma-dead humanoid
+      bodies, rescuing live survivors, restoring colony power, and restoring colony
+      communications. Intel points can be exchanged for requisitions budget and additional
+      OB warheads in CIC through the tech tree console.
+    type: Add
+  - message: Added the intelligence officer and its equipment, gear and weapons racks.
+      The XM4 armor has an integrated motion detector, but does not allow webbing
+      to be used alongside it.
+    type: Add
+  - message: Added fultons. These can be attached to crates and dead xenos and instantly
+      picked up by a dropship with a fulton recovery system attached to its utility
+      point.
+    type: Add
+  - message: Added plastic explosives. These are similar to breaching charges but
+      deal more damage around them, and can be attached to xeno tunnels to quickly
+      collapse them.
+    type: Add
+  - message: Mapped in intel spawners nailguns, barrels, and plastic explosives to
+      each planet map.
+    type: Add
+  - message: Added the thunderdome, where admins may spawn ghost roles.
+    type: Add
+  - message: Added admin commands to change the current requisitions budget and intel
+      points.
+    type: Add
+  - message: Added Provost playtime trackers and ghost role spawners, used by admins.
+    type: Add
+  - message: Added a verb for admins to spawn someone with a certain job.
+    type: Add
+  - message: Fixed Boilers leaving behind a body after dying and exploding.
+    type: Fix
+  - message: Fixed being able to damage yourself by touching lights.
+    type: Fix
+  - message: Fixed Requisitions not having M1984 AP magazines and signal flare packs
+      in their vendor.
+    type: Fix
+  - message: Fixed throwing cooldown being higher than intended (0.5s > 0.25s).
+    type: Fix
+  - message: Fixed the smart gun's motion detector automatically turning off when
+      dropped.
+    type: Fix
+  - message: Updated the roadmap.
+    type: Tweak
+  - message: Watching a xeno no longer closes the UI.
+    type: Tweak
+  id: 1310
+  time: '2025-02-09T11:33:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5554
+- author: DrSmugleaf
+  changes:
+  - message: Added Nan 'Snow Bunny' Mazu figurine
+    type: Add
+  id: 1311
+  time: '2025-02-09T11:53:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5556
+- author: Ian321
+  changes:
+  - message: IO can now pick up armor and a backpack from their equipment vendor.
+    type: Fix
+  id: 1312
+  time: '2025-02-09T19:47:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5559
+- author: DrSmugleaf
+  changes:
+  - message: Fixed ghost roles crashing the server this code is a blight I hate it
+      here this shit is ass 100 years of pain give me RMC14 ERT system so we can forget
+      they exist
+    type: Fix
+  - message: Mortars now have more health until them only being knocked over by xenos
+      is implemented.
+    type: Tweak
+  id: 1313
+  time: '2025-02-09T21:57:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5562
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the small document pouch being half the intended size.
+    type: Fix
+  id: 1314
+  time: '2025-02-09T21:59:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5563
+- author: Vermidia
+  changes:
+  - message: Fixed burrower unburrow stunning allies
+    type: Fix
+  id: 1315
+  time: '2025-02-10T00:23:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5565
+- author: DrSmugleaf
+  changes:
+  - message: Fixed ghost role menu sometimes not showing any ghost roles, including
+      larva ghost roleas.
+    type: Fix
+  - message: Fixed not being able to transfer IOs to other squads.
+    type: Fix
+  id: 1316
+  time: '2025-02-10T00:23:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5568
+- author: Vermidia
+  changes:
+  - message: Fixed xenos being able to destroy mortars. They now make them drop the
+      kit on the floor. Mortar health reverted back, and xenos now knock them over
+      in 1 hit.
+    type: Fix
+  id: 1317
+  time: '2025-02-10T00:24:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5564
+- author: DrSmugleaf
+  changes:
+  - message: Fixed CT, SL, SGO, Specs and FTLs not being able to buy fultons.
+    type: Fix
+  id: 1318
+  time: '2025-02-10T00:42:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5570
 Name: RMC14
 Order: -1

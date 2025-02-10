@@ -81,4 +81,7 @@ public sealed partial class AreaComponent : Component
     [DataField, AutoNetworkedField]
     [Access(typeof(AreaSystem), typeof(WeedKillerSystem))]
     public bool WeedKilling;
+
+    [DataField, AutoNetworkedField]
+    public bool RetrieveItemObjective;
 }
