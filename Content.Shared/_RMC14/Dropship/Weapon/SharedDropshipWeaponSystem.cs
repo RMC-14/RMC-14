@@ -254,15 +254,20 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 SetTarget((uid, terminal), null);
             }
 
-            var list = HasComp<MedevacStretcherComponent>(ent) ? terminal.Medevacs : terminal.Targets;
-            var span = CollectionsMarshal.AsSpan(list);
+            var targets = terminal.Targets;
+            if (HasComp<MedevacStretcherComponent>(ent))
+                targets = terminal.Medevacs;
+            else if (HasComp<RMCActiveFultonComponent>(ent))
+                targets = terminal.Fultons;
+
+            var span = CollectionsMarshal.AsSpan(targets);
             for (var i = 0; i < span.Length; i++)
             {
                 ref var target = ref span[i];
                 if (target.Id != netUid)
                     continue;
 
-                list.RemoveAt(i);
+                targets.RemoveAt(i);
                 break;
             }
 
