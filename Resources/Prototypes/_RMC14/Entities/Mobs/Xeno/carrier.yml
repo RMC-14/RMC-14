@@ -126,3 +126,5 @@
       state: carrier
   - type: XenoInhands
     prefix: carrier
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.2

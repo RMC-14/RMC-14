@@ -38,6 +38,7 @@ public sealed class HiveLeaderSystem : EntitySystem
         _pheromonesQuery = GetEntityQuery<XenoPheromonesComponent>();
 
         SubscribeLocalEvent<NewXenoEvolvedEvent>(OnLeaderNewXenoEvolved);
+        SubscribeLocalEvent<XenoDevolvedEvent>(OnLeaderXenoDevolved);
 
         SubscribeLocalEvent<HiveLeaderComponent, ComponentRemove>(OnLeaderRemove);
         SubscribeLocalEvent<HiveLeaderComponent, EntityTerminatingEvent>(OnLeaderRemove);
@@ -66,19 +67,12 @@ public sealed class HiveLeaderSystem : EntitySystem
 
     private void OnLeaderNewXenoEvolved(ref NewXenoEvolvedEvent args)
     {
-        if (!_hiveLeaderQuery.TryComp(args.OldXeno, out var oldLeader) ||
-            !_hiveLeaderGranterQuery.TryComp(oldLeader.Granter, out var granter) ||
-            _hiveLeaderGranterQuery.HasComp(args.NewXeno))
-        {
-            return;
-        }
+        Transfer(args.OldXeno, args.NewXeno);
+    }
 
-        var newLeader = EnsureComp<HiveLeaderComponent>(args.NewXeno);
-        newLeader.Granter = oldLeader.Granter;
-        granter.Leaders.Remove(args.OldXeno);
-        granter.Leaders.Add(args.NewXeno);
-
-        SyncPheromones((oldLeader.Granter.Value, granter));
+    private void OnLeaderXenoDevolved(ref XenoDevolvedEvent args)
+    {
+        Transfer(args.OldXeno, args.NewXeno);
     }
 
     private void OnGranterRemove<T>(Entity<HiveLeaderGranterComponent> ent, ref T args)
@@ -281,5 +275,22 @@ public sealed class HiveLeaderSystem : EntitySystem
         granter.Leaders.Remove(leader);
         Dirty(leader.Comp.Granter.Value, granter);
         SyncPheromones((leader.Comp.Granter.Value, granter));
+    }
+
+    private void Transfer(EntityUid oldXeno, EntityUid newXeno)
+    {
+        if (!_hiveLeaderQuery.TryComp(oldXeno, out var oldLeader) ||
+            !_hiveLeaderGranterQuery.TryComp(oldLeader.Granter, out var granter) ||
+            _hiveLeaderGranterQuery.HasComp(newXeno))
+        {
+            return;
+        }
+
+        var newLeader = EnsureComp<HiveLeaderComponent>(newXeno);
+        newLeader.Granter = oldLeader.Granter;
+        granter.Leaders.Remove(oldXeno);
+        granter.Leaders.Add(newXeno);
+
+        SyncPheromones((oldLeader.Granter.Value, granter));
     }
 }

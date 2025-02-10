@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: BaseItem
   id: RMCMortarKit
   name: M402 mortar portable kit
@@ -89,6 +89,15 @@
       Snow: _RMC14/Objects/Weapons/mortar/snow.rsi
       Classic: _RMC14/Objects/Weapons/mortar/classic.rsi
       Urban: _RMC14/Objects/Weapons/mortar/urban.rsi
+  - type: ReceiverXenoClaws
+    maxHealth: 100
+    hitsToDestroy: 1
+    minimumClawStrength: Normal
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/_RMC14/Structures/metalhit.ogg"
 
 - type: entity
   abstract: true

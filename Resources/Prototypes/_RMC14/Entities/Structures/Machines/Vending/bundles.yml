@@ -85,14 +85,14 @@
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleCombatTechnicianEssentials
   name: essential engineer set
-  description: Contains 50 metal, 40 plasteel, 25 sandbags, a high-capacity power cell, an entrenching tool and a light replacer.
+  description: Contains 50 metal, 40 plasteel, 25 sandbags, a high-capacity power cell, an entrenching tool, a light replacer, and a nailgun.
   components:
   - type: Sprite
     sprite: Objects/Weapons/Bombs/c4.rsi
     state: icon
   - type: CMVendorBundle
     bundle:
-#      - # TODO RMC14 plastic explosives
+    - RMCExplosivePlastic
     - CMSandbagEmpty25
     - CMSheetMetal50
     - CMSheetPlasteel40
@@ -100,6 +100,7 @@
     - CMEntrenchingTool
     - CMLightReplacer
 #    - CMAPCElectronics # TODO RMC14 uncomment when power
+    - RMCNailgunTactical
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel

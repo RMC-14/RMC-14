@@ -114,6 +114,8 @@
       whitelist:
         components:
         - XenoHeavy
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.7
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -179,7 +181,9 @@
   - type: XenoRetrieve
   - type: XenoAid
     componentsRemove:
-    - type: AmmoSlowed
+    - type: RMCSlowdown
+    - type: RMCSuperSlowdown
+    - type: RMCRooted
   - type: XenoSprayAcid
     acid: XenoAcidSprayStrong
     plasmaCost: 130

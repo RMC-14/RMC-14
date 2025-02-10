@@ -521,6 +521,7 @@
   parent: RMCBoxMagazineBase
   id: RMCBoxMagazinePistolM1984APEmpty
   name: magazine box (AP M1984 x 16)
+  suffix: Empty
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -536,18 +537,20 @@
       map: [ "lid" ]
     - state: lid_type_ap
       map: [ "lid_stripe" ]
-
-- type: entity
-  parent: RMCBoxMagazinePistolM1984APEmpty
-  id: RMCBoxMagazinePistolM1984AP
-  components:
   - type: CMItemSlots
-    startingItem: RMCMagazinePistolM1984AP
     count: 16
     slot:
       whitelist:
         tags:
         - RMCMagazinePistolM1984AP
+
+- type: entity
+  parent: RMCBoxMagazinePistolM1984APEmpty
+  id: RMCBoxMagazinePistolM1984AP
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazinePistolM1984AP
 
 # M77
 - type: entity

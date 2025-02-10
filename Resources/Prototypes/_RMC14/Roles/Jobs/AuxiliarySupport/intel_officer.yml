@@ -8,6 +8,8 @@
   - !type:DepartmentTimeRequirement
     department: CMSquad
     time: 18000 # 5 hours
+  ranks:
+    RMCRankSecondLT: []
   startingGear: CMGearIntelOfficer
   icon: "CMJobIconIntelOfficer"
   joinNotifyCrew: false
@@ -24,25 +26,32 @@
     - type: Skills
       skills:
         RMCSkillCqc: 1
+        RMCSkillEndurance: 1
         RMCSkillEngineer: 2
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
         RMCSkillIntel: 2
         RMCSkillJtac: 2
-        RMCSkillLeadership: 2
+        RMCSkillLeadership: 1
         RMCSkillMeleeWeapons: 1
         RMCSkillOverwatch: 1
         RMCSkillResearch: 1
+    - type: CMVendorUser
+      points: 45
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "IO"
-  hidden: true # TODO RMC14
+      prefix: cm-job-prefix-intel
+    - type: ViewIntelObjectives
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadEcho
 
 - type: startingGear
   id: CMGearIntelOfficer
   equipment:
-    jumpsuit: CMJumpsuitIO
+    jumpsuit: RMCUniformIntel
     shoes: CMBootsBlackFilled
     id: CMIDCardIntelOfficer
 

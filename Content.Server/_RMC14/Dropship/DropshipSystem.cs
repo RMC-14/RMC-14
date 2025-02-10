@@ -1,6 +1,5 @@
 ﻿using System.Numerics;
 using Content.Server._RMC14.Marines;
-using Content.Server.Audio;
 using Content.Server.Doors.Systems;
 using Content.Server.GameTicking;
 using Content.Server.Shuttles.Components;
@@ -24,9 +23,7 @@ using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
-using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
-using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -70,7 +67,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         SubscribeLocalEvent<DropshipNavigationComputerComponent, ActivateInWorldEvent>(OnActivateInWorld);
 
         SubscribeLocalEvent<DropshipComponent, FTLRequestEvent>(OnRefreshUI);
-        SubscribeLocalEvent<DropshipComponent, FTLStartedEvent>(OnRefreshUI);
+        SubscribeLocalEvent<DropshipComponent, FTLStartedEvent>(OnFTLStarted);
         SubscribeLocalEvent<DropshipComponent, FTLCompletedEvent>(OnFTLCompleted);
         SubscribeLocalEvent<DropshipComponent, FTLUpdatedEvent>(OnRefreshUI);
 
@@ -113,6 +110,18 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
         _ui.OpenUi(ent.Owner, DropshipHijackerUiKey.Key, args.User);
         _ui.SetUiState(ent.Owner, DropshipHijackerUiKey.Key, new DropshipHijackerBuiState(destinations));
+    }
+
+    private void OnFTLStarted(Entity<DropshipComponent> ent, ref FTLStartedEvent args)
+    {
+        OnRefreshUI(ent, ref args);
+
+        var map = args.FromMapUid;
+        if (HasComp<AlmayerComponent>(map))
+        {
+            var ev = new DropshipLaunchedFromWarshipEvent(ent);
+            RaiseLocalEvent(ent, ref ev, true);
+        }
     }
 
     private void OnFTLCompleted(Entity<DropshipComponent> ent, ref FTLCompletedEvent args)

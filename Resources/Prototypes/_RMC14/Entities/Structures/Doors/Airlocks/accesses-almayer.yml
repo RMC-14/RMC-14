@@ -181,7 +181,7 @@
   suffix: Security, Locked
   components:
   - type: AccessReader
-    access: [ [ "CMAccessBrig" ] ]
+    access: [ [ "CMAccessBrig" ], [ "CMAccessCommand" ] ]
 
 # Liaison
 - type: entity

@@ -67,4 +67,7 @@ public sealed partial record CMVendorEntry
 
     [DataField, AutoNetworkedField]
     public int? BoxAmount;
+
+    [DataField, AutoNetworkedField]
+    public int? BoxSlots;
 }

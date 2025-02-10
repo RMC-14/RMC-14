@@ -385,12 +385,22 @@
       Urban: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/urban.rsi
 
 - type: entity
-  parent: RMCStockAttachmentBase
+  parent: RMCAttachmentM54CStockCollapsible
+  id: RMCAttachmentM54CMK1StockCollapsible
+  suffix: Desert Camo
+  description: The standard back end of any gun starting with M54. Compatible with the M54C series, this stock reduces recoil and scatter, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle. Painted in a lovely desert camo.
+  components:
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
+  parent: RMCAttachableBase
   id: RMCAttachmentM16Stock
   name: M16 bump stock
   description: Technically illegal in the state of California.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
     state: m16-stock
   - type: AttachableVisuals
     suffix: ""
@@ -398,9 +408,6 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentM16Stock
-  - type: AttachableWieldDelayMods
-    modifiers:
-    - delay: 0.1
 
 - type: entity
   parent: RMCStockAttachmentBase
@@ -628,6 +635,8 @@
   - type: AttachableSizeMods
     modifiers:
     - size: 1
+      conditions:
+        activeOnly: true
   - type: AttachableWieldDelayMods
     modifiers:
     - delay: 0.4

@@ -53,9 +53,9 @@
         points: 10
     - name: Restricted Firearms
       entries:
-      - id: RMCMK80Case
+      - id: RMCGunCasePistolMK80
         points: 15
-      - id: RMCSmartPistolCase
+      - id: RMCGunCasePistolSmart
         points: 15
     - name: Clothing Items
       entries:
@@ -132,7 +132,7 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      - id: CMBeltSmartGunOperator
+      - id: CMBeltSmartGunOperatorFilled
       - id: RMCBeltSmartGunOperatorPistolFilled
     - name: Pouches
       choices: { RMCPouch: 2 }
@@ -156,6 +156,7 @@
       - id: RMCPouchGeneralMedium
       - id: RMCPouchPistol
       - id: RMCPouchMacheteFilled
+        name: machete pouch (Full)
     #- id: CMSlingPouch
     - name: Accessories
       choices: { CMAccessories: 1 }

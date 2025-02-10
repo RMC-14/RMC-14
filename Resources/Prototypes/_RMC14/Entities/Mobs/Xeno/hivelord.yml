@@ -119,6 +119,8 @@
     - WallXenoResinThick
     - WallXenoMembraneThick
     - DoorXenoResinThick
+    - XenoStickyResin
+    - XenoFastResin
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
     canUpgrade: true
@@ -130,6 +132,8 @@
   - type: XenoEvolution
     strains:
     - CMXenoHivelordResinWhisperer
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.2
 
 - type: entity
   parent: CMXenoHivelordBase
@@ -160,6 +164,8 @@
     - WallXenoResin
     - WallXenoMembrane
     - DoorXenoResin
+    - XenoStickyResin
+    - XenoFastResin
     - XenoWeedsSource
     canOrderConstruction:
     - HiveCoreXenoConstructionNode

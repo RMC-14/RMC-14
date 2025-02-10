@@ -26,7 +26,7 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
             return;
 
         var locationName = "Unknown";
-        if (_areas.TryGetArea(ent, out _, out var areaProto, out _))
+        if (_areas.TryGetArea(ent, out _, out var areaProto))
             locationName = areaProto.Name;
 
         if (HasComp<ParasiteSpentComponent>(ent))

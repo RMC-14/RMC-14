@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: ActionXenoTransferPlasma
   parent: ActionXenoBase
   name: Transfer plasma (50) # TODO RMC14 proper plasma costs
@@ -31,7 +31,7 @@
   id: ActionXenoResinSurge
   parent: ActionXenoBase
   name: Resin Surge (75)
-  description: Speeds up fruit growth by 5 seconds when used on fruit, creates temporary walls when used on weeds or use on existing walls to reinforce them with 6000 hp for 15 seconds. #or create patches of sticky resin. TODO RMC14
+  description: Speeds up fruit growth by 5 seconds when used on fruit, creates temporary walls when used on weeds or use on existing walls to reinforce them with 6000 hp for 15 seconds. Targeting anything else creates a 3x3 patch of weak sticky resin after a small doafter.
   components:
   - type: EntityWorldTargetAction
     itemIconStyle: NoItem
