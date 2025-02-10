@@ -63,10 +63,7 @@
   - type: SpawnPoint
     job_id: CMIntelOfficer
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: intel_officer
+    state: io_spawn
 
 - type: playTimeTracker
   isHumanoid: true

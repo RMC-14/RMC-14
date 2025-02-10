@@ -86,10 +86,7 @@
   - type: SpawnPoint
     job_id: CMAuxiliarySupportOfficer
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: auxiliary_support_officer
+    state: x
 
 - type: playTimeTracker
   id: CMJobAuxiliarySupportOfficer

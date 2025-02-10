@@ -70,10 +70,7 @@
   - type: SpawnPoint
     job_id: CMChiefEngineer
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: chief_engineer
+    state: ce_spawn
 
 - type: playTimeTracker
   id: CMJobChiefEngineer
