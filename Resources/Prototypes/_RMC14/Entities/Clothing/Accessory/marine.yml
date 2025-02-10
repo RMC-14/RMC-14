@@ -7,6 +7,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/camera_gear.rsi
+    state: icon
   - type: ToggleClothing
     action: RMCActionToggleOWCamera
   - type: Item
