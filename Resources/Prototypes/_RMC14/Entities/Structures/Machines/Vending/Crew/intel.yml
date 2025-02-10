@@ -124,10 +124,10 @@
       - id: CMHeadsetIntel
       - id: CMMRE
     - name: Armor
-      choices: { CMArmor: 1 }
-      takeAll: RMCIntelArmor
+      choices: { CMArmor: 1}
       entries:
       - id: RMCArmorXM4
+        recommended: true
       - id: CMArmorM3Light
       - id: CMCoatOfficer
     - name: Backpack
