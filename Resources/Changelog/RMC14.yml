@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: TeaTotalTemplar
-  changes:
-  - message: Adds the M07 Training Grenade - this grenade functions identically to
-      the M40 HEDP and HEFA but contains no explosive charge, allowing new recruits
-      to familiarise themselves with the M40 in a safe environment. Can be loaded
-      into grenade launchers, or thrown by hand.
-    type: Add
-  id: 823
-  time: '2024-10-11T09:25:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4398
 - author: Rainbeon
   changes:
   - message: Fixed player-controlled Parasites not hearing their own infection noise
@@ -5222,5 +5212,41 @@
   id: 1322
   time: '2025-02-10T23:15:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5571
+- author: DrSmugleaf
+  changes:
+  - message: Fixed not being able to buy T1 techs after unlocking T2.
+    type: Fix
+  - message: Fixed ARES always listing all points as being new in the command and
+      intel radio announcement.
+    type: Fix
+  - message: Fixed intel officers not getting squad trackers.
+    type: Fix
+  - message: Fixed the ghost role amount shown on the button at the bottom sometimes
+      being incorrect.
+    type: Fix
+  - message: Fixed repurchasable intel tech tree options only ever increasing in price
+      the first time they are bought.
+    type: Fix
+  - message: Fixed 2 missing breaching charges in Chance's Claim.
+    type: Fix
+  - message: Fixed the XM4 armor not showing motion detector blips.
+    type: Fix
+  - message: Fixed returned fultons that crash back to the planet still being listed
+      on the dropship fulton target UI.
+    type: Fix
+  - message: Fixed picked up fultons still being listed on the dropship fulton target
+      UI.
+    type: Fix
+  - message: Fixed thunderdome humanoids and xenos showing up bioscans and being counted
+      for round end conditions.
+    type: Fix
+  - message: Fixed thunderdome humanoids being able to talk with or hear humanoids
+      outside the thunderdome.
+    type: Fix
+  - message: Fixed the thunderdome having no lights.
+    type: Fix
+  id: 1323
+  time: '2025-02-10T23:42:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5572
 Name: RMC14
 Order: -1
