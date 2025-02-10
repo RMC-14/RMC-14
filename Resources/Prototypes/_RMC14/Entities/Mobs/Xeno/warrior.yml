@@ -103,7 +103,7 @@
   - CMXenoFlammable
   - RMCXenoSpeechSounds
   id: CMXenoWarriorBoxer
-  name: 
+  name:
   description: Мускулистый ксено с бронированными лапами.
   components:
   - type: GhostRole
