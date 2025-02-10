@@ -162,6 +162,15 @@
   - type: XenoGrowOvipositorAction
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoGrowOvipositor
+  name: Grow Ovipositor
+  description: Become immobile and start laying eggs which will produce parasites.
+  components:
+    - type: Sprite
+      state: grow_ovipositor
+
+- type: entity
   id: ActionXenoTurnInvisible
   parent: ActionXenoBase
   name: Turn Invisible (20) # TODO RMC14 proper plasma costs
