@@ -212,7 +212,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
 
     private void RefreshComputers()
     {
-        var canEvacuate = _alertLevel.IsRedOrDeltaAlert();
+        var canEvacuate = _alertLevel.IsRedOrDeltaAlert() || _evacuation.IsEvacuationEnabled();
         var evacuationEnabled = _evacuation.IsEvacuationEnabled();
         var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
         while (computers.MoveNext(out var uid, out var computer))

@@ -407,26 +407,25 @@ public abstract class SharedEvacuationSystem : EntitySystem
         DebugTools.Assert(map != null);
 
         var progress = EnsureComp<EvacuationProgressComponent>(map.Value);
-        {
-            progress.Enabled = !progress.Enabled;
-            Dirty(map.Value, progress);
 
-            if (progress.Enabled)
-            {
-                _marineAnnounce.AnnounceARES(
-                    null,
-                    "Attention. Emergency. All personnel must evacuate immediately.",
-                    startSound
-                );
-                var ev = new EvacuationEnabledEvent();
-                RaiseLocalEvent(map.Value, ref ev, true);
-            }
-            else
-            {
-                _marineAnnounce.AnnounceARES(null, "Evacuation has been cancelled.", cancelSound);
-                var ev = new EvacuationDisabledEvent();
-                RaiseLocalEvent(map.Value, ref ev, true);
-            }
+        progress.Enabled = !progress.Enabled;
+        Dirty(map.Value, progress);
+
+        if (progress.Enabled)
+        {
+            _marineAnnounce.AnnounceARES(
+                null,
+                "Attention. Emergency. All personnel must evacuate immediately.",
+                startSound
+            );
+            var ev = new EvacuationEnabledEvent();
+            RaiseLocalEvent(map.Value, ref ev, true);
+        }
+        else
+        {
+            _marineAnnounce.AnnounceARES(null, "Evacuation has been cancelled.", cancelSound);
+            var ev = new EvacuationDisabledEvent();
+            RaiseLocalEvent(map.Value, ref ev, true);
         }
     }
 
