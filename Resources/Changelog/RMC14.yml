@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fix shields blocking more damage on break than they should
-    type: Fix
-  id: 815
-  time: '2024-10-10T01:01:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4389
-- author: DrSmugleaf
-  changes:
-  - message: Fixed receiving acid damage resulting in examine test that said you have
-      cold and shock burns.
-    type: Fix
-  id: 816
-  time: '2024-10-10T01:02:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4390
 - author: Whisper
   changes:
   - message: Fixed some minor structures and objects having arbitrary damage reduction,
@@ -5236,5 +5221,22 @@
   id: 1314
   time: '2025-02-09T21:59:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5563
+- author: Vermidia
+  changes:
+  - message: Fixed burrower unburrow stunning allies
+    type: Fix
+  id: 1315
+  time: '2025-02-10T00:23:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5565
+- author: DrSmugleaf
+  changes:
+  - message: Fixed ghost role menu sometimes not showing any ghost roles, including
+      larva ghost roleas.
+    type: Fix
+  - message: Fixed not being able to transfer IOs to other squads.
+    type: Fix
+  id: 1316
+  time: '2025-02-10T00:23:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5568
 Name: RMC14
 Order: -1
