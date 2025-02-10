@@ -1,6 +1,6 @@
-﻿namespace Content.Shared._RMC14.Thunderdome;
+﻿using Robust.Shared.GameStates;
 
-public sealed class ThunderdomeMapComponent : Component
-{
+namespace Content.Shared._RMC14.Thunderdome;
 
-}
+[RegisterComponent, NetworkedComponent]
+public sealed partial class ThunderdomeMapComponent : Component;
