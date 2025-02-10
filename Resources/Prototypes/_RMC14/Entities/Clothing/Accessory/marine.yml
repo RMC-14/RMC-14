@@ -13,8 +13,9 @@
     size: Normal
     sprite: _RMC14/Objects/Clothing/Accessory/camera_gear.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Accessory/camera_gear.rsi
     quickEquip: false
+    sprite: _RMC14/Objects/Clothing/Accessory/camera_gear.rsi
+    equippedPrefix: camera
     slots:
     - Ears
     - Head
