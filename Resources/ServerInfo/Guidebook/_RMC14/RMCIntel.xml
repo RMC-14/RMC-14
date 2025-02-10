@@ -8,11 +8,11 @@
 
   ## Sources
 
-  - Intelligence can be gather by anyone, tho some sources require specialized training.
+  - Intelligence can be gathered by anyone, though some sources require specialized training.
 
   [color=#A88B5E][bold]Uplink[/bold][/color]
 
-  - Restoring [textlink="power" link="RMCGuideRoleCombatTechnician"] and [textlink="communications" link="RMCGuideCommunicationsTowers"] for the first time grands points.
+  - Restoring [textlink="power" link="RMCGuideRoleCombatTechnician"] and [textlink="communications" link="RMCGuideCommunicationsTowers"] for the first time grants intel points.
 
   [color=#A88B5E][bold]Bodies[/bold][/color]
 
@@ -21,7 +21,7 @@
     <GuideEntityEmbed Entity="RMCHumanCorpseColonistBurst" />
   </Box>
 
-  - Survivors award points the first time they arrive on the mothership.
+  - Survivors award points the first time they arrive on the warship.
   - Dead colonists must be stored in the morgue.
 
   <Box>
@@ -33,7 +33,7 @@
 
   - Xenos must be stored in the research containment room on the second floor of medical.
   \n\t- The bigger they are, the more points they award.
-  \n\t- Note that immature ones (Parasites, Larvas and Lesser) do not award any points.
+  \n\t- Note that immature ones (Parasites, Larvas and Lesser Drones) do not award any points.
 
   [color=#A88B5E][bold]Documents and devices[/bold][/color]
 
@@ -44,10 +44,10 @@
     <GuideEntityEmbed Entity="RMCIntelTechnicalManual" />
   </Box>
 
-  1. These documents must be read by trained personal.
+  1. These documents must be read by trained personnel.
   \n\t\t\t- More complex documents require that you have read easier ones before.
   \n\t\t\t- scrap -> report -> folder -> manual
-  \n2. The gained intel must then be entered into the intel computer found in the intel room.
+  \n2. The gained knowledge must then be entered into the intel computer found in the intel room.
   \n3. The read document must then be stored in the intel room.
 
   <Box>
@@ -83,26 +83,26 @@
 
   There are however two "unique" things that requisitions can't help you with.
   One is the rechargeable night vision optic that allow you to see in the dark for a limited amount of time.
-  The other is the field intelligence support kit that includes the tools listed above plus an intelligence pamphlet that teaches the reader how work the intel computer.
+  The other is the field intelligence support kit that includes the tools listed above plus an intelligence pamphlet that teaches the reader how to use the intel computer.
 
   <Box>
     <GuideEntityEmbed Entity="RMCComputerIntel" />
     <GuideEntityEmbed Entity="RMCTechTreeConsole" />
   </Box>
 
-  After getting geared up you should make yourself familiar with the devices in the intel room.
+  After getting geared up you should make yourself familiar with the devices in the intel room and CIC.
   The intel computer is used to write down what you have read in documents and the tech tree console allows you to spend your collected intelligence.
 
   [color=#A88B5E][bold]Deployment[/bold][/color]
 
   Or rather: "[italic]Thanks for all that but how will it actually go down?[/italic]"
 
-  - The ASO will sit in the intel lab to read and type down all incoming documents.
+  - The ASO will sit in the intel lab to read and sort all incoming documents, and submit the gained knowledge into the intel computer.
   - The CMO will drag dead xenos into the research lab.
-  - The Pilots and DCCs will install one fulton recovery system per dropship.
-  - The IOs will form a squad with a couple of marines to gather intelligence.
+  - The Pilots and DCCs will install a fulton recovery system, normally on the Normandy, but sometimes also on the Alamo.
+  - The IOs will form a squad, sometimes including a couple other marines, to gather intelligence.
   - Marines that took fultons with them should extract dead xenos.
-  - Marines that picked up intel should pass it to passing IOs, the FOB or fulton it out.
+  - Marines that picked up intel should pass it to passing IOs, the FOB or fulton it out in crates.
 
   Talk to your superior or SEA if you are confused or have any questions.
   <Box>
