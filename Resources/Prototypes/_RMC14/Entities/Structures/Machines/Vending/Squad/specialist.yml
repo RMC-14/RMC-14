@@ -18,7 +18,7 @@
     pointsType: Specialist
     sections:
     - name: Weapons Specialist Sets
-      choices: { SquadSpecKit: 1 }
+      takeOne: SquadSpecKit
       sharedSpecLimit: 2 # 2 as requested until Pyro is added
       entries:
       - id: RMCDemoSpecEquipmentCase

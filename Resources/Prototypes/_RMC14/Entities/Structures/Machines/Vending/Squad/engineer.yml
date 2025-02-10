@@ -20,7 +20,7 @@
       entries:
       - id: CMVendorBundleCombatTechnicianEssentials
     - name: Handheld Defense
-      choices: { CMHandheldDefense: 1 }
+      takeOne: CMHandheldDefense
       entries:
     #    CM21STeslaCoil
     #    CMJIMAPlantedFlag
