@@ -1,22 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Made the M3-VL vest and M3-VL flak vest have light armor speed
-    type: Tweak
-  id: 821
-  time: '2024-10-10T20:08:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4400
-- author: Rainbeon
-  changes:
-  - message: The Rest action description no longer falsely claims to regenerate plasma,
-      as resting has no effect on plasma regeneration.
-    type: Fix
-  - message: Pheromone and Resin Walker descriptions now state how much Plasma they
-      consume per second.
-    type: Add
-  id: 822
-  time: '2024-10-11T09:24:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4408
 - author: TeaTotalTemplar
   changes:
   - message: Adds the M07 Training Grenade - this grenade functions identically to
@@ -5226,5 +5208,19 @@
   id: 1320
   time: '2025-02-10T22:37:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5574
+- author: Ian321
+  changes:
+  - message: A guidebook page explaining intel has been added.
+    type: Add
+  id: 1321
+  time: '2025-02-10T23:16:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5575
+- author: Vermidia
+  changes:
+  - message: Fixed slows lingering forever in some cases.
+    type: Fix
+  id: 1322
+  time: '2025-02-10T23:15:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5571
 Name: RMC14
 Order: -1
