@@ -52,13 +52,14 @@
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-executive-officer
+    - type: ViewIntelObjectives
 
 - type: startingGear
   id: CMGearExecutiveOfficer
   equipment:
     jumpsuit: CMJumpsuitBO
     shoes: RMCShoesLaceup
-    head: RMCHeadCapFlippable
+    head: CMHeadCapPeakedService
     outerClothing: RMCCoatService
     id: CMIDCardExecutiveOfficer
     ears: CMHeadsetSeniorCommand

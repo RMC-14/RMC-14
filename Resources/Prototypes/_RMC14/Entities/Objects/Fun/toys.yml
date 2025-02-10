@@ -111,3 +111,12 @@
   components:
   - type: Sprite
     state: rouny_plushie
+
+- type: entity
+  parent: CMPlushieBase
+  id: RMCPlushieAlec
+  name: conspicuous plush
+  description: You can almost feel spite emanating from it. On it's back is a small tag listing the several cheap and hyper allergenic textiles it's made of. At the very bottom is the name of the maker, Drake Industries.
+  components:
+  - type: Sprite
+    state: alec_plushie

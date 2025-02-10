@@ -49,6 +49,7 @@
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-chief-engineer
+    - type: ViewIntelObjectives
 
 - type: startingGear
   id: CMGearChiefEngineer

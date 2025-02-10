@@ -213,6 +213,8 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
                 _ambientSound.SetSound(target, receivingSound, otherSound);
                 _ambientSound.SetRange(target, 16, otherSound);
                 _ambientSound.SetVolume(target, receivingSound.Params.Volume, otherSound);
+                var ev = new RMCTelephoneRingEvent(target);
+                RaiseLocalEvent<RMCTelephoneRingEvent>(ref ev);
             }
         }
 

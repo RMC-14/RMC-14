@@ -195,6 +195,14 @@ public sealed class AreaSystem : EntitySystem
         return area.Value.Comp.OB;
     }
 
+    public bool CanFulton(EntityCoordinates coordinates)
+    {
+        if (!TryGetArea(coordinates, out var area, out _))
+            return false;
+
+        return area.Value.Comp.Fulton;
+    }
+
     private bool IsRoofed(EntityCoordinates coordinates, Predicate<Entity<RoofingEntityComponent>> predicate)
     {
         var roofs = EntityQueryEnumerator<RoofingEntityComponent>();

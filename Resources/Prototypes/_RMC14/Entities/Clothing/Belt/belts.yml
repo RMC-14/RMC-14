@@ -158,7 +158,8 @@
       - RMCExplosiveBreachingCharge
       - RodMetal1
       - RMCNailgunCompact
-      #     - # TODO circuit board, plastic explosives, stock parts
+      - RMCExplosivePlastic
+      #     - # TODO circuit board, stock parts
       components:
       - Welder
       - PowerCell

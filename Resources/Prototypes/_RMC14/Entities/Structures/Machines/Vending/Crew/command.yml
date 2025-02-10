@@ -196,9 +196,10 @@
       - id: RMCLaserDesignator
         points: 12
         recommended: true
-      #- id: RMCDataDetector # TODO RMC14 Data Detector
-      #  points: 5
-      #- id: RMCFultonRecoveryDevice # TODO RMC14 Fulton Recovery
+      - id: RMCIntelDetector
+        points: 5
+      - id: RMCFulton20
+        points: 5
       - id: RMCFlashlight
         points: 1
       - id: RMCMotionDetector
@@ -208,8 +209,8 @@
         points: 2
       - id: RMCWhistle
         points: 5
-      #- id: RMCScabbardMacheteFilled # TODO RMC14 Machete Scabbard
-      #  points: 5
+      - id: RMCScabbardMacheteFilled
+        points: 5
 
 
 # Executive Officer #
@@ -488,7 +489,7 @@
       - id: WeaponRifleM59A
         name: M59A Prototype Rifle
         recommended: true # TODO RMC14 Make choices: colour the options brown
-      - id: CMSmartGunOperatorEquipmentCaseBelt # TODO RMC14 Port M56C Smart Protag Gun
+      - id: CMSmartGunOperatorEquipmentCaseBelt
         name: Commander's Smartgun
         recommended: true # TODO RMC14 Make choices: colour the options brown
     - name: Primary Ammunition
@@ -982,9 +983,11 @@
       - CMChiefEngineer
       choices: { CMWeaponPrimary: 1 }
       entries:
-      - id: WeaponShotgunM42A2
-      - id: WeaponRifleM54C
-      # - id: WeaponIncineratorUnit ToDo Add.
+      - id: RMCM42A2ShotgunCase
+        name: M42A2 pump shotgun
+      - id: RMCM54CMK2Case
+        name: M54C assault rifle MK2
+      # - id: RMCIncineratorUnitCase TODO: Incinerator unit case
     - name: Spare Equipment
       jobs:
       - CMChiefEngineer

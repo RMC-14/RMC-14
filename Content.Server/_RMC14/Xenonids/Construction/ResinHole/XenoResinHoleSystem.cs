@@ -375,6 +375,9 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
     private void OnXenoResinHoleStepTriggered(Entity<XenoResinHoleComponent> resinHole, ref StepTriggeredOffEvent args)
     {
+        if (_mobState.IsDead(args.Tripper))
+            return;
+
         if (resinHole.Comp.TrapPrototype == XenoResinHoleComponent.ParasitePrototype)
         {
             _stun.TryParalyze(args.Tripper, resinHole.Comp.StepStunDuration, true);
@@ -532,7 +535,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
                 if (ent != tripper.Owner)
                     continue;
 
-                if (!_interaction.InRangeUnobstructed(resinHole, ent, 1.5f))
+                if (!IsVisibleToTrap(resinHole, ent))
                     continue;
 
                 ActivateTrap((resinHole, holeComponent));
@@ -549,6 +552,45 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
         if (stoodUp || tripper.Comp.HoleList.Count == 0)
             RemCompDeferred<InResinHoleRangeComponent>(tripper);
+    }
+
+    public bool IsVisibleToTrap(EntityUid resinHole, EntityUid ent)
+    {
+        //Basic case, can see each other clearly, open LoS
+        if (_interaction.InRangeUnobstructed(resinHole, ent, 1.5f))
+            return true;
+
+        //Advanced case, checks if any point 1 tile away in any cardinal direction is capable of seeing the target.
+        //Allows slipping around open passages, but NOT through encasing walls, as offset check fails if the origin coordinate is inside a wall.
+        var holeCoordinates = _transform.GetMapCoordinates(resinHole);
+        var offsetCoordinates = holeCoordinates;
+
+        for (int i = 0; i < 4; i++)
+        {
+            switch (i)
+            {
+                case 0:
+                    offsetCoordinates = holeCoordinates.Offset(1, 0);
+                    break;
+                case 1:
+                    offsetCoordinates = holeCoordinates.Offset(-1, 0);
+                    break;
+                case 2:
+                    offsetCoordinates = holeCoordinates.Offset(0, 1);
+                    break;
+                case 3:
+                    offsetCoordinates = holeCoordinates.Offset(0, -1);
+                    break;
+                default:
+                    break;
+            }
+
+            //Trigger Range is preserved by the ContactingEntities check in the parent function, this just checks vision
+            if (_interaction.InRangeUnobstructed(offsetCoordinates, ent, 1.5f))
+                return true;
+        }
+
+        return false;
     }
 
     public override void Update(float frameTime)

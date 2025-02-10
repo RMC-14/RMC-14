@@ -114,9 +114,12 @@ public sealed class WeedKillerSystem : EntitySystem
             Dirty(areaId, area);
         }
 
-        _audio.PlayPvs(killer.Comp.Sound, killer);
+        var map = _transform.GetMapId(killer.Owner);
+        var sameMap = Filter.BroadcastMap(map);
+        _audio.PlayGlobal(killer.Comp.Sound, sameMap, false);
+        _rmcCameraShake.ShakeCamera(sameMap, 3, 1);
+
         _marineAnnounce.AnnounceARES(null, Loc.GetString("rmc-weed-killer-deploying", ("dropship", killer.Comp.DropshipName)));
-        _rmcCameraShake.ShakeCamera(Filter.Pvs(killer), 3, 1);
 
         foreach (var position in killer.Comp.Positions)
         {

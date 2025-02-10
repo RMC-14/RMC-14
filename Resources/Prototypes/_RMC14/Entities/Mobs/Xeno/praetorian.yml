@@ -114,6 +114,8 @@
       whitelist:
         components:
         - XenoHeavy
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.7
 
 - type: entity
   parent: CMXenoPraetorianBase

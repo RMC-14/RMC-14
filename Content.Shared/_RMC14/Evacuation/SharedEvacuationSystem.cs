@@ -599,7 +599,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
                     if (offAreas.Length == 0)
                         marineAnnounce += " All fueling areas operational.";
                     else
-                        marineAnnounce += $"To increase speed, restore power to the following areas: {offAreas}";
+                        marineAnnounce += $" To increase speed, restore power to the following areas: {offAreas}";
 
                     _marineAnnounce.AnnounceARES(null, marineAnnounce);
 
