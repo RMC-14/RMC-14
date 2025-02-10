@@ -116,7 +116,7 @@ public sealed class TechSystem : EntitySystem
 
         tier[args.Index] = option with
         {
-            CurrentCost = option.Cost + option.Increase,
+            CurrentCost = option.CurrentCost + option.Increase,
             Purchased = true,
         };
         Dirty(ent);
