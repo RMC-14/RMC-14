@@ -83,6 +83,15 @@
   - type: Sprite
     state: io_spawn
 
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleIO
+  name: Intelligence Officer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: intel_officer
+
 - type: playTimeTracker
   isHumanoid: true
   id: CMJobIntelOfficer

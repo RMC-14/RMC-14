@@ -88,6 +88,15 @@
   - type: Sprite
     state: x
 
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleASO
+  name: Auxiliary Support Officer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: auxiliary_support_officer
+
 - type: playTimeTracker
   id: CMJobAuxiliarySupportOfficer
   isHumanoid: true
