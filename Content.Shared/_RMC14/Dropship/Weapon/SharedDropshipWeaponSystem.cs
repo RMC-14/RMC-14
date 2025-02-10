@@ -694,8 +694,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 continue;
             }
 
+            RemComp<DropshipTargetComponent>(target.Value);
             RemCompDeferred<RMCActiveFultonComponent>(target.Value);
-            RemCompDeferred<DropshipTargetComponent>(target.Value);
             _transform.PlaceNextTo(target.Value, point);
             RefreshWeaponsUI(ent);
             return;
