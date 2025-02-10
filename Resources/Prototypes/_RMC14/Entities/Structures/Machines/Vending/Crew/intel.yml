@@ -124,8 +124,7 @@
       - id: CMHeadsetIntel
       - id: CMMRE
     - name: Armor
-      choices: { CMArmor: 1 }
-      takeAll: RMCIntelArmor
+      takeOne: CMArmor
       entries:
       - id: RMCArmorXM4
       - id: CMArmorM3Light
