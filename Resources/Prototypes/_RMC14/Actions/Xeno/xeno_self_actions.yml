@@ -49,6 +49,15 @@
     useDelay: 0.33
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoPheromones
+  name: Emit Pheromones
+  description: Gives a buff to nearby xenonids.
+  components:
+  - type: Sprite
+    state: emit_pheromones
+
+- type: entity
   id: ActionXenoHide
   parent: ActionXenoBase
   name: Hide
