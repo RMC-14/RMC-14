@@ -1,28 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed hivemind chat not working for xenonids.
-    type: Fix
-  - message: Fixed dropship doors being unpowered.
-    type: Fix
-  - message: Fixed radios on corpses starting on.
-    type: Fix
-  - message: Fixed MOU53 being listed for 0 points.
-    type: Fix
-  - message: Fixed ejecting full handfuls from the MOU53.
-    type: Fix
-  id: 826
-  time: '2024-10-11T21:52:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4417
-- author: Vermidia
-  changes:
-  - message: Fixed Boiler corpses injecting you with neurotoxin.
-    type: Fix
-  id: 827
-  time: '2024-10-11T21:58:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4418
-- author: DrSmugleaf
-  changes:
   - message: Fixed hivemind chat not working but for real this time I hate chat code
       this shit is a blight on this project even trying to exclude xenos from handheld
       radios is a sisyphean task changing any part of this feels like pushing a rock
@@ -5183,5 +5161,22 @@
   id: 1325
   time: '2025-02-11T22:38:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5592
+- author: Whisper
+  changes:
+  - message: Survivors can no longer interact with intel objectives.
+    type: Tweak
+  - message: Rules change; Survivors may not secure intel objectives without marine
+      support.
+    type: Tweak
+  id: 1326
+  time: '2025-02-11T22:41:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5583
+- author: Ian321
+  changes:
+  - message: Undeployed mortars can no longer be destroyed.
+    type: Fix
+  id: 1327
+  time: '2025-02-11T22:42:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5588
 Name: RMC14
 Order: -1
