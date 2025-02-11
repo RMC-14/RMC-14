@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Fixed player-controlled Parasites not hearing their own infection noise
-      when infecting a marine.
-    type: Fix
-  id: 824
-  time: '2024-10-11T09:26:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4404
 - author: DrSmugleaf
   changes:
   - message: Added survivors. This is a very hard role to play that spawns on the
@@ -5248,5 +5240,12 @@
   id: 1323
   time: '2025-02-10T23:42:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5572
+- author: Ian321
+  changes:
+  - message: You can now actually read your collected clues inside the tech tree window.
+    type: Fix
+  id: 1324
+  time: '2025-02-11T19:53:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5591
 Name: RMC14
 Order: -1
