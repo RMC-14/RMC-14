@@ -916,7 +916,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     _marineList.Add(marineId);
                 }
 
-                if (marinesAlive)
+                if (marinesAlive && _marineList.Count > 1)
                     break;
             }
 
