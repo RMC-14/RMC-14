@@ -1,16 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed hivemind chat not working but for real this time I hate chat code
-      this shit is a blight on this project even trying to exclude xenos from handheld
-      radios is a sisyphean task changing any part of this feels like pushing a rock
-      up a mountain please for the love of god someone save me from this hell.
-    type: Fix
-  id: 828
-  time: '2024-10-11T22:40:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4420
-- author: DrSmugleaf
-  changes:
   - message: Fixed Trijent window frames having error sprites in some directions.
     type: Fix
   - message: Fixed resin surge mentioning sticky resin which is not implemented yet.
@@ -5178,5 +5168,13 @@
   id: 1327
   time: '2025-02-11T22:42:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5588
+- author: DrSmugleaf
+  changes:
+  - message: Fixed scout and sniper invis randomly going on extremely long cooldowns,
+      which is only supposed to happen if they are the last marine left alive.
+    type: Fix
+  id: 1328
+  time: '2025-02-11T22:46:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5593
 Name: RMC14
 Order: -1
