@@ -242,7 +242,7 @@ public sealed class IntelSystem : EntitySystem
     {
         var user = args.User;
 
-        if (_ent.GetComponentOrNull<SurvivorComponent>(user) != null)
+        if (HasComp<SurvivorComponent>(user))
         {
             _popup.PopupClient($"You have no need to read the {Name(ent)}.", ent, user);
             return;
@@ -260,7 +260,7 @@ public sealed class IntelSystem : EntitySystem
         ContainerGettingInsertedAttemptEvent args)
     {
         var user = args.Container.Owner;
-        if (_ent.GetComponentOrNull<SurvivorComponent>(user) != null)
+        if (HasComp<SurvivorComponent>(user))
         {
             args.Cancel();
             _popup.PopupClient($"You have no use for the {Name(ent)}.", ent, user);
@@ -272,7 +272,7 @@ public sealed class IntelSystem : EntitySystem
     private void OnIntelPullAttempt(Entity<IntelRetrieveItemObjectiveComponent> ent, ref PullAttemptEvent args)
     {
         var user = args.PullerUid;
-        if (_ent.GetComponentOrNull<SurvivorComponent>(user) != null)
+        if (HasComp<SurvivorComponent>(user))
         {
             args.Cancelled = true;
             _popup.PopupClient($"You have no use for the {Name(ent)}.", user, user);
