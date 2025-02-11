@@ -57,16 +57,16 @@ public sealed class WeedKillerSystem : EntitySystem
         if (ev.Dropship.Comp.Destination is not { } destination)
             return;
 
-        CreateWeedKiller(Name(ev.Dropship), destination.ToCoordinates());
+        CreateWeedKiller(ev.Dropship, destination.ToCoordinates());
     }
 
-    public void CreateWeedKiller(string dropshipName, EntityCoordinates coordinates)
+    public void CreateWeedKiller(EntityUid dropship, EntityCoordinates coordinates)
     {
         var id = Spawn();
         var comp = EnsureComp<WeedKillerComponent>(id);
         comp.DeployAt = _timing.CurTime + _dropshipDelay;
         comp.DisableAt = _timing.CurTime + _dropshipDelay + _disableDuration;
-        comp.DropshipName = dropshipName;
+        comp.Dropship = dropship;
         Dirty(id, comp);
 
         if (!_area.TryGetArea(coordinates, out var lzArea, out _))
@@ -114,12 +114,17 @@ public sealed class WeedKillerSystem : EntitySystem
             Dirty(areaId, area);
         }
 
-        var map = _transform.GetMapId(killer.Owner);
-        var sameMap = Filter.BroadcastMap(map);
-        _audio.PlayGlobal(killer.Comp.Sound, sameMap, false);
-        _rmcCameraShake.ShakeCamera(sameMap, 3, 1);
+        var dropship = killer.Comp.Dropship;
 
-        _marineAnnounce.AnnounceARES(null, Loc.GetString("rmc-weed-killer-deploying", ("dropship", killer.Comp.DropshipName)));
+        if (dropship != null)
+        {
+            var map = _transform.GetMapId(dropship.Value);
+            var mapFilter = Filter.BroadcastMap(map);
+
+            _audio.PlayGlobal(killer.Comp.Sound, mapFilter, false);
+            _rmcCameraShake.ShakeCamera(mapFilter, 3, 1);
+            _marineAnnounce.AnnounceARES(null, Loc.GetString("rmc-weed-killer-deploying", ("dropship", Name(dropship.Value))));
+        }
 
         foreach (var position in killer.Comp.Positions)
         {

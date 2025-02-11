@@ -137,13 +137,14 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
             BoundUserInterfaceMessage nextMsg,
             DropshipWeaponsButtonRow row,
             List<TargetEnt> targets,
+            int page,
             out DropshipWeaponsButtonData? previous,
             out DropshipWeaponsButtonData? next)
         {
             previous = default;
             next = default;
 
-            var firstTarget = terminal.TargetsPage * 5;
+            var firstTarget = page * 5;
             if (targets.Count <= 5)
                 firstTarget = 0;
             else if (firstTarget > targets.Count - 5)
@@ -180,6 +181,7 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
                 new DropshipTerminalWeaponsTargetsNextMsg(),
                 screen.RightRow,
                 terminal.Targets,
+                terminal.TargetsPage,
                 out previous,
                 out next
             );
@@ -340,6 +342,7 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
                     new DropshipTerminalWeaponsMedevacNextMsg(),
                     screen.LeftRow,
                     terminal.Medevacs,
+                    terminal.MedevacsPage,
                     out var previous,
                     out var next
                 );
@@ -356,6 +359,7 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
                     new DropshipTerminalWeaponsFultonNextMsg(),
                     screen.LeftRow,
                     terminal.Fultons,
+                    terminal.FultonsPage,
                     out var previous,
                     out var next
                 );

@@ -800,6 +800,7 @@ public sealed class IntelSystem : EntitySystem
             var ares = _ares.EnsureARES();
             var points = tree.Value.Comp.Tree.Points;
             var last = tree.Value.Comp.LastAnnouncePoints;
+            tree.Value.Comp.LastAnnouncePoints = points;
             Dirty(tree.Value);
 
             var change = points - last;

@@ -94,7 +94,7 @@ public sealed class TechSystem : EntitySystem
             return;
 
         var tree = _intel.EnsureTechTree();
-        if (args.Tier < tree.Comp.Tree.Tier ||
+        if (tree.Comp.Tree.Tier < args.Tier ||
             !tree.Comp.Tree.Options.TryGetValue(args.Tier, out var tier))
         {
             Log.Warning($"{ToPrettyString(args.Actor)} tried to buy tech option with invalid tier {args.Tier}");
@@ -116,7 +116,7 @@ public sealed class TechSystem : EntitySystem
 
         tier[args.Index] = option with
         {
-            CurrentCost = option.Cost + option.Increase,
+            CurrentCost = option.CurrentCost + option.Increase,
             Purchased = true,
         };
         Dirty(ent);
