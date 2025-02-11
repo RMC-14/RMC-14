@@ -1,77 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added survivors. This is a very hard role to play that spawns on the
-      planet.
-    type: Add
-  - message: Added colony handheld radio.
-    type: Add
-  - message: Added survivor weapons and magazines to planets, add corpses, add metal,
-      plasteel and colony-locked doors.
-    type: Add
-  - message: Added power mechanics to doors. They can be pried instantly by crowbars
-      when unpowered, and by a gun with a bayonet attached, but not by a detached
-      bayonet or your bare hands.
-    type: Add
-  - message: Added Mr Wiggles to LV.
-    type: Add
-  - message: Added suicides by right clicking or alt clicking yourself while holding
-      a loaded gun. Check the rules for which roleplay reasons allow a suicide. Any
-      done without a valid roleplay reason will result in a ban. Starting and cancelling
-      a suicide will be treated the same as an actual suicide, and punished if invalid.
-    type: Add
-  - message: Added dropship night vision.
-    type: Add
-  - message: Added the MP5, MK45, Holdout and M16 survivor weapons, and the detective
-      armor and armored vest.
-    type: Add
-  - message: Added cargo containers to planet maps and the Almayer. They can be blown
-      up by explosions.
-    type: Add
-  - message: Added water grates to Trijent.
-    type: Add
-  - message: Fixed red crowbar stored sprite and crowbar size being too small.
-    type: Fix
-  - message: Fixed fire axe wide animation rotation.
-    type: Fix
-  - message: Fixed access and names for many doors, including those on the Almayer.
-      The CIC is no longer a walk-in clinic.
-    type: Fix
-  - message: Fixed platforms not being climbable in 0.25 aseconds.
-    type: Fix
-  - message: Fixed being able to move through barbed cades when climbing other things.
-    type: Fix
-  - message: Fixed the lifesaver bag having ointments instead of burn kits.
-    type: Fix
-  - message: Fixed runners, larva and parasites not being able to move through window
-      frames without climbing.
-    type: Fix
-  - message: Fixed the Queen not regenerating plasma while on ovi.
-    type: Fix
-  - message: Fixed fuel pump sentries friendly-firing you and having double the intended
-      range.
-    type: Fix
-  - message: Fixed the 5-slot webbing vests being able to fit SMG mags.
-    type: Fix
-  - message: Fixed the Liaison's pod crashing if launched early.
-    type: Fix
-  - message: Fixed not being able to pry unpowered shutters.
-    type: Fix
-  - message: Fixed landing zone sentries being powered before the dropship lands.
-    type: Fix
-  - message: Fixed xenonid eggs not being drawn over everything but mobs.
-    type: Fix
-  - message: Increased Queen footstep volume.
-    type: Tweak
-  - message: Returned the new cave formation to north Solaris caves.
-    type: Tweak
-  - message: Updated the roadmap.
-    type: Tweak
-  id: 825
-  time: '2024-10-11T19:36:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4414
-- author: DrSmugleaf
-  changes:
   - message: Fixed hivemind chat not working for xenonids.
     type: Fix
   - message: Fixed dropship doors being unpowered.
@@ -5247,5 +5176,12 @@
   id: 1324
   time: '2025-02-11T19:53:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5591
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed light armor chosen from the intel vendor appearing as medium armor
+    type: Fix
+  id: 1325
+  time: '2025-02-11T22:38:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5592
 Name: RMC14
 Order: -1
