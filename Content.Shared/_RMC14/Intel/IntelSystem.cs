@@ -1,6 +1,5 @@
 ﻿using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
-using System.Net;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.ARES;
 using Content.Shared._RMC14.CCVar;
@@ -10,7 +9,6 @@ using Content.Shared._RMC14.Intel.Tech;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Power;
-using Content.Shared._RMC14.Survivor;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
@@ -242,7 +240,7 @@ public sealed class IntelSystem : EntitySystem
     {
         var user = args.User;
 
-        if (HasComp<SurvivorComponent>(user))
+        if (HasComp<IntelRescueSurvivorObjectiveComponent>(user))
         {
             _popup.PopupClient($"You have no need to read the {Name(ent)}.", ent, user);
             return;
@@ -260,7 +258,7 @@ public sealed class IntelSystem : EntitySystem
         ContainerGettingInsertedAttemptEvent args)
     {
         var user = args.Container.Owner;
-        if (HasComp<SurvivorComponent>(user))
+        if (HasComp<IntelRescueSurvivorObjectiveComponent>(user))
         {
             args.Cancel();
             _popup.PopupClient($"You have no use for the {Name(ent)}.", ent, user);
@@ -272,7 +270,7 @@ public sealed class IntelSystem : EntitySystem
     private void OnIntelPullAttempt(Entity<IntelRetrieveItemObjectiveComponent> ent, ref PullAttemptEvent args)
     {
         var user = args.PullerUid;
-        if (HasComp<SurvivorComponent>(user))
+        if (HasComp<IntelRescueSurvivorObjectiveComponent>(user))
         {
             args.Cancelled = true;
             _popup.PopupClient($"You have no use for the {Name(ent)}.", user, user);
