@@ -10,6 +10,7 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Chat;
 using Content.Shared.Construction.Components;
 using Content.Shared.Coordinates;
+using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
@@ -37,6 +38,7 @@ public abstract class SharedMortarSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly IEntityManager _entity = default!;
     [Dependency] private readonly FixtureSystem _fixture = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -111,6 +113,7 @@ public abstract class SharedMortarSystem : EntitySystem
             return;
 
         mortar.Comp.Deployed = true;
+        _entity.AddComponent<DamageableComponent>(mortar);
         Dirty(mortar);
 
         if (_fixture.GetFixtureOrNull(mortar, mortar.Comp.FixtureId) is { } fixture)
@@ -281,6 +284,7 @@ public abstract class SharedMortarSystem : EntitySystem
             return;
 
         mortar.Comp.Deployed = false;
+        _entity.RemoveComponent<DamageableComponent>(mortar);
         Dirty(mortar);
 
         if (_fixture.GetFixtureOrNull(mortar, mortar.Comp.FixtureId) is { } fixture)
