@@ -916,7 +916,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     _marineList.Add(marineId);
                 }
 
-                if (marinesAlive)
+                if (marinesAlive && _marineList.Count > 1)
                     break;
             }
 
@@ -952,30 +952,33 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 // TODO add ghost alert for last human
                 var lastMarine = _marineList.Last();
 
-                var cloak = _thermalCloak.FindWornCloak(lastMarine);
-                var ghillie = _ghillieSuit.FindSuit(lastMarine);
-
-                if (cloak != null && cloak.Value.Comp.Enabled)
+                var cloaks = EntityQueryEnumerator<ThermalCloakComponent>();
+                while (cloaks.MoveNext(out var cloakId, out var cloak))
                 {
-                    _thermalCloak.SetInvisibility(cloak.Value, lastMarine, false, true);
+                    if (!cloak.Enabled)
+                        continue;
 
-                    if (TryComp<InstantActionComponent>(cloak.Value.Comp.Action, out var action))
+                    _thermalCloak.SetInvisibility((cloakId, cloak), lastMarine, false, true);
+                    if (TryComp<InstantActionComponent>(cloak.Action, out var action))
                     {
                         action.Cooldown = (Timing.CurTime, Timing.CurTime + TimeSpan.FromHours(2)); // FUCK YOU
                         action.UseDelay = TimeSpan.FromHours(2);
-                        Dirty(cloak.Value.Comp.Action.Value, action);
+                        Dirty(cloak.Action.Value, action);
                     }
                 }
 
-                if (ghillie != null && ghillie.Value.Comp.Enabled)
+                var ghillies = EntityQueryEnumerator<GhillieSuitComponent>();
+                while (ghillies.MoveNext(out var ghillieId, out var ghillie))
                 {
-                    _ghillieSuit.ToggleInvisibility(ghillie.Value, lastMarine, false);
+                    if (!ghillie.Enabled)
+                        continue;
 
-                    if (TryComp<InstantActionComponent>(ghillie.Value.Comp.Action, out var action))
+                    _ghillieSuit.ToggleInvisibility((ghillieId, ghillie), lastMarine, false);
+                    if (TryComp<InstantActionComponent>(ghillie.Action, out var action))
                     {
                         action.Cooldown = (Timing.CurTime, Timing.CurTime + TimeSpan.FromHours(2)); // FUCK YOU
                         action.UseDelay = TimeSpan.FromHours(2);
-                        Dirty(ghillie.Value.Comp.Action.Value, action);
+                        Dirty(ghillie.Action.Value, action);
                     }
                 }
             }
