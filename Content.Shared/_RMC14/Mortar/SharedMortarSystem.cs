@@ -38,7 +38,6 @@ public abstract class SharedMortarSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly IEntityManager _entity = default!;
     [Dependency] private readonly FixtureSystem _fixture = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -73,6 +72,7 @@ public abstract class SharedMortarSystem : EntitySystem
         SubscribeLocalEvent<MortarComponent, ActivatableUIOpenAttemptEvent>(OnMortarActivatableUIOpenAttempt);
         SubscribeLocalEvent<MortarComponent, CombatModeShouldHandInteractEvent>(OnMortarShouldInteract);
         SubscribeLocalEvent<MortarComponent, DestructionEventArgs>(OnMortarDestruction);
+        SubscribeLocalEvent<MortarComponent, BeforeDamageChangedEvent>(OnMortarBeforeDamageChanged);
 
         SubscribeLocalEvent<MortarCameraShellComponent, MortarShellLandEvent>(OnMortarCameraShellLand);
 
@@ -83,6 +83,12 @@ public abstract class SharedMortarSystem : EntitySystem
                 subs.Event<MortarDialBuiMsg>(OnMortarDialBui);
                 subs.Event<MortarViewCamerasMsg>(OnMortarViewCameras);
             });
+    }
+
+    private void OnMortarBeforeDamageChanged(Entity<MortarComponent> ent, ref BeforeDamageChangedEvent args)
+    {
+        if (!ent.Comp.Deployed) // cannot destroy in item form
+            args.Cancelled = true;
     }
 
     private void OnMortarDestruction(Entity<MortarComponent> mortar, ref DestructionEventArgs args)
@@ -113,7 +119,6 @@ public abstract class SharedMortarSystem : EntitySystem
             return;
 
         mortar.Comp.Deployed = true;
-        _entity.AddComponent<DamageableComponent>(mortar);
         Dirty(mortar);
 
         if (_fixture.GetFixtureOrNull(mortar, mortar.Comp.FixtureId) is { } fixture)
@@ -284,7 +289,6 @@ public abstract class SharedMortarSystem : EntitySystem
             return;
 
         mortar.Comp.Deployed = false;
-        _entity.RemoveComponent<DamageableComponent>(mortar);
         Dirty(mortar);
 
         if (_fixture.GetFixtureOrNull(mortar, mortar.Comp.FixtureId) is { } fixture)
