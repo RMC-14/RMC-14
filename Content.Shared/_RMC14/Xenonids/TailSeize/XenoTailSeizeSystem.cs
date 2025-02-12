@@ -25,6 +25,7 @@ public sealed class XenoTailSeizeSystem : EntitySystem
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly ActionBlocker _actionBlocker = default!;
 
     public override void Initialize()
     {
@@ -82,6 +83,9 @@ public sealed class XenoTailSeizeSystem : EntitySystem
     private void OnTailSeizeAction(Entity<XenoTailSeizeComponent> xeno, ref XenoTailSeizeActionEvent args)
     {
         if (args.Handled || args.Coords == null)
+            return;
+
+        if (!_actionBlocker.CanAttack(xeno))
             return;
 
         _projectile.TryShoot(xeno, args.Coords.Value, 0, xeno.Comp.Projectile, null, 1, Angle.Zero, xeno.Comp.Speed, target: args.Entity);

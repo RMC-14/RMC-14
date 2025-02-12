@@ -9,21 +9,7 @@
   "states": [
     {
       "name": "xeno_telegraph_base"
-    },
-    {
-      "name": "xeno_telegraph_retrieve",
-      "delays": [
-        [
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1,
-          0.1
-        ]
-      ]
-    },
+    }
     {
       "name": "xeno_telegraph_abduct_hook_anim",
       "delays": [

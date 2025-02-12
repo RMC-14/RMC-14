@@ -7,8 +7,9 @@
   - type: Sprite
     drawdepth: Effects
     sprite: _RMC14/Effects/xeno_telegraph.rsi
+    color: "#008000"
     noRot: true
-    state: xeno_telegraph_retrieve
+    state: xeno_telegraph_base
   - type: EffectVisuals
   - type: Tag
     tags:
