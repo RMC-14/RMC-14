@@ -19,12 +19,8 @@ rmc-xeno-vanguard-description = You trade your spit, acid ball, acid spray, corr
    - Cleave an enemy either flinging them or rooting them in place, both stronger with your shield up.
 rmc-xeno-vanguard-popup = Fearless you are born, fearless you serve, fearless you die. This one will become my Vanguard.
 
-rmc-xeno-warden-name = Warden
-rmc-xeno-warden-description = You trade your acid ball, acid spray, dash, and a small bit of your slash damage and speed to become an effective medic.
-  You gain the ability to:
-  - Emit strong pheromones.
-  - Retrieve endangered, knocked-down or resting allies and pull them to your location.
-  - Use an internal hitpoint pool that fills with every slash against your enemies, which can be spent to aid your allies and yourself by healing them or curing their ailments.
+rmc-xeno-valkyrie-name = Valkyrie
+rmc-xeno-valkyrie-description = TODO
 rmc-xeno-warden-popup = This one will deny her sisters' deaths until they earn it. Fight or be forgotten.
 
 rmc-xeno-gardener-name = Gardener

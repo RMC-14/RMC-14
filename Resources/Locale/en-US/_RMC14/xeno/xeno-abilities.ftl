@@ -1,13 +1,17 @@
 ﻿# Plasma
-cm-xeno-not-enough-plasma = You don't have enough plasma!
+cm-xeno-not-enough-plasma = We don't have enough plasma!
 
 # Energy
-rmc-xeno-not-enough-energy = Your energy reserves are insufficient!
-rmc-xeno-energy-increase-user = You feel your internal energy reserves increase!
+rmc-xeno-not-enough-energy = Our energy reserves are insufficient!
+rmc-xeno-energy-increase-user = We feel our internal energy reserves increase!
 
 # Internal Health
-rmc-xeno-not-enough-internal-health = Your health reserves are insufficient!
-rmc-xeno-internal-health-increase-user = You feel your internal health reserves increase!
+rmc-xeno-not-enough-internal-health = Our health reserves are insufficient!
+rmc-xeno-internal-health-increase-user = We feel our internal health reserves increase!
+
+# Fury
+rmc-xeno-not-enough-fury = We're not angry enough for this!
+rmc-xeno-fury-increase-user = We are overcome with rage!
 
 # Acid reserves
 rmc-xeno-not-enough-acid = Your don't have enough acid built up!
@@ -279,3 +283,23 @@ rmc-xeno-soak-end-fail = We stop taking incoming damage.
 rmc-xeno-soak-end-self = We feel enraged after taking in oncoming damage! Our tail slam's cooldown is reset and we heal!
 rmc-xeno-soak-end-others =  {CAPITALIZE(THE($xeno))} gets enraged after being damaged enough!
 
+# Tail Fountain
+rmc-xeno-tail-fountain-self = We use our tail to pour acid over {$target}.
+rmc-xeno-tail-fountain-others = {CAPITALIZE(THE($user))} pours acid all over {$target} using its tail.
+rmc-xeno-tail-fountain-fail = We can't extinguish that!
+rmc-xeno-tail-fountain-fail-self = We can't extinguish ourselves!
+
+# Tantrum
+rmc-xeno-tantrum-fail-self = We must enrage a sister!
+rmc-xeno-tantrum-fail-raging-self = We are already full of rage!
+rmc-xeno-tantrum-fail-not-xeno = That's not a sister!
+rmc-xeno-tantrum-fail-wrong-hive = Why would we help our enemies?!
+rmc-xeno-tantrum-fail-dead = No amount of anger can bring our sister back.
+rmc-xeno-tantrum-fail-valkyrie = We can't order another valkyrie with our rage.
+rmc-xeno-tantrum-fail-raging = {CAPITALIZE(THE($target))} is already enraged!
+rmc-xeno-tantrum-self = Our rage drives us forward, our healing and armor is increased!
+rmc-xeno-tantrum-other = We feel an overwhelming rage!
+rmc-xeno-tantrum-end = We feel ourselves calm down.
+
+# Fight or Flight
+rmc-xeno-fof-effect = Every single inch in our body moves on its own to fight!

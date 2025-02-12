@@ -189,6 +189,7 @@
     range: 3
     useDelay: 6
     deselectOnMiss: false
+  - type: XenoOffensiveAction
   - type: XenoActionPlasma
     cost: 10
 
@@ -731,4 +732,22 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: shift_spit_xeno_acid
     event: !type:XenoSpitToggleActionEvent
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoHighGallop
+  name: High Gallop
+  description: Stuns foes in a 2x3 area in targeted direction, and slows them. Also flings back grenades.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_tail_trip
+    event: !type:XenoHighGallopActionEvent
+    range: 15
+    useDelay: 12
+    checkCanAccess: false
+  - type: ActionBlockIfResting
+
 
