@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Weapons.Melee;
@@ -31,6 +32,7 @@ public sealed partial class XenoDislocateSystem : EntitySystem
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoDislocateComponent, XenoDislocateActionEvent>(OnDislocateAction);
@@ -39,6 +41,9 @@ public sealed partial class XenoDislocateSystem : EntitySystem
     private void OnDislocateAction(Entity<XenoDislocateComponent> xeno, ref XenoDislocateActionEvent args)
     {
         if (args.Handled)
+            return;
+
+        if (!_rmcActions.TryUseAction(xeno, args.Action))
             return;
 
         args.Handled = true;
