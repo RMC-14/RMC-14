@@ -347,7 +347,7 @@
       Classic: _RMC14\Objects\Clothing\OuterClothing\Armor\m3\co\classic.rsi
       Urban: _RMC14\Objects\Clothing\OuterClothing\Armor\m3\co\urban.rsi
 
-    type: entity
+- type: entity
   parent: CMArmorM2MP
   id: RMCArmorM3General
   name: M3 pattern general officer armor
