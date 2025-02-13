@@ -1,6 +1,8 @@
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared.Alert;
 using Content.Shared.Coordinates;
+using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
@@ -12,11 +14,18 @@ public sealed class TacMapXenoAlertSystem : EntitySystem
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
+
+    private readonly Queue<Entity<TacMapXenoAlertComponent>> _xenoAlertQueue = new();
+
+    private TimeSpan _maxProcessTime;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<TacMapXenoAlertComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<TacMapXenoAlertComponent, ComponentRemove>(OnRemove);
+
+        Subs.CVar(_config, RMCCVars.RMCMaxTacmapAlertProcessTimeMilliseconds, v => _maxProcessTime = TimeSpan.FromMilliseconds(v), true);
     }
 
     private void OnMapInit(Entity<TacMapXenoAlertComponent> ent, ref MapInitEvent args)
@@ -41,6 +50,22 @@ public sealed class TacMapXenoAlertSystem : EntitySystem
             return;
 
         var time = _timing.CurTime;
+
+        if (_xenoAlertQueue.Count > 0)
+        {
+            while (_xenoAlertQueue.TryDequeue(out var ent))
+            {
+                if (_timing.CurTime >= time + _maxProcessTime)
+                    return;
+
+                if (TerminatingOrDeleted(ent))
+                    continue;
+
+                _alerts.ShowAlert(ent, ent.Comp.Alert, dynamicMessage: Loc.GetString("rmc-tacmap-alert-area", ("area", GetAreaName(ent))));
+                ent.Comp.NextUpdateTime += ent.Comp.UpdateInterval;
+            }
+        }
+
         var tacMapQuery = EntityQueryEnumerator<TacMapXenoAlertComponent>();
 
         while (tacMapQuery.MoveNext(out var uid, out var alert))
@@ -48,7 +73,7 @@ public sealed class TacMapXenoAlertSystem : EntitySystem
             if (time < alert.NextUpdateTime)
                 continue;
 
-            _alerts.ShowAlert(uid, alert.Alert, dynamicMessage: Loc.GetString("rmc-tacmap-alert-area", ("area", GetAreaName(uid))));
+            _xenoAlertQueue.Enqueue((uid, alert));
             alert.NextUpdateTime += alert.UpdateInterval;
         }
     }

@@ -1,8 +1,10 @@
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared.Alert;
 using Content.Shared.Coordinates;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
@@ -16,6 +18,11 @@ public sealed class TacMapMarineAlertSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
+
+    private readonly Queue<Entity<TacMapMarineAlertComponent>> _marineAlertQueue = new();
+
+    private TimeSpan _maxProcessTime;
 
     public override void Initialize()
     {
@@ -24,6 +31,8 @@ public sealed class TacMapMarineAlertSystem : EntitySystem
 
         SubscribeLocalEvent<TacMapMarineAlertComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<TacMapMarineAlertComponent, ComponentRemove>(OnRemove);
+
+        Subs.CVar(_config, RMCCVars.RMCMaxTacmapAlertProcessTimeMilliseconds, v => _maxProcessTime = TimeSpan.FromMilliseconds(v), true);
     }
     private void OnGotEquipped(Entity<GrantTacMapAlertComponent> ent, ref GotEquippedEvent args)
     {
@@ -68,6 +77,22 @@ public sealed class TacMapMarineAlertSystem : EntitySystem
             return;
 
         var time = _timing.CurTime;
+
+        if (_marineAlertQueue.Count > 0)
+        {
+            while (_marineAlertQueue.TryDequeue(out var ent))
+            {
+                if (_timing.CurTime >= time + _maxProcessTime)
+                    return;
+
+                if (TerminatingOrDeleted(ent))
+                    continue;
+
+                _alerts.ShowAlert(ent, ent.Comp.Alert, dynamicMessage: Loc.GetString("rmc-tacmap-alert-area", ("area", GetAreaName(ent))));
+                ent.Comp.NextUpdateTime += ent.Comp.UpdateInterval;
+            }
+        }
+
         var tacMapQuery = EntityQueryEnumerator<TacMapMarineAlertComponent>();
 
         while (tacMapQuery.MoveNext(out var uid, out var alert))
@@ -75,7 +100,7 @@ public sealed class TacMapMarineAlertSystem : EntitySystem
             if (time < alert.NextUpdateTime)
                 continue;
 
-            _alerts.ShowAlert(uid, alert.Alert, dynamicMessage: Loc.GetString("rmc-tacmap-alert-area", ("area", GetAreaName(uid))));
+            _marineAlertQueue.Enqueue((uid, alert));
             alert.NextUpdateTime += alert.UpdateInterval;
         }
     }
