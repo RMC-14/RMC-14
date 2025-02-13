@@ -97,7 +97,6 @@
   id: CMGearCommandingOfficer
   equipment:
     jumpsuit: CMJumpsuitBO
-    belt: RMCMatebaBeltFilled
     shoes: CMShoesLaceupCommander
     head: CMHeadBeretCO
     outerClothing: RMCCoatService
