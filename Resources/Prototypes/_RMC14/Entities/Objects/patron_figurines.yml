@@ -1133,3 +1133,14 @@
     state: nan_snow_bunny_mazu
   - type: PatronFigurine
     id: 05443bd1-e84b-4782-9f03-c2b4af96b109
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronZverNemesis
+  name: Zver' Nemesis figurine
+  description: "\"Hope you follow SOP and Marine Law while I'm going through Basic Training in the Army.\""
+  components:
+  - type: Sprite
+    state: zver_nemesis
+  - type: PatronFigurine
+    id: 63503a1b-5dd9-405e-92e6-e6fb9608c37e
