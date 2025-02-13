@@ -38,7 +38,7 @@
   parent: RMCSpaceCash
   id: RMCSpaceCash1
   name: 1 dollar bill
-  description: A single UN Government minted one dollar bill. It has a picture of George Washington printed on it. Makes most people of English origin cry, but isn't worth very much. Could probably get you half a hot-dog in some systems.
+  description: A single one-dollar bill, minted by the United Nations Treasury. Its design features the image of a long-forgotten figure from a bygone era, a leader whose legacy now means little to the galactic populace. While it holds sentimental value for those from certain worlds, its actual worth is minimal. In most systems, it might fetch you half a hot-dog or a similar low-value snack.
 
 - type: material
   id: Dollar
