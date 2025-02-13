@@ -156,8 +156,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
         if (!CanPlaceInHole(args.Used.Value, resinHole, args.User))
             return;
 
-        resinHole.Comp.TrapPrototype = XenoResinHoleComponent.ParasitePrototype;
-        Dirty(resinHole);
+        SetTrapType(resinHole, XenoResinHoleComponent.ParasitePrototype);
         _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-resin-hole-finished-parasite"), resinHole, args.User);
         QueueDel(args.Used);
 
@@ -227,9 +226,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
             QueueDel(para);
             return;
         }
-
-        resinHole.Comp.TrapPrototype = null;
-        Dirty(resinHole);
+        SetTrapType(resinHole, null);
         _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Empty);
         args.Handled = true;
     }
@@ -248,12 +245,12 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
             switch (bombardComp.Projectile.Id)
             {
                 case XenoResinHoleComponent.BoilerAcid:
-                    resinHole.Comp.TrapPrototype = XenoResinHoleComponent.AcidGasPrototype;
+                    SetTrapType(resinHole, XenoResinHoleComponent.AcidGasPrototype);
                     _appearanceSystem.SetData(resinHole, XenoResinHoleVisuals.Contained, ContainedTrap.AcidGas);
                     break;
 
                 case XenoResinHoleComponent.BoilerNeuro:
-                    resinHole.Comp.TrapPrototype = XenoResinHoleComponent.NeuroGasPrototype;
+                    SetTrapType(resinHole, XenoResinHoleComponent.NeuroGasPrototype);
                     _appearanceSystem.SetData(resinHole, XenoResinHoleVisuals.Contained, ContainedTrap.NeuroticGas);
                     break;
             }
@@ -271,7 +268,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
             if (!_xenoPlasma.TryRemovePlasmaPopup(args.User, acid.Cost))
                 return;
 
-            resinHole.Comp.TrapPrototype = acid.Spray;
+            SetTrapType(resinHole, acid.Spray);
             switch (acid.Spray.Id)
             {
                 case XenoResinHoleComponent.WeakAcidPrototype:
@@ -307,12 +304,6 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
         {
             destroyed = args.Damageable.TotalDamage + args.DamageDelta.GetTotal() > totalHealth;
         }
-
-        if (TryComp(resinHole.Owner, out XenoAnnounceStructureDestructionComponent? structureDestructionComp))
-        {
-            structureDestructionComp.StructureName = GetTrapTypeName(resinHole);
-        }
-
         ActivateTrap(resinHole, destroyed);
     }
 
@@ -474,11 +465,12 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
         // If the resin hole is destroyed, it's the XenoAnnounceStructureDestructionComponent job to announce
         // the entity's destruction
         if (!destroyed)
+        {
             RaiseLocalEvent(ent, ev);
 
-        comp.TrapPrototype = null;
-        Dirty(resinHole);
-        _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Empty);
+            SetTrapType(resinHole, null);
+            _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Empty);
+        }
 
         return true;
     }

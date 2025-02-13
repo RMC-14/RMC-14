@@ -36,8 +36,6 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<DropshipHijackStartEvent>(OnDropshipHijackStart);
-
         SubscribeLocalEvent<HiveCoreComponent, DestructionEventArgs>(OnHiveCoreDestruction);
 
         SubscribeLocalEvent<XenoComponent, GhostRoleSpawnerUsedEvent>(OnXenoSpawnerUsed);
@@ -47,16 +45,6 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
 
         SubscribeLocalEvent<HiveCoreComponent, StepTriggerAttemptEvent>(OnHiveCoreStepTriggerAttempt);
         SubscribeLocalEvent<HiveCoreComponent, StepTriggeredOffEvent>(OnHiveCoreStepTriggered);
-    }
-
-    private void OnDropshipHijackStart(ref DropshipHijackStartEvent ev)
-    {
-        var cores = EntityQueryEnumerator<HiveCoreComponent, TransformComponent>();
-        while (cores.MoveNext(out var uid, out _, out var xform))
-        {
-            if (xform.ParentUid != ev.Dropship)
-                QueueDel(uid);
-        }
     }
 
     private void OnHiveCoreDestruction(Entity<HiveCoreComponent> ent, ref DestructionEventArgs args)
