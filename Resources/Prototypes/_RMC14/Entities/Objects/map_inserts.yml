@@ -1,0 +1,35 @@
+﻿- type: entity
+  parent: MarkerBase
+  id: RMCMapInsertBase
+  abstract: true
+  name: Map Insert Base
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: nightmare_insert
+
+# Solaris
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertSolarisSeCheckpoint
+  name: SE Checkpoint
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    spawn: "/Maps/_RMC14/Inserts/Solaris/se-checkpoint.yml"
+    probability: 0.7
+    clearEntities: true
+    replaceAreas: true
+    
+# Kutjevo
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertKutjevoCommunications
+  name: SE Checkpoint
+  suffix: Insert Kutjevo
+  components:
+  - type: MapInsert
+    spawn: "/Maps/_RMC14/Inserts/Kutjevo/communications.yml"
+    probability: 0.35
+    clearEntities: true
+    replaceAreas: false
