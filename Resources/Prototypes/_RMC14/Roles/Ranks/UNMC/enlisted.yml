@@ -13,7 +13,7 @@
 - type: rank
   id: RMCRankFirstSergeant
   name: First Sergeant
-  prefix: 1Sgt.
+  prefix: 1stSgt.
   paygrade: E8E
 
 - type: rank
