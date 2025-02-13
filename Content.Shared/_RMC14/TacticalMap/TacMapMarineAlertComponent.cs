@@ -15,5 +15,5 @@ public sealed partial class TacMapMarineAlertComponent : Component
     public TimeSpan NextUpdateTime;
 
     [DataField]
-    public TimeSpan UpdateInterval;
+    public TimeSpan UpdateInterval = TimeSpan.FromSeconds(2);
 }
