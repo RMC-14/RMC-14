@@ -1,4 +1,4 @@
-﻿using Robust.Shared;
+using Robust.Shared;
 using Robust.Shared.Configuration;
 
 namespace Content.Shared._RMC14.CCVar;
@@ -393,4 +393,7 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCIntelHumanoidCorpsesMax =
         CVarDef.Create("rmc.intel_humanoid_corpses_max", 48, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCMaxTacmapAlertProcessTimeMilliseconds =
+    CVarDef.Create("rmc.tacmap_alert_max_process_time_milliseconds", 1f, CVar.REPLICATED | CVar.SERVER);
 }
