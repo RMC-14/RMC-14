@@ -74,7 +74,7 @@ public sealed class TacMapXenoAlertSystem : EntitySystem
                 continue;
 
             _xenoAlertQueue.Enqueue((uid, alert));
-            alert.NextUpdateTime += alert.UpdateInterval;
+            alert.NextUpdateTime = time + alert.UpdateInterval;
         }
     }
 }
