@@ -197,6 +197,7 @@
       state: apply_salve
     event: !type:XenoApplySalveActionEvent
     useDelay: 0.5
+    range: 2
 
 - type: entity
   parent: ActionXenoBase
@@ -211,3 +212,4 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: screech
     event: !type:XenoSacrificeHealActionEvent
+    range: 2
