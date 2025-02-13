@@ -107,6 +107,38 @@
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/prison_door.rsi
 
+- type: entity
+  parent: CMAirlock
+  id: RMCAirlockHybrisa
+  name: airlock
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/hybrisa_door.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: RMCAirlockHybrisaPersonal
+  name: airlock
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/hybrisa_personal_door.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: RMCAirlockRusted
+  name: airlock
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/rusted_door.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: RMCAirlockRustedWhite
+  name: airlock
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/rusted_white_door.rsi
+
 # Glass
 - type: entity
   parent: CMAirlock
@@ -169,6 +201,20 @@
     sprite: _RMC14/Structures/Doors/Airlocks/sec_door_glass.rsi
   - type: PaintableAirlock
     department: CMMilitaryPolice
+
+- type: entity
+  parent: CMAirlockGlass
+  id: CMAirlockGlassHybrisa
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/hybrisa_door_glass.rsi
+
+- type: entity
+  parent: CMAirlockGlass
+  id: CMAirlockGlassHybrisaPersonal
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/hybrisa_personal_door_glass.rsi
 
 # Prep
 - type: entity

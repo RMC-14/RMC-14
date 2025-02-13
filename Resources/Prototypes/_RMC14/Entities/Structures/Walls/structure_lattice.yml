@@ -1,0 +1,152 @@
+- type: entity
+  parent: BaseStructureDynamic
+  id: RMCStructureLattice
+  name: structural lattice
+  description: Like rebar, but in space.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/structure_lattice.rsi
+    state: structure_lattice_a
+  - type: Icon
+    sprite: _RMC14/Structures/structure_lattice.rsi
+    state: structure_lattice_a
+  - type: Transform
+    anchored: true
+    noRot: false
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - GlassAirlockLayer
+  - type: InteractionOutline
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: RMCDropshipBlocked
+  - type: DamageMultiplierFlags
+    flags: Breaching
+
+- type: entity
+  parent: RMCStructureLattice
+  id: RMCStructureLatticeB
+  components:
+  - type: Sprite
+    state: structure_lattice_b
+  - type: Icon
+    state: structure_lattice_b
+
+- type: entity
+  parent: RMCStructureLattice
+  id: RMCStructureLatticeC
+  components:
+  - type: Sprite
+    state: structure_lattice_c
+  - type: Icon
+    state: structure_lattice_c
+
+- type: entity
+  parent: BaseStructureDynamic
+  id: RMCStructureLatticeDouble
+  name: structural lattice
+  description: Like rebar, but in space.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/double_structure_lattice.rsi
+    state: structure_lattice_a
+    offset: 0,0.5
+  - type: Icon
+    sprite: _RMC14/Structures/double_structure_lattice.rsi
+    state: structure_lattice_a
+  - type: Transform
+    anchored: true
+    noRot: false
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - GlassAirlockLayer
+  - type: InteractionOutline
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: RMCDropshipBlocked
+  - type: DamageMultiplierFlags
+    flags: Breaching
+
+- type: entity
+  parent: RMCStructureLatticeDouble
+  id: RMCStructureLatticeDoubleB
+  components:
+  - type: Sprite
+    state: structure_lattice_b
+  - type: Icon
+    state: structure_lattice_b
+
+- type: entity
+  parent: RMCStructureLatticeDouble
+  id: RMCStructureLatticeDoubleC
+  components:
+  - type: Sprite
+    state: structure_lattice_c
+  - type: Icon
+    state: structure_lattice_c

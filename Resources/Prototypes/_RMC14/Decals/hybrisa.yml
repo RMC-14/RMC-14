@@ -1,0 +1,885 @@
+- type: decal
+  abstract: true
+  parent: CMDecalBase
+  id: RMCDecalHybrisaBase
+  tags: ["station", "markings"]
+
+# Road
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRoadEdge1
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: road_edge_decal1
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRoadEdge2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: road_edge_decal2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRoadEdge3
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: road_edge_decal3
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRoadEdge4
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: road_edge_decal4
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRoadEdge5
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: road_edge_decal5
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRoadEdge6
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: road_edge_decal6
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRoadEdge7
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: road_edge_decal7
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRoadEdge8
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: road_edge_decal8
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRoadEdge9
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: road_edge_decal9
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRoadEdge10
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: road_edge_decal10
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRoadEdge11
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: road_edge_decal11
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRoadEdge12
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: road_edge_decal12
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRoadLinesMiddle
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: roadlinesmiddle
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStopDecal1
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stop_decal1
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStopDecal2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stop_decal2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStopDecal3
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stop_decal3
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStopDecal4
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stop_decal4
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStopDecal5
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stop_decal5
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaZE4
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: Z_E4
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaZM1
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: Z_M1
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaZM2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: Z_M2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaZN2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: Z_N2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaZS3
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: Z_S3
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaZW1
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: Z_W1
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaZDE4
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: ZD_E4
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaZDM1
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: ZD_M1
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaZDM2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: ZD_M2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaZDN2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: ZD_N2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaZDS3
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: ZD_S3
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaZDW1
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: ZD_W1
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaZCorner
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: Z_corner
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWEYALogo1
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: weya_logo1
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWEYALogo2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: weya_logo2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWEYALogoWorn1
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: weya_logo_worn1
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWEYALogoWorn2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: weya_logo_worn2
+
+# Warning Stripes
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningWest
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: W
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningEast
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: E
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningNorth
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: NORTH
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningSouth
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: S
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningNorthEast
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: NE-out
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningNorthWest
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: NW-out
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningSouthEast
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: SE-out
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningSouthWest
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: SW-out
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRedWarningWest
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: red_W
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRedWarningEast
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: red_E
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRedWarningNorth
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: red_N
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRedWarningSouth
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: red_S
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRedWarningNorthEast
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: red_NE-out
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRedWarningNorthWest
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: red_NW-out
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRedWarningSouthEast
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: red_SE-out
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaRedWarningSouthWest
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: red_SW-out
+
+# Trash
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaTrash1
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: trash_1
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaTrash2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: trash_2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaTrash3
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: trash_3
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaTrash4
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: trash_4
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaTrash5
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: trash_5
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaTrash6
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: trash_6
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaTrash7
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: trash_7
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaTrash8
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: trash_8
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaTrash9
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: trash_9
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaTrash10
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: trash_10
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaTrash11
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: trash_11
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaTrash12
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: trash_12
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaTrash13
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: trash_13
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaTrash14
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: trash_14
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaTrash15
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: trash_15
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaTrash16
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: trash_16
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaTrash17
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: trash_17
+
+# Stone Trim
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStoneEdge1
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stone_edging_1
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStoneEdge2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stone_edging_2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStoneEdge3
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stone_edging_3
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStoneEdge4
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stone_edging_4
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStoneEdgeDeco1
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stone_edging_deco_1
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStoneEdgeDeco2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stone_edging_deco_2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStoneEdgeDeco3
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stone_edging_deco_3
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStoneEdgeDeco4
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stone_edging_deco_4
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStoneEdgeAlt1
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stone_edging_alt_1
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStoneEdgeAlt2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stone_edging_alt_2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStoneEdgeAlt3
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stone_edging_alt_3
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStoneEdgeAlt4
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stone_edging_alt_4
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStoneEdgeDecoAlt1
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stone_edging_deco_alt_1
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStoneEdgeDecoAlt2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stone_edging_deco_alt_2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStoneEdgeDecoAlt3
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stone_edging_deco_alt_3
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaStoneEdgeDecoAlt4
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: stone_edging_deco_alt_4
+
+# Diagonal
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaHalfGrate
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: zhalfgrate1
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaHalfGrate2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: zhalfgrate2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaHalfGrate3
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: zhalfgrate3
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaHalfGrate4
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: zhalfgrate4
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningStripesAngled
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: warningstripes_angled
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningStripesAngled2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: warningstripes_angled2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningStripesAngled3
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: warningstripes_angled3
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningStripesAngled4
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: warningstripes_angled4
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningStripesAngledCorner
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: warningstripes_angled_corner
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningStripesAngledCorner2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: warningstripes_angled_corner2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningStripesAngledCorner3
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: warningstripes_angled_corner3
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWarningStripesAngledCorner4
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: warningstripes_angled_corner4
+
+# Engineer Ship
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiPlatformCorners
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: engPlatform_corners
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiPlatformCorners2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: engPlatform_corners2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiPlatformCorners3
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: engPlatform_corners3
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiPlatformCorners4
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: engPlatform_corners4
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiPlatingAngled
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: plating_angled
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiPlatingAngled2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: plating_angled2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiPlatingAngled3
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: plating_angled3
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiPlatingAngled4
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: plating_angled4
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiHullAngled
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: hull_angled
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiHullAngled2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: hull_angled2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiHullAngled3
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: hull_angled3
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiHullAngled4
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: hull_angled4
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiHullAngledAlt
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: hull_angled_alt
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiHullAngledAlt2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: hull_angled_alt2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiHullAngledAlt3
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: hull_angled_alt3
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiHullAngledAlt4
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: hull_angled_alt4
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiPlatform
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: engineer_platform
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiPlatform2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: engineer_platform2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiPlatform3
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: engineer_platform3
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiPlatform4
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: engineer_platform4
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiPlatformDeco
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: engineer_platform_deco
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiPlatformDeco2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: engineer_platform_deco2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiPlatformDeco3
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: engineer_platform_deco3
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaEngiPlatformDeco4
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: engineer_platform_deco4
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWorkerSign1
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: workers_decal1
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaWorkerSign2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: workers_decal2
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaCheckpointSign1
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: checkpoint_decal1
+
+- type: decal
+  parent: RMCDecalHybrisaBase
+  id: RMCDecalHybrisaCheckpointSign2
+  sprite:
+    sprite: _RMC14/Decals/hybrisa.rsi
+    state: checkpoint_decal2
