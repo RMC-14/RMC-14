@@ -55,7 +55,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCExplosiveBreachingCharge
+    - id: RMCExplosivePlastic
       amount: 3
 
 - type: entity

@@ -72,6 +72,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         SubscribeLocalEvent<XenoTunnelComponent, GetVerbsEvent<ActivationVerb>>(OnGetRenameVerb);
         SubscribeLocalEvent<XenoTunnelComponent, InteractUsingEvent>(OnFillTunnel);
         SubscribeLocalEvent<XenoTunnelComponent, XenoCollapseTunnelDoAfterEvent>(OnCollapseTunnelFinish);
+        SubscribeLocalEvent<XenoTunnelComponent, EntityTerminatingEvent>(OnDeleteTunnel);
 
         SubscribeLocalEvent<XenoTunnelComponent, ContainerIsInsertingAttemptEvent>(OnInsertEntityIntoTunnel);
 
@@ -573,6 +574,11 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             return;
         }
 
+        CollapseTunnel(xenoTunnel);
+    }
+
+    private void OnDeleteTunnel(Entity<XenoTunnelComponent> xenoTunnel, ref EntityTerminatingEvent args)
+    {
         CollapseTunnel(xenoTunnel);
     }
 
