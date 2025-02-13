@@ -404,14 +404,15 @@
       choices: { CMBag: 1 }
       entries:
       - id: CMBackpackCommand
-        recommended: true
       #- id: CMSatchelCommandSecure # TODO RMC14 Secure Satchel (ID LOCK)
+      - id: RMCBackpackRTO
+      - id: CMSatchelMarineIntel 
     - name: Combat Equipment
       takeAll: CMCombatEquipment
       entries:
       - id: RMCArmorM3CO
-      - id: CMArmorHelmetM10CO
-      - id: RMCHandsCOGloves
+      - id: CMArmorHelmetM11CCO
+      - id: CMhandsInsulated
       - id: CMBootsBlackFilled
     - name: Accessories
       choices: { CMAccessories: 1 }
@@ -419,6 +420,7 @@
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbingBlack
+        recommend: true
     #- id: CMTacticalWaistcoat # TODO Port Waistcoat
       - id: CMWebbingPouch
       - id: CMWebbing
@@ -436,13 +438,10 @@
         recommended: true
       - id: CMBeltSecurityMPFilled
         name: M276 pattern security rig (Full)
-        recommended: true
       - id: CMBeltMedicBagFilled
         name: M276 pattern lifesaver bag (Full)
       - id: CMBeltMarine
-        recommended: true
       - id: CMBeltUtilityCombat
-        recommended: true
       #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
       - id: RMCM276ShotgunShellLoadingRig
     - name: Pouches
@@ -457,12 +456,19 @@
         recommended: true
       - id: RMCPouchMedkit
       - id: RMCPouchAutoinjectorFill
+        recommended: true 
       - id: RMCPouchGeneralLarge
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchMagazineLarge
       - id: RMCPouchPistol
       - id: RMCPouchShotgunLarge
       - id: RMCPouchToolsFill
+    - name: Mask
+      choices: { CMMask: 1 }
+      entries:
+      - id: CMMaskGas
+      - id: CMMaskCoif
+      - id: RMCMaskRebreather
 
 # Weapon Vend
 - type: entity
@@ -540,9 +546,10 @@
         points: 15
       - id: RMCAttachmentS42xTelescopicMiniscope
         points: 15
-    # - name: Helmet Visors # TODO RMC14 Port Helmet Visors
-    #   entries:
-    #   - id: CMHelmetVisor
+    - name: Helmet Visors # TODO RMC14 Port Helmet Visors
+      entries:
+    - id: RMCVisorNightVision 
+      points: 10
     - name: Underbarrel Attachments
       entries:
       - id: RMCAttachmentLaserSight
@@ -567,6 +574,7 @@
         points: 15
       - id: RMCAttachmentSuppressor
         points: 15
+        
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
