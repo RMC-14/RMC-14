@@ -1,4 +1,6 @@
+using Content.Shared._RMC14.Areas;
 using Content.Shared.Alert;
+using Content.Shared.Coordinates;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Robust.Shared.Timing;
@@ -11,6 +13,7 @@ public sealed class TacMapMarineAlertSystem : EntitySystem
     [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly InventorySystem _inv = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly AreaSystem _area = default!;
 
     public override void Initialize()
     {
@@ -19,6 +22,7 @@ public sealed class TacMapMarineAlertSystem : EntitySystem
 
         SubscribeLocalEvent<TacMapMarineAlertComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<TacMapMarineAlertComponent, ComponentRemove>(OnRemove);
+        SubscribeLocalEvent<TacMapMarineAlertComponent, MoveEvent>(OnMove);
     }
     private void OnGotEquipped(Entity<GrantTacMapAlertComponent> ent, ref GotEquippedEvent args)
     {
@@ -42,10 +46,22 @@ public sealed class TacMapMarineAlertSystem : EntitySystem
     }
     private void OnMapInit(Entity<TacMapMarineAlertComponent> ent, ref MapInitEvent args)
     {
-        _alerts.ShowAlert(ent, ent.Comp.Alert);
+        _alerts.ShowAlert(ent, ent.Comp.Alert, dynamicMessage: Loc.GetString("rmc-tacmap-alert-area", ("area", GetAreaName(ent))));
+    }
+    private void OnMove(Entity<TacMapMarineAlertComponent> ent, ref MoveEvent args)
+    {
+        _alerts.ShowAlert(ent, ent.Comp.Alert, dynamicMessage: Loc.GetString("rmc-tacmap-alert-area", ("area", GetAreaName(ent))));
     }
     private void OnRemove(Entity<TacMapMarineAlertComponent> ent, ref ComponentRemove args)
     {
         _alerts.ClearAlert(ent, ent.Comp.Alert);
+    }
+
+    private string GetAreaName(EntityUid ent)
+    {
+        if (!_area.TryGetArea(ent.ToCoordinates(), out var _, out var areaProto))
+            return Loc.GetString("rmc-tacmap-alert-no-area");
+
+        return areaProto.Name;
     }
 }
