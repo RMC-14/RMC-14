@@ -3,6 +3,7 @@ using Content.Shared.Alert;
 using Content.Shared.Coordinates;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
 
@@ -14,6 +15,7 @@ public sealed class TacMapMarineAlertSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inv = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly AreaSystem _area = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     public override void Initialize()
     {
@@ -22,7 +24,6 @@ public sealed class TacMapMarineAlertSystem : EntitySystem
 
         SubscribeLocalEvent<TacMapMarineAlertComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<TacMapMarineAlertComponent, ComponentRemove>(OnRemove);
-        SubscribeLocalEvent<TacMapMarineAlertComponent, MoveEvent>(OnMove);
     }
     private void OnGotEquipped(Entity<GrantTacMapAlertComponent> ent, ref GotEquippedEvent args)
     {
@@ -48,10 +49,6 @@ public sealed class TacMapMarineAlertSystem : EntitySystem
     {
         _alerts.ShowAlert(ent, ent.Comp.Alert, dynamicMessage: Loc.GetString("rmc-tacmap-alert-area", ("area", GetAreaName(ent))));
     }
-    private void OnMove(Entity<TacMapMarineAlertComponent> ent, ref MoveEvent args)
-    {
-        _alerts.ShowAlert(ent, ent.Comp.Alert, dynamicMessage: Loc.GetString("rmc-tacmap-alert-area", ("area", GetAreaName(ent))));
-    }
     private void OnRemove(Entity<TacMapMarineAlertComponent> ent, ref ComponentRemove args)
     {
         _alerts.ClearAlert(ent, ent.Comp.Alert);
@@ -63,5 +60,23 @@ public sealed class TacMapMarineAlertSystem : EntitySystem
             return Loc.GetString("rmc-tacmap-alert-no-area");
 
         return areaProto.Name;
+    }
+
+    public override void Update(float frameTime)
+    {
+        if (_net.IsClient)
+            return;
+
+        var time = _timing.CurTime;
+        var tacMapQuery = EntityQueryEnumerator<TacMapMarineAlertComponent>();
+
+        while (tacMapQuery.MoveNext(out var uid, out var alert))
+        {
+            if (time < alert.NextUpdateTime)
+                continue;
+
+            _alerts.ShowAlert(uid, alert.Alert, dynamicMessage: Loc.GetString("rmc-tacmap-alert-area", ("area", GetAreaName(uid))));
+            alert.NextUpdateTime += alert.UpdateInterval;
+        }
     }
 }
