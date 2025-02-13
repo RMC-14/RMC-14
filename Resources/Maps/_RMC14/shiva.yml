@@ -114242,6 +114242,13 @@ entities:
     - type: Transform
       pos: 209.26895,37.587654
       parent: 1
+- proto: RMCFortBicepSign
+  entities:
+  - uid: 17022
+    components:
+    - type: Transform
+      pos: 124,24
+      parent: 1
 - proto: RMCGeneratorFusionColony
   entities:
   - uid: 15668
@@ -121928,6 +121935,13 @@ entities:
     components:
     - type: Transform
       pos: 190.5,78.5
+      parent: 1
+- proto: RMCShivaIceSign
+  entities:
+  - uid: 17021
+    components:
+    - type: Transform
+      pos: 37,38
       parent: 1
 - proto: RMCShutterAlmayer
   entities:
