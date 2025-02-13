@@ -10438,8 +10438,8 @@ entities:
         82,19: RMCAreaSavannahMaintsStarboardQuarter
         82,20: RMCAreaSavannahMaintsStarboardQuarter
         81,20: RMCAreaSavannahMaintsStarboardQuarter
-        81,17: RMCAreaSavannahPumpStarboard Quarter
-        81,18: RMCAreaSavannahPumpStarboard Quarter
+        81,17: RMCAreaSavannahPumpStarboardQuarter
+        81,18: RMCAreaSavannahPumpStarboardQuarter
         81,19: RMCAreaSavannahMaintsStarboardQuarter
         81,21: RMCAreaSavannahAtmosStarboard
         80,23: RMCAreaSavannahAtmosStarboard
@@ -10447,50 +10447,50 @@ entities:
         80,21: RMCAreaSavannahAtmosStarboard
         80,20: RMCAreaSavannahMaintsStarboardQuarter
         80,19: RMCAreaSavannahMaintsStarboardQuarter
-        80,18: RMCAreaSavannahPumpStarboard Quarter
-        80,17: RMCAreaSavannahPumpStarboard Quarter
+        80,18: RMCAreaSavannahPumpStarboardQuarter
+        80,17: RMCAreaSavannahPumpStarboardQuarter
         79,23: RMCAreaSavannahAtmosStarboard
         79,22: RMCAreaSavannahAtmosStarboard
         79,21: RMCAreaSavannahAtmosStarboard
         79,20: RMCAreaSavannahMaintsStarboardQuarter
         79,19: RMCAreaSavannahMaintsStarboardQuarter
-        79,18: RMCAreaSavannahPumpStarboard Quarter
-        79,17: RMCAreaSavannahPumpStarboard Quarter
+        79,18: RMCAreaSavannahPumpStarboardQuarter
+        79,17: RMCAreaSavannahPumpStarboardQuarter
         78,23: RMCAreaSavannahAtmosStarboard
         78,22: RMCAreaSavannahAtmosStarboard
         78,21: RMCAreaSavannahAtmosStarboard
         78,20: RMCAreaSavannahMaintsStarboardQuarter
         78,19: RMCAreaSavannahMaintsStarboardQuarter
-        78,18: RMCAreaSavannahPumpStarboard Quarter
+        78,18: RMCAreaSavannahPumpStarboardQuarter
         77,22: RMCAreaSavannahAtmosStarboard
-        78,17: RMCAreaSavannahPumpStarboard Quarter
+        78,17: RMCAreaSavannahPumpStarboardQuarter
         77,23: RMCAreaSavannahAtmosStarboard
         77,21: RMCAreaSavannahAtmosStarboard
         77,20: RMCAreaSavannahMaintsStarboardQuarter
         77,19: RMCAreaSavannahMaintsStarboardQuarter
-        77,18: RMCAreaSavannahPumpStarboard Quarter
-        77,17: RMCAreaSavannahPumpStarboard Quarter
+        77,18: RMCAreaSavannahPumpStarboardQuarter
+        77,17: RMCAreaSavannahPumpStarboardQuarter
         76,23: RMCAreaSavannahAtmosStarboard
         76,22: RMCAreaSavannahAtmosStarboard
         76,21: RMCAreaSavannahAtmosStarboard
         76,20: RMCAreaSavannahMaintsStarboardQuarter
         76,19: RMCAreaSavannahMaintsStarboardQuarter
-        76,18: RMCAreaSavannahPumpStarboard Quarter
-        76,17: RMCAreaSavannahPumpStarboard Quarter
+        76,18: RMCAreaSavannahPumpStarboardQuarter
+        76,17: RMCAreaSavannahPumpStarboardQuarter
         75,23: RMCAreaSavannahAtmosStarboard
-        75,18: RMCAreaSavannahPumpStarboard Quarter
+        75,18: RMCAreaSavannahPumpStarboardQuarter
         75,22: RMCAreaSavannahAtmosStarboard
         75,21: RMCAreaSavannahAtmosStarboard
         75,20: RMCAreaSavannahMaintsStarboardQuarter
         75,19: RMCAreaSavannahMaintsStarboardQuarter
-        75,17: RMCAreaSavannahPumpStarboard Quarter
+        75,17: RMCAreaSavannahPumpStarboardQuarter
         74,23: RMCAreaSavannahAtmosStarboard
         74,22: RMCAreaSavannahAtmosStarboard
         74,21: RMCAreaSavannahAtmosStarboard
         74,20: RMCAreaSavannahMaintsStarboardQuarter
         74,19: RMCAreaSavannahMaintsStarboardQuarter
-        74,18: RMCAreaSavannahPumpStarboard Quarter
-        74,17: RMCAreaSavannahPumpStarboard Quarter
+        74,18: RMCAreaSavannahPumpStarboardQuarter
+        74,17: RMCAreaSavannahPumpStarboardQuarter
         99,16: RMCAreaSavannahMaintsStarboardQuarter
         97,15: RMCAreaSavannahMaintsStarboardQuarter
         100,15: RMCAreaSavannahMaintsStarboardQuarter
@@ -10521,7 +10521,7 @@ entities:
         87,16: RMCAreaSavannahMaintsStarboardQuarter
         86,15: RMCAreaSavannahMaintsStarboardQuarter
         86,16: RMCAreaSavannahMaintsStarboardQuarter
-        81,15: RMCAreaSavannahPumpStarboard Quarter
+        81,15: RMCAreaSavannahPumpStarboardQuarter
         85,15: RMCAreaSavannahMaintsStarboardQuarter
         85,16: RMCAreaSavannahMaintsStarboardQuarter
         84,15: RMCAreaSavannahMaintsStarboardQuarter
@@ -10530,37 +10530,37 @@ entities:
         83,16: RMCAreaSavannahMaintsStarboardQuarter
         82,15: RMCAreaSavannahMaintsStarboardQuarter
         82,16: RMCAreaSavannahMaintsStarboardQuarter
-        81,16: RMCAreaSavannahPumpStarboard Quarter
-        80,11: RMCAreaSavannahPumpStarboard Quarter
-        80,12: RMCAreaSavannahPumpStarboard Quarter
-        80,13: RMCAreaSavannahPumpStarboard Quarter
-        80,14: RMCAreaSavannahPumpStarboard Quarter
-        80,15: RMCAreaSavannahPumpStarboard Quarter
-        80,16: RMCAreaSavannahPumpStarboard Quarter
-        79,11: RMCAreaSavannahPumpStarboard Quarter
-        79,12: RMCAreaSavannahPumpStarboard Quarter
-        79,13: RMCAreaSavannahPumpStarboard Quarter
-        79,14: RMCAreaSavannahPumpStarboard Quarter
-        79,15: RMCAreaSavannahPumpStarboard Quarter
-        79,16: RMCAreaSavannahPumpStarboard Quarter
-        78,11: RMCAreaSavannahPumpStarboard Quarter
-        78,12: RMCAreaSavannahPumpStarboard Quarter
-        78,13: RMCAreaSavannahPumpStarboard Quarter
-        78,14: RMCAreaSavannahPumpStarboard Quarter
-        77,14: RMCAreaSavannahPumpStarboard Quarter
-        78,15: RMCAreaSavannahPumpStarboard Quarter
-        78,16: RMCAreaSavannahPumpStarboard Quarter
-        77,11: RMCAreaSavannahPumpStarboard Quarter
-        77,12: RMCAreaSavannahPumpStarboard Quarter
-        77,13: RMCAreaSavannahPumpStarboard Quarter
-        77,15: RMCAreaSavannahPumpStarboard Quarter
-        77,16: RMCAreaSavannahPumpStarboard Quarter
-        76,15: RMCAreaSavannahPumpStarboard Quarter
-        76,16: RMCAreaSavannahPumpStarboard Quarter
-        75,15: RMCAreaSavannahPumpStarboard Quarter
-        75,16: RMCAreaSavannahPumpStarboard Quarter
-        74,15: RMCAreaSavannahPumpStarboard Quarter
-        74,16: RMCAreaSavannahPumpStarboard Quarter
+        81,16: RMCAreaSavannahPumpStarboardQuarter
+        80,11: RMCAreaSavannahPumpStarboardQuarter
+        80,12: RMCAreaSavannahPumpStarboardQuarter
+        80,13: RMCAreaSavannahPumpStarboardQuarter
+        80,14: RMCAreaSavannahPumpStarboardQuarter
+        80,15: RMCAreaSavannahPumpStarboardQuarter
+        80,16: RMCAreaSavannahPumpStarboardQuarter
+        79,11: RMCAreaSavannahPumpStarboardQuarter
+        79,12: RMCAreaSavannahPumpStarboardQuarter
+        79,13: RMCAreaSavannahPumpStarboardQuarter
+        79,14: RMCAreaSavannahPumpStarboardQuarter
+        79,15: RMCAreaSavannahPumpStarboardQuarter
+        79,16: RMCAreaSavannahPumpStarboardQuarter
+        78,11: RMCAreaSavannahPumpStarboardQuarter
+        78,12: RMCAreaSavannahPumpStarboardQuarter
+        78,13: RMCAreaSavannahPumpStarboardQuarter
+        78,14: RMCAreaSavannahPumpStarboardQuarter
+        77,14: RMCAreaSavannahPumpStarboardQuarter
+        78,15: RMCAreaSavannahPumpStarboardQuarter
+        78,16: RMCAreaSavannahPumpStarboardQuarter
+        77,11: RMCAreaSavannahPumpStarboardQuarter
+        77,12: RMCAreaSavannahPumpStarboardQuarter
+        77,13: RMCAreaSavannahPumpStarboardQuarter
+        77,15: RMCAreaSavannahPumpStarboardQuarter
+        77,16: RMCAreaSavannahPumpStarboardQuarter
+        76,15: RMCAreaSavannahPumpStarboardQuarter
+        76,16: RMCAreaSavannahPumpStarboardQuarter
+        75,15: RMCAreaSavannahPumpStarboardQuarter
+        75,16: RMCAreaSavannahPumpStarboardQuarter
+        74,15: RMCAreaSavannahPumpStarboardQuarter
+        74,16: RMCAreaSavannahPumpStarboardQuarter
         71,-5: RMCAreaSavannahCorridorEscape
         71,-4: RMCAreaSavannahCorridorEscape
         71,-3: RMCAreaSavannahCorridorEscape
@@ -10570,50 +10570,50 @@ entities:
         71,1: RMCAreaSavannahCorridorEscape
         71,2: RMCAreaSavannahCorridorEscape
         71,3: RMCAreaSavannahCorridorEscape
-        71,4: RMCAreaSavannahPumpStarboard Quarter
-        71,5: RMCAreaSavannahPumpStarboard Quarter
-        71,6: RMCAreaSavannahPumpStarboard Quarter
-        71,7: RMCAreaSavannahPumpStarboard Quarter
-        71,8: RMCAreaSavannahPumpStarboard Quarter
-        71,12: RMCAreaSavannahPumpStarboard Quarter
-        71,9: RMCAreaSavannahPumpStarboard Quarter
-        71,10: RMCAreaSavannahPumpStarboard Quarter
-        71,11: RMCAreaSavannahPumpStarboard Quarter
-        71,13: RMCAreaSavannahPumpStarboard Quarter
-        71,14: RMCAreaSavannahPumpStarboard Quarter
+        71,4: RMCAreaSavannahPumpStarboardQuarter
+        71,5: RMCAreaSavannahPumpStarboardQuarter
+        71,6: RMCAreaSavannahPumpStarboardQuarter
+        71,7: RMCAreaSavannahPumpStarboardQuarter
+        71,8: RMCAreaSavannahPumpStarboardQuarter
+        71,12: RMCAreaSavannahPumpStarboardQuarter
+        71,9: RMCAreaSavannahPumpStarboardQuarter
+        71,10: RMCAreaSavannahPumpStarboardQuarter
+        71,11: RMCAreaSavannahPumpStarboardQuarter
+        71,13: RMCAreaSavannahPumpStarboardQuarter
+        71,14: RMCAreaSavannahPumpStarboardQuarter
         73,21: RMCAreaSavannahMaintsStarboardQuarter
-        73,15: RMCAreaSavannahPumpStarboard Quarter
-        73,16: RMCAreaSavannahPumpStarboard Quarter
-        73,17: RMCAreaSavannahPumpStarboard Quarter
-        73,18: RMCAreaSavannahPumpStarboard Quarter
+        73,15: RMCAreaSavannahPumpStarboardQuarter
+        73,16: RMCAreaSavannahPumpStarboardQuarter
+        73,17: RMCAreaSavannahPumpStarboardQuarter
+        73,18: RMCAreaSavannahPumpStarboardQuarter
         73,19: RMCAreaSavannahMaintsStarboardQuarter
         73,20: RMCAreaSavannahMaintsStarboardQuarter
         72,23: RMCAreaSavannahMaintsStarboardQuarter
         73,22: RMCAreaSavannahMaintsStarboardQuarter
         73,23: RMCAreaSavannahMaintsStarboardQuarter
-        72,15: RMCAreaSavannahPumpStarboard Quarter
-        72,16: RMCAreaSavannahPumpStarboard Quarter
-        72,17: RMCAreaSavannahPumpStarboard Quarter
-        72,18: RMCAreaSavannahPumpStarboard Quarter
+        72,15: RMCAreaSavannahPumpStarboardQuarter
+        72,16: RMCAreaSavannahPumpStarboardQuarter
+        72,17: RMCAreaSavannahPumpStarboardQuarter
+        72,18: RMCAreaSavannahPumpStarboardQuarter
         72,19: RMCAreaSavannahMaintsStarboardQuarter
         72,20: RMCAreaSavannahMaintsStarboardQuarter
         72,21: RMCAreaSavannahMaintsStarboardQuarter
         72,22: RMCAreaSavannahMaintsStarboardQuarter
-        71,15: RMCAreaSavannahPumpStarboard Quarter
-        71,16: RMCAreaSavannahPumpStarboard Quarter
-        71,17: RMCAreaSavannahPumpStarboard Quarter
-        71,18: RMCAreaSavannahPumpStarboard Quarter
+        71,15: RMCAreaSavannahPumpStarboardQuarter
+        71,16: RMCAreaSavannahPumpStarboardQuarter
+        71,17: RMCAreaSavannahPumpStarboardQuarter
+        71,18: RMCAreaSavannahPumpStarboardQuarter
         71,19: RMCAreaSavannahMaintsStarboardQuarter
         71,20: RMCAreaSavannahMaintsStarboardQuarter
         71,21: RMCAreaSavannahMaintsStarboardQuarter
         71,22: RMCAreaSavannahMaintsStarboardQuarter
         71,23: RMCAreaSavannahMaintsStarboardQuarter
-        70,13: RMCAreaSavannahPumpStarboard Quarter
-        70,14: RMCAreaSavannahPumpStarboard Quarter
-        70,15: RMCAreaSavannahPumpStarboard Quarter
-        70,16: RMCAreaSavannahPumpStarboard Quarter
-        70,17: RMCAreaSavannahPumpStarboard Quarter
-        70,18: RMCAreaSavannahPumpStarboard Quarter
+        70,13: RMCAreaSavannahPumpStarboardQuarter
+        70,14: RMCAreaSavannahPumpStarboardQuarter
+        70,15: RMCAreaSavannahPumpStarboardQuarter
+        70,16: RMCAreaSavannahPumpStarboardQuarter
+        70,17: RMCAreaSavannahPumpStarboardQuarter
+        70,18: RMCAreaSavannahPumpStarboardQuarter
         70,19: RMCAreaSavannahMaintsStarboardQuarter
         70,20: RMCAreaSavannahMaintsStarboardQuarter
         70,21: RMCAreaSavannahMaintsStarboardQuarter
@@ -11796,13 +11796,13 @@ entities:
         77,1: RMCAreaSavannahCorridorEscape
         77,2: RMCAreaSavannahCorridorEscape
         77,3: RMCAreaSavannahCorridorEscape
-        77,4: RMCAreaSavannahPumpStarboard Quarter
-        77,5: RMCAreaSavannahPumpStarboard Quarter
-        77,6: RMCAreaSavannahPumpStarboard Quarter
-        77,7: RMCAreaSavannahPumpStarboard Quarter
-        77,8: RMCAreaSavannahPumpStarboard Quarter
-        77,9: RMCAreaSavannahPumpStarboard Quarter
-        77,10: RMCAreaSavannahPumpStarboard Quarter
+        77,4: RMCAreaSavannahPumpStarboardQuarter
+        77,5: RMCAreaSavannahPumpStarboardQuarter
+        77,6: RMCAreaSavannahPumpStarboardQuarter
+        77,7: RMCAreaSavannahPumpStarboardQuarter
+        77,8: RMCAreaSavannahPumpStarboardQuarter
+        77,9: RMCAreaSavannahPumpStarboardQuarter
+        77,10: RMCAreaSavannahPumpStarboardQuarter
         76,-5: RMCAreaSavannahCorridorEscape
         76,-4: RMCAreaSavannahCorridorEscape
         76,-3: RMCAreaSavannahCorridorEscape
@@ -11812,14 +11812,14 @@ entities:
         76,1: RMCAreaSavannahCorridorEscape
         76,2: RMCAreaSavannahCorridorEscape
         76,3: RMCAreaSavannahCorridorEscape
-        76,4: RMCAreaSavannahPumpStarboard Quarter
+        76,4: RMCAreaSavannahPumpStarboardQuarter
         77,-3: RMCAreaSavannahCorridorEscape
-        76,5: RMCAreaSavannahPumpStarboard Quarter
-        76,6: RMCAreaSavannahPumpStarboard Quarter
-        76,7: RMCAreaSavannahPumpStarboard Quarter
-        76,8: RMCAreaSavannahPumpStarboard Quarter
-        76,9: RMCAreaSavannahPumpStarboard Quarter
-        76,10: RMCAreaSavannahPumpStarboard Quarter
+        76,5: RMCAreaSavannahPumpStarboardQuarter
+        76,6: RMCAreaSavannahPumpStarboardQuarter
+        76,7: RMCAreaSavannahPumpStarboardQuarter
+        76,8: RMCAreaSavannahPumpStarboardQuarter
+        76,9: RMCAreaSavannahPumpStarboardQuarter
+        76,10: RMCAreaSavannahPumpStarboardQuarter
         75,-5: RMCAreaSavannahCorridorEscape
         75,-4: RMCAreaSavannahCorridorEscape
         75,-3: RMCAreaSavannahCorridorEscape
@@ -11829,13 +11829,13 @@ entities:
         75,1: RMCAreaSavannahCorridorEscape
         75,2: RMCAreaSavannahCorridorEscape
         75,3: RMCAreaSavannahCorridorEscape
-        75,4: RMCAreaSavannahPumpStarboard Quarter
-        75,5: RMCAreaSavannahPumpStarboard Quarter
-        75,6: RMCAreaSavannahPumpStarboard Quarter
-        75,7: RMCAreaSavannahPumpStarboard Quarter
-        75,8: RMCAreaSavannahPumpStarboard Quarter
-        75,9: RMCAreaSavannahPumpStarboard Quarter
-        75,10: RMCAreaSavannahPumpStarboard Quarter
+        75,4: RMCAreaSavannahPumpStarboardQuarter
+        75,5: RMCAreaSavannahPumpStarboardQuarter
+        75,6: RMCAreaSavannahPumpStarboardQuarter
+        75,7: RMCAreaSavannahPumpStarboardQuarter
+        75,8: RMCAreaSavannahPumpStarboardQuarter
+        75,9: RMCAreaSavannahPumpStarboardQuarter
+        75,10: RMCAreaSavannahPumpStarboardQuarter
         74,-5: RMCAreaSavannahCorridorEscape
         74,-4: RMCAreaSavannahCorridorEscape
         74,-3: RMCAreaSavannahCorridorEscape
@@ -11845,13 +11845,13 @@ entities:
         74,1: RMCAreaSavannahCorridorEscape
         74,2: RMCAreaSavannahCorridorEscape
         74,3: RMCAreaSavannahCorridorEscape
-        74,4: RMCAreaSavannahPumpStarboard Quarter
-        74,5: RMCAreaSavannahPumpStarboard Quarter
-        74,6: RMCAreaSavannahPumpStarboard Quarter
-        74,7: RMCAreaSavannahPumpStarboard Quarter
-        74,8: RMCAreaSavannahPumpStarboard Quarter
-        74,9: RMCAreaSavannahPumpStarboard Quarter
-        74,10: RMCAreaSavannahPumpStarboard Quarter
+        74,4: RMCAreaSavannahPumpStarboardQuarter
+        74,5: RMCAreaSavannahPumpStarboardQuarter
+        74,6: RMCAreaSavannahPumpStarboardQuarter
+        74,7: RMCAreaSavannahPumpStarboardQuarter
+        74,8: RMCAreaSavannahPumpStarboardQuarter
+        74,9: RMCAreaSavannahPumpStarboardQuarter
+        74,10: RMCAreaSavannahPumpStarboardQuarter
         73,-5: RMCAreaSavannahCorridorEscape
         73,-4: RMCAreaSavannahCorridorEscape
         73,-3: RMCAreaSavannahCorridorEscape
@@ -11861,13 +11861,13 @@ entities:
         73,1: RMCAreaSavannahCorridorEscape
         73,2: RMCAreaSavannahCorridorEscape
         73,3: RMCAreaSavannahCorridorEscape
-        73,4: RMCAreaSavannahPumpStarboard Quarter
-        73,5: RMCAreaSavannahPumpStarboard Quarter
-        73,6: RMCAreaSavannahPumpStarboard Quarter
-        73,7: RMCAreaSavannahPumpStarboard Quarter
-        73,8: RMCAreaSavannahPumpStarboard Quarter
-        73,9: RMCAreaSavannahPumpStarboard Quarter
-        73,10: RMCAreaSavannahPumpStarboard Quarter
+        73,4: RMCAreaSavannahPumpStarboardQuarter
+        73,5: RMCAreaSavannahPumpStarboardQuarter
+        73,6: RMCAreaSavannahPumpStarboardQuarter
+        73,7: RMCAreaSavannahPumpStarboardQuarter
+        73,8: RMCAreaSavannahPumpStarboardQuarter
+        73,9: RMCAreaSavannahPumpStarboardQuarter
+        73,10: RMCAreaSavannahPumpStarboardQuarter
         72,-5: RMCAreaSavannahCorridorEscape
         72,-4: RMCAreaSavannahCorridorEscape
         72,-3: RMCAreaSavannahCorridorEscape
@@ -11877,64 +11877,64 @@ entities:
         72,1: RMCAreaSavannahCorridorEscape
         72,2: RMCAreaSavannahCorridorEscape
         72,3: RMCAreaSavannahCorridorEscape
-        72,4: RMCAreaSavannahPumpStarboard Quarter
-        72,5: RMCAreaSavannahPumpStarboard Quarter
-        72,6: RMCAreaSavannahPumpStarboard Quarter
-        72,7: RMCAreaSavannahPumpStarboard Quarter
-        72,8: RMCAreaSavannahPumpStarboard Quarter
-        72,9: RMCAreaSavannahPumpStarboard Quarter
-        72,10: RMCAreaSavannahPumpStarboard Quarter
-        72,11: RMCAreaSavannahPumpStarboard Quarter
-        72,12: RMCAreaSavannahPumpStarboard Quarter
-        72,13: RMCAreaSavannahPumpStarboard Quarter
-        72,14: RMCAreaSavannahPumpStarboard Quarter
-        73,11: RMCAreaSavannahPumpStarboard Quarter
-        73,13: RMCAreaSavannahPumpStarboard Quarter
-        73,14: RMCAreaSavannahPumpStarboard Quarter
-        74,11: RMCAreaSavannahPumpStarboard Quarter
-        74,12: RMCAreaSavannahPumpStarboard Quarter
-        74,13: RMCAreaSavannahPumpStarboard Quarter
-        74,14: RMCAreaSavannahPumpStarboard Quarter
-        75,11: RMCAreaSavannahPumpStarboard Quarter
-        75,12: RMCAreaSavannahPumpStarboard Quarter
-        75,13: RMCAreaSavannahPumpStarboard Quarter
-        75,14: RMCAreaSavannahPumpStarboard Quarter
-        76,11: RMCAreaSavannahPumpStarboard Quarter
-        76,12: RMCAreaSavannahPumpStarboard Quarter
-        76,13: RMCAreaSavannahPumpStarboard Quarter
-        76,14: RMCAreaSavannahPumpStarboard Quarter
-        73,12: RMCAreaSavannahPumpStarboard Quarter
-        78,10: RMCAreaSavannahPumpStarboard Quarter
-        78,8: RMCAreaSavannahPumpStarboard Quarter
-        78,7: RMCAreaSavannahPumpStarboard Quarter
-        78,6: RMCAreaSavannahPumpStarboard Quarter
-        78,9: RMCAreaSavannahPumpStarboard Quarter
-        78,5: RMCAreaSavannahPumpStarboard Quarter
-        78,4: RMCAreaSavannahPumpStarboard Quarter
+        72,4: RMCAreaSavannahPumpStarboardQuarter
+        72,5: RMCAreaSavannahPumpStarboardQuarter
+        72,6: RMCAreaSavannahPumpStarboardQuarter
+        72,7: RMCAreaSavannahPumpStarboardQuarter
+        72,8: RMCAreaSavannahPumpStarboardQuarter
+        72,9: RMCAreaSavannahPumpStarboardQuarter
+        72,10: RMCAreaSavannahPumpStarboardQuarter
+        72,11: RMCAreaSavannahPumpStarboardQuarter
+        72,12: RMCAreaSavannahPumpStarboardQuarter
+        72,13: RMCAreaSavannahPumpStarboardQuarter
+        72,14: RMCAreaSavannahPumpStarboardQuarter
+        73,11: RMCAreaSavannahPumpStarboardQuarter
+        73,13: RMCAreaSavannahPumpStarboardQuarter
+        73,14: RMCAreaSavannahPumpStarboardQuarter
+        74,11: RMCAreaSavannahPumpStarboardQuarter
+        74,12: RMCAreaSavannahPumpStarboardQuarter
+        74,13: RMCAreaSavannahPumpStarboardQuarter
+        74,14: RMCAreaSavannahPumpStarboardQuarter
+        75,11: RMCAreaSavannahPumpStarboardQuarter
+        75,12: RMCAreaSavannahPumpStarboardQuarter
+        75,13: RMCAreaSavannahPumpStarboardQuarter
+        75,14: RMCAreaSavannahPumpStarboardQuarter
+        76,11: RMCAreaSavannahPumpStarboardQuarter
+        76,12: RMCAreaSavannahPumpStarboardQuarter
+        76,13: RMCAreaSavannahPumpStarboardQuarter
+        76,14: RMCAreaSavannahPumpStarboardQuarter
+        73,12: RMCAreaSavannahPumpStarboardQuarter
+        78,10: RMCAreaSavannahPumpStarboardQuarter
+        78,8: RMCAreaSavannahPumpStarboardQuarter
+        78,7: RMCAreaSavannahPumpStarboardQuarter
+        78,6: RMCAreaSavannahPumpStarboardQuarter
+        78,9: RMCAreaSavannahPumpStarboardQuarter
+        78,5: RMCAreaSavannahPumpStarboardQuarter
+        78,4: RMCAreaSavannahPumpStarboardQuarter
         78,3: RMCAreaSavannahCorridorEscape
         78,2: RMCAreaSavannahCorridorEscape
         78,1: RMCAreaSavannahCorridorEscape
         78,0: RMCAreaSavannahCorridorEscape
         78,-1: RMCAreaSavannahCorridorEscape
-        79,10: RMCAreaSavannahPumpStarboard Quarter
-        79,9: RMCAreaSavannahPumpStarboard Quarter
-        79,8: RMCAreaSavannahPumpStarboard Quarter
-        79,7: RMCAreaSavannahPumpStarboard Quarter
-        79,6: RMCAreaSavannahPumpStarboard Quarter
-        79,5: RMCAreaSavannahPumpStarboard Quarter
-        79,4: RMCAreaSavannahPumpStarboard Quarter
+        79,10: RMCAreaSavannahPumpStarboardQuarter
+        79,9: RMCAreaSavannahPumpStarboardQuarter
+        79,8: RMCAreaSavannahPumpStarboardQuarter
+        79,7: RMCAreaSavannahPumpStarboardQuarter
+        79,6: RMCAreaSavannahPumpStarboardQuarter
+        79,5: RMCAreaSavannahPumpStarboardQuarter
+        79,4: RMCAreaSavannahPumpStarboardQuarter
         79,3: RMCAreaSavannahCorridorEscape
         79,2: RMCAreaSavannahCorridorEscape
         79,1: RMCAreaSavannahCorridorEscape
         79,0: RMCAreaSavannahCorridorEscape
         79,-1: RMCAreaSavannahCorridorEscape
-        80,10: RMCAreaSavannahPumpStarboard Quarter
-        80,9: RMCAreaSavannahPumpStarboard Quarter
-        80,8: RMCAreaSavannahPumpStarboard Quarter
-        80,7: RMCAreaSavannahPumpStarboard Quarter
-        80,6: RMCAreaSavannahPumpStarboard Quarter
-        80,4: RMCAreaSavannahPumpStarboard Quarter
-        80,5: RMCAreaSavannahPumpStarboard Quarter
+        80,10: RMCAreaSavannahPumpStarboardQuarter
+        80,9: RMCAreaSavannahPumpStarboardQuarter
+        80,8: RMCAreaSavannahPumpStarboardQuarter
+        80,7: RMCAreaSavannahPumpStarboardQuarter
+        80,6: RMCAreaSavannahPumpStarboardQuarter
+        80,4: RMCAreaSavannahPumpStarboardQuarter
+        80,5: RMCAreaSavannahPumpStarboardQuarter
         80,1: RMCAreaSavannahCorridorEscape
         80,0: RMCAreaSavannahCorridorEscape
         80,-1: RMCAreaSavannahCorridorEscape
