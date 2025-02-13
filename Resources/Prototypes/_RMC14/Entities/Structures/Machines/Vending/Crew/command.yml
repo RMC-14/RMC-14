@@ -548,7 +548,7 @@
         points: 15
     - name: Helmet Visors # TODO RMC14 Port Helmet Visors
       entries:
-    - id: RMCVisorNightVision 
+      - id: RMCVisorNightVision 
       points: 10
     - name: Underbarrel Attachments
       entries:
