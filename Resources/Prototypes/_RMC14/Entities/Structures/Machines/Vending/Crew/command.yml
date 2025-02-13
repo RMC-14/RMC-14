@@ -412,7 +412,7 @@
       entries:
       - id: RMCArmorM3CO
       - id: CMArmorHelmetM11CCO
-      - id: CMhandsInsulated
+      - id: CMHandsInsulated
       - id: CMBootsBlackFilled
     - name: Accessories
       choices: { CMAccessories: 1 }
