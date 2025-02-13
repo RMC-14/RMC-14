@@ -2,7 +2,7 @@
   parent: SpaceCash
   id: RMCSpaceCash
   name: dollars
-  description: Ten UN Government minted hundred-dollar bills. Every single damn one of them has Ben Fucking Franklin on them. The court of Bens sit impatiently, as if each one thought they alone belonged to you. This coven of angry Bens have all since learned about your relations with the other Bens, and they want answers.
+  description: Ten hundred-dollar bills, minted by the United Nations Treasury. Each are adorned with the face of a long-forgotten diplomat of a once-powerful planet. These bills are more than mere currency, they feel alive, as though they carry the weight of ancient history and the judgments of those who once controlled vast empires. The faces on each bill seem to watch you with silent intensity, as if each one believes it alone should be in your possession..
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/spacecash.rsi
