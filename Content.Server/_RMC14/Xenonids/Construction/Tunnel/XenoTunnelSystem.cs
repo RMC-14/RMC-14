@@ -1,6 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.Administration.Logs;
-using Content.Shared._RMC14.CustomDelete;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction;
@@ -73,7 +72,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         SubscribeLocalEvent<XenoTunnelComponent, GetVerbsEvent<ActivationVerb>>(OnGetRenameVerb);
         SubscribeLocalEvent<XenoTunnelComponent, InteractUsingEvent>(OnFillTunnel);
         SubscribeLocalEvent<XenoTunnelComponent, XenoCollapseTunnelDoAfterEvent>(OnCollapseTunnelFinish);
-        SubscribeLocalEvent<XenoTunnelComponent, CustomDeleteEvent>(OnDeleteTunnel);
+        SubscribeLocalEvent<XenoTunnelComponent, EntityTerminatingEvent>(OnDeleteTunnel);
 
         SubscribeLocalEvent<XenoTunnelComponent, ContainerIsInsertingAttemptEvent>(OnInsertEntityIntoTunnel);
 
@@ -578,7 +577,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         CollapseTunnel(xenoTunnel);
     }
 
-    private void OnDeleteTunnel(Entity<XenoTunnelComponent> xenoTunnel, ref CustomDeleteEvent args)
+    private void OnDeleteTunnel(Entity<XenoTunnelComponent> xenoTunnel, ref EntityTerminatingEvent args)
     {
         CollapseTunnel(xenoTunnel);
     }

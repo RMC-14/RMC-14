@@ -15,7 +15,6 @@
   - type: RMCNightVisionVisible
     priority: -1
     transparency: 0.2
-  - type: CustomDelete
   - type: XenoTunnel
   - type: XenoMapTracked
   - type: TacticalMapTracked

@@ -1,4 +1,3 @@
-using Content.Shared._RMC14.CustomDelete;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
 using Content.Shared.Body.Systems;
@@ -69,10 +68,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
             Transform(ent).ParentUid is { Valid: true } parent &&
             _entityWhitelist.IsWhitelistPass(ent.Comp.Whitelist, parent))
         {
-            if (HasComp<CustomDeleteComponent>(parent))
-                RaiseLocalEvent(parent, new CustomDeleteEvent());
-            else
-                QueueDel(parent);
+            QueueDel(parent);
         }
     }
 
