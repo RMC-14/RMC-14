@@ -100,7 +100,7 @@ public sealed class TacMapMarineAlertSystem : EntitySystem
                 continue;
 
             _marineAlertQueue.Enqueue((uid, alert));
-            alert.NextUpdateTime = _timing.CurTime + alert.UpdateInterval;
+            alert.NextUpdateTime = time + alert.UpdateInterval;
         }
     }
 }
