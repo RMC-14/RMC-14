@@ -89,7 +89,6 @@ public sealed class TacMapMarineAlertSystem : EntitySystem
                     continue;
 
                 _alerts.ShowAlert(ent, ent.Comp.Alert, dynamicMessage: Loc.GetString("rmc-tacmap-alert-area", ("area", GetAreaName(ent))));
-                ent.Comp.NextUpdateTime = _timing.CurTime + ent.Comp.UpdateInterval;
             }
         }
 
@@ -101,6 +100,7 @@ public sealed class TacMapMarineAlertSystem : EntitySystem
                 continue;
 
             _marineAlertQueue.Enqueue((uid, alert));
+            alert.NextUpdateTime = _timing.CurTime + alert.UpdateInterval;
         }
     }
 }
