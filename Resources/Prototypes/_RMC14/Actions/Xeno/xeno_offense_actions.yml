@@ -749,5 +749,3 @@
     useDelay: 12
     checkCanAccess: false
   - type: ActionBlockIfResting
-
-

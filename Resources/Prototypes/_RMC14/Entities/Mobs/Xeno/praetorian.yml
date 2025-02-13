@@ -159,7 +159,7 @@
     - ActionXenoTailFountain
     - ActionXenoPheromones
     - ActionXenoTantrum
-    # - ActionXenoHighGallop
+    - ActionXenoHighGallop
     - ActionXenoFightOrFlight
     - ActionXenoRetrieve
     - ActionXenoDevolve
@@ -207,6 +207,7 @@
     - type: RMCSlowdown
     - type: RMCSuperSlowdown
     - type: RMCRooted
+  - type: XenoHighGallop
 
 - type: entity
   parent: CMXenoPraetorianBase
