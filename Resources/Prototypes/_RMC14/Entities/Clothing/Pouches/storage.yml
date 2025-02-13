@@ -432,7 +432,7 @@
   components:
   - type: Storage
     grid:
-    - 0,0,7,1 #7 slots
+    - 0,0,13,1 #7 slots
 
 
 # Flare Pouch

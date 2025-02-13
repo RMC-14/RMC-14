@@ -242,7 +242,7 @@
       - CMEncryptionKeyPilot
 
 - type: entity
-  parent: RMCHeadsetShip
+  parent: RMCHeadsetMarine
   id: CMHeadsetIntel
   name: marine intel radio headset
   description: Used by Intelligence Officers.

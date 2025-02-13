@@ -41,10 +41,10 @@ public sealed class SkillPamphletSystem : EntitySystem
         // Add any components that should be added
         foreach (var comp in ent.Comp.AddComps.Values)
         {
-            if (HasComp(args.User, comp.GetType()))
+            if (HasComp(args.User, comp.Component.GetType()))
                 continue;
 
-            AddComp(args.User, comp.Component);
+            EntityManager.AddComponent(args.User, comp);
             ent.Comp.GaveSkill = true;
         }
 

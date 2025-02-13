@@ -57,6 +57,7 @@ public sealed class SquadSystem : EntitySystem
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
 
     private static readonly ProtoId<JobPrototype> SquadLeaderJob = "CMSquadLeader";
+    private static readonly ProtoId<JobPrototype> IntelOfficerJob = "CMIntelOfficer";
     public static readonly EntProtoId<SquadTeamComponent> EchoSquadId = "SquadEcho";
 
     public ImmutableArray<EntityPrototype> SquadPrototypes { get; private set; }
@@ -334,6 +335,9 @@ public sealed class SquadSystem : EntitySystem
             if (job.HasSquad)
                 jobBuilder.Add(job);
         }
+
+        if (_prototypes.TryIndex(IntelOfficerJob, out var intelJob))
+            jobBuilder.Add(intelJob);
 
         SquadRolePrototypes = jobBuilder.ToImmutable();
     }

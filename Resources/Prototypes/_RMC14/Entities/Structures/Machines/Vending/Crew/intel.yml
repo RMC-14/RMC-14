@@ -124,13 +124,13 @@
       - id: CMHeadsetIntel
       - id: CMMRE
     - name: Armor
-      choices: { CMArmor: 1 }
+      takeOne: CMArmor
       entries:
       - id: RMCArmorXM4
-      - id: CMArmorM3Light
+      - id: RMCArmorM3LightVariants
       - id: CMCoatOfficer
     - name: Backpack
-      choices: { CMArmor: 1 }
+      choices: { CMBag: 1 }
       entries:
       - id: CMSatchelMarineIntel
         recommended: true
@@ -188,7 +188,7 @@
       - id: CMWebbingHolster
       - id: CMWebbing
       - id: CMWebbingPouch
-    - name: Accessories
+    - name: Mask
       choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas

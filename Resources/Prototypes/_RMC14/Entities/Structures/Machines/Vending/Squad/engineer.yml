@@ -20,7 +20,7 @@
       entries:
       - id: CMVendorBundleCombatTechnicianEssentials
     - name: Handheld Defense
-      choices: { CMHandheldDefense: 1 }
+      takeOne: CMHandheldDefense
       entries:
     #    CM21STeslaCoil
     #    CMJIMAPlantedFlag
@@ -144,8 +144,8 @@
       entries:
       - id: CMRollerBedSpawnFolded
         points: 5
-    #- id: CMFultonDeviceStack
-    #  points: 5
+      - id: RMCFulton20
+        points: 5
       - id: CMFireExtinguisherPortable
         points: 3
       - id: RMCMotionDetector

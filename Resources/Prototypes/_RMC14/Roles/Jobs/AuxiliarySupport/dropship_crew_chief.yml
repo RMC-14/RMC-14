@@ -72,10 +72,7 @@
   - type: SpawnPoint
     job_id: CMDropshipCrewChief
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: dropship_crew_chief
+    state: dcc_spawn
 
 - type: playTimeTracker
   id: CMJobDropshipCrewChief

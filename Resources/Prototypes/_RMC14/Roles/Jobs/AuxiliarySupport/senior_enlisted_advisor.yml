@@ -101,10 +101,7 @@
   - type: SpawnPoint
     job_id: CMSeniorEnlistedAdvisor
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: senior_enlisted_advisor
+    state: sea_spawn
 
 - type: entity
   parent: CMGuidebookRole

@@ -217,6 +217,17 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
             Dirty(actor, user);
         }
+        if (section.TakeOne is { } takeOne)
+        {
+            user = EnsureComp<CMVendorUserComponent>(actor);
+            if (!user.TakeOne.Add(takeOne))
+            {
+                Log.Error($"{ToPrettyString(actor)} tried to buy too many take-ones.");
+                return;
+            }
+
+            Dirty(actor, user);
+        }
 
         var validJob = true;
         if (_mind.TryGetMind(args.Actor, out var mindId, out _))
@@ -267,6 +278,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         {
             if (section.Choices is { } choices && user != null)
                 user.Choices[choices.Id]--;
+            if (section.TakeOne is { } takeOne && user != null)
+                user.TakeOne.Remove(takeOne);
         }
 
         if (section.SharedSpecLimit is { } globalLimit)

@@ -12,9 +12,6 @@ public sealed partial class RMCPlanetMapPrototypeComponent : Component
     public ResPath Map;
 
     [DataField, AutoNetworkedField]
-    public string Name;
-
-    [DataField, AutoNetworkedField]
     public CamouflageType Camouflage = CamouflageType.Jungle;
 
     [DataField, AutoNetworkedField]
