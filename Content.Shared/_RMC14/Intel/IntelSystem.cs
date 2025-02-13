@@ -242,7 +242,7 @@ public sealed class IntelSystem : EntitySystem
 
         if (HasComp<IntelRescueSurvivorObjectiveComponent>(user))
         {
-            _popup.PopupClient($"You have no need to read the {Name(ent)}.", ent, user);
+            _popup.PopupClient(Loc.GetString("rmc-intel-survivor-read", ("thing", Name(ent))), ent, user);
             return;
         }
 
@@ -261,7 +261,7 @@ public sealed class IntelSystem : EntitySystem
         if (HasComp<IntelRescueSurvivorObjectiveComponent>(user))
         {
             args.Cancel();
-            _popup.PopupClient($"You have no use for the {Name(ent)}.", ent, user);
+            _popup.PopupClient(Loc.GetString("rmc-intel-survivor-pickup", ("thing", Name(ent))), ent, user);
             return;
         }
 
@@ -273,7 +273,7 @@ public sealed class IntelSystem : EntitySystem
         if (HasComp<IntelRescueSurvivorObjectiveComponent>(user))
         {
             args.Cancelled = true;
-            _popup.PopupClient($"You have no use for the {Name(ent)}.", user, user);
+            _popup.PopupClient(Loc.GetString("rmc-intel-survivor-pickup", ("thing", Name(ent))), ent, user);
         }
     }
 
