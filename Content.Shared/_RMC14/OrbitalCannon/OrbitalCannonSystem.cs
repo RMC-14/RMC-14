@@ -483,7 +483,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
                 var msg = "[font size=16][color=red]Orbital bombardment launch command detected![/color][/font]";
                 _rmcChat.ChatMessageToMany(msg, msg, groundFilter, ChatChannel.Radio);
 
-                if (_area.TryGetArea(planetCoordinates, out _, out var areaProto, out _))
+                if (_area.TryGetArea(planetCoordinates, out _, out var areaProto))
                 {
                     msg = $"[color=red]Launch command informs {firing.WarheadName}. Estimated impact area: {areaProto.Name}[/color]";
                     _rmcChat.ChatMessageToMany(msg, msg, groundFilter, ChatChannel.Radio);

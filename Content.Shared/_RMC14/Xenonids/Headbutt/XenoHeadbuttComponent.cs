@@ -21,6 +21,13 @@ public sealed partial class XenoHeadbuttComponent : Component
     public float Range = 3;
 
     [DataField, AutoNetworkedField]
+    public float ThrowForce = 1;
+
+    //Added to range when crest is lowered or fortified
+    [DataField, AutoNetworkedField]
+    public float CrestFortifiedThrowAdd = 1.75f; //Total 3 tiles from start
+
+    [DataField, AutoNetworkedField]
     public EntProtoId Effect = "CMEffectPunch";
 
     [DataField, AutoNetworkedField]
@@ -28,4 +35,10 @@ public sealed partial class XenoHeadbuttComponent : Component
 
     [DataField, AutoNetworkedField]
     public Vector2? Charge;
+
+    [DataField, AutoNetworkedField]
+    public int AP = 5;
+
+    [DataField, AutoNetworkedField]
+    public DamageSpecifier CrestedDamageReduction;
 }

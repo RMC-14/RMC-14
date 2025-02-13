@@ -1,9 +1,10 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
   id: CMXenoBurrower
   name: Burrower
   description: A beefy alien with sharp claws.
@@ -38,7 +39,7 @@
     - ActionXenoTremor
     - ActionXenoDevolve
     tier: 2
-    hudOffset: 0,0.56
+    hudOffset: -0.15,0.56
     unlockAt: 420 # 7 minutes
   - type: XenoLight
   - type: XenoDevolve
@@ -59,6 +60,7 @@
     range: 4
     plasmaCost: 100
     paralyzeTime: 2
+    slows: false
     sound: /Audio/_RMC14/Xeno/alien_footstep_charge1.ogg
   - type: XenoBurrow
   - type: MeleeWeapon
@@ -93,8 +95,8 @@
       whitelist:
         components:
         - XenoHeavy
-#  - type: RMCXenoDamageVisuals # TODO RMC14
-#    prefix: burrower
+  - type: RMCXenoDamageVisuals
+    prefix: burrower
   - type: TacticalMapIcon
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
@@ -105,3 +107,5 @@
   - type: XenoConstruction
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.2

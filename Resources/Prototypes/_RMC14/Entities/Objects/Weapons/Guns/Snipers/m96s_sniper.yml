@@ -6,9 +6,9 @@
     'Peace Through Superior Firepower'"
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Snipers/m96s.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Snipers/m96s/desert.rsi
     layers:
-    - state: base
+    - state: bolt-open
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
@@ -18,7 +18,7 @@
   - type: Item
     size: Large
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Snipers/m96s.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Snipers/m96s/desert.rsi
   - type: Tag
     tags:
     - CMM96SSniperRifle
@@ -74,6 +74,13 @@
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-underbarrel: 0.21875, -0.343
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle:  _RMC14/Objects/Weapons/Guns/Snipers/m96s/jungle.rsi
+      Desert:  _RMC14/Objects/Weapons/Guns/Snipers/m96s/desert.rsi
+      Snow:  _RMC14/Objects/Weapons/Guns/Snipers/m96s/snow.rsi
+      Classic:  _RMC14/Objects/Weapons/Guns/Snipers/m96s/classic.rsi
+      Urban:  _RMC14/Objects/Weapons/Guns/Snipers/m96s/urban.rsi
 
 - type: entity
   parent: BaseMagazineRifle

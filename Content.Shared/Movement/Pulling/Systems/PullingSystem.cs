@@ -7,6 +7,7 @@ using Content.Shared.Cuffs.Components;
 using Content.Shared.Database;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Input;
 using Content.Shared.Interaction;
 using Content.Shared.Item;
@@ -16,6 +17,7 @@ using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Popups;
 using Content.Shared.Pulling.Events;
 using Content.Shared.Standing;
 using Content.Shared.Verbs;
@@ -46,6 +48,7 @@ public sealed class PullingSystem : EntitySystem
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly HeldSpeedModifierSystem _clothingMoveSpeed = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -329,7 +332,6 @@ public sealed class PullingSystem : EntitySystem
             RaiseLocalEvent(pullableUid, message);
         }
 
-
         _alertsSystem.ClearAlert(pullableUid, pullableComp.PulledAlert);
     }
 
@@ -521,6 +523,10 @@ public sealed class PullingSystem : EntitySystem
 
         Dirty(pullerUid, pullerComp);
         Dirty(pullableUid, pullableComp);
+
+        var pullingMessage =
+            Loc.GetString("getting-pulled-popup", ("puller", Identity.Entity(pullerUid, EntityManager)));
+        _popup.PopupEntity(pullingMessage, pullableUid, pullableUid);
 
         _adminLogger.Add(LogType.Action, LogImpact.Low,
             $"{ToPrettyString(pullerUid):user} started pulling {ToPrettyString(pullableUid):target}");

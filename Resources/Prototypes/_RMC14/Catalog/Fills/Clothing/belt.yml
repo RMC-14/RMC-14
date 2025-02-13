@@ -54,7 +54,7 @@
     - id: CMPillCanisterInaprovaline
       amount: 1
     # TODO RMC14 tramadol and perixadon pills, splint
-    - id: CMOintment10
+    - id: CMBurnKit10
       amount: 1
     - id: CMTraumaKit10
       amount: 1
@@ -149,7 +149,7 @@
 
 - type: entity
   parent: CMBeltMarine
-  id: RMCBeltMarineAR10
+  id: CMBeltMarineAR10
   suffix: Filled, AR10
   components:
   - type: StorageFill

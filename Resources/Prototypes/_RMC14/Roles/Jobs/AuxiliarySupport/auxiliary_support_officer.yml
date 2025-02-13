@@ -17,6 +17,12 @@
   - !type:DepartmentTimeRequirement
     department: CMAuxiliarySupport
     time: 18000 # 5 hours
+  ranks:
+    RMCRankCaptain:
+    - !type:RoleTimeRequirement
+      role: CMJobAuxiliarySupportOfficer
+      time: 252000 # 70 hours
+    RMCRankFirstLT: []
   weight: 5
   startingGear: CMGearASO
   icon: "CMJobIconASO"
@@ -55,19 +61,22 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "ASO"
+      prefix: cm-job-prefix-aso
+    - type: ViewIntelObjectives
 
 - type: startingGear
   id: CMGearASO
   equipment:
     jumpsuit: CMJumpsuitBO
     outerClothing: CMCoatASO
-    back: CMSatchel
     shoes: CMBootsBlack
     id: CMIDCardASO
     ears: CMHeadsetSeniorCommand
     pocket1: RMCPouchGeneralLarge
     pocket2: RMCPouchGeneralLarge
+  storage:
+    pocket1:
+    - RMCRangefinder
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -77,10 +86,16 @@
   - type: SpawnPoint
     job_id: CMAuxiliarySupportOfficer
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: auxiliary_support_officer
+    state: x
+
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleASO
+  name: Auxiliary Support Officer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: auxiliary_support_officer
 
 - type: playTimeTracker
   id: CMJobAuxiliarySupportOfficer

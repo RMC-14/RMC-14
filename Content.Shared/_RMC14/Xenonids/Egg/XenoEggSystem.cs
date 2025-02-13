@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction;
+using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -582,7 +583,8 @@ public sealed class XenoEggSystem : EntitySystem
 
             if (HasComp<XenoConstructComponent>(uid) ||
                 _tags.HasAnyTag(uid.Value, StructureTag, AirlockTag) ||
-                HasComp<StrapComponent>(uid))
+                HasComp<StrapComponent>(uid) ||
+                HasComp<XenoTunnelComponent>(uid))
             {
                 var msg = Loc.GetString("cm-xeno-egg-blocked");
                 _popup.PopupClient(msg, uid.Value, user, PopupType.SmallCaution);

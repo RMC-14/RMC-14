@@ -1,11 +1,12 @@
-﻿- type: entity
+- type: entity
   parent: BaseItem
   id: RMCMortarKit
   name: M402 mortar portable kit
+  suffix: Classic
   description: A manual, crew-operated mortar system intended to rain down 80mm goodness on anything it's aimed at. Needs to be set down first.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/mortar.rsi
+    sprite: _RMC14/Objects/Weapons/mortar/classic.rsi
     layers:
     - map: [ "mortar" ]
       state: mortar_m402_carry
@@ -81,6 +82,22 @@
     whitelist:
       components:
       - Marine
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/mortar/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/mortar/desert.rsi
+      Snow: _RMC14/Objects/Weapons/mortar/snow.rsi
+      Classic: _RMC14/Objects/Weapons/mortar/classic.rsi
+      Urban: _RMC14/Objects/Weapons/mortar/urban.rsi
+  - type: ReceiverXenoClaws
+    maxHealth: 100
+    hitsToDestroy: 1
+    minimumClawStrength: Normal
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/_RMC14/Structures/metalhit.ogg"
 
 - type: entity
   abstract: true
@@ -102,6 +119,8 @@
   name: 80mm high explosive mortar shell
   description: An 80mm mortar shell, loaded with a high explosive charge.
   components:
+  - type: Item
+    heldPrefix: he
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/mortar.rsi
     state: mortar_ammo_he
@@ -121,6 +140,8 @@
   name: 80mm incendiary mortar shell
   description: An 80mm mortar shell, loaded with a Type B napalm charge. Perfect for long-range area denial.
   components:
+  - type: Item
+    heldPrefix: inc
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/mortar.rsi
     state: mortar_ammo_inc
@@ -143,6 +164,8 @@
   name: 80mm flare/camera mortar shell
   description: An 80mm mortar shell, loaded with an illumination flare / camera combo, attached to a parachute.
   components:
+  - type: Item
+    heldPrefix: flr
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/mortar.rsi
     state: mortar_ammo_flr

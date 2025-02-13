@@ -11,7 +11,7 @@
 
 - type: entity
   parent: RMCUnderAttachmentBase
-  id: RMCAttachmentAngledGrip
+  id: RMCAttachmentAngledGrip # angledgrip
   name: angled grip
   description: "An angled foregrip that improves weapon ergonomics resulting in faster wielding time.
     However, it also increases weapon size."
@@ -142,9 +142,10 @@
           tags:
           - RMCWeaponLMGM60
       fireDelayFlat: -0.1
+
 - type: entity
   parent: RMCUnderAttachmentBase
-  id: RMCAttachmentBurstFireAssembly
+  id: RMCAttachmentBurstFireAssembly # burstfire_assembly
   name: burst fire assembly
   description: A small angled piece of fine machinery that increases the burst count on some weapons.
   components:
@@ -257,6 +258,8 @@
     tags:
     - RMCAttachmentUnderbarrel
     - RMCAttachmentU7UnderbarrelShotgun
+  - type: Item
+    size: Normal
   - type: Gun
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_u7.ogg
@@ -329,6 +332,8 @@
     layers:
     - state: grenade
       map: [ "enum.BreechVisuals.Open" ]
+  - type: Item
+    size: Normal
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
@@ -356,13 +361,14 @@
       params:
         volume: -2
   - type: OnShootTriggerAmmoTimer
-    delay: 1
+    delay: 1.5
     beepInterval: 2
     initialBeepDelay: 0
     beepSound:
       path: "/Audio/Effects/beep1.ogg"
       params:
         volume: 5
+    timerStart: enum.TimerStartMode.OnHitGround
   - type: ShootAtFixedPoint
     maxFixedRange: 7
   - type: UniqueAction
@@ -407,6 +413,8 @@
     layers:
       - state: grenade-mk1
         map: [ "enum.BreechVisuals.Open" ]
+  - type: Item
+    size: Normal
   - type: BallisticAmmoProvider
     capacity: 5
   - type: ShootAtFixedPoint
@@ -427,6 +435,8 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
       state: grenade-mk1-on
+  - type: AttachableVisuals
+    offset: -0.1, 0.218
   - type: Tag
     tags:
     - RMCAttachmentUnderbarrel
@@ -434,7 +444,7 @@
 
 - type: entity
   parent: RMCUnderAttachmentBase
-  id: RMCAttachmentVerticalGrip
+  id: RMCAttachmentVerticalGrip # verticalgrip
   name: vertical grip
   description: "A vertical foregrip that offers better accuracy, less recoil, and less scatter, especially during burst fire.
     However, it also increases weapon size."
@@ -465,7 +475,7 @@
 
 - type: entity
   parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
-  id: RMCAttachmentFlashlightGrip
+  id: RMCAttachmentFlashlightGrip # flashlight/grip
   name: underbarrel flashlight grip
   description: Holy smokes RO man, they put a grip on a flashlight! Reduces recoil and scatter by a tiny amount. Works as a light source. # Boosts accuracy by a tiny amount.
   components:
@@ -481,6 +491,7 @@
     addPrefix: false
     blinkingBehaviourId: blinking
     radiatingBehaviourId: radiating
+  - type: NoHandsInteractionBlocked
   - type: LightBehaviour
     behaviours:
     - !type:FadeBehaviour

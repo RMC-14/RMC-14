@@ -50,6 +50,7 @@
           SeventyFive: { state: "on-75" }
           Hundred: { state: "on-100" }
           Overloaded: { state: "overloaded" }
+  - type: BlockXenoConstruction
 
 - type: entity
   parent: RMCGeneratorFusion
@@ -60,6 +61,7 @@
   - type: RMCFusionReactor
     watts: 100000
     randomizeDamage: true
+  - type: IntelPowerObjective
 
 - type: entity
   parent: BaseItem

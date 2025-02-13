@@ -28,17 +28,19 @@
   - type: WieldDelay
     baseDelay: 0.4
   - type: WieldableSpeedModifiers
-    baseWalk: 0.696
-    baseSprint: 0.559
+    base: 0.5
+    light: 0.69
+    medium: 0.75
+    heavy: 0.806
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/smart_gun.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/jungle.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/smart_gun.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/jungle.rsi
     slots:
     - suitStorage
     - Back
@@ -127,9 +129,11 @@
       - SmartGunArmor
   - type: GunToggleableRecoil
   - type: GunToggleableAutoFire
-  - type: GunToggleableMotionDetector
+  - type: ToggleableMotionDetector
+  - type: IFFToggle
   - type: MotionDetector
     handToggleable: false
+    deactivateOnDrop: false
     toggleSound: null
   - type: SmartGun
   - type: AttachableHolder
@@ -141,6 +145,17 @@
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-rail: -0.1875, 0.125
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a/urban.rsi
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/smartgun_mouse.rsi
+      state: all
 
 - type: entity
   parent: CMMagazineRifleBase
@@ -157,7 +172,7 @@
     proto: CMCartridgeSmartGun10x30mm
     capacity: 500
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/jungle.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -166,6 +181,13 @@
   - type: Clothing
     slots:
     - suitStorage
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/urban.rsi
 
 - type: entity
   parent: CMBaseCartridgeRifle

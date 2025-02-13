@@ -1,17 +1,18 @@
-﻿- type: entity
+- type: entity
   parent: WeaponRifleM4SPR
   name: M4SPR custom battle rifle
   id: WeaponRifleM4SPRCustom
   description: An improvement over the already great M4SPR. Able to take A19 rounds, as well as having better control and accuracy at the cost of being harder to use. Can take traditional M4SPR mags, at lower damage.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/desert.rsi
     layers:
-    - state: base
+    - state: bolt-open
       map: [ "enum.GunVisualLayers.Base" ]
     - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
       state: d_m4spr_custom_barrel
       offset: 0.65, 0
+      map: [ "barrel" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: RMCSelectiveFire
@@ -27,8 +28,10 @@
   - type: GunDamageModifier
     multiplier: 1.1 # Lower to allow for normal M4SPR mags to have lower damage. A19 mags do more damage to compensate.
   - type: WieldableSpeedModifiers
-    baseWalk: 0.94
-    baseSprint: 0.88
+    base: 0.725
+    light: 1
+    medium: 1
+    heavy: 1
   - type: Gun
     shotsPerBurst: 2
     selectedMode: SemiAuto
@@ -43,7 +46,7 @@
   - type: Corrodible
     isCorrodible: false
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/desert.rsi
   - type: MeleeWeapon
     attackRate: 1
     damage:
@@ -90,6 +93,20 @@
           - RMCMagazineRifleM4SPRA19
           - RMCMagazineRifleM4SPRA19Impact
           - RMCMagazineRifleM4SPRA19Incendiary
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Rifles/m4spr_custom/urban.rsi
+    layers:
+      barrel:
+        Jungle: m4spr_custom_barrel
+        Desert: d_m4spr_custom_barrel
+        Snow: s_m4spr_custom_barrel
+        Classic: c_m4spr_custom_barrel
+        Urban: u_m4spr_custom_barrel
 
 - type: entity
   parent: CMMagazineRifleBase
@@ -120,7 +137,7 @@
   parent: RMCMagazineRifleM4SPRA19
   id: RMCMagazineRifleM4SPRA19Impact
   name: "A19 HV high impact magazine (10x24mm)"
-  description: "A magazine of A19 HV high impact rounds for use in the M4RA battle rifle. The M4RA battle rifle is the only gun that can chamber these rounds."
+  description: "A magazine of A19 HV high impact rounds for use in the M4SPR custom battle rifle. The M4SPR custom battle rifle is the only gun that can chamber these rounds."
   components:
   - type: Tag
     tags:
@@ -145,7 +162,7 @@
   parent: RMCMagazineRifleM4SPRA19
   id: RMCMagazineRifleM4SPRA19Incendiary
   name: "A19 HV incendiary magazine (10x24mm)"
-  description: "A magazine of A19 HV incendiary rounds for use in the M4RA battle rifle. The M4RA battle rifle is the only gun that can chamber these rounds."
+  description: "A magazine of A19 HV incendiary rounds for use in the M4SPR custom battle rifle. The M4SPR custom battle rifle is the only gun that can chamber these rounds."
   components:
   - type: Tag
     tags:
@@ -262,7 +279,7 @@
   - type: CMArmorPiercing
     amount: 25
   - type: RMCProjectileAccuracy
-    accuracy: 95
+    accuracy: 105
   - type: IgniteOnProjectileHit
 
 - type: Tag

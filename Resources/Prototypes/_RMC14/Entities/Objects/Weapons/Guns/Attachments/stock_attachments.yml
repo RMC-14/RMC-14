@@ -36,6 +36,7 @@
     actionDesc: Extend the stock.
   - type: AttachableWieldDelayMods
     modifiers: []
+  - type: Appearance
 
 - type: entity
   parent: RMCStockAttachmentBase
@@ -44,7 +45,7 @@
   description: A non-standard heavy wooden stock for the M42A2 Shotgun. More cumbersome than the standard issue stakeout, but reduces recoil and scatter. Allegedly makes a pretty good club in a fight too.
   components:
   - type: Sprite
-    state: d-stock
+    state: d_stock
   - type: AttachableVisuals
     suffix: ""
   - type: Tag
@@ -77,6 +78,14 @@
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 6
+  - type: Appearance
+  - type: ItemCamouflage
+    states:
+      Jungle: stock
+      Desert: d_stock
+      Snow: s_stock
+      Classic: c_stock
+      Urban: u_stock
 
 
 - type: entity
@@ -130,6 +139,7 @@
     state: xm51_stock
   - type: AttachableVisuals
     suffix: ""
+  - type: Appearance
   - type: Tag
     tags:
     - RMCAttachmentStock
@@ -160,6 +170,13 @@
       accuracyAddMult: -0.25
       recoilFlat: 1
       scatterFlat: 10
+  - type: ItemCamouflage
+    states:
+      Jungle: xm51_stock
+      Desert: d_xm51_stock
+      Snow: s_xm51_stock
+      Classic: c_xm51_stock
+      Urban: u_xm51_stock
 
 - type: entity
   parent: RMCStockAttachmentBase
@@ -249,7 +266,7 @@
   description: A rare stock distributed in small numbers to UNMC forces. Compatible with the M54C, this stock reduces recoil and scatter, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi
     state: m54c-solid
   - type: Tag
     tags:
@@ -282,6 +299,14 @@
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 6
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/urban.rsi
 
 - type: entity
   parent: RMCAttachmentM54CStockSolid
@@ -306,7 +331,7 @@
   description: The standard back end of any gun starting with M54. Compatible with the M54C series, this stock reduces recoil and scatter, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi
     state: m54c-col
   - type: Tag
     tags:
@@ -316,10 +341,10 @@
     doAfterBreakOnMove: false
     doAfter: 0.5
     icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi
       state: m54c-col
     iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi
       state: m54c-col-on
     actionName: Toggle M54C Folding Stock
   - type: AttachableSizeMods
@@ -351,14 +376,31 @@
       accuracyAddMult: -0.15
       recoilFlat: 2
       scatterFlat: 6
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/urban.rsi
 
 - type: entity
-  parent: RMCStockAttachmentBase
+  parent: RMCAttachmentM54CStockCollapsible
+  id: RMCAttachmentM54CMK1StockCollapsible
+  suffix: Desert Camo
+  description: The standard back end of any gun starting with M54. Compatible with the M54C series, this stock reduces recoil and scatter, but at a reduction to handling and agility. Also enhances the thwacking of things with the stock-end of the rifle. Painted in a lovely desert camo.
+  components:
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
+  parent: RMCAttachableBase
   id: RMCAttachmentM16Stock
   name: M16 bump stock
   description: Technically illegal in the state of California.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
     state: m16-stock
   - type: AttachableVisuals
     suffix: ""
@@ -366,9 +408,6 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentM16Stock
-  - type: AttachableWieldDelayMods
-    modifiers:
-    - delay: 0.1
 
 - type: entity
   parent: RMCStockAttachmentBase
@@ -596,6 +635,8 @@
   - type: AttachableSizeMods
     modifiers:
     - size: 1
+      conditions:
+        activeOnly: true
   - type: AttachableWieldDelayMods
     modifiers:
     - delay: 0.4
@@ -630,6 +671,7 @@
   description: A specially made compound polymer stock reinforced with aluminum rods and thick rubber padding to shield the user from recoil. Fitted specifically for the XM88 Heavy Rifle.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
     state: d_boomslang-stock
   - type: AttachableVisuals
     suffix: ""
@@ -663,6 +705,14 @@
       accuracyAddMult: -0.1
       recoilFlat: 1
       scatterFlat: 14
+  - type: Appearance
+  - type: ItemCamouflage
+    states:
+      Jungle: boomslang-stock
+      Desert: d_boomslang-stock
+      Snow: s_boomslang-stock
+      Classic: c_boomslang-stock
+      Urban: u_boomslang-stock
 
 - type: Tag
   id: RMCAttachmentStock

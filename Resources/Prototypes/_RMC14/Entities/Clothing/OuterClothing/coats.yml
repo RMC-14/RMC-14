@@ -19,6 +19,47 @@
   - type: PlaytimeMedalHolder
 
 - type: entity
+  abstract: True
+  parent: [RMCBaseJacket, BaseFoldable]
+  id: RMCBaseJacketButtonable
+  components:
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-button-up-verb
+    foldVerbText: rmc-unbutton-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: open
+    foldedHeldPrefix: open
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: true
+    - state: icon-open
+      map: ["foldedLayer"]
+      visible: false
+
+- type: entity
+  abstract: True
+  parent: RMCBaseJacketButtonable
+  id: RMCBaseJacketButtonableOpened
+  suffix: opened
+  components:
+  - type: Foldable
+    folded: true
+  - type: Clothing
+    equippedPrefix: open
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: icon-open
+      map: ["foldedLayer"]
+      visible: true
+
+- type: entity
   abstract: true
   id: RMCAllowSuitStorageClothingJacket
   components:
@@ -82,7 +123,7 @@
       - Pen
       - RMCMacheteScabbard
       #TODO Katana scabbard
-      - RMCMotionDetector
+      - RMCDetector
 
 
 - type: entity
@@ -115,10 +156,72 @@
       - RMCMatebaHolster
       - RMCMacheteScabbard
       #TODO Katana scabbard
-      - RMCMotionDetector
+      - RMCDetector
       #TODO Walkman
 
-# TODO RMC14 labcoat has it's own list
+- type: entity
+  abstract: true
+  id: RMCAllowSuitStorageClothingLabcoat
+  components:
+  - type: AllowSuitStorage
+    whitelist:
+      components:
+      - CMSurgeryTool
+      - RMCLighter
+      - Stunbaton
+      - Gun
+      tags:
+      - DiscreteHealthAnalyzer
+      - CMOintment
+      - CMTraumaKit
+      - CMBurnKit
+      - Gauze
+      - Brutepack
+# TODO RMC14 splints
+      - Dropper
+      - Syringe
+      - Hypospray
+      - GlassBeaker
+      - Pill
+      - PillCanister
+      - Paper
+      - CMSurgicalLine
+      - CMSynthGraft
+      - CMRollerBed
+      - CMBloodPack
+# TODO RMC14 spray bottle
+      - Handcuffs
+      - GasTank
+      - Flashlight
+      - CigPack
+      - Knife
+      - RMCG8Pouch
+      - Binoculars
+      - RMCMacheteScabbard
+      - Crowbar
+      - DiscreteHealthAnalyzer
+      - Pen
+      - Crowbar
+      - Radio
+      - RMCDetector
+
+- type: entity
+  abstract: true
+  id: RMCAllowSuitStorageClothingChefApron
+  components:
+  - type: AllowSuitStorage
+    whitelist:
+      tags:
+      - Knife
+#TODO RMC kitchen knife
+      - Pen
+      - Crowbar
+      - Radio
+      - GasTank
+      - DiscreteHealthAnalyzer
+      - Flashlight
+
+
 
 # TODO RMC14 chef/medical apron have a shared list
 
@@ -178,9 +281,17 @@
   description: A comfortable vest for officers who are expected to work long hours staring at rows of numbers and inspecting equipment from knives to torpedos to entire dropships.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/jungle.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/jungle.rsi
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/urban.rsi
 
 # Commanding Officer
 - type: entity
@@ -240,7 +351,6 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/coat_formal.rsi
 
-# Officer
 - type: entity
   parent: RMCBaseJacket
   id: CMCoatOfficer
@@ -258,9 +368,9 @@
   description: A service jacket typically worn by officers of the UNMC. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/d_coat.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/jungle.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/d_coat.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/jungle.rsi
   - type: CMArmor
     armor: 10 # TODO RMC14 10 melee
   - type: Appearance
@@ -270,13 +380,10 @@
     foldVerbText: rmc-buttons-verb-fold
   - type: FoldableClothing
     foldedEquippedPrefix: jacket
-
-# Longcoat - This is the service jacket but for snow maps
-- type: entity
-  parent: CMCoatOfficer
-  id: CMCoatLong
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/long_coat.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/long_coat.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Coats/service/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Coats/service/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Coats/service/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Coats/service/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Coats/service/urban.rsi

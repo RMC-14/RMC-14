@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Numerics;
+using Content.Server._RMC14.Scorch;
 using Content.Server.Decals;
 using Content.Server.Explosion.Components;
 using Content.Server.Explosion.EntitySystems;
@@ -41,7 +42,7 @@ public sealed class RMCExplosionSystem : SharedRMCExplosionSystem
 
         SubscribeLocalEvent<CMVocalizeTriggerComponent, ActiveTimerTriggerEvent>(OnVocalizeTriggered);
 
-        SubscribeLocalEvent<RMCExplosiveDeleteWallsComponent, EntityStuckEvent>(OnExplosiveDeleteWallsStuck);
+        SubscribeLocalEvent<RMCExplosiveDeleteComponent, EntityStuckEvent>(OnExplosiveDeleteWallsStuck);
 
         SubscribeLocalEvent<RMCScorchEffectComponent, CMExplosiveTriggeredEvent>(OnExplosionEffectTriggered);
 
@@ -85,7 +86,7 @@ public sealed class RMCExplosionSystem : SharedRMCExplosionSystem
         _audio.PlayEntity(sound, filter, user, true);
     }
 
-    private void OnExplosiveDeleteWallsStuck(Entity<RMCExplosiveDeleteWallsComponent> ent, ref EntityStuckEvent args)
+    private void OnExplosiveDeleteWallsStuck(Entity<RMCExplosiveDeleteComponent> ent, ref EntityStuckEvent args)
     {
         _trigger.HandleTimerTrigger(ent, args.User, ent.Comp.Delay, ent.Comp.BeepInterval, null, null);
     }

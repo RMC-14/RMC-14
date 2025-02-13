@@ -1,4 +1,6 @@
-﻿using Content.Shared.Interaction.Events;
+﻿using Content.Shared.Hands.Components;
+using Content.Shared.Interaction.Events;
+using Content.Shared.Light.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 
@@ -11,12 +13,25 @@ public sealed class RMCInteractionSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<InteractedBlacklistComponent, GettingInteractedWithAttemptEvent>(OnBlacklistInteractionAttempt);
+        SubscribeLocalEvent<NoHandsInteractionBlockedComponent, GettingInteractedWithAttemptEvent>(OnNoHandsInteractionAttempt);
         SubscribeLocalEvent<InsertBlacklistComponent, ContainerGettingInsertedAttemptEvent>(OnInsertBlacklistContainerInsertedAttempt);
+    }
+
+    private void OnNoHandsInteractionAttempt(Entity<NoHandsInteractionBlockedComponent> ent, ref GettingInteractedWithAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (!HasComp<HandsComponent>(args.Uid))
+            args.Cancelled = true;
     }
 
     private void OnBlacklistInteractionAttempt(Entity<InteractedBlacklistComponent> ent, ref GettingInteractedWithAttemptEvent args)
     {
         if (args.Cancelled || ent.Comp.Blacklist == null)
+            return;
+
+        if (TryComp(ent, out HandheldLightComponent? handheldLight) && handheldLight.Activated)
             return;
 
         if (_whitelist.IsValid(ent.Comp.Blacklist, args.Uid))

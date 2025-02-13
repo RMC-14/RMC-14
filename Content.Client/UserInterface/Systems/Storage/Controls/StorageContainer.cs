@@ -10,6 +10,7 @@ using Content.Shared.Input;
 using Content.Shared.Item;
 using Content.Shared.Storage;
 using Robust.Client.Graphics;
+using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
@@ -20,6 +21,7 @@ namespace Content.Client.UserInterface.Systems.Storage.Controls;
 public sealed partial class StorageContainer : BaseWindow
 {
     [Dependency] private readonly IEntityManager _entity = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
     private readonly StorageUIController _storageController;
 
     public EntityUid? StorageEntity;
@@ -211,8 +213,6 @@ public sealed partial class StorageContainer : BaseWindow
         }
 
         #endregion
-
-        BuildItemPieces();
     }
 
     public void BuildBackground()
@@ -270,6 +270,15 @@ public sealed partial class StorageContainer : BaseWindow
         var boundingGrid = storageComp.Grid.GetBoundingBox();
         var size = _emptyTexture!.Size * 2;
         var containedEntities = storageComp.Container.ContainedEntities.Reverse().ToArray();
+        if (_lastUpdate.Grid.Equals(boundingGrid) &&
+            _lastUpdate.Contained.SequenceEqual(containedEntities) &&
+            _lastUpdate.Stored.Count == storageComp.StoredItems.Count &&
+            _lastUpdate.Stored.All(kvp => storageComp.StoredItems.TryGetValue(kvp.Key, out var v) && kvp.Value == v))
+        {
+            return;
+        }
+
+        _lastUpdate = (boundingGrid, containedEntities, storageComp.StoredItems);
 
         //todo. at some point, we may want to only rebuild the pieces that have actually received new data.
 
@@ -362,7 +371,7 @@ public sealed partial class StorageContainer : BaseWindow
             currentLocation = dragging.Location;
         }
         else if (handsSystem.GetActiveHandEntity() is { } handEntity &&
-                 storageSystem.CanInsert(StorageEntity.Value, handEntity, out _, storageComp: storageComponent, ignoreLocation: true))
+                 storageSystem.CanInsert(StorageEntity.Value, handEntity, _player.LocalEntity, out _, storageComp: storageComponent, ignoreLocation: true))
         {
             currentEnt = handEntity;
             currentLocation = new ItemStorageLocation(_storageController.DraggingRotation, Vector2i.Zero);
@@ -505,7 +514,7 @@ public sealed partial class StorageContainer : BaseWindow
         if (args.Function == ContentKeyFunctions.MoveStoredItem && StorageEntity != null)
         {
             if (handsSystem.GetActiveHandEntity() is { } handEntity &&
-                storageSystem.CanInsert(StorageEntity.Value, handEntity, out _))
+                storageSystem.CanInsert(StorageEntity.Value, handEntity, _player.LocalEntity, out _))
             {
                 if (!CMInventoryExtensions.TryGetFirst(StorageEntity.Value, handEntity, out var insertLocation))
                     return;

@@ -70,6 +70,12 @@ public sealed partial class BuckleComponent : Component
     /// Used for client rendering
     /// </summary>
     [ViewVariables] public int? OriginalDrawDepth;
+
+    [DataField, AutoNetworkedField]
+    public float? BuckleDelay;
+
+    [DataField, AutoNetworkedField]
+    public bool ClickUnbuckle = true;
 }
 
 public sealed partial class UnbuckleAlertEvent : BaseAlertEvent;

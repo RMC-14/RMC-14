@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Numerics;
+﻿using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Sprite;
@@ -100,7 +99,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
         if (TerminatingOrDeleted(ent))
             return;
 
-        if (_area.TryGetArea(ent, out _, out var areaProto, out _))
+        if (_area.TryGetArea(ent, out _, out var areaProto))
             _metaData.SetEntityName(ent, $"{areaProto.Name} APC");
 
         _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.CellContainerSlot);
@@ -204,12 +203,13 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 
         if (TryComp(used, out AccessComponent? access))
         {
-            var hasAccess = access.Tags.Any(t => ent.Comp.Access.Contains(t));
-            if (!hasAccess)
-            {
-                _popup.PopupClient("Access denied.", ent, user, SmallCaution);
-                return;
-            }
+            // TODO RMC14 access wire
+            // var hasAccess = access.Tags.Any(t => ent.Comp.Access.Contains(t));
+            // if (!hasAccess)
+            // {
+            //     _popup.PopupClient("Access denied.", ent, user, SmallCaution);
+            //     return;
+            // }
 
             ent.Comp.Locked = !ent.Comp.Locked;
             Dirty(ent);
@@ -661,14 +661,11 @@ public abstract class SharedRMCPowerSystem : EntitySystem
     private bool TryGetPowerArea(EntityUid ent, out Entity<RMCAreaPowerComponent> areaPower)
     {
         areaPower = default;
-        if (!_area.TryGetArea(ent, out _, out _, out var areaEnt) ||
-            areaEnt is not { Valid: true })
-        {
+        if (!_area.TryGetArea(ent, out var area, out _))
             return false;
-        }
 
-        var areaPowerComp = EnsureComp<RMCAreaPowerComponent>(areaEnt.Value);
-        areaPower = (areaEnt.Value, areaPowerComp);
+        var areaPowerComp = EnsureComp<RMCAreaPowerComponent>(area.Value);
+        areaPower = (area.Value, areaPowerComp);
         return true;
     }
 

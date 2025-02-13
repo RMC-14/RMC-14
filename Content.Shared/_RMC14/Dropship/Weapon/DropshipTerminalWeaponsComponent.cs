@@ -29,6 +29,18 @@ public sealed partial class DropshipTerminalWeaponsComponent : Component
     public int TargetsPage;
 
     [DataField, AutoNetworkedField]
+    public List<TargetEnt> Medevacs = new();
+
+    [DataField, AutoNetworkedField]
+    public int MedevacsPage;
+
+    [DataField, AutoNetworkedField]
+    public List<TargetEnt> Fultons = new();
+
+    [DataField, AutoNetworkedField]
+    public int FultonsPage;
+
+    [DataField, AutoNetworkedField]
     public bool NightVision;
 
     [DataRecord]

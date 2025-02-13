@@ -7,7 +7,17 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMSquad
-    time: 3600 # 1 hour
+    time: 18000 # 5 hours
+  ranks:
+    RMCRankCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobCombatTech
+      time: 252000 # 70 hours
+    RMCRankLanceCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobCombatTech
+      time: 36000 # 10 hours
+    RMCRankPrivateFirstClass: []
   startingGear: CMGearCombatTech
   dummyStartingGear: CMGearCombatTechEquipped
   icon: "CMJobIconCombatTech"
@@ -36,19 +46,17 @@
       points: 45
     - type: SquadArmorWearer
     - type: JobPrefix
-      prefix: "ComTech"
+      prefix: cm-job-prefix-combat-tech
 
 - type: startingGear
   id: CMGearCombatTech
   equipment:
-    back: CMSatchelMarineTech
     id: CMDogtagCombatTech
 
 - type: startingGear
   id: CMGearCombatTechEquipped
   equipment:
     jumpsuit: CMJumpsuitMarineEngineer
-    back: CMSatchelMarineTech
     shoes: CMBootsBlackFilled
     head: CMArmorHelmetM10Tech
     outerClothing: RMCArmorM3MediumVariants
@@ -69,10 +77,7 @@
   - type: SpawnPoint
     job_id: CMCombatTech
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: combat_tech
+    state: engi_spawn
 
 - type: entity
   parent: CMSpawnPointCombatTech
@@ -82,6 +87,8 @@
   - type: SquadSpawner
     squad: SquadAlpha
     role: CMCombatTech
+  - type: Sprite
+    state: engi_spawn_alpha
 
 - type: entity
   parent: CMSpawnPointCombatTech
@@ -91,6 +98,8 @@
   - type: SquadSpawner
     squad: SquadBravo
     role: CMCombatTech
+  - type: Sprite
+    state: engi_spawn_bravo
 
 - type: entity
   parent: CMSpawnPointCombatTech
@@ -100,6 +109,8 @@
   - type: SquadSpawner
     squad: SquadCharlie
     role: CMCombatTech
+  - type: Sprite
+    state: engi_spawn_charlie
 
 - type: entity
   parent: CMSpawnPointCombatTech
@@ -109,3 +120,5 @@
   - type: SquadSpawner
     squad: SquadDelta
     role: CMCombatTech
+  - type: Sprite
+    state: engi_spawn_delta

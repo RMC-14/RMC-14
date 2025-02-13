@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using Content.Shared._RMC14.Fireman;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
@@ -22,6 +23,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+
 
 namespace Content.Shared._RMC14.Pulling;
 
@@ -203,7 +205,7 @@ public sealed class RMCPullingSystem : EntitySystem
         if (args.Cancelled || ent.Owner == args.PulledUid)
             return;
 
-        if (_mobState.IsDead(args.PulledUid))
+        if (_mobState.IsDead(args.PulledUid) && !HasComp<IgnoreBlockPullingDeadComponent>(args.PulledUid))
         {
             _popup.PopupClient(Loc.GetString("cm-pull-whitelist-denied-dead", ("name", args.PulledUid)), args.PulledUid, args.PullerUid);
             args.Cancelled = true;
@@ -281,6 +283,30 @@ public sealed class RMCPullingSystem : EntitySystem
         }
 
         _pulling.TryStopPull(puller.Pulling.Value, pullable, user);
+    }
+
+    public void TryStopPullsOn(EntityUid puller)
+    {
+        if (!TryComp<PullableComponent>(puller, out var pullable) ||
+             pullable.Puller == null)
+        {
+            return;
+        }
+
+        _pulling.TryStopPull(puller, pullable);
+    }
+
+    public void TryStopAllPullsFromAndOn(EntityUid pullie)
+    {
+        TryStopPullsOn(pullie);
+
+       if (TryComp(pullie, out PullerComponent? puller) &&
+            puller.Pulling != null &&
+            TryComp(puller.Pulling, out PullableComponent? pullable2))
+        {
+            _pulling.TryStopPull(puller.Pulling.Value, pullable2, pullie);
+            return;
+        }
     }
 
     private void OnPullAnimation(Entity<PullableComponent> ent, ref PullStartedMessage args)
@@ -362,7 +388,7 @@ public sealed class RMCPullingSystem : EntitySystem
                 continue;
             }
 
-            if (_mobState.IsDead(pulling))
+            if (_mobState.IsDead(pulling) && !HasComp<IgnoreBlockPullingDeadComponent>(pulling))
                 _pulling.TryStopPull(pulling, pullable, uid);
         }
 
@@ -397,6 +423,8 @@ public sealed class RMCPullingSystem : EntitySystem
                 continue;
 
             var puller = pullable.Puller.Value;
+            if (!Exists(puller))
+                continue;
 
             if (_firemanQuery.TryComp(uid, out var fireman) && fireman.BeingCarried)
                 continue;

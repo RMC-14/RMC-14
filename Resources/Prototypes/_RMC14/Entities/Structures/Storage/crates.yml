@@ -95,8 +95,9 @@
       types:
         Blunt: 5000
   - type: PowerLoaderGrabbable
-    virtualRight: RMCVirtualDropshipGearRight
-    virtualLeft: RMCVirtualDropshipGearLeft
+    virtualRight: RMCVirtualCrateRight
+    virtualLeft: RMCVirtualCrateLeft
+  - type: RMCCanBeFultoned
 
 - type: entity
   parent: BaseStructureDynamic

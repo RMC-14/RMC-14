@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   save: false
   parent: BaseMobSpecies
   id: CMBaseMobSpeciesOrganic
@@ -139,6 +139,12 @@
         requireInputValidation: false
       enum.TacticalMapUserUi.Key:
         type: TacticalMapUserBui
+      enum.SquadLeaderTrackerUI.Key:
+        type: SquadInfoBui
+      enum.DialogUiKey.Key:
+        type: DialogBui
+      enum.ViewIntelObjectivesUI.Key:
+        type: ViewIntelObjectivesBui
   - type: Infectable
   - type: Tackleable
   - type: Tackle
@@ -200,10 +206,10 @@
       whitelist:
         components:
         - XenoHeavy
-#    - multiplier: 0.645
-#      whitelist:
-#        tags:
-#        - Bodybag
+    - multiplier: 0.645
+      whitelist:
+        tags:
+        - BodyBag
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -272,3 +278,9 @@
     blacklist:
       components:
       - Xeno
+  - type: RMCPickupDroppedItems
+  - type: CommendationReceiver
+  - type: RMCSpeciesSlowdownModifier
+    slowMultiplier: 0.66
+    superSlowMultiplier: 0.33
+  - type: RMCHandEmotes
