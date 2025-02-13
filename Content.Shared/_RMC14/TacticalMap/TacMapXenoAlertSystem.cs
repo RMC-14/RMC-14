@@ -62,7 +62,7 @@ public sealed class TacMapXenoAlertSystem : EntitySystem
                     continue;
 
                 _alerts.ShowAlert(ent, ent.Comp.Alert, dynamicMessage: Loc.GetString("rmc-tacmap-alert-area", ("area", GetAreaName(ent))));
-                ent.Comp.NextUpdateTime += ent.Comp.UpdateInterval;
+                ent.Comp.NextUpdateTime = _timing.CurTime + ent.Comp.UpdateInterval;
             }
         }
 
@@ -74,7 +74,6 @@ public sealed class TacMapXenoAlertSystem : EntitySystem
                 continue;
 
             _xenoAlertQueue.Enqueue((uid, alert));
-            alert.NextUpdateTime = time + alert.UpdateInterval;
         }
     }
 }
