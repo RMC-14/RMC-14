@@ -251,7 +251,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                 if (marine.Camera == default)
                 {
                     var watchLabel = new RichTextLabel();
-                    watchLabel.SetMarkupPermissive($"[color={YellowColor}]{name} (NO HELMET)[/color]");
+                    watchLabel.SetMarkupPermissive($"[color={YellowColor}]{name} (NO CAMERA)[/color]");
                     watchControl = watchLabel;
                 }
                 else
