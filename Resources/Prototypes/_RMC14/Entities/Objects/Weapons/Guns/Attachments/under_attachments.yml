@@ -443,6 +443,43 @@
     - RMCAttachmentMK1GrenadeLauncher
 
 - type: entity
+  parent: RMCAttachmentU1GrenadeLauncher
+  id: RMCAttachmentM203GrenadeLauncher
+  name: M203 grenade launcher
+  description: An antique underbarrel grenade launcher. Adopted in 1969 for the M16, it was made obsolete centuries ago; how its ended up here is a mystery to you. Holds only one propriatary 40mm grenade, does not have modern IFF systems, it won't pass through your friends.
+  components:
+  - type: Sprite # TODO: No IFF for this launcher
+    layers:
+      - state: grenade-m203
+        map: [ "enum.BreechVisuals.Open" ]
+  - type: BallisticAmmoProvider
+    capacity: 1
+  - type: ShootAtFixedPoint
+    maxFixedRange: 10
+  - type: RMCSelectiveFire
+    baseFireRate: 0.334
+  - type: GenericVisualizer
+    visuals:
+      enum.BreechVisuals.Open:
+        enum.BreechVisuals.Open:
+          True: { state: grenade-m203-open }
+          False: { state: grenade-m203 }
+  - type: AttachableToggleable
+    actionName: Switch to the MK1 Underslung Grenade Launcher
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: grenade-m203
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: grenade-m203-on
+  - type: AttachableVisuals
+    offset: -0.1, 0.218
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentM203GrenadeLauncher
+
+- type: entity
   parent: RMCUnderAttachmentBase
   id: RMCAttachmentVerticalGrip # verticalgrip
   name: vertical grip
@@ -623,6 +660,9 @@
 
 - type: Tag
   id: RMCAttachmentMK1GrenadeLauncher
+
+- type: Tag
+  id: RMCAttachmentM203GrenadeLauncher
 
 - type: Tag
   id: RMCAttachmentVerticalGrip
