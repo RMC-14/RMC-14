@@ -45,7 +45,7 @@
       - id: CMBeltMarine
         recommended: true
       - id: CMBeltKnifeFilled
-        name: M276 knife rig (full)
+        name: M276 knife rig (Full)
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltHolsterSMG

@@ -225,9 +225,9 @@
       choices: { CMBelt: 1 }
       entries:
       - id: CMBeltMedicBagFilled
-        name: m276 lifesaver bag (full)
+        name: M276 lifesaver bag (Full)
       - id: CMBeltMedicalFilled
-        name: m276 medical storage rig (full)
+        name: M276 medical storage rig (Full)
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
