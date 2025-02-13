@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent:
   - CMXenoDeveloped
@@ -110,7 +110,7 @@
     - ActionXenoPlantWeeds
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
-    - ActionXenoTransferPlasma
+    - ActionXenoTransferPlasmaHivelord
     - ActionXenoResinWalker
     - ActionXenoDevolve
   - type: XenoConstruction
@@ -128,6 +128,7 @@
     plasma: 1000
     maxPlasma: 1000
     plasmaRegenOnWeeds: 5.5
+    plasmaTransferDelay: 0.5
   - type: AcidTrap
   - type: XenoEvolution
     strains:
@@ -154,7 +155,7 @@
     - ActionXenoChooseStructure
     - ActionXenoCoerceResin
     - ActionXenoZoom
-    - ActionXenoTransferPlasma
+    - ActionXenoTransferPlasmaHivelord
     - ActionXenoResinWalker
     - ActionXenoDevolve
     hidden: true
