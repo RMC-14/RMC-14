@@ -738,7 +738,7 @@
   name: Tail Seize
   description: Throw out your tail in front of you. Uses up your melee attack. Pulls in the first enemy hit to you and roots and slows them on arrival.
   components:
-  - type: EntityWorldTargetAction
+  - type: WorldTargetAction
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
@@ -774,7 +774,7 @@
   name: Tail Lash (80)
   description: Fling back foes in a 2x3 area in targeted direction after a very short doafter. Also slows.
   components:
-  - type: EntityWorldTargetAction
+  - type: WorldTargetActionEvent
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi

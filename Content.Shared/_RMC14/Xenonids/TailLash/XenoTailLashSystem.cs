@@ -49,17 +49,17 @@ public sealed class XenoTailLashSystem : EntitySystem
 
     private void OnTailLashAction(Entity<XenoTailLashComponent> xeno, ref XenoTailLashActionEvent args)
     {
-        if (args.Handled || args.Coords == null)
+        if (args.Handled)
             return;
 
         if (!_plasma.HasPlasmaPopup(xeno.Owner, xeno.Comp.Cost))
             return;
 
-        if (_transform.GetGrid(args.Coords.Value) is not { } gridId ||
+        if (_transform.GetGrid(args.Target) is not { } gridId ||
     !TryComp(gridId, out MapGridComponent? grid))
             return;
 
-        var direction = (args.Coords.Value.Position - _transform.GetMoverCoordinates(xeno).Position).Normalized().ToAngle() - Angle.FromDegrees(90);
+        var direction = (args.Target.Position - _transform.GetMoverCoordinates(xeno).Position).Normalized().ToAngle() - Angle.FromDegrees(90);
 
         var xenoCoord = _transform.GetMoverCoordinates(xeno);
         var area = Box2.CenteredAround(xenoCoord.Position, new(xeno.Comp.Width, xeno.Comp.Height)).Translated(new(0, (xeno.Comp.Height / 2) + 0.5f));
