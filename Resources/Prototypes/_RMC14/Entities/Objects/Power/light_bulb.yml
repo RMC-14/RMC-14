@@ -43,7 +43,7 @@
   - type: Appearance
   - type: PhysicalComposition
     materialComposition:
-      CMGlass: 25
+      CMGlass: 100
   - type: ToolRefinable
     refineResult:
     - id: CMSheetGlass1
