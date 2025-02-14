@@ -35,6 +35,9 @@
   - type: DamageOnHighSpeedImpact
     minimumSpeed: 2
     damage: {}
+  - type: PhysicalComposition
+    materialComposition:
+      CMGlass: 100
 
 - type: entity
   parent: BaseBeakerMetallic
