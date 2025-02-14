@@ -87,4 +87,5 @@
   - type: XenoConstruct
     destroyWeeds: false
   - type: RequireProjectileTarget
+    collideOnTargetCoords: true
   - type: DeletedByWeedKiller
