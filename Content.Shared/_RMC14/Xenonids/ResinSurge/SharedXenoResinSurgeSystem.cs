@@ -99,8 +99,6 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
         if (args.Handled)
             return;
 
-        args.Handled = true;
-
         if (args.Coords is not { } target)
             return;
 
@@ -114,6 +112,10 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
             _popup.PopupClient(Loc.GetString("rmc-xeno-resin-surge-see-fail"), xeno, xeno);
             return;
         }
+
+        args.Handled = true;
+
+
 
         target = target.SnapToGrid(EntityManager, _map);
 
