@@ -11,6 +11,8 @@ using Content.Shared.Actions;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
+using Content.Shared.Examine;
+using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Content.Shared.Timing;
@@ -36,6 +38,7 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
+    [Dependency] private readonly ExamineSystemShared _examine = default!;
 
     public override void Initialize()
     {
@@ -105,6 +108,12 @@ public sealed class SharedXenoResinSurgeSystem : EntitySystem
         if (_transform.GetGrid(target) is not { } gridId ||
             !TryComp(gridId, out MapGridComponent? grid))
             return;
+
+        if (!_examine.InRangeUnOccluded(xeno.Owner, target, xeno.Comp.Range))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-resin-surge-see-fail"), xeno, xeno);
+            return;
+        }
 
         target = target.SnapToGrid(EntityManager, _map);
 

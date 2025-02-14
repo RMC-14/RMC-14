@@ -198,6 +198,7 @@ rmc-xeno-resin-surge-wall-self = We surge the resin, creating an unstable wall!
 rmc-xeno-resin-surge-wall-others = {CAPITALIZE(THE($xeno))} surges the resin, creating an unstable wall!
 rmc-xeno-resin-surge-sticky-self = We surge the deep resin, creating an unstable sticky resin patch!
 rmc-xeno-resin-surge-sticky-others = {CAPITALIZE(THE($xeno))} surges deep resin, creating an unstable sticky resin patch!
+rmc-xeno-resin-surge-see-fail = We cannot see that location!
 
 # Burrow
 rmc-xeno-burrow-down-start = We begin burrowing ourselves into the ground.
