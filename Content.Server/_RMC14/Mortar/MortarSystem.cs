@@ -93,13 +93,13 @@ public sealed class MortarSystem : SharedMortarSystem
             return false;
         }
 
-        if (!_area.TryGetArea(coordinates, out var area, out _, out _))
+        if (!_area.TryGetArea(coordinates, out var area, out _))
         {
             _popup.PopupEntity(Loc.GetString("rmc-mortar-target-not-area"), user, user, SmallCaution);
             return false;
         }
 
-        if (area.LandingZone)
+        if (area.Value.Comp.LandingZone)
         {
             _popup.PopupEntity(Loc.GetString("rmc-mortar-target-is-lz"), user, user, SmallCaution);
             return false;

@@ -7,7 +7,17 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: CMSquad
-      time: 18000 # 5 hours
+      time: 36000 # 10 hours
+  ranks:
+    RMCRankSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobSmartGunOperator
+      time: 252000 # 70 hours
+    RMCRankCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobSmartGunOperator
+      time: 36000 # 10 hours
+    RMCRankLanceCorporal: []
   startingGear: CMGearSmartGunOperator
   dummyStartingGear: CMGearSmartGunOperatorEquipped
   icon: "CMJobIconSmartGunOperator"
@@ -35,7 +45,7 @@
       points: 45
     - type: SquadArmorWearer
     - type: JobPrefix
-      prefix: "SG"
+      prefix: cm-job-prefix-gun-operator
 
 - type: startingGear
   id: CMGearSmartGunOperator

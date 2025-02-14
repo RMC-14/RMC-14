@@ -206,6 +206,20 @@
       duration: 15
 
 - type: reaction
+  id: Flash
+  impact: High
+  priority: 20
+  reactants:
+    Aluminium:
+      amount: 1
+    Potassium:
+      amount: 1
+    Sulfur:
+      amount: 1
+  effects:
+    - !type:FlashReactionEffect
+
+- type: reaction
   id: TableSalt
   minTemp: 370
   reactants:
@@ -501,3 +515,4 @@
       amount: 1
   products:
     Tazinide: 1
+

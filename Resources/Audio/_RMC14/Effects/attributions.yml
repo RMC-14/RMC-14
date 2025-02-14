@@ -23,7 +23,22 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/81bbf5d8226c8ab52fc71461498080bb49c4c996/sound/effects/ob_alert.ogg"
 
+- files: ["rocketpod_fire.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/8c4eecb1d4ad42c95b3fb0348732b3f8a0efe758/sound/effects/rocketpod_fire.ogg"
+
 - files: ["tech_notification.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/695fa4980c03c4398575b5f92413d7f70374ce9b/sound/effects/tech_notification.ogg"
+
+- files: ["radiostatic.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/695fa4980c03c4398575b5f92413d7f70374ce9b/sound/effects/radiostatic.ogg"
+
+- files: ["tick.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/items/tick.ogg"

@@ -1,4 +1,4 @@
-﻿- type: entity # TODO RMC14 sound
+- type: entity # TODO RMC14 sound
   id: XenoWeeds
   name: weeds
   description: Weird black weeds...
@@ -93,6 +93,7 @@
       Brute:
         collection: XenoResinBreak
   - type: ExplosionRandomResistance
+  - type: DeletedByWeedKiller
 #  - type: Physics
 #    bodyType: Static
 #  - type: FootstepModifier
@@ -121,6 +122,8 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: XenoConstructionPlasmaCost
+    plasma: 215
 
 - type: entity # TODO RMC14 sound
   parent: XenoWeeds
@@ -135,6 +138,8 @@
     range: 7
     spawns: XenoHiveWeeds
     level: 3
+    speedMultiplierOutsider: 0.338
+    speedMultiplierOutsiderArmor: 0.4856
     blockOtherWeeds: true
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
@@ -206,6 +211,7 @@
         acts: [ "Destruction" ]
   - type: XenoConstructionPlasmaCost
     plasma: 75
+
 - type: entity
   id: XenoWeedsWall
   name: weeds
@@ -269,6 +275,8 @@
     spawns: XenoHardyWeeds
     spreadsOnSemiWeedable: true
     fruitGrowthMultiplier: 0.8
+    speedMultiplierOutsider: 0.508
+    speedMultiplierOutsiderArmor: 0.6177
   - type: Destructible
     thresholds:
     - trigger:

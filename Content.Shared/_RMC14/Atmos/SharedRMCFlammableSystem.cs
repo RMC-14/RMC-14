@@ -199,7 +199,10 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             return;
 
         var ev = new CraftMolotovDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.Delay, ev, ent, ent, args.Used);
+        var doAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.Delay, ev, ent, ent, args.Used)
+        {
+            BreakOnMove = true,
+        };
         _doAfter.TryStartDoAfter(doAfter);
     }
 

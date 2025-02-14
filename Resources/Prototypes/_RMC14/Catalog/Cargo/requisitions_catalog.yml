@@ -177,6 +177,8 @@
       #  crate: RMCCrateGrenadesSmoke
       - cost: 4000
         crate: RMCCrateGrenadesFragOld
+      - cost: 3000
+        crate: RMCCratePlasticExplosives
       - cost: 4000
         crate: RMCCrateBreachingCharges
       - cost: 10000
@@ -201,6 +203,8 @@
         crate: RMCCrateGearMotionDetector
       - cost: 6000
         crate: RMCCrateGearPackFlareCAS
+      - cost: 2000
+        crate: RMCCrateGearFulton
     - name: Medical
       entries:
       - cost: 3200

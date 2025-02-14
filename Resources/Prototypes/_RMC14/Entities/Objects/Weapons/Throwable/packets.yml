@@ -78,7 +78,7 @@
 - type: entity
   parent: BaseStorageItem
   id: RMCPacketGrenadeFlashBang
-  name: flash-bang box
+  name: box of flashbangs (WARNING)
   suffix: Filled
   components:
   - type: Sprite
@@ -93,7 +93,7 @@
   - type: Storage
     maxItemSize: Small
     grid:
-    - 0,0,5,1 # 3 slots
+    - 0,0,15,1
     whitelist:
       tags:
       - RMCGrenadeFlashBang

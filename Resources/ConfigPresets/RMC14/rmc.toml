@@ -1,4 +1,7 @@
-﻿[admin]
+﻿[accessibility]
+screen_shake_intensity = 1
+
+[admin]
 deadmin_on_join = true
 see_own_notes = true
 server_ban_erase_player = true
@@ -16,7 +19,18 @@ max_process_time = 1
 [auth]
 mode = 1
 
+[events]
+enabled = false
+
+[explosion]
+can_create_vacuum = false
+
 [game]
+defaultpreset = "CMDistressSignal"
+fallbackenabled = false
+fallbackpreset = "CMDistressSignal"
+round_end_sound_collection = "CMRoundEnd"
+contraband_examine = false
 maxplayers = 500
 soft_max_players = 350
 panic_bunker.enabled = false
@@ -24,9 +38,15 @@ round_end_pvs_overrides = false
 round_restart_time = 180
 lobbyduration = 180
 
+[gateway]
+generator_enabled = false
+
 [ghost]
 kill_crit = false
 role_time = 0
+
+[guidebook]
+show_editor_species_button = false
 
 [hub]
 # Set to true to show this server on the public server list
@@ -39,7 +59,8 @@ tags = "lang:en,region:am_n_e,rp:med"
 
 [ic]
 flavor_text = true
-enable_suicide = false
+role_time = 0
+kill_crit = false
 
 [infolinks]
 #appeal = "https://appeal.rouny-ss14.com"
@@ -61,6 +82,12 @@ grid_splitting = false
 maxlinvelocity = 72
 target_minimum_tickrate = 120
 
+[pointing]
+cooldown_seconds = 1
+
+[procgen]
+preload = false
+
 [replay]
 auto_record = true
 max_compressed_size = 4194304
@@ -71,7 +98,21 @@ auto_record_name = "done/{year}_{month}_{day}-{hour}_{minute}-round_{round}.zip"
 [rmc]
 discord_account_linking_message_link = "https://discord.com/channels/1168210010233376858/1256765329002991679/1256767294839980132"
 
+[server]
+rules_file = "RMCOverview"
+default_guide = "RMC14"
+
 [shuttle]
+arrivals_planet = false
+arrivals = false
+grid_fill = false
+preload_grids = false
+startup_time = 10
+travel_time = 100
+arrival_time = 10
+cooldown = 120
+mass_limit = -1
+emergency = false
 auto_call_time = 0
 
 [status]
@@ -82,3 +123,11 @@ enabled = true
 # This is the address and port the status server binds to.
 # The port is by default set based on net.port so it will follow what you set there.
 bind = "*:1212"
+
+[tips]
+dataset = "CM_Tips"
+login_dataset = "CM_Tips"
+
+[vote]
+preset_enabled = false
+restart_ghost_percentage = 75

@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
@@ -10,6 +11,8 @@ using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
+using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Events;
@@ -43,6 +46,8 @@ public sealed class RMCRepairableSystem : EntitySystem
 
         SubscribeLocalEvent<NailgunRepairableComponent, InteractUsingEvent>(OnNailgunRepairableInteractUsing);
         SubscribeLocalEvent<NailgunRepairableComponent, RMCNailgunRepairableDoAfterEvent>(OnNailgunRepairableDoAfter);
+
+        SubscribeLocalEvent<ReagentTankComponent, InteractUsingEvent>(OnWelderInteractUsing);
     }
 
     private void OnRepairableInteractUsing(Entity<RMCRepairableComponent> repairable, ref InteractUsingEvent args)
@@ -63,10 +68,24 @@ public sealed class RMCRepairableSystem : EntitySystem
             return;
         }
 
-        if (!TryComp(repairable, out DamageableComponent? damageable) ||
-            damageable.TotalDamage <= FixedPoint2.Zero)
+        if (!TryComp(repairable, out DamageableComponent? damageable))
+            return;
+
+        if (damageable.TotalDamage <= FixedPoint2.Zero)
         {
-            _popup.PopupClient(Loc.GetString("rmc-repairable-not-damaged", ("target", repairable)), user, user, PopupType.SmallCaution);
+            _popup.PopupClient(Loc.GetString("rmc-repairable-not-damaged", ("target", repairable)),
+                user,
+                user,
+                PopupType.SmallCaution);
+            return;
+        }
+
+        if (repairable.Comp.RepairableDamageLimit > 0 && damageable.TotalDamage > repairable.Comp.RepairableDamageLimit)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-repairable-too-damaged", ("target", repairable)),
+                user,
+                user,
+                PopupType.SmallCaution);
             return;
         }
 
@@ -304,5 +323,46 @@ public sealed class RMCRepairableSystem : EntitySystem
         }
 
         return repairValue;
+    }
+
+    private void OnWelderInteractUsing(Entity<ReagentTankComponent> ent, ref InteractUsingEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        var used = args.Used;
+        var target = args.Target;
+
+        if (!TryComp<WelderComponent>(used, out var welder))
+            return;
+
+        if (ent.Comp.TankType == ReagentTankType.Fuel
+            && _solution.TryGetDrainableSolution(target, out var targetSoln, out var targetSolution)
+            && _solution.TryGetSolution(used, welder.FuelSolutionName, out var solutionComp, out var welderSolution))
+        {
+            var trans = FixedPoint2.Min(welderSolution.AvailableVolume, targetSolution.Volume);
+
+            if (welder.Enabled)
+            {
+                _popup.PopupClient(Loc.GetString("rmc-welder-component-danger"), used, args.User, PopupType.MediumCaution);
+            }
+            else if (trans > 0)
+            {
+                var drained = _solution.Drain(target, targetSoln.Value, trans);
+                _solution.TryAddSolution(solutionComp.Value, drained);
+                _audio.PlayPredicted(welder.WelderRefill, used, user: args.User);
+                _popup.PopupClient(Loc.GetString("welder-component-after-interact-refueled-message"), used, args.User);
+            }
+            else if (welderSolution.AvailableVolume <= 0)
+            {
+                _popup.PopupClient(Loc.GetString("welder-component-already-full"), used, args.User);
+            }
+            else
+            {
+                _popup.PopupClient(Loc.GetString("welder-component-no-fuel-in-tank", ("owner", args.Target)), used, args.User);
+            }
+
+            args.Handled = true;
+        }
     }
 }

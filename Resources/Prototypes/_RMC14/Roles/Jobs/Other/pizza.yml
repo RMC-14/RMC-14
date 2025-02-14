@@ -1,3 +1,27 @@
+- type: job
+  parent: CMJobBase
+  id: CMPizzaDeliverer
+  name: cm-job-name-pizza-deliverer
+  description: cm-job-description-pizza-deliverer
+  playTimeTracker: CMJobPizzaDeliverer
+  ranks:
+    RMCRankCivilian: []
+  startingGear: RMCGearPizzaDeliveryBoy
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  accessGroups:
+  - CMPizzaDeliverer
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillVehicles: 1
+    - type: JobPrefix
+      prefix: cm-job-prefix-pizza-deliverer
+  hasIcon: false
+  hidden: true
+
 - type: entity
   parent: MarkerBase
   id: RMCSpawnerPizzaDeliveryBoy
@@ -36,6 +60,12 @@
         settings: short
     - type: Loadout
       prototypes: [ RMCGearPizzaDeliveryBoy ]
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillVehicles: 1
 
 - type: startingGear
   id: RMCGearPizzaDeliveryBoy
@@ -45,5 +75,11 @@
     jumpsuit: RMCJumpsuitPizza
     shoes: ClothingShoesColorRed
     id: RMCIDCardPizza
-    ears: CMHeadset
-    pocket1: RMCFlashlight
+    belt: RMCFlashlight
+    pocket1: CMDrinkCanDrGibb
+    pocket2: RMCRadioHandheldAlmayer
+  inhand:
+  - FoodBoxPizzaFilled
+
+- type: playTimeTracker
+  id: CMJobPizzaDeliverer
