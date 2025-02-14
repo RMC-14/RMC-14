@@ -130,19 +130,16 @@ public sealed class XenoTantrumSystem : EntitySystem
         ourRage.ArmorGain = xeno.Comp.SelfArmorBoost;
         ourRage.ExpireAt = time + xeno.Comp.SelfArmorDuration;
         _popup.PopupClient(Loc.GetString("rmc-xeno-tantrum-self"), xeno, xeno, PopupType.MediumCaution);
-        if (_timing.IsFirstTimePredicted)
-            _audio.PlayEntity(xeno.Comp.BuffSound, xeno, xeno);
+        _audio.PlayPredicted(xeno.Comp.BuffSound, xeno, xeno);
         _aura.GiveAura(xeno, xeno.Comp.EnrageColor, xeno.Comp.SelfArmorDuration);
         _armor.UpdateArmorValue(xeno.Owner);
 
         var otherDuration = HasComp<TantrumSpeedBuffComponent>(args.Target) ? xeno.Comp.OtherSpeedDuration : xeno.Comp.OtherArmorDuration;
         var otherRage = EnsureComp<TantrumingComponent>(args.Target);
         otherRage.ExpireAt = time + otherDuration;
-        if (_timing.IsFirstTimePredicted)
-        {
+        if (_net.IsServer)
             _popup.PopupEntity(Loc.GetString("rmc-xeno-tantrum-other"), args.Target, args.Target, PopupType.MediumCaution);
-            _audio.PlayEntity(xeno.Comp.BuffSound, args.Target, args.Target);
-        }
+        _audio.PlayPredicted(xeno.Comp.BuffSound, args.Target, xeno);
         _aura.GiveAura(args.Target, xeno.Comp.EnrageColor, otherDuration);
         _armor.UpdateArmorValue(args.Target);
         _speed.RefreshMovementSpeedModifiers(args.Target);
