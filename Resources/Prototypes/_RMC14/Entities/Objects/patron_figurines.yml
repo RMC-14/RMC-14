@@ -1138,7 +1138,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronZverNemesis
   name: Zver' Nemesis figurine
-  description: "\"Hope you follow SOP and Marine Law while I'm going through Basic Training in the Army.\""
+  description: "\"If you had not broken Marine Law, I would not have been sent to arrest you.\""
   components:
   - type: Sprite
     state: zver_nemesis
