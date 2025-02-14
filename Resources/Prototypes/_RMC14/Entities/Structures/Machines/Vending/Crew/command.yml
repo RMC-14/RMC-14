@@ -420,7 +420,7 @@
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbingBlack
-        recommend: true
+        recommended: true
     #- id: CMTacticalWaistcoat # TODO Port Waistcoat
       - id: CMWebbingPouch
       - id: CMWebbing
@@ -438,8 +438,11 @@
         recommended: true
       - id: CMBeltSecurityMPFilled
         name: M276 pattern security rig (Full)
+      - id: CMBeltMedicalFilled
+        name: M276 pattern medical storage rig (Full)
       - id: CMBeltMedicBagFilled
         name: M276 pattern lifesaver bag (Full)
+        recommended: true 
       - id: CMBeltMarine
       - id: CMBeltUtilityCombat
       #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
