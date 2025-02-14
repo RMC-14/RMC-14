@@ -86,10 +86,16 @@
   - type: SpawnPoint
     job_id: CMAuxiliarySupportOfficer
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: auxiliary_support_officer
+    state: x
+
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleASO
+  name: Auxiliary Support Officer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: auxiliary_support_officer
 
 - type: playTimeTracker
   id: CMJobAuxiliarySupportOfficer

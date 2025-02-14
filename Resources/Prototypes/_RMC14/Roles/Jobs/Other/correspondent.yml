@@ -54,10 +54,7 @@
   - type: SpawnPoint
     job_id: CMCorrespondent
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: combat_correspondent
+    state: marine_spawn
 
 - type: playTimeTracker
   id: CMJobCorrespondent

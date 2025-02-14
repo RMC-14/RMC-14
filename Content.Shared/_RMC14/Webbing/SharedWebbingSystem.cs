@@ -175,7 +175,9 @@ public abstract class SharedWebbingSystem : EntitySystem
         handled = false;
         if (!TryComp(webbing, out WebbingComponent? webbingComp) ||
             HasComp<StorageComponent>(clothing) ||
-            !HasComp<StorageComponent>(webbing))
+            !HasComp<StorageComponent>(webbing) ||
+            !TryComp(clothing, out ItemComponent? clothingItem) ||
+            !TryComp(webbing, out ItemComponent? webbingItem))
         {
             return false;
         }
@@ -206,6 +208,9 @@ public abstract class SharedWebbingSystem : EntitySystem
         comp.Transfer = TransferType.ToClothing;
         Dirty(webbing, comp);
 
+        clothing.Comp.UnequippedSize = clothingItem.Size;
+        _item.SetSize(clothing, webbingItem.Size);
+
         handled = true;
         return true;
     }
@@ -227,6 +232,12 @@ public abstract class SharedWebbingSystem : EntitySystem
         comp.Clothing = clothing;
         comp.Transfer = TransferType.ToWebbing;
         Dirty(webbing, comp);
+
+        if (clothing.Comp.UnequippedSize is { } size)
+        {
+            clothing.Comp.UnequippedSize = null;
+            _item.SetSize(clothing, size);
+        }
     }
 
     public override void Update(float frameTime)

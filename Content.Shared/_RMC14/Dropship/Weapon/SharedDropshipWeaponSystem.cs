@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Utility.Components;
+using Content.Shared._RMC14.Dropship.Utility.Systems;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
@@ -47,6 +48,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDropshipSystem _dropship = default!;
+    [Dependency] private readonly DropshipUtilitySystem _dropshipUtility = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
@@ -252,15 +254,20 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 SetTarget((uid, terminal), null);
             }
 
-            var list = HasComp<MedevacStretcherComponent>(ent) ? terminal.Medevacs : terminal.Targets;
-            var span = CollectionsMarshal.AsSpan(list);
+            var targets = terminal.Targets;
+            if (HasComp<MedevacStretcherComponent>(ent))
+                targets = terminal.Medevacs;
+            else if (HasComp<RMCActiveFultonComponent>(ent))
+                targets = terminal.Fultons;
+
+            var span = CollectionsMarshal.AsSpan(targets);
             for (var i = 0; i < span.Length; i++)
             {
                 ref var target = ref span[i];
                 if (target.Id != netUid)
                     continue;
 
-                list.RemoveAt(i);
+                targets.RemoveAt(i);
                 break;
             }
 
@@ -651,6 +658,9 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private void OnWeaponsFultonSelect(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsFultonSelectMsg args)
     {
+        if (_net.IsClient)
+            return;
+
         if (!TryGetEntity(args.Target, out var target) ||
             !HasComp<RMCActiveFultonComponent>(target))
         {
@@ -677,8 +687,15 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             if (!HasComp<RMCFultonComponent>(contained))
                 continue;
 
+            if (TryComp(contained, out DropshipUtilityComponent? utility) &&
+                !_dropshipUtility.IsActivatable((contained, utility), args.Actor, out var popup))
+            {
+                _popup.PopupCursor(popup, args.Actor);
+                continue;
+            }
+
+            RemComp<DropshipTargetComponent>(target.Value);
             RemCompDeferred<RMCActiveFultonComponent>(target.Value);
-            RemCompDeferred<DropshipTargetComponent>(target.Value);
             _transform.PlaceNextTo(target.Value, point);
             RefreshWeaponsUI(ent);
             return;

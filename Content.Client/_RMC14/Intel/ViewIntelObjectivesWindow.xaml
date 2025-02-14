@@ -3,7 +3,7 @@
     xmlns:controls="clr-namespace:Content.Client._RMC14.Intel"
     xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
     Title="Marine Tech Tree Objectives"
-    MinSize="600 300">
+    MinSize="600 450">
     <BoxContainer Orientation="Vertical">
         <RichTextLabel Text="[bold]Tech Points[/bold]" />
         <ui:BlueHorizontalSeparator />
@@ -50,8 +50,8 @@
             <RichTextLabel Text="[color=#5B88B0]Colony power:[/color]" MinWidth="200" />
             <Label Name="ColonyPowerLabel" Access="Public" />
         </BoxContainer>
-        <RichTextLabel Text="[bold]Objectives[/bold]" Margin="0 15 0 0" />
+        <RichTextLabel Text="[bold]Clues[/bold]" Margin="0 15 0 0" />
         <ui:BlueHorizontalSeparator />
-        <TabContainer Name="CluesContainer" Access="Public" />
+        <TabContainer Name="CluesContainer" Access="Public" VerticalExpand="True" MinHeight="100" />
     </BoxContainer>
 </controls:ViewIntelObjectivesWindow>
