@@ -68,6 +68,7 @@
       state: all
 
 - type: entity
+  abstract: true
   parent: CMBaseWeaponRifleNoDualWieldPenalty
   id: CMBaseWeaponRifle
   components:

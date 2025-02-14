@@ -7,7 +7,7 @@ namespace Content.Shared._RMC14.OrbitalCannon;
 [DataRecord]
 [Serializable, NetSerializable]
 public readonly record struct OrbitalCannonExplosion(
-    ProtoId<ExplosionPrototype> Type,
+    ProtoId<ExplosionPrototype>? Type,
     float Total,
     float Slope,
     float Max,
