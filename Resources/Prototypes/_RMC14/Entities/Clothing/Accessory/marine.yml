@@ -16,10 +16,9 @@
   - type: Clothing
     quickEquip: false
     sprite: _RMC14/Objects/Clothing/Accessory/camera_gear.rsi
-    equippedPrefix: camera
     slots:
-    - Ears
-    - Head
+    - EARS
+    - HEAD
   - type: ItemToggle
     activated: true
     soundActivate:
@@ -40,6 +39,7 @@
           True: {state: icon-on}
           False: {state: icon}
   - type: Appearance
+  - type: RMCItemToggleClothingVisuals
   - type: Tag
     tags:
     - RipOffOnInfection
