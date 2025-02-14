@@ -50,6 +50,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     public override void Initialize()
     {
@@ -171,6 +172,9 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
                 var entitiesToStun = _entityLookup.GetEntitiesInRange(burrower, burrower.Comp.UnburrowStunRange);
                 foreach (var entity in entitiesToStun)
                 {
+                    if (!_xeno.CanAbilityAttackTarget(burrower, entity))
+                        continue;
+
                     _stun.TryParalyze(entity, burrower.Comp.UnburrowStunLength, false);
                 }
             }
