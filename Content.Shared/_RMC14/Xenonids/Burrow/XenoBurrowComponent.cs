@@ -1,13 +1,8 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Content.Shared._RMC14.Xenonids.Burrow;
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class XenoBurrowComponent : Component
 {
     /// <summary>
@@ -34,6 +29,7 @@ public sealed partial class XenoBurrowComponent : Component
     [DataField]
     public TimeSpan TunnelCooldown = TimeSpan.FromSeconds(2);
 
+    [DataField, AutoNetworkedField]
     public TimeSpan? NextTunnelAt;
 
     /// <summary>
@@ -42,6 +38,7 @@ public sealed partial class XenoBurrowComponent : Component
     [DataField]
     public TimeSpan BurrowMaxDuration = TimeSpan.FromSeconds(9);
 
+    [DataField, AutoNetworkedField]
     public TimeSpan? ForcedUnburrowAt;
 
     /// <summary>
