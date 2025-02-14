@@ -440,9 +440,9 @@
         name: M276 pattern security rig (Full)
       - id: CMBeltMedicalFilled
         name: M276 pattern medical storage rig (Full)
+        recommended: true 
       - id: CMBeltMedicBagFilled
         name: M276 pattern lifesaver bag (Full)
-        recommended: true 
       - id: CMBeltMarine
       - id: CMBeltUtilityCombat
       #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
