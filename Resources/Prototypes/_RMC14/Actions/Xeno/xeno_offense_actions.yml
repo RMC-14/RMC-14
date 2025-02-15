@@ -271,6 +271,8 @@
       state: charge_spit
     event: !type:XenoChargeSpitActionEvent
     useDelay: 12
+  - type: XenoActionPlasma
+    cost: 50
 
 - type: entity
   parent: ActionXenoBase
