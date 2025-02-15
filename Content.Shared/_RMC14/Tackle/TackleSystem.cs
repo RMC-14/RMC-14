@@ -37,7 +37,6 @@ public sealed class TackleSystem : EntitySystem
 
     private void OnDisarmed(Entity<TackleableComponent> target, ref CMDisarmEvent args)
     {
-
         var user = args.User;
         if (!TryComp(user, out TackleComponent? tackle))
             return;
