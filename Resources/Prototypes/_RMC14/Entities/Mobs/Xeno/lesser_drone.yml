@@ -84,6 +84,7 @@
       types:
         Blunt: 2.5
   - type: XenoHiveCoreRole
+  - type: Tackleable
   - type: RMCSize
     size: VerySmallXeno
 #  - type: RMCXenoDamageVisuals # TODO RMC14
