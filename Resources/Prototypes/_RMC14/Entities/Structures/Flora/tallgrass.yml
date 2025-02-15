@@ -12,21 +12,22 @@
   - type: Physics
     canCollide: false
   - type: Fixtures
-#  - type: Damageable
-#    damageContainer: Inorganic
-#  - type: MeleeSound
-#    soundGroups:
-#      Brute:
-#        path: /Audio/Effects/chop.ogg
-#        params:
-#          variation: 0.05
-#  - type: Destructible
-#    - trigger:
-#        !type:DamageTrigger
-#        damage: 50
-#      behaviors:
-#      - !type:DoActsBehavior
-#        acts: [ "Destruction" ]
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path: /Audio/Effects/chop.ogg
+        params:
+          variation: 0.05
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity
   abstract: true
