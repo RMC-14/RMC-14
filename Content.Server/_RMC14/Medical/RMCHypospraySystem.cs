@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Chemistry;
+using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Refill;
 using Content.Shared.Administration.Logs;
@@ -122,7 +122,7 @@ public sealed class RMCHypospraySystem : RMCSharedHypospraySystem
         if (args.Target == null)
             return;
 
-        _slots.TryInsertEmpty((ent, slots), args.Target.Value, args.User);
+        _slots.TryInsertEmpty((ent, slots), args.Target.Value, null);
     }
 
     protected override void OnInteractUsing(Entity<RMCHyposprayComponent> ent, ref InteractUsingEvent args)

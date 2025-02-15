@@ -1,8 +1,8 @@
-﻿- type: entity
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoAcidNormal
   name: Corrosive Acid (100)  # TODO RMC14 proper plasma costs
-  description: Melts down a structure over time.
+  description: Melts down a structure or item over time.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
@@ -21,7 +21,7 @@
   parent: ActionXenoAcidNormal
   id: ActionXenoAcidWeak
   name: Weak Corrosive Acid (75)  # TODO RMC14 proper plasma costs
-  description: Melts down a structure over time.
+  description: Melts down a structure or item over time.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
@@ -40,7 +40,7 @@
   parent: ActionXenoAcidNormal
   id: ActionXenoAcidStrong
   name: Strong Corrosive Acid (125)  # TODO RMC14 proper plasma costs
-  description: Melts down a structure over time.
+  description: Melts down a structure or item over time.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
@@ -189,6 +189,8 @@
     range: 3
     useDelay: 6
     deselectOnMiss: false
+  - type: XenoActionPlasma
+    cost: 10
 
 - type: entity
   id: ActionXenoTailSweep
@@ -345,6 +347,8 @@
       state: lurker_inject_neuro
     event: !type:XenoParalyzingSlashActionEvent
     useDelay: 12
+  - type: XenoActionPlasma
+    cost: 50
 
 - type: entity
   parent: ActionXenoBase
@@ -359,6 +363,8 @@
       state: lurker_inject_neuro
     event: !type:XenoCripplingStrikeActionEvent
     useDelay: 10
+  - type: XenoActionPlasma
+    cost: 20
 
 - type: entity
   id: ActionXenoBoneChips
@@ -472,7 +478,7 @@
   id: ActionXenoCharge
   parent: ActionXenoBase
   name: Charge (20)
-  description: Click on a tile you want to charge at, after a brief non cancel-able windup time. [color=green]Cooldown is partially refunded upon attacking an enemy, scaling with the amount of enemies you cleave with your passive.[/color]
+  description: Click on a tile you want to charge at, after a brief non cancel-able windup time. Slows around the impact area. [color=green]Cooldown is partially refunded upon attacking an enemy, scaling with the amount of enemies you cleave with your passive.[/color]
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
@@ -589,6 +595,8 @@
     deselectOnMiss: false
   - type: XenoOffensiveAction
   - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 80
 
 - type: entity
   parent: ActionXenoBase
@@ -606,6 +614,8 @@
     useDelay: 13
     deselectOnMiss: false
   - type: XenoOffensiveAction
+  - type: XenoActionPlasma
+    cost: 30
   - type: ActionBlockIfResting
 
 - type: entity
@@ -623,8 +633,9 @@
     range: 15
     useDelay: 3
     checkCanAccess: false
-  - type: XenoOffensiveAction
   - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 50
 
 - type: entity
   parent: ActionXenoDash
@@ -657,7 +668,7 @@
     ids:
     - ActionXenoCleaveFling
     cooldown: 12
-  
+
 - type: entity
   parent: ActionXenoBase
   id: ActionXenoCleaveFling

@@ -71,7 +71,7 @@
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridgePistol22mm
+      - CMCartridgePistol.22mm
     proto: CMCartridgePistol22mm
     capacity: 5
   - type: Sprite

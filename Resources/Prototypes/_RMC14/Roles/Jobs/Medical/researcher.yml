@@ -36,6 +36,7 @@
     - type: RMCUserBulkyArmorIncapable
     - type: JobPrefix
       prefix: cm-job-prefix-researcher
+    - type: ViewIntelObjectives
   hidden: true # TODO RMC14
 
 - type: startingGear
@@ -63,10 +64,7 @@
   - type: SpawnPoint
     job_id: CMResearcher
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: researcher
+    state: res_spawn
 
 - type: playTimeTracker
   id: CMJobResearcher

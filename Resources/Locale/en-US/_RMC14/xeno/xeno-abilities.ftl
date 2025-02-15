@@ -119,7 +119,7 @@ cm-xeno-toggle-crest-cant-tail-sweep = You can't tail sweep while your crest is 
 cm-xeno-plasma-transferred-to-other = You have transferred {$plasma} plasma to {$target}. You now have {$total}
 cm-xeno-plasma-transferred-to-self = {$target} has transferred {$plasma} plasma to you. You now have {$total}
 cm-xeno-plasma-cannot-self = You can't transfer plasma to yourself!
-cm-xeno-plasma-other-max-zero = {$target} doesn't have any use for plasma!
+cm-xeno-plasma-other-max-zero = {CAPITALIZE(THE($target))} doesn't have any use for plasma!
 rmc-xeno-plasma-ovipositor = We can't transfer plasma to a queen mounted on her ovipositor.
 
 # Watch

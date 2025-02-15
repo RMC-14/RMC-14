@@ -4,8 +4,8 @@ using Content.Server.Administration;
 using Content.Shared._RMC14.Marines;
 using Content.Shared.Administration;
 using Content.Shared.Roles;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Toolshed;
-using Robust.Shared.Toolshed.TypeParsers;
 
 namespace Content.Server._RMC14.Marines;
 
@@ -56,12 +56,12 @@ public sealed class MarineCommand : ToolshedCommand
     [CommandImplementation("randomizewithjob")]
     public EntityUid RandomizeJob(
         [PipedArgument] EntityUid ent,
-        [CommandArgument] Prototype<JobPrototype> job)
+        [CommandArgument] ProtoId<JobPrototype> job)
     {
         if (!HasComp<MarineComponent>(ent))
             return ent;
 
-        var randomized = GetSys<RMCAdminSystem>().RandomizeMarine(ent, job: job.Value);
+        var randomized = GetSys<RMCAdminSystem>().RandomizeMarine(ent, job: job);
         Del(ent);
         EnsureComp<MarineComponent>(randomized);
         return ent;
@@ -70,7 +70,7 @@ public sealed class MarineCommand : ToolshedCommand
     [CommandImplementation("randomizewithjob")]
     public IEnumerable<EntityUid> RandomizeJob(
         [PipedArgument] IEnumerable<EntityUid> ents,
-        [CommandArgument] Prototype<JobPrototype> job)
+        [CommandArgument] ProtoId<JobPrototype> job)
     {
         return ents.Select(e => RandomizeJob(e, job));
     }
