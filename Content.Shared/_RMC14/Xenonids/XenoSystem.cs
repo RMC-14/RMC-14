@@ -170,11 +170,9 @@ public sealed class XenoSystem : EntitySystem
         if (args.Target is not { } target)
             return;
 
-        Log.Debug("okerref");
 
         if (HasComp<XenoTackableComponent>(target) && args.Disarm && _hive.FromSameHive(xeno.Owner, target))
         {
-            Log.Debug("yodfd");
             return;
         }
 
@@ -182,7 +180,6 @@ public sealed class XenoSystem : EntitySystem
         if ((_xenoFriendlyQuery.HasComp(target) && _hive.FromSameHive(xeno.Owner, target)) ||
             _mobState.IsDead(target))
         {
-            Log.Debug("same hive and attacked");
             args.Cancel();
             return;
         }
@@ -197,10 +194,8 @@ public sealed class XenoSystem : EntitySystem
 
     private void OnXenoGettingAttackedAttempt(Entity<XenoComponent> xeno, ref GettingAttackedAttemptEvent args)
     {
-        Log.Debug("you just got attacked");
         if (!_hive.FromSameHive(args.Attacker, xeno.Owner) && args.Disarm)
         {
-            Log.Debug("saved your attack mate");
             args.Cancelled = true;
         }
     }
