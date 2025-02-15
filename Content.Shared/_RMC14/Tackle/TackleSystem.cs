@@ -92,6 +92,7 @@ public sealed class TackleSystem : EntitySystem
                         _audio.PlayPvs(standingState.DownSound, target);
                 }
             }
+            
             foreach (var session in Filter.PvsExcept(user).Recipients)
             {
                 if (session.AttachedEntity is not { } recipient)
