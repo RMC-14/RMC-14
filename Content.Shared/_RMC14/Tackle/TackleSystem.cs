@@ -1,4 +1,3 @@
-﻿using System.Diagnostics;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -41,18 +40,14 @@ public sealed class TackleSystem : EntitySystem
 
     private void OnDisarmed(Entity<TackleableComponent> target, ref CMDisarmEvent args)
     {
-        Log.Debug("ok");
+
         var user = args.User;
         if (!TryComp(user, out TackleComponent? tackle))
             return;
 
-        Log.Debug("ya");
-
-
         if (HasComp<XenoTackableComponent>(target) && _hive.FromSameHive(target.Owner, user))
         {
-            _stun.TryParalyze(target, TimeSpan.FromSeconds(10), true);
-            Log.Debug("where are the refs");
+            _stun.TryParalyze(target, TimeSpan.FromSeconds(2), true);
         }
 
 
