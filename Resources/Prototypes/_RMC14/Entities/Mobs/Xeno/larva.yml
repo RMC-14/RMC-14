@@ -65,6 +65,7 @@
   - type: Speech
     speechSounds: XenonidLarva
     allowedEmotes: [ "XenoRoar" ]
+  - type: XenoTackable
   - type: RMCSize
     size: Small
   - type: TacticalMapIcon
