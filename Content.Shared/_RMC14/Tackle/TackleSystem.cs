@@ -1,4 +1,6 @@
-﻿using Content.Shared._RMC14.Xenonids.Parasite;
+﻿using System.Diagnostics;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CombatMode;
@@ -42,6 +44,15 @@ public sealed class TackleSystem : EntitySystem
         var user = args.User;
         if (!TryComp(user, out TackleComponent? tackle))
             return;
+
+        Log.Debug("ya");
+
+
+        if (HasComp<XenoTackableComponent>(target) && _hive.FromSameHive(target.Owner, user))
+        {
+            _stun.TryParalyze(target, TimeSpan.FromSeconds(10), true);
+            Log.Debug("hello");
+        }
 
 
         args.Handled = true;
@@ -95,7 +106,7 @@ public sealed class TackleSystem : EntitySystem
                         _audio.PlayPvs(standingState.DownSound, target);
                 }
             }
-            
+
             foreach (var session in Filter.PvsExcept(user).Recipients)
             {
                 if (session.AttachedEntity is not { } recipient)
