@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using Content.Shared._RMC14.Scoping;
 using Content.Shared.Actions;
+using Content.Shared.Clothing;
+using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
@@ -22,11 +24,13 @@ public sealed class VisorSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedPowerCellSystem _powerCell = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
+    [Dependency] private readonly SharedItemSystem _item = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<InventoryComponent, ScopedEvent>(OnInventoryScoped);
 
+        SubscribeLocalEvent<CycleableVisorComponent, GetEquipmentVisualsEvent>(OnCycleableVisorGetEquipmentVisuals, after: [typeof(ClothingSystem)]);
         SubscribeLocalEvent<CycleableVisorComponent, GetItemActionsEvent>(OnCycleableVisorGetItemActions);
         SubscribeLocalEvent<CycleableVisorComponent, CycleVisorActionEvent>(OnCycleableVisorAction);
         SubscribeLocalEvent<CycleableVisorComponent, InteractUsingEvent>(OnCycleableVisorInteractUsing, before: [typeof(SharedStorageSystem)]);
@@ -46,6 +50,41 @@ public sealed class VisorSystem : EntitySystem
     private void OnCycleableVisorGetItemActions(Entity<CycleableVisorComponent> ent, ref GetItemActionsEvent args)
     {
         args.AddAction(ref ent.Comp.Action, ent.Comp.ActionId);
+    }
+
+    private void OnCycleableVisorGetEquipmentVisuals(Entity<CycleableVisorComponent> ent, ref GetEquipmentVisualsEvent args)
+    {
+        if (ent.Comp.CurrentVisor == null)
+            return;
+
+        if (!ent.Comp.Containers.TryGetValue(ent.Comp.CurrentVisor.Value, out var currentId))
+            return;
+
+        if (!_container.TryGetContainer(ent, currentId, out var currentContainer))
+            return;
+
+        if (!TryComp<VisorComponent>(currentContainer.ContainedEntities.FirstOrDefault(), out var visorComp))
+            return;
+
+        if (visorComp.ToggledSprite == null)
+            return;
+
+        if (_inventory.TryGetSlot(args.Equipee, args.Slot, out var slot) &&
+            (slot.SlotFlags & visorComp.Slot) == 0)
+        {
+            return;
+        }
+
+        var layer = $"enum.{nameof(VisorVisualLayers)}.{VisorVisualLayers.Base}";
+        if (args.Layers.Any(l => l.Item1 == layer))
+            return;
+
+        args.Layers.Add((layer, new PrototypeLayerData
+        {
+            RsiPath = visorComp.ToggledSprite.RsiPath.ToString(),
+            State = visorComp.ToggledSprite.RsiState,
+            Visible = true,
+        }));
     }
 
     private void OnCycleableVisorAction(Entity<CycleableVisorComponent> ent, ref CycleVisorActionEvent args)
@@ -97,6 +136,8 @@ public sealed class VisorSystem : EntitySystem
             if (!ev.Handled)
                 current = null;
         }
+
+        _item.VisualsChanged(ent);
     }
 
     private void OnCycleableVisorInteractUsing(Entity<CycleableVisorComponent> ent, ref InteractUsingEvent args)
