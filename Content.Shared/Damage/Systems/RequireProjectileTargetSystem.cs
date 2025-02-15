@@ -30,8 +30,15 @@ public sealed class RequireProjectileTargetSystem : EntitySystem
             return;
 
         var other = args.OtherEntity;
-        if (TryComp(other, out ProjectileComponent? projectile) &&
-            CompOrNull<TargetedProjectileComponent>(other) is TargetedProjectileComponent targetedProjectileComp)
+        var targetedProjectileComp = CompOrNull<TargetedProjectileComponent>(other);
+
+        if (targetedProjectileComp is null)
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        if (TryComp(other, out ProjectileComponent? projectile))
         {
             if (ent.Comp.CollideOnTargetCoords && targetedProjectileComp.TargetCoordinates is EntityCoordinates)
             {
