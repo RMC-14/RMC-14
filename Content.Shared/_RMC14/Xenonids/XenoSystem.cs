@@ -171,7 +171,7 @@ public sealed class XenoSystem : EntitySystem
             return;
 
 
-        if (HasComp<XenoTackableComponent>(target) && args.Disarm && _hive.FromSameHive(xeno.Owner, target))
+        if (HasComp<TackleableComponent>(target) && args.Disarm && _hive.FromSameHive(xeno.Owner, target))
         {
             return;
         }
