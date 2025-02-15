@@ -1,4 +1,4 @@
-﻿- type: accent
+- type: accent
   id: CMChatSanitize
   wordReplacements:
     cm-chatsan-word-deltard: cm-chatsan-replacement-deltard
@@ -129,6 +129,7 @@
     cm-chatsan-word-sensors: cm-chatsan-replacement-sensors
     cm-chatsan-word-sensor-tower: cm-chatsan-replacement-sensor-tower
     cm-chatsan-word-comms: cm-chatsan-replacement-comms
+    cm-chatsan-word-tcomms: cm-chatsan-replacement-tcomms
     cm-chatsan-word-communications-tower: cm-chatsan-replacement-communications-tower
     cm-chatsan-word-smart-gun: cm-chatsan-replacement-smart-gun
     cm-chatsan-word-smartgun: cm-chatsan-replacement-smartgun
@@ -139,4 +140,10 @@
     cm-chatsan-word-shotgun: cm-chatsan-replacement-shotgun
     cm-chatsan-word-squad: cm-chatsan-replacement-squad
     cm-chatsan-word-squads: cm-chatsan-replacement-squads
+    cm-chatsan-word-sg: cm-chatsan-replacement-sg
+    cm-chatsan-word-sgs: cm-chatsan-replacement-sgs
+    cm-chatsan-word-flares: cm-chatsan-replacement-flares
+    cm-chatsan-word-nade: cm-chatsan-replacement-nade
+    cm-chatsan-word-nades: cm-chatsan-replacement-nades
+    cm-chatsan-word-nuke: cm-chatsan-replacement-nuke
 

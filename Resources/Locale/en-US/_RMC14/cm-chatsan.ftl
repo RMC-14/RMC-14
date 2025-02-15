@@ -1,4 +1,4 @@
-﻿cm-chatsan-word-deltard = deltard
+cm-chatsan-word-deltard = deltard
 cm-chatsan-replacement-deltard = delta
 
 cm-chatsan-word-deltards = deltards
@@ -54,6 +54,9 @@ cm-chatsan-replacement-sniper = long spitter
 
 cm-chatsan-word-flare = flare
 cm-chatsan-replacement-flare = glow stick
+
+cm-chatsan-word-flares = flares
+cm-chatsan-replacement-flares = glow sticks
 
 cm-chatsan-word-synth = synth
 cm-chatsan-replacement-synth = fake hosts
@@ -363,11 +366,20 @@ cm-chatsan-replacement-sensor-tower = tall eye tower
 cm-chatsan-word-comms = comms
 cm-chatsan-replacement-comms = tall hivemind tower
 
+cm-chatsan-word-tcomms = tcomms
+cm-chatsan-replacement-tcomms = tall hivemind tower
+
 cm-chatsan-word-communications-tower = communications tower
 cm-chatsan-replacement-communications-tower = tall hivemind tower
 
 cm-chatsan-word-smart-gun = smart gun
 cm-chatsan-replacement-smartgun = smart spitter
+
+cm-chatsan-word-sg = sg
+cm-chatsan-replacement-sg = smart spitter
+
+cm-chatsan-word-sgs = sgs
+cm-chatsan-replacement-sgs = smart spitters
 
 cm-chatsan-word-smartgun = smartgun
 cm-chatsan-replacement-smart-gun = smart spitter
@@ -392,3 +404,12 @@ cm-chatsan-replacement-squads = castes
 
 cm-chatsan-word-shotgun = shotgun
 cm-chatsan-replacement-shotgun = scatter spitter
+
+cm-chatsan-word-nade = nade
+cm-chatsan-replacement-nade = boomstick
+
+cm-chatsan-word-nade = nades
+cm-chatsan-replacement-nade = boomsticks
+
+cm-chatsan-word-nuke = nuke
+cm-chatsan-replacement-nuke = hive killer
