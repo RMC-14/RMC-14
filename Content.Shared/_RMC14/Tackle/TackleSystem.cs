@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage.Systems;
@@ -23,6 +24,7 @@ public sealed class TackleSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
@@ -40,6 +42,7 @@ public sealed class TackleSystem : EntitySystem
         var user = args.User;
         if (!TryComp(user, out TackleComponent? tackle))
             return;
+
 
         args.Handled = true;
 
