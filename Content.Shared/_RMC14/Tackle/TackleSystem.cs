@@ -41,6 +41,7 @@ public sealed class TackleSystem : EntitySystem
 
     private void OnDisarmed(Entity<TackleableComponent> target, ref CMDisarmEvent args)
     {
+        Log.Debug("ok");
         var user = args.User;
         if (!TryComp(user, out TackleComponent? tackle))
             return;
@@ -51,7 +52,7 @@ public sealed class TackleSystem : EntitySystem
         if (HasComp<XenoTackableComponent>(target) && _hive.FromSameHive(target.Owner, user))
         {
             _stun.TryParalyze(target, TimeSpan.FromSeconds(10), true);
-            Log.Debug("hello");
+            Log.Debug("where are the refs");
         }
 
 
