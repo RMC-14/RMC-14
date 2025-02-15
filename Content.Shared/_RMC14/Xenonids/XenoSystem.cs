@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Net;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Damage;
