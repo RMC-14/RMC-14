@@ -603,9 +603,6 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
     /// <param name="xenoTunnel"></param>
     private void CollapseTunnel(Entity<XenoTunnelComponent> xenoTunnel)
     {
-        var mobContainer = _container.EnsureContainer<Container>(xenoTunnel.Owner, XenoTunnelComponent.ContainedMobsContainerId);
-
-        var tempMobList = new List<EntityUid>(mobContainer.ContainedEntities);
         var hiveTuple = Hive.GetHive(xenoTunnel.Owner);
         if (hiveTuple is not null && TryGetHiveTunnelName(xenoTunnel, out var tunnelName))
         {
@@ -613,10 +610,13 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             hiveComp.HiveTunnels.Remove(tunnelName);
         }
 
-        foreach (var mob in tempMobList)
+        if (_container.TryGetContainer(xenoTunnel.Owner, XenoTunnelComponent.ContainedMobsContainerId, out var mobContainer))
         {
-            RemoveFromTunnel(mob, mobContainer.Owner);
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-fill-xeno-drop"), mob, mob);
+            foreach (var mob in mobContainer.ContainedEntities)
+            {
+                RemoveFromTunnel(mob, mobContainer.Owner);
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-fill-xeno-drop"), mob, mob);
+            }
         }
 
         QueueDel(xenoTunnel.Owner);
