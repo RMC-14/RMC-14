@@ -1,7 +1,7 @@
 ﻿using Robust.Shared.GameStates;
 
-namespace Content.Shared._RMC14.Survivor;
+namespace Content.Shared._RMC14.Xenonids;
 
 [RegisterComponent, NetworkedComponent]
-[Access(typeof(SurvivorSystem))]
-public sealed partial class SurvivorComponent : Component;
+[Access(typeof(XenoSystem))]
+public sealed partial class XenoTackableComponent : Component;
