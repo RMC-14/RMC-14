@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed parasite trap inconsistencies. They now stun for less (2.5->2.0
-      seconds) but parasites will now no longer do a doafter and will instant leap/infect
-      anyone in their radius after 1.5 seconds
-    type: Fix
-  id: 846
-  time: '2024-10-16T00:38:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4487
-- author: Rainbeon
-  changes:
-  - message: The remaining time until you are allowed to become a Parasite is now
-      told to the player when attempting to take a Parasite ghost role from an Egg/Carrier.
-    type: Add
-  id: 847
-  time: '2024-10-16T00:38:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4488
 - author: FungiFellow
   changes:
   - message: Survivors are not allowed to Poach Monkies
@@ -5177,5 +5160,19 @@
   id: 1345
   time: '2025-02-16T04:42:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5550
+- author: Whisper
+  changes:
+  - message: Updated Kazi Priestess figurine
+    type: Tweak
+  id: 1346
+  time: '2025-02-16T04:56:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5645
+- author: Djvarik
+  changes:
+  - message: Adds landing zone signs to Shiva, Fiorina, and New Varadero
+    type: Fix
+  id: 1347
+  time: '2025-02-16T04:56:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5600
 Name: RMC14
 Order: -1
