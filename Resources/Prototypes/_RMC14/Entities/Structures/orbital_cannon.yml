@@ -152,17 +152,17 @@
   components:
   - type: OrbitalCannonExplosion
     steps:
-    - type: RMCOB
+    - type: RMCOBXenoTunnel
       total: 5000
       slope: 1500
       max: 200
       delay: 1
-    - type: RMCOB
+    - type: RMCOBXenoTunnel
       total: 50000
       slope: 10
       max: 90
       delay: 0.3
-    - type: RMCOB
+    - type: RMCOBXenoTunnel
       total: 50000
       slope: 10
       max: 90
