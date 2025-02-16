@@ -120,6 +120,7 @@
     cm-chatsan-word-rocket: cm-chatsan-replacement-rocket
     cm-chatsan-word-grenadier: cm-chatsan-replacement-grenadier
     cm-chatsan-word-scout: cm-chatsan-replacement-scout
+    cm-chatsan-word-scout-specialist: cm-chatsan-replacement-scout-specialist
     cm-chatsan-word-mortar: cm-chatsan-replacement-mortar
     cm-chatsan-word-demo: cm-chatsan-replacement-demo
     cm-chatsan-word-demolitionist: cm-chatsan-replacement-demolitionist
@@ -146,4 +147,9 @@
     cm-chatsan-word-nade: cm-chatsan-replacement-nade
     cm-chatsan-word-nades: cm-chatsan-replacement-nades
     cm-chatsan-word-nuke: cm-chatsan-replacement-nuke
+    cm-chatsan-word-intel: cm-chatsan-replacement-intel
+    cm-chatsan-word-survivor: cm-chatsan-replacement-survivor
+    cm-chatsan-word-survivors: cm-chatsan-replacement-survivors
+    cm-chatsan-word-surv: cm-chatsan-replacement-surv
+    cm-chatsan-word-survs: cm-chatsan-replacement-survs
 

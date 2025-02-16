@@ -336,8 +336,11 @@ cm-chatsan-replacement-rocket = boom spit
 cm-chatsan-word-grenadier = grenadier
 cm-chatsan-replacement-grenadier = boomstick spitter
 
-cm-chatsan-word-scout = scout
+cm-chatsan-word-scout = scout spec
 cm-chatsan-replacement-scout = tall lurker
+
+cm-chatsan-word-scout-specialist = scout specialist
+cm-chatsan-replacement-scout-specialist = tall lurker
 
 cm-chatsan-word-mortar = mortar
 cm-chatsan-replacement-mortar = skyboom
@@ -413,3 +416,18 @@ cm-chatsan-replacement-nade = boomsticks
 
 cm-chatsan-word-nuke = nuke
 cm-chatsan-replacement-nuke = hive killer
+
+cm-chatsan-word-intel = intel
+cm-chatsan-replacement-intel = scavenger talls
+
+cm-chatsan-word-survivor = survivor
+cm-chatsan-replacement-survivor = planet tall
+
+cm-chatsan-word-survivors = survivors
+cm-chatsan-replacement-survivors = planet talls
+
+cm-chatsan-word-surv = surv
+cm-chatsan-replacement-surv = planet tall
+
+cm-chatsan-word-survs = survs
+cm-chatsan-replacement-survs = planet talls
