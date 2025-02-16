@@ -17,7 +17,6 @@ using Content.Shared.Timing;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Timing;
-using Content.Shared.Hands;
 
 namespace Content.Server._RMC14.Medical.Scanner;
 
@@ -39,8 +38,6 @@ public sealed class HealthScannerSystem : EntitySystem
         SubscribeLocalEvent<HealthScannerComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<HealthScannerComponent, DoAfterAttemptEvent<HealthScannerDoAfterEvent>>(OnDoAfterAttempt);
         SubscribeLocalEvent<HealthScannerComponent, HealthScannerDoAfterEvent>(OnDoAfter);
-        SubscribeLocalEvent<HealthScannerComponent, GotEquippedHandEvent>(OnEquipped);
-        SubscribeLocalEvent<HealthScannerComponent, GotUnequippedHandEvent>(OnUnequipped);
     }
 
     private void OnAfterInteract(Entity<HealthScannerComponent> scanner, ref AfterInteractEvent args)
