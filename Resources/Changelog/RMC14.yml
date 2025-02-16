@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fruit speed modifiers are now additive instead of multiplicative (it
-      has less effect the faster you are)
-    type: Fix
-  id: 830
-  time: '2024-10-11T23:24:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4422
-- author: DrSmugleaf
-  changes:
-  - message: Fixed survivors not being listed on the ghost warp UI.
-    type: Fix
-  id: 831
-  time: '2024-10-11T23:25:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4423
 - author: DrSmugleaf
   changes:
   - message: Added the missing blocker to weeds being spread near landing zones before
@@ -5174,5 +5159,20 @@
   id: 1329
   time: '2025-02-13T08:38:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5611
+- author: Ian321
+  changes:
+  - message: Fixed Power loaders continuing to load or unload after the operator gets
+      out.
+    type: Fix
+  id: 1330
+  time: '2025-02-16T04:16:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5643
+- author: Vermidia
+  changes:
+  - message: Fixed xenos being unable to pat fire on marines.
+    type: Fix
+  id: 1331
+  time: '2025-02-16T04:16:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5644
 Name: RMC14
 Order: -1
