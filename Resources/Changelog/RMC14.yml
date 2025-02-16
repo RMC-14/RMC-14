@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Changed gun suicide do-after delay from 4 to 2 seconds.
-    type: Tweak
-  id: 841
-  time: '2024-10-14T06:48:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4454
 - author: Vermidia
   changes:
   - message: Fix Warden's Aid ability being usable on hive structures
@@ -5174,5 +5167,12 @@
   id: 1340
   time: '2025-02-16T04:32:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5620
+- author: Vermidia
+  changes:
+  - message: Fixed Resin Surge not working through membranes/windows
+    type: Fix
+  id: 1341
+  time: '2025-02-16T04:35:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5629
 Name: RMC14
 Order: -1
