@@ -1,21 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed mk80 falloff starting from 3 tiles to starting at 6 tiles.
-    type: Fix
-  id: 843
-  time: '2024-10-14T23:03:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4468
-- author: Rainbeon
-  changes:
-  - message: Fixed xenonids being able to apply acid to the Scout Weapon Specialist's
-      Rifle and Thermal Cloak.
-    type: Fix
-  id: 844
-  time: '2024-10-14T23:04:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4469
-- author: Vermidia
-  changes:
   - message: Added Avali speech sounds by Nefuki.
     type: Add
   id: 845
@@ -5174,5 +5159,22 @@
   id: 1342
   time: '2025-02-16T04:38:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5621
+- author: Vermidia
+  changes:
+  - message: Added the name of the current area you are in in the tacmap alert tooltip.
+    type: Add
+  id: 1343
+  time: '2025-02-16T04:40:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5615
+- author: SG6732
+  changes:
+  - message: Added new vulp wrap sprites.
+    type: Add
+  - message: Removed folded up necksprites for wraps on the neck slot. Regular mask
+      slot wraps will work fine.
+    type: Remove
+  id: 1344
+  time: '2025-02-16T04:40:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5569
 Name: RMC14
 Order: -1
