@@ -1,37 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added the missing blocker to weeds being spread near landing zones before
-      40 minutes pass.
-    type: Add
-  - message: Fixed evac doors being unpowered.
-    type: Fix
-  - message: Fixed planet faxes being able to fax the ship.
-    type: Fix
-  - message: Fixed lifeboat pump sentries not shooting.
-    type: Fix
-  - message: Fixed being able to suicide without a gun in your active hand.
-    type: Fix
-  id: 832
-  time: '2024-10-12T09:27:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4435
-- author: Vermidia
-  changes:
-  - message: Fix resin traps being activated by fruits.
-    type: Fix
-  id: 833
-  time: '2024-10-13T02:03:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4429
-- author: Vermidia
-  changes:
-  - message: Fix neurotoxin gas sometimes injecting twice as much neuro as was supposed
-      to
-    type: Fix
-  id: 834
-  time: '2024-10-13T02:02:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4449
-- author: DrSmugleaf
-  changes:
   - message: Fixed xenonid weeds spreading 3 times faster than intended.
     type: Fix
   id: 835
@@ -5174,5 +5143,38 @@
   id: 1331
   time: '2025-02-16T04:16:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5644
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed intelligence headband and squad beret not spawning
+    type: Fix
+  id: 1332
+  time: '2025-02-16T04:19:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5637
+- author: Vermidia
+  changes:
+  - message: Fixed burrower visibility while burrowed. It is correctly invisible to
+      all but itself, and is transparent on the xeno overlay.
+    type: Fix
+  - message: Fixed burrower burrow/unburrow thinking you were still unmoving, preventing
+      movement prediction from kicking in. mostly.
+    type: Fix
+  - message: Fixed burrower not having seperate burrow and tunneling cooldowns. The
+      burrow cooldown is 2 seconds and kicks in when successfully burrowing, unburrowing,
+      or cancelling a burrow. Tunneling is 7 seconds and kicks in when cancelling
+      a tunneling.
+    type: Fix
+  id: 1333
+  time: '2025-02-16T04:19:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5628
+- author: Vermidia
+  changes:
+  - message: More xeno chatsans, most for abbreviated terms, intel, and survivors.
+    type: Add
+  - message: Scout is no longer part of the xeno chatsan. Scout spec and scout specialist
+      are sanitized instead.
+    type: Tweak
+  id: 1334
+  time: '2025-02-16T04:20:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5634
 Name: RMC14
 Order: -1
