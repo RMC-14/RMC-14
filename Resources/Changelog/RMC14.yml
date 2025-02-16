@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xenonid weeds spreading 3 times faster than intended.
-    type: Fix
-  id: 835
-  time: '2024-10-13T06:09:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4451
 - author: crystalHex
   changes:
   - message: Fixed hardy weeds slowing down fruit growth instead of speeding it up.
@@ -5176,5 +5169,12 @@
   id: 1334
   time: '2025-02-16T04:20:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5634
+- author: blueDev2
+  changes:
+  - message: Fixed resin holes being unshootable if fully covered by another object
+    type: Fix
+  id: 1335
+  time: '2025-02-16T04:23:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5627
 Name: RMC14
 Order: -1
