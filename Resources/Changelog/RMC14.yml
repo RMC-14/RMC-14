@@ -5166,5 +5166,12 @@
   id: 1354
   time: '2025-02-16T06:48:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5631
+- author: Vermidia
+  changes:
+  - message: Fixed burrow, fultoning, and supply drops not dropping pulls.
+    type: Fix
+  id: 1355
+  time: '2025-02-16T21:48:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5652
 Name: RMC14
 Order: -1
