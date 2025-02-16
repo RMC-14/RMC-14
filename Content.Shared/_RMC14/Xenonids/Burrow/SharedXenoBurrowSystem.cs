@@ -248,7 +248,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
         }
         else
         {
-            /*
+
             if (TryComp(burrower, out DoAfterComponent? doAfterComp))
             {
                 foreach (var doAfter in doAfterComp.DoAfters)
@@ -260,7 +260,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
                     }
                 }
             }
-            */
+
             if (!CanBurrowPopup(burrower))
                 return;
 

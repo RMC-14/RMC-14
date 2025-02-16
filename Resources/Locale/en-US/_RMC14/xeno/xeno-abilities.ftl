@@ -207,7 +207,7 @@ rmc-xeno-burrow-down-failure-rest = We cannot burrow while resting!
 rmc-xeno-burrow-down-finish = We burrow ourselves into the ground.
 rmc-xeno-burrow-cooldown-finish = We can burrow again.
 rmc-xeno-burrow-down-failure-cooldown = We can't burrow yet.
-rmc-xeno-burrow-down-doafter-stop = We can't do that right now!
+rmc-xeno-burrow-down-doafter-stop = We're busy burrowing!
 
 rmc-xeno-burrow-resurface-cooldown-finish = We can now surface.
 rmc-xeno-burrow-move-cooldown-finish = We can now tunnel while burrowed.
