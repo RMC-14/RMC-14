@@ -73,25 +73,6 @@
 
 - type: entity
   parent: ArmorHelmetM10
-  id: CMArmorHelmetM10CO
-  name: M10 pattern commanding officer helmet
-  description: A special M10 Pattern Helmet worn by Commanding Officers of the UNMC. It reads on the label, 'The difference between an open-casket and closed-casket funeral. Wear on head for best results.'.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/co.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/co.rsi
-  - type: CMArmor
-    armor: 30
-    bio: 25
-    explosionArmor: 10 #same as base m10 helmet
-    #todo RMC: melee armor: 25
-    #todo RMC: energy armor: 15
-  - type: ItemCamouflage
-    camouflageVariations: { }
-
-- type: entity
-  parent: ArmorHelmetM10
   id: CMArmorHelmetM10Medic
   name: M10 medic helmet
   description: A special variant of the M10 Pattern Helmet worn by the medic marines of the Marines.
@@ -161,6 +142,51 @@
       Snow: _RMC14/Objects/Clothing/Head/Helmets/m11/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m11/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m11/urban.rsi
+
+- type: entity
+  parent: ArmorHelmetM10
+  id: CMArmorHelmetM11CCO
+  name: M11C pattern commanding officer helmet
+  description: A special M11 Pattern Helmet worn by Commanding Officers of the UNMC. It reads on the label, 'The difference between an open-casket and closed-casket funeral. Wear on head for best results.'.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m11/co.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m11/co.rsi
+  - type: CMArmor
+    armor: 30
+    bio: 25
+    explosionArmor: 10 #same as base m10 helmet
+    #todo RMC: melee armor: 25
+    #todo RMC: energy armor: 15
+  - type: ItemCamouflage
+    camouflageVariations:
+     Jungle: _RMC14/Objects/Clothing/Head/Helmets/m11/co/jungle.rsi
+     Desert: _RMC14/Objects/Clothing/Head/Helmets/m11/co/desert.rsi
+     Snow: _RMC14/Objects/Clothing/Head/Helmets/m11/co/snow.rsi
+     Classic: _RMC14/Objects/Clothing/Head/Helmets/m11/co/classic.rsi
+     Urban: _RMC14/Objects/Clothing/Head/Helmets/m11/co/urban.rsi
+
+- type: entity
+  parent: ArmorHelmetM10
+  id: CMArmorHelmetM11CGeneral
+  name: M11C pattern ceremonial helmet
+  description: A special M11 pattern ceremonial helmet worn occasionally by general officers of the UNMC.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m11/ceremonial.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m11/ceremonial.rsi
+  - type: CMArmor
+    armor: 30
+    bio: 25
+    explosionArmor: 10 #same as base m10 helmet
+    #todo RMC: melee armor: 25
+    #todo RMC: energy armor: 15
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+
 
 # M12
 - type: entity
