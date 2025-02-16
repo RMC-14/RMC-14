@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
@@ -108,8 +108,8 @@
         - XenoHeavy
   - type: RMCSize
     size: Big
-#  - type: RMCXenoDamageVisuals # TODO RMC14
-#    prefix: ravager
+  - type: RMCXenoDamageVisuals
+    prefix: ravager
   - type: TacticalMapIcon
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
