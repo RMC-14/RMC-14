@@ -40,7 +40,7 @@ public sealed class HelmetAccessoriesSystem : EntitySystem
     private void OnGetEquipmentVisuals(Entity<HelmetAccessoryHolderComponent> ent, ref GetEquipmentVisualsEvent args)
     {
         if (_inventory.TryGetSlot(args.Equipee, args.Slot, out var slot) &&
-            (slot.SlotFlags & SlotFlags.HEAD) == 0)
+            (slot.SlotFlags & ent.Comp.Slot) == 0)
         {
             return;
         }

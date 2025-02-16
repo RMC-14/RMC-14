@@ -1,5 +1,4 @@
-﻿using Content.Shared.Inventory;
-using Robust.Shared.GameStates;
+﻿using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Clothing;
@@ -12,6 +11,6 @@ public sealed partial class HelmetAccessoryComponent : Component
     public SpriteSpecifier.Rsi Rsi;
 
     // todo add toggle sprites
-    // [DataField, AutoNetworkedField]
-    // public SpriteSpecifier.Rsi? ToggledSprite;
+    [DataField, AutoNetworkedField]
+    public SpriteSpecifier.Rsi? ToggledRsi;
 }
