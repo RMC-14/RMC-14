@@ -183,6 +183,7 @@ public sealed class HealthScannerSystem : EntitySystem
         var temperature = CompOrNull<TemperatureComponent>(target)?.CurrentTemperature;
         var bleeding = bloodstream is { BleedAmount: > 0 };
         var state = new HealthScannerBuiState(GetNetEntity(target), blood, maxBlood, temperature, chemicals, bleeding);
+
         _ui.SetUiState(scanner.Owner, HealthScannerUIKey.Key, state);
     }
 
