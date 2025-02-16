@@ -761,7 +761,6 @@ public abstract partial class SharedGunSystem : EntitySystem
         {
             var targeted = EnsureComp<TargetedProjectileComponent>(uid);
             targeted.Target = target;
-            targeted.TargetCoordinates = gun.ShootCoordinates;
             Dirty(uid, targeted);
         }
 

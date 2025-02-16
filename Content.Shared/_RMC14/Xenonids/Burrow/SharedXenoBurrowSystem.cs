@@ -26,6 +26,7 @@ using Robust.Shared.Timing;
 using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
+using Content.Shared._RMC14.Pulling;
 
 namespace Content.Shared._RMC14.Xenonids.Burrow;
 
@@ -51,6 +52,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
 
     public override void Initialize()
     {
@@ -158,6 +160,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
                 Dirty(action.Id, actComp);
             }
 
+            _rmcPulling.TryStopAllPullsFromAndOn(burrower);
             _transform.Unanchor(burrower);
             if (TryComp<PhysicsComponent>(burrower, out var body))
             {
