@@ -113336,7 +113336,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: RMCERTShuttleEngineLeft1
+- proto: RMCERTShuttleEngineLeft01
   entities:
   - uid: 1446
     components:
@@ -113348,7 +113348,7 @@ entities:
     - type: Transform
       pos: 65.5,45.5
       parent: 1
-- proto: RMCERTShuttleEngineLeft2
+- proto: RMCERTShuttleEngineLeft02
   entities:
   - uid: 1686
     components:
@@ -113360,7 +113360,7 @@ entities:
     - type: Transform
       pos: 65.5,46.5
       parent: 1
-- proto: RMCERTShuttleEngineLeft3
+- proto: RMCERTShuttleEngineLeft03
   entities:
   - uid: 1687
     components:
@@ -113372,7 +113372,7 @@ entities:
     - type: Transform
       pos: 65.5,47.5
       parent: 1
-- proto: RMCERTShuttleEngineRight1
+- proto: RMCERTShuttleEngineRight01
   entities:
   - uid: 1665
     components:
@@ -113384,7 +113384,7 @@ entities:
     - type: Transform
       pos: 71.5,45.5
       parent: 1
-- proto: RMCERTShuttleEngineRight2
+- proto: RMCERTShuttleEngineRight02
   entities:
   - uid: 1685
     components:
@@ -113396,7 +113396,7 @@ entities:
     - type: Transform
       pos: 71.5,46.5
       parent: 1
-- proto: RMCERTShuttleEngineRight3
+- proto: RMCERTShuttleEngineRight03
   entities:
   - uid: 1688
     components:
@@ -113694,7 +113694,7 @@ entities:
     - type: Transform
       pos: 66.5,50.5
       parent: 1
-- proto: RMCERTShuttleWallStandard4
+- proto: RMCERTShuttleWallStandard04
   entities:
   - uid: 1701
     components:
