@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Added Avali speech sounds by Nefuki.
-    type: Add
-  id: 845
-  time: '2024-10-15T00:05:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4455
-- author: Vermidia
-  changes:
   - message: Fixed parasite trap inconsistencies. They now stun for less (2.5->2.0
       seconds) but parasites will now no longer do a doafter and will instant leap/infect
       anyone in their radius after 1.5 seconds
@@ -5176,5 +5169,13 @@
   id: 1344
   time: '2025-02-16T04:40:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5569
+- author: Tunguso4ka
+  changes:
+  - message: Updated Medical, Requisition departments and Intel and Pilot rooms on
+      Savannah.
+    type: Add
+  id: 1345
+  time: '2025-02-16T04:42:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5550
 Name: RMC14
 Order: -1
