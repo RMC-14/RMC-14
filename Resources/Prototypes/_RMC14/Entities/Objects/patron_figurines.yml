@@ -814,7 +814,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronKaziPriestess
   name: Kazi Priestess figurine
-  description: "\"Wait, you wanted a supply drop sent to those cords? Shit..\""
+  description: "\"An orbital strike a day, keeps the enemy at bay.\""
   components:
   - type: Sprite
     state: kazi_priestess
