@@ -1,8 +1,9 @@
 ﻿using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.OrbitalCannon;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, EntityCategory("Spawner")]
 [Access(typeof(OrbitalCannonSystem))]
 public sealed partial class OrbitalCannonExplosionComponent : Component
 {

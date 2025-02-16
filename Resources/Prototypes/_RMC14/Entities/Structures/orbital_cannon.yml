@@ -123,6 +123,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_warhead_3
+  - type: OrbitalCannonWarhead
+    explosion: RMCOrbitalCannonExplosionCluster
 
 - type: entity
   id: RMCOrbitalCannonWarheadSpawner
@@ -185,6 +187,18 @@
       delay: 1
     - fire: RMCTileFireOB
       fireRange: 18
+  - type: WarpPoint
+    location: 1 orbital bombardment
+
+- type: entity
+  parent: MarkerBase
+  id: RMCOrbitalCannonExplosionCluster
+  name: cluster OB explosion
+  suffix: FIRES AN OB!!!
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: OrbitalCannonExplosion # TODO: RMC14
   - type: WarpPoint
     location: 1 orbital bombardment
 

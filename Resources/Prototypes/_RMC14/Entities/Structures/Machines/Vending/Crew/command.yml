@@ -908,15 +908,15 @@
         recommended: true
       - id: RMCPouchGeneralLarge
       - id: RMCPouchToolsFill
-        name: tools pouch (full)
+        name: tools pouch (Full)
       - id: RMCPouchConstruction
       - id: RMCPouchElectronicsFill
-        name: electronics pouch (full)
+        name: electronics pouch (Full)
       - id: RMCPouchMagazine
       - id: RMCPouchShotgun
       - id: RMCPouchPistol
       - id: RMCPouchFlareFilled
-        name: flare pouch (full)
+        name: flare pouch (Full)
       - id: RMCPouchFuelTank
     - name: Personal Sidearms
       jobs:
@@ -1141,7 +1141,9 @@
       choices: { CMBelt: 1 }
       entries:
       - id: CMBeltMedicBagFilled
+        name: M276 pattern lifesaver bag (Full)
       - id: CMBeltMedicalFilled
+        name: M276 medical storage rig (Full)
     - name: Personal Sidearm
       jobs:
       - CMCMO

@@ -58,7 +58,7 @@
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
-  - type: Sprite
+  - type: Sprite # TODO: Replace with landmark sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
