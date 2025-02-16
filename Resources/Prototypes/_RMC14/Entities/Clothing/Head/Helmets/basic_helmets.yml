@@ -44,7 +44,7 @@
     - popup: rmc-storage-limit-accessories
       count: 2
       whitelist:
-        tags:
+        components:
         - HelmetAccessory
   - type: ContainerContainer
     containers:
