@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: Rainbeon
   changes:
-  - message: Shotguns and Grenade Launchers now correctly display ammo when being
-      loaded.
-    type: Fix
-  id: 854
-  time: '2024-10-18T02:26:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4494
-- author: Rainbeon
-  changes:
   - message: You may now become a Parasite again immediately after successfully infecting
       a Marine.
     type: Tweak
@@ -5173,5 +5165,13 @@
   id: 1353
   time: '2025-02-16T06:42:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5439
+- author: Ian321
+  changes:
+  - message: Lights, beakers and pressurized canisters no longer leave glass shards
+      when destroyed.
+    type: Tweak
+  id: 1354
+  time: '2025-02-16T06:48:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5631
 Name: RMC14
 Order: -1
