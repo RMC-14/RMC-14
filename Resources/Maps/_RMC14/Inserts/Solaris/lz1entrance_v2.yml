@@ -1,0 +1,1413 @@
+meta:
+  format: 6
+  postmapinit: false
+tilemap:
+  0: Space
+  1: CMFloorAsteroidFloor
+  3: CMFloorAsteroidStriped0
+  4: CMFloorAsteroidStriped1
+  5: CMFloorAsteroidStriped2
+  6: CMFloorAsteroidStriped3
+  7: CMFloorAsteroidStriped4
+  8: CMFloorAsteroidStriped5
+  9: CMFloorAsteroidStriped6
+  10: CMFloorAsteroidStriped7
+  198: CMFloorPlating
+  275: CMFloorSteelPlanetBlack
+  315: CMFloorSteelPlanetDarkGreen0
+  316: CMFloorSteelPlanetDarkGreen1
+  317: CMFloorSteelPlanetDarkGreen2
+  318: CMFloorSteelPlanetDarkGreen3
+  319: CMFloorSteelPlanetDarkGreen4
+  320: CMFloorSteelPlanetDarkGreen5
+  321: CMFloorSteelPlanetDarkGreen6
+  322: CMFloorSteelPlanetDarkGreen7
+  884: CMPlanetMarsCave1
+  908: CMPlanetMarsDirt10
+  909: CMPlanetMarsDirt11
+  910: CMPlanetMarsDirt12
+  911: CMPlanetMarsDirt13
+  912: CMPlanetMarsDirt2
+  913: CMPlanetMarsDirt3
+  918: CMPlanetMarsDirt8
+  919: CMPlanetMarsDirt9
+  920: CMPlanetMarsSand
+  1154: RMCFloorCement1
+  1155: RMCFloorCement10
+  1157: RMCFloorCement12
+  1159: RMCFloorCement14
+  1160: RMCFloorCement15
+  1165: RMCFloorCement2
+  1167: RMCFloorCement3
+  1168: RMCFloorCement4
+  1173: RMCFloorCement9
+  1174: RMCFloorCementSunBleached1
+  1175: RMCFloorCementSunBleached10
+  1177: RMCFloorCementSunBleached12
+  1180: RMCFloorCementSunBleached15
+  1185: RMCFloorCementSunBleached2
+  1187: RMCFloorCementSunBleached3
+  1188: RMCFloorCementSunBleached4
+  1193: RMCFloorCementSunBleached9
+entities:
+- proto: ""
+  entities:
+  - uid: 1
+    components:
+    - type: MetaData
+      name: grid
+    - type: Transform
+    - type: MapGrid
+      chunks:
+        0,0:
+          ind: 0,0
+          tiles: mAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAowQAAAAAlwQAAAAAlgQAAAAAkQMAAAAAkQMAAAAAowQAAAAAlwQAAAAAlgQAAAAAkQMAAAAAmQQAAAAAnAQAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAowQAAAAAlwQAAAAAlgQAAAAAkQMAAAAAkQMAAAAAowQAAAAAlwQAAAAAlgQAAAAAkQMAAAAAlwQAAAAAlgQAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAowQAAAAAlwQAAAAAlgQAAAAAkQMAAAAAkQMAAAAAowQAAAAAlwQAAAAAlgQAAAAAjQMAAAAAlwQAAAAAlwQAAAAAmQQAAAAAmQQAAAAAmQQAAAAAmQQAAAAAmQQAAAAAlwQAAAAAlwQAAAAAlgQAAAAAkQMAAAAAkQMAAAAAowQAAAAAlwQAAAAAlgQAAAAAjQMAAAAAlwQAAAAAlwQAAAAApAQAAAAApAQAAAAApAQAAAAApAQAAAAApAQAAAAAlwQAAAAAlwQAAAAAlgQAAAAAkQMAAAAAkQMAAAAAowQAAAAAlwQAAAAAlgQAAAAAkQMAAAAAlwQAAAAAlgQAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAowQAAAAAlwQAAAAAlgQAAAAAkQMAAAAAkQMAAAAAowQAAAAAlwQAAAAAlgQAAAAAkQMAAAAApAQAAAAAqQQAAAAAmAMAAAAACAAAAAAAAwAAAAAAAwAAAAAABwAAAAAAowQAAAAAlwQAAAAAlwQAAAAAmQQAAAAAmQQAAAAAlwQAAAAAlwQAAAAAlwQAAAAAmQQAAAAAmAMAAAAAjAMAAAAAkAMAAAAABgAAAAAAAQAAAAAAAQAAAAAABQAAAAAAowQAAAAAlwQAAAAAlwQAAAAAlwQAAAAAlwQAAAAAlwQAAAAAlwQAAAAAlwQAAAAAlwQAAAAAmAMAAAAAjAMAAAAAkQMAAAAACgAAAAAABAAAAAAABAAAAAAACQAAAAAAowQAAAAAlwQAAAAAlwQAAAAApAQAAAAApAQAAAAApAQAAAAApAQAAAAApAQAAAAApAQAAAAAmAMAAAAAjAMAAAAAkQMAAAAAkQMAAAAAkQMAAAAAkQMAAAAAkQMAAAAAowQAAAAAlwQAAAAAlgQAAAAAkQMAAAAAkQMAAAAAkQMAAAAAlwMAAAAAlwMAAAAAlwMAAAAAdAMAAAAAjgMAAAAAkQMAAAAAkQMAAAAAkQMAAAAAkQMAAAAAkQMAAAAAowQAAAAAlwQAAAAAlgQAAAAAkQMAAAAAkQMAAAAAjQMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAdAMAAAAAmAMAAAAAjAMAAAAAkQMAAAAAkQMAAAAAkQMAAAAAkQMAAAAAoQQAAAAApAQAAAAAqQQAAAAAkQMAAAAAkQMAAAAAjQMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAhwQAAAAAhQQAAAAAiAQAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAAQAAAAAABQAAAAAAxgAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAjwQAAAAAgwQAAAAAggQAAAAAAQAAAAAAxgAAAAAAQAEAAAAAOwEAAAAAOwEAAAAAOwEAAAAAAQAAAAAAAQAAAAAAhwQAAAAAhQQAAAAAhQQAAAAAhQQAAAAAhQQAAAAAgwQAAAAAgwQAAAAAggQAAAAAAQAAAAAAxgAAAAAAPgEAAAAAEwEAAAAAEwEAAAAAEwEAAAAAAQAAAAAAAQAAAAAAjwQAAAAAgwQAAAAAgwQAAAAAgwQAAAAAgwQAAAAAgwQAAAAAgwQAAAAAggQAAAAAAQAAAAAAEwEAAAAAEwEAAAAAEwEAAAAAEwEAAAAAEwEAAAAA
+          version: 6
+        1,0:
+          ind: 1,0
+          tiles: jQMAAAAAmAMAAAAAmAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAjwMAAAAAmAMAAAAAmAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAmAMAAAAAmAMAAAAAmAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAmAMAAAAAmAMAAAAAmAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlgMAAAAAmAMAAAAAmAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkQMAAAAAkAMAAAAAkAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAmQQAAAAAmQQAAAAAmQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlwQAAAAAlwQAAAAAlwQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApAQAAAAApAQAAAAApAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlwMAAAAAlwMAAAAAlwMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAmAMAAAAAmAMAAAAAmAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAmAMAAAAAmAMAAAAAmAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOwEAAAAAOwEAAAAAPwEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEwEAAAAAEwEAAAAAPQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEwEAAAAAEwEAAAAAPQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          version: 6
+        0,1:
+          ind: 0,1
+          tiles: AQAAAAAAAQAAAAAAjQQAAAAAkAQAAAAAkAQAAAAAkAQAAAAAkAQAAAAAkAQAAAAAkAQAAAAAlQQAAAAAAQAAAAAAEwEAAAAAEwEAAAAAEwEAAAAAEwEAAAAAEwEAAAAAAQAAAAAABQAAAAAAxgAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAxgAAAAAAQgEAAAAAPAEAAAAAPAEAAAAAPAEAAAAABgAAAAAABQAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          version: 6
+        1,1:
+          ind: 1,1
+          tiles: EwEAAAAAEwEAAAAAPQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPAEAAAAAPAEAAAAAQQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          version: 6
+    - type: Broadphase
+    - type: Physics
+      bodyStatus: InAir
+      angularDamping: 0.05
+      linearDamping: 0.05
+      fixedRotation: False
+      bodyType: Dynamic
+    - type: Fixtures
+      fixtures: {}
+    - type: OccluderTree
+    - type: SpreaderGrid
+    - type: Shuttle
+    - type: GridPathfinding
+    - type: Gravity
+      gravityShakeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/alert.ogg
+    - type: DecalGrid
+      chunkCollection:
+        version: 2
+        nodes:
+        - node:
+            color: '#FFFFFFFF'
+            id: Dirt
+          decals:
+            0: 3,4
+            1: 3,3
+            2: 4,4
+            3: 0,7
+            4: 0,8
+            5: 0,9
+            6: 1,8
+            7: 2,10
+            8: 3,10
+            9: 3,11
+            10: 5,10
+            11: 7,9
+            12: 7,8
+            13: 9,6
+            14: 11,8
+            15: 12,6
+            16: 7,12
+            17: 7,13
+            18: 8,13
+            19: 5,16
+            20: 6,16
+            21: 6,15
+            22: 7,15
+            23: 7,16
+            24: 2,14
+            25: 3,14
+            26: 3,15
+            27: 16,13
+            28: 15,14
+            29: 15,15
+            30: 16,16
+            31: 17,15
+            32: 13,15
+            33: 12,16
+    - type: GridAtmosphere
+      version: 2
+      data:
+        chunkSize: 4
+    - type: GasTileOverlay
+    - type: RadiationGridResistance
+    - type: AreaGrid
+      areaEntities: {}
+      colors: {}
+      areas:
+        5,6: RMCAreaBigredv2OutsideNw
+        5,7: RMCAreaBigredv2OutsideNw
+        5,8: RMCAreaBigredv2OutsideNw
+        5,9: RMCAreaBigredv2OutsideNw
+        4,0: RMCAreaBigredv2OutsideNw
+        4,1: RMCAreaBigredv2OutsideNw
+        4,2: RMCAreaBigredv2OutsideNw
+        4,3: RMCAreaBigredv2OutsideNw
+        4,4: RMCAreaBigredv2OutsideNw
+        4,5: RMCAreaBigredv2OutsideNw
+        4,6: RMCAreaBigredv2OutsideNw
+        4,7: RMCAreaBigredv2OutsideNw
+        4,8: RMCAreaBigredv2OutsideNw
+        4,9: RMCAreaBigredv2OutsideNw
+        3,0: RMCAreaBigredv2OutsideNw
+        3,1: RMCAreaBigredv2OutsideNw
+        3,2: RMCAreaBigredv2OutsideNw
+        3,3: RMCAreaBigredv2OutsideNw
+        3,4: RMCAreaBigredv2OutsideNw
+        3,5: RMCAreaBigredv2OutsideNw
+        3,6: RMCAreaBigredv2OutsideNw
+        3,7: RMCAreaBigredv2OutsideNw
+        3,8: RMCAreaBigredv2OutsideNw
+        3,9: RMCAreaBigredv2OutsideNw
+        2,0: RMCAreaBigredv2OutsideNw
+        2,1: RMCAreaBigredv2OutsideNw
+        2,2: RMCAreaBigredv2OutsideNw
+        2,3: RMCAreaBigredv2OutsideNw
+        2,4: RMCAreaBigredv2OutsideNw
+        2,5: RMCAreaBigredv2OutsideNw
+        2,6: RMCAreaBigredv2OutsideNw
+        2,7: RMCAreaBigredv2OutsideNw
+        2,8: RMCAreaBigredv2OutsideNw
+        2,9: RMCAreaBigredv2OutsideNw
+        1,0: RMCAreaBigredv2OutsideNw
+        1,1: RMCAreaBigredv2OutsideNw
+        1,2: RMCAreaBigredv2OutsideNw
+        1,3: RMCAreaBigredv2OutsideNw
+        1,4: RMCAreaBigredv2OutsideNw
+        1,5: RMCAreaBigredv2OutsideNw
+        1,6: RMCAreaBigredv2OutsideNw
+        1,7: RMCAreaBigredv2OutsideNw
+        1,8: RMCAreaBigredv2OutsideNw
+        1,9: RMCAreaBigredv2OutsideNw
+        0,0: RMCAreaBigredv2OutsideNw
+        0,1: RMCAreaBigredv2OutsideNw
+        0,2: RMCAreaBigredv2OutsideNw
+        0,3: RMCAreaBigredv2OutsideNw
+        0,4: RMCAreaBigredv2OutsideNw
+        0,5: RMCAreaBigredv2OutsideNw
+        0,6: RMCAreaBigredv2OutsideNw
+        0,7: RMCAreaBigredv2OutsideNw
+        0,8: RMCAreaBigredv2OutsideNw
+        0,9: RMCAreaBigredv2OutsideNw
+        18,10: RMCAreaBigredv2OutsideNw
+        18,11: RMCAreaBigredv2OutsideNw
+        17,10: RMCAreaBigredv2OutsideNw
+        17,11: RMCAreaBigredv2OutsideNw
+        16,10: RMCAreaBigredv2OutsideNw
+        16,11: RMCAreaBigredv2OutsideNw
+        15,10: RMCAreaBigredv2OutsideNw
+        15,11: RMCAreaBigredv2OutsideNw
+        14,10: RMCAreaBigredv2OutsideNw
+        14,11: RMCAreaBigredv2OutsideNw
+        13,10: RMCAreaBigredv2OutsideNw
+        13,11: RMCAreaBigredv2OutsideNw
+        12,10: RMCAreaBigredv2OutsideNw
+        12,11: RMCAreaBigredv2OutsideNw
+        11,10: RMCAreaBigredv2OutsideNw
+        11,11: RMCAreaBigredv2OutsideNw
+        10,10: RMCAreaBigredv2OutsideNw
+        10,11: RMCAreaBigredv2OutsideNw
+        9,10: RMCAreaBigredv2OutsideNw
+        9,11: RMCAreaBigredv2OutsideNw
+        8,10: RMCAreaBigredv2OutsideNw
+        8,11: RMCAreaBigredv2OutsideNw
+        7,10: RMCAreaBigredv2OutsideNw
+        7,11: RMCAreaBigredv2OutsideNw
+        6,10: RMCAreaBigredv2OutsideNw
+        6,11: RMCAreaBigredv2OutsideNw
+        5,10: RMCAreaBigredv2OutsideNw
+        5,11: RMCAreaBigredv2OutsideNw
+        4,10: RMCAreaBigredv2OutsideNw
+        4,11: RMCAreaBigredv2OutsideNw
+        3,10: RMCAreaBigredv2OutsideNw
+        3,11: RMCAreaBigredv2OutsideNw
+        2,10: RMCAreaBigredv2OutsideNw
+        2,11: RMCAreaBigredv2OutsideNw
+        1,10: RMCAreaBigredv2OutsideNw
+        1,11: RMCAreaBigredv2OutsideNw
+        0,10: RMCAreaBigredv2Caves
+        0,11: RMCAreaBigredv2Caves
+        18,12: RMCAreaBigredv2OutsideSpacePort
+        18,13: RMCAreaBigredv2OutsideSpacePort
+        18,14: RMCAreaBigredv2OutsideSpacePort
+        18,15: RMCAreaBigredv2OutsideSpacePort
+        18,16: RMCAreaBigredv2OutsideSpacePort
+        18,17: RMCAreaBigredv2OutsideSpacePort
+        18,18: RMCAreaBigredv2OutsideSpacePort
+        17,12: RMCAreaBigredv2OutsideSpacePort
+        17,13: RMCAreaBigredv2OutsideSpacePort
+        17,14: RMCAreaBigredv2OutsideSpacePort
+        17,15: RMCAreaBigredv2OutsideSpacePort
+        17,16: RMCAreaBigredv2OutsideSpacePort
+        17,17: RMCAreaBigredv2OutsideSpacePort
+        17,18: RMCAreaBigredv2OutsideSpacePort
+        16,12: RMCAreaBigredv2OutsideSpacePort
+        16,13: RMCAreaBigredv2OutsideSpacePort
+        16,14: RMCAreaBigredv2OutsideSpacePort
+        16,15: RMCAreaBigredv2OutsideSpacePort
+        16,16: RMCAreaBigredv2OutsideSpacePort
+        16,17: RMCAreaBigredv2OutsideSpacePort
+        16,18: RMCAreaBigredv2OutsideSpacePort
+        15,12: RMCAreaBigredv2OutsideSpacePort
+        15,13: RMCAreaBigredv2OutsideSpacePort
+        15,14: RMCAreaBigredv2OutsideSpacePort
+        15,15: RMCAreaBigredv2OutsideSpacePort
+        15,16: RMCAreaBigredv2OutsideSpacePort
+        15,17: RMCAreaBigredv2OutsideSpacePort
+        15,18: RMCAreaBigredv2OutsideSpacePort
+        14,12: RMCAreaBigredv2OutsideSpacePort
+        14,13: RMCAreaBigredv2OutsideSpacePort
+        14,14: RMCAreaBigredv2OutsideSpacePort
+        14,15: RMCAreaBigredv2OutsideSpacePort
+        14,16: RMCAreaBigredv2OutsideSpacePort
+        14,17: RMCAreaBigredv2OutsideSpacePort
+        14,18: RMCAreaBigredv2OutsideSpacePort
+        13,12: RMCAreaBigredv2OutsideSpacePort
+        13,13: RMCAreaBigredv2OutsideSpacePort
+        13,14: RMCAreaBigredv2OutsideSpacePort
+        13,15: RMCAreaBigredv2OutsideSpacePort
+        13,16: RMCAreaBigredv2OutsideSpacePort
+        13,17: RMCAreaBigredv2OutsideSpacePort
+        13,18: RMCAreaBigredv2OutsideSpacePort
+        12,12: RMCAreaBigredv2OutsideSpacePort
+        12,13: RMCAreaBigredv2OutsideSpacePort
+        12,14: RMCAreaBigredv2OutsideSpacePort
+        12,15: RMCAreaBigredv2OutsideSpacePort
+        12,16: RMCAreaBigredv2OutsideSpacePort
+        12,17: RMCAreaBigredv2OutsideSpacePort
+        12,18: RMCAreaBigredv2OutsideSpacePort
+        11,12: RMCAreaBigredv2OutsideSpacePort
+        11,13: RMCAreaBigredv2OutsideSpacePort
+        11,14: RMCAreaBigredv2OutsideSpacePort
+        11,15: RMCAreaBigredv2OutsideSpacePort
+        11,16: RMCAreaBigredv2OutsideSpacePort
+        11,17: RMCAreaBigredv2OutsideSpacePort
+        11,18: RMCAreaBigredv2OutsideSpacePort
+        10,12: RMCAreaBigredv2OutsideSpacePort
+        10,13: RMCAreaBigredv2OutsideSpacePort
+        10,14: RMCAreaBigredv2OutsideSpacePort
+        10,15: RMCAreaBigredv2OutsideSpacePort
+        10,16: RMCAreaBigredv2OutsideSpacePort
+        10,17: RMCAreaBigredv2OutsideSpacePort
+        10,18: RMCAreaBigredv2OutsideSpacePort
+        9,12: RMCAreaBigredv2OutsideSpacePort
+        9,13: RMCAreaBigredv2OutsideSpacePort
+        9,14: RMCAreaBigredv2OutsideSpacePort
+        9,15: RMCAreaBigredv2OutsideSpacePort
+        9,16: RMCAreaBigredv2OutsideSpacePort
+        9,17: RMCAreaBigredv2OutsideSpacePort
+        9,18: RMCAreaBigredv2OutsideSpacePort
+        8,12: RMCAreaBigredv2OutsideSpacePort
+        8,13: RMCAreaBigredv2OutsideSpacePort
+        8,14: RMCAreaBigredv2OutsideSpacePort
+        8,15: RMCAreaBigredv2OutsideSpacePort
+        8,16: RMCAreaBigredv2OutsideSpacePort
+        8,17: RMCAreaBigredv2OutsideSpacePort
+        8,18: RMCAreaBigredv2OutsideSpacePort
+        7,12: RMCAreaBigredv2OutsideSpacePort
+        7,13: RMCAreaBigredv2OutsideSpacePort
+        7,14: RMCAreaBigredv2OutsideSpacePort
+        7,15: RMCAreaBigredv2OutsideSpacePort
+        7,16: RMCAreaBigredv2OutsideSpacePort
+        7,17: RMCAreaBigredv2OutsideSpacePort
+        7,18: RMCAreaBigredv2OutsideSpacePort
+        6,12: RMCAreaBigredv2OutsideSpacePort
+        6,13: RMCAreaBigredv2OutsideSpacePort
+        6,14: RMCAreaBigredv2OutsideSpacePort
+        6,15: RMCAreaBigredv2OutsideSpacePort
+        6,16: RMCAreaBigredv2OutsideSpacePort
+        6,17: RMCAreaBigredv2OutsideSpacePort
+        6,18: RMCAreaBigredv2OutsideSpacePort
+        5,12: RMCAreaBigredv2OutsideSpacePort
+        5,13: RMCAreaBigredv2OutsideSpacePort
+        5,14: RMCAreaBigredv2OutsideSpacePort
+        5,15: RMCAreaBigredv2OutsideSpacePort
+        5,16: RMCAreaBigredv2OutsideSpacePort
+        5,17: RMCAreaBigredv2OutsideSpacePort
+        5,18: RMCAreaBigredv2OutsideSpacePort
+        4,12: RMCAreaBigredv2OutsideSpacePort
+        4,13: RMCAreaBigredv2OutsideSpacePort
+        4,14: RMCAreaBigredv2OutsideSpacePort
+        4,15: RMCAreaBigredv2OutsideSpacePort
+        4,16: RMCAreaBigredv2OutsideSpacePort
+        4,17: RMCAreaBigredv2OutsideSpacePort
+        4,18: RMCAreaBigredv2OutsideSpacePort
+        3,12: RMCAreaBigredv2OutsideSpacePort
+        3,13: RMCAreaBigredv2OutsideSpacePort
+        3,14: RMCAreaBigredv2OutsideSpacePort
+        3,15: RMCAreaBigredv2OutsideSpacePort
+        3,16: RMCAreaBigredv2OutsideSpacePort
+        3,17: RMCAreaBigredv2OutsideSpacePort
+        3,18: RMCAreaBigredv2OutsideSpacePort
+        2,12: RMCAreaBigredv2OutsideSpacePort
+        2,13: RMCAreaBigredv2OutsideSpacePort
+        2,14: RMCAreaBigredv2OutsideSpacePort
+        2,15: RMCAreaBigredv2OutsideSpacePort
+        2,16: RMCAreaBigredv2OutsideSpacePort
+        2,17: RMCAreaBigredv2OutsideSpacePort
+        2,18: RMCAreaBigredv2OutsideSpacePort
+        1,12: RMCAreaBigredv2OutsideSpacePort
+        1,13: RMCAreaBigredv2OutsideSpacePort
+        1,14: RMCAreaBigredv2OutsideSpacePort
+        1,15: RMCAreaBigredv2OutsideSpacePort
+        1,16: RMCAreaBigredv2OutsideSpacePort
+        1,17: RMCAreaBigredv2OutsideSpacePort
+        1,18: RMCAreaBigredv2OutsideSpacePort
+        0,12: RMCAreaBigredv2OutsideSpacePort
+        0,13: RMCAreaBigredv2OutsideSpacePort
+        0,14: RMCAreaBigredv2OutsideSpacePort
+        0,15: RMCAreaBigredv2OutsideSpacePort
+        0,16: RMCAreaBigredv2OutsideSpacePort
+        0,17: RMCAreaBigredv2OutsideSpacePort
+        0,18: RMCAreaBigredv2OutsideSpacePort
+        5,5: RMCAreaBigredv2OutsideNw
+        5,3: RMCAreaBigredv2OutsideNw
+        5,2: RMCAreaBigredv2OutsideNw
+        5,1: RMCAreaBigredv2OutsideNw
+        5,0: RMCAreaBigredv2OutsideNw
+        6,9: RMCAreaBigredv2OutsideNw
+        6,8: RMCAreaBigredv2OutsideNw
+        6,7: RMCAreaBigredv2OutsideNw
+        6,6: RMCAreaBigredv2OutsideNw
+        6,5: RMCAreaBigredv2OutsideNw
+        6,4: RMCAreaBigredv2OutsideNw
+        6,3: RMCAreaBigredv2OutsideNw
+        6,2: RMCAreaBigredv2OutsideNw
+        6,1: RMCAreaBigredv2OutsideNw
+        6,0: RMCAreaBigredv2OutsideNw
+        7,9: RMCAreaBigredv2OutsideNw
+        7,8: RMCAreaBigredv2OutsideNw
+        7,7: RMCAreaBigredv2OutsideNw
+        7,6: RMCAreaBigredv2OutsideNw
+        7,5: RMCAreaBigredv2OutsideNw
+        7,4: RMCAreaBigredv2OutsideNw
+        7,3: RMCAreaBigredv2OutsideNw
+        7,2: RMCAreaBigredv2OutsideNw
+        7,1: RMCAreaBigredv2OutsideNw
+        7,0: RMCAreaBigredv2OutsideNw
+        5,4: RMCAreaBigredv2OutsideNw
+        8,9: RMCAreaBigredv2OutsideNw
+        8,8: RMCAreaBigredv2OutsideNw
+        8,6: RMCAreaBigredv2OutsideNw
+        8,7: RMCAreaBigredv2OutsideNw
+        8,5: RMCAreaBigredv2OutsideNw
+        8,4: RMCAreaBigredv2OutsideNw
+        8,3: RMCAreaBigredv2OutsideNw
+        8,2: RMCAreaBigredv2OutsideNw
+        8,1: RMCAreaBigredv2OutsideNw
+        8,0: RMCAreaBigredv2OutsideNw
+        9,9: RMCAreaBigredv2OutsideNw
+        9,8: RMCAreaBigredv2OutsideNw
+        9,7: RMCAreaBigredv2OutsideNw
+        9,6: RMCAreaBigredv2OutsideNw
+        9,5: RMCAreaBigredv2OutsideNw
+        9,4: RMCAreaBigredv2OutsideNw
+        9,3: RMCAreaBigredv2OutsideNw
+        9,2: RMCAreaBigredv2OutsideNw
+        9,1: RMCAreaBigredv2OutsideNw
+        9,0: RMCAreaBigredv2OutsideNw
+        10,9: RMCAreaBigredv2OutsideNw
+        10,8: RMCAreaBigredv2OutsideNw
+        10,7: RMCAreaBigredv2OutsideNw
+        10,6: RMCAreaBigredv2OutsideNw
+        10,5: RMCAreaBigredv2OutsideNw
+        10,4: RMCAreaBigredv2OutsideNw
+        10,3: RMCAreaBigredv2OutsideNw
+        10,2: RMCAreaBigredv2OutsideNw
+        10,1: RMCAreaBigredv2OutsideNw
+        10,0: RMCAreaBigredv2OutsideNw
+        11,9: RMCAreaBigredv2OutsideNw
+        11,8: RMCAreaBigredv2OutsideNw
+        11,7: RMCAreaBigredv2OutsideNw
+        11,6: RMCAreaBigredv2OutsideNw
+        11,5: RMCAreaBigredv2OutsideNw
+        11,4: RMCAreaBigredv2OutsideNw
+        11,3: RMCAreaBigredv2OutsideNw
+        11,2: RMCAreaBigredv2OutsideNw
+        11,1: RMCAreaBigredv2OutsideNw
+        11,0: RMCAreaBigredv2OutsideNw
+        12,9: RMCAreaBigredv2OutsideNw
+        12,8: RMCAreaBigredv2OutsideNw
+        12,7: RMCAreaBigredv2OutsideNw
+        12,6: RMCAreaBigredv2OutsideNw
+        12,5: RMCAreaBigredv2OutsideNw
+        12,4: RMCAreaBigredv2OutsideNw
+        12,3: RMCAreaBigredv2OutsideNw
+        12,2: RMCAreaBigredv2OutsideNw
+        12,1: RMCAreaBigredv2OutsideNw
+        12,0: RMCAreaBigredv2OutsideNw
+        13,9: RMCAreaBigredv2OutsideNw
+        13,8: RMCAreaBigredv2OutsideNw
+        13,7: RMCAreaBigredv2OutsideNw
+        13,6: RMCAreaBigredv2OutsideNw
+        13,5: RMCAreaBigredv2OutsideNw
+        13,4: RMCAreaBigredv2OutsideNw
+        13,3: RMCAreaBigredv2OutsideNw
+        13,2: RMCAreaBigredv2OutsideNw
+        13,1: RMCAreaBigredv2OutsideNw
+        13,0: RMCAreaBigredv2OutsideNw
+        14,9: RMCAreaBigredv2OutsideNw
+        14,8: RMCAreaBigredv2OutsideNw
+        14,7: RMCAreaBigredv2OutsideNw
+        14,6: RMCAreaBigredv2OutsideNw
+        14,5: RMCAreaBigredv2OutsideNw
+        14,4: RMCAreaBigredv2OutsideNw
+        14,3: RMCAreaBigredv2OutsideNw
+        14,2: RMCAreaBigredv2OutsideNw
+        14,1: RMCAreaBigredv2OutsideNw
+        14,0: RMCAreaBigredv2OutsideNw
+        15,9: RMCAreaBigredv2OutsideNw
+        15,8: RMCAreaBigredv2OutsideNw
+        15,7: RMCAreaBigredv2OutsideNw
+        15,6: RMCAreaBigredv2OutsideNw
+        15,5: RMCAreaBigredv2OutsideNw
+        15,4: RMCAreaBigredv2OutsideNw
+        15,3: RMCAreaBigredv2OutsideNw
+        15,2: RMCAreaBigredv2OutsideNw
+        15,1: RMCAreaBigredv2OutsideNw
+        15,0: RMCAreaBigredv2OutsideNw
+        16,9: RMCAreaBigredv2OutsideNw
+        16,8: RMCAreaBigredv2OutsideNw
+        16,7: RMCAreaBigredv2OutsideNw
+        16,6: RMCAreaBigredv2OutsideNw
+        16,5: RMCAreaBigredv2OutsideNw
+        16,4: RMCAreaBigredv2OutsideNw
+        16,3: RMCAreaBigredv2OutsideNw
+        16,2: RMCAreaBigredv2OutsideNw
+        16,1: RMCAreaBigredv2OutsideNw
+        16,0: RMCAreaBigredv2OutsideNw
+        17,9: RMCAreaBigredv2OutsideNw
+        17,8: RMCAreaBigredv2OutsideNw
+        17,7: RMCAreaBigredv2OutsideNw
+        17,6: RMCAreaBigredv2OutsideNw
+        17,5: RMCAreaBigredv2OutsideNw
+        17,4: RMCAreaBigredv2OutsideNw
+        17,3: RMCAreaBigredv2OutsideNw
+        17,2: RMCAreaBigredv2OutsideNw
+        17,1: RMCAreaBigredv2OutsideNw
+        17,0: RMCAreaBigredv2OutsideNw
+        18,9: RMCAreaBigredv2OutsideNw
+        18,8: RMCAreaBigredv2OutsideNw
+        18,7: RMCAreaBigredv2OutsideNw
+        18,6: RMCAreaBigredv2OutsideNw
+        18,5: RMCAreaBigredv2OutsideNw
+        18,4: RMCAreaBigredv2OutsideNw
+        18,3: RMCAreaBigredv2OutsideNw
+        18,2: RMCAreaBigredv2OutsideNw
+        18,1: RMCAreaBigredv2OutsideNw
+        18,0: RMCAreaBigredv2OutsideNw
+- proto: CMChairOfficeDark
+  entities:
+  - uid: 96
+    components:
+    - type: Transform
+      pos: 13.5,14.5
+      parent: 1
+  - uid: 97
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 17.5,14.5
+      parent: 1
+- proto: CMDisposalUnit
+  entities:
+  - uid: 92
+    components:
+    - type: Transform
+      pos: 13.5,17.5
+      parent: 1
+- proto: CMDoubleDoorGenericGlass
+  entities:
+  - uid: 76
+    components:
+    - type: Transform
+      pos: 11.5,16.5
+      parent: 1
+  - uid: 77
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 11.5,15.5
+      parent: 1
+- proto: CMFence
+  entities:
+  - uid: 35
+    components:
+    - type: Transform
+      pos: 6.5,10.5
+      parent: 1
+  - uid: 36
+    components:
+    - type: Transform
+      pos: 6.5,9.5
+      parent: 1
+  - uid: 37
+    components:
+    - type: Transform
+      pos: 5.5,9.5
+      parent: 1
+  - uid: 38
+    components:
+    - type: Transform
+      pos: 4.5,9.5
+      parent: 1
+  - uid: 39
+    components:
+    - type: Transform
+      pos: 3.5,9.5
+      parent: 1
+  - uid: 40
+    components:
+    - type: Transform
+      pos: 2.5,9.5
+      parent: 1
+  - uid: 41
+    components:
+    - type: Transform
+      pos: 2.5,8.5
+      parent: 1
+  - uid: 42
+    components:
+    - type: Transform
+      pos: 2.5,7.5
+      parent: 1
+  - uid: 43
+    components:
+    - type: Transform
+      pos: 2.5,6.5
+      parent: 1
+  - uid: 44
+    components:
+    - type: Transform
+      pos: 2.5,5.5
+      parent: 1
+  - uid: 45
+    components:
+    - type: Transform
+      pos: 3.5,5.5
+      parent: 1
+  - uid: 46
+    components:
+    - type: Transform
+      pos: 4.5,5.5
+      parent: 1
+  - uid: 47
+    components:
+    - type: Transform
+      pos: 5.5,5.5
+      parent: 1
+  - uid: 48
+    components:
+    - type: Transform
+      pos: 6.5,5.5
+      parent: 1
+  - uid: 49
+    components:
+    - type: Transform
+      pos: 10.5,5.5
+      parent: 1
+  - uid: 50
+    components:
+    - type: Transform
+      pos: 11.5,5.5
+      parent: 1
+  - uid: 51
+    components:
+    - type: Transform
+      pos: 15.5,5.5
+      parent: 1
+  - uid: 52
+    components:
+    - type: Transform
+      pos: 15.5,4.5
+      parent: 1
+  - uid: 53
+    components:
+    - type: Transform
+      pos: 16.5,5.5
+      parent: 1
+  - uid: 54
+    components:
+    - type: Transform
+      pos: 17.5,5.5
+      parent: 1
+  - uid: 55
+    components:
+    - type: Transform
+      pos: 18.5,5.5
+      parent: 1
+  - uid: 56
+    components:
+    - type: Transform
+      pos: 18.5,9.5
+      parent: 1
+  - uid: 57
+    components:
+    - type: Transform
+      pos: 17.5,9.5
+      parent: 1
+  - uid: 58
+    components:
+    - type: Transform
+      pos: 16.5,9.5
+      parent: 1
+  - uid: 59
+    components:
+    - type: Transform
+      pos: 15.5,9.5
+      parent: 1
+  - uid: 60
+    components:
+    - type: Transform
+      pos: 11.5,9.5
+      parent: 1
+  - uid: 61
+    components:
+    - type: Transform
+      pos: 10.5,9.5
+      parent: 1
+  - uid: 62
+    components:
+    - type: Transform
+      pos: 10.5,10.5
+      parent: 1
+- proto: CMFilingCabinet
+  entities:
+  - uid: 93
+    components:
+    - type: Transform
+      pos: 18.5,16.5
+      parent: 1
+- proto: CMLightFixture
+  entities:
+  - uid: 103
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 18.5,15.5
+      parent: 1
+  - uid: 104
+    components:
+    - type: Transform
+      pos: 13.5,13.5
+      parent: 1
+  - uid: 105
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 1.5,18.5
+      parent: 1
+  - uid: 106
+    components:
+    - type: Transform
+      pos: 5.5,13.5
+      parent: 1
+- proto: CMPaper
+  entities:
+  - uid: 99
+    components:
+    - type: Transform
+      pos: 17.5,13.5
+      parent: 1
+- proto: CMPaperBin10
+  entities:
+  - uid: 100
+    components:
+    - type: Transform
+      pos: 18.5,13.5
+      parent: 1
+- proto: CMPen
+  entities:
+  - uid: 101
+    components:
+    - type: Transform
+      pos: 17.5,13.5
+      parent: 1
+- proto: CMRack
+  entities:
+  - uid: 91
+    components:
+    - type: Transform
+      pos: 12.5,17.5
+      parent: 1
+- proto: CMRodMetal10
+  entities:
+  - uid: 151
+    components:
+    - type: Transform
+      pos: 13.5,11.5
+      parent: 1
+  - uid: 152
+    components:
+    - type: Transform
+      pos: 15.5,11.5
+      parent: 1
+  - uid: 153
+    components:
+    - type: Transform
+      pos: 17.5,11.5
+      parent: 1
+- proto: CMShardGlass
+  entities:
+  - uid: 146
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 5.5,17.5
+      parent: 1
+  - uid: 147
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 14.5,17.5
+      parent: 1
+  - uid: 148
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 15.5,18.5
+      parent: 1
+- proto: CMSheetMetal10
+  entities:
+  - uid: 150
+    components:
+    - type: Transform
+      pos: 15.5,11.5
+      parent: 1
+- proto: CMTable
+  entities:
+  - uid: 84
+    components:
+    - type: Transform
+      pos: 17.5,13.5
+      parent: 1
+  - uid: 85
+    components:
+    - type: Transform
+      pos: 18.5,13.5
+      parent: 1
+  - uid: 86
+    components:
+    - type: Transform
+      pos: 18.5,14.5
+      parent: 1
+  - uid: 87
+    components:
+    - type: Transform
+      pos: 18.5,15.5
+      parent: 1
+  - uid: 88
+    components:
+    - type: Transform
+      pos: 12.5,13.5
+      parent: 1
+  - uid: 89
+    components:
+    - type: Transform
+      pos: 13.5,13.5
+      parent: 1
+  - uid: 90
+    components:
+    - type: Transform
+      pos: 14.5,13.5
+      parent: 1
+- proto: CMVendorCigs
+  entities:
+  - uid: 94
+    components:
+    - type: Transform
+      pos: 18.5,17.5
+      parent: 1
+- proto: CMVentPump
+  entities:
+  - uid: 107
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 14.5,16.5
+      parent: 1
+- proto: CMWallSolarisReinforced
+  entities:
+  - uid: 5
+    components:
+    - type: Transform
+      pos: 0.5,12.5
+      parent: 1
+  - uid: 6
+    components:
+    - type: Transform
+      pos: 1.5,12.5
+      parent: 1
+  - uid: 7
+    components:
+    - type: Transform
+      pos: 2.5,12.5
+      parent: 1
+  - uid: 8
+    components:
+    - type: Transform
+      pos: 3.5,12.5
+      parent: 1
+  - uid: 9
+    components:
+    - type: Transform
+      pos: 4.5,12.5
+      parent: 1
+  - uid: 10
+    components:
+    - type: Transform
+      pos: 5.5,12.5
+      parent: 1
+  - uid: 11
+    components:
+    - type: Transform
+      pos: 6.5,12.5
+      parent: 1
+  - uid: 12
+    components:
+    - type: Transform
+      pos: 2.5,13.5
+      parent: 1
+  - uid: 13
+    components:
+    - type: Transform
+      pos: 2.5,17.5
+      parent: 1
+  - uid: 14
+    components:
+    - type: Transform
+      pos: 2.5,18.5
+      parent: 1
+  - uid: 15
+    components:
+    - type: Transform
+      pos: 3.5,18.5
+      parent: 1
+  - uid: 16
+    components:
+    - type: Transform
+      pos: 6.5,18.5
+      parent: 1
+  - uid: 17
+    components:
+    - type: Transform
+      pos: 7.5,18.5
+      parent: 1
+  - uid: 18
+    components:
+    - type: Transform
+      pos: 10.5,18.5
+      parent: 1
+  - uid: 19
+    components:
+    - type: Transform
+      pos: 11.5,18.5
+      parent: 1
+  - uid: 20
+    components:
+    - type: Transform
+      pos: 12.5,18.5
+      parent: 1
+  - uid: 21
+    components:
+    - type: Transform
+      pos: 13.5,18.5
+      parent: 1
+  - uid: 22
+    components:
+    - type: Transform
+      pos: 11.5,17.5
+      parent: 1
+  - uid: 23
+    components:
+    - type: Transform
+      pos: 10.5,12.5
+      parent: 1
+  - uid: 24
+    components:
+    - type: Transform
+      pos: 11.5,12.5
+      parent: 1
+  - uid: 25
+    components:
+    - type: Transform
+      pos: 12.5,12.5
+      parent: 1
+  - uid: 26
+    components:
+    - type: Transform
+      pos: 13.5,12.5
+      parent: 1
+  - uid: 27
+    components:
+    - type: Transform
+      pos: 17.5,12.5
+      parent: 1
+  - uid: 28
+    components:
+    - type: Transform
+      pos: 18.5,12.5
+      parent: 1
+  - uid: 29
+    components:
+    - type: Transform
+      pos: 17.5,18.5
+      parent: 1
+  - uid: 30
+    components:
+    - type: Transform
+      pos: 18.5,18.5
+      parent: 1
+- proto: CMWallSolarisRock
+  entities:
+  - uid: 3
+    components:
+    - type: Transform
+      pos: 0.5,11.5
+      parent: 1
+  - uid: 4
+    components:
+    - type: Transform
+      pos: 0.5,10.5
+      parent: 1
+- proto: CMWindowSolarisReinforced
+  entities:
+  - uid: 64
+    components:
+    - type: Transform
+      pos: 4.5,18.5
+      parent: 1
+  - uid: 65
+    components:
+    - type: Transform
+      pos: 8.5,18.5
+      parent: 1
+  - uid: 66
+    components:
+    - type: Transform
+      pos: 9.5,18.5
+      parent: 1
+  - uid: 67
+    components:
+    - type: Transform
+      pos: 16.5,18.5
+      parent: 1
+  - uid: 68
+    components:
+    - type: Transform
+      pos: 11.5,13.5
+      parent: 1
+  - uid: 69
+    components:
+    - type: Transform
+      pos: 11.5,14.5
+      parent: 1
+  - uid: 70
+    components:
+    - type: Transform
+      pos: 14.5,12.5
+      parent: 1
+  - uid: 71
+    components:
+    - type: Transform
+      pos: 15.5,12.5
+      parent: 1
+  - uid: 72
+    components:
+    - type: Transform
+      pos: 16.5,12.5
+      parent: 1
+- proto: GasPipeBend
+  entities:
+  - uid: 108
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 12.5,16.5
+      parent: 1
+  - uid: 109
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 12.5,15.5
+      parent: 1
+  - uid: 122
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.5,13.5
+      parent: 1
+  - uid: 123
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 1.5,15.5
+      parent: 1
+  - uid: 144
+    components:
+    - type: Transform
+      pos: 14.5,7.5
+      parent: 1
+  - uid: 145
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 8.5,7.5
+      parent: 1
+- proto: GasPipeStraight
+  entities:
+  - uid: 110
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 13.5,16.5
+      parent: 1
+  - uid: 111
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 9.5,15.5
+      parent: 1
+  - uid: 112
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 10.5,15.5
+      parent: 1
+  - uid: 113
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 11.5,15.5
+      parent: 1
+  - uid: 114
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 7.5,15.5
+      parent: 1
+  - uid: 115
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 6.5,15.5
+      parent: 1
+  - uid: 116
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 5.5,15.5
+      parent: 1
+  - uid: 117
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.5,15.5
+      parent: 1
+  - uid: 118
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.5,15.5
+      parent: 1
+  - uid: 119
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,15.5
+      parent: 1
+  - uid: 120
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 1.5,14.5
+      parent: 1
+  - uid: 121
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 0.5,13.5
+      parent: 1
+  - uid: 125
+    components:
+    - type: Transform
+      pos: 8.5,14.5
+      parent: 1
+  - uid: 126
+    components:
+    - type: Transform
+      pos: 8.5,13.5
+      parent: 1
+  - uid: 127
+    components:
+    - type: Transform
+      pos: 8.5,12.5
+      parent: 1
+  - uid: 128
+    components:
+    - type: Transform
+      pos: 8.5,11.5
+      parent: 1
+  - uid: 129
+    components:
+    - type: Transform
+      pos: 8.5,10.5
+      parent: 1
+  - uid: 130
+    components:
+    - type: Transform
+      pos: 8.5,9.5
+      parent: 1
+  - uid: 131
+    components:
+    - type: Transform
+      pos: 8.5,8.5
+      parent: 1
+  - uid: 132
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 9.5,7.5
+      parent: 1
+  - uid: 133
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 10.5,7.5
+      parent: 1
+  - uid: 134
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 11.5,7.5
+      parent: 1
+  - uid: 135
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 12.5,7.5
+      parent: 1
+  - uid: 136
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 14.5,6.5
+      parent: 1
+  - uid: 137
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 14.5,5.5
+      parent: 1
+  - uid: 138
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 14.5,4.5
+      parent: 1
+  - uid: 139
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 14.5,3.5
+      parent: 1
+  - uid: 140
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 14.5,2.5
+      parent: 1
+  - uid: 141
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 14.5,1.5
+      parent: 1
+  - uid: 142
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 14.5,0.5
+      parent: 1
+  - uid: 143
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 13.5,7.5
+      parent: 1
+- proto: GasPipeTJunction
+  entities:
+  - uid: 124
+    components:
+    - type: Transform
+      pos: 8.5,15.5
+      parent: 1
+- proto: RMCBarrelBlue
+  entities:
+  - uid: 33
+    components:
+    - type: Transform
+      pos: 10.5,17.5
+      parent: 1
+  - uid: 34
+    components:
+    - type: Transform
+      pos: 7.5,17.5
+      parent: 1
+- proto: RMCContainerBlueLeft
+  entities:
+  - uid: 156
+    components:
+    - type: Transform
+      pos: 4.5,7.5
+      parent: 1
+- proto: RMCContainerBlueMiddle
+  entities:
+  - uid: 157
+    components:
+    - type: Transform
+      pos: 5.5,7.5
+      parent: 1
+- proto: RMCContainerBlueRight
+  entities:
+  - uid: 158
+    components:
+    - type: Transform
+      pos: 6.5,7.5
+      parent: 1
+- proto: RMCCrateLarge
+  entities:
+  - uid: 31
+    components:
+    - type: Transform
+      pos: 3.5,13.5
+      parent: 1
+  - uid: 32
+    components:
+    - type: Transform
+      pos: 5.5,13.5
+      parent: 1
+  - uid: 155
+    components:
+    - type: Transform
+      pos: 3.5,8.5
+      parent: 1
+- proto: RMCFoodPacketHotdogTrash
+  entities:
+  - uid: 154
+    components:
+    - type: Transform
+      pos: 7.5,1.5
+      parent: 1
+- proto: RMCLamp
+  entities:
+  - uid: 98
+    components:
+    - type: Transform
+      pos: 18.5,15.5
+      parent: 1
+- proto: RMCPodDoorButton
+  entities:
+  - uid: 102
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 18.5,15
+      parent: 1
+    - type: RMCDoorButton
+      id: Spaceport2
+    - type: Fixtures
+      fixtures: {}
+- proto: RMCRadioHandheldColonyOff
+  entities:
+  - uid: 95
+    components:
+    - type: Transform
+      pos: 14.5,13.5
+      parent: 1
+- proto: RMCShutterAlmayer
+  entities:
+  - uid: 78
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 11.5,14.5
+      parent: 1
+    - type: RMCPodDoor
+      id: Spaceport2
+  - uid: 79
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 11.5,13.5
+      parent: 1
+    - type: RMCPodDoor
+      id: Spaceport2
+  - uid: 80
+    components:
+    - type: Transform
+      pos: 14.5,12.5
+      parent: 1
+    - type: RMCPodDoor
+      id: Spaceport2
+  - uid: 81
+    components:
+    - type: Transform
+      pos: 15.5,12.5
+      parent: 1
+    - type: RMCPodDoor
+      id: Spaceport2
+  - uid: 82
+    components:
+    - type: Transform
+      pos: 16.5,12.5
+      parent: 1
+    - type: RMCPodDoor
+      id: Spaceport2
+  - uid: 83
+    components:
+    - type: Transform
+      pos: 16.5,18.5
+      parent: 1
+    - type: RMCPodDoor
+      id: Spaceport2
+- proto: RMCSolarisRidgeSign
+  entities:
+  - uid: 63
+    components:
+    - type: Transform
+      pos: 11,12
+      parent: 1
+- proto: RMCSpawnerCorpseEngineer
+  entities:
+  - uid: 149
+    components:
+    - type: Transform
+      pos: 16.5,15.5
+      parent: 1
+- proto: RMCWindowFrameSolaris
+  entities:
+  - uid: 73
+    components:
+    - type: Transform
+      pos: 14.5,18.5
+      parent: 1
+  - uid: 74
+    components:
+    - type: Transform
+      pos: 15.5,18.5
+      parent: 1
+  - uid: 75
+    components:
+    - type: Transform
+      pos: 5.5,18.5
+      parent: 1
+...

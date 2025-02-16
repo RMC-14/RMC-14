@@ -1,0 +1,553 @@
+meta:
+  format: 6
+  postmapinit: false
+tilemap:
+  0: Space
+  198: CMFloorPlating
+  884: CMPlanetMarsCave1
+entities:
+- proto: ""
+  entities:
+  - uid: 1
+    components:
+    - type: MetaData
+      name: grid
+    - type: Transform
+    - type: MapGrid
+      chunks:
+        0,0:
+          ind: 0,0
+          tiles: xgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxgAAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxgAAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxgAAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          version: 6
+    - type: Broadphase
+    - type: Physics
+      bodyStatus: InAir
+      angularDamping: 0.05
+      linearDamping: 0.05
+      fixedRotation: False
+      bodyType: Dynamic
+    - type: Fixtures
+      fixtures: {}
+    - type: OccluderTree
+    - type: SpreaderGrid
+    - type: Shuttle
+    - type: GridPathfinding
+    - type: Gravity
+      gravityShakeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/alert.ogg
+    - type: DecalGrid
+      chunkCollection:
+        version: 2
+        nodes: []
+    - type: GridAtmosphere
+      version: 2
+      data:
+        chunkSize: 4
+    - type: GasTileOverlay
+    - type: RadiationGridResistance
+    - type: AreaGrid
+      areaEntities: {}
+      colors: {}
+      areas:
+        4,7: RMCAreaBigredv2OutsideLz1NorthCas
+        3,7: RMCAreaBigredv2OutsideLz1NorthCas
+        2,6: RMCAreaBigredv2OutsideLz1NorthCas
+        3,6: RMCAreaBigredv2OutsideLz1NorthCas
+        4,6: RMCAreaBigredv2OutsideLz1NorthCas
+        5,6: RMCAreaBigredv2OutsideLz1NorthCas
+        6,6: RMCAreaBigredv2OutsideLz1NorthCas
+        7,6: RMCAreaBigredv2OutsideLz1NorthCas
+        9,6: RMCAreaBigredv2OutsideLz1NorthCas
+        9,5: RMCAreaBigredv2OutsideLz1NorthCas
+        9,4: RMCAreaBigredv2OutsideLz1NorthCas
+        9,3: RMCAreaBigredv2OutsideLz1NorthCas
+        9,2: RMCAreaBigredv2OutsideLz1NorthCas
+        8,1: RMCAreaBigredv2OutsideLz1NorthCas
+        8,2: RMCAreaBigredv2OutsideLz1NorthCas
+        8,3: RMCAreaBigredv2OutsideLz1NorthCas
+        8,4: RMCAreaBigredv2OutsideLz1NorthCas
+        8,5: RMCAreaBigredv2OutsideLz1NorthCas
+        7,1: RMCAreaBigredv2OutsideLz1NorthCas
+        7,2: RMCAreaBigredv2OutsideLz1NorthCas
+        7,3: RMCAreaBigredv2OutsideLz1NorthCas
+        7,4: RMCAreaBigredv2OutsideLz1NorthCas
+        7,5: RMCAreaBigredv2OutsideLz1NorthCas
+        6,1: RMCAreaBigredv2OutsideLz1NorthCas
+        6,2: RMCAreaBigredv2OutsideLz1NorthCas
+        6,3: RMCAreaBigredv2OutsideLz1NorthCas
+        6,4: RMCAreaBigredv2OutsideLz1NorthCas
+        6,5: RMCAreaBigredv2OutsideLz1NorthCas
+        5,1: RMCAreaBigredv2OutsideLz1NorthCas
+        5,2: RMCAreaBigredv2OutsideLz1NorthCas
+        5,3: RMCAreaBigredv2OutsideLz1NorthCas
+        5,4: RMCAreaBigredv2OutsideLz1NorthCas
+        5,5: RMCAreaBigredv2OutsideLz1NorthCas
+        4,1: RMCAreaBigredv2OutsideLz1NorthCas
+        4,2: RMCAreaBigredv2OutsideLz1NorthCas
+        4,3: RMCAreaBigredv2OutsideLz1NorthCas
+        4,4: RMCAreaBigredv2OutsideLz1NorthCas
+        4,5: RMCAreaBigredv2OutsideLz1NorthCas
+        3,1: RMCAreaBigredv2OutsideLz1NorthCas
+        3,2: RMCAreaBigredv2OutsideLz1NorthCas
+        3,3: RMCAreaBigredv2OutsideLz1NorthCas
+        3,5: RMCAreaBigredv2OutsideLz1NorthCas
+        3,4: RMCAreaBigredv2OutsideLz1NorthCas
+        2,1: RMCAreaBigredv2OutsideLz1NorthCas
+        2,3: RMCAreaBigredv2OutsideLz1NorthCas
+        2,2: RMCAreaBigredv2OutsideLz1NorthCas
+        2,4: RMCAreaBigredv2OutsideLz1NorthCas
+        2,5: RMCAreaBigredv2OutsideLz1NorthCas
+        1,1: RMCAreaBigredv2OutsideLz1NorthCas
+        1,2: RMCAreaBigredv2OutsideLz1NorthCas
+        1,3: RMCAreaBigredv2OutsideLz1NorthCas
+        1,4: RMCAreaBigredv2OutsideLz1NorthCas
+        1,5: RMCAreaBigredv2OutsideLz1NorthCas
+        0,4: RMCAreaBigredv2OutsideLz1NorthCas
+        9,0: RMCAreaBigredv2OutsideSpacePort
+        8,0: RMCAreaBigredv2OutsideSpacePort
+        7,0: RMCAreaBigredv2OutsideSpacePort
+        6,0: RMCAreaBigredv2OutsideSpacePort
+        5,0: RMCAreaBigredv2OutsideSpacePort
+        4,0: RMCAreaBigredv2OutsideSpacePort
+        3,0: RMCAreaBigredv2OutsideSpacePort
+        2,0: RMCAreaBigredv2OutsideSpacePort
+        1,0: RMCAreaBigredv2OutsideSpacePort
+        0,0: RMCAreaBigredv2OutsideSpacePort
+        0,1: RMCAreaBigredv2OutsideSpacePort
+        0,2: RMCAreaBigredv2OutsideSpacePort
+        0,3: RMCAreaBigredv2OutsideSpacePort
+        5,7: RMCAreaBigredv2Caves
+        6,7: RMCAreaBigredv2Caves
+        7,7: RMCAreaBigredv2Caves
+        8,6: RMCAreaBigredv2Caves
+        8,7: RMCAreaBigredv2Caves
+        9,7: RMCAreaBigredv2Caves
+        9,9: RMCAreaBigredv2Caves
+        9,8: RMCAreaBigredv2Caves
+        8,9: RMCAreaBigredv2Caves
+        8,8: RMCAreaBigredv2Caves
+        7,9: RMCAreaBigredv2Caves
+        7,8: RMCAreaBigredv2Caves
+        6,9: RMCAreaBigredv2Caves
+        6,8: RMCAreaBigredv2Caves
+        5,9: RMCAreaBigredv2Caves
+        5,8: RMCAreaBigredv2Caves
+        4,9: RMCAreaBigredv2Caves
+        4,8: RMCAreaBigredv2Caves
+        3,9: RMCAreaBigredv2Caves
+        3,8: RMCAreaBigredv2Caves
+        2,9: RMCAreaBigredv2Caves
+        2,8: RMCAreaBigredv2Caves
+        2,7: RMCAreaBigredv2Caves
+        1,9: RMCAreaBigredv2Caves
+        1,8: RMCAreaBigredv2Caves
+        1,7: RMCAreaBigredv2Caves
+        1,6: RMCAreaBigredv2Caves
+        0,9: RMCAreaBigredv2Caves
+        0,8: RMCAreaBigredv2Caves
+        0,7: RMCAreaBigredv2Caves
+        0,6: RMCAreaBigredv2Caves
+        9,1: RMCAreaBigredv2Caves
+        0,5: RMCAreaBigredv2Caves
+- proto: CMAirlockMaintLockedColony
+  entities:
+  - uid: 72
+    components:
+    - type: MetaData
+      name: Mining Operations
+    - type: Transform
+      pos: 2.5,0.5
+      parent: 1
+- proto: CMMaskGas
+  entities:
+  - uid: 64
+    components:
+    - type: Transform
+      pos: 4.5,1.5
+      parent: 1
+  - uid: 67
+    components:
+    - type: Transform
+      pos: 2.5,6.5
+      parent: 1
+- proto: CMPackFlare
+  entities:
+  - uid: 71
+    components:
+    - type: Transform
+      pos: 0.5,4.5
+      parent: 1
+- proto: CMRack
+  entities:
+  - uid: 48
+    components:
+    - type: Transform
+      pos: 0.5,4.5
+      parent: 1
+  - uid: 49
+    components:
+    - type: Transform
+      pos: 2.5,6.5
+      parent: 1
+  - uid: 50
+    components:
+    - type: Transform
+      pos: 3.5,7.5
+      parent: 1
+  - uid: 51
+    components:
+    - type: Transform
+      pos: 4.5,7.5
+      parent: 1
+- proto: CMSemioticHazard
+  entities:
+  - uid: 73
+    components:
+    - type: Transform
+      pos: 3.5,0.5
+      parent: 1
+  - uid: 74
+    components:
+    - type: Transform
+      pos: 1.5,0.5
+      parent: 1
+- proto: CMTable
+  entities:
+  - uid: 53
+    components:
+    - type: Transform
+      pos: 4.5,1.5
+      parent: 1
+  - uid: 54
+    components:
+    - type: Transform
+      pos: 5.5,1.5
+      parent: 1
+  - uid: 55
+    components:
+    - type: Transform
+      pos: 6.5,1.5
+      parent: 1
+  - uid: 56
+    components:
+    - type: Transform
+      pos: 5.5,6.5
+      parent: 1
+  - uid: 57
+    components:
+    - type: Transform
+      pos: 6.5,6.5
+      parent: 1
+  - uid: 58
+    components:
+    - type: Transform
+      pos: 7.5,6.5
+      parent: 1
+- proto: CMWallSolarisReinforced
+  entities:
+  - uid: 36
+    components:
+    - type: Transform
+      pos: 0.5,3.5
+      parent: 1
+  - uid: 37
+    components:
+    - type: Transform
+      pos: 0.5,2.5
+      parent: 1
+  - uid: 38
+    components:
+    - type: Transform
+      pos: 0.5,1.5
+      parent: 1
+  - uid: 39
+    components:
+    - type: Transform
+      pos: 0.5,0.5
+      parent: 1
+  - uid: 40
+    components:
+    - type: Transform
+      pos: 1.5,0.5
+      parent: 1
+  - uid: 41
+    components:
+    - type: Transform
+      pos: 3.5,0.5
+      parent: 1
+  - uid: 42
+    components:
+    - type: Transform
+      pos: 4.5,0.5
+      parent: 1
+  - uid: 43
+    components:
+    - type: Transform
+      pos: 5.5,0.5
+      parent: 1
+  - uid: 44
+    components:
+    - type: Transform
+      pos: 6.5,0.5
+      parent: 1
+  - uid: 45
+    components:
+    - type: Transform
+      pos: 7.5,0.5
+      parent: 1
+  - uid: 46
+    components:
+    - type: Transform
+      pos: 8.5,0.5
+      parent: 1
+  - uid: 47
+    components:
+    - type: Transform
+      pos: 9.5,0.5
+      parent: 1
+- proto: CMWallSolarisRock
+  entities:
+  - uid: 3
+    components:
+    - type: Transform
+      pos: 9.5,1.5
+      parent: 1
+  - uid: 4
+    components:
+    - type: Transform
+      pos: 0.5,5.5
+      parent: 1
+  - uid: 5
+    components:
+    - type: Transform
+      pos: 0.5,6.5
+      parent: 1
+  - uid: 6
+    components:
+    - type: Transform
+      pos: 0.5,7.5
+      parent: 1
+  - uid: 7
+    components:
+    - type: Transform
+      pos: 0.5,8.5
+      parent: 1
+  - uid: 8
+    components:
+    - type: Transform
+      pos: 0.5,9.5
+      parent: 1
+  - uid: 9
+    components:
+    - type: Transform
+      pos: 1.5,6.5
+      parent: 1
+  - uid: 10
+    components:
+    - type: Transform
+      pos: 1.5,7.5
+      parent: 1
+  - uid: 11
+    components:
+    - type: Transform
+      pos: 1.5,8.5
+      parent: 1
+  - uid: 12
+    components:
+    - type: Transform
+      pos: 1.5,9.5
+      parent: 1
+  - uid: 13
+    components:
+    - type: Transform
+      pos: 2.5,7.5
+      parent: 1
+  - uid: 14
+    components:
+    - type: Transform
+      pos: 2.5,8.5
+      parent: 1
+  - uid: 15
+    components:
+    - type: Transform
+      pos: 2.5,9.5
+      parent: 1
+  - uid: 16
+    components:
+    - type: Transform
+      pos: 3.5,8.5
+      parent: 1
+  - uid: 17
+    components:
+    - type: Transform
+      pos: 3.5,9.5
+      parent: 1
+  - uid: 18
+    components:
+    - type: Transform
+      pos: 4.5,8.5
+      parent: 1
+  - uid: 19
+    components:
+    - type: Transform
+      pos: 4.5,9.5
+      parent: 1
+  - uid: 20
+    components:
+    - type: Transform
+      pos: 5.5,8.5
+      parent: 1
+  - uid: 21
+    components:
+    - type: Transform
+      pos: 5.5,9.5
+      parent: 1
+  - uid: 22
+    components:
+    - type: Transform
+      pos: 6.5,8.5
+      parent: 1
+  - uid: 23
+    components:
+    - type: Transform
+      pos: 6.5,9.5
+      parent: 1
+  - uid: 24
+    components:
+    - type: Transform
+      pos: 7.5,8.5
+      parent: 1
+  - uid: 25
+    components:
+    - type: Transform
+      pos: 7.5,9.5
+      parent: 1
+  - uid: 26
+    components:
+    - type: Transform
+      pos: 8.5,8.5
+      parent: 1
+  - uid: 27
+    components:
+    - type: Transform
+      pos: 8.5,9.5
+      parent: 1
+  - uid: 28
+    components:
+    - type: Transform
+      pos: 9.5,8.5
+      parent: 1
+  - uid: 29
+    components:
+    - type: Transform
+      pos: 9.5,9.5
+      parent: 1
+  - uid: 30
+    components:
+    - type: Transform
+      pos: 5.5,7.5
+      parent: 1
+  - uid: 31
+    components:
+    - type: Transform
+      pos: 6.5,7.5
+      parent: 1
+  - uid: 32
+    components:
+    - type: Transform
+      pos: 7.5,7.5
+      parent: 1
+  - uid: 33
+    components:
+    - type: Transform
+      pos: 8.5,7.5
+      parent: 1
+  - uid: 34
+    components:
+    - type: Transform
+      pos: 9.5,7.5
+      parent: 1
+  - uid: 35
+    components:
+    - type: Transform
+      pos: 8.5,6.5
+      parent: 1
+- proto: CMWarningCone
+  entities:
+  - uid: 75
+    components:
+    - type: Transform
+      pos: 8.5,2.5
+      parent: 1
+- proto: FoodBoxPizzaFilled
+  entities:
+  - uid: 63
+    components:
+    - type: Transform
+      pos: 5.5,1.5
+      parent: 1
+- proto: OreBox
+  entities:
+  - uid: 52
+    components:
+    - type: Transform
+      pos: 8.5,1.5
+      parent: 1
+- proto: RMCBarricadeWood
+  entities:
+  - uid: 59
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 8.5,5.5
+      parent: 1
+  - uid: 60
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 8.5,4.5
+      parent: 1
+  - uid: 61
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 9.5,2.5
+      parent: 1
+  - uid: 62
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 9.5,3.5
+      parent: 1
+- proto: RMCFlashlight
+  entities:
+  - uid: 65
+    components:
+    - type: Transform
+      pos: 6.5,1.5
+      parent: 1
+- proto: RMCPickaxe
+  entities:
+  - uid: 68
+    components:
+    - type: Transform
+      pos: 4.5,7.5
+      parent: 1
+  - uid: 69
+    components:
+    - type: Transform
+      pos: 7.5,6.5
+      parent: 1
+  - uid: 70
+    components:
+    - type: Transform
+      pos: 6.5,3.5
+      parent: 1
+- proto: RMCToolboxEmergencyFilled
+  entities:
+  - uid: 66
+    components:
+    - type: Transform
+      pos: 5.5,6.5
+      parent: 1
+...
