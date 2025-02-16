@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from CM-SS13 at commit https://github.com/cmss13-devs/cmss13/blob/5a2359bab582e18b3b432539733be04204148a5e/",
+  "size": {
+    "x": 48,
+    "y": 48
+  },
+  "states": [
+    {
+      "name": "washing_machine_open"
+    },
+    {
+      "name": "washing_machine_closed"
+    },
+    {
+      "name": "washing_machine_double_open"
+    },
+    {
+      "name": "washing_machine_double_closed"
+    }
+  ]
+}

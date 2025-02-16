@@ -1,40 +1,44 @@
-﻿- type: gameMap
+﻿# The Almayer map file is currently considered private content by RMC14.
+# The Almayer map file is to serve as a solution for a test fail that would result from the lack of its existence otherwise.
+# If you wish for this file to be public you may recreate them yourself and PR it to the repo.
+- type: gameMap
   id: Almayer
   mapName: Almayer
   mapPath: /Maps/_RMC14/almayer.yml
-  minPlayers: 0
+  minPlayers: 0 # TODO RMC14 74
   maxRandomOffset: 0
   randomRotation: false
+  fallback: true
   stations:
     Almayer:
       stationProto: StandardNanotrasenStation
       components:
       - type: StationNameSetup
-        mapNameTemplate: 'USS Almayer'
+        mapNameTemplate: 'UNS Almayer'
       - type: StationJobs
         availableJobs:
           #Command
           CMCommandingOfficer: [1, 1]
           CMExecutiveOfficer: [1, 1]
-          CMStaffOfficer: [1, 1]
+          CMStaffOfficer: [4, 4]
           CMSeniorEnlistedAdvisor: [2, 2]
 
           #Military Police
           CMChiefMP: [1, 1]
           CMMilitaryWarden: [1, 1]
-          CMMilitaryPolice: [5, 8]
+          CMMilitaryPolice: [7, 10]
 
           #Auxiliary
           CMAuxiliarySupportOfficer: [1, 1]
-#          CMIntelOfficer: [4, 4]
-          CMPilotDropship: [2, 2] # TODO RMC14 1
-#          CMPilotGunship: [1, 1]
+          CMIntelOfficer: [4, 4]
+          CMPilotDropship: [1, 1]
+          CMPilotGunship: [1, 1]
           CMDropshipCrewChief: [2, 2]
 
           #Engineering
-#          CMChiefEngineer: [1, 1]
+          CMChiefEngineer: [1, 1]
 #          CMOrdnanceTech: [3, 3]
-#          CMMaintTech: [1, 1]
+          CMMaintTech: [3, 3]
 
           #Medical
           CMCMO: [1, 1]
@@ -44,13 +48,13 @@
 
           #Requisition
           CMQuartermaster: [1, 1]
-          CMCargoTech: [3, 3]
+          CMCargoTech: [4, 4]
 #          CMMessTech: [1, 1]
 
           #Marines
           CMSquadLeader: [4, 4]
           CMFireteamLeader: [4, 8]
-#          CMSmartGunOperator: [8, 16]
+          CMSmartGunOperator: [4, 4]
           CMWeaponsSpecialist: [4, 4]
           CMCombatTech: [8, 12]
           CMHospitalCorpsman: [8, 16]
@@ -58,3 +62,6 @@
 
           #Civilians
           CMCorrespondent: [2, 2]
+
+          # Other
+          CMLiaison: [1, 1]

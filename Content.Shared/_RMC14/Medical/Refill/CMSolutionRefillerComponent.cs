@@ -3,6 +3,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Medical.Refill;
@@ -32,3 +33,6 @@ public sealed partial class CMSolutionRefillerComponent : Component
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan RechargeAt;
 }
+
+[ByRefEvent]
+public readonly record struct RefilledSolutionEvent();

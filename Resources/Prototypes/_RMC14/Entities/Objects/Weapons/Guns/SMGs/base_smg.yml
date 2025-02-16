@@ -1,0 +1,61 @@
+﻿- type: entity
+  abstract: true
+  parent: CMBaseWeaponRifle
+  id: CMBaseWeaponSMG
+  components:
+  - type: Item
+    size: Large
+  - type: AmmoCounter
+  - type: Gun
+    selectedMode: FullAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    modifiers:
+      FullAuto:
+        maxScatterModifier: 12
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 4
+  - type: WieldableSpeedModifiers
+    base: 0.725
+    light: 1
+    medium: 1
+    heavy: 1
+  - type: WieldDelay
+    baseDelay: 0.2
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
+  - type: GunUnskilledPenalty
+    angleIncrease: 20
+  - type: Tag
+    tags:
+    - RMCWeaponSMG
+  - type: GunDualWielding
+    weaponGroup: Submachinegun
+  - type: GunPointBlank
+  - type: GunGroupPenalty
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/pistol_mouse.rsi
+      state: all
+
+- type: entity
+  parent: BaseCartridgeCaselessRifle
+  id: CMCartridgeSMGBase
+  abstract: true
+  components:
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+
+- type: Tag
+  id: RMCWeaponSMG
+
+- type: Tag
+  id: CMMagazineSmg

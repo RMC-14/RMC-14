@@ -1,6 +1,6 @@
 - type: entity
   parent: CMBaseStructureCorrodible
-  id: RMCShutterBase
+  id: RMCShutterBaseIndestructible
   abstract: true
   name: shutters
   description: That looks like it doesn't open easily.
@@ -50,6 +50,9 @@
       path: /Audio/_RMC14/Machines/blastdoor.ogg
     closeSound:
       path: /Audio/_RMC14/Machines/blastdoor.ogg
+    performCollisionCheck: false
+    canCrush: false
+    canPry: false
   - type: Appearance
   - type: UserInterface
     interfaces:
@@ -58,11 +61,37 @@
   - type: IconSmooth
     key: walls
     mode: NoSprite
-  # TODO RMC14 Add linkable buttons and open/close logic to the shutters, thanks
+  - type: Airtight
+  - type: Occluder
+  - type: MinimapColor
+    color: "#451e5eb8"
+  - type: WallMount
+    arc: 360
+  - type: ApcPowerReceiver
+  - type: RMCPowerReceiver
+    idleLoad: 1
+    activeLoad: 20
+    channel: Environment
+  - type: RMCOpenOnAlertLevel
+
+- type: entity
+  parent: RMCShutterBaseIndestructible
+  id: RMCShutterBase
+  abstract: true
+  components:
+  - type: Door
+    canPry: true
+  - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
+    threshold: 1
 
 - type: entity
   parent: RMCShutterBase
   id: RMCShutterAlmayer
+  components:
+  - type: RMCPodDoor
+  - type: Clickable
+  - type: InteractionOutline
 
 - type: entity
   parent: RMCShutterAlmayer

@@ -1,0 +1,53 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/134b9b90f2d59c11f05e7e3faf06f0a971482809/icons/obj/items/food.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "box"
+    },
+    {
+      "name": "boxopen"
+    },
+    {
+      "name": "do1"
+    },
+    {
+      "name": "do2"
+    },
+    {
+      "name": "do3"
+    },
+    {
+      "name": "do4"
+    },
+    {
+      "name": "do5"
+    },
+    {
+      "name": "do6"
+    },
+    {
+      "name": "fdo1"
+    },
+    {
+      "name": "fdo2"
+    },
+    {
+      "name": "fdo3"
+    },
+    {
+      "name": "fdo4"
+    },
+    {
+      "name": "fdo5"
+    },
+    {
+      "name": "fdo6"
+    }
+  ]
+}

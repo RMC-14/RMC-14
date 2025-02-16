@@ -1,0 +1,13 @@
+- type: constructionGraph
+  parent: RMC
+  id: M357Sawn
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: M357sawn
+          steps:
+            - tool: Sawing
+              doAfter: 2
+    - node: M357sawn
+      entity: WeaponShotgunM357Sawn

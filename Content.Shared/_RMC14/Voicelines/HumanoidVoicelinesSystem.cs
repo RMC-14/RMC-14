@@ -1,5 +1,4 @@
-﻿using System.Collections.Immutable;
-using Content.Shared._RMC14.CCVar;
+﻿using Content.Shared._RMC14.CCVar;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
 using Robust.Shared.Configuration;
@@ -23,14 +22,14 @@ public sealed class HumanoidVoicelinesSystem : EntitySystem
 
     private readonly Dictionary<ProtoId<SpeciesPrototype>, CVarDef> _cVars = new()
     {
-        [ArachnidSpecies] = CMCVars.CMPlayVoicelinesArachnid,
-        [DionaSpecies] = CMCVars.CMPlayVoicelinesDiona,
-        [DwarfSpecies] = CMCVars.CMPlayVoicelinesDwarf,
-        [FelinidSpecies] = CMCVars.CMPlayVoicelinesFelinid,
-        [HumanSpecies] = CMCVars.CMPlayVoicelinesHuman,
-        [MothSpecies] = CMCVars.CMPlayVoicelinesMoth,
-        [ReptilianSpecies] = CMCVars.CMPlayVoicelinesReptilian,
-        [SlimeSpecies] = CMCVars.CMPlayVoicelinesSlime,
+        [ArachnidSpecies] = RMCCVars.CMPlayVoicelinesArachnid,
+        [DionaSpecies] = RMCCVars.CMPlayVoicelinesDiona,
+        [DwarfSpecies] = RMCCVars.CMPlayVoicelinesDwarf,
+        [FelinidSpecies] = RMCCVars.CMPlayVoicelinesFelinid,
+        [HumanSpecies] = RMCCVars.CMPlayVoicelinesHuman,
+        [MothSpecies] = RMCCVars.CMPlayVoicelinesMoth,
+        [ReptilianSpecies] = RMCCVars.CMPlayVoicelinesReptilian,
+        [SlimeSpecies] = RMCCVars.CMPlayVoicelinesSlime,
     };
 
     private EntityQuery<HumanoidAppearanceComponent> _humanoidAppearanceQuery;

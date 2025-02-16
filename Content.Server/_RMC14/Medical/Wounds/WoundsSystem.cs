@@ -15,7 +15,7 @@ namespace Content.Server._RMC14.Medical.Wounds;
 public sealed class WoundsSystem : SharedWoundsSystem
 {
     [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
-    [Dependency] private readonly CMDamageableSystem _cmDamageable = default!;
+    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -83,7 +83,7 @@ public sealed class WoundsSystem : SharedWoundsSystem
                     {
                         var amount = -FixedPoint2.Min(-toHeal, wound.Damage - wound.Healed);
                         toHeal -= amount;
-                        _passiveDamage = _cmDamageable.DistributeHealing(damageableEnt, group.Value, amount, _passiveDamage);
+                        _passiveDamage = _rmcDamageable.DistributeHealing(damageableEnt, group.Value, amount, _passiveDamage);
                     }
                 }
 

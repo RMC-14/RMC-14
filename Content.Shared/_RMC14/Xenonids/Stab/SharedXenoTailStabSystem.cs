@@ -1,17 +1,25 @@
 ﻿using System.Linq;
 using System.Numerics;
+using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Xenonids.GasToggle;
+using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Neurotoxin;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
+using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Configuration;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
@@ -26,8 +34,14 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly INetManager _net = default!;
+
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -35,13 +49,26 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
     private const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque);
 
     protected Box2Rotated LastTailAttack;
+    private int _tailStabMaxTargets;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<XenoTailStabComponent, XenoTailStabEvent>(OnXenoTailStab);
+        SubscribeLocalEvent<XenoTailStabComponent, XenoGasToggleActionEvent>(OnXenoGasToggle);
+
+        Subs.CVar(_config, RMCCVars.RMCTailStabMaxTargets, v => _tailStabMaxTargets = v, true);
     }
+
+    private void OnXenoGasToggle(Entity<XenoTailStabComponent> stab, ref XenoGasToggleActionEvent args)
+    {
+        if (!stab.Comp.Toggle)
+            return;
+
+        stab.Comp.InjectNeuro = !stab.Comp.InjectNeuro;
+    }
+
 
     private void OnXenoTailStab(Entity<XenoTailStabComponent> stab, ref XenoTailStabEvent args)
     {
@@ -82,7 +109,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
         // ray on the right side of the box
         var rightRay = new CollisionRay(boxRotated.BottomRight, (boxRotated.TopRight - boxRotated.BottomRight).Normalized(), AttackMask);
 
-        var hive = CompOrNull<XenoComponent>(stab)?.Hive;
+        var hive = _hive.GetHive(stab.Owner);
 
         bool Ignored(EntityUid uid)
         {
@@ -92,13 +119,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
             if (!HasComp<MobStateComponent>(uid))
                 return true;
 
-            if (TryComp(uid, out XenoComponent? otherXeno) &&
-                hive == otherXeno.Hive)
-            {
-                return true;
-            }
-
-            return false;
+            return _hive.IsMember(uid, hive);
         }
 
         // dont open allocations ahead
@@ -118,7 +139,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                 continue;
 
             actualResults.Add(result);
-            if (actualResults.Count == 3)
+            if (actualResults.Count >= _tailStabMaxTargets)
                 break;
         }
 
@@ -162,9 +183,43 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                     var change = _damageable.TryChangeDamage(hit, modifiedDamage, origin: stab);
 
                     if (change?.GetTotal() > FixedPoint2.Zero)
-                    {
                         _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { hit }, filter);
+
+                    if (stab.Comp.InjectNeuro)
+                    {
+                        if (!TryComp<NeurotoxinInjectorComponent>(stab, out var neuroTox))
+                           continue;
+
+                        if (!EnsureComp<NeurotoxinComponent>(hit, out var neuro))
+                        {
+                            neuro.LastMessage = _timing.CurTime;
+                            neuro.LastAccentTime = _timing.CurTime;
+                            neuro.LastStumbleTime = _timing.CurTime;
+                        }
+                        neuro.NeurotoxinAmount += neuroTox.NeuroPerSecond;
+                        neuro.ToxinDamage = neuroTox.ToxinDamage;
+                        neuro.OxygenDamage = neuroTox.OxygenDamage;
+                        neuro.CoughDamage = neuroTox.CoughDamage;
                     }
+                    else if (stab.Comp.Inject != null &&
+                        _solutionContainer.TryGetInjectableSolution(hit, out var solutionEnt, out _))
+                    {
+                        foreach (var (reagent, amount) in stab.Comp.Inject)
+                        {
+                            _solutionContainer.TryAddReagent(solutionEnt.Value, reagent, amount);
+                        }
+                    }
+
+                    var msg = Loc.GetString("rmc-xeno-tail-stab-self", ("target", hit));
+                    if (_net.IsServer)
+                        _popup.PopupEntity(msg, stab, stab);
+
+                    msg = Loc.GetString("rmc-xeno-tail-stab-target", ("user", stab));
+                    _popup.PopupEntity(msg, stab, hit, PopupType.MediumCaution);
+
+                    msg = Loc.GetString("rmc-xeno-tail-stab-others", ("user", stab), ("target", hit));
+                    var othersFilter = Filter.PvsExcept(stab).RemovePlayerByAttachedEntity(hit);
+                    _popup.PopupEntity(msg, stab, othersFilter, true, PopupType.SmallCaution);
                 }
             }
         }
@@ -176,7 +231,9 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
 
         DoLunge((stab, stab, transform), localPos, "WeaponArcThrust");
 
-        _audio.PlayPredicted(stab.Comp.TailHitSound, stab, stab);
+        var sound = actualResults.Count > 0 ? stab.Comp.SoundHit : stab.Comp.SoundMiss;
+        if (_net.IsServer)
+            _audio.PlayPvs(sound, stab);
 
         var attackEv = new MeleeAttackEvent(stab);
         RaiseLocalEvent(stab, ref attackEv);

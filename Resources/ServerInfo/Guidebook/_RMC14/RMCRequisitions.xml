@@ -1,0 +1,58 @@
+<Document>
+  #Requisitions
+
+  Rise and shine! The Corps have been activated and they need you to keep them in fighting shape. Without additional supply, Marines will be about as menacing as your average paper pusher, so punch in your card and get to work!
+
+  Make your way to the front desk and hit the red button to raise the shutters. Soon, Marines will line up to request various items they were unable to obtain from their barracks. Majority of these requests will be fulfilled using the preloaded Vendors.
+
+  <Box>
+    <GuideEntityEmbed Entity="ColMarTechCargoGuns"/>
+  </Box>
+
+  - [bold]Armaments Attachments[/bold]: Contains attachments for Marines to improve their weapons.
+  - [bold]Automated Armaments[/bold]: Contains additional Weapons, Explosives, Webbings, Bags and Belts, Pouches, and utility gear.
+  - [bold]Automated Munition[/bold]: Contains regular, armour piercing, and extended magazines for the various Marine weapons and pistols. Also contains the special Smart Gun Ammo.
+  - [bold]Surplus Uniform[/bold]: Contains spare uniforms, helmets, armour, and radio encryption keys.
+  - The [bold]Autolathe[/bold] can produce additional medical gear, engineering tools, and some furniture.
+
+  If something is missing from these vendors or crafting machines, there is a good chance you’ll need to acquire it from below deck.
+
+  ##Acquisitions
+
+  This responsibility is often managed by the Quartermaster or Auxiliary Support Officer, your direct superiors, but inexpensive orders are often left for the Cargo Techs. If you’re ever unsure about a purchase, contact them across the Requisitions radio frequency.
+
+  Acquisitions is handled using the ASRS console.
+
+  <Box>
+    <GuideEntityEmbed Entity="CMASRSConsole"/>
+  </Box>
+
+  Everything Marines will need can be found here. To order items, first lower the loading platform using the console, and then order the desired crates of supply one at a time. There is no confirmation signal, you touch it you buy it! Items are categorized by function, and the ones you’ll most frequently visit are:
+
+  - [bold]Ammo[/bold]: Ammunition for the regular Marine guns and pistols, as well as Sentry and Smart Gun supplies.
+  - [bold]Engineering[/bold]: Building materials and Electrical components.
+  - [bold]Explosives[/bold]: Grenades and Breaching charges.
+  - [bold]Gear[/bold]: Binoculars and Flare packs.
+  - [bold]Mortar[/bold]: Mortars and their munitions.
+  - [bold]Weapon Specialist Ammo[/bold]: Ammunition for the highly specialised Marine weapons.
+
+  If you’re unsure of the category an item is in, make use of the search feature to find it quickly.
+
+  After the orders have been placed, raise the loading platform to acquire all the crates of gear and equipment purchased. Open all the crates and offload the gear onto various racks but keep the crates on the loading pit!
+
+  When the supplies are offloaded, remove the invoice from each crate and stamp it with your green approved stamp, then reattach the invoice back to its crate. When the loading platform is lowered again, you’ll receive a small rebate for properly processing the order and recycling the crate.
+
+  Keep the loading platform lowered to make the next order slightly faster, and then remove all nearby tripping hazards.
+
+  ##Post Deployment
+
+  Once the Marine’s orders are fulfilled and the waiting lines are empty, the job is not over. You’ll need to continue acquiring supply and loading it onto the Dropships to ferry it directly to the Marines in the AO. Keep an ear out on radio communications to find out what’s required and make damn sure the empty crates are returned to be refilled!
+
+  To save money, make sure to use up the supply in the preloaded Vendors before acquiring more. Items often requested in bulk, such as regular ammunition and flares, can be looted from the Squad Barracks Vendors and ferried to Marines free of charge.
+
+  There are plenty of free supplies in various locations aboard the Almayer, as well as numerous ways to efficiently load and transport these items. To discover the secrets of the trade, try talking to your direct superiors or the resident mentor, the Senior Enlisted Advisor.
+
+  <Box>
+    <GuideEntityEmbed Entity="CMGuidebookRoleSEA"/>
+  </Box>
+</Document>

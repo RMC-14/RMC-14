@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CMBaseWallXeno
   id: WallXenoResin
   name: resin wall
@@ -23,10 +23,14 @@
   - type: XenoNestSurface
   - type: XenoConstructionPlasmaCost
     plasma: 120
+  - type: XenoStructureUpgradeable
+    to: WallXenoResinThick
+    cost: 50
   - type: MeleeReceivedMultiplier
     xenoDamage:
       types:
         Slash: 225
+  - type: XenoConstructReinforce
 
 - type: entity
   parent: WallXenoResin
@@ -54,6 +58,10 @@
     xenoDamage:
       types:
         Slash: 338
+  - type: XenoConstructionPlasmaCost
+    plasma: 170
+  - type: XenoStructureUpgradeable
+    to: null
 
 - type: entity
   parent: CMBaseWallXeno
@@ -114,6 +122,9 @@
   - type: IconSmooth
     key: walls
     base: membrane
+  - type: XenoStructureUpgradeable
+    to: WallXenoMembraneThick
+    cost: 25
 
 - type: entity
   parent: BaseMembraneXeno
@@ -141,3 +152,26 @@
     xenoDamage:
       types:
         Slash: 300
+  - type: XenoConstructionPlasmaCost
+    plasma: 120
+
+- type: entity
+  parent: WallXenoResin
+  id: WallXenoResinWeak
+  name: weak resin wall
+  description: Weird slime solidified into a wall. It already looks on the verge of collapsing...
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100 # very weak
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: XenoConstruct # would be painful to use if it destroyed weeds
+    destroyWeeds: false
+  - type: TimedDespawn
+    lifetime: 5.0
+  - type: XenoStructureUpgradeable
+    to: null

@@ -26,6 +26,14 @@
     {
       "name": "pilot_chair",
       "directions": 4
+    },
+    {
+      "name": "chair",
+      "directions": 4
+    },
+    {
+      "name": "chair_buckled_overlay",
+      "directions": 4
     }
   ]
 }

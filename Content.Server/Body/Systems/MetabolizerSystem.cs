@@ -1,4 +1,5 @@
 using Content.Server.Body.Components;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Shared._RMC14.Medical.Stasis;
 using Content.Shared.Administration.Logs;
@@ -7,6 +8,7 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Database;
+using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -24,7 +26,7 @@ namespace Content.Server.Body.Systems
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
         [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-        [Dependency] private readonly SolutionContainerSystem _solutionContainerSystem = default!;
+        [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
         [Dependency] private readonly CMStasisBagSystem _cmStasisBag = default!;
 
         private EntityQuery<OrganComponent> _organQuery;
@@ -57,11 +59,11 @@ namespace Content.Server.Body.Systems
         {
             if (!entity.Comp.SolutionOnBody)
             {
-                _solutionContainerSystem.EnsureSolution(entity.Owner, entity.Comp.SolutionName);
+                _solutionContainerSystem.EnsureSolution(entity.Owner, entity.Comp.SolutionName, out _);
             }
             else if (_organQuery.CompOrNull(entity)?.Body is { } body)
             {
-                _solutionContainerSystem.EnsureSolution(body, entity.Comp.SolutionName);
+                _solutionContainerSystem.EnsureSolution(body, entity.Comp.SolutionName, out _);
             }
         }
 
@@ -197,8 +199,7 @@ namespace Content.Server.Body.Systems
                     }
 
                     var actualEntity = ent.Comp2?.Body ?? solutionEntityUid.Value;
-                    var args = new ReagentEffectArgs(actualEntity, ent, solution, proto, mostToRemove,
-                        EntityManager, null, scale);
+                    var args = new EntityEffectReagentArgs(actualEntity, EntityManager, ent, solution, mostToRemove, proto, null, scale);
 
                     // do all effects, if conditions apply
                     foreach (var effect in entry.Effects)

@@ -1,4 +1,0 @@
-- type: vendingMachineInventory
-  id: CMVendorSodaSoviet
-  startingInventory:
-    CMDrinkCanBoda: 30

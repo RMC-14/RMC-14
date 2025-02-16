@@ -5,6 +5,8 @@
   id: CMXenoLarva
   name: Larva
   components:
+  - type: GhostRole
+    name: cm-job-name-xeno-larva
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Larva/larva.rsi
   - type: MobState
@@ -23,9 +25,12 @@
     - ActionXenoRest
     - ActionXenoWatch
     - ActionXenoHide
-    hudOffset: -0.1,0.125
+    hudOffset: -0.1,0.25
     tier: 0
     unlockAt: 0
+    healOffWeeds: true
+    emoteSounds: Larva
+  - type: XenoLight
   - type: XenoPlasma
     maxPlasma: 10
     plasmaRegenOnWeeds: 0.1
@@ -48,10 +53,36 @@
         density: 185
         mask:
         - SmallMobMask
+        - BarbedBarricade
         layer:
         - SmallMobLayer
   - type: Flammable
     canResistFire: false
+  - type: IgnoreBlockPullingDead
   - type: MovementSpeedModifier
     baseWalkSpeed: 3.7
     baseSprintSpeed: 6.7
+  - type: Speech
+    speechSounds: XenonidLarva
+    allowedEmotes: [ "XenoRoar" ]
+  - type: RMCSize
+    size: Small
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: larva
+  - type: Tag
+    tags:
+    - RMCXenoLarva
+
+# For surgeries/failed incubations
+- type: entity
+  id: RMCXenoEmbryo
+  parent: BaseItem
+  name: alien embryo
+  description: All slimy and yucky.
+  components:
+    - type: Sprite
+      sprite: _RMC14/Mobs/Xenonids/Larva/larva.rsi
+      noRot: true
+      state: embryo

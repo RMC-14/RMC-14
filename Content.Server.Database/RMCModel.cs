@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Content.Shared.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace Content.Server.Database;
@@ -37,6 +38,8 @@ public sealed class RMCPatronTier
 
     public bool ShowOnCredits { get; set; }
 
+    public bool GhostColor { get; set; }
+
     public bool NamedItems { get; set; }
 
     public bool Figurines { get; set; }
@@ -66,6 +69,7 @@ public sealed class RMCPatron
     public int TierId { get; set; }
 
     public RMCPatronTier Tier { get; set; } = default!;
+    public int? GhostColor { get; set; } = default!;
     public RMCPatronLobbyMessage? LobbyMessage { get; set; } = default!;
     public RMCPatronRoundEndMarineShoutout? RoundEndMarineShoutout { get; set; } = default!;
     public RMCPatronRoundEndXenoShoutout? RoundEndXenoShoutout { get; set; } = default!;
@@ -104,6 +108,9 @@ public sealed class RMCNamedItems
 
     [StringLength(20)]
     public string? ArmorName { get; set; } = default!;
+
+    [StringLength(20)]
+    public string? SentryName { get; set; } = default!;
 }
 
 [Table("rmc_linked_accounts_logs")]
@@ -172,4 +179,48 @@ public sealed class RMCRoleTimerExclude
     public Player Player { get; set; } = default!;
 
     public string Tracker { get; set; } = default!;
+}
+
+[Table("rmc_squad_preferences")]
+public sealed class RMCSquadPreference
+{
+    [Key, ForeignKey("Player")]
+    public int ProfileId { get; set; }
+
+    public Profile Profile { get; set; } = default!;
+
+    public string? Squad { get; set; } // EntProtoId<SquadTeamComponent>
+}
+
+[Table("rmc_commendations")]
+public sealed class RMCCommendation
+{
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id;
+
+    [ForeignKey("Giver")]
+    public Guid GiverId { get; set; }
+
+    public Player Giver { get; set; } = default!;
+
+    [ForeignKey("Receiver")]
+    public Guid ReceiverId { get; set; }
+
+    public Player Receiver { get; set; } = default!;
+
+    [ForeignKey("Round")]
+    public int RoundId { get; set; }
+
+    public Round Round { get; set; } = default!;
+
+    public string GiverName { get; set; } = string.Empty;
+
+    public string ReceiverName { get; set; } = string.Empty;
+
+    public string Name { get; set; } = string.Empty;
+
+    public string Text { get; set; } = string.Empty;
+
+    public CommendationType Type { get; set; }
 }

@@ -29,6 +29,7 @@ public sealed class UniqueActionSystem : EntitySystem
 
     public override void Shutdown()
     {
+        base.Shutdown();
         CommandBinds.Unregister<UniqueActionSystem>();
     }
 
@@ -51,11 +52,7 @@ public sealed class UniqueActionSystem : EntitySystem
     private void TryUniqueAction(EntityUid userUid)
     {
         if (!_entityManager.TryGetComponent(userUid, out HandsComponent? handsComponent) ||
-            !_entityManager.TryGetComponent(handsComponent.ActiveHandEntity,
-                out UniqueActionComponent? uniqueActionComponent))
-            return;
-
-        if (!uniqueActionComponent.Running)
+            handsComponent.ActiveHandEntity == null)
             return;
 
         TryUniqueAction(userUid, handsComponent.ActiveHandEntity.Value);

@@ -6,6 +6,7 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
+using Content.Shared.Strip.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 
@@ -32,6 +33,8 @@ public abstract class ClothingSystem : EntitySystem
 
         SubscribeLocalEvent<ClothingComponent, ClothingEquipDoAfterEvent>(OnEquipDoAfter);
         SubscribeLocalEvent<ClothingComponent, ClothingUnequipDoAfterEvent>(OnUnequipDoAfter);
+
+        SubscribeLocalEvent<ClothingComponent, BeforeItemStrippedEvent>(OnItemStripped);
     }
 
     private void OnUseInHand(Entity<ClothingComponent> ent, ref UseInHandEvent args)
@@ -120,6 +123,12 @@ public abstract class ClothingSystem : EntitySystem
             }
             _humanoidSystem.SetLayerVisibility(equipee, layer, shouldLayerShow);
         }
+
+        foreach (HumanoidVisualLayers appearanceLayer in appearanceLayers) // RMC14
+        {
+            if (!layers.Contains(appearanceLayer))
+                _humanoidSystem.SetLayerVisibility(equipee, appearanceLayer, true);
+        }
     }
 
     protected virtual void OnGotEquipped(EntityUid uid, ClothingComponent component, GotEquippedEvent args)
@@ -162,7 +171,7 @@ public abstract class ClothingSystem : EntitySystem
         if (args.Current is ClothingComponentState state)
         {
             SetEquippedPrefix(uid, state.EquippedPrefix, component);
-            if (component.InSlot != null && _containerSys.TryGetContainingContainer(uid, out var container))
+            if (component.InSlot != null && _containerSys.TryGetContainingContainer((uid, null, null), out var container))
             {
                 CheckEquipmentForLayerHide(uid, container.Owner);
             }
@@ -192,7 +201,12 @@ public abstract class ClothingSystem : EntitySystem
             _handsSystem.TryPickup(args.User, ent);
     }
 
-    private void CheckEquipmentForLayerHide(EntityUid equipment, EntityUid equipee)
+    private void OnItemStripped(Entity<ClothingComponent> ent, ref BeforeItemStrippedEvent args)
+    {
+        args.Additive += ent.Comp.StripDelay;
+    }
+
+    public void CheckEquipmentForLayerHide(EntityUid equipment, EntityUid equipee)
     {
         if (TryComp(equipment, out HideLayerClothingComponent? clothesComp) && TryComp(equipee, out HumanoidAppearanceComponent? appearanceComp))
             ToggleVisualLayers(equipee, clothesComp.Slots, appearanceComp.HideLayersOnEquip);
@@ -233,7 +247,6 @@ public abstract class ClothingSystem : EntitySystem
         clothing.ClothingVisuals = otherClothing.ClothingVisuals;
         clothing.EquippedPrefix = otherClothing.EquippedPrefix;
         clothing.RsiPath = otherClothing.RsiPath;
-        clothing.FemaleMask = otherClothing.FemaleMask;
 
         _itemSys.VisualsChanged(uid);
         Dirty(uid, clothing);

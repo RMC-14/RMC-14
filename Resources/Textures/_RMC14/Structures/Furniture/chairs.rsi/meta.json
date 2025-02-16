@@ -72,6 +72,10 @@
       "directions": 4
     },
     {
+      "name": "stool",
+      "directions": 4
+    },
+    {
       "name": "wooden_chair",
       "directions": 4
     },

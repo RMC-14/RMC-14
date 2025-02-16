@@ -1,12 +1,12 @@
 ﻿using System.Text.Json.Serialization;
-using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.EntityEffects;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Chemistry.Effects;
 
-public sealed partial class RemoveDamage : ReagentEffect
+public sealed partial class RemoveDamage : EntityEffect
 {
     [DataField(required: true)]
     [JsonPropertyName("group")]
@@ -20,12 +20,12 @@ public sealed partial class RemoveDamage : ReagentEffect
         return $"Removes all {type.LocalizedName} damage";
     }
 
-    public override void Effect(ReagentEffectArgs args)
+    public override void Effect(EntityEffectBaseArgs args)
     {
-        if (args.Scale < 0.95f)
+        if (args is EntityEffectReagentArgs reagent && reagent.Scale < 0.95f)
             return;
 
-        if (!args.EntityManager.TryGetComponent(args.SolutionEntity, out DamageableComponent? damageable))
+        if (!args.EntityManager.TryGetComponent(args.TargetEntity, out DamageableComponent? damageable))
             return;
 
         var prototypes = IoCManager.Resolve<IPrototypeManager>();
@@ -40,6 +40,6 @@ public sealed partial class RemoveDamage : ReagentEffect
         }
 
         args.EntityManager.System<DamageableSystem>()
-            .TryChangeDamage(args.SolutionEntity, damage, true, interruptsDoAfters: false);
+            .TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
     }
 }

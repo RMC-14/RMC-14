@@ -1,0 +1,252 @@
+# ENGINEERING
+
+# Tools
+- type: entity
+  parent: ColMarTechBaseAnchorable
+  id: CMVendorTool
+  name: tool storage machine
+  description: A large storage machine containing various tools and devices for general repair.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/tool.rsi
+    layers:
+    - state: "off"
+      map: [ "enum.VendingMachineVisualLayers.Base" ]
+    - state: "normal-unshaded"
+      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+      shader: unshaded
+  - type: AccessReader
+    access: [["CMAccessCombatTechPrep"], ["CMAccessEngineering"], ["CMAccessColonyEngineering"], ["CMAccessColonyPublic"]] # TODO RMC14 remove public when surv jobs and hacking are in
+  - type: CMAutomatedVendor
+    sections:
+    - name: Equipment
+      entries:
+      - id: RMCFlashlight
+        amount: 4
+      - id: RMCHardhatBlue
+        amount: 4
+      - id: CMHandsInsulated
+        amount: 4
+      - id: CMBeltUtility
+        amount: 4
+      - id: ClothingEyesGlassesMeson
+        amount: 4
+      - id: ClothingHeadHatWelding
+        amount: 4
+      - id: RMCEngineerKit
+        amount: 2
+    - name: Scanners
+      entries:
+      #Atmos scanner
+      #Demo scanner
+      #Meson scanner
+      #Reagent scanner
+      - id: CMTRayScanner
+        amount: 4
+    - name: Tools
+      entries:
+      - id: CMCrowbar
+        amount: 8
+      - id: CMWelder
+        amount: 8
+      - id: CMWelderSmall
+        amount: 4
+      - id: CMScrewdriver
+        amount: 8
+      - id: CMWirecutter
+        amount: 8
+      - id: CMWrench
+        amount: 8
+
+# Circuits
+- type: entity
+  parent: CMVendorTool
+  id: CMVendorCircuits
+  name: circuit board vendor
+  description: A safe storage for pre-programmed circuit boards, it has an internal gyroscope to keep any external force from moving the boards, thick insulation and a custom 2.1mm UPS port for charging various We-Ya exclusive devices (sold separately).
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/robotics.rsi
+  - type: CMAutomatedVendor
+    sections:
+    - name: Circuitboards
+      entries:
+      - id: FireAlarmElectronics
+        amount: 5
+      - id: CMAPCElectronics
+        amount: 6
+#      - id: CMAutolatheMachineCircuitboard
+#        amount: 2 # TODO RMC14
+      - id: TelecomServerCircuitboard
+        amount: 1
+      - id: CrewMonitoringComputerCircuitboard
+        amount: 2
+      - id: IDComputerCircuitboard
+        amount: 2
+      - id: StationRecordsComputerCircuitboard
+        amount: 2
+#     - id: Supply ordering console
+#     - id: Reserach data terminal
+#     - id: CMPortableGeneratorPacmanMachineCircuitBoard
+#       amount: 5
+      - id: CMSMESMachineCircuitboard
+        amount: 2
+#     - id: Air alarm
+#     - id: security camera monitor
+#     - id: television set
+#     - id: station alerts
+#     - id: arcade
+#     - id: atmospheric monitor
+
+
+# Electronics
+- type: entity
+  parent: CMVendorTool
+  id: CMVendorElectronics
+  name: electronics vendor
+  description: Spare tool vendor. What? Did you expect some witty description?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/engivend.rsi
+  - type: CMAutomatedVendor
+    sections:
+    - name: Tools
+      entries:
+      - id: RMCCableCoil
+        amount: 6
+      - id: CMMultitool
+        amount: 6
+    - name: Circuitboards
+      entries:
+      - id: DoorElectronics
+        amount: 8
+      - id: CMAPCElectronics
+        amount: 8
+    - name: Batteries
+      entries:
+      - id: RMCPowerCellHigh
+        amount: 6
+      - id: RMCPowerCell
+        amount: 14
+
+
+# Components
+- type: entity
+  parent: CMVendorTool
+  id: CMVendorComponent
+  name: component storage machine
+  description: A large storage machine containing various components.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/engi.rsi
+  - type: CMAutomatedVendor
+    sections:
+    - name: Assembly Components
+      entries:
+      - id: Igniter
+        amount: 8
+      - id: TimerTrigger
+        amount: 4
+      - id: ProximitySensor
+        amount: 4
+      - id: RemoteSignaller
+        amount: 4
+    - name: Container
+      entries:
+      - id: RMCBucket
+        amount: 6
+      - id: CMBucketMop
+        amount: 2
+    - name: Stock Parts
+      entries:
+      - id: CMStockPartMatterBin
+        amount: 8
+      - id: CMStockPartManipulatorMicro
+        amount: 8
+      - id: CMStockPartCapacitor
+        amount: 8
+    #TODO Console screen, scanning module
+
+
+# Science
+- type: entity
+  parent: ColMarTechBaseAnchorable
+  id: CMVendorScience
+  name: We-Ya SciVend
+  description: Vendor containing basic equipment for your experiments.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/robotics.rsi
+    layers:
+    - state: "off"
+      map: [ "enum.VendingMachineVisualLayers.Base" ]
+    - state: "normal-unshaded"
+      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+      shader: unshaded
+  - type: AccessReader
+    access: [["CMAccessResearch"]]
+  - type: CMAutomatedVendor
+    sections:
+    - name: Equipment
+      entries:
+      - id: ClothingHeadHatHoodBioScientist
+        amount: 2
+      - id: ClothingOuterBioScientist
+        amount: 2
+      - id: CMJumpsuitResearch
+        amount: 2
+    - name: Assembly Components
+      entries:
+      - id: Igniter
+        amount: 8
+      - id: ProximitySensor
+        amount: 4
+      - id: RemoteSignaller
+        amount: 4
+      # Tank transfer valve
+      # Timer
+
+
+# Robotics
+- type: entity
+  parent: CMVendorScience
+  id: CMVendorRobotics
+  name: Robotech Deluxe
+  description: All the tools you need to create your own robot army.
+  components:
+  - type: CMAutomatedVendor
+    sections:
+    - name: Equipment
+      entries:
+      # Labcoat
+      - id: CMMaskGasMedical
+        amount: 2
+      # Roboticist Jumpsuit
+    - name: Tools
+      entries:
+      - id: RMCCableCoil
+        amount: 4
+      - id: SawElectric
+        amount: 2
+      - id: CMCrowbar
+        amount: 2
+      - id: CMScalpel
+        amount: 2
+      - id: CMScrewdriver
+        amount: 2
+    - name: Assembly Components
+      entries:
+      - id: CMFlash
+        amount: 4
+      - id: RMCPowerCellHigh
+        amount: 4
+      - id: ProximitySensor
+        amount: 4
+      - id: RemoteSignaller
+        amount: 4
+    - name: Miscellaneous
+      entries:
+      - id: NitrousOxideTankFilled
+        amount: 2
+      - id: CMHealthAnalyzer
+        amount: 2

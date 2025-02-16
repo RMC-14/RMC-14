@@ -10,6 +10,10 @@
   - type: Storage
     grid:
     - 0,0,14,1 # 15
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMSatchel
@@ -18,10 +22,56 @@
   description: A specially-designed smock with pockets for all your sniper needs.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/smock.rsi
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/jungle-classic.rsi
   - type: Storage
     grid:
     - 0,0,20,1 # 21, Satchel but with backpack capacity
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/jungle-classic.rsi
+      Desert: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/snow-urban-desert.rsi
+      Snow: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/snow-urban-desert.rsi
+      Classic: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/jungle-classic.rsi
+      Urban: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/snow-urban-desert.rsi
+
+- type: entity
+  parent: CMSatchel
+  id: RMCBackpackScout
+  name: M68 thermal cloak
+  description: The lightweight thermal dampeners and optical camouflage provided by this cloak are weaker than those found in standard UNMC ghillie suits. In exchange, the cloak can be worn over combat armor and offers the wearer high maneuverability and adaptability to many environments.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/scout_cloak.rsi
+  - type: Storage
+    grid:
+    - 0,0,20,1 # 21, Satchel but with backpack capacity
+  - type: ClothingRequireEquipped
+    whitelist:
+      tags:
+      - RMCScoutArmor
+    denyReason: rmc-wear-scout-armor-required
+  - type: ThermalCloak
+    opacity: 0.03 # Put to 0.03 for testing
+    restrictWeapons: true
+    cloakedHideLayers:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Tail
+    - Snout # I don't know if this is hugely problematic but better safe than sorry
+    whitelist:
+      components:
+      - ScoutWhitelist
+    cloakSound:
+      path: /Audio/_RMC14/Effects/Cloak/cloak_scout_on.ogg
+      params:
+        variation: 0.09
+    uncloakSound:
+      path: /Audio/_RMC14/Effects/Cloak/cloak_scout_off.ogg
+      params:
+        variation: 0.09
+  - type: Corrodible
+    isCorrodible: false
 
 - type: entity
   parent: CMSatchel
@@ -51,25 +101,104 @@
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/security.rsi
 
 - type: entity
+  parent: CMSatchelSecurity
+  id: CMSatchelSecurityFilledProvost
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCArmorProvostFlexi # TODO RMC14 provost office handheld beacon
+    - id: CMFlash # TODO RMC14 remove once provost jacket has it
+    - id: RMCHandcuffs # TODO RMC14 remove once provost jacket has it
+
+- type: entity
+  parent: CMSatchelSecurity
+  id: CMSatchelSecurityFilledProvostDeputyMarshal
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
+    - id: CMFlash # TODO RMC14 remove once provost jacket has it
+    - id: RMCHandcuffs # TODO RMC14 remove once provost jacket has it
+
+- type: entity
+  parent: CMSatchelSecurity
+  id: CMSatchelSecurityFilledProvostMarshal
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
+    - id: RMCTabletCO
+    - id: CMFlash # TODO RMC14 remove once provost jacket has it
+    - id: RMCHandcuffs # TODO RMC14 remove once provost jacket has it
+
+- type: entity
+  parent: CMSatchelSecurity
+  id: CMSatchelSecurityFilledProvostTeamLeader
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
+    - id: RMCTabletCO
+
+- type: entity
+  parent: CMSatchelSecurity
+  id: CMSatchelSecurityFilledProvostEnforcer
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCPacketGrenadeFlashBang
+    - id: RMCWeaponTaser # TODO RMC14 4 tear gas grenades
+
+- type: entity
   parent: CMSatchel
   id: CMSatchelMarine
   name: Marine satchel
   description: A heavy-duty satchel carried by some Marine soldiers and support personnel.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/standard.rsi
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/standard/jungle-desert-classic.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Back/Satchels/Marines/standard/jungle-desert-classic.rsi
+      Desert: _RMC14/Objects/Clothing/Back/Satchels/Marines/standard/jungle-desert-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Back/Satchels/Marines/standard/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Back/Satchels/Marines/standard/jungle-desert-classic.rsi
+      Urban: _RMC14/Objects/Clothing/Back/Satchels/Marines/standard/snow-urban.rsi
 
 - type: entity
   parent: CMSatchelMarine
   id: CMSatchelMarineIntel
-  name: Marine lightweight expedition pack
+  name: UNMC lightweight expedition pack
   description: A heavy-duty IMP based backpack that can be slung around the front or to the side, and can quickly be accessed with only one hand. Usually issued to Marine intelligence officers.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/big.rsi
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/big/jungle-desert-classic.rsi
   - type: Storage
     grid:
     - 0,0,19,1 # 20
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Back/Satchels/Marines/big/jungle-desert-classic.rsi
+      Desert: _RMC14/Objects/Clothing/Back/Satchels/Marines/big/jungle-desert-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Back/Satchels/Marines/big/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Back/Satchels/Marines/big/jungle-desert-classic.rsi
+      Urban: _RMC14/Objects/Clothing/Back/Satchels/Marines/big/snow-urban.rsi
+
+- type: entity
+  parent: CMSatchelMarineIntel
+  id: RMCSatchelMarineIntelChestrig
+  name: UNMC expedition chestrig
+  description: A heavy-duty IMP based chestrig, can quickly be accessed with only one hand. Usually issued to UNMC intelligence officers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Chestrigs/intel/desert.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Back/Chestrigs/intel/jungle-classic.rsi
+      Desert: _RMC14/Objects/Clothing/Back/Chestrigs/intel/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Back/Chestrigs/intel/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Back/Chestrigs/intel/jungle-classic.rsi
+      Urban: _RMC14/Objects/Clothing/Back/Chestrigs/intel/snow-urban.rsi
 
 - type: entity
   parent: CMSatchelMarineIntel
@@ -88,7 +217,14 @@
   description: A heavy-duty satchel used by Marine medics. It sacrifices capacity for usability. A small patch is sewn to the top flap.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/medic.rsi
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/medic/jungle-desert-classic.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Back/Satchels/Marines/medic/jungle-desert-classic.rsi
+      Desert: _RMC14/Objects/Clothing/Back/Satchels/Marines/medic/jungle-desert-classic.rsi
+      Snow: _RMC14/Objects/Clothing/Back/Satchels/Marines/medic/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Back/Satchels/Marines/medic/jungle-desert-classic.rsi
+      Urban: _RMC14/Objects/Clothing/Back/Satchels/Marines/medic/snow-urban.rsi
 
 - type: entity
   parent: CMSatchelMarine
@@ -97,7 +233,14 @@
   description: A heavy-duty chestrig used by some Marine technicians.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/techi.rsi
+    sprite: _RMC14/Objects/Clothing/Back/Chestrigs/tech/jungle-classic.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Back/Chestrigs/tech/jungle-classic.rsi
+      Desert: _RMC14/Objects/Clothing/Back/Chestrigs/tech/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Back/Chestrigs/tech/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Back/Chestrigs/tech/jungle-classic.rsi
+      Urban: _RMC14/Objects/Clothing/Back/Chestrigs/tech/snow-urban.rsi
 
 - type: entity
   parent: CMSatchel
@@ -118,3 +261,151 @@
       tags:
       - Grenade
   - type: FixedItemSizeStorage
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelWelder
+  name: UNMC technician welder-satchel
+  description: A specialized satchel worn by UNMC technicians and engineers. It carries two small fuel tanks for quick welder refueling and use.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/welder.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,12,1
+  - type: ExaminableSolution
+    solution: tank
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 250 # TODO RMC14 100 when welders are fixed
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 250
+  - type: ReagentTank
+    tankType: Fuel
+  - type: DrainableSolution
+    solution: tank
+  - type: SolutionTransfer
+    transferAmount: 50
+    maxTransferAmount: 100
+    minTransferAmount: 10
+    canChangeTransferAmount: true
+  - type: RefillableSolution
+    solution: tank
+  - type: DrawableSolution
+    solution: tank
+  - type: RMCSolutionTransferWhitelist
+    popup: rmc-solution-transfer-whitelist-failed-not-welding-tank
+    whitelist:
+      components:
+      - Welder
+      tags:
+      - RMCTankFuel
+
+- type: entity
+  parent: RMCSatchelWelder
+  id: RMCSatchelWelderChestrig
+  name: technician welder chestrig
+  description: A specialized Chestrig worn by technicians and engineers. It carries one medium fuel tank for quick welder refueling and use.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/welder_chestrig.rsi
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelDemoSpec
+  name: UNMC IMP M22 rocket bags
+  description: A specially-designed backpack that fits to the IMP mounting frame on standard UNMC infantry armor. It's made of two easily-accessible, waterproofed reinforced tubes and one smaller satchel slung at the bottom. The two silos are for rockets, but no one is stopping you from cramming other things in there.
+  components:
+  - type: ExplosionResistance
+    damageCoefficient: 0
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/rocketpack.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,20,1 # same as backpack, up to 7 normal size rockets
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelBureauObserverFill
+  suffix: Bureau Observer, Filled
+  components:
+  - type: StorageFill
+    contents: # TODO RMC14 film cartridge
+    - id: RMCBinoculars
+    - id: CMPaper
+    - id: CMFolderWhite
+    - id: CMPenClicky
+    - id: RMCRadioHandheldColonyOff
+    - id: CMClipboard # TODO RMC14 tape recorder
+    - id: CMCrowbar
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelICBLiaisonFill
+  suffix: Interstellar Commerce Bureau Liaison, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPenClicky
+    - id: CMPaper
+    - id: CMPaper
+    - id: RMCRadioHandheldColonyOff
+    - id: CMCrowbar
+
+- type: entity
+  parent: CMSatchel
+  id: RMCBackpackRTO
+  name: UNMC radio telephone pack
+  description: A heavy-duty pack, used for telecommunications between central command. Commonly carried by RTOs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto.rsi
+    layers:
+    - state: icon
+      map: [ "base" ]
+  - type: CMStorageVisualizer
+    storageClosed: null
+    storageOpen: null
+  - type: RotaryPhone
+    category: Marine
+  - type: RotaryPhoneBackpack
+  - type: UserInterface
+    interfaces:
+      enum.RMCTelephoneUiKey.Key:
+        type: RMCTelephoneBui
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: GenericVisualizer
+    visuals:
+      enum.RotaryPhoneLayers.Layer:
+        base:
+          Base: { state: icon }
+          Ring: { state: ring }
+          Ear: { state: ear }
+  - type: Undisposable
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelLightpack #ERT pack
+  name: lightweight combat pack
+  description: A small, lightweight pack for expeditions and short-range operations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack.rsi
+
+- type: entity
+  parent: RMCSatchelWelder
+  id: RMCSatchelLightpackWelder
+  name: lightweight technician welderpack
+  description: A small, lightweight pack for expeditions and short-range operations. Features a small fueltank for quick blowtorch refueling.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack_welder.rsi

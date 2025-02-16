@@ -21,15 +21,11 @@
       collection: FootstepCatwalk
       params:
         volume: 8
-  - type: Construction
-    graph: CMCatwalk
-    node: Catwalk
   - type: Tag
     tags:
-      - Catwalk
+    - Catwalk
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Metallic
   - type: Destructible
     thresholds:
     - trigger:
@@ -63,3 +59,93 @@
   components:
   - type: Sprite
     state: prison_catwalk
+
+- type: entity
+  parent: CMCatwalk
+  id: RMCCatwalkKutjevo
+  components:
+  - type: Sprite
+    state: kutjevo_catwalk
+
+# Monorail
+
+- type: entity
+  id: RMCMonorailStraight
+  name: monorail track
+  description: The rail system for the CORSAT monorail.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Clickable
+  - type: Sprite
+    sprite: _RMC14/Structures/catwalk.rsi
+    drawdepth: FloorTiles
+    state: monorailStraight
+    noRot: false
+  - type: Icon
+    sprite: _RMC14/Structures/catwalk.rsi
+    state: monorailStraight
+  - type: Transform
+    anchored: true
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepCatwalk
+      params:
+        volume: 8
+  - type: Tag
+    tags:
+    - Catwalk
+
+- type: entity
+  parent: RMCMonorailStraight
+  id: RMCMonorailBend
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/catwalk.rsi
+    drawdepth: FloorTiles
+    state: monorailBend
+  - type: Icon
+    sprite: _RMC14/Structures/catwalk.rsi
+    state: monorailBend
+
+# Minecart Track
+
+- type: entity
+  parent: RMCMonorailStraight
+  id: RMCRailroadStraight
+  name: rails
+  description: Minecarts and rail vehicles go on these.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/catwalk.rsi
+    drawdepth: FloorTiles
+    state: railroadStraight
+  - type: Icon
+    sprite: _RMC14/Structures/catwalk.rsi
+    state: railroadStraight
+
+- type: entity
+  parent: RMCRailroadStraight
+  id: RMCRailroadBend
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/catwalk.rsi
+    drawdepth: FloorTiles
+    state: railroadBend
+  - type: Icon
+    sprite: _RMC14/Structures/catwalk.rsi
+    state: railroadBend
+
+- type: entity
+  parent: RMCRailroadStraight
+  id: RMCRailroadBumper
+  name: rail bumpers
+  description: This (usually) stops minecarts and other rail vehicles at the end of a line of track.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/catwalk.rsi
+    drawdepth: FloorTiles
+    state: railroadBumper
+  - type: Icon
+    sprite: _RMC14/Structures/catwalk.rsi
+    state: railroadBumper

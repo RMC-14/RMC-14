@@ -1,0 +1,991 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f377f35b62161666d93e455b612e919631042785/icons/turf/areas.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "blank"
+    },
+    {
+      "name": "bridge"
+    },
+    {
+      "name": "unknown"
+    },
+    {
+      "name": "engine"
+    },
+    {
+      "name": "engine_waste"
+    },
+    {
+      "name": "prototype_engine"
+    },
+    {
+      "name": "engine_control"
+    },
+    {
+      "name": "engine_monitoring"
+    },
+    {
+      "name": "teleporter"
+    },
+    {
+      "name": "chapel"
+    },
+    {
+      "name": "chapeloffice"
+    },
+    {
+      "name": "engine_storage"
+    },
+    {
+      "name": "engine_hallway"
+    },
+    {
+      "name": "yellow"
+    },
+    {
+      "name": "ass_line"
+    },
+    {
+      "name": "green"
+    },
+    {
+      "name": "security"
+    },
+    {
+      "name": "sec_prison"
+    },
+    {
+      "name": "sec_hos"
+    },
+    {
+      "name": "security_sub"
+    },
+    {
+      "name": "toxlab"
+    },
+    {
+      "name": "xeno_lab"
+    },
+    {
+      "name": "xeno_f_lab"
+    },
+    {
+      "name": "xeno_f_store"
+    },
+    {
+      "name": "toxstorage"
+    },
+    {
+      "name": "toxtest"
+    },
+    {
+      "name": "toxmisc"
+    },
+    {
+      "name": "chem"
+    },
+    {
+      "name": "decontamination"
+    },
+    {
+      "name": "crew_quarters"
+    },
+    {
+      "name": "research"
+    },
+    {
+      "name": "research_dock"
+    },
+    {
+      "name": "mechbay"
+    },
+    {
+      "name": "morgue"
+    },
+    {
+      "name": "storage"
+    },
+    {
+      "name": "shuttle"
+    },
+    {
+      "name": "exit"
+    },
+    {
+      "name": "start"
+    },
+    {
+      "name": "dk_yellow"
+    },
+    {
+      "name": "purple"
+    },
+    {
+      "name": "bar"
+    },
+    {
+      "name": "cafeteria"
+    },
+    {
+      "name": "portico"
+    },
+    {
+      "name": "houseground"
+    },
+    {
+      "name": "hh_kitchen"
+    },
+    {
+      "name": "hh_diner"
+    },
+    {
+      "name": "hh_moffice"
+    },
+    {
+      "name": "hh_living"
+    },
+    {
+      "name": "hh_mines"
+    },
+    {
+      "name": "hh_panic"
+    },
+    {
+      "name": "hh_basement"
+    },
+    {
+      "name": "hh_crypt"
+    },
+    {
+      "name": "hh_lake"
+    },
+    {
+      "name": "hh_second"
+    },
+    {
+      "name": "conference"
+    },
+    {
+      "name": "restrooms"
+    },
+    {
+      "name": "observatory"
+    },
+    {
+      "name": "atmos"
+    },
+    {
+      "name": "shuttle2"
+    },
+    {
+      "name": "shuttle3"
+    },
+    {
+      "name": "brig"
+    },
+    {
+      "name": "armory"
+    },
+    {
+      "name": "captain"
+    },
+    {
+      "name": "courtroom"
+    },
+    {
+      "name": "ai_upload"
+    },
+    {
+      "name": "ai_server"
+    },
+    {
+      "name": "ai_foyer"
+    },
+    {
+      "name": "ai_chamber"
+    },
+    {
+      "name": "ai_cyborg"
+    },
+    {
+      "name": "detective"
+    },
+    {
+      "name": "checkpoint1"
+    },
+    {
+      "name": "eva"
+    },
+    {
+      "name": "kitchen"
+    },
+    {
+      "name": "medbay"
+    },
+    {
+      "name": "medbay2"
+    },
+    {
+      "name": "medbay3"
+    },
+    {
+      "name": "primarystorage"
+    },
+    {
+      "name": "panelss"
+    },
+    {
+      "name": "panelsp"
+    },
+    {
+      "name": "solarcontrols"
+    },
+    {
+      "name": "solarcontrolp"
+    },
+    {
+      "name": "construction"
+    },
+    {
+      "name": "auxstorage"
+    },
+    {
+      "name": "emergencystorage"
+    },
+    {
+      "name": "locker"
+    },
+    {
+      "name": "fitness"
+    },
+    {
+      "name": "head_quarters"
+    },
+    {
+      "name": "maintcentral"
+    },
+    {
+      "name": "fsmaint"
+    },
+    {
+      "name": "fmaint"
+    },
+    {
+      "name": "fpmaint"
+    },
+    {
+      "name": "pmaint"
+    },
+    {
+      "name": "apmaint"
+    },
+    {
+      "name": "smaint"
+    },
+    {
+      "name": "amaint"
+    },
+    {
+      "name": "asmaint"
+    },
+    {
+      "name": "maint_engine"
+    },
+    {
+      "name": "maint_e_shuttle"
+    },
+    {
+      "name": "maint_research_shuttle"
+    },
+    {
+      "name": "maint_research_port"
+    },
+    {
+      "name": "maint_research_starboard"
+    },
+    {
+      "name": "maint_bar"
+    },
+    {
+      "name": "maint_cargo"
+    },
+    {
+      "name": "maint_locker"
+    },
+    {
+      "name": "maint_arrivals"
+    },
+    {
+      "name": "maint_engineering"
+    },
+    {
+      "name": "maint_medbay"
+    },
+    {
+      "name": "maint_eva"
+    },
+    {
+      "name": "maint_dormitory"
+    },
+    {
+      "name": "maint_security_port"
+    },
+    {
+      "name": "maint_security_starboard"
+    },
+    {
+      "name": "hallc1"
+    },
+    {
+      "name": "hallc2"
+    },
+    {
+      "name": "hallc3"
+    },
+    {
+      "name": "hallf"
+    },
+    {
+      "name": "halls"
+    },
+    {
+      "name": "halla"
+    },
+    {
+      "name": "hallp"
+    },
+    {
+      "name": "escape"
+    },
+    {
+      "name": "entry"
+    },
+    {
+      "name": "quart"
+    },
+    {
+      "name": "quartoffice"
+    },
+    {
+      "name": "quartstorage"
+    },
+    {
+      "name": "janitor"
+    },
+    {
+      "name": "ai"
+    },
+    {
+      "name": "disposal"
+    },
+    {
+      "name": "mining"
+    },
+    {
+      "name": "mining_production"
+    },
+    {
+      "name": "mining_eva"
+    },
+    {
+      "name": "mining_living"
+    },
+    {
+      "name": "explored"
+    },
+    {
+      "name": "unexplored"
+    },
+    {
+      "name": "cave"
+    },
+    {
+      "name": "hydro"
+    },
+    {
+      "name": "garden"
+    },
+    {
+      "name": "hydro_north"
+    },
+    {
+      "name": "hydro_south"
+    },
+    {
+      "name": "library"
+    },
+    {
+      "name": "law"
+    },
+    {
+      "name": "toxmix"
+    },
+    {
+      "name": "shuttlegrn"
+    },
+    {
+      "name": "shuttlegrn2"
+    },
+    {
+      "name": "shuttlered"
+    },
+    {
+      "name": "shuttlered2"
+    },
+    {
+      "name": "nuke_storage"
+    },
+    {
+      "name": "virology"
+    },
+    {
+      "name": "cmo"
+    },
+    {
+      "name": "warden"
+    },
+    {
+      "name": "panelsa"
+    },
+    {
+      "name": "sleep"
+    },
+    {
+      "name": "solarcontrola"
+    },
+    {
+      "name": "toilet"
+    },
+    {
+      "name": "lp"
+    },
+    {
+      "name": "lps"
+    },
+    {
+      "name": "showroom"
+    },
+    {
+      "name": "theatre"
+    },
+    {
+      "name": "exam_room"
+    },
+    {
+      "name": "surgery"
+    },
+    {
+      "name": "genetics"
+    },
+    {
+      "name": "cloning"
+    },
+    {
+      "name": "server"
+    },
+    {
+      "name": "engine_smes"
+    },
+    {
+      "name": "thunder"
+    },
+    {
+      "name": "centcom"
+    },
+    {
+      "name": "cryo"
+    },
+    {
+      "name": "patients"
+    },
+    {
+      "name": "syndie-ship"
+    },
+    {
+      "name": "syndie-control"
+    },
+    {
+      "name": "syndie-elite"
+    },
+    {
+      "name": "firingrange"
+    },
+    {
+      "name": "tcomsatcham"
+    },
+    {
+      "name": "tcomsatentrance"
+    },
+    {
+      "name": "tcomsatlob"
+    },
+    {
+      "name": "tcomsatstore"
+    },
+    {
+      "name": "tcomsateast"
+    },
+    {
+      "name": "tcomsatwest"
+    },
+    {
+      "name": "tcomsatcomp"
+    },
+    {
+      "name": "tcomsatlounge"
+    },
+    {
+      "name": "holodeck"
+    },
+    {
+      "name": "away"
+    },
+    {
+      "name": "away1"
+    },
+    {
+      "name": "away2"
+    },
+    {
+      "name": "away3"
+    },
+    {
+      "name": "away4"
+    },
+    {
+      "name": "red2"
+    },
+    {
+      "name": "blue2"
+    },
+    {
+      "name": "blue-red2"
+    },
+    {
+      "name": "blue-red-d"
+    },
+    {
+      "name": "blue-red",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "invi"
+    },
+    {
+      "name": "blueold",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "dark"
+    },
+    {
+      "name": "dark160"
+    },
+    {
+      "name": "dark128"
+    },
+    {
+      "name": "party",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "blue",
+      "delays": [
+        [
+          0.3,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "bluenew",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "anomaly"
+    },
+    {
+      "name": "anog"
+    },
+    {
+      "name": "anosample"
+    },
+    {
+      "name": "anolab"
+    },
+    {
+      "name": "anospectro"
+    },
+    {
+      "name": "iso1"
+    },
+    {
+      "name": "iso2"
+    },
+    {
+      "name": "iso3"
+    },
+    {
+      "name": "red",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "north"
+    },
+    {
+      "name": "northeast"
+    },
+    {
+      "name": "northwest"
+    },
+    {
+      "name": "south"
+    },
+    {
+      "name": "southeast"
+    },
+    {
+      "name": "southwest"
+    },
+    {
+      "name": "east"
+    },
+    {
+      "name": "west"
+    },
+    {
+      "name": "central"
+    },
+    {
+      "name": "tactical"
+    },
+    {
+      "name": "engine_eva"
+    },
+    {
+      "name": "substation"
+    },
+    {
+      "name": "landing_pad"
+    },
+    {
+      "name": "container_yard"
+    },
+    {
+      "name": "landing_pad_ext"
+    },
+    {
+      "name": "cliff_blocked"
+    },
+    {
+      "name": "valley"
+    },
+    {
+      "name": "valley_north"
+    },
+    {
+      "name": "valley_north_east"
+    },
+    {
+      "name": "valley_north_west"
+    },
+    {
+      "name": "valley_west"
+    },
+    {
+      "name": "valley_south"
+    },
+    {
+      "name": "valley_south_west"
+    },
+    {
+      "name": "valley_south_excv"
+    },
+    {
+      "name": "valley_east"
+    },
+    {
+      "name": "clear"
+    },
+    {
+      "name": "clear_north"
+    },
+    {
+      "name": "clear_south"
+    },
+    {
+      "name": "clear_pass"
+    },
+    {
+      "name": "hangar"
+    },
+    {
+      "name": "hangar_alpha"
+    },
+    {
+      "name": "hangar_beta"
+    },
+    {
+      "name": "mining_outpost"
+    },
+    {
+      "name": "mining_storage"
+    },
+    {
+      "name": "garage"
+    },
+    {
+      "name": "garage_one"
+    },
+    {
+      "name": "garage_two"
+    },
+    {
+      "name": "interrogation"
+    },
+    {
+      "name": "sec_backroom"
+    },
+    {
+      "name": "alarm_ready",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "alarm_evac",
+      "delays": [
+        [
+          0.5,
+          0.2,
+          0.2,
+          0.3,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "alarm_atmos",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "alarm_fire",
+      "delays": [
+        [
+          0.3,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "alarm_down",
+      "delays": [
+        [
+          1.5,
+          0.2,
+          0.2,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "area_destroyed"
+    },
+    {
+      "name": "cells_low_nw"
+    },
+    {
+      "name": "cells_low_ne"
+    },
+    {
+      "name": "cells_low_sw"
+    },
+    {
+      "name": "cells_low_se"
+    },
+    {
+      "name": "cells_med_n"
+    },
+    {
+      "name": "cells_med_s"
+    },
+    {
+      "name": "cells_med_e"
+    },
+    {
+      "name": "cells_med_w"
+    },
+    {
+      "name": "cells_high_nn"
+    },
+    {
+      "name": "cells_high_ns"
+    },
+    {
+      "name": "cells_high_sn"
+    },
+    {
+      "name": "cells_high_ss"
+    },
+    {
+      "name": "cells_max_n"
+    },
+    {
+      "name": "cells_max_s"
+    },
+    {
+      "name": "cells_protective"
+    },
+    {
+      "name": "cells_vip"
+    },
+    {
+      "name": "caves_virology"
+    },
+    {
+      "name": "caves_sw"
+    },
+    {
+      "name": "caves_research"
+    },
+    {
+      "name": "caves_se"
+    },
+    {
+      "name": "caves_east"
+    },
+    {
+      "name": "caves_lambda"
+    },
+    {
+      "name": "caves_north"
+    },
+    {
+      "name": "bunker01_main"
+    },
+    {
+      "name": "bunker01_medbay"
+    },
+    {
+      "name": "bunker01_security"
+    },
+    {
+      "name": "bunker01_engineering"
+    },
+    {
+      "name": "bunker01_storage"
+    },
+    {
+      "name": "bunker01_gear"
+    },
+    {
+      "name": "bunker01_bedroom"
+    },
+    {
+      "name": "bunker01_command"
+    },
+    {
+      "name": "bunker01_bathroom"
+    },
+    {
+      "name": "bunker01_kitchen"
+    },
+    {
+      "name": "bunker01_hydroponics"
+    },
+    {
+      "name": "bunker01_caves"
+    },
+    {
+      "name": "bunker01_caves_outpost"
+    },
+    {
+      "name": "bunker01_break"
+    },
+    {
+      "name": "eta_living"
+    },
+    {
+      "name": "eta_xeno"
+    },
+    {
+      "name": "eta_storage"
+    },
+    {
+      "name": "eta_research"
+    },
+    {
+      "name": "lam_virology"
+    },
+    {
+      "name": "lam_research"
+    },
+    {
+      "name": "lam_break"
+    },
+    {
+      "name": "lam_xeno"
+    },
+    {
+      "name": "tutorial"
+    },
+    {
+      "name": "noop"
+    }
+  ]
+}

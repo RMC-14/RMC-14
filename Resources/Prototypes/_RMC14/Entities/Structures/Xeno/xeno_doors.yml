@@ -1,6 +1,6 @@
-﻿- type: entity
-  id: DoorXenoResin # TODO RMC14 make them only buildable next to other resin walls
+- type: entity
   parent: CMBaseXenoStructure
+  id: DoorXenoResin # TODO RMC14 make them only buildable next to other resin walls
   name: resin door
   description: That's a resin door.
   placement:
@@ -69,21 +69,30 @@
   - type: Airlock
     emergencyAccessLayer: false
     animatePanel: false
+    powered: true
     openingSpriteState: closed_unlit
     closingSpriteState: closed_unlit
-  - type: ApcPowerReceiver
-    powerLoad: 0
   - type: XenoConstructionPlasmaCost
     plasma: 120
+  - type: XenoStructureUpgradeable
+    to: DoorXenoResinThick
+    cost: 25
   - type: MeleeReceivedMultiplier
     xenoDamage:
       types:
         Slash: 600
   - type: XenoConstructionRequiresSupport
+  - type: ExplosionResistance
+    damageCoefficient: 7.5 # Doors take 15x explosive damage, resin doors reduce that by 50%
+  - type: XenoConstruct
+    destroyWeeds: false
+  - type: ResinDoor
+  - type: AllowWeedSpread
+  - type: XenoConstructReinforce
 
 - type: entity
-  id: DoorXenoResinThick
   parent: DoorXenoResin
+  id: DoorXenoResinThick
   name: thick resin door
   description: A thick resin door, which is more durable.
   components:
@@ -123,3 +132,7 @@
     xenoDamage:
       types:
         Slash: 900
+  - type: XenoConstructionPlasmaCost
+    plasma: 145
+  - type: XenoStructureUpgradeable
+    to: null

@@ -8,6 +8,16 @@
   - !type:DepartmentTimeRequirement
     department: CMMilitaryPolice
     time: 36000 # 10 hours
+  ranks:
+    RMCRankGunnerySergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobMilitaryWarden
+      time: 252000 # 70 hours
+    RMCRankStaffSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobMilitaryWarden
+      time: 36000 # 10 hours
+    RMCRankSergeant: []
   weight: 5
   startingGear: CMGearMilitaryWarden
   icon: "CMJobIconMilitaryWarden"
@@ -15,27 +25,37 @@
   supervisors: cm-job-supervisors-cmp
   accessGroups:
   - CMWarden
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: warden
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_mp
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      construction: 2
-      cqc: 2
-      endurance: 2
-      engineer: 2
-      firearms: 1
-      fireman: 1
-      leadership: 1
-      medical: 1
-      overwatch: 1
-      police: 2
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 2
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillLeadership: 1
+        RMCSkillMedical: 1
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 2
     - type: MarineOrders
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-militarywarden
 
 - type: startingGear
   id: CMGearMilitaryWarden
   equipment:
     jumpsuit: CMJumpsuitWarden
-    back: CMSatchelSecurity
     shoes: CMBootsBlackFilled
     head: CMHeadCapWarden
     eyes: CMGlassesSecurity
@@ -43,9 +63,9 @@
     id: CMIDCardMilitaryWarden
     outerClothing: CMArmorM3Warden
     ears: CMHeadsetCMP
-    belt: CMBeltSecurityFilled
+    belt: CMBeltSecurityMPFilled
     #    pocket1: TODO RMC14 tape recorder
-    pocket2: CMPouchGeneralLarge
+    pocket2: RMCPouchGeneralLarge
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -55,10 +75,8 @@
   - type: SpawnPoint
     job_id: CMMilitaryWarden
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: warden
+    state: wmp_spawn
 
 - type: playTimeTracker
   id: CMJobMilitaryWarden
+  isHumanoid: true

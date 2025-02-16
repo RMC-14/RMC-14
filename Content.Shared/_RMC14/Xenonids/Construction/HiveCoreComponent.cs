@@ -1,4 +1,5 @@
-﻿using Robust.Shared.GameStates;
+﻿using Content.Shared.FixedPoint;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -34,4 +35,13 @@ public sealed partial class HiveCoreComponent : Component
 
     [DataField]
     public TimeSpan NextLesserDroneCooldown = TimeSpan.FromSeconds(125);
+
+    [DataField]
+    public FixedPoint2 Heal = 100;
+
+    [DataField]
+    public TimeSpan HealEvery = TimeSpan.FromSeconds(10);
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan HealAt;
 }

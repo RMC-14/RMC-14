@@ -1,0 +1,483 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/3f12d8b58e7b1b15c1ecbcfbb0e50532e4bdbcf4/icons/landmarks.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "x"
+    },
+    {
+      "name": "x2"
+    },
+    {
+      "name": "x3"
+    },
+    {
+      "name": "thunderdome_observer"
+    },
+    {
+      "name": "thunderdome_admin"
+    },
+    {
+      "name": "thunderdome_t1"
+    },
+    {
+      "name": "thunderdome_t2"
+    },
+    {
+      "name": "corpse_spawner"
+    },
+    {
+      "name": "xeno_spawn"
+    },
+    {
+      "name": "hive_spawn"
+    },
+    {
+      "name": "queen_spawn"
+    },
+    {
+      "name": "xeno_tunnel"
+    },
+    {
+      "name": "monkey_spawn"
+    },
+    {
+      "name": "arrow",
+      "directions": 4
+    },
+    {
+      "name": "landmark_node"
+    },
+    {
+      "name": "landmark_node_old"
+    },
+    {
+      "name": "landmark_node_large"
+    },
+    {
+      "name": "landmark_node_trigger"
+    },
+    {
+      "name": "landmark_node_trigger_landing"
+    },
+    {
+      "name": "landmark_node_trigger_xeno"
+    },
+    {
+      "name": "landmark_node_marine"
+    },
+    {
+      "name": "landmark_node_xeno"
+    },
+    {
+      "name": "o_white"
+    },
+    {
+      "name": "o_green"
+    },
+    {
+      "name": "o_yellow"
+    },
+    {
+      "name": "o_red"
+    },
+    {
+      "name": "o_blue"
+    },
+    {
+      "name": "intel"
+    },
+    {
+      "name": "intel_close"
+    },
+    {
+      "name": "intel_medium"
+    },
+    {
+      "name": "intel_far"
+    },
+    {
+      "name": "intel_sci"
+    },
+    {
+      "name": "random_toolbox"
+    },
+    {
+      "name": "random_tool"
+    },
+    {
+      "name": "random_kit"
+    },
+    {
+      "name": "random_attachment"
+    },
+    {
+      "name": "random_cell_battery"
+    },
+    {
+      "name": "landmark_gibs"
+    },
+    {
+      "name": "purple_line",
+      "directions": 4
+    },
+    {
+      "name": "weednode"
+    },
+    {
+      "name": "membrane"
+    },
+    {
+      "name": "nest"
+    },
+    {
+      "name": "wall"
+    },
+    {
+      "name": "door"
+    },
+    {
+      "name": "pool"
+    },
+    {
+      "name": "core"
+    },
+    {
+      "name": "ipool"
+    },
+    {
+      "name": "ipool_bubshot"
+    },
+    {
+      "name": "ipool_surv_ammo"
+    },
+    {
+      "name": "nightmare_insert"
+    },
+    {
+      "name": "map_hazard"
+    },
+    {
+      "name": "map_blocker"
+    },
+    {
+      "name": "map_blocker_hazard"
+    },
+    {
+      "name": "projector"
+    },
+    {
+      "name": "trigger"
+    },
+    {
+      "name": "cleaner"
+    },
+    {
+      "name": "invisible_wall"
+    },
+    {
+      "name": "fog"
+    },
+    {
+      "name": "freed_mob_spawner",
+      "directions": 4
+    },
+    {
+      "name": "loot_pills"
+    },
+    {
+      "name": "loot_pills_20"
+    },
+    {
+      "name": "loot_pills_50"
+    },
+    {
+      "name": "loot_pills_80"
+    },
+    {
+      "name": "loot_goggles"
+    },
+    {
+      "name": "loot_goggles_20"
+    },
+    {
+      "name": "loot_goggles_50"
+    },
+    {
+      "name": "loot_goggles_80"
+    },
+    {
+      "name": "loot_pistol"
+    },
+    {
+      "name": "loot_pistol_20"
+    },
+    {
+      "name": "loot_pistol_50"
+    },
+    {
+      "name": "loot_pistol_80"
+    },
+    {
+      "name": "loot_smg"
+    },
+    {
+      "name": "loot_smg_20"
+    },
+    {
+      "name": "loot_smg_50"
+    },
+    {
+      "name": "loot_smg_80"
+    },
+    {
+      "name": "loot_rifle"
+    },
+    {
+      "name": "loot_rifle_20"
+    },
+    {
+      "name": "loot_rifle_50"
+    },
+    {
+      "name": "loot_rifle_80"
+    },
+    {
+      "name": "loot_shotgun"
+    },
+    {
+      "name": "loot_shotgun_20"
+    },
+    {
+      "name": "loot_shotgun_50"
+    },
+    {
+      "name": "loot_shotgun_80"
+    },
+    {
+      "name": "loot_special"
+    },
+    {
+      "name": "loot_special_20"
+    },
+    {
+      "name": "loot_special_50"
+    },
+    {
+      "name": "loot_special_80"
+    },
+    {
+      "name": "loot_sentry"
+    },
+    {
+      "name": "loot_sentry_20"
+    },
+    {
+      "name": "loot_sentry_50"
+    },
+    {
+      "name": "loot_sentry_80"
+    },
+    {
+      "name": "claymore",
+      "directions": 4
+    },
+    {
+      "name": "claymore_20",
+      "directions": 4
+    },
+    {
+      "name": "claymore_50",
+      "directions": 4
+    },
+    {
+      "name": "claymore_80",
+      "directions": 4
+    },
+    {
+      "name": "spec_spawn"
+    },
+    {
+      "name": "spec_spawn_alpha"
+    },
+    {
+      "name": "spec_spawn_bravo"
+    },
+    {
+      "name": "spec_spawn_charlie"
+    },
+    {
+      "name": "spec_spawn_delta"
+    },
+    {
+      "name": "smartgunner_spawn"
+    },
+    {
+      "name": "smartgunner_spawn_alpha"
+    },
+    {
+      "name": "smartgunner_spawn_bravo"
+    },
+    {
+      "name": "smartgunner_spawn_charlie"
+    },
+    {
+      "name": "smartgunner_spawn_delta"
+    },
+    {
+      "name": "engi_spawn"
+    },
+    {
+      "name": "engi_spawn_alpha"
+    },
+    {
+      "name": "engi_spawn_bravo"
+    },
+    {
+      "name": "engi_spawn_charlie"
+    },
+    {
+      "name": "engi_spawn_delta"
+    },
+    {
+      "name": "medic_spawn"
+    },
+    {
+      "name": "medic_spawn_alpha"
+    },
+    {
+      "name": "medic_spawn_bravo"
+    },
+    {
+      "name": "medic_spawn_charlie"
+    },
+    {
+      "name": "medic_spawn_delta"
+    },
+    {
+      "name": "leader_spawn"
+    },
+    {
+      "name": "leader_spawn_alpha"
+    },
+    {
+      "name": "leader_spawn_bravo"
+    },
+    {
+      "name": "leader_spawn_charlie"
+    },
+    {
+      "name": "leader_spawn_delta"
+    },
+    {
+      "name": "marine_spawn"
+    },
+    {
+      "name": "marine_spawn_alpha"
+    },
+    {
+      "name": "marine_spawn_bravo"
+    },
+    {
+      "name": "marine_spawn_charlie"
+    },
+    {
+      "name": "marine_spawn_delta"
+    },
+    {
+      "name": "co_spawn"
+    },
+    {
+      "name": "xo_spawn"
+    },
+    {
+      "name": "so_spawn"
+    },
+    {
+      "name": "io_spawn"
+    },
+    {
+      "name": "po_spawn"
+    },
+    {
+      "name": "dcc_spawn"
+    },
+    {
+      "name": "sea_spawn"
+    },
+    {
+      "name": "cmp_spawn"
+    },
+    {
+      "name": "wmp_spawn"
+    },
+    {
+      "name": "mp_spawn"
+    },
+    {
+      "name": "syn_spawn"
+    },
+    {
+      "name": "wj_spawn"
+    },
+    {
+      "name": "cmo_spawn"
+    },
+    {
+      "name": "doc_spawn"
+    },
+    {
+      "name": "res_spawn"
+    },
+    {
+      "name": "nur_spawn"
+    },
+    {
+      "name": "ro_spawn"
+    },
+    {
+      "name": "ct_spawn"
+    },
+    {
+      "name": "chef_spawn"
+    },
+    {
+      "name": "ce_spawn"
+    },
+    {
+      "name": "mt_spawn"
+    },
+    {
+      "name": "ot_spawn"
+    },
+    {
+      "name": "cl_spawn"
+    },
+    {
+      "name": "tl_spawn"
+    },
+    {
+      "name": "tl_spawn_alpha"
+    },
+    {
+      "name": "tl_spawn_bravo"
+    },
+    {
+      "name": "tl_spawn_charlie"
+    },
+    {
+      "name": "tl_spawn_delta"
+    },
+    {
+      "name": "prop_gun"
+    },
+    {
+      "name": "merge_conflict_marker"
+    }
+  ]
+}

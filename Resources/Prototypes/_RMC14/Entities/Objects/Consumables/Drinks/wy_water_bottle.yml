@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: DrinkBottlePlasticBaseFull
   id: CMDrinkWEYAWaterBottle30
   name: We-Ya bottled spring water
@@ -27,3 +27,7 @@
   - type: MREItem
   - type: Destructible
     thresholds: [] # TODO RMC14 destroy on explosion unless inside a container
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno

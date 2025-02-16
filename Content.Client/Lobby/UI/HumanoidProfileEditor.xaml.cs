@@ -7,9 +7,12 @@ using Content.Client.Lobby.UI.Loadouts;
 using Content.Client.Lobby.UI.Roles;
 using Content.Client.Message;
 using Content.Client.Players.PlayTimeTracking;
+using Content.Client.Sprite;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.Guidebook;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.LinkAccount;
+using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.NamedItems;
 using Content.Shared._RMC14.Prototypes;
 using Content.Shared.CCVar;
@@ -31,6 +34,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Client.Utility;
 using Robust.Shared.Configuration;
+using Robust.Shared.ContentPack;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -47,6 +51,7 @@ namespace Content.Client.Lobby.UI
         private readonly IFileDialogManager _dialogManager;
         private readonly IPlayerManager _playerManager;
         private readonly IPrototypeManager _prototypeManager;
+        private readonly IResourceManager _resManager;
         private readonly MarkingManager _markingManager;
         private readonly JobRequirementsManager _requirements;
         private readonly LobbyUIController _controller;
@@ -58,6 +63,7 @@ namespace Content.Client.Lobby.UI
         private LoadoutWindow? _loadoutWindow;
 
         private bool _exporting;
+        private bool _imaging;
 
         /// <summary>
         /// If we're attempting to save.
@@ -111,6 +117,7 @@ namespace Content.Client.Lobby.UI
             ILogManager logManager,
             IPlayerManager playerManager,
             IPrototypeManager prototypeManager,
+            IResourceManager resManager,
             JobRequirementsManager requirements,
             MarkingManager markings)
         {
@@ -123,6 +130,7 @@ namespace Content.Client.Lobby.UI
             _prototypeManager = prototypeManager;
             _markingManager = markings;
             _preferencesManager = preferencesManager;
+            _resManager = resManager;
             _requirements = requirements;
             _controller = UserInterfaceManager.GetUIController<LobbyUIController>();
 
@@ -134,6 +142,16 @@ namespace Content.Client.Lobby.UI
             ExportButton.OnPressed += args =>
             {
                 ExportProfile();
+            };
+
+            ExportImageButton.OnPressed += args =>
+            {
+                ExportImage();
+            };
+
+            OpenImagesButton.OnPressed += args =>
+            {
+                _resManager.UserData.OpenOsWindow(ContentSpriteSystem.Exports);
             };
 
             ResetButton.OnPressed += args =>
@@ -344,6 +362,80 @@ namespace Content.Client.Lobby.UI
 
             #endregion SpawnPriority
 
+            #region ArmorPreference
+
+            foreach (var value in Enum.GetValues<ArmorPreference>())
+            {
+                ArmorPreferenceButton.AddItem(value.ToString(), (int) value);
+            }
+
+            ArmorPreferenceButton.OnItemSelected += args =>
+            {
+                ArmorPreferenceButton.SelectId(args.Id);
+                SetArmorPreference((ArmorPreference) args.Id);
+            };
+
+            #endregion ArmorPreference
+
+            #region SquadPreference
+
+            SquadPreferenceButton.AddItem(Loc.GetString("loadout-none"), 0);
+            var squad = _entManager.System<SquadSystem>();
+            for (var i = 0; i < squad.SquadPrototypes.Length; i++)
+            {
+                var squadProto = squad.SquadPrototypes[i];
+                if (!squadProto.TryGetComponent(out SquadTeamComponent? team) ||
+                    !team.RoundStart)
+                {
+                    continue;
+                }
+
+                SquadPreferenceButton.AddItem(squadProto.Name, i + 1);
+            }
+
+            SquadPreferenceButton.OnItemSelected += args =>
+            {
+                SquadPreferenceButton.SelectId(args.Id);
+
+                if (args.Id == 0)
+                {
+                    SetSquadPreference(null);
+                    return;
+                }
+
+                if (squad.SquadPrototypes.TryGetValue(args.Id - 1, out var proto))
+                    SetSquadPreference(proto.ID);
+            };
+
+            #endregion SquadPreference
+
+            #region PlaytimePerks
+
+            PlaytimePerksButton.OnPressed += args =>
+            {
+                SetPlaytimePerks(args.Button.Pressed);
+            };
+
+            #endregion
+
+            #region Xeno Prefix
+
+            XenoPrefix.OnTextChanged += args =>
+            {
+                SetXenoPrefix(args.Text);
+            };
+
+            #endregion
+
+            #region Xeno Postfix
+
+            XenoPostfix.OnTextChanged += args =>
+            {
+                SetXenoPostfix(args.Text);
+            };
+
+            #endregion
+
             #region Eyes
 
             EyeColorPicker.OnEyeColorPicked += newColor =>
@@ -438,6 +530,7 @@ namespace Content.Client.Lobby.UI
                     SidearmName = type == RMCNamedItemType.Sidearm ? itemName : Profile.NamedItems.SidearmName,
                     HelmetName = type == RMCNamedItemType.Helmet ? itemName : Profile.NamedItems.HelmetName,
                     ArmorName = type == RMCNamedItemType.Armor ? itemName : Profile.NamedItems.ArmorName,
+                    SentryName = type == RMCNamedItemType.Sentry ? itemName : Profile.NamedItems.SentryName,
                 });
                 SetDirty();
             }
@@ -449,9 +542,9 @@ namespace Content.Client.Lobby.UI
             NamedItems.Sidearm.OnTextChanged += args => SetItemName(RMCNamedItemType.Sidearm, args.Text);
             NamedItems.Helmet.OnTextChanged += args => SetItemName(RMCNamedItemType.Helmet, args.Text);
             NamedItems.Armor.OnTextChanged += args => SetItemName(RMCNamedItemType.Armor, args.Text);
+            NamedItems.Sentry.OnTextChanged += args => SetItemName(RMCNamedItemType.Sentry, args.Text);
 
             UpdateSpeciesGuidebookIcon();
-            ReloadPreview();
             IsDirty = false;
         }
 
@@ -506,10 +599,10 @@ namespace Content.Client.Lobby.UI
                 return;
             }
 
-            //Setup model
-            Dictionary<string, List<string>> model = new();
+            // Setup model
+            Dictionary<string, List<string>> traitGroups = new();
             List<string> defaultTraits = new();
-            model.Add("default", defaultTraits);
+            traitGroups.Add(TraitCategoryPrototype.Default, defaultTraits);
 
             foreach (var trait in traits)
             {
@@ -519,18 +612,19 @@ namespace Content.Client.Lobby.UI
                     continue;
                 }
 
-                if (!model.ContainsKey(trait.Category))
-                {
-                    model.Add(trait.Category, new());
-                }
-                model[trait.Category].Add(trait.ID);
+                if (!_prototypeManager.HasIndex(trait.Category))
+                    continue;
+
+                var group = traitGroups.GetOrNew(trait.Category);
+                group.Add(trait.ID);
             }
 
-            //Create UI view from model
-            foreach (var (categoryId, traitId) in model)
+            // Create UI view from model
+            foreach (var (categoryId, categoryTraits) in traitGroups)
             {
                 TraitCategoryPrototype? category = null;
-                if (categoryId != "default")
+
+                if (categoryId != TraitCategoryPrototype.Default)
                 {
                     category = _prototypeManager.Index<TraitCategoryPrototype>(categoryId);
                     // Label
@@ -545,7 +639,7 @@ namespace Content.Client.Lobby.UI
                 List<TraitPreferenceSelector?> selectors = new();
                 var selectionCount = 0;
 
-                foreach (var traitProto in traitId)
+                foreach (var traitProto in categoryTraits)
                 {
                     var trait = _prototypeManager.Index<TraitPrototype>(traitProto);
                     var selector = new TraitPreferenceSelector(trait);
@@ -556,7 +650,15 @@ namespace Content.Client.Lobby.UI
 
                     selector.PreferenceChanged += preference =>
                     {
-                        Profile = Profile?.WithTraitPreference(trait.ID, categoryId, preference);
+                        if (preference)
+                        {
+                            Profile = Profile?.WithTraitPreference(trait.ID, _prototypeManager);
+                        }
+                        else
+                        {
+                            Profile = Profile?.WithoutTraitPreference(trait.ID, _prototypeManager);
+                        }
+
                         SetDirty();
                         RefreshTraits(); // If too many traits are selected, they will be reset to the real value.
                     };
@@ -652,7 +754,7 @@ namespace Content.Client.Lobby.UI
                 selector.Select(Profile?.AntagPreferences.Contains(antag.ID) == true ? 0 : 1);
 
                 var requirements = _entManager.System<SharedRoleSystem>().GetAntagRequirement(antag);
-                if (!_requirements.CheckRoleTime(requirements, out var reason))
+                if (!_requirements.CheckRoleRequirements(requirements, (HumanoidCharacterProfile?)_preferencesManager.Preferences?.SelectedCharacter, out var reason))
                 {
                     selector.LockRequirements(reason);
                     Profile = Profile?.WithAntagPreference(antag.ID, false);
@@ -720,11 +822,15 @@ namespace Content.Client.Lobby.UI
             _entManager.DeleteEntity(PreviewDummy);
             PreviewDummy = EntityUid.Invalid;
 
-            if (Profile == null || !_prototypeManager.HasIndex<SpeciesPrototype>(Profile.Species))
+            if (Profile == null || !_prototypeManager.HasIndex(Profile.Species))
                 return;
 
             PreviewDummy = _controller.LoadProfileEntity(Profile, JobOverride, ShowClothes.Pressed);
             SpriteView.SetEntity(PreviewDummy);
+            _entManager.System<MetaDataSystem>().SetEntityName(PreviewDummy, Profile.Name);
+
+            // Check and set the dirty flag to enable the save/reset buttons as appropriate.
+            SetDirty();
         }
 
         /// <summary>
@@ -753,6 +859,8 @@ namespace Content.Client.Lobby.UI
             UpdateGenderControls();
             UpdateSkinColor();
             UpdateSpawnPriorityControls();
+            UpdateArmorPreferenceControls();
+            UpdateSquadPreferenceControls();
             UpdateAgeEdit();
             UpdateEyePickers();
             UpdateSaveButton();
@@ -761,6 +869,9 @@ namespace Content.Client.Lobby.UI
             UpdateCMarkingsHair();
             UpdateCMarkingsFacialHair();
             UpdateNamedItems();
+            UpdatePlaytimePerks();
+            UpdateXenoPrefix();
+            UpdateXenoPostfix();
 
             RefreshAntags();
             RefreshJobs();
@@ -786,6 +897,9 @@ namespace Content.Client.Lobby.UI
                 return;
 
             _entManager.System<HumanoidAppearanceSystem>().LoadProfile(PreviewDummy, Profile);
+
+            // Check and set the dirty flag to enable the save/reset buttons as appropriate.
+            SetDirty();
         }
 
         private void OnSpeciesInfoButtonPressed(BaseButton.ButtonEventArgs args)
@@ -913,7 +1027,7 @@ namespace Content.Client.Lobby.UI
                     icon.Texture = jobIcon.Icon.Frame0();
                     selector.Setup(items, job.LocalizedName, 200, job.LocalizedDescription, icon, job.Guides);
 
-                    if (!_requirements.IsAllowed(job, out var reason))
+                    if (!_requirements.IsAllowed(job, (HumanoidCharacterProfile?)_preferencesManager.Preferences?.SelectedCharacter, out var reason))
                     {
                         selector.LockRequirements(reason);
                     }
@@ -1024,7 +1138,6 @@ namespace Content.Client.Lobby.UI
                 roleLoadout.AddLoadout(loadoutGroup, loadoutProto, _prototypeManager);
                 _loadoutWindow.RefreshLoadouts(roleLoadout, session, collection);
                 Profile = Profile?.WithLoadout(roleLoadout);
-                SetDirty();
                 ReloadPreview();
             };
 
@@ -1033,7 +1146,6 @@ namespace Content.Client.Lobby.UI
                 roleLoadout.RemoveLoadout(loadoutGroup, loadoutProto, _prototypeManager);
                 _loadoutWindow.RefreshLoadouts(roleLoadout, session, collection);
                 Profile = Profile?.WithLoadout(roleLoadout);
-                SetDirty();
                 ReloadPreview();
             };
 
@@ -1043,7 +1155,6 @@ namespace Content.Client.Lobby.UI
             _loadoutWindow.OnClose += () =>
             {
                 JobOverride = null;
-                SetDirty();
                 ReloadPreview();
             };
 
@@ -1068,7 +1179,6 @@ namespace Content.Client.Lobby.UI
                 return;
 
             Profile = Profile.WithCharacterAppearance(Profile.Appearance.WithMarkings(markings.GetForwardEnumerator().ToList()));
-            SetDirty();
             ReloadProfilePreview();
         }
 
@@ -1136,7 +1246,6 @@ namespace Content.Client.Lobby.UI
                 }
             }
 
-            SetDirty();
             ReloadProfilePreview();
         }
 
@@ -1148,6 +1257,17 @@ namespace Content.Client.Lobby.UI
 
             _loadoutWindow?.Dispose();
             _loadoutWindow = null;
+        }
+
+        protected override void EnteredTree()
+        {
+            base.EnteredTree();
+            ReloadPreview();
+        }
+
+        protected override void ExitedTree()
+        {
+            base.ExitedTree();
             _entManager.DeleteEntity(PreviewDummy);
             PreviewDummy = EntityUid.Invalid;
         }
@@ -1156,7 +1276,6 @@ namespace Content.Client.Lobby.UI
         {
             Profile = Profile?.WithAge(newAge);
             ReloadPreview();
-            SetDirty();
         }
 
         private void SetSex(Sex newSex)
@@ -1179,14 +1298,12 @@ namespace Content.Client.Lobby.UI
             UpdateGenderControls();
             Markings.SetSex(newSex);
             ReloadPreview();
-            SetDirty();
         }
 
         private void SetGender(Gender newGender)
         {
             Profile = Profile?.WithGender(newGender);
             ReloadPreview();
-            SetDirty();
         }
 
         private void SetSpecies(string newSpecies)
@@ -1200,7 +1317,6 @@ namespace Content.Client.Lobby.UI
             RefreshLoadouts();
             UpdateSexControls(); // update sex for new species
             UpdateSpeciesGuidebookIcon();
-            SetDirty();
             ReloadPreview();
         }
 
@@ -1208,6 +1324,11 @@ namespace Content.Client.Lobby.UI
         {
             Profile = Profile?.WithName(newName);
             SetDirty();
+
+            if (!IsDirty)
+                return;
+
+            _entManager.System<MetaDataSystem>().SetEntityName(PreviewDummy, newName);
         }
 
         private void SetSpawnPriority(SpawnPriorityPreference newSpawnPriority)
@@ -1216,7 +1337,37 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
-        private bool IsDirty
+        private void SetArmorPreference(ArmorPreference newArmorPreference)
+        {
+            Profile = Profile?.WithArmorPreference(newArmorPreference);
+            SetDirty();
+        }
+
+        private void SetSquadPreference(EntProtoId<SquadTeamComponent>? newSquadPreference)
+        {
+            Profile = Profile?.WithSquadPreference(newSquadPreference);
+            SetDirty();
+        }
+
+        private void SetPlaytimePerks(bool playtimePerks)
+        {
+            Profile = Profile?.WithPlaytimePerks(playtimePerks);
+            SetDirty();
+        }
+
+        private void SetXenoPrefix(string prefix)
+        {
+            Profile = Profile?.WithXenoPrefix(prefix);
+            SetDirty();
+        }
+
+        private void SetXenoPostfix(string postfix)
+        {
+            Profile = Profile?.WithXenoPostfix(postfix);
+            SetDirty();
+        }
+
+        public bool IsDirty
         {
             get => _isDirty;
             set
@@ -1356,6 +1507,9 @@ namespace Content.Client.Lobby.UI
 
         public void UpdateSpeciesGuidebookIcon()
         {
+            if (!_cfgManager.GetCVar(RMCCVars.GuidebookShowEditorSpeciesButton))
+                return;
+
             SpeciesInfoButton.StyleClasses.Clear();
 
             var species = Profile?.Species;
@@ -1403,6 +1557,35 @@ namespace Content.Client.Lobby.UI
             }
 
             SpawnPriorityButton.SelectId((int) Profile.SpawnPriority);
+        }
+
+        private void UpdateArmorPreferenceControls()
+        {
+            if (Profile == null)
+            {
+                return;
+            }
+
+            ArmorPreferenceButton.SelectId((int) Profile.ArmorPreference);
+        }
+
+        private void UpdateSquadPreferenceControls()
+        {
+            if (Profile == null)
+            {
+                return;
+            }
+
+            var index = 0;
+            if (Profile.SquadPreference is { } preference)
+            {
+                var squads = new List<EntityPrototype>(_entManager.System<SquadSystem>().SquadPrototypes)
+                    .Select(s => s.ID)
+                    .ToList();
+                index = squads.IndexOf(preference.Id) + 1;
+            }
+
+            SquadPreferenceButton.SelectId(index);
         }
 
         private void UpdateHairPickers()
@@ -1519,6 +1702,22 @@ namespace Content.Client.Lobby.UI
             NamedItems.Sidearm.Text = Profile?.NamedItems.SidearmName ?? string.Empty;
             NamedItems.Helmet.Text = Profile?.NamedItems.HelmetName ?? string.Empty;
             NamedItems.Armor.Text = Profile?.NamedItems.ArmorName ?? string.Empty;
+            NamedItems.Sentry.Text = Profile?.NamedItems.SentryName ?? string.Empty;
+        }
+
+        private void UpdatePlaytimePerks()
+        {
+            PlaytimePerksButton.Pressed = Profile?.PlaytimePerks ?? true;
+        }
+
+        private void UpdateXenoPrefix()
+        {
+            XenoPrefix.Text = Profile?.XenoPrefix ?? string.Empty;
+        }
+
+        private void UpdateXenoPostfix()
+        {
+            XenoPostfix.Text = Profile?.XenoPostfix ?? string.Empty;
         }
 
         private void UpdateSaveButton()
@@ -1545,6 +1744,19 @@ namespace Content.Client.Lobby.UI
             var name = HumanoidCharacterProfile.GetName(Profile.Species, Profile.Gender);
             SetName(name);
             UpdateNameEdit();
+        }
+
+        private async void ExportImage()
+        {
+            if (_imaging)
+                return;
+
+            var dir = SpriteView.OverrideDirection ?? Direction.South;
+
+            // I tried disabling the button but it looks sorta goofy as it only takes a frame or two to save
+            _imaging = true;
+            await _entManager.System<ContentSpriteSystem>().Export(PreviewDummy, dir, includeId: false);
+            _imaging = false;
         }
 
         private async void ImportProfile()

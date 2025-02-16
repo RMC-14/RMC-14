@@ -10,6 +10,8 @@ using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Stacks;
@@ -26,7 +28,7 @@ namespace Content.Shared._RMC14.Medical.Wounds;
 public abstract class SharedWoundsSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly CMDamageableSystem _cmDamageable = default!;
+    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -42,6 +44,8 @@ public abstract class SharedWoundsSystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<MobStateComponent, CMBleedAttemptEvent>(OnMobStateBleedAttempt);
+
         SubscribeLocalEvent<WoundableComponent, DamageChangedEvent>(OnWoundableDamaged);
         SubscribeLocalEvent<WoundableComponent, CMBleedEvent>(OnWoundableBleed);
 
@@ -53,8 +57,14 @@ public abstract class SharedWoundsSystem : EntitySystem
         SubscribeLocalEvent<WoundTreaterComponent, AfterInteractEvent>(OnWoundTreaterAfterInteract);
         SubscribeLocalEvent<WoundTreaterComponent, TreatWoundDoAfterEvent>(OnWoundTreaterDoAfter);
 
-        Subs.CVar(_config, CMCVars.CMBloodlossMultiplier, v => _bloodlossMultiplier = v, true);
-        Subs.CVar(_config, CMCVars.CMBleedTimeMultiplier, v => _bleedTimeMultiplier = v, true);
+        Subs.CVar(_config, RMCCVars.CMBloodlossMultiplier, v => _bloodlossMultiplier = v, true);
+        Subs.CVar(_config, RMCCVars.CMBleedTimeMultiplier, v => _bleedTimeMultiplier = v, true);
+    }
+
+    private void OnMobStateBleedAttempt(Entity<MobStateComponent> ent, ref CMBleedAttemptEvent args)
+    {
+        if (ent.Comp.CurrentState == MobState.Dead)
+            args.Cancelled = true;
     }
 
     private void OnWoundableDamaged(Entity<WoundableComponent> ent, ref DamageChangedEvent args)
@@ -130,7 +140,7 @@ public abstract class SharedWoundsSystem : EntitySystem
 
         if (damage != FixedPoint2.Zero)
         {
-            var total = _cmDamageable.DistributeHealing((target, damageable), treater.Comp.Group, damage);
+            var total = _rmcDamageable.DistributeHealing((target, damageable), treater.Comp.Group, damage);
 
             _damageable.TryChangeDamage(target, total, true, damageable: damageable, origin: user, tool: args.Used);
         }
@@ -226,7 +236,7 @@ public abstract class SharedWoundsSystem : EntitySystem
         }
 
         var targetName = Identity.Name(target, EntityManager, user);
-        var hasSkills = _skills.HasSkills(user, in treater.Comp.Skills);
+        var hasSkills = _skills.HasAllSkills(user, treater.Comp.Skills);
         if (!treater.Comp.CanUseUnskilled && !hasSkills)
         {
             if (doPopups)
@@ -348,6 +358,9 @@ public abstract class SharedWoundsSystem : EntitySystem
             }
         }
 
+        if (user != target && treater.Comp.TargetStartPopup != null)
+            _popup.PopupEntity(Loc.GetString(treater.Comp.TargetStartPopup, ("user", user)), target, target);
+
         var ev = new TreatWoundDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, treater, target, treater)
         {
@@ -356,6 +369,8 @@ public abstract class SharedWoundsSystem : EntitySystem
             BreakOnHandChange = true,
             NeedHand = true,
             CancelDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameEvent,
+            TargetEffect = "RMCEffectHealBusy",
         };
         _doAfter.TryStartDoAfter(doAfter);
         _audio.PlayPredicted(treater.Comp.TreatBeginSound, user, user);

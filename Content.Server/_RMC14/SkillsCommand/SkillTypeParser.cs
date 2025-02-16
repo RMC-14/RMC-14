@@ -1,10 +1,7 @@
 ﻿using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Threading.Tasks;
 using Content.Shared._RMC14.Marines.Skills;
 using Robust.Shared.Console;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Toolshed.Errors;
 using Robust.Shared.Toolshed.Syntax;
 using Robust.Shared.Toolshed.TypeParsers;
@@ -14,32 +11,34 @@ namespace Content.Server._RMC14.SkillsCommand;
 
 public sealed class SkillTypeParser : TypeParser<SkillType>
 {
-    public override bool TryParse(ParserContext parserContext, [NotNullWhen(true)] out object? result, out IConError? error)
+    [Dependency] private readonly IEntityManager _entities = default!;
+
+    public override bool TryParse(ParserContext ctx, out SkillType result)
     {
-        if (parserContext.GetWord(ParserContext.IsToken) is not { } skill)
+        if (ctx.GetWord(ParserContext.IsToken) is not { } skillName)
         {
-            error = new NotAValidSkill(null);
-            result = null;
+            ctx.Error = new NotAValidSkill(null);
+            result = default;
             return false;
         }
 
-        var fields = typeof(Skills).GetProperties().Select(p => p.Name);
-        if (!fields.Contains(skill))
+        var skills = _entities.System<SkillsSystem>().SkillNames;
+        if (!skills.TryGetValue(skillName, out var skill))
         {
-            error = new NotAValidSkill(skill);
-            result = null;
+            ctx.Error = new NotAValidSkill(skillName);
+            result = default;
             return false;
         }
 
-        error = null;
+        ctx.Error = null;
         result = new SkillType(skill);
         return true;
     }
 
-    public override ValueTask<(CompletionResult? result, IConError? error)> TryAutocomplete(ParserContext parserContext, string? argName)
+    public override CompletionResult TryAutocomplete(ParserContext parserContext, string? argName)
     {
-        var fields = typeof(Skills).GetProperties().Select(p => p.Name);
-        return ValueTask.FromResult<(CompletionResult? result, IConError? error)>((CompletionResult.FromHintOptions(fields, "skill"), null));
+        var skills = _entities.System<SkillsSystem>().SkillNames.Keys.Order(StringComparer.OrdinalIgnoreCase);
+        return CompletionResult.FromHintOptions(skills, "skill");
     }
 }
 

@@ -1,0 +1,14 @@
+- type: soundCollection
+  id: XenonidSpeech
+  files:
+    - /Audio/_RMC14/Voice/Xeno/alien_talk1.ogg
+    - /Audio/_RMC14/Voice/Xeno/alien_talk2.ogg
+    - /Audio/_RMC14/Voice/Xeno/alien_talk3.ogg
+
+- type: soundCollection
+  id: XenonidLarvaSpeech
+  files:
+    - /Audio/_RMC14/Voice/Xeno/larva_talk1.ogg
+    - /Audio/_RMC14/Voice/Xeno/larva_talk2.ogg
+    - /Audio/_RMC14/Voice/Xeno/larva_talk3.ogg
+    - /Audio/_RMC14/Voice/Xeno/larva_talk4.ogg

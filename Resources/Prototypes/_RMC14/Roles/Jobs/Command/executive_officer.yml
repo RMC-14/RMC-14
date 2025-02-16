@@ -7,47 +7,67 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMCommand
-    time: 18000 # 5 hours
+    time: 36000 # 10 hours
+  ranks:
+    RMCRankCaptain: []
   weight: 5
-  startingGear: CMGearStaffOfficer
+  startingGear: CMGearExecutiveOfficer
   icon: "CMJobIconExecutiveOfficer"
   requireAdminNotify: true
   joinNotifyCrew: true
   supervisors: cm-job-supervisors-co
   accessGroups:
   - MarineMain
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: xo
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      cqc: 2
-      construction: 2
-      endurance: 2
-      engineer: 2
-      firearms: 1
-      fireman: 2
-      intel: 2
-      jtac: 4
-      leadership: 3
-      medical: 3
-      navigations: 1
-      overwatch: 1
-      police: 1
-      powerLoader: 2
-      surgery: 1
-      vehicles: 1
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillConstruction: 2
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillIntel: 2
+        RMCSkillJtac: 4
+        RMCSkillLeadership: 3
+        RMCSkillMedical: 3
+        RMCSkillNavigations: 1
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillSurgery: 1
+        RMCSkillVehicles: 1
     - type: MarineOrders
+    - type: CMVendorUser
+      points: 120
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-executive-officer
+    - type: ViewIntelObjectives
 
 - type: startingGear
   id: CMGearExecutiveOfficer
   equipment:
     jumpsuit: CMJumpsuitBO
-    back: CMSatchel
-    shoes: CMShoesLaceup
-    head: CMHeadCap
-    outerClothing: CMCoatOfficer
+    shoes: RMCShoesLaceup
+    head: CMHeadCapPeakedService
+    outerClothing: RMCCoatService
     id: CMIDCardExecutiveOfficer
-    ears: CMHeadsetLeader
+    ears: CMHeadsetSeniorCommand
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchGeneralLarge
+  storage:
+    pocket1:
+    - RMCRangefinder
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -57,10 +77,8 @@
   - type: SpawnPoint
     job_id: CMExecutiveOfficer
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: executive_officer
+    state: xo_spawn
 
 - type: playTimeTracker
   id: CMJobExecutiveOfficer
+  isHumanoid: true

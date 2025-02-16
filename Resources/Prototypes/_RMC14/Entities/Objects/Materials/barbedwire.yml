@@ -11,7 +11,6 @@
     - Metal
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Metallic
   - type: Destructible
     thresholds:
     - trigger:
@@ -48,6 +47,17 @@
   - type: Stack
     stackType: BarbedWire
     count: 10
+
+- type: entity
+  parent: BarbedWireBase
+  id: BarbedWire15
+  suffix: "15"
+  components:
+  - type: Sprite
+    state: barbed_wire
+  - type: Stack
+    stackType: BarbedWire
+    count: 15
 
 - type: entity
   parent: BarbedWireBase

@@ -1,0 +1,44 @@
+- type: entity
+  parent: RMCBaseBullet
+  id: CMProjectileShrapnel
+  name: shrapnel
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/shotgun_projectiles.rsi
+    layers:
+    - state: buckshot
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+        - LowImpassable
+      fly-by:
+        shape: !type:PhysShapeCircle
+          radius: 1.5
+        layer:
+        - Impassable
+        - MidImpassable
+        - HighImpassable
+        - LowImpassable
+        hard: False
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 25
+    deleteOnCollide: true
+  - type: CMArmorPiercing
+    amount: 20
+  - type: TimedDespawn
+    lifetime: 0.25
+  - type: RMCProjectileAccuracy
+    accuracy: 100
+    thresholds:
+    - range: 32
+      falloff: 10

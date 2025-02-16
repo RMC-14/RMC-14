@@ -47,7 +47,12 @@
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
             <Label Text="Holocard:" MinWidth="80" Modulate="#5B88B0" />
-            <Label Name="HolocardDescription" Access="Public" Align="Right" MinWidth="160"/>
+			<PanelContainer Name="HolocardPanel" Access="Public" Visible="True" Margin="2 5">
+				<PanelContainer.PanelOverride>
+					<graphics:StyleBoxFlat BackgroundColor="#984A16" />
+				</PanelContainer.PanelOverride>
+				<Label Name="HolocardDescription" Access="Public" Align="Right" MinWidth="160" Margin="2 2"/>
+			</PanelContainer>			
             <Button Name="ChangeHolocardButton" Access="Public" StyleClasses="OpenBoth" Margin="5 0 0 0" />
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
@@ -65,6 +70,14 @@
         </BoxContainer>
         <Label Name="ChemicalContentsLabel" Access="Public" Text="Chemical Contents" Margin="0 20 0 0" />
         <cc:HSeparator Name="ChemicalContentsSeparator" Access="Public" Color="#4972A1" Margin="0 0 0 5" />
-        <BoxContainer Name="ChemicalsContainer" Access="Public" Orientation="Vertical" />
+        <BoxContainer Orientation="Vertical">
+            <PanelContainer Name="UnknownChemicalsPanel" Access="Public" Visible="False" Margin="0 5">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat BackgroundColor="#984A16" />
+                </PanelContainer.PanelOverride>
+                <RichTextLabel Name="UnknownReagentsLabel" Access="Public" Margin="5 2" />
+            </PanelContainer>
+            <BoxContainer Name="ChemicalsContainer" Access="Public" Orientation="Vertical" />
+        </BoxContainer>
     </BoxContainer>
 </scanner:HealthScannerWindow>

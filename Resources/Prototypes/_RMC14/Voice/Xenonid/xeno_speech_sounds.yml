@@ -1,0 +1,17 @@
+- type: speechSounds
+  id: Xenonid
+  saySound:
+    collection: XenonidSpeech
+  askSound:
+    collection: XenonidSpeech
+  exclaimSound:
+    collection: XenonidSpeech
+
+- type: speechSounds
+  id: XenonidLarva
+  saySound:
+    collection: XenonidLarvaSpeech
+  askSound:
+    collection: XenonidLarvaSpeech
+  exclaimSound:
+    collection: XenonidLarvaSpeech

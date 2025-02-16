@@ -12,9 +12,29 @@
     - state: bottle-1-1
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
+    - state: lid_bottle-1
+      map: ["enum.OpenableVisuals.Layer"]
+      visible: false
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 60
   - type: SolutionContainerVisuals
     maxFillLevels: 5
     fillBaseName: bottle-1-
+  - type: Openable
+    opened: true
+    closeable: true
+    examineText: rmc-bottle-closed
+    openVerbText: rmc-bottle-remove-lid
+    closeVerbText: rmc-bottle-put-lid
+    sound: null
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: {visible: false}
+          False: {visible: true}
   - type: Destructible
     thresholds:
     - trigger:
@@ -35,6 +55,26 @@
         transferForensics: true
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
+  - type: SolutionTransfer
+    transferAmount: 60
+    maxTransferAmount: 60
+    canChangeTransferAmount: true
+    transferAmounts:
+    - 5
+    - 10
+    - 15
+    - 25
+    - 30
+    - 40
+    - 60
 
 - type: entity
   parent: CMBottleEmpty

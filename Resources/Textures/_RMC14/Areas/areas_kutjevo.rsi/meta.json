@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/fc6c669a48193eb3c4b8935a4a462f8471967b24/icons/turf/area_kutjevo.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": ""
+    },
+    {
+      "name": "base_ico"
+    },
+    {
+      "name": "kutjevo"
+    },
+    {
+      "name": "ext"
+    },
+    {
+      "name": "int"
+    },
+    {
+      "name": "oob"
+    },
+    {
+      "name": "shuttle"
+    },
+    {
+      "name": "shuttle2"
+    },
+    {
+      "name": "lz_dunes"
+    },
+    {
+      "name": "lz_pad"
+    },
+    {
+      "name": "lz_river"
+    },
+    {
+      "name": "scrubland"
+    },
+    {
+      "name": "power_2"
+    },
+    {
+      "name": "weed_int"
+    },
+    {
+      "name": "weed_ext"
+    },
+    {
+      "name": "stone_fields"
+    },
+    {
+      "name": "rf_dunes"
+    },
+    {
+      "name": "rf_river"
+    },
+    {
+      "name": "rf_bridge"
+    },
+    {
+      "name": "rf_overlook"
+    },
+    {
+      "name": "construction"
+    },
+    {
+      "name": "construction1"
+    },
+    {
+      "name": "construction2"
+    },
+    {
+      "name": "construction3"
+    },
+    {
+      "name": "power"
+    },
+    {
+      "name": "construction_int"
+    },
+    {
+      "name": "foremans"
+    },
+    {
+      "name": "colony_int"
+    },
+    {
+      "name": "colony_caves_0"
+    },
+    {
+      "name": "colony_caves_1"
+    },
+    {
+      "name": "colony_caves_2"
+    },
+    {
+      "name": "colony_caves_3"
+    },
+    {
+      "name": "med0"
+    },
+    {
+      "name": "med1"
+    },
+    {
+      "name": "med2"
+    },
+    {
+      "name": "med3"
+    },
+    {
+      "name": "med4"
+    },
+    {
+      "name": "med5"
+    },
+    {
+      "name": "med_ext"
+    },
+    {
+      "name": "botany0"
+    },
+    {
+      "name": "botany1"
+    },
+    {
+      "name": "botany2"
+    },
+    {
+      "name": "botany3"
+    }
+  ]
+}

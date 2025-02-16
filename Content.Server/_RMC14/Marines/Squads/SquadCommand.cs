@@ -1,10 +1,9 @@
 ﻿using System.Linq;
 using Content.Server.Administration;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared.Administration;
-using Content.Shared.Roles;
 using Robust.Shared.Toolshed;
-using Robust.Shared.Toolshed.TypeParsers;
 
 namespace Content.Server._RMC14.Marines.Squads;
 
@@ -34,6 +33,9 @@ public sealed class SquadCommand : ToolshedCommand
         [PipedArgument] EntityUid marine,
         [CommandArgument] SquadType squad)
     {
+        if (!HasComp<MarineComponent>(marine))
+            return marine;
+
         _squad ??= GetSys<SquadSystem>();
         _squad.AssignSquad(marine, squad.Value, null);
         return marine;
@@ -46,5 +48,24 @@ public sealed class SquadCommand : ToolshedCommand
         [CommandArgument] SquadType squad)
     {
         return marines.Select(marine => Set(ctx, marine, squad));
+    }
+
+    [CommandImplementation("with")]
+    public IEnumerable<EntityUid> With(
+        [CommandInvocationContext] IInvocationContext ctx,
+        [PipedArgument] IEnumerable<EntityUid> marines,
+        [CommandArgument] SquadType squad)
+    {
+        return marines.Where(marine => TryComp(marine, out SquadMemberComponent? member) && member.Squad == squad.Value);
+    }
+
+    [CommandImplementation("refresh")]
+    public EntityUid Refresh(
+        [CommandInvocationContext] IInvocationContext ctx,
+        [CommandArgument] SquadType squad)
+    {
+        _squad ??= GetSys<SquadSystem>();
+        _squad.RefreshSquad(squad.Value);
+        return squad.Value;
     }
 }

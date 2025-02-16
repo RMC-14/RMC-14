@@ -1,0 +1,25 @@
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelPizza
+  suffix: Pizza, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolHoldout
+    - id: CMCrowbar
+    - id: FoodBoxPizzaFilled # TODO RMC14
+      amount: 3
+    - id: CMDrinkCanDrGibb
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - BoxCardboard
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelCivilianFill
+  suffix: Civilian, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetMetal20

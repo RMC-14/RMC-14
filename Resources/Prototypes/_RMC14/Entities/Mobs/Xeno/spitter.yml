@@ -3,10 +3,14 @@
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
   id: CMXenoSpitter
   name: Spitter
   description: A gross, oozing alien of some kind.
   components:
+  - type: GhostRole
+    name: cm-job-name-xeno-spitter
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Spitter/spitter.rsi
   - type: MobState
@@ -25,16 +29,16 @@
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
-    - ActionXenoTailStab
+    - ActionXenoTailStabCorrosive
     - ActionXenoAcidNormal
     - ActionXenoSpit
     - ActionXenoChargeSpit
-    - ActionXenoScatteredSpit # TODO RMC14 replace this with spray acid
-    #    - ActionXenoSprayAcid
+    - ActionXenoSprayAcid
     - ActionXenoDevolve
     tier: 2
-    hudOffset: 0,0.16
+    hudOffset: -0.15,0.025
     unlockAt: 540 # 9 minutes
+  - type: XenoHeavy
   - type: XenoDevolve
     devolvesTo:
     - CMXenoSentinel
@@ -45,16 +49,23 @@
     maxPlasma: 600
     plasmaRegenOnWeeds: 4
   - type: XenoEvolution
-    max: 540
-#    evolvesTo:
-#    - CMXenoPraetorian
-#    - CMXenoBoiler
+    max: 500
+    evolvesTo:
+    - CMXenoBoiler
+    - CMXenoPraetorian
   - type: XenoSpit
   - type: XenoChargeSpit
-    damage:
-      groups:
-        Burn: 25 # TODO RMC14 damage over time
   - type: XenoScatteredSpit
+  - type: XenoSprayAcid
+    barricadeDamage:
+      types:
+        Heat: 5
+  - type: XenoTailStab
+    inject:
+      RMCMolecularAcid: 2
+    tailDamage:
+      groups:
+        Brute: 36
   - type: CMArmor
     armor: 15
     explosionArmor: 20
@@ -63,8 +74,34 @@
       groups:
         Brute: 25
   - type: Tackle
-    threshold: 4
-    stun: 9
+    min: 2
+    max: 6
+    chance: 0.45
+    stunMin: 4
+    stunMax: 5
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.6375
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.7075
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.475
+      whitelist:
+        components:
+        - XenoHeavy
+  - type: RMCXenoDamageVisuals
+    prefix: spitter
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: spitter
+  - type: AcidTrap
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.2

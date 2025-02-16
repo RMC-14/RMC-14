@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/turf/walls/prison.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "metal"
+    },
+    {
+      "name": "metal0",
+      "directions": 4
+    },
+    {
+      "name": "metal1",
+      "directions": 4
+    },
+    {
+      "name": "metal2",
+      "directions": 4
+    },
+    {
+      "name": "metal3",
+      "directions": 4
+    },
+    {
+      "name": "metal4",
+      "directions": 4
+    },
+    {
+      "name": "metal5",
+      "directions": 4
+    },
+    {
+      "name": "metal6",
+      "directions": 4
+    },
+    {
+      "name": "metal7",
+      "directions": 4
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/e361df6c305add0bfe43e4a402362fe1ccd18f11/icons/turf/walls/hangar.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "hangar"
+    },
+    {
+      "name": "hangar0",
+      "directions": 4
+    },
+    {
+      "name": "hangar1",
+      "directions": 4
+    },
+    {
+      "name": "hangar2",
+      "directions": 4
+    },
+    {
+      "name": "hangar3",
+      "directions": 4
+    },
+    {
+      "name": "hangar4",
+      "directions": 4
+    },
+    {
+      "name": "hangar5",
+      "directions": 4
+    },
+    {
+      "name": "hangar6",
+      "directions": 4
+    },
+    {
+      "name": "hangar7",
+      "directions": 4
+    }
+  ]
+}

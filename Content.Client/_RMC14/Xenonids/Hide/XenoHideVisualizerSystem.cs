@@ -22,7 +22,7 @@ public sealed class XenoHideVisualizerSystem : VisualizerSystem<XenoHideComponen
         if (AppearanceSystem.TryGetData(ent, XenoVisualLayers.Hide, out bool hiding) &&
             hiding)
         {
-            args.DrawDepth = DrawDepth.SmallMobs;
+            args.DrawDepth = DrawDepth.Walls;
         }
     }
 

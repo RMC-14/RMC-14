@@ -1,31 +1,50 @@
 ﻿# This is for boxes of loose rounds, not magazines.
 
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateBoxShellsShotgunSlugs
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxShellsShotgunSlugs
   name: Shell box (100x slug shells)
   components:
   - type: StorageFill
     contents:
-    - id: CMBoxShotgunSlugs
-      amount: 4 # TODO RMC14 boxes
+    - id: RMCBoxShellsSlugs
+      amount: 1
 
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateBoxShellsShotgunBuckshot
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxShellsShotgunBuckshot
   name: Shell box (100x buckshot shells)
   components:
   - type: StorageFill
     contents:
-    - id: CMBoxShotgunBuckshot
-      amount: 4 # TODO RMC14 boxes
+    - id: RMCBoxShellsBuckshot
+      amount: 1
 
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateBoxShellsShotgunFlechette
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxShellsShotgunFlechette
   name: Shell box (100x flechette shells)
   components:
   - type: StorageFill
     contents:
-    - id: CMBoxShotgunFlechette
-      amount: 4 # TODO RMC14 boxes
+    - id: RMCBoxShellsFlechette
+      amount: 1
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxShellsShotgunBreaching
+  name: Shell box (120x breaching shells)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxShellsBreaching
+      amount: 1
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxAmmo458
+  name: .458 bullets box (.458 x 300)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxBullets458

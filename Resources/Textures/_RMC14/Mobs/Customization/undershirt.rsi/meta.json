@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/884ab172389b6fc54ef063f5fbea5e8b0a0a2235/icons/mob/humans/undershirt.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "t_undershirt",
+      "directions": 4
+    },
+    {
+      "name": "t_undershirt_sleeveless",
+      "directions": 4
+    },
+    {
+      "name": "t_rolled_undershirt",
+      "directions": 4
+    },
+    {
+      "name": "t_rolled_undershirt_sleeveless",
+      "directions": 4
+    },
+    {
+      "name": "t_long_undershirt",
+      "directions": 4
+    },
+    {
+      "name": "b_undershirt",
+      "directions": 4
+    },
+    {
+      "name": "b_undershirt_sleeveless",
+      "directions": 4
+    },
+    {
+      "name": "b_long_undershirt",
+      "directions": 4
+    },
+    {
+      "name": "c_classic",
+      "directions": 4
+    },
+    {
+      "name": "c_sports",
+      "directions": 4
+    },
+    {
+      "name": "c_strapless",
+      "directions": 4
+    },
+    {
+      "name": "j_classic",
+      "directions": 4
+    },
+    {
+      "name": "j_sports",
+      "directions": 4
+    },
+    {
+      "name": "j_strapless",
+      "directions": 4
+    },
+    {
+      "name": "s_classic",
+      "directions": 4
+    },
+    {
+      "name": "s_sports",
+      "directions": 4
+    },
+    {
+      "name": "s_strapless",
+      "directions": 4
+    },
+    {
+      "name": "d_classic",
+      "directions": 4
+    },
+    {
+      "name": "d_sports",
+      "directions": 4
+    },
+    {
+      "name": "d_strapless",
+      "directions": 4
+    },
+    {
+      "name": "blank",
+      "directions": 4
+    }
+  ]
+}

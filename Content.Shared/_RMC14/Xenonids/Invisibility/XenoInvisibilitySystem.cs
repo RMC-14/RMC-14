@@ -1,6 +1,8 @@
-﻿using Content.Shared._RMC14.Xenonids.Leap;
+﻿using Content.Shared._RMC14.Xenonids.Devour;
+using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
+using Content.Shared.DoAfter;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
@@ -14,6 +16,7 @@ public sealed class XenoInvisibilitySystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
     public override void Initialize()
@@ -21,32 +24,33 @@ public sealed class XenoInvisibilitySystem : EntitySystem
         SubscribeLocalEvent<XenoTurnInvisibleComponent, XenoTurnInvisibleActionEvent>(OnXenoTurnInvisibleAction);
 
         SubscribeLocalEvent<XenoActiveInvisibleComponent, ComponentRemove>(OnXenoActiveInvisibleRemove);
-        SubscribeLocalEvent<XenoActiveInvisibleComponent, MeleeAttackEvent>(OnXenoActiveInvisibleMeleeAttack);
+        SubscribeLocalEvent<XenoActiveInvisibleComponent, MeleeHitEvent>(OnXenoActiveInvisibleMeleeHit);
+        SubscribeLocalEvent<XenoActiveInvisibleComponent, DoAfterAttemptEvent<XenoDevourDoAfterEvent>>(OnXenoDevourDoAfterAttempt);
         SubscribeLocalEvent<XenoActiveInvisibleComponent, XenoLeapHitEvent>(OnXenoActiveInvisibleLeapHit);
         SubscribeLocalEvent<XenoActiveInvisibleComponent, RefreshMovementSpeedModifiersEvent>(OnXenoActiveInvisibleRefreshSpeed);
     }
 
     private void OnXenoTurnInvisibleAction(Entity<XenoTurnInvisibleComponent> xeno, ref XenoTurnInvisibleActionEvent args)
     {
-        if (args.Handled)
-            return;
-
-        args.Handled = true;
-        if (HasComp<XenoActiveInvisibleComponent>(xeno))
-        {
-            _popup.PopupClient(Loc.GetString("cm-xeno-invisibility-already-invisible"), xeno, xeno);
-            return;
-        }
-
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
             return;
 
-        var active = EnsureComp<XenoActiveInvisibleComponent>(xeno);
-        active.ExpiresAt = _timing.CurTime + xeno.Comp.Duration;
-        active.Cooldown = xeno.Comp.Cooldown;
-        active.SpeedMultiplier = xeno.Comp.SpeedMultiplier;
+        if (TryComp<XenoActiveInvisibleComponent>(xeno, out var invis))
+        {
+            var refundedCooldown = GetRefundedCooldown(xeno, invis, xeno.Comp.ManualRefundMultiplier);
+            RemoveInvisibility((xeno, invis), refundedCooldown);
+        }
+        else
+        {
+            var active = EnsureComp<XenoActiveInvisibleComponent>(xeno);
+            active.ExpiresAt = _timing.CurTime + xeno.Comp.Duration;
+            active.FullCooldown = xeno.Comp.FullCooldown;
+            active.SpeedMultiplier = xeno.Comp.SpeedMultiplier; 
 
-        _movementSpeed.RefreshMovementSpeedModifiers(xeno);
+            //Half a second cooldown to prevent double clicks
+            StartCooldown((xeno, active), xeno.Comp.ToggleLockoutTime, true);
+            _movementSpeed.RefreshMovementSpeedModifiers(xeno);
+        }
     }
 
     private void OnXenoActiveInvisibleRemove(Entity<XenoActiveInvisibleComponent> xeno, ref ComponentRemove args)
@@ -55,16 +59,36 @@ public sealed class XenoInvisibilitySystem : EntitySystem
             _movementSpeed.RefreshMovementSpeedModifiers(xeno);
     }
 
-    private void OnXenoActiveInvisibleMeleeAttack(Entity<XenoActiveInvisibleComponent> xeno, ref MeleeAttackEvent args)
+    private void OnXenoActiveInvisibleMeleeHit(Entity<XenoActiveInvisibleComponent> xeno, ref MeleeHitEvent args)
     {
-        RemCompDeferred<XenoActiveInvisibleComponent>(xeno);
-        OnRemoveInvisibility(xeno);
+        if (!args.IsHit || args.HitEntities.Count == 0)
+            return;
+
+        foreach (var entity in args.HitEntities)
+        {
+            if (!_xeno.CanAbilityAttackTarget(xeno, entity))
+                return;
+        
+            RemoveInvisibility(xeno, xeno.Comp.FullCooldown);
+            break;
+        }
+    }
+
+    private void OnXenoDevourDoAfterAttempt(Entity<XenoActiveInvisibleComponent> xeno, ref DoAfterAttemptEvent<XenoDevourDoAfterEvent> args)
+    {
+        if(!TryComp<XenoTurnInvisibleComponent>(xeno, out var turnInvis))
+        {
+            RemoveInvisibility(xeno, xeno.Comp.FullCooldown);
+            return;
+        }
+
+        var devourCooldown = GetRefundedCooldown((xeno, turnInvis), xeno.Comp, turnInvis.RevealedRefundMultiplier);
+        RemoveInvisibility(xeno, devourCooldown);
     }
 
     private void OnXenoActiveInvisibleLeapHit(Entity<XenoActiveInvisibleComponent> xeno, ref XenoLeapHitEvent args)
     {
-        RemCompDeferred<XenoActiveInvisibleComponent>(xeno);
-        OnRemoveInvisibility(xeno);
+        RemoveInvisibility(xeno, xeno.Comp.FullCooldown);
     }
 
     private void OnXenoActiveInvisibleRefreshSpeed(Entity<XenoActiveInvisibleComponent> xeno, ref RefreshMovementSpeedModifiersEvent args)
@@ -73,15 +97,38 @@ public sealed class XenoInvisibilitySystem : EntitySystem
         args.ModifySpeed(multiplier, multiplier);
     }
 
-    private void OnRemoveInvisibility(Entity<XenoActiveInvisibleComponent> xeno)
+    private TimeSpan GetRefundedCooldown(Entity<XenoTurnInvisibleComponent> xeno, XenoActiveInvisibleComponent activeInvis, float refundMultiplier)
+    {
+        var timeRemaining = (activeInvis.ExpiresAt - _timing.CurTime) / xeno.Comp.Duration;
+        var refundedCooldown = xeno.Comp.FullCooldown - timeRemaining * refundMultiplier * xeno.Comp.FullCooldown;
+
+        return refundedCooldown;
+    }
+
+    private void StartCooldown(Entity<XenoActiveInvisibleComponent> xeno, TimeSpan cooldownTime, bool toggledStatus)
     {
         foreach (var (actionId, actionComp) in _actions.GetActions(xeno))
         {
             if (actionComp.BaseEvent is XenoTurnInvisibleActionEvent)
-                _actions.SetIfBiggerCooldown(actionId, xeno.Comp.Cooldown);
+            {
+                _actions.SetCooldown(actionId, cooldownTime);
+                _actions.SetToggled(actionId, toggledStatus);
+            }
         }
+    }
 
+    private void RemoveInvisibility(Entity<XenoActiveInvisibleComponent> xeno, TimeSpan cooldownTime)
+    {
+        RemCompDeferred<XenoActiveInvisibleComponent>(xeno);
+        StartCooldown(xeno, cooldownTime, false);
         _movementSpeed.RefreshMovementSpeedModifiers(xeno);
+
+        if (!xeno.Comp.DidPopup)
+        {
+            _popup.PopupClient(Loc.GetString("cm-xeno-invisibility-expire"), xeno, xeno, PopupType.SmallCaution);
+            xeno.Comp.DidPopup = true;
+            Dirty(xeno);
+        }
     }
 
     public override void Update(float frameTime)
@@ -93,15 +140,7 @@ public sealed class XenoInvisibilitySystem : EntitySystem
             if (active.ExpiresAt > time)
                 continue;
 
-            RemCompDeferred<XenoActiveInvisibleComponent>(uid);
-            OnRemoveInvisibility((uid, active));
-
-            if (!active.DidPopup)
-            {
-                _popup.PopupClient(Loc.GetString("cm-xeno-invisibility-expire"), uid, uid, PopupType.SmallCaution);
-                active.DidPopup = true;
-                Dirty(uid, active);
-            }
+            RemoveInvisibility((uid, active), active.FullCooldown);
         }
     }
 }

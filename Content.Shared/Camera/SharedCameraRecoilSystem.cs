@@ -52,17 +52,14 @@ public abstract class SharedCameraRecoilSystem : EntitySystem
 
     private void UpdateEyes(float frameTime)
     {
-        var query = AllEntityQuery<EyeComponent, CameraRecoilComponent>();
+        var query = AllEntityQuery<CameraRecoilComponent, EyeComponent>();
 
-        while (query.MoveNext(out var uid, out var eye, out var recoil))
+        while (query.MoveNext(out var uid, out var recoil, out var eye))
         {
             var magnitude = recoil.CurrentKick.Length();
             if (magnitude <= 0.005f)
             {
                 recoil.CurrentKick = Vector2.Zero;
-                var ev = new GetEyeOffsetEvent();
-                RaiseLocalEvent(uid, ref ev);
-                _eye.SetOffset(uid, ev.Offset, eye);
             }
             else // Continually restore camera to 0.
             {
@@ -78,11 +75,15 @@ public abstract class SharedCameraRecoilSystem : EntitySystem
                     y = 0;
 
                 recoil.CurrentKick = new Vector2(x, y);
-
-                var ev = new GetEyeOffsetEvent();
-                RaiseLocalEvent(uid, ref ev);
-                _eye.SetOffset(uid, ev.Offset, eye);
             }
+
+            if (recoil.CurrentKick == recoil.LastKick)
+                continue;
+
+            recoil.LastKick = recoil.CurrentKick;
+            var ev = new GetEyeOffsetEvent();
+            RaiseLocalEvent(uid, ref ev);
+            _eye.SetOffset(uid, ev.Offset, eye);
         }
     }
 

@@ -1,0 +1,9 @@
+- type: soundCollection
+  id: RCMXenoClaw
+  files:
+    - /Audio/_RMC14/Xeno/alien_claw_block.ogg
+    - /Audio/_RMC14/Xeno/alien_claw_flesh1.ogg
+    - /Audio/_RMC14/Xeno/alien_claw_flesh2.ogg
+    - /Audio/_RMC14/Xeno/alien_claw_flesh3.ogg
+    - /Audio/_RMC14/Xeno/alien_claw_flesh4.ogg
+    - /Audio/_RMC14/Xeno/alien_claw_flesh5.ogg

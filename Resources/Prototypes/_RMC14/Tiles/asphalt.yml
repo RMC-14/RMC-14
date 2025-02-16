@@ -1,0 +1,321 @@
+# in this file: Asphalt(_, 1..17), Cement(1..20), CementSunBleached(1..20)
+
+# Asphalt
+- type: tile
+  parent: CMFloorSteel
+  id: RMCFloorAsphaltTile
+  name: tiles-rmc-asphalt
+  sprite: /Textures/_RMC14/Tiles/asphalt/tile.png
+
+- type: tile
+  parent: CMFloorSteel
+  id: RMCFloorAsphaltSunBleached
+  name: tiles-rmc-asphalt
+  sprite: /Textures/_RMC14/Tiles/asphalt/sunbleached_asphalt.png
+
+# Asphalt Tiles
+- type: tile
+  parent: CMFloorSteel
+  id: RMCFloorAsphalt
+  name: tiles-rmc-asphalt
+  sprite: /Textures/_RMC14/Tiles/asphalt/asphalt.png
+
+- type: tile
+  parent: RMCFloorAsphalt
+  id: RMCFloorAsphalt1
+  sprite: /Textures/_RMC14/Tiles/asphalt/asphalt1.png
+
+- type: tile
+  parent: RMCFloorAsphalt
+  id: RMCFloorAsphalt2
+  sprite: /Textures/_RMC14/Tiles/asphalt/asphalt2.png
+
+- type: tile
+  parent: RMCFloorAsphalt
+  id: RMCFloorAsphalt3
+  sprite: /Textures/_RMC14/Tiles/asphalt/asphalt3.png
+
+- type: tile
+  parent: RMCFloorAsphalt
+  id: RMCFloorAsphalt4
+  sprite: /Textures/_RMC14/Tiles/asphalt/asphalt4.png
+
+- type: tile
+  parent: RMCFloorAsphalt
+  id: RMCFloorAsphalt5
+  sprite: /Textures/_RMC14/Tiles/asphalt/asphalt5.png
+
+- type: tile
+  parent: RMCFloorAsphalt
+  id: RMCFloorAsphalt6
+  sprite: /Textures/_RMC14/Tiles/asphalt/asphalt6.png
+
+- type: tile
+  parent: RMCFloorAsphalt
+  id: RMCFloorAsphalt7
+  sprite: /Textures/_RMC14/Tiles/asphalt/asphalt7.png
+
+- type: tile
+  parent: RMCFloorAsphalt
+  id: RMCFloorAsphalt8
+  sprite: /Textures/_RMC14/Tiles/asphalt/asphalt8.png
+
+- type: tile
+  parent: RMCFloorAsphalt
+  id: RMCFloorAsphalt9
+  sprite: /Textures/_RMC14/Tiles/asphalt/asphalt9.png
+
+- type: tile
+  parent: RMCFloorAsphalt
+  id: RMCFloorAsphalt10
+  sprite: /Textures/_RMC14/Tiles/asphalt/asphalt10.png
+
+- type: tile
+  parent: RMCFloorAsphalt
+  id: RMCFloorAsphalt11
+  sprite: /Textures/_RMC14/Tiles/asphalt/asphalt11.png
+
+- type: tile
+  parent: RMCFloorAsphalt
+  id: RMCFloorAsphalt12
+  sprite: /Textures/_RMC14/Tiles/asphalt/asphalt12.png
+
+- type: tile
+  parent: RMCFloorAsphalt
+  id: RMCFloorAsphalt13
+  sprite: /Textures/_RMC14/Tiles/asphalt/asphalt13.png
+
+- type: tile
+  parent: RMCFloorAsphalt
+  id: RMCFloorAsphalt14
+  sprite: /Textures/_RMC14/Tiles/asphalt/asphalt14.png
+
+- type: tile
+  parent: RMCFloorAsphalt
+  id: RMCFloorAsphalt15
+  sprite: /Textures/_RMC14/Tiles/asphalt/asphalt15.png
+
+- type: tile
+  parent: RMCFloorAsphalt
+  id: RMCFloorAsphalt16
+  sprite: /Textures/_RMC14/Tiles/asphalt/asphalt16.png
+
+- type: tile
+  parent: RMCFloorAsphalt
+  id: RMCFloorAsphalt17
+  sprite: /Textures/_RMC14/Tiles/asphalt/asphalt17.png
+
+# Cement 
+
+- type: tile
+  abstract: true
+  parent: CMFloorSteel
+  id: RMCFloorCementBase
+  name: tiles-rmc-cement
+
+- type: tile
+  parent: RMCFloorCementBase
+  id: RMCFloorCement1
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement1.png
+
+- type: tile
+  parent: RMCFloorCementBase
+  id: RMCFloorCement2
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement2.png
+
+- type: tile
+  parent: RMCFloorCementBase
+  id: RMCFloorCement3
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement3.png
+
+- type: tile
+  parent: RMCFloorCementBase
+  id: RMCFloorCement4
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement4.png
+
+- type: tile
+  parent: RMCFloorCementBase
+  id: RMCFloorCement5
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement5.png
+
+- type: tile
+  parent: RMCFloorCementBase
+  id: RMCFloorCement6
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement6.png
+
+- type: tile
+  parent: RMCFloorCementBase
+  id: RMCFloorCement7
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement7.png
+
+- type: tile
+  parent: RMCFloorCementBase
+  id: RMCFloorCement8
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement8.png
+
+- type: tile
+  parent: RMCFloorCementBase
+  id: RMCFloorCement9
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement9.png
+
+- type: tile
+  parent: RMCFloorCementBase
+  id: RMCFloorCement10
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement10.png
+
+- type: tile
+  parent: RMCFloorCementBase
+  id: RMCFloorCement11
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement11.png
+
+- type: tile
+  parent: RMCFloorCementBase
+  id: RMCFloorCement12
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement12.png
+
+- type: tile
+  parent: RMCFloorCementBase
+  id: RMCFloorCement13
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement13.png
+
+- type: tile
+  parent: RMCFloorCementBase
+  id: RMCFloorCement14
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement14.png
+
+- type: tile
+  parent: RMCFloorCementBase
+  id: RMCFloorCement15
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement15.png
+
+- type: tile
+  parent: RMCFloorCementBase
+  id: RMCFloorCement16
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement16.png
+
+- type: tile
+  parent: RMCFloorCementBase
+  id: RMCFloorCement17
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement17.png
+
+- type: tile
+  parent: RMCFloorCementBase
+  id: RMCFloorCement18
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement18.png
+
+- type: tile
+  parent: RMCFloorCementBase
+  id: RMCFloorCement19
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement19.png
+
+- type: tile
+  parent: RMCFloorCementBase
+  id: RMCFloorCement20
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement20.png
+
+# Cement Sun Bleached
+
+- type: tile
+  abstract: true
+  parent: RMCFloorCementBase
+  id: RMCFloorCementSunBleachedBase
+
+- type: tile
+  parent: RMCFloorCementSunBleachedBase
+  id: RMCFloorCementSunBleached1
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement_sunbleached1.png
+
+- type: tile
+  parent: RMCFloorCementSunBleachedBase
+  id: RMCFloorCementSunBleached2
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement_sunbleached2.png
+
+- type: tile
+  parent: RMCFloorCementSunBleachedBase
+  id: RMCFloorCementSunBleached3
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement_sunbleached3.png
+
+- type: tile
+  parent: RMCFloorCementSunBleachedBase
+  id: RMCFloorCementSunBleached4
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement_sunbleached4.png
+
+- type: tile
+  parent: RMCFloorCementSunBleachedBase
+  id: RMCFloorCementSunBleached5
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement_sunbleached5.png
+
+- type: tile
+  parent: RMCFloorCementSunBleachedBase
+  id: RMCFloorCementSunBleached6
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement_sunbleached6.png
+
+- type: tile
+  parent: RMCFloorCementSunBleachedBase
+  id: RMCFloorCementSunBleached7
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement_sunbleached7.png
+
+- type: tile
+  parent: RMCFloorCementSunBleachedBase
+  id: RMCFloorCementSunBleached8
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement_sunbleached8.png
+
+- type: tile
+  parent: RMCFloorCementSunBleachedBase
+  id: RMCFloorCementSunBleached9
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement_sunbleached9.png
+
+- type: tile
+  parent: RMCFloorCementSunBleachedBase
+  id: RMCFloorCementSunBleached10
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement_sunbleached10.png
+
+- type: tile
+  parent: RMCFloorCementSunBleachedBase
+  id: RMCFloorCementSunBleached11
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement_sunbleached11.png
+
+- type: tile
+  parent: RMCFloorCementSunBleachedBase
+  id: RMCFloorCementSunBleached12
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement_sunbleached12.png
+
+- type: tile
+  parent: RMCFloorCementSunBleachedBase
+  id: RMCFloorCementSunBleached13
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement_sunbleached13.png
+
+- type: tile
+  parent: RMCFloorCementSunBleachedBase
+  id: RMCFloorCementSunBleached14
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement_sunbleached14.png
+
+- type: tile
+  parent: RMCFloorCementSunBleachedBase
+  id: RMCFloorCementSunBleached15
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement_sunbleached15.png
+
+- type: tile
+  parent: RMCFloorCementSunBleachedBase
+  id: RMCFloorCementSunBleached16
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement_sunbleached16.png
+
+- type: tile
+  parent: RMCFloorCementSunBleachedBase
+  id: RMCFloorCementSunBleached17
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement_sunbleached17.png
+
+- type: tile
+  parent: RMCFloorCementSunBleachedBase
+  id: RMCFloorCementSunBleached18
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement_sunbleached18.png
+
+- type: tile
+  parent: RMCFloorCementSunBleachedBase
+  id: RMCFloorCementSunBleached19
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement_sunbleached19.png
+
+- type: tile
+  parent: RMCFloorCementSunBleachedBase
+  id: RMCFloorCementSunBleached20
+  sprite: /Textures/_RMC14/Tiles/asphalt/cement_sunbleached20.png

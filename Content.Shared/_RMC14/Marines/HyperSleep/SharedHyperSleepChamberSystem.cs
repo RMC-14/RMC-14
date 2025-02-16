@@ -1,4 +1,5 @@
-﻿using Content.Shared.Movement.Events;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Movement.Events;
 using Robust.Shared.Containers;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Timing;
@@ -11,11 +12,16 @@ public abstract class SharedHyperSleepChamberSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
+    private EntityQuery<HyperSleepChamberComponent> _hyperSleepQuery;
+
     private readonly HashSet<EntityUid> _intersecting = new();
 
     public override void Initialize()
     {
+        _hyperSleepQuery = GetEntityQuery<HyperSleepChamberComponent>();
+
         SubscribeLocalEvent<HyperSleepChamberComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<HyperSleepChamberComponent, ContainerIsInsertingAttemptEvent>(OnInsertAttempt);
         SubscribeLocalEvent<HyperSleepChamberComponent, EntInsertedIntoContainerMessage>(OnInserted);
 
         SubscribeLocalEvent<InsideHyperSleepChamberComponent, MoveInputEvent>(OnMoveInput);
@@ -28,6 +34,15 @@ public abstract class SharedHyperSleepChamberSystem : EntitySystem
         _containers.EnsureContainer<Container>(ent, ent.Comp.ContainerId);
     }
 
+    private void OnInsertAttempt(Entity<HyperSleepChamberComponent> ent, ref ContainerIsInsertingAttemptEvent args)
+    {
+        if (HasComp<XenoComponent>(args.EntityUid))
+        {
+            args.Cancel();
+            return;
+        }
+    }
+
     private void OnInserted(Entity<HyperSleepChamberComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         if (!_timing.ApplyingState)
@@ -36,6 +51,9 @@ public abstract class SharedHyperSleepChamberSystem : EntitySystem
 
     private void OnMoveInput(Entity<InsideHyperSleepChamberComponent> ent, ref MoveInputEvent args)
     {
+        if (!args.HasDirectionalMovement)
+            return;
+
         if (_timing.ApplyingState)
             return;
 
@@ -53,6 +71,15 @@ public abstract class SharedHyperSleepChamberSystem : EntitySystem
     {
         if (ent.Comp.Chamber == args.OtherEntity)
             args.Cancelled = true;
+    }
+
+    public void EjectChamber(Entity<HyperSleepChamberComponent?> ent)
+    {
+        if (!_hyperSleepQuery.Resolve(ent, ref ent.Comp, false))
+            return;
+
+        if (_containers.TryGetContainer(ent, ent.Comp.ContainerId, out var container))
+            _containers.EmptyContainer(container);
     }
 
     public override void Update(float frameTime)

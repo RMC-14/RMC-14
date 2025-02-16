@@ -1,6 +1,7 @@
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.DoAfter;
+using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Maps;
@@ -24,14 +25,16 @@ public abstract partial class SharedToolSystem : EntitySystem
     [Dependency] private   readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private   readonly SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] protected readonly SharedInteractionSystem InteractionSystem = default!;
-    [Dependency] protected readonly SharedItemToggleSystem ItemToggle = default!;
+    [Dependency] protected readonly ItemToggleSystem ItemToggle = default!;
     [Dependency] private   readonly SharedMapSystem _maps = default!;
     [Dependency] private   readonly SharedPopupSystem _popup = default!;
     [Dependency] protected readonly SharedSolutionContainerSystem SolutionContainerSystem = default!;
     [Dependency] private   readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private   readonly TileSystem _tiles = default!;
     [Dependency] private   readonly TurfSystem _turfs = default!;
-    [Dependency] protected readonly SharedSolutionContainerSystem SolutionContainer = default!;
+
+    public const string CutQuality = "Cutting";
+    public const string PulseQuality = "Pulsing";
 
     public override void Initialize()
     {
@@ -39,6 +42,7 @@ public abstract partial class SharedToolSystem : EntitySystem
         InitializeTile();
         InitializeWelder();
         SubscribeLocalEvent<ToolComponent, ToolDoAfterEvent>(OnDoAfter);
+        SubscribeLocalEvent<ToolComponent, ExaminedEvent>(OnExamine);
     }
 
     private void OnDoAfter(EntityUid uid, ToolComponent tool, ToolDoAfterEvent args)
@@ -53,6 +57,34 @@ public abstract partial class SharedToolSystem : EntitySystem
             RaiseLocalEvent(GetEntity(args.OriginalTarget.Value), (object) ev);
         else
             RaiseLocalEvent((object) ev);
+    }
+
+    private void OnExamine(Entity<ToolComponent> ent, ref ExaminedEvent args)
+    {
+        // If the tool has no qualities, exit early
+        if (ent.Comp.Qualities.Count == 0)
+            return;
+
+        var message = new FormattedMessage();
+
+        // Create a list to store tool quality names
+        var toolQualities = new List<string>();
+
+        // Loop through tool qualities and add localized names to the list
+        foreach (var toolQuality in ent.Comp.Qualities)
+        {
+            if (_protoMan.TryIndex<ToolQualityPrototype>(toolQuality ?? string.Empty, out var protoToolQuality))
+            {
+                toolQualities.Add(Loc.GetString(protoToolQuality.Name));
+            }
+        }
+
+        // Combine the qualities into a single string and localize the final message
+        var qualitiesString = string.Join(", ", toolQualities);
+
+        // Add the localized message to the FormattedMessage object
+        message.AddMarkupPermissive(Loc.GetString("tool-component-qualities", ("qualities", qualitiesString)));
+        args.PushMessage(message);
     }
 
     public void PlayToolSound(EntityUid uid, ToolComponent tool, EntityUid? user)
@@ -115,6 +147,7 @@ public abstract partial class SharedToolSystem : EntitySystem
     /// the event that this tool-use cancelled an existing DoAfter</param>
     /// <param name="fuel">Amount of fuel that should be taken from the tool.</param>
     /// <param name="toolComponent">The tool component.</param>
+    /// <param name="duplicateCondition">Condition to check for duplicates on.</param>
     /// <returns>Returns true if any interaction takes place.</returns>
     public bool UseTool(
         EntityUid tool,
@@ -125,7 +158,8 @@ public abstract partial class SharedToolSystem : EntitySystem
         DoAfterEvent doAfterEv,
         out DoAfterId? id,
         float fuel = 0,
-        ToolComponent? toolComponent = null)
+        ToolComponent? toolComponent = null,
+        DuplicateConditions duplicateCondition = DuplicateConditions.None)
     {
         id = null;
         if (!Resolve(tool, ref toolComponent, false))
@@ -141,7 +175,8 @@ public abstract partial class SharedToolSystem : EntitySystem
             BreakOnMove = true,
             BreakOnWeightlessMove = false,
             NeedHand = tool != user,
-            AttemptFrequency = fuel > 0 ? AttemptFrequency.EveryTick : AttemptFrequency.Never
+            AttemptFrequency = fuel > 0 ? AttemptFrequency.EveryTick : AttemptFrequency.Never,
+            DuplicateCondition = duplicateCondition,
         };
 
         _doAfterSystem.TryStartDoAfter(doAfterArgs, out id);
@@ -162,6 +197,7 @@ public abstract partial class SharedToolSystem : EntitySystem
     /// will be directed at the tool target.</param>
     /// <param name="fuel">Amount of fuel that should be taken from the tool.</param>
     /// <param name="toolComponent">The tool component.</param>
+    /// <param name="duplicateCondition">Condition to check for duplicates on.</param>
     /// <returns>Returns true if any interaction takes place.</returns>
     public bool UseTool(
         EntityUid tool,
@@ -171,7 +207,8 @@ public abstract partial class SharedToolSystem : EntitySystem
         string toolQualityNeeded,
         DoAfterEvent doAfterEv,
         float fuel = 0,
-        ToolComponent? toolComponent = null)
+        ToolComponent? toolComponent = null,
+        DuplicateConditions duplicateCondition = DuplicateConditions.None)
     {
         return UseTool(tool,
             user,

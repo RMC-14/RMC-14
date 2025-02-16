@@ -151,3 +151,16 @@
     state: basic_bow
   - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
     state: basic_bell
+
+- type: marking
+  id: FelinidTiger
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Felinid]
+  sprites:
+    - sprite: _RMC14/Mobs/Felinids/tiger_tail.rsi
+      state: m_tail_tiger_primary
+    - sprite: _RMC14/Mobs/Felinids/tiger_tail.rsi
+      state: m_tail_tiger_secondary
+    - sprite: _RMC14/Mobs/Felinids/tiger_tail.rsi
+      state: m_tail_tiger_tertiary

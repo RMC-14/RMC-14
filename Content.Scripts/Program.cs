@@ -3,7 +3,10 @@
 string program;
 if (args.Length == 0)
 {
-    Console.WriteLine("Which program to run? [doorsplitter, metafixer]");
+    Console.WriteLine(@"Which program to run?
+1: doorsplitter
+2: metafixer
+3: areaimporter");
     program = Console.ReadLine() ?? string.Empty;
 }
 else
@@ -13,13 +16,17 @@ else
 
 program = program.ToLower().Trim();
 
-if ("doorsplitter".Contains(program))
+if (program == "1" || "doorsplitter".Contains(program))
 {
     DoorSplitter.Run();
 }
-else if ("metafixer".Contains(program))
+else if (program == "2" || "metafixer".Contains(program))
 {
     MetaFixer.Run();
+}
+else if (program == "3" || "areaimporter".Contains(program))
+{
+    new AreaImporter().Run();
 }
 else
 {

@@ -71,3 +71,11 @@
   components:
   - type: AccessReader
     access: [["CMAccessASO"]]
+
+- type: entity
+  parent: CMAirlockCommand
+  id: CMAirlockHighCommandLocked
+  suffix: High Command, Locked
+  components:
+  - type: AccessReader
+    access: [["CMAccessHighCommand"]]

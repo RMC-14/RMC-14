@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
@@ -24,9 +24,6 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
 
     private void OnXenoParalyzingSlashAction(Entity<XenoParalyzingSlashComponent> xeno, ref XenoParalyzingSlashActionEvent args)
     {
-        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
-            return;
-
         args.Handled = true;
         var active = EnsureComp<XenoActiveParalyzingSlashComponent>(xeno);
 
@@ -46,7 +43,7 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
 
         foreach (var entity in args.HitEntities)
         {
-            if (!_xeno.CanHitLiving(xeno, entity) ||
+            if (!_xeno.CanAbilityAttackTarget(xeno, entity) ||
                 HasComp<VictimBeingParalyzedComponent>(entity))
             {
                 continue;
@@ -61,7 +58,9 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
             Dirty(entity, victim);
 
             var message = Loc.GetString("cm-xeno-paralyzing-slash-hit", ("target", entity));
-            _popup.PopupClient(message, entity, xeno);
+
+            if (_net.IsServer)
+                _popup.PopupEntity(message, entity, xeno);
 
             RemCompDeferred<XenoActiveParalyzingSlashComponent>(xeno);
             break;

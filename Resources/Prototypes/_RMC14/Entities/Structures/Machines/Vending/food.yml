@@ -1,0 +1,152 @@
+# FOOD
+
+- type: entity
+  parent: ColMarTechBaseAnchorable
+  id: ColMarTechFood
+  name: ColMarTech food vendor
+  description: Marine Food Vendor, containing standard military Prepared Meals.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/food.rsi
+  - type: CMAutomatedVendor
+    sections:
+    - name: Festive Meals
+      holidays:
+      - FestiveSeason
+      entries:
+      - id: RMCMarinePreparedMealCookies
+        amount: 25
+      - id: RMCMarinePreparedMealGingerbread
+        amount: 25
+      - id: RMCMarinePreparedMealFruitcake
+        amount: 25
+    - name: Prepared Meals
+      entries:
+      - id: CMMRE
+        name: UNMC Meal Ready to Eat
+        amount: 15
+      - id: CMMarinePreparedMealChicken
+        amount: 15
+      - id: CMMarinePreparedMealCornbread
+        amount: 15
+      - id: CMMarinePreparedMealPasta
+        amount: 15
+      - id: CMMarinePreparedMealPizza
+        amount: 15
+      - id: CMMarinePreparedMealPork
+        amount: 15
+      - id: CMMarinePreparedMealTofu
+        amount: 15
+      - id: CMMarineProteinBar
+        amount: 50
+    - name: Flasks
+      entries:
+      - id: CMCanteen
+        amount: 10
+      - id: CMMetalFlask
+        name: metal flask (empty)
+        amount: 10
+      - id: CMMarineFlask
+        amount: 5
+      - id: CMWEYAFlask
+        amount: 5
+
+- type: entity
+  parent: ColMarTechBaseAnchorable
+  id: CMVendorBooze
+  name: Booze-O-Mat
+  description: A technological marvel, supposedly able to mix just the mixture you'd like to drink the moment you ask for one.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/boozeomat.rsi
+    layers:
+    - state: "off"
+    - state: "normal-unshaded"
+  - type: AccessReader
+    access:
+    - [ "CMAccessKitchen" ]
+    - [ "CMAccessColonyPublic" ]
+  - type: CMAutomatedVendor
+    sections:
+    - name: Alcohol
+      entries:
+#      - id: DrinkAleBottleFull
+#        amount: 6
+#      - id: DrinkBeerBottleFull
+#        amount: 6
+#      - id: DrinkGrenadineBottleFull
+#        amount: 5
+#      - id: DrinkTequilaBottleFull
+#        amount: 5
+      - id: RMCDrinkAlcoholRum
+        amount: 5
+      - id: RMCDrinkAlcoholCognac
+        amount: 5
+      - id: RMCDrinkAlcoholWhiskey
+        amount: 5
+      - id: RMCDrinkAlcoholPurpleWine
+        amount: 5
+      - id: RMCDrinkAlcoholMelonLiquor
+        amount: 2
+#      - id: DrinkVermouthBottleFull
+#        amount: 5
+      - id: RMCDrinkAlcoholGin
+        amount: 5
+      - id: RMCDrinkAlcoholAbsinthe
+        amount: 2
+#      - id: DrinkBlueCuracaoBottleFull
+#        amount: 2
+      - id: RMCDrinkAlcoholVodka
+        amount: 5
+#      - id: DrinkCoffeeLiqueurBottleFull
+#        amount: 5
+    - name: Craft Beers
+      entries: []
+    - name: Non-Alcohol
+      entries:
+      - id: CMDrinkCanFruitBeer
+        amount: 8
+      - id: DrinkJuiceLimeCarton
+        amount: 4
+      - id: DrinkCreamCarton
+        amount: 4
+      - id: DrinkJuiceOrangeCarton
+        amount: 4
+      - id: CMDrinkCanSoda
+        amount: 15
+      - id: DrinkJuiceTomatoCarton
+        amount: 4
+      - id: CMDrinkCanTonic
+        amount: 8
+    - name: Containers
+      entries:
+      - id: CMMetalFlask
+        name: metal flask (empty)
+        amount: 5
+      - id: DrinkGlass
+        amount: 30
+      - id: CMMarineFlask
+        amount: 5
+
+- type: entity
+  parent: ColMarTechBaseAnchorable
+  id: CMVendorChess
+  name: Chess-o-mat
+  description: In 2143 Red Star Drinks, a SPP-CA (Colony Administration) affiliated corporation ran a promotional sweepstakes for drinkers who had found special codes on the inside of the caps of a limited run of Red Star Vodka, shipping them a Chess-O-Mat with unlimited refills.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/chessomat.rsi
+    layers:
+    - state: "off"
+    - state: "normal-unshaded"
+  - type: CMAutomatedVendor
+    sections:
+    - name: Chess
+      entries:
+      - id: ChessBoard
+        amount: 5
+    - name: White Pieces
+      entries: []
+    - name: Black Pieces
+      entries: []
+    # TODO RMC14 vodka chess pieces

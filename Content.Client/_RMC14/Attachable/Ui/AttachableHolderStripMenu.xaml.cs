@@ -57,7 +57,7 @@ public sealed partial class AttachableHolderStripMenu : FancyWindow
 
             AttachableButton = new Button
             {
-                Text = Loc.GetString("cm-attachable-holder-strip-ui-empty-slot"),
+                Text = Loc.GetString("rmc-attachable-holder-strip-ui-empty-slot"),
                 HorizontalExpand = true,
                 HorizontalAlignment = HAlignment.Right,
                 StyleClasses = { StyleBase.ButtonOpenRight }
@@ -83,7 +83,7 @@ public sealed partial class AttachableHolderStripMenu : FancyWindow
         {
             if (attachableName == null)
             {
-                AttachableButton.Text = Loc.GetString("cm-attachable-holder-strip-ui-empty-slot");
+                AttachableButton.Text = Loc.GetString("rmc-attachable-holder-strip-ui-empty-slot");
                 AttachableButton.Disabled = true;
                 return;
             }

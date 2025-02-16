@@ -50,6 +50,7 @@
         node: missingWires
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: RMCDropshipBlocked
 
 - type: entity
   parent: MachineFrameDestroyed

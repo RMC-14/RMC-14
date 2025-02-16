@@ -17,6 +17,12 @@
   - !type:DepartmentTimeRequirement
     department: CMAuxiliarySupport
     time: 18000 # 5 hours
+  ranks:
+    RMCRankCaptain:
+    - !type:RoleTimeRequirement
+      role: CMJobAuxiliarySupportOfficer
+      time: 252000 # 70 hours
+    RMCRankFirstLT: []
   weight: 5
   startingGear: CMGearASO
   icon: "CMJobIconASO"
@@ -25,38 +31,52 @@
   supervisors: cm-job-supervisors-co
   accessGroups:
   - ASO
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: aso
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      construction: 2
-      engineer: 2
-      firearms: 1
-      fireman: 1
-      intel: 2
-      jtac: 3
-      leadership: 3
-      medical: 2
-      navigations: 1
-      overwatch: 1
-      pilot: 2
-      police: 1
-      powerLoader: 2
-      surgery: 1
-      vehicles: 1
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillIntel: 2
+        RMCSkillJtac: 3
+        RMCSkillLeadership: 3
+        RMCSkillMedical: 2
+        RMCSkillNavigations: 1
+        RMCSkillOverwatch: 1
+        RMCSkillPilot: 2
+        RMCSkillPolice: 1
+        RMCSkillPowerLoader: 2
+        RMCSkillSurgery: 1
+        RMCSkillVehicles: 1
     - type: MarineOrders
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-aso
+    - type: ViewIntelObjectives
 
 - type: startingGear
   id: CMGearASO
   equipment:
     jumpsuit: CMJumpsuitBO
     outerClothing: CMCoatASO
-    back: CMSatchel
     shoes: CMBootsBlack
     id: CMIDCardASO
-    ears: CMHeadsetLeader
-    pocket1: CMPouchGeneralLarge
-    pocket2: CMPouchGeneralLarge
+    ears: CMHeadsetSeniorCommand
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchGeneralLarge
+  storage:
+    pocket1:
+    - RMCRangefinder
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -65,11 +85,22 @@
   components:
   - type: SpawnPoint
     job_id: CMAuxiliarySupportOfficer
-  - type: Sprite
+  - type: Sprite # TODO: Replace with landmark sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
-    - state: auxiliary_support_officer
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: auxiliary_support_officer
+
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleASO
+  name: Auxiliary Support Officer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: auxiliary_support_officer
 
 - type: playTimeTracker
   id: CMJobAuxiliarySupportOfficer
+  isHumanoid: true

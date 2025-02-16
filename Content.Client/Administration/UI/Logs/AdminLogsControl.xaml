@@ -11,7 +11,7 @@
                             StyleClasses="OpenRight"/>
                 </BoxContainer>
                 <BoxContainer Orientation="Horizontal" VerticalExpand="True">
-                    <BoxContainer Orientation="Vertical" MinWidth="200">
+                    <BoxContainer Orientation="Vertical" MinWidth="250">
                         <LineEdit Name="TypeSearch" Access="Public" StyleClasses="actionSearchBox"
                                   HorizontalExpand="true" PlaceHolder="{Loc admin-logs-search-types-placeholder}"/>
                         <BoxContainer Orientation="Horizontal">

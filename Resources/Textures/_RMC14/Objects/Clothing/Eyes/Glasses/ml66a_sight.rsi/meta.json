@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f2b3774f6ca9173e76e7783d88e3c2f765cd385f/icons/obj/items/clothing/glasses.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon_on"
+    },
+    {
+      "name": "icon"
+    }
+  ]
+}

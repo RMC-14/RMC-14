@@ -14,7 +14,9 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
     time: 18000 # 5 hours
-  startingGear: CMGearSurvivor
+  ranks:
+    RMCRankCivilian: []
+  startingGear: RMCGearSurvivor
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-nobody
@@ -24,20 +26,30 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      construction: 1
-      endurance: 2
-      firearms: 1
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetCivilian
+    - type: Survivor
+    - type: MotionDetectorTracked
+    - type: UserIFF
+      faction: FactionSurvivor
+    - type: IntelRescueSurvivorObjective
   hasIcon: false
-  hidden: true # TODO RMC14
 
 - type: startingGear
-  id: CMGearSurvivor
+  id: RMCGearSurvivor
   equipment:
     jumpsuit: CMJumpsuitColonist
-    back: CMSatchel
-    shoes: CMBootsBrown
+    back: RMCSatchelCivilianFill
+    shoes: RMCShoesBlack
     id: CMIDCardColonist
     ears: CMHeadsetColony
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchGeneral
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -46,11 +58,22 @@
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
-  - type: Sprite
+  - type: Sprite # TODO: Replace with landmark sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
-    - state: survivor
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
+
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleSurvivor
+  name: Survivor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: survivor
 
 - type: playTimeTracker
   id: CMJobSurvivor
+  isHumanoid: true

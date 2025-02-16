@@ -2,14 +2,19 @@
   id: Hiss
   name: rmc-emote-name-hiss
   category: Vocal
+  whitelist:
+    components:
+    - Vocal
+    - Xeno
+  blacklist:
+    components:
+    - BorgChassis
   available: false
-  icon: Interface/Actions/scream.png
+  icon: _RMC14/Actions/xeno_emotes.rsi/hiss.png
   chatMessages: ["rmc-emote-hiss"]
   chatTriggers:
     - hiss
     - hisses
-    - hisses.
-    - hisses!
     - hissing
     - hissed
 
@@ -17,37 +22,41 @@
   id: Meow
   name: rmc-emote-name-meow
   category: Vocal
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
   available: false
   icon: Interface/Actions/scream.png
   chatMessages: ["rmc-emote-meow"]
   chatTriggers:
     - meow
     - meows
-    - meows.
-    - meows!
     - meowing
     - meowed
     - miau
     - miaus
-    - miaus.
-    - miaus!
     - nya
     - nyas
-    - nyas.
-    - nyas!
 
 - type: emote
   id: Mew
   name: rmc-emote-name-mew
   category: Vocal
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
   available: false
   icon: Interface/Actions/scream.png
   chatMessages: ["rmc-emote-mew"]
   chatTriggers:
     - mew
     - mews
-    - mews.
-    - mews!
     - mewing
     - mewed
 
@@ -55,8 +64,15 @@
   id: Growl
   name: rmc-emote-name-growl
   category: Vocal
+  whitelist:
+    components:
+    - Vocal
+    - Xeno
+  blacklist:
+    components:
+    - BorgChassis
   available: false
-  icon: Interface/Actions/scream.png
+  icon: _RMC14/Actions/xeno_emotes.rsi/growl.png
   chatMessages: ["rmc-emote-growl"]
   chatTriggers:
     - growl
@@ -70,13 +86,93 @@
   id: Purr
   name: rmc-emote-name-purr
   category: Vocal
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
   available: false
   icon: Interface/Actions/scream.png
   chatMessages: ["rmc-emote-purr"]
   chatTriggers:
     - purr
     - purrs
-    - purrs.
-    - purrs!
     - purring
     - purred
+
+#Vulpkanin
+
+- type: emote
+  id: Bark
+  name: rmc-emote-name-bark
+  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-bark"]
+  chatTriggers:
+    - bark
+    - bark.
+    - bark!
+    - barks
+    - barks.
+    - barks!
+    - barked.
+    - barked!
+    - barking.
+
+- type: emote
+  id: Snarl
+  name: rmc-emote-name-snarl
+  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-snarl"]
+  chatTriggers:
+    - snarl
+    - snarl.
+    - snarl!
+    - snarls
+    - snarls.
+    - snarls!
+    - snarled.
+    - snarled!
+    - snarling.
+
+- type: emote
+  id: Whine
+  name: rmc-emote-name-whine
+  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-whine"]
+  chatTriggers:
+    - whine
+    - whine.
+    - whine!
+    - whines
+    - whines.
+    - whines!
+    - whined.
+    - whined!
+    - whining.
+
+
+
+
+

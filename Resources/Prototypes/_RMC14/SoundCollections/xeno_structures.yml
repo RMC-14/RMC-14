@@ -1,0 +1,6 @@
+- type: soundCollection
+  id: RMCResinBuild
+  files:
+    - /Audio/_RMC14/Xeno/alien_resin_build1.ogg
+    - /Audio/_RMC14/Xeno/alien_resin_build2.ogg
+    - /Audio/_RMC14/Xeno/alien_resin_build3.ogg

@@ -16,3 +16,12 @@
     state: mixer_loaded
   - type: Machine
     board: CMCircuitboardChemMaster
+  - type: RequiresSkill
+    skills:
+      RMCSkillMedical: 3
+  - type: ApcPowerReceiver
+    needsPower: false # TOOD RMC14 power
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno

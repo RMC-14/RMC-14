@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/6c8f3153bb8846baa74e413b3ed8d3355aebcea3/icons/turf/walls/window_frames.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bnkr_frame0"
+    },
+    {
+      "name": "bnkr_frame1"
+    },
+    {
+      "name": "bnkr_frame2"
+    },
+    {
+      "name": "bnkr_frame3"
+    },
+    {
+      "name": "bnkr_frame4"
+    },
+    {
+      "name": "bnkr_frame5"
+    },
+    {
+      "name": "bnkr_frame6"
+    },
+    {
+      "name": "bnkr_frame7"
+    },
+    {
+      "name": "bnkr_frame8"
+    },
+    {
+      "name": "bnkr_frame9"
+    },
+    {
+      "name": "bnkr_frame10"
+    },
+    {
+      "name": "bnkr_frame11"
+    },
+    {
+      "name": "bnkr_frame12"
+    },
+    {
+      "name": "bnkr_frame13"
+    },
+    {
+      "name": "bnkr_frame14"
+    },
+    {
+      "name": "bnkr_frame15"
+    }
+  ]
+}

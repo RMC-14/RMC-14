@@ -14,7 +14,6 @@
     spentDesc: expendable-light-spent-flare-desc
     glowDuration: 225
     fadeOutDuration: 15
-    iconStateOn: flare_unlit
     iconStateSpent: flare_spent
     turnOnBehaviourID: turn_on
     fadeOutBehaviourID: fade_out
@@ -26,7 +25,6 @@
         loop: true
         volume: -10
         maxDistance: 5
-
   - type: Sprite
     sprite: Objects/Misc/flare.rsi
     layers:

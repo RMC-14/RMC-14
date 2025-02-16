@@ -18,7 +18,7 @@
     whitelist:
       tags:
       - DiscreteHealthAnalyzer
-      #      - TODO RMC14 CMDropper
+      - Dropper
       - Pill
       - Bottle
       - Syringe
@@ -30,14 +30,16 @@
       - Brutepack
       - Bloodpack
       #      - TODO RMC14 splint
-      #      - TODO RMC14 penlight
+      - RMCPenlight
       - CMAutoInjector
       #      - TODO RMC14 syringe cases
-      #      - TODO RMC14 surgical cases
       - CMSurgicalLine
       - CMSynthGraft
       - CMRollerBed
       - BodyBag
+      - Hypospray
+      - CMBloodPack
+      - CMSurgicalCase
       components:
       - Hypospray
   - type: Item
@@ -58,6 +60,14 @@
     items:
       tags:
       - PillCanister
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: StorageNestedOpenSkillRequired
+    skills:
+      all:
+        RMCSkillMedical: 2
 
 - type: entity
   parent: CMFirstAidKit
@@ -83,12 +93,12 @@
   components:
   - type: Sprite
     layers:
-    - state: ointment
+    - state: firefirstaid
     - state: kit_empty
       map: [ "openLayer" ]
       visible: false
   - type: Item
-    heldPrefix: ointment
+    heldPrefix: firefirstaid
 
 - type: entity
   parent: CMBurnAidKit

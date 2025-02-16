@@ -1,5 +1,7 @@
 ﻿using System.Linq;
+using Content.Server._RMC14.Marines;
 using Content.Server.Administration;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Vendors;
 using Content.Shared.Administration;
 using Robust.Shared.Toolshed;
@@ -32,6 +34,9 @@ public sealed class VendorPointsCommand : ToolshedCommand
         [PipedArgument] EntityUid marine,
         [CommandArgument] ValueRef<int> points)
     {
+        if (!HasComp<MarineComponent>(marine))
+            return marine;
+
         _automatedVendor ??= GetSys<CMAutomatedVendorSystem>();
         var user = EnsureComp<CMVendorUserComponent>(marine);
         _automatedVendor.SetPoints((marine, user), points.Evaluate(ctx));
@@ -53,6 +58,9 @@ public sealed class VendorPointsCommand : ToolshedCommand
         [PipedArgument] EntityUid marine,
         [CommandArgument] ValueRef<int> points)
     {
+        if (!HasComp<MarineComponent>(marine))
+            return marine;
+
         _automatedVendor ??= GetSys<CMAutomatedVendorSystem>();
         var user = EnsureComp<CMVendorUserComponent>(marine);
         _automatedVendor.SetExtraPoints((marine, user), SpecialistPoints, points.Evaluate(ctx));

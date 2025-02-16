@@ -31,6 +31,15 @@
       ]
     },
     {
+      "name": "autolathe_u",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
       "name": "autolathe_t"
     },
     {

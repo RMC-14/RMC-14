@@ -9,6 +9,12 @@ namespace Content.Shared.Projectiles;
 public sealed partial class ProjectileComponent : Component
 {
     /// <summary>
+    ///     The angle of the fired projectile.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public Angle Angle;
+
+    /// <summary>
     ///     The effect that appears when a projectile collides with an entity.
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]
@@ -71,6 +77,14 @@ public sealed partial class ProjectileComponent : Component
     /// <summary>
     ///     Whether this projectile has already damaged an entity.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool DamagedEntity;
+
+    /// <summary>
+    /// Sets the maximum range for a projectile fired with ShootAtFixedPointComponent.
+    /// This can be set on both the Projectile and ShootAtFixedPoint Components.
+    /// The default value is null for no cap. The minimum value between the two is used.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float? MaxFixedRange;
 }

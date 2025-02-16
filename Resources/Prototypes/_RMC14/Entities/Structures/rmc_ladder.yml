@@ -1,0 +1,21 @@
+﻿- type: entity
+  id: RMCLadder
+  name: ladder
+  description: A sturdy metal ladder.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _RMC14/Structures/ladder.rsi
+    drawdepth: WallTops
+    state: ladderdown
+  - type: PlacementReplacement
+    key: ladders
+  - type: Ladder

@@ -12,6 +12,33 @@
         },
         {
             "name": "base-1"
+        },
+        {
+            "name": "base-2"
+        },
+        {
+            "name": "base-3"
+        },
+        {
+            "name": "base-4"
+        },
+        {
+            "name": "base-5"
+        },
+        {
+            "name": "base-unshaded-1"
+        },
+        {
+            "name": "base-unshaded-2"
+        },
+        {
+            "name": "base-unshaded-3"
+        },
+        {
+            "name": "base-unshaded-4"
+        },
+        {
+            "name": "base-unshaded-5"
         }
     ]
 }

@@ -1,0 +1,17 @@
+- type: emoteSounds
+  parent: RMCBaseMaleSounds
+  id: RMCMaleHuman
+  sounds:
+    Scream:
+      collection: CMMaleScreams
+    Laugh:
+      collection: MaleLaugh
+
+- type: emoteSounds
+  parent: RMCBaseFemaleSounds
+  id: RMCFemaleHuman
+  sounds:
+    Scream:
+      collection: CMFemaleScreams
+    Laugh:
+      collection: FemaleLaugh

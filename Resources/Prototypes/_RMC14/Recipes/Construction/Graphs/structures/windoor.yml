@@ -33,7 +33,7 @@
       conditions:
       - !type:EntityAnchored { }
       steps:
-      - material: Cable
+      - material: RMCCable
         amount: 1
         doAfter: 4
 
@@ -65,7 +65,7 @@
     - to: assembly
       completed:
       - !type:SpawnPrototype
-        prototype: CableApcStack1
+        prototype: RMCCableCoil
         amount: 1
       steps:
       - tool: Cutting
@@ -115,7 +115,7 @@
       conditions:
       - !type:EntityAnchored { }
       steps:
-      - material: Cable
+      - material: RMCCable
         amount: 1
         doAfter: 4
 
@@ -150,7 +150,7 @@
     - to: assemblySecure
       completed:
       - !type:SpawnPrototype
-        prototype: CableApcStack1
+        prototype: RMCCableCoil
         amount: 1
       steps:
       - tool: Cutting

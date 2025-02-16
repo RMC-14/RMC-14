@@ -1,0 +1,113 @@
+- type: entity
+  parent: SpaceCash
+  id: RMCSpaceCash
+  name: dollars
+  description: Ten hundred-dollar bills, minted by the United Nations Treasury. Each are adorned with the face of a long-forgotten diplomat of a once-powerful planet. These bills are more than mere currency, they feel alive, as though they carry the weight of ancient history and the judgments of those who once controlled vast empires. The faces on each bill seem to watch you with silent intensity, as if each one believes it alone should be in your possession..
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/spacecash.rsi
+    state: spacecash1
+    layers:
+    - state: spacecash1
+      map: ["base"]
+  - type: Item
+    size: Tiny
+    shape: null
+  - type: Tag
+    tags:
+    - Holdout
+  - type: Stack
+    stackType: Dollar
+    count: 1
+    baseLayer: base
+    layerStates:
+    - spacecash1
+    - spacecash10
+    - spacecash20
+    - spacecash50
+    - spacecash100
+    - spacecash200
+    - spacecash500
+    - spacecash1000
+  - type: PhysicalComposition
+    materialComposition:
+      Dollar: 1
+  - type: Appearance
+
+- type: entity
+  parent: RMCSpaceCash
+  id: RMCSpaceCash1
+  name: 1 dollar bill
+  description: A single one-dollar bill, minted by the United Nations Treasury. Its design features the image of a long-forgotten figure from a bygone era, a leader whose legacy now means little to the galactic populace. While it holds sentimental value for those from certain worlds, its actual worth is minimal. In most systems, it might fetch you half a hot-dog or a similar low-value snack.
+
+- type: material
+  id: Dollar
+  name: 1 dollar bill
+  unit: materials-unit-bill
+  stackEntity: RMCSpaceCash1
+  icon: { sprite: /Textures/_RMC14/Objects/Misc/spacecash.rsi, state: spacecash1 }
+  price: 1
+
+- type: stack
+  id: Dollar
+  name: 1 dollar bill
+  icon: { sprite: /Textures/_RMC14/Objects/Misc/spacecash.rsi, state: spacecash1 }
+  spawn: RMCSpaceCash1
+
+# TODO RMC14 make different bills
+
+- type: entity
+  parent: RMCSpaceCash1
+  id: RMCSpaceCash10
+  suffix: 10
+  components:
+  - type: Stack
+    count: 10
+
+- type: entity
+  parent: RMCSpaceCash1
+  id: RMCSpaceCash20
+  suffix: 20
+  components:
+  - type: Stack
+    count: 20
+
+- type: entity
+  parent: RMCSpaceCash1
+  id: RMCSpaceCash50
+  suffix: 50
+  components:
+  - type: Stack
+    count: 50
+
+- type: entity
+  parent: RMCSpaceCash1
+  id: RMCSpaceCash100
+  suffix: 100
+  components:
+  - type: Stack
+    count: 100
+
+- type: entity
+  parent: RMCSpaceCash1
+  id: RMCSpaceCash200
+  suffix: 200
+  components:
+  - type: Stack
+    count: 200
+
+- type: entity
+  parent: RMCSpaceCash1
+  id: RMCSpaceCash500
+  suffix: 500
+  components:
+  - type: Stack
+    count: 500
+
+- type: entity
+  parent: RMCSpaceCash1
+  id: RMCSpaceCash1000
+  suffix: 1000
+  components:
+  - type: Stack
+    count: 1000

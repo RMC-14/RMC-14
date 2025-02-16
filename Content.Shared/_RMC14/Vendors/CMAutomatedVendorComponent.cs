@@ -14,7 +14,7 @@ public sealed partial class CMAutomatedVendorComponent : Component
     public string? PointsType;
 
     [DataField, AutoNetworkedField]
-    public ProtoId<JobPrototype>? Job;
+    public List<ProtoId<JobPrototype>> Jobs = new();
 
     [DataField, AutoNetworkedField]
     public List<CMVendorSection> Sections = new();

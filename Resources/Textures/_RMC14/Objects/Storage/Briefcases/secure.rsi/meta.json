@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/c648dca374ddee1c80f61ab88678c287356fa66f/icons/obj/items/storage.dmi, https://github.com/cmss13-devs/cmss13/blob/6bb886fa1b5d76f7266c2f0514d860537008dfa4/icons/mob/humans/onmob/items_lefthand_0.dmi, https://github.com/cmss13-devs/cmss13/blob/6bb886fa1b5d76f7266c2f0514d860537008dfa4/icons/mob/humans/onmob/items_righthand_0.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "secure"
+    },
+    {
+      "name": "secure0"
+    },
+    {
+      "name": "secureb",
+      "delays": [
+        [
+          1.5,
+          1.5
+        ]
+      ]
+    },
+    {
+      "name": "securespark",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    }
+  ]
+}

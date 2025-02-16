@@ -1,0 +1,45 @@
+- type: trait
+  id: Russian
+  name: rmc-trait-russian-accent-name
+  description: rmc-trait-russian-accent-desc
+  category: SpeechTraits
+  cost: 1
+  components:
+    - type: RussianAccent
+
+- type: trait
+  id: Mobster
+  name: rmc-trait-mobster-accent-name
+  description: rmc-trait-mobster-accent-desc
+  category: SpeechTraits
+  cost: 1
+  components:
+    - type: MobsterAccent
+
+- type: trait
+  id: French
+  name: rmc-trait-french-accent-name
+  description: rmc-trait-french-accent-desc
+  category: SpeechTraits
+  cost: 1
+  components:
+    - type: FrenchAccent
+
+- type: trait
+  id: Spanish
+  name: rmc-trait-spanish-accent-name
+  description: rmc-trait-spanish-accent-desc
+  category: SpeechTraits
+  cost: 1
+  components:
+    - type: SpanishAccent
+
+- type: trait
+  id: ScottishAccent
+  name: rmc-trait-scottish-accent-name
+  description: rmc-trait-scottish-accent-desc
+  category: SpeechTraits
+  cost: 1
+  components:
+  - type: ReplacementAccent
+    accent: dwarf

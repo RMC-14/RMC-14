@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cms13 at https://github.com/cmss13-devs/cmss13/blob/8cb02763e1dec491c90406db2124642d1275192a/icons/obj/structures/machinery/floodlight.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "smallflood"
+    },
+    {
+      "name": "smallfloodon"
+    },
+    {
+      "name": "magical"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 <controls:FancyWindow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
-    Title="{Loc 'cm-attachable-holder-strip-ui-title'}"
+    Title="{Loc 'rmc-attachable-holder-strip-ui-title'}"
     MinSize="200 100"
     SetSize="200 100">
     <BoxContainer Name="SlotsContainer" Orientation="Vertical" VerticalExpand="True"

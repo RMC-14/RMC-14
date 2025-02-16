@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking;
 using Content.Server.Ghost;
@@ -194,7 +194,7 @@ public sealed class MindSystem : SharedMindSystem
             component = EnsureComp<MindContainerComponent>(entity.Value);
 
             if (component.HasMind)
-                _gameTicker.OnGhostAttempt(component.Mind.Value, false);
+                _ghosts.OnGhostAttempt(component.Mind.Value, false);
 
             if (TryComp<ActorComponent>(entity.Value, out var actor))
             {
@@ -290,6 +290,15 @@ public sealed class MindSystem : SharedMindSystem
         Dirty(mindId, mind);
         var netMind = GetNetEntity(mindId);
         _pvsOverride.ClearOverride(netMind);
+
+        if (mind.Session != null)
+        {
+            foreach (var role in mind.MindRoles)
+            {
+                _pvsOverride.RemoveSessionOverride(role, mind.Session);
+            }
+        }
+
         if (userId != null && !_players.TryGetPlayerData(userId.Value, out _))
         {
             Log.Error($"Attempted to set mind user to invalid value {userId}");
@@ -337,17 +346,22 @@ public sealed class MindSystem : SharedMindSystem
         {
             mind.Session = ret;
             _pvsOverride.AddSessionOverride(netMind, ret);
+            foreach (var role in mind.MindRoles)
+            {
+                _pvsOverride.AddSessionOverride(role, ret);
+            }
+
             _players.SetAttachedEntity(ret, mind.CurrentEntity);
         }
     }
 
-    public void ControlMob(EntityUid user, EntityUid target)
+    public override void ControlMob(EntityUid user, EntityUid target)
     {
         if (TryComp(user, out ActorComponent? actor))
             ControlMob(actor.PlayerSession.UserId, target);
     }
 
-    public void ControlMob(NetUserId user, EntityUid target)
+    public override void ControlMob(NetUserId user, EntityUid target)
     {
         var (mindId, mind) = GetOrCreateMind(user);
 

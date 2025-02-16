@@ -5,9 +5,10 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Dropship;
 
 [Serializable, NetSerializable]
-public sealed class DropshipNavigationDestinationsBuiState(List<(NetEntity Id, string Name, bool Occupied)> destinations) : BoundUserInterfaceState
+public sealed class DropshipNavigationDestinationsBuiState(NetEntity? flyBy, List<Destination> destinations) : BoundUserInterfaceState
 {
-    public readonly List<(NetEntity Id, string Name, bool Occupied)> Destinations = destinations;
+    public readonly NetEntity? FlyBy = flyBy;
+    public readonly List<Destination> Destinations = destinations;
 }
 
 [Serializable, NetSerializable]
@@ -25,7 +26,13 @@ public sealed class DropshipNavigationLaunchMsg(NetEntity target) : BoundUserInt
 }
 
 [Serializable, NetSerializable]
+public sealed class DropshipLockdownMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
 public enum DropshipNavigationUiKey
 {
     Key
 }
+
+[Serializable, NetSerializable]
+public readonly record struct Destination(NetEntity Id, string Name, bool Occupied, bool Primary);

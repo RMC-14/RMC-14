@@ -1,0 +1,80 @@
+# TODO RMC14 all of these vendor inventories
+# TODO RMC14 deny and vend states
+- type: entity
+  abstract: true
+  id: ColMarTechBase
+  name: ColMarTech vendor
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    noRot: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Tag
+    tags:
+    - Structure
+  #    offState: off
+  #    brokenState: broken
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/colmartechweapons.rsi
+    layers:
+    - state: "off"
+      map: [ "enum.VendingMachineVisualLayers.Base" ]
+    - state: "base"
+      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+  - type: UserInterface
+    interfaces:
+      enum.CMAutomatedVendorUI.Key:
+        type: CMAutomatedVendorBui
+  - type: AmbientOnPowered
+  - type: AmbientSound
+    volume: -9
+    range: 3
+    enabled: false
+    sound:
+      path: /Audio/Ambience/Objects/vending_machine_hum.ogg
+  - type: ActivatableUI
+    key: enum.CMAutomatedVendorUI.Key
+  - type: ActivatableUIRequiresAccess
+  - type: WallMount
+    arc: 360
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  abstract: true
+  parent: ColMarTechBase
+  id: ColMarTechBaseAnchorable
+  components:
+  - type: Transform
+    anchored: true
+  - type: Anchorable
+  - type: Pullable
+  - type: Physics
+    bodyType: Dynamic
+  - type: Damageable
+    damageContainer: StructuralMarine
+  - type: Destructible # TODO RMC14 some of these should just be knocked over with a do after by xenos
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 500
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]

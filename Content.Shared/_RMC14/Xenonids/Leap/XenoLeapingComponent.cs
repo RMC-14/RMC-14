@@ -22,7 +22,7 @@ public sealed partial class XenoLeapingComponent : Component
     public TimeSpan LeapEndTime;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan MoveDelayTime = TimeSpan.FromSeconds(.7);
+    public TimeSpan MoveDelayTime;
 
     [DataField, AutoNetworkedField]
     public bool KnockedDown;

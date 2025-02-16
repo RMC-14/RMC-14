@@ -1,0 +1,13 @@
+- type: entity
+  parent: BaseItem
+  id: RMCCorrespondentMicrophone
+  name: microphone
+  suffix: RMC
+  description: To report on the events where no other correspondent has gone before. Now with sound!
+  components:
+  - type: Sprite
+    sprite: Objects/Fun/Instruments/microphone.rsi
+    state: icon
+  - type: Item
+    size: Small
+    sprite: Objects/Fun/Instruments/microphone.rsi

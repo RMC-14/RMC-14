@@ -70,7 +70,7 @@ public sealed class LagCompensationSystem : EntitySystem
 
         var angle = Angle.Zero;
         var coordinates = EntityCoordinates.Invalid;
-        var ping = pSession.Ping;
+        var ping = pSession.Channel.Ping;
         // Use 1.5 due to the trip buffer.
         var sentTime = _timing.CurTime - TimeSpan.FromMilliseconds(ping * 1.5);
 

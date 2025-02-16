@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -25,7 +26,10 @@ public sealed class XenoTailSweepSystem : EntitySystem
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private readonly SharedInteractionSystem _interact = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _hit = new();
 
@@ -58,14 +62,22 @@ public sealed class XenoTailSweepSystem : EntitySystem
             return;
 
         _hit.Clear();
-        _entityLookup.GetEntitiesInRange(transform.Coordinates, 1.5f, _hit);
+        _entityLookup.GetEntitiesInRange(transform.Coordinates, xeno.Comp.Range, _hit);
 
         var origin = _transform.GetMapCoordinates(xeno);
         foreach (var marine in _hit)
         {
+            if (!_xeno.CanAbilityAttackTarget(xeno, marine))
+                continue;
+
+            if (!_interact.InRangeUnobstructed(xeno.Owner, marine.Owner, xeno.Comp.Range))
+                continue;
+
+            _rmcPulling.TryStopAllPullsFromAndOn(marine);
+
             var marineCoords = _transform.GetMapCoordinates(marine);
             var diff = marineCoords.Position - origin.Position;
-            diff *= xeno.Comp.Range / 3;
+            diff = diff.Normalized() * xeno.Comp.Range;
 
             if (xeno.Comp.Damage is { } damage)
                 _damageable.TryChangeDamage(marine, damage);

@@ -1,15 +1,24 @@
 using System.Numerics;
 using Content.Client.Cooldown;
 using Content.Client.UserInterface.Systems.Inventory.Controls;
+using Content.Shared._RMC14.IconLabel;
+using Robust.Client.Graphics;
+using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
+using Robust.Client.UserInterface.Themes;
 using Robust.Shared.Input;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client.UserInterface.Controls
 {
     [Virtual]
     public abstract class SlotControl : Control, IEntityControl
     {
+        [Dependency] private readonly IEntityManager _entities = default!;
+        [Dependency] private readonly IPrototypeManager _prototype = default!;
+        [Dependency] private readonly ILocalizationManager _loc = default!;
+
         public static int DefaultButtonSize = 64;
 
         public TextureRect ButtonRect { get; }
@@ -18,6 +27,8 @@ namespace Content.Client.UserInterface.Controls
         public SpriteView HoverSpriteView { get; }
         public TextureButton StorageButton { get; }
         public CooldownGraphic CooldownDisplay { get; }
+        // RMC14 - Declare icon label
+        public Label IconLabel { get; }
 
         private SpriteView SpriteView { get; }
 
@@ -69,7 +80,7 @@ namespace Content.Client.UserInterface.Controls
             set
             {
                 _buttonTexturePath = value;
-                UpdateButtonTexture();
+                UpdateChildren();
             }
         }
 
@@ -80,7 +91,7 @@ namespace Content.Client.UserInterface.Controls
             set
             {
                 _fullButtonTexturePath = value;
-                UpdateButtonTexture();
+                UpdateChildren();
             }
         }
 
@@ -118,12 +129,14 @@ namespace Content.Client.UserInterface.Controls
         public SlotControl()
         {
             IoCManager.InjectDependencies(this);
+
             Name = "SlotButton_null";
             MinSize = new Vector2(DefaultButtonSize, DefaultButtonSize);
+
             AddChild(ButtonRect = new TextureRect
             {
                 TextureScale = new Vector2(2, 2),
-                MouseFilter = MouseFilterMode.Stop
+                MouseFilter = MouseFilterMode.Stop,
             });
             AddChild(HighlightRect = new TextureRect
             {
@@ -147,6 +160,15 @@ namespace Content.Client.UserInterface.Controls
                 Scale = new Vector2(2, 2),
                 SetSize = new Vector2(DefaultButtonSize, DefaultButtonSize),
                 OverrideDirection = Direction.South
+            });
+            // RMC14 - Add icon label
+            AddChild(IconLabel = new Label
+            {
+                Text = "",
+                SetSize = new Vector2(1f, 1f),
+                HorizontalAlignment = HAlignment.Center,
+                VerticalAlignment = VAlignment.Center,
+                Visible = true,
             });
 
             AddChild(StorageButton = new TextureButton
@@ -212,16 +234,38 @@ namespace Content.Client.UserInterface.Controls
         public void SetEntity(EntityUid? ent)
         {
             SpriteView.SetEntity(ent);
-            UpdateButtonTexture();
+            UpdateChildren();
         }
 
-        private void UpdateButtonTexture()
+        private void UpdateChildren()
         {
             var fullTexture = Theme.ResolveTextureOrNull(_fullButtonTexturePath);
             var texture = Entity.HasValue && fullTexture != null
                 ? fullTexture.Texture
                 : Theme.ResolveTextureOrNull(_buttonTexturePath)?.Texture;
             ButtonRect.Texture = texture;
+            // RMC14 - Refresh icon label
+            IconLabel.Text = "";
+            IconLabel.FontColorOverride = Color.White;
+            if (_entities.TryGetComponent(Entity, out IconLabelComponent? iconLabel))
+            {
+                if (iconLabel.LabelTextLocId is not null && _loc.TryGetString(iconLabel.LabelTextLocId, out String? labelText, iconLabel.LabelTextParams.ToArray()))
+                {
+                    if (labelText.Length > iconLabel.LabelMaxSize)
+                    {
+                        return;
+                    }
+                    IconLabel.Text = labelText;
+                }
+
+                if (Color.TryFromName(iconLabel.TextColor, out Robust.Shared.Maths.Color color))
+                {
+                    IconLabel.FontColorOverride = color;
+                }
+
+                IconLabel.SetSize = new Vector2(iconLabel.TextSize);
+            }
+            // RMC14 - End Refresh icon label
         }
 
         private void OnButtonPressed(GUIBoundKeyEventArgs args)
@@ -257,7 +301,7 @@ namespace Content.Client.UserInterface.Controls
 
             StorageButton.TextureNormal = Theme.ResolveTextureOrNull(_storageTexturePath)?.Texture;
             HighlightRect.Texture = Theme.ResolveTextureOrNull(_highlightTexturePath)?.Texture;
-            UpdateButtonTexture();
+            UpdateChildren();
         }
 
         EntityUid? IEntityControl.UiEntity => Entity;

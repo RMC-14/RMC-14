@@ -1,0 +1,193 @@
+﻿- type: entity
+  parent: RMCBaseEquipmentCase
+  id: CMSniperEquipmentCase
+  name: sniper equipment case
+  description: "A large case containing your very own long-range M96S sniper rifle, M45 ghillie armor and helmet, M42 scout sight, ammunition, spotter equipment, and additional pieces of equipment.\n\nNOTE: You cannot put items back inside this case."
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMArmorM45
+    - id: CMArmorHelmetM45
+    - id: CMGlassesM42ScoutSight
+    - id: CMMagazineSniperM96S
+    - id: CMMagazineSniperM96SIncendiary
+      amount: 2
+    - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
+    - id: CMBackpackSniper
+    - id: RMCMK80
+    - id: CMMagazinePistolMK80
+      amount: 2
+    - id: CMM96SSniperRifle
+#    - id: CMFacepaintSniper
+#    - id: CMSpotter
+  - type: CMChangeUserOnVend
+    addComponents:
+    - type: SniperWhitelist
+
+- type: entity
+  parent: RMCBaseEquipmentCase
+  id: RMCGrenadeSpecEquipmentCase
+  name: heavy grenadier equipment case
+  description: "A large case containing a heavy-duty multi-shot M83 grenade launcher, M3-G4 grenadier armor and helmet, significant amount of various M40 grenades and additional pieces of equipment.\n\nNOTE: You cannot put items back inside this case."
+  components:
+  - type: Sprite
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: grenadier
+      map: [ label ]
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,21,1
+  - type: StorageFill
+    contents:
+    - id: WeaponLauncherM83 # check IFF
+    - id: RMCBeltGrenadeLargeFilled
+    - id: RMCSatchelGrenadeSpec # ID lock
+    - id: RMCSatchelGrenadeSpec
+    - id: RMCHandsM3G4
+    - id: RMCArmorM3G4
+    - id: RMCArmorHelmetM3G4 # hugger protection
+    - id: RMCMK80
+    - id: CMMagazinePistolMK80
+      amount: 2
+    - id: RMCBinoculars
+  - type: CMChangeUserOnVend
+    addComponents:
+    - type: GrenadeSpecWhitelist
+
+- type: entity
+  parent: RMCBaseEquipmentCase
+  id: RMCDemoSpecEquipmentCase
+  name: demolitionist equipment case
+  description: "A large case containing a heavy-caliber M5 Anti-Tank Launcher, reinforced M3-T light armor, five 84mm rockets, and additional pieces of equipment.\n\nNOTE: You cannot put items back inside this case."
+  components:
+  - type: Sprite
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: demo
+      map: [ label ]
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,15,3
+  - type: StorageFill
+    contents:
+    - id: RMCArmorM3TDemo
+    - id: RMCArmorHelmetM3TDemo # TODO RMC14 Give hearing protection component if ear damage is added. Hearing protection should prevent backblast stun, damage, and deafness effects.
+    - id: RMCSatchelDemoSpec
+    - id: RMCWeaponLauncherM5ATL
+    - id: RMCRocket84mm
+      amount: 3 # +1 no WP
+    - id: RMCRocket84mmAntiArmor
+      amount: 2
+#    - id: RMCRocket84mmWhitePhosphorous
+#      amount: 1
+    - id: RMCMK80
+    - id: CMMagazinePistolMK80
+      amount: 2
+    - id: RMCExplosivePlastic
+      amount: 2
+    - id: RMCBinoculars
+    - id: RMCKitLoader
+  - type: CMChangeUserOnVend
+    addComponents:
+    - type: DemoSpecWhitelist
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCKitLoader
+
+- type: entity
+  parent: RMCBaseEquipmentCase
+  id: RMCScoutSpecEquipmentCase
+  name: scout equipment case
+  description: "A large case containing an M4SPR custom battle rifle, M3-S light armor and helmet, M4SPR battle sight, M68 thermal cloak, V3 reactive thermal tarp, ammunition and additional pieces of equipment.\nNOTE: You cannot put items back inside this case."
+  components:
+  - type: Sprite
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: scout
+      map: [ label ]
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,21,3
+  - type: StorageFill
+    contents:
+    - id: RMCArmorM3Scout
+    - id: RMCArmorHelmetM3Scout
+    - id: RMCGlassesM4SPRBattleSight
+    - id: RMCMagazineRifleM4SPRA19
+      amount: 4
+    - id: RMCMagazineRifleM4SPRA19Incendiary
+      amount: 2
+    - id: RMCMagazineRifleM4SPRA19Impact
+      amount: 2
+    - id: RMCBackpackScout
+    - id: RMCMK80
+    - id: CMMagazinePistolMK80
+      amount: 2
+    - id: WeaponRifleM4SPRCustom
+    - id: RMCThermalTarpFolded
+    - id: RMCExplosivePlastic
+      amount: 2
+    - id: CMEncryptionKeyJTAC
+    - id: RMCLaserDesignatorScout
+    - id: RMCScoutShoes
+  - type: CMChangeUserOnVend
+    addComponents:
+    - type: ScoutWhitelist
+
+- type: entity
+  parent: RMCKitBase
+  id: RMCKitLoader
+  name: loader kit
+  description: "A large kit containing all the supplies needed to turn a Private into the loading assistant for a Demolitions Specialist.
+
+    A little infographic series shows how reloading should be done:
+
+    Step One: Grab the Rocket
+
+    Step Two: Position yourself behind the Specialist
+
+    Step Three: Ensure the Specialist is wielding their Launcher
+
+    Step Four: Load the Rocket into the Launcher
+
+    Step Five: Stand clear of the back-blast"
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,13,3
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+  - type: StorageFill
+    contents:
+    - id: RMCArmorM3TDemo
+    - id: RMCArmorHelmetM3TDemo
+    - id: RMCSatchelDemoSpec
+    - id: RMCRocket84mm
+      amount: 2 # +1 no WP
+    - id: RMCRocket84mmAntiArmor
+    #    - id: RMCRocket84mmWhitePhosphorous
+    #      amount: 1
+    - id: RMCMK80
+    - id: CMMagazinePistolMK80
+      amount: 2
+    - id: RMCExplosiveBreachingCharge # TODO RMC14 RMCPlasticExplosives
+      amount: 2
+    - id: RMCBinoculars
+    - id: RMCPamphletLoader
+  - type: Tag
+    tags:
+    - RMCKitLoader
+
+- type: Tag
+  id: RMCKitLoader

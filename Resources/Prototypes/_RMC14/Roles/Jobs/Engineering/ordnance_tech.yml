@@ -12,30 +12,50 @@
   icon: "CMJobIconOrdnanceTech"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-ce
+  ranks:
+    RMCRankLanceCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobOrdnanceTech
+      time: 252000 # 70 hours
+    RMCRankPrivateFirstClass:
+    - !type:RoleTimeRequirement
+      role: CMJobOrdnanceTech
+      time: 36000 # 10 hours
+    RMCRankPrivate: []
   accessGroups:
   - OT
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: ot
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_shipside
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      construction: 3
-      engineer: 3
-      firearms: 1
-      powerLoader: 2
+      skills:
+        RMCSkillConstruction: 3
+        RMCSkillEngineer: 3
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillPowerLoader: 2
+    - type: JobPrefix
+      prefix: cm-job-prefix-ordnance-tech
   hidden: true # TODO RMC14
 
 - type: startingGear
   id: CMGearOrdnanceTech
   equipment:
     jumpsuit: CMJumpsuitOrdnanceTech
-    back: CMSatchelMarineTech
     shoes: CMBootsBlack
     gloves: CMHandsInsulated
     id: CMIDCardOrdnanceTech
     ears: CMHeadsetEngineer
     belt: CMBeltUtilityFilled
 #    pocket1: CMDemolitionsScanner TODO RMC14
-    pocket2: CMPouchGeneralMedium
+    pocket2: RMCPouchGeneralMedium
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -45,10 +65,8 @@
   - type: SpawnPoint
     job_id: CMOrdnanceTech
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: ordnance_tech
+    state: ot_spawn
 
 - type: playTimeTracker
   id: CMJobOrdnanceTech
+  isHumanoid: true

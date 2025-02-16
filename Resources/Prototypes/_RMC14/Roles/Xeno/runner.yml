@@ -3,6 +3,13 @@
   id: CMXenoRunner
   name: cm-job-name-xeno-runner
   playTimeTracker: CMJobXenoRunner
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: runner
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_xeno
 
 - type: playTimeTracker
   id: CMJobXenoRunner
+  isXeno: true

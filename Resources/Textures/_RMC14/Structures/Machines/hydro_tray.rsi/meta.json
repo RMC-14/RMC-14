@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/85bcc1a23e09e240ed086ac502c856b29a27e4a6/icons/obj/structures/props/ice_colony/props.rsi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "hydro_tray",
+      "delays": [
+        [
+          0.9,
+          1.3
+        ]
+      ]
+    }
+  ]
+}

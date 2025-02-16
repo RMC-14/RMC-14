@@ -6,6 +6,7 @@ gun-selected-mode = Selected {$mode}
 gun-disabled = You can't use guns!
 gun-clumsy = The gun blows up in your face!
 gun-set-fire-mode = Set to {$mode}
+gun-magazine-whitelist-fail = That won't fit into the gun!
 
 # SelectiveFire
 gun-SemiAuto = semi-auto
@@ -16,9 +17,14 @@ gun-FullAuto = full-auto
 gun-ballistic-cycle = Cycle
 gun-ballistic-cycled = Cycled
 gun-ballistic-cycled-empty = Cycled (empty)
+gun-ballistic-cycle-delayed = You begin unloading {CAPITALIZE(THE($entity))}. Hold still...
+gun-ballistic-cycle-delayed-cancelled = You stop unloading {CAPITALIZE(THE($entity))}.
+gun-ballistic-cycle-delayed-empty = {CAPITALIZE(THE($entity))} is already unloaded.
 gun-ballistic-transfer-invalid = {CAPITALIZE(THE($ammoEntity))} won't fit inside {THE($targetEntity)}!
-gun-ballistic-transfer-empty = {CAPITALIZE(THE($entity))} is empty.
-gun-ballistic-transfer-target-full = {CAPITALIZE(THE($entity))} is already fully loaded.
+gun-ballistic-transfer-empty = {CAPITALIZE(THE($entity))} is already empty!
+gun-ballistic-transfer-target-full = {CAPITALIZE(THE($entity))} is already fully loaded!
+gun-ballistic-transfer-cancelled = Your reload was interrupted!
+gun-ballistic-transfer-primed = You can't load a primed {$ammoEntity}!
 
 # CartridgeAmmo
 gun-cartridge-spent = It is [color=red]spent[/color].

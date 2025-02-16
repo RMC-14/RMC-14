@@ -1,17 +1,23 @@
-﻿using System.Numerics;
+using System.Numerics;
+using Content.Shared._RMC14.Holiday;
 using Content.Shared._RMC14.Inventory;
+using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Scaling;
 using Content.Shared._RMC14.Webbing;
 using Content.Shared.Access.Components;
 using Content.Shared.Clothing.Components;
+using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
+using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Mind;
 using Content.Shared.Popups;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.UserInterface;
+using Content.Shared.Wall;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -30,20 +36,98 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedWebbingSystem _webbing = default!;
+    [Dependency] private readonly SharedRMCHolidaySystem _rmcHoliday = default!;
 
     // TODO RMC14 make this a prototype
     public const string SpecialistPoints = "Specialist";
 
+    private readonly Dictionary<EntProtoId, CMVendorEntry> _entries = new();
+    private readonly List<CMVendorEntry> _boxEntries = new();
+
     public override void Initialize()
     {
+        SubscribeLocalEvent<MarineScaleChangedEvent>(OnMarineScaleChanged);
+
+        SubscribeLocalEvent<CMAutomatedVendorComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<CMAutomatedVendorComponent, ActivatableUIOpenAttemptEvent>(OnUIOpenAttempt);
+
+        SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedHandEvent>(OnRecentlyGotEquipped);
+        SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedEvent>(OnRecentlyGotEquipped);
 
         Subs.BuiEvents<CMAutomatedVendorComponent>(CMAutomatedVendorUI.Key, subs =>
         {
             subs.Event<CMVendorVendBuiMsg>(OnVendBui);
         });
+    }
+
+    private void OnMarineScaleChanged(ref MarineScaleChangedEvent ev)
+    {
+        var vendors = EntityQueryEnumerator<CMAutomatedVendorComponent>();
+        while (vendors.MoveNext(out var uid, out var vendor))
+        {
+            var changed = false;
+            foreach (var section in vendor.Sections)
+            {
+                foreach (var entry in section.Entries)
+                {
+                    if (entry.Multiplier is not { } multiplier ||
+                        entry.Max is not { } max ||
+                        entry.Box != null)
+                    {
+                        continue;
+                    }
+
+                    var newMax = (int) Math.Round(ev.New * multiplier);
+                    var toAdd = newMax - max;
+                    if (toAdd <= 0)
+                        continue;
+
+                    entry.Amount += toAdd;
+                    entry.Max += toAdd;
+                    changed = true;
+                    AmountUpdated((uid, vendor), entry);
+                }
+            }
+
+            if (changed)
+                Dirty(uid, vendor);
+        }
+    }
+
+    private void OnMapInit(Entity<CMAutomatedVendorComponent> ent, ref MapInitEvent args)
+    {
+        _entries.Clear();
+        _boxEntries.Clear();
+        foreach (var section in ent.Comp.Sections)
+        {
+            foreach (var entry in section.Entries)
+            {
+                _entries.TryAdd(entry.Id, entry);
+                if (entry.Box != null)
+                {
+                    _boxEntries.Add(entry);
+                    continue;
+                }
+
+                entry.Multiplier = entry.Amount;
+                entry.Max = entry.Amount;
+            }
+        }
+
+        foreach (var boxEntry in _boxEntries)
+        {
+            if (boxEntry.Box is not { } box)
+                continue;
+
+            if (_entries.TryGetValue(box, out var entry))
+                AmountUpdated(ent, entry);
+        }
+
+        if (_boxEntries.Count > 0)
+            Dirty(ent);
     }
 
     private void OnUIOpenAttempt(Entity<CMAutomatedVendorComponent> vendor, ref ActivatableUIOpenAttemptEvent args)
@@ -71,15 +155,25 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             }
         }
 
-        if (vendor.Comp.Job is not { Id.Length: > 0 } job)
+        if (vendor.Comp.Jobs.Count == 0)
             return;
 
-        if (!_mind.TryGetMind(args.User, out var mindId, out _) ||
-            !_job.MindHasJobWithId(mindId, job.Id))
+        if (_mind.TryGetMind(args.User, out var mindId, out _))
         {
-            _popup.PopupClient(Loc.GetString("cm-vending-machine-access-denied"), vendor, args.User);
-            args.Cancel();
+            foreach (var job in vendor.Comp.Jobs)
+            {
+                if (_job.MindHasJobWithId(mindId, job.Id))
+                    return;
+            }
         }
+
+        _popup.PopupClient(Loc.GetString("cm-vending-machine-access-denied"), vendor, args.User);
+        args.Cancel();
+    }
+
+    private void OnRecentlyGotEquipped<T>(Entity<RMCRecentlyVendedComponent> ent, ref T args)
+    {
+        RemCompDeferred<WallMountComponent>(ent);
     }
 
     protected virtual void OnVendBui(Entity<CMAutomatedVendorComponent> vendor, ref CMVendorVendBuiMsg args)
@@ -123,6 +217,42 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
             Dirty(actor, user);
         }
+        if (section.TakeOne is { } takeOne)
+        {
+            user = EnsureComp<CMVendorUserComponent>(actor);
+            if (!user.TakeOne.Add(takeOne))
+            {
+                Log.Error($"{ToPrettyString(actor)} tried to buy too many take-ones.");
+                return;
+            }
+
+            Dirty(actor, user);
+        }
+
+        var validJob = true;
+        if (_mind.TryGetMind(args.Actor, out var mindId, out _))
+        {
+            foreach (var job in section.Jobs)
+            {
+                if (!_job.MindHasJobWithId(mindId, job.Id))
+                    validJob = false;
+                else
+                    validJob = true;
+            }
+        }
+
+        if (!validJob)
+            return;
+
+        var validHoliday = section.Holidays.Count == 0;
+        foreach (var holiday in section.Holidays)
+        {
+            if (_rmcHoliday.IsActiveHoliday(holiday))
+                validHoliday = true;
+        }
+
+        if (!validHoliday)
+            return;
 
         if (section.Choices is { } choices)
         {
@@ -142,6 +272,76 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
             user.Choices[choices.Id] = ++playerChoices;
             Dirty(actor, user);
+        }
+
+        void ResetChoices()
+        {
+            if (section.Choices is { } choices && user != null)
+                user.Choices[choices.Id]--;
+            if (section.TakeOne is { } takeOne && user != null)
+                user.TakeOne.Remove(takeOne);
+        }
+
+        if (section.SharedSpecLimit is { } globalLimit)
+        {
+            if (HasComp<RMCVendorSpecialistComponent>(vendor))
+            {
+                var thisSpecVendor = Comp<RMCVendorSpecialistComponent>(vendor);
+                int vendCount = 0;
+
+                // If the vendor's own value is at or above the capacity, immediately return.
+                if (thisSpecVendor.GlobalSharedVends.TryGetValue(args.Entry, out vendCount) && vendCount >= section.SharedSpecLimit)
+                {
+                    // FIXME
+                    ResetChoices();
+                    _popup.PopupEntity(Loc.GetString("cm-vending-machine-specialist-max"), vendor, actor);
+                    return;
+                }
+
+                // Get every RMCVendorSpec
+                var specVendors = EntityQueryEnumerator<RMCVendorSpecialistComponent>();
+                // Used to verify newer vendors
+                int maxAmongVendors = 0;
+
+                if (thisSpecVendor.GlobalSharedVends.TryGetValue(args.Entry, out vendCount))
+                    // So it doesn't matter what order the vendors are checked in
+                    maxAmongVendors = vendCount;
+
+                // Goes through each RMCVendorSpec and gets the largest value for this kit type.
+                while (specVendors.MoveNext(out var vendorId, out _))
+                {
+                    var specVendorComponent = EnsureComp<RMCVendorSpecialistComponent>(vendorId);
+                    if (specVendorComponent.GlobalSharedVends.TryGetValue(args.Entry, out vendCount))
+                    {
+                        if (vendCount > maxAmongVendors)
+                        {
+                            maxAmongVendors = specVendorComponent.GlobalSharedVends[args.Entry];
+                        }
+                        else
+                        {
+                            specVendorComponent.GlobalSharedVends[args.Entry] = maxAmongVendors;
+                        }
+                    }
+                    else // Does not exist on the currently checked vendor
+                        specVendorComponent.GlobalSharedVends.Add(args.Entry, maxAmongVendors);
+                    Dirty(vendorId, specVendorComponent);
+                }
+
+                thisSpecVendor.GlobalSharedVends[args.Entry] = maxAmongVendors;
+
+                if (thisSpecVendor.GlobalSharedVends[args.Entry] >= section.SharedSpecLimit)
+                {
+                    ResetChoices();
+                    _popup.PopupEntity(Loc.GetString("cm-vending-machine-specialist-max"), vendor.Owner, actor);
+                    return;
+                }
+                else
+                {
+                    thisSpecVendor.GlobalSharedVends[args.Entry] += 1;
+                }
+
+                Dirty(vendor, thisSpecVendor);
+            }
         }
 
         if (entry.Points != null)
@@ -171,8 +371,35 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         if (entry.Amount != null)
         {
-            entry.Amount--;
-            Dirty(vendor);
+            if (entry.Box is { } box)
+            {
+                var foundEntry = false;
+                foreach (var vendorSection in vendor.Comp.Sections)
+                {
+                    foreach (var vendorEntry in vendorSection.Entries)
+                    {
+                        if (vendorEntry.Id != box)
+                            continue;
+
+                        vendorEntry.Amount -= GetBoxRemoveAmount(entry);
+                        entry.Amount--;
+                        foundEntry = true;
+                        break;
+                    }
+
+                    if (foundEntry)
+                        break;
+                }
+
+                if (foundEntry)
+                    Dirty(vendor);
+            }
+            else
+            {
+                entry.Amount--;
+                Dirty(vendor);
+                AmountUpdated(vendor, entry);
+            }
         }
 
         if (_net.IsClient)
@@ -225,7 +452,21 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
 
         var spawn = SpawnNextToOrDrop(toVend, vendor);
-        if (!Grab(player, spawn) && TryComp(spawn, out TransformComponent? xform))
+        var recently = EnsureComp<RMCRecentlyVendedComponent>(spawn);
+        var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(spawn);
+        while (anchored.MoveNext(out var uid))
+        {
+            recently.PreventCollide.Add(uid);
+        }
+
+        Dirty(spawn, recently);
+
+        var mount = EnsureComp<WallMountComponent>(spawn);
+        mount.Arc = Angle.FromDegrees(360);
+        Dirty(spawn, mount);
+
+        var grabbed = Grab(player, spawn);
+        if (!grabbed && TryComp(spawn, out TransformComponent? xform))
             _transform.SetLocalPosition(spawn, xform.LocalPosition + offset, xform);
 
         var ev = new RMCAutomatedVendedUserEvent(spawn);
@@ -260,7 +501,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             {
                 if (slot.ContainedEntity is { } contained &&
                     TryComp(contained, out WebbingClothingComponent? clothing) &&
-                    _webbing.Attach((contained, clothing), item))
+                    _webbing.Attach((contained, clothing), item, player, out _))
                 {
                     return true;
                 }
@@ -281,5 +522,46 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         user.Comp.ExtraPoints ??= new Dictionary<string, int>();
         user.Comp.ExtraPoints[key] = points;
         Dirty(user);
+    }
+
+    public void AmountUpdated(Entity<CMAutomatedVendorComponent> vendor, CMVendorEntry entry)
+    {
+        foreach (var section in vendor.Comp.Sections)
+        {
+            if (!section.HasBoxes)
+                continue;
+
+            foreach (var sectionEntry in section.Entries)
+            {
+                if (sectionEntry.Box is not { } box)
+                    continue;
+
+                if (entry.Id != box)
+                    continue;
+
+                sectionEntry.Amount = entry.Amount / GetBoxRemoveAmount(sectionEntry);
+            }
+        }
+    }
+
+    private int GetBoxRemoveAmount(CMVendorEntry entry)
+    {
+        if (entry.BoxSlots is not { } boxSlots)
+        {
+            if (!_prototypes.TryIndex(entry.Id, out var boxProto) ||
+                !boxProto.TryGetComponent(out CMItemSlotsComponent? slots, _compFactory) ||
+                slots.Count is not { } count)
+            {
+                return 1;
+            }
+
+            boxSlots = count;
+        }
+
+        var amount = boxSlots;
+        if (entry.BoxAmount is { } boxAmount)
+            amount = boxAmount;
+
+        return Math.Max(1, amount);
     }
 }

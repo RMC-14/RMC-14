@@ -1,4 +1,5 @@
-﻿using Content.Shared.Movement.Events;
+﻿using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared.Movement.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 
@@ -26,6 +27,9 @@ public abstract class SharedWatchXenoSystem : EntitySystem
 
     private void OnXenoMoveInput(Entity<XenoComponent> xeno, ref MoveInputEvent args)
     {
+        if (!args.HasDirectionalMovement)
+            return;
+
         if (_net.IsClient && _player.LocalEntity == xeno.Owner && _player.LocalSession != null)
             Unwatch(xeno.Owner, _player.LocalSession);
         else if (TryComp(xeno, out ActorComponent? actor))
@@ -34,8 +38,6 @@ public abstract class SharedWatchXenoSystem : EntitySystem
 
     private void OnXenoWatchBui(Entity<XenoComponent> xeno, ref XenoWatchBuiMsg args)
     {
-        _ui.CloseUi(xeno.Owner, XenoWatchUIKey.Key, args.Actor);
-
         if (!TryGetEntity(args.Target, out var target))
             return;
 
@@ -46,7 +48,7 @@ public abstract class SharedWatchXenoSystem : EntitySystem
     {
     }
 
-    protected virtual void Watch(Entity<XenoComponent?, ActorComponent?, EyeComponent?> watcher, Entity<XenoComponent?> toWatch)
+    public virtual void Watch(Entity<HiveMemberComponent?, ActorComponent?, EyeComponent?> watcher, Entity<HiveMemberComponent?> toWatch)
     {
     }
 
@@ -55,6 +57,21 @@ public abstract class SharedWatchXenoSystem : EntitySystem
         if (!Resolve(watcher, ref watcher.Comp))
             return;
 
-        _eye.SetTarget(watcher, watcher, watcher);
+        _eye.SetTarget(watcher, null, watcher);
+        var ev = new XenoUnwatchEvent();
+        RaiseLocalEvent(watcher, ref ev);
+    }
+
+    public bool TryGetWatched(Entity<XenoWatchingComponent?> watching, out EntityUid watched)
+    {
+        if (!Resolve(watching, ref watching.Comp, false) ||
+            watching.Comp.Watching == null)
+        {
+            watched = default;
+            return false;
+        }
+
+        watched = watching.Comp.Watching.Value;
+        return true;
     }
 }

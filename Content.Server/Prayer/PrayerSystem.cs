@@ -3,6 +3,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.Bible.Components;
 using Content.Server.Chat.Managers;
 using Content.Server.Popups;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Database;
 using Content.Shared.Popups;
 using Content.Shared.Chat;
@@ -40,6 +41,10 @@ public sealed class PrayerSystem : EntitySystem
 
         // this is to prevent ghosts from using it
         if (!args.CanInteract)
+            return;
+
+        // Nobody to answer their prayers :(
+        if (HasComp<XenoComponent>(args.User))
             return;
 
         var prayerVerb = new ActivationVerb

@@ -8,6 +8,16 @@
   - !type:DepartmentTimeRequirement
     department: CMRequisitions
     time: 36000 # 10 hours
+  ranks:
+    RMCRankMasterSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobQuartermaster
+      time: 252000 # 70 hours
+    RMCRankGunnerySergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobQuartermaster
+      time: 36000 # 10 hours
+    RMCRankStaffSergeant: []
   weight: 5
   startingGear: CMGearQuartermaster
   icon: "CMJobIconQuartermaster"
@@ -16,33 +26,46 @@
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - CMQM
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: cargo
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      construction: 2
-      firearms: 1
-      fireman: 1
-      intel: 1
-      jtac: 3
-      leadership: 2
-      overwatch: 1
-      police: 1
-      powerLoader: 2
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillIntel: 1
+        RMCSkillJtac: 3
+        RMCSkillLeadership: 2
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 1
+        RMCSkillPowerLoader: 2
     - type: MarineOrders
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-quartermaster
+    - type: ViewIntelObjectives
 
 - type: startingGear
   id: CMGearQuartermaster
   equipment:
     jumpsuit: CMJumpsuitQM
-    back: CMSatchelMarineTech
     shoes: CMBootsBlack
-    head: CMHeadCapCargo
+    head: RMCHeadCapQuartermaster
     gloves: CMHandsInsulated
     id: CMIDCardQuartermaster
     ears: CMHeadsetQM
-    pocket1: CMPouchGeneralMedium
-    pocket2: CMFlash
+    pocket1: CMFlash
+    pocket2: RMCPouchGeneralLarge
+  inhand:
+  - CMStampApproved
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -52,10 +75,8 @@
   - type: SpawnPoint
     job_id: CMQuartermaster
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: quartermaster
+    state: ro_spawn
 
 - type: playTimeTracker
   id: CMJobQuartermaster
+  isHumanoid: true

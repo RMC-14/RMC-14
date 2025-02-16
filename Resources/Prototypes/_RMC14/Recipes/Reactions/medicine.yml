@@ -1,0 +1,184 @@
+- type: reaction
+  id: CMDylovene
+  reactants:
+    RMCSilicon:
+      amount: 1
+    RMCPotassium:
+      amount: 1
+    RMCNitrogen:
+      amount: 1
+  products:
+    CMDylovene: 3
+
+- type: reaction
+  id: CMEthylredoxrazine
+  reactants:
+    RMCOxygen:
+      amount: 1
+    CMDylovene:
+      amount: 1
+    RMCCarbon:
+      amount: 1
+  products:
+    CMEthylredoxrazine: 3
+
+- type: reaction
+  id: CMArithrazine
+  reactants:
+    CMDylovene:
+      amount: 1
+    RMCPhosphorus:
+      amount: 1
+  products:
+    CMArithrazine: 2
+
+- type: reaction
+  id: CMBicaridine
+  reactants:
+    CMInaprovaline:
+      amount: 1
+    RMCCarbon:
+      amount: 1
+  products:
+    CMBicaridine: 2
+
+- type: reaction
+  id: CMCryoxadone
+  reactants:
+    CMDexalin:
+      amount: 1
+    Water:
+      amount: 1
+    RMCOxygen:
+      amount: 1
+  products:
+    CMCryoxadone: 3
+
+- type: reaction
+  id: CMDermaline
+  reactants:
+    RMCOxygen:
+      amount: 1
+    RMCPhosphorus:
+      amount: 1
+    CMKelotane:
+      amount: 1
+  products:
+    CMDermaline: 3
+
+- type: reaction
+  id: CMDexalin
+  reactants:
+    RMCOxygen:
+      amount: 2
+    RMCPhoron:
+      amount: 5.1
+  products:
+    CMDexalin: 1
+    RMCPhoron: 5
+
+- type: reaction
+  id: CMDexalinPlus
+  reactants:
+    CMDexalin:
+      amount: 1
+    RMCCarbon:
+      amount: 1
+    RMCIron:
+      amount: 1
+  products:
+    CMDexalinPlus: 3
+
+- type: reaction
+  id: CMEpinephrine
+  reactants:
+    RMCCarbon:
+      amount: 1
+    RMCNitrogen:
+      amount: 1
+    RMCOxygen:
+      amount: 1
+  products:
+    CMEpinephrine: 2
+
+- type: reaction
+  id: CMInaprovaline
+  reactants:
+    RMCOxygen:
+      amount: 1
+    RMCCarbon:
+      amount: 1
+    RMCSugar:
+      amount: 1
+  products:
+    CMInaprovaline: 3
+
+- type: reaction
+  id: CMKelotane
+  reactants:
+    RMCSilicon:
+      amount: 1
+    RMCCarbon:
+      amount: 1
+  products:
+    CMKelotane: 2
+
+- type: reaction
+  id: CMLeporazine
+  reactants:
+    RMCSilicon:
+      amount: 1
+    RMCCopper:
+      amount: 1
+    RMCPhoron:
+      amount: 5
+      catalyst: true
+  products:
+    CMLeporazine: 2
+
+- type: reaction
+  id: CMTricordrazine
+  reactants:
+    CMInaprovaline:
+      amount: 1
+    CMDylovene:
+      amount: 1
+  products:
+    CMTricordrazine: 2
+
+- type: reaction
+  id: CMMeralyne
+  reactants:
+    RMCCarbon:
+      amount: 1
+    Water:
+      amount: 1
+    CMBicaridine:
+      amount: 1
+  products:
+    CMMeralyne: 3
+
+- type: reaction
+  id: CMImidazoline
+  reactants:
+    RMCCarbon:
+      amount: 1
+    RMCHydrogen:
+      amount: 1
+    CMDylovene:
+      amount: 1
+  products:
+    CMImidazoline: 2
+
+- type: reaction
+  id: CMClonexadone
+  reactants:
+    CMCryoxadone:
+      amount: 1
+    RMCSodium:
+      amount: 1
+    RMCPhoron:
+      amount: 5.1
+  products:
+    CMClonexadone: 2
+    RMCPhoron: 5

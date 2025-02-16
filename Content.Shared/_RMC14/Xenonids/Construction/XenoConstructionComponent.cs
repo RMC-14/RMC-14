@@ -1,12 +1,14 @@
-﻿using Content.Shared.FixedPoint;
+using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
+using Content.Shared.FixedPoint;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Construction;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedXenoConstructionSystem))]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[Access(typeof(SharedXenoConstructionSystem), typeof(ResinWhispererSystem))]
 public sealed partial class XenoConstructionComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -35,4 +37,13 @@ public sealed partial class XenoConstructionComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan OrderConstructionAddPlasmaDelay = TimeSpan.FromSeconds(3);
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier BuildSound = new SoundCollectionSpecifier("RMCResinBuild")
+    {
+        Params = AudioParams.Default.WithVolume(-10f),
+    };
+
+    [DataField, AutoNetworkedField]
+    public bool CanUpgrade;
 }

@@ -1,4 +1,4 @@
-﻿# Light Tubes
+# Light Tubes
 
 # Light Tube, Always Powered
 - type: entity
@@ -8,6 +8,11 @@
   description: A lighting fixture that is fitted with a bright fluorescent light tube. Looking at it for too long makes your eyes go watery.
   suffix: Always powered
   components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+    canCollide: false
   - type: Sprite
     sprite: _RMC14/Structures/Wallmounts/Lighting/light_tube.rsi
     state: tube1
@@ -22,34 +27,67 @@
       Broken: tube-broken
       Burned: tube-burned
   - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 200
-      behaviors: #excess damage, don't spawn entities.
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:EmptyAllContainersBehaviour
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          CMSheetMetal1:
-            min: 2
-            max: 2
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
+    thresholds: []
   - type: Construction
     graph: CMLightFixture
     node: tubeLight
+  - type: RMCBreakLightOnAttack
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: CMLightFixtureAlwaysPowered
+  id: RMCLightFixtureBlueAlwaysPowered
+  components:
+  - type: Sprite
+    state: btube1
+    layers:
+    - state: btube1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: btube-empty
+      Off: btube0
+      On: btube1
+      Broken: btube-broken
+      Burned: btube-burned
+
+- type: entity
+  parent: CMLightFixtureAlwaysPowered
+  id: RMCLightFixtureDoubleAlwaysPowered
+  description: A lighting fixture that can be fitted with two bright fluorescent light tubes for that extra eye-watering goodness.
+  components:
+  - type: Sprite
+    state: ptube1
+    layers:
+    - state: ptube1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: ptube-empty
+      Off: ptube0
+      On: ptube1
+      Broken: ptube-broken
+      Burned: ptube-burned
+
+- type: entity
+  parent: RMCLightFixtureDoubleAlwaysPowered
+  id: RMCLightFixtureBlueDoubleAlwaysPowered
+  components:
+  - type: Sprite
+    state: bptube1
+    layers:
+    - state: bptube1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: bptube-empty
+      Off: bptube0
+      On: bptube1
+      Broken: bptube-broken
+      Burned: bptube-burned
 
 # Light Tube, Empty
 - type: entity
@@ -63,6 +101,8 @@
     enabled: false
   - type: PoweredLight
     bulb: Tube
+    unarmedHitShock: 0
+  - type: DamageOnInteract
     damage:
       types:
         Heat: 2
@@ -70,18 +110,68 @@
     containers:
       light_bulb: !type:ContainerSlot
   - type: ApcPowerReceiver
-  - type: ExtensionCableReceiver
-  - type: DeviceNetwork
-    deviceNetId: Wireless
-    receiveFrequencyId: SmartLight
-  - type: WirelessNetworkConnection
-    range: 200
+  - type: Appearance
+  - type: RMCPowerReceiver
+    idleLoad: 1
+    activeLoad: 40
+    channel: Lighting
   - type: DeviceLinkSink
     ports:
-      - On
-      - Off
-      - Toggle
-  - type: Appearance
+    - On
+    - Off
+    - Toggle
+
+- type: entity
+  parent: CMLightFixtureEmpty
+  id: RMCLightFixtureBlueEmpty
+  components:
+  - type: Sprite
+    state: btube1
+    layers:
+    - state: btube1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: btube-empty
+      Off: btube0
+      On: btube1
+      Broken: btube-broken
+      Burned: btube-burned
+
+- type: entity
+  parent: CMLightFixtureEmpty
+  id: RMCLightFixtureDoubleEmpty
+  description: A lighting fixture that can be fitted with two bright fluorescent light tubes for that extra eye-watering goodness.
+  components:
+  - type: Sprite
+    state: ptube1
+    layers:
+    - state: ptube1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: ptube-empty
+      Off: ptube0
+      On: ptube1
+      Broken: ptube-broken
+      Burned: ptube-burned
+
+- type: entity
+  parent: RMCLightFixtureDoubleEmpty
+  id: RMCLightFixtureBlueDoubleEmpty
+  components:
+  - type: Sprite
+    state: bptube1
+    layers:
+    - state: bptube1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: bptube-empty
+      Off: bptube0
+      On: bptube1
+      Broken: bptube-broken
+      Burned: bptube-burned
 
 # Light Tube
 - type: entity
@@ -95,6 +185,8 @@
     enabled: true
   - type: PoweredLight
     hasLampOnSpawn: CMLightTube
+    unarmedHitShock: 0
+  - type: DamageOnInteract
     damage:
       types:
         Heat: 2
@@ -104,6 +196,63 @@
     range: 2
     sound:
       path: /Audio/Ambience/Objects/light_hum.ogg
+  - type: DeviceLinkSink
+    ports:
+    - On
+    - Off
+    - Toggle
+
+- type: entity
+  parent: CMLightFixture
+  id: RMCLightFixtureBlue
+  components:
+  - type: Sprite
+    state: btube1
+    layers:
+    - state: btube1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: btube-empty
+      Off: btube0
+      On: btube1
+      Broken: btube-broken
+      Burned: btube-burned
+
+- type: entity
+  parent: CMLightFixture
+  id: RMCLightFixtureDouble
+  description: A lighting fixture that can be fitted with two bright fluorescent light tubes for that extra eye-watering goodness.
+  components:
+  - type: Sprite
+    state: ptube1
+    layers:
+    - state: ptube1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: ptube-empty
+      Off: ptube0
+      On: ptube1
+      Broken: ptube-broken
+      Burned: ptube-burned
+
+- type: entity
+  parent: RMCLightFixtureDouble
+  id: RMCLightFixtureBlueDouble
+  components:
+  - type: Sprite
+    state: bptube1
+    layers:
+    - state: bptube1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: bptube-empty
+      Off: bptube0
+      On: bptube1
+      Broken: bptube-broken
+      Burned: bptube-burned
 
 # Light Bulbs
 
@@ -133,34 +282,28 @@
       Broken: bulb-broken
       Burned: bulb-burned
   - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 200
-      behaviors: #excess damage, don't spawn entities.
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:EmptyAllContainersBehaviour
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          CMSheetMetal1:
-            min: 1
-            max: 1
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          collection: GlassBreak
+    thresholds: []
   - type: Construction
     graph: CMLightFixture
     node: bulbLight
+  - type: RMCBreakLightOnAttack
+
+- type: entity
+  parent: CMLightFixtureSmallAlwaysPowered
+  id: RMCLightFixtureSmallBlueAlwaysPowered
+  components:
+  - type: Sprite
+    state: bbulb1
+    layers:
+    - state: bbulb1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: bbulb-empty
+      Off: bbulb0
+      On: bbulb1
+      Broken: bbulb-broken
+      Burned: bbulb-burned
 
 # Light Bulb, Empty
 - type: entity
@@ -175,6 +318,8 @@
     offset: "0, -0.5"
   - type: PoweredLight
     bulb: Bulb
+    unarmedHitShock: 0
+  - type: DamageOnInteract
     damage:
       types:
         Heat: 2
@@ -182,18 +327,33 @@
     containers:
       light_bulb: !type:ContainerSlot
   - type: ApcPowerReceiver
-  - type: ExtensionCableReceiver
-  - type: DeviceNetwork
-    deviceNetId: Wireless
-    receiveFrequencyId: SmartLight
-  - type: WirelessNetworkConnection
-    range: 200
+  - type: Appearance
+  - type: RMCPowerReceiver
+    idleLoad: 1
+    activeLoad: 40
+    channel: Lighting
   - type: DeviceLinkSink
     ports:
-      - On
-      - Off
-      - Toggle
-  - type: Appearance
+    - On
+    - Off
+    - Toggle
+
+- type: entity
+  parent: CMLightFixtureSmallEmpty
+  id: RMCLightFixtureSmallBlueEmpty
+  components:
+  - type: Sprite
+    state: bbulb1
+    layers:
+    - state: bbulb1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: bbulb-empty
+      Off: bbulb0
+      On: bbulb1
+      Broken: bbulb-broken
+      Burned: bbulb-burned
 
 # Light Bulb
 - type: entity
@@ -207,6 +367,8 @@
     enabled: true
   - type: PoweredLight
     hasLampOnSpawn: CMLightBulb
+    unarmedHitShock: 0
+  - type: DamageOnInteract
     damage:
       types:
         Heat: 2
@@ -216,3 +378,25 @@
     range: 2
     sound:
       path: /Audio/Ambience/Objects/light_hum.ogg
+  - type: DeviceLinkSink
+    ports:
+    - On
+    - Off
+    - Toggle
+
+- type: entity
+  parent: CMLightFixtureSmall
+  id: RMCLightFixtureSmallBlue
+  components:
+  - type: Sprite
+    state: bbulb1
+    layers:
+    - state: bbulb1
+      map: ["enum.PoweredLightLayers.Base"]
+  - type: PoweredLightVisuals
+    spriteStateMap:
+      Empty: bbulb-empty
+      Off: bbulb0
+      On: bbulb1
+      Broken: bbulb-broken
+      Burned: bbulb-burned

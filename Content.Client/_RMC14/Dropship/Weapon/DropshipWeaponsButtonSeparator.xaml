@@ -1,0 +1,5 @@
+﻿<controls:DropshipWeaponsButtonSeparator
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Dropship.Weapon"
+    SetSize="42 42">
+</controls:DropshipWeaponsButtonSeparator>

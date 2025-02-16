@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/turf/walls/bunker.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bunker"
+    },
+    {
+      "name": "bunker0",
+      "directions": 4
+    },
+    {
+      "name": "bunker1",
+      "directions": 4
+    },
+    {
+      "name": "bunker2",
+      "directions": 4
+    },
+    {
+      "name": "bunker3",
+      "directions": 4
+    },
+    {
+      "name": "bunker4",
+      "directions": 4
+    },
+    {
+      "name": "bunker5",
+      "directions": 4
+    },
+    {
+      "name": "bunker6",
+      "directions": 4
+    },
+    {
+      "name": "bunker7",
+      "directions": 4
+    },
+    {
+      "name": "wall_w"
+    },
+    {
+      "name": "gate_west"
+    },
+    {
+      "name": "gate_east"
+    },
+    {
+      "name": "wall_e"
+    },
+    {
+      "name": "wall_south"
+    },
+    {
+      "name": "wall_north"
+    },
+    {
+      "name": "bunker_2"
+    }
+  ]
+}

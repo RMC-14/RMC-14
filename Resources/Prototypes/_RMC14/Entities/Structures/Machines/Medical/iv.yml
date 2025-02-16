@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CMBaseStructureCorrodible
   id: CMIV
   name: iv
@@ -51,6 +51,10 @@
   - type: ContainerContainer
     containers:
       pack: !type:ContainerSlot {}
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: BaseItem
@@ -79,6 +83,10 @@
   - type: SolutionTransfer
     canChangeTransferAmount: true
   - type: Appearance
+  - type: DrawableSolution
+    solution: pack
+  - type: InjectableSolution
+    solution: pack
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Glass
@@ -89,6 +97,17 @@
         Blunt: 5
   - type: StaticPrice
     price: 30
+  - type: Tag
+    tags:
+      - CMBloodPack
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 - type: entity
   parent: CMBloodPack

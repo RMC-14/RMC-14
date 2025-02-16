@@ -27,6 +27,7 @@
         heavy_6: ""
   - type: Appearance
   - type: Clickable
+  - type: InteractionOutline
   - type: Transform
     anchored: true
   - type: Physics
@@ -112,3 +113,4 @@
         heavy_4: ""
         heavy_5: ""
         heavy_6: ""
+  - type: Occluder

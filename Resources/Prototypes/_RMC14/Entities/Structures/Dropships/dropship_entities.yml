@@ -1,0 +1,47 @@
+﻿- type: entity
+  parent: MarkerBase
+  id: RMCDropshipDoorBlocker
+  name: dropship door blocker
+  description: Blocks barricades from being pulled into the dropship.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      dropship:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 100
+        layer:
+        - DropshipImpassable
+
+- type: entity
+  parent: CMBaseStructureCorrodible
+  id: RMCUtilityAttachmentPoint
+  name: utility attach point
+  description: An attachment point for utility systems
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/dropship_attachment_points.rsi
+    layers:
+    - state: "equip_base"
+      map: [ "enum.DropshipUtilityPointLayers.AttachedUtility"]
+    - state: "equip_base"
+      map: [ "enum.DropshipUtilityPointLayers.AttachementBase"]
+  - type: Icon
+    sprite: _RMC14/Structures/Machines/dropship_attachment_points.rsi
+    state: "equip_base"
+  - type: Physics
+    canCollide: false
+  - type: Occluder
+    enabled: false
+  - type: InteractionOutline
+  - type: Clickable
+  - type: DropshipUtilityPoint
+  - type: Appearance
+  - type: Tag
+    tags:
+    - RMCDropshipUtilityPoint

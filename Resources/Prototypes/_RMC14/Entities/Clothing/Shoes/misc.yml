@@ -1,0 +1,46 @@
+- type: entity
+  parent: ClothingShoesBase
+  id: RMCShoesLaceup
+  name: laceup shoes
+  description: The height of fashion, and they're pre-polished!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/laceup.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/laceup.rsi
+  - type: ContainerContainer
+    containers:
+      item: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      item:
+        name: rmc-gun
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m42a2.ogg
+        whitelist:
+          tags:
+          - Holdout
+  - type: Matchbox
+  - type: CMHolster
+  - type: CMItemSlots
+  - type: UsableWhileDevoured
+
+- type: entity
+  parent: RMCShoesLaceup
+  id: RMCShoesLaceupBrown
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/laceup_brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/laceup_brown.rsi
+
+- type: entity
+  parent: CMBootsBlackFilled
+  id: RMCShoesJackboots
+  name: jackboots
+  description: Security combat boots for combat scenarios or combat situations. All combat, all the time.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/jackboots.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/jackboots.rsi

@@ -153,15 +153,21 @@ namespace Content.Client.Options.UI.Tabs
             }
 
             AddHeader("ui-options-header-rmc");
-            AddButton(CMKeyFunctions.CMActivateAttachableBarrel);
-            AddButton(CMKeyFunctions.CMActivateAttachableRail);
-            AddButton(CMKeyFunctions.CMActivateAttachableStock);
-            AddButton(CMKeyFunctions.CMActivateAttachableUnderbarrel);
+            AddButton(CMKeyFunctions.RMCActivateAttachableBarrel);
+            AddButton(CMKeyFunctions.RMCActivateAttachableRail);
+            AddButton(CMKeyFunctions.RMCActivateAttachableStock);
+            AddButton(CMKeyFunctions.RMCActivateAttachableUnderbarrel);
+            AddButton(CMKeyFunctions.RMCFieldStripHeldItem);
+            AddButton(CMKeyFunctions.RMCCycleFireMode);
             AddButton(CMKeyFunctions.CMUniqueAction);
             AddButton(CMKeyFunctions.CMHolsterPrimary);
             AddButton(CMKeyFunctions.CMHolsterSecondary);
             AddButton(CMKeyFunctions.CMHolsterTertiary);
             AddButton(CMKeyFunctions.CMHolsterQuaternary);
+            AddButton(CMKeyFunctions.RMCPickUpDroppedItems);
+
+            AddHeader("ui-options-header-rmc-xeno");
+            AddButton(CMKeyFunctions.CMXenoWideSwing);
 
             AddHeader("ui-options-header-general");
             AddCheckBox("ui-options-hotkey-keymap", _cfg.GetCVar(CVars.DisplayUSQWERTYHotkeys), HandleToggleUSQWERTYCheckbox);
@@ -207,6 +213,9 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.MovePulledObject);
             AddButton(ContentKeyFunctions.ReleasePulledObject);
             AddButton(ContentKeyFunctions.Point);
+            AddButton(ContentKeyFunctions.RotateObjectClockwise);
+            AddButton(ContentKeyFunctions.RotateObjectCounterclockwise);
+            AddButton(ContentKeyFunctions.FlipObject);
 
             AddHeader("ui-options-header-ui");
             AddButton(ContentKeyFunctions.FocusChat);

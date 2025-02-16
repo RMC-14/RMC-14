@@ -32,7 +32,7 @@
       conditions:
       - !type:EntityAnchored
       steps:
-      - material: Cable
+      - material: RMCCable
     - to: start
       completed:
       - !type:SpawnPrototype
@@ -86,7 +86,7 @@
         examineText: construction-condition-machine-container-empty
       completed:
       - !type:SpawnPrototype
-        prototype: CableApcStack1
+        prototype: RMCCableCoil
       steps:
       - tool: Cutting
         doAfter: 0.25

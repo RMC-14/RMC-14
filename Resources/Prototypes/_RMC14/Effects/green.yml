@@ -1,0 +1,16 @@
+﻿- type: entity
+  id: RMCEffectXenoTelegraphGreen
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 10
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _RMC14/Effects/xeno_telegraph.rsi
+    color: "#008000"
+    noRot: true
+    state: xeno_telegraph_base
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu

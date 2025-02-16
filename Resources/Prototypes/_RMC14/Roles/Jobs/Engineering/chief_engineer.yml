@@ -7,7 +7,13 @@
   requirements:
   - !type:TotalJobsTimeRequirement
     group: CMJobsEngineering
-    time: 36000 # 10 hours
+    time: 72000 # 20 hours
+  ranks:
+    RMCRankFirstLT:
+    - !type:RoleTimeRequirement
+      role: CMJobChiefEngineer
+      time: 252000 # 70 hours
+    RMCRankSecondLT: []
   weight: 5
   startingGear: CMGearChiefEngineer
   icon: "CMJobIconChiefEngineer"
@@ -16,35 +22,45 @@
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - CMCE
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: ce
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      construction: 3
-      engineer: 3
-      firearms: 1
-      fireman: 1
-      intel: 1
-      jtac: 4
-      leadership: 3
-      navigations: 1
-      overwatch: 1
-      police: 1
-      powerLoader: 2
+      skills:
+        RMCSkillConstruction: 3
+        RMCSkillEngineer: 3
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillIntel: 1
+        RMCSkillJtac: 4
+        RMCSkillLeadership: 3
+        RMCSkillNavigations: 1
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 1
+        RMCSkillPowerLoader: 2
     - type: MarineOrders
-  hidden: true # TODO RMC14
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-chief-engineer
+    - type: ViewIntelObjectives
 
 - type: startingGear
   id: CMGearChiefEngineer
   equipment:
     jumpsuit: CMJumpsuitChiefEngineer
-    back: CMSatchelMarineTech
     shoes: CMBootsBlack
     gloves: CMHandsInsulated
     id: CMIDCardChiefEngineer
     ears: CMHeadsetCE
     belt: CMBeltUtilityFilled
-    pocket1: CMPouchElectronics
+    pocket1: RMCPouchElectronics
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -54,10 +70,8 @@
   - type: SpawnPoint
     job_id: CMChiefEngineer
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: chief_engineer
+    state: ce_spawn
 
 - type: playTimeTracker
   id: CMJobChiefEngineer
+  isHumanoid: true

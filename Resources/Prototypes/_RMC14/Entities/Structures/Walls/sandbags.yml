@@ -4,6 +4,7 @@
   name: sandbag barricade
   description: A makeshift barricade made out of the sand from the ground. Tough to beat but easy to pierce.
   components:
+  - type: BarricadeSandbag
   - type: Climbable
   - type: MeleeSound
     soundGroups:
@@ -14,6 +15,7 @@
     sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
     layers:
     - state: sandbag
+    - map: [ "acided" ]
     drawdepth: WallTops
   - type: GenericVisualizer
     visuals:
@@ -21,10 +23,17 @@
         barbWired:
           UnWired: { state: sandbag_wire, visible: false }
           WiredClosed: { state: sandbag_wire, visible: true }
+      enum.SprayAcidedVisuals.Acided:
+        acided:
+          True:
+            sprite: _RMC14/Effects/xeno_spray_acid.rsi
+            state: acid
+            visible: true
+          False:
+            visible: false
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: CMSandbag
-  - type: Repairable
   - type: Destructible
     thresholds:
     - trigger:
@@ -38,14 +47,14 @@
         acts: [ "Destruction" ]
   - type: DamageVisuals
     thresholds: [4, 8, 12]
-    damageDivisor: 2
+    damageDivisor: 25
     trackAllDamage: true
     damageOverlay:
       sprite: _RMC14/Structures/Walls/Barricades/sandbag_cracks.rsi
   - type: Barbed
     thornsDamage:
       types:
-        Slash: 6
+        Slash: 10
 
 - type: entity
   parent: BaseItem
@@ -57,7 +66,9 @@
     size: Small
   - type: Sprite
     sprite: _RMC14/Objects/Misc/sandbags.rsi
-    state: sandbag_stack
+    layers:
+    - state: sandbag_stack
+    - map: [ "acided" ]
   - type: EmptySandbag
   - type: Stack
     stackType: CMSandbagEmpty
@@ -91,11 +102,17 @@
     size: Large
   - type: Sprite
     sprite: _RMC14/Objects/Misc/sandbags.rsi
-    state: sandbag_pile
+    layers:
+    - state: sandbag_pile
+    - map: [ "acided" ]
   - type: FullSandbag
   - type: Stack
     stackType: CMSandbagFull
     count: 1
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMSandbagFull
@@ -105,6 +122,15 @@
   - type: Stack
     stackType: CMSandbagFull
     count: 50
+
+- type: entity
+  parent: CMSandbagFull
+  id: CMSandbagFull25
+  suffix: "25"
+  components:
+  - type: Stack
+    stackType: CMSandbagFull
+    count: 25
 
 - type: stack
   id: CMSandbagEmpty

@@ -1,0 +1,15 @@
+{
+    "version": 1,
+    "size": {
+      "x": 32,
+      "y": 32
+    },
+    "copyright": "Taken from https://github.com/Bubberstation/Bubberstation/commit/5da5844b05612f68327cbb77c8a05f67ea19e368",
+    "license": "CC-BY-SA-3.0",
+    "states": [
+      {
+        "name": "hair_verybadlycut",
+        "directions": 4
+      }
+    ]
+}

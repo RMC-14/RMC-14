@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/8e8d26bbb4f1617ea1b1ffc17ffffca552ce8c11/icons/turf/walls/ice_colony/shiva_turfs.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "shiva_fab"
+    },
+    {
+      "name": "shiva_fab0",
+      "directions": 4
+    },
+    {
+      "name": "shiva_fab1",
+      "directions": 4
+    },
+    {
+      "name": "shiva_fab2",
+      "directions": 4
+    },
+    {
+      "name": "shiva_fab3",
+      "directions": 4
+    },
+    {
+      "name": "shiva_fab4",
+      "directions": 4
+    },
+    {
+      "name": "shiva_fab5",
+      "directions": 4
+    },
+    {
+      "name": "shiva_fab6",
+      "directions": 4
+    },
+    {
+      "name": "shiva_fab7",
+      "directions": 4
+    }
+  ]
+}

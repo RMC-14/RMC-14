@@ -1,0 +1,32 @@
+﻿- type: entity
+  parent: CMBaseCartridgeRifle
+  id: CMCartridgeSentry10x50mm
+  name: cartridge (10x50mm)
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: CartridgeAmmo
+    proto: CMBulletSentry10x50mm
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeSentry
+  name: cartridge (10x28mm)
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: CartridgeAmmo
+    proto: RMCBulletSentry
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeSentry
+
+- type: Tag
+  id: RMCCartridgeSentry

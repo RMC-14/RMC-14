@@ -67,12 +67,45 @@
     sprite: _RMC14/Structures/Doors/Airlocks/maint_door.rsi
 
 - type: entity
+  parent: CMAirlockMaint
+  id: CMAirlockMaintReinforced
+  name: reinforced maintenance hatch
+  suffix: Reinforced
+  components:
+  - type: AirlockReceiverXenoClaws
+    maxHealth: 1200
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
   parent: CMAirlock
   id: CMAirlockSecure
   name: secure airlock
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/secure_door.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockCell
+  name: cell door
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/cell_door.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: CMAirlockPrison
+  name: maintenance hatch
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/prison_door.rsi
 
 # Glass
 - type: entity
@@ -177,3 +210,10 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/prep_door_delta.rsi
+
+- type: entity
+  parent: CMAirlock
+  id: RMCAirlockStrata
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/strata_door.rsi

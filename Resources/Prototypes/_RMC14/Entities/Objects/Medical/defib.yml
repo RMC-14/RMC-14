@@ -21,9 +21,15 @@
           False: { visible: false }
   - type: Item
     size: Normal
-    sprite: Objects/Specific/Medical/defib.rsi
+    sprite: _RMC14/Objects/Medical/defib.rsi
+    heldPrefix: defib
   - type: Speech
     speechVerb: Robotic
+  - type: ItemToggle
+    soundActivate:
+      path: /Audio/_RMC14/Medical/defib_SafetyOn.ogg
+    soundDeactivate:
+      path: /Audio/_RMC14/Medical/defib_safetyOff.ogg
   - type: Defibrillator
     doAfterDuration: 6.25
     allowDoAfterMovement: false
@@ -33,8 +39,28 @@
     - Burn: -12
     - Toxin: -12
     zapHeal:
-      types:
-        Asphyxiation: -200
+      groups:
+        Airloss: -400
+    zapSound:
+      path: /Audio/_RMC14/Medical/defib_release.ogg
+      params:
+        volume: -6
+    chargeSound:
+      path: /Audio/_RMC14/Medical/defib_charge.ogg
+      params:
+        volume: -8
+    failureSound:
+      path: /Audio/_RMC14/Medical/defib_failed.ogg
+      params:
+        volume: -6
+    successSound:
+      path: /Audio/_RMC14/Medical/defib_success.ogg
+      params:
+        volume: -6
+    readySound:
+      path: /Audio/_RMC14/Medical/defib_ready.ogg
+      params:
+        volume: -6
     zapDamage: 0
   - type: DoAfter
   - type: UseDelay
@@ -45,15 +71,17 @@
     - Medical Doctor
   - type: RequiresSkill
     skills:
-      medical: 2
+      RMCSkillMedical: 2
 
 - type: entity
   id: CMDefibrillator
-  parent: [ CMBaseDefibrillator, PowerCellSlotMediumItem ]
+  parent: [CMBaseDefibrillator, RMCPowerCellSlotUnremovable]
   suffix: RMC14
   components:
   - type: PowerCellDraw
-    useRate: 100
+    enabled: false
+    useRate: 66
+  - type: RMCPowerUsageDisplay
 
 - type: entity
   id: CMDefibrillatorEmpty

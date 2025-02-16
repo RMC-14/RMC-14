@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Shared._RMC14.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
@@ -124,7 +125,7 @@ namespace Content.Shared.Damage
         ///     null if the user had no applicable components that can take damage.
         /// </returns>
         public DamageSpecifier? TryChangeDamage(EntityUid? uid, DamageSpecifier damage, bool ignoreResistances = false,
-            bool interruptsDoAfters = true, DamageableComponent? damageable = null, EntityUid? origin = null, EntityUid? tool = null)
+            bool interruptsDoAfters = true, DamageableComponent? damageable = null, EntityUid? origin = null, EntityUid? tool = null, int armorPiercing = 0)
         {
             if (!uid.HasValue || !_damageableQuery.Resolve(uid.Value, ref damageable, false))
             {
@@ -154,7 +155,7 @@ namespace Content.Shared.Damage
                     damage = DamageSpecifier.ApplyModifierSet(damage, modifierSet);
                 }
 
-                var ev = new DamageModifyEvent(damage, origin, tool);
+                var ev = new DamageModifyEvent(damage, origin, tool, armorPiercing);
                 RaiseLocalEvent(uid.Value, ev);
                 damage = ev.Damage;
 
@@ -162,6 +163,15 @@ namespace Content.Shared.Damage
                 {
                     return damage;
                 }
+            }
+
+            var evd = new DamageModifyAfterResistEvent(damage, origin, tool);
+            RaiseLocalEvent(uid.Value, evd);
+            damage = evd.Damage;
+
+            if (damage.Empty)
+            {
+                return damage;
             }
 
             // TODO DAMAGE PERFORMANCE
@@ -304,13 +314,15 @@ namespace Content.Shared.Damage
         public DamageSpecifier Damage;
         public EntityUid? Origin;
         public EntityUid? Tool;
+        public int ArmorPiercing;
 
-        public DamageModifyEvent(DamageSpecifier damage, EntityUid? origin = null, EntityUid? tool = null)
+        public DamageModifyEvent(DamageSpecifier damage, EntityUid? origin = null, EntityUid? tool = null, int armorPiercing = 0)
         {
             OriginalDamage = damage;
             Damage = damage;
             Origin = origin;
             Tool = tool;
+            ArmorPiercing = armorPiercing;
         }
     }
 

@@ -10,7 +10,7 @@
       - material: CMSteel
         amount: 2
         doAfter: 0
-      - material: Cable
+      - material: RMCCable
         amount: 10
         doAfter: 2
 

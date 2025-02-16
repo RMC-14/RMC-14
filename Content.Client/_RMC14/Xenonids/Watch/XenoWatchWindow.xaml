@@ -4,6 +4,7 @@
     Title="{Loc cm-xeno-watch}"
     MinSize="300 400">
     <BoxContainer Orientation="Vertical">
+        <Label Name="BurrowedLarvaLabel" Access="Public" Text="Burrowed Larva: 0" />
         <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
             <BoxContainer Orientation="Vertical" Name="XenoContainer" Access="Public" />
         </ScrollContainer>

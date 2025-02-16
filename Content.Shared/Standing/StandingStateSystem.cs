@@ -25,7 +25,11 @@ namespace Content.Shared.Standing
             return !standingState.Standing;
         }
 
-        public bool Down(EntityUid uid, bool playSound = true, bool dropHeldItems = true,
+        public bool Down(EntityUid uid,
+            bool playSound = true,
+            bool dropHeldItems = true,
+            bool force = false,
+            bool changeCollision = false,
             StandingStateComponent? standingState = null,
             AppearanceComponent? appearance = null,
             HandsComponent? hands = null)
@@ -49,11 +53,14 @@ namespace Content.Shared.Standing
                 RaiseLocalEvent(uid, new DropHandItemsEvent(), false);
             }
 
-            var msg = new DownAttemptEvent();
-            RaiseLocalEvent(uid, msg, false);
+            if (!force)
+            {
+                var msg = new DownAttemptEvent();
+                RaiseLocalEvent(uid, msg, false);
 
-            if (msg.Cancelled)
-                return false;
+                if (msg.Cancelled)
+                    return false;
+            }
 
             standingState.Standing = false;
             Dirty(uid, standingState);
@@ -63,7 +70,7 @@ namespace Content.Shared.Standing
             _appearance.SetData(uid, RotationVisuals.RotationState, RotationState.Horizontal, appearance);
 
             // Change collision masks to allow going under certain entities like flaps and tables
-            if (TryComp(uid, out FixturesComponent? fixtureComponent))
+            if (changeCollision && TryComp(uid, out FixturesComponent? fixtureComponent))
             {
                 foreach (var (key, fixture) in fixtureComponent.Fixtures)
                 {

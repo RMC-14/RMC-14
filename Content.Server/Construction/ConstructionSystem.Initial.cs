@@ -34,7 +34,7 @@ namespace Content.Server.Construction
         [Dependency] private readonly EntityLookupSystem _lookupSystem = default!;
         [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
         [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-        [Dependency] private readonly CMConstructionSystem _cmConstruction = default!;
+        [Dependency] private readonly RMCConstructionSystem _rmcConstruction = default!;
 
         // --- WARNING! LEGACY CODE AHEAD! ---
         // This entire file contains the legacy code for initial construction.
@@ -106,7 +106,7 @@ namespace Content.Server.Construction
             EntityCoordinates coords,
             Angle angle = default)
         {
-            if (!_cmConstruction.CanConstruct(user))
+            if (!_rmcConstruction.CanConstruct(user))
                 return null;
 
             // We need a place to hold our construction items!
@@ -414,6 +414,21 @@ namespace Content.Server.Construction
             {
                 Log.Error($"Tried to start construction of invalid recipe '{ev.PrototypeName}'!");
                 RaiseNetworkEvent(new AckStructureConstructionMessage(ev.Ack));
+                return;
+            }
+
+            var coordinates = GetCoordinates(ev.Location);
+            var attempt = new RMCConstructionAttemptEvent(coordinates, constructionPrototype.Name);
+            RaiseLocalEvent(ref attempt);
+
+            if (attempt.Cancelled)
+            {
+                if (attempt.Popup is { } popup &&
+                    args.SenderSession.AttachedEntity is { } ent)
+                {
+                    _popup.PopupCoordinates(popup, coordinates, ent);
+                }
+
                 return;
             }
 

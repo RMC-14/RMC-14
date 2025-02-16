@@ -1,29 +1,29 @@
 ﻿# TODO RMC14
 - type: soundCollection
-  id: CMMarineMajor
-  files: []
-#  - /Audio/_RMC14/Announcements/RoundEnd/winning_triumph1.ogg
+  id: RMCMarineMajor
+  files:
+  - /Audio/_RMC14/Announcements/RoundEnd/marine_major.ogg
 #  - /Audio/_RMC14/Announcements/RoundEnd/winning_triumph2.ogg
 
 - type: soundCollection
-  id: CMMarineMinor
-  files: []
-#  - /Audio/_RMC14/Announcements/RoundEnd/neutral_hopeful1.ogg
+  id: RMCMarineMinor
+  files:
+  - /Audio/_RMC14/Announcements/RoundEnd/marine_minor.ogg
 #  - /Audio/_RMC14/Announcements/RoundEnd/neutral_hopeful2.ogg
 
 - type: soundCollection
-  id: CMXenoMajor
-  files: []
-#  - /Audio/_RMC14/Announcements/RoundEnd/sad_loss1.ogg
+  id: RMCXenoMajor
+  files:
+  - /Audio/_RMC14/Announcements/RoundEnd/xeno_major.ogg
 #  - /Audio/_RMC14/Announcements/RoundEnd/sad_loss2.ogg
 
 - type: soundCollection
-  id: CMXenoMinor
-  files: []
-#  - /Audio/_RMC14/Announcements/RoundEnd/neutral_melancholy1.ogg
+  id: RMCXenoMinor
+  files:
+  - /Audio/_RMC14/Announcements/RoundEnd/xeno_minor.ogg
 
 - type: soundCollection
-  id: CMAllDied
+  id: RMCAllDied
   files: []
 #  - /Audio/_RMC14/Announcements/RoundEnd/neutral_hopeful1.ogg
 #  - /Audio/_RMC14/Announcements/RoundEnd/neutral_hopeful2.ogg

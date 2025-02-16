@@ -1,4 +1,4 @@
-﻿# Xeno AI
+# Xeno AI
 - type: htnCompound
   id: CMXenoCompound
   branches:
@@ -21,13 +21,6 @@
     - !type:HTNCompoundTask
       task: MeleeAttackTargetCompound
 
-- type: nameIdentifierGroup
-  id: CMXeno
-  fullName: false
-  prefix: XX
-  minValue: 1
-  maxValue: 999
-
 - type: emote
   id: CMXenoDeathGasp
   name: chat-emote-name-deathgasp
@@ -39,7 +32,7 @@
   id: CMXenoBase
   abstract: true
   save: false
-  components:
+  components: # TODO RMC14 camera recoil from large explosions? check 13
   - type: Damageable
     damageContainer: Xeno
   - type: Destructible
@@ -58,6 +51,7 @@
       Alive: XenoHealth
       Critical: XenoCrit
       Dead: XenoDead
+    displayDamageInAlert: true
   - type: MobStateActions
     actions:
       Critical:
@@ -70,7 +64,7 @@
     sound:
       collection: XenoDeath
       params:
-        volume: -12
+        volume: -4
   - type: HealthExaminable
     examinableTypes:
     - Blunt
@@ -78,12 +72,13 @@
     - Piercing
     - Heat
     - Shock
+  - type: CMDefibrillatorBlocked
+    popup: defibrillator-xeno
+    showOnExamine: false
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.2
     baseSprintSpeed: 4
   - type: Climbing
-  - type: NameIdentifier
-    group: CMXeno
   - type: Insulated
   - type: Input
     context: "human"
@@ -92,6 +87,7 @@
   - type: InputMover
   - type: LagCompensation
   - type: MobMover
+  - type: Emoting
   - type: Actions
   - type: Alerts
   - type: Appearance
@@ -99,7 +95,6 @@
   - type: Examiner
   - type: Eye
   - type: ContentEye
-  - type: CameraRecoil
   - type: MindContainer
     showExamineInfo: true
   - type: StatusIcon
@@ -119,6 +114,12 @@
     layers:
     - map: [ "enum.XenoVisualLayers.Base" ]
       state: alive
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
   - type: Physics
     bodyType: KinematicController
   - type: Fixtures
@@ -130,8 +131,16 @@
         density: 185
         mask:
         - MobMask
+        - BarbedBarricade
         layer:
         - MobLayer
+      fix2:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.40
+        density: 185
+        layer:
+        - BulletImpassable
   - type: Xeno
   - type: UserInterface
     interfaces:
@@ -147,15 +156,29 @@
         type: XenoPheromonesBui
       enum.XenoOrderConstructionUI.Key:
         type: XenoOrderConstructionBui
+      enum.XenoFruitChooseUI.Key:
+        type: XenoFruitChooseBui
       enum.XenoWordQueenUI.Key:
         type: XenoWordQueenBui
+      enum.TacticalMapUserUi.Key:
+        type: TacticalMapUserBui
+      enum.XenoReserveParasiteChangeUI.Key:
+        type: ReserveParasitesBoundUserInterface
+      enum.XenoParasiteGhostUI.Key:
+        type: XenoParasiteGhostBui
+        requireInputValidation: false
+      enum.DialogUiKey.Key:
+        type: DialogBui
   - type: TypingIndicator
     proto: alien
   - type: MovedByPressure
   - type: NoSlip
+  - type: RMCSize
+    size: Xeno
   - type: Pullable
   - type: Speech
     speechVerb: Xeno
+    allowedEmotes: [ "Growl", "Hiss", "XenoRoar", "XenoHelp", "XenoTailSwipe" ]
   - type: GhostOnMove
     mustBeDead: true
   - type: WhitelistPickup
@@ -164,6 +187,7 @@
     alert: XenoNightVision
     overlay: true
   - type: ParalyzeOnPullAttemptImmune
+  - type: InfectOnPullAttemptImmune
   - type: GhostTakeoverAvailable
   - type: GhostRole
     makeSentient: true
@@ -189,12 +213,23 @@
     - Hivemind
   - type: StandingState
   - type: SlowOnPull
-    multiplier: 0.75
+    slowdowns:
+      - multiplier: 0.6
+        whitelist:
+          components:
+          - Marine
+      - multiplier: 0.665
+        whitelist:
+          components:
+          - XenoLight
+      - multiplier: 0.445
+        whitelist:
+          components:
+          - XenoHeavy
   - type: PullWhitelist
     whitelist:
       components:
       - Xeno
-      - XenoEgg
       - Infectable
   - type: BlockPullingDead
   - type: XenoFriendly
@@ -212,14 +247,58 @@
   - type: XenoAnnounceDeath # TODO RMC14 announce location of death (area)
     message: cm-xeno-death
     color: "#459A62"
+  - type: ExplosionResistance
+    damageCoefficient: 2
+  - type: NpcFactionMember
+    factions:
+    - RMCXeno
+  - type: RMCNightVisionVisible
+  - type: CrashLandable
+  - type: UserBlacklistActivatableUI
+    keys:
+    - enum.VendingMachineUiKey.Key
+    - enum.PaperUiKey.Key
+    - enum.RMCCameraUiKey.Key
+  - type: ActiveInputMover
+  - type: HiveTracker
+  - type: RequireProjectileTarget
+    active: false
+  - type: TacticalMapTracked
+  - type: TacMapXenoAlert
+  - type: TacticalMapUser
+    actionId: RMCActionOpenTacticalMapXeno
+    xenos: true
+  - type: TacticalMapLiveUpdateOnOvi
+    enabled: true
+  - type: MotionDetectorTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: xeno
+    background:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_xeno
+  - type: XenoMapTracked
+  - type: Evasion
+  - type: RMCWeaponAccuracy # This is so projectiles fired by xenos get a correctly-generated seed for RNG.
+  - type: StunOnExplosionReceived
+    weak: true
+  - type: AssignXenoName
+  - type: MobGibbedByExplosionType
+  - type: TileFirePatter
+  - type: CanBeFirePatted
+  - type: BlockIdExamine
+  - type: NoStunOnExit
+  - type: RMCSpeciesSlowdownModifier
+    slowMultiplier: 0.87
+    superSlowMultiplier: 0.75
+    durationMultiplier: 0.666
+  - type: RMCCanBeFultoned
 
 - type: entity
   abstract: true
   id: CMXenoPrying
   components:
-  - type: Tool
-    qualities:
-    - Prying
   - type: Prying
     pryPowered: true
     speedModifier: 2.7
@@ -240,16 +319,18 @@
     canDisarm: true
     disarmFailChance: 0
   - type: MeleeWeapon
+    autoAttack: true
     widePrimary: true
     altDisarm: true
     angle: 60
     soundHit:
-      collection: AlienClaw
-    animation: WeaponArcBite
+      collection: RCMXenoClaw
+    animation: RMCWeaponArcXenoClaw
     damage:
       groups:
         Brute: 12
   - type: Tackle
+  - type: XenoClaws
 
 - type: entity
   abstract: true
@@ -267,13 +348,10 @@
   id: CMXenoAI
   parent: CMXenoBase
   abstract: true
-  components:
+#  components:
 #  - type: HTN # TODO RMC14 needs to not target nested marines
 #    rootTask:
 #      task: CMXenoCompound
-  - type: NpcFactionMember
-    factions:
-    - Xeno
 
 - type: entity
   id: CMXenoDeveloped
@@ -295,7 +373,13 @@
       location: Right
     - name: Left Hand
       location: Left
+  - type: WhitelistPickup
+    whitelist:
+      components:
+      - XenoFruit
   - type: ParalyzeOnPullAttempt
+  - type: FirePatter
+  - type: RMCHandEmotes
 
 - type: entity
   abstract: true
@@ -315,7 +399,20 @@
     canResistFire: true
     damage: #per second, scales with number of fire 'stacks'
       types:
-        Heat: 3
+        Heat: 1
+
+- type: entity
+  abstract: true
+  id: RMCXenoCommendationReceiver
+  components:
+  - type: CommendationReceiver
+
+- type: entity
+  abstract: true
+  id: RMCXenoSpeechSounds
+  components:
+  - type: Speech
+    speechSounds: Xenonid
 
 - type: speechVerb
   id: Xeno

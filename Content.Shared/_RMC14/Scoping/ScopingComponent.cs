@@ -12,4 +12,7 @@ public sealed partial class ScopingComponent : Component
 
     [ViewVariables, AutoNetworkedField]
     public Vector2 EyeOffset;
+
+    [ViewVariables, AutoNetworkedField]
+    public bool AllowMovement;
 }

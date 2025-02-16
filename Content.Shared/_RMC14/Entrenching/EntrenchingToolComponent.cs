@@ -6,7 +6,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Entrenching;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
-[Access(typeof(EntrenchingToolSystem))]
+[Access(typeof(BarricadeSystem))]
 public sealed partial class EntrenchingToolComponent : Component
 {
     [DataField, AutoNetworkedField]

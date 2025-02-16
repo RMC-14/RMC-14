@@ -13,7 +13,7 @@ public sealed partial class RMCAdminWindow : DefaultWindow
         RobustXamlLoader.Load(this);
 
         TabContainer.SetTabTitle(TransformTab, Loc.GetString("rmc-ui-transform-tab"));
+        TabContainer.SetTabTitle(MarineTab, Loc.GetString("rmc-ui-marine-tab"));
         TabContainer.SetTabTitle(XenoTab, Loc.GetString("rmc-ui-xeno-tab"));
-        TabContainer.SetTabTitle(SquadsTab, Loc.GetString("rmc-ui-squads-tab"));
     }
 }

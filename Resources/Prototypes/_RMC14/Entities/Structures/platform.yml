@@ -10,6 +10,8 @@
     sprite: _RMC14/Structures/platforms.rsi
   - type: InteractionOutline
   - type: Clickable
+  - type: Climbable
+    delay: 0.25
 
 - type: entity
   parent: CMPlatformBase
@@ -35,7 +37,6 @@
         - TableLayer
   - type: Sprite
     state: platform
-  - type: Climbable
 
 - type: entity
   parent: CMPlatformBase
@@ -99,6 +100,50 @@
   - type: Climbable
 
 - type: entity
+  parent: CMPlatformBase
+  id: RMCPlatformRound
+  name: platform
+  description: A square metal surface resting on four legs.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.36"
+        density: 1500
+        mask:
+          - TableMask
+        layer:
+          - TableLayer
+      fix2:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,-0.36,0.49"
+        density: 1500
+        mask:
+          - TableMask
+        layer:
+          - TableLayer
+      fix3:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "0.36,-0.49,0.49,0.49"
+        density: 1500
+        mask:
+          - TableMask
+        layer:
+          - TableLayer
+  - type: Sprite
+    state: platform_round
+  - type: Climbable
+
+- type: entity
   parent: CMPlatform
   id: RMCPlatformStairRight
   components:
@@ -138,6 +183,24 @@
   components:
   - type: Sprite
     state: kutjevo_platform_sm
+
+- type: entity
+  parent: CMPlatformCorner
+  id: RMCPlatformKutjevoSMCorner
+  name: raised metal edge
+  description: A raised level of metal, often used to elevate areas above others, or construct bridges. You could probably climb it.
+  components:
+  - type: Sprite
+    state: kutjevo_platform_sm_corner
+
+- type: entity
+  parent: RMCPlatformRound
+  id: RMCPlatformKutjevoSMRound
+  name: raised metal edge
+  description: A raised level of metal, often used to elevate areas above others, or construct bridges. You could probably climb it.
+  components:
+  - type: Sprite
+    state: kutjevo_platform_sm_round
 
 - type: entity
   parent: CMPlatform

@@ -8,9 +8,18 @@
   - !type:DepartmentTimeRequirement
     department: CMMilitaryPolice
     time: 54000 # 15 hours
+  - !type:RoleTimeRequirement
+    role: CMJobMilitaryWarden
+    time: 18000 # 5 hours
   - !type:DepartmentTimeRequirement
     department: CMCommand
     time: 18000 # 5 hours
+  ranks:
+    RMCRankFirstLT:
+    - !type:RoleTimeRequirement
+      role: CMJobChiefMP
+      time: 36000 # 10 hours
+    RMCRankSecondLT: []
   weight: 5
   startingGear: CMGearChiefMP
   icon: "CMJobIconChiefMP"
@@ -19,40 +28,51 @@
   supervisors: cm-job-supervisors-co
   accessGroups:
   - CMP
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: cmp
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_mp
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      construction: 2
-      cqc: 2
-      endurance: 2
-      engineer: 2
-      firearms: 1
-      fireman: 2
-      intel: 1
-      jtac: 3
-      leadership: 2
-      medical: 1
-      meleeWeapons: 1
-      overwatch: 1
-      police: 2
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 2
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillIntel: 1
+        RMCSkillJtac: 3
+        RMCSkillLeadership: 2
+        RMCSkillMedical: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 2
     - type: MarineOrders
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-mp
+    - type: ViewIntelObjectives
 
 - type: startingGear
   id: CMGearChiefMP
   equipment:
     jumpsuit: CMJumpsuitWO
-    back: CMSatchelSecurity
     shoes: CMBootsBlackFilled
-    head: CMHeadBeretWO
+    head: CMHeadBeretCMP
     eyes: CMGlassesSecurity
     gloves: CMHandsBlackMarine
     id: CMIDCardChiefMP
     outerClothing: CMArmorM3WO
     ears: CMHeadsetCMP
-    belt: CMBeltSecurityFilled
+    belt: CMBeltSecurityMPFilled
     #    pocket1: TODO RMC14 tape recorder
-    pocket2: CMPouchGeneralLarge
+    pocket2: RMCPouchGeneralLarge
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -62,10 +82,8 @@
   - type: SpawnPoint
     job_id: CMChiefMP
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: chief_military_police
+    state: cmp_spawn
 
 - type: playTimeTracker
   id: CMJobChiefMP
+  isHumanoid: true

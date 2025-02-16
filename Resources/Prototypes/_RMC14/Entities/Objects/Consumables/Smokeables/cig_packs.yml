@@ -1,0 +1,14 @@
+- type: entity
+  parent: CigPackBlack
+  id: CMCigPackBlack
+  components:
+  - type: Storage
+    whitelist:
+      components:
+      - RMCLighter
+      tags:
+      - Cigarette
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno

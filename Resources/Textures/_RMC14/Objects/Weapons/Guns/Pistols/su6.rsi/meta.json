@@ -8,10 +8,10 @@
   },
   "states": [
     {
-      "name": "smartpistol"
+      "name": "icon"
     },
     {
-      "name": "smartpistol_e"
+      "name": "base"
     },
     {
       "name": "inhand-left",
@@ -30,7 +30,7 @@
       "directions": 4
     },
     {
-      "name": "icon"
+      "name": "mag-0"
     }
   ]
 }

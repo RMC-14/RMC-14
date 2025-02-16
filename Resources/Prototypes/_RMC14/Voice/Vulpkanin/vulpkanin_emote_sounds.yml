@@ -1,0 +1,19 @@
+- type: emoteSounds
+  id: RMCUnisexVulpkanin
+  sounds:
+    Growl:
+      collection: VulpkaninGrowls
+    Snarl:
+      collection: VulpkaninSnarls
+    Bark:
+      collection: VulpkaninBarks
+    Whine:
+      collection: VulpkaninWhines
+
+- type: emoteSounds
+  parent: [RMCUnisexVulpkanin, RMCMaleHuman]
+  id: RMCMaleVulpkanin
+
+- type: emoteSounds
+  parent: [RMCUnisexVulpkanin, RMCFemaleHuman]
+  id: RMCFemaleVulpkanin

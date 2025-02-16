@@ -1,5 +1,5 @@
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   id: CMIntercom
   name: intercom
   description: An intercom. For when the marines just needs to know something.
@@ -7,6 +7,8 @@
   components:
   - type: WallMount
   - type: ApcPowerReceiver
+    powerLoad: 100 # TODO RMC14 power
+    needsPower: true
   - type: Electrified
     enabled: false
     usesApcPower: true
@@ -39,6 +41,15 @@
     - state: intercom-p
     - state: intercom
       map: ["enum.PowerDeviceVisualLayers.Powered"]
+      shader: unshaded
+    - state: broadcasting
+      map: ["enum.RadioDeviceVisualLayers.Broadcasting"]
+      shader: unshaded
+      visible: false
+    - state: speaker
+      map: ["enum.RadioDeviceVisualLayers.Speaker"]
+      shader: unshaded
+      visible: false
   - type: Transform
     noRot: false
     anchored: true
@@ -47,6 +58,10 @@
     boardName: wires-board-name-intercom
     layoutId: Intercom
   - type: ActivatableUIRequiresPower
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
   - type: ActivatableUI
     key: enum.IntercomUiKey.Key
   - type: UserInterface
@@ -57,7 +72,6 @@
         type: WiresBoundUserInterface
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Metallic
   - type: Destructible
     thresholds:
       - trigger:

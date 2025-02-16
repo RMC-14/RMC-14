@@ -1,0 +1,67 @@
+﻿- type: entity
+  parent: BaseStorageItem
+  name: vial storage box
+  description: A place to store your fragile vials when you are not using them.
+  id: RMCVialBox
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/vial_box.rsi
+    layers:
+    - state: vialbox
+    - state: vialbox1
+      map: ["vialbox1"]
+      visible: false
+    - state: vialbox2
+      map: ["vialbox2"]
+      visible: false
+    - state: vialbox3
+      map: ["vialbox3"]
+      visible: false
+    - state: vialbox4
+      map: ["vialbox4"]
+      visible: false
+    - state: vialbox5
+      map: ["vialbox5"]
+      visible: false
+    - state: vialbox6
+      map: ["vialbox6"]
+      visible: false
+  - type: Item
+    sprite: _RMC14/Objects/Storage/vial_box.rsi
+    size: Normal
+  - type: Storage
+    hideStackVisualsWhenClosed: false
+    maxItemSize: Small
+    grid:
+    - 0,0,11,1 # 6 slots
+    whitelist:
+      tags:
+      - CMAutoInjector
+      components:
+      - Vial
+  - type: FixedItemSizeStorage
+  - type: ItemCounter
+    count:
+      tags:
+      - CMAutoInjector
+      components:
+      - Vial
+    composite: true
+    layerStates:
+    - vialbox1
+    - vialbox2
+    - vialbox3
+    - vialbox4
+    - vialbox5
+    - vialbox6
+  - type: Appearance
+
+- type: entity
+  parent: RMCVialBox
+  suffix: Full
+  id: RMCVialBoxFull
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCVial
+      amount: 6

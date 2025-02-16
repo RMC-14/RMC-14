@@ -1,7 +1,9 @@
 ﻿using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Marines.Skills;
 
+// TODO RMC14 make this more general
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SkillsSystem))]
 public sealed partial class MedicallyUnskilledDoAfterComponent : Component
@@ -12,4 +14,7 @@ public sealed partial class MedicallyUnskilledDoAfterComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan DoAfter = TimeSpan.FromSeconds(3);
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId<SkillDefinitionComponent> Skill = "RMCSkillMedical";
 }

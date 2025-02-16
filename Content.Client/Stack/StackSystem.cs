@@ -22,7 +22,7 @@ namespace Content.Client.Stack
 
         public override void SetCount(EntityUid uid, int amount, StackComponent? component = null)
         {
-            if (!Resolve(uid, ref component))
+            if (!Resolve(uid, ref component, false))
                 return;
 
             base.SetCount(uid, amount, component);
@@ -44,7 +44,7 @@ namespace Content.Client.Stack
             // TODO PREDICT ENTITY DELETION: This should really just be a normal entity deletion call.
             if (component.Count <= 0 && !component.Lingering)
             {
-                Xform.DetachParentToNull(uid, Transform(uid));
+                Xform.DetachEntity(uid, Transform(uid));
                 return;
             }
 

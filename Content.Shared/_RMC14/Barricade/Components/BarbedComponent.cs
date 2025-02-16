@@ -8,7 +8,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Barricade.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(BarbedSystem))]
+[Access(typeof(SharedBarbedSystem))]
 public sealed partial class BarbedComponent : Component
 {
     [DataField(required: true)]
@@ -28,6 +28,9 @@ public sealed partial class BarbedComponent : Component
 
     [DataField]
     public TimeSpan CutTime = TimeSpan.FromSeconds(1);
+
+    [DataField]
+    public string FixtureId = "fix1";
 }
 
 [NetSerializable, Serializable]

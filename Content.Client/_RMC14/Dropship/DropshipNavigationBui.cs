@@ -59,7 +59,8 @@ public sealed class DropshipNavigationBui : BoundUserInterface
 
         _window = new DropshipNavigationWindow();
         _window.OnClose += OnClose;
-        SetHeader("Flight Controls");
+        SetFlightHeader("Flight Controls");
+        SetDoorHeader("Lockdown");
 
         if (_entities.TryGetComponent(Owner, out TransformComponent? transform) &&
             _entities.TryGetComponent(transform.ParentUid, out MetaDataComponent? metaData))
@@ -84,6 +85,8 @@ public sealed class DropshipNavigationBui : BoundUserInterface
             ResetDestinationButtons();
         };
 
+        _window.LockdownButton.Button.OnPressed += _ => SendPredictedMessage(new DropshipLockdownMsg());
+
         _window.OpenCentered();
         _entities.System<DropshipSystem>().Uis.Add(this);
     }
@@ -99,7 +102,7 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         if (_window == null)
             return;
 
-        SetHeader("Flight Controls");
+        SetFlightHeader("Flight Controls");
 
         _window.DestinationsContainer.Visible = true;
         _window.ProgressBarContainer.Visible = false;
@@ -108,24 +111,39 @@ public sealed class DropshipNavigationBui : BoundUserInterface
 
         _window.DestinationsContainer.DisposeAllChildren();
 
-        _destinations.Clear();
-        foreach (var destination in destinations.Destinations)
+        DropshipButton DestinationButton(string name, bool disabled, Action onPressed)
         {
             var button = new DropshipButton();
-            button.Text = destination.Name;
-            button.Disabled = destination.Occupied;
+
+            button.Text = name;
+            button.Disabled = disabled;
             button.BorderColor = Color.Transparent;
             button.BorderThickness = new Thickness(0);
             button.Button.ToggleMode = true;
             button.Button.OnPressed += _ =>
             {
+                button.Text = $"> {name}";
                 SetCancelLaunchDisabled(false);
-                _selected = destination.Id;
+                onPressed();
                 ResetDestinationButtons();
-                button.Text = $"> {destination.Name}";
             };
 
-            _destinations[button] = destination.Name;
+            return button;
+        }
+
+        if (destinations.FlyBy is { } flyBy)
+            _window.DestinationsContainer.AddChild(DestinationButton("Flyby", false, () => _selected = flyBy));
+
+        _destinations.Clear();
+        foreach (var destination in destinations.Destinations)
+        {
+            var name = destination.Name;
+            if (destination.Primary)
+                name += " (Primary)";
+
+            var button = DestinationButton(name, destination.Occupied, () => _selected = destination.Id);
+
+            _destinations[button] = name;
             _window.DestinationsContainer.AddChild(button);
         }
     }
@@ -151,20 +169,24 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         switch (travelling.State)
         {
             case FTLState.Starting:
-                SetHeader("Launch in progress"); // 10s
+                SetFlightHeader("Launch in progress");
                 _window.ProgressBarHeader.SetMarkup(Msg($"Launching in T-{time}s to {destination}"));
+                _window.LockdownButton.Disabled = false;
                 break;
             case FTLState.Travelling:
-                SetHeader($"In flight: {destination}"); // 100s
+                SetFlightHeader($"In flight: {destination}");
                 _window.ProgressBarHeader.SetMarkup(Msg($"Time until destination: T-{time}s"));
+                _window.LockdownButton.Disabled = true;
                 break;
             case FTLState.Arriving:
-                SetHeader($"Final Approach: {destination}"); // 10s
+                SetFlightHeader($"Final Approach: {destination}");
                 _window.ProgressBarHeader.SetMarkup(Msg($"Time until landing: T-{time}s"));
+                _window.LockdownButton.Disabled = true;
                 break;
             case FTLState.Cooldown:
-                SetHeader("Refueling in progress"); // 120s
+                SetFlightHeader("Refueling in progress");
                 _window.ProgressBarHeader.SetMarkup(Msg($"Ready to launch in T-{time}s"));
+                _window.LockdownButton.Disabled = false;
                 break;
             default:
                 return;
@@ -176,9 +198,14 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         _window.ProgressBar.SetAsRatio(1 - startEndTime.ProgressAt(_timing.CurTime));
     }
 
-    private void SetHeader(string label)
+    private void SetFlightHeader(string label)
     {
         _window?.Header.SetMarkup($"[color=#0BDC49][font size=16][bold]{label}[/bold][/font][/color]");
+    }
+
+    private void SetDoorHeader(string label)
+    {
+        _window?.DoorHeader.SetMarkup($"[color=#0BDC49][font size=16][bold]{label}[/bold][/font][/color]");
     }
 
     private void SetCancelLaunchDisabled(bool disabled)

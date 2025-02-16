@@ -6,7 +6,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Xenonids.Construction.Events;
 
 [Serializable, NetSerializable]
-public sealed partial class XenoOrderConstructionDoAfterEvent : DoAfterEvent
+public sealed partial class XenoOrderConstructionDoAfterEvent : SimpleDoAfterEvent
 {
     [DataField]
     public EntProtoId StructureId = "HiveCoreXeno";
@@ -18,10 +18,5 @@ public sealed partial class XenoOrderConstructionDoAfterEvent : DoAfterEvent
     {
         StructureId = structureId;
         Coordinates = coordinates;
-    }
-
-    public override DoAfterEvent Clone()
-    {
-        return this;
     }
 }

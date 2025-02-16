@@ -11,4 +11,9 @@ public sealed partial class XenoPlantWeedsActionEvent : InstantActionEvent
 
     [DataField]
     public EntProtoId Prototype = "XenoWeedsSource";
+
+    // Slight corner cutting to avoid the pain of having to extract this from the prototype every time
+    // TODO: do this properly
+    [DataField]
+    public bool UseOnSemiWeedable = false;
 }

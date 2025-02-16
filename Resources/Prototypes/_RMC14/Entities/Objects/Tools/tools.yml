@@ -15,6 +15,15 @@
   - type: Item
     size: Tiny
     sprite: _RMC14/Objects/Tools/screwdriver.rsi
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_RMC14/Handling/screwdriver_pickup.ogg
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Ears
+    - Suitstorage
+    - Mask
 
 - type: entity
   parent: Wirecutter
@@ -33,6 +42,13 @@
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Tools/wirecutters.rsi
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_RMC14/Handling/wirecutter_pickup.ogg
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Suitstorage
 
 - type: entity
   parent: Wrench
@@ -44,6 +60,17 @@
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Tools/wrench.rsi
+    storedRotation: 90
+    storedSprite:
+      sprite: _RMC14/Objects/Tools/wrench.rsi
+      state: icon
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_RMC14/Handling/wrench_pickup.ogg
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Suitstorage
 
 - type: entity
   parent: Multitool
@@ -59,6 +86,46 @@
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Tools/multitool.rsi
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_RMC14/Handling/multitool_pickup.ogg
+  - type: Multitool
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Suitstorage
+
+- type: entity
+  parent: trayScanner
+  id: CMTRayScanner
+  name: t-ray scanner
+  description: A high-tech scanning device that uses terahertz radiation to detect subfloor infrastructure.
+  suffix: trayScanner
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/t-ray.rsi
+    layers:
+    - state: tray-off
+      map: [ "base" ]
+  - type: TrayScanner
+    range: 1
+  - type: Item
+    sprite: _RMC14/Objects/Tools/t-ray.rsi
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TrayScannerVisual.Visual:
+        base:
+          On: { state: tray-on }
+          Off: { state: tray-off }
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_RMC14/Handling/multitool_pickup.ogg
+  - type: Multitool
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Suitstorage
 
 - type: entity
   parent: Crowbar
@@ -69,7 +136,19 @@
     state: icon
   - type: Item
     size: Small
-    sprite: _RMC14/Objects/Tools/crowbar.rsi
+    sprite: null
+    storedSprite: null
+    shape: null
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_RMC14/Handling/crowbar_pickup.ogg
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Belt
+    - Suitstorage
+  - type: Prying
+    speedModifier: 100000
 
 - type: entity
   parent: CMCrowbar
@@ -84,6 +163,7 @@
     state: red-icon
   - type: Item
     heldPrefix: red
+    storedSprite: null
 
 - type: entity
   parent: HandLabeler

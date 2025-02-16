@@ -1,7 +1,7 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: BaseItem
-  id: CMBoxMagazineBase
+  id: RMCBoxMagazineBase
   name: generic magazine box (? x ?)"
   description: A box of magazines.
   components:
@@ -32,11 +32,24 @@
           Medium: { state: magaz_reg_2, visible: true }
           High: { state: magaz_reg_3, visible: true }
           Full: { state: magaz_reg, visible: true }
+  - type: RMCUnfoldCardboard
+    spawns:
+    - id: RMCSheetCardboard1
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: Tag
+    tags:
+    - RMCAmmoBox
+
+- type: Tag
+  id: RMCAmmoBox
 
 - type: entity
   abstract: true
-  parent: CMBoxMagazineBase
-  id: CMBoxMagazineAPBase
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMagazineAPBase
   name: generic magazine box (? x ?)"
   description: A box of magazines.
   components:
@@ -59,8 +72,8 @@
 
 - type: entity
   abstract: true
-  parent: CMBoxMagazineBase
-  id: CMBoxMagazineHVBase
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMagazineHVBase
   name: generic magazine box (? x ?)"
   description: A box of magazines.
   components:
@@ -81,15 +94,40 @@
           High: { state: magaz_hv_3, visible: true }
           Full: { state: magaz_hv, visible: true }
 
+
+- type: entity
+  abstract: true
+  parent: RMCBoxMagazineBase
+  id: RMCBoxShellsBase
+  name: generic shell box (? x ?)"
+  description: A box of shells.
+  components:
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        lid_stripe:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: shells_buck, visible: false }
+          Low: { state: shells_buck_1, visible: true }
+          Medium: { state: shells_buck_2, visible: true }
+          High: { state: shells_buck_3, visible: true }
+          Full: { state: shells_buck, visible: true }
+
 # M54C
 - type: entity
-  parent: CMBoxMagazineBase
-  id: CMBoxMagazineRifleM54CEmpty
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMagazineRifleM54CEmpty
   name: magazine box (M54C x 10)
   components:
   - type: Construction
-    graph: CMBoxMagazine
-    node: CMBoxMagazineRifleM54CEmpty
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazineRifleM54CEmpty
   - type: Sprite
     layers:
     - state: base_m54 # icon_state = base color of box
@@ -101,16 +139,16 @@
       map: [ "lid" ]
     - state: lid_type_reg # lid stripe,ends in the type of ammo used
       map: [ "lid_stripe" ]
-    - type: CMItemSlots
-      count: 10
-      slot:
-        whitelist:
-          tags:
-          - CMMagazineRifleM54C
+  - type: CMItemSlots
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54C
 
 - type: entity
-  parent: CMBoxMagazineRifleM54CEmpty
-  id: CMBoxMagazineRifleM54C
+  parent: RMCBoxMagazineRifleM54CEmpty
+  id: RMCBoxMagazineRifleM54C
   suffix: Filled
   components:
   - type: CMItemSlots
@@ -122,13 +160,13 @@
         - CMMagazineRifleM54C
 
 - type: entity
-  parent: CMBoxMagazineAPBase
-  id: CMBoxMagazineRifleM54CAPEmpty
+  parent: RMCBoxMagazineAPBase
+  id: RMCBoxMagazineRifleM54CAPEmpty
   name: magazine box (AP M54C x 10)
   components:
   - type: Construction
-    graph: CMBoxMagazine
-    node: CMBoxMagazineRifleM54CAPEmpty
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazineRifleM54CAPEmpty
   - type: Sprite
     layers:
     - state: base_m54
@@ -140,17 +178,16 @@
       map: [ "lid" ]
     - state: lid_type_ap
       map: [ "lid_stripe" ]
-    - type: CMItemSlots
-      startingItem: CMMagazineRifleM54CAP
-      count: 10
-      slot:
-        whitelist:
-          tags:
-          - CMMagazineRifleM54CAP
+  - type: CMItemSlots
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54CAP
 
 - type: entity
-  parent: CMBoxMagazineRifleM54CAPEmpty
-  id: CMBoxMagazineRifleM54CAP
+  parent: RMCBoxMagazineRifleM54CAPEmpty
+  id: RMCBoxMagazineRifleM54CAP
   name: magazine box (AP M54C x 10)
   suffix: Filled
   components:
@@ -163,13 +200,13 @@
         - CMMagazineRifleM54CAP
 
 - type: entity
-  parent: CMBoxMagazineBase
-  id: CMBoxMagazineRifleM54CExtEmpty
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMagazineRifleM54CExtEmpty
   name: magazine box (Ext M54C x 8)
   components:
   - type: Construction
-    graph: CMBoxMagazine
-    node: CMBoxMagazineRifleM54CExtEmpty
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazineRifleM54CExtEmpty
   - type: Sprite
     layers:
     - state: base_m54
@@ -189,8 +226,8 @@
         - CMMagazineRifleM54CExt
 
 - type: entity
-  parent: CMBoxMagazineBase
-  id: CMBoxMagazineRifleM54CExt
+  parent: RMCBoxMagazineRifleM54CExtEmpty
+  id: RMCBoxMagazineRifleM54CExt
   suffix: Filled
   name: magazine box (Ext M54C x 8)
   components:
@@ -204,13 +241,13 @@
 
 # M63
 - type: entity
-  parent: CMBoxMagazineHVBase
-  id: CMBoxMagazineSMGM63Empty
+  parent: RMCBoxMagazineHVBase
+  id: RMCBoxMagazineSMGM63Empty
   name: magazine box (M63 x 12)
   components:
   - type: Construction
-    graph: CMBoxMagazine
-    node: CMBoxMagazineSMGM63Empty
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazineSMGM63Empty
   - type: Sprite
     layers:
     - state: base_m63
@@ -222,16 +259,16 @@
       map: [ "lid" ]
     - state: lid_type_reg
       map: [ "lid_stripe" ]
-    - type: CMItemSlots
-      count: 12
-      slot:
-        whitelist:
-          tags:
-          - CMMagazineSMGM63
+  - type: CMItemSlots
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineSMGM63
 
 - type: entity
-  parent: CMBoxMagazineSMGM63Empty
-  id: CMBoxMagazineSMGM63
+  parent: RMCBoxMagazineSMGM63Empty
+  id: RMCBoxMagazineSMGM63
   name: magazine box (M63 x 12)
   components:
   - type: CMItemSlots
@@ -243,13 +280,13 @@
         - CMMagazineSMGM63
 
 - type: entity
-  parent: CMBoxMagazineBase
-  id: CMBoxMagazineSMGM63APEmpty
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMagazineSMGM63APEmpty
   name: magazine box (AP M63 x 12)
   components:
   - type: Construction
-    graph: CMBoxMagazine
-    node: CMBoxMagazineSMGM63APEmpty
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazineSMGM63APEmpty
   - type: Sprite
     layers:
     - state: base_m63
@@ -261,16 +298,16 @@
       map: [ "lid" ]
     - state: lid_type_ap
       map: [ "lid_stripe" ]
-    - type: CMItemSlots
-      count: 12
-      slot:
-        whitelist:
-          tags:
-          - CMMagazineSMGM63AP
+  - type: CMItemSlots
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineSMGM63AP
 
 - type: entity
-  parent: CMBoxMagazineSMGM63APEmpty
-  id: CMBoxMagazineSMGM63AP
+  parent: RMCBoxMagazineSMGM63APEmpty
+  id: RMCBoxMagazineSMGM63AP
   suffix: Full
   name: magazine box (AP M63 x 12)
   components:
@@ -283,13 +320,13 @@
         - CMMagazineSMGM63AP
 
 - type: entity
-  parent: CMBoxMagazineHVBase
-  id: CMBoxMagazineSMGM63ExtEmpty
+  parent: RMCBoxMagazineHVBase
+  id: RMCBoxMagazineSMGM63ExtEmpty
   name: magazine box (Ext M63 x 10)
   components:
   - type: Construction
-    graph: CMBoxMagazine
-    node: CMBoxMagazineSMGM63ExtEmpty
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazineSMGM63ExtEmpty
   - type: Sprite
     layers:
     - state: base_m63
@@ -301,16 +338,16 @@
       map: [ "lid" ]
     - state: lid_type_ext
       map: [ "lid_stripe" ]
-    - type: CMItemSlots
-      count: 10
-      slot:
-        whitelist:
-          tags:
-          - CMMagazineSMGM63Ext
+  - type: CMItemSlots
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineSMGM63Ext
 
 - type: entity
-  parent: CMBoxMagazineSMGM63ExtEmpty
-  id: CMBoxMagazineSMGM63Ext
+  parent: RMCBoxMagazineSMGM63ExtEmpty
+  id: RMCBoxMagazineSMGM63Ext
   name: magazine box (Ext M63 x 10)
   suffix: Full
   components:
@@ -324,13 +361,13 @@
 
 # M4SPR
 - type: entity
-  parent: CMBoxMagazineBase
-  id: CMBoxMagazineRifleM4SPREmpty
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMagazineRifleM4SPREmpty
   name: magazine box (M4SPR x 16)
   components:
   - type: Construction
-    graph: CMBoxMagazine
-    node: CMBoxMagazineRifleM4SPREmpty
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazineRifleM4SPREmpty
   - type: Sprite
     layers:
     - state: base_m4spr
@@ -342,16 +379,16 @@
       map: [ "lid" ]
     - state: lid_type_reg
       map: [ "lid_stripe" ]
-    - type: CMItemSlots
-      count: 16
-      slot:
-        whitelist:
-          tags:
-          - CMMagazineRifleM4SPR
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM4SPR
 
 - type: entity
-  parent: CMBoxMagazineRifleM4SPREmpty
-  id: CMBoxMagazineRifleM4SPR
+  parent: RMCBoxMagazineRifleM4SPREmpty
+  id: RMCBoxMagazineRifleM4SPR
   name: magazine box (M4SPR x 16)
   suffix: Filled
   components:
@@ -364,13 +401,13 @@
         - CMMagazineRifleM4SPR
 
 - type: entity
-  parent: CMBoxMagazineBase
-  id: CMBoxMagazineRifleM4SPRAPEmpty
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMagazineRifleM4SPRAPEmpty
   name: magazine box (AP M4SPR x 16)
   components:
   - type: Construction
-    graph: CMBoxMagazine
-    node: CMBoxMagazineRifleM4SPRAPEmpty
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazineRifleM4SPRAPEmpty
   - type: Sprite
     layers:
     - state: base_m4spr
@@ -390,8 +427,8 @@
         - CMMagazineRifleM4SPRAP
 
 - type: entity
-  parent: CMBoxMagazineRifleM4SPRAPEmpty
-  id: CMBoxMagazineRifleM4SPRAP
+  parent: RMCBoxMagazineRifleM4SPRAPEmpty
+  id: RMCBoxMagazineRifleM4SPRAP
   name: magazine box (AP M4SPR x 16)
   components:
   - type: CMItemSlots
@@ -403,13 +440,13 @@
         - CMMagazineRifleM4SPRAP
 
 - type: entity
-  parent: CMBoxMagazineBase
-  id: CMBoxMagazineRifleM4SPRExtEmpty
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMagazineRifleM4SPRExtEmpty
   name: magazine box (Ext M4SPR x 12)
   components:
   - type: Construction
-    graph: CMBoxMagazine
-    node: CMBoxMagazineRifleM4SPRExtEmpty
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazineRifleM4SPRExtEmpty
   - type: Sprite
     layers:
     - state: base_m4spr
@@ -429,8 +466,8 @@
         - CMMagazineRifleM4SPRExt
 
 - type: entity
-  parent: CMBoxMagazineRifleM4SPRExtEmpty
-  id: CMBoxMagazineRifleM4SPRExt
+  parent: RMCBoxMagazineRifleM4SPRExtEmpty
+  id: RMCBoxMagazineRifleM4SPRExt
   name: magazine box (Ext M4SPR x 12)
   components:
   - type: CMItemSlots
@@ -443,13 +480,13 @@
 
 # M1984
 - type: entity
-  parent: CMBoxMagazineBase
-  id: CMBoxMagazinePistolM1984Empty
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMagazinePistolM1984Empty
   name: magazine box (M1984 x 16)
   components:
   - type: Construction
-    graph: CMBoxMagazine
-    node: CMBoxMagazinePistolM1984Empty
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazinePistolM1984Empty
   - type: Sprite
     layers:
     - state: base_m1984
@@ -469,9 +506,8 @@
         - CMMagazinePistolM1984
 
 - type: entity
-  parent: CMBoxMagazinePistolM1984Empty
-  id: CMBoxMagazinePistolM1984
-  name: magazine box (M1984 x 16)
+  parent: RMCBoxMagazinePistolM1984Empty
+  id: RMCBoxMagazinePistolM1984
   components:
   - type: CMItemSlots
     startingItem: CMMagazinePistolM1984
@@ -481,42 +517,50 @@
         tags:
         - CMMagazinePistolM1984
 
-#- type: entity # TODO RMC14 this box is done but needs mags made, dont forget to add it to crafting and cargo
-#  parent: CMBoxMagazineBase
-#  id: CMBoxMagazinePistolM1984AP
-#  name: magazine box (AP M1984 x 16)
-#  components:
-#  - type: Construction
-#    graph: CMBoxMagazine
-#    node: CMBoxMagazinePistolM1984APEmpty
-#  - type: Sprite
-#    layers:
-#    - state: base_m1984
-#    - state: text_m1984
-#    - state: base_type_ap
-#    - state: magaz_ap
-#      map: [ "enum.CMItemSlotsLayers.Fill" ]
-#    - state: base_m1984_lid
-#      map: [ "lid" ]
-#    - state: lid_type_ap
-#      map: [ "lid_stripe" ]
-#  - type: CMItemSlots
-#    startingItem: CMMagazinePistolM1984AP
-#    count: 16
-#    slot:
-#      whitelist:
-#        tags:
-#        - CMMagazinePistolM1984AP
+- type: entity
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMagazinePistolM1984APEmpty
+  name: magazine box (AP M1984 x 16)
+  suffix: Empty
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazinePistolM1984APEmpty
+  - type: Sprite
+    layers:
+    - state: base_m1984
+    - state: text_m1984
+    - state: base_type_ap
+    - state: magaz_ap
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: base_m1984_lid
+      map: [ "lid" ]
+    - state: lid_type_ap
+      map: [ "lid_stripe" ]
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolM1984AP
+
+- type: entity
+  parent: RMCBoxMagazinePistolM1984APEmpty
+  id: RMCBoxMagazinePistolM1984AP
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazinePistolM1984AP
 
 # M77
 - type: entity
-  parent: CMBoxMagazineAPBase
-  id: CMBoxMagazinePistolM77APEmpty
+  parent: RMCBoxMagazineAPBase
+  id: RMCBoxMagazinePistolM77APEmpty
   name: magazine box (M77 AP x 16)
   components:
   - type: Construction
-    graph: CMBoxMagazine
-    node: CMBoxMagazinePistolM77APEmpty
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazinePistolM77APEmpty
   - type: Sprite
     layers:
     - state: base_m77
@@ -536,8 +580,8 @@
         - CMMagazinePistolM77AP
 
 - type: entity
-  parent: CMBoxMagazinePistolM77APEmpty
-  id: CMBoxMagazinePistolM77AP
+  parent: RMCBoxMagazinePistolM77APEmpty
+  id: RMCBoxMagazinePistolM77AP
   name: magazine box (M77 AP x 16)
   components:
   - type: CMItemSlots
@@ -550,13 +594,13 @@
 
 # MK80
 - type: entity
-  parent: CMBoxMagazineBase
-  id:  CMBoxMagazinePistolMK80Empty
+  parent: RMCBoxMagazineBase
+  id:  RMCBoxMagazinePistolMK80Empty
   name: magazine box (MK80 x 16)
   components:
   - type: Construction
-    graph: CMBoxMagazine
-    node: CMBoxMagazinePistolMK80Empty
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazinePistolMK80Empty
   - type: Sprite
     layers:
     - state: base_mk80
@@ -576,8 +620,8 @@
         - CMMagazinePistolMK80
 
 - type: entity
-  parent: CMBoxMagazinePistolMK80Empty
-  id:  CMBoxMagazinePistolMK80
+  parent: RMCBoxMagazinePistolMK80Empty
+  id:  RMCBoxMagazinePistolMK80
   name: magazine box (MK80 x 16)
   components:
   - type: CMItemSlots
@@ -587,3 +631,581 @@
       whitelist:
         tags:
         - CMMagazinePistolMK80
+
+# SU-6 Smart Pistol
+- type: entity
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMagazinePistolSU6Empty
+  name: magazine box (SU-6 x 16)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazinePistolSU6Empty
+  - type: Sprite
+    layers:
+    - state: base_su6
+    - state: text_su6
+    - state: base_type_reg
+    - state: magaz_reg
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: base_su6_lid
+      map: [ "lid" ]
+    - state: lid_type_reg
+      map: [ "lid_stripe" ]
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolSU6
+
+- type: entity
+  parent: RMCBoxMagazinePistolSU6Empty
+  id: RMCBoxMagazinePistolSU6
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazinePistolSU6
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolSU6
+
+# M44 Revolver
+
+- type: entity
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMagazineRevolverM44Empty
+  name: speedloader box (M44 x 16)
+  description: A box for holding many speedloaders with a carrying handle.
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazineRevolverM44Empty
+  - type: Sprite
+    layers:
+    - state: base_m44
+    - state: magaz_reg
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: text_m44
+    - state: base_type_m44_reg
+    - state: base_m44_lid
+      map: [ "lid" ]
+    - state: lid_type_m44_reg
+      map: [ "lid_stripe" ]
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCSpeedLoaderM44
+
+- type: entity
+  parent: RMCBoxMagazineRevolverM44Empty
+  id: RMCBoxMagazineRevolverM44
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCSpeedLoaderM44
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCSpeedLoaderM44
+
+- type: entity
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMagazineRevolverM44MarksmanEmpty
+  name: speedloader box (Marksman M44 x 16)
+  description: A box for holding many speedloaders with a carrying handle, these ones are loaded with Marksman Rounds.
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazineRevolverM44MarksmanEmpty
+  - type: Sprite
+    layers:
+    - state: base_m44
+    - state: magaz_reg
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: text_m44
+    - state: base_type_m44_mark
+    - state: base_m44_lid
+      map: [ "lid" ]
+    - state: lid_type_m44_mark
+      map: [ "lid_stripe" ]
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCSpeedLoaderM44
+
+- type: entity
+  parent: RMCBoxMagazineRevolverM44MarksmanEmpty
+  id: RMCBoxMagazineRevolverM44Marksman
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCSpeedLoader44Marksman
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCSpeedLoaderM44
+
+# Nailgun
+
+- type: entity
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMagazineSMGNailgunEmpty
+  name: magazine box (Nailgun x 10)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazineSMGNailgunEmpty
+  - type: Sprite
+    layers:
+    - state: base_nailgun_deployed
+      map: [ "deployed" ]
+      visible: false
+    - state: magaz_nailgun
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      visible: false
+    - state: base_nailgun
+      map: [ "packed" ]
+  # The nailgun box sprite isn't structured the same as other sprites, so the visualizer is different.
+  - type: GenericVisualizer
+    visuals:
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: blank, visible: true }
+          Low: { state: magaz_nailgun_1, visible: true }
+          Medium: { state: magaz_nailgun_2, visible: true }
+          High: { state: magaz_nailgun_3, visible: true }
+          Full: { state: magaz_nailgun, visible: true }
+      enum.DeployableItemVisuals.Deployed:
+        deployed:
+          True: { visible: true }
+          False: { visible: false }
+        enum.CMItemSlotsLayers.Fill:
+          True: { visible: true }
+          False: { visible: false }
+        packed:
+          True: { visible: false }
+          False: { visible: true }
+  - type: CMItemSlots
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineSMGNailgun
+
+- type: entity
+  parent: RMCBoxMagazineSMGNailgunEmpty
+  id: RMCBoxMagazineSMGNailgun
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineSMGNailgun
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineSMGNailgun
+
+# Shotgun
+- type: entity
+  parent: RMCBoxShellsBase
+  id: RMCBoxShellsBuckshotEmpty
+  name: shell box (Buckshot x 100)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsBuckshotEmpty
+  - type: Sprite
+    layers:
+    - state: base_buck
+    - state: shells_buck
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: text_shells
+    - state: base_buck_lid
+      map: [ "lid" ]
+  - type: CMItemSlots
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBuckshot
+
+- type: entity
+  parent: RMCBoxShellsBuckshotEmpty
+  id: RMCBoxShellsBuckshot
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: CMShellShotgunBuckshot
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBuckshot
+
+- type: entity
+  parent: RMCBoxShellsBase
+  id: RMCBoxShellsSlugsEmpty
+  name: shell box (Slugs x 100)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsSlugsEmpty
+  - type: Sprite
+    layers:
+    - state: base_slug
+    - state: shells_slug
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: text_shells
+    - state: base_slug_lid
+      map: [ "lid" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        lid_stripe:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: shells_slug, visible: false }
+          Low: { state: shells_slug_1, visible: true }
+          Medium: { state: shells_slug_2, visible: true }
+          High: { state: shells_slug_3, visible: true }
+          Full: { state: shells_slug, visible: true }
+  - type: CMItemSlots
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunSlugs
+
+- type: entity
+  parent: RMCBoxShellsSlugsEmpty
+  id: RMCBoxShellsSlugs
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: CMShellShotgunSlugs
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunSlugs
+
+- type: entity
+  parent: RMCBoxShellsBase
+  id: RMCBoxShellsFlechetteEmpty
+  name: shell box (Flechette x 100)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsFlechetteEmpty
+  - type: Sprite
+    layers:
+    - state: base_flech
+    - state: shells_flech
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: text_shells
+    - state: base_flech_lid
+      map: [ "lid" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        lid_stripe:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: shells_flech, visible: false }
+          Low: { state: shells_flech_1, visible: true }
+          Medium: { state: shells_flech_2, visible: true }
+          High: { state: shells_flech_3, visible: true }
+          Full: { state: shells_flech, visible: true }
+  - type: CMItemSlots
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunFlechette
+
+- type: entity
+  parent: RMCBoxShellsFlechetteEmpty
+  id: RMCBoxShellsFlechette
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: CMShellShotgunFlechette
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunFlechette
+
+# These shells aren't fully implemented yet, so they can't be constructed
+- type: entity
+  parent: RMCBoxShellsBase
+  id: RMCBoxShellsIncendiaryEmpty
+  name: shell box (Incendiary x 100)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsIncendiaryEmpty
+  - type: Sprite
+    layers:
+    - state: base_inc
+    - state: shells_incen
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: text_shells
+    - state: base_inc_lid
+      map: [ "lid" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        lid_stripe:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: shells_incen, visible: false }
+          Low: { state: shells_incen_1, visible: true }
+          Medium: { state: shells_incen_2, visible: true }
+          High: { state: shells_incen_3, visible: true }
+          Full: { state: shells_incen, visible: true }
+  - type: CMItemSlots
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunIncendiary
+
+- type: entity
+  parent: RMCBoxShellsIncendiaryEmpty
+  id: RMCBoxShellsIncendiary
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: CMShellShotgunIncendiary
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunIncendiary
+
+- type: entity
+  parent: RMCBoxShellsBase
+  id: RMCBoxShellsBeanbagEmpty
+  name: shell box (Beanbag x 100)
+  components:
+  # - type: Construction
+    # graph: RMCBoxMagazine
+    # node: RMCBoxShellsBeanbagEmpty
+  - type: Sprite
+    layers:
+    - state: base_bean
+    - state: shells_bean
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: text_shells
+    - state: base_bean_lid
+      map: [ "lid" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        lid_stripe:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: shells_bean, visible: false }
+          Low: { state: shells_bean_1, visible: true }
+          Medium: { state: shells_bean_2, visible: true }
+          High: { state: shells_bean_3, visible: true }
+          Full: { state: shells_bean, visible: true }
+  - type: CMItemSlots
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBeanbag
+
+- type: entity
+  parent: RMCBoxShellsBeanbagEmpty
+  id: RMCBoxShellsBeanbag
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: CMShellShotgunBeanbag
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBeanbag
+
+- type: entity
+  parent: RMCBoxShellsBase
+  id: RMCBoxShellsIncendiaryBuckshotEmpty
+  name: shell box (Incendiary Buckshot x 100)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsIncendiaryBuckshotEmpty
+  - type: Sprite
+    layers:
+    - state: base_incbuck
+    - state: shells_incenbuck
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: text_shells
+    - state: base_incbuck_lid
+      map: [ "lid" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        lid_stripe:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: shells_incenbuck, visible: false }
+          Low: { state: shells_incenbuck_1, visible: true }
+          Medium: { state: shells_incenbuck_2, visible: true }
+          High: { state: shells_incenbuck_3, visible: true }
+          Full: { state: shells_incenbuck, visible: true }
+  - type: CMItemSlots
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunIncendiaryBuckshot
+
+- type: entity
+  parent: RMCBoxShellsIncendiaryBuckshotEmpty
+  id: RMCBoxShellsIncendiaryBuckshot
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: CMShellShotgunIncendiaryBuckshot
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunIncendiaryBuckshot
+
+- type: entity
+  parent: RMCBoxShellsBase
+  id: RMCBoxShellsBreachingEmpty
+  name: shell box (Breaching x 120)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxShellsBreachingEmpty
+  - type: Sprite
+    layers:
+    - state: base_breach
+    - state: shells_breach
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: text_shells
+    - state: base_breach_lid
+      map: [ "lid" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        lid_stripe:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: shells_breach, visible: false }
+          Low: { state: shells_breach_1, visible: true }
+          Medium: { state: shells_breach_2, visible: true }
+          High: { state: shells_breach_3, visible: true }
+          Full: { state: shells_breach, visible: true }
+  - type: CMItemSlots
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBreaching
+
+- type: entity
+  parent: RMCBoxShellsBreachingEmpty
+  id: RMCBoxShellsBreaching
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCShellShotgunBreaching
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBreaching
+
+- type: entity
+  parent: RMCBoxMagazineBase
+  id: RMCBoxBullets458Empty
+  name: .458 bullets box crate (x300 rounds) # TODO RMC14 this is 297 since its multiples of 9
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxBullets458Empty
+  - type: Sprite
+    layers:
+    - state: base_458
+    - state: rounds_458
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: text_458
+    - state: base_458_lid
+      map: [ "lid" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        lid_stripe:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: rounds_458, visible: false }
+          Low: { state: rounds_458_1, visible: true }
+          Medium: { state: rounds_458_2, visible: true }
+          High: { state: rounds_458_3, visible: true }
+          Full: { state: rounds_458, visible: true }
+  - type: CMItemSlots
+    count: 33
+    slot:
+      whitelist:
+        tags:
+        - RMCCartridge458SOCOM
+
+- type: entity
+  parent: RMCBoxBullets458Empty
+  id: RMCBoxBullets458
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCCartridge458SOCOM

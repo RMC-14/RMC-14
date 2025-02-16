@@ -28,6 +28,10 @@
       "directions": 4
     },
     {
+      "name": "platform_round",
+      "directions": 4
+    },
+    {
       "name": "strata_platform",
       "directions": 4
     },
@@ -61,6 +65,14 @@
     },
     {
       "name": "kutjevo_platform_sm",
+      "directions": 4
+    },
+    {
+      "name": "kutjevo_platform_sm_corner",
+      "directions": 4
+    },
+    {
+      "name": "kutjevo_platform_sm_round",
       "directions": 4
     },
     {

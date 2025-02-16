@@ -7,59 +7,11 @@ namespace Content.Client._RMC14.Xenonids.Infected;
 
 public sealed class XenoParasiteSystem : SharedXenoParasiteSystem
 {
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly XenoVisualizerSystem _xenoVisualizer = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        SubscribeLocalEvent<VictimInfectedComponent, AppearanceChangeEvent>(OnVictimInfectedAppearanceChanged);
-        SubscribeLocalEvent<VictimBurstComponent, AppearanceChangeEvent>(OnVictimBurstAppearanceChanged);
-    }
-
-    private void OnVictimInfectedAppearanceChanged(Entity<VictimInfectedComponent> ent, ref AppearanceChangeEvent args)
-    {
-        if (args.Sprite is not { } sprite)
-            return;
-
-        if (!_appearance.TryGetData(ent, ent.Comp.InfectedLayer, out bool infected, args.Component))
-            return;
-
-        if (!sprite.LayerMapTryGet(ent.Comp.InfectedLayer, out var layer))
-            layer = sprite.LayerMapReserveBlank(ent.Comp.InfectedLayer);
-
-        if (infected)
-        {
-            sprite.LayerSetSprite(layer, ent.Comp.InfectedSprite);
-            sprite.LayerSetVisible(layer, true);
-        }
-        else
-        {
-            sprite.LayerSetVisible(layer, false);
-        }
-    }
-
-    private void OnVictimBurstAppearanceChanged(Entity<VictimBurstComponent> ent, ref AppearanceChangeEvent args)
-    {
-        if (args.Sprite is not { } sprite)
-            return;
-
-        if (!_appearance.TryGetData(ent, ent.Comp.BurstLayer, out bool burst, args.Component))
-            return;
-
-        if (!sprite.LayerMapTryGet(ent.Comp.BurstLayer, out var layer))
-            layer = sprite.LayerMapReserveBlank(ent.Comp.BurstLayer);
-
-        if (burst)
-        {
-            sprite.LayerSetSprite(layer, ent.Comp.BurstSprite);
-            sprite.LayerSetVisible(layer, true);
-        }
-        else
-        {
-            sprite.LayerSetVisible(layer, true);
-        }
     }
 
     public override void FrameUpdate(float frameTime)

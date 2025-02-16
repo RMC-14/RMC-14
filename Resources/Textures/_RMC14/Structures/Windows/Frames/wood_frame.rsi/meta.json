@@ -1,0 +1,59 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/6c8f3153bb8846baa74e413b3ed8d3355aebcea3/icons/turf/walls/window_frames.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "wood_frame0"
+        },
+        {
+            "name": "wood_frame1"
+        },
+        {
+            "name": "wood_frame2"
+        },
+        {
+            "name": "wood_frame3"
+        },
+        {
+            "name": "wood_frame4"
+        },
+        {
+            "name": "wood_frame5"
+        },
+        {
+            "name": "wood_frame6"
+        },
+        {
+            "name": "wood_frame7"
+        },
+        {
+            "name": "wood_frame8"
+        },
+        {
+            "name": "wood_frame9"
+        },
+        {
+            "name": "wood_frame10"
+        },
+        {
+            "name": "wood_frame11"
+        },
+        {
+            "name": "wood_frame12"
+        },
+        {
+            "name": "wood_frame13"
+        },
+        {
+            "name": "wood_frame14"
+        },
+        {
+            "name": "wood_frame15"
+        }
+    ]
+}

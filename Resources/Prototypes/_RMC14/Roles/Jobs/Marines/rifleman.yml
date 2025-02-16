@@ -5,38 +5,58 @@
   description: cm-job-description-rifleman
   playTimeTracker: CMJobRifleman
   startingGear: CMGearRifleman
+  dummyStartingGear: CMGearRiflemanEquipped
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
+  ranks:
+    RMCRankLanceCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 252000 # 70 hours
+    RMCRankPrivateFirstClass:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 36000 # 10 hours
+    RMCRankPrivate: []
   accessGroups:
   - Rifleman
+  hasIcon: false
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: private
+  roleWeight: 1
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      firearms: 1
+      skills:
+        RMCSkillFirearms: 1
     - type: CMVendorUser
       points: 45
-  hasIcon: false
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: cm-job-prefix-rifleman
 
 - type: startingGear
   id: CMGearRifleman
   equipment:
-    jumpsuit: JumpsuitMarine # TODO RMC14 all squad roles should spawn with no jumpsuit but still have clothes on
-    back: CMSatchelMarine
     id: CMDogtagRifleman
 
 - type: startingGear
   id: CMGearRiflemanEquipped
   equipment:
     jumpsuit: JumpsuitMarine
-    back: CMSatchelMarine
     shoes: CMBootsBlackFilled
     head: ArmorHelmetM10
-    outerClothing: CMArmorM3Medium
+    outerClothing: RMCArmorM3MediumVariants
     gloves: CMHandsBlackMarine
     id: CMDogtagRifleman
     ears: CMHeadsetAlpha
+
+- type: playTimeTracker
+  id: CMJobRifleman
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -46,10 +66,57 @@
   - type: SpawnPoint
     job_id: CMRifleman
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: rifleman
+    state: marine_spawn
 
-- type: playTimeTracker
-  id: CMJobRifleman
+- type: entity
+  parent: CMSpawnPointRifleman
+  id: CMSpawnPointRiflemanAlpha
+  suffix: Alpha
+  components:
+  - type: SquadSpawner
+    squad: SquadAlpha
+    role: CMRifleman
+  - type: Sprite
+    state: marine_spawn_alpha
+
+- type: entity
+  parent: CMSpawnPointRifleman
+  id: CMSpawnPointRiflemanBravo
+  suffix: Bravo
+  components:
+  - type: SquadSpawner
+    squad: SquadBravo
+    role: CMRifleman
+  - type: Sprite
+    state: marine_spawn_bravo
+
+- type: entity
+  parent: CMSpawnPointRifleman
+  id: CMSpawnPointRiflemanCharlie
+  suffix: Charlie
+  components:
+  - type: SquadSpawner
+    squad: SquadCharlie
+    role: CMRifleman
+  - type: Sprite
+    state: marine_spawn_charlie
+
+- type: entity
+  parent: CMSpawnPointRifleman
+  id: CMSpawnPointRiflemanDelta
+  suffix: Delta
+  components:
+  - type: SquadSpawner
+    squad: SquadDelta
+    role: CMRifleman
+  - type: Sprite
+    state: marine_spawn_delta
+
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleYou
+  name: You?
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: rifleman

@@ -18,7 +18,7 @@ public sealed class StorageSystem : SharedStorageSystem
     private readonly List<Entity<StorageComponent>> _openStorages = new();
     public int OpenStorageAmount => _openStorages.Count;
 
-    public event Action<Entity<StorageComponent>>? StorageUpdated;
+    public event Action<Entity<StorageComponent>?>? StorageUpdated;
     public event Action<Entity<StorageComponent>?>? StorageOrderChanged;
 
     public override void Initialize()
@@ -143,13 +143,13 @@ public sealed class StorageSystem : SharedStorageSystem
         if (!_timing.IsFirstTimePredicted)
             return;
 
-        if (finalCoords.InRange(EntityManager, TransformSystem, initialCoords, 0.1f) ||
+        if (TransformSystem.InRange(finalCoords, initialCoords, 0.1f) ||
             !Exists(initialCoords.EntityId) || !Exists(finalCoords.EntityId))
         {
             return;
         }
 
-        var finalMapPos = finalCoords.ToMapPos(EntityManager, TransformSystem);
+        var finalMapPos = TransformSystem.ToMapCoordinates(finalCoords).Position;
         var finalPos = Vector2.Transform(finalMapPos, TransformSystem.GetInvWorldMatrix(initialCoords.EntityId));
 
         _entityPickupAnimation.AnimateEntityPickup(item, initialCoords, finalPos, initialAngle);
@@ -173,5 +173,13 @@ public sealed class StorageSystem : SharedStorageSystem
                 _entityPickupAnimation.AnimateEntityPickup(entity, GetCoordinates(initialPosition), transformComp.LocalPosition, msg.EntityAngles[i]);
             }
         }
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        if (_timing.IsFirstTimePredicted)
+            StorageUpdated?.Invoke(null);
     }
 }

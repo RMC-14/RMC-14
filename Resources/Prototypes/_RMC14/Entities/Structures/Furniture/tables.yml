@@ -5,6 +5,9 @@
   name: table
   description: A square metal surface resting on four legs. Useful to put stuff on.
   components:
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/Tables/standard.rsi
   - type: Icon
@@ -25,6 +28,11 @@
             volume: -4
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: Construction
+    graph: RMCTable
+    node: Tan
+  - type: DamageMultiplierFlags
+    flags: Breaching
 
 # Reinforced
 - type: entity
@@ -37,6 +45,9 @@
     sprite: _RMC14/Structures/Furniture/Tables/reinforced.rsi
   - type: Icon
     sprite: _RMC14/Structures/Furniture/Tables/reinforced.rsi
+  - type: Construction
+    graph: RMCTable
+    node: Reinforced
 
 # Reinforced Requisition
 - type: entity
@@ -72,6 +83,9 @@
     sprite: _RMC14/Structures/Furniture/Tables/wood.rsi
   - type: Icon
     sprite: _RMC14/Structures/Furniture/Tables/wood.rsi
+  - type: Construction
+    graph: RMCTable
+    node: Wood
 
 # Wooden Poor
 - type: entity
@@ -84,6 +98,9 @@
     sprite: _RMC14/Structures/Furniture/Tables/poor_wood.rsi
   - type: Icon
     sprite: _RMC14/Structures/Furniture/Tables/poor_wood.rsi
+  - type: Construction
+    graph: RMCTable
+    node: PoorWood
 
 # Wooden Fancy
 - type: entity
@@ -96,6 +113,9 @@
     sprite: _RMC14/Structures/Furniture/Tables/fancy_wood.rsi
   - type: Icon
     sprite: _RMC14/Structures/Furniture/Tables/fancy_wood.rsi
+  - type: Construction
+    graph: RMCTable
+    node: FancyWood
 
 # Wooden Gambling
 - type: entity
@@ -108,6 +128,9 @@
     sprite: _RMC14/Structures/Furniture/Tables/gambling.rsi
   - type: Icon
     sprite: _RMC14/Structures/Furniture/Tables/gambling.rsi
+  - type: Construction
+    graph: RMCTable
+    node: Gambling
 
 # Almayer
 - type: entity
@@ -121,3 +144,32 @@
     sprite: _RMC14/Structures/Furniture/Tables/almayer.rsi
   - type: Icon
     sprite: _RMC14/Structures/Furniture/Tables/almayer.rsi
+  - type: Construction
+    graph: RMCTable
+    node: Almayer
+
+# Prison
+- type: entity
+  parent: CMTable
+  id: RMCTablePrison
+  name: table
+  description: A square metal surface resting on four legs. This one has side panels, making it useful as a desk, but impossible to flip.
+  suffix: Prison
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/prison.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Tables/prison.rsi
+
+# Hunter
+- type: entity
+  parent: CMTable
+  id: RMCTableHunter
+  name: table
+  description: A square metal surface resting on four legs. This one has side panels, making it useful as a desk, but impossible to flip.
+  suffix: Hunter
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/hunter.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Tables/hunter.rsi

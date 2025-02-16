@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/185a0f510b502711291175be8ed5decb94ce83b3/icons/turf/walls/chigusa.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "chigusa"
+    },
+    {
+      "name": "chigusa0",
+      "directions": 4
+    },
+    {
+      "name": "chigusa1",
+      "directions": 4
+    },
+    {
+      "name": "chigusa2",
+      "directions": 4
+    },
+    {
+      "name": "chigusa3",
+      "directions": 4
+    },
+    {
+      "name": "chigusa4",
+      "directions": 4
+    },
+    {
+      "name": "chigusa5",
+      "directions": 4
+    },
+    {
+      "name": "chigusa6",
+      "directions": 4
+    },
+    {
+      "name": "chigusa7",
+      "directions": 4
+    },
+    {
+      "name": "deco_wall0"
+    },
+    {
+      "name": "deco_wall1"
+    },
+    {
+      "name": "deco_wall2"
+    }
+  ]
+}

@@ -1,9 +1,8 @@
+using System.Numerics;
 using Content.Shared._RMC14.Explosion.Components;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
-using System.Collections.Generic;
-using System.Numerics;
 
 namespace Content.Client._RMC14.Explosion;
 
@@ -12,7 +11,7 @@ public sealed class RMCExplosionShockWaveOverlay : Overlay, IEntityEventSubscrib
     [Dependency] private readonly IEntityManager _entMan = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
-    private SharedTransformSystem? _xformSystem = null;
+    private SharedTransformSystem? _xformSystem;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
     public override bool RequestScreenTexture => true;
@@ -34,7 +33,8 @@ public sealed class RMCExplosionShockWaveOverlay : Overlay, IEntityEventSubscrib
     private readonly float[] _falloffPower = new float[MaxCount];
     private readonly float[] _sharpness = new float[MaxCount];
     private readonly float[] _width = new float[MaxCount];
-    private int _count = 0;
+    private int _count;
+
     protected override bool BeforeDraw(in OverlayDrawArgs args)
     {
         if (args.Viewport.Eye == null || _xformSystem is null && !_entMan.TrySystem(out _xformSystem))
@@ -65,7 +65,7 @@ public sealed class RMCExplosionShockWaveOverlay : Overlay, IEntityEventSubscrib
 
             if (_count == MaxCount)
                 break;
-            }
+        }
 
         return _count > 0;
     }
@@ -85,7 +85,7 @@ public sealed class RMCExplosionShockWaveOverlay : Overlay, IEntityEventSubscrib
 
         var worldHandle = args.WorldHandle;
         worldHandle.UseShader(_shader);
-        worldHandle.DrawRect(args.WorldAABB, Color.White);
+        worldHandle.DrawRect(args.WorldBounds, Color.White);
         worldHandle.UseShader(null);
     }
 }

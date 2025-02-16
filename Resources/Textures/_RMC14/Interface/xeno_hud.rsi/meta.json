@@ -299,6 +299,9 @@
       "name": "xenoenergy10"
     },
     {
+      "name": "xenoenergy0"
+    },
+    {
       "name": "infected0"
     },
     {
@@ -536,6 +539,39 @@
     },
     {
       "name": "hudalien_ally"
+    },
+    {
+      "name": "xenoshield0"
+    },
+    {
+      "name": "xenoshield10"
+    },
+    {
+      "name": "xenoshield20"
+    },
+    {
+      "name": "xenoshield30"
+    },
+    {
+      "name": "xenoshield40"
+    },
+    {
+      "name": "xenoshield50"
+    },
+    {
+      "name": "xenoshield60"
+    },
+    {
+      "name": "xenoshield70"
+    },
+    {
+      "name": "xenoshield80"
+    },
+    {
+      "name": "xenoshield90"
+    },
+    {
+      "name": "xenoshield100"
     }
   ]
 }

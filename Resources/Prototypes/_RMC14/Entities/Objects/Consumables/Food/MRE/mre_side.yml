@@ -12,7 +12,7 @@
   parent: CMMRESideComponentBase
   id: CMMREComponentCracker
   name: MRE component (cracker)
-  description: An MRE side component. Contains a side, to be eaten alongside the main. This one is cracker.
+  description: An MRE side component. Contains a side, to be eaten alongside the main. This one is a cracker.
   components:
   - type: SpawnItemsOnUse
     items:
@@ -55,7 +55,7 @@
   id: CMMREFoodSide
   components:
   - type: Food
-    transferAmount: 4
+    transferAmount: 1.6
   - type: SolutionContainerManager
     solutions:
       food:
@@ -65,12 +65,16 @@
           Quantity: 6
         - ReagentId: TableSalt
           Quantity: 2
+  - type: Extractable
+    grindableSolutionName: food
+  - type: InjectableSolution
+    solution: food
 
 - type: entity
   parent: CMMREFoodSide
   id: CMMREFoodCracker
   name: cracker
-  description: The contents of a Marine Standard issue MRE. This one is cracker.
+  description: The contents of a Marine Standard issue MRE. This one is a cracker.
   components:
   - type: Sprite
     state: cracker

@@ -41,15 +41,13 @@ public sealed class CPRSystem : EntitySystem
 
         // TODO RMC14 use skills
         // TODO RMC14 something more generic than "marine"
-        SubscribeLocalEvent<MarineComponent, InteractHandEvent>(OnMarineInteractHand);
+        SubscribeLocalEvent<MarineComponent, InteractHandEvent>(OnMarineInteractHand,
+            before: [typeof(InteractionPopupSystem)]);
         SubscribeLocalEvent<MarineComponent, CPRDoAfterEvent>(OnMarineDoAfter);
 
         SubscribeLocalEvent<ReceivingCPRComponent, ReceiveCPRAttemptEvent>(OnReceivingCPRAttempt);
         SubscribeLocalEvent<CPRReceivedComponent, ReceiveCPRAttemptEvent>(OnReceivedCPRAttempt);
         SubscribeLocalEvent<MobStateComponent, ReceiveCPRAttemptEvent>(OnMobStateCPRAttempt);
-
-        SubscribeLocalEvent<InventoryComponent, ReceiveCPRAttemptEvent>(_inventory.RelayEvent);
-        SubscribeLocalEvent<MaskComponent, InventoryRelayedEvent<ReceiveCPRAttemptEvent>>(OnMaskCPRAttempt);
     }
 
     private void OnMarineInteractHand(Entity<MarineComponent> ent, ref InteractHandEvent args)
@@ -102,7 +100,7 @@ public sealed class CPRSystem : EntitySystem
 
         var othersPopup = Loc.GetString("cm-cpr-other-perform", ("performer", performer), ("target", target));
         var othersFilter = Filter.Pvs(performer).RemoveWhereAttachedEntity(e => e == performer);
-        _popups.PopupEntity(othersPopup, performer, othersFilter, true);
+        _popups.PopupEntity(othersPopup, performer, othersFilter, true, PopupType.Medium);
     }
 
     private void OnReceivingCPRAttempt(Entity<ReceivingCPRComponent> ent, ref ReceiveCPRAttemptEvent args)
@@ -113,7 +111,7 @@ public sealed class CPRSystem : EntitySystem
             return;
 
         var popup = Loc.GetString("cm-cpr-already-being-performed", ("target", ent.Owner));
-        _popups.PopupEntity(popup, ent, args.Performer);
+        _popups.PopupEntity(popup, ent, args.Performer, PopupType.Medium);
     }
 
     private void OnReceivedCPRAttempt(Entity<CPRReceivedComponent> ent, ref ReceiveCPRAttemptEvent args)
@@ -133,11 +131,11 @@ public sealed class CPRSystem : EntitySystem
                 return;
 
             var selfPopup = Loc.GetString("cm-cpr-self-perform-fail-received-too-recently", ("target", target));
-            _popups.PopupEntity(selfPopup, target, performer);
+            _popups.PopupEntity(selfPopup, target, performer, PopupType.SmallCaution);
 
             var othersPopup = Loc.GetString("cm-cpr-other-perform-fail", ("performer", performer), ("target", target));
             var othersFilter = Filter.Pvs(performer).RemoveWhereAttachedEntity(e => e == performer);
-            _popups.PopupEntity(othersPopup, performer, othersFilter, true);
+            _popups.PopupEntity(othersPopup, performer, othersFilter, true, PopupType.SmallCaution);
         }
     }
 
@@ -146,20 +144,8 @@ public sealed class CPRSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (_mobState.IsAlive(ent))
+        if (_mobState.IsAlive(ent) || _rotting.IsRotten(ent))
             args.Cancelled = true;
-
-        if (_mobState.IsDead(ent) && _rotting.IsRotten(ent))
-            args.Cancelled = true;
-    }
-
-    private void OnMaskCPRAttempt(Entity<MaskComponent> ent, ref InventoryRelayedEvent<ReceiveCPRAttemptEvent> args)
-    {
-        if (!ent.Comp.IsToggled)
-        {
-            _popups.PopupClient(Loc.GetString("cm-crp-take-off-mask"), ent, args.Args.Performer);
-            args.Args.Cancelled = true;
-        }
     }
 
     private bool CanCPRPopup(EntityUid performer, EntityUid target, bool start, out FixedPoint2 damage)
@@ -175,7 +161,7 @@ public sealed class CPRSystem : EntitySystem
         if (performAttempt.Cancelled)
             return false;
 
-        var receiveAttempt = new ReceiveCPRAttemptEvent(performer, start);
+        var receiveAttempt = new ReceiveCPRAttemptEvent(performer, target, start);
         RaiseLocalEvent(target, ref receiveAttempt);
 
         if (receiveAttempt.Cancelled)
@@ -198,7 +184,10 @@ public sealed class CPRSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, performer, TimeSpan.FromSeconds(4), new CPRDoAfterEvent(), performer, target)
         {
             BreakOnMove = true,
-            NeedHand = true
+            NeedHand = true,
+            BlockDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameEvent,
+            TargetEffect = "RMCEffectHealBusy",
         };
         _doAfter.TryStartDoAfter(doAfter);
 

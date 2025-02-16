@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Client._RMC14.Attachable.Systems;
 using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Attachable.Components;
@@ -51,9 +52,21 @@ public sealed partial class AttachableVisualsComponent : Component
     [DataField, AutoNetworkedField]
     public bool ShowActive;
 
+    /// <summary>
+    ///     If this is set to true, the attachment will be redrawn on its holder every time it receives an AppearanceChangeEvent. Useful for things like the UGL.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool RedrawOnAppearanceChange;
+
     [DataField, AutoNetworkedField]
     public int Layer;
 
     [DataField, AutoNetworkedField]
     public Vector2 Offset;
+
+    [DataField]
+    public string? LastSlotId;
+
+    [DataField]
+    public string? LastSuffix;
 }

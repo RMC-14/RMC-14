@@ -32,4 +32,9 @@
 
 - type: accessLevel
   id: CMAccessCorp
-  name: cm-job-name-corp # this won't exist until test 2
+  name: cm-job-name-corp
+
+# Admin only.
+- type: accessLevel
+  id: CMAccessHighCommand
+  name: cm-job-name-high-command

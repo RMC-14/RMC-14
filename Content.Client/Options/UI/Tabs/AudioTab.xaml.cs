@@ -62,14 +62,14 @@ public sealed partial class AudioTab : Control
         Control.AddOptionCheckBox(CCVars.RestartSoundsEnabled, RestartSoundsCheckBox);
         Control.AddOptionCheckBox(CCVars.EventMusicEnabled, EventMusicCheckBox);
         Control.AddOptionCheckBox(CCVars.AdminSoundsEnabled, AdminSoundsCheckBox);
-        Control.AddOptionCheckBox(CMCVars.CMPlayVoicelinesArachnid, CMVoicelinesArachnid);
-        Control.AddOptionCheckBox(CMCVars.CMPlayVoicelinesDiona, CMVoicelinesDiona);
-        Control.AddOptionCheckBox(CMCVars.CMPlayVoicelinesDwarf, CMVoicelinesDwarf);
-        Control.AddOptionCheckBox(CMCVars.CMPlayVoicelinesFelinid, CMVoicelinesFelinid);
-        Control.AddOptionCheckBox(CMCVars.CMPlayVoicelinesHuman, CMVoicelinesHuman);
-        Control.AddOptionCheckBox(CMCVars.CMPlayVoicelinesMoth, CMVoicelinesMoth);
-        Control.AddOptionCheckBox(CMCVars.CMPlayVoicelinesReptilian, CMVoicelinesReptilian);
-        Control.AddOptionCheckBox(CMCVars.CMPlayVoicelinesSlime, CMVoicelinesSlime);
+        Control.AddOptionCheckBox(RMCCVars.CMPlayVoicelinesArachnid, CMVoicelinesArachnid);
+        Control.AddOptionCheckBox(RMCCVars.CMPlayVoicelinesDiona, CMVoicelinesDiona);
+        Control.AddOptionCheckBox(RMCCVars.CMPlayVoicelinesDwarf, CMVoicelinesDwarf);
+        Control.AddOptionCheckBox(RMCCVars.CMPlayVoicelinesFelinid, CMVoicelinesFelinid);
+        Control.AddOptionCheckBox(RMCCVars.CMPlayVoicelinesHuman, CMVoicelinesHuman);
+        Control.AddOptionCheckBox(RMCCVars.CMPlayVoicelinesMoth, CMVoicelinesMoth);
+        Control.AddOptionCheckBox(RMCCVars.CMPlayVoicelinesReptilian, CMVoicelinesReptilian);
+        Control.AddOptionCheckBox(RMCCVars.CMPlayVoicelinesSlime, CMVoicelinesSlime);
 
         Control.Initialize();
     }

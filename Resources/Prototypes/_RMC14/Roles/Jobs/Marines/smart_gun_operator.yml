@@ -7,42 +7,65 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: CMSquad
-      time: 18000 # 5 hours
+      time: 36000 # 10 hours
+  ranks:
+    RMCRankSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobSmartGunOperator
+      time: 252000 # 70 hours
+    RMCRankCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobSmartGunOperator
+      time: 36000 # 10 hours
+    RMCRankLanceCorporal: []
   startingGear: CMGearSmartGunOperator
+  dummyStartingGear: CMGearSmartGunOperatorEquipped
   icon: "CMJobIconSmartGunOperator"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - SmartGunOperator
+  overwatchSortPriority: -2
+  overwatchShowName: true
+  overwatchRoleName: Smart Gun Operator
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: smartgunner
+  roleWeight: 1
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      firearms: 1
-      jtac: 1
-      smartGun: 1
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillJtac: 1
+        RMCSkillSmartGun: 1
     - type: CMVendorUser
       points: 45
-  hidden: true # TODO RMC14
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: cm-job-prefix-gun-operator
 
 - type: startingGear
   id: CMGearSmartGunOperator
   equipment:
-    jumpsuit: JumpsuitMarine # TODO RMC14 all squad roles should spawn with no jumpsuit but still have clothes on
-    back: CMSatchelMarine
     id: CMDogtagSmartGunOperator
 
 - type: startingGear
   id: CMGearSmartGunOperatorEquipped
   equipment:
     jumpsuit: JumpsuitMarine
-    back: CMSatchelMarine
     shoes: CMBootsBlackFilled
     head: ArmorHelmetM10
-    outerClothing: CMArmorM3Medium
+    outerClothing: CMArmorSmartGunCombatHarness
     gloves: CMHandsBlackMarine
     id: CMDogtagSmartGunOperator
     ears: CMHeadsetAlpha
+
+- type: playTimeTracker
+  id: CMJobSmartGunOperator
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -52,10 +75,49 @@
   - type: SpawnPoint
     job_id: CMSmartGunOperator
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: smart_gun_operator
+    state: smartgunner_spawn
 
-- type: playTimeTracker
-  id: CMJobSmartGunOperator
+- type: entity
+  parent: CMSpawnPointSmartGunOperator
+  id: CMSpawnPointSmartGunOperatorAlpha
+  suffix: Alpha
+  components:
+  - type: SquadSpawner
+    squad: SquadAlpha
+    role: CMSmartGunOperator
+  - type: Sprite
+    state: smartgunner_spawn_alpha
+
+- type: entity
+  parent: CMSpawnPointSmartGunOperator
+  id: CMSpawnPointSmartGunOperatorBravo
+  suffix: Bravo
+  components:
+  - type: SquadSpawner
+    squad: SquadBravo
+    role: CMSmartGunOperator
+  - type: Sprite
+    state: smartgunner_spawn_bravo
+
+- type: entity
+  parent: CMSpawnPointSmartGunOperator
+  id: CMSpawnPointSmartGunOperatorCharlie
+  suffix: Charlie
+  components:
+  - type: SquadSpawner
+    squad: SquadCharlie
+    role: CMSmartGunOperator
+  - type: Sprite
+    state: smartgunner_spawn_charlie
+
+- type: entity
+  parent: CMSpawnPointSmartGunOperator
+  id: CMSpawnPointSmartGunOperatorDelta
+  suffix: Delta
+  components:
+  - type: SquadSpawner
+    squad: SquadDelta
+    role: CMSmartGunOperator
+  - type: Sprite
+    state: smartgunner_spawn_delta
+
