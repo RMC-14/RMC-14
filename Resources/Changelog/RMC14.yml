@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fix Warden's Aid ability being usable on hive structures
-    type: Fix
-  id: 842
-  time: '2024-10-14T23:00:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4471
-- author: Vermidia
-  changes:
   - message: Fixed mk80 falloff starting from 3 tiles to starting at 6 tiles.
     type: Fix
   id: 843
@@ -5174,5 +5167,12 @@
   id: 1341
   time: '2025-02-16T04:35:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5629
+- author: Vermidia
+  changes:
+  - message: Fixed resin walls and doors not being resin surgable
+    type: Fix
+  id: 1342
+  time: '2025-02-16T04:38:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5621
 Name: RMC14
 Order: -1
