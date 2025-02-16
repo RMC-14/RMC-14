@@ -63,7 +63,40 @@ entities:
     - type: DecalGrid
       chunkCollection:
         version: 2
-        nodes: []
+        nodes:
+        - node:
+            cleanable: True
+            color: '#FFFFFFFF'
+            id: Dirt
+          decals:
+            7: 2,1
+            8: 3,1
+            9: 3,2
+            10: 4,4
+            11: 4,3
+            12: 5,1
+            14: 1,7
+            15: 2,6
+            16: 2,9
+            17: 3,9
+            18: 3,8
+            19: 4,8
+            20: 5,7
+            21: 5,6
+            27: 6,3
+            28: 6,2
+        - node:
+            color: '#800409FF'
+            id: splatter
+          decals:
+            22: 3,8
+            23: 4,7        
+        - node:
+            color: '#1D1D21FF'
+            id: splatter
+          decals:
+            24: 6,5
+            26: 6,1
     - type: GridAtmosphere
       version: 2
       data:
@@ -170,6 +203,13 @@ entities:
       parent: 1
     - type: Physics
       bodyType: Static
+- proto: CMFolderBlack
+  entities:
+  - uid: 97
+    components:
+    - type: Transform
+      pos: 4.5,10.5
+      parent: 1
 - proto: CMGirder
   entities:
   - uid: 34
