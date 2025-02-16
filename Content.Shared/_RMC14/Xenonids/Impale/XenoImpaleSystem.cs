@@ -11,6 +11,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Content.Shared._RMC14.Weapons.Melee;
+using Content.Shared._RMC14.Actions;
 
 namespace Content.Shared._RMC14.Xenonids.Impale;
 
@@ -23,6 +24,7 @@ public sealed class XenoImpaleSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
 
 
     public override void Initialize()
@@ -35,6 +37,9 @@ public sealed class XenoImpaleSystem : EntitySystem
     private void OnXenoImpaleAction(Entity<XenoImpaleComponent> xeno, ref XenoImpaleActionEvent args)
     {
         if (args.Handled)
+            return;
+
+        if (!_rmcActions.TryUseAction(xeno, args.Action))
             return;
 
         args.Handled = true;

@@ -42,6 +42,7 @@ using static Content.Shared.Physics.CollisionGroup;
 using Content.Shared.Movement.Components;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Aura;
 
 namespace Content.Shared._RMC14.Xenonids.Fruit;
 
@@ -74,6 +75,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     [Dependency] private readonly SharedXenoPheromonesSystem _xenoPhero = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly SharedAuraSystem _aura = default!;
 
     private static readonly ProtoId<DamageTypePrototype> FruitPlantDamageType = "Blunt";
 
@@ -515,6 +517,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         _transform.Unanchor(fruit, xform);
         SetFruitState(fruit, XenoFruitState.Item);
         _hands.TryPickup(args.User, fruit);
+        RemCompDeferred<AuraComponent>(fruit);
     }
 
     #endregion
@@ -1006,6 +1009,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
                 continue;
 
             SetFruitState((uid, fruit), XenoFruitState.Grown);
+            _aura.GiveAura(uid, fruit.OutlineColor, null);
         }
 
         // Handle fruit effects

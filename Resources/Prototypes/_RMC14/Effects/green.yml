@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: RMCEffectXenoTelegraphGreen
   categories: [ HideSpawnMenu ]
   components:
@@ -14,3 +14,23 @@
   - type: Tag
     tags:
     - HideContextMenu
+
+
+- type: entity
+  parent: RMCEffectXenoTelegraphGreen
+  id: RMCEffectXenoTelegraphRed
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.25
+  - type: Sprite
+    color: "#A50824"
+
+- type: entity
+  parent: RMCEffectXenoTelegraphRed
+  id: RMCEffectXenoTelegraphRedSmall
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: xeno_telegraph_base_small
+

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: ActionXenoRest
   parent: ActionXenoBase
   name: Rest
@@ -191,9 +191,10 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: retrieve_egg
     event: !type:XenoRetrieveEggActionEvent
+    checkCanAccess: false
     deselectOnMiss: false
     repeat: true
-    range: 30
+    range: 16
 
 - type: entity
   id: ActionXenoThrowParasite
@@ -207,9 +208,10 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: throw_parasite
     event: !type:XenoThrowParasiteActionEvent
+    checkCanAccess: false
     deselectOnMiss: false
     repeat: true
-    range: 30
+    range: 16
     useDelay: 0
 
 - type: entity
@@ -265,7 +267,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: burrow
     event: !type:XenoBurrowActionEvent
-    range: 15
+    range: 8
     repeat: true
     deselectOnMiss: false
     checkCanAccess: false

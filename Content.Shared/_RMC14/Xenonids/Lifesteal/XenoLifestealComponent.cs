@@ -1,4 +1,4 @@
-﻿using Content.Shared.Chat.Prototypes;
+using Content.Shared.Chat.Prototypes;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -35,4 +35,7 @@ public sealed partial class XenoLifestealComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan? EmoteCooldown = TimeSpan.FromSeconds(5);
+
+    [DataField, AutoNetworkedField]
+    public Color AuraColor = Color.FromHex("#6C6F24");
 }

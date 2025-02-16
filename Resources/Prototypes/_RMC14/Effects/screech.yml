@@ -15,3 +15,26 @@
   - type: Tag
     tags:
     - HideContextMenu
+
+- type: entity
+  parent: CMEffectScreech
+  id: RMCEffectScreechValkyrie
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCXenoScreechShockWave
+    waveSpeed: 30.6
+    waveStrength: 0.25
+    downScale: 1.0
+  - type: Sprite
+    layers:
+    - state: screech
+      visible: false
+
+- type: entity
+  parent: RMCEffectScreechValkyrie
+  id: RMCEffectScreechValkyrieWeak
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RMCXenoScreechShockWave
+    waveSpeed: 25
+    waveStrength: 0.12

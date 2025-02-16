@@ -30,3 +30,12 @@
   - type: Sprite
     state: empower_custom
     color: "#93EC78C8"
+
+- type: entity
+  parent: RMCEffectEmpower
+  id: RMCEffectEmpowerTantrum
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: empower_custom
+    color: "#A31010C8"

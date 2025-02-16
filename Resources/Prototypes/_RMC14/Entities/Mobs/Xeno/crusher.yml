@@ -106,3 +106,4 @@
     weak: false
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.7
+  - type: TantrumSpeedBuff
