@@ -193,18 +193,31 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
         var querry = EntityQueryEnumerator<XenoBurrowComponent>();
         while (querry.MoveNext(out var ent, out var comp))
         {
+            if (comp.NextBurrowAt < time)
+            {
+                if (comp.Active)
+                {
+                    //Commented out since it doesn't really mean anything while burrowed
+                    //_popup.PopupEntity(Loc.GetString("rmc-xeno-burrow-resurface-cooldown-finish"), ent, ent);
+                }
+                else
+                    _popup.PopupEntity(Loc.GetString("rmc-xeno-burrow-cooldown-finish"), ent, ent);
+                comp.NextBurrowAt = null;
+            }
+
             if (comp.NextTunnelAt < time)
             {
                 _popup.PopupEntity(Loc.GetString("rmc-xeno-burrow-move-cooldown-finish"), ent, ent);
                 comp.NextTunnelAt = null;
             }
 
-            if (comp.ForcedUnburrowAt < time)
+            if (!comp.Tunneling && comp.ForcedUnburrowAt < time)
             {
                 var ev = new BurrowedEvent(false);
                 RaiseLocalEvent(ent, ref ev);
                 comp.ForcedUnburrowAt = null;
                 _popup.PopupEntity(Loc.GetString("rmc-xeno-burrow-move-forced-unburrow"), ent, ent, PopupType.MediumCaution);
+                comp.NextBurrowAt = time + comp.BurrowCooldown;
             }
         }
     }
@@ -221,17 +234,21 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
                 return;
             var duration = new TimeSpan(0, 0, (int)distance);
             var moveEv = new XenoBurrowMoveDoAfter(_entities.GetNetCoordinates(target));
-            var moveDoAfterArgs = new DoAfterArgs(_entities, burrower, duration, moveEv, burrower) { RequireCanInteract = false };
-            _doAfter.TryStartDoAfter(moveDoAfterArgs);
+            var moveDoAfterArgs = new DoAfterArgs(_entities, burrower, duration, moveEv, burrower) { RequireCanInteract = false, DuplicateCondition = DuplicateConditions.SameEvent };
 
-            burrower.Comp.NextTunnelAt = null;
-            burrower.Comp.ForcedUnburrowAt = null;
+            if (_doAfter.TryStartDoAfter(moveDoAfterArgs))
+            {
+                burrower.Comp.Tunneling = true;
+                Dirty(burrower);
+            }
+
             Dirty(burrower);
             if (_net.IsServer)
                 _audio.PlayPvs(burrower.Comp.BurrowDownSound, burrower);
         }
         else
         {
+            /*
             if (TryComp(burrower, out DoAfterComponent? doAfterComp))
             {
                 foreach (var doAfter in doAfterComp.DoAfters)
@@ -243,7 +260,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
                     }
                 }
             }
-
+            */
             if (!CanBurrowPopup(burrower))
                 return;
 
@@ -251,7 +268,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
             var burrowDoAfterArgs = new DoAfterArgs(_entities, burrower, burrower.Comp.BurrowLength, burrowEv, burrower)
             {
                 BreakOnMove = true,
-                DuplicateCondition = DuplicateConditions.None,
+                DuplicateCondition = DuplicateConditions.SameEvent,
                 CancelDuplicate = true
             };
 
@@ -268,6 +285,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
         if (args.Cancelled)
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-burrow-down-failure-break"), burrower, burrower);
+            burrower.Comp.NextBurrowAt = _time.CurTime + burrower.Comp.BurrowCooldown;
             return;
         }
 
@@ -278,7 +296,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
         }
 
         burrower.Comp.ForcedUnburrowAt = _time.CurTime + burrower.Comp.BurrowMaxDuration;
-        burrower.Comp.NextTunnelAt = _time.CurTime + burrower.Comp.TunnelCooldown;
+        burrower.Comp.NextBurrowAt = _time.CurTime + burrower.Comp.BurrowCooldown;
         Dirty(burrower);
 
         var ev = new BurrowedEvent(true);
@@ -288,6 +306,12 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
 
     private bool CanBurrowPopup(Entity<XenoBurrowComponent> ent)
     {
+        if (ent.Comp.NextBurrowAt > _time.CurTime)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-burrow-down-failure-cooldown"), ent, ent);
+            return false;
+        }
+
         var coordinates = _transform.GetMoverCoordinates(ent.Owner).SnapToGrid();
 
         if (!_area.TryGetArea(coordinates, out var area, out _) ||
@@ -368,21 +392,32 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
             return false;
         }
 
-        _popup.PopupClient(Loc.GetString("rmc-xeno-burrow-move-start"), ent, ent);
+        if (!ent.Comp.Tunneling)
+            _popup.PopupClient(Loc.GetString("rmc-xeno-burrow-move-start"), ent, ent);
+        else
+            _popup.PopupClient(Loc.GetString("rmc-xeno-burrow-move-break"), ent, ent);
         distance = burrowDistance;
         return true;
     }
 
-    private void OnFinishTunnel(EntityUid ent, XenoBurrowComponent comp, ref XenoBurrowMoveDoAfter args)
+    private void OnFinishTunnel(Entity<XenoBurrowComponent> burrower, ref XenoBurrowMoveDoAfter args)
     {
         if (args.Handled || args.Cancelled)
+        {
+            burrower.Comp.Tunneling = false;
+            burrower.Comp.NextTunnelAt = _time.CurTime + burrower.Comp.TunnelCooldown;
             return;
+        }
 
+        burrower.Comp.Tunneling = false;
+        burrower.Comp.NextTunnelAt = null;
+        burrower.Comp.ForcedUnburrowAt = null;
+        Dirty(burrower);
         if (_net.IsServer)
-            _transform.SetCoordinates(ent, _entities.GetCoordinates(args.TargetCoords));
+            _transform.SetCoordinates(burrower, _entities.GetCoordinates(args.TargetCoords));
         var ev = new BurrowedEvent(false);
-        RaiseLocalEvent(ent, ref ev);
-        _popup.PopupClient(Loc.GetString("rmc-xeno-burrow-move-finish"), ent, ent);
+        RaiseLocalEvent(burrower, ref ev);
+        _popup.PopupClient(Loc.GetString("rmc-xeno-burrow-move-finish"), burrower, burrower);
     }
 }
 

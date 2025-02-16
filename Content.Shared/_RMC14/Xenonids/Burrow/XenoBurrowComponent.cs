@@ -12,6 +12,12 @@ public sealed partial class XenoBurrowComponent : Component
     public bool Active = false;
 
     /// <summary>
+    /// Whether the xeno is currently tunneling or not
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool Tunneling = false;
+
+    /// <summary>
     /// Max distance a xeno can move from burrowing
     /// </summary>
     [DataField]
@@ -27,10 +33,19 @@ public sealed partial class XenoBurrowComponent : Component
     /// How long the xeno must wait before burrowing back up or tunneling
     /// </summary>
     [DataField]
-    public TimeSpan TunnelCooldown = TimeSpan.FromSeconds(2);
+    public TimeSpan BurrowCooldown = TimeSpan.FromSeconds(2);
+
+    /// <summary>
+    /// How long the xeno must wait before burrowing back up or tunneling
+    /// </summary>
+    [DataField]
+    public TimeSpan TunnelCooldown = TimeSpan.FromSeconds(7);
 
     [DataField, AutoNetworkedField]
     public TimeSpan? NextTunnelAt;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan? NextBurrowAt;
 
     /// <summary>
     /// How long the xeno can stay burrowed

@@ -205,6 +205,8 @@ rmc-xeno-burrow-down-failure-break = We stop burrowing.
 rmc-xeno-burrow-down-failure-bad-area = There's no way to burrow here.
 rmc-xeno-burrow-down-failure-rest = We cannot burrow while resting!
 rmc-xeno-burrow-down-finish = We burrow ourselves into the ground.
+rmc-xeno-burrow-cooldown-finish = We can burrow again.
+rmc-xeno-burrow-down-failure-cooldown = We can't burrow yet.
 rmc-xeno-burrow-down-doafter-stop = We can't do that right now!
 
 rmc-xeno-burrow-resurface-cooldown-finish = We can now surface.
@@ -212,6 +214,7 @@ rmc-xeno-burrow-move-cooldown-finish = We can now tunnel while burrowed.
 rmc-xeno-burrow-move-forced-unburrow = We pop out of the ground!
 
 rmc-xeno-burrow-move-start = We start tunneling!
+rmc-xeno-burrow-move-break = We stop tunneling!
 rmc-xeno-burrow-move-failure = There's no way to tunnel over there.
 rmc-xeno-burrow-move-failure-solid = We can't tunnel into a solid wall!
 rmc-xeno-burrow-move-failure-bad-area = There's no way to tunnel over there.
