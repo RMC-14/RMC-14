@@ -275,7 +275,7 @@ rmc-xeno-toggle-cleave-fling = We will now throw our enemies with our cleave.
 # Soak
 rmc-xeno-soak-self = We begin to tank incoming damage!
 rmc-xeno-soak-others = {CAPITALIZE(THE($xeno))} begins to tank incoming damage!
-rmc-xeno-soak-end-fail = We stop taking incoming damage.
+rmc-xeno-soak-end-fail = We stop tanking incoming damage.
 rmc-xeno-soak-end-self = We feel enraged after taking in oncoming damage! Our tail slam's cooldown is reset and we heal!
 rmc-xeno-soak-end-others =  {CAPITALIZE(THE($xeno))} gets enraged after being damaged enough!
 
