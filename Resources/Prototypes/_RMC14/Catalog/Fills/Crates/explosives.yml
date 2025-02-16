@@ -50,6 +50,16 @@
 
 - type: entity
   parent: RMCCrateExplosives
+  id: RMCCratePlasticExplosives
+  name: plastic explosives crate (x3)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCExplosivePlastic
+      amount: 3
+
+- type: entity
+  parent: RMCCrateExplosives
   id: RMCCrateBreachingCharges
   name: breaching charges crate (x4)
   components:

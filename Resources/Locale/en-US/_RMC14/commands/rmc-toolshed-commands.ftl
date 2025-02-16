@@ -1,4 +1,7 @@
-﻿command-description-areas-load = Load all saved areas to the map as entities.
+﻿command-description-alertlevel-get = Prints the current alert level on the warship to the console.
+command-description-alertlevel-set = Changes the alert level on the warship.
+
+command-description-areas-load = Load all saved areas to the map as entities.
 command-description-areas-loadmortar = Load only mortarable saved areas to the map as entities.
 command-description-areas-save = Save all mapped areas to the map.
 
@@ -34,6 +37,12 @@ command-description-marine-randomizewithjob = Deletes and then spawns a marine o
 
 command-description-removeinvalidweeds = Removes any weeds that should not have normally spread to where they are from the map.
 
+command-description-requisitions-addbudget = Adds budget to the default Requisitions account.
+command-description-requisitions-removebudget = Removes budget from the default Requisitions account.
+
+command-description-intel-addpoints = Adds points to the default Intel tech tree.
+command-description-intel-removepoints = Removes points from the default Intel tech tree.
+
 command-description-prototypecontains = Filters entities by whether or not their prototype ID contains the given text.
 
 command-description-skills-get = Gets the level of a specific skill for a marine.
@@ -47,5 +56,7 @@ command-description-squad-with = Filters a group of marines by their squad.
 command-description-squad-refresh = Manually refreshes the members of a squad.
 
 command-description-xenomature = Instantly matures a xeno. Applicable to the Queen, at which point she gets more health and abilities.
+
+command-description-weedkiller = Runs weed killer on the current location's area. This kills all weeds and resin structures nearby.
 
 command-description-withxenotier = Filters entities or entity prototypes to those of a specific xenonid tier.

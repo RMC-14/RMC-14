@@ -1,6 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Threading.Tasks;
 using Content.Shared._RMC14.Marines.Squads;
 using Robust.Shared.Console;
 using Robust.Shared.Toolshed.Errors;
@@ -14,28 +12,28 @@ public sealed class SquadTypeParser : TypeParser<SquadType>
 {
     [Dependency] private readonly IEntityManager _entities = default!;
 
-    public override bool TryParse(ParserContext parserContext, [NotNullWhen(true)] out object? result, out IConError? error)
+    public override bool TryParse(ParserContext ctx, out SquadType result)
     {
-        if (parserContext.GetWord(ParserContext.IsToken) is not { } squad)
+        if (ctx.GetWord(ParserContext.IsToken) is not { } squad)
         {
-            error = new NotAValidSquad(null);
-            result = null;
+            ctx.Error = new NotAValidSquad(null);
+            result = default;
             return false;
         }
 
         if (!int.TryParse(squad, out var number))
         {
-            error = new NotAValidSquad(squad);
-            result = null;
+            ctx.Error = new NotAValidSquad(squad);
+            result = default;
             return false;
         }
 
-        error = null;
+        ctx.Error = null;
         result = new SquadType(new EntityUid(number));
         return true;
     }
 
-    public override ValueTask<(CompletionResult? result, IConError? error)> TryAutocomplete(ParserContext parserContext, string? argName)
+    public override CompletionResult TryAutocomplete(ParserContext parserContext, string? argName)
     {
         var squadsQuery = _entities.EntityQueryEnumerator<SquadTeamComponent, MetaDataComponent>();
         var squads = new List<CompletionOption>();
@@ -44,8 +42,7 @@ public sealed class SquadTypeParser : TypeParser<SquadType>
             squads.Add(new CompletionOption(uid.ToString(), meta.EntityName));
         }
 
-        var completions = CompletionResult.FromHintOptions(squads, "squad");
-        return ValueTask.FromResult<(CompletionResult? result, IConError? error)>((completions, null));
+        return CompletionResult.FromHintOptions(squads, "squad");
     }
 }
 

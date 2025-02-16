@@ -4,6 +4,11 @@
   name: M44 combat revolver
   description: A bulky revolver, occasionally carried by assault troops and officers in the Marine Corps, as well as civilian law enforcement. Fires .44 Magnum rounds.
   components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCRevolver
+    - RMCWeaponRevolverM44
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/m44.rsi
   - type: Clothing
@@ -12,6 +17,7 @@
     whitelist:
       tags:
       - RMCSpeedLoaderM44
+      - RMCSpeedLoader44Marksman
       - RMCCartridgeRevolver44
     proto: RMCCartridgeRevolver44
     capacity: 7
@@ -112,6 +118,10 @@
   name: "M44 marksman speed loader (.44)"
   description: A revolver speed loader filled with Marksman ammo.
   components:
+  - type: Tag
+    tags:
+    - RMCMagazineRevolver
+    - RMCSpeedLoader44Marksman
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/m44.rsi
     layers:
@@ -188,3 +198,6 @@
 
 - type: Tag
   id: RMCSpeedLoaderM44
+
+- type: Tag
+  id: RMCSpeedLoader44Marksman

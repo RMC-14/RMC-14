@@ -33,4 +33,11 @@ public abstract class SharedRMCSpriteSystem : EntitySystem
         sprite.RenderOrder = order;
         Dirty(ent, sprite);
     }
+
+    public void SetColor(Entity<SpriteColorComponent?> ent, Color color)
+    {
+        ent.Comp = EnsureComp<SpriteColorComponent>(ent);
+        ent.Comp.Color = color;
+        Dirty(ent);
+    }
 }

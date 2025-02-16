@@ -28,7 +28,7 @@
         RMCSkillFirearms: 2
         RMCSkillFireman: 1
     - type: JobPrefix
-      prefix: "MST"
+      prefix: cm-job-prefix-messtech
   hidden: true # TODO RMC14
 
 - type: startingGear
@@ -52,10 +52,7 @@
   - type: SpawnPoint
     job_id: CMMessTech
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: mess_tech
+    state: chef_spawn
 
 - type: playTimeTracker
   id: CMJobMessTech

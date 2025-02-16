@@ -27,7 +27,7 @@ using Content.Shared.Radio.EntitySystems;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Storage;
-using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Whitelist;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -40,6 +40,7 @@ public sealed class SquadSystem : EntitySystem
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly EncryptionKeySystem _encryptionKey = default!;
+    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly SharedIdCardSystem _id = default!;
     [Dependency] private readonly SharedCMInventorySystem _cmInventory = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
@@ -54,9 +55,9 @@ public sealed class SquadSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedRMCBanSystem _rmcBan = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
 
     private static readonly ProtoId<JobPrototype> SquadLeaderJob = "CMSquadLeader";
+    private static readonly ProtoId<JobPrototype> IntelOfficerJob = "CMIntelOfficer";
     public static readonly EntProtoId<SquadTeamComponent> EchoSquadId = "SquadEcho";
 
     public ImmutableArray<EntityPrototype> SquadPrototypes { get; private set; }
@@ -95,6 +96,8 @@ public sealed class SquadSystem : EntitySystem
 
         SubscribeLocalEvent<SquadLeaderHeadsetComponent, EncryptionChannelsChangedEvent>(OnSquadLeaderHeadsetChannelsChanged);
         SubscribeLocalEvent<SquadLeaderHeadsetComponent, EntityTerminatingEvent>(OnSquadLeaderHeadsetTerminating);
+
+        SubscribeLocalEvent<AssignSquadComponent, MapInitEvent>(OnAssignSquadMapInit);
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
@@ -236,6 +239,18 @@ public sealed class SquadSystem : EntitySystem
         }
     }
 
+    private void OnAssignSquadMapInit(Entity<AssignSquadComponent> ent, ref MapInitEvent args)
+    {
+        var query = EntityQueryEnumerator<SquadTeamComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (!_entityWhitelist.IsWhitelistPass(ent.Comp.Whitelist, uid))
+                continue;
+
+            AssignSquad(ent, (uid, comp), null);
+        }
+    }
+
     private void SearchForMappedItems(Entity<SquadMemberComponent> ent, EntityUid squad)
     {
         var user = ent.Owner;
@@ -321,6 +336,9 @@ public sealed class SquadSystem : EntitySystem
                 jobBuilder.Add(job);
         }
 
+        if (_prototypes.TryIndex(IntelOfficerJob, out var intelJob))
+            jobBuilder.Add(intelJob);
+
         SquadRolePrototypes = jobBuilder.ToImmutable();
     }
 
@@ -401,18 +419,17 @@ public sealed class SquadSystem : EntitySystem
 
         var member = EnsureComp<SquadMemberComponent>(marine);
         var oldSquadId = member.Squad;
+        var role = job ?? _originalRoleQuery.CompOrNull(marine)?.Job;
         if (_squadTeamQuery.TryComp(oldSquadId, out var oldSquad))
         {
             oldSquad.Members.Remove(marine);
 
-            if (_mind.TryGetMind(marine, out var mindId, out _) &&
-                _job.MindTryGetJobId(mindId, out var currentJob) &&
-                currentJob != null)
+            if (role != null)
             {
-                if (oldSquad.Roles.TryGetValue(currentJob.Value, out var oldJobs) &&
+                if (oldSquad.Roles.TryGetValue(role.Value, out var oldJobs) &&
                     oldJobs > 0)
                 {
-                    oldSquad.Roles[currentJob.Value] = oldJobs - 1;
+                    oldSquad.Roles[role.Value] = oldJobs - 1;
                 }
             }
         }
@@ -438,10 +455,10 @@ public sealed class SquadSystem : EntitySystem
         Dirty(marine, grant);
 
         team.Comp.Members.Add(marine);
-        if (job != null)
+        if (role != null)
         {
-            team.Comp.Roles.TryGetValue(job.Value, out var roles);
-            team.Comp.Roles[job.Value] = roles + 1;
+            team.Comp.Roles.TryGetValue(role.Value, out var roles);
+            team.Comp.Roles[role.Value] = roles + 1;
         }
 
         var ev = new SquadMemberUpdatedEvent(team);
