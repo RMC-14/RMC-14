@@ -9,7 +9,7 @@
       drink:
         maxVol: 50
         reagents:
-        - ReagentId: Water
+        - ReagentId: Coffee
           Quantity: 30
   - type: Drink
   - type: Sprite

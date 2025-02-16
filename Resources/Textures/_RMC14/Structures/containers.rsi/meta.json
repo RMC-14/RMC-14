@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a69663ee8d9e3a980d486a1ee05efa44f79abc17/icons/obj/structures/props/contain.dmi, modified by troytroy40 on GitHub",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a69663ee8d9e3a980d486a1ee05efa44f79abc17/icons/obj/structures/props/contain.dmi and https://github.com/cmss13-devs/cmss13/blob/a69663ee8d9e3a980d486a1ee05efa44f79abc17/icons/obj/structures/props/containers/containersextended.dmi, modified by troytroy40 and noctyrnal on GitHub",
   "size": {
     "x": 32,
     "y": 64
@@ -33,6 +33,60 @@
     },
     {
       "name": "bluecontainermiddle"
+    },
+    {
+      "name": "tartarus_l"
+    },
+    {
+      "name": "tartarus_r"
+    },
+    {
+      "name": "tanleft"
+    },
+    {
+      "name": "tanright"
+    },
+    {
+      "name": "blueleft"
+    },
+    {
+      "name": "blueright"
+    },
+    {
+      "name": "greenleft"
+    },
+    {
+      "name": "greenright"
+    },
+    {
+      "name": "redleft"
+    },
+    {
+      "name": "redright"
+    },
+    {
+      "name": "blackwyleft"
+    },
+    {
+      "name": "blackwyright"
+    },
+    {
+      "name": "greywyleft"
+    },
+    {
+      "name": "greywyright"
+    },
+    {
+      "name": "lightgreywyleft"
+    },
+    {
+      "name": "lightgreywyright"
+    },
+    {
+      "name": "whitewyleft"
+    },
+    {
+      "name": "whitewyright"
     }
   ]
 }

@@ -153,6 +153,30 @@
     {
       "name": "small_wire",
       "directions": 4
+    },
+    {
+      "name": "handrail_hybrisa",
+      "directions": 4
+    },
+    {
+      "name": "plasticroadbarrierred",
+      "directions": 4
+    },
+    {
+      "name": "plasticroadbarrierblue",
+      "directions": 4
+    },
+    {
+      "name": "plasticroadbarrierblack",
+      "directions": 4
+    },
+    {
+      "name": "centerroadbarrier1",
+      "directions": 4
+    },
+    {
+      "name": "centerroadbarrier2",
+      "directions": 4
     }
   ]
 }
