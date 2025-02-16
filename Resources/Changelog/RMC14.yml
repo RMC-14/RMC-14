@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: Rainbeon
   changes:
-  - message: You may now become a Parasite again immediately after successfully infecting
-      a Marine.
-    type: Tweak
-  id: 855
-  time: '2024-10-18T02:26:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4491
-- author: Rainbeon
-  changes:
   - message: Runner's pulling speed on marines has been decreased by about ~23.5%,
       moving slightly slower than a Marine wearing Heavy Armor.
     type: Tweak
@@ -5173,5 +5165,12 @@
   id: 1355
   time: '2025-02-16T21:48:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5652
+- author: CyberTropic
+  changes:
+  - message: Added decals to map inserts.
+    type: Add
+  id: 1356
+  time: '2025-02-16T21:51:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5651
 Name: RMC14
 Order: -1
