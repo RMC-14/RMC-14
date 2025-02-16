@@ -92,7 +92,7 @@
     state: icon
   - type: CMVendorBundle
     bundle:
-#      - # TODO RMC14 plastic explosives
+    - RMCExplosivePlastic
     - CMSandbagEmpty25
     - CMSheetMetal50
     - CMSheetPlasteel40

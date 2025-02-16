@@ -59,8 +59,6 @@ tags = "lang:en,region:am_n_e,rp:med"
 
 [ic]
 flavor_text = true
-role_time = 0
-kill_crit = false
 
 [infolinks]
 #appeal = "https://appeal.rouny-ss14.com"
@@ -130,3 +128,4 @@ login_dataset = "CM_Tips"
 
 [vote]
 preset_enabled = false
+restart_ghost_percentage = 75

@@ -37,3 +37,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/695fa4980c03c4398575b5f92413d7f70374ce9b/sound/effects/radiostatic.ogg"
+
+- files: ["tick.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/items/tick.ogg"

@@ -103,6 +103,8 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 5.55
     baseSprintSpeed: 10
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.1
 
 - type: entity
   parent: CMXenoRunnerBase

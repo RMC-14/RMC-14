@@ -140,8 +140,8 @@ public abstract class SharedVirtualItemSystem : EntitySystem
     {
         // Client can't currently predict deleting networked entities so we use this workaround, another
         // problem can popup when the hands leave PVS for example and this avoids that too
-        if (_netManager.IsClient)
-            return;
+        // if (_netManager.IsClient) // RMC14
+        //     return;
 
         foreach (var hand in _handsSystem.EnumerateHands(user))
         {

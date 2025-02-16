@@ -101,6 +101,55 @@
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/security.rsi
 
 - type: entity
+  parent: CMSatchelSecurity
+  id: CMSatchelSecurityFilledProvost
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCArmorProvostFlexi # TODO RMC14 provost office handheld beacon
+    - id: CMFlash # TODO RMC14 remove once provost jacket has it
+    - id: RMCHandcuffs # TODO RMC14 remove once provost jacket has it
+
+- type: entity
+  parent: CMSatchelSecurity
+  id: CMSatchelSecurityFilledProvostDeputyMarshal
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
+    - id: CMFlash # TODO RMC14 remove once provost jacket has it
+    - id: RMCHandcuffs # TODO RMC14 remove once provost jacket has it
+
+- type: entity
+  parent: CMSatchelSecurity
+  id: CMSatchelSecurityFilledProvostMarshal
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
+    - id: RMCTabletCO
+    - id: CMFlash # TODO RMC14 remove once provost jacket has it
+    - id: RMCHandcuffs # TODO RMC14 remove once provost jacket has it
+
+- type: entity
+  parent: CMSatchelSecurity
+  id: CMSatchelSecurityFilledProvostTeamLeader
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
+    - id: RMCTabletCO
+
+- type: entity
+  parent: CMSatchelSecurity
+  id: CMSatchelSecurityFilledProvostEnforcer
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCPacketGrenadeFlashBang
+    - id: RMCWeaponTaser # TODO RMC14 4 tear gas grenades
+
+- type: entity
   parent: CMSatchel
   id: CMSatchelMarine
   name: Marine satchel
@@ -119,7 +168,7 @@
 - type: entity
   parent: CMSatchelMarine
   id: CMSatchelMarineIntel
-  name: Marine lightweight expedition pack
+  name: UNMC lightweight expedition pack
   description: A heavy-duty IMP based backpack that can be slung around the front or to the side, and can quickly be accessed with only one hand. Usually issued to Marine intelligence officers.
   components:
   - type: Sprite
@@ -134,6 +183,22 @@
       Snow: _RMC14/Objects/Clothing/Back/Satchels/Marines/big/snow-urban.rsi
       Classic: _RMC14/Objects/Clothing/Back/Satchels/Marines/big/jungle-desert-classic.rsi
       Urban: _RMC14/Objects/Clothing/Back/Satchels/Marines/big/snow-urban.rsi
+
+- type: entity
+  parent: CMSatchelMarineIntel
+  id: RMCSatchelMarineIntelChestrig
+  name: UNMC expedition chestrig
+  description: A heavy-duty IMP based chestrig, can quickly be accessed with only one hand. Usually issued to UNMC intelligence officers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Chestrigs/intel/desert.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Back/Chestrigs/intel/jungle-classic.rsi
+      Desert: _RMC14/Objects/Clothing/Back/Chestrigs/intel/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Back/Chestrigs/intel/snow-urban.rsi
+      Classic: _RMC14/Objects/Clothing/Back/Chestrigs/intel/jungle-classic.rsi
+      Urban: _RMC14/Objects/Clothing/Back/Chestrigs/intel/snow-urban.rsi
 
 - type: entity
   parent: CMSatchelMarineIntel

@@ -46139,335 +46139,121 @@ entities:
       parent: 1
 - proto: CMDoubleDoorEngineerGlass
   entities:
-  - uid: 12893
+  - uid: 17003
     components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 181.5,118.5
-      parent: 1
-  - uid: 12896
-    components:
+    - type: MetaData
+      name: Colony Power Substation
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 180.5,118.5
       parent: 1
-  - uid: 13847
+  - uid: 17004
     components:
+    - type: MetaData
+      name: Colony Power Substation
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 181.5,118.5
+      parent: 1
+  - uid: 17005
+    components:
+    - type: MetaData
+      name: Colony Power Substation
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 180.5,123.5
       parent: 1
-  - uid: 13858
+  - uid: 17006
     components:
+    - type: MetaData
+      name: Colony Power Substation
     - type: Transform
-      rot: -1.5707963267948966 rad
+      rot: 4.71238898038469 rad
       pos: 181.5,123.5
       parent: 1
-  - uid: 13937
+  - uid: 17007
     components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 182.5,132.5
-      parent: 1
-  - uid: 13938
-    components:
+    - type: MetaData
+      name: Colony Power Substation
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 181.5,132.5
       parent: 1
+  - uid: 17008
+    components:
+    - type: MetaData
+      name: Colony Power Substation
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 182.5,132.5
+      parent: 1
 - proto: CMDoubleDoorGenericGlass
   entities:
-  - uid: 1304
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 57.5,35.5
-      parent: 1
-  - uid: 1305
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 56.5,35.5
-      parent: 1
-  - uid: 5812
-    components:
-    - type: Transform
-      pos: 90.5,110.5
-      parent: 1
-  - uid: 5813
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 90.5,109.5
-      parent: 1
-  - uid: 5853
-    components:
-    - type: Transform
-      pos: 90.5,98.5
-      parent: 1
-  - uid: 5854
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 90.5,97.5
-      parent: 1
   - uid: 5855
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 92.5,113.5
-      parent: 1
-  - uid: 5856
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 93.5,113.5
-      parent: 1
-  - uid: 7110
-    components:
-    - type: Transform
-      pos: 103.5,127.5
-      parent: 1
-  - uid: 7111
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 103.5,126.5
-      parent: 1
-  - uid: 7112
-    components:
-    - type: Transform
-      pos: 106.5,127.5
-      parent: 1
-  - uid: 7113
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 106.5,126.5
-      parent: 1
-  - uid: 7170
-    components:
-    - type: Transform
-      pos: 101.5,145.5
-      parent: 1
-  - uid: 7171
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 101.5,144.5
-      parent: 1
-  - uid: 7172
-    components:
-    - type: Transform
-      pos: 104.5,145.5
-      parent: 1
-  - uid: 7173
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 104.5,144.5
-      parent: 1
-  - uid: 7366
-    components:
-    - type: Transform
-      pos: 123.5,109.5
-      parent: 1
-  - uid: 7367
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 123.5,108.5
-      parent: 1
-  - uid: 7622
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 125.5,153.5
-      parent: 1
-  - uid: 7623
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 124.5,153.5
-      parent: 1
-  - uid: 8006
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 118.5,88.5
-      parent: 1
-  - uid: 8007
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 119.5,88.5
-      parent: 1
-  - uid: 8169
-    components:
-    - type: Transform
-      pos: 120.5,127.5
-      parent: 1
-  - uid: 8170
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 120.5,126.5
-      parent: 1
-  - uid: 8171
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 112.5,133.5
-      parent: 1
-  - uid: 8172
-    components:
-    - type: Transform
-      pos: 112.5,134.5
-      parent: 1
-  - uid: 8391
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 146.5,127.5
-      parent: 1
-  - uid: 8392
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 145.5,127.5
-      parent: 1
-  - uid: 8988
-    components:
-    - type: Transform
-      pos: 138.5,82.5
-      parent: 1
-  - uid: 8989
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 138.5,81.5
-      parent: 1
-  - uid: 9425
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 157.5,39.5
-      parent: 1
-  - uid: 9426
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 156.5,39.5
-      parent: 1
-  - uid: 9690
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 139.5,153.5
-      parent: 1
-  - uid: 9691
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 132.5,153.5
-      parent: 1
-  - uid: 9692
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 138.5,153.5
-      parent: 1
-  - uid: 9693
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 131.5,153.5
-      parent: 1
-  - uid: 9814
-    components:
-    - type: Transform
-      pos: 142.5,140.5
-      parent: 1
-  - uid: 9815
-    components:
-    - type: Transform
-      pos: 142.5,136.5
-      parent: 1
-  - uid: 9816
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 142.5,135.5
-      parent: 1
-  - uid: 9817
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 142.5,139.5
-      parent: 1
-  - uid: 14239
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 159.5,140.5
-      parent: 1
-  - uid: 14241
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 160.5,140.5
-      parent: 1
-  - uid: 14365
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 164.5,127.5
-      parent: 1
-  - uid: 14366
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 163.5,127.5
-      parent: 1
-  - uid: 14738
-    components:
-    - type: Transform
-      pos: 123.5,98.5
-      parent: 1
-  - uid: 14739
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 123.5,97.5
-      parent: 1
-  - uid: 14792
-    components:
-    - type: Transform
-      pos: 103.5,127.5
-      parent: 1
-  - uid: 14793
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 101.5,144.5
-      parent: 1
-  - uid: 14794
-    components:
-    - type: Transform
-      pos: 101.5,145.5
-      parent: 1
-  - uid: 14797
     components:
     - type: MetaData
       name: Colony Dormitories
     - type: Transform
-      rot: 4.71238898038469 rad
-      pos: 93.5,112.5
+      rot: 3.141592653589793 rad
+      pos: 90.5,97.5
       parent: 1
     - type: AccessReader
       access:
       - - CMAccessColonyPublic
-  - uid: 14798
+  - uid: 5856
+    components:
+    - type: MetaData
+      name: Colony Dormitories
+    - type: Transform
+      pos: 90.5,98.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 7110
+    components:
+    - type: MetaData
+      name: North Aerodrome Hangar
+    - type: Transform
+      rot: 4.71238898038469 rad
+      pos: 57.5,35.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 7111
+    components:
+    - type: MetaData
+      name: North Aerodrome Hangar
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 56.5,35.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 16961
+    components:
+    - type: MetaData
+      name: Colony Dormitories
+    - type: Transform
+      pos: 90.5,110.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 16962
+    components:
+    - type: MetaData
+      name: Colony Dormitories
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 90.5,109.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyPublic
+  - uid: 16963
     components:
     - type: MetaData
       name: Colony Dormitories
@@ -46478,106 +46264,69 @@ entities:
     - type: AccessReader
       access:
       - - CMAccessColonyPublic
-  - uid: 14799
+  - uid: 16964
     components:
     - type: MetaData
       name: Colony Dormitories
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 90.5,109.5
-      parent: 1
-    - type: AccessReader
-      access:
-      - - CMAccessColonyPublic
-  - uid: 14800
-    components:
-    - type: MetaData
-      name: Colony Dormitories
-    - type: Transform
-      pos: 90.5,110.5
-      parent: 1
-    - type: AccessReader
-      access:
-      - - CMAccessColonyPublic
-  - uid: 14801
-    components:
-    - type: MetaData
-      name: Colony Dormitories
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 90.5,97.5
-      parent: 1
-    - type: AccessReader
-      access:
-      - - CMAccessColonyPublic
-  - uid: 14802
-    components:
-    - type: MetaData
-      name: Colony Dormitories
-    - type: Transform
-      pos: 90.5,98.5
-      parent: 1
-    - type: AccessReader
-      access:
-      - - CMAccessColonyPublic
-  - uid: 14809
-    components:
-    - type: MetaData
-      name: North Aerodrome Hangar
     - type: Transform
       rot: 4.71238898038469 rad
-      pos: 57.5,35.5
+      pos: 93.5,112.5
       parent: 1
     - type: AccessReader
       access:
       - - CMAccessColonyPublic
-  - uid: 14810
+  - uid: 16965
     components:
-    - type: MetaData
-      name: North Aerodrome Hangar
     - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 56.5,35.5
+      pos: 101.5,145.5
       parent: 1
-    - type: AccessReader
-      access:
-      - - CMAccessColonyPublic
-  - uid: 15639
+  - uid: 16966
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 101.5,144.5
+      parent: 1
+  - uid: 16967
+    components:
+    - type: Transform
+      pos: 103.5,127.5
+      parent: 1
+  - uid: 16968
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 103.5,126.5
       parent: 1
-  - uid: 15640
+  - uid: 16969
     components:
     - type: Transform
       pos: 104.5,145.5
       parent: 1
-  - uid: 15641
+  - uid: 16970
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 104.5,144.5
       parent: 1
-  - uid: 15643
+  - uid: 16971
     components:
     - type: Transform
       pos: 106.5,127.5
       parent: 1
-  - uid: 15644
+  - uid: 16972
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 106.5,126.5
       parent: 1
-  - uid: 15646
+  - uid: 16973
     components:
     - type: MetaData
       name: Underground Chapel
     - type: Transform
       pos: 112.5,134.5
       parent: 1
-  - uid: 15647
+  - uid: 16974
     components:
     - type: MetaData
       name: Underground Chapel
@@ -46585,7 +46334,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 112.5,133.5
       parent: 1
-  - uid: 15648
+  - uid: 16975
     components:
     - type: MetaData
       name: Colony Dormitories Canteen
@@ -46596,7 +46345,7 @@ entities:
     - type: AccessReader
       access:
       - - CMAccessColonyPublic
-  - uid: 15649
+  - uid: 16976
     components:
     - type: MetaData
       name: Colony Dormitories Canteen
@@ -46607,18 +46356,18 @@ entities:
     - type: AccessReader
       access:
       - - CMAccessColonyPublic
-  - uid: 15651
+  - uid: 16977
     components:
     - type: Transform
       pos: 120.5,127.5
       parent: 1
-  - uid: 15652
+  - uid: 16978
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 120.5,126.5
       parent: 1
-  - uid: 15654
+  - uid: 16979
     components:
     - type: MetaData
       name: Colony Dormitories
@@ -46628,7 +46377,7 @@ entities:
     - type: AccessReader
       access:
       - - CMAccessColonyPublic
-  - uid: 15655
+  - uid: 16980
     components:
     - type: MetaData
       name: Colony Dormitories
@@ -46639,7 +46388,7 @@ entities:
     - type: AccessReader
       access:
       - - CMAccessColonyPublic
-  - uid: 15656
+  - uid: 16981
     components:
     - type: MetaData
       name: Colony Dormitories
@@ -46649,7 +46398,7 @@ entities:
     - type: AccessReader
       access:
       - - CMAccessColonyPublic
-  - uid: 15657
+  - uid: 16982
     components:
     - type: MetaData
       name: Colony Dormitories
@@ -46660,19 +46409,19 @@ entities:
     - type: AccessReader
       access:
       - - CMAccessColonyPublic
-  - uid: 15658
+  - uid: 16983
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 124.5,153.5
       parent: 1
-  - uid: 15659
+  - uid: 16984
     components:
     - type: Transform
       rot: 4.71238898038469 rad
       pos: 125.5,153.5
       parent: 1
-  - uid: 15662
+  - uid: 16985
     components:
     - type: MetaData
       name: Underground Sports Center
@@ -46683,7 +46432,7 @@ entities:
     - type: AccessReader
       access:
       - - CMAccessColonyPublic
-  - uid: 15663
+  - uid: 16986
     components:
     - type: MetaData
       name: Underground Sports Center
@@ -46694,7 +46443,7 @@ entities:
     - type: AccessReader
       access:
       - - CMAccessColonyPublic
-  - uid: 15665
+  - uid: 16987
     components:
     - type: MetaData
       name: Colony Garage
@@ -46704,7 +46453,7 @@ entities:
     - type: AccessReader
       access:
       - - CMAccessColonyPublic
-  - uid: 15666
+  - uid: 16988
     components:
     - type: MetaData
       name: Colony Garage
@@ -46715,7 +46464,7 @@ entities:
     - type: AccessReader
       access:
       - - CMAccessColonyPublic
-  - uid: 15667
+  - uid: 16989
     components:
     - type: MetaData
       name: Underground Sports Center
@@ -46726,7 +46475,7 @@ entities:
     - type: AccessReader
       access:
       - - CMAccessColonyPublic
-  - uid: 15843
+  - uid: 16990
     components:
     - type: MetaData
       name: Underground Sports Center
@@ -46737,7 +46486,7 @@ entities:
     - type: AccessReader
       access:
       - - CMAccessColonyPublic
-  - uid: 15844
+  - uid: 16991
     components:
     - type: MetaData
       name: Underground Staff Canteen
@@ -46747,7 +46496,7 @@ entities:
     - type: AccessReader
       access:
       - - CMAccessColonyPublic
-  - uid: 15845
+  - uid: 16992
     components:
     - type: MetaData
       name: Underground Staff Canteen
@@ -46758,7 +46507,7 @@ entities:
     - type: AccessReader
       access:
       - - CMAccessColonyPublic
-  - uid: 15846
+  - uid: 16993
     components:
     - type: MetaData
       name: Underground Staff Canteen
@@ -46768,7 +46517,7 @@ entities:
     - type: AccessReader
       access:
       - - CMAccessColonyPublic
-  - uid: 15847
+  - uid: 16994
     components:
     - type: MetaData
       name: Underground Staff Canteen
@@ -46779,31 +46528,31 @@ entities:
     - type: AccessReader
       access:
       - - CMAccessColonyPublic
-  - uid: 15849
+  - uid: 16995
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 145.5,127.5
       parent: 1
-  - uid: 15850
+  - uid: 16996
     components:
     - type: Transform
       rot: 4.71238898038469 rad
       pos: 146.5,127.5
       parent: 1
-  - uid: 15853
+  - uid: 16997
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 156.5,39.5
       parent: 1
-  - uid: 15854
+  - uid: 16998
     components:
     - type: Transform
       rot: 4.71238898038469 rad
       pos: 157.5,39.5
       parent: 1
-  - uid: 15855
+  - uid: 16999
     components:
     - type: MetaData
       name: Underground Security Checkpoint
@@ -46814,7 +46563,7 @@ entities:
     - type: AccessReader
       access:
       - - CMAccessColonyPublic
-  - uid: 15856
+  - uid: 17000
     components:
     - type: MetaData
       name: Underground Security Checkpoint
@@ -46825,7 +46574,7 @@ entities:
     - type: AccessReader
       access:
       - - CMAccessColonyPublic
-  - uid: 15859
+  - uid: 17001
     components:
     - type: MetaData
       name: Underground Security Brig
@@ -46836,7 +46585,7 @@ entities:
     - type: AccessReader
       access:
       - - CMAccessColonyPublic
-  - uid: 15860
+  - uid: 17002
     components:
     - type: MetaData
       name: Underground Security Brig
@@ -46849,42 +46598,7 @@ entities:
       - - CMAccessColonyPublic
 - proto: CMDoubleDoorMedicalGlass
   entities:
-  - uid: 14494
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 201.5,139.5
-      parent: 1
-  - uid: 14495
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 202.5,139.5
-      parent: 1
-  - uid: 14504
-    components:
-    - type: Transform
-      pos: 196.5,124.5
-      parent: 1
-  - uid: 14505
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 196.5,123.5
-      parent: 1
-  - uid: 14514
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 200.5,127.5
-      parent: 1
-  - uid: 14515
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 201.5,127.5
-      parent: 1
-  - uid: 15869
+  - uid: 17009
     components:
     - type: MetaData
       name: Aurora Medical Clinic Treatment
@@ -46892,7 +46606,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 195.5,146.5
       parent: 1
-  - uid: 15870
+  - uid: 17010
     components:
     - type: MetaData
       name: Aurora Medical Clinic Treatment
@@ -46900,14 +46614,14 @@ entities:
       rot: 4.71238898038469 rad
       pos: 196.5,146.5
       parent: 1
-  - uid: 15871
+  - uid: 17011
     components:
     - type: MetaData
       name: Aurora Medical Clinic
     - type: Transform
       pos: 196.5,124.5
       parent: 1
-  - uid: 15872
+  - uid: 17012
     components:
     - type: MetaData
       name: Aurora Medical Clinic
@@ -46915,7 +46629,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 196.5,123.5
       parent: 1
-  - uid: 15873
+  - uid: 17013
     components:
     - type: MetaData
       name: Aurora Medical Clinic Treatment
@@ -46923,7 +46637,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 198.5,120.5
       parent: 1
-  - uid: 15874
+  - uid: 17014
     components:
     - type: MetaData
       name: Aurora Medical Clinic Treatment
@@ -46931,7 +46645,7 @@ entities:
       rot: 4.71238898038469 rad
       pos: 199.5,120.5
       parent: 1
-  - uid: 15876
+  - uid: 17015
     components:
     - type: MetaData
       name: Aurora Medical Clinic Treatment
@@ -46939,7 +46653,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 200.5,127.5
       parent: 1
-  - uid: 15877
+  - uid: 17016
     components:
     - type: MetaData
       name: Aurora Medical Clinic Treatment
@@ -46947,7 +46661,7 @@ entities:
       rot: 4.71238898038469 rad
       pos: 201.5,127.5
       parent: 1
-  - uid: 15878
+  - uid: 17017
     components:
     - type: MetaData
       name: Aurora Medical Clinic Treatment
@@ -46955,7 +46669,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 201.5,139.5
       parent: 1
-  - uid: 15879
+  - uid: 17018
     components:
     - type: MetaData
       name: Aurora Medical Clinic Treatment
@@ -46963,54 +46677,17 @@ entities:
       rot: 4.71238898038469 rad
       pos: 202.5,139.5
       parent: 1
-  - uid: 15880
+  - uid: 17019
     components:
     - type: MetaData
       name: Aurora Medical Clinic Treatment
     - type: Transform
       pos: 205.5,143.5
       parent: 1
-  - uid: 15881
+  - uid: 17020
     components:
     - type: MetaData
       name: Aurora Medical Clinic Treatment
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 205.5,142.5
-      parent: 1
-- proto: CMDoubleDoorMedicalGlassLocked
-  entities:
-  - uid: 13818
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 199.5,120.5
-      parent: 1
-  - uid: 13819
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 198.5,120.5
-      parent: 1
-  - uid: 14476
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 196.5,146.5
-      parent: 1
-  - uid: 14477
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 195.5,146.5
-      parent: 1
-  - uid: 14478
-    components:
-    - type: Transform
-      pos: 205.5,143.5
-      parent: 1
-  - uid: 14479
-    components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 205.5,142.5
@@ -50263,22 +49940,22 @@ entities:
       parent: 1
 - proto: CMMagazineSMGMP5
   entities:
-  - uid: 15703
+  - uid: 14494
     components:
     - type: Transform
       pos: 166.5,133.5
       parent: 1
-  - uid: 15704
+  - uid: 14495
     components:
     - type: Transform
       pos: 166.5,133.5
       parent: 1
-  - uid: 15709
+  - uid: 14505
     components:
     - type: Transform
       pos: 165.5,133.5
       parent: 1
-  - uid: 15710
+  - uid: 14514
     components:
     - type: Transform
       pos: 165.5,133.5
@@ -110946,57 +110623,52 @@ entities:
     - type: InsideEntityStorage
 - proto: RMCBarrelBlue
   entities:
-  - uid: 2655
-    components:
-    - type: Transform
-      pos: 130.5,139.5
-      parent: 1
-  - uid: 12506
-    components:
-    - type: Transform
-      pos: 209.5,59.5
-      parent: 1
-  - uid: 16113
-    components:
-    - type: Transform
-      pos: 26.5,97.5
-      parent: 1
-  - uid: 16219
+  - uid: 1305
     components:
     - type: Transform
       pos: 10.5,59.5
       parent: 1
-  - uid: 16301
+  - uid: 7112
+    components:
+    - type: Transform
+      pos: 209.5,59.5
+      parent: 1
+  - uid: 16218
     components:
     - type: Transform
       pos: 113.5,17.5
       parent: 1
 - proto: RMCBarrelGreen
   entities:
-  - uid: 12508
-    components:
-    - type: Transform
-      pos: 209.5,58.5
-      parent: 1
-  - uid: 16218
+  - uid: 5853
     components:
     - type: Transform
       pos: 10.5,58.5
       parent: 1
-  - uid: 16245
+  - uid: 7113
     components:
     - type: Transform
-      pos: 41.5,20.5
+      pos: 209.5,58.5
       parent: 1
-  - uid: 16298
+  - uid: 16219
+    components:
+    - type: Transform
+      pos: 113.5,16.5
+      parent: 1
+  - uid: 16923
     components:
     - type: Transform
       pos: 101.5,17.5
       parent: 1
-  - uid: 16299
+  - uid: 16945
     components:
     - type: Transform
-      pos: 113.5,16.5
+      pos: 62.5,10.5
+      parent: 1
+  - uid: 16957
+    components:
+    - type: Transform
+      pos: 41.5,20.5
       parent: 1
 - proto: RMCBarrelPileYard
   entities:
@@ -111012,44 +110684,49 @@ entities:
       parent: 1
 - proto: RMCBarrelRed
   entities:
-  - uid: 16300
+  - uid: 16113
+    components:
+    - type: Transform
+      pos: 113.5,67.5
+      parent: 1
+  - uid: 16246
     components:
     - type: Transform
       pos: 112.5,17.5
       parent: 1
 - proto: RMCBarrelWhite
   entities:
-  - uid: 16246
-    components:
-    - type: Transform
-      pos: 42.5,20.5
-      parent: 1
-  - uid: 16297
+  - uid: 16301
     components:
     - type: Transform
       pos: 103.5,16.5
+      parent: 1
+  - uid: 16956
+    components:
+    - type: Transform
+      pos: 42.5,20.5
       parent: 1
 - proto: RMCBarrelYellow
   entities:
   - uid: 16247
     components:
     - type: Transform
-      pos: 41.5,19.5
-      parent: 1
-  - uid: 16294
-    components:
-    - type: Transform
       pos: 110.5,12.5
       parent: 1
-  - uid: 16295
+  - uid: 16300
     components:
     - type: Transform
       pos: 104.5,17.5
       parent: 1
-  - uid: 16296
+  - uid: 16920
     components:
     - type: Transform
       pos: 102.5,16.5
+      parent: 1
+  - uid: 16958
+    components:
+    - type: Transform
+      pos: 41.5,19.5
       parent: 1
 - proto: RMCBarricadeHandrailAlt
   entities:
@@ -114048,6 +113725,18 @@ entities:
     - type: Transform
       pos: 71.5,48.5
       parent: 1
+- proto: RMCExplosivePlastic
+  entities:
+  - uid: 13858
+    components:
+    - type: Transform
+      pos: 172.5,97.5
+      parent: 1
+  - uid: 13937
+    components:
+    - type: Transform
+      pos: 171.5,102.5
+      parent: 1
 - proto: RMCFlashlight
   entities:
   - uid: 2194
@@ -114552,6 +114241,13 @@ entities:
     components:
     - type: Transform
       pos: 209.26895,37.587654
+      parent: 1
+- proto: RMCFortBicepSign
+  entities:
+  - uid: 17022
+    components:
+    - type: Transform
+      pos: 124,24
       parent: 1
 - proto: RMCGeneratorFusionColony
   entities:
@@ -121535,6 +121231,16 @@ entities:
     - type: Transform
       pos: 107.5,95.5
       parent: 1
+    - type: ContainerContainer
+      containers:
+        pouch: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+        storagebase: !type:Container
+          showEnts: False
+          occludes: True
+          ents: []
 - proto: RMCPrefabOrangeBase
   entities:
   - uid: 1589
@@ -122229,6 +121935,13 @@ entities:
     components:
     - type: Transform
       pos: 190.5,78.5
+      parent: 1
+- proto: RMCShivaIceSign
+  entities:
+  - uid: 17021
+    components:
+    - type: Transform
+      pos: 37,38
       parent: 1
 - proto: RMCShutterAlmayer
   entities:
@@ -123160,6 +122873,819 @@ entities:
     components:
     - type: Transform
       pos: 158.5,70.5
+      parent: 1
+- proto: RMCSpawnerIntelClose
+  entities:
+  - uid: 5812
+    components:
+    - type: Transform
+      pos: 3.5,124.5
+      parent: 1
+  - uid: 5813
+    components:
+    - type: Transform
+      pos: 3.5,126.5
+      parent: 1
+  - uid: 5854
+    components:
+    - type: Transform
+      pos: 6.5,146.5
+      parent: 1
+  - uid: 7170
+    components:
+    - type: Transform
+      pos: 207.5,114.5
+      parent: 1
+  - uid: 7172
+    components:
+    - type: Transform
+      pos: 204.5,125.5
+      parent: 1
+  - uid: 7367
+    components:
+    - type: Transform
+      pos: 203.5,129.5
+      parent: 1
+  - uid: 7623
+    components:
+    - type: Transform
+      pos: 201.5,31.5
+      parent: 1
+  - uid: 8170
+    components:
+    - type: Transform
+      pos: 195.5,129.5
+      parent: 1
+  - uid: 8392
+    components:
+    - type: Transform
+      pos: 193.5,136.5
+      parent: 1
+  - uid: 8989
+    components:
+    - type: Transform
+      pos: 192.5,119.5
+      parent: 1
+  - uid: 9425
+    components:
+    - type: Transform
+      pos: 191.5,64.5
+      parent: 1
+  - uid: 9426
+    components:
+    - type: Transform
+      pos: 191.5,47.5
+      parent: 1
+  - uid: 9691
+    components:
+    - type: Transform
+      pos: 185.5,75.5
+      parent: 1
+  - uid: 9693
+    components:
+    - type: Transform
+      pos: 184.5,31.5
+      parent: 1
+  - uid: 9814
+    components:
+    - type: Transform
+      pos: 182.5,121.5
+      parent: 1
+  - uid: 9815
+    components:
+    - type: Transform
+      pos: 181.5,155.5
+      parent: 1
+  - uid: 9817
+    components:
+    - type: Transform
+      pos: 178.5,129.5
+      parent: 1
+  - uid: 12508
+    components:
+    - type: Transform
+      pos: 177.5,35.5
+      parent: 1
+  - uid: 12893
+    components:
+    - type: Transform
+      pos: 175.5,27.5
+      parent: 1
+  - uid: 12896
+    components:
+    - type: Transform
+      pos: 174.5,154.5
+      parent: 1
+  - uid: 13818
+    components:
+    - type: Transform
+      pos: 173.5,130.5
+      parent: 1
+  - uid: 14476
+    components:
+    - type: Transform
+      pos: 168.5,43.5
+      parent: 1
+  - uid: 14504
+    components:
+    - type: Transform
+      pos: 166.5,43.5
+      parent: 1
+  - uid: 14738
+    components:
+    - type: Transform
+      pos: 163.5,84.5
+      parent: 1
+  - uid: 14792
+    components:
+    - type: Transform
+      pos: 162.5,124.5
+      parent: 1
+  - uid: 14794
+    components:
+    - type: Transform
+      pos: 161.5,154.5
+      parent: 1
+  - uid: 14797
+    components:
+    - type: Transform
+      pos: 160.5,47.5
+      parent: 1
+  - uid: 14798
+    components:
+    - type: Transform
+      pos: 159.5,119.5
+      parent: 1
+  - uid: 14800
+    components:
+    - type: Transform
+      pos: 153.5,154.5
+      parent: 1
+  - uid: 14802
+    components:
+    - type: Transform
+      pos: 149.5,144.5
+      parent: 1
+  - uid: 14809
+    components:
+    - type: Transform
+      pos: 147.5,87.5
+      parent: 1
+  - uid: 15639
+    components:
+    - type: Transform
+      pos: 142.5,128.5
+      parent: 1
+  - uid: 15641
+    components:
+    - type: Transform
+      pos: 140.5,155.5
+      parent: 1
+  - uid: 15647
+    components:
+    - type: Transform
+      pos: 137.5,127.5
+      parent: 1
+  - uid: 15648
+    components:
+    - type: Transform
+      pos: 136.5,142.5
+      parent: 1
+  - uid: 15654
+    components:
+    - type: Transform
+      pos: 132.5,158.5
+      parent: 1
+  - uid: 15655
+    components:
+    - type: Transform
+      pos: 132.5,81.5
+      parent: 1
+  - uid: 15656
+    components:
+    - type: Transform
+      pos: 132.5,50.5
+      parent: 1
+  - uid: 15657
+    components:
+    - type: Transform
+      pos: 131.5,134.5
+      parent: 1
+  - uid: 15663
+    components:
+    - type: Transform
+      pos: 129.5,137.5
+      parent: 1
+  - uid: 15665
+    components:
+    - type: Transform
+      pos: 129.5,130.5
+      parent: 1
+  - uid: 15667
+    components:
+    - type: Transform
+      pos: 125.5,23.5
+      parent: 1
+  - uid: 15704
+    components:
+    - type: Transform
+      pos: 124.5,142.5
+      parent: 1
+  - uid: 15710
+    components:
+    - type: Transform
+      pos: 124.5,49.5
+      parent: 1
+  - uid: 15844
+    components:
+    - type: Transform
+      pos: 122.5,56.5
+      parent: 1
+  - uid: 15849
+    components:
+    - type: Transform
+      pos: 120.5,130.5
+      parent: 1
+  - uid: 15850
+    components:
+    - type: Transform
+      pos: 120.5,70.5
+      parent: 1
+  - uid: 15853
+    components:
+    - type: Transform
+      pos: 120.5,69.5
+      parent: 1
+  - uid: 15873
+    components:
+    - type: Transform
+      pos: 115.5,102.5
+      parent: 1
+  - uid: 15878
+    components:
+    - type: Transform
+      pos: 114.5,83.5
+      parent: 1
+  - uid: 15879
+    components:
+    - type: Transform
+      pos: 113.5,123.5
+      parent: 1
+  - uid: 15881
+    components:
+    - type: Transform
+      pos: 113.5,69.5
+      parent: 1
+  - uid: 16245
+    components:
+    - type: Transform
+      pos: 112.5,150.5
+      parent: 1
+  - uid: 16294
+    components:
+    - type: Transform
+      pos: 109.5,157.5
+      parent: 1
+  - uid: 16296
+    components:
+    - type: Transform
+      pos: 105.5,52.5
+      parent: 1
+  - uid: 16298
+    components:
+    - type: Transform
+      pos: 104.5,111.5
+      parent: 1
+  - uid: 16299
+    components:
+    - type: Transform
+      pos: 104.5,99.5
+      parent: 1
+  - uid: 16922
+    components:
+    - type: Transform
+      pos: 101.5,55.5
+      parent: 1
+  - uid: 16925
+    components:
+    - type: Transform
+      pos: 100.5,67.5
+      parent: 1
+  - uid: 16926
+    components:
+    - type: Transform
+      pos: 100.5,55.5
+      parent: 1
+  - uid: 16927
+    components:
+    - type: Transform
+      pos: 99.5,121.5
+      parent: 1
+  - uid: 16929
+    components:
+    - type: Transform
+      pos: 99.5,83.5
+      parent: 1
+  - uid: 16930
+    components:
+    - type: Transform
+      pos: 99.5,82.5
+      parent: 1
+  - uid: 16934
+    components:
+    - type: Transform
+      pos: 95.5,93.5
+      parent: 1
+  - uid: 16935
+    components:
+    - type: Transform
+      pos: 92.5,89.5
+      parent: 1
+  - uid: 16936
+    components:
+    - type: Transform
+      pos: 91.5,104.5
+      parent: 1
+  - uid: 16938
+    components:
+    - type: Transform
+      pos: 69.5,43.5
+      parent: 1
+  - uid: 16939
+    components:
+    - type: Transform
+      pos: 67.5,24.5
+      parent: 1
+  - uid: 16940
+    components:
+    - type: Transform
+      pos: 66.5,19.5
+      parent: 1
+  - uid: 16941
+    components:
+    - type: Transform
+      pos: 64.5,55.5
+      parent: 1
+  - uid: 16946
+    components:
+    - type: Transform
+      pos: 58.5,144.5
+      parent: 1
+  - uid: 16947
+    components:
+    - type: Transform
+      pos: 58.5,39.5
+      parent: 1
+  - uid: 16950
+    components:
+    - type: Transform
+      pos: 56.5,144.5
+      parent: 1
+  - uid: 16952
+    components:
+    - type: Transform
+      pos: 50.5,55.5
+      parent: 1
+  - uid: 16954
+    components:
+    - type: Transform
+      pos: 45.5,48.5
+      parent: 1
+  - uid: 16955
+    components:
+    - type: Transform
+      pos: 45.5,18.5
+      parent: 1
+  - uid: 16959
+    components:
+    - type: Transform
+      pos: 33.5,73.5
+      parent: 1
+  - uid: 16960
+    components:
+    - type: Transform
+      pos: 28.5,64.5
+      parent: 1
+- proto: RMCSpawnerIntelFar
+  entities:
+  - uid: 8172
+    components:
+    - type: Transform
+      pos: 193.5,138.5
+      parent: 1
+  - uid: 8988
+    components:
+    - type: Transform
+      pos: 193.5,135.5
+      parent: 1
+  - uid: 14365
+    components:
+    - type: Transform
+      pos: 169.5,40.5
+      parent: 1
+  - uid: 14810
+    components:
+    - type: Transform
+      pos: 145.5,158.5
+      parent: 1
+  - uid: 15644
+    components:
+    - type: Transform
+      pos: 138.5,139.5
+      parent: 1
+  - uid: 15658
+    components:
+    - type: Transform
+      pos: 131.5,133.5
+      parent: 1
+  - uid: 15662
+    components:
+    - type: Transform
+      pos: 130.5,130.5
+      parent: 1
+  - uid: 15666
+    components:
+    - type: Transform
+      pos: 125.5,142.5
+      parent: 1
+  - uid: 15843
+    components:
+    - type: Transform
+      pos: 123.5,10.5
+      parent: 1
+  - uid: 15860
+    components:
+    - type: Transform
+      pos: 117.5,91.5
+      parent: 1
+  - uid: 15872
+    components:
+    - type: Transform
+      pos: 115.5,104.5
+      parent: 1
+  - uid: 16917
+    components:
+    - type: Transform
+      pos: 102.5,80.5
+      parent: 1
+  - uid: 16944
+    components:
+    - type: Transform
+      pos: 62.5,54.5
+      parent: 1
+- proto: RMCSpawnerIntelMedium
+  entities:
+  - uid: 7173
+    components:
+    - type: Transform
+      pos: 204.5,32.5
+      parent: 1
+  - uid: 7622
+    components:
+    - type: Transform
+      pos: 202.5,119.5
+      parent: 1
+  - uid: 8007
+    components:
+    - type: Transform
+      pos: 199.5,93.5
+      parent: 1
+  - uid: 8171
+    components:
+    - type: Transform
+      pos: 195.5,128.5
+      parent: 1
+  - uid: 8391
+    components:
+    - type: Transform
+      pos: 193.5,137.5
+      parent: 1
+  - uid: 9690
+    components:
+    - type: Transform
+      pos: 189.5,119.5
+      parent: 1
+  - uid: 13819
+    components:
+    - type: Transform
+      pos: 173.5,27.5
+      parent: 1
+  - uid: 13938
+    components:
+    - type: Transform
+      pos: 170.5,157.5
+      parent: 1
+  - uid: 14241
+    components:
+    - type: Transform
+      pos: 169.5,43.5
+      parent: 1
+  - uid: 14479
+    components:
+    - type: Transform
+      pos: 167.5,39.5
+      parent: 1
+  - uid: 14515
+    components:
+    - type: Transform
+      pos: 164.5,124.5
+      parent: 1
+  - uid: 14799
+    components:
+    - type: Transform
+      pos: 156.5,137.5
+      parent: 1
+  - uid: 15640
+    components:
+    - type: Transform
+      pos: 142.5,127.5
+      parent: 1
+  - uid: 15643
+    components:
+    - type: Transform
+      pos: 139.5,125.5
+      parent: 1
+  - uid: 15646
+    components:
+    - type: Transform
+      pos: 137.5,128.5
+      parent: 1
+  - uid: 15649
+    components:
+    - type: Transform
+      pos: 136.5,141.5
+      parent: 1
+  - uid: 15651
+    components:
+    - type: Transform
+      pos: 136.5,136.5
+      parent: 1
+  - uid: 15652
+    components:
+    - type: Transform
+      pos: 134.5,125.5
+      parent: 1
+  - uid: 15659
+    components:
+    - type: Transform
+      pos: 131.5,130.5
+      parent: 1
+  - uid: 15703
+    components:
+    - type: Transform
+      pos: 124.5,158.5
+      parent: 1
+  - uid: 15709
+    components:
+    - type: Transform
+      pos: 124.5,103.5
+      parent: 1
+  - uid: 15845
+    components:
+    - type: Transform
+      pos: 122.5,10.5
+      parent: 1
+  - uid: 15846
+    components:
+    - type: Transform
+      pos: 121.5,130.5
+      parent: 1
+  - uid: 15847
+    components:
+    - type: Transform
+      pos: 121.5,102.5
+      parent: 1
+  - uid: 15854
+    components:
+    - type: Transform
+      pos: 119.5,104.5
+      parent: 1
+  - uid: 15855
+    components:
+    - type: Transform
+      pos: 119.5,45.5
+      parent: 1
+  - uid: 15856
+    components:
+    - type: Transform
+      pos: 118.5,102.5
+      parent: 1
+  - uid: 15869
+    components:
+    - type: Transform
+      pos: 116.5,102.5
+      parent: 1
+  - uid: 15880
+    components:
+    - type: Transform
+      pos: 113.5,72.5
+      parent: 1
+  - uid: 16297
+    components:
+    - type: Transform
+      pos: 104.5,112.5
+      parent: 1
+  - uid: 16918
+    components:
+    - type: Transform
+      pos: 102.5,70.5
+      parent: 1
+  - uid: 16921
+    components:
+    - type: Transform
+      pos: 101.5,75.5
+      parent: 1
+  - uid: 16931
+    components:
+    - type: Transform
+      pos: 98.5,102.5
+      parent: 1
+  - uid: 16937
+    components:
+    - type: Transform
+      pos: 91.5,101.5
+      parent: 1
+  - uid: 16942
+    components:
+    - type: Transform
+      pos: 63.5,55.5
+      parent: 1
+  - uid: 16948
+    components:
+    - type: Transform
+      pos: 57.5,144.5
+      parent: 1
+  - uid: 16949
+    components:
+    - type: Transform
+      pos: 57.5,39.5
+      parent: 1
+- proto: RMCSpawnerIntelScience
+  entities:
+  - uid: 1304
+    components:
+    - type: Transform
+      pos: 212.5,26.5
+      parent: 1
+  - uid: 2655
+    components:
+    - type: Transform
+      pos: 24.5,117.5
+      parent: 1
+  - uid: 7171
+    components:
+    - type: Transform
+      pos: 205.5,31.5
+      parent: 1
+  - uid: 7366
+    components:
+    - type: Transform
+      pos: 203.5,130.5
+      parent: 1
+  - uid: 8006
+    components:
+    - type: Transform
+      pos: 199.5,154.5
+      parent: 1
+  - uid: 8169
+    components:
+    - type: Transform
+      pos: 197.5,137.5
+      parent: 1
+  - uid: 9692
+    components:
+    - type: Transform
+      pos: 184.5,156.5
+      parent: 1
+  - uid: 9816
+    components:
+    - type: Transform
+      pos: 179.5,47.5
+      parent: 1
+  - uid: 12506
+    components:
+    - type: Transform
+      pos: 177.5,39.5
+      parent: 1
+  - uid: 14239
+    components:
+    - type: Transform
+      pos: 169.5,52.5
+      parent: 1
+  - uid: 14366
+    components:
+    - type: Transform
+      pos: 169.5,3.5
+      parent: 1
+  - uid: 14477
+    components:
+    - type: Transform
+      pos: 168.5,39.5
+      parent: 1
+  - uid: 14478
+    components:
+    - type: Transform
+      pos: 167.5,41.5
+      parent: 1
+  - uid: 14739
+    components:
+    - type: Transform
+      pos: 163.5,54.5
+      parent: 1
+  - uid: 14793
+    components:
+    - type: Transform
+      pos: 162.5,19.5
+      parent: 1
+  - uid: 14801
+    components:
+    - type: Transform
+      pos: 153.5,38.5
+      parent: 1
+  - uid: 15859
+    components:
+    - type: Transform
+      pos: 118.5,51.5
+      parent: 1
+  - uid: 15870
+    components:
+    - type: Transform
+      pos: 116.5,99.5
+      parent: 1
+  - uid: 15871
+    components:
+    - type: Transform
+      pos: 116.5,96.5
+      parent: 1
+  - uid: 15874
+    components:
+    - type: Transform
+      pos: 115.5,70.5
+      parent: 1
+  - uid: 15876
+    components:
+    - type: Transform
+      pos: 115.5,56.5
+      parent: 1
+  - uid: 15877
+    components:
+    - type: Transform
+      pos: 115.5,53.5
+      parent: 1
+  - uid: 16295
+    components:
+    - type: Transform
+      pos: 108.5,68.5
+      parent: 1
+  - uid: 16915
+    components:
+    - type: Transform
+      pos: 102.5,116.5
+      parent: 1
+  - uid: 16916
+    components:
+    - type: Transform
+      pos: 102.5,114.5
+      parent: 1
+  - uid: 16919
+    components:
+    - type: Transform
+      pos: 102.5,54.5
+      parent: 1
+  - uid: 16924
+    components:
+    - type: Transform
+      pos: 100.5,68.5
+      parent: 1
+  - uid: 16928
+    components:
+    - type: Transform
+      pos: 99.5,94.5
+      parent: 1
+  - uid: 16932
+    components:
+    - type: Transform
+      pos: 97.5,102.5
+      parent: 1
+  - uid: 16933
+    components:
+    - type: Transform
+      pos: 97.5,99.5
+      parent: 1
+  - uid: 16943
+    components:
+    - type: Transform
+      pos: 62.5,151.5
+      parent: 1
+  - uid: 16951
+    components:
+    - type: Transform
+      pos: 52.5,23.5
+      parent: 1
+  - uid: 16953
+    components:
+    - type: Transform
+      pos: 50.5,17.5
       parent: 1
 - proto: RMCSpawnerRandomPowercell
   entities:
@@ -126565,6 +127091,13 @@ entities:
     components:
     - type: Transform
       pos: 204.5,158.5
+      parent: 1
+- proto: WeaponNailgun
+  entities:
+  - uid: 13847
+    components:
+    - type: Transform
+      pos: 172.5,99.5
       parent: 1
 - proto: WeaponRifleAR10
   entities:

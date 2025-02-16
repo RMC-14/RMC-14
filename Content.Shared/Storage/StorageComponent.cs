@@ -56,6 +56,7 @@ namespace Content.Shared.Storage
         /// Minimum delay between quick/area insert actions.
         /// </summary>
         /// <remarks>Used to prevent autoclickers spamming server with individual pickup actions.</remarks>
+        [DataField]
         public TimeSpan QuickInsertCooldown = TimeSpan.FromSeconds(0.5);
 
         /// <summary>

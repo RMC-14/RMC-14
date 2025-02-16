@@ -23,7 +23,7 @@
     - Plating
     - CMFloorSteel
   - type: Stack
-    stackType: FloorTileSteel
+    stackType: RMCTileSteel
 
 - type: entity
   parent: CMTileItemBase
@@ -39,4 +39,16 @@
     - Plating
     - CMFloorWood
   - type: Stack
-    stackType: FloorTileWood
+    stackType: RMCTileWood
+
+- type: stack
+  id: RMCTileSteel
+  name: steel tile
+  spawn: CMTileItemSteel
+  maxCount: 60
+
+- type: stack
+  id: RMCTileWood
+  name: steel tile
+  spawn: CMTileItemWood
+  maxCount: 60

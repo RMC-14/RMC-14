@@ -65,10 +65,7 @@
   - type: SpawnPoint
     job_id: CMOrdnanceTech
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: ordnance_tech
+    state: ot_spawn
 
 - type: playTimeTracker
   id: CMJobOrdnanceTech
