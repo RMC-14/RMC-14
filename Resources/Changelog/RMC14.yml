@@ -1,35 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: You can no longer akimbo with two MOU53s
-    type: Fix
-  id: 850
-  time: '2024-10-18T01:06:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4506
-- author: Vermidia
-  changes:
-  - message: Fix being able to repair multiple cades at once. Welders also use the
-      proper amount of fuel for this, and isn't canceled by damage.
-    type: Fix
-  - message: Cades now heal 200 health on weld instead of all their health. They also
-      now take 5 seconds to weld with construction skill 2 and 10 with 1 or 0 skill.
-    type: Fix
-  - message: You can no longer weld sentries with a turned off or empty welder.
-    type: Fix
-  id: 851
-  time: '2024-10-18T01:26:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4505
-- author: Vermidia
-  changes:
-  - message: Fix identifiers not being preserved on devolve
-    type: Fix
-  - message: Fix free slots not being 100% free. They will no longer count towards
-      existing tier counts and will always be available no matter how many xenos of
-      that tier are roaming about.
-    type: Fix
-  id: 852
-  time: '2024-10-18T01:27:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4499
 - author: Dutch-VanDerLinde
   changes:
   - message: Added xeno egg destroying animations
@@ -5179,5 +5148,34 @@
   id: 1349
   time: '2025-02-16T05:10:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5616
+- author: Vermidia
+  changes:
+  - message: Fixed drone transfer plasma's doafter taking too long (3 > 2 seconds)
+    type: Fix
+  - message: Fixed hivelord having drone's transfer plasma. They now transfer 200
+      plasma in 0.5 seconds, up to 7 tiles away.
+    type: Fix
+  id: 1350
+  time: '2025-02-16T05:12:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5613
+- author: Dutch-VanDerLinde
+  changes:
+  - message: MP5 and M16 now have a small chance to spawn with a single-shot underbarrel
+      grenade launcher.
+    type: Tweak
+  id: 1351
+  time: '2025-02-16T05:12:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5555
+- author: CyberTropic
+  changes:
+  - message: Added Nightmare map insert system.
+    type: Add
+  - message: Added Solaris SE Checkpoint insert with 70% probability.
+    type: Add
+  - message: Added Kutjevo Communications insert with 35% probability.
+    type: Add
+  id: 1352
+  time: '2025-02-16T05:11:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5508
 Name: RMC14
 Order: -1
