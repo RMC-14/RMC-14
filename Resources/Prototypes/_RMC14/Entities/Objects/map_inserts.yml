@@ -19,6 +19,7 @@
     spawn: "/Maps/_RMC14/Inserts/Solaris/se-checkpoint.yml"
     probability: 0.7
     clearEntities: true
+    clearDecals: true
     replaceAreas: true
     
 # Kutjevo
@@ -30,7 +31,7 @@
   components:
   - type: MapInsert
     spawn: "/Maps/_RMC14/Inserts/Kutjevo/communications.yml"
-    probability: 1
+    probability: 0.35
     clearEntities: true
     clearDecals: true
     replaceAreas: false

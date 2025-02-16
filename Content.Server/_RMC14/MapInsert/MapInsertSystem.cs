@@ -3,6 +3,7 @@ using Content.Server.Decals;
 using Content.Server.Spawners.EntitySystems;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Map;
+using Content.Shared.Decals;
 using Content.Shared.GameTicking;
 using Robust.Server.Physics;
 using Robust.Shared.Map;
@@ -104,7 +105,6 @@ public sealed class MapInsertSystem : EntitySystem
             }
         }
 
-
         // Clear all entities on map in insert area
         _transform.SetMapCoordinates(insertGrid, coordinates);
         MapInsertSmimsh(insertGrid, (EntityUid)mainGrid, ent.Comp.ClearEntities, ent.Comp.ClearDecals);
@@ -112,7 +112,19 @@ public sealed class MapInsertSystem : EntitySystem
         // Merge grids
         // Need to make sure the grid isn't overlapping where it's going to be merged to, otherwise exception
         _transform.SetMapCoordinates(insertGrid, coordinates.Offset(new Vector2(999f)));
+
         //Decals not handled in Merge(), so do it here
+        if (!TryComp(insertGrid, out DecalGridComponent? insertDecalGrid))
+            return;
+
+        foreach (var chunk in insertDecalGrid.ChunkCollection.ChunkCollection.Values)
+        {
+            foreach (var (decalUid, decal) in chunk.Decals)
+            {
+                _decals.SetDecalPosition(insertGrid, decalUid, new(mainGrid.Value, decal.Coordinates + coordinatesi));
+            }
+        }
+
         _fixture.Merge((EntityUid)mainGrid, insertGrid, coordinatesi, Angle.Zero);
 
         QueueDel(ent);
@@ -128,19 +140,6 @@ public sealed class MapInsertSystem : EntitySystem
             return;
 
         // Flatten anything not parented to a grid.
-        var aabbs = new List<Box2>(manager.Fixtures.Count);
-        var tileSet = new List<(Vector2i, Tile)>();
-
-        var tiles = new HashSet<Vector2i>();
-        if (TryComp(uid, out MapGridComponent? shuttleGrid))
-        {
-            var enumerator = _mapSystem.GetAllTilesEnumerator(uid, shuttleGrid);
-            while (enumerator.MoveNext(out var tile))
-            {
-                tiles.Add(tile.Value.GridIndices);
-            }
-        }
-
         foreach (var fixture in manager.Fixtures.Values)
         {
             if (!fixture.Hard)
@@ -149,9 +148,6 @@ public sealed class MapInsertSystem : EntitySystem
             var aabb = _physics.GetWorldAABB(uid, xform: xform);
 
             aabb = aabb.Enlarged(-0.05f);
-            aabbs.Add(aabb);
-
-            tileSet.Clear();
             _lookupEnts.Clear();
             _immuneEnts.Clear();
             // TODO: Ideally we'd query first BEFORE moving grid but needs adjustments above.
@@ -162,15 +158,11 @@ public sealed class MapInsertSystem : EntitySystem
                 foreach (var ent in _lookupEnts)
                 {
                     if (ent == uid || _immuneEnts.Contains(ent))
-                    {
                         continue;
-                    }
 
                     // If it's on our grid ignore it.
                     if (!TryComp(ent, out TransformComponent? childXform) || childXform.GridUid == uid)
-                    {
                         continue;
-                    }
 
                     if (HasComp<AreaComponent>(ent))
                         continue;
