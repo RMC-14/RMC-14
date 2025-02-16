@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fix pistols from vends and guncases not starting with a magazine
-    type: Fix
-  id: 839
-  time: '2024-10-14T06:41:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4465
 - author: Dutch-VanDerLinde
   changes:
   - message: You no longer need to pull down a marine's mask to perform CPR on them
@@ -5173,5 +5166,12 @@
   id: 1338
   time: '2025-02-16T04:26:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5609
+- author: Djvarik
+  changes:
+  - message: Space dollars are now legal UN tender.
+    type: Tweak
+  id: 1339
+  time: '2025-02-16T04:30:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5601
 Name: RMC14
 Order: -1
