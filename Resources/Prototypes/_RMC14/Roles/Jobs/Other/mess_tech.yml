@@ -17,7 +17,7 @@
   startingGear: CMGearMessTech
   icon: "CMJobIconMessTech"
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-qm
+  supervisors: cm-job-supervisors-aso
   accessGroups:
   - MessTech
   minimapIcon:
