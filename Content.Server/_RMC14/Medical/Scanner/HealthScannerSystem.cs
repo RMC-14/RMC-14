@@ -3,6 +3,7 @@ using Content.Server.DoAfter;
 using Content.Server.Popups;
 using Content.Server.Storage.Components;
 using Content.Server.Temperature.Components;
+using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Scanner;
 using Content.Shared.Chemistry.Components;
@@ -25,6 +26,7 @@ public sealed class HealthScannerSystem : EntitySystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly DoAfterSystem _doAfter = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly CMHandsSystem _rmcHands = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -103,16 +105,6 @@ public sealed class HealthScannerSystem : EntitySystem
         UpdateUI(scanner);
     }
 
-    private void OnEquipped(Entity<HealthScannerComponent> scanner, ref GotEquippedHandEvent args)
-    {
-        scanner.Comp.InHand = true;
-    }
-
-    private void OnUnequipped(Entity<HealthScannerComponent> scanner, ref GotUnequippedHandEvent args)
-    {
-        scanner.Comp.InHand = false;
-    }
-
     /// <param name="scanner">The Health Scanner</param>
     /// <param name="user"> The entity using the Health Scanner</param>
     /// <param name="target">The entity being scanned by the Health Scanner. May be changed</param>
@@ -174,6 +166,9 @@ public sealed class HealthScannerSystem : EntitySystem
             return;
         }
 
+        if (!_rmcHands.TryGetHolder(scanner, out _))
+            return;
+
         FixedPoint2 blood = 0;
         FixedPoint2 maxBlood = 0;
         Solution? chemicals = null;
@@ -190,8 +185,7 @@ public sealed class HealthScannerSystem : EntitySystem
 
         var temperature = CompOrNull<TemperatureComponent>(target)?.CurrentTemperature;
         var bleeding = bloodstream is { BleedAmount: > 0 };
-        var state = new HealthScannerBuiState(GetNetEntity(target), scanner.Comp.InHand, blood, maxBlood, temperature, chemicals, bleeding);
-
+        var state = new HealthScannerBuiState(GetNetEntity(target), blood, maxBlood, temperature, chemicals, bleeding);
         _ui.SetUiState(scanner.Owner, HealthScannerUIKey.Key, state);
     }
 
