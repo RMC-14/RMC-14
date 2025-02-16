@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: FungiFellow
-  changes:
-  - message: Survivors are not allowed to Poach Monkies
-    type: Tweak
-  id: 848
-  time: '2024-10-16T05:07:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4490
-- author: FungiFellow
-  changes:
-  - message: Anti Monkey Poaching Rule has been re-worded
-    type: Tweak
-  id: 849
-  time: '2024-10-17T01:30:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4496
 - author: Vermidia
   changes:
   - message: You can no longer akimbo with two MOU53s
@@ -5174,5 +5160,24 @@
   id: 1347
   time: '2025-02-16T04:56:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5600
+- author: ShadowCommander
+  changes:
+  - message: You can use items in your hand on other items in storage. If there is
+      no interaction, it will insert the item instead.
+    type: Fix
+  id: 1348
+  time: '2025-02-16T05:09:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/2754
+- author: Ian321
+  changes:
+  - message: The plastic explosives crate now actually contains plastic explosives.
+    type: Fix
+  - message: The xeno tunnel list no longer lists destroyed tunnels.
+    type: Fix
+  - message: Fixed HE orbital warheads not destroying xeno tunnels.
+    type: Fix
+  id: 1349
+  time: '2025-02-16T05:10:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5616
 Name: RMC14
 Order: -1
