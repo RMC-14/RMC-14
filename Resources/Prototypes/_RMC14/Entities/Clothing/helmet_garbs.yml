@@ -1,0 +1,23 @@
+﻿- type: Tag
+  id: HelmetGarb
+
+- type: Tag
+  id: HelmetGarbNVGoggles
+
+- type: entity
+  parent: BaseItem
+  id: RMCHelmetGarbNightVision
+  name: old M2 night vision goggles
+  description: This pair has been gutted of all electronics and therefore not working. But hey, they make you feel tacticool, and that's all that matters, right?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/nv_goggles.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/nv_goggles.rsi
+    state: icon
+    size: Tiny
+  - type: Tag
+    tags:
+    - HelmetGarb
+    - HelmetGarbNVGoggles

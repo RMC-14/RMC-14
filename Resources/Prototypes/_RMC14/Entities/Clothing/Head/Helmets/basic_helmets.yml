@@ -7,10 +7,10 @@
   components:
   - type: Item
     size: Normal
-  - type: Storage #hopefully in the future someone smarter than me can add storage(?) for integrated things like netting, HUD, etc. but for now this is for hiding snacks
+  - type: Storage
     maxItemSize: Tiny
     grid:
-    - 0,0,3,1 # TODO RMC14 7, but 2 slots are reserved for garbs
+    - 0,0,7,1
     blacklist:
       tags:
       - Pouch
@@ -39,11 +39,11 @@
       tags:
       - CigPack
       - Cigarette
+      - HelmetGarb
 #      - TODO RMC14 cards
       - Slice
 #      - TODO RMC14 glasses (eyewear)
 #      - TODO RMC14 walkman and casettes
-#      - TODO RMC14 helmet garb
       - Pen
       - Crayon
       - RMCHandful
@@ -53,6 +53,16 @@
       - CMAutoInjector
       - PillPacket
   - type: FixedItemSizeStorage
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-helmet-garb
+      whitelist:
+        tags:
+        - HelmetGarb
+  - type: CMHolster
+    whitelist:
+      tags:
+      - HelmetGarb
   - type: InteractedBlacklist
     blacklist:
       components:
