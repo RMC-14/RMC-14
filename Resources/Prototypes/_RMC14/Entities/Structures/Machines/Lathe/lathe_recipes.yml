@@ -18,14 +18,14 @@
   result: CMLightTube
   completetime: 4
   materials:
-    CMGlass: 100 # 125
+    CMGlass: 3 # 125
 
 - type: latheRecipe
   id: CMLightBulb
   result: CMLightBulb
   completetime: 4
   materials:
-    CMGlass: 100 # 125
+    CMGlass: 3 # 125
 
 - type: latheRecipe
   id: CMHandLabeler
@@ -183,7 +183,7 @@
   result: CMBeaker
   completetime: 4
   materials:
-    CMGlass: 100 # 625
+    CMGlass: 17 # 625
 
 - type: latheRecipe
   id: CMBeakerLarge

@@ -117,7 +117,7 @@
   result: RMCPouchReagentCanister
   completetime: 4
   materials:
-    CMGlass: 100 # 2500
+    CMGlass: 67 # 2500
     RMCPlastic: 125 # 2500
 
 - type: latheRecipe
@@ -125,7 +125,7 @@
   result: RMCPressurizedCanister
   completetime: 4
   materials:
-    CMGlass: 100 # 2500
+    CMGlass: 67 # 2500
 
 - type: latheRecipe
   id: RMCMedicAutoInjectorEZ1
