@@ -17,6 +17,9 @@ public sealed partial class MapInsertComponent : Component
     public bool ClearEntities;
 
     [DataField]
+    public bool ClearDecals;
+
+    [DataField]
     public bool ReplaceAreas;
 
     [DataField]

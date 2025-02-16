@@ -1,4 +1,6 @@
 ﻿using System.Numerics;
+using Content.Server.Decals;
+using Content.Server.Spawners.EntitySystems;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Map;
 using Content.Shared.GameTicking;
@@ -26,6 +28,7 @@ public sealed class MapInsertSystem : EntitySystem
     [Dependency] private readonly GridFixtureSystem _fixture = default!;
     [Dependency] private readonly AreaSystem _areas = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly DecalSystem _decals = default!;
 
     private MapId? _map;
     private int _index;
@@ -37,7 +40,7 @@ public sealed class MapInsertSystem : EntitySystem
     {
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
-        SubscribeLocalEvent<MapInsertComponent, MapInitEvent>(OnMapInsertMapInit, before: [typeof(AreaSystem)]);
+        SubscribeLocalEvent<MapInsertComponent, MapInitEvent>(OnMapInsertMapInit, before: [typeof(ConditionalSpawnerSystem), typeof(AreaSystem)]);
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -76,6 +79,8 @@ public sealed class MapInsertSystem : EntitySystem
         var insertGrid = grids[0];
         var xform = Transform(ent);
         var mainGrid = xform.GridUid;
+        if (mainGrid == null)
+            return;
         var coordinates = _transform.GetMapCoordinates(ent, xform).Offset(new Vector2(-0.5f, -0.5f));
         coordinates = coordinates.Offset(ent.Comp.Offset);
         var coordinatesi = new Vector2i((int)coordinates.X, (int)coordinates.Y);
@@ -102,24 +107,22 @@ public sealed class MapInsertSystem : EntitySystem
 
         // Clear all entities on map in insert area
         _transform.SetMapCoordinates(insertGrid, coordinates);
-        if (ent.Comp.ClearEntities)
-        {
-            MapInsertSmimsh(insertGrid);
-        }
+        MapInsertSmimsh(insertGrid, (EntityUid)mainGrid, ent.Comp.ClearEntities, ent.Comp.ClearDecals);
 
         // Merge grids
-        if (mainGrid == null)
-            return;
         // Need to make sure the grid isn't overlapping where it's going to be merged to, otherwise exception
         _transform.SetMapCoordinates(insertGrid, coordinates.Offset(new Vector2(999f)));
+        //Decals not handled in Merge(), so do it here
         _fixture.Merge((EntityUid)mainGrid, insertGrid, coordinatesi, Angle.Zero);
 
         QueueDel(ent);
     }
 
-    private void MapInsertSmimsh(EntityUid uid,  FixturesComponent? manager = null, MapGridComponent? grid = null, TransformComponent? xform = null)
+    private void MapInsertSmimsh(EntityUid uid, EntityUid mainGridUid, bool clearEntities, bool clearDecals, FixturesComponent? manager = null, MapGridComponent? grid = null, TransformComponent? xform = null)
     {
         // This code is based on the Smimsh function for shuttle ftl, but we need some tweaks for our use-case
+        if (!(clearEntities || clearDecals))
+            return;
 
         if (!Resolve(uid, ref manager, ref grid, ref xform) || xform.MapUid == null)
             return;
@@ -154,23 +157,35 @@ public sealed class MapInsertSystem : EntitySystem
             // TODO: Ideally we'd query first BEFORE moving grid but needs adjustments above.
             _lookup.GetLocalEntitiesIntersecting(xform.MapUid.Value, aabb, _lookupEnts, flags: LookupFlags.Uncontained);
 
-            foreach (var ent in _lookupEnts)
+            if (clearEntities)
             {
-                if (ent == uid || _immuneEnts.Contains(ent))
+                foreach (var ent in _lookupEnts)
                 {
-                    continue;
-                }
+                    if (ent == uid || _immuneEnts.Contains(ent))
+                    {
+                        continue;
+                    }
 
-                // If it's on our grid ignore it.
-                if (!TryComp(ent, out TransformComponent? childXform) || childXform.GridUid == uid)
+                    // If it's on our grid ignore it.
+                    if (!TryComp(ent, out TransformComponent? childXform) || childXform.GridUid == uid)
+                    {
+                        continue;
+                    }
+
+                    if (HasComp<AreaComponent>(ent))
+                        continue;
+
+                    QueueDel(ent);
+                }
+            }
+
+            if (clearDecals)
+            {
+                var mainGridDecals = _decals.GetDecalsIntersecting(mainGridUid, aabb);
+                foreach (var decal in mainGridDecals)
                 {
-                    continue;
+                    _decals.RemoveDecal(mainGridUid, decal.Index);
                 }
-
-                if (HasComp<AreaComponent>(ent))
-                    continue;
-
-                QueueDel(ent);
             }
         }
     }
