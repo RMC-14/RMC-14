@@ -75,4 +75,10 @@ public sealed partial class ProjectileGrenadeComponent : Component
     /// </summary>
     [DataField]
     public float ProjectileSpeed = 20f;
+
+    /// <summary>
+    ///     If the projectiles spawned from the grenade will inherit the IFF targeting from the projectile grenade
+    /// </summary>
+    [DataField]
+    public bool InheritIFF;
 }

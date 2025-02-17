@@ -1,6 +1,7 @@
 ﻿using Content.Server.Explosion.Components;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
@@ -17,6 +18,7 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly TransformSystem _transformSystem = default!;
     [Dependency] private readonly TriggerSystem _trigger = default!;
+    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
 
     // RMC14
     private readonly List<EntityUid> _spawned = new();
@@ -84,6 +86,15 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
         _spawned.Clear();
         while (TrySpawnContents(grenadeCoord, component, out var contentUid))
         {
+            // Give the same IFF faction and enabled state to the projectiles shot from the grenade
+            if (component.InheritIFF)
+            {
+                if (TryComp(uid, out ProjectileIFFComponent? grenadeIFFComponent))
+                {
+                    _gunIFF.GiveAmmoIFF(contentUid, grenadeIFFComponent.Faction, grenadeIFFComponent.Enabled);
+                }
+            }
+
             Angle angle;
             if (component.RandomAngle)
                 angle = _random.NextAngle();
