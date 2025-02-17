@@ -323,6 +323,8 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentM54CStockSolidMarksman
+  - type: ItemCamouflage # TODO RMC14
+    camouflageVariations: null
 
 - type: entity
   parent: RMCStockAttachmentCollapsibleBase
@@ -394,12 +396,13 @@
     camouflageVariations: { }
 
 - type: entity
-  parent: RMCStockAttachmentBase
+  parent: RMCAttachableBase
   id: RMCAttachmentM16Stock
   name: M16 bump stock
   description: Technically illegal in the state of California.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
     state: m16-stock
   - type: AttachableVisuals
     suffix: ""
@@ -407,9 +410,6 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentM16Stock
-  - type: AttachableWieldDelayMods
-    modifiers:
-    - delay: 0.1
 
 - type: entity
   parent: RMCStockAttachmentBase

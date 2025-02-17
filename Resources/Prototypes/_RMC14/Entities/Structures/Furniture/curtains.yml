@@ -4,6 +4,8 @@
   name: curtain
   abstract: true
   components:
+  - type: InteractionOutline
+  - type: Clickable
   - type: Destructible
     thresholds:
     - trigger:

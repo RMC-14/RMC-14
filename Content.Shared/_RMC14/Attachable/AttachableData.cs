@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Weapons.Ranged.Components;
@@ -7,12 +8,25 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Attachable;
 
-[DataRecord, Serializable, NetSerializable]
-public record struct AttachableSlot(
-    bool Locked,
-    EntityWhitelist Whitelist,
-    ProtoId<EntityPrototype>? StartingAttachable
-);
+[DataDefinition]
+[Serializable, NetSerializable]
+public partial struct AttachableSlot()
+{
+    [DataField]
+    public bool Locked;
+
+    [DataField]
+    public EntityWhitelist? Whitelist;
+
+    [DataField]
+    public EntProtoId<AttachableComponent>? StartingAttachable;
+
+    [DataField]
+    public List<EntProtoId<AttachableComponent>>? Random;
+
+    [DataField]
+    public float RandomChance = 1f;
+}
 
 [DataRecord, Serializable, NetSerializable]
 public record struct AttachableModifierConditions(

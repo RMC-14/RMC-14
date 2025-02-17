@@ -97,6 +97,7 @@
   - type: PowerLoaderGrabbable
     virtualRight: RMCVirtualCrateRight
     virtualLeft: RMCVirtualCrateLeft
+  - type: RMCCanBeFultoned
 
 - type: entity
   parent: BaseStructureDynamic

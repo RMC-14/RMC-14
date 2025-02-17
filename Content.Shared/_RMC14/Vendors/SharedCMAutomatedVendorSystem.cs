@@ -217,6 +217,17 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
             Dirty(actor, user);
         }
+        if (section.TakeOne is { } takeOne)
+        {
+            user = EnsureComp<CMVendorUserComponent>(actor);
+            if (!user.TakeOne.Add(takeOne))
+            {
+                Log.Error($"{ToPrettyString(actor)} tried to buy too many take-ones.");
+                return;
+            }
+
+            Dirty(actor, user);
+        }
 
         var validJob = true;
         if (_mind.TryGetMind(args.Actor, out var mindId, out _))
@@ -267,6 +278,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         {
             if (section.Choices is { } choices && user != null)
                 user.Choices[choices.Id]--;
+            if (section.TakeOne is { } takeOne && user != null)
+                user.TakeOne.Remove(takeOne);
         }
 
         if (section.SharedSpecLimit is { } globalLimit)
@@ -488,7 +501,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             {
                 if (slot.ContainedEntity is { } contained &&
                     TryComp(contained, out WebbingClothingComponent? clothing) &&
-                    _webbing.Attach((contained, clothing), item))
+                    _webbing.Attach((contained, clothing), item, player, out _))
                 {
                     return true;
                 }
@@ -533,14 +546,19 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     private int GetBoxRemoveAmount(CMVendorEntry entry)
     {
-        if (!_prototypes.TryIndex(entry.Id, out var boxProto) ||
-            !boxProto.TryGetComponent(out CMItemSlotsComponent? slots, _compFactory) ||
-            slots.Count is not { } count)
+        if (entry.BoxSlots is not { } boxSlots)
         {
-            return 1;
+            if (!_prototypes.TryIndex(entry.Id, out var boxProto) ||
+                !boxProto.TryGetComponent(out CMItemSlotsComponent? slots, _compFactory) ||
+                slots.Count is not { } count)
+            {
+                return 1;
+            }
+
+            boxSlots = count;
         }
 
-        var amount = count;
+        var amount = boxSlots;
         if (entry.BoxAmount is { } boxAmount)
             amount = boxAmount;
 

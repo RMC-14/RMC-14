@@ -2,7 +2,7 @@
   parent: ActionXenoBase
   id: ActionXenoAcidNormal
   name: Corrosive Acid (100)  # TODO RMC14 proper plasma costs
-  description: Melts down a structure over time.
+  description: Melts down a structure or item over time.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
@@ -21,7 +21,7 @@
   parent: ActionXenoAcidNormal
   id: ActionXenoAcidWeak
   name: Weak Corrosive Acid (75)  # TODO RMC14 proper plasma costs
-  description: Melts down a structure over time.
+  description: Melts down a structure or item over time.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
@@ -40,7 +40,7 @@
   parent: ActionXenoAcidNormal
   id: ActionXenoAcidStrong
   name: Strong Corrosive Acid (125)  # TODO RMC14 proper plasma costs
-  description: Melts down a structure over time.
+  description: Melts down a structure or item over time.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
@@ -668,7 +668,7 @@
     ids:
     - ActionXenoCleaveFling
     cooldown: 12
-  
+
 - type: entity
   parent: ActionXenoBase
   id: ActionXenoCleaveFling

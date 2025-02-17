@@ -1,6 +1,6 @@
 ﻿- type: entity
   parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
-  name: M42A2 Pump Shotgun
+  name: M42A2 pump shotgun
   id: WeaponShotgunM42A2
   description: An Aegis Battlefield Armaments classic design, the M42A2 combines close-range firepower with long term reliability. Needs to be pumped.
   components:
@@ -70,6 +70,7 @@
   - type: Tag
     tags:
     - RMCWeaponShotgunM42A2
+    - RMCWeaponShotgun
 
 - type: Tag
   id: RMCWeaponShotgunM42A2

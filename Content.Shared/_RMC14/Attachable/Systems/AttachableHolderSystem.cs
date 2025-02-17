@@ -26,6 +26,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
+using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Attachable.Systems;
 
@@ -38,6 +39,7 @@ public sealed class AttachableHolderSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedVerbSystem _verbSystem = default!;
 
@@ -128,16 +130,26 @@ public sealed class AttachableHolderSystem : EntitySystem
     {
         var xform = Transform(holder.Owner);
         var coords = new EntityCoordinates(holder.Owner, Vector2.Zero);
+        var doRandom = _random.Prob(holder.Comp.RandomAttachmentChance);
 
         foreach (var slotId in holder.Comp.Slots.Keys)
         {
-            if (holder.Comp.Slots[slotId].StartingAttachable == null)
+            var slot = holder.Comp.Slots[slotId];
+            var attachment = slot.StartingAttachable;
+            if (doRandom &&
+                slot.Random is { Count: > 0 } random &&
+                _random.Prob(slot.RandomChance))
+            {
+                attachment = _random.Pick(random);
+            }
+
+            if (attachment == null)
                 continue;
 
             var container = _container.EnsureContainer<ContainerSlot>(holder, slotId);
             container.OccludesLight = false;
 
-            var attachableUid = Spawn(holder.Comp.Slots[slotId].StartingAttachable, coords);
+            var attachableUid = Spawn(attachment, coords);
             if (!_container.Insert(attachableUid, container, containerXform: xform))
                 continue;
         }

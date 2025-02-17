@@ -15,6 +15,8 @@
   - type: RMCNightVisionVisible
     priority: -1
     transparency: 0.2
+  - type: DestroyedByExplosionType
+    explosion: RMCOBXenoTunnel
   - type: XenoTunnel
   - type: XenoMapTracked
   - type: TacticalMapTracked

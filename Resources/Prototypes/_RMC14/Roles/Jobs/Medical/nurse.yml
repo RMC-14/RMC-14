@@ -67,10 +67,7 @@
   - type: SpawnPoint
     job_id: CMNurse
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: nurse
+    state: nur_spawn
 
 - type: playTimeTracker
   id: CMJobNurse

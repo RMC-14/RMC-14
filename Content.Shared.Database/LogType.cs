@@ -473,4 +473,5 @@ public enum LogType
     RMCSquadCreated = RMCMarineAnnounce + 25,
     RMCFireteam = RMCMarineAnnounce + 26,
     RMCAlertLevel = RMCMarineAnnounce + 27,
+    RMCSpawnJob = RMCMarineAnnounce + 28,
 }

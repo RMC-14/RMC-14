@@ -256,17 +256,32 @@
       Classic: _RMC14/Objects/Clothing/Uniforms/boiler/classic.rsi
       Urban: _RMC14/Objects/Clothing/Uniforms/boiler/urban.rsi
 
+# Auxiliary
 # IO
 - type: entity
-  parent: RMCMarineUniformBase
-  id: CMJumpsuitIO
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  id: RMCUniformIntel
   name: marine intelligence officer uniform
   description: Tighter than a vice. Slicker than beard oil. Covered from head to toe in pouches, pockets, bags, straps, and belts. Clearly, you are not only the most intelligent of intelligence officers, but the most fashionable as well. This suit took an entire R&D team five days to develop. It is more expensive than the entire Almayer... probably.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/intel/jungle.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/intel/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/intel/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/intel/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/intel/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/intel/urban.rsi
+  - type: Tag
+    tags:
+    - RMCUniformIntel
 
-# Auxiliary
+- type: Tag
+  id: RMCUniformIntel
 
 # Pilot
 - type: entity
