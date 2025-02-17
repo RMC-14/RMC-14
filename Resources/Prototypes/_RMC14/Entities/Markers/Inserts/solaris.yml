@@ -1,5 +1,6 @@
 ﻿# Solaris
 - type: entity
+  abstract: true
   parent: RMCMapInsertBase
   id: RMCMapInsertSolarisBase
   suffix: Insert Solaris
