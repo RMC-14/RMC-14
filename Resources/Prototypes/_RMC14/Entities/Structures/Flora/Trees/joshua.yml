@@ -2,7 +2,7 @@
   parent: RMCBaseTree
   id: RMCTreeJoshua
   name: joshua tree
-  desctiption: A tall tree covered in spiky-like needles, covering its trunk.
+  description: A tall tree covered in spiky-like needles, covering its trunk.
   placement:
     mode: SnapgridBorder
   components:
