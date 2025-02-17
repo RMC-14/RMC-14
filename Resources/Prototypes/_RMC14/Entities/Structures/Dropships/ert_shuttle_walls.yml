@@ -520,9 +520,9 @@
   suffix: 14
   components:
   - type: Sprite
-    state: weya_wall_20
+    state: weya_wall_18
   - type: Icon
-    state: weya_wall_20
+    state: weya_wall_18
 
 - type: entity
   parent: RMCERTShuttleWallWeYa
@@ -530,9 +530,9 @@
   suffix: 15
   components:
   - type: Sprite
-    state: weya_wall_21
+    state: weya_wall_19
   - type: Icon
-    state: weya_wall_21
+    state: weya_wall_19
 
 - type: entity
   parent: RMCERTShuttleWallWeYa
@@ -540,9 +540,9 @@
   suffix: 16
   components:
   - type: Sprite
-    state: weya_wall_22
+    state: weya_wall_20
   - type: Icon
-    state: weya_wall_22
+    state: weya_wall_20
 
 - type: entity
   parent: RMCERTShuttleWallWeYa
@@ -550,14 +550,34 @@
   suffix: 17
   components:
   - type: Sprite
+    state: weya_wall_21
+  - type: Icon
+    state: weya_wall_21
+
+- type: entity
+  parent: RMCERTShuttleWallWeYa
+  id: RMCERTShuttleWallWeYa18
+  suffix: 18
+  components:
+  - type: Sprite
+    state: weya_wall_22
+  - type: Icon
+    state: weya_wall_22
+
+- type: entity
+  parent: RMCERTShuttleWallWeYa
+  id: RMCERTShuttleWallWeYa19
+  suffix: 19
+  components:
+  - type: Sprite
     state: weya_wall_23
   - type: Icon
     state: weya_wall_23
 
 - type: entity
   parent: RMCERTShuttleWallWeYa
-  id: RMCERTShuttleWallWeYa18
-  suffix: 18
+  id: RMCERTShuttleWallWeYa20
+  suffix: 20
   components:
   - type: Sprite
     state: weya_wall_25
@@ -566,8 +586,8 @@
 
 - type: entity
   parent: RMCERTShuttleWallWeYa
-  id: RMCERTShuttleWallWeYa19
-  suffix: 19
+  id: RMCERTShuttleWallWeYa21
+  suffix: 21
   components:
   - type: Sprite
     state: weya_wall_27
