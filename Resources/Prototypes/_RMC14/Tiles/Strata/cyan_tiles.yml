@@ -10,12 +10,12 @@
   sprite: /Textures/_RMC14/Tiles/strata/cyan1.png
 
 - type: tile
-  parent: CMFloorStrataCyan1
+  parent: CMFloorStrataCyan01
   id: CMFloorStrataCyan02
   sprite: /Textures/_RMC14/Tiles/strata/cyan2.png
 
 - type: tile
-  parent: CMFloorStrataCyan1
+  parent: CMFloorStrataCyan01
   id: CMFloorStrataCyan1
   sprite: /Textures/_RMC14/Tiles/strata/cyan_1.png
 
