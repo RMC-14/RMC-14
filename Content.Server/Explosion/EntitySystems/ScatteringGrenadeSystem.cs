@@ -5,7 +5,12 @@ using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
 using System.Numerics;
+using Content.Server.Light.EntitySystems;
 using Content.Shared.Explosion.EntitySystems;
+using Content.Shared.Item.ItemToggle;
+using Content.Shared.Light.Components;
+using Content.Shared.Physics;
+using Robust.Shared.Physics.Events;
 
 namespace Content.Server.Explosion.EntitySystems;
 
@@ -15,12 +20,15 @@ public sealed class ScatteringGrenadeSystem : SharedScatteringGrenadeSystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
     [Dependency] private readonly TransformSystem _transformSystem = default!;
+    [Dependency] private readonly ItemToggleSystem _toggle = default!;
+    [Dependency] private readonly ExpendableLightSystem _light = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<ScatteringGrenadeComponent, TriggerEvent>(OnScatteringTrigger);
+        SubscribeLocalEvent<ScatteringGrenadeComponent, StartCollideEvent>(OnStartCollide);
     }
 
     /// <summary>
@@ -32,6 +40,15 @@ public sealed class ScatteringGrenadeSystem : SharedScatteringGrenadeSystem
     {
         entity.Comp.IsTriggered = true;
         args.Handled = true;
+    }
+
+    /// <summary>
+    /// Triggers the scattering grenade if it collides with a wall
+    /// </summary>
+    private void OnStartCollide(Entity<ScatteringGrenadeComponent> entity, ref StartCollideEvent args)
+    {
+        if ((args.OtherFixture.CollisionLayer & (int) (CollisionGroup.Impassable | CollisionGroup.HighImpassable)) != 0 && entity.Comp.TriggerOnWallCollide)
+            entity.Comp.IsTriggered = true;
     }
 
     /// <summary>
@@ -84,6 +101,14 @@ public sealed class ScatteringGrenadeSystem : SharedScatteringGrenadeSystem
                         var ev = new ActiveTimerTriggerEvent(contentUid, uid);
                         RaiseLocalEvent(contentUid, ref ev);
                     }
+
+                    if (!component.ToggleContents)
+                        continue;
+
+                    _toggle.TryActivate(contentUid);
+
+                    if (TryComp(contentUid, out ExpendableLightComponent? expendableLightComponent))
+                        _light.TryActivate((contentUid,expendableLightComponent));
                 }
 
                 // Normally we'd use DeleteOnTrigger but because we need to wait for the frame update

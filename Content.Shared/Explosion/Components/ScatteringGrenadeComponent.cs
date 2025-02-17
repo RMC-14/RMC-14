@@ -42,6 +42,18 @@ public sealed partial class ScatteringGrenadeComponent : Component
     [DataField]
     public bool TriggerContents = true;
 
+    /// <summary>
+    /// Decides if contained entities get toggled after getting launched
+    /// </summary>
+    [DataField]
+    public bool ToggleContents;
+
+    /// <summary>
+    /// Triggers the grenade if it collides with impassable entities
+    /// </summary>
+    [DataField]
+    public bool TriggerOnWallCollide;
+
     #region Trigger time parameters for scattered entities
     /// <summary>
     ///  Minimum delay in seconds before any entities start to be triggered.

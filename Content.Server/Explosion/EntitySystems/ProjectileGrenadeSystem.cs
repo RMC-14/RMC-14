@@ -1,9 +1,11 @@
 ﻿using Content.Server.Explosion.Components;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared.Weapons.Ranged.Events;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Random;
 
 namespace Content.Server.Explosion.EntitySystems;
@@ -14,6 +16,7 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly TransformSystem _transformSystem = default!;
+    [Dependency] private readonly TriggerSystem _trigger = default!;
 
     // RMC14
     private readonly List<EntityUid> _spawned = new();
@@ -25,6 +28,7 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
         SubscribeLocalEvent<ProjectileGrenadeComponent, ComponentInit>(OnFragInit);
         SubscribeLocalEvent<ProjectileGrenadeComponent, ComponentStartup>(OnFragStartup);
         SubscribeLocalEvent<ProjectileGrenadeComponent, TriggerEvent>(OnFragTrigger);
+        SubscribeLocalEvent<ProjectileGrenadeComponent, StartCollideEvent>(OnStartCollide);
     }
 
     private void OnFragInit(Entity<ProjectileGrenadeComponent> entity, ref ComponentInit args)
@@ -41,6 +45,19 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
             return;
 
         entity.Comp.UnspawnedCount = Math.Max(0, entity.Comp.Capacity - entity.Comp.Container.ContainedEntities.Count);
+    }
+
+    /// <summary>
+    /// Reverses the payload shooting direction if the projectile grenade collides with an entity
+    /// </summary>
+    private void OnStartCollide(Entity<ProjectileGrenadeComponent> entity, ref StartCollideEvent args)
+    {
+        if (!entity.Comp.Rebounds)
+            return;
+
+        //Shoot the payload backwards if colliding with an entity
+        entity.Comp.DirectionAngle += entity.Comp.ReboundAngle;
+        _trigger.Trigger(entity);
     }
 
     /// <summary>
@@ -62,7 +79,7 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
         var shootCount = 0;
         var totalCount = component.Container.ContainedEntities.Count + component.UnspawnedCount;
         var segmentAngle = component.SpreadAngle / totalCount;
-        var projectileRotation = _transformSystem.GetMoverCoordinateRotation(uid, Transform(uid)).worldRot.Degrees - 90;
+        var projectileRotation = _transformSystem.GetMoverCoordinateRotation(uid, Transform(uid)).worldRot.Degrees + component.DirectionAngle;
 
         _spawned.Clear();
         while (TrySpawnContents(grenadeCoord, component, out var contentUid))
@@ -88,6 +105,11 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
 
         var clusterEv = new CMClusterSpawnedEvent(_spawned);
         RaiseLocalEvent(uid, ref clusterEv);
+        RaiseLocalEvent(uid,
+            new AmmoShotEvent
+            {
+                FiredProjectiles = _spawned,
+            });
         QueueDel(uid);
     }
 

@@ -29,6 +29,24 @@ public sealed partial class ProjectileGrenadeComponent : Component
     public int Capacity = 3;
 
     /// <summary>
+    ///     Decides if the grenade will shoot it's payload backwards when colliding.
+    /// </summary>
+    [DataField]
+    public bool Rebounds;
+
+    /// <summary>
+    ///     Adjust the shooting direction, -90 is the front, 90 is the back.
+    /// </summary>
+    [DataField]
+    public float DirectionAngle = -90;
+
+    /// <summary>
+    ///     The degrees added to the direction angle when the grenade rebounds
+    /// </summary>
+    [DataField]
+    public float ReboundAngle = 180;
+
+    /// <summary>
     ///     Should the angle of the projectiles be uneven?
     /// </summary>
     [DataField]
