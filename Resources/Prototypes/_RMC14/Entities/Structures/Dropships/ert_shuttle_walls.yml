@@ -11,7 +11,7 @@
   - type: Icon
     sprite: _RMC14/Structures/Dropships/ert_shuttle.rsi
 
-#ERT Shuttle Engines
+#Base Shuttle Engines
 
 - type: entity
   abstract: true
