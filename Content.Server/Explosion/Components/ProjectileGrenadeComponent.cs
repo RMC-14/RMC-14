@@ -45,4 +45,16 @@ public sealed partial class ProjectileGrenadeComponent : Component
     /// </summary>
     [DataField]
     public float MaxVelocity = 6f;
+
+    /// <summary>
+    ///     The angle of the projectile spray
+    /// </summary>
+    [DataField]
+    public float SpreadAngle = 360;
+
+    /// <summary>
+    ///     The speed of the projectile
+    /// </summary>
+    [DataField]
+    public float ProjectileSpeed = 20f;
 }

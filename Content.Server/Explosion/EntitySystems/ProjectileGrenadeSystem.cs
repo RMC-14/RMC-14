@@ -61,7 +61,8 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
         var grenadeCoord = _transformSystem.GetMapCoordinates(uid);
         var shootCount = 0;
         var totalCount = component.Container.ContainedEntities.Count + component.UnspawnedCount;
-        var segmentAngle = 360 / totalCount;
+        var segmentAngle = component.SpreadAngle / totalCount;
+        var projectileRotation = _transformSystem.GetMoverCoordinateRotation(uid, Transform(uid)).worldRot.Degrees - 90;
 
         _spawned.Clear();
         while (TrySpawnContents(grenadeCoord, component, out var contentUid))
@@ -71,9 +72,9 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
                 angle = _random.NextAngle();
             else
             {
-                var angleMin = segmentAngle * shootCount;
-                var angleMax = segmentAngle * (shootCount + 1);
-                angle = Angle.FromDegrees(_random.Next(angleMin, angleMax));
+                var angleMin = projectileRotation - component.SpreadAngle / 2 + segmentAngle * shootCount;
+                var angleMax = projectileRotation - component.SpreadAngle / 2 + segmentAngle * (shootCount + 1);
+                angle = Angle.FromDegrees(_random.Next((int)angleMin, (int)angleMax));
                 shootCount++;
             }
 
@@ -81,7 +82,7 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
             // slightly uneven, doesn't really change much, but it looks better
             var direction = angle.ToVec().Normalized();
             var velocity = _random.NextVector2(component.MinVelocity, component.MaxVelocity);
-            _gun.ShootProjectile(contentUid, direction, velocity, uid, null);
+            _gun.ShootProjectile(contentUid, direction, velocity, uid, null, component.ProjectileSpeed);
             _spawned.Add(contentUid);
         }
 
