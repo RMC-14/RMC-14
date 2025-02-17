@@ -14,19 +14,19 @@
       "name": "slice"
     },
     {
-      "name": "pizza_inhand-left",
+      "name": "pizza-inhand-left",
       "directions": 4
     },
     {
-      "name": "slice_inhand-left",
+      "name": "slice-inhand-left",
       "directions": 4
     },
     {
-      "name": "pizza_inhand-right",
+      "name": "pizza-inhand-right",
       "directions": 4
     },
     {
-      "name": "slice_inhand-right",
+      "name": "slice-inhand-right",
       "directions": 4
     }
   ]

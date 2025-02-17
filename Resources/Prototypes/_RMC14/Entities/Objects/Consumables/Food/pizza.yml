@@ -64,6 +64,8 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/Pizza/margherita.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/Pizza/margherita.rsi
   - type: FlavorProfile
     flavors:
     - cheesy
