@@ -880,6 +880,6 @@
 
 - type: tile
   parent: CMPlanetBase
-  id: RMCPlanetTatami
+  id: CMPlanetTatami
   name: tatami flooring
   sprite: /Textures/_RMC14/Tiles/planet/interior/tatami.png
