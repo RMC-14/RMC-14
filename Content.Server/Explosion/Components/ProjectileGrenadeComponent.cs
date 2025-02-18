@@ -71,6 +71,12 @@ public sealed partial class ProjectileGrenadeComponent : Component
     public float SpreadAngle = 360;
 
     /// <summary>
+    ///     Determines if the spread will be uniform.
+    /// </summary>
+    [DataField]
+    public bool EvenSpread;
+
+    /// <summary>
     ///     The speed of the projectile
     /// </summary>
     [DataField]

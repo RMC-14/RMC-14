@@ -95,16 +95,19 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
                 }
             }
 
+            var angleMin = projectileRotation - component.SpreadAngle / 2 + segmentAngle * shootCount;
+            var angleMax = projectileRotation - component.SpreadAngle / 2 + segmentAngle * (shootCount + 1);
+
             Angle angle;
             if (component.RandomAngle)
                 angle = _random.NextAngle();
+            else if (component.EvenSpread)
+                angle = Angle.FromDegrees((angleMin + angleMax) / 2);
             else
             {
-                var angleMin = projectileRotation - component.SpreadAngle / 2 + segmentAngle * shootCount;
-                var angleMax = projectileRotation - component.SpreadAngle / 2 + segmentAngle * (shootCount + 1);
                 angle = Angle.FromDegrees(_random.Next((int)angleMin, (int)angleMax));
-                shootCount++;
             }
+            shootCount++;
 
             // velocity is randomized to make the projectiles look
             // slightly uneven, doesn't really change much, but it looks better

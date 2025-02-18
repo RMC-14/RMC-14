@@ -73,6 +73,7 @@ public sealed class CMGunSystem : EntitySystem
         _projectileQuery = GetEntityQuery<ProjectileComponent>();
 
         SubscribeLocalEvent<ShootAtFixedPointComponent, AmmoShotEvent>(OnShootAtFixedPointShot);
+        SubscribeLocalEvent<IgnoreArcComponent, BeforeArcEvent>(OnBeforeArc);
 
         SubscribeLocalEvent<RMCWeaponDamageFalloffComponent, AmmoShotEvent>(OnWeaponDamageFalloffShot);
         SubscribeLocalEvent<RMCWeaponDamageFalloffComponent, GunRefreshModifiersEvent>(OnWeaponDamageFalloffRefreshModifiers);
@@ -180,6 +181,13 @@ public sealed class CMGunSystem : EntitySystem
             _physics.SetLinearVelocity(projectile, Vector2.Zero, body: physics);
             _physics.ApplyLinearImpulse(projectile, impulse, body: physics);
             _physics.SetBodyStatus(projectile, physics, BodyStatus.InAir);
+
+            // Check if the fixed distance should be disabled.
+            var ev = new BeforeArcEvent();
+            RaiseLocalEvent(projectile, ref ev);
+
+            if(ev.Cancelled)
+                return;
 
             // Apply the ProjectileFixedDistanceComponent onto each fired projectile, which both holds the FlyEndTime to be continually checked
             // and will trigger the OnEventToStopProjectile function once the PFD Component is deleted at that time. See Update()
@@ -762,6 +770,12 @@ public sealed class CMGunSystem : EntitySystem
             return;
 
         RemCompDeferred<AssistedReloadReceiverComponent>(wielder);
+    }
+
+    // Do not arc the projectile if it has the IgnoreArcComponent
+    private void OnBeforeArc(Entity<IgnoreArcComponent> ent, ref BeforeArcEvent args)
+    {
+        args.Cancelled = true;
     }
 }
 
