@@ -1,7 +1,9 @@
 ﻿using Content.Shared.Explosion.Components;
 using Content.Shared.Interaction;
+using Content.Shared.Physics;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
+using Robust.Shared.Physics.Events;
 
 namespace Content.Shared.Explosion.EntitySystems;
 
@@ -18,11 +20,21 @@ public abstract class SharedScatteringGrenadeSystem : EntitySystem
         SubscribeLocalEvent<ScatteringGrenadeComponent, ComponentInit>(OnScatteringInit);
         SubscribeLocalEvent<ScatteringGrenadeComponent, ComponentStartup>(OnScatteringStartup);
         SubscribeLocalEvent<ScatteringGrenadeComponent, InteractUsingEvent>(OnScatteringInteractUsing);
+        SubscribeLocalEvent<ScatteringGrenadeComponent, StartCollideEvent>(OnStartCollide);
     }
 
     private void OnScatteringInit(Entity<ScatteringGrenadeComponent> entity, ref ComponentInit args)
     {
         entity.Comp.Container = _container.EnsureContainer<Container>(entity.Owner, "cluster-payload");
+    }
+
+    /// <summary>
+    /// Triggers the scattering grenade if it collides with a wall
+    /// </summary>
+    private void OnStartCollide(Entity<ScatteringGrenadeComponent> entity, ref StartCollideEvent args)
+    {
+        if ((args.OtherFixture.CollisionLayer & (int) (CollisionGroup.Impassable | CollisionGroup.HighImpassable)) != 0 && entity.Comp.TriggerOnWallCollide)
+            entity.Comp.IsTriggered = true;
     }
 
     /// <summary>

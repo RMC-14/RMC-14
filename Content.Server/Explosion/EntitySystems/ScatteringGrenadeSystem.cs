@@ -9,8 +9,6 @@ using Content.Server.Light.EntitySystems;
 using Content.Shared.Explosion.EntitySystems;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Light.Components;
-using Content.Shared.Physics;
-using Robust.Shared.Physics.Events;
 
 namespace Content.Server.Explosion.EntitySystems;
 
@@ -28,7 +26,6 @@ public sealed class ScatteringGrenadeSystem : SharedScatteringGrenadeSystem
         base.Initialize();
 
         SubscribeLocalEvent<ScatteringGrenadeComponent, TriggerEvent>(OnScatteringTrigger);
-        SubscribeLocalEvent<ScatteringGrenadeComponent, StartCollideEvent>(OnStartCollide);
     }
 
     /// <summary>
@@ -40,15 +37,6 @@ public sealed class ScatteringGrenadeSystem : SharedScatteringGrenadeSystem
     {
         entity.Comp.IsTriggered = true;
         args.Handled = true;
-    }
-
-    /// <summary>
-    /// Triggers the scattering grenade if it collides with a wall
-    /// </summary>
-    private void OnStartCollide(Entity<ScatteringGrenadeComponent> entity, ref StartCollideEvent args)
-    {
-        if ((args.OtherFixture.CollisionLayer & (int) (CollisionGroup.Impassable | CollisionGroup.HighImpassable)) != 0 && entity.Comp.TriggerOnWallCollide)
-            entity.Comp.IsTriggered = true;
     }
 
     /// <summary>
