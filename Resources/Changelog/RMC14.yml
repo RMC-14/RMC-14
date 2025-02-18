@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: TsjipTsjip
-  changes:
-  - message: Marine icon command.
-    type: Add
-  id: 857
-  time: '2024-10-18T02:34:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4480
 - author: TeaTotalTemplar
   changes:
   - message: Added the M60 General Purpose Machinegun and associated box magazine.
@@ -5159,5 +5152,12 @@
   id: 1357
   time: '2025-02-18T22:20:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5650
+- author: Djvarik
+  changes:
+  - message: Added missing trash carts in casino alley in Chance's
+    type: Fix
+  id: 1358
+  time: '2025-02-18T22:22:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5656
 Name: RMC14
 Order: -1
