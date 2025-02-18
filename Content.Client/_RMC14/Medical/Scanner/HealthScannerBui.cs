@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using Content.Client._RMC14.Medical.HUD;
 using Content.Client.Message;
-using Content.Client.Stylesheets;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.HUD;
 using Content.Shared._RMC14.Medical.HUD.Components;
@@ -26,7 +25,7 @@ using Robust.Shared.Utility;
 namespace Content.Client._RMC14.Medical.Scanner;
 
 [UsedImplicitly]
-public sealed class HealthScannerBoundUserInterface : BoundUserInterface
+public sealed class HealthScannerBui : BoundUserInterface
 {
     [Dependency] private readonly IEntityManager _entities = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
@@ -41,7 +40,7 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
     private readonly SharedWoundsSystem _wounds;
     private readonly SharedRottingSystem _rot;
 
-    public HealthScannerBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+    public HealthScannerBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _holocardIcons = _entities.System<ShowHolocardIconsSystem>();
         _skills = _entities.System<SkillsSystem>();
@@ -71,6 +70,7 @@ public sealed class HealthScannerBoundUserInterface : BoundUserInterface
 
         if (_entities.GetEntity(uiState.Target) is not { Valid: true } target)
             return;
+
         _lastTarget = uiState.Target;
 
         _window.PatientLabel.Text = $"Patient: {Identity.Name(target, _entities, _player.LocalEntity)}";

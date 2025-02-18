@@ -141,5 +141,5 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public TimeSpan RoundEndCheckDelay = TimeSpan.FromMinutes(1);
 
     [DataField]
-    public ResPath Thunderdome = new("Maps/_RMC14/thunderdome.yml");
+    public ResPath Thunderdome = new("/Maps/_RMC14/thunderdome.yml");
 }

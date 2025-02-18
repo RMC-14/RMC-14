@@ -49,6 +49,7 @@
   - type: ContainerContainer
     containers:
       pouch: !type:ContainerSlot
+      storagebase: !type:Container
   - type: ItemSlots
     slots:
       pouch:

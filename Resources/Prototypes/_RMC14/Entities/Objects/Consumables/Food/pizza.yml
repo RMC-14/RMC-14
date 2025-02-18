@@ -1,0 +1,6 @@
+﻿- type: entity
+  parent: FoodBoxPizzaFilled
+  id: RMCFoodBoxPizzaFilled # TODO RMC14 sprites
+  components:
+  - type: Item
+    size: Normal

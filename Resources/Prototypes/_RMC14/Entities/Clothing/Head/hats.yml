@@ -428,7 +428,7 @@
       SquadDelta: RMCHeadBeretSquadDelta
       SquadEcho: RMCHeadBeretSquadEcho
       SquadFoxtrot: RMCHeadBeretSquadFoxtrot
-      # TODO SquadIntel: RMCHeadBeretSquadIntel
+      SquadIntel: RMCHeadBeretSquadIntel
 
 - type: entity
   parent: CMHeadBeret
