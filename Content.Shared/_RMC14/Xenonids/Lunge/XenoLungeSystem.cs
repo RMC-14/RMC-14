@@ -71,7 +71,7 @@ public sealed class XenoLungeSystem : EntitySystem
         xeno.Comp.Charge = diff;
         Dirty(xeno);
 
-        _throwing.TryThrow(xeno, diff, 10, animated: false);
+        _throwing.TryThrow(xeno, diff, 30, animated: false);
 
         if (!_physicsQuery.TryGetComponent(xeno, out var physics))
             return;
