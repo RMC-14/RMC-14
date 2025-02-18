@@ -568,7 +568,7 @@
   description: It's specifically made to hold engineering items. Requires engineering skills to use effectively.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Pouches/construction.rsi
+    sprite: _RMC14/Objects/Clothing/Pouches/engineerpouch.rsi
   - type: Storage
     maxItemSize: Normal
     grid:
