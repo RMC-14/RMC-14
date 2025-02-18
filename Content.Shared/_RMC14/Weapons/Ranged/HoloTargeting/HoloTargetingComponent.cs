@@ -18,8 +18,8 @@ public sealed partial class HoloTargetingComponent : Component
     public float MaxStacks = 100f;
 
     /// <summary>
-    ///     The duration of the applied holo stacks
+    ///     The decay rate of the applied holo stacks
     /// </summary>
     [DataField]
-    public float Duration = 5f;
+    public float Decay = 5f;
 }

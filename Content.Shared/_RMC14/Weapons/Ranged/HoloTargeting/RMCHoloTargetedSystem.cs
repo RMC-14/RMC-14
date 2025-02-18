@@ -5,10 +5,6 @@ namespace Content.Shared._RMC14.Weapons.Ranged.HoloTargeting;
 
 public sealed class RMCHoloTargetedSystem : EntitySystem
 {
-    [ValidatePrototypeId<StatusEffectPrototype>]
-    private const string HoloKey = "HoloTargeted";
-
-    [Dependency] private readonly StatusEffectsSystem _statusEffectsSystem = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -19,26 +15,13 @@ public sealed class RMCHoloTargetedSystem : EntitySystem
     /// <summary>
     ///     Try to apply holo stacks to the target up to a certain cap.
     /// </summary>
-    public bool TryApplyHoloStacks(EntityUid uid, float duration, float stacks, float maxStacks, StatusEffectsComponent? status = null)
+    public void ApplyHoloStacks(EntityUid uid, float decay, float stacks, float maxStacks)
     {
-        if (!Resolve(uid, ref status, false))
-            return false;
-
-        if (!_statusEffectsSystem.HasStatusEffect(uid, HoloKey, status))
-        {
-            _statusEffectsSystem.TryAddStatusEffect<HoloTargetedComponent>(uid, HoloKey, TimeSpan.FromSeconds(duration), true, status);
-        }
-        else
-        {
-            _statusEffectsSystem.TrySetTime(uid, HoloKey, TimeSpan.FromSeconds(duration), status);
-        }
-
         var holoTargeted = EnsureComp<HoloTargetedComponent>(uid);
+        holoTargeted.Decay = decay;
         var newStacks = holoTargeted.Stacks + stacks;
         holoTargeted.Stacks = Math.Clamp(newStacks, 0f, maxStacks);
         Dirty(uid, holoTargeted);
-
-        return true;
     }
 
     /// <summary>
@@ -48,5 +31,26 @@ public sealed class RMCHoloTargetedSystem : EntitySystem
     {
         var damageMultiplier = 1 + component.Stacks / 1000;
         args.Damage *= damageMultiplier;
+    }
+
+    /// <summary>
+    ///     Reduce the amount of holo stacks every second and remove the component if the amount of stacks reaches 0.
+    /// </summary>
+    public override void Update(float frameTime)
+    {
+        var query = EntityQueryEnumerator<HoloTargetedComponent>();
+
+        while (query.MoveNext(out var uid, out var component))
+        {
+            component.DecayTimer += frameTime;
+            if (component.DecayTimer >= 1)
+            {
+                component.DecayTimer = 0f;
+                component.Stacks -= component.Decay;
+                Dirty(uid, component);
+                if (component.Stacks <= 0)
+                    RemCompDeferred<HoloTargetedComponent>(uid);
+            }
+        }
     }
 }

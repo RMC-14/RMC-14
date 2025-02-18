@@ -11,4 +11,16 @@ public sealed partial class HoloTargetedComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public float Stacks;
+
+    /// <summary>
+    ///     The amount of stacks being removed every second.
+    /// </summary>
+    [DataField]
+    public float Decay = 5f;
+
+    /// <summary>
+    ///     Ensures the decay amount if being removed every second.
+    /// </summary>
+    [DataField]
+    public float DecayTimer;
 }

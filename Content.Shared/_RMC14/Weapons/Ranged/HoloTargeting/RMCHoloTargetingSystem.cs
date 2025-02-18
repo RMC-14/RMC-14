@@ -15,6 +15,6 @@ public sealed class RMCHoloTargetingSystem : EntitySystem
 
     private void OnProjectileHit(EntityUid uid, HoloTargetingComponent component, ref ProjectileHitEvent args)
     {
-        _holoTargeted.TryApplyHoloStacks(args.Target, component.Duration, component.Stacks, component.MaxStacks);
+        _holoTargeted.ApplyHoloStacks(args.Target, component.Decay, component.Stacks, component.MaxStacks);
     }
 }
