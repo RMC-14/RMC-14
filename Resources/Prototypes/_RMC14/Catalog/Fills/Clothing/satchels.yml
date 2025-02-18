@@ -7,7 +7,7 @@
     contents:
     - id: RMCWeaponPistolHoldout
     - id: CMCrowbar
-    - id: FoodBoxPizzaFilled # TODO RMC14
+    - id: RMCFoodBoxPizzaFilled
       amount: 3
     - id: CMDrinkCanDrGibb
   - type: IgnoreContentsSize
