@@ -46,6 +46,8 @@
   id: RMCBaseJacketButtonableOpened
   suffix: opened
   components:
+  - type: Item
+    heldPrefix: open
   - type: Foldable
     folded: true
   - type: Clothing
