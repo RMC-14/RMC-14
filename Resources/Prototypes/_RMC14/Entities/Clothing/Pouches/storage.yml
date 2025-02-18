@@ -593,24 +593,24 @@
       - MachineBoard
   - type: StorageStoreSkillRequired
     entries:
-    whitelist:
-      tags:
-      - RMCCircuitboard
-      - Flashlight
-      - RMCWeldingGoggle
-      # - TODO RMC14 RMCAnalyzer
-      # - TODO RMC14 RMCDemoScanner
-      # - TODO RMC14 RMCReagentScanner
-      - CableCoil
-      - PowerCell
-      # - TODO RMC14 RMCAssembly
-      # - TODO RMC14 RMCStockParts
-      - RMCExplosivePlastic
-      # - TODO RMC14 RMCSynthResetKey
-      components:
-      - TrayScanner
-      - ComputerBoard
-      - MachineBoard
+    - whitelist:
+        tags:
+        - RMCCircuitboard
+        - Flashlight
+        - RMCWeldingGoggle
+        # - TODO RMC14 RMCAnalyzer
+        # - TODO RMC14 RMCDemoScanner
+        # - TODO RMC14 RMCReagentScanner
+        - CableCoil
+        - PowerCell
+        # - TODO RMC14 RMCAssembly
+        # - TODO RMC14 RMCStockParts
+        - RMCExplosivePlastic
+        # - TODO RMC14 RMCSynthResetKey
+        components:
+        - TrayScanner
+        - ComputerBoard
+        - MachineBoard
       skills:
         all:
           RMCSkillEngineer: 2
