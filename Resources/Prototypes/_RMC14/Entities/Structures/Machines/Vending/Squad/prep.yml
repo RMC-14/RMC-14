@@ -324,7 +324,7 @@
       #  amount: 2
       - id: RMCBoxShotgunBreaching
         amount: 2
-      - id: RMCBatonSlugsHIRR
+      - id: RMCBatonSlugHIRR
         amount: 6
       - id: RMCStarShellM74AGMS
         amount: 4

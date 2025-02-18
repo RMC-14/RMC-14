@@ -1,7 +1,9 @@
 using System.Numerics;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Actions;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
@@ -11,12 +13,14 @@ using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Stun;
 
 public sealed class RMCSizeStunSystem : EntitySystem
 {
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly StandingStateSystem _stand = default!;
     [Dependency] private readonly StaminaSystem _stamina = default!;
@@ -30,6 +34,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     public override void Initialize()
     {
@@ -75,13 +80,25 @@ public sealed class RMCSizeStunSystem : EntitySystem
         if (distance > bullet.Comp.MaxRange || _stand.IsDown(args.Target))
             return;
 
+        //Silence part, before the big size check because big xenos can still be silenced
+        if (bullet.Comp.DazeTime > TimeSpan.Zero)
+        {
+            foreach (var (actionId, _) in _actions.GetActions(args.Target))
+            {
+                if (TryComp(actionId, out RMCDazeableActionComponent? silenceable))
+                {
+                    _actions.SetCooldown(actionId, bullet.Comp.DazeTime * silenceable.DurationMultiplier);
+                }
+            }
+        }
+
         if (!TryComp<RMCSizeComponent>(args.Target, out var size) || size.Size >= RMCSizes.Big)
             return;
 
         //TODO Camera Shake
 
         //Knockback
-        if (_blocker.CanMove(args.Target))
+        if (_blocker.CanMove(args.Target) || bullet.Comp.ForceKnockBack)
         {
 
             _physics.SetLinearVelocity(args.Target, Vector2.Zero);
@@ -91,8 +108,9 @@ public sealed class RMCSizeStunSystem : EntitySystem
             if (vec.Length() != 0)
             {
                 _rmcPulling.TryStopPullsOn(args.Target);
-                var direction = vec.Normalized();
-                _throwing.TryThrow(args.Target, direction, 1, animated: false, playSound: false, doSpin: false);
+                var knockBackPower = _random.NextFloat(bullet.Comp.KnockBackPowerMin, bullet.Comp.KnockBackPowerMax);
+                var direction = vec.Normalized() * knockBackPower;
+                _throwing.TryThrow(args.Target, direction, bullet.Comp.KnockBackSpeed, animated: false, playSound: false, doSpin: false);
                 // RMC-14 TODO Thrown into obstacle mechanics
             }
         }
@@ -119,5 +137,6 @@ public sealed class RMCSizeStunSystem : EntitySystem
         }
         else
             _stamina.TakeStaminaDamage(args.Target, args.Damage.GetTotal().Float());
+
     }
 }

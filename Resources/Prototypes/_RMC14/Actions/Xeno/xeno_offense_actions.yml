@@ -88,6 +88,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: regurgitate
     event: !type:XenoRegurgitateActionEvent
+  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoTailStab
@@ -105,6 +106,7 @@
     useDelay: 10
     checkCanAccess: false
   - type: XenoTailStabAction
+  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoTailSlam
@@ -143,6 +145,7 @@
     range: 15
     useDelay: 3
     checkCanAccess: false
+  - type: RMCDazeableAction
 
 - type: entity
   parent: ActionXenoLeap
@@ -158,6 +161,7 @@
     event: !type:XenoLeapActionEvent
     useDelay: 6
     checkCanAccess: false
+  - type: RMCDazeableAction
 
 - type: entity
   parent: ActionXenoLeap
@@ -205,6 +209,7 @@
       state: tail_sweep
     event: !type:XenoTailSweepActionEvent
     useDelay: 15
+  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoSlowingSpit
@@ -414,6 +419,7 @@
     useDelay: 7
     deselectOnMiss: false
   - type: XenoOffensiveAction
+  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoLunge
@@ -431,6 +437,7 @@
     useDelay: 10
     deselectOnMiss: false
   - type: XenoOffensiveAction
+  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoScreech
@@ -445,6 +452,7 @@
       state: screech
     event: !type:XenoScreechActionEvent
     useDelay: 50
+  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoGut

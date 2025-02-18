@@ -28,6 +28,9 @@ public sealed partial class ScatteringGrenadeComponent : Component
     public float DirectionAngle = -90;
 
     [DataField]
+    public float ReboundAngle = 180;
+
+    [DataField]
     public float SpreadAngle = 360;
 
     /// <summary>
@@ -59,6 +62,12 @@ public sealed partial class ScatteringGrenadeComponent : Component
     /// </summary>
     [DataField]
     public bool TriggerOnWallCollide;
+
+    /// <summary>
+    /// Triggers the grenade on any direct hit
+    /// </summary>
+    [DataField]
+    public bool DirectHitTrigger;
 
     #region Trigger time parameters for scattered entities
     /// <summary>

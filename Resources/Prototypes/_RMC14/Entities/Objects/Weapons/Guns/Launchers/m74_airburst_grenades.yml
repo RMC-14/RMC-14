@@ -339,6 +339,11 @@
     maxRange: 10
     stunTime: 3
     slowTime: 6
+    knockBackPowerMin: 1
+    knockBackPowerMax: 3
+    knockBackSpeed: 5
+    forceKnockBack: true
+    dazeTime: 4.5
   - type: RMCProjectileAccuracy
     accuracy: 100
     thresholds:
@@ -346,13 +351,11 @@
       falloff: 10
   - type: ScatteringGrenade
     spreadAngle: 45
-    triggerOnWallCollide: true
-    fillPrototype: RMCBatonSlugShell
+    directHitTrigger: true
+    fillPrototype: RMCBatonSlugHIRR
     capacity: 1
     distance: 1
   - type: IgnoreArc
-  - type: TriggerOnCollide
-    fixtureID: projectile
   - type: Fixtures
     fixtures:
       projectile:

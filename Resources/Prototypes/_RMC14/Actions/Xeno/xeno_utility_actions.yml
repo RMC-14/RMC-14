@@ -91,7 +91,8 @@
     ids:
     - ActionXenoAidRejuvenate
     cooldown: 10
-  
+  - type: RMCDazeableAction
+
 - type: entity
   parent: ActionXenoBase
   id: ActionXenoAidRejuvenate
@@ -182,6 +183,7 @@
       state: apply_salve
     event: !type:XenoApplySalveActionEvent
     useDelay: 0.5
+  - type: RMCDazeableAction
 
 - type: entity
   parent: ActionXenoBase
