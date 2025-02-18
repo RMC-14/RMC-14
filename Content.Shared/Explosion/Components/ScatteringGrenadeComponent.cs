@@ -24,6 +24,12 @@ public sealed partial class ScatteringGrenadeComponent : Component
     [DataField]
     public EntProtoId? FillPrototype;
 
+    [DataField]
+    public float DirectionAngle = -90;
+
+    [DataField]
+    public float SpreadAngle = 360;
+
     /// <summary>
     /// If we have a pre-fill how many more can we spawn.
     /// </summary>

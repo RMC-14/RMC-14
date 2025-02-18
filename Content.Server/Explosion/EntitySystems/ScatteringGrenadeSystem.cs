@@ -57,7 +57,8 @@ public sealed class ScatteringGrenadeSystem : SharedScatteringGrenadeSystem
             {
                 var grenadeCoord = _transformSystem.GetMapCoordinates(uid);
                 var thrownCount = 0;
-                var segmentAngle = 360 / totalCount;
+                var segmentAngle = component.SpreadAngle / totalCount;
+                var projectileRotation = _transformSystem.GetMoverCoordinateRotation(uid, Transform(uid)).worldRot.Degrees + component.DirectionAngle;
                 var additionalIntervalDelay = 0f;
 
                 while (TrySpawnContents(grenadeCoord, component, out var contentUid))
@@ -67,9 +68,9 @@ public sealed class ScatteringGrenadeSystem : SharedScatteringGrenadeSystem
                         angle = _random.NextAngle();
                     else
                     {
-                        var angleMin = segmentAngle * thrownCount;
-                        var angleMax = segmentAngle * (thrownCount + 1);
-                        angle = Angle.FromDegrees(_random.Next(angleMin, angleMax));
+                        var angleMin = projectileRotation - component.SpreadAngle / 2 + segmentAngle * thrownCount;
+                        var angleMax = projectileRotation - component.SpreadAngle / 2 + segmentAngle * (thrownCount + 1);
+                        angle = Angle.FromDegrees(_random.Next((int)angleMin, (int)angleMax));
                         thrownCount++;
                     }
 

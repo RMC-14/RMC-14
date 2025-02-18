@@ -182,19 +182,16 @@ public sealed class CMGunSystem : EntitySystem
             _physics.ApplyLinearImpulse(projectile, impulse, body: physics);
             _physics.SetBodyStatus(projectile, physics, BodyStatus.InAir);
 
-            // Check if the fixed distance should be disabled.
-            var ev = new BeforeArcEvent();
-            RaiseLocalEvent(projectile, ref ev);
-
-            if(ev.Cancelled)
-                return;
-
             // Apply the ProjectileFixedDistanceComponent onto each fired projectile, which both holds the FlyEndTime to be continually checked
             // and will trigger the OnEventToStopProjectile function once the PFD Component is deleted at that time. See Update()
             var comp = EnsureComp<ProjectileFixedDistanceComponent>(projectile);
 
+            // Check if the arcing should be disabled.
+            var ev = new BeforeArcEvent();
+            RaiseLocalEvent(projectile, ref ev);
+
             // Transfer arcing to the projectile.
-            if (Comp<ShootAtFixedPointComponent>(ent).ShootArcProj)
+            if (Comp<ShootAtFixedPointComponent>(ent).ShootArcProj && !ev.Cancelled)
                 comp.ArcProj = true;
 
             // Take the lowest nonzero MaxFixedRange between projectile and gun for the capped vector length.
