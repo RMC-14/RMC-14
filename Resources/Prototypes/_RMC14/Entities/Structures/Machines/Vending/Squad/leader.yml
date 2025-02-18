@@ -27,7 +27,7 @@
     #- id: CMM240PyrotechnicianSupportKit
     #- id: CMM2CHeavyMachineGun
     #- id: CMM56DHeavyMachineGun
-    #- id: CMM79GrenadeLauncher
+      - id: RMCM79Case
       - id: RMCMOU53Case
       - id: RMCCaseXM88
       - id: RMCKitEngineering
@@ -186,8 +186,8 @@
         points: 8
       - id: RMCGunCasePistolSmart
         points: 12
-    #- id: CMM79GrenadeLauncher
-    #  points: 18
+      - id: RMCM79Case
+        points: 18
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer

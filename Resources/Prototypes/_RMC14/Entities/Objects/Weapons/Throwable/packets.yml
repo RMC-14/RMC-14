@@ -28,6 +28,9 @@
     storageClosed: closedLayer
     storageOpen: openLayer
     storageEmpty: emptyLayer
+  - type: Tag
+    tags:
+    - RMCPacketGrenade
 
 - type: entity
   parent: CMPacketBase
@@ -214,14 +217,14 @@
   components:
   - type: Sprite
     layers:
-    - state: hornet_packet
+    - state: starshell_packet
       map: [ "closedLayer" ]
-    - state: hornet_packet_e
+    - state: starshell_packet_e
       map: [ "openLayer", "emptyLayer"]
 
 - type: entity
   parent: RMCPacketGrenadeM74AGMSStarShell
-  id: RMCPacketGrenadeN74AGMSStarShellFilled
+  id: RMCPacketGrenadeM74AGMSStarShellFilled
   suffix: Filled
   components:
   - type: StorageFill
@@ -297,3 +300,6 @@
     contents:
     - id: CMGrenadeFragOld
       amount: 3
+
+- type: Tag
+  id: RMCPacketGrenade

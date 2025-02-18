@@ -55,8 +55,8 @@
       #  amount: 2
       #- id: M240 Incinerator Unit
       #  amount: 2
-      #- id: M79 Grenade Launcher
-      #  amount: 3
+      - id: RMCM79Case
+        amount: 3
       - id: RMCXM51Case
         amount: 3
     - name: Explosives
