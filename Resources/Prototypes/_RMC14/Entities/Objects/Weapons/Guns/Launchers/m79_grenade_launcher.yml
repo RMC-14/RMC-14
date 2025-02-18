@@ -17,6 +17,8 @@
   - type: Gun
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/m79_shoot.ogg
+  - type: GunIFF
+    enabled: true
   - type: RMCSelectiveFire
     baseFireRate: 0.833
   - type: BallisticAmmoProvider

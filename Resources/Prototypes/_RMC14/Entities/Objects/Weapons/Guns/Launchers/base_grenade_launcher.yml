@@ -65,3 +65,4 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/explosive_mouse.rsi
       state: all
+  - type: GunIgnorePrediction

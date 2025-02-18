@@ -1,0 +1,321 @@
+#SHELLS
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RMCBaseAirBurstGrenade
+  name: air burst grenade
+  components:
+  - type: Appearance
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/grenade_launcher.rsi
+    layers:
+    - state: grenade_m74_airburst_f
+  - type: Item
+    size: Small
+  - type: Clothing
+    slots:
+    - suitStorage
+  - type: Destructible
+    thresholds: []
+  - type: IgnorePredictionHide
+  - type: Ammo
+
+- type: entity
+  parent: RMCBaseAirBurstGrenade
+  id: RMCAirBurstGrenadeFrag
+  name: M74 AGM-F 40mm Grenade
+  description: M74 - Airburst Grenade Munition - Fragmentation. This grenade must be launched with a grenade launcher, and detonates once it reaches its destination. It disperses jagged shrapnel in a cone in front of itself, tearing through sinews and armor alike. Dispersion pattern is optimized against large target. Suffers from overpenetration on a direct hit.
+  components:
+  - type: Tag
+    tags:
+    - Grenade
+    - LauncherCompatibleGrenade
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+    proto: RMCAirBurstProjectileFrag
+
+- type: entity
+  parent: RMCAirBurstGrenadeFrag
+  id: RMCAirBurstGrenadeHornet
+  name: M74 AGM-H 40mm Hornet Shell
+  description: Functions identically to the standard AGM-F 40mm grenade, except instead of exploding into shrapnel, the hornet shell shoots off holo-targeting .22lr rounds. The equivalent to buckshot at-range.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/grenade_launcher.rsi
+    layers:
+    - state: grenade_hornet
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+    proto: RMCAirBurstProjectileHornet
+
+- type: entity
+  parent: RMCAirBurstGrenadeFrag
+  id: RMCAirBurstGrenadeStarShell
+  name: M74 AGM-S Star Shell
+  description: Functions identically to the standard AGM-F 40mm grenade, except instead of exploding into shrapnel, the star shells bursts into burning phosphor that illuminates the area.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/grenade_launcher.rsi
+    layers:
+    - state: grenade_starshell
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+    proto: RMCAirBurstProjectileStarShell
+
+- type: entity
+  parent: RMCAirBurstGrenadeFrag
+  id: RMCBatonSlugShell
+  name: HIRR baton slug
+  description: Cousin to the M15 Rubber pellet, the HIRR baton slug was recalled from military and civilian police forces due to over-packed propellant in the sabot casing. Now it is utilized as a less-than-lethal option in engagements with human, and sometimes non-human, forces. Historically, the HIRR was incredibly popular during the Arcturus conflict, as the impact force was found to reliably incapacitate Arcturian resistance forces by breaking their ribs into their lungs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/grenade_launcher.rsi
+    layers:
+    - state: baton_slug
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+    proto: RMCBatonSlugProjectile
+
+#PROJECTILES
+- type: entity
+  abstract: true
+  parent: RMCBaseBullet
+  id: RMCBaseAirBurstProjectile
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TriggerOnFixedDistanceStop
+    delay: 0
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/grenade_launcher.rsi
+    layers:
+    - state: grenade_m74_airburst_f_active
+  - type: Projectile
+    deleteOnCollide: false
+    impactEffect: BulletImpactEffect
+    maxFixedRange: 7
+    damage:
+      types:
+        Piercing: 100
+    soundHit:
+      path: /Audio/Effects/gen_hit.ogg
+  - type: ProjectileGrenade
+    evenSpread: true
+    minVelocity: 0.5
+    maxVelocity: 1.5
+    fillPrototype: RMCShrapnelJagged
+    rebounds: true
+    capacity: 16
+    spreadAngle: 40
+  - type: ClusterLimitHits
+    limit: 5
+  - type: CMExplosionEffect
+    maxShrapnel: 0
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.45,0.15,0.15"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+  - type: IgnorePredictionHide
+
+- type: entity
+  parent: RMCBaseAirBurstProjectile
+  id: RMCAirBurstProjectileFrag
+  name: M74 AGM-F 40mm Grenade
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: RMCBaseAirBurstProjectile
+  id: RMCAirBurstProjectileHornet
+  name: M74 AGM-H 40mm Hornet Shell
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/grenade_launcher.rsi
+    layers:
+    - state: grenade_hornet_active
+  - type: ProjectileGrenade
+    evenSpread: true
+    minVelocity: 0.5
+    maxVelocity: 1.5
+    rebounds: true
+    fillPrototype: RMCHornetRound
+    capacity: 15
+    spreadAngle: 25
+
+- type: entity
+  parent: RMCBaseAirBurstProjectile
+  id: RMCAirBurstProjectileStarShell
+  name: M74 AGM-S Star Shell
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/grenade_launcher.rsi
+    layers:
+    - state: grenade_starshell_active
+  - type: ProjectileGrenade
+    rebounds: true
+    fillPrototype: RMCStarShellBullet
+    inheritIFF: true
+    minVelocity: 0
+    maxVelocity: 0
+    capacity: 8
+    spreadAngle: 360
+  - type: Projectile
+    impactEffect: BulletImpactEffect
+    deleteOnCollide: false
+    maxFixedRange: 7
+    damage:
+      types:
+        Piercing: 30
+    soundHit:
+      path: /Audio/Effects/gen_hit.ogg
+  - type: OnShootTriggerAmmoTimer
+    delay: 0.25
+
+#Payloads
+- type: entity
+  parent: RMCBaseBullet
+  id: RMCStarShellBullet
+  name: starshell ash
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/airburst_projectiles.rsi
+    layers:
+    - state: starshell_bullet
+  - type: GunIFF
+    enabled: true
+  - type: Projectile
+    deleteOnCollide: false
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Piercing: 2.5
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
+  - type: ScatteringGrenade
+    triggerOnWallCollide: true
+    fillPrototype: RMCStarShellAsh
+    capacity: 1
+    delayBeforeTriggerContents: 0
+    distance: 0
+    toggleContents: true
+  - type: PointLight
+    enabled: true
+    color: "#ff4300"
+    radius: 2.0
+    energy: 7.0
+  - type: IgniteOnProjectileHit
+    stacks: 2
+
+- type: entity
+  parent: RMCBaseBullet
+  id: RMCHornetRound
+  name: .22 hornet round
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/airburst_projectiles.rsi
+    layers:
+    - state: hornet_round
+  - type: HoloTargeting
+    stacks: 20
+  - type: Projectile
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Piercing: 10
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
+  - type: CMArmorPiercing
+    amount: 25
+
+- type: entity
+  parent: RMCBaseBullet
+  id: RMCShrapnelJagged
+  name: jagged shrapnel
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/shotgun_projectiles.rsi
+    layers:
+    - state: buckshot
+      shader: unshaded
+  - type: Projectile
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Piercing: 30
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
+  - type: CMArmorPiercing
+    amount: 10
+  - type: RMCStunOnHit
+    maxRange: 10
+    stunTime: 0
+    slowTime: 0.8
+  - type: RMCProjectileAccuracy
+    accuracy: 100
+    thresholds:
+    - range: 7
+      falloff: 10
+
+- type: entity
+  parent: RMCBaseBullet
+  id: RMCBatonSlugProjectile
+  name: HIRR baton slug
+  description: Cousin to the M15 Rubber pellet, the HIRR baton slug was recalled from military and civilian police forces due to over-packed propellant in the sabot casing. Now it is utilized as a less-than-lethal option in engagements with human, and sometimes non-human, forces. Historically, the HIRR was incredibly popular during the Arcturus conflict, as the impact force was found to reliably incapacitate Arcturian resistance forces by breaking their ribs into their lungs.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: IgnorePredictionHide
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/grenade_launcher.rsi
+    layers:
+    - state: baton_slug_active
+      shader: unshaded
+  - type: Projectile
+    deleteOnCollide: false
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Blunt: 15
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
+  - type: RMCStunOnHit
+    maxRange: 10
+    stunTime: 3
+    slowTime: 6
+  - type: RMCProjectileAccuracy
+    accuracy: 100
+    thresholds:
+    - range: 7
+      falloff: 10
+  - type: ScatteringGrenade
+    triggerOnWallCollide: true
+    fillPrototype: RMCBatonSlugShell
+    capacity: 1
+    distance: 1
+  - type: IgnoreArc
+  - type: TriggerOnCollide
+    fixtureID: projectile
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.45,0.15,0.15"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
