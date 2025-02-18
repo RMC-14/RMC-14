@@ -26,7 +26,6 @@
       - PowerCell
       # - TODO RMC14 RMCAssembly
       # - TODO RMC14 RMCStockParts,
-      - RMCExplosivePlastic
       - RMCExplosiveBreachingCharge
       - RMCWeldingGoggle
       components:
