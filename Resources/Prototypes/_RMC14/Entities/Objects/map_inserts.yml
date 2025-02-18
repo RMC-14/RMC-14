@@ -7,20 +7,6 @@
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
     state: nightmare_insert
-
-# Solaris
-- type: entity
-  parent: RMCMapInsertBase
-  id: RMCMapInsertSolarisSeCheckpoint
-  name: SE Checkpoint
-  suffix: Insert Solaris
-  components:
-  - type: MapInsert
-    spawn: "/Maps/_RMC14/Inserts/Solaris/se-checkpoint.yml"
-    probability: 0.7
-    clearEntities: true
-    clearDecals: true
-    replaceAreas: true
     
 # Kutjevo
 - type: entity
