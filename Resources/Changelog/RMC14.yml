@@ -1,24 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Runner's pulling speed on marines has been decreased by about ~23.5%,
-      moving slightly slower than a Marine wearing Heavy Armor.
-    type: Tweak
-  - message: Warrior's pulling speed on marines has been decreased by about ~10%.
-    type: Tweak
-  - message: All other Xenos pull Marines somewhat faster.
-    type: Tweak
-  - message: Marines now pull other Marines faster.
-    type: Tweak
-  - message: All Xenos besides Hivelord and Crusher now pull other Xenos slower.
-    type: Tweak
-  - message: Hivelords and Crushers now pull other Xenos faster.
-    type: Tweak
-  - message: Marines now pull Xeno corpses faster.
-    type: Tweak
-  id: 856
-  time: '2024-10-18T02:29:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4453
 - author: TsjipTsjip
   changes:
   - message: Marine icon command.
@@ -5172,5 +5152,12 @@
   id: 1356
   time: '2025-02-16T21:51:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5651
+- author: Tunguso4ka
+  changes:
+  - message: Nightmare Inserts added to Solaris.
+    type: Add
+  id: 1357
+  time: '2025-02-18T22:20:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5650
 Name: RMC14
 Order: -1
