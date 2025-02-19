@@ -49,7 +49,7 @@
     - map: [ "light" ]
   - type: Rangefinder
   - type: UseDelay
-    delay: 1
+    delay: 0
   - type: UserInterface
     interfaces:
       enum.RangefinderUiKey.Key:
@@ -83,8 +83,6 @@
   - type: Rangefinder
     mode: Designator
     canDesignate: true
-  - type: UseDelay
-    delay: 1
 
 - type: entity
   parent: RMCLaserDesignator
