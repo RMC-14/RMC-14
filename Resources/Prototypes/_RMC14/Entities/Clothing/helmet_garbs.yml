@@ -1,10 +1,4 @@
-﻿- type: Tag
-  id: HelmetGarb
-
-- type: Tag
-  id: HelmetGarbNVGoggles
-
-- type: entity
+﻿- type: entity
   parent: BaseItem
   id: RMCHelmetGarbNightVision
   name: old M2 night vision goggles
@@ -17,7 +11,7 @@
     sprite: _RMC14/Objects/Clothing/HelmetGarb/nv_goggles.rsi
     state: icon
     size: Tiny
-  - type: Tag
-    tags:
-    - HelmetGarb
-    - HelmetGarbNVGoggles
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/nv_goggles.rsi
+      state: helmet
