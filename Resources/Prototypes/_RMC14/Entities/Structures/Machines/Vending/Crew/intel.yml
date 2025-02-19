@@ -63,6 +63,7 @@
         points: 15
         recommended: true
       - id: RMCPouchMacheteFilled
+        name: machete pouch (Full)
         points: 10
     - name: Utilities
       entries:
