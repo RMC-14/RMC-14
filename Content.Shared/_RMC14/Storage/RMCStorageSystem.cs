@@ -59,6 +59,8 @@ public sealed class RMCStorageSystem : EntitySystem
 
         SubscribeLocalEvent<StorageNestedOpenSkillRequiredComponent, StorageInteractAttemptEvent>(OnNestedSkillRequiredInteractAttempt);
 
+        SubscribeLocalEvent<RMCEntityStorageWhitelistComponent, ContainerIsInsertingAttemptEvent>(OnEntityStorageWhitelistAttempt);
+
         Subs.BuiEvents<StorageCloseOnMoveComponent>(StorageUiKey.Key, subs =>
         {
             subs.Event<BoundUIOpenedEvent>(OnCloseOnMoveUIOpened);
@@ -215,6 +217,15 @@ public sealed class RMCStorageSystem : EntitySystem
 
         var msg = Loc.GetString("rmc-storage-nested-unable", ("nested", ent), ("parent", container.Owner));
         _popup.PopupClient(msg, ent, args.User, PopupType.SmallCaution);
+    }
+
+    private void OnEntityStorageWhitelistAttempt(Entity<RMCEntityStorageWhitelistComponent> ent, ref ContainerIsInsertingAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (!_entityWhitelist.IsWhitelistPass(ent.Comp.Whitelist, args.EntityUid))
+            args.Cancel();
     }
 
     private void OnCloseOnMoveUIOpened(Entity<StorageCloseOnMoveComponent> ent, ref BoundUIOpenedEvent args)
