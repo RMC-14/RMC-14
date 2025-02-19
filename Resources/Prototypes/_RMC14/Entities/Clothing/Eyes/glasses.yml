@@ -460,6 +460,10 @@
     - RMCWeldingGoggle
   - type: Item
     storedRotation: 0
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
+      state: helmet
 
 - type: Tag
   id: RMCWeldingGoggle
