@@ -162,8 +162,6 @@
     popup: rmc-xeno-fruit-effect-speed
     color: "#5B248C"
   - type: XenoFruitSpeed
-    duration: 15
-    speedModifier: 0.4
 
 - type: entity
   parent: XenoFruitBase
