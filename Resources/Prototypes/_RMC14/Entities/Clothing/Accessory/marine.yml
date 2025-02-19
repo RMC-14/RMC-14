@@ -17,19 +17,6 @@
     slots:
     - EARS
     - HEAD
-  - type: ItemToggle
-    activated: true
-    soundActivate:
-      path: /Audio/_RMC14/Machines/click.ogg
-      params:
-        variation: 0.250
-    soundDeactivate:
-      path: /Audio/_RMC14/Machines/click.ogg
-      params:
-        variation: 0.250
-  - type: ComponentToggler
-    components:
-    - type: OverwatchCamera
   - type: GenericVisualizer
     visuals:
       enum.ToggleVisuals.Toggled:
