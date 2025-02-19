@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fix being able to transfer plasma to ovi'd Queens
-    type: Fix
-  id: 862
-  time: '2024-10-18T19:11:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4513
-- author: Vermidia
-  changes:
   - message: Comtechs now have engineering skill 3 instead of 2
     type: Tweak
   id: 863
@@ -5160,5 +5153,16 @@
   id: 1362
   time: '2025-02-19T05:39:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5610
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added helmet accessories. Currently, only the M1A1 ballistic goggles
+      are valid accessories.
+    type: Add
+  - message: Helmets now have 4 slots, 2 of those slots being reserved for helmet
+      accessories.
+    type: Tweak
+  id: 1363
+  time: '2025-02-19T05:52:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5654
 Name: RMC14
 Order: -1
