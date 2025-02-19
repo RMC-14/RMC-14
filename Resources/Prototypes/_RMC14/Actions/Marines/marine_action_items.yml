@@ -122,16 +122,6 @@
 
 - type: entity
   parent: ActionMarineBase
-  id: RMCActionToggleOWCamera
-  name: Toggle Camera Transmission
-  description: Toggle the M5 Camera's transmitter.
-  components:
-  - type: InstantAction
-    itemIconStyle: BigItem
-    event: !type:ToggleActionEvent
-
-- type: entity
-  parent: ActionMarineBase
   id: RMCActionToggleWeldingGoggles
   name: Toggle the welding goggles
   description: Change the positions of the welding goggles on your forehead.
