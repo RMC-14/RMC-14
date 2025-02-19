@@ -62,7 +62,8 @@
       - id: RMCPouchAutoinjector
         points: 15
         recommended: true
-      - id: RMCPouchMachete
+      - id: RMCPouchMacheteFilled
+        name: machete pouch (Full)
         points: 10
     - name: Utilities
       entries:
