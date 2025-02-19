@@ -375,7 +375,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 return false;
             }
 
-            var larvaEvolve = TimeSpan.FromSeconds(180);
+            var larvaEvolve = TimeSpan.FromSeconds(900);
 
 
             if (!_xenoWeeds.IsOnWeeds((gridUid, grid), coordinates) && larvaEvolve > _gameTicker.RoundDuration())
