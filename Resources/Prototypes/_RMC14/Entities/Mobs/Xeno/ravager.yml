@@ -37,7 +37,7 @@
     tier: 3
     hudOffset: 0,0.1
     unlockAt: 900 # 15 minutes
-    hidden: true # TODO RMC: remove once ravager is implemented
+    standHealingMultiplier: 0.66
   - type: XenoHeavy
   - type: XenoDevolve
     devolvesTo:
@@ -110,6 +110,10 @@
     size: Big
   - type: RMCXenoDamageVisuals
     prefix: ravager
+  - type: RMCFireArmorDebuffModifier
+    debuffModifier: 1.2
+  - type: PlasmaFrenzy
+  - type: RMCImmuneToFireTileDamage
   - type: TacticalMapIcon
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
