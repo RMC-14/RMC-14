@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Gun bayonets can now be used while devoured by a xenonid. You cannot
-      shoot the gun, however.
-    type: Tweak
-  id: 861
-  time: '2024-10-18T19:11:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4514
 - author: Vermidia
   changes:
   - message: Fix being able to transfer plasma to ovi'd Queens
@@ -5154,5 +5146,19 @@
   id: 1361
   time: '2025-02-19T05:36:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5664
+- author: Vermidia
+  changes:
+  - message: Added Valkyrie, a replacement to the Warden praetorian strain, which
+      focuses on frontline support.
+    type: Add
+  - message: Fixed Burrower's burrow having too high a range (15 > 8).
+    type: Fix
+  - message: Fixed Resin Whisperer construction range being too high (13 > 11).
+    type: Fix
+  - message: Fruits glow when ready to be harvested
+    type: Fix
+  id: 1362
+  time: '2025-02-19T05:39:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5610
 Name: RMC14
 Order: -1
