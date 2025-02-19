@@ -67,7 +67,7 @@
   - type: Anchorable
   - type: Pullable
   - type: Physics
-    bodyType: Dynamic
+    bodyType: Static
   - type: Damageable
     damageContainer: StructuralMarine
   - type: Destructible # TODO RMC14 some of these should just be knocked over with a do after by xenos

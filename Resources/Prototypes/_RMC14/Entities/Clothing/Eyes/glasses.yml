@@ -208,6 +208,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles.rsi
+      state: helmet
 
 - type: entity
   parent: RMCGogglesBallistic

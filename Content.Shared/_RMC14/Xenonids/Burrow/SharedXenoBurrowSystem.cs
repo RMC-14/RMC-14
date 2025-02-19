@@ -26,6 +26,7 @@ using Robust.Shared.Timing;
 using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
+using Content.Shared._RMC14.Pulling;
 
 namespace Content.Shared._RMC14.Xenonids.Burrow;
 
@@ -51,6 +52,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
 
     public override void Initialize()
     {
@@ -297,6 +299,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
 
         burrower.Comp.ForcedUnburrowAt = _time.CurTime + burrower.Comp.BurrowMaxDuration;
         burrower.Comp.NextBurrowAt = _time.CurTime + burrower.Comp.BurrowCooldown;
+        _rmcPulling.TryStopAllPullsFromAndOn(burrower);
         Dirty(burrower);
 
         var ev = new BurrowedEvent(true);
@@ -412,6 +415,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
         burrower.Comp.Tunneling = false;
         burrower.Comp.NextTunnelAt = null;
         burrower.Comp.ForcedUnburrowAt = null;
+        _rmcPulling.TryStopAllPullsFromAndOn(burrower);
         Dirty(burrower);
         if (_net.IsServer)
             _transform.SetCoordinates(burrower, _entities.GetCoordinates(args.TargetCoords));

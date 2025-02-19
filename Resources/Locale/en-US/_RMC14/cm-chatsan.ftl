@@ -411,8 +411,8 @@ cm-chatsan-replacement-shotgun = scatter spitter
 cm-chatsan-word-nade = nade
 cm-chatsan-replacement-nade = boomstick
 
-cm-chatsan-word-nade = nades
-cm-chatsan-replacement-nade = boomsticks
+cm-chatsan-word-nades = nades
+cm-chatsan-replacement-nades = boomsticks
 
 cm-chatsan-word-nuke = nuke
 cm-chatsan-replacement-nuke = hive killer

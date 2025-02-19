@@ -1,105 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added xeno egg destroying animations
-    type: Add
-  - message: Added xeno egg opening animations
-    type: Add
-  - message: There is now a 1 second delay for a xeno egg to open
-    type: Tweak
-  id: 853
-  time: '2024-10-18T02:24:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4495
-- author: Rainbeon
-  changes:
-  - message: Shotguns and Grenade Launchers now correctly display ammo when being
-      loaded.
-    type: Fix
-  id: 854
-  time: '2024-10-18T02:26:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4494
-- author: Rainbeon
-  changes:
-  - message: You may now become a Parasite again immediately after successfully infecting
-      a Marine.
-    type: Tweak
-  id: 855
-  time: '2024-10-18T02:26:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4491
-- author: Rainbeon
-  changes:
-  - message: Runner's pulling speed on marines has been decreased by about ~23.5%,
-      moving slightly slower than a Marine wearing Heavy Armor.
-    type: Tweak
-  - message: Warrior's pulling speed on marines has been decreased by about ~10%.
-    type: Tweak
-  - message: All other Xenos pull Marines somewhat faster.
-    type: Tweak
-  - message: Marines now pull other Marines faster.
-    type: Tweak
-  - message: All Xenos besides Hivelord and Crusher now pull other Xenos slower.
-    type: Tweak
-  - message: Hivelords and Crushers now pull other Xenos faster.
-    type: Tweak
-  - message: Marines now pull Xeno corpses faster.
-    type: Tweak
-  id: 856
-  time: '2024-10-18T02:29:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4453
-- author: TsjipTsjip
-  changes:
-  - message: Marine icon command.
-    type: Add
-  id: 857
-  time: '2024-10-18T02:34:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4480
-- author: TeaTotalTemplar
-  changes:
-  - message: Added the M60 General Purpose Machinegun and associated box magazine.
-      Includes a pre-installed bipod which greatly benefits it when properly deployed.
-    type: Add
-  - message: Corrected an error in the B92FS pistol's description.
-    type: Tweak
-  id: 858
-  time: '2024-10-18T02:37:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4428
-- author: TeaTotalTemplar
-  changes:
-  - message: The Rifleman guide entry of the guidebook has been updated to be more
-      instructional, more specific, and more immersive. Further suggestions or feedback
-      is welcomed in the discord thread.
-    type: Tweak
-  - message: The MK45 cartridges are now correctly identified as .45 automagnum
-    type: Fix
-  - message: The M16 magazine now correctly shows if it is loaded or empty
-    type: Fix
-  - message: The MP5 magazine now correctly loads 9mm smg rounds
-    type: Fix
-  id: 859
-  time: '2024-10-18T06:13:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4481
-- author: Whisper
-  changes:
-  - message: Added the Requisitions guidebook page, by epicjoston.
-    type: Add
-  id: 860
-  time: '2024-10-18T09:47:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4508
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Gun bayonets can now be used while devoured by a xenonid. You cannot
-      shoot the gun, however.
-    type: Tweak
-  id: 861
-  time: '2024-10-18T19:11:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4514
-- author: Vermidia
-  changes:
-  - message: Fix being able to transfer plasma to ovi'd Queens
-    type: Fix
-  id: 862
-  time: '2024-10-18T19:11:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4513
 - author: Vermidia
   changes:
   - message: Comtechs now have engineering skill 3 instead of 2
@@ -5033,13 +4932,6 @@
   id: 1334
   time: '2025-02-16T04:20:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5634
-- author: blueDev2
-  changes:
-  - message: Fixed resin holes being unshootable if fully covered by another object
-    type: Fix
-  id: 1335
-  time: '2025-02-16T04:23:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5627
 - author: Ian321
   changes:
   - message: Survivors can handle intel after being rescued.
@@ -5177,5 +5069,102 @@
   id: 1352
   time: '2025-02-16T05:11:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5508
+- author: N0lim
+  changes:
+  - message: health analyzer closed the window while it was not in hand
+    type: Fix
+  id: 1353
+  time: '2025-02-16T06:42:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5439
+- author: Ian321
+  changes:
+  - message: Lights, beakers and pressurized canisters no longer leave glass shards
+      when destroyed.
+    type: Tweak
+  id: 1354
+  time: '2025-02-16T06:48:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5631
+- author: Vermidia
+  changes:
+  - message: Fixed burrow, fultoning, and supply drops not dropping pulls.
+    type: Fix
+  id: 1355
+  time: '2025-02-16T21:48:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5652
+- author: CyberTropic
+  changes:
+  - message: Added decals to map inserts.
+    type: Add
+  id: 1356
+  time: '2025-02-16T21:51:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5651
+- author: Tunguso4ka
+  changes:
+  - message: Nightmare Inserts added to Solaris.
+    type: Add
+  id: 1357
+  time: '2025-02-18T22:20:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5650
+- author: Djvarik
+  changes:
+  - message: Added missing trash carts in casino alley in Chance's
+    type: Fix
+  id: 1358
+  time: '2025-02-18T22:22:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5656
+- author: Whisper
+  changes:
+  - message: Fixed duplicated traits and traits not intended to be selectable, and
+      lowered the frequency of replacements for some accents.
+    type: Fix
+  - message: Spawning as a command role now removes stuttering accent and frontal lisps from the character for that round.
+    type: Fix
+  id: 1359
+  time: '2025-02-19T05:18:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4872
+- author: CyberTropic
+  changes:
+  - message: Fixed fences connecting to walls.
+    type: Fix
+  id: 1360
+  time: '2025-02-19T05:19:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5668
+- author: Vermidia
+  changes:
+  - message: Fixed APC boards not fitting in a few pouches
+    type: Fix
+  - message: Fixed plastic explosives not fitting in the tools pouch
+    type: Fix
+  - message: Added the engineer kit pouch, which requires engineering skill to put
+      stuff inside. Holds various engineering items.
+    type: Add
+  id: 1361
+  time: '2025-02-19T05:36:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5664
+- author: Vermidia
+  changes:
+  - message: Added Valkyrie, a replacement to the Warden praetorian strain, which
+      focuses on frontline support.
+    type: Add
+  - message: Fixed Burrower's burrow having too high a range (15 > 8).
+    type: Fix
+  - message: Fixed Resin Whisperer construction range being too high (13 > 11).
+    type: Fix
+  - message: Fruits glow when ready to be harvested
+    type: Fix
+  id: 1362
+  time: '2025-02-19T05:39:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5610
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added helmet accessories. Currently, only the M1A1 ballistic goggles
+      are valid accessories.
+    type: Add
+  - message: Helmets now have 4 slots, 2 of those slots being reserved for helmet
+      accessories.
+    type: Tweak
+  id: 1363
+  time: '2025-02-19T05:52:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5654
 Name: RMC14
 Order: -1

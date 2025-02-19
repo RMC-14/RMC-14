@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Aura;
+using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Stab;
 using Content.Shared.Actions;
@@ -20,6 +21,7 @@ public sealed class XenoSoakSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcdamage = default!;
     [Dependency] private readonly SharedActionsSystem _action = default!;
+    [Dependency] private readonly SharedAuraSystem _aura = default!;
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoSoakComponent, XenoSoakActionEvent>(OnXenoSoakAction);
@@ -42,8 +44,8 @@ public sealed class XenoSoakSystem : EntitySystem
         soak.DamageAccumulated = 0;
         Dirty(xeno.Owner, soak);
 
-        //TODO reddish aura around the defender
         _popup.PopupPredicted(Loc.GetString("rmc-xeno-soak-self"), Loc.GetString("rmc-xeno-soak-others", ("xeno", xeno)), xeno, xeno, PopupType.MediumCaution);
+        _aura.GiveAura(xeno, soak.SoakColor, xeno.Comp.Duration);
     }
 
     private void OnXenoSoakingDamageChanged(Entity<XenoSoakingDamageComponent> xeno, ref DamageChangedEvent args)
@@ -66,12 +68,12 @@ public sealed class XenoSoakSystem : EntitySystem
         }
 
         RemCompDeferred<XenoSoakingDamageComponent>(xeno);
+        _aura.GiveAura(xeno, xeno.Comp.RageColor, xeno.Comp.RageDuration);
 
         if (_net.IsServer)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-soak-end-self"), xeno, xeno, PopupType.MediumCaution);
             _popup.PopupEntity(Loc.GetString("rmc-xeno-soak-end-others", ("xeno", xeno)), xeno, Filter.PvsExcept(xeno), true, PopupType.MediumCaution);
-            SpawnAttachedTo(xeno.Comp.RageEffect, xeno.Owner.ToCoordinates());
         }
     }
 

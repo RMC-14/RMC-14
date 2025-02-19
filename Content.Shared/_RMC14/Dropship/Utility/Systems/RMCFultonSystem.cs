@@ -1,8 +1,9 @@
-﻿using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Utility.Events;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Rules;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Coordinates;
@@ -35,6 +36,7 @@ public sealed class RMCFultonSystem : EntitySystem
     [Dependency] private readonly SharedStackSystem _stack = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcpulling = default!;
 
     private int _fultonCount;
     private MapId? _fultonMap;
@@ -114,6 +116,7 @@ public sealed class RMCFultonSystem : EntitySystem
 
         var name = Name(target);
         _dropshipWeapon.MakeTarget(target, name, false);
+        _rmcpulling.TryStopAllPullsFromAndOn(target);
 
         var mapId = EnsureMap();
         _transform.SetMapCoordinates(target, new MapCoordinates(_fultonCount++ * 50, 0, mapId));

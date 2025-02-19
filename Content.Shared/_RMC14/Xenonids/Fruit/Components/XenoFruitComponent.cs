@@ -61,6 +61,10 @@ public sealed partial class XenoFruitComponent : Component
     // Color for the gardener overlay
     [DataField, AutoNetworkedField]
     public Color? Color;
+
+    // Color for the aura overlay
+    [DataField, AutoNetworkedField]
+    public Color OutlineColor;
 }
 
 [Serializable, NetSerializable]

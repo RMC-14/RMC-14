@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Shields;
@@ -38,6 +39,7 @@ public sealed class XenoPierceSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly VanguardShieldSystem _vanguard = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
 
     private const int AttackMask = (int)(CollisionGroup.MobMask | CollisionGroup.Opaque);
 
@@ -48,6 +50,11 @@ public sealed class XenoPierceSystem : EntitySystem
 
     private void OnXenoPierceAction(Entity<XenoPierceComponent> xeno, ref XenoPierceActionEvent args)
     {
+        if (args.Handled)
+            return;
+
+        if (!_rmcActions.TryUseAction(xeno, args.Action))
+            return;
 
         if (_transform.GetGrid(args.Target) is not { } gridId ||
     !TryComp(gridId, out MapGridComponent? grid))
