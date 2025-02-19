@@ -41,7 +41,6 @@ rmc-xeno-evolution-cant-devolve-damaged = We are too weak to deevolve, we must r
 rmc-xeno-evolution-cant-evolve-recent-queen-death-minutes = We must wait about {$minutes} minutes and {$seconds} seconds for the hive to recover from the previous Queen's death.
 rmc-xeno-evolution-cant-evolve-recent-queen-death-seconds = We must wait about {$seconds} seconds for the hive to recover from the previous Queen's death.
 rmc-xeno-evolution-cant-evolve-caste-cooldown = We cannot evolve into this caste again yet! ({$minutes} minutes and {$seconds} seconds remaining)
-rmc-xeno-evolution-failed-hive-full = The hive hasn't developed enough yet for you to evolve off weeds!
 rmc-xeno-evolution-failed-early-weeds = The hive hasn't developed enough yet for you to evolve off weeds!
 rmc-xeno-evolution-failed-bad-location = We can't evolve here.
 rmc-xeno-evolution-start-self = We begin to twist and contort.
