@@ -32,6 +32,7 @@
     emoteSounds: Larva
   - type: XenoLight
   - type: XenoPlasma
+    plasma: 10
     maxPlasma: 10
     plasmaRegenOnWeeds: 0.1
   - type: XenoEvolution
