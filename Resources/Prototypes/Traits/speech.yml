@@ -33,6 +33,7 @@
   cost: 1
   components:
   - type: PirateAccent
+    yarrChance: 0.1
 
 - type: trait
   id: CowboyAccent

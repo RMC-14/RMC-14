@@ -14,7 +14,9 @@
   category: SpeechTraits
   cost: 1
   components:
-  - type: MobsterAccent
+    - type: MobsterAccent
+      prefixChance: 0.1
+      suffixChance: 0.2
 
 - type: trait
   id: FrenchAccent

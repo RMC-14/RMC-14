@@ -46,48 +46,52 @@ public sealed class MobsterAccentSystem : EntitySystem
         msg = RegexUpperAr.Replace(msg, "AH");
 
         // Prefix
-        // Removed for RMC
-        // if (_random.Prob(0.15f))
-        // {
-        //     //Checks if the first word of the sentence is all caps
-        //     //So the prefix can be allcapped and to not resanitize the captial
-        //     var firstWordAllCaps = !RegexFirstWord.Match(msg).Value.Any(char.IsLower);
-        //     var pick = _random.Next(1, 2);
-        //
-        //     // Reverse sanitize capital
-        //     var prefix = Loc.GetString($"accent-mobster-prefix-{pick}");
-        //     if (!firstWordAllCaps)
-        //         msg = msg[0].ToString().ToLower() + msg.Remove(0, 1);
-        //     else
-        //         prefix = prefix.ToUpper();
-        //     msg = prefix + " " + msg;
-        // }
+        if (_random.Prob(component.PrefixChance))
+        {
+            //Checks if the first word of the sentence is all caps
+            //So the prefix can be allcapped and to not resanitize the captial
+            var firstWordAllCaps = !RegexFirstWord.Match(msg).Value.Any(char.IsLower);
+            var pick = _random.Next(1, 2);
+
+            // Reverse sanitize capital
+            var prefix = Loc.GetString($"accent-mobster-prefix-{pick}");
+            if (!firstWordAllCaps)
+                msg = msg[0].ToString().ToLower() + msg.Remove(0, 1);
+            else
+                prefix = prefix.ToUpper();
+            msg = prefix + " " + msg;
+        }
 
         // Sanitize capital again, in case we substituted a word that should be capitalized
         msg = msg[0].ToString().ToUpper() + msg.Remove(0, 1);
 
         // Suffixes
-        // removed for RMC
-        // if (_random.Prob(0.4f))
-        // {
-        //     //Checks if the last word of the sentence is all caps
-        //     //So the suffix can be allcapped
-        //     var lastWordAllCaps = !RegexLastWord.Match(msg).Value.Any(char.IsLower);
-        //     var suffix = "";
-        //     if (component.IsBoss)
-        //     {
-        //         var pick = _random.Next(1, 4);
-        //         suffix = Loc.GetString($"accent-mobster-suffix-boss-{pick}");
-        //     }
-        //     else
-        //     {
-        //         var pick = _random.Next(1, 3);
-        //         suffix = Loc.GetString($"accent-mobster-suffix-minion-{pick}");
-        //     }
-        //     if (lastWordAllCaps)
-        //         suffix = suffix.ToUpper();
-        //     msg += suffix;
-        // }
+        if (_random.Prob(component.SuffixChance))
+        {
+            //Checks if the last word of the sentence is all caps
+            //So the suffix can be allcapped
+            var lastWordAllCaps = !RegexLastWord.Match(msg).Value.Any(char.IsLower);
+            var suffix = "";
+            if (component.IsBoss)
+            {
+                var pick = _random.Next(1, 4);
+                suffix = Loc.GetString($"accent-mobster-suffix-boss-{pick}");
+            }
+            else
+            {
+                var pick = _random.Next(1, 3);
+                suffix = Loc.GetString($"accent-mobster-suffix-minion-{pick}");
+            }
+            if (lastWordAllCaps)
+                suffix = suffix.ToUpper();
+
+            if (msg.EndsWith("..."))
+                suffix = suffix[1..];
+            else if (msg.EndsWith("."))
+                msg = msg[..^1];
+
+            msg += suffix;
+        }
 
         return msg;
     }
