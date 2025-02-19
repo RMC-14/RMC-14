@@ -366,7 +366,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
 
 
-        if (TryComp<MetaDataComponent>(xeno.Owner, out var metaData) && metaData.EntityPrototype?.ID == "CMXenoLarva")
+        if (TryComp<RestrictEvolveOffWeedsComponent>(xeno.Owner, out var comp))
         {
             var coordinates = _transform.GetMoverCoordinates(xeno).SnapToGrid(EntityManager, _map);
             if (_transform.GetGrid(coordinates) is not { } gridUid ||
@@ -375,10 +375,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
                 return false;
             }
 
-            var larvaEvolve = TimeSpan.FromSeconds(900);
-
-
-            if (!_xenoWeeds.IsOnWeeds((gridUid, grid), coordinates) && larvaEvolve > _gameTicker.RoundDuration())
+            if (!_xenoWeeds.IsOnWeeds((gridUid, grid), coordinates) && comp.RestrictTime > _gameTicker.RoundDuration())
             {
                 _popup.PopupEntity(
                     Loc.GetString("rmc-xeno-evolution-failed-early-weeds"),
