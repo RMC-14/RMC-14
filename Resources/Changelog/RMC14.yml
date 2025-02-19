@@ -1,29 +1,4 @@
 ﻿Entries:
-- author: TeaTotalTemplar
-  changes:
-  - message: Added the M60 General Purpose Machinegun and associated box magazine.
-      Includes a pre-installed bipod which greatly benefits it when properly deployed.
-    type: Add
-  - message: Corrected an error in the B92FS pistol's description.
-    type: Tweak
-  id: 858
-  time: '2024-10-18T02:37:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4428
-- author: TeaTotalTemplar
-  changes:
-  - message: The Rifleman guide entry of the guidebook has been updated to be more
-      instructional, more specific, and more immersive. Further suggestions or feedback
-      is welcomed in the discord thread.
-    type: Tweak
-  - message: The MK45 cartridges are now correctly identified as .45 automagnum
-    type: Fix
-  - message: The M16 magazine now correctly shows if it is loaded or empty
-    type: Fix
-  - message: The MP5 magazine now correctly loads 9mm smg rounds
-    type: Fix
-  id: 859
-  time: '2024-10-18T06:13:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4481
 - author: Whisper
   changes:
   - message: Added the Requisitions guidebook page, by epicjoston.
@@ -5159,5 +5134,20 @@
   id: 1358
   time: '2025-02-18T22:22:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5656
+- author: Whisper
+  changes:
+  - message: Fixed duplicated traits and traits not intended to be selectable, and
+      lowered the frequency of replacements for some accents.
+    type: Fix
+  id: 1359
+  time: '2025-02-19T05:18:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4872
+- author: CyberTropic
+  changes:
+  - message: Fixed fences connecting to walls.
+    type: Fix
+  id: 1360
+  time: '2025-02-19T05:19:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5668
 Name: RMC14
 Order: -1
