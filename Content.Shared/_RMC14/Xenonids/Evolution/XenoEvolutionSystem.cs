@@ -381,7 +381,7 @@ public sealed class XenoEvolutionSystem : EntitySystem
             if (!_xenoWeeds.IsOnWeeds((gridUid, grid), coordinates) && larvaEvolve > _gameTicker.RoundDuration())
             {
                 _popup.PopupEntity(
-                    Loc.GetString("cm-xeno-evolution-failed-early-weeds"),
+                    Loc.GetString("rmc-xeno-evolution-failed-early-weeds"),
                     xeno,
                     xeno,
                     PopupType.MediumCaution
