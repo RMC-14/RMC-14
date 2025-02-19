@@ -5117,6 +5117,8 @@
   - message: Fixed duplicated traits and traits not intended to be selectable, and
       lowered the frequency of replacements for some accents.
     type: Fix
+  - message: Spawning as a command role now removes stuttering accent and frontal lisps from the character for that round.
+    type: Fix
   id: 1359
   time: '2025-02-19T05:18:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4872

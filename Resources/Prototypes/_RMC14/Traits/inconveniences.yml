@@ -14,3 +14,25 @@
   components:
   - type: LightweightDrunk
     boozeStrengthMultiplier: 2
+
+- type: trait
+  id: SocialAnxiety
+  name: trait-socialanxiety-name
+  description: trait-socialanxiety-desc
+  category: SpeechTraits
+  cost: 2
+  components:
+  - type: StutteringAccent
+    matchRandomProb: 0.1
+    fourRandomProb: 0
+    threeRandomProb: 0
+    cutRandomProb: 0
+
+- type: trait
+  id: FrontalLisp
+  name: trait-frontal-lisp-name
+  description: trait-frontal-lisp-desc
+  category: SpeechTraits
+  cost: 2
+  components:
+  - type: FrontalLisp

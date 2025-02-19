@@ -50,6 +50,10 @@ public sealed class HelmetAccessoriesSystem : EntitySystem
 
         var layer = $"enum.{nameof(HelmetAccessoryLayers)}.{HelmetAccessoryLayers.Helmet}";
 
+        // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+        if (storage.Container == null)
+            return;
+
         foreach (var item in storage.Container.ContainedEntities)
         {
             if (!_accessoryQuery.TryComp(item, out var accessoryComp))

@@ -87,3 +87,23 @@
   components:
   - type: ReplacementAccent
     accent: italian
+
+- type: trait
+  id: PirateAccent
+  name: trait-pirate-accent-name
+  description: trait-pirate-accent-desc
+  category: SpeechTraits
+  cost: 1
+  components:
+  - type: PirateAccent
+    yarrChance: 0.1
+
+- type: trait
+  id: CowboyAccent
+  name: trait-cowboy-name
+  description: trait-cowboy-desc
+  category: SpeechTraits
+  cost: 1
+  components:
+  - type: ReplacementAccent
+    accent: cowboy
