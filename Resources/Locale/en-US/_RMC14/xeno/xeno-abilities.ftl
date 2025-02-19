@@ -202,6 +202,7 @@ rmc-xeno-resin-surge-wall-self = We surge the resin, creating an unstable wall!
 rmc-xeno-resin-surge-wall-others = {CAPITALIZE(THE($xeno))} surges the resin, creating an unstable wall!
 rmc-xeno-resin-surge-sticky-self = We surge the deep resin, creating an unstable sticky resin patch!
 rmc-xeno-resin-surge-sticky-others = {CAPITALIZE(THE($xeno))} surges deep resin, creating an unstable sticky resin patch!
+rmc-xeno-resin-surge-see-fail = We cannot see that location!
 
 # Burrow
 rmc-xeno-burrow-down-start = We begin burrowing ourselves into the ground.
@@ -209,11 +210,16 @@ rmc-xeno-burrow-down-failure-break = We stop burrowing.
 rmc-xeno-burrow-down-failure-bad-area = There's no way to burrow here.
 rmc-xeno-burrow-down-failure-rest = We cannot burrow while resting!
 rmc-xeno-burrow-down-finish = We burrow ourselves into the ground.
+rmc-xeno-burrow-cooldown-finish = We can burrow again.
+rmc-xeno-burrow-down-failure-cooldown = We can't burrow yet.
+rmc-xeno-burrow-down-doafter-stop = We can't do this right now!
 
 rmc-xeno-burrow-resurface-cooldown-finish = We can now surface.
 rmc-xeno-burrow-move-cooldown-finish = We can now tunnel while burrowed.
+rmc-xeno-burrow-move-forced-unburrow = We pop out of the ground!
 
 rmc-xeno-burrow-move-start = We start tunneling!
+rmc-xeno-burrow-move-break = We stop tunneling!
 rmc-xeno-burrow-move-failure = There's no way to tunnel over there.
 rmc-xeno-burrow-move-failure-solid = We can't tunnel into a solid wall!
 rmc-xeno-burrow-move-failure-bad-area = There's no way to tunnel over there.
@@ -279,7 +285,7 @@ rmc-xeno-toggle-cleave-fling = We will now throw our enemies with our cleave.
 # Soak
 rmc-xeno-soak-self = We begin to tank incoming damage!
 rmc-xeno-soak-others = {CAPITALIZE(THE($xeno))} begins to tank incoming damage!
-rmc-xeno-soak-end-fail = We stop taking incoming damage.
+rmc-xeno-soak-end-fail = We stop tanking incoming damage.
 rmc-xeno-soak-end-self = We feel enraged after taking in oncoming damage! Our tail slam's cooldown is reset and we heal!
 rmc-xeno-soak-end-others =  {CAPITALIZE(THE($xeno))} gets enraged after being damaged enough!
 

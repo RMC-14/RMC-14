@@ -1,0 +1,32 @@
+- type: entity
+  parent: RMCBaseTree
+  id: RMCTreeJoshua
+  name: joshua tree
+  description: A tall tree covered in spiky-like needles, covering its trunk.
+  placement:
+    mode: SnapgridBorder
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Flora/Trees/joshua.rsi
+    state: joshua_1
+
+- type: entity
+  parent: RMCTreeJoshua
+  id: RMCTreeJoshua1
+  components:
+  - type: Sprite
+    state: joshua_2
+
+- type: entity
+  parent: RMCTreeJoshua
+  id: RMCTreeJoshua2
+  components:
+  - type: Sprite
+    state: joshua_3
+
+- type: entity
+  parent: RMCTreeJoshua
+  id: RMCTreeJoshua3
+  components:
+  - type: Sprite
+    state: joshua_4

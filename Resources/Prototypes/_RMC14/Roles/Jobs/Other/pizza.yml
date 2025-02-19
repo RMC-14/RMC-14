@@ -79,7 +79,7 @@
     pocket1: CMDrinkCanDrGibb
     pocket2: RMCRadioHandheldAlmayer
   inhand:
-  - FoodBoxPizzaFilled
+  - RMCBoxPizzaMargherita
 
 - type: playTimeTracker
   id: CMJobPizzaDeliverer

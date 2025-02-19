@@ -74,10 +74,7 @@
   - type: SpawnPoint
     job_id: CMStaffOfficer
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: staff_officer
+    state: so_spawn
 
 - type: playTimeTracker
   id: CMJobStaffOfficer

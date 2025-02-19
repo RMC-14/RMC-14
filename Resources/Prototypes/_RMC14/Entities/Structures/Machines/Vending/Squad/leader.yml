@@ -19,8 +19,8 @@
       takeAll: CMStandard
       entries:
       - id: RMCVendorBundleCrewLeader
-    - name: Squad Kit (CHOOSE 1, for yourself or your squad)
-      choices: { RMCSquadKit: 1 }
+    - name: Squad Kit (for yourself or your squad)
+      takeOne: RMCSquadKit
       entries:
       - id: RMCKitRifleM4SPR
       - id: RMCKitCM54C
@@ -55,8 +55,8 @@
         points: 3
       - id: RMCMotionDetector
         points: 5
-    #- id: CMFultonDeviceStack
-    #  points: 5
+      - id: RMCFulton20
+        points: 5
     - name: Binoculars
       entries:
       - id: RMCRangefinder

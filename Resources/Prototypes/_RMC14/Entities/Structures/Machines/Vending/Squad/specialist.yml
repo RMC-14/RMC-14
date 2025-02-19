@@ -18,7 +18,7 @@
     pointsType: Specialist
     sections:
     - name: Weapons Specialist Sets
-      choices: { SquadSpecKit: 1 }
+      takeOne: SquadSpecKit
       sharedSpecLimit: 2 # 2 as requested until Pyro is added
       entries:
       - id: RMCDemoSpecEquipmentCase
@@ -199,12 +199,12 @@
       entries:
       - id: CMRollerBedSpawnFolded
         points: 5
+      - id: RMCFulton20
+        points: 5
       - id: CMFireExtinguisherPortable
         points: 5
       - id: RMCMotionDetector
         points: 10
-    #- id: CMFultonDeviceStack
-    #- id: CMMotionDetector
       - id: RMCWhistle
         points: 5
     - name: Binoculars

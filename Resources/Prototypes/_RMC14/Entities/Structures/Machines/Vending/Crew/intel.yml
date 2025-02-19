@@ -124,11 +124,10 @@
       - id: CMHeadsetIntel
       - id: CMMRE
     - name: Armor
-      choices: { CMArmor: 1 }
-      takeAll: RMCIntelArmor
+      takeOne: CMArmor
       entries:
       - id: RMCArmorXM4
-      - id: CMArmorM3Light
+      - id: RMCArmorM3LightVariants
       - id: CMCoatOfficer
     - name: Backpack
       choices: { CMBag: 1 }
@@ -169,7 +168,7 @@
       - id: RMCPouchFirstAidPills
         name: first-aid pouch (pill packets)
       - id: RMCPouchFlareFilled
-        name: flare pouch (full)
+        name: flare pouch (Full)
       #- id: TODO RMC14 Fuel Tank Strap Pouch
       - id: RMCPouchGeneralLarge
       - id: RMCPouchMagazinePistolLarge
@@ -177,7 +176,7 @@
       - id: RMCPouchShotgun
       - id: RMCPouchPistol
       - id: RMCPouchToolsFill
-        name: tools pouch (full)
+        name: tools pouch (Full)
         recommended: true
       #- id: RMCPouchSling # TODO RMC14 Sling Pouch
     - name: Accessories

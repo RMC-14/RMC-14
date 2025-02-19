@@ -1069,3 +1069,11 @@ RMCCrateBoxMagazineM44RevolverMarksman: RMCCrateBoxMagazineRevolverM44Marksman
 
 # 2025-01-19
 RMCCrateM54C: RMCCrateM54CMK1
+
+# 2025-02-10
+BulletRifle5.56x45mm: BulletRifle556x45mm
+CMBulletPistol.22mm: CMBulletPistol22mm
+CMCartridgePistol.22mm: CMCartridgePistol22mm
+
+# 2025-02-12
+RMCAreaSavannahPumpStarboard Quarter: RMCAreaSavannahPumpStarboardQuarter

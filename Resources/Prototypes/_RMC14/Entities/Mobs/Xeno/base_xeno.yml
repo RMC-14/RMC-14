@@ -380,9 +380,6 @@
       - XenoFruit
   - type: ParalyzeOnPullAttempt
   - type: FirePatter
-    blacklist:
-      components:
-      - Marine
   - type: RMCHandEmotes
 
 - type: entity

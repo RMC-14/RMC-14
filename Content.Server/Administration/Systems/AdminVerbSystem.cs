@@ -186,7 +186,7 @@ namespace Content.Server.Administration.Systems
                             }
 
                             jobs.Sort((a, b) => string.Compare(a.Text, b.Text, StringComparison.Ordinal));
-                            _dialog.OpenOptions(args.Target, "Choose a job", jobs);
+                            _dialog.OpenOptions(args.User, "Choose a job", jobs);
                         },
                         ConfirmationPopup = true,
                         Impact = LogImpact.High,

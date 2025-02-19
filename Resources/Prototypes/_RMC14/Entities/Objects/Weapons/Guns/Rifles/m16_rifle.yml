@@ -108,6 +108,7 @@
           - RMCAttachmentU1GrenadeLauncher
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentLaserSight
+          - RMCAttachmentM203GrenadeLauncher
         random:
         - RMCAttachmentAngledGrip
         - RMCAttachmentVerticalGrip
@@ -116,6 +117,7 @@
         - RMCAttachmentBipod # TODO RMC14 underbarrel extinguisher
         - RMCAttachmentU7UnderbarrelShotgun
         - RMCAttachmentLaserSight
+        - RMCAttachmentM203GrenadeLauncher
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.81, -0.03
@@ -159,11 +161,11 @@
     - Cartridge
     - RMCCartridgeRifleM16
   - type: CartridgeAmmo
-    proto: BulletRifle5.56x45mm
+    proto: BulletRifle556x45mm
 
 - type: entity
   parent: BulletRifle10x24mm
-  id: BulletRifle5.56x45mm
+  id: BulletRifle556x45mm
   components:
   - type: Projectile
     damage:
