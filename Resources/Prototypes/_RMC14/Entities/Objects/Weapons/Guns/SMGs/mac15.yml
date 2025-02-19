@@ -1,6 +1,6 @@
 - type: entity
   parent: CMBaseWeaponSMG
-  name: MAC-15 submachine gun
+  name: MAC-15 submachinegun
   id: WeaponSMGMAC15 # TODO RMC14 10% chance to have an underbarrel grenade launcher
   description: A cheap, reliable design and manufacture make this ubiquitous submachinegun useful despite the age.
   suffix: Filled
