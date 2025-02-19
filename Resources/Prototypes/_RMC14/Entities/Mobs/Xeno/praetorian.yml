@@ -114,6 +114,8 @@
       whitelist:
         components:
         - XenoHeavy
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.7
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -139,13 +141,13 @@
     strains:
     - RMCXenoPraetorianDancer
     - RMCXenoPraetorianVanguard
-    - RMCXenoPraetorianWarden
+    - RMCXenoPraetorianValkyrie
   - type: AcidTrap
 
 - type: entity
   parent: CMXenoPraetorianBase
-  id: RMCXenoPraetorianWarden
-  suffix: Warden
+  id: RMCXenoPraetorianValkyrie
+  suffix: Valkyrie
   components:
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Praetorian/warden_praetorian.rsi
@@ -154,49 +156,28 @@
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
-    - ActionXenoTailStab
-    - ActionXenoAcidNormal
+    - ActionXenoTailFountain
     - ActionXenoPheromones
-    - ActionXenoSpit
-    - ActionXenoSprayAcidWarden
-    - ActionXenoAidHeal
-    - ActionXenoAidRejuvenate
+    - ActionXenoTantrum
+    - ActionXenoHighGallop
+    - ActionXenoFightOrFlight
     - ActionXenoRetrieve
     - ActionXenoDevolve
     hidden: true
   - type: XenoStrain
-    name: rmc-xeno-warden-name
-    description: rmc-xeno-warden-description
-    popup: rmc-xeno-warden-popup
+    name: rmc-xeno-valkyrie-name
+    description: rmc-xeno-valkyrie-description
+    popup: rmc-xeno-valkyrie-popup
   - type: XenoPheromones
     pheromonesMultiplier: 3
-  - type: XenoSpit
-    projectileId: XenoSpitProjectilePraetorianWarden
   - type: XenoEnergy
-    alert: XenoEnergyWarden
-    popupGain: rmc-xeno-internal-health-increase-user
-    popupNotEnough: rmc-xeno-not-enough-internal-health
+    alert: XenoEnergyValkyrie
+    popupGain: rmc-xeno-fury-increase-user
+    popupNotEnough: rmc-xeno-not-enough-fury
+    max: 200
+    gainAttack: 15
+    gainAttackDowned: 15
   - type: XenoRetrieve
-  - type: XenoAid
-    componentsRemove:
-    - type: RMCSlowdown
-    - type: RMCSuperSlowdown
-    - type: RMCRooted
-  - type: XenoSprayAcid
-    acid: XenoAcidSprayStrong
-    plasmaCost: 130
-    barricadeDamage:
-      types:
-        Heat: 5
-    doAfter: 0.5
-  - type: MeleeWeapon
-    damage:
-      groups:
-        Brute: 30
-  - type: XenoTailStab
-    tailDamage:
-      groups:
-        Brute: 36
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.2
     baseSprintSpeed: 3.5
@@ -214,7 +195,19 @@
       whitelist:
         components:
         - XenoHeavy
-  - type: AcidTrap
+  - type: CMArmor
+    armor: 35
+  - type: XenoClaws
+    clawType: VerySharp
+  - type: XenoTailFountain
+  - type: XenoTantrum
+  - type: XenoFury
+  - type: XenoFightOrFlight
+    componentsRemove:
+    - type: RMCSlowdown
+    - type: RMCSuperSlowdown
+    - type: RMCRooted
+  - type: XenoHighGallop
 
 - type: entity
   parent: CMXenoPraetorianBase

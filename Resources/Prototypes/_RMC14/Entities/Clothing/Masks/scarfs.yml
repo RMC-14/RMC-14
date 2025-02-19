@@ -30,9 +30,9 @@
   - type: Foldable
     folded: true
   - type: Clothing
-    equippedPrefix: down
+    equippedPrefix: flipped
   - type: Item
-    heldPrefix: down
+    heldPrefix: flipped
   - type: Sprite
     layers:
     - state: icon

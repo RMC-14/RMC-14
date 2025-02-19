@@ -115,12 +115,10 @@
       - id: RMCGlassesAviators
       - id: RMCM5Bayonet
     - name: Specialisation Kit
-      choices: { CMBundle: 1 }
+      takeOne: CMBundle
       entries:
       - id: CMVendorBundleCombatTechnicianEssentials
-        recommended: true
       - id: CMVendorBundleSquadMedicalEssentials
-        recommended: true
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
@@ -196,9 +194,10 @@
       - id: RMCLaserDesignator
         points: 12
         recommended: true
-      #- id: RMCDataDetector # TODO RMC14 Data Detector
-      #  points: 5
-      #- id: RMCFultonRecoveryDevice # TODO RMC14 Fulton Recovery
+      - id: RMCIntelDetector
+        points: 5
+      - id: RMCFulton20
+        points: 5
       - id: RMCFlashlight
         points: 1
       - id: RMCMotionDetector
@@ -208,8 +207,8 @@
         points: 2
       - id: RMCWhistle
         points: 5
-      #- id: RMCScabbardMacheteFilled # TODO RMC14 Machete Scabbard
-      #  points: 5
+      - id: RMCScabbardMacheteFilled
+        points: 5
 
 
 # Executive Officer #
@@ -231,8 +230,7 @@
     - CMExecutiveOfficer
     sections:
     - name: Captain's Primary
-      choices: { CMPrimary: 1 }
-      takeAll: CMStandard
+      takeOne: CMPrimary
       entries:
       - id: RMCM54CMK1CaseAP
         name: M54C MK1 assault rifle
@@ -252,7 +250,7 @@
       - id: RMCBoxShotgunFlechette
         points: 20
     - name: Specilisation Kit
-      choices: { CMBundle: 1 }
+      takeOne: CMBundle
       entries:
       - id: CMVendorBundleSquadMedicalEssentials
       - id: CMVendorBundleCombatTechnicianEssentials
@@ -483,14 +481,12 @@
     - CMCommandingOfficer
     sections:
     - name: Commander's Primary
-      choices: { CMProtagGun: 1 }
+      takeOne: CMProtagGun
       entries:
       - id: WeaponRifleM59A
         name: M59A Prototype Rifle
-        recommended: true # TODO RMC14 Make choices: colour the options brown
-      - id: CMSmartGunOperatorEquipmentCaseBelt 
+      - id: CMSmartGunOperatorEquipmentCaseBelt
         name: Commander's Smartgun
-        recommended: true # TODO RMC14 Make choices: colour the options brown
     - name: Primary Ammunition
       entries:
       - id: CMMagazineRifleM54CMK1
@@ -912,16 +908,17 @@
         recommended: true
       - id: RMCPouchGeneralLarge
       - id: RMCPouchToolsFill
-        name: tools pouch (full)
+        name: tools pouch (Full)
       - id: RMCPouchConstruction
       - id: RMCPouchElectronicsFill
-        name: electronics pouch (full)
+        name: electronics pouch (Full)
       - id: RMCPouchMagazine
       - id: RMCPouchShotgun
       - id: RMCPouchPistol
       - id: RMCPouchFlareFilled
-        name: flare pouch (full)
+        name: flare pouch (Full)
       - id: RMCPouchFuelTank
+      - id: RMCPouchEngineerKit
     - name: Personal Sidearms
       jobs:
       - CMChiefEngineer
@@ -1145,7 +1142,9 @@
       choices: { CMBelt: 1 }
       entries:
       - id: CMBeltMedicBagFilled
+        name: M276 pattern lifesaver bag (Full)
       - id: CMBeltMedicalFilled
+        name: M276 medical storage rig (Full)
     - name: Personal Sidearm
       jobs:
       - CMCMO

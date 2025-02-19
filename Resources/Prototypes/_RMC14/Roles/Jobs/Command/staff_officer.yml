@@ -51,6 +51,8 @@
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-staff-officer
+    - type: ViewIntelObjectives
+    - type: CommandAccent
 
 - type: startingGear
   id: CMGearStaffOfficer
@@ -73,10 +75,7 @@
   - type: SpawnPoint
     job_id: CMStaffOfficer
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: staff_officer
+    state: so_spawn
 
 - type: playTimeTracker
   id: CMJobStaffOfficer

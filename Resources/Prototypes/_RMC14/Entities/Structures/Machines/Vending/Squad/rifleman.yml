@@ -45,7 +45,7 @@
       - id: CMBeltMarine
         recommended: true
       - id: CMBeltKnifeFilled
-        name: M276 knife rig (full)
+        name: M276 knife rig (Full)
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltHolsterSMG
@@ -72,7 +72,7 @@
       - id: RMCPouchFlareFilled
         name: Flare pouch (Full)
         recommended: true
-      #    CMSmallDocumentPouch #TODO: Make this
+      - id: RMCPouchDocumentSmall
       - id: RMCPouchMagazine
       - id: RMCPouchShotgun
       - id: RMCPouchGeneral
@@ -187,14 +187,14 @@
       entries:
       - id: CMRollerBedSpawnFolded
         points: 5
-    #- id: CMFultonDeviceStack
-    #  points: 5
+      - id: RMCFulton20
+        points: 5
       - id: CMFireExtinguisherPortable
         points: 5
       - id: RMCMotionDetector
         points: 15
-    #- id: CMDataDetector
-    #  points: 15
+      - id: RMCIntelDetector
+        points: 15
       - id: RMCWhistle
         points: 5
     - name: Binoculars

@@ -85,6 +85,11 @@
       map: ["foldedLayer"]
       visible: false
   - type: HideLayerClothing
+    slots:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Snout
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/coif.rsi
   - type: IdentityBlocker

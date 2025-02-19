@@ -51,6 +51,7 @@
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-militarywarden
+    - type: CommandAccent
 
 - type: startingGear
   id: CMGearMilitaryWarden
@@ -75,10 +76,7 @@
   - type: SpawnPoint
     job_id: CMMilitaryWarden
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: warden
+    state: wmp_spawn
 
 - type: playTimeTracker
   id: CMJobMilitaryWarden

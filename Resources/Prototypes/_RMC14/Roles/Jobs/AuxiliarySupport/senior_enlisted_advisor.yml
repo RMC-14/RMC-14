@@ -77,6 +77,8 @@
     - type: JobPrefix
       prefix: cm-job-prefix-senior-enlisted-advisor
     - type: SeeNewPlayers
+    - type: ViewIntelObjectives
+    - type: CommandAccent
 
 - type: startingGear
   id: CMGearSeniorEnlistedAdvisor
@@ -100,10 +102,7 @@
   - type: SpawnPoint
     job_id: CMSeniorEnlistedAdvisor
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: senior_enlisted_advisor
+    state: sea_spawn
 
 - type: entity
   parent: CMGuidebookRole

@@ -94,6 +94,11 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/XM88/xm88-0.rsi
       state: all
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+      ballistic-ammo: !type:Container
 
 - type: entity
   parent: BulletRifle10x24mm

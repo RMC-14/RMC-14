@@ -60,10 +60,7 @@
   - type: SpawnPoint
     job_id: CMCargoTech
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: cargo_tech
+    state: ct_spawn
 
 - type: playTimeTracker
   id: CMJobCargoTech

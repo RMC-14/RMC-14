@@ -3,7 +3,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Communications;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, EntityCategory("Spawner")]
 [Access(typeof(CommunicationsTowerSystem))]
 public sealed partial class CommunicationsTowerSpawnerComponent : Component
 {

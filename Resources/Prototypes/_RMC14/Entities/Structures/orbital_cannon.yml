@@ -48,6 +48,7 @@
     anchored: true
   - type: Physics
     bodyType: Static
+    canCollide: false
   - type: Sprite
     sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_fuel
@@ -70,6 +71,7 @@
     anchored: true
   - type: Physics
     bodyType: Static
+    canCollide: false
   - type: Sprite
     sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_warhead1
@@ -86,12 +88,7 @@
   id: RMCOrbitalCannonWarheadExplosive
   name: HE orbital warhead
   components:
-  - type: Transform
-    anchored: true
-  - type: Physics
-    bodyType: Static
   - type: Sprite
-    sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_warhead_1
   - type: OrbitalCannonWarhead
     explosion: RMCOrbitalCannonExplosionExplosive
@@ -101,12 +98,7 @@
   id: RMCOrbitalCannonWarheadIncendiary
   name: incendiary orbital warhead
   components:
-  - type: Transform
-    anchored: true
-  - type: Physics
-    bodyType: Static
   - type: Sprite
-    sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_warhead_2
   - type: OrbitalCannonWarhead
     explosion: RMCOrbitalCannonExplosionIncendiary
@@ -116,13 +108,10 @@
   id: RMCOrbitalCannonWarheadCluster
   name: cluster orbital warhead
   components:
-  - type: Transform
-    anchored: true
-  - type: Physics
-    bodyType: Static
   - type: Sprite
-    sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_warhead_3
+  - type: OrbitalCannonWarhead
+    explosion: RMCOrbitalCannonExplosionCluster
 
 - type: entity
   id: RMCOrbitalCannonWarheadSpawner
@@ -150,17 +139,17 @@
   components:
   - type: OrbitalCannonExplosion
     steps:
-    - type: RMCOB
+    - type: RMCOBXenoTunnel
       total: 5000
       slope: 1500
       max: 200
       delay: 1
-    - type: RMCOB
+    - type: RMCOBXenoTunnel
       total: 50000
       slope: 10
       max: 90
       delay: 0.3
-    - type: RMCOB
+    - type: RMCOBXenoTunnel
       total: 50000
       slope: 10
       max: 90
@@ -185,6 +174,18 @@
       delay: 1
     - fire: RMCTileFireOB
       fireRange: 18
+  - type: WarpPoint
+    location: 1 orbital bombardment
+
+- type: entity
+  parent: MarkerBase
+  id: RMCOrbitalCannonExplosionCluster
+  name: cluster OB explosion
+  suffix: FIRES AN OB!!!
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: OrbitalCannonExplosion # TODO: RMC14
   - type: WarpPoint
     location: 1 orbital bombardment
 
@@ -221,6 +222,8 @@
   - type: Transform
     anchored: true
     rot: 90
+  - type: Physics
+    bodyType: Static
   - type: Sprite
     sprite: _RMC14/Structures/objects.rsi
     state: ob_chair

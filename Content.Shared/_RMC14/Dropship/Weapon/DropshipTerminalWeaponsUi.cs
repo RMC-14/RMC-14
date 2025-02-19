@@ -19,6 +19,7 @@ public enum DropshipTerminalWeaponsScreen
     Cams,
     SelectingWeapon,
     Medevac,
+    Fulton,
 }
 
 [Serializable, NetSerializable]
@@ -37,6 +38,12 @@ public sealed class DropshipTerminalWeaponsChooseWeaponMsg(bool first, NetEntity
 
 [Serializable, NetSerializable]
 public sealed class DropshipTerminalWeaponsChooseMedevacMsg(bool first) : BoundUserInterfaceMessage
+{
+    public readonly bool First = first;
+}
+
+[Serializable, NetSerializable]
+public sealed class DropshipTerminalWeaponsChooseFultonMsg(bool first) : BoundUserInterfaceMessage
 {
     public readonly bool First = first;
 }
@@ -94,6 +101,18 @@ public sealed class DropshipTerminalWeaponsMedevacNextMsg : BoundUserInterfaceMe
 
 [Serializable, NetSerializable]
 public sealed class DropshipTerminalWeaponsMedevacSelectMsg(NetEntity target) : BoundUserInterfaceMessage
+{
+    public readonly NetEntity Target = target;
+}
+
+[Serializable, NetSerializable]
+public sealed class DropshipTerminalWeaponsFultonPreviousMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
+public sealed class DropshipTerminalWeaponsFultonNextMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
+public sealed class DropshipTerminalWeaponsFultonSelectMsg(NetEntity target) : BoundUserInterfaceMessage
 {
     public readonly NetEntity Target = target;
 }

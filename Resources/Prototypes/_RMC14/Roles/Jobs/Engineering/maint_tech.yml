@@ -60,10 +60,7 @@
   - type: SpawnPoint
     job_id: CMMaintTech
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: maintenance_tech
+    state: mt_spawn
 
 - type: playTimeTracker
   id: CMJobMaintTech

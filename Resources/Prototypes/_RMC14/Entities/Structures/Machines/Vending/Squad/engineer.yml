@@ -20,7 +20,7 @@
       entries:
       - id: CMVendorBundleCombatTechnicianEssentials
     - name: Handheld Defense
-      choices: { CMHandheldDefense: 1 }
+      takeOne: CMHandheldDefense
       entries:
     #    CM21STeslaCoil
     #    CMJIMAPlantedFlag
@@ -49,8 +49,8 @@
         name: plasteel x10
         points: 7
         recommended: true
-    #- id: CMPlasticExplosive
-    #  points: 3
+      - id: RMCExplosivePlastic
+        points: 3
       - id: RMCExplosiveBreachingCharge
         points: 5
         recommended: true
@@ -144,8 +144,8 @@
       entries:
       - id: CMRollerBedSpawnFolded
         points: 5
-    #- id: CMFultonDeviceStack
-    #  points: 5
+      - id: RMCFulton20
+        points: 5
       - id: CMFireExtinguisherPortable
         points: 3
       - id: RMCMotionDetector
@@ -264,6 +264,7 @@
       - id: RMCPouchPistol
       - id: RMCPouchToolsFill
         name: Tools pouch (Full)
+      - id: RMCPouchEngineerKit
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:

@@ -1,13 +1,10 @@
 using Content.Shared.Administration.Logs;
-using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
-using Robust.Shared.Network;
-using Robust.Shared.Player;
 
 namespace Content.Shared.Chemistry.EntitySystems;
 
@@ -74,7 +71,8 @@ public sealed class SolutionTransferSystem : EntitySystem
         // Add specific transfer verbs according to the container's size
         var priority = 0;
         var user = args.User;
-        foreach (var amount in DefaultTransferAmounts)
+        var amounts = ent.Comp.TransferAmounts ?? DefaultTransferAmounts;
+        foreach (var amount in amounts)
         {
           if (amount < comp.MinimumTransferAmount || amount > comp.MaximumTransferAmount)
                 continue;
