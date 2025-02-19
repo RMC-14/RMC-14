@@ -70,7 +70,6 @@
       rmc-aslot-barrel:
         whitelist:
           tags:
-          - RMCAttachmentBarrelCharger
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentSuppressor
           - RMCM5Bayonet
