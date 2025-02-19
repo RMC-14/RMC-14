@@ -1,6 +1,6 @@
 - type: entity
   parent: CMBaseWeaponRifle
-  name: MAR-40 Assault Rifle
+  name: MAR-40 battle rifle
   id: WeaponRifleMAR40
   description: A cheap, reliable assault rifle chambered in 7.62x39mm. Commonly found in the hands of criminals or mercenaries, or in the hands of the SPP or CLF.
   suffix: Filled
