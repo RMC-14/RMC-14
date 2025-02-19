@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added the Requisitions guidebook page, by epicjoston.
-    type: Add
-  id: 860
-  time: '2024-10-18T09:47:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4508
 - author: Dutch-VanDerLinde
   changes:
   - message: Gun bayonets can now be used while devoured by a xenonid. You cannot
@@ -5149,5 +5142,17 @@
   id: 1360
   time: '2025-02-19T05:19:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5668
+- author: Vermidia
+  changes:
+  - message: Fixed APC boards not fitting in a few pouches
+    type: Fix
+  - message: Fixed plastic explosives not fitting in the tools pouch
+    type: Fix
+  - message: Added the engineer kit pouch, which requires engineering skill to put
+      stuff inside. Holds various engineering items.
+    type: Add
+  id: 1361
+  time: '2025-02-19T05:36:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5664
 Name: RMC14
 Order: -1
