@@ -4,23 +4,6 @@ meta:
 tilemap:
   0: Space
   198: CMFloorPlating
-  273: CMFloorSteelPlanet
-  364: CMFloorSteelPlanetDelivery
-  853: CMPlanetGCircuit
-  895: CMPlanetMarsCave2
-  921: CMPlanetMarsSand1
-  1156: RMCFloorCement1
-  1159: RMCFloorCement12
-  1161: RMCFloorCement14
-  1162: RMCFloorCement15
-  1167: RMCFloorCement2
-  1169: RMCFloorCement3
-  1170: RMCFloorCement4
-  1171: RMCFloorCement5
-  1175: RMCFloorCement9
-  1176: RMCFloorCementSunBleached1
-  1182: RMCFloorCementSunBleached15
-  1195: RMCFloorCementSunBleached9
 entities:
 - proto: ""
   entities:
@@ -29,7 +12,6 @@ entities:
     - type: MetaData
       name: grid
     - type: Transform
-      parent: 2
     - type: MapGrid
       chunks:
         0,0:

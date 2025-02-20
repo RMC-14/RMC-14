@@ -32,6 +32,18 @@
       Snow: s_binoculars
       Classic: c_binoculars
       Urban: u_binoculars
+      
+- type: entity
+  parent: RMCBinoculars
+  id: RMCBinocularsCiv
+  name: binoculars
+  description: A pair of binoculars.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/binoculars.rsi
+    state: binoculars_civ
+  - type: ItemCamouflage
+    states:
 
 - type: entity
   parent: RMCBinoculars
