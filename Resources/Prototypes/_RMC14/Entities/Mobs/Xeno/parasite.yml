@@ -86,6 +86,7 @@
   - type: ParasiteAI
   - type: CanEscapeInventory
     baseResistTime: 1
+  - type: Tackleable
   - type: HTN
     rootTask:
       task: RMCParasiteActiveCompound
