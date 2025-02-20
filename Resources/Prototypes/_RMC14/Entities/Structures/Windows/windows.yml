@@ -118,6 +118,10 @@
   - type: Construction
     graph: RMCWindowAlmayer
     node: windowAlmayerReinforced
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameAlmayer
+    sound:
+      collection: WindowShatter
 
 - type: entity
   parent: CMBaseWindow
@@ -188,6 +192,10 @@
   - type: Construction
     graph: RMCWindowWhite
     node: windowWhiteReinforced
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameWhite
+    sound:
+      collection: WindowShatter
 
 - type: entity
   parent: CMBaseWindow
@@ -236,6 +244,10 @@
   - type: Construction
     graph: RMCWindowColony
     node: windowColony
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameColony
+    sound:
+      collection: WindowShatter
 
 - type: entity
   parent: CMBaseWindow
@@ -287,6 +299,10 @@
   - type: Construction
     graph: RMCWindowColonyReinforced
     node: windowColonyReinforced
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameColonyReinforced
+    sound:
+      collection: WindowShatter
 
 - type: entity
   parent: CMBaseWindow
@@ -341,6 +357,10 @@
   - type: Construction
     graph: RMCWindowHunterReinforced
     node: windowHunterReinforced
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameHunterReinforced
+    sound:
+      collection: WindowShatter
 
 - type: entity
   parent: CMBaseWindow
@@ -389,6 +409,10 @@
   - type: Construction
     graph: RMCWindowWood
     node: windowWood
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameWood
+    sound:
+      collection: WindowShatter
 
 - type: entity
   parent: CMBaseWindow
@@ -440,6 +464,10 @@
   - type: Construction
     graph: RMCWindowWood
     node: windowWoodReinforced
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameWood
+    sound:
+      collection: WindowShatter
 
 - type: entity
   parent: CMBaseWindow
@@ -491,3 +519,7 @@
   - type: Construction
     graph: RMCWindowAI
     node: windowAIReinforced
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameAI
+    sound:
+      collection: WindowShatter

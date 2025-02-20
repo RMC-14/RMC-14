@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: RMCWindowFrameColonyReinforced
   id: RMCWindowFrameCorsatReinforced
   components:
@@ -66,3 +66,7 @@
   - type: Construction
     graph: RMCWindowCorsatReinforced
     node: windowCorsatReinforced
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameColonyReinforced
+    sound:
+      collection: WindowShatter

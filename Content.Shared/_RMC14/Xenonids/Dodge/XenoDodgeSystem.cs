@@ -1,10 +1,13 @@
-﻿using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.Empower;
+using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared.Actions;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
+using System;
 
 namespace Content.Shared._RMC14.Xenonids.Dodge;
 
@@ -18,6 +21,7 @@ public sealed class XenoDodgeSystem : EntitySystem
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _crowd = new();
     public override void Initialize()
@@ -46,6 +50,11 @@ public sealed class XenoDodgeSystem : EntitySystem
         EnsureComp<XenoActiveDodgeComponent>(xeno).ExpiresAt = _timing.CurTime + xeno.Comp.Duration;
         _speed.RefreshMovementSpeedModifiers(xeno);
         _popup.PopupEntity(Loc.GetString("rmc-xeno-dodge-self"), xeno, xeno, PopupType.Medium);
+        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        {
+            if (action.BaseEvent is XenoDodgeActionEvent)
+                _actions.SetToggled(actionId, true);
+        }
     }
 
     private void OnActiveDodgeRefresh(Entity<XenoActiveDodgeComponent> xeno, ref RefreshMovementSpeedModifiersEvent args)
@@ -59,6 +68,11 @@ public sealed class XenoDodgeSystem : EntitySystem
         if (!TerminatingOrDeleted(xeno))
         {
             _speed.RefreshMovementSpeedModifiers(xeno);
+            foreach (var (actionId, action) in _actions.GetActions(xeno))
+            {
+                if (action.BaseEvent is XenoDodgeActionEvent)
+                    _actions.SetToggled(actionId, false);
+            }
         }
     }
 

@@ -44,6 +44,10 @@
   - type: RMCDropshipBlocked
   - type: MinimapColor
     color: "#8d2294ad"
+  - type: DamageOnXenoScissors
+    damage:
+      types:
+        Slash: 50
 
 - type: entity
   parent: CMBaseStructureCorrodible

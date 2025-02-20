@@ -1,27 +1,18 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Emote;
-using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Weapons.Melee;
-using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.ScissorCut;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
-using Content.Shared.Physics;
-using Content.Shared.Weapons.Melee;
-using Content.Shared.Weapons.Melee.Events;
-using Pidgin;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
-using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
-using System.Linq;
-using System.Numerics;
 
 namespace Content.Shared._RMC14.Xenonids.Pierce;
 
@@ -29,7 +20,6 @@ public sealed class XenoPierceSystem : EntitySystem
 {
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
@@ -40,8 +30,6 @@ public sealed class XenoPierceSystem : EntitySystem
     [Dependency] private readonly VanguardShieldSystem _vanguard = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
     [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
-
-    private const int AttackMask = (int)(CollisionGroup.MobMask | CollisionGroup.Opaque);
 
     public override void Initialize()
     {
@@ -74,8 +62,19 @@ public sealed class XenoPierceSystem : EntitySystem
 
         foreach (var ent in _physics.GetCollidingEntities(Transform(xeno).MapID, rot))
         {
-            if (!_interaction.InRangeUnobstructed(xeno.Owner, ent.Owner, xeno.Comp.Range.Float()))
+            if (!_interaction.InRangeUnobstructed(xeno.Owner, ent.Owner, xeno.Comp.Range.Float() + 0.5f))
                 continue;
+
+            if (TryComp<DestroyOnXenoPierceScissorComponent>(ent, out var destroy))
+            {
+                if (_net.IsServer)
+                {
+                    SpawnAtPosition(destroy.SpawnPrototype, ent.Owner.ToCoordinates());
+                    QueueDel(ent);
+                }
+                _audio.PlayPredicted(destroy.Sound, ent, xeno);
+                continue;
+            }
 
             if (!_xeno.CanAbilityAttackTarget(xeno, ent))
                 continue;

@@ -1,4 +1,5 @@
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Aura;
 
@@ -11,4 +12,7 @@ public sealed partial class AuraComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan? ExpiresAt;
+
+    [DataField, AutoNetworkedField]
+    public float OutlineWidth = 2;
 }
