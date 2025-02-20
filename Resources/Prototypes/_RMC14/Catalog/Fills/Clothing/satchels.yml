@@ -7,9 +7,11 @@
     contents:
     - id: RMCWeaponPistolHoldout
     - id: CMCrowbar
-    - id: RMCFoodBoxPizzaFilled
-      amount: 3
+    - id: RMCBoxPizzaVegetable
+    - id: RMCBoxPizzaMushroom
+    - id: RMCBoxPizzaMeat
     - id: CMDrinkCanDrGibb
+    # ThirteenLoko
   - type: IgnoreContentsSize
     items:
       tags:

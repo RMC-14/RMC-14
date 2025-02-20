@@ -11,10 +11,41 @@
   - type: Storage #hopefully in the future someone smarter than me can add storage(?) for integrated things like netting, HUD, etc. but for now this is for hiding snacks
     maxItemSize: Tiny
     grid:
-    - 0,0,3,1 # TODO RMC14 7, but 2 slots are reserved for garbs
+    - 0,0,7,1 # 4 slots, 2 reserved for helmet accessories
     blacklist:
       tags:
       - Pouch
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-cant-fit
+      count: 2
+      whitelist:
+        components:
+        - RMCLighter
+        - RMCFlask
+        - CMScalpel
+        - Figurine
+        - Matchbox
+        tags:
+        - CigPack
+        - Cigarette
+#       - TODO RMC14 cards
+        - Slice
+#       - TODO RMC14 glasses (eyewear)
+#       - TODO RMC14 walkman and casettes
+        - Pen
+        - Crayon
+        - RMCHandful
+        - Flashlight
+        - Brutepack
+        - CMOintment
+        - CMAutoInjector
+        - PillPacket
+    - popup: rmc-storage-limit-accessories
+      count: 2
+      whitelist:
+        components:
+        - HelmetAccessory
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
@@ -37,6 +68,7 @@
       - CMScalpel
       - Figurine
       - Matchbox
+      - HelmetAccessory
       tags:
       - CigPack
       - Cigarette
@@ -44,7 +76,6 @@
       - Slice
 #      - TODO RMC14 glasses (eyewear)
 #      - TODO RMC14 walkman and casettes
-#      - TODO RMC14 helmet garb
       - Pen
       - Crayon
       - RMCHandful
@@ -59,6 +90,7 @@
       components:
       - Xeno
   - type: Appearance
+  - type: HelmetAccessoryHolder
 
 - type: entity
   parent: RMCHelmetBase

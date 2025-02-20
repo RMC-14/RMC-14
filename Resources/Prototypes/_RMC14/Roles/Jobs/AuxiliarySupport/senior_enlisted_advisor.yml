@@ -78,6 +78,7 @@
       prefix: cm-job-prefix-senior-enlisted-advisor
     - type: SeeNewPlayers
     - type: ViewIntelObjectives
+    - type: CommandAccent
 
 - type: startingGear
   id: CMGearSeniorEnlistedAdvisor

@@ -7,6 +7,7 @@ using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Actions;
 
 namespace Content.Shared._RMC14.Xenonids.Crippling;
 
@@ -18,8 +19,7 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
 
     public override void Initialize()
     {
@@ -32,6 +32,12 @@ public sealed class XenoCripplingStrikeSystem : EntitySystem
 
     private void OnXenoCripplingStrikeAction(Entity<XenoCripplingStrikeComponent> xeno, ref XenoCripplingStrikeActionEvent args)
     {
+        if (args.Handled)
+            return;
+
+        if (!_rmcActions.TryUseAction(xeno, args.Action))
+            return;
+
         args.Handled = true;
         var active = EnsureComp<XenoActiveCripplingStrikeComponent>(xeno);
         var reset = EnsureComp<MeleeResetComponent>(xeno);
