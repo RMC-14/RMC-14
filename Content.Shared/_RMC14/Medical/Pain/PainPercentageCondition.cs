@@ -6,7 +6,6 @@ namespace Content.Shared._RMC14.Medical.Pain;
 
 public sealed partial class PainPercentage : EntityEffectCondition
 {
-    [Dependency] private readonly PainSystem _ps = default!;
 
     [DataField]
     public FixedPoint2 Max = FixedPoint2.MaxValue;
@@ -18,7 +17,7 @@ public sealed partial class PainPercentage : EntityEffectCondition
     {
         if (args.EntityManager.TryGetComponent(args.TargetEntity, out PainComponent? pain))
         {
-            var painPercentage = _ps.GetCurrentPainPercentage(pain);
+            var painPercentage = pain.CurrentPainPercentage;
             if (painPercentage >= Min && painPercentage < Max)
                 return true;
         }

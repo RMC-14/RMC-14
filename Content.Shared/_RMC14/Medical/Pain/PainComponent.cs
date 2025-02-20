@@ -7,10 +7,13 @@ namespace Content.Shared._RMC14.Medical.Pain
     [RegisterComponent, NetworkedComponent]
     public sealed partial class PainComponent : Component
     {
-        [ViewVariables, Access(typeof(PainSystem))]
+        /// <summary>
+        /// Sum of pain increacing factors at the moment
+        /// </summary>
+        [ViewVariables]
         public FixedPoint2 CurrentPain = FixedPoint2.Zero;
 
-        [ViewVariables, Access(typeof(PainSystem))]
+        [ViewVariables]
         public FixedPoint2 CurrentPainPercentage = FixedPoint2.Zero;
 
         [ViewVariables, Access(typeof(PainSystem))]
@@ -32,13 +35,13 @@ namespace Content.Shared._RMC14.Medical.Pain
         public FixedPoint2 AirlossPainMultiplier = FixedPoint2.Zero;
 
         [DataField(required: true, serverOnly: true)]
-        public EntityEffect[] PainLevels = default!;
+        public List<EntityEffect> PainLevels = new(0);
     }
 
     [DataDefinition]
     public sealed partial class PainReductionModificator
     {
-        public DateTime EffectEnd;
+        public TimeSpan Duration;
         public FixedPoint2 EffectStrength;
     }
 }
