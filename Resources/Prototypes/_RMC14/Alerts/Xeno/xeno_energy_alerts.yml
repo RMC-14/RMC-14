@@ -48,7 +48,7 @@
   parent: XenoEnergyBase
   id: XenoEnergyAcider
   name: Acid reserves
-  description: Your stored acid. Used by different abilities
+  description: Your stored acid. Used by different abilities. You can only passively generate up to 400.
 
 - type: alert
   parent: XenoEnergyBase
