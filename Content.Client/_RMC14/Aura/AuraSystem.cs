@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Aura;
+using Content.Shared._RMC14.Stealth;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Shared.Prototypes;
@@ -29,6 +30,9 @@ public sealed class AuraSystem : SharedAuraSystem
         if (TerminatingOrDeleted(ent))
             return;
 
+        if (HasComp<EntityActiveInvisibleComponent>(ent))
+            return;
+
         if (!TryComp(ent, out SpriteComponent? sprite))
             return;
 
@@ -44,6 +48,7 @@ public sealed class AuraSystem : SharedAuraSystem
         while (auraQuery.MoveNext(out var uid, out var aura, out var sprite))
         {
             sprite.PostShader?.SetParameter("outline_color", aura.Color);
+            sprite.PostShader?.SetParameter("outline_width", aura.OutlineWidth);
         }
     }
 }

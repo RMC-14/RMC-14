@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CMBaseStructure
   id: CMRack
   name: rack
@@ -55,3 +55,5 @@
     node: rack
   - type: DamageMultiplierFlags
     flags: Breaching
+  - type: XenoLeapDestroyOnPass
+    spawnPrototype: CMSheetMetalBase

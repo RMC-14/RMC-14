@@ -16,7 +16,7 @@ public abstract class SharedAuraSystem : EntitySystem
     /// <param name="ent"></param>
     /// <param name="auraColor"></param>
     /// <param name="duration">null = lasts forever</param>
-    public void GiveAura(EntityUid ent, Color auraColor, TimeSpan? duration)
+    public void GiveAura(EntityUid ent, Color auraColor, TimeSpan? duration, float outlineWidth = 2)
     {
         //No aura to invis lurkers etc
         if (HasComp<EntityActiveInvisibleComponent>(ent))
@@ -26,6 +26,7 @@ public abstract class SharedAuraSystem : EntitySystem
 
         aura.Color = auraColor;
         aura.ExpiresAt = _timing.CurTime + duration;
+        aura.OutlineWidth = outlineWidth;
 
         Dirty(ent, aura);
     }

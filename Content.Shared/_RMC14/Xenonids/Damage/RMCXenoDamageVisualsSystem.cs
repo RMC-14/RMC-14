@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Xenonids.Fortify;
+using Content.Shared._RMC14.Xenonids.Fortify;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Damage;
 using Content.Shared.Mobs;

@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Medical.Surgery.Steps;
 using Content.Shared._RMC14.Xenonids;
@@ -77,7 +77,7 @@ public sealed class CMArmorSystem : EntitySystem
         {
             var ev = new CMGetArmorEvent(SlotFlags.OUTERCLOTHING | SlotFlags.INNERCLOTHING);
             RaiseLocalEvent(armored, ref ev);
-            string? armorMessage = ev.Armor * ev.ArmorModifier + " / " + armored.Comp.Armor;
+            string? armorMessage = FixedPoint2.New(ev.Armor * ev.ArmorModifier) + " / " + armored.Comp.Armor;
             var max = _alerts.GetMaxSeverity(xeno.ArmorAlert);
 
             var severity = max - ContentHelpers.RoundToLevels(ev.Armor * ev.ArmorModifier, MaxXenoArmor, max + 1);
