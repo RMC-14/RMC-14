@@ -1,0 +1,76 @@
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: RMCFloorStrataGreenBase
+  name: tiles-cm-default-green
+
+- type: tile
+  parent: RMCFloorStrataGreenBase
+  id: RMCFloorStrataGreen
+  name: green metal tile
+  sprite: /Textures/_RMC14/Tiles/strata/green1.png
+
+- type: tile
+  parent: RMCFloorStrataGreen
+  id: RMCFloorStrataGreenTile
+  sprite: /Textures/_RMC14/Tiles/strata/green2.png
+
+- type: tile
+  parent: RMCFloorStrataGreen
+  id: RMCFloorStrataGreen1
+  sprite: /Textures/_RMC14/Tiles/strata/green_1.png
+
+- type: tile
+  parent: RMCFloorStrataGreen
+  id: RMCFloorStrataGreen2
+  sprite: /Textures/_RMC14/Tiles/strata/green_2.png
+
+- type: tile
+  parent: RMCFloorStrataGreen
+  id: RMCFloorStrataGreen3
+  sprite: /Textures/_RMC14/Tiles/strata/green_3.png
+
+- type: tile
+  parent: RMCFloorStrataGreen
+  id: RMCFloorStrataGreen4
+  sprite: /Textures/_RMC14/Tiles/strata/green_4.png
+
+- type: tile
+  parent: RMCFloorStrataGreen
+  id: RMCFloorStrataGreen5
+  sprite: /Textures/_RMC14/Tiles/strata/green_5.png
+
+- type: tile
+  parent: RMCFloorStrataGreen
+  id: RMCFloorStrataGreen6
+  sprite: /Textures/_RMC14/Tiles/strata/green_6.png
+
+- type: tile
+  parent: RMCFloorStrataGreen
+  id: RMCFloorStrataGreen7
+  sprite: /Textures/_RMC14/Tiles/strata/green_7.png
+
+- type: tile
+  parent: RMCFloorStrataGreen
+  id: RMCFloorStrataGreen8
+  sprite: /Textures/_RMC14/Tiles/strata/green_8.png
+
+- type: tile
+  parent: RMCFloorStrataGreen
+  id: RMCFloorStrataGreenCorner1
+  sprite: /Textures/_RMC14/Tiles/strata/green_corner_1.png
+
+- type: tile
+  parent: RMCFloorStrataGreen
+  id: RMCFloorStrataGreenCorner2
+  sprite: /Textures/_RMC14/Tiles/strata/green_corner_2.png
+
+- type: tile
+  parent: RMCFloorStrataGreen
+  id: RMCFloorStrataGreenCorner3
+  sprite: /Textures/_RMC14/Tiles/strata/green_corner_3.png
+
+- type: tile
+  parent: RMCFloorStrataGreen
+  id: RMCFloorStrataGreenCorner4
+  sprite: /Textures/_RMC14/Tiles/strata/green_corner_4.png

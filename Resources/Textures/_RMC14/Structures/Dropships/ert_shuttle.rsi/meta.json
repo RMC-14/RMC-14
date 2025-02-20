@@ -8,385 +8,391 @@
   },
   "states": [
     {
-      "name": "leftengine_1",
+      "name": "left_engine_01",
       "directions": 4
     },
     {
-      "name": "leftengine_2",
+      "name": "left_engine_02",
       "directions": 4
     },
     {
-      "name": "leftengine_3",
+      "name": "left_engine_03",
       "directions": 4
     },
     {
-      "name": "rightengine_1",
+      "name": "right_engine_01",
       "directions": 4
     },
     {
-      "name": "rightengine_2",
+      "name": "right_engine_02",
       "directions": 4
     },
     {
-      "name": "rightengine_3",
+      "name": "right_engine_03",
       "directions": 4
     },
     {
-      "name": "stan1",
+      "name": "standard_wall_01",
       "directions": 4
     },
     {
-      "name": "stan2",
+      "name": "standard_wall_02",
       "directions": 4
     },
     {
-      "name": "stan3",
+      "name": "standard_wall_03",
       "directions": 4
     },
     {
-      "name": "stan_l_w",
+      "name": "standard_leftward_wall",
       "directions": 4
     },
     {
-      "name": "stan_r_w",
+      "name": "standard_rightward_wall",
       "directions": 4
     },
     {
-      "name": "stan4",
+      "name": "standard_wall_04",
       "directions": 4
     },
     {
-      "name": "stan_inner_w_2",
+      "name": "standard_inner_wall_02",
       "directions": 4
     },
     {
-      "name": "stan5",
+      "name": "standard_wall_05",
       "directions": 4
     },
     {
-      "name": "stan_leftengine",
+      "name": "standard_left_engine",
       "directions": 4
     },
     {
-      "name": "stan8",
+      "name": "standard_wall_08",
       "directions": 4
     },
     {
-      "name": "stan9",
+      "name": "standard_wall_09",
       "directions": 4
     },
     {
-      "name": "stan_rightengine",
+      "name": "standard_right_engine",
       "directions": 4
     },
     {
-      "name": "stan20",
+      "name": "standard_wall_20",
       "directions": 4
     },
     {
-      "name": "stan21",
+      "name": "standard_wall_21",
       "directions": 4
     },
     {
-      "name": "stan22",
+      "name": "standard_wall_22",
       "directions": 4
     },
     {
-      "name": "stan23",
+      "name": "standard_wall_23",
       "directions": 4
     },
     {
-      "name": "stan25",
+      "name": "standard_wall_25",
       "directions": 4
     },
     {
-      "name": "stan27",
+      "name": "standard_wall_27",
       "directions": 4
     },
     {
-      "name": "stan_black_t_down",
+      "name": "standard_t_wall_inverted",
       "directions": 4
     },
     {
-      "name": "stan_black_t_up",
+      "name": "standard_t_wall",
       "directions": 4
     },
     {
-      "name": "stan_inner_dark",
+      "name": "standard_outer_wall",
       "directions": 4
     },
     {
-      "name": "stan_inner_s_w",
+      "name": "standard_inner_southward_wall",
       "directions": 4
     },
     {
-      "name": "stan_inner_t_right",
+      "name": "standard_inner_rightward_t_wall",
       "directions": 4
     },
     {
-      "name": "stan_inner_t_left",
+      "name": "standard_inner_leftward_t_wall",
       "directions": 4
     },
     {
-      "name": "stan_inner_w_1",
+      "name": "standard_inner_wall_01",
       "directions": 4
     },
     {
-      "name": "stan_white_t_up",
+      "name": "standard_inner_t_wall",
       "directions": 4
     },
     {
-      "name": "upp1",
+      "name": "spp_wall_01",
       "directions": 4
     },
     {
-      "name": "upp2",
+      "name": "spp_wall_02",
       "directions": 4
     },
     {
-      "name": "upp3",
+      "name": "spp_wall_03",
       "directions": 4
     },
     {
-      "name": "upp4",
+      "name": "spp_wall_04",
       "directions": 4
     },
     {
-      "name": "upp5",
+      "name": "spp_wall_05",
       "directions": 4
     },
     {
-      "name": "upp_leftengine",
+      "name": "spp_left_engine",
       "directions": 4
     },
     {
-      "name": "upp8",
+      "name": "spp_wall_08",
       "directions": 4
     },
     {
-      "name": "upp9",
+      "name": "spp_wall_09",
       "directions": 4
     },
     {
-      "name": "upp_rightengine",
+      "name": "spp_right_engine",
       "directions": 4
     },
     {
-      "name": "upp16",
+      "name": "spp_wall_16",
       "directions": 4
     },
     {
-      "name": "upp20",
+      "name": "spp_wall_20",
       "directions": 4
     },
     {
-      "name": "upp21",
+      "name": "spp_wall_21",
       "directions": 4
     },
     {
-      "name": "upp22",
+      "name": "spp_wall_22",
       "directions": 4
     },
     {
-      "name": "upp23",
+      "name": "spp_wall_23",
       "directions": 4
     },
     {
-      "name": "upp25",
+      "name": "spp_wall_25",
       "directions": 4
     },
     {
-      "name": "upp27",
+      "name": "spp_wall_27",
       "directions": 4
     },
     {
-      "name": "wy1",
+      "name": "weya_wall_01",
       "directions": 4
     },
     {
-      "name": "wy2",
+      "name": "weya_wall_02",
       "directions": 4
     },
     {
-      "name": "wy3",
+      "name": "weya_wall_03",
       "directions": 4
     },
     {
-      "name": "wy4",
+      "name": "weya_wall_04",
       "directions": 4
     },
     {
-      "name": "wy5",
+      "name": "weya_wall_05",
       "directions": 4
     },
     {
-      "name": "wy_leftengine",
+      "name": "weya_left_engine",
       "directions": 4
     },
     {
-      "name": "wy8",
+      "name": "weya_wall_08",
       "directions": 4
     },
     {
-      "name": "wy9",
+      "name": "weya_wall_09",
       "directions": 4
     },
     {
-      "name": "wy_rightengine",
+      "name": "weya_right_engine",
       "directions": 4
     },
     {
-      "name": "wy12",
+      "name": "weya_wall_12",
       "directions": 4
     },
     {
-      "name": "wy13",
+      "name": "weya_wall_13",
       "directions": 4
     },
     {
-      "name": "wy14",
+      "name": "weya_wall_14",
       "directions": 4
     },
     {
-      "name": "wy15",
+      "name": "weya_wall_15",
       "directions": 4
     },
     {
-      "name": "wy16",
+      "name": "weya_wall_16",
       "directions": 4
     },
     {
-      "name": "wy17",
+      "name": "weya_wall_17",
       "directions": 4
     },
     {
-      "name": "wy20",
+      "name": "weya_wall_18"
+    },
+    {
+      "name": "weya_wall_19"
+    },
+    {
+      "name": "weya_wall_20",
       "directions": 4
     },
     {
-      "name": "wy21",
+      "name": "weya_wall_21",
       "directions": 4
     },
     {
-      "name": "wy22",
+      "name": "weya_wall_22",
       "directions": 4
     },
     {
-      "name": "wy23",
+      "name": "weya_wall_23",
       "directions": 4
     },
     {
-      "name": "wy25",
+      "name": "weya_wall_25",
       "directions": 4
     },
     {
-      "name": "wy27",
+      "name": "weya_wall_27",
       "directions": 4
     },
     {
-      "name": "T1"
+      "name": "nightmare_spp_wall_01"
     },
     {
-      "name": "T2"
+      "name": "nightmare_spp_wall_02"
     },
     {
-      "name": "T3"
+      "name": "nightmare_spp_wall_03"
     },
     {
-      "name": "T4"
+      "name": "nightmare_spp_wall_04"
     },
     {
-      "name": "T5"
+      "name": "nightmare_spp_wall_05"
     },
     {
-      "name": "T6"
+      "name": "nightmare_spp_wall_06"
     },
     {
-      "name": "T15"
+      "name": "nightmare_spp_wall_15"
     },
     {
-      "name": "T7"
+      "name": "nightmare_spp_wall_07"
     },
     {
-      "name": "T8"
+      "name": "nightmare_spp_wall_08"
     },
     {
-      "name": "T20"
+      "name": "nightmare_spp_wall_20"
     },
     {
-      "name": "T9"
+      "name": "nightmare_spp_left_engine_01"
     },
     {
-      "name": "T17"
+      "name": "nightmare_spp_right_engine_01"
     },
     {
-      "name": "T10"
+      "name": "nightmare_spp_left_engine_02"
     },
     {
-      "name": "T19"
+      "name": "nightmare_spp_right_engine_02"
     },
     {
-      "name": "T11"
+      "name": "nightmare_spp_wall_11"
     },
     {
-      "name": "T16"
+      "name": "nightmare_spp_wall_16"
     },
     {
-      "name": "T12"
+      "name": "nightmare_spp_wall_12"
     },
     {
-      "name": "T13"
+      "name": "nightmare_spp_wall_13"
     },
     {
-      "name": "T14"
+      "name": "nightmare_spp_wall_14"
     },
     {
-      "name": "twe1"
+      "name": "tse_wall_01"
     },
     {
-      "name": "twe2"
+      "name": "tse_wall_02"
     },
     {
-      "name": "twe3"
+      "name": "tse_wall_03"
     },
     {
-      "name": "twe4"
+      "name": "tse_wall_04"
     },
     {
-      "name": "twe5"
+      "name": "tse_wall_05"
     },
     {
-      "name": "twe_leftengine"
+      "name": "tse_left_engine"
     },
     {
-      "name": "twe8"
+      "name": "tse_wall_08"
     },
     {
-      "name": "twe9"
+      "name": "tse_wall_09"
     },
     {
-      "name": "twe_rightengine"
+      "name": "tse_right_engine"
     },
     {
-      "name": "twe16"
+      "name": "tse_wall_16"
     },
     {
-      "name": "twe20"
+      "name": "tse_wall_20"
     },
     {
-      "name": "twe21"
+      "name": "tse_wall_21"
     },
     {
-      "name": "twe22"
+      "name": "tse_wall_22"
     },
     {
-      "name": "twe23"
+      "name": "tse_wall_23"
     },
     {
-      "name": "twe25"
+      "name": "tse_wall_25"
     },
     {
-      "name": "twe27"
+      "name": "tse_wall_27"
     }
   ]
 }

@@ -1,0 +1,76 @@
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: RMCFloorStrataYellowBase
+  name: tiles-cm-default-yellow
+
+- type: tile
+  parent: RMCFloorStrataYellowBase
+  id: RMCFloorStrataYellow
+  name: yellow metal tile
+  sprite: /Textures/_RMC14/Tiles/strata/yellow1.png
+
+- type: tile
+  parent: RMCFloorStrataYellow
+  id: RMCFloorStrataYellowTile
+  sprite: /Textures/_RMC14/Tiles/strata/yellow2.png
+
+- type: tile
+  parent: RMCFloorStrataYellow
+  id: RMCFloorStrataYellow1
+  sprite: /Textures/_RMC14/Tiles/strata/yellow_1.png
+
+- type: tile
+  parent: RMCFloorStrataYellow
+  id: RMCFloorStrataYellow2
+  sprite: /Textures/_RMC14/Tiles/strata/yellow_2.png
+
+- type: tile
+  parent: RMCFloorStrataYellow
+  id: RMCFloorStrataYellow3
+  sprite: /Textures/_RMC14/Tiles/strata/yellow_3.png
+
+- type: tile
+  parent: RMCFloorStrataYellow
+  id: RMCFloorStrataYellow4
+  sprite: /Textures/_RMC14/Tiles/strata/yellow_4.png
+
+- type: tile
+  parent: RMCFloorStrataYellow
+  id: RMCFloorStrataYellow5
+  sprite: /Textures/_RMC14/Tiles/strata/yellow_5.png
+
+- type: tile
+  parent: RMCFloorStrataYellow
+  id: RMCFloorStrataYellow6
+  sprite: /Textures/_RMC14/Tiles/strata/yellow_6.png
+
+- type: tile
+  parent: RMCFloorStrataYellow
+  id: RMCFloorStrataYellow7
+  sprite: /Textures/_RMC14/Tiles/strata/yellow_7.png
+
+- type: tile
+  parent: RMCFloorStrataYellow
+  id: RMCFloorStrataYellow8
+  sprite: /Textures/_RMC14/Tiles/strata/yellow_8.png
+
+- type: tile
+  parent: RMCFloorStrataYellow
+  id: RMCFloorStrataYellowCorner1
+  sprite: /Textures/_RMC14/Tiles/strata/yellow_corner_1.png
+
+- type: tile
+  parent: RMCFloorStrataYellow
+  id: RMCFloorStrataYellowCorner2
+  sprite: /Textures/_RMC14/Tiles/strata/yellow_corner_2.png
+
+- type: tile
+  parent: RMCFloorStrataYellow
+  id: RMCFloorStrataYellowCorner3
+  sprite: /Textures/_RMC14/Tiles/strata/yellow_corner_3.png
+
+- type: tile
+  parent: RMCFloorStrataYellow
+  id: RMCFloorStrataYellowCorner4
+  sprite: /Textures/_RMC14/Tiles/strata/yellow_corner_4.png

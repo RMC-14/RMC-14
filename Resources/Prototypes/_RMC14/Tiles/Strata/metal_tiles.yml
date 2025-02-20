@@ -1,0 +1,82 @@
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorStrataMetalBase
+  name: tiles-cm-default-metal
+
+- type: tile
+  parent: CMFloorStrataMetalBase
+  id: CMFloorStrataMultitile1
+  name: metal tile
+  sprite: /Textures/_RMC14/Tiles/strata/multi_tiles1.png
+
+- type: tile
+  parent: CMFloorStrataMultitile1
+  id: CMFloorStrataMultitile2
+  sprite: /Textures/_RMC14/Tiles/strata/multi_tiles2.png
+
+- type: tile
+  parent: CMFloorStrataMultitile1
+  id: CMFloorStrataMultitile3
+  sprite: /Textures/_RMC14/Tiles/strata/multi_tiles3.png
+
+- type: tile
+  parent: CMFloorStrataMultitile1
+  id: CMFloorStrataMultitile4
+  sprite: /Textures/_RMC14/Tiles/strata/multi_tiles4.png
+
+- type: tile
+  parent: CMFloorStrataMultitile1
+  id: CMFloorStrataMultitile5
+  sprite: /Textures/_RMC14/Tiles/strata/multi_tiles5.png
+
+- type: tile
+  parent: CMFloorStrataMultitile1
+  id: CMFloorStrataMultitile6
+  sprite: /Textures/_RMC14/Tiles/strata/multi_tiles6.png
+
+- type: tile
+  parent: CMFloorStrataMetalBase
+  id: CMFloorStrataGreyMultitile1
+  name: grey metal tile
+  sprite: /Textures/_RMC14/Tiles/strata/grey_multi_tiles1.png
+
+- type: tile
+  parent: CMFloorStrataGreyMultitile1
+  id: CMFloorStrataGreyMultitile2
+  sprite: /Textures/_RMC14/Tiles/strata/grey_multi_tiles2.png
+
+- type: tile
+  parent: CMFloorStrataGreyMultitile1
+  id: CMFloorStrataGreyMultitile3
+  sprite: /Textures/_RMC14/Tiles/strata/grey_multi_tiles3.png
+
+- type: tile
+  parent: CMFloorStrataGreyMultitile1
+  id: CMFloorStrataGreyMultitile4
+  sprite: /Textures/_RMC14/Tiles/strata/grey_multi_tiles4.png
+
+- type: tile
+  parent: CMFloorStrataGreyMultitile1
+  id: CMFloorStrataGreyMultitile5
+  sprite: /Textures/_RMC14/Tiles/strata/grey_multi_tiles5.png
+
+- type: tile
+  parent: CMFloorStrataGreyMultitile1
+  id: CMFloorStrataGreyMultitile6
+  sprite: /Textures/_RMC14/Tiles/strata/grey_multi_tiles6.png
+
+- type: tile
+  parent: CMFloorStrataMultitile1
+  id: CMFloorStrata1
+  sprite: /Textures/_RMC14/Tiles/strata/floor.png
+
+- type: tile
+  parent: CMFloorStrataMultitile1
+  id: CMFloorStrata2
+  sprite: /Textures/_RMC14/Tiles/strata/floor2.png
+
+- type: tile
+  parent: CMFloorStrataMultitile1
+  id: CMFloorStrata3
+  sprite: /Textures/_RMC14/Tiles/strata/floor3.png

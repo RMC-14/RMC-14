@@ -1,0 +1,76 @@
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorStrataOrangeBase
+  name: tiles-cm-default-orange
+
+- type: tile
+  parent: CMFloorStrataWhiteBase
+  id: CMFloorStrataOrangeCover
+  name: orange metal tile
+  sprite: /Textures/_RMC14/Tiles/strata/orange_cover.png
+
+- type: tile
+  parent: CMFloorStrataOrangeCover
+  id: CMFloorStrataOrangeTile
+  sprite: /Textures/_RMC14/Tiles/strata/orange_tile.png
+
+- type: tile
+  parent: CMFloorStrataOrangeCover
+  id: CMFloorStrataOrangeEdge1
+  sprite: /Textures/_RMC14/Tiles/strata/orange_edge1.png
+
+- type: tile
+  parent: CMFloorStrataOrangeCover
+  id: CMFloorStrataOrangeEdge2
+  sprite: /Textures/_RMC14/Tiles/strata/orange_edge2.png
+
+- type: tile
+  parent: CMFloorStrataOrangeCover
+  id: CMFloorStrataOrangeEdge3
+  sprite: /Textures/_RMC14/Tiles/strata/orange_edge3.png
+
+- type: tile
+  parent: CMFloorStrataOrangeCover
+  id: CMFloorStrataOrangeEdge4
+  sprite: /Textures/_RMC14/Tiles/strata/orange_edge4.png
+
+- type: tile
+  parent: CMFloorStrataOrangeCover
+  id: CMFloorStrataOrangeEdge5
+  sprite: /Textures/_RMC14/Tiles/strata/orange_edge5.png
+
+- type: tile
+  parent: CMFloorStrataOrangeCover
+  id: CMFloorStrataOrangeEdge6
+  sprite: /Textures/_RMC14/Tiles/strata/orange_edge6.png
+
+- type: tile
+  parent: CMFloorStrataOrangeCover
+  id: CMFloorStrataOrangeEdge7
+  sprite: /Textures/_RMC14/Tiles/strata/orange_edge7.png
+
+- type: tile
+  parent: CMFloorStrataOrangeCover
+  id: CMFloorStrataOrangeEdge8
+  sprite: /Textures/_RMC14/Tiles/strata/orange_edge8.png
+
+- type: tile
+  parent: CMFloorStrataOrangeCover
+  id: CMFloorStrataOrangeCorner1
+  sprite: /Textures/_RMC14/Tiles/strata/orange_icorner1.png
+
+- type: tile
+  parent: CMFloorStrataOrangeCover
+  id: CMFloorStrataOrangeCorner2
+  sprite: /Textures/_RMC14/Tiles/strata/orange_icorner2.png
+
+- type: tile
+  parent: CMFloorStrataOrangeCover
+  id: CMFloorStrataOrangeCorner3
+  sprite: /Textures/_RMC14/Tiles/strata/orange_icorner3.png
+
+- type: tile
+  parent: CMFloorStrataOrangeCover
+  id: CMFloorStrataOrangeCorner4
+  sprite: /Textures/_RMC14/Tiles/strata/orange_icorner4.png
