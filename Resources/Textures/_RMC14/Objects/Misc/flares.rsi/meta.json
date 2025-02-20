@@ -45,6 +45,31 @@
     {
       "name": "inhand-right",
       "directions": 4
+    },
+    {
+      "name": "starshell_ash",
+      "delays": [
+        [
+          0.4,
+          0.4,
+          0.4,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "starshell_ash-on",
+      "delays": [
+        [
+          0.4,
+          0.4,
+          0.4,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "starshell_ash-empty"
     }
   ]
 }

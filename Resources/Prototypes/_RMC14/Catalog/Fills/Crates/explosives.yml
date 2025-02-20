@@ -77,3 +77,63 @@
     contents:
     - id: CMGrenadeHighExplosive
       amount: 25
+
+- type: entity
+  parent: RMCCrateExplosives
+  id: RMCCrateGrenadesAirburstFragBox
+  name: M74 AGM-F 40mm frag grenades crate (x25)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMC40MMGrenadeM74AGMF
+      amount: 25
+
+- type: entity
+  parent: RMCCrateExplosives
+  id: RMCCrateGrenadesAirburstFrag
+  name: M74 AGM-F 40mm frag grenades crate (x6)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMC40MMGrenadeM74AGMF
+      amount: 6
+
+- type: entity
+  parent: RMCCrateExplosives
+  id: RMCCrateGrenadesAirburstSmoke
+  name: M74 AGM-S 40mm smoke grenades crate (x6)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMC40MMGrenadeM74AGMS
+      amount: 6
+
+- type: entity
+  parent: RMCCrateExplosives
+  id: RMCCrateGrenadesAirburstHornet
+  name: M74 AGM-H 40mm hornet grenades crate (x6)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHornetShellM74AGMS
+      amount: 6
+
+- type: entity
+  parent: RMCCrateExplosives
+  id: RMCCrateGrenadesAirburstStarShell
+  name: M74 AGM-H 40mm Starshell grenades crate (x6)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCStarShellM74AGMS
+      amount: 6
+
+- type: entity
+  parent: RMCCrateExplosives
+  id: RMCCrateGrenadesBatonSlug
+  name: HIRR Baton Slugs crate (x6)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBatonSlugProjectile
+      amount: 6

@@ -1,8 +1,8 @@
-using Content.Server.Light.Components;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
+using Content.Shared.Examine;
 using Content.Shared.IgnitionSource;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
@@ -13,6 +13,8 @@ using Content.Shared.Verbs;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Light.EntitySystems
@@ -26,6 +28,7 @@ namespace Content.Server.Light.EntitySystems
         [Dependency] private readonly SharedAudioSystem _audio = default!;
         [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
         [Dependency] private readonly MetaDataSystem _metaData = default!;
+        [Dependency] private readonly SharedPhysicsSystem _physics = default!;
 
         public override void Initialize()
         {
@@ -34,6 +37,7 @@ namespace Content.Server.Light.EntitySystems
             SubscribeLocalEvent<ExpendableLightComponent, ComponentInit>(OnExpLightInit);
             SubscribeLocalEvent<ExpendableLightComponent, UseInHandEvent>(OnExpLightUse);
             SubscribeLocalEvent<ExpendableLightComponent, GetVerbsEvent<ActivationVerb>>(AddIgniteVerb);
+            SubscribeLocalEvent<ExpendableLightComponent, ExaminedEvent>(OnExpendableLightExamined);
         }
 
         public override void Update(float frameTime)
@@ -112,6 +116,9 @@ namespace Content.Server.Light.EntitySystems
 
                 component.CurrentState = ExpendableLightState.Lit;
                 component.StateExpiryTime = component.GlowDuration;
+
+                if(!ent.Comp.PickupWhileOn)
+                    _physics.SetBodyType(ent, BodyType.Static);
                 Dirty(ent);
 
                 UpdateSounds(ent);
@@ -209,6 +216,12 @@ namespace Content.Server.Light.EntitySystems
                 Act = () => TryActivate(ent)
             };
             args.Verbs.Add(verb);
+        }
+
+        private void OnExpendableLightExamined(Entity<ExpendableLightComponent> ent, ref ExaminedEvent args)
+        {
+            if (!ent.Comp.PickupWhileOn && ent.Comp.CurrentState != ExpendableLightState.Dead)
+                args.PushMarkup(Loc.GetString("rmc-laser-designator-signal-flare-examine"));
         }
     }
 }

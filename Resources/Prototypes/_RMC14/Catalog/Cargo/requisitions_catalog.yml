@@ -183,6 +183,18 @@
         crate: RMCCrateBreachingCharges
       - cost: 10000
         crate: RMCCrateGrenadesHighExplosiveBox
+      - cost: 10000
+        crate: RMCCrateGrenadesAirburstFragBox
+      - cost: 4000
+        crate: RMCCrateGrenadesAirburstFrag
+      - cost: 3000
+        crate: RMCCrateGrenadesAirburstSmoke
+      - cost: 4000
+        crate: RMCCrateGrenadesAirburstHornet
+      - cost: 4000
+        crate: RMCCrateGrenadesAirburstStarShell
+      - cost: 1000
+        crate: RMCCrateGrenadesBatonSlug
     - name: Food
       entries:
       - cost: 1000
@@ -277,6 +289,8 @@
         crate: RMCCrateMOU53
       - cost: 3000
         crate: RMCCrateXM51
+      - cost: 4000
+        crate: RMCCrateM79
     - name: Weapons Specialist Ammo
       entries:
       - cost: 4000

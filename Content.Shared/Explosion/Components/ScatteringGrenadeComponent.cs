@@ -24,6 +24,15 @@ public sealed partial class ScatteringGrenadeComponent : Component
     [DataField]
     public EntProtoId? FillPrototype;
 
+    [DataField]
+    public float DirectionAngle = -90;
+
+    [DataField]
+    public float ReboundAngle = 180;
+
+    [DataField]
+    public float SpreadAngle = 360;
+
     /// <summary>
     /// If we have a pre-fill how many more can we spawn.
     /// </summary>
@@ -41,6 +50,24 @@ public sealed partial class ScatteringGrenadeComponent : Component
     /// </summary>
     [DataField]
     public bool TriggerContents = true;
+
+    /// <summary>
+    /// Decides if contained entities get toggled after getting launched
+    /// </summary>
+    [DataField]
+    public bool ToggleContents;
+
+    /// <summary>
+    /// Triggers the grenade if it collides with impassable entities
+    /// </summary>
+    [DataField]
+    public bool TriggerOnWallCollide;
+
+    /// <summary>
+    /// Triggers the grenade on any direct hit
+    /// </summary>
+    [DataField]
+    public bool DirectHitTrigger;
 
     #region Trigger time parameters for scattered entities
     /// <summary>

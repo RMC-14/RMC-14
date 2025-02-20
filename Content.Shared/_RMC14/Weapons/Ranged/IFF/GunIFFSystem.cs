@@ -166,4 +166,11 @@ public sealed class GunIFFSystem : EntitySystem
             Dirty(projectile, iff);
         }
     }
+
+    public void GiveAmmoIFF(EntityUid uid, EntProtoId<IFFFactionComponent>? faction, bool enabled)
+    {
+        var projectileIFFComponent = EnsureComp<ProjectileIFFComponent>(uid);
+        projectileIFFComponent.Faction = faction;
+        projectileIFFComponent.Enabled = enabled;
+    }
 }

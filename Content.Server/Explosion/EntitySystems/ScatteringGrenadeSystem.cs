@@ -5,7 +5,10 @@ using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
 using System.Numerics;
+using Content.Server.Light.EntitySystems;
 using Content.Shared.Explosion.EntitySystems;
+using Content.Shared.Item.ItemToggle;
+using Content.Shared.Light.Components;
 
 namespace Content.Server.Explosion.EntitySystems;
 
@@ -15,6 +18,8 @@ public sealed class ScatteringGrenadeSystem : SharedScatteringGrenadeSystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
     [Dependency] private readonly TransformSystem _transformSystem = default!;
+    [Dependency] private readonly ItemToggleSystem _toggle = default!;
+    [Dependency] private readonly ExpendableLightSystem _light = default!;
 
     public override void Initialize()
     {
@@ -52,7 +57,8 @@ public sealed class ScatteringGrenadeSystem : SharedScatteringGrenadeSystem
             {
                 var grenadeCoord = _transformSystem.GetMapCoordinates(uid);
                 var thrownCount = 0;
-                var segmentAngle = 360 / totalCount;
+                var segmentAngle = component.SpreadAngle / totalCount;
+                var projectileRotation = _transformSystem.GetMoverCoordinateRotation(uid, Transform(uid)).worldRot.Degrees + component.DirectionAngle;
                 var additionalIntervalDelay = 0f;
 
                 while (TrySpawnContents(grenadeCoord, component, out var contentUid))
@@ -62,9 +68,9 @@ public sealed class ScatteringGrenadeSystem : SharedScatteringGrenadeSystem
                         angle = _random.NextAngle();
                     else
                     {
-                        var angleMin = segmentAngle * thrownCount;
-                        var angleMax = segmentAngle * (thrownCount + 1);
-                        angle = Angle.FromDegrees(_random.Next(angleMin, angleMax));
+                        var angleMin = projectileRotation - component.SpreadAngle / 2 + segmentAngle * thrownCount;
+                        var angleMax = projectileRotation - component.SpreadAngle / 2 + segmentAngle * (thrownCount + 1);
+                        angle = Angle.FromDegrees(_random.Next((int)angleMin, (int)angleMax));
                         thrownCount++;
                     }
 
@@ -84,6 +90,14 @@ public sealed class ScatteringGrenadeSystem : SharedScatteringGrenadeSystem
                         var ev = new ActiveTimerTriggerEvent(contentUid, uid);
                         RaiseLocalEvent(contentUid, ref ev);
                     }
+
+                    if (!component.ToggleContents)
+                        continue;
+
+                    _toggle.TryActivate(contentUid);
+
+                    if (TryComp(contentUid, out ExpendableLightComponent? expendableLightComponent))
+                        _light.TryActivate((contentUid,expendableLightComponent));
                 }
 
                 // Normally we'd use DeleteOnTrigger but because we need to wait for the frame update

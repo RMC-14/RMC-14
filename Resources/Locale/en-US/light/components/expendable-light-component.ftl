@@ -6,6 +6,9 @@ expendable-light-spent-flare-desc = It looks like this flare has burnt out. What
 expendable-light-burnt-torch-name = burnt torch
 expendable-light-burnt-torch-desc = It looks like this torch has burnt out. What a bummer.
 
+expendable-light-starshell-ash-empty-name = extinguished star shell ash
+expendable-light-starshell-ash-empty-desc = Burnt out remains of a star shell
+
 expendable-light-spent-green-glowstick-name = spent green glowstick
 expendable-light-spent-red-glowstick-name = spent red glowstick
 expendable-light-spent-purple-glowstick-name = spent purple glowstick

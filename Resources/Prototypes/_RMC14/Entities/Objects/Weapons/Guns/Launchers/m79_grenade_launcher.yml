@@ -17,6 +17,8 @@
   - type: Gun
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/m79_shoot.ogg
+  - type: GunIFF
+    enabled: true
   - type: RMCSelectiveFire
     baseFireRate: 0.833
   - type: BallisticAmmoProvider
@@ -46,3 +48,9 @@
     offsets:
       rmc-aslot-rail: 0, 0.093
       rmc-aslot-stock: -0.56, 0.0
+  - type: Tag
+    tags:
+    - RMCWeaponLauncherM79
+
+- type: Tag
+  id: RMCWeaponLauncherM79

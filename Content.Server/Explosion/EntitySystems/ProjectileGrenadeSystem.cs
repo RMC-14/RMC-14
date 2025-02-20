@@ -1,9 +1,12 @@
 ﻿using Content.Server.Explosion.Components;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared.Weapons.Ranged.Events;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Random;
 
 namespace Content.Server.Explosion.EntitySystems;
@@ -14,6 +17,8 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly TransformSystem _transformSystem = default!;
+    [Dependency] private readonly TriggerSystem _trigger = default!;
+    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
 
     // RMC14
     private readonly List<EntityUid> _spawned = new();
@@ -25,6 +30,7 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
         SubscribeLocalEvent<ProjectileGrenadeComponent, ComponentInit>(OnFragInit);
         SubscribeLocalEvent<ProjectileGrenadeComponent, ComponentStartup>(OnFragStartup);
         SubscribeLocalEvent<ProjectileGrenadeComponent, TriggerEvent>(OnFragTrigger);
+        SubscribeLocalEvent<ProjectileGrenadeComponent, StartCollideEvent>(OnStartCollide);
     }
 
     private void OnFragInit(Entity<ProjectileGrenadeComponent> entity, ref ComponentInit args)
@@ -41,6 +47,19 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
             return;
 
         entity.Comp.UnspawnedCount = Math.Max(0, entity.Comp.Capacity - entity.Comp.Container.ContainedEntities.Count);
+    }
+
+    /// <summary>
+    /// Reverses the payload shooting direction if the projectile grenade collides with an entity
+    /// </summary>
+    private void OnStartCollide(Entity<ProjectileGrenadeComponent> entity, ref StartCollideEvent args)
+    {
+        if (!entity.Comp.Rebounds)
+            return;
+
+        //Shoot the payload backwards if colliding with an entity
+        entity.Comp.DirectionAngle += entity.Comp.ReboundAngle;
+        _trigger.Trigger(entity);
     }
 
     /// <summary>
@@ -61,32 +80,50 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
         var grenadeCoord = _transformSystem.GetMapCoordinates(uid);
         var shootCount = 0;
         var totalCount = component.Container.ContainedEntities.Count + component.UnspawnedCount;
-        var segmentAngle = 360 / totalCount;
+        var segmentAngle = component.SpreadAngle / totalCount;
+        var projectileRotation = _transformSystem.GetMoverCoordinateRotation(uid, Transform(uid)).worldRot.Degrees + component.DirectionAngle;
 
         _spawned.Clear();
         while (TrySpawnContents(grenadeCoord, component, out var contentUid))
         {
+            // Give the same IFF faction and enabled state to the projectiles shot from the grenade
+            if (component.InheritIFF)
+            {
+                if (TryComp(uid, out ProjectileIFFComponent? grenadeIFFComponent))
+                {
+                    _gunIFF.GiveAmmoIFF(contentUid, grenadeIFFComponent.Faction, grenadeIFFComponent.Enabled);
+                }
+            }
+
+            var angleMin = projectileRotation - component.SpreadAngle / 2 + segmentAngle * shootCount;
+            var angleMax = projectileRotation - component.SpreadAngle / 2 + segmentAngle * (shootCount + 1);
+
             Angle angle;
             if (component.RandomAngle)
                 angle = _random.NextAngle();
+            else if (component.EvenSpread)
+                angle = Angle.FromDegrees((angleMin + angleMax) / 2);
             else
             {
-                var angleMin = segmentAngle * shootCount;
-                var angleMax = segmentAngle * (shootCount + 1);
-                angle = Angle.FromDegrees(_random.Next(angleMin, angleMax));
-                shootCount++;
+                angle = Angle.FromDegrees(_random.Next((int)angleMin, (int)angleMax));
             }
+            shootCount++;
 
             // velocity is randomized to make the projectiles look
             // slightly uneven, doesn't really change much, but it looks better
             var direction = angle.ToVec().Normalized();
             var velocity = _random.NextVector2(component.MinVelocity, component.MaxVelocity);
-            _gun.ShootProjectile(contentUid, direction, velocity, uid, null);
+            _gun.ShootProjectile(contentUid, direction, velocity, uid, null, component.ProjectileSpeed);
             _spawned.Add(contentUid);
         }
 
         var clusterEv = new CMClusterSpawnedEvent(_spawned);
         RaiseLocalEvent(uid, ref clusterEv);
+        RaiseLocalEvent(uid,
+            new AmmoShotEvent
+            {
+                FiredProjectiles = _spawned,
+            });
         QueueDel(uid);
     }
 
