@@ -47,3 +47,14 @@
           steps:
             - tool: Screwing
               doAfter: 1
+    - node: bedDingy
+      entity: RMCBedDingy
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: CMSheetMetal1
+              amount: 1
+          steps:
+            - tool: Screwing
+              doAfter: 1

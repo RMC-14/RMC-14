@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright":  "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/e1a270d04e95a2294c43ecb309f17c294fcfeb8d/icons/mob/hostiles/Effects.dmi",
+  "copyright":  "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/e1a270d04e95a2294c43ecb309f17c294fcfeb8d/icons/mob/hostiles/Effects.dmi, https://github.com/cmss13-devs/cmss13/blob/e1a270d04e95a2294c43ecb309f17c294fcfeb8d/icons/obj/structures/ladders.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -9,6 +9,12 @@
   "states": [
     {
       "name": "hole"
+    },
+    {
+      "name": "maintenancehatch_alt"
+    },
+    {
+      "name": "wymanhole"
     }
   ]
 }

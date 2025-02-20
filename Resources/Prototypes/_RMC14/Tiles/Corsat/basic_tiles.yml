@@ -46,6 +46,11 @@
 
 - type: tile
   parent: CMFloorCorsatBasicBase
+  id: CMFloorCorsatBasicOfficePlate
+  sprite: /Textures/_RMC14/Tiles/corsat/spiralplate.png
+
+- type: tile
+  parent: CMFloorCorsatBasicBase
   id: CMFloorCorsatBasicSpiralBlueOffice
   sprite: /Textures/_RMC14/Tiles/corsat/spiralblueoffice.png
 

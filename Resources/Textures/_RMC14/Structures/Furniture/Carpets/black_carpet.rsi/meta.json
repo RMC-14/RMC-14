@@ -1,0 +1,38 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from cmss13 at: https://github.com/cmss13-devs/cmss13/blob/9dd2c0d0a1c21e3c9bddbad1321c63fd886f61cf/icons/turf/floors/floor.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "bcarpet01"
+        },
+        {
+            "name": "bcarpet02"
+        },
+        {
+            "name": "bcarpet03"
+        },
+        {
+            "name": "bcarpet04"
+        },
+        {
+            "name": "bcarpet05"
+        },
+        {
+            "name": "bcarpet06"
+        },
+        {
+            "name": "bcarpet07"
+        },
+        {
+            "name": "bcarpet08"
+        },
+        {
+            "name": "bcarpet09"
+        }
+    ]
+}
