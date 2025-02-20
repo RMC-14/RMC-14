@@ -150,6 +150,8 @@
       state: alive
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
+    - map: [ "enum.XenoAcidGeneratingVisualLayers.Base" ]
+      visible: false
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -186,6 +188,7 @@
     popupGain: rmc-xeno-acid-increase-user
     popupNotEnough: rmc-xeno-not-enough-acid
     alert: XenoEnergyAcider
+    generationCap: 400
   - type: PointLight
     enabled: false
     radius: 3
@@ -212,6 +215,7 @@
       damage:
         types:
           Heat: 1
+  - type: XenoAciderGeneration
   - type: SlowOnPull
     slowdowns:
     - multiplier: 0.59

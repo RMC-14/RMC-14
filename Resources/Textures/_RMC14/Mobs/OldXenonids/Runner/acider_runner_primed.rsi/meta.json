@@ -104,6 +104,16 @@
     },
     {
       "name": "runner_dissection"
+    },
+    {
+      "name": "acid",
+      "directions": 4
+    },
+    {
+      "name": "acid_rest"
+    },
+    {
+      "name": "acid_downed"
     }
   ]
 }

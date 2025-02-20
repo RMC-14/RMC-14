@@ -59,6 +59,16 @@
     {
       "name": "runner_walk_2",
       "directions": 4
+    },
+    {
+      "name": "acid",
+      "directions": 4
+    },
+    {
+      "name": "acid_rest"
+    },
+    {
+      "name": "acid_downed"
     }
   ]
 }
