@@ -218,6 +218,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
                 var ev = new BurrowedEvent(false);
                 RaiseLocalEvent(ent, ref ev);
                 comp.ForcedUnburrowAt = null;
+                comp.NextTunnelAt = null;
                 _popup.PopupEntity(Loc.GetString("rmc-xeno-burrow-move-forced-unburrow"), ent, ent, PopupType.MediumCaution);
                 comp.NextBurrowAt = time + comp.BurrowCooldown;
             }
@@ -299,6 +300,8 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
 
         burrower.Comp.ForcedUnburrowAt = _time.CurTime + burrower.Comp.BurrowMaxDuration;
         burrower.Comp.NextBurrowAt = _time.CurTime + burrower.Comp.BurrowCooldown;
+        burrower.Comp.NextTunnelAt = _time.CurTime + burrower.Comp.BurrowCooldown;
+
         _rmcPulling.TryStopAllPullsFromAndOn(burrower);
         Dirty(burrower);
 
@@ -408,7 +411,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
         if (args.Handled || args.Cancelled)
         {
             burrower.Comp.Tunneling = false;
-            burrower.Comp.NextTunnelAt = _time.CurTime + burrower.Comp.TunnelCooldown;
+            burrower.Comp.NextTunnelAt = TimeSpan.MaxValue;
             return;
         }
 
