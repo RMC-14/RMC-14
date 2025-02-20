@@ -88,6 +88,14 @@
       Dead: 0
   - type: Thirst
     baseDecayRate: 0.01666666666
+  - type: Pain # TODO change to normal from testing
+    painLevels:
+    - !type:PopupMessage
+      type: Local
+      messages: [ "carpetium-effect-blood-fibrous", "carpetium-effect-jumpsuit-insides" ]
+      conditions:
+      - !type:TotalDamage
+        max: 70
   - type: Body
     prototype: Human
     requiredLegs: 2

@@ -1,0 +1,136 @@
+using System.Linq;
+using Content.Shared.FixedPoint;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
+
+namespace Content.Shared._RMC14.Medical.Pain;
+
+public sealed partial class PainSystem : EntitySystem
+{
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+
+    private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
+    private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
+    private static readonly ProtoId<DamageGroupPrototype> ToxinGroup = "Toxin";
+    private static readonly ProtoId<DamageGroupPrototype> AirlossGroup = "Airloss";
+
+    private readonly HashSet<ProtoId<DamageTypePrototype>> _bruteTypes = new();
+    private readonly HashSet<ProtoId<DamageTypePrototype>> _burnTypes = new();
+    private readonly HashSet<ProtoId<DamageTypePrototype>> _toxinTypes = new();
+    private readonly HashSet<ProtoId<DamageTypePrototype>> _airlossTypes = new();
+
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<PainComponent, DamageChangedEvent>(OnDamageChanged);
+
+        _bruteTypes.Clear();
+        _burnTypes.Clear();
+        _toxinTypes.Clear();
+        _airlossTypes.Clear();
+
+        if (_prototypes.TryIndex(BruteGroup, out var bruteProto))
+        {
+            foreach (var type in bruteProto.DamageTypes)
+            {
+                _bruteTypes.Add(type);
+            }
+        }
+
+        if (_prototypes.TryIndex(BurnGroup, out var burnProto))
+        {
+            foreach (var type in burnProto.DamageTypes)
+            {
+                _burnTypes.Add(type);
+            }
+        }
+
+        if (_prototypes.TryIndex(ToxinGroup, out var toxinProto))
+        {
+            foreach (var type in toxinProto.DamageTypes)
+            {
+                _toxinTypes.Add(type);
+            }
+        }
+
+        if (_prototypes.TryIndex(AirlossGroup, out var airlossProto))
+        {
+            foreach (var type in airlossProto.DamageTypes)
+            {
+                _airlossTypes.Add(type);
+            }
+        }
+    }
+
+    private void OnDamageChanged(EntityUid uid, PainComponent comp, ref DamageChangedEvent args)
+    {
+        var damageDict = args.Damageable.Damage.DamageDict;
+        UpdateCurrentPain(comp, damageDict);
+        UpdateCurrentPainPercentage(comp);
+        Dirty(uid, comp);
+    }
+
+    public void AddPainReductionModificator(EntityUid uid, PainReductionModificator mod, PainComponent? pain = null)
+    {
+        if (!Resolve(uid, ref pain))
+            return;
+
+        pain.PainReductionModificators.Add(mod);
+        UpdateCurrentPainPercentage(pain);
+        Dirty(uid, pain);
+
+        Timer.Spawn(mod.Duration, () => RemovePainReductionModificator(uid, mod, pain));
+    }
+
+    private void RemovePainReductionModificator(EntityUid uid, PainReductionModificator mod, PainComponent? pain = null)
+    {
+        if (!Resolve(uid, ref pain))
+            return;
+
+        pain.PainReductionModificators.Remove(mod);
+        UpdateCurrentPainPercentage(pain);
+        Dirty(uid, pain);
+    }
+    private void UpdateCurrentPainPercentage(PainComponent comp)
+    {
+        var maxModificatorStrength = FixedPoint2.Zero;
+        if (comp.PainReductionModificators.Count != 0)
+        {
+            maxModificatorStrength = comp.PainReductionModificators.Max(mod => mod.EffectStrength);
+        }
+
+        // Pain reduction effectiveness linear decreases as the pain goes up
+        var newPainReduction = FixedPoint2.Max(0, -comp.CurrentPain * comp.PainReductionDecreaceRate + maxModificatorStrength);
+        comp.CurrentPainPercentage = FixedPoint2.Clamp(comp.CurrentPain - newPainReduction, 0, 100);
+    }
+
+    private void UpdateCurrentPain(PainComponent comp, Dictionary<string, FixedPoint2> damageDict)
+    {
+        var newCurrentPain = FixedPoint2.Zero;
+        foreach (var (type, _) in damageDict)
+        {
+            if (_bruteTypes.Contains(type))
+            {
+                newCurrentPain += comp.BrutePainMultiplier * damageDict[type];
+            }
+
+            if (_burnTypes.Contains(type))
+            {
+                newCurrentPain += comp.BurnPainMultiplier * damageDict[type];
+            }
+
+            if (_toxinTypes.Contains(type))
+            {
+                newCurrentPain += comp.ToxinPainMultiplier * damageDict[type];
+            }
+
+            if (_airlossTypes.Contains(type))
+            {
+                newCurrentPain += comp.AirlossPainMultiplier * damageDict[type];
+            }
+        }
+        comp.CurrentPain = newCurrentPain;
+    }
+}
+
