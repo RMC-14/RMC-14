@@ -140,7 +140,7 @@
         Brute: 2.4
     leapDamage:
       groups:
-        Brute: 40
+        Brute: 45
   - type: XenoScissorCut
     damage:
       types:
