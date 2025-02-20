@@ -8,6 +8,7 @@
     sprite: _RMC14/Structures/Machines/Science/small_dispensers.rsi
     state: booze_dispenser
     snapCardinals: true
+  - type: RMCTippable
   - type: ReagentDispenser
     storageWhitelist:
       tags:
