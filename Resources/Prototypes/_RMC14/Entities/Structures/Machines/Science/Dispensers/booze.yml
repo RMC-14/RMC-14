@@ -21,6 +21,7 @@
       - Xeno
   - type: ApcPowerReceiver
     needsPower: false
+  - type: Godmode # todo rmc14 we really need the technology to remove single components because copying an entire parent is actually torturous and prone to errors in the future
 
 - type: reagentDispenserInventory
   id: CMDispenserBoozeInventory
