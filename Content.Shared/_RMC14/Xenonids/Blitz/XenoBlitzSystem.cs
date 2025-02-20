@@ -14,7 +14,6 @@ using Content.Shared._RMC14.Xenonids.Sweep;
 using Robust.Shared.Audio.Systems;
 using Content.Shared._RMC14.Shields;
 using Content.Shared.Interaction;
-using Content.Shared._RMC14.Xenonids.Empower;
 
 namespace Content.Shared._RMC14.Xenonids.Blitz;
 

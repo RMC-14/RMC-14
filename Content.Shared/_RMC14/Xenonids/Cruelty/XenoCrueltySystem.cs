@@ -1,7 +1,6 @@
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared.Actions;
 using Content.Shared.Weapons.Melee.Events;
-using System;
 
 namespace Content.Shared._RMC14.Xenonids.Cruelty;
 

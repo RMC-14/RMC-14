@@ -1,4 +1,3 @@
-using Content.Shared._RMC14.Xenonids.Empower;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
 using Content.Shared.Mobs.Components;
@@ -7,7 +6,6 @@ using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
-using System;
 
 namespace Content.Shared._RMC14.Xenonids.Dodge;
 
