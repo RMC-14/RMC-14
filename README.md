@@ -1,8 +1,8 @@
 <p align="center"> <img alt="Space Station 14" width="400" height="400" src="https://github.com/user-attachments/assets/320ad459-8997-4e5b-9f7e-fc7e7d7dcb73" /></p>
 
-RMC-14 is inspired by CM13, Space Station 13, that runs on [Robust Toolbox](https://github.com/space-wizards/RobustToolbox).
+RMC-14 is a fork of [Space Station 14](https://github.com/space-wizards/space-station-14) inspired by [CM-SS13](https://github.com/cmss13-devs/cmss13), that runs on [Robust Toolbox](https://github.com/space-wizards/RobustToolbox).
 
-The design goal of this fork is to attempt to replicate the feel and experience of CM13, while using SS14 as a foundation.
+The design goal of this fork is to attempt to replicate the feel and experience of CM-SS13, while using SS14 as a foundation.
 
 This is the primary repo for RMC-14. To prevent people forking Robust Toolbox, a "content" pack is loaded by the client and server. This content pack contains everything needed to play the game on one specific server.
 
