@@ -129,7 +129,7 @@
       entries:
       - id: RMCArmorXM4
       - id: RMCArmorM3LightVariants
-      - id: CMCoatOfficer
+      - id: RMCCoatService
     - name: Backpack
       choices: { CMBag: 1 }
       entries:
