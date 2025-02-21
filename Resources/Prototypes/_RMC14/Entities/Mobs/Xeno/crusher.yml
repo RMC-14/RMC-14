@@ -96,6 +96,7 @@
   - type: XenoBrutalize
   - type: RMCSize
     size: Immobile
+  - type: VendorTipLarge
   - type: RMCXenoDamageVisuals
     prefix: crusher
   - type: TacticalMapIcon
