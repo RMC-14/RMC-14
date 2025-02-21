@@ -341,11 +341,11 @@
     - 0,0,5,1 # 3 slots
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle: _RMC14\Objects\Clothing\OuterClothing\Armor\m3\co\jungle.rsi
-      Desert: _RMC14\Objects\Clothing\OuterClothing\Armor\m3\co\desert.rsi
-      Snow: _RMC14\Objects\Clothing\OuterClothing\Armor\m3\co\snow.rsi
-      Classic: _RMC14\Objects\Clothing\OuterClothing\Armor\m3\co\classic.rsi
-      Urban: _RMC14\Objects\Clothing\OuterClothing\Armor\m3\co\urban.rsi
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/urban.rsi
 
 - type: entity
   parent: CMArmorM2MP
