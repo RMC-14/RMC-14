@@ -15,23 +15,22 @@ public sealed class RMCTippingSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<RMCTippableComponent, InteractHandEvent>(OnTippableInteractionHandAttempt);
+        SubscribeLocalEvent<RMCTippableComponent, InteractHandEvent>(OnTippableInteractHand);
         SubscribeLocalEvent<RMCTippableComponent, DoAfterAttemptEvent<RMCTippingDoAfterEvent>>(OnTippingDoAfterAttempt);
         SubscribeLocalEvent<RMCTippableComponent, RMCTippingDoAfterEvent>(OnTippingDoAfter);
 
     }
 
-    private void OnTippableInteractionHandAttempt(Entity<RMCTippableComponent> ent, ref InteractHandEvent args)
+    private void OnTippableInteractHand(Entity<RMCTippableComponent> ent, ref InteractHandEvent args)
     {
         Log.Debug("Starting check");
 
         if (!HasComp<XenoComponent>(args.User))
             return;
-        var time = TimeSpan.FromSeconds(4); //put in component with large small crusher
 
         var ev = new RMCTippingDoAfterEvent();
         Log.Debug("yea");
-        var doAfter = new DoAfterArgs(EntityManager, args.User, time, ev, ent.Owner, ent) { BreakOnMove = true };
+        var doAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.Delay, ev, ent.Owner, ent) { BreakOnMove = true };
         Log.Debug("exploded");
 
         if (_doAfter.TryStartDoAfter(doAfter))
