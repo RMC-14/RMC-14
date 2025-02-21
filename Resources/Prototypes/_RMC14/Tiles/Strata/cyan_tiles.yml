@@ -1,0 +1,76 @@
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorStrataCyanBase
+  name: tiles-cm-default-cyan
+
+- type: tile
+  parent: CMFloorStrataCyanBase
+  id: CMFloorStrataCyan01
+  name: cyan metal tile
+  sprite: /Textures/_RMC14/Tiles/strata/cyan1.png
+
+- type: tile
+  parent: CMFloorStrataCyan1
+  id: CMFloorStrataCyan02
+  sprite: /Textures/_RMC14/Tiles/strata/cyan2.png
+
+- type: tile
+  parent: CMFloorStrataCyan01
+  id: CMFloorStrataCyan1
+  sprite: /Textures/_RMC14/Tiles/strata/cyan_1.png
+
+- type: tile
+  parent: CMFloorStrataCyan1
+  id: CMFloorStrataCyan2
+  sprite: /Textures/_RMC14/Tiles/strata/cyan_2.png
+
+- type: tile
+  parent: CMFloorStrataCyan1
+  id: CMFloorStrataCyan3
+  sprite: /Textures/_RMC14/Tiles/strata/cyan_3.png
+
+- type: tile
+  parent: CMFloorStrataCyan1
+  id: CMFloorStrataCyan4
+  sprite: /Textures/_RMC14/Tiles/strata/cyan_4.png
+
+- type: tile
+  parent: CMFloorStrataCyan1
+  id: CMFloorStrataCyan5
+  sprite: /Textures/_RMC14/Tiles/strata/cyan_5.png
+
+- type: tile
+  parent: CMFloorStrataCyan1
+  id: CMFloorStrataCyan6
+  sprite: /Textures/_RMC14/Tiles/strata/cyan_6.png
+
+- type: tile
+  parent: CMFloorStrataCyan1
+  id: CMFloorStrataCyan7
+  sprite: /Textures/_RMC14/Tiles/strata/cyan_7.png
+
+- type: tile
+  parent: CMFloorStrataCyan1
+  id: CMFloorStrataCyan8
+  sprite: /Textures/_RMC14/Tiles/strata/cyan_8.png
+
+- type: tile
+  parent: CMFloorStrataCyan1
+  id: CMFloorStrataCyanCorner1
+  sprite: /Textures/_RMC14/Tiles/strata/cyan_corner_1.png
+
+- type: tile
+  parent: CMFloorStrataCyan1
+  id: CMFloorStrataCyanCorner2
+  sprite: /Textures/_RMC14/Tiles/strata/cyan_corner_2.png
+
+- type: tile
+  parent: CMFloorStrataCyan1
+  id: CMFloorStrataCyanCorner3
+  sprite: /Textures/_RMC14/Tiles/strata/cyan_corner_3.png
+
+- type: tile
+  parent: CMFloorStrataCyan1
+  id: CMFloorStrataCyanCorner4
+  sprite: /Textures/_RMC14/Tiles/strata/cyan_corner_4.png
