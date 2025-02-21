@@ -77,9 +77,7 @@ public sealed class RMCTippingSystem : EntitySystem
         if (args.Cancelled || args.Handled)
             return;
 
-        var tipComp = EnsureComp<RMCTippableComponent>(args.User);
-
-        tipComp.IsTipped = true;
+        ent.Comp.IsTipped = true;
 
         _popup.PopupClient("you smahsed it mate", args.User, args.User);
         Log.Debug("completed do-after");
