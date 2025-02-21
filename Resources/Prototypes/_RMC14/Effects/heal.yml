@@ -3,7 +3,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: TimedDespawn
-    lifetime: 3
+    lifetime: 2
   - type: Sprite
     drawdepth: Effects
     sprite: _RMC14/Effects/heal.rsi
@@ -41,6 +41,8 @@
   id: RMCEffectHealSacrifice
   categories: [ HideSpawnMenu ]
   components:
+  - type: TimedDespawn
+    lifetime: 3
   - type: Sprite
     color: "#44253D"
 
@@ -49,6 +51,8 @@
   id: RMCEffectHealAilments
   categories: [ HideSpawnMenu ]
   components:
+  - type: TimedDespawn
+    lifetime: 3
   - type: Sprite
     color: "#F5007A"
 
@@ -57,13 +61,7 @@
   id: RMCEffectHealQueen
   categories: [ HideSpawnMenu ]
   components:
+  - type: TimedDespawn
+    lifetime: 3
   - type: Sprite
     color: "#D9F500"
-
-- type: entity
-  parent: RMCEffectHeal
-  id: RMCEffectHealSoak
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    color: "#AD1313"

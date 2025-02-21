@@ -83,6 +83,24 @@
     {
       "name": "multi_tiles6"
     },
+	{
+      "name": "grey_multi_tiles1"
+    },
+    {
+      "name": "grey_multi_tiles2"
+    },
+    {
+      "name": "grey_multi_tiles3"
+    },
+    {
+      "name": "grey_multi_tiles4"
+    },
+    {
+      "name": "grey_multi_tiles5"
+    },
+    {
+      "name": "grey_multi_tiles6"
+    },
     {
       "name": "floor3"
     },

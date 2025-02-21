@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0525b5ada7da1afcd9b260e76d5fea01500d9c8d/icons/obj/structures/props/natural/vegetation/dam.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "heavygrass_1"
+    },
+    {
+      "name": "heavygrass_2"
+    },
+    {
+      "name": "heavygrass_3"
+    },
+    {
+      "name": "heavygrass_4"
+    },
+    {
+      "name": "heavygrass_5"
+    },
+    {
+      "name": "heavygrass_6"
+    },
+    {
+      "name": "heavygrass_7"
+    },
+    {
+      "name": "heavygrass_8"
+    },
+    {
+      "name": "heavygrass_9"
+    },
+    {
+      "name": "heavygrass_10"
+    },
+    {
+      "name": "heavygrass_11"
+    },
+    {
+      "name": "heavygrass_12"
+    },
+    {
+      "name": "heavygrass_13"
+    },
+    {
+      "name": "heavygrass_14"
+    },
+    {
+      "name": "heavygrass_15"
+    },
+    {
+      "name": "heavygrass_16"
+    }
+  ]
+}

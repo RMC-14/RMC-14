@@ -1,0 +1,10 @@
+- type: tile
+  abstract: true
+  id: RMCFloorStrataMiscBase
+  name: tiles-cm-default-misc
+  suffix: strata
+
+- type: tile
+  parent: RMCFloorStrataMiscBase
+  id: RMCFloorStrataFakeWood
+  sprite: /Textures/_RMC14/Tiles/strata/fake_wood.png
