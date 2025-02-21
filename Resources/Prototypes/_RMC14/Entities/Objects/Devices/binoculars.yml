@@ -2,11 +2,11 @@
   parent: BaseItem
   id: RMCBinoculars
   name: binoculars
-  suffix: Jungle
   description: A military-issued pair of binoculars.
   components:
   - type: Item
     size: Small
+    heldPrefix: binoculars
   - type: Sprite
     sprite: _RMC14/Objects/Devices/binoculars.rsi
     state: binoculars
@@ -24,6 +24,7 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: Appearance
   - type: ItemCamouflage
     states:
       Jungle: binoculars
@@ -36,9 +37,10 @@
   parent: RMCBinoculars
   id: RMCRangefinder
   name: rangefinder
-  suffix: Jungle
   description: "A pair of binoculars with a rangefinding function. Click a tile to acquire it's coordinates."
   components:
+  - type: Item
+    heldPrefix: rangefinders
   - type: Sprite
     sprite: _RMC14/Objects/Devices/binoculars.rsi
     layers:
@@ -71,7 +73,6 @@
   parent: RMCRangefinder
   id: RMCLaserDesignator
   name: laser designator
-  suffix: Jungle
   description: "A laser designator with two modes: target marking for CAS with IR laser and rangefinding. Click a tile to target something."
   components:
   - type: Sprite
@@ -89,7 +90,6 @@
   parent: RMCLaserDesignator
   id: RMCLaserDesignatorScout
   name: scout laser designator
-  suffix: Jungle
   description: "An improved laser designator, issued to UNMC scouts, with two modes: target marking for CAS with IR laser and rangefinding. Click a tile to target something."
   components:
   - type: Rangefinder

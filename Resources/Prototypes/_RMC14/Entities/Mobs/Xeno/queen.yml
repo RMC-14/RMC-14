@@ -69,6 +69,8 @@
     - WallXenoResin
     - WallXenoMembrane
     - DoorXenoResin
+    - XenoStickyResin
+    - XenoFastResin
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
   - type: XenoDevour
@@ -219,6 +221,9 @@
   - type: CommendationGiver
   - type: XenoInhands
     prefix: queen
+  - type: XenoOmitNumber
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 1.4
 
 - type: entity
   id: XenoLeaderPheromoneRelay

@@ -7,6 +7,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
+using Content.Shared._RMC14.Damage;
 
 namespace Content.Shared._RMC14.Shields;
 
@@ -35,10 +36,10 @@ public sealed partial class XenoShieldSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<XenoShieldComponent, DamageModifyEvent>(OnDamage, after: [typeof(CMArmorSystem)]);
+        SubscribeLocalEvent<XenoShieldComponent, DamageModifyAfterResistEvent>(OnDamage);
     }
 
-    private void OnDamage(Entity<XenoShieldComponent> ent, ref DamageModifyEvent args)
+    private void OnDamage(Entity<XenoShieldComponent> ent, ref DamageModifyAfterResistEvent args)
     {
         if (!ent.Comp.Active)
             return;

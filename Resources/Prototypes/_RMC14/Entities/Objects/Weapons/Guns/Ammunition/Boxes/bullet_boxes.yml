@@ -1,0 +1,168 @@
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RMCBoxBulletsBase
+  name: rifle ammunition box (10x24mm)
+  description: A 10x24mm ammunition box. Used to refill M54C MK1, MK2, M4SPR and M54CE2 HAR magazines. It comes with a leather strap allowing to wear it on the back.
+  components:
+  - type: Item
+    size: Huge
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    layers:
+    - state: base_m54
+    - sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/bullet_boxes.rsi
+      state: rounds_reg
+      map: [ "enum.BulletBoxLayers.Fill" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.BulletBoxLayers.Fill:
+        enum.BulletBoxLayers.Fill:
+          Empty: { state: rounds_reg, visible: false }
+          Low: { state: rounds_reg_1, visible: true }
+          Medium: { state: rounds_reg_2, visible: true }
+          High: { state: rounds_reg_3, visible: true }
+          Full: { state: rounds_reg, visible: true }
+  - type: RMCUnfoldCardboard
+    spawns:
+    - id: RMCSheetCardboard1
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Back
+  - type: DropOnUseInHand
+  - type: BulletBox
+  - type: Tag
+    tags:
+    - RMCAmmoBox
+
+- type: entity
+  parent: RMCBoxBulletsBase
+  id: RMCBoxBulletsRifle
+  components:
+  - type: BulletBox
+    bulletType: RMCBoxBulletsRifle
+
+- type: entity
+  parent: RMCBoxBulletsRifle
+  id: RMCBoxBulletsRifleEmpty
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxBulletsRifleEmpty
+  - type: BulletBox
+    bulletType: RMCBoxBulletsRifle
+    amount: 0
+
+- type: entity
+  parent: RMCBoxBulletsBase
+  id: RMCBoxBulletsRifleAP
+  name: rifle ammunition box (10x24mm AP)
+  description: A 10x24mm armor-piercing ammunition box. Used to refill M54C MK2, and M4SPR AP magazines. It comes with a leather strap allowing to wear it on the back.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    layers:
+    - state: base_m54
+    - sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/bullet_boxes.rsi
+      state: rounds_ap
+      map: [ "enum.BulletBoxLayers.Fill" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.BulletBoxLayers.Fill:
+        enum.BulletBoxLayers.Fill:
+          Empty: { state: rounds_ap, visible: false }
+          Low: { state: rounds_ap_1, visible: true }
+          Medium: { state: rounds_ap_2, visible: true }
+          High: { state: rounds_ap_3, visible: true }
+          Full: { state: rounds_ap, visible: true }
+  - type: BulletBox
+    bulletType: RMCBoxBulletsRifleAP
+
+- type: entity
+  parent: RMCBoxBulletsRifleAP
+  id: RMCBoxBulletsRifleAPEmpty
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxBulletsRifleAPEmpty
+  - type: BulletBox
+    bulletType: RMCBoxBulletsRifleAP
+    amount: 0
+
+- type: entity
+  parent: RMCBoxBulletsBase
+  id: RMCBoxBulletsSMG
+  name: SMG HV ammunition box (10x20mm)
+  description: A 10x20mm ammunition box. Used to refill M63 HV and extended magazines. It comes with a leather strap allowing to wear it on the back.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    layers:
+    - state: base_m63
+    - sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/bullet_boxes.rsi
+      state: rounds_hv
+      map: [ "enum.BulletBoxLayers.Fill" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.BulletBoxLayers.Fill:
+        enum.BulletBoxLayers.Fill:
+          Empty: { state: rounds_hv, visible: false }
+          Low: { state: rounds_hv_1, visible: true }
+          Medium: { state: rounds_hv_2, visible: true }
+          High: { state: rounds_hv_3, visible: true }
+          Full: { state: rounds_hv, visible: true }
+  - type: BulletBox
+    bulletType: RMCBoxBulletsSMG
+
+- type: entity
+  parent: RMCBoxBulletsSMG
+  id: RMCBoxBulletsSMGEmpty
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxBulletsSMGEmpty
+  - type: BulletBox
+    bulletType: RMCBoxBulletsSMG
+    amount: 0
+
+- type: entity
+  parent: RMCBoxBulletsBase
+  id: RMCBoxBulletsSMGAP
+  name: SMG ammunition box (10x20mm AP)
+  description: A 10x20mm armor-piercing ammunition box. Used to refill M63 AP magazines. It comes with a leather strap allowing to wear it on the back.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    layers:
+    - state: base_m63
+    - sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/bullet_boxes.rsi
+      state: rounds_ap
+      map: [ "enum.BulletBoxLayers.Fill" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.BulletBoxLayers.Fill:
+        enum.BulletBoxLayers.Fill:
+          Empty: { state: rounds_ap, visible: false }
+          Low: { state: rounds_ap_1, visible: true }
+          Medium: { state: rounds_ap_2, visible: true }
+          High: { state: rounds_ap_3, visible: true }
+          Full: { state: rounds_ap, visible: true }
+  - type: BulletBox
+    bulletType: RMCBoxBulletsSMGAP
+
+- type: entity
+  parent: RMCBoxBulletsSMGAP
+  id: RMCBoxBulletsSMGAPEmpty
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxBulletsSMGAPEmpty
+  - type: BulletBox
+    bulletType: RMCBoxBulletsSMGAP
+    amount: 0

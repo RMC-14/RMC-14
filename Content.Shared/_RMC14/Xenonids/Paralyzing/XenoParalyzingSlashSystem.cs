@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
@@ -14,7 +15,7 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
 
     public override void Initialize()
     {
@@ -24,7 +25,10 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
 
     private void OnXenoParalyzingSlashAction(Entity<XenoParalyzingSlashComponent> xeno, ref XenoParalyzingSlashActionEvent args)
     {
-        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
+        if (args.Handled)
+            return;
+
+        if (!_rmcActions.TryUseAction(xeno, args.Action))
             return;
 
         args.Handled = true;

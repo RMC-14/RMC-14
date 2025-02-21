@@ -1,4 +1,4 @@
-﻿using Robust.Shared.Input;
+using Robust.Shared.Input;
 
 namespace Content.Shared._RMC14.Input;
 
@@ -16,7 +16,9 @@ public sealed class CMKeyFunctions
     public static readonly BoundKeyFunction CMHolsterSecondary = "CMHolsterSecondary";
     public static readonly BoundKeyFunction CMHolsterTertiary = "CMHolsterTertiary";
     public static readonly BoundKeyFunction CMHolsterQuaternary = "CMHolsterQuaternary";
-    public static readonly BoundKeyFunction CMXenoWideSwing = "CMXenoWideSwing";
     public static readonly BoundKeyFunction RMCPickUpDroppedItems = "RMCPickUpDroppedItems";
     public static readonly BoundKeyFunction RMCFocusMentorChat = "RMCFocusMentorChat";
+
+    //Xeno
+    public static readonly BoundKeyFunction CMXenoWideSwing = "CMXenoWideSwing";
 }

@@ -65,6 +65,9 @@ public sealed class HiveLeaderOverlay : Overlay
         var leaders = _entity.EntityQueryEnumerator<HiveLeaderComponent, SpriteComponent, TransformComponent>();
         while (leaders.MoveNext(out _, out var sprite, out var xform))
         {
+            if (xform.MapID != args.MapId)
+                continue;
+
             var bounds = sprite.Bounds;
             var worldPos = _transform.GetWorldPosition(xform, _xformQuery);
 

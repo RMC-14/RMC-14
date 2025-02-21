@@ -18,7 +18,7 @@ tickrate = 15
 [physics]
 # Makes mapping annoying
 grid_splitting = false
-maxlinvelocity = 45 # TODO RMC14 62 when we don't get tunneling, change in GunComponent too
+maxlinvelocity = 72
 target_minimum_tickrate = 90
 
 [procgen]

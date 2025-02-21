@@ -43,6 +43,7 @@
           - PowerCell
           - ProjectileBatteryAmmoProvider
           - Defibrillator
+          - Visor
           # SmartGun Battery
   - type: ItemMapper
     sprite: _RMC14/Structures/Power/recharger.rsi

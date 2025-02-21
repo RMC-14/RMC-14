@@ -90,6 +90,8 @@
     evasion: 20
   - type: XenoInhands
     prefix: drone
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.1
 
 - type: entity
   parent: CMXenoDroneBase
@@ -125,6 +127,8 @@
     - WallXenoResin
     - WallXenoMembrane
     - DoorXenoResin
+    - XenoStickyResin
+    - XenoFastResin
 
 - type: entity
   parent: CMXenoDroneBase
@@ -193,6 +197,10 @@
     - map: [ "enum.XenoHealerVisualLayers.Goop" ]
       visible: false
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
       visible: false
   - type: RMCXenoDamageVisuals
     prefix: drone

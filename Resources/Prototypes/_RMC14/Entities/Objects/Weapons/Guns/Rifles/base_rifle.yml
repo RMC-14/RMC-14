@@ -62,8 +62,13 @@
   - type: Appearance
   - type: RMCNameItemOnVend
     item: PrimaryGun
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/rifle_mouse.rsi
+      state: all
 
 - type: entity
+  abstract: true
   parent: CMBaseWeaponRifleNoDualWieldPenalty
   id: CMBaseWeaponRifle
   components:

@@ -40,7 +40,7 @@
         amount: 25
     - name: Sidearms
       entries:
-      - id: CMWeaponPistolM77Empty
+      - id: RMCWeaponPistolM77Empty
         amount: 25
       - id: RMCWeaponRevolverM44Empty
         amount: 25
@@ -283,6 +283,7 @@
   - type: AccessReader
     access:
     - [ "CMAccessMarinePrep" ]
+    - [ "CMAccessRequisitions" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_ammo.rsi
   - type: CMAutomatedVendor
@@ -340,6 +341,7 @@
   - type: AccessReader
     access:
     - [ "CMAccessMarinePrep" ]
+    - [ "CMAccessRequisitions" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
   - type: CMAutomatedVendor
@@ -381,8 +383,8 @@
         amount: 1
     - name: Miscellaneous
       entries:
-      #- id: CMEngineerKit
-      #  amount: 1
+      - id: RMCEngineerKit
+        amount: 1
       #- id: CMMap
       #  amount: 5
       - id: CMFireExtinguisher
@@ -392,6 +394,7 @@
       - id: CMRollerBedSpawnFolded
         amount: 1
       - id: RMCScabbardMacheteFilled
+        name: machete scabbard (Full)
         amount: 5
       - id: RMCBinoculars
         amount: 1
@@ -400,6 +403,8 @@
       #- id: CMSparePDTLBattleBuddyKit
       #  amount: 3
       - id: RMCPowerCellCrap
+        amount: 2
+      - id: RMCMagazineSMGNailgun
         amount: 2
 
 
@@ -412,6 +417,7 @@
   - type: AccessReader
     access:
     - [ "CMAccessMarinePrep" ]
+    - [ "CMAccessRequisitions" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
   - type: CMAutomatedVendor

@@ -81,6 +81,7 @@
     - map: [ "mask" ]
     - map: [ "head" ]
     - map: [ "enum.SquadArmorLayers.Helmet" ]
+    - map: [ "enum.VisorVisualLayers.Base" ]
     - map: [ "pocket1" ]
     - map: [ "pocket2" ]
     - map: [ "clownedon" ]
