@@ -286,8 +286,7 @@
     whitelist:
       components:
       - SmartGunArmor
-  - type: GunIDLock
-    enabled: true     
+  - type: GunIDLock 
   - type: GunToggleableRecoil
   - type: GunToggleableAutoFire
   - type: ToggleableMotionDetector
