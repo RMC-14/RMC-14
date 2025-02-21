@@ -12,6 +12,6 @@ public sealed partial class RMCTippableComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan SmallDelay = TimeSpan.FromSeconds(5);
 
-    [DataField("isTipped", required: false), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public bool IsTipped = false;
 }
