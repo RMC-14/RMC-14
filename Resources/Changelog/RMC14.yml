@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Runner, Lurker, and Parasite Leaps will now register hits on Marines
-      that are too close or sharing the same tile as them.
-    type: Fix
-  id: 865
-  time: '2024-10-19T18:30:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4529
 - author: Dutch-VanDerLinde
   changes:
   - message: Fixed fence health being twice the intended amount.
@@ -5087,5 +5079,12 @@
   id: 1365
   time: '2025-02-21T13:02:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5680
+- author: Djvarik
+  changes:
+  - message: Ported sprites for Sorokyne Strata & ERT Shuttles
+    type: Add
+  id: 1366
+  time: '2025-02-21T13:04:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5657
 Name: RMC14
 Order: -1
