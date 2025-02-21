@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed fence health being twice the intended amount.
-    type: Fix
-  id: 866
-  time: '2024-10-19T18:32:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4518
 - author: Vermidia
   changes:
   - message: You can now wear motion detectors on your belt and on suitstorage for
@@ -5086,5 +5079,12 @@
   id: 1366
   time: '2025-02-21T13:04:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5657
+- author: J C Denton
+  changes:
+  - message: M890 Riot Shotgun now has a slightly different sprite.
+    type: Tweak
+  id: 1367
+  time: '2025-02-21T13:05:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5683
 Name: RMC14
 Order: -1
