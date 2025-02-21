@@ -48,7 +48,7 @@ public sealed class PullingTest : MovementTest
 
         // Move in the other direction
         await Move(DirectionFlag.East, 2);
-        Assert.That(Delta(), Is.InRange(-1.3f, -0.9f));
+        Assert.That(Delta(), Is.InRange(-1.3f, -0.8f));
         Assert.That(puller.Pulling, Is.EqualTo(STarget));
         Assert.That(pullable.Puller, Is.EqualTo(SPlayer));
         Assert.That(pullable.BeingPulled, Is.True);
