@@ -26,8 +26,11 @@ public sealed class RMCTippingSystem : EntitySystem
     {
         Log.Debug("Starting check");
 
+
         if (!HasComp<XenoComponent>(args.User))
             return;
+
+        args.Handled = true;
 
         var ev = new RMCTippingDoAfterEvent();
         Log.Debug("yea");
