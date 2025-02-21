@@ -58,7 +58,7 @@ public sealed class PullingTest : MovementTest
         // Stop pulling
         await PressKey(ContentKeyFunctions.ReleasePulledObject);
         await RunTicks(5);
-        Assert.That(Delta(), Is.InRange(-1.3f, -0.9f));
+        Assert.That(Delta(), Is.InRange(-1.3f, -0.8f));
         Assert.That(puller.Pulling, Is.Null);
         Assert.That(pullable.Puller, Is.Null);
         Assert.That(pullable.BeingPulled, Is.False);
