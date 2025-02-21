@@ -1,5 +1,4 @@
 using System.Numerics;
-using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
 using Content.Shared.ActionBlocker;
@@ -35,6 +34,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly RMCDazedSystem _dazed = default!;
 
     public override void Initialize()
     {
@@ -80,17 +80,8 @@ public sealed class RMCSizeStunSystem : EntitySystem
         if (distance > bullet.Comp.MaxRange || _stand.IsDown(args.Target))
             return;
 
-        //Silence part, before the big size check because big xenos can still be silenced
-        if (bullet.Comp.DazeTime > TimeSpan.Zero)
-        {
-            foreach (var (actionId, _) in _actions.GetActions(args.Target))
-            {
-                if (TryComp(actionId, out RMCDazeableActionComponent? silenceable))
-                {
-                    _actions.SetCooldown(actionId, bullet.Comp.DazeTime * silenceable.DurationMultiplier);
-                }
-            }
-        }
+        //Try to daze before the big size check, because big xenos can still be dazed.
+        _dazed.TryDaze(args.Target, bullet.Comp.DazeTime);
 
         if (!TryComp<RMCSizeComponent>(args.Target, out var size) || size.Size >= RMCSizes.Big)
             return;
