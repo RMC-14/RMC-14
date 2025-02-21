@@ -177,7 +177,7 @@
       - id: RMCPouchFlareFilled
         name: flare pouch (Full)
         amount: 5
-      - id: RMCPouchDocument
+      - id: RMCPouchDocumentSmall
         amount: 2
       #- id: RMCPouchSling
       #  amount: 2
