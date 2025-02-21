@@ -96,7 +96,6 @@
   - type: XenoBrutalize
   - type: RMCSize
     size: Immobile
-  - type: VendorTipLarge
   - type: RMCXenoDamageVisuals
     prefix: crusher
   - type: TacticalMapIcon
@@ -107,3 +106,5 @@
     weak: false
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.7
+  - type: VendorTipTime
+    isCrusher: true  
