@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: You can now wear motion detectors on your belt and on suitstorage for
-      most armors
-    type: Fix
-  id: 867
-  time: '2024-10-19T18:34:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4519
 - author: DrSmugleaf
   changes:
   - message: Added Beatrice 'Bea' Bootes figurine.
@@ -5086,5 +5078,15 @@
   id: 1367
   time: '2025-02-21T13:05:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5683
+- author: Binbagg
+  changes:
+  - message: Fixed larvas not starting with full plasma.
+    type: Fix
+  - message: Fixed larvas being able to evolve off weeds for the first 15 minutes
+      of a game.
+    type: Fix
+  id: 1368
+  time: '2025-02-21T13:08:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5671
 Name: RMC14
 Order: -1
