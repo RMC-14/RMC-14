@@ -58,6 +58,7 @@
       skills:
         all:
           RMCSkillMedical: 2
+  - type: StoreAfterFailedInteract
 
 - type: entity
   parent: CMPersonalStorageBase

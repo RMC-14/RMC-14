@@ -69,7 +69,7 @@
       SquadDelta: CMHeadBandDelta
       SquadEcho: CMHeadBandEcho
       SquadFoxtrot: CMHeadBandFoxtrot
-      # TODO SquadIntel: CMHeadBandIntel
+      SquadIntel: CMHeadBandIntel
 
 - type: entity
   parent: CMHeadBandGreen

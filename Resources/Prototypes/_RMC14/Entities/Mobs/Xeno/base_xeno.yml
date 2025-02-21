@@ -294,6 +294,7 @@
     superSlowMultiplier: 0.75
     durationMultiplier: 0.666
   - type: RMCCanBeFultoned
+  - type: CMArmor
 
 - type: entity
   abstract: true
@@ -379,9 +380,6 @@
       - XenoFruit
   - type: ParalyzeOnPullAttempt
   - type: FirePatter
-    blacklist:
-      components:
-      - Marine
   - type: RMCHandEmotes
 
 - type: entity
