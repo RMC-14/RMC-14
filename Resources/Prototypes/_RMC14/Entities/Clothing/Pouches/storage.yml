@@ -379,7 +379,7 @@
     - id: CMShellShotgunSlugs
       amount: 7
 
-# Expolosives Pouch
+# Explosives Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
   id: RMCPouchExplosive
@@ -503,11 +503,13 @@
     - 0,0,11,1 #6 slots
     whitelist:
       tags:
+      - RMCCircuitboard
       - PowerCell
-#      - # TODO RMC14 the rest of the owl idk theres a lot check cm13
+#      - # TODO RMC14 6 different stock parts
       components:
       - ComputerBoard
       - MachineBoard
+      - SmartGunBattery
   - type: FixedItemSizeStorage
 
 - type: entity
@@ -517,6 +519,8 @@
   components:
   - type: StorageFill
     contents:
+    - id: CMAPCElectronics
+      amount: 3
     - id: RMCPowerCellHigh
       amount: 3
 
@@ -558,6 +562,62 @@
     - id: CMSheetMetal50
     - id: BarbedWire15
 
+# Engineer Kit Pouch
+- type: entity
+  parent: [RMCPouchOpenClosed, RMCPouchStorage]
+  id: RMCPouchEngineerKit
+  name: engineer kit pouch
+  description: It's specifically made to hold engineering items. Requires engineering skills to use effectively.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/engineerpouch.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,11,1 #6 slots
+    whitelist:
+      tags:
+      - RMCCircuitboard
+      - Flashlight
+      - RMCWeldingGoggle
+      # - TODO RMC14 RMCAnalyzer
+      # - TODO RMC14 RMCDemoScanner
+      # - TODO RMC14 RMCReagentScanner
+      - CableCoil
+      - PowerCell
+      # - TODO RMC14 RMCAssembly
+      # - TODO RMC14 RMCStockParts
+      - RMCExplosivePlastic
+      # - TODO RMC14 RMCSynthResetKey
+      components:
+      - TrayScanner
+      - ComputerBoard
+      - MachineBoard
+  - type: StorageStoreSkillRequired
+    entries:
+    - whitelist:
+        tags:
+        - RMCCircuitboard
+        - Flashlight
+        - RMCWeldingGoggle
+        # - TODO RMC14 RMCAnalyzer
+        # - TODO RMC14 RMCDemoScanner
+        # - TODO RMC14 RMCReagentScanner
+        - CableCoil
+        - PowerCell
+        # - TODO RMC14 RMCAssembly
+        # - TODO RMC14 RMCStockParts
+        - RMCExplosivePlastic
+        # - TODO RMC14 RMCSynthResetKey
+        components:
+        - TrayScanner
+        - ComputerBoard
+        - MachineBoard
+      skills:
+        all:
+          RMCSkillEngineer: 2
+  - type: FixedItemSizeStorage
+
 
 # Tools Pouch
 - type: entity
@@ -583,6 +643,7 @@
       - Multitool
       - Flashlight
       - RMCExplosiveBreachingCharge
+      - RMCExplosivePlastic
       - CMFireExtinguisherPortable
       components:
       - Welder

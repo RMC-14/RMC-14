@@ -264,6 +264,7 @@
       - id: RMCPouchPistol
       - id: RMCPouchToolsFill
         name: Tools pouch (Full)
+      - id: RMCPouchEngineerKit
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:

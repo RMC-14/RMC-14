@@ -1,199 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Runner's pulling speed on marines has been decreased by about ~23.5%,
-      moving slightly slower than a Marine wearing Heavy Armor.
-    type: Tweak
-  - message: Warrior's pulling speed on marines has been decreased by about ~10%.
-    type: Tweak
-  - message: All other Xenos pull Marines somewhat faster.
-    type: Tweak
-  - message: Marines now pull other Marines faster.
-    type: Tweak
-  - message: All Xenos besides Hivelord and Crusher now pull other Xenos slower.
-    type: Tweak
-  - message: Hivelords and Crushers now pull other Xenos faster.
-    type: Tweak
-  - message: Marines now pull Xeno corpses faster.
-    type: Tweak
-  id: 856
-  time: '2024-10-18T02:29:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4453
-- author: TsjipTsjip
-  changes:
-  - message: Marine icon command.
-    type: Add
-  id: 857
-  time: '2024-10-18T02:34:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4480
-- author: TeaTotalTemplar
-  changes:
-  - message: Added the M60 General Purpose Machinegun and associated box magazine.
-      Includes a pre-installed bipod which greatly benefits it when properly deployed.
-    type: Add
-  - message: Corrected an error in the B92FS pistol's description.
-    type: Tweak
-  id: 858
-  time: '2024-10-18T02:37:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4428
-- author: TeaTotalTemplar
-  changes:
-  - message: The Rifleman guide entry of the guidebook has been updated to be more
-      instructional, more specific, and more immersive. Further suggestions or feedback
-      is welcomed in the discord thread.
-    type: Tweak
-  - message: The MK45 cartridges are now correctly identified as .45 automagnum
-    type: Fix
-  - message: The M16 magazine now correctly shows if it is loaded or empty
-    type: Fix
-  - message: The MP5 magazine now correctly loads 9mm smg rounds
-    type: Fix
-  id: 859
-  time: '2024-10-18T06:13:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4481
-- author: Whisper
-  changes:
-  - message: Added the Requisitions guidebook page, by epicjoston.
-    type: Add
-  id: 860
-  time: '2024-10-18T09:47:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4508
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Gun bayonets can now be used while devoured by a xenonid. You cannot
-      shoot the gun, however.
-    type: Tweak
-  id: 861
-  time: '2024-10-18T19:11:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4514
-- author: Vermidia
-  changes:
-  - message: Fix being able to transfer plasma to ovi'd Queens
-    type: Fix
-  id: 862
-  time: '2024-10-18T19:11:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4513
-- author: Vermidia
-  changes:
-  - message: Comtechs now have engineering skill 3 instead of 2
-    type: Tweak
-  id: 863
-  time: '2024-10-18T19:12:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4510
-- author: DrSmugleaf
-  changes:
-  - message: Added supply drops, pads and the Requisitions supply drop console. The
-      overwatch console can also call in supply drops.
-    type: Add
-  - message: Added promoting people to squad leader through the overwatch console.
-    type: Add
-  - message: Added energy chem. The chemical dispenser now uses automatically regenerating
-      energy to dispense chemicals instead of being limited to 200 units of carbon
-      for the entire operation.
-    type: Add
-  - message: Added the motion detector, which lets you see blips of movement near
-      you. It has a long and short mode. The smart gun comes with one that is always
-      in long mode. Requisitions starts with 4 and can buy more, while all squad roles
-      can buy one for points.
-    type: Add
-  - message: Added the sensor tower. There is one on each planet map, and when repaired
-      it will show Command in CIC a live-updating view of all remaining xenonids.
-      It starts broken, can be repaired by those trained in engineering skill, and
-      can be broken by xenonids. It will also randomly break during use.
-    type: Add
-  - message: Added fireman carry. Pulling someone twice then dragging them to you
-      will start carrying them without a speed penalty, if you are trained in fireman
-      carry.
-    type: Add
-  - message: Added the pressurized reagent canister pouch, which lets you carry 480
-      units of chemicals and a medipen which automatically refills when inserted into
-      the pouch.
-    type: Add
-  - message: Added the missing defibabble icon to dead but not unrevivable marines
-      on the tactical map.
-    type: Add
-  - message: Added big pointing arrows for leadership roles and Queen.
-    type: Add
-  - message: Added a second ear slot, that can carry screwdrivesrs and penlights.
-      A second headset cannot be worn.
-    type: Add
-  - message: Added the M63 holster rig, letting you carry an SMG and two mags in your
-      belt or suit storage slot.
-    type: Add
-  - message: Added 1000 unit reagent tank structures. One is in medbay.
-    type: Add
-  - message: Added the missing +25% melee weapon skill multiplier to the Weapons Specialist
-      and CMP.
-    type: Add
-  - message: Added customizable ghost colors for Rouny and above Patrons.
-    type: Add
-  - message: Add Tempest Patron figurine.
-    type: Add
-  - message: Fixed defib not properly reviving people that died from 200 bloodloss.
-    type: Fix
-  - message: Fixed survivors and corpses being counted for Requisitions starting money.
-    type: Fix
-  - message: Fixed the sectech giving MP headsets instead of blank headsets.
-    type: Fix
-  - message: Fixed corpses spawned planetside not capping at 25.
-    type: Fix
-  - message: Fixed light bulbs nto being powered by APCs.
-    type: Fix
-  - message: Fixed shotgun shells not ejecting when clicking a held shotgun shell
-      box with an empty hand.
-    type: Fix
-  - message: Fixed not being able to switch hands while using a defib.
-    type: Fix
-  - message: Fixed stasis bags requiring people to be lying down.
-    type: Fix
-  - message: Fixed not being able to click on the UI to insert items on some holster
-      storages like the combat toolbelt rig.
-    type: Fix
-  - message: Fixed Boiler Bombard projectile being 2.6 times faster than intended.
-    type: Fix
-  - message: Fixed frenzy pheromone speed buff being 40% stronger than intended.
-    type: Fix
-  - message: Fixed auto fire on the smart gun not draining battery.
-    type: Fix
-  - message: Fixed multi-stacked doors on Fiorina and Trijent, and mapped in some
-      missing props, cable and wrenches.
-    type: Fix
-  - message: Fixed small floodlights being movable.
-    type: Fix
-  - message: Fixed the second floor of the Almayer being cold.
-    type: Fix
-  - message: Fixed pills not metabolizing in 10 seconds, instead of 20.
-    type: Tweak
-  - message: Updated the roadmap.
-    type: Tweak
-  - message: Increased projectile speed to its intended value, a ~40% increase.
-    type: Tweak
-  id: 864
-  time: '2024-10-18T19:29:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4515
-- author: Rainbeon
-  changes:
-  - message: Runner, Lurker, and Parasite Leaps will now register hits on Marines
-      that are too close or sharing the same tile as them.
-    type: Fix
-  id: 865
-  time: '2024-10-19T18:30:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4529
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed fence health being twice the intended amount.
-    type: Fix
-  id: 866
-  time: '2024-10-19T18:32:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4518
-- author: Vermidia
-  changes:
-  - message: You can now wear motion detectors on your belt and on suitstorage for
-      most armors
-    type: Fix
-  id: 867
-  time: '2024-10-19T18:34:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4519
 - author: DrSmugleaf
   changes:
   - message: Added Beatrice 'Bea' Bootes figurine.
@@ -5172,5 +4977,116 @@
   id: 1356
   time: '2025-02-16T21:51:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5651
+- author: Tunguso4ka
+  changes:
+  - message: Nightmare Inserts added to Solaris.
+    type: Add
+  id: 1357
+  time: '2025-02-18T22:20:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5650
+- author: Djvarik
+  changes:
+  - message: Added missing trash carts in casino alley in Chance's
+    type: Fix
+  id: 1358
+  time: '2025-02-18T22:22:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5656
+- author: Whisper
+  changes:
+  - message: Fixed duplicated traits and traits not intended to be selectable, and
+      lowered the frequency of replacements for some accents.
+    type: Fix
+  - message: Spawning as a command role now removes stuttering accent and frontal
+      lisps from the character for that round.
+    type: Fix
+  id: 1359
+  time: '2025-02-19T05:18:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4872
+- author: CyberTropic
+  changes:
+  - message: Fixed fences connecting to walls.
+    type: Fix
+  id: 1360
+  time: '2025-02-19T05:19:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5668
+- author: Vermidia
+  changes:
+  - message: Fixed APC boards not fitting in a few pouches
+    type: Fix
+  - message: Fixed plastic explosives not fitting in the tools pouch
+    type: Fix
+  - message: Added the engineer kit pouch, which requires engineering skill to put
+      stuff inside. Holds various engineering items.
+    type: Add
+  id: 1361
+  time: '2025-02-19T05:36:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5664
+- author: Vermidia
+  changes:
+  - message: Added Valkyrie, a replacement to the Warden praetorian strain, which
+      focuses on frontline support.
+    type: Add
+  - message: Fixed Burrower's burrow having too high a range (15 > 8).
+    type: Fix
+  - message: Fixed Resin Whisperer construction range being too high (13 > 11).
+    type: Fix
+  - message: Fruits glow when ready to be harvested
+    type: Fix
+  id: 1362
+  time: '2025-02-19T05:39:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5610
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added helmet accessories. Currently, only the M1A1 ballistic goggles
+      are valid accessories.
+    type: Add
+  - message: Helmets now have 4 slots, 2 of those slots being reserved for helmet
+      accessories.
+    type: Tweak
+  id: 1363
+  time: '2025-02-19T05:52:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5654
+- author: CyberTropic
+  changes:
+  - message: Added the rest of the nightmare inserts to Kutjevo.
+    type: Add
+  - message: Added tall grass to Kutjevo.
+    type: Add
+  - message: Added civilian binoculars.
+    type: Add
+  id: 1364
+  time: '2025-02-21T13:01:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5669
+- author: noctyrnal
+  changes:
+  - message: Changed flare colour to be more white than red.
+    type: Tweak
+  id: 1365
+  time: '2025-02-21T13:02:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5680
+- author: Djvarik
+  changes:
+  - message: Ported sprites for Sorokyne Strata & ERT Shuttles
+    type: Add
+  id: 1366
+  time: '2025-02-21T13:04:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5657
+- author: J C Denton
+  changes:
+  - message: M890 Riot Shotgun now has a slightly different sprite.
+    type: Tweak
+  id: 1367
+  time: '2025-02-21T13:05:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5683
+- author: Binbagg
+  changes:
+  - message: Fixed larvas not starting with full plasma.
+    type: Fix
+  - message: Fixed larvas being able to evolve off weeds for the first 15 minutes
+      of a game.
+    type: Fix
+  id: 1368
+  time: '2025-02-21T13:08:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5671
 Name: RMC14
 Order: -1

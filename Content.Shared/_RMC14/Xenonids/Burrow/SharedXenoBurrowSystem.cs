@@ -160,7 +160,6 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
                 Dirty(action.Id, actComp);
             }
 
-            _rmcPulling.TryStopAllPullsFromAndOn(burrower);
             _transform.Unanchor(burrower);
             if (TryComp<PhysicsComponent>(burrower, out var body))
             {
@@ -300,6 +299,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
 
         burrower.Comp.ForcedUnburrowAt = _time.CurTime + burrower.Comp.BurrowMaxDuration;
         burrower.Comp.NextBurrowAt = _time.CurTime + burrower.Comp.BurrowCooldown;
+        _rmcPulling.TryStopAllPullsFromAndOn(burrower);
         Dirty(burrower);
 
         var ev = new BurrowedEvent(true);
@@ -415,6 +415,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
         burrower.Comp.Tunneling = false;
         burrower.Comp.NextTunnelAt = null;
         burrower.Comp.ForcedUnburrowAt = null;
+        _rmcPulling.TryStopAllPullsFromAndOn(burrower);
         Dirty(burrower);
         if (_net.IsServer)
             _transform.SetCoordinates(burrower, _entities.GetCoordinates(args.TargetCoords));

@@ -918,6 +918,7 @@
       - id: RMCPouchFlareFilled
         name: flare pouch (Full)
       - id: RMCPouchFuelTank
+      - id: RMCPouchEngineerKit
     - name: Personal Sidearms
       jobs:
       - CMChiefEngineer
