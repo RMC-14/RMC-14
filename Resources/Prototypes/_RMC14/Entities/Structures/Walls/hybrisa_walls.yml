@@ -31,6 +31,14 @@
     key: walls
     base: rock_border
 
+- type: entity
+  parent: RMCWallHybrisaRock
+  id: RMCWallHybrisaRockTimed
+  suffix: TIMED
+  components:
+  - type: TimedDespawn
+    lifetime: 2400
+
 # Engineer Ship
 
 - type: entity
