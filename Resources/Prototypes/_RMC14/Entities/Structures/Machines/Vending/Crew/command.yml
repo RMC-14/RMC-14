@@ -151,7 +151,7 @@
         name: first-aid pouch (pills)
       - id: RMCPouchFirstResponder
       - id: RMCPouchFlareFilled
-      #- id: RMCPouchFuelTank # TODO RMC14 Fuel Tank Pouch
+      - id: RMCPouchFuelTank
       - id: RMCPouchGeneralLarge
         recommended: true
       - id: RMCPouchMagazineLarge
@@ -553,10 +553,10 @@
         points: 15
       - id: RMCAttachmentU7UnderbarrelShotgun
         points: 15
-      - id: RMCAttachmentUnderbarrelExtinguisher # TODO: Check this works, prototype looks sussy
+      - id: RMCAttachmentUnderbarrelExtinguisher
         points: 15
-      #- id: RMCAttachmentUnderbarrelFlamethrower # TODO RMC14 Underbarrel FLamethrower
-      #  points: 15
+      - id: RMCAttachmentMiniFlamethrower
+        points: 15
       - id: RMCAttachmentU1GrenadeLauncher
         points: 5
     - name: Barrel Attachments
@@ -733,7 +733,7 @@
       - id: RMCPouchConstruction
       - id: RMCPouchElectronicsFill
       - id: RMCPouchFlareFilled
-      #- id: RMCPouchFuelTank # TODO RMC14 Fuel Tank Pouch
+      - id: RMCPouchFuelTank
     - name: Accessories
       jobs:
       - CMExecutiveOfficer
@@ -982,7 +982,8 @@
         name: M42A2 pump shotgun
       - id: RMCM54CMK2Case
         name: M54C assault rifle MK2
-      # - id: RMCIncineratorUnitCase TODO: Incinerator unit case
+      - id: RMCCaseFlamer
+        name: M34 incinerator unit
     - name: Spare Equipment
       jobs:
       - CMChiefEngineer

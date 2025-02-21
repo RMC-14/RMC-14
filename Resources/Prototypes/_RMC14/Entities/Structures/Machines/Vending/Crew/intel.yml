@@ -169,7 +169,7 @@
         name: first-aid pouch (pill packets)
       - id: RMCPouchFlareFilled
         name: flare pouch (Full)
-      #- id: TODO RMC14 Fuel Tank Strap Pouch
+      - id: RMCPouchFuelTank
       - id: RMCPouchGeneralLarge
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchMagazine

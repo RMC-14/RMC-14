@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   parent: [StorageTank, StructureWheeled]
   id: RMCTankReagentEmpty
   name: reagent tank
@@ -49,6 +49,9 @@
   - type: Corrodible
     timeToApply: 4
     structure: true
+  - type: Tag
+    tags:
+    - RMCTankReagent
 
 - type: entity
   parent: RMCTankReagentEmpty
@@ -105,6 +108,10 @@
   - type: Tag
     tags:
     - RMCTankFuel
+    - RMCTankReagent
 
 - type: Tag
   id: RMCTankFuel
+
+- type: Tag
+  id: RMCTankReagent

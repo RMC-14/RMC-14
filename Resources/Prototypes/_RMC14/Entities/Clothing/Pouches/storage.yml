@@ -73,7 +73,7 @@
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
   id: RMCPouchFuelTank
   name: fuel tank strap pouch
-  description: Two ring straps to loop around M240-pattern napalm tanks. Handle with care.
+  description: Two ring straps to loop around M34-pattern napalm tanks. Handle with care.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/fueltank.rsi
@@ -81,15 +81,17 @@
     grid:
     - 0,0,3,1 #2 slots
     whitelist:
+      components:
+      - RMCFlamerTank
       tags:
       - FireExtinguisher
-      # - TODO RMC14 M240
   - type: FixedItemSizeStorage
   - type: IgnoreContentsSize
     items:
+      components:
+      - RMCFlamerTank
       tags:
       - FireExtinguisher
-      # - TODO RMC14 M240
 
 # Survival Pouch
 - type: entity

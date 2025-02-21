@@ -294,29 +294,46 @@ public abstract partial class SharedGunSystem
         if (TryComp(used, out StackComponent? stack))
         {
             var coordinates = _transform.GetMoverCoordinates(used);
-            var split = _rmcStack.Split((used, stack), 1, coordinates);
-            if (split != null)
-                used = split.Value;
+            var amount = component.Capacity - component.Count;
+            if (amount <= 0)
+                return;
 
+            amount = Math.Min(amount, stack.Count);
             if (CompOrNull<CartridgeAmmoComponent>(used)?.SoundInsert is { } sound)
                 Audio.PlayPredicted(sound, uid, user);
 
-            UpdateAmmoCount(uid, artificialIncrease: 1);
-
+            UpdateAmmoCount(uid, artificialIncrease: amount);
+            var split = _rmcStack.Split((used, stack), amount, coordinates);
             if (_netManager.IsClient)
                 return;
+
+            if (split != null)
+                used = split.Value;
+
+            for (var i = 0; i < amount; i++)
+            {
+                split = _rmcStack.Split(used, amount, coordinates);
+                if (split == null)
+                    continue;
+
+                // Reused function moved here.
+                component.Entities.Add(split.Value);
+                Containers.Insert(split.Value, component.Container);
+            }
+        }
+        else
+        {
+            // Reused function moved here.
+            component.Entities.Add(used);
+            Containers.Insert(used, component.Container);
         }
 
-        // Reused function moved here.
-        component.Entities.Add(used);
-        Containers.Insert(used, component.Container);
         Dirty(uid, component);
         // Not predicted so
         Audio.PlayPredicted(component.SoundInsert, uid, user);
         UpdateBallisticAppearance(uid, component);
         UpdateAmmoCount(uid);
         DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.Entities));
-        return;
     }
 
     private void OnBallisticDelayedCycleDoAfter(EntityUid uid, BallisticAmmoProviderComponent component, DelayedCycleDoAfterEvent args)

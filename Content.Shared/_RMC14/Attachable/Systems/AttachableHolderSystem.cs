@@ -61,6 +61,7 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, GunRefreshModifiersEvent>(RelayEvent,
             after: new[] { typeof(WieldableSystem) });
         SubscribeLocalEvent<AttachableHolderComponent, InteractUsingEvent>(OnAttachableHolderInteractUsing);
+        SubscribeLocalEvent<AttachableHolderComponent, AfterInteractEvent>(OnAttachableHolderAfterInteract);
         SubscribeLocalEvent<AttachableHolderComponent, ActivateInWorldEvent>(OnAttachableHolderInteractInWorld,
             before: new [] { typeof(CMGunSystem) });
         SubscribeLocalEvent<AttachableHolderComponent, ItemWieldedEvent>(OnHolderWielded);
@@ -186,6 +187,25 @@ public sealed class AttachableHolderSystem : EntitySystem
             args.ClickLocation,
             true);
         RaiseLocalEvent(args.Used, afterInteractEvent);
+
+        if (afterInteractEvent.Handled)
+            args.Handled = true;
+    }
+
+    private void OnAttachableHolderAfterInteract(Entity<AttachableHolderComponent> holder, ref AfterInteractEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (holder.Comp.SupercedingAttachable is not { } attachable)
+            return;
+
+        var afterInteractEvent = new AfterInteractEvent(args.User,
+            attachable,
+            args.Target,
+            args.ClickLocation,
+            true);
+        RaiseLocalEvent(attachable, afterInteractEvent);
 
         if (afterInteractEvent.Handled)
             args.Handled = true;

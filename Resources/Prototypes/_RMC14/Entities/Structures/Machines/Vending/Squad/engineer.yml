@@ -116,8 +116,8 @@
         points: 8
       - id: RMCGunCasePistolSmart
         points: 12
-    #- id: CMM240IncineratorUnit
-    #  points: 12
+      - id: RMCCaseFlamer
+        points: 12
     #- id: CMM79GrenadeLauncher
     #  points: 24
     #- id: CMM56DHeavyMachineGun
@@ -132,8 +132,8 @@
         points: 8
       - id: RMCBackpackRTO
         points: 15
-    #- id: CMFuelTankStrapPouch
-    #  points: 4
+      - id: RMCPouchFuelTank
+        points: 4
     #- id: CMSlingPouch
     #  points: 6
       - id: RMCPouchGeneralLarge

@@ -88,6 +88,7 @@
           - RMCAttachmentU1GrenadeLauncher
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentVerticalGrip
+          - RMCAttachmentExtinguisher
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.75, 0.00

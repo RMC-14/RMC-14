@@ -10,6 +10,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Directions;
 using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
@@ -62,6 +63,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     private static readonly ProtoId<ReagentPrototype> WaterReagent = "Water";
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
+    private static readonly ProtoId<DamageTypePrototype> HeatDamage = "Heat";
 
     private EntityQuery<BlockTileFireComponent> _blockTileFireQuery;
     private EntityQuery<DoorComponent> _doorQuery;
@@ -464,6 +466,29 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
         intensity = FixedPoint2.Min(intensity, ent.Comp.MaxIntensity);
         return true;
+    }
+
+    public void SetIntensityDuration(Entity<RMCIgniteOnCollideComponent?, DamageOnCollideComponent?> ent, int? intensity, int? duration)
+    {
+        Resolve(ent, ref ent.Comp1, ref ent.Comp2, false);
+        if (ent.Comp1 != null)
+        {
+            if (intensity != null)
+                ent.Comp1.Intensity = intensity.Value;
+
+            if (duration != null)
+                ent.Comp1.Duration = duration.Value;
+
+            Dirty(ent, ent.Comp1);
+        }
+
+        if (ent.Comp2 != null)
+        {
+            if (duration != null)
+                ent.Comp2.Damage.DamageDict[HeatDamage] = duration.Value;
+
+            Dirty(ent, ent.Comp2);
+        }
     }
 
     public override void Update(float frameTime)
