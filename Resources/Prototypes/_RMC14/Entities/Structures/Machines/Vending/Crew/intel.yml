@@ -154,6 +154,7 @@
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterRevolver
+      - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
         recommended: true
     - name: Pouches
