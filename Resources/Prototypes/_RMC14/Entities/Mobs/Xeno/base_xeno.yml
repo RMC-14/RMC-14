@@ -380,6 +380,7 @@
   - type: ParalyzeOnPullAttempt
   - type: FirePatter
   - type: RMCHandEmotes
+  - type: VendorTipTime
 
 - type: entity
   abstract: true
