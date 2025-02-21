@@ -109,7 +109,7 @@
   description: Bright burning ash from a Star Shell 40mm. Don't touch, or it'll burn ya'.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Misc/cas_flares.rsi
+    sprite: _RMC14/Objects/Misc/flares.rsi
     layers:
     - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
       sprite: _RMC14/Objects/Misc/flares.rsi
@@ -120,7 +120,7 @@
       sprite: _RMC14/Objects/Misc/flares.rsi
       state: starshell_ash
   - type: Icon
-    sprite: _RMC14/Objects/Misc/cas_flares.rsi
+    sprite: _RMC14/Objects/Misc/flares.rsi
     state: starshell_ash
   - type: PointLight
     color: "#FA644B"

@@ -165,6 +165,29 @@
 
 - type: entity
   parent: CMPacketBase
+  id: RMCPacketGrenadeM74AGMI
+  name: M74AGM-I grenade packet
+  description: It contains three M74AGM-Incendiary airburst grenades.
+  components:
+  - type: Sprite
+    layers:
+    - state: agmi_packet
+      map: [ "closedLayer" ]
+    - state: agmi_packet_e
+      map: [ "openLayer", "emptyLayer"]
+
+- type: entity
+  parent: RMCPacketGrenadeM74AGMI
+  id: RMCPacketGrenadeM74AGMIFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMC40MMGrenadeM74AGMI
+      amount: 3
+
+- type: entity
+  parent: CMPacketBase
   id: RMCPacketGrenadeM74AGMS
   name: M74AGM-S grenade packet
   description: It contains three M74AGM-Smoke airburst grenades.

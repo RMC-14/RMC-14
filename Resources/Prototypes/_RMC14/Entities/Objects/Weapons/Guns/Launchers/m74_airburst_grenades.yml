@@ -39,6 +39,20 @@
 
 - type: entity
   parent: RMC40MMGrenadeM74AGMF
+  id: RMC40MMGrenadeM74AGMI
+  name: M74 AGM-I 40mm Incendiary Grenade
+  description: M74 - Airburst Grenade Munition - Incendiary. This grenade must be launched with a grenade launcher, and detonates once it reaches its destination. It disperses jagged shrapnel in a cone in front of itself, tearing through sinews and armor alike. Dispersion pattern is optimized against large target. Suffers from overpenetration on a direct hit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/grenade_launcher.rsi
+    layers:
+    - state: grenade_m74_airburst_i
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+    proto: RMCAirBurstProjectileIncendiary
+
+- type: entity
+  parent: RMC40MMGrenadeM74AGMF
   id: RMCHornetShellM74AGMS
   name: M74 AGM-H 40mm Hornet Shell
   description: Functions identically to the standard AGM-F 40mm grenade, except instead of exploding into shrapnel, the hornet shell shoots off holo-targeting .22lr rounds. The equivalent to buckshot at-range.
@@ -148,6 +162,28 @@
     rebounds: true
     capacity: 16
     spreadAngle: 40
+
+- type: entity
+  parent: RMCBaseAirBurstProjectile
+  id: RMCAirBurstProjectileIncendiary
+  name: M74 AGM-F 40mm Grenade
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/grenade_launcher.rsi
+    layers:
+    - state: grenade_m74_airburst_i_active
+  - type: ProjectileGrenade
+    evenSpread: true
+    minVelocity: 0.5
+    maxVelocity: 1.5
+    fillPrototype: RMCShrapnelIncendiary
+    rebounds: true
+    capacity: 5
+    spreadAngle: 40
+  - type: DirectionalTileFireOnTrigger
+    range: 3
+    spawn: RMCTileFire
 
 - type: entity
   parent: RMCBaseAirBurstProjectile
@@ -310,7 +346,39 @@
     accuracy: 100
     thresholds:
     - range: 7
-      falloff: 10
+      falloff: 33
+
+- type: entity
+  parent: RMCBaseBullet
+  id: RMCShrapnelIncendiary
+  name: Flaming Shrapnel
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/shotgun_projectiles.rsi
+    layers:
+    - state: beanbag
+      shader: unshaded
+  - type: Projectile
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Piercing: 30
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
+  - type: CMArmorPiercing
+    amount: 20
+  - type: IgniteOnProjectileHit
+  - type: PointLight
+    enabled: true
+    color: "#ff4300"
+    radius: 1.5
+    energy: 0.5
+  - type: RMCProjectileAccuracy
+    accuracy: 100
+    thresholds:
+    - range: 7
+      falloff: 33
 
 - type: entity
   parent: RMCBaseBullet
@@ -337,13 +405,13 @@
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
   - type: RMCStunOnHit
     maxRange: 10
-    stunTime: 3
-    slowTime: 6
+    stunTime: 1.6
+    slowTime: 4
     knockBackPowerMin: 1
     knockBackPowerMax: 3
     knockBackSpeed: 5
     forceKnockBack: true
-    dazeTime: 4.5
+    dazeTime: 3.4
   - type: RMCProjectileAccuracy
     accuracy: 100
     thresholds:

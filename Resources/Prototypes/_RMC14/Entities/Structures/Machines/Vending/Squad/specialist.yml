@@ -75,8 +75,8 @@
       - id: RMC40MMGrenadeM74AGMF
         points: 40
         spawn: 6
-    #- id: M74AGMIIncendiaryGrenadesx6
-    #  points: 40
+      - id: RMC40MMGrenadeM74AGMI
+        points: 40
       - id: RMC40MMGrenadeM74AGMS
         points: 20
         spawn: 6

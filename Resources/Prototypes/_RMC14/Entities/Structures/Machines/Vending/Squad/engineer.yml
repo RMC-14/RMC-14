@@ -74,8 +74,8 @@
         points: 9
       - id: RMCPacketGrenadeM74AGMFFilled
         points: 18
-    #- id: CMM74AGMIncendiaryAirburstPacket3
-    #  points: 18
+      - id: RMCPacketGrenadeM74AGMIFilled
+        points: 18
       - id: RMCPacketGrenadeM74AGMSFilled
         points: 10
       - id: RMCPacketGrenadeM74AGMSHornetFilled

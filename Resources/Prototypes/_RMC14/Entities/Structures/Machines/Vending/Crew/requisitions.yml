@@ -75,8 +75,8 @@
         amount: 5
       - id: RMC40MMGrenadeM74AGMF
         amount: 4
-      #- id: M74 AGM-Incendiary Airburst Grenade
-      #  amount: 4
+      - id: RMC40MMGrenadeM74AGMI
+        amount: 4
       - id: RMC40MMGrenadeM74AGMS
         amount: 4
       - id: RMCStarShellM74AGMS

@@ -187,6 +187,8 @@
         crate: RMCCrateGrenadesAirburstFragBox
       - cost: 4000
         crate: RMCCrateGrenadesAirburstFrag
+      - cost: 4000
+        crate: RMCCrateGrenadesAirburstIncendiary
       - cost: 3000
         crate: RMCCrateGrenadesAirburstSmoke
       - cost: 4000

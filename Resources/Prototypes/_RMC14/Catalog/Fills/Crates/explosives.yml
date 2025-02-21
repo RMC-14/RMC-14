@@ -100,6 +100,16 @@
 
 - type: entity
   parent: RMCCrateExplosives
+  id: RMCCrateGrenadesAirburstIncendiary
+  name: M74 AGM-I 40mm incendiary grenades crate (x6)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMC40MMGrenadeM74AGMI
+      amount: 6
+
+- type: entity
+  parent: RMCCrateExplosives
   id: RMCCrateGrenadesAirburstSmoke
   name: M74 AGM-S 40mm smoke grenades crate (x6)
   components:

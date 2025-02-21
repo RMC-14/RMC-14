@@ -1,6 +1,7 @@
 ﻿using Content.Server.Explosion.Components;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Server.GameObjects;
@@ -59,6 +60,10 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
 
         //Shoot the payload backwards if colliding with an entity
         entity.Comp.DirectionAngle += entity.Comp.ReboundAngle;
+
+        var ev = new RMCProjectileReboundEvent(entity.Comp.ReboundAngle);
+        RaiseLocalEvent(entity, ref ev);
+
         _trigger.Trigger(entity);
     }
 
