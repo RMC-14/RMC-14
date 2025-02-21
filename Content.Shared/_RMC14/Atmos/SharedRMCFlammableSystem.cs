@@ -254,18 +254,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
     private void OnIgniteCollide(Entity<RMCIgniteOnCollideComponent> ent, ref StartCollideEvent args)
     {
-        var flammableEnt = new Entity<FlammableComponent?>(args.OtherEntity, null);
-        if (!Resolve(flammableEnt, ref flammableEnt.Comp, false))
-            return;
-
-        var wasOnFire = IsOnFire(flammableEnt);
-        if (!Ignite(flammableEnt, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks))
-            return;
-
-        EnsureComp<SteppingOnFireComponent>(args.OtherEntity);
-
-        if (!wasOnFire && IsOnFire(flammableEnt))
-            _damageable.TryChangeDamage(flammableEnt, flammableEnt.Comp.Damage * ent.Comp.Intensity, true);
+        TryIgnite(ent, args.OtherEntity, false);
     }
 
     private void OnIgniteDamageCollide(Entity<RMCIgniteOnCollideComponent> ent, ref DamageCollideEvent args)
@@ -491,6 +480,25 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         }
     }
 
+    private void TryIgnite(Entity<RMCIgniteOnCollideComponent> ent, EntityUid other, bool checkIgnited)
+    {
+        var flammableEnt = new Entity<FlammableComponent?>(other, null);
+        if (!Resolve(flammableEnt, ref flammableEnt.Comp, false))
+            return;
+
+        var wasOnFire = IsOnFire(flammableEnt);
+        if (checkIgnited && wasOnFire)
+            return;
+
+        if (!Ignite(flammableEnt, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks))
+            return;
+
+        EnsureComp<SteppingOnFireComponent>(other);
+
+        if (!wasOnFire && IsOnFire(flammableEnt))
+            _damageable.TryChangeDamage(flammableEnt, flammableEnt.Comp.Damage * ent.Comp.Intensity, true);
+    }
+
     public override void Update(float frameTime)
     {
         if (_net.IsClient)
@@ -499,6 +507,11 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         var applyQuery = EntityQueryEnumerator<RMCIgniteOnCollideComponent>();
         while (applyQuery.MoveNext(out var uid, out var apply))
         {
+            foreach (var contact in _physics.GetEntitiesIntersectingBody(uid, (int) apply.Collision))
+            {
+                TryIgnite((uid, apply), contact, true);
+            }
+
             if (apply.InitDamaged)
                 continue;
 
