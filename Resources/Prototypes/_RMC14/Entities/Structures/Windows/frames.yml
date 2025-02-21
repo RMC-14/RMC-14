@@ -32,6 +32,7 @@
         - MachineMask
         layer:
         - MidImpassable
+        - BulletImpassable
   - type: Destructible
     thresholds:
       - trigger:
@@ -52,6 +53,7 @@
   - type: ReceiverXenoClaws
     maxHealth: 600
     hitsToDestroy: 3
+  - type: RequireProjectileTarget
 
 - type: entity
   parent: RMCBaseWindowFrame
