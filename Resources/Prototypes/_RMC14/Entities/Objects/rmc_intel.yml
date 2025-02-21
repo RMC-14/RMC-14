@@ -254,6 +254,20 @@
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: ob_incend
+        - name: Additional OB projectiles - Cluster
+          description: Highly explosive bombardment ammo that fragments, to be loaded into the orbital cannon.
+          cost: 5
+          increase: 2
+          repurchasable: true
+          events:
+          - !type:TechWarheadEvent
+            warhead: RMCOrbitalCannonWarheadCluster
+          - !type:TechAnnounceEvent
+            author: ALMAYER SPECIAL ASSETS AUTHORIZED
+            message: Additional Orbital Bombardment warheads (Cluster) have been delivered to Requisitions' ASRS.
+          icon:
+            sprite: _RMC14/Interface/tech_tree.rsi
+            state: ob_cluster
 
 - type: Tag
   id: RMCIntelItem
