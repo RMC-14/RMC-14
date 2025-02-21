@@ -85,7 +85,7 @@
     sprite: _RMC14/Objects/Misc/cas_flares.rsi
     state: flare
   - type: PointLight
-    color: "#64FA4B"
+    color: "#AACCAA"
   - type: FlareSignal
   - type: ExpendableLight
     glowDuration: 180
