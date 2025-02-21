@@ -1,102 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Comtechs now have engineering skill 3 instead of 2
-    type: Tweak
-  id: 863
-  time: '2024-10-18T19:12:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4510
-- author: DrSmugleaf
-  changes:
-  - message: Added supply drops, pads and the Requisitions supply drop console. The
-      overwatch console can also call in supply drops.
-    type: Add
-  - message: Added promoting people to squad leader through the overwatch console.
-    type: Add
-  - message: Added energy chem. The chemical dispenser now uses automatically regenerating
-      energy to dispense chemicals instead of being limited to 200 units of carbon
-      for the entire operation.
-    type: Add
-  - message: Added the motion detector, which lets you see blips of movement near
-      you. It has a long and short mode. The smart gun comes with one that is always
-      in long mode. Requisitions starts with 4 and can buy more, while all squad roles
-      can buy one for points.
-    type: Add
-  - message: Added the sensor tower. There is one on each planet map, and when repaired
-      it will show Command in CIC a live-updating view of all remaining xenonids.
-      It starts broken, can be repaired by those trained in engineering skill, and
-      can be broken by xenonids. It will also randomly break during use.
-    type: Add
-  - message: Added fireman carry. Pulling someone twice then dragging them to you
-      will start carrying them without a speed penalty, if you are trained in fireman
-      carry.
-    type: Add
-  - message: Added the pressurized reagent canister pouch, which lets you carry 480
-      units of chemicals and a medipen which automatically refills when inserted into
-      the pouch.
-    type: Add
-  - message: Added the missing defibabble icon to dead but not unrevivable marines
-      on the tactical map.
-    type: Add
-  - message: Added big pointing arrows for leadership roles and Queen.
-    type: Add
-  - message: Added a second ear slot, that can carry screwdrivesrs and penlights.
-      A second headset cannot be worn.
-    type: Add
-  - message: Added the M63 holster rig, letting you carry an SMG and two mags in your
-      belt or suit storage slot.
-    type: Add
-  - message: Added 1000 unit reagent tank structures. One is in medbay.
-    type: Add
-  - message: Added the missing +25% melee weapon skill multiplier to the Weapons Specialist
-      and CMP.
-    type: Add
-  - message: Added customizable ghost colors for Rouny and above Patrons.
-    type: Add
-  - message: Add Tempest Patron figurine.
-    type: Add
-  - message: Fixed defib not properly reviving people that died from 200 bloodloss.
-    type: Fix
-  - message: Fixed survivors and corpses being counted for Requisitions starting money.
-    type: Fix
-  - message: Fixed the sectech giving MP headsets instead of blank headsets.
-    type: Fix
-  - message: Fixed corpses spawned planetside not capping at 25.
-    type: Fix
-  - message: Fixed light bulbs nto being powered by APCs.
-    type: Fix
-  - message: Fixed shotgun shells not ejecting when clicking a held shotgun shell
-      box with an empty hand.
-    type: Fix
-  - message: Fixed not being able to switch hands while using a defib.
-    type: Fix
-  - message: Fixed stasis bags requiring people to be lying down.
-    type: Fix
-  - message: Fixed not being able to click on the UI to insert items on some holster
-      storages like the combat toolbelt rig.
-    type: Fix
-  - message: Fixed Boiler Bombard projectile being 2.6 times faster than intended.
-    type: Fix
-  - message: Fixed frenzy pheromone speed buff being 40% stronger than intended.
-    type: Fix
-  - message: Fixed auto fire on the smart gun not draining battery.
-    type: Fix
-  - message: Fixed multi-stacked doors on Fiorina and Trijent, and mapped in some
-      missing props, cable and wrenches.
-    type: Fix
-  - message: Fixed small floodlights being movable.
-    type: Fix
-  - message: Fixed the second floor of the Almayer being cold.
-    type: Fix
-  - message: Fixed pills not metabolizing in 10 seconds, instead of 20.
-    type: Tweak
-  - message: Updated the roadmap.
-    type: Tweak
-  - message: Increased projectile speed to its intended value, a ~40% increase.
-    type: Tweak
-  id: 864
-  time: '2024-10-18T19:29:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4515
 - author: Rainbeon
   changes:
   - message: Runner, Lurker, and Parasite Leaps will now register hits on Marines
@@ -5117,7 +5019,8 @@
   - message: Fixed duplicated traits and traits not intended to be selectable, and
       lowered the frequency of replacements for some accents.
     type: Fix
-  - message: Spawning as a command role now removes stuttering accent and frontal lisps from the character for that round.
+  - message: Spawning as a command role now removes stuttering accent and frontal
+      lisps from the character for that round.
     type: Fix
   id: 1359
   time: '2025-02-19T05:18:17.0000000+00:00'
@@ -5166,5 +5069,23 @@
   id: 1363
   time: '2025-02-19T05:52:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5654
+- author: CyberTropic
+  changes:
+  - message: Added the rest of the nightmare inserts to Kutjevo.
+    type: Add
+  - message: Added tall grass to Kutjevo.
+    type: Add
+  - message: Added civilian binoculars.
+    type: Add
+  id: 1364
+  time: '2025-02-21T13:01:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5669
+- author: noctyrnal
+  changes:
+  - message: Changed flare colour to be more white than red.
+    type: Tweak
+  id: 1365
+  time: '2025-02-21T13:02:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5680
 Name: RMC14
 Order: -1
