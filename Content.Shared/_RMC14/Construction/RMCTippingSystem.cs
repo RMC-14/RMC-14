@@ -15,13 +15,14 @@ public sealed class RMCTippingSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<RMCTippableComponent, InteractHandEvent>(OnTippableInteractHand);
+        SubscribeLocalEvent<RMCTippableComponent, InteractHandEvent>(TippableInteractHand);
         SubscribeLocalEvent<RMCTippableComponent, DoAfterAttemptEvent<RMCTippingDoAfterEvent>>(OnTippingDoAfterAttempt);
         SubscribeLocalEvent<RMCTippableComponent, RMCTippingDoAfterEvent>(OnTippingDoAfter);
 
+
     }
 
-    private void OnTippableInteractHand(Entity<RMCTippableComponent> ent, ref InteractHandEvent args)
+    private void TippableInteractHand(Entity<RMCTippableComponent> ent, ref InteractHandEvent args)
     {
         Log.Debug("Starting check");
 
