@@ -7,7 +7,10 @@ namespace Content.Shared._RMC14.Construction;
 public sealed partial class RMCTippableComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public TimeSpan Delay = TimeSpan.FromSeconds(4.5);
+    public TimeSpan BigDelay = TimeSpan.FromSeconds(10);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan SmallDelay = TimeSpan.FromSeconds(5);
 
     [DataField("isTipped", required: false), AutoNetworkedField]
     public bool IsTipped = false;

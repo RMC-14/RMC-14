@@ -1,4 +1,7 @@
-﻿using Content.Shared._RMC14.Xenonids;
+﻿using Content.Shared._RMC14.Intel;
+using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
@@ -19,22 +22,25 @@ public sealed class RMCTippingSystem : EntitySystem
         SubscribeLocalEvent<RMCTippableComponent, DoAfterAttemptEvent<RMCTippingDoAfterEvent>>(OnTippingDoAfterAttempt);
         SubscribeLocalEvent<RMCTippableComponent, RMCTippingDoAfterEvent>(OnTippingDoAfter);
 
-
     }
 
     private void TippableInteractHand(Entity<RMCTippableComponent> ent, ref InteractHandEvent args)
     {
         Log.Debug("Starting check");
 
+        if (!TryComp(args.User, out VendorTipTimeComponent? vendorTipComp))
+            return;
 
-        if (!HasComp<XenoComponent>(args.User))
+        if (!TryComp(args.User, out RMCSizeComponent? xenoSize))
             return;
 
         args.Handled = true;
 
+        var tippingDelay = vendorTipComp.GetTippingDelay(xenoSize.Size);
+
         var ev = new RMCTippingDoAfterEvent();
         Log.Debug("yea");
-        var doAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.Delay, ev, ent.Owner, ent) { BreakOnMove = true };
+        var doAfter = new DoAfterArgs(EntityManager, args.User, tippingDelay, ev, ent.Owner, ent) { BreakOnMove = true };
         Log.Debug("exploded");
 
         if (_doAfter.TryStartDoAfter(doAfter))
