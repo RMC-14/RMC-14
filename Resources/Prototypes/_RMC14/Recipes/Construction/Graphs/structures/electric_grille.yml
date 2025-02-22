@@ -27,7 +27,7 @@
         doAfter: 0.25
 
   - node: grilleBrokenElectrified
-    entity: RMCGrilleBrokenElectrified
+    entity: RMCGrilleElectrifiedBroken
     edges:
     - to: start
       completed:
