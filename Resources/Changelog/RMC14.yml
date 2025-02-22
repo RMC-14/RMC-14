@@ -1,68 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added Beatrice 'Bea' Bootes figurine.
-    type: Add
-  - message: Fixed not being able to move after cancelling an aggressive grab.
-    type: Fix
-  - message: Fixed grenades being exploded by landing supply drops.
-    type: Fix
-  - message: Fixed overwatch console never saying that a crate is loaded.
-    type: Fix
-  - message: Fixed overwatch console not showing promoted acting squad leaders on
-      the top summary.
-    type: Fix
-  - message: Fixed overwatch console squad leader promotion sometimes not giving comms,
-      a squad announcement and operator popup.
-    type: Fix
-  - message: Fixed reagent tank rounding down.
-    type: Fix
-  - message: Fixed platform corners not being quick-vaultable in 0.25 seconds.
-    type: Fix
-  - message: Fixed being able to pull while being aggressively grabbed or carried.
-    type: Fix
-  id: 868
-  time: '2024-10-19T22:28:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4532
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Patron Perks UI not refreshing in real time and making it look
-      like changes to lobby messages and shoutouts aren't saved.
-    type: Fix
-  id: 869
-  time: '2024-10-19T22:46:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4535
-- author: Whisper
-  changes:
-  - message: Added new lobby art by wendyribstonofpippin.
-    type: Add
-  id: 870
-  time: '2024-10-20T11:37:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4544
-- author: Whisper
-  changes:
-  - message: Updated the M63 sprites.
-    type: Add
-  id: 871
-  time: '2024-10-21T01:14:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4545
-- author: Whisper
-  changes:
-  - message: Added new lobby art by wrath7167e.
-    type: Add
-  id: 872
-  time: '2024-10-21T01:15:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4546
-- author: DrSmugleaf
-  changes:
-  - message: Added the interstellar sapient-life rights observer ghost role as an
-      admin event.
-    type: Add
-  id: 873
-  time: '2024-10-22T06:45:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4553
-- author: DrSmugleaf
-  changes:
   - message: Added the Corporate Executive Specialist, Corporate Executive Supervisor,
       and Interstellar Commerce Bureau Liaison admin ghost roles.
     type: Add
@@ -5088,5 +5026,68 @@
   id: 1368
   time: '2025-02-21T13:08:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5671
+- author: Vermidia
+  changes:
+  - message: Fixed Queen armor loss from being in green fire being too high (50% armor
+      retained -> 70%)
+    type: Fix
+  - message: Fixed Pierce not breaking window glass
+    type: Fix
+  - message: Fixed various abilities with a timer not showing toggled on on the action
+      bar
+    type: Fix
+  - message: Fixed crusher healing not enough while standing (0.4 -> 0.66)
+    type: Fix
+  - message: Added ravager, a T3 that evolves from lurker and focuses on empowering
+      from foes and dishing out damage.
+    type: Add
+  id: 1369
+  time: '2025-02-22T07:43:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5675
+- author: CyberTropic
+  changes:
+  - message: Changed signal flare color to be more white than green.
+    type: Tweak
+  id: 1370
+  time: '2025-02-22T07:44:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5688
+- author: Arcticular1
+  changes:
+  - message: New CO armor sprites + CO helmet sprites, general officer armor + helmet,
+      deluxe gloves.
+    type: Add
+  - message: RTO pack, expedition pack, night vision visor, to CO vendors. + General
+      officer armor, helmet & deluxe gloves.
+    type: Add
+  id: 1371
+  time: '2025-02-22T07:46:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5614
+- author: to4no_fix
+  changes:
+  - message: Now to take the role of a cargo technician you need to play 5 hours as
+      a marine
+    type: Tweak
+  id: 1372
+  time: '2025-02-22T07:47:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5684
+- author: Vermidia
+  changes:
+  - message: Aciders no longer generate over 400 acid passively. To compensate, slashing
+      at someone now generates bonus acid for 6 seconds, which stacks with passive
+      generation and works when the cap is hit.
+    type: Fix
+  id: 1373
+  time: '2025-02-22T07:48:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5676
+- author: Arcticular1
+  changes:
+  - message: Added the Commanding Officer's ML66B Cavalier smart gun with new sprites.
+      This replaces the regular smart gun in their vendor.
+    type: Add
+  - message: Added ID lock to the Commanding Officer's smart gun.
+    type: Tweak
+  id: 1374
+  time: '2025-02-22T07:52:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5687
 Name: RMC14
 Order: -1

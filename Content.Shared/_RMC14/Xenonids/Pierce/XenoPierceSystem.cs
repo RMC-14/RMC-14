@@ -2,23 +2,17 @@ using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Weapons.Melee;
-using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.ScissorCut;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
-using Content.Shared.Physics;
-using Content.Shared.Weapons.Melee;
-using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
-using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
-using System.Linq;
-using System.Numerics;
 
 namespace Content.Shared._RMC14.Xenonids.Pierce;
 
@@ -26,7 +20,6 @@ public sealed class XenoPierceSystem : EntitySystem
 {
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
@@ -37,8 +30,6 @@ public sealed class XenoPierceSystem : EntitySystem
     [Dependency] private readonly VanguardShieldSystem _vanguard = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
     [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
-
-    private const int AttackMask = (int)(CollisionGroup.MobMask | CollisionGroup.Opaque);
 
     public override void Initialize()
     {
@@ -53,79 +44,70 @@ public sealed class XenoPierceSystem : EntitySystem
         if (!_rmcActions.TryUseAction(xeno, args.Action))
             return;
 
-        //Note below is mostly all tail stab code
-        var transform = Transform(xeno);
-
-        var userCoords = _transform.GetMapCoordinates(xeno, transform);
-        if (userCoords.MapId == MapId.Nullspace)
+        if (_transform.GetGrid(args.Target) is not { } gridId ||
+    !TryComp(gridId, out MapGridComponent? grid))
             return;
 
-        var targetCoords = _transform.ToMapCoordinates(args.Target);
-        if (userCoords.MapId != targetCoords.MapId)
-            return;
+        args.Handled = true;
 
-        var range = xeno.Comp.Range.Float();
-        var box = new Box2(userCoords.Position.X - 0.10f, userCoords.Position.Y, userCoords.Position.X + 0.10f, userCoords.Position.Y + range);
+        var direction = (args.Target.Position - _transform.GetMoverCoordinates(xeno).Position).Normalized().ToAngle() - Angle.FromDegrees(90);
 
-        var matrix = Vector2.Transform(targetCoords.Position, _transform.GetInvWorldMatrix(transform));
-        var rotation = _transform.GetWorldRotation(xeno).RotateVec(-matrix).ToWorldAngle();
-        var boxRotated = new Box2Rotated(box, rotation, userCoords.Position);
+        var xenoCoord = _transform.GetMoverCoordinates(xeno);
+        var area = Box2.CenteredAround(xenoCoord.Position, new(1, xeno.Comp.Range.Float())).Translated(new(0, (xeno.Comp.Range.Float() / 2) + 0.5f));
+        var rot = new Box2Rotated(area, direction, xenoCoord.Position); // Correct the angle
 
-        // ray on the left side of the box
-        var leftRay = new CollisionRay(boxRotated.BottomLeft, (boxRotated.TopLeft - boxRotated.BottomLeft).Normalized(), AttackMask);
+        var hits = 0;
 
-        // ray on the right side of the box
-        var rightRay = new CollisionRay(boxRotated.BottomRight, (boxRotated.TopRight - boxRotated.BottomRight).Normalized(), AttackMask);
+        EntityUid? hitEnt = null;
 
-        bool Ignore(EntityUid uid)
+        foreach (var ent in _physics.GetCollidingEntities(Transform(xeno).MapID, rot))
         {
-            if (!_xeno.CanAbilityAttackTarget(xeno, uid))
-                return true;
-
-            return false;
-        }
-
-        var intersect = _physics.IntersectRayWithPredicate(transform.MapID, leftRay, range, Ignore, false);
-        intersect = intersect.Concat(_physics.IntersectRayWithPredicate(transform.MapID, rightRay, range, Ignore, false));
-        var results = intersect.Select(r => r.HitEntity).ToHashSet();
-
-        var actualResults = new List<EntityUid>();
-        foreach (var result in results)
-        {
-            if (!_interaction.InRangeUnobstructed(xeno.Owner, result, range: range))
+            if (!_interaction.InRangeUnobstructed(xeno.Owner, ent.Owner, xeno.Comp.Range.Float() + 0.5f))
                 continue;
 
-            actualResults.Add(result);
-            if (xeno.Comp.MaxTargets != null && actualResults.Count >= xeno.Comp.MaxTargets)
+            if (TryComp<DestroyOnXenoPierceScissorComponent>(ent, out var destroy))
+            {
+                if (_net.IsServer)
+                {
+                    SpawnAtPosition(destroy.SpawnPrototype, ent.Owner.ToCoordinates());
+                    QueueDel(ent);
+                }
+                _audio.PlayPredicted(destroy.Sound, ent, xeno);
+                continue;
+            }
+
+            if (!_xeno.CanAbilityAttackTarget(xeno, ent))
+                continue;
+
+            hits++;
+
+            var change = _damage.TryChangeDamage(ent, xeno.Comp.Damage, origin: xeno, armorPiercing: xeno.Comp.AP);
+
+            if (change?.GetTotal() > FixedPoint2.Zero)
+            {
+                var filter = Filter.Pvs(ent, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);
+                _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { ent }, filter);
+            }
+
+            if (_net.IsServer)
+                SpawnAttachedTo(xeno.Comp.AttackEffect, ent.Owner.ToCoordinates());
+
+            if (hitEnt is null)
+                hitEnt = ent;
+
+            if (xeno.Comp.MaxTargets != null && hits >= xeno.Comp.MaxTargets)
                 break;
         }
 
         _emote.TryEmoteWithChat(xeno, xeno.Comp.Emote, cooldown: xeno.Comp.EmoteCooldown);
 
-        args.Handled = true;
-
-        var filter = Filter.Pvs(transform.Coordinates, entityMan: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);
-        foreach (var hit in actualResults)
-        {
-            var attackedEv = new AttackedEvent(xeno, xeno, args.Target);
-            RaiseLocalEvent(hit, attackedEv);
-
-            var change = _damage.TryChangeDamage(hit, xeno.Comp.Damage, origin: xeno, armorPiercing: xeno.Comp.AP);
-
-            if (change?.GetTotal() > FixedPoint2.Zero)
-                _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { hit }, filter);
-
-            if (_net.IsServer)
-                SpawnAttachedTo(xeno.Comp.AttackEffect, hit.ToCoordinates());
-        }
-
-        if (actualResults.Count > 0)
-            _rmcMelee.DoLunge(xeno, actualResults[0]);
+        if (hits > 0 && hitEnt != null)
+            _rmcMelee.DoLunge(xeno, hitEnt.Value);
 
         if (_net.IsServer)
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
 
-        if (actualResults.Count >= xeno.Comp.RechargeTargetsRequired)
+        if (hits >= xeno.Comp.RechargeTargetsRequired)
             _vanguard.RegenShield(xeno);
     }
 }

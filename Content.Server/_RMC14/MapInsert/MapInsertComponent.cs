@@ -1,9 +1,10 @@
 ﻿using System.Numerics;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.MapInsert;
 
-[RegisterComponent]
+[RegisterComponent, EntityCategory("Spawner")]
 [Access(typeof(MapInsertSystem))]
 public sealed partial class MapInsertComponent : Component
 {

@@ -1,9 +1,11 @@
 ﻿using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Chemistry;
+using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Weapons.Melee;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Alert;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -58,6 +60,8 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly CMArmorSystem _armor = default!;
+    [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
+    [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
 
     private static readonly ProtoId<AlertPrototype> FireAlert = "Fire";
     private static readonly ProtoId<ReagentPrototype> WaterReagent = "Water";
@@ -105,6 +109,8 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
         SubscribeLocalEvent<FlammableComponent, RMCIgniteEvent>(OnFlammableIgnite);
         SubscribeLocalEvent<FlammableComponent, RMCExtinguishedEvent>(OnFlammableExtinguished);
+
+        SubscribeLocalEvent<PlasmaFrenzyComponent, RMCIgniteEvent>(OnPlasmaFrenzyIgnite);
     }
 
     private void OnIgniteOnProjectileHit(Entity<IgniteOnProjectileHitComponent> ent, ref ProjectileHitEvent args)
@@ -457,6 +463,19 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         return true;
     }
 
+    private void OnPlasmaFrenzyIgnite(Entity<PlasmaFrenzyComponent> ent, ref RMCIgniteEvent args)
+    {
+        if (!TryComp<XenoPlasmaComponent>(ent, out var plasma))
+            return;
+
+        if (plasma.Plasma < plasma.MaxPlasma && _net.IsServer)
+        {
+            _emote.TryEmoteWithChat(ent, ent.Comp.RoarEmote);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-plasma-frenzy-fire"), ent, ent, PopupType.SmallCaution);
+        }
+        _plasma.SetPlasma((ent, plasma), plasma.MaxPlasma);
+    }
+
     public void SetIntensityDuration(Entity<RMCIgniteOnCollideComponent?, DamageOnCollideComponent?> ent, int? intensity, int? duration)
     {
         Resolve(ent, ref ent.Comp1, ref ent.Comp2, false);
@@ -495,7 +514,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
         EnsureComp<SteppingOnFireComponent>(other);
 
-        if (!wasOnFire && IsOnFire(flammableEnt))
+        if (!wasOnFire && IsOnFire(flammableEnt) && !HasComp<RMCImmuneToFireTileDamageComponent>(ent))
             _damageable.TryChangeDamage(flammableEnt, flammableEnt.Comp.Damage * ent.Comp.Intensity, true);
     }
 
@@ -585,6 +604,8 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
                     _entityWhitelist.IsWhitelistPassOrNull(ignite.ArmorWhitelist, uid))
                 {
                     stepping.ArmorMultiplier = ignite.ArmorMultiplier;
+                    if (TryComp<RMCFireArmorDebuffModifierComponent>(uid, out var mod))
+                        stepping.ArmorMultiplier *= mod.DebuffModifier;
                     _armor.UpdateArmorValue((uid, null));
                 }
 
@@ -597,7 +618,8 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
                     if (stepping.Distance >= 1)
                     {
                         stepping.Distance = 0;
-                        _damageable.TryChangeDamage(uid, tile * ignite.Intensity);
+                        if(!HasComp<RMCImmuneToFireTileDamageComponent>(uid))
+                            _damageable.TryChangeDamage(uid, tile * ignite.Intensity);
                     }
                 }
 

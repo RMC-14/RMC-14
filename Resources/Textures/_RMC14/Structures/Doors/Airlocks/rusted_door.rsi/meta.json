@@ -1,0 +1,162 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken/modified from cmss13 at https://github.com/cmss13-devs/cmss13/blob/ac1f1195c020cd8c82cca401d8dcfd1bc8e4a859/icons/obj/structures/doors/rusted_door.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "closed",
+      "directions": 4
+    },
+    {
+      "name": "open",
+      "directions": 4
+    },
+    {
+      "name": "locked",
+      "directions": 4
+    },
+    {
+      "name": "opening",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.2
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.2
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.2
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "closing",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.2,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "panel_open",
+      "directions": 4
+    },
+    {
+      "name": "deny",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "spark",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "welded",
+      "directions": 4
+    },
+    {
+      "name": "unlit"
+    }
+  ]
+}
