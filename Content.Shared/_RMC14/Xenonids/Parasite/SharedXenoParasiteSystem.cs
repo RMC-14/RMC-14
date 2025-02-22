@@ -29,6 +29,7 @@ using Content.Shared.Rejuvenate;
 using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
+using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -64,6 +65,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly SharedRottingSystem _rotting = default!;
+    [Dependency] private readonly TagSystem _tagSystem = default!;
 
     public override void Initialize()
     {
@@ -799,45 +801,46 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     /// <summary>
     ///     Tries to rip off an entity's clothing item.
     /// </summary>
+    /// <returns>
+    ///     If target should be infected.
+    /// </returns>
     private bool TryRipOffClothing(EntityUid victim, SlotFlags slotFlags, bool doPopup = true)
     {
-        if (_inventory.TryGetContainerSlotEnumerator(victim, out var slots, slotFlags))
+        if (!_inventory.TryGetContainerSlotEnumerator(victim, out var slots))
+            return true;
+
+        EntityUid? rippedOffItem = null;
+        while (slots.NextItem(out var containedEntity, out var inventorySlot))
         {
-            while (slots.MoveNext(out var containerSlot))
+            if ((inventorySlot.SlotFlags & slotFlags) != 0 || _tagSystem.HasTag(containedEntity, "RipOffOnInfection"))
             {
-                var containedEntity = containerSlot.ContainedEntity;
+                TryComp(containedEntity, out ParasiteResistanceComponent? resistance);
 
-                if (containedEntity != null)
+                if (resistance != null && resistance.Count < resistance.MaxCount)
                 {
-                    TryComp(containedEntity, out ParasiteResistanceComponent? resistance);
+                    resistance.Count += 1;
+                    Dirty(containedEntity, resistance);
 
-                    if (resistance != null && resistance.Count < resistance.MaxCount)
+                    if (_net.IsServer && doPopup)
                     {
-                        resistance.Count += 1;
-                        Dirty(containedEntity.Value, resistance);
-
-                        if (_net.IsServer && doPopup)
-                        {
-                            var popupMessage = Loc.GetString("rmc-xeno-infect-fail", ("target", victim), ("clothing", containedEntity));
-                            _popup.PopupEntity(popupMessage, victim, PopupType.SmallCaution);
-                        }
-
-                        return false;
+                        var popupMessage = Loc.GetString("rmc-xeno-infect-fail", ("target", victim), ("clothing", containedEntity));
+                        _popup.PopupEntity(popupMessage, victim, PopupType.SmallCaution);
                     }
-                    else
-                    {
-                        _inventory.TryUnequip(victim, victim, containerSlot.ID, force: true);
 
-                        if (_net.IsServer && doPopup)
-                        {
-                            var popupMessage = Loc.GetString("rmc-xeno-infect-success", ("target", victim), ("clothing", containedEntity));
-                            _popup.PopupEntity(popupMessage, victim, PopupType.MediumCaution);
-                        }
-
-                        return true;
-                    }
+                    return false;
+                }
+                else
+                {
+                    _inventory.TryUnequip(victim, victim, inventorySlot.Name, force: true);
+                    rippedOffItem = containedEntity;
                 }
             }
+        }
+
+        if (_net.IsServer && doPopup && rippedOffItem != null)
+        {
+            var popupMessage = Loc.GetString("rmc-xeno-infect-success", ("target", victim), ("clothing", rippedOffItem));
+            _popup.PopupEntity(popupMessage, victim, PopupType.MediumCaution);
         }
 
         return true;
