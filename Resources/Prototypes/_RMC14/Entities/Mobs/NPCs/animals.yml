@@ -77,6 +77,12 @@
     coldDamageThreshold: 0
 
 - type: entity
+  parent: CMMobMouse
+  id: RMCMobMouseDoc
+  name: Doc
+  description: "Senior mouse researcher of the Almayer. Likes: cheese, experiments, explosions."
+
+- type: entity
   parent: MobCorgiPuppy
   id: CMMobWiggles
   name: Mister Wiggles
