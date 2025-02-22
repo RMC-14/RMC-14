@@ -1,7 +1,6 @@
 ﻿- type: entity
   id: RMCGeneratorFusionFake
   name: permanently destroyed S-52 fusion reactor
-  suffix: Fake
   placement:
     mode: SnapgridCenter
   components:

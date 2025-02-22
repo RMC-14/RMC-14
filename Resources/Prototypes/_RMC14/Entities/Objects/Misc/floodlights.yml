@@ -235,7 +235,7 @@
     sprite: _RMC14/Objects/Misc/Lights/streetlight.rsi
     offset: 0.0,0.8
     layers:
-      - state: street_on # Temporary until power works.
+      - state: street_on # TODO RMC14 change sprite when light off
       - state: street_off
         visible: false
         map: [ "light" ]
@@ -243,6 +243,10 @@
   - type: Construction
     graph: RMCStreetlightBroken
     node: completed
+  - type: PointLight
+    netsync: true
+  - type: RMCReactorPoweredLight
+  - type: PreventAttackLightOff
 
 - type: entity
   parent: RMCFloodlightBroken
