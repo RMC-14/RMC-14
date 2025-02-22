@@ -4,9 +4,9 @@
   name: honor guard kit
   components:
   - type: Storage
-    maxItemSize: Huge
+    maxItemSize: Ginormous
     grid:
-    - 0,0,5,0
+    - 0,0,7,0
   - type: Sprite
     sprite: _RMC14/Objects/Storage/procase_mini.rsi
   - type: Icon
