@@ -1,9 +1,9 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._RMC14.Construction;
+namespace Content.Shared._RMC14.Xenonids.Tipping;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(RMCConstructionSystem))]
+[Access(typeof(RMCTippingSystem))]
 public sealed partial class RMCTippableComponent : Component
 {
     [DataField, AutoNetworkedField]

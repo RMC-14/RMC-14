@@ -1,12 +1,10 @@
 ﻿using Content.Shared._RMC14.Stun;
-using Content.Shared._RMC14.Xenonids;
-using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 
-namespace Content.Shared._RMC14.Construction;
+namespace Content.Shared._RMC14.Xenonids.Tipping;
 
 public sealed class RMCTippingSystem : EntitySystem
 {
@@ -23,8 +21,6 @@ public sealed class RMCTippingSystem : EntitySystem
 
     private void TippableInteractHand(Entity<RMCTippableComponent> ent, ref InteractHandEvent args)
     {
-        Log.Debug("Starting check");
-
         if (!HasComp<XenoComponent>(args.User))
             return;
 
@@ -38,16 +34,15 @@ public sealed class RMCTippingSystem : EntitySystem
 
         var tippingDelay = GetTippingDelay(vendorTipComp, size.Size);
         var ev = new RMCTippingDoAfterEvent();
-        Log.Debug("yea");
         var doAfter = new DoAfterArgs(EntityManager, args.User, tippingDelay, ev, ent.Owner, ent) { BreakOnMove = true };
-        Log.Debug("exploded");
 
-        if (_doAfter.TryStartDoAfter(doAfter))
-        {
-            _popup.PopupClient("you begin to lean against it", args.User, args.User);
-        }
 
-        Log.Debug("yes you are a xeno interacting");
+
+        string leaningMessageLocID = "rmc-xeno-construction-vendor-tip-begin";
+        _popup.PopupClient(Loc.GetString(leaningMessageLocID, ("vendorName", ent.Owner)), args.User, args.User);
+
+
+        _doAfter.TryStartDoAfter(doAfter);
 
     }
 

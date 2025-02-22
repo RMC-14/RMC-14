@@ -1,7 +1,7 @@
 using Content.Shared._RMC14.Stun;
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._RMC14.Xenonids.Construction;
+namespace Content.Shared._RMC14.Xenonids.Tipping;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class VendorTipTimeComponent : Component
