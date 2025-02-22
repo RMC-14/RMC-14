@@ -21,7 +21,6 @@ using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using System;
 
 namespace Content.Shared._RMC14.Xenonids.Empower;
 
