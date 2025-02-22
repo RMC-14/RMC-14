@@ -1,13 +1,8 @@
 ﻿using Content.Server.Explosion.Components;
 using Content.Server.Weapons.Ranged.Systems;
-using Content.Shared._RMC14.Explosion;
-using Content.Shared._RMC14.Projectiles;
-using Content.Shared._RMC14.Weapons.Ranged.IFF;
-using Content.Shared.Weapons.Ranged.Events;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
-using Robust.Shared.Physics.Events;
 using Robust.Shared.Random;
 
 namespace Content.Server.Explosion.EntitySystems;
@@ -18,11 +13,6 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly TransformSystem _transformSystem = default!;
-    [Dependency] private readonly TriggerSystem _trigger = default!;
-    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
-
-    // RMC14
-    private readonly List<EntityUid> _spawned = new();
 
     public override void Initialize()
     {
@@ -31,7 +21,6 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
         SubscribeLocalEvent<ProjectileGrenadeComponent, ComponentInit>(OnFragInit);
         SubscribeLocalEvent<ProjectileGrenadeComponent, ComponentStartup>(OnFragStartup);
         SubscribeLocalEvent<ProjectileGrenadeComponent, TriggerEvent>(OnFragTrigger);
-        SubscribeLocalEvent<ProjectileGrenadeComponent, StartCollideEvent>(OnStartCollide);
     }
 
     private void OnFragInit(Entity<ProjectileGrenadeComponent> entity, ref ComponentInit args)
@@ -51,23 +40,6 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
     }
 
     /// <summary>
-    /// Reverses the payload shooting direction if the projectile grenade collides with an entity
-    /// </summary>
-    private void OnStartCollide(Entity<ProjectileGrenadeComponent> entity, ref StartCollideEvent args)
-    {
-        if (!entity.Comp.Rebounds)
-            return;
-
-        //Shoot the payload backwards if colliding with an entity
-        entity.Comp.DirectionAngle += entity.Comp.ReboundAngle;
-
-        var ev = new RMCProjectileReboundEvent(entity.Comp.ReboundAngle);
-        RaiseLocalEvent(entity, ref ev);
-
-        _trigger.Trigger(entity);
-    }
-
-    /// <summary>
     /// Can be triggered either by damage or the use in hand timer
     /// </summary>
     private void OnFragTrigger(Entity<ProjectileGrenadeComponent> entity, ref TriggerEvent args)
@@ -82,60 +54,45 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
     /// </summary>
     private void FragmentIntoProjectiles(EntityUid uid, ProjectileGrenadeComponent component)
     {
+
+        // RMC14
+        var ev = new FragmentIntoProjectilesEvent();
+        RaiseLocalEvent(uid, ref ev);
+
+        if(ev.Handled)
+            return;
+
         var grenadeCoord = _transformSystem.GetMapCoordinates(uid);
         var shootCount = 0;
         var totalCount = component.Container.ContainedEntities.Count + component.UnspawnedCount;
-        var segmentAngle = component.SpreadAngle / totalCount;
-        var projectileRotation = _transformSystem.GetMoverCoordinateRotation(uid, Transform(uid)).worldRot.Degrees + component.DirectionAngle;
+        var segmentAngle = 360 / totalCount;
 
-        _spawned.Clear();
         while (TrySpawnContents(grenadeCoord, component, out var contentUid))
         {
-            // Give the same IFF faction and enabled state to the projectiles shot from the grenade
-            if (component.InheritIFF)
-            {
-                if (TryComp(uid, out ProjectileIFFComponent? grenadeIFFComponent))
-                {
-                    _gunIFF.GiveAmmoIFF(contentUid, grenadeIFFComponent.Faction, grenadeIFFComponent.Enabled);
-                }
-            }
-
-            var angleMin = projectileRotation - component.SpreadAngle / 2 + segmentAngle * shootCount;
-            var angleMax = projectileRotation - component.SpreadAngle / 2 + segmentAngle * (shootCount + 1);
-
             Angle angle;
             if (component.RandomAngle)
                 angle = _random.NextAngle();
-            else if (component.EvenSpread)
-                angle = Angle.FromDegrees((angleMin + angleMax) / 2);
             else
             {
-                angle = Angle.FromDegrees(_random.Next((int)angleMin, (int)angleMax));
+                var angleMin = segmentAngle * shootCount;
+                var angleMax = segmentAngle * (shootCount + 1);
+                angle = Angle.FromDegrees(_random.Next(angleMin, angleMax));
+                shootCount++;
             }
-            shootCount++;
 
             // velocity is randomized to make the projectiles look
             // slightly uneven, doesn't really change much, but it looks better
             var direction = angle.ToVec().Normalized();
             var velocity = _random.NextVector2(component.MinVelocity, component.MaxVelocity);
-            _gun.ShootProjectile(contentUid, direction, velocity, uid, null, component.ProjectileSpeed);
-            _spawned.Add(contentUid);
+            _gun.ShootProjectile(contentUid, direction, velocity, uid, null);
         }
-
-        var clusterEv = new CMClusterSpawnedEvent(_spawned);
-        RaiseLocalEvent(uid, ref clusterEv);
-        RaiseLocalEvent(uid,
-            new AmmoShotEvent
-            {
-                FiredProjectiles = _spawned,
-            });
         QueueDel(uid);
     }
 
     /// <summary>
     /// Spawns one instance of the fill prototype or contained entity at the coordinate indicated
     /// </summary>
-    private bool TrySpawnContents(MapCoordinates spawnCoordinates, ProjectileGrenadeComponent component, out EntityUid contentUid)
+    public bool TrySpawnContents(MapCoordinates spawnCoordinates, ProjectileGrenadeComponent component, out EntityUid contentUid)
     {
         contentUid = default;
 
@@ -159,3 +116,9 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
         return false;
     }
 }
+
+/// <summary>
+///     Raised when a projectile grenade is being triggered
+/// </summary>
+[ByRefEvent]
+public record struct FragmentIntoProjectilesEvent(bool Handled = false);
