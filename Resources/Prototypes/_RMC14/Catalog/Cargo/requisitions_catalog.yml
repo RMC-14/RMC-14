@@ -257,6 +257,8 @@
         crate: RMCCrateSupplyJanitor
       - cost: 2000
         crate: RMCCrateSuppliesCrayons
+      - cost: 6666 #evil crate
+        crate: RMCCrateSuppliesPlushieAlec
 #    - name: Vehicle Ammo
 #      entries: []
     - name: Weapons
