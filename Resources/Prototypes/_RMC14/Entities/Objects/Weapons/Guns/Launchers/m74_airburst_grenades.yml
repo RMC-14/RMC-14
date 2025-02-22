@@ -215,6 +215,7 @@
     layers:
     - state: grenade_starshell_active
   - type: ProjectileGrenade
+    evenSpread: true
     rebounds: true
     fillPrototype: RMCStarShellBullet
     inheritIFF: true

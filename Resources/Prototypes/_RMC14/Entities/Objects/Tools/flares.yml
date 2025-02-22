@@ -123,7 +123,7 @@
     sprite: _RMC14/Objects/Misc/flares.rsi
     state: starshell_ash
   - type: PointLight
-    color: "#FA644B"
+    color: "#FFCCCC"
   - type: ExpendableLight
     pickupWhileOn: false
     glowDuration: 375

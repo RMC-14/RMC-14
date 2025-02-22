@@ -1,6 +1,7 @@
 using Content.Server.Explosion.Components;
 using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared.Projectiles;
 using Robust.Server.GameObjects;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Random;
@@ -18,14 +19,14 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ProjectileGrenadeComponent, StartCollideEvent>(OnStartCollide);
+        SubscribeLocalEvent<ProjectileGrenadeComponent, ProjectileHitEvent>(OnStartCollide);
         SubscribeLocalEvent<ProjectileGrenadeComponent, FragmentIntoProjectilesEvent>(OnFragmentIntoProjectiles);
     }
 
     /// <summary>
     /// Reverses the payload shooting direction if the projectile grenade collides with an entity
     /// </summary>
-    private void OnStartCollide(Entity<ProjectileGrenadeComponent> entity, ref StartCollideEvent args)
+    private void OnStartCollide(Entity<ProjectileGrenadeComponent> entity, ref ProjectileHitEvent args)
     {
         if (!entity.Comp.Rebounds)
             return;
