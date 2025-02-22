@@ -55,8 +55,8 @@
       #  amount: 2
       - id: RMCCaseFlamer
         amount: 2
-      #- id: M79 Grenade Launcher
-      #  amount: 3
+      - id: RMCM79Case
+        amount: 3
       - id: RMCXM51Case
         amount: 3
     - name: Explosives
@@ -73,18 +73,18 @@
       #  amount: 4
       - id: CMGrenadeSmoke
         amount: 5
-      #- id: M74 AGM-Frag Airburst Grenade
-      #  amount: 4
-      #- id: M74 AGM-Incendiary Airburst Grenade
-      #  amount: 4
-      #- id: M74 AGM-Smoke Airburst Grenade
-      #  amount: 4
-      #- id: M74 AGM-Star Shell
-      #  amount: 2
-      #- id: M74 AGM-Hornet Shell
-      #  amount: 4
-      #- id: M40 HIRR Baton Slug
-      #  amount: 8
+      - id: RMC40MMGrenadeM74AGMF
+        amount: 4
+      - id: RMC40MMGrenadeM74AGMI
+        amount: 4
+      - id: RMC40MMGrenadeM74AGMS
+        amount: 4
+      - id: RMCStarShellM74AGMS
+        amount: 2
+      - id: RMCHornetShellM74AGMS
+        amount: 4
+      - id: RMCBatonSlugHIRR
+        amount: 8
       #- id: M40 MFHS Metal Foam Grenade
       #  amount: 6
       - id: RMCExplosivePlastic

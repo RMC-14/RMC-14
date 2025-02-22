@@ -203,6 +203,7 @@
     - Stun
     - KnockedDown
     - SlowedDown
+    - Dazed
   - type: ImmuneToClothingRequiredStepTrigger
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter

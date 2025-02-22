@@ -103,11 +103,14 @@
     #    CMM40HPDPWhitePhosphorusPacketx3grenades: 18P
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
-    #    CMM74AGMFragAirburstPacketx3airburstgrenades: 20P
-    #    CMM74AGMIncendiaryAirburstPacketx3airburstgrenades: 20P
-    #    CMM74AGMSmokeAirburstPacketx3airburstgrenades: 10P
-    #    CMM74AGMHornetAirburstPacketx3airburstgrenades: 20P
-    #    CMM20MineBoxx4mines: 20P
+      - id: RMCPacketGrenadeM74AGMFFilled
+        points: 20
+      - id: RMCPacketGrenadeM74AGMIFilled
+        points: 20
+      - id: RMCPacketGrenadeM74AGMSFilled
+        points: 10
+      - id: RMCPacketGrenadeM74AGMSHornetFilled
+        points: 20
     - name: Primary Ammunition
       entries:
       - id: CMMagazineRifleM4SPRAP

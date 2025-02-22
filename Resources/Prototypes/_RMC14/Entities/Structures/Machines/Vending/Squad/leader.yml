@@ -27,7 +27,7 @@
       - id: RMCKitPyroMini
     #- id: CMM2CHeavyMachineGun
     #- id: CMM56DHeavyMachineGun
-    #- id: CMM79GrenadeLauncher
+      - id: RMCM79Case
       - id: RMCMOU53Case
       - id: RMCCaseXM88
       - id: RMCKitEngineering
@@ -112,14 +112,14 @@
     #  points: 18
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
-    #- id: CMM74AGM-FragAirburstPacketx3
-    #  points: 20
-    #- id: CMM74AGM-IncendiaryAirburstPacketx3
-    #  points: 20
-    #- id: CMM74AGM-SmokeAirburstPacketx3
-    #  points: 10
-    #- id: CMM74AGM-HornetAirburstPacketx3
-    #  points: 20
+      - id: RMCPacketGrenadeM74AGMFFilled
+        points: 20
+      - id: RMCPacketGrenadeM74AGMIFilled
+        points: 20
+      - id: RMCPacketGrenadeM74AGMSFilled
+        points: 10
+      - id: RMCPacketGrenadeM74AGMSHornetFilled
+        points: 20
     #- id: CMM20MineBoxx4mines
     #  points: 20
     #- id: CMM40MFHSMetalFoamGrenade
@@ -186,8 +186,8 @@
         points: 8
       - id: RMCGunCasePistolSmart
         points: 12
-    #- id: CMM79GrenadeLauncher
-    #  points: 18
+      - id: RMCM79Case
+        points: 18
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer

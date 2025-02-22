@@ -25,14 +25,14 @@
     #  points: 18
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
-    #- id: CMM74AGMFragAirburstPacketx3
-    #  points: 20
-    #- id: CMM74AGMIncendiaryAirburstPacketx3
-    #  points: 20
-    #- id: CMM74AGMSmokeAirburstPacketx3
-    #  points: 10
-    #- id: CMM74AGMHornetAirburstPacketx3
-    #  points: 20
+      - id: RMCPacketGrenadeM74AGMFFilled
+        points: 20
+      - id: RMCPacketGrenadeM74AGMIFilled
+        points: 20
+      - id: RMCPacketGrenadeM74AGMSFilled
+        points: 10
+      - id: RMCPacketGrenadeM74AGMSHornetFilled
+        points: 20
     #- id: CMM20MineBoxx4
     #  points: 20
     #- id: CMM40MFHSMetalFoamGrenade
@@ -69,8 +69,8 @@
         points: 10
       - id: RMCGunCasePistolSmart
         points: 15
-    #- id: CMM79GrenadeLauncher
-    #  points: 30
+      - id: RMCM79Case
+        points: 30
     - name: Armors
       entries:
       - id: CMArmorB12
