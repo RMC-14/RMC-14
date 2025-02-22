@@ -19,6 +19,49 @@
     },
     {
       "name": "dead"
+    },
+    {
+      "name": "ravager_walk_3",
+      "directions": 4
+    },
+    {
+      "name": "ravager_dissection"
+    },
+    {
+      "name": "ravager_downed_0"
+    },
+    {
+      "name": "ravager_downed_1"
+    },
+    {
+      "name": "ravager_downed_2"
+    },
+    {
+      "name": "ravager_downed_3"
+    },
+    {
+      "name": "ravager_rest_0"
+    },
+    {
+      "name": "ravager_rest_1"
+    },
+    {
+      "name": "ravager_rest_2"
+    },
+    {
+      "name": "ravager_rest_3"
+    },
+    {
+      "name": "ravager_walk_0",
+      "directions": 4
+    },
+    {
+      "name": "ravager_walk_1",
+      "directions": 4
+    },
+    {
+      "name": "ravager_walk_2",
+      "directions": 4
     }
   ]
 }

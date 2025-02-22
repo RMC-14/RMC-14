@@ -77,19 +77,26 @@
   - type: AccessReader
     access: [["CMAccessArmory"]]
 
-
 - type: entity
   parent: CMLockerBase
-  id: RMCLockerGunRed
-  name: red alert gun cabinet
+  id: RMCLockerGun
+  name: gun cabinet
+  description: It's an immobile card-locked storage unit.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/armorylocker.rsi
   - type: AccessReader
     access: [["CMAccessArmory"]]
-  - type: RMCUnlockOnAlertLevel
   - type: Destructible
     thresholds: []
+  - type: EntityStorageCloseOnMapInit
+
+- type: entity
+  parent: RMCLockerGun
+  id: RMCLockerGunRed
+  name: red alert gun cabinet
+  components:
+  - type: RMCUnlockOnAlertLevel
 
 - type: entity
   parent: CMLockerBase
@@ -118,6 +125,16 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/medical.rsi
+  - type: AccessReader
+    access: [["CMAccessMedical"]]
+
+- type: entity
+  parent: CMLockerBase
+  id: CMLockerMedicalWhite
+  name: medical locker
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/medical_white.rsi
   - type: AccessReader
     access: [["CMAccessMedical"]]
 

@@ -53,6 +53,7 @@
     - type: JobPrefix
       prefix: cm-job-prefix-executive-officer
     - type: ViewIntelObjectives
+    - type: CommandAccent
 
 - type: startingGear
   id: CMGearExecutiveOfficer

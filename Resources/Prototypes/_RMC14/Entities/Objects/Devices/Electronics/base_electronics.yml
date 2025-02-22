@@ -8,3 +8,6 @@
     - type: Sprite
       sprite: _RMC14/Objects/Misc/module.rsi
       state: door_electronics
+    - type: Tag
+      tags:
+      - RMCCircuitboard

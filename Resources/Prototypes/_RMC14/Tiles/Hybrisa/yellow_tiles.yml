@@ -1,0 +1,72 @@
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: RMCFloorHybrisaYellowBase
+  name: tiles-cm-default-yellow
+
+- type: tile
+  parent: RMCFloorHybrisaYellowBase
+  id: RMCFloorHybrisaYellow
+  name: yellow metal tile
+  sprite: /Textures/_RMC14/Tiles/hybrisa/yellow_bigtile.png
+
+- type: tile
+  parent: RMCFloorHybrisaYellow
+  id: RMCFloorHybrisaOrangeLine1
+  name: orange metal tile
+  sprite: /Textures/_RMC14/Tiles/hybrisa/orangeline_1.png
+
+- type: tile
+  parent: RMCFloorHybrisaOrangeLine1
+  id: RMCFloorHybrisaOrangeLine2
+  sprite: /Textures/_RMC14/Tiles/hybrisa/orangeline_2.png
+
+- type: tile
+  parent: RMCFloorHybrisaOrangeLine1
+  id: RMCFloorHybrisaOrangeLine3
+  sprite: /Textures/_RMC14/Tiles/hybrisa/orangeline_3.png
+
+- type: tile
+  parent: RMCFloorHybrisaOrangeLine1
+  id: RMCFloorHybrisaOrangeLine4
+  sprite: /Textures/_RMC14/Tiles/hybrisa/orangeline_4.png
+
+- type: tile
+  parent: RMCFloorHybrisaOrangeLine1
+  id: RMCFloorHybrisaOrangeLine5
+  sprite: /Textures/_RMC14/Tiles/hybrisa/orangeline_5.png
+
+- type: tile
+  parent: RMCFloorHybrisaOrangeLine1
+  id: RMCFloorHybrisaOrangeLine6
+  sprite: /Textures/_RMC14/Tiles/hybrisa/orangeline_6.png
+
+- type: tile
+  parent: RMCFloorHybrisaOrangeLine1
+  id: RMCFloorHybrisaOrangeLine7
+  sprite: /Textures/_RMC14/Tiles/hybrisa/orangeline_7.png
+
+- type: tile
+  parent: RMCFloorHybrisaOrangeLine1
+  id: RMCFloorHybrisaOrangeLine8
+  sprite: /Textures/_RMC14/Tiles/hybrisa/orangeline_8.png
+
+- type: tile
+  parent: RMCFloorHybrisaOrangeLine1
+  id: RMCFloorHybrisaOrangeLineCorner1
+  sprite: /Textures/_RMC14/Tiles/hybrisa/orangelinecorner_1.png
+
+- type: tile
+  parent: RMCFloorHybrisaOrangeLine1
+  id: RMCFloorHybrisaOrangeLineCorner2
+  sprite: /Textures/_RMC14/Tiles/hybrisa/orangelinecorner_2.png
+
+- type: tile
+  parent: RMCFloorHybrisaOrangeLine1
+  id: RMCFloorHybrisaOrangeLineCorner3
+  sprite: /Textures/_RMC14/Tiles/hybrisa/orangelinecorner_3.png
+
+- type: tile
+  parent: RMCFloorHybrisaOrangeLine1
+  id: RMCFloorHybrisaOrangeLineCorner4
+  sprite: /Textures/_RMC14/Tiles/hybrisa/orangelinecorner_4.png

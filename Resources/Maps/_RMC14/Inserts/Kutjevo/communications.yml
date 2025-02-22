@@ -37,7 +37,6 @@ entities:
     - type: MetaData
       name: grid
     - type: Transform
-      parent: 2
     - type: MapGrid
       chunks:
         0,0:
@@ -90,7 +89,7 @@ entities:
             id: splatter
           decals:
             22: 3,8
-            23: 4,7        
+            23: 4,7
         - node:
             color: '#1D1D21FF'
             id: splatter

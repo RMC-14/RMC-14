@@ -716,8 +716,14 @@ public abstract class SharedStorageSystem : EntitySystem
             items.Add((item, location));
         }
 
-        items.Sort(static (a, b) => a.Location.Position.X.CompareTo(b.Location.Position.X));
-        items.Sort(static (a, b) => a.Location.Position.Y.CompareTo(b.Location.Position.Y));
+        items.Sort(static (a, b) =>
+        {
+            var x = a.Location.Position.Y.CompareTo(b.Location.Position.Y);
+            if (x != 0)
+                return x;
+
+            return a.Location.Position.X.CompareTo(b.Location.Position.X);
+        });
 
         foreach (var (item, location) in items)
         {

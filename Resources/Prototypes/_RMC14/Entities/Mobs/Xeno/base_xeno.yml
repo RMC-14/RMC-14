@@ -295,6 +295,7 @@
     superSlowMultiplier: 0.75
     durationMultiplier: 0.666
   - type: RMCCanBeFultoned
+  - type: CMArmor
 
 - type: entity
   abstract: true
@@ -381,6 +382,13 @@
   - type: ParalyzeOnPullAttempt
   - type: FirePatter
   - type: RMCHandEmotes
+  - type: Buckle
+    buckleDelay: 0
+    clickUnbuckle: false
+  - type: BuckleWhitelist
+    whitelist:
+      tags:
+      - CMRollerBed
 
 - type: entity
   abstract: true

@@ -316,8 +316,8 @@
         amount: 6
       - id: RMCMagazinePistolSU6
         amount: 6
-      #- id: CMIncineratorTankM240
-      #  amount: 3
+      - id: RMCTankFlamer
+        amount: 3
       #- id: CMMagazineDrumM56D
       #  amount: 2
       #- id: CMMagazineBoxM2C
@@ -456,14 +456,14 @@
         amount: 2
       - id: RMCAttachmentLaserSight
         amount: 3
-#      - id: CMAttachmentMiniFlamethrower
-#        amount: 2
+      - id: RMCAttachmentMiniFlamethrower
+        amount: 2
 #      - id: CMAttachmentXMVESG1FlamerNozzle
 #        amount: 2
       - id: RMCAttachmentU7UnderbarrelShotgun
         amount: 2
-#      - id: CMAttachmentUnderbarrelExtinguisher
-#        amount: 2
+      - id: RMCAttachmentUnderbarrelExtinguisher
+        amount: 2
       - id: RMCAttachmentVerticalGrip
         amount: 3
     - name: Stock

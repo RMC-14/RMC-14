@@ -17,5 +17,11 @@ public sealed partial class OrbitalCannonExplosionComponent : Component
     public int Current;
 
     [DataField, AutoNetworkedField]
+    public TimeSpan LastAt;
+
+    [DataField, AutoNetworkedField]
+    public int Step;
+
+    [DataField, AutoNetworkedField]
     public TimeSpan LastStepAt;
 }

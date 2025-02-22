@@ -1,4 +1,4 @@
-﻿rmc-xeno-strain-specialized-into = It has specialized into {INDEFINITE($strain)} {$strain}.
+rmc-xeno-strain-specialized-into = It has specialized into {INDEFINITE($strain)} {$strain}.
 
 rmc-xeno-dancer-name = Dancer
 rmc-xeno-dancer-description = You trade your spit, acid ball, acid spray, dash, and a small bit of armor for high single-target damage.
@@ -19,13 +19,15 @@ rmc-xeno-vanguard-description = You trade your spit, acid ball, acid spray, corr
    - Cleave an enemy either flinging them or rooting them in place, both stronger with your shield up.
 rmc-xeno-vanguard-popup = Fearless you are born, fearless you serve, fearless you die. This one will become my Vanguard.
 
-rmc-xeno-warden-name = Warden
-rmc-xeno-warden-description = You trade your acid ball, acid spray, dash, and a small bit of your slash damage and speed to become an effective medic.
-  You gain the ability to:
-  - Emit strong pheromones.
-  - Retrieve endangered, knocked-down or resting allies and pull them to your location.
-  - Use an internal hitpoint pool that fills with every slash against your enemies, which can be spent to aid your allies and yourself by healing them or curing their ailments.
-rmc-xeno-warden-popup = This one will deny her sisters' deaths until they earn it. Fight or be forgotten.
+rmc-xeno-valkyrie-name = Valkyrie
+rmc-xeno-valkyrie-description = You trade your tail stab, spit, acid ball, acid spray, corrosive acid, and some speed to gain some armor and frontline support abilities.
+   You gain the ability to:
+   - Break the strongest of walls and other reinforced structures with your slash attack, and emit strong pheromones.
+   - Extinguish friend or capture alike with your tail, or knock away explosives and down enemies with your High Gallop. 
+   - Heal you and your allies for every slash, gaining fury, then enrage yourself and ally for more armor and healing.
+   - Rejuvenate a group all at once with a rallying shriek, removing their ailments.
+   - Retrieve endangered, knocked-down or resting allies and pull them to your location.
+rmc-xeno-valkyrie-popup = This one will deny her sisters' deaths until they earn it. Fight or be forgotten.
 
 rmc-xeno-gardener-name = Gardener
 rmc-xeno-gardener-description = You trade your choice of resin secretions, corrosive acid, and ability to transfer plasma for a tiny bit of extra health regeneration on weeds and several new abilities.
@@ -62,7 +64,7 @@ rmc-xeno-acider-name = Acider
 rmc-xeno-acider-description = You trade your leap, bone chips, long-range sight, and a little speed to gain more health, some armor, and a new organ that fills with volatile acid over time.
   You gain the ability to:
   - Cause your enemies to be covered in acid on hit.
-  - Gain acid reserves from slashing your enemies, and passively over time, which can be spent on corrosive acid as strong as a boiler's but applied much faster.
+  - Gain acid reserves from slashing your enemies, and passively over time up to 400, which can be spent on corrosive acid as strong as a boiler's but applied much faster.
   - Become a living bomb using all your stored up acid. Survive for 20 seconds and you explode, coating your enemies and their defenses with acid. You'll reincarnate as a larva afterwards.
 rmc-xeno-acider-popup = This one will be the last thing they hear. A martyr.
 

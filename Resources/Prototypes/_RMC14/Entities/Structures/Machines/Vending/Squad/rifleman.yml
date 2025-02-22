@@ -175,8 +175,8 @@
         points: 15
       - id: RMCBackpackRTO
         points: 15
-    #- id: CMFuelTankStrapPouch
-    #  points: 5
+      - id: RMCPouchFuelTank
+        points: 5
     #- id: CMWeldingGoggles
     #  points: 5
     #- id: CMSlingPouch

@@ -52,6 +52,7 @@
     - type: JobPrefix
       prefix: cm-job-prefix-cmo
     - type: ViewIntelObjectives
+    - type: CommandAccent
 
 - type: startingGear
   id: CMGearCMO

@@ -1,0 +1,43 @@
+- type: entity
+  parent: DrinkBottlePlasticBaseFull
+  id: RMCDrinkCoffee
+  name: coffee
+  description: Careful, the beverage you're about to enjoy is extremely hot.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 50
+        reagents:
+        - ReagentId: Coffee
+          Quantity: 30
+  - type: Drink
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/coffee.rsi
+    state: base
+    layers: []
+  - type: Item
+    size: Small
+  - type: DamageOnLand
+    damage: {}
+  - type: DamageOtherOnHit
+    damage: {}
+  - type: Appearance
+  - type: Sealable
+  - type: Destructible
+    thresholds: [] # TODO RMC14 destroy on explosion unless inside a container
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: RMCDrinkCoffee
+  id: RMCDrinkCoffeeGrind
+  name: The Daily Grind
+  description: Rise and Shine! Time to drink the Daily Grind!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/coffee_joe.rsi
+    state: base
+    layers: []

@@ -25,7 +25,8 @@ command-description-excluderoletimer-remove = Removes a player's exclusion for p
 command-description-figurine-export = Exports the current character as a figurine.
 command-description-figurine-openslots = Opens up infinite slots for all jobs on all map prototypes until the whole server is restarted.
 
-command-description-hive-alldefault = Sets the hive of a xeno or group of xenos.
+command-description-hive-alldefault = Sets the hive of all xenos to the default hive (the first one created).
+command-description-hive-set = Sets the hive of a xeno or group of xenos.
 
 command-description-icon-get_human_readable = Gets the human readable name of a player's job icon.
 command-description-icon-get = Gets the name of a player's job icon.

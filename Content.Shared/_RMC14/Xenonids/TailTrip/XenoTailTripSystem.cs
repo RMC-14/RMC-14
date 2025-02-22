@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Xenonids.Finesse;
 using Content.Shared._RMC14.Xenonids.Sweep;
@@ -18,6 +19,7 @@ public sealed class XenoTailTripSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
 
     public override void Initialize()
     {
@@ -27,6 +29,9 @@ public sealed class XenoTailTripSystem : EntitySystem
     private void OnXenoTailTripAction(Entity<XenoTailTripComponent> xeno, ref XenoTailTripActionEvent args)
     {
         if (args.Handled)
+            return;
+
+        if (!_rmcActions.TryUseAction(xeno, args.Action))
             return;
 
         args.Handled = true;
