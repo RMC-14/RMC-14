@@ -154,6 +154,6 @@
       sprite: _RMC14/Structures/Walls/electric_grille.rsi
       state: brokengrille
     - type: Construction
-      graph: GrilleElectrified
+      graph: RMCGrilleElectrified
       node: grilleBrokenElectrified
       deconstructionTarget: start

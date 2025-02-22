@@ -78,53 +78,45 @@
   parent: RMCFloorHybrisaBasicBase
   id: RMCFloorHybrisaRampNorth
   name: ramp
-  suffix: north
   sprite: /Textures/_RMC14/Tiles/hybrisa/rampsmaller_north.png
 
 - type: tile
   parent: RMCFloorHybrisaRampNorth
   id: RMCFloorHybrisaRampEast
-  suffix: east
   sprite: /Textures/_RMC14/Tiles/hybrisa/rampsmaller_east.png
 
 - type: tile
   parent: RMCFloorHybrisaRampNorth
   id: RMCFloorHybrisaRampSouth
-  suffix: south
   sprite: /Textures/_RMC14/Tiles/hybrisa/rampsmaller_south.png
 
 - type: tile
   parent: RMCFloorHybrisaRampNorth
   id: RMCFloorHybrisaRampWest
-  suffix: west
   sprite: /Textures/_RMC14/Tiles/hybrisa/rampsmaller_west.png
 
 - type: tile
   parent: RMCFloorHybrisaBasicBase
   id: RMCFloorHybrisaStripeRedNorth
   name: red stripe
-  suffix: north
   sprite: /Textures/_RMC14/Tiles/hybrisa/stripe_red_north.png
 
 - type: tile
   parent: RMCFloorHybrisaBasicBase
   id: RMCFloorHybrisaStripeRedSouth
   name: red stripe
-  suffix: south
   sprite: /Textures/_RMC14/Tiles/hybrisa/stripe_red_south.png
 
 - type: tile
   parent: RMCFloorHybrisaBasicBase
   id: RMCFloorHybrisaStripeRedEast
   name: red stripe
-  suffix: east
   sprite: /Textures/_RMC14/Tiles/hybrisa/stripe_red_east.png
 
 - type: tile
   parent: RMCFloorHybrisaBasicBase
   id: RMCFloorHybrisaStripeRedWest
   name: red stripe
-  suffix: west
   sprite: /Textures/_RMC14/Tiles/hybrisa/stripe_red_west.png
 
 - type: tile

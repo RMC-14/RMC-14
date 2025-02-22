@@ -94,23 +94,19 @@
   parent: CMFloorSteel
   id: CMFloorSteelPrisonRampNorth
   name: ramp
-  suffix: north
   sprite: /Textures/_RMC14/Tiles/prison/ramptop_north.png
 
 - type: tile
   parent: CMFloorSteelPrisonRampNorth
   id: CMFloorSteelPrisonRampSouth
-  suffix: south
   sprite: /Textures/_RMC14/Tiles/prison/ramptop_south.png
 
 - type: tile
   parent: CMFloorSteelPrisonRampNorth
   id: CMFloorSteelPrisonRampEast
-  suffix: east
   sprite: /Textures/_RMC14/Tiles/prison/ramptop_east.png
 
 - type: tile
   parent: CMFloorSteelPrisonRampNorth
   id: CMFloorSteelPrisonRampWest
-  suffix: west
   sprite: /Textures/_RMC14/Tiles/prison/ramptop_west.png

@@ -19,13 +19,13 @@
   - node: fenceMetal
     entity: RMCFenceHybrisaElectric
     edges:
-    - to: rmcFenceBrokenHybrisaElectric
+    - to: rmcFenceBroken
       steps:
       - tool: Cutting
         doAfter: 1.0
 
   - node: rmcFenceBroken
-    entity: RMCFenceBrokenHybrisaElectric
+    entity: RMCFenceHybrisaElectricBroken
     edges:
     - to: start
       completed:

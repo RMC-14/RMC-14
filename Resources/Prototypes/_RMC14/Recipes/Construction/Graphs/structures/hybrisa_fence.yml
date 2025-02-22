@@ -25,7 +25,7 @@
         doAfter: 1.0
 
   - node: rmcFenceBroken
-    entity: RMCFenceBrokenHybrisa
+    entity: RMCFenceHybrisaBroken
     edges:
     - to: start
       completed:

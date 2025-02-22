@@ -194,7 +194,7 @@
 
 - type: entity
   parent: RMCWindowFrameHybrisaReinforced
-  id: RMCWindowFrameHybrisaEngigReinforced
+  id: RMCWindowFrameHybrisaEngiReinforced
   suffix: engineering
   components:
   - type: Sprite
@@ -409,7 +409,7 @@
 
 - type: entity
   parent: RMCWindowHybrisaReinforced
-  id: RMCWindowHybrisaResearchlReinforced
+  id: RMCWindowHybrisaResearchReinforced
   suffix: research
   components:
   - type: Sprite
