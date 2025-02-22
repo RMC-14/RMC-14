@@ -205,7 +205,8 @@ public sealed class XenoEnergySystem : EntitySystem
                 continue;
 
             comp.NextGain = time + comp.GainEvery;
-            AddEnergy((uid, comp), comp.Gain, false);
+            if (comp.GenerationCap == null || comp.Current < comp.GenerationCap)
+                AddEnergy((uid, comp), comp.Gain, false);
             Dirty(uid, comp);
         }
     }

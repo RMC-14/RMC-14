@@ -4,6 +4,10 @@
   name: cm-job-name-cargotech
   description: cm-job-description-cargotech
   playTimeTracker: CMJobCargoTech
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 18000 # 5 hours
   ranks:
     RMCRankLanceCorporal:
     - !type:RoleTimeRequirement
