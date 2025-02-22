@@ -32,7 +32,7 @@ public sealed class RMCTippingSystem : EntitySystem
 
         args.Handled = true;
 
-        if (!ent.Comp.IsTipped)
+        if (ent.Comp.IsTipped)
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-construction-vendor-tip-done"), args.User, args.User);
             return;
