@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Medical.Scanner;
 using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Tackle;
 using Content.Shared._RMC14.Vendors;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Devour;
@@ -104,6 +105,7 @@ public sealed class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, HealthScannerAttemptTargetEvent>(OnXenoHealthScannerAttemptTarget);
         SubscribeLocalEvent<XenoComponent, GetDefaultRadioChannelEvent>(OnXenoGetDefaultRadioChannel);
         SubscribeLocalEvent<XenoComponent, AttackAttemptEvent>(OnXenoAttackAttempt);
+        SubscribeLocalEvent<XenoComponent, GettingAttackedAttemptEvent>(OnXenoGettingAttackedAttempt);
         SubscribeLocalEvent<XenoComponent, UserOpenActivatableUIAttemptEvent>(OnXenoOpenActivatableUIAttempt);
         SubscribeLocalEvent<XenoComponent, GetMeleeDamageEvent>(OnXenoGetMeleeDamage);
         SubscribeLocalEvent<XenoComponent, DamageModifyEvent>(OnXenoDamageModify);
@@ -172,6 +174,12 @@ public sealed class XenoSystem : EntitySystem
         if (args.Target is not { } target)
             return;
 
+
+        if (HasComp<TackleableComponent>(target) && args.Disarm && _hive.FromSameHive(xeno.Owner, target))
+        {
+            return;
+        }
+
         // TODO RMC14 this still falsely plays the hit red flash effect on xenos if others are hit in a wide swing
         if ((_xenoFriendlyQuery.HasComp(target) && _hive.FromSameHive(xeno.Owner, target)) ||
             _mobState.IsDead(target))
@@ -180,10 +188,19 @@ public sealed class XenoSystem : EntitySystem
             return;
         }
 
+
         if (_xenoNestedQuery.HasComp(target) &&
             _victimInfectedQuery.HasComp(target))
         {
             args.Cancel();
+        }
+    }
+
+    private void OnXenoGettingAttackedAttempt(Entity<XenoComponent> xeno, ref GettingAttackedAttemptEvent args)
+    {
+        if (!_hive.FromSameHive(args.Attacker, xeno.Owner) && args.Disarm)
+        {
+            args.Cancelled = true;
         }
     }
 
