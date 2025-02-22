@@ -87,5 +87,5 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/hybrisa.yml
     camouflage: Urban
-    announcement: "An automated distress signal has been received from the Weyland-Yutani colony, Hybrisa Prospera — a vast, city-like settlement renowned for its immense wealth, extensive mining operations, and thriving commerce. Recently fully acquired from the TWE, this former colony is now a key asset for Weyland-Yutani, with a sprawling urban center housing thousands of residents and numerous smaller outer colonies under its control. The ###SHIPNAME### has been dispatched to investigate the situation."
+    announcement: "An automated distress signal has been received from the Weston-Yamada colony, Hybrisa Prospera — a vast, city-like settlement renowned for its immense wealth, extensive mining operations, and thriving commerce. Recently fully acquired from the TSE, this former colony is now a key asset for Weston-Yamada, with a sprawling urban center housing thousands of residents and numerous smaller outer colonies under its control. The UNS Almayer has been dispatched to investigate the situation."
     minPlayers: 130
