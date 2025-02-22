@@ -46,7 +46,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         SubscribeLocalEvent<RMCFlamerAmmoProviderComponent, EntInsertedIntoContainerMessage>(OnInsertedIntoContainer);
         SubscribeLocalEvent<RMCFlamerAmmoProviderComponent, EntRemovedFromContainerMessage>(OnRemovedFromContainer);
 
-        SubscribeLocalEvent<RMCFlamerTankComponent, AfterInteractEvent>(OnFlamerTankAfterInteract);
+        SubscribeLocalEvent<RMCFlamerTankComponent, BeforeRangedInteractEvent>(OnFlamerTankBeforeRangedInteract);
 
         SubscribeLocalEvent<RMCSprayAmmoProviderComponent, TakeAmmoEvent>(OnSprayTakeAmmo);
         SubscribeLocalEvent<RMCSprayAmmoProviderComponent, GetAmmoCountEvent>(OnSprayGetAmmoCount);
@@ -92,38 +92,44 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         UpdateAppearance(ent);
     }
 
-    private void OnFlamerTankAfterInteract(Entity<RMCFlamerTankComponent> tank, ref AfterInteractEvent args)
+    private void OnFlamerTankBeforeRangedInteract(Entity<RMCFlamerTankComponent> tank, ref BeforeRangedInteractEvent args)
     {
+        if (!HasComp<RMCFlamerAmmoProviderComponent>(tank))
+            return;
+
         if (args.Target is not { } target)
             return;
 
         if (!_solution.TryGetSolution(tank.Owner, tank.Comp.SolutionId, out var tankSolutionEnt, out _))
             return;
 
-        if (!_solution.TryGetDrainableSolution(target, out var targetSolutionEnt, out _))
-            return;
-
-        args.Handled = true;
-        var tankSolution = tankSolutionEnt.Value.Comp.Solution;
-        var targetSolution = targetSolutionEnt.Value.Comp.Solution;
-        foreach (var content in targetSolution.Contents)
+        Entity<SolutionComponent> targetSolutionEnt;
+        if (_solution.TryGetDrainableSolution(target, out var drainable, out _))
         {
-            if (_prototypes.TryIndex(content.Reagent.Prototype, out ReagentPrototype? reagent) &&
-                reagent.Intensity <= FixedPoint2.Zero)
-            {
-                _popup.PopupClient(Loc.GetString("rmc-flamer-tank-not-potent-enough"), target, args.User);
-                return;
-            }
+            targetSolutionEnt = drainable.Value;
+        }
+        else if (TryComp(target, out RMCFlamerTankComponent? targetTank) &&
+                 _solution.TryGetSolution(target, targetTank.SolutionId, out var targetTankSolution))
+        {
+            targetSolutionEnt = targetTankSolution.Value;
+        }
+        else if (TryComp(target, out RMCFlamerBackpackComponent? backpack) &&
+                 _solution.TryGetSolution(target, backpack.SolutionId, out var backpackSolution))
+        {
+            targetSolutionEnt = backpackSolution.Value;
+        }
+        else if (HasComp<ReagentTankComponent>(target) &&
+                 _solution.TryGetDrainableSolution(target, out var reagentTankSolutionEnt, out _))
+        {
+            targetSolutionEnt = reagentTankSolutionEnt.Value;
+        }
+        else
+        {
+            return;
         }
 
-        _solutionTransfer.Transfer(
-            args.User,
-            target,
-            targetSolutionEnt.Value,
-            tank,
-            tankSolutionEnt.Value,
-            tankSolution.AvailableVolume
-        );
+        args.Handled = true;
+        Transfer(target, targetSolutionEnt, tank, tankSolutionEnt.Value, args.User);
     }
 
     private void OnSprayTakeAmmo(Entity<RMCSprayAmmoProviderComponent> ent, ref TakeAmmoEvent args)
@@ -210,7 +216,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         var normalized = -delta.Normalized();
 
         // to prevent hitting yourself
-        fromCoordinates = fromCoordinates.Offset(normalized * 0.35f);
+        fromCoordinates = fromCoordinates.Offset(normalized * 0.37f);
 
         var range = Math.Min((volume / flamer.Comp.CostPer).Int(), flamer.Comp.Range);
         if (delta.Length() > flamer.Comp.Range)
@@ -274,6 +280,37 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         }
 
         return _solution.TryGetSolution(tank.Owner, tank.Comp.SolutionId, out solutionEnt, out _);
+    }
+
+    private void Transfer(EntityUid source,
+        Entity<SolutionComponent> sourceSolutionEnt,
+        EntityUid target,
+        Entity<SolutionComponent> targetSolutionEnt,
+        EntityUid user)
+    {
+        var tankSolution = targetSolutionEnt.Comp.Solution;
+        var targetSolution = sourceSolutionEnt.Comp.Solution;
+        foreach (var content in targetSolution.Contents)
+        {
+            if (_prototypes.TryIndex(content.Reagent.Prototype, out ReagentPrototype? reagent) &&
+                reagent.Intensity <= FixedPoint2.Zero)
+            {
+                _popup.PopupClient(Loc.GetString("rmc-flamer-tank-not-potent-enough"), source, user);
+                return;
+            }
+        }
+
+        var transfer = _solutionTransfer.Transfer(
+            user,
+            source,
+            sourceSolutionEnt,
+            target,
+            targetSolutionEnt,
+            tankSolution.AvailableVolume
+        );
+
+        if (transfer > FixedPoint2.Zero)
+            _popup.PopupClient(Loc.GetString("rmc-flamer-refill", ("refilled", target)), source, user);
     }
 
     public override void Update(float frameTime)

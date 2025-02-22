@@ -43,7 +43,7 @@
         priority: 2
         whitelist:
           components:
-          - RMCTankFlamer
+          - RMCFlamerTank
   - type: Wieldable
   - type: GunRequiresWield
   - type: RMCFlamerAmmoProvider
@@ -94,7 +94,7 @@
     layers:
     - state: flametank_custom
     - state: flametank_custom_strip
-      color: "#DD9B00"
+      map: [ "enum.SolutionContainerLayers.Fill" ]
   - type: Item
     size: Normal
   - type: SolutionContainerManager
@@ -107,7 +107,7 @@
   - type: RMCFlamerTank
   - type: RMCSolutionTransferWhitelist
     popup: rmc-solution-transfer-whitelist-failed-not-reagent-tank
-    whitelist:
+    targetWhitelist:
       tags:
       - RMCTankReagent
       - RMCBackpackFlamer

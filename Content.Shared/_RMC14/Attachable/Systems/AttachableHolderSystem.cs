@@ -15,6 +15,7 @@ using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Components;
@@ -60,6 +61,8 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, GotUnequippedHandEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GunRefreshModifiersEvent>(RelayEvent,
             after: new[] { typeof(WieldableSystem) });
+        SubscribeLocalEvent<AttachableHolderComponent, BeforeRangedInteractEvent>(OnAttachableHolderBeforeRangedInteract,
+            before: [typeof(SharedStorageSystem)]);
         SubscribeLocalEvent<AttachableHolderComponent, InteractUsingEvent>(OnAttachableHolderInteractUsing);
         SubscribeLocalEvent<AttachableHolderComponent, AfterInteractEvent>(OnAttachableHolderAfterInteract);
         SubscribeLocalEvent<AttachableHolderComponent, ActivateInWorldEvent>(OnAttachableHolderInteractInWorld,
@@ -158,6 +161,25 @@ public sealed class AttachableHolderSystem : EntitySystem
         Dirty(holder);
     }
 
+    private void OnAttachableHolderBeforeRangedInteract(Entity<AttachableHolderComponent> holder, ref BeforeRangedInteractEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (holder.Comp.SupercedingAttachable is not { } attachable)
+            return;
+
+        var afterInteractEvent = new BeforeRangedInteractEvent(args.User,
+            attachable,
+            args.Target,
+            args.ClickLocation,
+            args.CanReach);
+        RaiseLocalEvent(attachable, afterInteractEvent);
+
+        if (afterInteractEvent.Handled)
+            args.Handled = true;
+    }
+
     private void OnAttachableHolderInteractUsing(Entity<AttachableHolderComponent> holder, ref InteractUsingEvent args)
     {
         if (CanAttach(holder, args.Used))
@@ -204,7 +226,7 @@ public sealed class AttachableHolderSystem : EntitySystem
             attachable,
             args.Target,
             args.ClickLocation,
-            true);
+            args.CanReach);
         RaiseLocalEvent(attachable, afterInteractEvent);
 
         if (afterInteractEvent.Handled)

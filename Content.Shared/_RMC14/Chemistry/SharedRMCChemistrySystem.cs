@@ -144,9 +144,16 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
 
     private void OnTransferWhitelistAttempt(Entity<RMCSolutionTransferWhitelistComponent> ent, ref SolutionTransferAttemptEvent args)
     {
-        var other = ent.Owner == args.From ? args.To : args.From;
-        if (_entityWhitelist.IsWhitelistFail(ent.Comp.Whitelist, other))
-            args.Cancel(Loc.GetString(ent.Comp.Popup));
+        if (ent.Owner == args.From)
+        {
+            if (_entityWhitelist.IsWhitelistFail(ent.Comp.SourceWhitelist, args.To))
+                args.Cancel(Loc.GetString(ent.Comp.Popup));
+        }
+        else
+        {
+            if (_entityWhitelist.IsWhitelistFail(ent.Comp.TargetWhitelist, args.From))
+                args.Cancel(Loc.GetString(ent.Comp.Popup));
+        }
     }
 
     private void OnNoMixingReagentsExamined(Entity<NoMixingReagentsComponent> ent, ref ExaminedEvent args)

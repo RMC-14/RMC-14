@@ -173,9 +173,9 @@
       - id: RMCMagazinePistolSU6
         points: 6
     - name: Special Ammunition
-      entries: [ ]
-    #- id: CMM240IncineratorTankNapthal
-    #  points: 3
+      entries:
+      - id: RMCTankFlamer
+        points: 3
     #- id: CMM240IncineratorTankB-Gel
     #  points: 3
     - name: Restricted Firearms
@@ -366,13 +366,14 @@
   - type: Storage
     maxItemSize: Huge
     grid:
-    - 0,0,9,1
+    - 0,0,11,1
   - type: Sprite
     sprite: _RMC14/Objects/Storage/procase_mini.rsi
   - type: Icon
     sprite: _RMC14/Objects/Storage/procase_mini.rsi
   - type: StorageFill
     contents:
+    - id: RMCBackpackFlamer
     - id: RMCWeaponFlamer
     - id: RMCTankFlamer # TODO RMC14 +1 b gel, -1 regular
       amount: 3 # TODO RMC14 projectile nozzle

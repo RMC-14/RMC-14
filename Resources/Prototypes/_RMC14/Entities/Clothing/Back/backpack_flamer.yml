@@ -36,15 +36,17 @@
   - type: RMCRefillSolutionOnStore
   - type: RMCSolutionTransferWhitelist
     popup: rmc-solution-transfer-whitelist-failed-not-welding-tank
-    whitelist:
-      components:
-      - RMCFlamerTank
+    targetWhitelist:
       tags:
       - RMCTankReagent
   - type: NoMixingReagents
   - type: Tag
     tags:
     - RMCBackpackFlamer
+  - type: CMStorageVisualizer
+    storageClosed: null
+    storageOpen: null
+  - type: RMCFlamerBackpack
   - type: ItemCamouflage
     camouflageVariations: {}
 
