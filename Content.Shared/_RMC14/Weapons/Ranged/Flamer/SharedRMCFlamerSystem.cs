@@ -95,7 +95,10 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     private void OnFlamerTankBeforeRangedInteract(Entity<RMCFlamerTankComponent> tank, ref BeforeRangedInteractEvent args)
     {
         if (!HasComp<RMCFlamerAmmoProviderComponent>(tank))
+        {
+            RefillTank(tank, ref args);
             return;
+        }
 
         if (args.Target is not { } target)
             return;
@@ -311,6 +314,29 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
         if (transfer > FixedPoint2.Zero)
             _popup.PopupClient(Loc.GetString("rmc-flamer-refill", ("refilled", target)), source, user);
+    }
+
+    private void RefillTank(Entity<RMCFlamerTankComponent> tank, ref BeforeRangedInteractEvent args)
+    {
+        if (args.Target is not { } target)
+            return;
+
+        if (!_solution.TryGetSolution(tank.Owner, tank.Comp.SolutionId, out var tankSolutionEnt, out _))
+            return;
+
+        Entity<SolutionComponent> targetSolutionEnt;
+        if (HasComp<ReagentTankComponent>(target) &&
+            _solution.TryGetDrainableSolution(target, out var reagentTankSolutionEnt, out _))
+        {
+            targetSolutionEnt = reagentTankSolutionEnt.Value;
+        }
+        else
+        {
+            return;
+        }
+
+        args.Handled = true;
+        Transfer(target, targetSolutionEnt, tank, tankSolutionEnt.Value, args.User);
     }
 
     public override void Update(float frameTime)
