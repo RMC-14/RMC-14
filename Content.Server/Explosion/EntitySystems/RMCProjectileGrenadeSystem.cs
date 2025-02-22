@@ -1,9 +1,7 @@
 using Content.Server.Explosion.Components;
 using Content.Server.Weapons.Ranged.Systems;
-using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
-using Content.Shared.Weapons.Ranged.Events;
 using Robust.Server.GameObjects;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Random;
@@ -12,14 +10,10 @@ namespace Content.Server.Explosion.EntitySystems;
 
 public sealed class RMCProjectileGrenadeSystem : EntitySystem
 {
-    [Dependency] private readonly GunSystem _gun = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly TransformSystem _transformSystem = default!;
     [Dependency] private readonly TriggerSystem _trigger = default!;
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
-    [Dependency] private readonly ProjectileGrenadeSystem _projectileGrenade = default!;
-
-    private readonly List<EntityUid> _spawned = new();
 
     public override void Initialize()
     {
@@ -54,53 +48,31 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
     {
         args.Handled = true;
 
-        var grenadeCoord = _transformSystem.GetMapCoordinates(ent.Owner);
-        var shootCount = 0;
         var totalCount = ent.Comp.Container.ContainedEntities.Count + ent.Comp.UnspawnedCount;
         var segmentAngle = ent.Comp.SpreadAngle / totalCount;
         var projectileRotation = _transformSystem.GetMoverCoordinateRotation(ent.Owner, Transform(ent.Owner)).worldRot.Degrees + ent.Comp.DirectionAngle;
 
-        _spawned.Clear();
-        while (_projectileGrenade.TrySpawnContents(grenadeCoord, ent.Comp, out var contentUid))
+        // Give the same IFF faction and enabled state to the projectiles shot from the grenade
+        if (ent.Comp.InheritIFF)
         {
-            // Give the same IFF faction and enabled state to the projectiles shot from the grenade
-            if (ent.Comp.InheritIFF)
+            if (TryComp(ent.Owner, out ProjectileIFFComponent? grenadeIFFComponent))
             {
-                if (TryComp(ent.Owner, out ProjectileIFFComponent? grenadeIFFComponent))
-                {
-                    _gunIFF.GiveAmmoIFF(contentUid, grenadeIFFComponent.Faction, grenadeIFFComponent.Enabled);
-                }
+                _gunIFF.GiveAmmoIFF(args.ContentUid, grenadeIFFComponent.Faction, grenadeIFFComponent.Enabled);
             }
-
-            var angleMin = projectileRotation - ent.Comp.SpreadAngle / 2 + segmentAngle * shootCount;
-            var angleMax = projectileRotation - ent.Comp.SpreadAngle / 2 + segmentAngle * (shootCount + 1);
-
-            Angle angle;
-            if (ent.Comp.RandomAngle)
-                angle = _random.NextAngle();
-            else if (ent.Comp.EvenSpread)
-                angle = Angle.FromDegrees((angleMin + angleMax) / 2);
-            else
-            {
-                angle = Angle.FromDegrees(_random.Next((int)angleMin, (int)angleMax));
-            }
-            shootCount++;
-
-            // velocity is randomized to make the projectiles look
-            // slightly uneven, doesn't really change much, but it looks better
-            var direction = angle.ToVec().Normalized();
-            var velocity = _random.NextVector2(ent.Comp.MinVelocity, ent.Comp.MaxVelocity);
-            _gun.ShootProjectile(contentUid, direction, velocity, ent.Owner, null, ent.Comp.ProjectileSpeed);
-            _spawned.Add(contentUid);
         }
 
-        var clusterEv = new CMClusterSpawnedEvent(_spawned);
-        RaiseLocalEvent(ent.Owner, ref clusterEv);
-        RaiseLocalEvent(ent.Owner,
-            new AmmoShotEvent
-            {
-                FiredProjectiles = _spawned,
-            });
-        QueueDel(ent.Owner);
+        var angleMin = projectileRotation - ent.Comp.SpreadAngle / 2 + segmentAngle * args.ShootCount;
+        var angleMax = projectileRotation - ent.Comp.SpreadAngle / 2 + segmentAngle * (args.ShootCount + 1);
+
+        if (ent.Comp.EvenSpread)
+            args.Angle = Angle.FromDegrees((angleMin + angleMax) / 2);
+        else
+            args.Angle = Angle.FromDegrees(_random.Next((int)angleMin, (int)angleMax));
+
     }
 }
+/// <summary>
+///     Raised when a projectile grenade is being triggered
+/// </summary>
+[ByRefEvent]
+public record struct FragmentIntoProjectilesEvent(EntityUid ContentUid, Angle Angle, int ShootCount, bool Handled = false);

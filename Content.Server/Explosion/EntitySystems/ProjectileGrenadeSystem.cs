@@ -1,5 +1,7 @@
 ﻿using Content.Server.Explosion.Components;
 using Content.Server.Weapons.Ranged.Systems;
+using Content.Shared._RMC14.Explosion;
+using Content.Shared.Weapons.Ranged.Events;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
@@ -13,6 +15,9 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly TransformSystem _transformSystem = default!;
+
+    // RMC14
+    private readonly List<EntityUid> _spawned = new();
 
     public override void Initialize()
     {
@@ -54,19 +59,12 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
     /// </summary>
     private void FragmentIntoProjectiles(EntityUid uid, ProjectileGrenadeComponent component)
     {
-
-        // RMC14
-        var ev = new FragmentIntoProjectilesEvent();
-        RaiseLocalEvent(uid, ref ev);
-
-        if(ev.Handled)
-            return;
-
         var grenadeCoord = _transformSystem.GetMapCoordinates(uid);
         var shootCount = 0;
         var totalCount = component.Container.ContainedEntities.Count + component.UnspawnedCount;
         var segmentAngle = 360 / totalCount;
 
+        _spawned.Clear();
         while (TrySpawnContents(grenadeCoord, component, out var contentUid))
         {
             Angle angle;
@@ -77,6 +75,13 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
                 var angleMin = segmentAngle * shootCount;
                 var angleMax = segmentAngle * (shootCount + 1);
                 angle = Angle.FromDegrees(_random.Next(angleMin, angleMax));
+
+                // RMC14
+                var ev = new FragmentIntoProjectilesEvent(contentUid, angle, shootCount);
+                RaiseLocalEvent(uid, ref ev);
+
+                if (ev.Handled)
+                    angle = ev.Angle;
                 shootCount++;
             }
 
@@ -84,15 +89,24 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
             // slightly uneven, doesn't really change much, but it looks better
             var direction = angle.ToVec().Normalized();
             var velocity = _random.NextVector2(component.MinVelocity, component.MaxVelocity);
-            _gun.ShootProjectile(contentUid, direction, velocity, uid, null);
+            _gun.ShootProjectile(contentUid, direction, velocity, uid, null, component.ProjectileSpeed);
+            _spawned.Add(contentUid);
         }
+
+        var clusterEv = new CMClusterSpawnedEvent(_spawned);
+        RaiseLocalEvent(uid, ref clusterEv);
+        RaiseLocalEvent(uid,
+            new AmmoShotEvent
+            {
+                FiredProjectiles = _spawned,
+            });
         QueueDel(uid);
     }
 
     /// <summary>
     /// Spawns one instance of the fill prototype or contained entity at the coordinate indicated
     /// </summary>
-    public bool TrySpawnContents(MapCoordinates spawnCoordinates, ProjectileGrenadeComponent component, out EntityUid contentUid)
+    private bool TrySpawnContents(MapCoordinates spawnCoordinates, ProjectileGrenadeComponent component, out EntityUid contentUid)
     {
         contentUid = default;
 
@@ -116,9 +130,3 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
         return false;
     }
 }
-
-/// <summary>
-///     Raised when a projectile grenade is being triggered
-/// </summary>
-[ByRefEvent]
-public record struct FragmentIntoProjectilesEvent(bool Handled = false);
