@@ -1,5 +1,4 @@
 using Content.Server.Explosion.Components;
-using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Robust.Server.GameObjects;
@@ -48,8 +47,7 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
     {
         args.Handled = true;
 
-        var totalCount = ent.Comp.Container.ContainedEntities.Count + ent.Comp.UnspawnedCount;
-        var segmentAngle = ent.Comp.SpreadAngle / totalCount;
+        var segmentAngle = ent.Comp.SpreadAngle / args.TotalCount;
         var projectileRotation = _transformSystem.GetMoverCoordinateRotation(ent.Owner, Transform(ent.Owner)).worldRot.Degrees + ent.Comp.DirectionAngle;
 
         // Give the same IFF faction and enabled state to the projectiles shot from the grenade
@@ -75,4 +73,4 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
 ///     Raised when a projectile grenade is being triggered
 /// </summary>
 [ByRefEvent]
-public record struct FragmentIntoProjectilesEvent(EntityUid ContentUid, Angle Angle, int ShootCount, bool Handled = false);
+public record struct FragmentIntoProjectilesEvent(EntityUid ContentUid, int TotalCount, Angle Angle, int ShootCount, bool Handled = false);

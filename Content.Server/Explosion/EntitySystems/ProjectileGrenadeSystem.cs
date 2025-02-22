@@ -77,7 +77,7 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
                 angle = Angle.FromDegrees(_random.Next(angleMin, angleMax));
 
                 // RMC14
-                var ev = new FragmentIntoProjectilesEvent(contentUid, angle, shootCount);
+                var ev = new FragmentIntoProjectilesEvent(contentUid, totalCount, angle, shootCount);
                 RaiseLocalEvent(uid, ref ev);
 
                 if (ev.Handled)
