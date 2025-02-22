@@ -248,7 +248,7 @@ public sealed class IntelSystem : EntitySystem
 
         var delay = ent.Comp.Delay * _skills.GetSkillDelayMultiplier(user, ent.Comp.Skill);
         var ev = new IntelReadDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent);
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent) { BreakOnDropItem = true };
         if (_doAfter.TryStartDoAfter(doAfter))
             _popup.PopupClient($"You start reading the {Name(ent)}", ent, user);
     }

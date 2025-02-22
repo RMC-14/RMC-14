@@ -26,8 +26,7 @@
       - CableCoil
       - PowerCell
       # - TODO RMC14 RMCAssembly
-      # - TODO RMC14 RMCStockParts
-      - RMCExplosivePlastic
+      # - TODO RMC14 RMCStockParts,
       - RMCExplosiveBreachingCharge
       # - TODO RMC14 RMCSynthResetKey
       components:

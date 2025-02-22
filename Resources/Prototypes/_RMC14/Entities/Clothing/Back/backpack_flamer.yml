@@ -1,0 +1,54 @@
+﻿- type: entity
+  parent: CMPersonalStorageBase
+  id: RMCBackpackFlamer
+  name: UNMC pyrotechnician G4-1 fueltank
+  description: A much older-generation back rig that holds fuel in two tanks. A small regulator sits between them. Has a few straps for holding up to three of the actual flamer tanks you'll be refilling.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/flamethrower.rsi
+    layers:
+    - state: icon
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,5,1
+    whitelist:
+      components:
+      - RMCFlamerTank
+  - type: FixedItemSizeStorage
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 350
+        reagents:
+        - ReagentId: RMCNapalmUT
+          Quantity: 350
+  - type: DetailedExaminableSolution
+    solution: tank
+  - type: SolutionTransfer
+    transferAmount: 350
+    maxTransferAmount: 350
+    minTransferAmount: 350
+  - type: RefillableSolution
+    solution: tank
+  - type: DrawableSolution
+    solution: tank
+  - type: RMCRefillSolutionOnStore
+  - type: RMCSolutionTransferWhitelist
+    popup: rmc-solution-transfer-whitelist-failed-not-welding-tank
+    targetWhitelist:
+      tags:
+      - RMCTankReagent
+  - type: NoMixingReagents
+  - type: Tag
+    tags:
+    - RMCBackpackFlamer
+  - type: CMStorageVisualizer
+    storageClosed: null
+    storageOpen: null
+  - type: RMCFlamerBackpack
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: Tag
+  id: RMCBackpackFlamer

@@ -63,7 +63,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/paper.rsi
-    state: folder
+    layers:
+    - state: folder
+      map: ["base" ]
   - type: Item
     size: Tiny
   - type: IntelReadObjective
@@ -74,6 +76,14 @@
   - type: IntelClues
     clue: rmc-intel-clue-folder
     category: rmc-intel-folders
+  - type: RandomSprite
+    available:
+    - base:
+        folder: ""
+        folder_black: ""
+        folder_blue: ""
+        folder_red: ""
+        folder_yellow: ""
 
 - type: entity
   parent: RMCIntelReadableBase
@@ -244,6 +254,20 @@
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: ob_incend
+        - name: Additional OB projectiles - Cluster
+          description: Highly explosive bombardment ammo that fragments, to be loaded into the orbital cannon.
+          cost: 5
+          increase: 2
+          repurchasable: true
+          events:
+          - !type:TechWarheadEvent
+            warhead: RMCOrbitalCannonWarheadCluster
+          - !type:TechAnnounceEvent
+            author: ALMAYER SPECIAL ASSETS AUTHORIZED
+            message: Additional Orbital Bombardment warheads (Cluster) have been delivered to Requisitions' ASRS.
+          icon:
+            sprite: _RMC14/Interface/tech_tree.rsi
+            state: ob_cluster
 
 - type: Tag
   id: RMCIntelItem

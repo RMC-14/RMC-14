@@ -230,12 +230,56 @@
 
 - type: entity
   parent: RMCUnderAttachmentBase
-  id: CMAttachmentMiniFlamethrower
-  name: mini flamethrower
+  id: RMCAttachmentMiniFlamethrower
+  name: mini flamethrower # TODO RMC14 intensity toggle
   description: A weapon-mounted refillable flamethrower attachment. It has a secondary setting for a more intense flame with far less propulsion ability and heavy fuel usage.
   components:
   - type: Sprite
     state: flamethrower
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentFlamer
+  - type: Item
+    size: Normal
+  - type: Gun
+    cameraRecoilScalar: 0
+    fireRate: 0.333
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      collection: RMCFlamerShoot
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 40
+        reagents:
+        - ReagentId: RMCNapalmUT
+          Quantity: 40
+  - type: RMCFlamerAmmoProvider
+  - type: RMCFlamerTank
+  - type: AttachableToggleable
+    userOnly: true
+    attachedOnly: true
+    supercedeHolder: true
+    wieldedUseOnly: true
+    activatePopupText: attachable-popup-switch-to-generic
+    deactivatePopupText: attachable-popup-switch-from-generic
+    activateSound:
+      path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg # TODO RMC14
+      params:
+        volume: -2
+    actionName: Switch to the mini flamethrower.
+    actionDesc: Switch to using the mini flamethrower.
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: flamethrower
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: flamethrower-on
+  - type: AttachableVisuals
+    offset: -0.125, 0.245
 
 - type: entity
   parent: RMCUnderAttachmentBase
@@ -321,6 +365,62 @@
   components:
   - type: Sprite
     state: extinguisher
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentExtinguisher
+  - type: Item
+    size: Normal
+  - type: Gun
+    cameraRecoilScalar: 0
+    fireRate: 0.5
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      collection: RMCFlamerShoot
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 60
+        reagents:
+        - ReagentId: Water
+          Quantity: 60
+  - type: AttachableToggleable
+    userOnly: true
+    attachedOnly: true
+    supercedeHolder: true
+    wieldedUseOnly: false
+    activatePopupText: attachable-popup-switch-to-generic
+    deactivatePopupText: attachable-popup-switch-from-generic
+    activateSound:
+      path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg # TODO RMC14
+      params:
+        volume: -2
+    actionName: Switch to the underbarrel extinguisher.
+    actionDesc: Switch to using the underbarrel extinguisher.
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: extinguisher
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: extinguisher-on
+  - type: AttachableVisuals
+    offset: 0.061, 0.028
+  - type: RMCSprayAmmoProvider
+  - type: Spray
+    transferAmount: 5
+    sprayedPrototype: RMCExtinguisherSpray
+    vaporAmount: 3
+    sprayDistance: 5
+    sprayVelocity: 5
+    spraySound:
+      path: /Audio/Effects/extinguish.ogg
+  - type: RefillableSolution
+    solution: spray
+  - type: SolutionTransfer
+    maxTransferAmount: 60
+    transferAmount: 60
 
 - type: entity
   parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
@@ -672,3 +772,9 @@
 
 - type: Tag
   id: RMCAttachmentLaserLightModule
+
+- type: Tag
+  id: RMCAttachmentFlamer
+
+- type: Tag
+  id: RMCAttachmentExtinguisher

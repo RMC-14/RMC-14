@@ -5058,13 +5058,6 @@
   id: 1374
   time: '2025-02-22T07:52:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5687
-- author: KittenColony
-  changes:
-  - message: Added UN and UNMC planted flag. Semper Fi.
-    type: Add
-  id: 1375
-  time: '2025-02-22T09:24:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4635
 - author: noctyrnal
   changes:
   - message: Ported LV-759 Hybrisa Prospera, a new planet map.

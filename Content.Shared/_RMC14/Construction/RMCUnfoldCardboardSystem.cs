@@ -1,5 +1,5 @@
-﻿using Content.Shared._RMC14.BulletBox;
-using Content.Shared._RMC14.Inventory;
+﻿using Content.Shared._RMC14.Inventory;
+using Content.Shared._RMC14.Weapons.Ranged.Ammo.BulletBox;
 using Content.Shared.Database;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
