@@ -88,7 +88,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] private   readonly INetConfigurationManager _netConfig = default!;
 
     // RMC14
-    [Dependency] private readonly RMCFlamerSystem _flamer = default!;
+    [Dependency] private readonly SharedRMCFlamerSystem _flamer = default!;
 
     private const float InteractNextFire = 0.3f;
     private const double SafetyNextFire = 0.5;

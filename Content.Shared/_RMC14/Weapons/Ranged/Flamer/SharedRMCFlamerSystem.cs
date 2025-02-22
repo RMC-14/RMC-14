@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Fluids;
 using Content.Shared._RMC14.Line;
+using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
@@ -21,7 +22,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Flamer;
 
-public sealed class RMCFlamerSystem : EntitySystem
+public abstract class SharedRMCFlamerSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -49,6 +50,10 @@ public sealed class RMCFlamerSystem : EntitySystem
 
         SubscribeLocalEvent<RMCSprayAmmoProviderComponent, TakeAmmoEvent>(OnSprayTakeAmmo);
         SubscribeLocalEvent<RMCSprayAmmoProviderComponent, GetAmmoCountEvent>(OnSprayGetAmmoCount);
+
+        SubscribeLocalEvent<RMCIgniterComponent, MapInitEvent>(OnIgniterMapInit, after: [typeof(SharedSolutionContainerSystem)]);
+        SubscribeLocalEvent<RMCIgniterComponent, UniqueActionEvent>(OnIgniterUniqueAction);
+        SubscribeLocalEvent<RMCIgniterComponent, AttemptShootEvent>(OnIgniterAttemptShoot);
     }
 
     private void OnMapInit(Entity<RMCFlamerAmmoProviderComponent> ent, ref MapInitEvent args)
@@ -136,6 +141,29 @@ public sealed class RMCFlamerSystem : EntitySystem
         args.Capacity = solution.MaxVolume.Int();
     }
 
+    private void OnIgniterMapInit(Entity<RMCIgniterComponent> ent, ref MapInitEvent args)
+    {
+        _appearance.SetData(ent, RMCIgniterVisuals.Ignited, ent.Comp.Enabled);
+    }
+
+    private void OnIgniterUniqueAction(Entity<RMCIgniterComponent> ent, ref UniqueActionEvent args)
+    {
+        ent.Comp.Enabled = !ent.Comp.Enabled;
+        Dirty(ent);
+
+        _audio.PlayPredicted(ent.Comp.Sound, ent, args.UserUid);
+        _appearance.SetData(ent, RMCIgniterVisuals.Ignited, ent.Comp.Enabled);
+    }
+
+    protected virtual void OnIgniterAttemptShoot(Entity<RMCIgniterComponent> ent, ref AttemptShootEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (!ent.Comp.Enabled)
+            args.Cancelled = true;
+    }
+
     private void UpdateAppearance(Entity<RMCFlamerAmmoProviderComponent> ent)
     {
         if (!TryComp(ent, out AppearanceComponent? appearance))
@@ -172,14 +200,21 @@ public sealed class RMCFlamerSystem : EntitySystem
         if (volume <= flamer.Comp.CostPer)
             return;
 
+        if (!fromCoordinates.TryDelta(EntityManager, _transform, toCoordinates, out var delta))
+            return;
+
+        if (delta.IsLengthZero())
+            return;
+
         _audio.PlayPredicted(gun.Comp.SoundGunshotModified, gun, user);
+        var normalized = -delta.Normalized();
+
+        // to prevent hitting yourself
+        fromCoordinates = fromCoordinates.Offset(normalized * 0.35f);
+
         var range = Math.Min((volume / flamer.Comp.CostPer).Int(), flamer.Comp.Range);
-        if (fromCoordinates.TryDelta(EntityManager, _transform, toCoordinates, out var delta) &&
-            !delta.IsLengthZero() &&
-            delta.Length() > flamer.Comp.Range)
-        {
-            toCoordinates = fromCoordinates.Offset(-delta.Normalized() * range);
-        }
+        if (delta.Length() > flamer.Comp.Range)
+            toCoordinates = fromCoordinates.Offset(normalized * range);
 
         var tiles = _line.DrawLine(fromCoordinates, toCoordinates, flamer.Comp.DelayPer, out _);
 

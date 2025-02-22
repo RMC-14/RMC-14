@@ -15,6 +15,8 @@
     - state: strip
       color: "#DD9B00"
       map: ["enum.RMCFlamerVisualLayers.Strip"]
+    - state: lit
+      map: ["enum.RMCIgniterVisuals.Ignited"]
   - type: Item
     sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/m34.rsi
     size: Large
@@ -36,8 +38,8 @@
       gun_magazine:
         name: Tank
         startingItem: RMCTankFlamer
-        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
-        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        insertSound: /Audio/_RMC14/Weapons/Handling/flamer_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Handling/flamer_unload.ogg
         priority: 2
         whitelist:
           components:
@@ -45,12 +47,6 @@
   - type: Wieldable
   - type: GunRequiresWield
   - type: RMCFlamerAmmoProvider
-  - type: GenericVisualizer
-    visuals:
-      enum.RMCFlamerVisualLayers.Strip:
-        enum.RMCFlamerVisualLayers.Strip:
-          True: { visible: true }
-          False: { visible: false }
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -70,6 +66,21 @@
     offsets:
       rmc-aslot-rail: -0.032, 0.092
       rmc-aslot-underbarrel: 0.284, -0.313
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/flamer_mouse.rsi
+      state: all
+  - type: RMCIgniter
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCFlamerVisualLayers.Strip:
+        enum.RMCFlamerVisualLayers.Strip:
+          True: { visible: true }
+          False: { visible: false }
+      enum.RMCIgniterVisuals.Ignited:
+        enum.RMCIgniterVisuals.Ignited:
+          True: { visible: true }
+          False: { visible: false }
 
 - type: entity
   parent: BaseItem
