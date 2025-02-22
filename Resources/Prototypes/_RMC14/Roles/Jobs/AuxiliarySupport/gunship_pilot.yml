@@ -7,7 +7,7 @@
   requirements:
   - !type:TotalJobsTimeRequirement
     group: CMJobsDropship
-    time: 7200 # 2 hours
+    time: 36000 # 10 hours
   ranks:
     RMCRankSecondLT: []
   startingGear: CMGearPilotGunship
