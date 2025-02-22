@@ -1,8 +1,8 @@
 namespace Content.Server.Explosion.Components;
-/// <summary>
-/// Grenades that, when triggered, explode into projectiles
-/// </summary>
 
+/// <summary>
+/// Extends the upstream ProjectileGrenadeComponent
+/// </summary>
 public sealed partial class ProjectileGrenadeComponent
 {
     /// <summary>

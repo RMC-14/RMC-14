@@ -2,7 +2,6 @@ using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
-using Content.Shared.Examine;
 using Content.Shared.IgnitionSource;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
@@ -37,7 +36,6 @@ namespace Content.Server.Light.EntitySystems
             SubscribeLocalEvent<ExpendableLightComponent, ComponentInit>(OnExpLightInit);
             SubscribeLocalEvent<ExpendableLightComponent, UseInHandEvent>(OnExpLightUse);
             SubscribeLocalEvent<ExpendableLightComponent, GetVerbsEvent<ActivationVerb>>(AddIgniteVerb);
-            SubscribeLocalEvent<ExpendableLightComponent, ExaminedEvent>(OnExpendableLightExamined);
         }
 
         public override void Update(float frameTime)
@@ -88,6 +86,9 @@ namespace Content.Server.Light.EntitySystems
                         _item.SetHeldPrefix(ent, "unlit", component: item);
                     }
 
+                    // RMC14
+                    _physics.SetBodyType(ent, BodyType.Dynamic);
+
                     break;
             }
         }
@@ -116,9 +117,6 @@ namespace Content.Server.Light.EntitySystems
 
                 component.CurrentState = ExpendableLightState.Lit;
                 component.StateExpiryTime = component.GlowDuration;
-
-                if(!ent.Comp.PickupWhileOn)
-                    _physics.SetBodyType(ent, BodyType.Static);
                 Dirty(ent);
 
                 UpdateSounds(ent);
@@ -216,12 +214,6 @@ namespace Content.Server.Light.EntitySystems
                 Act = () => TryActivate(ent)
             };
             args.Verbs.Add(verb);
-        }
-
-        private void OnExpendableLightExamined(Entity<ExpendableLightComponent> ent, ref ExaminedEvent args)
-        {
-            if (!ent.Comp.PickupWhileOn && ent.Comp.CurrentState != ExpendableLightState.Dead)
-                args.PushMarkup(Loc.GetString("rmc-laser-designator-signal-flare-examine"));
         }
     }
 }

@@ -46,9 +46,6 @@ public sealed partial class ExpendableLightComponent : Component
     [DataField, AutoNetworkedField]
     public EntityUid? PlayingStream;
 
-    [DataField]
-    public bool PickupWhileOn = true;
-
     /// <summary>
     ///     Status of light, whether or not it is emitting light.
     /// </summary>
