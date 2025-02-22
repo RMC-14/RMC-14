@@ -16,7 +16,7 @@ public sealed partial class RMCFlamerAmmoProviderComponent : Component, IShootab
     public int Range = 5;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan DelayPer = TimeSpan.FromSeconds(0.1);
+    public TimeSpan DelayPer = TimeSpan.FromSeconds(0.05);
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 CostPer = FixedPoint2.New(1);
