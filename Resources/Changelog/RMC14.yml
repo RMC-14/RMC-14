@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added the interstellar sapient-life rights observer ghost role as an
-      admin event.
-    type: Add
-  id: 873
-  time: '2024-10-22T06:45:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4553
-- author: DrSmugleaf
-  changes:
   - message: Added the Corporate Executive Specialist, Corporate Executive Supervisor,
       and Interstellar Commerce Bureau Liaison admin ghost roles.
     type: Add
@@ -5087,5 +5079,15 @@
   id: 1373
   time: '2025-02-22T07:48:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5676
+- author: Arcticular1
+  changes:
+  - message: Added the Commanding Officer's ML66B Cavalier smart gun with new sprites.
+      This replaces the regular smart gun in their vendor.
+    type: Add
+  - message: Added ID lock to the Commanding Officer's smart gun.
+    type: Tweak
+  id: 1374
+  time: '2025-02-22T07:52:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5687
 Name: RMC14
 Order: -1
