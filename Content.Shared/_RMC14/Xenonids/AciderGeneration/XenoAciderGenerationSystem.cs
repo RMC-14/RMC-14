@@ -95,7 +95,7 @@ public sealed class XenoAciderGenerationSystem : EntitySystem
             if (time >= acid.NextIncrease)
             {
                 _energy.AddEnergy((uid, energy), acid.IncreaseAmount, false);
-                acid.NextIncrease = acid.NextIncrease += acid.TimeBetweenGeneration;
+                acid.NextIncrease = time + acid.TimeBetweenGeneration;
                 Dirty(uid, acid);
             }
 
