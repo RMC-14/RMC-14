@@ -145,9 +145,9 @@ public sealed class XenoEmpowerSystem : EntitySystem
         }
 
         if (hits > 0)
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-ravager-empower"), xeno, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-ravager-empower"), xeno, xeno, PopupType.SmallCaution);
         else
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-ravager-empower-fizzle"), xeno, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-ravager-empower-fizzle"), xeno, xeno, PopupType.SmallCaution);
 
         _shield.ApplyShield(xeno, XenoShieldSystem.ShieldType.Ravager, hits * xeno.Comp.ShieldPerTarget);
         //Reset shield time
@@ -241,7 +241,7 @@ public sealed class XenoEmpowerSystem : EntitySystem
             if (super.ExpiresAt != null & time >= super.ExpiresAt)
             {
                 RemCompDeferred<XenoSuperEmpoweredComponent>(uid);
-                _popup.PopupEntity(Loc.GetString("rmc-xeno-ravager-super-empower-fade"), uid, PopupType.SmallCaution);
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-ravager-super-empower-fade"), uid, uid, PopupType.SmallCaution);
                 continue;
             }
 
