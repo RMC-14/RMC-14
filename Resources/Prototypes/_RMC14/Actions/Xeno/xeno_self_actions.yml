@@ -94,7 +94,7 @@
   id: ActionXenoFortifySteelcrest
   parent: ActionXenoFortify
   name: Fortify
-  description: Become much slower, increasing your resistance to direct damage and explosions. Damage is greatly reduced from the direction you are facing. You count as two sizes bigger while fortified and still can attack strcutures or use tail slam, but your slashes do less damage.
+  description: Become much slower, increasing your resistance to direct damage and explosions. Damage is greatly reduced from the direction you are facing. You count as two sizes bigger while fortified and still can attack structures or use tail slam, but your slashes do less damage.
 
 - type: entity
   id: ActionXenoResinWalker
