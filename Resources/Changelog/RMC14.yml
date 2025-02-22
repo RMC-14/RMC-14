@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fix normal marine armor not fitting MD on the suit slot
-    type: Fix
-  - message: Fix MD not showing blips while worn on the belt/suit slot
-    type: Fix
-  id: 877
-  time: '2024-10-23T22:51:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4537
 - author: crystalHex
   changes:
   - message: Added tooltips to the gardener's fruit selection UI.
@@ -5155,5 +5146,12 @@
   id: 1378
   time: '2025-02-22T19:48:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5699
+- author: Vermidia
+  changes:
+  - message: Made the Boiler sprite smaller.
+    type: Tweak
+  id: 1379
+  time: '2025-02-22T20:06:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5701
 Name: RMC14
 Order: -1
