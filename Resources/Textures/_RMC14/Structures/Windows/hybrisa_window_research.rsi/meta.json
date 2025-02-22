@@ -54,6 +54,9 @@
     },
     {
       "name": "strata_window15"
+    },
+    {
+      "name": "strata_window"
     }
   ]
 }

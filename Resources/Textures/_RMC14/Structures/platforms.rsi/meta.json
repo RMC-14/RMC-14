@@ -189,6 +189,14 @@
     {
       "name": "hybrisaplatform_deco3",
       "directions": 4
+    },
+    {
+      "name": "engineer_platform",
+      "directions": 4
+    },
+    {
+      "name": "engineer_platform_deco",
+      "directions": 4
     }
   ]
 }

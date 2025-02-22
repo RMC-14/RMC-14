@@ -120,6 +120,14 @@
     },
     {
       "name": "bigrollerhospitalsheet2_down"
+    },
+    {
+      "name": "bigrollerempty3_down",
+      "directions": 4
+    },
+    {
+      "name": "bigrollerempty3_up",
+      "directions": 4
     }
   ]
 }
