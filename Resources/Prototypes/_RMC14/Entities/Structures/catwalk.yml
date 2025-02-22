@@ -66,6 +66,8 @@
   components:
   - type: Sprite
     state: shiva_catwalk
+  - type: Icon
+    state: shiva_catwalk
 
 - type: entity
   parent: CMCatwalk
@@ -73,12 +75,16 @@
   components:
   - type: Sprite
     state: prison_catwalk
+  - type: Icon
+    state: prison_catwalk
 
 - type: entity
   parent: CMCatwalk
   id: RMCCatwalkKutjevo
   components:
   - type: Sprite
+    state: kutjevo_catwalk
+  - type: Icon
     state: kutjevo_catwalk
 
 - type: entity
