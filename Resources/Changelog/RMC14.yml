@@ -1,30 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added the Corporate Executive Specialist, Corporate Executive Supervisor,
-      and Interstellar Commerce Bureau Liaison admin ghost roles.
-    type: Add
-  - message: Added the black, khaki, blue, formal, and brown corporate jackets to
-      the Corporate Liaison's wardrobe.
-    type: Add
-  - message: Fixed the Corporate Liaison's ID and headset being the wrong color.
-    type: Fix
-  id: 874
-  time: '2024-10-23T06:36:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4574
-- author: Whisper
-  changes:
-  - message: Added a new hijack soundtrack, Storm the Iron Hive, by Nighty
-    type: Add
-  - message: Added a new lobby soundtrack, Enemy is Unknown, by Nighty
-    type: Add
-  - message: Added a new lobby soundtrack, The Fallen Queen, by Bolgarich
-    type: Add
-  id: 875
-  time: '2024-10-23T22:49:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4566
-- author: DrSmugleaf
-  changes:
   - message: Fixed promoting someone to aSL removing command comms for all other SLs
     type: Fix
   id: 876
@@ -5089,5 +5065,19 @@
   id: 1374
   time: '2025-02-22T07:52:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5687
+- author: KittenColony
+  changes:
+  - message: Added UN and UNMC planted flag. Semper Fi.
+    type: Add
+  id: 1375
+  time: '2025-02-22T09:24:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4635
+- author: noctyrnal
+  changes:
+  - message: Ported LV-759 Hybrisa Prospera, a new planet map.
+    type: Add
+  id: 1376
+  time: '2025-02-22T08:00:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5518
 Name: RMC14
 Order: -1
