@@ -1,0 +1,14 @@
+﻿<cc:RMCConstructionWindow
+    xmlns="https://spacestation14.io"
+    xmlns:cc="clr-namespace:Content.Client._RMC14.Construction"
+    xmlns:userInterface="clr-namespace:Content.Client._RMC14.UserInterface"
+    Title="Construction"
+    MinSize="300 300"
+    SetSize="450 500">
+    <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
+        <BoxContainer Orientation="Vertical">
+            <RichTextLabel Name="MaterialLabel" Access="Public" />
+            <BoxContainer Orientation="Vertical" Name="ConstructionContainer" Access="Public" />
+        </BoxContainer>
+    </ScrollContainer>
+</cc:RMCConstructionWindow>
