@@ -567,9 +567,9 @@ public sealed class OrbitalCannonSystem : EntitySystem
                 Spawn(OrbitalTargetMarker, _transform.GetMapCoordinates(uid));
             }
 
-            if (explosion.Current == default && explosion.LastStepAt == default)
+            if (explosion.Current == default && explosion.LastAt == default)
             {
-                explosion.LastStepAt = time;
+                explosion.LastAt = time;
                 Dirty(uid, explosion);
             }
 
@@ -580,21 +580,49 @@ public sealed class OrbitalCannonSystem : EntitySystem
             }
 
             var step = explosion.Steps[explosion.Current];
-            if (time >= explosion.LastStepAt + step.Delay)
+            if (time >= explosion.LastAt + step.Delay)
             {
-                explosion.Current++;
-                Dirty(uid, explosion);
-
-                if (step.Type is { } type)
+                if (step.Times <= 1)
                 {
-                    var coordinates = _transform.GetMapCoordinates(uid);
-                    _rmcExplosion.QueueExplosion(coordinates, type, step.Total, step.Slope, step.Max, uid);
+                    explosion.Current++;
+                    Dirty(uid, explosion);
+                }
+                else
+                {
+                    if (time < explosion.LastStepAt + step.DelayPer)
+                        continue;
+
+                    explosion.Step++;
+                    explosion.LastStepAt = time;
+                    if (explosion.Step >= step.Times)
+                    {
+                        explosion.Current++;
+                        explosion.Step = 0;
+                        explosion.LastStepAt = default;
+                        Dirty(uid, explosion);
+                    }
                 }
 
-                if (step.Fire is { } fire && step.FireRange > 0)
+                // TODO RMC14 cluster laser pointers
+                for (var i = 0; i < step.TimesPer; i++)
                 {
+                    var mapCoordinates = _transform.GetMapCoordinates(uid);
                     var coordinates = _transform.GetMoverCoordinates(uid);
-                    _rmcFlammable.SpawnFireDiamond(fire, coordinates, step.FireRange);
+                    if (step.Spread > 0)
+                    {
+                        var spread = _random.NextVector2(-step.Spread, step.Spread);
+                        mapCoordinates = mapCoordinates.Offset(spread);
+                        coordinates = coordinates.Offset(spread);
+                    }
+
+                    if (step.CheckProtectionPer && !_area.CanOrbitalBombard(coordinates, out _))
+                        continue;
+
+                    if (step.Type is { } type)
+                        _rmcExplosion.QueueExplosion(mapCoordinates, type, step.Total, step.Slope, step.Max, uid, canCreateVacuum: false);
+
+                    if (step.Fire is { } fire && step.FireRange > 0)
+                        _rmcFlammable.SpawnFireDiamond(fire, coordinates, step.FireRange);
                 }
             }
         }
