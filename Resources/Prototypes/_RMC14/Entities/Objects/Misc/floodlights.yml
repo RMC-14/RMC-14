@@ -219,6 +219,17 @@
   id: RMCStreetlight
   name: colony streetlight
   components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        density: 50
+        mask:
+        - MachineMask
+        layer:
+        - WallLayer
   - type: Sprite
     noRot: true
     sprite: _RMC14/Objects/Misc/Lights/streetlight.rsi
