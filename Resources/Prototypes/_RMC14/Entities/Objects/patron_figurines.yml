@@ -1144,3 +1144,14 @@
     state: zver_nemesis
   - type: PatronFigurine
     id: 63503a1b-5dd9-405e-92e6-e6fb9608c37e
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronHazzyLicious
+  name: Hazzy Licious figurine
+  description: "It has many bugs crawling over it."
+  components:
+  - type: Sprite
+    state: hazzy_licious
+  - type: PatronFigurine
+    id: aabf2d58-6ec9-455a-83e1-91f4e1a71d17

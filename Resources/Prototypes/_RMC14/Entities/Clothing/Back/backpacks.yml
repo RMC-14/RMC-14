@@ -189,8 +189,8 @@
 - type: entity
   parent: CMBackpack
   id: CMBackpackWelder
-  name: Marine technician welderpack
-  description: A specialized backpack worn by Marine technicians. It carries a fueltank for quick welder refueling and use.
+  name: UNMC technician welderpack
+  description: A specialized backpack worn by UNMC technicians. It carries a fueltank for quick welder refueling and use.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/welder/jungle-desert-classic.rsi
@@ -222,9 +222,10 @@
     solution: tank
   - type: RMCSolutionTransferWhitelist
     popup: rmc-solution-transfer-whitelist-failed-not-welding-tank
-    whitelist:
+    sourceWhitelist:
       components:
       - Welder
+    targetWhitelist:
       tags:
       - RMCTankFuel
   - type: ItemCamouflage
