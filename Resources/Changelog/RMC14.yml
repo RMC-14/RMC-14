@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed promoting someone to aSL removing command comms for all other SLs
-    type: Fix
-  id: 876
-  time: '2024-10-23T22:49:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4554
 - author: Vermidia
   changes:
   - message: Fix normal marine armor not fitting MD on the suit slot
@@ -5072,5 +5065,12 @@
   id: 1376
   time: '2025-02-22T08:00:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5518
+- author: UnicornOnLSD
+  changes:
+  - message: delta pilled the alec plushie
+    type: Add
+  id: 1377
+  time: '2025-02-22T11:07:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5694
 Name: RMC14
 Order: -1
