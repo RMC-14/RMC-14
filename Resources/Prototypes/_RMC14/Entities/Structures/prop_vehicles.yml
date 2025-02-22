@@ -25,7 +25,17 @@
     state: car_pileup
     offset: 1.5, 1
   - type: Clickable
-  - type: DeleteOnExplosion
+  - type: InteractionOutline
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 3000
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity
   abstract: true
