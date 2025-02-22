@@ -1,37 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added Beatrice 'Bea' Bootes figurine.
-    type: Add
-  - message: Fixed not being able to move after cancelling an aggressive grab.
-    type: Fix
-  - message: Fixed grenades being exploded by landing supply drops.
-    type: Fix
-  - message: Fixed overwatch console never saying that a crate is loaded.
-    type: Fix
-  - message: Fixed overwatch console not showing promoted acting squad leaders on
-      the top summary.
-    type: Fix
-  - message: Fixed overwatch console squad leader promotion sometimes not giving comms,
-      a squad announcement and operator popup.
-    type: Fix
-  - message: Fixed reagent tank rounding down.
-    type: Fix
-  - message: Fixed platform corners not being quick-vaultable in 0.25 seconds.
-    type: Fix
-  - message: Fixed being able to pull while being aggressively grabbed or carried.
-    type: Fix
-  id: 868
-  time: '2024-10-19T22:28:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4532
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Patron Perks UI not refreshing in real time and making it look
-      like changes to lobby messages and shoutouts aren't saved.
-    type: Fix
-  id: 869
-  time: '2024-10-19T22:46:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4535
 - author: Whisper
   changes:
   - message: Added new lobby art by wendyribstonofpippin.
@@ -5088,5 +5055,30 @@
   id: 1368
   time: '2025-02-21T13:08:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5671
+- author: Vermidia
+  changes:
+  - message: Fixed Queen armor loss from being in green fire being too high (50% armor
+      retained -> 70%)
+    type: Fix
+  - message: Fixed Pierce not breaking window glass
+    type: Fix
+  - message: Fixed various abilities with a timer not showing toggled on on the action
+      bar
+    type: Fix
+  - message: Fixed crusher healing not enough while standing (0.4 -> 0.66)
+    type: Fix
+  - message: Added ravager, a T3 that evolves from lurker and focuses on empowering
+      from foes and dishing out damage.
+    type: Add
+  id: 1369
+  time: '2025-02-22T07:43:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5675
+- author: CyberTropic
+  changes:
+  - message: Changed signal flare color to be more white than green.
+    type: Tweak
+  id: 1370
+  time: '2025-02-22T07:44:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5688
 Name: RMC14
 Order: -1
