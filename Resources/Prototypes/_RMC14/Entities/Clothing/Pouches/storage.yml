@@ -587,7 +587,7 @@
       - PowerCell
       # - TODO RMC14 RMCAssembly
       # - TODO RMC14 RMCStockParts
-      - RMCExplosivePlastic
+      - RMCExplosiveBreachingCharge
       # - TODO RMC14 RMCSynthResetKey
       components:
       - TrayScanner
