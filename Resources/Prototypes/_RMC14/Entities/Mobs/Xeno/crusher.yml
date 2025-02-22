@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
@@ -37,6 +37,7 @@
     tier: 3
     hudOffset: -0.15,0.1
     unlockAt: 900 # 15 minutes
+    standHealingMultiplier: 0.66
   - type: XenoHeavy
   - type: XenoDevolve
     devolvesTo:
