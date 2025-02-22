@@ -1,20 +1,6 @@
 ﻿Entries:
 - author: Whisper
   changes:
-  - message: Added new lobby art by wendyribstonofpippin.
-    type: Add
-  id: 870
-  time: '2024-10-20T11:37:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4544
-- author: Whisper
-  changes:
-  - message: Updated the M63 sprites.
-    type: Add
-  id: 871
-  time: '2024-10-21T01:14:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4545
-- author: Whisper
-  changes:
   - message: Added new lobby art by wrath7167e.
     type: Add
   id: 872
@@ -5080,5 +5066,24 @@
   id: 1370
   time: '2025-02-22T07:44:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5688
+- author: Arcticular1
+  changes:
+  - message: New CO armor sprites + CO helmet sprites, general officer armor + helmet,
+      deluxe gloves.
+    type: Add
+  - message: RTO pack, expedition pack, night vision visor, to CO vendors. + General
+      officer armor, helmet & deluxe gloves.
+    type: Add
+  id: 1371
+  time: '2025-02-22T07:46:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5614
+- author: to4no_fix
+  changes:
+  - message: Now to take the role of a cargo technician you need to play 5 hours as
+      a marine
+    type: Tweak
+  id: 1372
+  time: '2025-02-22T07:47:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5684
 Name: RMC14
 Order: -1
