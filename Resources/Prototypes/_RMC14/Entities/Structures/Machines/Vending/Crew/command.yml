@@ -494,7 +494,7 @@
       entries:
       - id: WeaponRifleM59A
         name: M59A Prototype Rifle
-      - id: CMSmartGunOperatorEquipmentCaseBelt
+      - id: CMCOSmartGunOperatorEquipmentCaseBelt
         name: Commander's Smartgun
     - name: Primary Ammunition
       entries:
