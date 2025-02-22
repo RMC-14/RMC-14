@@ -1,0 +1,38 @@
+- type: entity
+  parent: WeaponShotgunM890
+  id: WeaponShotgunM890Guard
+  description: A unique corporate made semi-automatic shotgun with a rapid fire rate. Holds 8 shotgun shells in the chamber. Equipped with a red handle to signify its use with Military Police Honor Guards.
+  suffix: Honor Guard
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m890_guard.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m890_guard.rsi
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        startingAttachable: RMCM5Bayonet
+        whitelist:
+          tags:
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        startingAttachable: RMCAttachmentMagneticHarness
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-stock:
+        startingAttachable: RMCAttachmentM890Stock
+        whitelist:
+          tags:
+          - RMCAttachmentM890Stock
+      rmc-aslot-underbarrel:
+        locked: true
+        startingAttachable: RMCAttachmentU1GrenadeLauncher
+        whitelist:
+          tags:
+          - RMCAttachmentU1GrenadeLauncher
