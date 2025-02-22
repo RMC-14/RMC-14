@@ -26,6 +26,13 @@
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
       rmc-aslot-stock:
+        startingAttachable: RMCAttachmentMagneticHarness
         whitelist:
           tags:
           - RMCAttachmentM890Stock
+      rmc-aslot-underbarrel:
+        locked: true
+        startingAttachable: RMCAttachmentU1GrenadeLauncher
+        whitelist:
+          tags:
+          - RMCAttachmentU1GrenadeLauncher
