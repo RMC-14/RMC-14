@@ -26,7 +26,7 @@
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
       rmc-aslot-stock:
-        startingAttachable: RMCAttachmentMagneticHarness
+        startingAttachable: RMCAttachmentM890Stock
         whitelist:
           tags:
           - RMCAttachmentM890Stock
