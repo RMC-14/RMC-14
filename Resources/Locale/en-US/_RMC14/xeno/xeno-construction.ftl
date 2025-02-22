@@ -72,5 +72,6 @@ rmc-xeno-construction-tunnel-examine = The pheromone scent reads: {$tunnelName}
 rmc-xeno-construction-tunnel-fill = You start collapsing the tunnel!
 rmc-xeno-construction-tunnel-fill-xeno-drop = The tunnel suddenly collapses, forcing you out!
 
-rmc-xeno-construction-vendor-tip-begin = We begin to lean against.
-rmc-xeno-construction-vendor-tip-success = We knock down!
+rmc-xeno-construction-vendor-tip-begin = We begin to lean against {$vendorName}.
+rmc-xeno-construction-vendor-tip-success = We knock {$vendorName} down!
+rmc-xeno-construction-vendor-tip-done = There's no reason to bother with that old piece of trash.
