@@ -127,6 +127,7 @@
   - type: ExpendableLight
     pickupWhileOn: false
     glowDuration: 375
+    fadeOutDuration: 30
     spentName: expendable-light-starshell-ash-empty-name
     spentDesc: expendable-light-starshell-ash-empty-desc
     iconStateSpent: starshell_ash-empty

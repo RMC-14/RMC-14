@@ -265,7 +265,7 @@
 - type: entity
   parent: RMCBaseBullet
   id: RMCStarShellBullet
-  name: Starshell Ssh
+  name: Starshell bullet
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -291,7 +291,7 @@
     toggleContents: true
   - type: PointLight
     enabled: true
-    color: "#ff4300"
+    color: "#FFCCCC"
     radius: 2.0
     energy: 7.0
   - type: IgniteOnProjectileHit
