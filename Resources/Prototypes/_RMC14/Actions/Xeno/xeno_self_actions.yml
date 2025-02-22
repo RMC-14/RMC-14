@@ -299,6 +299,6 @@
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: empower
+      state: rav_empower
     event: !type:XenoEmpowerActionEvent
   - type: ActionBlockIfResting
