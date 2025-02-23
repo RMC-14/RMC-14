@@ -59,9 +59,12 @@
   - type: CMArmor
     explosionArmor: 10
   - type: XenoEvolution
+    canEvolveWithoutGranter: true
     max: 200
     evolvesTo:
     - CMXenoLurker
+    evolvesToWithoutPoints:
+    - CMXenoQueen
   - type: XenoZoom
   - type: MeleeWeapon
     attackRate: 1.4
