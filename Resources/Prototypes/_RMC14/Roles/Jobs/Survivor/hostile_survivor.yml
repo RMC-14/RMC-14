@@ -45,7 +45,6 @@
 - type: startingGear
   id: RMCGearSurvivorHostile
   equipment:
-    neck: ClothingNeckCloakCLF
     jumpsuit: RMCJumpsuitFreelancer
     back: RMCSatchelCivilianFill
     shoes: RMCShoesBlack
