@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Coordinates;
@@ -30,6 +30,7 @@ public sealed class XenoLungeSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private readonly MobStateSystem _mob = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ThrownItemComponent> _thrownItemQuery;
@@ -89,6 +90,12 @@ public sealed class XenoLungeSystem : EntitySystem
 
     private void OnXenoLungeHit(Entity<XenoLungeComponent> xeno, ref ThrowDoHitEvent args)
     {
+        if (!_mob.IsAlive(xeno) || HasComp<StunnedComponent>(xeno))
+        {
+            xeno.Comp.Charge = null;
+            return;
+        }
+
         ApplyLungeHitEffects(xeno, args.Target);
     }
 
