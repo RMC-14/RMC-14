@@ -14,7 +14,65 @@
     delay: 0.25
 
 - type: entity
+  abstract: true
+  id: CMPlatformBaseBroken
+  name: destroyed platform
+  description: A square metal surface resting on four legs. It has been destroyed.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/platforms.rsi
+  - type: InteractionOutline
+  - type: Clickable
+
+- type: entity
+  abstract: true
   parent: CMPlatformBase
+  id: CMPlatformBaseDestructible
+  components:
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 150 # Excessive damage
+        behaviors:
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:ChangeConstructionNodeBehavior
+            node: platformBroken
+          - !type:DoActsBehavior
+            acts: ["Breakage"]
+  - type: ReceiverXenoClaws
+    maxHealth: 100
+    hitsToDestroy: 3
+  - type: Construction
+    graph: CMPlatformBaseDestructible
+    node: start
+
+- type: entity
+  parent: CMPlatformBaseBroken
+  id: CMPlatformBroken
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Physics
+  - type: Sprite
+    state: platform_broken
+  - type: Construction
+    graph: CMPlatformBaseDestructible
+    node: CMPlatformBroken
+
+- type: entity
+  parent: CMPlatformBaseDestructible
   id: CMPlatform
   name: platform
   description: A square metal surface resting on four legs.
@@ -74,7 +132,24 @@
   - type: Climbable
 
 - type: entity
-  parent: CMPlatformBase
+  parent: CMPlatformBaseBroken
+  id: CMPlatformBroken
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Physics
+  - type: Sprite
+    state: platform_broken
+  - type: Construction
+    graph: CMPlatformBaseDestructible
+    node: CMPlatformBroken
+  - type: Sprite
+    sprite: _RMC14/Structures/platforms.rsi
+
+- type: entity
+  parent: CMPlatformBaseDestructible
   id: RMCPlatformCornerSmall
   name: platform
   description: A square metal surface resting on four legs.
