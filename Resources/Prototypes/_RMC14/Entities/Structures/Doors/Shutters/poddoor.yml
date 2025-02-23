@@ -155,6 +155,8 @@
     color: "#451e5eb8"
   - type: TimedDespawn
     lifetime: 2700
+  - type: Corrodible
+    isCorrodible: false
 
 - type: entity
   parent: RMCPodDoorAlmayer
