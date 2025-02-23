@@ -31,6 +31,9 @@
         enum.DogtagVisuals.Taken:
           True: { state: "dogtag_taken" }
           False: { state: "dogtag" }
+  - type: Corrodible
+    isCorrodible: false
+
 
 - type: entity
   parent: BaseItem
