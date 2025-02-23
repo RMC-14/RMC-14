@@ -13,4 +13,7 @@
     enabled: false
     drawRate: 33
   - type: Visor
+    toggledSprite:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/huds.rsi
+      state: nvg_sight_right
   - type: NightVisionVisor

@@ -111,3 +111,12 @@
     role: CMRifleman
   - type: Sprite
     state: marine_spawn_delta
+
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleYou
+  name: You?
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: rifleman

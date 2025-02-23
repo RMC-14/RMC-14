@@ -32,6 +32,7 @@
         - MachineMask
         layer:
         - MidImpassable
+        - BulletImpassable
   - type: Destructible
     thresholds:
       - trigger:
@@ -52,6 +53,10 @@
   - type: ReceiverXenoClaws
     maxHealth: 600
     hitsToDestroy: 3
+  - type: XenoLeapDestroyOnPass
+    spawnPrototype: CMSheetMetal1
+    amount: 2
+  - type: RequireProjectileTarget
 
 - type: entity
   parent: RMCBaseWindowFrame
@@ -183,3 +188,5 @@
   - type: Construction
     graph: RMCWindowWood
     node: windowFrameWood
+  - type: XenoLeapDestroyOnPass
+    spawnPrototype: RMCPlankWood

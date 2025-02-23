@@ -8,8 +8,12 @@ rmc-intel-reports = Reports
 rmc-intel-folders = Folders
 rmc-intel-manuals = Manuals
 rmc-intel-clue-paper-scrap = {$intel} in {$area}.
-rmc-intel-clue-progress-report = A progress report in {$area}.
+rmc-intel-clue-progress-report = A {$intel} in {$area}.
 rmc-intel-clue-folder = A {$intel} in {$area}.
 rmc-intel-clue-technical-manual = {$intel} in {$area}.
 rmc-intel-clue-experimental-device = Retrieve {$intel} in {$area}.
 rmc-intel-not-intel-jumpsuit = You cannot wear this without wearing a marine intelligence officer uniform.
+rmc-intel-survivor-pickup = You have no use for the {$thing}.
+    Focus on getting out alive first.
+rmc-intel-survivor-read = You have no need to read the {$thing}.
+    Focus on getting out alive first.

@@ -113,7 +113,9 @@
           - RMCAttachmentU1GrenadeLauncher
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentVerticalGrip
-          #TODO RMC: add underbarrel flamer (and adv underbarrel flamer) and underbarrel extinguisher here when they are added
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
+          #TODO RMC: add adv underbarrel flamer here when it is added
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.8125, 0.03125

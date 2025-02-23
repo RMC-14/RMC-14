@@ -41,4 +41,7 @@ public sealed partial class XenoEnergyComponent : Component
 
     [DataField, AutoNetworkedField]
     public ProtoId<AlertPrototype> Alert = "XenoEnergyBase";
+
+    [DataField, AutoNetworkedField]
+    public int? GenerationCap;
 }

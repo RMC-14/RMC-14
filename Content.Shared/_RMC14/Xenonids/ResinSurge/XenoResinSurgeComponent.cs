@@ -41,4 +41,7 @@ public sealed partial class XenoResinSurgeComponent : Component
     // Prototype for resin to create
     [DataField, AutoNetworkedField]
     public EntProtoId StickyResinId = "XenoStickyResinWeak";
+
+    [DataField, AutoNetworkedField]
+    public int Range = 7;
 }

@@ -17,6 +17,9 @@ public sealed partial class CMVendorSection
     [DataField]
     public string? TakeAll;
 
+    [DataField]
+    public string? TakeOne;
+
     [DataField(required: true)]
     public List<CMVendorEntry> Entries = new();
 

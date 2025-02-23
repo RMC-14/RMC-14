@@ -1,9 +1,13 @@
+using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Xenonids.Dodge;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared.Actions;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
+using System;
 
 namespace Content.Shared._RMC14.Xenonids.Paralyzing;
 
@@ -14,16 +18,24 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
-    [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoParalyzingSlashComponent, XenoParalyzingSlashActionEvent>(OnXenoParalyzingSlashAction);
         SubscribeLocalEvent<XenoActiveParalyzingSlashComponent, MeleeHitEvent>(OnXenoParalyzingSlashHit);
+        SubscribeLocalEvent<XenoActiveParalyzingSlashComponent, ComponentShutdown>(OnXenoParalyzingSlashRemoved);
     }
 
     private void OnXenoParalyzingSlashAction(Entity<XenoParalyzingSlashComponent> xeno, ref XenoParalyzingSlashActionEvent args)
     {
+        if (args.Handled)
+            return;
+
+        if (!_rmcActions.TryUseAction(xeno, args.Action))
+            return;
+
         args.Handled = true;
         var active = EnsureComp<XenoActiveParalyzingSlashComponent>(xeno);
 
@@ -34,6 +46,20 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
         Dirty(xeno, active);
 
         _popup.PopupClient(Loc.GetString("cm-xeno-paralyzing-slash-activate"), xeno, xeno);
+        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        {
+            if (action.BaseEvent is XenoParalyzingSlashActionEvent)
+                _actions.SetToggled(actionId, true);
+        }
+    }
+
+    private void OnXenoParalyzingSlashRemoved(Entity<XenoActiveParalyzingSlashComponent> xeno, ref ComponentShutdown args)
+    {
+        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        {
+            if (action.BaseEvent is XenoParalyzingSlashActionEvent)
+                _actions.SetToggled(actionId, false);
+        }
     }
 
     private void OnXenoParalyzingSlashHit(Entity<XenoActiveParalyzingSlashComponent> xeno, ref MeleeHitEvent args)

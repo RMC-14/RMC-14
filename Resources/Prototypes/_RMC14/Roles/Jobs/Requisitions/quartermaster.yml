@@ -52,6 +52,7 @@
     - type: JobPrefix
       prefix: cm-job-prefix-quartermaster
     - type: ViewIntelObjectives
+    - type: CommandAccent
 
 - type: startingGear
   id: CMGearQuartermaster

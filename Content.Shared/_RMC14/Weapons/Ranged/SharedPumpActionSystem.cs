@@ -30,6 +30,9 @@ public abstract class SharedPumpActionSystem : EntitySystem
 
     protected virtual void OnAttemptShoot(Entity<PumpActionComponent> ent, ref AttemptShootEvent args)
     {
+        if (args.Cancelled)
+            return;
+
         if (!ent.Comp.Pumped)
             args.Cancelled = true;
     }

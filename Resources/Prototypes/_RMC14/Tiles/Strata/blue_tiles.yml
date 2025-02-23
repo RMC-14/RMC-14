@@ -1,0 +1,76 @@
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: RMCFloorStrataBlueBase
+  name: tiles-cm-default-blue
+
+- type: tile
+  parent: RMCFloorStrataBlueBase
+  id: RMCFloorStrataBlue
+  name: blue metal tile
+  sprite: /Textures/_RMC14/Tiles/strata/blue1.png
+
+- type: tile
+  parent: RMCFloorStrataBlue
+  id: RMCFloorStrataBlueTile
+  sprite: /Textures/_RMC14/Tiles/strata/blue2.png
+
+- type: tile
+  parent: RMCFloorStrataBlue
+  id: RMCFloorStrataBlue1
+  sprite: /Textures/_RMC14/Tiles/strata/blue_1.png
+
+- type: tile
+  parent: RMCFloorStrataBlue
+  id: RMCFloorStrataBlue2
+  sprite: /Textures/_RMC14/Tiles/strata/blue_2.png
+
+- type: tile
+  parent: RMCFloorStrataBlue
+  id: RMCFloorStrataBlue3
+  sprite: /Textures/_RMC14/Tiles/strata/blue_3.png
+
+- type: tile
+  parent: RMCFloorStrataBlue
+  id: RMCFloorStrataBlue4
+  sprite: /Textures/_RMC14/Tiles/strata/blue_4.png
+
+- type: tile
+  parent: RMCFloorStrataBlue
+  id: RMCFloorStrataBlue5
+  sprite: /Textures/_RMC14/Tiles/strata/blue_5.png
+
+- type: tile
+  parent: RMCFloorStrataBlue
+  id: RMCFloorStrataBlue6
+  sprite: /Textures/_RMC14/Tiles/strata/blue_6.png
+
+- type: tile
+  parent: RMCFloorStrataBlue
+  id: RMCFloorStrataBlue7
+  sprite: /Textures/_RMC14/Tiles/strata/blue_7.png
+
+- type: tile
+  parent: RMCFloorStrataBlue
+  id: RMCFloorStrataBlue8
+  sprite: /Textures/_RMC14/Tiles/strata/blue_8.png
+
+- type: tile
+  parent: RMCFloorStrataBlue
+  id: RMCFloorStrataBlueCorner1
+  sprite: /Textures/_RMC14/Tiles/strata/blue_corner_1.png
+
+- type: tile
+  parent: RMCFloorStrataBlue
+  id: RMCFloorStrataBlueCorner2
+  sprite: /Textures/_RMC14/Tiles/strata/blue_corner_2.png
+
+- type: tile
+  parent: RMCFloorStrataBlue
+  id: RMCFloorStrataBlueCorner3
+  sprite: /Textures/_RMC14/Tiles/strata/blue_corner_3.png
+
+- type: tile
+  parent: RMCFloorStrataBlue
+  id: RMCFloorStrataBlueCorner4
+  sprite: /Textures/_RMC14/Tiles/strata/blue_corner_4.png
