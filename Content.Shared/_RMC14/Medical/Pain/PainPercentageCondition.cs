@@ -6,7 +6,6 @@ namespace Content.Shared._RMC14.Medical.Pain;
 
 public sealed partial class PainPercentage : EntityEffectCondition
 {
-
     [DataField]
     public FixedPoint2 Max = FixedPoint2.MaxValue;
 

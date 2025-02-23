@@ -1,7 +1,9 @@
 using System.Linq;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
+using Content.Shared.EntityEffects;
 using Robust.Shared.Timing;
+using Robust.Shared.Random;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 
@@ -10,6 +12,8 @@ namespace Content.Shared._RMC14.Medical.Pain;
 public sealed partial class PainSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
@@ -132,5 +136,26 @@ public sealed partial class PainSystem : EntitySystem
         }
         comp.CurrentPain = newCurrentPain;
     }
-}
 
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var query = EntityQueryEnumerator<PainComponent>();
+        while (query.MoveNext(out var uid, out var pain))
+        {
+            if (_timing.CurTime < pain.NextEffectUpdateTime)
+                continue;
+            pain.NextEffectUpdateTime = _timing.CurTime + pain.EffectUpdateRate;
+
+            var args = new EntityEffectBaseArgs(uid, EntityManager);
+            foreach (var effect in pain.PainLevels)
+            {
+                if (!effect.ShouldApply(args, _random))
+                    continue;
+
+                effect.Effect(args);
+            }
+        }
+    }
+}

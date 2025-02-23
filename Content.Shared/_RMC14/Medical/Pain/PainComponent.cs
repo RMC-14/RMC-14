@@ -16,6 +16,21 @@ namespace Content.Shared._RMC14.Medical.Pain
         [ViewVariables]
         public FixedPoint2 CurrentPainPercentage = FixedPoint2.Zero;
 
+        [ViewVariables]
+        public int CurrentPainLevel = 0;
+
+        [DataField]
+        public TimeSpan PainLevelUpdateRate = TimeSpan.FromSeconds(2);
+
+        [ViewVariables]
+        public TimeSpan LastPainLevelUpdateTime = new(0);
+
+        [DataField]
+        public TimeSpan EffectUpdateRate = TimeSpan.FromSeconds(1);
+
+        [ViewVariables]
+        public TimeSpan NextEffectUpdateTime = new(0);
+
         [ViewVariables, Access(typeof(PainSystem))]
         public List<PainReductionModificator> PainReductionModificators = [];
 
