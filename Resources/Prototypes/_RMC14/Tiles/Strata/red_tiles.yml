@@ -1,0 +1,76 @@
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: RMCFloorStrataRedBase
+  name: tiles-cm-default-red
+
+- type: tile
+  parent: RMCFloorStrataRedBase
+  id: RMCFloorStrataRed
+  name: red metal tile
+  sprite: /Textures/_RMC14/Tiles/strata/red1.png
+
+- type: tile
+  parent: RMCFloorStrataRed
+  id: RMCFloorStrataRedTile
+  sprite: /Textures/_RMC14/Tiles/strata/red2.png
+
+- type: tile
+  parent: RMCFloorStrataRed
+  id: RMCFloorStrataRed1
+  sprite: /Textures/_RMC14/Tiles/strata/red_1.png
+
+- type: tile
+  parent: RMCFloorStrataRed
+  id: RMCFloorStrataRed2
+  sprite: /Textures/_RMC14/Tiles/strata/red_2.png
+
+- type: tile
+  parent: RMCFloorStrataRed
+  id: RMCFloorStrataRed3
+  sprite: /Textures/_RMC14/Tiles/strata/red_3.png
+
+- type: tile
+  parent: RMCFloorStrataRed
+  id: RMCFloorStrataRed4
+  sprite: /Textures/_RMC14/Tiles/strata/red_4.png
+
+- type: tile
+  parent: RMCFloorStrataRed
+  id: RMCFloorStrataRed5
+  sprite: /Textures/_RMC14/Tiles/strata/red_5.png
+
+- type: tile
+  parent: RMCFloorStrataRed
+  id: RMCFloorStrataRed6
+  sprite: /Textures/_RMC14/Tiles/strata/red_6.png
+
+- type: tile
+  parent: RMCFloorStrataRed
+  id: RMCFloorStrataRed7
+  sprite: /Textures/_RMC14/Tiles/strata/red_7.png
+
+- type: tile
+  parent: RMCFloorStrataRed
+  id: RMCFloorStrataRed8
+  sprite: /Textures/_RMC14/Tiles/strata/red_8.png
+
+- type: tile
+  parent: RMCFloorStrataRed
+  id: RMCFloorStrataRedCorner1
+  sprite: /Textures/_RMC14/Tiles/strata/red_corner_1.png
+
+- type: tile
+  parent: RMCFloorStrataRed
+  id: RMCFloorStrataRedCorner2
+  sprite: /Textures/_RMC14/Tiles/strata/red_corner_2.png
+
+- type: tile
+  parent: RMCFloorStrataRed
+  id: RMCFloorStrataRedCorner3
+  sprite: /Textures/_RMC14/Tiles/strata/red_corner_3.png
+
+- type: tile
+  parent: RMCFloorStrataRed
+  id: RMCFloorStrataRedCorner4
+  sprite: /Textures/_RMC14/Tiles/strata/red_corner_4.png

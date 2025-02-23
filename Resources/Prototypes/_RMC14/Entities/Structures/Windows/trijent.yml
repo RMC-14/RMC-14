@@ -68,6 +68,10 @@
   - type: Construction
     graph: RMCWindowChigusa
     node: windowChigusa
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameChigusa
+    sound:
+      collection: WindowShatter
 
 # Hangar
 
@@ -139,6 +143,10 @@
   - type: Construction
     graph: RMCWindowHangar
     node: windowHangar
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameHangar
+    sound:
+      collection: WindowShatter
 
 # Bunker
 
@@ -210,3 +218,7 @@
   - type: Construction
     graph: RMCWindowBunker
     node: windowBunker
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameBunker
+    sound:
+      collection: WindowShatter

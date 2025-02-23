@@ -321,11 +321,11 @@ cm-chatsan-replacement-laser = dot
 cm-chatsan-word-lazer = lazer
 cm-chatsan-replacement-lazer = dot
 
-# cm-chatsan-word-# flamer = # flamer
-# cm-chatsan-replacement-# flamer = fire spitter
+cm-chatsan-word-flamer = flamer
+cm-chatsan-replacement-flamer = fire spitter
 
-# cm-chatsan-word-# flamethrower = # flamethrower
-# cm-chatsan-replacement-# flamethrower =  fire spitter
+cm-chatsan-word-flamethrower = flamethrower
+cm-chatsan-replacement-flamethrower = fire spitter
 
 cm-chatsan-word-sadar = sadar
 cm-chatsan-replacement-sadar = tuber

@@ -98,7 +98,7 @@
 - type: entity
   parent: [ClothingEyesHudMedical, BaseToggleClothing]
   id: RMCGlassesMedicalHUDGlasses
-  name: medical HUD glasses
+  name: HealthMate HUD
   description: A heads-up display that scans the humanoids in view and provides accurate data about their health status.
   components:
   - type: Item
@@ -208,6 +208,10 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles.rsi
+      state: helmet
 
 - type: entity
   parent: RMCGogglesBallistic

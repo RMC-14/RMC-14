@@ -196,7 +196,7 @@
       - id: RMCPouchFirstResponder
       - id: RMCPouchFlareFilled
         name: Flare pouch (Full)
-      #- id: CMFuelTankStrapPouch
+      - id: RMCPouchFuelTank
       - id: RMCPouchGeneralLarge
       #- id: CMSlingPouch
       - id: RMCPouchMagazinePistolLarge

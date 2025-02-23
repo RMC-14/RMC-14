@@ -48,6 +48,7 @@
     anchored: true
   - type: Physics
     bodyType: Static
+    canCollide: false
   - type: Sprite
     sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_fuel
@@ -70,6 +71,7 @@
     anchored: true
   - type: Physics
     bodyType: Static
+    canCollide: false
   - type: Sprite
     sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_warhead1
@@ -86,12 +88,7 @@
   id: RMCOrbitalCannonWarheadExplosive
   name: HE orbital warhead
   components:
-  - type: Transform
-    anchored: true
-  - type: Physics
-    bodyType: Static
   - type: Sprite
-    sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_warhead_1
   - type: OrbitalCannonWarhead
     explosion: RMCOrbitalCannonExplosionExplosive
@@ -101,12 +98,7 @@
   id: RMCOrbitalCannonWarheadIncendiary
   name: incendiary orbital warhead
   components:
-  - type: Transform
-    anchored: true
-  - type: Physics
-    bodyType: Static
   - type: Sprite
-    sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_warhead_2
   - type: OrbitalCannonWarhead
     explosion: RMCOrbitalCannonExplosionIncendiary
@@ -116,12 +108,7 @@
   id: RMCOrbitalCannonWarheadCluster
   name: cluster orbital warhead
   components:
-  - type: Transform
-    anchored: true
-  - type: Physics
-    bodyType: Static
   - type: Sprite
-    sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_warhead_3
   - type: OrbitalCannonWarhead
     explosion: RMCOrbitalCannonExplosionCluster
@@ -139,7 +126,7 @@
   - type: RandomSpawner
     prototypes:
     - RMCOrbitalCannonWarheadExplosive
-#    - RMCOrbitalCannonWarheadCluster # TODO RMC14
+    - RMCOrbitalCannonWarheadCluster
     - RMCOrbitalCannonWarheadIncendiary
 
 - type: entity
@@ -198,7 +185,18 @@
   placement:
     mode: SnapgridCenter
   components:
-  - type: OrbitalCannonExplosion # TODO: RMC14
+  - type: OrbitalCannonExplosion
+    steps:
+    - type: RMCOBXenoTunnel
+      total: 6500
+      slope: 100
+      max: 350
+      delay: 1
+      times: 75
+      timesPer: 3
+      delayPer: 0.4
+      spread: 12
+      checkProtectionPer: true
   - type: WarpPoint
     location: 1 orbital bombardment
 
@@ -235,6 +233,8 @@
   - type: Transform
     anchored: true
     rot: 90
+  - type: Physics
+    bodyType: Static
   - type: Sprite
     sprite: _RMC14/Structures/objects.rsi
     state: ob_chair

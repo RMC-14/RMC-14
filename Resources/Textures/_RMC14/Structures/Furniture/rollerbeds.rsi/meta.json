@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0a8d59abad27ec6112ef59d7661ab2139e227d0a/icons/obj/structures/rollerbed.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/equipment/medical_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/equipment/medical_lefthand.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/obj/structures/rollerbed.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/equipment/medical_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/equipment/medical_lefthand.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -95,6 +95,38 @@
     },
     {
       "name": "stretcher-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "bigroller_up"
+    },
+    {
+      "name": "bigroller_down"
+    },
+    {
+      "name": "bigrollerblood_up"
+    },
+    {
+      "name": "bigrollerblood_down"
+    },
+    {
+      "name": "bigrollerhospitalsheet_up"
+    },
+    {
+      "name": "bigrollerhospitalsheet_down"
+    },
+    {
+      "name": "bigrollerhospitalsheet2_up"
+    },
+    {
+      "name": "bigrollerhospitalsheet2_down"
+    },
+    {
+      "name": "bigrollerempty3_down",
+      "directions": 4
+    },
+    {
+      "name": "bigrollerempty3_up",
       "directions": 4
     }
   ]

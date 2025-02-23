@@ -62,7 +62,8 @@
       - id: RMCPouchAutoinjector
         points: 15
         recommended: true
-      - id: RMCPouchMachete
+      - id: RMCPouchMacheteFilled
+        name: machete pouch (Full)
         points: 10
     - name: Utilities
       entries:
@@ -128,7 +129,7 @@
       entries:
       - id: RMCArmorXM4
       - id: RMCArmorM3LightVariants
-      - id: CMCoatOfficer
+      - id: RMCCoatService
     - name: Backpack
       choices: { CMBag: 1 }
       entries:
@@ -154,6 +155,7 @@
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterRevolver
+      - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
         recommended: true
     - name: Pouches
@@ -169,7 +171,7 @@
         name: first-aid pouch (pill packets)
       - id: RMCPouchFlareFilled
         name: flare pouch (Full)
-      #- id: TODO RMC14 Fuel Tank Strap Pouch
+      - id: RMCPouchFuelTank
       - id: RMCPouchGeneralLarge
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchMagazine

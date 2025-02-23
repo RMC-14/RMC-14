@@ -40,7 +40,7 @@ public sealed class XenoAidSystem : EntitySystem
     {
         var target = args.Target;
 
-        if(!HasComp<XenoComponent>(target))
+        if (!HasComp<XenoComponent>(target))
         {
             var msg = Loc.GetString("rmc-xeno-heal-sisters");
             _popup.PopupClient(msg, xeno, xeno, PopupType.SmallCaution);

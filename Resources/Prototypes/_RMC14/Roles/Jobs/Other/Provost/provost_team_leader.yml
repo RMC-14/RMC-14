@@ -95,6 +95,8 @@
   - type: GrenadeSpecWhitelist
   - type: ScoutWhitelist
   - type: SniperWhitelist
+  - type: AMRWhitelist
+  - type: PyroWhitelist
 
 - type: startingGear
   id: RMCGearProvostTeamLeader

@@ -44,6 +44,7 @@
         RMCSkillPolice: 2
     - type: JobPrefix
       prefix: cm-job-prefix-militarypolice
+    - type: CommandAccent
 
 - type: startingGear
   id: CMGearMilitaryPolice

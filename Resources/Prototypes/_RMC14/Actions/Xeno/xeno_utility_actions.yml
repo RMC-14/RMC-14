@@ -67,8 +67,8 @@
 - type: entity
   parent: ActionXenoBase
   id: ActionXenoRetrieve
-  name: Retrieve (180 plasma, 100 energy)
-  description: Pull a xenonid to you if they are still, with a 0.6 second doafter.
+  name: Retrieve (180 plasma, 100 fury)
+  description: Pulls a xenonid to you if they are still, with a 0.6 second doafter. You can't pull very big xenonids unless they are downed.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
@@ -213,4 +213,54 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: screech
     event: !type:XenoSacrificeHealActionEvent
+    range: 1.5
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoTailFountain
+  name: Tail Fountain
+  description: Extinguishes fire from a nearby ally or foe. Uses up your melee attack.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_tail_fountain
+    event: !type:XenoTailFountainActionEvent
     range: 2
+    useDelay: 10
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoTantrum
+  name: Tantrum (100 plasma, 75 fury)
+  description: Give an ally and yourself temporary armor for a few seconds, which lasts longer on you. Crushers and Ravagers get a speed boost instead.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: warden_heal
+    event: !type:XenoTantrumActionEvent
+    checkCanAccess: false
+    range: 8
+    useDelay: 7
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoFightOrFlight
+  name: Fight or Flight (300 plasma, 75 fury)
+  description: Remove ailments and stuns from all allies around you. The radius is longer if you have 75+ fury after paying the cost.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: screech
+    event: !type:XenoFightOrFlightActionEvent
+    useDelay: 45
+  - type: XenoActionEnergy
+    cost: 75
+  - type: XenoActionPlasma
+    cost: 300
+

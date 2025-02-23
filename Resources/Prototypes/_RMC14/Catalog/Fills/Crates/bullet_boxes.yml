@@ -19,7 +19,7 @@
 - type: entity
   parent: RMCCrateAmmo
   id: RMCCrateBoxBulletsSMG
-  name: smg ammo box crate (10x20mm AP) (x600 rounds)
+  name: smg ammo box crate (10x20mm) (x600 rounds)
   components:
   - type: StorageFill
     contents:

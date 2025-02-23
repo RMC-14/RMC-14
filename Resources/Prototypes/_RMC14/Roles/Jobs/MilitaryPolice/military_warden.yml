@@ -51,6 +51,7 @@
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-militarywarden
+    - type: CommandAccent
 
 - type: startingGear
   id: CMGearMilitaryWarden
