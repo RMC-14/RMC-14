@@ -172,8 +172,6 @@
     mode: NoSprite
   - type: Airtight
   - type: Occluder
-  - type: MinimapColor
-    color: "#451e5eb8"
   - type: WallMount
     arc: 360
   - type: Appearance
