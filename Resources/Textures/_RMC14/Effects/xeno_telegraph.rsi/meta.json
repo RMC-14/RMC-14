@@ -9,6 +9,9 @@
   "states": [
     {
       "name": "xeno_telegraph_base"
+    },
+    {
+      "name": "xeno_telegraph_base_small"
     }
   ]
 }

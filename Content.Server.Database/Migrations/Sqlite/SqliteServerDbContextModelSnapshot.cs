@@ -2144,7 +2144,7 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasPrincipalKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK_rmc_linked_accounts_logs_player__player_id1");
+                        .HasConstraintName("FK_rmc_linked_accounts_logs_player_player_id1");
 
                     b.Navigation("Discord");
 

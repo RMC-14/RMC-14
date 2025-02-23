@@ -3,6 +3,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Random;
+using Content.Shared._RMC14.Weapons.Ranged.Flamer;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
@@ -85,6 +86,9 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] private   readonly SharedCameraRecoilSystem _recoil = default!;
     [Dependency] private   readonly IConfigurationManager _config = default!;
     [Dependency] private   readonly INetConfigurationManager _netConfig = default!;
+
+    // RMC14
+    [Dependency] private readonly SharedRMCFlamerSystem _flamer = default!;
 
     private const float InteractNextFire = 0.3f;
     private const double SafetyNextFire = 0.5;
@@ -690,6 +694,14 @@ public abstract partial class SharedGunSystem : EntitySystem
 
                     Audio.PlayPredicted(gun.SoundGunshotModified, gunUid, user);
                     Recoil(user, mapDirection, gun.CameraRecoilScalarModified);
+                    break;
+                case RMCFlamerAmmoProviderComponent flamer:
+                    if (ent != null)
+                        _flamer.ShootFlamer((ent.Value, flamer), (gunUid, gun), user, fromCoordinates, toCoordinates);
+                    break;
+                case RMCSprayAmmoProviderComponent spray:
+                    if (ent != null)
+                        _flamer.ShootSpray((ent.Value, spray), (gunUid, gun), user, fromCoordinates, toCoordinates);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

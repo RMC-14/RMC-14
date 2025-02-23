@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
@@ -50,8 +50,8 @@
     explosionArmor: 20
   - type: XenoEvolution
     max: 500
-#    evolvesTo:
-#    - CMXenoRavager
+    evolvesTo:
+    - CMXenoRavager
   - type: XenoLeap
     plasmaCost: 20
     delay: 0

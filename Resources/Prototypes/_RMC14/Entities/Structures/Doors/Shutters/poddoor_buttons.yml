@@ -21,3 +21,15 @@
   - type: WallMount
     arc: 360
   - type: RMCDoorButton
+
+- type: entity
+  parent: RMCPodDoorButton
+  id: RMCPodDoorButtonBigRed
+  name: button
+  description: A remote control-switch for a door.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/door_button_br.rsi
+    layers:
+    - state: doorctrl
+      map: [ "enum.RMCPodDoorButtonLayers.Animation" ]

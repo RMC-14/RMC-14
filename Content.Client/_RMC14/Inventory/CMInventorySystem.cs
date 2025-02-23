@@ -6,6 +6,17 @@ namespace Content.Client._RMC14.Inventory;
 
 public sealed class CMInventorySystem : SharedCMInventorySystem
 {
+    public override void Initialize()
+    {
+        base.Initialize();
+        SubscribeLocalEvent<CMItemSlotsComponent, AppearanceChangeEvent>(OnItemSlotsAppearanceChange);
+    }
+
+    private void OnItemSlotsAppearanceChange(Entity<CMItemSlotsComponent> ent, ref AppearanceChangeEvent args)
+    {
+        ContentsUpdated(ent);
+    }
+
     protected override void ContentsUpdated(Entity<CMItemSlotsComponent> ent)
     {
         base.ContentsUpdated(ent);

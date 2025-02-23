@@ -68,6 +68,7 @@
     - type: JobPrefix
       prefix: cm-job-prefix-squad-leader
     - type: ViewIntelObjectives
+    - type: CommandAccent
 
 - type: startingGear
   id: CMGearSquadLeader

@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/turf/walls/icons/turf/walls/hybrisa_spaceport_walls.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "prison_frame0"
+    },
+    {
+      "name": "prison_frame1"
+    },
+    {
+      "name": "prison_frame2"
+    },
+    {
+      "name": "prison_frame3"
+    },
+    {
+      "name": "prison_frame4"
+    },
+    {
+      "name": "prison_frame5"
+    },
+    {
+      "name": "prison_frame6"
+    },
+    {
+      "name": "prison_frame7"
+    },
+    {
+      "name": "prison_frame8"
+    },
+    {
+      "name": "prison_frame9"
+    },
+    {
+      "name": "prison_frame10"
+    },
+    {
+      "name": "prison_frame11"
+    },
+    {
+      "name": "prison_frame12"
+    },
+    {
+      "name": "prison_frame13"
+    },
+    {
+      "name": "prison_frame14"
+    },
+    {
+      "name": "prison_frame15"
+    }
+  ]
+}
