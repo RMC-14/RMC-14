@@ -14,6 +14,7 @@ using Content.Shared._RMC14.Xenonids.Sweep;
 using Robust.Shared.Audio.Systems;
 using Content.Shared._RMC14.Shields;
 using Content.Shared.Interaction;
+using Content.Shared.Stunnable;
 
 namespace Content.Shared._RMC14.Xenonids.Blitz;
 
@@ -84,7 +85,7 @@ public sealed class XenoBlitzSystem : EntitySystem
 
         SetBlitzDelays(xeno);
 
-        if (!_mob.IsAlive(xeno))
+        if (!_mob.IsAlive(xeno) || HasComp<StunnedComponent>(xeno))
             return;
 
         var ev = new XenoLeapAttemptEvent();
