@@ -146,7 +146,7 @@
     color: "#451e5eb8"
 
 - type: entity
-  parent: CMBaseStructure
+  parent: RMCPodDoorIndestructible
   id: RMCPodDoorHybrisaIndestructibleUltra
   components:
   - type: Sprite
@@ -155,26 +155,8 @@
     color: "#451e5eb8"
   - type: TimedDespawn
     lifetime: 2700
-  - type: Physics
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.49,-0.49,0.49,0.49" # don't want this colliding with walls or they won't close
-        density: 100
-        mask:
-        - FullTileMask
-        layer:
-        - AirlockLayer
-  - type: IconSmooth
-    key: walls
-    mode: NoSprite
-  - type: Airtight
-  - type: Occluder
-  - type: WallMount
-    arc: 360
-  - type: Appearance
+  - type: Corrodible
+    isCorrodible: false
 
 - type: entity
   parent: RMCPodDoorAlmayer
