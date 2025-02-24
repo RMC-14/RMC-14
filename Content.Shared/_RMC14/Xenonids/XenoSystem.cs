@@ -34,6 +34,7 @@ using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Radio;
 using Content.Shared.Standing;
+using Content.Shared.StatusEffect;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Tools.Systems;
@@ -62,6 +63,7 @@ public sealed class XenoSystem : EntitySystem
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly WeldableSystem _weldable = default!;
@@ -82,6 +84,7 @@ public sealed class XenoSystem : EntitySystem
     private float _xenoDamageDealtMultiplier;
     private float _xenoDamageReceivedMultiplier;
     private float _xenoSpeedMultiplier;
+    private TimeSpan _xenoSpawnMuteDuration;
 
     public override void Initialize()
     {
@@ -117,6 +120,7 @@ public sealed class XenoSystem : EntitySystem
         Subs.CVar(_config, RMCCVars.CMXenoDamageDealtMultiplier, v => _xenoDamageDealtMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMXenoDamageReceivedMultiplier, v => _xenoDamageReceivedMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMXenoSpeedMultiplier, UpdateXenoSpeedMultiplier, true);
+        Subs.CVar(_config, RMCCVars.RMCXenoSpawnInitialMuteDurationSeconds, v => _xenoSpawnMuteDuration = TimeSpan.FromSeconds(v), true);
 
         UpdatesAfter.Add(typeof(SharedXenoPheromonesSystem));
     }
@@ -137,6 +141,11 @@ public sealed class XenoSystem : EntitySystem
 
         if (!MathHelper.CloseTo(_xenoSpeedMultiplier, 1))
             _movementSpeed.RefreshMovementSpeedModifiers(xeno);
+
+        if (xeno.Comp.MuteOnSpawn)
+        {
+            _status.TryAddStatusEffect(xeno, "Muted", _xenoSpawnMuteDuration, true, "Muted");
+        }
     }
 
     private void OnXenoGetAdditionalAccess(Entity<XenoComponent> xeno, ref GetAccessTagsEvent args)
