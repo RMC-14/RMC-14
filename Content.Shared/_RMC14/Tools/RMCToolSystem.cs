@@ -110,7 +110,7 @@ public sealed class RMCToolSystem : EntitySystem
 }
 
 /// <summary>
-///     Raised on an entity when they use a tool to possibly edit the DoAfter duration of the action.
+///     Raised on a tool when it's being used to possibly alter the delay of it's action.
 /// </summary>
 [ByRefEvent]
 public record struct RMCToolUseEvent(EntityUid User, TimeSpan Delay, bool Handled = false);
