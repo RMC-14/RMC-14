@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Tools;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.DoAfter;
@@ -167,6 +168,13 @@ public abstract partial class SharedToolSystem : EntitySystem
 
         if (!CanStartToolUse(tool, user, target, fuel, toolQualitiesNeeded, toolComponent))
             return false;
+
+        // RMC14
+        var ev = new RMCToolUseEvent(user, delay);
+
+        RaiseLocalEvent(tool, ref ev);
+        if(ev.Handled)
+            delay = ev.Delay;
 
         var toolEvent = new ToolDoAfterEvent(fuel, doAfterEv, GetNetEntity(target));
         var doAfterArgs = new DoAfterArgs(EntityManager, user, delay / toolComponent.SpeedModifier, toolEvent, tool, target: target, used: tool)

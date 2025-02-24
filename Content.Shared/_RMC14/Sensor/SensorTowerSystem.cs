@@ -208,7 +208,6 @@ public sealed class SensorTowerSystem : EntitySystem
             _ => throw new ArgumentOutOfRangeException(nameof(state), state, null)
         };
 
-        delay *= _skills.GetSkillDelayMultiplier(user, tower.Comp.Skill);
         _tool.UseTool(
             used,
             user,

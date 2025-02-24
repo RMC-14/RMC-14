@@ -649,7 +649,6 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             return;
         }
 
-        var delay = ent.Comp.RepairDelay * _skills.GetSkillDelayMultiplier(user, ent.Comp.Skill);
         var quality = state switch
         {
             RMCFusionReactorState.Wrench => ent.Comp.WrenchQuality,
@@ -662,7 +661,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
             used,
             user,
             ent,
-            (float) delay.TotalSeconds,
+            (float)ent.Comp.RepairDelay.TotalSeconds,
             quality,
             new RMCFusionReactorRepairDoAfterEvent(state),
             ent.Comp.WeldingCost,
