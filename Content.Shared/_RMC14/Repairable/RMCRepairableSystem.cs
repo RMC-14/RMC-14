@@ -11,7 +11,6 @@ using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
-using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Tools.Components;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Weapons.Ranged;
@@ -99,10 +98,8 @@ public sealed class RMCRepairableSystem : EntitySystem
         if (!UseFuel(args.Used, args.User, repairable.Comp.FuelUsed, true))
             return;
 
-        var delay = repairable.Comp.Delay * _skills.GetSkillDelayMultiplier(args.User, repairable.Comp.Skill);
-
         var ev = new RMCRepairableDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, repairable, used: args.Used)
+        var doAfter = new DoAfterArgs(EntityManager, user, repairable.Comp.Delay, ev, repairable, used: args.Used)
         {
             BreakOnMove = true,
             BlockDuplicate = true,
