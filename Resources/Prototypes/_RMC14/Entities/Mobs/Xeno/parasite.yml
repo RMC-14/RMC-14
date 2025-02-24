@@ -31,6 +31,7 @@
     countedInSlots: false
     unlockAt: 0
     emoteSounds: Larva
+    muteOnSpawn: true
   - type: XenoPlasma
     maxPlasma: 10
     plasmaRegenOnWeeds: 0.1
