@@ -8,6 +8,8 @@
   - type: GhostRole
     name: cm-job-name-xeno-parasite
     prob: 0.25
+    raffle:
+      settings: timeRequirement
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Parasite/parasite.rsi
   - type: MobState
