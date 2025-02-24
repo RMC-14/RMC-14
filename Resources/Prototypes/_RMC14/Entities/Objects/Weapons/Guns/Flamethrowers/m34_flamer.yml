@@ -33,6 +33,7 @@
     - SemiAuto
     soundGunshot:
       collection: RMCFlamerShoot
+  - type: ShootUseDelay
   - type: ItemSlots
     slots:
       gun_magazine:
