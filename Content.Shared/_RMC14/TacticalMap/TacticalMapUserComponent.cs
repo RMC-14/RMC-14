@@ -1,4 +1,4 @@
-﻿using Robust.Shared.Audio;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -34,6 +34,9 @@ public sealed partial class TacticalMapUserComponent : Component
 
     [DataField, AutoNetworkedField]
     public Dictionary<int, TacticalMapBlip> XenoBlips = new();
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<int, TacticalMapBlip> XenoStructureBlips = new();
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan LastAnnounceAt;
