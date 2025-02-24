@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Tools;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
@@ -48,7 +49,7 @@ public sealed class RMCRepairableSystem : EntitySystem
 
         SubscribeLocalEvent<ReagentTankComponent, InteractUsingEvent>(OnWelderInteractUsing);
     }
-
+//
     private void OnRepairableInteractUsing(Entity<RMCRepairableComponent> repairable, ref InteractUsingEvent args)
     {
         if (args.Handled)
@@ -105,6 +106,11 @@ public sealed class RMCRepairableSystem : EntitySystem
             BlockDuplicate = true,
             DuplicateCondition = DuplicateConditions.SameEvent
         };
+
+        var toolEvent = new RMCToolUseEvent(user, doAfter.Delay);
+        RaiseLocalEvent(args.Used, ref toolEvent);
+        if (toolEvent.Handled)
+            doAfter.Delay = toolEvent.Delay;
 
         if (_doAfter.TryStartDoAfter(doAfter))
         {
