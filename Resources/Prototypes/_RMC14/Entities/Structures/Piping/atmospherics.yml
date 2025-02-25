@@ -119,3 +119,73 @@
     sound:
       path: /Audio/Ambience/Objects/gas_vent.ogg
   - type: Weldable
+
+- type: entity
+  parent: BaseMachine
+  id: CMSpaceHeater
+  name: space heater
+  description: It's an electric space heater. It heats the room through radiation with electricity.
+  components:
+  - type: InteractionOutline
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Dynamic
+  - type: Sprite
+    sprite: _RMC14/Structures/Piping/Atmospherics/space_heater.rsi
+    noRot: true
+    state: sheater0
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 190
+        mask:
+        - TableMask
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600
+        behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+      - trigger:
+          !type:DamageTrigger
+          damage: 300
+        behaviors:
+        - !type:PlaySoundBehavior
+          sound:
+            collection: MetalBreak
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            CMSheetMetal1:
+              min: 1
+              max: 3
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+
+- type: entity
+  parent: CMSpaceHeater
+  id: CMSpaceHeaterRadiator
+  name: radiator
+  description: It's a radiator. It heats the room through convection with hot water.
+  components:
+  - type: Sprite
+    state: radiator
+  - type: Transform
+    anchored: true
+
+- type: entity
+  parent: CMSpaceHeaterRadiator
+  id: CMSpaceHeaterRadiatorRed
+  name: radiator
+  description: It's a radiator. It heats the room through convection with hot water. This one has a red handle.
+  components:
+  - type: Sprite
+    state: radiator-r
