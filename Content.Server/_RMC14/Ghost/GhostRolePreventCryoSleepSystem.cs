@@ -14,8 +14,7 @@ public sealed partial class GhostRolePreventCryoSleepSystem : EntitySystem
 
     public void OnStartup(Entity<GhostRolePreventCryoSleepComponent> ent, ref ComponentStartup args)
     {
-        if (!RemComp<CanEnterCryostorageComponent>(ent))
-            RemComp<GhostRolePreventCryoSleepComponent>(ent);
+        RemComp<CanEnterCryostorageComponent>(ent);
     }
 
     public void OnTakeover(Entity<GhostRolePreventCryoSleepComponent> ent, ref MindAddedMessage args)
