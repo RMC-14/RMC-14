@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Xenonids.Hook;
 using Content.Shared._RMC14.Xenonids.Projectile;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Projectiles;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee;
@@ -25,7 +26,7 @@ public sealed class XenoTailSeizeSystem : EntitySystem
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly ActionBlocker _actionBlocker = default!;
+    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
 
     public override void Initialize()
     {
