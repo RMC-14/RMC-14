@@ -117947,6 +117947,13 @@ entities:
     - type: Transform
       pos: 179.5,41.5
       parent: 1
+- proto: RMCMapInsertShivaSouthCaves
+  entities:
+  - uid: 17038
+    components:
+    - type: Transform
+      pos: 3.5,110.5
+      parent: 1
 - proto: RMCMaskRebreather
   entities:
   - uid: 9621
