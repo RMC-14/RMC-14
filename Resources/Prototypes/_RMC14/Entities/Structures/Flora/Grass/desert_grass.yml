@@ -1,0 +1,160 @@
+- type: entity
+  parent: RMCBasePlant
+  id: RMCGrassDesert
+  name: desert grass
+  suffix: Light
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Flora/Grass/desert_lightgrass.rsi
+    state: lightgrass_1
+
+- type: entity
+  parent: RMCGrassDesert
+  id: RMCGrassDesert1
+  components:
+  - type: Sprite
+    state: lightgrass_2
+
+- type: entity
+  parent: RMCGrassDesert
+  id: RMCGrassDesert2
+  components:
+  - type: Sprite
+    state: lightgrass_3
+
+- type: entity
+  parent: RMCGrassDesert
+  id: RMCGrassDesert3
+  components:
+  - type: Sprite
+    state: lightgrass_4
+
+- type: entity
+  parent: RMCGrassDesert
+  id: RMCGrassDesert4
+  components:
+  - type: Sprite
+    state: lightgrass_5
+
+- type: entity
+  parent: RMCGrassDesert
+  id: RMCGrassDesert5
+  components:
+  - type: Sprite
+    state: lightgrass_6
+
+- type: entity
+  parent: RMCGrassDesert
+  id: RMCGrassDesert6
+  components:
+  - type: Sprite
+    state: lightgrass_7
+
+- type: entity
+  parent: RMCGrassDesert
+  id: RMCGrassDesert7
+  components:
+  - type: Sprite
+    state: lightgrass_8
+
+- type: entity
+  parent: RMCGrassDesert
+  id: RMCGrassDesert8
+  components:
+  - type: Sprite
+    state: lightgrass_9
+
+- type: entity
+  parent: RMCGrassDesert
+  id: RMCGrassDesert9
+  components:
+  - type: Sprite
+    state: lightgrass_10
+
+- type: entity
+  parent: RMCGrassDesert
+  id: RMCGrassDesert10
+  components:
+  - type: Sprite
+    state: lightgrass_11
+
+- type: entity
+  parent: RMCGrassDesert
+  id: RMCGrassDesert11
+  components:
+  - type: Sprite
+    state: lightgrass_12
+
+# heavy grass
+
+- type: entity
+  parent: RMCGrassDesert
+  id: RMCGrassDesertHeavy
+  suffix: Heavy
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Flora/Grass/desert_heavygrass.rsi
+    state: heavygrass_1
+
+- type: entity
+  parent: RMCGrassDesertHeavy
+  id: RMCGrassDesertHeavy1
+  components:
+  - type: Sprite
+    state: heavygrass_2
+
+- type: entity
+  parent: RMCGrassDesertHeavy
+  id: RMCGrassDesertHeavy2
+  components:
+  - type: Sprite
+    state: heavygrass_3
+
+- type: entity
+  parent: RMCGrassDesertHeavy
+  id: RMCGrassDesertHeavy3
+  components:
+  - type: Sprite
+    state: heavygrass_4
+
+- type: entity
+  parent: RMCGrassDesertHeavy
+  id: RMCGrassDesertHeavy4
+  components:
+  - type: Sprite
+    state: heavygrass_5
+
+- type: entity
+  parent: RMCGrassDesertHeavy
+  id: RMCGrassDesertHeavy5
+  components:
+  - type: Sprite
+    state: heavygrass_6
+
+- type: entity
+  parent: RMCGrassDesertHeavy
+  id: RMCGrassDesertHeavy6
+  components:
+  - type: Sprite
+    state: heavygrass_7
+
+- type: entity
+  parent: RMCGrassDesertHeavy
+  id: RMCGrassDesertHeavy7
+  components:
+  - type: Sprite
+    state: heavygrass_8
+
+- type: entity
+  parent: RMCGrassDesertHeavy
+  id: RMCGrassDesertHeavy8
+  components:
+  - type: Sprite
+    state: heavygrass_9
+
+- type: entity
+  parent: RMCGrassDesertHeavy
+  id: RMCGrassDesertHeavy9
+  components:
+  - type: Sprite
+    state: heavygrass_10

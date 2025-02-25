@@ -287,16 +287,14 @@
   - type: MobGibbedByExplosionType
   - type: TileFirePatter
   - type: CanBeFirePatted
-  - type: FirePatter
-    blacklist:
-      components:
-      - Marine
   - type: BlockIdExamine
   - type: NoStunOnExit
   - type: RMCSpeciesSlowdownModifier
     slowMultiplier: 0.87
     superSlowMultiplier: 0.75
     durationMultiplier: 0.666
+  - type: RMCCanBeFultoned
+  - type: CMArmor
 
 - type: entity
   abstract: true
@@ -381,6 +379,15 @@
       components:
       - XenoFruit
   - type: ParalyzeOnPullAttempt
+  - type: FirePatter
+  - type: RMCHandEmotes
+  - type: Buckle
+    buckleDelay: 0
+    clickUnbuckle: false
+  - type: BuckleWhitelist
+    whitelist:
+      tags:
+      - CMRollerBed
 
 - type: entity
   abstract: true

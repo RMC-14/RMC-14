@@ -350,7 +350,40 @@
     - id: CMCrowbar
     - id: CMWirecutter
     - id: CMMultitool
-    
+
+- type: entity
+  parent: RMCToolWebbingSmall
+  id: RMCToolWebbingSmallERT
+  suffix: Filled
+  components:
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,13,1 # 7 slots
+  - type: Webbing
+    components:
+    - type: Storage
+      maxItemSize: Small
+      grid:
+      - 0,0,13,1 # 7 slots
+    - type: FixedItemSizeStorage
+  - type: FixedItemSizeStorage
+
+- type: entity
+  parent: RMCToolWebbingSmallERT
+  id: RMCToolWebbingSmallERTFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMWrench
+    - id: CMWelder
+    - id: CMCrowbar
+    - id: CMWirecutter
+    - id: RMCCableCoil30
+    - id: CMMultitool
+
 - type: entity
   parent: CMWebbingBase
   id: CMWebbingKnives
@@ -395,7 +428,7 @@
   id: CMWebbingKnivesFilled
   suffix: Filled
   components:
-  - type: StorageFill    
+  - type: StorageFill
     contents:
       - id: CMM11Knife
         amount: 5

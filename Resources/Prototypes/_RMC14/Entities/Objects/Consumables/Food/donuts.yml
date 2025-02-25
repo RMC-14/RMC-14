@@ -98,6 +98,12 @@
   - type: FlavorProfile
     flavors:
       - bread
+  - type: Extractable
+    grindableSolutionName: food
+  - type: InjectableSolution
+    solution: food
+  - type: DrawableSolution
+    solution: food
 
 - type: entity
   parent: RMCFoodDonut
@@ -124,6 +130,6 @@
     flavors:
       - bread
       - sweet
-  
+
 
 

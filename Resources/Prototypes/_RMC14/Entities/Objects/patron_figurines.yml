@@ -400,17 +400,6 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronMazyTheFortressTusji
-  name: Mazy 'The Fortress' Tusji figurine
-  description: "This figurine is covered in chew marks and acid burns, yet remains recognizable and unbroken."
-  components:
-  - type: Sprite
-    state: mazy_the_fortress_tusji
-  - type: PatronFigurine
-    id: 05443bd1-e84b-4782-9f03-c2b4af96b109
-
-- type: entity
-  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronAstorDebb
   name: Astor Debb figurine
   description: "Full-time demolitionist, she moves with a purpose, wielding her ~Magic Missile~"
@@ -419,6 +408,10 @@
     state: astor_debb
   - type: PatronFigurine
     id: 2dc63fb1-f830-4b0a-9eea-c8007fd09e6d
+  - type: PointLight
+    enabled: true
+    radius: 1.1
+    color: green
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -821,7 +814,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronKaziPriestess
   name: Kazi Priestess figurine
-  description: "\"Wait, you wanted a supply drop sent to those cords? Shit..\""
+  description: "\"An orbital strike a day, keeps the enemy at bay.\""
   components:
   - type: Sprite
     state: kazi_priestess
@@ -1104,3 +1097,61 @@
     state: duke_big_boss_morris
   - type: PatronFigurine
     id: acc78eb3-9639-4317-a89c-e921b5a999cb
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKamielLancoaster
+  name: Kamiel Lancoaster figurine
+  description: "Set a record for most sub 5 minute deaths during boot camp training simulations."
+  components:
+  - type: Sprite
+    state: kamiel_lancoaster
+  - type: PatronFigurine
+    id: 8f0f506a-6d32-47ac-9ab1-15d3ca2a68ae
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronEricRasczak
+  name: Eric Rasczak figurine
+  description: "\"Has anyone seen my synth-graft?\""
+  components:
+  - type: Sprite
+    state: eric_rasczak
+  - type: PatronFigurine
+    id: 759da7f1-be4b-41a5-98ee-8f42953a5635
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNanSnowBunnyMazu
+  name: Nan 'Snow Bunny' Mazu figurine
+  description: "The Way of Sunlight
+
+
+    The fifth of the Felinid Seven Ways of Trounce. This Way emphasizes choosing terrain that is best fit for you in combat, in order to minimize external factors, and then overcoming the enemy with superior strength and abilities. It gives weight to self-knowledge and perfecting oneself on a particular direction, assuming that a good warrior can always make any direction her preferred one, and by concentrating on a single one she can become the best. Its ritual weapon is a short naginata-like spear, although nowadays adepts of this Way are generally associated with large warships and armored forces."
+  components:
+  - type: Sprite
+    state: nan_snow_bunny_mazu
+  - type: PatronFigurine
+    id: 05443bd1-e84b-4782-9f03-c2b4af96b109
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronZverNemesis
+  name: Zver' Nemesis figurine
+  description: "\"If you had not broken Marine Law, I would not have been sent to arrest you.\""
+  components:
+  - type: Sprite
+    state: zver_nemesis
+  - type: PatronFigurine
+    id: 63503a1b-5dd9-405e-92e6-e6fb9608c37e
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronHazzyLicious
+  name: Hazzy Licious figurine
+  description: "It has many bugs crawling over it."
+  components:
+  - type: Sprite
+    state: hazzy_licious
+  - type: PatronFigurine
+    id: aabf2d58-6ec9-455a-83e1-91f4e1a71d17

@@ -90,6 +90,8 @@
     evasion: 20
   - type: XenoInhands
     prefix: drone
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.1
 
 - type: entity
   parent: CMXenoDroneBase

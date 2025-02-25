@@ -1,0 +1,30 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: RMCFloorHybrisaWoodBase
+  name: tiles-cm-wood
+  footstepSounds:
+    collection: FootstepWood
+  barestepSounds:
+    collection: BarestepWood
+  itemDrop: CMTileItemWood
+
+- type: tile
+  parent: RMCFloorHybrisaWoodBase
+  id: RMCFloorHybrisaWood
+  sprite: /Textures/_RMC14/Tiles/hybrisa/darkerwood.png
+
+- type: tile
+  parent: RMCFloorHybrisaWoodBase
+  id: RMCFloorHybrisaWoodGrey
+  sprite: /Textures/_RMC14/Tiles/hybrisa/greywood.png
+
+- type: tile
+  parent: RMCFloorHybrisaWoodBase
+  id: RMCFloorHybrisaWoodRed
+  sprite: /Textures/_RMC14/Tiles/hybrisa/redwood.png
+
+- type: tile
+  parent: RMCFloorHybrisaWoodBase
+  id: RMCFloorHybrisaWoodBlack
+  sprite: /Textures/_RMC14/Tiles/hybrisa/blackwood.png

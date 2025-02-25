@@ -81,10 +81,14 @@
         requireInputValidation: false
       enum.TacticalMapUserUi.Key:
         type: TacticalMapUserBui
+      enum.ViewIntelObjectivesUI.Key:
+        type: ViewIntelObjectivesBui
+        requireInputValidation: false
   - type: TacticalMapUser
     actionId: RMCActionOpenTacticalMapGhost
     marines: true
     xenos: true
+  - type: ViewIntelObjectives
 
 # proto for player ghosts specifically
 - type: entity

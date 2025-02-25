@@ -67,6 +67,8 @@
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-squad-leader
+    - type: ViewIntelObjectives
+    - type: CommandAccent
 
 - type: startingGear
   id: CMGearSquadLeader
@@ -96,10 +98,7 @@
   - type: SpawnPoint
     job_id: CMSquadLeader
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: squad_leader
+    state: leader_spawn
 
 - type: entity
   parent: CMSpawnPointSquadLeader
@@ -109,6 +108,8 @@
   - type: SquadSpawner
     squad: SquadAlpha
     role: CMSquadLeader
+  - type: Sprite
+    state: leader_spawn_alpha
 
 - type: entity
   parent: CMSpawnPointSquadLeader
@@ -118,6 +119,8 @@
   - type: SquadSpawner
     squad: SquadBravo
     role: CMSquadLeader
+  - type: Sprite
+    state: leader_spawn_bravo
 
 - type: entity
   parent: CMSpawnPointSquadLeader
@@ -127,6 +130,8 @@
   - type: SquadSpawner
     squad: SquadCharlie
     role: CMSquadLeader
+  - type: Sprite
+    state: leader_spawn_charlie
 
 - type: entity
   parent: CMSpawnPointSquadLeader
@@ -136,4 +141,6 @@
   - type: SquadSpawner
     squad: SquadDelta
     role: CMSquadLeader
+  - type: Sprite
+    state: leader_spawn_delta
 

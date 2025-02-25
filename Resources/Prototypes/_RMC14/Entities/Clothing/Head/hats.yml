@@ -294,7 +294,7 @@
 - type: entity
   parent: RMCHeadCapFlippable
   id: CMHeadCapOfficer
-  name: officer cap
+  name: UNMC officer cap
   description: A hat usually worn by officers in the UNMC. While it provides no protection, some officers wear it in the field to make themselves more recognisable.
   components:
   - type: Sprite
@@ -428,7 +428,7 @@
       SquadDelta: RMCHeadBeretSquadDelta
       SquadEcho: RMCHeadBeretSquadEcho
       SquadFoxtrot: RMCHeadBeretSquadFoxtrot
-      # TODO SquadIntel: RMCHeadBeretSquadIntel
+      SquadIntel: RMCHeadBeretSquadIntel
 
 - type: entity
   parent: CMHeadBeret

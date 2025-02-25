@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
@@ -221,6 +221,11 @@
   - type: CommendationGiver
   - type: XenoInhands
     prefix: queen
+  - type: XenoOmitNumber
+  - type: RMCFireArmorDebuffModifier
+    debuffModifier: 1.4
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 1.4
 
 - type: entity
   id: XenoLeaderPheromoneRelay

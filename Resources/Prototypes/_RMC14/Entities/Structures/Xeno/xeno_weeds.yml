@@ -1,4 +1,4 @@
-﻿- type: entity # TODO RMC14 sound
+- type: entity # TODO RMC14 sound
   id: XenoWeeds
   name: weeds
   description: Weird black weeds...
@@ -110,7 +110,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
-    drawdepth: DeadMobs
+    drawdepth: FloorTiles
     layers:
     - state: weed0
     - state: constructionnode
@@ -211,6 +211,7 @@
         acts: [ "Destruction" ]
   - type: XenoConstructionPlasmaCost
     plasma: 75
+
 - type: entity
   id: XenoWeedsWall
   name: weeds

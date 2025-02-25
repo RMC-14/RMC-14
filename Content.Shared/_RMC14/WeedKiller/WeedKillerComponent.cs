@@ -25,7 +25,7 @@ public sealed partial class WeedKillerComponent : Component
     public SoundSpecifier? Sound = new SoundPathSpecifier("/Audio/_RMC14/Effects/rocketpod_fire.ogg");
 
     [DataField, AutoNetworkedField]
-    public string DropshipName;
+    public EntityUid? Dropship;
 
     [DataField, AutoNetworkedField]
     public HashSet<EntProtoId> AreaPrototypes = new();
