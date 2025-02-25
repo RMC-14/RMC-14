@@ -35,11 +35,7 @@ public sealed class ServerTechSystem : EntitySystem
 
     private void OnTechCryoMarines(TechCryoMarinesEvent ev)
     {
-        if (_cryoMarinesPurchased)
-            SpawnCryo(FireteamLeaderProto, 1);
-        else
-            SpawnCryo(SquadLeaderProto, 1);
-
+        SpawnCryo(_cryoMarinesPurchased ? FireteamLeaderProto : SquadLeaderProto, 1);
         SpawnCryo(CombatTechProto, 1);
         SpawnCryo(HospitalCorpsmanProto, 1);
         SpawnCryo(RiflemanProto, 2);
