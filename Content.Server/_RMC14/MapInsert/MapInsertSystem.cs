@@ -12,6 +12,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.MapInsert;
 
@@ -52,13 +53,26 @@ public sealed class MapInsertSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (!_random.Prob(ent.Comp.Probability))
+        if (ent.Comp.Variations.Count <= 0)
         {
             QueueDel(ent);
             return;
         }
 
-        if (ent.Comp.Spawn is not { } spawn)
+        var randomProbability = _random.NextFloat();
+        var cumulativeProbability = 0f;
+        ResPath spawn = default;
+        foreach (var variation in ent.Comp.Variations)
+        {
+            cumulativeProbability += variation.Probability;
+            if (cumulativeProbability >= randomProbability)
+            {
+                spawn = variation.Spawn;
+                break;
+            }
+        }
+
+        if (spawn == default)
             return;
 
         if (_map == null)
