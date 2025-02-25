@@ -2,6 +2,7 @@
 using Content.Server.Decals;
 using Content.Server.Spawners.EntitySystems;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Doors;
 using Content.Shared._RMC14.Map;
 using Content.Shared.Decals;
 using Content.Shared.GameTicking;
@@ -41,7 +42,7 @@ public sealed class MapInsertSystem : EntitySystem
     {
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
-        SubscribeLocalEvent<MapInsertComponent, MapInitEvent>(OnMapInsertMapInit, before: [typeof(ConditionalSpawnerSystem), typeof(AreaSystem)]);
+        // SubscribeLocalEvent<MapInsertComponent, MapInitEvent>(OnMapInsertMapInit, before: [typeof(ConditionalSpawnerSystem), typeof(AreaSystem)]);
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -50,7 +51,12 @@ public sealed class MapInsertSystem : EntitySystem
         _index = 0;
     }
 
-    private void OnMapInsertMapInit(Entity<MapInsertComponent> ent, ref MapInitEvent args)
+    // public void OnMapInsertMapInit(Entity<MapInsertComponent> ent, ref MapInitEvent args)
+    // {
+    //     ProcessMapInsert(ent);
+    // }
+
+    public void ProcessMapInsert(Entity<MapInsertComponent> ent)
     {
         if (_net.IsClient)
             return;
