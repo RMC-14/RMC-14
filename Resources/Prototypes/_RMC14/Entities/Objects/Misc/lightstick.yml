@@ -33,6 +33,13 @@
 
 - type: entity
   parent: RMCLightStick
+  id: RMCLightStickRedSmallAlt
+  components:
+  - type: Sprite
+    state: lightstick_red1
+
+- type: entity
+  parent: RMCLightStick
   id: RMCLightStickBlueSmall
   name: blue lightstick
   components:
@@ -40,3 +47,10 @@
     state: lightstick_blue_variant1
   - type: PointLight
     color: "#2D2DE3"
+
+-  type: entity
+   parent: RMCLightStickBlueSmall
+   id: RMCLightStickBlueSmallAlt
+   components:
+   - type: Sprite
+     state: lightstick_blue1
