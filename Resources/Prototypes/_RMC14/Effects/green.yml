@@ -15,6 +15,15 @@
     tags:
     - HideContextMenu
 
+- type: entity
+  parent: RMCEffectXenoTelegraphGreen
+  id: RMCEffectXenoTelegraphInvisible
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    layers:
+      - state: xeno_telegraph_base
+        visible: false
 
 - type: entity
   parent: RMCEffectXenoTelegraphGreen
