@@ -88,6 +88,9 @@
       Dead: 0
   - type: Thirst
     baseDecayRate: 0.01666666666
+  - type: SlowOnDamage # nullify from BaseMobSpecies
+    speedModifierThresholds:
+      0: 1
   - type: Pain # TODO change to normal from testing
     painLevels:
     - !type:TryChangePainLevelTo
@@ -131,6 +134,12 @@
       conditions:
       - !type:PainPercentage
         min: 85
+    - !type:MovespeedModifier
+      walkSpeedModifier: 0.79
+      sprintSpeedModifier: 0.67
+      conditions:
+      - !type:PainLevel
+        level: 1
     - !type:PopupMessage
       type: Local
       messages: [ "rmc-pain-mild-inner" ]
@@ -138,6 +147,12 @@
       conditions:
       - !type:PainLevel
         level: 1
+    - !type:MovespeedModifier
+      walkSpeedModifier: 0.71
+      sprintSpeedModifier: 0.67
+      conditions:
+      - !type:PainLevel
+        level: 2
     - !type:PopupMessage
       type: Local
       messages: [ "rmc-pain-discomforting-inner" ]
@@ -145,6 +160,12 @@
       conditions:
       - !type:PainLevel
         level: 2
+    - !type:MovespeedModifier
+      walkSpeedModifier: 0.57
+      sprintSpeedModifier: 0.42
+      conditions:
+      - !type:PainLevel
+        level: 3
     - !type:PopupMessage
       type: Local
       messages: [ "rmc-pain-moderate-inner" ]
@@ -152,6 +173,12 @@
       conditions:
       - !type:PainLevel
         level: 3
+    - !type:MovespeedModifier
+      walkSpeedModifier: 0.5
+      sprintSpeedModifier: 0.35
+      conditions:
+      - !type:PainLevel
+        level: 4
     - !type:PopupMessage
       type: Local
       messages: [ "rmc-pain-distressing-inner" ]
@@ -159,11 +186,19 @@
       conditions:
       - !type:PainLevel
         level: 4
-    ##- !type:Emote
-    ##  emote: PainGrimace
-    ##  conditions:
-    ##  - !type:PainLevel
-    ##    level: 4
+    - !type:Emote
+      emote: PainGrimace
+      showInChat: true
+      probability: 0.033
+      conditions:
+      - !type:PainLevel
+        level: 4
+    - !type:MovespeedModifier
+      walkSpeedModifier: 0.45
+      sprintSpeedModifier: 0.31
+      conditions:
+      - !type:PainLevel
+        level: 5
     - !type:PopupMessage
       type: Local
       messages: [ "rmc-pain-severe-inner" ]
@@ -171,11 +206,19 @@
       conditions:
       - !type:PainLevel
         level: 5
-    ##- !type:Emote
-    ##  emote: TroubleEyeOpen
-    ##  conditions:
-    ##  - !type:PainLevel
-    ##    level: 5
+    - !type:Emote
+      emote: TroubleEyeOpen
+      showInChat: true
+      probability: 0.033
+      conditions:
+      - !type:PainLevel
+        level: 5
+    - !type:MovespeedModifier
+      walkSpeedModifier: 0.45
+      sprintSpeedModifier: 0.31
+      conditions:
+      - !type:PainLevel
+        level: 6
     - !type:PopupMessage
       type: Local
       messages: [ "rmc-pain-horrible-inner" ]
@@ -183,11 +226,13 @@
       conditions:
       - !type:PainLevel
         level: 6
-    ##- !type:Emote
-    ##  emote: TroubleStanding
-    ##  conditions:
-    ##  - !type:PainLevel
-    ##    level: 6
+    - !type:Emote
+      emote: TroubleStanding
+      showInChat: true
+      probability: 0.033
+      conditions:
+      - !type:PainLevel
+        level: 6
   - type: Body
     prototype: Human
     requiredLegs: 2
