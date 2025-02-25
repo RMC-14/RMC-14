@@ -83,6 +83,7 @@ public sealed partial class PainSystem : EntitySystem
         if (pain.LastPainLevelUpdateTime + pain.EffectUpdateRate > _timing.CurTime)
             return;
 
+        pain.LastPainLevelUpdateTime = _timing.CurTime;
         pain.CurrentPainLevel += level.CompareTo(pain.CurrentPainLevel);
     }
     public void AddPainReductionModificator(EntityUid uid, PainReductionModificator mod, PainComponent? pain = null)

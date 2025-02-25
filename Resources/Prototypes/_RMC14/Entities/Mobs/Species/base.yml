@@ -92,91 +92,97 @@
     painLevels:
     - !type:TryChangePainLevelTo
       level: 0
-    #  conditions:
-    #  - !type:PainPercentage
-    #    min: 0
-    #    max: 20
-    #- !type:TryChangePainLevelTo
-    #  level: 1
-    #  conditions:
-    # - !type:PainPercentage
-    #    min: 20
-    #    max: 30
-    #- !type:TryChangePainLevelTo
-    #  level: 2
-    #  conditions:
-    #  - !type:PainPercentage
-    #    min: 30
-    #    max: 40
-    #- !type:TryChangePainLevelTo
-    #  level: 3
-    #  conditions:
-    #  - !type:PainPercentage
-    #    min: 40
-    #    max: 60
-    #- !type:TryChangePainLevelTo
-    #  level: 4
-    #  conditions:
-    #  - !type:PainPercentage
-    #    min: 60
-    #    max: 75
-    #- !type:TryChangePainLevelTo
-    #  level: 5
-    #  conditions:
-    #  - !type:PainPercentage
-    #    min: 75
-    #    max: 85
-    #- !type:TryChangePainLevelTo
-    #  level: 6
-    #  conditions:
-    #  - !type:PainPercentage
-    #    min: 85
-    #- !type:PopupMessage
-    #  type: Local
-    # messages: [ "rmc-pain-mild-inner" ]
-    #  conditions:
-    #  - !type:PainLevel
-    #    level: 1
-    #- !type:PopupMessage
-    #  type: Local
-    #  messages: [ "rmc-pain-discomforting-inner" ]
-    #  conditions:
-    #  - !type:PainLevel
-    #    level: 2
-    #- !type:PopupMessage
-    #  type: Local
-    #  messages: [ "rmc-pain-moderate-inner" ]
-    #  conditions:
-    #  - !type:PainLevel
-    #    level: 3
-    #- !type:PopupMessage
-    #  type: Local
-    #  messages: [ "rmc-pain-distressing-inner" ]
-    #  conditions:
-    #  - !type:PainLevel
-    #    level: 4
+      conditions:
+      - !type:PainPercentage
+        min: 0
+        max: 20
+    - !type:TryChangePainLevelTo
+      level: 1
+      conditions:
+      - !type:PainPercentage
+        min: 20
+        max: 30
+    - !type:TryChangePainLevelTo
+      level: 2
+      conditions:
+      - !type:PainPercentage
+        min: 30
+        max: 40
+    - !type:TryChangePainLevelTo
+      level: 3
+      conditions:
+      - !type:PainPercentage
+        min: 40
+        max: 60
+    - !type:TryChangePainLevelTo
+      level: 4
+      conditions:
+      - !type:PainPercentage
+        min: 60
+        max: 75
+    - !type:TryChangePainLevelTo
+      level: 5
+      conditions:
+      - !type:PainPercentage
+        min: 75
+        max: 85
+    - !type:TryChangePainLevelTo
+      level: 6
+      conditions:
+      - !type:PainPercentage
+        min: 85
+    - !type:PopupMessage
+      type: Local
+      messages: [ "rmc-pain-mild-inner" ]
+      probability: 0.1
+      conditions:
+      - !type:PainLevel
+        level: 1
+    - !type:PopupMessage
+      type: Local
+      messages: [ "rmc-pain-discomforting-inner" ]
+      probability: 0.1
+      conditions:
+      - !type:PainLevel
+        level: 2
+    - !type:PopupMessage
+      type: Local
+      messages: [ "rmc-pain-moderate-inner" ]
+      probability: 0.1
+      conditions:
+      - !type:PainLevel
+        level: 3
+    - !type:PopupMessage
+      type: Local
+      messages: [ "rmc-pain-distressing-inner" ]
+      probability: 0.1
+      conditions:
+      - !type:PainLevel
+        level: 4
     ##- !type:Emote
     ##  emote: PainGrimace
     ##  conditions:
     ##  - !type:PainLevel
     ##    level: 4
-    #- !type:PopupMessage
-    #  type: Local
-    #  messages: [ "rmc-pain-severe-inner" ]
-    #  conditions:
-    #  - !type:PainLevel
-    #    level: 5
+    - !type:PopupMessage
+      type: Local
+      messages: [ "rmc-pain-severe-inner" ]
+      probability: 0.1
+      conditions:
+      - !type:PainLevel
+        level: 5
     ##- !type:Emote
     ##  emote: TroubleEyeOpen
     ##  conditions:
     ##  - !type:PainLevel
     ##    level: 5
-    #- !type:PopupMessage
-    #  type: Local
-    #  messages: [ "rmc-pain-horrible-inner" ]
-    #  conditions:
-    #  - !type:PainLevel
-    #    level: 6
+    - !type:PopupMessage
+      type: Local
+      messages: [ "rmc-pain-horrible-inner" ]
+      probability: 0.1
+      conditions:
+      - !type:PainLevel
+        level: 6
     ##- !type:Emote
     ##  emote: TroubleStanding
     ##  conditions:
