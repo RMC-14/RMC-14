@@ -75,6 +75,16 @@ public sealed partial class PainSystem : EntitySystem
         Dirty(uid, comp);
     }
 
+    public void TryChangePainLevelTo(EntityUid uid, int level, PainComponent? pain = null)
+    {
+        if (!Resolve(uid, ref pain))
+            return;
+
+        if (pain.LastPainLevelUpdateTime + pain.EffectUpdateRate > _timing.CurTime)
+            return;
+
+        pain.CurrentPainLevel += level.CompareTo(pain.CurrentPainLevel);
+    }
     public void AddPainReductionModificator(EntityUid uid, PainReductionModificator mod, PainComponent? pain = null)
     {
         if (!Resolve(uid, ref pain))

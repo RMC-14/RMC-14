@@ -18,7 +18,6 @@ namespace Content.Shared._RMC14.Medical.Pain
 
         [ViewVariables]
         public int CurrentPainLevel = 0;
-
         [DataField]
         public TimeSpan PainLevelUpdateRate = TimeSpan.FromSeconds(2);
 
