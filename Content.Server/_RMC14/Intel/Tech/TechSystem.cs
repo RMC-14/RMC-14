@@ -40,9 +40,9 @@ public sealed class ServerTechSystem : EntitySystem
         else
             SpawnCryo(SquadLeaderProto, 1);
 
-        SpawnCryo(CombatTechProto, 2);
-        SpawnCryo(HospitalCorpsmanProto, 2);
-        SpawnCryo(RiflemanProto, 5);
+        SpawnCryo(CombatTechProto, 1);
+        SpawnCryo(HospitalCorpsmanProto, 1);
+        SpawnCryo(RiflemanProto, 2);
 
         _cryoMarinesPurchased = true;
     }
