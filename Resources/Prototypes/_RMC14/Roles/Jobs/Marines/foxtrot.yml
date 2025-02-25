@@ -1,0 +1,176 @@
+# combat technician
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidFoxtrotCombatTech
+  name: foxtrot ghost role combat technician
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCFoxtrotCombatTech
+
+- type: randomHumanoidSettings
+  parent: RMCFoxtrotBase
+  id: RMCFoxtrotCombatTech
+  components:
+  - type: GhostRole
+    name: cm-job-name-combat-tech
+    description: cm-job-description-combat-tech
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    job: CMCombatTech
+
+# fireteam leader
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidFoxtrotFireteamLeader
+  name: foxtrot ghost role fireteam leader
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCFoxtrotFireteamLeader
+
+- type: randomHumanoidSettings
+  parent: RMCFoxtrotBase
+  id: RMCFoxtrotFireteamLeader
+  components:
+  - type: GhostRole
+    name: cm-job-name-fireteam-leader
+    description: cm-job-description-fireteam-leader
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    job: CMFireteamLeader
+
+# hospital corpsman
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidFoxtrotHospitalCorpsman
+  name: foxtrot ghost role hospital corpsman
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCFoxtrotHospitalCorpsman
+
+- type: randomHumanoidSettings
+  parent: RMCFoxtrotBase
+  id: RMCFoxtrotHospitalCorpsman
+  components:
+  - type: GhostRole
+    name: cm-job-name-hospital-corpsman
+    description: cm-job-description-hospital-corpsman
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    job: CMHospitalCorpsman
+
+# rifleman
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidFoxtrotRifleman
+  name: foxtrot ghost role rifleman
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCFoxtrotRifleman
+
+- type: randomHumanoidSettings
+  parent: RMCFoxtrotBase
+  id: RMCFoxtrotRifleman
+  components:
+  - type: GhostRole
+    name: cm-job-name-rifleman
+    description: cm-job-description-rifleman
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    job: CMRifleman
+
+# smart gun operator
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidFoxtrotSmartGunOperator
+  name: foxtrot ghost role smart gun operator
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCFoxtrotSmartGunOperator
+
+- type: randomHumanoidSettings
+  parent: RMCFoxtrotBase
+  id: RMCFoxtrotSmartGunOperator
+  components:
+  - type: GhostRole
+    name: cm-job-name-smart-gun-operator
+    description: cm-job-description-smart-gun-operator
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    job: CMSmartGunOperator
+
+# squad leader
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidFoxtrotSquadLeader
+  name: foxtrot ghost role squad leader
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCFoxtrotSquadLeader
+
+- type: randomHumanoidSettings
+  parent: RMCFoxtrotBase
+  id: RMCFoxtrotSquadLeader
+  components:
+  - type: GhostRole
+    name: cm-job-name-squad-leader
+    description: cm-job-description-squad-leader
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    job: CMSquadLeader
+
+# weapons specialist
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidFoxtrotWeaponsSpecialist
+  name: foxtrot ghost role weapons specialist
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCFoxtrotWeaponsSpecialist
+
+- type: randomHumanoidSettings
+  parent: RMCFoxtrotBase
+  id: RMCFoxtrotWeaponsSpecialist
+  components:
+  - type: GhostRole
+    name: cm-job-name-weapons-specialist
+    description: cm-job-description-weapons-specialist
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    job: CMWeaponsSpecialist
+
+# base
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCFoxtrotBase
+  components:
+  - type: GhostRolePreventCryoSleep
+  - type: GhostRoleApplySpecial
+    squad: SquadFoxtrot
