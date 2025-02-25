@@ -1037,9 +1037,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         //Process map inserts
         var mapInsertQuery = EntityQueryEnumerator<MapInsertComponent>();
-        while (mapInsertQuery.MoveNext(out var uid, out var spawner))
+        while (mapInsertQuery.MoveNext(out var uid, out var mapInsert))
         {
-            _mapInsert.ProcessMapInsert((uid, spawner));
+            _mapInsert.ProcessMapInsert((uid, mapInsert));
         }
 
         _mapManager.SetMapPaused(mapId, false);

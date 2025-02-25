@@ -41,8 +41,6 @@ public sealed class MapInsertSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
-
-        // SubscribeLocalEvent<MapInsertComponent, MapInitEvent>(OnMapInsertMapInit, before: [typeof(ConditionalSpawnerSystem), typeof(AreaSystem)]);
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -50,11 +48,6 @@ public sealed class MapInsertSystem : EntitySystem
         _map = null;
         _index = 0;
     }
-
-    // public void OnMapInsertMapInit(Entity<MapInsertComponent> ent, ref MapInitEvent args)
-    // {
-    //     ProcessMapInsert(ent);
-    // }
 
     public void ProcessMapInsert(Entity<MapInsertComponent> ent)
     {
