@@ -1,5 +1,17 @@
 ﻿- type: entity
   parent: BaseItem
+  id: RMCHelmetGarbBase
+  abstract: true
+  components:
+  - type: Sprite
+  - type: Item
+    size: Tiny
+  - type: HelmetAccessory
+
+# NVG
+
+- type: entity
+  parent: RMCHelmetGarbBase
   id: RMCHelmetGarbNightVision
   name: old M2 night vision goggles
   description: This pair has been gutted of all electronics and therefore not working. But hey, they make you feel tacticool, and that's all that matters, right?
@@ -10,8 +22,141 @@
   - type: Item
     sprite: _RMC14/Objects/Clothing/HelmetGarb/nv_goggles.rsi
     state: icon
-    size: Tiny
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/nv_goggles.rsi
+      state: helmet
+
+# Netting
+
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbNetting
+  name: combat netting
+  description: Probably combat netting for a helmet. Probably just an extra hairnet that got ordered for the phantom Almayer cooking staff. Probably useless.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting.rsi
+    state: icon
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbNetting
+  id: RMCHelmetGarbNettingUrban
+  name: urban combat netting
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_urban.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_urban.rsi
+    state: icon
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_urban.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbNetting
+  id: RMCHelmetGarbNettingDesert
+  name: desert combat netting
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_desert.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_desert.rsi
+    state: icon
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_desert.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbNetting
+  id: RMCHelmetGarbNettingJungle
+  name: jungle combat netting
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_jungle.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_jungle.rsi
+    state: icon
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_jungle.rsi
+      state: helmet
+
+# Rain Cover
+
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbRainCover
+  name: raincover
+  description: The standard M10 combat helmet is already water-resistant at depths of up to 10 meters. This makes the top potentially water-proof. At least it's something.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover.rsi
+    state: icon
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbRainCover
+  id: RMCHelmetGarbRainCoverUrban
+  name: urban raincover
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover_urban.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover_urban.rsi
+    state: icon
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover_urban.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbRainCover
+  id: RMCHelmetGarbRainCoverDesert
+  name: desert raincover
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover_desert.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover_desert.rsi
+    state: icon
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover_desert.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbRainCover
+  id: RMCHelmetGarbRainCoverJungle
+  name: jungle raincover
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover_jungle.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover_jungle.rsi
+    state: icon
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover_jungle.rsi
       state: helmet
