@@ -340,6 +340,31 @@
     grid:
     - 0,0,5,1 # 3 slots
   - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/urban.rsi
+
+- type: entity
+  parent: CMArmorM2MP
+  id: RMCArmorM3General
+  name: M3 pattern general officer armor
+  description: A well-crafted suit of M3 Pattern Armor with a gold shine. It looks very expensive, but shockingly fairly easy to carry and wear.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/ceremonial.rsi
+  - type: CMArmor
+    armor: 30
+    bio: 20
+    explosionArmor: 15
+  - type: SmartGunArmor
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,5,1 # 3 slots
+  - type: ItemCamouflage
     camouflageVariations: { }
 
 - type: entity

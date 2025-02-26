@@ -45,6 +45,7 @@ rmc-xeno-evolution-cant-devolve-damaged = We are too weak to deevolve, we must r
 rmc-xeno-evolution-cant-evolve-recent-queen-death-minutes = We must wait about {$minutes} minutes and {$seconds} seconds for the hive to recover from the previous Queen's death.
 rmc-xeno-evolution-cant-evolve-recent-queen-death-seconds = We must wait about {$seconds} seconds for the hive to recover from the previous Queen's death.
 rmc-xeno-evolution-cant-evolve-caste-cooldown = We cannot evolve into this caste again yet! ({$minutes} minutes and {$seconds} seconds remaining)
+rmc-xeno-evolution-failed-early-weeds = The hive hasn't developed enough yet for you to evolve off weeds!
 rmc-xeno-evolution-failed-bad-location = We can't evolve here.
 rmc-xeno-evolution-start-self = We begin to twist and contort.
 rmc-xeno-evolution-start-others = {$xeno} begins to twist and contort.
@@ -309,3 +310,11 @@ rmc-xeno-tantrum-end = We feel ourselves calm down.
 
 # Fight or Flight
 rmc-xeno-fof-effect = Every single inch in our body moves on its own to fight!
+
+# Ravager Empower
+rmc-xeno-ravager-shield-end = We feel our shield decay!
+rmc-xeno-empower-start-self = We start empowering ourself!
+rmc-xeno-empower-start-others = {CAPITALIZE(THE($user))} starts empowering!
+rmc-xeno-ravager-empower = We feel a rush of power from the surrounding enemies!
+rmc-xeno-ravager-empower-fizzle = There were no enemies around us!
+rmc-xeno-ravager-super-empower-fade = Our glow fades away, the power leaving our form!

@@ -24,7 +24,7 @@
       entries:
       - id: RMCKitRifleM4SPR
       - id: RMCKitCM54C
-    #- id: CMM240PyrotechnicianSupportKit
+      - id: RMCKitPyroMini
     #- id: CMM2CHeavyMachineGun
     #- id: CMM56DHeavyMachineGun
     #- id: CMM79GrenadeLauncher
@@ -173,15 +173,15 @@
       - id: RMCMagazinePistolSU6
         points: 6
     - name: Special Ammunition
-      entries: [ ]
-    #- id: CMM240IncineratorTankNapthal
-    #  points: 3
+      entries:
+      - id: RMCTankFlamer
+        points: 3
     #- id: CMM240IncineratorTankB-Gel
     #  points: 3
     - name: Restricted Firearms
       entries:
-    #- id: CMM240IncineratorUnit
-    #  points: 18
+      - id: RMCCaseFlamer
+        points: 18
       - id: RMCGunCasePistolMK80
         points: 8
       - id: RMCGunCasePistolSmart
@@ -260,7 +260,7 @@
         recommended: true
       - id: RMCPouchFlareFilled
         name: Flare pouch (Full)
-      #- id: CMFuelTankStrapPouch
+      - id: RMCPouchFuelTank
       - id: RMCPouchGeneralLarge
         recommended: true
       #- id: CMSlingPouch
@@ -357,3 +357,24 @@
     - id: RMCPouchConstructionFillLowGrade
     - id: RMCPouchElectronicsFill
 #    - id: RMCGogglesWelding # TODO RMC14 welding goggles
+
+- type: entity
+  parent: RMCKitBase
+  id: RMCKitPyroMini
+  name: m34 pyrotechnician support kit
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,11,1
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+  - type: StorageFill
+    contents:
+    - id: RMCBackpackFlamer
+    - id: RMCWeaponFlamer
+    - id: RMCTankFlamer # TODO RMC14 +1 b gel, -1 regular
+      amount: 3 # TODO RMC14 projectile nozzle
+    - id: CMFireExtinguisherPortable

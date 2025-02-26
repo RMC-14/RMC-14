@@ -53,6 +53,17 @@
     graph: RMCBed
     node: bedPsych
 
+- type: entity
+  parent: CMBed
+  id: RMCBedDingy
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/bed.rsi
+    state: dingy_bed
+  - type: Construction
+    graph: RMCBed
+    node: bedDingy
+
 # Bedroll
 
 - type: entity

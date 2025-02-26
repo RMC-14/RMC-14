@@ -22,6 +22,9 @@ public sealed class PumpActionSystem : SharedPumpActionSystem
 
     protected override void OnAttemptShoot(Entity<PumpActionComponent> ent, ref AttemptShootEvent args)
     {
+        if (args.Cancelled)
+            return;
+
         base.OnAttemptShoot(ent, ref args);
 
         if (!ent.Comp.Pumped)

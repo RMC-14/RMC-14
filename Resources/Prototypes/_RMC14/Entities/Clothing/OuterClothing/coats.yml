@@ -352,6 +352,9 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/coat_formal.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/coat_formal.rsi
+  - type: CMArmor
+    armor: 10
+    bio: 10
 
 - type: entity
   parent: RMCBaseJacket
@@ -363,6 +366,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/officer.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/officer.rsi
+  - type: CMArmor
+    armor: 10
 
 - type: entity
   parent: CMCoatOfficer

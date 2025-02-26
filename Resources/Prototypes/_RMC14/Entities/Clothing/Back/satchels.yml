@@ -298,11 +298,13 @@
     solution: tank
   - type: RMCSolutionTransferWhitelist
     popup: rmc-solution-transfer-whitelist-failed-not-welding-tank
-    whitelist:
+    sourceWhitelist:
       components:
       - Welder
+    targetWhitelist:
       tags:
       - RMCTankFuel
+  - type: RMCFlamerBackpack
 
 - type: entity
   parent: RMCSatchelWelder

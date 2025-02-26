@@ -1,0 +1,58 @@
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: RMCFloorHybrisaBeigeBase
+  name: tiles-cm-default-beige
+
+- type: tile
+  parent: RMCFloorHybrisaBeigeBase
+  id: RMCFloorHybrisaBeige
+  name: beige metal tile
+  sprite: /Textures/_RMC14/Tiles/hybrisa/tilebeige.png
+
+- type: tile
+  parent: RMCFloorHybrisaBeige
+  id: RMCFloorHybrisaBeigeCheck
+  sprite: /Textures/_RMC14/Tiles/hybrisa/tilebeigecheck.png
+
+- type: tile
+  parent: RMCFloorHybrisaBeige
+  id: RMCFloorHybrisaBeigeCheckAlt
+  sprite: /Textures/_RMC14/Tiles/hybrisa/tilebeigecheckalt.png
+
+- type: tile
+  parent: RMCFloorHybrisaBeige
+  id: RMCFloorHybrisaBeigeLight
+  sprite: /Textures/_RMC14/Tiles/hybrisa/tilelightbeige.png
+
+- type: tile
+  parent: RMCFloorHybrisaBeige
+  id: RMCFloorHybrisaBeigeBig
+  sprite: /Textures/_RMC14/Tiles/hybrisa/beige_bigtile.png
+
+- type: tile
+  parent: RMCFloorHybrisaBeige
+  id: RMCFloorHybrisaBeigeBigLight
+  sprite: /Textures/_RMC14/Tiles/hybrisa/lightbeige_bigtile.png
+
+- type: tile
+  parent: RMCFloorHybrisaBeige
+  id: RMCFloorHybrisaBeigeSupermart
+  sprite: /Textures/_RMC14/Tiles/hybrisa/supermartfloor2.png
+
+- type: tile
+  parent: RMCFloorHybrisaBeigeBase
+  id: RMCFloorHybrisaBeigeCarpet
+  name: beige carpet
+  sprite: /Textures/_RMC14/Tiles/hybrisa/carpetbeige.png
+
+- type: tile
+  parent: RMCFloorHybrisaBeigeCarpet
+  id: RMCFloorHybrisaBeigeCarpetDeco
+  sprite: /Textures/_RMC14/Tiles/hybrisa/carpetbeige_deco.png
+
+- type: tile
+  parent: RMCFloorHybrisaBeigeCarpet
+  id: RMCFloorHybrisaBrownPatternCarpet
+  name: brown metal tile
+  sprite: /Textures/_RMC14/Tiles/hybrisa/carpetpatternbrown.png

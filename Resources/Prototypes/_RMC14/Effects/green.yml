@@ -34,3 +34,11 @@
   - type: Sprite
     state: xeno_telegraph_base_small
 
+- type: entity
+  parent: RMCEffectXenoTelegraphRed
+  id: RMCEffectXenoTelegraphRedEmpower
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 1
+
