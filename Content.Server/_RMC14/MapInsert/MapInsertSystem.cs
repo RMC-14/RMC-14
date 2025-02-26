@@ -73,8 +73,10 @@ public sealed class MapInsertSystem : EntitySystem
         }
 
         if (spawn == default)
+        {
             QueueDel(ent);
             return;
+        }
 
         if (_map == null)
         {
