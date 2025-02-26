@@ -179,6 +179,13 @@
       conditions:
       - !type:PainLevel
         level: 4
+    - !type:GenericStatusEffect
+        key: Stutter
+        component: StutteringAccent
+        time: 4
+        conditions:
+        - !type:PainLevel
+          level: 4
     - !type:PopupMessage
       type: Local
       messages: [ "rmc-pain-distressing-inner" ]
@@ -199,6 +206,20 @@
       conditions:
       - !type:PainLevel
         level: 5
+    - !type:GenericStatusEffect
+        key: Stutter
+        component: StutteringAccent
+        time: 4
+        conditions:
+        - !type:PainLevel
+          level: 5
+    - !type:HealthChange
+      damage:
+        types:
+          Asphyxiation: 0.1
+      conditions:
+      - !type:PainLevel
+          level: 5
     - !type:PopupMessage
       type: Local
       messages: [ "rmc-pain-severe-inner" ]
@@ -219,6 +240,27 @@
       conditions:
       - !type:PainLevel
         level: 6
+    - !type:GenericStatusEffect
+        key: Stutter
+        component: StutteringAccent
+        time: 4
+        conditions:
+        - !type:PainLevel
+          level: 6
+    - !type:GenericStatusEffect
+        key: ForcedSleep
+        component: ForcedSleeping
+        time: 4
+        conditions:
+        - !type:PainLevel
+          level: 6
+    - !type:HealthChange
+      damage:
+        types:
+          Asphyxiation: 0.5
+      conditions:
+      - !type:PainLevel
+          level: 6
     - !type:PopupMessage
       type: Local
       messages: [ "rmc-pain-horrible-inner" ]
