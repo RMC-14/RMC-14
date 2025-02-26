@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Damage.Event;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Medical.Scanner;
 using Content.Shared._RMC14.NightVision;
+using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Vendors;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Devour;
@@ -18,13 +19,16 @@ using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Access.Components;
 using Content.Shared.Actions;
+using Content.Shared.Buckle.Components;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.DragDrop;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Lathe;
+using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Components;
@@ -37,6 +41,7 @@ using Content.Shared.Tools.Systems;
 using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Configuration;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -56,6 +61,7 @@ public sealed class XenoSystem : EntitySystem
     [Dependency] private readonly SharedNightVisionSystem _nightVision = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
+    [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -63,7 +69,7 @@ public sealed class XenoSystem : EntitySystem
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly EntityManager _entities = default!;
 
-    public static readonly ProtoId<DamageTypePrototype> HeatDamage = "Heat";
+    private static readonly ProtoId<DamageTypePrototype> HeatDamage = "Heat";
 
     private EntityQuery<AffectableByWeedsComponent> _affectableQuery;
     private EntityQuery<DamageableComponent> _damageableQuery;
@@ -107,6 +113,9 @@ public sealed class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, MeleeHitEvent>(OnXenoMeleeHit);
         SubscribeLocalEvent<XenoComponent, HiveChangedEvent>(OnHiveChanged);
         SubscribeLocalEvent<XenoComponent, RMCIgniteEvent>(OnXenoIgnite);
+        SubscribeLocalEvent<XenoComponent, CanDragEvent>(OnXenoCanDrag);
+        SubscribeLocalEvent<XenoComponent, BuckleAttemptEvent>(OnXenoBuckleAttempt);
+
         SubscribeLocalEvent<XenoComponent, ValidateDamageOnStepperEvent>(OnXenoStepOnSharp);
 
         Subs.CVar(_config, RMCCVars.CMXenoDamageDealtMultiplier, v => _xenoDamageDealtMultiplier = v, true);
@@ -273,6 +282,18 @@ public sealed class XenoSystem : EntitySystem
         }
     }
 
+    private void OnXenoCanDrag(Entity<XenoComponent> ent, ref CanDragEvent args)
+    {
+        if (_mobState.IsDead(ent))
+            args.Handled = true;
+    }
+
+    private void OnXenoBuckleAttempt(Entity<XenoComponent> ent, ref BuckleAttemptEvent args)
+    {
+        if (HasComp<XenoComponent>(args.User) || !_mobState.IsDead(ent))
+            args.Cancelled = true;
+    }
+
     private void UpdateXenoSpeedMultiplier(float speed)
     {
         _xenoSpeedMultiplier = speed;
@@ -368,6 +389,24 @@ public sealed class XenoSystem : EntitySystem
         var ev = new XenoHealAttemptEvent();
         RaiseLocalEvent(xeno, ref ev);
         return !ev.Cancelled;
+    }
+
+    public int GetGroundXenosAlive()
+    {
+        var count = 0;
+        var xenos = EntityQueryEnumerator<ActorComponent, XenoComponent, MobStateComponent,  TransformComponent>();
+        while (xenos.MoveNext(out _, out _, out var mobState, out var xform))
+        {
+            if (mobState.CurrentState == MobState.Dead)
+                continue;
+
+            if (!_rmcPlanet.IsOnPlanet(xform))
+                continue;
+
+            count++;
+        }
+
+        return count;
     }
 
     public override void Update(float frameTime)

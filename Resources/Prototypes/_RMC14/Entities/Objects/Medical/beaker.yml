@@ -20,12 +20,6 @@
             volume: -4
       - !type:SpillBehavior
         solution: beaker
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          CMShardGlass:
-            min: 1
-            max: 1
-        transferForensics: true
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: DamageOnLand
@@ -58,12 +52,6 @@
             volume: -4
       - !type:SpillBehavior
         solution: beaker
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          CMShardGlass:
-            min: 1
-            max: 1
-        transferForensics: true
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
 
@@ -110,6 +98,10 @@
     solution: beaker
   - type: StaticPrice
     price: 10
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 - type: entity
   parent: CMBeakerBase
@@ -196,6 +188,10 @@
     solution: beaker
   - type: StaticPrice
     price: 20
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 # Minitank /obj/item/reagent_container/glass/minitank
 - type: entity
@@ -225,6 +221,10 @@
     solution: beaker
   - type: StaticPrice
     price: 20
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - none
 
 # Pressurised Canister /obj/item/reagent_container/glass/pressurized_canister
 - type: entity
@@ -258,6 +258,10 @@
     - ChemDispensable
   - type: DrainableSolution
     solution: beaker
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - none
 
 - type: entity
   parent: RMCPressurizedCanister
@@ -335,7 +339,7 @@
       visible: false
   - type: Item
     size: Small
-    sprite: _RMC14/Objects/Medical/beaker.rsi
+    sprite: _RMC14/Objects/Chemistry/vials.rsi
   - type: SolutionContainerVisuals
     maxFillLevels: 5
     fillBaseName: vial

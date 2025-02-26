@@ -5,6 +5,8 @@ using Content.Server.Explosion.Components;
 using Content.Server.Flash;
 using Content.Server.Pinpointer;
 using Content.Server.Radio.EntitySystems;
+using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
@@ -21,6 +23,7 @@ using Content.Shared.Payload.Components;
 using Content.Shared.Radio;
 using Content.Shared.Slippery;
 using Content.Shared.StepTrigger.Systems;
+using Content.Shared.Stunnable;
 using Content.Shared.Trigger;
 using Content.Shared.Weapons.Ranged.Events;
 using JetBrains.Annotations;
@@ -75,6 +78,9 @@ namespace Content.Server.Explosion.EntitySystems
         [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
         [Dependency] private readonly InventorySystem _inventory = default!;
         [Dependency] private readonly ElectrocutionSystem _electrocution = default!;
+        [Dependency] private readonly SharedStunSystem _stun = default!;
+        [Dependency] private readonly EntityLookupSystem _lookup = default!;
+        [Dependency] private readonly SharedInteractionSystem _interaction = default!;
 
         public override void Initialize()
         {
@@ -100,6 +106,7 @@ namespace Content.Server.Explosion.EntitySystems
             SubscribeLocalEvent<DeleteOnTriggerComponent, TriggerEvent>(HandleDeleteTrigger);
             SubscribeLocalEvent<ExplodeOnTriggerComponent, TriggerEvent>(HandleExplodeTrigger);
             SubscribeLocalEvent<FlashOnTriggerComponent, TriggerEvent>(HandleFlashTrigger);
+            SubscribeLocalEvent<RMCStunOnTriggerComponent, TriggerEvent>(HandleStunOnTrigger);
             SubscribeLocalEvent<GibOnTriggerComponent, TriggerEvent>(HandleGibTrigger);
 
             SubscribeLocalEvent<AnchorOnTriggerComponent, TriggerEvent>(OnAnchorTrigger);
@@ -174,6 +181,28 @@ namespace Content.Server.Explosion.EntitySystems
         {
             // TODO Make flash durations sane ffs.
             _flashSystem.FlashArea(uid, args.User, component.Range, component.Duration * 1000f, probability: component.Probability);
+            args.Handled = true;
+        }
+
+        private void HandleStunOnTrigger(EntityUid uid, RMCStunOnTriggerComponent component, TriggerEvent args)
+        {
+            var query = _lookup.GetEntitiesInRange(uid, component.Range);
+
+            var stunTime = TimeSpan.FromSeconds(component.Duration);
+
+            foreach (var entity in query)
+            {
+                if (HasComp<XenoComponent>(entity))
+                    continue;
+
+                var transform = Transform(entity);
+                if (!_random.Prob(component.Probability) || !_interaction.InRangeUnobstructed(uid, transform.Coordinates, component.Range))
+                    continue;
+
+                _stun.TryStun(entity, stunTime, true);
+                _stun.TryKnockdown(entity, stunTime, true);
+            }
+
             args.Handled = true;
         }
 

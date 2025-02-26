@@ -1,0 +1,9 @@
+﻿- type: accessGroup
+  id: CMPizzaDeliverer
+  tags:
+  - CMAccessCommand
+  - CMAccessRequisitions
+  - CMAccessColonyPublic
+  - CMAccessColonyLogistics
+  - CMAccessColonyEngineering
+  - CMAccessColonyResearch

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
@@ -30,14 +30,14 @@
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
-    #    - ActionXenoCharge
-    #    - ActionXenoEmpower
-    #    - ActionXenoScissorCut
+    - ActionXenoAssault
+    - ActionXenoEmpower
+    - ActionXenoScissorCut
     - ActionXenoDevolve
     tier: 3
     hudOffset: 0,0.1
     unlockAt: 900 # 15 minutes
-    hidden: true # TODO RMC: remove once ravager is implemented
+    standHealingMultiplier: 0.66
   - type: XenoHeavy
   - type: XenoDevolve
     devolvesTo:
@@ -108,9 +108,40 @@
         - XenoHeavy
   - type: RMCSize
     size: Big
-#  - type: RMCXenoDamageVisuals # TODO RMC14
-#    prefix: ravager
+  - type: RMCXenoDamageVisuals
+    prefix: ravager
+  - type: RMCFireArmorDebuffModifier
+    debuffModifier: 1.2
+  - type: PlasmaFrenzy
+  - type: RMCImmuneToFireTileDamage
   - type: TacticalMapIcon
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: ravager
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.7
+  - type: TantrumSpeedBuff
+  - type: XenoShield
+  - type: XenoLeap
+    delay: 0
+    knockdownTime: 0
+    range: 5
+    moveDelayTime: 0
+    plasmaCost: 25
+    leapSound: /Audio/_RMC14/Xeno/alien_pounce.ogg
+    destroyObjects: true
+  - type: XenoCruelty
+  - type: XenoEmpower
+    damageIncreasePer:
+      groups:
+        Brute: 2
+    damageTailIncreasePer:
+      groups:
+        Brute: 2.4
+    leapDamage:
+      groups:
+        Brute: 45
+  - type: XenoScissorCut
+    damage:
+      types:
+        Slash: 40

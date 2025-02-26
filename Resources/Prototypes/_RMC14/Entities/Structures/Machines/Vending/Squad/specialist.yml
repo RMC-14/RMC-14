@@ -18,7 +18,7 @@
     pointsType: Specialist
     sections:
     - name: Weapons Specialist Sets
-      choices: { SquadSpecKit: 1 }
+      takeOne: SquadSpecKit
       sharedSpecLimit: 2 # 2 as requested until Pyro is added
       entries:
       - id: RMCDemoSpecEquipmentCase
@@ -164,9 +164,9 @@
       - id: RMCMaskRebreather
     - name: Restricted Firearms
       entries:
-      - id: RMCMK80Case
+      - id: RMCGunCasePistolMK80
         points: 15
-      - id: RMCSmartPistolCase
+      - id: RMCGunCasePistolSmart
         points: 15
     - name: Sidearm Ammunition
       entries:
@@ -179,29 +179,32 @@
     - name: Clothing Items
       entries:
       - id: RMCScabbardMacheteFilled
+        name: machete scabbard (Full)
         points: 6
       - id: RMCPouchMacheteFilled
+        name: machete pouch (Full)
         points: 15
       - id: RMCBackpackRTO
         points: 15
-    #- id: CMFuelTankStrapPouch
+      - id: RMCPouchFuelTank
     #- id: CMWeldingGoggles
       - id: RMCPouchGeneralLarge
         points: 10
       - id: CMBeltUtilityCombat
         points: 15
       - id: RMCPouchAutoinjectorFill
+        name: autoinjector pouch (Full)
         points: 15
     - name: Utilities
       entries:
       - id: CMRollerBedSpawnFolded
         points: 5
+      - id: RMCFulton20
+        points: 5
       - id: CMFireExtinguisherPortable
         points: 5
       - id: RMCMotionDetector
         points: 10
-    #- id: CMFultonDeviceStack
-    #- id: CMMotionDetector
       - id: RMCWhistle
         points: 5
     - name: Binoculars

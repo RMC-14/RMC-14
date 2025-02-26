@@ -1,0 +1,9 @@
+﻿- type: entity
+  id: RMCActionViewIntelObjectives
+  name: View Intel Objectives
+  components:
+  - type: InstantAction
+    checkCanInteract: false
+    icon:
+      entity: CMFolderWhite
+    event: !type:ViewIntelObjectivesActionEvent

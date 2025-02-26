@@ -15,11 +15,23 @@
       "directions": 4
     },
     {
+      "name": "equipped-MASK",
+      "directions": 4
+    },
+    {
       "name": "inhand-left",
       "directions": 4
     },
     {
       "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "helmet",
+      "directions": 4
+    },
+    {
+      "name": "helmet-down",
       "directions": 4
     }
   ]

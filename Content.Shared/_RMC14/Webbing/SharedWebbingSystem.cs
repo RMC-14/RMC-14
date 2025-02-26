@@ -3,12 +3,15 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
+using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
+using Robust.Shared.Map;
 using static Content.Shared._RMC14.Webbing.WebbingTransferComponent;
 
 namespace Content.Shared._RMC14.Webbing;
@@ -16,25 +19,59 @@ namespace Content.Shared._RMC14.Webbing;
 public abstract class SharedWebbingSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly MobStateSystem _mob = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedStorageSystem _storage = default!;
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<ClothingBlockWebbingComponent, BeingEquippedAttemptEvent>(OnBlockWebbingBeingEquippedAttempt);
+
+        SubscribeLocalEvent<WebbingClothingComponent, MapInitEvent>(OnWebbingClothingMapInit);
         SubscribeLocalEvent<WebbingClothingComponent, InteractUsingEvent>(OnWebbingClothingInteractUsing);
         SubscribeLocalEvent<WebbingClothingComponent, InventoryRelayedEvent<GetVerbsEvent<EquipmentVerb>>>(GetRelayedVerbs);
         SubscribeLocalEvent<WebbingClothingComponent, GetVerbsEvent<EquipmentVerb>>(OnWebbingClothingGetEquipmentVerbs);
         SubscribeLocalEvent<WebbingClothingComponent, GetVerbsEvent<InteractionVerb>>(OnWebbingClothingGetInteractionVerbs);
         SubscribeLocalEvent<WebbingClothingComponent, EntInsertedIntoContainerMessage>(OnClothingInserted);
         SubscribeLocalEvent<WebbingClothingComponent, EntRemovedFromContainerMessage>(OnClothingRemoved);
+        SubscribeLocalEvent<WebbingClothingComponent, BeingEquippedAttemptEvent>(OnClothingBeingEquippedAttempt);
+    }
+
+    private void OnBlockWebbingBeingEquippedAttempt(Entity<ClothingBlockWebbingComponent> ent, ref BeingEquippedAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        var slots = _inventory.GetSlotEnumerator(args.EquipTarget);
+        while (slots.MoveNext(out var slot))
+        {
+            if (!TryComp(slot.ContainedEntity, out WebbingClothingComponent? clothing) ||
+                clothing.Webbing == null)
+            {
+                continue;
+            }
+
+            args.Reason = "rmc-webbing-cannot-wear-with-webbing";
+            args.Cancel();
+        }
+    }
+
+    private void OnWebbingClothingMapInit(Entity<WebbingClothingComponent> ent, ref MapInitEvent args)
+    {
+        if (ent.Comp.StartingWebbing is not { } starting)
+            return;
+
+        var webbing = Spawn(starting, MapCoordinates.Nullspace);
+        Attach(ent, webbing, null, out _);
     }
 
     private void OnWebbingClothingInteractUsing(Entity<WebbingClothingComponent> clothing, ref InteractUsingEvent args)
     {
-        if (Attach(clothing, args.Used))
-            args.Handled = true;
+        Attach(clothing, args.Used, args.User, out var handled);
+        args.Handled = handled;
     }
 
     private void OnWebbingClothingGetInteractionVerbs(Entity<WebbingClothingComponent> clothing, ref GetVerbsEvent<InteractionVerb> args)
@@ -128,13 +165,49 @@ public abstract class SharedWebbingSystem : EntitySystem
         _item.VisualsChanged(clothing);
     }
 
-    public bool Attach(Entity<WebbingClothingComponent> clothing, EntityUid webbing)
+    private void OnClothingBeingEquippedAttempt(Entity<WebbingClothingComponent> ent, ref BeingEquippedAttemptEvent args)
     {
+        if (ent.Comp.Webbing == null)
+            return;
+
+        var slots = _inventory.GetSlotEnumerator(args.EquipTarget);
+        while (slots.MoveNext(out var slot))
+        {
+            if (!HasComp<ClothingBlockWebbingComponent>(slot.ContainedEntity))
+                continue;
+
+            args.Reason = "rmc-webbing-cannot-wear-with-webbing";
+            args.Cancel();
+        }
+    }
+
+    public bool Attach(Entity<WebbingClothingComponent> clothing, EntityUid webbing, EntityUid? user, out bool handled)
+    {
+        handled = false;
         if (!TryComp(webbing, out WebbingComponent? webbingComp) ||
             HasComp<StorageComponent>(clothing) ||
-            !HasComp<StorageComponent>(webbing))
+            !HasComp<StorageComponent>(webbing) ||
+            !TryComp(clothing, out ItemComponent? clothingItem) ||
+            !TryComp(webbing, out ItemComponent? webbingItem))
         {
             return false;
+        }
+
+        if (_container.TryGetContainingContainer((clothing, null), out var wearer) &&
+            TryComp(wearer.Owner, out InventoryComponent? inventory))
+        {
+            var slots = _inventory.GetSlotEnumerator((wearer.Owner, inventory));
+            while (slots.MoveNext(out var slot))
+            {
+                if (HasComp<ClothingBlockWebbingComponent>(slot.ContainedEntity))
+                {
+                    handled = true;
+
+                    if (user != null)
+                        _popup.PopupClient(Loc.GetString("rmc-webbing-cannot-wear-with-webbing"), webbing, user);
+                    return false;
+                }
+            }
         }
 
         var container = _container.EnsureContainer<ContainerSlot>(clothing, clothing.Comp.Container);
@@ -148,6 +221,10 @@ public abstract class SharedWebbingSystem : EntitySystem
         comp.Transfer = TransferType.ToClothing;
         Dirty(webbing, comp);
 
+        clothing.Comp.UnequippedSize = clothingItem.Size;
+        _item.SetSize(clothing, webbingItem.Size);
+
+        handled = true;
         return true;
     }
 
@@ -168,6 +245,12 @@ public abstract class SharedWebbingSystem : EntitySystem
         comp.Clothing = clothing;
         comp.Transfer = TransferType.ToWebbing;
         Dirty(webbing, comp);
+
+        if (clothing.Comp.UnequippedSize is { } size)
+        {
+            clothing.Comp.UnequippedSize = null;
+            _item.SetSize(clothing, size);
+        }
     }
 
     public override void Update(float frameTime)

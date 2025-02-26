@@ -17,6 +17,7 @@ public sealed class XenoCrestSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly CMArmorSystem _armor = default!;
 
     public override void Initialize()
     {
@@ -59,6 +60,8 @@ public sealed class XenoCrestSystem : EntitySystem
 
         xeno.Comp.Lowered = !xeno.Comp.Lowered;
         Dirty(xeno);
+
+        _armor.UpdateArmorValue((xeno, null));
 
         _movementSpeed.RefreshMovementSpeedModifiers(xeno);
         _appearance.SetData(xeno, XenoVisualLayers.Crest, xeno.Comp.Lowered);

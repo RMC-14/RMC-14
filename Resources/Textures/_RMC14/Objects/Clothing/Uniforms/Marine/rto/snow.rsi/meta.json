@@ -12,7 +12,11 @@
       "directions": 4
     },
     {
-      "name": "scarf-equipped-INNERCLOTHING",
+      "name": "jacket-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "sleeves-equipped-INNERCLOTHING",
       "directions": 4
     },
     {

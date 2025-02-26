@@ -28,6 +28,9 @@ public sealed partial class GetAttachementSlotEvent : EntityEventArgs
 
     public string SlotId = "";
 
+    //If the slot returned is able to have something placed/be removed depending on the mode
+    public bool CanUse = true;
+
     public GetAttachementSlotEvent(NetEntity user, NetEntity? used)
     {
         User = user;

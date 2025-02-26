@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Content.Shared._RMC14.Holiday;
 using Content.Shared._RMC14.Medical.Refill;
 using Content.Shared._RMC14.Vendors;
 using Content.Shared.Mind;
@@ -25,6 +26,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
 
     private readonly SharedJobSystem _job;
     private readonly SharedMindSystem _mind;
+    private readonly SharedRMCHolidaySystem _rmcHoliday;
 
     private CMAutomatedVendorWindow? _window;
 
@@ -32,6 +34,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
     {
         _job = EntMan.System<SharedJobSystem>();
         _mind = EntMan.System<SharedMindSystem>();
+        _rmcHoliday = EntMan.System<SharedRMCHolidaySystem>();
     }
 
     protected override void Open()
@@ -60,10 +63,17 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                     }
                 }
 
+                var validHoliday = section.Holidays.Count == 0;
+                foreach (var holiday in section.Holidays)
+                {
+                    if (_rmcHoliday.IsActiveHoliday(holiday))
+                        validHoliday = true;
+                }
+
                 var uiSection = new CMAutomatedVendorSection();
                 uiSection.Label.SetMessage(GetSectionName(user, section));
 
-                if (!validJob)
+                if (!validJob || !validHoliday)
                     uiSection.Visible = false; // hide the section
 
                 for (var entryIndex = 0; entryIndex < section.Entries.Count; entryIndex++)
@@ -82,7 +92,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                         var color = CMAutomatedVendorPanel.DefaultColor;
                         var borderColor = CMAutomatedVendorPanel.DefaultBorderColor;
                         var hoverColor = CMAutomatedVendorPanel.DefaultBorderColor;
-                        if (section.TakeAll != null)
+                        if (section.TakeAll != null || section.TakeOne != null)
                         {
                             name = $"Mandatory: {name}";
                             color = Color.FromHex("#251A0C");
@@ -210,6 +220,12 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                     if (takeAll != null && takeAll.Contains((takeAllId, entry.Id)))
                         disabled = true;
                 }
+                if (section.TakeOne is { } takeOneId)
+                {
+                    var takeOne = user?.TakeOne;
+                    if (takeOne != null && takeOne.Contains(takeOneId))
+                        disabled = true;
+                }
 
                 if (entry.Points != null)
                 {
@@ -292,7 +308,14 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                 }
             }
         }
-
+        else if (section.TakeOne != null)
+        {
+            var takeOne = user?.TakeOne;
+            if (takeOne == null || !takeOne.Contains(section.TakeOne))
+            {
+                name.AddText(" (TAKE ONE)");
+            }
+        }
         else if (section.Choices is { } choices)
         {
             if (user == null)

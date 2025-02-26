@@ -99,6 +99,163 @@
   - type: Sprite
     state: redcontainerright
 
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerTartarusLeft
+  suffix: Tartarus, Left
+  components:
+  - type: Sprite
+    state: tartarus_l
+  - type: Occluder
+    boundingBox: "-0.5,-0.5,0.5,0.8"
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.8"
+        density: 190
+        layer:
+        - MobMask
+
+- type: entity
+  parent: RMCContainerTartarusLeft
+  id: RMCContainerTartarusRight
+  suffix: Tartarus, Right
+  components:
+  - type: Sprite
+    state: tartarus_r
+
+- type: entity
+  parent: RMCContainerTartarusLeft
+  id: RMCContainerShortBlueLeft
+  suffix: Blue, Left
+  components:
+  - type: Sprite
+    state: blueleft
+
+- type: entity
+  parent: RMCContainerTartarusLeft
+  id: RMCContainerShortBlueRight
+  suffix: Blue, Right
+  components:
+  - type: Sprite
+    state: blueright
+
+- type: entity
+  parent: RMCContainerTartarusLeft
+  id: RMCContainerShortGreenLeft
+  suffix: Green, Left
+  components:
+  - type: Sprite
+    state: greenleft
+
+- type: entity
+  parent: RMCContainerTartarusLeft
+  id: RMCContainerShortGreenRight
+  suffix: Green, Right
+  components:
+  - type: Sprite
+    state: greenright
+
+- type: entity
+  parent: RMCContainerTartarusLeft
+  id: RMCContainerShortRedLeft
+  suffix: Red, Left
+  components:
+  - type: Sprite
+    state: redleft
+
+- type: entity
+  parent: RMCContainerTartarusLeft
+  id: RMCContainerShortRedRight
+  suffix: Red, Right
+  components:
+  - type: Sprite
+    state: redright
+
+- type: entity
+  parent: RMCContainerTartarusLeft
+  id: RMCContainerShortTanLeft
+  suffix: Tan, Left
+  components:
+  - type: Sprite
+    state: tanleft
+
+- type: entity
+  parent: RMCContainerTartarusLeft
+  id: RMCContainerShortTanRight
+  suffix: Tan, Right
+  components:
+  - type: Sprite
+    state: tanright
+
+# WeYa
+
+- type: entity
+  parent: RMCContainerTartarusLeft
+  id: RMCContainerWeYaBlackLeft
+  suffix: WeYa, Black, Left
+  components:
+  - type: Sprite
+    state: blackwyleft
+
+- type: entity
+  parent: RMCContainerTartarusLeft
+  id: RMCContainerWeYaBlackRight
+  suffix: WeYa, Black, Right
+  components:
+  - type: Sprite
+    state: blackwyright
+
+- type: entity
+  parent: RMCContainerTartarusLeft
+  id: RMCContainerWeYaGreyLeft
+  suffix: WeYa, Grey, Left
+  components:
+  - type: Sprite
+    state: greywyleft
+
+- type: entity
+  parent: RMCContainerTartarusLeft
+  id: RMCContainerWeYaGreyRight
+  suffix: WeYa, Grey, Right
+  components:
+  - type: Sprite
+    state: greywyright
+
+- type: entity
+  parent: RMCContainerTartarusLeft
+  id: RMCContainerWeYaLightGreyLeft
+  suffix: WeYa, Light Grey, Left
+  components:
+  - type: Sprite
+    state: lightgreywyleft
+
+- type: entity
+  parent: RMCContainerTartarusLeft
+  id: RMCContainerWeYaLightGreyRight
+  suffix: WeYa, Light Grey, Right
+  components:
+  - type: Sprite
+    state: lightgreywyright
+
+- type: entity
+  parent: RMCContainerTartarusLeft
+  id: RMCContainerWeYaWhiteLeft
+  suffix: WeYa, White, Left
+  components:
+  - type: Sprite
+    state: whitewyleft
+
+- type: entity
+  parent: RMCContainerTartarusLeft
+  id: RMCContainerWeYaWhiteRight
+  suffix: WeYa, White, Right
+  components:
+  - type: Sprite
+    state: whitewyright
+
 # Vertical
 
 - type: entity

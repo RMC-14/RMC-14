@@ -197,7 +197,8 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                     window.OpenCentered();
                 };
 
-                TabContainer.SetTabVisible(monitor.SupplyDrop, EntMan.HasComponent<SupplyDropComputerComponent>(Owner));
+                var canSupplyDrop = EntMan.HasComponent<SupplyDropComputerComponent>(Owner) && squad.CanSupplyDrop;
+                TabContainer.SetTabVisible(monitor.SupplyDrop, canSupplyDrop);
 
                 monitor.MessageSquadContainer.Visible = EntMan.TryGetComponent(Owner, out OverwatchConsoleComponent? overwatch) &&
                                                         overwatch.CanMessageSquad;
@@ -243,6 +244,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                         role.Deployed.Add(marine);
 
                     role.All.Add(marine);
+                    roles[marine.Role.Value] = role;
                 }
 
                 var name = marine.Name;
@@ -372,7 +374,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                 string roleAlive;
                 if (displayName)
                 {
-                    if (_overwatchConsole.IsSquadLeader(roleId) &&
+                    if (_squad.IsSquadLeader(roleId) &&
                         squad.Leader != null &&
                         marines.TryFirstOrNull(m => m.Id == squad.Leader.Value, out var leader))
                     {

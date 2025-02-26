@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: RMCBaseWindowFrame
   id: RMCWindowFrameKutjevo
   components:
@@ -81,6 +81,10 @@
   - type: Construction
     graph: RMCWindowKutjevo
     node: windowKutjevo
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameKutjevo
+    sound:
+      collection: WindowShatter
 
 - type: entity
   parent: CMBaseWindow
@@ -132,6 +136,10 @@
   - type: Construction
     graph: RMCWindowKutjevoReinforced
     node: windowKutjevoReinforced
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameKutjevoReinforced
+    sound:
+      collection: WindowShatter
 
 - type: entity
   parent: CMBaseWindow

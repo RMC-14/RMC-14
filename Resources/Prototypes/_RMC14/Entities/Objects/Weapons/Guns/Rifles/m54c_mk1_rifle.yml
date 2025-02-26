@@ -1,0 +1,182 @@
+﻿- type: entity
+  parent: CMBaseWeaponRifle
+  name: M54C assault rifle MK1
+  id: WeaponRifleM54CMK1
+  description: An older design of the Assault Rifle commonly used by the Marine Corps. Uses 10x24mm caseless ammunition.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54cmk1/desert.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54cmk1/desert.rsi
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: Gun
+    selectedMode: FullAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    soundGunshot:
+      collection: CMM54CShoot
+    shotsPerBurst: 4
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilUnwielded: 4
+    scatterWielded: 4
+    scatterUnwielded: 20
+    baseFireRate: 4
+    burstScatterMult: 2
+    modifiers:
+      Burst:
+        fireDelay: 0.1665
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+      FullAuto:
+        fireDelay: 0
+        maxScatterModifier: 26
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 4
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.15
+    accuracyMultiplierUnwielded: 0.65
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM54CMK1
+          - CMMagazineRifleM54CMK1AP
+        startingItem: CMMagazineRifleM54CMK1
+  - type: GunDamageModifier
+    multiplier: 1.1
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-stock:
+        startingAttachable: RMCAttachmentM54CMK1StockCollapsible
+        whitelist:
+          tags:
+          - RMCAttachmentM54CStockCollapsible
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentMK1GrenadeLauncher
+        whitelist:
+          tags:
+          - RMCAttachmentMK1GrenadeLauncher
+          - RMCAttachmentU7UnderbarrelShotgun
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.75, 0.00
+      rmc-aslot-rail: 0.1, 0.16
+      rmc-aslot-stock: -0.78, 0.0325
+      rmc-aslot-underbarrel: 0.35, -0.343
+  - type: Tag
+    tags:
+    - RMCWeaponRifleM54CMK1
+
+- type: entity
+  parent: WeaponRifleM54CMK1
+  id: WeaponRifleM54CMK1AP
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazineRifleM54CMK1
+          - CMMagazineRifleM54CMK1AP
+        startingItem: CMMagazineRifleM54CMK1AP
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: CMMagazineRifleM54CMK1
+  name: "M54C MK1 magazine (10x24mm)"
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - CMMagazineRifleM54CMK1
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgeRifle10x24mm
+    proto: CMCartridgeRifle10x24mm
+    capacity: 95
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54cmk1.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifle
+
+- type: entity
+  parent: CMMagazineRifleM54CMK1
+  id: CMMagazineRifleM54CMK1AP
+  name: "M54C MK1 AP magazine (10x24mm)"
+  suffix: AP
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - CMMagazineRifleM54CMK1AP
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - CMCartridgeRifle10x24mmAP
+    proto: CMCartridgeRifle10x24mmAP
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54cmk1.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#1F951F"
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifleAP
+
+- type: Tag
+  id: RMCWeaponRifleM54CMK1
+
+- type: Tag
+  id: CMMagazineRifleM54CMK1
+
+- type: Tag
+  id: CMMagazineRifleM54CMK1AP

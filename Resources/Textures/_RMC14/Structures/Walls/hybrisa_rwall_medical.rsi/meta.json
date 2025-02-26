@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/turf/walls/hybrisa_colonywall_hospital.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "strata_hull"
+    },
+    {
+      "name": "strata_ribbed_outpost_"
+    },
+    {
+      "name": "strata_ribbed_outpost_0",
+      "directions": 4
+    },
+    {
+      "name": "strata_ribbed_outpost_1",
+      "directions": 4
+    },
+    {
+      "name": "strata_ribbed_outpost_2",
+      "directions": 4
+    },
+    {
+      "name": "strata_ribbed_outpost_3",
+      "directions": 4
+    },
+    {
+      "name": "strata_ribbed_outpost_4",
+      "directions": 4
+    },
+    {
+      "name": "strata_ribbed_outpost_5",
+      "directions": 4
+    },
+    {
+      "name": "strata_ribbed_outpost_6",
+      "directions": 4
+    },
+    {
+      "name": "strata_ribbed_outpost_7",
+      "directions": 4
+    }
+  ]
+}

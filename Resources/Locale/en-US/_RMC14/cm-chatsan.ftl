@@ -1,4 +1,4 @@
-﻿cm-chatsan-word-deltard = deltard
+cm-chatsan-word-deltard = deltard
 cm-chatsan-replacement-deltard = delta
 
 cm-chatsan-word-deltards = deltards
@@ -54,6 +54,9 @@ cm-chatsan-replacement-sniper = long spitter
 
 cm-chatsan-word-flare = flare
 cm-chatsan-replacement-flare = glow stick
+
+cm-chatsan-word-flares = flares
+cm-chatsan-replacement-flares = glow sticks
 
 cm-chatsan-word-synth = synth
 cm-chatsan-replacement-synth = fake hosts
@@ -312,14 +315,119 @@ cm-chatsan-replacement-ammo = spits
 # cm-chatsan-word-#tank = #tank
 # cm-chatsan-replacement-#tank = turtle
 
-# cm-chatsan-word-# laser = # laser
-# cm-chatsan-replacement-# laser = dot
+cm-chatsan-word-laser = laser
+cm-chatsan-replacement-laser = dot
 
-# cm-chatsan-word-# lazer = # lazer
-# cm-chatsan-replacement-# lazer = dot
+cm-chatsan-word-lazer = lazer
+cm-chatsan-replacement-lazer = dot
 
-# cm-chatsan-word-# flamer = # flamer
-# cm-chatsan-replacement-# flamer = fire spitter
+cm-chatsan-word-flamer = flamer
+cm-chatsan-replacement-flamer = fire spitter
 
-# cm-chatsan-word-# flamethrower = # flamethrower
-# cm-chatsan-replacement-# flamethrower =  fire spitter
+cm-chatsan-word-flamethrower = flamethrower
+cm-chatsan-replacement-flamethrower = fire spitter
+
+cm-chatsan-word-sadar = sadar
+cm-chatsan-replacement-sadar = tuber
+
+cm-chatsan-word-rocket = rocket
+cm-chatsan-replacement-rocket = boom spit
+
+cm-chatsan-word-grenadier = grenadier
+cm-chatsan-replacement-grenadier = boomstick spitter
+
+cm-chatsan-word-scout = scout spec
+cm-chatsan-replacement-scout = tall lurker
+
+cm-chatsan-word-scout-specialist = scout specialist
+cm-chatsan-replacement-scout-specialist = tall lurker
+
+cm-chatsan-word-mortar = mortar
+cm-chatsan-replacement-mortar = skyboom
+
+cm-chatsan-word-demo = demo
+cm-chatsan-replacement-demo = boom tuber
+
+cm-chatsan-word-demolitionist = demolitionist
+cm-chatsan-replacement-demolitionist = boom tuber
+
+cm-chatsan-word-ws = ws
+cm-chatsan-replacement-ws = special tall
+
+cm-chatsan-word-spec = spec
+cm-chatsan-replacement-spec = special tall
+
+cm-chatsan-word-cas = cas
+cm-chatsan-replacement-cas = skyspit
+
+cm-chatsan-word-sensors = sensors
+cm-chatsan-replacement-sensors = tall eye tower
+
+cm-chatsan-word-sensor-tower = sensor tower
+cm-chatsan-replacement-sensor-tower = tall eye tower
+
+cm-chatsan-word-comms = comms
+cm-chatsan-replacement-comms = tall hivemind tower
+
+cm-chatsan-word-tcomms = tcomms
+cm-chatsan-replacement-tcomms = tall hivemind tower
+
+cm-chatsan-word-communications-tower = communications tower
+cm-chatsan-replacement-communications-tower = tall hivemind tower
+
+cm-chatsan-word-smart-gun = smart gun
+cm-chatsan-replacement-smartgun = smart spitter
+
+cm-chatsan-word-sg = sg
+cm-chatsan-replacement-sg = smart spitter
+
+cm-chatsan-word-sgs = sgs
+cm-chatsan-replacement-sgs = smart spitters
+
+cm-chatsan-word-smartgun = smartgun
+cm-chatsan-replacement-smart-gun = smart spitter
+
+cm-chatsan-word-smartgunner = smartgunner
+cm-chatsan-replacement-smartgunner = smart spitter
+
+cm-chatsan-word-smart-gunner = smart gunner
+cm-chatsan-replacement-smart-gunner = smart spitter
+
+cm-chatsan-word-sentry = sentry
+cm-chatsan-replacement-sentry = auto spitter
+
+cm-chatsan-word-sentries = sentries
+cm-chatsan-replacement-sentries = auto spitters
+
+cm-chatsan-word-squad = squad
+cm-chatsan-replacement-squad = caste
+
+cm-chatsan-word-squads = squads
+cm-chatsan-replacement-squads = castes
+
+cm-chatsan-word-shotgun = shotgun
+cm-chatsan-replacement-shotgun = scatter spitter
+
+cm-chatsan-word-nade = nade
+cm-chatsan-replacement-nade = boomstick
+
+cm-chatsan-word-nades = nades
+cm-chatsan-replacement-nades = boomsticks
+
+cm-chatsan-word-nuke = nuke
+cm-chatsan-replacement-nuke = hive killer
+
+cm-chatsan-word-intel = intel
+cm-chatsan-replacement-intel = scavenger talls
+
+cm-chatsan-word-survivor = survivor
+cm-chatsan-replacement-survivor = planet tall
+
+cm-chatsan-word-survivors = survivors
+cm-chatsan-replacement-survivors = planet talls
+
+cm-chatsan-word-surv = surv
+cm-chatsan-replacement-surv = planet tall
+
+cm-chatsan-word-survs = survs
+cm-chatsan-replacement-survs = planet talls

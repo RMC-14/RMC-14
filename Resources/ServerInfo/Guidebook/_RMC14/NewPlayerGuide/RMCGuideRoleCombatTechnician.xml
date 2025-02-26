@@ -1,0 +1,84 @@
+﻿<Document>
+  Guide by Kynthos on Discord
+
+  [color=#5f698a]█    █ █▄ █[/color] [head=2][bold]UNITED NATIONS MARINE CORPS[/bold][/head]\n
+  [color=#5f698a]▀ ▄▀ █ ▀█ [/color]
+
+  #Combat Technician
+
+  It is recommended that you play [textlink="Maintenance Technician" link="RMCGuideRoleMaintenanceTechnician"] to learn the basics of Engineering.
+
+  The Combat Technician is the frontline Engineer for the Marine squads. Their primary responsibilities include fixing power, breaching into buildings, and setting up forward fortifications. Your work will provide your fellow Marines with cover to fight from, allowing them to engage the enemy in areas they would not be able to safely do otherwise.
+
+  ##Pre-Deployment Equipment
+
+  The Combat Technician is expected to carry the following items on them at all times:
+  - [bold]A full suite of tools[/bold]. Among them are the blowtorch, crowbar, entrenching tool, light replacer, screwdriver, security access tuner, wire cutters, and wrench.
+  - [bold]Welding Protection[/bold]. The standard Combat Technician Helmet provides Welding protection, but Welding Goggles can be found elsewhere should you lose your helmet.
+  - [bold]Common building materials[/bold] for constructing fortifications: Sandbags, Metal, and Plasteel. It is highly recommended that you use a [bold]Construction Pouch[/bold] to efficiently carry these bulky items.
+  - [bold]Breaching explosives[/bold], for accessing inaccessible areas through a newly crafted doorway and stripping cover from the enemy.
+  - [bold]Your faithful Sentry Gun[/bold], which you can deploy to provide covering fire in hostile environments. If it breaks you are not getting a replacement.
+
+  Majority of these items are provided for free in your specialised Barracks. The Essential Engineer set, Sentry Gun, and a toolbelt full of tools can all be dispensed free of charge. Use your limited points to purchase an upgrade to the Sentry Gun, additional breaching explosives, or additional building materials. If you need more of anything, line up at Requisitions to request more.
+
+  Once you are equipped and deployed, you’ll be expected to perform the following responsibilities.
+
+  ##Fixing Power and Repairing Lights
+
+  Each facility the UNMC is deployed to is powered by [bold]G-11 Geothermal Generators[/bold], which will be depowered and broken when you arrive. These items are usually located in the local engineering facility, but your superiors will inform you of their exact location in case they’re not. You’ll need a blowtorch, wire cutters, and wrench to get them in working order.
+
+  <Box>
+    <GuideEntityEmbed Entity="RMCGeneratorFusionColony"/>
+  </Box>
+
+  Once power is generating, you’ll need to repair any broken APCs to distribute power to nearby electronics and use the light replacer to replace broken lightbulbs. Broken floodlights will take slightly more effort, as the internal wiring will also need replacing. Carry some [bold]cable coil[/bold] if you’re expecting to repair these.
+
+  ##Repairing Sensitive Equipment
+
+  The Combat Technician is among the few Marines specially trained in repairing vital equipment on the Colony. The two you will be entrusted with are the Telecommunications and Sensor tower, which you can learn more about [textlink="here" link="RMCGuideCommunicationsTowers"].
+
+  ##Building Fortifications
+
+  The enemy that you are fighting excels in melee range. In many situations, the only thing that stops a fighting Marine from getting mauled is the simple metal barricade, which blocks movement but still allows you to shoot over.
+
+  <Box>
+    <GuideEntityEmbed Entity="CMBarricadeMetal"/>
+    [color=#C68610]Everything the Combat Technician will need can be found in the crafting menu, default hotkey G. Type "Bar" in the search field.[/color]
+  </Box>
+
+  - [bold]Metal Barricade[/bold]: Standard issue tried and true combat fortification. Requires 4 metal.
+  - [bold]Metal Folding Barricade[/bold]: A metal barricade that can be folded down to allow passage. Is extremely fragile, so do not rely on it to provide much safety. Requires 6 metal.
+  - [bold]Plasteel Barricade[/bold]: Much more durable but expensive version of the metal barricade. Requires 6 Plasteel.
+  - [bold]Plasteel Folding Barricade[/bold]: This folding barricade is more durable than its metal counterparts, and as such is recommended for making doorways in sturdy fortifications. Requires 8 plasteel.
+
+  The cheap alternative to metal barricades are [bold]sandbag barricades[/bold]. These can be deployed faster than a barricade and do not need specialised training to construct, but the bags need to be filled using an entrenching tool beforehand. Sandbags also have limited repair options, so they are only reliable for so long.
+
+  <Box>
+    <GuideEntityEmbed Entity="CMBarricadeSandbag"/>
+  </Box>
+
+  Once a Barricade is built, it isn’t finished until you lace it with barbed wire, which you can craft for 1 metal per barricade. A Barbed barricade will harm anything that strikes it, as well as completely prevent anything from vaulting over it. [bold]Every Barricade should have some barbed wire[/bold].
+
+  <Box>
+    <GuideEntityEmbed Entity="BarbedWire1"/>
+  </Box>
+
+  Non-foldable Barricades have three upgrades which require 2 metal:
+  - [bold]Anti-Biohazard[/bold]: Provides resistance to being melted down by various acid attacks.
+  - [bold]Blast-Resistant[/bold]: Provides explosive resistance.
+  - [bold]Reinforced[/bold]: Provides resistance to being mauled.
+
+  To upgrade a barricade, click one with metal sheets in your active hand.
+
+  <Box>
+    <GuideEntityEmbed Entity="CMBarricadeBurn"/>
+    <GuideEntityEmbed Entity="CMBarricadeExplosive"/>
+    <GuideEntityEmbed Entity="CMBarricadeBrute"/>
+  </Box>
+
+  Should a barricade be damaged, it can be repaired with a blowtorch. This is a lengthy process that does not completely repair the Barricade, so extreme punishment will eventually wear down your defences. When placing Barricades, make sure it allows your Marines to safely shoot at the enemy, and avoid placing them right next to corners where they can be endlessly attacked from behind cover. If you have the extra time, deconstruct or blast this cover to open new firing lines.
+
+  ##Scavenging Materials
+
+  You will [bold]always[/bold] need additional building materials, and the lives of your fellow Marines are worth more than the buildings around you. Chairs, metal railings, and window frames can be quickly deconstructed for more metal, while walls and doors can be slowly deconstructed for the same purpose. Some AOs will have preinstalled fortifications that you can use yourself or deconstruct to obtain the building materials. Instructions for deconstruction are provided upon inspection.
+</Document>

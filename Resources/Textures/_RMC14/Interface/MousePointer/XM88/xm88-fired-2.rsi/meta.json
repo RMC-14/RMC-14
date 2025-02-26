@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f6d90e75a09536a981eb5b9255370ae24adb226f/icons/effects/mouse_pointer/xm88/xm88-fired-2.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "all",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          100
+        ]
+      ]
+    }
+  ]
+}
