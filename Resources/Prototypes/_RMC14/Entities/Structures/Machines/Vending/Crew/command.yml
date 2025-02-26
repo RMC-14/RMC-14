@@ -396,10 +396,10 @@
       entries:
       - id: CMHeadsetSeniorCommand
       - id: CMMRE
-  # - name: Commanding Officer Essentials Kit #TODO: Make this.
-  #   takeAll: CMBundle
-  #   entries:
-  #   - id: CMCommandingOfficerEssentialsBundle # TODO RMC14 Megaphone , Paper Map , Laser Designator
+    - name: Commanding Officer Essentials Kit
+      takeAll: CMBundle
+      entries:
+      - id: RMCCommandingOfficerEssentialsBundle # TODO RMC14 Megaphone , Paper Map
     - name: Bags
       choices: { CMBag: 1 }
       entries:
