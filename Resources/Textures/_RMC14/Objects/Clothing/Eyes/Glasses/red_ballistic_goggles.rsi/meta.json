@@ -17,6 +17,14 @@
     {
       "name": "equipped-MASK",
       "directions": 4
+    },
+    {
+      "name": "helmet",
+      "directions": 4
+    },
+    {
+      "name": "helmet-down",
+      "directions": 4
     }
   ]
 }
