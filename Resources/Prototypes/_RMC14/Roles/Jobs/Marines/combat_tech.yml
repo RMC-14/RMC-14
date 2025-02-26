@@ -122,3 +122,20 @@
     role: CMCombatTech
   - type: Sprite
     state: engi_spawn_delta
+
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCCombatTech
+  components:
+  - type: GhostRole
+    name: cm-job-name-combat-tech
+    description: cm-job-description-combat-tech
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    raffle:
+      settings: default
+    job: CMCombatTech
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobCombatTech
+      time: 1

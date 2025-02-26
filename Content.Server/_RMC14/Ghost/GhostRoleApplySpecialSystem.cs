@@ -1,6 +1,7 @@
 using Content.Server._RMC14.Marines.Roles.Ranks;
 using Content.Server.Ghost.Roles.Components;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Roles;
 using Content.Shared.Access.Components;
 using Content.Shared.Clothing;
 using Content.Shared.Inventory;
@@ -38,7 +39,7 @@ public sealed partial class GhostRoleApplySpecialSystem : EntitySystem
         if (job.StartingGear is { } gear)
             _loadout.Equip(ent, [gear], null);
 
-        if (_inventory.TryGetSlotContainer(ent, "id", out var container, out var _))
+        if (_inventory.TryGetSlotContainer(ent, "id", out var container, out _))
         {
             foreach (var item in container.ContainedEntities)
             {
@@ -50,11 +51,17 @@ public sealed partial class GhostRoleApplySpecialSystem : EntitySystem
             }
         }
 
+        AddComp(ent, new OriginalRoleComponent() { Job = jobProto });
         foreach (var special in job.Special)
             special.AfterEquip(ent);
 
         if (ent.Comp.Squad is { } squadProto && _squad.TryEnsureSquad(squadProto, out var squad))
+        {
+            if (_squad.TryGetSquadLeader(squad, out _))
+                RemComp<SquadLeaderComponent>(ent);
+
             _squad.AssignSquad(ent, squad.Owner, jobProto);
+        }
 
         if (job.Ranks is { } ranks)
         {
