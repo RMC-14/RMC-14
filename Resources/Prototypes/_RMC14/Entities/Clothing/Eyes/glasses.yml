@@ -289,10 +289,6 @@
     - MASK
     - EYES
   - type: FlashImmunity
-  - type: HelmetAccessory
-    rsi:
-      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bigsunglasses.rsi
-      state: equipped-EYES
 
 - type: entity
   parent: ClothingEyesBase
