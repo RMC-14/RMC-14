@@ -147,11 +147,10 @@
     state: mortar_ammo_inc
   - type: Explosive
     explosionType: RMCMortar
-    maxIntensity: 30 # max 150 brute, 150 burn
-    intensitySlope: 6
-    totalIntensity: 800
+    maxIntensity: 0
+    intensitySlope: 0
+    totalIntensity: 0
     canCreateVacuum: false
-  - type: CMExplosionEffect
   - type: RMCScorchEffect
   - type: MortarShell
   - type: TileFireOnTrigger
