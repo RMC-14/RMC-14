@@ -54,6 +54,10 @@
     {
       "name": "gold_autism",
       "directions": 4
+    },
+    {
+      "name": "lgbt",
+      "directions": 4
     }
   ]
 }
