@@ -1246,7 +1246,3 @@
   - type: CMItemSlots
     startingItem: RMCMagazineRifleM16
     count: 12
-    slot:
-      whitelist:
-        tags:
-        - RMCMagazineRifleM16
