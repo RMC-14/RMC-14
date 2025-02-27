@@ -20,6 +20,7 @@ using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Standing;
 using Content.Shared.Timing;
+using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -408,6 +409,11 @@ public sealed class CMGunSystem : EntitySystem
         }
 
         userDelay.LastPBAt = _timing.CurTime;
+
+        if (!TryComp<MeleeWeaponComponent>(gun, out var melee))
+            return;
+        //Can't melee right after a PB
+        melee.NextAttack = userDelay.LastPBAt;
     }
 
     private void OnRecoilSkilledRefreshModifiers(Entity<GunSkilledRecoilComponent> ent, ref GunRefreshModifiersEvent args)
