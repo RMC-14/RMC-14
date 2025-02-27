@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.CriticalGrace;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.Stab;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.Coordinates;
@@ -18,6 +19,7 @@ using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Collections;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Threading;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -40,6 +42,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
+    [Dependency] private readonly IPrototypeManager _protoManager = default!;
 
     private readonly TimeSpan _pheromonePlasmaUseDelay = TimeSpan.FromSeconds(1);
 
@@ -70,6 +73,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, ComponentRemove>(OnFrenzyRemove);
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, GetMeleeDamageEvent>(OnFrenzyGetMeleeDamage);
+        SubscribeLocalEvent<XenoFrenzyPheromonesComponent, RMCGetTailStabBonusDamageEvent>(OnFrenzyGetTailStabDamage);
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, RefreshMovementSpeedModifiersEvent>(OnFrenzyMovementSpeedModifiers);
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, PullStartedMessage>(OnFrenzyPullStarted, after: [typeof(RMCPullingSystem)] );
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, PullStoppedMessage>(OnFrenzyPullStopped, after: [typeof(RMCPullingSystem)] );
@@ -181,10 +185,13 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
     private void OnFrenzyGetMeleeDamage(Entity<XenoFrenzyPheromonesComponent> frenzy, ref GetMeleeDamageEvent args)
     {
-        args.Modifiers.Add(new DamageModifierSet
-        {
-            Coefficients = frenzy.Comp.DamageTypes.ToDictionary(key => key.ToString(), _ => frenzy.Comp.AttackDamageModifier)
-        });
+        args.Damage += new DamageSpecifier(_protoManager.Index(frenzy.Comp.DamageGroup), frenzy.Comp.AttackDamageAddPerMult * frenzy.Comp.Multiplier);
+    }
+
+    private void OnFrenzyGetTailStabDamage(Entity<XenoFrenzyPheromonesComponent> frenzy, ref RMCGetTailStabBonusDamageEvent args)
+    {
+        //1.2 = tailstab attack mult
+        args.Damage += new DamageSpecifier(_protoManager.Index(frenzy.Comp.DamageGroup), frenzy.Comp.AttackDamageAddPerMult * frenzy.Comp.Multiplier * 1.2);
     }
 
     private void OnFrenzyMovementSpeedModifiers(Entity<XenoFrenzyPheromonesComponent> frenzy, ref RefreshMovementSpeedModifiersEvent args)
@@ -254,6 +261,24 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         RaiseLocalEvent(ent, ref ev);
     }
 
+    private bool KeepWarding(EntityUid ent, XenoWardingPheromonesComponent warding, FixedPoint2 newWardMult)
+    {
+        if ((!_mobThreshold.TryGetIncapThreshold(ent, out var critThres) ||
+             !_damageableQuery.TryGetComponent(ent, out var damageable)))
+            return false;
+
+        if (damageable.TotalDamage < critThres)
+            return false;
+
+        if (newWardMult > warding.Multiplier)
+            return false;
+
+        if ((TryComp<XenoComponent>(ent, out var xeno) && xeno.HealOffWeeds) || !_weeds.IsOnWeeds(ent))
+            return false;
+
+        return true;
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -277,6 +302,10 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         var wardingQuery = EntityQueryEnumerator<XenoWardingPheromonesComponent>();
         while (wardingQuery.MoveNext(out var uid, out var warding))
         {
+            //Don't clear if we would die
+            if (KeepWarding(uid, warding, 0))
+                continue;
+
             oldWarding.Add(uid);
             warding.Multiplier = 0;
         }
