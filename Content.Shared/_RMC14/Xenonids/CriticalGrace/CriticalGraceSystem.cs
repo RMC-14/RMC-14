@@ -34,8 +34,6 @@ public sealed partial class CriticalGraceSystem : EntitySystem
         RaiseLocalEvent(ent, ref ev);
         grace.GraceEndsAt = _timing.CurTime + ev.Time;
 
-        //Don't run on stopping/stopped/removing/deleted
-        //if (grace.LifeStage < ComponentLifeStage.Stopping)
         args.State = Shared.Mobs.MobState.Alive;
     }
 
