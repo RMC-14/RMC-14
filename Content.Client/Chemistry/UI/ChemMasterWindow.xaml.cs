@@ -150,6 +150,7 @@ namespace Content.Client.Chemistry.UI
 
             // RMC - Change Pill Bottle Color Button
             ChangePillBottleColorButton.Disabled = castState.OutputContainerInfo is null;
+            ChangePillBottleColorButton.Text = Enum.GetName(castState.SelectedBottleColor);
 
             UpdateDosageFields(castState);
         }
@@ -164,7 +165,7 @@ namespace Content.Client.Chemistry.UI
             var bottleAmountMax = holdsReagents ? remainingCapacity : 0;
             var bufferVolume = castState.BufferCurrentVolume?.Int() ?? 0;
 
-            PillDosage.Value = (int)Math.Min(bufferVolume, castState.PillDosageLimit);
+            PillDosage.Value = (int)Math.Min(bufferVolume, Math.Min(castState.PillDosageLimit, castState.PillDosagePrevious));
 
             PillTypeButtons[castState.SelectedPillType].Pressed = true;
             PillNumber.IsValid = x => x >= 0 && x <= pillNumberMax;

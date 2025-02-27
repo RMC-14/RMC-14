@@ -25,3 +25,9 @@
     blacklist:
       components:
       - Xeno
+  - type: UserInterface
+    interfaces:
+      enum.ChemMasterUiKey.Key:
+        type: ChemMasterBoundUserInterface
+      enum.ChangePillBottleUIKey.Key:
+        type: RMCChangePillBottleColorBui
