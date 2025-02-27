@@ -24,7 +24,7 @@
     
 - type: entity
   parent: CMJumpsuitLiaison
-  id: CMJumpsuitLiaisonCharcoalSuitskirt
+  id: RMCJumpsuitLiaisonCharcoalSuitskirt
   name: liaison's charcoal suitskirt
   description: A stiff, stylish charcoal suit commonly worn by businesswomen from the We-Ya corporation. Expertly crafted to make you look like a prick.
   components:
@@ -99,7 +99,7 @@
     
 - type: entity
   parent: CMJumpsuitLiaison
-  id: CMJumpsuitLiaisonFieldSuitskirt
+  id: RMCJumpsuitLiaisonFieldSuitskirt
   name: corporate field suitskirt
   description: A black pencil skirt paired with a dark blue button-down shirt. A popular look among those in the corporate world that conduct the majority of their business from night clubs.
   components:
@@ -143,7 +143,7 @@
     
 - type: entity
   parent: CMJumpsuitLiaison
-  id: CMJumpsuitLiaisonBlackSuitskirt
+  id: RMCJumpsuitLiaisonBlackSuitskirt
   name: black suitskirt
   description: A simple black pencil skirt paired with a white shirt. A common pairing among corporate workers.
   components:

@@ -20,7 +20,7 @@
       entries:
       - id: CMJumpsuitLiaisonBlack
         amount: 1
-      - id: CMJumpsuitLiaisonBlackSuitskirt
+      - id: RMCJumpsuitLiaisonBlackSuitskirt
         amount: 1
       - id: CMJumpsuitLiaisonBlue
         amount: 1
@@ -32,7 +32,7 @@
         amount: 1
       - id: CMJumpsuitLiaisonCharcoal
         amount: 1
-      - id: CMJumpsuitLiaisonCharcoalSuitskirt
+      - id: RMCJumpsuitLiaisonCharcoalSuitskirt
         amount: 1
       - id: CMJumpsuitLiaisonFormal
         amount: 1
@@ -47,7 +47,7 @@
 #      - id: OrangeOutfit
       - id: CMJumpsuitLiaisonField
         amount: 1
-      - id: CMJumpsuitLiaisonFieldSuitskirt
+      - id: RMCJumpsuitLiaisonFieldSuitskirt
         amount: 1
       - id: CMJumpsuitLiaisonOutingRed
         amount: 1
