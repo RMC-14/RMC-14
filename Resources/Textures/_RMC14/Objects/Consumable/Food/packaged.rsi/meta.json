@@ -29,13 +29,7 @@
       "name": "hburger"
     },
     {
-      "name": "kepler_chips"
-    },
-    {
       "name": "wy_pepper"
-    },
-    {
-      "name": "kepler_flame"
     },
     {
       "name": "hotdog_trash"
@@ -47,13 +41,7 @@
       "name": "MREtray_empty"
     },
     {
-      "name": "kepler_chips_flame_trash"
-    },
-    {
       "name": "wy_chips_pepper_trash"
-    },
-    {
-      "name": "kepler_chips_trash"
     },
     {
       "name": "hunk_trash"
@@ -99,6 +87,36 @@
     },
     {
       "name": "eat_bar"
+    },
+    {
+      "name": "kepler_flame"
+    },
+    {
+      "name": "kepler_chips"
+    },
+    {
+      "name": "kepler_chips_trash"
+    },
+    {
+      "name": "kepler_chips_flame_trash"
+    },
+    {
+      "name": "popcorn_trash"
+    },
+    {
+      "name": "candy_trash"
+    },
+    {
+      "name": "chips_trash"
+    },
+    {
+      "name": "popcorn"
+    },
+    {
+      "name": "chips"
+    },
+    {
+      "name": "candy"
     }
   ]
 }
