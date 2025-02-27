@@ -66,7 +66,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         SubscribeLocalEvent<XenoPheromonesComponent, XenoPheromonesActionEvent>(OnXenoPheromonesAction);
 
         SubscribeLocalEvent<XenoWardingPheromonesComponent, UpdateMobStateEvent>(OnWardingUpdateMobState,
-            after: [typeof(MobThresholdSystem), typeof(SharedXenoPheromonesSystem)]);
+            after: [typeof(MobThresholdSystem)]);
         SubscribeLocalEvent<XenoWardingPheromonesComponent, ComponentRemove>(OnWardingRemove);
         SubscribeLocalEvent<XenoWardingPheromonesComponent, DamageStateCritBeforeDamageEvent>(OnWardingDamageCritModify);
         SubscribeLocalEvent<XenoWardingPheromonesComponent, GetCriticalGraceTimeEvent>(OnWardingGetGraceTime);

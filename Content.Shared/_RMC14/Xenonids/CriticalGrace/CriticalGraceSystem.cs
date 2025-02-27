@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.Network;
@@ -13,7 +14,8 @@ public sealed partial class CriticalGraceSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     public override void Initialize()
     {
-        SubscribeLocalEvent<CriticalGraceTimeComponent, UpdateMobStateEvent>(OnCriticalGraceMobState, after: [typeof(MobThresholdSystem)]);
+        SubscribeLocalEvent<CriticalGraceTimeComponent, UpdateMobStateEvent>(OnCriticalGraceMobState,
+            after: [typeof(MobThresholdSystem), typeof(SharedXenoPheromonesSystem)]);
         SubscribeLocalEvent<InCriticalGraceComponent, ComponentShutdown>(OnInCriticalGraceRemove);
     }
 
