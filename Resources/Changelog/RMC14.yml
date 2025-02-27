@@ -1,49 +1,4 @@
 ﻿Entries:
-- author: crystalHex
-  changes:
-  - message: Added tooltips to the gardener's fruit selection UI.
-    type: Tweak
-  id: 878
-  time: '2024-10-23T22:54:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4562
-- author: Rainbeon
-  changes:
-  - message: Fixed Leaps self-stunning Xenos instead of self-rooting. This means Runners
-      and Lurkers can attack, shove, and initiate grabs immediately after a leap without
-      waiting, but still can not move.
-    type: Fix
-  - message: Lurkers now self-root themselves for 1.5 seconds when leaping a Marine
-      while invisible, up from 0.7 seconds.
-    type: Fix
-  - message: Fixed Lurkers stunning themselves when leaping a marine while still visible.
-    type: Fix
-  - message: Fixed Lurkers not un-rooting themselves when attacking Marines after
-      a Leap.
-    type: Fix
-  id: 879
-  time: '2024-10-23T22:54:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4575
-- author: CyberTropic
-  changes:
-  - message: Added scorch marks to explosives.
-    type: Add
-  id: 880
-  time: '2024-10-23T22:59:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4572
-- author: Ss14plss
-  changes:
-  - message: Now you can put your cigarette/writing pen behind your ear.
-    type: Add
-  id: 881
-  time: '2024-10-23T23:02:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4550
-- author: Vermidia
-  changes:
-  - message: Fix Medic Autoinjectors not requiring medical 2 to use
-    type: Fix
-  id: 882
-  time: '2024-10-28T09:45:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4616
 - author: Vermidia
   changes:
   - message: Added Pressurized Chemical Dispensers, which can be used by corpsman
@@ -5153,5 +5108,46 @@
   id: 1379
   time: '2025-02-22T20:06:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5701
+- author: OmerF-afk
+  changes:
+  - message: Added missing plates, toolboxes, motion detectors, M16 ammo boxes, bipods,
+      couches, clothing, shotgun shell loading rig, plasteel, crayons, kitchen items,
+      and the powerloader operator card to Fiorina.
+    type: Add
+  id: 1380
+  time: '2025-02-27T05:02:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5727
+- author: Tunguso4ka
+  changes:
+  - message: Solaris Caves north of Mining now have rock walls that disappear 40 minutes
+      into a round.
+    type: Add
+  id: 1381
+  time: '2025-02-27T05:09:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5719
+- author: CyberTropic
+  changes:
+  - message: Fixed map nightmare inserts not clearing all previous objects.
+    type: Fix
+  - message: Added map nightmare insert variants. Shiva LZ2 South Caves can now spawn
+      as default, built up, or destroyed.
+    type: Add
+  id: 1382
+  time: '2025-02-27T05:17:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5724
+- author: Vermidia
+  changes:
+  - message: Fixed boiler neuro tailstab not injecting enough neurotoxin (16 -> 20)
+    type: Fix
+  id: 1383
+  time: '2025-02-27T05:49:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5737
+- author: Arcticular1
+  changes:
+  - message: Commanding Officer Essentials Kit to CO vendor.
+    type: Add
+  id: 1384
+  time: '2025-02-27T05:50:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5736
 Name: RMC14
 Order: -1
