@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: crystalHex
-  changes:
-  - message: Added tooltips to the gardener's fruit selection UI.
-    type: Tweak
-  id: 878
-  time: '2024-10-23T22:54:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4562
 - author: Rainbeon
   changes:
   - message: Fixed Leaps self-stunning Xenos instead of self-rooting. This means Runners
@@ -5153,5 +5146,14 @@
   id: 1379
   time: '2025-02-22T20:06:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5701
+- author: OmerF-afk
+  changes:
+  - message: Added missing plates, toolboxes, motion detectors, M16 ammo boxes, bipods,
+      couches, clothing, shotgun shell loading rig, plasteel, crayons, kitchen items,
+      and the powerloader operator card to Fiorina.
+    type: Add
+  id: 1380
+  time: '2025-02-27T05:02:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5727
 Name: RMC14
 Order: -1
