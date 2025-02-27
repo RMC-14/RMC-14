@@ -118,6 +118,17 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_black.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_black.rsi
+    
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: CMJumpsuitLiaisonBlackSuitskirt
+  name: black suitskirt
+  description: A simple black pencil skirt paired with a white shirt. A common pairing among corporate workers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_black_suitskirt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_black_suitskirt.rsi
 
 - type: entity
   parent: CMJumpsuitLiaison

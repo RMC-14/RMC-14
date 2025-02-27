@@ -20,6 +20,8 @@
       entries:
       - id: CMJumpsuitLiaisonBlack
         amount: 1
+      - id: CMJumpsuitLiaisonBlackSuitskirt
+        amount: 1
       - id: CMJumpsuitLiaisonBlue
         amount: 1
       - id: CMJumpsuitLiaisonBrown
