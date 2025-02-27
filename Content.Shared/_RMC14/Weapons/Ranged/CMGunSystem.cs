@@ -413,7 +413,7 @@ public sealed class CMGunSystem : EntitySystem
         if (!TryComp<MeleeWeaponComponent>(gun, out var melee))
             return;
         //Can't melee right after a PB
-        melee.NextAttack = userDelay.LastPBAt;
+        melee.NextAttack = userDelay.LastPBAt + userDelay.TimeBetweenPBs;
         Dirty(gun, melee);
     }
 
