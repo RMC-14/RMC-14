@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Added scorch marks to explosives.
-    type: Add
-  id: 880
-  time: '2024-10-23T22:59:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4572
 - author: Ss14plss
   changes:
   - message: Now you can put your cigarette/writing pen behind your ear.
@@ -5146,5 +5139,15 @@
   id: 1381
   time: '2025-02-27T05:09:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5719
+- author: CyberTropic
+  changes:
+  - message: Fixed map nightmare inserts not clearing all previous objects.
+    type: Fix
+  - message: Added map nightmare insert variants. Shiva LZ2 South Caves can now spawn
+      as default, built up, or destroyed.
+    type: Add
+  id: 1382
+  time: '2025-02-27T05:17:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5724
 Name: RMC14
 Order: -1
