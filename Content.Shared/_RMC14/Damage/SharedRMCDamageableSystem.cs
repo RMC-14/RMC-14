@@ -392,6 +392,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                 case MobState.Critical:
                     _damageable.TryChangeDamage(uid, comp.NonDeadDamage, true, damageable: damageable);
                     var ev = new DamageStateCritBeforeDamageEvent(comp.CritDamage);
+                    RaiseLocalEvent(uid, ref ev);
                     _damageable.TryChangeDamage(uid, ev.Damage, true, damageable: damageable);
                     break;
             }

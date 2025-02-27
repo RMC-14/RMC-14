@@ -28,7 +28,6 @@ using Robust.Shared.Utility;
 using Content.Shared._RMC14.Xenonids.Finesse;
 using static Robust.Shared.Utility.SpriteSpecifier;
 using Content.Shared._RMC14.Slow;
-using Content.Shared._RMC14.Xenonids.CriticalGrace;
 
 namespace Content.Client._RMC14.Xenonids.Hud;
 
