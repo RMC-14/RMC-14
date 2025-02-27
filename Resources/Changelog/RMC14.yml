@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Ss14plss
-  changes:
-  - message: Now you can put your cigarette/writing pen behind your ear.
-    type: Add
-  id: 881
-  time: '2024-10-23T23:02:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4550
-- author: Vermidia
-  changes:
-  - message: Fix Medic Autoinjectors not requiring medical 2 to use
-    type: Fix
-  id: 882
-  time: '2024-10-28T09:45:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4616
 - author: Vermidia
   changes:
   - message: Added Pressurized Chemical Dispensers, which can be used by corpsman
@@ -5149,5 +5135,19 @@
   id: 1382
   time: '2025-02-27T05:17:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5724
+- author: Vermidia
+  changes:
+  - message: Fixed boiler neuro tailstab not injecting enough neurotoxin (16 -> 20)
+    type: Fix
+  id: 1383
+  time: '2025-02-27T05:49:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5737
+- author: Arcticular1
+  changes:
+  - message: Commanding Officer Essentials Kit to CO vendor.
+    type: Add
+  id: 1384
+  time: '2025-02-27T05:50:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5736
 Name: RMC14
 Order: -1
