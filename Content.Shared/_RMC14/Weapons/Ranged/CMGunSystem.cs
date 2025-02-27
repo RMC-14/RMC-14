@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Marines.Orders;
 using Content.Shared._RMC14.Marines.Skills;
@@ -378,7 +378,15 @@ public sealed class CMGunSystem : EntitySystem
             return;
         }
 
-        if (gunComp.SelectedMode == SelectiveFire.FullAuto && TryGetGunUser(gun.Owner, out var user) && gunComp.Target.Value == user.Owner)
+        if (!TryGetGunUser(gun.Owner, out var user))
+            return;
+
+        var userDelay = EnsureComp<UserPointblankCooldownComponent>(user);
+
+        if (_timing.CurTime < userDelay.LastPBAt + userDelay.TimeBetweenPBs)
+            return;
+
+        if (gunComp.SelectedMode == SelectiveFire.FullAuto && gunComp.Target.Value == user.Owner)
             return;
 
         foreach (var projectile in args.FiredProjectiles)
@@ -398,6 +406,8 @@ public sealed class CMGunSystem : EntitySystem
 
             _projectile.ProjectileCollide((projectile, projectileComp, physicsComp), gunComp.Target.Value);
         }
+
+        userDelay.LastPBAt = _timing.CurTime;
     }
 
     private void OnRecoilSkilledRefreshModifiers(Entity<GunSkilledRecoilComponent> ent, ref GunRefreshModifiersEvent args)
