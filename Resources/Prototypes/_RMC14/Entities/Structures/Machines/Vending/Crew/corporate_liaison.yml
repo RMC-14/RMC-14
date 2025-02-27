@@ -32,6 +32,8 @@
         amount: 1
       - id: CMJumpsuitLiaisonCharcoal
         amount: 1
+      - id: CMJumpsuitLiaisonCharcoalSuitskirt
+        amount: 1
       - id: CMJumpsuitLiaisonFormal
         amount: 1
       - id: CMJumpsuitLiaisonBlazer
@@ -44,6 +46,8 @@
         amount: 1
 #      - id: OrangeOutfit
       - id: CMJumpsuitLiaisonField
+        amount: 1
+      - id: CMJumpsuitLiaisonFieldSuitskirt
         amount: 1
       - id: CMJumpsuitLiaisonOutingRed
         amount: 1
