@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Fixed Leaps self-stunning Xenos instead of self-rooting. This means Runners
-      and Lurkers can attack, shove, and initiate grabs immediately after a leap without
-      waiting, but still can not move.
-    type: Fix
-  - message: Lurkers now self-root themselves for 1.5 seconds when leaping a Marine
-      while invisible, up from 0.7 seconds.
-    type: Fix
-  - message: Fixed Lurkers stunning themselves when leaping a marine while still visible.
-    type: Fix
-  - message: Fixed Lurkers not un-rooting themselves when attacking Marines after
-      a Leap.
-    type: Fix
-  id: 879
-  time: '2024-10-23T22:54:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4575
 - author: CyberTropic
   changes:
   - message: Added scorch marks to explosives.
@@ -5155,5 +5138,13 @@
   id: 1380
   time: '2025-02-27T05:02:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5727
+- author: Tunguso4ka
+  changes:
+  - message: Solaris Caves north of Mining now have rock walls that disappear 40 minutes
+      into a round.
+    type: Add
+  id: 1381
+  time: '2025-02-27T05:09:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5719
 Name: RMC14
 Order: -1
