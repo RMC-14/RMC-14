@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Xenonids.Dodge;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
+using Content.Shared.Jittering;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
@@ -20,6 +21,7 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
 
     public override void Initialize()
     {
@@ -75,11 +77,12 @@ public sealed class XenoParalyzingSlashSystem : EntitySystem
                 continue;
             }
 
-            // TODO RMC14 slight blindness
+            // TODO RMC14 daze
             var victim = EnsureComp<VictimBeingParalyzedComponent>(entity);
 
             victim.ParalyzeAt = _timing.CurTime + xeno.Comp.ParalyzeDelay;
             victim.ParalyzeDuration = xeno.Comp.ParalyzeDuration;
+            _jitter.DoJitter(entity, xeno.Comp.ParalyzeDelay, true);
 
             Dirty(entity, victim);
 
