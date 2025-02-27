@@ -150,7 +150,7 @@
   suffix: Valkyrie
   components:
   - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Praetorian/warden_praetorian.rsi
+    sprite: _RMC14/Mobs/Xenonids/Praetorian/valkyrie_praetorian.rsi
   - type: Xeno
     actionIds:
     - ActionXenoRest

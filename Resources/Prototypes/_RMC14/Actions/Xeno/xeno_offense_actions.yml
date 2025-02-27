@@ -161,6 +161,21 @@
 
 - type: entity
   parent: ActionXenoLeap
+  id: ActionXenoAssault
+  name: Assault (25)
+  description: Charge towards a location. Destroys some objects in your path. Melee slashes reduce assault's cooldown. If Super-Empowered, stuns and flings back the first enemy hit.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: charge
+    event: !type:XenoLeapActionEvent
+    useDelay: 14
+    checkCanAccess: false
+
+- type: entity
+  parent: ActionXenoLeap
   id: ActionXenoDash
   name: Dash (40)
   description: Dash a short distance towards a given location.
@@ -745,9 +760,28 @@
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: prae_tail_trip
+      state: stomp
     event: !type:XenoHighGallopActionEvent
     range: 15
     useDelay: 12
     checkCanAccess: false
   - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoScissorCut
+  name: Scissor Cut (25)
+  description: Cuts enemies and fences in a straight line. If Super-Empowered, slows enemies hit too.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_scissor_cut
+    event: !type:XenoScissorCutActionEvent
+    useDelay: 6
+    checkCanAccess: false
+    range: 15
+  - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 25

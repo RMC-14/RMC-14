@@ -43,6 +43,9 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
 
         SubscribeLocalEvent<RMCSolutionTransferWhitelistComponent, SolutionTransferAttemptEvent>(OnTransferWhitelistAttempt);
 
+        SubscribeLocalEvent<NoMixingReagentsComponent, ExaminedEvent>(OnNoMixingReagentsExamined);
+        SubscribeLocalEvent<NoMixingReagentsComponent, SolutionTransferAttemptEvent>(OnNoMixingReagentsTransferAttempt);
+
         Subs.BuiEvents<RMCChemicalDispenserComponent>(RMCChemicalDispenserUi.Key,
             subs =>
             {
@@ -141,9 +144,45 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
 
     private void OnTransferWhitelistAttempt(Entity<RMCSolutionTransferWhitelistComponent> ent, ref SolutionTransferAttemptEvent args)
     {
-        var other = ent.Owner == args.From ? args.To : args.From;
-        if (_entityWhitelist.IsWhitelistFail(ent.Comp.Whitelist, other))
-            args.Cancel(Loc.GetString(ent.Comp.Popup));
+        if (ent.Owner == args.From)
+        {
+            if (_entityWhitelist.IsWhitelistFail(ent.Comp.SourceWhitelist, args.To))
+                args.Cancel(Loc.GetString(ent.Comp.Popup));
+        }
+        else
+        {
+            if (_entityWhitelist.IsWhitelistFail(ent.Comp.TargetWhitelist, args.From))
+                args.Cancel(Loc.GetString(ent.Comp.Popup));
+        }
+    }
+
+    private void OnNoMixingReagentsExamined(Entity<NoMixingReagentsComponent> ent, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(NoMixingReagentsComponent)))
+        {
+            args.PushMarkup(Loc.GetString("rmc-fuel-examine-cant-mix"));
+        }
+    }
+
+    private void OnNoMixingReagentsTransferAttempt(Entity<NoMixingReagentsComponent> ent, ref SolutionTransferAttemptEvent args)
+    {
+        var tankSolution = args.FromSolution.Comp.Solution;
+        var targetSolution = args.ToSolution.Comp.Solution;
+        if (targetSolution.Contents.Count > 1)
+        {
+            args.Cancel(Loc.GetString("rmc-fuel-cant-mix"));
+            return;
+        }
+
+        foreach (var content in targetSolution.Contents)
+        {
+            if (tankSolution.Volume > FixedPoint2.Zero &&
+                !tankSolution.ContainsReagent(content.Reagent))
+            {
+                args.Cancel(Loc.GetString("rmc-fuel-cant-mix"));
+                return;
+            }
+        }
     }
 
     private void OnChemicalDispenserSettingMsg(Entity<RMCChemicalDispenserComponent> ent, ref RMCChemicalDispenserDispenseSettingBuiMsg args)

@@ -1,15 +1,13 @@
 ﻿using System.Numerics;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.MapInsert;
 
-[RegisterComponent]
+[RegisterComponent, EntityCategory("Spawner")]
 [Access(typeof(MapInsertSystem))]
 public sealed partial class MapInsertComponent : Component
 {
-    [DataField(required: true)]
-    public ResPath? Spawn;
-
     [DataField]
     public Vector2 Offset;
 
@@ -22,7 +20,16 @@ public sealed partial class MapInsertComponent : Component
     [DataField]
     public bool ReplaceAreas;
 
+    [DataField(required: true)]
+    public List<SpawnVariation> Variations = new();
+}
+
+[DataDefinition]
+public sealed partial record SpawnVariation
+{
+    [DataField(required: true)]
+    public ResPath Spawn;
+
     [DataField]
     public float Probability = 1.0f;
-
 }

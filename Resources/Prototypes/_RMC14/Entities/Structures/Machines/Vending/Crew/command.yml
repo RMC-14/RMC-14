@@ -151,7 +151,7 @@
         name: first-aid pouch (pills)
       - id: RMCPouchFirstResponder
       - id: RMCPouchFlareFilled
-      #- id: RMCPouchFuelTank # TODO RMC14 Fuel Tank Pouch
+      - id: RMCPouchFuelTank
       - id: RMCPouchGeneralLarge
         recommended: true
       - id: RMCPouchMagazineLarge
@@ -396,22 +396,23 @@
       entries:
       - id: CMHeadsetSeniorCommand
       - id: CMMRE
-  # - name: Commanding Officer Essentials Kit #TODO: Make this.
-  #   takeAll: CMBundle
-  #   entries:
-  #   - id: CMCommandingOfficerEssentialsBundle # TODO RMC14 Megaphone , Paper Map , Laser Designator
+    - name: Commanding Officer Essentials Kit
+      takeAll: CMBundle
+      entries:
+      - id: RMCCommandingOfficerEssentialsBundle # TODO RMC14 Megaphone , Paper Map
     - name: Bags
       choices: { CMBag: 1 }
       entries:
       - id: CMBackpackCommand
-        recommended: true
       #- id: CMSatchelCommandSecure # TODO RMC14 Secure Satchel (ID LOCK)
+      - id: RMCBackpackRTO
+      - id: CMSatchelMarineIntel 
     - name: Combat Equipment
       takeAll: CMCombatEquipment
       entries:
       - id: RMCArmorM3CO
-      - id: CMArmorHelmetM10CO
-      - id: RMCHandsCOGloves
+      - id: CMArmorHelmetM11CCO
+      - id: CMHandsInsulated
       - id: CMBootsBlackFilled
     - name: Accessories
       choices: { CMAccessories: 1 }
@@ -419,6 +420,7 @@
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbingBlack
+        recommended: true
     #- id: CMTacticalWaistcoat # TODO Port Waistcoat
       - id: CMWebbingPouch
       - id: CMWebbing
@@ -436,13 +438,13 @@
         recommended: true
       - id: CMBeltSecurityMPFilled
         name: M276 pattern security rig (Full)
-        recommended: true
+      - id: CMBeltMedicalFilled
+        name: M276 pattern medical storage rig (Full)
+        recommended: true 
       - id: CMBeltMedicBagFilled
         name: M276 pattern lifesaver bag (Full)
       - id: CMBeltMarine
-        recommended: true
       - id: CMBeltUtilityCombat
-        recommended: true
       #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
       - id: RMCM276ShotgunShellLoadingRig
     - name: Pouches
@@ -457,12 +459,19 @@
         recommended: true
       - id: RMCPouchMedkit
       - id: RMCPouchAutoinjectorFill
+        recommended: true 
       - id: RMCPouchGeneralLarge
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchMagazineLarge
       - id: RMCPouchPistol
       - id: RMCPouchShotgunLarge
       - id: RMCPouchToolsFill
+    - name: Mask
+      choices: { CMMask: 1 }
+      entries:
+      - id: CMMaskGas
+      - id: CMMaskCoif
+      - id: RMCMaskRebreather
 
 # Weapon Vend
 - type: entity
@@ -485,7 +494,7 @@
       entries:
       - id: WeaponRifleM59A
         name: M59A Prototype Rifle
-      - id: CMSmartGunOperatorEquipmentCaseBelt
+      - id: CMCOSmartGunOperatorEquipmentCaseBelt
         name: Commander's Smartgun
     - name: Primary Ammunition
       entries:
@@ -540,9 +549,10 @@
         points: 15
       - id: RMCAttachmentS42xTelescopicMiniscope
         points: 15
-    # - name: Helmet Visors # TODO RMC14 Port Helmet Visors
-    #   entries:
-    #   - id: CMHelmetVisor
+    - name: Helmet Visors # TODO RMC14 Port Helmet Visors
+      entries:
+      - id: RMCVisorNightVision 
+        points: 10
     - name: Underbarrel Attachments
       entries:
       - id: RMCAttachmentLaserSight
@@ -553,10 +563,10 @@
         points: 15
       - id: RMCAttachmentU7UnderbarrelShotgun
         points: 15
-      - id: RMCAttachmentUnderbarrelExtinguisher # TODO: Check this works, prototype looks sussy
+      - id: RMCAttachmentUnderbarrelExtinguisher
         points: 15
-      #- id: RMCAttachmentUnderbarrelFlamethrower # TODO RMC14 Underbarrel FLamethrower
-      #  points: 15
+      - id: RMCAttachmentMiniFlamethrower
+        points: 15
       - id: RMCAttachmentU1GrenadeLauncher
         points: 5
     - name: Barrel Attachments
@@ -567,6 +577,7 @@
         points: 15
       - id: RMCAttachmentSuppressor
         points: 15
+        
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
@@ -733,7 +744,7 @@
       - id: RMCPouchConstruction
       - id: RMCPouchElectronicsFill
       - id: RMCPouchFlareFilled
-      #- id: RMCPouchFuelTank # TODO RMC14 Fuel Tank Pouch
+      - id: RMCPouchFuelTank
     - name: Accessories
       jobs:
       - CMExecutiveOfficer
@@ -983,7 +994,8 @@
         name: M42A2 pump shotgun
       - id: RMCM54CMK2Case
         name: M54C assault rifle MK2
-      # - id: RMCIncineratorUnitCase TODO: Incinerator unit case
+      - id: RMCCaseFlamer
+        name: M34 incinerator unit
     - name: Spare Equipment
       jobs:
       - CMChiefEngineer

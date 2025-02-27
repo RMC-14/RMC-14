@@ -27,7 +27,14 @@
         type: RMCRadioFilterBui
 
 - type: entity
+  abstract: true
   parent: CMHeadset
+  id: RMCHeadsetIcons
+  components:
+  - type: GrantMarineIcons
+
+- type: entity
+  parent: RMCHeadsetIcons
   id: RMCHeadsetShip
   name: marine radio headset
   description: A standard military radio headset. Bulkier than combat models.

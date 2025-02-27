@@ -20,6 +20,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
     [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private readonly SolutionTransferSystem _solutionTransfer = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
@@ -31,6 +32,8 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         SubscribeLocalEvent<CMSolutionRefillerComponent, InteractUsingEvent>(OnRefillerInteractUsing);
 
         SubscribeLocalEvent<RMCRefillSolutionOnStoreComponent, EntInsertedIntoContainerMessage>(OnRefillSolutionOnStoreInserted);
+
+        SubscribeLocalEvent<RMCRefillSolutionFromContainerOnStoreComponent, EntInsertedIntoContainerMessage>(OnRefillSolutionFromContainerOnStoreInserted);
     }
 
     private void OnRefillableSolutionExamined(Entity<CMRefillableSolutionComponent> ent, ref ExaminedEvent args)
@@ -101,6 +104,18 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
     }
 
     private void OnRefillSolutionOnStoreInserted(Entity<RMCRefillSolutionOnStoreComponent> ent, ref EntInsertedIntoContainerMessage args)
+    {
+        if (!_solution.TryGetSolution(ent.Owner, ent.Comp.SolutionId, out var solutionEnt) ||
+            !_solution.TryGetRefillableSolution(args.Entity, out var refillable, out _))
+        {
+            return;
+        }
+
+        var volume = refillable.Value.Comp.Solution.AvailableVolume;
+        _solutionTransfer.Transfer(null, ent, solutionEnt.Value, args.Entity, refillable.Value, volume);
+    }
+
+    private void OnRefillSolutionFromContainerOnStoreInserted(Entity<RMCRefillSolutionFromContainerOnStoreComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container) ||
             !container.ContainedEntities.TryFirstOrNull(out var contained))

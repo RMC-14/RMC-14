@@ -104,7 +104,9 @@
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentBipod
-          - RMCAttachmentBurstFireAssembly # TODO RMC14 underbarrel extinguisher, flamer, advanced flamer
+          - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer # TODO RMC14 advanced flamer
           - RMCAttachmentU1GrenadeLauncher
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentLaserSight
@@ -114,7 +116,8 @@
         - RMCAttachmentVerticalGrip
         - RMCAttachmentGyroscopicStabilizer
         - RMCAttachmentBurstFireAssembly
-        - RMCAttachmentBipod # TODO RMC14 underbarrel extinguisher
+        - RMCAttachmentBipod
+        - RMCAttachmentUnderbarrelExtinguisher
         - RMCAttachmentU7UnderbarrelShotgun
         - RMCAttachmentLaserSight
         - RMCAttachmentM203GrenadeLauncher

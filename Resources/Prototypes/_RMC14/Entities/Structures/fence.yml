@@ -44,6 +44,10 @@
   - type: RMCDropshipBlocked
   - type: MinimapColor
     color: "#8d2294ad"
+  - type: DamageOnXenoScissors
+    damage:
+      types:
+        Slash: 50
 
 - type: entity
   parent: CMBaseStructureCorrodible
@@ -81,3 +85,49 @@
   - type: Construction
     graph: CMFence
     node: rmcFenceBroken
+
+- type: entity
+  parent: CMFence
+  id: RMCFenceHybrisa
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_fences.rsi
+    state: fence0
+  - type: Construction
+    graph: RMCFenceHybrisa
+    node: fenceMetalHybrisa
+
+- type: entity
+  parent: RMCFenceBroken
+  id: RMCFenceHybrisaBroken
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_fences.rsi
+    state: fence0
+  - type: Construction
+    graph: RMCFenceHybrisa
+    node: rmcFenceBrokenHybrisa
+
+- type: entity
+  parent: CMFence
+  id: RMCFenceHybrisaElectric
+  suffix: electric
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_fences_electric.rsi
+    state: fence0
+  - type: Construction
+    graph: RMCFenceHybrisa
+    node: fenceMetalHybrisaElectric
+
+- type: entity
+  parent: RMCFenceBroken
+  id: RMCFenceHybrisaElectricBroken
+  suffix: electric
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_fences_electric.rsi
+    state: fence0
+  - type: Construction
+    graph: RMCFenceHybrisa
+    node: rmcFenceBrokenHybrisaElectric

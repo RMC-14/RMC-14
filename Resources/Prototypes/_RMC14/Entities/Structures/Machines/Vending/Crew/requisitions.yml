@@ -53,8 +53,8 @@
       #  amount: 2
       #- id: M2C Heavy Machine Gun
       #  amount: 2
-      #- id: M240 Incinerator Unit
-      #  amount: 2
+      - id: RMCCaseFlamer
+        amount: 2
       #- id: M79 Grenade Launcher
       #  amount: 3
       - id: RMCXM51Case
@@ -111,8 +111,8 @@
         amount: 15
       - id: RMCScabbardShotgun
         amount: 10
-      #- id: Pyrotechnician G4-1 Fueltank
-      #  amount: 2
+      - id: RMCBackpackFlamer
+        amount: 2
       - id: CMBackpackWelder
         amount: 2
       - id: CMBackpackMortar
@@ -177,7 +177,7 @@
       - id: RMCPouchFlareFilled
         name: flare pouch (Full)
         amount: 5
-      - id: RMCPouchDocument
+      - id: RMCPouchDocumentSmall
         amount: 2
       #- id: RMCPouchSling
       #  amount: 2
@@ -197,8 +197,8 @@
         amount: 5
       - id: RMCPouchMagazinePistolLarge
         amount: 5
-      #- id: TODO RMC14 Fuel Tank Strap Pouch
-      #  amount: 4
+      - id: RMCPouchFuelTank
+        amount: 4
       - id: RMCPouchGeneralLarge
         amount: 1
       - id: RMCPouchMagazineLarge
@@ -352,8 +352,8 @@
         amount: 11
       - id: RMCMagazinePistolSU6
         amount: 13
-      #- id: M240 Incinerator Tank
-      #  amount: 3
+      - id: RMCTankFlamer
+        amount: 3
       - id: CMMagazineRifleM54CE2
         amount: 3
       - id: CMMagazineRifleM54CMK1
@@ -513,14 +513,14 @@
         amount: 5
       - id: RMCAttachmentLaserSight
         amount: 10
-      #- id: RMCAttachmentMiniFlamethrower
-      #  amount: 5
+      - id: RMCAttachmentMiniFlamethrower
+        amount: 5
       #- id: RMCAttachmentXMVESG1FlamerNozzle
       #  amount: 5
       - id: RMCAttachmentU7UnderbarrelShotgun
         amount: 5
-      #- id: RMCAttachmentUnderbarrelExtinguisher
-      #  amount: 5
+      - id: RMCAttachmentUnderbarrelExtinguisher
+        amount: 5
       - id: RMCAttachmentU1GrenadeLauncher
         amount: 10
       - id: RMCAttachmentVerticalGrip
