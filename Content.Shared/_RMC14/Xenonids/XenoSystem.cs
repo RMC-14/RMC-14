@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Damage;
@@ -109,6 +109,7 @@ public sealed class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, MeleeHitEvent>(OnXenoMeleeHit);
         SubscribeLocalEvent<XenoComponent, HiveChangedEvent>(OnHiveChanged);
         SubscribeLocalEvent<XenoComponent, RMCIgniteEvent>(OnXenoIgnite);
+        SubscribeLocalEvent<XenoComponent, DamageStateCritBeforeDamageEvent>(OnXenoBeforeCritDamage);
 
         Subs.CVar(_config, RMCCVars.CMXenoDamageDealtMultiplier, v => _xenoDamageDealtMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMXenoDamageReceivedMultiplier, v => _xenoDamageReceivedMultiplier = v, true);
@@ -258,6 +259,15 @@ public sealed class XenoSystem : EntitySystem
             _damageable.TryChangeDamage(held, damage, true);
             _hands.TryDrop(ent, held);
         }
+    }
+
+    private void OnXenoBeforeCritDamage(Entity<XenoComponent> ent, ref DamageStateCritBeforeDamageEvent args)
+    {
+        if (!_rmcFlammable.IsOnFire(ent.Owner))
+            return;
+
+        //Don't take bleedout damage on fire
+        args.Damage.ClampMax(0);
     }
 
     private void UpdateXenoSpeedMultiplier(float speed)

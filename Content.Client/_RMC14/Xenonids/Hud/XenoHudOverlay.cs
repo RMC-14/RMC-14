@@ -28,6 +28,7 @@ using Robust.Shared.Utility;
 using Content.Shared._RMC14.Xenonids.Finesse;
 using static Robust.Shared.Utility.SpriteSpecifier;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Xenonids.CriticalGrace;
 
 namespace Content.Client._RMC14.Xenonids.Hud;
 
@@ -474,7 +475,8 @@ public sealed class XenoHudOverlay : Overlay
         _mobThresholds.TryGetDeadThreshold(uid, out var deadThresholdNullable, mobThresholds);
 
         string state;
-        if (_mobState.IsCritical(uid, mobState))
+        if (_mobState.IsCritical(uid, mobState) ||
+            (_mobState.IsAlive(uid) && critThresholdNullable != null && damageable.TotalDamage > critThresholdNullable))
         {
             if (critThresholdNullable is not { } critThreshold || deadThresholdNullable is not { } deadThreshold)
                 return;

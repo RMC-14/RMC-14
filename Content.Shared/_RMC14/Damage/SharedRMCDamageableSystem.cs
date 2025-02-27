@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Orders;
@@ -391,7 +391,8 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                     break;
                 case MobState.Critical:
                     _damageable.TryChangeDamage(uid, comp.NonDeadDamage, true, damageable: damageable);
-                    _damageable.TryChangeDamage(uid, comp.CritDamage, true, damageable: damageable);
+                    var ev = new DamageStateCritBeforeDamageEvent(comp.CritDamage);
+                    _damageable.TryChangeDamage(uid, ev.Damage, true, damageable: damageable);
                     break;
             }
         }
