@@ -1,0 +1,9 @@
+- type: entity
+  parent: BaseItem
+  id: RMCPropTrashFull
+  name: full trash bag
+  description: It's the heavy-duty black polymer kind. It's full of old trash, you don't want to touch it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/prop_trash.rsi
+    state: ztrashbag

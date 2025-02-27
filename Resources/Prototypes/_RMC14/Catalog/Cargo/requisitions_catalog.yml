@@ -67,6 +67,8 @@
       - cost: 4000
         crate: RMCCrateBoxMagazineSentry
       - cost: 4000
+        crate: RMCCrateMagazineNapthalUT
+      - cost: 4000
         crate: RMCCrateBoxMagazineSentryShotgun
     - name: Attachments
       entries:
@@ -273,6 +275,8 @@
         crate: RMCCrateXM88
       - cost: 3000
         crate: RMCCrateSU6
+      - cost: 4000
+        crate: RMCCrateM34
       - cost: 3000
         crate: RMCCrateMOU53
       - cost: 3000

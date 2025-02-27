@@ -1,4 +1,4 @@
-using Content.Shared._RMC14.Armor;
+﻿using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Explosion;
@@ -12,6 +12,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
 using Content.Shared.Directions;
 using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
@@ -66,6 +67,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     private static readonly ProtoId<ReagentPrototype> WaterReagent = "Water";
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
+    private static readonly ProtoId<DamageTypePrototype> HeatDamage = "Heat";
 
     private EntityQuery<BlockTileFireComponent> _blockTileFireQuery;
     private EntityQuery<DoorComponent> _doorQuery;
@@ -258,18 +260,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
     private void OnIgniteCollide(Entity<RMCIgniteOnCollideComponent> ent, ref StartCollideEvent args)
     {
-        var flammableEnt = new Entity<FlammableComponent?>(args.OtherEntity, null);
-        if (!Resolve(flammableEnt, ref flammableEnt.Comp, false))
-            return;
-
-        var wasOnFire = IsOnFire(flammableEnt);
-        if (!Ignite(flammableEnt, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks))
-            return;
-
-        EnsureComp<SteppingOnFireComponent>(args.OtherEntity);
-
-        if (!wasOnFire && IsOnFire(flammableEnt) && !HasComp<RMCImmuneToFireTileDamageComponent>(ent))
-            _damageable.TryChangeDamage(flammableEnt, flammableEnt.Comp.Damage * ent.Comp.Intensity, true);
+        TryIgnite(ent, args.OtherEntity, false);
     }
 
     private void OnIgniteDamageCollide(Entity<RMCIgniteOnCollideComponent> ent, ref DamageCollideEvent args)
@@ -485,6 +476,48 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         _plasma.SetPlasma((ent, plasma), plasma.MaxPlasma);
     }
 
+    public void SetIntensityDuration(Entity<RMCIgniteOnCollideComponent?, DamageOnCollideComponent?> ent, int? intensity, int? duration)
+    {
+        Resolve(ent, ref ent.Comp1, ref ent.Comp2, false);
+        if (ent.Comp1 != null)
+        {
+            if (intensity != null)
+                ent.Comp1.Intensity = intensity.Value;
+
+            if (duration != null)
+                ent.Comp1.Duration = duration.Value;
+
+            Dirty(ent, ent.Comp1);
+        }
+
+        if (ent.Comp2 != null)
+        {
+            if (duration != null)
+                ent.Comp2.Damage.DamageDict[HeatDamage] = duration.Value;
+
+            Dirty(ent, ent.Comp2);
+        }
+    }
+
+    private void TryIgnite(Entity<RMCIgniteOnCollideComponent> ent, EntityUid other, bool checkIgnited)
+    {
+        var flammableEnt = new Entity<FlammableComponent?>(other, null);
+        if (!Resolve(flammableEnt, ref flammableEnt.Comp, false))
+            return;
+
+        var wasOnFire = IsOnFire(flammableEnt);
+        if (checkIgnited && wasOnFire)
+            return;
+
+        if (!Ignite(flammableEnt, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks))
+            return;
+
+        EnsureComp<SteppingOnFireComponent>(other);
+
+        if (!wasOnFire && IsOnFire(flammableEnt) && !HasComp<RMCImmuneToFireTileDamageComponent>(ent))
+            _damageable.TryChangeDamage(flammableEnt, flammableEnt.Comp.Damage * ent.Comp.Intensity, true);
+    }
+
     public override void Update(float frameTime)
     {
         if (_net.IsClient)
@@ -493,6 +526,11 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         var applyQuery = EntityQueryEnumerator<RMCIgniteOnCollideComponent>();
         while (applyQuery.MoveNext(out var uid, out var apply))
         {
+            foreach (var contact in _physics.GetEntitiesIntersectingBody(uid, (int) apply.Collision))
+            {
+                TryIgnite((uid, apply), contact, true);
+            }
+
             if (apply.InitDamaged)
                 continue;
 
