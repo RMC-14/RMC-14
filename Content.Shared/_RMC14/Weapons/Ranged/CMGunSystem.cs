@@ -414,6 +414,7 @@ public sealed class CMGunSystem : EntitySystem
             return;
         //Can't melee right after a PB
         melee.NextAttack = userDelay.LastPBAt;
+        Dirty(gun, melee);
     }
 
     private void OnRecoilSkilledRefreshModifiers(Entity<GunSkilledRecoilComponent> ent, ref GunRefreshModifiersEvent args)
