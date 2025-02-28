@@ -66,6 +66,7 @@ public sealed class XenoSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly WeldableSystem _weldable = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
 
     private static readonly ProtoId<DamageTypePrototype> HeatDamage = "Heat";
 
@@ -113,7 +114,7 @@ public sealed class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, RMCIgniteEvent>(OnXenoIgnite);
         SubscribeLocalEvent<XenoComponent, CanDragEvent>(OnXenoCanDrag);
         SubscribeLocalEvent<XenoComponent, BuckleAttemptEvent>(OnXenoBuckleAttempt);
-        SubscribeLocalEvent<XenoComponent, DamageStateCritBeforeDamageEvent>(OnXenoBeforeCritDamage);
+        SubscribeLocalEvent<XenoComponent, DamageStateCritBeforeDamageEvent>(OnXenoBeforeCritDamage, before: [typeof(SharedXenoPheromonesSystem)]);
 
         Subs.CVar(_config, RMCCVars.CMXenoDamageDealtMultiplier, v => _xenoDamageDealtMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMXenoDamageReceivedMultiplier, v => _xenoDamageReceivedMultiplier = v, true);
@@ -279,10 +280,10 @@ public sealed class XenoSystem : EntitySystem
 
     private void OnXenoBeforeCritDamage(Entity<XenoComponent> ent, ref DamageStateCritBeforeDamageEvent args)
     {
-        if (!_rmcFlammable.IsOnFire(ent.Owner))
+        if (!_rmcFlammable.IsOnFire(ent.Owner) || ent.Comp.HealOffWeeds || _weeds.IsOnWeeds(ent.Owner))
             return;
 
-        //Don't take bleedout damage on fire
+        //Don't take bleedout damage on fire or on weeds
         args.Damage.ClampMax(0);
     }
 
