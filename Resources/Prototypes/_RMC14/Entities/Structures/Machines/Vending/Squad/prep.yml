@@ -250,6 +250,8 @@
         amount: 10
       - id: RMCGlassesMarineRpg
         amount: 10
+      - id: RMCGlassesMarineRpgOld
+        amount: 10
 #      - id: M5 Integrated Gas Mask
 #        amount: 10
 #      - id: M10 Helmet Netting

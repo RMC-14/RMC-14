@@ -147,7 +147,7 @@
 - type: entity
   parent: ClothingEyesBase
   id: RMCGlassesMarineRpg # TODO make this actually prescription
-  name: Marine RPG glasses
+  name: marine RPG glasses
   description: The Corps may call them Regulation Prescription Glasses but you know them as Rut Prevention Glasses.
   components:
   - type: Item
@@ -159,6 +159,16 @@
     slots:
     - MASK
     - EYES
+
+- type: entity
+  parent: RMCGlassesMarineRpg
+  id: RMCGlassesMarineRpgOld
+  name: old marine RPG glasses
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/old_rpg_glasses.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/old_rpg_glasses.rsi
 
 - type: entity
   parent: ClothingEyesBase
