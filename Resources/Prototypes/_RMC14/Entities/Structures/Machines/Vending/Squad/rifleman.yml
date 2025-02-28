@@ -28,7 +28,7 @@
         points: 45
       - id: Chainsaw
         points: 5
-      - id: WeaponBagguete
+      - id: WeaponBaguette
         points: 5
     - name: Armor
       choices: { CMArmour: 1 }
