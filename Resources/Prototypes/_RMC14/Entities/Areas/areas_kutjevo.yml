@@ -641,7 +641,7 @@
 - type: entity
   parent: RMCAreaKutjevoInterior
   id: RMCAreaKutjevoInteriorColonySEast
-  name: Kutjevo - Southeast East Colony Caves
+  name: Kutjevo - Southeast Colony Caves
   components:
   - type: Sprite
     state: colony_caves_2
