@@ -386,11 +386,14 @@ public sealed class RMCStorageSystem : EntitySystem
     public override void Update(float frameTime)
     {
         var removeOnlyQuery = EntityQueryEnumerator<RemoveOnlyStorageComponent>();
-        while (removeOnlyQuery.MoveNext(out var uid, out _))
+        while (removeOnlyQuery.MoveNext(out var uid, out var comp))
         {
             if (TryComp(uid, out StorageComponent? storage))
             {
-                storage.Whitelist = new EntityWhitelist();
+                if (comp.Blacklist != null)
+                    storage.Blacklist = comp.Blacklist;
+
+                storage.Whitelist = comp.Whitelist;
                 Dirty(uid, storage);
             }
 

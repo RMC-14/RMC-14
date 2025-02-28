@@ -243,6 +243,11 @@
     - id: RMCBoxShotgunBreaching
       amount: 2
     - id: RMCBeltXM51
+  - type: RemoveOnlyStorage
+    blacklist:
+      tags:
+      - RMCBoxShotgunBreaching
+    whitelist: null
 
 # MOU53
 - type: entity
