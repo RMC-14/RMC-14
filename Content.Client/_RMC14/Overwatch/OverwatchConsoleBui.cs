@@ -601,6 +601,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
             );
 
             squad.HasOrbital = console.HasOrbital;
+            squad.NextOrbitalAt = console.NextOrbitalLaunch;
         }
     }
 
