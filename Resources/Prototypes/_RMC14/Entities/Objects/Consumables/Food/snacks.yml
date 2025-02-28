@@ -53,6 +53,10 @@
   components:
   - type: Sprite
     state: barcardine
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+      state: barcardine_helmet
   - type: Item
   - type: SpawnItemsOnUse
     items:
@@ -94,6 +98,10 @@
   components:
   - type: Sprite
     state: boonie
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+      state: boonie_helmet
   - type: Item
   - type: SpawnItemsOnUse
     items:
@@ -133,6 +141,10 @@
   components:
   - type: Sprite
     state: chunk
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+      state: chunkbox_helmet
   - type: Item
   - type: SpawnItemsOnUse
     items:
@@ -438,6 +450,10 @@
   components:
   - type: Sprite
     state: packaged-burrito
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+      state: packaged-burrito_helmet
   - type: Item
   - type: SpawnItemsOnUse
     items:
@@ -459,6 +475,10 @@
       - bread
   - type: Sprite
     state: open-burrito
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+      state: open-burrito_helmet
   - type: Item
   - type: SolutionContainerManager
     solutions:
@@ -478,6 +498,10 @@
   components:
   - type: Sprite
     state: packaged-hotdog
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+      state: packaged-hotdog_helmet
   - type: Item
   - type: SpawnItemsOnUse
     items:
@@ -499,6 +523,10 @@
       - salty
   - type: Sprite
     state: open-hotdog
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+      state: open-hotdog_helmet
   - type: Item
   - type: SolutionContainerManager
     solutions:
@@ -524,6 +552,10 @@
       - nutriment
   - type: Sprite
     state: eat_bar
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+      state: snack_eat_helmet
   - type: SolutionContainerManager
     solutions:
       food:
@@ -535,6 +567,31 @@
   - type: Food
     trash:
     - RMCFoodPacketEATBarTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackDonkpocket
+  name: Donk-pocket
+  description: The food of choice for the seasoned traitor.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - bread
+  - type: Sprite
+    state: donkpocket
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+      state: donkpocket_helmet
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment # 2 meat protein & 2 bread. Needs microwave-tricord deal
+          Quantity: 4
+  - type: Item
 
 # Trash
 
