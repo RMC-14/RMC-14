@@ -1,16 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Added Pressurized Chemical Dispensers, which can be used by corpsman
-      to make their own simple canister mixes.
-    type: Add
-  - message: Corpsman vendors have been reorganized. A few items have been removed,
-      most notably non-medical belts and the machete scabbard, as well as the JTAC
-      pamphlet. You can also no longer pointbuy gauze or ointment from them.
-    type: Tweak
-  id: 883
-  time: '2024-10-28T09:46:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4615
 - author: Boaz1111
   changes:
   - message: The powerloader is now capable of picking up crates, like those from
@@ -5149,5 +5137,12 @@
   id: 1384
   time: '2025-02-27T05:50:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5736
+- author: Ian321
+  changes:
+  - message: The marksman M44 speedloader box can now be refilled.
+    type: Fix
+  id: 1385
+  time: '2025-02-28T03:03:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5734
 Name: RMC14
 Order: -1
