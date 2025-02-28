@@ -75,10 +75,7 @@
   - type: SpawnPoint
     job_id: CMLiaison
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: corp_liaison
+    state: cl_spawn
 
 - type: playTimeTracker
   id: CMJobLiaison

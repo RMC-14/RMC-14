@@ -1,0 +1,386 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken/modified from cmss13 at https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/effects/hybrisa_decals.dmi, WEYA logo decals by github noctyrnal",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "road_edge_decal1"
+    },
+    {
+      "name": "road_edge_decal2"
+    },
+    {
+      "name": "road_edge_decal3"
+    },
+    {
+      "name": "road_edge_decal4"
+    },
+    {
+      "name": "road_edge_decal5"
+    },
+    {
+      "name": "road_edge_decal6"
+    },
+    {
+      "name": "road_edge_decal7"
+    },
+    {
+      "name": "road_edge_decal8"
+    },
+    {
+      "name": "road_edge_decal9"
+    },
+    {
+      "name": "road_edge_decal10"
+    },
+    {
+      "name": "road_edge_decal11"
+    },
+    {
+      "name": "road_edge_decal12"
+    },
+    {
+      "name": "stop_decal1"
+    },
+    {
+      "name": "stop_decal2"
+    },
+    {
+      "name": "stop_decal3"
+    },
+    {
+      "name": "stop_decal4"
+    },
+    {
+      "name": "stop_decal5",
+      "directions": 4
+    },
+    {
+      "name": "roadlinesmiddle",
+      "directions": 4
+    },
+    {
+      "name": "trash_1"
+    },
+    {
+      "name": "trash_2"
+    },
+    {
+      "name": "trash_3"
+    },
+    {
+      "name": "trash_4"
+    },
+    {
+      "name": "trash_5"
+    },
+    {
+      "name": "trash_6"
+    },
+    {
+      "name": "trash_7"
+    },
+    {
+      "name": "trash_8"
+    },
+    {
+      "name": "trash_9"
+    },
+    {
+      "name": "trash_10"
+    },
+    {
+      "name": "trash_11"
+    },
+    {
+      "name": "trash_12"
+    },
+    {
+      "name": "trash_13"
+    },
+    {
+      "name": "trash_14"
+    },
+    {
+      "name": "trash_15"
+    },
+    {
+      "name": "trash_16"
+    },
+    {
+      "name": "trash_17"
+    },
+    {
+      "name": "Z_corner",
+      "directions": 4
+    },
+    {
+      "name": "Z_E4"
+    },
+    {
+      "name": "Z_M1"
+    },
+    {
+      "name": "Z_M2"
+    },
+    {
+      "name": "Z_N2"
+    },
+    {
+      "name": "Z_S3"
+    },
+    {
+      "name": "Z_W1"
+    },
+    {
+      "name": "ZD_E4"
+    },
+    {
+      "name": "ZD_M1"
+    },
+    {
+      "name": "ZD_M2"
+    },
+    {
+      "name": "ZD_N2"
+    },
+    {
+      "name": "ZD_S3"
+    },
+    {
+      "name": "ZD_W1"
+    },
+    {
+      "name": "W"
+    },
+    {
+      "name": "E"
+    },
+    {
+      "name": "NORTH"
+    },
+    {
+      "name": "NE-out"
+    },
+    {
+      "name": "NW-out"
+    },
+    {
+      "name": "S"
+    },
+    {
+      "name": "SE-out"
+    },
+    {
+      "name": "SW-out"
+    },
+    {
+      "name": "weya_logo1"
+    },
+    {
+      "name": "weya_logo2"
+    },
+    {
+      "name": "weya_logo_worn1"
+    },
+    {
+      "name": "weya_logo_worn2"
+    },
+    {
+      "name": "stone_edging_1"
+    },
+    {
+      "name": "stone_edging_2"
+    },
+    {
+      "name": "stone_edging_3"
+    },
+    {
+      "name": "stone_edging_4"
+    },
+    {
+      "name": "stone_edging_alt_1"
+    },
+    {
+      "name": "stone_edging_alt_2"
+    },
+    {
+      "name": "stone_edging_alt_3"
+    },
+    {
+      "name": "stone_edging_alt_4"
+    },
+    {
+      "name": "stone_edging_deco_1"
+    },
+    {
+      "name": "stone_edging_deco_2"
+    },
+    {
+      "name": "stone_edging_deco_3"
+    },
+    {
+      "name": "stone_edging_deco_4"
+    },
+    {
+      "name": "stone_edging_deco_alt_1"
+    },
+    {
+      "name": "stone_edging_deco_alt_2"
+    },
+    {
+      "name": "stone_edging_deco_alt_3"
+    },
+    {
+      "name": "stone_edging_deco_alt_4"
+    },
+    {
+      "name": "red_N"
+    },
+    {
+      "name": "red_W"
+    },
+    {
+      "name": "red_E"
+    },
+    {
+      "name": "red_S"
+    },
+    {
+      "name": "red_NW-out"
+    },
+    {
+      "name": "red_NE-out"
+    },
+    {
+      "name": "red_SW-out"
+    },
+    {
+      "name": "red_SE-out"
+    },
+    {
+      "name": "engPlatform_corners"
+    },
+    {
+      "name": "engPlatform_corners2"
+    },
+    {
+      "name": "engPlatform_corners3"
+    },
+    {
+      "name": "engPlatform_corners4"
+    },
+    {
+      "name": "hull_angled"
+    },
+    {
+      "name": "hull_angled2"
+    },
+    {
+      "name": "hull_angled3"
+    },
+    {
+      "name": "hull_angled4"
+    },
+    {
+      "name": "hull_angled_alt"
+    },
+    {
+      "name": "hull_angled_alt2"
+    },
+    {
+      "name": "hull_angled_alt3"
+    },
+    {
+      "name": "hull_angled_alt4"
+    },
+    {
+      "name": "plating_angled"
+    },
+    {
+      "name": "plating_angled2"
+    },
+    {
+      "name": "plating_angled3"
+    },
+    {
+      "name": "plating_angled4"
+    },
+    {
+      "name": "warningstripes_angled"
+    },
+    {
+      "name": "warningstripes_angled2"
+    },
+    {
+      "name": "warningstripes_angled3"
+    },
+    {
+      "name": "warningstripes_angled4"
+    },
+    {
+      "name": "warningstripes_angled_corner"
+    },
+    {
+      "name": "warningstripes_angled_corner2"
+    },
+    {
+      "name": "warningstripes_angled_corner3"
+    },
+    {
+      "name": "warningstripes_angled_corner4"
+    },
+    {
+      "name": "zhalfgrate1"
+    },
+    {
+      "name": "zhalfgrate2"
+    },
+    {
+      "name": "zhalfgrate3"
+    },
+    {
+      "name": "zhalfgrate4"
+    },
+    {
+      "name": "engineer_platform"
+    },
+    {
+      "name": "engineer_platform2"
+    },
+    {
+      "name": "engineer_platform3"
+    },
+    {
+      "name": "engineer_platform4"
+    },
+    {
+      "name": "engineer_platform_deco"
+    },
+    {
+      "name": "engineer_platform_deco2"
+    },
+    {
+      "name": "engineer_platform_deco3"
+    },
+    {
+      "name": "engineer_platform_deco4"
+    },
+    {
+      "name": "workers_decal1"
+    },
+    {
+      "name": "workers_decal2"
+    },
+    {
+      "name": "checkpoint_decal1"
+    },
+    {
+      "name": "checkpoint_decal2"
+    }
+  ]
+}

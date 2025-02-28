@@ -16,9 +16,6 @@ monstermos_rip_tiles = false
 grid_impulse = false
 max_process_time = 1
 
-[audio]
-alert.explosion_min_intensity = -1
-
 [auth]
 mode = 1
 
@@ -62,8 +59,6 @@ tags = "lang:en,region:am_n_e,rp:med"
 
 [ic]
 flavor_text = true
-role_time = 0
-kill_crit = false
 
 [infolinks]
 #appeal = "https://appeal.rouny-ss14.com"
@@ -133,3 +128,4 @@ login_dataset = "CM_Tips"
 
 [vote]
 preset_enabled = false
+restart_ghost_percentage = 75

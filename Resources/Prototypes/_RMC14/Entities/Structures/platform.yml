@@ -248,6 +248,20 @@
     state: strata_metalplatform
 
 - type: entity
+  parent: RMCPlatformStrata
+  id: RMCPlatformStrataStair
+  components:
+  - type: Sprite
+    state: strata_metalplatform_stair
+
+- type: entity
+  parent: RMCPlatformStrata
+  id: RMCPlatformStrataStairAlt
+  components:
+  - type: Sprite
+    state: strata_metalplatform_stair_alt
+
+- type: entity
   parent: RMCPlatformCornerSmall
   id: RMCPlatformStrataCornerSmall
   name: raised metal corner
@@ -255,6 +269,42 @@
   components:
   - type: Sprite
     state: strata_metalplatform_deco
+
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformStrataTwo
+  name: raised metal edge
+  description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: strata_metalplatform2
+
+- type: entity
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformStrataTwoCornerSmall
+  name: raised metal corner
+  description: A raised level of metal, often used to elevate areas above others. This is the corner.
+  components:
+  - type: Sprite
+    state: strata_metalplatform_deco2
+
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformStrataThree
+  name: raised metal edge
+  description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: strata_metalplatform3
+
+- type: entity
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformStrataThreeCornerSmall
+  name: raised metal corner
+  description: A raised level of metal, often used to elevate areas above others. This is the corner.
+  components:
+  - type: Sprite
+    state: strata_metalplatform_deco3
 
 - type: entity
   parent: CMPlatform
@@ -295,3 +345,138 @@
   components:
   - type: Sprite
     state: strata_platform_deco
+
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformHybrisaEdge
+  name: raised metal edge
+  description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: hybrisametal
+
+- type: entity
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformHybrisaEdgeCornerSmall
+  name: raised metal corner
+  description: A raised level of metal, often used to elevate areas above others. This is the corner.
+  components:
+  - type: Sprite
+    state: hybrisametal_deco
+
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformHybrisa
+  name: raised metal platform
+  description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: hybrisaplatform
+
+- type: entity
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformHybrisaCornerSmall
+  name: raised metal corner
+  description: A raised level of metal, often used to elevate areas above others. This is the corner.
+  components:
+  - type: Sprite
+    state: hybrisaplatform_deco
+
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformHybrisaTwo
+  name: raised metal platform
+  description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: hybrisaplatform2
+
+- type: entity
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformHybrisaTwoCornerSmall
+  name: raised metal corner
+  description: A raised level of metal, often used to elevate areas above others. This is the corner.
+  components:
+  - type: Sprite
+    state: hybrisaplatform_deco2
+
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformHybrisaThree
+  name: raised metal platform
+  description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: hybrisaplatform3
+
+- type: entity
+  parent: CMPlatformCorner
+  id: RMCPlatformHybrisaThreeCorner
+  name: raised metal platform
+  description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: hybrisaplatform3_corner
+
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformHybrisaThreeStair
+  name: raised metal platform
+  description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: hybrisaplatform3_stair
+
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformHybrisaThreeStairAlt
+  name: raised metal platform
+  description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: hybrisaplatform3_stair_alt
+
+- type: entity
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformHybrisaThreeCornerSmall
+  name: raised metal corner
+  description: A raised level of metal, often used to elevate areas above others. This is the corner.
+  components:
+  - type: Sprite
+    state: hybrisaplatform_deco3
+
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformHybrisaRock
+  name: raised rock edges
+  description: A collection of stones and rocks that provide ample grappling and vaulting opportunity. Indicates a change in elevation. You could probably climb it.
+  components:
+  - type: Sprite
+    state: kutjevo_rockdark
+
+- type: entity
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformHybrisaRockCornerSmall
+  name: raised rock corner
+  description: A collection of stones and rocks that cap the edge of some conveniently 1-meter-long lengths of perfectly climbable chest high walls.
+  components:
+  - type: Sprite
+    state: kutjevo_rock_decodark
+
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformHybrisaStone
+  name: raised metal platform
+  description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: stone
+
+- type: entity
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformHybrisaStoneCornerSmall
+  name: raised metal   corner
+  description: A raised level of metal, often used to elevate areas above others. This is the corner.
+  components:
+  - type: Sprite
+    state: stone_deco

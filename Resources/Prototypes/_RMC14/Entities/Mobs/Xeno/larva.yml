@@ -32,6 +32,7 @@
     emoteSounds: Larva
   - type: XenoLight
   - type: XenoPlasma
+    plasma: 10
     maxPlasma: 10
     plasmaRegenOnWeeds: 0.1
   - type: XenoEvolution
@@ -58,9 +59,11 @@
         - SmallMobLayer
   - type: Flammable
     canResistFire: false
+  - type: IgnoreBlockPullingDead
   - type: MovementSpeedModifier
     baseWalkSpeed: 3.7
     baseSprintSpeed: 6.7
+  - type: RestrictEvolveOffWeeds
   - type: Speech
     speechSounds: XenonidLarva
     allowedEmotes: [ "XenoRoar" ]
@@ -85,6 +88,3 @@
       sprite: _RMC14/Mobs/Xenonids/Larva/larva.rsi
       noRot: true
       state: embryo
-
-- type: Tag
-  id: RMCXenoLarva

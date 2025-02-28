@@ -11,7 +11,7 @@
 
 - type: entity
   parent: RMCBarrelAttachmentBase
-  id: RMCAttachmentExtendedBarrel
+  id: RMCAttachmentExtendedBarrel # extended_barrel
   name: extended barrel
   description: The lengthened barrel speeds up and stabilizes the bullet, increasing velocity. # and accuracy.
   components:
@@ -67,7 +67,7 @@
 
 - type: entity
   parent: RMCBarrelAttachmentBase
-  id: RMCAttachmentRecoilCompensator
+  id: RMCAttachmentRecoilCompensator # compensator
   name: recoil compensator
   description: "A muzzle attachment that reduces recoil by diverting expelled gasses upwards.
     Reduces recoil, at the cost of a small amount of weapon damage." # increases accuracy and reduces recoil
@@ -93,7 +93,7 @@
 
 - type: entity
   parent: RMCBarrelAttachmentBase
-  id: RMCAttachmentSuppressor
+  id: RMCAttachmentSuppressor # suppressor
   name: suppressor
   description: "A small tube with exhaust ports to expel noise and gas.
     Does not completely silence a weapon, but does make it much quieter at the cost of slightly reduced damage."

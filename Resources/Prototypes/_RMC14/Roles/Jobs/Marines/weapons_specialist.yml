@@ -81,10 +81,7 @@
   - type: SpawnPoint
     job_id: CMWeaponsSpecialist
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: weapons_specialist
+    state: spec_spawn
 
 - type: entity
   parent: CMSpawnPointWeaponsSpecialist
@@ -94,6 +91,8 @@
   - type: SquadSpawner
     squad: SquadAlpha
     role: CMWeaponsSpecialist
+  - type: Sprite
+    state: spec_spawn_alpha
 
 - type: entity
   parent: CMSpawnPointWeaponsSpecialist
@@ -103,6 +102,8 @@
   - type: SquadSpawner
     squad: SquadBravo
     role: CMWeaponsSpecialist
+  - type: Sprite
+    state: spec_spawn_bravo
 
 - type: entity
   parent: CMSpawnPointWeaponsSpecialist
@@ -112,6 +113,8 @@
   - type: SquadSpawner
     squad: SquadCharlie
     role: CMWeaponsSpecialist
+  - type: Sprite
+    state: spec_spawn_charlie
 
 - type: entity
   parent: CMSpawnPointWeaponsSpecialist
@@ -121,4 +124,6 @@
   - type: SquadSpawner
     squad: SquadDelta
     role: CMWeaponsSpecialist
+  - type: Sprite
+    state: spec_spawn_delta
 

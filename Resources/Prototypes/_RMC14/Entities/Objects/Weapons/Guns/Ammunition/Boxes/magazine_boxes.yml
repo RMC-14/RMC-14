@@ -738,7 +738,7 @@
     slot:
       whitelist:
         tags:
-        - RMCSpeedLoaderM44
+        - RMCSpeedLoader44Marksman
 
 - type: entity
   parent: RMCBoxMagazineRevolverM44MarksmanEmpty
@@ -751,7 +751,7 @@
     slot:
       whitelist:
         tags:
-        - RMCSpeedLoaderM44
+        - RMCSpeedLoader44Marksman
 
 # Nailgun
 
@@ -1209,3 +1209,40 @@
   components:
   - type: CMItemSlots
     startingItem: RMCCartridge458SOCOM
+
+  # M16
+- type: entity
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMagazineRifleM16Empty
+  name: magazine box (M16 x 12)
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazineRifleM16Empty
+  - type: Sprite
+    layers:
+    - state: base_m16 # icon_state = base color of box
+    - state: magaz_reg # overlay_content = sprite of mags
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: text_m16 # overlay_gun_type = text overlay
+    - state: base_type_reg # overlay_ammo_type = box stripe
+    - state: base_m16_lid # matches the base box
+      map: [ "lid" ]
+    - state: lid_type_reg # lid stripe,ends in the type of ammo used
+      map: [ "lid_stripe" ]
+  - type: CMItemSlots
+    count: 12
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleM16
+
+- type: entity
+  parent: RMCBoxMagazineRifleM16Empty
+  id: RMCBoxMagazineRifleM16
+  suffix: Filled
+  name: magazine box (M16 x 12)
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleM16
+    count: 12

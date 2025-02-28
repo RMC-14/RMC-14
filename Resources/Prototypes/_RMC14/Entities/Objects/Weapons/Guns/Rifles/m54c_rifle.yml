@@ -88,6 +88,8 @@
           - RMCAttachmentU1GrenadeLauncher
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentVerticalGrip
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.75, 0.00
@@ -101,6 +103,9 @@
       Snow: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
       Classic: _RMC14/Objects/Weapons/Guns/Rifles/m54c/classic.rsi
       Urban: _RMC14/Objects/Weapons/Guns/Rifles/m54c/urban.rsi
+  - type: Tag
+    tags:
+    - RMCWeaponRifleM54CMK2
 
 - type: entity
   parent: CMMagazineRifleBase
@@ -246,6 +251,9 @@
         Piercing: 30
   - type: CMArmorPiercing
     amount: 40
+
+- type: Tag
+  id: RMCWeaponRifleM54CMK2
 
 - type: Tag
   id: CMMagazineRifleM54C

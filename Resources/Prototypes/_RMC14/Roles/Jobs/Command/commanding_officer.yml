@@ -91,6 +91,8 @@
     - type: JobPrefix
       prefix: cm-job-prefix-commanding-officer
     - type: CommendationGiver
+    - type: ViewIntelObjectives
+    - type: CommandAccent
 
 - type: startingGear
   id: CMGearCommandingOfficer
@@ -113,10 +115,7 @@
   - type: SpawnPoint
     job_id: CMCommandingOfficer
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: commanding_officer
+    state: co_spawn
 
 - type: playTimeTracker
   id: CMJobCommandingOfficer

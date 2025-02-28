@@ -53,8 +53,8 @@
       #  amount: 2
       #- id: M2C Heavy Machine Gun
       #  amount: 2
-      #- id: M240 Incinerator Unit
-      #  amount: 2
+      - id: RMCCaseFlamer
+        amount: 2
       #- id: M79 Grenade Launcher
       #  amount: 3
       - id: RMCXM51Case
@@ -87,8 +87,8 @@
       #  amount: 8
       #- id: M40 MFHS Metal Foam Grenade
       #  amount: 6
-      #- id: Plastic Explosives
-      #  amount: 3
+      - id: RMCExplosivePlastic
+        amount: 3
       - id: RMCExplosiveBreachingCharge
         amount: 2
     - name: Webbings
@@ -111,8 +111,8 @@
         amount: 15
       - id: RMCScabbardShotgun
         amount: 10
-      #- id: Pyrotechnician G4-1 Fueltank
-      #  amount: 2
+      - id: RMCBackpackFlamer
+        amount: 2
       - id: CMBackpackWelder
         amount: 2
       - id: CMBackpackMortar
@@ -177,7 +177,7 @@
       - id: RMCPouchFlareFilled
         name: flare pouch (Full)
         amount: 5
-      - id: RMCPouchDocument
+      - id: RMCPouchDocumentSmall
         amount: 2
       #- id: RMCPouchSling
       #  amount: 2
@@ -197,8 +197,8 @@
         amount: 5
       - id: RMCPouchMagazinePistolLarge
         amount: 5
-      #- id: Fuel Tank Strap Pouch
-      #  amount: 4
+      - id: RMCPouchFuelTank
+        amount: 4
       - id: RMCPouchGeneralLarge
         amount: 1
       - id: RMCPouchMagazineLarge
@@ -213,8 +213,8 @@
         amount: 4
       - id: CMMaskGas
         amount: 10
-      #- id: M89-S Signal Flare Pack
-      #   amount: 2
+      - id: RMCPackFlareCAS
+        amount: 2
       - id: CMPackFlare
         amount: 10
       - id: RMCScabbardMacheteFilled
@@ -223,8 +223,8 @@
       #   amount: 3
       - id: RMCMotionDetector
         amount: 4
-      #- id: Data Detector
-      #  amount: 4
+      - id: RMCIntelDetector
+        amount: 4
       - id: RMCBinoculars
         amount: 2
       - id: RMCRangefinder
@@ -237,8 +237,8 @@
         amount: 3
       - id: RMCPowerCellHigh
         amount: 1
-      #- id: Fulton Device Stack
-      #  amount: 1
+      - id: RMCFulton20
+        amount: 1
       #- id: Sentry Gun Network Laptop
       #   amount: 4
       - id: CMPamphletJTAC
@@ -253,10 +253,29 @@
         amount: 10
       - id: RMCMagazineSMGNailgun
         amount: 4
-    - name: Other Boxes
+    - name: Explosive Boxes
+      hasBoxes: true
       entries:
-      - id: RMCBoxMagazineSMGNailgun
-        amount: 2
+      - id: CMPacketGrenadeFragOldFilled
+        name: M15 fragmentation grenade packet
+        box: CMGrenadeFragOld
+        boxAmount: 3
+        boxSlots: 3
+      - id: CMPacketGrenadeHighExplosiveFilled
+        name: M40 HEDP grenade packet
+        box: CMGrenadeHighExplosive
+        boxAmount: 3
+        boxSlots: 3
+      - id: RMCPacketGrenadeIncendiaryFilled
+        name: M40 HIDP grenade packet
+        box: RMCGrenadeIncendiary
+        boxAmount: 3
+        boxSlots: 3
+      - id: RMCPacketGrenadeSmokeFilled
+        name: M40 HSDP grenade packet
+        box: CMGrenadeSmoke
+        boxAmount: 3
+        boxSlots: 3
 
 #AMMUNITION VENDOR
 
@@ -303,8 +322,8 @@
         amount: 12
       - id: CMMagazineRifleM54CAP
         amount: 10
-      #- id: M4A3 AP Magazine (9mm)
-      #  amount: 2
+      - id: RMCMagazinePistolM1984AP
+        amount: 2
     - name: Extended ammunition
       entries:
       - id: CMMagazineSMGM63Ext
@@ -333,8 +352,8 @@
         amount: 11
       - id: RMCMagazinePistolSU6
         amount: 13
-      #- id: M240 Incinerator Tank
-      #  amount: 3
+      - id: RMCTankFlamer
+        amount: 3
       - id: CMMagazineRifleM54CE2
         amount: 3
       - id: CMMagazineRifleM54CMK1
@@ -494,14 +513,14 @@
         amount: 5
       - id: RMCAttachmentLaserSight
         amount: 10
-      #- id: RMCAttachmentMiniFlamethrower
-      #  amount: 5
+      - id: RMCAttachmentMiniFlamethrower
+        amount: 5
       #- id: RMCAttachmentXMVESG1FlamerNozzle
       #  amount: 5
       - id: RMCAttachmentU7UnderbarrelShotgun
         amount: 5
-      #- id: RMCAttachmentUnderbarrelExtinguisher
-      #  amount: 5
+      - id: RMCAttachmentUnderbarrelExtinguisher
+        amount: 5
       - id: RMCAttachmentU1GrenadeLauncher
         amount: 10
       - id: RMCAttachmentVerticalGrip

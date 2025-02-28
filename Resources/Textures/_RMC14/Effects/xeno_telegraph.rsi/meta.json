@@ -11,6 +11,9 @@
       "name": "xeno_telegraph_base"
     },
     {
+      "name": "xeno_telegraph_base_small"
+    },
+    {
       "name": "xeno_telegraph_abduct_hook_anim",
       "delays": [
         [

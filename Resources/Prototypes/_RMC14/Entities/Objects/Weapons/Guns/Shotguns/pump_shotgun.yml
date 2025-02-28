@@ -1,6 +1,6 @@
 ﻿- type: entity
   parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
-  name: M42A2 Pump Shotgun
+  name: M42A2 pump shotgun
   id: WeaponShotgunM42A2
   description: An Aegis Battlefield Armaments classic design, the M42A2 combines close-range firepower with long term reliability. Needs to be pumped.
   components:
@@ -23,6 +23,15 @@
     scatterUnwielded: 10
     baseFireRate: 0.5
     burstScatterMult: 5
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCShellShotgunBuckshot
+      - RMCShellShotgunSlugs
+      - RMCShellShotgunFlechette
+      - RMCShellShotgunIncendiaryBuckshot
+      - RMCShellShotgunIncendiary
+      - RMCShellShotgunBeanbag
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.15
     accuracyMultiplierUnwielded: 0.95
@@ -54,6 +63,8 @@
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentVerticalGrip
+          - RMCAttachmentFlamer
+          - RMCAttachmentExtinguisher
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.81, 0.06
@@ -67,3 +78,10 @@
       Snow: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/snow.rsi
       Classic: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/classic.rsi
       Urban: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/urban.rsi
+  - type: Tag
+    tags:
+    - RMCWeaponShotgunM42A2
+    - RMCWeaponShotgun
+
+- type: Tag
+  id: RMCWeaponShotgunM42A2

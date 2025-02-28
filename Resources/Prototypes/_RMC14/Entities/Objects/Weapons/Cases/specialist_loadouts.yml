@@ -68,18 +68,16 @@
     - state: closed
       map: [ base ]
     - state: demo
-      map: [ demo ]
+      map: [ label ]
   - type: Storage
     maxItemSize: Huge
     grid:
-    - 0,0,33,1 # 17 items total
+    - 0,0,15,3
   - type: StorageFill
     contents:
     - id: RMCArmorM3TDemo
-    - id: RMCArmorHelmetM3TDemo # TODO RMC14 Give hearing protection component if ear damage is added
-      amount: 2 # For loader. Hearing protection should prevent backblast stun, damage, and deafness effects.
+    - id: RMCArmorHelmetM3TDemo # TODO RMC14 Give hearing protection component if ear damage is added. Hearing protection should prevent backblast stun, damage, and deafness effects.
     - id: RMCSatchelDemoSpec
-      amount: 2
     - id: RMCWeaponLauncherM5ATL
     - id: RMCRocket84mm
       amount: 3 # +1 no WP
@@ -90,12 +88,17 @@
     - id: RMCMK80
     - id: CMMagazinePistolMK80
       amount: 2
-#    - id: RMCPlasticExplosives
-#      amount: 2
+    - id: RMCExplosivePlastic
+      amount: 2
     - id: RMCBinoculars
+    - id: RMCKitLoader
   - type: CMChangeUserOnVend
     addComponents:
     - type: DemoSpecWhitelist
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCKitLoader
 
 - type: entity
   parent: RMCBaseEquipmentCase
@@ -112,7 +115,7 @@
   - type: Storage
     maxItemSize: Huge
     grid:
-    - 0,0,33,1 # 17 items total
+    - 0,0,21,3
   - type: StorageFill
     contents:
     - id: RMCArmorM3Scout
@@ -130,11 +133,61 @@
       amount: 2
     - id: WeaponRifleM4SPRCustom
     - id: RMCThermalTarpFolded
-#    - id: RMCPlasticExplosives
-#      amount: 2
+    - id: RMCExplosivePlastic
+      amount: 2
     - id: CMEncryptionKeyJTAC
     - id: RMCLaserDesignatorScout
     - id: RMCScoutShoes
   - type: CMChangeUserOnVend
     addComponents:
     - type: ScoutWhitelist
+
+- type: entity
+  parent: RMCKitBase
+  id: RMCKitLoader
+  name: loader kit
+  description: "A large kit containing all the supplies needed to turn a Private into the loading assistant for a Demolitions Specialist.
+
+    A little infographic series shows how reloading should be done:
+
+    Step One: Grab the Rocket
+
+    Step Two: Position yourself behind the Specialist
+
+    Step Three: Ensure the Specialist is wielding their Launcher
+
+    Step Four: Load the Rocket into the Launcher
+
+    Step Five: Stand clear of the back-blast"
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,13,3
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+  - type: StorageFill
+    contents:
+    - id: RMCArmorM3TDemo
+    - id: RMCArmorHelmetM3TDemo
+    - id: RMCSatchelDemoSpec
+    - id: RMCRocket84mm
+      amount: 2 # +1 no WP
+    - id: RMCRocket84mmAntiArmor
+    #    - id: RMCRocket84mmWhitePhosphorous
+    #      amount: 1
+    - id: RMCMK80
+    - id: CMMagazinePistolMK80
+      amount: 2
+    - id: RMCExplosivePlastic
+      amount: 2
+    - id: RMCBinoculars
+    - id: RMCPamphletLoader
+  - type: Tag
+    tags:
+    - RMCKitLoader
+
+- type: Tag
+  id: RMCKitLoader

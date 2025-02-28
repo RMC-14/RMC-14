@@ -67,6 +67,11 @@ public sealed class XenoBlitzSystem : EntitySystem
             _actions.SetUseDelay(args.Action, xeno.Comp.BaseUseDelay);
             xeno.Comp.FirstPartActivatedAt = _timing.CurTime;
             //Don't handle - let the leap go through
+            foreach (var (actionId, action) in _actions.GetActions(xeno))
+            {
+                if (action.BaseEvent is XenoLeapActionEvent)
+                    _actions.SetToggled(actionId, true);
+            }
         }
 
         Dirty(xeno);
@@ -99,7 +104,7 @@ public sealed class XenoBlitzSystem : EntitySystem
             if (!_xeno.CanAbilityAttackTarget(xeno, hit))
                 continue;
 
-            if (_interact.InRangeUnobstructed(xeno.Owner, hit.Owner, xeno.Comp.Range))
+            if (!_interact.InRangeUnobstructed(xeno.Owner, hit.Owner, xeno.Comp.Range))
                 continue;
 
             hits++;
@@ -120,6 +125,12 @@ public sealed class XenoBlitzSystem : EntitySystem
 
         if (hits >= xeno.Comp.HitsToRecharge)
             _vanguard.RegenShield(xeno);
+
+        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        {
+            if (action.BaseEvent is XenoLeapActionEvent)
+                _actions.SetToggled(actionId, false);
+        }
 
         Dirty(xeno);
     }

@@ -1,28 +1,4 @@
 - type: rank
-  id: RMCRankMarineCommandant
-  name: Commandant of the Marine Corps
-  prefix: CMC.
-  paygrade: O10S
-
-- type: rank
-  id: RMCRankAssistantCommandant
-  name: Assistant Commandant of the Marine Corps
-  prefix: ACMC.
-  paygrade: O10C
-
-- type: rank
-  id: RMCRankGeneral
-  name: General
-  prefix: Gen.
-  paygrade: O10
-
-- type: rank
-  id: RMCRankLieutenantGeneral
-  name: Lieutenant General
-  prefix: LtGen.
-  paygrade: O9
-
-- type: rank
   id: RMCRankMajorGeneral
   name: Major General
   prefix: MajGen.

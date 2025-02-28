@@ -90,3 +90,23 @@
   name: tiles-cm-white-sterile
   sprite: /Textures/_RMC14/Tiles/prison/sterile_white.png
 
+- type: tile
+  parent: CMFloorSteel
+  id: CMFloorSteelPrisonRampNorth
+  name: ramp
+  sprite: /Textures/_RMC14/Tiles/prison/ramptop_north.png
+
+- type: tile
+  parent: CMFloorSteelPrisonRampNorth
+  id: CMFloorSteelPrisonRampSouth
+  sprite: /Textures/_RMC14/Tiles/prison/ramptop_south.png
+
+- type: tile
+  parent: CMFloorSteelPrisonRampNorth
+  id: CMFloorSteelPrisonRampEast
+  sprite: /Textures/_RMC14/Tiles/prison/ramptop_east.png
+
+- type: tile
+  parent: CMFloorSteelPrisonRampNorth
+  id: CMFloorSteelPrisonRampWest
+  sprite: /Textures/_RMC14/Tiles/prison/ramptop_west.png

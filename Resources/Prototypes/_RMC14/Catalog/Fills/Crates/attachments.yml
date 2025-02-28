@@ -147,8 +147,8 @@
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentMiniFlamethrower
-        amount: 4
+    - id: RMCAttachmentMiniFlamethrower
+      amount: 4
 
 - type: entity
   id: RMCCrateAttachmentBurstfire

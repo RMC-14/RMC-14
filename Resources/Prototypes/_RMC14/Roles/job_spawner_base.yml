@@ -9,7 +9,7 @@
   - type: SpawnPoint
     spawn_type: Job
   - type: Sprite
-    sprite: _RMC14/Markers/cm_jobs.rsi
+    sprite: _RMC14/Markers/landmarks.rsi
 
 - type: entity
   id: CMGuidebookRole

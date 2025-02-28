@@ -1,0 +1,91 @@
+# Queer Pins
+- type: loadout
+  id: RMCPinLGBT
+  cost: 1
+  storage:
+    back:
+    - ClothingNeckLGBTPin
+
+- type: loadout
+  id: RMCPinAromantic
+  cost: 1
+  storage:
+    back:
+    - ClothingNeckAromanticPin
+
+- type: loadout
+  id: RMCPinAsexual
+  cost: 1
+  storage:
+    back:
+    - ClothingNeckAsexualPin
+
+- type: loadout
+  id: RMCPinBisexual
+  cost: 1
+  storage:
+    back:
+    - ClothingNeckBisexualPin
+
+- type: loadout
+  id: RMCPinGay
+  cost: 1
+  storage:
+    back:
+    - ClothingNeckGayPin
+
+- type: loadout
+  id: RMCPinIntersex
+  cost: 1
+  storage:
+    back:
+    - ClothingNeckIntersexPin
+
+- type: loadout
+  id: RMCPinLesbian
+  cost: 1
+  storage:
+    back:
+    - ClothingNeckLesbianPin
+
+- type: loadout
+  id: RMCPinNonBinary
+  cost: 1
+  storage:
+    back:
+    - ClothingNeckNonBinaryPin
+
+- type: loadout
+  id: RMCPinPansexual
+  cost: 1
+  storage:
+    back:
+    - ClothingNeckPansexualPin
+
+- type: loadout
+  id: RMCPinOmnisexual
+  cost: 1
+  storage:
+    back:
+    - ClothingNeckOmnisexualPin
+
+- type: loadout
+  id: RMCPinTransgender
+  cost: 1
+  storage:
+    back:
+    - ClothingNeckTransPin
+
+- type: loadout
+  id: RMCPinAutism
+  cost: 1
+  storage:
+    back:
+    - ClothingNeckAutismPin
+
+- type: loadout
+  id: RMCPinAutismGold
+  cost: 1
+  storage:
+    back:
+    - ClothingNeckGoldAutismPin
