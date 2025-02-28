@@ -306,7 +306,7 @@
   suffix: Oppressor
   components:
   - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Praetorian/praetorian.rsi #TODO needs new sprite
+    sprite: _RMC14/Mobs/Xenonids/Praetorian/oppressor_praetorian.rsi
   - type: Xeno
     actionIds:
     - ActionXenoRest
