@@ -55,7 +55,7 @@
     state: barcardine
   - type: HelmetAccessory
     rsi:
-      sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+      sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
       state: barcardine_helmet
   - type: Item
   - type: SpawnItemsOnUse
@@ -100,7 +100,7 @@
     state: boonie
   - type: HelmetAccessory
     rsi:
-      sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+      sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
       state: boonie_helmet
   - type: Item
   - type: SpawnItemsOnUse
@@ -143,7 +143,7 @@
     state: chunk
   - type: HelmetAccessory
     rsi:
-      sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+      sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
       state: chunkbox_helmet
   - type: Item
   - type: SpawnItemsOnUse
@@ -452,7 +452,7 @@
     state: packaged-burrito
   - type: HelmetAccessory
     rsi:
-      sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+      sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
       state: packaged-burrito_helmet
   - type: Item
   - type: SpawnItemsOnUse
@@ -477,7 +477,7 @@
     state: open-burrito
   - type: HelmetAccessory
     rsi:
-      sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+      sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
       state: open-burrito_helmet
   - type: Item
   - type: SolutionContainerManager
@@ -500,7 +500,7 @@
     state: packaged-hotdog
   - type: HelmetAccessory
     rsi:
-      sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+      sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
       state: packaged-hotdog_helmet
   - type: Item
   - type: SpawnItemsOnUse
@@ -525,7 +525,7 @@
     state: open-hotdog
   - type: HelmetAccessory
     rsi:
-      sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+      sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
       state: open-hotdog_helmet
   - type: Item
   - type: SolutionContainerManager
@@ -554,7 +554,7 @@
     state: eat_bar
   - type: HelmetAccessory
     rsi:
-      sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+      sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
       state: snack_eat_helmet
   - type: SolutionContainerManager
     solutions:
@@ -582,7 +582,7 @@
     state: donkpocket
   - type: HelmetAccessory
     rsi:
-      sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+      sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
       state: donkpocket_helmet
   - type: SolutionContainerManager
     solutions:
