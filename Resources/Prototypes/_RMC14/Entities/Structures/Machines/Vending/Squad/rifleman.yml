@@ -20,6 +20,16 @@
       - id: CMMRE
         name: MRE
       #- id: CMMap # TODO: Make a map
+    - name: SuperSpecial
+      entries:
+      - id: Throngler
+        points: 46
+      - id: WeaponMeleeToolboxRobust
+        points: 45
+      - id: Chainsaw
+        points: 5
+      - id: WeaponBagguete
+        points: 5
     - name: Armor
       choices: { CMArmour: 1 }
       entries:
