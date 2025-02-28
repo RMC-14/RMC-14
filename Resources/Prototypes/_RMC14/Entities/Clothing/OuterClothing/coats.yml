@@ -263,6 +263,19 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/mp.rsi
 
+# Quartermaster
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCQuartermasterJacket
+  name: quartermaster jacket
+  description: A green jacket worn by UNMC personnel. The back has the flag of the United Nations on it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/qm.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/qm.rsi
+
+
 # Mess Seargeant/Tech
 - type: entity
   parent: RMCBaseJacket
