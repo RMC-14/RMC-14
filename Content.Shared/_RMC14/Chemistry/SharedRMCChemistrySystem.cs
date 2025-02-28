@@ -272,6 +272,9 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
         var dispensers = EntityQueryEnumerator<RMCChemicalDispenserComponent>();
         while (dispensers.MoveNext(out var dispenserId, out var dispenserComp))
         {
+            if (dispenserComp.Network != storage.Comp.Network)
+                continue;
+
             dispenserComp.Energy = energy;
             Dirty(dispenserId, dispenserComp);
         }
