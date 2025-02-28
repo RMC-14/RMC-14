@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoAcidNormal
   name: Corrosive Acid (100)  # TODO RMC14 proper plasma costs
