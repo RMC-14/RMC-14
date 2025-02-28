@@ -280,7 +280,7 @@ public sealed class XenoSystem : EntitySystem
 
     private void OnXenoBeforeCritDamage(Entity<XenoComponent> ent, ref DamageStateCritBeforeDamageEvent args)
     {
-        if (!_rmcFlammable.IsOnFire(ent.Owner) || ent.Comp.HealOffWeeds || _weeds.IsOnWeeds(ent.Owner))
+        if (!_rmcFlammable.IsOnFire(ent.Owner) || (!ent.Comp.HealOffWeeds && !_weeds.IsOnWeeds(ent.Owner)))
             return;
 
         //Don't take bleedout damage on fire or on weeds
