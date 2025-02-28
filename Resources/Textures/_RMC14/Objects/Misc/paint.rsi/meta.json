@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/1a8d07d9b5ca6652c7cfdf1072b3b82599cd03e9/icons/obj/items/paint.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "lipstick"
+    },
+    {
+      "name": "lipstick_red"
+    },
+    {
+      "name": "lipstick_purple"
+    },
+    {
+      "name": "lipstick_jade"
+    },
+    {
+      "name": "lipstick_maroon"
+    },
+    {
+      "name": "sunscreen_stick"
+    },
+    {
+      "name": "paint_empty"
+    },
+    {
+      "name": "paint_red"
+    },
+    {
+      "name": "paint_green"
+    },
+    {
+      "name": "paint_neutral"
+    },
+    {
+      "name": "paint_yellow"
+    },
+    {
+      "name": "paint_black"
+    },
+    {
+      "name": "paint_white"
+    },
+    {
+      "name": "paint_blue"
+    },
+    {
+      "name": "paint_violet"
+    },
+    {
+      "name": "camo"
+    },
+    {
+      "name": "green_camo"
+    },
+    {
+      "name": "full_camo"
+    },
+    {
+      "name": "brown_camo"
+    },
+    {
+      "name": "skull_camo"
+    },
+    {
+      "name": "black_camo"
+    },
+    {
+      "name": "crayonred"
+    },
+    {
+      "name": "crayonorange"
+    },
+    {
+      "name": "crayonyellow"
+    },
+    {
+      "name": "crayongreen"
+    },
+    {
+      "name": "crayonblue"
+    },
+    {
+      "name": "crayonpurple"
+    },
+    {
+      "name": "crayonrainbow"
+    },
+    {
+      "name": "crayonlesbian"
+    },
+    {
+      "name": "crayonfluid"
+    },
+    {
+      "name": "crayontrans"
+    },
+    {
+      "name": "crayongay"
+    },
+    {
+      "name": "crayonpan"
+    },
+    {
+      "name": "crayonace"
+    },
+    {
+      "name": "crayonenby"
+    },
+    {
+      "name": "crayonbi"
+    },
+    {
+      "name": "crayonmime"
+    },
+    {
+      "name": "red"
+    },
+    {
+      "name": "orange"
+    },
+    {
+      "name": "yellow"
+    },
+    {
+      "name": "green"
+    },
+    {
+      "name": "blue"
+    },
+    {
+      "name": "purple"
+    },
+    {
+      "name": "crayonbox"
+    }
+  ]
+}

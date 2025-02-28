@@ -46,6 +46,8 @@
         type: OverwatchConsoleBui
       enum.TacticalMapComputerUi.Key:
         type: TacticalMapComputerBui
+      enum.DialogUiKey.Key:
+        type: DialogBui
   - type: MarineCommunicationsComputer
   - type: OverwatchConsole
     canMessageSquad: false
@@ -83,6 +85,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
     state: overwatch
+    overrideDir: West
+    enableOverrideDir: true
   - type: InteractionOutline
   - type: ActivatableUI
     key: enum.OverwatchConsoleUI.Key

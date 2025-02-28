@@ -1,4 +1,4 @@
-﻿using Content.Shared.Coordinates;
+using Content.Shared.Coordinates;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
@@ -13,6 +13,7 @@ using Robust.Shared.Timing;
 using Content.Shared._RMC14.Xenonids.Sweep;
 using Robust.Shared.Audio.Systems;
 using Content.Shared._RMC14.Shields;
+using Content.Shared.Interaction;
 
 namespace Content.Shared._RMC14.Xenonids.Blitz;
 
@@ -30,6 +31,7 @@ public sealed class XenoBlitzSystem : EntitySystem
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly VanguardShieldSystem _vanguard = default!;
+    [Dependency] private readonly SharedInteractionSystem _interact = default!;
 
     public override void Initialize()
     {
@@ -65,6 +67,11 @@ public sealed class XenoBlitzSystem : EntitySystem
             _actions.SetUseDelay(args.Action, xeno.Comp.BaseUseDelay);
             xeno.Comp.FirstPartActivatedAt = _timing.CurTime;
             //Don't handle - let the leap go through
+            foreach (var (actionId, action) in _actions.GetActions(xeno))
+            {
+                if (action.BaseEvent is XenoLeapActionEvent)
+                    _actions.SetToggled(actionId, true);
+            }
         }
 
         Dirty(xeno);
@@ -97,6 +104,9 @@ public sealed class XenoBlitzSystem : EntitySystem
             if (!_xeno.CanAbilityAttackTarget(xeno, hit))
                 continue;
 
+            if (!_interact.InRangeUnobstructed(xeno.Owner, hit.Owner, xeno.Comp.Range))
+                continue;
+
             hits++;
 
             var myDamage = _damage.TryChangeDamage(hit, xeno.Comp.Damage);
@@ -115,6 +125,12 @@ public sealed class XenoBlitzSystem : EntitySystem
 
         if (hits >= xeno.Comp.HitsToRecharge)
             _vanguard.RegenShield(xeno);
+
+        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        {
+            if (action.BaseEvent is XenoLeapActionEvent)
+                _actions.SetToggled(actionId, false);
+        }
 
         Dirty(xeno);
     }

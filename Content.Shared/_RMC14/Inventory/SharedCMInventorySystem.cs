@@ -288,7 +288,13 @@ public abstract class SharedCMInventorySystem : EntitySystem
         if (!_pickupDroppedItemsQuery.TryComp(user, out var pickupDroppedItems))
             return;
 
-        foreach (var item in pickupDroppedItems.DroppedItems.Distinct().Reverse())
+        // Sort items by importance
+        var sortedItems = pickupDroppedItems.DroppedItems
+            .OrderByDescending(item => HasComp<GunComponent>(item))
+            .ThenByDescending(item => HasComp<MeleeWeaponComponent>(item))
+            .ToList();
+
+        foreach (var item in sortedItems.Distinct())
         {
             if (!_container.IsEntityInContainer(item) && _interaction.InRangeUnobstructed(user, item))
             {
@@ -474,7 +480,6 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 _hands.TryDrop(user, item) &&
                 _storage.Insert(slot.Ent, item, out _, user, storage, playSound: false))
             {
-                holster.Contents.Add(item);
                 _audio.PlayPredicted(holster.InsertSound, item, user);
                 _adminLog.Add(LogType.RMCHolster, $"{ToPrettyString(user)} holstered {ToPrettyString(item)}");
                 return;

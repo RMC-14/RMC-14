@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared._RMC14.Weapons.Ranged.Whitelist;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands;
@@ -33,6 +34,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
+using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
@@ -762,3 +764,15 @@ public sealed class CMGunSystem : EntitySystem
         RemCompDeferred<AssistedReloadReceiverComponent>(wielder);
     }
 }
+
+/// <summary>
+/// DoAfter event for filling a ballistic ammo provider directly while InsertDelay > 0.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed partial class DelayedAmmoInsertDoAfterEvent : SimpleDoAfterEvent;
+
+/// <summary>
+/// DoAfter event for cycling a ballistic ammo provider while CycleDelay > 0.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed partial class DelayedCycleDoAfterEvent : SimpleDoAfterEvent;

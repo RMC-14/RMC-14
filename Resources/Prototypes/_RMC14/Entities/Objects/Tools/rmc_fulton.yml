@@ -1,0 +1,44 @@
+﻿- type: entity
+  parent: BaseItem
+  id: RMCFulton
+  name: fulton recovery device
+  description: A system used by the UNMC for retrieving objects of interest on the ground from an AUD-25 dropship. Can be used to extract unrevivable corpses, or crates, typically lasting around 3 minutes in the air.
+  suffix: 1
+  components:
+  - type: Sprite
+    drawdepth: SmallObjects
+    sprite: _RMC14/Objects/Tools/fulton.rsi
+    state: fulton
+  - type: Item
+    size: Small
+  - type: Stack
+    stackType: RMCFulton
+    count: 1
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: RMCFulton
+
+- type: entity
+  parent: RMCFulton
+  id: RMCFulton20
+  suffix: 20
+  components:
+  - type: Stack
+    count: 20
+
+- type: stack
+  id: RMCFulton
+  name: fulton
+  icon:
+    sprite: _RMC14/Objects/Tools/fulton.rsi
+    state: fulton
+  spawn: RMCFulton
+  maxCount: 20

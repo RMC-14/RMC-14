@@ -1,8 +1,8 @@
-﻿- type: entity
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoAcidNormal
   name: Corrosive Acid (100)  # TODO RMC14 proper plasma costs
-  description: Melts down a structure over time.
+  description: Melts down a structure or item over time.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
@@ -21,7 +21,7 @@
   parent: ActionXenoAcidNormal
   id: ActionXenoAcidWeak
   name: Weak Corrosive Acid (75)  # TODO RMC14 proper plasma costs
-  description: Melts down a structure over time.
+  description: Melts down a structure or item over time.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
@@ -40,7 +40,7 @@
   parent: ActionXenoAcidNormal
   id: ActionXenoAcidStrong
   name: Strong Corrosive Acid (125)  # TODO RMC14 proper plasma costs
-  description: Melts down a structure over time.
+  description: Melts down a structure or item over time.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
@@ -116,6 +116,11 @@
   id: ActionXenoTailStabCorrosive
   name: Corrosive Tail Stab
   description: Launches an attack towards a given direction. The cooldown is faster if you miss. [color=red]It also injects diluted molecular acid into the target, dealing damage over time.[/color]
+  components:
+  - type: WorldTargetAction
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: tail_attack_acid
 
 - type: entity
   parent: ActionXenoTailStab
@@ -156,6 +161,21 @@
 
 - type: entity
   parent: ActionXenoLeap
+  id: ActionXenoAssault
+  name: Assault (25)
+  description: Charge towards a location. Destroys some objects in your path. Melee slashes reduce assault's cooldown. If Super-Empowered, stuns and flings back the first enemy hit.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: charge
+    event: !type:XenoLeapActionEvent
+    useDelay: 14
+    checkCanAccess: false
+
+- type: entity
+  parent: ActionXenoLeap
   id: ActionXenoDash
   name: Dash (40)
   description: Dash a short distance towards a given location.
@@ -184,6 +204,9 @@
     range: 3
     useDelay: 6
     deselectOnMiss: false
+  - type: XenoOffensiveAction
+  - type: XenoActionPlasma
+    cost: 10
 
 - type: entity
   id: ActionXenoTailSweep
@@ -228,7 +251,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: acid_shotgun
     event: !type:XenoScatteredSpitActionEvent
-    useDelay: 6
+    useDelay: 7
     range: 15
     checkCanAccess: false
   - type: ActionBlockIfResting
@@ -263,6 +286,8 @@
       state: charge_spit
     event: !type:XenoChargeSpitActionEvent
     useDelay: 12
+  - type: XenoActionPlasma
+    cost: 50
 
 - type: entity
   parent: ActionXenoBase
@@ -340,6 +365,8 @@
       state: lurker_inject_neuro
     event: !type:XenoParalyzingSlashActionEvent
     useDelay: 12
+  - type: XenoActionPlasma
+    cost: 50
 
 - type: entity
   parent: ActionXenoBase
@@ -354,6 +381,8 @@
       state: lurker_inject_neuro
     event: !type:XenoCripplingStrikeActionEvent
     useDelay: 10
+  - type: XenoActionPlasma
+    cost: 20
 
 - type: entity
   id: ActionXenoBoneChips
@@ -467,7 +496,7 @@
   id: ActionXenoCharge
   parent: ActionXenoBase
   name: Charge (20)
-  description: Click on a tile you want to charge at, after a brief non cancel-able windup time. [color=green]Cooldown is partially refunded upon attacking an enemy, scaling with the amount of enemies you cleave with your passive.[/color]
+  description: Click on a tile you want to charge at, after a brief non cancel-able windup time. Slows around the impact area. [color=green]Cooldown is partially refunded upon attacking an enemy, scaling with the amount of enemies you cleave with your passive.[/color]
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
@@ -550,7 +579,7 @@
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: stomp
+      state: tremor
     event: !type:XenoStompActionEvent
     useDelay: 45
 
@@ -584,6 +613,8 @@
     deselectOnMiss: false
   - type: XenoOffensiveAction
   - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 80
 
 - type: entity
   parent: ActionXenoBase
@@ -601,6 +632,8 @@
     useDelay: 13
     deselectOnMiss: false
   - type: XenoOffensiveAction
+  - type: XenoActionPlasma
+    cost: 30
   - type: ActionBlockIfResting
 
 - type: entity
@@ -618,8 +651,9 @@
     range: 15
     useDelay: 3
     checkCanAccess: false
-  - type: XenoOffensiveAction
   - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 50
 
 - type: entity
   parent: ActionXenoDash
@@ -633,37 +667,65 @@
 
 - type: entity
   parent: ActionXenoBase
-  id: ActionXenoCleave
-  name: Cleave
-  description: Root an enemy for a second or fling them depending on the toggle. The effect and distance are doubled if your shield is up.
+  id: ActionXenoCleaveRoot
+  name: Cleave Root
+  description: Root an enemy for a second. The duration is higher if your shield is up.
   components:
   - type: EntityTargetAction
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: prae_cleave_action
+      state: prae_cleave_root
     event: !type:XenoCleaveActionEvent
     range: 1.5
     useDelay: 12
     deselectOnMiss: false
   - type: ActionBlockIfResting
+  - type: ActionSharedCooldown
+    id: ActionXenoCleaveRoot
+    ids:
+    - ActionXenoCleaveFling
+    cooldown: 12
 
 - type: entity
   parent: ActionXenoBase
-  id: ActionXenoToggleCleave
-  name: Toggle Cleave Type
-  description: Toggle between your Cleave rooting enemies or flinging enemies.
+  id: ActionXenoCleaveFling
+  name: Cleave Fling
+  description: Fling an enemy. The distance is doubled if your shield is up.
   components:
-  - type: InstantAction
+  - type: EntityTargetAction
     itemIconStyle: NoItem
-    backgroundOn: null
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: prae_cleave_root
-    iconOn:
-      sprite: _RMC14/Actions/xeno_actions.rsi
       state: prae_cleave_fling
-    event: !type:XenoToggleCleaveActionEvent
+    event: !type:XenoCleaveActionEvent
+      flings: true
+    range: 1.5
+    useDelay: 12
+    deselectOnMiss: false
+  - type: ActionBlockIfResting
+  - type: ActionSharedCooldown
+    id: ActionXenoCleaveFling
+    ids:
+    - ActionXenoCleaveRoot
+    cooldown: 12
+
+#- type: entity
+#  parent: ActionXenoBase
+#  id: ActionXenoToggleCleave
+#  name: Toggle Cleave Type
+#  description: Toggle between your Cleave rooting enemies or flinging enemies.
+#  components:
+#  - type: InstantAction
+#    itemIconStyle: NoItem
+#    backgroundOn: null
+#    icon:
+#      sprite: _RMC14/Actions/xeno_actions.rsi
+#      state: prae_cleave_root
+#    iconOn:
+#      sprite: _RMC14/Actions/xeno_actions.rsi
+#      state: prae_cleave_fling
+#    event: !type:XenoToggleCleaveActionEvent
 
 - type: entity
   id: ActionXenoSpitQueen
@@ -688,3 +750,38 @@
       state: shift_spit_xeno_acid
     event: !type:XenoSpitToggleActionEvent
 
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoHighGallop
+  name: High Gallop
+  description: Stuns foes in a 2x3 area in targeted direction, and slows them. Also flings back grenades.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: stomp
+    event: !type:XenoHighGallopActionEvent
+    range: 15
+    useDelay: 12
+    checkCanAccess: false
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoScissorCut
+  name: Scissor Cut (25)
+  description: Cuts enemies and fences in a straight line. If Super-Empowered, slows enemies hit too.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_scissor_cut
+    event: !type:XenoScissorCutActionEvent
+    useDelay: 6
+    checkCanAccess: false
+    range: 15
+  - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 25

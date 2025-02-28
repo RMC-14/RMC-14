@@ -1,0 +1,27 @@
+- type: entity
+  parent: BaseStructure
+  id: RMCPlanter
+  name: concrete planter
+  description: A decorative concrete planter.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Structures/Furniture/hybrisa_planter.rsi
+    offset: 0,0.5
+    state: planter
+  - type: Appearance
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.48,0.25,0.8"
+        density: 75
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: PlaceableSurface
+    placeCentered: true
+    isPlaceable: false

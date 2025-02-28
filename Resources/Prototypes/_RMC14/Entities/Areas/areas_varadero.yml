@@ -20,6 +20,7 @@
     sprite: _RMC14/Areas/areas_varadero.rsi
     state: shuttle
   - type: Area
+    linkedLz: dropship_lz1
     minimapColor: '#EBE5E5E3'
 
 - type: entity
@@ -31,6 +32,7 @@
     sprite: _RMC14/Areas/areas_varadero.rsi
     state: shuttle2
   - type: Area
+    linkedLz: dropship_lz2
     minimapColor: '#EBE5E5E3'
 
 - type: entity
@@ -88,9 +90,8 @@
   - type: Sprite
     state: comms1
   - type: Area
+    linkedLz: dropship_lz1
     minimapColor: '#5A4501E7'
-    resinAllowed: false
-    unweedable: false
 
 - type: entity
   parent: RMCAreaVaraderoInterior
@@ -101,6 +102,7 @@
     state: comms2
   - type: Area
     minimapColor: '#5A4501E7'
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaVaraderoInterior
@@ -111,6 +113,7 @@
     state: comms3
   - type: Area
     minimapColor: '#5A4501E7'
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaVaraderoExterior
@@ -120,9 +123,8 @@
   - type: Sprite
     state: comms4
   - type: Area
+    linkedLz: dropship_lz1
     minimapColor: '#5A4501E7'
-    resinAllowed: false
-    unweedable: false
 
 - type: entity
   parent: RMCAreaVaraderoInterior
@@ -143,7 +145,7 @@
     resinAllowed: false
     avoidBioscan: false
     noTunnel: true
-    unweedable: false
+    unweedable: true
 
 - type: entity
   parent: RMCAreaVaraderoExterior
@@ -151,7 +153,6 @@
   name: New Varadero - Pontoon Dock
   components:
   - type: Area
-    resinAllowed: false
     minimapColor: '#EBE5E5E3'
     landingZone: true
 
@@ -161,7 +162,6 @@
   name: New Varadero - Palm Airfield
   components:
   - type: Area
-    resinAllowed: false
     minimapColor: '#EBE5E5E3'
 
 - type: entity
@@ -172,10 +172,9 @@
   - type: Sprite
     state: lz1
   - type: Area
+    linkedLz: dropship_lz1
     minimapColor: '#EBE5E5E3'
     landingZone: true
-    resinAllowed: false
-    unweedable: false
 
 - type: entity
   parent: RMCAreaVaraderoExterior
@@ -185,10 +184,9 @@
   - type: Sprite
     state: lz2
   - type: Area
+    linkedLz: dropship_lz2
     minimapColor: '#EBE5E5E3'
     landingZone: true
-    resinAllowed: false
-    unweedable: false
 
 - type: entity
   parent: RMCAreaVaraderoExterior
@@ -198,9 +196,8 @@
   - type: Sprite
     state: varadero0
   - type: Area
+    linkedLz: dropship_lz1, dropship_lz2
     minimapColor: '#2B5B2BEE'
-    resinAllowed: false
-    unweedable: false
 
 - type: entity
   parent: RMCAreaVaraderoExteriorPontoonBeach
@@ -208,6 +205,7 @@
   components:
   - type: Area
     landingZone: true
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaVaraderoExterior
@@ -217,9 +215,8 @@
   - type: Sprite
     state: varadero1
   - type: Area
+    linkedLz: dropship_lz2
     minimapColor: '#2B5B2BEE'
-    resinAllowed: false
-    unweedable: false
 
 - type: entity
   parent: RMCAreaVaraderoExterior
@@ -249,11 +246,11 @@
   - type: Sprite
     state: varadero2
   - type: Area
+    linkedLz: dropship_lz2
     avoidBioscan: false
     noTunnel: true
     unweedable: false
     minimapColor: '#0603C4EE'
-    resinAllowed: false
 
 - type: entity
   parent: RMCAreaVaraderoExterior
@@ -263,7 +260,6 @@
   - type: Sprite
     state: varadero3
   - type: Area
-    resinAllowed: false
     avoidBioscan: false
     noTunnel: true
     unweedable: false
@@ -277,6 +273,7 @@
   - type: Sprite
     state: varadero4
   - type: Area
+    linkedLz: dropship_lz1, dropship_lz2
     minimapColor: '#2B5B2BEE'
 
 - type: entity
@@ -287,6 +284,7 @@
   - type: Sprite
     state: varadero3
   - type: Area
+    linkedLz: dropship_lz1
     minimapColor: '#2B5B2BEE'
     landingZone: true
 
@@ -298,9 +296,8 @@
   - type: Sprite
     state: req0
   - type: Area
+    linkedLz: dropship_lz1
     minimapColor: '#C19504E7'
-    resinAllowed: false
-    unweedable: false
 
 - type: entity
   parent: RMCAreaVaraderoInterior
@@ -318,8 +315,7 @@
   - type: Sprite
     state: hall2
   - type: Area
-    resinAllowed: false
-    unweedable: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaVaraderoInterior
@@ -337,9 +333,8 @@
   - type: Sprite
     state: offices1
   - type: Area
+    linkedLz: dropship_lz1
     minimapColor: '#132242EE'
-    resinAllowed: false
-    unweedable: false
 
 - type: entity
   parent: RMCAreaVaraderoInterior
@@ -349,9 +344,8 @@
   - type: Sprite
     state: offices0
   - type: Area
+    linkedLz: dropship_lz1
     minimapColor: '#17472CEE'
-    resinAllowed: false
-    unweedable: false
 
 - type: entity
   parent: RMCAreaVaraderoInterior
@@ -379,8 +373,7 @@
   - type: Sprite
     state: tunnels1
   - type: Area
-    resinAllowed: false
-    unweedable: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaVaraderoInteriorMaintenance
@@ -406,6 +399,9 @@
   parent: RMCAreaVaraderoInteriorMaintenanceSecurity
   id: RMCAreaVaraderoInteriorMaintenanceSecurityNorth
   name: New Varadero - North Sec. Maintenance
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaVaraderoInteriorMaintenanceSecurity
@@ -431,6 +427,7 @@
     state: req4
   - type: Area
     minimapColor: '#C19504E7'
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaVaraderoInterior
@@ -486,9 +483,8 @@
   - type: Sprite
     state: offices0
   - type: Area
+    linkedLz: dropship_lz1
     minimapColor: '#132242EE'
-    resinAllowed: false
-    unweedable: false
 
 - type: entity
   parent: RMCAreaVaraderoInterior

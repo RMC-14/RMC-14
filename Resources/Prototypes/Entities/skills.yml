@@ -17,7 +17,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillDefinition
-    delayMultipliers: [1, 1, 0.5]
+    delayMultipliers: [ 1, 1, 0.5 ]
 # Based on barricade weld times, 1 and 0 are full second, 2 is half
 
 - type: entity
@@ -45,7 +45,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillDefinition
-    delayMultipliers: [1, 0.75, 0.5, 0.375, 0.25]
+    delayMultipliers: [ 1, 0.75, 0.5, 0.375, 0.25 ]
 
 - type: entity
   parent: RMCSkillBase
@@ -66,13 +66,16 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillDefinition
-    delayMultipliers: [1, 0.75, 0.5, 0.25, 0.1]
+    delayMultipliers: [ 1, 0.75, 0.5 ]
 
 - type: entity
   parent: RMCSkillBase
   id: RMCSkillIntel
   name: Intel
   categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillDefinition
+    delayMultipliers: [ 1, 0.75, 0.5, 0.25, 0.1 ]
 
 - type: entity
   parent: RMCSkillBase

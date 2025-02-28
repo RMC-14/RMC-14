@@ -46,6 +46,7 @@
     - map: [ "mask" ]
     - map: [ "head" ]
     - map: [ "enum.SquadArmorLayers.Helmet" ]
+    - map: [ "enum.VisorVisualLayers.Base" ]
     - map: [ "pocket1" ]
     - map: [ "pocket2" ]
     - map: ["enum.HumanoidVisualLayers.Handcuffs"]
@@ -152,7 +153,7 @@
   - type: IdExaminable
   - type: Hands
   - type: ComplexInteraction
-  - type: Internals
+#  - type: Internals
   - type: FloatingVisuals
   - type: Climbing
   - type: Cuffable
@@ -221,6 +222,7 @@
     - DoorBumpOpener
     - AnomalyHost
   - type: MobGibbedByExplosionType
+  - type: RMCCanBeFultoned
 
 - type: entity
   save: false

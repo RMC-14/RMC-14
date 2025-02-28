@@ -28,3 +28,4 @@
   - type: Tag
     tags:
     - Pickaxe
+  - type: DeleteOnExplosion

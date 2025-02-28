@@ -96,6 +96,38 @@
     - Suitstorage
 
 - type: entity
+  parent: trayScanner
+  id: CMTRayScanner
+  name: t-ray scanner
+  description: A high-tech scanning device that uses terahertz radiation to detect subfloor infrastructure.
+  suffix: trayScanner
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/t-ray.rsi
+    layers:
+    - state: tray-off
+      map: [ "base" ]
+  - type: TrayScanner
+    range: 1
+  - type: Item
+    sprite: _RMC14/Objects/Tools/t-ray.rsi
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TrayScannerVisual.Visual:
+        base:
+          On: { state: tray-on }
+          Off: { state: tray-off }
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_RMC14/Handling/multitool_pickup.ogg
+  - type: Multitool
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Suitstorage
+
+- type: entity
   parent: Crowbar
   id: CMCrowbar
   components:

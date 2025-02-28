@@ -21,7 +21,8 @@
           False: { visible: false }
   - type: Item
     size: Normal
-    sprite: Objects/Specific/Medical/defib.rsi
+    sprite: _RMC14/Objects/Medical/defib.rsi
+    heldPrefix: defib
   - type: Speech
     speechVerb: Robotic
   - type: ItemToggle
@@ -30,6 +31,7 @@
     soundDeactivate:
       path: /Audio/_RMC14/Medical/defib_safetyOff.ogg
   - type: Defibrillator
+    zapDelay: 0
     doAfterDuration: 6.25
     allowDoAfterMovement: false
     canDefibCrit: false

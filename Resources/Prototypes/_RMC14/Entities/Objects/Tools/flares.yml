@@ -41,7 +41,7 @@
   - type: Appearance
   - type: PointLight
     enabled: false
-    color: "#FA644B"
+    color: "#FFCCCC"
     radius: 1
     energy: 5.0
     netsync: false
@@ -57,6 +57,7 @@
         maxDuration: 570
         startValue: 7.0
         endValue: 1.0
+  - type: RMCNightVisionVisibleOnIgnite
 
 - type: entity
   parent: CMFlare
@@ -84,7 +85,7 @@
     sprite: _RMC14/Objects/Misc/cas_flares.rsi
     state: flare
   - type: PointLight
-    color: "#64FA4B"
+    color: "#AACCAA"
   - type: FlareSignal
   - type: ExpendableLight
     glowDuration: 180
@@ -149,7 +150,7 @@
   components:
   - type: CMItemSlots
     startingItem: CMPackFlare
-   
+
 - type: entity
   parent: RMCBoxMagazineBase
   id: RMCBoxPackFlareCASEmpty
@@ -276,9 +277,9 @@
 
 - type: Tag
   id: RMCFlare
-  
+
 - type: Tag
   id: RMCFlareCAS
-  
+
 - type: Tag
   id: RMCPackFlareCAS

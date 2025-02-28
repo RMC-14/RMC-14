@@ -21,11 +21,11 @@ public abstract class SharedMedevacSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<MedevacComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<MedevacComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<MedevacComponent, InteractHandEvent>(OnInteract);
     }
 
-    private void OnInit(Entity<MedevacComponent> ent, ref ComponentInit args)
+    private void OnMapInit(Entity<MedevacComponent> ent, ref MapInitEvent args)
     {
         _useDelay.SetLength(ent.Owner, ent.Comp.DelayLength, MedevacComponent.AnimationDelay);
     }

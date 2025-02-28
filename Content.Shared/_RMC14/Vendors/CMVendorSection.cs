@@ -17,6 +17,9 @@ public sealed partial class CMVendorSection
     [DataField]
     public string? TakeAll;
 
+    [DataField]
+    public string? TakeOne;
+
     [DataField(required: true)]
     public List<CMVendorEntry> Entries = new();
 
@@ -26,6 +29,12 @@ public sealed partial class CMVendorSection
 
     [DataField]
     public List<ProtoId<JobPrototype>> Jobs = new();
+
+    [DataField]
+    public List<string> Holidays = new();
+
+    [DataField]
+    public bool HasBoxes;
 }
 
 [DataDefinition]
@@ -55,4 +64,13 @@ public sealed partial record CMVendorEntry
 
     [DataField]
     public int? Max;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId? Box;
+
+    [DataField, AutoNetworkedField]
+    public int? BoxAmount;
+
+    [DataField, AutoNetworkedField]
+    public int? BoxSlots;
 }

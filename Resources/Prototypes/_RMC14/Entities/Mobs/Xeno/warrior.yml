@@ -93,3 +93,5 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: warrior
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.2

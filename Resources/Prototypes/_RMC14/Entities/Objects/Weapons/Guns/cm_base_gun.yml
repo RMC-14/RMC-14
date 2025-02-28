@@ -35,9 +35,14 @@
   - type: Gun
     meleeCooldownOnShoot: false
     resetOnHandSelected: false
+    burstCooldown: 0
   - type: RMCWeaponAccuracy
   - type: GunSkilledAccuracy
   - type: Appearance
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/pistol_mouse.rsi
+      state: all
 
 - type: entity
   parent: BaseBullet

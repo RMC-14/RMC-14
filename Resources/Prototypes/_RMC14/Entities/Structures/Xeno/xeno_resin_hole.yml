@@ -87,3 +87,4 @@
   - type: XenoConstruct
     destroyWeeds: false
   - type: RequireProjectileTarget
+  - type: DeletedByWeedKiller
