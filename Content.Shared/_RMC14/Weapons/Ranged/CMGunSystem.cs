@@ -21,6 +21,7 @@ using Content.Shared.Projectiles;
 using Content.Shared.Standing;
 using Content.Shared.Timing;
 using Content.Shared.Weapons.Melee;
+using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -369,6 +370,20 @@ public sealed class CMGunSystem : EntitySystem
         }
     }
 
+    private void OnGunPointBlankMeleeHit(Entity<GunPointBlankComponent> gun, ref MeleeHitEvent args)
+    {
+        if (!TryComp<MeleeWeaponComponent>(gun, out var melee))
+            return;
+
+        if (!TryGetGunUser(gun.Owner, out var user))
+            return;
+
+        var userDelay = EnsureComp<UserPointblankCooldownComponent>(user);
+
+        //After meleeing can't PB
+        userDelay.LastPBAt = _timing.CurTime;
+    }
+
     private void OnGunPointBlankAmmoShot(Entity<GunPointBlankComponent> gun, ref AmmoShotEvent args)
     {
         if (!TryComp(gun.Owner, out GunComponent? gunComp) ||
@@ -412,6 +427,7 @@ public sealed class CMGunSystem : EntitySystem
 
         if (!TryComp<MeleeWeaponComponent>(gun, out var melee))
             return;
+
         //Can't melee right after a PB
         melee.NextAttack = userDelay.LastPBAt + userDelay.TimeBetweenPBs;
         Dirty(gun, melee);
