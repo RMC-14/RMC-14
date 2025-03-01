@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fix hyposprays needing medical skill 2 to instant inject
-    type: Fix
-  id: 890
-  time: '2024-10-30T02:13:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4624
-- author: Vermidia
-  changes:
   - message: More jobs have unique map icons
     type: Tweak
   - message: Hive core now shows up on xeno's map
@@ -5168,5 +5161,12 @@
   id: 1391
   time: '2025-03-01T11:05:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5757
+- author: Vermidia
+  changes:
+  - message: Fixed m81 riot not accepting smoke nades.
+    type: Fix
+  id: 1392
+  time: '2025-03-01T11:08:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5764
 Name: RMC14
 Order: -1
