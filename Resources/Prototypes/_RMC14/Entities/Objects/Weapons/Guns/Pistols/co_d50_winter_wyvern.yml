@@ -1,7 +1,7 @@
 - type: entity
   parent: CMWeaponPistolBase
-  id: CMWeaponPistolCOMagnumAutomatic
-  name: Vintage Magnum Automatic
+  id: RMCWeaponPistolCOD50WinterWyvern
+  name: vintage D50 winter wyvern
   description: A bulky 50 caliber pistol with a serious kick. Hand crafted from the finest blacksteel with an ivory grip bolted together with gold studs. Very elegant.
   components:
   - type: Gun
@@ -16,9 +16,9 @@
     baseFireRate: 1.43
     burstScatterMult: 7
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/magnumautomaticvintage.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/d50winterwyvernvintage.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/magnumautomaticvintage.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/d50winterwyvernvintage.rsi
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 7.2
     accuracyMultiplierUnwielded: 3.9
@@ -31,9 +31,9 @@
         priority: 2
         whitelist:
           tags:
-          - CMMagazinePistolMagnumAutomaticHI
-          - CMMagazinePistolMagnumAutomaticHIAP
-        startingItem: CMMagazinePistolMagnumAutomaticHI
+          - RMCMagazinePistolD50WinterWyvernHI
+          - RMCMagazinePistolD50WinterWyvernHIAP
+        startingItem: RMCMagazinePistolD50WinterWyvernHI
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -60,22 +60,22 @@
 
 - type: entity
   parent: CMBaseMagazinePistol
-  id: CMMagazinePistolMagnumAutomaticHI
-  name: High Impact Magnum Automatic Magazine (.50AE)
+  id: RMCMagazinePistolD50WinterWyvernHI
+  name: D50 winter wyvern HI magazine (.50AE)
   components:
   - type: Tag
     tags:
     - CMMagazinePistol
-    - CMMagazinePistolMagnumAutomaticHI
+    - RMCMagazinePistolD50WinterWyvernHI
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridgePistolHI50AE
-    proto: CMCartridgePistolHI50AE
+      - RMCCartridgePistolHI50AE
+    proto: RMCCartridgePistolHI50AE
     capacity: 7
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/magnumautomatic.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/d50winterwyvern.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -83,20 +83,20 @@
       map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
-  id: CMCartridgePistolHI50AE
+  id: RMCCartridgePistolHI50AE
   name: cartridge (High Impact .50AE)
   parent: CMCartridgePistolBase
   components:
   - type: Tag
     tags:
     - Cartridge
-    - CMCartridgePistolHI50AE
+    - RMCCartridgePistolHI50AE
   - type: CartridgeAmmo
-    proto: CMBulletPistolHI50AE
+    proto: RMCBulletPistolHI50AE
 
 - type: entity
   parent: CMBulletBase
-  id: CMBulletPistolHI50AE
+  id: RMCBulletPistolHI50AE
   name: bullet (HI50AE)
   components:
   - type: Projectile
@@ -113,22 +113,22 @@
 
 - type: entity
   parent: CMBaseMagazinePistol
-  id: CMMagazinePistolMagnumAutomaticHIAP
-  name: High Impact Armor-Piercing Magnum Automatic Magazine (.50AE)
+  id: RMCMagazinePistolD50WinterWyvernHIAP
+  name: D50 winter wyvern HIAP Magazine (.50AE)
   components:
   - type: Tag
     tags:
     - CMMagazinePistol
-    - CMMagazinePistolMagnumAutomaticHIAP
+    - RMCMagazinePistolD50WinterWyvernHIAP
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridgePistolHIAP50AE
-    proto: CMCartridgePistolHIAP50AE
+      - RMCCartridgePistolHIAP50AE
+    proto: RMCCartridgePistolHIAP50AE
     capacity: 7
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/magnumautomatic.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/d50winterwyvern.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -136,20 +136,20 @@
       map: ["enum.GunVisualLayers.Mag"]
 
 - type: entity
-  id: CMCartridgePistolHIAP50AE
+  id: RMCCartridgePistolHIAP50AE
   name: cartridge (High Impact Armor-Piercing .50AE)
   parent: CMCartridgePistolBase
   components:
   - type: Tag
     tags:
     - Cartridge
-    - CMCartridgePistolHIAP50AE
+    - RMCCartridgePistolHIAP50AE
   - type: CartridgeAmmo
-    proto: CMBulletPistolHIAP50AE
+    proto: RMCBulletPistolHIAP50AE
 
 - type: entity
   parent: CMBulletBase
-  id: CMBulletPistolHIAP50AE
+  id: RMCBulletPistolHIAP50AE
   name: bullet (HIAP50AE)
   components:
   - type: Projectile
@@ -165,15 +165,13 @@
     accuracy: 90
 
 - type: Tag
-  id: CMMagazinePistolMagnumAutomaticHI
+  id: RMCMagazinePistolD50WinterWyvernHI
 
 - type: Tag
-  id: CMCartridgePistolHI50AE
+  id: RMCCartridgePistolHI50AE
 
 - type: Tag
-  id: CMMagazinePistolMagnumAutomaticHIAP
+  id: RMCMagazinePistolD50WinterWyvernHIAP
 
 - type: Tag
-  id: CMCartridgePistolHIAP50AE
-
-
+  id: RMCCartridgePistolHIAP50AE

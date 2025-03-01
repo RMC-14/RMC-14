@@ -491,7 +491,7 @@
     - name: Commander's Secondary
       choices: { CMSecondary: 1 }
       entries:
-      - id: RMCMagnumAutomaticBeltFilled
+      - id: RMCD50WinterWyvernBeltFilled
       - id: RMCMatebaBeltFilled
     - name: Primary Ammunition
       entries:
@@ -513,9 +513,9 @@
         points: 15
     #   - id: CMMagazineMatebaAP  # TODO RMC14 Port More Sidearm Ammo
     #     points: 20
-      - id: CMMagazinePistolMagnumAutomaticHI
+      - id: RMCMagazinePistolD50WinterWyvernHI
         points: 15
-      - id: CMMagazinePistolMagnumAutomaticHIAP
+      - id: RMCMagazinePistolD50WinterWyvernHIAP
         points: 20
     - name: Shotgun Ammunition
       entries:
