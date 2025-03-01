@@ -45,6 +45,7 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: RMCStrapNoDrawDepthChange
 
 - type: entity
   parent: CMRollerBed
