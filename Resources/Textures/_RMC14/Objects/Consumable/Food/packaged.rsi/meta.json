@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/134b9b90f2d59c11f05e7e3faf06f0a971482809/icons/obj/items/food.dmi, https://github.com/cmss13-devs/cmss13/blob/800f3950414b25174f1e81278dfe1cde4fbbf281/icons/mob/humans/onmob/clothing/helmet_garb/food.dmi, https://github.com/cmss13-devs/cmss13/blob/800f3950414b25174f1e81278dfe1cde4fbbf281/icons/obj/items/food/bakery.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/134b9b90f2d59c11f05e7e3faf06f0a971482809/icons/obj/items/food.dmi, https://github.com/cmss13-devs/cmss13/blob/800f3950414b25174f1e81278dfe1cde4fbbf281/icons/mob/humans/onmob/clothing/helmet_garb/food.dmi, https://github.com/cmss13-devs/cmss13/blob/800f3950414b25174f1e81278dfe1cde4fbbf281/icons/obj/items/food/bakery.dmi, https://github.com/cmss13-devs/cmss13/blob/800f3950414b25174f1e81278dfe1cde4fbbf281/icons/mob/humans/onmob/inhands/items/food_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/800f3950414b25174f1e81278dfe1cde4fbbf281/icons/mob/humans/onmob/inhands/items/food_righthand.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -156,6 +156,142 @@
     },
     {
       "name": "donkpocket"
+    },
+    {
+      "name": "kepler-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "flamehotkepler-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "burrito-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "pburrito-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "hotdog-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "photdog-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "burger-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "pburger-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "wy_chips_pepper-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "hunk-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "hunk_o-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "chunk-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "chunk_o-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "barcardine-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "boonie-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "barcardine_o-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "boonie_o-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "kepler-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "flamehotkepler-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "burrito-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "pburrito-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "hotdog-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "photdog-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "burger-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "pburger-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "wy_chips_pepper-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "hunk-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "hunk_o-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "chunk-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "chunk_o-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "barcardine-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "boonie-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "barcardine_o-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "boonie_o-inhand-right",
+      "directions": 4
     }
   ]
 }

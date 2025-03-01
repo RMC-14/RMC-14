@@ -58,6 +58,7 @@
       sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
       state: barcardine_helmet
   - type: Item
+    heldPrefix: barcardine
   - type: SpawnItemsOnUse
     items:
       - id: RMCFoodPacketBarcardineTrash
@@ -78,6 +79,7 @@
   - type: Sprite
     state: barcardine-o
   - type: Item
+    heldPrefix: barcardine_o
   - type: SolutionContainerManager
     solutions:
       food:
@@ -103,6 +105,7 @@
       sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
       state: boonie_helmet
   - type: Item
+    heldPrefix: boonie
   - type: SpawnItemsOnUse
     items:
       - id: RMCFoodPacketBoonieTrash
@@ -123,6 +126,7 @@
   - type: Sprite
     state: boonie-o
   - type: Item
+    heldPrefix: boonie_o
   - type: SolutionContainerManager
     solutions:
       food:
@@ -146,6 +150,7 @@
       sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
       state: chunkbox_helmet
   - type: Item
+    heldPrefix: chunk
   - type: SpawnItemsOnUse
     items:
       - id: RMCFoodPacketCHUNKTrash
@@ -171,6 +176,7 @@
   - type: Sprite
     state: chunk-o
   - type: Item
+    heldPrefix: chunk_o
   - type: SolutionContainerManager
     solutions:
       food:
@@ -196,6 +202,7 @@
   - type: Sprite
     state: hunk
   - type: Item
+    heldPrefix: hunk
     size: Normal
   - type: SpawnItemsOnUse
     items:
@@ -223,6 +230,7 @@
   - type: Sprite
     state: hunk-o
   - type: Item
+    heldPrefix: hunk_o
     size: Normal
   - type: SolutionContainerManager
     solutions:
@@ -290,6 +298,7 @@
         - ReagentId: TableSalt # Holy shit these are salty.
           Quantity: 12
   - type: Item
+    heldPrefix: kepler
   - type: Food
     trash:
     - RMCFoodPacketKeplerCrispsTrash
@@ -319,6 +328,7 @@
         - ReagentId: Hotsauce
           Quantity: 8
   - type: Item
+    heldPrefix: flamehotkepler
   - type: Food
     trash:
     - RMCFoodPacketKeplerCrispsFlamehotTrash
@@ -345,6 +355,7 @@
         - ReagentId: Blackpepper
           Quantity: 1
   - type: Item
+    heldPrefix: wy_chips_pepper
   - type: Food
     trash:
     - RMCFoodPacketPepperChipsTrash
@@ -409,6 +420,7 @@
   - type: Sprite
     state: burger
   - type: Item
+    heldPrefix: pburger
   - type: SpawnItemsOnUse
     items:
       - id: RMCFoodPacketCheeseburgerTrash
@@ -430,6 +442,7 @@
   - type: Sprite
     state: hburger
   - type: Item
+    heldPrefix: burger
   - type: SolutionContainerManager
     solutions:
       food:
@@ -455,6 +468,7 @@
       sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
       state: packaged-burrito_helmet
   - type: Item
+    heldPrefix: pburrito
   - type: SpawnItemsOnUse
     items:
       - id: RMCFoodPacketBurritoTrash
@@ -480,6 +494,7 @@
       sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
       state: open-burrito_helmet
   - type: Item
+    heldPrefix: burrito
   - type: SolutionContainerManager
     solutions:
       food:
@@ -503,6 +518,7 @@
       sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
       state: packaged-hotdog_helmet
   - type: Item
+    heldPrefix: photdog
   - type: SpawnItemsOnUse
     items:
       - id: RMCFoodPacketHotdogTrash
@@ -528,6 +544,7 @@
       sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
       state: open-hotdog_helmet
   - type: Item
+    heldPrefix: hotdog
   - type: SolutionContainerManager
     solutions:
       food:

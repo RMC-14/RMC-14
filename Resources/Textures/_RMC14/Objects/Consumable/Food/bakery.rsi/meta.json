@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/800f3950414b25174f1e81278dfe1cde4fbbf281/icons/obj/items/food/bakery.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/800f3950414b25174f1e81278dfe1cde4fbbf281/icons/obj/items/food/bakery.dmi, https://github.com/cmss13-devs/cmss13/blob/800f3950414b25174f1e81278dfe1cde4fbbf281/icons/mob/humans/onmob/inhands/items/food_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/800f3950414b25174f1e81278dfe1cde4fbbf281/icons/mob/humans/onmob/inhands/items/food_righthand.dmi,",
   "size": {
     "x": 32,
     "y": 32
@@ -66,6 +66,22 @@
     },
     {
       "name": "poppypretzel"
+    },
+    {
+      "name": "meatpie-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "meatpie-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "COOKIE!!!-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "COOKIE!!!-inhand-right",
+      "directions": 4
     }
   ]
 }
