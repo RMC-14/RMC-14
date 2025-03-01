@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/800f3950414b25174f1e81278dfe1cde4fbbf281/icons/obj/items/food/eggs.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "eggboxes"
+    },
+    {
+      "name": "eggbox"
+    },
+    {
+      "name": "eggbox0"
+    },
+    {
+      "name": "eggbox1"
+    },
+    {
+      "name": "eggbox2"
+    },
+    {
+      "name": "eggbox3"
+    },
+    {
+      "name": "eggbox4"
+    },
+    {
+      "name": "eggbox5"
+    },
+    {
+      "name": "eggbox6"
+    },
+    {
+      "name": "eggbox7"
+    },
+    {
+      "name": "eggbox8"
+    },
+    {
+      "name": "eggbox9"
+    },
+    {
+      "name": "eggbox10"
+    },
+    {
+      "name": "eggbox11"
+    },
+    {
+      "name": "eggbox12"
+    },
+    {
+      "name": "eggs"
+    },
+    {
+      "name": "egg"
+    },
+    {
+      "name": "egg-purple"
+    },
+    {
+      "name": "egg-blue"
+    },
+    {
+      "name": "egg-red"
+    },
+    {
+      "name": "egg-orange"
+    },
+    {
+      "name": "egg-yellow"
+    },
+    {
+      "name": "egg-green"
+    },
+    {
+      "name": "egg-rainbow"
+    },
+    {
+      "name": "egg-mime"
+    },
+    {
+      "name": "chocolateegg"
+    }
+  ]
+}

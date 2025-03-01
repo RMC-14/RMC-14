@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/800f3950414b25174f1e81278dfe1cde4fbbf281/icons/obj/items/food/dishes.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "spesslaw"
+    },
+    {
+      "name": "tofurkey"
+    },
+    {
+      "name": "legacy_bay"
+    },
+    {
+      "name": "loadedbakedpotato"
+    },
+    {
+      "name": "omelette"
+    },
+    {
+      "name": "cheesyfries"
+    },
+    {
+      "name": "fries"
+    },
+    {
+      "name": "eggplantparm"
+    },
+    {
+      "name": "carrotfries"
+    },
+    {
+      "name": "pasta"
+    },
+    {
+      "name": "pastatomato"
+    },
+    {
+      "name": "soydope"
+    },
+    {
+      "name": "spagettiboiled"
+    },
+    {
+      "name": "meatballspagetti"
+    },
+    {
+      "name": "stewedsoymeat"
+    },
+    {
+      "name": "friedegg"
+    },
+    {
+      "name": "mint"
+    },
+    {
+      "name": "boiledrorocore"
+    },
+    {
+      "name": "badrecipe"
+    },
+    {
+      "name": "berryclafoutis"
+    },
+    {
+      "name": "spacylibertyduff",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "amanitajelly",
+      "delays": [
+        [
+          5,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "enchiladas"
+    },
+    {
+      "name": "wingfangchu"
+    }
+  ]
+}
