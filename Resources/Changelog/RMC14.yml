@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: crystalHex
-  changes:
-  - message: Added functional holsters to the smart pistol belt, combat toolbelt,
-      mortar operator belt and M63 holster rig.
-    type: Tweak
-  id: 902
-  time: '2024-10-31T09:20:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4522
 - author: CyberTropic
   changes:
   - message: Added scorch marks to CAS fire
@@ -5153,5 +5145,12 @@
   id: 1403
   time: '2025-03-01T13:33:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5754
+- author: Kickguy223
+  changes:
+  - message: Fixed being able to drop and walk away from a piece of intel you're reading
+    type: Fix
+  id: 1404
+  time: '2025-03-01T13:35:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5707
 Name: RMC14
 Order: -1
