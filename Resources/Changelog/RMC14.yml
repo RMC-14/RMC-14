@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Surgical Cases can now hold synth graft and surgical line
-    type: Add
-  id: 885
-  time: '2024-10-28T09:49:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4608
-- author: Vermidia
-  changes:
   - message: Fix defibs healing less oxygen damage on defib than intended.
     type: Fix
   id: 886
@@ -5147,5 +5140,20 @@
   id: 1386
   time: '2025-02-28T03:06:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5759
+- author: Vermidia
+  changes:
+  - message: Fixed mortars having infinite range. They now have a min range of 25,
+      and max range of 75. Req also now starts with a kit for the mortar, which comes
+      with mortar operator pamplets.
+    type: Fix
+  - message: Fixed Incindiary mortar shells exploding on impact. They only create
+      fire now.
+    type: Fix
+  - message: Mortar Shells are now cheaper to buy from req, you can no longer get
+      them from ASRS random crates.
+    type: Fix
+  id: 1387
+  time: '2025-03-01T11:00:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5735
 Name: RMC14
 Order: -1
