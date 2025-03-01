@@ -1,0 +1,188 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/aefb9575f85df13fe574f4947c61218afa2c81a7/icons/obj/items/food/mre_food/uscm.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "entree"
+    },
+    {
+      "name": "chili_con_carne"
+    },
+    {
+      "name": "noodle_soup"
+    },
+    {
+      "name": "brazilian-style_feijoada"
+    },
+    {
+      "name": "boneless_pork_ribs"
+    },
+    {
+      "name": "grilled_chicken"
+    },
+    {
+      "name": "pizza_square"
+    },
+    {
+      "name": "chicken_tender"
+    },
+    {
+      "name": "spaghetti_chunks"
+    },
+    {
+      "name": "pepperoni_square"
+    },
+    {
+      "name": "grilled_chicken_breast"
+    },
+    {
+      "name": "side"
+    },
+    {
+      "name": "rice"
+    },
+    {
+      "name": "mashed_potatoes"
+    },
+    {
+      "name": "cinnamon_apple_slices"
+    },
+    {
+      "name": "cracker"
+    },
+    {
+      "name": "risotto"
+    },
+    {
+      "name": "rice_onigiri"
+    },
+    {
+      "name": "cornbread"
+    },
+    {
+      "name": "tortillas"
+    },
+    {
+      "name": "kale"
+    },
+    {
+      "name": "snack"
+    },
+    {
+      "name": "biscuits"
+    },
+    {
+      "name": "biscuit"
+    },
+    {
+      "name": "meatballs"
+    },
+    {
+      "name": "pretzels"
+    },
+    {
+      "name": "meatzels"
+    },
+    {
+      "name": "sushi"
+    },
+    {
+      "name": "peanuts"
+    },
+    {
+      "name": "dessert"
+    },
+    {
+      "name": "spiced_apples"
+    },
+    {
+      "name": "chocolate_brownie"
+    },
+    {
+      "name": "sugar_cookie"
+    },
+    {
+      "name": "coco_bar"
+    },
+    {
+      "name": "flan"
+    },
+    {
+      "name": "honey_flan"
+    },
+    {
+      "name": "lemon_pie"
+    },
+    {
+      "name": "key_lime_pie"
+    },
+    {
+      "name": "strawberry_toaster_pastry"
+    },
+    {
+      "name": "brigadeiro_balls"
+    },
+    {
+      "name": "cereal_bar"
+    },
+    {
+      "name": "shortbread"
+    },
+    {
+      "name": "muesli"
+    },
+    {
+      "name": "choco"
+    },
+    {
+      "name": "packet"
+    },
+    {
+      "name": "packet_alt"
+    },
+    {
+      "name": "packet_opened"
+    },
+    {
+      "name": "packet_alt_opened"
+    },
+    {
+      "name": "choco_candies"
+    },
+    {
+      "name": "spread"
+    },
+    {
+      "name": "spread_open"
+    },
+    {
+      "name": "jalapeno_cheese_spread"
+    },
+    {
+      "name": "cheese_spread"
+    },
+    {
+      "name": "peanut_butter"
+    },
+    {
+      "name": "sushiboard"
+    },
+    {
+      "name": "beverage"
+    },
+    {
+      "name": "fortune_cookie"
+    },
+    {
+      "name": "fortune_cookie_open"
+    },
+    {
+      "name": "yummers"
+    }
+  ]
+}

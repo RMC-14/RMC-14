@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0b241c0584b792912d42c34007d808494e386023/icons/obj/items/weapons/guns/ammo_boxes/magazines.dmi, https://github.com/cmss13-devs/cmss13/blob/07455a5f3986b610e7ccdc3096cad1d914fca2f9/icons/obj/items/weapons/guns/ammo_boxes/boxes_and_lids.dmi, https://github.com/cmss13-devs/cmss13/blob/fba613ad33ac51b16689a75bc2f1572b24df282a/icons/obj/items/weapons/guns/ammo_boxes/text.dmi, https://github.com/cmss13-devs/cmss13/blob/fba613ad33ac51b16689a75bc2f1572b24df282a/icons/obj/items/weapons/guns/ammo_boxes/handfuls.dmi, m4spr, m1984, mp5 edited by sio3732. m54 edited by Vermidia, https://github.com/cmss13-devs/cmss13/blob/07455a5f3986b610e7ccdc3096cad1d914fca2f9/icons/obj/items/weapons/guns/ammo_boxes/handfuls.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/aefb9575f85df13fe574f4947c61218afa2c81a7/icons/obj/items/weapons/guns/ammo_boxes/magazines.dmi, https://github.com/cmss13-devs/cmss13/blob/aefb9575f85df13fe574f4947c61218afa2c81a7/icons/obj/items/weapons/guns/ammo_boxes/boxes_and_lids.dmi, https://github.com/cmss13-devs/cmss13/blob/fba613ad33ac51b16689a75bc2f1572b24df282a/icons/obj/items/weapons/guns/ammo_boxes/text.dmi, https://github.com/cmss13-devs/cmss13/blob/fba613ad33ac51b16689a75bc2f1572b24df282a/icons/obj/items/weapons/guns/ammo_boxes/handfuls.dmi, m4spr, m1984, mp5 edited by sio3732. m54 edited by Vermidia, https://github.com/cmss13-devs/cmss13/blob/07455a5f3986b610e7ccdc3096cad1d914fca2f9/icons/obj/items/weapons/guns/ammo_boxes/handfuls.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -291,18 +291,6 @@
     },
     {
       "name": "misc"
-    },
-    {
-      "name": "magaz_mre_1"
-    },
-    {
-      "name": "magaz_mre_2"
-    },
-    {
-      "name": "magaz_mre_3"
-    },
-    {
-      "name": "magaz_mre"
     },
     {
       "name": "magaz_flares_1"
@@ -1017,6 +1005,102 @@
     },
     {
       "name": "rounds_458_1"
+    },
+    {
+      "name": "merc_food_crate"
+    },
+    {
+      "name": "tse_food_crate"
+    },
+    {
+      "name": "colony_food_crate"
+    },
+    {
+      "name": "wy_food_crate"
+    },
+    {
+      "name": "spp_food_crate"
+    },
+    {
+      "name": "pmc_food_crate"
+    },
+    {
+      "name": "merc_food_crate_lid"
+    },
+    {
+      "name": "tse_food_crate_lid"
+    },
+    {
+      "name": "colony_food_crate_lid"
+    },
+    {
+      "name": "wy_food_crate_lid"
+    },
+    {
+      "name": "spp_food_crate_lid"
+    },
+    {
+      "name": "pmc_food_crate_lid"
+    },
+    {
+      "name": "magaz_mre_1"
+    },
+    {
+      "name": "magaz_mre_2"
+    },
+    {
+      "name": "magaz_mre_3"
+    },
+    {
+      "name": "magaz_mre"
+    },
+    {
+      "name": "magaz_wy_mre_1"
+    },
+    {
+      "name": "magaz_wy_mre_2"
+    },
+    {
+      "name": "magaz_wy_mre_3"
+    },
+    {
+      "name": "magaz_wy_mre"
+    },
+    {
+      "name": "magaz_colony_mre_1"
+    },
+    {
+      "name": "magaz_colony_mre_2"
+    },
+    {
+      "name": "magaz_colony_mre_3"
+    },
+    {
+      "name": "magaz_colony_mre"
+    },
+    {
+      "name": "magaz_spp_mre_1"
+    },
+    {
+      "name": "magaz_spp_mre_2"
+    },
+    {
+      "name": "magaz_spp_mre_3"
+    },
+    {
+      "name": "magaz_spp_mre"
+    },
+    {
+      "name": "magaz_tse_mre_1"
+    },
+    {
+      "name": "magaz_tse_mre_2"
+    },
+    {
+      "name": "magaz_tse_mre_3"
+    },
+    {
+      "name": "magaz_tse_mre"
     }
   ]
 }

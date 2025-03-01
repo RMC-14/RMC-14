@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/aefb9575f85df13fe574f4947c61218afa2c81a7/icons/obj/items/storage/mre.dmi, https://github.com/cmss13-devs/cmss13/blob/aefb9575f85df13fe574f4947c61218afa2c81a7/icons/obj/items/kitchen_tools.dmi, https://github.com/cmss13-devs/cmss13/blob/aefb9575f85df13fe574f4947c61218afa2c81a7/icons/mob/humans/onmob/inhands/items/mres_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/aefb9575f85df13fe574f4947c61218afa2c81a7/icons/mob/humans/onmob/inhands/items/mres_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/aefb9575f85df13fe574f4947c61218afa2c81a7/icons/mob/humans/onmob/inhands/equipment/kitchen_tools_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/aefb9575f85df13fe574f4947c61218afa2c81a7/icons/mob/humans/onmob/inhands/equipment/kitchen_tools_righthand.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "mealpack"
+    },
+    {
+      "name": "mealpackopened"
+    },
+    {
+      "name": "mealpackempty"
+    },
+    {
+      "name": "spp_mealpack"
+    },
+    {
+      "name": "spp_mealpackopened"
+    },
+    {
+      "name": "spp_mealpackempty"
+    },
+    {
+      "name": "pmc_mealpack"
+    },
+    {
+      "name": "pmc_mealpackopened"
+    },
+    {
+      "name": "pmc_mealpackempty"
+    },
+    {
+      "name": "wy_mealpack"
+    },
+    {
+      "name": "wy_mealpackopened"
+    },
+    {
+      "name": "wy_mealpackempty"
+    },
+    {
+      "name": "tse_mealpack"
+    },
+    {
+      "name": "tse_mealpackopened"
+    },
+    {
+      "name": "tse_mealpackempty"
+    },
+    {
+      "name": "merc_mealpack"
+    },
+    {
+      "name": "merc_mealpackopened"
+    },
+    {
+      "name": "mre_spork"
+    },
+    {
+      "name": "can_opener"
+    },
+    {
+      "name": "can_opener_compact"
+    },
+    {
+      "name": "can_opener_compact_open"
+    },
+    {
+      "name": "merc_mealpack-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "tse_mealpack-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "spp_mealpack-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "wy_mealpack-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "pmc_mealpack-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "mealpack-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "merc_mealpack-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "tse_mealpack-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "spp_mealpack-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "wy_mealpack-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "pmc_mealpack-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "mealpack-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "mre_spork-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "can_opener-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "can_opener-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "mre_spork-inhand-right",
+      "directions": 4
+    }
+  ]
+}

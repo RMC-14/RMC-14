@@ -1,0 +1,161 @@
+#TODO localize
+# BASE
+
+- type: reagent
+  id: RMCDrinkBase
+  parent: CMReagent
+  group: Drinks
+  abstract: true
+  color: "#E78108"
+  unknown: true
+  metabolisms:
+    Drink:
+      metabolismRate: 0.2
+      effects:
+      - !type:SatiateHunger
+        factor: 0.125
+      - !type:SatiateThirst #Unparity but as long as we have thirst might as well - half as effective as water
+        factor: 0.4
+
+- type: reagent
+  id: RMCCoconutMilk
+  parent: RMCDrinkBase
+  name: coconut milk
+  color: "#DFDFC7"
+  flavor: RMCCoconutMilk
+  desc: A very light, half opague milk from coconuts, barely has any taste on its own.
+  physicalDesc: reagent-physical-desc-milky
+
+- type: reagent
+  id: RMCSoyMilk
+  parent: RMCDrinkBase
+  name: soy milk
+  color: "#DFDFC7"
+  flavor: soy
+  desc: An opaque white liquid made from soybeans.
+  physicalDesc: reagent-physical-desc-milky
+
+- type: reagent
+  id: RMCChocolateDrink
+  parent: RMCDrinkBase
+  name: chocolate drink
+  color: "#61450e"
+  flavor: chocolate
+  desc: Smooth and creamy chocolate drink.
+  physicalDesc: reagent-physical-desc-creamy
+  metabolisms:
+    Drink:
+      metabolismRate: 0.1
+      effects:
+      - !type:SatiateHunger
+        factor: 4
+      - !type:SatiateThirst
+        factor: 0.2
+
+- type: reagent
+  id: RMCChocolateDrinkHazelnut
+  parent: RMCChocolateDrink
+  name: chocolate hazelnut drink
+  color: "#865e2a"
+  flavor: RMCHazelnutChocolate
+  desc: Smooth and creamy chocolate drink, with a hint of hazelnut flavor.
+
+- type: reagent
+  id: RMCBugJuice
+  parent: RMCDrinkBase
+  name: bug juice
+  color: "#2ca314"
+  flavor: RMCKiwi
+  desc: Soda drink made from all kinds of insects, very nutritious.
+  physicalDesc: reagent-physical-desc-bubbly
+  metabolisms:
+    Drink:
+      metabolismRate: 0.2
+      effects:
+      - !type:SatiateHunger
+        factor: 1
+      - !type:SatiateThirst #Unparity but as long as we have thirst might as well - half as effective as water
+        factor: 0.4
+
+- type: reagent
+  id: RMCGrapeJuice
+  parent: RMCDrinkBase
+  name: grape juice
+  color: "#863333"
+  flavor: RMCGrape
+  desc: It's grrrrrape!
+  physicalDesc: reagent-physical-desc-crisp
+
+- type: reagent
+  id: RMCOrangeJuice
+  parent: RMCDrinkBase
+  name: orange juice
+  color: "#E78108"
+  flavor: RMCOrange
+  desc: Both delicious AND rich in Vitamin C, what more do you need?
+  physicalDesc: reagent-physical-desc-crisp
+
+- type: reagent
+  id: RMCLemonLime
+  parent: RMCDrinkBase
+  name: lemon lime
+  color: "#878F00"
+  flavor: RMCLemonLime
+  desc: A tangy substance made of 0.5% natural citrus!
+  physicalDesc: reagent-physical-desc-citric
+
+# Drink powders
+
+- type: reagent
+  id: RMCDrinkPowderBase
+  parent: CMReagent
+  unknown: true
+  group: Food
+  # Apparently they taste like nothing as a powder so no flavor
+  physicalDesc: reagent-physical-desc-powdery
+  abstract: true
+  metabolisms:
+    Food:
+      metabolismRate: 0.1
+      effects:
+      - !type:SatiateHunger
+        factor: 20
+
+- type: reagent
+  id: RMCDrinkPowderGrape
+  parent: RMCDrinkPowderBase
+  name: dehydrated grape beverage powder
+  desc: Powderized electrolyte beverage with a grape flavor, ready to be mixed with water.
+  color: "#74206f"
+
+- type: reagent
+  id: RMCDrinkPowderOrange
+  parent: RMCDrinkPowderBase
+  name: dehydrated orange beverage powder
+  desc: Powderized electrolyte beverage with an orange flavor, ready to be mixed with water. Smells of, surprise surprise, oranges.
+  color: "#FFA500"
+  physicalDesc: reagent-physical-desc-aromatic
+
+- type: reagent
+  id: RMCDrinkPowderLemonLime
+  parent: RMCDrinkPowderBase
+  name: dehydrated lemon-lime beverage powder
+  desc: Powderized electrolyte beverage with a lemon-lime flavor, ready to be mixed with water. Smells of, surprise surprise, lemons and limes.
+  color: "#35b435"
+  physicalDesc: reagent-physical-desc-aromatic
+
+- type: reagent
+  id: RMCDrinkPowderHazelnut
+  parent: RMCDrinkPowderBase
+  name: chocolate hazelnut protein drink powder
+  desc: Powderized chocolate and hazelnut protein drink beverage, ready to be mixed with water.
+  color: "#ac4729"
+
+- type: reagent
+  id: RMCDrinkPowderChocolate
+  parent: RMCDrinkPowderBase
+  name: chocolate protein drink powder
+  desc: Powderized chocolate drink beverage, ready to be mixed with water.
+  color: "#46271e"
+
+

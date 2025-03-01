@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/aefb9575f85df13fe574f4947c61218afa2c81a7/icons/obj/items/food/mre_food/clf.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "clf_mealpack"
+    },
+    {
+      "name": "clf_meatpie"
+    },
+    {
+      "name": "clf_pie"
+    },
+    {
+      "name": "clf_cheesepizza"
+    },
+    {
+      "name": "clf_meatpizza"
+    },
+    {
+      "name": "clf_mushroompizza"
+    },
+    {
+      "name": "clf_vegetablepizza"
+    }
+  ]
+}

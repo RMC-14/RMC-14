@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/71d46ee8057d19b12e1495419cb299d2fedef6cc/icons/obj/items/storage.dmi, https://github.com/cmss13-devs/cmss13/blob/c648dca374ddee1c80f61ab88678c287356fa66f/icons/obj/items/storage.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/71d46ee8057d19b12e1495419cb299d2fedef6cc/icons/obj/items/storage.dmi, https://github.com/cmss13-devs/cmss13/blob/c648dca374ddee1c80f61ab88678c287356fa66f/icons/obj/items/storage.dmi, https://github.com/cmss13-devs/cmss13/blob/aefb9575f85df13fe574f4947c61218afa2c81a7/icons/obj/items/storage/boxes.dmi, https://github.com/cmss13-devs/cmss13/blob/aefb9575f85df13fe574f4947c61218afa2c81a7/icons/mob/humans/onmob/inhands/items/storage_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/aefb9575f85df13fe574f4947c61218afa2c81a7/icons/mob/humans/onmob/inhands/items/storage_righthand.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -93,6 +93,28 @@
     },
     {
       "name": "m89_e"
+    },
+    {
+      "name": "lemon_drop_box"
+    },
+    {
+      "name": "teabag_box"
+    },
+    {
+      "name": "lemon_drop_box-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "teabag_box-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "lemon_drop_box-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "teabag_box-inhand-right",
+      "directions": 4
     }
   ]
 }

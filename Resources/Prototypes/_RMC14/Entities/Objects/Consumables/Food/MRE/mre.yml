@@ -1,5 +1,8 @@
-﻿- type: Tag
+- type: Tag
   id: MRE
+
+- type: Tag
+  id: MREUNMC
 
 - type: entity
   parent: BaseStorageItem
@@ -10,19 +13,23 @@
   - type: Tag
     tags:
     - MRE
+    - MREUNMC
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Food/mre.rsi
-    state: closed
+    sprite: _RMC14/Objects/Consumable/Food/mre_other.rsi
+    state: mealpack
   - type: Item
     size: Small
+    heldPrefix: mealpack
   - type: Storage
     grid:
-    - 0,0,13,1
+    - 0,0,21,1 #11 slots
     maxItemSize: Small
     whitelist:
       components:
       - MREItem
   - type: Openable
+    opened: false
+    closeable: false
     sound:
       collection: CMFoodRip
   - type: Appearance
@@ -30,10 +37,11 @@
     visuals:
       enum.OpenableVisuals.Opened:
         enum.OpenableVisuals.Layer:
-          True: { state: "open" }
-          False: { state: "closed" }
+          True: { state: "mealpackopened" }
+          False: { state: "mealpack" }
   - type: StorageFill
     contents:
+    # entree
     - id: CMMREComponentBonelessPorkRibs
       orGroup: main
     - id: CMMREComponentGrilledChicken
@@ -44,6 +52,7 @@
       orGroup: main
     - id: CMMREComponentChickenTender
       orGroup: main
+    # side
     - id: CMMREComponentCracker
       orGroup: side
     - id: CMMREComponentRiceOnigiri
@@ -52,6 +61,7 @@
       orGroup: side
     - id: CMMREComponentRisotto
       orGroup: side
+    # snack
     - id: CMMREComponentBiscuit
       orGroup: snack
     - id: CMMREComponentMeatballs
@@ -64,6 +74,7 @@
       orGroup: snack
     - id: CMMREComponentSushi
       orGroup: snack
+    # dessert
     - id: CMMREComponentBiscuit
       orGroup: dessert
     - id: CMMREComponentChocolateBrownie
@@ -76,10 +87,14 @@
       orGroup: dessert
     - id: CMMREComponentHoneyFlan
       orGroup: dessert
+    # drink
     - id: CMDrinkWEYAWaterBottle30
+    # cookie
     - id: CMFortuneCookie
       prob: 0.333
+    # cigs
     - id: CMCigarettePackLuckySlothsMini
+    # matches
     - id: CMMatchBook
       orGroup: matchbook
     - id: CMBrownMatchBook
@@ -90,6 +105,20 @@
       orGroup: matchbook
     - id: CMExecutiveWEYAMatchbook
       orGroup: matchbook
+    # spread
+    # beverage
+    - id: RMCBeveragePowderGrape
+      orGroup: beverage
+    - id: RMCBeveragePowderOrange
+      orGroup: beverage
+    - id: RMCBeveragePowderLemonLime
+      orGroup: beverage
+    - id: RMCBeveragePowderChocolate
+      orGroup: beverage
+    - id: RMCBeveragePowderChocolateHazelnut
+      orGroup: beverage
+    # utensil
+    - id: RMCMRESpork
   - type: FixedItemSizeStorage
   - type: RemoveOnlyStorage
   - type: InteractedBlacklist
@@ -170,3 +199,26 @@
   components:
   - type: CMItemSlots
     startingItem: CMMRE
+
+- type: entity
+  parent: UtensilBase
+  id: RMCMRESpork
+  name: MRE spork
+  description: It's a plastic brown spork. Very robust for what it is, legends tell about stranded marines who dug trenches with these.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/mre_other.rsi
+    state: mre_spork
+  - type: Item
+    size: Tiny
+    heldPrefix: mre_spork
+  - type: MREItem
+  - type: Utensil
+    types:
+    - Fork
+    - Spoon
+
+- type: entity
+  parent: RMCMRESpork
+  id: RMCFSRSpork
+  name: FSR spork

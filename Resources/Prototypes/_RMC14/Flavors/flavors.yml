@@ -1,4 +1,35 @@
+#TODO localize
 - type: flavor
   id: bobda
   flavorType: Base
   description: flavor-base-savory
+
+- type: flavor
+  id: RMCCoconutMilk
+  flavorType: Complex
+  description: like creamy coconut
+
+- type: flavor
+  id: RMCKiwi
+  flavorType: Complex
+  description: like kiwi
+
+- type: flavor
+  id: RMCGrape
+  flavorType: Complex
+  description: like grape
+
+- type: flavor
+  id: RMCOrange
+  flavorType: Complex
+  description: like oranges
+
+- type: flavor
+  id: RMCLemonLime
+  flavorType: Complex
+  description: like lemon-lime
+
+- type: flavor
+  id: RMCHazelnutChocolate
+  flavorType: Complex
+  description: like chocolate and hazelnut

@@ -1,0 +1,98 @@
+# Components
+- type: entity
+  parent: DrinkBase
+  id: RMCBeveragePowderPacketBase
+  name: beverage powder packet
+  description: A packet filled with a beverage powder, to be mixed with water, makes a ready-on-the-field drink.
+  suffix: Empty
+  components:
+  - type: MREItem
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/unmc_mre.rsi
+    state: beverage
+  - type: Item
+    size: Small
+  - type: Drink
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 20
+
+- type: entity
+  parent: RMCBeveragePowderPacketBase
+  id: RMCBeveragePowderGrape
+  suffix: Grape
+  components:
+  - type: Label
+    currentLabel: rmc-beverage-powder-grape
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 20
+        reagents:
+        - ReagentId: RMCDrinkPowderGrape
+          Quantity: 4
+
+- type: entity
+  parent: RMCBeveragePowderPacketBase
+  id: RMCBeveragePowderOrange
+  suffix: Orange
+  components:
+  - type: Label
+    currentLabel: rmc-beverage-powder-orange
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 20
+        reagents:
+        - ReagentId: RMCDrinkPowderOrange
+          Quantity: 4
+
+- type: entity
+  parent: RMCBeveragePowderPacketBase
+  id: RMCBeveragePowderLemonLime
+  suffix: Lemon-Lime
+  components:
+  - type: Label
+    currentLabel: rmc-beverage-powder-lemon-lime
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 20
+        reagents:
+        - ReagentId: RMCDrinkPowderLemonLime
+          Quantity: 4
+
+- type: entity
+  parent: RMCBeveragePowderPacketBase
+  id: RMCBeveragePowderChocolate
+  suffix: Chocolate
+  components:
+  - type: Label
+    currentLabel: rmc-beverage-powder-chocolate
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 20
+        reagents:
+        - ReagentId: RMCDrinkPowderChocolate
+          Quantity: 4
+
+- type: entity
+  parent: RMCBeveragePowderPacketBase
+  id: RMCBeveragePowderChocolateHazelnut
+  suffix: Chocolate Hazelnut
+  components:
+  - type: Label
+    currentLabel: rmc-beverage-powder-chocolate-hazelnut
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 20
+        reagents:
+        - ReagentId: RMCDrinkPowderChocolateHazelnut
+          Quantity: 4
