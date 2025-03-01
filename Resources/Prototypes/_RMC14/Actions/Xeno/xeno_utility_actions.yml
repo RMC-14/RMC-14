@@ -107,7 +107,8 @@
     ids:
     - ActionXenoAidRejuvenate
     cooldown: 10
-  
+  - type: RMCDazeableAction
+
 - type: entity
   parent: ActionXenoBase
   id: ActionXenoAidRejuvenate
@@ -199,6 +200,7 @@
     event: !type:XenoApplySalveActionEvent
     useDelay: 0.5
     range: 2
+  - type: RMCDazeableAction
 
 - type: entity
   parent: ActionXenoBase
@@ -225,7 +227,7 @@
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: tail_seize
+      state: prae_tail_fountain
     event: !type:XenoTailFountainActionEvent
     range: 2
     useDelay: 10

@@ -155,6 +155,7 @@
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterSMG
       - id: RMCBeltHolsterRevolver
+      - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
         recommended: true
     - name: Pouches
@@ -170,7 +171,7 @@
         name: first-aid pouch (pill packets)
       - id: RMCPouchFlareFilled
         name: flare pouch (Full)
-      #- id: TODO RMC14 Fuel Tank Strap Pouch
+      - id: RMCPouchFuelTank
       - id: RMCPouchGeneralLarge
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchMagazine

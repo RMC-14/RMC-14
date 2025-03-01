@@ -1,5 +1,5 @@
 - type: entity
-  parent: RMCBasePlant
+  parent: RMCBaseGrass
   id: RMCGrassDesert
   name: desert grass
   suffix: Light

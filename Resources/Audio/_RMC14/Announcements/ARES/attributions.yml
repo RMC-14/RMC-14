@@ -32,3 +32,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "cmss13"
   source: "https://github.com/cmss13-devs/cmss13/21e6447cc08aea502f671c819fdbcecbb85e6028master/sound/AI/hijack.ogg"
+
+- files: ["GQfullcall.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/e6c579f4d6d2e117cd8a7021fe6ac773bd897cd6master/sound/effects/GQfullcall.ogg"

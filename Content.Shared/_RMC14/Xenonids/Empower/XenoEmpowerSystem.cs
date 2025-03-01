@@ -2,7 +2,6 @@ using Content.Shared._RMC14.Aura;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Shields;
-using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -20,7 +19,6 @@ using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
-using Robust.Shared.Physics;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
@@ -85,6 +83,7 @@ public sealed class XenoEmpowerSystem : EntitySystem
 
         if (!xeno.Comp.ActivatedOnce)
         {
+            _actions.SetUseDelay(args.Action, TimeSpan.Zero);
             if (!_plasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.Cost))
                 return;
 
@@ -146,9 +145,9 @@ public sealed class XenoEmpowerSystem : EntitySystem
         }
 
         if (hits > 0)
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-ravager-empower"), xeno, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-ravager-empower"), xeno, xeno, PopupType.SmallCaution);
         else
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-ravager-empower-fizzle"), xeno, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-ravager-empower-fizzle"), xeno, xeno, PopupType.SmallCaution);
 
         _shield.ApplyShield(xeno, XenoShieldSystem.ShieldType.Ravager, hits * xeno.Comp.ShieldPerTarget);
         //Reset shield time
@@ -242,7 +241,7 @@ public sealed class XenoEmpowerSystem : EntitySystem
             if (super.ExpiresAt != null & time >= super.ExpiresAt)
             {
                 RemCompDeferred<XenoSuperEmpoweredComponent>(uid);
-                _popup.PopupEntity(Loc.GetString("rmc-xeno-ravager-super-empower-fade"), uid, PopupType.SmallCaution);
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-ravager-super-empower-fade"), uid, uid, PopupType.SmallCaution);
                 continue;
             }
 
@@ -264,7 +263,9 @@ public sealed class XenoEmpowerSystem : EntitySystem
             if (action.BaseEvent is XenoEmpowerActionEvent)
             {
                 _actions.SetToggled(actionId, false);
-                _actions.SetCooldown(actionId, xeno.Comp.CooldownDuration - (_timing.CurTime - xeno.Comp.FirstActivationAt));
+                var cooldownTime = xeno.Comp.CooldownDuration - (_timing.CurTime - xeno.Comp.FirstActivationAt);
+                _actions.SetUseDelay(actionId, cooldownTime);
+                _actions.SetCooldown(actionId, cooldownTime);
             }
         }
     }

@@ -59,6 +59,10 @@
       state: "creampie_human"
       visible: false
     - map: [ "acided" ]
+    - map: [ "hooked" ]
+      sprite: "_RMC14/Effects/xeno_spray_acid.rsi"
+      state: hooked
+      visible: false
     - map: [ "enum.NewPlayerLayers.Layer" ]
       visible: false
   - type: DamageVisuals

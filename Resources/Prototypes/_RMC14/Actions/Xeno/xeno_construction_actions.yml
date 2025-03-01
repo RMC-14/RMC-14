@@ -32,6 +32,7 @@
       state: place_resin
     event: !type:XenoChooseStructureActionEvent
   - type: XenoChooseConstructionAction
+  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoSecreteStructure
@@ -53,6 +54,7 @@
     checkStructureSelected: true
     checkWeeds: true
     canUpgrade: true
+  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoCoerceResin
@@ -74,6 +76,7 @@
     checkStructureSelected: true
     checkWeeds: true
     canUpgrade: false
+  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoOrderConstruction
@@ -92,6 +95,7 @@
   - type: XenoConstructionAction
     checkStructureSelected: false
     checkWeeds: false
+  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoResinHole
@@ -106,6 +110,7 @@
       state: place_trap
     event: !type:XenoPlaceResinHoleActionEvent
     useDelay: 1
+  - type: RMCDazeableAction
 
 # For gardener drone
 - type: entity

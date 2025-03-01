@@ -203,6 +203,8 @@
     - Stun
     - KnockedDown
     - SlowedDown
+    - Muted
+    - Dazed
   - type: ImmuneToClothingRequiredStepTrigger
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
@@ -381,6 +383,13 @@
   - type: ParalyzeOnPullAttempt
   - type: FirePatter
   - type: RMCHandEmotes
+  - type: Buckle
+    buckleDelay: 0
+    clickUnbuckle: false
+  - type: BuckleWhitelist
+    whitelist:
+      tags:
+      - CMRollerBed
 
 - type: entity
   abstract: true

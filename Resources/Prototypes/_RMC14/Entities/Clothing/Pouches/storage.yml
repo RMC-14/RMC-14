@@ -67,30 +67,6 @@
     - id: RMCSpaceCash1000
     - id: RMCSpaceCash1000 # TODO RMC14 tape recorder
 
-
-# Fuel Tank Pouch
-- type: entity
-  parent: [RMCPouchOpenClosed, RMCPouchStorage]
-  id: RMCPouchFuelTank
-  name: fuel tank strap pouch
-  description: Two ring straps to loop around M240-pattern napalm tanks. Handle with care.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Pouches/fueltank.rsi
-  - type: Storage
-    grid:
-    - 0,0,3,1 #2 slots
-    whitelist:
-      tags:
-      - FireExtinguisher
-      # - TODO RMC14 M240
-  - type: FixedItemSizeStorage
-  - type: IgnoreContentsSize
-    items:
-      tags:
-      - FireExtinguisher
-      # - TODO RMC14 M240
-
 # Survival Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
@@ -377,26 +353,6 @@
     - id: CMShellShotgunSlugs
       amount: 7
 
-# Explosives Pouch
-- type: entity
-  parent: [RMCPouchOpenClosed, RMCPouchStorage]
-  id: RMCPouchExplosive
-  name: explosive pouch
-  description: It can carry grenades, plastic explosives, mine boxes, and other explosives.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Pouches/large_explosive.rsi
-  - type: Storage
-    maxItemSize: Normal
-    grid:
-    - 0,0,11,1 #6 slots
-    whitelist:
-      tags:
-      - Grenade
-      - RMCExplosiveBreachingCharge
-  - type: FixedItemSizeStorage
-
-
 # Large Documents Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
@@ -522,44 +478,6 @@
     - id: RMCPowerCellHigh
       amount: 3
 
-
-# Construction Pouch
-- type: entity
-  parent: [RMCPouchOpenClosed, RMCPouchStorage]
-  id: RMCPouchConstruction
-  name: construction pouch
-  description: It's designed to hold construction materials - glass/metal sheets, metal rods, barbed wire, cable coil, and empty sandbags. It also has two hooks for an entrenching tool and light replacer.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Pouches/construction.rsi
-  - type: Storage
-    maxItemSize: Normal
-    grid:
-    - 0,0,5,1 #3 slots
-    whitelist:
-      tags:
-      - Sheet
-      - RodMetal1
-      - CableCoil
-      components:
-      - BarbedWire
-      - FloorTile
-      - EntrenchingTool
-      - EmptySandbag
-      - LightReplacer
-  - type: FixedItemSizeStorage
-
-- type: entity
-  parent: RMCPouchConstruction
-  id: RMCPouchConstructionFillLowGrade
-  suffix: Low grade full
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMSheetPlasteel30
-    - id: CMSheetMetal50
-    - id: BarbedWire15
-
 # Engineer Kit Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
@@ -585,7 +503,7 @@
       - PowerCell
       # - TODO RMC14 RMCAssembly
       # - TODO RMC14 RMCStockParts
-      - RMCExplosivePlastic
+      - RMCExplosiveBreachingCharge
       # - TODO RMC14 RMCSynthResetKey
       components:
       - TrayScanner
@@ -605,7 +523,7 @@
         - PowerCell
         # - TODO RMC14 RMCAssembly
         # - TODO RMC14 RMCStockParts
-        - RMCExplosivePlastic
+        - RMCExplosiveBreachingCharge
         # - TODO RMC14 RMCSynthResetKey
         components:
         - TrayScanner
@@ -641,7 +559,6 @@
       - Multitool
       - Flashlight
       - RMCExplosiveBreachingCharge
-      - RMCExplosivePlastic
       - CMFireExtinguisherPortable
       components:
       - Welder

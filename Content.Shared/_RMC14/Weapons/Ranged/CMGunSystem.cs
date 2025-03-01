@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Marines.Orders;
 using Content.Shared._RMC14.Marines.Skills;
@@ -20,6 +20,8 @@ using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Standing;
 using Content.Shared.Timing;
+using Content.Shared.Weapons.Melee;
+using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -73,6 +75,7 @@ public sealed class CMGunSystem : EntitySystem
         _projectileQuery = GetEntityQuery<ProjectileComponent>();
 
         SubscribeLocalEvent<ShootAtFixedPointComponent, AmmoShotEvent>(OnShootAtFixedPointShot);
+        SubscribeLocalEvent<IgnoreArcComponent, BeforeArcEvent>(OnBeforeArc);
 
         SubscribeLocalEvent<RMCWeaponDamageFalloffComponent, AmmoShotEvent>(OnWeaponDamageFalloffShot);
         SubscribeLocalEvent<RMCWeaponDamageFalloffComponent, GunRefreshModifiersEvent>(OnWeaponDamageFalloffRefreshModifiers);
@@ -185,8 +188,12 @@ public sealed class CMGunSystem : EntitySystem
             // and will trigger the OnEventToStopProjectile function once the PFD Component is deleted at that time. See Update()
             var comp = EnsureComp<ProjectileFixedDistanceComponent>(projectile);
 
+            // Check if the arcing should be disabled.
+            var ev = new BeforeArcEvent();
+            RaiseLocalEvent(projectile, ref ev);
+
             // Transfer arcing to the projectile.
-            if (Comp<ShootAtFixedPointComponent>(ent).ShootArcProj)
+            if (Comp<ShootAtFixedPointComponent>(ent).ShootArcProj && !ev.Cancelled)
                 comp.ArcProj = true;
 
             // Take the lowest nonzero MaxFixedRange between projectile and gun for the capped vector length.
@@ -368,6 +375,20 @@ public sealed class CMGunSystem : EntitySystem
         }
     }
 
+    private void OnGunPointBlankMeleeHit(Entity<GunPointBlankComponent> gun, ref MeleeHitEvent args)
+    {
+        if (!TryComp<MeleeWeaponComponent>(gun, out var melee))
+            return;
+
+        if (!TryGetGunUser(gun.Owner, out var user))
+            return;
+
+        var userDelay = EnsureComp<UserPointblankCooldownComponent>(user);
+
+        //After meleeing can't PB
+        userDelay.LastPBAt = _timing.CurTime;
+    }
+
     private void OnGunPointBlankAmmoShot(Entity<GunPointBlankComponent> gun, ref AmmoShotEvent args)
     {
         if (!TryComp(gun.Owner, out GunComponent? gunComp) ||
@@ -378,7 +399,15 @@ public sealed class CMGunSystem : EntitySystem
             return;
         }
 
-        if (gunComp.SelectedMode == SelectiveFire.FullAuto && TryGetGunUser(gun.Owner, out var user) && gunComp.Target.Value == user.Owner)
+        if (!TryGetGunUser(gun.Owner, out var user))
+            return;
+
+        var userDelay = EnsureComp<UserPointblankCooldownComponent>(user);
+
+        if (_timing.CurTime < userDelay.LastPBAt + userDelay.TimeBetweenPBs)
+            return;
+
+        if (gunComp.SelectedMode == SelectiveFire.FullAuto && gunComp.Target.Value == user.Owner)
             return;
 
         foreach (var projectile in args.FiredProjectiles)
@@ -398,6 +427,15 @@ public sealed class CMGunSystem : EntitySystem
 
             _projectile.ProjectileCollide((projectile, projectileComp, physicsComp), gunComp.Target.Value);
         }
+
+        userDelay.LastPBAt = _timing.CurTime;
+
+        if (!TryComp<MeleeWeaponComponent>(gun, out var melee))
+            return;
+
+        //Can't melee right after a PB
+        melee.NextAttack = userDelay.LastPBAt + userDelay.TimeBetweenPBs;
+        Dirty(gun, melee);
     }
 
     private void OnRecoilSkilledRefreshModifiers(Entity<GunSkilledRecoilComponent> ent, ref GunRefreshModifiersEvent args)
@@ -762,6 +800,12 @@ public sealed class CMGunSystem : EntitySystem
             return;
 
         RemCompDeferred<AssistedReloadReceiverComponent>(wielder);
+    }
+
+    // Do not arc the projectile if it has the IgnoreArcComponent
+    private void OnBeforeArc(Entity<IgnoreArcComponent> ent, ref BeforeArcEvent args)
+    {
+        args.Cancelled = true;
     }
 }
 

@@ -36,3 +36,10 @@
   id: CMAR10Shoot
   files:
   - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ar10.ogg
+
+- type: soundCollection
+  id: RMCFlamerShoot
+  files:
+  - /Audio/_RMC14/Weapons/Guns/Flamer/gun_flamethrower1.ogg
+  - /Audio/_RMC14/Weapons/Guns/Flamer/gun_flamethrower2.ogg
+  - /Audio/_RMC14/Weapons/Guns/Flamer/gun_flamethrower3.ogg

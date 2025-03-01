@@ -31,8 +31,7 @@
         enum.DogtagVisuals.Taken:
           True: { state: "dogtag_taken" }
           False: { state: "dogtag" }
-          
-  
+
 - type: entity
   parent: BaseItem
   id: RMCInformationDogtag

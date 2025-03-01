@@ -40,6 +40,8 @@
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
     - type: SniperWhitelist
+    - type: AMRWhitelist
+    - type: PyroWhitelist
   hidden: true
 
 - type: entity
@@ -102,6 +104,8 @@
   - type: GrenadeSpecWhitelist
   - type: ScoutWhitelist
   - type: SniperWhitelist
+  - type: AMRWhitelist
+  - type: PyroWhitelist
 
 - type: startingGear
   id: RMCGearProvostDeputyMarshal
