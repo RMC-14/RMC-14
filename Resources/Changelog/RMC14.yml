@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Fixed Hive Cores having their ghost warp points removed upon being fully
-      constructed.
-    type: Fix
-  id: 887
-  time: '2024-10-29T08:07:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4582
 - author: Vermidia
   changes:
   - message: Fix fruit eating/feeding being slower than intended.
@@ -5157,5 +5149,15 @@
   id: 1388
   time: '2025-03-01T11:01:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5753
+- author: Vermidia
+  changes:
+  - message: Fixed knockback from ammo stuns and neurotoxin forced movement being
+      too slow
+    type: Fix
+  - message: Fixed knockback from ammo stuns not applying in certain cases.
+    type: Fix
+  id: 1389
+  time: '2025-03-01T11:02:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5767
 Name: RMC14
 Order: -1
