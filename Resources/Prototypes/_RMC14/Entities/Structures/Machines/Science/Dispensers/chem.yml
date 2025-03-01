@@ -179,6 +179,7 @@
         enum.PowerDeviceVisualLayers.Powered:
           True: { visible: true }
   - type: RMCChemicalDispenser
+    network: RMCChemStorageGround
     reagents:
       - CMBicaridine
       - CMKelotane
