@@ -40,6 +40,7 @@
     contributesToVictory: false
     countedInSlots: false
     unlockAt: 0
+    muteOnSpawn: true
   - type: XenoLight
   - type: XenoAcid
   - type: XenoConstruction
