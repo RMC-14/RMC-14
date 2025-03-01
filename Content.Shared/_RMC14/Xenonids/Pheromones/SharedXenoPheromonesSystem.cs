@@ -242,6 +242,14 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         RaiseLocalEvent(ent, ref ev);
     }
 
+    public string? GetPheroSuffix(Entity<XenoPheromonesComponent?> xeno)
+    {
+        if (!Resolve(xeno, ref xeno.Comp, false))
+            return null;
+
+        return xeno.Comp.PheroSuffix;
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);

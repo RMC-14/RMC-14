@@ -170,6 +170,7 @@
     popup: rmc-xeno-valkyrie-popup
   - type: XenoPheromones
     pheromonesMultiplier: 3
+    pheroSuffix: strong
   - type: XenoEnergy
     alert: XenoEnergyValkyrie
     popupGain: rmc-xeno-fury-increase-user
