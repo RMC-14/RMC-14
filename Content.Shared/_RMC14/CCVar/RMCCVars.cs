@@ -396,4 +396,7 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCMaxTacmapAlertProcessTimeMilliseconds =
     CVarDef.Create("rmc.tacmap_alert_max_process_time_milliseconds", 1f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCDamageYourself =
+        CVarDef.Create("rmc.damage_yourself", false, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
 }
