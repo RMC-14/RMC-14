@@ -81,6 +81,8 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#00CDEA"
 
 - type: entity
   id: RMCCartridgePistolHI50AE
@@ -134,6 +136,8 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#1F951F"
 
 - type: entity
   id: RMCCartridgePistolHIAP50AE
