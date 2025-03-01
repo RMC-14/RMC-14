@@ -63,6 +63,7 @@
     - Pacified
     - StaminaModifier
     - Flashed
+    - Dazed
   - type: Blindable
   - type: Tag
     tags:

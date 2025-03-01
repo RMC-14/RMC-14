@@ -75,6 +75,7 @@ public sealed class CMGunSystem : EntitySystem
         _projectileQuery = GetEntityQuery<ProjectileComponent>();
 
         SubscribeLocalEvent<ShootAtFixedPointComponent, AmmoShotEvent>(OnShootAtFixedPointShot);
+        SubscribeLocalEvent<IgnoreArcComponent, BeforeArcEvent>(OnBeforeArc);
 
         SubscribeLocalEvent<RMCWeaponDamageFalloffComponent, AmmoShotEvent>(OnWeaponDamageFalloffShot);
         SubscribeLocalEvent<RMCWeaponDamageFalloffComponent, GunRefreshModifiersEvent>(OnWeaponDamageFalloffRefreshModifiers);
@@ -187,8 +188,12 @@ public sealed class CMGunSystem : EntitySystem
             // and will trigger the OnEventToStopProjectile function once the PFD Component is deleted at that time. See Update()
             var comp = EnsureComp<ProjectileFixedDistanceComponent>(projectile);
 
+            // Check if the arcing should be disabled.
+            var ev = new BeforeArcEvent();
+            RaiseLocalEvent(projectile, ref ev);
+
             // Transfer arcing to the projectile.
-            if (Comp<ShootAtFixedPointComponent>(ent).ShootArcProj)
+            if (Comp<ShootAtFixedPointComponent>(ent).ShootArcProj && !ev.Cancelled)
                 comp.ArcProj = true;
 
             // Take the lowest nonzero MaxFixedRange between projectile and gun for the capped vector length.
@@ -795,6 +800,12 @@ public sealed class CMGunSystem : EntitySystem
             return;
 
         RemCompDeferred<AssistedReloadReceiverComponent>(wielder);
+    }
+
+    // Do not arc the projectile if it has the IgnoreArcComponent
+    private void OnBeforeArc(Entity<IgnoreArcComponent> ent, ref BeforeArcEvent args)
+    {
+        args.Cancelled = true;
     }
 }
 
