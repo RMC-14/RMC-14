@@ -244,6 +244,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                         role.Deployed.Add(marine);
 
                     role.All.Add(marine);
+                    roles[marine.Role.Value] = role;
                 }
 
                 var name = marine.Name;

@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0525b5ada7da1afcd9b260e76d5fea01500d9c8d/icons/obj/structures/props/natural/vegetation/dam.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "tallgrass"
+    },
+    {
+      "name": "tallgrass_sides",
+      "directions": 4
+    },
+    {
+      "name": "tallgrass_corner",
+      "directions": 4
+    },
+    {
+      "name": "tallgrass_overlay"
+    },
+    {
+      "name": "tallgrass_overlay_corner",
+      "directions": 8
+    }
+  ]
+}

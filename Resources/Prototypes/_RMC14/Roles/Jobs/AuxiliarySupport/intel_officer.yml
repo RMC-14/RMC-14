@@ -11,6 +11,7 @@
   ranks:
     RMCRankSecondLT: []
   startingGear: CMGearIntelOfficer
+  dummyStartingGear: RMCGearIntelOfficerEquipped
   icon: "CMJobIconIntelOfficer"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-aso
@@ -55,6 +56,23 @@
     shoes: CMBootsBlackFilled
     id: CMIDCardIntelOfficer
 
+- type: startingGear
+  id: RMCGearIntelOfficerEquipped
+  equipment:
+    jumpsuit: RMCUniformIntel
+    back: CMSatchelMarineIntel
+    shoes: CMBootsBlackFilled
+    head: RMCArmorHelmetM12Intel
+    outerClothing: RMCArmorXM4
+    gloves: CMHandsInsulated
+    id: CMIDCardIntelOfficer
+    ears: CMHeadsetIntel
+    belt: RMCMK80BeltFilled
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchDocument
+  inhand:
+    - RMCBinoculars
+
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointIntelOfficer
@@ -63,10 +81,16 @@
   - type: SpawnPoint
     job_id: CMIntelOfficer
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: intel_officer
+    state: io_spawn
+
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleIO
+  name: Intelligence Officer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: intel_officer
 
 - type: playTimeTracker
   isHumanoid: true

@@ -52,6 +52,7 @@
     - type: JobPrefix
       prefix: cm-job-prefix-cmo
     - type: ViewIntelObjectives
+    - type: CommandAccent
 
 - type: startingGear
   id: CMGearCMO
@@ -81,10 +82,7 @@
   - type: SpawnPoint
     job_id: CMCMO
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: chief_medical_officer
+    state: cmo_spawn
 
 - type: playTimeTracker
   id: CMJobCMO

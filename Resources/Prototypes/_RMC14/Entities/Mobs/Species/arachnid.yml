@@ -76,6 +76,7 @@
     - map: [ "mask" ]
     - map: [ "head" ]
     - map: [ "enum.SquadArmorLayers.Helmet" ]
+    - map: [ "enum.VisorVisualLayers.Base" ]
     - map: [ "pocket1" ]
     - map: [ "pocket2" ]
     - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
@@ -88,5 +89,9 @@
       state: "creampie_arachnid"
       visible: false
     - map: [ "acided" ]
+    - map: [ "hooked" ]
+      sprite: "_RMC14/Effects/xeno_spray_acid.rsi"
+      state: hooked
+      visible: false
     - map: [ "enum.NewPlayerLayers.Layer" ]
       visible: false

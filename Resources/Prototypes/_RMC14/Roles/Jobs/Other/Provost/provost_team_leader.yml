@@ -5,7 +5,7 @@
   description: rmc-job-description-provost-team-leader
   playTimeTracker: CMJobProvostTeamLeader
   ranks:
-    RMCRankProvostTeamLeader: []
+    RMCRankProvostProvostTeamLeader: []
   startingGear: RMCGearProvostTeamLeader
   icon: RMCJobIconProvostTeamLeader
   joinNotifyCrew: false
@@ -95,6 +95,8 @@
   - type: GrenadeSpecWhitelist
   - type: ScoutWhitelist
   - type: SniperWhitelist
+  - type: AMRWhitelist
+  - type: PyroWhitelist
 
 - type: startingGear
   id: RMCGearProvostTeamLeader

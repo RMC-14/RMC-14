@@ -44,6 +44,7 @@
         RMCSkillPolice: 2
     - type: JobPrefix
       prefix: cm-job-prefix-militarypolice
+    - type: CommandAccent
 
 - type: startingGear
   id: CMGearMilitaryPolice
@@ -68,10 +69,7 @@
   - type: SpawnPoint
     job_id: CMMilitaryPolice
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: military_police
+    state: mp_spawn
 
 - type: playTimeTracker
   id: CMJobMilitaryPolice

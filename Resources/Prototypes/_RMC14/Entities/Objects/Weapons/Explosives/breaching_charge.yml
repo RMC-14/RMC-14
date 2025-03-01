@@ -60,9 +60,6 @@
       components:
       - RMCWallExplosionDeletable
       - XenoTunnel
-  - type: Tag
-    tags:
-    - RMCExplosivePlastic
   - type: RMCExplosiveDelete
     delay: 10
     whitelist:
@@ -71,6 +68,3 @@
 
 - type: Tag
   id: RMCExplosiveBreachingCharge
-
-- type: Tag
-  id: RMCExplosivePlastic

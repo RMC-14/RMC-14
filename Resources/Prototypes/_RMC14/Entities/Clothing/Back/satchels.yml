@@ -188,7 +188,7 @@
   parent: CMSatchelMarineIntel
   id: RMCSatchelMarineIntelChestrig
   name: UNMC expedition chestrig
-  description: A heavy-duty IMP based chestrig, can quickly be accessed with only one hand. Usually issued to USCM intelligence officers.
+  description: A heavy-duty IMP based chestrig, can quickly be accessed with only one hand. Usually issued to UNMC intelligence officers.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Chestrigs/intel/desert.rsi
@@ -298,11 +298,13 @@
     solution: tank
   - type: RMCSolutionTransferWhitelist
     popup: rmc-solution-transfer-whitelist-failed-not-welding-tank
-    whitelist:
+    sourceWhitelist:
       components:
       - Welder
+    targetWhitelist:
       tags:
       - RMCTankFuel
+  - type: RMCFlamerBackpack
 
 - type: entity
   parent: RMCSatchelWelder

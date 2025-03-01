@@ -1,0 +1,56 @@
+﻿# Kutjevo
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertKutjevoCommunications
+  name: SE Checkpoint
+  suffix: Insert Kutjevo
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/communications.yml"
+      probability: 0.35
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertKutjevoCleaningProgBotany
+  name: Cleaning Botany
+  suffix: Insert Kutjevo
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/cleaningprog_botany.yml"
+      probability: 0.25
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertKutjevoTrappedMonke
+  name: Trapped Clown
+  suffix: Insert Kutjevo
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/trappedmonke_andclown.yml"
+      probability: 0.05
+    clearEntities: false
+    clearDecals: false
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertSolarisPlinkingSpotNorthLZ
+  name: Plinking Spot North LZ
+  suffix: Insert Kutjevo
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/plinkingspot_northlz.yml"
+      probability: 0.25
+    clearEntities: false
+    clearDecals: false
+    replaceAreas: false

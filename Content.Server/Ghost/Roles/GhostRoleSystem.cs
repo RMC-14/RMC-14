@@ -57,6 +57,7 @@ public sealed class GhostRoleSystem : EntitySystem
 
     private readonly Dictionary<uint, Entity<GhostRoleComponent>> _ghostRoles = new();
     private readonly Dictionary<uint, Entity<GhostRoleRaffleComponent>> _ghostRoleRaffles = new();
+    private readonly List<uint> _ghostRolesToRemove = new();
 
     private readonly Dictionary<ICommonSession, GhostRolesEui> _openUis = new();
     private readonly Dictionary<ICommonSession, MakeGhostRoleEui> _openMakeGhostRoleUis = new();
@@ -369,6 +370,12 @@ public sealed class GhostRoleSystem : EntitySystem
         // we copy these settings into the component because they would be cumbersome to access otherwise
         raffle.JoinExtendsDurationBy = TimeSpan.FromSeconds(settings.JoinExtendsDurationBy);
         raffle.MaxDuration = TimeSpan.FromSeconds(settings.MaxDuration);
+
+        // RMC14
+        var ev = new GhostRoleRaffleEvent(TimeSpan.FromSeconds(countdown), settings.RoundTimeRequirement);
+        RaiseLocalEvent(ent, ref ev);
+        if (ev.Handled)
+            raffle.Countdown = ev.CountDown;
     }
 
     private void OnRaffleShutdown(Entity<GhostRoleRaffleComponent> ent, ref ComponentShutdown args)
@@ -542,13 +549,17 @@ public sealed class GhostRoleSystem : EntitySystem
         var roles = new List<GhostRoleInfo>();
         var metaQuery = GetEntityQuery<MetaDataComponent>();
 
+        _ghostRolesToRemove.Clear();
         foreach (var (id, (uid, role)) in _ghostRoles)
         {
-            if (!metaQuery.TryComp(uid, out var meta) ||
-                meta.EntityPaused)
+            if (!metaQuery.TryComp(uid, out var meta))
             {
+                _ghostRolesToRemove.Add(id);
                 continue;
             }
+
+            if (meta.EntityPaused)
+                continue;
 
             var kind = GhostRoleKind.FirstComeFirstServe;
             GhostRoleRaffleComponent? raffle = null;
@@ -583,6 +594,12 @@ public sealed class GhostRoleSystem : EntitySystem
                 RafflePlayerCount = rafflePlayerCount,
                 RaffleEndTime = raffleEndTime
             });
+        }
+
+        foreach (var id in _ghostRolesToRemove)
+        {
+            _ghostRoles.Remove(id);
+            _ghostRoleRaffles.Remove(id);
         }
 
         return roles.ToArray();

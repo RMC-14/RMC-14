@@ -63,10 +63,7 @@
   - type: SpawnPoint
     job_id: CMDoctor
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: doctor
+    state: doc_spawn
 
 - type: playTimeTracker
   id: CMJobDoctor
