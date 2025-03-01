@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Added Kutjevo tiles
-    type: Add
-  id: 898
-  time: '2024-10-31T09:05:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4607
 - author: DrSmugleaf
   changes:
   - message: Added the printable ez autoinjector to the medilathe, which requires
@@ -5164,5 +5157,16 @@
   id: 1399
   time: '2025-03-01T13:17:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5755
+- author: Dygon
+  changes:
+  - message: Fixed Parasite roles being able to be taken before 15 minutes have passed
+      in the round.
+    type: Fix
+  - message: Fixed Parasites and lesser drones not being muted for 3 minutes when
+      they spawn.
+    type: Fix
+  id: 1400
+  time: '2025-03-01T13:22:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5722
 Name: RMC14
 Order: -1
