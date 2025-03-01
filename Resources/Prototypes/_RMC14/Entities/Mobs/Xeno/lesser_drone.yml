@@ -35,7 +35,6 @@
     - ActionXenoPlantWeeds # TODO RMC14 only near other weeds for lesser drones
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
-    # evasion: 10
     tier: 0
     hudOffset: -0.15,-0.03
     contributesToVictory: false
@@ -52,6 +51,7 @@
     - DoorXenoResin
   - type: XenoDevour
   - type: XenoPheromones
+    pheroSuffix: weak
   - type: XenoPlasma
     plasma: 300
     maxPlasma: 300

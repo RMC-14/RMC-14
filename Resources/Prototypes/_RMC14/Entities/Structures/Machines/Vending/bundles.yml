@@ -163,3 +163,19 @@
     - CMSurgicalCaseFilled
     - RMCFlashlightPen
 #   - Syringe case # TODO RMC14 syringe cases
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCCommandingOfficerEssentialsBundle
+  name: Commanding Officer Essentials kit
+  description: Contains a laser designator, whistle, and a disabler.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/binoculars.rsi
+    state: rangefinder
+  - type: CMVendorBundle
+    bundle:
+    - RMCLaserDesignator
+    - RMCWhistle
+    - RMCWeaponTaser
+    #TODO RMC14 Megaphone, Paper Map.

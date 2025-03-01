@@ -204,6 +204,7 @@
     - KnockedDown
     - SlowedDown
     - Muted
+    - Dazed
   - type: ImmuneToClothingRequiredStepTrigger
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter

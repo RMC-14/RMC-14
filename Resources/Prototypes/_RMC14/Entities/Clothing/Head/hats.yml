@@ -80,6 +80,7 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret/jungle.rsi
+  - type: Appearance 
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Head/Hats/CO/beret/jungle.rsi

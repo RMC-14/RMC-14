@@ -13,6 +13,18 @@ public sealed partial class RMCStunOnHitComponent : Component
     public float MaxRange = 2.5f;
 
     [DataField, AutoNetworkedField]
+    public float KnockBackPowerMin = 1;
+
+    [DataField, AutoNetworkedField]
+    public float KnockBackPowerMax = 1;
+
+    [DataField, AutoNetworkedField]
+    public float KnockBackSpeed = 1;
+
+    [DataField, AutoNetworkedField]
+    public bool ForceKnockBack;
+
+    [DataField, AutoNetworkedField]
     public bool LosesEffectWithRange = false;
 
     [DataField, AutoNetworkedField]
@@ -23,4 +35,9 @@ public sealed partial class RMCStunOnHitComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan SlowTime = TimeSpan.FromSeconds(4);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan DazeTime;
+
+
 }

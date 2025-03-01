@@ -142,7 +142,7 @@
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
       - RMCMatebaHolster
-      #TODO Ceremonial Sword
+      - RMCCeremonialSword
       - RMCDetector
       #TODO walkman
 
