@@ -496,6 +496,12 @@
         name: M59A Prototype Rifle
       - id: CMCOSmartGunOperatorEquipmentCaseBelt
         name: Commander's Smartgun
+        recommended: true # TODO RMC14 Make choices: colour the options brown
+    - name: Commander's Secondary
+      choices: { CMSecondary: 1 }
+      entries:
+      - id: RMCD50WinterWyvernBeltFilled
+      - id: RMCMatebaBeltFilled
     - name: Primary Ammunition
       entries:
       - id: CMMagazineRifleM54CMK1
@@ -516,10 +522,10 @@
         points: 15
     #   - id: CMMagazineMatebaAP  # TODO RMC14 Port More Sidearm Ammo
     #     points: 20
-    #   - id: CMMagazineDesertEagle
-    #     points: 15
-    #   - id: CMMagazineDesertEagleAP
-    #     points: 20
+      - id: RMCMagazinePistolD50WinterWyvernHI
+        points: 15
+      - id: RMCMagazinePistolD50WinterWyvernHIAP
+        points: 20
     - name: Shotgun Ammunition
       entries:
       - id: RMCBoxShotgunBuckshot
