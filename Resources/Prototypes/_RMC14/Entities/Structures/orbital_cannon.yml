@@ -126,7 +126,7 @@
   - type: RandomSpawner
     prototypes:
     - RMCOrbitalCannonWarheadExplosive
-#    - RMCOrbitalCannonWarheadCluster # TODO RMC14
+    - RMCOrbitalCannonWarheadCluster
     - RMCOrbitalCannonWarheadIncendiary
 
 - type: entity
@@ -185,7 +185,18 @@
   placement:
     mode: SnapgridCenter
   components:
-  - type: OrbitalCannonExplosion # TODO: RMC14
+  - type: OrbitalCannonExplosion
+    steps:
+    - type: RMCOBXenoTunnel
+      total: 6500
+      slope: 100
+      max: 350
+      delay: 1
+      times: 75
+      timesPer: 3
+      delayPer: 0.4
+      spread: 12
+      checkProtectionPer: true
   - type: WarpPoint
     location: 1 orbital bombardment
 

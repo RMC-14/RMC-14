@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
 using Content.Shared.DoAfter;
+using Content.Shared.Fluids;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -67,6 +68,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableRelayedEvent<HandDeselectedEvent>>(OnHandDeselected);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableRelayedEvent<GotEquippedHandEvent>>(OnGotEquippedHand);
         SubscribeLocalEvent<AttachableToggleableComponent, AttachableRelayedEvent<GotUnequippedHandEvent>>(OnGotUnequippedHand);
+        SubscribeLocalEvent<AttachableToggleableComponent, SprayAttemptEvent>(OnSprayAttempt);
 
         SubscribeLocalEvent<AttachableMovementLockedComponent, MoveInputEvent>(OnAttachableMovementLockedMoveInput);
 
@@ -79,7 +81,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
         SubscribeLocalEvent<AttachableGunPreventShootComponent, AttemptShootEvent>(OnAttemptShoot);
     }
 
-#region AttachableAlteredEvent handling
+    #region AttachableAlteredEvent handling
     private void OnAttachableAltered(Entity<AttachableToggleableComponent> attachable, ref AttachableAlteredEvent args)
     {
         switch (args.Alteration)
@@ -293,6 +295,15 @@ public sealed class AttachableToggleableSystem : EntitySystem
         RaiseLocalEvent(attachable, ref removeEv);
     }
 
+    private void OnSprayAttempt(Entity<AttachableToggleableComponent> attachable, ref SprayAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (attachable.Comp.AttachedOnly && !attachable.Comp.Attached)
+            args.Cancelled = true;
+    }
+
     private void OnAttachableMovementLockedMoveInput(Entity<AttachableMovementLockedComponent> user, ref MoveInputEvent args)
     {
         if (!args.HasDirectionalMovement)
@@ -356,7 +367,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
         var playerMapPos = _transformSystem.ToMapCoordinates(playerPos);
         var targetMapPos = _transformSystem.ToMapCoordinates(targetPos);
         var currentAngle = (targetMapPos.Position - playerMapPos.Position).ToWorldAngle();
-        
+
         var differenceFromLockedAngle = (currentAngle.Degrees - initialAngle.Degrees + 180 + 360) % 360 - 180;
 
         if (differenceFromLockedAngle > -90 && differenceFromLockedAngle < 90)
@@ -647,7 +658,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
             if (directionLockedComponent.LockedDirection == null)
                 directionLockedComponent.LockedDirection = Transform(userUid.Value).LocalRotation.GetCardinalDir();
         }
-        
+
         if (attachable.Comp.BreakOnFullRotate && userUid != null)
         {
             var sideLockedComponent = EnsureComp<AttachableSideLockedComponent>(userUid.Value);

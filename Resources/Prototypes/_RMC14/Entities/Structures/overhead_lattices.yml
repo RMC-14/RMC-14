@@ -1,0 +1,388 @@
+﻿- type: entity
+  id: RMCOverheadLattice
+  abstract: true
+  name: lattice
+  description: A support lattice.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: SpriteFade
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice.rsi
+    state: lattice1
+    drawdepth: Overdoors
+    offset: 0,0.5
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice.rsi
+    state: lattice1
+  - type: Anchorable
+  - type: Clickable
+
+# Vertical
+
+- type: entity
+  parent: RMCOverheadLattice
+  id: RMCOverheadLatticeVertical1
+  suffix: Vertical
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice.rsi
+    state: lattice1
+    offset: 0.25,0.5
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice.rsi
+    state: lattice1
+
+- type: entity
+  parent: RMCOverheadLatticeVertical1
+  id: RMCOverheadLatticeVertical2
+  suffix: Vertical
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice.rsi
+    state: lattice2
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice.rsi
+    state: lattice2
+
+- type: entity
+  parent: RMCOverheadLatticeVertical1
+  id: RMCOverheadLatticeVertical3
+  suffix: Vertical
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice.rsi
+    state: lattice3
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice.rsi
+    state: lattice3
+
+- type: entity
+  parent: RMCOverheadLatticeVertical1
+  id: RMCOverheadLatticeVertical1A
+  suffix: Vertical
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice1_a
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice1_a
+
+- type: entity
+  parent: RMCOverheadLatticeVertical1
+  id: RMCOverheadLatticeVertical1B
+  suffix: Vertical
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice1_b
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice1_b
+
+- type: entity
+  parent: RMCOverheadLatticeVertical1
+  id: RMCOverheadLatticeVertical1C
+  suffix: Vertical
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice1_c
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice1_c
+
+- type: entity
+  parent: RMCOverheadLatticeVertical1
+  id: RMCOverheadLatticeVertical1D
+  suffix: Vertical
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice1_d
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice1_d
+
+- type: entity
+  parent: RMCOverheadLatticeVertical1
+  id: RMCOverheadLatticeVertical2A
+  suffix: Vertical
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice2_a
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice2_a
+
+- type: entity
+  parent: RMCOverheadLatticeVertical1
+  id: RMCOverheadLatticeVertical2B
+  suffix: Vertical
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice2_b
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice2_b
+
+- type: entity
+  parent: RMCOverheadLatticeVertical1
+  id: RMCOverheadLatticeVertical2C
+  suffix: Vertical
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice2_c
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice2_c
+
+- type: entity
+  parent: RMCOverheadLatticeVertical1
+  id: RMCOverheadLatticeVertical2D
+  suffix: Vertical
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice2_d
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice2_d
+
+- type: entity
+  parent: RMCOverheadLatticeVertical1
+  id: RMCOverheadLatticeVertical3A
+  suffix: Vertical
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice3_a
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice3_a
+
+- type: entity
+  parent: RMCOverheadLatticeVertical1
+  id: RMCOverheadLatticeVertical3B
+  suffix: Vertical
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice3_b
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice3_b
+
+- type: entity
+  parent: RMCOverheadLatticeVertical1
+  id: RMCOverheadLatticeVertical3C
+  suffix: Vertical
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice3_c
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice3_c
+
+- type: entity
+  parent: RMCOverheadLatticeVertical1
+  id: RMCOverheadLatticeVertical3D
+  suffix: Vertical
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice3_d
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice3_d
+
+# Horizontal
+
+- type: entity
+  parent: RMCOverheadLattice
+  id: RMCOverheadLatticeHorizontal4
+  suffix: Horizontal
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice.rsi
+    state: lattice4
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice.rsi
+    state: lattice4
+
+- type: entity
+  parent: RMCOverheadLattice
+  id: RMCOverheadLatticeHorizontal8
+  suffix: Horizontal
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice.rsi
+    state: lattice8
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice.rsi
+    state: lattice8
+
+- type: entity
+  parent: RMCOverheadLattice
+  id: RMCOverheadLatticeHorizontal12
+  suffix: Horizontal
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice.rsi
+    state: lattice12
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice.rsi
+    state: lattice12
+
+- type: entity
+  parent: RMCOverheadLattice
+  id: RMCOverheadLatticeHorizontal4A
+  suffix: Horizontal
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice4_a
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice4_a
+
+- type: entity
+  parent: RMCOverheadLattice
+  id: RMCOverheadLatticeHorizontal4B
+  suffix: Horizontal
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice4_b
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice4_b
+
+- type: entity
+  parent: RMCOverheadLattice
+  id: RMCOverheadLatticeHorizontal4C
+  suffix: Horizontal
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice4_c
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice4_c
+
+- type: entity
+  parent: RMCOverheadLattice
+  id: RMCOverheadLatticeHorizontal4D
+  suffix: Horizontal
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice4_d
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice4_d
+
+- type: entity
+  parent: RMCOverheadLattice
+  id: RMCOverheadLatticeHorizontal5A
+  suffix: Horizontal
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice5_a
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice5_a
+
+- type: entity
+  parent: RMCOverheadLattice
+  id: RMCOverheadLatticeHorizontal5B
+  suffix: Horizontal
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice5_b
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice5_b
+
+- type: entity
+  parent: RMCOverheadLattice
+  id: RMCOverheadLatticeHorizontal5C
+  suffix: Horizontal
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice5_c
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice5_c
+
+- type: entity
+  parent: RMCOverheadLattice
+  id: RMCOverheadLatticeHorizontal5D
+  suffix: Horizontal
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice5_d
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice5_d
+
+- type: entity
+  parent: RMCOverheadLattice
+  id: RMCOverheadLatticeHorizontal6A
+  suffix: Horizontal
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice6_a
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice6_a
+
+- type: entity
+  parent: RMCOverheadLattice
+  id: RMCOverheadLatticeHorizontal6B
+  suffix: Horizontal
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice6_b
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice6_b
+
+- type: entity
+  parent: RMCOverheadLattice
+  id: RMCOverheadLatticeHorizontal6C
+  suffix: Horizontal
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice6_c
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice6_c
+
+- type: entity
+  parent: RMCOverheadLattice
+  id: RMCOverheadLatticeHorizontal6D
+  suffix: Horizontal
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice6_d
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_lattice_hybrisa.rsi
+    state: lattice6_d

@@ -52,7 +52,7 @@
   description: "A pair of binoculars with a rangefinding function. Click a tile to acquire it's coordinates."
   components:
   - type: Item
-    heldPrefix: rangefinders
+    heldPrefix: rangefinder
   - type: Sprite
     sprite: _RMC14/Objects/Devices/binoculars.rsi
     layers:
@@ -61,7 +61,7 @@
     - map: [ "light" ]
   - type: Rangefinder
   - type: UseDelay
-    delay: 1
+    delay: 0
   - type: UserInterface
     interfaces:
       enum.RangefinderUiKey.Key:
@@ -95,8 +95,6 @@
   - type: Rangefinder
     mode: Designator
     canDesignate: true
-  - type: UseDelay
-    delay: 1
 
 - type: entity
   parent: RMCLaserDesignator

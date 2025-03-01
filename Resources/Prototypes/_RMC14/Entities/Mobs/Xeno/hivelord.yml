@@ -34,6 +34,7 @@
   - type: XenoDevour
   - type: XenoPheromones
     pheromonesMultiplier: 2.5
+    pheroSuffix: hivelord
   - type: CMArmor
     explosionArmor: 10
   - type: XenoResinWalker

@@ -318,3 +318,13 @@ rmc-xeno-empower-start-others = {CAPITALIZE(THE($user))} starts empowering!
 rmc-xeno-ravager-empower = We feel a rush of power from the surrounding enemies!
 rmc-xeno-ravager-empower-fizzle = There were no enemies around us!
 rmc-xeno-ravager-super-empower-fade = Our glow fades away, the power leaving our form!
+# Abduct
+rmc-xeno-abduct-cancel = We relax our tail.
+rmc-xeno-abduct-no-room = We don't have any room to do our abduction!
+rmc-xeno-abduct-none = Our tail fails to catch anything!
+rmc-xeno-abduct-one = Our tail catches and slows one target!
+rmc-xeno-abduct-two = Our tail catches and roots two targets!
+rmc-xeno-abduct-more = Our tail catches and stuns {$targets} targets!
+
+# Tail Lash
+rmc-xeno-tail-lash-no-room = We don't have any room to do our tail lash!
