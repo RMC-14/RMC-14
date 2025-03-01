@@ -1,28 +1,4 @@
 ﻿Entries:
-- author: MACMAN2003
-  changes:
-  - message: Added rebreathers to squad vendors.
-    type: Add
-  id: 895
-  time: '2024-10-31T08:36:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4636
-- author: MACMAN2003
-  changes:
-  - message: Added medium armor to surplus vendors.
-    type: Add
-  id: 896
-  time: '2024-10-31T09:01:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4637
-- author: Aurallianz
-  changes:
-  - message: QM and CE now have all comms.
-    type: Fix
-  - message: Senior Officer Vendors now have content for CMP, CMO, ASO, CE, QM, and
-      XO.
-    type: Add
-  id: 897
-  time: '2024-10-31T09:02:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4409
 - author: CyberTropic
   changes:
   - message: Added Kutjevo tiles
@@ -5160,5 +5136,33 @@
   id: 1396
   time: '2025-03-01T13:10:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5717
+- author: Vermidia
+  changes:
+  - message: Fixed warrior, lurker, and runner not healing slightly faster while resting.
+    type: Fix
+  id: 1397
+  time: '2025-03-01T13:18:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5748
+- author: Vermidia
+  changes:
+  - message: Added Oppressor praetorian strain, which focuses and pulling in and pushing
+      away foes.
+    type: Add
+  - message: Fixed warrior punch and fling having a lower range than most melee moves
+      (1 > 1.5)
+    type: Fix
+  - message: Fixed spray acid/flamers not going through doors
+    type: Fix
+  id: 1398
+  time: '2025-03-01T13:17:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5561
+- author: Vermidia
+  changes:
+  - message: Fixed healer drone's tailstab damage being too high, and melee being
+      slightly too low.
+    type: Fix
+  id: 1399
+  time: '2025-03-01T13:17:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5755
 Name: RMC14
 Order: -1
