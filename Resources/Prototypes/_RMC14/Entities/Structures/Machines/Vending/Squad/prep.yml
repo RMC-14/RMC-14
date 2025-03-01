@@ -12,6 +12,9 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessMarinePrep"
+    hackable: true
     sections:
     - name: Primary firearms
       entries:
@@ -91,6 +94,9 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessMarinePrep"
+    hackable: true
     sections:
     - name: Standard Equipment
       entries:
@@ -289,6 +295,10 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_ammo.rsi
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessMarinePrep"
+    - "CMAccessRequisitions"
+    hackable: true
     sections:
     - name: Armor-Piercing Ammunition
       entries:
@@ -347,6 +357,10 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessMarinePrep"
+    - "CMAccessRequisitions"
+    hackable: true
     sections:
     - name: Food
       entries:
@@ -423,6 +437,10 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessMarinePrep"
+    - "CMAccessRequisitions"
+    hackable: true
     sections: # TODO RMC14
     - name: Barrel
       entries:
