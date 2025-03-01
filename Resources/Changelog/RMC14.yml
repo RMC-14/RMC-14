@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: The Bipod can now correctly turn 90 degrees in either direction before
-      automatically dismounting, up from 45 degrees.
-    type: Fix
-  id: 894
-  time: '2024-10-31T01:20:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4592
 - author: MACMAN2003
   changes:
   - message: Added rebreathers to squad vendors.
@@ -5160,5 +5152,13 @@
   id: 1395
   time: '2025-03-01T13:03:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5666
+- author: Dygon
+  changes:
+  - message: The engineering skill now speeds up how fast you deconstruct and repair
+      objects.
+    type: Fix
+  id: 1396
+  time: '2025-03-01T13:10:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5717
 Name: RMC14
 Order: -1
