@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: Added Find Parasite action for ghosts
-    type: Add
-  id: 901
-  time: '2024-10-31T09:16:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4589
 - author: crystalHex
   changes:
   - message: Added functional holsters to the smart pistol belt, combat toolbelt,
@@ -5153,5 +5146,12 @@
   id: 1402
   time: '2025-03-01T13:28:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5708
+- author: to4no_fix
+  changes:
+  - message: Hijack now automatically calls General Quarters
+    type: Add
+  id: 1403
+  time: '2025-03-01T13:33:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5754
 Name: RMC14
 Order: -1
