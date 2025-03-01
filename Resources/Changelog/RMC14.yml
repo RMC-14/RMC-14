@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Added scorch marks to CAS fire
-    type: Add
-  id: 903
-  time: '2024-10-31T09:21:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4602
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added xeno claw sharpness. Certain xenos will have sharp or very sharp
-      claws which allows them to destroy certain structures, such as doors, walls,
-      and window frames.
-    type: Add
-  id: 904
-  time: '2024-10-31T09:23:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4533
 - author: FungiFellow
   changes:
   - message: All current Survivor weapons have had their stats adjusted
@@ -5152,5 +5136,20 @@
   id: 1404
   time: '2025-03-01T13:35:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5707
+- author: Vermidia
+  changes:
+  - message: All t1 xenos can now evolve into Queen
+    type: Add
+  id: 1405
+  time: '2025-03-01T13:37:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5704
+- author: Vermidia
+  changes:
+  - message: Fixed Vanguard pierce being a straight line, and no longer goes over
+      cades.
+    type: Fix
+  id: 1406
+  time: '2025-03-01T13:38:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5725
 Name: RMC14
 Order: -1
