@@ -1,20 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fix fruit eating/feeding being slower than intended.
-    type: Fix
-  id: 888
-  time: '2024-10-29T08:11:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4593
-- author: crystalHex
-  changes:
-  - message: Fixed RMC Actions menu transforming into strain instead of base xenonid.
-    type: Fix
-  id: 889
-  time: '2024-10-29T08:10:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4560
-- author: Vermidia
-  changes:
   - message: Fix hyposprays needing medical skill 2 to instant inject
     type: Fix
   id: 890
@@ -5159,5 +5145,28 @@
   id: 1389
   time: '2025-03-01T11:02:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5767
+- author: Arcticular1
+  changes:
+  - message: Buttons to MP jacket, CO bomber jacket, and formal service jacket.
+    type: Add
+  - message: jackets not having the correct armor.
+    type: Fix
+  - message: CO berets not having camo.
+    type: Fix
+  id: 1390
+  time: '2025-03-01T11:04:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5760
+- author: Vermidia
+  changes:
+  - message: Fixed there being no delays between PB shots. There is now a 1.1 second
+      interval between when you PB anything, before you can PB again. Shots will just
+      register as normal shots until the delay is over.
+    type: Fix
+  - message: Fixed PBing not putting a gun on melee cooldown. Meleeing also puts a
+      gun on PB cooldown.
+    type: Fix
+  id: 1391
+  time: '2025-03-01T11:05:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5757
 Name: RMC14
 Order: -1
