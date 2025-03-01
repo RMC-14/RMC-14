@@ -474,10 +474,6 @@ public sealed class XenoNestSystem : EntitySystem
         }
 
     }
-    private bool NestAssoicatedWithHive()
-    {
-        return false;
-    }
 
     private void DetachNested(EntityUid? nest, EntityUid? nestedNullable)
     {
