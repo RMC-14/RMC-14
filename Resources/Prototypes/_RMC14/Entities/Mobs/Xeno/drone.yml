@@ -231,6 +231,7 @@
         Brute: 17
   - type: XenoPheromones
     pheromonesMultiplier: 3
+    pheroSuffix: strong
   - type: XenoStrain
     name: rmc-xeno-healer-name
     description: rmc-xeno-healer-description

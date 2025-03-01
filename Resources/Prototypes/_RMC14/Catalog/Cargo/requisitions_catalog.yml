@@ -239,11 +239,11 @@
       entries:
       - cost: 6000
         crate: RMCCrateMortarKit
-      - cost: 2000
+      - cost: 1500
         crate: RMCCrateMortarShellHE
-      - cost: 2000
+      - cost: 1500
         crate: RMCCrateMortarShellIncendiary
-      - cost: 2000
+      - cost: 1000
         crate: RMCCrateMortarShellFlare
 #    - name: Operations
 #      entries: []

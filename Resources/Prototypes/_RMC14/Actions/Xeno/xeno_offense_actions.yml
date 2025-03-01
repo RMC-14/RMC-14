@@ -256,7 +256,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: acid_shotgun
     event: !type:XenoScatteredSpitActionEvent
-    useDelay: 6
+    useDelay: 7
     range: 15
     checkCanAccess: false
   - type: ActionBlockIfResting

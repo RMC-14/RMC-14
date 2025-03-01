@@ -72,7 +72,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
 
     private void OnHit(Entity<RMCStunOnHitComponent> bullet, ref ProjectileHitEvent args)
     {
-        if (_net.IsClient || bullet.Comp.ShotFrom == null)
+        if (bullet.Comp.ShotFrom == null)
             return;
 
         var distance = (_transform.GetMoverCoordinates(args.Target).Position - bullet.Comp.ShotFrom.Value.Position).Length();
@@ -89,22 +89,21 @@ public sealed class RMCSizeStunSystem : EntitySystem
         //TODO Camera Shake
 
         //Knockback
-        if (_blocker.CanMove(args.Target) || bullet.Comp.ForceKnockBack)
+        _physics.SetLinearVelocity(args.Target, Vector2.Zero);
+        _physics.SetAngularVelocity(args.Target, 0f);
+
+        var vec = _transform.GetMoverCoordinates(args.Target).Position - bullet.Comp.ShotFrom.Value.Position;
+        if (vec.Length() != 0)
         {
-
-            _physics.SetLinearVelocity(args.Target, Vector2.Zero);
-            _physics.SetAngularVelocity(args.Target, 0f);
-
-            var vec = _transform.GetMoverCoordinates(args.Target).Position - bullet.Comp.ShotFrom.Value.Position;
-            if (vec.Length() != 0)
-            {
-                _rmcPulling.TryStopPullsOn(args.Target);
-                var knockBackPower = _random.NextFloat(bullet.Comp.KnockBackPowerMin, bullet.Comp.KnockBackPowerMax);
-                var direction = vec.Normalized() * knockBackPower;
-                _throwing.TryThrow(args.Target, direction, bullet.Comp.KnockBackSpeed, animated: false, playSound: false, doSpin: false);
-                // RMC-14 TODO Thrown into obstacle mechanics
-            }
+            _rmcPulling.TryStopPullsOn(args.Target);
+            var knockBackPower = _random.NextFloat(bullet.Comp.KnockBackPowerMin, bullet.Comp.KnockBackPowerMax);
+            var direction = vec.Normalized() * knockBackPower;
+            _throwing.TryThrow(args.Target, direction, bullet.Comp.KnockBackSpeed, animated: false, playSound: false, doSpin: false);
+            // RMC-14 TODO Thrown into obstacle mechanics
         }
+
+        if (_net.IsClient)
+            return;
 
         //Stun part
         if (IsXenoSized((args.Target, size)))
