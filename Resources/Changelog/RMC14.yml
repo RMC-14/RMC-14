@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: More jobs have unique map icons
-    type: Tweak
-  - message: Hive core now shows up on xeno's map
-    type: Add
-  id: 891
-  time: '2024-10-30T02:15:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4626
-- author: Vermidia
-  changes:
   - message: Sentinel slowing spit now drains medicines in the target by 1.75 each
       on hit
     type: Add
@@ -5168,5 +5159,13 @@
   id: 1392
   time: '2025-03-01T11:08:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5764
+- author: Tyzemol
+  changes:
+  - message: Xeno pheromone UI no longer spawns in screen corners when watching other
+      xeno.
+    type: Fix
+  id: 1393
+  time: '2025-03-01T11:10:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5766
 Name: RMC14
 Order: -1
