@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fix defibs healing less oxygen damage on defib than intended.
-    type: Fix
-  id: 886
-  time: '2024-10-28T09:50:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4604
 - author: Rainbeon
   changes:
   - message: Fixed Hive Cores having their ghost warp points removed upon being fully
@@ -5155,5 +5148,14 @@
   id: 1387
   time: '2025-03-01T11:00:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5735
+- author: DoguhanOzgurAkca
+  changes:
+  - message: OB protection from Kutjevo caves and reactors
+    type: Tweak
+  - message: area names in kutjevo caves being mixed up.
+    type: Tweak
+  id: 1388
+  time: '2025-03-01T11:01:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5753
 Name: RMC14
 Order: -1
