@@ -37,4 +37,7 @@ public sealed partial class XenoPierceComponent : Component
 
     [DataField, AutoNetworkedField]
     public int RechargeTargetsRequired = 2;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId Blocker = "RMCEffectXenoTelegraphInvisible";
 }

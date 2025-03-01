@@ -648,7 +648,7 @@
   parent: ActionXenoBase
   id: ActionXenoPierce
   name: Pierce (50)
-  description: Pierce through enemies in a line doing high damage and piercing some armor. Hitting 2 or more recharges your shield.
+  description: Pierce through enemies in a 3 tile range, doing high damage and piercing some armor. Hitting 2 or more recharges your shield.
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
