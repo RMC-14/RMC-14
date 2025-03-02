@@ -928,6 +928,8 @@
       - id: RMCBeltConstruction
       - id: RMCBeltUtilityGeneral
       - id: CMBeltUtilityFilled
+        name: M276 pattern toolbelt rig (Full)
+       
     - name: Pouches
       jobs:
       - CMChiefEngineer
