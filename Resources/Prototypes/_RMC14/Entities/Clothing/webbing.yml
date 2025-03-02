@@ -394,6 +394,16 @@
     - id: CMMultitool
 
 - type: entity
+  parent: CMWebbing
+  id: RMCWebbingHEFA
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFrag
+      amount: 3
+
+- type: entity
   parent: CMWebbingBase
   id: CMWebbingKnives
   name: M272 pattern knife vest
