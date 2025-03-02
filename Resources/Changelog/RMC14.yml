@@ -1,30 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Mobs that are knocked down can no longer be dragged through tables, window
-      frames, and flaps without manually vaulting them.
-    type: Tweak
-  - message: Runners, Larvae, and Parasites can now travel on top of window frames
-      without vaulting once again.
-    type: Tweak
-  id: 920
-  time: '2024-11-02T04:29:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4660
-- author: Vermidia
-  changes:
-  - message: Sentinel's paralyzing slash now kicks in 1 second faster, and stuns for
-      an additional second
-    type: Tweak
-  - message: Slowing spit now last 8 seconds
-    type: Tweak
-  - message: Scatter spit's max scatter decreased from 60 to 45
-    type: Tweak
-  - message: Slowing spit's cooldown increased to 2 seconds, Scatter spit's cooldown
-      decreased to 6
-    type: Tweak
-  id: 921
-  time: '2024-11-02T09:17:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4664
 - author: Vermidia
   changes:
   - message: Added Information Tags. When a body can no longer be defibbed or is dead
@@ -5288,5 +5262,24 @@
   id: 1421
   time: '2025-03-02T21:23:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5788
+- author: Vermidia
+  changes:
+  - message: Fixed sentient paras being puttable in egg morphers
+    type: Fix
+  - message: Fixed para AI not going into eggmorphers
+    type: Fix
+  - message: Fixed para AI incorrectly trying to leap on nested people, they will
+      manual infect instead.
+    type: Fix
+  id: 1422
+  time: '2025-03-02T22:48:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5789
+- author: Ian321
+  changes:
+  - message: Role icons for foxtrot are now visible.
+    type: Fix
+  id: 1423
+  time: '2025-03-02T22:48:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5791
 Name: RMC14
 Order: -1
