@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: HiveCoreXeno
   name: hive core # TODO RMC14 allow other structures to be built
   description: A giant pulsating mound of mass. It looks very much alive.
@@ -63,7 +63,7 @@
   - type: EvolutionBonus
   - type: WarpPoint
     location: hive core
-  - type: XenoMapTracked
+  - type: XenoStructureMapTracked
   - type: TacticalMapTracked
   - type: TacticalMapIcon
     icon:
