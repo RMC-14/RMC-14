@@ -1247,7 +1247,6 @@
     - name: Spare Equipment
       jobs: 
       - CMCMO
-      choices: { CMAccessories: 1 }
       entries:
       - id: CMHeadsetMedical
         amount: 15
