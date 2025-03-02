@@ -132,3 +132,52 @@
         whitelist:
           tags:
           - RMCWeaponShotgun
+
+- type: entity
+  parent: RMCScabbardBase
+  id: RMCScabbardCeremonial
+  name: ceremonial sabre scabbard
+  description: A large, vibrantly colored scabbard used to carry a ceremonial sabre.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/co_sabre_sheath.rsi
+    state: half
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/co_sabre_sheath.rsi
+    quickEquip: false
+    slots:
+    - belt
+  - type: ItemSlots
+    slots:
+      item:
+        name: Sabre
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        whitelist:
+          tags:
+          - RMCCeremonialSword
+  - type: ItemMapper
+    mapLayers:
+      full:
+        whitelist:
+          tags:
+          - RMCCeremonialSword
+  - type: Tag
+    tags:
+    - Scabbard
+    - RMCCeremonialScabbard
+
+- type: entity
+  parent: RMCScabbardCeremonial
+  id: RMCScabbardCeremonialFilled
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - RMCCeremonialSword
+
+- type: Tag
+  id: RMCCeremonialScabbard

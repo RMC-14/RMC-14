@@ -1,4 +1,5 @@
-﻿using Content.Shared.Buckle.Components;
+﻿using System.Numerics;
+using Content.Shared.Buckle.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Physics.Events;
 
@@ -38,6 +39,14 @@ public sealed class RMCBuckleSystem : EntitySystem
     {
         if (!_entityWhitelist.IsWhitelistPassOrNull(ent.Comp.Whitelist, args.Strap))
             args.Cancelled = true;
+    }
+
+    public Vector2 GetOffset(Entity<RMCBuckleOffsetComponent?> offset)
+    {
+        if (!Resolve(offset, ref offset.Comp, false))
+            return Vector2.Zero;
+
+        return offset.Comp.Offset;
     }
 
     public override void Update(float frameTime)

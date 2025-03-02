@@ -1,0 +1,13 @@
+﻿- type: entity
+  name: oppressor tail
+  id: RMCOppressorTail
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: /Textures/_RMC14/Effects/beam.rsi
+    drawdepth: Effects
+    state: "oppressor_tail"
+  - type: Beam
+  - type: Tag
+    tags:
+      - HideContextMenu

@@ -127,3 +127,19 @@
   - type: Sprite
     state: spec_spawn_delta
 
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCWeaponsSpecialist
+  components:
+  - type: GhostRole
+    name: cm-job-name-weapons-specialist
+    description: cm-job-description-weapons-specialist
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    raffle:
+      settings: default
+    job: CMWeaponsSpecialist
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobWeaponsSpecialist
+      time: 1

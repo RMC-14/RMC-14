@@ -14,6 +14,7 @@ using Content.Shared._RMC14.Xenonids.Sweep;
 using Robust.Shared.Audio.Systems;
 using Content.Shared._RMC14.Shields;
 using Content.Shared.Interaction;
+using Content.Shared.Stunnable;
 
 namespace Content.Shared._RMC14.Xenonids.Blitz;
 
@@ -67,10 +68,13 @@ public sealed class XenoBlitzSystem : EntitySystem
             _actions.SetUseDelay(args.Action, xeno.Comp.BaseUseDelay);
             xeno.Comp.FirstPartActivatedAt = _timing.CurTime;
             //Don't handle - let the leap go through
+            // TODO RMC14 Find a way for this to work without also changing toggle on move selection
             foreach (var (actionId, action) in _actions.GetActions(xeno))
             {
                 if (action.BaseEvent is XenoLeapActionEvent)
+                {
                     _actions.SetToggled(actionId, true);
+                }
             }
         }
 
@@ -84,7 +88,7 @@ public sealed class XenoBlitzSystem : EntitySystem
 
         SetBlitzDelays(xeno);
 
-        if (!_mob.IsAlive(xeno))
+        if (!_mob.IsAlive(xeno) || HasComp<StunnedComponent>(xeno))
             return;
 
         var ev = new XenoLeapAttemptEvent();
