@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Added nailgun survivor weapon. Uses nails as ammo and fits in backpack.
-    type: Add
-  - message: Added flora. LV-624 now has plants and bushes that can hide alien weeds,
-      including strange alien trees.
-    type: Add
-  id: 915
-  time: '2024-11-01T05:23:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4511
 - author: snebl
   changes:
   - message: Fixed bug that allowed laser designation on the warship.
@@ -5173,5 +5163,12 @@
   id: 1416
   time: '2025-03-02T06:24:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5749
+- author: Ian321
+  changes:
+  - message: The foxtrot squad can now be awoken.
+    type: Add
+  id: 1417
+  time: '2025-03-02T06:29:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5729
 Name: RMC14
 Order: -1
