@@ -4,6 +4,8 @@
   name: lifeboat medical cabinet
   description: A wall-mounted cabinet containing medical supplies vital to survival. While better equipped, it can only refill basic supplies.
   components:
+  - type: Transform
+    anchored: false
   - type: Sprite
     sprite: _RMC14/Structures/Lifeboat/lifeboat_gadgets.rsi
     layers:
