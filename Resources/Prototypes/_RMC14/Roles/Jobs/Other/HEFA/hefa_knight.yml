@@ -9,8 +9,6 @@
   startingGear: RMCGearHEFAShrapnelsworn
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
-  accessGroups:
-  - CMHEFAShrapnelsworn
   special:
   - !type:AddComponentSpecial
     components:

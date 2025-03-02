@@ -39,7 +39,6 @@
     state: icon
   - type: Item
     sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting.rsi
-    state: icon
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting.rsi
