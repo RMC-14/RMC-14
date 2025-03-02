@@ -83,7 +83,7 @@ public sealed class XenoTailSeizeSystem : EntitySystem
 
     private void OnTailSeizeAction(Entity<XenoTailSeizeComponent> xeno, ref XenoTailSeizeActionEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || args.Coords == null)
             return;
 
         if (!_actionBlocker.CanAttack(xeno))
