@@ -134,8 +134,5 @@
     prototype: CMXenoLesserDrone
   - type: HiveConstructionLimited
     id: HivePylonXeno
-  - type: RoofingEntity
-    range: 10
-    canOrbitalBombard : true
   - type: WarpPoint
     location: hive pylon
