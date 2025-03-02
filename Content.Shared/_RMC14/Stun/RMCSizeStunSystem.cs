@@ -19,6 +19,9 @@ namespace Content.Shared._RMC14.Stun;
 
 public sealed class RMCSizeStunSystem : EntitySystem
 {
+    private const double DazedMultiplierSmallXeno = 0.7;
+    private const double DazedMultiplierBigXeno = 1.2;
+
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly StandingStateSystem _stand = default!;
@@ -80,8 +83,19 @@ public sealed class RMCSizeStunSystem : EntitySystem
         if (distance > bullet.Comp.MaxRange || _stand.IsDown(args.Target))
             return;
 
+
+        // Multiply daze duration based on the size of the target
+        var dazeMultiplier = 1.0;
+        if(TryComp(args.Target, out RMCSizeComponent? targetSize))
+        {
+            if (targetSize.Size >= RMCSizes.Big)
+                dazeMultiplier = DazedMultiplierBigXeno;
+            else if (targetSize.Size <= RMCSizes.SmallXeno && IsXenoSized((args.Target, targetSize)))
+                dazeMultiplier = DazedMultiplierSmallXeno;
+        }
+
         //Try to daze before the big size check, because big xenos can still be dazed.
-        _dazed.TryDaze(args.Target, bullet.Comp.DazeTime);
+        _dazed.TryDaze(args.Target, bullet.Comp.DazeTime * dazeMultiplier);
 
         if (!TryComp<RMCSizeComponent>(args.Target, out var size) || size.Size >= RMCSizes.Big)
             return;

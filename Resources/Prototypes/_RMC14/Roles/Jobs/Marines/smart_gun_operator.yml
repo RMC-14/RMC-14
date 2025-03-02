@@ -121,3 +121,19 @@
   - type: Sprite
     state: smartgunner_spawn_delta
 
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCSmartGunOperator
+  components:
+  - type: GhostRole
+    name: cm-job-name-smart-gun-operator
+    description: cm-job-description-smart-gun-operator
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    raffle:
+      settings: default
+    job: CMSmartGunOperator
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSmartGunOperator
+      time: 1

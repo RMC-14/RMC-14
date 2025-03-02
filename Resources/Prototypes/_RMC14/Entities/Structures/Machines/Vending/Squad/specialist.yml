@@ -77,6 +77,7 @@
         spawn: 6
       - id: RMC40MMGrenadeM74AGMI
         points: 40
+        spawn: 6
       - id: RMC40MMGrenadeM74AGMS
         points: 20
         spawn: 6
@@ -189,6 +190,7 @@
       - id: RMCBackpackRTO
         points: 15
       - id: RMCPouchFuelTank
+        points: 5
     #- id: CMWeldingGoggles
       - id: RMCPouchGeneralLarge
         points: 10

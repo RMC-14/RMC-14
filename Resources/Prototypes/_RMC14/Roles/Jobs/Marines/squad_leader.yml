@@ -144,3 +144,19 @@
   - type: Sprite
     state: leader_spawn_delta
 
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCSquadLeader
+  components:
+  - type: GhostRole
+    name: cm-job-name-squad-leader
+    description: cm-job-description-squad-leader
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    raffle:
+      settings: default
+    job: CMSquadLeader
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 1

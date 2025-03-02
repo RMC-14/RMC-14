@@ -3,7 +3,6 @@ using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Projectiles;
 using Robust.Server.GameObjects;
-using Robust.Shared.Physics.Events;
 using Robust.Shared.Random;
 
 namespace Content.Server.Explosion.EntitySystems;
@@ -41,8 +40,7 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
     }
 
     /// <summary>
-    /// Spawns projectiles at the coordinates of the grenade upon triggering
-    /// Can customize the angle and velocity the projectiles come out at
+    /// Overwrites the logic of the upstream <seealso cref="ProjectileGrenadeSystem"/> to allow more customization
     /// </summary>
     private void OnFragmentIntoProjectiles(Entity<ProjectileGrenadeComponent> ent, ref FragmentIntoProjectilesEvent args)
     {
@@ -67,9 +65,9 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
             args.Angle = Angle.FromDegrees((angleMin + angleMax) / 2);
         else
             args.Angle = Angle.FromDegrees(_random.Next((int)angleMin, (int)angleMax));
-
     }
 }
+
 /// <summary>
 ///     Raised when a projectile grenade is being triggered
 /// </summary>

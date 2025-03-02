@@ -1,88 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed scout rifle's damage multiplier being higher than intended
-    type: Fix
-  id: 907
-  time: '2024-10-31T21:35:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4643
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added sniper specialist's prepare position ability. This will allow them
-      to go invisible while standing still.
-    type: Add
-  - message: Made the sniper ghillie suit have light armor speed.
-    type: Tweak
-  - message: Made the sniper ghillie suit unable to be acidifed.
-    type: Tweak
-  id: 908
-  time: '2024-10-31T21:45:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3592
-- author: snebl
-  changes:
-  - message: Fixed some airlocks 'bolted' sprite not working.
-    type: Fix
-  id: 909
-  time: '2024-10-31T23:47:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4644
-- author: Binbagg
-  changes:
-  - message: Changed bio-hazard cades description
-    type: Tweak
-  id: 910
-  time: '2024-11-01T05:15:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4649
-- author: CyberTropic
-  changes:
-  - message: Fixed missing stair sprites.
-    type: Fix
-  id: 911
-  time: '2024-11-01T05:16:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4647
-- author: mnemosynium
-  changes:
-  - message: Added MK80 pistol magazines to the dropship crew weapons vendor
-    type: Add
-  id: 912
-  time: '2024-11-01T05:14:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4611
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Medical HUDs are now toggleable.
-    type: Tweak
-  - message: Added the missing medical skill 1 requirement for Medical HUDs to be
-      used.
-    type: Tweak
-  id: 913
-  time: '2024-11-01T05:17:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4646
-- author: Dutch-VanDerLinde
-  changes:
-  - message: You can now remove fully grown larva in surgery, but it will not kill
-      the larva
-    type: Tweak
-  - message: Fixed parasites and larvas dying on the dropship
-    type: Fix
-  id: 914
-  time: '2024-11-01T05:19:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4595
-- author: CyberTropic
-  changes:
-  - message: Added nailgun survivor weapon. Uses nails as ammo and fits in backpack.
-    type: Add
-  - message: Added flora. LV-624 now has plants and bushes that can hide alien weeds,
-      including strange alien trees.
-    type: Add
-  id: 915
-  time: '2024-11-01T05:23:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4511
-- author: snebl
-  changes:
-  - message: Fixed bug that allowed laser designation on the warship.
-    type: Fix
-  id: 916
-  time: '2024-11-01T23:00:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4655
 - author: Aurallianz
   changes:
   - message: New Varadero.
@@ -5155,5 +5071,105 @@
   id: 1408
   time: '2025-03-02T01:56:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5709
+- author: Alekshhh
+  changes:
+  - message: Updated the sprites for fast and sticky resin.
+    type: Tweak
+  id: 1409
+  time: '2025-03-02T05:37:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5774
+- author: Vermidia
+  changes:
+  - message: Fixed warding giving twice as much crit health as it should have
+    type: Fix
+  - message: Fixed warding not slowing bleedout off weeds, and not healing crit xenos
+      slightly on weeds
+    type: Fix
+  - message: Fixed xenos bleeding out while on fire (they only take the fire damage,
+      not bleedout damage)
+    type: Fix
+  - message: Added critical grace for xenos. When under crit grace xenos can move
+      around when they would have crit. Non-lesser warding pheros add a second or
+      two of the critical grace.
+    type: Add
+  - message: Fixed lesser drones having no damage overlays
+    type: Fix
+  - message: Fixed warding not persisting in crit on weeds even when there's no producers
+    type: Fix
+  - message: Fixed frenzy being a flat 10% melee damage multiplier. It's now +2 damage
+      per level, and properly adds to tailstab damage.
+    type: Fix
+  id: 1410
+  time: '2025-03-02T05:39:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5747
+- author: Whisper
+  changes:
+  - message: Dogtags can no longer be melted by acid.
+    type: Tweak
+  id: 1411
+  time: '2025-03-02T05:42:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5712
+- author: J C Denton
+  changes:
+  - message: CO's secure box containing Honor Guard kits for CIC armory.
+    type: Add
+  id: 1412
+  time: '2025-03-02T05:48:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5692
+- author: blueDev2
+  changes:
+  - message: Added Hive Cluster, a hive limited structure that spreads hive weeds
+      around it.
+    type: Add
+  - message: Added Eggmorpher, a hive limited structure that requires hive weeds and
+      passively creates parasites.
+    type: Add
+  - message: Added Recover Node, a hive limited structure that requires hive weeds
+      and heals a single nearby Xeno.
+    type: Add
+  - message: Xeno eggs must now be planted on Hive Weeds.
+    type: Tweak
+  - message: Marines (Talls) must now be nested on weed walls from hive weeds or on
+      resin walls with hive weeds under them.
+    type: Tweak
+  id: 1413
+  time: '2025-03-02T05:57:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4978
+- author: Skarletto
+  changes:
+  - message: Removed the ability to drag and drop containers into the chem master
+    type: Remove
+  id: 1414
+  time: '2025-03-02T06:22:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5587
+- author: Ian321
+  changes:
+  - message: Improvements to the pill making process.
+    type: Tweak
+  id: 1415
+  time: '2025-03-02T06:22:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5758
+- author: chaussettes1999
+  changes:
+  - message: Added 3 new suitskirt options in the Corporate Liaison vendor.
+    type: Add
+  id: 1416
+  time: '2025-03-02T06:24:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5749
+- author: Ian321
+  changes:
+  - message: The foxtrot squad can now be awoken.
+    type: Add
+  id: 1417
+  time: '2025-03-02T06:29:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5729
+- author: Arcticular1
+  changes:
+  - message: Fixed fuel pouches on the weapons specialist vendor being free instead
+      of costing 5 points.
+    type: Fix
+  id: 1418
+  time: '2025-03-02T06:36:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5732
 Name: RMC14
 Order: -1
