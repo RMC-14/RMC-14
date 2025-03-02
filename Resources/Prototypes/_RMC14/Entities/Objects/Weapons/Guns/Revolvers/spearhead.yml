@@ -180,7 +180,7 @@
 
 - type: entity
   parent: CMBulletBase
-  id: CMBulletRevolver357
+  id: RMCBulletRevolver357
   name: bullet (.357)
   components:
   - type: Projectile
