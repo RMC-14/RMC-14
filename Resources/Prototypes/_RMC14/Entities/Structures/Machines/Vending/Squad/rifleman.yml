@@ -114,13 +114,13 @@
       - id: RMCPacketGrenadeSmokeFilled
         points: 10
       - id: RMCPacketGrenadeM74AGMFFilled
-        points: 20
+        points: 15
       - id: RMCPacketGrenadeM74AGMIFilled
-        points: 20
+        points: 15
       - id: RMCPacketGrenadeM74AGMSFilled
         points: 10
       - id: RMCPacketGrenadeM74AGMSHornetFilled
-        points: 20
+        points: 15
     #- id: CMM20MineBox4
     #  points: 20
     - name: Primary Ammunition
