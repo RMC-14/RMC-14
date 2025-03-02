@@ -62,7 +62,7 @@
         priority: 2
         whitelist:
           tags:
-          - CMMagazineSMGP90
+          - RMCMagazineSMGP90
   - type: AttachableHolder
     randomAttachmentChance: 0.1
     slots:
