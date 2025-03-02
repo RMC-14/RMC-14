@@ -39,5 +39,6 @@ public sealed partial class RMCStunOnHitComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan DazeTime;
 
-
+    [DataField, AutoNetworkedField]
+    public float StunArea = 0.5f;
 }
