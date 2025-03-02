@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: FungiFellow
-  changes:
-  - message: Suppressors restrict the Range your Gunshot can be heard from
-    type: Tweak
-  id: 918
-  time: '2024-11-02T04:26:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4657
 - author: Whisper
   changes:
   - message: Added figurines for Gives-The-Fish, Jester-Who-Helps, Flynn 'Wendigo'
@@ -5286,5 +5279,12 @@
   id: 1419
   time: '2025-03-02T10:55:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5775
+- author: Tunguso4ka
+  changes:
+  - message: 5 new Nightmare Inserts added to Solaris Ridge.
+    type: Add
+  id: 1420
+  time: '2025-03-02T19:14:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5778
 Name: RMC14
 Order: -1
