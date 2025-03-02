@@ -615,6 +615,8 @@
         amount: 5
       - id: CMEncryptionKeyEcho
         amount: 5
+      - id: CMEncryptionKeyFoxtrot
+        amount: 5
       - id: CMEncryptionKeyEngineer
         amount: 5
       - id: CMEncryptionKeyIntel
