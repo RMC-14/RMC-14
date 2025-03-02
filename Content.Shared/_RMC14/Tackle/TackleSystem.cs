@@ -36,7 +36,7 @@ public sealed class TackleSystem : EntitySystem
 
         SubscribeLocalEvent<TackledRecentlyByComponent, ComponentRemove>(OnByRemove);
         SubscribeLocalEvent<TackledRecentlyByComponent, EntityTerminatingEvent>(OnByRemove);
-        SubscribeLocalEvent<TackledRecentlyByComponent, StunnedEvent>(OnByStunned);
+        SubscribeLocalEvent<TackledRecentlyByComponent, KnockedDownEvent>(OnByKnockedDown);
 
         SubscribeLocalEvent<TackledRecentlyComponent, ComponentRemove>(OnRemove);
         SubscribeLocalEvent<TackledRecentlyComponent, EntityTerminatingEvent>(OnRemove);
@@ -148,7 +148,7 @@ public sealed class TackleSystem : EntitySystem
         }
     }
 
-    private void OnByStunned(Entity<TackledRecentlyByComponent> ent, ref StunnedEvent args)
+    private void OnByKnockedDown(Entity<TackledRecentlyByComponent> ent, ref KnockedDownEvent args)
     {
         RemCompDeferred<TackledRecentlyByComponent>(ent);
     }
