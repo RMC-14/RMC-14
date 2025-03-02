@@ -180,12 +180,19 @@
       - !type:PainLevel
         level: 4
     - !type:GenericStatusEffect
-        key: Stutter
-        component: StutteringAccent
-        time: 4
-        conditions:
-        - !type:PainLevel
-          level: 4
+      key: EyeBlur
+      component: BlurryVision
+      time: 4
+      conditions:
+      - !type:PainLevel
+        level: 4
+    - !type:GenericStatusEffect
+      key: Stutter
+      component: StutteringAccent
+      time: 4
+      conditions:
+      - !type:PainLevel
+        level: 4
     - !type:PopupMessage
       type: Local
       messages: [ "rmc-pain-distressing-inner" ]
@@ -206,6 +213,13 @@
       conditions:
       - !type:PainLevel
         level: 5
+    - !type:GenericStatusEffect
+        key: EyeBlur
+        component: BlurryVision
+        time: 4
+        conditions:
+        - !type:PainLevel
+          level: 5
     - !type:GenericStatusEffect
         key: Stutter
         component: StutteringAccent
