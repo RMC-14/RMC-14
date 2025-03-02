@@ -4886,6 +4886,7 @@ entities:
     - type: Shuttle
     - type: StationInfiniteBatteryTarget
     - type: AreaGrid
+      labels: {}
       areaEntities: {}
       colors: {}
       areas:
@@ -118111,6 +118112,190 @@ entities:
     components:
     - type: Transform
       pos: 3.5,110.5
+      parent: 1
+- proto: RMCMarkerAreaLabel
+  entities:
+  - uid: 17039
+    components:
+    - type: MetaData
+      name: LZ1
+    - type: Transform
+      pos: 23.5,32.5
+      parent: 1
+  - uid: 17040
+    components:
+    - type: MetaData
+      name: Warehouse
+    - type: Transform
+      pos: 55.5,19.5
+      parent: 1
+  - uid: 17041
+    components:
+    - type: MetaData
+      name: North Aerodrome Hangar
+    - type: Transform
+      pos: 56.5,48.5
+      parent: 1
+  - uid: 17042
+    components:
+    - type: MetaData
+      name: Cave Camp
+    - type: Transform
+      pos: 65.5,89.5
+      parent: 1
+  - uid: 17043
+    components:
+    - type: MetaData
+      name: LZ2
+    - type: Transform
+      pos: 22.5,139.5
+      parent: 1
+  - uid: 17044
+    components:
+    - type: MetaData
+      name: Auxiliary Generator Station
+    - type: Transform
+      pos: 57.5,146.5
+      parent: 1
+  - uid: 17045
+    components:
+    - type: MetaData
+      name: Botany
+    - type: Transform
+      pos: 106.5,96.5
+      parent: 1
+  - uid: 17046
+    components:
+    - type: MetaData
+      name: Colony Administration
+    - type: Transform
+      pos: 107.5,79.5
+      parent: 1
+  - uid: 17047
+    components:
+    - type: MetaData
+      name: Panic Room
+    - type: Transform
+      pos: 105.5,69.5
+      parent: 1
+  - uid: 17048
+    components:
+    - type: MetaData
+      name: Anti-Freeze Bar
+    - type: Transform
+      pos: 114.5,54.5
+      parent: 1
+  - uid: 17049
+    components:
+    - type: MetaData
+      name: Junk Yard
+    - type: Transform
+      pos: 120.5,36.5
+      parent: 1
+  - uid: 17050
+    components:
+    - type: MetaData
+      name: Junk Yard
+    - type: Transform
+      pos: 103.5,15.5
+      parent: 1
+  - uid: 17051
+    components:
+    - type: MetaData
+      name: Fort Biceps
+    - type: Transform
+      pos: 128.5,17.5
+      parent: 1
+  - uid: 17052
+    components:
+    - type: MetaData
+      name: Research Habitation
+    - type: Transform
+      pos: 182.5,38.5
+      parent: 1
+  - uid: 17053
+    components:
+    - type: MetaData
+      name: Research Hab Interior
+    - type: Transform
+      pos: 196.5,14.5
+      parent: 1
+  - uid: 17054
+    components:
+    - type: MetaData
+      name: Disposals
+    - type: Transform
+      pos: 197.5,89.5
+      parent: 1
+  - uid: 17055
+    components:
+    - type: MetaData
+      name: Colony Garage
+    - type: Transform
+      pos: 151.5,82.5
+      parent: 1
+  - uid: 17056
+    components:
+    - type: MetaData
+      name: Command Centre
+    - type: Transform
+      pos: 116.5,119.5
+      parent: 1
+  - uid: 17057
+    components:
+    - type: MetaData
+      name: Church
+    - type: Transform
+      pos: 116.5,133.5
+      parent: 1
+  - uid: 17058
+    components:
+    - type: MetaData
+      name: Morgue
+    - type: Transform
+      pos: 127.5,137.5
+      parent: 1
+  - uid: 17059
+    components:
+    - type: MetaData
+      name: Canteen
+    - type: Transform
+      pos: 139.5,142.5
+      parent: 1
+  - uid: 17060
+    components:
+    - type: MetaData
+      name: B-Ball Court
+    - type: Transform
+      pos: 135.5,148.5
+      parent: 1
+  - uid: 17061
+    components:
+    - type: MetaData
+      name: Security
+    - type: Transform
+      pos: 156.5,132.5
+      parent: 1
+  - uid: 17062
+    components:
+    - type: MetaData
+      name: Power Substation
+    - type: Transform
+      pos: 180.5,138.5
+      parent: 1
+  - uid: 17063
+    components:
+    - type: MetaData
+      name: Underground Security Armory
+    - type: Transform
+      pos: 170.5,153.5
+      parent: 1
+  - uid: 17064
+    components:
+    - type: MetaData
+      name: Aurora Medical Clinic
+    - type: Transform
+      pos: 194.5,146.5
       parent: 1
 - proto: RMCMaskRebreather
   entities:

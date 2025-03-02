@@ -423,6 +423,28 @@
     state: nesart_onan
   - type: PatronFigurine
     id: 0e3c7afc-4366-48a1-af0c-a9a8c1ecf0e6
+  - type: Item
+    size: Small
+  - type: Drink
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:SpillBehavior { }
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: RMCFlask
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -478,17 +500,6 @@
     state: the_soil_of_martyrs
   - type: PatronFigurine
     id: 7486e344-c4b1-4d84-a3a8-8e8c94aa3c7e
-
-- type: entity
-  parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronSethSleeper
-  name: Seth Sleeper figurine
-  description: "The type of guy to bring a pillow to a gunfight."
-  components:
-  - type: Sprite
-    state: seth_sleeper
-  - type: PatronFigurine
-    id: 909c243e-6fb8-42ed-a477-d48571fccff2
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -1166,3 +1177,14 @@
     state: flaps_conflag_moth
   - type: PatronFigurine
     id: 3a452032-fcc9-4744-adb3-65af5e68cb2c
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSethXXiao
+  name: Seth 'X' Xiao figurine
+  description: "X marks the spot…right between the eyes."
+  components:
+  - type: Sprite
+    state: seth_x_xiao
+  - type: PatronFigurine
+    id: 909c243e-6fb8-42ed-a477-d48571fccff2

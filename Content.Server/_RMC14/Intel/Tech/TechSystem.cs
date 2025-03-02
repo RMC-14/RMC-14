@@ -35,6 +35,7 @@ public sealed class ServerTechSystem : EntitySystem
 
     private void OnTechCryoMarines(TechCryoMarinesEvent ev)
     {
+        // TODO RMC14 this should spawn you as your character but with random name
         SpawnCryo(_cryoMarinesPurchased ? FireteamLeaderProto : SquadLeaderProto, 1);
         SpawnCryo(CombatTechProto, 1);
         SpawnCryo(HospitalCorpsmanProto, 1);

@@ -93,11 +93,12 @@
   id: RMCLockerGun
   name: gun cabinet
   description: It's an immobile card-locked storage unit.
+  suffix: Colony
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/armorylocker.rsi
   - type: AccessReader
-    access: [["CMAccessArmory"]]
+    access: [["CMAccessColonyArmory"]]
   - type: Destructible
     thresholds: []
   - type: EntityStorageCloseOnMapInit

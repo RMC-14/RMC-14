@@ -299,6 +299,9 @@
     - state: "normal-unshaded"
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessCombatTechPrep"
+    hackable: true
     jobs:
     - CMCombatTech
     sections:

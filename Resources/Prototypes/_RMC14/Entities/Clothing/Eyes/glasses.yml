@@ -147,7 +147,7 @@
 - type: entity
   parent: ClothingEyesBase
   id: RMCGlassesMarineRpg # TODO make this actually prescription
-  name: Marine RPG glasses
+  name: marine RPG glasses
   description: The Corps may call them Regulation Prescription Glasses but you know them as Rut Prevention Glasses.
   components:
   - type: Item
@@ -190,6 +190,16 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bimex_black_glasses.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/bimex_black_glasses.rsi
+
+- type: entity
+  parent: RMCGlassesMarineRpg
+  id: RMCGlassesMarineRpgOld
+  name: old marine RPG glasses
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/old_rpg_glasses.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/old_rpg_glasses.rsi
 
 - type: entity
   parent: ClothingEyesBase
@@ -241,7 +251,7 @@
   parent: RMCGogglesBallistic
   id: RMCGogglesBallisticRed # TODO prescription variant
   name: red marine ballistic goggles
-  description: Standard issue USCM goggles. While commonly found mounted atop M10 pattern helmets, they are also capable of preventing insects, dust, and other things from getting into one's eyes. This one has scarlet colored day lenses.
+  description: Standard issue UNMC goggles. While commonly found mounted atop M10 pattern helmets, they are also capable of preventing insects, dust, and other things from getting into one's eyes. This one has scarlet colored day lenses.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/red_ballistic_goggles.rsi
@@ -256,7 +266,7 @@
   parent: RMCGogglesBallistic
   id: RMCGogglesBallisticBlue # TODO prescription variant
   name: red marine ballistic goggles
-  description: Standard issue USCM goggles. While commonly found mounted atop M10 pattern helmets, they are also capable of preventing insects, dust, and other things from getting into one's eyes. This one has blue colored day lenses.
+  description: Standard issue UNMC goggles. While commonly found mounted atop M10 pattern helmets, they are also capable of preventing insects, dust, and other things from getting into one's eyes. This one has blue colored day lenses.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/blue_ballistic_goggles.rsi
@@ -267,7 +277,7 @@
   parent: RMCGogglesBallistic
   id: RMCGogglesBallisticPurple # TODO prescription variant
   name: purple marine ballistic goggles
-  description: Standard issue USCM goggles. While commonly found mounted atop M10 pattern helmets, they are also capable of preventing insects, dust, and other things from getting into one's eyes. This one has purple colored day lenses.
+  description: Standard issue UNMC goggles. While commonly found mounted atop M10 pattern helmets, they are also capable of preventing insects, dust, and other things from getting into one's eyes. This one has purple colored day lenses.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/purple_ballistic_goggles.rsi
@@ -282,7 +292,7 @@
   parent: RMCGogglesBallistic
   id: RMCGogglesBallisticYellow # TODO prescription variant
   name: yellow marine ballistic goggles
-  description: Standard issue USCM goggles. While commonly found mounted atop M10 pattern helmets, they are also capable of preventing insects, dust, and other things from getting into one's eyes. This one has yellow colored day lenses.
+  description: Standard issue UNMC goggles. While commonly found mounted atop M10 pattern helmets, they are also capable of preventing insects, dust, and other things from getting into one's eyes. This one has yellow colored day lenses.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/yellow_ballistic_goggles.rsi
@@ -297,7 +307,7 @@
   parent: RMCGogglesBallistic
   id: RMCGogglesBallisticPolarizedBlue # TODO prescription variant
   name: M1A1 marine polarized ballistic goggles
-  description: Newer issue USCM goggles. While commonly found mounted atop M10 pattern helmets, they are also capable of preventing insects, dust, and other things from getting into one's eyes. This version has larger polarized lenses.
+  description: Newer issue UNMC goggles. While commonly found mounted atop M10 pattern helmets, they are also capable of preventing insects, dust, and other things from getting into one's eyes. This version has larger polarized lenses.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/blue_polarized_ballistic_goggles.rsi
@@ -312,7 +322,7 @@
   parent: RMCGogglesBallistic
   id: RMCGogglesBallisticPolarizedOrange # TODO prescription variant
   name: M1A1 marine polarized ballistic goggles
-  description: Newer issue USCM goggles. While commonly found mounted atop M10 pattern helmets, they are also capable of preventing insects, dust, and other things from getting into one's eyes. This version has larger polarized lenses.
+  description: Newer issue UNMC goggles. While commonly found mounted atop M10 pattern helmets, they are also capable of preventing insects, dust, and other things from getting into one's eyes. This version has larger polarized lenses.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/orange_polarized_ballistic_goggles.rsi
@@ -348,7 +358,7 @@
   parent: RMCGogglesBallistic
   id: RMCGogglesM1A1BallisticBlue # TODO prescription variant
   name: blue marine ballistic goggles
-  description: Standard issue USCM goggles. While commonly found mounted atop M10 pattern helmets, they are also capable of preventing insects, dust, and other things from getting into one's eyes. This one has blue colored day lenses.
+  description: Standard issue UNMC goggles. While commonly found mounted atop M10 pattern helmets, they are also capable of preventing insects, dust, and other things from getting into one's eyes. This one has blue colored day lenses.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles_blue.rsi

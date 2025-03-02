@@ -17,12 +17,12 @@
 
 - type: entity
   parent: CMEncryptionKey
-  id: RMCEncryptionKeyFreelancer
-  name: freelancer encryption Key
+  id: RMCEncryptionKeyDukes
+  name: duke encryption Key
   components:
   - type: EncryptionKey
     channels:
-    - MarineCommon # TODO RMC14 add Freelancer (Dutch) channel
+    - MarineCommon # TODO RMC14 add Freelancer (Duke) channel
     - Colony
     defaultChannel: Colony
   - type: Sprite

@@ -21,7 +21,7 @@
   description: A machine printed circuit board for an autolathe
   components: # TODO RMC14 autolathe
     - type: MachineBoard
-      prototype: CMAutolathe
+      prototype: RMCAutolatheEmpty
 #      requirements:
 #        MatterBin: 3
 #        Manipulator: 1

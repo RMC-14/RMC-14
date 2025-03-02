@@ -391,6 +391,10 @@
     whitelist:
       tags:
       - CMRollerBed
+  - type: RMCBuckleDrawDepth
+    buckleDepth: Mobs
+  - type: RMCBuckleOffset
+    offset: 0, 0.5
 
 - type: entity
   abstract: true

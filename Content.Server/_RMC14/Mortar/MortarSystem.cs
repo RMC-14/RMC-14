@@ -117,10 +117,12 @@ public sealed class MortarSystem : SharedMortarSystem
             return false;
         }
 
-        var deviation = shell.Comp.PlanetDeviation;
-        var xDeviation = _random.Next(-deviation, deviation + 1);
-        var yDeviation = _random.Next(-deviation, deviation + 1);
-        coordinates = coordinates.Offset(new Vector2(xDeviation, yDeviation));
+        if (mortar.Comp.FireRandomOffset is { Length: > 0 } fireRandomOffset)
+        {
+            var xDeviation = _random.Pick(fireRandomOffset);
+            var yDeviation = _random.Pick(fireRandomOffset);
+            coordinates = coordinates.Offset(new Vector2(xDeviation, yDeviation));
+        }
 
         if (_container.TryGetContainer(mortar, mortar.Comp.ContainerId, out var container) &&
             !_container.CanInsert(shell, container))

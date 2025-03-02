@@ -9,7 +9,6 @@
       Brute:
         path:
           "/Audio/Weapons/dodgeball.ogg"
-  - type: Anchorable
   - type: InteractionOutline
   - type: PlaceableSurface
   - type: Sprite

@@ -47,10 +47,6 @@
   - type: ActivatableUI
     key: enum.ChemMasterUiKey.Key
   - type: ActivatableUIRequiresPower
-  - type: UserInterface
-    interfaces:
-      enum.ChemMasterUiKey.Key:
-        type: ChemMasterBoundUserInterface
   - type: ApcPowerReceiver
     powerLoad: 250
     needsPower: false # TODO RMC14 power
@@ -82,9 +78,6 @@
           tags:
           - Bottle
           - PillCanister
-  - type: SolutionContainerManager
-    solutions:
-      buffer: {}
   - type: GuideHelp
     guides:
     - Chemicals
@@ -92,8 +85,6 @@
   - type: RequiresSkill
     skills:
       RMCSkillMedical: 3
-  - type: ApcPowerReceiver
-    needsPower: false # TOOD RMC14 power
   - type: ActivatableUIBlacklist
     blacklist:
       components:
@@ -104,3 +95,7 @@
         type: ChemMasterBoundUserInterface
       enum.ChangePillBottleUIKey.Key:
         type: RMCChangePillBottleColorBui
+  - type: SolutionContainerManager
+    solutions:
+      buffer:
+        maxVol: 500

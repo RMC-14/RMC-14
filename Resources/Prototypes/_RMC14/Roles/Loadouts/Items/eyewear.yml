@@ -21,6 +21,13 @@
     - RMCGlassesMarineRpg
 
 - type: loadout
+  id: GlassesRPGRMCOld
+  cost: 2
+  storage:
+    back:
+    - RMCGlassesMarineRpgOld
+
+- type: loadout
   id: GlassesPrescriptionRMC
   cost: 2
   storage:

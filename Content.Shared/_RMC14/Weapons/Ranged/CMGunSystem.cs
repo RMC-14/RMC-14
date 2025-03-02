@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Marines.Orders;
 using Content.Shared._RMC14.Marines.Skills;
@@ -30,11 +31,13 @@ using Content.Shared.Whitelist;
 using Content.Shared.Wieldable;
 using Content.Shared.Wieldable.Components;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
@@ -47,14 +50,15 @@ public sealed class CMGunSystem : EntitySystem
     [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedProjectileSystem _projectile = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly ItemSlotsSystem _slots = default!;
+    [Dependency] private readonly INetConfigurationManager _netConfig = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedProjectileSystem _projectile = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly ItemSlotsSystem _slots = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -407,8 +411,17 @@ public sealed class CMGunSystem : EntitySystem
         if (_timing.CurTime < userDelay.LastPBAt + userDelay.TimeBetweenPBs)
             return;
 
-        if (gunComp.SelectedMode == SelectiveFire.FullAuto && gunComp.Target.Value == user.Owner)
-            return;
+        if (gunComp.Target.Value == user.Owner)
+        {
+            if (gunComp.SelectedMode == SelectiveFire.FullAuto)
+                return;
+
+            if (TryComp(user, out ActorComponent? actor) &&
+                !_netConfig.GetClientCVar(actor.PlayerSession.Channel, RMCCVars.RMCDamageYourself))
+            {
+                return;
+            }
+        }
 
         foreach (var projectile in args.FiredProjectiles)
         {

@@ -47,6 +47,7 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Medical skill" Text="Allows more advanced medical procedures and increases their overall speed" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno Queen" Text="Head caste of the xenonids" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="LV-759 Hybrisa Prospera planet" Text="A large city map from cmss13 by Zenith, mikoka wei, Drathek, Nanu, Cuberound, Almings, Crowford, Blundir, dimdimich1996, being ported to RMC-14 by Noctyrn." />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Ravager" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Marine squad orders" Text="The move, focus and hold orders. These are orders that specific marine roles can use to give a temporary buff to every marine around them" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Weapon attachments" Text="Each weapon will be able to be customized with different attachments, changing the weapon's stats" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Burrower" Text="Lay the foundations for resin traps in strategic locations or the Hive's flanks. Flank your way around the map with the tunnel ability and dig tunnels to allow for quick transportation of fellow Aliens from the hive to the frontlines" />
@@ -91,7 +92,6 @@
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Charger Crusher strain" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Oppressor Praetorian strain" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Trapper Boiler strain" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Ravager" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Berserker Ravager strain" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Hedgehog Ravager strain" />
                 </BoxContainer>
@@ -103,7 +103,7 @@
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Organ damage" Text="Caused by physical damage to unarmored parts, moving with unsplinted fractures, and overdoses." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Clone damage and cryo cells" Text="Clone damage is rarely caused by some chemicals, cryo cells treats this kind of damage." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Autodoc and body scanners" Text="Automatically but very inefficiently treats marines in the medbay." />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Vehicles, the tank and the ARC" Text="Driveable vehicles such as the colony van, which can be repaired. The tank unlocks at 300 players for the marines." />
+                    <controls:RoadmapItem ItemState="Planned" HeaderText="Vehicles, the tank and the ARC" Text="Driveable vehicles such as the colony van, which can be repaired. The tank unlocks at 200 players for the marines." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Mounted Weapons" Text="Mounted heavy machine guns are placeable machine guns with a high ammo count, usually placed behind barricades" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Specialist's AMR Kit" Text="Anti-materiel rifle that deals high burst damage and briefly stuns the target." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Specialist's Pyrotechnician Kit" Text="Flamethrower with special kinds of fuel." />

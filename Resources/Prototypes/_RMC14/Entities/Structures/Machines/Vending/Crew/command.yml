@@ -352,6 +352,7 @@
       - id: RMCSunglassesBig
       - id: RMCGlassesAviators
       - id: RMCGlassesMarineRpg
+      - id: RMCGlassesMarineRpgOld
     - name: Service
       entries:
       - id: CMJumpsuitCOService
@@ -406,7 +407,7 @@
       - id: CMBackpackCommand
       #- id: CMSatchelCommandSecure # TODO RMC14 Secure Satchel (ID LOCK)
       - id: RMCBackpackRTO
-      - id: CMSatchelMarineIntel 
+      - id: CMSatchelMarineIntel
     - name: Combat Equipment
       takeAll: CMCombatEquipment
       entries:
@@ -440,7 +441,7 @@
         name: M276 pattern security rig (Full)
       - id: CMBeltMedicalFilled
         name: M276 pattern medical storage rig (Full)
-        recommended: true 
+        recommended: true
       - id: CMBeltMedicBagFilled
         name: M276 pattern lifesaver bag (Full)
       - id: CMBeltMarine
@@ -459,7 +460,7 @@
         recommended: true
       - id: RMCPouchMedkit
       - id: RMCPouchAutoinjectorFill
-        recommended: true 
+        recommended: true
       - id: RMCPouchGeneralLarge
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchMagazineLarge
@@ -557,7 +558,7 @@
         points: 15
     - name: Helmet Visors # TODO RMC14 Port Helmet Visors
       entries:
-      - id: RMCVisorNightVision 
+      - id: RMCVisorNightVision
         points: 10
     - name: Underbarrel Attachments
       entries:
@@ -583,7 +584,7 @@
         points: 15
       - id: RMCAttachmentSuppressor
         points: 15
-        
+
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel

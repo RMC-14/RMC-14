@@ -96,7 +96,7 @@
 - type: entity
   parent: CMPlushieBase
   id: CMPlushieRunnerBeret
-  name: XX-121 therapy plush
+  name: XX therapy plush
   description: Don't be sad! Be glad (that you're alive)!
   components:
   - type: Sprite

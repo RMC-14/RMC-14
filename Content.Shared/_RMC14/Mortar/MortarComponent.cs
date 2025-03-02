@@ -87,4 +87,7 @@ public sealed partial class MortarComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId Drop = "RMCMortarKit";
+
+    [DataField, AutoNetworkedField]
+    public int[] FireRandomOffset = new[] { -1, 0, 0, 1 };
 }
