@@ -97,7 +97,7 @@
   - type: Tag
     tags:
     - CMMagazineSmg
-    - CMMagazineSMGP90
+    - RMCMagazineSMGP90
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
