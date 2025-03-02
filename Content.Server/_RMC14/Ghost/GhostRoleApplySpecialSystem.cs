@@ -1,5 +1,7 @@
+using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Marines.Roles.Ranks;
 using Content.Server.Ghost.Roles.Components;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Roles;
 using Content.Shared.Access.Components;
@@ -17,6 +19,7 @@ public sealed partial class GhostRoleApplySpecialSystem : EntitySystem
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!;
     [Dependency] private readonly RankSystem _rank = default!;
+    [Dependency] private readonly MarineSystem _marine = default!;
 
     public override void Initialize()
     {
@@ -74,6 +77,11 @@ public sealed partial class GhostRoleApplySpecialSystem : EntitySystem
                 }
             }
         }
+
+        if (HasComp<MarineComponent>(ent) &&
+            job.Icon != "CMJobIconEmpty" &&
+            _prototype.TryIndex(job.Icon, out var icon))
+            _marine.SetMarineIcon(ent, icon.Icon);
 
         RemComp<GhostRoleApplySpecialComponent>(ent);
     }
