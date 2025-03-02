@@ -129,6 +129,12 @@ public sealed partial class EggMorpherSystem : EntitySystem
             return;
         }
 
+        if (!HasComp<ParasiteAIComponent>(used))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-awake-child", ("parasite", used)), user, user, PopupType.SmallCaution);
+            return;
+        }
+
         if (!_mobState.IsAlive(used))
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-dead-child"), eggMorpher, user);
