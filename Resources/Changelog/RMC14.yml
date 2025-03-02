@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: FungiFellow
-  changes:
-  - message: All current Survivor weapons have had their stats adjusted
-    type: Tweak
-  - message: The AR10 can now fit attachments
-    type: Fix
-  id: 905
-  time: '2024-10-31T09:24:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4605
 - author: Vermidia
   changes:
   - message: Fixed Suicide killing larva in the host
@@ -5151,5 +5142,18 @@
   id: 1406
   time: '2025-03-01T13:38:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5725
+- author: noctyrnal
+  changes:
+  - message: Added Keffiyehs, Smocks and Neckerchiefs.
+    type: Add
+  - message: Added Multiple new Goggles and Glasses.
+    type: Add
+  - message: Added Most Helmet Garbs.
+    type: Add
+  - message: Pride Pins and Welding Goggle can now be put onto your helmets.
+    type: Tweak
+  id: 1407
+  time: '2025-03-02T00:56:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5744
 Name: RMC14
 Order: -1
