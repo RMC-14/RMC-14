@@ -80,7 +80,7 @@
       rmc-aslot-underbarrel: 0.32, -0.31
   - type: Tag
     tags:
-    - WeaponShotgunHG3712
+    - RMCWeaponShotgunHG3712
     - RMCWeaponShotgun
 
 - type: Tag
