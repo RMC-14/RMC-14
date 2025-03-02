@@ -21,7 +21,6 @@
     state: icon
   - type: Item
     sprite: _RMC14/Objects/Clothing/HelmetGarb/nv_goggles.rsi
-    state: icon
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/nv_goggles.rsi
