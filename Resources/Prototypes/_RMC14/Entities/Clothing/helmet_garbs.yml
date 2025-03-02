@@ -69,7 +69,6 @@
     state: icon
   - type: Item
     sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_desert.rsi
-    state: icon
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_desert.rsi
@@ -85,7 +84,6 @@
     state: icon
   - type: Item
     sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_jungle.rsi
-    state: icon
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_jungle.rsi
@@ -104,7 +102,6 @@
     state: icon
   - type: Item
     sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover.rsi
-    state: icon
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover.rsi
@@ -120,7 +117,6 @@
     state: icon
   - type: Item
     sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover_urban.rsi
-    state: icon
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover_urban.rsi
@@ -136,7 +132,6 @@
     state: icon
   - type: Item
     sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover_desert.rsi
-    state: icon
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover_desert.rsi
@@ -152,7 +147,6 @@
     state: icon
   - type: Item
     sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover_jungle.rsi
-    state: icon
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover_jungle.rsi
@@ -171,7 +165,6 @@
     state: icon
   - type: Item
     sprite: _RMC14/Objects/Clothing/HelmetGarb/buckshot.rsi
-    state: icon
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/buckshot.rsi
@@ -188,7 +181,6 @@
     state: icon
   - type: Item
     sprite: _RMC14/Objects/Clothing/HelmetGarb/flechette.rsi
-    state: icon
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/flechette.rsi
@@ -205,7 +197,6 @@
     state: icon
   - type: Item
     sprite: _RMC14/Objects/Clothing/HelmetGarb/slug.rsi
-    state: icon
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/slug.rsi
@@ -222,7 +213,6 @@
     state: icon
   - type: Item
     sprite: _RMC14/Objects/Clothing/HelmetGarb/cartridge.rsi
-    state: icon
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/cartridge.rsi
@@ -241,7 +231,6 @@
     state: icon
   - type: Item
     sprite: _RMC14/Objects/Clothing/HelmetGarb/gasmask.rsi
-    state: icon
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/gasmask.rsi
@@ -260,7 +249,6 @@
     state: icon
   - type: Item
     sprite: _RMC14/Objects/Clothing/HelmetGarb/gun_oil.rsi
-    state: icon
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/gun_oil.rsi
@@ -277,7 +265,6 @@
     state: icon
   - type: Item
     sprite: _RMC14/Objects/Clothing/HelmetGarb/rosary.rsi
-    state: icon
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/rosary.rsi
@@ -294,7 +281,6 @@
     state: icon
   - type: Item
     sprite: _RMC14/Objects/Clothing/HelmetGarb/prescription.rsi
-    state: icon
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/prescription.rsi
@@ -311,7 +297,6 @@
     state: icon
   - type: Item
     sprite: _RMC14/Objects/Clothing/HelmetGarb/trimmed_barb_wire.rsi
-    state: icon
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/trimmed_barb_wire.rsi
