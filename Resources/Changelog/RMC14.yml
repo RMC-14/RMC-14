@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed scout rifle's damage multiplier being higher than intended
-    type: Fix
-  id: 907
-  time: '2024-10-31T21:35:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4643
 - author: Dutch-VanDerLinde
   changes:
   - message: Added sniper specialist's prepare position ability. This will allow them
@@ -5155,5 +5148,12 @@
   id: 1408
   time: '2025-03-02T01:56:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5709
+- author: Alekshhh
+  changes:
+  - message: Updated the sprites for fast and sticky resin.
+    type: Tweak
+  id: 1409
+  time: '2025-03-02T05:37:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5774
 Name: RMC14
 Order: -1
