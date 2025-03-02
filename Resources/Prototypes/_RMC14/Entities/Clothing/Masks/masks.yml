@@ -196,3 +196,38 @@
     sprite: _RMC14/Objects/Clothing/Mask/skull_coif.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/skull_coif.rsi
+
+- type: entity
+  parent: CMBaseMask
+  id: RMCMaskSWAT
+  name: SWAT mask
+  description: A close-fitting tactical mask that can be connected to an air supply.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/swat_mask.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/swat_mask.rsi
+    slots:
+    - Mask
+  - type: Item
+    size: Small
+
+- type: entity
+  parent: CMBaseMask
+  id: RMCVisorSWAT
+  name: TC2 CMB riot shield
+  description: Yellowish protective glass piece, can be lifted up when needed, makes you see everything in yellow.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/swat_shield.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/swat_shield.rsi
+    slots:
+    - Mask
+  - type: Item
+    size: Small
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Mask/swat_shield.rsi
+      state: helmet
+
