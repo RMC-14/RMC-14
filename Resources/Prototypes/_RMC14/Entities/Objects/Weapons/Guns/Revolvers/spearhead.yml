@@ -199,7 +199,7 @@
 
 - type: entity
   parent: CMBulletBase
-  id: CMBulletRevolver357Hollowpoint
+  id: RMCBulletRevolver357Hollowpoint
   name: bullet (.357) Hollowpoint
   components:
   - type: Projectile
