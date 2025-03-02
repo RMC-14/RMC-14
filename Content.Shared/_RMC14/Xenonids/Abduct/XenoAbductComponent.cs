@@ -41,4 +41,7 @@ public sealed partial class XenoAbductComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan StunTime = TimeSpan.FromSeconds(2.6);
+
+    [DataField, AutoNetworkedField]
+    public int MaxTargets = 10;
 }
