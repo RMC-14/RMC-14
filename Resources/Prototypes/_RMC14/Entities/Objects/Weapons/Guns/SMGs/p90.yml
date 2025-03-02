@@ -103,7 +103,7 @@
     whitelist:
       tags:
       - RMCCartridge57x28mm
-    proto: CMCartridge57×28mm
+    proto: RMCCartridge57x28mm
     capacity: 50
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/p90.rsi
