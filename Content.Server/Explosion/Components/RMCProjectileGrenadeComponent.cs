@@ -23,7 +23,6 @@ public sealed partial class ProjectileGrenadeComponent
     [DataField]
     public float ReboundAngle = 180;
 
-
     /// <summary>
     ///     The angle of the projectile spray
     /// </summary>
