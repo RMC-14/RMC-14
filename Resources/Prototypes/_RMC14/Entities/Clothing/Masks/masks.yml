@@ -196,3 +196,61 @@
     sprite: _RMC14/Objects/Clothing/Mask/skull_coif.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/skull_coif.rsi
+
+# Keffiyehs
+
+- type: entity
+  parent: CMMaskCoif
+  id: RMCMaskKeffiyeh
+  name: keffiyeh
+  description: A traditional headscarf worn for protection from the elements and to conceal the face. Typically made of cotton, it can provide shade from the sun, guard against dust, and serve as camouflage in arid environments. Often worn by soldiers and civilians alike in desert and hostile regions, the keffiyeh has become a symbol of cultural identity and resilience.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh.rsi
+
+- type: entity
+  parent: RMCMaskKeffiyeh
+  id: RMCMaskKeffiyehBlack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_black.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_black.rsi
+
+- type: entity
+  parent: RMCMaskKeffiyeh
+  id: RMCMaskKeffiyehBlue
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_blue.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_blue.rsi
+
+- type: entity
+  parent: RMCMaskKeffiyeh
+  id: RMCMaskKeffiyehGreen
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_green.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_green.rsi
+
+- type: entity
+  parent: RMCMaskKeffiyeh
+  id: RMCMaskKeffiyehWhite
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_white.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_white.rsi
+
+- type: entity
+  parent: RMCMaskKeffiyeh
+  id: RMCMaskKeffiyehRed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_red.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_red.rsi
