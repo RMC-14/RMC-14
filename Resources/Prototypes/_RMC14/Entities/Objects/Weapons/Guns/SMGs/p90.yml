@@ -128,7 +128,7 @@
   - type: Tag
     tags:
     - Cartridge
-    - CMCartridge57×28mm
+    - RMCCartridge57x28mm
   - type: CartridgeAmmo
     proto: CMBullet57×28mm
 
