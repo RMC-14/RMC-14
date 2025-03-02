@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added figurines for Gives-The-Fish, Jester-Who-Helps, Flynn 'Wendigo'
-      Suziko, and Julie 'Sniper' Walker.
-    type: Add
-  id: 919
-  time: '2024-11-02T04:26:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4652
 - author: Rainbeon
   changes:
   - message: Mobs that are knocked down can no longer be dragged through tables, window
@@ -5286,5 +5278,15 @@
   id: 1420
   time: '2025-03-02T19:14:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5778
+- author: DrSmugleaf
+  changes:
+  - message: Fixed the tactical map show area labels setting not saving.
+    type: Fix
+  - message: Fixed Oppressor Praetorian abduct not having a max cap of targets. It
+      can now hit a maximum of 10 marines at once.
+    type: Fix
+  id: 1421
+  time: '2025-03-02T21:23:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5788
 Name: RMC14
 Order: -1
