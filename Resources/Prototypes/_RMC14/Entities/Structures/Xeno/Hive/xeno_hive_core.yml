@@ -1,5 +1,6 @@
 ﻿- type: entity
   id: HiveCoreXeno
+  parent: BaseHiveStructure
   name: hive core # TODO RMC14 allow other structures to be built
   description: A giant pulsating mound of mass. It looks very much alive.
   components: # TODO RMC14 block ob
@@ -25,13 +26,8 @@
   - type: CollisionWake
     enabled: false
   - type: Sprite
-    sprite: _RMC14/Structures/Xenos/hive_core.rsi
+    sprite: _RMC14/Structures/Xenos/hive_structures.rsi
     state: core
-  - type: InteractionOutline
-  - type: Clickable
-  - type: Damageable
-    damageContainer: StructuralXeno
-    damageModifierSet: Resin
   - type: Destructible
     thresholds:
     - trigger:
@@ -43,10 +39,14 @@
   - type: StepTrigger
     requiredTriggeredSpeed: 0
     intersectRatio: 0.1
-  - type: RMCNightVisionVisible
-    priority: -1
-    transparency: 0.2
+  - type: HivePylon
   - type: HiveCore
+  - type: XenoWeedsSpreading
+  - type: XenoWeeds
+    range: 7
+    spawns: XenoHiveWeeds
+    level: 3
+    blockOtherWeeds: true
   - type: GhostRole
     name: roles-lesser-drone-name
     description: roles-lesser-drone-description
@@ -56,7 +56,7 @@
     availableTakeovers: 2
     deleteOnSpawn: false
     prototype: CMXenoLesserDrone
-  - type: HiveConstructionUnique
+  - type: HiveConstructionLimited
     id: HiveCoreXeno
   - type: RoofingEntity
     range: 10
@@ -72,21 +72,15 @@
 
 - type: entity
   id: HiveCoreXenoConstructionNode
+  parent: BaseHiveStructureNode
   name: hive core
   description: A strange wriggling lump. Looks like a marker for something.
   suffix: Construction
   components:
-  - type: Transform
-    anchored: true
   - type: Sprite
-    sprite: _RMC14/Structures/Xenos/hive_core.rsi
+    sprite: _RMC14/Structures/Xenos/hive_structures.rsi
     state: core
     color: '#FFFFFFAA'
-  - type: InteractionOutline
-  - type: Clickable
-  - type: Damageable
-    damageContainer: StructuralXeno
-    damageModifierSet: Resin
   - type: Destructible
     thresholds:
     - trigger:
@@ -95,14 +89,50 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: RMCNightVisionVisible
-    priority: -1
-    transparency: 0.1
   - type: HiveConstructionNode
     initialPlasmaCost: 400
     plasmaCost: 1000
     spawn: HiveCoreXeno
-  - type: HiveConstructionUnique
+  - type: HiveConstructionLimited
     id: HiveCoreXeno
   - type: WarpPoint
     location: hive core
+
+
+- type: entity
+  id: HivePylonXeno
+  parent: BaseHiveStructure
+  name: hive pylon
+  description: A towering spike of resin. Its base pulsates with large tendrils.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/hive_structures.rsi
+    state: pylon
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: HivePylon
+  - type: XenoWeedsSpreading
+  - type: XenoWeeds
+    range: 7
+    spawns: XenoHiveWeeds
+    level: 3
+    blockOtherWeeds: true
+  - type: GhostRole
+    name: roles-lesser-drone-name
+    description: roles-lesser-drone-description
+    raffle:
+      settings: short
+  - type: GhostRoleMobSpawner
+    availableTakeovers: 2
+    deleteOnSpawn: false
+    prototype: CMXenoLesserDrone
+  - type: HiveConstructionLimited
+    id: HivePylonXeno
+  - type: WarpPoint
+    location: hive pylon
