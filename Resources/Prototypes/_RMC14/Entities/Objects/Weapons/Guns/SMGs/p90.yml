@@ -134,7 +134,7 @@
 
 - type: entity
   parent: Bullet10x20mm
-  id: CMBullet57×28mm
+  id: RMCBullet57x28mm
   components:
   - type: Projectile
     damage:
