@@ -46,3 +46,9 @@
     offsets:
       rmc-aslot-rail: 0, 0.093
       rmc-aslot-stock: -0.56, 0.0
+  - type: Tag
+    tags:
+    - RMCWeaponLauncherM79
+
+- type: Tag
+  id: RMCWeaponLauncherM79

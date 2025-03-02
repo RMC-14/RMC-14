@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Server._RMC14.Dropship;
 using Content.Server.Popups;
 using Content.Shared._RMC14.Areas;
@@ -83,6 +83,12 @@ public sealed class MortarSystem : SharedMortarSystem
         if ((mortarCoordinates.Position - coordinates.Position).Length() < mortar.Comp.MinimumRange)
         {
             _popup.PopupEntity(Loc.GetString("rmc-mortar-target-too-close"), user, user, SmallCaution);
+            return false;
+        }
+
+        if ((mortarCoordinates.Position - coordinates.Position).Length() > mortar.Comp.MaximumRange)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-mortar-target-too-far"), user, user, SmallCaution);
             return false;
         }
 

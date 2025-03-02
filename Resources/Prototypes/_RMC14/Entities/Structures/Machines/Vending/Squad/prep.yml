@@ -324,12 +324,12 @@
       #  amount: 2
       - id: RMCBoxShotgunBreaching
         amount: 2
-      #- id: CMBatonSlugsHIRR
-      #  amount: 6
-      #- id: CMStarShellN74AGMS
-      #  amount: 4
-      #- id: CMHornetShellM74AGMS
-      #  amount: 4
+      - id: RMCBatonSlugHIRR
+        amount: 6
+      - id: RMCStarShellM74AGMS
+        amount: 4
+      - id: RMCHornetShellM74AGMS
+        amount: 4
 
 
 - type: entity
