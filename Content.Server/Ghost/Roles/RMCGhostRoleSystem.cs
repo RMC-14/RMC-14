@@ -17,7 +17,8 @@ public sealed class RMCGhostRoleSystem : EntitySystem
     /// </summary>
     private void OnGhostRoleRaffle(Entity<GhostRoleRaffleComponent> ent, ref GhostRoleRaffleEvent args)
     {
-        var timeUntilRequirement = Math.Clamp(args.RoundTimeRequirement - _gameTicker.RoundDuration().TotalSeconds, args.CountDown.TotalSeconds, args.RoundTimeRequirement);
+        var max = Math.Max(args.CountDown.TotalSeconds, args.RoundTimeRequirement);
+        var timeUntilRequirement = Math.Clamp(args.RoundTimeRequirement - _gameTicker.RoundDuration().TotalSeconds, args.CountDown.TotalSeconds, max);
         args.CountDown = args.CountDown += TimeSpan.FromSeconds(timeUntilRequirement);
         args.Handled = true;
     }
