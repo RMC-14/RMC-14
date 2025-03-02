@@ -70,10 +70,6 @@
     storedOffset: 3, 12
   - type: UserInterface
     interfaces:
-      enum.ChangePillBottleUIKey.Key:
-        type: RMCChangePillBottleColorBui
-        requireInputValidation: false
-        interactionRange: -1
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
   - type: Clothing

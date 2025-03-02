@@ -19,15 +19,15 @@
       takeAll: CMStandard
       entries:
       - id: RMCVendorBundleCrewLeader
-    - name: Squad Kit (CHOOSE 1, for yourself or your squad)
-      choices: { RMCSquadKit: 1 }
+    - name: Squad Kit (for yourself or your squad)
+      takeOne: RMCSquadKit
       entries:
       - id: RMCKitRifleM4SPR
       - id: RMCKitCM54C
-    #- id: CMM240PyrotechnicianSupportKit
+      - id: RMCKitPyroMini
     #- id: CMM2CHeavyMachineGun
     #- id: CMM56DHeavyMachineGun
-    #- id: CMM79GrenadeLauncher
+      - id: RMCM79Case
       - id: RMCMOU53Case
       - id: RMCCaseXM88
       - id: RMCKitEngineering
@@ -55,8 +55,8 @@
         points: 3
       - id: RMCMotionDetector
         points: 5
-    #- id: CMFultonDeviceStack
-    #  points: 5
+      - id: RMCFulton20
+        points: 5
     - name: Binoculars
       entries:
       - id: RMCRangefinder
@@ -86,9 +86,9 @@
         name: plasteel x10
         points: 7
         recommended: true
-    #- id: CMPlasticexplosive
-    #  points: 5
-    #  recommended: true
+      - id: RMCExplosivePlastic
+        points: 5
+        recommended: true
       - id: RMCExplosiveBreachingCharge
         points: 7
         recommended: true
@@ -112,14 +112,14 @@
     #  points: 18
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
-    #- id: CMM74AGM-FragAirburstPacketx3
-    #  points: 20
-    #- id: CMM74AGM-IncendiaryAirburstPacketx3
-    #  points: 20
-    #- id: CMM74AGM-SmokeAirburstPacketx3
-    #  points: 10
-    #- id: CMM74AGM-HornetAirburstPacketx3
-    #  points: 20
+      - id: RMCPacketGrenadeM74AGMFFilled
+        points: 20
+      - id: RMCPacketGrenadeM74AGMIFilled
+        points: 20
+      - id: RMCPacketGrenadeM74AGMSFilled
+        points: 10
+      - id: RMCPacketGrenadeM74AGMSHornetFilled
+        points: 20
     #- id: CMM20MineBoxx4mines
     #  points: 20
     #- id: CMM40MFHSMetalFoamGrenade
@@ -173,21 +173,21 @@
       - id: RMCMagazinePistolSU6
         points: 6
     - name: Special Ammunition
-      entries: [ ]
-    #- id: CMM240IncineratorTankNapthal
-    #  points: 3
+      entries:
+      - id: RMCTankFlamer
+        points: 3
     #- id: CMM240IncineratorTankB-Gel
     #  points: 3
     - name: Restricted Firearms
       entries:
-    #- id: CMM240IncineratorUnit
-    #  points: 18
+      - id: RMCCaseFlamer
+        points: 18
       - id: RMCGunCasePistolMK80
         points: 8
       - id: RMCGunCasePistolSmart
         points: 12
-    #- id: CMM79GrenadeLauncher
-    #  points: 18
+      - id: RMCM79Case
+        points: 18
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer
@@ -260,7 +260,7 @@
         recommended: true
       - id: RMCPouchFlareFilled
         name: Flare pouch (Full)
-      #- id: CMFuelTankStrapPouch
+      - id: RMCPouchFuelTank
       - id: RMCPouchGeneralLarge
         recommended: true
       #- id: CMSlingPouch
@@ -291,11 +291,11 @@
   description: Contains a laser designator, a pack of signal flares, a breaching charge and a fire extinguisher.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Explosives/satchel_charge.rsi # TODO RMC14 plastic explosives icon
+    sprite: _RMC14/Objects/Weapons/Explosives/plastic_explosives.rsi
     state: icon
   - type: CMVendorBundle
     bundle:
-    - RMCExplosiveBreachingCharge # TODO RMC14 plastic explosives
+    - RMCExplosivePlastic
     - RMCPackFlareCAS
     - RMCLaserDesignator
     - CMFireExtinguisher
@@ -357,3 +357,24 @@
     - id: RMCPouchConstructionFillLowGrade
     - id: RMCPouchElectronicsFill
 #    - id: RMCGogglesWelding # TODO RMC14 welding goggles
+
+- type: entity
+  parent: RMCKitBase
+  id: RMCKitPyroMini
+  name: m34 pyrotechnician support kit
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,11,1
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+  - type: StorageFill
+    contents:
+    - id: RMCBackpackFlamer
+    - id: RMCWeaponFlamer
+    - id: RMCTankFlamer # TODO RMC14 +1 b gel, -1 regular
+      amount: 3 # TODO RMC14 projectile nozzle
+    - id: CMFireExtinguisherPortable

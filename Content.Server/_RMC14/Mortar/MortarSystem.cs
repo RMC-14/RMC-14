@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Server._RMC14.Dropship;
 using Content.Server.Popups;
 using Content.Shared._RMC14.Areas;
@@ -86,6 +86,12 @@ public sealed class MortarSystem : SharedMortarSystem
             return false;
         }
 
+        if ((mortarCoordinates.Position - coordinates.Position).Length() > mortar.Comp.MaximumRange)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-mortar-target-too-far"), user, user, SmallCaution);
+            return false;
+        }
+
         if (!_rmcMap.TryGetTileDef(coordinates, out var def) ||
             def.ID == ContentTileDefinition.SpaceID)
         {
@@ -93,13 +99,13 @@ public sealed class MortarSystem : SharedMortarSystem
             return false;
         }
 
-        if (!_area.TryGetArea(coordinates, out var area, out _, out _))
+        if (!_area.TryGetArea(coordinates, out var area, out _))
         {
             _popup.PopupEntity(Loc.GetString("rmc-mortar-target-not-area"), user, user, SmallCaution);
             return false;
         }
 
-        if (area.LandingZone)
+        if (area.Value.Comp.LandingZone)
         {
             _popup.PopupEntity(Loc.GetString("rmc-mortar-target-is-lz"), user, user, SmallCaution);
             return false;

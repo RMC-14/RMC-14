@@ -1,4 +1,3 @@
-using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
 using Content.Shared.Body.Systems;
@@ -7,8 +6,10 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.Explosion;
 using Content.Shared.FixedPoint;
 using Content.Shared.Standing;
+using Content.Shared.Sticky.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -19,9 +20,8 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 {
     [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly IMapManager _map = default!;
+    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
@@ -37,7 +37,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
     {
         SubscribeLocalEvent<CMExplosionEffectComponent, CMExplosiveTriggeredEvent>(OnExplosionEffectTriggered);
 
-        SubscribeLocalEvent<RMCExplosiveDeleteWallsComponent, CMExplosiveTriggeredEvent>(OnDeleteWallsTriggered);
+        SubscribeLocalEvent<RMCExplosiveDeleteComponent, CMExplosiveTriggeredEvent>(OnDeleteWallsTriggered);
 
         SubscribeLocalEvent<ExplosionRandomResistanceComponent, GetExplosionResistanceEvent>(OnExplosionRandomResistanceGet);
 
@@ -53,7 +53,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         DoEffect(ent);
     }
 
-    private void OnDeleteWallsTriggered(Entity<RMCExplosiveDeleteWallsComponent> ent, ref CMExplosiveTriggeredEvent args)
+    private void OnDeleteWallsTriggered(Entity<RMCExplosiveDeleteComponent> ent, ref CMExplosiveTriggeredEvent args)
     {
         _walls.Clear();
         _entityLookup.GetEntitiesInRange(ent.Owner.ToCoordinates(), ent.Comp.Range, _walls);
@@ -61,6 +61,14 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         foreach (var wall in _walls)
         {
             QueueDel(wall);
+        }
+
+        if (ent.Comp.Whitelist != null &&
+            HasComp<StickyComponent>(ent) &&
+            Transform(ent).ParentUid is { Valid: true } parent &&
+            _entityWhitelist.IsWhitelistPass(ent.Comp.Whitelist, parent))
+        {
+            QueueDel(parent);
         }
     }
 

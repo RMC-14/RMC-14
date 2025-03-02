@@ -1,4 +1,4 @@
-﻿using Content.Shared.Alert;
+using Content.Shared.Alert;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -17,7 +17,7 @@ public sealed partial class XenoPlasmaComponent : Component
     public int MaxPlasma = 300;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan PlasmaTransferDelay = TimeSpan.FromSeconds(3);
+    public TimeSpan PlasmaTransferDelay = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier PlasmaTransferSound = new SoundCollectionSpecifier("XenoDrool");

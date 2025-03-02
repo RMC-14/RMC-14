@@ -70,6 +70,41 @@
     - RMCMaskScarfTan
 
 - type: loadout
+  id: NeckerchiefSquadRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskNeckerchiefSquad
+
+- type: loadout
+  id: NeckerchiefTanRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskNeckerchiefTan
+
+- type: loadout
+  id: NeckerchiefBlackRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskNeckerchiefBlack
+
+- type: loadout
+  id: NeckerchiefGrayRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskNeckerchiefGray
+
+- type: loadout
+  id: NeckerchiefGreenRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskNeckerchiefGreen
+
+- type: loadout
   id: TornScarfBlackRMC
   cost: 2
   storage:
@@ -112,6 +147,20 @@
     - RMCMaskTornScarfSnow
 
 - type: loadout
+  id: SmockRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskSmockBlack
+
+- type: loadout
+  id: SmockCamoRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskSmockCamo
+
+- type: loadout
   id: CoifGreenRMC
   cost: 2
   storage:
@@ -131,6 +180,48 @@
   storage:
     back:
     - RMCMaskCoifTan
+
+- type: loadout
+  id: KeffiyehRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskKeffiyeh
+
+- type: loadout
+  id: KeffiyehBlackRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskKeffiyehBlack
+
+- type: loadout
+  id: KeffiyehBlueRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskKeffiyehBlue
+
+- type: loadout
+  id: KeffiyehGreenRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskKeffiyehGreen
+
+- type: loadout
+  id: KeffiyehWhiteRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskKeffiyehWhite
+
+- type: loadout
+  id: KeffiyehRedRMC
+  cost: 2
+  storage:
+    back:
+    - RMCMaskKeffiyehRed
 
 - type: loadout
   id: BalaclavaSkullBlueRMC

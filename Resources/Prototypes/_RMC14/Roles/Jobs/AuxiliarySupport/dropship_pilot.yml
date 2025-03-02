@@ -44,6 +44,7 @@
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-dropship-pilot
+    - type: ViewIntelObjectives
 
 - type: startingGear
   id: CMGearPilotDropship
@@ -61,10 +62,7 @@
   - type: SpawnPoint
     job_id: CMPilotDropship
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: pilot
+    state: po_spawn
 
 - type: playTimeTracker
   id: CMJobPilotDropship

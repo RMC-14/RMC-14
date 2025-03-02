@@ -97,8 +97,15 @@ public sealed class StaffHelpUIController : UIController, IOnSystemChanged<Bwoin
         var other = false;
         foreach (var message in msg.Messages)
         {
-            if (message.Author != null && message.Author != _player.LocalUser)
+            if (!message.Create && !_messages.ContainsKey(message.Destination))
+                continue;
+
+            if (message.Create &&
+                message.Author != null &&
+                message.Author != _player.LocalUser)
+            {
                 other = true;
+            }
 
             if (IsMentor &&
                 _mentorWindow is not { IsOpen: true })

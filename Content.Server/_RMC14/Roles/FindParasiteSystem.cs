@@ -1,13 +1,12 @@
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Roles.FindParasite;
+using Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 using Content.Shared.Coordinates;
-using Content.Shared.Ghost;
 using Content.Shared.Verbs;
 using Robust.Shared.Console;
 using Robust.Shared.Network;
-using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Roles;
 
@@ -47,6 +46,7 @@ public sealed partial class FindParasiteSystem : EntitySystem
         var uiState = new FindParasiteUIState();
 
         var eggs = EntityQueryEnumerator<XenoEggComponent>();
+        var eggMorphers = EntityQueryEnumerator<EggMorpherComponent>();
         var parasiteThrowers = EntityQueryEnumerator<XenoParasiteThrowerComponent>();
 
         var spawners = new List<NetEntity>();
@@ -59,6 +59,16 @@ public sealed partial class FindParasiteSystem : EntitySystem
 
             var netEnt = _entities.GetNetEntity(eggEnt);
             spawners.Add(netEnt);
+        }
+
+        while (eggMorphers.MoveNext(out var eggMorpherEnt, out var eggMorpherComp))
+        {
+            if (eggMorpherComp.CurParasites <= eggMorpherComp.ReservedParasites ||
+                eggMorpherComp.CurParasites == 0)
+            {
+                continue;
+            }
+            spawners.Add(_entities.GetNetEntity(eggMorpherEnt));
         }
 
         while (parasiteThrowers.MoveNext(out var throwerEnt, out var parasiteThrower))
@@ -76,11 +86,9 @@ public sealed partial class FindParasiteSystem : EntitySystem
             var spawnerEnt = _entities.GetEntity(spawner);
             var name = MetaData(spawnerEnt).EntityName;
             var areaName = Loc.GetString("xeno-ui-default-area-name");
-            if (_areas.TryGetArea(spawnerEnt.ToCoordinates(), out AreaComponent? area, out _, out var areaEnt) &&
-                areaEnt is EntityUid)
-            {
-                areaName = MetaData(areaEnt.Value).EntityName;
-            }
+            if (_areas.TryGetArea(spawnerEnt.ToCoordinates(), out var area, out _))
+                areaName = Name(area.Value);
+
             name = Loc.GetString("xeno-ui-find-parasite-item",
                     ("itemName", name), ("areaName", areaName));
 

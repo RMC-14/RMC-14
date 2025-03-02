@@ -35,3 +35,15 @@
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/vehicle_seats.rsi
     state: chair
+
+- type: entity
+  parent: CMSeatBase
+  id: RMCSeatWhite
+  name: passenger seat
+  description: A sturdy chair with a brace that lowers over your body. Prevents being flung around in vehicle during crash being injured as a result. Fasten your seatbelts, kids! Fix with welding tool in case of damage.
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/vehicle_seats.rsi
+    state: vehicle_seat

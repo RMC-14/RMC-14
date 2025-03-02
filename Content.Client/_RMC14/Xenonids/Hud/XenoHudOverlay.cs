@@ -474,7 +474,8 @@ public sealed class XenoHudOverlay : Overlay
         _mobThresholds.TryGetDeadThreshold(uid, out var deadThresholdNullable, mobThresholds);
 
         string state;
-        if (_mobState.IsCritical(uid, mobState))
+        if (_mobState.IsCritical(uid, mobState) ||
+            (_mobState.IsAlive(uid) && critThresholdNullable != null && damageable.TotalDamage > critThresholdNullable))
         {
             if (critThresholdNullable is not { } critThreshold || deadThresholdNullable is not { } deadThreshold)
                 return;
@@ -589,5 +590,15 @@ public sealed class XenoHudOverlay : Overlay
 
         var position = new Vector2(xOffset, yOffset);
         handle.DrawTexture(texture, position);
+
+        if (comp.GenerationCap != null && comp.Current >= comp.GenerationCap)
+        {
+            var level2 = ContentHelpers.RoundToLevels(comp.GenerationCap.Value, max, 11);
+            var name2 = level2 > 0 ? $"{level2 * 10}" : "0";
+            var state2 = $"cap{name2}";
+            var icon2 = new Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_hud.rsi"), state2);
+            var texture2 = _sprite.GetFrame(icon2, _timing.CurTime);
+            handle.DrawTexture(texture2, position);
+        }
     }
 }

@@ -50,6 +50,16 @@
 
 - type: entity
   parent: RMCCrateExplosives
+  id: RMCCratePlasticExplosives
+  name: plastic explosives crate (x3)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCExplosivePlastic
+      amount: 3
+
+- type: entity
+  parent: RMCCrateExplosives
   id: RMCCrateBreachingCharges
   name: breaching charges crate (x4)
   components:
@@ -67,3 +77,73 @@
     contents:
     - id: CMGrenadeHighExplosive
       amount: 25
+
+- type: entity
+  parent: RMCCrateExplosives
+  id: RMCCrateGrenadesAirburstFragBox
+  name: M74 AGM-F 40mm frag grenades crate (x25)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMC40MMGrenadeM74AGMF
+      amount: 25
+
+- type: entity
+  parent: RMCCrateExplosives
+  id: RMCCrateGrenadesAirburstFrag
+  name: M74 AGM-F 40mm frag grenades crate (x6)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCPacketGrenadeM74AGMFFilled
+      amount: 2
+
+- type: entity
+  parent: RMCCrateExplosives
+  id: RMCCrateGrenadesAirburstIncendiary
+  name: M74 AGM-I 40mm incendiary grenades crate (x6)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCPacketGrenadeM74AGMIFilled
+      amount: 2
+
+- type: entity
+  parent: RMCCrateExplosives
+  id: RMCCrateGrenadesAirburstSmoke
+  name: M74 AGM-S 40mm smoke grenades crate (x6)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCPacketGrenadeM74AGMSFilled
+      amount: 2
+
+- type: entity
+  parent: RMCCrateExplosives
+  id: RMCCrateGrenadesAirburstHornet
+  name: M74 AGM-H 40mm hornet grenades crate (x6)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCPacketGrenadeM74AGMSHornetFilled
+      amount: 2
+
+- type: entity
+  parent: RMCCrateExplosives
+  id: RMCCrateGrenadesAirburstStarShell
+  name: M74 AGM-H 40mm Starshell grenades crate (x6)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCPacketGrenadeM74AGMSStarShellFilled
+      amount: 2
+
+- type: entity
+  parent: RMCCrateExplosives
+  id: RMCCrateGrenadesBatonSlug
+  name: HIRR Baton Slugs crate (x6)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCPacketGrenadeBatonSlugHIRRFilled
+      amount: 2

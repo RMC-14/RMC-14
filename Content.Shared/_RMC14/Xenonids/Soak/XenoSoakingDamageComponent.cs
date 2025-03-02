@@ -1,4 +1,4 @@
-﻿using Content.Shared.FixedPoint;
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -19,6 +19,12 @@ public sealed partial class XenoSoakingDamageComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan EffectExpiresAt;
 
-    [DataField, AutoNetworkedField] //Temp until we get outline auras
-    public EntProtoId RageEffect = "RMCEffectHealSoak";
+    [DataField, AutoNetworkedField]
+    public Color SoakColor = Color.FromHex("#421313");
+
+    [DataField, AutoNetworkedField]
+    public Color RageColor = Color.FromHex("#AD1313");
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan RageDuration = TimeSpan.FromSeconds(3);
 }

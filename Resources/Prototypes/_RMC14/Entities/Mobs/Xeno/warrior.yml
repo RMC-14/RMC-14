@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
@@ -37,6 +37,7 @@
     tier: 2
     hudOffset: -0.15,0.25
     unlockAt: 540 # 9 minutes
+    restHealMultiplier:  1.4
   - type: XenoLight
   - type: XenoDevolve
     devolvesTo:
@@ -93,3 +94,5 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: warrior
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.2

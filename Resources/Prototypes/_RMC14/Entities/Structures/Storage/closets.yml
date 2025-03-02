@@ -7,6 +7,8 @@
   components:
   - type: Transform
     anchored: true
+  - type: Physics
+    bodyType: Static
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Closets/standard.rsi
     layers:

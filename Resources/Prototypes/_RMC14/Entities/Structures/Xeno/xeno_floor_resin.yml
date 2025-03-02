@@ -57,6 +57,7 @@
       types:
         Slash: 45
   - type: StickyResinSurgeBlocker
+  - type: DeletedByWeedKiller
 
 - type: entity
   parent: XenoBaseFloorResin

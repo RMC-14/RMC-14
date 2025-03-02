@@ -1,13 +1,8 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Content.Shared._RMC14.Xenonids.Burrow;
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class XenoBurrowComponent : Component
 {
     /// <summary>
@@ -15,6 +10,12 @@ public sealed partial class XenoBurrowComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool Active = false;
+
+    /// <summary>
+    /// Whether the xeno is currently tunneling or not
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool Tunneling = false;
 
     /// <summary>
     /// Max distance a xeno can move from burrowing
@@ -32,9 +33,19 @@ public sealed partial class XenoBurrowComponent : Component
     /// How long the xeno must wait before burrowing back up or tunneling
     /// </summary>
     [DataField]
-    public TimeSpan TunnelCooldown = TimeSpan.FromSeconds(2);
+    public TimeSpan BurrowCooldown = TimeSpan.FromSeconds(2);
 
+    /// <summary>
+    /// How long the xeno must wait before burrowing back up or tunneling
+    /// </summary>
+    [DataField]
+    public TimeSpan TunnelCooldown = TimeSpan.FromSeconds(7);
+
+    [DataField, AutoNetworkedField]
     public TimeSpan? NextTunnelAt;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan? NextBurrowAt;
 
     /// <summary>
     /// How long the xeno can stay burrowed
@@ -42,7 +53,20 @@ public sealed partial class XenoBurrowComponent : Component
     [DataField]
     public TimeSpan BurrowMaxDuration = TimeSpan.FromSeconds(9);
 
+    [DataField, AutoNetworkedField]
     public TimeSpan? ForcedUnburrowAt;
+
+    /// <summary>
+    /// Distance from unburrow coordinates which entities will be stunned
+    /// </summary>
+    [DataField]
+    public float UnburrowStunRange = 0.5f;
+
+    /// <summary>
+    /// How long the entities in unburrow stun range will be stunned for
+    /// </summary>
+    [DataField]
+    public TimeSpan UnburrowStunLength = TimeSpan.FromSeconds(4);
 
     [DataField]
     public SoundSpecifier BurrowDownSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/burrowing_b.ogg");

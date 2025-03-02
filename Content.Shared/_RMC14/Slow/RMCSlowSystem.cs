@@ -125,17 +125,17 @@ public sealed class RMCSlowSystem : EntitySystem
 
     private void OnSlowdownRefresh(Entity<RMCSlowdownComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
-        if (!TryComp<RMCSpeciesSlowdownModifierComponent>(ent, out var slow))
+        if (!TryComp<RMCSpeciesSlowdownModifierComponent>(ent, out var slow) || !ent.Comp.Running)
             return;
 
         //Don't apply slow when superslow is in effect
-        if (!HasComp<RMCSuperSlowdownComponent>(ent))
+        if (!TryComp<RMCSuperSlowdownComponent>(ent, out var comp) || !comp.Running)
             args.ModifySpeed(slow.SlowMultiplier, slow.SlowMultiplier);
     }
 
     private void OnSuperSlowdownRefresh(Entity<RMCSuperSlowdownComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
-        if (!TryComp<RMCSpeciesSlowdownModifierComponent>(ent, out var slow))
+        if (!TryComp<RMCSpeciesSlowdownModifierComponent>(ent, out var slow) || !ent.Comp.Running)
             return;
 
         args.ModifySpeed(slow.SuperSlowMultiplier, slow.SuperSlowMultiplier);
@@ -143,6 +143,9 @@ public sealed class RMCSlowSystem : EntitySystem
 
     private void OnRootRefresh(Entity<RMCRootedComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
+        if (!ent.Comp.Running)
+            return;
+
         args.ModifySpeed(0, 0);
     }
 
@@ -221,6 +224,7 @@ public sealed class RMCSlowSystem : EntitySystem
                 continue;
 
             RemCompDeferred<RMCSlowdownComponent>(uid);
+            _speed.RefreshMovementSpeedModifiers(uid);
         }
 
         var superSlowQuery = EntityQueryEnumerator<RMCSuperSlowdownComponent>();
@@ -231,6 +235,7 @@ public sealed class RMCSlowSystem : EntitySystem
                 continue;
 
             RemCompDeferred<RMCSuperSlowdownComponent>(uid);
+            _speed.RefreshMovementSpeedModifiers(uid);
         }
 
         var rootQuery = EntityQueryEnumerator<RMCRootedComponent>();
@@ -241,6 +246,7 @@ public sealed class RMCSlowSystem : EntitySystem
                 continue;
 
             RemCompDeferred<RMCRootedComponent>(uid);
+            _speed.RefreshMovementSpeedModifiers(uid);
         }
     }
 }

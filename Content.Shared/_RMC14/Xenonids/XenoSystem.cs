@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Damage;
@@ -18,9 +18,11 @@ using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Access.Components;
 using Content.Shared.Actions;
+using Content.Shared.Buckle.Components;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.DragDrop;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
@@ -32,6 +34,7 @@ using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Radio;
 using Content.Shared.Standing;
+using Content.Shared.StatusEffect;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Tools.Systems;
@@ -60,10 +63,12 @@ public sealed class XenoSystem : EntitySystem
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly WeldableSystem _weldable = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
 
     private static readonly ProtoId<DamageTypePrototype> HeatDamage = "Heat";
 
@@ -80,6 +85,7 @@ public sealed class XenoSystem : EntitySystem
     private float _xenoDamageDealtMultiplier;
     private float _xenoDamageReceivedMultiplier;
     private float _xenoSpeedMultiplier;
+    private TimeSpan _xenoSpawnMuteDuration;
 
     public override void Initialize()
     {
@@ -109,10 +115,14 @@ public sealed class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, MeleeHitEvent>(OnXenoMeleeHit);
         SubscribeLocalEvent<XenoComponent, HiveChangedEvent>(OnHiveChanged);
         SubscribeLocalEvent<XenoComponent, RMCIgniteEvent>(OnXenoIgnite);
+        SubscribeLocalEvent<XenoComponent, CanDragEvent>(OnXenoCanDrag);
+        SubscribeLocalEvent<XenoComponent, BuckleAttemptEvent>(OnXenoBuckleAttempt);
+        SubscribeLocalEvent<XenoComponent, DamageStateCritBeforeDamageEvent>(OnXenoBeforeCritDamage, before: [typeof(SharedXenoPheromonesSystem)]);
 
         Subs.CVar(_config, RMCCVars.CMXenoDamageDealtMultiplier, v => _xenoDamageDealtMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMXenoDamageReceivedMultiplier, v => _xenoDamageReceivedMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMXenoSpeedMultiplier, UpdateXenoSpeedMultiplier, true);
+        Subs.CVar(_config, RMCCVars.RMCXenoSpawnInitialMuteDurationSeconds, v => _xenoSpawnMuteDuration = TimeSpan.FromSeconds(v), true);
 
         UpdatesAfter.Add(typeof(SharedXenoPheromonesSystem));
     }
@@ -133,6 +143,11 @@ public sealed class XenoSystem : EntitySystem
 
         if (!MathHelper.CloseTo(_xenoSpeedMultiplier, 1))
             _movementSpeed.RefreshMovementSpeedModifiers(xeno);
+
+        if (xeno.Comp.MuteOnSpawn)
+        {
+            _status.TryAddStatusEffect(xeno, "Muted", _xenoSpawnMuteDuration, true, "Muted");
+        }
     }
 
     private void OnXenoGetAdditionalAccess(Entity<XenoComponent> xeno, ref GetAccessTagsEvent args)
@@ -258,6 +273,27 @@ public sealed class XenoSystem : EntitySystem
             _damageable.TryChangeDamage(held, damage, true);
             _hands.TryDrop(ent, held);
         }
+    }
+
+    private void OnXenoCanDrag(Entity<XenoComponent> ent, ref CanDragEvent args)
+    {
+        if (_mobState.IsDead(ent))
+            args.Handled = true;
+    }
+
+    private void OnXenoBuckleAttempt(Entity<XenoComponent> ent, ref BuckleAttemptEvent args)
+    {
+        if (HasComp<XenoComponent>(args.User) || !_mobState.IsDead(ent))
+            args.Cancelled = true;
+    }
+
+    private void OnXenoBeforeCritDamage(Entity<XenoComponent> ent, ref DamageStateCritBeforeDamageEvent args)
+    {
+        if (!_rmcFlammable.IsOnFire(ent.Owner) || (!ent.Comp.HealOffWeeds && !_weeds.IsOnWeeds(ent.Owner)))
+            return;
+
+        //Don't take bleedout damage on fire or on weeds
+        args.Damage.ClampMax(0);
     }
 
     private void UpdateXenoSpeedMultiplier(float speed)
