@@ -275,7 +275,7 @@ public abstract partial class SharedXenoParasiteSystem
 
         foreach (var eggmorpher in _entityLookup.GetEntitiesInRange<EggMorpherComponent>(_transform.GetMoverCoordinates(para), para.Comp.RangeCheck))
         {
-            if (eggmorpher.Comp.CurParasites <= eggmorpher.Comp.MaxParasites)
+            if (eggmorpher.Comp.CurParasites < eggmorpher.Comp.MaxParasites)
                 return;
         }
 
