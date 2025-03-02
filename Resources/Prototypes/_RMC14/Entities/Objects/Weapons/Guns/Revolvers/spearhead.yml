@@ -164,7 +164,7 @@
     - Cartridge
     - RMCCartridgeRevolver357
   - type: CartridgeAmmo
-    proto: CMBulletRevolver357
+    proto: RMCBulletRevolver357
 
 - type: entity
   id: RMCCartridgeRevolver357Hollowpoint
