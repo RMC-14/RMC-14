@@ -115,6 +115,7 @@
     - Grenade
     - LauncherCompatibleGrenade
     - RMCGrenadeM40
+    - RMCGrenadeRiot
   - type: Ammo
 
 - type: entity

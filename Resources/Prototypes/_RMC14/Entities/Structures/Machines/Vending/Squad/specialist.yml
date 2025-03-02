@@ -72,12 +72,14 @@
         spawn: 6
     #- id: M40HPDPWhitePhosphorusGrenadesx6
     #  points: 40
-    #- id: M74AGMFFragmentationGrenadesx6
-    #  points: 40
-    #- id: M74AGMIIncendiaryGrenadesx6
-    #  points: 40
-    #- id: M74AGMSSmokeGrenadesx6
-    #  points: 20
+      - id: RMC40MMGrenadeM74AGMF
+        points: 40
+        spawn: 6
+      - id: RMC40MMGrenadeM74AGMI
+        points: 40
+      - id: RMC40MMGrenadeM74AGMS
+        points: 20
+        spawn: 6
     - name: Extra Flamethrower Tanks
       entries: [ ]
     #- id: LargeIncineratorTank

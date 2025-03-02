@@ -76,6 +76,7 @@
   - type: XenoDevour
   - type: XenoPheromones
     pheromonesMultiplier: 4
+    pheroSuffix: queen
   - type: XenoPlasma
     plasma: 1000
     maxPlasma: 1000

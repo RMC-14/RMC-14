@@ -1155,3 +1155,14 @@
     state: hazzy_licious
   - type: PatronFigurine
     id: aabf2d58-6ec9-455a-83e1-91f4e1a71d17
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronFlapsConflagMoth
+  name: Flaps 'Conflag' Moth figurine
+  description: "You can almost hear him Screaming, \"HI FREN!\""
+  components:
+  - type: Sprite
+    state: flaps_conflag_moth
+  - type: PatronFigurine
+    id: 3a452032-fcc9-4744-adb3-65af5e68cb2c

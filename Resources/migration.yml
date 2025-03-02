@@ -1082,6 +1082,9 @@ RMCAreaSavannahPumpStarboard Quarter: RMCAreaSavannahPumpStarboardQuarter
 RMCWindowFrameHybrisaEngigReinforced: RMCWindowFrameHybrisaEngiReinforced
 RMCWindowHybrisaResearchlReinforced: RMCWindowHybrisaResearchReinforced
 
+# 2025-02-25
+CMAirlockGlassRequisitionsLocked: CMAirlockRequisitionsLocked
+
 # 2025-02-26
 RMCAreaLv759IndoorsWeyyuOffice: RMCAreaLv759IndoorsWeyaOffice
 RMCAreaLv759IndoorsWeyyuOfficeHallway: RMCAreaLv759IndoorsWeyaOfficeHallway
