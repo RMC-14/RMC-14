@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: snebl
-  changes:
-  - message: Fixed some airlocks 'bolted' sprite not working.
-    type: Fix
-  id: 909
-  time: '2024-10-31T23:47:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4644
 - author: Binbagg
   changes:
   - message: Changed bio-hazard cades description
@@ -5167,5 +5160,12 @@
   id: 1410
   time: '2025-03-02T05:39:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5747
+- author: Whisper
+  changes:
+  - message: Dogtags can no longer be melted by acid.
+    type: Tweak
+  id: 1411
+  time: '2025-03-02T05:42:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5712
 Name: RMC14
 Order: -1
