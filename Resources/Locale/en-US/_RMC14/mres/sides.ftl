@@ -1,0 +1,10 @@
+rmc-mre-side-crackers = crackers
+rmc-mre-side-mashed-potatos = mashed potatos
+rmc-mre-side-risotto = risotto
+rmc-mre-side-rice-onigiri = rice onigiri
+rmc-mre-side-cornbread = cornbread
+rmc-mre-side-kale = marinated kale
+rmc-mre-side-tortillas = tortillas
+rmc-mre-side-cinnamon-apple-slices = cinnamon apple slices
+rmc-mre-side-boiled-rice = boiled rice
+rmc-mre-side-biscuits = biscuits

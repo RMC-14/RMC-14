@@ -1,8 +1,9 @@
-﻿# Components
+# Components
 - type: entity
   abstract: true
   parent: CMMREComponentBase
   id: CMMRESideComponentBase
+  name: MRE side
   description: An MRE side component. Contains a side, to be eaten alongside the main.
   components:
   - type: Sprite
@@ -11,29 +12,23 @@
 - type: entity
   parent: CMMRESideComponentBase
   id: CMMREComponentCracker
-  name: MRE component (cracker)
   description: An MRE side component. Contains a side, to be eaten alongside the main. This one is a cracker.
+  suffix: cracker
   components:
+  - type: Label
+    currentLabel: rmc-mre-side-crackers
   - type: SpawnItemsOnUse
     items:
     - id: CMMREFoodCracker
 
 - type: entity
   parent: CMMRESideComponentBase
-  id: CMMREComponentRiceOnigiri
-  name: MRE component (rice onigiri)
-  description: An MRE side component. Contains a side, to be eaten alongside the main. This one is rice onigiri.
-  components:
-  - type: SpawnItemsOnUse
-    items:
-    - id: CMMREFoodRiceOnigiri
-
-- type: entity
-  parent: CMMRESideComponentBase
   id: CMMREComponentMashedPotatoes
-  name: MRE component (mashed potatoes)
   description: An MRE side component. Contains a side, to be eaten alongside the main. This one is mashed potatoes.
+  suffix: mashed potatos
   components:
+  - type: Label
+    currentLabel: rmc-mre-side-mashed-potatos
   - type: SpawnItemsOnUse
     items:
     - id: CMMREFoodMashedPotatoes
@@ -41,12 +36,98 @@
 - type: entity
   parent: CMMRESideComponentBase
   id: CMMREComponentRisotto
-  name: MRE component (risotto)
   description: An MRE side component. Contains a side, to be eaten alongside the main. This one is risotto.
+  suffix: risotto
   components:
+  - type: Label
+    currentLabel: rmc-mre-side-risotto
   - type: SpawnItemsOnUse
     items:
     - id: CMMREFoodRisotto
+
+- type: entity
+  parent: CMMRESideComponentBase
+  id: CMMREComponentRiceOnigiri
+  description: An MRE side component. Contains a side, to be eaten alongside the main. This one is rice onigiri.
+  suffix: rice onigiri
+  components:
+  - type: Label
+    currentLabel: rmc-mre-side-rice-onigiri
+  - type: SpawnItemsOnUse
+    items:
+    - id: CMMREFoodRiceOnigiri
+
+- type: entity
+  parent: CMMRESideComponentBase
+  id: CMMREComponentCornbread
+  description: An MRE side component. Contains a side, to be eaten alongside the main. This one is cornbread.
+  suffix: cornbread
+  components:
+  - type: Label
+    currentLabel: rmc-mre-side-cornbread
+  - type: SpawnItemsOnUse
+    items:
+    - id: CMMREFoodCornbread
+
+- type: entity
+  parent: CMMRESideComponentBase
+  id: CMMREComponentKale
+  description: An MRE side component. Contains a side, to be eaten alongside the main. This one is marinated kale.
+  suffix: kale
+  components:
+  - type: Label
+    currentLabel: rmc-mre-side-kale
+  - type: SpawnItemsOnUse
+    items:
+    - id: CMMREFoodKale
+
+- type: entity
+  parent: CMMRESideComponentBase
+  id: CMMREComponentTortillas
+  description: An MRE side component. Contains a side, to be eaten alongside the main. This one is tortillas.
+  suffix: tortillas
+  components:
+  - type: Label
+    currentLabel: rmc-mre-side-tortillas
+  - type: SpawnItemsOnUse
+    items:
+    - id: CMMREFoodTortillas
+
+- type: entity
+  parent: CMMRESideComponentBase
+  id: CMMREComponentCinnamonAppleSlices
+  description: An MRE side component. Contains a side, to be eaten alongside the main. This one is cinnamon apple slices.
+  suffix: cinnamon apple slices
+  components:
+  - type: Label
+    currentLabel: rmc-mre-side-cinnamon-apple-slices
+  - type: SpawnItemsOnUse
+    items:
+    - id: CMMREFoodCinnamonAppleSlices
+
+- type: entity
+  parent: CMMRESideComponentBase
+  id: CMMREComponentBoiledRice
+  description: An MRE side component. Contains a side, to be eaten alongside the main. This one is boiled rice.
+  suffix: boiled rice
+  components:
+  - type: Label
+    currentLabel: rmc-mre-side-boiled-rice
+  - type: SpawnItemsOnUse
+    items:
+    - id: CMMREFoodBoiledRice
+
+- type: entity
+  parent: CMMRESideComponentBase
+  id: CMMREComponentBiscuitsSide
+  description: An MRE side component. Contains a side, to be eaten alongside the main. This one is biscuits.
+  suffix: biscuits
+  components:
+  - type: Label
+    currentLabel: rmc-mre-side-biscuits
+  - type: SpawnItemsOnUse
+    items:
+    - id: CMMREFoodBiscuits
 
 # Foods
 - type: entity
@@ -55,16 +136,7 @@
   id: CMMREFoodSide
   components:
   - type: Food
-    transferAmount: 1.6
   - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 8
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 6
-        - ReagentId: TableSalt
-          Quantity: 2
   - type: Extractable
     grindableSolutionName: food
   - type: InjectableSolution
@@ -74,49 +146,233 @@
   parent: CMMREFoodSide
   id: CMMREFoodCracker
   name: cracker
-  description: The contents of a Marine Standard issue MRE. This one is a cracker.
+  description: Crumbs easily but it's the most satisfying part.
   components:
+  - type: Food
+    transferAmount: 3
   - type: Sprite
     state: cracker
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 18
+        reagents:
+        - ReagentId: RMCBread
+          Quantity: 6
+        - ReagentId: TableSalt
+          Quantity: 2
   - type: FlavorProfile
     flavors:
     - Cracker
 
 - type: entity
   parent: CMMREFoodSide
+  id: CMMREFoodMashedPotatoes
+  name: mashed potatoes
+  description: Really soft and gentle, goes well with a main dish.
+  components:
+  - type: Food
+    transferAmount: 4
+  - type: Sprite
+    state: mashed_potatoes
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 22
+        reagents:
+        - ReagentId: RMCPotatoJuice
+          Quantity: 6
+        - ReagentId: RMCVegetable
+          Quantity: 3
+        - ReagentId: RMCMilk
+          Quantity: 2
+        - ReagentId: TableSalt
+          Quantity: 1
+
+- type: entity
+  parent: CMMREFoodSide
+  id: CMMREFoodRisotto
+  name: risotto
+  description: A bit more exotic, but Italian cuisine never dissapoints.
+  components:
+  - type: Food
+    transferAmount: 3
+  - type: Sprite
+    state: risotto
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 18
+        reagents:
+        - ReagentId: RMCRice
+          Quantity: 4
+        - ReagentId: RMCVegetable
+          Quantity: 2
+        - ReagentId: RMCCornOil
+          Quantity: 1
+        - ReagentId: TableSalt
+          Quantity: 1
+  - type: FlavorProfile
+    flavors:
+    - Risotto
+
+- type: entity
+  parent: CMMREFoodSide
   id: CMMREFoodRiceOnigiri
   name: rice onigiri
-  description: The contents of a Marine Standard issue MRE. This one is rice onigiri.
+  description: Cooked rice in a form of a triangle, covered in a seaweed at the bottom, doesn't fall apart, surprisingly.
   components:
+  - type: Food
+    transferAmount: 3
   - type: Sprite
     state: rice_onigiri
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 17
+        reagents:
+        - ReagentId: RMCRice
+          Quantity: 5
+        - ReagentId: RMCPlantMatter
+          Quantity: 1
+        - ReagentId: TableSalt
+          Quantity: 1
   - type: FlavorProfile
     flavors:
     - RiceOnigiri
 
 - type: entity
   parent: CMMREFoodSide
-  id: CMMREFoodMashedPotatoes
-  name: mashed potatoes
-  description: The contents of a Marine Standard issue MRE. This one is mashed potatoes.
+  id: CMMREFoodCornbread
+  name: cornbread
+  description: Almost universally hated, very dry and simple taste of it really gets old fast. Requisitions probably has ass-load of it in the back. Nobody eats that shit.
   components:
+  - type: Food
+    transferAmount: 3
   - type: Sprite
-    state: mashed_potatoes
+    state: cornbread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 17
+        reagents:
+        - ReagentId: RMCBread
+          Quantity: 4
+        - ReagentId: RMCCornOil
+          Quantity: 2
+        - ReagentId: TableSalt
+          Quantity: 1
   - type: FlavorProfile
     flavors:
-    - Potato
+    - horrible
 
 - type: entity
   parent: CMMREFoodSide
-  id: CMMREFoodRisotto
-  name: risotto
-  description: The contents of a Marine Standard issue MRE. This one is risotto.
+  id: CMMREFoodKale
+  name: marinated kale
+  description: A sort of cabbage, marinated in spices, still has a lot of moist and crunch to it.
   components:
+  - type: Food
+    transferAmount: 4
   - type: Sprite
-    state: risotto
+    state: kale
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: RMCPlantMatter
+          Quantity: 6
+        - ReagentId: Blackpepper
+          Quantity: 2
+        - ReagentId: TableSalt
+          Quantity: 2
   - type: FlavorProfile
     flavors:
-    - Risotto
+    - Kale
+
+- type: entity
+  parent: CMMREFoodSide
+  id: CMMREFoodTortillas
+  name: tortillas
+  description: A kind of flat bread, goes well with adding other things onto it.
+  components:
+  - type: Food
+    transferAmount: 2
+  - type: Sprite
+    state: tortillas
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 16
+        reagents:
+        - ReagentId: RMCBread
+          Quantity: 6
+  - type: FlavorProfile
+    flavors:
+    - Tortilla
+
+- type: entity
+  parent: CMMREFoodSide
+  id: CMMREFoodBiscuits
+  name: biscuits
+  description: An assortment of biscuits, go well with adding other things onto them.
+  components:
+  - type: Food
+    transferAmount: 2
+  - type: Sprite
+    state: biscuits
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 16
+        reagents:
+        - ReagentId: RMCBread
+          Quantity: 6
+  - type: FlavorProfile
+    flavors:
+    - Biscuit
+
+- type: entity
+  parent: CMMREFoodSide
+  id: CMMREFoodCinnamonAppleSlices
+  name: cinnamon apple slices
+  description: A bit gooey pieces of apple in cinnamon sauce, a bit sticky but tasty.
+  components:
+  - type: Food
+    transferAmount: 2
+  - type: Sprite
+    state: spiced_apples
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 16
+        reagents:
+        - ReagentId: RMCFruit
+          Quantity: 3
+        - ReagentId: RMCSugar
+          Quantity: 3
+  - type: FlavorProfile
+    flavors:
+    - CinnamonApple
+
+- type: entity
+  parent: CMMREFoodSide
+  id: CMMREFoodBoiledRice
+  name: boiled rice
+  description: A packet of plain boiled rice, a bit boring but would go well with additives.
+  components:
+  - type: Food
+    transferAmount: 2
+  - type: Sprite
+    state: rice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 16
+        reagents:
+        - ReagentId: RMCRice
+          Quantity: 6
 
 # Flavors
 - type: flavor
@@ -125,16 +381,21 @@
   description: like crackers
 
 - type: flavor
-  id: RiceOnigiri
-  flavorType: Complex
-  description: like rice
-
-- type: flavor
-  id: Potato
-  flavorType: Complex
-  description: like potatoes
-
-- type: flavor
   id: Risotto
   flavorType: Complex
   description: like risotto
+
+- type: flavor
+  id: Kale
+  flavorType: Complex
+  description: like kale
+
+- type: flavor
+  id: Tortilla
+  flavorType: Complex
+  description: like tortilla
+
+- type: flavor
+  id: CinnamonApple
+  flavorType: Complex
+  description: like cinnamon and apples

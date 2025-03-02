@@ -18,6 +18,15 @@
         factor: 0.4
 
 - type: reagent
+  id: RMCMilk
+  parent: RMCDrinkBase
+  name: milk
+  color: "#DFDFDF"
+  flavor: milk
+  desc: An opaque white liquid produced by the mammary glands of mammals.
+  physicalDesc: reagent-physical-desc-milky
+
+- type: reagent
   id: RMCCoconutMilk
   parent: RMCDrinkBase
   name: coconut milk
@@ -25,6 +34,7 @@
   flavor: RMCCoconutMilk
   desc: A very light, half opague milk from coconuts, barely has any taste on its own.
   physicalDesc: reagent-physical-desc-milky
+
 
 - type: reagent
   id: RMCSoyMilk
@@ -74,8 +84,27 @@
       effects:
       - !type:SatiateHunger
         factor: 1
-      - !type:SatiateThirst #Unparity but as long as we have thirst might as well - half as effective as water
+      - !type:SatiateThirst
         factor: 0.4
+
+- type: reagent
+  parent: CMReagent
+  id: RMCSoysauce
+  name: soysauce
+  desc: A salty sauce made from the soy plant.
+  group: Drink
+  flavor: salty
+  color: "#792300"
+  unknown: true
+  physicalDesc: reagent-physical-desc-salty
+  metabolisms:
+    Drink:
+      metabolismRate: 0.1
+      effects:
+      - !type:SatiateHunger
+        factor: 4
+      - !type:SatiateThirst
+        factor: 0.2
 
 - type: reagent
   id: RMCGrapeJuice
@@ -103,6 +132,48 @@
   flavor: RMCLemonLime
   desc: A tangy substance made of 0.5% natural citrus!
   physicalDesc: reagent-physical-desc-citric
+
+- type: reagent
+  id: RMCTomatoJuice
+  parent: RMCDrinkBase
+  name: tomato juice
+  color: "#731008"
+  flavor: tomato
+  desc: Tomatoes made into juice. What a waste of big, juicy tomatoes, huh?
+  physicalDesc: reagent-physical-desc-crisp
+
+- type: reagent
+  id: RMCPotatoJuice
+  parent: RMCDrinkBase
+  name: potato juice
+  color: "#302000"
+  flavor: potatoes
+  desc: Juice of the potato. Bleh.
+  physicalDesc: reagent-physical-desc-opaque
+  metabolisms:
+    Drink:
+      metabolismRate: 0.2
+      effects:
+      - !type:SatiateHunger
+        factor: 1
+      - !type:SatiateThirst
+        factor: 0.4
+
+- type: reagent
+  parent: CMReagent
+  id: RMCCornOil
+  name: corn oil
+  desc: An oil derived from various types of corn.
+  group: Drinks
+  color: "#302000"
+  unknown: true
+  physicalDesc: reagent-physical-desc-oily
+  metabolisms:
+    Food:
+      metabolismRate: 0.1
+      effects:
+      - !type:SatiateHunger
+        factor: 40
 
 # Drink powders
 

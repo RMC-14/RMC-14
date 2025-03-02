@@ -33,3 +33,8 @@
   id: RMCHazelnutChocolate
   flavorType: Complex
   description: like chocolate and hazelnut
+
+- type: flavor
+  id: RMCPasta
+  flavorType: Complex
+  description: like pasta

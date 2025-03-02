@@ -1,19 +1,24 @@
-﻿# Components
+# Main Components
+# UNMC
 - type: entity
   abstract: true
   parent: CMMREComponentBase
   id: CMMREMainComponentBase
+  name: MRE main dish
   description: An MRE entree component. Contains the main course for nutrients.
   components:
   - type: Sprite
     state: entree
+# TODO RMC14 comp that marks this is determining MRE label
 
 - type: entity
   parent: CMMREMainComponentBase
   id: CMMREComponentBonelessPorkRibs
-  name: MRE component (boneless pork ribs)
   description: An MRE entree component. Contains the main course for nutrients. This one is boneless pork ribs.
+  suffix: boneless pork ribs
   components:
+  - type: Label
+    currentLabel: rmc-mre-entree-pork-ribs
   - type: SpawnItemsOnUse
     items:
     - id: CMMREFoodBonelessPorkRibs
@@ -21,9 +26,11 @@
 - type: entity
   parent: CMMREMainComponentBase
   id: CMMREComponentGrilledChicken
-  name: MRE component (grilled chicken)
   description: An MRE entree component. Contains the main course for nutrients. This one is grilled chicken.
+  suffix: grilled chicken
   components:
+  - type: Label
+    currentLabel: rmc-mre-entree-grilled-chicken
   - type: SpawnItemsOnUse
     items:
     - id: CMMREFoodGrilledChicken
@@ -31,32 +38,98 @@
 - type: entity
   parent: CMMREMainComponentBase
   id: CMMREComponentPizzaSquare
-  name: MRE component (pizza square)
   description: An MRE entree component. Contains the main course for nutrients. This one is a pizza square.
+  suffix: pizza square
   components:
+  - type: Label
+    currentLabel: rmc-mre-entree-pizza-square
   - type: SpawnItemsOnUse
     items:
     - id: CMMREFoodPizzaSquare
 
 - type: entity
   parent: CMMREMainComponentBase
-  id: CMMREComponentSpaghettiChunks
-  name: MRE component (spaghetti chunks)
-  description: An MRE entree component. Contains the main course for nutrients. This one is spaghetti chunks.
+  id: CMMREComponentChickenTender
+  description: An MRE entree component. Contains the main course for nutrients. This one is a chicken tender.
+  suffix: chicken tender
   components:
+  - type: Label
+    currentLabel: rmc-mre-entree-chicken-tender
+  - type: SpawnItemsOnUse
+    items:
+    - id: CMMREFoodChickenTender
+
+- type: entity
+  parent: CMMREMainComponentBase
+  id: CMMREComponentPepperoniSquare
+  description: An MRE entree component. Contains the main course for nutrients. This one is a pepperoni pizza square.
+  suffix: pepperoni pizza square
+  components:
+  - type: Label
+    currentLabel: rmc-mre-entree-pepperoni-square
+  - type: SpawnItemsOnUse
+    items:
+    - id: CMMREFoodPepperoniSquare
+
+- type: entity
+  parent: CMMREMainComponentBase
+  id: CMMREComponentSpaghettiChunks
+  description: An MRE entree component. Contains the main course for nutrients. This one is meat spaghetti.
+  suffix: meat spaghetti
+  components:
+  - type: Label
+    currentLabel: rmc-mre-entree-spaghetti-chunks
   - type: SpawnItemsOnUse
     items:
     - id: CMMREFoodSpaghettiChunks
 
 - type: entity
   parent: CMMREMainComponentBase
-  id: CMMREComponentChickenTender
-  name: MRE component (chicken tender)
-  description: An MRE entree component. Contains the main course for nutrients. This one is a chicken tender.
+  id: CMMREComponentChiliConCarne
+  description: An MRE entree component. Contains the main course for nutrients. This one is chili con carne.
+  suffix: chili con carne
   components:
+  - type: Label
+    currentLabel: rmc-mre-entree-chili-con-carne
   - type: SpawnItemsOnUse
     items:
-    - id: CMMREFoodChickenTender
+    - id: CMMREFoodChiliConCarne
+
+- type: entity
+  parent: CMMREMainComponentBase
+  id: CMMREComponentNoodleSoup
+  description: An MRE entree component. Contains the main course for nutrients. This one is noodle soup.
+  suffix: noodle soup
+  components:
+  - type: Label
+    currentLabel: rmc-mre-entree-noodle-soup
+  - type: SpawnItemsOnUse
+    items:
+    - id: CMMREFoodNoodleSoup
+
+- type: entity
+  parent: CMMREMainComponentBase
+  id: CMMREComponentGrilledChickenBreast
+  description: An MRE entree component. Contains the main course for nutrients. This one is grilled chicken breast.
+  suffix: grilled chicken breast
+  components:
+  - type: Label
+    currentLabel: rmc-mre-entree-grilled-chicken-breast
+  - type: SpawnItemsOnUse
+    items:
+    - id: CMMREFoodGrilledChickenBreast
+
+- type: entity
+  parent: CMMREMainComponentBase
+  id: CMMREComponentFeijoada
+  description: An MRE entree component. Contains the main course for nutrients. This one is brazilian-style feijoada.
+  suffix: brazilian-style feijoada
+  components:
+  - type: Label
+    currentLabel: rmc-mre-entree-feijoada
+  - type: SpawnItemsOnUse
+    items:
+    - id: CMMREFoodFeijoada
 
 # Foods
 - type: entity
@@ -65,16 +138,7 @@
   id: CMMREFoodMain
   components:
   - type: Food
-    transferAmount: 4
   - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 14
-        - ReagentId: TableSalt
-          Quantity: 6
   - type: Extractable
     grindableSolutionName: food
   - type: InjectableSolution
@@ -84,10 +148,23 @@
   parent: CMMREFoodMain
   id: CMMREFoodBonelessPorkRibs
   name: boneless pork ribs
-  description: The contents of a Marine Standard issue MRE. This one is boneless pork ribs.
+  description: You can't even taste processed meat taste under all those spices!
   components:
+  - type: Food
+    transferAmount: 7
   - type: Sprite
     state: boneless_pork_ribs
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: RMCMeatProtein
+          Quantity: 14
+        - ReagentId: TableSalt
+          Quantity: 2
+        - ReagentId: Blackpepper
+          Quantity: 4
   - type: FlavorProfile
     flavors:
     - BonelessPorkRibs
@@ -96,10 +173,21 @@
   parent: CMMREFoodMain
   id: CMMREFoodGrilledChicken
   name: grilled chicken
-  description: The contents of a Marine Standard issue MRE. This one is grilled chicken.
+  description: Doesn't actually tastes like grilled one, but do you really expect that luxury here?
   components:
+  - type: Food
+    transferAmount: 6
   - type: Sprite
     state: grilled_chicken
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 26
+        reagents:
+        - ReagentId: RMCMeatProtein
+          Quantity: 14
+        - ReagentId: TableSalt
+          Quantity: 2
   - type: FlavorProfile
     flavors:
     - GrilledChicken
@@ -108,37 +196,222 @@
   parent: CMMREFoodMain
   id: CMMREFoodPizzaSquare
   name: pizza square
-  description: The contents of a Marine Standard issue MRE. This one is a pizza square.
+  description: An American classic, been added and removed from the menu about 27 times at this point, still loved despite being cheap parody of a real thing.
   components:
+  - type: Food
+    transferAmount: 7
   - type: Sprite
     state: pizza_square
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: RMCCheese
+          Quantity: 4
+        - ReagentId: RMCMeatProtein
+          Quantity: 3
+        - ReagentId: RMCBread
+          Quantity: 5
+        - ReagentId: RMCVegetable
+          Quantity: 2
+        - ReagentId: RMCTomatoJuice
+          Quantity: 4
+        - ReagentId: TableSalt
+          Quantity: 2
   - type: FlavorProfile
     flavors:
     - PizzaSquare
 
 - type: entity
   parent: CMMREFoodMain
-  id: CMMREFoodSpaghettiChunks
-  name: spaghetti chunks
-  description: The contents of a Marine Standard issue MRE. This one is spaghetti chunks.
+  id: CMMREFoodPepperoniSquare
+  name: pepperoni pizza square
+  description: A newer addition to the timeless MRE classic, very similar.
   components:
+  - type: Food
+    transferAmount: 7
+  - type: Sprite
+    state: pepperoni_square
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: RMCCheese
+          Quantity: 3
+        - ReagentId: RMCMeatProtein
+          Quantity: 5
+        - ReagentId: RMCBread
+          Quantity: 6
+        - ReagentId: RMCTomatoJuice
+          Quantity: 4
+        - ReagentId: TableSalt
+          Quantity: 2
+  - type: FlavorProfile
+    flavors:
+    - PizzaSquarePepperoni
+
+- type: entity
+  parent: CMMREFoodMain
+  id: CMMREFoodChickenTender
+  name: chicken tender
+  description: Really tasty and has nice crumbs texture, but makes you wish for some good chicken wings...
+  components:
+  - type: Food
+    transferAmount: 6
+  - type: Sprite
+    state: chicken_tender
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 26
+        reagents:
+        - ReagentId: RMCMeatProtein
+          Quantity: 10
+        - ReagentId: RMCBread
+          Quantity: 4
+        - ReagentId: TableSalt
+          Quantity: 2
+  - type: FlavorProfile
+    flavors:
+    - ChickenTender
+
+- type: entity
+  parent: CMMREFoodMain
+  id: CMMREFoodGrilledChickenBreast
+  name: grilled chicken breast
+  description: Very plain grilled chicken meat, simple but yet very classic taste.
+  components:
+  - type: Food
+    transferAmount: 6
+  - type: Sprite
+    state: grilled_chicken_breast
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 26
+        reagents:
+        - ReagentId: RMCMeatProtein
+          Quantity: 14
+        - ReagentId: TableSalt
+          Quantity: 2
+  - type: FlavorProfile
+    flavors:
+    - GrilledChicken
+
+- type: entity
+  parent: CMMREFoodMain
+  id: CMMREFoodSpaghettiChunks
+  name: meat spaghetti
+  description: Spaghetti with some cooked meat chunks, all covered in a tomato sauce.
+  components:
+  - type: Food
+    transferAmount: 7
   - type: Sprite
     state: spaghetti_chunks
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: RMCNoodles
+          Quantity: 8
+        - ReagentId: RMCMeatProtein
+          Quantity: 6
+        - ReagentId: RMCTomatoJuice
+          Quantity: 4
+        - ReagentId: TableSalt
+          Quantity: 2
   - type: FlavorProfile
     flavors:
     - SpaghettiChunks
 
 - type: entity
   parent: CMMREFoodMain
-  id: CMMREFoodChickenTender
-  name: chicken tender
-  description: The contents of a Marine Standard issue MRE. This one is a chicken tender.
+  id: CMMREFoodChiliConCarne
+  name: chili con carne
+  description: Spicy minced meat dish, there is no limit on adding chili in there, having some milk in near proximity is recommended.
   components:
+  - type: Food
+    transferAmount: 8
   - type: Sprite
-    state: chicken_tender
+    state: chili_con_carne
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 34
+        reagents:
+        - ReagentId: RMCMeatProtein
+          Quantity: 10
+        - ReagentId: Hotsauce
+          Quantity: 6
+        - ReagentId: RMCVegetable
+          Quantity: 4
+        - ReagentId: RMCTomatoJuice
+          Quantity: 2
+        - ReagentId: TableSalt
+          Quantity: 2
   - type: FlavorProfile
     flavors:
-    - ChickenTender
+    - Chili
+
+- type: entity
+  parent: CMMREFoodMain
+  id: CMMREFoodNoodleSoup
+  name: noodle soup
+  description: Very nourishing noodle soup with vegetables and a chicken flavor, will keep you warm for a long time if heated.
+  components:
+  - type: Food
+    transferAmount: 8
+    useSound:
+      path: /Audio/Items/drink.ogg
+    utensilType: Spoon
+  - type: Sprite
+    state: noodle_soup
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 33
+        reagents:
+        - ReagentId: RMCNoodles
+          Quantity: 9
+        - ReagentId: RMCVegetable
+          Quantity: 4
+        - ReagentId: Water
+          Quantity: 5
+        - ReagentId: RMCMeatProtein
+          Quantity: 5
+  - type: FlavorProfile
+    flavors:
+    - NoodleSoup
+
+- type: entity
+  parent: CMMREFoodMain
+  id: CMMREFoodFeijoada
+  name: brazilian-style feijoada
+  description: A Brazillian dish filled with black beans, different kinds of meat, vegetables and spices, very nourishing and rich in flavor.
+  components:
+  - type: Food
+    transferAmount: 6
+  - type: Sprite
+    state: brazilian-style_feijoada
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 28
+        reagents:
+        - ReagentId: RMCVegetable
+          Quantity: 7
+        - ReagentId: RMCMeatProtein
+          Quantity: 5
+        - ReagentId: RMCTomatoJuice
+          Quantity: 4
+        - ReagentId: RMCPlantMatter
+          Quantity: 2
+  - type: FlavorProfile
+    flavors:
+    - Feijoada
 
 # Flavors
 - type: flavor
@@ -157,11 +430,31 @@
   description: like pizza
 
 - type: flavor
+  id: PizzaSquarePepperoni
+  flavorType: Complex
+  description: like pepperoni pizza
+
+- type: flavor
   id: SpaghettiChunks
   flavorType: Complex
-  description: like spaghetti
+  description: like spaghetti and meat chunks
 
 - type: flavor
   id: ChickenTender
   flavorType: Complex
   description: like chicken
+
+- type: flavor
+  id: Chili
+  flavorType: Complex
+  description: like chili
+
+- type: flavor
+  id: NoodleSoup
+  flavorType: Complex
+  description: like warm soup
+
+- type: flavor
+  id: Feijoada
+  flavorType: Complex
+  description: like brazil

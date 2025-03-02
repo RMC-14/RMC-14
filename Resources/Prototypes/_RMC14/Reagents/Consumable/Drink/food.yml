@@ -1,0 +1,91 @@
+# BASE
+
+- type: reagent
+  parent: Nutriment
+  id: RMCMeatProtein
+  name: meat protein
+  desc: Proteins found in various types of meat.
+  group: Food
+  flavor: meaty
+
+- type: reagent
+  parent: Nutriment
+  id: RMCFish
+  name: fish meat
+  desc: It used to swim.
+  group: Food
+  flavor: fishy
+
+- type: reagent
+  parent: Nutriment
+  id: RMCCheese
+  name: cheese
+  desc: This used to be milk.
+  group: Food
+  flavor: cheesey
+
+- type: reagent
+  parent: Nutriment
+  id: RMCBread
+  name: bread
+  desc: Cooked bread.
+  group: Food
+  flavor: bread
+
+- type: reagent
+  parent: Nutriment
+  id: RMCNoodles
+  name: noodles
+  desc: Cooked noodles.
+  group: Food
+  flavor: RMCPasta
+
+- type: reagent
+  parent: Nutriment
+  id: RMCFruit
+  name: fruit
+  desc: Some sort of fruit.
+  group: Food
+  flavor: fruity
+
+- type: reagent
+  parent: Nutriment
+  id: RMCVegetable
+  name: vegetable
+  desc: Some sort of vegetable.
+  group: Food
+  flavor: vegetables
+
+- type: reagent
+  parent: Nutriment
+  id: RMCPlantMatter
+  name: plant matter
+  desc: Some sort of plant.
+  group: Food
+  flavor: leafy
+
+- type: reagent
+  parent: Nutriment
+  id: RMCNuts
+  name: nuts
+  desc: Some sort of grinded nut, smells like almonds.
+  group: Food
+  flavor: nutty
+
+- type: reagent
+  parent: CMReagent
+  id: RMCRice
+  name: rice
+  desc: The most widely consumed staple food on Earth. Rice is the most important grain with regard to human nutrition and caloric intake.
+  group: Food
+  flavor: rice
+  color: "#FFFFFF"
+  unknown: true
+  physicalDesc: reagent-physical-desc-coarse
+  metabolisms:
+    Food:
+      metabolismRate: 0.1
+      effects:
+      - !type:SatiateHunger
+        factor: 21
+

@@ -1,8 +1,9 @@
-﻿# Components
+# Components
 - type: entity
   abstract: true
   parent: CMMREComponentBase
   id: CMMREDessertComponentBase
+  name: MRE dessert
   description: An MRE side component. Contains a sweet dessert, to be eaten after the main (or before, if you're rebellious).
   components:
   - type: Sprite
