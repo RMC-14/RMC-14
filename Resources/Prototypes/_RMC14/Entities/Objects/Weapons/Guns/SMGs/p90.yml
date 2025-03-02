@@ -102,7 +102,7 @@
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridge57×28mm
+      - RMCCartridge57x28mm
     proto: CMCartridge57×28mm
     capacity: 50
   - type: Sprite
