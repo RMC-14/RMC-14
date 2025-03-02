@@ -176,7 +176,7 @@
     - Cartridge
     - RMCCartridgeRevolver357
   - type: CartridgeAmmo
-    proto: CMBulletRevolver357Hollowpoint
+    proto: RMCBulletRevolver357Hollowpoint
 
 - type: entity
   parent: CMBulletBase
