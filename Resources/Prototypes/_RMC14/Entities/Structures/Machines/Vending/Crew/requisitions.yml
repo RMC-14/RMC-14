@@ -639,3 +639,5 @@
       entries:
       - id: BedrollFolded
         amount: 30
+      - id: RMCM5CameraGear
+        amount: 3
