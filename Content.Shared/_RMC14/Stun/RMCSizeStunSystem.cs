@@ -101,7 +101,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
         //Try to daze before the big size check, because big xenos can still be dazed.
         _dazed.TryDaze(args.Target, bullet.Comp.DazeTime * dazeMultiplier);
 
-        if (!TryComp<RMCSizeComponent>(args.Target, out var size) || size.Size >= RMCSizes.Big)
+        if (!TryComp<RMCSizeComponent>(args.Target, out var size))
             return;
 
         KnockBack(args.Target, bullet);
@@ -137,9 +137,14 @@ public sealed class RMCSizeStunSystem : EntitySystem
     /// </summary>
     private void ApplyEffects(EntityUid uid, TimeSpan stun, TimeSpan slow, TimeSpan superSlow)
     {
-        _stun.TryParalyze(uid, stun, true);
         _slow.TrySlowdown(uid, slow);
         _slow.TrySuperSlowdown(uid, superSlow);
+
+        // Don't paralyze if big
+        if (!TryComp<RMCSizeComponent>(uid, out var size) || size.Size >= RMCSizes.Big)
+            return;
+
+        _stun.TryParalyze(uid, stun, true);
     }
 
     /// <summary>
