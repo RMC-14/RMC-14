@@ -25,3 +25,7 @@
     blacklist:
       components:
       - Xeno
+  - type: SolutionContainerManager
+    solutions:
+      buffer:
+        maxVol: 500
