@@ -62,7 +62,7 @@
           tags:
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentGyroscopicStabilizer
-          - RMCAttachmentMiniFlamethrower
+          - RMCAttachmentFlamer
         random:
         - RMCAttachmentMiniFlamethrower
         - RMCAttachmentFlashlightGrip

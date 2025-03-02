@@ -56,13 +56,13 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: CMMagazineSMGP90
+        startingItem: RMCMagazineSMGP90
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_reload.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
         priority: 2
         whitelist:
           tags:
-          - CMMagazineSMGP90
+          - RMCMagazineSMGP90
   - type: AttachableHolder
     randomAttachmentChance: 0.1
     slots:
@@ -128,9 +128,9 @@
   - type: Tag
     tags:
     - Cartridge
-    - CMCartridge57×28mm
+    - RMCCartridge57x28mm
   - type: CartridgeAmmo
-    proto: CMBullet57×28mm
+    proto: RMCBullet57x28mm
 
 - type: entity
   parent: Bullet10x20mm
