@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Fixed missing stair sprites.
-    type: Fix
-  id: 911
-  time: '2024-11-01T05:16:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4647
 - author: mnemosynium
   changes:
   - message: Added MK80 pistol magazines to the dropship crew weapons vendor
@@ -5167,5 +5160,24 @@
   id: 1412
   time: '2025-03-02T05:48:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5692
+- author: blueDev2
+  changes:
+  - message: Added Hive Cluster, a hive limited structure that spreads hive weeds
+      around it.
+    type: Add
+  - message: Added Eggmorpher, a hive limited structure that requires hive weeds and
+      passively creates parasites.
+    type: Add
+  - message: Added Recover Node, a hive limited structure that requires hive weeds
+      and heals a single nearby Xeno.
+    type: Add
+  - message: Xeno eggs must now be planted on Hive Weeds.
+    type: Tweak
+  - message: Marines (Talls) must now be nested on weed walls from hive weeds or on
+      resin walls with hive weeds under them.
+    type: Tweak
+  id: 1413
+  time: '2025-03-02T05:57:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4978
 Name: RMC14
 Order: -1
