@@ -118153,7 +118153,7 @@ entities:
   - uid: 17044
     components:
     - type: MetaData
-      name: Argentinian Research HQ
+      name: Auxiliary Generator Station
     - type: Transform
       pos: 57.5,146.5
       parent: 1
