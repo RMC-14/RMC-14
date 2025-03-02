@@ -391,6 +391,8 @@
     whitelist:
       tags:
       - CMRollerBed
+  - type: VendorTipTime
+
 
 - type: entity
   abstract: true
