@@ -189,7 +189,7 @@
       - Paper
       - CMSurgicalLine
       - CMSynthGraft
-      - CMRollerBed
+      - CMRollerItem
       - CMBloodPack
 # TODO RMC14 spray bottle
       - Handcuffs
@@ -240,7 +240,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/cmp.rsi
   - type: CMArmor
     armor: 10
-  
+
 
 # Military Warden
 - type: entity

@@ -210,6 +210,9 @@ public sealed class RMCCVars : CVars
     public static readonly CVarDef<float> RMCTacticalMapUpdateEverySeconds =
         CVarDef.Create("rmc.tactical_map_update_every_seconds", 1f, CVar.SERVER | CVar.REPLICATED);
 
+    public static readonly CVarDef<bool> RMCTacticalMapShowAreaLabels =
+        CVarDef.Create("rmc.tactical_map_show_area_labels", true, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
+
     public static readonly CVarDef<bool> RMCGunPrediction =
         CVarDef.Create("rmc.gun_prediction", true, CVar.SERVER | CVar.REPLICATED);
 

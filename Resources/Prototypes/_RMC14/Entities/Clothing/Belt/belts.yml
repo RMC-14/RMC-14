@@ -306,7 +306,7 @@
       - CMBurnKit
       #      - # TODO RMC14 splints
       - CMAutoInjector
-      - CMRollerBed
+      - CMRollerItem
       - BodyBag
       #      - # TODO RMC14 latex gloves
       - Hypospray
