@@ -297,6 +297,7 @@
     durationMultiplier: 0.666
   - type: RMCCanBeFultoned
   - type: CMArmor
+  - type: CriticalGraceTime
 
 - type: entity
   abstract: true
