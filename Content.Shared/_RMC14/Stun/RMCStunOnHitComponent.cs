@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 
 namespace Content.Shared._RMC14.Stun;
@@ -19,7 +19,7 @@ public sealed partial class RMCStunOnHitComponent : Component
     public float KnockBackPowerMax = 1;
 
     [DataField, AutoNetworkedField]
-    public float KnockBackSpeed = 1;
+    public float KnockBackSpeed = 5;
 
     [DataField, AutoNetworkedField]
     public bool ForceKnockBack;
