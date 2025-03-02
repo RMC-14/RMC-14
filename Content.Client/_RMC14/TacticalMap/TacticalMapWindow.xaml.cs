@@ -55,6 +55,7 @@ public sealed partial class TacticalMapWindow : DefaultWindow
         };
 
         CooldownBar.ForegroundStyleBoxOverride = new StyleBoxFlat(Color.Red);
+        AreaLabelsCheckbox.OnPressed += args => Map.DrawAreaLabels = args.Button.Pressed;
     }
 
     public void UpdateTexture(Entity<AreaGridComponent> grid)

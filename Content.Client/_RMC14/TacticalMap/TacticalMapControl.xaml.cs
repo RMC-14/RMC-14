@@ -31,6 +31,7 @@ public sealed partial class TacticalMapControl : TextureRect
     public readonly List<TacticalMapLine> Lines = new();
     public int LineLimit;
     public bool Drawing { get; set; }
+    public bool DrawAreaLabels { get; set; } = true;
     public Color Color;
 
     public TacticalMapControl()
@@ -135,16 +136,26 @@ public sealed partial class TacticalMapControl : TextureRect
             handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, lineVectors, line.Color);
         }
 
-        if (_labels != null)
+        if (_labels != null && DrawAreaLabels)
         {
             foreach (var (indices, label) in _labels)
             {
                 var position = IndicesToPosition(indices);
+
+                // Center vertically
                 position = position with { Y = position.Y - 6 };
+
+                // Get text size
                 var drawn = handle.DrawString(_font, position, label, Color.Transparent);
+
+                // Offset by half to center
                 position -= drawn / 2;
+
+                // Add 4 and 2 to give the background a margin around the text
                 drawn = drawn with { X = drawn.X + 4, Y = drawn.Y + _font.GetLineHeight(1) + 2 };
-                handle.DrawRect(UIBox2.FromDimensions(position - new Vector2(2, 0), drawn), Color.Black.WithAlpha(0.75f));
+
+                // Remove 2 for background margin
+                handle.DrawRect(UIBox2.FromDimensions(position - new Vector2(2, 0), drawn), Color.Black.WithAlpha(0.85f));
                 handle.DrawString(_font, position, label, Color.White);
             }
         }
