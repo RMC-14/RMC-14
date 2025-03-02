@@ -46,6 +46,8 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
         SubscribeLocalEvent<NoMixingReagentsComponent, ExaminedEvent>(OnNoMixingReagentsExamined);
         SubscribeLocalEvent<NoMixingReagentsComponent, SolutionTransferAttemptEvent>(OnNoMixingReagentsTransferAttempt);
 
+        SubscribeLocalEvent<RMCEmptySolutionComponent, GetVerbsEvent<AlternativeVerb>>(OnEmptySolutionGetVerbs);
+
         Subs.BuiEvents<RMCChemicalDispenserComponent>(RMCChemicalDispenserUi.Key,
             subs =>
             {
@@ -183,6 +185,26 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
                 return;
             }
         }
+    }
+
+    private void OnEmptySolutionGetVerbs(Entity<RMCEmptySolutionComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!_solution.TryGetSolution(ent.Owner, ent.Comp.Solution, out var solutionEnt, out _) ||
+            solutionEnt.Value.Comp.Solution.Volume <= FixedPoint2.Zero)
+        {
+            return;
+        }
+
+        args.Verbs.Add(new AlternativeVerb
+        {
+            Text = Loc.GetString("rmc-empty-solution-verb"),
+            Act = () =>
+            {
+                if (_solution.TryGetSolution(ent.Owner, ent.Comp.Solution, out solutionEnt, out _))
+                    _solution.RemoveAllSolution(solutionEnt.Value);
+            },
+            Priority = 1,
+        });
     }
 
     private void OnChemicalDispenserSettingMsg(Entity<RMCChemicalDispenserComponent> ent, ref RMCChemicalDispenserDispenseSettingBuiMsg args)
