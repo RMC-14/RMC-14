@@ -1,5 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
+using Content.Shared._RMC14.Chat;
+using Content.Shared._RMC14.Ghost;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -8,6 +10,7 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
+using Content.Shared.Ghost;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
@@ -24,7 +27,6 @@ using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
-using Content.Shared.Wall;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
@@ -38,6 +40,7 @@ public sealed class XenoNestSystem : EntitySystem
 {
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedGhostSystem _ghost = default!;
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -47,6 +50,7 @@ public sealed class XenoNestSystem : EntitySystem
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
     [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -67,6 +71,8 @@ public sealed class XenoNestSystem : EntitySystem
         _xenoNestQuery = GetEntityQuery<XenoNestComponent>();
         _xenoNestSurfaceQuery = GetEntityQuery<XenoNestSurfaceComponent>();
         _xenoWeedableQuery = GetEntityQuery<XenoWeedableComponent>();
+
+        SubscribeLocalEvent<GhostAttemptHandleEvent>(OnNestedGhostAttemptHandle);
 
         SubscribeLocalEvent<XenoComponent, GetUsedEntityEvent>(OnXenoGetUsedEntity);
 
@@ -155,6 +161,20 @@ public sealed class XenoNestSystem : EntitySystem
         // TODO RMC14
         if (HasComp<KnockedDownComponent>(ent) || _mobState.IsIncapacitated(ent))
             _standing.Down(ent, changeCollision: true);
+
+        if (ent.Comp.GhostedId is { } id &&
+            _player.TryGetSessionById(id, out var player) &&
+            player.AttachedEntity is { } ghost &&
+            HasComp<GhostComponent>(ghost))
+        {
+            _rmcChat.ChatMessageToOne("\n[font size=24][color=red]You have been freed from your nest and may go back to your body![/color][/font]\n", ghost);
+
+            var returnTo = EnsureComp<RMCGhostReturnComponent>(ghost);
+            returnTo.Target = ent;
+            Dirty(ghost, returnTo);
+
+            _ghost.SetCanReturnToBody(ghost, true);
+        }
     }
 
     private void OnSurfaceDoAfterAttempt(Entity<XenoNestSurfaceComponent> ent, ref DoAfterAttemptEvent<XenoNestDoAfterEvent> args)
@@ -291,6 +311,21 @@ public sealed class XenoNestSystem : EntitySystem
     {
         if (ent.Comp.Running)
             args.Multiply(ent.Comp.IncubationMultiplier);
+    }
+
+    private void OnNestedGhostAttemptHandle(GhostAttemptHandleEvent args)
+    {
+        if (args.Mind.CurrentEntity is not { } ent ||
+            !TryComp(ent, out XenoNestedComponent? nested))
+        {
+            return;
+        }
+
+        if (args.Mind.UserId is not { } userId)
+            return;
+
+        nested.GhostedId = userId;
+        Dirty(ent, nested);
     }
 
     private void TryStartNesting(EntityUid user, Entity<XenoNestSurfaceComponent> surface, EntityUid victim)

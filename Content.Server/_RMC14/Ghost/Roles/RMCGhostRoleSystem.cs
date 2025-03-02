@@ -1,7 +1,7 @@
 using Content.Server.GameTicking;
 using Content.Server.Ghost.Roles.Components;
 
-namespace Content.Server.Ghost.Roles;
+namespace Content.Server._RMC14.Ghost.Roles;
 
 public sealed class RMCGhostRoleSystem : EntitySystem
 {
