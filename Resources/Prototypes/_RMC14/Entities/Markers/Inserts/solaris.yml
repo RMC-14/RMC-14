@@ -132,3 +132,58 @@
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Solaris/lz1north_mining.yml"
       probability: 0.2
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisLambdaGraveyard
+  name: Lambda Graveyard
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/lambda_graveyard.yml"
+      probability: 0.5
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisDormsParty
+  name: Dorms Party
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/dorms_party.yml"
+      probability: 0.4
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisAdminPMC
+  name: Admin PMC
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/admin_pmc.yml"
+      probability: 0.4
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisFiltrationRestored
+  name: Filtration Restored
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/filtration_restored.yml"
+      probability: 0.35
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisVault
+  name: Vault V2
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/vault_v2.yml"
+      probability: 0.25
