@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Binbagg
-  changes:
-  - message: Changed bio-hazard cades description
-    type: Tweak
-  id: 910
-  time: '2024-11-01T05:15:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4649
 - author: CyberTropic
   changes:
   - message: Fixed missing stair sprites.
@@ -5167,5 +5160,12 @@
   id: 1411
   time: '2025-03-02T05:42:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5712
+- author: J C Denton
+  changes:
+  - message: CO's secure box containing Honor Guard kits for CIC armory.
+    type: Add
+  id: 1412
+  time: '2025-03-02T05:48:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5692
 Name: RMC14
 Order: -1
