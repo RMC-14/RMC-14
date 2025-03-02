@@ -47,7 +47,7 @@
 
 - type: entity
   parent: RMCBaseMarineArmorLight
-  id: CMArmorM4RMarshallMedium
+  id: RMCArmorM4RMarshallMedium
   name: M4R pattern CMB Marshal armor
   description: A custom fit variation of the CMB Riot armor, intended to be worn the Marshals themselves, has a golden lining with rank insignia. Has additional layer of lightweigh protective materials.
   components:
