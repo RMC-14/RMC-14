@@ -1,16 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added sniper specialist's prepare position ability. This will allow them
-      to go invisible while standing still.
-    type: Add
-  - message: Made the sniper ghillie suit have light armor speed.
-    type: Tweak
-  - message: Made the sniper ghillie suit unable to be acidifed.
-    type: Tweak
-  id: 908
-  time: '2024-10-31T21:45:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3592
 - author: snebl
   changes:
   - message: Fixed some airlocks 'bolted' sprite not working.
@@ -5155,5 +5143,29 @@
   id: 1409
   time: '2025-03-02T05:37:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5774
+- author: Vermidia
+  changes:
+  - message: Fixed warding giving twice as much crit health as it should have
+    type: Fix
+  - message: Fixed warding not slowing bleedout off weeds, and not healing crit xenos
+      slightly on weeds
+    type: Fix
+  - message: Fixed xenos bleeding out while on fire (they only take the fire damage,
+      not bleedout damage)
+    type: Fix
+  - message: Added critical grace for xenos. When under crit grace xenos can move
+      around when they would have crit. Non-lesser warding pheros add a second or
+      two of the critical grace.
+    type: Add
+  - message: Fixed lesser drones having no damage overlays
+    type: Fix
+  - message: Fixed warding not persisting in crit on weeds even when there's no producers
+    type: Fix
+  - message: Fixed frenzy being a flat 10% melee damage multiplier. It's now +2 damage
+      per level, and properly adds to tailstab damage.
+    type: Fix
+  id: 1410
+  time: '2025-03-02T05:39:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5747
 Name: RMC14
 Order: -1
