@@ -130,7 +130,7 @@
     - Cartridge
     - RMCCartridge57x28mm
   - type: CartridgeAmmo
-    proto: CMBullet57×28mm
+    proto: RMCBullet57x28mm
 
 - type: entity
   parent: Bullet10x20mm
