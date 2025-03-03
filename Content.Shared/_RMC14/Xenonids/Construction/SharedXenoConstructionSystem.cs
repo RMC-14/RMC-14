@@ -43,6 +43,7 @@ using Content.Shared.Destructible;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared.Damage;
+using Content.Shared._RMC14.Rules;
 
 
 namespace Content.Shared._RMC14.Xenonids.Construction;
@@ -75,6 +76,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
     [Dependency] private readonly TagSystem _tags = default!;
     [Dependency] private readonly FloorTileSystem _tiles = default!;
+    [Dependency] private readonly RMCPlanetSystem _planet = default!;
 
     private static readonly ImmutableArray<Direction> Directions = Enum.GetValues<Direction>()
         .Where(d => d != Direction.Invalid)
@@ -677,7 +679,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var hiveStructures = EntityQueryEnumerator<HiveConstructionLimitedComponent, TransformComponent>();
         while (hiveStructures.MoveNext(out var hiveStructure, out _, out var transformComp))
         {
-            if (transformComp.ParentUid != ev.Dropship)
+            if (transformComp.ParentUid != ev.Dropship && _planet.IsOnPlanet(hiveStructure.ToCoordinates()))
                 _destruction.DestroyEntity(hiveStructure);
         }
     }
