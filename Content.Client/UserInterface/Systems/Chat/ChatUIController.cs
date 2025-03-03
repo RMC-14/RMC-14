@@ -632,7 +632,10 @@ public sealed class ChatUIController : UIController
                     History.RemoveAt(i);
 
                 if (_timing.CurTime > time + TimeSpan.FromMilliseconds(8.33))
+                {
+                    _deletingHistoryIndex = i;
                     return;
+                }
             }
 
             _deleteMessages.Clear();
