@@ -437,6 +437,29 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         _hive.SetSameHive(xeno.Owner, structure);
 
         _adminLogs.Add(LogType.RMCXenoOrderConstruction, $"Xeno {ToPrettyString(xeno):xeno} ordered construction of {ToPrettyString(structure):structure} at {coordinates}");
+
+        if (!_prototype.TryIndex(args.StructureId, out var structureProto))
+        {
+            return;
+        }
+
+        if (TryComp(structure, out HiveConstructionLimitedComponent? hiveLimitedComp) &&
+            CanPlaceLimitedHiveStructure(xeno.Owner, hiveLimitedComp, out var limit, out var curCount))
+        {
+            var remainCount = limit - curCount;
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-order-construction-limited-structure-designated",
+                ("construct", structureProto.Name), ("remainCount", remainCount), ("maxCount", limit)), xeno.Owner, xeno.Owner);
+        }
+
+        var areaName = "Unknown";
+        if (_area.TryGetArea(target, out _, out var areaProto))
+        {
+            areaName = areaProto.Name;
+        }
+        if (Loc.TryGetString("rmc-xeno-order-construction-structure-designated", out var placementMsg, ("construct", structureProto.Name), ("area", areaName)))
+        {
+            _announce.AnnounceSameHive(xeno.Owner, placementMsg, needsQueen: true);
+        }
     }
 
     private void OnHiveConstructionNodeAddPlasmaDoAfter(Entity<XenoConstructionComponent> xeno, ref XenoConstructionAddPlasmaDoAfterEvent args)
@@ -854,9 +877,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 }
             }
 
-
             if (choiceProto.TryGetComponent(out HiveConstructionLimitedComponent? limited, _compFactory) &&
-                !CanPlaceLimitedHiveStructure(xeno.Owner, limited, out var limit))
+                !CanPlaceLimitedHiveStructure(xeno.Owner, limited, out var limit, out _))
             {
                 // server-only as the structure may not be in the client's PVS bubble
                 if (_net.IsServer)
@@ -881,9 +903,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         return true;
     }
 
-    private bool CanPlaceLimitedHiveStructure(EntityUid hiveMember, HiveConstructionLimitedComponent comp, [NotNullWhen(true)] out int? limit)
+    private bool CanPlaceLimitedHiveStructure(EntityUid hiveMember, HiveConstructionLimitedComponent comp, [NotNullWhen(true)] out int? limit, [NotNullWhen(true)] out int? curCount)
     {
         limit = null;
+        curCount = null;
         var id = comp.Id;
         var hive = _hive.GetHive(hiveMember);
         if (hive is null)
@@ -897,7 +920,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         limit = trueLimit;
 
-        var curCount = 0;
+        curCount = 0;
         var limitedConstructs = EntityQueryEnumerator<HiveConstructionLimitedComponent, HiveMemberComponent>();
         while (limitedConstructs.MoveNext(out var otherUnique, out var otherHive))
         {

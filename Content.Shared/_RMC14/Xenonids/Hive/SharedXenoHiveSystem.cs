@@ -204,6 +204,10 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         return memberHive.Owner == hive;
     }
 
+    public bool HasHiveQueen(Entity<HiveComponent> hive)
+    {
+        return (hive.Comp.CurrentQueen is not null);
+    }
     public bool SetHiveQueen(EntityUid queen, Entity<HiveComponent> hive)
     {
         hive.Comp.CurrentQueen = queen;
