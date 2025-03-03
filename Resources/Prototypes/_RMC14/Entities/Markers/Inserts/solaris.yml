@@ -143,6 +143,7 @@
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Solaris/lambda_graveyard.yml"
       probability: 0.5
+      offset: 0,9.0
 
 - type: entity
   parent: RMCMapInsertSolarisBase
@@ -154,6 +155,7 @@
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Solaris/dorms_party.yml"
       probability: 0.4
+      offset: 0,6.0
 
 - type: entity
   parent: RMCMapInsertSolarisBase
@@ -165,6 +167,7 @@
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Solaris/admin_pmc.yml"
       probability: 0.4
+      offset: 0,9.0
 
 - type: entity
   parent: RMCMapInsertSolarisBase
@@ -176,6 +179,7 @@
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Solaris/filtration_restored.yml"
       probability: 0.35
+      offset: 0,24.0
 
 - type: entity
   parent: RMCMapInsertSolarisBase

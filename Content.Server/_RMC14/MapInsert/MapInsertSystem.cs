@@ -48,7 +48,7 @@ public sealed class MapInsertSystem : EntitySystem
         _index = 0;
     }
 
-    public void ProcessMapInsert(Entity<MapInsertComponent> ent)
+    public void ProcessMapInsert(Entity<MapInsertComponent> ent, bool forceSpawn = false)
     {
         if (_net.IsClient)
             return;
@@ -62,12 +62,14 @@ public sealed class MapInsertSystem : EntitySystem
         var randomProbability = _random.NextFloat();
         var cumulativeProbability = 0f;
         ResPath spawn = default;
+        Vector2 spawnOffset = default;
         foreach (var variation in ent.Comp.Variations)
         {
             cumulativeProbability += variation.Probability;
-            if (cumulativeProbability >= randomProbability)
+            if (forceSpawn ||  cumulativeProbability >= randomProbability)
             {
                 spawn = variation.Spawn;
+                spawnOffset = variation.Offset;
                 break;
             }
         }
@@ -97,7 +99,7 @@ public sealed class MapInsertSystem : EntitySystem
         if (mainGrid == null)
             return;
         var coordinates = _transform.GetMapCoordinates(ent, xform).Offset(new Vector2(-0.5f, -0.5f));
-        coordinates = coordinates.Offset(ent.Comp.Offset);
+        coordinates = coordinates.Offset(spawnOffset);
         var coordinatesi = new Vector2i((int)coordinates.X, (int)coordinates.Y);
 
         //Replace areas
