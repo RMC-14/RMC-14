@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage.Systems;
@@ -36,7 +36,7 @@ public sealed class TackleSystem : EntitySystem
 
         SubscribeLocalEvent<TackledRecentlyByComponent, ComponentRemove>(OnByRemove);
         SubscribeLocalEvent<TackledRecentlyByComponent, EntityTerminatingEvent>(OnByRemove);
-        SubscribeLocalEvent<TackledRecentlyByComponent, KnockedDownEvent>(OnByKnockedDown);
+        SubscribeLocalEvent<TackledRecentlyByComponent, DownedEvent>(OnDowned);
 
         SubscribeLocalEvent<TackledRecentlyComponent, ComponentRemove>(OnRemove);
         SubscribeLocalEvent<TackledRecentlyComponent, EntityTerminatingEvent>(OnRemove);
@@ -148,9 +148,10 @@ public sealed class TackleSystem : EntitySystem
         }
     }
 
-    private void OnByKnockedDown(Entity<TackledRecentlyByComponent> ent, ref KnockedDownEvent args)
+    private void OnDowned(Entity<TackledRecentlyByComponent> ent, ref DownedEvent args)
     {
-        RemCompDeferred<TackledRecentlyByComponent>(ent);
+        if (!HasComp<VictimInfectedComponent>(ent))
+            RemCompDeferred<TackledRecentlyByComponent>(ent);
     }
 
     private void OnRemove<T>(Entity<TackledRecentlyComponent> ent, ref T args)
