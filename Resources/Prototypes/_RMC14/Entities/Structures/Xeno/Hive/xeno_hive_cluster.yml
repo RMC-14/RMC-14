@@ -15,6 +15,10 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 300
   - type: XenoWeeds
     range: 7
     spawns: XenoHiveWeeds

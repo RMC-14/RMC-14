@@ -15,6 +15,10 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 100
   - type: RecoveryNode
   - type: HiveConstructionLimited
     id: HiveRecoveryNodeXeno
@@ -23,7 +27,7 @@
 
 - type: entity
   id: HiveRecoveryNodeXenoConstructionNode
-  parent: BaseHiveStructure
+  parent: BaseHiveStructureNode
   name: Recovery Node
   description: A warm, soothing light source that pulsates with a faint hum. Looks like a marker for something.
   suffix: Construction
