@@ -623,6 +623,9 @@ public sealed class ChatUIController : UIController
         {
             for (var i = _deletingHistoryIndex.Value; i >= 0; i--)
             {
+                if (i >= History.Count)
+                    continue;
+
                 // This will delete messages from an entity even if different players were the author.
                 // Usages of the erase admin verb should be rare enough that this does not matter.
                 // Otherwise the client would need to know that one entity has multiple author players,
