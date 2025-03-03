@@ -42,6 +42,7 @@ using Content.Shared.Tiles;
 using Content.Shared.Destructible;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared.Damage;
 
 
 namespace Content.Shared._RMC14.Xenonids.Construction;
@@ -58,6 +59,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedDestructibleSystem _destruction = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -132,7 +134,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         SubscribeLocalEvent<DeleteXenoResinOnHitComponent, ProjectileHitEvent>(OnDeleteXenoResinHit);
 
-        SubscribeLocalEvent<HiveConstructionLimitedComponent, DropshipHijackStartEvent>(OnDropshipHijackStart);
+        SubscribeLocalEvent<DropshipHijackStartEvent>(OnDropshipHijackStart);
 
         Subs.BuiEvents<XenoConstructionComponent>(XenoChooseStructureUI.Key, subs =>
         {
@@ -670,15 +672,14 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             QueueDel(args.Target);
     }
 
-    private void OnDropshipHijackStart(Entity<HiveConstructionLimitedComponent> ent, ref DropshipHijackStartEvent ev)
+    private void OnDropshipHijackStart(ref DropshipHijackStartEvent ev)
     {
-        if (!TryComp(ent.Owner, out TransformComponent? transformComp))
+        var hiveStructures = EntityQueryEnumerator<HiveConstructionLimitedComponent, TransformComponent>();
+        while (hiveStructures.MoveNext(out var hiveStructure, out _, out var transformComp))
         {
-            return;
+            if (transformComp.ParentUid != ev.Dropship)
+                _destruction.DestroyEntity(hiveStructure);
         }
-
-        if (transformComp.ParentUid != ev.Dropship)
-            _destruction.DestroyEntity(ent.Owner);
     }
     public FixedPoint2? GetStructurePlasmaCost(EntProtoId prototype)
     {
