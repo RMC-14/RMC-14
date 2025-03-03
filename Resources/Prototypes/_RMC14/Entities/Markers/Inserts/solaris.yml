@@ -165,6 +165,7 @@
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Solaris/admin_pmc.yml"
       probability: 0.4
+      offset: 0,10.0
 
 - type: entity
   parent: RMCMapInsertSolarisBase
@@ -176,6 +177,7 @@
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Solaris/filtration_restored.yml"
       probability: 0.35
+      offset: 0,24.0
 
 - type: entity
   parent: RMCMapInsertSolarisBase
