@@ -574,14 +574,20 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             var intersecting = _physics.GetEntitiesIntersectingBody(uid, (int) extinguish.Collision);
             foreach (var entIntersecting in intersecting)
             {
-                if (!_flammableQuery.TryComp(entIntersecting, out var flammable))
-                    continue;
+                if (_flammableQuery.TryComp(entIntersecting, out var flammable))
+                {
+                    var ev = new ExtinguishFireAttemptEvent(uid, entIntersecting);
+                    RaiseLocalEvent(uid, ref ev);
 
-                var ev = new ExtinguishFireAttemptEvent(uid, entIntersecting);
-                RaiseLocalEvent(uid, ref ev);
+                    if (!ev.Cancelled)
+                        Extinguish((entIntersecting, flammable));
+                }
 
-                if (!ev.Cancelled)
-                    Extinguish((entIntersecting, flammable));
+                if (_tileFireQuery.TryComp(entIntersecting, out var tileFire) &&
+                    extinguish.ExtinguishingPower is { } power)
+                {
+                    tileFire.Duration -= TimeSpan.FromSeconds(tileFire.AcidSprayExtinguishMultiplier * power);
+                }
             }
         }
 
