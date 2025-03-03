@@ -618,32 +618,39 @@ public sealed class ChatUIController : UIController
     {
         UpdateQueuedSpeechBubbles(delta);
 
-        var time = _timing.CurTime;
-        if (_deletingHistoryIndex != null)
+        try
         {
-            for (var i = _deletingHistoryIndex.Value; i >= 0; i--)
+            var time = _timing.CurTime;
+            if (_deletingHistoryIndex != null)
             {
-                if (i >= History.Count)
-                    continue;
-
-                // This will delete messages from an entity even if different players were the author.
-                // Usages of the erase admin verb should be rare enough that this does not matter.
-                // Otherwise the client would need to know that one entity has multiple author players,
-                // or the server would need to track when and which entities a player sent messages as.
-                var (_, h) = History[i];
-                if (_deleteMessages.Any(msg => h.SenderKey == msg.Key || msg.Entities.Contains(h.SenderEntity)))
-                    History.RemoveAt(i);
-
-                if (_timing.CurTime > time + TimeSpan.FromMilliseconds(8.33))
+                for (var i = _deletingHistoryIndex.Value; i >= 0; i--)
                 {
-                    _deletingHistoryIndex = i;
-                    return;
-                }
-            }
+                    if (i >= History.Count)
+                        continue;
 
-            _deleteMessages.Clear();
-            _deletingHistoryIndex = null;
-            Repopulate();
+                    // This will delete messages from an entity even if different players were the author.
+                    // Usages of the erase admin verb should be rare enough that this does not matter.
+                    // Otherwise the client would need to know that one entity has multiple author players,
+                    // or the server would need to track when and which entities a player sent messages as.
+                    var (_, h) = History[i];
+                    if (_deleteMessages.Any(msg => h.SenderKey == msg.Key || msg.Entities.Contains(h.SenderEntity)))
+                        History.RemoveAt(i);
+
+                    if (_timing.CurTime > time + TimeSpan.FromMilliseconds(8.33))
+                    {
+                        _deletingHistoryIndex = i;
+                        return;
+                    }
+                }
+
+                _deleteMessages.Clear();
+                _deletingHistoryIndex = null;
+                Repopulate();
+            }
+        }
+        catch (Exception e)
+        {
+            Logger.Error($"Error deleting chat history:\n{e}");
         }
     }
 
