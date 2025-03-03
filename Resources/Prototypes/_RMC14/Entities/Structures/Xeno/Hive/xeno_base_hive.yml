@@ -25,6 +25,7 @@
   - type: XenoConstruct
     destroyWeedNodes: false
   - type: XenoAnnounceStructureDestruction
+  - type: RequireProjectileTarget
 
 - type: entity
   abstract: true
