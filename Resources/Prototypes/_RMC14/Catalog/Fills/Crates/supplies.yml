@@ -80,3 +80,14 @@
 
 # /datum/supply_packs/presents
 # /datum/supply_packs/wrapping_supplies
+
+- type: entity
+  id: RMCCrateSuppliesPlushieAlec
+  parent: RMCCrateSupply
+  name: you fear of opening it yourself
+  components:
+  - type: StorageFill
+    contents:
+       - id: RMCPlushieAlec
+         amount: 6
+  
