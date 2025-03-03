@@ -2,13 +2,18 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/a3b7bc4f4388bf291ccfeceac7d471961c224b45/sound/weapons/gun_rifle_draw.ogg"
-  
+
 - files: ["gun_pistol_draw.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/a3b7bc4f4388bf291ccfeceac7d471961c224b45/sound/weapons/gun_pistol_draw.ogg"
-  
+
 - files: ["gun_pistol_sheathe.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/a3b7bc4f4388bf291ccfeceac7d471961c224b45/sound/weapons/gun_pistol_sheathe.ogg"
+
+- files: ["gun_cmb_click1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/weapons/handling/gun_cmb_click1.ogg"
