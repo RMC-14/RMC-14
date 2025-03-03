@@ -5,14 +5,14 @@
   description: An older design of the Assault Rifle commonly used by the Marine Corps. Uses 10x24mm caseless ammunition.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54cmk1/desert.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54cmk1.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54cmk1/desert.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54cmk1.rsi
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
