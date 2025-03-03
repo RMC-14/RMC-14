@@ -342,7 +342,7 @@
         amount: 16 # TODO RMC14 6 once heavy is in
       #- id: M4A3 HP Magazine (9mm)
       #  amount: 2
-      - id: CMMagazineRifleM54CE2HoloTargeting
+      - id: CMMagazineRifleM54CE2HT
         amount: 2
       - id: RMCBox458SOCOM
         amount: 4
