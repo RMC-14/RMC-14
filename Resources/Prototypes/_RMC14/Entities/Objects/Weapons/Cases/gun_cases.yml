@@ -184,7 +184,7 @@
     contents:
     - id: WeaponRifleM54CE2
     - id: CMMagazineRifleM54CE2
-    - id: CMMagazineRifleM54CE2 # Replace with a holotargeting mag once that ammo is implemented.
+    - id: CMMagazineRifleM54CE2HT
 
 # XM88
 - type: entity

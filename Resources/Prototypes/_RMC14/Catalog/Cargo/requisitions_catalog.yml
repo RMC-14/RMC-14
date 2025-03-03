@@ -26,6 +26,8 @@
         crate: RMCCrateBoxMagazineRifleM54CExt
 #      - cost: 2000
 #        crate: RMCCrateMagazineRifleM54CE2
+      - cost: 3000
+        crate: RMCCrateMagazineRifleM54CE2HT
       - cost: 2000
         crate: RMCCrateBoxMagazineRifleM4SPR
       - cost: 4000
