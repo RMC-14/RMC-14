@@ -123,7 +123,8 @@ public sealed class RMCSizeStunSystem : EntitySystem
                 slow -= TimeSpan.FromSeconds(distance / 5);
             }
 
-            ApplyEffects(args.Target, stun, slow, superSlow);
+            if (bullet.Comp.SlowsEffectBigXenos || size.Size < RMCSizes.Big)
+                ApplyEffects(args.Target, stun, slow, superSlow);
 
             _popup.PopupEntity(Loc.GetString("rmc-xeno-stun-shaken"), args.Target, args.Target, PopupType.MediumCaution);
         }
