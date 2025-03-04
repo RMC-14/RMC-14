@@ -1,7 +1,7 @@
 - type: entity
   parent: CMWeaponPistolBase
   id: RMCWeaponPistolCOD50WinterWyvern
-  name: vintage D50 winter wyvern
+  name: vintage D50 Winter Wyvern
   description: A bulky 50 caliber pistol with a serious kick. Hand crafted from the finest blacksteel with an ivory grip bolted together with gold studs. Very elegant.
   components:
   - type: Gun
