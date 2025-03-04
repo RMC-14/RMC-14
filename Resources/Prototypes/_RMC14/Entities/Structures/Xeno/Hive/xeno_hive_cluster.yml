@@ -33,6 +33,12 @@
   - type: RepairableXenoStructure
     plasmaCost: 300
     repairLength: 15
+  - type: XenoMapTracked
+  - type: TacticalMapTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: cluster
 
 
 - type: entity
