@@ -626,16 +626,16 @@
       "name": "background_spp"
     },
     {
-      "name": "background_upp_alpha"
+      "name": "background_spp_alpha"
     },
     {
-      "name": "background_upp_bravo"
+      "name": "background_spp_bravo"
     },
     {
-      "name": "background_upp_charlie"
+      "name": "background_spp_charlie"
     },
     {
-      "name": "background_upp_delta"
+      "name": "background_spp_delta"
     },
     {
       "name": "spp_slt"
