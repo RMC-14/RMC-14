@@ -1,11 +1,6 @@
+using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.RecoveryNode;
 
@@ -22,8 +17,8 @@ public sealed partial class RecoveryNodeComponent : Component
     public TimeSpan HealCooldown = TimeSpan.FromSeconds(5);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan? NextHealAt;
+    public TimeSpan NextHealAt;
 
-    [DataField, AutoNetworkedField]
-    public EntProtoId? HealEffect = "RMCEffectHealQueen";
+    [DataField]
+    public DoAfterId? HealDoafter;
 }

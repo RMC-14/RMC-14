@@ -80,4 +80,5 @@ rmc-xeno-construction-egg-morpher-already-full = This egg morpher is already ful
 
 rmc-xeno-construction-egg-morpher-examine = Sheltering: {$cur_paras}/{$max_paras} parasites.
 
-rmc-xeno-construction-recovery-node-heal-target = You feel a warm aura envelop you.
+rmc-xeno-construction-recovery-node-heal-target = We feel a warm aura envelop us.
+rmc-xeno-construction-recovery-node-heal-other = {CAPITALIZE(THE($target))} glows as a warm aura envelops them.
