@@ -66,7 +66,6 @@
     - map: [ "eyes" ]
     - map: [ "belt" ]
     - map: [ "enum.HumanoidVisualLayers.Tail" ] # Mentioned in moth code: This needs renaming lol.
-    - map: [ "neck" ]
     - map: [ "back" ]
     - map: [ "id" ]
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
@@ -74,6 +73,7 @@
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
     - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
     - map: [ "mask" ]
+    - map: [ "neck" ]
     - map: [ "head" ]
     - map: [ "enum.SquadArmorLayers.Helmet" ]
     - map: [ "enum.VisorVisualLayers.Base" ]

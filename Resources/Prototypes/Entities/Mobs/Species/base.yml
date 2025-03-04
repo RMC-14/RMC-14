@@ -35,7 +35,6 @@
     - map: [ "enum.MedalVisualLayers.Base" ]
     - map: [ "eyes" ]
     - map: [ "belt" ]
-    - map: [ "neck" ]
     - map: [ "back" ]
     - map: [ "id" ]
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
@@ -44,6 +43,7 @@
     - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
     - map: [ "enum.HumanoidVisualLayers.Tail" ]
     - map: [ "mask" ]
+    - map: [ "neck" ] # RMC14 re-arrange neck slot
     - map: [ "head" ]
     - map: [ "enum.SquadArmorLayers.Helmet" ]
     - map: [ "enum.VisorVisualLayers.Base" ]
@@ -341,7 +341,6 @@
     - map: [ "eyes" ]
     - map: [ "belt" ]
     - map: [ "id" ]
-    - map: [ "neck" ]
     - map: [ "back" ]
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
     - map: [ "enum.HumanoidVisualLayers.Hair" ]
@@ -349,6 +348,7 @@
     - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
     - map: [ "enum.HumanoidVisualLayers.Tail" ]
     - map: [ "mask" ]
+    - map: [ "neck" ] # RMC14 re-arrange neck slot
     - map: [ "head" ]
     - map: [ "pocket1" ]
     - map: [ "pocket2" ]
