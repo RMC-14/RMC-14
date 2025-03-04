@@ -36,6 +36,9 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: RepairableXenoStructure
+    plasmaCost: 1000
+    repairLength: 15
   - type: MeleeReceivedMultiplier
     xenoDamage:
       types:
@@ -120,6 +123,9 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: RepairableXenoStructure
+    plasmaCost: 1000
+    repairLength: 15
   - type: MeleeReceivedMultiplier
     xenoDamage:
       types:

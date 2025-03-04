@@ -129,6 +129,11 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         SubscribeLocalEvent<HiveConstructionNodeComponent, ExaminedEvent>(OnHiveConstructionNodeExamined);
         SubscribeLocalEvent<HiveConstructionNodeComponent, ActivateInWorldEvent>(OnHiveConstructionNodeActivated);
 
+        SubscribeLocalEvent<RepairableXenoStructureComponent, ActivateInWorldEvent>(OnHiveConstructionRepair);
+        SubscribeLocalEvent<RepairableXenoStructureComponent, XenoRepairStructureDoAfterEvent>(OnHiveConstructionRepairDoAfter);
+
+        SubscribeLocalEvent<XenoWeedsComponent, XenoStructureRepairedEvent>(OnWeedStructureRepair);
+
         SubscribeLocalEvent<XenoConstructionSupportComponent, ComponentRemove>(OnCheckAdjacentCollapse);
         SubscribeLocalEvent<XenoConstructionSupportComponent, EntityTerminatingEvent>(OnCheckAdjacentCollapse);
 
@@ -636,6 +641,101 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         };
 
         _doAfter.TryStartDoAfter(doAfter);
+    }
+
+    private void OnHiveConstructionRepair(Entity<RepairableXenoStructureComponent> xenoStructure, ref ActivateInWorldEvent args)
+    {
+        var user = args.User;
+        var plasmaLeft = xenoStructure.Comp.PlasmaCost - xenoStructure.Comp.StoredPlasma;
+        if (!TryComp(user, out XenoConstructionComponent? xeno) ||
+            plasmaLeft < FixedPoint2.Zero ||
+            !TryComp(xenoStructure, out TransformComponent? xenoStructureTransform) ||
+            !TryComp(user, out XenoPlasmaComponent? plasma) ||
+            !TryComp(xenoStructure, out DamageableComponent? xenoStructureDamage))
+        {
+            return;
+        }
+
+        if (xenoStructureDamage.TotalDamage <= 0)
+        {
+            var undamagedStructureMessage = Loc.GetString("rmc-xeno-construction-repair-structure-no-damage-failure", ("struct", xenoStructure.Owner));
+            _popup.PopupClient(undamagedStructureMessage, xenoStructure.Owner.ToCoordinates(), user);
+        }
+
+        if (!InRangePopup(user, xenoStructureTransform.Coordinates, xeno.OrderConstructionRange.Float()))
+            return;
+
+        if (plasma.Plasma < 1)
+        {
+            return;
+        }
+
+        var ev = new XenoRepairStructureDoAfterEvent();
+        var delay = xenoStructure.Comp.RepairLength;
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, xenoStructure, xenoStructure)
+        {
+            BreakOnMove = true
+        };
+
+        _doAfter.TryStartDoAfter(doAfter);
+        _popup.PopupClient(Loc.GetString("rmc-xeno-construction-repair-structure-start-attempt", ("struct", xenoStructure.Owner)),
+            xenoStructureTransform.Coordinates, user);
+    }
+
+    private void OnHiveConstructionRepairDoAfter(Entity<RepairableXenoStructureComponent> xenoStructure, ref XenoRepairStructureDoAfterEvent args)
+    {
+        var user = args.User;
+        var plasmaLeft = xenoStructure.Comp.PlasmaCost - xenoStructure.Comp.StoredPlasma;
+        if (!TryComp(user, out XenoConstructionComponent? xeno) ||
+            plasmaLeft < FixedPoint2.Zero ||
+            !TryComp(xenoStructure, out TransformComponent? xenoStructureTransform) ||
+            !TryComp(user, out XenoPlasmaComponent? plasma) ||
+            !TryComp(xenoStructure, out DamageableComponent? xenoStructureDamage) ||
+            xenoStructureDamage.TotalDamage <= 0)
+        {
+            return;
+        }
+
+        if (!InRangePopup(user, xenoStructureTransform.Coordinates, xeno.OrderConstructionRange.Float()))
+            return;
+
+        var subtract = FixedPoint2.Min(plasma.Plasma, plasmaLeft);
+        if (plasma.Plasma < 1 ||
+            !_xenoPlasma.TryRemovePlasma((user, plasma), subtract))
+        {
+            return;
+        }
+
+        xenoStructure.Comp.StoredPlasma += subtract;
+        if (xenoStructure.Comp.StoredPlasma >= xenoStructure.Comp.PlasmaCost)
+        {
+            xenoStructure.Comp.StoredPlasma = 0;
+        }
+        else
+        {
+            var notEnoughPlasmaMessage = Loc.GetString("rmc-xeno-construction-repair-structure-insufficient-plasma-warn",
+                ("struct", xenoStructure.Owner), ("remainingPlasma", xenoStructure.Comp.PlasmaCost - xenoStructure.Comp.StoredPlasma));
+            _popup.PopupClient(notEnoughPlasmaMessage, xenoStructure.Owner.ToCoordinates(), user);
+            return;
+        }
+
+        _damageable.SetAllDamage(xenoStructure.Owner, xenoStructureDamage, 0);
+        var ev = new XenoStructureRepairedEvent();
+        RaiseLocalEvent(xenoStructure, ev);
+
+        _popup.PopupClient(Loc.GetString("rmc-xeno-construction-repair-structure-success", ("struct", xenoStructure.Owner)),
+            xenoStructureTransform.Coordinates, user);
+    }
+
+    private void OnWeedStructureRepair(Entity<XenoWeedsComponent> weedsStructure, ref XenoStructureRepairedEvent args)
+    {
+        var (ent, comp) = weedsStructure;
+        foreach (var weed in comp.Spread)
+        {
+            var weedSpreaderComp = new XenoWeedsSpreadingComponent();
+            weedSpreaderComp.SpreadAt = _timing.CurTime;
+            AddComp(weed, weedSpreaderComp);
+        }
     }
 
     private void OnCheckAdjacentCollapse<T>(Entity<XenoConstructionSupportComponent> ent, ref T args)

@@ -30,6 +30,9 @@
   - type: XenoWeedsSpreading
   - type: HiveConstructionLimited
     id: HiveClusterXeno
+  - type: RepairableXenoStructure
+    plasmaCost: 300
+    repairLength: 15
 
 
 - type: entity
