@@ -359,8 +359,6 @@
       - id: CMJumpsuitCOService
       - id: CMJumpsuitCOFormalWhite
       - id: CMJumpsuitCOFormalBlack 
-      - id: CMCoatCOFormalWhite
-      - id: CMCoatCOFormalBlack
       - id: RMCCoatService
       - id: CMCoatMP
       - id: RMCShoesLaceup
