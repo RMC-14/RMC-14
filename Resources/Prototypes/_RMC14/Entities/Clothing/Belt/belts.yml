@@ -575,21 +575,25 @@
   description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi/classic-jungle-urban.rsi
     layers:
     - state: icon
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: m1984 # TODO RMC14 per-gun underlay
-      map: [ "enum.CMHolsterLayers.Fill" ]
-      visible: false
-    - sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
-      state: icon-front
+      state: _m77
+      map: [ "_m77_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m1984
+      map: [ "m1984_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: mk80
+      map: [ "mk80_fill" ]
+    - state: icon-front
     - state: half
       map: [ "openLayer" ]
     - state: full
       map: [ "closedLayer" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi/classic-jungle-urban.rsi
     slots:
     - suitStorage
     - belt
@@ -625,8 +629,31 @@
   - type: Tag
     tags:
     - RMCGeneralPistolHolster
+  - type: ItemMapper
+    spriteLayers:
+    - _m77_fill
+    - m1984_fill
+    - mk80_fill
+    mapLayers:
+      _m77_fill:
+        whitelist:
+          tags:
+          - RMCWeaponPistolM77
+      m1984_fill:
+        whitelist:
+          tags:
+          - CMWeaponPistolM1984
+      mk80_fill:
+        whitelist:
+          tags:
+          - RMCMK80
   - type: ItemCamouflage
-    camouflageVariations: { }
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi/classic-jungle-urban.rsi
+      Desert: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi/classic-jungle-urban.rsi
+      Urban: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi/classic-jungle-urban.rsi
 
 - type: Tag
   id: RMCGeneralPistolHolster
