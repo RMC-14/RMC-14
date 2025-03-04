@@ -15,6 +15,10 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 300
   - type: XenoWeeds
     range: 7
     spawns: XenoHiveWeeds
@@ -26,6 +30,9 @@
   - type: XenoWeedsSpreading
   - type: HiveConstructionLimited
     id: HiveClusterXeno
+  - type: RepairableXenoStructure
+    plasmaCost: 300
+    repairLength: 15
 
 
 - type: entity

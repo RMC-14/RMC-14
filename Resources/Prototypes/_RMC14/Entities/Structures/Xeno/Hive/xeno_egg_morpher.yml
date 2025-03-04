@@ -43,6 +43,10 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 75
   - type: EggMorpher
   - type: HiveConstructionRequiresHiveWeeds
   - type: HiveConstructionRequiresSpace
