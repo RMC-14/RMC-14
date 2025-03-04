@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Buckle.Components;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
@@ -150,7 +151,7 @@ public sealed class TackleSystem : EntitySystem
 
     private void OnDowned(Entity<TackledRecentlyByComponent> ent, ref DownedEvent args)
     {
-        if (!HasComp<VictimInfectedComponent>(ent))
+        if (!HasComp<VictimInfectedComponent>(ent) && (!TryComp<BuckleComponent>(ent, out var buckle) || !buckle.Buckled))
             RemCompDeferred<TackledRecentlyByComponent>(ent);
     }
 
