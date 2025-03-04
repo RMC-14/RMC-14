@@ -345,7 +345,9 @@
       - id: CMHeadCapCO
       - id: CMHeadBeretCO
       - id: CMBootsBlackFilled
+      - id: CMBootsBrown
       - id: CMHandsBlackMarine
+      - id: CMHandsBrown
     - name: Utility Extras
       entries:
       - id: RMCSunglasses
@@ -357,7 +359,7 @@
       entries:
       - id: CMJumpsuitCOService
       - id: CMJumpsuitCOFormalWhite
-      - id: CMJumpsuitCOFormalBlack
+      - id: CMJumpsuitCOFormalBlack 
       - id: RMCCoatService
       - id: CMCoatMP
       - id: RMCShoesLaceup
@@ -367,6 +369,8 @@
       - id: CMHeadBeretCO
       - id: CMHeadBeretCOWhite
       - id: CMHeadBeretCOBlack
+      - id: CMHeadCapCOFormalBlack
+      - id: CMHeadCapCOFormalWhite
       - id: RMCHeadCapFlippable # TODO: Check this is the service variant. If so, parent and rename.
     - name: Service Extras
       entries:
