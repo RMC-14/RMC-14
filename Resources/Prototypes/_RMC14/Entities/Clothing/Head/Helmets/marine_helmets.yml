@@ -109,7 +109,7 @@
   parent: RMCMarineHelmetBase
   id: RMCArmorHelmetM10MedicWhite
   name: M10 white corpsman helmet
-  description: An M10 marine helmet version worn by marine hospital corpsmen. Painted in medical white and has white cross in a red square painted on its front.
+  description: An M10 marine helmet version worn by marine hospital corpsmen. Painted in medical white and has white cross in a blue square painted on its front.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/medic_white.rsi
