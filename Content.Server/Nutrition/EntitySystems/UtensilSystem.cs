@@ -56,7 +56,7 @@ namespace Content.Server.Nutrition.EntitySystems
             if (!_interactionSystem.InRangeUnobstructed(user, target, popup: true))
                 return (false, true);
 
-            return _foodSystem.TryFeed(user, user, target, food);
+            return _foodSystem.TryFeed(user, user, target, food, true);
         }
 
         /// <summary>

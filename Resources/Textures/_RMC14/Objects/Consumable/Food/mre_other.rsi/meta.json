@@ -133,6 +133,9 @@
     {
       "name": "mre_spork-inhand-right",
       "directions": 4
+    },
+    {
+      "name": "food_1"
     }
   ]
 }

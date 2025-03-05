@@ -59,7 +59,7 @@
 
 - type: entity
   parent: CMMRESideComponentBase
-  id: CMMREComponentCornbread
+  id: RMCMREComponentCornbread
   description: An MRE side component. Contains a side, to be eaten alongside the main. This one is cornbread.
   suffix: cornbread
   components:
@@ -67,11 +67,11 @@
     currentLabel: rmc-mre-side-cornbread
   - type: SpawnItemsOnUse
     items:
-    - id: CMMREFoodCornbread
+    - id: RMCMREFoodCornbread
 
 - type: entity
   parent: CMMRESideComponentBase
-  id: CMMREComponentKale
+  id: RMCMREComponentKale
   description: An MRE side component. Contains a side, to be eaten alongside the main. This one is marinated kale.
   suffix: kale
   components:
@@ -79,11 +79,11 @@
     currentLabel: rmc-mre-side-kale
   - type: SpawnItemsOnUse
     items:
-    - id: CMMREFoodKale
+    - id: RMCMREFoodKale
 
 - type: entity
   parent: CMMRESideComponentBase
-  id: CMMREComponentTortillas
+  id: RMCMREComponentTortillas
   description: An MRE side component. Contains a side, to be eaten alongside the main. This one is tortillas.
   suffix: tortillas
   components:
@@ -91,11 +91,11 @@
     currentLabel: rmc-mre-side-tortillas
   - type: SpawnItemsOnUse
     items:
-    - id: CMMREFoodTortillas
+    - id: RMCMREFoodTortillas
 
 - type: entity
   parent: CMMRESideComponentBase
-  id: CMMREComponentCinnamonAppleSlices
+  id: RMCMREComponentCinnamonAppleSlices
   description: An MRE side component. Contains a side, to be eaten alongside the main. This one is cinnamon apple slices.
   suffix: cinnamon apple slices
   components:
@@ -103,11 +103,11 @@
     currentLabel: rmc-mre-side-cinnamon-apple-slices
   - type: SpawnItemsOnUse
     items:
-    - id: CMMREFoodCinnamonAppleSlices
+    - id: RMCMREFoodCinnamonAppleSlices
 
 - type: entity
   parent: CMMRESideComponentBase
-  id: CMMREComponentBoiledRice
+  id: RMCMREComponentBoiledRice
   description: An MRE side component. Contains a side, to be eaten alongside the main. This one is boiled rice.
   suffix: boiled rice
   components:
@@ -115,11 +115,11 @@
     currentLabel: rmc-mre-side-boiled-rice
   - type: SpawnItemsOnUse
     items:
-    - id: CMMREFoodBoiledRice
+    - id: RMCMREFoodBoiledRice
 
 - type: entity
   parent: CMMRESideComponentBase
-  id: CMMREComponentBiscuitsSide
+  id: RMCMREComponentBiscuitsSide
   description: An MRE side component. Contains a side, to be eaten alongside the main. This one is biscuits.
   suffix: biscuits
   components:
@@ -127,7 +127,7 @@
     currentLabel: rmc-mre-side-biscuits
   - type: SpawnItemsOnUse
     items:
-    - id: CMMREFoodBiscuits
+    - id: RMCMREFoodBiscuits
 
 # Foods
 - type: entity
@@ -243,7 +243,7 @@
 
 - type: entity
   parent: CMMREFoodSide
-  id: CMMREFoodCornbread
+  id: RMCMREFoodCornbread
   name: cornbread
   description: Almost universally hated, very dry and simple taste of it really gets old fast. Requisitions probably has ass-load of it in the back. Nobody eats that shit.
   components:
@@ -268,7 +268,7 @@
 
 - type: entity
   parent: CMMREFoodSide
-  id: CMMREFoodKale
+  id: RMCMREFoodKale
   name: marinated kale
   description: A sort of cabbage, marinated in spices, still has a lot of moist and crunch to it.
   components:
@@ -293,7 +293,7 @@
 
 - type: entity
   parent: CMMREFoodSide
-  id: CMMREFoodTortillas
+  id: RMCMREFoodTortillas
   name: tortillas
   description: A kind of flat bread, goes well with adding other things onto it.
   components:
@@ -314,7 +314,7 @@
 
 - type: entity
   parent: CMMREFoodSide
-  id: CMMREFoodBiscuits
+  id: RMCMREFoodBiscuits
   name: biscuits
   description: An assortment of biscuits, go well with adding other things onto them.
   components:
@@ -335,7 +335,7 @@
 
 - type: entity
   parent: CMMREFoodSide
-  id: CMMREFoodCinnamonAppleSlices
+  id: RMCMREFoodCinnamonAppleSlices
   name: cinnamon apple slices
   description: A bit gooey pieces of apple in cinnamon sauce, a bit sticky but tasty.
   components:
@@ -358,7 +358,7 @@
 
 - type: entity
   parent: CMMREFoodSide
-  id: CMMREFoodBoiledRice
+  id: RMCMREFoodBoiledRice
   name: boiled rice
   description: A packet of plain boiled rice, a bit boring but would go well with additives.
   components:

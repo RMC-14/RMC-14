@@ -22,7 +22,7 @@
     heldPrefix: mealpack
   - type: Storage
     grid:
-    - 0,0,21,1 #11 slots
+    - 0,0,13,3 #11 slots min
     maxItemSize: Small
     whitelist:
       components:
@@ -50,17 +50,17 @@
       orGroup: main
     - id: CMMREComponentChickenTender
       orGroup: main
-    - id: CMMREComponentPepperoniSquare
+    - id: RMCMREComponentPepperoniSquare
       orGroup: main
     - id: CMMREComponentSpaghettiChunks
       orGroup: main
-    - id: CMMREComponentChiliConCarne
+    - id: RMCMREComponentChiliConCarne
       orGroup: main
-    - id: CMMREComponentNoodleSoup
+    - id: RMCMREComponentNoodleSoup
       orGroup: main
-    - id: CMMREComponentGrilledChickenBreast
+    - id: RMCMREComponentGrilledChickenBreast
       orGroup: main
-    - id: CMMREComponentFeijoada
+    - id: RMCMREComponentFeijoada
       orGroup: main
     # side
     - id: CMMREComponentCracker
@@ -71,17 +71,17 @@
       orGroup: side
     - id: CMMREComponentRiceOnigiri
       orGroup: side
-    - id: CMMREComponentCornbread
+    - id: RMCMREComponentCornbread
       orGroup: side
-    - id: CMMREComponentKale
+    - id: RMCMREComponentKale
       orGroup: side
-    - id: CMMREComponentTortillas
+    - id: RMCMREComponentTortillas
       orGroup: side
-    - id: CMMREComponentCinnamonAppleSlices
+    - id: RMCMREComponentCinnamonAppleSlices
       orGroup: side
-    - id: CMMREComponentBoiledRice
+    - id: RMCMREComponentBoiledRice
       orGroup: side
-    - id: CMMREComponentBiscuitsSide
+    - id: RMCMREComponentBiscuitsSide
       orGroup: side
     # snack
     - id: CMMREComponentBiscuit
@@ -223,14 +223,19 @@
     startingItem: CMMRE
 
 - type: entity
-  parent: UtensilBase
+  parent: RMCFork
   id: RMCMRESpork
   name: MRE spork
   description: It's a plastic brown spork. Very robust for what it is, legends tell about stranded marines who dug trenches with these.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/mre_other.rsi
-    state: mre_spork
+    layers:
+    - state: mre_spork
+    - map: ["RMCUtensilFoodLayers.Food"]
+      sprite: _RMC14/Objects/Consumable/Food/mre_other.rsi
+      state: loaded_food
+      visible: false
   - type: Item
     size: Tiny
     heldPrefix: mre_spork

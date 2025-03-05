@@ -9,7 +9,9 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Organ;
 using Content.Shared.Chemistry;
+using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Database;
 using Content.Shared.Destructible;
@@ -33,6 +35,7 @@ using Content.Shared.Whitelist;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Nutrition.EntitySystems;
@@ -62,6 +65,8 @@ public sealed class FoodSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
 
     public const float MaxFeedDistance = SharedInteractionSystem.InteractionRange;
+    public readonly ProtoId<ReagentPrototype> BonusToolReagent = "Nutriment";
+    public readonly FixedPoint2 BonusToolReagentAmount = FixedPoint2.New(1);
 
     public override void Initialize()
     {
@@ -103,7 +108,7 @@ public sealed class FoodSystem : EntitySystem
     /// <summary>
     /// Tries to feed the food item to the target entity
     /// </summary>
-    public (bool Success, bool Handled) TryFeed(EntityUid user, EntityUid target, EntityUid food, FoodComponent foodComp)
+    public (bool Success, bool Handled) TryFeed(EntityUid user, EntityUid target, EntityUid food, FoodComponent foodComp, bool usedTool = false)
     {
         //Suppresses eating yourself and alive mobs
         if (food == user || (_mobState.IsAlive(food) && foodComp.RequireDead))
@@ -175,7 +180,7 @@ public sealed class FoodSystem : EntitySystem
             return (false, true);
         }
 
-        var forceFeed = user != target;
+        var forceFeed = user != target && usedTool;
         if (forceFeed)
         {
             var userName = Identity.Entity(user, EntityManager);
@@ -188,13 +193,16 @@ public sealed class FoodSystem : EntitySystem
         else
         {
             // log voluntary eating
-            _adminLogger.Add(LogType.Ingestion, LogImpact.Low, $"{ToPrettyString(target):target} is eating {ToPrettyString(food):food} {SharedSolutionContainerSystem.ToPrettyString(foodSolution)}");
+            if(user != target)
+                _adminLogger.Add(LogType.ForceFeed, LogImpact.Medium, $"{ToPrettyString(user):user} is forcing {ToPrettyString(target):target} to eat {ToPrettyString(food):food} {SharedSolutionContainerSystem.ToPrettyString(foodSolution)}");
+            else
+                _adminLogger.Add(LogType.Ingestion, LogImpact.Low, $"{ToPrettyString(target):target} is eating {ToPrettyString(food):food} {SharedSolutionContainerSystem.ToPrettyString(foodSolution)}");
         }
 
         var doAfterArgs = new DoAfterArgs(EntityManager,
             user,
             forceFeed ? foodComp.ForceFeedDelay : foodComp.Delay,
-            new ConsumeDoAfterEvent(foodComp.Solution, flavors),
+            new ConsumeDoAfterEvent(foodComp.Solution, flavors, usedTool),
             eventTarget: food,
             target: target,
             used: food)
@@ -274,6 +282,13 @@ public sealed class FoodSystem : EntitySystem
 
         _reaction.DoEntityReaction(args.Target.Value, solution, ReactionMethod.Ingestion);
         _stomach.TryTransferSolution(stomachToUse!.Value.Owner, split, stomachToUse);
+
+        // RMC14 - gives +1 nutriment when anything is eaten with a utensil
+        if (args.ToolBonus)
+        {
+            var bonusSolu = new Solution(BonusToolReagent, BonusToolReagentAmount);
+            _stomach.TryTransferSolution(stomachToUse!.Value.Owner, bonusSolu, stomachToUse);
+        }
 
         var flavors = args.FlavorMessage;
 

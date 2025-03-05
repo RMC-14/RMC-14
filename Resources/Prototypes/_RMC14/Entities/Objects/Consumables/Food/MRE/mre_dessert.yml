@@ -12,9 +12,10 @@
 - type: entity
   parent: CMMREDessertComponentBase
   id: CMMREComponentSpicedApples
-  name: MRE component (spiced apples)
   description: An MRE side component. Contains a sweet dessert, to be eaten after the main (or before, if you're rebellious). This one is spiced apples.
   components:
+  - type: Label
+    currentLabel: rmc-mre-dessert-spiced-apples
   - type: SpawnItemsOnUse
     items:
     - id: CMMREFoodSpicedApples
@@ -22,9 +23,11 @@
 - type: entity
   parent: CMMREDessertComponentBase
   id: CMMREComponentChocolateBrownie
-  name: MRE component (chocolate brownie)
+  name: MRE component
   description: An MRE side component. Contains a sweet dessert, to be eaten after the main (or before, if you're rebellious). This one is a chocolate brownie.
   components:
+  - type: Label
+    currentLabel: rmc-mre-dessert-chocolate-brownie
   - type: SpawnItemsOnUse
     items:
     - id: CMMREFoodChocolateBrownie
@@ -32,9 +35,11 @@
 - type: entity
   parent: CMMREDessertComponentBase
   id: CMMREComponentSugarCookie
-  name: MRE component (sugar cookie)
+  name: MRE component
   description: An MRE side component. Contains a sweet dessert, to be eaten after the main (or before, if you're rebellious). This one is a sugar cookie.
   components:
+  - type: Label
+    currentLabel: rmc-mre-dessert-sugar-cookie
   - type: SpawnItemsOnUse
     items:
     - id: CMMREFoodSugarCookie
@@ -42,9 +47,11 @@
 - type: entity
   parent: CMMREDessertComponentBase
   id: CMMREComponentCocoBar
-  name: MRE component (coco bar)
+  name: MRE component
   description: An MRE side component. Contains a sweet dessert, to be eaten after the main (or before, if you're rebellious). This one is a coco bar.
   components:
+  - type: Label
+    currentLabel: rmc-mre-dessert-coco-bar
   - type: SpawnItemsOnUse
     items:
     - id: CMMREFoodCocoBar

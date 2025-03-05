@@ -1,4 +1,4 @@
-﻿using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.Prototypes;
@@ -19,14 +19,18 @@ public sealed partial class ConsumeDoAfterEvent : DoAfterEvent
     [DataField("flavorMessage", required: true)]
     public string FlavorMessage = default!;
 
+    [DataField]
+    public bool ToolBonus = false!;
+
     private ConsumeDoAfterEvent()
     {
     }
 
-    public ConsumeDoAfterEvent(string solution, string flavorMessage)
+    public ConsumeDoAfterEvent(string solution, string flavorMessage, bool toolBonus = false)
     {
         Solution = solution;
         FlavorMessage = flavorMessage;
+        ToolBonus = toolBonus;
     }
 
     public override DoAfterEvent Clone() => this;

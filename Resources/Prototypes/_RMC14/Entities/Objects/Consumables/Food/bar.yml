@@ -4,11 +4,14 @@
   id: CMBarFoodBase
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Food/bar.rsi
+    sprite: _RMC14/Objects/Consumable/Food/unmc_mre.rsi
+    state: yummers
+  - type: Food
+    transferAmount: 2
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 50
+        maxVol: 18
         reagents:
         - ReagentId: Nutriment
           Quantity: 8
@@ -27,6 +30,3 @@
   id: CMMarineProteinBar
   name: stale Marine protein bar
   description: The most fake-looking protein bar you have ever laid eyes on, covered in a substitution chocolate. The powder used to make these is a substitute of a substitute of whey substitute.
-  components:
-  - type: Sprite
-    state: protein_bar

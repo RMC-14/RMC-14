@@ -8,14 +8,32 @@
     sprite: _RMC14/Objects/Tools/Kitchen/rolling_pin.rsi
 
 - type: entity
-  parent: Fork
+  id: RMCFeedableBase
+  abstract: true
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 5
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    fillBaseName: food-
+
+- type: entity
+  parent: [Fork, RMCFeedableBase]
   id: RMCFork
   name: fork
   description: It's a fork. Sure is pointy.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Tools/Kitchen/fork.rsi
-    state: icon
+    layers:
+    - state: icon
+    - map: ["enum.SolutionContainerLayers.Fill"]
+      sprite: _RMC14/Objects/Consumable/Food/mre_other.rsi
+      visible: false
+
+
 
 - type: entity
   parent: RMCFork
@@ -24,17 +42,27 @@
   description: Yay, no washing up to do.
   components:
   - type: Sprite
-    state: plastic
+    layers:
+    - state: plastic
+    - map: ["enum.SolutionContainerLayers.Fill"]
+      sprite: _RMC14/Objects/Consumable/Food/mre_other.rsi
+      visible: false
+  - type: Item
+    heldPrefix: plastic
 
 - type: entity
-  parent: Spoon
+  parent: [Spoon, RMCFeedableBase]
   id: RMCSpoon
   name: spoon
   description: It's a spoon. You can see your own upside-down face in it.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Tools/Kitchen/spoon.rsi
-    state: icon
+    layers:
+    - state: icon
+    - map: ["enum.SolutionContainerLayers.Fill"]
+      sprite: _RMC14/Objects/Consumable/Food/mre_other.rsi
+      visible: false
 
 - type: entity
   parent: RMCSpoon
@@ -43,4 +71,10 @@
   description: It's a plastic spoon. How dull.
   components:
   - type: Sprite
-    state: plastic
+    layers:
+    - state: plastic
+    - map: ["enum.SolutionContainerLayers.Fill"]
+      sprite: _RMC14/Objects/Consumable/Food/mre_other.rsi
+      visible: false
+  - type: Item
+    heldPrefix: plastic
