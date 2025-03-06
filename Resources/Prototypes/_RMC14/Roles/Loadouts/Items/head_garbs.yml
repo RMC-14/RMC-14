@@ -98,6 +98,13 @@
     - RMCHelmetGarbGasmask
 
 - type: loadout
+  id: HelmetGasmaskJungleRMC
+  cost: 2
+  storage:
+    back:
+    - RMCHelmetGarbGasmaskJungle
+
+- type: loadout
   id: GunOilRMC
   cost: 2
   storage:

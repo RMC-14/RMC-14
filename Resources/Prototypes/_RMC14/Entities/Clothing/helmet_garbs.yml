@@ -227,15 +227,30 @@
   description: The UNMC had its funding pulled for these when it became apparent that not every deployed enlisted was wearing a helmet 24/7; much to the bafflement of UA High Command.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/HelmetGarb/gasmask.rsi
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask.rsi
     state: icon
   - type: Item
-    sprite: _RMC14/Objects/Clothing/HelmetGarb/gasmask.rsi
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask.rsi
   - type: HelmetAccessory
     rsi:
-      sprite: _RMC14/Objects/Clothing/HelmetGarb/gasmask.rsi
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask.rsi
       state: helmet
 
+- type: entity
+  parent: RMCHelmetGarbGasmask
+  id: RMCHelmetGarbGasmaskJungle
+  name: Jungle M5 integrated gasmask
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_jungle.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_jungle.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_jungle.rsi
+      state: helmet
+      
 # Misc
 
 - type: entity
