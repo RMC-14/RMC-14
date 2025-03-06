@@ -1,0 +1,212 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/800f3950414b25174f1e81278dfe1cde4fbbf281/icons/obj/items/seeds.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "seed"
+    },
+    {
+      "name": "seed-chili"
+    },
+    {
+      "name": "seed-poppy"
+    },
+    {
+      "name": "seed-berry"
+    },
+    {
+      "name": "seed-eggplant"
+    },
+    {
+      "name": "seed-icepepper"
+    },
+    {
+      "name": "seed-potato"
+    },
+    {
+      "name": "seed-eggy"
+    },
+    {
+      "name": "seed-soybean"
+    },
+    {
+      "name": "seed-tomato"
+    },
+    {
+      "name": "seed-corn"
+    },
+    {
+      "name": "seed-wheat"
+    },
+    {
+      "name": "seed-carrot"
+    },
+    {
+      "name": "seed-sunflower"
+    },
+    {
+      "name": "seed-banana"
+    },
+    {
+      "name": "seed-replicapod"
+    },
+    {
+      "name": "mycelium-amanita"
+    },
+    {
+      "name": "mycelium-angel"
+    },
+    {
+      "name": "mycelium-liberty"
+    },
+    {
+      "name": "mycelium-chanter"
+    },
+    {
+      "name": "mycelium-tower"
+    },
+    {
+      "name": "mycelium-plump"
+    },
+    {
+      "name": "mycelium-glowshroom"
+    },
+    {
+      "name": "mycelium-empty"
+    },
+    {
+      "name": "seed-nettle"
+    },
+    {
+      "name": "seed-deathnettle"
+    },
+    {
+      "name": "seed-alien1"
+    },
+    {
+      "name": "seed-alien2"
+    },
+    {
+      "name": "seed-alien3"
+    },
+    {
+      "name": "seed-alien4"
+    },
+    {
+      "name": "seed-appleold"
+    },
+    {
+      "name": "seed-ambrosiavulgaris"
+    },
+    {
+      "name": "seed-whitebeet"
+    },
+    {
+      "name": "seed-grass"
+    },
+    {
+      "name": "seed-watermelon"
+    },
+    {
+      "name": "seed-apple"
+    },
+    {
+      "name": "seed-goldapple"
+    },
+    {
+      "name": "seed-lime"
+    },
+    {
+      "name": "seed-lemon"
+    },
+    {
+      "name": "seed-orange"
+    },
+    {
+      "name": "seed-poisonberry"
+    },
+    {
+      "name": "seed-sugarcane"
+    },
+    {
+      "name": "seed-bloodtomato"
+    },
+    {
+      "name": "seed-cocoapod"
+    },
+    {
+      "name": "seed-deathberry"
+    },
+    {
+      "name": "seed-bluetomato"
+    },
+    {
+      "name": "seed-glowberry"
+    },
+    {
+      "name": "mycelium-walkingmushroom"
+    },
+    {
+      "name": "seed-killertomato"
+    },
+    {
+      "name": "seed-grapesLARGE"
+    },
+    {
+      "name": "seed-cabbage"
+    },
+    {
+      "name": "seed-pumpkin"
+    },
+    {
+      "name": "seed-greengrapesLARGE"
+    },
+    {
+      "name": "seed-greengrapes"
+    },
+    {
+      "name": "seed-grapes"
+    },
+    {
+      "name": "seed-ambrosiadeus"
+    },
+    {
+      "name": "seed-cash"
+    },
+    {
+      "name": "seed-bluespacetomato"
+    },
+    {
+      "name": "seed-harebell"
+    },
+    {
+      "name": "mycelium-reishi"
+    },
+    {
+      "name": "seed-cherry"
+    },
+    {
+      "name": "seed-kudzu"
+    },
+    {
+      "name": "seed-rice"
+    },
+    {
+      "name": "mycelium-plast"
+    },
+    {
+      "name": "seed-shand"
+    },
+    {
+      "name": "seed-mtear"
+    },
+    {
+      "name": "seed-peanut"
+    }
+  ]
+}
