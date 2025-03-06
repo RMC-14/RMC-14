@@ -51,6 +51,7 @@
   - AviatorsRMC
   - EyepatchRMC
   - GlassesRPGRMC
+  - GlassesRPGRMCOld
   - GlassesPrescriptionRMC
   - GogglesRMC
   - GogglesPrescriptionRMC
@@ -60,6 +61,16 @@
   - GogglesM1A1RMC
   - PersonalShadesRMC
   - SunglassesRMC # TODO prescription sunglasses
+  - GlassesBiMexYellowRMC
+  - GlassesBiMexBronzeRMC
+  - GlassesBiMexBlackRMC
+  - GogglesRedRMC
+  - GogglesBlueRMC
+  - GogglesPurpleRMC
+  - GogglesYellowRMC
+  - GogglesPolarizedBlueRMC
+  - GogglesPolarizedOrangeRMC
+  - GogglesM1A1BlueRMC
 
 # Masks
 - type: loadoutGroup
@@ -89,6 +100,19 @@
   - CoifTanRMC
   - BalaclavaSkullBlueRMC
   - BalaclavaSkullBlackRMC
+  - KeffiyehRMC
+  - KeffiyehBlackRMC
+  - KeffiyehBlueRMC
+  - KeffiyehGreenRMC
+  - KeffiyehWhiteRMC
+  - KeffiyehRedRMC
+  - SmockRMC
+  - SmockCamoRMC
+  - NeckerchiefSquadRMC
+  - NeckerchiefTanRMC
+  - NeckerchiefBlackRMC
+  - NeckerchiefGrayRMC
+  - NeckerchiefGreenRMC
 
 # Headwear
 - type: loadoutGroup
@@ -107,6 +131,32 @@
   - RedHeadbandRMC
   - TanHeadbandRMC
   - SquadHeadbandRMC
+
+# Helmet Garbs
+- type: loadoutGroup
+  id: HelmetGarbsRMC
+  name: rmc-loadout-group-helmet-garbs
+  minLimit: 0
+  maxLimit: 10
+  loadouts:
+  - FakeNVGRMC
+  - NettingRMC
+  - NettingUrbanRMC
+  - NettingDesertRMC
+  - NettingJungleRMC
+  - RaincoverRMC
+  - RaincoverUrbanRMC
+  - RaincoverDesertRMC
+  - RaincoverJungleRMC
+  - BuckshotSpentRMC
+  - FlechetteSpentRMC
+  - SlugSpentRMC
+  - CartridgeSpentRMC
+  - HelmetGasmaskRMC
+  - GunOilRMC
+  - RosaryRMC
+  - PrescriptionRMC
+  - TrimmedWireRMC
 
 # Paperwork
 - type: loadoutGroup

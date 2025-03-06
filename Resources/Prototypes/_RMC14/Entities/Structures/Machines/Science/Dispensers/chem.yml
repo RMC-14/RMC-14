@@ -179,6 +179,7 @@
         enum.PowerDeviceVisualLayers.Powered:
           True: { visible: true }
   - type: RMCChemicalDispenser
+    network: RMCChemStorageGround
     reagents:
       - CMBicaridine
       - CMKelotane
@@ -195,5 +196,5 @@
   suffix: Medbay
   components:
   - type: RMCChemicalDispenser
-    network: RMCChemStorageMedbay
+    network: RMCChemStorageGround
 

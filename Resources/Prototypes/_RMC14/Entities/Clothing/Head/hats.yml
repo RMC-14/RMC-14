@@ -80,6 +80,7 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret/jungle.rsi
+  - type: Appearance
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Head/Hats/CO/beret/jungle.rsi
@@ -164,6 +165,7 @@
     whitelist:
       components:
       - RMCLighter
+      - HelmetAccessory
       tags:
       - Cigarette
       - Matchstick
@@ -176,6 +178,7 @@
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
   - type: FixedItemSizeStorage
+  - type: HelmetAccessoryHolder
 
 - type: entity
   parent: CMHeadCapMP

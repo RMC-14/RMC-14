@@ -354,6 +354,7 @@
       - id: RMCSunglassesBig
       - id: RMCGlassesAviators
       - id: RMCGlassesMarineRpg
+      - id: RMCGlassesMarineRpgOld
     - name: Service
       entries:
       - id: CMJumpsuitCOService
@@ -400,17 +401,17 @@
       entries:
       - id: CMHeadsetSeniorCommand
       - id: CMMRE
-  # - name: Commanding Officer Essentials Kit #TODO: Make this.
-  #   takeAll: CMBundle
-  #   entries:
-  #   - id: CMCommandingOfficerEssentialsBundle # TODO RMC14 Megaphone , Paper Map , Laser Designator
+    - name: Commanding Officer Essentials Kit
+      takeAll: CMBundle
+      entries:
+      - id: RMCCommandingOfficerEssentialsBundle # TODO RMC14 Megaphone , Paper Map
     - name: Bags
       choices: { CMBag: 1 }
       entries:
       - id: CMBackpackCommand
       #- id: CMSatchelCommandSecure # TODO RMC14 Secure Satchel (ID LOCK)
       - id: RMCBackpackRTO
-      - id: CMSatchelMarineIntel 
+      - id: CMSatchelMarineIntel
     - name: Combat Equipment
       takeAll: CMCombatEquipment
       entries:
@@ -444,7 +445,7 @@
         name: M276 pattern security rig (Full)
       - id: CMBeltMedicalFilled
         name: M276 pattern medical storage rig (Full)
-        recommended: true 
+        recommended: true
       - id: CMBeltMedicBagFilled
         name: M276 pattern lifesaver bag (Full)
       - id: CMBeltMarine
@@ -463,7 +464,7 @@
         recommended: true
       - id: RMCPouchMedkit
       - id: RMCPouchAutoinjectorFill
-        recommended: true 
+        recommended: true
       - id: RMCPouchGeneralLarge
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchMagazineLarge
@@ -500,6 +501,12 @@
         name: M59A Prototype Rifle
       - id: CMCOSmartGunOperatorEquipmentCaseBelt
         name: Commander's Smartgun
+        recommended: true # TODO RMC14 Make choices: colour the options brown
+    - name: Commander's Secondary
+      choices: { CMSecondary: 1 }
+      entries:
+      - id: RMCD50WinterWyvernBeltFilled
+      - id: RMCMatebaBeltFilled
     - name: Primary Ammunition
       entries:
       - id: CMMagazineRifleM54CMK1
@@ -520,10 +527,10 @@
         points: 15
     #   - id: CMMagazineMatebaAP  # TODO RMC14 Port More Sidearm Ammo
     #     points: 20
-    #   - id: CMMagazineDesertEagle
-    #     points: 15
-    #   - id: CMMagazineDesertEagleAP
-    #     points: 20
+      - id: RMCMagazinePistolD50WinterWyvernHI
+        points: 15
+      - id: RMCMagazinePistolD50WinterWyvernHIAP
+        points: 20
     - name: Shotgun Ammunition
       entries:
       - id: RMCBoxShotgunBuckshot
@@ -555,7 +562,7 @@
         points: 15
     - name: Helmet Visors # TODO RMC14 Port Helmet Visors
       entries:
-      - id: RMCVisorNightVision 
+      - id: RMCVisorNightVision
         points: 10
     - name: Underbarrel Attachments
       entries:
@@ -581,7 +588,7 @@
         points: 15
       - id: RMCAttachmentSuppressor
         points: 15
-        
+
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel

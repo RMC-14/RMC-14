@@ -59,7 +59,6 @@ public sealed class IntelSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly IEntityManager _ent = default!;
 
     private static readonly ImmutableArray<char> UppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToImmutableArray();
 
@@ -248,7 +247,7 @@ public sealed class IntelSystem : EntitySystem
 
         var delay = ent.Comp.Delay * _skills.GetSkillDelayMultiplier(user, ent.Comp.Skill);
         var ev = new IntelReadDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent) { BreakOnDropItem = true };
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent) { BreakOnDropItem = true, NeedHand = true };
         if (_doAfter.TryStartDoAfter(doAfter))
             _popup.PopupClient($"You start reading the {Name(ent)}", ent, user);
     }
