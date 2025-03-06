@@ -150,8 +150,15 @@ public abstract class SharedStorageSystem : EntitySystem
 
     private void OnMapInit(Entity<StorageComponent> entity, ref MapInitEvent args)
     {
+        // RMC14
+        var hadDelay = HasComp<UseDelayComponent>(entity);
+
         UseDelay.SetLength(entity.Owner, entity.Comp.QuickInsertCooldown, QuickInsertUseDelayID);
         UseDelay.SetLength(entity.Owner, entity.Comp.OpenUiCooldown, OpenUiUseDelayID);
+
+        // RMC14
+        if (!hadDelay)
+            UseDelay.SetLength(entity.Owner, TimeSpan.Zero);
     }
 
     private void OnStorageGetState(EntityUid uid, StorageComponent component, ref ComponentGetState args)

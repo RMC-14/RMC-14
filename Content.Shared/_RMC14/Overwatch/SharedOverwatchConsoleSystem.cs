@@ -68,6 +68,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         _planetQuery = GetEntityQuery<RMCPlanetComponent>();
 
         SubscribeLocalEvent<OrbitalCannonChangedEvent>(OnOrbitalCannonChanged);
+        SubscribeLocalEvent<OrbitalCannonLaunchEvent>(OnOrbitalCannonLaunch);
 
         SubscribeLocalEvent<OverwatchConsoleComponent, BoundUIOpenedEvent>(OnBUIOpened);
         SubscribeLocalEvent<OverwatchConsoleComponent, OverwatchTransferMarineSelectedEvent>(OnTransferMarineSelected);
@@ -112,6 +113,16 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         while (consoles.MoveNext(out var uid, out var console))
         {
             console.HasOrbital = hasOrbital;
+            Dirty(uid, console);
+        }
+    }
+
+    private void OnOrbitalCannonLaunch(ref OrbitalCannonLaunchEvent ev)
+    {
+        var consoles = EntityQueryEnumerator<OverwatchConsoleComponent>();
+        while (consoles.MoveNext(out var uid, out var console))
+        {
+            console.NextOrbitalLaunch = _timing.CurTime + ev.Cooldown;
             Dirty(uid, console);
         }
     }

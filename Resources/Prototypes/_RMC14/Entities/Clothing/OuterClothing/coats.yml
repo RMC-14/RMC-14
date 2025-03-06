@@ -189,7 +189,7 @@
       - Paper
       - CMSurgicalLine
       - CMSynthGraft
-      - CMRollerBed
+      - CMRollerItem
       - CMBloodPack
 # TODO RMC14 spray bottle
       - Handcuffs
@@ -238,6 +238,9 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/cmp.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/cmp.rsi
+  - type: CMArmor
+    armor: 10
+
 
 # Military Warden
 - type: entity
@@ -250,6 +253,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/warden.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/warden.rsi
+  - type: CMArmor
+    armor: 10
 
 # Military Police
 - type: entity
@@ -262,6 +267,15 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/mp.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/mp.rsi
+  - type: CMArmor
+    armor: 10
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-buttons-verb-fold
+    foldVerbText: rmc-buttons-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: jacket
 
 # Mess Seargeant/Tech
 - type: entity
@@ -274,6 +288,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/chef.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/chef.rsi
+  - type: CMArmor
+    armor: 10
 
 # Auxiliary Supply Officer
 - type: entity
@@ -286,6 +302,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/jungle.rsi
+  - type: CMArmor
+    armor: 10
   - type: Appearance
   - type: ItemCamouflage
     camouflageVariations:
@@ -306,6 +324,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/jacket.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/jacket.rsi
+  - type: CMArmor
+    armor: 10
 
 - type: entity
   parent: CMCoatCO
@@ -317,6 +337,15 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/bomber.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/bomber.rsi
+  - type: CMArmor
+    armor: 10
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-buttons-verb-fold
+    foldVerbText: rmc-buttons-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: jacket
 
 - type: entity
   parent: CMCoatCO
@@ -328,6 +357,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/formal_black.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/formal_black.rsi
+  - type: CMArmor
+    armor: 10
 
 - type: entity
   parent: CMCoatCO
@@ -339,6 +370,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/formal_white.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/formal_white.rsi
+  - type: CMArmor
+    armor: 10
 
 # Executive Officer
 
@@ -354,7 +387,13 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/coat_formal.rsi
   - type: CMArmor
     armor: 10
-    bio: 10
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-buttons-verb-fold
+    foldVerbText: rmc-buttons-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: jacket
 
 - type: entity
   parent: RMCBaseJacket

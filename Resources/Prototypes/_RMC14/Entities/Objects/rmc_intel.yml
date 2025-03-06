@@ -268,6 +268,54 @@
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: ob_cluster
+        - name: Unlock Tier 3
+          description: Transitions the tree to another tier.
+          cost: 5
+          events:
+          - !type:TechUnlockTierEvent
+            tier: 3
+          - !type:TechAnnounceEvent
+            author: ALMAYER DEFCON LEVEL INCREASED
+            message: "THREAT ASSESSMENT LEVEL INCREASED TO LEVEL 3.
+
+              LEVEL 3 assets have been authorised to handle the situation."
+          icon:
+            sprite: _RMC14/Interface/tech_tree.rsi
+            state: upgrade
+      -
+        - name: Wake Up Additional Troops
+          description: Wakes up additional troops to fight against any threats.
+          cost: 6
+          increase: 6
+          repurchasable: true
+          events:
+          - !type:TechCryoMarinesEvent
+          - !type:TechAnnounceEvent
+            author: ALMAYER SPECIAL ASSETS AUTHORIZED
+            message: Additional troops are being taken out of cryo.
+          icon:
+            sprite: _RMC14/Interface/tech_tree.rsi
+            state: cryotroops
+        - name: Wake Up Additional Specialist
+          description: Wakes up an additional specialist to fight against any threats.
+          cost: 8
+          events:
+          - !type:TechCryoSpecEvent
+          - !type:TechAnnounceEvent
+            author: ALMAYER SPECIAL ASSETS AUTHORIZED
+            message: An additional specialist is being taken out of cryo.
+          icon:
+            sprite: _RMC14/Interface/tech_tree.rsi
+            state: overshield
 
 - type: Tag
   id: RMCIntelItem
+
+- type: entity
+  parent: RMCIntelPaperScrap
+  id: RMCIntelDebug
+  suffix: DEBUG, DO NOT MAP
+  components:
+  - type: IntelReadObjective
+    state: Active
+    value: 999

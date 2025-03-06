@@ -306,7 +306,7 @@
       - CMBurnKit
       #      - # TODO RMC14 splints
       - CMAutoInjector
-      - CMRollerBed
+      - CMRollerItem
       - BodyBag
       #      - # TODO RMC14 latex gloves
       - Hypospray
@@ -1021,3 +1021,16 @@
 
 - type: Tag
   id: RMCBeltSOCOM
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCD50WinterWyvernBeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolD50WinterWyvernHI
+      amount: 4
+    - id: RMCMagazinePistolD50WinterWyvernHIAP
+      amount: 2
+    - id: RMCWeaponPistolCOD50WinterWyvern

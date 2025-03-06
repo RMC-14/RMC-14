@@ -5,6 +5,7 @@ using Content.Server.GameTicking;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Shuttles.Systems;
+using Content.Shared._RMC14.AlertLevel;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
@@ -47,6 +48,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
+    [Dependency] private readonly RMCAlertLevelSystem _alertLevelSystem = default!;
 
     private EntityQuery<DockingComponent> _dockingQuery;
     private EntityQuery<DoorComponent> _doorQuery;
@@ -273,12 +275,19 @@ public sealed class DropshipSystem : SharedDropshipSystem
         {
             if (user != null)
             {
-                var xenoText = "The Queen has commanded the metal bird to depart for the metal hive in the sky! Rejoice!";
+                var xenoText = Loc.GetString("rmc-announcement-dropship-hijack-hive");
                 _xenoAnnounce.AnnounceSameHive(user.Value, xenoText);
                 _audio.PlayPvs(dropship.LocalHijackSound, dropshipId.Value);
 
-                var marineText = "Unscheduled dropship departure detected from operational area. Hijack likely. Shutting down autopilot.";
+                var marineText = Loc.GetString("rmc-announcement-dropship-hijack");
                 _marineAnnounce.AnnounceARES(dropshipId.Value, marineText, dropship.MarineHijackSound, new LocId("rmc-announcement-dropship-message"));
+
+                var generalQuartersText = Loc.GetString("rmc-announcement-general-quarters");
+                Timer.Spawn(TimeSpan.FromSeconds(10), () =>
+                {
+                    _alertLevelSystem.Set(RMCAlertLevels.Red, dropshipId.Value, false, false);
+                    _marineAnnounce.AnnounceARES(dropshipId.Value, generalQuartersText, dropship.GeneralQuartersSound, null);
+                });
             }
 
             // Add 10 seconds to compensate for the arriving times

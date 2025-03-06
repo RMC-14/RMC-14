@@ -120,3 +120,20 @@
     role: CMFireteamLeader
   - type: Sprite
     state: tl_spawn_delta
+
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCFireteamLeader
+  components:
+  - type: GhostRole
+    name: cm-job-name-fireteam-leader
+    description: cm-job-description-fireteam-leader
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    raffle:
+      settings: default
+    job: CMFireteamLeader
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobFireteamLeader
+      time: 1
