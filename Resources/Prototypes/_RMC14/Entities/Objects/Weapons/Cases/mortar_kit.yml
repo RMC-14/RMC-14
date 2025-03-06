@@ -1,0 +1,35 @@
+- type: entity
+  parent: RMCBaseEquipmentCase
+  id: RMCMortarEquipmentCase
+  name: mortar kit
+  description: Contains the equipment needed for the mortar.
+  components:
+  - type: Sprite
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: mortar
+      map: [ label ]
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,15,3
+  - type: StorageFill
+    contents:
+    - id: RMCMortarKit
+    - id: RMCPamphletMortarOperator
+      amount: 2
+    - id: CMBeltMortar
+      amount: 2
+    - id: CMBackpackMortar
+    - id: RMCMortarShellIncendiary # TODO RMC14 replace 1 incend and 1 HE with 2 Frag shells
+      amount: 3
+    - id: RMCMortarShellFlare
+      amount: 2
+#    - id: RMCMortarShellFrag
+#      amount: 2
+    - id: RMCMortarShellHE 
+      amount: 3
+    - id: CMWrench
+    - id: RMCRangefinder
+      amount: 2

@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.NPC;
+using Content.Shared._RMC14.NPC;
 using Content.Shared.Examine;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Actions;
@@ -15,6 +15,7 @@ using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared.Throwing;
 using Content.Shared.Stunnable;
 using Content.Shared._RMC14.Xenonids.Leap;
+using Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
 
 namespace Content.Shared._RMC14.Xenonids.Parasite;
 
@@ -272,9 +273,13 @@ public abstract partial class SharedXenoParasiteSystem
                 return;
         }
 
-        EnsureComp<ParasiteTiredOutComponent>(para);
+        foreach (var eggmorpher in _entityLookup.GetEntitiesInRange<EggMorpherComponent>(_transform.GetMoverCoordinates(para), para.Comp.RangeCheck))
+        {
+            if (eggmorpher.Comp.CurParasites < eggmorpher.Comp.MaxParasites)
+                return;
+        }
 
-        // TODO RMC14 eggmorpher
+        EnsureComp<ParasiteTiredOutComponent>(para);
     }
 
     private void OnParasiteAIMapInit(Entity<ParasiteTiredOutComponent> dead, ref MapInitEvent args)

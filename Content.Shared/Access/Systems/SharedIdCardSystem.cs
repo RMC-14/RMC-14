@@ -19,6 +19,9 @@ public abstract class SharedIdCardSystem : EntitySystem
     [Dependency] private readonly MetaDataSystem _metaSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
+    // RMC14, for ghost roles
+    private readonly List<EntityUid> _toRename = new();
+
     public override void Initialize()
     {
         base.Initialize();
@@ -37,8 +40,8 @@ public abstract class SharedIdCardSystem : EntitySystem
         if (HasComp<IdCardComponent>(ev.Uid) || HasComp<PdaComponent>(ev.Uid))
             return;
 
-        if (TryFindIdCard(ev.Uid, out var idCard))
-            TryChangeFullName(idCard, ev.NewName, idCard);
+        // RMC14, for ghost roles
+        _toRename.Add(ev.Uid);
     }
 
     private void OnMapInit(EntityUid uid, IdCardComponent id, MapInitEvent args)
@@ -255,5 +258,25 @@ public abstract class SharedIdCardSystem : EntitySystem
     {
         return $"{idCardComponent.FullName} ({CultureInfo.CurrentCulture.TextInfo.ToTitleCase(idCardComponent.LocalizedJobTitle ?? string.Empty)})"
             .Trim();
+    }
+
+    // RMC14, for ghost roles
+    public override void Update(float frameTime)
+    {
+        try
+        {
+            foreach (var rename in _toRename)
+            {
+                if (TerminatingOrDeleted(rename))
+                    continue;
+
+                if (TryFindIdCard(rename, out var idCard))
+                    TryChangeFullName(idCard, Name(rename), idCard);
+            }
+        }
+        finally
+        {
+            _toRename.Clear();
+        }
     }
 }

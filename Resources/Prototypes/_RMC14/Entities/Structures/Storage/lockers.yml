@@ -39,6 +39,17 @@
 
 - type: entity
   parent: CMLockerBase
+  id: CMLockerCommanderSecure
+  name: commanding officer's secure box
+  description: A safe for the Commanding Officer to store any equipment they need to have ready at a moment's notice. There's a note inside saying that whatever was inside it before was moved out.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/safe.rsi
+  - type: AccessReader
+    access: [["CMAccessCO"]]
+
+- type: entity
+  parent: CMLockerBase
   id: CMLockerStaff
   name: staff officer's locker
   components:
@@ -82,11 +93,12 @@
   id: RMCLockerGun
   name: gun cabinet
   description: It's an immobile card-locked storage unit.
+  suffix: Colony
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/armorylocker.rsi
   - type: AccessReader
-    access: [["CMAccessArmory"]]
+    access: [["CMAccessColonyArmory"]]
   - type: Destructible
     thresholds: []
   - type: EntityStorageCloseOnMapInit

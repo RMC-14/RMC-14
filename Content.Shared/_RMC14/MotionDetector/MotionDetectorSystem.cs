@@ -34,7 +34,7 @@ public sealed class MotionDetectorSystem : EntitySystem
     private EntityQuery<MotionDetectorComponent> _detectorQuery;
     private EntityQuery<StorageComponent> _storageQuery;
 
-    private readonly List<Entity<MotionDetectorTrackedComponent>> _toUpdate = new();
+    private readonly HashSet<Entity<MotionDetectorTrackedComponent>> _toUpdate = new();
     private readonly HashSet<Entity<MotionDetectorTrackedComponent>> _tracked = new();
 
     public override void Initialize()
@@ -187,6 +187,9 @@ public sealed class MotionDetectorSystem : EntitySystem
 
     private void OnMotionDetectorTracked(Entity<MotionDetectorTrackedComponent> ent, ref MoveEvent args)
     {
+        if (args.OldPosition == args.NewPosition)
+            return;
+
         _toUpdate.Add(ent);
     }
 

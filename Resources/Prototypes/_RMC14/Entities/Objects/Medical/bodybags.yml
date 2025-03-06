@@ -136,7 +136,7 @@
       components:
       - MedevacStretcher
       tags:
-      - CMRollerBed
+      - CMRollerItem
 
 - type: entity
   parent: CMStasisBag

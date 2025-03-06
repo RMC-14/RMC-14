@@ -252,7 +252,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                 if (marine.Camera == default)
                 {
                     var watchLabel = new RichTextLabel();
-                    watchLabel.SetMarkupPermissive($"[color={YellowColor}]{name} (NO HELMET)[/color]");
+                    watchLabel.SetMarkupPermissive($"[color={YellowColor}]{name} (NO CAMERA)[/color]");
                     watchControl = watchLabel;
                 }
                 else
@@ -601,6 +601,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
             );
 
             squad.HasOrbital = console.HasOrbital;
+            squad.NextOrbitalAt = console.NextOrbitalLaunch;
         }
     }
 

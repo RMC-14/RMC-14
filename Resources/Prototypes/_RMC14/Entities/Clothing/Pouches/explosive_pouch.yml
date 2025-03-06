@@ -24,3 +24,12 @@
     contents:
     - id: RMCExplosivePlastic
       amount: 6
+
+- type: entity
+  parent: RMCPouchExplosive
+  id: RMCPouchExplosiveFilledHEFA
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFrag
+      amount: 4
