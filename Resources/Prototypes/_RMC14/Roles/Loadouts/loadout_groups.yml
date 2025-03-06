@@ -153,6 +153,9 @@
   - SlugSpentRMC
   - CartridgeSpentRMC
   - HelmetGasmaskRMC
+  - HelmetGasmaskDesertRMC
+  - HelmetGasmaskJungleRMC
+  - HelmetGasmaskUrbanRMC
   - GunOilRMC
   - RosaryRMC
   - PrescriptionRMC
