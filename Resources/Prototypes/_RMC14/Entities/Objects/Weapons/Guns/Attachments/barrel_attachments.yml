@@ -130,6 +130,34 @@
   - type: AttachableVisuals
   - type: AttachableWeaponRangedMods
 
+- type: entity
+  parent: RMCBarrelAttachmentBase
+  id: RMCAttachmentShotgunChoke # Shotgun Choke
+  name: shotgun choke
+  description: A modified choke for the M42A2 pump shotgun. It tightens the spread, accuracy, speed and max range of fired shells. The cyclic rate of the weapon is also increased. In exchange, projectile damage and force is greatly reduced, with the weapon also having higher recoil. Not recommended for use with slugs. # and accuracy.
+  components:
+  - type: Sprite
+    state: choke
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentShotgunChoke
+  - type: AttachableVisuals
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - fireDelayFlat: -0.5
+    - scatterFlat: -5
+    - accuracyAddMult: 0.25
+      damageFalloffAddMult: -0.3
+      damageAddMult: -0.2
+    - conditions:
+        wieldedOnly: true
+      recoilFlat: 2
+    - conditions:
+        unwieldedOnly: true
+      recoilFlat: 2
+
+
 - type: Tag
   id: RMCAttachmentBarrel
 
@@ -147,3 +175,6 @@
 
 - type: Tag
   id: RMCAttachmentMatebaStandard
+
+- type: Tag
+  id: RMCAttachmentShotgunChoke
