@@ -3,7 +3,12 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
+using Content.Shared.DoAfter;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using System;
@@ -23,35 +28,35 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
     [Dependency] private readonly SharedXenoHealSystem _heal = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly MobStateSystem _mob = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
     public override void Initialize()
     {
         base.Initialize();
+
+        SubscribeLocalEvent<RecoveryNodeComponent, RecoveryNodeRecoverDoAfterEvent>(OnRecoveryDoAfter);
 
     }
 
     public override void Update(float frameTime)
     {
-        base.Update(frameTime);
+        if (_net.IsClient)
+            return;
 
         var curTime = _time.CurTime;
         var recoverNodes = EntityQueryEnumerator<RecoveryNodeComponent>();
 
         while (recoverNodes.MoveNext(out var ent, out var comp))
         {
-            if (comp.NextHealAt < curTime)
+            if (comp.NextHealAt < curTime && comp.HealDoafter == null)
             {
                 TryHealRandomXeno((ent, comp));
-                comp.NextHealAt = null;
-            }
-
-            if (comp.NextHealAt is null)
-            {
-                comp.NextHealAt = curTime + comp.HealCooldown;
             }
         }
     }
 
-    private bool TryHealRandomXeno(Entity<RecoveryNodeComponent> recoveryNode)
+    private void TryHealRandomXeno(Entity<RecoveryNodeComponent> recoveryNode)
     {
         var (ent, comp) = recoveryNode;
         var nearbyEntities = _lookup.GetEntitiesInRange(ent, comp.HealRange);
@@ -59,7 +64,8 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
         foreach (var nearbyEntity in nearbyEntities)
         {
             if (!_hive.FromSameHive(ent, nearbyEntity) || !HasComp<XenoComponent>(nearbyEntity) || !HasComp<XenoRestingComponent>(nearbyEntity) ||
-                !TryComp<DamageableComponent>(nearbyEntity, out var damageComp) || damageComp.TotalDamage <= 0)
+                !TryComp<DamageableComponent>(nearbyEntity, out var damageComp) || damageComp.TotalDamage <= 0 ||
+                (!HasComp<MobStateComponent>(nearbyEntity) || _mob.IsDead(nearbyEntity)))
             {
                 continue;
             }
@@ -67,15 +73,35 @@ public sealed partial class RecoveryNodeSystem : EntitySystem
             possibleTargets.Add(nearbyEntity);
         }
 
-        if (possibleTargets.Count == 0)
-        {
-            return false;
-        }
-        var selectedTarget = _random.Pick(possibleTargets);
+        recoveryNode.Comp.NextHealAt = _time.CurTime + recoveryNode.Comp.HealCooldown;
 
-        _heal.Heal(selectedTarget, comp.HealAmount);
-        SpawnAttachedTo(comp.HealEffect, selectedTarget.ToCoordinates());
-        _popup.PopupClient(Loc.GetString("rmc-xeno-construction-recovery-node-heal-target"), selectedTarget, selectedTarget);
-        return true;
+        if (possibleTargets.Count == 0)
+            return;
+
+        var selectedTarget = _random.Pick(possibleTargets);
+        var recover = new DoAfterArgs(EntityManager, recoveryNode, recoveryNode.Comp.HealCooldown, new RecoveryNodeRecoverDoAfterEvent(), recoveryNode, selectedTarget)
+        {
+            BreakOnMove = true,
+            MovementThreshold = 0.5f,
+            DuplicateCondition = DuplicateConditions.SameEvent,
+            TargetEffect = "RMCEffectHealBusy"
+        };
+
+        if (_doafter.TryStartDoAfter(recover, out var id))
+        {
+            recoveryNode.Comp.HealDoafter = id;
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-recovery-node-heal-target"), selectedTarget, selectedTarget);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-recovery-node-heal-other", ("target", selectedTarget)), selectedTarget, Filter.PvsExcept(selectedTarget), true);
+        }
+    }
+
+    private void OnRecoveryDoAfter(Entity<RecoveryNodeComponent> recoveryNode, ref RecoveryNodeRecoverDoAfterEvent args)
+    {
+        recoveryNode.Comp.HealDoafter = null;
+
+        if (args.Handled || args.Cancelled || args.Target == null)
+            return;
+
+        _heal.Heal(args.Target.Value, recoveryNode.Comp.HealAmount);
     }
 }

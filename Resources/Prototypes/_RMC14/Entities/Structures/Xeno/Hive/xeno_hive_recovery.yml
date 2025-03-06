@@ -20,6 +20,7 @@
     id: HiveRecoveryNodeXeno
   - type: HiveConstructionRequiresHiveWeeds
   - type: HiveConstructionRequiresSpace
+  - type: DoAfter
 
 - type: entity
   id: HiveRecoveryNodeXenoConstructionNode
