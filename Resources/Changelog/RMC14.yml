@@ -1,45 +1,6 @@
 ﻿Entries:
 - author: FungiFellow
   changes:
-  - message: Added storage for holdout to color shoes
-    type: Add
-  id: 924
-  time: '2024-11-02T22:51:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4669
-- author: DrSmugleaf
-  changes:
-  - message: Fixed patron figurines being invisible.
-    type: Fix
-  - message: Fixed not being able to open the radio telephone backpack storage.
-    type: Fix
-  - message: Fixed comms towers being acidable.
-    type: Fix
-  - message: Fixed the telephone UI overflowing when there's too many choices.
-    type: Fix
-  - message: Fixed not being able to open the groundside operations console while
-      the announcement is on cooldown.
-    type: Fix
-  - message: Fixed telephone cord drawing erratically over your screen.
-    type: Fix
-  id: 925
-  time: '2024-11-02T22:57:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4675
-- author: Whisper
-  changes:
-  - message: Updated the sprites of the M54C and M54CE2 (In development)
-    type: Add
-  id: 926
-  time: '2024-11-03T02:06:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4542
-- author: Vermidia
-  changes:
-  - message: Fixed hive core not showing on the xeno tacmap
-    type: Fix
-  id: 927
-  time: '2024-11-03T02:07:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4678
-- author: FungiFellow
-  changes:
   - message: Added Welder Chestrig to MT Vendor
     type: Add
   id: 928
@@ -5228,5 +5189,33 @@
   id: 1425
   time: '2025-03-06T05:05:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5806
+- author: DummeHytteOst
+  changes:
+  - message: fixed taking damage stopping prying.
+    type: Fix
+  id: 1426
+  time: '2025-03-06T05:07:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5825
+- author: Dygon
+  changes:
+  - message: M5 camera gear now functions as a camera for the overwatch console.
+    type: Fix
+  id: 1427
+  time: '2025-03-06T05:06:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5815
+- author: Vermidia
+  changes:
+  - message: Fixed recovery nodes not having a doafter on healing.
+    type: Fix
+  id: 1428
+  time: '2025-03-06T05:06:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5814
+- author: Vermidia
+  changes:
+  - message: Fixed scout high impact and shotgun slugs and buckshot slowing big xenos.
+    type: Fix
+  id: 1429
+  time: '2025-03-06T05:07:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5818
 Name: RMC14
 Order: -1
