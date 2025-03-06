@@ -635,13 +635,13 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
-    OB: false
+    OB: true
     supplyDrop: false
 
 - type: entity
   parent: RMCAreaKutjevoInterior
   id: RMCAreaKutjevoInteriorColonySEast
-  name: Kutjevo - North East Colony Caves
+  name: Kutjevo - Southeast Colony Caves
   components:
   - type: Sprite
     state: colony_caves_2
@@ -652,13 +652,13 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
-    OB: false
+    OB: true
     supplyDrop: false
 
 - type: entity
   parent: RMCAreaKutjevoInterior
   id: RMCAreaKutjevoInteriorColonyNEast
-  name: Kutjevo - South East Colony Caves
+  name: Kutjevo - Northeast Colony Caves
   components:
   - type: Sprite
     state: colony_caves_2
@@ -669,7 +669,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
-    OB: false
+    OB: true
     supplyDrop: false
 
 - type: entity
@@ -686,7 +686,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
-    OB: false
+    OB: true
     supplyDrop: false
 
 - type: entity
@@ -703,6 +703,6 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
-    OB: false
+    OB: true
     supplyDrop: false
     minimapColor: '#5A4501E7'

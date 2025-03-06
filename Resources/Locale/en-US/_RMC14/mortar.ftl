@@ -36,6 +36,7 @@ rmc-mortar-target-x = Target X:
 rmc-mortar-target-y = Target Y:
 rmc-mortar-target-set = Set Target
 rmc-mortar-target-too-close = You cannot aim at this coordinate, it is too close to your mortar.
+rmc-mortar-target-too-far = You cannot aim at this coordinate, it is too far from your mortar.
 
 rmc-mortar-offset-x = X Offset:
 rmc-mortar-offset-y = Y Offset:

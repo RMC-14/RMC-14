@@ -125,4 +125,19 @@
   - type: Sprite
     state: marine_spawn_delta
 
-
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCHospitalCorpsman
+  components:
+  - type: GhostRole
+    name: cm-job-name-hospital-corpsman
+    description: cm-job-description-hospital-corpsman
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    raffle:
+      settings: default
+    job: CMHospitalCorpsman
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobHospitalCorpsman
+      time: 1

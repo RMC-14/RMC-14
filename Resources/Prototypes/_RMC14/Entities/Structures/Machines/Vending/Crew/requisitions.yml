@@ -55,8 +55,8 @@
       #  amount: 2
       - id: RMCCaseFlamer
         amount: 2
-      #- id: M79 Grenade Launcher
-      #  amount: 3
+      - id: RMCM79Case
+        amount: 3
       - id: RMCXM51Case
         amount: 3
     - name: Explosives
@@ -73,18 +73,18 @@
       #  amount: 4
       - id: CMGrenadeSmoke
         amount: 5
-      #- id: M74 AGM-Frag Airburst Grenade
-      #  amount: 4
-      #- id: M74 AGM-Incendiary Airburst Grenade
-      #  amount: 4
-      #- id: M74 AGM-Smoke Airburst Grenade
-      #  amount: 4
-      #- id: M74 AGM-Star Shell
-      #  amount: 2
-      #- id: M74 AGM-Hornet Shell
-      #  amount: 4
-      #- id: M40 HIRR Baton Slug
-      #  amount: 8
+      - id: RMC40MMGrenadeM74AGMF
+        amount: 4
+      - id: RMC40MMGrenadeM74AGMI
+        amount: 4
+      - id: RMC40MMGrenadeM74AGMS
+        amount: 4
+      - id: RMCStarShellM74AGMS
+        amount: 2
+      - id: RMCHornetShellM74AGMS
+        amount: 4
+      - id: RMCBatonSlugHIRR
+        amount: 8
       #- id: M40 MFHS Metal Foam Grenade
       #  amount: 6
       - id: RMCExplosivePlastic
@@ -342,8 +342,8 @@
         amount: 16 # TODO RMC14 6 once heavy is in
       #- id: M4A3 HP Magazine (9mm)
       #  amount: 2
-      #- id: M54CE2 Holo Target Rounds (10x24mm)
-      #  amount: 2
+      - id: CMMagazineRifleM54CE2HT
+        amount: 2
       - id: RMCBox458SOCOM
         amount: 4
     - name: Restricted firearm ammunition
@@ -615,6 +615,8 @@
         amount: 5
       - id: CMEncryptionKeyEcho
         amount: 5
+      - id: CMEncryptionKeyFoxtrot
+        amount: 5
       - id: CMEncryptionKeyEngineer
         amount: 5
       - id: CMEncryptionKeyIntel
@@ -639,3 +641,5 @@
       entries:
       - id: BedrollFolded
         amount: 30
+      - id: RMCM5CameraGear
+        amount: 3

@@ -12,6 +12,9 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessMarinePrep"
+    hackable: true
     sections:
     - name: Primary firearms
       entries:
@@ -91,6 +94,9 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessMarinePrep"
+    hackable: true
     sections:
     - name: Standard Equipment
       entries:
@@ -250,6 +256,8 @@
         amount: 10
       - id: RMCGlassesMarineRpg
         amount: 10
+      - id: RMCGlassesMarineRpgOld
+        amount: 10
 #      - id: M5 Integrated Gas Mask
 #        amount: 10
 #      - id: M10 Helmet Netting
@@ -266,6 +274,8 @@
 #        amount: 15
       - id: BedrollFolded
         amount: 20
+      - id: RMCM5CameraGear
+        amount: 10
     - name: Optics
       entries: [ ]
 #      - id: Advanced Medical Optic (CORPSMAN ONLY)
@@ -287,6 +297,10 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_ammo.rsi
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessMarinePrep"
+    - "CMAccessRequisitions"
+    hackable: true
     sections:
     - name: Armor-Piercing Ammunition
       entries:
@@ -324,12 +338,12 @@
       #  amount: 2
       - id: RMCBoxShotgunBreaching
         amount: 2
-      #- id: CMBatonSlugsHIRR
-      #  amount: 6
-      #- id: CMStarShellN74AGMS
-      #  amount: 4
-      #- id: CMHornetShellM74AGMS
-      #  amount: 4
+      - id: RMCBatonSlugHIRR
+        amount: 6
+      - id: RMCStarShellM74AGMS
+        amount: 4
+      - id: RMCHornetShellM74AGMS
+        amount: 4
 
 
 - type: entity
@@ -345,6 +359,10 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessMarinePrep"
+    - "CMAccessRequisitions"
+    hackable: true
     sections:
     - name: Food
       entries:
@@ -421,6 +439,10 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessMarinePrep"
+    - "CMAccessRequisitions"
+    hackable: true
     sections: # TODO RMC14
     - name: Barrel
       entries:

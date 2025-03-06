@@ -4,7 +4,7 @@
 - type: entity
   parent: BaseStorageItem
   id: CMMRE
-  name: Marine MRE
+  name: UNMC MRE
   description: A Meal, Ready-to-Eat. A single-meal combat ration designed to provide a soldier with enough nutrients for a day of strenuous work. Its expiration date is at least 20 years ahead of your combat life expectancy.
   components:
   - type: Tag
@@ -162,7 +162,7 @@
           Medium: { state: magaz_mre_2, visible: true }
           High: { state: magaz_mre_3, visible: true }
           Full: { state: magaz_mre, visible: true }
-    
+
 - type: entity
   parent: RMCBoxMREEmpty
   id: RMCBoxMRE

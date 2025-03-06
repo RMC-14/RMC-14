@@ -35,7 +35,7 @@
     scatterWielded: 4
     scatterUnwielded: 20
     baseFireRate: 4
-    burstScatterMult: 2
+    burstScatterMult: 1
     modifiers:
       Burst:
         fireDelay: 0.1665
@@ -45,7 +45,7 @@
         shotsToMaxScatter: 6
       FullAuto:
         fireDelay: 0
-        maxScatterModifier: 26
+        maxScatterModifier: 13
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 4

@@ -1,0 +1,118 @@
+# combat technician
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidFoxtrotCombatTech
+  name: foxtrot ghost role combat technician
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCFoxtrotCombatTech
+
+- type: randomHumanoidSettings
+  parent: [RMCCombatTech, RMCFoxtrotBase]
+  id: RMCFoxtrotCombatTech
+
+# fireteam leader
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidFoxtrotFireteamLeader
+  name: foxtrot ghost role fireteam leader
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCFoxtrotFireteamLeader
+
+- type: randomHumanoidSettings
+  parent: [RMCFireteamLeader, RMCFoxtrotBase]
+  id: RMCFoxtrotFireteamLeader
+
+# hospital corpsman
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidFoxtrotHospitalCorpsman
+  name: foxtrot ghost role hospital corpsman
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCFoxtrotHospitalCorpsman
+
+- type: randomHumanoidSettings
+  parent: [RMCHospitalCorpsman, RMCFoxtrotBase]
+  id: RMCFoxtrotHospitalCorpsman
+
+# rifleman
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidFoxtrotRifleman
+  name: foxtrot ghost role rifleman
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCFoxtrotRifleman
+
+- type: randomHumanoidSettings
+  parent: [RMCRifleman, RMCFoxtrotBase]
+  id: RMCFoxtrotRifleman
+
+# smart gun operator
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidFoxtrotSmartGunOperator
+  name: foxtrot ghost role smart gun operator
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCFoxtrotSmartGunOperator
+
+- type: randomHumanoidSettings
+  parent: [RMCSmartGunOperator, RMCFoxtrotBase]
+  id: RMCFoxtrotSmartGunOperator
+
+# squad leader
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidFoxtrotSquadLeader
+  name: foxtrot ghost role squad leader
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCFoxtrotSquadLeader
+
+- type: randomHumanoidSettings
+  parent: [RMCSquadLeader, RMCFoxtrotBase]
+  id: RMCFoxtrotSquadLeader
+
+# weapons specialist
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidFoxtrotWeaponsSpecialist
+  name: foxtrot ghost role weapons specialist
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCFoxtrotWeaponsSpecialist
+
+- type: randomHumanoidSettings
+  parent: [RMCWeaponsSpecialist, RMCFoxtrotBase]
+  id: RMCFoxtrotWeaponsSpecialist

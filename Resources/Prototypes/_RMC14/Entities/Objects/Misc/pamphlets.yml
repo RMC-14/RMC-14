@@ -138,6 +138,20 @@
       RMCSkillEndurance: 1 # TODO RMC14 loader job icon and role name, max 2
     bypassLimit: true
 
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletMortarOperator
+  name: mortar operator instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge. This one has the image of a mortar on it.
+  components:
+  - type: Sprite
+    state: pamphlet_mortar
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillEngineer: 1 # TODO RMC14 mortar operator job icon and role name, rifleman only
+      RMCSkillJtac: 2 # TODO RMC14 max 1 engineering, max 2 jtac
+    bypassLimit: true
+
 
 # LANGUAGE / bypasses limit
 

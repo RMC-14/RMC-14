@@ -1,0 +1,118 @@
+# combat technician
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidEchoCombatTech
+  name: echo ghost role combat technician
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCEchoCombatTech
+
+- type: randomHumanoidSettings
+  parent: [RMCCombatTech, RMCEchoBase]
+  id: RMCEchoCombatTech
+
+# fireteam leader
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidEchoFireteamLeader
+  name: echo ghost role fireteam leader
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCEchoFireteamLeader
+
+- type: randomHumanoidSettings
+  parent: [RMCFireteamLeader, RMCEchoBase]
+  id: RMCEchoFireteamLeader
+
+# hospital corpsman
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidEchoHospitalCorpsman
+  name: echo ghost role hospital corpsman
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCEchoHospitalCorpsman
+
+- type: randomHumanoidSettings
+  parent: [RMCHospitalCorpsman, RMCEchoBase]
+  id: RMCEchoHospitalCorpsman
+
+# rifleman
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidEchoRifleman
+  name: echo ghost role rifleman
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCEchoRifleman
+
+- type: randomHumanoidSettings
+  parent: [RMCRifleman, RMCEchoBase]
+  id: RMCEchoRifleman
+
+# smart gun operator
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidEchoSmartGunOperator
+  name: echo ghost role smart gun operator
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCEchoSmartGunOperator
+
+- type: randomHumanoidSettings
+  parent: [RMCSmartGunOperator, RMCEchoBase]
+  id: RMCEchoSmartGunOperator
+
+# squad leader
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidEchoSquadLeader
+  name: echo ghost role squad leader
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCEchoSquadLeader
+
+- type: randomHumanoidSettings
+  parent: [RMCSquadLeader, RMCEchoBase]
+  id: RMCEchoSquadLeader
+
+# weapons specialist
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidEchoWeaponsSpecialist
+  name: echo ghost role weapons specialist
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCEchoWeaponsSpecialist
+
+- type: randomHumanoidSettings
+  parent: [RMCWeaponsSpecialist, RMCEchoBase]
+  id: RMCEchoWeaponsSpecialist

@@ -5,6 +5,7 @@
     Title="Map" MinSize="600 600">
     <TabContainer Name="Tabs" Access="Public">
         <BoxContainer Name="MapTab" Access="Public" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+            <CheckBox Name="AreaLabelsCheckbox" Access="Public" Text="Show Area Labels" Pressed="True" />
             <controls:TacticalMapControl Name="Map" Access="Public" Stretch="Keep" TextureScale="3 3" />
         </BoxContainer>
         <BoxContainer Name="CanvasTab" Access="Public" Orientation="Vertical" Visible="False"

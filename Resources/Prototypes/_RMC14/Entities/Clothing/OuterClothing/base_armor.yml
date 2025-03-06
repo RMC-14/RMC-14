@@ -20,6 +20,7 @@
       path: /Audio/_RMC14/Machines/armor_equip.ogg
   - type: PlaytimeMedalHolder
   - type: MoveOrderArmor
+  - type: StoreAfterFailedInteract
 
 - type: entity
   abstract: true

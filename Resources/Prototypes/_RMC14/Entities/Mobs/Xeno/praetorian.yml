@@ -140,6 +140,7 @@
   - type: XenoEvolution
     strains:
     - RMCXenoPraetorianDancer
+    - RMCXenoPraetorianOppressor
     - RMCXenoPraetorianVanguard
     - RMCXenoPraetorianValkyrie
   - type: AcidTrap
@@ -170,6 +171,7 @@
     popup: rmc-xeno-valkyrie-popup
   - type: XenoPheromones
     pheromonesMultiplier: 3
+    pheroSuffix: strong
   - type: XenoEnergy
     alert: XenoEnergyValkyrie
     popupGain: rmc-xeno-fury-increase-user
@@ -291,3 +293,66 @@
       groups:
         Brute: 40
   - type: XenoCleave
+
+- type: entity
+  parent: CMXenoPraetorianBase
+  id: RMCXenoPraetorianOppressor
+  suffix: Oppressor
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Praetorian/oppressor_praetorian.rsi
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailSeize
+    - ActionXenoAbduct
+    - ActionXenoDislocate
+    - ActionXenoTailLash
+    - ActionXenoDevolve
+    hidden: true
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 30
+  - type: XenoStrain
+    name: rmc-xeno-oppressor-name
+    description: rmc-xeno-oppressor-description
+    popup: rmc-xeno-oppressor-popup
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.2
+    baseSprintSpeed: 3.5
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.64
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.7025
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.475
+      whitelist:
+        components:
+        - XenoHeavy
+  - type: XenoClaws
+    clawType: Sharp
+  - type: CMArmor
+    armor: 25
+    explosionArmor: 60
+  - type: StunOnExplosionReceived
+    weak: false
+  - type: XenoHook
+  - type: XenoTailSeize
+  - type: XenoAbduct
+  - type: XenoTailLash
+  - type: XenoDislocate
+    damage:
+      groups:
+        Brute: 20
+  - type: XenoSmackdown
+    damage:
+      groups:
+        Brute: 15

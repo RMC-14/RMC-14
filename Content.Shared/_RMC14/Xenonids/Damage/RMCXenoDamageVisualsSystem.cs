@@ -65,7 +65,11 @@ public sealed class RMCXenoDamageVisualsSystem : EntitySystem
 
         var damage = args.Damageable.TotalDamage.Double();
         var max = threshold.Value.Double();
-        var level = ContentHelpers.RoundToEqualLevels(damage, max, ent.Comp.States + 1);
+        int level;
+        if (damage > threshold)
+            level = ent.Comp.States + 1;
+        else
+            level = ContentHelpers.RoundToEqualLevels(damage, max, ent.Comp.States + 1);
         _appearance.SetData(ent, RMCDamageVisuals.State, level);
     }
 }
