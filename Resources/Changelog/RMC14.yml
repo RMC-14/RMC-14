@@ -1,64 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added comms towers, phones and the RTO backpack. Radio channels won't
-      work on the planet until at least one is repaired. Phones always work. Only
-      one tower needs to be repaired, powered and turned on before radio channels
-      work on the planet. Comms towers show up on the tactical map at round-start.
-      The RTO backpack which carries a phone can be bought by every squad role except
-      the smartgunner for points, and Req gets 2 for free.
-    type: Add
-  - message: Added the ability for Command to directly message a squad through the
-      overwatch console.
-    type: Add
-  - message: Added admin xenonid announcements titled Queen Mother Psychic Directive.
-    type: Add
-  - message: Added new player labels, visible to SEAs. Red means new to the game and
-      job, yellow means new to the game but not the job, and green means new to the
-      job but not the game.
-    type: Add
-  - message: Added the tactical map action to ghosts.
-    type: Add
-  - message: Added the ability to open the tactical map and overwatch through the
-      groundside operations console, and added the cameras console to the CIC bubble.
-    type: Add
-  - message: Added figurines for Alec 'Protag' Buchanan, Kon Kleemaan, and Porter
-      'Zombie' Coolidge.
-    type: Add
-  - message: Fixed skill locked injectors being usable with z.
-    type: Fix
-  - message: Fixed sensor tower appearance nto updating when breaking over time.
-    type: Fix
-  - message: Fixed shive ice walls not being destroyed by explosions.
-    type: Fix
-  - message: Fixed the fire axe not prying unpowered doors instantly.
-    type: Fix
-  - message: Fixed operation Bassmaster not finding any of the boxes of shotgun shells
-      that were supposed to be there in the underground lake house in LV.
-    type: Fix
-  - message: Fixed the M4SPR with a bipod healing on melee attack.
-    type: Fix
-  - message: Fixed the 92FS not starting with a mag.
-    type: Fix
-  - message: Fixed survivors not properly randomizing their secondary weapon located
-      inside their satchel.
-    type: Fix
-  - message: Renamed Marine Common to Almayer. This channel never works on the planet,
-      regardless of comms tower status.
-    type: Tweak
-  - message: Changed the description of the Warden Praetorian's xenonid aid to be
-      clearer. You cannot heal yourself directly, but will heal indirectly when healing
-      another xenonid.
-    type: Tweak
-  - message: Increased the time it takes for the round to end from 2 to 5 minutes,
-      and to start from 2 and a half to 3 minutes.
-    type: Tweak
-  - message: Added examine test to bottles and injectors indicating that they can
-      be refilled at a medical vendor.
-    type: Tweak
-  id: 923
-  time: '2024-11-02T20:17:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4667
 - author: FungiFellow
   changes:
   - message: Added storage for holdout to color shoes
@@ -5281,5 +5221,12 @@
   id: 1424
   time: '2025-03-03T00:19:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5794
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed helmet accessories not fitting inside patrol caps.
+    type: Fix
+  id: 1425
+  time: '2025-03-06T05:05:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5806
 Name: RMC14
 Order: -1
