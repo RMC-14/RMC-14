@@ -83,4 +83,5 @@ public enum RangefinderMode
 {
     Rangefinder,
     Designator,
+    Spotter,
 }

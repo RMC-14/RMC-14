@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Rangefinder.Spotting;
 using Content.Shared._RMC14.Rules;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
@@ -46,6 +47,8 @@ public sealed class RangefinderSystem : EntitySystem
         SubscribeLocalEvent<RangefinderComponent, LaserDesignatorDoAfterEvent>(OnRangefinderDoAfter);
         SubscribeLocalEvent<RangefinderComponent, ExaminedEvent>(OnRangefinderExamined);
         SubscribeLocalEvent<RangefinderComponent, GetVerbsEvent<AlternativeVerb>>(OnRangefinderGetAlternativeVerbs);
+        SubscribeLocalEvent<RangefinderComponent, AimingCancelledEvent>(OnAimingCancelled);
+        SubscribeLocalEvent<RangefinderComponent, AimingFinishedEvent>(OnAimingFinished);
 
         SubscribeLocalEvent<ActiveLaserDesignatorComponent, ComponentRemove>(OnLaserDesignatorRemove);
         SubscribeLocalEvent<ActiveLaserDesignatorComponent, EntityTerminatingEvent>(OnLaserDesignatorRemove);
@@ -276,6 +279,16 @@ public sealed class RangefinderSystem : EntitySystem
             active.Target = null;
             Dirty(target.Comp.LaserDesignator.Value, active);
         }
+    }
+
+    private void OnAimingCancelled(Entity<RangefinderComponent> ent, ref AimingCancelledEvent args)
+    {
+        UpdateAppearance(ent);
+    }
+
+    private void OnAimingFinished(Entity<RangefinderComponent> ent, ref AimingFinishedEvent args)
+    {
+        UpdateAppearance(ent);
     }
 
     private void ChangeDesignatorMode(Entity<RangefinderComponent> rangefinder, RangefinderMode mode)

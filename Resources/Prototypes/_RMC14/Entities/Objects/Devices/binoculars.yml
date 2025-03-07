@@ -73,6 +73,7 @@
         light:
           Rangefinder: { state: laser_range }
           Designator: { state: laser_cas }
+          Spotter: { state: laser_spotter }
   - type: ItemCamouflage
     states:
       Jungle: rangefinder
