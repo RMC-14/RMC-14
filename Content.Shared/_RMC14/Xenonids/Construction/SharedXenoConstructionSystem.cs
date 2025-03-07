@@ -69,6 +69,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly XenoNestSystem _xenoNest = default!;
@@ -529,26 +530,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         if (HasComp<HiveConstructionRequiresSpaceComponent>(target))
         {
-            var centerTile = _mapSystem.GetTileRef((gridId, grid), target.ToCoordinates()).GridIndices;
-            for (var adjacentX = centerTile.X - 1; adjacentX <= centerTile.X + 1; adjacentX++)
+            var mapCoords = _transform.GetMapCoordinates(target);
+            if (!CanPlaceSpaceRequiringStructurePopup(mapCoords, (gridId, grid), xeno.Owner, MetaData(target).EntityName))
             {
-                for (var adjacentY = centerTile.Y - 1; adjacentY <= centerTile.Y + 1; adjacentY++)
-                {
-                    if (adjacentX == adjacentY && adjacentX == 0)
-                    {
-                        continue;
-                    }
-
-                    var adjacentTile = new Vector2i(adjacentX, adjacentY);
-                    if (_turf.IsTileBlocked(gridId, adjacentTile, MidImpassable, grid))
-                    {
-                        _popup.PopupClient(
-                        Loc.GetString("rmc-xeno-construction-requires-space", ("choice", target)),
-                        target,
-                        args.User);
-                        return;
-                    }
-                }
+                return;
             }
         }
 
@@ -956,27 +941,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
             if (choiceProto.HasComponent<HiveConstructionRequiresSpaceComponent>(_compFactory))
             {
-                var centerTile = _mapSystem.GetTileRef((gridId, grid), target).GridIndices;
-                for (var adjacentX = centerTile.X - 1; adjacentX <= centerTile.X + 1; adjacentX++)
+                if (!CanPlaceSpaceRequiringStructurePopup(_transform.ToMapCoordinates(target), (gridId, grid), xeno.Owner, choiceProto.Name))
                 {
-                    for (var adjacentY = centerTile.Y - 1; adjacentY <= centerTile.Y + 1; adjacentY++)
-                    {
-                        if (adjacentX == adjacentY && adjacentX == 0)
-                        {
-                            continue;
-                        }
-
-                        var adjacentTile = new Vector2i(adjacentX, adjacentY);
-                        if (_turf.IsTileBlocked(gridId, adjacentTile, MidImpassable, grid))
-                        {
-                            _popup.PopupClient(
-                            Loc.GetString("rmc-xeno-construction-requires-space", ("choice", choiceProto.Name)),
-                            xeno,
-                            xeno,
-                            PopupType.MediumCaution);
-                            return false;
-                        }
-                    }
+                    return false;
                 }
             }
 
@@ -1069,6 +1036,45 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         return supported;
     }
 
+    private bool CanPlaceSpaceRequiringStructurePopup(MapCoordinates mapCoords, Entity<MapGridComponent> map, EntityUid user, string structName)
+    {
+        var mapID = mapCoords.MapId;
+        var aabbRange = new Box2(mapCoords.X - 1.5F, mapCoords.Y + 1.5F, mapCoords.X + 1.5F, mapCoords.Y - 1.5F);
+        var nearHiveLimitedStructure = _lookup.AnyComponentsIntersecting(typeof(HiveConstructionLimitedComponent), mapID, aabbRange);
+        var centerTile = _mapSystem.GetTileRef(map, mapCoords);
+        var userCoords = _transform.ToCoordinates(user, mapCoords);
+
+        if (nearHiveLimitedStructure)
+        {
+            _popup.PopupClient(
+                    Loc.GetString("rmc-xeno-construction-requires-space", ("choice", structName)),
+                    userCoords,
+                    user);
+            return false;
+        }
+
+        for (var adjacentX = centerTile.X - 1; adjacentX <= centerTile.X + 1; adjacentX++)
+        {
+            for (var adjacentY = centerTile.Y - 1; adjacentY <= centerTile.Y + 1; adjacentY++)
+            {
+                if (adjacentX == adjacentY && adjacentX == 0)
+                {
+                    continue;
+                }
+
+                var adjacentTile = new Vector2i(adjacentX, adjacentY);
+                if (_turf.IsTileBlocked(map, adjacentTile, MobMask, map.Comp))
+                {
+                    _popup.PopupClient(
+                    Loc.GetString("rmc-xeno-construction-requires-space", ("choice", structName)),
+                    userCoords,
+                    user);
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
     public bool CanPlaceXenoStructure(EntityUid user, EntityCoordinates coords, [NotNullWhen(false)] out string? popupType, bool needsWeeds = true)
     {
         popupType = null;
