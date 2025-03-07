@@ -85,9 +85,13 @@
   suffix: Construction
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Xenos/hive_structures.rsi
-    state: core
     color: '#FFFFFFAA'
+    layers:
+    - sprite: _RMC14/Structures/Xenos/hive_structures.rsi
+      state: core
+    - sprite: _RMC14/Interface/xeno_hud.rsi
+      state: xeno_structure_node_indicator
+      scale: 0.8, 0.8
   - type: Destructible
     thresholds:
     - trigger:
