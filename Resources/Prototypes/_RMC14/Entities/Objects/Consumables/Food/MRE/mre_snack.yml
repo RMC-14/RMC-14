@@ -88,11 +88,6 @@
   id: CMMREFoodSnack
   components:
   - type: Food
-  - type: SolutionContainerManager
-  - type: Extractable
-    grindableSolutionName: food
-  - type: InjectableSolution
-    solution: food
 
 - type: entity
   parent: CMMREFoodSnack
@@ -107,7 +102,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 15
+        maxVol: 50
         reagents:
         - ReagentId: RMCBread
           Quantity: 4
@@ -115,7 +110,7 @@
           Quantity: 1
   - type: FlavorProfile
     flavors:
-    - Biscuit
+    - bread
 
 - type: entity
   parent: CMMREFoodSnack
@@ -130,7 +125,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 17
+        maxVol: 50
         reagents:
         - ReagentId: RMCMeatProtein
           Quantity: 4
@@ -155,7 +150,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 18
+        maxVol: 50
         reagents:
         - ReagentId: RMCBread
           Quantity: 4
@@ -163,7 +158,7 @@
           Quantity: 4
   - type: FlavorProfile
     flavors:
-    - Pretzels
+    - bread
 
 - type: entity
   parent: CMMREFoodSnack
@@ -178,7 +173,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 18
+        maxVol: 50
         reagents:
         - ReagentId: RMCMeatProtein
           Quantity: 4
@@ -201,7 +196,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 18
+        maxVol: 50
         reagents:
         - ReagentId: RMCFish
           Quantity: 2
@@ -213,7 +208,7 @@
           Quantity: 2
   - type: FlavorProfile
     flavors:
-    - Sushi
+    - fishy
 
 - type: entity
   parent: CMMREFoodSnack
@@ -228,7 +223,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 15
+        maxVol: 50
         reagents:
         - ReagentId: RMCNuts
           Quantity: 4
@@ -236,13 +231,9 @@
           Quantity: 1
   - type: FlavorProfile
     flavors:
-    - Peanuts
+    - nutty
 
 # Flavors
-- type: flavor
-  id: Biscuit
-  flavorType: Complex
-  description: like biscuits
 
 - type: flavor
   id: Meatballs
@@ -253,18 +244,3 @@
   id: Meatzels
   flavorType: Complex
   description: like meatzels...?
-
-- type: flavor
-  id: Pretzels
-  flavorType: Complex
-  description: like pretzels
-
-- type: flavor
-  id: Peanuts
-  flavorType: Complex
-  description: like peanuts
-
-- type: flavor
-  id: Sushi
-  flavorType: Complex
-  description: like sushi

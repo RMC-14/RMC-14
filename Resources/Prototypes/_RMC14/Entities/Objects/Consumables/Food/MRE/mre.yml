@@ -4,6 +4,12 @@
 - type: Tag
   id: MREUNMC
 
+- type: Tag
+  id: MRECLF
+
+- type: Tag
+  id: MREWY
+
 - type: entity
   parent: BaseStorageItem
   id: CMMRE
@@ -98,6 +104,8 @@
     - id: CMMREComponentPeanuts
       orGroup: snack
     # dessert
+    - id: CMMREComponentSpicedApples
+      orGroup: dessert
     - id: CMMREComponentChocolateBrownie
       orGroup: dessert
     - id: CMMREComponentSugarCookie
@@ -107,6 +115,16 @@
     - id: CMMREComponentFlan
       orGroup: dessert
     - id: CMMREComponentHoneyFlan
+      orGroup: dessert
+    - id: RMCMREComponentCookie
+      orGroup: dessert
+    - id: RMCMREComponentLemonPie
+      orGroup: dessert
+    - id: RMCMREComponentKeyLimePie
+      orGroup: dessert
+    - id: RMCMREComponentBrigadeiroBalls
+      orGroup: dessert
+    - id: RMCMREComponentStrawberryToasterPastry
       orGroup: dessert
     # drink
     - id: CMDrinkWEYAWaterBottle30
@@ -127,6 +145,12 @@
     - id: CMExecutiveWEYAMatchbook
       orGroup: matchbook
     # spread
+    - id: RMCMREDrinkSpreadPacketCheese
+      orGroup: spread
+    - id: RMCMREDrinkSpreadPacketJalapenoCheese
+      orGroup: spread
+    - id: RMCMREDrinkSpreadPacketPeanutButter
+      orGroup: spread
     # beverage
     - id: RMCBeveragePowderGrape
       orGroup: beverage
@@ -142,10 +166,109 @@
     - id: RMCMRESpork
   - type: FixedItemSizeStorage
   - type: RemoveOnlyStorage
+  - type: RMCLabelByContained
+  - type: StorageRequireOpened
   - type: InteractedBlacklist
     blacklist:
       components:
       - Xeno
+  - type: UseDelay
+    delay: 0.1
+    
+
+- type: entity
+  parent: CMMRE
+  id: RMCWYMRE
+  name: We-Ya brand ration pack
+  description: "A more or less cohesive ration, intended for colonist and corporate security, packed with a medium quality foods with a long shelf life. On the box is the Westom-Yamada logo, with a slogan surrounding it: WESTON-YAMADA. FEEDING THE FUTURE."
+  components:
+  - type: Tag
+    tags:
+    - MRE
+    - MREWY
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/mre_other.rsi
+    state: wy_mealpack
+  - type: Item
+    size: Small
+    heldPrefix: wy_mealpack
+  - type: Storage
+    grid:
+    - 0,0,9,1 #5 slots min
+    whitelist: null
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: { state: "wy_mealpackopened" }
+          False: { state: "wy_mealpack" }
+  - type: StorageFill
+    contents:
+    # entree
+    - id: RMCMREComponentWYBonelessPorkRibs
+      orGroup: main
+    - id: RMCMREComponentWYGrilledChicken
+      orGroup: main
+    - id: RMCMREComponentWYChickenTender
+      orGroup: main
+    - id: RMCMREComponentWYSpaghettiChunks
+      orGroup: main
+    - id: RMCMREComponentWYGrilledChickenBreast
+      orGroup: main
+    # side
+    - id: RMCFoodSnackCheeseburgerPackaged
+      orGroup: side
+    - id: RMCFoodSnackBurritoPackaged
+      orGroup: side
+    # snack
+    - id: RMCFoodSnackHotdogPackaged
+    # dessert
+    - id: RMCFoodSnackEATBar
+      orGroup: dessert
+    - id: RMCFoodSnackBoonie
+      orGroup: dessert
+    - id: RMCFoodSnackBarcaridine
+      orGroup: dessert
+    - id: RMCFoodSnackCHUNK
+      orGroup: dessert
+    # drink
+    - id: RMCDrinkWEYABugJuice
+
+- type: entity
+  parent: BaseItem
+  id: RMCCLFMRE
+  name: wrapped makeshift meal
+  description: Some home cooked or salvaged meal, you do what you must within your capabilities.
+  components:
+  - type: Tag
+    tags:
+    - MRE
+    - MRECLF
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/clf_mre.rsi
+    state: clf_mealpack
+  - type: Item
+    size: Small
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCMREFoodCLFMeatPie
+      orGroup: main
+    - id: RMCMREFoodCLFBananaPie
+      orGroup: main
+    - id: RMCMREFoodCLFCheesePizza
+      orGroup: main
+    - id: RMCMREFoodCLFMushroomPizza
+      orGroup: main
+    - id: RMCMREFoodCLFVegetablePizza
+      orGroup: main
+    - id: RMCMREFoodCLFMeatPizza
+      orGroup: main
+
+#Components
 
 - type: entity
   abstract: true
@@ -163,7 +286,7 @@
       collection: CMFoodRip
   - type: MREItem
 
-# Note for MRES - give an extra 10 vol so people can shove spreads etc on them
+# Note for MRES - all should have 50 volume
 - type: entity
   abstract: true
   parent: CMFoodBase
@@ -175,6 +298,15 @@
   - type: Item
     size: Small
   - type: MREItem
+  - type: RefillableSolution
+    solution: food
+  - type: InjectableSolution
+    solution: food
+  - type: Extractable
+    grindableSolutionName: food
+  - type: FlavorProfile
+    flavors:
+    - cheap
 
 - type: entity
   parent: RMCBoxMagazineBase
@@ -213,6 +345,79 @@
           Medium: { state: magaz_mre_2, visible: true }
           High: { state: magaz_mre_3, visible: true }
           Full: { state: magaz_mre, visible: true }
+
+- type: entity
+  parent: RMCBoxMREEmpty
+  id: RMCBoxMREWYEmpty
+  name: box of We-Ya brand rations
+  description: "A box of basic packed foods, comes with all sorts of We-Ya branded snacks. On the box is the Weston-Yamada logo, with a slogan surrounding it: WESTON-YAMADA. FEEDING THE FUTURE."
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMREWYEmpty
+  - type: CMItemSlots
+    slot:
+      name: MREWY
+      whitelist:
+        tags:
+        - MREWY
+  - type: Sprite
+    layers:
+    - state: wy_food_crate
+    - state: magaz_wy_mre
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: wy_food_crate_lid
+      map: [ "lid" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: magaz_wy_mre, visible: false }
+          Low: { state: magaz_wy_mre_1, visible: true }
+          Medium: { state: magaz_wy_mre_2, visible: true }
+          High: { state: magaz_wy_mre_3, visible: true }
+          Full: { state: magaz_wy_mre, visible: true }
+
+- type: entity
+  parent: RMCBoxMREEmpty
+  id: RMCBoxMREEmergencyEmpty
+  name: box of emergency rations
+  description: A box of emergency rations. Designed to withstand.
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMREEmergencyEmpty
+  - type: CMItemSlots
+    count: 20
+    slot:
+      name: MREButterCookies
+      whitelist:
+        tags:
+        - MREButterCookie
+  - type: Sprite
+    layers:
+    - state: colony_food_crate
+    - state: magaz_colony_mre
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: colony_food_crate_lid
+      map: [ "lid" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: magaz_colony_mre, visible: false }
+          Low: { state: magaz_colony_mre_1, visible: true }
+          Medium: { state: magaz_colony_mre_2, visible: true }
+          High: { state: magaz_colony_mre_3, visible: true }
+          Full: { state: magaz_colony_mre, visible: true }
     
 - type: entity
   parent: RMCBoxMREEmpty
@@ -221,6 +426,22 @@
   components:
   - type: CMItemSlots
     startingItem: CMMRE
+
+- type: entity
+  parent: RMCBoxMREWYEmpty
+  id: RMCBoxWYMRE
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCWYMRE
+
+- type: entity
+  parent: RMCBoxMREEmergencyEmpty
+  id: RMCBoxMREEmergency
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMREComponentWYCookieBriquette
 
 - type: entity
   parent: RMCFork
@@ -232,14 +453,19 @@
     sprite: _RMC14/Objects/Consumable/Food/mre_other.rsi
     layers:
     - state: mre_spork
-    - map: ["RMCUtensilFoodLayers.Food"]
-      sprite: _RMC14/Objects/Consumable/Food/mre_other.rsi
-      state: loaded_food
+    - map: ["enum.SolutionContainerLayers.Fill"]
+      state: food-1
       visible: false
   - type: Item
     size: Tiny
+    sprite: _RMC14/Objects/Consumable/Food/mre_other.rsi
     heldPrefix: mre_spork
   - type: MREItem
+  - type: ReactionMixer
+    mixMessage: "spoon-mixing-success"
+    timeToMix: 0.5
+    reactionTypes:
+    - Stir
   - type: Utensil
     types:
     - Fork

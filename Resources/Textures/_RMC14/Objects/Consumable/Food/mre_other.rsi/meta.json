@@ -135,7 +135,10 @@
       "directions": 4
     },
     {
-      "name": "food_1"
+      "name": "food-1"
+    },
+    {
+      "name": "food-2"
     }
   ]
 }

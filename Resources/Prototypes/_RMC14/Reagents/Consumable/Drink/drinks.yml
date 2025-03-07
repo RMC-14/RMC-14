@@ -27,6 +27,15 @@
   physicalDesc: reagent-physical-desc-milky
 
 - type: reagent
+  id: RMCCream
+  parent: RMCMilk
+  name: cream
+  color: "#DFD7AF"
+  flavor: creamy
+  desc: The fatty, still liquid part of milk. Why don't you mix this with sum scotch, eh?
+  physicalDesc: reagent-physical-desc-creamy
+
+- type: reagent
   id: RMCCoconutMilk
   parent: RMCDrinkBase
   name: coconut milk
@@ -141,6 +150,42 @@
   flavor: tomato
   desc: Tomatoes made into juice. What a waste of big, juicy tomatoes, huh?
   physicalDesc: reagent-physical-desc-crisp
+
+- type: reagent
+  id: RMCLemonJuice
+  parent: RMCDrinkBase
+  name: lemon juice
+  color: "#D1DB42"
+  flavor: sour
+  desc: This juice is VERY sour.
+  physicalDesc: reagent-physical-desc-citric
+
+- type: reagent
+  id: RMCLimeJuice
+  parent: RMCDrinkBase
+  name: lime juice
+  color: "#365E30"
+  flavor: sour
+  desc: The sweet-sour juice of limes.
+  physicalDesc: reagent-physical-desc-citric
+
+- type: reagent
+  id: RMCBerryJuice
+  parent: RMCDrinkBase
+  name: berry juice
+  color: "#990066"
+  flavor: sweet
+  desc: A delicious blend of several different kinds of berries.
+  physicalDesc: reagent-physical-desc-sweet
+
+- type: reagent
+  id: RMCBananaJuice
+  parent: RMCDrinkBase
+  name: banana juice
+  color: "#E4C439"
+  flavor: banana
+  desc: The raw essence of a banana.
+  physicalDesc: reagent-physical-desc-tropical
 
 - type: reagent
   id: RMCPotatoJuice

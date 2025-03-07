@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Prototypes;
 using Content.Shared.DoAfter;
@@ -6,6 +6,8 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
+using Content.Shared.Nutrition.Components;
+using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
@@ -34,6 +36,7 @@ public sealed class RMCStorageSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly OpenableSystem _open = default!;
 
     private readonly List<EntityUid> _toRemove = new();
 
@@ -58,6 +61,9 @@ public sealed class RMCStorageSystem : EntitySystem
         SubscribeLocalEvent<MarineComponent, EntGotRemovedFromContainerMessage>(OnRemovedMarineFromContainer);
 
         SubscribeLocalEvent<StorageNestedOpenSkillRequiredComponent, StorageInteractAttemptEvent>(OnNestedSkillRequiredInteractAttempt);
+
+        SubscribeLocalEvent<StorageRequireOpenedComponent, StorageInteractAttemptEvent>(OnOpenAttempt);
+        SubscribeLocalEvent<StorageRequireOpenedComponent, DumpableDoAfterEvent>(OnOpenDumpableDoAfter, before: [typeof(DumpableSystem)]);
 
         Subs.BuiEvents<StorageCloseOnMoveComponent>(StorageUiKey.Key, subs =>
         {
@@ -179,6 +185,24 @@ public sealed class RMCStorageSystem : EntitySystem
             comp.OpenedAt.Remove(args.Equipee);
     }
 
+    private void OnOpenAttempt(Entity<StorageRequireOpenedComponent> ent, ref StorageInteractAttemptEvent args)
+    {
+        if ( args.Cancelled)
+            return;
+
+        if (TryCancelOpenRequired(args.User, ent))
+            args.Cancelled = true;
+    }
+
+    private void OnOpenDumpableDoAfter(Entity<StorageRequireOpenedComponent> ent, ref DumpableDoAfterEvent args)
+    {
+        if (args.Handled || args.Cancelled)
+            return;
+
+        if (TryCancelOpenRequired(args.User, ent))
+            args.Handled = true;
+    }
+
     private void OnBlockInsertIntoEntityStorageAttempt(Entity<BlockEntityStorageComponent> ent, ref InsertIntoEntityStorageAttemptEvent args)
     {
         if (_entityWhitelist.IsWhitelistPassOrNull(ent.Comp.Whitelist, args.Container))
@@ -242,6 +266,17 @@ public sealed class RMCStorageSystem : EntitySystem
             _popup.PopupClient(Loc.GetString("cm-storage-unskilled"), storage, user, PopupType.SmallCaution);
             return true;
         }
+
+        return false;
+    }
+
+    private bool TryCancelOpenRequired(EntityUid user, Entity<StorageRequireOpenedComponent> storage)
+    {
+        if (!TryComp<OpenableComponent>(storage, out var open))
+            return false;
+
+        if (_open.IsClosed(storage, user))
+            return true;
 
         return false;
     }

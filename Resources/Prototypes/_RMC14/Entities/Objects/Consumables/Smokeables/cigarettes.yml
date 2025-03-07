@@ -5,7 +5,7 @@
   description: These four-packs of Luckies come in every MRE. They're not as good as the Habana Reals that come in the LACN MREs, but at least they're free.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/lucky_sloths_4.rsi
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/lucky_sloths_mini.rsi
     layers:
     - state: closed
     - state: open
@@ -180,6 +180,21 @@
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/unfiltered_roll.rsi
     state: unlit-icon
+  - type: Clothing
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/unfiltered_roll.rsi
+
+- type: entity
+  parent: RMCCigarette
+  id: RMCCigaretteBlackRoll
+  description: A roll of tobacco, nicotine, and some phosphor, in a fancy black package. The phosphor makes the tip glow blue when lit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/black_roll.rsi
+    state: unlit-icon
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/black_roll.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/black_roll.rsi
 
 - type: entity
   id: RMCCigaretteSpent
@@ -201,13 +216,49 @@
       - Burnt
 
 - type: entity
+  id: RMCCigaretteBlackRollSpent
+  parent: RMCCigaretteBlackRoll
+  suffix: spent
+  components:
+  - type: Sprite
+    state: burnt-icon
+  - type: Smokable
+    state: Burnt
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 20
+  - type: Tag
+    tags:
+      - Cigarette
+      - Trash
+      - Burnt
+
+- type: entity
   parent: RMCCigarettePackLuckySloths
   id: RMCCigarettePackWeYaGold
   name: We-Ya gold packet
-  description: Paving Better Worlds, and rolling better cigarettes. These fancy cigarettes are Weston-Yamada's entry into the market. Comes backed by a fierce legal team.
+  description: The future is now, with better cigarettes! These fancy cigarettes are Weston-Yamada's entry into the market. Comes backed by a fierce legal team.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/we_ya_gold_packet.rsi
+  - type: StorageFill
+    contents:
+    - id: Cigarette
+      amount: 20
+
+- type: entity
+  parent: CMCigarettePackLuckySlothsMini
+  id: RMCCigarettePackWeYaGoldMini
+  name: We-Ya gold mini packet
+  description: The future is now, with better cigarettes! Compact and ready for your executive ventures, protecting corporate assets never felt cooler.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/we_ya_gold_packet_mini.rsi
+  - type: StorageFill
+    contents:
+    - id: Cigarette
+      amount: 4
 
 - type: entity
   parent: RMCCigarettePackLuckySloths
@@ -217,3 +268,49 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/executive_select.rsi
+  - type: StorageFill
+    contents:
+    - id: RMCCigaretteBlackRoll
+      amount: 20
+
+- type: entity
+  parent: CMCigarettePackLuckySlothsMini
+  id: RMCCigarettePackExecutiveSelectMini
+  name: executive select mini packet
+  description: Luxury right in your ration. You will have them just in time to use them while observing a nuclear blast and enjoying it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/executive_select_mini.rsi
+  - type: StorageFill
+    contents:
+    - id: RMCCigaretteBlackRoll
+      amount: 4
+
+- type: entity
+  parent: RMCCigarettePackLuckySloths
+  id: RMCCigarettePackNoble
+  name: noble packet
+  description: Smoking like the 1900s. Quite popular amongst people living in the Three Suns Empire.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/noble.rsi
+  - type: ItemCounter
+    composite: false
+    baseLayer: "cig20"
+  - type: StorageFill
+    contents:
+    - id: Cigarette
+      amount: 20
+
+- type: entity
+  parent: CMCigarettePackLuckySlothsMini
+  id: RMCCigarettePackNobleMini
+  name: noble mini packet
+  description: Smoking like the 1900s. Now in the field, with a new compact package!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/noble_mini.rsi
+  - type: StorageFill
+    contents:
+    - id: Cigarette
+      amount: 4

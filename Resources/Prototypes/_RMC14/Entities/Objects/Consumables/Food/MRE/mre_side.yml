@@ -111,6 +111,8 @@
   description: An MRE side component. Contains a side, to be eaten alongside the main. This one is boiled rice.
   suffix: boiled rice
   components:
+  - type: Food
+    utensil: Spoon
   - type: Label
     currentLabel: rmc-mre-side-boiled-rice
   - type: SpawnItemsOnUse
@@ -136,11 +138,6 @@
   id: CMMREFoodSide
   components:
   - type: Food
-  - type: SolutionContainerManager
-  - type: Extractable
-    grindableSolutionName: food
-  - type: InjectableSolution
-    solution: food
 
 - type: entity
   parent: CMMREFoodSide
@@ -155,7 +152,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 18
+        maxVol: 50
         reagents:
         - ReagentId: RMCBread
           Quantity: 6
@@ -163,7 +160,7 @@
           Quantity: 2
   - type: FlavorProfile
     flavors:
-    - Cracker
+    - bread
 
 - type: entity
   parent: CMMREFoodSide
@@ -178,7 +175,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 22
+        maxVol: 50
         reagents:
         - ReagentId: RMCPotatoJuice
           Quantity: 6
@@ -188,6 +185,9 @@
           Quantity: 2
         - ReagentId: TableSalt
           Quantity: 1
+  - type: FlavorProfile
+    flavors:
+    - potato
 
 - type: entity
   parent: CMMREFoodSide
@@ -202,7 +202,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 18
+        maxVol: 50
         reagents:
         - ReagentId: RMCRice
           Quantity: 4
@@ -214,7 +214,7 @@
           Quantity: 1
   - type: FlavorProfile
     flavors:
-    - Risotto
+    - creamy
 
 - type: entity
   parent: CMMREFoodSide
@@ -229,7 +229,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 17
+        maxVol: 50
         reagents:
         - ReagentId: RMCRice
           Quantity: 5
@@ -239,7 +239,7 @@
           Quantity: 1
   - type: FlavorProfile
     flavors:
-    - RiceOnigiri
+    - RMCRice
 
 - type: entity
   parent: CMMREFoodSide
@@ -254,7 +254,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 17
+        maxVol: 50
         reagents:
         - ReagentId: RMCBread
           Quantity: 4
@@ -279,7 +279,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 20
+        maxVol: 50
         reagents:
         - ReagentId: RMCPlantMatter
           Quantity: 6
@@ -304,13 +304,13 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 16
+        maxVol: 50
         reagents:
         - ReagentId: RMCBread
           Quantity: 6
   - type: FlavorProfile
     flavors:
-    - Tortilla
+    - bread
 
 - type: entity
   parent: CMMREFoodSide
@@ -325,13 +325,13 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 16
+        maxVol: 50
         reagents:
         - ReagentId: RMCBread
           Quantity: 6
   - type: FlavorProfile
     flavors:
-    - Biscuit
+    - bread
 
 - type: entity
   parent: CMMREFoodSide
@@ -346,7 +346,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 16
+        maxVol: 50
         reagents:
         - ReagentId: RMCFruit
           Quantity: 3
@@ -369,33 +369,21 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 16
+        maxVol: 50
         reagents:
         - ReagentId: RMCRice
           Quantity: 6
+  - type: FlavorProfile
+    flavors:
+    - RMCRice
 
 # Flavors
-- type: flavor
-  id: Cracker
-  flavorType: Complex
-  description: like crackers
-
-- type: flavor
-  id: Risotto
-  flavorType: Complex
-  description: like risotto
-
 - type: flavor
   id: Kale
   flavorType: Complex
   description: like kale
 
 - type: flavor
-  id: Tortilla
+  id: Cinnamon
   flavorType: Complex
-  description: like tortilla
-
-- type: flavor
-  id: CinnamonApple
-  flavorType: Complex
-  description: like cinnamon and apples
+  description: like cinnamon

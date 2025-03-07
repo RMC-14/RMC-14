@@ -12,6 +12,7 @@
 - type: entity
   parent: CMMREDessertComponentBase
   id: CMMREComponentSpicedApples
+  suffix: spiced apples
   description: An MRE side component. Contains a sweet dessert, to be eaten after the main (or before, if you're rebellious). This one is spiced apples.
   components:
   - type: Label
@@ -23,8 +24,8 @@
 - type: entity
   parent: CMMREDessertComponentBase
   id: CMMREComponentChocolateBrownie
-  name: MRE component
   description: An MRE side component. Contains a sweet dessert, to be eaten after the main (or before, if you're rebellious). This one is a chocolate brownie.
+  suffix: chocolate brownie
   components:
   - type: Label
     currentLabel: rmc-mre-dessert-chocolate-brownie
@@ -35,8 +36,8 @@
 - type: entity
   parent: CMMREDessertComponentBase
   id: CMMREComponentSugarCookie
-  name: MRE component
   description: An MRE side component. Contains a sweet dessert, to be eaten after the main (or before, if you're rebellious). This one is a sugar cookie.
+  suffix: sugar cookie
   components:
   - type: Label
     currentLabel: rmc-mre-dessert-sugar-cookie
@@ -47,8 +48,8 @@
 - type: entity
   parent: CMMREDessertComponentBase
   id: CMMREComponentCocoBar
-  name: MRE component
   description: An MRE side component. Contains a sweet dessert, to be eaten after the main (or before, if you're rebellious). This one is a coco bar.
+  suffix: coco bar
   components:
   - type: Label
     currentLabel: rmc-mre-dessert-coco-bar
@@ -59,9 +60,11 @@
 - type: entity
   parent: CMMREDessertComponentBase
   id: CMMREComponentFlan
-  name: MRE component (flan)
   description: An MRE side component. Contains a sweet dessert, to be eaten after the main (or before, if you're rebellious). This one is flan.
+  suffix: flan
   components:
+  - type: Label
+    currentLabel: rmc-mre-dessert-flan
   - type: SpawnItemsOnUse
     items:
     - id: CMMREFoodFlan
@@ -69,12 +72,74 @@
 - type: entity
   parent: CMMREDessertComponentBase
   id: CMMREComponentHoneyFlan
-  name: MRE component (honey flan)
   description: An MRE side component. Contains a sweet dessert, to be eaten after the main (or before, if you're rebellious). This one is honey flan.
+  suffix: honey flan
   components:
+  - type: Label
+    currentLabel: rmc-mre-dessert-honey-flan
   - type: SpawnItemsOnUse
     items:
     - id: CMMREFoodHoneyFlan
+
+- type: entity
+  parent: CMMREDessertComponentBase
+  id: RMCMREComponentCookie
+  description: An MRE side component. Contains a sweet dessert, to be eaten after the main (or before, if you're rebellious). This one is a cookie.
+  suffix: cookie
+  components:
+  - type: Label
+    currentLabel: rmc-mre-dessert-cookie
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCFoodCookie
+
+- type: entity
+  parent: CMMREDessertComponentBase
+  id: RMCMREComponentLemonPie
+  description: An MRE side component. Contains a sweet dessert, to be eaten after the main (or before, if you're rebellious). This one is lemon pie.
+  suffix: lemon pie
+  components:
+  - type: Label
+    currentLabel: rmc-mre-dessert-lemon-pie
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCMREFoodLemonPie
+
+- type: entity
+  parent: CMMREDessertComponentBase
+  id: RMCMREComponentKeyLimePie
+  description: An MRE side component. Contains a sweet dessert, to be eaten after the main (or before, if you're rebellious). This one is key lime pie.
+  suffix: key lime pie
+  components:
+  - type: Label
+    currentLabel: rmc-mre-dessert-key-lime-pie
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCMREFoodKeyLimePie
+
+- type: entity
+  parent: CMMREDessertComponentBase
+  id: RMCMREComponentBrigadeiroBalls
+  description: An MRE side component. Contains a sweet dessert, to be eaten after the main (or before, if you're rebellious). This one is brigaderio balls.
+  suffix: brigaderio balls
+  components:
+  - type: Label
+    currentLabel: rmc-mre-dessert-brigadeiro-balls
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCMREFoodBrigadeiroBalls
+
+- type: entity
+  parent: CMMREDessertComponentBase
+  id: RMCMREComponentStrawberryToasterPastry
+  description: An MRE side component. Contains a sweet dessert, to be eaten after the main (or before, if you're rebellious). This one is a strawberry toaster pastry.
+  suffix: strawberry toaster pastry
+  components:
+  - type: Label
+    currentLabel: rmc-mre-dessert-strawberry-toaster-pastry
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCMREFoodStrawberryToasterPastry
 
 # Foods
 - type: entity
@@ -83,118 +148,303 @@
   id: CMMREFoodDessert
   components:
   - type: Food
-    transferAmount: 1
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 3
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 2
-        - ReagentId: RMCSugar
-          Quantity: 2
-        - ReagentId: Theobromine
-          Quantity: 1
 
 - type: entity
   parent: CMMREFoodDessert
   id: CMMREFoodSpicedApples
   name: spiced apples
-  description: The contents of a Marine Standard issue MRE. This one is spiced apples.
+  description: A bit dry pieces of apple in cinnamon spice, makes your mouth water, but still tasty.
   components:
+  - type: Food
+    transferAmount: 1.5
   - type: Sprite
     state: spiced_apples
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCFruit
+          Quantity: 2
+        - ReagentId: RMCSugar
+          Quantity: 2
   - type: FlavorProfile
     flavors:
-    - SpicedApples
+    - Cinnamon
 
 - type: entity
   parent: CMMREFoodDessert
   id: CMMREFoodChocolateBrownie
   name: chocolate brownie
-  description: The contents of a Marine Standard issue MRE. This one is a chocolate brownie.
+  description: Coco filled cake base with a chocolate frosting on top, has a deep chocolate flavor.
   components:
+  - type: Food
+    transferAmount: 2
   - type: Sprite
     state: chocolate_brownie
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCBread
+          Quantity: 2
+        - ReagentId: RMCCocoPowder
+          Quantity: 2
+        - ReagentId: RMCSprinkles
+          Quantity: 1
   - type: FlavorProfile
     flavors:
-    - ChocolateBrownie
+    - chocolate
 
 - type: entity
   parent: CMMREFoodDessert
   id: CMMREFoodSugarCookie
   name: sugar cookie
-  description: The contents of a Marine Standard issue MRE. This one is a sugar cookie.
+  description: Baked cookie frosted with a caramelized sugar.
   components:
+  - type: Food
+    transferAmount: 1.5
   - type: Sprite
     state: sugar_cookie
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCBread
+          Quantity: 2
+        - ReagentId: RMCSugar
+          Quantity: 2
   - type: FlavorProfile
     flavors:
-    - SugarCookie
+    - sweet
 
 - type: entity
   parent: CMMREFoodDessert
   id: CMMREFoodCocoBar
   name: coco bar
-  description: The contents of a Marine Standard issue MRE. This one is a coco bar.
+  description: Good old milk chocolate bar, goes well with hot drinks.
   components:
+  - type: Food
+    transferAmount: 3
   - type: Sprite
     state: coco_bar
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCCocoPowder
+          Quantity: 5
+        - ReagentId: RMCMilk
+          Quantity: 2
+        - ReagentId: RMCSugar
+          Quantity: 2
   - type: FlavorProfile
     flavors:
-    - CocoBar
+    - chocolate
 
 - type: entity
   parent: CMMREFoodDessert
   id: CMMREFoodFlan
   name: flan
-  description: The contents of a Marine Standard issue MRE. This one is flan.
+  description: A soft milky biscuit pie.
   components:
+  - type: Food
+    transferAmount: 3
   - type: Sprite
     state: flan
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCEgg
+          Quantity: 3
+        - ReagentId: RMCCream
+          Quantity: 2
+        - ReagentId: RMCSugar
+          Quantity: 2
+        - ReagentId: RMCMilk
+          Quantity: 1
   - type: FlavorProfile
     flavors:
-    - Flan
+    - sweet
 
 - type: entity
   parent: CMMREFoodDessert
   id: CMMREFoodHoneyFlan
   name: honey flan
-  description: The contents of a Marine Standard issue MRE. This one is honey flan.
+  description: A soft milky biscuit pie, covered in honey topping.
   components:
+  - type: Food
+    transferAmount: 4
   - type: Sprite
     state: honey_flan
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCHoney
+          Quantity: 3
+        - ReagentId: RMCEgg
+          Quantity: 3
+        - ReagentId: RMCMilk
+          Quantity: 2
+        - ReagentId: RMCSugar
+          Quantity: 2
   - type: FlavorProfile
     flavors:
-    - HoneyFlan
+    - sweet
+
+- type: entity
+  parent: CMMREFoodDessert
+  id: RMCFoodCookie
+  name: cookie
+  description: A delicious and crumbly chocolate chip cookie. Don't feed to parrots.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/baked.rsi
+    state: cookie!!!
+  - type: Food
+    transferAmount: 2
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCBread
+          Quantity: 4
+        - ReagentId: RMCSugar
+          Quantity: 1
+  - type: FlavorProfile
+    flavors:
+    - chewy
+
+- type: entity
+  parent: CMMREFoodDessert
+  id: RMCMREFoodLemonPie
+  name: lemon pie
+  description: A creamy pie with a milky lemon filling and a thick crust.
+  components:
+  - type: Food
+    transferAmount: 4
+  - type: Sprite
+    state: lemon_pie
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCLemonJuice
+          Quantity: 5
+        - ReagentId: RMCBread
+          Quantity: 2
+        - ReagentId: RMCCream
+          Quantity: 2
+        - ReagentId: RMCSugar
+          Quantity: 1
+        - ReagentId: RMCEgg
+          Quantity: 1
+  - type: FlavorProfile
+    flavors:
+    - sour
+
+- type: entity
+  parent: CMMREFoodDessert
+  id: RMCMREFoodKeyLimePie
+  name: key lime pie
+  description: A creamy pie with a milky lime filling and a thick crust.
+  components:
+  - type: Food
+    transferAmount: 4
+  - type: Sprite
+    state: key_lime_pie
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCLimeJuice
+          Quantity: 5
+        - ReagentId: RMCBread
+          Quantity: 2
+        - ReagentId: RMCCream
+          Quantity: 2
+        - ReagentId: RMCSugar
+          Quantity: 1
+        - ReagentId: RMCEgg
+          Quantity: 1
+  - type: FlavorProfile
+    flavors:
+    - sour
+
+- type: entity
+  parent: CMMREFoodDessert
+  id: RMCMREFoodBrigadeiroBalls
+  name: brigadeiro balls
+  description: A traditional Brazillian dessert, made out of condensed milk, cocoa and butter, very soft and sugary in taste.
+  components:
+  - type: Food
+    transferAmount: 4
+  - type: Sprite
+    state: brigadeiro_balls
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCCocoPowder
+          Quantity: 4
+        - ReagentId: RMCSugar
+          Quantity: 3
+        - ReagentId: RMCCream
+          Quantity: 2
+        - ReagentId: RMCEgg
+          Quantity: 1
+  - type: FlavorProfile
+    flavors:
+    - BrigadeiroBalls
+
+- type: entity
+  parent: CMMREFoodDessert
+  id: RMCMREFoodStrawberryToasterPastry
+  name: strawberry toaster pastry
+  description: A crunchy biscuit with a strawberry jam inside it, with a frosting on top.
+  components:
+  - type: Food
+    transferAmount: 4
+  - type: Sprite
+    state: strawberry_toaster_pastry
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: RMCBerryJuice
+          Quantity: 3
+        - ReagentId: RMCBread
+          Quantity: 2
+        - ReagentId: RMCCream
+          Quantity: 2
+        - ReagentId: RMCSprinkles
+          Quantity: 2
+        - ReagentId: RMCEgg
+          Quantity: 1
+  - type: FlavorProfile
+    flavors:
+    - StrawberryToasterPastry
+
 
 # Flavors
 - type: flavor
-  id: SpicedApples
+  id: BrigadeiroBalls
   flavorType: Complex
-  description: like spiced apples
+  description: like a soft sweetness
 
 - type: flavor
-  id: ChocolateBrownie
+  id: StrawberryToasterPastry
   flavorType: Complex
-  description: like chocolate brownies
-
-- type: flavor
-  id: SugarCookie
-  flavorType: Complex
-  description: like sugar cookie
-
-- type: flavor
-  id: CocoBar
-  flavorType: Complex
-  description: like chocolate
-
-- type: flavor
-  id: Flan
-  flavorType: Complex
-  description: like flan
-
-- type: flavor
-  id: HoneyFlan
-  flavorType: Complex
-  description: like honey flan
+  description: like an early morning

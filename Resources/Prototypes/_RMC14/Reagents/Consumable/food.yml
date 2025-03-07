@@ -7,6 +7,7 @@
   desc: Proteins found in various types of meat.
   group: Food
   flavor: meaty
+  color: "#822E24"
 
 - type: reagent
   parent: Nutriment
@@ -15,6 +16,7 @@
   desc: It used to swim.
   group: Food
   flavor: fishy
+  color: "#FFD1CC"
 
 - type: reagent
   parent: Nutriment
@@ -22,7 +24,17 @@
   name: cheese
   desc: This used to be milk.
   group: Food
-  flavor: cheesey
+  flavor: cheesy
+  color: "#EDCC5F"
+
+- type: reagent
+  parent: Nutriment
+  id: RMCEgg
+  name: egg
+  desc: The contents of an egg. Salmonella not included.
+  group: Food
+  flavor: egg
+  color: "#F7E06A"
 
 - type: reagent
   parent: Nutriment
@@ -31,6 +43,7 @@
   desc: Cooked bread.
   group: Food
   flavor: bread
+  color: "#FFF7DE"
 
 - type: reagent
   parent: Nutriment
@@ -38,7 +51,8 @@
   name: noodles
   desc: Cooked noodles.
   group: Food
-  flavor: RMCPasta
+  flavor: pasta
+  color: "#E8DFB0"
 
 - type: reagent
   parent: Nutriment
@@ -47,6 +61,7 @@
   desc: Some sort of fruit.
   group: Food
   flavor: fruity
+  color: "#F76363"
 
 - type: reagent
   parent: Nutriment
@@ -55,6 +70,7 @@
   desc: Some sort of vegetable.
   group: Food
   flavor: vegetables
+  color: "#DE4A14"
 
 - type: reagent
   parent: Nutriment
@@ -63,6 +79,16 @@
   desc: Some sort of plant.
   group: Food
   flavor: leafy
+  color: "#59855C"
+
+- type: reagent
+  parent: Nutriment
+  id: RMCMushroom
+  name: mushroom
+  desc: Some sort of fungus.
+  group: Food
+  flavor: mushroom
+  color: "#523628"
 
 - type: reagent
   parent: Nutriment
@@ -71,6 +97,41 @@
   desc: Some sort of grinded nut, smells like almonds.
   group: Food
   flavor: nutty
+  color: "#80714D"
+
+- type: reagent
+  parent: CMReagent
+  id: RMCHoney
+  name: honey
+  desc: Honey is a natural sweet, viscous food substance composed of mainly fructose and glucose.
+  group: Food
+  flavor: honey
+  color: "#FFFF00"
+  unknown: true
+  physicalDesc: reagent-physical-desc-thick
+  metabolisms:
+    Food:
+      metabolismRate: 0.1 
+      effects:
+      - !type:ChemVomit # Gives no nutrition or anything really
+        probability: 0
+
+- type: reagent
+  parent: CMReagent
+  id: RMCCapsaicin
+  name: capsaicin
+  desc: Capsaicin is a chili pepper extract with analgesic properties. Capsaicin is a neuropeptide releasing agent selective for primary sensory peripheral neurons.
+  group: Food
+  flavor: spicy
+  color: "#B31008"
+  unknown: true
+  physicalDesc: reagent-physical-desc-spicy
+  metabolisms:
+    Food:
+      metabolismRate: 0.1 
+      effects:
+      - !type:ChemVomit # TODO RMC14 Warms you up slightly and can cause gasping
+        probability: 0
 
 - type: reagent
   parent: CMReagent
@@ -82,6 +143,40 @@
   color: "#FFFFFF"
   unknown: true
   physicalDesc: reagent-physical-desc-coarse
+  metabolisms:
+    Food:
+      metabolismRate: 0.1
+      effects:
+      - !type:SatiateHunger
+        factor: 21
+
+- type: reagent
+  parent: CMReagent
+  id: RMCCocoPowder
+  name: coco powder
+  desc: The cocoa bean or simply cocoa, which is also called the cacao bean or cacao, is the dried and fully fermented seed of Theobroma cacao, from which cocoa solids and cocoa butter can be extracted.
+  group: Food
+  flavor: chocolate
+  color: "#302000"
+  unknown: true
+  physicalDesc: reagent-physical-desc-powdery
+  metabolisms:
+    Food:
+      metabolismRate: 0.1
+      effects:
+      - !type:SatiateHunger
+        factor: 25
+
+- type: reagent
+  parent: CMReagent
+  id: RMCSprinkles
+  name: sprinkles
+  desc: Multi-colored little bits of sugar, commonly found on donuts. Loved by cops.
+  group: Food
+  flavor: RMCSprinkles
+  color: "#FF00FF"
+  unknown: true
+  physicalDesc: reagent-physical-desc-powdery
   metabolisms:
     Food:
       metabolismRate: 0.1

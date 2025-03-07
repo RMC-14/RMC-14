@@ -21,12 +21,20 @@
       shader: unshaded
   - type: Item
     size: Tiny
-    sprite: Objects/Tools/lighters.rsi
+    sprite: _RMC14/Objects/Tools/Lighters/zippo.rsi
   - type: Clothing
     quickEquip: false
     slots:
     - suitstorage
   - type: RMCLighter
+  - type: ToggleableLightVisuals
+    inhandVisuals:
+      left:
+      - state: zippoon-inhand-left
+        shader: unshaded
+      right:
+      - state: zippoon-inhand-right
+        shader: unshaded
 
 - type: entity
   name: cheap lighter
@@ -35,7 +43,8 @@
   id: RMCLighter
   components:
   - type: Item
-    heldPrefix: null
+    sprite: _RMC14/Objects/Tools/Lighters/basic.rsi
+    heldPrefix: lighter_c
   - type: ItemToggle
     predictable: false
     soundActivate:
@@ -61,10 +70,10 @@
     spriteLayer: lighter_flame
     inhandVisuals:
       left:
-      - state: inhand-left-flame
+      - state: lighter_flame_on-inhand-left
         shader: unshaded
       right:
-      - state: inhand-right-flame
+      - state: lighter_flame_on-inhand-right
         shader: unshaded
   - type: RandomSprite
     available:

@@ -5,6 +5,7 @@ using Content.Server.Inventory;
 using Content.Server.Nutrition.Components;
 using Content.Server.Popups;
 using Content.Server.Stack;
+using Content.Shared._RMC14.Food;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Organ;
@@ -180,7 +181,7 @@ public sealed class FoodSystem : EntitySystem
             return (false, true);
         }
 
-        var forceFeed = user != target && usedTool;
+        var forceFeed = user != target;
         if (forceFeed)
         {
             var userName = Identity.Entity(user, EntityManager);
@@ -193,15 +194,14 @@ public sealed class FoodSystem : EntitySystem
         else
         {
             // log voluntary eating
-            if(user != target)
-                _adminLogger.Add(LogType.ForceFeed, LogImpact.Medium, $"{ToPrettyString(user):user} is forcing {ToPrettyString(target):target} to eat {ToPrettyString(food):food} {SharedSolutionContainerSystem.ToPrettyString(foodSolution)}");
-            else
-                _adminLogger.Add(LogType.Ingestion, LogImpact.Low, $"{ToPrettyString(target):target} is eating {ToPrettyString(food):food} {SharedSolutionContainerSystem.ToPrettyString(foodSolution)}");
+            _adminLogger.Add(LogType.Ingestion, LogImpact.Low, $"{ToPrettyString(target):target} is eating {ToPrettyString(food):food} {SharedSolutionContainerSystem.ToPrettyString(foodSolution)}");
         }
+
+        var forceFeedDelay = forceFeed && !usedTool ? foodComp.ForceFeedDelay : foodComp.Delay;
 
         var doAfterArgs = new DoAfterArgs(EntityManager,
             user,
-            forceFeed ? foodComp.ForceFeedDelay : foodComp.Delay,
+            forceFeedDelay,
             new ConsumeDoAfterEvent(foodComp.Solution, flavors, usedTool),
             eventTarget: food,
             target: target,
@@ -319,7 +319,10 @@ public sealed class FoodSystem : EntitySystem
             _utensil.TryBreak(utensil, args.User);
         }
 
-        args.Repeat = !forceFeed;
+        if (HasComp<RMCFoodScoopingComponent>(entity))
+            args.Repeat = false;
+        else
+            args.Repeat = !forceFeed;
 
         if (TryComp<StackComponent>(entity, out var stack))
         {
@@ -552,6 +555,9 @@ public sealed class FoodSystem : EntitySystem
     {
         if (!Resolve(uid, ref comp))
             return 0;
+
+        if (HasComp<RMCFoodScoopingComponent>(uid))
+            return 1;
 
         if (!_solutionContainer.TryGetSolution(uid, comp.Solution, out _, out var solution) || solution.Volume == 0)
             return 0;

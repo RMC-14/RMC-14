@@ -1,12 +1,12 @@
-﻿- type: entity
+- type: entity
   parent: BaseItem
   id: CMFortuneCookie
   name: fortune cookie
   description: A golden brown fortune cookie. Some say the paper inside even has the ability to predict the future, whatever that means.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Food/fortune_cookie.rsi
-    state: base
+    sprite: _RMC14/Objects/Consumable/Food/unmc_mre.rsi
+    state: fortune_cookie
   - type: Item
     size: Small
     heldPrefix: null
@@ -25,8 +25,8 @@
   description: A golden brown fortune cookie. Some say the paper inside even has the ability to predict the future, whatever that means.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Food/fortune_cookie.rsi
-    state: open
+    sprite: _RMC14/Objects/Consumable/Food/unmc_mre.rsi
+    state: fortune_cookie_open
   - type: Item
     size: Small
   - type: FlavorProfile

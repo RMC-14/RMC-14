@@ -420,6 +420,34 @@
 
 - type: construction
   parent: RMC
+  name: Supply Box (We-Ya MRE)
+  id: RMCBoxMREWYEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMREWYEmpty
+  category: construction-category-cm-box-magazine
+  description: A box of basic packed foods, comes with all sorts of We-Ya branded snacks.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: wy_food_crate
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: Supply Box (Emergency Rations)
+  id: RMCBoxMREEmergencyEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMREWYEmpty
+  category: construction-category-cm-box-magazine
+  description: A box of emergency rations. Designed to withstand.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: colony_food_crate
+  objectType: Item
+
+- type: construction
+  parent: RMC
   name: Supply Box (M94)
   id: RMCBoxPackFlareEmpty
   graph: RMCBoxMagazine
@@ -641,6 +669,16 @@
 
     # Misc
     - to: RMCBoxMREEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+    - to: RMCBoxMREWYEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+    - to: RMCBoxMREEmergencyEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1

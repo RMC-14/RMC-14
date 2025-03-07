@@ -35,6 +35,6 @@
   description: like chocolate and hazelnut
 
 - type: flavor
-  id: RMCPasta
+  id: RMCSprinkles
   flavorType: Complex
-  description: like pasta
+  description: like sprinkles

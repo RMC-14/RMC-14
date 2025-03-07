@@ -11,13 +11,19 @@
   id: RMCFeedableBase
   abstract: true
   components:
+  - type: Food
+  - type: RMCFoodScooping
   - type: SolutionContainerManager
     solutions:
       food:
         maxVol: 5
   - type: SolutionContainerVisuals
-    maxFillLevels: 1
+    maxFillLevels: 2
     fillBaseName: food-
+  - type: Appearance
+  - type: FlavorProfile
+  - type: ExaminableSolution
+    solution: food
 
 - type: entity
   parent: [Fork, RMCFeedableBase]
@@ -31,6 +37,7 @@
     - state: icon
     - map: ["enum.SolutionContainerLayers.Fill"]
       sprite: _RMC14/Objects/Consumable/Food/mre_other.rsi
+      state: food-1
       visible: false
 
 
@@ -46,6 +53,7 @@
     - state: plastic
     - map: ["enum.SolutionContainerLayers.Fill"]
       sprite: _RMC14/Objects/Consumable/Food/mre_other.rsi
+      state: food-1
       visible: false
   - type: Item
     heldPrefix: plastic
@@ -56,12 +64,16 @@
   name: spoon
   description: It's a spoon. You can see your own upside-down face in it.
   components:
+  - type: Food
+    useSound:
+      path: /Audio/Items/drink.ogg
   - type: Sprite
     sprite: _RMC14/Objects/Tools/Kitchen/spoon.rsi
     layers:
     - state: icon
     - map: ["enum.SolutionContainerLayers.Fill"]
       sprite: _RMC14/Objects/Consumable/Food/mre_other.rsi
+      state: food-1
       visible: false
 
 - type: entity
@@ -75,6 +87,7 @@
     - state: plastic
     - map: ["enum.SolutionContainerLayers.Fill"]
       sprite: _RMC14/Objects/Consumable/Food/mre_other.rsi
+      state: food-1
       visible: false
   - type: Item
     heldPrefix: plastic
