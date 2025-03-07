@@ -120,6 +120,25 @@
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
       visible: false
+  - type: GenericVisualizer
+    visuals:
+      enum.TargetedVisuals.Targeted:
+        targeted:
+          None:
+            visible: false
+          Spotted:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: spotter_lockon
+            visible: true
+          Targeted:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: sniper_lockon
+            visible: true
+          TargetedIntense:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: sniper_lockon_intense
+            visible: true
+  - type: Spottable
   - type: Physics
     bodyType: KinematicController
   - type: Fixtures

@@ -24,6 +24,9 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/sniper_mouse.rsi
       state: all
+  - type: GunToggleableLaser
+  - type: AimedShot
+    laserProto: "RMCM96SLaser"
 
 - type: entity
   parent: CMBaseCartridgeRifle

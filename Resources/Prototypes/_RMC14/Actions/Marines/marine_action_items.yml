@@ -143,3 +143,44 @@
       state: sight_up
     event: !type:CycleVisorActionEvent
     useDelay: 0.5
+
+- type: entity
+  parent: ActionMarineBase
+  id: RMCActionSpotTarget
+  name: Spot Target
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/marine_sniper_actions.rsi
+      state: spotter_target
+    event: !type:SpotTargetActionEvent
+    range: 30
+    useDelay: 5
+
+- type: entity
+  parent: ActionMarineBase
+  id: RMCActionToggleLaser
+  name: Toggle Laser
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/marine_sniper_actions.rsi
+      state: sniper_toggle_laser_off
+    event: !type:GunToggleLaserActionEvent
+    useDelay: 0.25
+
+- type: entity
+  parent: ActionMarineBase
+  id: RMCActionAimedShot
+  name: Aimed Shot
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/marine_sniper_actions.rsi
+      state: sniper_aim
+    event: !type:AimedShotActionEvent
+    range: 30
+    useDelay: 2.5

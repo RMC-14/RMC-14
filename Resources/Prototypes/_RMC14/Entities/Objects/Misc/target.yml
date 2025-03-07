@@ -9,6 +9,26 @@
     sprite: Objects/Specific/Security/target.rsi
     state: target_h
     noRot: true
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.TargetedVisuals.Targeted:
+        targeted:
+          None:
+            visible: false
+          Spotted:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: spotter_lockon
+            visible: true
+          Targeted:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: sniper_lockon
+            visible: true
+          TargetedIntense:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: sniper_lockon_intense
+            visible: true
+  - type: Spottable
   - type: Repairable
   - type: DamagePopup
     allowTypeChange: true
