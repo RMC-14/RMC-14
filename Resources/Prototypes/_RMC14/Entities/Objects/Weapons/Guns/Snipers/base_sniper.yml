@@ -24,9 +24,18 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/sniper_mouse.rsi
       state: all
-  - type: GunToggleableLaser
   - type: AimedShot
     laserProto: "RMCM96SLaser"
+  - type: GunToggleableLaser
+    settings:
+    - name: rmc-toggleable-laser-on
+      icon:
+        sprite: _RMC14/Actions/marine_sniper_actions.rsi
+        state: sniper_toggle_laser_on
+    - name: rmc-toggleable-laser-off
+      icon:
+        sprite: _RMC14/Actions/marine_sniper_actions.rsi
+        state: sniper_toggle_laser_off
 
 - type: entity
   parent: CMBaseCartridgeRifle

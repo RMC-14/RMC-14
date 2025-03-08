@@ -22,6 +22,8 @@ public sealed class TargetingSystem : EntitySystem
         SubscribeLocalEvent<ActiveTargetingLaserComponent, RMCDroppedEvent>(OnActiveTargetingLaserDropped);
         SubscribeLocalEvent<ActiveTargetingLaserComponent, GotUnequippedHandEvent>(OnActiveTargetingLaserDropped);
         SubscribeLocalEvent<ActiveTargetingLaserComponent, HandDeselectedEvent>(OnActiveTargetingLaserDropped);
+
+        //SubscribeLocalEvent<TargetedComponent, MoveEvent>(OnTargetedMove);
     }
 
     /// <summary>
@@ -32,7 +34,24 @@ public sealed class TargetingSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        StopTargeting(targetingLaser);
+        while (targetingLaser.Comp.Targets.Count > 0)
+        {
+            StopTargeting(targetingLaser, targetingLaser.Comp.Targets[0]);
+        }
+    }
+
+    /// <summary>
+    ///     Update a laser when it's targeted entity moves //TODO Decide between using this or update.
+    /// </summary>
+    private void OnTargetedMove(Entity<TargetedComponent> ent, ref MoveEvent args)
+    {
+        foreach (var targeter in ent.Comp.TargetedBy)
+        {
+            if(!TryComp(targeter, out ActiveTargetingLaserComponent? activelaser))
+                return;
+
+            UpdateLaser((targeter,activelaser), ent);
+        }
     }
 
     /// <summary>
@@ -42,21 +61,33 @@ public sealed class TargetingSystem : EntitySystem
     {
         var ev = new AimingCancelledEvent();
         RaiseLocalEvent(targetingLaser, ref ev);
-        StopTargeting(targetingLaser);
+
+        while (targetingLaser.Comp.Targets.Count > 0)
+        {
+            StopTargeting(targetingLaser, targetingLaser.Comp.Targets[0]);
+        }
     }
 
     /// <summary>
     ///     Remove the laser and replace targeting effects originating from the given entity.
     /// </summary>
-    private void StopTargeting(Entity<ActiveTargetingLaserComponent> targetingLaser)
+    private void StopTargeting(Entity<ActiveTargetingLaserComponent> targetingLaser, EntityUid target)
     {
-        _line.DeleteBeam(targetingLaser.Comp.Laser);
-
-        if (!TryComp(targetingLaser.Comp.Target, out TargetedComponent? targeted))
+        if (!TryComp(target, out TargetedComponent? targeted))
             return;
 
-        targeted.TargetedBy.Remove(targetingLaser);
-        Dirty(targetingLaser.Comp.Target, targeted);
+        if (targeted.TargetedBy.Contains(targetingLaser))
+        {
+            targeted.TargetedBy.Remove(targetingLaser);
+
+            if(targeted.Laser.TryGetValue(targetingLaser, out var value))
+                _line.DeleteBeam(value);
+
+            Dirty(target, targeted);
+        }
+
+        targetingLaser.Comp.Targets.Remove(target);
+        Dirty(targetingLaser);
 
         // Find the next target marker with the highest priority
         var highestMark = TargetedEffects.None;
@@ -65,7 +96,7 @@ public sealed class TargetingSystem : EntitySystem
         // Check all active lasers currently aiming at the target
         foreach (var activeLaser in targeted.TargetedBy)
         {
-            if(!TryComp(activeLaser, out ActiveTargetingLaserComponent? comp))
+            if (!TryComp(activeLaser, out ActiveTargetingLaserComponent? comp))
                 continue;
 
             if (comp.LaserType > highestMark)
@@ -76,35 +107,37 @@ public sealed class TargetingSystem : EntitySystem
         }
 
         // Remove the targeted component if none of the targeting lasers is a spotter
-        if(!spotters)
-            RemComp<SpottedComponent>(targetingLaser.Comp.Target);
+        if (!spotters)
+            RemComp<SpottedComponent>(target);
 
         // Update the target marker and remove the active laser component
-        UpdateTargetMarker(targetingLaser.Comp.Target, highestMark, true);
-        RemComp<ActiveTargetingLaserComponent>(targetingLaser);
+        UpdateTargetMarker(target, highestMark, true);
 
-        if(targeted.TargetedBy.Count != 0)
+        if (targeted.TargetedBy.Count != 0)
             return;
 
         // Remove the target's targeted component if it has nothing targeting it anymore
-        RemComp<TargetedComponent>(targetingLaser.Comp.Target);
+        RemComp<TargetedComponent>(target);
+
+        if(targetingLaser.Comp.Targets.Count == 0)
+            RemComp<ActiveTargetingLaserComponent>(targetingLaser);
     }
 
     /// <summary>
     ///     Remove any old beams and replace it with a new one.
     /// </summary>
-    private void UpdateLaser(Entity<ActiveTargetingLaserComponent> ent)
+    private void UpdateLaser(Entity<ActiveTargetingLaserComponent> ent, Entity<TargetedComponent> target)
     {
         if (_net.IsClient)
             return;
 
-        var laser = ent.Comp;
+        if (target.Comp.Laser.TryGetValue(ent, out var beam))
+            _line.DeleteBeam(beam);
 
-        if (laser.Laser.Count != 0)
-            _line.DeleteBeam(laser.Laser);
+        if (_line.TryCreateLine(ent.Comp.User, target, ent.Comp.LaserProto, out var lines))
+            target.Comp.Laser[ent] = lines;
 
-        if (_line.TryCreateLine(laser.User, laser.Target, laser.LaserProto, out var lines))
-            laser.Laser = lines;
+        Dirty(target);
     }
 
     /// <summary>
@@ -119,12 +152,12 @@ public sealed class TargetingSystem : EntitySystem
 
         var active = EnsureComp<ActiveTargetingLaserComponent>(equipment);
         active.Source = equipment;
-        active.Target = target;
+        active.Targets.Add(target);
         active.LaserProto = laserProto;
         active.Origin = Transform(user).Coordinates;
         active.User = user;
         active.LaserType = targetedEffect;
-        active.LaserDuration = laserDuration;
+        active.LaserDurations.Add(laserDuration);
         active.ShowLaser = showLaser;
 
         Dirty(equipment, active);
@@ -132,7 +165,7 @@ public sealed class TargetingSystem : EntitySystem
 
         UpdateTargetMarker(target, targetedEffect);
         if(showLaser)
-            UpdateLaser((equipment, active));
+            UpdateLaser((equipment, active), (target,targeted));
 
         return true;
     }
@@ -153,22 +186,37 @@ public sealed class TargetingSystem : EntitySystem
     public override void Update(float frameTime)
     {
         var query = EntityQueryEnumerator<ActiveTargetingLaserComponent, TransformComponent>();
-
         while (query.MoveNext(out var uid, out var laser, out var xform))
         {
-            laser.LaserDuration -= frameTime;
-            Dirty(uid,laser);
-
-            // Only update the laser if it's actually supposed to be visible.
-            if (laser.ShowLaser)
-                UpdateLaser((uid, laser));
-
-            // Raise an event and remove the active component if the aiming successfully finishes.
-            if (laser.LaserDuration <= 0)
+            var iterator = 0;
+            while (iterator < laser.LaserDurations.Count)
             {
-                var ev = new AimingFinishedEvent(laser.User, Transform(laser.Target).Coordinates);
-                RaiseLocalEvent(uid, ref ev);
-                RemComp<ActiveTargetingLaserComponent>(uid);
+                laser.LaserDurations[iterator] -= frameTime;
+
+                // Only update the laser if it's actually supposed to be visible.
+                if (laser.ShowLaser)
+                {
+                    if(!TryComp(laser.Targets[iterator], out TargetedComponent? targeted))
+                        return;
+
+                    UpdateLaser((uid, laser), (laser.Targets[iterator], targeted));
+                }
+
+
+                Dirty(uid,laser);
+                // Raise an event and remove the active component if the aiming successfully finishes.
+                if (laser.LaserDurations[iterator] <= 0)
+                {
+                    var ev = new AimingFinishedEvent(laser.User, Transform(laser.Targets[iterator]).Coordinates, laser.Targets[iterator]);
+                    RaiseLocalEvent(uid, ref ev);
+
+
+                    StopTargeting((uid,laser), laser.Targets[iterator]);
+                    laser.LaserDurations.RemoveAt(iterator);
+                    iterator = 0;
+                }
+
+                iterator++;
             }
 
             // Remove the active component and raise an event if the user moves.
@@ -176,6 +224,8 @@ public sealed class TargetingSystem : EntitySystem
             {
                 var ev = new AimingCancelledEvent();
                 RaiseLocalEvent(uid, ref ev);
+
+                laser.LaserDurations.Clear();
                 RemComp<ActiveTargetingLaserComponent>(uid);
             }
         }
@@ -186,7 +236,7 @@ public sealed class TargetingSystem : EntitySystem
 ///     Raised on an entity when it finishes aiming.
 /// </summary>
 [ByRefEvent]
-public record struct AimingFinishedEvent(EntityUid User, EntityCoordinates Coordinates, bool Handled = false);
+public record struct AimingFinishedEvent(EntityUid User, EntityCoordinates Coordinates, EntityUid Target, bool Handled = false);
 
 /// <summary>
 ///     Raised on an aiming when it's aiming is interrupted.

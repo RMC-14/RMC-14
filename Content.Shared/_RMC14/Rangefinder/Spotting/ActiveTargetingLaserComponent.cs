@@ -14,10 +14,10 @@ public sealed partial class ActiveTargetingLaserComponent : Component
     public EntityUid Source;
 
     /// <summary>
-    ///     The target of the laser.
+    ///     A list of targets targeted by this entity
     /// </summary>
     [DataField, AutoNetworkedField]
-    public EntityUid Target;
+    public List<EntityUid> Targets = new();
 
     /// <summary>
     ///     The entity using the entity that creates the laser.
@@ -28,7 +28,7 @@ public sealed partial class ActiveTargetingLaserComponent : Component
     /// <summary>
     ///     A list of the laser entities.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public List<EntityUid> Laser = new();
 
     /// <summary>
@@ -47,7 +47,7 @@ public sealed partial class ActiveTargetingLaserComponent : Component
     ///     The duration of the laser
     /// </summary>
     [DataField, AutoNetworkedField]
-    public double LaserDuration = 10;
+    public List<double> LaserDurations = new();
 
     /// <summary>
     ///     The visualiser to enable on the entity being targeted by the laser

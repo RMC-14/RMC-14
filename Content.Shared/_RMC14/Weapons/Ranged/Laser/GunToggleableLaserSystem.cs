@@ -6,6 +6,7 @@ namespace Content.Shared._RMC14.Weapons.Ranged.Laser;
 public sealed class GunToggleableLaserSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
 
     public override void Initialize()
     {
@@ -29,7 +30,24 @@ public sealed class GunToggleableLaserSystem : EntitySystem
     {
         _audio.PlayPredicted(ent.Comp.ToggleSound, ent, args.Performer);
         ent.Comp.Active = !ent.Comp.Active;
-        Dirty(ent);
+
+        if (ent.Comp.Settings.Count == 0)
+            return;
+
+        ref var settingIndex = ref ent.Comp.Setting;
+        settingIndex++;
+        if (settingIndex >= ent.Comp.Settings.Count)
+            settingIndex = 0;
+
+        var setting = ent.Comp.Settings[settingIndex];
+
+        if (_actions.TryGetActionData(ent.Comp.Action, out var action))
+        {
+            action.Icon = setting.Icon;
+            Dirty(ent.Comp.Action.Value, action);
+            _actions.UpdateAction(ent.Comp.Action, action);
+        }
+
         args.Handled = true;
     }
 }

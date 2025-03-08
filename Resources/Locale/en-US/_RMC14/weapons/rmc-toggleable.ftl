@@ -9,3 +9,6 @@ rmc-toggleable-autofire-requires-wielding = You need to wield {THE($gun)} to ena
 
 rmc-toggleable-motion-detector-on = You enable {THE($gun)}'s motion detector.
 rmc-toggleable-motion-detector-off = You disable {THE($gun)}'s motion detector.
+
+rmc-toggleable-laser-on = laser enabled
+rmc-toggleable-laser-off = laser disabled

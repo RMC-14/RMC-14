@@ -1,12 +1,20 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Laser;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class GunToggleableLaserComponent : Component
 {
+    [DataField(required: true), AutoNetworkedField]
+    public List<GunToggleableLaserSetting> Settings = new();
+
+    [DataField, AutoNetworkedField]
+    public int Setting;
+
     /// <summary>
     ///     Is the laser active
     /// </summary>
@@ -43,3 +51,7 @@ public sealed partial class GunToggleableLaserComponent : Component
     [DataField, AutoNetworkedField]
     public double SpottedAimDurationMultiplierSubtraction = 0.15;
 }
+
+[DataRecord]
+[Serializable, NetSerializable]
+public readonly record struct GunToggleableLaserSetting(LocId Name, SpriteSpecifier.Rsi Icon);

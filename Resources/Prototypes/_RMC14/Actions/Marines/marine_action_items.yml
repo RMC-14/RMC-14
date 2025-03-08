@@ -156,7 +156,7 @@
       state: spotter_target
     event: !type:SpotTargetActionEvent
     range: 30
-    useDelay: 5
+    useDelay: 1 #TODO put this back to 5
 
 - type: entity
   parent: ActionMarineBase
@@ -167,7 +167,7 @@
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/marine_sniper_actions.rsi
-      state: sniper_toggle_laser_off
+      state: sniper_toggle_laser_on
     event: !type:GunToggleLaserActionEvent
     useDelay: 0.25
 
