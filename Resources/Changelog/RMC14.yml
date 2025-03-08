@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: FungiFellow
-  changes:
-  - message: Added Welder Chestrig to MT Vendor
-    type: Add
-  id: 928
-  time: '2024-11-03T02:08:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4681
 - author: Rainbeon
   changes:
   - message: Defibrillators no longer passively drain power at all.
@@ -5217,5 +5210,12 @@
   id: 1429
   time: '2025-03-06T05:07:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5818
+- author: SG6732
+  changes:
+  - message: Added new spritework for the B8 Smart-Scope. Now with 6 animation frames!
+    type: Add
+  id: 1430
+  time: '2025-03-08T20:33:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5288
 Name: RMC14
 Order: -1
