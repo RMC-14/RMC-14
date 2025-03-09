@@ -1,9 +1,9 @@
-﻿- type: entity
+- type: entity
   id: HiveCoreXeno
   parent: BaseHiveStructure
-  name: hive core # TODO RMC14 allow other structures to be built
+  name: hive core
   description: A giant pulsating mound of mass. It looks very much alive.
-  components: # TODO RMC14 block ob
+  components:
   - type: Transform
     anchored: true
   - type: Physics
@@ -27,7 +27,10 @@
     enabled: false
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/hive_structures.rsi
-    state: core
+    layers:
+     - sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
+       state: hive_weed0
+     - state: core
   - type: Destructible
     thresholds:
     - trigger:
@@ -59,7 +62,7 @@
   - type: HiveConstructionLimited
     id: HiveCoreXeno
   - type: RoofingEntity
-    range: 10
+    range: 10.5
   - type: EvolutionBonus
   - type: WarpPoint
     location: hive core
@@ -107,7 +110,10 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/hive_structures.rsi
-    state: pylon
+    layers:
+     - sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
+       state: hive_weed0
+     - state: pylon
   - type: Destructible
     thresholds:
     - trigger:
@@ -118,8 +124,11 @@
         acts: ["Destruction"]
   - type: HivePylon
   - type: XenoWeedsSpreading
+  - type: RoofingEntity
+    range: 7.5
+    canOrbitalBombard: true
   - type: XenoWeeds
-    range: 7
+    range: 5
     spawns: XenoHiveWeeds
     level: 3
     blockOtherWeeds: true
