@@ -418,6 +418,14 @@ namespace Content.Client.Lobby.UI
 
             #endregion
 
+            #region QueenName
+
+            QueenNameButton.OnPressed += args =>
+            {
+            };
+
+            #endregion
+
             #region Xeno Prefix
 
             XenoPrefix.OnTextChanged += args =>
