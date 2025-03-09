@@ -422,7 +422,7 @@ namespace Content.Client.Lobby.UI
 
             QueenNameButton.OnPressed += args =>
             {
-                UpdateQueenName(args.Button.Pressed)
+                SetQueenName(args.Button.Pressed)
             };
 
             #endregion
