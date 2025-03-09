@@ -1,6 +1,6 @@
 - type: entity
   parent: DrinkBaseCup
-  id: RMCColonialLiberationFrontCup
+  id: RMCColonyLiberationFrontCup
   name: CLF Cup
   description: A tough, well-worn cup marked with the CLF sigil born from the defiance sparked by the Slaughter of Xibou.
   components:
