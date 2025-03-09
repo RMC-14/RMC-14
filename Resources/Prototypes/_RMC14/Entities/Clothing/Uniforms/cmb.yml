@@ -2,7 +2,7 @@
   parent: RMCMarineUniformBase
   id: RMCSwatCMBUniform
   name: CMB Riot Control uniform
-  description: A dark set of tactical uniform utilized by the Colonial Marshals, designed to be used by units of riot supression on the distant worlds, under colonial jurisdiction.
+  description: A dark set of tactical uniform utilized by the Colony Marshals, designed to be used by units of riot supression on the distant worlds, under colony jurisdiction.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/CMB/cmb_swat_uniform.rsi
