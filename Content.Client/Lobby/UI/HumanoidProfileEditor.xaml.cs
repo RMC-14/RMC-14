@@ -879,6 +879,7 @@ namespace Content.Client.Lobby.UI
             UpdateCMarkingsFacialHair();
             UpdateNamedItems();
             UpdatePlaytimePerks();
+            UpdateQueenName();
             UpdateXenoPrefix();
             UpdateXenoPostfix();
 
