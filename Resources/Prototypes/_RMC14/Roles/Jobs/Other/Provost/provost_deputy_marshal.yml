@@ -114,11 +114,11 @@
     eyes: CMGlassesSecurity
     ears: CMHeadsetHighCommand
     jumpsuit: CMJumpsuitProvostMarshal
-#    outerClothing: # TODO RMC14 provost jacket, with handcuffs and flash
+    outerClothing: RMCProvostCoatMarshalFilled
     gloves: CMHandsBlackMarine # TODO RMC14 black gloves
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostDeputyMarshal
-    belt: RMCMatebaBeltFilled
+    belt: RMCMatebaBeltLuxuriousFilled
     back: CMSatchelSecurityFilledProvostDeputyMarshal
 #    pocket1: # TODO RMC14 tape recorder
     pocket2: RMCPouchMagazinePistolFilledMateba # TODO RMC14 3 listening devices
@@ -130,6 +130,10 @@
   parent: CMIDCardGold # TODO RMC14 provost id
   id: RMCIDCardProvostDeputyMarshal
   name: provost deputy marshal ID card
+  description: Issued to members of the Provost Office.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
   - type: PresetIdCard
     job: CMProvostDeputyMarshal
