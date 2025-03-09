@@ -1,32 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed drawn tactical map lines disappearing after being drawn.
-    type: Fix
-  - message: Fixed New Varadero not having a sensor tower.
-    type: Fix
-  - message: Fixed Almayer radio color being hard to read by darkening the chat background
-      color to its intended value.
-    type: Fix
-  - message: Fix telephone filtering not working.
-    type: Fix
-  - message: Fixed phone sounds being too quiet.
-    type: Fix
-  - message: Fixed New Varadero not having early hive spread protection.
-    type: Fix
-  - message: Fixed New Varadero having incorrectly stacked filing cabinets and chairs,
-      and having 3 beds instead of lattices in the hunter ship.
-    type: Fix
-  - message: Fixed being able to receive Almayer channel radio comms while on the
-      planet.
-    type: Fix
-  - message: Fixed being able to vault through invisible blockers in New Varadero.
-    type: Fix
-  - message: Updated the roadmap.
-    type: Tweak
-  id: 930
-  time: '2024-11-03T03:03:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4685
 - author: Rainbeon
   changes:
   - message: Fixed Xeno Spit Projectiles and Runner Bone Chips not shooting where
@@ -5217,5 +5189,12 @@
   id: 1431
   time: '2025-03-08T20:42:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5777
+- author: CyberTropic
+  changes:
+  - message: Fixed some solaris inserts.
+    type: Fix
+  id: 1432
+  time: '2025-03-09T23:26:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5798
 Name: RMC14
 Order: -1
