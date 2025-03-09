@@ -364,6 +364,12 @@ namespace Content.Shared.Preferences
             return new(this) { PlaytimePerks = playtimePerks };
         }
 
+        public HumanoidCharacterProfile WithQueenName(bool queenName)
+        {
+            return new(this) { QueenName = queenName };
+        }
+
+
         public HumanoidCharacterProfile WithXenoPrefix(string prefix)
         {
             return new(this) { XenoPrefix = prefix };
