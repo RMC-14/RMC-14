@@ -422,6 +422,7 @@ namespace Content.Client.Lobby.UI
 
             QueenNameButton.OnPressed += args =>
             {
+                UpdateQueenName(args.Button.Pressed)
             };
 
             #endregion
@@ -1363,6 +1364,12 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
+        private void SetQueenName(bool queenName)
+        {
+            Profile = Profile?.WithQueenName(queenName);
+            SetDirty();
+        }
+
         private void SetXenoPrefix(string prefix)
         {
             Profile = Profile?.WithXenoPrefix(prefix);
@@ -1716,6 +1723,11 @@ namespace Content.Client.Lobby.UI
         private void UpdatePlaytimePerks()
         {
             PlaytimePerksButton.Pressed = Profile?.PlaytimePerks ?? true;
+        }
+
+        private void UpdateQueenName()
+        {
+            QueenNameButton.Pressed = Profile?.QueenName ?? true;
         }
 
         private void UpdateXenoPrefix()
