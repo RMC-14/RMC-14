@@ -47,7 +47,7 @@
   - type: XenoWeedsSpreading
   - type: XenoWeeds
     range: 7
-    spawns: XenoHiveWeeds
+    spawns: XenoHiveWeedsCore
     level: 3
     blockOtherWeeds: true
   - type: GhostRole
@@ -129,7 +129,7 @@
     canOrbitalBombard: true
   - type: XenoWeeds
     range: 5
-    spawns: XenoHiveWeeds
+    spawns: XenoHiveWeedsCluster
     level: 3
     blockOtherWeeds: true
   - type: GhostRole

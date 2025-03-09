@@ -20,7 +20,7 @@
         acts: ["Destruction"]
   - type: XenoWeeds
     range: 5
-    spawns: XenoHiveWeeds
+    spawns: XenoHiveWeedsCluster
     level: 3
     blockOtherWeeds: true
   - type: ReplaceWeedSourceOnWeeding
