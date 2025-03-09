@@ -219,7 +219,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 140 # TODO RMC14 70 when aimed shot is in please someone help im dying
+        Piercing: 70
   - type: RMCProjectileDamageFalloff
     thresholds:
     - range: 32
@@ -235,6 +235,8 @@
     - range: 4
       falloff: 10
       buildup: true
+  - type: AimedShotEffect
+    bonusDamageMultiplier: 2
 
 - type: entity
   parent: CMBulletSniper10x28mm
@@ -245,11 +247,15 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 100 # TODO RMC14 50 when aimed shot is in please someone help im dying
-        Heat: 20 # TODO RMC14 10 when aimed shot is in please someone help im dying
+        Piercing: 50
+        Heat: 10
   - type: CMArmorPiercing
     amount: 20
   - type: IgniteOnProjectileHit
+  - type: AimedShotEffect
+    bonusDamageMultiplier: 0
+    fireStacksOnHit: 10
+    blindDuration: 5
 
 # TODO RMC14 slow
 - type: entity
@@ -264,6 +270,12 @@
         Piercing: 55
   - type: CMArmorPiercing
     amount: 0
+  - type: AimedShotEffect
+    bonusDamageMultiplier: 1
+    superSlowDuration: 7
+  - type: AreaDamage
+    damageArea: 2.5
+    falloffRange: 1.5
 
 - type: entity
   parent: CMBulletSniper10x28mm

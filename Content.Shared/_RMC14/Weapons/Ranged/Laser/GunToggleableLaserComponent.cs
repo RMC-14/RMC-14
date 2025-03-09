@@ -54,4 +54,4 @@ public sealed partial class GunToggleableLaserComponent : Component
 
 [DataRecord]
 [Serializable, NetSerializable]
-public readonly record struct GunToggleableLaserSetting(LocId Name, SpriteSpecifier.Rsi Icon);
+public readonly record struct GunToggleableLaserSetting(SpriteSpecifier.Rsi Icon);

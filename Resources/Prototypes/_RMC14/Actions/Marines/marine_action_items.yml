@@ -162,6 +162,7 @@
   parent: ActionMarineBase
   id: RMCActionToggleLaser
   name: Toggle Laser
+  description: Toggles your laser on or off
   components:
   - type: InstantAction
     itemIconStyle: NoItem

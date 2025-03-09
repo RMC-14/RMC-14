@@ -38,6 +38,12 @@ public sealed partial class AimedShotComponent : Component
     public bool WaitForAiming;
 
     /// <summary>
+    ///     The target of the aimed shot.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid? Target;
+
+    /// <summary>
     ///     If the laser should be visible.
     /// </summary>
     [DataField, AutoNetworkedField]
@@ -54,4 +60,10 @@ public sealed partial class AimedShotComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public double AimDistanceDifficulty = 0.05;
+
+    /// <summary>
+    ///     If training is required to use the aimed shot, if set to false it still won't fire if the user isn't trained for the gun.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool RequiresTraining = true;
 }
