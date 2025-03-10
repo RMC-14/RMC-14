@@ -80,7 +80,7 @@ public abstract class SharedXenoNameSystem : EntitySystem
             }
             else
             {
-                args.AddModifier("rmc-xeno-name", extraArgs: [("rank", rank)]);
+                args.AddModifier("rmc-xeno-name-queen", extraArgs: [("rank", rank)]);
             }
         }
         else
