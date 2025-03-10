@@ -17,4 +17,7 @@ public sealed partial class XenoNameComponent : Component
 
     [DataField, AutoNetworkedField]
     public string Postfix = string.Empty;
+
+    [DataField, AutoNetworkedField]
+    public bool QueenName = false;
 }

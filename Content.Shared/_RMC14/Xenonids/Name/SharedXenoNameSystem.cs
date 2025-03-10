@@ -70,9 +70,18 @@ public abstract class SharedXenoNameSystem : EntitySystem
 
         var number = ent.Comp.Number;
 
+
+
         if (HasComp<XenoOmitNumberComponent>(ent))
         {
-            args.AddModifier("rmc-xeno-name", extraArgs: [("rank", rank), ("prefix", prefix), ("postfix", postfix)]);
+            if (TryComp(ent.Owner, out XenoNameComponent? queenName) && queenName.QueenName)
+            {
+                args.AddModifier("rmc-xeno-name", extraArgs: [("rank", rank), ("prefix", prefix), ("postfix", postfix)]);
+            }
+            else
+            {
+                args.AddModifier("rmc-xeno-name", extraArgs: [("rank", rank)]);
+            }
         }
         else
         {
