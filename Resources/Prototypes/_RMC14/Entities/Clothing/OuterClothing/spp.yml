@@ -26,7 +26,7 @@
   parent: RMCArmorSPP
   id: RMCArmorSPPSupport
   name: UL6 personal armor
-  description: Standard body armor of the SPP military, the UM5 (Union Medium MK5) is a medium body armor, roughly on par with the M3 pattern body armor in service with the UNMC, specialized towards ballistics protection. Unlike the M3, however, the plate has a heavier neckplate. This has earned many UN members to refer to SPP soldiers as 'tin men'.
+  description: Standard body armor of the SPP military, the UL6 (Union Light MK6) is a light body armor, slightly weaker than the M3 pattern body armor in service with the UNMC, specialized towards ballistics protection. This set of personal armor lacks the iconic neck piece and some of the armor in favor of user mobility.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/support.rsi
