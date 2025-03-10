@@ -1,11 +1,13 @@
 using Content.Shared._RMC14.Projectiles.Aimed;
 using Content.Shared._RMC14.Rangefinder.Spotting;
+using Content.Shared._RMC14.Weapons.Ranged.Homing;
 using Content.Shared._RMC14.Weapons.Ranged.Laser;
 using Content.Shared._RMC14.Weapons.Ranged.Whitelist;
 using Content.Shared.Actions;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.Whitelist;
 using Content.Shared.Wieldable.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
@@ -20,6 +22,7 @@ public sealed class AimedShotSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -33,12 +36,19 @@ public sealed class AimedShotSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Give the action to the entity holding the item,
+    ///     Give the action to the entity holding the item.
     /// </summary>
     private void OnAimedShotGetItemActions(Entity<AimedShotComponent> ent, ref GetItemActionsEvent args)
     {
         args.AddAction(ref ent.Comp.Action, ent.Comp.ActionId);
-        Dirty(ent.Owner, ent.Comp);
+
+        // Inherit the whitelist from the equipment giving the action.
+        if (TryComp(args.Provider, out GunUserWhitelistComponent? whitelist))
+            ent.Comp.Whitelist = whitelist.Whitelist;
+        else
+            ent.Comp.Whitelist = new EntityWhitelist();
+
+        Dirty(ent);
     }
 
     /// <summary>
@@ -51,8 +61,8 @@ public sealed class AimedShotSystem : EntitySystem
 
         args.Handled = true;
 
-        // Cancel the action if the user isn't trained in sniping
-        if (!TryComp(args.Performer, out SniperWhitelistComponent? whitelist) && ent.Comp.RequiresTraining)
+        // Cancel the action if the user doesn't have the correct whitelist
+        if (!_whitelist.IsValid(ent.Comp.Whitelist, args.Performer) && ent.Comp.Whitelist.Components != null)
         {
             var message = Loc.GetString("cm-gun-unskilled", ("gun", ent));
             _popup.PopupClient(message, args.Performer, args.Performer);
@@ -125,7 +135,7 @@ public sealed class AimedShotSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Mark projectiles as being shot using the aimed shot action.
+    ///     Mark projectiles as being shot using the aimed shot action and make them homing.
     /// </summary>
     private void OnAmmoShot(Entity<AimedShotComponent> ent, ref AmmoShotEvent args)
     {
@@ -137,6 +147,11 @@ public sealed class AimedShotSystem : EntitySystem
             var aimedProjectile = EnsureComp<AimedProjectileComponent>(projectile);
             aimedProjectile.Target = ent.Comp.Target.Value;
             Dirty(projectile, aimedProjectile);
+
+            var homingProjectile = EnsureComp<HomingProjectileComponent>(projectile);
+            homingProjectile.Target = ent.Comp.Target.Value;
+            homingProjectile.ProjectileSpeed = ent.Comp.ProjectileSpeed;
+            Dirty(projectile, homingProjectile);
         }
 
         ent.Comp.Target = null;

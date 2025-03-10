@@ -1,3 +1,4 @@
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -62,8 +63,14 @@ public sealed partial class AimedShotComponent : Component
     public double AimDistanceDifficulty = 0.05;
 
     /// <summary>
-    ///     If training is required to use the aimed shot, if set to false it still won't fire if the user isn't trained for the gun.
+    ///     The whitelist required to use aimed shot.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool RequiresTraining = true;
+    public EntityWhitelist Whitelist = new();
+
+    /// <summary>
+    ///     The speed of the aimed shot projectile
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int ProjectileSpeed = 62;
 }
