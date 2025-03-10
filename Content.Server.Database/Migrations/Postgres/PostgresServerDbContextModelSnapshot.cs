@@ -882,6 +882,12 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasDefaultValue(true)
                         .HasColumnName("playtime_perks");
 
+                    b.Property<bool>("QueenName")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(true)
+                        .HasColumnName("queen_name");
+
                     b.Property<int>("PreferenceId")
                         .HasColumnType("integer")
                         .HasColumnName("preference_id");
