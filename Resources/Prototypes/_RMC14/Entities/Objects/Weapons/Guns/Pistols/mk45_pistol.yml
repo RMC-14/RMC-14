@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CMWeaponPistolBase
   id: RMCWeaponPistolMK45
   name: "MK-45 'high-power' automagnum"
@@ -69,6 +69,10 @@
       rmc-aslot-barrel: 0.71, 0.095
       rmc-aslot-rail: -0.065, 0.125
       rmc-aslot-underbarrel: 0.312, -0.25
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCMK45
 
 - type: entity
   parent: CMBaseMagazinePistol
@@ -128,3 +132,6 @@
 
 - type: Tag
   id: CMCartridgePistolMK45
+
+- type: Tag
+  id: RMCMK45

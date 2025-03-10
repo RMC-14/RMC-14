@@ -12,6 +12,10 @@
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/b92fs.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/b92fs.rsi
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCb92fs
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -77,5 +81,9 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+
 - type: Tag
   id: RMCMagazinePistolB92FS
+
+- type: Tag
+  id: RMCb92fs
