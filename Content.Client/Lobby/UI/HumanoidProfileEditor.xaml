@@ -76,6 +76,7 @@
                                     <Label Text="{Loc 'humanoid-profile-editor-show-queen-name'}" />
                                     <Control HorizontalExpand="True"/>
                                     <Button Name="QueenNameButton" Pressed="True" ToggleMode="True" Text="{Loc 'humanoid-profile-editor-enable'}" HorizontalAlignment="Right" />
+                                </BoxContainer>
                                 <!-- Xeno Prefix -->
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-xeno-prefix'}" />
