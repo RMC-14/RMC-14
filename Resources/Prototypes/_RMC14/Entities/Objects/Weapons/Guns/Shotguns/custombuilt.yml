@@ -24,6 +24,9 @@
     scatterUnwielded: 20
     baseFireRate: 0.85
     burstScatterMult: 4
+    modifiers:
+      Burst:
+        fireDelay: 0.1665
   - type: GunDamageModifier
     multiplier: 1
   - type: BallisticAmmoProvider
@@ -54,8 +57,8 @@
           - RMCAttachmentLaserSight
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.780, 0.06 
-      rmc-aslot-rail: -0.025, 0.125 
-      rmc-aslot-underbarrel: 0.30, -0.31 
+      rmc-aslot-barrel: 0.780, 0.06
+      rmc-aslot-rail: -0.025, 0.125
+      rmc-aslot-underbarrel: 0.30, -0.31
 
 # Theres a damaged version of this with worse stats, make sure to use the "busted" state as the base/icon for it

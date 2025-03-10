@@ -14,6 +14,14 @@
   - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m1984_5.ogg
 
 - type: soundCollection
+  id: RMCXM38Shoot
+  files:
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_tactical_1.ogg
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_tactical_2.ogg
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_tactical_3.ogg
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_tactical_4.ogg
+
+- type: soundCollection
   id: CMM54CShoot
   files:
   - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_rifle.ogg # TODO RMC14

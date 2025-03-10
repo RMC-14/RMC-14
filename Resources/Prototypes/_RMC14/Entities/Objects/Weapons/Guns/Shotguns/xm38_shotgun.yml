@@ -1,0 +1,72 @@
+- type: entity
+  parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
+  name: XM38 tactical shotgun
+  id: RMCWeaponShotgunXM38
+  description: Way back in 2168, We-Ya began testing the MK221. The UNMC picked up an early prototype, and later adopted it with a limited military contract. But the UNMC Special Operations Forces wasn't satisfied, and iterated on the early prototypes they had access to; eventually, their internal armorers and tinkerers produced the MK210, designated XM38, a lightweight folding shotgun that snaps to the belt. And to boot, it's fully automatic, made of stamped medal, and keeps the UGL. Truly an engineering marvel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/xm38.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/xm38.rsi
+    slots:
+    - suitStorage
+    - belt
+  - type: Gun
+    soundGunshot:
+      collection: RMCXM38Shoot
+  - type: ShootUseDelay
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - FullAuto
+    recoilWielded: 2
+    recoilUnwielded: 4
+    scatterWielded: 10
+    scatterUnwielded: 20
+    baseFireRate: 1.666
+    burstScatterMult: 5
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.15
+    accuracyMultiplierUnwielded: 0.9
+  - type: RMCMagneticItem
+  - type: GunDamageModifier
+    multiplier: 1
+  - type: BallisticAmmoProvider
+    cycleable: false
+    whitelist:
+      tags:
+      - RMCShellShotgun
+    capacity: 10
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentExtendedBarrel
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentRailFlashlight
+      rmc-aslot-stock:
+        startingAttachable: RMCAttachmentMK221Stock
+        whitelist:
+          tags:
+          - RMCAttachmentMK221Stock
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentLaserSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.780, 0.06
+      rmc-aslot-rail: -0.2, 0.198
+      rmc-aslot-underbarrel: 0.30, -0.31
+      rmc-aslot-stock: -0.55, -0.01
