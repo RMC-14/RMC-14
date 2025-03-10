@@ -189,6 +189,24 @@
     - 0:
         hive_weed15: ""
 
+- type: entity
+  parent: XenoHiveWeeds
+  id: XenoHiveWeedsCluster
+  components:
+  - type: XenoWeeds
+    range: 6
+    spawns: XenoHiveWeedsCluster
+    level: 3
+
+- type: entity
+  parent: XenoHiveWeeds
+  id: XenoHiveWeedsCore
+  components:
+  - type: XenoWeeds
+    range: 8
+    spawns: XenoHiveWeedsCore
+    level: 3
+
 - type: entity # TODO RMC14 sound
   parent: XenoHiveWeeds
   id: XenoHiveWeedsSource
