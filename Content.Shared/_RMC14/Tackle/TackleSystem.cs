@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage.Systems;
