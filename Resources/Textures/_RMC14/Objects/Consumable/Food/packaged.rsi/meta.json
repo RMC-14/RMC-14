@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/134b9b90f2d59c11f05e7e3faf06f0a971482809/icons/obj/items/food.dmi and https://github.com/cmss13-devs/cmss13/blob/95997cd3e1b745f93a49c1ce345a6b5f98a567e1/icons/obj/items/trash.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/134b9b90f2d59c11f05e7e3faf06f0a971482809/icons/obj/items/food.dmi, https://github.com/cmss13-devs/cmss13/blob/800f3950414b25174f1e81278dfe1cde4fbbf281/icons/mob/humans/onmob/clothing/helmet_garb/food.dmi, https://github.com/cmss13-devs/cmss13/blob/800f3950414b25174f1e81278dfe1cde4fbbf281/icons/obj/items/food/bakery.dmi, https://github.com/cmss13-devs/cmss13/blob/800f3950414b25174f1e81278dfe1cde4fbbf281/icons/mob/humans/onmob/inhands/items/food_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/800f3950414b25174f1e81278dfe1cde4fbbf281/icons/mob/humans/onmob/inhands/items/food_righthand.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -29,13 +29,7 @@
       "name": "hburger"
     },
     {
-      "name": "kepler_chips"
-    },
-    {
       "name": "wy_pepper"
-    },
-    {
-      "name": "kepler_flame"
     },
     {
       "name": "hotdog_trash"
@@ -47,13 +41,7 @@
       "name": "MREtray_empty"
     },
     {
-      "name": "kepler_chips_flame_trash"
-    },
-    {
       "name": "wy_chips_pepper_trash"
-    },
-    {
-      "name": "kepler_chips_trash"
     },
     {
       "name": "hunk_trash"
@@ -99,6 +87,226 @@
     },
     {
       "name": "eat_bar"
+    },
+    {
+      "name": "kepler_flame"
+    },
+    {
+      "name": "kepler_chips"
+    },
+    {
+      "name": "kepler_chips_trash"
+    },
+    {
+      "name": "kepler_chips_flame_trash"
+    },
+    {
+      "name": "popcorn_trash"
+    },
+    {
+      "name": "candy_trash"
+    },
+    {
+      "name": "chips_trash"
+    },
+    {
+      "name": "popcorn"
+    },
+    {
+      "name": "chips"
+    },
+    {
+      "name": "candy"
+    },
+    {
+      "name": "donkpocket_helmet",
+      "directions": 4
+    },
+    {
+      "name": "barcardine_helmet",
+      "directions": 4
+    },
+    {
+      "name": "chunkbox_helmet",
+      "directions": 4
+    },
+    {
+      "name": "open-burrito_helmet",
+      "directions": 4
+    },
+    {
+      "name": "packaged-burrito_helmet",
+      "directions": 4
+    },
+    {
+      "name": "open-hotdog_helmet",
+      "directions": 4
+    },
+    {
+      "name": "packaged-hotdog_helmet",
+      "directions": 4
+    },
+    {
+      "name": "boonie_helmet",
+      "directions": 4
+    },
+    {
+      "name": "snack_eat_helmet",
+      "directions": 4
+    },
+    {
+      "name": "donkpocket"
+    },
+    {
+      "name": "kepler-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "flamehotkepler-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "burrito-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "pburrito-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "hotdog-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "photdog-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "burger-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "pburger-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "wy_chips_pepper-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "hunk-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "hunk_o-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "chunk-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "chunk_o-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "barcardine-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "boonie-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "barcardine_o-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "boonie_o-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "kepler-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "flamehotkepler-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "burrito-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "pburrito-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "hotdog-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "photdog-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "burger-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "pburger-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "wy_chips_pepper-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "hunk-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "hunk_o-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "chunk-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "chunk_o-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "barcardine-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "boonie-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "barcardine_o-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "boonie_o-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "cheesie_honkers"
+    },
+    {
+      "name": "sosjerky"
+    },
+    {
+      "name": "4no_raisins"
+    },
+    {
+      "name": "space_twinkie"
+    },
+    {
+      "name": "syndi_cakes"
     }
   ]
 }
