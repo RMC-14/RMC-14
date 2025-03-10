@@ -107,7 +107,7 @@
         acts: ["Destruction"]
 
 - type: entity
-  parent: BaseStructureDynamic
+  parent: RMCSecureCase
   id: RMCSecureCaseDouble
   name: cases
   description: A stack of black storage cases.
@@ -121,37 +121,9 @@
   - type: Icon
     sprite: _RMC14/Structures/Storage/Crates/casedouble.rsi
     state: base
-  - type: Transform
-    noRot: true
-  - type: InteractionOutline
-  - type: Physics
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.42,-0.42,0.4,0.15"
-        density: 50
-        mask:
-        - SmallMobMask
-        layer:
-        - MachineLayer
-  - type: PlaceableSurface
-    isPlaceable: false
-  - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: Wood
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
 
 - type: entity
-  parent: BaseStructureDynamic
+  parent: RMCSecureCase
   id: RMCSecureCaseSmall
   name: small cases
   description: Two small black storage cases.
@@ -165,34 +137,6 @@
   - type: Icon
     sprite: _RMC14/Structures/Storage/Crates/casesmall.rsi
     state: base
-  - type: Transform
-    noRot: true
-  - type: InteractionOutline
-  - type: Physics
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.42,-0.42,0.4,0.15"
-        density: 50
-        mask:
-        - SmallMobMask
-        layer:
-        - MachineLayer
-  - type: PlaceableSurface
-    isPlaceable: false
-  - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: Wood
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
 
 - type: entity
   parent: BaseStructureDynamic
@@ -239,7 +183,7 @@
         acts: ["Destruction"]
 
 - type: entity
-  parent: BaseStructureDynamic
+  parent: RMCSecureCaseChest
   id: RMCSecureCaseStrapped
   name: supplies crate
   description: A hefty wooden crate.
@@ -253,37 +197,9 @@
   - type: Icon
     sprite: _RMC14/Structures/Storage/Crates/securecrate.rsi
     state: base
-  - type: Transform
-    noRot: true
-  - type: InteractionOutline
-  - type: Physics
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.42,-0.42,0.4,0.35"
-        density: 50
-        mask:
-        - SmallMobMask
-        layer:
-        - MachineLayer
-  - type: PlaceableSurface
-    isPlaceable: false
-  - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: Wood
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
 
 - type: entity
-  parent: BaseStructureDynamic
+  parent: RMCSecureCaseChest
   id: RMCSecureCaseMedicalBig
   name: medical crate
   description: A crate containing medical supplies.
@@ -297,34 +213,6 @@
   - type: Icon
     sprite: _RMC14/Structures/Storage/Crates/chestwhite.rsi
     state: base
-  - type: Transform
-    noRot: true
-  - type: InteractionOutline
-  - type: Physics
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.42,-0.42,0.4,0.35"
-        density: 50
-        mask:
-        - SmallMobMask
-        layer:
-        - MachineLayer
-  - type: PlaceableSurface
-    isPlaceable: false
-  - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: Wood
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
 
 - type: entity
   parent: BaseStructureDynamic
@@ -371,7 +259,7 @@
         acts: ["Destruction"]
 
 - type: entity
-  parent: BaseStructureDynamic
+  parent: RMCSmallChestYellow
   id: RMCSmallChestBlue
   name: small chest
   description: A small plastic crate wrapped with securing elastic straps.
@@ -385,37 +273,9 @@
   - type: Icon
     sprite: _RMC14/Structures/Storage/Crates/minichestb.rsi
     state: base
-  - type: Transform
-    noRot: true
-  - type: InteractionOutline
-  - type: Physics
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.2,-0.3,0.2,0.3"
-        density: 50
-        mask:
-        - SmallMobMask
-        layer:
-        - MachineLayer
-  - type: PlaceableSurface
-    isPlaceable: false
-  - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: Wood
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
 
 - type: entity
-  parent: BaseStructureDynamic
+  parent: RMCSmallChestYellow
   id: RMCSmallChestRed
   name: small chest
   description: A small plastic crate wrapped with securing elastic straps.
@@ -429,37 +289,9 @@
   - type: Icon
     sprite: _RMC14/Structures/Storage/Crates/minichestc.rsi
     state: base
-  - type: Transform
-    noRot: true
-  - type: InteractionOutline
-  - type: Physics
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.2,-0.3,0.2,0.3"
-        density: 50
-        mask:
-        - SmallMobMask
-        layer:
-        - MachineLayer
-  - type: PlaceableSurface
-    isPlaceable: false
-  - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: Wood
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
 
 - type: entity
-  parent: BaseStructureDynamic
+  parent: RMCSmallChestYellow
   id: RMCSecureCaseMedicalSmall
   name: small medcase
   description: A small metal crate. Here, Freeman take this medkit!
@@ -473,37 +305,9 @@
   - type: Icon
     sprite: _RMC14/Structures/Storage/Crates/minimedcase.rsi
     state: base
-  - type: Transform
-    noRot: true
-  - type: InteractionOutline
-  - type: Physics
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.2,-0.3,0.2,0.3"
-        density: 50
-        mask:
-        - SmallMobMask
-        layer:
-        - MachineLayer
-  - type: PlaceableSurface
-    isPlaceable: false
-  - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: Wood
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
 
 - type: entity
-  parent: BaseStructureDynamic
+  parent: RMCSmallChestYellow
   id: RMCSecureCaseAmmoMini
   name: small ammocase
   description: A small metal crate. Here, Freeman ammo!
@@ -517,34 +321,28 @@
   - type: Icon
     sprite: _RMC14/Structures/Storage/Crates/miniammo.rsi
     state: base
-  - type: Transform
+
+- type: entity
+  parent: RMCSmallChestYellow
+  id: RMCCrateMini
+  name: small crate
+  description: The large supply crate's cousin, 1st removed.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/minicrate.rsi
     noRot: true
-  - type: InteractionOutline
-  - type: Physics
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.2,-0.3,0.2,0.3"
-        density: 50
-        mask:
-        - SmallMobMask
-        layer:
-        - MachineLayer
-  - type: PlaceableSurface
-    isPlaceable: false
-  - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: Wood
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: invoice
+      sprite: _RMC14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/minicrate.rsi
+    state: base
 
 - type: entity
   parent: BaseStructureDynamic
@@ -571,56 +369,6 @@
         shape:
           !type:PhysShapeAabb
           bounds: "-0.2,-0.3,0.2,0.2"
-        density: 50
-        mask:
-        - SmallMobMask
-        layer:
-        - MachineLayer
-  - type: PlaceableSurface
-    isPlaceable: false
-  - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: Wood
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 50
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-
-- type: entity
-  parent: BaseStructureDynamic
-  id: RMCCrateMini
-  name: small crate
-  description: The large supply crate's cousin, 1st removed.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Storage/Crates/minicrate.rsi
-    noRot: true
-    layers:
-    - state: base
-      map: ["enum.StorageVisualLayers.Base"]
-    - state: closed
-      map: ["enum.StorageVisualLayers.Door"]
-    - state: invoice
-      sprite: _RMC14/Structures/Storage/Crates/labels.rsi
-      visible: false
-      map: ["enum.PaperLabelVisuals.Layer"]
-  - type: Icon
-    sprite: _RMC14/Structures/Storage/Crates/minicrate.rsi
-    state: base
-  - type: Transform
-    noRot: true
-  - type: InteractionOutline
-  - type: Physics
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.2,-0.3,0.2,0.3"
         density: 50
         mask:
         - SmallMobMask
