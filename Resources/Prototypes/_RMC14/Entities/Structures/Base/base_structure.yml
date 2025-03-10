@@ -158,6 +158,9 @@
     - Turf
     - Xeno
   - type: ResinSurgeReinforcable
+  - type: Tag
+    tags:
+    - SpreaderIgnore
 
 # Invisible Wall
 

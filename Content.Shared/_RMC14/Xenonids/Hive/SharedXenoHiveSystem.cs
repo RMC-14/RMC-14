@@ -144,6 +144,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     /// <summary>
     /// Sets the hive for a member, if it's different.
     /// If it does not have HiveMemberComponent this method adds it.
+    /// If the new HiveMember is a queen, it is now the new hiveQueen
     /// </summary>
     public void SetHive(Entity<HiveMemberComponent?> member, EntityUid? hive)
     {
@@ -164,6 +165,9 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 
         comp.Hive = hive;
         Dirty(member, comp);
+
+        if (HasComp<XenoEvolutionGranterComponent>(member) && hiveEnt.HasValue)
+            SetHiveQueen(member, hiveEnt.Value);
 
         var ev = new HiveChangedEvent(hiveEnt, old);
         RaiseLocalEvent(member, ref ev);
@@ -204,6 +208,10 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         return memberHive.Owner == hive;
     }
 
+    public bool HasHiveQueen(Entity<HiveComponent> hive)
+    {
+        return (hive.Comp.CurrentQueen is not null);
+    }
     public bool SetHiveQueen(EntityUid queen, Entity<HiveComponent> hive)
     {
         hive.Comp.CurrentQueen = queen;

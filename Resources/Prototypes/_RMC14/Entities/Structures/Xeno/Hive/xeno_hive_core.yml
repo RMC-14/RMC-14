@@ -36,6 +36,13 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: RepairableXenoStructure
+    plasmaCost: 1000
+    repairLength: 15
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 300
   - type: StepTrigger
     requiredTriggeredSpeed: 0
     intersectRatio: 0.1
@@ -78,9 +85,13 @@
   suffix: Construction
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Xenos/hive_structures.rsi
-    state: core
     color: '#FFFFFFAA'
+    layers:
+    - sprite: _RMC14/Structures/Xenos/hive_structures.rsi
+      state: core
+    - sprite: _RMC14/Interface/xeno_hud.rsi
+      state: xeno_structure_node_indicator
+      scale: 0.8, 0.8
   - type: Destructible
     thresholds:
     - trigger:
@@ -116,6 +127,13 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: RepairableXenoStructure
+    plasmaCost: 1000
+    repairLength: 15
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 25
   - type: HivePylon
   - type: XenoWeedsSpreading
   - type: XenoWeeds
