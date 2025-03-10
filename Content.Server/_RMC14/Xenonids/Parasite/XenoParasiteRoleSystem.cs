@@ -99,12 +99,13 @@ public sealed class XenoEggRoleSystem : EntitySystem
                 _ghostRole.GhostRoleInternalCreateMindAndTransfer(session, parasite.Value, parasite.Value);
         }
     }
-
-    private bool SharedChecks(EntityUid ent, EntityUid user)
+    /// <summary>
+    /// Can this user take a parasite role
+    /// </summary>
+    /// <param name="user"></param>
+    /// <returns></returns>
+    public bool UserCheck(EntityUid user)
     {
-        //TODO RMC14 parasite bans should be checked here
-        _ui.CloseUi(ent, XenoParasiteGhostUI.Key);
-
         if (_net.IsClient)
             return false;
 
@@ -132,5 +133,12 @@ public sealed class XenoEggRoleSystem : EntitySystem
         }
 
         return true;
+    }
+    private bool SharedChecks(EntityUid ent, EntityUid user)
+    {
+        //TODO RMC14 parasite bans should be checked here
+        _ui.CloseUi(ent, XenoParasiteGhostUI.Key);
+
+        return UserCheck(user);
     }
 }

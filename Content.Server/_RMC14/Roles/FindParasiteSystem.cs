@@ -1,3 +1,4 @@
+using Content.Server._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Roles.FindParasite;
 using Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
@@ -17,6 +18,7 @@ public sealed partial class FindParasiteSystem : EntitySystem
     [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly AreaSystem _areas = default!;
+    [Dependency] private readonly XenoEggRoleSystem _parasiteRole = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -30,11 +32,10 @@ public sealed partial class FindParasiteSystem : EntitySystem
 
     private void FindParasites(Entity<FindParasiteComponent> parasiteFinderEnt, ref FindParasiteActionEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || !_parasiteRole.UserCheck(parasiteFinderEnt.Owner))
         {
             return;
         }
-        var ent = args.Performer;
 
         _ui.OpenUi(parasiteFinderEnt.Owner, XenoFindParasiteUI.Key, parasiteFinderEnt);
         args.Handled = true;
