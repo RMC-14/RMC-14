@@ -53,7 +53,7 @@
     availableModes:
     - FullAuto
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a_2.ogg
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
   - type: RMCSelectiveFire
