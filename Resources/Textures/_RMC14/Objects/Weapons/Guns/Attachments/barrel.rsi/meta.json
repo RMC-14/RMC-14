@@ -205,6 +205,12 @@
     },
     {
       "name": "pmc_sniperbarrel"
+    },
+    {
+      "name": "choke"
+    },
+    {
+      "name": "choke_a"
     }
   ]
 }
