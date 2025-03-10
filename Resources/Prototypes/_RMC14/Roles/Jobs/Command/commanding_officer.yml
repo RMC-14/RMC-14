@@ -101,10 +101,11 @@
     shoes: CMShoesLaceupCommander
     head: CMHeadBeretCO
     outerClothing: RMCCoatService
-    id: CMIDCardCommandingOfficer
     ears: CMHeadsetSeniorCommand
     pocket1: RMCPouchCommand
     pocket2: RMCPouchGeneralLarge
+  inhand:
+    - RMCMatebaCustomizationCase
 
 - type: entity
   parent: CMSpawnPointJobBase

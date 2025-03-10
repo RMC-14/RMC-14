@@ -129,6 +129,10 @@
   parent: CMIDCardGold # TODO RMC14 provost id
   id: RMCIDCardProvostTeamLeader
   name: provost team leader ID card
+  description: Issued to members of the Provost Office.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
   - type: PresetIdCard
     job: CMProvostTeamLeader

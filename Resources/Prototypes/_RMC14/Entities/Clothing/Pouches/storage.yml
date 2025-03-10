@@ -274,7 +274,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCSpeedLoaderMateba
+    - id: RMCSpeedLoaderMatebaHIAP
       amount: 4
 
 # Large Pistol Magazine Pouch
