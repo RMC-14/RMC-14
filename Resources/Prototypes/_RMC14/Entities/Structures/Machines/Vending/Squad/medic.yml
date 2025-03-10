@@ -218,6 +218,12 @@
         recommended: true
       - id: RMCArmorM3HeavyVariants
         name: heavy armor
+    - name: Helmet
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: CMArmorHelmetM10Medic
+      - id: RMCArmorHelmetM10MedicWhite
+        recommended: true
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
