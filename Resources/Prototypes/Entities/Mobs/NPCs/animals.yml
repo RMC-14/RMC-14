@@ -350,7 +350,7 @@
       Dead:
         Base: cockroach_dead
   - type: Bloodstream
-    bloodReagent: InsectBlood
+    bloodReagent: [InsectBlood]
     bloodMaxVolume: 20
   - type: Food
   - type: FlavorProfile
@@ -508,7 +508,7 @@
     damageContainer: Biological
     damageModifierSet: Moth
   - type: Bloodstream
-    bloodReagent: InsectBlood
+    bloodReagent: [InsectBlood]
   - type: Respirator
     damage:
       types:
@@ -916,7 +916,7 @@
     accent: crab
   - type: Bloodstream
     bloodMaxVolume: 50
-    bloodReagent: CopperBlood
+    bloodReagent: [CopperBlood]
   - type: Tag
     tags:
     - VimPilot
@@ -1879,7 +1879,7 @@
   - type: RadiationSource
     intensity: 0.3
   - type: Bloodstream
-    bloodReagent: UnstableMutagen
+    bloodReagent: [UnstableMutagen]
   - type: SolutionContainerManager
     solutions:
       food:
@@ -2353,7 +2353,7 @@
   - type: IgnoreSpiderWeb
   - type: Bloodstream
     bloodMaxVolume: 150
-    bloodReagent: CopperBlood
+    bloodReagent: [CopperBlood]
   - type: Speech
     speechVerb: Arachnid
     speechSounds: Arachnid
@@ -2499,7 +2499,7 @@
       speechVerb: Cluwne
     - type: Bloodstream
       bloodMaxVolume: 150
-      bloodReagent: Laughter
+      bloodReagent: [Laughter]
 
 - type: entity
   name: wizard spider
@@ -2822,7 +2822,7 @@
     attributes:
       gender: epicene
   - type: Bloodstream
-    bloodReagent: DemonsBlood
+    bloodReagent: [DemonsBlood]
   - type: Damageable
     damageContainer: BiologicalMetaphysical
     damageModifierSet: Infernal
@@ -3445,7 +3445,7 @@
     speciesId: cat
     templateId: pet
   - type: Bloodstream
-    bloodReagent: Sap
+    bloodReagent: [Sap]
     bloodMaxVolume: 60
   - type: DamageStateVisuals
     states:
