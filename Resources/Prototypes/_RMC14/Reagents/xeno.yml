@@ -1,0 +1,472 @@
+# Blood
+- type: reagent
+  parent: CMReagent
+  id: RMCXenoBlood
+  name: reagent-name-rmc-xenoblood
+  desc: reagent-desc-rmc-xenoblood
+  physicalDesc: reagent-physical-desc-acidic
+  color: "#dffc00"
+  unknown: true
+  metabolisms:
+    # CORROSIVE = 3
+    # TODO: Melt items.
+    Poison:
+      metabolismRate: 0.2
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Burn: 0.6
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Burn: 0.6
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Burn: 1.2
+
+- type: reagent
+  parent: RMCXenoBlood
+  id: RMCXenoBloodRoyal
+  name: reagent-name-rmc-xenobloodroyal
+  color: "#bbb900"
+  metabolisms:
+    # CORROSIVE = 6
+    # TODO: Melt items.
+    Poison:
+      metabolismRate: 0.2
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Burn: 1.2
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Burn: 1.2
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Burn: 2.4
+
+# Plasma
+- type: reagent
+  parent: CMReagent
+  id: RMCPlasma # Technically the "human" kind.
+  name: reagent-name-rmc-plasma
+  desc: reagent-desc-rmc-plasma
+  physicalDesc: reagent-physical-desc-viscous
+  color: "#f1e8cf"
+  unknown: true
+  overdose: 30
+
+- type: reagent
+  parent: RMCPlasma
+  id: RMCPlasmaPurple
+  name: reagent-name-rmc-xenoplasmapurple
+  desc: reagent-desc-rmc-xenoplasmapurple
+  color: "#a65d7f"
+  metabolisms:
+    # BIOCIDIC = 2
+    Poison:
+      metabolismRate: 0.2
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Brute: 0.4
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Brute: 0.4
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Brute: 0.8
+
+- type: reagent
+  parent: RMCPlasma
+  id: RMCPlasmaPheromone
+  name: reagent-name-rmc-xenoplasmapheromone
+  desc: reagent-desc-rmc-xenoplasmapheromone
+  physicalDesc: reagent-physical-desc-exotic-smelling
+  color: "#a2e7d6"
+  metabolisms:
+    # HALLUCINOGENIC = 8, NERVESTIMULATING = 6
+    Narcotic:
+      metabolismRate: 0.2
+      effects:
+      - !type:Emote
+        emote: Laugh
+        showInChat: true
+        probability: 0.02
+      - !type:Emote
+        emote: Whistle
+        showInChat: true
+        probability: 0.02
+      - !type:GenericStatusEffect
+        key: SeeingRainbows
+        component: SeeingRainbows
+        type: Add
+        time: 1.2
+      - !type:Jitter
+      # TODO: Stumble around at OD
+      - !type:GenericStatusEffect
+          conditions:
+          - !type:ReagentThreshold
+            min: 50
+          key: KnockedDown
+          component: KnockedDown
+          time: 4
+          type: Add
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Toxin: 1.6 # TODO: Should be brain damage.
+      # And now the stimulant, I hope I got them all
+      - !type:GenericStatusEffect
+          key: KnockedDown
+          time: 1.2
+          type: Remove
+      - !type:GenericStatusEffect
+          key: Stun
+          time: 1.2
+          type: Remove
+      - !type:GenericStatusEffect
+          key: Drunk
+          time: 2.4
+          type: Remove
+      - !type:GenericStatusEffect
+          key: Stutter
+          time: 2.4
+          type: Remove
+      - !type:GenericStatusEffect
+          key: Jitter
+          time: 2.4
+          type: Remove
+      - !type:GenericStatusEffect
+          key: SeeingRainbows
+          time: 2.4
+          type: Remove
+      - !type:GenericStatusEffect
+          key: ForcedSleep
+          time: 2.4
+          type: Remove
+      - !type:GenericStatusEffect
+          key: TemporaryBlindness
+          time: 2.4
+          type: Remove
+      - !type:GenericStatusEffect
+          key: Drowsiness
+          time: 2.4
+          type: Remove
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Toxin: 2.4
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Brute: 1.2
+            Burn: 1.2
+            Toxin: 1.2
+
+- type: reagent
+  parent: RMCPlasma
+  id: RMCPlasmaChitin
+  name: reagent-name-rmc-xenoplasmachitin
+  desc: reagent-desc-rmc-xenoplasmachitin
+  physicalDesc: reagent-physical-desc-fibrous
+  color: "#6d7694"
+  metabolisms:
+    # HYPERDENSIFICATING = 1
+    Narcotic:
+      metabolismRate: 1
+      effects:
+      # TODO: Prevent fractures
+      - !type:MovespeedModifier
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        walkSpeedModifier: 0.8
+        sprintSpeedModifier: 0.8
+        statusLifetime: 1.1
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Brute: 3
+
+- type: reagent
+  parent: RMCPlasma
+  id: RMCPlasmaCatecholamine
+  name: reagent-name-rmc-xenoplasmacatecholamine
+  desc: reagent-desc-rmc-xenoplasmacatecholamine
+  color: "#cf7551"
+  metabolisms:
+    # PAINING = 2, MUSCLESTIMULATING = 6
+    Narcotic:
+      metabolismRate: 1
+      effects:
+      - !type:MovespeedModifier
+        walkSpeedModifier: 1.5
+        sprintSpeedModifier: 1.5
+        statusLifetime: 1.1
+      - !type:GenericStatusEffect
+        key: StaminaModifier
+        component: StaminaModifier
+        time: 3
+        type: Add
+      # TODO: Pain
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Brute: 8 # TODO: Part is heart damage.
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Brute: 8
+
+- type: reagent
+  parent: RMCPlasma
+  id: RMCPlasmaNeurotoxin
+  name: reagent-name-rmc-xenoplasmaneurotixin
+  desc: reagent-desc-rmc-xenoplasmaneurotixin
+  physicalDesc: reagent-physical-desc-pungent
+  color: "#ba8216"
+  metabolisms:
+    # NEUROTOXIC = 4, EXCRETING = 2, HALLUCINOGENIC = 6
+    Narcotic:
+      metabolismRate: 0.2
+      effects:
+      - !type:Emote
+        emote: Laugh
+        showInChat: true
+        probability: 0.02
+      - !type:Emote
+        emote: Whistle
+        showInChat: true
+        probability: 0.02
+      - !type:GenericStatusEffect
+        key: SeeingRainbows
+        component: SeeingRainbows
+        type: Add
+        time: 1.1
+      - !type:Jitter
+      # TODO: Stumble around at OD
+      - !type:GenericStatusEffect
+          conditions:
+          - !type:ReagentThreshold
+            min: 50
+          key: KnockedDown
+          component: KnockedDown
+          time: 3
+          type: Add
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Toxin: 1.2 # TODO: Should be brain damage.
+      - !type:ClearOtherReagents
+        reagent: RMCPlasmaNeurotoxin
+      - !type:HealthChange
+        damage:
+          groups:
+            Toxin: 1.4 # TODO: Should be brain damage.
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Toxin: 1 # TODO: Should be brain damage.
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        key: Drowsiness
+        time: 1.1
+        type: Add
+      # TODO: Apply neurotoxin
+
+- type: reagent
+  parent: RMCPlasma
+  id: RMCPlasmaAntiNeurotoxin
+  name: reagent-name-rmc-xenoplasmaantineurotixin
+  desc: reagent-desc-rmc-xenoplasmaantineurotixin
+  physicalDesc: reagent-physical-desc-neural
+  color: "#afffc9"
+  metabolisms:
+    # NEUROSHIELDING = 1
+    Narcotic:
+      metabolismRate: 0.2
+      effects:
+      - !type:AddNeurotoxinImmunity
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Toxin: 0.2 # TODO: Should be liver damage.
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Toxin: 0.4 # TODO: Should be brain damage.
+
+- type: reagent
+  parent: RMCPlasma
+  id: RMCPlasmaEgg
+  name: reagent-name-rmc-xenoplasmaegg
+  desc: reagent-desc-rmc-xenoplasmaegg
+  physicalDesc: reagent-physical-desc-mucus-like
+  color: "#c3c371"
+  metabolisms:
+    Poison:
+      metabolismRate: 0.2
+      effects:
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentThreshold
+          min: 100
+        reagent: RMCPlasmaEggHelper
+        amount: 1
+
+- type: reagent
+  parent: RMCPlasmaEgg
+  id: RMCPlasmaEggHelper
+  name: reagent-name-rmc-xenoplasmaegg-helper
+  desc: reagent-desc-rmc-xenoplasmaegg-helper
+  metabolisms:
+    Poison:
+      metabolismRate: 1
+      effects:
+      - !type:AddXenoEmbryo
+      - !type:PopupMessage
+        type: Local
+        visualType: LargeCaution
+        messages: [ "reagent-effect-plasma-egg" ]
+      - !type:AdjustReagent
+        reagent: RMCPlasmaEgg
+        amount: -999
+
+- type: reagent
+  parent: RMCPlasma
+  id: RMCPlasmaRoyal
+  name: reagent-name-rmc-xenoplasmaroyal
+  desc: reagent-desc-rmc-xenoplasmaroyal
+  color: "#ffeb9c"
+  metabolisms:
+    # BIOCIDIC = 4, ADDICTIVE = 1, HALLUCINOGENIC = 4, CIPHERING = 1
+    Narcotic:
+      metabolismRate: 0.2
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Brute: 0.8
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Brute: 0.8
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Brute: 1.6
+      ######
+      # TODO: Addictions
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Brute: 0.4 # TODO: Should be brain damage.
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        key: SeeingRainbows
+        component: SeeingRainbows
+        type: Add
+        time: 1.1
+      ######
+      - !type:Emote
+        emote: Laugh
+        showInChat: true
+        probability: 0.02
+      - !type:Emote
+        emote: Whistle
+        showInChat: true
+        probability: 0.02
+      - !type:GenericStatusEffect
+        key: SeeingRainbows
+        component: SeeingRainbows
+        type: Add
+        time: 1.1
+      - !type:Jitter
+      # TODO: Stumble around at OD
+      - !type:GenericStatusEffect
+          conditions:
+          - !type:ReagentThreshold
+            min: 50
+          key: KnockedDown
+          component: KnockedDown
+          time: 2
+          type: Add
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Toxin: 0.8 # TODO: Should be brain damage.
+      ######
+      # TODO: Ciphering
