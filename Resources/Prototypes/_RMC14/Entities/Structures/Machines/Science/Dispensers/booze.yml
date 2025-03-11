@@ -9,6 +9,7 @@
     state: booze_dispenser
     snapCardinals: true
   - type: RMCTippable
+  - type: StandingStateComponent
   - type: ReagentDispenser
     storageWhitelist:
       tags:
