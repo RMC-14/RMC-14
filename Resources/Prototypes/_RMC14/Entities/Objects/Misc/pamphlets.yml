@@ -144,6 +144,9 @@
     giveIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: hudsquad_load
+    giveMapBlip:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: loader
     bypassLimit: true
     jobWhitelists:
     - popup: rmc-pamphlets-rifleman-warning
@@ -165,6 +168,9 @@
     giveIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: hudsquad_mortar
+    giveMapBlip:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: mortar
     bypassLimit: true
     jobWhitelists:
     - popup: rmc-pamphlets-rifleman-warning

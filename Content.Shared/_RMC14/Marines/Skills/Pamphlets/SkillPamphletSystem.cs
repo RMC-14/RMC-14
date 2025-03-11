@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mind;
 using Content.Shared.Popups;
@@ -98,6 +99,10 @@ public sealed class SkillPamphletSystem : EntitySystem
             usedSkillComp.Icon = ent.Comp.GiveIcon;
             usedSkillComp.JobTitle = ent.Comp.GiveJobTitle;
             Dirty(args.User, usedSkillComp);
+
+            var mapBlip = EnsureComp<MapBlipIconOverrideComponent>(args.User);
+            mapBlip.Icon = ent.Comp.GiveMapBlip;
+            Dirty(args.User, mapBlip);
 
             _squads.UpdateSquadTitle(args.User);
 

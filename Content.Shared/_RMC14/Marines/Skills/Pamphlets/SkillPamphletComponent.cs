@@ -20,6 +20,9 @@ public sealed partial class SkillPamphletComponent : Component
     public SpriteSpecifier.Rsi? GiveIcon;
 
     [DataField, AutoNetworkedField]
+    public SpriteSpecifier.Rsi? GiveMapBlip;
+
+    [DataField, AutoNetworkedField]
     public LocId? GiveJobTitle;
 
     [DataField, AutoNetworkedField]
