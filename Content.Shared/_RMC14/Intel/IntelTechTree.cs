@@ -36,6 +36,9 @@ public sealed partial class IntelTechTree
     public int RecoverCorpses;
 
     [DataField]
+    public int DissectCorpses;
+
+    [DataField]
     public bool ColonyCommunications;
 
     [DataField]
