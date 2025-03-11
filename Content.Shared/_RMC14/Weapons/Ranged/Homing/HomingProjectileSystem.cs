@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared.Projectiles;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Homing;
@@ -9,6 +10,22 @@ public sealed class HomingProjectileSystem : EntitySystem
 {
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<HomingProjectileComponent, PreventCollideEvent>(OnPreventCollide);
+    }
+
+    /// <summary>
+    ///     Disable homing if collision with the target is prevented.
+    /// </summary>
+    private void OnPreventCollide(Entity<HomingProjectileComponent> ent, ref PreventCollideEvent args)
+    {
+        if(args.OtherEntity != ent.Comp.Target)
+            return;
+
+        RemComp<HomingProjectileComponent>(ent);
+    }
 
     /// <summary>
     ///     Adjust the velocity and rotation of the projectile every frame.
