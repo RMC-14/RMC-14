@@ -90,6 +90,7 @@ public sealed class SquadSystem : EntitySystem
         SubscribeLocalEvent<SquadMemberComponent, GetMarineIconEvent>(OnSquadRoleGetIcon, after: [typeof(SharedMarineSystem)]);
         SubscribeLocalEvent<SquadMemberComponent, EnteredCryostorageEvent>(OnSquadMemberEnteredCryo);
         SubscribeLocalEvent<SquadMemberComponent, LeftCryostorageEvent>(OnSquadMemberLeftCryo);
+        SubscribeLocalEvent<SquadMemberComponent, GetMarineSquadNameEvent>(OnSquadRoleGetName);
 
         SubscribeLocalEvent<SquadLeaderComponent, EntityTerminatingEvent>(OnSquadLeaderTerminating);
         SubscribeLocalEvent<SquadLeaderComponent, GetMarineIconEvent>(OnSquadLeaderGetMarineIcon, after: [typeof(SharedMarineSystem)]);
@@ -180,6 +181,26 @@ public sealed class SquadSystem : EntitySystem
     {
         args.Background = member.Comp.Background;
         args.BackgroundColor = member.Comp.BackgroundColor;
+    }
+
+    private void OnSquadRoleGetName(Entity<SquadMemberComponent> member, ref GetMarineSquadNameEvent args)
+    {
+        if (!TryGetMemberSquad(member.Owner, out var squadTeam))
+            return;
+
+        args.SquadName = Name(squadTeam);
+
+        var jobId = _originalRoleQuery.CompOrNull(member)?.Job;
+
+        if (_prototypes.TryIndex(jobId, out var jobProto))
+        {
+            args.RoleName = jobProto.LocalizedName;
+        }
+        else if (_mind.TryGetMind(member, out var mindId, out _) &&
+                 _job.MindTryGetJobName(mindId, out var name))
+        {
+            args.RoleName = name;
+        }
     }
 
     private void OnSquadMemberEnteredCryo(Entity<SquadMemberComponent> ent, ref EnteredCryostorageEvent args)
@@ -442,16 +463,6 @@ public sealed class SquadSystem : EntitySystem
         var grant = EnsureComp<SquadGrantAccessComponent>(marine);
         grant.AccessLevels = team.Comp.AccessLevels;
 
-        if (_prototypes.TryIndex(job, out var jobProto))
-        {
-            grant.RoleName = $"{Name(team)} {jobProto.LocalizedName}";
-        }
-        else if (_mind.TryGetMind(marine, out var mindId, out _) &&
-                 _job.MindTryGetJobName(mindId, out var name))
-        {
-            MarineSetTitle(marine, $"{Name(team)} {name}");
-        }
-
         Dirty(marine, grant);
 
         team.Comp.Members.Add(marine);
@@ -476,16 +487,21 @@ public sealed class SquadSystem : EntitySystem
         if (Prototype(team)?.ID is { } squadProto)
             _appearance.SetData(marine, SquadVisuals.Squad, squadProto);
 
+        UpdateSquadTitle(marine);
+
         // Search for any squad-specific items to map
         SearchForMappedItems((marine, member), member.Squad.Value);
     }
 
-    private void MarineSetTitle(EntityUid marine, string title)
+    public void UpdateSquadTitle(EntityUid marine)
     {
+        var ev = new GetMarineSquadNameEvent();
+        RaiseLocalEvent(marine, ref ev);
+
         foreach (var item in _inventory.GetHandOrInventoryEntities(marine))
         {
             if (TryComp(item, out IdCardComponent? idCard))
-                _id.TryChangeJobTitle(item, title, idCard);
+                _id.TryChangeJobTitle(item, $"{ev.SquadName} {ev.RoleName}", idCard);
         }
     }
 
@@ -674,7 +690,7 @@ public sealed class SquadSystem : EntitySystem
         while (query.MoveNext(out var uid, out var grant))
         {
             if (grant.RoleName != null)
-                MarineSetTitle(uid, grant.RoleName);
+                UpdateSquadTitle(uid);
 
             foreach (var item in _inventory.GetHandOrInventoryEntities(uid))
             {
