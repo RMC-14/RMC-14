@@ -1,0 +1,9 @@
+- type: body
+  id: Xenomorph
+  name: "xenomorph"
+  root: head
+  slots:
+    head:
+      part: RMCHeadXeno
+      organs:
+        heart: RMCOrganXenoHeart

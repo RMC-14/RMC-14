@@ -139,6 +139,8 @@
     - CMXenoHivelordResinWhisperer
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.2
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT2
 
 - type: entity
   parent: CMXenoHivelordBase

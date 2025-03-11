@@ -185,9 +185,14 @@
         density: 185
         layer:
         - BulletImpassable
+  - type: CMSurgeryTarget
+  - type: Body
+    prototype: Xenomorph
   - type: Xeno
   - type: UserInterface
     interfaces:
+      enum.CMSurgeryUIKey.Key:
+        type: CMSurgeryBui
       enum.XenoEvolutionUIKey.Key:
         type: XenoEvolutionBui
       enum.XenoDevolveUIKey.Key:
