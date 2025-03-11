@@ -420,7 +420,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             return;
         }
 
-        tracked.Comp.Icon = mapBlipOverride ?? mapBlip;
+        tracked.Comp.Icon = mapBlipOverride ?? jobProto.MinimapIcon;
         tracked.Comp.Background = jobProto.MinimapBackground;
         UpdateSquadBackground(tracked);
 
