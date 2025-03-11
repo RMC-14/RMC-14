@@ -51,10 +51,6 @@
             <Label Name="RecoverCorpsesLabel" Access="Public" />
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
-            <RichTextLabel Text="[color=#5B88B0]Dissect corpses:[/color]" MinWidth="200" />
-            <Label Name="DissectCorpsesLabel" Access="Public" />
-        </BoxContainer>
-        <BoxContainer Orientation="Horizontal">
             <RichTextLabel Text="[color=#5B88B0]Colony communications:[/color]" MinWidth="200" />
             <Label Name="ColonyCommunicationsLabel" Access="Public" />
         </BoxContainer>

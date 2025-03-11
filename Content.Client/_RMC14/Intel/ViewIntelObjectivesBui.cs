@@ -36,7 +36,6 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
         // _window.AnalyzeChemicalsLabel.Text = $"{tree.AnalyzeChemicals} / \u221e";
         _window.RescueSurvivorsLabel.Text = $"{tree.RescueSurvivors} / \u221e";
         _window.RecoverCorpsesLabel.Text = $"{tree.RecoverCorpses} / \u221e";
-        _window.DissectCorpsesLabel.Text = $"{tree.DissectCorpses} / \u221e";
         _window.ColonyCommunicationsLabel.Text = tree.ColonyCommunications ? "Online" : "Offline";
         _window.ColonyPowerLabel.Text = tree.ColonyPower ? "Online" : "Offline";
 
