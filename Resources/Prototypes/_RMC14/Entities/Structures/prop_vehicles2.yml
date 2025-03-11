@@ -23,6 +23,7 @@
     noRot: true
     state: crane
   - type: Clickable
+  - type: DeleteOnExplosion
   - type: InteractionOutline
   - type: Damageable
     damageContainer: Inorganic
@@ -31,11 +32,13 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 3000
+        damage: 3000 #For Parity sake this value can just be removed since vehicles on 13 dev enviro just get destroyed by explosions
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: RequireProjectileTarget
+  - type: Corrodible #Tried as drone on 13 dev enviro unable to acid those fellas
+    isCorrodible: false
 
 #suffix: WeYa, Destroyed, Flipped
 - type: entity
