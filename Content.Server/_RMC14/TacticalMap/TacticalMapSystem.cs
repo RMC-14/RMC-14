@@ -24,6 +24,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.TacticalMap;
 
@@ -398,9 +399,13 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void UpdateIcon(Entity<ActiveTacticalMapTrackedComponent> tracked)
     {
+        SpriteSpecifier.Rsi? mapBlipOverride = null;
+        if (TryComp<MapBlipIconOverrideComponent>(tracked, out var mapBlipOverrideComp) && mapBlipOverrideComp.Icon != null)
+            mapBlipOverride = mapBlipOverrideComp.Icon;
+
         if (_tacticalMapIconQuery.TryComp(tracked, out var iconComp))
         {
-            tracked.Comp.Icon = iconComp.Icon;
+            tracked.Comp.Icon = mapBlipOverride ?? iconComp.Icon;
             tracked.Comp.Background = iconComp.Background;
 
             UpdateSquadBackground(tracked);
@@ -415,12 +420,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             return;
         }
 
-        var mapBlip = jobProto.MinimapIcon;
-
-        if (TryComp<MapBlipIconOverrideComponent>(tracked, out var mapBlipOverride) && mapBlipOverride.Icon != null)
-            mapBlip = mapBlipOverride.Icon;
-
-        tracked.Comp.Icon = mapBlip;
+        tracked.Comp.Icon = mapBlipOverride ?? mapBlip;
         tracked.Comp.Background = jobProto.MinimapBackground;
         UpdateSquadBackground(tracked);
 
