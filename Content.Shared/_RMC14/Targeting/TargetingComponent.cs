@@ -54,10 +54,4 @@ public sealed partial class TargetingComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public float AlphaMultiplier = 1f;
-
-    /// <summary>
-    ///     If the laser alpha should be based on how long the targeting has lasted.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool GradualAlpha;
 }

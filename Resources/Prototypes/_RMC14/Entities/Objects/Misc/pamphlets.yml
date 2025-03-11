@@ -65,10 +65,12 @@
   id: CMPamphletSpotter
   name: spotter instructional pamphlet
   description: A pamphlet used to quickly impart vital knowledge. This one has the image of a pair of binoculars on it.
-  suffix: NOT IMPLEMENTED
   components:
   - type: Sprite
     state: pamphlet_spotter
+  - type: SkillPamphlet
+    addComps:
+    - type: Spotter
 
 # gives powerloader skill / bypasses limit
 - type: entity

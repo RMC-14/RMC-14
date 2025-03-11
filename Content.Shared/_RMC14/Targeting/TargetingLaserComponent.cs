@@ -6,18 +6,6 @@ namespace Content.Shared._RMC14.Targeting;
 public sealed partial class TargetingLaserComponent : Component
 {
     /// <summary>
-    ///     The target of the laser
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public EntityUid Target;
-
-    /// <summary>
-    ///     The entity where the laser is originating from
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public EntityUid Origin;
-
-    /// <summary>
     ///     If the laser is supposed to be visible.
     /// </summary>
     [DataField, AutoNetworkedField]

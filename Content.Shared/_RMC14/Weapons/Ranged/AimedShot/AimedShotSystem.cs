@@ -87,10 +87,6 @@ public sealed class AimedShotSystem : EntitySystem
 
         args.Handled = true;
 
-        // Don't calculate clientside
-        if(_net.IsClient )
-            return;
-
         // Add time to the duration of the aimed shot per tile of distance to the target.
         var laserDuration =  (float)(ent.Comp.AimDuration + (_transform.GetMoverCoordinates(args.Target).Position - _transform.GetMoverCoordinates(args.Performer).Position).Length() * ent.Comp.AimDistanceDifficulty);
         var appliedSpotterBuff = false;
@@ -118,12 +114,11 @@ public sealed class AimedShotSystem : EntitySystem
             if (TryComp(ent, out TargetingLaserComponent? targetingLaser))
             {
                 targetingLaser.ShowLaser = toggleLaser.Active;
+                Dirty(ent, targetingLaser);
             }
         }
 
         laserDuration *= aimMultiplier;
-
-        Dirty(ent);
 
         _targeting.Target(ent.Owner, args.Performer, args.Target, laserDuration, TargetedEffects.Targeted);
     }

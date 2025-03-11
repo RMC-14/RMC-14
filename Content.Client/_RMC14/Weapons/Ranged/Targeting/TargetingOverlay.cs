@@ -20,7 +20,7 @@ public sealed class TargetingOverlay : Overlay
         var query = _entManager.EntityQueryEnumerator<TargetedComponent>();
         var xformQuery = _entManager.GetEntityQuery<TransformComponent>();
         var targetingLaserQuery = _entManager.GetEntityQuery<TargetingLaserComponent>();
-        var activeTargetingLaserQuery = _entManager.GetEntityQuery<TargetingComponent>();
+        var targetingQuery = _entManager.GetEntityQuery<TargetingComponent>();
         var worldHandle = args.WorldHandle;
         var xformSystem = _entManager.System<SharedTransformSystem>();
 
@@ -28,7 +28,7 @@ public sealed class TargetingOverlay : Overlay
         {
             foreach (var gun in targeted.TargetedBy)
             {
-                if (!targetingLaserQuery.TryGetComponent(gun, out var targeting) || !targeting.ShowLaser)
+                if (!targetingLaserQuery.TryGetComponent(gun, out var targetingLaser) || !targetingLaser.ShowLaser)
                     continue;
 
                 if (!xformQuery.TryGetComponent(gun, out var gunXform) ||
@@ -51,13 +51,11 @@ public sealed class TargetingOverlay : Overlay
                 var box = new Box2(-Width, -length, Width, length);
                 var rotated = new Box2Rotated(box.Translated(midPoint), angle, midPoint);
 
-                var color = targeting.LaserColor;
-                var alpha = 0f;
+                var color = targetingLaser.LaserColor;
+                var alpha = targetingLaser.LaserAlpha;
 
-                if (activeTargetingLaserQuery.TryGetComponent(gun, out var activeLaser))
-                {
-                    alpha = targeting.LaserAlpha * activeLaser.AlphaMultiplier;
-                }
+                if (targetingQuery.TryGetComponent(gun, out var targeting) && targetingLaser.GradualAlpha)
+                    alpha *= targeting.AlphaMultiplier;
 
                 worldHandle.DrawRect(rotated, color.WithAlpha(alpha));
             }

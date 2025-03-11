@@ -18,11 +18,15 @@
     - id: CMMagazinePistolMK80
       amount: 2
     - id: CMM96SSniperRifle
+    - id: RMCKitSpotter
 #    - id: CMFacepaintSniper
-#    - id: CMSpotter
   - type: CMChangeUserOnVend
     addComponents:
     - type: SniperWhitelist
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCKitSpotter
 
 - type: entity
   parent: RMCBaseEquipmentCase
@@ -168,6 +172,11 @@
     sprite: _RMC14/Objects/Storage/procase_mini.rsi
   - type: Icon
     sprite: _RMC14/Objects/Storage/procase_mini.rsi
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: loader
+      map: [ label ]
   - type: StorageFill
     contents:
     - id: RMCArmorM3TDemo
@@ -189,5 +198,38 @@
     tags:
     - RMCKitLoader
 
+- type: entity
+  parent: RMCKitBase
+  id: RMCKitSpotter
+  name: spotter kit
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,11,1
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: spotter
+      map: [ label ]
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+  - type: StorageFill
+    contents:
+    - id: CMArmorM45
+    - id: CMArmorHelmetM45
+    - id: CMGlassesM42ScoutSight
+    - id: CMBackpackSniper
+    - id: RMCLaserDesignatorSpotter
+    - id: CMPamphletSpotter
+  - type: Tag
+    tags:
+    - RMCKitSpotter
+
 - type: Tag
   id: RMCKitLoader
+
+- type: Tag
+  id: RMCKitSpotter

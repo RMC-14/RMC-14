@@ -105,7 +105,7 @@ public sealed class TargetingSystem : EntitySystem
     ///     Apply the <see cref="TargetingComponent"/> to the entity creating the laser.
     ///     Apply the <see cref="TargetedComponent"/> to the entity being targeted.
     /// </summary>
-    public bool Target(EntityUid equipment, EntityUid user, EntityUid target, float laserDuration, TargetedEffects targetedEffect = TargetedEffects.None)
+    public void Target(EntityUid equipment, EntityUid user, EntityUid target, float laserDuration, TargetedEffects targetedEffect = TargetedEffects.None)
     {
         var targeted = EnsureComp<TargetedComponent>(target);
         targeted.TargetedBy.Add(equipment);
@@ -122,8 +122,6 @@ public sealed class TargetingSystem : EntitySystem
         Dirty(equipment, active);
 
         UpdateTargetMarker(target, targetedEffect);
-
-        return true;
     }
 
     /// <summary>
@@ -142,30 +140,26 @@ public sealed class TargetingSystem : EntitySystem
     public override void Update(float frameTime)
     {
         var query = EntityQueryEnumerator<TargetingComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var laser, out var xform))
+        while (query.MoveNext(out var uid, out var targeting, out var xform))
         {
             var laserNumber = 0;
-            while (laserNumber < laser.LaserDurations.Count)
+            while (laserNumber < targeting.LaserDurations.Count)
             {
-                laser.LaserDurations[laserNumber] -= frameTime;
+                targeting.LaserDurations[laserNumber] -= frameTime;
 
-                // Adjust alpha of the laser based on how close it is to finishing.
-                if (laser.GradualAlpha)
-                {
-                    laser.AlphaMultiplier = 1 - laser.LaserDurations[laserNumber] / laser.OriginalLaserDurations[laserNumber];
-                }
+                // Adjust alpha of the laser based on how close it is to finish targeting.
+                targeting.AlphaMultiplier = 1 - targeting.LaserDurations[laserNumber] / targeting.OriginalLaserDurations[laserNumber];
+                Dirty(uid,targeting);
 
-                Dirty(uid,laser);
                 // Raise an event and stop targeting if the targeting successfully finishes.
-                if (laser.LaserDurations[laserNumber] <= 0)
+                if (targeting.LaserDurations[laserNumber] <= 0)
                 {
-                    var ev = new TargetingFinishedEvent(laser.User, Transform(laser.Targets[laserNumber]).Coordinates, laser.Targets[laserNumber]);
+                    var ev = new TargetingFinishedEvent(targeting.User, Transform(targeting.Targets[laserNumber]).Coordinates, targeting.Targets[laserNumber]);
                     RaiseLocalEvent(uid, ref ev);
 
-
-                    StopTargeting((uid,laser), laser.Targets[laserNumber]);
-                    laser.LaserDurations.RemoveAt(laserNumber);
-                    laser.OriginalLaserDurations.RemoveAt(laserNumber);
+                    StopTargeting((uid,targeting), targeting.Targets[laserNumber]);
+                    targeting.LaserDurations.RemoveAt(laserNumber);
+                    targeting.OriginalLaserDurations.RemoveAt(laserNumber);
                     laserNumber = 0;
                 }
 
@@ -173,13 +167,13 @@ public sealed class TargetingSystem : EntitySystem
             }
 
             // Remove the active component and raise an event if the user moves.
-            if (!_transform.InRange(Transform(xform.ParentUid).Coordinates, laser.Origin, 0.1f))
+            if (!_transform.InRange(Transform(xform.ParentUid).Coordinates, targeting.Origin, 0.1f))
             {
                 var ev = new TargetingCancelledEvent();
                 RaiseLocalEvent(uid, ref ev);
 
-                laser.LaserDurations.Clear();
-                laser.OriginalLaserDurations.Clear();
+                targeting.LaserDurations.Clear();
+                targeting.OriginalLaserDurations.Clear();
                 RemComp<TargetingComponent>(uid);
             }
         }

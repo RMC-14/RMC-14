@@ -35,16 +35,28 @@ public sealed partial class SpottingSystem : EntitySystem
     /// </summary>
     private void OnSpotTarget(Entity<SpottingComponent> ent, ref SpotTargetActionEvent args)
     {
-        if(!TryComp(args.Target, out SpottableComponent? spottable))
+        var user = args.Performer;
+        var target = args.Target;
+
+        if(!HasComp<SpottableComponent>(args.Target))
             return;
+
+        // Only allow entities with the SpotterComponent to use the spotting function.
+        if(!HasComp<SpotterComponent>(user))
+        {
+            var message = Loc.GetString("rmc-action-popup-spotting-user-no-skill", ("rangefinder", ent));
+            _popup.PopupClient(message, user, user);
+            return;
+        }
 
         // No laser if the user is invisible.
         if (TryComp(args.Performer, out EntityTurnInvisibleComponent? invisible) &&
             TryComp(ent, out TargetingLaserComponent? targeting))
+        {
             targeting.ShowLaser = !invisible.Enabled;
+            Dirty(ent, targeting);
+        }
 
-        var user = args.Performer;
-        var target = args.Target;
 
         // Cancel the action if the entity isn't held.
         if (!_hands.TryGetActiveItem(user, out var heldItem) || heldItem != ent)
@@ -54,8 +66,7 @@ public sealed partial class SpottingSystem : EntitySystem
             return;
         }
 
-        if(!_targeting.Target(ent, user, target, ent.Comp.SpottingDuration,TargetedEffects.Spotted))
-            return;
+        _targeting.Target(ent, user, target, ent.Comp.SpottingDuration, TargetedEffects.Spotted);
 
         _audio.PlayPredicted(ent.Comp.SpottingSound, ent, user);
         _appearance.SetData(ent, RangefinderLayers.Layer, RangefinderMode.Spotter);

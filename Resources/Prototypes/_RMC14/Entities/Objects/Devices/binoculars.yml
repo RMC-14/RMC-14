@@ -118,6 +118,7 @@
   - type: TargetingLaser
     laserColor: orange
     laserAlpha: 0.3
+    gradualAlpha: false
 
 - type: entity
   parent: RMCLaserDesignator
