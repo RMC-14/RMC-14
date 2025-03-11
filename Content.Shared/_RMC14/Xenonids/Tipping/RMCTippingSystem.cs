@@ -3,6 +3,10 @@ using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Content.Shared.Rotation;
+using Content.Shared.Standing;
+using Content.Shared.StatusEffect;
+using Content.Shared.Stunnable;
 
 namespace Content.Shared._RMC14.Xenonids.Tipping;
 
@@ -10,6 +14,10 @@ public sealed class RMCTippingSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly StandingStateSystem _standingState = default!;
+    [Dependency] private readonly StatusEffectsSystem _statusEffect = default!;
+    [Dependency] private readonly SharedRotationVisualsSystem _rotationVisuals = default!;
+
 
     public override void Initialize()
     {
@@ -71,7 +79,18 @@ public sealed class RMCTippingSystem : EntitySystem
         if (args.Cancelled || args.Handled)
             return;
 
+        var time = TimeSpan.FromMinutes(5);
+
         ent.Comp.IsTipped = true;
+        _standingState.Down(ent.Owner);
+        var comp = AddComp<RotationVisualsComponent>(ent.Owner);
+        comp.VerticalRotation = 120;
+        _rotationVisuals.SetHorizontalAngle(ent.Owner, 30);
+        comp.HorizontalRotation = 30;
+        _rotationVisuals.SetHorizontalAngle(ent.Owner, 30);
+        Log.Debug("after down state");
+
+        _statusEffect.TryAddStatusEffect<KnockedDownComponent>(ent.Owner, "KnockedDown", time, true);
 
         _popup.PopupClient(Loc.GetString("rmc-xeno-construction-vendor-tip-success", ("vendorName", ent.Owner)), args.User, args.User);
     }
