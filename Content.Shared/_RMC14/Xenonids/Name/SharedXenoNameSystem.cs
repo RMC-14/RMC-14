@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Content.Shared._RMC14.CCVar;
+﻿using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
@@ -75,27 +74,17 @@ public abstract class SharedXenoNameSystem : EntitySystem
 
         if (HasComp<XenoOmitNumberComponent>(ent))
         {
-            Log.Debug($"{rank}");
-            if (TryComp(ent.Owner, out XenoNameComponent? queenName) && queenName.QueenName) //Checks for queen name toggle and Empress variant
-
+            if (TryComp(ent.Owner, out XenoNameComponent? queenName) && queenName.QueenName)
             {
                 args.AddModifier("rmc-xeno-name", extraArgs: [("rank", rank), ("prefix", prefix), ("postfix", postfix)]);
-                Log.Debug($"{rank}");
             }
             else
             {
-                if (rank == "Prime")
-                {
-                    Log.Debug($"{rank}");
-                    args.AddModifier("rmc-xeno-name-empress", extraArgs: [("rank", rank)]);
-                }
-                Log.Debug($"{rank}");
                 args.AddModifier("rmc-xeno-name-queen", extraArgs: [("rank", rank)]);
             }
         }
         else
         {
-            Log.Debug($"{rank}");
             if (postfix.Length > 0)
                 postfix = $"-{postfix}";
 
