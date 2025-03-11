@@ -2,7 +2,7 @@
   id: RMCOrganXenoHeart
   parent: BaseItem
   name: acidic heart
-  description: Acidic heart removed from a xenomorph. It spews droplets of acid every so often.
+  description: Acidic heart removed from a xenonid. It spews droplets of acid every so often.
   components:
   - type: Heart
   - type: Corrodible
