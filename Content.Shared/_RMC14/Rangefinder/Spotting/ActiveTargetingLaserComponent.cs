@@ -4,7 +4,8 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Rangefinder.Spotting;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState()]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(TargetingSystem))]
 public sealed partial class ActiveTargetingLaserComponent : Component
 {
     /// <summary>
@@ -44,10 +45,16 @@ public sealed partial class ActiveTargetingLaserComponent : Component
     public EntityCoordinates Origin;
 
     /// <summary>
-    ///     The duration of the laser
+    ///     The remaining duration of the laser
     /// </summary>
     [DataField, AutoNetworkedField]
-    public List<double> LaserDurations = new();
+    public List<float> LaserDurations = new();
+
+    /// <summary>
+    ///     The original duration of the laser
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public List<float> OriginalLaserDurations = new();
 
     /// <summary>
     ///     The visualiser to enable on the entity being targeted by the laser
@@ -59,6 +66,12 @@ public sealed partial class ActiveTargetingLaserComponent : Component
     ///     If the laser should be visible
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool ShowLaser;
+    public float AlphaMultiplier = 1f;
+
+    /// <summary>
+    ///     If the laser alpha should be based on how long the aiming has lasted.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool GradualAlpha;
 }
 

@@ -128,6 +128,9 @@ public sealed class TargetingSystem : EntitySystem
     /// </summary>
     private void UpdateLaser(Entity<ActiveTargetingLaserComponent> ent, Entity<TargetedComponent> target)
     {
+
+
+        return;
         if (_net.IsClient)
             return;
 
@@ -145,7 +148,7 @@ public sealed class TargetingSystem : EntitySystem
     ///     Apply the <see cref="TargetedComponent"/> to the entity being targeted.
     ///     Create a line in between the user and the target, then enable the given visualiser on the targeted entity.
     /// </summary>
-    public bool TryLaserTarget(EntityUid equipment, EntityUid user, EntityUid target, double laserDuration, EntProtoId laserProto, bool showLaser = true, TargetedEffects targetedEffect = TargetedEffects.None)
+    public bool TryLaserTarget(EntityUid equipment, EntityUid user, EntityUid target, float laserDuration, EntProtoId laserProto, bool showLaser = true, TargetedEffects targetedEffect = TargetedEffects.None)
     {
         var targeted = EnsureComp<TargetedComponent>(target);
         targeted.TargetedBy.Add(equipment);
@@ -158,7 +161,7 @@ public sealed class TargetingSystem : EntitySystem
         active.User = user;
         active.LaserType = targetedEffect;
         active.LaserDurations.Add(laserDuration);
-        active.ShowLaser = showLaser;
+        active.OriginalLaserDurations.Add(laserDuration);
 
         Dirty(equipment, active);
         Dirty(target, targeted);
@@ -188,35 +191,32 @@ public sealed class TargetingSystem : EntitySystem
         var query = EntityQueryEnumerator<ActiveTargetingLaserComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var laser, out var xform))
         {
-            var iterator = 0;
-            while (iterator < laser.LaserDurations.Count)
+            var laserNumber = 0;
+            while (laserNumber < laser.LaserDurations.Count)
             {
-                laser.LaserDurations[iterator] -= frameTime;
+                laser.LaserDurations[laserNumber] -= frameTime;
 
-                // Only update the laser if it's actually supposed to be visible.
-                if (laser.ShowLaser)
+                // Adjust alpha of the laser based on how close it is to finishing.
+                if (laser.GradualAlpha)
                 {
-                    if(!TryComp(laser.Targets[iterator], out TargetedComponent? targeted))
-                        return;
-
-                    UpdateLaser((uid, laser), (laser.Targets[iterator], targeted));
+                    laser.AlphaMultiplier = 1 - laser.LaserDurations[laserNumber] / laser.OriginalLaserDurations[laserNumber];
                 }
-
 
                 Dirty(uid,laser);
                 // Raise an event and remove the active component if the aiming successfully finishes.
-                if (laser.LaserDurations[iterator] <= 0)
+                if (laser.LaserDurations[laserNumber] <= 0)
                 {
-                    var ev = new AimingFinishedEvent(laser.User, Transform(laser.Targets[iterator]).Coordinates, laser.Targets[iterator]);
+                    var ev = new AimingFinishedEvent(laser.User, Transform(laser.Targets[laserNumber]).Coordinates, laser.Targets[laserNumber]);
                     RaiseLocalEvent(uid, ref ev);
 
 
-                    StopTargeting((uid,laser), laser.Targets[iterator]);
-                    laser.LaserDurations.RemoveAt(iterator);
-                    iterator = 0;
+                    StopTargeting((uid,laser), laser.Targets[laserNumber]);
+                    laser.LaserDurations.RemoveAt(laserNumber);
+                    laser.OriginalLaserDurations.RemoveAt(laserNumber);
+                    laserNumber = 0;
                 }
 
-                iterator++;
+                laserNumber++;
             }
 
             // Remove the active component and raise an event if the user moves.
@@ -226,6 +226,7 @@ public sealed class TargetingSystem : EntitySystem
                 RaiseLocalEvent(uid, ref ev);
 
                 laser.LaserDurations.Clear();
+                laser.OriginalLaserDurations.Clear();
                 RemComp<ActiveTargetingLaserComponent>(uid);
             }
         }

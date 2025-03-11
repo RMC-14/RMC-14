@@ -42,5 +42,5 @@ public sealed partial class SpottingComponent : Component
     ///     How long the spotting should last if not interrupted.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public double SpottingDuration = 10;
+    public float SpottingDuration = 10f;
 }

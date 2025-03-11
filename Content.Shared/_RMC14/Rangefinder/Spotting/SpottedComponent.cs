@@ -10,7 +10,7 @@ public sealed partial class SpottedComponent : Component
     ///     The duration multiplier for any aimed shots done at an entity with this component.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public double AimDurationMultiplier = 0.5;
+    public float AimDurationMultiplier = 0.5f;
 
     /// <summary>
     ///     The entity spotting this target.

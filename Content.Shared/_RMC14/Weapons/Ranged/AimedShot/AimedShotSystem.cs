@@ -59,8 +59,6 @@ public sealed class AimedShotSystem : EntitySystem
         if (args.Handled)
             return;
 
-        args.Handled = true;
-
         // Cancel the action if the user doesn't have the correct whitelist
         if (!_whitelist.IsValid(ent.Comp.Whitelist, args.Performer) && ent.Comp.Whitelist.Components != null)
         {
@@ -86,14 +84,16 @@ public sealed class AimedShotSystem : EntitySystem
         // Do play the sound clientside
         _audio.PlayPredicted(ent.Comp.AimingSound, ent, args.Performer);
 
+        args.Handled = true;
+
         // Don't calculate clientside
         if(_net.IsClient )
             return;
 
         // Add time to the duration of the aimed shot per tile of distance to the target.
-        var laserDuration =  ent.Comp.AimDuration + (_transform.GetMoverCoordinates(args.Target).Position - _transform.GetMoverCoordinates(args.Performer).Position).Length() * ent.Comp.AimDistanceDifficulty;
+        var laserDuration =  (float)(ent.Comp.AimDuration + (_transform.GetMoverCoordinates(args.Target).Position - _transform.GetMoverCoordinates(args.Performer).Position).Length() * ent.Comp.AimDistanceDifficulty);
         var appliedSpotterBuff = false;
-        var aimMultiplier = 1.0;
+        var aimMultiplier = 1f;
 
         // Apply the spotted multiplier if the target is spotted.
         if (TryComp(args.Target, out SpottedComponent? spotted))

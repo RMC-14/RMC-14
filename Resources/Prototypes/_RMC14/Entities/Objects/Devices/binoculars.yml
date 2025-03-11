@@ -115,6 +115,9 @@
   - type: Corrodible
     isCorrodible: false
   - type: Spotting
+  - type: TargetingLaser
+    laserColor: orange
+    laserAlpha: 0.3
 
 - type: entity
   parent: RMCLaserDesignator

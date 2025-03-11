@@ -6,6 +6,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Weapons.Ranged.AimedShot;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(AimedShotSystem))]
 public sealed partial class AimedShotComponent : Component
 {
     /// <summary>
@@ -54,7 +55,7 @@ public sealed partial class AimedShotComponent : Component
     ///     The base aiming duration.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public double AimDuration = 1.25;
+    public float AimDuration = 1.25f;
 
     /// <summary>
     ///     The amount of time in seconds to be added to the aim duration for every tile of distance to the target.
