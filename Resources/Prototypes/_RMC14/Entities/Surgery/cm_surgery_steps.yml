@@ -205,7 +205,7 @@
 - type: entity
   parent: CMSurgeryStepBase
   id: RMCSurgeryRemoveXenoOrgan
-  name: Remove xenomorph organ
+  name: Remove xenonid organ
   components:
   - type: CMSurgeryStep
     skill: 2

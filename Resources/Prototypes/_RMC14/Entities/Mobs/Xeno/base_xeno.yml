@@ -187,7 +187,7 @@
         - BulletImpassable
   - type: CMSurgeryTarget
   - type: Body
-    prototype: Xenomorph
+    prototype: Xenonid
   - type: Xeno
   - type: UserInterface
     interfaces:
