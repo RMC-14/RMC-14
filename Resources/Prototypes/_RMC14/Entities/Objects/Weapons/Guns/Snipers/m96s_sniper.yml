@@ -273,7 +273,7 @@
   - type: AimedShotEffect
     bonusDamageMultiplier: 1
     superSlowDuration: 7
-  - type: AreaDamage
+  - type: RMCAreaDamage
     damageArea: 2.5
     falloffRange: 1.5
 

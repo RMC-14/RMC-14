@@ -1,6 +1,6 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._RMC14.Rangefinder.Spotting;
+namespace Content.Shared._RMC14.Targeting;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState()]
 public sealed partial class TargetingLaserComponent : Component

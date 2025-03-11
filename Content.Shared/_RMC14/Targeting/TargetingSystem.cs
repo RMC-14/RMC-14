@@ -1,12 +1,13 @@
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Line;
+using Content.Shared._RMC14.Rangefinder.Spotting;
 using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._RMC14.Rangefinder.Spotting;
+namespace Content.Shared._RMC14.Targeting;
 
 public sealed class TargetingSystem : EntitySystem
 {
@@ -17,19 +18,19 @@ public sealed class TargetingSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<ActiveTargetingLaserComponent, ComponentRemove>(OnActiveTargetingLaserRemoved);
-        SubscribeLocalEvent<ActiveTargetingLaserComponent, DroppedEvent>(OnActiveTargetingLaserDropped);
-        SubscribeLocalEvent<ActiveTargetingLaserComponent, RMCDroppedEvent>(OnActiveTargetingLaserDropped);
-        SubscribeLocalEvent<ActiveTargetingLaserComponent, GotUnequippedHandEvent>(OnActiveTargetingLaserDropped);
-        SubscribeLocalEvent<ActiveTargetingLaserComponent, HandDeselectedEvent>(OnActiveTargetingLaserDropped);
+        SubscribeLocalEvent<TargetingComponent, ComponentRemove>(OnActiveTargetingLaserRemoved);
+        SubscribeLocalEvent<TargetingComponent, DroppedEvent>(OnActiveTargetingLaserDropped);
+        SubscribeLocalEvent<TargetingComponent, RMCDroppedEvent>(OnActiveTargetingLaserDropped);
+        SubscribeLocalEvent<TargetingComponent, GotUnequippedHandEvent>(OnActiveTargetingLaserDropped);
+        SubscribeLocalEvent<TargetingComponent, HandDeselectedEvent>(OnActiveTargetingLaserDropped);
 
         //SubscribeLocalEvent<TargetedComponent, MoveEvent>(OnTargetedMove);
     }
 
     /// <summary>
-    ///     Remove any lasers if the <see cref="ActiveTargetingLaserComponent"/> is being removed from an entity.
+    ///     Remove any lasers if the <see cref="TargetingComponent"/> is being removed from an entity.
     /// </summary>
-    private void OnActiveTargetingLaserRemoved<T>(Entity<ActiveTargetingLaserComponent> targetingLaser, ref T args)
+    private void OnActiveTargetingLaserRemoved<T>(Entity<TargetingComponent> targetingLaser, ref T args)
     {
         if (_net.IsClient)
             return;
@@ -47,7 +48,7 @@ public sealed class TargetingSystem : EntitySystem
     {
         foreach (var targeter in ent.Comp.TargetedBy)
         {
-            if(!TryComp(targeter, out ActiveTargetingLaserComponent? activelaser))
+            if(!TryComp(targeter, out TargetingComponent? activelaser))
                 return;
 
             UpdateLaser((targeter,activelaser), ent);
@@ -57,7 +58,7 @@ public sealed class TargetingSystem : EntitySystem
     /// <summary>
     ///     Remove any lasers originating from the entity.
     /// </summary>
-    private void OnActiveTargetingLaserDropped<T>(Entity<ActiveTargetingLaserComponent> targetingLaser, ref T args)
+    private void OnActiveTargetingLaserDropped<T>(Entity<TargetingComponent> targetingLaser, ref T args)
     {
         var ev = new AimingCancelledEvent();
         RaiseLocalEvent(targetingLaser, ref ev);
@@ -71,7 +72,7 @@ public sealed class TargetingSystem : EntitySystem
     /// <summary>
     ///     Remove the laser and replace targeting effects originating from the given entity.
     /// </summary>
-    private void StopTargeting(Entity<ActiveTargetingLaserComponent> targetingLaser, EntityUid target)
+    private void StopTargeting(Entity<TargetingComponent> targetingLaser, EntityUid target)
     {
         if (!TryComp(target, out TargetedComponent? targeted))
             return;
@@ -96,7 +97,7 @@ public sealed class TargetingSystem : EntitySystem
         // Check all active lasers currently aiming at the target
         foreach (var activeLaser in targeted.TargetedBy)
         {
-            if (!TryComp(activeLaser, out ActiveTargetingLaserComponent? comp))
+            if (!TryComp(activeLaser, out TargetingComponent? comp))
                 continue;
 
             if (comp.LaserType > highestMark)
@@ -120,13 +121,13 @@ public sealed class TargetingSystem : EntitySystem
         RemComp<TargetedComponent>(target);
 
         if(targetingLaser.Comp.Targets.Count == 0)
-            RemComp<ActiveTargetingLaserComponent>(targetingLaser);
+            RemComp<TargetingComponent>(targetingLaser);
     }
 
     /// <summary>
     ///     Remove any old beams and replace it with a new one.
     /// </summary>
-    private void UpdateLaser(Entity<ActiveTargetingLaserComponent> ent, Entity<TargetedComponent> target)
+    private void UpdateLaser(Entity<TargetingComponent> ent, Entity<TargetedComponent> target)
     {
 
 
@@ -144,7 +145,7 @@ public sealed class TargetingSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Apply the <see cref="ActiveTargetingLaserComponent"/> to the entity creating the laser.
+    ///     Apply the <see cref="TargetingComponent"/> to the entity creating the laser.
     ///     Apply the <see cref="TargetedComponent"/> to the entity being targeted.
     ///     Create a line in between the user and the target, then enable the given visualiser on the targeted entity.
     /// </summary>
@@ -153,7 +154,7 @@ public sealed class TargetingSystem : EntitySystem
         var targeted = EnsureComp<TargetedComponent>(target);
         targeted.TargetedBy.Add(equipment);
 
-        var active = EnsureComp<ActiveTargetingLaserComponent>(equipment);
+        var active = EnsureComp<TargetingComponent>(equipment);
         active.Source = equipment;
         active.Targets.Add(target);
         active.LaserProto = laserProto;
@@ -188,7 +189,7 @@ public sealed class TargetingSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        var query = EntityQueryEnumerator<ActiveTargetingLaserComponent, TransformComponent>();
+        var query = EntityQueryEnumerator<TargetingComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var laser, out var xform))
         {
             var laserNumber = 0;
@@ -227,7 +228,7 @@ public sealed class TargetingSystem : EntitySystem
 
                 laser.LaserDurations.Clear();
                 laser.OriginalLaserDurations.Clear();
-                RemComp<ActiveTargetingLaserComponent>(uid);
+                RemComp<TargetingComponent>(uid);
             }
         }
     }

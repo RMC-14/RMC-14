@@ -1,7 +1,7 @@
-namespace Content.Shared._RMC14.Projectiles.Aimed;
+namespace Content.Shared._RMC14.Projectiles;
 
 [RegisterComponent]
-public sealed partial class AreaDamageComponent : Component
+public sealed partial class RMCAreaDamageComponent : Component
 {
     /// <summary>
     ///     The range in which damage is dealt.

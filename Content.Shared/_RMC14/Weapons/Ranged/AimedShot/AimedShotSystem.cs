@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Projectiles.Aimed;
 using Content.Shared._RMC14.Rangefinder.Spotting;
+using Content.Shared._RMC14.Targeting;
 using Content.Shared._RMC14.Weapons.Ranged.Homing;
 using Content.Shared._RMC14.Weapons.Ranged.Laser;
 using Content.Shared._RMC14.Weapons.Ranged.Whitelist;
@@ -166,12 +167,11 @@ public sealed class AimedShotSystem : EntitySystem
         if (args.Handled)
             return;
 
-        args.Handled = true;
-
         _gunSystem.TryGetGun(ent, out var gun, out var gunComp);
         if(gunComp == null)
             return;
 
+        args.Handled = true;
         ent.Comp.Target = args.Target;
 
         // Enable the ability to shoot when done aiming.

@@ -2,11 +2,11 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared._RMC14.Rangefinder.Spotting;
+namespace Content.Shared._RMC14.Targeting;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(TargetingSystem))]
-public sealed partial class ActiveTargetingLaserComponent : Component
+public sealed partial class TargetingComponent : Component
 {
     /// <summary>
     ///     The entity creating the laser.

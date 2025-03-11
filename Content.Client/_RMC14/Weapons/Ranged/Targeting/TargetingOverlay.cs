@@ -1,4 +1,4 @@
-using Content.Shared._RMC14.Rangefinder.Spotting;
+using Content.Shared._RMC14.Targeting;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
 
@@ -20,7 +20,7 @@ public sealed class TargetingOverlay : Overlay
         var query = _entManager.EntityQueryEnumerator<TargetedComponent>();
         var xformQuery = _entManager.GetEntityQuery<TransformComponent>();
         var targetingLaserQuery = _entManager.GetEntityQuery<TargetingLaserComponent>();
-        var activeTargetingLaserQuery = _entManager.GetEntityQuery<ActiveTargetingLaserComponent>();
+        var activeTargetingLaserQuery = _entManager.GetEntityQuery<TargetingComponent>();
         var worldHandle = args.WorldHandle;
         var xformSystem = _entManager.System<SharedTransformSystem>();
 

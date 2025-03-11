@@ -14,13 +14,13 @@ public sealed class RMCAreaDamageSystem : EntitySystem
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     public override void Initialize()
     {
-        SubscribeLocalEvent<AreaDamageComponent, ProjectileHitEvent>(OnAreaDamageProjectileHit);
+        SubscribeLocalEvent<RMCAreaDamageComponent, ProjectileHitEvent>(OnAreaDamageProjectileHit);
     }
 
     /// <summary>
     ///     Apply damage to entities around the hit target.
     /// </summary>
-    private void OnAreaDamageProjectileHit(Entity<AreaDamageComponent> ent, ref ProjectileHitEvent args)
+    private void OnAreaDamageProjectileHit(Entity<RMCAreaDamageComponent> ent, ref ProjectileHitEvent args)
     {
         var ev = new BeforeAreaDamageEvent(args.Target, args.Damage);
         RaiseLocalEvent(ent, ref ev);
@@ -34,7 +34,7 @@ public sealed class RMCAreaDamageSystem : EntitySystem
     /// <summary>
     ///     Apply damage to entities near a target.
     /// </summary>
-    private void ApplyAreaDamage(EntityUid uid, EntityUid target, DamageSpecifier damage, AreaDamageComponent? areaDamage = null)
+    private void ApplyAreaDamage(EntityUid uid, EntityUid target, DamageSpecifier damage, RMCAreaDamageComponent? areaDamage = null)
     {
         if (!Resolve(uid, ref areaDamage))
             return;
