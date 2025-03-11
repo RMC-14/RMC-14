@@ -106,5 +106,9 @@
   - type: Sprite
     sprite: _RMC14/Objects/CMIDs/provost.rsi
     state: provost
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
   - type: PresetIdCard
     job: CMProvostChiefInspector

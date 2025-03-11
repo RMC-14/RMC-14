@@ -514,8 +514,8 @@
 - type: entity
   parent: CMHeadBeret
   id: RMCProvostCommandBeret
-  name: USCM provost command beret
-  description: A beret with the USCM Military Police insignia emblazoned on it.
+  name: UNMC provost command beret
+  description: A beret with the UNMC Military Police insignia emblazoned on it.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/pvciberet.rsi
