@@ -3,6 +3,7 @@ using Content.Server.Body.Systems;
 using Content.Server.Chat.Systems;
 using Content.Server.Popups;
 using Content.Shared._RMC14.Body.Components;
+using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Medical.Surgery.Conditions;
@@ -29,6 +30,7 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly WoundsSystem _wounds = default!;
+    [Dependency] private readonly IntelSystem _intel = default!;
 
     private readonly List<EntProtoId> _surgeries = new();
 
@@ -163,8 +165,15 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
         {
             QueueDel(entity.Owner);
         }
-        SpawnAtPosition(heart.Item, xform.Coordinates);
+        var item = SpawnAtPosition(heart.Item, xform.Coordinates);
         RemComp<RMCSurgeryXenoHeartComponent>(args.Body);
+
+        if (!TryComp<IntelDissectionComponent>(item, out var dissection))
+            return;
+
+        var tree = _intel.EnsureTechTree();
+        tree.Comp.Tree.DissectCorpses++;
+        _intel.AddPoints(tree, dissection.Value);
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)

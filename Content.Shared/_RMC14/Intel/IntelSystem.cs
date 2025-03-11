@@ -175,8 +175,6 @@ public sealed class IntelSystem : EntitySystem
         SubscribeLocalEvent<IntelReadComponent, ComponentRemove>(OnReadRemove);
         SubscribeLocalEvent<IntelReadComponent, EntityTerminatingEvent>(OnReadRemove);
 
-        SubscribeLocalEvent<IntelDissectionComponent, ComponentStartup>(OnDissected);
-
         SubscribeLocalEvent<IntelConsoleComponent, InteractHandEvent>(OnConsoleInteractHand);
         SubscribeLocalEvent<IntelConsoleComponent, IntelSubmitDoAfterEvent>(OnConsoleSubmitDoAfter);
 
@@ -817,17 +815,6 @@ public sealed class IntelSystem : EntitySystem
             console.Tree = tree.Comp.Tree;
             Dirty(uid, console);
         }
-    }
-
-    private void OnDissected(Entity<IntelDissectionComponent> ent, ref ComponentStartup args)
-    {
-        if (_net.IsClient)
-            return;
-
-        var tree = EnsureTechTree();
-        tree.Comp.Tree.DissectCorpses++;
-        AddPoints(tree, ent.Comp.Value);
-        RemComp<IntelDissectionComponent>(ent);
     }
 
     public override void Update(float frameTime)
