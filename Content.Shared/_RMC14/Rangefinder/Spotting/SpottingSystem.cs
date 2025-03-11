@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Targeting;
 using Content.Shared.Actions;
 using Content.Shared.Hands.EntitySystems;
@@ -30,30 +31,38 @@ public sealed partial class SpottingSystem : EntitySystem
     }
 
     /// <summary>
-    ///    Applies the spotted component to the entity if it's a valid target and tries to draw a laser.
+    ///    Applies the spotted component to the entity if it's a valid target and starts targeting it.
     /// </summary>
     private void OnSpotTarget(Entity<SpottingComponent> ent, ref SpotTargetActionEvent args)
     {
         if(!TryComp(args.Target, out SpottableComponent? spottable))
             return;
 
+        // No laser if the user is invisible.
+        if (TryComp(args.Performer, out EntityTurnInvisibleComponent? invisible) &&
+            TryComp(ent, out TargetingLaserComponent? targeting))
+            targeting.ShowLaser = !invisible.Enabled;
+
+        var user = args.Performer;
+        var target = args.Target;
+
         // Cancel the action if the entity isn't held.
-        if (!_hands.TryGetActiveItem(args.Performer, out var heldItem) || heldItem != ent)
+        if (!_hands.TryGetActiveItem(user, out var heldItem) || heldItem != ent)
         {
             var message = Loc.GetString("rmc-action-popup-spotting-user-must-hold", ("rangefinder", ent));
-            _popup.PopupClient(message, args.Performer, args.Performer);
+            _popup.PopupClient(message, user, user);
             return;
         }
 
-        if(!_targeting.TryLaserTarget(ent.Owner, args.Performer, args.Target, ent.Comp.SpottingDuration, ent.Comp.LaserProto, ent.Comp.ShowLaser,TargetedEffects.Spotted))
+        if(!_targeting.Target(ent, user, target, ent.Comp.SpottingDuration,TargetedEffects.Spotted))
             return;
 
-        _audio.PlayPredicted(ent.Comp.SpottingSound, ent, args.Performer);
+        _audio.PlayPredicted(ent.Comp.SpottingSound, ent, user);
         _appearance.SetData(ent, RangefinderLayers.Layer, RangefinderMode.Spotter);
 
-        var spotted = EnsureComp<SpottedComponent>(args.Target);
-        spotted.Spotter = args.Performer;
-        Dirty(args.Target, spotted);
+        var spotted = EnsureComp<SpottedComponent>(target);
+        spotted.Spotter = user;
+        Dirty(target, spotted);
 
         args.Handled = true;
     }

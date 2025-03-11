@@ -1,6 +1,5 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Targeting;
 
@@ -25,18 +24,6 @@ public sealed partial class TargetingComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid User;
-
-    /// <summary>
-    ///     A list of the laser entities.
-    /// </summary>
-    [DataField]
-    public List<EntityUid> Laser = new();
-
-    /// <summary>
-    ///     The laser prototype to spawn.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public EntProtoId LaserProto = "RMCSpottingLaser";
 
     /// <summary>
     ///     The origin coordinates of the laser
@@ -69,9 +56,8 @@ public sealed partial class TargetingComponent : Component
     public float AlphaMultiplier = 1f;
 
     /// <summary>
-    ///     If the laser alpha should be based on how long the aiming has lasted.
+    ///     If the laser alpha should be based on how long the targeting has lasted.
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool GradualAlpha;
 }
-

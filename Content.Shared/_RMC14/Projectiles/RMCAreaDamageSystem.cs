@@ -1,4 +1,3 @@
-using Content.Shared._RMC14.Projectiles.Aimed;
 using Content.Shared._RMC14.Stun;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Components;
@@ -57,8 +56,8 @@ public sealed class RMCAreaDamageSystem : EntitySystem
             var newDamage = damage;
 
             // Reduce damage if the distance is bigger than the falloff range
-            if (areaDamage.FalloffRange / distance.Length() < 1)
-                newDamage *= areaDamage.FalloffRange / distance.Length();
+            if (areaDamage.FalloffDistance / distance.Length() < 1)
+                newDamage *= areaDamage.FalloffDistance / distance.Length();
 
             _sizeStun.TryGetSize(entity, out var size);
 

@@ -46,7 +46,7 @@ public sealed class AimedProjectileSystem : EntitySystem
         }
 
         // Apply bonus damage
-        var damage =  args.Damage * aimedEffect.BonusDamageMultiplier;
+        var damage =  args.Damage * aimedEffect.ExtraHits;
         _damageable.TryChangeDamage(args.Target, damage);
 
         // TODO Apply blind

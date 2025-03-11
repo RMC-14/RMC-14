@@ -29,8 +29,8 @@ public sealed class AimedShotSystem : EntitySystem
     {
         SubscribeLocalEvent<AimedShotComponent, GetItemActionsEvent>(OnAimedShotGetItemActions);
         SubscribeLocalEvent<AimedShotComponent, AimedShotActionEvent>(OnAimedShot);
-        SubscribeLocalEvent<AimedShotComponent, AimingFinishedEvent>(OnAimingFinished);
-        SubscribeLocalEvent<AimedShotComponent, AimingCancelledEvent>(OnAimingCancelled);
+        SubscribeLocalEvent<AimedShotComponent, TargetingFinishedEvent>(OnTargetingFinished);
+        SubscribeLocalEvent<AimedShotComponent, TargetingCancelledEvent>(OnTargetingCancelled);
         SubscribeLocalEvent<AimedShotComponent, ShotAttemptedEvent>(OnAttemptShoot);
         SubscribeLocalEvent<AimedShotComponent, AmmoShotEvent>(OnAmmoShot);
 
@@ -79,7 +79,7 @@ public sealed class AimedShotSystem : EntitySystem
             return;
         }
 
-        // Disable shooting until aiming is cancelled or finished.
+        // Disable shooting until targeting is cancelled or finished.
         ToggleShooting((ent.Owner, ent.Comp),true);
 
         // Do play the sound clientside
@@ -103,6 +103,7 @@ public sealed class AimedShotSystem : EntitySystem
             appliedSpotterBuff = true;
         }
 
+
         // Apply the laser's multiplier to the duration of the aimed shot  if it's turned on.
         if (TryComp(ent, out GunToggleableLaserComponent? toggleLaser))
         {
@@ -113,14 +114,18 @@ public sealed class AimedShotSystem : EntitySystem
                 else
                     aimMultiplier = toggleLaser.AimDurationMultiplier;
             }
-            ent.Comp.ShowLaser = toggleLaser.Active;
+
+            if (TryComp(ent, out TargetingLaserComponent? targetingLaser))
+            {
+                targetingLaser.ShowLaser = toggleLaser.Active;
+            }
         }
 
         laserDuration *= aimMultiplier;
 
         Dirty(ent);
 
-        _targeting.TryLaserTarget(ent.Owner, args.Performer, args.Target, laserDuration, ent.Comp.LaserProto, ent.Comp.ShowLaser, TargetedEffects.Targeted);
+        _targeting.Target(ent.Owner, args.Performer, args.Target, laserDuration, TargetedEffects.Targeted);
     }
 
     /// <summary>
@@ -160,9 +165,9 @@ public sealed class AimedShotSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Try to shoot at a target when an entity successfully finishes aiming.
+    ///     Try to shoot at a target when an entity successfully finishes targeting.
     /// </summary>
-    private void OnAimingFinished(Entity<AimedShotComponent> ent, ref AimingFinishedEvent args)
+    private void OnTargetingFinished(Entity<AimedShotComponent> ent, ref TargetingFinishedEvent args)
     {
         if (args.Handled)
             return;
@@ -181,9 +186,9 @@ public sealed class AimedShotSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Enable the ability to shoot when aiming is cancelled.
+    ///     Enable the ability to shoot when targeting is cancelled.
     /// </summary>
-    private void OnAimingCancelled(Entity<AimedShotComponent> ent, ref AimingCancelledEvent args)
+    private void OnTargetingCancelled(Entity<AimedShotComponent> ent, ref TargetingCancelledEvent args)
     {
         if(args.Handled)
             return;

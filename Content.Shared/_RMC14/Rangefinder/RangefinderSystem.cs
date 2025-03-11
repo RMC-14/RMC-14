@@ -47,8 +47,8 @@ public sealed class RangefinderSystem : EntitySystem
         SubscribeLocalEvent<RangefinderComponent, LaserDesignatorDoAfterEvent>(OnRangefinderDoAfter);
         SubscribeLocalEvent<RangefinderComponent, ExaminedEvent>(OnRangefinderExamined);
         SubscribeLocalEvent<RangefinderComponent, GetVerbsEvent<AlternativeVerb>>(OnRangefinderGetAlternativeVerbs);
-        SubscribeLocalEvent<RangefinderComponent, AimingCancelledEvent>(OnAimingCancelled);
-        SubscribeLocalEvent<RangefinderComponent, AimingFinishedEvent>(OnAimingFinished);
+        SubscribeLocalEvent<RangefinderComponent, TargetingCancelledEvent>(OnTargetingCancelled);
+        SubscribeLocalEvent<RangefinderComponent, TargetingFinishedEvent>(OnTargetingFinished);
 
         SubscribeLocalEvent<ActiveLaserDesignatorComponent, ComponentRemove>(OnLaserDesignatorRemove);
         SubscribeLocalEvent<ActiveLaserDesignatorComponent, EntityTerminatingEvent>(OnLaserDesignatorRemove);
@@ -281,12 +281,12 @@ public sealed class RangefinderSystem : EntitySystem
         }
     }
 
-    private void OnAimingCancelled(Entity<RangefinderComponent> ent, ref AimingCancelledEvent args)
+    private void OnTargetingCancelled(Entity<RangefinderComponent> ent, ref TargetingCancelledEvent args)
     {
         UpdateAppearance(ent);
     }
 
-    private void OnAimingFinished(Entity<RangefinderComponent> ent, ref AimingFinishedEvent args)
+    private void OnTargetingFinished(Entity<RangefinderComponent> ent, ref TargetingFinishedEvent args)
     {
         UpdateAppearance(ent);
     }

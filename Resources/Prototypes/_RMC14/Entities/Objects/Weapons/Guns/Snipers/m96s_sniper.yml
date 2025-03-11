@@ -236,7 +236,7 @@
       falloff: 10
       buildup: true
   - type: AimedShotEffect
-    bonusDamageMultiplier: 2
+    extraHits: 2
 
 - type: entity
   parent: CMBulletSniper10x28mm
@@ -253,11 +253,9 @@
     amount: 20
   - type: IgniteOnProjectileHit
   - type: AimedShotEffect
-    bonusDamageMultiplier: 0
     fireStacksOnHit: 10
     blindDuration: 5
 
-# TODO RMC14 slow
 - type: entity
   parent: CMBulletSniper10x28mm
   id: CMBulletSniper10x28mmFlak
@@ -271,11 +269,11 @@
   - type: CMArmorPiercing
     amount: 0
   - type: AimedShotEffect
-    bonusDamageMultiplier: 1
+    extraHits: 1
     superSlowDuration: 7
   - type: RMCAreaDamage
     damageArea: 2.5
-    falloffRange: 1.5
+    falloffDistance: 1.5
 
 - type: entity
   parent: CMBulletSniper10x28mm

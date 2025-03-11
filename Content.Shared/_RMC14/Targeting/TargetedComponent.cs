@@ -11,12 +11,6 @@ public sealed partial class TargetedComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public HashSet<EntityUid> TargetedBy = new();
-
-    /// <summary>
-    ///     A dictionary of targeting entities and their lasers targeting this entity.
-    /// </summary>
-    [DataField]
-    public Dictionary<EntityUid, List<EntityUid>> Laser = new();
 }
 
 [Serializable, NetSerializable]

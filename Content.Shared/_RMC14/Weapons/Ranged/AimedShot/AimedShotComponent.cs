@@ -16,22 +16,16 @@ public sealed partial class AimedShotComponent : Component
     public EntProtoId ActionId = "RMCActionAimedShot";
 
     /// <summary>
-    ///     The laser Prototype
+    ///     The action entity.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public EntProtoId LaserProto = "RMCSpottingLaser";
+    public EntityUid? Action;
 
     /// <summary>
     ///     The sound to be played when the action is used.
     /// </summary>
     [DataField, AutoNetworkedField]
     public SoundSpecifier AimingSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/Handling/target_on.ogg");
-
-    /// <summary>
-    ///     The uid of the action.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public EntityUid? Action;
 
     /// <summary>
     ///     If gunshots should be cancelled until aiming is done.
@@ -44,12 +38,6 @@ public sealed partial class AimedShotComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? Target;
-
-    /// <summary>
-    ///     If the laser should be visible.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool ShowLaser = true;
 
     /// <summary>
     ///     The base aiming duration.

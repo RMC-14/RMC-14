@@ -25,7 +25,6 @@
       sprite: _RMC14/Interface/MousePointer/sniper_mouse.rsi
       state: all
   - type: AimedShot
-    laserProto: "RMCM96SLaser"
   - type: TargetingLaser
   - type: GunToggleableLaser
     settings:

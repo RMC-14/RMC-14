@@ -10,8 +10,8 @@ public sealed partial class RMCAreaDamageComponent : Component
     public float DamageArea;
 
     /// <summary>
-    ///     The range after which damage starts to fall off.
+    ///     The distance after which damage starts to fall off.
     /// </summary>
     [DataField]
-    public float FalloffRange = 0.5f;
+    public float FalloffDistance = 0.5f;
 }
