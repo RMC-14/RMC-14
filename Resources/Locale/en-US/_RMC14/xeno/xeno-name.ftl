@@ -1,7 +1,5 @@
 ﻿rmc-xeno-name-number = {$baseName} ({$prefix}-{$number}{$postfix})
 rmc-xeno-name-queen = {$baseName}
-rmc-xeno-name-empress-none = Empress
-rmc-xeno-name-empress = Empress ({$prefix}{$postfix})
 rmc-xeno-name = {$baseName} ({$prefix}{$postfix})
 rmc-xeno-young = Young {$baseName}
 rmc-xeno-mature = Mature {$baseName}
