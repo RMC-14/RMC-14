@@ -190,7 +190,7 @@ public sealed class SquadSystem : EntitySystem
 
         args.SquadName = Name(squadTeam);
 
-        var jobId = _originalRoleQuery.CompOrNull(member)?.Job;
+        var jobId = args.JobProto ?? _originalRoleQuery.CompOrNull(member)?.Job;
 
         if (_prototypes.TryIndex(jobId, out var jobProto))
         {
@@ -487,15 +487,15 @@ public sealed class SquadSystem : EntitySystem
         if (Prototype(team)?.ID is { } squadProto)
             _appearance.SetData(marine, SquadVisuals.Squad, squadProto);
 
-        UpdateSquadTitle(marine);
+        UpdateSquadTitle(marine, role);
 
         // Search for any squad-specific items to map
         SearchForMappedItems((marine, member), member.Squad.Value);
     }
 
-    public void UpdateSquadTitle(EntityUid marine)
+    public void UpdateSquadTitle(EntityUid marine, ProtoId<JobPrototype>? jobProto = null)
     {
-        var ev = new GetMarineSquadNameEvent();
+        var ev = new GetMarineSquadNameEvent { JobProto = jobProto };
         RaiseLocalEvent(marine, ref ev);
 
         foreach (var item in _inventory.GetHandOrInventoryEntities(marine))
