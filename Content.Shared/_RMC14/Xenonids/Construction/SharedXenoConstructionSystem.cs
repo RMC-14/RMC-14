@@ -95,6 +95,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private EntityQuery<XenoWeedsComponent> _xenoWeedsQuery;
 
     private const string XenoStructuresAnimation = "RMCEffect";
+    private const string XenoHiveCoreNodeId = "HiveCoreXenoConstructionNode";
 
     private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
@@ -961,7 +962,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 return false;
             }
 
-            if (choiceProto.HasComponent<HiveComponent>(_compFactory) && _hive.GetHive(xeno.Owner) is {} hive && hive.Comp.NewCoreAt > _timing.CurTime)
+            if (choiceProto.ID == XenoHiveCoreNodeId && _hive.GetHive(xeno.Owner) is {} hive && hive.Comp.NewCoreAt > _timing.CurTime)
             {
                 if (_net.IsServer)
                     _popup.PopupEntity(Loc.GetString("rmc-xeno-cant-build-new-yet", ("choice", choiceProto.Name)), xeno, xeno, PopupType.MediumCaution);
