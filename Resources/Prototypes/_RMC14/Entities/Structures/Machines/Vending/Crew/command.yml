@@ -359,7 +359,7 @@
       entries:
       - id: CMJumpsuitCOService
       - id: CMJumpsuitCOFormalWhite
-      - id: CMJumpsuitCOFormalBlack 
+      - id: CMJumpsuitCOFormalBlack
       - id: RMCCoatService
       - id: CMCoatMP
       - id: RMCShoesLaceup
