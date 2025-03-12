@@ -5210,5 +5210,18 @@
   id: 1442
   time: '2025-03-12T08:51:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5820
+- author: OmerF-afk
+  changes:
+  - message: Added numerous additions to Trijent Dam, focusing on the CMB armory, paper bins, and missing guns.
+    type: Add
+  - message: Added new CMB clothing, armor, helmet, and visor.
+    type: Add
+  - message: Added four faction cups—UN, UNMC, CLF, and SPP.
+    type: Add
+  - message: Added three new planet-only guns—FN P90, CMB Spearhead, and HG 3712.
+    type: Add
+  id: 1443
+  time: '2025-03-12T09:03:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5785
 Name: RMC14
 Order: -1
