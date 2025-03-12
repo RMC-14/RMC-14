@@ -372,6 +372,21 @@
           min: 100
         reagent: RMCPlasmaEggHelper
         amount: 1
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentThreshold
+          max: 100
+        - !type:BloodThreshold
+          min: 10
+        reagent: RMCPlasmaEgg
+        amount: 1.2
+      - !type:ModifyBloodLevel
+        conditions:
+        - !type:ReagentThreshold
+          max: 100
+        - !type:BloodThreshold
+          min: 10
+        amount: -10
 
 - type: reagent
   parent: RMCPlasmaEgg
