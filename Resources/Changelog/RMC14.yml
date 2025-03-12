@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: UnicornOnLSD
-  changes:
-  - message: Added General's formal cloak
-    type: Add
-  id: 946
-  time: '2024-11-08T01:26:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4705
 - author: Nairodian
   changes:
   - message: Added a new lobby art.
@@ -5216,5 +5209,12 @@
   id: 1447
   time: '2025-03-12T09:50:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5804
+- author: DummeHytteOst
+  changes:
+  - message: Added holstered visuals for sidearm pouch.
+    type: Add
+  id: 1448
+  time: '2025-03-12T09:51:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5826
 Name: RMC14
 Order: -1
