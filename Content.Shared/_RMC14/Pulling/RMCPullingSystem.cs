@@ -59,6 +59,8 @@ public sealed class RMCPullingSystem : EntitySystem
     {
         _firemanQuery = GetEntityQuery<FiremanCarriableComponent>();
 
+        SubscribeLocalEvent<XenoComponent, RMCPullToggleEvent>(OnXenoPullToggle);
+
         SubscribeLocalEvent<ParalyzeOnPullAttemptComponent, PullAttemptEvent>(OnParalyzeOnPullAttempt);
         SubscribeLocalEvent<InfectOnPullAttemptComponent, PullAttemptEvent>(OnInfectOnPullAttempt);
         SubscribeLocalEvent<MeleeWeaponComponent, PullAttemptEvent>(OnMeleePullAttempt);
@@ -243,9 +245,13 @@ public sealed class RMCPullingSystem : EntitySystem
         if (args.PullerUid != ent.Owner)
             return;
 
-        var weapon = ent.Comp;
-        if (weapon.Attacking || weapon.NextAttack > _timing.CurTime)
+        if (ent.Comp.NextAttack > _timing.CurTime)
             args.Cancelled = true;
+    }
+
+    private void OnXenoPullToggle(Entity<XenoComponent> ent, ref RMCPullToggleEvent args)
+    {
+        args.Handled = true;
     }
 
     private void OnPreventPulledWhileAliveStart(Entity<PreventPulledWhileAliveComponent> ent, ref PullStartedMessage args)
