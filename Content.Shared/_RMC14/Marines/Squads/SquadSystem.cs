@@ -461,6 +461,16 @@ public sealed class SquadSystem : EntitySystem
         var grant = EnsureComp<SquadGrantAccessComponent>(marine);
         grant.AccessLevels = team.Comp.AccessLevels;
 
+        if (_prototypes.TryIndex(job, out var jobProto))
+        {
+            grant.RoleName = $"{Name(team)} {jobProto.LocalizedName}";
+        }
+        else if (_mind.TryGetMind(marine, out var mindId, out _) &&
+                 _job.MindTryGetJobName(mindId, out var name))
+        {
+            MarineSetTitle(marine, $"{Name(team)} {name}");
+        }
+
         Dirty(marine, grant);
 
         team.Comp.Members.Add(marine);
@@ -485,21 +495,26 @@ public sealed class SquadSystem : EntitySystem
         if (Prototype(team)?.ID is { } squadProto)
             _appearance.SetData(marine, SquadVisuals.Squad, squadProto);
 
-        UpdateSquadTitle(marine, Name(team));
+        UpdateSquadTitle(marine);
 
         // Search for any squad-specific items to map
         SearchForMappedItems((marine, member), member.Squad.Value);
     }
 
-    public void UpdateSquadTitle(EntityUid marine, string? squadName = null)
+    public void UpdateSquadTitle(EntityUid marine)
     {
-        var ev = new GetMarineSquadNameEvent { SquadName = squadName ?? string.Empty };
+        var ev = new GetMarineSquadNameEvent();
         RaiseLocalEvent(marine, ref ev);
 
+        MarineSetTitle(marine, $"{ev.SquadName} {ev.RoleName}");
+    }
+
+    public void MarineSetTitle(EntityUid marine, string title)
+    {
         foreach (var item in _inventory.GetHandOrInventoryEntities(marine))
         {
             if (TryComp(item, out IdCardComponent? idCard))
-                _id.TryChangeJobTitle(item, $"{ev.SquadName} {ev.RoleName}", idCard);
+                _id.TryChangeJobTitle(item, title, idCard);
         }
     }
 
