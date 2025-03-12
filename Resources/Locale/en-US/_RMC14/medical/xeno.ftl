@@ -1,5 +1,5 @@
 reagent-name-rmc-xenoblood = Acidic Blood
-reagent-desc-rmc-xenoblood = A corrosive blood like substance. Makeup appears to be made out of acids and blood plasma.
+reagent-desc-rmc-xenoblood = A corrosive blood like substance. It appears to be made out of acids and blood plasma.
 
 reagent-name-rmc-xenobloodroyal = Dark Acidic Blood
 
@@ -36,7 +36,7 @@ reagent-effect-guidebook-excreting =
     } all other reagents from the body
 
 reagent-name-rmc-xenoplasmaegg = Egg Plasma
-reagent-desc-rmc-xenoplasmaegg = A white-ish plasma high with a high concentration of protein...
+reagent-desc-rmc-xenoplasmaegg = A white-ish plasma with a high concentration of protein...
 reagent-name-rmc-xenoplasmaegg-helper = Alien Egg
 reagent-desc-rmc-xenoplasmaegg-helper = A coagulated mass of egg plasma.
 reagent-effect-plasma-egg = Your stomach cramps and you suddenly feel very sick!
