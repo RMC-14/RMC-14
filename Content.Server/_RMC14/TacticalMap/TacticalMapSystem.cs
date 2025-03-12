@@ -272,8 +272,8 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     {
         if (_activeTacticalMapTrackedQuery.TryComp(ent, out var active))
         {
-            UpdateIcon((ent, active));
-            UpdateTracked(ent);
+            UpdateIcon((ent.Owner, active));
+            UpdateTracked((ent.Owner, active));
         }
     }
 
