@@ -159,6 +159,6 @@
   source: "https://github.com/cmss13-devs/cmss13/blob/32730c731936c6737668ead7bde83a6cf296010f/sound/weapons/gun_mar40.ogg"
 
 - files: ["gun_ml66a_2.ogg"]
-  license: "CC0"
+  license: "CC0-1.0"
   copyright: "Taken and modified from freesound.org"
   source: "https://freesound.org/people/SuperPhat/sounds/417686/"
