@@ -345,7 +345,9 @@
       - id: CMHeadCapCO
       - id: CMHeadBeretCO
       - id: CMBootsBlackFilled
+      - id: CMBootsBrown
       - id: CMHandsBlackMarine
+      - id: CMHandsBrown
     - name: Utility Extras
       entries:
       - id: RMCSunglasses
