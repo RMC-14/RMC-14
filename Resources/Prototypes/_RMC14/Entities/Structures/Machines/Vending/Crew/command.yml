@@ -369,8 +369,6 @@
       - id: CMHeadBeretCO
       - id: CMHeadBeretCOWhite
       - id: CMHeadBeretCOBlack
-      - id: CMHeadCapCOFormalBlack
-      - id: CMHeadCapCOFormalWhite
       - id: RMCHeadCapFlippable # TODO: Check this is the service variant. If so, parent and rename.
     - name: Service Extras
       entries:
