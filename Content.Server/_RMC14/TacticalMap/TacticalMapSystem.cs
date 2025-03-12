@@ -271,7 +271,10 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private void OnMapBlipOverrideMapInit(Entity<MapBlipIconOverrideComponent> ent, ref MapInitEvent args)
     {
         if (_activeTacticalMapTrackedQuery.TryComp(ent, out var active))
+        {
             UpdateIcon((ent, active));
+            UpdateTracked(ent);
+        }
     }
 
     private void OnRottingMapInit(Entity<RottingComponent> ent, ref MapInitEvent args)
