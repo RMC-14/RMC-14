@@ -217,3 +217,59 @@
   sprites:
   - sprite: _RMC14/Mobs/Customization/underwear.rsi
     state: urban_satin
+
+# tanga
+- type: marking
+  id: RMCUnderwearTanga
+  bodyPart: Underwear
+  markingCategory: Underwear
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: classic_tanga
+
+- type: marking
+  id: RMCUnderwearTangaDesert
+  bodyPart: Underwear
+  markingCategory: Underwear
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: desert_tanga
+
+- type: marking
+  id: RMCUnderwearTangaJungle
+  bodyPart: Underwear
+  markingCategory: Underwear
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: jungle_tanga
+
+- type: marking
+  id: RMCUnderwearTangaSnow
+  bodyPart: Underwear
+  markingCategory: Underwear
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: snow_tanga
+
+- type: marking
+  id: RMCUnderwearTangaUrban
+  bodyPart: Underwear
+  markingCategory: Underwear
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
+  sprites:
+  - sprite: _RMC14/Mobs/Customization/underwear.rsi
+    state: urban_tanga

@@ -90,6 +90,22 @@
     {
       "name": "urban_tanga",
       "directions": 4
+    },
+    {
+      "name": "desert_tanga",
+      "directions": 4
+    },
+    {
+      "name": "snow_tanga",
+      "directions": 4
+    },
+    {
+      "name": "classic_tanga",
+      "directions": 4
+    },
+    {
+      "name": "jungle_tanga",
+      "directions": 4
     }
   ]
 }
