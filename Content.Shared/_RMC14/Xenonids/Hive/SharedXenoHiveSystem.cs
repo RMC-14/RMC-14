@@ -26,7 +26,6 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -219,6 +218,24 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         return true;
     }
 
+    public bool HasHiveCore(Entity<HiveComponent> hive)
+    {
+        return GetHiveCore(hive) is not null;
+    }
+
+    public EntityUid? GetHiveCore(Entity<HiveComponent> hive)
+    {
+        var hiveCoreQuerry = EntityQueryEnumerator<HiveCoreComponent>();
+        while (hiveCoreQuerry.MoveNext(out var hiveCoreEnt, out _))
+        {
+            if (GetHive(hiveCoreEnt) == hive)
+            {
+                return hiveCoreEnt;
+            }
+        }
+        return null;
+    }
+
     public bool TryGetStructureLimit(Entity<HiveComponent> hive, EntProtoId structureProtoId, out int limit)
     {
         return hive.Comp.HiveStructureSlots.TryGetValue(structureProtoId, out limit);
@@ -338,7 +355,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         Dirty(hive);
 
         _xeno.MakeXeno(larva.Value);
-        _hive.SetHive(larva.Value, hive);
+        SetHive(larva.Value, hive);
 
         if (TryComp(user, out ActorComponent? actor))
         {

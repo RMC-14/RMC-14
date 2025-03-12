@@ -932,6 +932,24 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (choice != null &&
             _prototype.TryIndex(choice, out var choiceProto))
         {
+            if (choiceProto.HasComponent<HiveConstructionRequiresHiveCoreComponent>(_compFactory))
+            {
+                if (_hive.GetHive(xeno.Owner) is Entity<HiveComponent> hiveEnt)
+                {
+                    if (!_hive.HasHiveCore(hiveEnt))
+                    {
+                        if (_net.IsServer)
+                            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-requires-hive-core", ("choice", choiceProto.Name)), xeno, xeno, PopupType.MediumCaution);
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (_net.IsServer)
+                        _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-requires-hive-core", ("choice", choiceProto.Name)), xeno, xeno, PopupType.MediumCaution);
+                    return false;
+                }
+            }
 
             if (choiceProto.HasComponent<HiveConstructionRequiresHiveWeedsComponent>(_compFactory) && !_xenoWeeds.IsOnHiveWeeds((gridId, grid), target))
             {

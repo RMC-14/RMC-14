@@ -20,6 +20,7 @@
       types:
         Slash: 100
   - type: RecoveryNode
+  - type: HiveConstructionRequiresHiveCore
   - type: HiveConstructionLimited
     id: HiveRecoveryNodeXeno
   - type: HiveConstructionRequiresHiveWeeds
@@ -52,6 +53,7 @@
     initialPlasmaCost: 400
     plasmaCost: 450
     spawn: HiveRecoveryNodeXeno
+  - type: HiveConstructionRequiresHiveCore
   - type: HiveConstructionLimited
     id: HiveRecoveryNodeXeno
   - type: HiveConstructionRequiresHiveWeeds

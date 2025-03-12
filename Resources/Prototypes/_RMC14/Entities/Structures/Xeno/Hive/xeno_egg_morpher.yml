@@ -50,6 +50,7 @@
   - type: EggMorpher
   - type: HiveConstructionRequiresHiveWeeds
   - type: HiveConstructionRequiresSpace
+  - type: HiveConstructionRequiresHiveCore
   - type: HiveConstructionLimited
     id: HiveEggMorpherXeno
   - type: UserInterface
@@ -90,6 +91,7 @@
     initialPlasmaCost: 400
     plasmaCost: 450
     spawn: HiveEggMorpherXeno
+  - type: HiveConstructionRequiresHiveCore
   - type: HiveConstructionRequiresHiveWeeds
   - type: HiveConstructionRequiresSpace
   - type: HiveConstructionLimited
