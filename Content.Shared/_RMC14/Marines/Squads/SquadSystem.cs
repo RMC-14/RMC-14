@@ -118,6 +118,9 @@ public sealed class SquadSystem : EntitySystem
             return;
         }
 
+        if (TryGetMemberSquad(ent.Owner, out var memberSquad) && !memberSquad.Comp.HasSquadArmor)
+            return;
+
         var rsi = wearer.Leader ? ent.Comp.LeaderRsi : ent.Comp.Rsi;
         var layer = $"enum.{nameof(SquadArmorLayers)}.{ent.Comp.Layer}";
         if (args.Layers.Any(l => l.Item1 == layer))
