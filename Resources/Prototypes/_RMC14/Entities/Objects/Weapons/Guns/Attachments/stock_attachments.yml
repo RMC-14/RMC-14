@@ -741,6 +741,29 @@
       Classic: c_boomslang-stock
       Urban: u_boomslang-stock
 
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentHG3712Stock
+  name: HG3712 stock
+  description: The non-detachable stock of a HG 37-12 pump shotgun.
+  components:
+  - type: Sprite
+    state: hg3712_stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentHG3712Stock
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 10
+
+- type: Tag
+  id: RMCAttachmentHG3712Stock
+
 - type: Tag
   id: RMCAttachmentStock
 

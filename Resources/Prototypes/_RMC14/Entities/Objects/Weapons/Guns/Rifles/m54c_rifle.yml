@@ -50,6 +50,7 @@
           - CMMagazineRifleM54C
           - CMMagazineRifleM54CAP
           - CMMagazineRifleM54CExt
+          - RMCMagazineRifleM54CIncendiary
           - RMCMagazineRifleM54CHEAP
   - type: GunDamageModifier
     multiplier: 1.1
@@ -164,6 +165,33 @@
 
 - type: entity
   parent: CMMagazineRifleM54C
+  id: RMCMagazineRifleM54CIncendiary
+  name: "M54C Incendiary magazine (10x24mm)"
+  suffix: Incendiary
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleM54CIncendiary
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmIncendiary
+    proto: RMCCartridgeRifle10x24mmIncendiary
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#771A10"
+#  - type: RefillableByBulletBox no bullet box for it yet
+#    bulletType: RMCBoxBulletsRifleAP
+
+- type: entity
+  parent: CMMagazineRifleM54C
   id: RMCMagazineRifleM54CHEAP
   name: "M54C HEAP magazine (10x24mm)"
   suffix: HEAP
@@ -246,6 +274,19 @@
 
 - type: entity
   parent: CMCartridgeRifle10x24mm
+  id: RMCCartridgeRifle10x24mmIncendiary
+  name: AP cartridge (10x24mm)
+  description: An armor piercing 10x24mm cartridge. Fits in 10x24mm AP magazines.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifle10x24mmIncendiary
+  - type: CartridgeAmmo
+    proto: RMCBulletRifle10x24mmIncendiary
+
+- type: entity
+  parent: CMCartridgeRifle10x24mm
   id: RMCCartridgeRifle10x24mmHEAP
   name: HEAP cartridge (10x24mm)
   description: An armor piercing 10x24mm cartridge. Fits in 10x24mm HEAP magazines.
@@ -295,6 +336,19 @@
 
 - type: entity
   parent: BulletRifle10x24mm
+  id: RMCBulletRifle10x24mmIncendiary
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 33
+  - type: CMArmorPiercing
+    amount: 5
+  - type: IgniteOnProjectileHit
+
+- type: entity
+  parent: BulletRifle10x24mm
   id: RMCBulletRifle10x24mmHEAP
   categories: [ HideSpawnMenu ]
   components:
@@ -322,6 +376,9 @@
   id: CMMagazineRifleM54CAP
 
 - type: Tag
+  id: RMCMagazineRifleM54CIncendiary
+
+- type: Tag
   id: RMCMagazineRifleM54CHEAP
 
 - type: Tag
@@ -332,6 +389,9 @@
 
 - type: Tag
   id: CMCartridgeRifle10x24mmAP
+
+- type: Tag
+  id: RMCCartridgeRifle10x24mmIncendiary
 
 - type: Tag
   id: RMCCartridgeRifle10x24mmHEAP
