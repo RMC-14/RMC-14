@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed pens and cigarettes not fitting on ears
-    type: Fix
-  - message: Fixed cig machine inventory
-    type: Fix
-  id: 944
-  time: '2024-11-08T00:40:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4754
 - author: MetalSage
   changes:
   - message: Added XM51 shotgun
@@ -5218,5 +5209,12 @@
   id: 1445
   time: '2025-03-12T09:22:27.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5808
+- author: Vermidia
+  changes:
+  - message: Fixed the D50 winter wyvern's stats
+    type: Fix
+  id: 1446
+  time: '2025-03-12T09:33:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5813
 Name: RMC14
 Order: -1
