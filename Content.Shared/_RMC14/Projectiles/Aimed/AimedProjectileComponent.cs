@@ -7,4 +7,7 @@ public sealed partial class AimedProjectileComponent : Component
 {
     [DataField, AutoNetworkedField]
     public EntityUid Target;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid Source;
 }

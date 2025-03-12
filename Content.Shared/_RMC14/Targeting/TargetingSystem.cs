@@ -53,19 +53,19 @@ public sealed class TargetingSystem : EntitySystem
     /// <summary>
     ///     Remove the laser and replace targeting effects originating from the given entity.
     /// </summary>
-    private void StopTargeting(Entity<TargetingComponent> targetingLaser, EntityUid target)
+    public void StopTargeting(EntityUid target, EntityUid targetingUid, TargetingComponent? targeting = null)
     {
-        if (!TryComp(target, out TargetedComponent? targeted))
+        if (!TryComp(target, out TargetedComponent? targeted) || !Resolve(targetingUid, ref targeting))
             return;
 
-        if (targeted.TargetedBy.Contains(targetingLaser))
+        if (targeted.TargetedBy.Contains(targetingUid))
         {
-            targeted.TargetedBy.Remove(targetingLaser);
+            targeted.TargetedBy.Remove(targetingUid);
             Dirty(target, targeted);
         }
 
-        targetingLaser.Comp.Targets.Remove(target);
-        Dirty(targetingLaser);
+        targeting.Targets.Remove(target);
+        Dirty(targetingUid, targeting);
 
         // Find the next target marker with the highest priority
         var highestMark = TargetedEffects.None;
@@ -97,8 +97,8 @@ public sealed class TargetingSystem : EntitySystem
         // Remove the target's targeted component if it has nothing targeting it anymore
         RemComp<TargetedComponent>(target);
 
-        if(targetingLaser.Comp.Targets.Count == 0)
-            RemComp<TargetingComponent>(targetingLaser);
+        if(targeting.Targets.Count == 0)
+            RemComp<TargetingComponent>(targetingUid);
     }
 
     /// <summary>
@@ -142,28 +142,27 @@ public sealed class TargetingSystem : EntitySystem
         var query = EntityQueryEnumerator<TargetingComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var targeting, out var xform))
         {
-            var laserNumber = 0;
-            while (laserNumber < targeting.LaserDurations.Count)
+            var targetNumber = 0;
+            while (targetNumber < targeting.LaserDurations.Count)
             {
-                targeting.LaserDurations[laserNumber] -= frameTime;
+                targeting.LaserDurations[targetNumber] -= frameTime;
 
                 // Adjust alpha of the laser based on how close it is to finish targeting.
-                targeting.AlphaMultiplier = 1 - targeting.LaserDurations[laserNumber] / targeting.OriginalLaserDurations[laserNumber];
+                targeting.AlphaMultiplier = 1 - targeting.LaserDurations[targetNumber] / targeting.OriginalLaserDurations[targetNumber];
                 Dirty(uid,targeting);
 
                 // Raise an event and stop targeting if the targeting successfully finishes.
-                if (targeting.LaserDurations[laserNumber] <= 0)
+                if (targeting.LaserDurations[targetNumber] <= 0)
                 {
-                    var ev = new TargetingFinishedEvent(targeting.User, Transform(targeting.Targets[laserNumber]).Coordinates, targeting.Targets[laserNumber]);
+                    var ev = new TargetingFinishedEvent(targeting.User, Transform(targeting.Targets[targetNumber]).Coordinates, targeting.Targets[targetNumber]);
                     RaiseLocalEvent(uid, ref ev);
 
-                    StopTargeting((uid,targeting), targeting.Targets[laserNumber]);
-                    targeting.LaserDurations.RemoveAt(laserNumber);
-                    targeting.OriginalLaserDurations.RemoveAt(laserNumber);
-                    laserNumber = 0;
+                    targeting.LaserDurations.RemoveAt(targetNumber);
+                    targeting.OriginalLaserDurations.RemoveAt(targetNumber);
+                    targetNumber = 0;
                 }
 
-                laserNumber++;
+                targetNumber++;
             }
 
             // Remove the active component and raise an event if the user moves.

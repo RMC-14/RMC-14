@@ -57,14 +57,17 @@ public sealed class AimedShotSystem : EntitySystem
     /// </summary>
     private void OnAimedShot(Entity<AimedShotComponent> ent, ref AimedShotActionEvent args)
     {
-        if (args.Handled)
+        var target = args.Target;
+        var user = args.Performer;
+
+        if (args.Handled || !HasComp<SpottableComponent>(target))
             return;
 
         // Cancel the action if the user doesn't have the correct whitelist
-        if (!_whitelist.IsValid(ent.Comp.Whitelist, args.Performer) && ent.Comp.Whitelist.Components != null)
+        if (!_whitelist.IsValid(ent.Comp.Whitelist, user) && ent.Comp.Whitelist.Components != null)
         {
             var message = Loc.GetString("cm-gun-unskilled", ("gun", ent));
-            _popup.PopupClient(message, args.Performer, args.Performer);
+            _popup.PopupClient(message, user, user);
 
             return;
         }
@@ -74,7 +77,7 @@ public sealed class AimedShotSystem : EntitySystem
             !wieldable.Wielded)
         {
             var message = Loc.GetString("rmc-action-popup-aiming-user-must-wield", ("gun", ent));
-            _popup.PopupClient(message, args.Performer, args.Performer);
+            _popup.PopupClient(message, user, user);
 
             return;
         }
@@ -83,17 +86,17 @@ public sealed class AimedShotSystem : EntitySystem
         ToggleShooting((ent.Owner, ent.Comp),true);
 
         // Do play the sound clientside
-        _audio.PlayPredicted(ent.Comp.AimingSound, ent, args.Performer);
+        _audio.PlayPredicted(ent.Comp.AimingSound, ent, user);
 
         args.Handled = true;
 
         // Add time to the duration of the aimed shot per tile of distance to the target.
-        var laserDuration =  (float)(ent.Comp.AimDuration + (_transform.GetMoverCoordinates(args.Target).Position - _transform.GetMoverCoordinates(args.Performer).Position).Length() * ent.Comp.AimDistanceDifficulty);
+        var laserDuration =  (float)(ent.Comp.AimDuration + (_transform.GetMoverCoordinates(target).Position - _transform.GetMoverCoordinates(user).Position).Length() * ent.Comp.AimDistanceDifficulty);
         var appliedSpotterBuff = false;
         var aimMultiplier = 1f;
 
         // Apply the spotted multiplier if the target is spotted.
-        if (TryComp(args.Target, out SpottedComponent? spotted))
+        if (TryComp(target, out SpottedComponent? spotted))
         {
             aimMultiplier = spotted.AimDurationMultiplier;
             appliedSpotterBuff = true;
@@ -120,7 +123,7 @@ public sealed class AimedShotSystem : EntitySystem
 
         laserDuration *= aimMultiplier;
 
-        _targeting.Target(ent.Owner, args.Performer, args.Target, laserDuration, TargetedEffects.Targeted);
+        _targeting.Target(ent.Owner, user, target, laserDuration, TargetedEffects.Targeted);
     }
 
     /// <summary>
@@ -147,6 +150,7 @@ public sealed class AimedShotSystem : EntitySystem
         {
             var aimedProjectile = EnsureComp<AimedProjectileComponent>(projectile);
             aimedProjectile.Target = ent.Comp.Target.Value;
+            aimedProjectile.Source = ent;
             Dirty(projectile, aimedProjectile);
 
             var homingProjectile = EnsureComp<HomingProjectileComponent>(projectile);
@@ -177,6 +181,11 @@ public sealed class AimedShotSystem : EntitySystem
         // Enable the ability to shoot when done aiming.
         ToggleShooting(ent, false);
 
+        // Only shoot serverside
+        if (_net.IsClient)
+            return;
+
+        _audio.PlayPvs(gunComp.SoundGunshot, Transform(ent).Coordinates);
         _gunSystem.AttemptShoot(args.User,gun, gunComp, args.Coordinates);
     }
 

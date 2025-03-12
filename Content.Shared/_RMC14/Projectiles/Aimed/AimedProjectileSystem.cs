@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Targeting;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Damage;
 using Content.Shared.Projectiles;
@@ -14,6 +15,7 @@ public sealed class AimedProjectileSystem : EntitySystem
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly TargetingSystem _targeting = default!;
 
     public override void Initialize()
     {
@@ -26,6 +28,8 @@ public sealed class AimedProjectileSystem : EntitySystem
     /// </summary>
     private void OnAimedProjectileHit(Entity<AimedProjectileComponent> ent, ref ProjectileHitEvent args)
     {
+        _targeting.StopTargeting(ent.Comp.Target, ent.Comp.Source);
+
         if (!TryComp(ent, out AimedShotEffectComponent? aimedEffect))
             return;
 
