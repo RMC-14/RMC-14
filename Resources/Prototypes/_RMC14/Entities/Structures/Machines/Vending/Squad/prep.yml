@@ -258,14 +258,18 @@
         amount: 10
       - id: RMCGlassesMarineRpgOld
         amount: 10
-#      - id: M5 Integrated Gas Mask
-#        amount: 10
-#      - id: M10 Helmet Netting
-#        amount: 10
-#      - id: M10 Helmet Rain Cover
-#        amount: 10
-#      - id: Firearm Lubricant
-#        amount: 15
+      - id: RMCHelmetGarbGasmask
+        name: M5 integrated gas mask
+        amount: 10
+      - id: RMCHelmetGarbNetting
+        name: M10 helmet netting
+        amount: 10
+      - id: RMCHelmetGarbRainCover
+        name: M10 helmet rain cover
+        amount: 10
+      - id: RMCHelmetGarbGunOil
+        name: firearm lubricant
+        amount: 15
 #      - id: Marine Flair
 #        amount: 15
 #      - id: Falling Falcons Shoulder Patch
