@@ -72,7 +72,7 @@
   - type: Tag
     tags:
     - Sidearm
-    - RMCMK45 
+    - RMCMK45
 
 - type: entity
   parent: CMBaseMagazinePistol
