@@ -1,4 +1,3 @@
-# TODO Helmet accessories
 # TODO Recreational
 # TODO Miscellaneous
 
@@ -8,9 +7,10 @@
   points: 7
   groups:
   - MarineLeatherBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -26,9 +26,9 @@
   points: 7
   groups:
   - MarineLeatherBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
   - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
@@ -45,9 +45,9 @@
   points: 7
   groups:
   - MarineLeatherBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
   - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
@@ -64,9 +64,9 @@
   points: 7
   groups:
   - MarineLeatherBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
   - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
@@ -83,9 +83,9 @@
   points: 7
   groups:
   - MarineBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
   - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
@@ -105,9 +105,9 @@
   - CommandingOfficerIDRMC
   - MarineLeatherBackpack
   - CommandingOfficerRoleSpecificRMC
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
   - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
@@ -124,9 +124,9 @@
   points: 7
   groups:
   - MarineLeatherBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
   - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
@@ -143,9 +143,9 @@
   points: 7
   groups:
   - MarineBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
   - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
@@ -163,9 +163,10 @@
   points: 7
   groups:
   - MarineTechnicianBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -181,9 +182,10 @@
   points: 7
   groups:
   - MarineTechnicianBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -199,9 +201,10 @@
   points: 7
   groups:
   - MarineTechnicianBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -218,9 +221,9 @@
   points: 7
   groups:
   - MarineTechnicianBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
   - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
@@ -237,9 +240,9 @@
   points: 7
   groups:
   - MarineBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
   - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
@@ -256,9 +259,9 @@
   points: 7
   groups:
   - MarineMedicBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
   - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
@@ -275,9 +278,9 @@
   points: 7
   groups:
   - MarineBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
   - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
@@ -294,9 +297,9 @@
   points: 7
   groups:
   - MarineBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
   - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
@@ -313,9 +316,9 @@
   points: 7
   groups:
   - MarineBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
   - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
@@ -332,9 +335,9 @@
   points: 7
   groups:
   - MarineBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
   - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
@@ -352,9 +355,10 @@
   points: 7
   groups:
   - MarineLeatherBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -370,9 +374,10 @@
   points: 7
   groups:
   - MarineBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -388,9 +393,10 @@
   points: 7
   groups:
   - MarineBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -406,9 +412,10 @@
   points: 7
   groups:
   - MarineLeatherBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -425,9 +432,9 @@
   points: 7
   groups:
   - MarineSecurityBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
   - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
@@ -444,9 +451,9 @@
   points: 7
   groups:
   - MarineSecurityBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
   - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
@@ -463,9 +470,9 @@
   points: 7
   groups:
   - MarineSecurityBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
   - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
@@ -483,9 +490,10 @@
   points: 7
   groups:
   - MarineLeatherBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -501,9 +509,10 @@
   points: 7
   groups:
   - MarineLeatherBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -519,9 +528,10 @@
   points: 7
   groups:
   - MarineBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -537,9 +547,10 @@
   points: 7
   groups:
   - MarineBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -556,9 +567,10 @@
   points: 7
   groups:
   - MarineTechnicianBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -574,9 +586,10 @@
   points: 7
   groups:
   - MarineTechnicianBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
