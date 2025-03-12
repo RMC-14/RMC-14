@@ -43,9 +43,14 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 75
   - type: EggMorpher
   - type: HiveConstructionRequiresHiveWeeds
   - type: HiveConstructionRequiresSpace
+  - type: HiveConstructionRequiresHiveCore
   - type: HiveConstructionLimited
     id: HiveEggMorpherXeno
   - type: UserInterface
@@ -71,6 +76,9 @@
     - sprite: _RMC14/Structures/Xenos/hive_structures.rsi
       state: eggmorph_overlay
       color: '#FFFFFFAA'
+    - sprite: _RMC14/Interface/xeno_hud.rsi
+      state: xeno_structure_node_indicator
+      scale: 0.8, 0.8
   - type: Destructible
     thresholds:
     - trigger:
@@ -83,6 +91,7 @@
     initialPlasmaCost: 400
     plasmaCost: 450
     spawn: HiveEggMorpherXeno
+  - type: HiveConstructionRequiresHiveCore
   - type: HiveConstructionRequiresHiveWeeds
   - type: HiveConstructionRequiresSpace
   - type: HiveConstructionLimited

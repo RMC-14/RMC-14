@@ -167,3 +167,8 @@
   license: "CC0"
   copyright: "Taken and modified from freesound.org"
   source: "https://freesound.org/people/mikobuntu/sounds/648733/"
+
+- files: ["gun_ml66a_2.ogg"]
+  license: "CC0-1.0"
+  copyright: "Taken and modified from freesound.org"
+  source: "https://freesound.org/people/SuperPhat/sounds/417686/"
