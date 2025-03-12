@@ -118,7 +118,7 @@ public sealed class SquadSystem : EntitySystem
             return;
         }
 
-        if (TryGetMemberSquad(args.Equipee, out var memberSquad) && memberSquad.Comp.DisableSquadArmor)
+        if (!member.HasSquadArmor)
             return;
 
         var rsi = wearer.Leader ? ent.Comp.LeaderRsi : ent.Comp.Rsi;
@@ -440,6 +440,7 @@ public sealed class SquadSystem : EntitySystem
         member.Squad = team;
         member.Background = team.Comp.Background;
         member.BackgroundColor = team.Comp.Color;
+        member.HasSquadArmor = team.Comp.HasSquadArmor;
         Dirty(marine, member);
 
         var grant = EnsureComp<SquadGrantAccessComponent>(marine);
