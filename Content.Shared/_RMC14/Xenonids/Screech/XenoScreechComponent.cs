@@ -1,4 +1,4 @@
-﻿using Content.Shared.FixedPoint;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -35,5 +35,5 @@ public sealed partial class XenoScreechComponent : Component
     public EntProtoId Effect = "CMEffectScreech";
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_queen_screech.ogg", AudioParams.Default.WithVolume(-7));
+    public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/Animals/cat_meow.ogg", AudioParams.Default.WithVolume(-7));
 }
