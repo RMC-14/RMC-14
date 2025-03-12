@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: crystalHex
-  changes:
-  - message: Attempting to unholster a gun from a belt holster while unable to interact
-      with inventory items no longer breaks the holster.
-    type: Fix
-  id: 942
-  time: '2024-11-06T22:44:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4734
-- author: Vermidia
-  changes:
-  - message: Fixed medic and ez injectors not fitting into some storages
-    type: Fix
-  id: 943
-  time: '2024-11-07T08:18:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4744
 - author: Vermidia
   changes:
   - message: Fixed pens and cigarettes not fitting on ears
@@ -5216,5 +5201,22 @@
   id: 1443
   time: '2025-03-12T09:03:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5785
+- author: DummeHytteOst
+  changes:
+  - message: Added snow and desert camo variants to the general pistol holster.
+    type: Add
+  - message: Added holstered pistol visual to the general pistol holster.
+    type: Add
+  id: 1444
+  time: '2025-03-12T09:23:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5821
+- author: Vermidia
+  changes:
+  - message: Fixed some tables dropping too many rods when destroyed by ravager's
+      assault ability.
+    type: Fix
+  id: 1445
+  time: '2025-03-12T09:22:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5808
 Name: RMC14
 Order: -1
