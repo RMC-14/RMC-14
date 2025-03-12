@@ -1,0 +1,38 @@
+- type: entity
+  parent: RMCHeadCapFlippable
+  id: RMCBoonie
+  name: USCM boonie hat
+  description: A floppy bush hat. Protects only from the sun and rain, but very comfortable.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/boonie/jungle.rsi
+    layers:
+    - state: booniehat
+      map: [ "unfoldedLayer" ]
+    - state: booniehat_b
+      map: ["foldedLayer"]
+      visible: false
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/boonie/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      classic: _RMC14/Objects/Clothing/Head/Hats/boonie/classic.rsi
+      desert: _RMC14/Objects/Clothing/Head/Hats/boonie/desert.rsi
+      jungle: _RMC14/Objects/Clothing/Head/Hats/boonie/jungle.rsi
+      snow: _RMC14/Objects/Clothing/Head/Hats/boonie/snow.rsi
+      urban: _RMC14/Objects/Clothing/Head/Hats/boonie/urban.rsi
+  - type: Foldable
+    unfoldVerbText: fold-strap-verb
+    foldVerbText: fold-unstrap-verb
+
+- type: entity
+  parent: RMCBoonie
+  id: RMCBoonieTan
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/boonie/jungle.rsi
+    layers:
+    - state: booniehattan
+      map: [ "unfoldedLayer" ]
+    - state: booniehattan_b
+      map: ["foldedLayer"]
