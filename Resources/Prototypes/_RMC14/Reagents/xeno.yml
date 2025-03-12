@@ -366,43 +366,43 @@
     Poison:
       metabolismRate: 0.2
       effects:
+      # Self replicate by consuming blood
       - !type:AdjustReagent
         conditions:
-        - !type:ReagentThreshold
-          min: 100
-        reagent: RMCPlasmaEggHelper
-        amount: 1
-      - !type:AdjustReagent
-        conditions:
-        - !type:ReagentThreshold
-          max: 100
         - !type:BloodThreshold
           min: 10
+        - !type:ParasiteStatus
+          infected: false
         reagent: RMCPlasmaEgg
         amount: 1.2
       - !type:ModifyBloodLevel
         conditions:
-        - !type:ReagentThreshold
-          max: 100
         - !type:BloodThreshold
           min: 10
+        - !type:ParasiteStatus
+          infected: false
         amount: -10
-
-- type: reagent
-  parent: RMCPlasmaEgg
-  id: RMCPlasmaEggHelper
-  name: reagent-name-rmc-xenoplasmaegg-helper
-  desc: reagent-desc-rmc-xenoplasmaegg-helper
-  metabolisms:
-    Poison:
-      metabolismRate: 1
-      effects:
-      - !type:AddXenoEmbryo
+      # Infect on 100
       - !type:PopupMessage
+        conditions:
+        - !type:ParasiteStatus
+          infected: false
+        - !type:ReagentThreshold
+          min: 100
         type: Local
         visualType: LargeCaution
         messages: [ "reagent-effect-plasma-egg" ]
+      - !type:AddXenoEmbryo
+        conditions:
+        - !type:ParasiteStatus
+          infected: false
+        - !type:ReagentThreshold
+          min: 100
+      # Bit off cleanup
       - !type:AdjustReagent
+        conditions:
+        - !type:ParasiteStatus
+          infected: true
         reagent: RMCPlasmaEgg
         amount: -999
 

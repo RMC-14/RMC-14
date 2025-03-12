@@ -37,8 +37,6 @@ reagent-effect-guidebook-excreting =
 
 reagent-name-rmc-xenoplasmaegg = Egg Plasma
 reagent-desc-rmc-xenoplasmaegg = A white-ish plasma with a high concentration of protein...
-reagent-name-rmc-xenoplasmaegg-helper = Alien Egg
-reagent-desc-rmc-xenoplasmaegg-helper = A coagulated mass of egg plasma.
 reagent-effect-plasma-egg = Your stomach cramps and you suddenly feel very sick!
 reagent-effect-guidebook-plasma-egg =
     { $chance ->
@@ -57,3 +55,9 @@ reagent-effect-condition-guidebook-blood-threshold =
                     *[other] there's between {NATURALFIXED($min, 2)}u and {NATURALFIXED($max, 2)}u of blood
                  }
     }
+
+reagent-effect-condition-guidebook-infected =
+    the individual { $infected ->
+        [true] hosts
+        *[false] does not host
+    } an alien parasite
