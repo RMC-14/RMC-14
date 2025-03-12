@@ -60,7 +60,11 @@ public sealed partial class TacticalMapWindow : DefaultWindow
         };
 
         CooldownBar.ForegroundStyleBoxOverride = new StyleBoxFlat(Color.Red);
-        AreaLabelsCheckbox.OnPressed += args => Map.DrawAreaLabels = args.Button.Pressed;
+        AreaLabelsCheckbox.OnPressed += args =>
+        {
+            Map.DrawAreaLabels = args.Button.Pressed;
+            _config.SetCVar(RMCCVars.RMCTacticalMapShowAreaLabels, args.Button.Pressed);
+        };
         AreaLabelsCheckbox.Pressed = _config.GetCVar(RMCCVars.RMCTacticalMapShowAreaLabels);
         Map.DrawAreaLabels = AreaLabelsCheckbox.Pressed;
     }

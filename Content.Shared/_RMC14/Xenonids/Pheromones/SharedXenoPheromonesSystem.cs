@@ -311,7 +311,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         while (wardingQuery.MoveNext(out var uid, out var warding))
         {
             //Don't clear if we would die
-            if (KeepWarding(uid, warding, 0))
+            if (!_mobState.IsDead(uid) && KeepWarding(uid, warding, 0))
                 continue;
 
             oldWarding.Add(uid);

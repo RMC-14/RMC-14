@@ -619,6 +619,12 @@
     },
     {
       "name": "sensor_tower"
+    },
+    {
+      "name": "loader"
+    },
+    {
+      "name": "mortar"
     }
   ]
 }
