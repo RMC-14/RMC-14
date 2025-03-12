@@ -61,3 +61,9 @@ reagent-effect-condition-guidebook-infected =
         [true] hosts
         *[false] does not host
     } an alien parasite
+
+reagent-effect-condition-guidebook-valid-host =
+    the individual { $valid ->
+        [true] is
+        *[false] is not
+    } a valid host

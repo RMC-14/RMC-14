@@ -385,6 +385,7 @@
       # Infect on 100
       - !type:PopupMessage
         conditions:
+        - !type:ParasiteValidHost
         - !type:ParasiteStatus
           infected: false
         - !type:ReagentThreshold
@@ -394,6 +395,7 @@
         messages: [ "reagent-effect-plasma-egg" ]
       - !type:AddXenoEmbryo
         conditions:
+        - !type:ParasiteValidHost
         - !type:ParasiteStatus
           infected: false
         - !type:ReagentThreshold
@@ -403,6 +405,12 @@
         conditions:
         - !type:ParasiteStatus
           infected: true
+        reagent: RMCPlasmaEgg
+        amount: -999
+      - !type:AdjustReagent
+        conditions:
+        - !type:ParasiteValidHost
+          valid: false
         reagent: RMCPlasmaEgg
         amount: -999
 
