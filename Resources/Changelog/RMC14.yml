@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fix sentries continuing to fire after leaving their range
-    type: Fix
-  id: 938
-  time: '2024-11-06T22:39:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4740
 - author: Rainbeon
   changes:
   - message: Popups for Shoving, Tail Stab, Sentinel Paralyzing Slash, and Lurker
@@ -5210,5 +5203,12 @@
   id: 1439
   time: '2025-03-12T08:35:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5807
+- author: Arcticular1
+  changes:
+  - message: Brown gloves/boots + formal CO attire to CO's clothing vendor.
+    type: Add
+  id: 1440
+  time: '2025-03-12T08:46:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5733
 Name: RMC14
 Order: -1
