@@ -423,7 +423,6 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         tracked.Comp.Icon = mapBlipOverride ?? jobProto.MinimapIcon;
         tracked.Comp.Background = jobProto.MinimapBackground;
         UpdateSquadBackground(tracked);
-
     }
 
     private void UpdateSquadBackground(Entity<ActiveTacticalMapTrackedComponent> tracked)
