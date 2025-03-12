@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed corrosive acid taking too long to apply. It's now 1 second for
-      items and 4 for structures.
-    type: Fix
-  id: 936
-  time: '2024-11-06T01:27:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4706
 - author: DrSmugleaf
   changes:
   - message: Fixed the surplus uniform vendor not having a radio telephone pack.
@@ -5209,5 +5201,12 @@
   id: 1437
   time: '2025-03-12T08:28:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5866
+- author: Dygon
+  changes:
+  - message: Raffle durations aren't twice as long as intended anymore.
+    type: Fix
+  id: 1438
+  time: '2025-03-12T08:34:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5797
 Name: RMC14
 Order: -1
