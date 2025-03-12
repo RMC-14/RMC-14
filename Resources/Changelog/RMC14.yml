@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fix defibs having 10 instead of 15 charges
-    type: Fix
-  - message: Fixed Defibs being able to have their powercells removed
-    type: Fix
-  id: 941
-  time: '2024-11-06T22:41:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4731
 - author: crystalHex
   changes:
   - message: Attempting to unholster a gun from a belt holster while unable to interact
@@ -5212,13 +5203,15 @@
   url: https://github.com/RMC-14/RMC-14/pull/5820
 - author: OmerF-afk
   changes:
-  - message: Added numerous additions to Trijent Dam, focusing on the CMB armory, paper bins, and missing guns.
+  - message: Added numerous additions to Trijent Dam, focusing on the CMB armory,
+      paper bins, and missing guns.
     type: Add
   - message: Added new CMB clothing, armor, helmet, and visor.
     type: Add
-  - message: Added four faction cups—UN, UNMC, CLF, and SPP.
+  - message: "Added four faction cups\u2014UN, UNMC, CLF, and SPP."
     type: Add
-  - message: Added three new planet-only guns—FN P90, CMB Spearhead, and HG 3712.
+  - message: "Added three new planet-only guns\u2014FN P90, CMB Spearhead, and HG\
+      \ 3712."
     type: Add
   id: 1443
   time: '2025-03-12T09:03:20.0000000+00:00'
