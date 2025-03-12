@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: RMCTileFire
   name: fire
   placement:
@@ -107,6 +107,10 @@
       state: white_4
   - type: PointLight
     color: "#8fcbeb"
+    radius: 1.5
+    energy: 2
+  - type: RgbLightController
+    layers: [ 0 ]
   - type: RMCIgniteOnCollide
     intensity: 80
     duration: 70
