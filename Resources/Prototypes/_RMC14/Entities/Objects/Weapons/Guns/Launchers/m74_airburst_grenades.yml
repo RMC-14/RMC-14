@@ -414,6 +414,7 @@
     knockBackPowerMax: 3
     knockBackSpeed: 5
     forceKnockBack: true
+    slowsEffectBigXenos: true
     dazeTime: 3.4
   - type: RMCProjectileAccuracy
     accuracy: 100

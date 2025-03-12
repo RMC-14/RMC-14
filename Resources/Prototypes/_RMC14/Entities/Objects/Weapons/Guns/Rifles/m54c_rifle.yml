@@ -50,6 +50,7 @@
           - CMMagazineRifleM54C
           - CMMagazineRifleM54CAP
           - CMMagazineRifleM54CExt
+          - RMCMagazineRifleM54CIncendiary
   - type: GunDamageModifier
     multiplier: 1.1
   - type: AttachableHolder
@@ -163,6 +164,33 @@
 
 - type: entity
   parent: CMMagazineRifleM54C
+  id: RMCMagazineRifleM54CIncendiary
+  name: "M54C Incendiary magazine (10x24mm)"
+  suffix: Incendiary
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleM54CIncendiary
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmIncendiary
+    proto: RMCCartridgeRifle10x24mmIncendiary
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#771A10"
+#  - type: RefillableByBulletBox no bullet box for it yet
+#    bulletType: RMCBoxBulletsRifleAP
+
+- type: entity
+  parent: CMMagazineRifleM54C
   id: CMMagazineRifleM54CExt
   name: "M54C extended magazine (10x24mm)"
   components:
@@ -217,6 +245,19 @@
     proto: BulletRifle10x24mmAP
 
 - type: entity
+  parent: CMCartridgeRifle10x24mm
+  id: RMCCartridgeRifle10x24mmIncendiary
+  name: AP cartridge (10x24mm)
+  description: An armor piercing 10x24mm cartridge. Fits in 10x24mm AP magazines.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifle10x24mmIncendiary
+  - type: CartridgeAmmo
+    proto: RMCBulletRifle10x24mmIncendiary
+
+- type: entity
   parent: RMCBaseBullet
   id: BulletRifle10x24mm
   categories: [ HideSpawnMenu ]
@@ -252,6 +293,19 @@
   - type: CMArmorPiercing
     amount: 40
 
+- type: entity
+  parent: BulletRifle10x24mm
+  id: RMCBulletRifle10x24mmIncendiary
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 33
+  - type: CMArmorPiercing
+    amount: 5
+  - type: IgniteOnProjectileHit
+
 - type: Tag
   id: RMCWeaponRifleM54CMK2
 
@@ -262,6 +316,9 @@
   id: CMMagazineRifleM54CAP
 
 - type: Tag
+  id: RMCMagazineRifleM54CIncendiary
+
+- type: Tag
   id: CMMagazineRifleM54CExt
 
 - type: Tag
@@ -269,3 +326,6 @@
 
 - type: Tag
   id: CMCartridgeRifle10x24mmAP
+
+- type: Tag
+  id: RMCCartridgeRifle10x24mmIncendiary

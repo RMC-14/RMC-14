@@ -106,6 +106,19 @@
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/urban.rsi
 
 - type: entity
+  parent: CMArmorHelmetM10Medic
+  id: RMCArmorHelmetM10MedicWhite
+  name: M10 white corpsman helmet
+  description: An M10 marine helmet version worn by marine hospital corpsmen. Painted in medical white and has white cross in a blue square painted on its front.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/medic_white.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/medic_white.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
   parent: ArmorHelmetM10
   id: CMArmorHelmetM10Tech
   name: M10 tech helmet
