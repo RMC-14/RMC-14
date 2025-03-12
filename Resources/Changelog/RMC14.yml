@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Popups for Shoving, Tail Stab, Sentinel Paralyzing Slash, and Lurker
-      Crippling Strike are no longer predicted. This means the message will no longer
-      mispredict and lie to you about their effects happening, but will appear later
-      than they used to on successes.
-    type: Fix
-  id: 939
-  time: '2024-11-06T22:42:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4703
-- author: Vermidia
-  changes:
-  - message: Fixed shield fruit not applying the first time it's used
-    type: Fix
-  id: 940
-  time: '2024-11-06T22:42:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4730
 - author: Vermidia
   changes:
   - message: Fix defibs having 10 instead of 15 charges
@@ -5210,5 +5193,22 @@
   id: 1440
   time: '2025-03-12T08:46:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5733
+- author: Tobi-nator
+  changes:
+  - message: Added new ML66A Smartgun sounds
+    type: Tweak
+  id: 1441
+  time: '2025-03-12T08:50:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5843
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed helmet garbs not being 1 point in loadouts.
+    type: Fix
+  - message: Added M5 integrated gas mask, rain cover, netting, and gun oil to the
+      surplus squad prep vendors.
+    type: Add
+  id: 1442
+  time: '2025-03-12T08:51:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5820
 Name: RMC14
 Order: -1
