@@ -102,6 +102,10 @@
     {
       "name": "crawler_fuel",
       "directions": 4
+    },
+    {
+      "name": "van_candy",
+      "directions": 4
     }
   ]
 }

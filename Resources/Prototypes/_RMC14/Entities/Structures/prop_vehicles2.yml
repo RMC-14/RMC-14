@@ -290,6 +290,9 @@
         shape:
           !type:PhysShapeAabb
           bounds: "-0.5,-0.8,0.5,0.8"
+        density: 190
+        layer:
+        - MobMask
 
 - type: entity
   parent: RMCPropVehicleVan
@@ -308,3 +311,12 @@
   components:
   - type: Sprite
     state: van_snow
+
+- type: entity
+  parent: RMCPropVehicleVan
+  id: RMCPropVehicleVanCandy
+  name: van
+  description: An old van, seems to be filled with... Candy?
+  components:
+  - type: Sprite
+    state: van_candy
