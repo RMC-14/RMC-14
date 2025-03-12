@@ -109,7 +109,7 @@
   components:
   - type: SquadTeam
     color: "#053818"
-    hasSquadArmor: false
+    disableSquadArmor: true
     minimapBackground:
      sprite: _RMC14/Interface/map_blips.rsi
      state: background_intel
