@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: crystalHex
   changes:
-  - message: Added the general pistol holster rig, revolver holster rig, smart gun
-      operator sidearm belt and M63 holster rig (without pouches).
-    type: Add
-  id: 932
-  time: '2024-11-04T02:00:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3625
-- author: crystalHex
-  changes:
   - message: Added a verb to the context menu to allow for webbing to be removed from
       dead marines without stripping them of their uniform (and dignity).
     type: Tweak
@@ -5195,5 +5187,16 @@
   id: 1433
   time: '2025-03-12T02:14:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5823
+- author: Dutch-VanDerLinde
+  changes:
+  - message: You now get a special job icon and title when using a loader or mortar
+      operator pamphlet.
+    type: Add
+  - message: Fixed roles other than riflemen being able to use the loader or mortar
+      operator pamphlet.
+    type: Fix
+  id: 1434
+  time: '2025-03-12T02:26:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5874
 Name: RMC14
 Order: -1
