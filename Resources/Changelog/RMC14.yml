@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the surplus uniform vendor not having a radio telephone pack.
-    type: Fix
-  - message: Fixed not showing counts for any votes.
-    type: Fix
-  id: 937
-  time: '2024-11-06T05:30:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4713
 - author: Vermidia
   changes:
   - message: Fix sentries continuing to fire after leaving their range
@@ -5208,5 +5199,16 @@
   id: 1438
   time: '2025-03-12T08:34:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5797
+- author: Vermidia
+  changes:
+  - message: Fixed infected hosts losing tacklestacks and not consistently being able
+      to keep them tackled down.
+    type: Fix
+  - message: Fixed tacklestacks getting removed if you would get knocked down while
+      already knocked down.
+    type: Fix
+  id: 1439
+  time: '2025-03-12T08:35:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5807
 Name: RMC14
 Order: -1
