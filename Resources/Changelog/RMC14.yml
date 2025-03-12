@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed helmets being small
-    type: Fix
-  id: 935
-  time: '2024-11-06T01:28:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4710
-- author: Vermidia
-  changes:
   - message: Fixed corrosive acid taking too long to apply. It's now 1 second for
       items and 4 for structures.
     type: Fix
@@ -5208,5 +5201,13 @@
   id: 1436
   time: '2025-03-12T05:53:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5803
+- author: blueDev2
+  changes:
+  - message: '"Find Parasite" action does not show standard UI and shows a warning
+      popup if the user cannot take a ghost role'
+    type: Tweak
+  id: 1437
+  time: '2025-03-12T08:28:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5866
 Name: RMC14
 Order: -1
