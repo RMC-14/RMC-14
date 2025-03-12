@@ -145,3 +145,5 @@
     damage:
       types:
         Slash: 40
+  - type: Bloodstream
+    bloodReagent: [RMCXenoBlood, RMCPlasmaCatecholamine]

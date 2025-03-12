@@ -84,6 +84,14 @@
   - type: RequireProjectileTarget
   - type: XenoInhandSprite
     stateName: egg
+  - type: Extractable
+    grindableSolutionName: egg
+  - type: SolutionContainerManager
+    solutions:
+      egg:
+        reagents:
+        - ReagentId: RMCPlasmaEgg
+          Quantity: 60
 
 - type: entity
   parent: BaseItem

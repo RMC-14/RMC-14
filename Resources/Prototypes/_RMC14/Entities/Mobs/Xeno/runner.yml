@@ -109,6 +109,8 @@
     baseSprintSpeed: 10
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.1
+  - type: Bloodstream
+    bloodReagent: [RMCXenoBlood, RMCPlasmaCatecholamine]
 
 - type: entity
   parent: CMXenoRunnerBase

@@ -245,7 +245,7 @@
       - !type:GenericStatusEffect
         key: StaminaModifier
         component: StaminaModifier
-        time: 3
+        time: 1.1
         type: Add
       # TODO: Pain
       - !type:HealthChange

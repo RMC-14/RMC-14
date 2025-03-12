@@ -149,3 +149,5 @@
     damage: #per second, scales with number of fire 'stacks'
       types:
         Heat: 3
+  - type: Bloodstream
+    bloodReagent: [RMCXenoBlood, RMCPlasmaNeurotoxin]

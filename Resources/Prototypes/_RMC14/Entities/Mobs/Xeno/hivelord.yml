@@ -91,6 +91,8 @@
       state: hivelord
   - type: XenoInhands
     prefix: hivelord
+  - type: Bloodstream
+    bloodReagent: [RMCXenoBlood, RMCPlasmaPurple, RMCPlasmaPheromone]
 
 - type: entity
   parent: CMXenoHivelordBase
