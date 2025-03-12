@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: MetalSage
-  changes:
-  - message: Added XM51 shotgun
-    type: Add
-  id: 945
-  time: '2024-11-08T01:19:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3778
 - author: UnicornOnLSD
   changes:
   - message: Added General's formal cloak
@@ -5216,5 +5209,12 @@
   id: 1446
   time: '2025-03-12T09:33:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5813
+- author: Tunguso4ka
+  changes:
+  - message: Ported Draconic Wings for reptilians.
+    type: Add
+  id: 1447
+  time: '2025-03-12T09:50:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5804
 Name: RMC14
 Order: -1
