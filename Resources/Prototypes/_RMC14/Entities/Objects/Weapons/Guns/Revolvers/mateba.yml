@@ -350,12 +350,12 @@
     maxItemSize: Small
     grid:
     - 0,0,9,1 # 7 slots
-  - type: FixedItemSizeStorage
     whitelist:
       tags:
       - RMCAttachmentMatebaStandard
       - RMCAttachmentMatebaMarksman
       - RMCAttachmentMatebaSnubNose
+  - type: FixedItemSizeStorage
   - type: StorageFill
     contents:
     - id: RMCAttachmentMatebaStandard
