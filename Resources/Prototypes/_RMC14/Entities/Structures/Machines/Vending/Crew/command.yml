@@ -519,10 +519,10 @@
         points: 20
     - name: Sidearm Ammunition
       entries:
-      - id: RMCSpeedLoaderMateba
+      - id: RMCSpeedLoaderMatebaHighImpact
         points: 15
-    #   - id: CMMagazineMatebaAP  # TODO RMC14 Port More Sidearm Ammo
-    #     points: 20
+      - id: RMCSpeedLoaderMatebaHIAP
+        points: 20
       - id: RMCMagazinePistolD50WinterWyvernHI
         points: 15
       - id: RMCMagazinePistolD50WinterWyvernHIAP
@@ -537,7 +537,8 @@
         points: 20
     - name: Special Ammunition
       entries:
-      #- id: M54C Incendiary Magazine
+      - id: RMCMagazineRifleM54CIncendiary
+        points: 65
       #- id: M54C Rubber Magazine
       - id: RMCBoxShotgunBeanbag
         points: 10

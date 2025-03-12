@@ -13,6 +13,32 @@
     - CMHeadBeretCOCol
 
 - type: loadout
+  id: ColIDCardRMC
+  cost: 3 # same price as headwear
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobCommandingOfficer
+      time: 630000 # 175 hrs
+  equipment:
+    id: RMCIDCardCommandingOfficerPlus
+
+- type: loadout
+  id: ColNormalIDCardRMC
+  cost: 0
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobCommandingOfficer
+      time: 252000 # 70 hrs
+      inverted: true
+  equipment:
+    id: CMIDCardCommandingOfficer
+
+
+- type: loadout
   id: LtColBeretRMC
   cost: 3
   effects:
