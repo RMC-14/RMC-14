@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Fixed Xeno Spit Projectiles and Runner Bone Chips not shooting where
-      you are actually aiming.
-    type: Fix
-  id: 931
-  time: '2024-11-04T01:56:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4693
 - author: crystalHex
   changes:
   - message: Added the general pistol holster rig, revolver holster rig, smart gun
@@ -5196,5 +5188,12 @@
   id: 1432
   time: '2025-03-09T23:26:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5798
+- author: OmerF-afk
+  changes:
+  - message: Added M10 White Medic Helmet to Corpsman vendors
+    type: Add
+  id: 1433
+  time: '2025-03-12T02:14:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5823
 Name: RMC14
 Order: -1
