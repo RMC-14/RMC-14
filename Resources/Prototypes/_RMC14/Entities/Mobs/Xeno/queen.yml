@@ -9,6 +9,9 @@
   components:
   - type: GhostRole
     name: cm-job-name-xeno-queen
+  - type: OwOAccent
+  - type: Speech
+    speechSounds: Cat
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Extras/queen.rsi
     layers:
