@@ -14,20 +14,20 @@
       "name": "sleeping"
     },
     {
-      "name": "walk",
+      "name": "alive",
       "directions": 4
     },
     {
-      "name": "wawa_downed_0"
+        "name": "larva_downed_0"
     },
     {
-      "name": "wawa_downed_1"
+        "name": "larva_downed_1"
     },
     {
-      "name": "wawa_downed_2"
+        "name": "larva_downed_2"
     },
     {
-      "name": "wawa_downed_3"
+        "name": "larva_downed_3"
     },
     {
       "name": "dead"
