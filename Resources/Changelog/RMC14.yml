@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: crystalHex
-  changes:
-  - message: Added a verb to the context menu to allow for webbing to be removed from
-      dead marines without stripping them of their uniform (and dignity).
-    type: Tweak
-  id: 933
-  time: '2024-11-04T02:03:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4666
 - author: DrSmugleaf
   changes:
   - message: Fixed telephones not listing a marine's squad.
@@ -5198,5 +5190,13 @@
   id: 1434
   time: '2025-03-12T02:26:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5874
+- author: Vermidia
+  changes:
+  - message: Fixed fruits not having a spent state. Gardener UI for choosing fruits
+      now also shows them in their full grown state.
+    type: Fix
+  id: 1435
+  time: '2025-03-12T05:51:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5822
 Name: RMC14
 Order: -1
