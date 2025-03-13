@@ -1,4 +1,4 @@
-chat-radio-marine-highcommand = Marine High Command
+chat-radio-marine-highcommand = HighCom
 
 chat-radio-marine-common = Almayer
 chat-radio-marine-command = Command
