@@ -158,6 +158,78 @@
       recoilFlat: 2
 
 
+- type: entity
+  parent: RMCBarrelAttachmentBase
+  id: RMCAttachmentMatebaMarksman
+  name: Marksman Mateba Barrel
+  description: A marksman mateba barrel. Offers a greater accuracy at the cost of fire rate.
+  components:
+  - type: Sprite
+    state: mateba_long
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentMatebaMarksman
+  - type: AttachableVisuals
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - accuracyAddMult: 0.2
+    - scatterFlat: -0.5
+    - fireDelayFlat: 0.5
+
+- type: entity
+  parent: RMCBarrelAttachmentBase
+  id: RMCAttachmentMatebaSnubNose
+  name: Snubnose Mateba Barrel
+  description: A snubnosed mateba barrel. Offers a fast fire rate at the cost of accuracy.
+  components:
+  - type: Sprite
+    state: mateba_short
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentMatebaSnubNose
+  - type: AttachableVisuals
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - accuracyAddMult: -0.2
+    - scatterFlat: 0.5
+    - fireDelayFlat: -0.5
+
+- type: entity
+  parent: RMCAttachmentMatebaMarksman
+  id: RMCAttachmentMatebaStandardGolden
+  components:
+  - type: Sprite
+    state: amateba_medium
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentMatebaStandardGolden
+
+- type: entity
+  parent: RMCAttachmentMatebaStandard
+  id: RMCAttachmentMatebaMarksmanGolden
+  components:
+  - type: Sprite
+    state: amateba_long
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentMatebaMarksmanGolden
+
+- type: entity
+  parent: RMCAttachmentMatebaSnubNose
+  id: RMCAttachmentMatebaSnubNoseGolden
+  components:
+  - type: Sprite
+    state: amateba_short
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentMatebaSnubNoseGolden
+
+
 - type: Tag
   id: RMCAttachmentBarrel
 
@@ -178,3 +250,18 @@
 
 - type: Tag
   id: RMCAttachmentShotgunChoke
+
+- type: Tag
+  id: RMCAttachmentMatebaMarksman
+
+- type: Tag
+  id: RMCAttachmentMatebaSnubNose
+
+- type: Tag
+  id: RMCAttachmentMatebaStandardGolden
+
+- type: Tag
+  id: RMCAttachmentMatebaMarksmanGolden
+
+- type: Tag
+  id: RMCAttachmentMatebaSnubNoseGolden

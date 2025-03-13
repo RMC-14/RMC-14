@@ -284,6 +284,13 @@
   - ColBeretRMC
   - LtColBeretRMC
 
+- type: loadoutGroup
+  id: CommandingOfficerIDRMC
+  name: rmc-loadout-group-role-specific-ID
+  loadouts:
+  - ColIDCardRMC
+  - ColNormalIDCardRMC
+
 # Pins
 - type: loadoutGroup
   id: RMCLoadoutGroupPins
