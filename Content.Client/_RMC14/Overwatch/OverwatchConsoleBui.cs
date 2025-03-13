@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Content.Client._RMC14.UserInterface;
 using Content.Client.Message;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Overwatch;
@@ -17,7 +18,7 @@ using static Robust.Client.UserInterface.Controls.BoxContainer;
 namespace Content.Client._RMC14.Overwatch;
 
 [UsedImplicitly]
-public sealed class OverwatchConsoleBui : BoundUserInterface
+public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
 {
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
@@ -25,8 +26,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
     private const string RedColor = "#A42625";
     private const string YellowColor = "#CED22B";
 
-    [ViewVariables]
-    private OverwatchConsoleWindow? _window;
+    protected override OverwatchConsoleWindow? Window { get; set; }
 
     private readonly OverwatchConsoleSystem _overwatchConsole;
     private readonly SquadSystem _squad;
@@ -41,19 +41,16 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
 
     protected override void Open()
     {
-        if (_window != null)
+        if (Window != null)
             return;
 
-        _window = new OverwatchConsoleWindow();
-        _window.OnClose += Close;
-        _window.OverwatchHeader.SetMarkupPermissive($"[color=#88C7FA]OVERWATCH DISABLED - SELECT SQUAD[/color]");
+        Window = this.CreatePopOutableWindow<OverwatchConsoleWindow>();
+        Window.OverwatchHeader.SetMarkupPermissive("[color=#88C7FA]OVERWATCH DISABLED - SELECT SQUAD[/color]");
 
         if (State is OverwatchConsoleBuiState s)
             RefreshState(s);
 
         UpdateView();
-
-        _window.OpenCentered();
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -64,13 +61,13 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
 
     private void RefreshState(OverwatchConsoleBuiState s)
     {
-        if (_window == null ||
+        if (Window == null ||
             !EntMan.TryGetComponent(Owner, out OverwatchConsoleComponent? console))
         {
             return;
         }
 
-        _window.SquadsContainer.DisposeAllChildren();
+        Window.SquadsContainer.DisposeAllChildren();
 
         var squads = s.Squads.ToList();
         squads.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name));
@@ -87,7 +84,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
 
             var panel = CreatePanel();
             panel.AddChild(squadButton);
-            _window.SquadsContainer.AddChild(panel);
+            Window.SquadsContainer.AddChild(panel);
         }
 
         var activeSquad = GetActiveSquad();
@@ -204,7 +201,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
                                                         overwatch.CanMessageSquad;
 
                 _squadViews[squad.Id] = monitor;
-                _window.SquadViewContainer.AddChild(monitor);
+                Window.SquadViewContainer.AddChild(monitor);
             }
 
             monitor.OverwatchLabel.Text = $"{squad.Name} Overwatch | Dashboard";
@@ -513,7 +510,7 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
 
     private void UpdateView()
     {
-        if (_window == null ||
+        if (Window == null ||
             !EntMan.TryGetComponent(Owner, out OverwatchConsoleComponent? console))
         {
             return;
@@ -523,15 +520,15 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
         var activeSquad = GetActiveSquad();
         if (activeSquad == null)
         {
-            _window.OverwatchViewContainer.Visible = true;
-            _window.SquadViewContainer.Visible = false;
-            _window.Wrapper.VerticalAlignment = VAlignment.Top;
+            Window.OverwatchViewContainer.Visible = true;
+            Window.SquadViewContainer.Visible = false;
+            Window.Wrapper.VerticalAlignment = VAlignment.Top;
         }
         else
         {
-            _window.OverwatchViewContainer.Visible = false;
-            _window.SquadViewContainer.Visible = true;
-            _window.Wrapper.VerticalAlignment = VAlignment.Stretch;
+            Window.OverwatchViewContainer.Visible = false;
+            Window.SquadViewContainer.Visible = true;
+            Window.Wrapper.VerticalAlignment = VAlignment.Stretch;
         }
 
         var consoleOperator = GetOperator();
@@ -746,13 +743,5 @@ public sealed class OverwatchConsoleBui : BoundUserInterface
     {
         if (State is OverwatchConsoleBuiState s)
             RefreshState(s);
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        base.Dispose(disposing);
-
-        if (disposing)
-            _window?.Dispose();
     }
 }
