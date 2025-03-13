@@ -132,6 +132,7 @@
     spawnPrototype: RMCWindowFrameAlmayer
     sound:
       collection: WindowShatter
+  - type: ImmuneToUnarmed
 
 - type: entity
   parent: CMBaseWindowIndestructible
