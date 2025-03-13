@@ -92,9 +92,6 @@ public sealed partial class EggMorpherSystem : EntitySystem
             if (_mobState.IsDead(user))
                 return;
 
-            if (_net.IsClient)
-                return;
-
             _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-return-self", ("parasite", user)), eggMorpher);
 
             QueueDel(user);
@@ -126,6 +123,12 @@ public sealed partial class EggMorpherSystem : EntitySystem
         if (!HasComp<XenoParasiteComponent>(used))
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-egg-morpher-attempt-insert-non-parasite"), eggMorpher, user);
+            return;
+        }
+
+        if (!HasComp<ParasiteAIComponent>(used))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-awake-child", ("parasite", used)), user, user, PopupType.SmallCaution);
             return;
         }
 
@@ -274,6 +277,12 @@ public sealed partial class EggMorpherSystem : EntitySystem
         return eggMorpher.Comp.StandardSpawnCooldown;
     }
 
+    /// <summary>
+    /// Will return false if client side, make popup code with this in mind
+    /// </summary>
+    /// <param name="eggMorpher"></param>
+    /// <param name="parasite"></param>
+    /// <returns></returns>
     public bool TryCreateParasiteFromEggMorpher(Entity<EggMorpherComponent> eggMorpher, [NotNullWhen(true)] out EntityUid? parasite)
     {
         parasite = null;
@@ -285,6 +294,12 @@ public sealed partial class EggMorpherSystem : EntitySystem
         }
         comp.CurParasites--;
         Dirty(eggMorpher);
+
+        if (_net.IsClient)
+        {
+            parasite = EntityUid.Invalid;
+            return true;
+        }
 
         parasite = SpawnAtPosition(EggMorpherComponent.ParasitePrototype, ent.ToCoordinates());
         if (parasite is not null)

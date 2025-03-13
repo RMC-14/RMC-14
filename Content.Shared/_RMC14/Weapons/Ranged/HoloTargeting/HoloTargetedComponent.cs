@@ -23,4 +23,10 @@ public sealed partial class HoloTargetedComponent : Component
     /// </summary>
     [DataField]
     public float DecayTimer;
+
+    /// <summary>
+    ///     The amount of time in seconds of not being hit before stacks start decaying.
+    /// </summary>
+    [DataField]
+    public float DecayDelay = 5;
 }

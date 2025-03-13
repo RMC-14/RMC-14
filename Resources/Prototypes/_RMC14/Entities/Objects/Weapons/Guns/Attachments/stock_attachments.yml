@@ -231,7 +231,32 @@
       recoilFlat: 2
       scatterFlat: 6
 
-
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentMK221Stock
+  name: MK221 tactical stock
+  description: A metal stock made for the MK221 tactical shotgun.
+  components:
+  - type: Sprite
+    state: tactical_stock
+  - type: AttachableVisuals
+    suffix: "_a" #shotgun is called XM38
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentMK221Stock
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.5
+      recoilFlat: -1
+      scatterFlat: -2
+    - conditions:
+        unwieldedOnly: true
+      accuracyAddMult: 0.5
+      recoilFlat: -1
+      scatterFlat: -2
 
 - type: entity
   parent: RMCStockAttachmentBase
@@ -716,6 +741,29 @@
       Classic: c_boomslang-stock
       Urban: u_boomslang-stock
 
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentHG3712Stock
+  name: HG3712 stock
+  description: The non-detachable stock of a HG 37-12 pump shotgun.
+  components:
+  - type: Sprite
+    state: hg3712_stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentHG3712Stock
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 10
+
+- type: Tag
+  id: RMCAttachmentHG3712Stock
+
 - type: Tag
   id: RMCAttachmentStock
 
@@ -769,3 +817,6 @@
 
 - type: Tag
   id: RMCAttachmentXM88Stock
+
+- type: Tag
+  id: RMCAttachmentMK221Stock

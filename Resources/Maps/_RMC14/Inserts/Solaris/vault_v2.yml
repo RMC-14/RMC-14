@@ -7,6 +7,8 @@ tilemap:
   338: CMFloorSteelPlanetDarkPurpleCorners0
   340: CMFloorSteelPlanetDarkPurpleCorners2
   367: CMFloorSteelPlanetDelivery
+  1: CMFloorSteelPlanetWhiteGreen0
+  2: CMFloorSteelPlanetWhiteGreen4
   831: CMFloorStrataWhiteCyan12
   934: CMPlanetMarsCave1
   1622: RMCFloorPlatingNorthEast
@@ -23,7 +25,7 @@ entities:
       chunks:
         0,0:
           ind: 0,0
-          tiles: pgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAAAAAAAAAAAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAPwMAAAAAPwMAAAAAPwMAAAAAPwMAAAAAPwMAAAAAyAAAAAAAAAAAAAAAAAAAAAAAVAEAAAAAVAEAAAAAVAEAAAAAVAEAAAAAVAEAAAAAVAEAAAAAVAEAAAAAbwEAAAAAPwMAAAAAVgYAAAAAVgYAAAAAVgYAAAAAPwMAAAAAyAAAAAAAAAAAAAAAAAAAAAAAUgEAAAAAUgEAAAAAUgEAAAAAUgEAAAAAUgEAAAAAUgEAAAAAUgEAAAAAyAAAAAAAPwMAAAAAVgYAAAAAVgYAAAAAVgYAAAAAPwMAAAAAyAAAAAAAAAAAAAAAAAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAPwMAAAAAVgYAAAAAVgYAAAAAVgYAAAAAPwMAAAAAyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAyAAAAAAAPwMAAAAAPwMAAAAAPwMAAAAAPwMAAAAAPwMAAAAAyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          tiles: pgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAAAAAAAAAAAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAPwMAAAAAPwMAAAAAPwMAAAAAPwMAAAAAPwMAAAAAyAAAAAAAAAAAAAAAAAAAAAAAVAEAAAAAVAEAAAAAVAEAAAAAVAEAAAAAVAEAAAAAVAEAAAAAVAEAAAAAbwEAAAAAPwMAAAAAVgYAAAAAVgYAAAAAVgYAAAAAPwMAAAAAyAAAAAAAAAAAAAAAAAAAAAAAUgEAAAAAUgEAAAAAUgEAAAAAUgEAAAAAUgEAAAAAUgEAAAAAUgEAAAAAyAAAAAAAPwMAAAAAVgYAAAAAVgYAAAAAVgYAAAAAPwMAAAAAyAAAAAAAAAAAAAAAAAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAPwMAAAAAVgYAAAAAVgYAAAAAVgYAAAAAPwMAAAAAyAAAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAyAAAAAAAPwMAAAAAPwMAAAAAPwMAAAAAPwMAAAAAPwMAAAAAyAAAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAAAAAAAAAAAAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAAyAAAAAAAyAAAAAAAyAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAyAAAAAAAyAAAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAApgMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
           version: 6
     - type: Broadphase
     - type: Physics
@@ -44,7 +46,17 @@ entities:
     - type: DecalGrid
       chunkCollection:
         version: 2
-        nodes: []
+        nodes:
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalHybrisaWEYALogo1
+          decals:
+            1: 9.5,7
+        - node:
+            color: '#FFFFFFFF'
+            id: RMCDecalHybrisaWEYALogo2
+          decals:
+            2: 10.5,7
     - type: GridAtmosphere
       version: 2
       data:
@@ -270,6 +282,13 @@ entities:
     - type: Transform
       pos: 12.69365,8.823352
       parent: 1
+- proto: CMHydroponicsTray
+  entities:
+  - uid: 123
+    components:
+    - type: Transform
+      pos: 0.5,13.5
+      parent: 1
 - proto: CMLightFixture
   entities:
   - uid: 39
@@ -293,6 +312,13 @@ entities:
     components:
     - type: Transform
       pos: 3.5,6.5
+      parent: 1
+- proto: CMVendorNutri
+  entities:
+  - uid: 124
+    components:
+    - type: Transform
+      pos: 1.5,13.5
       parent: 1
 - proto: CMWallSolarisReinforced
   entities:
@@ -441,6 +467,31 @@ entities:
     - type: Transform
       pos: 8.5,10.5
       parent: 1
+  - uid: 118
+    components:
+    - type: Transform
+      pos: 0.5,12.5
+      parent: 1
+  - uid: 119
+    components:
+    - type: Transform
+      pos: 1.5,12.5
+      parent: 1
+  - uid: 120
+    components:
+    - type: Transform
+      pos: 2.5,12.5
+      parent: 1
+  - uid: 121
+    components:
+    - type: Transform
+      pos: 2.5,13.5
+      parent: 1
+  - uid: 122
+    components:
+    - type: Transform
+      pos: 3.5,13.5
+      parent: 1
 - proto: CMWallSolarisRock
   entities:
   - uid: 75
@@ -492,6 +543,174 @@ entities:
     components:
     - type: Transform
       pos: 0.5,0.5
+      parent: 1
+  - uid: 89
+    components:
+    - type: Transform
+      pos: 0.5,9.5
+      parent: 1
+  - uid: 90
+    components:
+    - type: Transform
+      pos: 0.5,4.5
+      parent: 1
+  - uid: 91
+    components:
+    - type: Transform
+      pos: 0.5,3.5
+      parent: 1
+  - uid: 92
+    components:
+    - type: Transform
+      pos: 0.5,10.5
+      parent: 1
+  - uid: 93
+    components:
+    - type: Transform
+      pos: 0.5,11.5
+      parent: 1
+  - uid: 94
+    components:
+    - type: Transform
+      pos: 6.5,4.5
+      parent: 1
+  - uid: 95
+    components:
+    - type: Transform
+      pos: 6.5,3.5
+      parent: 1
+  - uid: 96
+    components:
+    - type: Transform
+      pos: 7.5,3.5
+      parent: 1
+  - uid: 97
+    components:
+    - type: Transform
+      pos: 8.5,3.5
+      parent: 1
+  - uid: 98
+    components:
+    - type: Transform
+      pos: 9.5,3.5
+      parent: 1
+  - uid: 99
+    components:
+    - type: Transform
+      pos: 10.5,3.5
+      parent: 1
+  - uid: 100
+    components:
+    - type: Transform
+      pos: 11.5,3.5
+      parent: 1
+  - uid: 101
+    components:
+    - type: Transform
+      pos: 12.5,3.5
+      parent: 1
+  - uid: 102
+    components:
+    - type: Transform
+      pos: 13.5,3.5
+      parent: 1
+  - uid: 103
+    components:
+    - type: Transform
+      pos: 13.5,11.5
+      parent: 1
+  - uid: 104
+    components:
+    - type: Transform
+      pos: 13.5,12.5
+      parent: 1
+  - uid: 105
+    components:
+    - type: Transform
+      pos: 13.5,13.5
+      parent: 1
+  - uid: 106
+    components:
+    - type: Transform
+      pos: 12.5,13.5
+      parent: 1
+  - uid: 107
+    components:
+    - type: Transform
+      pos: 11.5,13.5
+      parent: 1
+  - uid: 108
+    components:
+    - type: Transform
+      pos: 12.5,12.5
+      parent: 1
+  - uid: 109
+    components:
+    - type: Transform
+      pos: 11.5,12.5
+      parent: 1
+  - uid: 110
+    components:
+    - type: Transform
+      pos: 10.5,12.5
+      parent: 1
+  - uid: 111
+    components:
+    - type: Transform
+      pos: 9.5,12.5
+      parent: 1
+  - uid: 112
+    components:
+    - type: Transform
+      pos: 9.5,11.5
+      parent: 1
+  - uid: 113
+    components:
+    - type: Transform
+      pos: 10.5,11.5
+      parent: 1
+  - uid: 114
+    components:
+    - type: Transform
+      pos: 11.5,11.5
+      parent: 1
+  - uid: 115
+    components:
+    - type: Transform
+      pos: 12.5,11.5
+      parent: 1
+  - uid: 116
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.5,10.5
+      parent: 1
+  - uid: 117
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.5,11.5
+      parent: 1
+- proto: CMWindoor
+  entities:
+  - uid: 127
+    components:
+    - type: Transform
+      pos: 10.5,9.5
+      parent: 1
+- proto: CMWindowReinforcedDirectional
+  entities:
+  - uid: 125
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 10.5,9.5
+      parent: 1
+  - uid: 126
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 10.5,9.5
       parent: 1
 - proto: RMCBarricadeWood
   entities:
@@ -720,5 +939,10 @@ entities:
     components:
     - type: Transform
       pos: 11.5,1.5
+      parent: 1
+  - uid: 128
+    components:
+    - type: Transform
+      pos: 0.5,6.5
       parent: 1
 ...
