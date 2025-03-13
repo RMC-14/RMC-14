@@ -30,6 +30,9 @@ public sealed partial class XenoFruitComponent : Component
     public string GrownState = "fruit_lesser";
 
     [DataField, AutoNetworkedField]
+    public string EatenState = "fruit_lesser_spent";
+
+    [DataField, AutoNetworkedField]
     public SoundSpecifier HarvestSound = new SoundCollectionSpecifier("XenoResinBreak")
     {
         Params = AudioParams.Default.WithVolume(-10f)
@@ -65,6 +68,9 @@ public sealed partial class XenoFruitComponent : Component
     // Color for the aura overlay
     [DataField, AutoNetworkedField]
     public Color OutlineColor;
+
+    [DataField, AutoNetworkedField]
+    public float SpentDespawnTime = 1.0f;
 }
 
 [Serializable, NetSerializable]
@@ -72,7 +78,8 @@ public enum XenoFruitState
 {
     Item,
     Growing,
-    Grown
+    Grown,
+    Eaten
 }
 
 [Serializable, NetSerializable]

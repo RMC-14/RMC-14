@@ -141,6 +141,7 @@
     speedMultiplierOutsider: 0.338
     speedMultiplierOutsiderArmor: 0.4856
     blockOtherWeeds: true
+    spreadsOnSemiWeedable: true
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
     drawdepth: FloorTiles
