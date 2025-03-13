@@ -61,7 +61,6 @@ public sealed class RMCPullingSystem : EntitySystem
 
         SubscribeLocalEvent<ParalyzeOnPullAttemptComponent, PullAttemptEvent>(OnParalyzeOnPullAttempt);
         SubscribeLocalEvent<InfectOnPullAttemptComponent, PullAttemptEvent>(OnInfectOnPullAttempt);
-        SubscribeLocalEvent<MeleeWeaponComponent, PullAttemptEvent>(OnMeleePullAttempt);
 
         SubscribeLocalEvent<SlowOnPullComponent, PullStartedMessage>(OnSlowPullStarted);
         SubscribeLocalEvent<SlowOnPullComponent, PullStoppedMessage>(OnSlowPullStopped);
@@ -236,16 +235,6 @@ public sealed class RMCPullingSystem : EntitySystem
             _popup.PopupClient(msg, ent, args.PullerUid, PopupType.SmallCaution);
             args.Cancelled = true;
         }
-    }
-
-    private void OnMeleePullAttempt(Entity<MeleeWeaponComponent> ent, ref PullAttemptEvent args)
-    {
-        if (args.PullerUid != ent.Owner)
-            return;
-
-        var weapon = ent.Comp;
-        if (weapon.Attacking || weapon.NextAttack > _timing.CurTime)
-            args.Cancelled = true;
     }
 
     private void OnPreventPulledWhileAliveStart(Entity<PreventPulledWhileAliveComponent> ent, ref PullStartedMessage args)
