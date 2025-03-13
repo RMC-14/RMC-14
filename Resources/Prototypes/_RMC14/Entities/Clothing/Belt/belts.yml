@@ -588,7 +588,7 @@
       state: mk80
       map: [ "mk80_fill" ]
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: b92fs 
+      state: b92fs
       map: [ "b92fs_fill" ]
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: highpower
@@ -757,6 +757,8 @@
     slots:
     - suitStorage
     - belt
+  - type: Item
+    size: Large
   - type: ContainerContainer
     containers:
       pouch: !type:ContainerSlot
