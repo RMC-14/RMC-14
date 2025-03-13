@@ -6,22 +6,14 @@ using Content.Shared.Coordinates;
 using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
-using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.StepTrigger.Systems;
-using Content.Shared.Stunnable;
 using Content.Shared.Verbs;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
 
@@ -35,8 +27,6 @@ public sealed partial class EggMorpherSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedHandsSystem _hand = default!;
 
     public override void Initialize()
     {
@@ -76,14 +66,13 @@ public sealed partial class EggMorpherSystem : EntitySystem
             return;
         }
 
-        var (ent, comp) = eggMorpher;
         var user = args.User;
 
         if (HasComp<XenoParasiteComponent>(user))
         {
             args.Handled = true;
 
-            if (comp.MaxParasites <= comp.CurParasites)
+            if (eggMorpher.Comp.MaxParasites <= eggMorpher.Comp.CurParasites)
             {
                 _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-egg-morpher-already-full"), eggMorpher, user);
                 return;
@@ -95,18 +84,20 @@ public sealed partial class EggMorpherSystem : EntitySystem
             _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-return-self", ("parasite", user)), eggMorpher);
 
             QueueDel(user);
-            comp.CurParasites++;
+            eggMorpher.Comp.CurParasites++;
 
             return;
         }
 
-        if (!TryCreateParasiteFromEggMorpher(eggMorpher, out var newParasite))
+        if (!TryCreateParasiteFromEggMorpher(eggMorpher, out _))
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-egg-morpher-no-parasites"), eggMorpher, user);
             return;
         }
+
         args.Handled = true;
     }
+
     private void OnInteractUsing(Entity<EggMorpherComponent> eggMorpher, ref InteractUsingEvent args)
     {
         if (_net.IsClient)
@@ -114,8 +105,6 @@ public sealed partial class EggMorpherSystem : EntitySystem
             args.Handled = true;
             return;
         }
-
-        var (ent, comp) = eggMorpher;
 
         var user = args.User;
         var used = args.Used;
@@ -138,7 +127,7 @@ public sealed partial class EggMorpherSystem : EntitySystem
             return;
         }
 
-        if (comp.MaxParasites <= comp.CurParasites)
+        if (eggMorpher.Comp.MaxParasites <= eggMorpher.Comp.CurParasites)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-egg-morpher-already-full"), eggMorpher, user);
             return;
@@ -146,7 +135,7 @@ public sealed partial class EggMorpherSystem : EntitySystem
 
         args.Handled = true;
         QueueDel(used);
-        comp.CurParasites++;
+        eggMorpher.Comp.CurParasites++;
     }
 
     private void OnChangeParasiteReserve(Entity<EggMorpherComponent> eggMorpher, ref XenoChangeParasiteReserveMessage args)
@@ -212,25 +201,23 @@ public sealed partial class EggMorpherSystem : EntitySystem
     private bool TryTrigger(Entity<EggMorpherComponent> eggMorpher, EntityUid tripper)
     {
         if (!CanTrigger(tripper))
-        {
             return false;
-        }
 
         if (!_interaction.InRangeUnobstructed(eggMorpher.Owner, tripper))
-        {
             return false;
-        }
 
         if (!TryCreateParasiteFromEggMorpher(eggMorpher, out var spawnedParasite))
-        {
             return false;
-        }
 
-        var parasiteComp = EnsureComp<XenoParasiteComponent>(spawnedParasite.Value);
-        _parasite.Infect((spawnedParasite.Value, parasiteComp), tripper, force: true);
+        if (spawnedParasite != null)
+        {
+            var parasiteComp = EnsureComp<XenoParasiteComponent>(spawnedParasite.Value);
+            _parasite.Infect((spawnedParasite.Value, parasiteComp), tripper, force: true);
+        }
 
         return true;
     }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -263,12 +250,12 @@ public sealed partial class EggMorpherSystem : EntitySystem
 
     private TimeSpan GetParasiteSpawnCooldown(Entity<EggMorpherComponent> eggMorpher)
     {
-        if (_hive.GetHive(eggMorpher.Owner) is not Entity<HiveComponent> hive)
+        if (_hive.GetHive(eggMorpher.Owner) is not { } hive)
         {
             return eggMorpher.Comp.StandardSpawnCooldown;
         }
 
-        if (hive.Comp.CurrentQueen is EntityUid curQueen &&
+        if (hive.Comp.CurrentQueen is { } curQueen &&
             HasComp<XenoAttachedOvipositorComponent>(curQueen))
         {
             return eggMorpher.Comp.OviSpawnCooldown;
@@ -283,7 +270,7 @@ public sealed partial class EggMorpherSystem : EntitySystem
     /// <param name="eggMorpher"></param>
     /// <param name="parasite"></param>
     /// <returns></returns>
-    public bool TryCreateParasiteFromEggMorpher(Entity<EggMorpherComponent> eggMorpher, [NotNullWhen(true)] out EntityUid? parasite)
+    public bool TryCreateParasiteFromEggMorpher(Entity<EggMorpherComponent> eggMorpher, out EntityUid? parasite)
     {
         parasite = null;
 
@@ -297,17 +284,12 @@ public sealed partial class EggMorpherSystem : EntitySystem
 
         if (_net.IsClient)
         {
-            parasite = EntityUid.Invalid;
+            parasite = null;
             return true;
         }
 
         parasite = SpawnAtPosition(EggMorpherComponent.ParasitePrototype, ent.ToCoordinates());
-        if (parasite is not null)
-        {
-            _hive.SetSameHive(eggMorpher.Owner, parasite.Value);
-            return true;
-        }
-
-        return false;
+        _hive.SetSameHive(eggMorpher.Owner, parasite.Value);
+        return true;
     }
 }
