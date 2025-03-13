@@ -101,7 +101,6 @@
     access: [["CMAccessColonyArmory"]]
   - type: Destructible
     thresholds: []
-  - type: EntityStorageCloseOnMapInit
 
 - type: entity
   parent: RMCLockerGun
