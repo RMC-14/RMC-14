@@ -87,6 +87,31 @@
       - Xeno
 
 - type: entity
+  parent: RMCCommunicationsTower
+  id: RMCCommunicationsTowerOn
+  suffix: "On, UNMC, Colony, WeYa"
+  components:
+  - type: CommunicationsTower
+    state: On
+    channels:
+    - Colony
+    - MarineCommand
+    - MarineMedical
+    - MarineEngineer
+    - MarineMilitaryPolice
+    #    - TODO RMC14 sentry
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineRequisition
+    - MarineJTAC
+    - MarineIntel
+    - WEYA
+
+- type: entity
   abstract: true
   parent: MarkerBase
   id: RMCSpawnerCommunicationsTowerBase
