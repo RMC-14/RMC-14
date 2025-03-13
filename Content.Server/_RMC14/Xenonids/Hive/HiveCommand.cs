@@ -48,9 +48,15 @@ public sealed class HiveCommand : ToolshedCommand
         [PipedArgument] EntityUid xeno,
         [CommandArgument] EntityUid hive)
     {
-        if (!HasComp<XenoComponent>(xeno) ||
-            !HasComp<HiveComponent>(hive))
+        if (!HasComp<XenoComponent>(xeno))
         {
+            ctx.WriteLine($"Entity {xeno} does not have {nameof(XenoComponent)}");
+            return xeno;
+        }
+
+        if (!HasComp<HiveComponent>(hive))
+        {
+            ctx.WriteLine($"Entity {hive} does not have {nameof(HiveComponent)}");
             return xeno;
         }
 
