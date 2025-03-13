@@ -35,13 +35,13 @@ public sealed partial class TargetingComponent : Component
     ///     The remaining duration of the laser
     /// </summary>
     [DataField, AutoNetworkedField]
-    public List<float> LaserDurations = new();
+    public Dictionary<EntityUid,float> LaserDurations = new();
 
     /// <summary>
     ///     The original duration of the laser
     /// </summary>
     [DataField, AutoNetworkedField]
-    public List<float> OriginalLaserDurations = new();
+    public Dictionary<EntityUid,float> OriginalLaserDurations = new();
 
     /// <summary>
     ///     The visualiser to enable on the entity being targeted by the laser

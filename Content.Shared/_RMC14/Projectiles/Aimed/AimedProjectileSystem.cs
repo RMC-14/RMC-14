@@ -28,7 +28,10 @@ public sealed class AimedProjectileSystem : EntitySystem
     /// </summary>
     private void OnAimedProjectileHit(Entity<AimedProjectileComponent> ent, ref ProjectileHitEvent args)
     {
-        _targeting.StopTargeting(ent.Comp.Target, ent.Comp.Source);
+        if (TryComp(ent.Comp.Source, out TargetingComponent? targeting))
+        {
+            _targeting.StopTargeting((ent.Comp.Source, targeting), ent.Comp.Target);
+        }
 
         if (!TryComp(ent, out AimedShotEffectComponent? aimedEffect))
             return;

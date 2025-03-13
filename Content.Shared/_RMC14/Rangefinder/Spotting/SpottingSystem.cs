@@ -19,6 +19,7 @@ public sealed partial class SpottingSystem : EntitySystem
     {
         SubscribeLocalEvent<SpottingComponent, GetItemActionsEvent>(OnSpotterGetItemActions);
         SubscribeLocalEvent<SpottingComponent, SpotTargetActionEvent>(OnSpotTarget);
+        SubscribeLocalEvent<SpottingComponent, TargetingFinishedEvent>(OnTargetingFinished);
     }
 
     /// <summary>
@@ -38,7 +39,7 @@ public sealed partial class SpottingSystem : EntitySystem
         var user = args.Performer;
         var target = args.Target;
 
-        if(!HasComp<SpottableComponent>(args.Target))
+        if(!HasComp<SpottableComponent>(args.Target) || HasComp<SpottedComponent>(args.Target))
             return;
 
         // Only allow entities with the SpotterComponent to use the spotting function.
@@ -76,5 +77,16 @@ public sealed partial class SpottingSystem : EntitySystem
         Dirty(target, spotted);
 
         args.Handled = true;
+    }
+
+    /// <summary>
+    ///     Stop targeting after finishing spotting.
+    /// </summary>
+    private void OnTargetingFinished(Entity<SpottingComponent> ent, ref TargetingFinishedEvent args)
+    {
+        if(!TryComp(ent, out TargetingComponent? targeting))
+            return;
+
+        _targeting.StopTargeting((ent.Owner,targeting), args.Target);
     }
 }

@@ -60,33 +60,11 @@ public sealed class AimedShotSystem : EntitySystem
         var target = args.Target;
         var user = args.Performer;
 
-        if (args.Handled || !HasComp<SpottableComponent>(target))
+        if(!CanAimShot(ent, target, user))
             return;
-
-        // Cancel the action if the user doesn't have the correct whitelist
-        if (!_whitelist.IsValid(ent.Comp.Whitelist, user) && ent.Comp.Whitelist.Components != null)
-        {
-            var message = Loc.GetString("cm-gun-unskilled", ("gun", ent));
-            _popup.PopupClient(message, user, user);
-
-            return;
-        }
-
-        // cancel the action if the user isn't wielding the gun.
-        if (TryComp(ent, out WieldableComponent? wieldable) &&
-            !wieldable.Wielded)
-        {
-            var message = Loc.GetString("rmc-action-popup-aiming-user-must-wield", ("gun", ent));
-            _popup.PopupClient(message, user, user);
-
-            return;
-        }
 
         // Disable shooting until targeting is cancelled or finished.
         ToggleShooting((ent.Owner, ent.Comp),true);
-
-        // Do play the sound clientside
-        _audio.PlayPredicted(ent.Comp.AimingSound, ent, user);
 
         args.Handled = true;
 
@@ -102,8 +80,7 @@ public sealed class AimedShotSystem : EntitySystem
             appliedSpotterBuff = true;
         }
 
-
-        // Apply the laser's multiplier to the duration of the aimed shot  if it's turned on.
+        // Apply the laser's multiplier to the duration of the aimed shot if it's turned on.
         if (TryComp(ent, out GunToggleableLaserComponent? toggleLaser))
         {
             if (toggleLaser.Active)
@@ -122,7 +99,10 @@ public sealed class AimedShotSystem : EntitySystem
         }
 
         laserDuration *= aimMultiplier;
+        ent.Comp.Target = target;
+        Dirty(ent);
 
+        _audio.PlayPredicted(ent.Comp.AimingSound, ent, user);
         _targeting.Target(ent.Owner, user, target, laserDuration, TargetedEffects.Targeted);
     }
 
@@ -146,6 +126,7 @@ public sealed class AimedShotSystem : EntitySystem
         if(ent.Comp.Target == null)
             return;
 
+        // Apply the components that alter the projectiles behavior.
         foreach (var projectile in args.FiredProjectiles)
         {
             var aimedProjectile = EnsureComp<AimedProjectileComponent>(projectile);
@@ -164,29 +145,36 @@ public sealed class AimedShotSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Try to shoot at a target when an entity successfully finishes targeting.
+    ///     Try to shoot at a target when a gun successfully finishes targeting.
     /// </summary>
     private void OnTargetingFinished(Entity<AimedShotComponent> ent, ref TargetingFinishedEvent args)
     {
-        if (args.Handled)
-            return;
-
         _gunSystem.TryGetGun(ent, out var gun, out var gunComp);
         if(gunComp == null)
             return;
 
-        args.Handled = true;
         ent.Comp.Target = args.Target;
-
-        // Enable the ability to shoot when done aiming.
-        ToggleShooting(ent, false);
+        Dirty(ent);
 
         // Only shoot serverside
-        if (_net.IsClient)
-            return;
+        if (_net.IsServer)
+        {
+            // Enable the ability to shoot when done aiming.
+            ToggleShooting(ent, false);
 
-        _audio.PlayPvs(gunComp.SoundGunshot, Transform(ent).Coordinates);
-        _gunSystem.AttemptShoot(args.User,gun, gunComp, args.Coordinates);
+            _audio.PlayPvs(gunComp.SoundGunshot, Transform(ent).Coordinates);
+            _gunSystem.AttemptShoot(args.User,gun, gunComp, args.Coordinates);
+
+            var ammoCount = new GetAmmoCountEvent();
+            RaiseLocalEvent(ent, ref ammoCount);
+
+            if(ammoCount.Count <= 0)
+                _audio.PlayPvs(gunComp.SoundEmpty, Transform(ent).Coordinates);
+        }
+
+        // Update ammo visualiser because client doesn't know about the shot.
+        var ev = new UpdateClientAmmoEvent();
+        RaiseLocalEvent(ent, ref ev);
     }
 
     /// <summary>
@@ -198,6 +186,8 @@ public sealed class AimedShotSystem : EntitySystem
             return;
 
         ToggleShooting(ent, false);
+        ent.Comp.Target = null;
+        Dirty(ent);
 
         args.Handled = true;
     }
@@ -209,6 +199,41 @@ public sealed class AimedShotSystem : EntitySystem
     {
         ent.Comp.WaitForAiming = wait;
         Dirty(ent);
+    }
+
+    /// <summary>
+    ///     Checks if it's possible to use the aimed shot action on the selected target.
+    /// </summary>
+    private bool CanAimShot(Entity<AimedShotComponent> ent, EntityUid target, EntityUid user)
+    {
+        // Can't aim at the target if they don't have the component that marks them as a potential target.
+        if (!HasComp<SpottableComponent>(target))
+            return false;
+
+        // Can't aim if already aiming.
+        if (ent.Comp.Target != null)
+            return false;
+
+        // Can't aim if the user doesn't have the correct whitelist.
+        if (!_whitelist.IsValid(ent.Comp.Whitelist, user) && ent.Comp.Whitelist.Components != null)
+        {
+            var message = Loc.GetString("cm-gun-unskilled", ("gun", ent));
+            _popup.PopupClient(message, user, user);
+
+            return false;
+        }
+
+        // Can't aim if the user isn't wielding the gun.
+        if (TryComp(ent, out WieldableComponent? wieldable) &&
+            !wieldable.Wielded)
+        {
+            var message = Loc.GetString("rmc-action-popup-aiming-user-must-wield", ("gun", ent));
+            _popup.PopupClient(message, user, user);
+
+            return false;
+        }
+
+        return true;
     }
 }
 

@@ -15,17 +15,17 @@ public sealed class TargetingSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<TargetingComponent, ComponentRemove>(OnActiveTargetingLaserRemoved);
-        SubscribeLocalEvent<TargetingComponent, DroppedEvent>(OnActiveTargetingLaserDropped);
-        SubscribeLocalEvent<TargetingComponent, RMCDroppedEvent>(OnActiveTargetingLaserDropped);
-        SubscribeLocalEvent<TargetingComponent, GotUnequippedHandEvent>(OnActiveTargetingLaserDropped);
-        SubscribeLocalEvent<TargetingComponent, HandDeselectedEvent>(OnActiveTargetingLaserDropped);
+        SubscribeLocalEvent<TargetingComponent, ComponentRemove>(OnTargetingRemoved);
+        SubscribeLocalEvent<TargetingComponent, DroppedEvent>(OnTargetingDropped);
+        SubscribeLocalEvent<TargetingComponent, RMCDroppedEvent>(OnTargetingDropped);
+        SubscribeLocalEvent<TargetingComponent, GotUnequippedHandEvent>(OnTargetingDropped);
+        SubscribeLocalEvent<TargetingComponent, HandDeselectedEvent>(OnTargetingDropped);
     }
 
     /// <summary>
     ///     Remove any lasers if the <see cref="TargetingComponent"/> is being removed from an entity.
     /// </summary>
-    private void OnActiveTargetingLaserRemoved<T>(Entity<TargetingComponent> targetingLaser, ref T args)
+    private void OnTargetingRemoved<T>(Entity<TargetingComponent> targetingLaser, ref T args)
     {
         if (_net.IsClient)
             return;
@@ -39,7 +39,7 @@ public sealed class TargetingSystem : EntitySystem
     /// <summary>
     ///     Remove any lasers originating from the entity.
     /// </summary>
-    private void OnActiveTargetingLaserDropped<T>(Entity<TargetingComponent> targetingLaser, ref T args)
+    private void OnTargetingDropped<T>(Entity<TargetingComponent> targetingLaser, ref T args)
     {
         var ev = new TargetingCancelledEvent();
         RaiseLocalEvent(targetingLaser, ref ev);
@@ -53,9 +53,12 @@ public sealed class TargetingSystem : EntitySystem
     /// <summary>
     ///     Remove the laser and replace targeting effects originating from the given entity.
     /// </summary>
-    public void StopTargeting(EntityUid target, EntityUid targetingUid, TargetingComponent? targeting = null)
+    public void StopTargeting(Entity<TargetingComponent> ent, EntityUid target)
     {
-        if (!TryComp(target, out TargetedComponent? targeted) || !Resolve(targetingUid, ref targeting))
+        var targeting = ent.Comp;
+        var targetingUid = ent.Owner;
+
+        if (!TryComp(target, out TargetedComponent? targeted))
             return;
 
         if (targeted.TargetedBy.Contains(targetingUid))
@@ -65,6 +68,8 @@ public sealed class TargetingSystem : EntitySystem
         }
 
         targeting.Targets.Remove(target);
+        targeting.LaserDurations.Remove(target);
+        targeting.OriginalLaserDurations.Remove(target);
         Dirty(targetingUid, targeting);
 
         // Find the next target marker with the highest priority
@@ -111,15 +116,15 @@ public sealed class TargetingSystem : EntitySystem
         targeted.TargetedBy.Add(equipment);
         Dirty(target, targeted);
 
-        var active = EnsureComp<TargetingComponent>(equipment);
-        active.Source = equipment;
-        active.Targets.Add(target);
-        active.Origin = Transform(user).Coordinates;
-        active.User = user;
-        active.LaserType = targetedEffect;
-        active.LaserDurations.Add(laserDuration);
-        active.OriginalLaserDurations.Add(laserDuration);
-        Dirty(equipment, active);
+        var targeting = EnsureComp<TargetingComponent>(equipment);
+        targeting.Source = equipment;
+        targeting.LaserDurations.TryAdd(target, laserDuration);
+        targeting.OriginalLaserDurations.TryAdd(target, laserDuration);
+        targeting.Targets.Add(target);
+        targeting.Origin = Transform(user).Coordinates;
+        targeting.User = user;
+        targeting.LaserType = targetedEffect;
+        Dirty(equipment, targeting);
 
         UpdateTargetMarker(target, targetedEffect);
     }
@@ -143,23 +148,29 @@ public sealed class TargetingSystem : EntitySystem
         while (query.MoveNext(out var uid, out var targeting, out var xform))
         {
             var targetNumber = 0;
-            while (targetNumber < targeting.LaserDurations.Count)
+            while (targetNumber < targeting.Targets.Count)
             {
-                targeting.LaserDurations[targetNumber] -= frameTime;
+                var target = targeting.Targets[targetNumber];
+                if (!targeting.LaserDurations.Keys.Contains(target))
+                {
+                    targetNumber++;
+                    continue;
+                }
+                targeting.LaserDurations[target] -= frameTime;
 
                 // Adjust alpha of the laser based on how close it is to finish targeting.
-                targeting.AlphaMultiplier = 1 - targeting.LaserDurations[targetNumber] / targeting.OriginalLaserDurations[targetNumber];
+                targeting.AlphaMultiplier = 1 - targeting.LaserDurations[target] / targeting.OriginalLaserDurations[target];
                 Dirty(uid,targeting);
 
                 // Raise an event and stop targeting if the targeting successfully finishes.
-                if (targeting.LaserDurations[targetNumber] <= 0)
+                if (targeting.LaserDurations[target] <= 0)
                 {
-                    var ev = new TargetingFinishedEvent(targeting.User, Transform(targeting.Targets[targetNumber]).Coordinates, targeting.Targets[targetNumber]);
-                    RaiseLocalEvent(uid, ref ev);
+                    targeting.LaserDurations.Remove(target);
+                    targeting.OriginalLaserDurations.Remove(target);
+                    Dirty(uid,targeting);
 
-                    targeting.LaserDurations.RemoveAt(targetNumber);
-                    targeting.OriginalLaserDurations.RemoveAt(targetNumber);
-                    targetNumber = 0;
+                    var ev = new TargetingFinishedEvent(targeting.User, Transform(target).Coordinates, target);
+                    RaiseLocalEvent(uid, ref ev);
                 }
 
                 targetNumber++;
@@ -173,6 +184,7 @@ public sealed class TargetingSystem : EntitySystem
 
                 targeting.LaserDurations.Clear();
                 targeting.OriginalLaserDurations.Clear();
+                Dirty(uid, targeting);
                 RemComp<TargetingComponent>(uid);
             }
         }
