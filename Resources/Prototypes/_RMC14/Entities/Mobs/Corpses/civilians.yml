@@ -257,7 +257,7 @@
   id: RMCHumanCorpseColonistKutjevo
   components:
   - type: Loadout
-    prototypes: [ RMCGearCorpseColonistKutjevoA, RMCGearCorpseColonistKutjevoB ]
+    prototypes: [ RMCGearCorpseColonistKutjevo, RMCGearCorpseColonistKutjevoDrysuit ]
     
 - type: startingGear
   id: RMCGearCorpseColonistKutjevo
@@ -266,15 +266,10 @@
     eyes: RMCGogglesKutjevo
     head: ArmorHelmetPMCKutjevo
     mask: RMCMaskKutjevoRespirator
-
-- type: startingGear
-  id: RMCGearCorpseColonistKutjevoA
-  parent: RMCGearCorpseColonistKutjevo
-  equipment:
     jumpsuit: RMCJumpsuitKutjevoJumper
     
 - type: startingGear
-  id: RMCGearCorpseColonistKutjevoB
+  id: RMCGearCorpseColonistKutjevoDrysuit
   parent: RMCGearCorpseColonistKutjevo
   equipment:
     jumpsuit: RMCJumpsuitKutjevoDrysuit
