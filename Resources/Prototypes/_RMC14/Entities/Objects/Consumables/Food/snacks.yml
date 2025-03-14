@@ -365,7 +365,24 @@
     sprite: _RMC14/Objects/Consumable/Food/condiments.rsi
     prefix: flour
 
-# TODO RMC14 - Appendix
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackOrgan
+  name: Organ
+  description: It's good for you.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/organs.rsi
+    state: appendix
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Protein #meatprotein
+          Quantity: 4
+        - ReagentId: Toxin
+          Quantity: 2
 
 - type: entity
   parent: RMCFoodSnackBase
