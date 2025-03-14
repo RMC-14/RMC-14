@@ -14,8 +14,6 @@
   - type: Tag
     tags:
     - HideContextMenu
-  - type: RMCNightVisionVisible
-    priority: 1
 
 - type: entity
   parent: RMCBaseEffect
@@ -34,5 +32,3 @@
   - type: Tag
     tags:
     - HideContextMenu
-  - type: RMCNightVisionVisible
-    priority: 1

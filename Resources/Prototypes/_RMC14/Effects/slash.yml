@@ -14,11 +14,9 @@
   - type: Tag
     tags:
     - HideContextMenu
-  - type: RMCNightVisionVisible
-    priority: 1
 
 - type: entity
-  parent: WeaponArcClaw
+  parent: [WeaponArcClaw, RMCBaseEffect]
   id: RMCWeaponArcXenoClaw
   categories: [ HideSpawnMenu ]
   components:
@@ -28,5 +26,3 @@
     sprite: _RMC14/Effects/attacks.rsi
     noRot: true
     state: slash
-  - type: RMCNightVisionVisible
-    priority: 1
