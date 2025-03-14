@@ -323,7 +323,6 @@
             Brute: 3
             Toxin: 6
 
-# TODO RMC14 other effects (pain)
 # TODO RMC14 injected only
 # TODO implement opiate receptor deficency
 # TODO CMEpinephrine should deal liver and brain damage over 20u
@@ -339,6 +338,8 @@
     Medicine:
       metabolismRate: 0.2
       effects:
+      - !type:DecreasePain
+        strength: 15
       - !type:EqualHealthChange
         conditions:
         - !type:RecentlyDefibrillated
@@ -360,7 +361,7 @@
           min: 10.5
         damage:
           groups:
-            Toxin: 0.75
+            Toxin: 0.19
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
@@ -375,7 +376,7 @@
           min: 20
         damage:
           groups:
-            Airloss: 2
+            Airloss: 3
 
 # TODO pain related effects
 # TODO heart damage over 100u
@@ -391,6 +392,8 @@
     Medicine:
       metabolismRate: 0.1
       effects:
+      - !type:DecreasePain
+        strength: 30
       - !type:HealthChange
         conditions:
         - !type:MobStateCondition
@@ -618,3 +621,111 @@
         damage:
           types:
             Cellular: -3.75
+
+# TODO add liver and brain damage
+- type: reagent
+  parent: [ CMReagentMedicine ]
+  id: CMParacetamol
+  name: reagent-name-cmparacetamol
+  desc: reagent-desc-cmparacetamol
+  color: "#C855DC"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.03
+      effects:
+      - !type:DecreasePain
+        strength: 20
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 60
+        key: SeeingRainbows # TODO change to hallucinations
+        component: SeeingRainbows
+        type: Add
+        time: 60
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 60
+        damage:
+          groups:
+            Toxin: 0.25
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 100
+        damage:
+          groups:
+            Airloss: 3
+
+# TODO add liver and brain damage
+- type: reagent
+  parent: [ CMReagentMedicine ]
+  id: CMTramadol
+  name: reagent-name-cmtramadol
+  desc: reagent-desc-cmtramadol
+  color: "#d7c7e0"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.03
+      effects:
+      - !type:DecreasePain
+        strength: 50
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        key: SeeingRainbows # TODO change to hallucinations
+        component: SeeingRainbows
+        type: Add
+        time: 60
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Toxin: 0.63
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 50
+        damage:
+          groups:
+            Airloss: 3
+
+# TODO add liver and brain damage
+- type: reagent
+  parent: [ CMReagentMedicine ]
+  id: CMOxycodone
+  name: reagent-name-cmoxycodone
+  desc: reagent-desc-cmoxycodone
+  color: "#1cc282"
+  metabolisms:
+    Medicine:
+      metabolismRate: 0.05
+      effects:
+      - !type:DecreasePain
+        strength: 80
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentThreshold
+          min: 20
+        key: SeeingRainbows # TODO change to hallucinations
+        component: SeeingRainbows
+        type: Add
+        time: 60
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 20
+        damage:
+          groups:
+            Toxin: 1
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        damage:
+          groups:
+            Airloss: 3
