@@ -77,11 +77,10 @@
           - RMCAttachmentS84xTelescopicScope
           - RMCAttachmentS42xTelescopicMiniscope
       rmc-aslot-stock:
-        startingAttachable: RMCAttachmentM54CStockCollapsible
+        startingAttachable: RMCAttachmentM54C2StockCollapsible
         whitelist:
           tags:
-          - RMCAttachmentM54CStockSolid
-          - RMCAttachmentM54CStockCollapsible
+          - RMCAttachmentM54C2StockCollapsible
       rmc-aslot-underbarrel:
         startingAttachable: RMCAttachmentU1GrenadeLauncher
         whitelist:

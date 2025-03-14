@@ -192,14 +192,14 @@
     medium: 0.75
     heavy: 0.806
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/whiteout.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml79a.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/whiteout.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml79a.rsi
     slots:
     - suitStorage
     - Back
@@ -241,14 +241,14 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: RMCMagazineSmartGun
+        startingItem: RMCMagazineSmartGunirradiated
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_unload.ogg
         priority: 2
         whitelist:
           tags:
-          - RMCMagazineSmartGun
           - RMCMagazineSmartGunirradiated
+          - RMCMagazineSmartGun #For some reason when this is removed mags literally becomes unusable :confused:
       cell_slot:
         name: power-cell-slot-component-slot-name-default
         startingItem: RMCPowerCellSmartgun
@@ -502,7 +502,7 @@
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineSmartGunirradiated
-  name: "ML66A drum magazine irradiated (10x30mm)"
+  name: "ML79A drum magazine irradiated (10x30mm)"
   components:
   - type: Tag
     tags:
@@ -510,8 +510,8 @@
   - type: BallisticAmmoProvider
     whitelist:
       tags:
-      - CMCartridgeSmartGun10x30mm
-    proto: CMCartridgeSmartGun10x30mm
+      - RMCCartridgeSmartGun10x30mmirradiated
+    proto: RMCCartridgeSmartGun10x30mmirradiated
     capacity: 500
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun_deplated.rsi
