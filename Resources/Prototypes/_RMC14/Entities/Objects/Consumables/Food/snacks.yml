@@ -18,7 +18,6 @@
           Quantity: 10
   - type: Item
     sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
-    heldPrefix: packet
     size: Small
   - type: Extractable
     grindableSolutionName: food
@@ -26,6 +25,2782 @@
     solution: food
   - type: DrawableSolution
     solution: food
+
+#Snacks
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackAesirSalad
+  name: Aesir Salad
+  description: Probably too incredible for mortal men to fully enjoy.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soups_salads.rsi
+    state: aesirsalad
+  - type: Food
+    trash:
+    - RMCFoodPacketBowlTrash
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Cellulose #plantmatter
+          Quantity: 8
+        - ReagentId: DoctorsDelight
+          Quantity: 8
+        - ReagentId: CMTricordrazine
+          Quantity: 8
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackCandy
+  name: Candy
+  description: Nougat, love it or hate it.
+  components:
+  - type: Sprite
+    state: candy
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 1
+        - ReagentId: Sugar
+          Quantity: 3
+  - type: Item
+    size: Tiny
+  - type: Food
+    trash:
+    - RMCFoodPacketCandyTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackCandyCorn
+  name: Candy Corn
+  description: It's a handful of candy corn. Cannot be stored in a detective's hat, alas.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/candies.rsi
+    state: candy_corn
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment #vegetable
+          Quantity: 4
+        - ReagentId: Sugar
+          Quantity: 2
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackChips
+  name: Chips
+  description: Commander Riker's What-The-Crisps
+  components:
+  - type: Sprite
+    state: chips
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 3
+        - ReagentId: Blackpepper
+          Quantity: 1
+  - type: Food
+    trash:
+    - RMCFoodPacketChipsTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackChipsPepper
+  name: Weston-Yamada Pepper Chips
+  description: Premium high-quality chips, now with 0% trans fat and added black pepper.
+  components:
+  - type: Sprite
+    state: wy_pepper
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 3
+        - ReagentId: Blackpepper
+          Quantity: 1
+  - type: Item
+    heldPrefix: wy_chips_pepper
+  - type: Food
+    trash:
+    - RMCFoodPacketPepperChipsTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackCookie
+  name: Cookie
+  description: A delicious and crumbly chocolate chip cookie. Don't feed to parrots.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: COOKIE!!!
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    heldPrefix: COOKIE!!!
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 4
+        - ReagentId: Sugar
+          Quantity: 1
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackChocolateBar
+  name: Chocolate Bar
+  description: Such sweet, fattening food.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/candies.rsi
+    state: chocolatebar
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+        - ReagentId: Sugar
+          Quantity: 2
+        - ReagentId: CocoaPowder
+          Quantity: 2
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackChocolateEgg
+  name: Chocolate Egg
+  description: Such sweet, fattening food.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/eggs.rsi
+    state: chocolateegg
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Egg
+          Quantity: 3
+        - ReagentId: Sugar
+          Quantity: 2
+        - ReagentId: CocoaPowder
+          Quantity: 2
+
+# TODO RMC14 - Donuts in donuts.yml
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackEgg
+  name: Egg
+  description: An egg!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/eggs.rsi
+    state: egg
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/eggs.rsi
+    heldPrefix: egg
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Egg
+          Quantity: 1
+
+# TODO RMC14 - thrown egg should leave egg smudge decal
+
+- type: entity
+  parent: RMCFoodSnackEgg
+  id: RMCFoodSnackEggBlue
+  components:
+  - type: Sprite
+    state: egg-blue
+
+- type: entity
+  parent: RMCFoodSnackEgg
+  id: RMCFoodSnackEggGreen
+  components:
+  - type: Sprite
+    state: egg-green
+
+- type: entity
+  parent: RMCFoodSnackEgg
+  id: RMCFoodSnackEggMime
+  components:
+  - type: Sprite
+    state: egg-mime
+
+- type: entity
+  parent: RMCFoodSnackEgg
+  id: RMCFoodSnackEggOrange
+  components:
+  - type: Sprite
+    state: egg-orange
+
+- type: entity
+  parent: RMCFoodSnackEgg
+  id: RMCFoodSnackEggPurple
+  components:
+  - type: Sprite
+    state: egg-purple
+
+- type: entity
+  parent: RMCFoodSnackEgg
+  id: RMCFoodSnackEggRainbow
+  components:
+  - type: Sprite
+    state: egg-rainbow
+
+- type: entity
+  parent: RMCFoodSnackEgg
+  id: RMCFoodSnackEggRed
+  components:
+  - type: Sprite
+    state: egg-red
+
+- type: entity
+  parent: RMCFoodSnackEgg
+  id: RMCFoodSnackEggYellow
+  components:
+  - type: Sprite
+    state: egg-yellow
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerRandomEgg
+  name: Random Egg Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: _RMC14/Objects/Consumable/Food/eggs.rsi
+      state: egg
+  - type: RandomSpawner
+    prototypes:
+    - RMCFoodSnackEggBlue
+    - RMCFoodSnackEggGreen
+    - RMCFoodSnackEggMime
+    - RMCFoodSnackEggOrange
+    - RMCFoodSnackEggPurple
+    - RMCFoodSnackEggRainbow
+    - RMCFoodSnackEggRed
+    - RMCFoodSnackEggYellow
+    offset: 0
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackFriedEgg
+  name: Fried Egg
+  description: A fried egg, with a touch of salt and pepper.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: friedegg
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Egg
+          Quantity: 2
+        - ReagentId: TableSalt
+          Quantity: 1
+        - ReagentId: Blackpepper
+          Quantity: 1
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackBoiledEgg
+  name: Boiled Egg
+  description: A hard-boiled egg.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/eggs.rsi
+    state: egg
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/eggs.rsi
+    heldPrefix: egg
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Egg
+          Quantity: 2
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackFlour
+  name: Flour
+  description: A small bag filled with some flour.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/condiments.rsi
+    state: flour
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Flour #dough
+          Quantity: 1
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/condiments.rsi
+    prefix: flour
+
+# TODO RMC14 - Appendix
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackTofu
+  name: Tofu
+  description: We all love tofu.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cheese.rsi
+    state: tofu
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment #tofu
+          Quantity: 3
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackTofurkey
+  name: Tofurkey
+  description: A fake turkey made from tofu.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: tofurkey
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment #tofu
+          Quantity: 12
+        - ReagentId: Nocturine #stoxin - Soporific (sleep chem)
+          Quantity: 3
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackStuffing
+  name: Stuffing
+  description: Moist, peppery breadcrumbs for filling the body cavities of dead birds. Dig in!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/food_ingredients.rsi
+    state: stuffing
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 2
+        - ReagentId: Blackpepper
+          Quantity: 1
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackCarpFillet
+  name: Carp Fillet
+  description: A fillet of spess carp meat
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/fish.rsi
+    state: fishfillet
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: UncookedAnimalProteins #fish
+          Quantity: 3
+        - ReagentId: CarpoToxin
+          Quantity: 6
+
+- type: entity
+  parent: RMCFoodSnackCarpFillet
+  id: RMCFoodSnackProcessedCarpFillet
+  name: Processed Carp Fillet
+  description: A fillet of spess carp meat. This one has been processed to remove carpotoxin.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: UncookedAnimalProteins #fish
+          Quantity: 3
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackFishFingers
+  name: Fish Fingers
+  description: A finger of fish.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/fish.rsi
+    state: fishfingers
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: UncookedAnimalProteins #fish
+          Quantity: 4
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackHugeMushroomSlice
+  name: Huge Mushroom Slice
+  description: A slice from a huge mushroom.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/slices.rsi
+    state: hugemushroomslice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment #mushroom
+          Quantity: 3
+        - ReagentId: SpaceDrugs #psilocybin (hallucinogen)
+          Quantity: 3
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackTomatoSlice
+  name: Tomato Slice
+  description: A slice from a huge tomato.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/slices.rsi
+    state: tomatomeat
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment #vegetable
+          Quantity: 3
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackBearMeat
+  name: Bear Meat
+  description: A very manly slab of meat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/meat.rsi
+    state: bearmeat
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Protein #meatprotein
+          Quantity: 12
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackMeatball
+  name: Meatball
+  description: A great meal all round.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/meat.rsi
+    state: meatball
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Protein #meatprotein
+          Quantity: 3
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackSausage
+  name: Sausage
+  description: A piece of mixed, long meat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/meat.rsi
+    state: sausage
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Protein #meatprotein
+          Quantity: 6
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackDonkpocket
+  name: Donk-pocket
+  description: The food of choice for the seasoned traitor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: donkpocket
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+      state: donkpocket_helmet
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Protein # meatprotein
+          Quantity: 2
+        - ReagentId: Nutriment # bread
+          Quantity: 2
+
+# TODO RMC14 - Heated Donkpocket tricord interaction
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackBrainBurger
+  name: Brainburger
+  description: A strange looking burger. It looks almost sentient.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/burgers.rsi
+    state: brainburger
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Protein # meatprotein
+          Quantity: 6
+        - ReagentId: Mannitol # alkysine (brain med)
+          Quantity: 6
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackGhostBurger
+  name: Ghost Burger
+  description: Spooky! It doesn't look very filling.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/burgers.rsi
+    state: ghostburger
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackHumanBurger
+  name: Bob Burger
+  description: A bloody burger.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/burgers.rsi
+    state: hamburger
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 3
+        - ReagentId: Protein #meatprotein
+          Quantity: 6
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackCheeseburger
+  name: Cheeseburger
+  description: The cheese adds a good flavor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/burgers.rsi
+    state: hamburger
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 3
+        - ReagentId: Protein #cheese
+          Quantity: 3
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackMonkeyBurger
+  name: Burger
+  description: The cornerstone of every nutritious breakfast.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/burgers.rsi
+    state: hburger
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 3
+        - ReagentId: Protein #meatprotein
+          Quantity: 3
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackFishBurger
+  name: Fillet -o- Carp Sandwich
+  description: Almost like a carp is yelling somewhere... Give me back that fillet -o- carp, give me that carp.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/burgers.rsi
+    state: fishburger
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 3
+        - ReagentId: Protein #fish
+          Quantity: 3
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackTofuBurger
+  name: Tofu Burger
+  description: What... is that meat?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/burgers.rsi
+    state: tofuburger
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 3
+        - ReagentId: Protein #tofu
+          Quantity: 3
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackRoburger
+  name: Roburger
+  description: The lettuce is the only organic component. Beep.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/burgers.rsi
+    state: roburger
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 3
+        - ReagentId: Iron
+          Quantity: 3
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackXenoBurger
+  name: Xenoburger
+  description: Smells caustic. Tastes like heresy.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/burgers.rsi
+    state: xburger
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 3
+        - ReagentId: Protein #meatprotein
+          Quantity: 3
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackClownBurger
+  name: Clown Burger
+  description: This tastes funny...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/burgers.rsi
+    state: clownburger
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 6
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackMimeBurger
+  name: Mime Burger
+  description: Its taste defies language.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/burgers.rsi
+    state: mimeburger
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 6
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackOmelette
+  name: Omelette Du Fromage
+  description: That's all you can say!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: omelette
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Egg
+          Quantity: 4
+        - ReagentId: Protein #cheese
+          Quantity: 4
+  - type: Food
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackMuffin
+  name: Muffin
+  description: A little muffin. Spongy, moist, and delicious.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: muffin
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 4
+        - ReagentId: Sugar
+          Quantity: 2
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackBananaCreamPie
+  name: Banana Cream Pie
+  description: Just like back home, on clown planet! HONK!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: pie
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 4
+        - ReagentId: JuiceBanana #banana
+          Quantity: 5
+  - type: Food
+    trash:
+    - RMCFoodPacketPlateTrash
+
+# TODO RMC14 - Banana cream pie splat and decal
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackBerryClafoutis
+  name: Berry Clafoutis
+  description: No black birds, this is a good sign.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: berryclafoutis
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 4
+        - ReagentId: JuiceBerry #berryjuice
+          Quantity: 5
+  - type: Food
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackWaffles
+  name: Waffles
+  description: Mmm, waffles.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: waffles
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 5
+        - ReagentId: Sugar
+          Quantity: 3
+  - type: Food
+    trash:
+    - RMCFoodPacketWafflesTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackPancakes
+  name: Pancakes
+  description: Golden brown creamy pancakes fresh from the griddle. Drizzled with maple syrup and topped with a slice of butter.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: pancakes
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 6
+        - ReagentId: Sugar
+          Quantity: 4
+        - ReagentId: Milk
+          Quantity: 5
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackEggplantParm
+  name: Eggplant Parmigiana
+  description: The only good recipe for eggplant.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: eggplantparm
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment #vegetable
+          Quantity: 4
+        - ReagentId: Protein #cheese
+          Quantity: 2
+  - type: Food
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackSoylentGreen
+  name: Soylent Green
+  description: Not made of people. Honest. #Totally people.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: soylent_green
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 7
+        - ReagentId: Protein #meatprotein
+          Quantity: 3
+  - type: Food
+    trash:
+    - RMCFoodPacketWafflesTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackSoylentViridians
+  name: Soylen Virdians
+  description: Not made of people. Honest. #Actually honest for once.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: soylent_yellow
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 10
+  - type: Food
+    trash:
+    - RMCFoodPacketWafflesTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackMeatPie
+  name: Meat-pie
+  description: An old barber recipe, very delicious!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: meatpie
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 6
+        - ReagentId: Protein #meatprotein
+          Quantity: 4
+  - type: Food
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackTofuPie
+  name: Tofu-pie
+  description: A delicious tofu pie.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: meatpie
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 6
+        - ReagentId: Protein #tofu
+          Quantity: 4
+  - type: Food
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackAmanitaPie
+  name: Amanita Pie
+  description: Sweet and tasty poison pie.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: amanita_pie
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 5
+        - ReagentId: Amatoxin
+          Quantity: 3
+        - ReagentId: SpaceDrugs #psilocybin (hallucinogen)
+          Quantity: 1
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackPlumpPie
+  name: Plump Pie
+  description: I bet you love stuff made out of plump helmets!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: plump_pie
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Protein #mushroom
+          Quantity: 4
+        - ReagentId: Nutriment
+          Quantity: 4
+
+- type: entity
+  parent: RMCFoodSnackPlumpPie
+  id: RMCFoodSnackExceptionalPlumpPie
+  name: Exceptional Plump Pie
+  description: Microwave is taken by a fey mood! It has cooked an exceptional plump pie!
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 4
+        - ReagentId: Protein #mushroom
+          Quantity: 4
+        - ReagentId: CMTricordrazine
+          Quantity: 5
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackXenoPie
+  name: Xeno-pie
+  description: A delicious meatpie. Probably heretical.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: xenomeatpie
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 4
+        - ReagentId: Protein #meatprotein
+          Quantity: 2
+  - type: Food
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackWingFangChu
+  name: Wing Fang Chu
+  description: A savory dish of alien wing wang in soy.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: wingfangchu
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Soysauce
+          Quantity: 4
+        - ReagentId: Protein #meatprotein
+          Quantity: 4
+  - type: Food
+    trash:
+    - RMCFoodPacketBowlTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackKabob
+  name: Kabob
+  description: A human meat, on a stick.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/meat.rsi
+    state: kabob
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Protein #meatprotein
+          Quantity: 8
+  - type: Food
+    trash:
+    - CMRodMetal1
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackMonkeyKabob
+  name: Meat-kabob
+  description: Delicious meat, on a stick.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/meat.rsi
+    state: kabob
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Protein #meatprotein
+          Quantity: 8
+  - type: Food
+    trash:
+    - CMRodMetal1
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackTofuKabob
+  name: Tofu-kabob
+  description: Vegan meat, on a stick.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/meat.rsi
+    state: kabob
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Protein #tofu
+          Quantity: 8
+  - type: Food
+    trash:
+    - CMRodMetal1
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackCubanCarp
+  name: Cuban Carp
+  description: A grifftastic sandwich that burns your tongue and then leaves it numb!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/fish.rsi
+    state: cubancarp
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Protein #fish
+          Quantity: 6
+        - ReagentId: Hotsauce
+          Quantity: 3
+  - type: Food
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackPopcorn
+  name: Popcorn
+  description: Buttery movie theater-style popcorn. Now to find a move to watch while eating it.
+  components:
+  - type: Sprite
+    state: popcorn
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Cellulose #plantmatter
+          Quantity: 2
+  - type: Food
+    trash:
+    - RMCFoodPacketPopcornTrash
+
+# TODO RMC14 - Biting unpopped kernel
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackSosjerky
+  name: Scaredy's Private Reserve Beef Jerky
+  description: Beef jerky made from the finest space cows.
+  components:
+  - type: Sprite
+    state: sosjerky
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Protein #meatprotein
+          Quantity: 4
+  - type: Food
+    trash:
+    - RMCFoodPacketSosjerkyTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackNoRaisins
+  name: 4no Raisins
+  description: Best raisins in the universe. Not sure why.
+  components:
+  - type: Sprite
+    state: 4no_raisins
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Vitamin #fruit
+          Quantity: 4
+        - ReagentId: JuiceGrape
+          Quantity: 2
+  - type: Food
+    trash:
+    - RMCFoodPacketRaisinsTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackSpaceTwinkie
+  name: Space Twinkie
+  description: Guaranteed to survive longer than you will.
+  components:
+  - type: Sprite
+    state: space_twinkie
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Sugar
+          Quantity: 4
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackCheesieHonkers
+  name: Cheesie Honkers
+  description: Bite sized cheesie snacks that will honk all over your mouth.
+  components:
+  - type: Sprite
+    state: cheesie_honkers
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Protein #cheese
+          Quantity: 4
+  - type: Food
+    trash:
+    - RMCFoodPacketCheesieHonkersTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackSyndicakes
+  name: Syndi-Cakes
+  description: An extremely moist snack cake that tastes just as good after being nuked.
+  components:
+  - type: Sprite
+    state: syndi_cakes
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: DoctorsDelight
+          Quantity: 5
+  - type: Food
+    trash:
+    - RMCFoodPacketSyndicakesTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackLoadedBakedPotato
+  name: Loaded Baked Potato
+  description: Totally baked.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: loadedbakedpotato
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment #potato
+          Quantity: 2
+        - ReagentId: Protein #cheese
+          Quantity: 4
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackSpaceFries
+  name: Space Fries
+  description: "AKA: French Fries, Freedom Fries, etc."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: fries
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment #potato
+          Quantity: 2
+        - ReagentId: Protein #vegetable
+          Quantity: 4
+  - type: Food
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackSoyDope
+  name: Soy Dope
+  description: Dope from a soy.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: soydope
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+  - type: Food
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackSpaghetti
+  name: Spaghetti
+  description: A bundle of raw spaghetti.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/food_ingredients.rsi
+    state: spagetti
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Flour #dough
+          Quantity: 1
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackCheesyFries
+  name: Cheesy Fries
+  description: Fries. Covered in cheese. Duh.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: cheesyfries
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Protein #cheese
+          Quantity: 4
+        - ReagentId: Nutriment #potato
+          Quantity: 2
+  - type: Food
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackBadRecipe
+  name: Burned Mess
+  description: Someone should be demoted from chef for this.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: badrecipe
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Toxin
+          Quantity: 1
+        - ReagentId: Carbon
+          Quantity: 3
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackMeatSteak
+  name: Steak
+  description: A fine cut of grilled meat, spiced with salt and pepper. Where the meat came from is, well, probably best left unanswered.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/meat.rsi
+    state: meatstake
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Protein #meatprotein
+          Quantity: 4
+        - ReagentId: TableSalt
+          Quantity: 1
+        - ReagentId: Blackpepper
+          Quantity: 1
+  - type: Food
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackSpacyLibertyDuff
+  name: Spacy Liberty Duff
+  description: Jello gelatin, from Alfred Hubbard's cookbook
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: spacylibertyduff
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Protein #mushroom
+          Quantity: 6
+        - ReagentId: SpaceDrugs #psilocybin
+          Quantity: 6
+  - type: Food
+    trash:
+    - RMCFoodPacketBowlTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackAmanitaJelly
+  name: Amanita Jelly
+  description: Looks curiously toxic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: amanitajelly
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Protein #mushroom
+          Quantity: 6
+        - ReagentId: Amatoxin
+          Quantity: 6
+        - ReagentId: SpaceDrugs #psilocybin
+          Quantity: 3
+  - type: Food
+    trash:
+    - RMCFoodPacketBowlTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackPoppyPretzel
+  name: Poppy Pretzel
+  description: It's all twisted up!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: poppypretzel
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Cellulose #plantmatter
+          Quantity: 1
+        - ReagentId: Nutriment #bread
+          Quantity: 4
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackMeatballSoup
+  name: Meatball Soup
+  description: You've got balls kid, BALLS!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soups_salads.rsi
+    state: meatballsoup
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Protein #meatprotein
+          Quantity: 8
+        - ReagentId: Water
+          Quantity: 5
+  - type: Food
+    trash:
+    - RMCFoodPacketBowlTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackBloodSoup
+  name: Tomato Soup
+  description: Smells like copper
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soups_salads.rsi
+    state: tomatosoup
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 2
+        - ReagentId: Blood
+          Quantity: 10
+        - ReagentId: Water
+          Quantity: 5
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackClownsTears
+  name: Clown's Tears
+  description: Not very funny.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soups_salads.rsi
+    state: clownstears
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: JuiceBanana #banana
+          Quantity: 5
+        - ReagentId: Water
+          Quantity: 10
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackVegetableSoup
+  name: Vegetable Soup
+  description: A true vegan meal.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soups_salads.rsi
+    state: vegetablesoup
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment #vegetable
+          Quantity: 8
+        - ReagentId: Water
+          Quantity: 5
+  - type: Food
+    trash:
+    - RMCFoodPacketBowlTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackNettleSoup
+  name: Nettle Soup
+  description: To think, the botanist would've beat you to death with one of these.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soups_salads.rsi
+    state: nettlesoup
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Cellulose #plantmatter
+          Quantity: 8
+        - ReagentId: Water
+          Quantity: 5
+        - ReagentId: CMTricordrazine
+          Quantity: 5
+  - type: Food
+    trash:
+    - RMCFoodPacketBowlTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackMysterySoup
+  name: Mystery Soup
+  description: The mystery is, why aren't you eating it?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soups_salads.rsi
+    state: mysterysoup
+  - type: Food
+    trash:
+    - RMCFoodPacketBowlTrash
+
+- type: entity
+  parent: RMCFoodSnackMysterySoup
+  id: RMCFoodSnackMysterySoup1
+  suffix: 1
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Cellulose #plantmatter
+          Quantity: 6
+        - ReagentId: Hotsauce
+          Quantity: 3
+        - ReagentId: JuiceTomato
+          Quantity: 2
+
+- type: entity
+  parent: RMCFoodSnackMysterySoup
+  id: RMCFoodSnackMysterySoup2
+  suffix: 2
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Cellulose #plantmatter
+          Quantity: 6
+        - ReagentId: Frostoil
+          Quantity: 3
+        - ReagentId: JuiceTomato
+          Quantity: 2
+
+- type: entity
+  parent: RMCFoodSnackMysterySoup
+  id: RMCFoodSnackMysterySoup3
+  suffix: 3
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+        - ReagentId: Water
+          Quantity: 5
+        - ReagentId: CMTricordrazine
+          Quantity: 5
+
+- type: entity
+  parent: RMCFoodSnackMysterySoup
+  id: RMCFoodSnackMysterySoup4
+  suffix: 4
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 5
+        - ReagentId: Water
+          Quantity: 10
+
+- type: entity
+  parent: RMCFoodSnackMysterySoup
+  id: RMCFoodSnackMysterySoup5
+  suffix: 5
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #fruit
+          Quantity: 2
+        - ReagentId: JuiceBanana #banana
+          Quantity: 10
+
+- type: entity
+  parent: RMCFoodSnackMysterySoup
+  id: RMCFoodSnackMysterySoup6
+  suffix: 6
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Protein #meatprotein
+          Quantity: 6
+        - ReagentId: Blood
+          Quantity: 10
+
+- type: entity
+  parent: RMCFoodSnackMysterySoup
+  id: RMCFoodSnackMysterySoup7
+  suffix: 7
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Carbon
+          Quantity: 10
+        - ReagentId: Toxin
+          Quantity: 10
+
+- type: entity
+  parent: RMCFoodSnackMysterySoup
+  id: RMCFoodSnackMysterySoup8
+  suffix: 8
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #vegetable
+          Quantity: 5
+        - ReagentId: JuiceTomato
+          Quantity: 10
+
+- type: entity
+  parent: RMCFoodSnackMysterySoup
+  id: RMCFoodSnackMysterySoup9
+  suffix: 9
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 6
+        - ReagentId: JuiceTomato
+          Quantity: 5
+        - ReagentId: CMImidazoline
+          Quantity: 5
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackWishSoup
+  name: Wish Soup
+  description: I wish this was soup.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soups_salads.rsi
+    state: wishsoup
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Water
+          Quantity: 10
+  - type: Food
+    trash:
+    - RMCFoodPacketBowlTrash
+
+- type: entity
+  parent: RMCFoodSnackWishSoup
+  id: RMCFoodSnackWishSoupNutriment
+  description: A wish come true!
+  suffix: Nutriment
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+  - type: Food
+    trash:
+    - RMCFoodPacketBowlTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackHotChili
+  name: Hot Chili
+  description: A five alarm Texan Chili!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soups_salads.rsi
+    state: hotchili
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Protein #meatprotein
+          Quantity: 6
+        - ReagentId: Hotsauce
+          Quantity: 3
+        - ReagentId: JuiceTomato
+          Quantity: 2
+  - type: Food
+    trash:
+    - RMCFoodPacketBowlTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackColdChili
+  name: Cold Chili
+  description: This slush is barely a liquid!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soups_salads.rsi
+    state: coldchili
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Protein #meatprotein
+          Quantity: 6
+        - ReagentId: Frostoil
+          Quantity: 3
+        - ReagentId: JuiceTomato
+          Quantity: 2
+  - type: Food
+    trash:
+    - RMCFoodPacketBowlTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackMonkeyCube
+  name: Monkey Cube
+  description: Just add water!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/monkeycubes.rsi
+    state: monkeycube
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Protein #meatprotein
+          Quantity: 10
+
+# TODO RMC14 - Monkey cube sink interaction
+
+# TODO RMC14 - Monkeycube water interaction
+
+# TODO RMC14 - Wrapped monkeycube
+
+# TODO RMC14 - Misc animal cubes
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackSpellBurger
+  name: Spell Burger
+  description: This is absolutely Ei Nath.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/burgers.rsi
+    state: spellburger
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 6
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackBigBiteBurger
+  name: Big Bite Burger
+  description: Forget the Big Mac. THIS is the future!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/burgers.rsi
+    state: bigbiteburger
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Protein #meatprotein
+          Quantity: 7
+        - ReagentId: Nutriment #bread
+          Quantity: 7
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackEnchiladas
+  name: Enchiladas
+  description: Viva La Mexico!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: enchiladas
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #vegetable
+          Quantity: 2
+        - ReagentId: Protein #meatprotein
+          Quantity: 4
+        - ReagentId: Hotsauce
+          Quantity: 6
+  - type: Food
+    trash:
+    - RMCFoodPacketTrayTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackMonkeysDelight
+  name: Monkey's Delight
+  description: Eeee Eee!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/meat.rsi
+    state: monkeysdelight
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Protein #meatprotein
+          Quantity: 10
+        - ReagentId: JuiceBanana #banana
+          Quantity: 5
+        - ReagentId: Blackpepper
+          Quantity: 1
+        - ReagentId: TableSalt
+          Quantity: 1
+  - type: Food
+    trash:
+    - RMCFoodPacketTrayTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackBaguette
+  name: Baguette
+  description: Bon appetit!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bread.rsi
+    state: baguette
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 6
+        - ReagentId: Blackpepper
+          Quantity: 1
+        - ReagentId: TableSalt
+          Quantity: 1
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackFishAndChips
+  name: Fish and Chips
+  description: I do say so myself chap.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/fish.rsi
+    state: fishandchips
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Protein #fish
+          Quantity: 6
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackSandwich
+  name: Sandwich
+  description: A grand creation of meat, cheese, bread, and several leaves of lettuce! Arthur Dent would be proud.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bread.rsi
+    state: sandwich
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 2
+        - ReagentId: Vitamin #cheese
+          Quantity: 2
+        - ReagentId: Protein #meatprotein
+          Quantity: 2
+  - type: Food
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackToastedSandwich
+  name: Toasted Sandwich
+  description: Now if you only had a pepper bar.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bread.rsi
+    state: toastedsandwich
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 6
+        - ReagentId: Carbon
+          Quantity: 2
+  - type: Food
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackGrilledCheeseSandwich
+  name: Grilled Cheese Sandwich
+  description: Goes great with Tomato soup!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bread.rsi
+    state: toastedsandwich
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 4
+        - ReagentId: Vitamin #cheese
+          Quantity: 3
+  - type: Food
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackTomatoSoup
+  name: Tomato Soup
+  description: Drinking this feels like being a vampire! A tomato vampire...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soups_salads.rsi
+    state: tomatosoup
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #vegetable
+          Quantity: 5
+        - ReagentId: JuiceTomato
+          Quantity: 10
+  - type: Food
+    trash:
+    - RMCFoodPacketBowlTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackRoffleWaffles
+  name: Roffle Waffles
+  description: Waffles from Roffle Co.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: rofflewaffles
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 8
+        - ReagentId: SpaceDrugs #psilocybin
+          Quantity: 8
+  - type: Food
+    trash:
+    - RMCFoodPacketWafflesTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackStew
+  name: Stew
+  description: A nice and warm stew. Healthy and strong.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soups_salads.rsi
+    state: stew
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 30
+        reagents:
+        - ReagentId: Nutriment #vegetable
+          Quantity: 4
+        - ReagentId: Protein #meatprotein
+          Quantity: 3
+        - ReagentId: Vitamin #mushroom
+          Quantity: 3
+        - ReagentId: JuiceTomato
+          Quantity: 5
+        - ReagentId: CMImidazoline
+          Quantity: 5
+        - ReagentId: Water
+          Quantity: 5
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackJelliedToast
+  name: Jellied Toast
+  description: A slice of bread covered with delicious jam.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bread.rsi
+    state: jellytoast
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 1
+  - type: Food
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackJelliedToast
+  id: RMCFoodSnackJelliedToastCherry
+  suffix: Cherry
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 1
+        - ReagentId: JuiceCherry #cherryjelly
+          Quantity: 5
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackJellyBurger
+  name: Jelly Burger
+  description: Culinary delight..?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/burgers.rsi
+    state: jellyburger
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 5
+
+- type: entity
+  parent: RMCFoodSnackJellyBurger
+  id: RMCFoodSnackJellyBurgerCherry
+  suffix: Cherry
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 5
+        - ReagentId: JuiceCherry #cherryjelly
+          Quantity: 5
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackMilosoup
+  name: Milosoup
+  description: The universes best soup! Yum!!!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soups_salads.rsi
+    state: milosoup
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Protein #tofu
+          Quantity: 8
+        - ReagentId: Water
+          Quantity: 5
+  - type: Food
+    trash:
+    - RMCFoodPacketBowlTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackStewedSoyMeat
+  name: Stewed Soy Meat
+  description: Even non-vegetarians will LOVE this!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: stewedsoymeat
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 8
+  - type: Food
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackBoiledSpaghetti
+  name: Boiled Spaghetti
+  description: A plain dish of noodles, this sucks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: spagettiboiled
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #noodles
+          Quantity: 2
+  - type: Food
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackBoiledRice
+  name: Boiled Rice
+  description: A boring dish of boring rice.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soups_salads.rsi
+    state: boiledrice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #rice
+          Quantity: 2
+  - type: Food
+    trash:
+    - RMCFoodPacketBowlTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackRicePudding
+  name: Rice Pudding
+  description: Where's the Jam!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soups_salads.rsi
+    state: rpudding
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #rice
+          Quantity: 3
+        - ReagentId: Milk
+          Quantity: 1
+  - type: Food
+    trash:
+    - RMCFoodPacketBowlTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackPastaTomato
+  name: Spaghetti
+  description: Spaghetti and crushed tomatoes. Just like your abusive father used to make!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: pastatomato
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #noodles
+          Quantity: 6
+        - ReagentId: JuiceTomato
+          Quantity: 10
+  - type: Food
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackMeatballSpaghetti
+  name: Spaghetti & Meatballs
+  description: Now thats a nic'e meatball!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: meatballspagetti
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #noodles
+          Quantity: 4
+        - ReagentId: Protein #meatprotein
+          Quantity: 4
+  - type: Food
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackSpesslaw
+  name: Spesslaw
+  description: A lawyer's favourite
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: spesslaw
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #noodles
+          Quantity: 6
+        - ReagentId: Protein #meatprotein
+          Quantity: 6
+  - type: Food
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackCarrotFries
+  name: Carrot Fries
+  description: Tasty fries from fresh Carrots.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: carrotfries
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #vegetable
+          Quantity: 3
+        - ReagentId: CMImidazoline
+          Quantity: 3
+  - type: Food
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackSuperBiteBurger
+  name: Super Bite Burger
+  description: This is a mountain of a burger. FOOD!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/burgers.rsi
+    state: superbiteburger
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 70
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 20
+        - ReagentId: Protein #meatprotein
+          Quantity: 10
+        - ReagentId: Egg
+          Quantity: 5
+        - ReagentId: TableSalt
+          Quantity: 2
+        - ReagentId: Blackpepper
+          Quantity: 3
+        - ReagentId: Vitamin #cheese
+          Quantity: 10
+        - ReagentId: JuiceTomato
+          Quantity: 10
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackCandiedApple
+  name: Candied Apple
+  description: An apple coated in sugary sweetness.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/candies.rsi
+    state: candiedapple
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Vitamin #fruit
+          Quantity: 3
+        - ReagentId: Sugar
+          Quantity: 3
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackApplePie
+  name: Apple Pie
+  description: A pie containing sweet sweet love... or apple.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: applepie
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 3
+        - ReagentId: Vitamin #fruit
+          Quantity: 3
+        - ReagentId: Sugar
+          Quantity: 3
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackCherryPie
+  name: Cherry Pie
+  description: Taste so good, make a grown man cry.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: cherrypie
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 3
+        - ReagentId: JuiceCherry #cherryjelly
+          Quantity: 3
+        - ReagentId: Sugar
+          Quantity: 3
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackTwoBread
+  name: Two Bread
+  description: It is very bitter and winy.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bread.rsi
+    state: twobread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 3
+        - ReagentId: Wine
+          Quantity: 3
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackJellySandwich
+  name: Jelly Sandwich
+  description: You wish you had some peanut butter to go with this...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bread.rsi
+    state: jellysandwich
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 2
+  - type: Food
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackJellySandwich
+  id: RMCFoodSnackJellySandwichCherry
+  suffix: Cherry
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 2
+        - ReagentId: JuiceCherry #cherryjelly
+          Quantity: 5
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackMint
+  name: Mint
+  description: it is only wafer thin.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/dishes.rsi
+    state: mint
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 1
+        reagents:
+        - ReagentId: Nutriment #minttoxin
+          Quantity: 1
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackChantrelleSoup
+  name: Chantrelle Soup
+  description: A delicious and hearty mushroom soup.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soups_salads.rsi
+    state: mushroomsoup
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #mushroom
+          Quantity: 6
+        - ReagentId: Milk
+          Quantity: 2
+  - type: Food
+    trash:
+    - RMCFoodPacketBowlTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackPlumpHelmetBiscuit
+  name: Plump Helmet Biscuit
+  description: This is a finely-prepared plump helmet biscuit. The ingredients are exceptionally minced plump helmet, and well-minced dwarven wheat flour.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: phelmbiscuit
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 3
+        - ReagentId: Vitamin #mushroom
+          Quantity: 2
+
+- type: entity
+  parent: RMCFoodSnackPlumpHelmetBiscuit
+  id: RMCFoodSnackExceptionalPlumpHelmetBiscuit
+  name: Exceptional Plump Helmet Biscuit
+  description: Microwave is taken by a fey mood! It has cooked an exceptional plump helmet biscuit!
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 4
+        - ReagentId: Vitamin #mushroom
+          Quantity: 4
+        - ReagentId: CMTricordrazine
+          Quantity: 5
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackChawanmushi
+  name: Chawanmushi
+  description: A legendary egg custard that makes friends out of enemies. Probably too hot for a cat to eat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: chawanmushi
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Egg
+          Quantity: 2
+        - ReagentId: Vitamin #mushroom
+          Quantity: 2
+        - ReagentId: Soysauce
+          Quantity: 1
+  - type: Food
+    trash:
+    - RMCFoodPacketBowlTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackBeetSoup
+  name: Beet Soup
+  description: Wait, how do you spell it again..?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soups_salads.rsi
+    state: beetsoup
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #vegetable
+          Quantity: 8
+  - type: Food
+    trash:
+    - RMCFoodPacketBowlTrash
+
+- type: entity
+  parent: RMCFoodSnackBeetSoup
+  id: RMCFoodSnackBeetSoupBorsch
+  name: Borsch
+
+- type: entity
+  parent: RMCFoodSnackBeetSoup
+  id: RMCFoodSnackBeetSoupBortsch
+  name: Bortsch
+
+- type: entity
+  parent: RMCFoodSnackBeetSoup
+  id: RMCFoodSnackBeetSoupBorstch
+  name: Borstch
+
+- type: entity
+  parent: RMCFoodSnackBeetSoup
+  id: RMCFoodSnackBeetSoupBorsh
+  name: Borsh
+
+- type: entity
+  parent: RMCFoodSnackBeetSoup
+  id: RMCFoodSnackBeetSoupBorshch
+  name: Borshch
+
+- type: entity
+  parent: RMCFoodSnackBeetSoup
+  id: RMCFoodSnackBeetSoupBorscht
+  name: Borscht
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackTossedSalad
+  name: Tossed Salad
+  description: A proper salad, basic and simple, with little bits of carrot, tomato and apple intermingled. Vegan!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soups_salads.rsi
+    state: herbsalad
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #fruit
+          Quantity: 4
+        - ReagentId: Vitamin #vegetable
+          Quantity: 4
+  - type: Food
+    trash:
+    - RMCFoodPacketBowlTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackValidSalad
+  name: Valid Salad
+  description: It's just a salad of questionable 'herbs' with meatballs and fried potato slices. Nothing suspicious about it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/soups_salads.rsi
+    state: validsalad
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Cellulose #plantmatter
+          Quantity: 4
+        - ReagentId: Protein #meatprotein
+          Quantity: 4
+        - ReagentId: JuicePotato #potato
+          Quantity: 1
+  - type: Food
+    trash:
+    - RMCFoodPacketBowlTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackAppleTart
+  name: Golden Apple Streusel Tart
+  description: A tasty dessert that won't make it through a metal detector.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
+    state: gappletart
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 25
+        reagents:
+        - ReagentId: Nutriment #fruit
+          Quantity: 8
+        - ReagentId: Gold
+          Quantity: 5
+  - type: Food
+    trash:
+    - RMCFoodPacketPlateTrash
+
+#Sliceable
+
+#Pizza
+
+#Pizza Galaxy Pizza
+
+#New Old Food Stuff from BS12
 
 - type: entity
   parent: RMCFoodSnackBase
@@ -45,41 +2820,169 @@
         - ReagentId: Nutriment
           Quantity: 7
 
+#raw potato sticks
+
 - type: entity
   parent: RMCFoodSnackBase
-  id: RMCFoodSnackBarcardine
-  name: Barcardine Bar
-  description: A bar of chocolate, it smells like the medical bay. "Chocolate helps the pain go away."
+  id: RMCFoodSnackBurritoPackaged
+  name: Packaged Burrito
+  description: A hard microwavable burrito. There's no time given on how long to cook it. Packaged by the Weston-Yamada Corporation.
   components:
   - type: Sprite
-    state: barcardine
+    state: packaged-burrito
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
-      state: barcardine_helmet
+      state: packaged-burrito_helmet
   - type: Item
-    heldPrefix: barcardine
+    heldPrefix: pburrito
   - type: SpawnItemsOnUse
     items:
-      - id: RMCFoodPacketBarcardineTrash
-      - id: RMCFoodSnackBarcardineBar
+    - id: RMCFoodPacketBurritoTrash
+    - id: RMCFoodSnackBurrito
     sound:
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
   parent: RMCFoodSnackBase
-  id: RMCFoodSnackBarcardineBar
-  name: Barcardine Bar
-  description: A bar of chocolate, it smells like the medical bay. "Chocolate helps the pain go away."
+  id: RMCFoodSnackBurrito
+  name: Packaged Burrito
+  description: A hard microwavable burrito. There's no time given on how long to cook it. Packaged by the Weston-Yamada Corporation.
   components:
   - type: FlavorProfile
     flavors:
-      - chocolate
-      - medicine
+    - meaty
+    - bread
   - type: Sprite
-    state: barcardine-o
+    state: open-burrito
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
+      state: open-burrito_helmet
   - type: Item
-    heldPrefix: barcardine_o
+    heldPrefix: burrito
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 5
+        - ReagentId: Protein #meatprotein
+          Quantity: 5
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackCheeseburgerPackaged
+  name: Packaged Cheeseburger
+  description: A soggy microwavable burger. There's no time given for how long to cook it. Packaged by the Weston-Yamada Corporation.
+  components:
+  - type: Sprite
+    state: burger
+  - type: Item
+    heldPrefix: pburger
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCFoodPacketPackagedBurgerTrash
+    - id: RMCFoodSnackPackagedCheeseburger
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackPackagedCheeseburger
+  name: Packaged Cheeseburger
+  description: A soggy microwavable burger. There's no time given for how long to cook it. Packaged by the Weston-Yamada Corporation.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - cheesy
+    - bun
+  - type: Sprite
+    state: hburger
+  - type: Item
+    heldPrefix: burger
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 5
+        - ReagentId: Protein #meatprotein
+          Quantity: 5
+        - ReagentId: TableSalt
+          Quantity: 2
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackHotdogPackaged
+  name: Packaged Hotdog
+  description: A singular squishy, room temperature, hot dog. There's no time given for how long to cook it, so you assume its probably good to go. Packaged by the Weston-Yamada Corporation.
+  components:
+  - type: Sprite
+    state: packaged-hotdog
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
+      state: packaged-hotdog_helmet
+  - type: Item
+    heldPrefix: photdog
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCFoodPacketHotdogTrash
+    - id: RMCFoodSnackHotdog
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackHotdog
+  name: Packaged Hotdog
+  description: A singular squishy, room temperature, hot dog. There's no time given for how long to cook it, so you assume its probably good to go. Packaged by the Weston-Yamada Corporation.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - bun
+    - salty
+  - type: Sprite
+    state: open-hotdog
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
+      state: open-hotdog_helmet
+  - type: Item
+    heldPrefix: hotdog
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 2
+        - ReagentId: Protein #meatprotein
+          Quantity: 1
+        - ReagentId: TableSalt
+          Quantity: 2
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackEATBar
+  name: MEAT Bar
+  description: It is a vacuum sealed tube of suspicious meat. Artificially packed full of nutrients you can't pronounce. The M is printed on the side, so it just reads EAT. Guess that's where the slogan comes from.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - nutriment
+  - type: Sprite
+    state: eat_bar
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
+      state: snack_eat_helmet
   - type: SolutionContainerManager
     solutions:
       food:
@@ -87,10 +2990,71 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 4
-        - ReagentId: CocoaPowder
-          Quantity: 2
-        - ReagentId: CMBicaridine #Will need to be replaced with Tramadol when pain is added
-          Quantity: 1
+        - ReagentId: Protein #meatprotein
+          Quantity: 4
+  - type: Item
+  - type: Food
+    trash:
+    - RMCFoodPacketEATBarTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackKeplarCrisps
+  name: Keplar Crisps
+  description: "'They're disturbingly good!' Now with 0% trans fat and added genuine sea salts."
+  components:
+  - type: FlavorProfile
+    flavors:
+    - potatoes
+    - salty
+  - type: Sprite
+    state: kepler_chips
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 4
+        - ReagentId: TableSalt
+          Quantity: 12
+  - type: Item
+    heldPrefix: kepler
+  - type: Food
+    trash:
+    - RMCFoodPacketKeplerCrispsTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackKeplarFlamehotCrisps
+  name: Keplar Flamehot
+  description: "'They're disturbingly good!' Due to an exceptionally well-timed ad campaign with the release of Keplar Flamehot in 2165, the Keplar brand was able to overtake other confectionary Weston products by quarter three of that year. Contains 0% trans fat."
+  components:
+  - type: FlavorProfile
+    flavors:
+    - potatoes
+    - spicy
+    - salty
+  - type: Sprite
+    state: kepler_flame
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 20
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 4
+        - ReagentId: TableSalt
+          Quantity: 4
+        - ReagentId: Hotsauce
+          Quantity: 8
+  - type: Item
+    heldPrefix: flamehotkepler
+  - type: Food
+    trash:
+    - RMCFoodPacketKeplerCrispsFlamehotTrash
+
+#Wrapped Candy Bars
 
 - type: entity
   parent: RMCFoodSnackBase
@@ -108,8 +3072,8 @@
     heldPrefix: boonie
   - type: SpawnItemsOnUse
     items:
-      - id: RMCFoodPacketBoonieTrash
-      - id: RMCFoodSnackBoonieBar
+    - id: RMCFoodPacketBoonieTrash
+    - id: RMCFoodSnackBoonieBar
     sound:
       path: /Audio/Effects/unwrap.ogg
 
@@ -121,8 +3085,8 @@
   components:
   - type: FlavorProfile
     flavors:
-      - chocolate
-      - minty
+    - chocolate
+    - minty
   - type: Sprite
     state: boonie-o
   - type: Item
@@ -153,11 +3117,11 @@
     heldPrefix: chunk
   - type: SpawnItemsOnUse
     items:
-      - id: RMCFoodPacketCHUNKTrash
-      - id: RMCFoodSnackCHUNKBar
+    - id: RMCFoodPacketCHUNKTrash
+    - id: RMCFoodSnackCHUNKBar
     sound:
       path: /Audio/Effects/unwrap.ogg
-  - type: MeleeWeapon # True horror comes from improvisation.
+  - type: MeleeWeapon
     damage:
       types:
         Blunt: 15
@@ -172,7 +3136,7 @@
   components:
   - type: FlavorProfile
     flavors:
-      - chocolate
+    - chocolate
   - type: Sprite
     state: chunk-o
   - type: Item
@@ -180,13 +3144,13 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 20 # It's going to take a bit to eat this goddamn thing.
+        maxVol: 20
         reagents:
         - ReagentId: Nutriment
           Quantity: 7
         - ReagentId: CocoaPowder
           Quantity: 10
-  - type: MeleeWeapon # True horror comes from improvisation.
+  - type: MeleeWeapon
     damage:
       types:
         Blunt: 15
@@ -206,11 +3170,11 @@
     size: Normal
   - type: SpawnItemsOnUse
     items:
-      - id: RMCFoodPacketHUNKTrash
-      - id: RMCFoodSnackHUNKBar
+    - id: RMCFoodPacketHUNKTrash
+    - id: RMCFoodSnackHUNKBar
     sound:
       path: /Audio/Effects/unwrap.ogg
-  - type: MeleeWeapon # You could legitimately use this as a strong melee weapon. That horrifies me.
+  - type: MeleeWeapon
     damage:
       types:
         Blunt: 35
@@ -225,8 +3189,8 @@
   components:
   - type: FlavorProfile
     flavors:
-      - metallic
-      - chocolate
+    - metallic
+    - chocolate
   - type: Sprite
     state: hunk-o
   - type: Item
@@ -235,15 +3199,15 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 40 # Remember what I said before? It's worse now.
+        maxVol: 40
         reagents:
         - ReagentId: Nutriment
           Quantity: 5
-        - ReagentId: Iron # IT CONTAINS 30 UNITS OF WHAT???
+        - ReagentId: Iron
           Quantity: 30
         - ReagentId: CocoaPowder
           Quantity: 5
-  - type: MeleeWeapon # You could legitimately use this as a strong melee weapon. That horrifies me.
+  - type: MeleeWeapon
     damage:
       types:
         Blunt: 35
@@ -252,372 +3216,64 @@
 
 - type: entity
   parent: RMCFoodSnackBase
-  id: RMCFoodSnackCandy
-  name: Candy
-  description: Nougat, love it or hate it.
+  id: RMCFoodSnackBarcardine
+  name: Barcardine Bar
+  description: A bar of chocolate, it smells like the medical bay. "Chocolate helps the pain go away."
+  components:
+  - type: Sprite
+    state: barcardine
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
+      state: barcardine_helmet
+  - type: Item
+    heldPrefix: barcardine
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCFoodPacketBarcardineTrash
+    - id: RMCFoodSnackBarcardineBar
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackBarcardineBar
+  name: Barcardine Bar
+  description: A bar of chocolate, it smells like the medical bay. "Chocolate helps the pain go away."
   components:
   - type: FlavorProfile
     flavors:
-    - sugary
+    - chocolate
+    - medicine
   - type: Sprite
-    state: candy
+    state: barcardine-o
+  - type: Item
+    heldPrefix: barcardine_o
   - type: SolutionContainerManager
     solutions:
       food:
         maxVol: 10
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 1
-        - ReagentId: Sugar
-          Quantity: 3
-  - type: Item
-    size: Tiny
-  - type: Food
-    trash:
-    - RMCFoodPacketCandyTrash
-
-- type: entity
-  parent: RMCFoodSnackBase
-  id: RMCFoodSnackKeplarCrisps
-  name: Keplar Crisps
-  description: "'They're disturbingly good!' Now with 0% trans fat and added genuine sea salts."
-  components:
-  - type: FlavorProfile
-    flavors:
-      - potatoes
-      - salty
-  - type: Sprite
-    state: kepler_chips
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20
         reagents:
         - ReagentId: Nutriment
           Quantity: 4
-        - ReagentId: TableSalt # Holy shit these are salty.
-          Quantity: 12
-  - type: Item
-    heldPrefix: kepler
-  - type: Food
-    trash:
-    - RMCFoodPacketKeplerCrispsTrash
-
-- type: entity
-  parent: RMCFoodSnackBase
-  id: RMCFoodSnackKeplarFlamehotCrisps
-  name: Keplar Flamehot
-  description: "'They're disturbingly good!' Due to an exceptionally well-timed ad campaign with the release of Keplar Flamehot in 2165, the Keplar brand was able to overtake other confectionary Weston products by quarter three of that year. Contains 0% trans fat."
-  components:
-  - type: FlavorProfile
-    flavors:
-      - potatoes
-      - spicy
-      - salty
-  - type: Sprite
-    state: kepler_flame
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 20
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 8
-        - ReagentId: TableSalt
-          Quantity: 16
-        - ReagentId: Hotsauce
-          Quantity: 8
-  - type: Item
-    heldPrefix: flamehotkepler
-  - type: Food
-    trash:
-    - RMCFoodPacketKeplerCrispsFlamehotTrash
-
-- type: entity
-  parent: RMCFoodSnackBase
-  id: RMCFoodSnackChipsPepper
-  name: Weston-Yamada Pepper Chips
-  description: Premium high-quality chips, now with 0% trans fat and added black pepper.
-  components:
-  - type: FlavorProfile
-    flavors:
-      - potatoes
-      - peppery
-  - type: Sprite
-    state: wy_pepper
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 10
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 3
-        - ReagentId: Blackpepper
+        - ReagentId: CocoaPowder
+          Quantity: 2
+        - ReagentId: CMBicaridine #Will need to be replaced with Tramadol when pain is added
           Quantity: 1
-  - type: Item
-    heldPrefix: wy_chips_pepper
-  - type: Food
-    trash:
-    - RMCFoodPacketPepperChipsTrash
+
+#ORP oat biscuit
+
+#IRP army biscuits
+
+#TODO RMC14 - Move to new trash yml
+
+# Trash Parent
 
 - type: entity
-  parent: RMCFoodSnackBase
-  id: RMCFoodSnackChips
-  name: Chips
-  description: Commander Riker's What-The-Crisps
-  components:
-  - type: FlavorProfile
-    flavors:
-      - potatoes
-      - peppery
-  - type: Sprite
-    state: chips
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 10
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 3
-        - ReagentId: Blackpepper
-          Quantity: 1
-  - type: Item
-  - type: Food
-    trash:
-    - RMCFoodPacketChipsTrash
-
-- type: entity
-  parent: RMCFoodSnackBase
-  id: RMCFoodSnackPopcorn
-  name: Popcorn
-  description: Buttery movie theater-style popcorn. Now to find a move to watch while eating it.
-  components:
-  - type: FlavorProfile
-    flavors:
-      - buttery
-  - type: Sprite
-    state: popcorn
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 10
-        reagents:
-        - ReagentId: Cellulose # 13 is PlantMatter
-          Quantity: 2
-  - type: Item
-  - type: Food
-    trash:
-    - RMCFoodPacketPopcornTrash
-
-# Packaged Hot Foods
-
-- type: entity
-  parent: RMCFoodSnackBase
-  id: RMCFoodSnackCheeseburgerPackaged
-  name: Packaged Cheeseburger
-  description: A soggy microwavable burger. There's no time given for how long to cook it. Packaged by the Weston-Yamada Corporation.
-  components:
-  - type: Sprite
-    state: burger
-  - type: Item
-    heldPrefix: pburger
-  - type: SpawnItemsOnUse
-    items:
-      - id: RMCFoodPacketCheeseburgerTrash
-      - id: RMCFoodSnackCheeseburger
-    sound:
-      path: /Audio/Effects/unwrap.ogg
-
-- type: entity
-  parent: RMCFoodSnackBase
-  id: RMCFoodSnackCheeseburger
-  name: Packaged Cheeseburger
-  description: A soggy microwavable burger. There's no time given for how long to cook it. Packaged by the Weston-Yamada Corporation.
-  components:
-  - type: FlavorProfile
-    flavors:
-      - meaty
-      - cheesy
-      - bun
-  - type: Sprite
-    state: hburger
-  - type: Item
-    heldPrefix: burger
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 15
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 5
-        - ReagentId: Protein
-          Quantity: 5
-        - ReagentId: TableSalt
-          Quantity: 2
-
-- type: entity
-  parent: RMCFoodSnackBase
-  id: RMCFoodSnackBurritoPackaged
-  name: Packaged Burrito
-  description: A hard microwavable burrito. There's no time given on how long to cook it. Packaged by the Weston-Yamada Corporation.
-  components:
-  - type: Sprite
-    state: packaged-burrito
-  - type: HelmetAccessory
-    rsi:
-      sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
-      state: packaged-burrito_helmet
-  - type: Item
-    heldPrefix: pburrito
-  - type: SpawnItemsOnUse
-    items:
-      - id: RMCFoodPacketBurritoTrash
-      - id: RMCFoodSnackBurrito
-    sound:
-      path: /Audio/Effects/unwrap.ogg
-
-
-- type: entity
-  parent: RMCFoodSnackBase
-  id: RMCFoodSnackBurrito
-  name: Packaged Burrito
-  description: A hard microwavable burrito. There's no time given on how long to cook it. Packaged by the Weston-Yamada Corporation.
-  components:
-  - type: FlavorProfile
-    flavors:
-      - meaty
-      - bread
-  - type: Sprite
-    state: open-burrito
-  - type: HelmetAccessory
-    rsi:
-      sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
-      state: open-burrito_helmet
-  - type: Item
-    heldPrefix: burrito
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 15
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 5
-        - ReagentId: Protein
-          Quantity: 5
-
-- type: entity
-  parent: RMCFoodSnackBase
-  id: RMCFoodSnackHotdogPackaged
-  name: Packaged Hotdog
-  description: A singular squishy, room temperature, hot dog. There's no time given for how long to cook it, so you assume its probably good to go. Packaged by the Weston-Yamada Corporation.
-  components:
-  - type: Sprite
-    state: packaged-hotdog
-  - type: HelmetAccessory
-    rsi:
-      sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
-      state: packaged-hotdog_helmet
-  - type: Item
-    heldPrefix: photdog
-  - type: SpawnItemsOnUse
-    items:
-      - id: RMCFoodPacketHotdogTrash
-      - id: RMCFoodSnackHotdog
-    sound:
-      path: /Audio/Effects/unwrap.ogg
-
-- type: entity
-  parent: RMCFoodSnackBase
-  id: RMCFoodSnackHotdog
-  name: Packaged Hotdog
-  description: A singular squishy, room temperature, hot dog. There's no time given for how long to cook it, so you assume its probably good to go. Packaged by the Weston-Yamada Corporation.
-  components:
-  - type: FlavorProfile
-    flavors:
-      - meaty
-      - bun
-      - salty
-  - type: Sprite
-    state: open-hotdog
-  - type: HelmetAccessory
-    rsi:
-      sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
-      state: open-hotdog_helmet
-  - type: Item
-    heldPrefix: hotdog
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 10
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 2
-        - ReagentId: Protein
-          Quantity: 1
-        - ReagentId: TableSalt
-          Quantity: 2
-
-- type: entity
-  parent: RMCFoodSnackBase
-  id: RMCFoodSnackEATBar
-  name: MEAT Bar
-  description: It is a vacuum sealed tube of suspicious meat. Artificially packed full of nutrients you can't pronounce. The M is printed on the side, so it just reads EAT. Guess that's where the slogan comes from.
-  components:
-  - type: FlavorProfile
-    flavors:
-      - meaty
-      - nutriment
-  - type: Sprite
-    state: eat_bar
-  - type: HelmetAccessory
-    rsi:
-      sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
-      state: snack_eat_helmet
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 10
-        reagents:
-        - ReagentId: Nutriment # 4 nutriment and 4 meat protein
-          Quantity: 8
-  - type: Item
-  - type: Food
-    trash:
-    - RMCFoodPacketEATBarTrash
-
-- type: entity
-  parent: RMCFoodSnackBase
-  id: RMCFoodSnackDonkpocket
-  name: Donk-pocket
-  description: The food of choice for the seasoned traitor.
-  components:
-  - type: FlavorProfile
-    flavors:
-    - meaty
-    - bread
-  - type: Sprite
-    state: donkpocket
-  - type: HelmetAccessory
-    rsi:
-      sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
-      state: donkpocket_helmet
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 10
-        reagents:
-        - ReagentId: Nutriment # 2 meat protein & 2 bread. Needs microwave-tricord deal
-          Quantity: 4
-  - type: Item
-
-# Trash
-
-- type: entity
-  categories: [ HideSpawnMenu ]
+  abstract: true
   parent: BaseItem
   id: RMCFoodPacketTrash
   description: This is rubbish.
-  abstract: true
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
@@ -633,105 +3289,29 @@
       Steel: 100
   - type: SpaceGarbage
 
+#Wrappers
+
 - type: entity
-  categories: [ HideSpawnMenu ]
   parent: RMCFoodPacketTrash
   id: RMCFoodPacketBarcardineTrash
-  name: barcardine bar wrapper
+  name: Barcardine Bar wrapper
   description: An empty wrapper from a barcardine bar. You notice the inside has several medical labels. You're not sure if you care or not about that.
   components:
   - type: Sprite
     state: barcardine_trash
 
 - type: entity
-  categories: [ HideSpawnMenu ]
   parent: RMCFoodPacketTrash
   id: RMCFoodPacketBoonieTrash
-  name: boonie bar wrapper
+  name: Boonie Bar wrapper
   description: A minty green wrapper. Reminds you of another terrible decision involving minty green, but you can't remember what...
   components:
   - type: Sprite
     state: boonie_trash
 
 - type: entity
-  categories: [ HideSpawnMenu ]
   parent: RMCFoodPacketTrash
-  id: RMCFoodPacketCHUNKTrash
-  name: chunk bar box
-  description: An empty box from a chunk bar. Significantly less heavy.
-  components:
-  - type: Sprite
-    state: chunk_trash
-
-- type: entity
-  categories: [ HideSpawnMenu ]
-  parent: RMCFoodPacketTrash
-  id: RMCFoodPacketHUNKTrash
-  name: hunk bar crate
-  description: An empty crate from a hunk bar. Tremendously less heavy.
-  components:
-  - type: Sprite
-    state: hunk_trash
-
-- type: entity
-  categories: [ HideSpawnMenu ]
-  parent: RMCFoodPacketTrash
-  id: RMCFoodPacketCandyTrash
-  name: Candy
-  components:
-  - type: Sprite
-    state: candy_trash
-
-- type: entity
-  categories: [ HideSpawnMenu ]
-  parent: RMCFoodPacketTrash
-  id: RMCFoodPacketKeplerCrispsTrash
-  name: Keplar wrapper
-  components:
-  - type: Sprite
-    state: kepler_chips_trash
-
-- type: entity
-  categories: [ HideSpawnMenu ]
-  parent: RMCFoodPacketTrash
-  id: RMCFoodPacketKeplerCrispsFlamehotTrash
-  name: Keplar Flamehot wrapper
-  components:
-  - type: Sprite
-    state: kepler_chips_flame_trash
-
-- type: entity
-  categories: [ HideSpawnMenu ]
-  parent: RMCFoodPacketTrash
-  id: RMCFoodPacketPepperChipsTrash
-  name: Weston-Yamada Pepper Chips
-  description: An oily empty bag that once held Weston-Yamada Pepper Chips.
-  components:
-  - type: Sprite
-    state: wy_chips_pepper_trash
-
-- type: entity
-  categories: [ HideSpawnMenu ]
-  parent: RMCFoodPacketTrash
-  id: RMCFoodPacketChipsTrash
-  name: Chips
-  components:
-  - type: Sprite
-    state: chips_trash
-
-- type: entity
-  categories: [ HideSpawnMenu ]
-  parent: RMCFoodPacketTrash
-  id: RMCFoodPacketPopcornTrash
-  name: Popcorn
-  components:
-  - type: Sprite
-    state: popcorn_trash
-
-- type: entity
-  categories: [ HideSpawnMenu ]
-  parent: RMCFoodPacketTrash
-  id: RMCFoodPacketCheeseburgerTrash
+  id: RMCFoodPacketPackagedBurgerTrash
   name: Burger wrapper
   description: A greasy plastic film that once held a Cheeseburger. Packaged by the Weston-Yamada Corporation.
   components:
@@ -739,7 +3319,6 @@
     state: burger_trash
 
 - type: entity
-  categories: [ HideSpawnMenu ]
   parent: RMCFoodPacketTrash
   id: RMCFoodPacketBurritoTrash
   name: Burrito wrapper
@@ -749,7 +3328,56 @@
     state: burrito_trash
 
 - type: entity
-  categories: [ HideSpawnMenu ]
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketCandyTrash
+  name: Candy
+  components:
+  - type: Sprite
+    state: candy_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketCheesieHonkersTrash
+  name: Cheesie Honkers
+  components:
+  - type: Sprite
+    state: cheesie_honkers_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketChipsTrash
+  name: Chips
+  components:
+  - type: Sprite
+    state: chips_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketCHUNKTrash
+  name: Chunk Bar Box
+  description: An empty box from a chunk bar. Significantly less heavy.
+  components:
+  - type: Sprite
+    state: chunk_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketHUNKTrash
+  name: Hunk Bar crate
+  description: An empty crate from a hunk bar. Tremendously less heavy.
+  components:
+  - type: Sprite
+    state: hunk_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketEATBarTrash
+  name: EAT Bar wrapper
+  components:
+  - type: Sprite
+    state: eat
+
+- type: entity
   parent: RMCFoodPacketTrash
   id: RMCFoodPacketHotdogTrash
   name: Hotdog wrapper
@@ -759,10 +3387,171 @@
     state: hotdog_trash
 
 - type: entity
-  categories: [ HideSpawnMenu ]
   parent: RMCFoodPacketTrash
-  id: RMCFoodPacketEATBarTrash
-  name: EAT bar wrapper
+  id: RMCFoodPacketKeplerCrispsTrash
+  name: Keplar wrapper
   components:
   - type: Sprite
-    state: eat
+    state: kepler_chips_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketKeplerCrispsFlamehotTrash
+  name: Keplar Flamehot wrapper
+  components:
+  - type: Sprite
+    state: kepler_chips_flame_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketLiqiudFoodTrash
+  name: '"LiquidFood" Ration'
+  components:
+  - type: Sprite
+    state: liquidfood_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketPistachiosTrash
+  name: Pistachios pack
+  components:
+  - type: Sprite
+    state: pistachios_pack_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketPopcornTrash
+  name: Popcorn
+  components:
+  - type: Sprite
+    state: popcorn_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketRaisinsTrash
+  name: 4no raisins
+  components:
+  - type: Sprite
+    state: 4no_raisins_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketSemkiTrash
+  name: Semki pack
+  components:
+  - type: Sprite
+    state: semki_pack_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketSosjerkyTrash
+  name: Scaredy's Private Reserve Beef Jerky
+  components:
+  - type: Sprite
+    state: sosjerky_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketSyndicakesTrash
+  name: Syndi-Cakes
+  components:
+  - type: Sprite
+    state: syndi_cakes_trash
+
+#mres
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketWafflesTrash
+  name: Waffles
+  components:
+  - type: Sprite
+    state: waffles_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketPepperChipsTrash
+  name: Weston-Yamada Pepper Chips
+  description: An oily empty bag that once held Weston-Yamada Pepper Chips.
+  components:
+  - type: Sprite
+    state: wy_chips_pepper_trash
+
+#Cigarette Butts
+
+#Dishes
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketPlateTrash
+  name: Plate
+  components:
+  - type: Sprite
+    state: plate_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketCeramicPlateTrash
+  name: Ceramic plate
+  description: A ceramic plate, it doesn't seem like it's done its patriotic duty of being a stand for food yet. Now that you look at it, this might make a good throwing weapon...
+  components:
+  - type: Sprite
+    state: ceramic_plate_trash
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 5
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 5
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 5
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: RMCShatter
+          params:
+            volume: -5
+            variation: 0.125
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketBowlTrash
+  name: Snack bowl
+  components:
+  - type: Sprite
+    state: snack_bowl_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketTrayTrash
+  name: Tray
+  components:
+  - type: Sprite
+    state: tray_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketUSCMTrayTrash
+  name: USCM Tray
+  description: Finished with its tour of duty.
+  components:
+  - type: Sprite
+    state: MREtray_empty
+
+#Misc
+
+
+
+
+
+
+

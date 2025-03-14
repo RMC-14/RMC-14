@@ -119,10 +119,6 @@
       "name": "candy"
     },
     {
-      "name": "donkpocket_helmet",
-      "directions": 4
-    },
-    {
       "name": "barcardine_helmet",
       "directions": 4
     },
@@ -153,9 +149,6 @@
     {
       "name": "snack_eat_helmet",
       "directions": 4
-    },
-    {
-      "name": "donkpocket"
     },
     {
       "name": "kepler-inhand-left",
@@ -307,6 +300,45 @@
     },
     {
       "name": "syndi_cakes"
+    },
+    {
+      "name": "4no_raisins_trash"
+    },
+    {
+      "name": "cheesie_honkers_trash"
+    },
+    {
+      "name": "sosjerky_trash"
+    },
+    {
+      "name": "syndi_cakes_trash"
+    },
+    {
+      "name": "waffles_trash"
+    },
+    {
+      "name": "plate_trash"
+    },
+    {
+      "name": "snack_bowl_trash"
+    },
+    {
+      "name": "pistachios_pack_trash"
+    },
+    {
+      "name": "semki_pack_trash"
+    },
+    {
+      "name": "tray_trash"
+    },
+    {
+      "name": "liquidfood_trash"
+    },
+    {
+      "name": "plasticbag_trash"
+    },
+    {
+      "name": "ceramic_plate_trash"
     }
   ]
 }

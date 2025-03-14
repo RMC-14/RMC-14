@@ -28,6 +28,21 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/8c4eecb1d4ad42c95b3fb0348732b3f8a0efe758/sound/effects/rocketpod_fire.ogg"
 
+- files: ["Glassbr1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/ec6f484f1115d6aa1c72749215676f9fe13fe3a1/sound/effects/Glassbr1.ogg"
+
+- files: ["Glassbr2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/ec6f484f1115d6aa1c72749215676f9fe13fe3a1/sound/effects/Glassbr2.ogg"
+
+- files: ["Glassbr3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/ec6f484f1115d6aa1c72749215676f9fe13fe3a1/sound/effects/Glassbr3.ogg"
+
 - files: ["tech_notification.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
