@@ -20,7 +20,6 @@ public sealed class TargetingOverlay : Overlay
         var query = _entManager.EntityQueryEnumerator<TargetedComponent>();
         var xformQuery = _entManager.GetEntityQuery<TransformComponent>();
         var targetingLaserQuery = _entManager.GetEntityQuery<TargetingLaserComponent>();
-        var targetingQuery = _entManager.GetEntityQuery<TargetingComponent>();
         var worldHandle = args.WorldHandle;
         var xformSystem = _entManager.System<SharedTransformSystem>();
 
@@ -52,10 +51,12 @@ public sealed class TargetingOverlay : Overlay
                 var rotated = new Box2Rotated(box.Translated(midPoint), angle, midPoint);
 
                 var color = targetingLaser.LaserColor;
-                var alpha = targetingLaser.LaserAlpha;
+                var alpha = 0f;
 
-                if (targetingQuery.TryGetComponent(gun, out var targeting) && targetingLaser.GradualAlpha)
-                    alpha *= targeting.AlphaMultiplier;
+                if( targetingLaser.GradualAlpha)
+                    alpha = targetingLaser.LaserAlpha * targeted.AlphaMultipliers[gun];
+                else
+                    alpha = targetingLaser.LaserAlpha;
 
                 worldHandle.DrawRect(rotated, color.WithAlpha(alpha));
             }

@@ -155,8 +155,8 @@
       sprite: _RMC14/Actions/marine_sniper_actions.rsi
       state: spotter_target
     event: !type:SpotTargetActionEvent
-    range: 30
-    useDelay: 1 #TODO put this back to 5
+    range: 32
+    useDelay: 5
 
 - type: entity
   parent: ActionMarineBase
@@ -183,5 +183,5 @@
       sprite: _RMC14/Actions/marine_sniper_actions.rsi
       state: sniper_aim
     event: !type:AimedShotActionEvent
-    range: 30
+    range: 32
     useDelay: 2.5

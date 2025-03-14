@@ -37,7 +37,7 @@ public sealed class TargetingSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Remove any lasers originating from the entity.
+    ///     Stop all targeting done by the entity if it's interrupted.
     /// </summary>
     private void OnTargetingDropped<T>(Entity<TargetingComponent> targetingLaser, ref T args)
     {
@@ -53,23 +53,21 @@ public sealed class TargetingSystem : EntitySystem
     /// <summary>
     ///     Remove the laser and replace targeting effects originating from the given entity.
     /// </summary>
-    public void StopTargeting(Entity<TargetingComponent> ent, EntityUid target)
+    /// <param name="targetingUid">The entity that is targeting</param>
+    /// <param name="target">The entity being targeted</param>
+    /// <param name="targeting">The <see cref="TargetingComponent"/> belonging to the targing entity</param>
+    public void StopTargeting(EntityUid targetingUid, EntityUid target, TargetingComponent? targeting = null)
     {
-        var targeting = ent.Comp;
-        var targetingUid = ent.Owner;
+        if(!Resolve(targetingUid, ref targeting))
+            return;
 
         if (!TryComp(target, out TargetedComponent? targeted))
             return;
 
-        if (targeted.TargetedBy.Contains(targetingUid))
-        {
-            targeted.TargetedBy.Remove(targetingUid);
-            Dirty(target, targeted);
-        }
+        targeted.TargetedBy.Remove(targetingUid);
+        Dirty(target, targeted);
 
         targeting.Targets.Remove(target);
-        targeting.LaserDurations.Remove(target);
-        targeting.OriginalLaserDurations.Remove(target);
         Dirty(targetingUid, targeting);
 
         // Find the next target marker with the highest priority
@@ -110,16 +108,25 @@ public sealed class TargetingSystem : EntitySystem
     ///     Apply the <see cref="TargetingComponent"/> to the entity creating the laser.
     ///     Apply the <see cref="TargetedComponent"/> to the entity being targeted.
     /// </summary>
-    public void Target(EntityUid equipment, EntityUid user, EntityUid target, float laserDuration, TargetedEffects targetedEffect = TargetedEffects.None)
+    /// <param name="equipment">The entity that is targeting</param>
+    /// <param name="user">The user of the targeting entity</param>
+    /// <param name="target">The entity being targeted</param>
+    /// <param name="targetingDuration">How long the targeting should last if not interrupted</param>
+    /// <param name="targetedEffect">The visualiser to apply on the entity being targeted</param>
+    public void Target(EntityUid equipment, EntityUid user, EntityUid target, float targetingDuration, TargetedEffects targetedEffect = TargetedEffects.None)
     {
         var targeted = EnsureComp<TargetedComponent>(target);
         targeted.TargetedBy.Add(equipment);
         Dirty(target, targeted);
 
         var targeting = EnsureComp<TargetingComponent>(equipment);
+        if (!targeting.LaserDurations.TryAdd(target, new List<float>{targetingDuration}))
+            targeting.LaserDurations[target].Add(targetingDuration);
+
+        if (!targeting.OriginalLaserDurations.TryAdd(target, new List<float>{targetingDuration}))
+            targeting.OriginalLaserDurations[target].Add(targetingDuration);
+
         targeting.Source = equipment;
-        targeting.LaserDurations.TryAdd(target, laserDuration);
-        targeting.OriginalLaserDurations.TryAdd(target, laserDuration);
         targeting.Targets.Add(target);
         targeting.Origin = Transform(user).Coordinates;
         targeting.User = user;
@@ -132,6 +139,9 @@ public sealed class TargetingSystem : EntitySystem
     /// <summary>
     ///     Change the enabled visualiser on the target.
     /// </summary>
+    /// <param name="target">The entity of which the visualiser should should change</param>
+    /// <param name="newMarker">The new visualiser state</param>
+    /// <param name="force">Should the new visualiser be applied, ignoring all conditions</param>
     private void UpdateTargetMarker(EntityUid target, TargetedEffects newMarker, bool force = false)
     {
         //Get the currently active visualiser.
@@ -142,37 +152,67 @@ public sealed class TargetingSystem : EntitySystem
             _appearance.SetData(target, TargetedVisuals.Targeted, newMarker);
     }
 
+    /// <summary>
+    ///     Remove a laser pointing to a specific target,
+    /// </summary>
+    /// <param name="ent">The targeting entity</param>
+    /// <param name="target">The target the laser is pointing to</param>
+    /// <param name="laserNumber">The position of the laser in the list of lasers connecting to the target</param>
+    private void RemoveLaser(Entity<TargetingComponent> ent, EntityUid target, int laserNumber)
+    {
+        ent.Comp.LaserDurations[target].RemoveAt(laserNumber);
+        ent.Comp.OriginalLaserDurations[target].RemoveAt(laserNumber);
+        if (ent.Comp.LaserDurations[target].Count <= 0)
+        {
+            ent.Comp.LaserDurations.Remove(target);
+            ent.Comp.OriginalLaserDurations.Remove(target);
+        }
+
+        Dirty(ent);
+    }
+
     public override void Update(float frameTime)
     {
         var query = EntityQueryEnumerator<TargetingComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var targeting, out var xform))
         {
             var targetNumber = 0;
+            var checkedTargets = new List<EntityUid>();
             while (targetNumber < targeting.Targets.Count)
             {
                 var target = targeting.Targets[targetNumber];
-                if (!targeting.LaserDurations.Keys.Contains(target))
+                if (!targeting.LaserDurations.Keys.Contains(target) || checkedTargets.Contains(target))
                 {
                     targetNumber++;
                     continue;
                 }
-                targeting.LaserDurations[target] -= frameTime;
 
-                // Adjust alpha of the laser based on how close it is to finish targeting.
-                targeting.AlphaMultiplier = 1 - targeting.LaserDurations[target] / targeting.OriginalLaserDurations[target];
-                Dirty(uid,targeting);
+                checkedTargets.Add(target);
 
-                // Raise an event and stop targeting if the targeting successfully finishes.
-                if (targeting.LaserDurations[target] <= 0)
+                var laserNumber = 0;
+                while (laserNumber < targeting.LaserDurations[target].Count)
                 {
-                    targeting.LaserDurations.Remove(target);
-                    targeting.OriginalLaserDurations.Remove(target);
-                    Dirty(uid,targeting);
+                    targeting.LaserDurations[target][laserNumber] -= frameTime;
+                    Dirty(uid, targeting);
 
-                    var ev = new TargetingFinishedEvent(targeting.User, Transform(target).Coordinates, target);
-                    RaiseLocalEvent(uid, ref ev);
+                    // Adjust alpha of the laser based on how close it is to finishing targeting.
+                    if (TryComp(target, out TargetedComponent? targeted))
+                    {
+                        var newAlpha = 1 - targeting.LaserDurations[target][laserNumber] / targeting.OriginalLaserDurations[target][laserNumber];
+                        if (!targeted.AlphaMultipliers.TryAdd(uid, newAlpha) && newAlpha > targeted.AlphaMultipliers[uid])
+                            targeted.AlphaMultipliers[uid] =  newAlpha;
+                    }
+
+                    // Raise an event and stop targeting if the targeting successfully finishes.
+                    if (targeting.LaserDurations[target][laserNumber] <= 0)
+                    {
+                        RemoveLaser((uid, targeting), target, laserNumber);
+                        var ev = new TargetingFinishedEvent(targeting.User, Transform(target).Coordinates, target);
+                        RaiseLocalEvent(uid, ref ev);
+                        break;
+                    }
+                    laserNumber++;
                 }
-
                 targetNumber++;
             }
 
@@ -185,7 +225,10 @@ public sealed class TargetingSystem : EntitySystem
                 targeting.LaserDurations.Clear();
                 targeting.OriginalLaserDurations.Clear();
                 Dirty(uid, targeting);
-                RemComp<TargetingComponent>(uid);
+                while (targeting.Targets.Count > 0)
+                {
+                    StopTargeting(uid, targeting.Targets[0]);
+                }
             }
         }
     }

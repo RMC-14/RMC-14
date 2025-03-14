@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Weapons.Ranged.Laser;
 using Content.Shared._RMC14.Weapons.Ranged.Whitelist;
 using Content.Shared.Actions;
 using Content.Shared.Popups;
+using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Whitelist;
@@ -31,9 +32,7 @@ public sealed class AimedShotSystem : EntitySystem
         SubscribeLocalEvent<AimedShotComponent, AimedShotActionEvent>(OnAimedShot);
         SubscribeLocalEvent<AimedShotComponent, TargetingFinishedEvent>(OnTargetingFinished);
         SubscribeLocalEvent<AimedShotComponent, TargetingCancelledEvent>(OnTargetingCancelled);
-        SubscribeLocalEvent<AimedShotComponent, ShotAttemptedEvent>(OnAttemptShoot);
         SubscribeLocalEvent<AimedShotComponent, AmmoShotEvent>(OnAmmoShot);
-
     }
 
     /// <summary>
@@ -62,9 +61,6 @@ public sealed class AimedShotSystem : EntitySystem
 
         if(!CanAimShot(ent, target, user))
             return;
-
-        // Disable shooting until targeting is cancelled or finished.
-        ToggleShooting((ent.Owner, ent.Comp),true);
 
         args.Handled = true;
 
@@ -99,7 +95,7 @@ public sealed class AimedShotSystem : EntitySystem
         }
 
         laserDuration *= aimMultiplier;
-        ent.Comp.Target = target;
+        ent.Comp.Targets.Add(target);
         Dirty(ent);
 
         _audio.PlayPredicted(ent.Comp.AimingSound, ent, user);
@@ -107,41 +103,33 @@ public sealed class AimedShotSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Cancel any shots made while aiming.
-    /// </summary>
-    private void OnAttemptShoot(Entity<AimedShotComponent> ent, ref ShotAttemptedEvent args)
-    {
-        if(args.Cancelled)
-            return;
-
-        if(ent.Comp.WaitForAiming)
-            args.Cancel();
-    }
-
-    /// <summary>
     ///     Mark projectiles as being shot using the aimed shot action and make them homing.
+    ///     <see cref="AimedProjectileComponent"/> and <see cref="HomingProjectileComponent"/>
     /// </summary>
     private void OnAmmoShot(Entity<AimedShotComponent> ent, ref AmmoShotEvent args)
     {
-        if(ent.Comp.Target == null)
+        // This means it's not an aimed shot so don't apply any effects
+        if(ent.Comp.CurrentTarget == null)
             return;
+
+        var target = ent.Comp.CurrentTarget.Value;
 
         // Apply the components that alter the projectiles behavior.
         foreach (var projectile in args.FiredProjectiles)
         {
             var aimedProjectile = EnsureComp<AimedProjectileComponent>(projectile);
-            aimedProjectile.Target = ent.Comp.Target.Value;
+            aimedProjectile.Target = target;
             aimedProjectile.Source = ent;
             Dirty(projectile, aimedProjectile);
 
             var homingProjectile = EnsureComp<HomingProjectileComponent>(projectile);
-            homingProjectile.Target = ent.Comp.Target.Value;
+            homingProjectile.Target = target;
             homingProjectile.ProjectileSpeed = ent.Comp.ProjectileSpeed;
             Dirty(projectile, homingProjectile);
         }
 
-        ent.Comp.Target = null;
-        Dirty(ent);
+        _targeting.StopTargeting(ent, target);
+        RemoveTarget(ent, target);
     }
 
     /// <summary>
@@ -149,27 +137,32 @@ public sealed class AimedShotSystem : EntitySystem
     /// </summary>
     private void OnTargetingFinished(Entity<AimedShotComponent> ent, ref TargetingFinishedEvent args)
     {
-        _gunSystem.TryGetGun(ent, out var gun, out var gunComp);
-        if(gunComp == null)
+        if(!TryComp(ent, out GunComponent? gun))
             return;
 
-        ent.Comp.Target = args.Target;
+        ent.Comp.CurrentTarget = args.Target;
         Dirty(ent);
 
         // Only shoot serverside
         if (_net.IsServer)
         {
-            // Enable the ability to shoot when done aiming.
-            ToggleShooting(ent, false);
+            var shotProjectiles = _gunSystem.AttemptShoot((ent, gun), args.User, args.Coordinates);
 
-            _audio.PlayPvs(gunComp.SoundGunshot, Transform(ent).Coordinates);
-            _gunSystem.AttemptShoot(args.User,gun, gunComp, args.Coordinates);
+            if (shotProjectiles != null)
+            {
+                _audio.PlayEntity(gun.SoundGunshotModified, args.User, ent);
+            }
+            else
+            {
+                _targeting.StopTargeting(ent, args.Target);
+                RemoveTarget(ent, args.Target);
 
-            var ammoCount = new GetAmmoCountEvent();
-            RaiseLocalEvent(ent, ref ammoCount);
+                var ammoCount = new GetAmmoCountEvent();
+                RaiseLocalEvent(ent, ref ammoCount);
 
-            if(ammoCount.Count <= 0)
-                _audio.PlayPvs(gunComp.SoundEmpty, Transform(ent).Coordinates);
+                if(ammoCount.Count <= 0)
+                    _audio.PlayEntity(gun.SoundEmpty, args.User, ent);
+            }
         }
 
         // Update ammo visualiser because client doesn't know about the shot.
@@ -178,27 +171,17 @@ public sealed class AimedShotSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Enable the ability to shoot when targeting is cancelled.
+    ///     Clear targets when targeting is cancelled.
     /// </summary>
     private void OnTargetingCancelled(Entity<AimedShotComponent> ent, ref TargetingCancelledEvent args)
     {
         if(args.Handled)
             return;
 
-        ToggleShooting(ent, false);
-        ent.Comp.Target = null;
+        ent.Comp.Targets.Clear();
         Dirty(ent);
 
         args.Handled = true;
-    }
-
-    /// <summary>
-    ///     Enable or disable the ability to shoot the gun.
-    /// </summary>
-    private void ToggleShooting(Entity<AimedShotComponent> ent, bool wait)
-    {
-        ent.Comp.WaitForAiming = wait;
-        Dirty(ent);
     }
 
     /// <summary>
@@ -208,10 +191,6 @@ public sealed class AimedShotSystem : EntitySystem
     {
         // Can't aim at the target if they don't have the component that marks them as a potential target.
         if (!HasComp<SpottableComponent>(target))
-            return false;
-
-        // Can't aim if already aiming.
-        if (ent.Comp.Target != null)
             return false;
 
         // Can't aim if the user doesn't have the correct whitelist.
@@ -234,6 +213,18 @@ public sealed class AimedShotSystem : EntitySystem
         }
 
         return true;
+    }
+
+    /// <summary>
+    ///     Remove a target from the target list stored on the component.
+    /// </summary>
+    /// <param name="ent">The entity that needs the target removed</param>
+    /// <param name="target">The target to be removed from the target list</param>
+    private void RemoveTarget(Entity<AimedShotComponent> ent, EntityUid target)
+    {
+        ent.Comp.Targets.Remove(target);
+        ent.Comp.CurrentTarget = null;
+        Dirty(ent);
     }
 }
 

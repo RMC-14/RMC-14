@@ -10,7 +10,13 @@ public sealed partial class TargetedComponent : Component
     ///     The entities targeting the entity with this component.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public HashSet<EntityUid> TargetedBy = new();
+    public List<EntityUid> TargetedBy = new();
+
+    /// <summary>
+    ///     The entities targeting the entity with this component.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public Dictionary<EntityUid, float> AlphaMultipliers = new();
 }
 
 [Serializable, NetSerializable]

@@ -28,16 +28,16 @@ public sealed partial class AimedShotComponent : Component
     public SoundSpecifier AimingSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/Handling/target_on.ogg");
 
     /// <summary>
-    ///     If gunshots should be cancelled until aiming is done.
+    ///     The target of the aimed shot.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool WaitForAiming;
+    public List<EntityUid> Targets = new();
 
     /// <summary>
     ///     The target of the aimed shot.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public EntityUid? Target;
+    public EntityUid? CurrentTarget;
 
     /// <summary>
     ///     The base aiming duration.

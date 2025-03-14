@@ -10,10 +10,4 @@ public sealed partial class SpottedComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public float AimDurationMultiplier = 0.5f;
-
-    /// <summary>
-    ///     The entity spotting this target.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public EntityUid Spotter;
 }

@@ -32,26 +32,20 @@ public sealed partial class TargetingComponent : Component
     public EntityCoordinates Origin;
 
     /// <summary>
-    ///     The remaining duration of the laser
+    ///     The remaining durations of the lasers.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public Dictionary<EntityUid,float> LaserDurations = new();
+    public Dictionary<EntityUid,List<float>> LaserDurations = new();
 
     /// <summary>
-    ///     The original duration of the laser
+    ///     The original durations of the lasers.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public Dictionary<EntityUid,float> OriginalLaserDurations = new();
+    public Dictionary<EntityUid,List<float>> OriginalLaserDurations = new();
 
     /// <summary>
-    ///     The visualiser to enable on the entity being targeted by the laser
+    ///     The visualiser to enable on the entity being targeted by the laser.
     /// </summary>
     [DataField, AutoNetworkedField]
     public TargetedEffects LaserType;
-
-    /// <summary>
-    ///     If the laser should be visible
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public float AlphaMultiplier = 1f;
 }

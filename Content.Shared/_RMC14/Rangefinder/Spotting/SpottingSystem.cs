@@ -39,7 +39,7 @@ public sealed partial class SpottingSystem : EntitySystem
         var user = args.Performer;
         var target = args.Target;
 
-        if(!HasComp<SpottableComponent>(args.Target) || HasComp<SpottedComponent>(args.Target))
+        if(!HasComp<SpottableComponent>(args.Target))
             return;
 
         // Only allow entities with the SpotterComponent to use the spotting function.
@@ -73,20 +73,19 @@ public sealed partial class SpottingSystem : EntitySystem
         _appearance.SetData(ent, RangefinderLayers.Layer, RangefinderMode.Spotter);
 
         var spotted = EnsureComp<SpottedComponent>(target);
-        spotted.Spotter = user;
         Dirty(target, spotted);
 
         args.Handled = true;
     }
 
     /// <summary>
-    ///     Stop targeting after finishing spotting.
+    ///     Stop targeting an entity when done spotting.
     /// </summary>
     private void OnTargetingFinished(Entity<SpottingComponent> ent, ref TargetingFinishedEvent args)
     {
         if(!TryComp(ent, out TargetingComponent? targeting))
             return;
 
-        _targeting.StopTargeting((ent.Owner,targeting), args.Target);
+        _targeting.StopTargeting(ent, args.Target, targeting);
     }
 }
