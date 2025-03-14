@@ -251,11 +251,11 @@ namespace Content.Client.UserInterface.Controls
             {
                 if (iconLabel.LabelTextLocId is not null && _loc.TryGetString(iconLabel.LabelTextLocId, out String? labelText, iconLabel.LabelTextParams.ToArray()))
                 {
-                    if (labelText.Length > iconLabel.LabelMaxSize)
-                    {
-                        return;
-                    }
-                    IconLabel.Text = labelText;
+                    // if (labelText.Length > iconLabel.LabelMaxSize)
+                    // {
+                    //     return;
+                    // }
+                    IconLabel.Text = labelText.Substring(0, iconLabel.LabelMaxSize);
                 }
 
                 if (Color.TryFromName(iconLabel.TextColor, out Robust.Shared.Maths.Color color))

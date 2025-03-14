@@ -1,5 +1,6 @@
 using Content.Shared.Labels.EntitySystems;
 using Content.Shared.Whitelist;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
@@ -17,6 +18,11 @@ public sealed partial class HandLabelerComponent : Component
     [DataField]
     public int MaxLabelChars = 50;
 
+    public NetEntity Bottle;
+
+    [DataField("clickSound"), ViewVariables(VVAccess.ReadWrite)]
+    public SoundSpecifier ClickSound = new SoundPathSpecifier("/Audio/Machines/machine_switch.ogg");
+
     [DataField]
     public EntityWhitelist Whitelist = new();
 }
@@ -25,6 +31,8 @@ public sealed partial class HandLabelerComponent : Component
 public sealed class HandLabelerComponentState(string assignedLabel) : IComponentState
 {
     public string AssignedLabel = assignedLabel;
+
+    public NetEntity Bottle;
 
     public int MaxLabelChars;
 }

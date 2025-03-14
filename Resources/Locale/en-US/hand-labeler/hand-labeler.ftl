@@ -15,3 +15,4 @@ hand-labeler-has-label = This object has a label on it, which reads '{$label}'
 # Verb text
 hand-labeler-remove-label-text = Remove label
 hand-labeler-add-label-text = Apply label
+hand-labeler-edit-pill-bottle-text = Change bottle color

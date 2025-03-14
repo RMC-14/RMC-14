@@ -50,7 +50,7 @@ namespace Content.Client.Chemistry.UI
                     (uint) _window.BottleDosage.Value, _window.LabelLine));
             // RMC - Change Pill Bottle Color Button
             _window.ChangePillBottleColorButton.OnPressed += (BaseButton.ButtonEventArgs args) =>
-            SendMessage(new OpenChangePillBottleColorMenuMessage());
+                SendMessage(new OpenChangePillBottleColorMenuMessage());
 
             for (uint i = 0; i < _window.PillTypeButtons.Length; i++)
             {

@@ -5,7 +5,7 @@ using Robust.Client.UserInterface.Controls;
 namespace Content.Client._RMC14.Chemistry.PillBottle;
 
 [UsedImplicitly]
-public sealed partial class RMCChangePillBottleColorBui : BoundUserInterface
+public class RMCChangePillBottleColorBui : BoundUserInterface
 {
     private RMCChangePillBottleColorWindow? _window;
     private List<string> _selectableColorNames = new();
@@ -37,8 +37,9 @@ public sealed partial class RMCChangePillBottleColorBui : BoundUserInterface
     private void OnPillbottleColorSelect(ItemList.ItemListSelectedEventArgs args)
     {
         var newSelectedColor = (PillbottleColor)args.ItemList[args.ItemIndex].Metadata!;
+        Logger.GetSawmill("loader").Debug($"bottle2 {newSelectedColor} from ${Owner}");
 
-        if (newSelectedColor is { } newColor)
+        if (newSelectedColor is var newColor)
         {
             ChangeColor(newColor);
             Close();
@@ -78,9 +79,9 @@ public sealed partial class RMCChangePillBottleColorBui : BoundUserInterface
         }
     }
 
-    private void ChangeColor(PillbottleColor newColor)
+    protected virtual void ChangeColor(PillbottleColor newColor)
     {
-        SendMessage(new ChangePillBottleColorMessage(newColor));
+        SendPredictedMessage(new ChangePillBottleColorMessage(newColor));
     }
 
     protected override void Dispose(bool disposing)
@@ -90,5 +91,23 @@ public sealed partial class RMCChangePillBottleColorBui : BoundUserInterface
             return;
 
         _window?.Dispose();
+    }
+}
+
+[UsedImplicitly]
+public sealed partial class RMCChangeExistingPillBottleColorBui : RMCChangePillBottleColorBui
+{
+    public RMCChangeExistingPillBottleColorBui(EntityUid owner, Enum key) : base(owner, key)
+    {
+    }
+
+    protected override void ChangeColor(PillbottleColor newColor)
+    {
+        SendPredictedMessage(
+            new ChangeExistingPillBottleColorMessage(
+                newColor,
+                IoCManager.Resolve<IEntityManager>().GetNetEntity(Owner)
+            )
+        );
     }
 }
