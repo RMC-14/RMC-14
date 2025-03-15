@@ -1,4 +1,24 @@
 - type: rank
+  id: RMCRankWeYaJuniorExecutive
+  name: Junior Executive
+  prefix: Jr. Exec.
+
+- type: rank
+  id: RMCRankWeYaExecutive
+  name: Executive
+  prefix: Exec.
+
+- type: rank
+  id: RMCRankWeYaSeniorExecutive
+  name: Senior Executive
+  prefix: Sr. Exec.
+
+- type: rank
+  id: RMCRankWeYaExecutiveSpecialist
+  name: Executive Specialist
+  prefix: Exec. Spc.
+
+- type: rank
   id: RMCRankWeYaExecutiveSupervisor
   name: Executive Supervisor
   prefix: Exec. Spvsr.
