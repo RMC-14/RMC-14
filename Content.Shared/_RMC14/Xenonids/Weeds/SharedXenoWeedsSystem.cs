@@ -1,9 +1,8 @@
-using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Map;
-using Content.Shared._RMC14.Xenonids.Construction.FloorResin;
 using Content.Shared._RMC14.Xenonids.Construction;
+using Content.Shared._RMC14.Xenonids.Construction.FloorResin;
 using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -13,6 +12,7 @@ using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.Maps;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
@@ -25,7 +25,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
-using static Content.Shared._RMC14.Sprite.SpriteSetRenderOrderComponent;
 
 namespace Content.Shared._RMC14.Xenonids.Weeds;
 
@@ -74,6 +73,9 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         SubscribeLocalEvent<XenoWeedsComponent, AnchorStateChangedEvent>(OnWeedsAnchorChanged);
         SubscribeLocalEvent<XenoWeedsComponent, ComponentShutdown>(OnModifierShutdown);
         SubscribeLocalEvent<XenoWeedsComponent, EntityTerminatingEvent>(OnWeedsTerminating);
+        SubscribeLocalEvent<XenoWeedsComponent, MapInitEvent>(OnWeedsMapInit);
+        SubscribeLocalEvent<XenoWeedsComponent, StartCollideEvent>(OnWeedsStartCollide);
+        SubscribeLocalEvent<XenoWeedsComponent, EndCollideEvent>(OnWeedsEndCollide);
 
         SubscribeLocalEvent<XenoWallWeedsComponent, EntityTerminatingEvent>(OnWallWeedsTerminating);
 
@@ -82,9 +84,6 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         SubscribeLocalEvent<DamageOffWeedsComponent, MapInitEvent>(OnDamageOffWeedsMapInit);
 
         SubscribeLocalEvent<AffectableByWeedsComponent, RefreshMovementSpeedModifiersEvent>(WeedsRefreshPassiveSpeed);
-
-        SubscribeLocalEvent<XenoWeedsComponent, StartCollideEvent>(OnWeedsStartCollide);
-        SubscribeLocalEvent<XenoWeedsComponent, EndCollideEvent>(OnWeedsEndCollide);
 
         SubscribeLocalEvent<XenoWeedsSpreadingComponent, MapInitEvent>(OnSpreadingMapInit);
 
@@ -99,6 +98,20 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         SubscribeLocalEvent<ReplaceWeedSourceOnWeedingComponent, AfterEntityWeedingEvent>(OnWeedOver);
 
         UpdatesAfter.Add(typeof(SharedPhysicsSystem));
+    }
+
+    private void OnWeedsAnchorChanged(Entity<XenoWeedsComponent> weeds, ref AnchorStateChangedEvent args)
+    {
+        if (_net.IsServer && !args.Anchored)
+            QueueDel(weeds);
+    }
+
+    private void OnModifierShutdown<T>(Entity<T> ent, ref ComponentShutdown args) where T : IComponent
+    {
+        if (!TryComp(ent, out PhysicsComponent? phys))
+            return;
+
+        _toUpdate.UnionWith(_physics.GetContactingEntities(ent, phys));
     }
 
     private void OnWeedsTerminating(Entity<XenoWeedsComponent> ent, ref EntityTerminatingEvent args)
@@ -138,24 +151,33 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         ent.Comp.Spread.Clear();
     }
 
+    private void OnWeedsMapInit(Entity<XenoWeedsComponent> ent, ref MapInitEvent args)
+    {
+        foreach (var intersecting in _physics.GetEntitiesIntersectingBody(ent, (int) CollisionGroup.MobLayer))
+        {
+            if (_affectedQuery.TryComp(intersecting, out var affected) && !affected.OnXenoWeeds)
+                _toUpdate.Add(intersecting);
+        }
+    }
+
+    private void OnWeedsStartCollide(Entity<XenoWeedsComponent> ent, ref StartCollideEvent args)
+    {
+        var other = args.OtherEntity;
+        if (_affectedQuery.TryComp(other, out var affected) && !affected.OnXenoWeeds)
+            _toUpdate.Add(other);
+    }
+
+    private void OnWeedsEndCollide(Entity<XenoWeedsComponent> ent, ref EndCollideEvent args)
+    {
+        var other = args.OtherEntity;
+        if (_affectedQuery.TryComp(other, out var affected) && affected.OnXenoWeeds)
+            _toUpdate.Add(other);
+    }
+
     private void OnWallWeedsTerminating(Entity<XenoWallWeedsComponent> ent, ref EntityTerminatingEvent args)
     {
         if (TryComp(ent.Comp.Weeds, out XenoWeedsComponent? weeds))
             weeds.Spread.Remove(ent);
-    }
-
-    private void OnWeedsAnchorChanged(Entity<XenoWeedsComponent> weeds, ref AnchorStateChangedEvent args)
-    {
-        if (_net.IsServer && !args.Anchored)
-            QueueDel(weeds);
-    }
-
-    private void OnModifierShutdown<T>(Entity<T> ent, ref ComponentShutdown args) where T : IComponent
-    {
-        if (!TryComp(ent, out PhysicsComponent? phys))
-            return;
-
-        _toUpdate.UnionWith(_physics.GetContactingEntities(ent, phys));
     }
 
     private void OnWeedableAnchorStateChanged(Entity<XenoWeedableComponent> weedable, ref AnchorStateChangedEvent args)
@@ -244,16 +266,11 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         }
         //Resin + Weed Speedups stack, but resin + weed slowdowns do not
         var finalSpeed = 1.0f;
-
         if (entriesWeeds > 0)
-        {
             speedWeeds /= entriesWeeds;
-        }
 
         if (entriesResin > 0)
-        {
             speedResin /= entriesResin;
-        }
 
         //If Weeds is a speedup, let them stack, otherwise treat them as slowdownss
         if ((speedWeeds > 1 || speedResin > 1) && entriesResin > 0 && entriesWeeds > 0)
@@ -329,20 +346,6 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         }
 
         return IsOnWeeds((gridUid, grid), coordinates);
-    }
-
-    private void OnWeedsStartCollide(Entity<XenoWeedsComponent> ent, ref StartCollideEvent args)
-    {
-        var other = args.OtherEntity;
-        if (_affectedQuery.TryComp(other, out var affected) && !affected.OnXenoWeeds)
-            _toUpdate.Add(other);
-    }
-
-    private void OnWeedsEndCollide(Entity<XenoWeedsComponent> ent, ref EndCollideEvent args)
-    {
-        var other = args.OtherEntity;
-        if (_affectedQuery.TryComp(other, out var affected) && affected.OnXenoWeeds)
-            _toUpdate.Add(other);
     }
 
     private void OnResinSlowdownStartCollide(Entity<ResinSlowdownModifierComponent> ent, ref StartCollideEvent args)
