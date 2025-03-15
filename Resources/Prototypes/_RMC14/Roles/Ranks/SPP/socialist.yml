@@ -1,8 +1,4 @@
 - type: rank
-  id: RMCRankSPPConscript
-  name: Conscript
-
-- type: rank
   id: RMCRankSPPRyadovoy
   name: Ryadovoy
   prefix: Rya.
