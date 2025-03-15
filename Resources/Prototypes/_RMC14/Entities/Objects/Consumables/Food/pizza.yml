@@ -41,6 +41,10 @@
   components:
   - type: Sprite
     state: slice
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Consumable/Food/Pizza/margherita.rsi
+      state: pizza_helmet
   - type: Item
     heldPrefix: slice
     size: Tiny

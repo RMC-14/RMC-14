@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/800f3950414b25174f1e81278dfe1cde4fbbf281/icons/obj/items/food/cakes.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "legacy_bay"
+    },
+    {
+      "name": "birthdaycake"
+    },
+    {
+      "name": "cheesecake"
+    },
+    {
+      "name": "plaincake"
+    },
+    {
+      "name": "carrotcake"
+    },
+    {
+      "name": "applecake"
+    },
+    {
+      "name": "chocolatecake"
+    },
+    {
+      "name": "limecake"
+    },
+    {
+      "name": "orangecake"
+    },
+    {
+      "name": "lemoncake"
+    },
+    {
+      "name": "pumpkinpie"
+    },
+    {
+      "name": "braincake"
+    },
+    {
+      "name": "cake slices"
+    },
+    {
+      "name": "birthdaycakeslice"
+    },
+    {
+      "name": "cheesecake_slice"
+    },
+    {
+      "name": "plaincake_slice"
+    },
+    {
+      "name": "carrotcake_slice"
+    },
+    {
+      "name": "applecakeslice"
+    },
+    {
+      "name": "limecake_slice"
+    },
+    {
+      "name": "orangecake_slice"
+    },
+    {
+      "name": "lemoncake_slice"
+    },
+    {
+      "name": "pumpkinpieslice"
+    },
+    {
+      "name": "braincakeslice"
+    },
+    {
+      "name": "chocolatecake_slice"
+    }
+  ]
+}
