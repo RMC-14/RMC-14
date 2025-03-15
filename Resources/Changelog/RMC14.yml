@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: Aurallianz
-  changes:
-  - message: Lifeboats doors
-    type: Fix
-  - message: Lifeboats windows
-    type: Fix
-  - message: Lifeboats & Evac Pod gravity.
-    type: Fix
-  id: 954
-  time: '2024-11-08T06:49:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4758
 - author: Dutch-VanDerLinde
   changes:
   - message: Added armor variants. You can select which armor variant you get with
@@ -5225,5 +5214,12 @@
   id: 1455
   time: '2025-03-15T07:20:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5819
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed using melee not delaying being able to pull someone.
+    type: Fix
+  id: 1456
+  time: '2025-03-15T07:22:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5880
 Name: RMC14
 Order: -1
