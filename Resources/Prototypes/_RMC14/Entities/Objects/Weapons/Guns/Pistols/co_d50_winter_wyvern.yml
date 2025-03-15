@@ -34,7 +34,7 @@
     accuracyMultiplier: 1.0
     accuracyMultiplierUnwielded: 0.75
   - type: GunDamageModifier
-    multiplier: 1.05
+    multiplier: 1.4
   - type: ItemSlots
     slots:
       gun_magazine:
