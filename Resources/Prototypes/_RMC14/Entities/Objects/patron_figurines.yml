@@ -1160,7 +1160,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronHazzyLicious
   name: Hazzy Licious figurine
-  description: "It has many bugs crawling over it."
+  description: "It looks fleshy and covered in red tendrils..."
   components:
   - type: Sprite
     state: hazzy_licious
@@ -1199,3 +1199,25 @@
     state: juno_kleptocat_kaneko
   - type: PatronFigurine
     id: 522b8dc4-58bd-40b0-a3bb-93c050a661f1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronStellaCowabungaStewart
+  name: Stella 'Cowabunga' Stewart figurine
+  description: "We're building the mother of all FOB's here, Jack!"
+  components:
+  - type: Sprite
+    state: stella_cowabunga__stewart
+  - type: PatronFigurine
+    id: 46f746bd-e191-4b76-a526-711f05dfc1c3
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRosalindHexVolkov
+  name: Rosalind 'Hex' Volkov figurine
+  description: "\"I solemnly swear to not charge sensors.\""
+  components:
+  - type: Sprite
+    state: rosalind_hex_volkov
+  - type: PatronFigurine
+    id: 8de95861-fbb6-4ee4-b38b-6de75f483f37

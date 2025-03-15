@@ -244,6 +244,27 @@ public sealed partial class ChatSystem : SharedChatSystem
         // This message may have a radio prefix, and should then be whispered to the resolved radio channel
         if (checkRadioPrefix)
         {
+            var messages = _cmChat.TryMultiBroadcast(source, message);
+            if (messages != null)
+            {
+                var channelsSent = new HashSet<ProtoId<RadioChannelPrototype>>();
+                foreach (var msg in messages)
+                {
+                    if (!TryProccessRadioMessage(source, msg, out var modMsg, out var modChannel))
+                        continue;
+
+                    if (modChannel != null && channelsSent.Contains(modChannel.ID))
+                        continue;
+
+                    SendEntityWhisper(source, modMsg, range, modChannel, nameOverride, hideLog, ignoreActionBlocker);
+
+                    if (modChannel != null)
+                        channelsSent.Add(modChannel.ID);
+                }
+
+                return;
+            }
+
             if (TryProccessRadioMessage(source, message, out var modMessage, out var channel))
             {
                 SendEntityWhisper(source, modMessage, range, channel, nameOverride, hideLog, ignoreActionBlocker);

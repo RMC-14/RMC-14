@@ -25,7 +25,7 @@
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - WeaponSpec
-  overwatchSortPriority: -3
+  overwatchSortPriority: -4
   overwatchShowName: true
   overwatchRoleName: Specialist
   minimapIcon:

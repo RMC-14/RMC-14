@@ -1,19 +1,46 @@
 - type: entity
-  parent: RMCBaseEquipmentCase
+  parent: RMCGunCaseBase
   id: RMCMortarEquipmentCase
   name: mortar kit
   description: Contains the equipment needed for the mortar.
   components:
   - type: Sprite
+    sprite: _RMC14/Objects/loadout_kits.rsi
     layers:
     - state: closed
       map: [ base ]
     - state: mortar
       map: [ label ]
+  - type: Icon
+    sprite: _RMC14/Objects/loadout_kits.rsi
   - type: Storage
     maxItemSize: Ginormous
     grid:
     - 0,0,15,3
+    whitelist:
+      components:
+      - Mortar
+      - SkillPamphlet
+      - FixedItemSizeStorage
+      - MortarShell
+      - Rangefinder
+      tags:
+      - Wrench
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        base:
+          True: { state: open }
+          False: { state: closed }
+        label:
+          True: { visible: false }
+          False: { visible: true }
+  #  - type: RemoveOnlyStorage TODO RMC14 fix being empty on map spawn
+  - type: FixedItemSizeStorage
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
   - type: StorageFill
     contents:
     - id: RMCMortarKit
@@ -26,9 +53,9 @@
       amount: 3
     - id: RMCMortarShellFlare
       amount: 2
-#    - id: RMCMortarShellFrag
-#      amount: 2
-    - id: RMCMortarShellHE 
+    #    - id: RMCMortarShellFrag
+    #      amount: 2
+    - id: RMCMortarShellHE
       amount: 3
     - id: CMWrench
     - id: RMCRangefinder
