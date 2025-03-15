@@ -55,7 +55,7 @@
     damageContainer: Biological
     damageModifierSet: Slime
   - type: Bloodstream
-    bloodReagent: Slime
+    bloodReagent: [Slime]
     bloodlossDamage:
       types:
         Bloodloss:

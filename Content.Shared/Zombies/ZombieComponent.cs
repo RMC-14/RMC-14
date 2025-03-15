@@ -143,11 +143,11 @@ public sealed partial class ZombieComponent : Component
     /// The blood reagent of the humanoid to restore in case of cloning
     /// </summary>
     [DataField("beforeZombifiedBloodReagent")]
-    public string BeforeZombifiedBloodReagent = string.Empty;
+    public ProtoId<ReagentPrototype>[] BeforeZombifiedBloodReagent = [];
 
     /// <summary>
     /// The blood reagent to give the zombie. In case you want zombies that bleed milk, or something.
     /// </summary>
-    [DataField("newBloodReagent", customTypeSerializer: typeof(PrototypeIdSerializer<ReagentPrototype>))]
-    public string NewBloodReagent = "ZombieBlood";
+    [DataField("newBloodReagent")]
+    public ProtoId<ReagentPrototype>[] NewBloodReagent = ["ZombieBlood"];
 }

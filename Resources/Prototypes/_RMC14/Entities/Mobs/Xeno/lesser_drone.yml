@@ -101,3 +101,5 @@
     evasion: 10
   - type: XenoInhands
     prefix: lesser
+  - type: Bloodstream
+    bloodReagent: [RMCXenoBlood, RMCPlasmaPurple]

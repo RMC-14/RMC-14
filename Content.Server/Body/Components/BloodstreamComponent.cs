@@ -138,9 +138,10 @@ namespace Content.Server.Body.Components
         /// </summary>
         /// <remarks>
         ///     Slime-people might use slime as their blood or something like that.
+        ///     RMC14: Xenos have multiple reagents as blood.
         /// </remarks>
         [DataField]
-        public ProtoId<ReagentPrototype> BloodReagent = "Blood";
+        public ProtoId<ReagentPrototype>[] BloodReagent = ["Blood"];
 
         /// <summary>Name/Key that <see cref="BloodSolution"/> is indexed by.</summary>
         [DataField]

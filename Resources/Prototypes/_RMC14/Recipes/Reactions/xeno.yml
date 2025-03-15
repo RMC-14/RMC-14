@@ -1,0 +1,29 @@
+- type: reaction
+  id: RMCPlasmaRoyal
+  reactants:
+    RMCPlasmaEgg:
+      amount: 1
+    RMCXenoBloodRoyal:
+      amount: 1
+  products:
+    RMCPlasmaRoyal: 2
+
+- type: reaction
+  id: RMCPlasmaAntiNeurotoxin
+  reactants:
+    RMCPlasmaNeurotoxin:
+      amount: 1
+    CMDylovene:
+      amount: 1
+  products:
+    RMCPlasmaAntiNeurotoxin: 1
+
+- type: reaction
+  id: RMCPlasmaEgg
+  reactants:
+    Blood:
+      amount: 10
+    RMCPlasmaEgg:
+      amount: 1
+  products:
+    RMCPlasmaEgg: 2

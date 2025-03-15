@@ -262,7 +262,7 @@
     speedModifierThresholds:
       50: 0.4
   - type: Bloodstream
-    bloodReagent: Water
+    bloodReagent: [Water]
     chemicalMaxVolume: 100
   - type: StatusEffects
     allowed:
@@ -332,7 +332,7 @@
   suffix: Beer
   components:
   - type: Bloodstream
-    bloodReagent: Beer
+    bloodReagent: [Beer]
   - type: PointLight
     color: "#cfa85f"
   - type: Sprite
@@ -349,7 +349,7 @@
   suffix: Pax
   components:
   - type: Bloodstream
-    bloodReagent: Pax
+    bloodReagent: [Pax]
   - type: PointLight
     color: "#AAAAAA"
   - type: Sprite
@@ -369,7 +369,7 @@
   suffix: Nocturine
   components:
   - type: Bloodstream
-    bloodReagent: Nocturine
+    bloodReagent: [Nocturine]
   - type: PointLight
     color: "#128e80"
   - type: Sprite
@@ -389,7 +389,7 @@
   suffix: THC
   components:
   - type: Bloodstream
-    bloodReagent: THC
+    bloodReagent: [THC]
   - type: PointLight
     color: "#808080"
   - type: Sprite
@@ -406,7 +406,7 @@
   suffix: Bicaridine
   components:
   - type: Bloodstream
-    bloodReagent: Bicaridine
+    bloodReagent: [Bicaridine]
   - type: PointLight
     color: "#ffaa00"
   - type: Sprite
@@ -423,7 +423,7 @@
   suffix: Toxin
   components:
   - type: Bloodstream
-    bloodReagent: Toxin
+    bloodReagent: [Toxin]
   - type: PointLight
     color: "#cf3600"
   - type: Sprite
@@ -440,7 +440,7 @@
   suffix: Napalm
   components:
   - type: Bloodstream
-    bloodReagent: Napalm
+    bloodReagent: [Napalm]
   - type: PointLight
     color: "#FA00AF"
   - type: Sprite
@@ -457,7 +457,7 @@
   suffix: Omnizine
   components:
   - type: Bloodstream
-    bloodReagent: Omnizine
+    bloodReagent: [Omnizine]
   - type: PointLight
     color: "#fcf7f9"
   - type: Sprite
@@ -474,7 +474,7 @@
   suffix: Mute Toxin
   components:
   - type: Bloodstream
-    bloodReagent: MuteToxin
+    bloodReagent: [MuteToxin]
   - type: PointLight
     color: "#0f0f0f"
   - type: Sprite
@@ -491,7 +491,7 @@
   suffix: Norepinephric Acid
   components:
   - type: Bloodstream
-    bloodReagent: NorepinephricAcid
+    bloodReagent: [NorepinephricAcid]
   - type: PointLight
     color: "#96a8b5"
   - type: Sprite
@@ -508,7 +508,7 @@
   suffix: Ephedrine
   components:
   - type: Bloodstream
-    bloodReagent: Ephedrine
+    bloodReagent: [Ephedrine]
   - type: PointLight
     color: "#D2FFFA"
   - type: Sprite
@@ -525,7 +525,7 @@
   suffix: Robust Harvest
   components:
   - type: Bloodstream
-    bloodReagent: RobustHarvest
+    bloodReagent: [RobustHarvest]
   - type: PointLight
     color: "#3e901c"
   - type: Sprite

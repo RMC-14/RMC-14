@@ -95,6 +95,8 @@
     prefix: drone
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.1
+  - type: Bloodstream
+    bloodReagent: [RMCXenoBlood, RMCPlasmaPurple]
 
 - type: entity
   parent: CMXenoDroneBase

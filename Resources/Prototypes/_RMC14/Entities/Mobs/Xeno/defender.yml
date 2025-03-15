@@ -96,6 +96,8 @@
       state: defender
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.1
+  - type: Bloodstream
+    bloodReagent: [RMCXenoBlood, RMCPlasmaChitin]
 
 - type: entity
   parent: CMXenoDefenderBase

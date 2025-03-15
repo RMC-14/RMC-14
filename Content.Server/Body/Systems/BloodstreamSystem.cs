@@ -209,7 +209,9 @@ public sealed class BloodstreamSystem : EntitySystem
         }
 
         // Fill blood solution with BLOOD
-        bloodSolution.AddReagent(new ReagentId(entity.Comp.BloodReagent, GetEntityBloodData(entity.Owner)), entity.Comp.BloodMaxVolume - bloodSolution.Volume);
+        var bloodPart = (entity.Comp.BloodMaxVolume - bloodSolution.Volume) / entity.Comp.BloodReagent.Length;
+        foreach (var reagent in entity.Comp.BloodReagent)
+            bloodSolution.AddReagent(new ReagentId(reagent, GetEntityBloodData(entity.Owner)), bloodPart);
     }
 
     private void OnDamageChanged(Entity<BloodstreamComponent> ent, ref DamageChangedEvent args)
@@ -379,7 +381,13 @@ public sealed class BloodstreamSystem : EntitySystem
         }
 
         if (amount >= 0)
-            return _solutionContainerSystem.TryAddReagent(component.BloodSolution.Value, component.BloodReagent, amount, null, GetEntityBloodData(uid));
+        {
+            var bloodPart = amount / component.BloodReagent.Length;
+            var success = true;
+            foreach (var reagent in component.BloodReagent)
+                success &= _solutionContainerSystem.TryAddReagent(component.BloodSolution.Value, reagent, bloodPart, null, GetEntityBloodData(uid));
+            return success;
+        }
 
         // Removal is more involved,
         // since we also wanna handle moving it to the temporary solution
@@ -470,7 +478,7 @@ public sealed class BloodstreamSystem : EntitySystem
     /// <summary>
     ///     Change what someone's blood is made of, on the fly.
     /// </summary>
-    public void ChangeBloodReagent(EntityUid uid, string reagent, BloodstreamComponent? component = null)
+    public void ChangeBloodReagent(EntityUid uid, ProtoId<ReagentPrototype>[] reagent, BloodstreamComponent? component = null)
     {
         if (!Resolve(uid, ref component, logMissing: false)
             || reagent == component.BloodReagent)
@@ -484,12 +492,18 @@ public sealed class BloodstreamSystem : EntitySystem
             return;
         }
 
-        var currentVolume = bloodSolution.RemoveReagent(component.BloodReagent, bloodSolution.Volume, ignoreReagentData: true);
+        FixedPoint2 currentVolume = 0;
+        foreach (var bloodReagent in component.BloodReagent)
+            currentVolume += bloodSolution.RemoveReagent(bloodReagent, bloodSolution.Volume, ignoreReagentData: true);
 
         component.BloodReagent = reagent;
 
         if (currentVolume > 0)
-            _solutionContainerSystem.TryAddReagent(component.BloodSolution.Value, component.BloodReagent, currentVolume, null, GetEntityBloodData(uid));
+        {
+            var bloodPart = currentVolume / component.BloodReagent.Length;
+            foreach (var bloodReagent in component.BloodReagent)
+                _solutionContainerSystem.TryAddReagent(component.BloodSolution.Value, bloodReagent, bloodPart, null, GetEntityBloodData(uid));
+        }
     }
 
     private void OnDnaGenerated(Entity<BloodstreamComponent> entity, ref GenerateDnaEvent args)

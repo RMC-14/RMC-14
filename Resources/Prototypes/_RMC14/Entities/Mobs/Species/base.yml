@@ -32,7 +32,7 @@
   - type: InjectableSolution
     solution: chemicals
   - type: Bloodstream
-    bloodReagent: Blood
+    bloodReagent: [Blood]
     bloodMaxVolume: 560
     maxBleedAmount: 50
     bleedReductionAmount: 0
