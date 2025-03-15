@@ -1,7 +1,7 @@
 - type: entity
   parent: RMCHeadCapFlippable
   id: RMCBoonie
-  name: USCM boonie hat
+  name: UNMC boonie hat
   description: A floppy bush hat. Protects only from the sun and rain, but very comfortable.
   components:
   - type: Sprite

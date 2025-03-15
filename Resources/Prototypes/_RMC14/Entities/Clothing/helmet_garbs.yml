@@ -250,7 +250,7 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_desert.rsi
       state: helmet
-      
+
 
 - type: entity
   parent: RMCHelmetGarbGasmask
@@ -266,7 +266,7 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_jungle.rsi
       state: helmet
-      
+
 - type: entity
   parent: RMCHelmetGarbGasmask
   id: RMCHelmetGarbGasmaskUrban
@@ -288,7 +288,7 @@
   parent: RMCHelmetGarbBase
   id: RMCHelmetGarbGunOil
   name: gun oil
-  description: It is a bottle of oil, for your gun. Don't fall for the rumors, the M41A is NOT a self-cleaning firearm.
+  description: It is a bottle of oil, for your gun. Don't fall for the rumors, the M54C is NOT a self-cleaning firearm.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/HelmetGarb/gun_oil.rsi
