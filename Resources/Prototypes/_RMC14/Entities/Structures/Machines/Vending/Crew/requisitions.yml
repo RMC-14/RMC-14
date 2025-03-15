@@ -105,6 +105,8 @@
         amount: 2
       - id: CMWebbingKnivesFilled
         amount: 1
+      - id: RMCOuterClothingExternalWebbing
+        amount: 2
     - name: Backpacks
       entries:
       - id: CMBackpackMarine
