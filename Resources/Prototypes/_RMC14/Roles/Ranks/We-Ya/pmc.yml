@@ -1,0 +1,74 @@
+- type: rank
+  id: RMCRankWeYaOperator
+  name: Operator
+  prefix: OPR.
+
+- type: rank
+  id: RMCRankWeYaEnforcer
+  name: Enforcer
+  prefix: ENF.
+
+- type: rank
+  id: RMCRankWeYaVehicleSpecialist
+  name: Vehicle Specialist
+  prefix: SPV.
+
+- type: rank
+  id: RMCRankWeYaSupportSpecialist
+  name: Support Specialist
+  prefix: SPS.
+
+- type: rank
+  id: RMCRankWeYaMedicalSpecialist
+  name: Medical Specialist
+  prefix: SPM.
+
+- type: rank
+  id: RMCRankWeYaWeaponSpecialist
+  name: Weapon Specialist
+  prefix: SPW.
+
+- type: rank
+  id: RMCRankWeYaXenoSpecialist
+  name: Xeno Specialist
+  prefix: SPX.
+
+- type: rank
+  id: RMCRankWeYaTraumaSurgeon
+  name: Trauma Surgeon
+  prefix: Dr.
+
+- type: rank
+  id: RMCRankWeYaCorporateTechnician
+  name: Corporate Technician
+  prefix: TEC.
+
+- type: rank
+  id: RMCRankWeYaEliteResponder
+  name: Elite Responder
+  prefix: ELR.
+
+- type: rank
+  id: RMCRankWeYaEliteMedic
+  name: Elite Medic
+  prefix: ELM.
+
+- type: rank
+  id: RMCRankWeYaEliteGunner
+  name: Elite Gunner
+  prefix: ELG.
+
+- type: rank
+  id: RMCRankWeYaTeamLeader
+  name: Team Leader
+  prefix: TML.
+
+- type: rank
+  id: RMCRankWeYaEliteTeamLeader
+  name: Elite Team Leader
+  prefix: ETML.
+
+- type: rank
+  id: RMCRankWeYaSiteDirector
+  name: PMC Site Director
+  prefix: Director

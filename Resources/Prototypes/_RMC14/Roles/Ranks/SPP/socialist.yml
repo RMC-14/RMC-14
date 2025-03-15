@@ -1,0 +1,99 @@
+- type: rank
+  id: RMCRankSPPRyadovoy
+  name: Ryadovoy
+  prefix: Rya.
+
+- type: rank
+  id: RMCRankSPPEfreitor
+  name: Efreitor
+  prefix: Efr.
+
+- type: rank
+  id: RMCRankSPPMladshiySerzhant
+  name: Mladshiy Serzhant
+  prefix: MSzht.
+
+- type: rank
+  id: RMCRankSPPSerzhant
+  name: Serzhant
+  prefix: Sgt.
+
+- type: rank
+  id: RMCRankSPPStarshiySerzhant
+  name: Starshiy Serzhant
+  prefix: SSgt.
+
+- type: rank
+  id: RMCRankSPPStarshyna
+  name: Starshyna
+  prefix: StS.
+
+- type: rank
+  id: RMCRankSPPJuniorKommando
+  name: Junior Kommando
+  prefix: JKdo.
+
+- type: rank
+  id: RMCRankSPP2ndKommando
+  name: 2nd Kommando
+  prefix: 2ndKdo.
+
+- type: rank
+  id: RMCRankSPP1stKommando
+  name: 1st Kommando
+  prefix: 1stKdo.
+
+- type: rank
+  id: RMCRankSPPMladshiyLeytenant
+  name: Mladshiy Leytenant
+  prefix: MsLt.
+
+- type: rank
+  id: RMCRankSPPStarshiyLeytenant
+  name: Starshiy Leytenant
+  prefix: SrLt.
+
+- type: rank
+  id: RMCRankSPPKapitan
+  name: Kapitan
+  prefix: Kpt.
+
+- type: rank
+  id: RMCRankSPPMayjor
+  name: Mayjor
+  prefix: May.
+
+- type: rank
+  id: RMCRankSPPPoliticalCommissar
+  name: Political Commissar
+  prefix: Pol.
+
+- type: rank
+  id: RMCRankSPPPodpolkovnik
+  name: Podpolkovnik
+  prefix: Pdk.
+
+- type: rank
+  id: RMCRankSPPPolkovnik
+  name: Polkovnik
+  prefix: Plk.
+
+- type: rank
+  id: RMCRankSPPGeneralMayjor
+  name: General Mayjor
+  prefix: GenMay.
+
+- type: rank
+  id: RMCRankSPPGeneralLeytenant
+  name: General Leytenant
+  prefix: GenLt.
+
+- type: rank
+  id: RMCRankSPPGeneralPolkovnik
+  name: General Polkovnik
+  prefix: GenPlk
+
+- type: rank
+  id: RMCRankSPPGeneralArmii
+  name: General Armii
+  prefix: GenArm.
