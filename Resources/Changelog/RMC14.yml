@@ -5079,14 +5079,6 @@
   id: 1451
   time: '2025-03-15T07:17:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5887
-- author: OmerF-afk
-  changes:
-  - message: Added SnapGridBorder and other placement modes to prop_vehicles2 by removing
-      anchor
-    type: Add
-  id: 1452
-  time: '2025-03-15T07:21:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5882
 - author: Vermidia
   changes:
   - message: Fixed hive core weeds not spreading far enough, and cluster/pylon weeds
