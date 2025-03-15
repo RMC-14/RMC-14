@@ -124,6 +124,7 @@
     state: starshell_ash
   - type: PointLight
     color: "#FFCCCC"
+    energy: 1.5
   - type: ExpendableLight
     pickupWhileOn: false
     glowDuration: 375
@@ -131,6 +132,7 @@
     spentName: expendable-light-starshell-ash-empty-name
     spentDesc: expendable-light-starshell-ash-empty-desc
     iconStateSpent: starshell_ash-empty
+    loopedSound: null
   - type: LightBehaviour
     behaviours:
     - !type:FadeBehaviour

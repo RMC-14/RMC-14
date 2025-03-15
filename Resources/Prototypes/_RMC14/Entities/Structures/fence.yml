@@ -60,6 +60,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/fences.rsi
     state: brokenfence0
+  - type: Clickable
+  - type: InteractionOutline
   - type: PlacementReplacement
     key: walls
   - type: IconSmooth

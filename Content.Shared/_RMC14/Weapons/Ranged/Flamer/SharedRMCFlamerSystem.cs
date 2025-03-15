@@ -27,6 +27,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly LineSystem _line = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -226,6 +227,8 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
             toCoordinates = fromCoordinates.Offset(normalized * range);
 
         var tiles = _line.DrawLine(fromCoordinates, toCoordinates, flamer.Comp.DelayPer, out _);
+        if (tiles.Count == 0 || !_interaction.InRangeUnobstructed(flamer, tiles[0].Coordinates, 3))
+            return;
 
         ProtoId<ReagentPrototype>? reagent = null;
         if (solutionEnt.Value.Comp.Solution.TryFirstOrNull(out var firstReagent))

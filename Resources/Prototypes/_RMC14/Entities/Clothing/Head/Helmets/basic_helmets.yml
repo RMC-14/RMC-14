@@ -41,6 +41,8 @@
         - CMOintment
         - CMAutoInjector
         - PillPacket
+        - Syringe
+        - Pill
     - popup: rmc-storage-limit-accessories
       count: 2
       whitelist:
