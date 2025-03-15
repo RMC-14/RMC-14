@@ -1215,7 +1215,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronRosalindHexVolkov
   name: Rosalind 'Hex' Volkov figurine
-  #description: ""
+  description: "\"I solemnly swear to not charge sensors.\""
   components:
   - type: Sprite
     state: rosalind_hex_volkov
