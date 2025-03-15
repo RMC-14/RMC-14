@@ -119,6 +119,9 @@ public sealed class SquadSystem : EntitySystem
             return;
         }
 
+        if (member.BlacklistedSquadArmor.Contains(ent.Comp.Layer))
+            return;
+
         var rsi = wearer.Leader ? ent.Comp.LeaderRsi : ent.Comp.Rsi;
         var layer = $"enum.{nameof(SquadArmorLayers)}.{ent.Comp.Layer}";
         if (args.Layers.Any(l => l.Item1 == layer))
@@ -456,6 +459,7 @@ public sealed class SquadSystem : EntitySystem
         member.Squad = team;
         member.Background = team.Comp.Background;
         member.BackgroundColor = team.Comp.Color;
+        member.BlacklistedSquadArmor = team.Comp.BlacklistedSquadArmor;
         Dirty(marine, member);
 
         var grant = EnsureComp<SquadGrantAccessComponent>(marine);
