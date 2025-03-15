@@ -14,6 +14,7 @@ using Content.Shared.Maps;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
+using Content.Shared.Prototypes;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -42,6 +43,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly ITileDefinitionManager _tile = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -57,8 +59,6 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     private EntityQuery<XenoComponent> _xenoQuery;
     private EntityQuery<BlockWeedsComponent> _blockWeedsQuery;
     private EntityQuery<HiveMemberComponent> _hiveQuery;
-
-    private readonly EntProtoId HiveWeedProtoId = "XenoHiveWeeds";
 
     public override void Initialize()
     {
@@ -298,7 +298,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
         // Some structures produce hive weed and act like a hive weed source, but they themselves are not hiveweeds.
         // For the purposes of this function, those structures are hive weed sources.
-        return (weedComp.Spawns == HiveWeedProtoId);
+        return _prototype.TryIndex(weedComp.Spawns, out var spawns) &&
+               spawns.HasComponent<HiveWeedsComponent>();
     }
 
     public bool IsOnWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates, bool sourceOnly = false)

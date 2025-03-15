@@ -44,7 +44,7 @@
 
 - type: entity
   abstract: true
-  parent: CMBaseStructureCorrodible
+  parent: CMBaseWindowIndestructible
   id: CMBaseWindow # TODO RMC14 this needs to be 2 separate entities eventually
   placement:
     mode: SnapgridCenter

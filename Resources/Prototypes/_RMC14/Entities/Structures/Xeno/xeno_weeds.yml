@@ -147,6 +147,7 @@
     drawdepth: FloorTiles
     layers:
     - state: hive_weed0
+  - type: HiveWeeds
   - type: IconSmooth
     key: cm_xeno_weeds
     base: hive_weed
