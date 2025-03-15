@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Trees leave behind stumps when destroyed.
-    type: Add
-  id: 968
-  time: '2024-11-12T05:58:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4631
 - author: Vermidia
   changes:
   - message: Fixed breaching shells having no spread bullets, too much damage, and
@@ -5293,5 +5286,14 @@
   id: 1470
   time: '2025-03-15T21:19:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5905
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Warrior lunge not pulling if pull is on cooldown.
+    type: Fix
+  - message: Fixed racks being improperly placed in some places.
+    type: Fix
+  id: 1471
+  time: '2025-03-15T21:46:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5909
 Name: RMC14
 Order: -1
