@@ -43,8 +43,8 @@
     - CMTricordrazine
     - CMEpinephrine
     - CMInaprovaline
-#    - CMOxycodone # TODO RMC14
-#    - CMTramadol # TODO RMC14
+    - CMOxycodone
+    - CMTramadol
 #    - CMPeridaxon # TODO RMC14
     whitelist:
       components:
@@ -78,10 +78,10 @@
         amount: 3
       - id: CMKelotaneAutoInjector
         amount: 3
-#      - id: CMOxycodoneAutoinjector # TODO RMC14
-#        amount: 3
-#      - id: CMTramadolAutoinjector # TODO RMC14
-#        amount: 3
+      - id: CMOxycodoneAutoinjector
+        amount: 3
+      - id: CMTramadolAutoinjector
+        amount: 3
       - id: CMTricordrazineAutoInjector
         amount: 3
     - name: Liquid bottles
@@ -96,12 +96,12 @@
         amount: 3
       - id: CMBottleKelotane
         amount: 3
-#      - id: CMBottleOxycodone # TODO RMC14
-#        amount: 3
-#      - id: CMBottlePeridaxon # TODO RMC14
-#        amount: 3
-#      - id: CMBottleTramadol # TODO RMC14
-#        amount: 3
+      - id: CMBottleOxycodone
+        amount: 3
+      - id: CMBottlePeridaxon
+        amount: 3
+      - id: CMBottleTramadol
+        amount: 3
     - name: Pill bottles
       entries:
       - id: CMPillCanisterBicaridine
@@ -114,10 +114,10 @@
         amount: 2
       - id: CMPillCanisterKelotane
         amount: 2
-#      - id: CMPillCanisterPeridaxon # TODO RMC14
-#        amount: 2
-#      - id: CMPillCanisterTramadol # TODO RMC14
-#        amount: 2
+      - id: CMPillCanisterPeridaxon
+        amount: 2
+      - id: CMPillCanisterTramadol
+        amount: 2
     - name: Medical utilities
       entries:
       - id: CMDefibrillator
@@ -173,12 +173,12 @@
         amount: 6
       - id: CMBottleKelotane
         amount: 6
-    #      - id: CMBottleOxycodone # TODO RMC14
-    #        amount: 6
-    #      - id: CMBottlePeridaxon # TODO RMC14
-    #        amount: 6
-    #      - id: CMBottleTramadol # TODO RMC14
-    #        amount: 6
+      - id: CMBottleOxycodone
+        amount: 6
+      - id: CMBottlePeridaxon
+        amount: 6
+      - id: CMBottleTramadol
+        amount: 6
     - name: Miscellaneous
       entries:
       - id: CMBeaker
@@ -226,7 +226,7 @@
     rechargeCooldown: 4
     reagents:
     - CMTricordrazine
-#    - CMTramadol # TODO RMC14
+    - CMTramadol
     whitelist:
       components:
       - Hypospray
@@ -236,7 +236,8 @@
       entries:
       - id: CMTricordrazineAutoInjectorNoSkill
         amount: 5
-    #- id: CMPainStopAutoinjector
+      - id: CMTramadolAutoInjectorNoSkill
+        amount: 5
     - name: Devices
       entries:
       - id: CMHealthAnalyzer
@@ -283,7 +284,7 @@
     rechargeCooldown: 4
     reagents:
     - CMTricordrazine
-#    - CMTramadol # TODO RMC14
+    - CMTramadol
     whitelist:
       components:
       - Hypospray
@@ -291,8 +292,8 @@
     sections:
     - name: Supplies
       entries:
-      # - id: CMPainStopAutoinjector
-      #   amount: 2
+      - id: CMTramadolAutoInjectorNoSkill
+        amount: 2
       - id: CMTricordrazineAutoInjectorNoSkill
         amount: 2
       - id: CMGauze10

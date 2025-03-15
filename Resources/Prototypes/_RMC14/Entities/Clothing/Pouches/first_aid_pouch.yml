@@ -31,7 +31,7 @@
     contents:
     - id: CMBicaridineAutoInjector
     - id: CMKelotaneAutoInjector
-    #- id: CMTramadolAutoInjector # TODO RMC14
+    - id: CMTramadolAutoInjector
     - id: CMEmergencyAutoInjector
 
 - type: entity
@@ -55,8 +55,8 @@
     contents:
     - id: CMPacketPillsBicaridine
     - id: CMPacketPillsKelotane
-#    - id: CMPacketPillsTramadol # TODO RMC14
-#    - id: CMPacketPillsTramadol # TODO RMC14
+    - id: CMPacketPillsTramadol
+    - id: CMPacketPillsTramadol
 
 
 # First Aid ERT
@@ -80,7 +80,7 @@
     contents:
     - id: CMBicaridineAutoInjector
     - id: CMKelotaneAutoInjector
-    #- id: CMTramadolAutoInjector
+    - id: CMTramadolAutoInjector
     - id: CMEmergencyAutoInjector
     - id: CMGauze10
 

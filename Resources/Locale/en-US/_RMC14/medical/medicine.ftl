@@ -63,6 +63,7 @@ rmc-dexalin-container-label-text = DX
 rmc-dylovene-container-label-text = DY
 rmc-inaprovaline-container-label-text = IN
 rmc-first-aid-container-label-text = FA
+rmc-pain-stop-container-label-text = PS
 rmc-emergency-medicine-container-label-text = EM
 rmc-dexalin-plus-container-label-text = D+
 rmc-epinephrine-container-label-text = EP

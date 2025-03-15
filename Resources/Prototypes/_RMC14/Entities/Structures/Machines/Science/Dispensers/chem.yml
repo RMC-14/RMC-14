@@ -186,7 +186,8 @@
       - CMDexalin
       - CMInaprovaline
       - CMEpinephrine
-      # TODO RMC-14 Peridaxon and tramadol
+      # TODO RMC-14 Peridaxon
+      - CMTramadol
       - CMTricordrazine
 
 - type: entity
