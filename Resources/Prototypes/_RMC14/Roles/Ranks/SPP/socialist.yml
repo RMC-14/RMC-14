@@ -30,7 +30,7 @@
 - type: rank
   id: RMCRankSPPStarshyna
   name: Starshyna
-  prefix: StS
+  prefix: StS.
 
 - type: rank
   id: RMCRankSPPJuniorKommando
