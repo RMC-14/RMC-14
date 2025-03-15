@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: BackeTako
-  changes:
-  - message: Fixed MedKit inhand sprite inconsistencies
-    type: Fix
-  id: 949
-  time: '2024-11-08T04:43:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4733
 - author: PursuitInAshes
   changes:
   - message: 'The SEA vendors have been updated to include new items and equipment:
@@ -5220,5 +5213,15 @@
   id: 1450
   time: '2025-03-15T07:14:35.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5888
+- author: OmerF-afk
+  changes:
+  - message: 'Ported admin-only spawn corporate weapons for exterminators and PMCs:
+      M63B2, M54C2, ML79A, HEAP for M63 SMGs, B12 blast grenade.'
+    type: Add
+  - message: Added missing eye glow for M5X PMC helmet.
+    type: Add
+  id: 1451
+  time: '2025-03-15T07:17:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5887
 Name: RMC14
 Order: -1
