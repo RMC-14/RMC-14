@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Nairodian
-  changes:
-  - message: Added a new lobby art.
-    type: Add
-  id: 947
-  time: '2024-11-08T04:36:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4750
 - author: BackeTako
   changes:
   - message: Fixed doors looking bright when emergency access is on.
@@ -5216,5 +5209,16 @@
   id: 1448
   time: '2025-03-12T09:51:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5826
+- author: OmerF-afk
+  changes:
+  - message: Added MARSOC HEAP for rifles.
+    type: Add
+  - message: Added XM38 and XM40 Death squad weaponry.
+    type: Add
+  - message: Added missing firedelay on custombuilt shotgun.
+    type: Add
+  id: 1449
+  time: '2025-03-13T19:24:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5879
 Name: RMC14
 Order: -1
