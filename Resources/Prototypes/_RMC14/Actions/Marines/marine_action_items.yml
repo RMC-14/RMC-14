@@ -173,15 +173,13 @@
     useDelay: 0.25
 
 - type: entity
-  parent: ActionMarineBase
+  parent: ActionMarineToggleable
   id: RMCActionAimedShot
   name: Aimed Shot
   components:
-  - type: EntityTargetAction
+  - type: InstantAction
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/marine_sniper_actions.rsi
       state: sniper_aim
     event: !type:AimedShotActionEvent
-    range: 32
-    useDelay: 2.5

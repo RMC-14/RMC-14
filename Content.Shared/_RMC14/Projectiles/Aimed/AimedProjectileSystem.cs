@@ -1,6 +1,6 @@
+using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
-using Content.Shared._RMC14.Targeting;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Damage;
 using Content.Shared.Projectiles;
@@ -15,7 +15,6 @@ public sealed class AimedProjectileSystem : EntitySystem
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly TargetingSystem _targeting = default!;
 
     public override void Initialize()
     {
@@ -48,8 +47,13 @@ public sealed class AimedProjectileSystem : EntitySystem
         }
 
         // Apply bonus damage
+        var apValue = 0;
         var damage =  args.Damage * aimedEffect.ExtraHits;
-        _damageable.TryChangeDamage(args.Target, damage);
+
+        if (TryComp(ent, out CMArmorPiercingComponent? armorPiercing))
+            apValue = armorPiercing.Amount;
+
+        _damageable.TryChangeDamage(args.Target, damage, tool: ent.Comp.Source, armorPiercing: apValue);
 
         // TODO Apply blind
 

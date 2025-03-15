@@ -253,6 +253,7 @@
     amount: 20
   - type: IgniteOnProjectileHit
   - type: AimedShotEffect
+    extraHits: 0
     fireStacksOnHit: 10
     blindDuration: 5
 

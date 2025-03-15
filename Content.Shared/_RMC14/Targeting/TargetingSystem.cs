@@ -199,7 +199,8 @@ public sealed class TargetingSystem : EntitySystem
                     if (TryComp(target, out TargetedComponent? targeted))
                     {
                         var newAlpha = 1 - targeting.LaserDurations[target][laserNumber] / targeting.OriginalLaserDurations[target][laserNumber];
-                        if (!targeted.AlphaMultipliers.TryAdd(uid, newAlpha) && newAlpha > targeted.AlphaMultipliers[uid])
+                        targeted.AlphaMultipliers.TryAdd(uid, newAlpha);
+                        if (newAlpha > targeted.AlphaMultipliers[uid])
                             targeted.AlphaMultipliers[uid] =  newAlpha;
                     }
 

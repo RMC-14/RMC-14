@@ -28,12 +28,25 @@ public sealed class GunToggleableLaserSystem : EntitySystem
     /// </summary>
     private void OnToggleLaser(Entity<GunToggleableLaserComponent> ent, ref GunToggleLaserActionEvent args)
     {
-        _audio.PlayPredicted(ent.Comp.ToggleSound, ent, args.Performer);
+        if (args.Handled)
+            return;
+
+        if(ToggleLaser(ent, args.Performer))
+            args.Handled = true;
+    }
+
+    /// <summary>
+    ///     Toggle the active laser.
+    /// </summary>
+    private bool ToggleLaser(Entity<GunToggleableLaserComponent> ent, EntityUid user)
+    {
+        _audio.PlayPredicted(ent.Comp.ToggleSound, ent, user);
         ent.Comp.Active = !ent.Comp.Active;
 
         if (ent.Comp.Settings.Count == 0)
-            return;
+            return false;
 
+        // Change icon
         ref var settingIndex = ref ent.Comp.Setting;
         settingIndex++;
         if (settingIndex >= ent.Comp.Settings.Count)
@@ -48,6 +61,7 @@ public sealed class GunToggleableLaserSystem : EntitySystem
             _actions.UpdateAction(ent.Comp.Action, action);
         }
 
-        args.Handled = true;
+        Dirty(ent);
+        return true;
     }
 }

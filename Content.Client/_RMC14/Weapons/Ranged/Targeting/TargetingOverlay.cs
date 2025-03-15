@@ -25,12 +25,12 @@ public sealed class TargetingOverlay : Overlay
 
         while (query.MoveNext(out var uid, out var targeted))
         {
-            foreach (var gun in targeted.TargetedBy)
+            foreach (var targeter in targeted.TargetedBy)
             {
-                if (!targetingLaserQuery.TryGetComponent(gun, out var targetingLaser) || !targetingLaser.ShowLaser)
+                if (!targetingLaserQuery.TryGetComponent(targeter, out var targetingLaser) || !targetingLaser.ShowLaser)
                     continue;
 
-                if (!xformQuery.TryGetComponent(gun, out var gunXform) ||
+                if (!xformQuery.TryGetComponent(targeter, out var gunXform) ||
                     !xformQuery.TryGetComponent(uid, out var xform))
                 {
                     continue;
@@ -53,8 +53,11 @@ public sealed class TargetingOverlay : Overlay
                 var color = targetingLaser.LaserColor;
                 var alpha = 0f;
 
-                if( targetingLaser.GradualAlpha)
-                    alpha = targetingLaser.LaserAlpha * targeted.AlphaMultipliers[gun];
+                if (targetingLaser.GradualAlpha)
+                {
+                    if(targeted.AlphaMultipliers.TryGetValue(targeter, out var multiplier))
+                        alpha = targetingLaser.LaserAlpha * multiplier;
+                }
                 else
                     alpha = targetingLaser.LaserAlpha;
 

@@ -5,18 +5,21 @@ using Content.Shared._RMC14.Weapons.Ranged.Homing;
 using Content.Shared._RMC14.Weapons.Ranged.Laser;
 using Content.Shared._RMC14.Weapons.Ranged.Whitelist;
 using Content.Shared.Actions;
+using Content.Shared.Examine;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Whitelist;
 using Content.Shared.Wieldable.Components;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.AimedShot;
 
-public sealed class AimedShotSystem : EntitySystem
+public abstract class SharedRMCAimedShotSystem : EntitySystem
 {
     [Dependency] private readonly TargetingSystem _targeting = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -25,6 +28,10 @@ public sealed class AimedShotSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly ExamineSystemShared _examine = default!;
+
+    [Dependency] protected readonly IGameTiming Timing = default!;
 
     public override void Initialize()
     {
@@ -52,20 +59,25 @@ public sealed class AimedShotSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Perform an aimed shot on the entity targeted by the action.
+    ///     Try to perform an aimed shot on the given target.
     /// </summary>
-    private void OnAimedShot(Entity<AimedShotComponent> ent, ref AimedShotActionEvent args)
+    /// <param name="netGun">The gun performing the aimed shot.</param>
+    /// <param name="netUser">The entity using the gun to perform the aimed shot.</param>
+    /// <param name="netTarget">The target of the aimed shot.</param>
+    protected void AimedShotRequested(NetEntity netGun, NetEntity netUser, NetEntity netTarget)
     {
-        var target = args.Target;
-        var user = args.Performer;
+        var gun = GetEntity(netGun);
+        var user = GetEntity(netUser);
+        var target = GetEntity(netTarget);
 
-        if(!CanAimShot(ent, target, user))
+        if (!TryComp(gun, out AimedShotComponent? aimedShot) || !aimedShot.Activated)
             return;
 
-        args.Handled = true;
+        if(!CanAimShot((gun, aimedShot), target, user))
+            return;
 
         // Add time to the duration of the aimed shot per tile of distance to the target.
-        var laserDuration =  (float)(ent.Comp.AimDuration + (_transform.GetMoverCoordinates(target).Position - _transform.GetMoverCoordinates(user).Position).Length() * ent.Comp.AimDistanceDifficulty);
+        var laserDuration =  (float)(aimedShot.AimDuration + (_transform.GetMoverCoordinates(target).Position - _transform.GetMoverCoordinates(user).Position).Length() * aimedShot.AimDistanceDifficulty);
         var appliedSpotterBuff = false;
         var aimMultiplier = 1f;
 
@@ -77,7 +89,7 @@ public sealed class AimedShotSystem : EntitySystem
         }
 
         // Apply the laser's multiplier to the duration of the aimed shot if it's turned on.
-        if (TryComp(ent, out GunToggleableLaserComponent? toggleLaser))
+        if (TryComp(gun, out GunToggleableLaserComponent? toggleLaser))
         {
             if (toggleLaser.Active)
             {
@@ -87,19 +99,32 @@ public sealed class AimedShotSystem : EntitySystem
                     aimMultiplier = toggleLaser.AimDurationMultiplier;
             }
 
-            if (TryComp(ent, out TargetingLaserComponent? targetingLaser))
+            if (TryComp(gun, out TargetingLaserComponent? targetingLaser))
             {
                 targetingLaser.ShowLaser = toggleLaser.Active;
-                Dirty(ent, targetingLaser);
+                Dirty(gun, targetingLaser);
             }
         }
 
         laserDuration *= aimMultiplier;
-        ent.Comp.Targets.Add(target);
+        aimedShot.Targets.Add(target);
+        aimedShot.NextAimedShot = Timing.CurTime + aimedShot.AimedShotCooldown;
+        Dirty(gun, aimedShot);
+
+        _audio.PlayPredicted(aimedShot.AimingSound, gun, user);
+        _targeting.Target(gun, user, target, laserDuration, TargetedEffects.Targeted);
+    }
+
+    /// <summary>
+    ///     Toggle the ability to perform an aimed shot using the unique action key on or off.
+    /// </summary>
+    private void OnAimedShot(Entity<AimedShotComponent> ent, ref AimedShotActionEvent args)
+    {
+        ent.Comp.Activated = !ent.Comp.Activated;
         Dirty(ent);
 
-        _audio.PlayPredicted(ent.Comp.AimingSound, ent, user);
-        _targeting.Target(ent.Owner, user, target, laserDuration, TargetedEffects.Targeted);
+        _actions.SetToggled(ent.Comp.Action, ent.Comp.Activated);
+        args.Handled = true;
     }
 
     /// <summary>
@@ -148,23 +173,26 @@ public sealed class AimedShotSystem : EntitySystem
         {
             var shotProjectiles = _gunSystem.AttemptShoot((ent, gun), args.User, args.Coordinates);
 
+            var ammoCount = new GetAmmoCountEvent();
+            RaiseLocalEvent(ent, ref ammoCount);
+
             if (shotProjectiles != null)
             {
                 _audio.PlayEntity(gun.SoundGunshotModified, args.User, ent);
+                if (ammoCount.Count == 0)
+                    _audio.PlayPvs(new SoundPathSpecifier("/Audio/Weapons/Guns/EmptyAlarm/smg_empty_alarm.ogg"), ent);
             }
             else
             {
                 _targeting.StopTargeting(ent, args.Target);
                 RemoveTarget(ent, args.Target);
 
-                var ammoCount = new GetAmmoCountEvent();
-                RaiseLocalEvent(ent, ref ammoCount);
-
-                if(ammoCount.Count <= 0)
+                if(ammoCount.Count < 0)
                     _audio.PlayEntity(gun.SoundEmpty, args.User, ent);
+
+                Dirty(ent);
             }
         }
-
         // Update ammo visualiser because client doesn't know about the shot.
         var ev = new UpdateClientAmmoEvent();
         RaiseLocalEvent(ent, ref ev);
@@ -191,6 +219,14 @@ public sealed class AimedShotSystem : EntitySystem
     {
         // Can't aim at the target if they don't have the component that marks them as a potential target.
         if (!HasComp<SpottableComponent>(target))
+            return false;
+
+        // Can't aim at a target you can't see.
+        if (!_examine.InRangeUnOccluded(user, target, ent.Comp.Range))
+            return false;
+
+        // Can't aim for a certain amount of time after having performed an aimed shot.
+        if (ent.Comp.NextAimedShot > Timing.CurTime)
             return false;
 
         // Can't aim if the user doesn't have the correct whitelist.

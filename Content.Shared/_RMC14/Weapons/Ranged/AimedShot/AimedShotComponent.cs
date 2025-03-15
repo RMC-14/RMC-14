@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Weapons.Ranged.AimedShot;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(AimedShotSystem))]
+[Access(typeof(SharedRMCAimedShotSystem))]
 public sealed partial class AimedShotComponent : Component
 {
     /// <summary>
@@ -22,10 +22,34 @@ public sealed partial class AimedShotComponent : Component
     public EntityUid? Action;
 
     /// <summary>
+    ///     If the aimed shot ability is on or off.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool Activated;
+
+    /// <summary>
     ///     The sound to be played when the action is used.
     /// </summary>
     [DataField, AutoNetworkedField]
     public SoundSpecifier AimingSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/Handling/target_on.ogg");
+
+    /// <summary>
+    ///     When the next aimed shot can be performed.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan NextAimedShot =  TimeSpan.Zero;
+
+    /// <summary>
+    ///     The amount of time before another aimed shot can be performed.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan AimedShotCooldown = TimeSpan.FromSeconds(2.5);
+
+    /// <summary>
+    ///     The range of the aimed shot action.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int Range = 32;
 
     /// <summary>
     ///     The target of the aimed shot.
