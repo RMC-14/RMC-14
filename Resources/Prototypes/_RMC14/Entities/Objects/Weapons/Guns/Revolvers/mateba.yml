@@ -18,7 +18,7 @@
     tags:
     - Sidearm
     - RMCRevolver
-    - RMCMateba 
+    - RMCMateba
   - type: RevolverAmmoProvider
     whitelist:
       tags:
@@ -382,6 +382,7 @@
     sprite: _RMC14/Objects/Weapons/Guns/Attachments/mateba_kit.rsi
     state: c_matebacase
   - type: FixedItemSizeStorage
+  - type: Storage
     whitelist:
       tags:
       - RMCAttachmentMatebaStandardGolden
