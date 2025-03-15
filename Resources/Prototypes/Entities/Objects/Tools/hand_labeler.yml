@@ -19,6 +19,8 @@
       interfaces:
         enum.HandLabelerUiKey.Key:
           type: HandLabelerBoundUserInterface
+        enum.ChangeExistingPillBottleUIKey.Key:
+          type: RMCChangeExistingPillBottleColorBui
     - type: HandLabeler
       whitelist:
         components:

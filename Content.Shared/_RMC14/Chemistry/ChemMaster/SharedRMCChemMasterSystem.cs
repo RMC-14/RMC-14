@@ -29,6 +29,19 @@ public sealed partial class ChangePillBottleColorMessage : BoundUserInterfaceMes
 }
 
 [Serializable, NetSerializable]
+public sealed partial class ChangeExistingPillBottleColorMessage : BoundUserInterfaceMessage
+{
+    public PillbottleColor NewColor;
+    public NetEntity Destination;
+
+    public ChangeExistingPillBottleColorMessage(PillbottleColor newColor, NetEntity destination)
+    {
+        NewColor = newColor;
+        Destination = destination;
+    }
+}
+
+[Serializable, NetSerializable]
 public enum ChangePillBottleUIKey
 {
     Key

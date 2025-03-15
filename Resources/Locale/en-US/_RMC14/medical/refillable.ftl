@@ -5,3 +5,4 @@ cm-refillable-solution-whirring-noise = {CAPITALIZE(THE($user))} makes a whirrin
 rmc-bottle-closed = An airtight lid seals it completely.
 rmc-bottle-put-lid = Add lid
 rmc-bottle-remove-lid = Remove lid
+rmc-bottle-tag = PillCanister
