@@ -44,6 +44,9 @@ public sealed partial class SquadTeamComponent : Component
     public bool CanSupplyDrop = true;
 
     [DataField]
+    public bool HasSquadArmor = true;
+
+    [DataField]
     [Access(typeof(SquadLeaderTrackerSystem))]
     public FireteamData Fireteams = new();
 }
