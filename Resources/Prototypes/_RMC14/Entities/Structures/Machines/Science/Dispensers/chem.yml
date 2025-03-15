@@ -50,6 +50,7 @@
 
 - type: entity
   abstract: true
+  parent: RMCDispenserBase
   id: RMCChemDispenserBase
   name: chemical dispenser
   description: A complex machine for mixing elements into chemicals. A We-Ya product.
