@@ -2,6 +2,7 @@
 using Content.Server.Body.Systems;
 using Content.Server.Chat.Systems;
 using Content.Server.Popups;
+using Content.Shared._RMC14.Body.Components;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Medical.Surgery.Conditions;
@@ -42,6 +43,7 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
         SubscribeLocalEvent<CMSurgeryStepEmoteEffectComponent, CMSurgeryStepEvent>(OnStepScreamComplete);
         SubscribeLocalEvent<RMCSurgeryStepSpawnEffectComponent, CMSurgeryStepEvent>(OnStepSpawnComplete);
         SubscribeLocalEvent<RMCSurgeryStepLarvaEffectComponent, CMSurgeryStepEvent>(OnStepLarvaComplete);
+        SubscribeLocalEvent<RMCSurgeryStepXenoHeartEffectComponent, CMSurgeryStepEvent>(OnStepXenoHeartComplete);
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
@@ -147,6 +149,22 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
         {
             SpawnAtPosition(ent.Comp.DeadLarvaItem, coords);
         }
+    }
+
+    private void OnStepXenoHeartComplete(Entity<RMCSurgeryStepXenoHeartEffectComponent> ent, ref CMSurgeryStepEvent args)
+    {
+        if (!TryComp<RMCSurgeryXenoHeartComponent>(args.Body, out var heart))
+            return;
+
+        if (!TryComp(args.Body, out TransformComponent? xform))
+            return;
+
+        foreach (var entity in _body.GetBodyOrganEntityComps<HeartComponent>(args.Body))
+        {
+            QueueDel(entity.Owner);
+        }
+        SpawnAtPosition(heart.Item, xform.Coordinates);
+        RemComp<RMCSurgeryXenoHeartComponent>(args.Body);
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
