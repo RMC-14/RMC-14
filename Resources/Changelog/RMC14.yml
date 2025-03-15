@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: FungiFellow
-  changes:
-  - message: Increased all Turrets Range by One Tile Parity :)
-    type: Tweak
-  id: 966
-  time: '2024-11-12T05:53:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4728
 - author: CyberTropic
   changes:
   - message: Added couch, water cooler.
@@ -5284,5 +5277,20 @@
   id: 1468
   time: '2025-03-15T19:25:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5896
+- author: DrSmugleaf
+  changes:
+  - message: Fixed all hive weed checks being broken, such as planting eggs and nesting.
+    type: Fix
+  - message: Fixed job-less skill pamphlets not being usable by anyone.
+    type: Fix
+  - message: Fixed chemical, drink and corpsman dispensers being broken.
+    type: Fix
+  - message: Fixed the live tactical map not updating when popped out.
+    type: Fix
+  - message: Fixed some windows not having collisions.
+    type: Fix
+  id: 1469
+  time: '2025-03-15T21:16:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5907
 Name: RMC14
 Order: -1
