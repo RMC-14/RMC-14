@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "license": null,
-  "copyright": null,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/e8152b093efb4791bbdd77d0b111f45dac8e074a/icons/obj/structures/machinery/atmos.dmi",
   "size": {
     "x": 32,
     "y": 32
