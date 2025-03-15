@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Added random spawners for powercells, toolboxes, and tech supplies.
-    type: Add
-  id: 965
-  time: '2024-11-12T05:51:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4793
 - author: FungiFellow
   changes:
   - message: Increased all Turrets Range by One Tile Parity :)
@@ -5283,5 +5276,13 @@
   id: 1467
   time: '2025-03-15T19:22:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5898
+- author: mmails
+  changes:
+  - message: Added missing ranks from 13! These are only able to be given by admins
+      right now
+    type: Add
+  id: 1468
+  time: '2025-03-15T19:25:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5896
 Name: RMC14
 Order: -1
