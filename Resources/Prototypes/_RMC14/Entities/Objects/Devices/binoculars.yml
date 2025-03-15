@@ -2,7 +2,6 @@
   parent: BaseItem
   id: RMCBinoculars
   name: binoculars
-  suffix: Jungle
   description: A military-issued pair of binoculars.
   components:
   - type: Item
@@ -25,6 +24,7 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: Appearance
   - type: ItemCamouflage
     states:
       Jungle: binoculars
@@ -32,16 +32,27 @@
       Snow: s_binoculars
       Classic: c_binoculars
       Urban: u_binoculars
+      
+- type: entity
+  parent: RMCBinoculars
+  id: RMCBinocularsCiv
+  name: binoculars
+  description: A pair of binoculars.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/binoculars.rsi
+    state: binoculars_civ
+  - type: ItemCamouflage
+    states:
 
 - type: entity
   parent: RMCBinoculars
   id: RMCRangefinder
   name: rangefinder
-  suffix: Jungle
   description: "A pair of binoculars with a rangefinding function. Click a tile to acquire it's coordinates."
   components:
   - type: Item
-    heldPrefix: rangefinders
+    heldPrefix: rangefinder
   - type: Sprite
     sprite: _RMC14/Objects/Devices/binoculars.rsi
     layers:
@@ -50,7 +61,7 @@
     - map: [ "light" ]
   - type: Rangefinder
   - type: UseDelay
-    delay: 1
+    delay: 0
   - type: UserInterface
     interfaces:
       enum.RangefinderUiKey.Key:
@@ -74,7 +85,6 @@
   parent: RMCRangefinder
   id: RMCLaserDesignator
   name: laser designator
-  suffix: Jungle
   description: "A laser designator with two modes: target marking for CAS with IR laser and rangefinding. Click a tile to target something."
   components:
   - type: Sprite
@@ -85,14 +95,11 @@
   - type: Rangefinder
     mode: Designator
     canDesignate: true
-  - type: UseDelay
-    delay: 1
 
 - type: entity
   parent: RMCLaserDesignator
   id: RMCLaserDesignatorScout
   name: scout laser designator
-  suffix: Jungle
   description: "An improved laser designator, issued to UNMC scouts, with two modes: target marking for CAS with IR laser and rangefinding. Click a tile to target something."
   components:
   - type: Rangefinder

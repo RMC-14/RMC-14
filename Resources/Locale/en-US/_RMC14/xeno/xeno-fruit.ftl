@@ -85,6 +85,7 @@ rmc-xeno-fruit-verb-feed = Feed
 rmc-xeno-fruit-examine-base = This fruit is {$growthStatus}.
 rmc-xeno-fruit-examine-growing = still [color=darkred]growing[/color]
 rmc-xeno-fruit-examine-grown = [color=darkgreen]fully grown[/color]
+rmc-xeno-fruit-examine-spent = [color=orange]spent[/color]
 
 # UI text
 rmc-xeno-fruit-ui-title = Choose Resin Fruit

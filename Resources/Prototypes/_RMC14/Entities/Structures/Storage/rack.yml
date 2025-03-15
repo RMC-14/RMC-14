@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CMBaseStructure
   id: CMRack
   name: rack
@@ -9,7 +9,6 @@
       Brute:
         path:
           "/Audio/Weapons/dodgeball.ogg"
-  - type: Anchorable
   - type: InteractionOutline
   - type: PlaceableSurface
   - type: Sprite
@@ -55,3 +54,5 @@
     node: rack
   - type: DamageMultiplierFlags
     flags: Breaching
+  - type: XenoLeapDestroyOnPass
+    spawnPrototype: CMSheetMetalBase

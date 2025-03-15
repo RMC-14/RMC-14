@@ -2,7 +2,6 @@
   parent: RMCBaseWeaponSniperRifle
   id: CMM96SSniperRifle
   name: M96S scoped rifle
-  suffix: Desert
   description: "A heavy sniper rifle manufactured by Aegis Armaments. It has a scope system and fires armor penetrating rounds out of a 15-round magazine.
     'Peace Through Superior Firepower'"
   components:
@@ -43,6 +42,7 @@
     slots:
       gun_magazine:
         name: Magazine
+        startingItem: CMMagazineSniperM96S
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_reload.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_unload.ogg
         priority: 2
@@ -77,11 +77,11 @@
       rmc-aslot-underbarrel: 0.21875, -0.343
   - type: ItemCamouflage
     camouflageVariations:
-      Jungle:  _RMC14/Objects/Weapons/Guns/Snipers/m96s/jungle.rsi
-      Desert:  _RMC14/Objects/Weapons/Guns/Snipers/m96s/desert.rsi
-      Snow:  _RMC14/Objects/Weapons/Guns/Snipers/m96s/snow.rsi
-      Classic:  _RMC14/Objects/Weapons/Guns/Snipers/m96s/classic.rsi
-      Urban:  _RMC14/Objects/Weapons/Guns/Snipers/m96s/urban.rsi
+      Jungle: _RMC14/Objects/Weapons/Guns/Snipers/m96s/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Snipers/m96s/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Snipers/m96s/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Snipers/m96s/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Snipers/m96s/urban.rsi
 
 - type: entity
   parent: BaseMagazineRifle

@@ -99,6 +99,10 @@ public sealed class CMDoorSystem : EntitySystem
             }
         }
 
+        var selfMsg = Loc.GetString("rmc-door-button-pressed-self", ("button", button));
+        var othersMsg = Loc.GetString("rmc-door-button-pressed-others", ("user", user), ("button", button));
+        _popup.PopupPredicted(selfMsg, othersMsg, user, user);
+
         if (_net.IsServer)
             RaiseNetworkEvent(new RMCPodDoorButtonPressedEvent(GetNetEntity(button)), Filter.PvsExcept(button));
     }

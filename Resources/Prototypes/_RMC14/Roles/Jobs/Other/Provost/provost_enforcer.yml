@@ -1,0 +1,115 @@
+﻿- type: job
+  parent: CMJobBase
+  id: CMProvostEnforcer
+  name: rmc-job-name-provost-enforcer
+  description: rmc-job-description-provost-enforcer
+  playTimeTracker: CMJobProvostEnforcer
+  ranks:
+    RMCRankProvostProvostEnforcer: []
+  startingGear: RMCGearProvostEnforcer
+  icon: RMCJobIconProvostEnforcer
+  joinNotifyCrew: false
+  accessGroups:
+  - ShipMasterAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 3
+        RMCSkillEndurance: 3
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillPolice: 2
+    - type: JobPrefix
+      prefix: rmc-job-prefix-provost-enforcer
+  hidden: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerProvostEnforcer
+  name: provost spawner enforcer
+  suffix: Spawner, Player, Given Objective
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCRandomHumanoidProvostEnforcer
+
+- type: entity
+  id: RMCRandomHumanoidProvostEnforcer
+  name: provost ghost role enforcer
+  suffix: Role, Player, Given Objective
+  components:
+  - type: Sprite
+    sprite: Markers/cross.rsi
+    state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCProvostEnforcer
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCProvostEnforcer
+  components:
+  - type: GhostRole
+    name: rmc-ghost-role-information-provost-enforcer-name
+    description: rmc-ghost-role-information-provost-enforcer-description
+    rules: ghost-role-information-nonantagonist-rules
+    raffle:
+      settings: short
+  - type: Loadout
+    prototypes: [ RMCGearProvostEnforcer ]
+  - type: Skills
+    skills:
+      RMCSkillCqc: 3
+      RMCSkillEndurance: 3
+      RMCSkillFirearms: 1
+      RMCSkillFireman: 2
+      RMCSkillMeleeWeapons: 1
+      RMCSkillPolice: 2
+
+- type: startingGear
+  id: RMCGearProvostEnforcer
+  equipment:
+    head: RMCHeadBeretProvost
+    eyes: CMGlassesSecurity
+    ears: RMCHeadsetProvost
+    jumpsuit: CMJumpsuitProvost
+    outerClothing: RMCArmorProvost
+    gloves: CMHandsBlackMarine # TODO RMC14 black gloves
+    shoes: CMBootsBlackFilled
+    suitstorage: WeaponShotgunM890
+    id: RMCIDCardProvostEnforcer
+    belt: RMCM1984BeltFilled
+    back: CMSatchelSecurityFilledProvostEnforcer
+    pocket1: RMCPouchShotgunLargeBeanbag
+    pocket2: RMCPouchShotgunLargeSlugs # TODO RMC14 riot shield
+
+- type: playTimeTracker
+  id: CMJobProvostEnforcer
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconProvostEnforcer
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_pva
+
+- type: entity
+  parent: CMIDCardGold # TODO RMC14 provost id
+  id: RMCIDCardProvostEnforcer
+  name: provost enforcer ID card
+  description: Issued to members of the Provost Office.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+  - type: PresetIdCard
+    job: CMProvostEnforcer

@@ -4,6 +4,7 @@ using Content.Shared.Roles;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Rules;
 
@@ -138,4 +139,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 
     [DataField]
     public TimeSpan RoundEndCheckDelay = TimeSpan.FromMinutes(1);
+
+    [DataField]
+    public ResPath Thunderdome = new("/Maps/_RMC14/thunderdome.yml");
 }

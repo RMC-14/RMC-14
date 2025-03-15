@@ -92,7 +92,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                         var color = CMAutomatedVendorPanel.DefaultColor;
                         var borderColor = CMAutomatedVendorPanel.DefaultBorderColor;
                         var hoverColor = CMAutomatedVendorPanel.DefaultBorderColor;
-                        if (section.TakeAll != null)
+                        if (section.TakeAll != null || section.TakeOne != null)
                         {
                             name = $"Mandatory: {name}";
                             color = Color.FromHex("#251A0C");
@@ -220,6 +220,12 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                     if (takeAll != null && takeAll.Contains((takeAllId, entry.Id)))
                         disabled = true;
                 }
+                if (section.TakeOne is { } takeOneId)
+                {
+                    var takeOne = user?.TakeOne;
+                    if (takeOne != null && takeOne.Contains(takeOneId))
+                        disabled = true;
+                }
 
                 if (entry.Points != null)
                 {
@@ -302,7 +308,14 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                 }
             }
         }
-
+        else if (section.TakeOne != null)
+        {
+            var takeOne = user?.TakeOne;
+            if (takeOne == null || !takeOne.Contains(section.TakeOne))
+            {
+                name.AddText(" (TAKE ONE)");
+            }
+        }
         else if (section.Choices is { } choices)
         {
             if (user == null)

@@ -17,6 +17,8 @@
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: entity
   parent: CMArmorM4PMC
@@ -102,6 +104,8 @@
     armor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: entity
   parent: CMArmorM4PMCSmartGunHarness

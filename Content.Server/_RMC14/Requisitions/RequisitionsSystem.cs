@@ -1,17 +1,19 @@
 ﻿using System.Numerics;
+using System.Runtime.InteropServices;
 using Content.Server.Administration.Logs;
 using Content.Server.Cargo.Components;
 using Content.Server.Chat.Systems;
 using Content.Server.Storage.EntitySystems;
 using Content.Shared._RMC14.CCVar;
-using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Requisitions;
 using Content.Shared._RMC14.Requisitions.Components;
-using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chasm;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Random.Helpers;
 using Content.Shared.UserInterface;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
@@ -19,6 +21,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using static Content.Shared._RMC14.Requisitions.Components.RequisitionsElevatorMode;
 
@@ -29,24 +32,25 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
     [Dependency] private readonly IAdminLogManager _adminLogs = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly ChasmSystem _chasm = default!;
+    [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly EntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly PhysicsSystem _physics = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     private static readonly EntProtoId AccountId = "RMCASRSAccount";
-    private const string PaperRequisitionInvoice = "RMCPaperRequisitionInvoice";
+    private static readonly EntProtoId PaperRequisitionInvoice = "RMCPaperRequisitionInvoice";
+    private static readonly EntProtoId<IFFFactionComponent> MarineFaction = "FactionMarine";
 
     private EntityQuery<ChasmComponent> _chasmQuery;
     private EntityQuery<ChasmFallingComponent> _chasmFallingQuery;
-
-    private int _starting;
     private int _gain;
+    private int _freeCratesXenoDivider;
 
     private readonly HashSet<Entity<MobStateComponent>> _toPit = new();
 
@@ -66,8 +70,8 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
             subs.Event<RequisitionsPlatformMsg>(OnPlatform);
         });
 
-        Subs.CVar(_config, RMCCVars.RMCRequisitionsStartingBalance, v => _starting = v, true);
         Subs.CVar(_config, RMCCVars.RMCRequisitionsBalanceGain, v => _gain = v, true);
+        Subs.CVar(_config, RMCCVars.RMCRequisitionsFreeCratesXenoDivider, v => _freeCratesXenoDivider = v, true);
     }
 
     private void OnComputerMapInit(Entity<RequisitionsComputerComponent> ent, ref MapInitEvent args)
@@ -172,12 +176,6 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         var newAccountComp = EnsureComp<RequisitionsAccountComponent>(newAccount);
 
         return (newAccount, newAccountComp);
-    }
-
-    private int GetElevatorCapacity(Entity<RequisitionsElevatorComponent> elevator)
-    {
-        var side = (int) MathF.Floor(elevator.Comp.Radius * 2 + 1);
-        return side * side;
     }
 
     private void UpdateRailings(Entity<RequisitionsElevatorComponent> elevator, RequisitionsRailingMode mode)
@@ -367,8 +365,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         var account = GetAccount();
         var entities = _lookup.GetEntitiesIntersecting(elevator);
         var soldAny = false;
-        var bureaucraticRewards = 0;
-        var logisticRecycleRewards = 0;
+        var rewards = 0;
         foreach (var entity in entities)
         {
             if (entity == elevator.Comp.Audio)
@@ -377,27 +374,48 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
             if (HasComp<CargoSellBlacklistComponent>(entity))
                 continue;
 
-            bureaucraticRewards += SubmitInvoices(entity);
+            rewards += SubmitInvoices(entity);
 
             if (TryComp(entity, out RequisitionsCrateComponent? crate))
             {
-                logisticRecycleRewards += crate.Reward;
+                rewards += crate.Reward;
                 soldAny = true;
             }
 
             QueueDel(entity);
         }
 
-        if (bureaucraticRewards > 0)
-            SendUIFeedback(Loc.GetString("requisition-paperwork-reward-message", ("amount", bureaucraticRewards)));
+        if (rewards > 0)
+            SendUIFeedback(Loc.GetString("requisition-paperwork-reward-message", ("amount", rewards)));
 
-        account.Comp.Balance += bureaucraticRewards;
-        account.Comp.Balance += logisticRecycleRewards;
+        account.Comp.Balance += rewards;
 
         if (soldAny)
             Dirty(account);
 
         return soldAny;
+    }
+
+    private void GetCrateWeight(Entity<RequisitionsAccountComponent> account, Dictionary<EntProtoId, float> crates, out Entity<RequisitionsComputerComponent> computer)
+    {
+        // TODO RMC14 price scaling
+        computer = default;
+        var computers = EntityQueryEnumerator<RequisitionsComputerComponent>();
+        while (computers.MoveNext(out var uid, out var comp))
+        {
+            if (comp.Account != account)
+                continue;
+
+            computer = (uid, comp);
+            foreach (var category in comp.Categories)
+            {
+                foreach (var entry in category.Entries)
+                {
+                    if (crates.ContainsKey(entry.Crate))
+                        crates[entry.Crate] = 10000f / entry.Cost;
+                }
+            }
+        }
     }
 
     public override void Update(float frameTime)
@@ -409,25 +427,6 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         var accounts = EntityQueryEnumerator<RequisitionsAccountComponent>();
         while (accounts.MoveNext(out var uid, out var account))
         {
-            if (!account.Started)
-            {
-                account.Started = true;
-                var marines = 0;
-                var marinesQuery = EntityQueryEnumerator<MarineComponent, TransformComponent>();
-                while (marinesQuery.MoveNext(out var marineId, out var xform))
-                {
-                    if (HasComp<RMCPlanetComponent>(xform.MapUid))
-                        continue;
-
-                    marines++;
-                }
-
-                account.Balance = _starting + marines * StartingDollarsPerMarine;
-                Dirty(uid, account);
-
-                updateUI = true;
-            }
-
             if (time > account.NextGain)
             {
                 account.NextGain = time + account.GainEvery;
@@ -435,6 +434,58 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
                 Dirty(uid, account);
 
                 updateUI = true;
+            }
+
+            var xenos = _xeno.GetGroundXenosAlive();
+            var randomCrates = CollectionsMarshal.AsSpan(account.RandomCrates);
+            foreach (ref var pool in randomCrates)
+            {
+                if (pool.Next == default)
+                    pool.Next = time + pool.Every;
+
+                if (pool.Next >= time)
+                    continue;
+
+                var crates = Math.Max(0, Math.Sqrt((float) xenos / _freeCratesXenoDivider));
+
+                if (crates < pool.Minimum && pool.Given < pool.MinimumFor)
+                    crates = pool.Minimum;
+
+                pool.Next = time + pool.Every;
+                pool.Given++;
+                pool.Fraction = crates - (int) crates;
+
+                if (pool.Fraction >= 1)
+                {
+                    var add = (int) pool.Fraction;
+                    pool.Fraction = pool.Fraction - add;
+                    crates += add;
+                }
+
+                if (crates < 1)
+                    continue;
+
+                var crateCosts = new Dictionary<EntProtoId, float>();
+                foreach (var choice in pool.Choices)
+                {
+                    crateCosts[choice] = 0;
+                }
+
+                if (crateCosts.Count == 0)
+                    continue;
+
+                GetCrateWeight((uid, account), crateCosts, out var computer);
+                if (computer == default)
+                    continue;
+
+                if (GetElevator(computer) is not { } elevator)
+                    continue;
+
+                for (var i = 0; i < crates; i++)
+                {
+                    var crate = _random.Pick(crateCosts);
+                    elevator.Comp.Orders.Add(new RequisitionsEntry { Crate = crate });
+                }
             }
         }
 

@@ -2,7 +2,6 @@
   parent: CMBaseWeaponRifle
   name: XM88 Heavy Rifle
   id: WeaponRifleXM88
-  suffix: Desert
   description: An experimental man-portable anti-materiel rifle chambered in .458 SOCOM. It must be manually chambered for every shot.
   components:
   - type: Sprite
@@ -27,9 +26,9 @@
     recoilUnwielded: 5
     scatterWielded: 6
     scatterUnwielded: 20
-    baseFireRate: 0.8
+    baseFireRate: 1
   - type: RMCWeaponAccuracy
-    accuracyMultiplier: 1.1
+    accuracyMultiplier: 1.25
     accuracyMultiplierUnwielded: 0.5
   - type: WieldDelay
     baseDelay: 0.4
@@ -95,6 +94,11 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/XM88/xm88-0.rsi
       state: all
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+      ballistic-ammo: !type:Container
 
 - type: entity
   parent: BulletRifle10x24mm
@@ -104,7 +108,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 104
+        Piercing: 80
   - type: CMArmorPiercing
     amount: 10
   - type: GunStacksProjectile

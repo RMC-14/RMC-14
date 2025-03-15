@@ -7,6 +7,8 @@
   components:
   - type: Transform
     anchored: true
+  - type: Physics
+    bodyType: Static
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Closets/standard.rsi
     layers:
@@ -48,6 +50,7 @@
           collection: MetalBreak
           params:
             volume: -6
+  - type: EntityStorageCloseOnMapInit
 
 - type: entity
   parent: CMClosetBase
@@ -187,4 +190,3 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Closets/acloset.rsi
-

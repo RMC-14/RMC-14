@@ -1,0 +1,30 @@
+# Camera Gear
+- type: entity
+  parent: Clothing
+  id: RMCM5CameraGear
+  name: M5 Camera Gear
+  description: A camera and associated headgear designed to allow marine commanders to see what their troops can see. A more robust version of this equipment is integrated into all standard UNMC combat helmets. Can be worn over the ear or head.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/camera_gear.rsi
+    state: icon
+  - type: Item
+    size: Normal
+    sprite: _RMC14/Objects/Clothing/Accessory/camera_gear.rsi
+  - type: Clothing
+    quickEquip: false
+    sprite: _RMC14/Objects/Clothing/Accessory/camera_gear.rsi
+    slots:
+    - EARS
+    - HEAD
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Layer:
+          True: {state: icon-on}
+          False: {state: icon}
+  - type: Appearance
+  - type: Tag
+    tags:
+    - RipOffOnInfection
+  - type: OverwatchCamera

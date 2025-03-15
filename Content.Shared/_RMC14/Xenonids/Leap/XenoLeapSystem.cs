@@ -1,17 +1,16 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Invisibility;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
-using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Pulling.Events;
@@ -116,6 +115,7 @@ public sealed class XenoLeapSystem : EntitySystem
         args.Handled = true;
 
         leaping.KnockdownRequiresInvisibility = xeno.Comp.KnockdownRequiresInvisibility;
+        leaping.DestroyObjects = xeno.Comp.DestroyObjects;
         leaping.MoveDelayTime = xeno.Comp.MoveDelayTime;
 
         if (xeno.Comp.PlasmaCost > FixedPoint2.Zero &&
@@ -208,6 +208,21 @@ public sealed class XenoLeapSystem : EntitySystem
     {
         if (xeno.Comp.KnockedDown)
             return false;
+
+        if (xeno.Comp.DestroyObjects && TryComp<XenoLeapDestroyOnPassComponent>(target, out var destroy))
+        {
+            if (_net.IsServer)
+            {
+                for (int i = 0; i < destroy.Amount; i++)
+                {
+                    if (destroy.SpawnPrototype != null)
+                        SpawnAtPosition(destroy.SpawnPrototype, target.ToCoordinates());
+                }
+                QueueDel(target);
+            }
+            _physics.SetCanCollide(target, false, force: true);
+            return false;
+        }
 
         if (!HasComp<MobStateComponent>(target) || _mobState.IsIncapacitated(target))
             return false;

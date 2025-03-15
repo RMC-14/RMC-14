@@ -1,4 +1,4 @@
-﻿using Robust.Shared.Audio;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -32,4 +32,7 @@ public sealed partial class XenoLeapingComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool KnockdownRequiresInvisibility;
+
+    [DataField, AutoNetworkedField]
+    public bool DestroyObjects;
 }

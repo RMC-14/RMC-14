@@ -1,12 +1,12 @@
-chat-radio-marine-highcommand = Marine High Command
+chat-radio-marine-highcommand = HighCom
 
 chat-radio-marine-common = Almayer
 chat-radio-marine-command = Command
-chat-radio-marine-medical = Medical
-chat-radio-marine-engineer = Engineering
-chat-radio-marine-military-police = Military Police
-chat-radio-marine-requisition = Requisition
-chat-radio-marine-intel = Intelligence
+chat-radio-marine-medical = MedSci
+chat-radio-marine-engineer = Engi
+chat-radio-marine-military-police = MP
+chat-radio-marine-requisition = Req
+chat-radio-marine-intel = Intel
 chat-radio-marine-jtac = JTAC
 
 chat-radio-marine-alpha = Alpha
@@ -19,5 +19,12 @@ chat-radio-marine-foxtrot = Foxtrot
 chat-radio-colony = Colony
 chat-radio-WY = We-Ya
 chat-radio-CMB = Colony Marshal Bureau
+chat-radio-provost = Provost
+
+chat-radio-spp-command = SPP Command
+chat-radio-spp = SPP
+chat-radio-spp-engi = SPP Engi
+chat-radio-spp-med = SPP Med
+chat-radio-spp-cct = SPP CCT
 
 chat-radio-hivemind = Hivemind

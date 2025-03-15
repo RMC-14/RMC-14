@@ -158,9 +158,10 @@ namespace Content.Server.Pointing.EntitySystems
             var mapCoordsPointed = _transform.ToMapCoordinates(coordsPointed);
             _rotateToFaceSystem.TryFaceCoordinates(player, mapCoordsPointed.Position);
 
-            var arrowEv = new RMCGetPointingArrowEvent("PointingArrow");
+            var arrowEv = new RMCSpawnPointingArrowEvent("PointingArrow", coordsPointed);
             RaiseLocalEvent(player, ref arrowEv);
-            var arrow = EntityManager.SpawnEntity(arrowEv.Arrow, coordsPointed);
+
+            var arrow = arrowEv.Spawned ?? EntityManager.SpawnEntity(arrowEv.Arrow, coordsPointed);
 
             if (TryComp<PointingArrowComponent>(arrow, out var pointing))
             {

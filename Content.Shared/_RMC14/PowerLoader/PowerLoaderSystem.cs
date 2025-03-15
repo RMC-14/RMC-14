@@ -179,6 +179,9 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
         DeleteVirtuals(ent, buckle);
+
+        if (ent.Comp.DoAfter != null && _doAfter.IsRunning(ent.Comp.DoAfter.Id))
+            _doAfter.Cancel(ent.Comp.DoAfter.Id);
     }
 
     private void OnUserActivateInWorld(Entity<PowerLoaderComponent> ent, ref UserActivateInWorldEvent args)
@@ -195,7 +198,8 @@ public sealed class PowerLoaderSystem : EntitySystem
             DuplicateCondition = DuplicateConditions.SameEvent,
         };
 
-        _doAfter.TryStartDoAfter(doAfter);
+        if (_doAfter.TryStartDoAfter(doAfter))
+            ent.Comp.DoAfter = ev.DoAfter;
     }
 
     private void OnGrabDoAfter(Entity<PowerLoaderComponent> ent, ref PowerLoaderGrabDoAfterEvent args)
@@ -246,7 +250,8 @@ public sealed class PowerLoaderSystem : EntitySystem
             DuplicateCondition = DuplicateConditions.SameEvent,
         };
 
-        _doAfter.TryStartDoAfter(doAfter);
+        if (_doAfter.TryStartDoAfter(doAfter))
+            ent.Comp.DoAfter = ev.DoAfter;
     }
 
     private void OnPointActivateInWorld(Entity<DropshipWeaponPointComponent> ent, ref ActivateInWorldEvent args)
@@ -276,7 +281,8 @@ public sealed class PowerLoaderSystem : EntitySystem
             DuplicateCondition = DuplicateConditions.SameEvent,
         };
 
-        _doAfter.TryStartDoAfter(doAfter);
+        if (_doAfter.TryStartDoAfter(doAfter))
+            loader.DoAfter = ev.DoAfter;
     }
 
     private void OnPointActivateInWorld(Entity<DropshipUtilityPointComponent> ent, ref ActivateInWorldEvent args)
@@ -306,7 +312,8 @@ public sealed class PowerLoaderSystem : EntitySystem
             DuplicateCondition = DuplicateConditions.SameEvent,
         };
 
-        _doAfter.TryStartDoAfter(doAfter);
+        if (_doAfter.TryStartDoAfter(doAfter))
+            loader.DoAfter = ev.DoAfter;
     }
 
     private void OnGrabbablePickupAttempt(Entity<PowerLoaderGrabbableComponent> ent, ref PickupAttemptEvent args)
@@ -389,9 +396,9 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         ContainerSlot? slot = null;
         if (args.BeingAttached)
-            CanAttachPopup(ref user, ent, used.Value, out slot);
+            args.CanUse = CanAttachPopup(ref user, ent, used.Value, out slot);
         else
-            CanDetachPopup(ref user, ent, out slot);
+            args.CanUse = CanDetachPopup(ref user, ent, out slot);
 
         if (slot is null)
         {
@@ -444,6 +451,8 @@ public sealed class PowerLoaderSystem : EntitySystem
         var containedEntity = EntityManager.GetEntity(args.ContainedEntity);
 
         var slot = _container.GetContainer(containerEntity, args.SlotId);
+        if (slot.ContainedEntities.Count > 0)
+            return;
         _container.Insert(containedEntity, slot);
 
         if (user.Comp != null)
@@ -477,6 +486,8 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
 
         var slot = _container.GetContainer(containerEntity, args.SlotId);
+        if (slot.ContainedEntities.Count > 0)
+            return;
         _container.Insert(containedEntity, slot);
 
         if (user.Comp != null)
@@ -584,7 +595,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         RaiseLocalEvent(target, slotEv);
         var slot = _container.EnsureContainer<ContainerSlot>(target, slotEv.SlotId);
 
-        if (slot is null)
+        if (slot is null || !slotEv.CanUse)
         {
             return;
         }
@@ -601,7 +612,8 @@ public sealed class PowerLoaderSystem : EntitySystem
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
         };
-        _doAfter.TryStartDoAfter(doAfter);
+        if (_doAfter.TryStartDoAfter(doAfter) && TryComp<PowerLoaderComponent>(args.User, out var loader))
+            loader.DoAfter = ev.DoAfter;
     }
 
     private void OnActivePilotPreventCollide(Entity<ActivePowerLoaderPilotComponent> ent, ref PreventCollideEvent args)

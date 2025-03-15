@@ -13,10 +13,13 @@
   branches:
   - tasks:
     - !type:HTNCompoundTask
-      task: RMCParasiteEgg # TODO RMC14 Eggmorpher function
+      task: RMCParasiteEgg
   - tasks:
     - !type:HTNCompoundTask
       task: RMCParasiteResinTrap
+  - tasks:
+    - !type:HTNCompoundTask
+      task: RMCParasiteEggmorpher
 
 - type: htnCompound
   id: RMCParasiteLeap
@@ -147,6 +150,34 @@
          proto: RMCNearbyResinTraps
          key: Trap
 
+- type: htnCompound
+  id: RMCParasiteEggmorpher
+  branches:
+  - tasks:
+     - !type:HTNPrimitiveTask
+       operator: !type:UtilityOperator
+         proto: RMCNearbyEggmorphers
+         key: Eggmorpher
+
+     - !type:HTNPrimitiveTask
+       preconditions:
+       - !type:KeyExistsPrecondition
+         key: Eggmorpher
+       - !type:TargetInRangePrecondition
+         targetKey: Eggmorpher
+         rangeKey: InteractRange
+       - !type:TargetInLOSPrecondition
+         targetKey: Eggmorpher
+         rangeKey: InteractRange
+       operator: !type:InteractWithOperator
+         targetKey: Eggmorpher
+
+       services:
+       - !type:UtilityService
+         id: EggmorpherService
+         proto: RMCNearbyEggmorphers
+         key: Eggmorpher
+
 - type: utilityQuery
   id: RMCNearbyLeapInfectable
   query:
@@ -207,6 +238,23 @@
     - type: XenoResinHole
   considerations:
   - !type:TargetIsEmptyResinTrapCon
+    curve: !type:BoolCurve
+  - !type:TargetDistanceCon
+    curve: !type:PresetCurve
+      preset: TargetDistance
+  - !type:TargetAccessibleCon
+    curve: !type:BoolCurve
+  - !type:TargetInLOSOrCurrentCon
+    curve: !type:BoolCurve
+
+- type: utilityQuery
+  id: RMCNearbyEggmorphers
+  query:
+  - !type:ComponentQuery
+    components:
+    - type: EggMorpher
+  considerations:
+  - !type:TargetAvailibleEggMorpherCon
     curve: !type:BoolCurve
   - !type:TargetDistanceCon
     curve: !type:PresetCurve

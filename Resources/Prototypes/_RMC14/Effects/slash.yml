@@ -1,4 +1,5 @@
 - type: entity
+  parent: RMCBaseEffect
   id: RMCEffectExtraSlash
   categories: [ HideSpawnMenu ]
   components:
@@ -15,7 +16,7 @@
     - HideContextMenu
 
 - type: entity
-  parent: WeaponArcClaw
+  parent: [WeaponArcClaw, RMCBaseEffect]
   id: RMCWeaponArcXenoClaw
   categories: [ HideSpawnMenu ]
   components:

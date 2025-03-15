@@ -3,6 +3,7 @@ using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Tools.Systems;
@@ -27,6 +28,7 @@ public sealed class SensorTowerSystem : EntitySystem
     {
         SubscribeLocalEvent<TacticalMapIncludeXenosEvent>(OnTacticalMapIncludeXenos);
 
+        SubscribeLocalEvent<SensorTowerComponent, MapInitEvent>(OnSensorTowerMapInit);
         SubscribeLocalEvent<SensorTowerComponent, InteractUsingEvent>(OnSensorTowerInteractUsing);
         SubscribeLocalEvent<SensorTowerComponent, InteractHandEvent>(OnSensorTowerInteractHand);
         SubscribeLocalEvent<SensorTowerComponent, ExaminedEvent>(OnSensorTowerExamined);
@@ -47,6 +49,11 @@ public sealed class SensorTowerSystem : EntitySystem
         }
     }
 
+    private void OnSensorTowerMapInit(Entity<SensorTowerComponent> ent, ref MapInitEvent args)
+    {
+        UpdateAppearance(ent);
+    }
+
     private void OnSensorTowerInteractUsing(Entity<SensorTowerComponent> ent, ref InteractUsingEvent args)
     {
         var user = args.User;
@@ -59,13 +66,18 @@ public sealed class SensorTowerSystem : EntitySystem
 
         var used = args.Used;
 
+        var correctQuality = ent.Comp.State switch
+        {
+            SensorTowerState.Weld => ent.Comp.WeldingQuality,
+            SensorTowerState.Wire => ent.Comp.CuttingQuality,
+            SensorTowerState.Wrench => ent.Comp.WrenchQuality,
+            _ => throw new ArgumentOutOfRangeException(),
+        };
+
         args.Handled = true;
-        if (_tool.HasQuality(used, ent.Comp.WrenchQuality))
-            TryRepair(ent, user, used, SensorTowerState.Wrench);
-        else if (_tool.HasQuality(used, ent.Comp.CuttingQuality))
-            TryRepair(ent, user, used, SensorTowerState.Wire);
-        else if (_tool.HasQuality(used, ent.Comp.WeldingQuality))
-            TryRepair(ent, user, used, SensorTowerState.Weld);
+
+        if (_tool.HasQuality(used, correctQuality))
+            TryRepair(ent, user, used, ent.Comp.State);
     }
 
     private void OnSensorTowerInteractHand(Entity<SensorTowerComponent> ent, ref InteractHandEvent args)
@@ -73,6 +85,9 @@ public sealed class SensorTowerSystem : EntitySystem
         var user = args.User;
         if (HasComp<XenoComponent>(user))
         {
+            if (!HasComp<HandsComponent>(user))
+                return;
+
             Destroy(ent, user);
             return;
         }
@@ -193,7 +208,6 @@ public sealed class SensorTowerSystem : EntitySystem
             _ => throw new ArgumentOutOfRangeException(nameof(state), state, null)
         };
 
-        delay *= _skills.GetSkillDelayMultiplier(user, tower.Comp.Skill);
         _tool.UseTool(
             used,
             user,
@@ -244,6 +258,7 @@ public sealed class SensorTowerSystem : EntitySystem
             if (!_random.Prob(tower.BreakChance))
             {
                 tower.NextBreakAt = time + tower.BreakEvery;
+                Dirty(uid, tower);
                 continue;
             }
 
@@ -251,11 +266,13 @@ public sealed class SensorTowerSystem : EntitySystem
             {
                 _popup.PopupEntity($"The {Name(uid)} beeps wildly and sprays random pieces everywhere! Use a wrench to repair it.", uid, uid, PopupType.LargeCaution);
                 tower.State = SensorTowerState.Wrench;
+                Dirty(uid, tower);
             }
             else
             {
                 _popup.PopupEntity($"The {Name(uid)} beeps wildly and a fuse blows! Use wirecutters, then a wrench to repair it.", uid, uid, PopupType.LargeCaution);
                 tower.State = SensorTowerState.Wire;
+                Dirty(uid, tower);
             }
 
             UpdateAppearance((uid, tower));

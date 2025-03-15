@@ -66,7 +66,6 @@
     - map: [ "eyes" ]
     - map: [ "belt" ]
     - map: [ "enum.HumanoidVisualLayers.Tail" ] # Mentioned in moth code: This needs renaming lol.
-    - map: [ "neck" ]
     - map: [ "back" ]
     - map: [ "id" ]
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
@@ -74,8 +73,10 @@
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
     - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
     - map: [ "mask" ]
+    - map: [ "neck" ]
     - map: [ "head" ]
     - map: [ "enum.SquadArmorLayers.Helmet" ]
+    - map: [ "enum.VisorVisualLayers.Base" ]
     - map: [ "pocket1" ]
     - map: [ "pocket2" ]
     - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
@@ -88,5 +89,9 @@
       state: "creampie_arachnid"
       visible: false
     - map: [ "acided" ]
+    - map: [ "hooked" ]
+      sprite: "_RMC14/Effects/xeno_spray_acid.rsi"
+      state: hooked
+      visible: false
     - map: [ "enum.NewPlayerLayers.Layer" ]
       visible: false

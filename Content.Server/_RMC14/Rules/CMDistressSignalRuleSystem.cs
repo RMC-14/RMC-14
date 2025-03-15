@@ -1,6 +1,8 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server._RMC14.Commendations;
 using Content.Server._RMC14.Dropship;
+using Content.Server._RMC14.MapInsert;
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Stations;
 using Content.Server._RMC14.Xenonids.Construction.Tunnel;
@@ -21,10 +23,15 @@ using Content.Server.Spawners.Components;
 using Content.Server.Spawners.EntitySystems;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
+using Content.Server.Stunnable;
 using Content.Server.Voting;
 using Content.Server.Voting.Managers;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.ARES;
+using Content.Shared._RMC14.Armor.Ghillie;
+using Content.Shared._RMC14.Armor.ThermalCloak;
 using Content.Shared._RMC14.Bioscan;
+using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Item;
@@ -37,12 +44,15 @@ using Content.Shared._RMC14.Scaling;
 using Content.Shared._RMC14.Spawners;
 using Content.Shared._RMC14.Survivor;
 using Content.Shared._RMC14.TacticalMap;
+using Content.Shared._RMC14.Thunderdome;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared._RMC14.WeedKiller;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.Actions;
 using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
@@ -56,11 +66,13 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
+using Content.Shared.StatusEffect;
 using Robust.Server.Audio;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
+using Robust.Shared.Collections;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -73,6 +85,7 @@ namespace Content.Server._RMC14.Rules;
 
 public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignalRuleComponent>
 {
+    [Dependency] private readonly ARESSystem _ares = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IBanManager _bans = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
@@ -106,6 +119,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
     [Dependency] private readonly PlayTimeTrackingSystem _playTimeTracking = default!;
     [Dependency] private readonly ScalingSystem _scaling = default!;
+    [Dependency] private readonly ShuttleSystem _shuttle = default!;
     [Dependency] private readonly StationJobsSystem _stationJobs = default!;
     [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
@@ -114,6 +128,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
     [Dependency] private readonly XenoTunnelSystem _xenoTunnel = default!;
+    [Dependency] private readonly StunSystem _stuns = default!;
+    [Dependency] private readonly RMCCameraShakeSystem _rmcCameraShake = default!;
+    [Dependency] private readonly ThermalCloakSystem _thermalCloak = default!;
+    [Dependency] private readonly SharedGhillieSuitSystem _ghillieSuit = default!;
+    [Dependency] private readonly MapInsertSystem _mapInsert = default!;
 
     private readonly HashSet<string> _operationNames = new();
     private readonly HashSet<string> _operationPrefixes = new();
@@ -130,8 +149,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private string _adminFaxAreaMap = string.Empty;
     private int _mapVoteExcludeLast;
     private bool _useCarryoverVoting;
+    private TimeSpan _hijackStunTime = TimeSpan.FromSeconds(5);
+    private bool _landingZoneMiasmaEnabled;
 
     private readonly List<MapId> _almayerMaps = [];
+    private readonly List<EntityUid> _marineList = [];
 
     private EntityQuery<HyperSleepChamberComponent> _hyperSleepChamberQuery;
     private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
@@ -184,6 +206,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         Subs.CVar(_config, RMCCVars.RMCAdminFaxAreaMap, v => _adminFaxAreaMap = v, true);
         Subs.CVar(_config, RMCCVars.RMCPlanetMapVoteExcludeLast, v => _mapVoteExcludeLast = v, true);
         Subs.CVar(_config, RMCCVars.RMCUseCarryoverVoting, v => _useCarryoverVoting = v, true);
+        Subs.CVar(_config, RMCCVars.RMCLandingZoneMiasmaEnabled, v => _landingZoneMiasmaEnabled = v, true);
 
         ReloadPrototypes();
     }
@@ -226,7 +249,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             SetCamoType();
 
             SpawnSquads((uid, comp));
-            SpawnAdminFaxArea();
+            SpawnAdminAreas(comp);
 
             var bioscan = Spawn(null, MapCoordinates.Nullspace);
             EnsureComp<BioscanComponent>(bioscan);
@@ -325,6 +348,18 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 _roles.MindAddJobRole(mind.Value, jobPrototype: comp.SurvivorJob);
 
                 _playTimeTracking.PlayerRolesChanged(player);
+
+                var spawnEv = new PlayerSpawnCompleteEvent(
+                    survivorMob,
+                    player,
+                    comp.SurvivorJob,
+                    false,
+                    true,
+                    0,
+                    default,
+                    profile
+                );
+                RaiseLocalEvent(survivorMob, spawnEv, true);
                 return playerId;
             }
 
@@ -559,7 +594,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         foreach (var id in rule.Comp.ExtraSquadIds)
         {
-            // Spawn(id);
+            Spawn(id);
         }
     }
 
@@ -708,6 +743,21 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             _audio.PlayGlobal(rule.HijackSong, Filter.Broadcast(), true);
             break;
         }
+
+        var didCameraShake = false;
+        var warshipQuery = EntityQueryEnumerator<AlmayerComponent, TransformComponent>();
+        while (warshipQuery.MoveNext(out var uid, out _, out var xform)) // Stun everyone on the Almayer
+        {
+            if (!didCameraShake)
+            {
+                var map = _transform.GetMapId(uid);
+                var sameMap = Filter.BroadcastMap(map);
+                _rmcCameraShake.ShakeCamera(sameMap, 10, 2);
+                didCameraShake = true;
+            }
+
+            StunAllMarinesOnAlmayer(xform);
+        }
     }
 
     private void OnMobStateChanged<T>(Entity<T> ent, ref MobStateChangedEvent args) where T : IComponent?
@@ -825,6 +875,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (!xeno.ContributesToVictory)
                     continue;
 
+                if (HasComp<ThunderdomeMapComponent>(xform.MapUid))
+                    continue;
+
                 if (_mobState.IsAlive(xenoId, mobState) &&
                     (distress.AbandonedAt == null ||
                      time < distress.AbandonedAt ||
@@ -840,6 +893,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             var marines = EntityQueryEnumerator<ActorComponent, MarineComponent, MobStateComponent, TransformComponent>();
             var marinesAlive = false;
+            _marineList.Clear();
             while (marines.MoveNext(out var marineId, out _, out _, out var mobState, out var xform))
             {
                 if (HasComp<VictimInfectedComponent>(marineId) ||
@@ -852,6 +906,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (_containers.IsEntityInContainer(marineId))
                     continue;
 
+                if (HasComp<ThunderdomeMapComponent>(xform.MapUid))
+                    continue;
+
                 if (_mobState.IsAlive(marineId, mobState) &&
                     (distress.AbandonedAt == null ||
                      time < distress.AbandonedAt ||
@@ -859,9 +916,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                      _almayerMaps.Contains(xform.MapID)))
                 {
                     marinesAlive = true;
+                    _marineList.Add(marineId);
                 }
 
-                if (marinesAlive)
+                if (marinesAlive && _marineList.Count > 1)
                     break;
             }
 
@@ -890,6 +948,42 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             {
                 EndRound(distress, DistressSignalRuleResult.AllDied);
                 continue;
+            }
+
+            if (_marineList.Count == 1)
+            {
+                // TODO add ghost alert for last human
+                var lastMarine = _marineList.Last();
+
+                var cloaks = EntityQueryEnumerator<ThermalCloakComponent>();
+                while (cloaks.MoveNext(out var cloakId, out var cloak))
+                {
+                    if (!cloak.Enabled)
+                        continue;
+
+                    _thermalCloak.SetInvisibility((cloakId, cloak), lastMarine, false, true);
+                    if (TryComp<InstantActionComponent>(cloak.Action, out var action))
+                    {
+                        action.Cooldown = (Timing.CurTime, Timing.CurTime + TimeSpan.FromHours(2)); // FUCK YOU
+                        action.UseDelay = TimeSpan.FromHours(2);
+                        Dirty(cloak.Action.Value, action);
+                    }
+                }
+
+                var ghillies = EntityQueryEnumerator<GhillieSuitComponent>();
+                while (ghillies.MoveNext(out var ghillieId, out var ghillie))
+                {
+                    if (!ghillie.Enabled)
+                        continue;
+
+                    _ghillieSuit.ToggleInvisibility((ghillieId, ghillie), lastMarine, false);
+                    if (TryComp<InstantActionComponent>(ghillie.Action, out var action))
+                    {
+                        action.Cooldown = (Timing.CurTime, Timing.CurTime + TimeSpan.FromHours(2)); // FUCK YOU
+                        action.UseDelay = TimeSpan.FromHours(2);
+                        Dirty(ghillie.Action.Value, action);
+                    }
+                }
             }
 
             if (_xenoEvolution.HasLiving<XenoEvolutionGranterComponent>(1))
@@ -942,10 +1036,19 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         rule.Comp.XenoMap = grids[0];
 
+        //Process map inserts
+        var mapInsertQuery = EntityQueryEnumerator<MapInsertComponent>();
+        while (mapInsertQuery.MoveNext(out var uid, out var mapInsert))
+        {
+            _mapInsert.ProcessMapInsert((uid, mapInsert));
+        }
+
         _mapManager.SetMapPaused(mapId, false);
 
         // TODO RMC14 this should be delayed by 3 minutes + 13 second warning for immersion
-        if (rule.Comp.LandingZoneGas is { } gas && TryComp(rule.Comp.XenoMap, out AreaGridComponent? areaGrid))
+        if (_landingZoneMiasmaEnabled &&
+            rule.Comp.LandingZoneGas is { } gas &&
+            TryComp(rule.Comp.XenoMap, out AreaGridComponent? areaGrid))
         {
             foreach (var (indices, areaProto) in areaGrid.Areas)
             {
@@ -956,6 +1059,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     Spawn(gas, coordinates);
                 }
             }
+        }
+
+        var tunnels = EntityQueryEnumerator<XenoTunnelComponent>();
+        while (tunnels.MoveNext(out var uid, out _))
+        {
+            EnsureComp<DeletedByWeedKillerComponent>(uid);
         }
 
         return true;
@@ -1357,23 +1466,36 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     }
 
     // TODO RMC14 this would be literally anywhere else if the code for loading maps wasn't dogshit and broken upstream
-    private void SpawnAdminFaxArea()
+    private void SpawnAdminAreas(CMDistressSignalRuleComponent comp)
     {
-        try
+        bool SpawnMap(ResPath path, [NotNullWhen(true)] out EntityUid? mapEnt)
         {
-            if (string.IsNullOrWhiteSpace(_adminFaxAreaMap))
-                return;
+            mapEnt = default;
 
-            var mapId = _mapManager.CreateMap();
-            if (!_mapLoader.TryLoad(mapId, _adminFaxAreaMap, out _))
-                return;
+            try
+            {
+                if (string.IsNullOrWhiteSpace(path.ToString()))
+                    return false;
 
-            _mapManager.SetMapPaused(mapId, false);
+                var mapId = _mapManager.CreateMap();
+                if (!_mapLoader.TryLoad(mapId, path.ToString(), out _))
+                    return false;
+
+                _mapManager.SetMapPaused(mapId, false);
+                _mapSystem.TryGetMap(mapId, out mapEnt);
+                return mapEnt != null;
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Error loading admin fax area:\n{e}");
+            }
+
+            return false;
         }
-        catch (Exception e)
-        {
-            Log.Error($"Error loading admin fax area:\n{e}");
-        }
+
+        SpawnMap(new ResPath(_adminFaxAreaMap), out _);
+        if (SpawnMap(comp.Thunderdome, out var mapEnt))
+            EnsureComp<ThunderdomeMapComponent>(mapEnt.Value);
     }
 
     private void EndRound(CMDistressSignalRuleComponent rule, DistressSignalRuleResult result)
@@ -1398,15 +1520,14 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         switch (rule.Result)
         {
             case DistressSignalRuleResult.MajorMarineVictory:
-                var ent = Spawn();
-                _metaData.SetEntityName(ent, "ARES v3.2");
-                _marineAnnounce.AnnounceRadio(ent,
+                var ares = _ares.EnsureARES();
+                _marineAnnounce.AnnounceRadio(ares,
                     "Bioscan complete. No unknown lifeform signature detected.",
                     rule.AllClearChannel);
-                _marineAnnounce.AnnounceRadio(ent,
+                _marineAnnounce.AnnounceRadio(ares,
                     "Saving operational report to archive.",
                     rule.AllClearChannel);
-                _marineAnnounce.AnnounceRadio(ent,
+                _marineAnnounce.AnnounceRadio(ares,
                     "Commencing final systems scan in 3 minutes.",
                     rule.AllClearChannel);
                 rule.EndAtAllClear ??= Timing.CurTime + rule.AllClearEndDelay;
@@ -1441,6 +1562,40 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         {
             _xenoTunnel.TryPlaceTunnel(hive, null, tunnel.ToCoordinates(), out _);
             QueueDel(tunnel);
+        }
+    }
+
+    /// <summary>
+    /// Stuns all marines on the Almayer.
+    /// </summary>
+    private void StunAllMarinesOnAlmayer(TransformComponent xform)
+    {
+        // Get enumeration exceptions from people dropping things if we just paralyze as we go
+        var toKnock = new ValueList<EntityUid>();
+        GetMarinesOnAlmayer(xform, ref toKnock);
+
+        foreach (var child in toKnock)
+        {
+            if (!TryComp<StatusEffectsComponent>(child, out var status))
+                continue;
+
+            _stuns.TryParalyze(child, _hijackStunTime, true, status);
+        }
+    }
+
+    /// <summary>
+    /// Gets all marines on the Almayer.
+    /// </summary>
+    private void GetMarinesOnAlmayer(TransformComponent xform, ref ValueList<EntityUid> reference)
+    {
+        // Not recursive because probably not necessary? If we need it to be that's why this method is separate.
+        var childEnumerator = xform.ChildEnumerator;
+        while (childEnumerator.MoveNext(out var child))
+        {
+            if (HasComp<XenoComponent>(child))
+                continue;
+
+            reference.Add(child);
         }
     }
 }

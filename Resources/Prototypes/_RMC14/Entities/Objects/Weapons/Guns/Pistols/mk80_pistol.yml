@@ -1,6 +1,6 @@
 ﻿- type: entity
   parent: CMWeaponPistolBase
-  id: CMWeaponPistolMK80
+  id: RMCMK80
   name: MK80 pistol
   description: A massive, formidable semi-automatic handgun chambered in 9mm squash-head rounds. A common sight throughout both UN and TSE space, often held by both We-Ya PMC units and corporate executives. This weapon is also undergoing limited field testing as part of the Marines' next generation pistol program. The slide is engraved with the We-Ya logo reminding you who's really in charge.
   components:
@@ -31,7 +31,7 @@
     burstScatterMult: 4
     modifiers:
       Burst:
-        fireDelay: 0.1665
+        fireDelay: 0.08 # For some reason the intended value of 0.1665 is too slow because it has a burst cooldown
         maxScatterModifier: 10
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2

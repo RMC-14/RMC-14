@@ -2,7 +2,7 @@
   parent: [ BaseItem, RMCPowerCellSlotUnremovableSuper ]
   id: RMCVisorNightVision
   name: night vision optic
-  description: An insertable visor HUD into a standard UNMC helmet. This type gives a form of night vision and is standard issue in units with regular funding.
+  description: An insertable visor HUD into a standard UNMC helmet. This type gives a form of night vision and is standard issue in units with regular funding. It can be inserted into a recharger to recharge its internal battery.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
@@ -11,6 +11,9 @@
     size: Tiny
   - type: PowerCellDraw
     enabled: false
-    useRate: 33
+    drawRate: 33
   - type: Visor
+    toggledSprite:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/huds.rsi
+      state: nvg_sight_right
   - type: NightVisionVisor

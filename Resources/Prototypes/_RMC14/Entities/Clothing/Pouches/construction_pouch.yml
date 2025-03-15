@@ -1,0 +1,46 @@
+﻿- type: entity
+  parent: [RMCPouchOpenClosed, RMCPouchStorage]
+  id: RMCPouchConstruction
+  name: construction pouch
+  description: It's designed to hold construction materials - glass/metal sheets, metal rods, barbed wire, cable coil, and empty sandbags. It also has two hooks for an entrenching tool and light replacer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/construction.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,5,1 #3 slots
+    whitelist:
+      tags:
+      - Sheet
+      - RodMetal1
+      - CableCoil
+      components:
+      - BarbedWire
+      - FloorTile
+      - EntrenchingTool
+      - EmptySandbag
+      - LightReplacer
+  - type: FixedItemSizeStorage
+
+- type: entity
+  parent: RMCPouchConstruction
+  id: RMCPouchConstructionFillLowGrade
+  suffix: Low grade full
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetPlasteel30
+    - id: CMSheetMetal50
+    - id: BarbedWire15
+
+- type: entity
+  parent: RMCPouchConstruction
+  id: RMCPouchConstructionFillFull
+  suffix: Full
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetPlasteel50
+    - id: CMSheetMetal50
+    - id: CMSandbagEmpty50

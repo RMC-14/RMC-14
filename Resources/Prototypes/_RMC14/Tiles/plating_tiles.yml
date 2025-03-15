@@ -60,3 +60,8 @@
   parent: CMFloorStripedBase
   id: CMFloorPlatingBotCyan
   sprite: /Textures/_RMC14/Tiles/floors/platebotc.png
+
+- type: tile
+  parent: CMFloorStripedBase
+  id: CMFloorPlatingWarnplate
+  sprite: /Textures/_RMC14/Tiles/floors/warnplate_singular.png
