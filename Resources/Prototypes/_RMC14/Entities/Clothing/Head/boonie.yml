@@ -6,12 +6,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/boonie/jungle.rsi
-    layers:
-    - state: equipped-HELMET
-      map: [ "unfoldedLayer" ]
-    - state: flipped-equipped-HELMET
-      map: ["foldedLayer"]
-      visible: false
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/boonie/jungle.rsi
   - type: Foldable
