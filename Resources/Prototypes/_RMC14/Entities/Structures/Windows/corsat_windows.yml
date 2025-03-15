@@ -69,7 +69,7 @@
 
 - type: entity
   parent: CMBaseWindow
-  id: RMCWindowCorsatHullResearch
+  id: RMCWindowCorsatResearchHull
   name: hull window
   description: A glass window. Something tells you this one is somehow indestructible.
   components:
