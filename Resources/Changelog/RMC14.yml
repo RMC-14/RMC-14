@@ -1,16 +1,6 @@
 ﻿Entries:
 - author: Sigil
   changes:
-  - message: Fixed The MOU and the M42A2 having burst fire.
-    type: Fix
-  - message: The sawn-off double-barrel shotgun now has a 2-round burst, same as the
-      normal double-barrel shotgun.
-    type: Fix
-  id: 962
-  time: '2024-11-09T05:21:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4777
-- author: Sigil
-  changes:
   - message: You can now extract grenades from the UGL even when it's not attached
       to a gun.
     type: Fix
@@ -5285,5 +5275,14 @@
   id: 1464
   time: '2025-03-15T10:57:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5892
+- author: CyberTropic
+  changes:
+  - message: 'Atmospherics update: added atmospherics props!'
+    type: Add
+  - message: Shrank washing machine hitbox.
+    type: Fix
+  id: 1465
+  time: '2025-03-15T19:21:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5904
 Name: RMC14
 Order: -1
