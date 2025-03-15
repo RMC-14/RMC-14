@@ -8,20 +8,12 @@
   },
   "states": [
     {
-      "name": "booniehat",
-      "directions": 4
+        "name": "equipped-HELMET",
+        "directions": 4
     },
     {
-      "name": "booniehat_b",
-      "directions": 4
-    },
-    {
-      "name": "booniehattan",
-      "directions": 4
-    },
-    {
-      "name": "booniehattan_b",
-      "directions": 4
+        "name": "flipped-equipped-HELMET",
+        "directions": 4
     }
   ]
 }
