@@ -115,7 +115,9 @@
   components:
   - type: SquadTeam
     color: "#053818"
-    hasSquadArmor: false
+    blacklistedSquadArmor:
+    - Helmet
+    - Armor
     radio: MarineIntel
     minimapBackground:
      sprite: _RMC14/Interface/map_blips.rsi

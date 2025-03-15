@@ -17,5 +17,5 @@ public sealed partial class SquadMemberComponent : Component
     public Color BackgroundColor;
 
     [DataField, AutoNetworkedField]
-    public bool HasSquadArmor = true;
+    public List<SquadArmorLayers> BlacklistedSquadArmor = new();
 }

@@ -44,7 +44,7 @@ public sealed partial class SquadTeamComponent : Component
     public bool CanSupplyDrop = true;
 
     [DataField]
-    public bool HasSquadArmor = true;
+    public List<SquadArmorLayers> BlacklistedSquadArmor = new();
 
     [DataField]
     [Access(typeof(SquadLeaderTrackerSystem))]
