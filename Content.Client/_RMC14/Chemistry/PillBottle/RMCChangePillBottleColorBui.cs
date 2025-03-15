@@ -39,7 +39,7 @@ public class RMCChangePillBottleColorBui : BoundUserInterface
         var newSelectedColor = (PillbottleColor)args.ItemList[args.ItemIndex].Metadata!;
         Logger.GetSawmill("loader").Debug($"bottle2 {newSelectedColor} from ${Owner}");
 
-        if (newSelectedColor is var newColor)
+        if (newSelectedColor is { } newColor)
         {
             ChangeColor(newColor);
             Close();

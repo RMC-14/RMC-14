@@ -43,10 +43,19 @@ public sealed class RMCIconLabelsSystem : SharedRMCIconLabelSystem
         Color.TryFromName(iconLabel.TextColor, out var textColor);
 
         var charArray = ToLabelShortForm(msg, iconLabel.LabelMaxSize).ToCharArray();
-        var iconLabelPosition = new Vector2(iconPosition.X + scale * iconLabel.StoredOffset.X,
-            iconPosition.Y + scale * iconLabel.StoredOffset.Y);
+
+        if (charArray.Length == 0)
+            return;
 
         var textSize = iconLabel.TextSize;
+
+        int thirdCharOffset = charArray.Length > 2
+            ? (_font.GetCharMetrics(new System.Text.Rune(charArray[2]), textSize * scale)?.Advance ?? 0)
+            : 0;
+
+        var iconLabelPosition = new Vector2(iconPosition.X + scale * iconLabel.StoredOffset.X - thirdCharOffset,
+            iconPosition.Y + scale * iconLabel.StoredOffset.Y);
+
 
         float sep = 0;
         foreach (var chr in charArray)
