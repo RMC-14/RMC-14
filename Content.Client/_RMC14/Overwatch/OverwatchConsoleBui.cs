@@ -87,12 +87,36 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
             Window.SquadsContainer.AddChild(panel);
         }
 
+        var roleSorting = new Dictionary<ProtoId<JobPrototype>, int>();
         var activeSquad = GetActiveSquad();
         var margin = new Thickness(2);
         foreach (var squad in s.Squads)
         {
             if (!s.Marines.TryGetValue(squad.Id, out var marines))
                 continue;
+
+            marines.Sort((a, b) =>
+            {
+                int Sorting(OverwatchMarine marine)
+                {
+                    if (marine.Role is not { } role)
+                        return 0;
+
+                    if (roleSorting.TryGetValue(role, out var sort))
+                        return sort;
+
+                    if (!_prototypes.TryIndex(role, out var roleProto) ||
+                        roleProto.OverwatchSortPriority is not { } prio)
+                    {
+                        return 0;
+                    }
+
+                    roleSorting[role] = prio;
+                    return prio;
+                }
+
+                return Sorting(a).CompareTo(Sorting(b));
+            });
 
             if (_squadViews.TryGetValue(squad.Id, out var monitor))
             {
