@@ -36,3 +36,38 @@
   color: "#DD9B00"
   intensity: 30
   duration: 20
+
+- type: reagent #Deathsquad Flamer
+  parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCNapalmEX
+  name: reagent-name-rmcnapalx
+  desc: reagent-desc-rmcnapalx
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#641DD6"
+  intensity: 40
+  duration: 40
+# missing ignoring fire shield on xenos
+
+- type: reagent #Blue Flame
+  parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCNapalmX
+  name: reagent-name-rmcnapalex
+  desc: reagent-desc-rmcnapalex
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#00B8FF"
+  intensity: 40
+  duration: 40
+
+- type: reagent #Green Flame
+  parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCNapalmB
+  name: reagent-name-rmcnapalb
+  desc: reagent-desc-rmcnapalb
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#069420"
+  intensity: 15
+  duration: 50
+#Halves the Armor

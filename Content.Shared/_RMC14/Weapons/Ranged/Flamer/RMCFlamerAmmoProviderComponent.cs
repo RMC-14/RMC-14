@@ -25,8 +25,8 @@ public sealed partial class RMCFlamerAmmoProviderComponent : Component, IShootab
     public EntProtoId Spawn = "RMCTileFire";
 
     [DataField, AutoNetworkedField]
-    public int MaxIntensity = 20;
+    public int MaxIntensity = 42;
 
     [DataField, AutoNetworkedField]
-    public int MaxDuration = 24;
+    public int MaxDuration = 42;
 }

@@ -124,6 +124,126 @@
   - type: Appearance
 
 - type: entity
+  parent: BaseItem
+  id: RMCTankFlamerNapalmEX
+  name: incinerator tank [NapalmEX]
+  description: A fuel tank used to store fuel for use in the M34 incinerator unit. Handle with care.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/flamethrower.rsi
+    state: flametank_custom
+    layers:
+    - state: flametank_custom
+    - state: flametank_custom_strip0
+      map: [ "enum.SolutionContainerLayers.Fill" ]
+  - type: Item
+    size: Normal
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 100
+        reagents:
+        - ReagentId: RMCNapalmEX
+          Quantity: 100
+  - type: RMCFlamerTank
+  - type: RMCSolutionTransferWhitelist
+    popup: rmc-solution-transfer-whitelist-failed-not-reagent-tank
+    targetWhitelist:
+      tags:
+      - RMCTankReagent
+      - RMCBackpackFlamer
+  - type: RefillableSolution
+    solution: rmc_flamer_tank
+  - type: DetailedExaminableSolution
+    solution: rmc_flamer_tank
+  - type: NoMixingReagents
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    emptySpriteName: flametank_custom_strip0
+    fillBaseName: flametank_custom_strip
+  - type: Appearance
+
+- type: entity
+  parent: BaseItem
+  id: RMCTankFlamerNapalmB
+  name: incinerator tank [NapalmB]
+  description: A fuel tank used to store fuel for use in the M34 incinerator unit. Handle with care.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/flamethrower.rsi
+    state: flametank_custom
+    layers:
+    - state: flametank_custom
+    - state: flametank_custom_strip0
+      map: [ "enum.SolutionContainerLayers.Fill" ]
+  - type: Item
+    size: Normal
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 100
+        reagents:
+        - ReagentId: RMCNapalmB
+          Quantity: 100
+  - type: RMCFlamerTank
+  - type: RMCSolutionTransferWhitelist
+    popup: rmc-solution-transfer-whitelist-failed-not-reagent-tank
+    targetWhitelist:
+      tags:
+      - RMCTankReagent
+      - RMCBackpackFlamer
+  - type: RefillableSolution
+    solution: rmc_flamer_tank
+  - type: DetailedExaminableSolution
+    solution: rmc_flamer_tank
+  - type: NoMixingReagents
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    emptySpriteName: flametank_custom_strip0
+    fillBaseName: flametank_custom_strip
+  - type: Appearance
+
+- type: entity
+  parent: BaseItem
+  id: RMCTankFlamerNapalmX
+  name: incinerator tank [NapalmX]
+  description: A fuel tank used to store fuel for use in the M34 incinerator unit. Handle with care.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/flamethrower.rsi
+    state: flametank_custom
+    layers:
+    - state: flametank_custom
+    - state: flametank_custom_strip0
+      map: [ "enum.SolutionContainerLayers.Fill" ]
+  - type: Item
+    size: Normal
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 100
+        reagents:
+        - ReagentId: RMCNapalmX
+          Quantity: 100
+  - type: RMCFlamerTank
+  - type: RMCSolutionTransferWhitelist
+    popup: rmc-solution-transfer-whitelist-failed-not-reagent-tank
+    targetWhitelist:
+      tags:
+      - RMCTankReagent
+      - RMCBackpackFlamer
+  - type: RefillableSolution
+    solution: rmc_flamer_tank
+  - type: DetailedExaminableSolution
+    solution: rmc_flamer_tank
+  - type: NoMixingReagents
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    emptySpriteName: flametank_custom_strip0
+    fillBaseName: flametank_custom_strip
+  - type: Appearance
+
+- type: entity
   parent: RMCGunCaseBase
   id: RMCCaseFlamer
   name: M34 incinerator case
