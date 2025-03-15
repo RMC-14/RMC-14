@@ -1,9 +1,9 @@
-﻿- type: entity
+- type: entity
   id: HiveCoreXeno
   parent: BaseHiveStructure
-  name: hive core # TODO RMC14 allow other structures to be built
+  name: hive core
   description: A giant pulsating mound of mass. It looks very much alive.
-  components: # TODO RMC14 block ob
+  components:
   - type: Transform
     anchored: true
   - type: Physics
@@ -27,7 +27,10 @@
     enabled: false
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/hive_structures.rsi
-    state: core
+    layers:
+     - sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
+       state: hive_weed0
+     - state: core
   - type: Destructible
     thresholds:
     - trigger:
@@ -36,6 +39,13 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: RepairableXenoStructure
+    plasmaCost: 1000
+    repairLength: 15
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 300
   - type: StepTrigger
     requiredTriggeredSpeed: 0
     intersectRatio: 0.1
@@ -44,7 +54,7 @@
   - type: XenoWeedsSpreading
   - type: XenoWeeds
     range: 7
-    spawns: XenoHiveWeeds
+    spawns: XenoHiveWeedsCore
     level: 3
     blockOtherWeeds: true
   - type: GhostRole
@@ -78,9 +88,13 @@
   suffix: Construction
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Xenos/hive_structures.rsi
-    state: core
     color: '#FFFFFFAA'
+    layers:
+    - sprite: _RMC14/Structures/Xenos/hive_structures.rsi
+      state: core
+    - sprite: _RMC14/Interface/xeno_hud.rsi
+      state: xeno_structure_node_indicator
+      scale: 0.8, 0.8
   - type: Destructible
     thresholds:
     - trigger:
@@ -107,7 +121,10 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/hive_structures.rsi
-    state: pylon
+    layers:
+     - sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
+       state: hive_weed0
+     - state: pylon
   - type: Destructible
     thresholds:
     - trigger:
@@ -116,11 +133,21 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: RepairableXenoStructure
+    plasmaCost: 1000
+    repairLength: 15
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 25
   - type: HivePylon
   - type: XenoWeedsSpreading
-  - type: XenoWeeds
+  - type: RoofingEntity
     range: 7
-    spawns: XenoHiveWeeds
+    canOrbitalBombard: true
+  - type: XenoWeeds
+    range: 5
+    spawns: XenoHiveWeedsCluster
     level: 3
     blockOtherWeeds: true
   - type: GhostRole

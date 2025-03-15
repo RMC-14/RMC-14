@@ -47,6 +47,7 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Medical skill" Text="Allows more advanced medical procedures and increases their overall speed" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno Queen" Text="Head caste of the xenonids" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="LV-759 Hybrisa Prospera planet" Text="A large city map from cmss13 by Zenith, mikoka wei, Drathek, Nanu, Cuberound, Almings, Crowford, Blundir, dimdimich1996, being ported to RMC-14 by Noctyrn." />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Oppressor Praetorian strain" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Ravager" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Marine squad orders" Text="The move, focus and hold orders. These are orders that specific marine roles can use to give a temporary buff to every marine around them" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Weapon attachments" Text="Each weapon will be able to be customized with different attachments, changing the weapon's stats" />
@@ -90,7 +91,6 @@
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Eggsac Carrier strain" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Vampire Lurker strain" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Charger Crusher strain" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Oppressor Praetorian strain" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Trapper Boiler strain" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Berserker Ravager strain" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Hedgehog Ravager strain" />

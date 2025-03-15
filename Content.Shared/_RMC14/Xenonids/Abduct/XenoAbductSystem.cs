@@ -123,7 +123,7 @@ public sealed partial class XenoAbductSystem : EntitySystem
         foreach (var tile in xeno.Comp.Tiles)
         {
             abductEnts.Clear();
-            _lookup.GetEntitiesInRange(tile.ToCoordinates(), 0.5f, abductEnts);
+            _lookup.GetEntitiesInRange(tile.ToCoordinates(), xeno.Comp.TileRadius, abductEnts);
 
             foreach (var ent in abductEnts)
             {

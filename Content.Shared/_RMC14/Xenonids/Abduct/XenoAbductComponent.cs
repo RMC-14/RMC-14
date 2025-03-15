@@ -44,4 +44,7 @@ public sealed partial class XenoAbductComponent : Component
 
     [DataField, AutoNetworkedField]
     public int MaxTargets = 10;
+
+    [DataField, AutoNetworkedField]
+    public float TileRadius = 0.4f;
 }

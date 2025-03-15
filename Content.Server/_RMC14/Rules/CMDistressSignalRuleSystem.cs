@@ -46,6 +46,7 @@ using Content.Shared._RMC14.Survivor;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Thunderdome;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared._RMC14.WeedKiller;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
@@ -776,13 +777,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private void OnMapInit(Entity<XenoEvolutionGranterComponent> ent, ref MapInitEvent args)
     {
         CheckRoundShouldEnd();
-        var hive = _hive.GetHive(ent.Owner);
-        if (hive is null)
-        {
-            return;
-        }
-
-        _hive.SetHiveQueen(ent.Owner, hive.Value);
     }
 
     private void ReloadPrototypes()
@@ -1065,6 +1059,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     Spawn(gas, coordinates);
                 }
             }
+        }
+
+        var tunnels = EntityQueryEnumerator<XenoTunnelComponent>();
+        while (tunnels.MoveNext(out var uid, out _))
+        {
+            EnsureComp<DeletedByWeedKillerComponent>(uid);
         }
 
         return true;

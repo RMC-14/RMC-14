@@ -105,6 +105,8 @@
         amount: 2
       - id: CMWebbingKnivesFilled
         amount: 1
+      - id: RMCOuterClothingExternalWebbing
+        amount: 2
     - name: Backpacks
       entries:
       - id: CMBackpackMarine
@@ -342,8 +344,8 @@
         amount: 16 # TODO RMC14 6 once heavy is in
       #- id: M4A3 HP Magazine (9mm)
       #  amount: 2
-      #- id: M54CE2 Holo Target Rounds (10x24mm)
-      #  amount: 2
+      - id: CMMagazineRifleM54CE2HT
+        amount: 2
       - id: RMCBox458SOCOM
         amount: 4
     - name: Restricted firearm ammunition

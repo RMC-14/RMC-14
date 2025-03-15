@@ -460,6 +460,20 @@
     state: flashlightbox
   objectType: Item
 
+- type: construction
+  parent: RMC
+  name: Supply Box (High-Capacity Power Cells)
+  id: RMCBoxMagazinePowerCellsHigh
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazinePowerCellsHigh
+  category: construction-category-cm-box-magazine
+  description: A box of High-Capacity Power Cells to keep your electronics going all night long!
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    state: batterybox
+  objectType: Item
+
 # Construct graphs
 - type: constructionGraph
   parent: RMC
@@ -660,6 +674,11 @@
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 0.25
+    - to: RMCBoxMagazinePowerCellsHigh
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
 
   # Why the fuck do you even need these nodes???
 
@@ -752,3 +771,5 @@
     entity: RMCBoxPackFlareCASEmpty
   - node: RMCBoxFlashlightsEmpty
     entity: RMCBoxFlashlightsEmpty
+  - node: RMCBoxMagazinePowerCellsHigh
+    entity: RMCBoxMagazinePowerCellsHigh
