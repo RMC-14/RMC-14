@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: BackeTako
   changes:
-  - message: Fixed doors looking bright when emergency access is on.
-    type: Fix
-  id: 948
-  time: '2024-11-08T04:38:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4736
-- author: BackeTako
-  changes:
   - message: Fixed MedKit inhand sprite inconsistencies
     type: Fix
   id: 949
@@ -5220,5 +5213,12 @@
   id: 1449
   time: '2025-03-13T19:24:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5879
+- author: DummeHytteOst
+  changes:
+  - message: Fixed healer appearing twice in the drone evolution menu.
+    type: Fix
+  id: 1450
+  time: '2025-03-15T07:14:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5888
 Name: RMC14
 Order: -1
