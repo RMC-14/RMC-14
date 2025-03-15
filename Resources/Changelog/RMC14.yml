@@ -1,36 +1,4 @@
 ﻿Entries:
-- author: PursuitInAshes
-  changes:
-  - message: 'The SEA vendors have been updated to include new items and equipment:
-      Service Jackets, reddot sight.'
-    type: Tweak
-  id: 950
-  time: '2024-11-08T05:22:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4634
-- author: crystalHex
-  changes:
-  - message: Added the shoulder holster.
-    type: Add
-  id: 951
-  time: '2024-11-08T05:31:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3623
-- author: CyberTropic
-  changes:
-  - message: Added sand edges for New Varadero sand
-    type: Add
-  id: 952
-  time: '2024-11-08T06:14:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4683
-- author: blueDev2
-  changes:
-  - message: ChemMaster labeled pill bottles now show label icons IF the label is
-      2 or less characters long
-    type: Add
-  - message: Pill bottles can be recolored via the ChemMaster via the Output tab
-    type: Add
-  id: 953
-  time: '2024-11-08T06:33:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4645
 - author: Aurallianz
   changes:
   - message: Lifeboats doors
@@ -5223,5 +5191,39 @@
   id: 1451
   time: '2025-03-15T07:17:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5887
+- author: OmerF-afk
+  changes:
+  - message: Added SnapGridBorder and other placement modes to prop_vehicles2 by removing
+      anchor
+    type: Add
+  id: 1452
+  time: '2025-03-15T07:21:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5882
+- author: Vermidia
+  changes:
+  - message: Fixed hive core weeds not spreading far enough, and cluster/pylon weeds
+      spreading too far (by 1 tile each).
+    type: Fix
+  - message: Fixed hive cluster not having CAS and Mortar protection
+    type: Fix
+  id: 1453
+  time: '2025-03-15T07:21:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5865
+- author: CyberTropic
+  changes:
+  - message: Added many missing entities to Kutjevo.
+    type: Add
+  - message: Added Kutjevo clothing.
+    type: Add
+  id: 1454
+  time: '2025-03-15T07:19:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5881
+- author: Vermidia
+  changes:
+  - message: Fixed burrowers map icon being t1 colored.
+    type: Fix
+  id: 1455
+  time: '2025-03-15T07:20:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5819
 Name: RMC14
 Order: -1
