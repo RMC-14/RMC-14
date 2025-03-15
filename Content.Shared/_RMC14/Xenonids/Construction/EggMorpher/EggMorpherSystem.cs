@@ -16,12 +16,7 @@ using Content.Shared.Verbs;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
 
@@ -37,6 +32,7 @@ public sealed partial class EggMorpherSystem : EntitySystem
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedHandsSystem _hand = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {
@@ -92,10 +88,14 @@ public sealed partial class EggMorpherSystem : EntitySystem
             if (_mobState.IsDead(user))
                 return;
 
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-return-self", ("parasite", user)), eggMorpher);
+            if (_net.IsClient)
+                return;
+
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-egg-morpher-return-self", ("parasite", user)), eggMorpher);
 
             QueueDel(user);
             comp.CurParasites++;
+            _appearance.SetData(eggMorpher, EggmorpherOverlayVisuals.Number, eggMorpher.Comp.CurParasites);
 
             return;
         }
@@ -147,11 +147,13 @@ public sealed partial class EggMorpherSystem : EntitySystem
         args.Handled = true;
         QueueDel(used);
         comp.CurParasites++;
+        _appearance.SetData(eggMorpher, EggmorpherOverlayVisuals.Number, eggMorpher.Comp.CurParasites);
     }
 
     private void OnChangeParasiteReserve(Entity<EggMorpherComponent> eggMorpher, ref XenoChangeParasiteReserveMessage args)
     {
         eggMorpher.Comp.ReservedParasites = args.NewReserve;
+
     }
 
     private void OnGetVerbs(Entity<EggMorpherComponent> eggMorpher, ref GetVerbsEvent<ActivationVerb> args)
@@ -233,6 +235,9 @@ public sealed partial class EggMorpherSystem : EntitySystem
     }
     public override void Update(float frameTime)
     {
+        if (_net.IsClient)
+            return;
+
         base.Update(frameTime);
 
         var curTime = _time.CurTime;
@@ -249,6 +254,7 @@ public sealed partial class EggMorpherSystem : EntitySystem
             if (eggMorpherComp.NextSpawnAt < curTime)
             {
                 eggMorpherComp.CurParasites++;
+                _appearance.SetData(eggMorpherEnt, EggmorpherOverlayVisuals.Number, eggMorpherComp.CurParasites);
                 eggMorpherComp.NextSpawnAt = newSpawnTime;
                 Dirty(eggMorpherEnt, eggMorpherComp);
                 continue;
@@ -293,6 +299,7 @@ public sealed partial class EggMorpherSystem : EntitySystem
             return false;
         }
         comp.CurParasites--;
+        _appearance.SetData(eggMorpher, EggmorpherOverlayVisuals.Number, eggMorpher.Comp.CurParasites);
         Dirty(eggMorpher);
 
         if (_net.IsClient)
