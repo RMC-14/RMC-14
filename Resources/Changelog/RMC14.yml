@@ -1,71 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added burrowed larva, which replace player-less round-start larva and
-      are granted after a certain amount of marine late-joins, scaled by the role
-      of the marine (squad role vs not), and how late they join into the round. A
-      count of them is displayed in the watch Xeno UI.
-    type: Add
-  - message: Added hive leaders. The Queen can choose up to 4 hive leaders, which
-      will emit the same pheromones as her with her 4x pheromone multiplier while
-      she's in Ovi.
-    type: Add
-  - message: Added Queen AOE healing. She can use 600 plasma to remotely heal any
-      xenos in a 4-tile radius for 30% of their health each, only usable while she's
-      in Ovi.
-    type: Add
-  - message: Added the ability for the Queen to force a T2 or T3 xeno to devolve.
-      Any devolutions done in this way must have valid justification. Ask an admin
-      if unsure.
-    type: Add
-  - message: Added the ability for hivelords to upgrade regular resin structures to
-      thick resin structures by clicking them with the secrete resin ability. The
-      plasma cost will be the difference in cost between the upgraded and unupgraded
-      structures.
-    type: Add
-  - message: Added the M54CE2 to the Requisitions weapons vendor and the ASRS console.
-    type: Add
-  - message: Added grinders to the kitchen, medbay and research rooms.
-    type: Add
-  - message: Added both round-start ARES announcements, one greeting marines and one
-      announcing the planet.
-    type: Add
-  - message: Fixed not showing counts for votes. This will go away again once we have
-      vote accumulation like 13.
-    type: Fix
-  - message: Fixed Requisitions having too little of some ammo types in their vendors.
-    type: Fix
-  - message: Fixed the Scout Specialist not getting a JTAC radio encryption key.
-    type: Fix
-  - message: Fixed penlights having a larger light radius than intended.
-    type: Fix
-  - message: Fixed watermelon helmets giving blunt protection.
-    type: Fix
-  - message: Fixed dropship part fabricators being unanchorable.
-    type: Fix
-  - message: Fixed reagent tanks being anchorable and blocking interactions.
-    type: Fix
-  - message: Fixed there being more survivors in low-pop than intended, there are
-      now 20 marines per survivor instead of 10 marines per survivor, minimum 2 maximum
-      6.
-    type: Fix
-  id: 958
-  time: '2024-11-08T20:18:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4767
-- author: DrSmugleaf
-  changes:
-  - message: Fixed pill canisters not being able to be opened.
-    type: Fix
-  - message: Fixed not being able to demote hive leaders when you have 4, and not
-      getting popups when promoting and demoting hive leaders. These popups are on
-      your cursor since popups beyond your view range broke AGAIN.
-    type: Fix
-  - message: Fixed the XM51 breaching scattergun sounding like its being fired inside
-      your skull if used by someone else.
-    type: Fix
-  id: 959
-  time: '2024-11-08T22:26:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4771
 - author: Vermidia
   changes:
   - message: Fixed doors, vending machines, and sentries having acid applied too fast
@@ -5226,5 +5159,19 @@
   id: 1459
   time: '2025-03-15T07:27:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5878
+- author: UnicornOnLSD
+  changes:
+  - message: New variants of the M5 gas mask are now available in loadouts !
+    type: Add
+  id: 1460
+  time: '2025-03-15T07:32:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5839
+- author: noctyrnal
+  changes:
+  - message: Added two cursed plushies .. oh no.
+    type: Add
+  id: 1461
+  time: '2025-03-15T07:31:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5873
 Name: RMC14
 Order: -1
