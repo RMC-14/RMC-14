@@ -1210,3 +1210,14 @@
     state: stella_cowabunga__stewart
   - type: PatronFigurine
     id: 46f746bd-e191-4b76-a526-711f05dfc1c3
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRosalindHexVolkov
+  name: Rosalind 'Hex' Volkov figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: rosalind_hex_volkov
+  - type: PatronFigurine
+    id: 8de95861-fbb6-4ee4-b38b-6de75f483f37
