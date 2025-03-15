@@ -219,16 +219,6 @@
   - type: AccessReader
     access: [["CMAccessCMO"]]
 
-- type: entity
-  parent: CMLockerBase
-  id: CMLockerFridge
-  name: fridge
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Storage/Lockers/fridge.rsi
-  - type: AccessReader
-    access: [["CMAccessKitchen"]]
-
 # Engineering
 - type: entity
   parent: CMLockerBase
