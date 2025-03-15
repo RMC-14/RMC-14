@@ -94,6 +94,23 @@
   components:
   - type: CorpseSpawner
     spawn: RMCHumanCorpseColonistBurst
+    
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseColonistKutjevo
+  name: Corpse Spawner - Colonist Kutjevo
+  components:
+  - type: CorpseSpawner
+    spawn: RMCHumanCorpseColonistKutjevo
+
+- type: entity
+  parent: RMCSpawnerCorpseColonist
+  id: RMCSpawnerCorpseColonistKutjevoBust
+  name: Corpse Spawner - Colonist Kutjevo
+  suffix: RMC14, Burst
+  components:
+  - type: CorpseSpawner
+    spawn: RMCHumanCorpseColonistKutjevoBurst
 
 - type: entity
   parent: RMCSpawnerCorpse
@@ -102,3 +119,11 @@
   components:
   - type: CorpseSpawner
     spawn: RMCHumanCorpseWeYaGoon
+    
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseWeYaGoonKutjevo
+  name: Corpse Spawner - We-Ya Goon Kutjevo
+  components:
+  - type: CorpseSpawner
+    spawn: RMCHumanCorpseWeYaGoonKutjevo

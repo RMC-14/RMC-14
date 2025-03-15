@@ -68,6 +68,21 @@
     - Mask
   - type: Item
     size: Small
+    
+- type: entity
+  parent: CMBaseMask
+  id: RMCMaskKutjevoRespirator
+  name: kutjevo respirator
+  description: A respirator worn on the face that filters out harmful air particles often present in the air of Kutjevo.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/kutjevo_respirator.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/kutjevo_respirator.rsi
+    slots:
+    - Mask
+  - type: Item
+    size: Small
 
 # Coifs
 - type: entity

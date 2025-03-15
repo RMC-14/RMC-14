@@ -355,3 +355,19 @@
 
 - type: Tag
   id: RMCWeldingGoggle
+
+- type: entity
+  parent: ClothingEyesBase
+  id: RMCGogglesKutjevo
+  name: kutjevo goggles
+  description: Goggles used to shield the eyes of workers on Kutjevo. N95Z Rated Goggles.
+  components:
+  - type: Item
+    storedRotation: 0
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/kutjevo_goggles.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/kutjevo_goggles.rsi
+    slots:
+    - MASK
+    - EYES
