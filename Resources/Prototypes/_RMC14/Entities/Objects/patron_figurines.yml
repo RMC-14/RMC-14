@@ -1160,7 +1160,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronHazzyLicious
   name: Hazzy Licious figurine
-  description: "It has many bugs crawling over it."
+  description: "It looks fleshy and covered in red tendrils..."
   components:
   - type: Sprite
     state: hazzy_licious
