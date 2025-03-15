@@ -32,16 +32,17 @@ public sealed class RMCIconLabelsSystem : SharedRMCIconLabelSystem
             return;
 
         var scale = 2 * uiScale;
-        if (iconLabel.LabelTextLocId is null ||
-            !Loc.TryGetString(iconLabel.LabelTextLocId, out var msg, iconLabel.LabelTextParams.ToArray()) ||
-            msg.Length > iconLabel.LabelMaxSize)
+        if (iconLabel.LabelTextLocId is null
+            || (!Loc.TryGetString(
+                iconLabel.LabelTextLocId, out var msg, iconLabel.LabelTextParams.ToArray())
+            && !GetLabelForIcon(entity, out msg)))
         {
             return;
         }
 
         Color.TryFromName(iconLabel.TextColor, out var textColor);
 
-        var charArray = msg.ToCharArray();
+        var charArray = ToLabelShortForm(msg, iconLabel.LabelMaxSize).ToCharArray();
         var iconLabelPosition = new Vector2(iconPosition.X + scale * iconLabel.StoredOffset.X,
             iconPosition.Y + scale * iconLabel.StoredOffset.Y);
 

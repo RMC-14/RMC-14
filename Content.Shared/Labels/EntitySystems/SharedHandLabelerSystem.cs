@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Chemistry.ChemMaster;
+using Content.Shared._RMC14.IconLabel;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry;
 using Content.Shared.Containers.ItemSlots;
@@ -12,8 +13,8 @@ using Content.Shared.Storage;
 using Content.Shared.Tag;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
-using Robust.Server.Audio;
 using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Network;
 using Robust.Shared.Serialization;
@@ -25,13 +26,15 @@ public abstract class SharedHandLabelerSystem : EntitySystem
     [Dependency] protected readonly SharedUserInterfaceSystem UserInterfaceSystem = default!;
     [Dependency] protected readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedLabelSystem _labelSystem = default!;
+    [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] protected readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly INetManager _netManager = default!;
-    [Dependency] private readonly AudioSystem _audioSystem = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
 
     protected ISawmill _logLoader = default!;
+
+    public static event Action<EntityUid, string>? OnUpdateBottleLabel;
 
     public override void Initialize()
     {
@@ -84,15 +87,36 @@ public abstract class SharedHandLabelerSystem : EntitySystem
             return;
         }
 
+        string newLabel = handLabeler.AssignedLabel;
+
+        if (_netManager.IsServer)
+        {
+            _labelSystem.Label(target,
+                newLabel == string.Empty
+                    ? null
+                    : handLabeler.AssignedLabel);
+            if (TryComp(target, out IconLabelComponent? iconLabelComponent))
+            {
+                UpdateIconLabel(
+                    target,
+                    iconLabelComponent,
+                    newLabel
+                );
+            }
+
+
+        }
+        else if (IsPillBottle(target))
+        {
+            OnUpdateBottleLabel?.Invoke(target, newLabel);
+        }
+
         if (handLabeler.AssignedLabel == string.Empty)
         {
-            if (_netManager.IsServer)
-                _labelSystem.Label(target, null);
             result = Loc.GetString("hand-labeler-successfully-removed");
             return;
         }
-        if (_netManager.IsServer)
-            _labelSystem.Label(target, handLabeler.AssignedLabel);
+
         result = Loc.GetString("hand-labeler-successfully-applied");
     }
 
@@ -194,11 +218,23 @@ public abstract class SharedHandLabelerSystem : EntitySystem
         }
 
         ClickSound(handLabeler);
+
+        if (_netManager.IsClient)
+        {
+        }
     }
 
-    private void ClickSound(Entity<HandLabelerComponent> handLabeler)
+    protected virtual void ClickSound(Entity<HandLabelerComponent> handLabeler)
     {
-        _audioSystem.PlayPvs(handLabeler.Comp.ClickSound, handLabeler, AudioParams.Default.WithVolume(-2f));
+
+    }
+
+    protected virtual void UpdateIconLabel(
+        EntityUid owner,
+        IconLabelComponent iconLabelComponent,
+        string customLabel
+    ) {
+
     }
 
     private void OnHandLabelerLabelChanged(EntityUid uid, HandLabelerComponent handLabeler, HandLabelerLabelChangedMessage args)

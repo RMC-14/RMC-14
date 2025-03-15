@@ -1,7 +1,10 @@
 using System.Numerics;
 using Content.Client.Cooldown;
+using Content.Client.Labels.EntitySystems;
 using Content.Client.UserInterface.Systems.Inventory.Controls;
 using Content.Shared._RMC14.IconLabel;
+using Content.Shared.Labels.Components;
+using Content.Shared.Labels.EntitySystems;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
@@ -215,6 +218,9 @@ namespace Content.Client.UserInterface.Controls
 
             HighlightTexturePath = "slot_highlight";
             BlockedTexturePath = "blocked";
+
+            // When a hand labeler changes the label on a bottle, this ensures the icon text will update
+            SharedHandLabelerSystem.OnUpdateBottleLabel += OnUpdateBottleLabel;
         }
 
         public void ClearHover()
@@ -237,7 +243,15 @@ namespace Content.Client.UserInterface.Controls
             UpdateChildren();
         }
 
-        private void UpdateChildren()
+        private void OnUpdateBottleLabel(EntityUid entity, string label)
+        {
+            if (entity != Entity)
+                return;
+
+            UpdateChildren(label);
+        }
+
+        private void UpdateChildren(string? predefinedLabel = null)
         {
             var fullTexture = Theme.ResolveTextureOrNull(_fullButtonTexturePath);
             var texture = Entity.HasValue && fullTexture != null
@@ -249,13 +263,24 @@ namespace Content.Client.UserInterface.Controls
             IconLabel.FontColorOverride = Color.White;
             if (_entities.TryGetComponent(Entity, out IconLabelComponent? iconLabel))
             {
-                if (iconLabel.LabelTextLocId is not null && _loc.TryGetString(iconLabel.LabelTextLocId, out String? labelText, iconLabel.LabelTextParams.ToArray()))
+                string? labelText = predefinedLabel;
+
+                if (
+                    predefinedLabel != null ||
+                    // If the bottle prototype has a LabelTextLocId, try to make an icon from that
+                    (iconLabel.LabelTextLocId is not null
+                    && _loc.TryGetString(
+                        iconLabel.LabelTextLocId,
+                        out labelText,
+                        iconLabel.LabelTextParams.ToArray()
+                        ))
+                    // Otherwise, try to look for a label in a label component to make an icon from
+                    || (Entity != null
+                        && GetLabelForIcon((EntityUid)Entity, out labelText)
+                        )
+                )
                 {
-                    // if (labelText.Length > iconLabel.LabelMaxSize)
-                    // {
-                    //     return;
-                    // }
-                    IconLabel.Text = labelText.Substring(0, iconLabel.LabelMaxSize);
+                    IconLabel.Text = SharedRMCIconLabelSystem.ToLabelShortForm(labelText ?? string.Empty, iconLabel.LabelMaxSize);
                 }
 
                 if (Color.TryFromName(iconLabel.TextColor, out Robust.Shared.Maths.Color color))
@@ -266,6 +291,20 @@ namespace Content.Client.UserInterface.Controls
                 IconLabel.SetSize = new Vector2(iconLabel.TextSize);
             }
             // RMC14 - End Refresh icon label
+        }
+
+        // For pill bottles that have a custom label applied to make an icon label appear
+        // since previous icon labels depend on localized strings in a yaml file
+        public bool GetLabelForIcon(EntityUid entity, out string label)
+        {
+            if (_entities.TryGetComponent(entity, out LabelComponent? labelComponent))
+            {
+                label = labelComponent.CurrentLabel ?? string.Empty;
+                return true;
+            }
+
+            label = string.Empty;
+            return false;
         }
 
         private void OnButtonPressed(GUIBoundKeyEventArgs args)
