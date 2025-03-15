@@ -2,10 +2,10 @@
   abstract: true
   id: RMCPropVehicle2Base
   placement:
-    mode: SnapgridCenter
+    mode: SnapgridBorder
   components:
   - type: Transform
-    anchored: true
+    anchored: false
   - type: Physics
     bodyType: Static
     fixedRotation: true

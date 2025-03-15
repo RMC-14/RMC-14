@@ -1,95 +1,4 @@
 ﻿Entries:
-- author: Nairodian
-  changes:
-  - message: Added a new lobby art.
-    type: Add
-  id: 947
-  time: '2024-11-08T04:36:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4750
-- author: BackeTako
-  changes:
-  - message: Fixed doors looking bright when emergency access is on.
-    type: Fix
-  id: 948
-  time: '2024-11-08T04:38:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4736
-- author: BackeTako
-  changes:
-  - message: Fixed MedKit inhand sprite inconsistencies
-    type: Fix
-  id: 949
-  time: '2024-11-08T04:43:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4733
-- author: PursuitInAshes
-  changes:
-  - message: 'The SEA vendors have been updated to include new items and equipment:
-      Service Jackets, reddot sight.'
-    type: Tweak
-  id: 950
-  time: '2024-11-08T05:22:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4634
-- author: crystalHex
-  changes:
-  - message: Added the shoulder holster.
-    type: Add
-  id: 951
-  time: '2024-11-08T05:31:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3623
-- author: CyberTropic
-  changes:
-  - message: Added sand edges for New Varadero sand
-    type: Add
-  id: 952
-  time: '2024-11-08T06:14:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4683
-- author: blueDev2
-  changes:
-  - message: ChemMaster labeled pill bottles now show label icons IF the label is
-      2 or less characters long
-    type: Add
-  - message: Pill bottles can be recolored via the ChemMaster via the Output tab
-    type: Add
-  id: 953
-  time: '2024-11-08T06:33:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4645
-- author: Aurallianz
-  changes:
-  - message: Lifeboats doors
-    type: Fix
-  - message: Lifeboats windows
-    type: Fix
-  - message: Lifeboats & Evac Pod gravity.
-    type: Fix
-  id: 954
-  time: '2024-11-08T06:49:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4758
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added armor variants. You can select which armor variant you get with
-      in the vendor in the character customization screen. The variants are just cosmetic
-      changes.
-    type: Add
-  id: 955
-  time: '2024-11-08T07:46:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4735
-- author: Vermidia
-  changes:
-  - message: Add the IMP Ammo Rack, available from req in small quantities. It can
-      carry 3 ammo boxes, at the cost of a backslot and slowdown no matter how you
-      carry it.
-    type: Add
-  id: 956
-  time: '2024-11-08T07:48:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4747
-- author: Rainbeon
-  changes:
-  - message: Ported Lurker's Crippling Strike Attack Reset from CM13. Whenever the
-      Crippling Strike ability is used, you can melee attack again instantly, regardless
-      of when you last meleed. This lets you melee twice in quick succession.
-    type: Add
-  id: 957
-  time: '2024-11-08T09:21:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4755
 - author: DrSmugleaf
   changes:
   - message: Added burrowed larva, which replace player-less round-start larva and
@@ -5216,5 +5125,106 @@
   id: 1448
   time: '2025-03-12T09:51:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5826
+- author: OmerF-afk
+  changes:
+  - message: Added MARSOC HEAP for rifles.
+    type: Add
+  - message: Added XM38 and XM40 Death squad weaponry.
+    type: Add
+  - message: Added missing firedelay on custombuilt shotgun.
+    type: Add
+  id: 1449
+  time: '2025-03-13T19:24:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5879
+- author: DummeHytteOst
+  changes:
+  - message: Fixed healer appearing twice in the drone evolution menu.
+    type: Fix
+  id: 1450
+  time: '2025-03-15T07:14:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5888
+- author: OmerF-afk
+  changes:
+  - message: 'Ported admin-only spawn corporate weapons for exterminators and PMCs:
+      M63B2, M54C2, ML79A, HEAP for M63 SMGs, B12 blast grenade.'
+    type: Add
+  - message: Added missing eye glow for M5X PMC helmet.
+    type: Add
+  id: 1451
+  time: '2025-03-15T07:17:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5887
+- author: OmerF-afk
+  changes:
+  - message: Added SnapGridBorder and other placement modes to prop_vehicles2 by removing
+      anchor
+    type: Add
+  id: 1452
+  time: '2025-03-15T07:21:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5882
+- author: Vermidia
+  changes:
+  - message: Fixed hive core weeds not spreading far enough, and cluster/pylon weeds
+      spreading too far (by 1 tile each).
+    type: Fix
+  - message: Fixed hive cluster not having CAS and Mortar protection
+    type: Fix
+  id: 1453
+  time: '2025-03-15T07:21:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5865
+- author: CyberTropic
+  changes:
+  - message: Added many missing entities to Kutjevo.
+    type: Add
+  - message: Added Kutjevo clothing.
+    type: Add
+  id: 1454
+  time: '2025-03-15T07:19:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5881
+- author: Vermidia
+  changes:
+  - message: Fixed burrowers map icon being t1 colored.
+    type: Fix
+  id: 1455
+  time: '2025-03-15T07:20:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5819
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed using melee not delaying being able to pull someone.
+    type: Fix
+  id: 1456
+  time: '2025-03-15T07:22:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5880
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added external webbing that fits on the armor slot. It can fit 2 items
+      and allows suit storage. You can find it in requisitions.
+    type: Add
+  id: 1457
+  time: '2025-03-15T07:25:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5885
+- author: Arcticular1
+  changes:
+  - message: Added QM jacket to QM's vendor.
+    type: Add
+  - message: Added spare researcher and medical headsets to CMO's vendor.
+    type: Add
+  - message: Added mini flamethrower, RTO pack, motion detector, fultons and space
+      cleaner, and medical storage rig to XO's vendor.
+    type: Add
+  - message: Added tactical nailgun, construction belt, general storage belt and toolbelt
+      to CE's vendor.
+    type: Add
+  - message: Added tan beret to ASO's vendor.
+    type: Add
+  id: 1458
+  time: '2025-03-15T07:24:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5763
+- author: Binbagg
+  changes:
+  - message: Added more missing map loot to Solaris and Varadero.
+    type: Add
+  id: 1459
+  time: '2025-03-15T07:27:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5878
 Name: RMC14
 Order: -1
