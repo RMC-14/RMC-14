@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Ported Lurker's Crippling Strike Attack Reset from CM13. Whenever the
-      Crippling Strike ability is used, you can melee attack again instantly, regardless
-      of when you last meleed. This lets you melee twice in quick succession.
-    type: Add
-  id: 957
-  time: '2024-11-08T09:21:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4755
 - author: DrSmugleaf
   changes:
   - message: Added burrowed larva, which replace player-less round-start larva and
@@ -5228,5 +5219,12 @@
   id: 1458
   time: '2025-03-15T07:24:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5763
+- author: Binbagg
+  changes:
+  - message: Added more missing map loot to Solaris and Varadero.
+    type: Add
+  id: 1459
+  time: '2025-03-15T07:27:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5878
 Name: RMC14
 Order: -1
