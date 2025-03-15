@@ -12,7 +12,7 @@
     soundActivate: /Audio/_RMC14/Machines/click.ogg
     soundDeactivate: /Audio/_RMC14/Machines/click.ogg
   - type: UseDelay
-    delay: 0.5
+    delay: 2
   - type: Sprite
     sprite: _RMC14/Structures/atmos.rsi
     state: pscrubber_0
@@ -131,7 +131,7 @@
     soundActivate: /Audio/_RMC14/Machines/click.ogg
     soundDeactivate: /Audio/_RMC14/Machines/click.ogg
   - type: UseDelay
-    delay: 0.5
+    delay: 2
   - type: Sprite
     sprite: _RMC14/Structures/atmos.rsi
     state: radiator
@@ -186,7 +186,7 @@
     soundActivate: /Audio/_RMC14/Machines/click.ogg
     soundDeactivate: /Audio/_RMC14/Machines/click.ogg
   - type: UseDelay
-    delay: 0.5
+    delay: 2
   - type: Sprite
     sprite: _RMC14/Structures/atmos.rsi
     state: sheater0
