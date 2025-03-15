@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed doors, vending machines, and sentries having acid applied too fast
-    type: Fix
-  id: 960
-  time: '2024-11-09T04:18:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4769
 - author: DrSmugleaf
   changes:
   - message: Fixed stars sometimes not being shown to xenos for hive leaders.
@@ -5173,5 +5166,12 @@
   id: 1461
   time: '2025-03-15T07:31:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5873
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added snow, jungle, desert and black variants of underwear
+    type: Add
+  id: 1462
+  time: '2025-03-15T07:33:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4221
 Name: RMC14
 Order: -1
