@@ -21,7 +21,7 @@
 - type: rank
   id: RMCRankVAISynthetic
   name: VAI Synthetic
-  Prefix: Syn.
+  prefix: Syn.
 
 - type: rank
   id: RMCRankVAITeamLeader
