@@ -13,7 +13,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.45,-0.45,0.45,0.45"
+          bounds: "-0.35,-0.35,0.35,0.35"
         density: 100
         layer:
         - MobMask

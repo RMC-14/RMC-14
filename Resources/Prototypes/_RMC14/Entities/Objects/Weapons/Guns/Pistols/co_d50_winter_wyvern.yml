@@ -1,27 +1,40 @@
 - type: entity
   parent: CMWeaponPistolBase
   id: RMCWeaponPistolCOD50WinterWyvern
-  name: vintage D50 winter wyvern
+  name: vintage D50 Winter Wyvern
   description: A bulky 50 caliber pistol with a serious kick. Hand crafted from the finest blacksteel with an ivory grip bolted together with gold studs. Very elegant.
   components:
   - type: Gun
-    selectedMode: SemiAuto
+    shotsPerBurst: 2
     availableModes:
     - SemiAuto
+    - Burst
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_DE50.ogg
   - type: RMCSelectiveFire
-    scatterWielded: 5
-    scatterUnwielded: 8
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    scatterWielded: 10
+    scatterUnwielded: 10
     baseFireRate: 1.43
-    burstScatterMult: 7
+    burstScatterMult: 5
+    modifiers:
+      Burst:
+        fireDelay: 0.2 #Suppoed to be 0.6 but it's two slow that way
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/d50winterwyvernvintage.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/d50winterwyvernvintage.rsi
   - type: RMCWeaponAccuracy
-    accuracyMultiplier: 7.2
-    accuracyMultiplierUnwielded: 3.9
+    accuracyMultiplier: 1.0
+    accuracyMultiplierUnwielded: 0.75
+  - type: GunDamageModifier
+    multiplier: 1.4
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -104,14 +117,14 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 84
+        Piercing: 60
   - type: CMArmorPiercing
     amount: 5
   - type: RMCStunOnHit
-    maxRange: 4
+    maxRange: 4.5
     stunTime: 1
   - type: RMCProjectileAccuracy
-    accuracy: 90
+    accuracy: 70
 
 - type: entity
   parent: CMBaseMagazinePistol
@@ -159,14 +172,14 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 63
+        Piercing: 45
   - type: CMArmorPiercing
     amount: 50
   - type: RMCStunOnHit
-    maxRange: 4
+    maxRange: 4.5
     stunTime: 1
   - type: RMCProjectileAccuracy
-    accuracy: 90
+    accuracy: 70
 
 - type: Tag
   id: RMCMagazinePistolD50WinterWyvernHI

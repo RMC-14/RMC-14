@@ -1,6 +1,6 @@
 - type: entity
   id: RMCCrateClothingLargePouches
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: large pouches crate (2x Pistol, Magazine, General)
   components:
   - type: StorageFill
@@ -14,7 +14,7 @@
 
 - type: entity
   id: RMCCrateClothingMedicalPouches
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: medical pouches crate (1x firstaid, medical, syringe, medkit)
   components:
   - type: StorageFill
@@ -32,7 +32,7 @@
 
 - type: entity
   id: RMCCrateClothingWebbing
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: webbing crate (x4)
   components:
   - type: StorageFill
@@ -42,7 +42,7 @@
 
 - type: entity
   id: RMCCrateClothingWebbingVest
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: brown and black webbing crate (x2 each)
   components:
   - type: StorageFill
@@ -54,17 +54,17 @@
 
 - type: entity
   id: RMCCrateClothingWebbingKnife
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: knife vest crate (x3)
   components:
   - type: StorageFill
     contents:
       - id: CMWebbingKnivesFilled
         amount: 3
-        
+
 - type: entity
   id: RMCCrateClothingWebbingHolster
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: shoulder holster crate (x4)
   components:
   - type: StorageFill
@@ -74,7 +74,7 @@
 
 - type: entity
   id: RMCCrateClothingWebbingPouch
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: drop pouch crate (x4)
   components:
   - type: StorageFill
@@ -84,7 +84,7 @@
 
 - type: entity
   id: RMCCrateClothingOfficerOutfit
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: officer outfit crate
   components:
   - type: StorageFill

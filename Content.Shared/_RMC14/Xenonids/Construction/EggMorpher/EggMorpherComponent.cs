@@ -1,4 +1,5 @@
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,4 +48,23 @@ public sealed partial class EggMorpherComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan? NextSpawnAt;
+
+    [DataField, AutoNetworkedField]
+    public string OverlayPrefix = "eggmorph";
+
+    [DataField, AutoNetworkedField]
+    public int OverlayCount = 4;
+}
+
+[Serializable, NetSerializable]
+public enum EggmorpherOverlayVisuals
+{
+    Number,
+}
+
+[Serializable, NetSerializable]
+public enum EggmorpherOverlayLayers
+{
+    Base,
+    Overlay,
 }

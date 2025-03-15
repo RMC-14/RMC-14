@@ -25,7 +25,7 @@
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - FTL
-  overwatchSortPriority: -4
+  overwatchSortPriority: -5
   overwatchRoleName: Fire Team Leaders
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi

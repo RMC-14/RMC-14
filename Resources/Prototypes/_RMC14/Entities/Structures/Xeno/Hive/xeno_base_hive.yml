@@ -28,6 +28,7 @@
     otherMultiplier: 8.2
   - type: XenoAnnounceStructureDestruction
   - type: RequireProjectileTarget
+  - type: DeletedByWeedKiller
 
 - type: entity
   abstract: true
@@ -43,3 +44,4 @@
   - type: RMCNightVisionVisible
     priority: -1
     transparency: 0.1
+  - type: DeletedByWeedKiller

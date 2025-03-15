@@ -14,6 +14,11 @@
   - type: Gun
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_mateba.ogg
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCRevolver
+    - RMCMateba
   - type: RevolverAmmoProvider
     whitelist:
       tags:
@@ -273,7 +278,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 90
+        Piercing: 60
   - type: CMArmorPiercing
     amount: 20
   - type: RMCProjectileAccuracy
@@ -287,7 +292,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 90
+        Piercing: 60
   - type: CMArmorPiercing
     amount: 5
   - type: RMCStunOnHit
@@ -304,7 +309,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 67.5
+        Piercing: 45
   - type: CMArmorPiercing
     amount: 50
   - type: RMCStunOnHit
@@ -321,7 +326,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 150
+        Piercing: 100
   - type: CMArmorPiercing
     amount: 50
   - type: RMCStunOnHit
@@ -377,6 +382,7 @@
     sprite: _RMC14/Objects/Weapons/Guns/Attachments/mateba_kit.rsi
     state: c_matebacase
   - type: FixedItemSizeStorage
+  - type: Storage
     whitelist:
       tags:
       - RMCAttachmentMatebaStandardGolden
@@ -412,3 +418,6 @@
 
 - type: Tag
   id: RMCCartridgeRevolverMatebaHE
+
+- type: Tag
+  id: RMCMateba
