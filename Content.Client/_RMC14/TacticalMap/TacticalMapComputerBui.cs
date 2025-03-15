@@ -50,7 +50,7 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
 
     public void Refresh()
     {
-        if (Window is not { IsOpen: true })
+        if (Window == null)
             return;
 
         var lineLimit = EntMan.System<TacticalMapSystem>().LineLimit;
@@ -80,7 +80,7 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
 
     private void UpdateBlips()
     {
-        if (Window is not { IsOpen: true })
+        if (Window == null)
             return;
 
         if (!EntMan.TryGetComponent(Owner, out TacticalMapComputerComponent? computer))
