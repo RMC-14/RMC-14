@@ -134,7 +134,7 @@ public abstract class SharedRMCAimedShotSystem : EntitySystem
     private void OnAmmoShot(Entity<AimedShotComponent> ent, ref AmmoShotEvent args)
     {
         // This means it's not an aimed shot so don't apply any effects
-        if(ent.Comp.CurrentTarget == null)
+        if(ent.Comp.CurrentTarget == null || !TerminatingOrDeleted(ent.Comp.CurrentTarget))
             return;
 
         var target = ent.Comp.CurrentTarget.Value;
@@ -151,6 +151,11 @@ public abstract class SharedRMCAimedShotSystem : EntitySystem
             homingProjectile.Target = target;
             homingProjectile.ProjectileSpeed = ent.Comp.ProjectileSpeed;
             Dirty(projectile, homingProjectile);
+
+            // Make sure the projectile can hit dead targets.
+            var targeted = EnsureComp<TargetedProjectileComponent>(projectile);
+            targeted.Target = target;
+            Dirty(projectile, targeted);
         }
 
         _targeting.StopTargeting(ent, target);
@@ -233,7 +238,7 @@ public abstract class SharedRMCAimedShotSystem : EntitySystem
         if (!_whitelist.IsValid(ent.Comp.Whitelist, user) && ent.Comp.Whitelist.Components != null)
         {
             var message = Loc.GetString("cm-gun-unskilled", ("gun", ent));
-            _popup.PopupClient(message, user, user);
+            _popup.PopupClient(message, user, user, PopupType.SmallCaution);
 
             return false;
         }
