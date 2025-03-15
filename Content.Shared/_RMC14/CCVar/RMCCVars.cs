@@ -411,4 +411,10 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCDamageYourself =
         CVarDef.Create("rmc.damage_yourself", false, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
+
+    public static readonly CVarDef<float> RMCOverwatchMaxProcessTimeMilliseconds =
+        CVarDef.Create("rmc.overwatch_max_process_time_milliseconds", 1f, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<float> RMCOverwatchConsoleUpdateEverySeconds =
+        CVarDef.Create("rmc.overwatch_console_update_every_seconds", 0.5f, CVar.REPLICATED | CVar.SERVER);
 }

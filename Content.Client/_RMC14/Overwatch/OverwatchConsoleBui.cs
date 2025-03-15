@@ -2,6 +2,7 @@
 using Content.Client._RMC14.UserInterface;
 using Content.Client.Message;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Maths;
 using Content.Shared._RMC14.Overwatch;
 using Content.Shared._RMC14.SupplyDrop;
 using Content.Shared.Mobs;
@@ -32,6 +33,8 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
     private readonly SquadSystem _squad;
 
     private readonly Dictionary<NetEntity, OverwatchSquadView> _squadViews = new();
+    private readonly Dictionary<NetEntity, PanelContainer> _squads = new();
+    private readonly Dictionary<NetEntity, Dictionary<NetEntity, OverwatchRow>> _rows = new();
 
     public OverwatchConsoleBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
@@ -67,12 +70,20 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
             return;
         }
 
-        Window.SquadsContainer.DisposeAllChildren();
-
         var squads = s.Squads.ToList();
         squads.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name));
+
+        foreach (var (id, panel) in _squads)
+        {
+            if (squads.All(oldSquad => oldSquad.Id != id))
+                panel.Orphan();
+        }
+
         foreach (var squad in squads)
         {
+            if (_squads.ContainsKey(squad.Id))
+                continue;
+
             var squadButton = new Button
             {
                 Text = squad.Name.ToUpper(),
@@ -85,6 +96,8 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
             var panel = CreatePanel();
             panel.AddChild(squadButton);
             Window.SquadsContainer.AddChild(panel);
+
+            _squads[squad.Id] = panel;
         }
 
         var roleSorting = new Dictionary<ProtoId<JobPrototype>, int>();
@@ -120,11 +133,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
 
             if (_squadViews.TryGetValue(squad.Id, out var monitor))
             {
-                monitor.Names.DisposeAllChildren();
-                monitor.Roles.DisposeAllChildren();
-                monitor.States.DisposeAllChildren();
                 monitor.RolesContainer.DisposeAllChildren();
-                monitor.Buttons.DisposeAllChildren();
             }
             else
             {
@@ -239,6 +248,23 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 roles[role.ID] = (new HashSet<OverwatchMarine>(), new HashSet<OverwatchMarine>(), new HashSet<OverwatchMarine>());
             }
 
+            var marineIds = marines.Select(e => e.Id).ToHashSet();
+            var squadRows = _rows.GetOrNew(squad.Id);
+            foreach (var (id, row) in squadRows.ToArray())
+            {
+                if (marineIds.Contains(id))
+                    continue;
+
+                row.Name.Panel.Orphan();
+                row.Role.Panel.Orphan();
+                row.State.Panel.Orphan();
+                row.Location.Panel.Orphan();
+                row.Distance.Panel.Orphan();
+                row.Buttons.Container.Orphan();
+
+                _rows.Remove(id);
+            }
+
             foreach (var marine in marines)
             {
                 var roleName = "None";
@@ -269,38 +295,133 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 }
 
                 var name = marine.Name;
-                Control watchControl;
-                if (marine.Camera == default)
-                {
-                    var watchLabel = new RichTextLabel();
-                    watchLabel.SetMarkupPermissive($"[color={YellowColor}]{name} (NO CAMERA)[/color]");
-                    watchControl = watchLabel;
-                }
-                else
+                if (!squadRows.TryGetValue(marine.Id, out var row))
                 {
                     var watchButton = new Button
                     {
-                        Text = marine.Name,
                         StyleClasses = { "OpenBoth" },
                         Margin = new Thickness(2, 0),
                     };
 
-                    watchButton.OnPressed += _ => SendPredictedMessage(new OverwatchConsoleWatchBuiMsg(marine.Camera));
-                    watchControl = watchButton;
+                    watchButton.OnPressed += _ => SendPredictedMessage(new OverwatchConsoleWatchBuiMsg(marine.Id));
+
+                    var watchLabel = new RichTextLabel();
+                    watchButton.AddChild(watchLabel);
+
+                    var namePanel = CreatePanel(50);
+                    watchButton.Margin = margin;
+                    namePanel.AddChild(watchButton);
+                    monitor.Names.AddChild(namePanel);
+
+                    var rolePanel = CreatePanel(50);
+                    var roleLabel = new Label
+                    {
+                        Text = roleName,
+                        Margin = margin,
+                    };
+                    rolePanel.AddChild(roleLabel);
+                    monitor.Roles.AddChild(rolePanel);
+
+                    var state = new RichTextLabel { Margin = margin };
+                    var statePanel = CreatePanel(50);
+                    statePanel.AddChild(state);
+                    monitor.States.AddChild(statePanel);
+
+                    var location = CreatePanel(50);
+                    var locationLabel = new RichTextLabel()
+                    {
+                        Margin = margin,
+                        MaxWidth = 250,
+                    };
+                    location.AddChild(locationLabel);
+                    monitor.Locations.AddChild(location);
+
+                    var distancePanel = CreatePanel(50);
+                    var distanceLabel = new Label { Margin = margin };
+                    distancePanel.AddChild(distanceLabel);
+                    monitor.Distances.AddChild(distancePanel);
+
+                    var hideButton = new Button
+                    {
+                        MaxWidth = 25,
+                        MaxHeight = 25,
+                        VerticalAlignment = VAlignment.Top,
+                        StyleClasses = { "OpenBoth" },
+                        Text = "-",
+                        ModulateSelfOverride = Color.FromHex("#BB1F1D"),
+                        ToolTip = "Hide marine",
+                    };
+
+                    var promoteButton = new Button
+                    {
+                        MaxWidth = 25,
+                        MaxHeight = 25,
+                        VerticalAlignment = VAlignment.Top,
+                        StyleClasses = { "OpenBoth" },
+                        Text = "^",
+                        ModulateSelfOverride = Color.FromHex(GreenColor),
+                        ToolTip = "Promote marine to Squad Leader",
+                    };
+
+                    hideButton.OnPressed += _ =>
+                    {
+                        var hidden = !_overwatchConsole.IsHidden((Owner, console), marine.Id);
+                        SendPredictedMessage(new OverwatchConsoleHideBuiMsg(marine.Id, hidden));
+                    };
+
+                    promoteButton.OnPressed += _ =>
+                        SendPredictedMessage(new OverwatchConsolePromoteLeaderBuiMsg(marine.Id));
+
+                    var hide = CreatePanel(50);
+                    hideButton.Margin = margin;
+                    hide.AddChild(hideButton);
+                    var buttonsContainer = new BoxContainer { Orientation = LayoutOrientation.Horizontal };
+                    buttonsContainer.AddChild(hide);
+
+                    var promote = CreatePanel(50);
+                    promoteButton.Margin = margin;
+                    promote.AddChild(promoteButton);
+                    buttonsContainer.AddChild(promote);
+
+                    monitor.Buttons.AddChild(buttonsContainer);
+
+                    row = new OverwatchRow(
+                        marine.Role,
+                        (namePanel, watchButton, watchLabel),
+                        (rolePanel, roleLabel),
+                        (statePanel, state),
+                        (location, locationLabel),
+                        (distancePanel, distanceLabel),
+                        (buttonsContainer, hideButton, promoteButton)
+                    );
+                    squadRows[marine.Id] = row;
+
+                    if (marine.Role != null && squadRows.TryFirstOrNull(r => r.Key != marine.Id && r.Value.RoleId == marine.Role, out var first))
+                    {
+                        var position = first.Value.Value.Name.Panel.GetPositionInParent() + 1;
+                        row.Name.Panel.SetPositionInParent(position);
+                        row.Role.Panel.SetPositionInParent(position);
+                        row.State.Panel.SetPositionInParent(position);
+                        row.Location.Panel.SetPositionInParent(position);
+                        row.Distance.Panel.SetPositionInParent(position);
+                        row.Buttons.Container.SetPositionInParent(position);
+                    }
                 }
 
-                var panel = CreatePanel(50);
-                watchControl.Margin = margin;
-                panel.AddChild(watchControl);
-                monitor.Names.AddChild(panel);
-
-                panel = CreatePanel(50);
-                panel.AddChild(new Label
+                if (marine.Camera == default)
                 {
-                    Text = roleName,
-                    Margin = margin,
-                });
-                monitor.Roles.AddChild(panel);
+                    row.Name.Label.SetMarkupPermissive($"[color={YellowColor}]{name} (NO CAMERA)[/color]");
+                    row.Name.Button.Text = null;
+                    row.Name.Button.Disabled = true;
+                }
+                else
+                {
+                    row.Name.Label.Text = null;
+                    row.Name.Button.Text = name;
+                    row.Name.Button.Disabled = false;
+                }
+
+                row.Role.Label.Text = roleName;
 
                 var (mobState, color) = marine.State switch
                 {
@@ -312,69 +433,37 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 if (marine.SSD && marine.State != MobState.Dead)
                     mobState = $"{mobState} (SSD)";
 
-                var state = new RichTextLabel { Margin = margin };
-                state.SetMarkupPermissive($"[color={color}]{mobState}[/color]");
-                panel = CreatePanel(50);
-                panel.AddChild(state);
-                monitor.States.AddChild(panel);
+                row.State.Label.SetMarkupPermissive($"[color={color}]{mobState}[/color]");
+                row.Location.Label.Text = $"[color=white]{marine.AreaName}[/color]";
 
-                var hideButton = new Button
+                var distanceStr = "N/A";
+                if (marine.LeaderDistance is { } distance &&
+                    !distance.IsLengthZero())
                 {
-                    MaxWidth = 25,
-                    MaxHeight = 25,
-                    VerticalAlignment = VAlignment.Top,
-                    StyleClasses = { "OpenBoth" },
-                    Text = "-",
-                    ModulateSelfOverride = Color.FromHex("#BB1F1D"),
-                    ToolTip = "Hide marine",
-                };
+                    distanceStr = $"{marine.LeaderDistance.Value.Length():F0} ({marine.LeaderDistance.Value.GetDir().GetShorthand()})";
+                }
 
-                var promoteButton = new Button
-                {
-                    MaxWidth = 25,
-                    MaxHeight = 25,
-                    VerticalAlignment = VAlignment.Top,
-                    StyleClasses = { "OpenBoth" },
-                    Text = "^",
-                    ModulateSelfOverride = Color.FromHex(GreenColor),
-                    ToolTip = "Promote marine to Squad Leader",
-                };
+                row.Distance.Label.Text = distanceStr;
 
                 if (_overwatchConsole.IsHidden((Owner, console), marine.Id) &&
                     marine.Id != squad.Leader)
                 {
-                    hideButton.Text = "+";
-                    hideButton.ModulateSelfOverride = Color.FromHex("#248E34");
-                    hideButton.ToolTip = "Show marine";
+                    row.Buttons.Hide.Text = "+";
+                    row.Buttons.Hide.ModulateSelfOverride = Color.FromHex("#248E34");
+                    row.Buttons.Hide.ToolTip = "Show marine";
+                }
+                else
+                {
+                    row.Buttons.Hide.Text = "-";
+                    row.Buttons.Hide.ModulateSelfOverride = Color.FromHex("#BB1F1D");
+                    row.Buttons.Hide.ToolTip = "Hide marine";
                 }
 
                 if (squad.Leader == marine.Id)
                 {
-                    hideButton.Visible = false;
-                    promoteButton.Visible = false;
+                    row.Buttons.Hide.Visible = false;
+                    row.Buttons.Promote.Visible = false;
                 }
-
-                hideButton.OnPressed += _ =>
-                {
-                    var hidden = !_overwatchConsole.IsHidden((Owner, console), marine.Id);
-                    SendPredictedMessage(new OverwatchConsoleHideBuiMsg(marine.Id, hidden));
-                };
-
-                promoteButton.OnPressed += _ =>
-                    SendPredictedMessage(new OverwatchConsolePromoteLeaderBuiMsg(marine.Id));
-
-                panel = CreatePanel(50);
-                hideButton.Margin = margin;
-                panel.AddChild(hideButton);
-                var buttonsContainer = new BoxContainer { Orientation = LayoutOrientation.Horizontal };
-                buttonsContainer.AddChild(panel);
-
-                panel = CreatePanel(50);
-                promoteButton.Margin = margin;
-                panel.AddChild(promoteButton);
-                buttonsContainer.AddChild(panel);
-
-                monitor.Buttons.AddChild(buttonsContainer);
             }
 
             var rolesList = new List<(string Role, HashSet<OverwatchMarine> Deployed, HashSet<OverwatchMarine> Alive, HashSet<OverwatchMarine> All, bool DisplayName, int Priority)>();
@@ -768,4 +857,14 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
         if (State is OverwatchConsoleBuiState s)
             RefreshState(s);
     }
+
+    private readonly record struct OverwatchRow(
+        ProtoId<JobPrototype>? RoleId,
+        (PanelContainer Panel, Button Button, RichTextLabel Label) Name,
+        (PanelContainer Panel, Label Label) Role,
+        (PanelContainer Panel, RichTextLabel Label) State,
+        (PanelContainer Panel, RichTextLabel Label) Location,
+        (PanelContainer Panel, Label Label) Distance,
+        (BoxContainer Container, Button Hide, Button Promote) Buttons
+    );
 }
