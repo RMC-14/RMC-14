@@ -116,6 +116,31 @@
     - damageFalloffAddMult: 0.1
 
 - type: entity
+  parent: RMCAttachmentSuppressor
+  id: RMCAttachmentSuppressorXM40 # XM40 suppressor
+  name: XM40 suppressor
+  description: "A small tube with exhaust ports to expel noise and gas.
+    Does not completely silence a weapon, but does make it much quieter at the cost of slightly reduced damage."
+  components:
+  - type: Sprite
+    state: m40sd_suppressor
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentSuppressor
+  - type: AttachableVisuals
+    prefix: m40sd_suppressor
+  - type: AttachableSilencer
+    sound:
+      collection: CMSilencedShoot
+      params:
+        maxDistance: 6
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - damageFalloffAddMult: 0.1
+
+
+- type: entity
   parent: RMCBarrelAttachmentBase
   id: RMCAttachmentMatebaStandard
   name: Standard Mateba Barrel
@@ -213,6 +238,9 @@
 
 - type: Tag
   id: RMCAttachmentSuppressor
+
+- type: Tag
+  id: RMCAttachmentSuppressorXM40
 
 - type: Tag
   id: RMCAttachmentBarrelCharger
