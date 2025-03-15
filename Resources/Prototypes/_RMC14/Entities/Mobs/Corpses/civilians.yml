@@ -251,6 +251,34 @@
   id: RMCHumanCorpseColonistBurst
   components:
   - type: VictimBurst
+  
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpseColonistKutjevo
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseColonistKutjevo, RMCGearCorpseColonistKutjevoDrysuit ]
+    
+- type: startingGear
+  id: RMCGearCorpseColonistKutjevo
+  parent: RMCGearCorpseColonist
+  equipment:
+    eyes: RMCGogglesKutjevo
+    head: ArmorHelmetPMCKutjevo
+    mask: RMCMaskKutjevoRespirator
+    jumpsuit: RMCJumpsuitKutjevoJumper
+    
+- type: startingGear
+  id: RMCGearCorpseColonistKutjevoDrysuit
+  parent: RMCGearCorpseColonistKutjevo
+  equipment:
+    jumpsuit: RMCJumpsuitKutjevoDrysuit
+
+- type: entity
+  parent: RMCHumanCorpseColonistKutjevo
+  id: RMCHumanCorpseColonistKutjevoBurst
+  components:
+  - type: VictimBurst
 
 # We-Ya Goon
 - type: entity
@@ -279,3 +307,19 @@
     - CMMagazinePistolM77AP
     - CMMagazinePistolM77AP
     - CMMagazinePistolM77AP
+
+- type: entity
+  parent: RMCHumanCorpse
+  id: RMCHumanCorpseWeYaGoonKutjevo
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseWeYaGoonKutjevo ]
+
+- type: startingGear
+  id: RMCGearCorpseWeYaGoonKutjevo
+  parent: RMCGearCorpseWeYaGoon
+  equipment:
+    head: RMCArmorHelmetPMCKutjevoSecurity
+    jumpsuit: RMCJumpsuitVeteranPMCKutjevo
+    eyes: RMCGogglesKutjevo
+    
