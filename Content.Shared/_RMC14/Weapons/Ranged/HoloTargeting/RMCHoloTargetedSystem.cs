@@ -21,6 +21,8 @@ public sealed class RMCHoloTargetedSystem : EntitySystem
         holoTargeted.Decay = decay;
         var newStacks = holoTargeted.Stacks + stacks;
         holoTargeted.Stacks = Math.Clamp(newStacks, 0f, maxStacks);
+        holoTargeted.DecayDelay = 0;
+        holoTargeted.DecayTimer = 0;
         Dirty(uid, holoTargeted);
     }
 
@@ -42,15 +44,23 @@ public sealed class RMCHoloTargetedSystem : EntitySystem
 
         while (query.MoveNext(out var uid, out var component))
         {
+            component.DecayDelay += frameTime;
+
+            //Only start the decay timer if not hit for DecayDelay amount of time.
+            if (!(component.DecayDelay >= 5))
+                continue;
+
             component.DecayTimer += frameTime;
-            if (component.DecayTimer >= 1)
-            {
-                component.DecayTimer = 0f;
-                component.Stacks -= component.Decay;
-                Dirty(uid, component);
-                if (component.Stacks <= 0)
-                    RemCompDeferred<HoloTargetedComponent>(uid);
-            }
+
+            //Remove stacks every second
+            if (!(component.DecayTimer >= 1))
+                continue;
+
+            component.DecayTimer = 0f;
+            component.Stacks -= component.Decay;
+            Dirty(uid, component);
+            if (component.Stacks <= 0)
+                RemCompDeferred<HoloTargetedComponent>(uid);
         }
     }
 }

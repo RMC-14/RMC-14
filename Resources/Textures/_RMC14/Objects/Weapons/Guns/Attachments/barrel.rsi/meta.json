@@ -105,16 +105,34 @@
       "name": "mateba_short_a"
     },
     {
+      "name": "amateba_short"
+    },
+    {
+      "name": "amateba_short_a"
+    },
+    {
       "name": "mateba_medium"
     },
     {
       "name": "mateba_medium_a"
     },
     {
+      "name": "amateba_medium"
+    },
+    {
+      "name": "amateba_medium_a"
+    },
+    {
       "name": "mateba_long"
     },
     {
       "name": "mateba_long_a"
+    },
+    {
+      "name": "amateba_long"
+    },
+    {
+      "name": "amateba_long_a"
     },
     {
       "name": "m40sd_suppressor"

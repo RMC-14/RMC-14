@@ -1,0 +1,235 @@
+﻿- type: entity
+  parent: RMCWeaponRevolverBase
+  id: RMCWeaponRevolverSpearhead
+  name: CMB Spearhead autorevolver
+  description: A bulky revolver, occasionally carried by assault troops and officers in the Marine Corps, as well as civilian law enforcement. Fires .357 Magnum rounds.
+  components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCRevolver
+    - RMCWeaponRevolverSpearhead
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/spearhead.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/spearhead.rsi
+  - type: RevolverAmmoProvider
+    whitelist:
+      tags:
+      - RMCSpeedLoader357
+      - RMCSpeedLoader357Hollowpoint
+      - RMCCartridgeRevolver357
+      - RMCCartridgeRevolver357Hollowpoint
+    proto: RMCCartridgeRevolver357
+    capacity: 6
+    chambers: [ True, True, True, True, True, True]
+    ammoSlots: [ null, null, null, null, null, null]
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_cmb_1.ogg
+    soundEmpty:
+      path: /Audio/_RMC14/Weapons/Guns/gun_cmb_click1.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 1
+    recoilUnwielded: 3
+    scatterWielded: 8
+    scatterUnwielded: 12
+    baseFireRate: 1.67
+    burstScatterMult: 4
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-stock:
+        whitelist:
+          tags:
+          - RMCAttachmentM44MagnumSharpshooterStock
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentLaserSight
+          - RMCAttachmentGyroscopicStabilizer
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.75, 0.1
+      rmc-aslot-rail: -0.14, 0.158
+      rmc-aslot-stock: -0.59375, 0.09375
+      rmc-aslot-underbarrel: 0.38, -0.24
+
+- type: entity
+  parent: RMCWeaponRevolverSpearhead
+  id: RMCWeaponRevolverSpearheadEmpty
+  suffix: Empty
+  components:
+  - type: RevolverAmmoProvider
+    proto: null
+    chambers: [ null, null, null, null, null, null, null ]
+
+- type: entity
+  id: RMCBaseSpeedLoader357
+  name: "Speed loader (.357)"
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - RMCMagazineRevolver
+    - RMCSpeedLoader357
+  - type: SpeedLoader
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRevolver357
+    capacity: 6
+  - type: Sprite
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+
+- type: entity
+  parent: RMCBaseSpeedLoader357
+  id: RMCSpeedLoader357
+  name: "Speed loader (.357)"
+  description: A revolver speed loader.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/spearhead.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: base-5
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: MagazineVisuals
+    magState: base
+    steps: 6
+    zeroVisible: false
+  - type: BallisticAmmoProvider
+    proto: RMCCartridgeRevolver357
+    capacity: 6
+  - type: Appearance
+
+- type: entity
+  parent: RMCBaseSpeedLoader357
+  id: RMCSpeedLoader357Hollowpoint
+  name: "hollowpoint speed loader (.357)"
+  description: A revolver speed loader filled with Hollowpoint ammo.
+  components:
+  - type: Tag
+    tags:
+    - RMCMagazineRevolver
+    - RMCSpeedLoader357Hollowpoint
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/spearhead.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: base-5
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: MagazineVisuals
+    magState: base
+    steps: 6
+    zeroVisible: false
+  - type: BallisticAmmoProvider
+    proto: RMCCartridgeRevolver357Hollowpoint
+    capacity: 6
+  - type: Appearance
+
+- type: entity
+  id: RMCCartridgeRevolver357
+  name: cartridge (.357)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRevolver357
+  - type: CartridgeAmmo
+    proto: RMCBulletRevolver357
+
+- type: entity
+  id: RMCCartridgeRevolver357Hollowpoint
+  name: cartridge (.357) Hollowpoint
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRevolver357
+  - type: CartridgeAmmo
+    proto: RMCBulletRevolver357Hollowpoint
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletRevolver357
+  name: bullet (.357)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 69
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 22
+      falloff: 1
+      ignoreModifiers: true
+  - type: CMArmorPiercing
+    amount: 15
+  - type: RMCProjectileAccuracy
+    accuracy: 90
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletRevolver357Hollowpoint
+  name: bullet (.357) Hollowpoint
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 86
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 22
+      falloff: 5
+      ignoreModifiers: true
+  - type: CMArmorPiercing
+    amount: 0
+  - type: RMCProjectileAccuracy
+    accuracy: 90
+    thresholds:
+    - range: 12
+      falloff: 10
+
+- type: Tag
+  id: RMCWeaponRevolverSpearhead
+
+- type: Tag
+  id: RMCSpeedLoader357
+
+- type: Tag
+  id: RMCCartridgeRevolver357
+
+- type: Tag
+  id: RMCCartridgeRevolver357Hollowpoint
+
+- type: Tag
+  id: RMCSpeedLoader357Hollowpoint

@@ -2,7 +2,7 @@
 - type: entity
   parent: CMEncryptionKey
   id: RMCEncryptionKeyBureau
-  name: bureau encryption Key
+  name: bureau encryption key
   components:
   - type: EncryptionKey
     channels:
@@ -18,7 +18,7 @@
 - type: entity
   parent: CMEncryptionKey
   id: RMCEncryptionKeyDukes
-  name: duke encryption Key
+  name: duke encryption key
   components:
   - type: EncryptionKey
     channels:
