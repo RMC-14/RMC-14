@@ -1,7 +1,7 @@
 using Content.Server.Administration;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
-using Robust.Shared.Audio; // Add this import
+using Robust.Shared.Audio;
 
 namespace Content.Server._RMC14.Marines;
 
@@ -22,9 +22,8 @@ public sealed class AresAnnounceCommand : IConsoleCommand
         }
 
         var message = string.Join(' ', args);
-        var localizedMessage = Loc.GetString("rmc-announcement-ares-command", ("message", message));
-        var soundSpecifier = new SoundPathSpecifier("Resources/Audio/RMC14/AI/announce.ogg"); // Update this path to your actual sound file
-        marineAnnounce.AnnounceARES(null, localizedMessage, soundSpecifier);
+        var soundSpecifier = new SoundPathSpecifier("Resources/Audio/RMC14/AI/announce.ogg");
+        marineAnnounce.AnnounceARES(null, message, soundSpecifier, "rmc-announcement-ares-command");
         shell.WriteLine("Sent!");
     }
 }
