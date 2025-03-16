@@ -62,9 +62,9 @@
     ears: CMHeadsetCE
     belt: CMBeltUtilityFilled
     pocket1: RMCPouchElectronics
-    storage:
-      back:
-      - CMStampCE
+  storage:
+    back:
+    - CMStampCE
 
 - type: entity
   parent: CMSpawnPointJobBase
