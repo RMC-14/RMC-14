@@ -81,6 +81,8 @@
   storage:
     pocket1:
     - RMCRangefinder
+      back:
+      - CMStampASO
 
 - type: entity
   parent: CMSpawnPointJobBase

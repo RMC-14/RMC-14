@@ -73,6 +73,9 @@
     id: CMIDCardCMO
     ears: CMHeadsetCMO
     belt: CMBeltMedicalFilled
+    storage:
+      back:
+      - CMStampCMO
 
 - type: entity
   parent: CMSpawnPointJobBase

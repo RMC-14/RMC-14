@@ -67,6 +67,9 @@
     pocket2: RMCPouchGeneralLarge
   inhand:
   - CMStampApproved
+    storage:
+      back:
+      - CMStampQM
 
 - type: entity
   parent: CMSpawnPointJobBase

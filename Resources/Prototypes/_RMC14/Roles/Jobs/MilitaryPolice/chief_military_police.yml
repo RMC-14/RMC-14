@@ -74,6 +74,9 @@
     belt: CMBeltSecurityMPFilled
     #    pocket1: TODO RMC14 tape recorder
     pocket2: RMCPouchGeneralLarge
+  storage:
+    back:
+    - CMStampCMP
 
 - type: entity
   parent: CMSpawnPointJobBase

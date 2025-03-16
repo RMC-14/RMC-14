@@ -134,7 +134,7 @@
 - type: entity
   parent: CMStampBase
   id: CMStampMarine
-  name: Marine rubber stamp
+  name: High command rubber stamp
   suffix: Admin
   components:
   - type: Sprite
