@@ -45,3 +45,35 @@
   name: Second Lieutenant
   prefix: 2ndLt.
   paygrade: O1
+
+# Warrant Officers, officers who are officers but also arent officers
+
+- type: rank
+  id: RMCRankWarrantOfficer1
+  name: Warrant Officer 1
+  prefix: WO1
+  paygrade: W1
+
+- type: rank
+  id: RMCRankChiefWarrantOfficer2
+  name: Chief Warrant Officer 2
+  prefix: CWO2
+  paygrade: W2
+
+- type: rank
+  id: RMCRankChiefWarrantOfficer3
+  name: Chief Warrant Officer 3
+  prefix: CWO3
+  paygrade: W3
+
+- type: rank
+  id: RMCRankChiefWarrantOfficer4
+  name: Chief Warrant Officer 4
+  prefix: CWO4
+  paygrade: W4
+
+- type: rank
+  id: RMCRankChiefWarrantOfficer5
+  name: Chief Warrant Officer 5
+  prefix: CWO5
+  paygrade: W5
