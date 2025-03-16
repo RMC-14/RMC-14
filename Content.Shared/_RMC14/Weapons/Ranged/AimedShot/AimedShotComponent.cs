@@ -52,6 +52,12 @@ public sealed partial class AimedShotComponent : Component
     public int Range = 32;
 
     /// <summary>
+    ///     The minimum distance to the target needed to perform the aimed shot action.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int MinRange = 2;
+
+    /// <summary>
     ///     The target of the aimed shot.
     /// </summary>
     [DataField, AutoNetworkedField]

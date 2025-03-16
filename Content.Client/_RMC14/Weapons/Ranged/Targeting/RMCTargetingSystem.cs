@@ -1,8 +1,9 @@
+using Content.Shared._RMC14.Targeting;
 using Robust.Client.Graphics;
 
 namespace Content.Client._RMC14.Weapons.Ranged.Targeting;
 
-public sealed class RMCTargetingSystem : EntitySystem
+public sealed class RMCTargetingSystem : SharedRMCTargetingSystem
 {
     [Dependency] private readonly IOverlayManager _overlay = default!;
 

@@ -21,7 +21,7 @@ namespace Content.Shared._RMC14.Weapons.Ranged.AimedShot;
 
 public abstract class SharedRMCAimedShotSystem : EntitySystem
 {
-    [Dependency] private readonly TargetingSystem _targeting = default!;
+    [Dependency] private readonly SharedRMCTargetingSystem _targeting = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedGunSystem _gunSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -134,7 +134,7 @@ public abstract class SharedRMCAimedShotSystem : EntitySystem
     private void OnAmmoShot(Entity<AimedShotComponent> ent, ref AmmoShotEvent args)
     {
         // This means it's not an aimed shot so don't apply any effects
-        if(ent.Comp.CurrentTarget == null || !TerminatingOrDeleted(ent.Comp.CurrentTarget))
+        if(ent.Comp.CurrentTarget == null || TerminatingOrDeleted(ent.Comp.CurrentTarget))
             return;
 
         var target = ent.Comp.CurrentTarget.Value;
@@ -158,7 +158,6 @@ public abstract class SharedRMCAimedShotSystem : EntitySystem
             Dirty(projectile, targeted);
         }
 
-        _targeting.StopTargeting(ent, target);
         RemoveTarget(ent, target);
     }
 
@@ -169,6 +168,15 @@ public abstract class SharedRMCAimedShotSystem : EntitySystem
     {
         if(!TryComp(ent, out GunComponent? gun))
             return;
+
+        // Don't shoot if the target isn't visible when aiming is finished.
+        if (!_examine.InRangeUnOccluded(args.User, args.Target, ent.Comp.Range))
+        {
+            RemoveTarget(ent, args.Target);
+            var message = Loc.GetString("rmc-action-popup-aiming-target-blocked", ("gun", ent));
+            _popup.PopupClient(message, args.User, args.User);
+            return;
+        }
 
         ent.Comp.CurrentTarget = args.Target;
         Dirty(ent);
@@ -189,13 +197,10 @@ public abstract class SharedRMCAimedShotSystem : EntitySystem
             }
             else
             {
-                _targeting.StopTargeting(ent, args.Target);
                 RemoveTarget(ent, args.Target);
 
                 if(ammoCount.Count < 0)
                     _audio.PlayEntity(gun.SoundEmpty, args.User, ent);
-
-                Dirty(ent);
             }
         }
         // Update ammo visualiser because client doesn't know about the shot.
@@ -253,6 +258,26 @@ public abstract class SharedRMCAimedShotSystem : EntitySystem
             return false;
         }
 
+        // Can't aim if the gun is empty.
+        var ammoCount = new GetAmmoCountEvent();
+        RaiseLocalEvent(ent, ref ammoCount);
+        if (ammoCount.Count <= 0)
+        {
+            var message = Loc.GetString("rmc-action-popup-aiming-gun-no-ammo", ("gun", ent));
+            _popup.PopupClient(message, user, user);
+
+            return false;
+        }
+
+        // Can't aim if the target is too close.
+        if (_transform.InRange(Transform(target).Coordinates, Transform(user).Coordinates, ent.Comp.MinRange))
+        {
+            var message = Loc.GetString("rmc-action-popup-aiming-target-too-close", ("target", target));
+            _popup.PopupClient(message, user, user);
+
+            return false;
+        }
+
         return true;
     }
 
@@ -263,6 +288,7 @@ public abstract class SharedRMCAimedShotSystem : EntitySystem
     /// <param name="target">The target to be removed from the target list</param>
     private void RemoveTarget(Entity<AimedShotComponent> ent, EntityUid target)
     {
+        _targeting.StopTargeting(ent, target);
         ent.Comp.Targets.Remove(target);
         ent.Comp.CurrentTarget = null;
         Dirty(ent);

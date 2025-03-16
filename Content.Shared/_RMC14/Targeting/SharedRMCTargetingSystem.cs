@@ -7,7 +7,7 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Targeting;
 
-public sealed class TargetingSystem : EntitySystem
+public abstract class SharedRMCTargetingSystem : EntitySystem
 {
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;

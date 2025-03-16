@@ -4,7 +4,7 @@ using Robust.Shared.Map;
 namespace Content.Shared._RMC14.Targeting;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(TargetingSystem))]
+[Access(typeof(SharedRMCTargetingSystem))]
 public sealed partial class TargetingComponent : Component
 {
     /// <summary>

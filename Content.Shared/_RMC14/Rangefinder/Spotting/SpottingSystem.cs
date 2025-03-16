@@ -9,7 +9,7 @@ namespace Content.Shared._RMC14.Rangefinder.Spotting;
 
 public sealed partial class SpottingSystem : EntitySystem
 {
-    [Dependency] private readonly TargetingSystem _targeting = default!;
+    [Dependency] private readonly SharedRMCTargetingSystem _targeting = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;

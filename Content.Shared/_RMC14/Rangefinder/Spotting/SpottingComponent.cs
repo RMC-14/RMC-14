@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Rangefinder.Spotting;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(TargetingSystem))]
+[Access(typeof(SharedRMCTargetingSystem))]
 public sealed partial class SpottingComponent : Component
 {
     /// <summary>

@@ -1,9 +1,11 @@
 using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.BlurredVision;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Damage;
 using Content.Shared.Projectiles;
+using Content.Shared.StatusEffect;
 
 namespace Content.Shared._RMC14.Projectiles.Aimed;
 
@@ -11,10 +13,12 @@ public sealed class AimedProjectileSystem : EntitySystem
 {
     private const float BigXenoSlowDurationMultiplier = 0.6f;
     private const float BigXenoBlindDurationMultiplier = 0.4f;
+    private const string BlindKey = "Blinded";
 
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
 
     public override void Initialize()
     {
@@ -55,11 +59,12 @@ public sealed class AimedProjectileSystem : EntitySystem
 
         _damageable.TryChangeDamage(args.Target, damage, tool: ent.Comp.Source, armorPiercing: apValue);
 
-        // TODO Apply blind
-
         // Apply slows
         _slow.TrySlowdown(target, aimedEffect.SlowDuration);
         _slow.TrySuperSlowdown(target, superSlowDuration);
+
+        // Apply blind
+        _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(args.Target, BlindKey, blindDuration, false);
 
         // Apply firestacks
         if (TryComp(target, out FlammableComponent? flammable))

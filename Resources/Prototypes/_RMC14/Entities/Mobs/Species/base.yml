@@ -64,6 +64,7 @@
     - StaminaModifier
     - Flashed
     - Dazed
+    - Blinded
   - type: Blindable
   - type: Tag
     tags:

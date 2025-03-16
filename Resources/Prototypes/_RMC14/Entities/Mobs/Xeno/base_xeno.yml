@@ -224,6 +224,7 @@
     - SlowedDown
     - Muted
     - Dazed
+    - Blinded
   - type: ImmuneToClothingRequiredStepTrigger
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
