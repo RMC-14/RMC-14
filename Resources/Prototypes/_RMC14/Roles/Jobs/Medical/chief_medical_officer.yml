@@ -61,6 +61,9 @@
     shoes: ClothingShoesColorWhite
     id: CMIDCardCMO
     # TODO RMC14 random chemical synthesis note
+  storage:
+    back:
+    - CMStampCMO
 
 - type: startingGear
   id: CMGearCMOEquipped
