@@ -2102,7 +2102,7 @@
 
 - type: entity
   parent: RMCFoodSnackBase
-  id: RMCFoodSnackMonkeyCube
+  id: RMCFoodSnackMonkeyCube #black_market_value = 25
   name: Monkey Cube
   description: Just add water!
   components:
@@ -3012,7 +3012,700 @@
     trash:
     - RMCFoodPacketPlateTrash
 
-# TODO Sliceable
+# Sliceable
+
+- type: entity
+  abstract: true
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackSliceableBase
+  components:
+  - type: SliceableFood
+    count: 6
+
+- type: entity
+  parent: RMCFoodSnackSliceableBase
+  id: RMCFoodSnackMeatbread
+  name: Meatbread Loaf
+  description: The culinary base of every self-respecting eloquen/tg/entleman.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bread.rsi
+    state: meatbread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 10
+        - ReagentId: Protein #meatprotein
+          Quantity: 10
+        - ReagentId: Vitamin #cheese
+          Quantity: 10
+  - type: Food
+    transferAmount: 2
+  - type: SliceableFood
+    slice: RMCFoodSnackMeatbreadSlice
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackMeatbreadSlice
+  name: Meatbread Slice
+  description: A slice of delicious meatbread.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bread.rsi
+    state: meatbreadslice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 1.66667
+        - ReagentId: Protein #meatprotein
+          Quantity: 1.66667
+        - ReagentId: Vitamin #cheese
+          Quantity: 1.66667
+  - type: Food
+    transferAmount: 2
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackSliceableBase
+  id: RMCFoodSnackXenomeatbread
+  name: Xenomeatbread Loaf
+  description: The culinary base of every self-respecting eloquent gentleman. Extra Heretical.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bread.rsi
+    state: xenomeatbread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 10
+        - ReagentId: Protein #meatprotein
+          Quantity: 10
+        - ReagentId: Vitamin #cheese
+          Quantity: 10
+  - type: Food
+    transferAmount: 2
+  - type: SliceableFood
+    slice: RMCFoodSnackXenomeatbreadSlice
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackXenomeatbreadSlice
+  name: Xenomeatbread Slice
+  description: A slice of delicious meatbread. Extra Heretical.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bread.rsi
+    state: xenobreadslice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 1.66667
+        - ReagentId: Protein #meatprotein
+          Quantity: 1.66667
+        - ReagentId: Vitamin #cheese
+          Quantity: 1.66667
+  - type: Food
+    transferAmount: 2
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackSliceableBase
+  id: RMCFoodSnackBananabread
+  name: Banana Nut Bread
+  description: A heavenly and filling treat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bread.rsi
+    state: bananabread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        canReact: false #stops laughter creation, remove when proper banana reagent added.
+        reagents:
+        - ReagentId: JuiceBanana #banana
+          Quantity: 15
+        - ReagentId: Nutriment #bread
+          Quantity: 15
+        - ReagentId: Sugar
+          Quantity: 10
+  - type: Food
+    transferAmount: 2
+  - type: SliceableFood
+    slice: RMCFoodSnackBananabreadSlice
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackBananabreadSlice
+  name: Banana Nut Bread Slice
+  description: A slice of delicious banana bread.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bread.rsi
+    state: bananabreadslice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        canReact: false #stops laughter creation, remove when proper banana reagent added.
+        reagents:
+        - ReagentId: JuiceBanana #banana
+          Quantity: 2.5
+        - ReagentId: Nutriment #bread
+          Quantity: 2.5
+        - ReagentId: Sugar
+          Quantity: 1.66667
+  - type: Food
+    transferAmount: 2
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackSliceableBase
+  id: RMCFoodSnackTofubread
+  name: Tofubread
+  description: Like meatbread but for vegetarians. Not guaranteed to give superpowers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bread.rsi
+    state: tofubread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 10
+        - ReagentId: Protein #tofu
+          Quantity: 10
+        - ReagentId: Vitamin #cheese
+          Quantity: 10
+  - type: Food
+    transferAmount: 2
+  - type: SliceableFood
+    slice: RMCFoodSnackTofubreadSlice
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackTofubreadSlice
+  name: Tofubread Slice
+  description: A slice of delicious tofubread.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bread.rsi
+    state: tofubreadslice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 1.66667
+        - ReagentId: Protein #tofu
+          Quantity: 1.66667
+        - ReagentId: Vitamin #cheese
+          Quantity: 1.66667
+  - type: Food
+    transferAmount: 2
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackSliceableBase
+  id: RMCFoodSnackCarrotCake
+  name: Carrot Cake
+  description: A favorite desert of a certain wascally wabbit. Not a lie.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+    state: carrotcake
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 15
+        - ReagentId: Vitamin #vegetable
+          Quantity: 5
+        - ReagentId: Sugar
+          Quantity: 5
+        - ReagentId: CMImidazoline
+          Quantity: 10
+  - type: Food
+    transferAmount: 2
+  - type: SliceableFood
+    slice: RMCFoodSnackCarrotCakeSlice
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackCarrotCakeSlice
+  name: Carrot Cake Slice
+  description: Carroty slice of Carrot Cake, carrots are good for your eyes! Also not a lie.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+    state: carrotcake_slice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 2.5
+        - ReagentId: Vitamin #vegetable
+          Quantity: 0.833333
+        - ReagentId: Sugar
+          Quantity: 0.833333
+        - ReagentId: CMImidazoline
+          Quantity: 1.66667
+  - type: Food
+    transferAmount: 2
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackSliceableBase
+  id: RMCFoodSnackBrainCake
+  name: Brain Cake
+  description: A squishy cake-thing.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+    state: braincake
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 15
+        - ReagentId: Protein #meatprotein
+          Quantity: 10
+        - ReagentId: Mannitol #alkysine
+          Quantity: 10
+  - type: Food
+    transferAmount: 2
+  - type: SliceableFood
+    slice: RMCFoodSnackBrainCakeSlice
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackBrainCakeSlice
+  name: Brain Cake Slice
+  description: Lemme tell you something about prions. THEY'RE DELICIOUS.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+    state: braincakeslice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 2.5
+        - ReagentId: Protein #meatprotein
+          Quantity: 1.66667
+        - ReagentId: Mannitol #alkysine
+          Quantity: 1.66667
+  - type: Food
+    transferAmount: 2
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackSliceableBase
+  id: RMCFoodSnackCheeseCake #black_market_value = 30
+  name: Cheese Cake
+  description: DANGEROUSLY cheesy.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+    state: cheesecake
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 10
+        - ReagentId: Vitamin #cheese
+          Quantity: 15
+  - type: Food
+    transferAmount: 2
+  - type: SliceableFood
+    slice: RMCFoodSnackCheeseCakeSlice
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackCheeseCakeSlice #black_market_value = 20
+  name: Cheese Cake Slice
+  description: Slice of pure cheestisfaction
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+    state: cheesecake_slice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 1.66667
+        - ReagentId: Vitamin #cheese
+          Quantity: 2.5
+  - type: Food
+    transferAmount: 2
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackSliceableBase
+  id: RMCFoodSnackVanillaCake
+  name: Vanilla Cake
+  description: A plain cake, not a lie.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+    state: plaincake
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 10
+        - ReagentId: Sugar
+          Quantity: 15
+  - type: SliceableFood
+    slice: RMCFoodSnackVanillaCakeSlice
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackVanillaCakeSlice
+  name: Vanilla Cake Slice
+  description: Just a slice of cake, it is enough for everyone.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+    state: plaincake_slice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 1.66667
+        - ReagentId: Sugar
+          Quantity: 2.5
+  - type: Food
+    transferAmount: 2
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackSliceableBase
+  id: RMCFoodSnackOrangeCake
+  name: Orange Cake
+  description: A cake with added orange.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+    state: orangecake
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 5
+        - ReagentId: Vitamin #fruit
+          Quantity: 5
+        - ReagentId: Sugar
+          Quantity: 10
+        - ReagentId: JuiceOrange
+          Quantity: 10
+  - type: SliceableFood
+    slice: RMCFoodSnackOrangeCakeSlice
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackOrangeCakeSlice
+  name: Orange Cake Slice
+  description: Just a slice of cake, it is enough for everyone.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+    state: orangecake_slice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 0.833333
+        - ReagentId: Vitamin #fruit
+          Quantity: 0.833333
+        - ReagentId: Sugar
+          Quantity: 1.66667
+        - ReagentId: JuiceOrange
+          Quantity: 1.66667
+  - type: Food
+    transferAmount: 2
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackSliceableBase
+  id: RMCFoodSnackLimeCake
+  name: Lime Cake
+  description: A cake with added lime.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+    state: limecake
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 5
+        - ReagentId: Vitamin #fruit
+          Quantity: 5
+        - ReagentId: Sugar
+          Quantity: 10
+        - ReagentId: JuiceLime
+          Quantity: 10
+  - type: SliceableFood
+    slice: RMCFoodSnackLimeCakeSlice
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackLimeCakeSlice
+  name: Lime Cake Slice
+  description: Just a slice of cake, it is enough for everyone.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+    state: limecake_slice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 0.833333
+        - ReagentId: Vitamin #fruit
+          Quantity: 0.833333
+        - ReagentId: Sugar
+          Quantity: 1.66667
+        - ReagentId: JuiceLime
+          Quantity: 1.66667
+  - type: Food
+    transferAmount: 2
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackSliceableBase
+  id: RMCFoodSnackLemonCake
+  name: Lemon Cake
+  description: A cake with added lemon.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+    state: lemoncake
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 5
+        - ReagentId: Vitamin #fruit
+          Quantity: 5
+        - ReagentId: Sugar
+          Quantity: 10
+        - ReagentId: JuiceLemon
+          Quantity: 10
+  - type: SliceableFood
+    slice: RMCFoodSnackLemonCakeSlice
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackLemonCakeSlice
+  name: Lemon Cake Slice
+  description: Just a slice of cake, it is enough for everyone.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+    state: lemoncake_slice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 0.833333
+        - ReagentId: Vitamin #fruit
+          Quantity: 0.833333
+        - ReagentId: Sugar
+          Quantity: 1.66667
+        - ReagentId: JuiceLemon
+          Quantity: 1.66667
+  - type: Food
+    transferAmount: 2
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackSliceableBase
+  id: RMCFoodSnackChocolateCake
+  name: Chocolate Cake
+  description: A cake with added chocolate.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+    state: chocolatecake
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 10
+        - ReagentId: Sugar
+          Quantity: 5
+        - ReagentId: CocoaPowder
+          Quantity: 10
+  - type: SliceableFood
+    slice: RMCFoodSnackChocolateCakeSlice
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackChocolateCakeSlice
+  name: Chocolate Cake Slice
+  description: Just a slice of cake, it is enough for everyone.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+    state: chocolatecake_slice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 1.66667
+        - ReagentId: Sugar
+          Quantity: 0.833333
+        - ReagentId: CocoaPowder
+          Quantity: 1.66667
+  - type: Food
+    transferAmount: 2
+    trash:
+    - RMCFoodPacketPlateTrash
+
+- type: entity
+  parent: RMCFoodSnackSliceableBase
+  id: RMCFoodSnackCheeseWheel #black_market_value = 25
+  name: Cheese Wheel
+  description: A big wheel of delicious Cheddar.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cheese.rsi
+    state: cheesewheel
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Vitamin #cheese
+          Quantity: 20
+  - type: Food
+    transferAmount: 2
+  - type: SliceableFood
+    slice: RMCFoodSnackCheeseWedge
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackCheeseWedge #black_market_value = 10
+  name: Cheese Wedge
+  description: A wedge of delicious Cheddar. The cheese wheel it was cut from can't have gone far.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cheese.rsi
+    state: cheesewedge
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Vitamin #cheese
+          Quantity: 3.33333
+  - type: Food
+    transferAmount: 2
+
+- type: entity
+  parent: RMCFoodSnackCheeseWheel
+  id: RMCFoodSnackCheeseWheelImmature
+  name: Immature Cheese Wheel
+  description: A big wheel of supposedly delicious Cheddar, but it hasn't been aged enough and as such tastes rather crap.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Vitamin #cheese
+          Quantity: 15
+        - ReagentId: Milk
+          Quantity: 5
+  - type: Food
+    transferAmount: 4
+  - type: SliceableFood
+    slice: RMCFoodSnackCheeseWedgeImmature
+
+- type: entity
+  parent: RMCFoodSnackCheeseWedge
+  id: RMCFoodSnackCheeseWedgeImmature
+  name: Immature Cheese Wedge
+  description: A wedge of immature Cheddar, without any noticeable good taste. The cheese wheel it was cut from can't have gone far. It's so weak you can basically eat it all in one bite.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        reagents:
+        - ReagentId: Vitamin #cheese
+          Quantity: 2.5
+        - ReagentId: Milk
+          Quantity: 0.833333
+  - type: Food
+    transferAmount: 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #Pizza
 
@@ -3253,7 +3946,7 @@
     trash:
     - RMCFoodPacketKeplerCrispsFlamehotTrash
 
-#Wrapped Candy Bars
+#Wrapped Candy Bars - TODO black_market_value = 5
 
 - type: entity
   parent: BaseItem
