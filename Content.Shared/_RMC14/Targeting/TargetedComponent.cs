@@ -23,6 +23,7 @@ public sealed partial class TargetedComponent : Component
 public enum TargetedVisuals
 {
     Targeted,
+    TargetedDirection,
 }
 
 [Serializable, NetSerializable]
@@ -32,4 +33,11 @@ public enum TargetedEffects
     Spotted = 1,
     Targeted= 2,
     TargetedIntense = 3,
+}
+
+public enum DirectionTargetedEffects
+{
+    None = 0,
+    DirectionTargeted = 1,
+    DirectionTargetedIntense= 2,
 }

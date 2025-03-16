@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Targeting;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -92,4 +93,16 @@ public sealed partial class AimedShotComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public int ProjectileSpeed = 62;
+
+    /// <summary>
+    ///     The speed of the aimed shot projectile
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TargetedEffects TargetEffect = TargetedEffects.Targeted;
+
+    /// <summary>
+    ///     The speed of the aimed shot projectile
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public DirectionTargetedEffects DirectionTargetEffect = DirectionTargetedEffects.DirectionTargeted;
 }

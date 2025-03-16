@@ -80,6 +80,8 @@ public abstract class SharedRMCAimedShotSystem : EntitySystem
         var laserDuration =  (float)(aimedShot.AimDuration + (_transform.GetMoverCoordinates(target).Position - _transform.GetMoverCoordinates(user).Position).Length() * aimedShot.AimDistanceDifficulty);
         var appliedSpotterBuff = false;
         var aimMultiplier = 1f;
+        var targetEffect = aimedShot.TargetEffect;
+        var directionEffect = aimedShot.DirectionTargetEffect;
 
         // Apply the spotted multiplier if the target is spotted.
         if (TryComp(target, out SpottedComponent? spotted))
@@ -97,6 +99,9 @@ public abstract class SharedRMCAimedShotSystem : EntitySystem
                     aimMultiplier -= toggleLaser.SpottedAimDurationMultiplierSubtraction;
                 else
                     aimMultiplier = toggleLaser.AimDurationMultiplier;
+
+                // TODO make this rotate towards targeter
+                //directionEffect = DirectionTargetedEffects.None;
             }
 
             if (TryComp(gun, out TargetingLaserComponent? targetingLaser))
@@ -112,7 +117,7 @@ public abstract class SharedRMCAimedShotSystem : EntitySystem
         Dirty(gun, aimedShot);
 
         _audio.PlayPredicted(aimedShot.AimingSound, gun, user);
-        _targeting.Target(gun, user, target, laserDuration, TargetedEffects.Targeted);
+        _targeting.Target(gun, user, target, laserDuration, targetEffect, directionEffect);
     }
 
     /// <summary>

@@ -48,4 +48,10 @@ public sealed partial class TargetingComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public TargetedEffects LaserType;
+
+    /// <summary>
+    ///     The direction visualiser to enable on the entity being targeted by the laser.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public DirectionTargetedEffects DirectionEffect;
 }

@@ -72,6 +72,7 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
 
         // Find the next target marker with the highest priority
         var highestMark = TargetedEffects.None;
+        var highestDirection = DirectionTargetedEffects.None;
         var spotters = false;
 
         // Check all active lasers currently targeting the target
@@ -83,6 +84,9 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
             if (comp.LaserType > highestMark)
                 highestMark = comp.LaserType;
 
+            if (comp.DirectionEffect > highestDirection)
+                highestDirection = comp.DirectionEffect;
+
             if (comp.LaserType == TargetedEffects.Spotted)
                 spotters = true;
         }
@@ -92,7 +96,7 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
             RemComp<SpottedComponent>(target);
 
         // Update the target marker
-        UpdateTargetMarker(target, highestMark, true);
+        UpdateTargetMarker(target, highestMark, highestDirection, true);
 
         if (targeted.TargetedBy.Count != 0)
             return;
@@ -113,7 +117,8 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
     /// <param name="target">The entity being targeted</param>
     /// <param name="targetingDuration">How long the targeting should last if not interrupted</param>
     /// <param name="targetedEffect">The visualiser to apply on the entity being targeted</param>
-    public void Target(EntityUid equipment, EntityUid user, EntityUid target, float targetingDuration, TargetedEffects targetedEffect = TargetedEffects.None)
+    /// <param name="directionEffect">The direction visualiser to apply on the entity being targeted</param>
+    public void Target(EntityUid equipment, EntityUid user, EntityUid target, float targetingDuration, TargetedEffects targetedEffect = TargetedEffects.None, DirectionTargetedEffects directionEffect = DirectionTargetedEffects.None)
     {
         var targeted = EnsureComp<TargetedComponent>(target);
         targeted.TargetedBy.Add(equipment);
@@ -131,9 +136,10 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
         targeting.Origin = Transform(user).Coordinates;
         targeting.User = user;
         targeting.LaserType = targetedEffect;
+        targeting.DirectionEffect = directionEffect;
         Dirty(equipment, targeting);
 
-        UpdateTargetMarker(target, targetedEffect);
+        UpdateTargetMarker(target, targetedEffect, directionEffect);
     }
 
     /// <summary>
@@ -142,14 +148,21 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
     /// <param name="target">The entity of which the visualiser should should change</param>
     /// <param name="newMarker">The new visualiser state</param>
     /// <param name="force">Should the new visualiser be applied, ignoring all conditions</param>
-    private void UpdateTargetMarker(EntityUid target, TargetedEffects newMarker, bool force = false)
+    /// <param name="directionEffect">The direction targeted visualiser to apply to the target</param>
+    private void UpdateTargetMarker(EntityUid target, TargetedEffects newMarker,  DirectionTargetedEffects directionEffect, bool force = false)
     {
         //Get the currently active visualiser.
         _appearance.TryGetData<TargetedEffects>(target, TargetedVisuals.Targeted, out var marker);
+        _appearance.TryGetData<DirectionTargetedEffects>(target, TargetedVisuals.Targeted, out var directionMarker);
 
         // Only apply the visualiser if forced, or it has a higher priority than the already existing one.
         if (force || newMarker > marker)
+        {
             _appearance.SetData(target, TargetedVisuals.Targeted, newMarker);
+        }
+
+        if (force || directionEffect > directionMarker)
+            _appearance.SetData(target, TargetedVisuals.TargetedDirection, directionEffect);
     }
 
     /// <summary>
