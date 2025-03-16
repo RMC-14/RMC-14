@@ -5,11 +5,11 @@ using Robust.Shared.Console;
 namespace Content.Server._RMC14.Marines;
 
 [AdminCommand(AdminFlags.Moderator)]
-public sealed class MarineAnnounceCommand : IConsoleCommand
+public sealed class AresAnnounceCommand : IConsoleCommand
 {
-    public string Command => "marineannounce";
-    public string Description => Loc.GetString("rmc-command-marineannounce-description");
-    public string Help => Loc.GetString("rmc-command-marineannounce-help");
+    public string Command => "aresannounce";
+    public string Description => Loc.GetString("rmc-command-aresannounce-description");
+    public string Help => Loc.GetString("rmc-command-aresannounce-help");
 
     public void Execute(IConsoleShell shell, string argStr, string[] args)
     {
@@ -20,15 +20,8 @@ public sealed class MarineAnnounceCommand : IConsoleCommand
             return;
         }
 
-        if (args.Length == 1)
-        {
-            marineAnnounce.AnnounceHighCommand(args[0]);
-        }
-        else
-        {
-            var message = string.Join(' ', args[1..]);
-            marineAnnounce.AnnounceHighCommand(message, args[0]);
-        }
+        var message = string.Join(' ', args);
+        marineAnnounce.AnnounceHighCommand(message, "ARES v3.2");
         shell.WriteLine("Sent!");
     }
 }
