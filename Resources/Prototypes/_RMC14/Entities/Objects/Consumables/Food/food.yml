@@ -10,10 +10,6 @@
   - type: FlavorProfile
     flavors:
     - nutriment
-  - type: SolutionContainerManager
-    solutions:
-      food:
-        maxVol: 50
   - type: Extractable
     grindableSolutionName: food
   - type: InjectableSolution

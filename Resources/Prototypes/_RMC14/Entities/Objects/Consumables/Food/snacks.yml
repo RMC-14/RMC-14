@@ -31,6 +31,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Cellulose #plantmatter
           Quantity: 8
@@ -50,6 +51,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 1
@@ -72,6 +74,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 10
@@ -92,6 +95,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #vegetable
           Quantity: 4
@@ -111,6 +115,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 3
@@ -133,6 +138,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 3
@@ -159,6 +165,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 4
@@ -177,6 +184,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 2
@@ -199,6 +207,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Egg
           Quantity: 3
@@ -221,6 +230,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 3
@@ -243,6 +253,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 3
@@ -278,6 +289,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 2
@@ -303,6 +315,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 2
@@ -323,6 +336,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 3
@@ -346,6 +360,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 3
@@ -362,6 +377,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 3
@@ -378,6 +394,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 3
@@ -401,6 +418,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Egg
           Quantity: 1
@@ -495,6 +513,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Egg
           Quantity: 2
@@ -518,6 +537,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Egg
           Quantity: 2
@@ -534,6 +554,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Flour #dough
           Quantity: 1
@@ -553,6 +574,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein #meatprotein
           Quantity: 4 #3-5
@@ -573,6 +595,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #tofu
           Quantity: 3
@@ -591,6 +614,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #tofu
           Quantity: 12
@@ -611,6 +635,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 2
@@ -629,6 +654,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: UncookedAnimalProteins #fish
           Quantity: 3
@@ -646,6 +672,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: UncookedAnimalProteins #fish
           Quantity: 3
@@ -662,6 +689,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: UncookedAnimalProteins #fish
           Quantity: 4
@@ -680,6 +708,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #mushroom
           Quantity: 3
@@ -700,6 +729,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #vegetable
           Quantity: 3
@@ -718,6 +748,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein #meatprotein
           Quantity: 12
@@ -736,6 +767,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein #meatprotein
           Quantity: 3
@@ -754,6 +786,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein #meatprotein
           Quantity: 6
@@ -776,13 +809,31 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein # meatprotein
           Quantity: 2
         - ReagentId: Nutriment # bread
           Quantity: 2
 
-# TODO RMC14 - Heated Donkpocket tricord interaction
+- type: entity
+  parent: RMCFoodSnackDonkpocket
+  id: RMCFoodSnackWarmDonkpocket
+  name: Warm Donk-pocket
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Protein # meatprotein
+          Quantity: 2
+        - ReagentId: Nutriment # bread
+          Quantity: 2
+        - ReagentId: CMTricordrazine
+          Quantity: 5
+  - type: Food
+    transferAmount: 6
 
 - type: entity
   parent: RMCFoodSnackBase
@@ -796,6 +847,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein # meatprotein
           Quantity: 6
@@ -816,6 +868,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 2
@@ -834,6 +887,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 3
@@ -854,6 +908,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 3
@@ -874,6 +929,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 3
@@ -894,6 +950,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 3
@@ -914,6 +971,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 3
@@ -934,6 +992,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 3
@@ -954,6 +1013,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 3
@@ -974,6 +1034,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 6
@@ -992,6 +1053,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 6
@@ -1010,6 +1072,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Egg
           Quantity: 4
@@ -1031,6 +1094,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 4
@@ -1051,6 +1115,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 4
@@ -1077,6 +1142,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 4
@@ -1099,6 +1165,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 5
@@ -1121,6 +1188,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 6
@@ -1143,6 +1211,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #vegetable
           Quantity: 4
@@ -1165,6 +1234,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 7
@@ -1187,6 +1257,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 10
@@ -1207,6 +1278,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 6
@@ -1232,6 +1304,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 6
@@ -1257,6 +1330,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 5
@@ -1279,6 +1353,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein #mushroom
           Quantity: 4
@@ -1296,6 +1371,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 4
@@ -1316,6 +1392,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 4
@@ -1338,6 +1415,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Soysauce
           Quantity: 4
@@ -1360,6 +1438,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein #meatprotein
           Quantity: 8
@@ -1380,6 +1459,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein #meatprotein
           Quantity: 8
@@ -1400,6 +1480,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein #tofu
           Quantity: 8
@@ -1420,6 +1501,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein #fish
           Quantity: 6
@@ -1441,6 +1523,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Cellulose #plantmatter
           Quantity: 2
@@ -1462,6 +1545,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein #meatprotein
           Quantity: 4
@@ -1481,6 +1565,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Vitamin #fruit
           Quantity: 4
@@ -1501,6 +1586,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Sugar
           Quantity: 4
@@ -1518,6 +1604,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein #cheese
           Quantity: 4
@@ -1537,6 +1624,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 4
@@ -1559,6 +1647,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #potato
           Quantity: 2
@@ -1579,6 +1668,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #potato
           Quantity: 2
@@ -1601,6 +1691,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 2
@@ -1621,6 +1712,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Flour #dough
           Quantity: 1
@@ -1637,6 +1729,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein #cheese
           Quantity: 4
@@ -1659,6 +1752,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Toxin
           Quantity: 1
@@ -1679,6 +1773,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein #meatprotein
           Quantity: 4
@@ -1703,6 +1798,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein #mushroom
           Quantity: 6
@@ -1725,6 +1821,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein #mushroom
           Quantity: 6
@@ -1749,6 +1846,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Cellulose #plantmatter
           Quantity: 1
@@ -1769,6 +1867,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein #meatprotein
           Quantity: 8
@@ -1791,6 +1890,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 2
@@ -1813,6 +1913,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 4
@@ -1835,6 +1936,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #vegetable
           Quantity: 8
@@ -1857,6 +1959,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Cellulose #plantmatter
           Quantity: 8
@@ -1891,6 +1994,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Cellulose #plantmatter
           Quantity: 6
@@ -1907,6 +2011,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Cellulose #plantmatter
           Quantity: 6
@@ -1923,6 +2028,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 5
@@ -1939,6 +2045,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 5
@@ -1953,6 +2060,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #fruit
           Quantity: 2
@@ -1967,6 +2075,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein #meatprotein
           Quantity: 6
@@ -1981,6 +2090,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Carbon
           Quantity: 10
@@ -1995,6 +2105,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #vegetable
           Quantity: 5
@@ -2009,6 +2120,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 6
@@ -2029,6 +2141,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Water
           Quantity: 10
@@ -2046,6 +2159,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Water
           Quantity: 10
@@ -2064,6 +2178,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein #meatprotein
           Quantity: 6
@@ -2088,6 +2203,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein #meatprotein
           Quantity: 6
@@ -2112,13 +2228,47 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein #meatprotein
           Quantity: 10
   - type: Food
     transferAmount: 12
+  - type: Reactive
+    reactions:
+    - reagents: [Water]
+      methods: [Touch, Ingestion, Injection]
+      effects:
+      - !type:AddToSolutionReaction
+        solution: food
+  - type: Rehydratable
+    possibleSpawns:
+    - MobMonkey #todo check if we use custom monkey
+  - type: RefillableSolution
+    solution: food
+
+
 
 # TODO RMC14 - Monkey cube & misc animal cubes
+
+- type: entity
+  parent: BaseItem
+  id: RMCFoodSnackMonkeyCubeWrapped
+  name: Monkey Cube
+  description: Still wrapped in some paper.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/monkeycubes.rsi
+    state: monkeycubewrap
+  - type: Item
+    size: Small
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCFoodSnackMonkeyCube
+
+
+
+
 
 - type: entity
   parent: RMCFoodSnackBase
@@ -2132,6 +2282,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 6
@@ -2150,6 +2301,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein #meatprotein
           Quantity: 7
@@ -2170,6 +2322,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #vegetable
           Quantity: 2
@@ -2194,6 +2347,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein #meatprotein
           Quantity: 10
@@ -2220,6 +2374,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 6
@@ -2242,6 +2397,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein #fish
           Quantity: 6
@@ -2260,6 +2416,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 2
@@ -2284,6 +2441,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 6
@@ -2306,6 +2464,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 4
@@ -2328,6 +2487,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #vegetable
           Quantity: 5
@@ -2350,6 +2510,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 8
@@ -2372,6 +2533,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #vegetable
           Quantity: 4
@@ -2400,6 +2562,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 1
@@ -2416,6 +2579,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 1
@@ -2434,6 +2598,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 5
@@ -2448,6 +2613,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 5
@@ -2466,6 +2632,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Protein #tofu
           Quantity: 8
@@ -2488,6 +2655,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 8
@@ -2508,6 +2676,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #noodles
           Quantity: 2
@@ -2528,6 +2697,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #rice
           Quantity: 2
@@ -2548,6 +2718,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #rice
           Quantity: 3
@@ -2570,6 +2741,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #noodles
           Quantity: 6
@@ -2592,6 +2764,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #noodles
           Quantity: 4
@@ -2614,6 +2787,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #noodles
           Quantity: 6
@@ -2636,6 +2810,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #vegetable
           Quantity: 3
@@ -2689,6 +2864,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Vitamin #fruit
           Quantity: 3
@@ -2709,6 +2885,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 3
@@ -2731,6 +2908,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 3
@@ -2753,6 +2931,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 3
@@ -2773,6 +2952,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 2
@@ -2789,6 +2969,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 2
@@ -2807,7 +2988,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 1
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #minttoxin
           Quantity: 1
@@ -2824,6 +3005,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #mushroom
           Quantity: 6
@@ -2846,6 +3028,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 3
@@ -2863,6 +3046,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 4
@@ -2883,6 +3067,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Egg
           Quantity: 2
@@ -2906,6 +3091,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #vegetable
           Quantity: 8
@@ -2956,6 +3142,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #fruit
           Quantity: 4
@@ -2978,6 +3165,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Cellulose #plantmatter
           Quantity: 4
@@ -3002,6 +3190,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #fruit
           Quantity: 8
@@ -3034,6 +3223,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 10
@@ -3058,6 +3248,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 1.66667
@@ -3082,6 +3273,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 10
@@ -3106,6 +3298,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 1.66667
@@ -3130,6 +3323,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         canReact: false #stops laughter creation, remove when proper banana reagent added.
         reagents:
         - ReagentId: JuiceBanana #banana
@@ -3155,6 +3349,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         canReact: false #stops laughter creation, remove when proper banana reagent added.
         reagents:
         - ReagentId: JuiceBanana #banana
@@ -3180,6 +3375,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 10
@@ -3204,6 +3400,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 1.66667
@@ -3228,6 +3425,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 15
@@ -3254,6 +3452,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 2.5
@@ -3280,6 +3479,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 15
@@ -3304,6 +3504,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 2.5
@@ -3328,6 +3529,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 10
@@ -3350,6 +3552,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 1.66667
@@ -3372,6 +3575,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 10
@@ -3392,6 +3596,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 1.66667
@@ -3414,6 +3619,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 5
@@ -3438,6 +3644,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 0.833333
@@ -3464,6 +3671,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 5
@@ -3488,6 +3696,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 0.833333
@@ -3514,6 +3723,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 5
@@ -3538,6 +3748,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 0.833333
@@ -3564,6 +3775,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 10
@@ -3586,6 +3798,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 1.66667
@@ -3610,6 +3823,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Vitamin #cheese
           Quantity: 20
@@ -3630,6 +3844,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Vitamin #cheese
           Quantity: 3.33333
@@ -3645,6 +3860,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Vitamin #cheese
           Quantity: 15
@@ -3664,6 +3880,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Vitamin #cheese
           Quantity: 2.5
@@ -3672,40 +3889,373 @@
   - type: Food
     transferAmount: 4
 
+- type: entity
+  parent: RMCFoodSnackCheeseWheel
+  id: RMCFoodSnackCheeseWheelMature
+  name: Mature Cheese Wheel
+  description: A big wheel of delicious Cheddar, sufficiently aged.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Vitamin #cheese
+          Quantity: 20
+        - ReagentId: TableSalt
+          Quantity: 5
+  - type: SliceableFood
+    slice: RMCFoodSnackCheeseWedgeMature
 
+- type: entity
+  parent: RMCFoodSnackCheeseWedge
+  id: RMCFoodSnackCheeseWedgeMature
+  name: Mature Cheese Wedge
+  description: A wedge of mature Cheddar, tastes pretty nice. The cheese wheel it was cut from can't have gone far.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Vitamin #cheese
+          Quantity: 6.66667
+        - ReagentId: TableSalt
+          Quantity: 0.833333
 
+- type: entity
+  parent: RMCFoodSnackCheeseWheel
+  id: RMCFoodSnackCheeseWheelAged
+  name: Aged Cheese Wheel
+  description: A big wheel of delicious Cheddar, it has been aged for a long time and is pretty strong.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Vitamin #cheese
+          Quantity: 25
+  - type: SliceableFood
+    slice: RMCFoodSnackCheeseWedgeAged
 
+- type: entity
+  parent: RMCFoodSnackCheeseWedge
+  id: RMCFoodSnackCheeseWedgeAged
+  name: Aged Cheese Wedge
+  description: A wedge of very mature Cheddar. This one's been aged for a while. The cheese wheel it was cut from can't have gone far.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Vitamin #cheese
+          Quantity: 4.16667
 
+- type: entity
+  parent: RMCFoodSnackCheeseWheel
+  id: RMCFoodSnackCheeseWheelPrimordial
+  name: Primordial Cheese Wheel
+  description: A big wheel of delicious Cheddar, it has been aged for practically aeons. Merely seeing this cheese causes you to break into a cold sweat. Due to its strength, you can't eat in big bites.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        canReact: false #prevents mead reaction, remove when either upstream adds honey and proper mead recipe or we switch to unique enzyme/sugar reagents
+        reagents:
+        - ReagentId: Vitamin #cheese
+          Quantity: 25
+        - ReagentId: Sugar
+          Quantity: 1
+        - ReagentId: TableSalt
+          Quantity: 1
+        - ReagentId: Enzyme
+          Quantity: 1
+  - type: SliceableFood
+    slice: RMCFoodSnackCheeseWedgePrimordial
 
+- type: entity
+  parent: RMCFoodSnackCheeseWedge
+  id: RMCFoodSnackCheeseWedgePrimordial
+  name: Primordial Cheese Wedge
+  description: A wedge of extra mature Cheddar. So strong you can barely put more than a few grammes in your mouth at a time. The cheese wheel it was cut from can't have gone far.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        canReact: false #prevents mead reaction, remove when either upstream adds honey and proper mead recipe or we switch to unique enzyme/sugar reagents
+        reagents:
+        - ReagentId: Vitamin #cheese
+          Quantity: 4.16667
+        - ReagentId: Sugar
+          Quantity: 0.166667
+        - ReagentId: TableSalt
+          Quantity: 0.166667
+        - ReagentId: Enzyme
+          Quantity: 0.166667
 
+- type: entity
+  parent: RMCFoodSnackSliceableBase
+  id: RMCFoodSnackBirthdayCake
+  name: Birthday Cake
+  description: Happy Birthday...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+    state: birthdaycake
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 10
+        - ReagentId: Sugar
+          Quantity: 10
+        - ReagentId: Vitamin #sprinkles
+          Quantity: 10
+  - type: Food
+    transferAmount: 3
+  - type: SliceableFood
+    slice: RMCFoodSnackBirthdayCakeSlice
 
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackBirthdayCakeSlice
+  name: Birthday Cake Slice
+  description: A slice of your birthday
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+    state: birthdaycakeslice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 1.66667
+        - ReagentId: Sugar
+          Quantity: 1.66667
+        - ReagentId: Vitamin #sprinkles
+          Quantity: 1.66667
+  - type: Food
+    transferAmount: 2
+    trash:
+    - RMCFoodPacketPlateTrash
 
+- type: entity
+  parent: RMCFoodSnackSliceableBase
+  id: RMCFoodSnackBread
+  name: Bread
+  description: Some plain old Earthen bread.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bread.rsi
+    state: bread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 6
+  - type: Food
+    transferAmount: 2
+  - type: SliceableFood
+    slice: RMCFoodSnackBreadSlice
 
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackBreadSlice
+  name: Bread Slice
+  description: A slice of home.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bread.rsi
+    state: breadslice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 1
+  - type: Food
+    transferAmount: 2
+    trash:
+    - RMCFoodPacketPlateTrash
 
+- type: entity
+  parent: RMCFoodSnackSliceableBase
+  id: RMCFoodSnackCreamCheeseBread
+  name: Cream CheeseBread
+  description: Yum yum yum!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bread.rsi
+    state: creamcheesebread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 10
+        - ReagentId: Vitamin #cheese
+          Quantity: 10
+  - type: Food
+    transferAmount: 2
+  - type: SliceableFood
+    slice: RMCFoodSnackCreamCheeseBreadSlice
 
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackCreamCheeseBreadSlice
+  name: Cream Cheese Bread Slice
+  description: A slice of yum!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/bread.rsi
+    state: creamcheesebreadslice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 1.66667
+        - ReagentId: Vitamin #cheese
+          Quantity: 1.66667
+  - type: Food
+    transferAmount: 2
+    trash:
+    - RMCFoodPacketPlateTrash
 
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackWatermelonSlice
+  name: Watermelon Slice
+  description: A slice of watery goodness.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/slices.rsi
+    state: watermelonslice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment #watermelon
+          Quantity: 0.2 #Taken from normal watermelon, may be dynamic based on original watermelon's stats
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: JuiceWatermelon
+        Quantity: 5
+  - type: Food
+    transferAmount: 2
 
+- type: entity
+  parent: RMCFoodSnackSliceableBase
+  id: RMCFoodSnackAppleCake
+  name: Apple Cake
+  description: A cake centred with Apple
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+    state: applecake
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 5
+        - ReagentId: Vitamin #fruit
+          Quantity: 10
+        - ReagentId: Sugar
+          Quantity: 10
+  - type: SliceableFood
+    slice: RMCFoodSnackAppleCakeSlice
 
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackAppleCakeSlice
+  name: Apple Cake Slice
+  description: A slice of heavenly cake.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+    state: applecakeslice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 0.833333
+        - ReagentId: Vitamin #fruit
+          Quantity: 1.66667
+        - ReagentId: Sugar
+          Quantity: 1.66667
+  - type: Food
+    transferAmount: 2
+    trash:
+    - RMCFoodPacketPlateTrash
 
+- type: entity
+  parent: RMCFoodSnackSliceableBase
+  id: RMCFoodSnackPumpkinPie
+  name: Pumpkin Pie
+  description: A delicious treat for the autumn months.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+    state: pumpkinpie
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 5
+        - ReagentId: Vitamin #vegetable
+          Quantity: 5
+        - ReagentId: Sugar
+          Quantity: 10
+  - type: SliceableFood
+    slice: RMCFoodSnackPumpkinPieSlice
 
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackPumpkinPieSlice
+  name: Pumpkin Pie Slice
+  description: A slice of pumpkin pie, with whipped cream on top. Perfection.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/cakes.rsi
+    state: pumpkinpieslice
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 0.833333
+        - ReagentId: Vitamin #vegetable
+          Quantity: 0.833333
+        - ReagentId: Sugar
+          Quantity: 1.66667
+  - type: Food
+    transferAmount: 2
+    trash:
+    - RMCFoodPacketPlateTrash
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Cracker (MRE)
 
 #Pizza
 
@@ -3722,21 +4272,137 @@
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/taco.rsi
     state: taco
-  - type: Item
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 7
   - type: Food
     transferAmount: 3
 
-#raw potato sticks
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackRawCutlet
+  name: Raw Cutlet
+  description: A thin piece of raw meat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/food_ingredients.rsi
+    state: rawcutlet
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Protein #meatprotein
+          Quantity: 1
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackCutlet
+  name: Cutlet
+  description: A tasty meat slice.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/food_ingredients.rsi
+    state: cutlet
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Protein #meatprotein
+          Quantity: 2
+  - type: Food
+    transferAmount: 2
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackRawMeatball
+  name: Raw Meatball
+  description: A raw meatball.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/food_ingredients.rsi
+    state: rawmeatball
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Protein #meatprotein
+          Quantity: 2
+  - type: Food
+    transferAmount: 2
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackHotdog
+  name: Hotdog
+  description: Unrelated to dogs, maybe.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
+    state: open-hotdog
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 3
+        - ReagentId: Protein #meatprotein
+          Quantity: 3
+  - type: Food
+    transferAmount: 2
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackFlatbread
+  name: Flatbread
+  description: Bland but filling.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/food_ingredients.rsi
+    state: flatbread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment #bread
+          Quantity: 3
+  - type: Food
+    transferAmount: 2
+
+# TODO Potato + knife = raw sticks (knife interaction for rawsticks & wire for potato cell
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackRawPotatoSticks
+  name: Raw Potato Sticks
+  description: Raw fries, not very tasty.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/food_ingredients.rsi
+    state: rawsticks
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Vitamin #vegetable
+          Quantity: 3
+        - ReagentId: Nutriment #potato
+          Quantity: 3
+  - type: Food
+    transferAmount: 2
 
 - type: entity
   parent: BaseItem
-  id: RMCFoodSnackBurritoPackaged
+  id: RMCFoodSnackPackagedBurritoWrapped
   name: Packaged Burrito
   description: A hard microwavable burrito. There's no time given on how long to cook it. Packaged by the Weston-Yamada Corporation.
   components:
@@ -3748,6 +4414,7 @@
       sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
       state: packaged-burrito_helmet
   - type: Item
+    size: Small
     heldPrefix: pburrito
   - type: SpawnItemsOnUse
     items:
@@ -3758,7 +4425,7 @@
 
 - type: entity
   parent: RMCFoodSnackBase
-  id: RMCFoodSnackBurrito
+  id: RMCFoodSnackPackagedBurrito
   name: Packaged Burrito
   description: A hard microwavable burrito. There's no time given on how long to cook it. Packaged by the Weston-Yamada Corporation.
   components:
@@ -3773,6 +4440,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 5
@@ -3783,7 +4451,7 @@
 
 - type: entity
   parent: BaseItem
-  id: RMCFoodSnackCheeseburgerPackaged
+  id: RMCFoodSnackPackagedCheeseburgerWrapped
   name: Packaged Cheeseburger
   description: A soggy microwavable burger. There's no time given for how long to cook it. Packaged by the Weston-Yamada Corporation.
   components:
@@ -3791,6 +4459,7 @@
     sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
     state: burger
   - type: Item
+    size: Small
     heldPrefix: pburger
   - type: SpawnItemsOnUse
     items:
@@ -3812,6 +4481,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 5
@@ -3824,7 +4494,7 @@
 
 - type: entity
   parent: BaseItem
-  id: RMCFoodSnackHotdogPackaged
+  id: RMCFoodSnackPackagedHotdogWrapped
   name: Packaged Hotdog
   description: A singular squishy, room temperature, hot dog. There's no time given for how long to cook it, so you assume its probably good to go. Packaged by the Weston-Yamada Corporation.
   components:
@@ -3836,6 +4506,7 @@
       sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
       state: packaged-hotdog_helmet
   - type: Item
+    size: Small
     heldPrefix: photdog
   - type: SpawnItemsOnUse
     items:
@@ -3846,7 +4517,7 @@
 
 - type: entity
   parent: RMCFoodSnackBase
-  id: RMCFoodSnackHotdog
+  id: RMCFoodSnackPackagedHotdog
   name: Packaged Hotdog
   description: A singular squishy, room temperature, hot dog. There's no time given for how long to cook it, so you assume its probably good to go. Packaged by the Weston-Yamada Corporation.
   components:
@@ -3861,6 +4532,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 2
@@ -3886,6 +4558,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 4
@@ -3909,6 +4582,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 4
@@ -3932,6 +4606,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment #bread
           Quantity: 4
@@ -3946,7 +4621,7 @@
     trash:
     - RMCFoodPacketKeplerCrispsFlamehotTrash
 
-#Wrapped Candy Bars - TODO black_market_value = 5
+#Wrapped Candy Bars - black_market_value = 5
 
 - type: entity
   parent: BaseItem
@@ -3962,6 +4637,7 @@
       sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
       state: boonie_helmet
   - type: Item
+    size: Small
     heldPrefix: boonie
   - type: SpawnItemsOnUse
     items:
@@ -3983,6 +4659,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 6
@@ -4037,6 +4714,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 7
@@ -4098,6 +4776,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 5
@@ -4132,6 +4811,7 @@
       sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
       state: barcardine_helmet
   - type: Item
+    size: Small
     heldPrefix: barcardine
   - type: SpawnItemsOnUse
     items:
@@ -4153,6 +4833,7 @@
   - type: SolutionContainerManager
     solutions:
       food:
+        maxVol: 50
         reagents:
         - ReagentId: Nutriment
           Quantity: 4
