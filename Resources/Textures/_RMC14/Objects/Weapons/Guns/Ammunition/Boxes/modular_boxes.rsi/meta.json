@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Original Sprite by Aleksh, Modified by Ramiris",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "rifle_box"
+    },
+    {
+      "name": "rifle_lid"
+    },
+    {
+      "name": "rifle_box_stripe"
+    },
+    {
+      "name": "rifle_lid_stripe"
+    },
+    {
+      "name": "rifle_box_54"
+    },
+    {
+      "name": "rifle_ammo_full"
+    },
+    {
+      "name": "rifle_ammo_high"
+    },
+    {
+      "name": "rifle_ammo_low"
+    },
+    {
+      "name": "rifle_ammo_medium"
+    }
+  ]
+}
