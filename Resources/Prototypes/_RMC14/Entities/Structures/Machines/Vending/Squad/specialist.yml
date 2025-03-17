@@ -28,6 +28,7 @@
       #  points: 0
       - id: RMCScoutSpecEquipmentCase
       - id: CMSniperEquipmentCase
+      - id: RMCAntiMaterielEquipmentCase
     - name: Extra Scout Ammunition
       entries:
       - id: RMCMagazineRifleM4SPRA19Impact

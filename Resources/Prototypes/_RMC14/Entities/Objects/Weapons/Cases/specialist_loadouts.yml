@@ -12,7 +12,8 @@
     - id: CMMagazineSniperM96S
     - id: CMMagazineSniperM96SIncendiary
       amount: 2
-    - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
+    - id: CMMagazineSniperM96SFlak
+      amount: 2
     - id: CMBackpackSniper
     - id: RMCMK80
     - id: CMMagazinePistolMK80
@@ -27,6 +28,27 @@
     items:
       tags:
       - RMCKitSpotter
+
+- type: entity
+  parent: CMSniperEquipmentCase
+  id: RMCAntiMaterielEquipmentCase
+  name: anti-materiel sniper equipment case
+  description: "A large case containing your very own long-range M96S sniper rifle, M45 ghillie armor and helmet, M42 scout sight, ammunition, spotter equipment, and additional pieces of equipment.\n\nNOTE: You cannot put items back inside this case."
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMArmorM45
+    - id: CMArmorHelmetM45
+    - id: CMGlassesM42ScoutSight
+    - id: RMCMagazineSniperXM43E1AntiMateriel
+      amount: 2
+    - id: CMBackpackSniper
+    - id: RMCMK80
+    - id: CMMagazinePistolMK80
+      amount: 2
+    - id: RMCXM43E1AntiMaterielRifle
+    - id: RMCKitSpotter
+  #    - id: CMFacepaintSniper
 
 - type: entity
   parent: RMCBaseEquipmentCase
