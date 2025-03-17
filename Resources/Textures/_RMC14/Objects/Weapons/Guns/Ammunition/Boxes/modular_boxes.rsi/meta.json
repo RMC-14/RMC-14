@@ -14,10 +14,10 @@
       "name": "rifle_lid"
     },
     {
-      "name": "rifle_box_stripe"
+      "name": "rifle_box_marking"
     },
     {
-      "name": "rifle_lid_stripe"
+      "name": "rifle_lid_marking"
     },
     {
       "name": "rifle_box_54"
@@ -35,7 +35,7 @@
       "name": "rifle_ammo_medium"
     },
     {
-      "name": "smg_lid_stripe"
+      "name": "smg_lid_marking"
     },
     {
       "name": "smg_box"
@@ -44,7 +44,7 @@
       "name": "smg_box_63"
     },
     {
-      "name": "smg_box_stripe"
+      "name": "smg_box_marking"
     },
     {
       "name": "smg_lid"
@@ -110,7 +110,7 @@
       "name": "pistol_box_80"
     },
     {
-      "name": "pistol_box_stripe"
+      "name": "pistol_box_marking"
     },
     {
       "name": "pistol_box_su"
@@ -119,7 +119,28 @@
       "name": "pistol_lid"
     },
     {
-      "name": "pistol_lid_stripe"
+      "name": "pistol_lid_marking"
+    },
+    {
+      "name": "rifle_box_spr"
+    },
+    {
+      "name": "pistol_box_1984"
+    },
+    {
+      "name": "pistol_box_77"
+    },
+    {
+      "name": "pistol_box_44"
+    },
+    {
+      "name": "shell_box_incendiary"
+    },
+    {
+      "name": "shell_box_marking"
+    },
+    {
+      "name": "shell_lid_marking"
     }
   ]
 }
