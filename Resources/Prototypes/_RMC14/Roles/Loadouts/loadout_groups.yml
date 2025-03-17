@@ -190,6 +190,8 @@
   - PlushieMothRMC
   - PlushieRockRMC
   - PlushieTherapyRMC
+  - PlushieGnarpGnarpRMC
+  - PlushieGnarpGnarpAltRMC
 
 # Weapons
 - type: loadoutGroup
