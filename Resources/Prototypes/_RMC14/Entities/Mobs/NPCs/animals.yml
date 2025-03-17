@@ -522,3 +522,12 @@
     prototypes:
     - RMCMobGarry
 
+- type: entity
+  parent: SpawnMobMouse
+  id: RMCSpawnMobDoc
+  name: doc spawner
+  suffix: RMC
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobMouseDoc

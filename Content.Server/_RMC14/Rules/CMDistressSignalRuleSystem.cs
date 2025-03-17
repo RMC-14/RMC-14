@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server._RMC14.Commendations;
 using Content.Server._RMC14.Dropship;
+using Content.Server._RMC14.MapInsert;
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Stations;
 using Content.Server._RMC14.Xenonids.Construction.Tunnel;
@@ -45,6 +46,7 @@ using Content.Shared._RMC14.Survivor;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Thunderdome;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared._RMC14.WeedKiller;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
@@ -130,6 +132,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly RMCCameraShakeSystem _rmcCameraShake = default!;
     [Dependency] private readonly ThermalCloakSystem _thermalCloak = default!;
     [Dependency] private readonly SharedGhillieSuitSystem _ghillieSuit = default!;
+    [Dependency] private readonly MapInsertSystem _mapInsert = default!;
 
     private readonly HashSet<string> _operationNames = new();
     private readonly HashSet<string> _operationPrefixes = new();
@@ -1033,6 +1036,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         rule.Comp.XenoMap = grids[0];
 
+        //Process map inserts
+        var mapInsertQuery = EntityQueryEnumerator<MapInsertComponent>();
+        while (mapInsertQuery.MoveNext(out var uid, out var mapInsert))
+        {
+            _mapInsert.ProcessMapInsert((uid, mapInsert));
+        }
+
         _mapManager.SetMapPaused(mapId, false);
 
         // TODO RMC14 this should be delayed by 3 minutes + 13 second warning for immersion
@@ -1049,6 +1059,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     Spawn(gas, coordinates);
                 }
             }
+        }
+
+        var tunnels = EntityQueryEnumerator<XenoTunnelComponent>();
+        while (tunnels.MoveNext(out var uid, out _))
+        {
+            EnsureComp<DeletedByWeedKillerComponent>(uid);
         }
 
         return true;

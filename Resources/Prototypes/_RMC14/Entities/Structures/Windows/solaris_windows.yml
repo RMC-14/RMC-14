@@ -142,7 +142,7 @@
       collection: WindowShatter
 
 - type: entity
-  parent: CMBaseWindow
+  parent: CMBaseWindowIndestructible
   id: CMWindowSolarisHull
   name: hull window
   description: A glass window. Something tells you this one is somehow indestructible.

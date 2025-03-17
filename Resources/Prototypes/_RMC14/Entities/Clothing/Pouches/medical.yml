@@ -104,7 +104,7 @@
       #      - TODO RMC14 splint
       - CMAutoInjector
       - CMFireExtinguisherPortable
-      - CMRollerBed
+      - CMRollerItem
       - BodyBag
       - PillPacket
       - Hypospray
@@ -273,7 +273,7 @@
       # - TODO RMC14 syringe case
         - CMSurgicalCase
         - CMFireExtinguisherPortable
-        - CMRollerBed
+        - CMRollerItem
         - CMSurgicalLine
         - CMSynthGraft
         - BodyBag
@@ -306,7 +306,7 @@
       #      - TODO RMC14 syringe case
       - CMSurgicalCase
       - CMFireExtinguisherPortable
-      - CMRollerBed
+      - CMRollerItem
       - CMSurgicalLine
       - CMSynthGraft
       - BodyBag

@@ -52,6 +52,7 @@
   - type: Tag
     tags:
     - RMCTankReagent
+    - Structure
 
 - type: entity
   parent: RMCTankReagentEmpty

@@ -331,6 +331,7 @@
       RMCSkillMedical: 2
   - type: Hypospray
     transferAmount: 15
+  - type: RMCEmptySolution
 
 - type: entity
   parent: RMCMedicAutoInjector15

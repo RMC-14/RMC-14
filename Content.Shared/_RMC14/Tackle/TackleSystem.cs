@@ -1,5 +1,6 @@
-﻿using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Buckle.Components;
 using Content.Shared.CombatMode;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
@@ -33,6 +34,13 @@ public sealed class TackleSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<TackleableComponent, CMDisarmEvent>(OnDisarmed, before: [typeof(SharedHandsSystem), typeof(StaminaSystem)]);
+
+        SubscribeLocalEvent<TackledRecentlyByComponent, ComponentRemove>(OnByRemove);
+        SubscribeLocalEvent<TackledRecentlyByComponent, EntityTerminatingEvent>(OnByRemove);
+        SubscribeLocalEvent<TackledRecentlyByComponent, DownedEvent>(OnDowned);
+
+        SubscribeLocalEvent<TackledRecentlyComponent, ComponentRemove>(OnRemove);
+        SubscribeLocalEvent<TackledRecentlyComponent, EntityTerminatingEvent>(OnRemove);
     }
 
     private void OnDisarmed(Entity<TackleableComponent> target, ref CMDisarmEvent args)
@@ -53,6 +61,10 @@ public sealed class TackleSystem : EntitySystem
 
         recently.Trackers[target] = tracker;
         Dirty(user, recently);
+
+        var tackledBy = EnsureComp<TackledRecentlyByComponent>(target);
+        tackledBy.Tacklers.Add(user);
+        Dirty(target, tackledBy);
 
         if (_net.IsClient)
             return;
@@ -92,7 +104,7 @@ public sealed class TackleSystem : EntitySystem
                         _audio.PlayPvs(standingState.DownSound, target);
                 }
             }
-            
+
             foreach (var session in Filter.PvsExcept(user).Recipients)
             {
                 if (session.AttachedEntity is not { } recipient)
@@ -112,7 +124,10 @@ public sealed class TackleSystem : EntitySystem
         }
 
         if (!HasComp<VictimInfectedComponent>(target))
+        {
             recently.Trackers.Remove(target);
+            RemoveTackledBy(target.Owner, user);
+        }
 
         var stun = tackle.StunMin;
         if (tackle.StunMin < tackle.StunMax)
@@ -122,13 +137,51 @@ public sealed class TackleSystem : EntitySystem
         _stun.TryParalyze(target, stun, true);
     }
 
+    private void OnByRemove<T>(Entity<TackledRecentlyByComponent> ent, ref T args)
+    {
+        foreach (var tackler in ent.Comp.Tacklers)
+        {
+            if (!TryComp(tackler, out TackledRecentlyComponent? recently))
+                continue;
+
+            recently.Trackers.Remove(ent);
+            Dirty(tackler, recently);
+        }
+    }
+
+    private void OnDowned(Entity<TackledRecentlyByComponent> ent, ref DownedEvent args)
+    {
+        if (!HasComp<VictimInfectedComponent>(ent) && (!TryComp<BuckleComponent>(ent, out var buckle) || !buckle.Buckled))
+            RemCompDeferred<TackledRecentlyByComponent>(ent);
+    }
+
+    private void OnRemove<T>(Entity<TackledRecentlyComponent> ent, ref T args)
+    {
+        foreach (var tracker in ent.Comp.Trackers)
+        {
+            if (!TryComp(tracker.Key, out TackledRecentlyByComponent? tackled))
+                continue;
+
+            tackled.Tacklers.Remove(ent);
+        }
+    }
+
+    private void RemoveTackledBy(Entity<TackledRecentlyByComponent?> by, EntityUid tackler)
+    {
+        if (!Resolve(by, ref by.Comp, false))
+            return;
+
+        by.Comp.Tacklers.Remove(tackler);
+        Dirty(by);
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
         var time = _timing.CurTime;
         var query = EntityQueryEnumerator<TackledRecentlyComponent>();
-        while (query.MoveNext(out var uid, out var recently))
+        while (query.MoveNext(out var tackler, out var recently))
         {
             _trackersToRemove.Clear();
             foreach (var tracker in recently.Trackers)
@@ -140,10 +193,11 @@ public sealed class TackleSystem : EntitySystem
             foreach (var id in _trackersToRemove)
             {
                 recently.Trackers.Remove(id);
+                RemoveTackledBy(id, tackler);
             }
 
             if (recently.Trackers.Count == 0)
-                RemCompDeferred<TackledRecentlyComponent>(uid);
+                RemCompDeferred<TackledRecentlyComponent>(tackler);
         }
     }
 }

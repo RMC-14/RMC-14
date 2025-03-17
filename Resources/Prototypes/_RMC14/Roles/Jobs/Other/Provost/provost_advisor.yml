@@ -78,7 +78,7 @@
     eyes: CMGlassesSecurity
     ears: RMCHeadsetProvost
     jumpsuit: CMJumpsuitProvostSenior
-#    outerClothing: # TODO RMC14 provost jacket, with handcuffs and flash
+    outerClothing: RMCProvostJacketFilled
     gloves: CMHandsBlackMarine # TODO RMC14 black gloves
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostAdvisor
@@ -101,6 +101,14 @@
   parent: CMIDCardGold # TODO RMC14 provost id
   id: RMCIDCardProvostAdvisor
   name: provost advisor ID card
+  description: Issued to members of the Provost Office.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
   - type: PresetIdCard
     job: CMProvostAdvisor

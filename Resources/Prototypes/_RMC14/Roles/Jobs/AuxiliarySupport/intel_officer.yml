@@ -47,7 +47,8 @@
     - type: AssignSquad
       whitelist:
         tags:
-        - RMCSquadEcho
+        - RMCSquadIntel
+    - type: SquadArmorWearer
 
 - type: startingGear
   id: CMGearIntelOfficer

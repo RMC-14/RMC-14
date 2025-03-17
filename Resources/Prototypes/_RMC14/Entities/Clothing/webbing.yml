@@ -30,6 +30,7 @@
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
+    - type: StoreAfterFailedInteract
   - type: ExplosionResistance
     damageCoefficient: 0
     worn: false
@@ -37,6 +38,7 @@
     blacklist:
       components:
       - Xeno
+  - type: StoreAfterFailedInteract
 
 - type: entity
   parent: CMWebbingBase
@@ -83,6 +85,7 @@
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
+    - type: StoreAfterFailedInteract
 
 - type: entity
   parent: CMWebbingBase
@@ -131,6 +134,7 @@
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
+    - type: StoreAfterFailedInteract
 
 - type: entity
   parent: CMWebbingBlack
@@ -164,6 +168,7 @@
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
+    - type: StoreAfterFailedInteract
 
 - type: entity
   parent: CMWebbingBase
@@ -239,6 +244,7 @@
       whitelist:
         tags:
         - Sidearm
+    - type: StoreAfterFailedInteract
 
 - type: entity
   parent: CMWebbingBase
@@ -277,6 +283,7 @@
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
+    - type: StoreAfterFailedInteract
 
 - type: entity
   parent: CMWebbing
@@ -336,6 +343,7 @@
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
+    - type: StoreAfterFailedInteract
 
 - type: entity
   parent: RMCToolWebbingSmall
@@ -367,6 +375,7 @@
       grid:
       - 0,0,13,1 # 7 slots
     - type: FixedItemSizeStorage
+    - type: StoreAfterFailedInteract
   - type: FixedItemSizeStorage
 
 - type: entity
@@ -383,6 +392,16 @@
     - id: CMWirecutter
     - id: RMCCableCoil30
     - id: CMMultitool
+
+- type: entity
+  parent: CMWebbing
+  id: RMCWebbingHEFA
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFrag
+      amount: 3
 
 - type: entity
   parent: CMWebbingBase
@@ -422,6 +441,7 @@
       damageCoefficient: 0
       worn: false
     - type: CMHolster
+    - type: StoreAfterFailedInteract
 
 - type: entity
   parent: CMWebbingKnives
