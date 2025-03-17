@@ -90,6 +90,36 @@
     },
     {
       "name": "shell_box_slugs"
+    },
+    {
+      "name": "pistol_ammo_full"
+    },
+    {
+      "name": "pistol_ammo_high"
+    },
+    {
+      "name": "pistol_ammo_low"
+    },
+    {
+      "name": "pistol_ammo_medium"
+    },
+    {
+      "name": "pistol_box"
+    },
+    {
+      "name": "pistol_box_80"
+    },
+    {
+      "name": "pistol_box_stripe"
+    },
+    {
+      "name": "pistol_box_su"
+    },
+    {
+      "name": "pistol_lid"
+    },
+    {
+      "name": "pistol_lid_stripe"
     }
   ]
 }

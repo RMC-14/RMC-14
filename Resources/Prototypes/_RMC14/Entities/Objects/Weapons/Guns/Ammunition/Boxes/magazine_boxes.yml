@@ -61,6 +61,48 @@
 - type: entity
   abstract: true
   parent: RMCBoxMagazineBase
+  id: RMCBoxMagazinePistolBase
+  name: generic pistol magazine box (? x ?)"
+  description: A box of pistol magazines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    layers:
+    - state: rifle_box # icon_state = base color of box
+      color: "#7b8246" # - M54C Ammo Base Colour
+    - state: rifle_ammo_full # Default full ammo sprite
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#ffc000"
+    - state: rifle_box_54 # overlay_gun_type = text overlay
+      color: "#ffcb26" # - Standard Yellow Text Colour
+    - state: rifle_box_stripe # overlay_ammo_type = box stripe
+      color: "#ffcb26" # - Ext Ammo Yellow Stripe Colour
+    - state: rifle_lid # matches the base box
+      map: [ "lid" ]
+      color: "#7b8246" #  - M54C Ammo Base Colour
+    - state: rifle_lid_stripe # lid stripe,ends in the type of ammo used
+      map: [ "lid_stripe" ]
+      color: "#ffcb26" # - Ext Ammo Yellow Stripe Colour
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        lid_stripe:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: pistol_ammo_full, visible: false }
+          Low: { state: pistol_ammo_low, visible: true }
+          Medium: { state: pistol_ammo_medium, visible: true }
+          High: { state: pistol_ammo_high, visible: true }
+          Full: { state: pistol_ammo_full, visible: true }
+
+- type: entity
+  abstract: true
+  parent: RMCBoxMagazineBase
   id: RMCBoxMagazineAPBase
   name: generic magazine box (? x ?)"
   description: A box of magazines.
@@ -307,7 +349,7 @@
       color: "#727e90"
     - state: rifle_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-      color: "#ffc000"
+      color: "#727e90"
     - state: smg_box_63
       color: "#ffcb26"
     - state: smg_box_stripe
@@ -398,7 +440,7 @@
       color: "#727e90"
     - state: rifle_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-      color: "#ffc000"
+      color: "#727e90"
     - state: smg_box_63
       color: "#ffcb26"
     - state: smg_box_stripe
@@ -551,7 +593,7 @@
 
 # M1984
 - type: entity
-  parent: RMCBoxMagazineBase
+  parent: RMCBoxMagazinePistolBase
   id: RMCBoxMagazinePistolM1984Empty
   name: magazine box (M1984 x 16)
   components:
@@ -589,7 +631,7 @@
         - CMMagazinePistolM1984
 
 - type: entity
-  parent: RMCBoxMagazineBase
+  parent: RMCBoxMagazinePistolBase
   id: RMCBoxMagazinePistolM1984APEmpty
   name: magazine box (AP M1984 x 16)
   suffix: Empty
@@ -665,7 +707,7 @@
 
 # MK80
 - type: entity
-  parent: RMCBoxMagazineBase
+  parent: RMCBoxMagazinePistolBase
   id:  RMCBoxMagazinePistolMK80Empty
   name: magazine box (MK80 x 16)
   components:
@@ -673,16 +715,23 @@
     graph: RMCBoxMagazine
     node: RMCBoxMagazinePistolMK80Empty
   - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     layers:
-    - state: base_mk80
-    - state: text_mk80
-    - state: base_type_reg
-    - state: magaz_reg
+    - state: pistol_box # Main box base sprite
+      color: "#4a4a4a"
+    - state: pistol_ammo_full # Default full ammo sprite
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: base_mk80_lid
+      color: "#ffc000"
+    - state: pistol_box_80 # Text Markings on Box
+      color: "#ffcb26"
+    - state: pistol_box_stripe # Type Markings to place over Box
+      color: "#7c4c1b"
+    - state: pistol_lid # Lid to match with Box
       map: [ "lid" ]
-    - state: lid_type_reg
+      color: "#4a4a4a"
+    - state: pistol_lid_stripe # Type Markings to place over Lid
       map: [ "lid_stripe" ]
+      color: "#7c4c1b"
   - type: CMItemSlots
     count: 16
     slot:
@@ -705,7 +754,7 @@
 
 # SU-6 Smart Pistol
 - type: entity
-  parent: RMCBoxMagazineBase
+  parent: RMCBoxMagazinePistolBase
   id: RMCBoxMagazinePistolSU6Empty
   name: magazine box (SU-6 x 16)
   components:
@@ -713,16 +762,23 @@
     graph: RMCBoxMagazine
     node: RMCBoxMagazinePistolSU6Empty
   - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     layers:
-    - state: base_su6
-    - state: text_su6
-    - state: base_type_reg
-    - state: magaz_reg
+    - state: pistol_box # Main box base sprite
+      color: "#6b5c58"
+    - state: pistol_ammo_full # Default full ammo sprite
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: base_su6_lid
+      color: "#ffc000"
+    - state: pistol_box_su # Text Markings on Box
+      color: "#ffcb26"
+    - state: pistol_box_stripe # Type Markings to place over Box
+      color: "#7c4c1b"
+    - state: pistol_lid # Lid to match with Box
       map: [ "lid" ]
-    - state: lid_type_reg
+      color: "#6b5c58"
+    - state: pistol_lid_stripe # Type Markings to place over Lid
       map: [ "lid_stripe" ]
+      color: "#7c4c1b"
   - type: CMItemSlots
     count: 16
     slot:
@@ -745,7 +801,7 @@
 # M44 Revolver
 
 - type: entity
-  parent: RMCBoxMagazineBase
+  parent: RMCBoxMagazinePistolBase
   id: RMCBoxMagazineRevolverM44Empty
   name: speedloader box (M44 x 16)
   description: A box for holding many speedloaders with a carrying handle.
@@ -785,7 +841,7 @@
         - RMCSpeedLoaderM44
 
 - type: entity
-  parent: RMCBoxMagazineBase
+  parent: RMCBoxMagazinePistolBase
   id: RMCBoxMagazineRevolverM44MarksmanEmpty
   name: speedloader box (Marksman M44 x 16)
   description: A box for holding many speedloaders with a carrying handle, these ones are loaded with Marksman Rounds.
