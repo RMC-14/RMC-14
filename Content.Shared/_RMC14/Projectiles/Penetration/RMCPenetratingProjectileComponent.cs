@@ -19,6 +19,12 @@ public sealed partial class RMCPenetratingProjectileComponent : Component
     public EntityCoordinates? ShotFrom;
 
     /// <summary>
+    ///     The multiplier for range and damage loss if a membrane is hit.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public HashSet<EntityUid> HitTargets = new();
+
+    /// <summary>
     ///     The amount of range lost per hit entity.
     /// </summary>
     [DataField, AutoNetworkedField]

@@ -8,7 +8,7 @@ namespace Content.Shared._RMC14.Projectiles.Penetration;
 
 public sealed class RMCPenetratingProjectileSystem : EntitySystem
 {
-    private readonly int _hardCollisionGroup = (int) (CollisionGroup.HighImpassable | CollisionGroup.Impassable);
+    private const int HardCollisionGroup = (int) (CollisionGroup.HighImpassable | CollisionGroup.Impassable);
 
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly RMCSizeStunSystem _rmcSize = default!;
@@ -16,7 +16,9 @@ public sealed class RMCPenetratingProjectileSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCPenetratingProjectileComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<RMCPenetratingProjectileComponent, PreventCollideEvent>(OnPreventCollide);
         SubscribeLocalEvent<RMCPenetratingProjectileComponent, StartCollideEvent>(OnStartCollide, after: [typeof(SharedProjectileSystem)]);
+        SubscribeLocalEvent<RMCPenetratingProjectileComponent, ProjectileHitEvent>(OnProjectileHit);
 
     }
 
@@ -26,9 +28,29 @@ public sealed class RMCPenetratingProjectileSystem : EntitySystem
         Dirty(ent);
     }
 
+    /// <summary>
+    ///     Prevent collision with an already hit entity.
+    /// </summary>
+    private void OnPreventCollide(Entity<RMCPenetratingProjectileComponent> ent, ref PreventCollideEvent args)
+    {
+        if(!ent.Comp.HitTargets.Contains(args.OtherEntity))
+            return;
+
+        args.Cancelled = true;
+    }
+
+    /// <summary>
+    ///     Add the hit target to a list of hit targets that won't be hit another time..
+    /// </summary>
+    private void OnProjectileHit(Entity<RMCPenetratingProjectileComponent> ent, ref ProjectileHitEvent args)
+    {
+        ent.Comp.HitTargets.Add(args.Target);
+        Dirty(ent);
+    }
+
     private void OnStartCollide(Entity<RMCPenetratingProjectileComponent> ent, ref StartCollideEvent args)
     {
-        if(!TryComp(ent, out ProjectileComponent? projectile) || ent.Comp.ShotFrom == null)
+        if(!TryComp(ent, out ProjectileComponent? projectile) || ent.Comp.ShotFrom == null || ent.Comp.HitTargets.Contains(args.OtherEntity))
             return;
 
         var rangeLoss = ent.Comp.RangeLossPerHit;
@@ -36,7 +58,7 @@ public sealed class RMCPenetratingProjectileSystem : EntitySystem
        _rmcSize.TryGetSize(args.OtherEntity, out var size);
 
         // Apply damage and range loss multipliers depending on target hit.
-        if ((args.OtherFixture.CollisionLayer & _hardCollisionGroup) != 0)
+        if ((args.OtherFixture.CollisionLayer & HardCollisionGroup) != 0)
         {
             // Thick Membranes have a lower multiplier.
             if (TryComp(args.OtherEntity, out OccluderComponent? occluder) &&

@@ -1,7 +1,7 @@
 using System.Numerics;
-using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Projectiles;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Homing;
@@ -10,7 +10,34 @@ public sealed class HomingProjectileSystem : EntitySystem
 {
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
+
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<HomingProjectileComponent, StartCollideEvent>(OnStartCollide);
+        SubscribeLocalEvent<HomingProjectileComponent, PreventCollideEvent>(OnPreventCollide);
+    }
+
+    /// <summary>
+    ///     Remove homing when colliding with the target.
+    /// </summary>
+    private void OnStartCollide(Entity<HomingProjectileComponent> ent, ref StartCollideEvent args)
+    {
+        if(args.OtherEntity != ent.Comp.Target)
+            return;
+
+        RemComp<HomingProjectileComponent>(ent);
+    }
+
+    /// <summary>
+    ///     Remove homing if the collision with the target is prevented.
+    /// </summary>
+    private void OnPreventCollide(Entity<HomingProjectileComponent> ent, ref PreventCollideEvent args)
+    {
+        if(args.OtherEntity != ent.Comp.Target)
+            return;
+
+        RemComp<HomingProjectileComponent>(ent);
+    }
 
     /// <summary>
     ///     Adjust the velocity and rotation of the projectile every frame.
@@ -22,12 +49,6 @@ public sealed class HomingProjectileSystem : EntitySystem
         while (query.MoveNext(out var projectile, out var component))
         {
             if(!TryComp(projectile, out PhysicsComponent? physics))
-                return;
-
-            // Prevent homing if the target is in the same IFF faction.
-            if(TryComp(projectile, out ProjectileIFFComponent? projectileIFF) &&
-               projectileIFF is { Enabled: true, Faction: not null } &&
-               _gunIFF.IsInFaction(component.Target, projectileIFF.Faction.Value))
                 return;
 
             // Get the map coordinates and the direction

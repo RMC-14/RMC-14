@@ -130,7 +130,9 @@
   - type: CMArmorPiercing
     amount: 75
   - type: RMCPenetratingProjectile
-
+  - type: RMCStoppingPower
+  - type: AimedShotEffect
+    extraHits: 0.6
 - type: Tag
   id: RMCXM43E1AntiMaterielRifle
 
