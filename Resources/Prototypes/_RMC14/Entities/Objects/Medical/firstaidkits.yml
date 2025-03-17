@@ -113,6 +113,7 @@
     - id: CMKelotaneAutoInjector
       amount: 3
     - id: CMTramadolAutoInjectorNoSkill
+      amount: 1
 
 - type: entity
   parent: CMFirstAidKit

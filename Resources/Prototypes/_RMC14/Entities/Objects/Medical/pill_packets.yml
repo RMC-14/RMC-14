@@ -88,7 +88,7 @@
   description: This packet contains tramadol pills, a mild painkiller. Once you take them out, they don't go back in. Don't take more than 2 pills in a short period.
   components:
   - type: Sprite
-    state: kelotane_packet # TODO tramadol packet
+    state: tramadol_packet
   - type: StorageFill
     contents:
     - id: CMPillTramadol
@@ -103,7 +103,7 @@
   description: This packet contains oxycodone pills. A highly effective painkiller. Once you take them out, they don't go back in. Don't take more than 1 pill in a short period.
   components:
   - type: Sprite
-    state: kelotane_packet # TODO oxycodone packet
+    state: oxycodone_packet
   - type: StorageFill
     contents:
     - id: CMPillOxycodone

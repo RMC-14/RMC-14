@@ -192,7 +192,7 @@
 - type: entity
   parent: CMBottleFilled
   id: CMBottleOxycodone
-  name: inaprovaline bottle
+  name: oxycodone bottle
   description: A small bottle. Contains oxycodone - Used as an Extreme Painkiller. ILLEGAL TO DISTRIBUTE.
   components:
   - type: SolutionContainerManager
