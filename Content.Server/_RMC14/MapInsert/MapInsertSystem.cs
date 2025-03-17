@@ -1,6 +1,5 @@
 ﻿using System.Numerics;
 using Content.Server.Decals;
-using Content.Server.Spawners.EntitySystems;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Map;
 using Content.Shared.Decals;
@@ -13,6 +12,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.MapInsert;
 
@@ -40,8 +40,6 @@ public sealed class MapInsertSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
-
-        SubscribeLocalEvent<MapInsertComponent, MapInitEvent>(OnMapInsertMapInit, before: [typeof(ConditionalSpawnerSystem), typeof(AreaSystem)]);
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -50,19 +48,37 @@ public sealed class MapInsertSystem : EntitySystem
         _index = 0;
     }
 
-    private void OnMapInsertMapInit(Entity<MapInsertComponent> ent, ref MapInitEvent args)
+    public void ProcessMapInsert(Entity<MapInsertComponent> ent, bool forceSpawn = false)
     {
         if (_net.IsClient)
             return;
 
-        if (!_random.Prob(ent.Comp.Probability))
+        if (ent.Comp.Variations.Count <= 0)
         {
             QueueDel(ent);
             return;
         }
 
-        if (ent.Comp.Spawn is not { } spawn)
+        var randomProbability = _random.NextFloat();
+        var cumulativeProbability = 0f;
+        ResPath spawn = default;
+        Vector2 spawnOffset = default;
+        foreach (var variation in ent.Comp.Variations)
+        {
+            cumulativeProbability += variation.Probability;
+            if (forceSpawn ||  cumulativeProbability >= randomProbability)
+            {
+                spawn = variation.Spawn;
+                spawnOffset = variation.Offset;
+                break;
+            }
+        }
+
+        if (spawn == default)
+        {
+            QueueDel(ent);
             return;
+        }
 
         if (_map == null)
         {
@@ -83,7 +99,7 @@ public sealed class MapInsertSystem : EntitySystem
         if (mainGrid == null)
             return;
         var coordinates = _transform.GetMapCoordinates(ent, xform).Offset(new Vector2(-0.5f, -0.5f));
-        coordinates = coordinates.Offset(ent.Comp.Offset);
+        coordinates = coordinates.Offset(spawnOffset);
         var coordinatesi = new Vector2i((int)coordinates.X, (int)coordinates.Y);
 
         //Replace areas

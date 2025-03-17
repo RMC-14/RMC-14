@@ -1,0 +1,402 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/18e0f698bd58944a46b04d1e147c21d4b05057d5/icons/effects/beam.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "1-full",
+      "directions": 8
+    },
+    {
+      "name": "1-half",
+      "directions": 8
+    },
+    {
+      "name": "1-corner",
+      "directions": 8
+    },
+    {
+      "name": "2-full",
+      "directions": 8
+    },
+    {
+      "name": "2-half",
+      "directions": 8
+    },
+    {
+      "name": "2-corner",
+      "directions": 8
+    },
+    {
+      "name": "3-full",
+      "directions": 8
+    },
+    {
+      "name": "3-half",
+      "directions": 8
+    },
+    {
+      "name": "3-corner",
+      "directions": 8
+    },
+    {
+      "name": "b_beam",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "r_beam",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "g_beam",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "n_beam",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "electric",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "chain"
+    },
+    {
+      "name": "wire"
+    },
+    {
+      "name": "iv_tube"
+    },
+    {
+      "name": "medbeam",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "nzcrentrs_power",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "bsa_beam",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "sat_beam",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "red_lightning",
+      "delays": [
+        [
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "purple_lightning",
+      "delays": [
+        [
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "lightning1",
+      "delays": [
+        [
+          0.120000005,
+          0.08
+        ]
+      ]
+    },
+    {
+      "name": "lightning2",
+      "delays": [
+        [
+          0.120000005,
+          0.08
+        ]
+      ]
+    },
+    {
+      "name": "lightning3",
+      "delays": [
+        [
+          0.120000005,
+          0.08
+        ]
+      ]
+    },
+    {
+      "name": "lightning4",
+      "delays": [
+        [
+          0.120000005,
+          0.08
+        ]
+      ]
+    },
+    {
+      "name": "lightning5",
+      "delays": [
+        [
+          0.120000005,
+          0.08
+        ]
+      ]
+    },
+    {
+      "name": "lightning6",
+      "delays": [
+        [
+          0.120000005,
+          0.08
+        ]
+      ]
+    },
+    {
+      "name": "lightning7",
+      "delays": [
+        [
+          0.120000005,
+          0.08
+        ]
+      ]
+    },
+    {
+      "name": "lightning8",
+      "delays": [
+        [
+          0.120000005,
+          0.08
+        ]
+      ]
+    },
+    {
+      "name": "lightning9",
+      "delays": [
+        [
+          0.120000005,
+          0.08
+        ]
+      ]
+    },
+    {
+      "name": "lightning10",
+      "delays": [
+        [
+          0.120000005,
+          0.08
+        ]
+      ]
+    },
+    {
+      "name": "lightning11",
+      "delays": [
+        [
+          0.120000005,
+          0.08
+        ]
+      ]
+    },
+    {
+      "name": "lightning12",
+      "delays": [
+        [
+          0.120000005,
+          0.08
+        ]
+      ]
+    },
+    {
+      "name": "rped_upgrade",
+      "delays": [
+        [
+          0.030000001,
+          0.030000001,
+          0.030000001,
+          0.030000001
+        ]
+      ]
+    },
+    {
+      "name": "volt_ray",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "blur"
+    },
+    {
+      "name": "solar_beam",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "light_beam",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "plasmabeam"
+    },
+    {
+      "name": "sm_arc",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "sm_arc_supercharged",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "sm_arc_dbz_referance",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "oppressor_tail"
+    },
+    {
+      "name": "oppressor_tail_hook"
+    },
+    {
+      "name": "oppressor_tail_hook_full"
+    },
+    {
+      "name": "laser_beam"
+    },
+    {
+      "name": "laser_beam_intense"
+    },
+    {
+      "name": "laser_beam_spotter"
+    }
+  ]
+}

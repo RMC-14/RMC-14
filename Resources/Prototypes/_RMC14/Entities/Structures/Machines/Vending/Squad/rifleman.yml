@@ -101,8 +101,8 @@
         points: 15
       - id: RMCGunCasePistolSmart
         points: 15
-    #- id: CMM79GrenadeLauncher
-    #  points: 30
+      - id: RMCM79Case
+        points: 30
     - name: Explosives
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
@@ -113,14 +113,14 @@
     #  points: 20
       - id: RMCPacketGrenadeSmokeFilled
         points: 10
-    #- id: CMM74AGMFragAirburstPacket3
-    #  points: 15
-    #- id: CMM74AGMIncendiaryAirburstPacket3
-    #  points: 15
-    #- id: CMM74AGMSmokeAirburstPacket3
-    #  points: 10
-    #- id: CMM74AGMHornetAirburstPacket3
-    #  points: 15
+      - id: RMCPacketGrenadeM74AGMFFilled
+        points: 15
+      - id: RMCPacketGrenadeM74AGMIFilled
+        points: 15
+      - id: RMCPacketGrenadeM74AGMSFilled
+        points: 10
+      - id: RMCPacketGrenadeM74AGMSHornetFilled
+        points: 15
     #- id: CMM20MineBox4
     #  points: 20
     - name: Primary Ammunition

@@ -3,7 +3,7 @@
     xmlns:controls="clr-namespace:Content.Client._RMC14.Intel"
     xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
     Title="Marine Tech Tree Objectives"
-    MinSize="600 450">
+    MinSize="600 550">
     <BoxContainer Orientation="Vertical">
         <RichTextLabel Text="[bold]Tech Points[/bold]" />
         <ui:BlueHorizontalSeparator />

@@ -74,6 +74,11 @@
   name: pizza guy badge
   description: It reads 'Pizza-guy local union No. 217', 'We always deliver!'
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/pizza.rsi
+    state: pizza
+  - type: Clothing
+    sprite: _RMC14/Objects/CMIDs/pizza.rsi
   - type: PresetIdCard
     job: CMPizzaDeliverer
 

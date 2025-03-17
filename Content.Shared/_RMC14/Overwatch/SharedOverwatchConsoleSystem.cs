@@ -1,6 +1,8 @@
 ﻿using System.Linq;
+using System.Numerics;
+using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dialog;
-using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.OrbitalCannon;
@@ -20,6 +22,8 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
+using Robust.Shared.Configuration;
+using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -31,6 +35,8 @@ namespace Content.Shared._RMC14.Overwatch;
 public abstract class SharedOverwatchConsoleSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly AreaSystem _area = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
@@ -50,24 +56,31 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     private EntityQuery<ActorComponent> _actor;
-    private EntityQuery<AlmayerComponent> _almayerQuery;
     private EntityQuery<MobStateComponent> _mobStateQuery;
     private EntityQuery<OriginalRoleComponent> _originalRoleQuery;
+    private EntityQuery<OverwatchDataComponent> _overwatchDataQuery;
     private EntityQuery<RMCPlanetComponent> _planetQuery;
 
     private readonly ProtoId<DamageGroupPrototype> _bruteGroup = "Brute";
     private readonly ProtoId<DamageGroupPrototype> _burnGroup = "Burn";
     private readonly ProtoId<DamageGroupPrototype> _toxinGroup = "Toxin";
 
+    private TimeSpan _maxProcessTime;
+    private TimeSpan _nextUpdateTime;
+    private TimeSpan _updateEvery;
+    private readonly Dictionary<Entity<SquadTeamComponent>, Queue<EntityUid>> _toProcess = new();
+    private readonly HashSet<Entity<SquadTeamComponent>> _toRemove = new();
+
     public override void Initialize()
     {
         _actor = GetEntityQuery<ActorComponent>();
-        _almayerQuery = GetEntityQuery<AlmayerComponent>();
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
         _originalRoleQuery = GetEntityQuery<OriginalRoleComponent>();
+        _overwatchDataQuery = GetEntityQuery<OverwatchDataComponent>();
         _planetQuery = GetEntityQuery<RMCPlanetComponent>();
 
         SubscribeLocalEvent<OrbitalCannonChangedEvent>(OnOrbitalCannonChanged);
+        SubscribeLocalEvent<OrbitalCannonLaunchEvent>(OnOrbitalCannonLaunch);
 
         SubscribeLocalEvent<OverwatchConsoleComponent, BoundUIOpenedEvent>(OnBUIOpened);
         SubscribeLocalEvent<OverwatchConsoleComponent, OverwatchTransferMarineSelectedEvent>(OnTransferMarineSelected);
@@ -75,8 +88,6 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         SubscribeLocalEvent<OverwatchWatchingComponent, MoveInputEvent>(OnWatchingMoveInput);
         SubscribeLocalEvent<OverwatchWatchingComponent, DamageChangedEvent>(OnWatchingDamageChanged);
-
-        SubscribeLocalEvent<SquadMemberComponent, SquadMemberUpdatedEvent>(OnSquadMemberUpdated);
 
         Subs.BuiEvents<OverwatchConsoleComponent>(OverwatchConsoleUI.Key, subs =>
         {
@@ -103,6 +114,9 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             // subs.Event<OverwatchConsoleOrbitalCommentBuiMsg>(OnOverwatchOrbitalCommentBui);
             subs.Event<OverwatchConsoleSendMessageBuiMsg>(OnOverwatchSendMessageBui);
         });
+
+        Subs.CVar(_config, RMCCVars.RMCOverwatchMaxProcessTimeMilliseconds, v => _maxProcessTime = TimeSpan.FromMilliseconds(v), true);
+        Subs.CVar(_config, RMCCVars.RMCOverwatchConsoleUpdateEverySeconds, v => _updateEvery = TimeSpan.FromSeconds(v), true);
     }
 
     private void OnOrbitalCannonChanged(ref OrbitalCannonChangedEvent ev)
@@ -112,6 +126,16 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         while (consoles.MoveNext(out var uid, out var console))
         {
             console.HasOrbital = hasOrbital;
+            Dirty(uid, console);
+        }
+    }
+
+    private void OnOrbitalCannonLaunch(ref OrbitalCannonLaunchEvent ev)
+    {
+        var consoles = EntityQueryEnumerator<OverwatchConsoleComponent>();
+        while (consoles.MoveNext(out var uid, out var console))
+        {
+            console.NextOrbitalLaunch = _timing.CurTime + ev.Cooldown;
             Dirty(uid, console);
         }
     }
@@ -256,16 +280,6 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             _popup.PopupEntity("The pain kicked you out of the console!", ent, ent, PopupType.MediumCaution);
     }
 
-    private void OnSquadMemberUpdated(Entity<SquadMemberComponent> ent, ref SquadMemberUpdatedEvent args)
-    {
-        var state = GetOverwatchBuiState();
-        var consoles = EntityQueryEnumerator<OverwatchConsoleComponent>();
-        while (consoles.MoveNext(out var uid, out _))
-        {
-            _ui.SetUiState(uid, OverwatchConsoleUI.Key, state);
-        }
-    }
-
     private void OnOverwatchSelectSquadBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSelectSquadBuiMsg args)
     {
         if (_net.IsServer)
@@ -356,7 +370,10 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         if (args.Target == default || !TryGetEntity(args.Target, out var target))
             return;
 
-        Watch(args.Actor, target.Value);
+        if (!_inventory.TryGetInventoryEntity<OverwatchCameraComponent>(target.Value, out var camera))
+            return;
+
+        Watch(args.Actor, camera);
     }
 
     private void OnOverwatchHideBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleHideBuiMsg args)
@@ -542,42 +559,11 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             var netUid = GetNetEntity(uid);
             var squad = new OverwatchSquad(netUid, Name(uid), team.Color, null, team.CanSupplyDrop);
             var members = marines.GetOrNew(netUid);
+
             foreach (var member in team.Members)
             {
-                if (TerminatingOrDeleted(member))
-                    continue;
-
-                // to ignore cryo'd marines
-                var xform = Transform(member);
-                if (!_map.TryGetMap(xform.MapID, out var mapId) ||
-                    _map.IsPaused(mapId.Value))
-                {
-                    continue;
-                }
-
-                var name = Identity.Name(member, EntityManager);
-
-                _inventory.TryGetInventoryEntity<OverwatchCameraComponent>(member, out var camera);
-                var mobState = _mobStateQuery.CompOrNull(member)?.CurrentState ?? MobState.Alive;
-                var ssd = !_actor.HasComp(member);
-                var role = _originalRoleQuery.CompOrNull(member)?.Job;
-                var deployed = !_almayerQuery.HasComp(_transform.GetMap((member, xform)));
-                var location = _planetQuery.HasComp(mapId) ? OverwatchLocation.Planet : OverwatchLocation.Ship;
-                var netMember = GetNetEntity(member);
-
-                members.Add(new OverwatchMarine(
-                    netMember,
-                    GetNetEntity(camera),
-                    name,
-                    mobState,
-                    ssd,
-                    role,
-                    deployed,
-                    location
-                ));
-
-                if (HasComp<SquadLeaderComponent>(member))
-                    squad.Leader = netMember;
+                if (_overwatchDataQuery.CompOrNull(member)?.Marine is { } data)
+                    members.Add(data);
             }
 
             squads.Add(squad);
@@ -597,5 +583,139 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             Unwatch(ent.Owner, _player.LocalSession);
         else if (TryComp(ent, out ActorComponent? actor))
             Unwatch(ent.Owner, actor.PlayerSession);
+    }
+
+    private void ProcessData()
+    {
+        if (_net.IsClient)
+        {
+            _toProcess.Clear();
+            return;
+        }
+
+        try
+        {
+            var time = _timing.CurTime;
+            if (_toProcess.Count > 0)
+            {
+                foreach (var (squadId, membersQueue) in _toProcess)
+                {
+                    if (TerminatingOrDeleted(squadId))
+                    {
+                        _toRemove.Add(squadId);
+                        continue;
+                    }
+
+                    MapCoordinates? leaderCoords = null;
+                    if (_squad.TryGetSquadLeader(squadId, out var leader))
+                        leaderCoords = _transform.GetMapCoordinates(leader);
+
+                    while (membersQueue.TryDequeue(out var member))
+                    {
+                        if (_timing.CurTime > time + _maxProcessTime)
+                            break;
+
+                        if (TerminatingOrDeleted(member))
+                            continue;
+
+                        // to ignore cryo'd marines
+                        var xform = Transform(member);
+                        if (!_map.TryGetMap(xform.MapID, out var mapId) ||
+                            _map.IsPaused(mapId.Value))
+                        {
+                            continue;
+                        }
+
+                        var coords = _transform.GetMapCoordinates(member);
+                        var name = Identity.Name(member, EntityManager);
+                        var mobState = _mobStateQuery.CompOrNull(member)?.CurrentState ?? MobState.Alive;
+                        var ssd = !_actor.HasComp(member);
+                        var role = _originalRoleQuery.CompOrNull(member)?.Job;
+                        var location = _planetQuery.HasComp(mapId) ? OverwatchLocation.Planet : OverwatchLocation.Ship;
+                        var areaName = _area.TryGetArea(coords, out _, out var areaProto)
+                            ? areaProto.Name
+                            : string.Empty;
+                        var netMember = GetNetEntity(member);
+
+                        Vector2? leaderDistance = null;
+                        if (member != leader.Owner &&
+                            leaderCoords != null &&
+                            leaderCoords.Value.MapId == coords.MapId)
+                        {
+                            leaderDistance = leaderCoords.Value.Position - coords.Position;
+                        }
+
+                        _inventory.TryGetInventoryEntity<OverwatchCameraComponent>(member, out var camera);
+
+                        EnsureComp<OverwatchDataComponent>(member).Marine = new OverwatchMarine(
+                            netMember,
+                            GetNetEntity(camera),
+                            name,
+                            mobState,
+                            ssd,
+                            role,
+                            location == OverwatchLocation.Planet,
+                            location,
+                            areaName,
+                            leaderDistance
+                        );
+                    }
+
+                    if (membersQueue.Count == 0)
+                        _toRemove.Add(squadId);
+                }
+
+                foreach (var squad in _toRemove)
+                {
+                    _toProcess.Remove(squad);
+                }
+
+                return;
+            }
+
+            var query = EntityQueryEnumerator<SquadTeamComponent>();
+            while (query.MoveNext(out var squadId, out var squadComp))
+            {
+                var queue = _toProcess.GetOrNew((squadId, squadComp));
+                foreach (var member in squadComp.Members)
+                {
+                    queue.Enqueue(member);
+                }
+            }
+        }
+        catch
+        {
+            _toProcess.Clear();
+            throw;
+        }
+    }
+
+    private void UpdateConsoles()
+    {
+        if (_net.IsClient)
+            return;
+
+        var time = _timing.CurTime;
+        if (time < _nextUpdateTime)
+            return;
+
+        _nextUpdateTime = time + _updateEvery;
+
+        OverwatchConsoleBuiState? state = null;
+        var query = EntityQueryEnumerator<OverwatchConsoleComponent>();
+        while (query.MoveNext(out var uid, out _))
+        {
+            if (!_ui.IsUiOpen(uid, OverwatchConsoleUI.Key))
+                continue;
+
+            state ??= GetOverwatchBuiState();
+            _ui.SetUiState(uid, OverwatchConsoleUI.Key, state);
+        }
+    }
+
+    public override void Update(float frameTime)
+    {
+        ProcessData();
+        UpdateConsoles();
     }
 }

@@ -35,7 +35,7 @@
       #      - TODO RMC14 syringe cases
       - CMSurgicalLine
       - CMSynthGraft
-      - CMRollerBed
+      - CMRollerItem
       - BodyBag
       - Hypospray
       - CMBloodPack

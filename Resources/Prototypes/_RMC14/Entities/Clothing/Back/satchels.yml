@@ -107,8 +107,6 @@
   - type: StorageFill
     contents:
     - id: RMCArmorProvostFlexi # TODO RMC14 provost office handheld beacon
-    - id: CMFlash # TODO RMC14 remove once provost jacket has it
-    - id: RMCHandcuffs # TODO RMC14 remove once provost jacket has it
 
 - type: entity
   parent: CMSatchelSecurity
@@ -117,8 +115,6 @@
   - type: StorageFill
     contents:
     - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
-    - id: CMFlash # TODO RMC14 remove once provost jacket has it
-    - id: RMCHandcuffs # TODO RMC14 remove once provost jacket has it
 
 - type: entity
   parent: CMSatchelSecurity
@@ -128,8 +124,7 @@
     contents:
     - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
     - id: RMCTabletCO
-    - id: CMFlash # TODO RMC14 remove once provost jacket has it
-    - id: RMCHandcuffs # TODO RMC14 remove once provost jacket has it
+
 
 - type: entity
   parent: CMSatchelSecurity
@@ -256,7 +251,7 @@
   - type: Storage
     maxItemSize: Normal
     grid:
-    - 0,0,23,1 # Can hold 12 grenades of size 2x2.
+    - 0,0,11,3 # Can hold 12 grenades of size 2x2.
     whitelist:
       tags:
       - Grenade

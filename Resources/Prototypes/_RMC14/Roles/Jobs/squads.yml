@@ -22,6 +22,7 @@
   - type: SquadTeam
     roundStart: true
     color: "#E61919"
+    radio: MarineAlpha
     accessLevels:
     - CMAccessAlpha
     minimapBackground:
@@ -36,6 +37,7 @@
   - type: SquadTeam
     roundStart: true
     color: "#FFC32D"
+    radio: MarineBravo
     accessLevels:
     - CMAccessBravo
     minimapBackground:
@@ -50,6 +52,7 @@
   - type: SquadTeam
     roundStart: true
     color: "#C864C8"
+    radio: MarineCharlie
     accessLevels:
     - CMAccessCharlie
     minimapBackground:
@@ -64,6 +67,7 @@
   - type: SquadTeam
     roundStart: true
     color: "#4148C8"
+    radio: MarineDelta
     accessLevels:
     - CMAccessDelta
     minimapBackground:
@@ -77,6 +81,7 @@
   components:
   - type: SquadTeam
     color: "#C47A50"
+    radio: MarineFoxtrot
     accessLevels:
     - CMAccessAlpha
     - CMAccessBravo
@@ -93,6 +98,7 @@
   components:
   - type: SquadTeam
     color: "#67D692"
+    radio: MarineEcho
     accessLevels:
     - CMAccessAlpha
     - CMAccessBravo
@@ -109,6 +115,10 @@
   components:
   - type: SquadTeam
     color: "#053818"
+    blacklistedSquadArmor:
+    - Helmet
+    - Armor
+    radio: MarineIntel
     minimapBackground:
      sprite: _RMC14/Interface/map_blips.rsi
      state: background_intel
@@ -122,7 +132,7 @@
       CMSquadLeader: 0
   - type: Tag
     tags:
-    - RMCSquadEcho
+    - RMCSquadIntel
 
 - type: Tag
-  id: RMCSquadEcho
+  id: RMCSquadIntel

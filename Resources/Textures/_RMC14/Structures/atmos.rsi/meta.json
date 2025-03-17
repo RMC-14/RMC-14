@@ -1,0 +1,204 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/e8152b093efb4791bbdd77d0b111f45dac8e074a/icons/obj/structures/machinery/atmos.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "can-o3"
+    },
+    {
+      "name": "can-o2"
+    },
+    {
+      "name": "can-o1"
+    },
+    {
+      "name": "can-o0",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "red"
+    },
+    {
+      "name": "orange"
+    },
+    {
+      "name": "blue"
+    },
+    {
+      "name": "black"
+    },
+    {
+      "name": "redws"
+    },
+    {
+      "name": "grey"
+    },
+    {
+      "name": "yellow"
+    },
+    {
+      "name": "can-open"
+    },
+    {
+      "name": "can-connector"
+    },
+    {
+      "name": "pscrubber_0"
+    },
+    {
+      "name": "pscrubber_1",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "psiphon_0"
+    },
+    {
+      "name": "psiphon_1",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "scrubber_0"
+    },
+    {
+      "name": "scrubber_1",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "scrubber_T",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "siphon_0"
+    },
+    {
+      "name": "siphon_1",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "siphon_T",
+      "delays": [
+        [
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "sheater0"
+    },
+    {
+      "name": "sheater1",
+      "delays": [
+        [
+          0.4,
+          0.4,
+          0.3,
+          0.3,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "sheater-open"
+    },
+    {
+      "name": "radiator",
+      "directions": 4
+    },
+    {
+      "name": "radiator-r",
+      "directions": 4
+    },
+    {
+      "name": "can-oa1"
+    },
+    {
+      "name": "scrubber-open"
+    },
+    {
+      "name": "scrubber-connector"
+    },
+    {
+      "name": "siphon-open"
+    },
+    {
+      "name": "siphon-connector"
+    },
+    {
+      "name": "red-1"
+    },
+    {
+      "name": "orange-1"
+    },
+    {
+      "name": "black-1"
+    },
+    {
+      "name": "grey-1"
+    },
+    {
+      "name": "blue-1"
+    },
+    {
+      "name": "redws-1"
+    },
+    {
+      "name": "yellow-1"
+    }
+  ]
+}

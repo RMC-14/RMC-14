@@ -1,0 +1,37 @@
+- type: entity
+  parent: RMCHeadCapFlippable
+  id: RMCBoonie
+  name: UNMC boonie hat
+  description: A floppy bush hat. Protects only from the sun and rain, but very comfortable.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/boonie/jungle.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/boonie/jungle.rsi
+  - type: Foldable
+    unfoldVerbText: fold-strap-verb
+    foldVerbText: fold-unstrap-verb
+  - type: ItemCamouflage
+    camouflageVariations:
+      classic: _RMC14/Objects/Clothing/Head/Hats/boonie/classic.rsi
+      desert: _RMC14/Objects/Clothing/Head/Hats/boonie/desert.rsi
+      jungle: _RMC14/Objects/Clothing/Head/Hats/boonie/jungle.rsi
+      snow: _RMC14/Objects/Clothing/Head/Hats/boonie/snow.rsi
+      urban: _RMC14/Objects/Clothing/Head/Hats/boonie/urban.rsi
+
+- type: entity
+  parent: RMCBoonie
+  id: RMCBoonieTan
+  suffix: Tan
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/boonie_tan/jungle.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/boonie_tan/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      classic: _RMC14/Objects/Clothing/Head/Hats/boonie_tan/classic.rsi
+      desert: _RMC14/Objects/Clothing/Head/Hats/boonie_tan/desert.rsi
+      jungle: _RMC14/Objects/Clothing/Head/Hats/boonie_tan/jungle.rsi
+      snow: _RMC14/Objects/Clothing/Head/Hats/boonie_tan/snow.rsi
+      urban: _RMC14/Objects/Clothing/Head/Hats/boonie_tan/urban.rsi
