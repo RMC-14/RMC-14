@@ -122,12 +122,14 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
+    deleteOnCollide: false
     damage:
       types:
         Piercing: 125
         Structural: 1275
   - type: CMArmorPiercing
     amount: 75
+  - type: RMCPenetratingProjectile
 
 - type: Tag
   id: RMCXM43E1AntiMaterielRifle
