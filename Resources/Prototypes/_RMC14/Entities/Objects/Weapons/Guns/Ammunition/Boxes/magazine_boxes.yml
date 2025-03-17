@@ -12,6 +12,8 @@
   components:
   - type: Item
     size: Huge
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
   - type: ItemSlots
   - type: Appearance
   - type: DeployableItem
@@ -478,6 +480,47 @@
         tags:
         - CMMagazineRifleM4SPRExt
 
+# .458 SOCOM
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBoxBullets458Empty
+  name: "Bullet Bundle Box (.458 SOCOM x 297)" # TODO RMC14 this is 297 since its multiples of 9
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxBullets458Empty
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#62757b"
+    - state: rifle_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#719380"
+    - state: rifle_box_458
+      color: "#ffcb26"
+    - state: rifle_box_marking
+      color: "#7c4c1b"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#62757b"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 33
+    slot:
+      whitelist:
+        tags:
+        - RMCCartridge458SOCOM
+
+- type: entity
+  parent: RMCBoxBullets458Empty
+  id: RMCBoxBullets458
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCCartridge458SOCOM
+
 # -- SMG BOXES --
 
 # M63 REG
@@ -940,6 +983,7 @@
         - RMCSpeedLoader44Marksman
 
 # -- SHELL BOXES --
+
 # Buckshot
 - type: entity
   parent: RMCBoxMagazineShellBase
@@ -1079,7 +1123,6 @@
     graph: RMCBoxMagazine
     node: RMCBoxShellsBreachingEmpty
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     layers:
     - state: shell_box # Main box base sprite
       color: "#595959"
@@ -1111,6 +1154,51 @@
       whitelist:
         tags:
         - RMCShellShotgunBreaching
+
+# Beanbag Shell
+- type: entity
+  parent: RMCBoxMagazineShellBase
+  id: RMCBoxShellsBeanbagEmpty
+  name: "Shell Box (Beanbag x 100)"
+  components:
+  # - type: Construction
+  # graph: RMCBoxMagazine
+  # node: RMCBoxShellsBeanbagEmpty
+  - type: Sprite
+    layers:
+    - state: shell_box
+      color: "#5786be"
+    - state: shell_box_marking
+    - state: shell_ammo_full_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: shell_ammo_full_base
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#5786be"
+    - state: shell_box_beanbag
+    - state: shell_lid
+      map: [ "lid" ]
+      color: "#5786be"
+    - state: shell_lid_marking
+      map: [ "lid_marking" ]
+  - type: CMItemSlots
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBeanbag
+
+- type: entity
+  parent: RMCBoxShellsBeanbagEmpty
+  id: RMCBoxShellsBeanbag
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: CMShellShotgunBeanbag
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunBeanbag
 
 # Incendiary Slug
 - type: entity
@@ -1208,31 +1296,11 @@
         tags:
         - RMCShellShotgunIncendiaryBuckshot
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# -- OTHER -- (Uses original RSI)
 
 # Nailgun
-
 - type: entity
-  parent: RMCBoxMagazineSMGBase
+  parent: RMCBoxMagazineBase
   id: RMCBoxMagazineSMGNailgunEmpty
   name: magazine box (Nailgun x 10)
   components:
@@ -1294,106 +1362,12 @@
 # These shells aren't fully implemented yet, so they can't be constructed
 
 
-- type: entity
-  parent: RMCBoxMagazineShellBase
-  id: RMCBoxShellsBeanbagEmpty
-  name: shell box (Beanbag x 100)
-  components:
-  # - type: Construction
-    # graph: RMCBoxMagazine
-    # node: RMCBoxShellsBeanbagEmpty
-  - type: Sprite
-    layers:
-    - state: base_bean
-    - state: shells_bean
-      map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: text_shells
-    - state: base_bean_lid
-      map: [ "lid" ]
-  - type: GenericVisualizer
-    visuals:
-      enum.DeployableItemVisuals.Deployed:
-        lid:
-          True: { visible: false }
-          False: { visible: true }
-        lid_marking:
-          True: { visible: false }
-          False: { visible: true }
-      enum.CMItemSlotsLayers.Fill:
-        enum.CMItemSlotsLayers.Fill:
-          Empty: { state: shells_bean, visible: false }
-          Low: { state: shells_bean_1, visible: true }
-          Medium: { state: shells_bean_2, visible: true }
-          High: { state: shells_bean_3, visible: true }
-          Full: { state: shells_bean, visible: true }
-  - type: CMItemSlots
-    count: 20
-    slot:
-      whitelist:
-        tags:
-        - RMCShellShotgunBeanbag
 
-- type: entity
-  parent: RMCBoxShellsBeanbagEmpty
-  id: RMCBoxShellsBeanbag
-  suffix: Full
-  components:
-  - type: CMItemSlots
-    startingItem: CMShellShotgunBeanbag
-    count: 20
-    slot:
-      whitelist:
-        tags:
-        - RMCShellShotgunBeanbag
 
-- type: entity
-  parent: RMCBoxMagazineBase
-  id: RMCBoxBullets458Empty
-  name: .458 bullets box crate (x300 rounds) # TODO RMC14 this is 297 since its multiples of 9
-  components:
-  - type: Construction
-    graph: RMCBoxMagazine
-    node: RMCBoxBullets458Empty
-  - type: Sprite
-    layers:
-    - state: base_458
-    - state: rounds_458
-      map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: text_458
-    - state: base_458_lid
-      map: [ "lid" ]
-  - type: GenericVisualizer
-    visuals:
-      enum.DeployableItemVisuals.Deployed:
-        lid:
-          True: { visible: false }
-          False: { visible: true }
-        lid_marking:
-          True: { visible: false }
-          False: { visible: true }
-      enum.CMItemSlotsLayers.Fill:
-        enum.CMItemSlotsLayers.Fill:
-          Empty: { state: rounds_458, visible: false }
-          Low: { state: rounds_458_1, visible: true }
-          Medium: { state: rounds_458_2, visible: true }
-          High: { state: rounds_458_3, visible: true }
-          Full: { state: rounds_458, visible: true }
-  - type: CMItemSlots
-    count: 33
-    slot:
-      whitelist:
-        tags:
-        - RMCCartridge458SOCOM
 
-- type: entity
-  parent: RMCBoxBullets458Empty
-  id: RMCBoxBullets458
-  suffix: Full
-  components:
-  - type: CMItemSlots
-    startingItem: RMCCartridge458SOCOM
 
   # M16
+# M16
 - type: entity
   parent: RMCBoxMagazineBase
   id: RMCBoxMagazineRifleM16Empty

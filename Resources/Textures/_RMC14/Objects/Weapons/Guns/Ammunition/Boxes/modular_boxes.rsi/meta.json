@@ -141,6 +141,12 @@
     },
     {
       "name": "shell_lid_marking"
+    },
+    {
+      "name": "rifle_box_458"
+    },
+    {
+      "name": "shell_box_beanbag"
     }
   ]
 }
