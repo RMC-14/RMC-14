@@ -624,7 +624,7 @@
 
 # TODO add liver and brain damage
 - type: reagent
-  parent: [ CMReagentMedicine ]
+  parent: [ CMReagentMedicine, CMTramadol ]
   id: CMParacetamol
   name: reagent-name-cmparacetamol
   desc: reagent-desc-cmparacetamol
@@ -660,7 +660,7 @@
 
 # TODO add liver and brain damage
 - type: reagent
-  parent: [ CMReagentMedicine ]
+  parent: [ CMReagentMedicine, Tricordazine ]
   id: CMTramadol
   name: reagent-name-cmtramadol
   desc: reagent-desc-cmtramadol
@@ -696,7 +696,7 @@
 
 # TODO add liver and brain damage
 - type: reagent
-  parent: [ CMReagentMedicine ]
+  parent: [ CMReagentMedicine, CMTramadol ]
   id: CMOxycodone
   name: reagent-name-cmoxycodone
   desc: reagent-desc-cmoxycodone
