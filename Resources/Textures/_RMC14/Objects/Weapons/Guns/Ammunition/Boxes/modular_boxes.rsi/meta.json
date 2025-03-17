@@ -33,6 +33,63 @@
     },
     {
       "name": "rifle_ammo_medium"
+    },
+    {
+      "name": "smg_lid_stripe"
+    },
+    {
+      "name": "smg_box"
+    },
+    {
+      "name": "smg_box_63"
+    },
+    {
+      "name": "smg_box_stripe"
+    },
+    {
+      "name": "smg_lid"
+    },
+    {
+      "name": "shell_lid"
+    },
+    {
+      "name": "shell_box"
+    },
+    {
+      "name": "shell_ammo_low_color"
+    },
+    {
+      "name": "shell_ammo_medium_base"
+    },
+    {
+      "name": "shell_ammo_medium_color"
+    },
+    {
+      "name": "shell_ammo_full_base"
+    },
+    {
+      "name": "shell_ammo_full_color"
+    },
+    {
+      "name": "shell_ammo_high_base"
+    },
+    {
+      "name": "shell_ammo_high_color"
+    },
+    {
+      "name": "shell_ammo_low_base"
+    },
+    {
+      "name": "shell_box_buckshot"
+    },
+    {
+      "name": "shell_box_breaching"
+    },
+    {
+      "name": "shell_box_flechette"
+    },
+    {
+      "name": "shell_box_slugs"
     }
   ]
 }
