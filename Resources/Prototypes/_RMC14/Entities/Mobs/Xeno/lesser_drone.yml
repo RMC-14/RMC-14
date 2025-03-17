@@ -6,7 +6,7 @@
   - RMCXenoSpeechSounds
   id: CMXenoLesserDrone
   name: Lesser Drone
-  description: An alien drone. Looks... smaller.
+  description: The epitome of royalty.
   components:
   - type: GhostRole
     name: cm-job-name-xeno-lesser-drone
@@ -14,7 +14,7 @@
     raffle:
       settings: short
   - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/LesserDrone/lesser_drone.rsi
+    sprite: _RMC14/Mobs/Xenonids/Extras/princess_lesser_drone.rsi
   - type: MobState
     allowedStates:
     - Alive
