@@ -660,7 +660,7 @@
 
 # TODO add liver and brain damage
 - type: reagent
-  parent: [ CMReagentMedicine, Tricordazine ]
+  parent: [ CMReagentMedicine, CMTricordrazine ]
   id: CMTramadol
   name: reagent-name-cmtramadol
   desc: reagent-desc-cmtramadol
