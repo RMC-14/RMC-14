@@ -50,6 +50,6 @@ rmc-announcement-dropship-hijack = Unscheduled dropship departure detected from 
 
 rmc-announcement-dropship-hijack-hive = The Queen has commanded the metal bird to depart for the metal hive in the sky! Rejoice!
 
-rmc-announcement-ares-command = [color=#CECECE][font size=16][bold]ARES v3.2[/bold][/font][/color][color=red][font size=16][bold]
+rmc-announcement-ares-command = [color=#CECECE][font size=16][bold]ARES v3.2[/bold][/font][/color][color=red][font size=16]
 
-    {$message}[/bold][/font][/color]
+    {$message}[/font][/color]

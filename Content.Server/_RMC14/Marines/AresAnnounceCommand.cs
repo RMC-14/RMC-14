@@ -22,7 +22,7 @@ public sealed class AresAnnounceCommand : IConsoleCommand
         }
 
         var message = string.Join(' ', args);
-        var soundSpecifier = new SoundPathSpecifier("Resources/Audio/RMC14/AI/announce.ogg");
+        var soundSpecifier = new SoundPathSpecifier("/Audio/_RMC14/AI/announce.ogg");
         marineAnnounce.AnnounceARES(null, message, soundSpecifier, "rmc-announcement-ares-command");
         shell.WriteLine("Sent!");
     }
