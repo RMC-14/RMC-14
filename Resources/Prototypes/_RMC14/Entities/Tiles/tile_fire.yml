@@ -106,7 +106,7 @@
     - map: [ "base" ]
       state: white_4
   - type: PointLight
-    color: "#8fcbeb"
+    color: []
   - type: RgbLightController
     layers: [ 0 ]
   - type: RMCIgniteOnCollide
