@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/obj/structures/props/vehicles/vehicles.dmi",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "truck",
+      "directions": 4
+    },
+    {
+      "name": "truck_damaged",
+      "directions": 4
+    },
+    {
+      "name": "truck_snow",
+      "directions": 4
+    },
+    {
+      "name": "truck_cargo",
+      "directions": 4
+    },
+    {
+      "name": "truck_cargo_snow",
+      "directions": 4
+    },
+    {
+      "name": "truck_mining",
+      "directions": 4
+    },
+    {
+      "name": "tractor",
+      "directions": 4
+    },
+    {
+      "name": "tractor_damaged",
+      "directions": 4
+    },
+    {
+      "name": "tractor_snow",
+      "directions": 4
+    },
+    {
+      "name": "crane",
+      "directions": 4
+    },
+    {
+      "name": "crane_damaged",
+      "directions": 4
+    },
+    {
+      "name": "crane_snow",
+      "directions": 4
+    },
+    {
+      "name": "crane_cargo",
+      "directions": 4
+    },
+    {
+      "name": "crane_cargo_snow",
+      "directions": 4
+    },
+    {
+      "name": "van",
+      "directions": 4
+    },
+    {
+      "name": "van_damaged",
+      "directions": 4
+    },
+    {
+      "name": "van_snow",
+      "directions": 4
+    },
+    {
+      "name": "crawler",
+      "directions": 4
+    },
+    {
+      "name": "crawler_covered_bed",
+      "directions": 4
+    },
+    {
+      "name": "crawler_crate",
+      "directions": 4
+    },
+    {
+      "name": "crawler_crate_alt",
+      "directions": 4
+    },
+    {
+      "name": "crawler_crate_alt2",
+      "directions": 4
+    },
+    {
+      "name": "crawler_crate_wy",
+      "directions": 4
+    },
+    {
+      "name": "crawler_fuel",
+      "directions": 4
+    },
+    {
+      "name": "van_candy",
+      "directions": 4
+    }
+  ]
+}

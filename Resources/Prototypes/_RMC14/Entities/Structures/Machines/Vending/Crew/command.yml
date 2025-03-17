@@ -289,6 +289,8 @@
         points: 15
       - id: RMCAttachmentUnderbarrelExtinguisher
         points: 15
+      - id: RMCAttachmentMiniFlamethrower
+        points: 15 
       - id: RMCAttachmentU1GrenadeLauncher
         points: 5
     - name: Barrel Attachments
@@ -305,6 +307,10 @@
         points: 3
       - id: RMCPouchMacheteFilled
         points: 5
+      - id: RMCBackpackRTO
+        points: 15
+      - id: RMCMotionDetector
+        points: 5
       - id: CMEntrenchingTool
         points: 1
       - id: RMCBinoculars
@@ -313,10 +319,15 @@
         points: 8
       - id: RMCLaserDesignator
         points: 12
+      - id: RMCFulton20
+        points: 5
+      - id: SprayBottleSpaceCleaner
+        points: 2
       - id: RMCWhistle
         points: 5
       - id: RMCFlashlight
         points: 1
+       #TODO Synthetic Reset Key
 
 # Commanding Officer #
 
@@ -345,7 +356,9 @@
       - id: CMHeadCapCO
       - id: CMHeadBeretCO
       - id: CMBootsBlackFilled
+      - id: CMBootsBrown
       - id: CMHandsBlackMarine
+      - id: CMHandsBrown
     - name: Utility Extras
       entries:
       - id: RMCSunglasses
@@ -519,10 +532,10 @@
         points: 20
     - name: Sidearm Ammunition
       entries:
-      - id: RMCSpeedLoaderMateba
+      - id: RMCSpeedLoaderMatebaHighImpact
         points: 15
-    #   - id: CMMagazineMatebaAP  # TODO RMC14 Port More Sidearm Ammo
-    #     points: 20
+      - id: RMCSpeedLoaderMatebaHIAP
+        points: 20
       - id: RMCMagazinePistolD50WinterWyvernHI
         points: 15
       - id: RMCMagazinePistolD50WinterWyvernHIAP
@@ -537,7 +550,8 @@
         points: 20
     - name: Special Ammunition
       entries:
-      #- id: M54C Incendiary Magazine
+      - id: RMCMagazineRifleM54CIncendiary
+        points: 65
       #- id: M54C Rubber Magazine
       - id: RMCBoxShotgunBeanbag
         points: 10
@@ -694,6 +708,9 @@
         recommended: true
       - id: CMBeltSecurityMPFilled
         name: M276 pattern security rig (Full)
+        recommended: true
+      - id: CMBeltMedicalFilled
+        name: M276 pattern medical storage rig (Full)
         recommended: true
       - id: CMBeltMedicBagFilled
         name: M276 pattern lifesaver bag (Full)
@@ -873,8 +890,9 @@
       - id: CMHeadsetCE
       - id: CMBootsBlack
       - id: ClothingEyesGlassesMeson # TODO change to CM13 engi goggles.
+      - id: RMCNailgunTactical
       # TODO KN5500/2 PDA
-      # TODO Compact nailgun
+     
     - name: Uniform
       jobs:
       - CMChiefEngineer
@@ -912,6 +930,16 @@
       - id: RMCSatchelWelder
       - id: RMCSatchelWelderChestrig
       - id: CMBackpackWelder
+    - name: Belt
+      jobs:
+      - CMChiefEngineer
+      choices: { CMBelt: 1 }
+      entries:
+      - id: RMCBeltConstruction
+      - id: RMCBeltUtilityGeneral
+      - id: CMBeltUtilityFilled
+        name: M276 pattern toolbelt rig (Full)
+       
     - name: Pouches
       jobs:
       - CMChiefEngineer
@@ -1022,7 +1050,7 @@
       - id: CMJumpsuitQM
       - id: CMHeadsetQM
       - id: CMSatchel
-      # - id: CMCoatQM Todo: Port this
+      - id: RMCQuartermasterJacket
     - name: Headgear
       jobs:
       - CMQuartermaster
@@ -1228,6 +1256,16 @@
       - id: CMWebbingBlack
         recommended: true
       - id: CMWebbing
+    - name: Spare Equipment
+      jobs: 
+      - CMCMO
+      entries:
+      - id: CMHeadsetMedical
+        amount: 15
+      - id: CMHeadsetResearcher
+        amount: 15
+        
+
     # ////////////////////////////////////
     # Auxiliary Support Officer
     # ////////////////////////////////////
@@ -1273,6 +1311,8 @@
         recommended: true
       - id: CMHeadCapPeakedService
         recommended: true
+      - id: CMHeadBeretTan
+        recommended: true  
     - name: Combat Equipment
       jobs:
       - CMAuxiliarySupportOfficer

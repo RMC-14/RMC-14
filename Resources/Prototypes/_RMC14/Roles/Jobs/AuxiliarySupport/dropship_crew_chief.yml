@@ -19,7 +19,7 @@
     RMCRankSergeant:
     - !type:RoleTimeRequirement
       role: CMJobDropshipCrewChief
-      time: 270000 # 10 hours
+      time: 36000 # 10 hours
     RMCRankCorporal: []
   startingGear: CMGearDCC
   icon: "CMJobIconDCC"

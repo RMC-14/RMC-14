@@ -104,7 +104,7 @@
   - type: SolutionContainerManager
     solutions:
       drink:
-        maxVol: 30
+        maxVol: 50 # RMC14
   - type: SolutionContainerVisuals
     maxFillLevels: 9
     fillBaseName: fill

@@ -15,6 +15,22 @@
     job: CMCommandingOfficer
 
 - type: entity
+  parent: CMIDCardGold
+  id: RMCIDCardCommandingOfficerPlus
+  name: commanding officer ID card
+  description: Top brass of the top brass. Issued to only the most dedicated.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/general.rsi
+    state: general
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/general.rsi
+  - type: PresetIdCard
+    job: CMCommandingOfficer
+
+- type: entity
   parent: CMIDCardSilver
   id: CMIDCardExecutiveOfficer
   name: executive officer ID card
@@ -25,17 +41,17 @@
 - type: entity
   parent: IDCardStandard # Deliberately parenting off of upstream ID card cause it needs to work with admin access configurator.
   id: CMIDCardHighCommand
-  name: high command ID card
+  name: general officer ID card
   suffix: Admin
-  description: A gold-plated holo-badge reserved for those exclusively above your rank.
+  description: Top brass of the top brass. Issued to only the most dedicated.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/CMIDs/gold_id.rsi
-    state: gold
+    sprite: _RMC14/Objects/CMIDs/general.rsi
+    state: general
   - type: Clothing
     slots:
     - idcard
-    sprite: _RMC14/Objects/CMIDs/gold_id.rsi
+    sprite: _RMC14/Objects/CMIDs/general.rsi
   - type: Item
     heldPrefix: green
   - type: Access
@@ -54,15 +70,15 @@
   id: CMIDCardProvostSectorMarshal
   name: Provost Sector Marshal ID card
   suffix: Admin
-  description: A gold-plated holo-badge reserved for those exclusively above your rank, this one bares the symbol of the Provost Marshal's office.
+  description: Issued to members of the Provost Office.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/CMIDs/gold_id.rsi
-    state: gold
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
   - type: Clothing
     slots:
     - idcard
-    sprite: _RMC14/Objects/CMIDs/gold_id.rsi
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
   - type: Item
     heldPrefix: green
   - type: Access

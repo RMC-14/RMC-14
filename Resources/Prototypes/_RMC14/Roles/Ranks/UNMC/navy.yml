@@ -1,0 +1,144 @@
+- type: rank
+  id: RMCRankNavySeamanRecruit
+  name: Seaman Recruit
+  prefix: SR.
+  paygrade: E1
+
+- type: rank
+  id: RMCRankNavySeamanApprentice
+  name: Seaman Apprentice
+  prefix: SA.
+  paygrade: E2
+
+- type: rank
+  id: RMCRankNavySeaman
+  name: Seaman
+  prefix: SN.
+  paygrade: E3
+
+- type: rank
+  id: RMCRankNavyPettyOfficer3rdClass
+  name: Petty Officer 3rd Class
+  prefix: PO3.
+  paygrade: E4
+
+- type: rank
+  id: RMCRankNavyPettyOfficer2ndClass
+  name: Petty Officer 2nd Class
+  prefix: PO2.
+  paygrade: E5
+
+- type: rank
+  id: RMCRankNavyPettyOfficer1stClass
+  name: Petty Officer 1st Class
+  prefix: PO1.
+  paygrade: E6
+
+- type: rank
+  id: RMCRankNavyChiefPettyOfficer
+  name: Chief Petty Officer
+  prefix: CPO.
+  paygrade: E7
+
+- type: rank
+  id: RMCRankNavySeniorChiefPettyOfficer
+  name: Senior Chief Petty Officer
+  prefix: SCPO.
+  paygrade: E8
+
+- type: rank
+  id: RMCRankNavyCommandSeniorChiefPettyOfficer
+  name: Command Senior Chief Petty Officer
+  prefix: CSCPO.
+  paygrade: E8
+
+- type: rank
+  id: RMCRankNavyMasterChiefPettyOfficer
+  name: Master Chief Petty Officer
+  prefix: MCPO.
+  paygrade: E9
+
+- type: rank
+  id: RMCRankNavyCommandMasterChiefPettyOfficer
+  name: Command Master Chief Petty Officer
+  prefix: CMCPO.
+  paygrade: E9
+
+# Commissioned Officers
+- type: rank
+  id: RMCRankNavyEnsign
+  name: Ensign
+  prefix: ENS.
+  paygrade: O1
+
+- type: rank
+  id: RMCRankNavyLieutenantJuniorGrade
+  name: Lieutenant Junior Grade
+  prefix: LTJG.
+  paygrade: O2
+
+- type: rank
+  id: RMCRankNavyLieutenant
+  name: Lieutenant
+  prefix: LT.
+  paygrade: O3
+
+- type: rank
+  id: RMCRankNavyLieutenantCommander
+  name: Lieutenant Commander
+  prefix: LCDR.
+  paygrade: O4
+
+- type: rank
+  id: RMCRankNavyCommander
+  name: Commander
+  prefix: CDR.
+  paygrade: O5
+
+- type: rank
+  id: RMCRankNavyCaptain
+  name: Captain
+  prefix: CAPT.
+  paygrade: O6
+
+- type: rank
+  id: RMCRankNavyCommodore
+  name: Commodore
+  prefix: CDRE.
+  paygrade: O7
+
+- type: rank
+  id: RMCRankNavySeniorCommodore
+  name: Senior Commodore
+  prefix: Snr CDRE.
+  paygrade: O7
+
+- type: rank
+  id: RMCRankNavyRearAdmiralLowerHalf
+  name: Rear Admiral (Lower Half)
+  prefix: RDML.
+  paygrade: O8
+
+- type: rank
+  id: RMCRankNavyRearAdmiralUpperHalf
+  name: Rear Admiral (Upper Half)
+  prefix: RADM.
+  paygrade: O9
+
+- type: rank
+  id: RMCRankNavyViceAdmiral
+  name: Vice Admiral
+  prefix: VADM.
+  paygrade: O9
+
+- type: rank
+  id: RMCRankNavyAdmiral
+  name: Admiral
+  prefix: ADM.
+  paygrade: O10
+
+- type: rank
+  id: RMCRankNavyChiefOfNavalOperations
+  name: Chief of Naval Operations
+  prefix: CNO.
+  paygrade: O10

@@ -34,7 +34,7 @@
   supervisors: cm-job-supervisors-co
   accessGroups:
   - SquadLeader
-  overwatchSortPriority: -5
+  overwatchSortPriority: -6
   overwatchShowName: true
   overwatchRoleName: Squad Leader
   minimapIcon:

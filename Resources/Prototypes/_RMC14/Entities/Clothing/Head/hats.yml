@@ -178,6 +178,10 @@
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
   - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      components:
+      - HelmetAccessory
   - type: HelmetAccessoryHolder
 
 - type: entity
@@ -510,3 +514,14 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/intel.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/intel.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: RMCProvostCommandBeret
+  name: UNMC provost command beret
+  description: A beret with the UNMC Military Police insignia emblazoned on it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/pvciberet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/pvciberet.rsi

@@ -238,11 +238,11 @@
         amount: 24
     - name: Sidearms
       entries:
-      - id: RMCWeaponPistolM77
+      - id: RMCWeaponPistolM77Empty
         amount: 4
-      - id: RMCWeaponRevolverM44
+      - id: RMCWeaponRevolverM44Empty
         amount: 4
-      - id: CMWeaponPistolM1984
+      - id: CMWeaponPistolM1984Empty
         amount: 4
     - name: Sidearm Ammunition
       entries:
