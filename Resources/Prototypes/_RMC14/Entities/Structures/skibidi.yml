@@ -1,0 +1,40 @@
+﻿- type: entity
+  parent: BaseStructureDynamic
+  id: RMCSkibidiToilet
+  name: skibidi toilet
+  description: ???
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/skibidi.rsi
+    noRot: true
+    state: base
+  - type: Rotatable
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.18,-0.48,0.18,0.48"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: null
+  - type: InteractionOutline
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 4500
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WindowShatter
