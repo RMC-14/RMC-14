@@ -646,6 +646,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         {
             var undamagedStructureMessage = Loc.GetString("rmc-xeno-construction-repair-structure-no-damage-failure", ("struct", xenoStructure.Owner));
             _popup.PopupClient(undamagedStructureMessage, xenoStructure.Owner.ToCoordinates(), user);
+            return;
         }
 
         if (!InRangePopup(user, xenoStructureTransform.Coordinates, xeno.OrderConstructionRange.Float()))
