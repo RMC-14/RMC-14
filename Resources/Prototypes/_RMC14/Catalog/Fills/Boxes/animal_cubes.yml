@@ -46,11 +46,11 @@
 
 - type: entity
   parent: RMCBoxMonkeyCube
-  id: RMCBoxNeaeraCube
-  name: Neaera Cube Box
-  description: Drymate brand neaera cubes, shipped from Jargon 4. Just add water!
+  id: RMCBoxYirenCube
+  name: Yiren Cube Box
+  description: Drymate brand yiren cubes, shipped from Qerrbalak. Just add water!
   components:
   - type: StorageFill
     contents:
-    - id: RMCFoodSnackNeaeraCubeWrapped
+    - id: RMCFoodSnackYirenCubeWrapped
       amount: 5
