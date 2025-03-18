@@ -766,7 +766,14 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         while (hiveStructures.MoveNext(out var hiveStructure, out _, out var transformComp))
         {
             if (transformComp.ParentUid != ev.Dropship && _planet.IsOnPlanet(hiveStructure.ToCoordinates()))
+            {
                 _destruction.DestroyEntity(hiveStructure);
+                // Supress Hivecore Cooldown if destroyed via auto-destruction during hijack
+                if (HasComp<HiveCoreComponent>(hiveStructure) && _hive.GetHive(hiveStructure) is { } hive)
+                {
+                    hive.Comp.NewCoreAt = _timing.CurTime;
+                }
+            }
         }
     }
     public FixedPoint2? GetStructurePlasmaCost(EntProtoId prototype)
