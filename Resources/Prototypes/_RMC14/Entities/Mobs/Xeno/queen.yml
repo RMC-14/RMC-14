@@ -85,7 +85,7 @@
     maxPlasma: 1000
     plasmaRegenOnWeeds: 4
   - type: CMArmor
-    armor: 25
+    xenoArmor: 25
     explosionArmor: 100
   - type: XenoWordQueen
   - type: XenoGut
