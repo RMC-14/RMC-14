@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Inventory;
+using Content.Shared._RMC14.Rangefinder;
 using Content.Shared._RMC14.Rangefinder.Spotting;
 using Content.Shared.Hands;
 using Content.Shared.Interaction.Events;
@@ -25,28 +26,31 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
     /// <summary>
     ///     Remove any lasers if the <see cref="TargetingComponent"/> is being removed from an entity.
     /// </summary>
-    private void OnTargetingRemoved<T>(Entity<TargetingComponent> targetingLaser, ref T args)
+    private void OnTargetingRemoved<T>(Entity<TargetingComponent> targeting, ref T args)
     {
         if (_net.IsClient)
             return;
 
-        while (targetingLaser.Comp.Targets.Count > 0)
+        if(TryComp(targeting, out RangefinderComponent? rangefinder))
+            _appearance.SetData(targeting, RangefinderLayers.Layer, rangefinder.Mode);
+
+        while (targeting.Comp.Targets.Count > 0)
         {
-            StopTargeting(targetingLaser, targetingLaser.Comp.Targets[0]);
+            StopTargeting(targeting, targeting.Comp.Targets[0]);
         }
     }
 
     /// <summary>
     ///     Stop all targeting done by the entity if it's interrupted.
     /// </summary>
-    private void OnTargetingDropped<T>(Entity<TargetingComponent> targetingLaser, ref T args)
+    private void OnTargetingDropped<T>(Entity<TargetingComponent> targeting, ref T args)
     {
         var ev = new TargetingCancelledEvent();
-        RaiseLocalEvent(targetingLaser, ref ev);
+        RaiseLocalEvent(targeting, ref ev);
 
-        while (targetingLaser.Comp.Targets.Count > 0)
+        while (targeting.Comp.Targets.Count > 0)
         {
-            StopTargeting(targetingLaser, targetingLaser.Comp.Targets[0]);
+            StopTargeting(targeting, targeting.Comp.Targets[0]);
         }
     }
 

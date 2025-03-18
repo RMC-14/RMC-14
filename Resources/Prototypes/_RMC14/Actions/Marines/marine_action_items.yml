@@ -145,18 +145,16 @@
     useDelay: 0.5
 
 - type: entity
-  parent: ActionMarineBase
+  parent: ActionMarineToggleable
   id: RMCActionSpotTarget
   name: Spot Target
   components:
-  - type: EntityTargetAction
+  - type: InstantAction
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/marine_sniper_actions.rsi
       state: spotter_target
     event: !type:SpotTargetActionEvent
-    range: 32
-    useDelay: 5
 
 - type: entity
   parent: ActionMarineBase

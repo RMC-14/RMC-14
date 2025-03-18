@@ -49,8 +49,9 @@ public sealed class RMCFocusingSystem : EntitySystem
             _appearance.SetData(component.FocusTarget, FocusedVisuals.Focused, true);
             _appearance.SetData(component.OldTarget, FocusedVisuals.Focused, false);
 
+            //TODO make this the squad color
             if(TryComp(component.FocusTarget, out SpriteComponent? sprite))
-                sprite.LayerSetColor($"focused", Color.Blue);
+                sprite.LayerSetColor($"focused", Color.Red);
         }
     }
 }
