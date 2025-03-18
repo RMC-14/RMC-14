@@ -96,9 +96,3 @@ public enum FocusedVisuals : byte
 {
     Focused,
 }
-
-public enum FocusedEffect
-{
-    None = 0,
-    Focused = 1,
-}

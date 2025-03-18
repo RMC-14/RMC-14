@@ -283,6 +283,10 @@
             sprite: _RMC14/Effects/targeted.rsi
             state: sniper_lockon_intense_direction
             visible: true
+      enum.FocusedVisuals.Focused:
+        focused:
+          True: { visible: true }
+          False: { visible: false }
   - type: Spottable
   - type: ActiveInputMover
   - type: DropItemsOnRest

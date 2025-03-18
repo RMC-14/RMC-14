@@ -4,6 +4,8 @@ namespace Content.Shared._RMC14.Weapons.Ranged.AimedShot.FocusedShooting;
 
 public sealed class RMCFocusedShootingSystem : EntitySystem
 {
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCFocusedShootingComponent, AimedShotEvent>(OnAimedShot);
@@ -47,6 +49,9 @@ public sealed class RMCFocusedShootingSystem : EntitySystem
     {
         var focusCounter = ent.Comp.FocusCounter;
         var currentTarget = ent.Comp.CurrentTarget;
+        var user = _transform.GetParentUid(ent);
+        var focusing = EnsureComp<RMCFocusingComponent>(user);
+
         if (currentTarget == args.Target)
         {
             if (focusCounter >= 3)
@@ -54,9 +59,15 @@ public sealed class RMCFocusedShootingSystem : EntitySystem
         }
         else
         {
+            if (ent.Comp.CurrentTarget != null)
+                focusing.OldTarget = focusing.FocusTarget;
+
             ent.Comp.CurrentTarget = args.Target;
             focusCounter= 0;
         }
+
+        focusing.FocusTarget = args.Target;
+        Dirty(user, focusing);
 
         ent.Comp.FocusCounter = Math.Min(focusCounter + 1, 3);
         Dirty(ent);

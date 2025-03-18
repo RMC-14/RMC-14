@@ -57,6 +57,13 @@ public sealed class HomingProjectileSystem : EntitySystem
             var projectileCoords = _transform.GetMapCoordinates(projectile, Transform(projectile));
             var direction = targetCoords.Position - projectileCoords.Position;
 
+            // Remove the homing component once the projectile gets close to it's target.
+            if (_transform.InRange(Transform(projectile).Coordinates, Transform(target).Coordinates, 1f))
+            {
+                RemComp<HomingProjectileComponent>(projectile);
+                return;
+            }
+
             // Get the velocity of the target and the projectile
             var targetMapVelocity = Vector2.Zero + direction.Normalized() * component.ProjectileSpeed;
             var currentMapVelocity = _physics.GetMapLinearVelocity(projectile, physics);

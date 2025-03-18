@@ -1,0 +1,56 @@
+using Content.Shared._RMC14.Rangefinder.Spotting;
+using Content.Shared._RMC14.Weapons.Ranged.AimedShot.FocusedShooting;
+using Robust.Client.GameObjects;
+using Robust.Client.Player;
+
+namespace Content.Client._RMC14.Weapons.Ranged.Sniper.Focused;
+
+public sealed class RMCFocusingSystem : EntitySystem
+{
+    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+
+    public override void Initialize()
+    {
+        SubscribeLocalEvent<RMCFocusingComponent, ComponentRemove>(OnComponentRemove);
+    }
+
+    private void OnComponentRemove(Entity<RMCFocusingComponent> ent, ref ComponentRemove args)
+    {
+        var entity = _player.LocalEntity;
+
+        if(ent.Owner != entity)
+            return;
+
+        _appearance.SetData(ent.Comp.FocusTarget, FocusedVisuals.Focused, false);
+    }
+
+    /// <summary>
+    ///     Enable or disable a visualizer only on the client of the entity that is targeting.
+    ///     Since aimed shot isn't predicted this has to be an update.
+    /// </summary>
+    public override void Update(float frameTime)
+    {
+        var query = EntityQueryEnumerator<RMCFocusingComponent>();
+
+        while (query.MoveNext(out var uid, out var component))
+        {
+            var entity = _player.LocalEntity;
+
+            // Only the sniper and Spotters can see what snipers are focusing on.
+            if(uid != entity && !HasComp<SpotterComponent>(uid))
+                return;
+
+            _appearance.TryGetData(component.FocusTarget, FocusedVisuals.Focused, out var visuals);
+
+            if(visuals == null)
+                return;
+
+            _appearance.SetData(component.FocusTarget, FocusedVisuals.Focused, true);
+            _appearance.SetData(component.OldTarget, FocusedVisuals.Focused, false);
+
+            if(TryComp(component.FocusTarget, out SpriteComponent? sprite))
+                sprite.LayerSetColor($"focused", Color.Blue);
+        }
+    }
+}
