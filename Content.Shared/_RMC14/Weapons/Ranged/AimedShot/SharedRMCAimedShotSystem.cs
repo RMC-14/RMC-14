@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Weapons.Ranged.Homing;
 using Content.Shared._RMC14.Weapons.Ranged.Laser;
 using Content.Shared._RMC14.Weapons.Ranged.Whitelist;
 using Content.Shared.Actions;
+using Content.Shared.CombatMode;
 using Content.Shared.Examine;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Components;
@@ -30,6 +31,7 @@ public abstract class SharedRMCAimedShotSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
 
     [Dependency] protected readonly IGameTiming Timing = default!;
 
@@ -100,8 +102,7 @@ public abstract class SharedRMCAimedShotSystem : EntitySystem
                 else
                     aimMultiplier = toggleLaser.AimDurationMultiplier;
 
-                // TODO make this rotate towards targeter
-                //directionEffect = DirectionTargetedEffects.None;
+                directionEffect = DirectionTargetedEffects.None;
             }
 
             if (TryComp(gun, out TargetingLaserComponent? targetingLaser))
@@ -147,6 +148,9 @@ public abstract class SharedRMCAimedShotSystem : EntitySystem
         // Apply the components that alter the projectiles behavior.
         foreach (var projectile in args.FiredProjectiles)
         {
+            var ev = new AimedShotEvent(target);
+            RaiseLocalEvent(ent, ref ev);
+
             var aimedProjectile = EnsureComp<AimedProjectileComponent>(projectile);
             aimedProjectile.Target = target;
             aimedProjectile.Source = ent;
@@ -244,6 +248,10 @@ public abstract class SharedRMCAimedShotSystem : EntitySystem
         if (ent.Comp.NextAimedShot > Timing.CurTime)
             return false;
 
+        // Can't aim if not in combat mode.
+        if (!_combatMode.IsInCombatMode(user))
+            return false;
+
         // Can't aim if the user doesn't have the correct whitelist.
         if (!_whitelist.IsValid(ent.Comp.Whitelist, user) && ent.Comp.Whitelist.Components != null)
         {
@@ -299,4 +307,11 @@ public abstract class SharedRMCAimedShotSystem : EntitySystem
         Dirty(ent);
     }
 }
+
+/// <summary>
+///     Raised on a projectile when it's shot using the aimed shot action.
+/// </summary>
+/// <param name="Target">The target of the aimed shot.</param>
+[ByRefEvent]
+public record struct AimedShotEvent(EntityUid Target);
 

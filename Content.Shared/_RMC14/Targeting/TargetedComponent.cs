@@ -27,17 +27,17 @@ public enum TargetedVisuals
 }
 
 [Serializable, NetSerializable]
-public enum TargetedEffects
+public enum TargetedEffects : byte
 {
     None = 0,
-    Spotted = 1,
-    Targeted= 2,
-    TargetedIntense = 3,
+    Spotted,
+    Targeted,
+    TargetedIntense,
 }
 
 public enum DirectionTargetedEffects
 {
     None = 0,
-    DirectionTargeted = 1,
-    DirectionTargetedIntense= 2,
+    DirectionTargeted,
+    DirectionTargetedIntense,
 }

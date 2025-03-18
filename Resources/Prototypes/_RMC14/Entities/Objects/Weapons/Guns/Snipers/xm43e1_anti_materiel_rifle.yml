@@ -78,6 +78,7 @@
     aimDuration: 2
     aimedShotCooldown: 4.5
   - type: TargetingLaser
+  - type: RMCFocusedShooting
 
 - type: entity
   parent: CMMagazineSniperM96S
@@ -132,7 +133,7 @@
   - type: RMCPenetratingProjectile
   - type: RMCStoppingPower
   - type: AimedShotEffect
-    extraHits: 0.6
+    extraHits: 0.8
 - type: Tag
   id: RMCXM43E1AntiMaterielRifle
 

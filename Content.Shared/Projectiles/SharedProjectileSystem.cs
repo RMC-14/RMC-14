@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared._RMC14.Projectiles.Penetration;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Camera;
@@ -132,6 +133,10 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
         component.DamagedEntity = true;
         Dirty(uid, component);
+
+        // RMC14
+        var additonalHits = new AfterProjectileHitEvent(projectile, target);
+        RaiseLocalEvent(uid, ref additonalHits);
 
         if (!predicted && component.DeleteOnCollide && (_netManager.IsServer || IsClientSide(uid)))
             QueueDel(uid);

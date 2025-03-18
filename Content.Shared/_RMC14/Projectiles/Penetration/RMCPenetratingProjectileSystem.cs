@@ -19,9 +19,13 @@ public sealed class RMCPenetratingProjectileSystem : EntitySystem
         SubscribeLocalEvent<RMCPenetratingProjectileComponent, PreventCollideEvent>(OnPreventCollide);
         SubscribeLocalEvent<RMCPenetratingProjectileComponent, StartCollideEvent>(OnStartCollide, after: [typeof(SharedProjectileSystem)]);
         SubscribeLocalEvent<RMCPenetratingProjectileComponent, ProjectileHitEvent>(OnProjectileHit);
+        SubscribeLocalEvent<RMCPenetratingProjectileComponent, AfterProjectileHitEvent>(OnAllowAdditionalHits);
 
     }
 
+    /// <summary>
+    ///     Store the coordinates the projectile was shot from.
+    /// </summary>
     private void OnMapInit(Entity<RMCPenetratingProjectileComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.ShotFrom = _transform.GetMoverCoordinates(ent);
@@ -40,17 +44,26 @@ public sealed class RMCPenetratingProjectileSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Add the hit target to a list of hit targets that won't be hit another time..
+    ///     Add the hit target to a list of hit targets that won't be hit another time.
     /// </summary>
     private void OnProjectileHit(Entity<RMCPenetratingProjectileComponent> ent, ref ProjectileHitEvent args)
     {
+        if (ent.Comp.HitTargets.Contains(args.Target))
+        {
+            args.Handled = true;
+            return;
+        }
+
         ent.Comp.HitTargets.Add(args.Target);
         Dirty(ent);
     }
 
+    /// <summary>
+    ///     Reduce the projectile damage and range based on what kind of target the projectile is colliding with.
+    /// </summary>
     private void OnStartCollide(Entity<RMCPenetratingProjectileComponent> ent, ref StartCollideEvent args)
     {
-        if(!TryComp(ent, out ProjectileComponent? projectile) || ent.Comp.ShotFrom == null || ent.Comp.HitTargets.Contains(args.OtherEntity))
+        if(!TryComp(ent, out ProjectileComponent? projectile) || ent.Comp.ShotFrom == null)
             return;
 
         var rangeLoss = ent.Comp.RangeLossPerHit;
@@ -91,16 +104,34 @@ public sealed class RMCPenetratingProjectileSystem : EntitySystem
 
         projectile.Damage *= 1 - damageLoss;
         Dirty(ent,projectile);
+    }
+
+    /// <summary>
+    ///     Make sure additional hits are allowed if range is still above 0.
+    /// </summary>
+    private void OnAllowAdditionalHits(Entity<RMCPenetratingProjectileComponent> ent, ref AfterProjectileHitEvent args)
+    {
+        if(ent.Comp.ShotFrom == null)
+            return;
 
         var distanceTravelled =
             (_transform.GetMoverCoordinates(ent).Position - ent.Comp.ShotFrom.Value.Position).Length();
         var range = ent.Comp.Range - distanceTravelled;
 
-        // Only allow the projectile to penetrate if it still has range left.
+        ent.Comp.HitTargets.Add(args.Target);
+        Dirty(ent);
+
         if (range < 0)
             return;
 
-        projectile.DamagedEntity = false;
-        Dirty(ent, projectile);
+        args.Projectile.Comp.DamagedEntity = false;
+        Dirty(args.Projectile);
     }
 }
+
+/// <summary>
+///     Raised on a projectile after it has hit an entity.
+/// </summary>
+[ByRefEvent]
+public record struct AfterProjectileHitEvent(Entity<ProjectileComponent> Projectile, EntityUid Target);
+

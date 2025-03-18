@@ -50,7 +50,7 @@ public sealed class TargetingOverlay : Overlay
                 var box = new Box2(-Width, -length, Width, length);
                 var rotated = new Box2Rotated(box.Translated(midPoint), angle, midPoint);
 
-                var color = targetingLaser.LaserColor;
+                var color = targetingLaser.CurrentLaserColor;
                 var alpha = 0f;
 
                 if (targetingLaser.GradualAlpha)

@@ -45,6 +45,9 @@ public sealed class RMCStoppingPowerSystem : EntitySystem
         var target = args.Target;
         _sizeStun.TryGetSize(target, out var size);
 
+        ent.Comp.CurrentStoppingPower = stoppingPower;
+        Dirty(ent);
+
         // Big xeno's have higher thresholds before they get affected.
         if (size >= RMCSizes.Big)
         {

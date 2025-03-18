@@ -120,6 +120,12 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
     /// <param name="directionEffect">The direction visualiser to apply on the entity being targeted</param>
     public void Target(EntityUid equipment, EntityUid user, EntityUid target, float targetingDuration, TargetedEffects targetedEffect = TargetedEffects.None, DirectionTargetedEffects directionEffect = DirectionTargetedEffects.None)
     {
+        // Change the laser and targeting effect if focused.
+        var ev = new TargetingStartedEvent(directionEffect, targetedEffect, target);
+        RaiseLocalEvent(equipment, ref ev);
+        targetedEffect = ev.TargetedEffect;
+        directionEffect = ev.DirectionEffect;
+
         var targeted = EnsureComp<TargetedComponent>(target);
         targeted.TargetedBy.Add(equipment);
         Dirty(target, targeted);
@@ -153,7 +159,7 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
     {
         //Get the currently active visualiser.
         _appearance.TryGetData<TargetedEffects>(target, TargetedVisuals.Targeted, out var marker);
-        _appearance.TryGetData<DirectionTargetedEffects>(target, TargetedVisuals.Targeted, out var directionMarker);
+        _appearance.TryGetData<DirectionTargetedEffects>(target, TargetedVisuals.TargetedDirection, out var directionMarker);
 
         // Only apply the visualiser if forced, or it has a higher priority than the already existing one.
         if (force || newMarker > marker)
@@ -161,6 +167,7 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
             _appearance.SetData(target, TargetedVisuals.Targeted, newMarker);
         }
 
+        // TODO make this rotate towards targeter
         if (force || directionEffect > directionMarker)
             _appearance.SetData(target, TargetedVisuals.TargetedDirection, directionEffect);
     }
@@ -259,3 +266,9 @@ public record struct TargetingFinishedEvent(EntityUid User, EntityCoordinates Co
 /// </summary>
 [ByRefEvent]
 public record struct TargetingCancelledEvent(bool Handled = false);
+
+/// <summary>
+///     Raised on an entity when it starts targeting.
+/// </summary>
+[ByRefEvent]
+public record struct TargetingStartedEvent(DirectionTargetedEffects DirectionEffect, TargetedEffects TargetedEffect, EntityUid Target);

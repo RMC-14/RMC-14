@@ -7,6 +7,12 @@ namespace Content.Shared._RMC14.Projectiles.StoppingPower;
 public sealed partial class RMCStoppingPowerComponent : Component
 {
     /// <summary>
+    ///     The current stopping power.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float CurrentStoppingPower;
+
+    /// <summary>
     ///     The maximum stopping power value possible.
     /// </summary>
     [DataField, AutoNetworkedField]

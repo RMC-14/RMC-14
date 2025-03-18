@@ -12,10 +12,16 @@ public sealed partial class TargetingLaserComponent : Component
     public bool ShowLaser = true;
 
     /// <summary>
-    ///     The speed of the aimed shot projectile
+    ///     The original color of the laser.
     /// </summary>
     [DataField, AutoNetworkedField]
     public Color LaserColor = Color.Red;
+
+    /// <summary>
+    ///     The current color of the laser
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public Color CurrentLaserColor = Color.Red;
 
     /// <summary>
     ///     How long the spotting should last if not interrupted.
