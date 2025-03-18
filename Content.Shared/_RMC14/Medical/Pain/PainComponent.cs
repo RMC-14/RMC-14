@@ -53,9 +53,15 @@ namespace Content.Shared._RMC14.Medical.Pain
     }
 
     [DataDefinition]
-    public sealed partial class PainReductionModificator(TimeSpan duration, FixedPoint2 strength)
+    public sealed partial class PainReductionModificator
     {
-        public TimeSpan Duration = duration;
-        public FixedPoint2 EffectStrength = strength;
+        public TimeSpan Duration;
+        public FixedPoint2 EffectStrength;
+
+        public PainReductionModificator(TimeSpan duration, FixedPoint2 strength)
+        {
+            Duration = duration;
+            EffectStrength = strength;
+        }
     }
 }
