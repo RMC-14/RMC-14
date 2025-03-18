@@ -11,7 +11,6 @@ using Robust.Shared.Timing;
 using Robust.Shared.Configuration;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids.Energy;
-using Content.Shared.Flash.Components;
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
 
