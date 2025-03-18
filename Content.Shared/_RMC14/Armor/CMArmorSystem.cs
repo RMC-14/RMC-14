@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Medical.Surgery.Steps;
 using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Slowing;
 using Content.Shared.Alert;
 using Content.Shared.Clothing.Components;
@@ -238,10 +239,11 @@ public sealed class CMArmorSystem : EntitySystem
         else
         {
             ev.Melee = (int)(ev.Melee * ev.ArmorModifier);
-            ev.Bullet = (int)(ev.Bullet * ev.ArmorModifier);
-
             ev.Melee -= armorPiercing;
+
+            ev.Bullet = (int)(ev.Bullet * ev.ArmorModifier);
             ev.Bullet -= armorPiercing;
+
             ev.Bio -= armorPiercing;
         }
         if (args.Origin is { } origin)
@@ -258,17 +260,17 @@ public sealed class CMArmorSystem : EntitySystem
                 }
             }
         }
-        args.Damage = new DamageSpecifier(args.Damage);
 
+        args.Damage = new DamageSpecifier(args.Damage);
         if (TryComp<XenoComponent>(ent, out var xeno2))
         {
             Resist(args.Damage, ev.XenoArmor, ArmorGroup);
         }
-        else if (TryComp<RMCProjectileAccuracyComponent>(args.Tool, out var accuracy))
+        else if (!TryComp<XenoProjectileComponent>(args.Tool, out var spit) && TryComp<RMCProjectileAccuracyComponent>(args.Tool, out var bullet))
         {
             Resist(args.Damage, ev.Bullet, ArmorGroup);
         }
-        else
+        else if(!TryComp<XenoProjectileComponent>(args.Tool, out var spit2))
         {
             Resist(args.Damage, ev.Melee, ArmorGroup);
         }
