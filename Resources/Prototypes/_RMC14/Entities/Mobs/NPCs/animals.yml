@@ -30,7 +30,7 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: preview
-      sprite: _RMC14/Mobs/Animals/r_monkey.rsi
+      sprite: _RMC14/Mobs/Animals/monkey_derivatives.rsi
     - map: [ "jumpsuit" ]
     - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
       color: "#ffffff"
@@ -57,8 +57,8 @@
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
-      state: preview
-      sprite: _RMC14/Mobs/Animals/r_yiren.rsi
+      state: yirenkey1
+      sprite: _RMC14/Mobs/Animals/monkey_derivatives.rsi
     - map: [ "jumpsuit" ]
     - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
       color: "#ffffff"
@@ -87,8 +87,8 @@
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
-      state: preview
-      sprite: _RMC14/Mobs/Animals/r_farwa.rsi
+      state: tajkey1
+      sprite: _RMC14/Mobs/Animals/monkey_derivatives.rsi
     - map: [ "jumpsuit" ]
     - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
       color: "#ffffff"
@@ -118,7 +118,7 @@
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: skrellkey1
-      sprite: _RMC14/Mobs/Animals/r_neaera.rsi
+      sprite: _RMC14/Mobs/Animals/monkey_derivatives.rsi
     - map: [ "jumpsuit" ]
     - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
       color: "#ffffff"
@@ -147,8 +147,8 @@
   - type: Sprite
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
-      state: preview
-      sprite: _RMC14/Mobs/Animals/r_stok.rsi
+      state: stokkey1
+      sprite: _RMC14/Mobs/Animals/monkey_derivatives.rsi
     - map: [ "jumpsuit" ]
     - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
       color: "#ffffff"
