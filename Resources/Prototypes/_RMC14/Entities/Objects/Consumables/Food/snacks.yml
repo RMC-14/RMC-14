@@ -4839,12 +4839,12 @@
     damage:
       types:
         Blunt: 35
+    soundHit:
+      collection: MetalThud
   - type: DamageOtherOnHit
     damage:
       types:
         Blunt: 50
-    soundHit:
-      collection: MetalThud
 
 - type: entity
   parent: RMCFoodSnackBase
