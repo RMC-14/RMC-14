@@ -1124,7 +1124,7 @@
   - type: CreamPie #Needs to leave splat decal after being thrown and delete trash
   - type: Item
     sprite: _RMC14/Objects/Consumable/Food/bakery.rsi
-    state: pie
+    heldPrefix: pie
   - type: Food
     transferAmount: 3
     trash:
@@ -4503,7 +4503,7 @@
   - type: SpawnItemsOnUse
     items:
     - id: RMCFoodPacketBurritoTrash
-    - id: RMCFoodSnackBurrito
+    - id: RMCFoodSnackPackagedBurrito
     sound:
       path: /Audio/Effects/unwrap.ogg
 
@@ -4595,7 +4595,7 @@
   - type: SpawnItemsOnUse
     items:
     - id: RMCFoodPacketHotdogTrash
-    - id: RMCFoodSnackHotdog
+    - id: RMCFoodSnackPackagedHotdog
     sound:
       path: /Audio/Effects/unwrap.ogg
 
@@ -4778,12 +4778,12 @@
     damage:
       types:
         Blunt: 15
+    soundHit:
+      collection: MetalThud
   - type: DamageOtherOnHit
     damage:
       types:
         Blunt: 10
-    soundHit:
-      collection: MetalThud
 
 - type: entity
   parent: RMCFoodSnackBase

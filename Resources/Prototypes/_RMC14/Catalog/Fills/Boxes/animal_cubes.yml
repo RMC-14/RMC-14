@@ -30,7 +30,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCFoodSnackStokeCubeWrapped
+    - id: RMCFoodSnackStokCubeWrapped
       amount: 5
 
 - type: entity
