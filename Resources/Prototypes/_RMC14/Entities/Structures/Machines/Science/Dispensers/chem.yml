@@ -166,6 +166,14 @@
     network: RMCChemStorageResearch
 
 - type: entity
+  parent: RMCChemStorageBase
+  id: RMCDispenserChem
+  suffix: Research
+  components:
+  - type: RMCChemicalStorage
+    network: RMCDispenserChem
+
+- type: entity
   parent: RMCChemDispenserBase
   id: RMCChemDispenserCorpsmanBase
   name: pressurized chemical dispenser
