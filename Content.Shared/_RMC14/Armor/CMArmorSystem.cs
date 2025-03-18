@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Medical.Surgery.Steps;
 using Content.Shared._RMC14.Projectiles;
+using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Slowing;
@@ -262,15 +263,15 @@ public sealed class CMArmorSystem : EntitySystem
         }
 
         args.Damage = new DamageSpecifier(args.Damage);
-        if (TryComp<XenoComponent>(ent, out var xeno2))
+        if (TryComp<XenoComponent>(ent, out var xenoResist))
         {
             Resist(args.Damage, ev.XenoArmor, ArmorGroup);
         }
-        else if (!TryComp<XenoProjectileComponent>(args.Tool, out var spit) && TryComp<RMCProjectileAccuracyComponent>(args.Tool, out var bullet))
+        else if (TryComp<RMCBulletComponent>(args.Tool, out var bulletResist))
         {
             Resist(args.Damage, ev.Bullet, ArmorGroup);
         }
-        else if(!TryComp<XenoProjectileComponent>(args.Tool, out var spit2))
+        else if(!TryComp<XenoProjectileComponent>(args.Tool, out var meleeResist))
         {
             Resist(args.Damage, ev.Melee, ArmorGroup);
         }
