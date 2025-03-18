@@ -1882,6 +1882,7 @@
   parent: RMCFoodSnackBase
   id: RMCFoodSnackBloodSoup
   name: Tomato Soup
+  suffix: Blood
   description: Smells like copper
   components:
   - type: Sprite
@@ -4177,7 +4178,7 @@
 - type: entity
   parent: RMCFoodSnackSliceableBase
   id: RMCFoodSnackCreamCheeseBread
-  name: Cream CheeseBread
+  name: Cream Cheese Bread
   description: Yum yum yum!
   components:
   - type: Sprite
