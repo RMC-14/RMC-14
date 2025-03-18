@@ -2,7 +2,7 @@
 - type: entity
   parent: CMArmorM3Medium
   id: RMCArmorSPP
-  name: SPP UM5 personal armor
+  name: UM5 personal armor
   description: Standard body armor of the SPP military, the UM5 (Union Medium MK5) is a medium body armor, roughly on par with the M3 pattern body armor in service with the UNMC, specialized towards ballistics protection. Unlike the M3, however, the plate has a heavier neckplate. This has earned many UN members to refer to SPP soldiers as 'tin men'.
   components:
   - type: Sprite
@@ -25,8 +25,8 @@
 - type: entity
   parent: RMCArmorSPP
   id: RMCArmorSPPSupport
-  name: SPP UL6 personal armor
-  description: Standard body armor of the SPP military, the UM5 (Union Medium MK5) is a medium body armor, roughly on par with the M3 pattern body armor in service with the UNMC, specialized towards ballistics protection. Unlike the M3, however, the plate has a heavier neckplate. This has earned many UN members to refer to SPP soldiers as 'tin men'.
+  name: UL6 personal armor
+  description: Standard body armor of the SPP military, the UL6 (Union Light MK6) is a light body armor, slightly weaker than the M3 pattern body armor in service with the UNMC, specialized towards ballistics protection. This set of personal armor lacks the iconic neck piece and some of the armor in favor of user mobility.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/support.rsi
@@ -78,7 +78,7 @@
 - type: entity
   parent: RMCArmorSPP
   id: RMCArmorSPPHeavy
-  name: SPP UH7 heavy plated armor
+  name: UH7 heavy plated armor
   description: An extremely heavy-duty set of body armor in service with the SPP military, the UH7 (Union Heavy MK7) is known for having powerful ballistic protection, alongside a noticeable neck guard, fortified in order to allow the wearer to endure the stresses of the bulky helmet.
   components:
   - type: Sprite

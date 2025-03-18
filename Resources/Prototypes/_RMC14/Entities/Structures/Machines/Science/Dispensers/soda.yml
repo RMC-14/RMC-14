@@ -1,61 +1,59 @@
 - type: entity
-  parent: SodaDispenser
+  parent: RMCDispenserBase
   id: CMDispenserSoda
   name: soda fountain
   description: A drink fabricating machine, capable of producing many sugary drinks with just one touch.
   components:
-  - type: Transform
-    anchored: false
-  - type: Physics
-    bodyType: Static
   - type: Sprite
     sprite: _RMC14/Structures/Machines/Science/small_dispensers.rsi
-    state: soda_dispenser
     snapCardinals: true
-  - type: ReagentDispenser
-    storageWhitelist:
-      tags:
-      - DrinkBottle
-    pack: CMDispenserSodaInventory
+    layers:
+    - state: soda_dispenser
   - type: Machine
     board: CMCircuitboardDispenserSoda
-  - type: InteractedBlacklist
-    blacklist:
-      components:
-      - Xeno
-  - type: ApcPowerReceiver
-    needsPower: false
-
-- type: reagentDispenserInventory
-  id: CMDispenserSodaInventory
-  inventory:
-  # Water
-  - DrinkIceJug
-  - DrinkCoffeeJug
-  - DrinkCreamCartonXL
-  - DrinkTeaJug
-  - DrinkColaBottleFull
-  - DrinkSpaceMountainWindBottleFull
-  - DrinkDrGibbJug
-  - DrinkSpaceUpBottleFull
-  - DrinkTonicWaterBottleFull
-  - DrinkSodaWaterBottleFull
-  - DrinkLemonLimeJug
-  - DrinkSugarJug
-  - DrinkJuiceOrangeCartonXL
-  - DrinkJuiceLimeCartonXL
-  - DrinkWaterMelonJuiceJug
-  # Tomato
-  # Carrot
-  # Berry
-  # Grape
-  # Lemon
-  # Banana
+  - type: RMCChemicalDispenser
+    network: RMCChemStorageDrinks
+    reagents:
+    - JuiceBanana
+    - JuiceBerry
+    - JuiceCarrot
+    - Coffee
+    - Cola
+    - Cream
+    - DrGibb
+    - JuiceGrape
+    - Ice
+    - JuiceLemon
+    - LemonLime
+    - JuiceLime
+    - JuiceOrange
+    - SodaWater
+    - SpaceMountainWind
+    - SpaceUp
+    - Sugar
+    - Tea
+    - JuiceTomato
+    - TonicWater
+    - Water
+    - JuiceWatermelon
+  - type: ItemSlots
+    slots:
+      chemical_dispenser_slot:
+        name: Soda Fountain
+        whitelist:
+          tags:
+          - GlassBeaker
+          - ChemDispensable
+          - DrinkGlass
 
 - type: entity
-  parent: CMDispenserSoda
-  id: CMDispenserSodaEmpty
-  suffix: Empty
+  parent: RMCChemStorageBase
+  id: RMCChemStorageDrinks
+  suffix: Drinks
   components:
-  - type: ReagentDispenser
-    pack: EmptyInventory
+  - type: RMCChemicalStorage
+    network: RMCChemStorageDrinks
+    energy: 1100
+    maxEnergy: 1100
+    baseMax: 1100
+    maxPer: 0

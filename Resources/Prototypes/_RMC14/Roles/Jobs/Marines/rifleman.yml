@@ -120,3 +120,20 @@
   components:
   - type: Sprite
     state: rifleman
+
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCRifleman
+  components:
+  - type: GhostRole
+    name: cm-job-name-rifleman
+    description: cm-job-description-rifleman
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    raffle:
+      settings: default
+    job: CMRifleman
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 1

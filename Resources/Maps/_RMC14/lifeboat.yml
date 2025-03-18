@@ -72,8 +72,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 10.5,0.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 117
@@ -83,8 +81,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 7.5,2.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 118
@@ -93,8 +89,6 @@ entities:
       anchored: True
       pos: 7.5,-1.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 119
@@ -102,8 +96,6 @@ entities:
     - type: Transform
       pos: -8,-1.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 120
@@ -112,8 +104,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: -8,2.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 121
@@ -122,8 +112,6 @@ entities:
       anchored: True
       pos: 4.5,-0.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 122
@@ -133,8 +121,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 4.5,1.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 123
@@ -143,8 +129,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: -1,1.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 124
@@ -152,8 +136,6 @@ entities:
     - type: Transform
       pos: -1,-0.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 125
@@ -161,8 +143,6 @@ entities:
     - type: Transform
       pos: -6,-0.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 126
@@ -171,8 +151,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: -6,1.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
   - uid: 127
@@ -181,8 +159,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -10,0.5
       parent: 1
-    - type: Physics
-      canCollide: False
     - type: Fixtures
       fixtures: {}
 - proto: CMSeatPassenger
@@ -324,6 +300,25 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 10.5,0.5
+      parent: 1
+- proto: RMCVendorLifeboatMedical
+  entities:
+  - uid: 130
+    components:
+    - type: Transform
+      pos: 4.3493648,2.3425684
+      parent: 1
+- proto: RMCVendorLifeboatWall
+  entities:
+  - uid: 128
+    components:
+    - type: Transform
+      pos: -5.8639383,2.4082017
+      parent: 1
+  - uid: 129
+    components:
+    - type: Transform
+      pos: 4.8152256,2.3425684
       parent: 1
 - proto: RMCWallLifeboat00
   entities:

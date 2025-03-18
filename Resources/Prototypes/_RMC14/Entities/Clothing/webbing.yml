@@ -30,6 +30,7 @@
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
+    - type: StoreAfterFailedInteract
   - type: ExplosionResistance
     damageCoefficient: 0
     worn: false
@@ -37,6 +38,7 @@
     blacklist:
       components:
       - Xeno
+  - type: StoreAfterFailedInteract
 
 - type: entity
   parent: CMWebbingBase
@@ -83,6 +85,7 @@
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
+    - type: StoreAfterFailedInteract
 
 - type: entity
   parent: CMWebbingBase
@@ -131,6 +134,7 @@
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
+    - type: StoreAfterFailedInteract
 
 - type: entity
   parent: CMWebbingBlack
@@ -164,6 +168,7 @@
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
+    - type: StoreAfterFailedInteract
 
 - type: entity
   parent: CMWebbingBase
@@ -239,6 +244,7 @@
       whitelist:
         tags:
         - Sidearm
+    - type: StoreAfterFailedInteract
 
 - type: entity
   parent: CMWebbingBase
@@ -277,6 +283,7 @@
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
+    - type: StoreAfterFailedInteract
 
 - type: entity
   parent: CMWebbing
@@ -336,6 +343,7 @@
     - type: ExplosionResistance
       damageCoefficient: 0
       worn: false
+    - type: StoreAfterFailedInteract
 
 - type: entity
   parent: RMCToolWebbingSmall
@@ -350,7 +358,51 @@
     - id: CMCrowbar
     - id: CMWirecutter
     - id: CMMultitool
-    
+
+- type: entity
+  parent: RMCToolWebbingSmall
+  id: RMCToolWebbingSmallERT
+  suffix: Filled
+  components:
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,13,1 # 7 slots
+  - type: Webbing
+    components:
+    - type: Storage
+      maxItemSize: Small
+      grid:
+      - 0,0,13,1 # 7 slots
+    - type: FixedItemSizeStorage
+    - type: StoreAfterFailedInteract
+  - type: FixedItemSizeStorage
+
+- type: entity
+  parent: RMCToolWebbingSmallERT
+  id: RMCToolWebbingSmallERTFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMWrench
+    - id: CMWelder
+    - id: CMCrowbar
+    - id: CMWirecutter
+    - id: RMCCableCoil30
+    - id: CMMultitool
+
+- type: entity
+  parent: CMWebbing
+  id: RMCWebbingHEFA
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFrag
+      amount: 3
+
 - type: entity
   parent: CMWebbingBase
   id: CMWebbingKnives
@@ -389,13 +441,14 @@
       damageCoefficient: 0
       worn: false
     - type: CMHolster
+    - type: StoreAfterFailedInteract
 
 - type: entity
   parent: CMWebbingKnives
   id: CMWebbingKnivesFilled
   suffix: Filled
   components:
-  - type: StorageFill    
+  - type: StorageFill
     contents:
       - id: CMM11Knife
         amount: 5

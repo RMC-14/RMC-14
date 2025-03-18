@@ -25,7 +25,8 @@ command-description-excluderoletimer-remove = Removes a player's exclusion for p
 command-description-figurine-export = Exports the current character as a figurine.
 command-description-figurine-openslots = Opens up infinite slots for all jobs on all map prototypes until the whole server is restarted.
 
-command-description-hive-alldefault = Sets the hive of a xeno or group of xenos.
+command-description-hive-alldefault = Sets the hive of all xenos to the default hive (the first one created).
+command-description-hive-set = Sets the hive of a xeno or group of xenos.
 
 command-description-icon-get_human_readable = Gets the human readable name of a player's job icon.
 command-description-icon-get = Gets the name of a player's job icon.
@@ -60,3 +61,5 @@ command-description-xenomature = Instantly matures a xeno. Applicable to the Que
 command-description-weedkiller = Runs weed killer on the current location's area. This kills all weeds and resin structures nearby.
 
 command-description-withxenotier = Filters entities or entity prototypes to those of a specific xenonid tier.
+
+command-description-spawnallmapinserts = Spawns all map inserts, with forced guaranteed spawn probability.

@@ -21,11 +21,39 @@
     - RMCGlassesMarineRpg
 
 - type: loadout
+  id: GlassesRPGRMCOld
+  cost: 2
+  storage:
+    back:
+    - RMCGlassesMarineRpgOld
+
+- type: loadout
   id: GlassesPrescriptionRMC
   cost: 2
   storage:
     back:
     - RMCHipsterGlasses
+
+- type: loadout
+  id: GlassesBiMexYellowRMC
+  cost: 2
+  storage:
+    back:
+    - RMCGlassesBiMexYellow
+
+- type: loadout
+  id: GlassesBiMexBronzeRMC
+  cost: 2
+  storage:
+    back:
+    - RMCGlassesBiMexBronze
+
+- type: loadout
+  id: GlassesBiMexBlackRMC
+  cost: 2
+  storage:
+    back:
+    - RMCGlassesBiMexBlack
 
 - type: loadout
   id: GogglesRMC
@@ -56,6 +84,34 @@
     - RMCGogglesBallisticOrange
 
 - type: loadout
+  id: GogglesRedRMC
+  cost: 2
+  storage:
+    back:
+    - RMCGogglesBallisticRed
+
+- type: loadout
+  id: GogglesBlueRMC
+  cost: 2
+  storage:
+    back:
+    - RMCGogglesBallisticBlue
+
+- type: loadout
+  id: GogglesPurpleRMC
+  cost: 2
+  storage:
+    back:
+    - RMCGogglesBallisticPurple
+
+- type: loadout
+  id: GogglesYellowRMC
+  cost: 2
+  storage:
+    back:
+    - RMCGogglesBallisticYellow
+
+- type: loadout
   id: GogglesAdvancedRMC
   cost: 2
   storage:
@@ -68,6 +124,27 @@
   storage:
     back:
     - RMCGogglesM1A1Ballistic
+
+- type: loadout
+  id: GogglesPolarizedBlueRMC
+  cost: 2
+  storage:
+    back:
+    - RMCGogglesBallisticPolarizedBlue
+
+- type: loadout
+  id: GogglesPolarizedOrangeRMC
+  cost: 2
+  storage:
+    back:
+    - RMCGogglesBallisticPolarizedOrange
+
+- type: loadout
+  id: GogglesM1A1BlueRMC
+  cost: 2
+  storage:
+    back:
+    - RMCGogglesM1A1BallisticBlue
 
 - type: loadout
   id: PersonalShadesRMC

@@ -40,7 +40,7 @@ public sealed class StunShakeableSystem : EntitySystem
         var target = args.Target;
         if (!_statusEffects.HasStatusEffect(target, Stun) &&
             !_statusEffects.HasStatusEffect(target, KnockedDown) &&
-            !HasComp<TackledRecentlyComponent>(target))
+            !HasComp<TackledRecentlyByComponent>(target))
         {
             return;
         }
@@ -64,7 +64,7 @@ public sealed class StunShakeableSystem : EntitySystem
 
         _statusEffects.TryRemoveTime(target, Stun, ent.Comp.DurationRemoved);
         _statusEffects.TryRemoveTime(target, KnockedDown, ent.Comp.DurationRemoved);
-        RemCompDeferred<TackledRecentlyComponent>(target);
+        RemCompDeferred<TackledRecentlyByComponent>(target);
 
         var userPopup = Loc.GetString("rmc-shake-awake-user", ("target", target));
         _popup.PopupClient(userPopup, target, user);

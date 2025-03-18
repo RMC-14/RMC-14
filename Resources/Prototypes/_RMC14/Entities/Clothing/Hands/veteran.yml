@@ -65,7 +65,7 @@
   parent: RMCHandsVeteran
   id: RMCHandsVeteranRoyalMarine
   name: L6 pattern combat gloves
-  description: Standard issue tactical gloves used by the royal marines.
+  description: Standard issue tactical gloves used by the Royal Crown Marines.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/royal_marine.rsi

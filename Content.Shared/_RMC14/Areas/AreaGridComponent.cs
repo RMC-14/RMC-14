@@ -15,4 +15,7 @@ public sealed partial class AreaGridComponent : Component
 
     [DataField, AutoNetworkedField]
     public Dictionary<EntProtoId<AreaComponent>, EntityUid> AreaEntities = new();
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<Vector2i, string> Labels = new();
 }

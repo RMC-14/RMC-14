@@ -8,12 +8,6 @@ namespace Content.Server._RMC14.MapInsert;
 [Access(typeof(MapInsertSystem))]
 public sealed partial class MapInsertComponent : Component
 {
-    [DataField(required: true)]
-    public ResPath? Spawn;
-
-    [DataField]
-    public Vector2 Offset;
-
     [DataField]
     public bool ClearEntities;
 
@@ -23,7 +17,19 @@ public sealed partial class MapInsertComponent : Component
     [DataField]
     public bool ReplaceAreas;
 
+    [DataField(required: true)]
+    public List<SpawnVariation> Variations = new();
+}
+
+[DataDefinition]
+public sealed partial record SpawnVariation
+{
+    [DataField(required: true)]
+    public ResPath Spawn;
+
+    [DataField]
+    public Vector2 Offset;
+
     [DataField]
     public float Probability = 1.0f;
-
 }

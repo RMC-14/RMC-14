@@ -18,6 +18,12 @@
   - type: AccessReader
     access: [["CMAccessCombatTechPrep"], ["CMAccessEngineering"], ["CMAccessColonyEngineering"], ["CMAccessColonyPublic"]] # TODO RMC14 remove public when surv jobs and hacking are in
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessCombatTechPrep"
+    - "CMAccessEngineering"
+    - "CMAccessColonyEngineering"
+    - "CMAccessColonyPublic"
+    hackable: true
     sections:
     - name: Equipment
       entries:
@@ -68,6 +74,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/robotics.rsi
   - type: CMAutomatedVendor
+    hackable: true
     sections:
     - name: Circuitboards
       entries:
@@ -109,6 +116,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/engivend.rsi
   - type: CMAutomatedVendor
+    hackable: true
     sections:
     - name: Tools
       entries:
@@ -140,6 +148,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/engi.rsi
   - type: CMAutomatedVendor
+    hackable: true
     sections:
     - name: Assembly Components
       entries:
@@ -186,6 +195,9 @@
   - type: AccessReader
     access: [["CMAccessResearch"]]
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessResearch"
+    hackable: true
     sections:
     - name: Equipment
       entries:
@@ -215,6 +227,7 @@
   description: All the tools you need to create your own robot army.
   components:
   - type: CMAutomatedVendor
+    hackable: true
     sections:
     - name: Equipment
       entries:

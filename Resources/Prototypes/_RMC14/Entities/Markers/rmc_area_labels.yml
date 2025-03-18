@@ -1,0 +1,9 @@
+﻿- type: entity
+  parent: MarkerBase
+  id: RMCMarkerAreaLabel
+  name: area
+  suffix: Tactical Map Area Label
+  components:
+  - type: Sprite
+    state: blue
+  - type: AreaLabel # RMC14

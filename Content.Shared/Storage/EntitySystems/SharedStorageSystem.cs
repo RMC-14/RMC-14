@@ -150,8 +150,15 @@ public abstract class SharedStorageSystem : EntitySystem
 
     private void OnMapInit(Entity<StorageComponent> entity, ref MapInitEvent args)
     {
+        // RMC14
+        var hadDelay = HasComp<UseDelayComponent>(entity);
+
         UseDelay.SetLength(entity.Owner, entity.Comp.QuickInsertCooldown, QuickInsertUseDelayID);
         UseDelay.SetLength(entity.Owner, entity.Comp.OpenUiCooldown, OpenUiUseDelayID);
+
+        // RMC14
+        if (!hadDelay)
+            UseDelay.SetLength(entity.Owner, TimeSpan.Zero);
     }
 
     private void OnStorageGetState(EntityUid uid, StorageComponent component, ref ComponentGetState args)
@@ -716,8 +723,14 @@ public abstract class SharedStorageSystem : EntitySystem
             items.Add((item, location));
         }
 
-        items.Sort(static (a, b) => a.Location.Position.X.CompareTo(b.Location.Position.X));
-        items.Sort(static (a, b) => a.Location.Position.Y.CompareTo(b.Location.Position.Y));
+        items.Sort(static (a, b) =>
+        {
+            var x = a.Location.Position.Y.CompareTo(b.Location.Position.Y);
+            if (x != 0)
+                return x;
+
+            return a.Location.Position.X.CompareTo(b.Location.Position.X);
+        });
 
         foreach (var (item, location) in items)
         {

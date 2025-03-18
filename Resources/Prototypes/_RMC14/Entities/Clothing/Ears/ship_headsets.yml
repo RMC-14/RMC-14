@@ -25,9 +25,17 @@
     interfaces:
       enum.RMCRadioFilterUI.Key:
         type: RMCRadioFilterBui
+  - type: HeadsetMultiBroadcast
 
 - type: entity
+  abstract: true
   parent: CMHeadset
+  id: RMCHeadsetIcons
+  components:
+  - type: GrantMarineIcons
+
+- type: entity
+  parent: RMCHeadsetIcons
   id: RMCHeadsetShip
   name: marine radio headset
   description: A standard military radio headset. Bulkier than combat models.
@@ -60,6 +68,8 @@
     - MarineDelta
     - MarineEcho
     - MarineFoxtrot
+  - type: HeadsetMultiBroadcast
+    cooldown: 60
 
 - type: entity
   parent: RMCHeadsetShip
@@ -82,6 +92,8 @@
     - MarineDelta
     - MarineEcho
     - MarineFoxtrot
+  - type: HeadsetMultiBroadcast
+    cooldown: 60
 
 - type: entity
   parent: RMCHeadsetShip
@@ -167,6 +179,8 @@
     - MarineEcho
     - MarineFoxtrot
     - MarineMedical
+  - type: HeadsetMultiBroadcast
+    cooldown: 60
 
 - type: entity
   parent: RMCHeadsetShip
@@ -217,6 +231,8 @@
       key_slots:
       - CMEncryptionKeyCommon
       - RMCEncryptionKeyMarineCommand
+  - type: HeadsetMultiBroadcast
+    cooldown: 60
 
 - type: entity
   parent: RMCHeadsetMarineCommand
@@ -240,6 +256,8 @@
       key_slots:
       - CMEncryptionKeyCommon
       - CMEncryptionKeyPilot
+  - type: HeadsetMultiBroadcast
+    cooldown: 60
 
 - type: entity
   parent: RMCHeadsetMarine
@@ -300,6 +318,8 @@
       key_slots:
       - CMEncryptionKeyCommon
       - RMCEncryptionKeySeniorCommand
+  - type: HeadsetMultiBroadcast
+    cooldown: 60
 
 - type: entity
   parent: RMCHeadsetShip
@@ -315,6 +335,8 @@
       - CMEncryptionKeyCommon
       - RMCEncryptionKeySeniorCommand
       - RMCEncryptionKeyHighCommand
+  - type: HeadsetMultiBroadcast
+    cooldown: 60
 
 - type: entity
   parent: CMHeadsetSeniorCommand
@@ -329,3 +351,5 @@
       key_slots:
       - CMEncryptionKeyCommon
       - RMCEncryptionKeySeniorCommand
+  - type: HeadsetMultiBroadcast
+    cooldown: 60
