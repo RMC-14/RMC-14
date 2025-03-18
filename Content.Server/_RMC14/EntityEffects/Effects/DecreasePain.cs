@@ -5,7 +5,7 @@ using Content.Shared._RMC14.Medical.Pain;
 
 namespace Content.Server._RMC14.Chemistry.Effects;
 
-public sealed partial class PainReduction : EntityEffect
+public sealed partial class DecreasePain : EntityEffect
 {
     [DataField]
     public FixedPoint2 Strength;
