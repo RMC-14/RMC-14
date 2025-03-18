@@ -16,6 +16,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Preferences;
 using Content.Shared.Rounding;
+using Content.Shared.Weapons.Melee;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Armor;
@@ -101,7 +102,7 @@ public sealed class CMArmorSystem : EntitySystem
 
     private void OnGetArmor(Entity<CMArmorComponent> armored, ref CMGetArmorEvent args)
     {
-        if (TryComp<XenoComponent>(armored, out var xeno))
+        if (HasComp<XenoComponent>(armored))
         {
             args.XenoArmor += armored.Comp.XenoArmor;
         }
@@ -115,7 +116,7 @@ public sealed class CMArmorSystem : EntitySystem
 
     private void OnGetArmorRelayed(Entity<CMArmorComponent> armored, ref InventoryRelayedEvent<CMGetArmorEvent> args)
     {
-        if (TryComp<XenoComponent>(armored, out var xeno))
+        if (HasComp<XenoComponent>(armored))
         {
             args.Args.XenoArmor += armored.Comp.XenoArmor;
         }
@@ -232,7 +233,7 @@ public sealed class CMArmorSystem : EntitySystem
             armorPiercing += piercingEv.Piercing;
         }
 
-        if (TryComp<XenoComponent>(ent, out var xeno))
+        if (HasComp<XenoComponent>(ent))
         {
             ev.XenoArmor = (int)(ev.XenoArmor * ev.ArmorModifier);
             ev.XenoArmor -= armorPiercing;
@@ -263,15 +264,15 @@ public sealed class CMArmorSystem : EntitySystem
         }
 
         args.Damage = new DamageSpecifier(args.Damage);
-        if (TryComp<XenoComponent>(ent, out var xenoResist))
+        if (HasComp<XenoComponent>(ent))
         {
             Resist(args.Damage, ev.XenoArmor, ArmorGroup);
         }
-        else if (TryComp<RMCBulletComponent>(args.Tool, out var bulletResist))
+        else if (HasComp<RMCBulletComponent>(args.Tool))
         {
             Resist(args.Damage, ev.Bullet, ArmorGroup);
         }
-        else if(!TryComp<XenoProjectileComponent>(args.Tool, out var meleeResist))
+        else if (HasComp<MeleeWeaponComponent>(args.Tool))
         {
             Resist(args.Damage, ev.Melee, ArmorGroup);
         }
