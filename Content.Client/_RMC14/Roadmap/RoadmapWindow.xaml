@@ -23,6 +23,7 @@
             <BoxContainer Name="Columns" Access="Public" Orientation="Horizontal">
                 <BoxContainer Name="FirstVersion" Access="Public" Orientation="Vertical" HorizontalExpand="True" Margin="0 0 20 0">
                     <controls:RoadmapVersionHeader Text="Current version" />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Mess Technician" Text="Shipside Kitchen role" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Flamethrowers" Text="Werfs flammen" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Intelligence officer" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Orbital bombardment" />
@@ -84,7 +85,6 @@
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Construction skill" Text="Allows you to build more advanced constructs" />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Whiskey Outpost gamemode" Text="A different PvP gamemode with infinite waves of xenos fighting against a team of marines." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="PvE" Text="A separate player vs AI gamemode on a second server with campaigns ran by the community." />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Mess Technician" Text="Shipside Kitchen role" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Blood types" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Pain and painkillers" Text="Wounds will cause pain which can be dulled with painkillers" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="More surgeries" Text="Foreign object removal, internal bleeding surgery, fractures" />
