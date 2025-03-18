@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/71d46ee8057d19b12e1495419cb299d2fedef6cc/icons/obj/items/storage.dmi, https://github.com/cmss13-devs/cmss13/blob/c648dca374ddee1c80f61ab88678c287356fa66f/icons/obj/items/storage.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/800f3950414b25174f1e81278dfe1cde4fbbf281/icons/obj/items/storage/boxes.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -39,12 +39,6 @@
     },
     {
       "name": "mousetraps"
-    },
-    {
-      "name": "m94"
-    },
-    {
-      "name": "m94_e"
     },
     {
       "name": "spray"
@@ -89,10 +83,58 @@
       "name": "mre2"
     },
     {
+      "name": "monkeycubebox"
+    },
+    {
+      "name": "mousebox"
+    },
+    {
+      "name": "candlebox1"
+    },
+    {
+      "name": "candlebox2"
+    },
+    {
+      "name": "candlebox3"
+    },
+    {
+      "name": "candlebox4"
+    },
+    {
+      "name": "candlebox5"
+    },
+    {
+      "name": "candlebox0"
+    },
+    {
+      "name": "inf_box"
+    },
+    {
+      "name": "box_of_doom"
+    },
+    {
+      "name": "flashbang"
+    },
+    {
+      "name": "flashbang_e"
+    },
+    {
+      "name": "emp"
+    },
+    {
+      "name": "emp_e"
+    },
+    {
       "name": "m89"
     },
     {
       "name": "m89_e"
+    },
+    {
+      "name": "m94"
+    },
+    {
+      "name": "m94_e"
     }
   ]
 }

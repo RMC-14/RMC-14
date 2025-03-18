@@ -2243,13 +2243,30 @@
         solution: food
   - type: Rehydratable
     possibleSpawns:
-    - MobMonkey #todo check if we use custom monkey
+    - CMMobMonkey
   - type: RefillableSolution
     solution: food
+  - type: CollisionWake
+    enabled: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.3,-0.3,0.3,0.3"
+        density: 5
+        mask:
+        - ItemMask
+      rehydrate:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.3,-0.3,0.3,0.3"
+        hard: false
+        layer:
+        - LowImpassable
 
 
-
-# TODO RMC14 - Monkey cube & misc animal cubes
+# TODO RMC14 - Newmed internal injuries if eaten
 
 - type: entity
   parent: BaseItem
@@ -2266,9 +2283,77 @@
     items:
     - id: RMCFoodSnackMonkeyCube
 
+- type: entity
+  parent: RMCFoodSnackMonkeyCube
+  id: RMCFoodSnackFarwaCube
+  name: Farwa Cube
+  components:
+  - type: Rehydratable
+    possibleSpawns:
+    - RMCMobFarwa
 
+- type: entity
+  parent: RMCFoodSnackMonkeyCubeWrapped
+  id: RMCFoodSnackFarwaCubeWrapped
+  name: Farwa Cube
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCFoodSnackFarwaCube
 
+- type: entity
+  parent: RMCFoodSnackMonkeyCube
+  id: RMCFoodSnackStokCube
+  name: Stok Cube
+  components:
+  - type: Rehydratable
+    possibleSpawns:
+    - RMCMobStok
 
+- type: entity
+  parent: RMCFoodSnackMonkeyCubeWrapped
+  id: RMCFoodSnackStokCubeWrapped
+  name: Stok Cube
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCFoodSnackStokCube
+
+- type: entity
+  parent: RMCFoodSnackMonkeyCube
+  id: RMCFoodSnackNeaeraCube
+  name: Neaera Cube
+  components:
+  - type: Rehydratable
+    possibleSpawns:
+    - RMCMobNeaera
+
+- type: entity
+  parent: RMCFoodSnackMonkeyCubeWrapped
+  id: RMCFoodSnackNeaeraCubeWrapped
+  name: Neaera Cube
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCFoodSnackNeaeraCube
+
+- type: entity
+  parent: RMCFoodSnackMonkeyCube
+  id: RMCFoodSnackYirenCube
+  name: Yiren Cube
+  components:
+  - type: Rehydratable
+    possibleSpawns:
+    - RMCMobYiren
+
+- type: entity
+  parent: RMCFoodSnackMonkeyCubeWrapped
+  id: RMCFoodSnackYirenCubeWrapped
+  name: Yiren Cube
+  components:
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCFoodSnackYirenCube
 
 - type: entity
   parent: RMCFoodSnackBase
@@ -4377,8 +4462,6 @@
   - type: Food
     transferAmount: 2
 
-# TODO Potato + knife = raw sticks (knife interaction for rawsticks & wire for potato cell
-
 - type: entity
   parent: RMCFoodSnackBase
   id: RMCFoodSnackRawPotatoSticks
@@ -4839,7 +4922,7 @@
           Quantity: 4
         - ReagentId: CocoaPowder
           Quantity: 2
-        - ReagentId: CMBicaridine #Will need to be replaced with Tramadol when pain is added
+        - ReagentId: CMBicaridine #TODO RMC14 - Will need to be replaced with Tramadol when pain is added
           Quantity: 1
   - type: Food
     transferAmount: 3

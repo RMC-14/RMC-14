@@ -1,0 +1,56 @@
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxMonkeyCube
+  name: Monkey Cube Box
+  description: Drymate brand monkey cubes. Just add water!
+  components:
+  - type: Sprite
+    state: monkeycubebox
+  - type: StorageFill
+    contents:
+      - id: RMCFoodSnackMonkeyCubeWrapped
+        amount: 5
+
+- type: entity
+  parent: RMCBoxMonkeyCube
+  id: RMCBoxFarwaCube
+  name: Farwa Cube Box
+  description: Drymate brand farwa cubes, shipped from Ahdomai. Just add water!
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCFoodSnackFarwaCubeWrapped
+      amount: 5
+
+- type: entity
+  parent: RMCBoxMonkeyCube
+  id: RMCBoxStokCube
+  name: Stok Cube Box
+  description: Drymate brand stok cubes, shipped from Moghes. Just add water!
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCFoodSnackStokeCubeWrapped
+      amount: 5
+
+- type: entity
+  parent: RMCBoxMonkeyCube
+  id: RMCBoxNeaeraCube
+  name: Neaera Cube Box
+  description: Drymate brand neaera cubes, shipped from Jargon 4. Just add water!
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCFoodSnackNeaeraCubeWrapped
+      amount: 5
+
+- type: entity
+  parent: RMCBoxMonkeyCube
+  id: RMCBoxNeaeraCube
+  name: Neaera Cube Box
+  description: Drymate brand neaera cubes, shipped from Jargon 4. Just add water!
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCFoodSnackNeaeraCubeWrapped
+      amount: 5

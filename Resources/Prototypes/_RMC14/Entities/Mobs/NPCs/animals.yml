@@ -20,10 +20,152 @@
 - type: entity
   parent: [MobMonkey, RMCSmallHost]
   id: CMMobMonkey
-  suffix: CM
+  name: Monkey
+  description: ""
+  suffix: RMC
   components:
   - type: GhostRole
     prob: 0
+  - type: Sprite
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: preview
+      sprite: _RMC14/Mobs/Animals/r_monkey.rsi
+    - map: [ "jumpsuit" ]
+    - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
+      color: "#ffffff"
+      sprite: Objects/Misc/handcuffs.rsi
+      state: body-overlay-2
+      visible: false
+    - map: [ "ears" ]
+    - map: [ "outerClothing" ]
+    - map: [ "id" ]
+    - map: [ "mask" ]
+    - map: [ "head" ]
+    - map: [ "clownedon" ]
+      sprite: "Effects/creampie.rsi"
+      state: "creampie_human"
+      visible: false
+
+- type: entity
+  parent: CMMobMonkey
+  id: RMCMobYiren
+  name: Yiren
+  components:
+  - type: GhostRole
+    prob: 0
+  - type: Sprite
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: preview
+      sprite: _RMC14/Mobs/Animals/r_yiren.rsi
+    - map: [ "jumpsuit" ]
+    - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
+      color: "#ffffff"
+      sprite: Objects/Misc/handcuffs.rsi
+      state: body-overlay-2
+      visible: false
+    - map: [ "ears" ]
+    - map: [ "outerClothing" ]
+    - map: [ "id" ]
+    - map: [ "mask" ]
+    - map: [ "head" ]
+    - map: [ "clownedon" ]
+      sprite: "Effects/creampie.rsi"
+      state: "creampie_human"
+      visible: false
+  - type: Hands
+  - type: ComplexInteraction
+
+- type: entity
+  parent: CMMobMonkey
+  id: RMCMobFarwa
+  name: Farwa
+  components:
+  - type: GhostRole
+    prob: 0
+  - type: Sprite
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: preview
+      sprite: _RMC14/Mobs/Animals/r_farwa.rsi
+    - map: [ "jumpsuit" ]
+    - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
+      color: "#ffffff"
+      sprite: Objects/Misc/handcuffs.rsi
+      state: body-overlay-2
+      visible: false
+    - map: [ "ears" ]
+    - map: [ "outerClothing" ]
+    - map: [ "id" ]
+    - map: [ "mask" ]
+    - map: [ "head" ]
+    - map: [ "clownedon" ]
+      sprite: "Effects/creampie.rsi"
+      state: "creampie_human"
+      visible: false
+  - type: Hands
+  - type: ComplexInteraction
+
+- type: entity
+  parent: CMMobMonkey
+  id: RMCMobNeaera
+  name: Neaera
+  components:
+  - type: GhostRole
+    prob: 0
+  - type: Sprite
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: skrellkey1
+      sprite: _RMC14/Mobs/Animals/r_neaera.rsi
+    - map: [ "jumpsuit" ]
+    - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
+      color: "#ffffff"
+      sprite: Objects/Misc/handcuffs.rsi
+      state: body-overlay-2
+      visible: false
+    - map: [ "ears" ]
+    - map: [ "outerClothing" ]
+    - map: [ "id" ]
+    - map: [ "mask" ]
+    - map: [ "head" ]
+    - map: [ "clownedon" ]
+      sprite: "Effects/creampie.rsi"
+      state: "creampie_human"
+      visible: false
+  - type: Hands
+  - type: ComplexInteraction
+
+- type: entity
+  parent: CMMobMonkey
+  id: RMCMobStok
+  name: Stok
+  components:
+  - type: GhostRole
+    prob: 0
+  - type: Sprite
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: preview
+      sprite: _RMC14/Mobs/Animals/r_stok.rsi
+    - map: [ "jumpsuit" ]
+    - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
+      color: "#ffffff"
+      sprite: Objects/Misc/handcuffs.rsi
+      state: body-overlay-2
+      visible: false
+    - map: [ "ears" ]
+    - map: [ "outerClothing" ]
+    - map: [ "id" ]
+    - map: [ "mask" ]
+    - map: [ "head" ]
+    - map: [ "clownedon" ]
+      sprite: "Effects/creampie.rsi"
+      state: "creampie_human"
+      visible: false
+  - type: Hands
+  - type: ComplexInteraction
 
 - type: entity
   parent: [MobKobold, RMCSmallHost]
