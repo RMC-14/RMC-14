@@ -122,3 +122,11 @@
     board: CMAutolatheMachineCircuitboard
   - type: Corrodible
     isCorrodible: false
+
+- type: entity
+  parent: CMAutolathe
+  id: RMCAutolatheEmpty
+  suffix: Empty
+  components:
+  - type: MaterialStorage
+    storage: {}

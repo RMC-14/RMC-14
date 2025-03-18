@@ -1,0 +1,94 @@
+﻿- type: job
+  parent: CMJobBase
+  id: CMHEFAShrapnelsworn
+  name: cm-job-name-hefa-shrapnelsworn
+  description: cm-job-description-hefa-shrapnelsworn
+  playTimeTracker: CMJobHEFAShrapnelsworn
+  ranks:
+    RMCRankHEFASer: []
+  startingGear: RMCGearHEFAShrapnelsworn
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillFireman: 1
+        RMCSkillCqc: 1
+        RMCSkillConstruction: 1
+        RMCSkillEngineer: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillEndurance: 2
+        RMCSkillJtac: 1
+        RMCSkillFirearms: 1
+    - type: JobPrefix
+      prefix: cm-job-prefix-hefa-shrapnelsworn
+    - type: GrenadeSpecWhitelist
+  hasIcon: false
+  hidden: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerHEFAShrapnelsworn
+  name: hefa shrapnelsworn spawner
+  suffix: Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCRandomHumanoidHEFAShrapnelsworn
+
+- type: entity
+  id: RMCRandomHumanoidHEFAShrapnelsworn
+  name: hefa shrapnelsworn ghost role
+  suffix: Role
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCHEFAShrapnelsworn
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCHEFAShrapnelsworn
+  components:
+  - type: GhostRole
+    name: rmc-ghost-role-information-hefa-shrapnelsworn-name
+    description: rmc-ghost-role-information-hefa-shrapnelsworn-description
+    rules: ghost-role-information-default-rules
+    raffle:
+      settings: short
+  - type: Loadout
+    prototypes: [ RMCGearHEFAShrapnelsworn ]
+  - type: Skills
+    skills:
+      RMCSkillFireman: 1
+      RMCSkillCqc: 1
+      RMCSkillConstruction: 1
+      RMCSkillEngineer: 1
+      RMCSkillMeleeWeapons: 1
+      RMCSkillEndurance: 2
+      RMCSkillJtac: 1
+      RMCSkillFirearms: 1
+  - type: JobPrefix
+    prefix: cm-job-prefix-hefa-shrapnelsworn
+  - type: GrenadeSpecWhitelist
+  - type: RandomMetadata
+    nameSegments:
+    - RMCNamesHEFA
+
+- type: startingGear
+  id: RMCGearHEFAShrapnelsworn
+  equipment:
+    head: RMCArmorHelmetHEFA
+    jumpsuit: RMCJumpsuitHEFA
+    outerClothing: RMCArmorMercenaryHEFA
+    gloves: CMHandsBlackMarine
+    shoes: CMBootsBlack
+    suitstorage: WeaponLauncherM83HEFA
+    id: RMCIDCardHEFAShrapnelsworn
+    belt: RMCBeltGrenadeHEFA
+    back: RMCSatchelHEFAFill
+    pocket1: RMCPouchFirstAidERTFill
+    pocket2: RMCPouchExplosiveFilledHEFA
+
+- type: playTimeTracker
+  id: CMJobHEFAShrapnelsworn

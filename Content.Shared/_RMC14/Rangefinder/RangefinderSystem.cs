@@ -185,6 +185,8 @@ public sealed class RangefinderSystem : EntitySystem
                 position += offset;
 
             rangefinder.Comp.LastTarget = position;
+            rangefinder.Comp.LastCoords = mapCoords;
+
             Dirty(rangefinder);
 
             _ui.OpenUi(rangefinder.Owner, RangefinderUiKey.Key, args.User);

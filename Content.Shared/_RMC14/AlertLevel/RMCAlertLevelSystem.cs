@@ -72,7 +72,7 @@ public sealed class RMCAlertLevelSystem : EntitySystem
         return alert.Comp.Level;
     }
 
-    public void Set(RMCAlertLevels level, EntityUid? user)
+    public void Set(RMCAlertLevels level, EntityUid? user, bool playSound = true, bool sendAnnouncement = true)
     {
         var ent = EnsureAlertLevel();
         if (ent.Comp.Level == level)
@@ -114,17 +114,24 @@ public sealed class RMCAlertLevelSystem : EntitySystem
                 return false;
             });
 
-        if (_net.IsServer)
+        // Play alarm sound if playSound == true
+        if (playSound && _net.IsServer)
+        {
             _audio.PlayGlobal(sound, filter, true);
-
-        if (announcement != null)
-        {
-            _marineAnnounce.AnnounceToMarines(Loc.GetString(announcement));
         }
-        else if (message != null)
+
+        // Send announcement if sendAnnouncement == true
+        if (sendAnnouncement)
         {
-            var ares = _ares.EnsureARES();
-            _marineAnnounce.AnnounceRadio(ares, Loc.GetString(message.Value), ent.Comp.RadioChannel);
+            if (announcement != null)
+            {
+                _marineAnnounce.AnnounceToMarines(Loc.GetString(announcement));
+            }
+            else if (message != null)
+            {
+                var ares = _ares.EnsureARES();
+                _marineAnnounce.AnnounceRadio(ares, Loc.GetString(message.Value), ent.Comp.RadioChannel);
+            }
         }
 
         var unlockQuery = EntityQueryEnumerator<RMCUnlockOnAlertLevelComponent, LockComponent>();

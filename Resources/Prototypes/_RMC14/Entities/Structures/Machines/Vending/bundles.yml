@@ -38,7 +38,6 @@
   components:
   - type: CMVendorBundle
     bundle:
-    - CMArmorHelmetM10Medic # TODO RMC14 M4
     - CMVendorHeadsetSquadCorpsman
     - CMJumpsuitMarineMedic
     - CMBootsBlackFilled

@@ -55,6 +55,11 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/commando.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/PMC/commando.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      - state: equipped-HELMET-Layer
+        shader: unshaded
   - type: Corrodible
     isCorrodible: false
 

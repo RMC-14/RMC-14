@@ -22,6 +22,7 @@
     sprite: _RMC14/Structures/vehicles2.rsi
     noRot: true
     state: crane
+    offset: 0.5,0.5
   - type: Clickable
   - type: DeleteOnExplosion
   - type: InteractionOutline

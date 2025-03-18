@@ -9,6 +9,8 @@
       SquadBravo: CMHeadsetBravo
       SquadCharlie: CMHeadsetCharlie
       SquadDelta: CMHeadsetDelta
+      SquadEcho: CMHeadsetEcho
+      SquadFoxtrot: CMHeadsetFoxtrot
 
 - type: entity
   id: CMVendorHeadsetSquadLeader
@@ -21,6 +23,8 @@
       SquadBravo: CMHeadsetBravoLeader
       SquadCharlie: CMHeadsetCharlieLeader
       SquadDelta: CMHeadsetDeltaLeader
+      SquadEcho: CMHeadsetEchoLeader
+      SquadFoxtrot: CMHeadsetFoxtrotLeader
 
 - type: entity
   id: CMVendorHeadsetSquadFTL
@@ -33,6 +37,8 @@
       SquadBravo: CMHeadsetBravoTeamLeader
       SquadCharlie: CMHeadsetCharlieTeamLeader
       SquadDelta: CMHeadsetDeltaTeamLeader
+      SquadEcho: CMHeadsetEchoTeamLeader
+      SquadFoxtrot: CMHeadsetFoxtrotTeamLeader
 
 - type: entity
   id: CMVendorHeadsetSquadComTech
@@ -45,6 +51,8 @@
       SquadBravo: CMHeadsetBravoEngineer
       SquadCharlie: CMHeadsetCharlieEngineer
       SquadDelta: CMHeadsetDeltaEngineer
+      SquadEcho: CMHeadsetEchoEngineer
+      SquadFoxtrot: CMHeadsetFoxtrotEngineer
 
 - type: entity
   id: CMVendorHeadsetSquadCorpsman
@@ -57,3 +65,5 @@
       SquadBravo: CMHeadsetBravoMedic
       SquadCharlie: CMHeadsetCharlieMedic
       SquadDelta: CMHeadsetDeltaMedic
+      SquadEcho: CMHeadsetEchoMedic
+      SquadFoxtrot: CMHeadsetFoxtrotMedic

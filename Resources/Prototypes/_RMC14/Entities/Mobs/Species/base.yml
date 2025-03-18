@@ -63,6 +63,7 @@
     - Pacified
     - StaminaModifier
     - Flashed
+    - Dazed
   - type: Blindable
   - type: Tag
     tags:
@@ -249,6 +250,10 @@
             sprite: _RMC14/Effects/xeno_spray_acid.rsi
             state: human_acid_enhanced
             visible: true
+      enum.HookedVisuals.Hooked:
+        hooked:
+          True: { visible: true }
+          False: { visible: false }
   - type: ActiveInputMover
   - type: DropItemsOnRest
   - type: UserBlockShootingInsideContainers
@@ -284,3 +289,4 @@
     slowMultiplier: 0.66
     superSlowMultiplier: 0.33
   - type: RMCHandEmotes
+  - type: RMCBuckleDrawDepth

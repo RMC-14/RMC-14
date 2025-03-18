@@ -24,6 +24,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.TacticalMap;
 
@@ -97,6 +98,8 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, SquadMemberUpdatedEvent>(OnActiveSquadMemberUpdated);
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, MobStateChangedEvent>(OnActiveMobStateChanged);
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, HiveLeaderStatusChangedEvent>(OnHiveLeaderStatusChanged);
+
+        SubscribeLocalEvent<MapBlipIconOverrideComponent, MapInitEvent>(OnMapBlipOverrideMapInit);
 
         SubscribeLocalEvent<RottingComponent, MapInitEvent>(OnRottingMapInit);
         SubscribeLocalEvent<RottingComponent, ComponentRemove>(OnRottingRemove);
@@ -265,6 +268,15 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         UpdateTracked(ent);
     }
 
+    private void OnMapBlipOverrideMapInit(Entity<MapBlipIconOverrideComponent> ent, ref MapInitEvent args)
+    {
+        if (_activeTacticalMapTrackedQuery.TryComp(ent, out var active))
+        {
+            UpdateIcon((ent.Owner, active));
+            UpdateTracked((ent.Owner, active));
+        }
+    }
+
     private void OnRottingMapInit(Entity<RottingComponent> ent, ref MapInitEvent args)
     {
         if (_activeTacticalMapTrackedQuery.TryComp(ent, out var active))
@@ -390,9 +402,13 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void UpdateIcon(Entity<ActiveTacticalMapTrackedComponent> tracked)
     {
+        SpriteSpecifier.Rsi? mapBlipOverride = null;
+        if (TryComp<MapBlipIconOverrideComponent>(tracked, out var mapBlipOverrideComp) && mapBlipOverrideComp.Icon != null)
+            mapBlipOverride = mapBlipOverrideComp.Icon;
+
         if (_tacticalMapIconQuery.TryComp(tracked, out var iconComp))
         {
-            tracked.Comp.Icon = iconComp.Icon;
+            tracked.Comp.Icon = mapBlipOverride ?? iconComp.Icon;
             tracked.Comp.Background = iconComp.Background;
 
             UpdateSquadBackground(tracked);
@@ -407,10 +423,9 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             return;
         }
 
-        tracked.Comp.Icon = jobProto.MinimapIcon;
+        tracked.Comp.Icon = mapBlipOverride ?? jobProto.MinimapIcon;
         tracked.Comp.Background = jobProto.MinimapBackground;
         UpdateSquadBackground(tracked);
-
     }
 
     private void UpdateSquadBackground(Entity<ActiveTacticalMapTrackedComponent> tracked)

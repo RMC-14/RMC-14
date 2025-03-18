@@ -1,0 +1,38 @@
+﻿- type: entity
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMagazinePowerCellsHigh
+  name: box of high-capacity power cells
+  description: A box of High-Capacity Power Cells to keep your electronics going all night long!
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazinePowerCellsHigh
+  - type: Sprite
+    layers:
+    - state: batterybox_deployed # icon_state = base color of box
+    - state: magaz_battery # overlay_content = sprite of mags
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: batterybox # matches the base box
+      map: [ "lid" ]
+  - type: CMItemSlots
+    count: 8
+    slot:
+      whitelist:
+        tags:
+        - RMCPowerCellHigh
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        lid_stripe:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: magaz_battery, visible: false }
+          Low: { state: magaz_battery_1, visible: true }
+          Medium: { state: magaz_battery_2, visible: true }
+          High: { state: magaz_battery_3, visible: true }
+          Full: { state: magaz_battery, visible: true }
