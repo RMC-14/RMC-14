@@ -18,7 +18,7 @@
     - map: [ "enum.XenoVisualLayers.Base" ]
       state: alive
     - map: [ "enum.XenoVisualLayers.Ovipositor" ]
-      sprite: _RMC14/Mobs/Xenonids/Queen/ovipositor.rsi
+      sprite: _RMC14/Mobs/Xenonids/Extras/ovipositor.rsi
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Left" ]

@@ -35,5 +35,5 @@ public sealed partial class XenoScreechComponent : Component
     public EntProtoId Effect = "CMEffectScreech";
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/Animals/fox11.ogg", AudioParams.Default.WithVolume(15));
+    public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/Items/Toys/rawr.ogg", AudioParams.Default.WithVolume(15));
 }
