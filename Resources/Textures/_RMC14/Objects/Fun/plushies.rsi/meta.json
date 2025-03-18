@@ -1,39 +1,39 @@
 {
-    "version": 1,
-    "license": "CC-BY-SA-3.0",
-    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/4a4c57a3861fbf0c3b09ff9814f356447a9f99ed/icons/obj/items/plush.dmi, rouny_plushie, moth_plushie and xippy by noctyrn (github), alec_plushie sprited by UnicornOnLSD (github), Gnarp Gnarp by Vermidia",
-    "size": {
-        "x": 32,
-        "y": 32
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/4a4c57a3861fbf0c3b09ff9814f356447a9f99ed/icons/obj/items/plush.dmi, rouny_plushie, moth_plushie and xippy by noctyrn (github), alec_plushie sprited by UnicornOnLSD (github), Gnarp Gnarp by Vermidia",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "debug"
     },
-    "states": [
-        {
-            "name": "debug"
-        },
-        {
-            "name": "farwa"
-        },
-        {
-            "name": "barricade"
-        },
-        {
-            "name": "therapy"
-        },
-        {
-            "name": "runner_beret",
-            "directions": 4
-        },
-        {
-            "name": "bee"
-        },
-        {
-            "name": "rock"
-        },
-        {
-            "name": "rouny_plushie"
-        },
-        {
-            "name": "alec_plushie"
+    {
+      "name": "farwa"
+    },
+    {
+      "name": "barricade"
+    },
+    {
+      "name": "therapy"
+    },
+    {
+      "name": "runner_beret",
+      "directions": 4
+    },
+    {
+      "name": "bee"
+    },
+    {
+      "name": "rock"
+    },
+    {
+      "name": "rouny_plushie"
+    },
+    {
+      "name": "alec_plushie"
     },
     {
       "name": "plushie_moth"
@@ -48,5 +48,5 @@
     {
       "name": "gnarp"
     }
-    ]
+  ]
 }
