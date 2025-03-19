@@ -1,60 +1,29 @@
-/*using Content.Shared.Drunk;
-using Robust.Client.Graphics;
-using Robust.Client.Player;
-using Robust.Shared.Player;
+using Content.Shared.StatusEffect;
+using Content.Shared.Stunnable;
+using Content.Shared._RMC14.StatusEffect;
 
-namespace Content.Client.Drunk;
+namespace Content.Shared._RMC14.Medical.Pain;
 
-public sealed class DrunkSystem : SharedDrunkSystem
+public sealed class PainKnockOutSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IOverlayManager _overlayMan = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
 
-    private DrunkOverlay _overlay = default!;
-
+    [ValidatePrototypeId<StatusEffectPrototype>]
+    private const string PainKnockOutKey = "PainKnockOut";
     public override void Initialize()
     {
-        base.Initialize();
-
-        SubscribeLocalEvent<DrunkComponent, ComponentInit>(OnDrunkInit);
-        SubscribeLocalEvent<DrunkComponent, ComponentShutdown>(OnDrunkShutdown);
-
-        SubscribeLocalEvent<DrunkComponent, LocalPlayerAttachedEvent>(OnPlayerAttached);
-        SubscribeLocalEvent<DrunkComponent, LocalPlayerDetachedEvent>(OnPlayerDetached);
-
-        _overlay = new();
+        SubscribeLocalEvent<PainKnockOutComponent, RMCStatusEffectTimeEvent>(OnUpdate);
     }
-
-    private void OnPlayerAttached(EntityUid uid, DrunkComponent component, LocalPlayerAttachedEvent args)
+    private void OnUpdate(EntityUid uid, PainKnockOutComponent component, RMCStatusEffectTimeEvent args)
     {
-        _stun.TryParalyze(victim, parasite.Comp.ParalyzeTime, true);
-        _status.TryAddStatusEffect(victim, "Muted", parasite.Comp.ParalyzeTime, true, "Muted");
-        _status.TryAddStatusEffect(victim, "TemporaryBlindness", parasite.Comp.ParalyzeTime, true, "TemporaryBlindness");
-        RefreshIncubationMultipliers(victim);
-        _overlayMan.AddOverlay(_overlay);
-    }
+        if (args.Key != PainKnockOutKey)
+            return;
 
-    private void OnPlayerDetached(EntityUid uid, DrunkComponent component, LocalPlayerDetachedEvent args)
-    {
-        _overlay.CurrentBoozePower = 0;
-        _overlayMan.RemoveOverlay(_overlay);
-    }
+        var time = args.Duration;
 
-    private void OnDrunkInit(EntityUid uid, DrunkComponent component, ComponentInit args)
-    {
-        if (_player.LocalEntity == uid)
-            _overlayMan.AddOverlay(_overlay);
-    }
-
-    private void OnDrunkShutdown(EntityUid uid, DrunkComponent component, ComponentShutdown args)
-    {
-        if (_player.LocalEntity == uid)
-        {
-            _overlay.CurrentBoozePower = 0;
-            _overlayMan.RemoveOverlay(_overlay);
-        }
+        _stun.TryParalyze(uid, time, true);
+        _status.TryAddStatusEffect(uid, "Muted", time, true, "Muted");
+        _status.TryAddStatusEffect(uid, "TemporaryBlindness", time, true, "TemporaryBlindness");
     }
 }
-*/

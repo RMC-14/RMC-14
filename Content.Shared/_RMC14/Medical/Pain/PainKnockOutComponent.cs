@@ -1,7 +1,6 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Shared.Speech.Muting
-{
-    [RegisterComponent, NetworkedComponent]
-    public sealed partial class PainKnockOutComponent : Component {}
-}
+namespace Content.Shared._RMC14.Medical.Pain;
+
+[RegisterComponent, NetworkedComponent]
+public sealed partial class PainKnockOutComponent : Component {}

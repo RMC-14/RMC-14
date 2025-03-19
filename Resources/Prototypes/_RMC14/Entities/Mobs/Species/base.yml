@@ -49,6 +49,7 @@
     allowed:
     - Stun
     - KnockedDown
+    - PainKnockOut
     - SlowedDown
     - Stutter
     - SeeingRainbows
@@ -263,8 +264,8 @@
         - !type:PainLevel
           level: 6
     - !type:GenericStatusEffect
-        key: ForcedSleep
-        component: ForcedSleeping
+        key: PainKnockOut
+        component: PainKnockOut
         time: 4
         conditions:
         - !type:PainLevel
