@@ -26,11 +26,29 @@
     modifiers:
     - conditions:
         wieldedOnly: true
-      accuracyAddMult: 0.2
+      accuracyAddMult: 0.15
     - projectileSpeedFlat: 10
   - type: AttachableWieldDelayMods
     modifiers:
     - delay: 0.4
+
+- type: entity
+  parent: RMCBarrelAttachmentBase
+  id: RMCAttachmentBarrelMar50
+  name: MAR-50 barrel
+  description: A heavy barrel.
+  components:
+  - type: Sprite
+    state: mar50barrel
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentBarrelMar50
+  - type: AttachableVisuals
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - accuracyAddMult: 0.15
+    - scatterFlat: -6
 
 - type: entity
   parent: RMCBarrelAttachmentBase
@@ -229,6 +247,9 @@
 
 - type: Tag
   id: RMCAttachmentBarrel
+
+- type: Tag
+  id: RMCAttachmentBarrelMar50
 
 - type: Tag
   id: RMCAttachmentExtendedBarrel
