@@ -10,7 +10,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._RMC14.Xenonids.Hive;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(SharedXenoHiveSystem), typeof(SharedXenoConstructionSystem), typeof(SharedXenoPylonSystem), typeof(SharedXenoTunnelSystem))]
+[Access(typeof(SharedXenoHiveSystem), typeof(SharedXenoPylonSystem), typeof(SharedXenoTunnelSystem))]
 public sealed partial class HiveComponent : Component
 {
     [DataField, AutoNetworkedField]

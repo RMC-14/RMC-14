@@ -39,11 +39,11 @@ using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using static Content.Shared.Physics.CollisionGroup;
 using Content.Shared.Tiles;
-using Content.Shared.Destructible;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared.Damage;
 using Content.Shared._RMC14.Rules;
+using Content.Shared.Destructible;
 
 
 namespace Content.Shared._RMC14.Xenonids.Construction;
@@ -59,7 +59,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedDestructibleSystem _destruction = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
@@ -142,8 +141,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         SubscribeLocalEvent<XenoAnnounceStructureDestructionComponent, DestructionEventArgs>(OnXenoStructureDestruction);
 
         SubscribeLocalEvent<DeleteXenoResinOnHitComponent, ProjectileHitEvent>(OnDeleteXenoResinHit);
-
-        SubscribeLocalEvent<DropshipHijackStartEvent>(OnDropshipHijackStart);
 
         Subs.BuiEvents<XenoConstructionComponent>(XenoChooseStructureUI.Key, subs =>
         {
@@ -766,22 +763,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             QueueDel(args.Target);
     }
 
-    private void OnDropshipHijackStart(ref DropshipHijackStartEvent ev)
-    {
-        var hiveStructures = EntityQueryEnumerator<HiveConstructionLimitedComponent, TransformComponent>();
-        while (hiveStructures.MoveNext(out var hiveStructure, out _, out var transformComp))
-        {
-            if (transformComp.ParentUid != ev.Dropship && _planet.IsOnPlanet(hiveStructure.ToCoordinates()))
-            {
-                _destruction.DestroyEntity(hiveStructure);
-                // Supress Hivecore Cooldown if destroyed via auto-destruction during hijack
-                if (HasComp<HiveCoreComponent>(hiveStructure) && _hive.GetHive(hiveStructure) is { } hive)
-                {
-                    hive.Comp.NewCoreAt = _timing.CurTime;
-                }
-            }
-        }
-    }
+
     public FixedPoint2? GetStructurePlasmaCost(EntProtoId prototype)
     {
         if (_prototype.TryIndex(prototype, out var buildChoice) &&
