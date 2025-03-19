@@ -7,6 +7,8 @@ namespace Content.Client._RMC14.Weapons.Ranged.Sniper.Focused;
 
 public sealed class RMCFocusingSystem : EntitySystem
 {
+    private const string FocusedKey = "focused";
+
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
@@ -27,7 +29,7 @@ public sealed class RMCFocusingSystem : EntitySystem
 
     /// <summary>
     ///     Enable or disable a visualizer only on the client of the entity that is targeting.
-    ///     Since aimed shot isn't predicted this has to be an update.
+    ///     Since aimed shot is never ran clientside this has to be an update.
     /// </summary>
     public override void Update(float frameTime)
     {
@@ -41,17 +43,21 @@ public sealed class RMCFocusingSystem : EntitySystem
             if(uid != entity && !HasComp<SpotterComponent>(uid))
                 return;
 
-            _appearance.TryGetData(component.FocusTarget, FocusedVisuals.Focused, out var visuals);
 
-            if(visuals == null)
+            if(!TryComp(component.FocusTarget, out SpriteComponent? sprite) || !sprite.LayerExists(FocusedKey))
+                return;
+
+            sprite.LayerMapTryGet(FocusedKey, out var layerIndex);
+            sprite.TryGetLayer(layerIndex, out var layer);
+
+            if(layer != null && layer.Visible)
                 return;
 
             _appearance.SetData(component.FocusTarget, FocusedVisuals.Focused, true);
             _appearance.SetData(component.OldTarget, FocusedVisuals.Focused, false);
 
             //TODO make this the squad color
-            if(TryComp(component.FocusTarget, out SpriteComponent? sprite))
-                sprite.LayerSetColor($"focused", Color.Red);
+            sprite.LayerSetColor(FocusedKey, Color.Red);
         }
     }
 }

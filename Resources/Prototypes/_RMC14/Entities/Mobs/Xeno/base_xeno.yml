@@ -125,6 +125,14 @@
       sprite: _RMC14/Interface/xeno_hud.rsi
       state: hudeye
       visible: false
+    - map: [ "targetedDirection" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_direction
+      visible: false
+    - map: [ "targetedDirectionIntense" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_intense_direction
+      visible: false
   - type: GenericVisualizer
     visuals:
       enum.TargetedVisuals.Targeted:
@@ -145,16 +153,12 @@
             visible: true
       enum.TargetedVisuals.TargetedDirection:
         targetedDirection:
-          None:
-            visible: false
-          DirectionTargeted:
-            sprite: _RMC14/Effects/targeted.rsi
-            state: sniper_lockon_direction
-            visible: true
-          DirectionTargetedIntense:
-            sprite: _RMC14/Effects/targeted.rsi
-            state: sniper_lockon_intense_direction
-            visible: true
+          True: { visible: true}
+          False: { visible: false}
+      enum.TargetedVisuals.TargetedDirectionIntense:
+        targetedDirectionIntense:
+          True: { visible: true }
+          False: { visible: false }
       enum.FocusedVisuals.Focused:
         focused:
           True: { visible: true}

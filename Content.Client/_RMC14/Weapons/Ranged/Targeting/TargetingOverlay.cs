@@ -17,7 +17,7 @@ public sealed class TargetingOverlay : Overlay
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        var query = _entManager.EntityQueryEnumerator<TargetedComponent>();
+        var query = _entManager.EntityQueryEnumerator<RMCTargetedComponent>();
         var xformQuery = _entManager.GetEntityQuery<TransformComponent>();
         var targetingLaserQuery = _entManager.GetEntityQuery<TargetingLaserComponent>();
         var worldHandle = args.WorldHandle;

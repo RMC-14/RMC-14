@@ -4,7 +4,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Targeting;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class TargetedComponent : Component
+public sealed partial class RMCTargetedComponent : Component
 {
     /// <summary>
     ///     The entities targeting the entity with this component.
@@ -20,10 +20,11 @@ public sealed partial class TargetedComponent : Component
 }
 
 [Serializable, NetSerializable]
-public enum TargetedVisuals
+public enum TargetedVisuals : byte
 {
     Targeted,
     TargetedDirection,
+    TargetedDirectionIntense,
 }
 
 [Serializable, NetSerializable]
@@ -35,7 +36,7 @@ public enum TargetedEffects : byte
     TargetedIntense,
 }
 
-public enum DirectionTargetedEffects
+public enum DirectionTargetedEffects : byte
 {
     None = 0,
     DirectionTargeted,

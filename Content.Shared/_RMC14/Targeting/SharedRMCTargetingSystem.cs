@@ -65,7 +65,7 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
         if(!Resolve(targetingUid, ref targeting))
             return;
 
-        if (!TryComp(target, out TargetedComponent? targeted))
+        if (!TryComp(target, out RMCTargetedComponent? targeted))
             return;
 
         targeted.TargetedBy.Remove(targetingUid);
@@ -106,7 +106,7 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
             return;
 
         // Remove the target's targeted component if it has nothing targeting it anymore
-        RemComp<TargetedComponent>(target);
+        RemComp<RMCTargetedComponent>(target);
 
         if(targeting.Targets.Count == 0)
             RemComp<TargetingComponent>(targetingUid);
@@ -114,7 +114,7 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
 
     /// <summary>
     ///     Apply the <see cref="TargetingComponent"/> to the entity creating the laser.
-    ///     Apply the <see cref="TargetedComponent"/> to the entity being targeted.
+    ///     Apply the <see cref="RMCTargetedComponent"/> to the entity being targeted.
     /// </summary>
     /// <param name="equipment">The entity that is targeting</param>
     /// <param name="user">The user of the targeting entity</param>
@@ -130,7 +130,7 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
         targetedEffect = ev.TargetedEffect;
         directionEffect = ev.DirectionEffect;
 
-        var targeted = EnsureComp<TargetedComponent>(target);
+        var targeted = EnsureComp<RMCTargetedComponent>(target);
         targeted.TargetedBy.Add(equipment);
         Dirty(target, targeted);
 
@@ -149,6 +149,9 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
         targeting.DirectionEffect = directionEffect;
         Dirty(equipment, targeting);
 
+        var ev2 = new GotTargetedEvent();
+        RaiseLocalEvent(target, ref ev2);
+
         UpdateTargetMarker(target, targetedEffect, directionEffect);
     }
 
@@ -163,17 +166,16 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
     {
         //Get the currently active visualiser.
         _appearance.TryGetData<TargetedEffects>(target, TargetedVisuals.Targeted, out var marker);
-        _appearance.TryGetData<DirectionTargetedEffects>(target, TargetedVisuals.TargetedDirection, out var directionMarker);
 
         // Only apply the visualiser if forced, or it has a higher priority than the already existing one.
         if (force || newMarker > marker)
-        {
             _appearance.SetData(target, TargetedVisuals.Targeted, newMarker);
-        }
 
-        // TODO make this rotate towards targeter
-        if (force || directionEffect > directionMarker)
-            _appearance.SetData(target, TargetedVisuals.TargetedDirection, directionEffect);
+        var directionVisual = directionEffect > DirectionTargetedEffects.None;
+        var directionVisualIntense = directionEffect > DirectionTargetedEffects.DirectionTargeted;
+
+        _appearance.SetData(target, TargetedVisuals.TargetedDirection, directionVisual && !directionVisualIntense);
+        _appearance.SetData(target, TargetedVisuals.TargetedDirectionIntense, directionVisual && directionVisualIntense);
     }
 
     /// <summary>
@@ -220,7 +222,7 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
                     Dirty(uid, targeting);
 
                     // Adjust alpha of the laser based on how close it is to finishing targeting.
-                    if (TryComp(target, out TargetedComponent? targeted))
+                    if (TryComp(target, out RMCTargetedComponent? targeted))
                     {
                         var newAlpha = 1 - targeting.LaserDurations[target][laserNumber] / targeting.OriginalLaserDurations[target][laserNumber];
                         targeted.AlphaMultipliers.TryAdd(uid, newAlpha);
@@ -276,3 +278,9 @@ public record struct TargetingCancelledEvent(bool Handled = false);
 /// </summary>
 [ByRefEvent]
 public record struct TargetingStartedEvent(DirectionTargetedEffects DirectionEffect, TargetedEffects TargetedEffect, EntityUid Target);
+
+/// <summary>
+///     Raised on an entity when targeting has finished
+/// </summary>
+[ByRefEvent]
+public record struct GotTargetedEvent();

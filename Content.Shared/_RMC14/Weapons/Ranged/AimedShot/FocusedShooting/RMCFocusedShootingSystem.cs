@@ -19,13 +19,13 @@ public sealed class RMCFocusedShootingSystem : EntitySystem
     {
         var focusCounter = ent.Comp.FocusCounter;
 
-        if (args.Target != ent.Comp.CurrentTarget)
+        if (args.Target != ent.Comp.CurrentTarget || ent.Comp.FocusCounter >= 3)
             focusCounter = 0;
 
         if (TryComp(ent, out TargetingLaserComponent? targetingLaser))
         {
 
-            if (focusCounter >= 2)
+            if (focusCounter >= 1)
                 targetingLaser.CurrentLaserColor = ent.Comp.LaserColor;
             else
                 targetingLaser.CurrentLaserColor = targetingLaser.LaserColor;
@@ -33,12 +33,10 @@ public sealed class RMCFocusedShootingSystem : EntitySystem
             Dirty(ent, targetingLaser);
         }
 
-        if (focusCounter >= 2)
+        if (focusCounter >= 1 && args.TargetedEffect == TargetedEffects.Targeted)
         {
-            if(args.TargetedEffect == TargetedEffects.Targeted)
-                args.TargetedEffect += 1;
-            if(args.DirectionEffect == DirectionTargetedEffects.DirectionTargeted)
-                args.DirectionEffect += 1;
+            args.TargetedEffect += 1;
+            args.DirectionEffect += 1;
         }
     }
 

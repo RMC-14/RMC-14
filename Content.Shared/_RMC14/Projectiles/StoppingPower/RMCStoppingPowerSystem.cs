@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Xenonids.Fortify;
 using Content.Shared.Camera;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Stunnable;
@@ -19,6 +20,7 @@ public sealed class RMCStoppingPowerSystem : EntitySystem
     [Dependency] private readonly StaminaSystem _stamina = default!;
     [Dependency] private readonly SharedCameraRecoilSystem _cameraRecoil = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
 
     public override void Initialize()
     {
@@ -87,7 +89,7 @@ public sealed class RMCStoppingPowerSystem : EntitySystem
             _cameraRecoil.KickCamera(target, new Vector2(stoppingPower - 2, stoppingPower - 1));
 
             // Don't knock back if knocked down.
-            if(!HasComp<KnockedDownComponent>(target))
+            if(!HasComp<KnockedDownComponent>(target) && !_mobState.IsDead(target))
             {
                 _sizeStun.KnockBack(target, ent.Comp.ShotFrom);
 
