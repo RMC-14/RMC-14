@@ -10,6 +10,7 @@ using Content.Shared.Alert;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Destructible;
 using Content.Shared.Explosion;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
@@ -248,6 +249,7 @@ public sealed class CMArmorSystem : EntitySystem
 
             ev.Bio -= armorPiercing;
         }
+
         if (args.Origin is { } origin)
         {
             var originCoords = _transform.GetMapCoordinates(origin);
@@ -264,20 +266,22 @@ public sealed class CMArmorSystem : EntitySystem
         }
 
         args.Damage = new DamageSpecifier(args.Damage);
-        if (HasComp<XenoComponent>(ent))
+        if (!HasComp<XenoComponent>(ent))
+        {
+            if (HasComp<RMCBulletComponent>(args.Tool))
+            {
+                Resist(args.Damage, ev.Bullet, ArmorGroup);
+            }
+            else if (HasComp<MeleeWeaponComponent>(args.Tool))
+            {
+                Resist(args.Damage, ev.Melee, ArmorGroup);
+            }
+            Resist(args.Damage, ev.Bio, BioGroup);
+        }
+        else
         {
             Resist(args.Damage, ev.XenoArmor, ArmorGroup);
         }
-        else if (HasComp<RMCBulletComponent>(args.Tool))
-        {
-            Resist(args.Damage, ev.Bullet, ArmorGroup);
-        }
-        else if (HasComp<MeleeWeaponComponent>(args.Tool))
-        {
-            Resist(args.Damage, ev.Melee, ArmorGroup);
-        }
-
-        Resist(args.Damage, ev.Bio, BioGroup);
     }
 
     private void Resist(DamageSpecifier damage, int armor, ProtoId<DamageGroupPrototype> group)
