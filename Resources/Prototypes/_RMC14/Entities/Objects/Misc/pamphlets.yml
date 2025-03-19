@@ -77,8 +77,6 @@
     jobWhitelists:
     - popup: rmc-pamphlets-rifleman-warning
       jobProto: CMRifleman
-  - type: SkillPamphlet
-
 
 # gives powerloader skill / bypasses limit
 - type: entity

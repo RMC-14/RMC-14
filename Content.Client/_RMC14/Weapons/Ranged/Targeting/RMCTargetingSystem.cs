@@ -21,7 +21,7 @@ public sealed class RMCTargetingSystem : SharedRMCTargetingSystem
     }
 
     /// <summary>
-    ///     Rotate the visualizer to the cardinal direction closest to the targeter.
+    ///     Rotate the visualizer to the cardinal direction closest to the targeting entity.
     /// </summary>
     private void OnGotTargeted(Entity<RMCTargetedComponent> ent, ref GotTargetedEvent args)
     {

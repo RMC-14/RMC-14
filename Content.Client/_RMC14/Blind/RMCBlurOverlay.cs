@@ -16,7 +16,7 @@ public sealed class RMCBlurOverlay : Overlay
     public override bool RequestScreenTexture => true;
     private readonly ShaderInstance _blurShader;
 
-    private float _blurAmount = 0.01f;
+    private const float BlurAmount = 0.01f;
 
     public RMCBlurOverlay(IEntityManager entManager)
     {
@@ -47,7 +47,7 @@ public sealed class RMCBlurOverlay : Overlay
 
         var handle = args.WorldHandle;
         _blurShader.SetParameter("SCREEN_TEXTURE", ScreenTexture);
-        _blurShader.SetParameter("BLUR_AMOUNT", _blurAmount);
+        _blurShader.SetParameter("BLUR_AMOUNT", BlurAmount);
         handle.UseShader(_blurShader);
         handle.DrawRect(args.WorldBounds, Color.White);
         handle.UseShader(null);

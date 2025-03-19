@@ -19,7 +19,7 @@ public sealed partial class RMCFocusedShootingComponent : Component
     public int FocusCounter;
 
     /// <summary>
-    ///     The value the bonus damage is multiplied by per focusCounter
+    ///     The value the bonus damage is multiplied by per focusCounter.
     /// </summary>
     [DataField, AutoNetworkedField]
     public float FocusMultiplier = 0.25f;

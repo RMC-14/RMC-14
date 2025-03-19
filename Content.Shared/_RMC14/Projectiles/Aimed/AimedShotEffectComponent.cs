@@ -31,7 +31,7 @@ public sealed partial class AimedShotEffectComponent : Component
     public TimeSpan SlowDuration;
 
     /// <summary>
-    ///     The duration of the super sloow on the hit target.
+    ///     The duration of the super slow on the hit target.
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan SuperSlowDuration;

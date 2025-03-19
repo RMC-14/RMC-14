@@ -197,6 +197,9 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
         Dirty(ent);
     }
 
+    /// <summary>
+    ///     Reduce the duration of targeting effects every frame.
+    /// </summary>
     public override void Update(float frameTime)
     {
         var query = EntityQueryEnumerator<TargetingComponent, TransformComponent>();

@@ -10,7 +10,7 @@ public sealed partial class RMCPenetratingProjectileComponent : Component
     ///     The remaining range of the projectile.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float Range = 32;
+    public float Range = 32f;
 
     /// <summary>
     ///     The coordinates the projectile was shot from.
@@ -22,7 +22,7 @@ public sealed partial class RMCPenetratingProjectileComponent : Component
     ///     The multiplier for range and damage loss if a membrane is hit.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public HashSet<EntityUid> HitTargets = new();
+    public List<EntityUid> HitTargets = new();
 
     /// <summary>
     ///     The amount of range lost per hit entity.
@@ -40,13 +40,13 @@ public sealed partial class RMCPenetratingProjectileComponent : Component
     ///     The multiplier for range and damage loss if a wall is hit.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float WallMultiplier = 3;
+    public float WallMultiplier = 3f;
 
     /// <summary>
     ///     The multiplier for range and damage loss if a big xeno is hit.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float BigXenoMultiplier = 2;
+    public float BigXenoMultiplier = 2f;
 
     /// <summary>
     ///     The multiplier for range and damage loss if a thick membrane is hit.

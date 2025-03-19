@@ -16,7 +16,7 @@ public sealed partial class GunToggleableLaserComponent : Component
     public int Setting;
 
     /// <summary>
-    ///     Is the laser active
+    ///     If the laser is active.
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool Active = true;
@@ -40,7 +40,7 @@ public sealed partial class GunToggleableLaserComponent : Component
     public SoundSpecifier ToggleSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/click.ogg");
 
     /// <summary>
-    ///     The duration multiplier to apply during aimed shot while the laser is active.
+    ///     The duration multiplier to apply during aimed shot, while the laser is active.
     /// </summary>
     [DataField, AutoNetworkedField]
     public float AimDurationMultiplier = 0.6f;

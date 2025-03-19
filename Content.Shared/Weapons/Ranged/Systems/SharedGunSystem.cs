@@ -212,7 +212,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         EntityManager.DirtyField(uid, gun, nameof(GunComponent.ShotCounter));
     }
 
-    // RMC14 Needed to check if the attempted shot actually shot anything.
+    // RMC14 Needed to check if the attempted shot actually shot any projectiles.
     /// <summary>
     ///     Attempts to shoot at the target coordinates. Resets the shot counter after every shot.
     /// </summary>

@@ -15,5 +15,5 @@ public sealed partial class RMCFocusingComponent : Component
     ///     The previous focused target, used to remove the focus visual.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public EntityUid OldTarget;
+    public EntityUid? OldTarget;
 }

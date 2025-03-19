@@ -4,7 +4,6 @@ using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Rules;
-using Content.Shared._RMC14.Targeting;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;

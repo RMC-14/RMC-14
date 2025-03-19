@@ -24,7 +24,7 @@ public sealed class RMCSpottingSystem : SharedRMCSpottingSystem
     }
 
     /// <summary>
-    ///     Send a request to perform an aimed shot on the entity below the mouse cursor when the unique action key is pressed.
+    ///     Send a request to start spotting the entity below the mouse cursor when the unique action key is pressed.
     /// </summary>
     private void OnUniqueAction(Entity<SpottingComponent> ent, ref UniqueActionEvent args)
     {

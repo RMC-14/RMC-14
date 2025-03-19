@@ -24,7 +24,7 @@ public sealed partial class TargetingLaserComponent : Component
     public Color CurrentLaserColor = Color.Red;
 
     /// <summary>
-    ///     How long the spotting should last if not interrupted.
+    ///     The default alpha multiplier of any lasers originating from this entity.
     /// </summary>
     [DataField, AutoNetworkedField]
     public float LaserAlpha = 0.5f;

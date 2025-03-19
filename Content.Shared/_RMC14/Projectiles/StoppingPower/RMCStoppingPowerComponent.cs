@@ -49,7 +49,7 @@ public sealed partial class RMCStoppingPowerComponent : Component
     public float XenoStunMultiplier = 0.3f;
 
     /// <summary>
-    ///     How long to stun big xeno's for if stopping power is high enough.
+    ///     How long to stun big xenos for if stopping power is high enough.
     ///     0.7 is the minimum needed to apply a stun any lower and no stun happens at all. In practice it's a micro stun.
     /// </summary>
     [DataField, AutoNetworkedField]

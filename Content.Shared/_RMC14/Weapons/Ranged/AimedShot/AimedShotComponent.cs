@@ -59,13 +59,13 @@ public sealed partial class AimedShotComponent : Component
     public int MinRange = 2;
 
     /// <summary>
-    ///     The target of the aimed shot.
+    ///     A list of targets that are being aimed at.
     /// </summary>
     [DataField, AutoNetworkedField]
     public List<EntityUid> Targets = new();
 
     /// <summary>
-    ///     The target of the aimed shot.
+    ///     The current target of the aimed shot.
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? CurrentTarget;
@@ -95,13 +95,13 @@ public sealed partial class AimedShotComponent : Component
     public int ProjectileSpeed = 62;
 
     /// <summary>
-    ///     The speed of the aimed shot projectile
+    ///     The targeting effect to apply to entities being aimed at.
     /// </summary>
     [DataField, AutoNetworkedField]
     public TargetedEffects TargetEffect = TargetedEffects.Targeted;
 
     /// <summary>
-    ///     The speed of the aimed shot projectile
+    ///     The additional direction effect to apply to entities being aimed at while the laser is turned off.
     /// </summary>
     [DataField, AutoNetworkedField]
     public DirectionTargetedEffects DirectionTargetEffect = DirectionTargetedEffects.DirectionTargeted;

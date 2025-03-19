@@ -37,7 +37,7 @@ public abstract partial class SharedRMCSpottingSystem : EntitySystem
     }
 
     /// <summary>
-    ///    Applies the spotted component to the entity if it's a valid target and starts targeting it.
+    ///    Toggles the ability to start spotting.
     /// </summary>
     private void OnSpotTarget(Entity<SpottingComponent> ent, ref SpotTargetActionEvent args)
     {

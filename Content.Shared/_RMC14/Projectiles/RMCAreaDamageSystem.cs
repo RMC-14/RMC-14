@@ -44,7 +44,7 @@ public sealed class RMCAreaDamageSystem : EntitySystem
 
         var nearbyEntities = _entityLookup.GetEntitiesInRange<MobStateComponent>(Transform(target).Coordinates, areaDamage.DamageArea);
 
-        // Apply damage to all eligible entities in range
+        // Apply damage to all eligible entities in range.
         foreach (var entity in nearbyEntities)
         {
             if(entity.Owner == target)
@@ -61,7 +61,7 @@ public sealed class RMCAreaDamageSystem : EntitySystem
 
             _sizeStun.TryGetSize(entity, out var size);
 
-            // Xenos take double area damage in CM13, I tried finding out why without success
+            // Xenos take double area damage in CM13 compared to humans, I tried finding out why without success so here's a 2x multiplier.
             if (size >= RMCSizes.SmallXeno)
                 newDamage *= 2;
 

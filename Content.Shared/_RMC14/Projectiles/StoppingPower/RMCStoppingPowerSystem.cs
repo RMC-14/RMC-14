@@ -35,7 +35,7 @@ public sealed class RMCStoppingPowerSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Apply a stun or knockback based on the damage of the shot and what kind of target is hit.
+    ///     Apply a stun and/or knockback based on the damage of the shot and what kind of target is hit.
     /// </summary>
     private void OnStoppingPowerHit(Entity<RMCStoppingPowerComponent> ent, ref ProjectileHitEvent args)
     {
@@ -50,7 +50,7 @@ public sealed class RMCStoppingPowerSystem : EntitySystem
         ent.Comp.CurrentStoppingPower = stoppingPower;
         Dirty(ent);
 
-        // Big xeno's have higher thresholds before they get affected.
+        // Big xenos have higher thresholds before they get affected.
         if (size >= RMCSizes.Big)
         {
             if (stoppingPower >= ent.Comp.BigXenoScreenShakeThreshold)

@@ -13,7 +13,7 @@ public sealed partial class RMCTargetedComponent : Component
     public List<EntityUid> TargetedBy = new();
 
     /// <summary>
-    ///     The entities targeting the entity with this component.
+    ///     A dictionary storing the alpha multipliers for every laser and their originating entity.
     /// </summary>
     [DataField, AutoNetworkedField]
     public Dictionary<EntityUid, float> AlphaMultipliers = new();

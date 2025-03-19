@@ -15,6 +15,9 @@ public sealed class TargetingOverlay : Overlay
         _entManager = entManager;
     }
 
+    /// <summary>
+    ///     Draws a line between any targeted entities and the entities targeting them.
+    /// </summary>
     protected override void Draw(in OverlayDrawArgs args)
     {
         var query = _entManager.EntityQueryEnumerator<RMCTargetedComponent>();
@@ -45,9 +48,9 @@ public sealed class TargetingOverlay : Overlay
                 var angle = diff.ToWorldAngle();
                 var length = diff.Length() / 2f;
                 var midPoint = gunWorldPos + diff / 2;
-                const float Width = 0.02f;
+                const float width = 0.02f;
 
-                var box = new Box2(-Width, -length, Width, length);
+                var box = new Box2(-width, -length, width, length);
                 var rotated = new Box2Rotated(box.Translated(midPoint), angle, midPoint);
 
                 var color = targetingLaser.CurrentLaserColor;
