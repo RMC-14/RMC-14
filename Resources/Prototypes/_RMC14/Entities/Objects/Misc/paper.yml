@@ -35,6 +35,7 @@
   - type: Appearance
   - type: PaperVisuals
   - type: Flammable
+    intensity: 10
     fireSpread: true
     canResistFire: false
     alwaysCombustible: true
