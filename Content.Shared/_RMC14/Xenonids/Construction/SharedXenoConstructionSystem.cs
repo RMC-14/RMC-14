@@ -717,11 +717,16 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private void OnWeedStructureRepair(Entity<XenoWeedsComponent> weedsStructure, ref XenoStructureRepairedEvent args)
     {
         var (ent, comp) = weedsStructure;
+
+        var spreaderComp = EnsureComp<XenoWeedsSpreadingComponent>(ent);
+        spreaderComp.SpreadAt = _timing.CurTime;
+        Dirty(ent, spreaderComp);
+
         foreach (var weed in comp.Spread)
         {
-            var weedSpreaderComp = new XenoWeedsSpreadingComponent();
-            weedSpreaderComp.SpreadAt = _timing.CurTime;
-            AddComp(weed, weedSpreaderComp);
+            spreaderComp = EnsureComp<XenoWeedsSpreadingComponent>(weed);
+            spreaderComp.SpreadAt = _timing.CurTime;
+            Dirty(weed, spreaderComp);
         }
     }
 
