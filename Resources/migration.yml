@@ -747,7 +747,7 @@ CMBoxMRE: RMCBoxMRE
 CMBoxPackFlare: RMCBoxPackFlare
 CMCrateBase: RMCCrateBase
 CMCrateLarge: RMCCrateLarge
-CMCrateWeldable: RMCCrateWeldable
+CMCrateWeldable: RMCCrateBase
 CMCrateAlpha: RMCCrateAlpha
 CMCrateBravo: RMCCrateBravo
 CMCrateCharlie: RMCCrateCharlie
@@ -1097,3 +1097,6 @@ RMCAreaLv759IndoorsWeyyuOfficeSupervisor: RMCAreaLv759IndoorsWeyaOfficeSuperviso
 # 2025-03-01
 RMCHeadsetDistressFreelancer: RMCHeadsetDistressDukes
 RMCEncryptionKeyFreelancer: RMCEncryptionKeyDukes
+
+# 2025-03-14
+RMCCrateWeldable: RMCCrateBase

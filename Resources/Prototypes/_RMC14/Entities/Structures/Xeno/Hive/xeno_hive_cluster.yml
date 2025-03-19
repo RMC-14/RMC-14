@@ -6,7 +6,10 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/hive_cluster.rsi
-    state: hive_cluster_idle
+    layers:
+     - sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
+       state: hive_weed0
+     - state: hive_cluster_idle
   - type: Destructible
     thresholds:
     - trigger:
@@ -15,17 +18,31 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 300
   - type: XenoWeeds
-    range: 7
-    spawns: XenoHiveWeeds
+    range: 5
+    spawns: XenoHiveWeedsCluster
     level: 3
     blockOtherWeeds: true
   - type: ReplaceWeedSourceOnWeeding
     replacementPairs:
       RMCCommunicationsTower: HivePylonXeno
   - type: XenoWeedsSpreading
+  - type: HiveConstructionRequiresHiveCore
   - type: HiveConstructionLimited
     id: HiveClusterXeno
+  - type: RepairableXenoStructure
+    plasmaCost: 300
+    repairLength: 15
+  - type: XenoMapTracked
+  - type: TacticalMapTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: cluster
 
 
 - type: entity
@@ -35,9 +52,13 @@
   description: A large clump of gooey mass. Looks like a marker for something.
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Xenos/hive_cluster.rsi
-    state: hive_cluster_idle
     color: '#FFFFFFAA'
+    layers:
+    - sprite: _RMC14/Structures/Xenos/hive_cluster.rsi
+      state: hive_cluster_idle
+    - sprite: _RMC14/Interface/xeno_hud.rsi
+      state: xeno_structure_node_indicator
+      scale: 0.8, 0.8
   - type: Destructible
     thresholds:
     - trigger:
@@ -50,6 +71,7 @@
     initialPlasmaCost: 400
     plasmaCost: 300
     spawn: HiveClusterXeno
+  - type: HiveConstructionRequiresHiveCore
   - type: HiveConstructionLimited
     id: HiveClusterXeno
   - type: WarpPoint

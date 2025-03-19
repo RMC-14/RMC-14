@@ -120,7 +120,6 @@
     strains:
     - CMXenoDroneGardener
     - CMXenoDroneHealer
-    - CMXenoDroneHealer
   - type: XenoAcid
   - type: AcidTrap
     trapLevel: 1

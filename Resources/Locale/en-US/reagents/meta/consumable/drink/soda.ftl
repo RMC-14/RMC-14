@@ -40,7 +40,8 @@ reagent-desc-sol-dry = Sweet ginger soda from outer space!
 reagent-name-roy-rogers = Roy Rogers
 reagent-desc-roy-rogers = Solid proof that there IS something known as too sweet.
 
-reagent-name-space-mountain-wind = Space Solar Wind
+# RMC14
+reagent-name-space-mountain-wind = Solar Wind
 reagent-desc-space-mountain-wind = Blows right through you like a solar wind.
 
 reagent-name-space-up = Space-Up

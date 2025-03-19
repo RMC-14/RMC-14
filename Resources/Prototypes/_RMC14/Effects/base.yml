@@ -1,0 +1,6 @@
+﻿- type: entity
+  id: RMCBaseEffect
+  abstract: true
+  components:
+  - type: RMCNightVisionVisible
+    priority: 1

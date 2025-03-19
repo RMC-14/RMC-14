@@ -1,4 +1,4 @@
-- type: htnCompound
+﻿- type: htnCompound
   id: RMCParasiteActiveCompound
   branches:
   - tasks:
@@ -252,7 +252,7 @@
   query:
   - !type:ComponentQuery
     components:
-    - type: Eggmorpher
+    - type: EggMorpher
   considerations:
   - !type:TargetAvailibleEggMorpherCon
     curve: !type:BoolCurve

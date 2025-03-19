@@ -158,3 +158,27 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/civilian.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/civilian.rsi
+    
+# Kutjevo
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitKutjevoJumper
+  name: kutjevo jumper
+  description: A heavy-duty jumpsuit worn by the workers on Kutjevo.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/kutjevo_jumper.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/kutjevo_jumper.rsi
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitKutjevoDrysuit
+  name: kutjevo drysuit
+  description: A heavy-duty drysuit worn by the workers on Kutjevo.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/kutjevo_drysuit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/kutjevo_drysuit.rsi
+    

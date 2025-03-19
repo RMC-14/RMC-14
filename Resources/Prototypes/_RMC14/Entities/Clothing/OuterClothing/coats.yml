@@ -277,6 +277,19 @@
   - type: FoldableClothing
     foldedEquippedPrefix: jacket
 
+# Quartermaster
+- type: entity
+  parent: RMCBaseJacket
+  id: RMCQuartermasterJacket
+  name: quartermaster jacket
+  description: A green jacket worn by UNMC personnel. The back has the flag of the United Nations on it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/qm.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/qm.rsi
+
+
 # Mess Seargeant/Tech
 - type: entity
   parent: RMCBaseJacket
@@ -433,3 +446,78 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Coats/service/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Coats/service/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Coats/service/urban.rsi
+
+- type: entity
+  parent: CMCoatOfficer
+  id: RMCProvostCoat
+  name: Provost Coat
+  description: The crisp coat of a Provost Officer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Provost/provost_coat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Provost/provost_coat.rsi
+
+
+- type: entity
+  parent: CMCoatOfficer
+  id: RMCProvostCoatMarshal
+  name: Provost Marshal Coat
+  description: The crisp coat of a Provost Officer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Provost/provost_coat_marshal.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Provost/provost_coat_marshal.rsi
+
+- type: entity
+  parent: CMCoatOfficer
+  id: RMCProvostJacket
+  name: Provost Jacket
+  description: A crisp jacket with the Provost sigil.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Provost/provost_jacket.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Provost/provost_jacket.rsi
+
+- type: entity
+  parent: CMCoatOfficer
+  id: RMCProvostCommandJacket
+  name: Provost Command Jacket
+  description: A crisp jacket with the Provost sigil.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Provost/provostci_jacket.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Provost/provostci_jacket.rsi
+
+- type: entity
+  parent: RMCProvostJacket
+  id: RMCProvostJacketFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMFlash
+    - id: RMCHandcuffs
+
+- type: entity
+  parent: RMCProvostCommandJacket
+  id: RMCProvostCommandJacketFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMFlash
+    - id: RMCHandcuffs
+
+- type: entity
+  parent: RMCProvostCoatMarshal
+  id: RMCProvostCoatMarshalFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMFlash
+    - id: RMCHandcuffs

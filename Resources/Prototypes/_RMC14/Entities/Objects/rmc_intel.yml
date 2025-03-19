@@ -179,6 +179,7 @@
             message: "THREAT ASSESSMENT LEVEL INCREASED TO LEVEL 1.
 
               LEVEL 1 assets have been authorised to handle the situation."
+            sound: /Audio/_RMC14/AI/commandreport.ogg
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: upgrade
@@ -222,6 +223,7 @@
             message: "THREAT ASSESSMENT LEVEL INCREASED TO LEVEL 2.
 
               LEVEL 2 assets have been authorised to handle the situation."
+            sound: /Audio/_RMC14/AI/commandreport.ogg
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: upgrade
@@ -279,6 +281,7 @@
             message: "THREAT ASSESSMENT LEVEL INCREASED TO LEVEL 3.
 
               LEVEL 3 assets have been authorised to handle the situation."
+            sound: /Audio/_RMC14/AI/commandreport.ogg
           icon:
             sprite: _RMC14/Interface/tech_tree.rsi
             state: upgrade

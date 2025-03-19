@@ -80,7 +80,7 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret/jungle.rsi
-  - type: Appearance 
+  - type: Appearance
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Head/Hats/CO/beret/jungle.rsi
@@ -165,6 +165,7 @@
     whitelist:
       components:
       - RMCLighter
+      - HelmetAccessory
       tags:
       - Cigarette
       - Matchstick
@@ -177,6 +178,11 @@
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
   - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      components:
+      - HelmetAccessory
+  - type: HelmetAccessoryHolder
 
 - type: entity
   parent: CMHeadCapMP
@@ -508,3 +514,14 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/intel.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/intel.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: RMCProvostCommandBeret
+  name: UNMC provost command beret
+  description: A beret with the UNMC Military Police insignia emblazoned on it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/pvciberet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/pvciberet.rsi

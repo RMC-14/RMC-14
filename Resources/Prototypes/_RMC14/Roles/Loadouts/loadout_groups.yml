@@ -124,6 +124,8 @@
   - SquadBeretRMC
   - GreenBeretRMC
   - TanBeretRMC
+  - BoonieRMC
+  - BoonieTanRMC 
   - CapRMC
   - BrownHeadbandRMC
   - GreenHeadbandRMC
@@ -153,6 +155,9 @@
   - SlugSpentRMC
   - CartridgeSpentRMC
   - HelmetGasmaskRMC
+  - HelmetGasmaskDesertRMC
+  - HelmetGasmaskJungleRMC
+  - HelmetGasmaskUrbanRMC
   - GunOilRMC
   - RosaryRMC
   - PrescriptionRMC
@@ -283,6 +288,13 @@
   loadouts:
   - ColBeretRMC
   - LtColBeretRMC
+
+- type: loadoutGroup
+  id: CommandingOfficerIDRMC
+  name: rmc-loadout-group-role-specific-ID
+  loadouts:
+  - ColIDCardRMC
+  - ColNormalIDCardRMC
 
 # Pins
 - type: loadoutGroup

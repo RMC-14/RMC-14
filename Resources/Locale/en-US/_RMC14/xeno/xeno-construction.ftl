@@ -74,10 +74,21 @@ rmc-xeno-construction-tunnel-examine = The pheromone scent reads: {$tunnelName}
 rmc-xeno-construction-tunnel-fill = You start collapsing the tunnel!
 rmc-xeno-construction-tunnel-fill-xeno-drop = The tunnel suddenly collapses, forcing you out!
 
+rmc-xeno-order-construction-structure-designated =  Hive: A new {$construct} construction has been designated at {$area}!
+rmc-xeno-order-construction-limited-structure-designated = We designate a new {$construct} construction. ({$remainCount}/{$maxCount} remaining)
+
+rmc-xeno-construction-repair-structure-start-attempt = We begin adding the plasma to the {$struct} to repair it.
+rmc-xeno-construction-repair-structure-success = We have successfully repaired the {$struct}.
+rmc-xeno-construction-repair-structure-no-damage-failure = The {$struct} is in good condition, you don't need to repair it.
+rmc-xeno-construction-repair-structure-insufficient-plasma-warn = The {$struct} requires {$remainingPlasma} more plasma to repair it.
+
 rmc-xeno-construction-egg-morpher-no-parasites = There are no parasites in the egg morpher!
 rmc-xeno-construction-egg-morpher-attempt-insert-non-parasite = You can't put that in the egg morpher!
 rmc-xeno-construction-egg-morpher-already-full = This egg morpher is already full!
 
+rmc-xeno-egg-morpher-return-self = {CAPITALIZE($parasite)} crawls into the egg morpher.
+
 rmc-xeno-construction-egg-morpher-examine = Sheltering: {$cur_paras}/{$max_paras} parasites.
 
-rmc-xeno-construction-recovery-node-heal-target = You feel a warm aura envelop you.
+rmc-xeno-construction-recovery-node-heal-target = We feel a warm aura envelop us.
+rmc-xeno-construction-recovery-node-heal-other = {CAPITALIZE(THE($target))} glows as a warm aura envelops them.

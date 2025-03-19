@@ -265,13 +265,17 @@
 - type: entity
   parent: RMCGogglesBallistic
   id: RMCGogglesBallisticBlue # TODO prescription variant
-  name: red marine ballistic goggles
+  name: blue marine ballistic goggles
   description: Standard issue UNMC goggles. While commonly found mounted atop M10 pattern helmets, they are also capable of preventing insects, dust, and other things from getting into one's eyes. This one has blue colored day lenses.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/blue_ballistic_goggles.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/blue_ballistic_goggles.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/blue_ballistic_goggles.rsi
+      state: helmet
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -509,3 +513,19 @@
 
 - type: Tag
   id: RMCWeldingGoggle
+
+- type: entity
+  parent: ClothingEyesBase
+  id: RMCGogglesKutjevo
+  name: kutjevo goggles
+  description: Goggles used to shield the eyes of workers on Kutjevo. N95Z Rated Goggles.
+  components:
+  - type: Item
+    storedRotation: 0
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/kutjevo_goggles.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/kutjevo_goggles.rsi
+    slots:
+    - MASK
+    - EYES
