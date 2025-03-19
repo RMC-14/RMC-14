@@ -1,0 +1,86 @@
+﻿- type: entity
+  parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
+  name: Type 23 riot shotgun
+  id: WeaponShotgunM42A2
+  description: As SPP soldiers frequently reported being outmatched by enemy combatants, SPP High Command commissioned a large amount of Type 23 shotguns, originally used for quelling defector colony riots. This slow semi-automatic shotgun chambers 8 gauge, and packs a mean punch.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/desert.rsi
+    layers:
+    - state: icon
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/desert.rsi
+  - type: Gun
+    shotsPerBurst: 1
+  - type: ShootUseDelay
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 5
+    recoilUnwielded: 5
+    scatterWielded: 14
+    scatterUnwielded: 30
+    baseFireRate: 4
+    burstScatterMult: 5
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags: #Heavy shells
+      - RMCShellShotgunBuckshot
+      - RMCShellShotgunSlugs
+      - RMCShellShotgunFlechette
+      - RMCShellShotgunIncendiaryBuckshot
+      - RMCShellShotgunIncendiary
+      - RMCShellShotgunBeanbag
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1
+    accuracyMultiplierUnwielded: 0.5
+  - type: PumpAction
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentRecoilCompensator
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-stock:
+        whitelist:
+          tags: #type23 stock
+          - RMCAttachmentM42A2WoodenStock
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentFlamer
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentBurstFireAssembly
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.81, 0.06
+      rmc-aslot-rail: -0.025, 0.125
+      rmc-aslot-stock: -0.375, -0.029
+      rmc-aslot-underbarrel: 0.25, -0.31
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/jungle.rsi
+      Desert: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/desert.rsi
+      Snow: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/snow.rsi
+      Classic: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/classic.rsi
+      Urban: _RMC14/Objects/Weapons/Guns/Shotguns/m42a2/urban.rsi
+  - type: Tag
+    tags:
+    - RMCWeaponShotgunM42A2
+    - RMCWeaponShotgun
+
+- type: Tag
+  id: RMCWeaponShotgunM42A2
