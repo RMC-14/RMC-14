@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.BlurredVision;
 using Content.Shared._RMC14.Projectiles.StoppingPower;
 using Content.Shared._RMC14.Slow;
@@ -76,8 +77,10 @@ public sealed class AimedProjectileSystem : EntitySystem
         _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(target, BlindKey, blindDuration, false);
 
         // Apply firestacks
-        if (TryComp(target, out FlammableComponent? flammable))
-            flammable.FireStacks += aimedEffect.FireStacksOnHit;
+        if (TryComp(ent, out IgniteOnProjectileHitComponent? ignite))
+        {
+            ignite.Stacks += aimedEffect.FireStacksOnHit;
+        }
     }
 
     /// <summary>
