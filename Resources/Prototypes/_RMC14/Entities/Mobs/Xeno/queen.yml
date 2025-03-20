@@ -230,6 +230,8 @@
     debuffModifier: 1.4
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 1.4
+  - type: Bloodstream
+    bloodReagent: [RMCXenoBloodRoyal, RMCPlasmaRoyal, RMCPlasmaChitin, RMCPlasmaPheromone, RMCPlasmaNeurotoxin]
 
 - type: entity
   id: XenoLeaderPheromoneRelay

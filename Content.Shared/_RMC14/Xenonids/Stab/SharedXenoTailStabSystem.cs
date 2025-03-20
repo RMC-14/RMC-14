@@ -190,6 +190,9 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
 
                     if (stab.Comp.InjectNeuro)
                     {
+                        if (HasComp<NeurotoxinImmunityComponent>(hit))
+                            continue;
+
                         if (!TryComp<NeurotoxinInjectorComponent>(stab, out var neuroTox))
                            continue;
 

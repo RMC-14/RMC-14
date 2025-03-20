@@ -131,3 +131,5 @@
     prefix: carrier
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.2
+  - type: Bloodstream
+    bloodReagent: [RMCXenoBlood, RMCPlasmaPurple]

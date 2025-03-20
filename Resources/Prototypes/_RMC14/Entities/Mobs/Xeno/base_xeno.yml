@@ -298,6 +298,15 @@
   - type: RMCCanBeFultoned
   - type: CMArmor
   - type: CriticalGraceTime
+  - type: Bloodstream
+    bloodReagent: [RMCXenoBlood]
+    bloodMaxVolume: 560
+    maxBleedAmount: 50
+    bleedReductionAmount: 5
+    bloodRefreshAmount: 5
+    bloodlossThreshold: 0 # TODO: no blood-loss damage for now
+    bloodlossDamage: {}
+    bloodlossHealDamage: {}
 
 - type: entity
   abstract: true

@@ -1,4 +1,6 @@
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Storage;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Medical.BiomassReclaimer
 {
@@ -37,7 +39,7 @@ namespace Content.Server.Medical.BiomassReclaimer
         /// The reagent that will be spilled while processing a mob.
         /// </summary>
         [ViewVariables]
-        public string? BloodReagent;
+        public ProtoId<ReagentPrototype>[] BloodReagent = [];
 
         /// <summary>
         /// Entities that can be randomly spawned while processing a mob.
