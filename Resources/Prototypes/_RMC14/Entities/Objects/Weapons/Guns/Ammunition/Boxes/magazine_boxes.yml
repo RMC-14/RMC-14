@@ -315,13 +315,13 @@
     - state: rifle_box_54
       color: "#ffcb26"
     - state: rifle_box_marking
-      color: "#435290"
+      color: "#ffcb26"
     - state: rifle_lid
       map: [ "lid" ]
       color: "#7b8246"
     - state: rifle_lid_marking
       map: [ "lid_marking" ]
-      color: "#435290"
+      color: "#ffcb26"
   - type: CMItemSlots
     count: 8
     slot:
@@ -453,13 +453,13 @@
     - state: rifle_box_spr
       color: "#ffcb26"
     - state: rifle_box_marking
-      color: "#435290"
+      color: "#ffcb26"
     - state: rifle_lid
       map: [ "lid" ]
       color: "#695d42"
     - state: rifle_lid_marking
       map: [ "lid_marking" ]
-      color: "#435290"
+      color: "#ffcb26"
   - type: CMItemSlots
     count: 12
     slot:
@@ -634,13 +634,13 @@
     - state: smg_box_63
       color: "#ffcb26"
     - state: smg_box_marking
-      color: "#435290"
+      color: "#ffcb26"
     - state: smg_lid
       map: [ "lid" ]
       color: "#727e90"
     - state: smg_lid_marking
       map: [ "lid_marking" ]
-      color: "#435290"
+      color: "#ffcb26"
   - type: CMItemSlots
     count: 10
     slot:
