@@ -1,6 +1,8 @@
 using Robust.Shared.GameStates;
 using Content.Shared.FixedPoint;
 using Content.Shared.EntityEffects;
+using Content.Shared.Alert;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Medical.Pain
 {
@@ -50,6 +52,9 @@ namespace Content.Shared._RMC14.Medical.Pain
 
         [DataField(required: true, serverOnly: true)]
         public List<EntityEffect> PainLevels = new(0);
+
+        [DataField, AutoNetworkedField]
+        public ProtoId<AlertPrototype> Alert = "Pain";
     }
 
     [DataDefinition]

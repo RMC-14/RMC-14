@@ -6,6 +6,7 @@ using Robust.Shared.Timing;
 using Robust.Shared.Random;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Alert;
 
 namespace Content.Shared._RMC14.Medical.Pain;
 
@@ -14,6 +15,7 @@ public sealed partial class PainSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly AlertsSystem _alerts = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
@@ -85,7 +87,10 @@ public sealed partial class PainSystem : EntitySystem
 
         pain.LastPainLevelUpdateTime = _timing.CurTime;
         pain.CurrentPainLevel += level.CompareTo(pain.CurrentPainLevel);
+
+        _alerts.ShowAlert(uid, pain.Alert, (short)pain.CurrentPainLevel);
     }
+
     public void AddPainReductionModificator(EntityUid uid, PainReductionModificator mod, PainComponent? pain = null)
     {
         if (!Resolve(uid, ref pain))
