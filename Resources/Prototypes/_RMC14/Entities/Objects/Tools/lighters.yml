@@ -27,6 +27,10 @@
     slots:
     - suitstorage
   - type: RMCLighter
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/lighter.rsi
+      state: helmet
 
 - type: entity
   name: cheap lighter
@@ -98,6 +102,10 @@
           lighter_u_on: ""
         open:
           lighter_u_on: ""
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/lighter.rsi
+      state: helmet
 
 - type: entity
   name: We-Ya executive zippo lighter
