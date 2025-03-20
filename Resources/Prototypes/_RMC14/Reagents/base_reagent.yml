@@ -24,6 +24,12 @@
 - type: reagent
   abstract: true
   parent: CMReagent
+  id: RMCReagentBotanical
+  group: Botanical
+
+- type: reagent
+  abstract: true
+  parent: CMReagent
   id: RMCReagentPyrotechnic
   group: Pyrotechnic
   

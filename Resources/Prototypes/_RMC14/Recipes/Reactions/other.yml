@@ -1,0 +1,19 @@
+- type: reaction
+  id: RMCHexamine
+  reactants:
+    RMCAmmonia:
+      amount: 2
+    RMCFormaldehyde:
+      amount: 3
+  products:
+    RMCHexamine: 3
+    
+- type: reaction
+  id: RMCGlycerol
+  reactants:
+    Cornoil:
+      amount: 3
+    RMCSulphuricAcid:
+      amount: 1
+  products:
+    RMCGlycerol: 1
