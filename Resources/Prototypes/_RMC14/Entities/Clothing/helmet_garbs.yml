@@ -224,7 +224,7 @@
   parent: RMCHelmetGarbBase
   id: RMCHelmetGarbGasmask
   name: M5 integrated gasmask
-  description: The UNMC had its funding pulled for these when it became apparent that not every deployed enlisted was wearing a helmet 24/7; much to the bafflement of UA High Command.
+  description: The UNMC had its funding pulled for these when it became apparent that not every deployed enlisted was wearing a helmet 24/7; much to the bafflement of UN High Command.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask.rsi
