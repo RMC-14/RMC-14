@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed breaching shells having no spread bullets, too much damage, and
-      no falloff
-    type: Fix
-  id: 969
-  time: '2024-11-15T02:42:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4819
-- author: Vermidia
-  changes:
   - message: Fixed Boilers not exploding into acid gas on death.
     type: Add
   id: 970
@@ -5295,5 +5287,12 @@
   id: 1471
   time: '2025-03-15T21:46:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5909
+- author: OmerF-afk
+  changes:
+  - message: Fixed Trijent Dam not loading.
+    type: Fix
+  id: 1472
+  time: '2025-03-17T05:30:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5927
 Name: RMC14
 Order: -1
