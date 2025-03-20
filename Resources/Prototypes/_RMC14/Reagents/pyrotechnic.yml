@@ -1,6 +1,6 @@
 # TODO RMC14 other effects
 - type: reagent
-  parent: [ CMReagent, BasePyrotechnic ]
+  parent: [ RMCReagentPyrotechnic ]
   id: RMCPhoron
   name: reagent-name-rmcphoron
   desc: reagent-desc-rmcphoron
@@ -21,13 +21,13 @@
       effects:
       - !type:HealthChange
         damage:
-          types:
-            Poison: 0.25
+          groups:
+            Toxin: 0.25
       - !type:FlammableReaction
         multiplier: 0.2
 
 - type: reagent
-  parent: [ CMReagent, BasePyrotechnic ]
+  parent: [ RMCReagentPyrotechnic ]
   id: RMCNapalmUT
   name: reagent-name-rmcnapalmut
   desc: reagent-desc-rmcnapalmut
@@ -36,3 +36,70 @@
   color: "#DD9B00"
   intensity: 30
   duration: 20
+
+- type: reagent
+  parent: [ RMCReagentPyrotechnic ]
+  id: RMCNapalm
+  name: reagent-name-rmcnapalm
+  desc: reagent-desc-rmcnapalm
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#ffb300"
+
+
+- type: reagent
+  parent: [ RMCReagentPyrotechnic ]
+  id: RMCNapalmSticky
+  name: reagent-name-rmcnapalm-sticky
+  desc: reagent-desc-rmcnapalm-sticky
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#f8e3b2"
+  intensity: 15
+  duration: 50
+  
+- type: reagent
+  parent: [ RMCReagentPyrotechnic ]
+  id: RMCNapalmHC
+  name: reagent-name-rmcnapalm-high-combustion
+  desc: reagent-desc-rmcnapalm-high-combustion
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#c51c1c"
+  intensity: 45
+  duration: 10
+
+- type: reagent
+  parent: [ RMCReagentPyrotechnic ]
+  id: RMCThermite
+  name: reagent-name-rmcthermite
+  desc: reagent-desc-rmcthermite
+  physicalDesc: reagent-physical-desc-powdery
+  color: "#673910"
+  metabolisms:
+    Poison:
+      metabolismRate: 0.1
+      effects:
+      - !type:HealthChange
+        damage:
+          groups:
+            Burn: 0.5
+            
+- type: reagent
+  parent: [ RMCReagentPyrotechnic ]
+  id: RMCChlorineTrifluoride
+  name: reagent-name-rmc-chlorine-trifluoride
+  desc: reagent-desc-rmc-chlorine-trifluoride
+  physicalDesc: reagent-physical-desc-blazing
+  color: "#00FFFF"
+  intensity: 54 # Oxidizing 9
+  duration: -18 # Oxidizing 9
+  metabolisms:
+    Poison:
+      metabolismRate: 0.05
+      effects:
+      - !typeHealthChange
+        damage:
+          groups:
+            Burn: 2.0
+            Toxin: 1.5

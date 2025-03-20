@@ -17,7 +17,7 @@
         probability: 0
 
 - type: reagent
-  parent: RMCReagentElement
+  parent: [ RMCReagentElement, BasePyrotechnic ]
   id: RMCCarbon
   name: reagent-name-carbon
   group: Elements
@@ -32,6 +32,8 @@
       effects:
       - !type:ChemVomit
         probability: 0
+  intensityMod: 0
+  durationMod: 1
 
 - type: reagent
   parent: RMCReagentElement

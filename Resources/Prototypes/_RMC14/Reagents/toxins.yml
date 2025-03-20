@@ -1,5 +1,5 @@
 ﻿- type: reagent
-  parent: CMReagent
+  parent: RMCReagentToxin
   id: RMCMolecularAcid
   name: reagent-name-rmcmolecularacid
   desc: reagent-desc-rmcmolecularacid
@@ -21,3 +21,62 @@
         visualType: SmallCaution
         messages: [ "rmc-body-stings" ]
         probability: 0.2
+        
+- type: reagent
+  parent: RMCReagentToxin
+  id: RMCPolytrinicAcid
+  name: reagent-name-rmcpolytrinic-acid
+  desc: reagent-desc-rmcpolytrinic-acid
+  physicalDesc: reagent-physical-desc-acidic
+  color: "#8E18A9"
+  metabolisms:
+    Poison:
+      metabolismRate: 0.1
+      effects:
+      #TODO Melt probability 30
+      - !type:HealthChange
+        damage:
+          groups:
+            Toxin: 0.50 # Toxic 2
+            Burn: 0.75 # Corrosive 3
+      - !type:PopupMessage
+        type: Local
+        visualType: SmallCaution
+        messages: [ "rmc-body-stings" ]
+        probability: 0.2
+        
+- type: reagent
+  parent: RMCReagentToxin
+  id: RMCFormaldehyde
+  name: reagent-name-rmcformaldehyde
+  desc: reagent-desc-rmcformaldehyde
+  physicalDesc: reagent-physical-desc-gaseous
+  color: "#808080"
+  metabolisms:
+    Poison:
+      metabolismRate: 0.1
+      effects:
+      #TODO Melt probability 30
+      - !type:HealthChange
+        damage:
+          groups:
+            Toxin: 0.25 # Toxic 1
+            #Clone: 0.25 Carcinogenic 1
+            
+- type: reagent
+  parent: RMCReagentToxin
+  id: RMCParaformaldehyde
+  name: reagent-name-rmcparaformaldehyde
+  desc: reagent-desc-rmcparaformaldehyde
+  physicalDesc: reagent-physical-desc-pungent
+  color: "#E0E0E0"
+  metabolisms:
+    Poison:
+      metabolismRate: 0.1
+      effects:
+      #TODO Melt probability 30
+      - !type:HealthChange
+        damage:
+          groups:
+            Toxin: 0.25 # Toxic 1
+            #Clone: 0.25 Carcinogenic 1
