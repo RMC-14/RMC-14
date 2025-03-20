@@ -348,22 +348,13 @@
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/urban.rsi
 
 - type: entity
-  parent: CMArmorM2MP
+  parent: RMCArmorM3CO
   id: RMCArmorM3LCO
   name: M3-L pattern commanding officer armor
-  description: A lightweight variant of M3 Pattern Commanding Officer Armor. A Robust, well-polished suit of armor for the Commanding Officer. Custom-made to fit its owner with special straps to operate a smartgun. Show those Marines who's really in charge.
+  description: A variant of M3 Pattern Commanding Officer Armor. A Robust, well-polished suit of armor for the Commanding Officer. Custom-made to fit its owner with special straps to operate a smartgun. Show those Marines who's really in charge.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co-light/jungle.rsi
-  - type: CMArmor
-    armor: 30
-    bio: 20
-    explosionArmor: 15
-  - type: SmartGunArmor
-  - type: Storage
-    maxItemSize: Small
-    grid:
-    - 0,0,5,1 # 3 slots
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co-light/jungle.rsi
