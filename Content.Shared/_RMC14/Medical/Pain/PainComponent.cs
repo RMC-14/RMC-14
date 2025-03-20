@@ -53,7 +53,7 @@ namespace Content.Shared._RMC14.Medical.Pain
         [DataField(required: true, serverOnly: true)]
         public List<EntityEffect> PainLevels = new(0);
 
-        [DataField, AutoNetworkedField]
+        [DataField]
         public ProtoId<AlertPrototype> Alert = "Pain";
     }
 
