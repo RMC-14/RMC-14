@@ -31,10 +31,10 @@ public sealed class RMCTargetingSystem : SharedRMCTargetingSystem
         if(!sprite.LayerExists(TargetedKey) || !sprite.LayerExists(TargetedDirectionKey))
             return;
 
-        var coords = _transform.GetMoverCoordinates(ent);
+        var coords = _transform.GetMoverCoordinateRotation(ent, Transform(ent));
         var sourceCoords = _transform.GetMoverCoordinates(ent.Comp.TargetedBy.Last());
-        var direction = coords.Position - sourceCoords.Position;
-        var angle = direction.ToAngle().GetCardinalDir().GetClockwise90Degrees().ToAngle();
+        var direction = coords.Coords.Position - sourceCoords.Position;
+        var angle = direction.ToAngle().GetCardinalDir().GetClockwise90Degrees().ToAngle() - coords.worldRot;
 
         sprite.LayerSetRotation(TargetedKey, angle);
         sprite.LayerSetRotation(TargetedDirectionKey, angle);

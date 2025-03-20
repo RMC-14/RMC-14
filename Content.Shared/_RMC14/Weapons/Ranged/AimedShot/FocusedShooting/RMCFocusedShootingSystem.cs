@@ -33,11 +33,13 @@ public sealed class RMCFocusedShootingSystem : EntitySystem
             Dirty(ent, targetingLaser);
         }
 
-        if (focusCounter >= 1 && args.TargetedEffect == TargetedEffects.Targeted)
-        {
-            args.TargetedEffect += 1;
-            args.DirectionEffect += 1;
-        }
+        if (focusCounter < 1 || args.TargetedEffect != TargetedEffects.Targeted)
+            return;
+
+        args.TargetedEffect = TargetedEffects.TargetedIntense;
+
+        if (args.DirectionEffect == DirectionTargetedEffects.DirectionTargeted)
+            args.DirectionEffect = DirectionTargetedEffects.DirectionTargetedIntense;
     }
 
     /// <summary>

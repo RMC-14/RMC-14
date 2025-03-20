@@ -215,7 +215,7 @@
   - type: CMArmorPiercing
     amount: 20
   - type: IgniteOnProjectileHit
-    intensity: 40
+    stacks: 40
   - type: AimedShotEffect
     extraHits: 0
     fireStacksOnHit: 10
