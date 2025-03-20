@@ -8,4 +8,5 @@ namespace Content.Shared._RMC14.Medical.TemporaryBlurryVision;
 [NetworkedComponent, RegisterComponent]
 public sealed partial class TemporaryBlurryVisionComponent : Component
 {
+    public float Blur = 0;
 }

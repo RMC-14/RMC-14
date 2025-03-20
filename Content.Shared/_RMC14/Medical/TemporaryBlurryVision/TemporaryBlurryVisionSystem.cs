@@ -6,9 +6,10 @@ namespace Content.Shared._RMC14.Medical.TemporaryBlurryVision;
 public sealed class TemporaryBlurrySystem : EntitySystem
 {
     [ValidatePrototypeId<StatusEffectPrototype>]
-    public const string BlurryVisionStatusEffect = "TemporaryBlurryVision";
+    public const string TemporaryBlurryVisionKey = "TemporaryBlurryVision";
 
-    [Dependency] private readonly BlindableSystem _blindableSystem = default!;
+    [Dependency] private readonly BlurryVisionSystem _blur = default!;
+    [Dependency] private readonly StatusEffectsSystem _statusEffectsSystem = default!;
 
     public override void Initialize()
     {
@@ -16,22 +17,41 @@ public sealed class TemporaryBlurrySystem : EntitySystem
 
         SubscribeLocalEvent<TemporaryBlurryVisionComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<TemporaryBlurryVisionComponent, ComponentShutdown>(OnShutdown);
-        SubscribeLocalEvent<TemporaryBlurryVisionComponent, CanSeeAttemptEvent>(OnBlindTrySee);
+        SubscribeLocalEvent<TemporaryBlurryVisionComponent, GetBlurEvent>(OnBlurUpdate);
     }
 
     private void OnStartup(EntityUid uid, TemporaryBlurryVisionComponent component, ComponentStartup args)
     {
-        _blindableSystem.UpdateIsBlind(uid);
+        _blur.UpdateBlurMagnitude(uid);
     }
 
     private void OnShutdown(EntityUid uid, TemporaryBlurryVisionComponent component, ComponentShutdown args)
     {
-        _blindableSystem.UpdateIsBlind(uid);
+        _blur.UpdateBlurMagnitude(uid);
     }
 
-    private void OnBlindTrySee(EntityUid uid, TemporaryBlurryVisionComponent component, CanSeeAttemptEvent args)
+    private void OnBlurUpdate(EntityUid uid, TemporaryBlurryVisionComponent component, GetBlurEvent args)
     {
         if (component.LifeStage <= ComponentLifeStage.Running)
-            args.Cancel();
+            args.Blur = Math.Max(component.Blur, args.Blur);
+    }
+
+    public void TryApplyBlindness(EntityUid uid, float blur, float seconds, StatusEffectsComponent? status = null)
+    {
+        if (!Resolve(uid, ref status, false))
+            return;
+
+        if (!_statusEffectsSystem.HasStatusEffect(uid, TemporaryBlurryVisionKey, status))
+        {
+            _statusEffectsSystem.TryAddStatusEffect<TemporaryBlurryVisionComponent>(uid, TemporaryBlurryVisionKey, TimeSpan.FromSeconds(seconds), true, status);
+            if (TryComp<TemporaryBlurryVisionComponent>(uid, out var comp))
+                comp.Blur = blur;
+        }
+        else
+        {
+            _statusEffectsSystem.TryAddTime(uid, TemporaryBlurryVisionKey, TimeSpan.FromSeconds(seconds), status);
+            if (TryComp<TemporaryBlurryVisionComponent>(uid, out var comp))
+                comp.Blur = blur;
+        }
     }
 }

@@ -181,9 +181,8 @@
       conditions:
       - !type:PainLevel
         level: 4
-    - !type:GenericStatusEffect
-      key: EyeBlur
-      component: BlurryVision
+    - !type:TemporaryBlurryVision
+      blur: 3
       time: 4
       conditions:
       - !type:PainLevel
@@ -215,9 +214,8 @@
       conditions:
       - !type:PainLevel
         level: 5
-    - !type:GenericStatusEffect
-        key: EyeBlur
-        component: BlurryVision
+    - !type:TemporaryBlurryVision
+        blur: 5
         time: 4
         conditions:
         - !type:PainLevel
@@ -229,6 +227,14 @@
         conditions:
         - !type:PainLevel
           level: 5
+    - !type:GenericStatusEffect
+        key: PainKnockOut
+        component: PainKnockOut
+        probability: 0.001
+        time: 6
+        conditions:
+        - !type:PainLevel
+          level: 6
     - !type:HealthChange
       damage:
         types:
@@ -266,6 +272,12 @@
     - !type:GenericStatusEffect
         key: PainKnockOut
         component: PainKnockOut
+        time: 4
+        conditions:
+        - !type:PainLevel
+          level: 6
+    - !type:TemporaryBlurryVision
+        blur: 5
         time: 4
         conditions:
         - !type:PainLevel
