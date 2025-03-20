@@ -150,7 +150,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
 
     private void OnMobGibbedByExplosionReceived(Entity<MobGibbedByExplosionTypeComponent> ent, ref ExplosionReceivedEvent args)
     {
-        if (args.Explosion != ent.Comp.Explosion)
+        if (Array.IndexOf(ent.Comp.Explosions, args.Explosion) == -1)
             return;
 
         var total = FixedPoint2.Zero;

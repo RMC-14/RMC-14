@@ -12,6 +12,7 @@
     - state: "off"
     - state: "normal-unshaded"
   - type: CMAutomatedVendor
+    hackable: true
     sections:
     - name: WalkMan
       entries: []
@@ -19,7 +20,7 @@
       entries: []
     #TODO RMC14 Walkman and music
     - name: Other
-      entries: 
+      entries:
       - id: CMPaper
         amount: 15
       - id: CMPen

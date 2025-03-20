@@ -1,0 +1,57 @@
+# base
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCRandomHumanoidBase
+  components:
+  - type: GhostRolePreventCryoSleep
+  - type: GhostRoleApplySpecial
+
+# squads
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCAlphaBase
+  components:
+  - type: GhostRoleApplySpecial
+    squad: SquadAlpha
+
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCBravoBase
+  components:
+  - type: GhostRoleApplySpecial
+    squad: SquadBravo
+
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCCharlieBase
+  components:
+  - type: GhostRoleApplySpecial
+    squad: SquadCharlie
+
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCDeltaBase
+  components:
+  - type: GhostRoleApplySpecial
+    squad: SquadDelta
+
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCEchoBase
+  components:
+  - type: GhostRoleApplySpecial
+    squad: SquadEcho
+
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCFoxtrotBase
+  components:
+  - type: GhostRoleApplySpecial
+    squad: SquadFoxtrot
+
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCIntelBase
+  components:
+  - type: GhostRoleApplySpecial
+    squad: SquadIntel

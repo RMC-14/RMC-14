@@ -63,6 +63,7 @@
       # if ConveyorBeltAssembly becomes craftable, maybe spawn some of the ingredients?
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: IgnorePredictionHit
 
 - type: entity
   id: ConveyorBeltAssembly
