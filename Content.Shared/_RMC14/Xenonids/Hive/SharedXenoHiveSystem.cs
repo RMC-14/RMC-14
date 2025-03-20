@@ -236,6 +236,12 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         return null;
     }
 
+    public void ResetHiveCoreCooldown(Entity<HiveComponent> hive)
+    {
+        hive.Comp.NewCoreAt = _timing.CurTime;
+        Dirty(hive);
+    }
+
     public bool TryGetStructureLimit(Entity<HiveComponent> hive, EntProtoId structureProtoId, out int limit)
     {
         return hive.Comp.HiveStructureSlots.TryGetValue(structureProtoId, out limit);

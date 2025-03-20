@@ -390,7 +390,8 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
 
         if (!TryComp(ent, out XenoWeedsComponent? weedComp) ||
             Prototype(weededEntity) is not EntityPrototype weededEntityProto ||
-            !comp.ReplacementPairs.TryGetValue(weededEntityProto.ID, out var replacementId))
+            !comp.ReplacementPairs.TryGetValue(weededEntityProto.ID, out var replacementId) ||
+            TerminatingOrDeleted(weedSource))
         {
             return;
         }
