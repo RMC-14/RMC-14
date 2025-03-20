@@ -7,6 +7,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Chat;
 using Content.Shared._RMC14.Xenonids.Devour;
+using Robust.Shared.GameObjects;
 
 namespace Content.Shared._RMC14.Medical.Pain;
 
@@ -14,7 +15,6 @@ public sealed class PainKnockOutSystem : EntitySystem
 {
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly SharedSuicideSystem _suicide = default!;
 
     [ValidatePrototypeId<StatusEffectPrototype>]
@@ -42,8 +42,11 @@ public sealed class PainKnockOutSystem : EntitySystem
 
     private void OnDevour(Entity<PainKnockOutComponent> ent, ref XenoDevouredEvent args)
     {
-        if (HasComp<DamageableComponent>(ent))
-            OxyKill(ent);
+        if (TryComp<DamageableComponent>(args.Target, out var damageable))
+        {
+            var devoured = new Entity<DamageableComponent>(args.Target, damageable);
+            OxyKill(devoured);
+        }
     }
 
     private void OxyKill(Entity<DamageableComponent> ent)
