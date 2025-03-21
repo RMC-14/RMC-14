@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Aurallianz
-  changes:
-  - message: 'Boots can now hold: Screwdriver, Scalpel, ThrowingKnife & Holdout Pistol.'
-    type: Fix
-  - message: 'Mouth slot can now hold: Screwdriver.'
-    type: Fix
-  id: 973
-  time: '2024-11-15T05:04:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4811
 - author: CyberTropic
   changes:
   - message: Added a box for M84 CAS flares.
@@ -5293,5 +5284,14 @@
   id: 1475
   time: '2025-03-21T05:54:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5936
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed M15 grenades not fitting in the m79 and grenadier spec launcher.
+    type: Fix
+  - message: Fixed airburst grenades not fitting in the U1 UGL.
+    type: Fix
+  id: 1476
+  time: '2025-03-21T20:03:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5966
 Name: RMC14
 Order: -1
