@@ -12,7 +12,7 @@
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidNormal
       plasmaCost: 100
-      time: 225 # seconds or 3.75 minutes
+      time: 50 # seconds
       dps: 8
       expendableLightDps: 2.5
     checkCanInteract: false
@@ -31,7 +31,7 @@
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidWeak
       plasmaCost: 75
-      time: 562.5 # seconds or 9.375 minutes
+      time: 125 # seconds or 2~ minutes
       dps: 4
       expendableLightDps: 0.3
     checkCanInteract: false
@@ -50,7 +50,7 @@
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidStrong
       plasmaCost: 125
-      time: 90 # seconds or 1.5 minutes
+      time: 20 # seconds
       dps: 20
       expendableLightDps: 23.4375
     checkCanInteract: false
@@ -71,7 +71,7 @@
       plasmaCost: 0
       energyCost: 100
       applyTimeMultiplier: 0.25
-      time: 90 # seconds or 1.5 minutes
+      time: 20 # seconds
       dps: 20
       expendableLightDps: 23.4375
     checkCanInteract: false

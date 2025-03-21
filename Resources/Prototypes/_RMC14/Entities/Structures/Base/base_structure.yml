@@ -123,6 +123,7 @@
   - type: Corrodible
     isCorrodible: true
     structure: true
+    meltTimeMult: 3
   - type: Clickable
   - type: RMCWallExplosionDeletable
   - type: DestroyedByExplosionType
