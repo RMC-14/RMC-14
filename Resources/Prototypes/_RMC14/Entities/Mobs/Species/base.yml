@@ -230,7 +230,7 @@
     - !type:GenericStatusEffect
         key: PainKnockOut
         component: PainKnockOut
-        probability: 0.001
+        probability: 0.01
         time: 6
         conditions:
         - !type:PainLevel
