@@ -15,7 +15,6 @@ entities:
     - type: MetaData
       name: grid
     - type: Transform
-      parent: 1
     - type: MapGrid
       chunks:
         0,0:
