@@ -418,6 +418,15 @@ namespace Content.Client.Lobby.UI
 
             #endregion
 
+            #region QueenName
+
+            QueenNameButton.OnPressed += args =>
+            {
+                SetQueenName(args.Button.Pressed);
+            };
+
+            #endregion
+
             #region Xeno Prefix
 
             XenoPrefix.OnTextChanged += args =>
@@ -870,6 +879,7 @@ namespace Content.Client.Lobby.UI
             UpdateCMarkingsFacialHair();
             UpdateNamedItems();
             UpdatePlaytimePerks();
+            UpdateQueenName();
             UpdateXenoPrefix();
             UpdateXenoPostfix();
 
@@ -1362,6 +1372,12 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
+        private void SetQueenName(bool queenName)
+        {
+            Profile = Profile?.WithQueenName(queenName);
+            SetDirty();
+        }
+
         private void SetXenoPrefix(string prefix)
         {
             Profile = Profile?.WithXenoPrefix(prefix);
@@ -1715,6 +1731,11 @@ namespace Content.Client.Lobby.UI
         private void UpdatePlaytimePerks()
         {
             PlaytimePerksButton.Pressed = Profile?.PlaytimePerks ?? true;
+        }
+
+        private void UpdateQueenName()
+        {
+            QueenNameButton.Pressed = Profile?.QueenName ?? true;
         }
 
         private void UpdateXenoPrefix()

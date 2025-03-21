@@ -287,6 +287,7 @@ namespace Content.Server.Database
                     SentryName = profile.NamedItems?.SentryName,
                 },
                 profile.PlaytimePerks,
+                profile.QueenName,
                 profile.XenoPrefix,
                 profile.XenoPostfix
             );
@@ -382,6 +383,7 @@ namespace Content.Server.Database
             };
 
             profile.PlaytimePerks = humanoid.PlaytimePerks;
+            profile.QueenName = humanoid.QueenName;
             profile.XenoPrefix = humanoid.XenoPrefix;
             profile.XenoPostfix = humanoid.XenoPostfix;
 
