@@ -248,6 +248,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/boiler/jungle.rsi
   - type: FoldableClothing
     foldedEquippedPrefix: sleeves
+  - type: Appearance
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Uniforms/boiler/jungle.rsi
