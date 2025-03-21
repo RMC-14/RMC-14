@@ -1,36 +1,4 @@
 ﻿Entries:
-- author: Aurallianz
-  changes:
-  - message: 'Boots can now hold: Screwdriver, Scalpel, ThrowingKnife & Holdout Pistol.'
-    type: Fix
-  - message: 'Mouth slot can now hold: Screwdriver.'
-    type: Fix
-  id: 973
-  time: '2024-11-15T05:04:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4811
-- author: CyberTropic
-  changes:
-  - message: Added a box for M84 CAS flares.
-    type: Add
-  - message: Made MRE and Flare boxes constructable from cardboard.
-    type: Add
-  - message: Fixed visuals for undeployed MRE and Flare boxes.
-    type: Fix
-  - message: Fixed spent CAS flares not being able to be picked up.
-    type: Fix
-  - message: Fixed being able to put CAS flares in regular flare pouches and vice
-      versa
-    type: Fix
-  id: 974
-  time: '2024-11-15T05:12:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4756
-- author: CyberTropic
-  changes:
-  - message: Added some filtration props
-    type: Add
-  id: 975
-  time: '2024-11-15T05:29:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4671
 - author: Vermidia
   changes:
   - message: Fixed bodybags and stasisbags stopping rot
@@ -5293,5 +5261,28 @@
   id: 1475
   time: '2025-03-21T05:54:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5936
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed M15 grenades not fitting in the m79 and grenadier spec launcher.
+    type: Fix
+  - message: Fixed airburst grenades not fitting in the U1 UGL.
+    type: Fix
+  id: 1476
+  time: '2025-03-21T20:03:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5966
+- author: DrSmugleaf
+  changes:
+  - message: Added 58 more random Avali names.
+    type: Add
+  id: 1477
+  time: '2025-03-21T20:39:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5974
+- author: mmails
+  changes:
+  - message: Moves mess tech from planned to complete in the roadmap
+    type: Fix
+  id: 1478
+  time: '2025-03-21T20:40:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5920
 Name: RMC14
 Order: -1
