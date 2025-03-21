@@ -7,6 +7,7 @@ using Robust.Shared.Random;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Alert;
+using Content.Shared.Mobs.Systems;
 
 namespace Content.Shared._RMC14.Medical.Pain;
 
@@ -16,6 +17,7 @@ public sealed partial class PainSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
@@ -160,8 +162,12 @@ public sealed partial class PainSystem : EntitySystem
         var query = EntityQueryEnumerator<PainComponent>();
         while (query.MoveNext(out var uid, out var pain))
         {
+            if (_mobState.IsDead(uid))
+                continue;
+
             if (_timing.CurTime < pain.NextEffectUpdateTime)
                 continue;
+
             pain.NextEffectUpdateTime = _timing.CurTime + pain.EffectUpdateRate;
 
             var args = new EntityEffectBaseArgs(uid, EntityManager);
