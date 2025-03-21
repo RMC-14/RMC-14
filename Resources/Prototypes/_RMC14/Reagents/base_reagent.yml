@@ -14,3 +14,27 @@
   parent: CMReagent
   id: RMCReagentElement
   group: Elements
+
+- type: reagent
+  abstract: true
+  parent: CMReagent
+  id: RMCReagentToxin
+  group: Toxins
+  
+- type: reagent
+  abstract: true
+  parent: CMReagent
+  id: RMCReagentBotanical
+  group: Botanical
+
+- type: reagent
+  abstract: true
+  parent: CMReagent
+  id: RMCReagentPyrotechnic
+  group: Pyrotechnic
+  
+- type: reagent
+  abstract: true
+  parent: CMReagent
+  id: RMCReagentOther
+  group: Others
