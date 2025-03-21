@@ -6,17 +6,14 @@ using static Robust.Client.UserInterface.Controls.BaseButton;
 namespace Content.Client._RMC14.Xenonids.Word;
 
 [UsedImplicitly]
-public sealed class XenoWordQueenBui : BoundUserInterface
+public sealed class XenoWordQueenBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     [ViewVariables]
     private XenoWordQueenWindow? _window;
 
-    public XenoWordQueenBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
-    {
-    }
-
     protected override void Open()
     {
+        base.Open();
         _window = new XenoWordQueenWindow();
         _window.OnClose += Close;
 

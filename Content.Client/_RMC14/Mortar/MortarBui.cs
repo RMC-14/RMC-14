@@ -12,6 +12,7 @@ public sealed class MortarBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
 
     protected override void Open()
     {
+        base.Open();
         _window = this.CreateWindow<MortarWindow>();
 
         Refresh();
