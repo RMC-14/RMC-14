@@ -33,7 +33,7 @@
         RMCSkillFireman: 1
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetCivilian
-    - type: Survivor
+    - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: UserIFF
       faction: FactionSurvivor

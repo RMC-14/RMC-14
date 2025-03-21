@@ -2,10 +2,9 @@ using System.Numerics;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
-using Content.Shared.ActionBlocker;
-using Content.Shared.Actions;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage.Systems;
-using Content.Shared.Movement.Systems;
+using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Standing;
@@ -16,7 +15,6 @@ using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
-using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Stun;
 
@@ -25,23 +23,20 @@ public sealed class RMCSizeStunSystem : EntitySystem
     private const double DazedMultiplierSmallXeno = 0.7;
     private const double DazedMultiplierBigXeno = 1.2;
 
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly StandingStateSystem _stand = default!;
-    [Dependency] private readonly StaminaSystem _stamina = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly RMCDazedSystem _dazed = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private readonly RMCSlowSystem _slow = default!;
+    [Dependency] private readonly StaminaSystem _stamina = default!;
+    [Dependency] private readonly StandingStateSystem _stand = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly ThrowingSystem _throwing = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -50,6 +45,8 @@ public sealed class RMCSizeStunSystem : EntitySystem
         SubscribeLocalEvent<RMCStunOnHitComponent, MapInitEvent>(OnSizeStunMapInit);
         SubscribeLocalEvent<RMCStunOnHitComponent, ProjectileHitEvent>(OnHit);
         SubscribeLocalEvent<RMCStunOnHitComponent, RMCTriggerEvent>(OnTrigger);
+
+        SubscribeLocalEvent<RMCStunOnTriggerComponent, RMCTriggerEvent>(OnStunOnTrigger);
     }
 
     public bool IsHumanoidSized(Entity<RMCSizeComponent> ent)
@@ -190,5 +187,29 @@ public sealed class RMCSizeStunSystem : EntitySystem
             KnockBack(target, ent.Comp.ShotFrom, ent.Comp.KnockBackPowerMin, ent.Comp.KnockBackPowerMax, ent.Comp.KnockBackSpeed);
             break;
         }
+    }
+
+    private void OnStunOnTrigger(Entity<RMCStunOnTriggerComponent> ent, ref RMCTriggerEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        var query = _entityLookup.GetEntitiesInRange(ent, ent.Comp.Range);
+        var stunTime = TimeSpan.FromSeconds(ent.Comp.Duration);
+
+        foreach (var entity in query)
+        {
+            if (HasComp<XenoComponent>(entity))
+                continue;
+
+            var transform = Transform(entity);
+            if (!_random.Prob(ent.Comp.Probability) || !_interaction.InRangeUnobstructed(ent, transform.Coordinates, ent.Comp.Range))
+                continue;
+
+            _stun.TryStun(entity, stunTime, true);
+            _stun.TryKnockdown(entity, stunTime, true);
+        }
+
+        args.Handled = true;
     }
 }

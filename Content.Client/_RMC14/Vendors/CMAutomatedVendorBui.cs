@@ -39,6 +39,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         _window = new CMAutomatedVendorWindow();
         _window.OnClose += Close;
         _window.Title = EntMan.GetComponentOrNull<MetaDataComponent>(Owner)?.EntityName ?? "ColMarTech Vendor";

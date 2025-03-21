@@ -1,6 +1,5 @@
 using Content.Shared.Inventory;
 using Robust.Shared.GameObjects;
-using Robust.Shared.Map;
 
 namespace Content.IntegrationTests.Tests
 {
@@ -78,7 +77,7 @@ namespace Content.IntegrationTests.Tests
             EntityUid belt = default;
 
             InventorySystem invSystem = default!;
-            var mapMan = server.ResolveDependency<IMapManager>();
+            var mapSystem = server.System<SharedMapSystem>();
             var entityMan = server.ResolveDependency<IEntityManager>();
 
             await server.WaitAssertion(() =>
@@ -146,7 +145,7 @@ namespace Content.IntegrationTests.Tests
                     Assert.That(!invSystem.TryGetSlotEntity(human, "belt", out _));
                 });
 
-                mapMan.DeleteMap(testMap.MapId);
+                mapSystem.DeleteMap(testMap.MapId);
             });
 
             await pair.CleanReturnAsync();
