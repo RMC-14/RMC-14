@@ -445,3 +445,54 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack_welder.rsi
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelSPP
+  name: UCP3 combat pack
+  description: An SPP military standard-issue Union Combat Pack MK3.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/SPP/standard.rsi
+
+- type: entity
+  parent: RMCSatchelSPP
+  id: RMCSatchelSPPRifleman
+  suffix: Filled, Rifleman
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMRE
+    - id: CMFireExtinguisherPortable
+    - id: CMPackFlare
+    - id: CMPackFlare
+
+- type: entity
+  parent: RMCSatchelSPP
+  id: RMCSatchelSPPMedic
+  suffix: Filled, Medic
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMRE
+    - id: CMDefibrillator
+    - id: CMAdvFirstAidKitFilled
+    - id: CMRollerBedSpawnFolded
+
+- type: entity
+  parent: RMCSatchelWelder
+  id: RMCSatchelSPPWelder
+  name: UCP3-E technician welderpack
+  description: A special version of the Union Combat Pack MK3 featuring a small fueltank for quick blowtorch refueling. Used by UPP Sappers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/SPP/welder.rsi
+
+- type: entity
+  parent: RMCSatchelSPPWelder
+  id: RMCSatchelSPPWelderEngineer
+  suffix: Filled, Engineer
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMRE # TODO : Needs hacked MD and SPP sentry
