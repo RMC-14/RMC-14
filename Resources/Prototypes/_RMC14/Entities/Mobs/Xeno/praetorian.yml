@@ -116,6 +116,8 @@
         - XenoHeavy
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.7
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT3
 
 - type: entity
   parent: CMXenoPraetorianBase
