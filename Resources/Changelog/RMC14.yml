@@ -1,60 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed Boilers not exploding into acid gas on death.
-    type: Add
-  id: 970
-  time: '2024-11-15T02:44:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4822
-- author: Vermidia
-  changes:
-  - message: Xenos can now see leaders on the tacmap
-    type: Add
-  id: 971
-  time: '2024-11-15T04:52:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4830
-- author: Boaz1111
-  changes:
-  - message: Fixed the breaching shells reverting to buckshot shells under certain
-      circumstances.
-    type: Fix
-  id: 972
-  time: '2024-11-15T05:02:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4798
-- author: Aurallianz
-  changes:
-  - message: 'Boots can now hold: Screwdriver, Scalpel, ThrowingKnife & Holdout Pistol.'
-    type: Fix
-  - message: 'Mouth slot can now hold: Screwdriver.'
-    type: Fix
-  id: 973
-  time: '2024-11-15T05:04:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4811
-- author: CyberTropic
-  changes:
-  - message: Added a box for M84 CAS flares.
-    type: Add
-  - message: Made MRE and Flare boxes constructable from cardboard.
-    type: Add
-  - message: Fixed visuals for undeployed MRE and Flare boxes.
-    type: Fix
-  - message: Fixed spent CAS flares not being able to be picked up.
-    type: Fix
-  - message: Fixed being able to put CAS flares in regular flare pouches and vice
-      versa
-    type: Fix
-  id: 974
-  time: '2024-11-15T05:12:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4756
-- author: CyberTropic
-  changes:
-  - message: Added some filtration props
-    type: Add
-  id: 975
-  time: '2024-11-15T05:29:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4671
-- author: Vermidia
-  changes:
   - message: Fixed bodybags and stasisbags stopping rot
     type: Fix
   id: 976
@@ -5294,5 +5240,49 @@
   id: 1472
   time: '2025-03-17T05:30:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5927
+- author: Arcticular1
+  changes:
+  - message: Fixed marine operations uniform not having camouflage specific sprites.
+    type: Fix
+  id: 1473
+  time: '2025-03-21T05:54:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5942
+- author: CyberTropic
+  changes:
+  - message: Cash stacks use stack sprites.
+    type: Fix
+  id: 1474
+  time: '2025-03-21T05:51:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5950
+- author: Djvarik
+  changes:
+  - message: The ground wires on Shiva's no longer block movement.
+    type: Fix
+  id: 1475
+  time: '2025-03-21T05:54:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5936
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed M15 grenades not fitting in the m79 and grenadier spec launcher.
+    type: Fix
+  - message: Fixed airburst grenades not fitting in the U1 UGL.
+    type: Fix
+  id: 1476
+  time: '2025-03-21T20:03:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5966
+- author: DrSmugleaf
+  changes:
+  - message: Added 58 more random Avali names.
+    type: Add
+  id: 1477
+  time: '2025-03-21T20:39:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5974
+- author: mmails
+  changes:
+  - message: Moves mess tech from planned to complete in the roadmap
+    type: Fix
+  id: 1478
+  time: '2025-03-21T20:40:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5920
 Name: RMC14
 Order: -1
