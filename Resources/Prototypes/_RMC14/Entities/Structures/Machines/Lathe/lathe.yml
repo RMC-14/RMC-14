@@ -84,7 +84,7 @@
   - type: MaterialStorage
     storage: {}
 
-- type: LatheRecipePack
+- type: latheRecipePack
   id: RMCRecipesLathe
   recipes:
   - RMCBucket

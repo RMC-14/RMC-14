@@ -121,7 +121,7 @@
     unlitIdleState: medilathe_u_f
     unlitRunningState: medilathe_n_u_f
 
-- type: LatheRecipePack
+- type: latheRecipePack
   id: RMCRecipesMedilathe
   recipes:
   - CMBeaker
