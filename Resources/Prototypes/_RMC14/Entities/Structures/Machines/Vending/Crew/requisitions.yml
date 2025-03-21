@@ -278,6 +278,36 @@
         box: CMGrenadeSmoke
         boxAmount: 3
         boxSlots: 3
+      - id: RMCPacketGrenadeM74AGMFFilled
+        name: M74AGM-F grenade packet
+        box: RMC40MMGrenadeM74AGMF
+        boxAmount: 3
+        boxSlots: 3
+      - id: RMCPacketGrenadeM74AGMIFilled
+        name: M74AGM-I grenade packet
+        box: RMC40MMGrenadeM74AGMI
+        boxAmount: 3
+        boxSlots: 3
+      - id: RMCPacketGrenadeM74AGMSFilled
+        name: M74AGM-S grenade packet
+        box: RMC40MMGrenadeM74AGMS
+        boxAmount: 3
+        boxSlots: 3
+      - id: RMCPacketGrenadeM74AGMSStarShellFilled
+        name: M74AGM-S Starshell grenade packet
+        box: RMCStarShellM74AGMS
+        boxAmount: 3
+        boxSlots: 3
+      - id: RMCPacketGrenadeM74AGMSHornetFilled
+        name: M74AGM-S Hornet grenade packet
+        box: RMCHornetShellM74AGMS
+        boxAmount: 3
+        boxSlots: 3
+      - id: RMCPacketGrenadeBatonSlugHIRRFilled
+        name: HIRR Baton Slug packet
+        box: RMCBatonSlugHIRR
+        boxAmount: 3
+        boxSlots: 3
 
 #AMMUNITION VENDOR
 
