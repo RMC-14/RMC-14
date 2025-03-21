@@ -112,13 +112,14 @@ public sealed class ItemGridPiece : Control, IEntityControl
             return;
         }
 
-        if (_storageController._container?.StorageEntity is not { } storage ||
-            !_entityManager.TryGetComponent(storage, out StorageComponent? storageComp))
+        var containerSystem = _entityManager.System<ContainerSystem>();
+        if (!containerSystem.TryGetContainingContainer((Entity, null), out var container) ||
+            !_entityManager.TryGetComponent(container.Owner, out StorageComponent? storageComp))
         {
             return;
         }
 
-        var adjustedShape = _entityManager.System<ItemSystem>().GetAdjustedItemShape((storage, storageComp), (Entity, itemComponent), Location.Rotation, Vector2i.Zero);
+        var adjustedShape = _entityManager.System<ItemSystem>().GetAdjustedItemShape((container.Owner, storageComp), (Entity, itemComponent), Location.Rotation, Vector2i.Zero);
         var boundingGrid = adjustedShape.GetBoundingBox();
         var size = _centerTexture!.Size * 2 * UIScale;
 

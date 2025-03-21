@@ -147,7 +147,7 @@ public sealed class EntityStorageComponentState : ComponentState
 }
 
 [ByRefEvent]
-public record struct InsertIntoEntityStorageAttemptEvent(EntityUid ItemToInsert, bool Cancelled = false);
+public record struct InsertIntoEntityStorageAttemptEvent(EntityUid ItemToInsert, EntityUid Container, bool Cancelled = false);
 
 [ByRefEvent]
 public record struct StorageOpenAttemptEvent(EntityUid User, bool Silent, bool Cancelled = false);

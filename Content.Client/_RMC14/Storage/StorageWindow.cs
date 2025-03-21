@@ -7,7 +7,7 @@ using Robust.Client.UserInterface.Controls;
 
 namespace Content.Client.UserInterface.Systems.Storage.Controls;
 
-public sealed partial class StorageContainer
+public sealed partial class StorageWindow
 {
     private (Box2i Grid, EntityUid[] Contained, Dictionary<EntityUid, ItemStorageLocation> Stored) _lastUpdate =
         (default, Array.Empty<EntityUid>(), new Dictionary<EntityUid, ItemStorageLocation>());

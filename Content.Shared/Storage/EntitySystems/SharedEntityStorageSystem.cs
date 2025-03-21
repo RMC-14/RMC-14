@@ -339,7 +339,7 @@ public abstract class SharedEntityStorageSystem : EntitySystem
             return false;
 
         // Allow other systems to prevent inserting the item: e.g. the item is actually a ghost.
-        var attemptEvent = new InsertIntoEntityStorageAttemptEvent(toInsert);
+        var attemptEvent = new InsertIntoEntityStorageAttemptEvent(toInsert, container);
         RaiseLocalEvent(toInsert, ref attemptEvent);
 
         if (attemptEvent.Cancelled)

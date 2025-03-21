@@ -1,6 +1,5 @@
 ﻿using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
-using System.Numerics;
 using Content.Shared.Atmos;
 using Content.Shared.Coordinates;
 using Content.Shared.Maps;
@@ -12,7 +11,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Map;
 
-public abstract class SharedRMCMapSystem : EntitySystem
+public sealed class RMCMapSystem : EntitySystem
 {
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
@@ -163,15 +162,5 @@ public abstract class SharedRMCMapSystem : EntitySystem
     public bool CanBuildOn(EntityCoordinates coordinates, CollisionGroup group = CollisionGroup.Impassable)
     {
         return !IsTileBlocked(coordinates, group) && !TileHasStructure(coordinates);
-    }
-
-    public virtual bool TryLoad(
-        MapId mapId,
-        string path,
-        [NotNullWhen(true)] out IReadOnlyList<EntityUid>? ents,
-        Matrix3x2? transform = null)
-    {
-        ents = null;
-        return false;
     }
 }

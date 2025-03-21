@@ -33,7 +33,6 @@
     - map: [ "ears" ]
     - map: [ "eyes" ]
     - map: [ "belt" ]
-    - map: [ "id" ]
     - map: [ "outerClothing" ]
     - map: [ "enum.SquadArmorLayers.Armor" ]
     - map: [ "enum.WebbingVisualLayers.Base" ]

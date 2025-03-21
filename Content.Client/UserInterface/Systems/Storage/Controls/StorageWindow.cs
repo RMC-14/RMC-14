@@ -5,9 +5,9 @@ using Content.Client.Hands.Systems;
 using Content.Client.Items.Systems;
 using Content.Client.Storage;
 using Content.Client.Storage.Systems;
-using Content.Shared.IdentityManagement;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Item;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Input;
 using Content.Shared.Item;
 using Content.Shared.Storage;
@@ -20,6 +20,7 @@ using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Collections;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Client.UserInterface.Systems.Storage.Controls;
 
@@ -426,6 +427,7 @@ public sealed partial class StorageWindow : BaseWindow
 
         var boundingGrid = storageComp.Grid.GetBoundingBox();
         var size = _emptyTexture!.Size * 2;
+        var containedEntities = storageComp.Container.ContainedEntities.Reverse().ToArray();
         if (_lastUpdate.Grid.Equals(boundingGrid) &&
             _lastUpdate.Contained.SequenceEqual(containedEntities) &&
             _lastUpdate.Stored.Count == storageComp.StoredItems.Count &&

@@ -329,7 +329,7 @@ public abstract class SharedStorageSystem : EntitySystem
         args.Verbs.Add(verb);
     }
 
-    public void OpenStorageUI(EntityUid uid, EntityUid actor, StorageComponent? storageComp = null, bool silent = true)
+    public void OpenStorageUI(EntityUid uid, EntityUid actor, StorageComponent? storageComp = null, bool silent = true, bool doAfter = true)
     {
         // Handle recursively opening nested storages.
         if (ContainerSystem.TryGetContainingContainer(uid, out var container) &&
@@ -337,7 +337,7 @@ public abstract class SharedStorageSystem : EntitySystem
         {
             _nestedCheck = true;
             HideStorageWindow(container.Owner, actor);
-            OpenStorageUIInternal(uid, actor, storageComp, silent: true);
+            OpenStorageUIInternal(uid, actor, storageComp, silent: true, doAfter: doAfter);
             _nestedCheck = false;
         }
         else
@@ -347,7 +347,7 @@ public abstract class SharedStorageSystem : EntitySystem
             if (_openStorageLimit == 1)
                 UI.CloseUserUis<StorageComponent.StorageUiKey>(actor);
 
-            OpenStorageUIInternal(uid, actor, storageComp, silent: silent);
+            OpenStorageUIInternal(uid, actor, storageComp, silent: silent, doAfter: doAfter);
         }
     }
 
@@ -355,7 +355,7 @@ public abstract class SharedStorageSystem : EntitySystem
     ///     Opens the storage UI for an entity
     /// </summary>
     /// <param name="entity">The entity to open the UI for</param>
-    public void OpenStorageUIInternal(EntityUid uid, EntityUid entity, StorageComponent? storageComp = null, bool silent = true, bool doAfter = true)
+    private void OpenStorageUIInternal(EntityUid uid, EntityUid entity, StorageComponent? storageComp = null, bool silent = true, bool doAfter = true)
     {
         if (doAfter && RMCStorage.OpenDoAfter(uid, entity, storageComp, silent))
             return;

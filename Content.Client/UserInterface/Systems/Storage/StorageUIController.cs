@@ -1,4 +1,3 @@
-using System.Numerics;
 using Content.Client.Examine;
 using Content.Client.Hands.Systems;
 using Content.Client.Interaction;
@@ -310,6 +309,7 @@ public sealed class StorageUIController : UIController, IOnSystemChanged<Storage
         // If we just clicked, then take it out of the bag.
         else
         {
+            window.Reclaim(control.Location, control);
             EntityManager.RaisePredictiveEvent(new StorageInteractWithItemEvent(
                 EntityManager.GetNetEntity(control.Entity),
                 EntityManager.GetNetEntity(sourceStorage)));
@@ -346,11 +346,15 @@ public sealed class StorageUIController : UIController, IOnSystemChanged<Storage
         if (DraggingGhost == null)
             return;
 
-        if (_container?.StorageEntity is not { } storageEnt|| !_entity.TryGetComponent<StorageComponent>(storageEnt, out var storageComp))
+        var containerSystem = EntityManager.System<ContainerSystem>();
+        if (!containerSystem.TryGetContainingContainer((DraggingGhost.Entity, null), out var container) ||
+            !EntityManager.TryGetComponent(container.Owner, out StorageComponent? storageComp))
+        {
             return;
+        }
 
         var offset = ItemGridPiece.GetCenterOffset(
-            (storageEnt, storageComp),
+            (container.Owner, storageComp),
             (DraggingGhost.Entity, null),
             new ItemStorageLocation(DraggingRotation, Vector2i.Zero),
             EntityManager);

@@ -57,7 +57,7 @@ public sealed class StorageVoiceControlSystem : EntitySystem
                 _popup.PopupEntity(Loc.GetString("comp-storagevoicecontrol-self-insert", ("entity", hands.ActiveHand.HeldEntity.Value)), ent, args.Source);
                 return;
             }
-            if (_storage.CanInsert(ent, hands.ActiveHand.HeldEntity.Value, out var failedReason))
+            if (_storage.CanInsert(ent, hands.ActiveHand.HeldEntity.Value, args.Source, out var failedReason))
             {
                 // We adminlog before insertion, otherwise the logger will attempt to pull info on an entity that no longer is present and throw an exception
                 _adminLogger.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(args.Source)} inserted {ToPrettyString(hands.ActiveHand.HeldEntity.Value)} into {ToPrettyString(ent)} via voice control");

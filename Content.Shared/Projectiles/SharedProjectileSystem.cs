@@ -4,6 +4,7 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Camera;
 using Content.Shared.Damage;
 using Content.Shared.Database;
+using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.Effects;
 using Content.Shared.Hands.EntitySystems;
@@ -29,6 +30,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedDestructibleSystem _destructible = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
@@ -57,7 +59,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     {
         // This is so entities that shouldn't get a collision are ignored.
         if (args.OurFixtureId != ProjectileFixture || !args.OtherFixture.Hard
-            || component.DamagedEntity || component is { Weapon: null, OnlyCollideWhenShot: true })
+            || component.ProjectileSpent || component is { Weapon: null, OnlyCollideWhenShot: true })
             return;
 
         ProjectileCollide((uid, component, args.OurBody), args.OtherEntity);
@@ -66,9 +68,9 @@ public abstract partial class SharedProjectileSystem : EntitySystem
     public void ProjectileCollide(Entity<ProjectileComponent, PhysicsComponent> projectile, EntityUid target, bool predicted = false)
     {
         var (uid, component, ourBody) = projectile;
-        if (projectile.Comp1.DamagedEntity)
+        if (projectile.Comp1.ProjectileSpent)
         {
-            if (_netManager.IsServer && component.DeleteOnCollide)
+            if (_net.IsServer && component.DeleteOnCollide)
                 QueueDel(uid);
 
             return;
@@ -83,14 +85,14 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             return;
         }
 
-        var ev = new ProjectileHitEvent(component.Damage, target, component.Shooter);
+        var ev = new ProjectileHitEvent(component.Damage * _damageableSystem.UniversalProjectileDamageModifier, target, component.Shooter);
         RaiseLocalEvent(uid, ref ev);
         if (ev.Handled)
             return;
 
         var coordinates = Transform(projectile).Coordinates;
         var otherName = ToPrettyString(target);
-        var modifiedDamage = _netManager.IsServer
+        var modifiedDamage = _net.IsServer
             ? _damageableSystem.TryChangeDamage(target,
                 ev.Damage,
                 component.IgnoreResistances,
@@ -121,6 +123,48 @@ public abstract partial class SharedProjectileSystem : EntitySystem
                 $"Projectile {ToPrettyString(uid):projectile} shot by {ToPrettyString(shooterOrWeapon):source} hit {otherName:target} and dealt {modifiedDamage.GetTotal():damage} damage");
         }
 
+        // TODO RMC14 move destructible to shared
+        // If penetration is to be considered, we need to do some checks to see if the projectile should stop.
+        // if (modifiedDamage is not null && component.PenetrationThreshold != 0)
+        // {
+        //     // If a damage type is required, stop the bullet if the hit entity doesn't have that type.
+        //     if (component.PenetrationDamageTypeRequirement != null)
+        //     {
+        //         var stopPenetration = false;
+        //         foreach (var requiredDamageType in component.PenetrationDamageTypeRequirement)
+        //         {
+        //             if (!modifiedDamage.DamageDict.Keys.Contains(requiredDamageType))
+        //             {
+        //                 stopPenetration = true;
+        //                 break;
+        //             }
+        //         }
+        //         if (stopPenetration)
+        //             component.ProjectileSpent = true;
+        //     }
+        //
+        //     var damageRequired = _destructible.DestroyedAt(target);
+        //     // If the object won't be destroyed, it "tanks" the penetration hit.
+        //     if (modifiedDamage.GetTotal() < damageRequired)
+        //     {
+        //         component.ProjectileSpent = true;
+        //     }
+        //
+        //     if (!component.ProjectileSpent)
+        //     {
+        //         component.PenetrationAmount += damageRequired;
+        //         // The projectile has dealt enough damage to be spent.
+        //         if (component.PenetrationAmount >= component.PenetrationThreshold)
+        //         {
+        //             component.ProjectileSpent = true;
+        //         }
+        //     }
+        // }
+        // else
+        // {
+        //     component.ProjectileSpent = true;
+        // }
+
         if (!deleted)
         {
             _guns.PlayImpactSound(target, modifiedDamage, component.SoundHit, component.ForceSound, filter, projectile);
@@ -133,12 +177,13 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             }
         }
 
-        component.DamagedEntity = true;
+        component.ProjectileSpent = true;
         Dirty(uid, component);
 
-        if (!predicted && component.DeleteOnCollide && (_netManager.IsServer || IsClientSide(uid)))
+        if (!predicted && component.DeleteOnCollide && (_net.IsServer || IsClientSide(uid)))
             QueueDel(uid);
-        else if (_netManager.IsServer && component.DeleteOnCollide)
+
+        else if (_net.IsServer && component.DeleteOnCollide)
         {
             var predictedComp = EnsureComp<PredictedProjectileHitComponent>(uid);
             predictedComp.Origin = _transform.GetMoverCoordinates(coordinates);
@@ -150,10 +195,10 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             Dirty(uid, predictedComp);
         }
 
-        if ((_netManager.IsServer || IsClientSide(uid)) && component.ImpactEffect != null)
+        if ((_net.IsServer || IsClientSide(uid)) && component.ImpactEffect != null)
         {
             var impactEffectEv = new ImpactEffectEvent(component.ImpactEffect, GetNetCoordinates(coordinates));
-            if (_netManager.IsServer)
+            if (_net.IsServer)
                 RaiseNetworkEvent(impactEffectEv, filter);
             else
                 RaiseLocalEvent(impactEffectEv);
