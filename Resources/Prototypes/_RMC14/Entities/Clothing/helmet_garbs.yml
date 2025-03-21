@@ -287,6 +287,21 @@
 - type: entity
   parent: RMCHelmetGarbBase
   id: RMCHelmetGarbFeather
+  name: lucky white feather
+  description: A sniper's greatest asset is his mind, not his rifle.
+  components:
+  - type: Sprite
+    sprite:  _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather.rsi
+  - type: Clothing
+    sprite:  _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbFeather
+  id: RMCHelmetGarbFeatherRed
   name: lucky red feather
   description: It is a riotous red color, made of really crummy plastic and synthetic threading, you know, the same sort of material every Corporate Liaison's spine is made of.
   components:
