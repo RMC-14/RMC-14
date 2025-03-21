@@ -227,10 +227,10 @@
         conditions:
         - !type:PainLevel
           level: 5
-    - !type:GenericStatusEffect
+    - !type:GenericStatusEffect # substitution of do once in 13
       key: PainKnockOut
       component: PainKnockOut
-      probability: 0.01
+      probability: 0.01 # this is around 45% chance per minute 1-(1-0.01)^60
       time: 6
       conditions:
       - !type:PainLevel
