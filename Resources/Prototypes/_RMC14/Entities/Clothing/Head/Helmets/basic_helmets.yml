@@ -21,14 +21,10 @@
       count: 2
       whitelist:
         components:
-        - RMCLighter
         - RMCFlask
         - CMScalpel
         - Figurine
-        - Matchbox
         tags:
-        - CigPack
-        - Cigarette
 #       - TODO RMC14 cards
         - Slice
 #       - TODO RMC14 glasses (eyewear)

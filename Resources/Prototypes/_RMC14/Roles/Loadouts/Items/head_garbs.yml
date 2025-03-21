@@ -96,7 +96,7 @@
   storage:
     back:
     - RMCHelmetGarbGasmask
-    
+
 - type: loadout
   id: HelmetGasmaskDesertRMC
   cost: 2
@@ -117,6 +117,41 @@
   storage:
     back:
     - RMCHelmetGarbGasmaskUrban
+
+- type: loadout
+  id: FeatherRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbFeather
+
+- type: loadout
+  id: FeatherRedRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbFeatherRed
+
+- type: loadout
+  id: FeatherBlueRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbFeatherBlue
+
+- type: loadout
+  id: FeatherYellowRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbFeatherYellow
+
+- type: loadout
+  id: FeatherPurpleRMC
+  cost: 1
+  storage:
+    back:
+    - RMCHelmetGarbFeatherPurple
 
 - type: loadout
   id: GunOilRMC
