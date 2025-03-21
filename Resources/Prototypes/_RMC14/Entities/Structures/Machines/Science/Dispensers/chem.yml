@@ -1,5 +1,6 @@
 - type: entity
   id: RMCDispenserBase
+  abstract: true
   placement:
     mode: SnapgridCenter
   components:
@@ -20,7 +21,6 @@
   - type: Clickable
   - type: InteractionOutline
   - type: RMCChemicalDispenser
-    network: RMCDispenserChem
   - type: ApcPowerReceiver
     needsPower: false # TODO RMC14
     powerLoad: 0
