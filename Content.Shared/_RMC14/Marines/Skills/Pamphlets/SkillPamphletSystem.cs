@@ -49,7 +49,7 @@ public sealed class SkillPamphletSystem : EntitySystem
         }
 
         // Check if the user has a whitelisted job
-        var failed = true;
+        var failed = ent.Comp.JobWhitelists.Count > 0;
         LocId? popup = null;
         foreach (var whitelist in ent.Comp.JobWhitelists)
         {
