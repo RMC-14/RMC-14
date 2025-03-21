@@ -155,12 +155,14 @@ public sealed class MapInsertSystem : EntitySystem
             return;
 
         // Flatten anything not parented to a grid.
+        var transform = _physics.GetRelativePhysicsTransform((uid, xform), xform.MapUid.Value);
+
         foreach (var fixture in manager.Fixtures.Values)
         {
             if (!fixture.Hard)
                 continue;
 
-            var aabb = _physics.GetWorldAABB(uid, xform: xform);
+            var aabb = fixture.Shape.ComputeAABB(transform, 0);
 
             aabb = aabb.Enlarged(-0.05f);
             _lookupEnts.Clear();
