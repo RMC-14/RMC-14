@@ -6,6 +6,7 @@ using Content.Server.EUI;
 using Content.Server.Ghost;
 using Content.Server.Popups;
 using Content.Server.PowerCell;
+using Content.Shared.Traits.Assorted;
 using Content.Server.Traits.Assorted;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Medical.Defibrillator;
@@ -233,9 +234,9 @@ public sealed class DefibrillatorSystem : EntitySystem
             _chatManager.TrySendInGameICMessage(uid, Loc.GetString("defibrillator-rotten"),
                 InGameICChatType.Speak, true);
         }
-        else if (HasComp<UnrevivableComponent>(target))
+        else if (TryComp<UnrevivableComponent>(target, out var unrevivable))
         {
-            _chatManager.TrySendInGameICMessage(uid, Loc.GetString("defibrillator-unrevivable"),
+            _chatManager.TrySendInGameICMessage(uid, Loc.GetString(unrevivable.ReasonMessage),
                 InGameICChatType.Speak, true);
         }
         else

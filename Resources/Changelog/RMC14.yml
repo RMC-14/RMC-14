@@ -1,34 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed breaching shells having no spread bullets, too much damage, and
-      no falloff
-    type: Fix
-  id: 969
-  time: '2024-11-15T02:42:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4819
-- author: Vermidia
-  changes:
-  - message: Fixed Boilers not exploding into acid gas on death.
-    type: Add
-  id: 970
-  time: '2024-11-15T02:44:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4822
-- author: Vermidia
-  changes:
-  - message: Xenos can now see leaders on the tacmap
-    type: Add
-  id: 971
-  time: '2024-11-15T04:52:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4830
-- author: Boaz1111
-  changes:
-  - message: Fixed the breaching shells reverting to buckshot shells under certain
-      circumstances.
-    type: Fix
-  id: 972
-  time: '2024-11-15T05:02:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4798
 - author: Aurallianz
   changes:
   - message: 'Boots can now hold: Screwdriver, Scalpel, ThrowingKnife & Holdout Pistol.'
@@ -5295,5 +5265,33 @@
   id: 1471
   time: '2025-03-15T21:46:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5909
+- author: OmerF-afk
+  changes:
+  - message: Fixed Trijent Dam not loading.
+    type: Fix
+  id: 1472
+  time: '2025-03-17T05:30:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5927
+- author: Arcticular1
+  changes:
+  - message: Fixed marine operations uniform not having camouflage specific sprites.
+    type: Fix
+  id: 1473
+  time: '2025-03-21T05:54:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5942
+- author: CyberTropic
+  changes:
+  - message: Cash stacks use stack sprites.
+    type: Fix
+  id: 1474
+  time: '2025-03-21T05:51:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5950
+- author: Djvarik
+  changes:
+  - message: The ground wires on Shiva's no longer block movement.
+    type: Fix
+  id: 1475
+  time: '2025-03-21T05:54:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5936
 Name: RMC14
 Order: -1
