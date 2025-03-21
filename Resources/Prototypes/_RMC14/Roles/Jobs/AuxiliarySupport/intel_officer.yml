@@ -49,6 +49,8 @@
         tags:
         - RMCSquadIntel
     - type: SquadArmorWearer
+    - type: SquadNameOverride
+      name: cm-job-name-intel
 
 - type: startingGear
   id: CMGearIntelOfficer
