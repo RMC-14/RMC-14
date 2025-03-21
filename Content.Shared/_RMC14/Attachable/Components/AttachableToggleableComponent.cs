@@ -47,6 +47,18 @@ public sealed partial class AttachableToggleableComponent : Component
     public bool BreakOnFullRotate = false;
 
     /// <summary>
+    /// If set to true, the attachment will deactivate upon being dropped.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool BreakOnDrop = false;
+
+    /// <summary>
+    /// If set to true, the attachment will slow the user upon being toggled due to any source but toggling it manually.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool SlowOnBreak = false;
+
+    /// <summary>
     /// If set to true, the attachment can only be toggled when the holder is wielded.
     /// </summary>
     [DataField, AutoNetworkedField]
