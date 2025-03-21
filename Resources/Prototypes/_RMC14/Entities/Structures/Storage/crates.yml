@@ -307,6 +307,7 @@
       map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _RMC14/Structures/Storage/Crates/freezer.rsi
+  - type: AntiRottingContainer
 
 - type: entity
   parent: RMCCrateBase
