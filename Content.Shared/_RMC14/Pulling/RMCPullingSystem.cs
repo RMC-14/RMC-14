@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared._RMC14.Fireman;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -63,6 +63,7 @@ public sealed class RMCPullingSystem : EntitySystem
 
         SubscribeLocalEvent<ParalyzeOnPullAttemptComponent, PullAttemptEvent>(OnParalyzeOnPullAttempt);
         SubscribeLocalEvent<InfectOnPullAttemptComponent, PullAttemptEvent>(OnInfectOnPullAttempt);
+        SubscribeLocalEvent<MeleeWeaponComponent, PullAttemptEvent>(OnMeleePullAttempt);
 
         SubscribeLocalEvent<SlowOnPullComponent, PullStartedMessage>(OnSlowPullStarted);
         SubscribeLocalEvent<SlowOnPullComponent, PullStoppedMessage>(OnSlowPullStopped);
@@ -239,6 +240,14 @@ public sealed class RMCPullingSystem : EntitySystem
         }
     }
 
+    private void OnMeleePullAttempt(Entity<MeleeWeaponComponent> ent, ref PullAttemptEvent args)
+    {
+        if (args.PullerUid != ent.Owner)
+            return;
+
+        if (ent.Comp.NextAttack > _timing.CurTime)
+            args.Cancelled = true;
+    }
 
     private void OnXenoPullToggle(Entity<XenoComponent> ent, ref RMCPullToggleEvent args)
     {
