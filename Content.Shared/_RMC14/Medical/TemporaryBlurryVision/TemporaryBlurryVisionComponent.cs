@@ -8,5 +8,19 @@ namespace Content.Shared._RMC14.Medical.TemporaryBlurryVision;
 [NetworkedComponent, RegisterComponent]
 public sealed partial class TemporaryBlurryVisionComponent : Component
 {
-    public float Blur = 0;
+    [ViewVariables, Access(typeof(TemporaryBlurryVisionSystem))]
+    public List<TemporaryBlurModificator> TemporaryBlurModificators = [];
+}
+
+[DataDefinition]
+public sealed partial class TemporaryBlurModificator
+{
+    public TimeSpan Duration;
+    public int EffectStrength;
+
+    public TemporaryBlurModificator(TimeSpan duration, int strength)
+    {
+        Duration = duration;
+        EffectStrength = strength;
+    }
 }

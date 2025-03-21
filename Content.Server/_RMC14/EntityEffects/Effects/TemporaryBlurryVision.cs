@@ -7,7 +7,7 @@ namespace Content.Server._RMC14.EntityEffects.Effects;
 public sealed partial class TemporaryBlurryVision : EntityEffect
 {
     [DataField]
-    public float Blur = 3f;
+    public int Blur = 3;
 
     [DataField]
     public float Time = 2f;
@@ -23,7 +23,9 @@ public sealed partial class TemporaryBlurryVision : EntityEffect
             time *= reagentArgs.Scale.Float();
         }
 
-        var blurrySys = args.EntityManager.EntitySysManager.GetEntitySystem<TemporaryBlurrySystem>();
-        blurrySys.TryApplyBlindness(args.TargetEntity, Blur, time);
+        var scale = (args as EntityEffectReagentArgs)?.Scale ?? 1;
+        var modificator = new TemporaryBlurModificator(TimeSpan.FromSeconds(Time * scale.Float()), Blur);
+        var blurrySys = args.EntityManager.EntitySysManager.GetEntitySystem<TemporaryBlurryVisionSystem>();
+        blurrySys.AddTemporaryBlurModificator(args.TargetEntity, modificator);
     }
 }
