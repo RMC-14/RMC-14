@@ -343,7 +343,7 @@ public sealed class MaterialArbitrageTest
             }
         });
 
-        await server.WaitPost(() => mapManager.DeleteMap(testMap.MapId));
+        await server.WaitPost(() => mapSystem.DeleteMap(testMap.MapId));
         await pair.CleanReturnAsync();
 
         async Task<double> GetSpawnedPrice(Dictionary<string, int> ents)

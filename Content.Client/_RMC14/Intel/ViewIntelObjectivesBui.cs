@@ -12,6 +12,7 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
 
     protected override void Open()
     {
+        base.Open();
         _window = this.CreateWindow<ViewIntelObjectivesWindow>();
         Refresh();
     }
