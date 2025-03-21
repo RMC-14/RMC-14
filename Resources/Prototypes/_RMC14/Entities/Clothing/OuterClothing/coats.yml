@@ -411,8 +411,7 @@
 - type: entity
   parent: RMCBaseJacket
   id: CMCoatOfficer
-  name: marine service jacket
-  description: A service jacket typically worn by officers of the UNMC.
+  abstract: true
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/officer.rsi
@@ -424,7 +423,8 @@
 - type: entity
   parent: CMCoatOfficer
   id: RMCCoatService
-  description: A service jacket typically worn by officers of the UNMC. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  name: marine service jacket
+  description: A service jacket typically worn by officers of the UNMC.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/jungle.rsi
