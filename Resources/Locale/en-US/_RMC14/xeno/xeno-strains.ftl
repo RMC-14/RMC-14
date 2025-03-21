@@ -39,6 +39,14 @@ rmc-xeno-valkyrie-description = You trade your tail stab, spit, acid ball, acid 
    - Retrieve endangered, knocked-down or resting allies and pull them to your location.
 rmc-xeno-valkyrie-popup = This one will deny her sisters' deaths until they earn it. Fight or be forgotten.
 
+rmc-xeno-observer-name = Observer
+rmc-xeno-observer-description = You lose your ability to hide, but will be able to to see further into the distance. Stalk your prey for the best opportunity or coordinate an ambush with your sisters.
+  You gain the ability to:
+  - Zoom out your field of view, like a Runner.
+  You lose your ability to:
+  - Hide.
+rmc-xeno-observer-popup = This one will stalk the prey from a distance, with a greater sight.
+
 rmc-xeno-gardener-name = Gardener
 rmc-xeno-gardener-description = You trade your choice of resin secretions, corrosive acid, and ability to transfer plasma for a tiny bit of extra health regeneration on weeds and several new abilities.
   You gain the ability to:
