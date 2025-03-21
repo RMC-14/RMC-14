@@ -25,6 +25,7 @@ public sealed class XenoWatchBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         EnsureWindow();
     }
 
