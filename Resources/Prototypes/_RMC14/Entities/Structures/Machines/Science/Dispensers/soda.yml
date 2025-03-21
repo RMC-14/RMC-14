@@ -57,3 +57,11 @@
     maxEnergy: 1100
     baseMax: 1100
     maxPer: 0
+
+- type: entity
+  parent: CMDispenserSoda
+  id: CMDispenserSodaEmpty
+  suffix: Empty
+  components:
+  - type: ReagentDispenser
+    pack: EmptyInventory
