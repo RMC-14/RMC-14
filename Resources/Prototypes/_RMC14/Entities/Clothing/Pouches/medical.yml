@@ -216,7 +216,6 @@
     - id: CMEmergencyAutoInjector
       amount: 1
 
-
 # Syringe Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
@@ -333,3 +332,15 @@
     # splint
     - id: CMBicaridineAutoInjector
     - id: CMKelotaneAutoInjector
+
+- type: entity
+  parent: RMCPouchMedkit
+  id: RMCPouchMedkitFillSPP
+  suffix: Filled, SPP
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSurgicalLine
+    - id: CMSynthGraft
+    - id: CMHealthAnalyzer
+    - id: CMHyposprayFilledTricord

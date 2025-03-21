@@ -1,0 +1,103 @@
+﻿- type: job
+  parent: CMJobBase
+  id: RMCSPPSpecialist
+  name: rmc-job-name-spp-specialist
+  description: rmc-job-description-spp-specialist
+  playTimeTracker: CMJobSPPSpecialist
+  ranks:
+    RMCRankSPPSerzhant: []
+  startingGear: RMCGearSPPSpecialist
+  icon: "RMCJobIconSPPSpecialist"
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  - HospitalCorpsman
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 3
+        RMCSkillEndurance: 3
+        RMCSkillFirearms: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillConstruction: 1
+        RMCSkillEngineering: 1
+        RMCSkillJtac: 2
+        RMCSkillLeadership: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-specialist
+  hidden: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerSPPSpecialist
+  name: spp spawner specialist
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCRandomHumanoidSPPSpecialist
+
+- type: entity
+  id: RMCRandomHumanoidSPPSpecialist
+  name: spp ghost role specialist
+  suffix: Role, Player
+  components:
+  - type: Sprite
+    sprite: Markers/cross.rsi
+    state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSPPSpecialist
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCSPPSpecialist
+  components:
+  - type: GhostRole
+    name: rmc-job-name-spp-specialist
+    description: rmc-job-description-spp-specialist
+    rules: rmc-ghost-role-information-spp-rules
+    raffle:
+      settings: short
+  - type: Loadout
+    prototypes: [ RMCGearSPPSpecialist ]
+  - type: Skills
+    skills:
+      RMCSkillCqc: 3
+      RMCSkillEndurance: 3
+      RMCSkillFirearms: 2
+      RMCSkillMeleeWeapons: 1
+      RMCSkillConstruction: 1
+      RMCSkillEngineering: 1
+      RMCSkillJtac: 2
+      RMCSkillLeadership: 1
+
+- type: startingGear
+  id: RMCGearSPPSpecialist
+  equipment:
+    head: ArmorHelmetSPPHeavy
+    ears: RMCHeadsetSPP
+    jumpsuit: CMJumpsuitSPP
+    outerClothing: RMCArmorSPPHeavySpecialist
+    gloves: RMCHandsVeteran
+    shoes: CMBootsBlackFilled
+    suitstorage: RMCWeaponLMGM60
+    id: RMCIDSPP
+    belt: CMM77BeltFilled
+    back: RMCSatchelSPPRifleman
+    pocket1: RMCPouchAutoinjectorFill
+    pocket2: RMCPouchExplosiveFilledC4SPP
+
+- type: playTimeTracker
+  id: CMJobSPPSpecialist
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPSpecialist
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: upp_spec
