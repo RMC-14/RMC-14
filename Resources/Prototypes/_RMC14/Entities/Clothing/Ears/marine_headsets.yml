@@ -31,6 +31,8 @@
       - CMEncryptionKeyAlpha
       - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
+  - type: Headset
+    radioTextIncrease: 4
 
 - type: entity
   parent: CMHeadsetAlpha
@@ -44,6 +46,8 @@
       - CMEncryptionKeyAlpha
       - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
+  - type: Headset
+    radioTextIncrease: 2
 
 - type: entity
   parent: CMHeadsetAlpha
@@ -99,6 +103,8 @@
       - CMEncryptionKeyBravo
       - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
+  - type: Headset
+    radioTextIncrease: 4
 
 - type: entity
   parent: CMHeadsetBravo
@@ -112,6 +118,8 @@
       - CMEncryptionKeyBravo
       - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
+  - type: Headset
+    radioTextIncrease: 2
 
 - type: entity
   parent: CMHeadsetBravo
@@ -167,6 +175,8 @@
       - CMEncryptionKeyCharlie
       - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
+  - type: Headset
+    radioTextIncrease: 4
 
 - type: entity
   parent: CMHeadsetCharlie
@@ -180,6 +190,8 @@
       - CMEncryptionKeyCharlie
       - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
+  - type: Headset
+    radioTextIncrease: 2
 
 - type: entity
   parent: CMHeadsetCharlie
@@ -235,6 +247,8 @@
       - CMEncryptionKeyDelta
       - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
+  - type: Headset
+    radioTextIncrease: 4
 
 - type: entity
   parent: CMHeadsetDelta
@@ -248,6 +262,8 @@
       - CMEncryptionKeyDelta
       - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
+  - type: Headset
+    radioTextIncrease: 2
 
 - type: entity
   parent: CMHeadsetDelta
@@ -303,6 +319,8 @@
       - CMEncryptionKeyEcho
       - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
+  - type: Headset
+    radioTextIncrease: 4
 
 - type: entity
   parent: CMHeadsetEcho
@@ -316,6 +334,8 @@
       - CMEncryptionKeyEcho
       - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
+  - type: Headset
+    radioTextIncrease: 2
 
 - type: entity
   parent: CMHeadsetEcho
@@ -371,6 +391,8 @@
       - CMEncryptionKeyFoxtrot
       - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
+  - type: Headset
+    radioTextIncrease: 4
 
 - type: entity
   parent: CMHeadsetFoxtrot
@@ -384,6 +406,8 @@
       - CMEncryptionKeyFoxtrot
       - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
+  - type: Headset
+    radioTextIncrease: 2
 
 - type: entity
   parent: CMHeadsetFoxtrot
