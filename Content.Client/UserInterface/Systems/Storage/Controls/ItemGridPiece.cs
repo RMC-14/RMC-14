@@ -60,7 +60,7 @@ public sealed class ItemGridPiece : Control, IEntityControl
         Location = location;
 
         Visible = true;
-        MouseFilter = MouseFilterMode.Pass;
+        MouseFilter = MouseFilterMode.Stop;
 
         TooltipSupplier = SupplyTooltip;
 
@@ -106,8 +106,11 @@ public sealed class ItemGridPiece : Control, IEntityControl
             return;
         }
 
-        if (_storageController.IsDragging && _storageController.DraggingGhost?.Entity == Entity && _storageController.DraggingGhost != this)
+        if (_storageController.IsDragging && _storageController.DraggingGhost?.Entity == Entity &&
+            _storageController.DraggingGhost != this)
+        {
             return;
+        }
 
         if (_storageController._container?.StorageEntity is not { } storage ||
             !_entityManager.TryGetComponent(storage, out StorageComponent? storageComp))

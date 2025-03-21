@@ -17,6 +17,8 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Timing;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Server.Body.Components;
+using System.Linq;
 using Robust.Server.Audio;
 
 namespace Content.Server.Chemistry.EntitySystems;
@@ -24,8 +26,6 @@ namespace Content.Server.Chemistry.EntitySystems;
 public sealed class HypospraySystem : SharedHypospraySystem
 {
     [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly InteractionSystem _interaction = default!;
 
     public override void Initialize()
     {
@@ -34,7 +34,6 @@ public sealed class HypospraySystem : SharedHypospraySystem
         SubscribeLocalEvent<HyposprayComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<HyposprayComponent, MeleeHitEvent>(OnAttack);
         SubscribeLocalEvent<HyposprayComponent, UseInHandEvent>(OnUseInHand);
-        SubscribeLocalEvent<HyposprayComponent, HyposprayDoAfterEvent>(OnHyposprayDoAfter);
     }
 
     private void OnHyposprayDoAfter(Entity<HyposprayComponent> ent, ref HyposprayDoAfterEvent args)
@@ -140,69 +139,6 @@ public sealed class HypospraySystem : SharedHypospraySystem
 
         // same LogType as syringes...
         _adminLogger.Add(LogType.ForceFeed, $"{EntityManager.ToPrettyString(user):user} injected {EntityManager.ToPrettyString(target):target} with a solution {SharedSolutionContainerSystem.ToPrettyString(removedSolution):removedSolution} using a {EntityManager.ToPrettyString(uid):using}");
-    }
-
-    private bool TryUseHypospray(Entity<HyposprayComponent> entity, EntityUid target, EntityUid user)
-    {
-        // if target is ineligible but is a container, try to draw from the container if allowed
-        if (!EligibleEntity(target, EntityManager, entity)
-            && _solutionContainers.TryGetDrawableSolution(target, out var drawableSolution, out _) && entity.Comp.CanContainerDraw)
-        {
-            return TryDraw(entity, target, drawableSolution.Value, user);
-        }
-
-        return TryDoInject(entity, target, user);
-    }
-
-    private void OnUseInHand(Entity<HyposprayComponent> entity, ref UseInHandEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        args.Handled = TryDoInject(entity, args.User, args.User);
-    }
-
-    public void OnAfterInteract(Entity<HyposprayComponent> entity, ref AfterInteractEvent args)
-    {
-        if (args.Handled || !args.CanReach || args.Target == null)
-            return;
-
-        args.Handled = TryUseHypospray(entity, args.Target.Value, args.User);
-    }
-
-    public void OnAttack(Entity<HyposprayComponent> entity, ref MeleeHitEvent args)
-    {
-        if (!args.HitEntities.Any())
-            return;
-
-        TryDoInject(entity, args.HitEntities.First(), args.User);
-    }
-
-    public bool TryDoInject(Entity<HyposprayComponent> entity, EntityUid target, EntityUid user)
-    {
-        var (uid, component) = entity;
-
-        if (!EligibleEntity(target, EntityManager, component))
-            return false;
-
-        if (TryComp(uid, out UseDelayComponent? delayComp))
-        {
-            if (_useDelay.IsDelayed((uid, delayComp)))
-                return false;
-        }
-
-        var attemptEv = new AttemptHyposprayUseEvent(user, target, TimeSpan.Zero);
-        RaiseLocalEvent(entity, ref attemptEv);
-        var doAfter = new HyposprayDoAfterEvent();
-        var args = new DoAfterArgs(EntityManager, user, attemptEv.DoAfter, doAfter, entity, target, entity)
-        {
-            BreakOnMove = true,
-            BreakOnHandChange = true,
-            NeedHand = true
-        };
-        _doAfter.TryStartDoAfter(args);
-
-        return true;
     }
 
     private bool TryDraw(Entity<HyposprayComponent> entity, Entity<BloodstreamComponent?> target, Entity<SolutionComponent> targetSolution, EntityUid user)
