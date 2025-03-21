@@ -228,13 +228,13 @@
         - !type:PainLevel
           level: 5
     - !type:GenericStatusEffect
-        key: PainKnockOut
-        component: PainKnockOut
-        probability: 0.01
-        time: 6
-        conditions:
-        - !type:PainLevel
-          level: 6
+      key: PainKnockOut
+      component: PainKnockOut
+      probability: 0.01
+      time: 6
+      conditions:
+      - !type:PainLevel
+        level: 5
     - !type:HealthChange
       damage:
         types:
