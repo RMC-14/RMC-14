@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   id: HiveCoreXeno
   parent: BaseHiveStructure
   name: hive core
@@ -57,6 +57,7 @@
     spawns: XenoHiveWeedsCore
     level: 3
     blockOtherWeeds: true
+    spreadsOnSemiWeedable: true
   - type: GhostRole
     name: roles-lesser-drone-name
     description: roles-lesser-drone-description
