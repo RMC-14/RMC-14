@@ -14,7 +14,7 @@
       amount: 1
   products:
     RMCAmmoniumNitrateFuelOil: 2
-    
+ 
 #TODO sensitivity threshold = 5.01
 - type: reaction
   id: RMCNitroglycerin

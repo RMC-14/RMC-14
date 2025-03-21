@@ -144,6 +144,8 @@
   physicalDesc: reagent-physical-desc-gaseous
   flavor: bitter
   color: "#808080"
+  explosive: true
+  power: 0.15
   metabolisms:
     Medicine:
       metabolismRate: 0.01 # 1 every 200 seconds in CM?

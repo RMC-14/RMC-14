@@ -6,6 +6,11 @@
   flavor: salty
   physicalDesc: reagent-physical-desc-crystalline
   color: "#E5E5E5"
+  explosive: true
+  power: 0.4
+  falloffMod: 1.5
+  durationMod: -0.2
+  intensityMod: 0.5
         
 - type: reagent
   parent: RMCReagentBotanical
