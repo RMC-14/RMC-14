@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Fortify;
@@ -82,7 +82,7 @@ public sealed class XenoCrestSystem : EntitySystem
     private void OnXenoCrestGetArmor(Entity<XenoCrestComponent> xeno, ref CMGetArmorEvent args)
     {
         if (xeno.Comp.Lowered)
-            args.Armor += xeno.Comp.Armor;
+            args.XenoArmor += xeno.Comp.Armor;
     }
 
     private void OnXenoCrestBeforeStatusAdded(Entity<XenoCrestComponent> xeno, ref BeforeStatusEffectAddedEvent args)

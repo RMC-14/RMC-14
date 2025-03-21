@@ -70,7 +70,7 @@ public sealed class XenoTantrumSystem : EntitySystem
         if (HasComp<TantrumSpeedBuffComponent>(xeno) || !xeno.Comp.Running)
             return;
 
-        args.Armor += xeno.Comp.ArmorGain;
+        args.XenoArmor += xeno.Comp.ArmorGain;
     }
 
     private void OnXenoTantrumAction(Entity<XenoTantrumComponent> xeno, ref XenoTantrumActionEvent args)

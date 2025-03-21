@@ -68,4 +68,4 @@
   id: RMCMarineUniformBase
   components:
   - type: CMArmor
-    armor: 10
+    melee: 10

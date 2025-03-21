@@ -10,7 +10,7 @@
   - type: Item
     size: Normal
   - type: CMArmor
-    armor: 20 # CLOTHING_ARMOR_MEDIUM
+    bullet: 20 # CLOTHING_ARMOR_MEDIUM
     bio: 15
     explosionArmor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
   - type: RMCArmorSpeedTier
@@ -92,7 +92,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Provost/special.rsi
   - type: CMArmor
-    armor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
+    melee: 25
+    bullet: 25 # CLOTHING_ARMOR_MEDIUMHIGH
     bio: 20
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
   - type: Storage

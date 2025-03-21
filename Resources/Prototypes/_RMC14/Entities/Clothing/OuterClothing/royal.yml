@@ -17,7 +17,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Royal/light.rsi
   - type: CMArmor
-    armor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
+    bullet: 25 # CLOTHING_ARMOR_MEDIUMHIGH
     bio: 20
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
   - type: RMCArmorSpeedTier
@@ -54,7 +54,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Royal/pointman.rsi
   - type: CMArmor
-    armor: 32 # CLOTHING_ARMOR_HIGH (melee); CLOTHING_ARMOR_HIGHPLUS (bullet)
+    melee: 30 # CLOTHING_ARMOR_HIGH 
+    bullet: 35 # CLOTHING_ARMOR_HIGHPLUS (bullet)
     explosionArmor: 35 # CLOTHING_ARMOR_HIGHPLUS
     bio: 20 # CLOTHING_ARMOR_MEDIUM
   - type: RMCArmorSpeedTier
