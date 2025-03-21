@@ -783,6 +783,26 @@
         types:
           Blunt: 10
 
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentHuntingStock
+  name: Basira-Armstrong stock
+  description: The non-detachable stock of a Basira-Armstrong hunting rifle
+  components:
+  - type: Sprite
+    state: huntingstock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentHG3712Stock
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 10
+
 - type: Tag
   id: RMCAttachmentHG3712Stock
 
@@ -845,3 +865,6 @@
 
 - type: Tag
   id: RMCAttachmentM54C2StockCollapsible
+
+- type: Tag
+  id: RMCAttachmentHuntingStock
