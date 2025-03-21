@@ -338,7 +338,6 @@ MagazineBoxLightRifleRubber: MagazineBoxLightRifle
 MagazineBoxRifleRubber: MagazineBoxRifle
 MagazineBoxRifleBigRubber: MagazineBoxRifleBig
 MagazineBoxCaselessRifleRubber: MagazineBoxCaselessRifle
-MagazineBoxCaselessRifleBigRubber: MagazineBoxCaselessRifle10x24
 BoxMagazinePistolRubber: BoxMagazinePistol
 BoxMagazinePistolHighCapacityRubber: BoxMagazinePistolHighCapacity
 BoxMagazinePistolSubMachineGunRubber: BoxMagazinePistolSubMachineGun
@@ -348,7 +347,6 @@ BoxMagazineCaselessRifleRubber: BoxMagazinePistolCaselessRifle
 BoxMagazineMagnumSubMachineGunRubber: BoxMagazineMagnumSubMachineGun
 WeaponPistolMk58Nonlethal: WeaponPistolMk58
 WeaponPistolN1984Nonlethal: WeaponPistolN1984
-WeaponSubMachineGunVectorRubber: WeaponSubMachineGunVector
 WeaponSubMachineGunDrozdRubber: WeaponSubMachineGunDrozd
 WeaponRifleLecterRubber: WeaponRifleLecter
 
@@ -747,7 +745,7 @@ CMBoxMRE: RMCBoxMRE
 CMBoxPackFlare: RMCBoxPackFlare
 CMCrateBase: RMCCrateBase
 CMCrateLarge: RMCCrateLarge
-CMCrateWeldable: RMCCrateWeldable
+CMCrateWeldable: RMCCrateBase
 CMCrateAlpha: RMCCrateAlpha
 CMCrateBravo: RMCCrateBravo
 CMCrateCharlie: RMCCrateCharlie
@@ -997,6 +995,23 @@ LightTree06: LightTree
 #2024-12-28
 DrinkIrishCarBomb: DrinkIrishSlammer
 
+#2025-01-06
+ClothingMaskSexyClown: ClothingMaskBlushingClown
+ClothingMaskSexyMime: ClothingMaskBlushingMime
+
+# 2025-01-27
+FoodCondimentPacketFrostoil: FoodCondimentPacketColdsauce
+
+#2025-02-05
+WeaponSubMachineGunVector: null
+WeaponSubMachineGunVectorRubber: null
+
+# 2025-02-20
+MagazineBoxAntiMaterielBig: null
+MagazineBoxCaselessRifle10x24: null
+MagazineBoxCaselessRifleBig: null
+MagazinePistolHighCapacityRubber: null
+
 # 2024-10-28
 ColMarTechExecutiveOfficerEquipment: ColMarTechSeniorOfficerEquipment
 
@@ -1097,3 +1112,6 @@ RMCAreaLv759IndoorsWeyyuOfficeSupervisor: RMCAreaLv759IndoorsWeyaOfficeSuperviso
 # 2025-03-01
 RMCHeadsetDistressFreelancer: RMCHeadsetDistressDukes
 RMCEncryptionKeyFreelancer: RMCEncryptionKeyDukes
+
+# 2025-03-14
+RMCCrateWeldable: RMCCrateBase

@@ -224,16 +224,62 @@
   parent: RMCHelmetGarbBase
   id: RMCHelmetGarbGasmask
   name: M5 integrated gasmask
-  description: The UNMC had its funding pulled for these when it became apparent that not every deployed enlisted was wearing a helmet 24/7; much to the bafflement of UA High Command.
+  description: The UNMC had its funding pulled for these when it became apparent that not every deployed enlisted was wearing a helmet 24/7; much to the bafflement of UN High Command.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/HelmetGarb/gasmask.rsi
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask.rsi
     state: icon
   - type: Item
-    sprite: _RMC14/Objects/Clothing/HelmetGarb/gasmask.rsi
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask.rsi
   - type: HelmetAccessory
     rsi:
-      sprite: _RMC14/Objects/Clothing/HelmetGarb/gasmask.rsi
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbGasmask
+  id: RMCHelmetGarbGasmaskDesert
+  name: Desert M5 integrated gasmask
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_desert.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_desert.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_desert.rsi
+      state: helmet
+
+
+- type: entity
+  parent: RMCHelmetGarbGasmask
+  id: RMCHelmetGarbGasmaskJungle
+  name: Jungle M5 integrated gasmask
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_jungle.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_jungle.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_jungle.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbGasmask
+  id: RMCHelmetGarbGasmaskUrban
+  name: Urban M5 integrated gasmask
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_urban.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_urban.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_urban.rsi
       state: helmet
 
 # Misc
@@ -242,7 +288,7 @@
   parent: RMCHelmetGarbBase
   id: RMCHelmetGarbGunOil
   name: gun oil
-  description: It is a bottle of oil, for your gun. Don't fall for the rumors, the M41A is NOT a self-cleaning firearm.
+  description: It is a bottle of oil, for your gun. Don't fall for the rumors, the M54C is NOT a self-cleaning firearm.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/HelmetGarb/gun_oil.rsi

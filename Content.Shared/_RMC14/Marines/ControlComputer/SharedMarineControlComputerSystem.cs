@@ -180,7 +180,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
                 continue;
             }
 
-            if (HasComp<SurvivorComponent>(uid))
+            if (HasComp<RMCSurvivorComponent>(uid))
                 continue;
 
             if (uid == actor)

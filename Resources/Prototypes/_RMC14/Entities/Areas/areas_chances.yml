@@ -67,7 +67,7 @@
 - type: entity
   parent: RMCAreaLv522Oob
   id: RMCAreaLv522OobWYVault
-  name: LV522 - Weyland Secure Vault
+  name: LV522 - WEYA Secure Vault
   components:
   - type: Sprite
     state: blue

@@ -28,6 +28,7 @@ public sealed class XenoEvolutionBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         _window = this.CreateWindow<XenoEvolutionWindow>();
 
         if (EntMan.TryGetComponent(Owner, out XenoEvolutionComponent? xeno))

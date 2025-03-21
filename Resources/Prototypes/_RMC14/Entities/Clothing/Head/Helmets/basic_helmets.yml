@@ -11,7 +11,7 @@
   - type: Storage
     maxItemSize: Tiny
     grid:
-    - 0,0,7,1 # 4 slots, 2 reserved for helmet accessories
+    - 0,0,7,1 # 4 slots, only 2 can fit useful items (meds, cigarettes)
     blacklist:
       tags:
       - Pouch
@@ -41,11 +41,8 @@
         - CMOintment
         - CMAutoInjector
         - PillPacket
-    - popup: rmc-storage-limit-accessories
-      count: 2
-      whitelist:
-        components:
-        - HelmetAccessory
+        - Syringe
+        - Pill
   - type: ContainerContainer
     containers:
       storagebase: !type:Container

@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Survivor;
 using Content.Shared.Chat;
 using Content.Shared.Database;
@@ -40,6 +41,8 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         SubscribeLocalEvent<MarineCommunicationsComputerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<MarineCommunicationsComputerComponent, BoundUIOpenedEvent>(OnBUIOpened);
 
+        SubscribeLocalEvent<RMCPlanetComponent, RMCPlanetAddedEvent>(OnPlanetAdded);
+
         Subs.BuiEvents<MarineCommunicationsComputerComponent>(MarineCommunicationsComputerUI.Key,
             subs =>
             {
@@ -47,20 +50,23 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
             });
     }
 
-    private void OnMapInit(
-        Entity<MarineCommunicationsComputerComponent> computer,
-        ref MapInitEvent args
-        )
+    private void OnMapInit(Entity<MarineCommunicationsComputerComponent> computer, ref MapInitEvent args)
     {
         UpdatePlanetMap(computer);
     }
 
-    private void OnBUIOpened(
-        Entity<MarineCommunicationsComputerComponent> computer,
-        ref BoundUIOpenedEvent args
-        )
+    private void OnBUIOpened(Entity<MarineCommunicationsComputerComponent> computer, ref BoundUIOpenedEvent args)
     {
         UpdatePlanetMap(computer);
+    }
+
+    private void OnPlanetAdded(Entity<RMCPlanetComponent> ent, ref RMCPlanetAddedEvent args)
+    {
+        var computers = EntityQueryEnumerator<MarineCommunicationsComputerComponent>();
+        while (computers.MoveNext(out var uid, out var computer))
+        {
+            UpdatePlanetMap((uid, computer));
+        }
     }
 
     private void OnMarineCommunicationsDesignatePrimaryLZMsg(
@@ -78,9 +84,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         _dropship.TryDesignatePrimaryLZ(user, lz.Value);
     }
 
-    private void UpdatePlanetMap(
-        Entity<MarineCommunicationsComputerComponent> computer
-        )
+    private void UpdatePlanetMap(Entity<MarineCommunicationsComputerComponent> computer)
     {
         var planet = _distressSignal.SelectedPlanetMapName ?? string.Empty;
         var operation = _distressSignal.OperationName ?? string.Empty;
@@ -113,7 +117,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
                 HasComp<GhostComponent>(e)
             );
 
-        filter.RemoveWhereAttachedEntity(HasComp<SurvivorComponent>);
+        filter.RemoveWhereAttachedEntity(HasComp<RMCSurvivorComponent>);
 
         _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
         _audio.PlayGlobal(sound ?? DefaultAnnouncementSound, filter, true, AudioParams.Default.WithVolume(-2f));

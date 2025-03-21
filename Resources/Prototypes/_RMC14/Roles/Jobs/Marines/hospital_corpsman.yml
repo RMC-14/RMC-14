@@ -28,7 +28,7 @@
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - HospitalCorpsman
-  overwatchSortPriority: -1
+  overwatchSortPriority: -2
   overwatchRoleName: Hospital Corpsmen
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi

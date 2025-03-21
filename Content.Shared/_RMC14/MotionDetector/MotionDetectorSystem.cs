@@ -82,6 +82,9 @@ public sealed class MotionDetectorSystem : EntitySystem
         if (!ent.Comp.HandToggleable)
             return;
 
+        if (!_hands.IsHolding(args.User, ent))
+            return;
+
         args.Handled = true;
         Toggle(ent);
 

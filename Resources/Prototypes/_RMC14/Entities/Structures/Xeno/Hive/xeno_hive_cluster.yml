@@ -6,7 +6,10 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/hive_cluster.rsi
-    state: hive_cluster_idle
+    layers:
+     - sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
+       state: hive_weed0
+     - state: hive_cluster_idle
   - type: Destructible
     thresholds:
     - trigger:
@@ -20,8 +23,8 @@
       types:
         Slash: 300
   - type: XenoWeeds
-    range: 7
-    spawns: XenoHiveWeeds
+    range: 5
+    spawns: XenoHiveWeedsCluster
     level: 3
     blockOtherWeeds: true
   - type: ReplaceWeedSourceOnWeeding

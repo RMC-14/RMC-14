@@ -1,4 +1,5 @@
 - type: entity
+  parent: RMCBaseEffect
   id: RMCEffectEmoteBase
   abstract: true
   categories: [ HideSpawnMenu ]

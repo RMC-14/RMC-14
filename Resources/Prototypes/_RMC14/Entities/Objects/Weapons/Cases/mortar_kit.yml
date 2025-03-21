@@ -17,6 +17,15 @@
     maxItemSize: Ginormous
     grid:
     - 0,0,15,3
+    whitelist:
+      components:
+      - Mortar
+      - SkillPamphlet
+      - FixedItemSizeStorage
+      - MortarShell
+      - Rangefinder
+      tags:
+      - Wrench
   - type: GenericVisualizer
     visuals:
       enum.StorageVisuals.Open:
@@ -26,7 +35,7 @@
         label:
           True: { visible: false }
           False: { visible: true }
-#  - type: RemoveOnlyStorage TODO RMC14 fix being empty on map spawn
+  #  - type: RemoveOnlyStorage TODO RMC14 fix being empty on map spawn
   - type: FixedItemSizeStorage
   - type: InteractedBlacklist
     blacklist:
@@ -44,9 +53,9 @@
       amount: 3
     - id: RMCMortarShellFlare
       amount: 2
-#    - id: RMCMortarShellFrag
-#      amount: 2
-    - id: RMCMortarShellHE 
+    #    - id: RMCMortarShellFrag
+    #      amount: 2
+    - id: RMCMortarShellHE
       amount: 3
     - id: CMWrench
     - id: RMCRangefinder

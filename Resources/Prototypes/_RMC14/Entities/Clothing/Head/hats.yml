@@ -178,6 +178,10 @@
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
   - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      components:
+      - HelmetAccessory
   - type: HelmetAccessoryHolder
 
 - type: entity

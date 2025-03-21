@@ -42,7 +42,7 @@
   abstract: true
   parent: CMEncryptionKey
   id: RMCEncryptionKeySPP
-  name: SPP radio encryption Key
+  name: SPP radio encryption key
   components:
   - type: Sprite
     state: upp_key
@@ -50,7 +50,7 @@
 - type: entity
   parent: RMCEncryptionKeySPP
   id: RMCEncryptionKeySPPCommand
-  name: SPP command radio encryption Key
+  name: SPP command radio encryption key
   components:
   - type: EncryptionKey
     channels:
@@ -64,7 +64,7 @@
 - type: entity
   parent: RMCEncryptionKeySPP
   id: RMCEncryptionKeySPPEngineer
-  name: SPP engineering radio encryption Key
+  name: SPP engineering radio encryption key
   components:
   - type: EncryptionKey
     channels:
@@ -76,7 +76,7 @@
 - type: entity
   parent: RMCEncryptionKeySPP
   id: RMCEncryptionKeySPPMedic
-  name: SPP medic radio encryption Key
+  name: SPP medic radio encryption key
   components:
   - type: EncryptionKey
     channels:
