@@ -1,0 +1,103 @@
+﻿- type: job
+  parent: CMJobBase
+  id: RMCSPPLeader
+  name: rmc-job-name-spp-leader
+  description: rmc-job-description-spp-leader
+  playTimeTracker: CMJobSPPLeader
+  ranks:
+    RMCRankSPPSerzhant: []
+  startingGear: RMCGearSPPLeader
+  icon: "RMCJobIconSPPLeader"
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  - HospitalCorpsman
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillEndurance: 3
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineering: 2
+        RMCSkillJtac: 3
+        RMCSkillLeadership: 2
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-leader
+  hidden: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerSPPLeader
+  name: spp spawner leader
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCRandomHumanoidSPPLeader
+
+- type: entity
+  id: RMCRandomHumanoidSPPLeader
+  name: spp ghost role leader
+  suffix: Role, Player
+  components:
+  - type: Sprite
+    sprite: Markers/cross.rsi
+    state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSPPLeader
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCSPPLeader
+  components:
+  - type: GhostRole
+    name: rmc-job-name-spp-leader
+    description: rmc-job-description-spp-leader
+    rules: rmc-ghost-role-information-spp-rules
+    raffle:
+      settings: short
+  - type: Loadout
+    prototypes: [ RMCGearSPPLeader ]
+  - type: Skills
+    skills:
+      RMCSkillCqc: 1
+      RMCSkillEndurance: 3
+      RMCSkillFirearms: 1
+      RMCSkillMedical: 2
+      RMCSkillConstruction: 2
+      RMCSkillEngineering: 2
+      RMCSkillJtac: 3
+      RMCSkillLeadership: 2
+
+- type: startingGear
+  id: RMCGearSPPLeader
+  equipment:
+    head: CMHeadCapSPPBeret
+    ears: RMCHeadsetSPPCommand
+    jumpsuit: CMJumpsuitSPP
+    outerClothing: RMCArmorSPPRifleman
+    gloves: RMCHandsVeteran
+    shoes: CMBootsBlackFilled
+    suitstorage: WeaponRifleMAR40
+    id: RMCIDSPP
+    belt: CMM77BeltFilled
+    back: RMCSatchelSPPRifleman
+    pocket1: RMCPouchAutoinjectorFill
+    pocket2: RMCPouchFuelTankFilledExtinguisher
+
+- type: playTimeTracker
+  id: CMJobSPPLeader
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPLeader
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: upp_sl

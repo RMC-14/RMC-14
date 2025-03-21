@@ -250,6 +250,15 @@
     grid:
     - 0,0,7,1 #4 slots
 
+- type: entity
+  parent: RMCPouchMagazineLarge
+  id: RMCPouchMagazineLargeMP5
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineSMGMP5
+      amount: 4
 
 # Pistol Magazine Pouch
 - type: entity
