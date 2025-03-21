@@ -1,4 +1,4 @@
-﻿using Content.Client._RMC14.UserInterface;
+using Content.Client._RMC14.UserInterface;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.TacticalMap;
 using JetBrains.Annotations;
@@ -91,7 +91,7 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
             return;
         }
 
-        var blips = new TacticalMapBlip[user.MarineBlips.Count + user.XenoBlips.Count];
+        var blips = new TacticalMapBlip[user.MarineBlips.Count + user.XenoBlips.Count + user.XenoStructureBlips.Count];
         var i = 0;
 
         foreach (var blip in user.MarineBlips.Values)
@@ -100,6 +100,11 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         }
 
         foreach (var blip in user.XenoBlips.Values)
+        {
+            blips[i++] = blip;
+        }
+
+        foreach (var blip in user.XenoStructureBlips.Values)
         {
             blips[i++] = blip;
         }
