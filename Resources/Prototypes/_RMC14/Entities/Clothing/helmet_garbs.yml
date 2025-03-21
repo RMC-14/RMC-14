@@ -292,8 +292,9 @@
   components:
   - type: Sprite
     sprite:  _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather.rsi
-  - type: Clothing
-    sprite:  _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather.rsi
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather.rsi
