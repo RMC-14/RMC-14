@@ -3,24 +3,24 @@
                                              You are allowed to remember knowledge about the game in general, such as how to cook, how to use objects, etc.
                                              You are absolutely [color=red]NOT[/color] allowed to remember, say, the name, appearance, etc. of your previous character.
 
-CMSPPLeader = SPP Starshiy Serzhant
-rmc-job-description-spp-leader = ""
+rmc-job-name-spp-leader = SPP Starshiy Serzhant
+rmc-job-description-spp-leader = The commander of the UPP force, the UPP Leader is charged with executing whatever mission the UPP have assigned the squad. They are equipped with mostly standard issue UPP equipment, though the Leader wears similar armor to the UPP Specialist.
 rmc-job-prefix-spp-leader = SL
 
-CMSPPSpecialist = SPP Serzhant
-rmc-job-description-spp-specialist = ""
+rmc-job-name-spp-specialist = SPP Serzhant
+rmc-job-description-spp-specialist = UPP Specialists are better trained and armed than their standard counterpart. Equipped with special heavy UPP armor that is capable of withstanding a significant amount of damage, and equipped with the formidable M60 machine gun, UPP Specialists are not to be taken lightly by even the most robust of marines.
 rmc-job-prefix-spp-specialist = Spc
 
-CMSPPSoldier = SPP Ryadovoy
-rmc-job-description-spp-soldier = ""
+rmc-job-name-spp-soldier = SPP Enlisted
+rmc-job-description-spp-soldier = Enlisted or conscripted into the armed forces, these Standard SPP soldiers are the core and brunt of the SPP forces - These fanatical soldiers are a force to be reckoned with.
 rmc-job-prefix-spp-soldier = Sol
 
-CMSPPEngineer = SPP MSzht Engineer
-rmc-job-description-spp-engineer = ""
+rmc-job-name-spp-engineer = SPP MSzht Sapper
+rmc-job-description-spp-engineer = These combat sappers are the UPP equivalent of the USCM's squad engineers. They're trained to setup field fortifications and breach into hostile defences.
 rmc-job-prefix-spp-engineer = Sap
 
-CMSPPMedic = SPP MSzht Medic
-rmc-job-description-spp-medic = ""
+rmc-job-name-spp-medic = SPP MSzht Medic
+rmc-job-description-spp-medic = These trained soldiers have access to an array of standard issued UPP medical items akin to their USCM counterparts. Combat is not their focus.
 rmc-job-prefix-spp-medic = Med
 
 CMSPPMilitaryPolice = SPP Politsiya
