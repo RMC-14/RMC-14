@@ -1,0 +1,31 @@
+﻿# LV624
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertLV624Armory
+  name: Armory
+  suffix: Insert LV624
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/LV624/armory_looted.yml"
+      probability: 0.10
+    - spawn: "/Maps/_RMC14/Inserts/LV624/armory_extra.yml"
+      probability: 0.10
+    - spawn: "/Maps/_RMC14/Inserts/LV624/armory_cheese.yml"
+      probability: 0.10
+    clearEntities: true
+    clearDecals: true
+
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertLV624NexusCenter
+  name: Nexus Barricaded
+  suffix: Insert LV624
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/LV624/nexuscenter_barricaded.yml"
+      probability: 0.3
+    clearEntities: true
+    clearDecals: true
+    
