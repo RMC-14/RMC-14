@@ -7,7 +7,7 @@
     actions:
     - !type:DeleteEntity
     edges:
-    - to: fenceMetalHybrisaElectric
+    - to: fenceMetal
       completed:
       - !type:SnapToGrid
         southRotation: true
@@ -36,7 +36,7 @@
       steps:
       - tool: Cutting
         doAfter: 5.0
-    - to: fenceMetalHybrisaElectric
+    - to: fenceMetal
       steps:
       - material: BarbedWire
         amount: 2
