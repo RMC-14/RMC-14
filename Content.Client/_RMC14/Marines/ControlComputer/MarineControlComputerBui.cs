@@ -13,6 +13,7 @@ public sealed class MarineControlComputerBui(EntityUid owner, Enum uiKey) : Boun
 
     protected override void Open()
     {
+        base.Open();
         // TODO RMC14 this should be named Almayer/Savannah control console
         // TODO RMC14 change alert level button also needs to state current alert level
         _window = this.CreateWindow<MarineControlComputerWindow>();

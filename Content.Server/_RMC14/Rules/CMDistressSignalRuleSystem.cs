@@ -75,6 +75,7 @@ using Robust.Server.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Collections;
 using Robust.Shared.Configuration;
+using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -115,7 +116,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly IServerPreferencesManager _prefsManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
     [Dependency] private readonly RMCStationJobsSystem _rmcStationJobs = default!;
     [Dependency] private readonly RoleSystem _roles = default!;
@@ -536,7 +537,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             spawnedDropships = true;
             var dropshipMap = _mapManager.CreateMap();
             var dropshipPoints = EntityQueryEnumerator<DropshipDestinationComponent, TransformComponent>();
-            var ships = new[] { "/Maps/_RMC14/alamo.yml", "/Maps/_RMC14/normandy.yml" };
+            var ships = new[] { new ResPath("/Maps/_RMC14/alamo.yml"), new ResPath("/Maps/_RMC14/normandy.yml") };
             var shipIndex = 0;
             while (dropshipPoints.MoveNext(out var destinationId, out _, out var destTransform))
             {
@@ -546,34 +547,36 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     continue;
                 }
 
-                _mapLoader.TryLoad(dropshipMap, ships[shipIndex], out var shipGrids);
-                shipIndex++;
+                if (!_mapLoader.TryLoadGrid(dropshipMap, ships[shipIndex], out var shipGrids))
+                {
+                    shipIndex++;
 
+                    if (shipIndex >= ships.Length)
+                        shipIndex = 0;
+
+                    continue;
+                }
+
+                shipIndex++;
                 if (shipIndex >= ships.Length)
                     shipIndex = 0;
 
-                if (shipGrids == null)
-                    continue;
-
-                foreach (var shipGrid in shipGrids)
+                var computers = EntityQueryEnumerator<DropshipNavigationComputerComponent, TransformComponent>();
+                var launched = false;
+                while (computers.MoveNext(out var computerId, out var computer, out var xform))
                 {
-                    var computers = EntityQueryEnumerator<DropshipNavigationComputerComponent, TransformComponent>();
-                    var launched = false;
-                    while (computers.MoveNext(out var computerId, out var computer, out var xform))
-                    {
-                        if (xform.GridUid != shipGrid)
-                            continue;
+                    if (xform.GridUid != shipGrids.Value)
+                        continue;
 
-                        if (!_dropship.FlyTo((computerId, computer), destinationId, null, startupTime: 1f, hyperspaceTime: 1f))
-                            continue;
+                    if (!_dropship.FlyTo((computerId, computer), destinationId, null, startupTime: 1f, hyperspaceTime: 1f))
+                        continue;
 
-                        launched = true;
-                        break;
-                    }
-
-                    if (launched)
-                        break;
+                    launched = true;
+                    break;
                 }
+
+                if (launched)
+                    break;
             }
 
             var marineFactions = EntityQueryEnumerator<MarineIFFComponent>();
@@ -667,7 +670,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     _hunger.SetHunger(ev.SpawnResult.Value, 50.0f, hunger);
             }
 
-            var faction = HasComp<SurvivorComponent>(ev.SpawnResult.Value) ? comp.SurvivorFaction : comp.MarineFaction;
+            var faction = HasComp<RMCSurvivorComponent>(ev.SpawnResult.Value) ? comp.SurvivorFaction : comp.MarineFaction;
             _gunIFF.SetUserFaction(ev.SpawnResult.Value, faction);
             return;
         }
@@ -1035,8 +1038,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private bool SpawnXenoMap(Entity<CMDistressSignalRuleComponent> rule)
     {
-        var mapId = _mapManager.CreateMap();
-
         //Just in case the planet was not selected before now
         var planet = SelectRandomPlanet();
         _lastPlanetMaps.Enqueue(planet.Proto.ID);
@@ -1045,10 +1046,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             _lastPlanetMaps.Dequeue();
         }
 
-        if (!_mapLoader.TryLoad(mapId, planet.Comp.Map.ToString(), out var grids))
+        if (!_mapLoader.TryLoadMap(planet.Comp.Map, out var mapNullable, out var grids))
             return false;
 
-        var map = _mapManager.GetMapEntityId(mapId);
+        var map = mapNullable.Value;
         EnsureComp<RMCPlanetComponent>(map);
         EnsureComp<TacticalMapComponent>(map);
 
@@ -1058,7 +1059,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         if (grids.Count > 1)
             Log.Error("Multiple planet-side grids found");
 
-        rule.Comp.XenoMap = grids[0];
+        rule.Comp.XenoMap = grids.First();
 
         //Process map inserts
         var mapInsertQuery = EntityQueryEnumerator<MapInsertComponent>();
@@ -1067,7 +1068,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             _mapInsert.ProcessMapInsert((uid, mapInsert));
         }
 
-        _mapManager.SetMapPaused(mapId, false);
+        _mapSystem.InitializeMap((map, map));
 
         // TODO RMC14 this should be delayed by 3 minutes + 13 second warning for immersion
         if (_landingZoneMiasmaEnabled &&
@@ -1501,13 +1502,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (string.IsNullOrWhiteSpace(path.ToString()))
                     return false;
 
-                var mapId = _mapManager.CreateMap();
-                if (!_mapLoader.TryLoad(mapId, path.ToString(), out _))
+                if (!_mapLoader.TryLoadMap(path, out var map, out _))
                     return false;
 
-                _mapManager.SetMapPaused(mapId, false);
-                _mapSystem.TryGetMap(mapId, out mapEnt);
-                return mapEnt != null;
+                _mapSystem.InitializeMap((map.Value, map.Value));
+                mapEnt = map;
+                return true;
             }
             catch (Exception e)
             {

@@ -11,6 +11,7 @@ public sealed class LifeboatComputerBui(EntityUid owner, Enum uiKey) : BoundUser
 
     protected override void Open()
     {
+        base.Open();
         _window = this.CreateWindow<LifeboatComputerWindow>();
         _window.EmergencyLaunchButton.OnPressed += _ => SendPredictedMessage(new LifeboatComputerLaunchBuiMsg());
         _window.NoButton.OnPressed += _ => _window.Close();

@@ -1,5 +1,5 @@
-﻿using JetBrains.Annotations;
-using Content.Shared._RMC14.Xenonids.Egg;
+﻿using Content.Shared._RMC14.Xenonids.Egg;
+using JetBrains.Annotations;
 
 namespace Content.Client._RMC14.Xenonids.Parasite;
 
@@ -15,6 +15,7 @@ public sealed class XenoParasiteGhostBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         _window = new XenoParasiteGhostWindow();
         _window.OnClose += Close;
         _window.DenyButton.OnPressed += _ => _window.Close();
