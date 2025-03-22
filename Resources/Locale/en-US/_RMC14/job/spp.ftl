@@ -8,7 +8,7 @@ rmc-job-description-spp-leader = The commander of the SPP force, the SPP Leader 
 rmc-job-prefix-spp-leader = SL
 
 rmc-job-name-spp-specialist = SPP Serzhant
-rmc-job-description-spp-specialist = SPP Specialists are better trained and armed than their standard counterpart. Equipped with special heavy SPP armor that is capable of withstanding a significant amount of damage, and equipped with the formidable M60 machine gun, SPP Specialists are not to be taken lightly by even the most robust of marines.
+rmc-job-description-spp-specialist = SPP Specialists are better trained and armed than their standard counterpart. Equipped with special heavy SPP armor that is capable of withstanding a significant amount of damage, SPP Specialists are not to be taken lightly by even the most robust of marines.
 rmc-job-prefix-spp-specialist = Spc
 
 rmc-job-name-spp-soldier = SPP Enlisted
@@ -16,11 +16,11 @@ rmc-job-description-spp-soldier = Enlisted or conscripted into the armed forces,
 rmc-job-prefix-spp-soldier = Sol
 
 rmc-job-name-spp-engineer = SPP MSzht Sapper
-rmc-job-description-spp-engineer = These combat sappers are the SPP equivalent of the USCM's squad engineers. They're trained to setup field fortifications and breach into hostile defences.
+rmc-job-description-spp-engineer = These combat sappers are the SPP equivalent of the UNMC's squad engineers. They're trained to setup field fortifications and breach into hostile defences.
 rmc-job-prefix-spp-engineer = Sap
 
 rmc-job-name-spp-medic = SPP MSzht Medic
-rmc-job-description-spp-medic = These trained soldiers have access to an array of standard issued SPP medical items akin to their USCM counterparts. Combat is not their focus.
+rmc-job-description-spp-medic = These trained soldiers have access to an array of standard issued SPP medical items akin to their UNMC counterparts. Combat is not their focus.
 rmc-job-prefix-spp-medic = Med
 
 CMSPPMilitaryPolice = SPP Politsiya
