@@ -80,7 +80,7 @@
     outerClothing: RMCArmorSPPSupport
     gloves: RMCHandsVeteranSPP
     shoes: CMBootsBlackFilled
-    suitstorage: WeaponSMGMP5
+    suitstorage: WeaponSMGMP5 # TODO RMC14 : Replace with Bizon SMG
     id: RMCIDSPP
     belt: CMBeltMedicBagFilled
     back: RMCSatchelSPPMedic
