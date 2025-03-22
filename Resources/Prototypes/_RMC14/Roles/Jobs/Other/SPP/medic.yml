@@ -17,11 +17,11 @@
     components:
     - type: Skills
       skills:
-        RMCSkillCqc: 1
-        RMCSkillEndurance: 3
-        RMCSkillFirearms: 2
-        RMCSkillMedical: 3
-        RMCSkillSurgery: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillJtac: 1
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-medic
   hidden: true
@@ -64,11 +64,11 @@
     prototypes: [ RMCGearSPPMedic ]
   - type: Skills
     skills:
-      RMCSkillCqc: 1
-      RMCSkillEndurance: 3
-      RMCSkillFirearms: 2
-      RMCSkillMedical: 3
-      RMCSkillSurgery: 2
+      RMCSkillFirearms: 1
+      RMCSkillFireman: 1
+      RMCSkillJtac: 1
+      RMCSkillMedical: 2
+      RMCSkillSurgery: 1
 
 - type: startingGear
   id: RMCGearSPPMedic
@@ -78,7 +78,7 @@
     eyes: RMCGlassesMedicalHUDGlasses
     jumpsuit: CMJumpsuitSPPMedic
     outerClothing: RMCArmorSPPSupport
-    gloves: RMCHandsVeteran
+    gloves: RMCHandsVeteranSPP
     shoes: CMBootsBlackFilled
     suitstorage: WeaponSMGMP5
     id: RMCIDSPP
