@@ -77,7 +77,9 @@
           - CMMagazineRifleM54CExt
           - CMMagazineRifleM54CMK1
           - CMMagazineRifleM54CMK1AP
-        startingItem: CMMagazineRifleM54C #TODO RMC: Change to incend magazine when that is added, parity.
+          - RMCMagazineRifleM54CIncendiary
+          - RMCMagazineRifleM54CMK1Incendiary
+        startingItem: RMCMagazineRifleM54CIncendiary
   - type: GunDamageModifier
     multiplier: 1.15
   - type: RMCMagneticItem
@@ -113,7 +115,9 @@
           - RMCAttachmentU1GrenadeLauncher
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentVerticalGrip
-          #TODO RMC: add underbarrel flamer (and adv underbarrel flamer) and underbarrel extinguisher here when they are added
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
+          #TODO RMC: add adv underbarrel flamer here when it is added
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.8125, 0.03125

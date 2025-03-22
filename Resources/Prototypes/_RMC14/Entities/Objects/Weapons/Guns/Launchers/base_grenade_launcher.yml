@@ -13,6 +13,8 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
     resetOnHandSelected: false
+  - type: GunIFF
+    enabled: true
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
@@ -65,3 +67,4 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/explosive_mouse.rsi
       state: all
+  - type: GunIgnorePrediction

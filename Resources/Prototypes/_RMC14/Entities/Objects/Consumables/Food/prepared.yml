@@ -19,6 +19,8 @@
     grindableSolutionName: food
   - type: InjectableSolution
     solution: food
+  - type: DrawableSolution
+    solution: food
 
 - type: entity
   parent: CMMarinePreparedMealBase

@@ -1,0 +1,129 @@
+﻿- type: radioChannel
+  id: SPP
+  name: chat-radio-spp
+  keycode: "y"
+  frequency: 1251
+  color: "#9b0612"
+  longRange: true
+
+- type: radioChannel
+  id: SPPCommand
+  name: chat-radio-spp-command
+  keycode: "k"
+  frequency: 1252
+  color: "#9b0612"
+  longRange: true
+
+- type: radioChannel
+  id: SPPEngi
+  name: chat-radio-spp-engi
+  keycode: "s"
+  frequency: 1253
+  color: "#9b0612"
+  longRange: true
+
+- type: radioChannel
+  id: SPPMed
+  name: chat-radio-spp-med
+  keycode: "i"
+  frequency: 1254
+  color: "#9b0612"
+  longRange: true
+
+- type: radioChannel
+  id: SPPCCT
+  name: chat-radio-spp-cct
+  keycode: "x"
+  frequency: 1255
+  color: "#9b0612"
+  longRange: true
+
+- type: entity
+  abstract: true
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeySPP
+  name: SPP radio encryption key
+  components:
+  - type: Sprite
+    state: upp_key
+
+- type: entity
+  parent: RMCEncryptionKeySPP
+  id: RMCEncryptionKeySPPCommand
+  name: SPP command radio encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - SPP
+    - SPPCommand
+    - SPPEngi
+    - SPPMed
+    - SPPCCT
+    defaultChannel: SPP
+
+- type: entity
+  parent: RMCEncryptionKeySPP
+  id: RMCEncryptionKeySPPEngineer
+  name: SPP engineering radio encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - SPP
+    - SPPEngi
+    - SPPCCT
+    defaultChannel: SPP
+
+- type: entity
+  parent: RMCEncryptionKeySPP
+  id: RMCEncryptionKeySPPMedic
+  name: SPP medic radio encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - SPP
+    - SPPEngi
+    - SPPMed
+    defaultChannel: SPP
+
+- type: entity
+  parent: RMCHeadsetIcons
+  id: RMCHeadsetSPP
+  name: SPP-CMD headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyColony
+
+- type: entity
+  parent: RMCHeadsetIcons
+  id: RMCHeadsetSPPCommand
+  name: SPP-CMD headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeySPPCommand
+      - CMEncryptionKeyColony
+
+- type: entity
+  parent: RMCHeadsetIcons
+  id: RMCHeadsetSPPEngineer
+  name: SPP-CCT headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeySPPEngineer
+      - CMEncryptionKeyColony
+
+- type: entity
+  parent: RMCHeadsetIcons
+  id: RMCHeadsetSPPMedic
+  name: SPP-MED headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeySPPMedic
+      - CMEncryptionKeyColony

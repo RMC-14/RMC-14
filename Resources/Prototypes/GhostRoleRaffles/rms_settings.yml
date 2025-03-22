@@ -1,0 +1,8 @@
+# for roles that require a certain amount of time to have passed in the round before becoming available
+- type: ghostRoleRaffleSettings
+  id: timeRequirement
+  settings:
+    initialDuration: 10
+    joinExtendsDurationBy: 0
+    maxDuration: 910
+    roundTimeRequirement: 900 #seconds

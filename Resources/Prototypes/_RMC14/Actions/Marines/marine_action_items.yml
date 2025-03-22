@@ -104,7 +104,7 @@
     icon:
       sprite: _RMC14/Objects/phone.rsi
       state: rpb_phone
-    event: !type:TelephoneActionEvent
+    event: !type:RMCTelephoneActionEvent
     useDelay: 0.5
 
 - type: Tag

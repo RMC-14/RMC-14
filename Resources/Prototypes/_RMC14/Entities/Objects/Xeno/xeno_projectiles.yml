@@ -380,11 +380,9 @@
     damage: {}
   - type: TriggerOnFixedDistanceStop
     delay: 1
-  - type: ClusterGrenade
+  - type: ProjectileGrenade
     fillPrototype: XenoAcidBallSpitProjectile
-    maxGrenadesCount: 14
-    grenadeType: enum.GrenadeType.Shoot
-    triggerGrenades: false
+    capacity: 14
   - type: ProjectileMaxRange
     max: 5
     delete: false
@@ -393,3 +391,29 @@
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
+
+- type: entity
+  parent: XenoBaseProjectile
+  id: XenoOppressorTailHook
+  name: tail hook
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Sprite
+    sprite: _RMC14/Effects/beam.rsi
+    state: oppressor_tail_hook
+    drawDepth: Effects # Draws above mobs
+  - type: ProjectileMaxRange
+    max: 3.5
+  - type: PreventCollideWithDead
+  - type: Projectile
+    impactEffect: null
+    damage:
+      types:
+        Slash: 40
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: false
+  - type: RMCProjectileAccuracy
+    accuracy: 185
+  - type: XenoHookOnHit
+ 

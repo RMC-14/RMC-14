@@ -25,3 +25,14 @@
             Poison: 0.25
       - !type:FlammableReaction
         multiplier: 0.2
+
+- type: reagent
+  parent: [ CMReagent, BasePyrotechnic ]
+  id: RMCNapalmUT
+  name: reagent-name-rmcnapalmut
+  desc: reagent-desc-rmcnapalmut
+  physicalDesc: reagent-physical-desc-shiny
+  flavor: bitter
+  color: "#DD9B00"
+  intensity: 30
+  duration: 20

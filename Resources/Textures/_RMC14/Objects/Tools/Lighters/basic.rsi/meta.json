@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/items/items.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/items/items.dmi, modified by Hyenh#6078(313846233099927552)",
   "size": {
     "x": 32,
     "y": 32
@@ -30,6 +30,12 @@
     },
     {
       "name": "lighter_y_on"
+    },
+	{
+      "name": "lighter_u"
+    },
+    {
+      "name": "lighter_u_on"
     },
     {
       "name": "lighter_flame",

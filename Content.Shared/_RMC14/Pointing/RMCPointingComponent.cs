@@ -9,4 +9,7 @@ public sealed partial class RMCPointingComponent : Component
 {
     [DataField, AutoNetworkedField]
     public EntProtoId Arrow = "RMCPointingArrowBig";
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId SquadArrow = "RMCPointingArrowSquad";
 }

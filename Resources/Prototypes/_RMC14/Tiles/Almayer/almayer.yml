@@ -119,6 +119,66 @@
   canPlaceTunnel: false
 
 - type: tile
+  parent: CMFloorBlack
+  id: RMCFloorBlack0
+  sprite: /Textures/_RMC14/Tiles/almayer/black_0.png
+
+- type: tile
+  parent: CMFloorBlack
+  id: RMCFloorBlack1
+  sprite: /Textures/_RMC14/Tiles/almayer/black_1.png
+
+- type: tile
+  parent: CMFloorBlack
+  id: RMCFloorBlack2
+  sprite: /Textures/_RMC14/Tiles/almayer/black_2.png
+
+- type: tile
+  parent: CMFloorBlack
+  id: RMCFloorBlack3
+  sprite: /Textures/_RMC14/Tiles/almayer/black_3.png
+
+- type: tile
+  parent: CMFloorBlack
+  id: RMCFloorBlack4
+  sprite: /Textures/_RMC14/Tiles/almayer/black_4.png
+
+- type: tile
+  parent: CMFloorBlack
+  id: RMCFloorBlack5
+  sprite: /Textures/_RMC14/Tiles/almayer/black_5.png
+
+- type: tile
+  parent: CMFloorBlack
+  id: RMCFloorBlack6
+  sprite: /Textures/_RMC14/Tiles/almayer/black_6.png
+
+- type: tile
+  parent: CMFloorBlack
+  id: RMCFloorBlack7
+  sprite: /Textures/_RMC14/Tiles/almayer/black_7.png
+
+- type: tile
+  parent: CMFloorBlack
+  id: RMCFloorBlackCorner1
+  sprite: /Textures/_RMC14/Tiles/almayer/blackcorner_1.png
+
+- type: tile
+  parent: CMFloorBlack
+  id: RMCFloorBlackCorner2
+  sprite: /Textures/_RMC14/Tiles/almayer/blackcorner_2.png
+
+- type: tile
+  parent: CMFloorBlack
+  id: RMCFloorBlackCorner3
+  sprite: /Textures/_RMC14/Tiles/almayer/blackcorner_3.png
+
+- type: tile
+  parent: CMFloorBlack
+  id: RMCFloorBlackCorner4
+  sprite: /Textures/_RMC14/Tiles/almayer/blackcorner_4.png
+
+- type: tile
   parent: CMTileBase
   id: CMFloorTComms0
   name: tiles-cm-tcomms

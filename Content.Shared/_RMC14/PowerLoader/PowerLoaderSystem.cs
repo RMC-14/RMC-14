@@ -48,7 +48,7 @@ public sealed class PowerLoaderSystem : EntitySystem
     [Dependency] private readonly SharedMoverController _mover = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
@@ -179,6 +179,9 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
         DeleteVirtuals(ent, buckle);
+
+        if (ent.Comp.DoAfter != null && _doAfter.IsRunning(ent.Comp.DoAfter.Id))
+            _doAfter.Cancel(ent.Comp.DoAfter.Id);
     }
 
     private void OnUserActivateInWorld(Entity<PowerLoaderComponent> ent, ref UserActivateInWorldEvent args)
@@ -195,7 +198,8 @@ public sealed class PowerLoaderSystem : EntitySystem
             DuplicateCondition = DuplicateConditions.SameEvent,
         };
 
-        _doAfter.TryStartDoAfter(doAfter);
+        if (_doAfter.TryStartDoAfter(doAfter))
+            ent.Comp.DoAfter = ev.DoAfter;
     }
 
     private void OnGrabDoAfter(Entity<PowerLoaderComponent> ent, ref PowerLoaderGrabDoAfterEvent args)
@@ -246,7 +250,8 @@ public sealed class PowerLoaderSystem : EntitySystem
             DuplicateCondition = DuplicateConditions.SameEvent,
         };
 
-        _doAfter.TryStartDoAfter(doAfter);
+        if (_doAfter.TryStartDoAfter(doAfter))
+            ent.Comp.DoAfter = ev.DoAfter;
     }
 
     private void OnPointActivateInWorld(Entity<DropshipWeaponPointComponent> ent, ref ActivateInWorldEvent args)
@@ -276,7 +281,8 @@ public sealed class PowerLoaderSystem : EntitySystem
             DuplicateCondition = DuplicateConditions.SameEvent,
         };
 
-        _doAfter.TryStartDoAfter(doAfter);
+        if (_doAfter.TryStartDoAfter(doAfter))
+            loader.DoAfter = ev.DoAfter;
     }
 
     private void OnPointActivateInWorld(Entity<DropshipUtilityPointComponent> ent, ref ActivateInWorldEvent args)
@@ -306,7 +312,8 @@ public sealed class PowerLoaderSystem : EntitySystem
             DuplicateCondition = DuplicateConditions.SameEvent,
         };
 
-        _doAfter.TryStartDoAfter(doAfter);
+        if (_doAfter.TryStartDoAfter(doAfter))
+            loader.DoAfter = ev.DoAfter;
     }
 
     private void OnGrabbablePickupAttempt(Entity<PowerLoaderGrabbableComponent> ent, ref PickupAttemptEvent args)
@@ -605,7 +612,8 @@ public sealed class PowerLoaderSystem : EntitySystem
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
         };
-        _doAfter.TryStartDoAfter(doAfter);
+        if (_doAfter.TryStartDoAfter(doAfter) && TryComp<PowerLoaderComponent>(args.User, out var loader))
+            loader.DoAfter = ev.DoAfter;
     }
 
     private void OnActivePilotPreventCollide(Entity<ActivePowerLoaderPilotComponent> ent, ref PreventCollideEvent args)

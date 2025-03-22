@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/turf/walls/hybrisa_colony_window.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "strata_frame0"
+    },
+    {
+      "name": "strata_frame1"
+    },
+    {
+      "name": "strata_frame2"
+    },
+    {
+      "name": "strata_frame3"
+    },
+    {
+      "name": "strata_frame4"
+    },
+    {
+      "name": "strata_frame5"
+    },
+    {
+      "name": "strata_frame6"
+    },
+    {
+      "name": "strata_frame7"
+    },
+    {
+      "name": "strata_frame8"
+    },
+    {
+      "name": "strata_frame9"
+    },
+    {
+      "name": "strata_frame10"
+    },
+    {
+      "name": "strata_frame11"
+    },
+    {
+      "name": "strata_frame12"
+    },
+    {
+      "name": "strata_frame13"
+    },
+    {
+      "name": "strata_frame14"
+    },
+    {
+      "name": "strata_frame15"
+    }
+  ]
+}
