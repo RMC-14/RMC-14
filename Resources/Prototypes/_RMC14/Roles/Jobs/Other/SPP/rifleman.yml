@@ -16,14 +16,7 @@
     components:
     - type: Skills
       skills:
-        RMCSkillCqc: 2
-        RMCSkillEndurance: 3
-        RMCSkillFirearms: 2
-        RMCSkillFireman: 2
-        RMCSkillMeleeWeapons: 1
-        RMCSkillMedical: 1
-        RMCSkillEngineer: 1
-        RMCSkillConstruction: 1
+        RMCSkillFirearms: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-soldier
   hidden: true
@@ -66,14 +59,7 @@
     prototypes: [ RMCGearSPPRifleman ]
   - type: Skills
     skills:
-      RMCSkillCqc: 2
-      RMCSkillEndurance: 3
-      RMCSkillFirearms: 2
-      RMCSkillFireman: 2
-      RMCSkillMeleeWeapons: 1
-      RMCSkillMedical: 1
-      RMCSkillEngineer: 1
-      RMCSkillConstruction: 1
+      RMCSkillFirearms: 1
 
 - type: startingGear
   id: RMCGearSPPRifleman

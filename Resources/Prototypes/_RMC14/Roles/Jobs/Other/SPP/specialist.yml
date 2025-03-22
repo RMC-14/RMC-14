@@ -17,14 +17,15 @@
     components:
     - type: Skills
       skills:
-        RMCSkillCqc: 3
-        RMCSkillEndurance: 3
-        RMCSkillFirearms: 2
-        RMCSkillMeleeWeapons: 1
+        RMCSkillCqc: 1
         RMCSkillConstruction: 1
-        RMCSkillEngineering: 1
-        RMCSkillJtac: 2
-        RMCSkillLeadership: 1
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 1
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillJtac: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillSpecialistWeapons: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-specialist
   hidden: true
@@ -67,14 +68,15 @@
     prototypes: [ RMCGearSPPSpecialist ]
   - type: Skills
     skills:
-      RMCSkillCqc: 3
-      RMCSkillEndurance: 3
-      RMCSkillFirearms: 2
-      RMCSkillMeleeWeapons: 1
+      RMCSkillCqc: 1
       RMCSkillConstruction: 1
-      RMCSkillEngineering: 1
-      RMCSkillJtac: 2
-      RMCSkillLeadership: 1
+      RMCSkillEndurance: 2
+      RMCSkillEngineer: 1
+      RMCSkillFirearms: 1
+      RMCSkillFireman: 1
+      RMCSkillJtac: 1
+      RMCSkillMeleeWeapons: 1
+      RMCSkillSpecialistWeapons: 1
 
 - type: startingGear
   id: RMCGearSPPSpecialist
@@ -83,7 +85,7 @@
     ears: RMCHeadsetSPP
     jumpsuit: CMJumpsuitSPP
     outerClothing: RMCArmorSPPHeavySpecialist
-    gloves: RMCHandsVeteran
+    gloves: RMCHandsVeteranSPP
     shoes: CMBootsBlackFilled
     suitstorage: RMCWeaponLMGM60
     id: RMCIDSPP

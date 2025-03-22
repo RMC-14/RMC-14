@@ -17,14 +17,18 @@
     components:
     - type: Skills
       skills:
-        RMCSkillCqc: 1
-        RMCSkillEndurance: 3
-        RMCSkillFirearms: 1
-        RMCSkillMedical: 2
         RMCSkillConstruction: 2
-        RMCSkillEngineering: 2
-        RMCSkillJtac: 3
-        RMCSkillLeadership: 2
+        RMCSkillCqc: 1
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillIntel: 1
+        RMCSkillJtac: 2
+        RMCSkillLeadership: 1
+        RMCSkillMedical: 1
+        RMCSkillVehicles: 1
+        RMCSkillPolice: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-leader
   hidden: true
@@ -67,14 +71,18 @@
     prototypes: [ RMCGearSPPLeader ]
   - type: Skills
     skills:
-      RMCSkillCqc: 1
-      RMCSkillEndurance: 3
-      RMCSkillFirearms: 1
-      RMCSkillMedical: 2
       RMCSkillConstruction: 2
-      RMCSkillEngineering: 2
-      RMCSkillJtac: 3
-      RMCSkillLeadership: 2
+      RMCSkillCqc: 1
+      RMCSkillEndurance: 2
+      RMCSkillEngineer: 2
+      RMCSkillFirearms: 1
+      RMCSkillFireman: 1
+      RMCSkillIntel: 1
+      RMCSkillJtac: 2
+      RMCSkillLeadership: 1
+      RMCSkillMedical: 1
+      RMCSkillVehicles: 1
+      RMCSkillPolice: 1
 
 - type: startingGear
   id: RMCGearSPPLeader
@@ -83,7 +91,7 @@
     ears: RMCHeadsetSPPCommand
     jumpsuit: CMJumpsuitSPP
     outerClothing: RMCArmorSPPRifleman
-    gloves: RMCHandsVeteran
+    gloves: RMCHandsVeteranSPP
     shoes: CMBootsBlackFilled
     suitstorage: WeaponRifleMAR40
     id: RMCIDSPP
