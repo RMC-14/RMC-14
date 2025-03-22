@@ -5,14 +5,14 @@
   description: A much rarer variant of the Type 71, this version contains an integrated suppressor, integrated scope, and extensive fine-tuning. Many parts have been replaced, filed down, and improved upon. As a result, this variant is rarely seen outside of commando units.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/desert.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/type73.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/desert.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/type73.rsi
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -31,9 +31,10 @@
     - SemiAuto
     - Burst
     - FullAuto
-    recoilUnwielded: 3
+    recoilWielded: 0.1
+    recoilUnwielded: 2
     scatterWielded: 6
-    scatterUnwielded: 12
+    scatterUnwielded: 14
     baseFireRate: 4
     burstScatterMult: 1
     modifiers:
@@ -55,14 +56,18 @@
           - RMCMagazineRifleType71AP
           - RMCMagazineRifleType71HEAP
   - type: GunDamageModifier
-    multiplier: 0.8
+    multiplier: 1
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
+        locked: true
+        startingAttachable: RMCAttachmentSuppressor
         whitelist:
           tags:
-          - RMCAttachmentSuppressor
+          - RMCAttachmentSuppressor #it needs the ability to hide the exsisting sprite of a attachment while keeping stat changes
       rmc-aslot-rail:
+        locked: true
+        startingAttachable: RMCAttachmentS42xTelescopicMiniscope
         whitelist:
           tags:
           - RMCAttachmentS42xTelescopicMiniscope
@@ -77,9 +82,9 @@
           - RMCAttachmentBurstFireAssembly
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.75, 0.00
-      rmc-aslot-rail: 0.1, 0.16
-      rmc-aslot-underbarrel: 0.35, -0.343
+      rmc-aslot-barrel: 0.81, 0.032
+      rmc-aslot-rail: 0.05, 0.185
+      rmc-aslot-underbarrel: 0.4, -0.23
   - type: ItemCamouflage
     camouflageVariations: { }
   - type: Tag
