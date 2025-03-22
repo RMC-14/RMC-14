@@ -140,7 +140,7 @@ entities:
             31: 5,6
             39: 4,8
         - node:
-            color: '#B02E26FF'
+            color: '#A91409FF'
             id: splatter
           decals:
             51: 4,7
@@ -287,6 +287,30 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 1.5,10.5
+      parent: 1
+- proto: CMLightFixture
+  entities:
+  - uid: 133
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 4.5,11.5
+      parent: 1
+  - uid: 134
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 12.5,11.5
+      parent: 1
+  - uid: 135
+    components:
+    - type: Transform
+      pos: 4.5,3.5
+      parent: 1
+  - uid: 136
+    components:
+    - type: Transform
+      pos: 12.5,3.5
       parent: 1
 - proto: CMMop
   entities:
@@ -826,6 +850,15 @@ entities:
     components:
     - type: Transform
       pos: 5.5,11.5
+      parent: 1
+- proto: RMCMarkerAreaLabel
+  entities:
+  - uid: 132
+    components:
+    - type: MetaData
+      name: Nexus
+    - type: Transform
+      pos: 8.5,7.5
       parent: 1
 - proto: RMCPlankWood1
   entities:
