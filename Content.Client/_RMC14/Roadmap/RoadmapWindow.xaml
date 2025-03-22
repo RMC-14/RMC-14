@@ -46,6 +46,7 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Firearms skill" Text="Each marine role has a different firearms skill. This impacts how accurate they are with guns" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Medical skill" Text="Allows more advanced medical procedures and increases their overall speed" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno Queen" Text="Head caste of the xenonids" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Mess Technician" Text="Shipside Kitchen role" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="LV-759 Hybrisa Prospera planet" Text="A large city map from cmss13 by Zenith, mikoka wei, Drathek, Nanu, Cuberound, Almings, Crowford, Blundir, dimdimich1996, being ported to RMC-14 by Noctyrn." />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Oppressor Praetorian strain" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Ravager" />
@@ -84,7 +85,6 @@
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Construction skill" Text="Allows you to build more advanced constructs" />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Whiskey Outpost gamemode" Text="A different PvP gamemode with infinite waves of xenos fighting against a team of marines." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="PvE" Text="A separate player vs AI gamemode on a second server with campaigns ran by the community." />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Mess Technician" Text="Shipside Kitchen role" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Blood types" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Pain and painkillers" Text="Wounds will cause pain which can be dulled with painkillers" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="More surgeries" Text="Foreign object removal, internal bleeding surgery, fractures" />
