@@ -27,6 +27,7 @@ public sealed class RMCCameraBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         _window = new RMCCameraWindow();
         _window.OnClose += Close;
         _window.SearchBar.OnTextChanged += _ => RefreshSearch();

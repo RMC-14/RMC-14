@@ -33,6 +33,7 @@ public sealed class RMCChemicalDispenserBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         _window = this.CreateWindow<RMCChemicalDispenserWindow>();
         _window.EjectBeakerButton.OnPressed += _ => SendPredictedMessage(new RMCChemicalDispenserEjectBeakerBuiMsg());
 
