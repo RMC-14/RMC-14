@@ -54,8 +54,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Flora/tallgrass_desert.rsi #different sprite instead of color: "desert" because parity
-  - type: Icon
-    sprite: _RMC14/Structures/Flora/tallgrass_desert.rsi
 
 - type: entity
   parent: RMCGrassTallSidesBase
@@ -63,16 +61,12 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Flora/tallgrass_desert.rsi
-  - type: Icon
-    sprite: _RMC14/Structures/Flora/tallgrass_desert.rsi
 
 - type: entity
   parent: RMCGrassTallCornerBase
   id: RMCGrassTallCornerDesert
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Flora/tallgrass_desert.rsi
-  - type: Icon
     sprite: _RMC14/Structures/Flora/tallgrass_desert.rsi
 
 # Ice
