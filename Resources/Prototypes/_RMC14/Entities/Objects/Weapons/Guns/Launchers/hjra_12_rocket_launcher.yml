@@ -1,0 +1,121 @@
+- type: entity
+  name: HJRA-12 Handheld Anti-Tank Grenade Launcher
+  parent: [BaseWeaponLauncher, CMBaseWeaponGun, RMCBaseAttachableHolder]
+  id: RMCWeaponLauncherHJRA12
+  description: "The HJRA-12 Handheld Anti-Tank Grenade Launcher is the standard Anti-Armor weapon of the SPP. It is designed to be easy to use and to take out or disable armored vehicles."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/hjra12.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/hjra12.rsi
+    quickEquip: true
+    slots:
+    - suitStorage
+  - type: Gun
+    fireRate: 0.83
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/m5_shoot.ogg
+    resetOnHandSelected: false
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+        - RMCProjectileRocketHJRA12
+    capacity: 1
+    cycleable: true
+    mayTransfer: false
+    insertDelay: 6.0
+    cycleDelay: 6.0
+    proto: RMCRocketHJRA12
+    soundInsert:
+      path: /Audio/_RMC14/Weapons/Guns/Cock/m5_ammo.ogg
+  - type: Corrodible
+    isCorrodible: false
+  - type: ExplosionResistance
+    damageCoefficient: 0
+  - type: Wieldable
+  - type: GunRequiresWield
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
+  - type: OnShootTriggerAmmoTimer
+    delay: 0.2 # TODO RMC14 Make some way for rockets to explode when they stop, for shooting at the ground closer than max range.
+    # This is a temporary hack to guarantee it will always go off after stopping even if it doesn't collide with anything.
+    # Works for almost all gameplay purposes at least right now because even max range rockets are less than 0.2s and it's fast enough not matter.
+  - type: ShootAtFixedPoint
+    shootArcProj: false
+  - type: WieldableSpeedModifiers
+    base: 0.5
+    light: 0.69
+    medium: 0.75
+    heavy: 0.806
+  - type: WieldDelay
+    baseDelay: 1.2
+    preventFiring: true
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentHJRA12Back
+        whitelist:
+          tags:
+          - RMCAttachmentHJRA12Back
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-stock: -0.65, 0
+  - type: IgnorePredictionHide
+  - type: GunIgnorePrediction
+  - type: AssistedReloadWeapon
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/explosive_mouse.rsi
+      state: all
+
+- type: entity
+  id: RMCRocketHJRA12
+  name: HJRA-12 Anti-Tank Rocket
+  parent: BaseItem
+  description: A rocket for the SPP standard-issue HJRA-12 Handheld Anti-Tank Grenade Launcher. This one is a standard Anti-Tank rocket designed to disable or destroy hostile vehicles.
+  components:
+  - type: Tag
+    tags:
+    - RMCProjectileRocketHJRA12
+  - type: CartridgeAmmo
+    proto: RMCProjectileRocketHJRA12
+    deleteOnSpawn: false
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/hjraantitank.rsi
+    layers:
+    - state: hjra_tank
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Item
+    size: Normal
+  - type: Appearance
+  - type: SpentAmmoVisuals
+    state: hjra_tank
+    suffix: false
+  - type: IgnorePredictionHide
+
+- type: entity
+  parent: RMCProjectileRocket84mm # I'm not doing explosion UI bro that shit caused my wife to leave me
+  categories: [ HideSpawnMenu ]
+  id: RMCProjectileRocketHJRA12
+  name: 84mm high-explosive rocket
+  description: A rocket tube compatible with the M5-ATL loaded with an AP warhead. Capable of piercing and downing heavily armored targets. Deals very little to no splash damage. Inflicts guaranteed stun to most targets. Has high accuracy within 7 meters.
+  components:
+  - type: CartridgeAmmo
+    proto: RMCProjectileRocket84mmAntiArmor
+    deleteOnSpawn: false
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/hjraantitank.rsi
+    layers:
+    - state: hjra_tank
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: IgnorePredictionHide
+
+- type: Tag
+  id: RMCRocketHJRA12
+
+- type: Tag
+  id: RMCProjectileRocketHJRA12
