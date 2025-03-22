@@ -107,6 +107,7 @@
   - type: ContainerFill
     containers:
       key_slots:
+      - CMEncryptionKeyColony
       - RMCEncryptionKeySPPCommand
 
 - type: entity
@@ -117,6 +118,7 @@
   - type: ContainerFill
     containers:
       key_slots:
+      - CMEncryptionKeyColony
       - RMCEncryptionKeySPPEngineer
 
 - type: entity
@@ -127,4 +129,5 @@
   - type: ContainerFill
     containers:
       key_slots:
+      - CMEncryptionKeyColony
       - RMCEncryptionKeySPPMedic
