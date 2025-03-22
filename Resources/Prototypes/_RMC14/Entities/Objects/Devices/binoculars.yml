@@ -32,7 +32,7 @@
       Snow: s_binoculars
       Classic: c_binoculars
       Urban: u_binoculars
-      
+
 - type: entity
   parent: RMCBinoculars
   id: RMCBinocularsCiv
@@ -73,6 +73,7 @@
         light:
           Rangefinder: { state: laser_range }
           Designator: { state: laser_cas }
+          Spotter: { state: laser_spotter }
   - type: ItemCamouflage
     states:
       Jungle: rangefinder
@@ -95,6 +96,30 @@
   - type: Rangefinder
     mode: Designator
     canDesignate: true
+
+- type: entity
+  parent: RMCRangefinder
+  id: RMCLaserDesignatorSpotter
+  name: spotter's laser designator
+  description: "A specially-designed laser designator, issued to USCM spotters, with two modes: target marking for CAS with IR laser and rangefinding. Click a tile to target something. Additionally, a trained spotter can laze targets for a USCM marksman, increasing the speed of target acquisition. A targeting beam will connect the binoculars to the target, but it may inherit the user's cloak, if possible."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/binoculars.rsi
+    layers:
+    - state: rangefinder
+    - state: laser_cas
+    - state: spotter_overlay
+  - type: Rangefinder
+    mode: Designator
+    canDesignate: true
+  - type: Corrodible
+    isCorrodible: false
+  - type: Spotting
+  - type: TargetingLaser
+    laserColor: orange
+    currentLaserColor: orange
+    laserAlpha: 0.2
+    gradualAlpha: false
 
 - type: entity
   parent: RMCLaserDesignator

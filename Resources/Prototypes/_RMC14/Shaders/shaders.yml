@@ -19,6 +19,11 @@
   path: "/Textures/_RMC14/Shaders/night_vision.swsl"
 
 - type: shader
+  id: RMCBlurryVisionX
+  kind: source
+  path: "/Textures/_RMC14/Shaders/blurryx.swsl"
+
+- type: shader
   id: RMCAuraOutline
   kind: source
   path: "/Textures/Shaders/outline.swsl"

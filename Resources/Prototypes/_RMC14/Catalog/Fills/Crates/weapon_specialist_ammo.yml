@@ -7,7 +7,7 @@
     contents:
     - id: CMMagazineSniperM96S
       amount: 2
-    - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
+    - id: CMMagazineSniperM96SFlak
       amount: 2
     - id: CMMagazineSniperM96SIncendiary
       amount: 2
@@ -29,7 +29,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
+    - id: CMMagazineSniperM96SFlak
       amount: 5
 
 - type: entity
@@ -41,6 +41,16 @@
     contents:
     - id: CMMagazineSniperM96SIncendiary
       amount: 5
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineXM43E1Standard
+  name: XM43E1 Anti-Materiel Sniper Standard Magazine Crate (x3)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSniperXM43E1AntiMateriel
+      amount: 3
 
 - type: entity
   parent: RMCCrateAmmo

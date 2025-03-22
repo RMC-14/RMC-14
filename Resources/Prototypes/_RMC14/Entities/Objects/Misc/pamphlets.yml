@@ -70,6 +70,10 @@
   - type: Sprite
     state: pamphlet_spotter
   - type: SkillPamphlet
+    addComps:
+    - type: Spotter
+    addSkills:
+      RMCSkillJtac: 1
     jobWhitelists:
     - popup: rmc-pamphlets-rifleman-warning
       jobProto: CMRifleman

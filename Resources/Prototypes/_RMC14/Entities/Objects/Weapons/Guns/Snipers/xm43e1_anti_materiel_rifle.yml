@@ -1,0 +1,144 @@
+- type: entity
+  parent: RMCBaseWeaponSniperRifle
+  id: RMCXM43E1AntiMaterielRifle
+  name: XM43E1 anti-materiel rifle
+  description: An experimental anti-materiel rifle produced by Aegis Armaments, recently reacquired from the deep storage of an abandoned prototyping facility. This one in particular is currently undergoing field testing. Chambered in 10x99mm Caseless.\n\nThis weapon can punch through thin metal plating and walls, though it'll lose most of its lethality in the process. It can even work for demolitions, with experienced users known to disassemble segments of solid, reinforced walls in the field with just a single standard magazine of 10x99mm. In lieu of explosives or an engineer, they instead use each of the 8 shots to break down vital structural supports, taking the wall apart in the process.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Snipers/xm43e1.rsi
+    layers:
+    - state: bolt-open
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+      state: pmc_sniperbarrel
+      offset: 0.500, 0.050
+  - type: Item
+    size: Large
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Snipers/xm43e1.rsi
+  - type: Tag
+    tags:
+    - RMCXM43E1AntiMaterielRifle
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 12
+  - type: Gun
+    shotsPerBurst: 1
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_sniper_heavy.ogg
+  - type: RMCSelectiveFire
+    recoilWielded: 1
+    scatterWielded: 0
+    baseFireRate: 0.335
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 3
+  - type: WieldDelay
+    baseDelay: 1.2
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineSniperXM43E1AntiMateriel
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineXM43E1
+  - type: GunUserWhitelist
+    whitelist:
+      components:
+      - SniperWhitelist
+  - type: GunRequiresWield
+  - type: Corrodible
+    isCorrodible: false
+  - type: GunIFF
+    enabled: true
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        locked: true
+        startingAttachable: RMCXM43E1IntegratedScope
+        whitelist:
+          tags:
+          - RMCXM43E1IntegratedScope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBipod
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-underbarrel: 0.21875, -0.343
+  - type: AimedShot
+    aimDuration: 2
+    aimedShotCooldown: 4.5
+  - type: TargetingLaser
+  - type: RMCFocusedShooting
+
+- type: entity
+  parent: CMMagazineSniperM96S
+  id: RMCMagazineSniperXM43E1AntiMateriel
+  name: XM43E1 marksman magazine (10x99mm)
+  description: A magazine of caseless 10x99mm anti-materiel rounds, capable of penetrating through most infantry-level materiel. Depending on what you hit, it might even have enough energy to wound anything behind the target.
+  components:
+  - type: Tag
+    tags:
+    - RMCMagazineXM43E1
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeSniper10x99mmAntiMateriel
+    proto: RMCCartridgeSniper10x99mmAntiMateriel
+    capacity: 8
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m42c.rsi
+    layers:
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: CMCartridgeSniper10x28mm
+  id: RMCCartridgeSniper10x99mmAntiMateriel
+  name: cartridge (10x99mm) (AntiMateriel)
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeSniper10x99mmAntiMateriel
+  - type: CartridgeAmmo
+    proto: RMCBulletSniper10x99mmAntiMateriel
+
+- type: entity
+  parent: CMBulletSniper10x28mm
+  id: RMCBulletSniper10x99mmAntiMateriel
+  name: bullet (10x99mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    deleteOnCollide: false
+    damage:
+      types:
+        Piercing: 125
+        Structural: 1275
+  - type: CMArmorPiercing
+    amount: 75
+  - type: RMCPenetratingProjectile
+  - type: RMCStoppingPower
+  - type: AimedShotEffect
+    extraHits: 0.8
+- type: Tag
+  id: RMCXM43E1AntiMaterielRifle
+
+- type: Tag
+  id: RMCMagazineXM43E1
+
+- type: Tag
+  id: RMCCartridgeSniper10x99mmAntiMateriel
