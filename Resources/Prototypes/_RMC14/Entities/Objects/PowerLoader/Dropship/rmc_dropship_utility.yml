@@ -43,3 +43,23 @@
         RMCSkillMedical: 2
   - type: Medevac
   - type: AnimationPlayer
+
+- type: entity
+  parent: RMCDropshipAttachmentUtility
+  id: RMCDropshipAttachmentFulton
+  name: RMU-19 fulton recovery system
+  description: A winch system to collect any fulton recovery balloons in high altitude. Make sure you turn it on!
+  components:
+  - type: Sprite
+    layers:
+    - state: fulton_system
+  - type: DropshipFabricatorPrintable
+    cost: 200
+  - type: DropshipUtility
+    utilityAttachedSprite:
+      sprite: _RMC14/Objects/dropship_utility_attachments.rsi
+      state: fulton_system_deployed
+    activateDelay: 5
+    activateInTransport: true
+  - type: RMCFulton
+  - type: AnimationPlayer

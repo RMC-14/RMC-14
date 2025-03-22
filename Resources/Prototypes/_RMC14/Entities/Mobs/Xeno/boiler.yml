@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
@@ -126,7 +126,7 @@
     size: Big
   - type: XenoDeathcloud
   - type: NeurotoxinInjector
-    neuroPerSecond: 16
+    neuroPerSecond: 20
     injectInContact: false
     affectsDead: false
     affectsInfectedNested: false

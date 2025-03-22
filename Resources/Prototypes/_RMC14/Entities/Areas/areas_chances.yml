@@ -67,7 +67,7 @@
 - type: entity
   parent: RMCAreaLv522Oob
   id: RMCAreaLv522OobWYVault
-  name: LV522 - Weyland Secure Vault
+  name: LV522 - WEYA Secure Vault
   components:
   - type: Sprite
     state: blue
@@ -82,7 +82,7 @@
   - type: Area
     landingZone: true
     minimapColor: '#EBE5E5E3'
-    resinAllowed: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaLv522LandingZone1
@@ -112,7 +112,6 @@
     medevac: false
     OB: true
     supplyDrop: true
-    resinAllowed: false
 
 - type: entity
   parent: RMCAreaLv522LandingZone1Tunnel
@@ -138,6 +137,8 @@
   - type: Sprite
     sprite: _RMC14/Areas/areas_shiva.rsi
     state: shuttle
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaLv522LandingZone1
@@ -157,7 +158,7 @@
   - type: Area
     landingZone: true
     minimapColor: '#EBE5E5E3'
-    resinAllowed: false
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaLv522LandingZone2
@@ -181,6 +182,8 @@
   - type: Sprite
     sprite: _RMC14/Areas/areas_shiva.rsi
     state: shuttle2
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaLv522LandingZone2
@@ -317,6 +320,8 @@
   components:
   - type: Sprite
     state: west
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaLv522OutdoorsColonyStreets
@@ -325,6 +330,8 @@
   components:
   - type: Sprite
     state: east
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaLv522OutdoorsColonyStreets
@@ -334,7 +341,7 @@
   - type: Sprite
     state: south
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz2, dropship_lz1
 
 - type: entity
   parent: RMCAreaLv522OutdoorsColonyStreets
@@ -344,7 +351,7 @@
   - type: Sprite
     state: southeast
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaLv522OutdoorsColonyStreets
@@ -354,7 +361,7 @@
   - type: Sprite
     state: southwest
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaLv522OutdoorsColonyStreets
@@ -403,6 +410,8 @@
   components:
   - type: Sprite
     state: green
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaLv522IndoorsLoneBuildings
@@ -413,6 +422,7 @@
     state: engine_smes
   - type: Area
     minimapColor: '#C19504E7'
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaLv522IndoorsLoneBuildings
@@ -440,7 +450,7 @@
     medevac: true
     OB: true
     supplyDrop: true
-    resinAllowed: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaLv522IndoorsLoneBuildings
@@ -449,6 +459,8 @@
   components:
   - type: Sprite
     state: blue
+  - type: Area
+    linkedLz: dropship_lz2, dropship_lz1
 
 - type: entity
   parent: RMCAreaLv522IndoorsLoneBuildings
@@ -457,6 +469,8 @@
   components:
   - type: Sprite
     state: blue
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaLv522Indoors
@@ -795,6 +809,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaLv522IndoorsBBlock
@@ -819,6 +834,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    linkedLz: dropship_lz2, dropship_lz1
 
 - type: entity
   parent: RMCAreaLv522IndoorsBBlock
@@ -844,7 +860,7 @@
     medevac: true
     OB: true
     supplyDrop: true
-    resinAllowed: false
+    linkedLz: dropship_lz2, dropship_lz1
 
 - type: entity
   parent: RMCAreaLv522Indoors
@@ -853,6 +869,8 @@
   components:
   - type: Sprite
     state: green
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaLv522IndoorsCBlock
@@ -870,7 +888,7 @@
   - type: Sprite
     state: yellow
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaLv522IndoorsCBlock

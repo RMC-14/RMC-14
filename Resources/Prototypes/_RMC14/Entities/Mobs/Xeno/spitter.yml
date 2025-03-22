@@ -103,3 +103,5 @@
       sprite: _RMC14/Interface/map_blips.rsi
       state: spitter
   - type: AcidTrap
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.2

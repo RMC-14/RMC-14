@@ -340,6 +340,31 @@
     grid:
     - 0,0,5,1 # 3 slots
   - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/urban.rsi
+
+- type: entity
+  parent: CMArmorM2MP
+  id: RMCArmorM3General
+  name: M3 pattern general officer armor
+  description: A well-crafted suit of M3 Pattern Armor with a gold shine. It looks very expensive, but shockingly fairly easy to carry and wear.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/ceremonial.rsi
+  - type: CMArmor
+    armor: 30
+    bio: 20
+    explosionArmor: 15
+  - type: SmartGunArmor
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,5,1 # 3 slots
+  - type: ItemCamouflage
     camouflageVariations: { }
 
 - type: entity
@@ -746,3 +771,35 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/urban.rsi
+
+- type: entity
+  parent: CMArmorM4
+  id: RMCArmorXM4
+  name: XM4 pattern intel armor
+  description: Tougher than steel, quieter than whispers, the XM4 Intel Armor provides capable protection combined with an experimental integrated motion tracker. It took an R&D team a weekend to develop and costs more than the Chinook Station... probably. When worn, uniform accessories such as webbing cannot be attached due to the motion sensors occupying the clips.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/io/jungle.rsi
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,9,1 # 5 slots
+  - type: ClothingBlockWebbing
+  - type: ClothingRequireEquipped
+    denyReason: rmc-intel-not-intel-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformIntel
+  - type: MotionDetector
+    handToggleable: false
+  - type: ToggleableMotionDetector
+    slots:
+    - OUTERCLOTHING
+    batteryDrain: 0
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/io/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/io/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/io/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/io/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/io/urban.rsi

@@ -19,6 +19,7 @@ public sealed class ShowHealthIconsSystem : EquipmentHudSystem<ShowHealthIconsCo
     [Dependency] private readonly IPrototypeManager _prototypeMan = default!;
     [Dependency] private readonly CMHealthIconsSystem _healthIcons = default!;
 
+    [ViewVariables]
     public HashSet<string> DamageContainers = new();
 
     public override void Initialize()
@@ -26,6 +27,7 @@ public sealed class ShowHealthIconsSystem : EquipmentHudSystem<ShowHealthIconsCo
         base.Initialize();
 
         SubscribeLocalEvent<DamageableComponent, GetStatusIconsEvent>(OnGetStatusIconsEvent);
+        SubscribeLocalEvent<ShowHealthIconsComponent, AfterAutoHandleStateEvent>(OnHandleState);
     }
 
     protected override void UpdateInternal(RefreshEquipmentHudEvent<ShowHealthIconsComponent> component)
@@ -43,6 +45,11 @@ public sealed class ShowHealthIconsSystem : EquipmentHudSystem<ShowHealthIconsCo
         base.DeactivateInternal();
 
         DamageContainers.Clear();
+    }
+
+    private void OnHandleState(Entity<ShowHealthIconsComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        RefreshOverlay(ent);
     }
 
     private void OnGetStatusIconsEvent(Entity<DamageableComponent> entity, ref GetStatusIconsEvent args)

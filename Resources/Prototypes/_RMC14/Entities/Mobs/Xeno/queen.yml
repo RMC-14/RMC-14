@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
@@ -69,11 +69,17 @@
     - WallXenoResin
     - WallXenoMembrane
     - DoorXenoResin
+    - XenoStickyResin
+    - XenoFastResin
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
+    - HiveEggMorpherXenoConstructionNode
+    - HiveClusterXenoConstructionNode
+    - HiveRecoveryNodeXenoConstructionNode
   - type: XenoDevour
   - type: XenoPheromones
     pheromonesMultiplier: 4
+    pheroSuffix: queen
   - type: XenoPlasma
     plasma: 1000
     maxPlasma: 1000
@@ -219,6 +225,11 @@
   - type: CommendationGiver
   - type: XenoInhands
     prefix: queen
+  - type: XenoOmitNumber
+  - type: RMCFireArmorDebuffModifier
+    debuffModifier: 1.4
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 1.4
 
 - type: entity
   id: XenoLeaderPheromoneRelay

@@ -9,8 +9,11 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Melee;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
@@ -42,9 +45,15 @@ public sealed class ThrowingSystem : EntitySystem
     [Dependency] private readonly SharedCameraRecoilSystem _recoil = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IConfigurationManager _configManager = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+
+    // TODO RMC14
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RotateToFaceSystem _rotateToFace = default!;
+
+    private readonly SoundSpecifier _throwSound = new SoundCollectionSpecifier("RMCThrowing");
 
     public override void Initialize()
     {
@@ -227,7 +236,12 @@ public sealed class ThrowingSystem : EntitySystem
             var localPos = Vector2.Transform(transform.LocalPosition + direction, _transform.GetInvWorldMatrix(transform));
 
             if (rotate)
+            {
                 _rotateToFace.TryFaceCoordinates(user.Value, _transform.ToMapCoordinates(transform.Coordinates.Offset(direction)).Position);
+
+                if (_net.IsServer)
+                    _audio.PlayPvs(_throwSound, user.Value);
+            }
 
             localPos = transform.LocalRotation.RotateVec(localPos);
             _melee.DoLunge(user.Value, user.Value, Angle.Zero, localPos, null, predicted: false);

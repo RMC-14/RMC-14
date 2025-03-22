@@ -1,4 +1,4 @@
-﻿using Content.Shared.Chat.Prototypes;
+using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
@@ -11,9 +11,6 @@ namespace Content.Shared._RMC14.Xenonids.Pierce;
 
 public sealed partial class XenoPierceComponent : Component
 {
-    [DataField, AutoNetworkedField]
-    public int PlasmaCost = 50;
-
     [DataField, AutoNetworkedField]
     public DamageSpecifier Damage;
 
@@ -40,4 +37,7 @@ public sealed partial class XenoPierceComponent : Component
 
     [DataField, AutoNetworkedField]
     public int RechargeTargetsRequired = 2;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId Blocker = "RMCEffectXenoTelegraphInvisible";
 }

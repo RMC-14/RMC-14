@@ -26,6 +26,8 @@
         crate: RMCCrateBoxMagazineRifleM54CExt
 #      - cost: 2000
 #        crate: RMCCrateMagazineRifleM54CE2
+      - cost: 3000
+        crate: RMCCrateMagazineRifleM54CE2HT
       - cost: 2000
         crate: RMCCrateBoxMagazineRifleM4SPR
       - cost: 4000
@@ -66,6 +68,8 @@
         crate: RMCCrateBoxMagazineRevolverM44Marksman
       - cost: 4000
         crate: RMCCrateBoxMagazineSentry
+      - cost: 4000
+        crate: RMCCrateMagazineNapthalUT
       - cost: 4000
         crate: RMCCrateBoxMagazineSentryShotgun
     - name: Attachments
@@ -177,10 +181,26 @@
       #  crate: RMCCrateGrenadesSmoke
       - cost: 4000
         crate: RMCCrateGrenadesFragOld
+      - cost: 3000
+        crate: RMCCratePlasticExplosives
       - cost: 4000
         crate: RMCCrateBreachingCharges
       - cost: 10000
         crate: RMCCrateGrenadesHighExplosiveBox
+      - cost: 10000
+        crate: RMCCrateGrenadesAirburstFragBox
+      - cost: 4000
+        crate: RMCCrateGrenadesAirburstFrag
+      - cost: 4000
+        crate: RMCCrateGrenadesAirburstIncendiary
+      - cost: 3000
+        crate: RMCCrateGrenadesAirburstSmoke
+      - cost: 4000
+        crate: RMCCrateGrenadesAirburstHornet
+      - cost: 4000
+        crate: RMCCrateGrenadesAirburstStarShell
+      - cost: 1000
+        crate: RMCCrateGrenadesBatonSlug
     - name: Food
       entries:
       - cost: 1000
@@ -201,6 +221,8 @@
         crate: RMCCrateGearMotionDetector
       - cost: 6000
         crate: RMCCrateGearPackFlareCAS
+      - cost: 2000
+        crate: RMCCrateGearFulton
     - name: Medical
       entries:
       - cost: 3200
@@ -219,11 +241,11 @@
       entries:
       - cost: 6000
         crate: RMCCrateMortarKit
-      - cost: 2000
+      - cost: 1500
         crate: RMCCrateMortarShellHE
-      - cost: 2000
+      - cost: 1500
         crate: RMCCrateMortarShellIncendiary
-      - cost: 2000
+      - cost: 1000
         crate: RMCCrateMortarShellFlare
 #    - name: Operations
 #      entries: []
@@ -269,10 +291,14 @@
         crate: RMCCrateXM88
       - cost: 3000
         crate: RMCCrateSU6
+      - cost: 4000
+        crate: RMCCrateM34
       - cost: 3000
         crate: RMCCrateMOU53
       - cost: 3000
         crate: RMCCrateXM51
+      - cost: 4000
+        crate: RMCCrateM79
     - name: Weapons Specialist Ammo
       entries:
       - cost: 4000

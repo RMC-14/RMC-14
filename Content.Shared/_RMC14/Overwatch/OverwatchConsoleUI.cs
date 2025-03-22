@@ -1,4 +1,5 @@
-﻿using Content.Shared.Mobs;
+﻿using System.Numerics;
+using Content.Shared.Mobs;
 using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -160,5 +161,7 @@ public readonly record struct OverwatchMarine(
     bool SSD,
     ProtoId<JobPrototype>? Role,
     bool Deployed,
-    OverwatchLocation Location
+    OverwatchLocation Location,
+    string AreaName,
+    Vector2? LeaderDistance
 );

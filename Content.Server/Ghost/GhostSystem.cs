@@ -1,3 +1,5 @@
+using System.Linq;
+using System.Numerics;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
@@ -5,6 +7,7 @@ using Content.Server.Ghost.Components;
 using Content.Server.Mind;
 using Content.Server.Roles.Jobs;
 using Content.Server.Warps;
+using Content.Shared._RMC14.Ghost;
 using Content.Shared.Actions;
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
@@ -22,6 +25,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Popups;
 using Content.Shared.Storage.Components;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
@@ -31,15 +35,15 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using System.Linq;
-using System.Numerics;
 
 namespace Content.Server.Ghost
 {
     public sealed class GhostSystem : SharedGhostSystem
     {
         [Dependency] private readonly SharedActionsSystem _actions = default!;
+        [Dependency] private readonly IAdminLogManager _adminLog = default!;
         [Dependency] private readonly SharedEyeSystem _eye = default!;
         [Dependency] private readonly FollowerSystem _followerSystem = default!;
         [Dependency] private readonly IGameTiming _gameTiming = default!;
@@ -60,6 +64,8 @@ namespace Content.Server.Ghost
         [Dependency] private readonly SharedMindSystem _mind = default!;
         [Dependency] private readonly GameTicker _gameTicker = default!;
         [Dependency] private readonly DamageableSystem _damageable = default!;
+        [Dependency] private readonly SharedPopupSystem _popup = default!;
+        [Dependency] private readonly IRobustRandom _random = default!;
 
         private EntityQuery<GhostComponent> _ghostQuery;
         private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -124,7 +130,9 @@ namespace Content.Server.Ghost
             if (args.Handled)
                 return;
 
-            var entities = _lookup.GetEntitiesInRange(args.Performer, component.BooRadius);
+            var entities = _lookup.GetEntitiesInRange(args.Performer, component.BooRadius).ToList();
+            // Shuffle the possible targets so we don't favor any particular entities
+            _random.Shuffle(entities);
 
             var booCounter = 0;
             foreach (var ent in entities)
@@ -137,6 +145,9 @@ namespace Content.Server.Ghost
                 if (booCounter >= component.BooMaxTargets)
                     break;
             }
+
+            if (booCounter == 0)
+                _popup.PopupEntity(Loc.GetString("ghost-component-boo-action-failed"), uid, uid);
 
             args.Handled = true;
         }
@@ -213,14 +224,7 @@ namespace Content.Server.Ghost
 
         private void OnMapInit(EntityUid uid, GhostComponent component, MapInitEvent args)
         {
-            if (_actions.AddAction(uid, ref component.BooActionEntity, out var act, component.BooAction)
-                && act.UseDelay != null)
-            {
-                var start = _gameTiming.CurTime;
-                var end = start + act.UseDelay.Value;
-                _actions.SetCooldown(component.BooActionEntity.Value, start, end);
-            }
-
+            _actions.AddAction(uid, ref component.BooActionEntity, component.BooAction);
             _actions.AddAction(uid, ref component.ToggleGhostHearingActionEntity, component.ToggleGhostHearingAction);
             _actions.AddAction(uid, ref component.ToggleLightingActionEntity, component.ToggleLightingAction);
             _actions.AddAction(uid, ref component.ToggleFoVActionEntity, component.ToggleFoVAction);
@@ -272,6 +276,13 @@ namespace Content.Server.Ghost
                 || !TryComp(attached, out ActorComponent? actor))
             {
                 Log.Warning($"User {args.SenderSession.Name} sent an invalid {nameof(GhostReturnToBodyRequest)}");
+                return;
+            }
+
+            if (_mind.TryGetMind(attached, out var mindId, out _) &&
+                CompOrNull<RMCGhostReturnComponent>(attached)?.Target is { } returnTo)
+            {
+                _mind.TransferTo(mindId, returnTo);
                 return;
             }
 
@@ -330,6 +341,8 @@ namespace Content.Server.Ghost
 
         private void WarpTo(EntityUid uid, EntityUid target)
         {
+            _adminLog.Add(LogType.GhostWarp, $"{ToPrettyString(uid)} ghost warped to {ToPrettyString(target)}");
+
             if ((TryComp(target, out WarpPointComponent? warp) && warp.Follow) || HasComp<MobStateComponent>(target))
             {
                 _followerSystem.StartFollowingEntity(uid, target);
@@ -579,12 +592,5 @@ namespace Content.Server.Ghost
 
             return true;
         }
-    }
-
-    public sealed class GhostAttemptHandleEvent(MindComponent mind, bool canReturnGlobal) : HandledEntityEventArgs
-    {
-        public MindComponent Mind { get; } = mind;
-        public bool CanReturnGlobal { get; } = canReturnGlobal;
-        public bool Result { get; set; }
     }
 }

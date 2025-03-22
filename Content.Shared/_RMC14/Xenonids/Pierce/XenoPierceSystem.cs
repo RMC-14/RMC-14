@@ -1,23 +1,19 @@
-﻿using Content.Shared._RMC14.Emote;
+using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Emote;
+using Content.Shared._RMC14.Line;
 using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Weapons.Melee;
-using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.ScissorCut;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
-using Content.Shared.Physics;
-using Content.Shared.Weapons.Melee;
-using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Map;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
-using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
-using System.Linq;
-using System.Numerics;
 
 namespace Content.Shared._RMC14.Xenonids.Pierce;
 
@@ -25,7 +21,6 @@ public sealed class XenoPierceSystem : EntitySystem
 {
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
@@ -35,8 +30,11 @@ public sealed class XenoPierceSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly VanguardShieldSystem _vanguard = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly LineSystem _line = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
 
-    private const int AttackMask = (int)(CollisionGroup.MobMask | CollisionGroup.Opaque);
+    private readonly HashSet<EntityUid> pierceEnts = new();
 
     public override void Initialize()
     {
@@ -45,82 +43,97 @@ public sealed class XenoPierceSystem : EntitySystem
 
     private void OnXenoPierceAction(Entity<XenoPierceComponent> xeno, ref XenoPierceActionEvent args)
     {
-        if (!_plasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
+        if (args.Handled)
             return;
 
-        //Note below is mostly all tail stab code
-        var transform = Transform(xeno);
-
-        var userCoords = _transform.GetMapCoordinates(xeno, transform);
-        if (userCoords.MapId == MapId.Nullspace)
+        if (!_rmcActions.TryUseAction(xeno, args.Action))
             return;
 
-        var targetCoords = _transform.ToMapCoordinates(args.Target);
-        if (userCoords.MapId != targetCoords.MapId)
+        if (_transform.GetGrid(args.Target) is not { } gridId ||
+    !TryComp(gridId, out MapGridComponent? grid))
             return;
 
-        var range = xeno.Comp.Range.Float();
-        var box = new Box2(userCoords.Position.X - 0.10f, userCoords.Position.Y, userCoords.Position.X + 0.10f, userCoords.Position.Y + range);
+        var target = args.Target;
 
-        var matrix = Vector2.Transform(targetCoords.Position, _transform.GetInvWorldMatrix(transform));
-        var rotation = _transform.GetWorldRotation(xeno).RotateVec(-matrix).ToWorldAngle();
-        var boxRotated = new Box2Rotated(box, rotation, userCoords.Position);
+        var xenoCoords = _transform.GetMoverCoordinates(xeno);
 
-        // ray on the left side of the box
-        var leftRay = new CollisionRay(boxRotated.BottomLeft, (boxRotated.TopLeft - boxRotated.BottomLeft).Normalized(), AttackMask);
+        if (!args.Target.TryDistance(EntityManager, xenoCoords, out var dis))
+            return;
 
-        // ray on the right side of the box
-        var rightRay = new CollisionRay(boxRotated.BottomRight, (boxRotated.TopRight - boxRotated.BottomRight).Normalized(), AttackMask);
-
-        bool Ignore(EntityUid uid)
+        if (dis > xeno.Comp.Range)
         {
-            if (!_xeno.CanAbilityAttackTarget(xeno, uid))
-                return true;
-
-            return false;
+            var direction = (args.Target.Position - xenoCoords.Position).Normalized();
+            var newTile = direction * xeno.Comp.Range.Float();
+            target = xenoCoords.WithPosition(xenoCoords.Position + newTile);
         }
 
-        var intersect = _physics.IntersectRayWithPredicate(transform.MapID, leftRay, range, Ignore, false);
-        intersect = intersect.Concat(_physics.IntersectRayWithPredicate(transform.MapID, rightRay, range, Ignore, false));
-        var results = intersect.Select(r => r.HitEntity).ToHashSet();
+        var tiles = _line.DrawLine(xenoCoords, target, TimeSpan.Zero, out _);
 
-        var actualResults = new List<EntityUid>();
-        foreach (var result in results)
+        if (tiles.Count == 0)
+            return;
+
+        args.Handled = true;
+
+        var hits = 0;
+
+        EntityUid? hitEnt = null;
+
+        foreach (var tile in tiles)
         {
-            if (!_interaction.InRangeUnobstructed(xeno.Owner, result, range: range))
-                continue;
+            pierceEnts.Clear();
+            var entTile = Spawn(xeno.Comp.Blocker, tile.Coordinates);
+            _lookup.GetEntitiesInRange(entTile, 0.5f, pierceEnts);
 
-            actualResults.Add(result);
-            if (xeno.Comp.MaxTargets != null && actualResults.Count >= xeno.Comp.MaxTargets)
-                break;
+            foreach (var ent in pierceEnts)
+            {
+
+                if (!_interaction.InRangeUnobstructed(entTile, ent, xeno.Comp.Range.Float()))
+                    continue;
+
+                if (TryComp<DestroyOnXenoPierceScissorComponent>(ent, out var destroy))
+                {
+                    if (_net.IsServer)
+                    {
+                        SpawnAtPosition(destroy.SpawnPrototype, ent.ToCoordinates());
+                        QueueDel(ent);
+                    }
+                    _audio.PlayPredicted(destroy.Sound, ent, xeno);
+                    continue;
+                }
+
+                if (!_xeno.CanAbilityAttackTarget(xeno, ent))
+                    continue;
+
+                hits++;
+
+                var change = _damage.TryChangeDamage(ent, xeno.Comp.Damage, origin: xeno, armorPiercing: xeno.Comp.AP);
+
+                if (change?.GetTotal() > FixedPoint2.Zero)
+                {
+                    var filter = Filter.Pvs(ent, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);
+                    _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { ent }, filter);
+                }
+
+                if (_net.IsServer)
+                    SpawnAttachedTo(xeno.Comp.AttackEffect, ent.ToCoordinates());
+
+                if (hitEnt is null)
+                    hitEnt = ent;
+
+                if (xeno.Comp.MaxTargets != null && hits >= xeno.Comp.MaxTargets)
+                    break;
+            }
         }
 
         _emote.TryEmoteWithChat(xeno, xeno.Comp.Emote, cooldown: xeno.Comp.EmoteCooldown);
 
-        args.Handled = true;
-
-        var filter = Filter.Pvs(transform.Coordinates, entityMan: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);
-        foreach (var hit in actualResults)
-        {
-            var attackedEv = new AttackedEvent(xeno, xeno, args.Target);
-            RaiseLocalEvent(hit, attackedEv);
-
-            var change = _damage.TryChangeDamage(hit, xeno.Comp.Damage, origin: xeno, armorPiercing: xeno.Comp.AP);
-
-            if (change?.GetTotal() > FixedPoint2.Zero)
-                _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { hit }, filter);
-
-            if (_net.IsServer)
-                SpawnAttachedTo(xeno.Comp.AttackEffect, hit.ToCoordinates());
-        }
-
-        if (actualResults.Count > 0)
-            _rmcMelee.DoLunge(xeno, actualResults[0]);
+        if (hits > 0 && hitEnt != null)
+            _rmcMelee.DoLunge(xeno, hitEnt.Value);
 
         if (_net.IsServer)
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
 
-        if (actualResults.Count >= xeno.Comp.RechargeTargetsRequired)
+        if (hits >= xeno.Comp.RechargeTargetsRequired)
             _vanguard.RegenShield(xeno);
     }
 }

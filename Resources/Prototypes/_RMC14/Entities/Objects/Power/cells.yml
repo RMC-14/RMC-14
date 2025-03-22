@@ -89,6 +89,13 @@
   - type: Battery
     maxCharge: 10000
     startingCharge: 10000
+  - type: Tag
+    tags:
+    - PowerCell
+    - RMCPowerCellHigh
+
+- type: Tag
+  id: RMCPowerCellHigh
 
 - type: entity
   parent: RMCPowerCellHigh

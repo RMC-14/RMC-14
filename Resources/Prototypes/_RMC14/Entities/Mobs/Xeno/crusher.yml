@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
@@ -37,6 +37,7 @@
     tier: 3
     hudOffset: -0.15,0.1
     unlockAt: 900 # 15 minutes
+    standHealingMultiplier: 0.66
   - type: XenoHeavy
   - type: XenoDevolve
     devolvesTo:
@@ -47,7 +48,6 @@
       types:
         Blunt: 65
     selfEffect: CMEffectSelfStomp
-    effect: CMEffectStomp
   - type: XenoCharge
     damage:
       types:
@@ -75,7 +75,6 @@
   - type: XenoShield
   - type: XenoMeleeSlow
     slowTime: 2
-    effect: RMCEffectCrusherSlow
   - type: Tackle
     chance: 0.25
   - type: MovementSpeedModifier
@@ -106,3 +105,6 @@
       state: crusher
   - type: StunOnExplosionReceived
     weak: false
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.7
+  - type: TantrumSpeedBuff

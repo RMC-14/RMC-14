@@ -71,7 +71,11 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
 
             foreach (var zone in s.LandingZones)
             {
-                var button = new Button { Text = zone.Name };
+                var button = new Button
+                {
+                    Text = zone.Name,
+                    StyleClasses = { "OpenBoth" },
+                };
                 button.OnPressed += _ => SendPredictedMessage(new MarineCommunicationsDesignatePrimaryLZMsg(zone.Id));
                 _window.LandingZonesContainer.AddChild(button);
             }

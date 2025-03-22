@@ -1,0 +1,562 @@
+meta:
+  format: 6
+  postmapinit: false
+tilemap:
+  0: Space
+  3: CMFloorAsteroidStriped0
+  198: CMFloorPlating
+  884: CMPlanetMarsCave1
+  908: CMPlanetMarsDirt10
+  909: CMPlanetMarsDirt11
+  911: CMPlanetMarsDirt13
+  912: CMPlanetMarsDirt2
+  917: CMPlanetMarsDirt7
+  918: CMPlanetMarsDirt8
+  920: CMPlanetMarsSand
+entities:
+- proto: ""
+  entities:
+  - uid: 1
+    components:
+    - type: MetaData
+      name: grid
+    - type: Transform
+      pos: -0.3145383,-0.50000066
+    - type: MapGrid
+      chunks:
+        0,0:
+          ind: 0,0
+          tiles: AwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          version: 6
+        0,-1:
+          ind: 0,-1
+          tiles: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxgAAAAAAdAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAdAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAdAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAdAMAAAAAdAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAdAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAdAMAAAAAdAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAdAMAAAAAdAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAlQMAAAAAkAMAAAAAlgMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAdAMAAAAAdAMAAAAAdAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAjAMAAAAAjwMAAAAAjQMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAAmAMAAAAA
+          version: 6
+        1,-1:
+          ind: 1,-1
+          tiles: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAdAMAAAAAdAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAdAMAAAAAdAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAmAMAAAAAmAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAmAMAAAAAmAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAmAMAAAAAmAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAmAMAAAAAmAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAmAMAAAAAmAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAmAMAAAAAmAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAmAMAAAAAmAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          version: 6
+        1,0:
+          ind: 1,0
+          tiles: AwAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          version: 6
+    - type: Broadphase
+    - type: Physics
+      bodyStatus: InAir
+      angularDamping: 0.05
+      linearDamping: 0.05
+      fixedRotation: False
+      bodyType: Dynamic
+    - type: Fixtures
+      fixtures: {}
+    - type: OccluderTree
+    - type: SpreaderGrid
+    - type: Shuttle
+    - type: GridPathfinding
+    - type: Gravity
+      gravityShakeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/alert.ogg
+    - type: DecalGrid
+      chunkCollection:
+        version: 2
+        nodes: []
+    - type: GridAtmosphere
+      version: 2
+      data:
+        chunkSize: 4
+    - type: GasTileOverlay
+    - type: AreaGrid
+      labels: {}
+      areaEntities: {}
+      colors: {}
+      areas:
+        12,-7: RMCAreaBigredv2OutsideSe
+        11,0: RMCAreaBigredv2OutsideSe
+        11,-1: RMCAreaBigredv2OutsideSe
+        11,-2: RMCAreaBigredv2OutsideSe
+        11,-3: RMCAreaBigredv2OutsideSe
+        11,-4: RMCAreaBigredv2OutsideSe
+        11,-5: RMCAreaBigredv2OutsideSe
+        11,-6: RMCAreaBigredv2OutsideSe
+        11,-7: RMCAreaBigredv2OutsideSe
+        10,0: RMCAreaBigredv2OutsideSe
+        10,-1: RMCAreaBigredv2OutsideSe
+        10,-2: RMCAreaBigredv2OutsideSe
+        10,-3: RMCAreaBigredv2OutsideSe
+        10,-4: RMCAreaBigredv2OutsideSe
+        10,-5: RMCAreaBigredv2OutsideSe
+        10,-6: RMCAreaBigredv2OutsideSe
+        10,-7: RMCAreaBigredv2OutsideSe
+        9,0: RMCAreaBigredv2OutsideSe
+        9,-1: RMCAreaBigredv2OutsideSe
+        9,-2: RMCAreaBigredv2OutsideSe
+        9,-3: RMCAreaBigredv2OutsideSe
+        9,-4: RMCAreaBigredv2OutsideSe
+        9,-5: RMCAreaBigredv2OutsideSe
+        9,-6: RMCAreaBigredv2OutsideSe
+        9,-7: RMCAreaBigredv2OutsideSe
+        8,0: RMCAreaBigredv2OutsideSe
+        8,-1: RMCAreaBigredv2OutsideSe
+        8,-2: RMCAreaBigredv2OutsideSe
+        8,-3: RMCAreaBigredv2OutsideSe
+        8,-4: RMCAreaBigredv2OutsideSe
+        8,-5: RMCAreaBigredv2OutsideSe
+        8,-6: RMCAreaBigredv2OutsideSe
+        8,-7: RMCAreaBigredv2OutsideSe
+        7,0: RMCAreaBigredv2OutsideSe
+        7,-1: RMCAreaBigredv2OutsideSe
+        7,-2: RMCAreaBigredv2OutsideSe
+        7,-3: RMCAreaBigredv2OutsideSe
+        7,-4: RMCAreaBigredv2OutsideSe
+        7,-5: RMCAreaBigredv2OutsideSe
+        7,-6: RMCAreaBigredv2OutsideSe
+        7,-7: RMCAreaBigredv2OutsideSe
+        6,0: RMCAreaBigredv2OutsideSe
+        6,-1: RMCAreaBigredv2OutsideSe
+        6,-2: RMCAreaBigredv2OutsideSe
+        6,-3: RMCAreaBigredv2OutsideSe
+        6,-4: RMCAreaBigredv2OutsideSe
+        6,-5: RMCAreaBigredv2OutsideSe
+        6,-6: RMCAreaBigredv2OutsideSe
+        6,-7: RMCAreaBigredv2OutsideSe
+        5,0: RMCAreaBigredv2OutsideSe
+        5,-1: RMCAreaBigredv2OutsideSe
+        5,-2: RMCAreaBigredv2OutsideSe
+        5,-3: RMCAreaBigredv2OutsideSe
+        5,-4: RMCAreaBigredv2OutsideSe
+        5,-5: RMCAreaBigredv2OutsideSe
+        5,-6: RMCAreaBigredv2OutsideSe
+        5,-7: RMCAreaBigredv2OutsideSe
+        4,0: RMCAreaBigredv2OutsideSe
+        4,-1: RMCAreaBigredv2OutsideSe
+        4,-2: RMCAreaBigredv2OutsideSe
+        4,-3: RMCAreaBigredv2OutsideSe
+        4,-4: RMCAreaBigredv2OutsideSe
+        4,-5: RMCAreaBigredv2OutsideSe
+        4,-6: RMCAreaBigredv2OutsideSe
+        4,-7: RMCAreaBigredv2OutsideSe
+        3,-1: RMCAreaBigredv2OutsideSe
+        3,0: RMCAreaBigredv2OutsideSe
+        3,-4: RMCAreaBigredv2OutsideSe
+        3,-2: RMCAreaBigredv2OutsideSe
+        3,-3: RMCAreaBigredv2OutsideSe
+        3,-5: RMCAreaBigredv2OutsideSe
+        3,-6: RMCAreaBigredv2OutsideSe
+        3,-7: RMCAreaBigredv2OutsideSe
+        2,0: RMCAreaBigredv2OutsideSe
+        2,-1: RMCAreaBigredv2OutsideSe
+        2,-2: RMCAreaBigredv2OutsideSe
+        2,-3: RMCAreaBigredv2OutsideSe
+        2,-4: RMCAreaBigredv2OutsideSe
+        2,-5: RMCAreaBigredv2OutsideSe
+        2,-6: RMCAreaBigredv2OutsideSe
+        2,-7: RMCAreaBigredv2OutsideSe
+        1,0: RMCAreaBigredv2OutsideSe
+        1,-1: RMCAreaBigredv2OutsideSe
+        1,-2: RMCAreaBigredv2OutsideSe
+        1,-3: RMCAreaBigredv2OutsideSe
+        1,-4: RMCAreaBigredv2OutsideSe
+        1,-5: RMCAreaBigredv2OutsideSe
+        1,-6: RMCAreaBigredv2OutsideSe
+        1,-7: RMCAreaBigredv2OutsideSe
+        0,0: RMCAreaBigredv2OutsideSe
+        0,-1: RMCAreaBigredv2OutsideSe
+        0,-2: RMCAreaBigredv2OutsideSe
+        0,-3: RMCAreaBigredv2OutsideSe
+        0,-4: RMCAreaBigredv2OutsideSe
+        0,-5: RMCAreaBigredv2OutsideSe
+        0,-6: RMCAreaBigredv2OutsideSe
+        0,-7: RMCAreaBigredv2OutsideSe
+        0,-8: RMCAreaBigredv2OutsideSe
+        1,-8: RMCAreaBigredv2OutsideSe
+        2,-8: RMCAreaBigredv2OutsideSe
+        3,-8: RMCAreaBigredv2OutsideSe
+        4,-8: RMCAreaBigredv2OutsideSe
+        5,-8: RMCAreaBigredv2OutsideSe
+        6,-8: RMCAreaBigredv2OutsideSe
+        7,-8: RMCAreaBigredv2OutsideSe
+        8,-8: RMCAreaBigredv2OutsideSe
+        9,-8: RMCAreaBigredv2OutsideSe
+        10,-8: RMCAreaBigredv2OutsideSe
+        11,-8: RMCAreaBigredv2OutsideSe
+        12,-8: RMCAreaBigredv2OutsideSe
+        13,-8: RMCAreaBigredv2OutsideSe
+        14,-8: RMCAreaBigredv2OutsideSe
+        12,-9: RMCAreaBigredv2OutsideSe
+        14,-9: RMCAreaBigredv2OutsideSe
+        13,-9: RMCAreaBigredv2OutsideSe
+        8,-9: RMCAreaBigredv2OutsideSe
+        11,-9: RMCAreaBigredv2OutsideSe
+        10,-9: RMCAreaBigredv2OutsideSe
+        9,-9: RMCAreaBigredv2OutsideSe
+        7,-9: RMCAreaBigredv2OutsideSe
+        6,-9: RMCAreaBigredv2OutsideSe
+        5,-9: RMCAreaBigredv2OutsideSe
+        4,-9: RMCAreaBigredv2OutsideSe
+        3,-9: RMCAreaBigredv2OutsideSe
+        2,-9: RMCAreaBigredv2OutsideSe
+        0,-9: RMCAreaBigredv2Caves
+        1,-9: RMCAreaBigredv2Caves
+        17,-9: RMCAreaBigredv2Caves
+        17,-8: RMCAreaBigredv2Caves
+        16,-9: RMCAreaBigredv2Caves
+        16,-8: RMCAreaBigredv2Caves
+        15,-8: RMCAreaBigredv2Caves
+        15,-9: RMCAreaBigredv2Caves
+        12,-6: RMCAreaBigredv2OutsideSe
+        12,-5: RMCAreaBigredv2OutsideSe
+        12,-4: RMCAreaBigredv2OutsideSe
+        12,-3: RMCAreaBigredv2OutsideSe
+        12,-2: RMCAreaBigredv2OutsideSe
+        12,-1: RMCAreaBigredv2OutsideSe
+        12,0: RMCAreaBigredv2OutsideSe
+        13,-7: RMCAreaBigredv2OutsideSe
+        13,-6: RMCAreaBigredv2OutsideSe
+        13,-5: RMCAreaBigredv2OutsideSe
+        13,-4: RMCAreaBigredv2OutsideSe
+        13,-3: RMCAreaBigredv2OutsideSe
+        13,-2: RMCAreaBigredv2OutsideSe
+        13,-1: RMCAreaBigredv2OutsideSe
+        13,0: RMCAreaBigredv2OutsideSe
+        14,-7: RMCAreaBigredv2OutsideSe
+        14,-6: RMCAreaBigredv2OutsideSe
+        14,-5: RMCAreaBigredv2OutsideSe
+        14,-4: RMCAreaBigredv2OutsideSe
+        14,-3: RMCAreaBigredv2OutsideSe
+        14,-2: RMCAreaBigredv2OutsideSe
+        14,-1: RMCAreaBigredv2OutsideSe
+        14,0: RMCAreaBigredv2OutsideSe
+        15,-7: RMCAreaBigredv2OutsideSe
+        15,-6: RMCAreaBigredv2OutsideSe
+        15,-5: RMCAreaBigredv2OutsideSe
+        15,-4: RMCAreaBigredv2OutsideSe
+        15,-3: RMCAreaBigredv2OutsideSe
+        15,-2: RMCAreaBigredv2OutsideSe
+        15,-1: RMCAreaBigredv2OutsideSe
+        15,0: RMCAreaBigredv2OutsideSe
+        16,-7: RMCAreaBigredv2OutsideSe
+        16,-6: RMCAreaBigredv2OutsideSe
+        16,-5: RMCAreaBigredv2OutsideSe
+        16,-4: RMCAreaBigredv2OutsideSe
+        16,-3: RMCAreaBigredv2OutsideSe
+        16,-2: RMCAreaBigredv2OutsideSe
+        16,-1: RMCAreaBigredv2OutsideSe
+        16,0: RMCAreaBigredv2OutsideSe
+        17,-7: RMCAreaBigredv2OutsideSe
+        17,-6: RMCAreaBigredv2OutsideSe
+        17,-5: RMCAreaBigredv2OutsideSe
+        17,-4: RMCAreaBigredv2OutsideSe
+        17,-3: RMCAreaBigredv2OutsideSe
+        17,-2: RMCAreaBigredv2OutsideSe
+        17,-1: RMCAreaBigredv2OutsideSe
+        17,0: RMCAreaBigredv2OutsideSe
+- proto: CigaretteSpent
+  entities:
+  - uid: 39
+    components:
+    - type: Transform
+      pos: 14.5,-0.5
+      parent: 1
+  - uid: 40
+    components:
+    - type: Transform
+      pos: 14.552187,-0.37570792
+      parent: 1
+- proto: CMFence
+  entities:
+  - uid: 51
+    components:
+    - type: Transform
+      pos: 7.5,-8.5
+      parent: 1
+  - uid: 52
+    components:
+    - type: Transform
+      pos: 8.5,-8.5
+      parent: 1
+  - uid: 53
+    components:
+    - type: Transform
+      pos: 9.5,-8.5
+      parent: 1
+  - uid: 54
+    components:
+    - type: Transform
+      pos: 10.5,-8.5
+      parent: 1
+  - uid: 55
+    components:
+    - type: Transform
+      pos: 11.5,-8.5
+      parent: 1
+  - uid: 56
+    components:
+    - type: Transform
+      pos: 12.5,-8.5
+      parent: 1
+  - uid: 57
+    components:
+    - type: Transform
+      pos: 13.5,-8.5
+      parent: 1
+  - uid: 58
+    components:
+    - type: Transform
+      pos: 14.5,-8.5
+      parent: 1
+- proto: CMWallSolarisReinforced
+  entities:
+  - uid: 35
+    components:
+    - type: Transform
+      pos: 0.5,-8.5
+      parent: 1
+- proto: CMWallSolarisRock
+  entities:
+  - uid: 3
+    components:
+    - type: Transform
+      pos: 4.5,-3.5
+      parent: 1
+  - uid: 4
+    components:
+    - type: Transform
+      pos: 4.5,-4.5
+      parent: 1
+  - uid: 5
+    components:
+    - type: Transform
+      pos: 4.5,-5.5
+      parent: 1
+  - uid: 6
+    components:
+    - type: Transform
+      pos: 5.5,-2.5
+      parent: 1
+  - uid: 7
+    components:
+    - type: Transform
+      pos: 5.5,-3.5
+      parent: 1
+  - uid: 8
+    components:
+    - type: Transform
+      pos: 5.5,-4.5
+      parent: 1
+  - uid: 9
+    components:
+    - type: Transform
+      pos: 5.5,-5.5
+      parent: 1
+  - uid: 10
+    components:
+    - type: Transform
+      pos: 4.5,-2.5
+      parent: 1
+  - uid: 11
+    components:
+    - type: Transform
+      pos: 6.5,-3.5
+      parent: 1
+  - uid: 12
+    components:
+    - type: Transform
+      pos: 6.5,-4.5
+      parent: 1
+  - uid: 13
+    components:
+    - type: Transform
+      pos: 6.5,-5.5
+      parent: 1
+  - uid: 14
+    components:
+    - type: Transform
+      pos: 6.5,-6.5
+      parent: 1
+  - uid: 15
+    components:
+    - type: Transform
+      pos: 6.5,-7.5
+      parent: 1
+  - uid: 16
+    components:
+    - type: Transform
+      pos: 5.5,-6.5
+      parent: 1
+  - uid: 17
+    components:
+    - type: Transform
+      pos: 5.5,-7.5
+      parent: 1
+  - uid: 18
+    components:
+    - type: Transform
+      pos: 6.5,-8.5
+      parent: 1
+  - uid: 19
+    components:
+    - type: Transform
+      pos: 1.5,-8.5
+      parent: 1
+  - uid: 20
+    components:
+    - type: Transform
+      pos: 11.5,-3.5
+      parent: 1
+  - uid: 21
+    components:
+    - type: Transform
+      pos: 12.5,-2.5
+      parent: 1
+  - uid: 22
+    components:
+    - type: Transform
+      pos: 13.5,-3.5
+      parent: 1
+  - uid: 23
+    components:
+    - type: Transform
+      pos: 13.5,-2.5
+      parent: 1
+  - uid: 24
+    components:
+    - type: Transform
+      pos: 12.5,-3.5
+      parent: 1
+  - uid: 25
+    components:
+    - type: Transform
+      pos: 13.5,-1.5
+      parent: 1
+  - uid: 26
+    components:
+    - type: Transform
+      pos: 14.5,-1.5
+      parent: 1
+  - uid: 27
+    components:
+    - type: Transform
+      pos: 14.5,-2.5
+      parent: 1
+  - uid: 28
+    components:
+    - type: Transform
+      pos: 15.5,-1.5
+      parent: 1
+  - uid: 29
+    components:
+    - type: Transform
+      pos: 15.5,-7.5
+      parent: 1
+  - uid: 30
+    components:
+    - type: Transform
+      pos: 15.5,-8.5
+      parent: 1
+  - uid: 31
+    components:
+    - type: Transform
+      pos: 16.5,-7.5
+      parent: 1
+  - uid: 32
+    components:
+    - type: Transform
+      pos: 16.5,-8.5
+      parent: 1
+  - uid: 33
+    components:
+    - type: Transform
+      pos: 17.5,-7.5
+      parent: 1
+  - uid: 34
+    components:
+    - type: Transform
+      pos: 17.5,-8.5
+      parent: 1
+- proto: CrateStoneGrave
+  entities:
+  - uid: 44
+    components:
+    - type: Transform
+      pos: 15.5,-2.5
+      parent: 1
+  - uid: 45
+    components:
+    - type: Transform
+      pos: 14.5,-3.5
+      parent: 1
+  - uid: 46
+    components:
+    - type: Transform
+      pos: 11.5,-4.5
+      parent: 1
+  - uid: 47
+    components:
+    - type: Transform
+      pos: 12.5,-4.5
+      parent: 1
+  - uid: 48
+    components:
+    - type: Transform
+      pos: 7.5,-5.5
+      parent: 1
+  - uid: 49
+    components:
+    - type: Transform
+      pos: 9.5,-6.5
+      parent: 1
+  - uid: 50
+    components:
+    - type: Transform
+      pos: 16.5,-5.5
+      parent: 1
+- proto: RMCBoulderLarge1
+  entities:
+  - uid: 59
+    components:
+    - type: Transform
+      pos: 17,-1
+      parent: 1
+- proto: RMCBushd1
+  entities:
+  - uid: 36
+    components:
+    - type: Transform
+      pos: 8.5,-0.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: RMCDrinkAlcoholRum
+  entities:
+  - uid: 41
+    components:
+    - type: Transform
+      pos: 15.5,-0.5
+      parent: 1
+  - uid: 42
+    components:
+    - type: Transform
+      pos: 15.5,-0.5
+      parent: 1
+- proto: RMCSpawnerCorpseColonist
+  entities:
+  - uid: 38
+    components:
+    - type: Transform
+      pos: 15.5,-0.5
+      parent: 1
+- proto: RMCStool
+  entities:
+  - uid: 37
+    components:
+    - type: Transform
+      pos: 15.5,0.5
+      parent: 1
+- proto: RMCWeaponRevolverM44
+  entities:
+  - uid: 43
+    components:
+    - type: Transform
+      pos: 15.5,-0.5
+      parent: 1
+...

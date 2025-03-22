@@ -19,6 +19,9 @@ public abstract class SharedIdCardSystem : EntitySystem
     [Dependency] private readonly MetaDataSystem _metaSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
+    // RMC14, for ghost roles
+    private readonly List<EntityUid> _toRename = new();
+
     public override void Initialize()
     {
         base.Initialize();
@@ -33,11 +36,12 @@ public abstract class SharedIdCardSystem : EntitySystem
         // When a player gets renamed their id card is renamed as well to match.
         // Unfortunately since TryFindIdCard will succeed if the entity is also a card this means that the card will
         // keep renaming itself unless we return early.
-        if (HasComp<IdCardComponent>(ev.Uid))
+        // We also do not include the PDA itself being renamed, as that triggers the same event (e.g. for chameleon PDAs).
+        if (HasComp<IdCardComponent>(ev.Uid) || HasComp<PdaComponent>(ev.Uid))
             return;
 
-        if (TryFindIdCard(ev.Uid, out var idCard))
-            TryChangeFullName(idCard, ev.NewName, idCard);
+        // RMC14, for ghost roles
+        _toRename.Add(ev.Uid);
     }
 
     private void OnMapInit(EntityUid uid, IdCardComponent id, MapInitEvent args)
@@ -254,5 +258,25 @@ public abstract class SharedIdCardSystem : EntitySystem
     {
         return $"{idCardComponent.FullName} ({CultureInfo.CurrentCulture.TextInfo.ToTitleCase(idCardComponent.LocalizedJobTitle ?? string.Empty)})"
             .Trim();
+    }
+
+    // RMC14, for ghost roles
+    public override void Update(float frameTime)
+    {
+        try
+        {
+            foreach (var rename in _toRename)
+            {
+                if (TerminatingOrDeleted(rename))
+                    continue;
+
+                if (TryFindIdCard(rename, out var idCard))
+                    TryChangeFullName(idCard, Name(rename), idCard);
+            }
+        }
+        finally
+        {
+            _toRename.Clear();
+        }
     }
 }

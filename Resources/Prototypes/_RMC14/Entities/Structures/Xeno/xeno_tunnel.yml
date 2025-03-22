@@ -15,6 +15,8 @@
   - type: RMCNightVisionVisible
     priority: -1
     transparency: 0.2
+  - type: DestroyedByExplosionType
+    explosion: RMCOBXenoTunnel
   - type: XenoTunnel
   - type: XenoMapTracked
   - type: TacticalMapTracked
@@ -28,3 +30,35 @@
         type: SelectDestinationTunnelBui
       enum.NameTunnelUI.Key:
         type: NameTunnelBui
+  - type: DeletedByWeedKiller
+
+- type: entity
+  parent: XenoTunnel
+  id: XenoTunnelMaint
+  name: Maintenance Hatch
+  description: An entrance to a maintenance tunnel. You can see bits of slime and resin within. Pieces of debris keep you from getting a closer look.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_tunnel.rsi
+    state: maintenancehatch_alt
+
+- type: entity
+  parent: XenoTunnelMaint
+  id: XenoTunnelMaintNoXenoDesc
+  description: An entrance to a maintenance tunnel. Pieces of debris keep you from getting a closer look.
+
+- type: entity
+  parent: XenoTunnelMaint
+  id: XenoTunnelMaintHybrisa
+  name: Sewer Manhole
+  components:
+  - type: Sprite
+    state: wymanhole
+
+- type: entity
+  parent: XenoTunnelMaintNoXenoDesc
+  id: XenoTunnelMaintHybrisaNoXenoDesc
+  name: Sewer Manhole
+  components:
+  - type: Sprite
+    state: wymanhole

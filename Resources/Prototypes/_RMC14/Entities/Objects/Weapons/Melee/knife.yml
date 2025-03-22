@@ -9,7 +9,7 @@
 
 - type: entity
   parent: [ RMCBaseMeleeWeapon, BaseKnife, RMCAttachableBase ]
-  id: RMCM5Bayonet
+  id: RMCM5Bayonet # bayonet
   name: "M5 'Night Raider' bayonet"
   description: The standard-issue bayonet of the Marines. You can slide this knife into your boots. # TODO RMC14 , or attach it to the end of a rifle.
   components:
@@ -141,6 +141,21 @@
     useSound:
       path: /Audio/Items/crowbar.ogg
   - type: DeleteOnExplosion
+
+- type: entity
+  parent: CMM2132Machete
+  id: RMCCeremonialSword
+  name: ceremonial sabre
+  description: A fancy ceremonial sabre passed down from generation to generation. Despite this, it has been very well cared for, and is in top condition.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Melee/co_sabre.rsi
+  - type: Tag
+    tags:
+    - RMCCeremonialSword
+
+- type: Tag
+  id: RMCCeremonialSword
 
 - type: Tag
   id: RMCM5Bayonet

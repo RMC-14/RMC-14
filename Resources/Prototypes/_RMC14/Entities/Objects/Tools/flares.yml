@@ -41,7 +41,7 @@
   - type: Appearance
   - type: PointLight
     enabled: false
-    color: "#FA644B"
+    color: "#FFCCCC"
     radius: 1
     energy: 5.0
     netsync: false
@@ -85,7 +85,7 @@
     sprite: _RMC14/Objects/Misc/cas_flares.rsi
     state: flare
   - type: PointLight
-    color: "#64FA4B"
+    color: "#AACCAA"
   - type: FlareSignal
   - type: ExpendableLight
     glowDuration: 180
@@ -99,6 +99,50 @@
     - !type:FadeBehaviour # burns out slower
       id: fade_out
       maxDuration: 150
+      startValue: 7.0
+      endValue: 1.0
+
+- type: entity
+  parent: CMFlare
+  id: RMCStarShellAsh
+  name: burning star shell ash
+  description: Bright burning ash from a Star Shell 40mm. Don't touch, or it'll burn ya'.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/flares.rsi
+    layers:
+    - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
+      sprite: _RMC14/Objects/Misc/flares.rsi
+      state: starshell_ash-on
+      color: "#A7FFA7"
+      visible: false
+    - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
+      sprite: _RMC14/Objects/Misc/flares.rsi
+      state: starshell_ash
+  - type: Icon
+    sprite: _RMC14/Objects/Misc/flares.rsi
+    state: starshell_ash
+  - type: PointLight
+    color: "#FFCCCC"
+    energy: 1.5
+  - type: ExpendableLight
+    pickupWhileOn: false
+    glowDuration: 375
+    fadeOutDuration: 30
+    spentName: expendable-light-starshell-ash-empty-name
+    spentDesc: expendable-light-starshell-ash-empty-desc
+    iconStateSpent: starshell_ash-empty
+    loopedSound: null
+  - type: LightBehaviour
+    behaviours:
+    - !type:FadeBehaviour
+      id: turn_on
+      maxDuration: 5.0
+      startValue: 2.5
+      endValue: 7.0
+    - !type:FadeBehaviour
+      id: fade_out
+      maxDuration: 375
       startValue: 7.0
       endValue: 1.0
 

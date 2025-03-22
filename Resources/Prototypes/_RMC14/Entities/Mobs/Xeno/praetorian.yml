@@ -114,6 +114,8 @@
       whitelist:
         components:
         - XenoHeavy
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.7
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -138,63 +140,46 @@
   - type: XenoEvolution
     strains:
     - RMCXenoPraetorianDancer
+    - RMCXenoPraetorianOppressor
     - RMCXenoPraetorianVanguard
-    - RMCXenoPraetorianWarden
+    - RMCXenoPraetorianValkyrie
   - type: AcidTrap
 
 - type: entity
   parent: CMXenoPraetorianBase
-  id: RMCXenoPraetorianWarden
-  suffix: Warden
+  id: RMCXenoPraetorianValkyrie
+  suffix: Valkyrie
   components:
   - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Praetorian/warden_praetorian.rsi
+    sprite: _RMC14/Mobs/Xenonids/Praetorian/valkyrie_praetorian.rsi
   - type: Xeno
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
-    - ActionXenoTailStab
-    - ActionXenoAcidNormal
+    - ActionXenoTailFountain
     - ActionXenoPheromones
-    - ActionXenoSpit
-    - ActionXenoSprayAcidWarden
-    - ActionXenoAidHeal
-    - ActionXenoAidRejuvenate
+    - ActionXenoTantrum
+    - ActionXenoHighGallop
+    - ActionXenoFightOrFlight
     - ActionXenoRetrieve
     - ActionXenoDevolve
     hidden: true
   - type: XenoStrain
-    name: rmc-xeno-warden-name
-    description: rmc-xeno-warden-description
-    popup: rmc-xeno-warden-popup
+    name: rmc-xeno-valkyrie-name
+    description: rmc-xeno-valkyrie-description
+    popup: rmc-xeno-valkyrie-popup
   - type: XenoPheromones
     pheromonesMultiplier: 3
-  - type: XenoSpit
-    projectileId: XenoSpitProjectilePraetorianWarden
+    pheroSuffix: strong
   - type: XenoEnergy
-    alert: XenoEnergyWarden
-    popupGain: rmc-xeno-internal-health-increase-user
-    popupNotEnough: rmc-xeno-not-enough-internal-health
+    alert: XenoEnergyValkyrie
+    popupGain: rmc-xeno-fury-increase-user
+    popupNotEnough: rmc-xeno-not-enough-fury
+    max: 200
+    gainAttack: 15
+    gainAttackDowned: 15
   - type: XenoRetrieve
-  - type: XenoAid
-    componentsRemove:
-    - type: AmmoSlowed
-  - type: XenoSprayAcid
-    acid: XenoAcidSprayStrong
-    plasmaCost: 130
-    barricadeDamage:
-      types:
-        Heat: 5
-    doAfter: 0.5
-  - type: MeleeWeapon
-    damage:
-      groups:
-        Brute: 30
-  - type: XenoTailStab
-    tailDamage:
-      groups:
-        Brute: 36
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.2
     baseSprintSpeed: 3.5
@@ -212,7 +197,19 @@
       whitelist:
         components:
         - XenoHeavy
-  - type: AcidTrap
+  - type: CMArmor
+    armor: 35
+  - type: XenoClaws
+    clawType: VerySharp
+  - type: XenoTailFountain
+  - type: XenoTantrum
+  - type: XenoFury
+  - type: XenoFightOrFlight
+    componentsRemove:
+    - type: RMCSlowdown
+    - type: RMCSuperSlowdown
+    - type: RMCRooted
+  - type: XenoHighGallop
 
 - type: entity
   parent: CMXenoPraetorianBase
@@ -296,3 +293,66 @@
       groups:
         Brute: 40
   - type: XenoCleave
+
+- type: entity
+  parent: CMXenoPraetorianBase
+  id: RMCXenoPraetorianOppressor
+  suffix: Oppressor
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Praetorian/oppressor_praetorian.rsi
+  - type: Xeno
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoTailSeize
+    - ActionXenoAbduct
+    - ActionXenoDislocate
+    - ActionXenoTailLash
+    - ActionXenoDevolve
+    hidden: true
+  - type: MeleeWeapon
+    damage:
+      groups:
+        Brute: 30
+  - type: XenoStrain
+    name: rmc-xeno-oppressor-name
+    description: rmc-xeno-oppressor-description
+    popup: rmc-xeno-oppressor-popup
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.2
+    baseSprintSpeed: 3.5
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.64
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.7025
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.475
+      whitelist:
+        components:
+        - XenoHeavy
+  - type: XenoClaws
+    clawType: Sharp
+  - type: CMArmor
+    armor: 25
+    explosionArmor: 60
+  - type: StunOnExplosionReceived
+    weak: false
+  - type: XenoHook
+  - type: XenoTailSeize
+  - type: XenoAbduct
+  - type: XenoTailLash
+  - type: XenoDislocate
+    damage:
+      groups:
+        Brute: 20
+  - type: XenoSmackdown
+    damage:
+      groups:
+        Brute: 15
