@@ -1221,3 +1221,14 @@
     state: rosalind_hex_volkov
   - type: PatronFigurine
     id: 8de95861-fbb6-4ee4-b38b-6de75f483f37
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronColtenRipcordBailey
+  name: Colten 'Ripcord' Bailey figurine
+  description: "This figure's tail appears to have broken off and been glued back on. Twice."
+  components:
+  - type: Sprite
+    state: colten_ripcord_bailey
+  - type: PatronFigurine
+    id: 8736ab09-f5f8-4656-ab35-9dcebf1f6400
