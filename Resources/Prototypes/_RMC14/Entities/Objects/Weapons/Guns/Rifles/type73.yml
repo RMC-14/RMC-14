@@ -64,13 +64,13 @@
         startingAttachable: RMCAttachmentSuppressor
         whitelist:
           tags:
-          - RMCAttachmentSuppressor #it needs the ability to hide the exsisting sprite of a attachment while keeping stat changes
+          - RMCAttachmentSuppressor
       rmc-aslot-rail:
         locked: true
         startingAttachable: RMCAttachmentS42xTelescopicMiniscope
         whitelist:
           tags:
-          - RMCAttachmentS42xTelescopicMiniscope
+          - RMCAttachmentS42xTelescopicMiniscope #it needs the ability to hide the exsisting sprite of a attachment while keeping the functionality
       rmc-aslot-underbarrel:
         whitelist:
           tags:
