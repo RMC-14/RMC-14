@@ -39,7 +39,7 @@ public sealed class RMCStoppingPowerSystem : EntitySystem
     /// </summary>
     private void OnStoppingPowerHit(Entity<RMCStoppingPowerComponent> ent, ref ProjectileHitEvent args)
     {
-        var stoppingPower = (float)Math.Min(Math.Ceiling(args.Damage.GetTotal().Value / ent.Comp.StoppingPowerDivider), ent.Comp.MaxStoppingPower);
+        var stoppingPower = (float)Math.Min(Math.Ceiling(args.Damage.GetTotal().Float() / ent.Comp.StoppingPowerDivider), ent.Comp.MaxStoppingPower);
 
         if (!(stoppingPower >= ent.Comp.StoppingThreshold))
             return;

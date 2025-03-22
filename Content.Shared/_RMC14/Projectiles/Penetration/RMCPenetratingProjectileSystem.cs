@@ -123,7 +123,7 @@ public sealed class RMCPenetratingProjectileSystem : EntitySystem
         if (range < 0)
             return;
 
-        args.Projectile.Comp.DamagedEntity = false;
+        args.Projectile.Comp.ProjectileSpent = false;
         Dirty(args.Projectile);
     }
 }
