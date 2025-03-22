@@ -83,9 +83,9 @@
     outerClothing: RMCArmorSPPRifleman
     gloves: RMCHandsVeteranInsulated
     shoes: CMBootsBlackFilled
-    suitstorage: WeaponRifleMAR40
+    suitstorage: WeaponRifleM16 # TODO RMC14 : Replace with Type-71 Rifle Sapper Variant
     id: RMCIDSPP
-    belt: RMCMAR40BeltFilled
+    belt: RMCM17BeltFilled # TODO RMC14 : Replace with Type-71 Ammo Belt
     back: RMCSatchelSPPWelderEngineer
     pocket1: RMCPouchAutoinjectorFill
     pocket2: RMCPouchConstructionFillFull
