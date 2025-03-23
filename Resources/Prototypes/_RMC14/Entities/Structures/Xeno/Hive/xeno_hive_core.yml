@@ -69,7 +69,7 @@
   - type: HiveConstructionLimited
     id: HiveCoreXeno
   - type: RoofingEntity
-    range: 10
+    range: 11.848 #rounded to 3 decimals
   - type: EvolutionBonus
   - type: WarpPoint
     location: hive core
@@ -143,7 +143,7 @@
   - type: HivePylon
   - type: XenoWeedsSpreading
   - type: RoofingEntity
-    range: 7
+    range: 8.463 #rounded to 3 decimals
     canOrbitalBombard: true
   - type: XenoWeeds
     range: 5
