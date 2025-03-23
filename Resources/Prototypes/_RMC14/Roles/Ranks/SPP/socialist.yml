@@ -128,4 +128,4 @@
   id: RMCRankSPPMarshal
   name: Marshal of the Progressive People
   prefix: Comrade
-  paygrade: ☭
+  # This is (technically) civilian rank, so it doesn't get a paygrade. Still the supreme leader of the SPP.
