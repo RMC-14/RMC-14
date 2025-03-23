@@ -216,5 +216,5 @@
     thresholds:
     - range: 6
       falloff: 10
-
+  - type: GibOnHit
 # TODO RMC14 84mm WP
