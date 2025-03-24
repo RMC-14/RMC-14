@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared._RMC14.Fireman;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -208,7 +208,7 @@ public sealed class RMCPullingSystem : EntitySystem
         if (args.Cancelled || ent.Owner == args.PulledUid)
             return;
 
-        if (_mobState.IsDead(args.PulledUid) && !HasComp<IgnoreBlockPullingDeadComponent>(args.PulledUid))
+        if (_mobState.IsDead(args.PulledUid) && !CanPullDead(ent, args.PulledUid))
         {
             _popup.PopupClient(Loc.GetString("cm-pull-whitelist-denied-dead", ("name", args.PulledUid)), args.PulledUid, args.PullerUid);
             args.Cancelled = true;
@@ -394,6 +394,22 @@ public sealed class RMCPullingSystem : EntitySystem
             SpawnAttachedTo(PullEffect, pulled.ToCoordinates());
     }
 
+    private bool CanPullDead(EntityUid puller, EntityUid pulled)
+    {
+        if (!_mobState.IsDead(pulled))
+            return true;
+
+        if (HasComp<IgnoreBlockPullingDeadComponent>(pulled))
+            return true;
+
+        if (TryComp<VictimInfectedComponent>(pulled, out var infect) &&
+            TryComp<AllowPullWhileDeadAndInfectedComponent>(pulled, out var deadPull) &&
+            infect.CurrentStage > deadPull.InfectionStageThreshold)
+            return true;
+
+        return false;
+    }
+
     public override void Update(float frameTime)
     {
         var blockDeadActive = EntityQueryEnumerator<BlockPullingDeadActiveComponent, PullerComponent>();
@@ -405,7 +421,7 @@ public sealed class RMCPullingSystem : EntitySystem
                 continue;
             }
 
-            if (_mobState.IsDead(pulling) && !HasComp<IgnoreBlockPullingDeadComponent>(pulling))
+            if (!CanPullDead(uid, pulling))
                 _pulling.TryStopPull(pulling, pullable, uid);
         }
 
