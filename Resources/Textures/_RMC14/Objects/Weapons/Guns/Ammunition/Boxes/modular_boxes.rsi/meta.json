@@ -23,19 +23,37 @@
       "name": "rifle_lid_marking"
     },
     {
+      "name": "rifle_box_16"
+    },
+    {
       "name": "rifle_box_54"
     },
     {
-      "name": "rifle_ammo_full"
+      "name": "rifle_box_71"
     },
     {
-      "name": "rifle_ammo_high"
+      "name": "rifle_ammo_full_base"
     },
     {
-      "name": "rifle_ammo_low"
+      "name": "rifle_ammo_full_color"
     },
     {
-      "name": "rifle_ammo_medium"
+      "name": "rifle_ammo_high_base"
+    },
+    {
+      "name": "rifle_ammo_high_color"
+    },
+    {
+      "name": "rifle_ammo_low_base"
+    },
+    {
+      "name": "rifle_ammo_low_color"
+    },
+    {
+      "name": "rifle_ammo_medium_base"
+    },
+    {
+      "name": "rifle_ammo_medium_color"
     },
     {
       "name": "rifle_box_spr"
@@ -161,7 +179,43 @@
       "name": "shell_box_beanbag"
     },
     {
+      "name": "smallshell"
+    },
+    {
+      "name": "smallshell_ammo_full_8g_color"
+    },
+    {
+      "name": "smallshell_ammo_full_12g_base"
+    },
+    {
+      "name": "smallshell_ammo_full_12g_color"
+    },
+    {
+      "name": "smallshell_box"
+    },
+    {
+      "name": "smallshell_ammo_full_8g_base"
+    },
+    {
+      "name": "smallshell_empty"
+    },
+    {
+      "name": "smallshell_box_marking"
+    },
+    {
       "name": "supply"
+    },
+    {
+      "name": "supply_ammo_high"
+    },
+    {
+      "name": "supply_ammo_full"
+    },
+    {
+      "name": "supply_ammo_low"
+    },
+    {
+      "name": "supply_ammo_medium"
     },
     {
       "name": "supply_lid_closed"
@@ -179,6 +233,12 @@
       "name": "supply_box_food"
     },
     {
+      "name": "supply_box_lightflare"
+    },
+    {
+      "name": "supply_box_logo_clf"
+    },
+    {
       "name": "supply_box_logo_spp"
     },
     {
@@ -194,82 +254,10 @@
       "name": "old"
     },
     {
-      "name": "supply_ammo_high"
+      "name": "supply_box_flashlight"
     },
     {
-      "name": "supply_ammo_high_tse"
-    },
-    {
-      "name": "supply_ammo_full"
-    },
-    {
-      "name": "supply_ammo_full_tse"
-    },
-    {
-      "name": "supply_ammo_low"
-    },
-    {
-      "name": "supply_ammo_low_tse"
-    },
-    {
-      "name": "supply_ammo_medium"
-    },
-    {
-      "name": "supply_ammo_medium_tse"
-    },
-    {
-      "name": "supply_box_pmc"
-    },
-    {
-      "name": "supply_lid_pmc"
-    },
-    {
-      "name": "supply_box_spp"
-    },
-    {
-      "name": "supply_lid_spp"
-    },
-    {
-      "name": "supply_box_tse"
-    },
-    {
-      "name": "supply_lid_tse"
-    },
-    {
-      "name": "supply_box_wy"
-    },
-    {
-      "name": "supply_lid_wy"
-    },
-    {
-      "name": "supply_box_colony"
-    },
-    {
-      "name": "supply_lid_colony"
-    },
-    {
-      "name": "supply_box_merc"
-    },
-    {
-      "name": "supply_lid_merc"
-    },
-    {
-      "name": "supply_ammo_low_old"
-    },
-    {
-      "name": "supply_ammo_medium_old"
-    },
-    {
-      "name": "supply_ammo_high_old"
-    },
-    {
-      "name": "supply_ammo_full_old"
-    },
-    {
-      "name": "rifle_box_71"
-    },
-    {
-      "name": "supply_box_lightflare"
+      "name": "supply_box_nail"
     }
   ]
 }
