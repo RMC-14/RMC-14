@@ -59,7 +59,7 @@
 - type: entity
   parent: RMCBoxMagazineSupplyBase
   id: RMCBoxFlashlightsEmpty
-  name: box of flashlights
+  name: "Box of Flashlights (x8)"
   description: A box of flashlights to brighten your day!
   components:
   - type: Construction

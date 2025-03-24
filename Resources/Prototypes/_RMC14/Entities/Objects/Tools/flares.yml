@@ -149,7 +149,7 @@
 - type: entity
   parent: RMCBoxMagazineSupplyBase
   id: RMCBoxPackFlareEmpty
-  name: box of M94 flare packs
+  name: "Box of M94 Flare Packs (x10)"
   description: A box of M94 marking flare packs, to brighten up your day.
   components:
   - type: Construction
@@ -188,7 +188,7 @@
 - type: entity
   parent: RMCBoxMagazineSupplyBase
   id: RMCBoxPackFlareCASEmpty
-  name: box of M89-S flare packs
+  name: "Box of M89-S Flare Packs (x10)"
   description: A box of M89 signal flare packs, to mark up the way.
   components:
   - type: Construction

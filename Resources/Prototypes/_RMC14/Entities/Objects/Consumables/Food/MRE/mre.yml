@@ -128,7 +128,7 @@
 - type: entity
   parent: RMCBoxMagazineSupplyBase
   id: RMCBoxMREEmpty
-  name: box of MREs
+  name: "Box of MREs (x12)"
   description: A box of MREs. Nutritious, but not delicious.
   components:
   - type: Construction

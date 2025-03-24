@@ -258,6 +258,9 @@
     },
     {
       "name": "supply_box_nail"
+    },
+    {
+      "name": "supply_box_powercell"
     }
   ]
 }
