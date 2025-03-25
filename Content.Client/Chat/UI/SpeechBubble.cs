@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Client.Chat.Managers;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Xenonids.HiveLeader;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Speech;
@@ -272,8 +273,9 @@ namespace Content.Client.Chat.UI
             var entityManager = IoCManager.Resolve<IEntityManager>();
             var senderUid = entityManager.GetEntity(message.SenderEntity);
 
-            //RMC14 If the speaker is a squad leader and speaks in normal speech, use the command style.
-            if (speechStyleClass == "sayBox" && entityManager.HasComponent<SquadLeaderComponent>(senderUid))
+            //RMC14 If the speaker is a squad leader or a hive leader and speaks in normal speech, use the command style.
+            if (speechStyleClass == "sayBox" &&
+                (entityManager.HasComponent<SquadLeaderComponent>(senderUid) || entityManager.HasComponent<HiveLeaderComponent>(senderUid)))
             {
                 speechStyleClass = "commanderSpeech";
             }
