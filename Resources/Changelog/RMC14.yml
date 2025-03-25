@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added Stella 'Lake' Poley, Darfman Forgemog figurines.
-    type: Add
-  id: 977
-  time: '2024-11-15T05:31:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4797
 - author: Vermidia
   changes:
   - message: Fixed metabolism rate and properties of basic dispenser chems. Most dispenser
@@ -5285,5 +5278,12 @@
   id: 1479
   time: '2025-03-25T02:19:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5994
+- author: Dutch-VanDerLinde
+  changes:
+  - message: You will now take damage when you are thrown into a wall.
+    type: Add
+  id: 1480
+  time: '2025-03-25T02:20:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5993
 Name: RMC14
 Order: -1
