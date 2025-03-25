@@ -531,7 +531,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
                 {
                     foreach (var entity in ents)
                     {
-                        if (!TryComp(entity, out FixturesComponent? fixturesComponent))
+                        if (!TryComp(entity, out FixturesComponent? fixturesComponent) || !Transform(entity).Anchored)
                             continue;
 
                         foreach (var fixture in fixturesComponent.Fixtures.Values)
