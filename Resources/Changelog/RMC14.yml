@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: Rainbeon
   changes:
-  - message: Fixed Bipods using the wrong deployment direction when being deployed
-      after a manual un-deploy. Bipods should no longer seem to "randomly" undeploy
-      when being fired.
-    type: Fix
-  id: 979
-  time: '2024-11-15T06:17:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4832
-- author: Rainbeon
-  changes:
   - message: Warrior Lunge will now register hits on Marines that are too close or
       sharing the same tile as them, instead of making the Warrior uselessly fly through
       them.
@@ -5277,5 +5268,13 @@
   id: 1481
   time: '2025-03-25T02:22:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5978
+- author: DummeHytteOst
+  changes:
+  - message: Increased hivecore and pylon roof range to cover the intended amount
+      of total area.
+    type: Tweak
+  id: 1482
+  time: '2025-03-25T02:23:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5984
 Name: RMC14
 Order: -1
