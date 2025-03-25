@@ -1,22 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Warrior Lunge will now register hits on Marines that are too close or
-      sharing the same tile as them, instead of making the Warrior uselessly fly through
-      them.
-    type: Fix
-  - message: Warrior Lunge's knockdown and stun is no longer predicted. It will no
-      longer lie about hitting when it actually missed, and no longer cause Marines
-      to appear on the floor for the rest of the game when it fails, but will appear
-      to happen slightly later on a successful hit.
-    type: Fix
-  - message: Warrior Fling is no longer predicted. It will no longer consume it's
-      cooldown on a mis-predicted hit, and will not appear to knock Marines down when
-      the ability actually failed.
-    type: Fix
-  id: 980
-  time: '2024-11-15T07:53:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4781
 - author: Cyberanarchbee
   changes:
   - message: M890 Tactical Shotgun
@@ -5276,5 +5258,12 @@
   id: 1482
   time: '2025-03-25T02:23:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5984
+- author: Ian321
+  changes:
+  - message: Requisitions can now vendor packets of M74 grenades.
+    type: Add
+  id: 1483
+  time: '2025-03-25T06:49:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5954
 Name: RMC14
 Order: -1
