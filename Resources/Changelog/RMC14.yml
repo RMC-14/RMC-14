@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed bodybags and stasisbags stopping rot
-    type: Fix
-  id: 976
-  time: '2024-11-15T05:30:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4831
 - author: Whisper
   changes:
   - message: Added Stella 'Lake' Poley, Darfman Forgemog figurines.
@@ -5284,5 +5277,13 @@
   id: 1478
   time: '2025-03-21T20:40:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5920
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Changed tackling effects to make them different than slashing normally
+      for xenos.
+    type: Tweak
+  id: 1479
+  time: '2025-03-25T02:19:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5994
 Name: RMC14
 Order: -1
