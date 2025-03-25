@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed metabolism rate and properties of basic dispenser chems. Most dispenser
-      chems are shown as unknown on the health analyzer.
-    type: Fix
-  - message: Iron correctly heals more blood but also requires nutrition and drains
-      it as it processes.
-    type: Fix
-  - message: Nutriment heals blood if you're not hungry
-    type: Fix
-  - message: Modified Prepared MRES and components to intended values
-    type: Fix
-  id: 978
-  time: '2024-11-15T05:33:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4795
 - author: Rainbeon
   changes:
   - message: Fixed Bipods using the wrong deployment direction when being deployed
@@ -5285,5 +5270,12 @@
   id: 1480
   time: '2025-03-25T02:20:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5993
+- author: CyberTropic
+  changes:
+  - message: Remove WY logo from Fruit Beer.
+    type: Fix
+  id: 1481
+  time: '2025-03-25T02:22:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5978
 Name: RMC14
 Order: -1
