@@ -93,17 +93,7 @@ public sealed class TackleSystem : EntitySystem
         else
         {
             _adminLog.Add(LogType.RMCTackle, $"{ToPrettyString(user)} tackled down {ToPrettyString(target)}.");
-
-            if (_net.IsServer)
-            {
-                _popup.PopupEntity(Loc.GetString("cm-tackle-success-self", ("target", target.Owner)), user, user);
-
-                if (TryComp<StandingStateComponent>(target.Owner, out var standingState))
-                {
-                    if (!standingState.Standing)
-                        _audio.PlayPvs(standingState.DownSound, target);
-                }
-            }
+            _popup.PopupEntity(Loc.GetString("cm-tackle-success-self", ("target", target.Owner)), user, user);
 
             foreach (var session in Filter.PvsExcept(user).Recipients)
             {
@@ -117,11 +107,7 @@ public sealed class TackleSystem : EntitySystem
             }
         }
 
-        if (TryComp(user, out CombatModeComponent? combatMode))
-        {
-            var audioParams = AudioParams.Default.WithVariation(0.025f).WithVolume(5f);
-            _audio.PlayPredicted(combatMode.DisarmSuccessSound, target, user, audioParams);
-        }
+        _audio.PlayPvs(target.Comp.KnockdownSound, target);
 
         if (!HasComp<VictimInfectedComponent>(target))
         {
