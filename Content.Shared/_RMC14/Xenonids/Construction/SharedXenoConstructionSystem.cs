@@ -236,6 +236,12 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             }
         }
 
+        if (args.LimitDistance && !_xenoWeeds.HasWeedsNearby((gridUid, grid), coordinates))
+        {
+            _popup.PopupClient("We can only plant weed nodes near other weed nodes our hive owns!", xeno, xeno, PopupType.SmallCaution);
+            return;
+        }
+
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
             return;
 
