@@ -9,6 +9,12 @@ public enum BulletBoxLayers
 }
 
 [Serializable, NetSerializable]
+public enum BulletBoxLayers2
+{
+    Fill,
+}
+
+[Serializable, NetSerializable]
 public enum BulletBoxVisuals
 {
     Empty = 0,

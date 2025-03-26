@@ -23,7 +23,13 @@
       "name": "rifle_lid_marking"
     },
     {
+      "name": "rifle_box_spr"
+    },
+    {
       "name": "rifle_box_16"
+    },
+    {
+      "name": "rifle_box_458"
     },
     {
       "name": "rifle_box_54"
@@ -32,34 +38,52 @@
       "name": "rifle_box_71"
     },
     {
-      "name": "rifle_ammo_full_base"
+      "name": "rifle_ammo_full_mags_base"
     },
     {
-      "name": "rifle_ammo_full_color"
+      "name": "rifle_ammo_full_mags_color"
     },
     {
-      "name": "rifle_ammo_high_base"
+      "name": "rifle_ammo_full_rounds_base"
     },
     {
-      "name": "rifle_ammo_high_color"
+      "name": "rifle_ammo_full_rounds_color"
     },
     {
-      "name": "rifle_ammo_low_base"
+      "name": "rifle_ammo_high_mags_base"
     },
     {
-      "name": "rifle_ammo_low_color"
+      "name": "rifle_ammo_high_mags_color"
     },
     {
-      "name": "rifle_ammo_medium_base"
+      "name": "rifle_ammo_high_rounds_base"
     },
     {
-      "name": "rifle_ammo_medium_color"
+      "name": "rifle_ammo_high_rounds_color"
     },
     {
-      "name": "rifle_box_spr"
+      "name": "rifle_ammo_low_mags_base"
     },
     {
-      "name": "rifle_box_458"
+      "name": "rifle_ammo_low_mags_color"
+    },
+    {
+      "name": "rifle_ammo_low_rounds_base"
+    },
+    {
+      "name": "rifle_ammo_low_rounds_color"
+    },
+    {
+      "name": "rifle_ammo_medium_mags_base"
+    },
+    {
+      "name": "rifle_ammo_medium_mags_color"
+    },
+    {
+      "name": "rifle_ammo_medium_rounds_base"
+    },
+    {
+      "name": "rifle_ammo_medium_rounds_color"
     },
     {
       "name": "smg"
@@ -194,6 +218,9 @@
       "name": "smallshell_box"
     },
     {
+      "name": "smallshell_box_458"
+    },
+    {
       "name": "smallshell_ammo_full_8g_base"
     },
     {
@@ -230,6 +257,9 @@
       "name": "supply_box_casflare"
     },
     {
+      "name": "supply_box_flashlight"
+    },
+    {
       "name": "supply_box_food"
     },
     {
@@ -251,16 +281,13 @@
       "name": "supply_box_logo_weya"
     },
     {
-      "name": "old"
-    },
-    {
-      "name": "supply_box_flashlight"
-    },
-    {
       "name": "supply_box_nail"
     },
     {
       "name": "supply_box_powercell"
+    },
+    {
+      "name": "old"
     }
   ]
 }

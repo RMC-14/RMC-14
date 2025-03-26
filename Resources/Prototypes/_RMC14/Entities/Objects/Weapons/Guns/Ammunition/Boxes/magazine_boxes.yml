@@ -39,9 +39,9 @@
     layers:
     - state: rifle_box # "size"_box - Base Colour
       color: "#ff8888"
-    - state: rifle_ammo_full_base # "size"_ammo_full_base
+    - state: rifle_ammo_full_mags_base # "size"_ammo_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: rifle_ammo_full_color # "size"_ammo_full_color - Type Colour
+    - state: rifle_ammo_full_mags_color # "size"_ammo_full_color - Type Colour
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#8888ff"
     - state: rifle_box_54 # "size"_box_"label" - Label Colour
@@ -65,17 +65,17 @@
           False: { visible: true }
       enum.CMItemSlotsLayers.Fill:
         enum.CMItemSlotsLayers.Fill:
-          Empty: { state: rifle_ammo_full_base, visible: false }
-          Low: { state: rifle_ammo_low_base, visible: true }
-          Medium: { state: rifle_ammo_medium_base, visible: true }
-          High: { state: rifle_ammo_high_base, visible: true }
-          Full: { state: rifle_ammo_full_base, visible: true }
+          Empty: { state: rifle_ammo_full_mags_base, visible: false }
+          Low: { state: rifle_ammo_low_mags_base, visible: true }
+          Medium: { state: rifle_ammo_medium_mags_base, visible: true }
+          High: { state: rifle_ammo_high_mags_base, visible: true }
+          Full: { state: rifle_ammo_full_mags_base, visible: true }
         enum.CMItemSlotsLayers2.Fill: # Second fill state for coloured casings
-          Empty: { state: rifle_ammo_full_color, visible: false }
-          Low: { state: rifle_ammo_low_color, visible: true }
-          Medium: { state: rifle_ammo_medium_color, visible: true }
-          High: { state: rifle_ammo_high_color, visible: true }
-          Full: { state: rifle_ammo_full_color, visible: true }
+          Empty: { state: rifle_ammo_full_mags_color, visible: false }
+          Low: { state: rifle_ammo_low_mags_color, visible: true }
+          Medium: { state: rifle_ammo_medium_mags_color, visible: true }
+          High: { state: rifle_ammo_high_mags_color, visible: true }
+          Full: { state: rifle_ammo_full_mags_color, visible: true }
 
 # SMG Base
 - type: entity
@@ -90,9 +90,9 @@
     layers:
     - state: smg_box
       color: "#ff8888"
-    - state: rifle_ammo_full_base # "size"_ammo_full_base
+    - state: rifle_ammo_full_mags_base # "size"_ammo_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: rifle_ammo_full_color # "size"_ammo_full_color - Type Colour
+    - state: rifle_ammo_full_mags_color # "size"_ammo_full_color - Type Colour
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#8888ff"
     - state: smg_box_63
@@ -116,17 +116,17 @@
           False: { visible: true }
       enum.CMItemSlotsLayers.Fill:
         enum.CMItemSlotsLayers.Fill:
-          Empty: { state: rifle_ammo_full_base, visible: false }
-          Low: { state: rifle_ammo_low_base, visible: true }
-          Medium: { state: rifle_ammo_medium_base, visible: true }
-          High: { state: rifle_ammo_high_base, visible: true }
-          Full: { state: rifle_ammo_full_base, visible: true }
+          Empty: { state: rifle_ammo_full_mags_base, visible: false }
+          Low: { state: rifle_ammo_low_mags_base, visible: true }
+          Medium: { state: rifle_ammo_medium_mags_base, visible: true }
+          High: { state: rifle_ammo_high_mags_base, visible: true }
+          Full: { state: rifle_ammo_full_mags_base, visible: true }
         enum.CMItemSlotsLayers2.Fill: # Second fill state for coloured casings
-          Empty: { state: rifle_ammo_full_color, visible: false }
-          Low: { state: rifle_ammo_low_color, visible: true }
-          Medium: { state: rifle_ammo_medium_color, visible: true }
-          High: { state: rifle_ammo_high_color, visible: true }
-          Full: { state: rifle_ammo_full_color, visible: true }
+          Empty: { state: rifle_ammo_full_mags_color, visible: false }
+          Low: { state: rifle_ammo_low_mags_color, visible: true }
+          Medium: { state: rifle_ammo_medium_mags_color, visible: true }
+          High: { state: rifle_ammo_high_mags_color, visible: true }
+          Full: { state: rifle_ammo_full_mags_color, visible: true }
 
 # Pistol Base
 - type: entity
@@ -269,9 +269,9 @@
     layers:
     - state: rifle_box
       color: "#7b8246"
-    - state: rifle_ammo_full_base
+    - state: rifle_ammo_full_mags_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: rifle_ammo_full_color
+    - state: rifle_ammo_full_mags_color
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#ffc000"
     - state: rifle_box_54
@@ -317,9 +317,9 @@
     layers:
     - state: rifle_box
       color: "#7b8246"
-    - state: rifle_ammo_full_base
+    - state: rifle_ammo_full_mags_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: rifle_ammo_full_color
+    - state: rifle_ammo_full_mags_color
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#318b11"
     - state: rifle_box_54
@@ -365,9 +365,9 @@
     layers:
     - state: rifle_box
       color: "#7b8246"
-    - state: rifle_ammo_full_base
+    - state: rifle_ammo_full_mags_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: rifle_ammo_full_color
+    - state: rifle_ammo_full_mags_color
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#ffcb26"
     - state: rifle_box_54
@@ -413,9 +413,9 @@
     layers:
     - state: rifle_box
       color: "#695d42"
-    - state: rifle_ammo_full_base
+    - state: rifle_ammo_full_mags_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: rifle_ammo_full_color
+    - state: rifle_ammo_full_mags_color
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#ffc000"
     - state: rifle_box_spr
@@ -461,9 +461,9 @@
     layers:
     - state: rifle_box
       color: "#695d42"
-    - state: rifle_ammo_full_base
+    - state: rifle_ammo_full_mags_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: rifle_ammo_full_color
+    - state: rifle_ammo_full_mags_color
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#318b11"
     - state: rifle_box_spr
@@ -509,9 +509,9 @@
     layers:
     - state: rifle_box
       color: "#695d42"
-    - state: rifle_ammo_full_base
+    - state: rifle_ammo_full_mags_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: rifle_ammo_full_color
+    - state: rifle_ammo_full_mags_color
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#ffcb26"
     - state: rifle_box_spr
@@ -548,7 +548,7 @@
 - type: entity
   parent: RMCBoxMagazineRifleBase
   id: RMCBoxBullets458Empty
-  name: "Bullet Bundle Box (.458 SOCOM x 297)" # TODO RMC14 this is 297 since its multiples of 9
+  name: "Bullet Bundle Box (.458 SOCOM x 297)" # Used to say 300 when it was, infact, not 300 rounds.
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -557,21 +557,43 @@
     layers:
     - state: rifle_box
       color: "#62757b"
-    - state: rifle_ammo_full_base
-      map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: rifle_ammo_full_color
-      map: [ "enum.CMItemSlotsLayers2.Fill" ]
-      color: "#719380"
     - state: rifle_box_458
       color: "#ffcb26"
     - state: rifle_box_marking
       color: "#7c4c1b"
+    - state: rifle_ammo_full_rounds_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_rounds_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#719380"
     - state: rifle_lid
       map: [ "lid" ]
       color: "#62757b"
     - state: rifle_lid_marking
       map: [ "lid_marking" ]
       color: "#7c4c1b"
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        lid_marking:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: rifle_ammo_full_rounds_base, visible: false }
+          Low: { state: rifle_ammo_low_rounds_base, visible: true }
+          Medium: { state: rifle_ammo_medium_rounds_base, visible: true }
+          High: { state: rifle_ammo_high_rounds_base, visible: true }
+          Full: { state: rifle_ammo_full_rounds_base, visible: true }
+        enum.CMItemSlotsLayers2.Fill: # Second fill state for coloured casings
+          Empty: { state: rifle_ammo_full_rounds_color, visible: false }
+          Low: { state: rifle_ammo_low_rounds_color, visible: true }
+          Medium: { state: rifle_ammo_medium_rounds_color, visible: true }
+          High: { state: rifle_ammo_high_rounds_color, visible: true }
+          Full: { state: rifle_ammo_full_rounds_color, visible: true }
   - type: CMItemSlots
     count: 33
     slot:
@@ -600,9 +622,9 @@
     layers:
     - state: rifle_box
       color: "#485c63"
-    - state: rifle_ammo_full_base
+    - state: rifle_ammo_full_mags_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: rifle_ammo_full_color
+    - state: rifle_ammo_full_mags_color
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#ffc000"
     - state: rifle_box_16
@@ -646,9 +668,9 @@
     layers:
     - state: smg_box
       color: "#727e90"
-    - state: rifle_ammo_full_base
+    - state: rifle_ammo_full_mags_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: rifle_ammo_full_color
+    - state: rifle_ammo_full_mags_color
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#727e90"
     - state: smg_box_63
@@ -694,9 +716,9 @@
     layers:
     - state: smg_box
       color: "#727e90"
-    - state: rifle_ammo_full_base
+    - state: rifle_ammo_full_mags_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: rifle_ammo_full_color
+    - state: rifle_ammo_full_mags_color
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#318b11"
     - state: smg_box_63
@@ -742,9 +764,9 @@
     layers:
     - state: smg_box
       color: "#727e90"
-    - state: rifle_ammo_full_base
+    - state: rifle_ammo_full_mags_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: rifle_ammo_full_color
+    - state: rifle_ammo_full_mags_color
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#727e90"
     - state: smg_box_63
