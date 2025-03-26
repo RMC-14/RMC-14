@@ -13,7 +13,7 @@
     minimapColor: '#C19504E7'
 
 - type: entity
-  parent: RMCAreaBase
+  parent: RMCAreaShuttleDrop1
   id: RMCAreaShuttleDrop1Kutjevo
   name: Kutjevo - Dropship Alamo Landing Zone
   components:
@@ -21,10 +21,10 @@
     sprite: _RMC14/Areas/areas_kutjevo.rsi
     state: shuttle
   - type: Area
-    landingZone: true
+    linkedLz: dropship_lz1
 
 - type: entity
-  parent: RMCAreaBase
+  parent: RMCAreaShuttleDrop2
   id: RMCAreaShuttleDrop2Kutjevo
   name: Kutjevo - Dropship Normandy Landing Zone
   components:
@@ -32,7 +32,7 @@
     sprite: _RMC14/Areas/areas_kutjevo.rsi
     state: shuttle2
   - type: Area
-    landingZone: true
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaKutjevo
@@ -41,6 +41,15 @@
   components:
   - type: Sprite
     state: ext
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
 
 - type: entity
   parent: RMCAreaKutjevo
@@ -62,7 +71,7 @@
 - type: entity
   parent: RMCAreaKutjevoInterior
   id: RMCAreaKutjevoInteriorOob
-  name: Kutjevo -  Out Of Bounds
+  name: Kutjevo - Out Of Bounds
   components:
   - type: Sprite
     state: oob
@@ -78,7 +87,7 @@
     resinAllowed: false
     avoidBioscan: false
     noTunnel: true
-    unweedable: false
+    unweedable: true
 
 - type: entity
   parent: RMCAreaKutjevoInteriorOob
@@ -87,8 +96,6 @@
   components:
   - type: Sprite
     state: kutjevo
-  - type: Area
-    resinAllowed: false
 
 - type: entity
   parent: RMCAreaKutjevoExterior
@@ -98,8 +105,8 @@
   - type: Sprite
     state: lz_pad
   - type: Area
-    resinAllowed: false
     landingZone: true
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaKutjevoExterior
@@ -109,8 +116,8 @@
   - type: Sprite
     state: lz_dunes
   - type: Area
-    resinAllowed: false
     landingZone: true
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaKutjevoExterior
@@ -119,6 +126,8 @@
   components:
   - type: Sprite
     state: lz_river
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaKutjevoExterior
@@ -135,11 +144,16 @@
   components:
   - type: Sprite
     state: scrubland
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaKutjevoExteriorScrubland
   id: RMCAreaKutjevoExteriorScrublandSouth
   name: Kutjevo - South Scrubland
+  components:
+  - type: Area
+    linkedLz: dropship_lz1, dropship_lz2
 
 - type: entity
   parent: RMCAreaKutjevoExterior
@@ -148,6 +162,8 @@
   components:
   - type: Sprite
     state: stone_fields
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaKutjevoExterior
@@ -156,6 +172,8 @@
   components:
   - type: Sprite
     state: rf_dunes
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaKutjevoExterior
@@ -164,6 +182,8 @@
   components:
   - type: Sprite
     state: rf_dunes
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaKutjevoExterior
@@ -250,21 +270,33 @@
   parent: RMCAreaKutjevoExteriorTelecomm
   id: RMCAreaKutjevoExteriorTelecommLz1North
   name: Kutjevo - North LZ1 Communications Relay
+  components:
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaKutjevoExteriorTelecomm
   id: RMCAreaKutjevoExteriorTelecommLz1South
   name: Kutjevo - South LZ1 Communications Relay
+  components:
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaKutjevoExteriorTelecomm
   id: RMCAreaKutjevoExteriorTelecommLz2North
   name: Kutjevo - North LZ2 Communications Relay
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaKutjevoExteriorTelecomm
   id: RMCAreaKutjevoExteriorTelecommLz2South
   name: Kutjevo - South LZ2 Communications Relay
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaKutjevoInterior
@@ -382,6 +414,16 @@
   components:
   - type: Sprite
     state: colony_int
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+    linkedLz: dropship_lz2
     landingZone: true
 
 - type: entity
@@ -391,6 +433,16 @@
   components:
   - type: Sprite
     state: colony_int
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+    linkedLz: dropship_lz2
     landingZone: true
 
 - type: entity
@@ -401,6 +453,15 @@
   - type: Sprite
     state: colony_int
   - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+    linkedLz: dropship_lz2
     minimapColor: '#A22D2DEE'
     landingZone: true
 
@@ -412,7 +473,25 @@
   - type: Sprite
     state: power
   - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
     minimapColor: '#C19504E7'
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaKutjevoInteriorPower
+  id: RMCAreaKutjevoInteriorPowerComms
+  name: Kutjevo - Hydroelectric Dam Comms Relay
+  components:
+  - type: Sprite
+    state: power
+  - type: Area
     CAS: true
     fulton: true
     mortarPlacement: false
@@ -423,20 +502,21 @@
     supplyDrop: true
 
 - type: entity
-  parent: RMCAreaKutjevoInteriorPower
-  id: RMCAreaKutjevoInteriorPowerComms
-  name: Kutjevo - Hydroelectric Dam Comms Relay
-  components:
-  - type: Sprite
-    state: power
-
-- type: entity
   parent: RMCAreaKutjevoInterior
   id: RMCAreaKutjevoInteriorConstruction
   name: Kutjevo - Abandoned Construction Interior
   components:
   - type: Sprite
     state: construction_int
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
 
 - type: entity
   parent: RMCAreaKutjevoInterior
@@ -445,6 +525,15 @@
   components:
   - type: Sprite
     state: foremans
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
 
 - type: entity
   parent: RMCAreaKutjevoInterior
@@ -453,6 +542,15 @@
   components:
   - type: Sprite
     state: weed_int
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
 
 - type: entity
   parent: RMCAreaKutjevoInterior
@@ -461,6 +559,15 @@
   components:
   - type: Sprite
     state: power_2
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
 
 - type: entity
   parent: RMCAreaKutjevoInterior
@@ -469,6 +576,15 @@
   components:
   - type: Sprite
     state: colony_int
+  - type: Area
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: false
 
 - type: entity
   parent: RMCAreaKutjevoInterior
@@ -478,6 +594,14 @@
   - type: Sprite
     state: colony_caves_0
   - type: Area
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: false
     minimapColor: '#3F3C3CEF'
 
 - type: entity
@@ -487,6 +611,15 @@
   components:
   - type: Sprite
     state: colony_caves_0
+  - type: Area
+    CAS: true
+    fulton: false
+    mortarPlacement: false
+    mortarFire: false
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: false
 
 - type: entity
   parent: RMCAreaKutjevoInterior
@@ -497,29 +630,47 @@
     state: colony_caves_1
   - type: Area
     CAS: false
-    OB: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
 
 - type: entity
   parent: RMCAreaKutjevoInterior
   id: RMCAreaKutjevoInteriorColonySEast
-  name: Kutjevo - North East Colony Caves
+  name: Kutjevo - Southeast Colony Caves
   components:
   - type: Sprite
     state: colony_caves_2
   - type: Area
     CAS: false
-    OB: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
 
 - type: entity
   parent: RMCAreaKutjevoInterior
   id: RMCAreaKutjevoInteriorColonyNEast
-  name: Kutjevo - South East Colony Caves
+  name: Kutjevo - Northeast Colony Caves
   components:
   - type: Sprite
     state: colony_caves_2
   - type: Area
     CAS: false
-    OB: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
 
 - type: entity
   parent: RMCAreaKutjevoInterior
@@ -530,7 +681,13 @@
     state: colony_caves_3
   - type: Area
     CAS: false
-    OB: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
 
 - type: entity
   parent: RMCAreaKutjevoInteriorColonySouth
@@ -540,7 +697,12 @@
   - type: Sprite
     state: colony_caves_3
   - type: Area
-    minimapColor: '#5A4501E7'
     CAS: false
-    OB: false
-
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+    minimapColor: '#5A4501E7'

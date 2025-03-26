@@ -12,6 +12,9 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessMarinePrep"
+    hackable: true
     sections:
     - name: Primary firearms
       entries:
@@ -91,6 +94,9 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessMarinePrep"
+    hackable: true
     sections:
     - name: Standard Equipment
       entries:
@@ -250,14 +256,20 @@
         amount: 10
       - id: RMCGlassesMarineRpg
         amount: 10
-#      - id: M5 Integrated Gas Mask
-#        amount: 10
-#      - id: M10 Helmet Netting
-#        amount: 10
-#      - id: M10 Helmet Rain Cover
-#        amount: 10
-#      - id: Firearm Lubricant
-#        amount: 15
+      - id: RMCGlassesMarineRpgOld
+        amount: 10
+      - id: RMCHelmetGarbGasmask
+        name: M5 integrated gas mask
+        amount: 10
+      - id: RMCHelmetGarbNetting
+        name: M10 helmet netting
+        amount: 10
+      - id: RMCHelmetGarbRainCover
+        name: M10 helmet rain cover
+        amount: 10
+      - id: RMCHelmetGarbGunOil
+        name: firearm lubricant
+        amount: 15
 #      - id: Marine Flair
 #        amount: 15
 #      - id: Falling Falcons Shoulder Patch
@@ -266,6 +278,8 @@
 #        amount: 15
       - id: BedrollFolded
         amount: 20
+      - id: RMCM5CameraGear
+        amount: 10
     - name: Optics
       entries: [ ]
 #      - id: Advanced Medical Optic (CORPSMAN ONLY)
@@ -287,6 +301,10 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_ammo.rsi
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessMarinePrep"
+    - "CMAccessRequisitions"
+    hackable: true
     sections:
     - name: Armor-Piercing Ammunition
       entries:
@@ -316,20 +334,20 @@
         amount: 6
       - id: RMCMagazinePistolSU6
         amount: 6
-      #- id: CMIncineratorTankM240
-      #  amount: 3
+      - id: RMCTankFlamer
+        amount: 3
       #- id: CMMagazineDrumM56D
       #  amount: 2
       #- id: CMMagazineBoxM2C
       #  amount: 2
       - id: RMCBoxShotgunBreaching
         amount: 2
-      #- id: CMBatonSlugsHIRR
-      #  amount: 6
-      #- id: CMStarShellN74AGMS
-      #  amount: 4
-      #- id: CMHornetShellM74AGMS
-      #  amount: 4
+      - id: RMCBatonSlugHIRR
+        amount: 6
+      - id: RMCStarShellM74AGMS
+        amount: 4
+      - id: RMCHornetShellM74AGMS
+        amount: 4
 
 
 - type: entity
@@ -345,6 +363,10 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessMarinePrep"
+    - "CMAccessRequisitions"
+    hackable: true
     sections:
     - name: Food
       entries:
@@ -421,6 +443,10 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessMarinePrep"
+    - "CMAccessRequisitions"
+    hackable: true
     sections: # TODO RMC14
     - name: Barrel
       entries:
@@ -456,14 +482,14 @@
         amount: 2
       - id: RMCAttachmentLaserSight
         amount: 3
-#      - id: CMAttachmentMiniFlamethrower
-#        amount: 2
+      - id: RMCAttachmentMiniFlamethrower
+        amount: 2
 #      - id: CMAttachmentXMVESG1FlamerNozzle
 #        amount: 2
       - id: RMCAttachmentU7UnderbarrelShotgun
         amount: 2
-#      - id: CMAttachmentUnderbarrelExtinguisher
-#        amount: 2
+      - id: RMCAttachmentUnderbarrelExtinguisher
+        amount: 2
       - id: RMCAttachmentVerticalGrip
         amount: 3
     - name: Stock

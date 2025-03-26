@@ -338,7 +338,6 @@ MagazineBoxLightRifleRubber: MagazineBoxLightRifle
 MagazineBoxRifleRubber: MagazineBoxRifle
 MagazineBoxRifleBigRubber: MagazineBoxRifleBig
 MagazineBoxCaselessRifleRubber: MagazineBoxCaselessRifle
-MagazineBoxCaselessRifleBigRubber: MagazineBoxCaselessRifle10x24
 BoxMagazinePistolRubber: BoxMagazinePistol
 BoxMagazinePistolHighCapacityRubber: BoxMagazinePistolHighCapacity
 BoxMagazinePistolSubMachineGunRubber: BoxMagazinePistolSubMachineGun
@@ -348,7 +347,6 @@ BoxMagazineCaselessRifleRubber: BoxMagazinePistolCaselessRifle
 BoxMagazineMagnumSubMachineGunRubber: BoxMagazineMagnumSubMachineGun
 WeaponPistolMk58Nonlethal: WeaponPistolMk58
 WeaponPistolN1984Nonlethal: WeaponPistolN1984
-WeaponSubMachineGunVectorRubber: WeaponSubMachineGunVector
 WeaponSubMachineGunDrozdRubber: WeaponSubMachineGunDrozd
 WeaponRifleLecterRubber: WeaponRifleLecter
 
@@ -747,7 +745,7 @@ CMBoxMRE: RMCBoxMRE
 CMBoxPackFlare: RMCBoxPackFlare
 CMCrateBase: RMCCrateBase
 CMCrateLarge: RMCCrateLarge
-CMCrateWeldable: RMCCrateWeldable
+CMCrateWeldable: RMCCrateBase
 CMCrateAlpha: RMCCrateAlpha
 CMCrateBravo: RMCCrateBravo
 CMCrateCharlie: RMCCrateCharlie
@@ -997,6 +995,23 @@ LightTree06: LightTree
 #2024-12-28
 DrinkIrishCarBomb: DrinkIrishSlammer
 
+#2025-01-06
+ClothingMaskSexyClown: ClothingMaskBlushingClown
+ClothingMaskSexyMime: ClothingMaskBlushingMime
+
+# 2025-01-27
+FoodCondimentPacketFrostoil: FoodCondimentPacketColdsauce
+
+#2025-02-05
+WeaponSubMachineGunVector: null
+WeaponSubMachineGunVectorRubber: null
+
+# 2025-02-20
+MagazineBoxAntiMaterielBig: null
+MagazineBoxCaselessRifle10x24: null
+MagazineBoxCaselessRifleBig: null
+MagazinePistolHighCapacityRubber: null
+
 # 2024-10-28
 ColMarTechExecutiveOfficerEquipment: ColMarTechSeniorOfficerEquipment
 
@@ -1069,3 +1084,34 @@ RMCCrateBoxMagazineM44RevolverMarksman: RMCCrateBoxMagazineRevolverM44Marksman
 
 # 2025-01-19
 RMCCrateM54C: RMCCrateM54CMK1
+
+# 2025-02-10
+BulletRifle5.56x45mm: BulletRifle556x45mm
+CMBulletPistol.22mm: CMBulletPistol22mm
+CMCartridgePistol.22mm: CMCartridgePistol22mm
+
+# 2025-02-12
+RMCAreaSavannahPumpStarboard Quarter: RMCAreaSavannahPumpStarboardQuarter
+
+# 2025-02-21
+RMCWindowFrameHybrisaEngigReinforced: RMCWindowFrameHybrisaEngiReinforced
+RMCWindowHybrisaResearchlReinforced: RMCWindowHybrisaResearchReinforced
+
+# 2025-02-25
+CMAirlockGlassRequisitionsLocked: CMAirlockRequisitionsLocked
+
+# 2025-02-26
+RMCAreaLv759IndoorsWeyyuOffice: RMCAreaLv759IndoorsWeyaOffice
+RMCAreaLv759IndoorsWeyyuOfficeHallway: RMCAreaLv759IndoorsWeyaOfficeHallway
+RMCAreaLv759IndoorsWeyyuOfficeFloor: RMCAreaLv759IndoorsWeyaOfficeFloor
+RMCAreaLv759IndoorsWeyyuOfficeBreakroom: RMCAreaLv759IndoorsWeyaOfficeBreakroom
+RMCAreaLv759IndoorsWeyyuOfficeVip: RMCAreaLv759IndoorsWeyaOfficeVip
+RMCAreaLv759IndoorsWeyyuOfficePressroom: RMCAreaLv759IndoorsWeyaOfficePressroom
+RMCAreaLv759IndoorsWeyyuOfficeSupervisor: RMCAreaLv759IndoorsWeyaOfficeSupervisor
+
+# 2025-03-01
+RMCHeadsetDistressFreelancer: RMCHeadsetDistressDukes
+RMCEncryptionKeyFreelancer: RMCEncryptionKeyDukes
+
+# 2025-03-14
+RMCCrateWeldable: RMCCrateBase

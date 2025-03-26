@@ -25,7 +25,8 @@ command-description-excluderoletimer-remove = Removes a player's exclusion for p
 command-description-figurine-export = Exports the current character as a figurine.
 command-description-figurine-openslots = Opens up infinite slots for all jobs on all map prototypes until the whole server is restarted.
 
-command-description-hive-alldefault = Sets the hive of a xeno or group of xenos.
+command-description-hive-alldefault = Sets the hive of all xenos to the default hive (the first one created).
+command-description-hive-set = Sets the hive of a xeno or group of xenos.
 
 command-description-icon-get_human_readable = Gets the human readable name of a player's job icon.
 command-description-icon-get = Gets the name of a player's job icon.
@@ -36,6 +37,12 @@ command-description-marine-randomize = Deletes and then spawns a marine or group
 command-description-marine-randomizewithjob = Deletes and then spawns a marine or group of marines in the same place with a set job and a randomized name, species and appearance.
 
 command-description-removeinvalidweeds = Removes any weeds that should not have normally spread to where they are from the map.
+
+command-description-requisitions-addbudget = Adds budget to the default Requisitions account.
+command-description-requisitions-removebudget = Removes budget from the default Requisitions account.
+
+command-description-intel-addpoints = Adds points to the default Intel tech tree.
+command-description-intel-removepoints = Removes points from the default Intel tech tree.
 
 command-description-prototypecontains = Filters entities by whether or not their prototype ID contains the given text.
 
@@ -51,4 +58,8 @@ command-description-squad-refresh = Manually refreshes the members of a squad.
 
 command-description-xenomature = Instantly matures a xeno. Applicable to the Queen, at which point she gets more health and abilities.
 
+command-description-weedkiller = Runs weed killer on the current location's area. This kills all weeds and resin structures nearby.
+
 command-description-withxenotier = Filters entities or entity prototypes to those of a specific xenonid tier.
+
+command-description-spawnallmapinserts = Spawns all map inserts, with forced guaranteed spawn probability.

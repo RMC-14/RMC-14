@@ -20,7 +20,7 @@
       entries:
       - id: CMVendorBundleCombatTechnicianEssentials
     - name: Handheld Defense
-      choices: { CMHandheldDefense: 1 }
+      takeOne: CMHandheldDefense
       entries:
     #    CM21STeslaCoil
     #    CMJIMAPlantedFlag
@@ -49,8 +49,8 @@
         name: plasteel x10
         points: 7
         recommended: true
-    #- id: CMPlasticExplosive
-    #  points: 3
+      - id: RMCExplosivePlastic
+        points: 3
       - id: RMCExplosiveBreachingCharge
         points: 5
         recommended: true
@@ -72,14 +72,14 @@
     #  points: 18
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
-    #- id: CMM74AGMFragAirburstPacket3
-    #  points: 18
-    #- id: CMM74AGMIncendiaryAirburstPacket3
-    #  points: 18
-    #- id: CMM74AGMSmokeAirburstPacket3
-    #  points: 10
-    #- id: CMM74AGMHornetAirburstPacket3
-    #  points: 20
+      - id: RMCPacketGrenadeM74AGMFFilled
+        points: 18
+      - id: RMCPacketGrenadeM74AGMIFilled
+        points: 18
+      - id: RMCPacketGrenadeM74AGMSFilled
+        points: 10
+      - id: RMCPacketGrenadeM74AGMSHornetFilled
+        points: 20
     #- id: CMM20MineBox4
     #  points: 18
     #- id: CMM40MFHSMetalFoamGrenade
@@ -116,10 +116,10 @@
         points: 8
       - id: RMCGunCasePistolSmart
         points: 12
-    #- id: CMM240IncineratorUnit
-    #  points: 12
-    #- id: CMM79GrenadeLauncher
-    #  points: 24
+      - id: RMCCaseFlamer
+        points: 12
+      - id: RMCM79Case
+        points: 24
     #- id: CMM56DHeavyMachineGun
     #  points: 24
     - name: Clothing Items
@@ -132,8 +132,8 @@
         points: 8
       - id: RMCBackpackRTO
         points: 15
-    #- id: CMFuelTankStrapPouch
-    #  points: 4
+      - id: RMCPouchFuelTank
+        points: 4
     #- id: CMSlingPouch
     #  points: 6
       - id: RMCPouchGeneralLarge
@@ -144,8 +144,8 @@
       entries:
       - id: CMRollerBedSpawnFolded
         points: 5
-    #- id: CMFultonDeviceStack
-    #  points: 5
+      - id: RMCFulton20
+        points: 5
       - id: CMFireExtinguisherPortable
         points: 3
       - id: RMCMotionDetector
@@ -231,7 +231,6 @@
       - id: RMCBeltHolsterSMGPouch
     #- id: RMCBeltHolsterFlareGun
       - id: RMCM276ShotgunShellLoadingRig
-      - id: CMBeltMortar
       - id: CMBeltUtilityFilled
         name: M276 pattern toolbelt rig (Full)
         # mandatory: true, TODO allow vendors to mark entries as mandatory
@@ -264,6 +263,7 @@
       - id: RMCPouchPistol
       - id: RMCPouchToolsFill
         name: Tools pouch (Full)
+      - id: RMCPouchEngineerKit
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
@@ -299,6 +299,9 @@
     - state: "normal-unshaded"
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessCombatTechPrep"
+    hackable: true
     jobs:
     - CMCombatTech
     sections:

@@ -250,8 +250,6 @@
     RMCHandcuffs: 8
     RMCZipties: 10
     RMCGrenadeFlashBang: 4
-    RMCBola: 10
-    GrenadeFlashBang: 4
     RMCWeaponTaser: 4
     # Pepper spray 4
     CMStunbaton: 4
@@ -421,16 +419,11 @@
     RMCFork: 6
     RMCKitchenKnifeChef: 3
     DrinkGlass: 8
-    CMJumpsuitMessTech: 2
+    ClothingOuterApronChef: 2
     RMCCondimentSmallSalt: 4
     RMCCondimentSmallPepper: 4
     RMCCondimentEnzyme: 1
     RMCCondiment: 8
-    # TODO RMC14 make next items Mess Tech only
-    RMCSpoon: 2
-    RMCRollingPin: 2
-    RMCKitchenKnifeButcher: 2
-
 
 # BODA
 - type: entity
@@ -466,7 +459,7 @@
   id: CMVendorIngredient
   startingInventory:
     FoodContainerEgg: 12
-#    FoodMeatFish: 12
+    FoodMeatFish: 12
     FoodMeat: 12
     DrinkMilkCarton: 12
     DrinkSoyMilkCarton: 12
@@ -480,7 +473,7 @@
     FoodApple: 12
     FoodBanana: 12
     FoodMushroom: 12
-    # TODO RMC14 Cherry 12
+    FoodCherry: 12
     FoodChiliPepper: 12
     FoodCabbage: 12
     FoodCarrot: 12

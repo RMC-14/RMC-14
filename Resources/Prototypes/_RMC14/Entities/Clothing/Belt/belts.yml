@@ -158,7 +158,7 @@
       - RMCExplosiveBreachingCharge
       - RodMetal1
       - RMCNailgunCompact
-      #     - # TODO circuit board, plastic explosives, stock parts
+      #     - # TODO circuit board, stock parts
       components:
       - Welder
       - PowerCell
@@ -306,7 +306,7 @@
       - CMBurnKit
       #      - # TODO RMC14 splints
       - CMAutoInjector
-      - CMRollerBed
+      - CMRollerItem
       - BodyBag
       #      - # TODO RMC14 latex gloves
       - Hypospray
@@ -315,53 +315,6 @@
       - Defibrillator
       - Pill
   - type: FixedItemSizeStorage
-
-- type: entity
-  parent: CMBeltMedical
-  id: CMBeltMedicBag
-  name: M276 pattern lifesaver bag
-  description: The M276 is the standard load-bearing equipment of the UNMC. This configuration mounts a duffel bag filled with a range of injectors and light medical supplies, and is common among medics.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/medicbag/jungle-classic.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/medicbag/jungle-classic.rsi
-  - type: Storage
-    maxItemSize: Small
-    grid:
-    - 0,0,13,5 # 21 slots
-    whitelist:
-      tags:
-      - DiscreteHealthAnalyzer
-      - BodyBag
-      - Bottle
-      - PillCanister
-      - Syringe
-      - CMAutoInjector
-      - Brutepack
-      - CMBloodPack
-      - Gauze
-      - Ointment
-      - CMOintment
-      - CMTraumaKit
-      - CMBurnKit
-      #      - # TODO RMC14 splints
-      - RMCGlovesLatex
-      components:
-      - Defibrillator
-      - Pill
-  - type: FixedItemSizeStorage
-  - type: IgnoreContentsSize
-    items:
-      tags:
-      - PillCanister
-  - type: ItemCamouflage
-    camouflageVariations:
-      Jungle: _RMC14/Objects/Clothing/Belt/medicbag/jungle-classic.rsi
-      Snow: _RMC14/Objects/Clothing/Belt/medicbag/snow-urban.rsi
-      Desert: _RMC14/Objects/Clothing/Belt/medicbag/desert.rsi
-      Urban: _RMC14/Objects/Clothing/Belt/medicbag/snow-urban.rsi
-      Classic: _RMC14/Objects/Clothing/Belt/medicbag/jungle-classic.rsi
 
 - type: entity
   parent: CMBeltBaseStorage
@@ -622,21 +575,32 @@
   description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
     layers:
     - state: icon
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: m1984 # TODO RMC14 per-gun underlay
-      map: [ "enum.CMHolsterLayers.Fill" ]
-      visible: false
-    - sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
-      state: icon-front
+      state: _m77
+      map: [ "_m77_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m1984
+      map: [ "m1984_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: mk80
+      map: [ "mk80_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: b92fs
+      map: [ "b92fs_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: highpower
+      map: [ "mk45_fill" ]
+    - state: icon-front
+      map: [ "holstered" ]
     - state: half
       map: [ "openLayer" ]
     - state: full
       map: [ "closedLayer" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
     slots:
     - suitStorage
     - belt
@@ -672,8 +636,46 @@
   - type: Tag
     tags:
     - RMCGeneralPistolHolster
+  - type: ItemMapper
+    spriteLayers:
+    - holstered
+    - _m77_fill
+    - m1984_fill
+    - mk80_fill
+    - b92fs_fill
+    - mk45_fill
+    mapLayers:
+      holstered:
+        whitelist:
+          tags:
+          - Sidearm
+      _m77_fill:
+        whitelist:
+          tags:
+          - RMCWeaponPistolM77
+      m1984_fill:
+        whitelist:
+          tags:
+          - CMWeaponPistolM1984
+      mk80_fill:
+        whitelist:
+          tags:
+          - RMCMK80
+      b92fs_fill:
+        whitelist:
+          tags:
+          - RMCb92fs
+      mk45_fill:
+        whitelist:
+          tags:
+          - RMCMK45
   - type: ItemCamouflage
-    camouflageVariations: { }
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
+      Desert: _RMC14/Objects/Clothing/Belt/holster_pistol/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Belt/holster_pistol/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
+      Urban: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
 
 - type: Tag
   id: RMCGeneralPistolHolster
@@ -755,6 +757,8 @@
     slots:
     - suitStorage
     - belt
+  - type: Item
+    size: Large
   - type: ContainerContainer
     containers:
       pouch: !type:ContainerSlot
@@ -922,13 +926,51 @@
 
 - type: entity
   parent: RMCMatebaBelt
+  id: RMCMatebaBeltLuxurious
+  name: luxurious M276 pattern Mateba holster rig
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the powerful Mateba magnum revolver, along with five small pouches for speedloaders. This specific one is tinted black and engraved with gold, heavily customized for a high-ranking official.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/amateba_belt.rsi
+    layers:
+    - state: amateba
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      visible: false
+    - state: icon
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    slots:
+    - suitStorage
+    - belt
+    sprite: _RMC14/Objects/Clothing/Belt/amateba_belt.rsi
+
+- type: entity
+  parent: RMCMatebaBeltLuxurious
+  id: RMCMatebaBeltLuxuriousFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 2
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 3
+    - id: RMCWeaponRevolverMatebaGold
+
+- type: entity
+  parent: RMCMatebaBelt
   id: RMCMatebaBeltFilled
   suffix: Filled
   components:
   - type: StorageFill
     contents:
-    - id: RMCSpeedLoaderMateba
-      amount: 5
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 2
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 3
     - id: RMCWeaponRevolverMateba
 
 - type: entity
@@ -1068,3 +1110,16 @@
 
 - type: Tag
   id: RMCBeltSOCOM
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCD50WinterWyvernBeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolD50WinterWyvernHI
+      amount: 4
+    - id: RMCMagazinePistolD50WinterWyvernHIAP
+      amount: 2
+    - id: RMCWeaponPistolCOD50WinterWyvern

@@ -1,15 +1,18 @@
-﻿- type: entity
+- type: entity
   parent: CMBaseStructure
   id: CMRack
   name: rack
   description: A bunch of metal shelves stacked on top of eachother. Excellent for storage purposes, less so as cover.
   components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
   - type: MeleeSound
     soundGroups:
       Brute:
         path:
           "/Audio/Weapons/dodgeball.ogg"
-  - type: Anchorable
   - type: InteractionOutline
   - type: PlaceableSurface
   - type: Sprite
@@ -55,3 +58,5 @@
     node: rack
   - type: DamageMultiplierFlags
     flags: Breaching
+  - type: XenoLeapDestroyOnPass
+    spawnPrototype: CMSheetMetalBase

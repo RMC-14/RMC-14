@@ -42,6 +42,8 @@ using static Content.Shared.Physics.CollisionGroup;
 using Content.Shared.Movement.Components;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Aura;
+using Robust.Shared.Spawners;
 
 namespace Content.Shared._RMC14.Xenonids.Fruit;
 
@@ -74,6 +76,8 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     [Dependency] private readonly SharedXenoPheromonesSystem _xenoPhero = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly SharedAuraSystem _aura = default!;
+    [Dependency] private readonly IComponentFactory _componentFactory = default!;
 
     private static readonly ProtoId<DamageTypePrototype> FruitPlantDamageType = "Blunt";
 
@@ -154,9 +158,9 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     private void OnActionFruitChosen(Entity<XenoFruitChooseActionComponent> xeno, ref XenoFruitChosenEvent args)
     {
         if (_actions.TryGetActionData(xeno, out var action) &&
-            _prototype.HasIndex(args.Choice))
+            _prototype.TryIndex(args.Choice, out var fruit))
         {
-            action.Icon = new SpriteSpecifier.EntityPrototype(args.Choice);
+            action.Icon = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Structures/Xenos/xeno_fruit.rsi"), GetFruitSprite(fruit));
             Dirty(xeno, action);
         }
 
@@ -170,10 +174,17 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
     private void OnXenoFruitExamined(EntityUid uid, XenoFruitComponent fruit, ExaminedEvent args)
     {
+        var state = fruit.State switch
+        {
+            XenoFruitState.Item => "rmc-xeno-fruit-examine-grown",
+            XenoFruitState.Grown => "rmc-xeno-fruit-examine-grown",
+            XenoFruitState.Growing => "rmc-xeno-fruit-examine-growing",
+            XenoFruitState.Eaten => "rmc-xeno-fruit-examine-spent",
+            _ => "rmc-xeno-fruit-examine-grown"
+        };
+
         args.PushMarkup(Loc.GetString("rmc-xeno-fruit-examine-base",
-            ("growthStatus", Loc.GetString(fruit.State == XenoFruitState.Growing
-            ? "rmc-xeno-fruit-examine-growing"
-            : "rmc-xeno-fruit-examine-grown"))));
+            ("growthStatus", Loc.GetString(state))));
     }
 
     private void OnXenoFruitActivateInWorld(Entity<XenoFruitComponent> fruit, ref ActivateInWorldEvent args)
@@ -515,6 +526,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         _transform.Unanchor(fruit, xform);
         SetFruitState(fruit, XenoFruitState.Item);
         _hands.TryPickup(args.User, fruit);
+        RemCompDeferred<AuraComponent>(fruit);
     }
 
     #endregion
@@ -523,7 +535,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     #region Consuming
     private bool TryConsume(Entity<XenoFruitComponent> fruit, EntityUid user)
     {
-        if (!HasComp<XenoComponent>(user))
+        if (!HasComp<XenoComponent>(user) || fruit.Comp.State == XenoFruitState.Eaten)
         {
             // TODO: allow non-xenos to eat the forbidden froot
             return false;
@@ -536,7 +548,6 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             return false;
         }
 
-        // TODO: check for hive
         if (!_hive.FromSameHive(fruit.Owner, user))
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-wrong-hive"), user, user, PopupType.SmallCaution);
@@ -586,7 +597,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     private bool TryFeed(Entity<XenoFruitComponent> fruit, EntityUid user, EntityUid target)
     {
         // Non-xenos can't feed the froot
-        if (!HasComp<XenoComponent>(user))
+        if (!HasComp<XenoComponent>(user) || fruit.Comp.State == XenoFruitState.Eaten)
             return false;
 
         // Can't feed non-xenos
@@ -673,7 +684,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         var user = args.User;
 
         // Fruit was consumed/destroyed during the doafter
-        if (TerminatingOrDeleted(fruit) || EntityManager.IsQueuedForDeletion(fruit))
+        if (TerminatingOrDeleted(fruit) || EntityManager.IsQueuedForDeletion(fruit) || fruit.Comp.State == XenoFruitState.Eaten)
         {
             if (user == target)
                 _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-pick-failed-no-longer", ("fruit", fruit)), user, user, PopupType.SmallCaution);
@@ -705,8 +716,14 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             if (target != planter && user != planter)
                 _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-consumed"), planter, planter, PopupType.Medium);
 
+        SetFruitState(fruit, XenoFruitState.Eaten);
+        RemCompDeferred<AuraComponent>(fruit);
+
         if (_net.IsServer)
-            QueueDel(fruit);
+        {
+            var timer = EnsureComp<TimedDespawnComponent>(fruit);
+            timer.Lifetime = fruit.Comp.SpentDespawnTime;
+        }
     }
 
 
@@ -986,6 +1003,14 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         _ui.SetUiState(xeno.Owner, XenoFruitChooseUI.Key, state);
     }
 
+    public string GetFruitSprite(EntityPrototype ent)
+    {
+        if (!ent.TryGetComponent<XenoFruitComponent>(out var fruit, _componentFactory))
+            return "fruit_lesser_spent";
+
+        return fruit.GrownState;
+    }
+
     public override void Update(float frameTime)
     {
         if (_net.IsClient)
@@ -1006,6 +1031,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
                 continue;
 
             SetFruitState((uid, fruit), XenoFruitState.Grown);
+            _aura.GiveAura(uid, fruit.OutlineColor, null);
         }
 
         // Handle fruit effects

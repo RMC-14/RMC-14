@@ -56,6 +56,7 @@
           - CMMagazineSMGM63AP
           - CMMagazineSMGM63Ext
           - RMCMagazineSMGM63Rubber
+          - RMCMagazineSMGM63HEAP
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -108,9 +109,9 @@
       Urban: _RMC14/Objects/Weapons/Guns/SMGs/m63/urban.rsi
 
 - type: entity
-  parent: BaseMagazineRifle
+  parent: CMMagazineRifleBase
   id: CMMagazineSMGM63
-  name: "M63 magazine (10x20mm)"
+  name: "M63 HV magazine (10x20mm)"
   components:
   - type: Tag
     tags:
@@ -167,6 +168,33 @@
 
 - type: entity
   parent: CMMagazineSMGM63
+  id: RMCMagazineSMGM63HEAP
+  name: "M63 HEAP magazine (10x20mm)"
+  suffix: HEAP
+  components:
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridge10x20mmHEAP
+    proto: RMCCartridge10x20mmHEAP
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m63.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#9C9A19"
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - RMCMagazineSMGM63HEAP
+#  - type: RefillableByBulletBox no HEAP bulletbox
+#    bulletType: RMCBoxBulletsSMGAP
+
+- type: entity
+  parent: CMMagazineSMGM63
   id: CMMagazineSMGM63Ext
   name: "M63 extended magazine (10x20mm)"
   components:
@@ -209,6 +237,18 @@
     proto: Bullet10x20mmAP
 
 - type: entity
+  parent: CMCartridge10x20mm
+  id: RMCCartridge10x20mmHEAP
+  name: HEAP cartridge (10x20mm)
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridge10x20mmHEAP
+  - type: CartridgeAmmo
+    proto: RMCBullet10x20mmHEAP
+
+- type: entity
   parent: RMCBaseBullet
   id: Bullet10x20mm
   categories: [ HideSpawnMenu ]
@@ -244,6 +284,18 @@
   - type: CMArmorPiercing
     amount: 30
 
+- type: entity
+  parent: Bullet10x20mm
+  id: RMCBullet10x20mmHEAP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 45
+  - type: CMArmorPiercing
+    amount: 30
+
 - type: Tag
   id: RMCWeaponSMGM63
 
@@ -254,7 +306,13 @@
   id: CMMagazineSMGM63AP
 
 - type: Tag
+  id: RMCMagazineSMGM63HEAP
+
+- type: Tag
   id: CMMagazineSMGM63Ext
 
 - type: Tag
   id: CMCartridge10x20mmAP
+
+- type: Tag
+  id: RMCCartridge10x20mmHEAP

@@ -1,0 +1,64 @@
+- type: entity
+  id: HiveRecoveryNodeXeno
+  parent: BaseHiveStructure
+  name: Recovery Node
+  description: A warm, soothing light source that pulsates with a faint hum.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/hive_structures.rsi
+    state: recovery
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 100
+  - type: RecoveryNode
+  - type: HiveConstructionRequiresHiveCore
+  - type: HiveConstructionLimited
+    id: HiveRecoveryNodeXeno
+  - type: HiveConstructionRequiresHiveWeeds
+  - type: HiveConstructionRequiresSpace
+  - type: DoAfter
+
+- type: entity
+  id: HiveRecoveryNodeXenoConstructionNode
+  parent: BaseHiveStructureNode
+  name: Recovery Node
+  description: A warm, soothing light source that pulsates with a faint hum. Looks like a marker for something.
+  suffix: Construction
+  components:
+  - type: Sprite
+    color: '#FFFFFFAA'
+    layers:
+    - sprite: _RMC14/Structures/Xenos/hive_structures.rsi
+      state: recovery
+    - sprite: _RMC14/Interface/xeno_hud.rsi
+      state: xeno_structure_node_indicator
+      scale: 0.8, 0.8
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: HiveConstructionNode
+    initialPlasmaCost: 400
+    plasmaCost: 450
+    spawn: HiveRecoveryNodeXeno
+  - type: HiveConstructionRequiresHiveCore
+  - type: HiveConstructionLimited
+    id: HiveRecoveryNodeXeno
+  - type: HiveConstructionRequiresHiveWeeds
+  - type: HiveConstructionRequiresSpace
+  - type: WarpPoint
+    location: recovery node
+

@@ -16,9 +16,15 @@
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
       shader: unshaded
   - type: AccessReader
-    access: [["CMAccessCombatTechPrep"], ["CMAccessEngineering"], ["CMAccessColonyEngineering"]]
+    access: [["CMAccessCombatTechPrep"], ["CMAccessEngineering"], ["CMAccessColonyEngineering"], ["CMAccessColonyPublic"]] # TODO RMC14 remove public when surv jobs and hacking are in
   - type: CMAutomatedVendor
-    sections:    
+    access:
+    - "CMAccessCombatTechPrep"
+    - "CMAccessEngineering"
+    - "CMAccessColonyEngineering"
+    - "CMAccessColonyPublic"
+    hackable: true
+    sections:
     - name: Equipment
       entries:
       - id: RMCFlashlight
@@ -68,7 +74,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/robotics.rsi
   - type: CMAutomatedVendor
-    sections:    
+    hackable: true
+    sections:
     - name: Circuitboards
       entries:
       - id: FireAlarmElectronics
@@ -109,7 +116,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/engivend.rsi
   - type: CMAutomatedVendor
-    sections:    
+    hackable: true
+    sections:
     - name: Tools
       entries:
       - id: RMCCableCoil
@@ -140,7 +148,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/engi.rsi
   - type: CMAutomatedVendor
-    sections:    
+    hackable: true
+    sections:
     - name: Assembly Components
       entries:
       - id: Igniter
@@ -186,7 +195,10 @@
   - type: AccessReader
     access: [["CMAccessResearch"]]
   - type: CMAutomatedVendor
-    sections:    
+    access:
+    - "CMAccessResearch"
+    hackable: true
+    sections:
     - name: Equipment
       entries:
       - id: ClothingHeadHatHoodBioScientist
@@ -215,7 +227,8 @@
   description: All the tools you need to create your own robot army.
   components:
   - type: CMAutomatedVendor
-    sections:    
+    hackable: true
+    sections:
     - name: Equipment
       entries:
       # Labcoat

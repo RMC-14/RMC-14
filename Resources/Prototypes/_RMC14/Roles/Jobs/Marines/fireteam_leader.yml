@@ -25,7 +25,7 @@
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - FTL
-  overwatchSortPriority: -4
+  overwatchSortPriority: -5
   overwatchRoleName: Fire Team Leaders
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
@@ -75,10 +75,7 @@
   - type: SpawnPoint
     job_id: CMFireteamLeader
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: fireteam_leader
+    state: tl_spawn
 
 - type: entity
   parent: CMSpawnPointFireteamLeader
@@ -88,6 +85,8 @@
   - type: SquadSpawner
     squad: SquadAlpha
     role: CMFireteamLeader
+  - type: Sprite
+    state: tl_spawn_alpha
 
 - type: entity
   parent: CMSpawnPointFireteamLeader
@@ -97,6 +96,8 @@
   - type: SquadSpawner
     squad: SquadBravo
     role: CMFireteamLeader
+  - type: Sprite
+    state: tl_spawn_bravo
 
 - type: entity
   parent: CMSpawnPointFireteamLeader
@@ -106,6 +107,8 @@
   - type: SquadSpawner
     squad: SquadCharlie
     role: CMFireteamLeader
+  - type: Sprite
+    state: tl_spawn_charlie
 
 - type: entity
   parent: CMSpawnPointFireteamLeader
@@ -115,3 +118,22 @@
   - type: SquadSpawner
     squad: SquadDelta
     role: CMFireteamLeader
+  - type: Sprite
+    state: tl_spawn_delta
+
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCFireteamLeader
+  components:
+  - type: GhostRole
+    name: cm-job-name-fireteam-leader
+    description: cm-job-description-fireteam-leader
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    raffle:
+      settings: default
+    job: CMFireteamLeader
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobFireteamLeader
+      time: 1

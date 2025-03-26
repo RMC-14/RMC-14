@@ -14,6 +14,9 @@ public sealed partial class CMVendorUserComponent : Component
     public HashSet<(string Category, EntProtoId Ent)> TakeAll = new();
 
     [DataField, AutoNetworkedField]
+    public HashSet<string> TakeOne = new();
+
+    [DataField, AutoNetworkedField]
     public int Points;
 
     [DataField, AutoNetworkedField]

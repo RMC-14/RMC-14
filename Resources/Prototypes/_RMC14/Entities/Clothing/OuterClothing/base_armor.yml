@@ -20,6 +20,7 @@
       path: /Audio/_RMC14/Machines/armor_equip.ogg
   - type: PlaytimeMedalHolder
   - type: MoveOrderArmor
+  - type: StoreAfterFailedInteract
 
 - type: entity
   abstract: true
@@ -46,7 +47,7 @@
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
       - RMCXM51Holster
-      - RMCMotionDetector
+      - RMCDetector
       - RMCMatebaHolster
       #TODO walkman
 
@@ -93,7 +94,7 @@
       - Crowbar
       - RMCMacheteScabbard
       #TODO katana scabbard
-      - RMCMotionDetector
+      - RMCDetector
       #TODO walkman
 
 - type: entity
@@ -111,7 +112,7 @@
       - Knife
       - RMCG8Pouch
       #TODO mines
-      - RMCMotionDetector
+      - RMCDetector
       #TODO walkman
 
 - type: entity
@@ -142,8 +143,8 @@
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
       - RMCMatebaHolster
-      #TODO Ceremonial Sword
-      - RMCMotionDetector
+      - RMCCeremonialSword
+      - RMCDetector
       #TODO walkman
 
 - type: entity
@@ -166,7 +167,7 @@
       - Grenade
       - Flashlight
       - Machete
-      - RMCMotionDetector
+      - RMCDetector
       #TODO walkman
 
 # TODO: Add separate whitelists for 'safari jacket' and 'bureau deputy jacket'
@@ -272,6 +273,7 @@
       path: /Audio/_RMC14/Machines/suitlight_off.ogg
     turnOnSound:
       path: /Audio/_RMC14/Machines/suitlight_on.ogg
+  - type: NoHandsInteractionBlocked
   - type: LightBehaviour
     behaviours:
     - !type:FadeBehaviour

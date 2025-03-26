@@ -38,7 +38,6 @@
   components:
   - type: CMVendorBundle
     bundle:
-    - CMArmorHelmetM10Medic # TODO RMC14 M4
     - CMVendorHeadsetSquadCorpsman
     - CMJumpsuitMarineMedic
     - CMBootsBlackFilled
@@ -92,7 +91,7 @@
     state: icon
   - type: CMVendorBundle
     bundle:
-#      - # TODO RMC14 plastic explosives
+    - RMCExplosivePlastic
     - CMSandbagEmpty25
     - CMSheetMetal50
     - CMSheetPlasteel40
@@ -163,3 +162,19 @@
     - CMSurgicalCaseFilled
     - RMCFlashlightPen
 #   - Syringe case # TODO RMC14 syringe cases
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCCommandingOfficerEssentialsBundle
+  name: Commanding Officer Essentials kit
+  description: Contains a laser designator, whistle, and a disabler.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/binoculars.rsi
+    state: rangefinder
+  - type: CMVendorBundle
+    bundle:
+    - RMCLaserDesignator
+    - RMCWhistle
+    - RMCWeaponTaser
+    #TODO RMC14 Megaphone, Paper Map.

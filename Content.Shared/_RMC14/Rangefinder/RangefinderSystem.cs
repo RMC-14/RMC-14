@@ -76,6 +76,13 @@ public sealed class RangefinderSystem : EntitySystem
                 comp.SwitchModeUseDelay);
         }
 
+        if (comp.TargetDelay > TimeSpan.Zero)
+        {
+            _useDelay.SetLength(rangefinder.Owner,
+                comp.TargetDelay,
+                comp.TargetUseDelay);
+        }
+
         Dirty(rangefinder);
         UpdateAppearance(rangefinder);
     }
@@ -178,6 +185,8 @@ public sealed class RangefinderSystem : EntitySystem
                 position += offset;
 
             rangefinder.Comp.LastTarget = position;
+            rangefinder.Comp.LastCoords = mapCoords;
+
             Dirty(rangefinder);
 
             _ui.OpenUi(rangefinder.Owner, RangefinderUiKey.Key, args.User);
@@ -306,10 +315,10 @@ public sealed class RangefinderSystem : EntitySystem
     {
         if (TryComp(rangefinder, out UseDelayComponent? useDelay))
         {
-            if (_useDelay.IsDelayed((rangefinder, useDelay)))
+            if (_useDelay.IsDelayed((rangefinder, useDelay), rangefinder.Comp.TargetUseDelay))
                 return;
 
-            _useDelay.TryResetDelay(rangefinder, component: useDelay);
+            _useDelay.TryResetDelay(rangefinder, component: useDelay, id: rangefinder.Comp.TargetUseDelay);
         }
 
         var ev = new LaserDesignatorDoAfterEvent(GetNetCoordinates(coordinates));

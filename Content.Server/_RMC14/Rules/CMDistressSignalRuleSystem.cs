@@ -1,6 +1,8 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server._RMC14.Commendations;
 using Content.Server._RMC14.Dropship;
+using Content.Server._RMC14.MapInsert;
 using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Stations;
 using Content.Server._RMC14.Xenonids.Construction.Tunnel;
@@ -42,7 +44,9 @@ using Content.Shared._RMC14.Scaling;
 using Content.Shared._RMC14.Spawners;
 using Content.Shared._RMC14.Survivor;
 using Content.Shared._RMC14.TacticalMap;
+using Content.Shared._RMC14.Thunderdome;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared._RMC14.WeedKiller;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
@@ -70,6 +74,7 @@ using Robust.Server.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Collections;
 using Robust.Shared.Configuration;
+using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -108,7 +113,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly IServerPreferencesManager _prefsManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
     [Dependency] private readonly RMCStationJobsSystem _rmcStationJobs = default!;
     [Dependency] private readonly RoleSystem _roles = default!;
@@ -128,6 +133,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly RMCCameraShakeSystem _rmcCameraShake = default!;
     [Dependency] private readonly ThermalCloakSystem _thermalCloak = default!;
     [Dependency] private readonly SharedGhillieSuitSystem _ghillieSuit = default!;
+    [Dependency] private readonly MapInsertSystem _mapInsert = default!;
 
     private readonly HashSet<string> _operationNames = new();
     private readonly HashSet<string> _operationPrefixes = new();
@@ -145,6 +151,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private int _mapVoteExcludeLast;
     private bool _useCarryoverVoting;
     private TimeSpan _hijackStunTime = TimeSpan.FromSeconds(5);
+    private bool _landingZoneMiasmaEnabled;
 
     private readonly List<MapId> _almayerMaps = [];
     private readonly List<EntityUid> _marineList = [];
@@ -200,6 +207,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         Subs.CVar(_config, RMCCVars.RMCAdminFaxAreaMap, v => _adminFaxAreaMap = v, true);
         Subs.CVar(_config, RMCCVars.RMCPlanetMapVoteExcludeLast, v => _mapVoteExcludeLast = v, true);
         Subs.CVar(_config, RMCCVars.RMCUseCarryoverVoting, v => _useCarryoverVoting = v, true);
+        Subs.CVar(_config, RMCCVars.RMCLandingZoneMiasmaEnabled, v => _landingZoneMiasmaEnabled = v, true);
 
         ReloadPrototypes();
     }
@@ -242,7 +250,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             SetCamoType();
 
             SpawnSquads((uid, comp));
-            SpawnAdminFaxArea();
+            SpawnAdminAreas(comp);
 
             var bioscan = Spawn(null, MapCoordinates.Nullspace);
             EnsureComp<BioscanComponent>(bioscan);
@@ -523,7 +531,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             spawnedDropships = true;
             var dropshipMap = _mapManager.CreateMap();
             var dropshipPoints = EntityQueryEnumerator<DropshipDestinationComponent, TransformComponent>();
-            var ships = new[] { "/Maps/_RMC14/alamo.yml", "/Maps/_RMC14/normandy.yml" };
+            var ships = new[] { new ResPath("/Maps/_RMC14/alamo.yml"), new ResPath("/Maps/_RMC14/normandy.yml") };
             var shipIndex = 0;
             while (dropshipPoints.MoveNext(out var destinationId, out _, out var destTransform))
             {
@@ -533,34 +541,36 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     continue;
                 }
 
-                _mapLoader.TryLoad(dropshipMap, ships[shipIndex], out var shipGrids);
-                shipIndex++;
+                if (!_mapLoader.TryLoadGrid(dropshipMap, ships[shipIndex], out var shipGrids))
+                {
+                    shipIndex++;
 
+                    if (shipIndex >= ships.Length)
+                        shipIndex = 0;
+
+                    continue;
+                }
+
+                shipIndex++;
                 if (shipIndex >= ships.Length)
                     shipIndex = 0;
 
-                if (shipGrids == null)
-                    continue;
-
-                foreach (var shipGrid in shipGrids)
+                var computers = EntityQueryEnumerator<DropshipNavigationComputerComponent, TransformComponent>();
+                var launched = false;
+                while (computers.MoveNext(out var computerId, out var computer, out var xform))
                 {
-                    var computers = EntityQueryEnumerator<DropshipNavigationComputerComponent, TransformComponent>();
-                    var launched = false;
-                    while (computers.MoveNext(out var computerId, out var computer, out var xform))
-                    {
-                        if (xform.GridUid != shipGrid)
-                            continue;
+                    if (xform.GridUid != shipGrids.Value)
+                        continue;
 
-                        if (!_dropship.FlyTo((computerId, computer), destinationId, null, startupTime: 1f, hyperspaceTime: 1f))
-                            continue;
+                    if (!_dropship.FlyTo((computerId, computer), destinationId, null, startupTime: 1f, hyperspaceTime: 1f))
+                        continue;
 
-                        launched = true;
-                        break;
-                    }
-
-                    if (launched)
-                        break;
+                    launched = true;
+                    break;
                 }
+
+                if (launched)
+                    break;
             }
 
             var marineFactions = EntityQueryEnumerator<MarineIFFComponent>();
@@ -587,7 +597,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         foreach (var id in rule.Comp.ExtraSquadIds)
         {
-            // Spawn(id);
+            Spawn(id);
         }
     }
 
@@ -654,7 +664,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     _hunger.SetHunger(ev.SpawnResult.Value, 50.0f, hunger);
             }
 
-            var faction = HasComp<SurvivorComponent>(ev.SpawnResult.Value) ? comp.SurvivorFaction : comp.MarineFaction;
+            var faction = HasComp<RMCSurvivorComponent>(ev.SpawnResult.Value) ? comp.SurvivorFaction : comp.MarineFaction;
             _gunIFF.SetUserFaction(ev.SpawnResult.Value, faction);
             return;
         }
@@ -868,6 +878,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (!xeno.ContributesToVictory)
                     continue;
 
+                if (HasComp<ThunderdomeMapComponent>(xform.MapUid))
+                    continue;
+
                 if (_mobState.IsAlive(xenoId, mobState) &&
                     (distress.AbandonedAt == null ||
                      time < distress.AbandonedAt ||
@@ -896,6 +909,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (_containers.IsEntityInContainer(marineId))
                     continue;
 
+                if (HasComp<ThunderdomeMapComponent>(xform.MapUid))
+                    continue;
+
                 if (_mobState.IsAlive(marineId, mobState) &&
                     (distress.AbandonedAt == null ||
                      time < distress.AbandonedAt ||
@@ -906,7 +922,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     _marineList.Add(marineId);
                 }
 
-                if (marinesAlive)
+                if (marinesAlive && _marineList.Count > 1)
                     break;
             }
 
@@ -942,30 +958,33 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 // TODO add ghost alert for last human
                 var lastMarine = _marineList.Last();
 
-                var cloak = _thermalCloak.FindWornCloak(lastMarine);
-                var ghillie = _ghillieSuit.FindSuit(lastMarine);
-
-                if (cloak != null && cloak.Value.Comp.Enabled)
+                var cloaks = EntityQueryEnumerator<ThermalCloakComponent>();
+                while (cloaks.MoveNext(out var cloakId, out var cloak))
                 {
-                    _thermalCloak.SetInvisibility(cloak.Value, lastMarine, false, true);
+                    if (!cloak.Enabled)
+                        continue;
 
-                    if (TryComp<InstantActionComponent>(cloak.Value.Comp.Action, out var action))
+                    _thermalCloak.SetInvisibility((cloakId, cloak), lastMarine, false, true);
+                    if (TryComp<InstantActionComponent>(cloak.Action, out var action))
                     {
                         action.Cooldown = (Timing.CurTime, Timing.CurTime + TimeSpan.FromHours(2)); // FUCK YOU
                         action.UseDelay = TimeSpan.FromHours(2);
-                        Dirty(cloak.Value.Comp.Action.Value, action);
+                        Dirty(cloak.Action.Value, action);
                     }
                 }
 
-                if (ghillie != null && ghillie.Value.Comp.Enabled)
+                var ghillies = EntityQueryEnumerator<GhillieSuitComponent>();
+                while (ghillies.MoveNext(out var ghillieId, out var ghillie))
                 {
-                    _ghillieSuit.ToggleInvisibility(ghillie.Value, lastMarine, false);
+                    if (!ghillie.Enabled)
+                        continue;
 
-                    if (TryComp<InstantActionComponent>(ghillie.Value.Comp.Action, out var action))
+                    _ghillieSuit.ToggleInvisibility((ghillieId, ghillie), lastMarine, false);
+                    if (TryComp<InstantActionComponent>(ghillie.Action, out var action))
                     {
                         action.Cooldown = (Timing.CurTime, Timing.CurTime + TimeSpan.FromHours(2)); // FUCK YOU
                         action.UseDelay = TimeSpan.FromHours(2);
-                        Dirty(ghillie.Value.Comp.Action.Value, action);
+                        Dirty(ghillie.Action.Value, action);
                     }
                 }
             }
@@ -995,8 +1014,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
     private bool SpawnXenoMap(Entity<CMDistressSignalRuleComponent> rule)
     {
-        var mapId = _mapManager.CreateMap();
-
         //Just in case the planet was not selected before now
         var planet = SelectRandomPlanet();
         _lastPlanetMaps.Enqueue(planet.Proto.ID);
@@ -1005,10 +1022,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             _lastPlanetMaps.Dequeue();
         }
 
-        if (!_mapLoader.TryLoad(mapId, planet.Comp.Map.ToString(), out var grids))
+        if (!_mapLoader.TryLoadMap(planet.Comp.Map, out var mapNullable, out var grids))
             return false;
 
-        var map = _mapManager.GetMapEntityId(mapId);
+        var map = mapNullable.Value;
         EnsureComp<RMCPlanetComponent>(map);
         EnsureComp<TacticalMapComponent>(map);
 
@@ -1018,12 +1035,21 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         if (grids.Count > 1)
             Log.Error("Multiple planet-side grids found");
 
-        rule.Comp.XenoMap = grids[0];
+        rule.Comp.XenoMap = grids.First();
 
-        _mapManager.SetMapPaused(mapId, false);
+        //Process map inserts
+        var mapInsertQuery = EntityQueryEnumerator<MapInsertComponent>();
+        while (mapInsertQuery.MoveNext(out var uid, out var mapInsert))
+        {
+            _mapInsert.ProcessMapInsert((uid, mapInsert));
+        }
+
+        _mapSystem.InitializeMap((map, map));
 
         // TODO RMC14 this should be delayed by 3 minutes + 13 second warning for immersion
-        if (rule.Comp.LandingZoneGas is { } gas && TryComp(rule.Comp.XenoMap, out AreaGridComponent? areaGrid))
+        if (_landingZoneMiasmaEnabled &&
+            rule.Comp.LandingZoneGas is { } gas &&
+            TryComp(rule.Comp.XenoMap, out AreaGridComponent? areaGrid))
         {
             foreach (var (indices, areaProto) in areaGrid.Areas)
             {
@@ -1034,6 +1060,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     Spawn(gas, coordinates);
                 }
             }
+        }
+
+        var tunnels = EntityQueryEnumerator<XenoTunnelComponent>();
+        while (tunnels.MoveNext(out var uid, out _))
+        {
+            EnsureComp<DeletedByWeedKillerComponent>(uid);
         }
 
         return true;
@@ -1435,23 +1467,35 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     }
 
     // TODO RMC14 this would be literally anywhere else if the code for loading maps wasn't dogshit and broken upstream
-    private void SpawnAdminFaxArea()
+    private void SpawnAdminAreas(CMDistressSignalRuleComponent comp)
     {
-        try
+        bool SpawnMap(ResPath path, [NotNullWhen(true)] out EntityUid? mapEnt)
         {
-            if (string.IsNullOrWhiteSpace(_adminFaxAreaMap))
-                return;
+            mapEnt = default;
 
-            var mapId = _mapManager.CreateMap();
-            if (!_mapLoader.TryLoad(mapId, _adminFaxAreaMap, out _))
-                return;
+            try
+            {
+                if (string.IsNullOrWhiteSpace(path.ToString()))
+                    return false;
 
-            _mapManager.SetMapPaused(mapId, false);
+                if (!_mapLoader.TryLoadMap(path, out var map, out _))
+                    return false;
+
+                _mapSystem.InitializeMap((map.Value, map.Value));
+                mapEnt = map;
+                return true;
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Error loading admin fax area:\n{e}");
+            }
+
+            return false;
         }
-        catch (Exception e)
-        {
-            Log.Error($"Error loading admin fax area:\n{e}");
-        }
+
+        SpawnMap(new ResPath(_adminFaxAreaMap), out _);
+        if (SpawnMap(comp.Thunderdome, out var mapEnt))
+            EnsureComp<ThunderdomeMapComponent>(mapEnt.Value);
     }
 
     private void EndRound(CMDistressSignalRuleComponent rule, DistressSignalRuleResult result)

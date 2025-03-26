@@ -109,6 +109,15 @@
   - type: SupplyDropComputer
 
 - type: entity
+  parent: RMCOverwatchConsole
+  id: RMCOverwatchConsoleRotating
+  suffix: Rotating
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: false
+
+- type: entity
   parent: RMCCommunicationsConsoleBase
   id: RMCTacticalMapTable
   name: map table

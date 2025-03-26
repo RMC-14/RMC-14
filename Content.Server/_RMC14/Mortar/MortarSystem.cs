@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Server._RMC14.Dropship;
 using Content.Server.Popups;
 using Content.Shared._RMC14.Areas;
@@ -21,7 +21,7 @@ public sealed class MortarSystem : SharedMortarSystem
     [Dependency] private readonly DropshipSystem _dropship = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -86,6 +86,12 @@ public sealed class MortarSystem : SharedMortarSystem
             return false;
         }
 
+        if ((mortarCoordinates.Position - coordinates.Position).Length() > mortar.Comp.MaximumRange)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-mortar-target-too-far"), user, user, SmallCaution);
+            return false;
+        }
+
         if (!_rmcMap.TryGetTileDef(coordinates, out var def) ||
             def.ID == ContentTileDefinition.SpaceID)
         {
@@ -93,13 +99,13 @@ public sealed class MortarSystem : SharedMortarSystem
             return false;
         }
 
-        if (!_area.TryGetArea(coordinates, out var area, out _, out _))
+        if (!_area.TryGetArea(coordinates, out var area, out _))
         {
             _popup.PopupEntity(Loc.GetString("rmc-mortar-target-not-area"), user, user, SmallCaution);
             return false;
         }
 
-        if (area.LandingZone)
+        if (area.Value.Comp.LandingZone)
         {
             _popup.PopupEntity(Loc.GetString("rmc-mortar-target-is-lz"), user, user, SmallCaution);
             return false;
@@ -111,10 +117,12 @@ public sealed class MortarSystem : SharedMortarSystem
             return false;
         }
 
-        var deviation = shell.Comp.PlanetDeviation;
-        var xDeviation = _random.Next(-deviation, deviation + 1);
-        var yDeviation = _random.Next(-deviation, deviation + 1);
-        coordinates = coordinates.Offset(new Vector2(xDeviation, yDeviation));
+        if (mortar.Comp.FireRandomOffset is { Length: > 0 } fireRandomOffset)
+        {
+            var xDeviation = _random.Pick(fireRandomOffset);
+            var yDeviation = _random.Pick(fireRandomOffset);
+            coordinates = coordinates.Offset(new Vector2(xDeviation, yDeviation));
+        }
 
         if (_container.TryGetContainer(mortar, mortar.Comp.ContainerId, out var container) &&
             !_container.CanInsert(shell, container))

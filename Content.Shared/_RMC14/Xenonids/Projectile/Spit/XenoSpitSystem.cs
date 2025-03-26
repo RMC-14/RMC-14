@@ -1,9 +1,11 @@
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Shields;
+using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Ball;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
@@ -55,6 +57,8 @@ public sealed class XenoSpitSystem : EntitySystem
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly CMArmorSystem _armor = default!;
+    [Dependency] private readonly RMCSlowSystem _slow = default!;
+    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
 
     private static readonly ProtoId<ReagentPrototype> AcidRemovedBy = "Water";
 
@@ -85,8 +89,6 @@ public sealed class XenoSpitSystem : EntitySystem
 
         SubscribeLocalEvent<XenoProjectileShieldOnHitComponent, ProjectileHitEvent>(OnShieldOnHit, after: [typeof(CMClusterGrenadeSystem)]);
         SubscribeLocalEvent<XenoProjectileShieldOnHitComponent, CMClusterSpawnedEvent>(OnShieldOnHitClusterSpawned);
-
-        SubscribeLocalEvent<SlowedBySpitComponent, RefreshMovementSpeedModifiersEvent>(OnSlowedBySpitRefreshMovement);
 
         SubscribeLocalEvent<UserAcidedComponent, MapInitEvent>(OnUserAcidedMapInit);
         SubscribeLocalEvent<UserAcidedComponent, ComponentRemove>(OnUserAcidedRemove);
@@ -192,6 +194,9 @@ public sealed class XenoSpitSystem : EntitySystem
         if (args.Handled)
             return;
 
+        if (!_rmcActions.TryUseAction(xeno, args.Action))
+            return;
+
         args.Handled = true;
 
         var charging = EnsureComp<XenoActiveChargingSpitComponent>(xeno);
@@ -221,10 +226,10 @@ public sealed class XenoSpitSystem : EntitySystem
 
         if (spit.Comp.Slow > TimeSpan.Zero)
         {
-            var slow = EnsureComp<SlowedBySpitComponent>(target);
-            slow.ExpiresAt = _timing.CurTime + spit.Comp.Slow;
-            slow.SuperSlow = spit.Comp.SuperSlow;
-            _movementSpeed.RefreshMovementSpeedModifiers(target);
+            if (spit.Comp.SuperSlow)
+                _slow.TrySuperSlowdown(target, spit.Comp.Slow);
+            else
+                _slow.TrySlowdown(target, spit.Comp.Slow);
         }
 
         var resisted = false;
@@ -248,7 +253,7 @@ public sealed class XenoSpitSystem : EntitySystem
 
         args.Handled = true;
         var ev = new XenoAcidBallDoAfterEvent(GetNetCoordinates(args.Target));
-        var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.Delay, ev, ent);
+        var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.Delay, ev, ent) { BreakOnMove = true };
         _doAfter.TryStartDoAfter(doAfter);
     }
 
@@ -318,12 +323,6 @@ public sealed class XenoSpitSystem : EntitySystem
                 Dirty(spawned, projectile);
             }
         }
-    }
-
-    private void OnSlowedBySpitRefreshMovement(Entity<SlowedBySpitComponent> slowed, ref RefreshMovementSpeedModifiersEvent args)
-    {
-        if (slowed.Comp.ExpiresAt > _timing.CurTime)
-            args.ModifySpeed( slowed.Comp.SuperSlow ? slowed.Comp.SuperMultiplier : slowed.Comp.Multiplier, slowed.Comp.Multiplier);
     }
 
     private void OnUserAcidedMapInit(Entity<UserAcidedComponent> ent, ref MapInitEvent args)
@@ -451,15 +450,6 @@ public sealed class XenoSpitSystem : EntitySystem
     public override void Update(float frameTime)
     {
         var time = _timing.CurTime;
-        var slowedQuery = EntityQueryEnumerator<SlowedBySpitComponent>();
-        while (slowedQuery.MoveNext(out var uid, out var slowed))
-        {
-            if (slowed.ExpiresAt > time)
-                continue;
-
-            RemCompDeferred<SlowedBySpitComponent>(uid);
-            _movementSpeed.RefreshMovementSpeedModifiers(uid);
-        }
 
         var chargingQuery = EntityQueryEnumerator<XenoActiveChargingSpitComponent>();
         while (chargingQuery.MoveNext(out var uid, out var charging))

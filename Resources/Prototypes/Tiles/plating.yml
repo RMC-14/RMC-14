@@ -67,7 +67,7 @@
   deconstructTools: [ Cutting ]
   weather: true
   footstepSounds:
-    collection: FootstepPlating
+    collection: FootstepCatwalk
   friction: 0.2
   isSpace: true
   itemDrop: PartRodMetal1

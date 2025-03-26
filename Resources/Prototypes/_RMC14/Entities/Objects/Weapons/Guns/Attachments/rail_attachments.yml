@@ -27,6 +27,7 @@
     addPrefix: false
     blinkingBehaviourId: blinking
     radiatingBehaviourId: radiating
+  - type: NoHandsInteractionBlocked
   - type: LightBehaviour
     behaviours:
     - !type:FadeBehaviour
@@ -107,7 +108,7 @@
 
 - type: entity
   parent: RMCRailAttachmentBase
-  id: RMCAttachmentS5RedDotSight
+  id: RMCAttachmentS5RedDotSight # reddot
   name: S5 red-dot sight
   description: An all-weather collimator sight, designated as the AN/PVQ-64 Dot Sight. Equipped with a sunshade to increase clarity in bright conditions and resist weathering. Compact and efficient, a marvel of military design, until you realize that this is actually just an off-the-shelf design that got a military designation slapped on.
   components:
@@ -129,7 +130,7 @@
 
 - type: entity
   parent: RMCRailAttachmentBase
-  id: RMCAttachmentS6ReflexSight
+  id: RMCAttachmentS6ReflexSight # reflex
   name: S6 reflex sight
   description: An AEGIS S6 reflex sight. A zero-magnification alternative to iron sights with a more open optic window when compared to the S5 red-dot. Helps to reduce scatter during automated fire.
   components:
@@ -251,7 +252,7 @@
 
 - type: entity
   parent: RMCAttachmentScopeBase
-  id: RMCAttachmentS42xTelescopicMiniscope
+  id: RMCAttachmentS42xTelescopicMiniscope # mini
   name: S4 2x telescopic mini-scope
   description: An AEGIS S4 telescoping eye piece. Fixed at a modest 2x zoom.
   components:

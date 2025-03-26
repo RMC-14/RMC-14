@@ -52,13 +52,15 @@
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-executive-officer
+    - type: ViewIntelObjectives
+    - type: CommandAccent
 
 - type: startingGear
   id: CMGearExecutiveOfficer
   equipment:
     jumpsuit: CMJumpsuitBO
     shoes: RMCShoesLaceup
-    head: RMCHeadCapFlippable
+    head: CMHeadCapPeakedService
     outerClothing: RMCCoatService
     id: CMIDCardExecutiveOfficer
     ears: CMHeadsetSeniorCommand
@@ -76,10 +78,7 @@
   - type: SpawnPoint
     job_id: CMExecutiveOfficer
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: executive_officer
+    state: xo_spawn
 
 - type: playTimeTracker
   id: CMJobExecutiveOfficer

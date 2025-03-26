@@ -80,6 +80,7 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret/jungle.rsi
+  - type: Appearance
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Head/Hats/CO/beret/jungle.rsi
@@ -164,6 +165,7 @@
     whitelist:
       components:
       - RMCLighter
+      - HelmetAccessory
       tags:
       - Cigarette
       - Matchstick
@@ -176,6 +178,11 @@
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
   - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      components:
+      - HelmetAccessory
+  - type: HelmetAccessoryHolder
 
 - type: entity
   parent: CMHeadCapMP
@@ -294,7 +301,7 @@
 - type: entity
   parent: RMCHeadCapFlippable
   id: CMHeadCapOfficer
-  name: officer cap
+  name: UNMC officer cap
   description: A hat usually worn by officers in the UNMC. While it provides no protection, some officers wear it in the field to make themselves more recognisable.
   components:
   - type: Sprite
@@ -428,7 +435,7 @@
       SquadDelta: RMCHeadBeretSquadDelta
       SquadEcho: RMCHeadBeretSquadEcho
       SquadFoxtrot: RMCHeadBeretSquadFoxtrot
-      # TODO SquadIntel: RMCHeadBeretSquadIntel
+      SquadIntel: RMCHeadBeretSquadIntel
 
 - type: entity
   parent: CMHeadBeret
@@ -507,3 +514,14 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/intel.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/intel.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: RMCProvostCommandBeret
+  name: UNMC provost command beret
+  description: A beret with the UNMC Military Police insignia emblazoned on it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/pvciberet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/pvciberet.rsi

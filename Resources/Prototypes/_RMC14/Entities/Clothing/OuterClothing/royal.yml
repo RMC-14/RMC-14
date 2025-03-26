@@ -1,10 +1,10 @@
-# Royal marines
+# Royal Crown Marines
 # TODO: implement storage whitelist for this
 - type: entity
   parent: [CMArmorM4PMC, RMCAllowSuitStorageClothingArmorRoyal]
   id: RMCArmorRoyal
   name: kestrel armoured vest
-  description: A customizable personal armor system used by the Royal Marines Commandos. # TODO: write new, legally distinct description
+  description: A customizable personal armor system used by the Royal Crown Marines. # TODO: write new, legally distinct description
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Royal/light.rsi

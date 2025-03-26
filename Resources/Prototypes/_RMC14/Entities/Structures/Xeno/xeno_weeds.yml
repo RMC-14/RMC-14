@@ -1,4 +1,4 @@
-﻿- type: entity # TODO RMC14 sound
+- type: entity # TODO RMC14 sound
   id: XenoWeeds
   name: weeds
   description: Weird black weeds...
@@ -93,6 +93,7 @@
       Brute:
         collection: XenoResinBreak
   - type: ExplosionRandomResistance
+  - type: DeletedByWeedKiller
 #  - type: Physics
 #    bodyType: Static
 #  - type: FootstepModifier
@@ -140,11 +141,13 @@
     speedMultiplierOutsider: 0.338
     speedMultiplierOutsiderArmor: 0.4856
     blockOtherWeeds: true
+    spreadsOnSemiWeedable: true
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
     drawdepth: FloorTiles
     layers:
     - state: hive_weed0
+  - type: HiveWeeds
   - type: IconSmooth
     key: cm_xeno_weeds
     base: hive_weed
@@ -188,6 +191,24 @@
     - 0:
         hive_weed15: ""
 
+- type: entity
+  parent: XenoHiveWeeds
+  id: XenoHiveWeedsCluster
+  components:
+  - type: XenoWeeds
+    range: 6
+    spawns: XenoHiveWeedsCluster
+    level: 3
+
+- type: entity
+  parent: XenoHiveWeeds
+  id: XenoHiveWeedsCore
+  components:
+  - type: XenoWeeds
+    range: 8
+    spawns: XenoHiveWeedsCore
+    level: 3
+
 - type: entity # TODO RMC14 sound
   parent: XenoHiveWeeds
   id: XenoHiveWeedsSource
@@ -210,6 +231,7 @@
         acts: [ "Destruction" ]
   - type: XenoConstructionPlasmaCost
     plasma: 75
+
 - type: entity
   id: XenoWeedsWall
   name: weeds

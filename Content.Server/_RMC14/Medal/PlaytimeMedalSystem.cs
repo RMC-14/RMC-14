@@ -1,7 +1,6 @@
 ﻿using Content.Server.Hands.Systems;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Shared._RMC14.CCVar;
-using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Medal;
 using Content.Shared._RMC14.Survivor;
 using Content.Shared.Coordinates;
@@ -50,9 +49,6 @@ public sealed class PlaytimeMedalSystem : SharedPlaytimeMedalSystem
         if (!ev.Profile.PlaytimePerks)
             return;
 
-        if (HasComp<SurvivorComponent>(ev.Mob))
-            return;
-
         if (ev.JobId == null ||
             !_prototype.TryIndex(ev.JobId, out JobPrototype? job) ||
             !_playTimeTracking.TryGetTrackerTime(ev.Player, job.PlayTimeTracker, out var time))
@@ -61,18 +57,7 @@ public sealed class PlaytimeMedalSystem : SharedPlaytimeMedalSystem
         }
 
         EntProtoId? medalId = null;
-        if (HasComp<MarineComponent>(ev.Mob))
-        {
-            if (time >= _platinumTime)
-                medalId = PlatinumMedal;
-            else if (time >= _goldTime)
-                medalId = GoldMedal;
-            else if (time >= _silverTime)
-                medalId = SilverMedal;
-            else if (time >= _bronzeTime)
-                medalId = BronzeMedal;
-        }
-        else if (!HasComp<SurvivorComponent>(ev.Mob))
+        if (HasComp<RMCSurvivorComponent>(ev.Mob))
         {
             if (time >= _platinumTime)
                 medalId = BlueRibbon;
@@ -82,6 +67,17 @@ public sealed class PlaytimeMedalSystem : SharedPlaytimeMedalSystem
                 medalId = YellowRibbon;
             else if (time >= _bronzeTime)
                 medalId = WhiteRibbon;
+        }
+        else
+        {
+            if (time >= _platinumTime)
+                medalId = PlatinumMedal;
+            else if (time >= _goldTime)
+                medalId = GoldMedal;
+            else if (time >= _silverTime)
+                medalId = SilverMedal;
+            else if (time >= _bronzeTime)
+                medalId = BronzeMedal;
         }
 
         if (medalId == null)

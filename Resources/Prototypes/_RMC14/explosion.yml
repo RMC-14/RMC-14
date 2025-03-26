@@ -23,8 +23,8 @@
   id: RMCMortar
   damagePerIntensity:
     types:
-      Blunt: 5
-      Heat: 5
+      Blunt: 6.25
+      Heat: 6.25
       Structural: 90
   tileBreakChance: [0, 0.5, 1]
   tileBreakIntensity: [0, 10, 30]
@@ -43,6 +43,28 @@
 
 - type: explosion
   id: RMCOB
+  damagePerIntensity:
+    types:
+      Blunt: 5
+      Heat: 5
+      Structural: 90
+  tileBreakChance: [0, 0.5, 1]
+  tileBreakIntensity: [0, 10, 30]
+  tileBreakRerollReduction: 20
+  lightColor: Orange
+  texturePath: /Textures/Effects/fire.rsi
+  fireColor: Transparent
+  sound:
+    collection: RMCExplosionBig
+    params:
+      maxDistance: 50
+  smallSound:
+    collection: RMCExplosionBig
+    params:
+      maxDistance: 50
+
+- type: explosion
+  id: RMCOBXenoTunnel # This one also destroys xeno tunnels.
   damagePerIntensity:
     types:
       Blunt: 5

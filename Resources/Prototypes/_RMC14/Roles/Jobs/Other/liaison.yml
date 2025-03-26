@@ -45,7 +45,7 @@
     state: cl
   minimapBackground:
    sprite: _RMC14/Interface/map_blips.rsi
-   state: background_civillian
+   state: background_goon
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -75,10 +75,7 @@
   - type: SpawnPoint
     job_id: CMLiaison
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: corp_liaison
+    state: cl_spawn
 
 - type: playTimeTracker
   id: CMJobLiaison

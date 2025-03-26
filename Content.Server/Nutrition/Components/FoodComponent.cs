@@ -1,7 +1,7 @@
 using Content.Server.Body.Components;
-using Content.Shared.Nutrition.Components;
 using Content.Server.Nutrition.EntitySystems;
 using Content.Shared.FixedPoint;
+using Content.Shared.Nutrition.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 
@@ -60,7 +60,7 @@ public sealed partial class FoodComponent : Component
     /// How long it takes to eat the food personally.
     /// </summary>
     [DataField]
-    public float Delay = 1;
+    public float Delay = 0.5f;
 
     /// <summary>
     ///     This is how many seconds it takes to force feed someone this food.

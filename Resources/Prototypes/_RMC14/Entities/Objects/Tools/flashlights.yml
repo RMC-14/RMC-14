@@ -52,7 +52,9 @@
   - type: Clothing
     quickEquip: false
     slots:
+    - belt
     - suitstorage
+  - type: NoHandsInteractionBlocked
 
 - type: entity
   parent: RMCBoxMagazineBase

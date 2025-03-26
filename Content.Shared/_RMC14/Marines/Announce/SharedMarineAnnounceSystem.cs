@@ -1,27 +1,40 @@
 ﻿using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Marines.ControlComputer;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Overwatch;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.Administration.Logs;
+using Content.Shared.CCVar;
 using Content.Shared.Database;
+using Content.Shared.Ghost;
 using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Robust.Shared.Audio;
+using Robust.Shared.Configuration;
+using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Marines.Announce;
 
 public abstract class SharedMarineAnnounceSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedMarineControlComputerSystem _marineControlComputer = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedRankSystem _rankSystem = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+
+    private int _characterLimit = 1000;
 
     public override void Initialize()
     {
@@ -31,11 +44,14 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         Subs.BuiEvents<MarineCommunicationsComputerComponent>(MarineCommunicationsComputerUI.Key,
             subs =>
             {
+                subs.Event<MarineCommunicationsComputerMsg>(OnMarineCommunicationsComputerMsg);
                 subs.Event<MarineCommunicationsOpenMapMsg>(OnMarineCommunicationsOpenMapMsg);
                 subs.Event<MarineCommunicationsEchoSquadMsg>(OnMarineCommunicationsEchoMsg);
                 subs.Event<MarineCommunicationsOverwatchMsg>(OnMarineCommunicationsOverwatchMsg);
                 subs.Event<MarineControlComputerMedalMsg>(OnMarineCommunicationsMedalMsg);
             });
+
+        Subs.CVar(_config, CCVars.ChatMaxMessageLength, limit => _characterLimit = limit, true);
     }
 
     private void OnEchoSquadReason(Entity<MarineCommunicationsComputerComponent> ent, ref EchoSquadReasonEvent args)
@@ -72,6 +88,27 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
 
         _squad.TryEnsureSquad(SquadSystem.EchoSquadId, out _);
         _adminLog.Add(LogType.RMCSquadCreated, $"Echo squad was created by {ToPrettyString(user)} with reason {args.Message}");
+    }
+
+    private void OnMarineCommunicationsComputerMsg(Entity<MarineCommunicationsComputerComponent> ent, ref MarineCommunicationsComputerMsg args)
+    {
+        var time = _timing.CurTime;
+        if (_timing.CurTime < ent.Comp.LastAnnouncement + ent.Comp.Cooldown)
+        {
+            var cooldownMessage = Loc.GetString("rmc-announcement-cooldown", ("seconds", (int) ent.Comp.Cooldown.TotalSeconds));
+            _popup.PopupClient(cooldownMessage, args.Actor, PopupType.SmallCaution);
+            return;
+        }
+
+        _ui.CloseUi(ent.Owner, MarineCommunicationsComputerUI.Key);
+        var text = args.Text;
+        if (text.Length > _characterLimit)
+            text = text[.._characterLimit].Trim();
+
+        AnnounceSigned(args.Actor, text);
+
+        ent.Comp.LastAnnouncement = time;
+        Dirty(ent);
     }
 
     private void OnMarineCommunicationsOpenMapMsg(Entity<MarineCommunicationsComputerComponent> ent, ref MarineCommunicationsOpenMapMsg args)
@@ -172,5 +209,37 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         SoundSpecifier? sound = null
     )
     {
+    }
+
+    /// <summary>
+    /// Dispatches a signed announcement to Marines.
+    /// </summary>
+    /// <param name="sender">EntityUid of sender, for job and name params.</param>
+    /// <param name="message">The content of the announcement.</param>
+    /// <param name="author">The author of the message, Command by default.</param>
+    /// <param name="sound">GlobalSound for announcement.</param>
+    public void AnnounceSigned(
+        EntityUid sender,
+        string message,
+        string? author = null,
+        SoundSpecifier? sound = null
+    )
+    {
+        if (_net.IsClient)
+            return;
+
+        author ??= Loc.GetString("rmc-announcement-author"); // Get "Command" fluent string if author==null
+        var name = _rankSystem.GetSpeakerFullRankName(sender) ?? Name(sender);
+        var wrappedMessage = Loc.GetString("rmc-announcement-message-signed", ("author", author), ("message", message), ("name", name));
+
+        // TODO RMC14 receivers
+        var filter = Filter.Empty()
+            .AddWhereAttachedEntity(e =>
+                HasComp<MarineComponent>(e) ||
+                HasComp<GhostComponent>(e)
+            );
+
+        AnnounceToMarines(wrappedMessage);
+        _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(sender):source} marine announced message: {message}");
     }
 }

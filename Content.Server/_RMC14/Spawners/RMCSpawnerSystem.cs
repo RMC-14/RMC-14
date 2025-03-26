@@ -1,6 +1,7 @@
 ﻿using Content.Server.GameTicking;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Intel;
 using Content.Shared.Coordinates;
 using Content.Shared.GameTicking;
 using Robust.Shared.Configuration;
@@ -26,6 +27,7 @@ public sealed class RMCSpawnerSystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<DropshipLaunchedFromWarshipEvent>(OnDropshipLaunchedFromWarship);
         SubscribeLocalEvent<DropshipLandedOnPlanetEvent>(OnDropshipLandedOnPlanet);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
@@ -37,6 +39,15 @@ public sealed class RMCSpawnerSystem : EntitySystem
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
         _corpsesSpawned = 0;
+    }
+
+    private void OnDropshipLaunchedFromWarship(ref DropshipLaunchedFromWarshipEvent ev)
+    {
+        var deleteQuery = EntityQueryEnumerator<DeleteOnDropshipLaunchFromWarshipComponent>();
+        while (deleteQuery.MoveNext(out var uid, out _))
+        {
+            QueueDel(uid);
+        }
     }
 
     private void OnDropshipLandedOnPlanet(ref DropshipLandedOnPlanetEvent ev)
@@ -97,8 +108,9 @@ public sealed class RMCSpawnerSystem : EntitySystem
             if (_corpsesSpawned >= _maxCorpses)
                 continue;
 
-            Spawn(spawner.Comp.Spawn, _transform.GetMoverCoordinates(spawner));
             _corpsesSpawned++;
+            var corpse = Spawn(spawner.Comp.Spawn, _transform.GetMoverCoordinates(spawner));
+            EnsureComp<IntelRecoverCorpseObjectiveComponent>(corpse);
         }
 
         var proportional = EntityQueryEnumerator<ProportionalSpawnerComponent>();

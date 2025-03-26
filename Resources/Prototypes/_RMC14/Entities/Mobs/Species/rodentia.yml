@@ -63,6 +63,11 @@
       - map: [ "head" ]
       - map: [ "pocket1" ]
       - map: [ "pocket2" ]
+      - map: [ "acided" ]
+      - map: [ "hooked" ]
+        sprite: "_RMC14/Effects/xeno_spray_acid.rsi"
+        state: hooked
+        visible: false
   - type: MeleeWeapon
     soundHit:
       path: /Audio/Weapons/pierce.ogg

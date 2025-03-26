@@ -35,9 +35,12 @@
     - CMXenoLarva
     canBeDevolvedByOther: false
   - type: XenoEvolution
+    canEvolveWithoutGranter: true
     max: 200
     evolvesTo:
     - CMXenoWarrior
+    evolvesToWithoutPoints:
+    - CMXenoQueen
   - type: XenoPlasma
     plasma: 100
     maxPlasma: 100
@@ -91,6 +94,8 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: defender
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.1
 
 - type: entity
   parent: CMXenoDefenderBase

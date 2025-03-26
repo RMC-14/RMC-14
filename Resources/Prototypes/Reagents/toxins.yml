@@ -34,11 +34,12 @@
     amount: -5
   metabolisms:
     Poison:
+      metabolismRate: 0.05
       effects:
       - !type:HealthChange
         damage:
           types:
-            Poison: 4
+            Poison: 0.25
       - !type:PopupMessage
         type: Local
         visualType: MediumCaution

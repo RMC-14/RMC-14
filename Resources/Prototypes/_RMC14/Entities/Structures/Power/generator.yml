@@ -1,6 +1,6 @@
 ﻿- type: entity
-  id: RMCGeneratorFusion
-  name: S-52 fusion reactor
+  id: RMCGeneratorFusionFake
+  name: permanently destroyed S-52 fusion reactor
   placement:
     mode: SnapgridCenter
   components:
@@ -19,14 +19,22 @@
         layer:
         - AirlockLayer
         - LowImpassable
-  - type: Clickable
-  - type: InteractionOutline
   - type: Sprite
     drawdepth: WallMountedItems
     sprite: _RMC14/Structures/Power/fusion_reactor.rsi
     layers:
     - state: "off"
       map: [ "base" ]
+  - type: Clickable
+
+- type: entity
+  parent: RMCGeneratorFusionFake
+  id: RMCGeneratorFusion
+  name: S-52 fusion reactor
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: InteractionOutline
   - type: Appearance
   - type: Corrodible
     isCorrodible: false
@@ -61,6 +69,7 @@
   - type: RMCFusionReactor
     watts: 100000
     randomizeDamage: true
+  - type: IntelPowerObjective
 
 - type: entity
   parent: BaseItem
