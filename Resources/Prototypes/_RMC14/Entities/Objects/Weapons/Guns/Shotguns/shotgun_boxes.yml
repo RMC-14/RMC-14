@@ -2,7 +2,7 @@
   abstract: true
   parent: BaseStorageItem
   id: RMCBoxShotgunBase
-  name: "Box of Shotgun Shells"
+  name: box of shotgun shells
   components:
   - type: Item
     size: Large
@@ -12,7 +12,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     layers:
-    - state: smallshell_box # "size"_box - Base Colour
+    - state: smallshell_box
       color: "#ff0000"
     - state: smallshell_box_12g
       color: "#00ff00"
@@ -42,7 +42,7 @@
 - type: entity
   parent: RMCBoxShotgunBase
   id: RMCBoxShotgunBuckshot
-  name: "Box of Buckshot Shells"
+  name: box of buckshot shells
   description: A box filled with buckshot spread shotgun shells. 12 Gauge.
   components:
   - type: Storage
@@ -71,7 +71,7 @@
 - type: entity
   parent: RMCBoxShotgunBase
   id: RMCBoxShotgunSlugs
-  name: "Box of Slug Shells"
+  name: box of slug shells
   description: A box filled with heavy shotgun shells. A timeless classic. 12 Gauge.
   components:
   - type: Storage
@@ -100,7 +100,7 @@
 - type: entity
   parent: RMCBoxShotgunBase
   id: RMCBoxShotgunIncendiary
-  name: "Box of Incendiary Slug Shells"
+  name: box of incendiary slug shells
   description: A box filled with self-detonating incendiary shotgun rounds. 12 Gauge.
   components:
   - type: Storage
@@ -131,7 +131,7 @@
 - type: entity
   parent: RMCBoxShotgunBase
   id: RMCBoxShotgunBeanbag
-  name: "Box of Beanbag Shells"
+  name: box of beanbag shells
   description: A box filled with beanbag shotgun shells used for non-lethal crowd control. 12 Gauge.
   components:
   - type: Storage
@@ -160,7 +160,7 @@
 - type: entity
   parent: RMCBoxShotgunBase
   id: RMCBoxShotgunFlechette
-  name: "Box of Flechette Shells"
+  name: box of flechette shells
   description: A box filled with flechette shotgun shells. 12 Gauge.
   components:
   - type: Storage
@@ -189,7 +189,7 @@
 - type: entity
   parent: RMCBoxShotgunBase
   id: RMCBoxShotgunIncendiaryBuckshot
-  name: "Box of Incendiary Buckshot Shells"
+  name: box of incendiary buckshot shells
   description: A box filled with self-detonating buckshot incendiary shotgun rounds. 12 Gauge.
   components:
   - type: Storage
@@ -220,7 +220,7 @@
 - type: entity
   parent: RMCBoxShotgunBase
   id: RMCBoxShotgunBreaching
-  name: "Box of Breaching Shells"
+  name: box of breaching shells
   description: A box filled with breaching shotgun shells. 16 Gauge.
   components:
   - type: Storage
@@ -256,7 +256,7 @@
 - type: entity
   parent: RMCBoxShotgunBase
   id: RMCBoxShotgunBuckshot8g
-  name: "Box of Buckshot Shells"
+  name: box of buckshot shells
   description: A box filled with buckshot spread shotgun shells. 8 Gauge.
   components:
   - type: Storage

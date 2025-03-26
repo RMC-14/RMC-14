@@ -2,7 +2,7 @@
   abstract: true
   parent: BaseItem
   id: RMCBoxBulletsBase
-  name: "Rifle Ammunition Box (???)"
+  name: rifle ammunition box (???)
   description: An unknown ammunition box. It comes with a leather strap allowing to wear it on the back.
   components:
   - type: Item
@@ -28,7 +28,7 @@
           Medium: { state: rifle_ammo_medium_rounds_base, visible: true }
           High: { state: rifle_ammo_high_rounds_base, visible: true }
           Full: { state: rifle_ammo_full_rounds_base, visible: true }
-        enum.BulletBoxLayers2.Fill: # Second fill state for coloured casings
+        enum.BulletBoxLayers2.Fill:
           Empty: { state: rifle_ammo_full_rounds_color, visible: false }
           Low: { state: rifle_ammo_low_rounds_color, visible: true }
           Medium: { state: rifle_ammo_medium_rounds_color, visible: true }
@@ -55,7 +55,7 @@
 - type: entity
   parent: RMCBoxBulletsBase
   id: RMCBoxBulletsRifle
-  name: "Rifle Ammunition Box (10x24mm)"
+  name: rifle ammunition box (10x24mm)
   description: A 10x24mm ammunition box. Used to refill M54C MK1, MK2, M4SPR and M54CE2 HAR magazines. It comes with a leather strap allowing to wear it on the back.
   components:
   - type: Sprite
@@ -87,7 +87,7 @@
 - type: entity
   parent: RMCBoxBulletsBase
   id: RMCBoxBulletsRifleAP
-  name: "Rifle Ammunition Box (10x24mm AP)"
+  name: rifle ammunition box (10x24mm AP)
   description: A 10x24mm armor-piercing ammunition box. Used to refill M54C MK2, and M4SPR AP magazines. It comes with a leather strap allowing to wear it on the back.
   components:
   - type: Sprite
@@ -119,7 +119,7 @@
 - type: entity
   parent: RMCBoxBulletsBase
   id: RMCBoxBulletsSMG
-  name: "SMG Ammunition Box (10x20mm)"
+  name: SMG ammunition box (10x20mm)
   description: A 10x20mm ammunition box. Used to refill M63 HV and extended magazines. It comes with a leather strap allowing to wear it on the back.
   components:
   - type: Sprite
@@ -151,7 +151,7 @@
 - type: entity
   parent: RMCBoxBulletsBase
   id: RMCBoxBulletsSMGAP
-  name: "SMG Ammunition Box (10x20mm AP)"
+  name: SMG ammunition box (10x20mm AP)
   description: A 10x20mm armor-piercing ammunition box. Used to refill M63 AP magazines. It comes with a leather strap allowing to wear it on the back.
   components:
   - type: Sprite

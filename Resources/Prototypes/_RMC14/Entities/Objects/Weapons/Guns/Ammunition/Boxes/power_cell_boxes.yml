@@ -1,7 +1,7 @@
 ﻿- type: entity
   parent: RMCBoxMagazineSupplyBase
   id: RMCBoxMagazinePowerCellsHigh
-  name: "Box of High-Capacity Power Cells (x8)"
+  name: box of high-capacity power cells (x8)
   description: A box of High-Capacity Power Cells to keep your electronics going all night long!
   components:
   - type: Construction

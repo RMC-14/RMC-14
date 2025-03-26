@@ -7,8 +7,8 @@
   abstract: true
   parent: BaseItem
   id: RMCBoxMagazineBase
-  name: "Generic Magazine Box (? x ?)"
-  description: "A box of magazines."
+  name: generic magazine box (? x ?)
+  description: A box of magazines.
   components:
   - type: Item
     size: Huge
@@ -31,8 +31,8 @@
   abstract: true
   parent: RMCBoxMagazineBase
   id: RMCBoxMagazineRifleBase
-  name: "Generic Rifle Magazine Box (? x ?)"
-  description: "A box of rifle magazines."
+  name: generic rifle magazine box (? x ?)
+  description: A box of rifle magazines.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
@@ -82,8 +82,8 @@
   abstract: true
   parent: RMCBoxMagazineBase
   id: RMCBoxMagazineSMGBase
-  name: "Generic SMG Magazine Box (? x ?)"
-  description: "A box of SMG magazines."
+  name: generic smg magazine box (? x ?)
+  description: A box of SMG magazines.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
@@ -133,8 +133,8 @@
   abstract: true
   parent: RMCBoxMagazineBase
   id: RMCBoxMagazinePistolBase
-  name: "Generic Pistol Magazine Box (? x ?)"
-  description: "A box of pistol magazines."
+  name: generic pistol magazine box (? x ?)
+  description: A box of pistol magazines.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
@@ -176,8 +176,8 @@
   abstract: true
   parent: RMCBoxMagazineBase
   id: RMCBoxMagazineShellBase
-  name: "Generic Shell Bundle Box (? x ?)"
-  description: "A box of bundled shells."
+  name: generic shell bundle box (? x ?)
+  description: A box of bundled shells.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
@@ -222,8 +222,8 @@
   abstract: true
   parent: RMCBoxMagazineBase
   id: RMCBoxMagazineSupplyBase
-  name: "Generic Supply Box (? x ?)"
-  description: "A box of supplies."
+  name: generic supply box (? x ?)
+  description: A box of supplies.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
@@ -260,7 +260,7 @@
 - type: entity
   parent: RMCBoxMagazineRifleBase
   id: RMCBoxMagazineRifleM54CEmpty
-  name: "Magazine Box (M54C x 10)"
+  name: magazine box (M54C x 10)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -308,7 +308,7 @@
 - type: entity
   parent: RMCBoxMagazineRifleBase
   id: RMCBoxMagazineRifleM54CAPEmpty
-  name: "Magazine Box (AP M54C x 10)"
+  name: magazine box (AP M54C x 10)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -356,7 +356,7 @@
 - type: entity
   parent: RMCBoxMagazineRifleBase
   id: RMCBoxMagazineRifleM54CExtEmpty
-  name: "Magazine Box (Ext M54C x 8)"
+  name: magazine box (Ext M54C x 8)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -404,7 +404,7 @@
 - type: entity
   parent: RMCBoxMagazineRifleBase
   id: RMCBoxMagazineRifleM4SPREmpty
-  name: "Magazine Box (M4SPR x 16)"
+  name: magazine box (M4SPR x 16)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -452,7 +452,7 @@
 - type: entity
   parent: RMCBoxMagazineRifleBase
   id: RMCBoxMagazineRifleM4SPRAPEmpty
-  name: "Magazine Box (AP M4SPR x 16)"
+  name: magazine box (AP M4SPR x 16)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -500,7 +500,7 @@
 - type: entity
   parent: RMCBoxMagazineRifleBase
   id: RMCBoxMagazineRifleM4SPRExtEmpty
-  name: "Magazine Box (EXT M4SPR x 12)"
+  name: magazine box (EXT M4SPR x 12)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -548,7 +548,7 @@
 - type: entity
   parent: RMCBoxMagazineRifleBase
   id: RMCBoxBullets458Empty
-  name: "Bullet Bundle Box (.458 SOCOM x 297)" # Used to say 300 when it was, infact, not 300 rounds.
+  name: bullet bundle box (.458 SOCOM x 297) # Used to say 300 when it was, infact, not 300 rounds.
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -588,7 +588,7 @@
           Medium: { state: rifle_ammo_medium_rounds_base, visible: true }
           High: { state: rifle_ammo_high_rounds_base, visible: true }
           Full: { state: rifle_ammo_full_rounds_base, visible: true }
-        enum.CMItemSlotsLayers2.Fill: # Second fill state for coloured casings
+        enum.CMItemSlotsLayers2.Fill:
           Empty: { state: rifle_ammo_full_rounds_color, visible: false }
           Low: { state: rifle_ammo_low_rounds_color, visible: true }
           Medium: { state: rifle_ammo_medium_rounds_color, visible: true }
@@ -613,7 +613,7 @@
 - type: entity
   parent: RMCBoxMagazineRifleBase
   id: RMCBoxMagazineRifleM16Empty
-  name: "Magazine Box (M16 x 12)"
+  name: magazine box (M16 x 12)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -659,7 +659,7 @@
 - type: entity
   parent: RMCBoxMagazineSMGBase
   id: RMCBoxMagazineSMGM63Empty
-  name: "Magazine Box (M63 x 12)"
+  name: magazine box (M63 x 12)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -707,7 +707,7 @@
 - type: entity
   parent: RMCBoxMagazineSMGBase
   id: RMCBoxMagazineSMGM63APEmpty
-  name: "Magazine Box (AP M63 x 12)"
+  name: magazine box (AP M63 x 12)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -755,7 +755,7 @@
 - type: entity
   parent: RMCBoxMagazineSMGBase
   id: RMCBoxMagazineSMGM63ExtEmpty
-  name: "Magazine Box (Ext M63 x 10)"
+  name: magazine box (Ext M63 x 10)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -805,7 +805,7 @@
 - type: entity
   parent: RMCBoxMagazinePistolBase
   id: RMCBoxMagazinePistolM1984Empty
-  name: "Magazine Box (M1984 x 16)"
+  name: magazine box (M1984 x 16)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -851,7 +851,7 @@
 - type: entity
   parent: RMCBoxMagazinePistolBase
   id: RMCBoxMagazinePistolM1984APEmpty
-  name: "Magazine Box (AP M1984 x 16)"
+  name: magazine box (AP M1984 x 16)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -892,7 +892,7 @@
 - type: entity
   parent: RMCBoxMagazinePistolBase
   id:  RMCBoxMagazinePistolMK80Empty
-  name: "Magazine Box (MK80 x 16)"
+  name: magazine box (MK80 x 16)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -938,7 +938,7 @@
 - type: entity
   parent: RMCBoxMagazinePistolBase
   id: RMCBoxMagazinePistolSU6Empty
-  name: "Magazine Box (SU-6 x 16)"
+  name: magazine box (SU-6 x 16)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -984,7 +984,7 @@
 - type: entity
   parent: RMCBoxMagazinePistolBase
   id: RMCBoxMagazinePistolM77APEmpty
-  name: "Magazine Box (M77 AP x 16)"
+  name: magazine box (M77 AP x 16)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -1030,8 +1030,8 @@
 - type: entity
   parent: RMCBoxMagazinePistolBase
   id: RMCBoxMagazineRevolverM44Empty
-  name: "Speedloader Box (M44 x 16)"
-  description: "A box of pistol speedloaders."
+  name: speedloader box (M44 x 16)
+  description: A box of pistol speedloaders.
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -1077,8 +1077,8 @@
 - type: entity
   parent: RMCBoxMagazinePistolBase
   id: RMCBoxMagazineRevolverM44MarksmanEmpty
-  name: "Speedloader Box (Marksman M44 x 16)"
-  description: "A box of pistol speedloaders."
+  name: speedloader box (Marksman M44 x 16)
+  description: A box of pistol speedloaders.
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -1126,7 +1126,7 @@
 - type: entity
   parent: RMCBoxMagazineShellBase
   id: RMCBoxShellsBuckshotEmpty
-  name: "Shell Box (Buckshot x 100)"
+  name: shell box (Buckshot x 100)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -1170,7 +1170,7 @@
 - type: entity
   parent: RMCBoxMagazineShellBase
   id: RMCBoxShellsSlugsEmpty
-  name: "Shell Box (Slugs x 100)"
+  name: shell box (Slugs x 100)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -1178,16 +1178,16 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     layers:
-    - state: shell_box # Main box base sprite
+    - state: shell_box
       color: "#578e75"
-    - state: shell_ammo_full_base # Default full ammo sprite
+    - state: shell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: shell_ammo_full_base # Default full ammo sprite
+    - state: shell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#578e75"
-    - state: shell_box_slugs # Type Markings to place over Box
+    - state: shell_box_slugs
       color: "#e0d5c2"
-    - state: shell_lid # Lid to match with Box
+    - state: shell_lid
       map: [ "lid" ]
       color: "#578e75"
   - type: CMItemSlots
@@ -1214,7 +1214,7 @@
 - type: entity
   parent: RMCBoxMagazineShellBase
   id: RMCBoxShellsFlechetteEmpty
-  name: "Shell Box (Flechette x 100)"
+  name: shell box (Flechette x 100)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -1222,16 +1222,16 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     layers:
-    - state: shell_box # Main box base sprite
+    - state: shell_box
       color: "#6551a0"
-    - state: shell_ammo_full_base # Default full ammo sprite
+    - state: shell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: shell_ammo_full_base # Default full ammo sprite
+    - state: shell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#6551a0"
-    - state: shell_box_flechette # Type Markings to place over Box
+    - state: shell_box_flechette
       color: "#e0d5c2"
-    - state: shell_lid # Lid to match with Box
+    - state: shell_lid
       map: [ "lid" ]
       color: "#6551a0"
   - type: CMItemSlots
@@ -1258,23 +1258,23 @@
 - type: entity
   parent: RMCBoxMagazineShellBase
   id: RMCBoxShellsBreachingEmpty
-  name: "Shell Box (Breaching x 120)"
+  name: shell box (Breaching x 120)
   components:
   - type: Construction
     graph: RMCBoxMagazine
     node: RMCBoxShellsBreachingEmpty
   - type: Sprite
     layers:
-    - state: shell_box # Main box base sprite
+    - state: shell_box
       color: "#595959"
-    - state: shell_ammo_full_base # Default full ammo sprite
+    - state: shell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: shell_ammo_full_base # Default full ammo sprite
+    - state: shell_ammo_full_base
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#595959"
-    - state: shell_box_breaching # Type Markings to place over Box
+    - state: shell_box_breaching
       color: "#e0d5c2"
-    - state: shell_lid # Lid to match with Box
+    - state: shell_lid
       map: [ "lid" ]
       color: "#595959"
   - type: CMItemSlots
@@ -1301,7 +1301,7 @@
 - type: entity
   parent: RMCBoxMagazineShellBase
   id: RMCBoxShellsBeanbagEmpty
-  name: "Shell Box (Beanbag x 100)"
+  name: shell box (Beanbag x 100)
   components:
   # - type: Construction
   # graph: RMCBoxMagazine
@@ -1349,7 +1349,7 @@
 - type: entity
   parent: RMCBoxMagazineShellBase
   id: RMCBoxShellsIncendiaryEmpty
-  name: "Shell Box (Incendiary Slug x 100)"
+  name: shell box (Incendiary Slug x 100)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -1397,7 +1397,7 @@
 - type: entity
   parent: RMCBoxMagazineShellBase
   id: RMCBoxShellsIncendiaryBuckshotEmpty
-  name: "Shell Box (Incendiary Buckshot x 100)"
+  name: shell box (Incendiary Buckshot x 100)
   components:
   - type: Construction
     graph: RMCBoxMagazine
@@ -1441,13 +1441,13 @@
         tags:
         - RMCShellShotgunIncendiaryBuckshot
 
-# -- OTHER -- (Uses original RSI)
+# -- SUPPLY BOXES --
 
-# Nailgun 709bff
+# Nailgun
 - type: entity
   parent: RMCBoxMagazineSupplyBase
   id: RMCBoxMagazineSMGNailgunEmpty
-  name: "Magazine Box (Nailgun x 10)"
+  name: magazine box (Nailgun x 10)
   components:
   - type: Construction
     graph: RMCBoxMagazine
