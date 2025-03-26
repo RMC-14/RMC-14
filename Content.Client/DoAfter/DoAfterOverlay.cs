@@ -118,20 +118,23 @@ public sealed class DoAfterOverlay : Overlay
                 }
 
                 //RMC14
-                // Don't show the doafter bar to other clients if the entity's sprite isn't visible.
-                if(!sprite.Visible && uid != localEnt)
-                    continue;
+                if (!doAfter.Args.ForceVisible)
+                {
+                    // Don't show the doafter bar to other clients if the entity's sprite isn't visible.
+                    if(!sprite.Visible && uid != localEnt)
+                        continue;
 
-                // Set the doafter bar alpha to the alpha of the sprite.
-                alpha = sprite.Color.A;
+                    // Set the doafter bar alpha to the alpha of the sprite.
+                    alpha = sprite.Color.A;
 
-                // The system using this component does not edit the sprite alpha, so we use separate logic for it.
-                var invisibleQuery = _entManager.GetEntityQuery<EntityActiveInvisibleComponent>();
-                invisibleQuery.TryGetComponent(uid, out var invisible);
+                    // The system using this component does not edit the sprite alpha, so we use separate logic for it.
+                    var invisibleQuery = _entManager.GetEntityQuery<EntityActiveInvisibleComponent>();
+                    invisibleQuery.TryGetComponent(uid, out var invisible);
 
-                // Make the doafter bar alpha the same as the opacity of the invisibility.
-                if (invisible != null)
-                    alpha = invisible.Opacity;
+                    // Make the doafter bar alpha the same as the opacity of the invisibility.
+                    if (invisible != null)
+                        alpha = invisible.Opacity;
+                }
 
                 // Use the sprite itself if we know its bounds. This means short or tall sprites don't get overlapped
                 // by the bar.
