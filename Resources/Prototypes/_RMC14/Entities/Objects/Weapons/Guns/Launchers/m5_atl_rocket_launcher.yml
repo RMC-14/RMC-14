@@ -130,7 +130,7 @@
     impactEffect: BulletImpactEffect
     damage:
       types:
-        Blunt: 15
+        Blunt: 20
     maxFixedRange: 6 # 7 tiles
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/m5spec_projectiles.rsi
@@ -139,9 +139,9 @@
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: RMC
-    maxIntensity: 30
+    maxIntensity: 19.5 #Damage should be just below the gibbing threshold for unarmored targets
     intensitySlope: 10
-    totalIntensity: 290
+    totalIntensity: 300
     maxTileBreak: 0
   - type: CMExplosionEffect
   - type: RMCScorchEffect
@@ -187,8 +187,7 @@
     impactEffect: BulletImpactEffect
     damage:
       types:
-        Blunt: 160
-        Heat: 150
+        Blunt: 10
         # 10 brute damage + 150 brute and 150 burn to simulate direct explosive damage.
         # Temporary mechanic to make it consistent with intended main target damage.
     maxFixedRange: 5 # 6 tiles
@@ -200,10 +199,10 @@
     - state: m5_84mm_ap
   - type: Explosive
     # TODO RMC14 Very inconsistent because explosions spawn at epicenter of the rocket, not the hit entity. Proper values are around (50, 40, 90)
-    explosionType: RMC
-    maxIntensity: 10
-    intensitySlope: 5
-    totalIntensity: 35
+    explosionType: RMC #Kinda bruteforced and tuned the values until the explosion did the same amount that did with hardcoded projectile value
+    maxIntensity: 85
+    intensitySlope: 15
+    totalIntensity: 85
     maxTileBreak: 0
   - type: StunOnCollide
     # This only works for AP rockets because it's supposed to have a hardcoded 6 second stun.
@@ -216,5 +215,5 @@
     thresholds:
     - range: 6
       falloff: 10
-  - type: GibOnHit
+
 # TODO RMC14 84mm WP
