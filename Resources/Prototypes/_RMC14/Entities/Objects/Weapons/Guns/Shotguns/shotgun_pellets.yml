@@ -31,7 +31,7 @@
   - type: ProjectileSpread
     proto: CMPelletShotgunBuckshot
     count: 4
-    spread: 20
+    spread: 15
   - type: RMCProjectileDamageFalloff
     thresholds:
     - range: 4
@@ -144,7 +144,7 @@
   - type: ProjectileSpread
     proto: CMPelletShotgunFlechette
     count: 4
-    spread: 15
+    spread: 6
   - type: RMCProjectileDamageFalloff
     thresholds:
     - range: 12
