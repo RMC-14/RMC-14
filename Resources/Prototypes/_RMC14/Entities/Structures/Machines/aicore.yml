@@ -1,7 +1,7 @@
 - type: entity
   id: RMCAICore
   name: ARES v3.2.
-  description: This is the artificial intelligence system for the USS Almayer. Like many other military-grade AI systems, this one was manufactured by We-Ya.
+  description: This is the artificial intelligence system for the UNS Almayer. Like many other military-grade AI systems, this one was manufactured by We-Ya.
   placement:
     mode: SnapgridCenter
   components: #has no collission in 13 they have invisible walls behind it
@@ -102,7 +102,7 @@
   id: RMCAICoreProcessorBioscan
   parent: RMCAICoreProcessor
   name: ARES Processor (Bioscan)
-  description: The external component of ARES' Bioscan systems. Without this, the USS Almayer would be incapable of running bioscans!
+  description: The external component of ARES' Bioscan systems. Without this, the UNS Almayer would be incapable of running bioscans!
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/AIStuff/aicoremachinery.rsi
