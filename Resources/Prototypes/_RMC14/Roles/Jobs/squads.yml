@@ -134,5 +134,34 @@
     tags:
     - RMCSquadIntel
 
+- type: entity
+  parent: SquadBase
+  id: SquadSpecialOperations
+  name: SpecOps
+  components:
+  - type: SquadTeam
+    roundStart: false
+    color: "#1A1A1A" # black
+    radio: MarineSpecialOps
+    accessLevels:
+    - CMAccessSpecialOps
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_specialops
+    canSupplyDrop: false
+    maxRoles:
+      CMCombatTech: 2
+      CMHospitalCorpsman: 2
+      CMSmartGunOperator: 1
+      CMWeaponsSpecialist: 2
+      CMFireteamLeader: 1
+      CMSquadLeader: 1
+  - type: Tag
+    tags:
+    - RMCSquadSpecialOps
+
 - type: Tag
   id: RMCSquadIntel
+
+- type: Tag
+  id: RMCSquadSpecialOps
