@@ -341,7 +341,7 @@
     size: Small
     sprite: _RMC14/Objects/Chemistry/vials.rsi
   - type: SolutionContainerVisuals
-    maxFillLevels: 5
+    maxFillLevels: 6
     fillBaseName: vial
   - type: SolutionContainerManager
     solutions:
