@@ -102,7 +102,8 @@
         amount: 2
 #     - id: Air alarm
 #     - id: security camera monitor
-#     - id: television set
+      - id: RMCCircuitboardTelevision
+        amount: 4
 #     - id: station alerts
 #     - id: arcade
 #     - id: atmospheric monitor
