@@ -28,7 +28,7 @@
 - type: entity
   parent: CMTileItemBase
   id: CMTileItemWood
-  name: wood floor
+  name: wooden floor tile
   components:
   - type: Sprite
     state: wood
@@ -40,6 +40,9 @@
     - CMFloorWood
   - type: Stack
     stackType: RMCTileWood
+  - type: Construction
+    graph: RMCTileWood
+    node: start
 
 - type: stack
   id: RMCTileSteel
@@ -49,6 +52,6 @@
 
 - type: stack
   id: RMCTileWood
-  name: steel tile
+  name: wooden floor tile
   spawn: CMTileItemWood
   maxCount: 60
