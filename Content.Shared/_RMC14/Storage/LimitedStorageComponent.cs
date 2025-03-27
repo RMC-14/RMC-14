@@ -19,7 +19,7 @@ public sealed partial class LimitedStorageComponent : Component
         public int Count = 1;
 
         [DataField(required: true)]
-        public EntityWhitelist Whitelist = new();
+        public EntityWhitelist? Whitelist = new();
 
         [DataField(required: true)]
         public LocId Popup;

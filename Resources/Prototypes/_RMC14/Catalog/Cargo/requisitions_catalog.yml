@@ -188,7 +188,11 @@
       - cost: 10000
         crate: RMCCrateGrenadesHighExplosiveBox
       - cost: 10000
+        crate: RMCCrateGrenadesBoxHEFA
+      - cost: 10000
         crate: RMCCrateGrenadesAirburstFragBox
+      - cost: 10000
+        crate: RMCCrateBoxAGMI
       - cost: 4000
         crate: RMCCrateGrenadesAirburstFrag
       - cost: 4000

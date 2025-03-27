@@ -281,7 +281,7 @@ public sealed class RMCStorageSystem : EntitySystem
 
         foreach (var limit in limited.Comp2.Limits)
         {
-            if (!_entityWhitelist.IsWhitelistPass(limit.Whitelist, toInsert))
+            if (!_entityWhitelist.IsWhitelistPassOrNull(limit.Whitelist, toInsert))
                 continue;
 
             var storedCount = 0;
@@ -290,7 +290,7 @@ public sealed class RMCStorageSystem : EntitySystem
                 if (stored == toInsert)
                     continue;
 
-                if (!_entityWhitelist.IsWhitelistPass(limit.Whitelist, stored))
+                if (!_entityWhitelist.IsWhitelistPassOrNull(limit.Whitelist, stored))
                     continue;
 
                 storedCount++;
