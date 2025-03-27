@@ -55,7 +55,8 @@
         name: M276 M63 Holster Rig
       - id: RMCBeltHolsterRevolver
         name: M276 General Revolver Holster Rig
-      #    RMCBeltHolsterFlareGun #TODO: Make this
+      #- id: RMCBeltHolsterFlareGun #TODO: Make this
+      #  name: M276 M82F Holster Rig
       - id: RMCM276ShotgunShellLoadingRig
         name: M276 Shotgun Shell Loading Rig
       - id: RMCBeltUtilityGeneral
@@ -108,8 +109,9 @@
       - id: CMSandbagEmpty25
         name: Sandbags
         points: 20
-#      - id: ES-11 Mobile Fuel Canister
-#        points: 5
+      #- id: ES-11 Mobile Fuel Canister
+      #  name: ES-11 Mobile Fuel Canister
+      #  points: 5
       - id: CMWelderSmall
         name: ME3 Hand Welder
         points: 5
@@ -132,9 +134,9 @@
       - id: RMCPacketGrenadeIncendiaryFilled
         name: M40 HIDP Incendiary Packet (x3 grenades)
         points: 20
-    #- id: CMM40HPDPPhosphorusPacket3
-    #  name: M40 WPDP White Phosphorus Packet (x3 grenades)
-    #  points: 20
+      #- id: CMM40HPDPPhosphorusPacket3
+      #  name: M40 WPDP White Phosphorus Packet (x3 grenades)
+      #  points: 20
       - id: RMCPacketGrenadeSmokeFilled
         name: M40 HSDP Smoke Packet (x3 grenades)
         points: 10
@@ -150,17 +152,17 @@
       - id: RMCPacketGrenadeM74AGMSHornetFilled
         name: M74 AGM-Hornet Airburst Packet (x3 airburst grenades)
         points: 15
-    #- id: CMM20MineBox4
-    #  name: M20 Mine Box (x5 mines)
-    #  points: 20
+      #- id: CMM20MineBox4
+      #  name: M20 Mine Box (x5 mines)
+      #  points: 20
     - name: Primary Ammunition
       entries:
       - id: CMMagazineRifleM4SPRAP
         name: M4SPR AP Magazine (10x24mm)
         points: 10
-    #- id: CMMagazineRifleM4SPRExt
-    #  name: M4SPR Extended Magazine (10x24mm)
-    #  points: 10
+      #- id: CMMagazineRifleM4SPRExt
+      #  name: M4SPR Extended Magazine (10x24mm)
+      #  points: 10
       - id: CMMagazineSMGM63AP
         name: M63 AP Magazine (10x20mm)
         points: 10
@@ -212,9 +214,9 @@
       - id: CMWebbing
         name: Webbing
         points: 10
-    # - id: CMWebbingBlack
-    #   name: Black Webbing
-    #   points: 10
+      #- id: CMWebbingBlack
+      #  name: Black Webbing
+      #  points: 10
       - id: CMWebbingBrown
         name: Brown Webbing Vest
         points: 15
@@ -242,9 +244,9 @@
       - id: RMCWeldingGoggles
         name: Welding Goggles
         points: 5
-      - id: CMSlingPouch
-        name: Sling Pouch
-        points: 15
+      #- id: CMSlingPouch
+      #  name: Sling Pouch
+      #  points: 15
       - id: RMCPouchGeneralLarge
         name: Large General Pouch
         points: 15
