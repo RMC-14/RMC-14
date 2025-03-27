@@ -30,6 +30,7 @@
     tags:
     - Grenade
     - LauncherCompatibleGrenade
+    - RMCAirburstGrenade
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container

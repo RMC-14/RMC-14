@@ -18,6 +18,7 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
 
     protected override void Open()
     {
+        base.Open();
         Window = this.CreatePopOutableWindow<TacticalMapWindow>();
 
         TabContainer.SetTabTitle(Window.MapTab, "Map");

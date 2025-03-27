@@ -117,7 +117,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
                 HasComp<GhostComponent>(e)
             );
 
-        filter.RemoveWhereAttachedEntity(HasComp<SurvivorComponent>);
+        filter.RemoveWhereAttachedEntity(HasComp<RMCSurvivorComponent>);
 
         _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
         _audio.PlayGlobal(sound ?? DefaultAnnouncementSound, filter, true, AudioParams.Default.WithVolume(-2f));

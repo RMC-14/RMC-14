@@ -298,6 +298,7 @@
   - type: RMCCanBeFultoned
   - type: CMArmor
   - type: CriticalGraceTime
+  - type: RMCObstacleSlamming
 
 - type: entity
   abstract: true
@@ -333,6 +334,11 @@
     damage:
       groups:
         Brute: 12
+    soundSwing:
+      path: /Audio/_RMC14/Weapons/alien_claw_swipe.ogg
+      params:
+        variation: 0.1
+        volume: -5
   - type: Tackle
   - type: XenoClaws
 
