@@ -92,7 +92,7 @@ namespace Content.Server.Voting.Managers
             }
             else
             {
-                NotifyNotEnoughGhostPlayers(ghostVotePercentageRequirement, ghostVoterPercentage);
+                NotifyNotEnoughGhostPlayers(ghostVotePercentageRequirement, ghostVoterPercentage, initiator);
             }
         }
 
@@ -207,12 +207,16 @@ namespace Content.Server.Voting.Managers
             }
         }
 
-        private void NotifyNotEnoughGhostPlayers(int ghostPercentageRequirement, int roundedGhostPercentage)
+        private void NotifyNotEnoughGhostPlayers(int ghostPercentageRequirement, int roundedGhostPercentage, ICommonSession? session)
         {
             // Logic to notify that there are not enough ghost players to start a vote
             _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"Restart vote failed: Current Ghost player percentage:{roundedGhostPercentage.ToString()}% does not meet {ghostPercentageRequirement.ToString()}%");
-            _chatManager.DispatchServerAnnouncement(
-                Loc.GetString("ui-vote-restart-fail-not-enough-ghost-players", ("ghostPlayerRequirement", ghostPercentageRequirement)));
+
+            var msg = Loc.GetString("ui-vote-restart-fail-not-enough-ghost-players", ("ghostPlayerRequirement", ghostPercentageRequirement));
+            if (session == null)
+                _chatManager.DispatchServerAnnouncement(msg);
+            else
+                _chatManager.DispatchServerMessage(session, msg);
         }
 
         private void CreatePresetVote(ICommonSession? initiator)
