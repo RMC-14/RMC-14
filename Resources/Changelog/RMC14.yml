@@ -1,32 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed stasis bags being able to hold corpses
-    type: Fix
-  - message: Fix stasis bags lasting forever. They now have 15 minutes of stasis per
-      bag that goes down as someone is kept inside. Once they run out they turned
-      into trash.
-    type: Fix
-  id: 995
-  time: '2024-11-18T07:02:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4835
-- author: blueDev2
-  changes:
-  - message: Fixed Find Parasite Action
-    type: Fix
-  id: 996
-  time: '2024-11-18T07:02:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4759
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added barricade upgrading. Clicking on a barricade with metal gives you
-      a list of possible upgrades, each costing 2 metal.
-    type: Add
-  id: 997
-  time: '2024-11-19T12:37:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4837
-- author: Vermidia
-  changes:
   - message: Fixed sec vest slowdown being less than intended
     type: Fix
   id: 998
@@ -5222,5 +5196,30 @@
   id: 1497
   time: '2025-03-28T04:52:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5970
+- author: Vermidia
+  changes:
+  - message: Fixed acid taking 4.5x as long as it should be to melt most things. Walls
+      melting lasted 1.5x as long as they should have.
+    type: Fix
+  - message: Fixed acid on barricades lasting 5 seconds too long.
+    type: Fix
+  id: 1498
+  time: '2025-03-28T04:59:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5943
+- author: L9gie
+  changes:
+  - message: 'Added 3 new lobby screens: Cornered, Eyes Up, and Focus Fire'
+    type: Add
+  id: 1499
+  time: '2025-03-28T04:59:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5916
+- author: stranthbackup
+  changes:
+  - message: Fixed the crematorium and morgue having a maximum capacity of 1. They
+      now have a maximum capacity of 30.
+    type: Fix
+  id: 1500
+  time: '2025-03-28T04:58:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5930
 Name: RMC14
 Order: -1
