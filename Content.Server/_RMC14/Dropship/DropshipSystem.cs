@@ -22,6 +22,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
+using Content.Shared.Timing;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
@@ -128,6 +129,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
     private void OnFTLCompleted(Entity<DropshipComponent> ent, ref FTLCompletedEvent args)
     {
+        if (ent.Comp.RechargeTime is { } rechargeTime && TryComp(ent, out FTLComponent? ftl))
+            ftl.StateTime = StartEndTime.FromCurTime(_timing, rechargeTime);
+
         OnRefreshUI(ent, ref args);
 
         var map = args.MapUid;
