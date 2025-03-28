@@ -290,3 +290,11 @@
     superSlowMultiplier: 0.33
   - type: RMCHandEmotes
   - type: RMCBuckleDrawDepth
+  - type: DamageOnPulledWhileCrit
+    damage:
+      types:
+        Asphyxiation: 1.6
+    pullerWhitelist:
+      components:
+      - Xeno # TODO RMC14 not allied xenos
+
