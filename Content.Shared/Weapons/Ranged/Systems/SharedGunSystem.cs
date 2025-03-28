@@ -743,6 +743,7 @@ public abstract partial class SharedGunSystem : EntitySystem
             Audio.PlayPredicted(gun.SoundGunshotModified, gunUid, user);
         }
 
+        Logs.Add(LogType.RMCGunShot, LogImpact.Low, $"{ToPrettyString(user)} shot {ToPrettyString(gunUid)} with {shotProjectiles.Count} projectiles aiming at {toCoordinates}.");
         return shotProjectiles;
     }
 
