@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: Fixed Xenos not being able to devour standing victims that aren't moving.
-    type: Fix
-  id: 1003
-  time: '2024-11-22T00:15:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4891
 - author: Dutch-VanDerLinde
   changes:
   - message: Scouts now uncloak when they get infected by a parasite.
@@ -5218,5 +5211,12 @@
   id: 1505
   time: '2025-03-28T07:23:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5960
+- author: N0lim
+  changes:
+  - message: Fixed Queen building speed being half the intended amount.
+    type: Fix
+  id: 1506
+  time: '2025-03-28T10:08:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5842
 Name: RMC14
 Order: -1
