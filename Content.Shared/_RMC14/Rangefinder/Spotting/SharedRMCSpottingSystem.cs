@@ -112,16 +112,16 @@ public abstract partial class SharedRMCSpottingSystem : EntitySystem
         if (!HasComp<SpottableComponent>(target))
             return false;
 
-        // Can't aim at a target you can't see.
+        // Can't spot a target you can't see.
         if (!_examine.InRangeUnOccluded(user, target, ent.Comp.SpottingRange))
             return false;
 
-        // Can't aim for a certain amount of time after having performed an aimed shot.
+        // Can't spot for a certain amount of time after having spotted something.
         if (ent.Comp.NextSpot > Timing.CurTime)
             return false;
 
         // Only allow entities with the SpotterComponent to use the spotting function.
-        if(!HasComp<SpotterComponent>(user))
+        if(!HasComp<SpotterWhitelistComponent>(user))
         {
             var message = Loc.GetString("rmc-action-popup-spotting-user-no-skill", ("rangefinder", ent));
             _popup.PopupClient(message, user, user);

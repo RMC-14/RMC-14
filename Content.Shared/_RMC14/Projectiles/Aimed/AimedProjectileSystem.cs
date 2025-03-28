@@ -152,22 +152,23 @@ public sealed class AimedProjectileSystem : EntitySystem
                 aimedEffect.ExtraHits = damageIncreaseModifier;
                 aimedEffect.SuperSlowDuration = TimeSpan.FromSeconds(slowDuration);
                 aimedEffect.CurrentHealthDamage = damage;
-                Dirty(ent.Owner, aimedEffect);
             }
         }
 
         // Small xenos don't get slowed
-        if (size == RMCSizes.SmallXeno || !(slowDuration > 0))
-            return;
+        if (size != RMCSizes.SmallXeno || slowDuration > 0)
+        {
+            aimedEffect.SlowDuration = TimeSpan.FromSeconds(slowDuration);
 
-        aimedEffect.SlowDuration = TimeSpan.FromSeconds(slowDuration);
+            // If the slow duration is higher than the threshold, apply a super slow.
+            if (slowDuration > focusEffect.SlowThreshold)
+                aimedEffect.SuperSlowDuration = TimeSpan.FromSeconds(slowDuration);
 
-        // If the slow duration is higher than the threshold, apply a super slow.
-        if (slowDuration > focusEffect.SlowThreshold)
-            aimedEffect.SuperSlowDuration = TimeSpan.FromSeconds(slowDuration);
+            // Apply a short dazed effect if hit by high stopping power.
+            if (stoppingPower != null && stoppingPower.CurrentStoppingPower > focusEffect.DazeThreshold)
+                _dazed.TryDaze(target, TimeSpan.FromSeconds(focusEffect.DazeDuration));
+        }
 
-        // Apply a short dazed effect if hit by high stopping power.
-        if (stoppingPower != null && stoppingPower.CurrentStoppingPower > focusEffect.DazeThreshold)
-            _dazed.TryDaze(target, TimeSpan.FromSeconds(focusEffect.DazeDuration));
+        Dirty(ent.Owner, aimedEffect);
     }
 }

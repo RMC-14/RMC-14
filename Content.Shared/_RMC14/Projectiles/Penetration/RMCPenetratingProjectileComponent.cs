@@ -58,5 +58,5 @@ public sealed partial class RMCPenetratingProjectileComponent : Component
     ///     The multiplier for range and damage loss if a membrane is hit.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float MembraneMultiplier = 1.5f;
+    public float MembraneMultiplier = 1f;
 }

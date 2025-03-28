@@ -47,7 +47,7 @@ public sealed class RMCFocusingSystem : EntitySystem
             }
 
             // Only the sniper and Spotters can see what snipers are focusing on.
-            if(uid != entity && !HasComp<SpotterComponent>(uid))
+            if(uid != entity && !HasComp<SpotterWhitelistComponent>(uid))
                 return;
 
             if(!TryComp(component.FocusTarget, out SpriteComponent? sprite) || !sprite.LayerExists(FocusedKey))
