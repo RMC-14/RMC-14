@@ -1,0 +1,269 @@
+# Commanding Officer #
+
+# Clothing Vend
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechCommandingOfficerClothing
+  name: ColMarTech Commanding Officer Clothing Rack
+  description: An automated closet hooked up to a colossal storage of standard-issue dress uniform variants.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessCO" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMCommandingOfficer
+    sections:
+    - name: Utility
+      entries:
+      - id: CMJumpsuitBO
+      - id: CMJumpsuitCO
+      - id: CMJumpsuitOperations
+      - id: CMHeadCapCO
+      - id: CMHeadBeretCO
+      - id: CMBootsBlackFilled
+      - id: CMBootsBrown
+      - id: CMHandsBlackMarine
+      - id: CMHandsBrown
+    - name: Utility Extras
+      entries:
+      - id: RMCSunglasses
+      - id: RMCSunglassesBig
+      - id: RMCGlassesAviators
+      - id: RMCGlassesMarineRpg
+      - id: RMCGlassesMarineRpgOld
+    - name: Service
+      entries:
+      - id: CMJumpsuitCOService
+      - id: CMJumpsuitCOFormalWhite
+      - id: CMJumpsuitCOFormalBlack
+      - id: RMCCoatService
+      - id: CMCoatMP
+      - id: RMCShoesLaceup
+      - id: RMCShoesLaceupBrown # RMC Addition
+    - name: Service Headwear
+      entries:
+      - id: CMHeadBeretCO
+      - id: CMHeadBeretCOWhite
+      - id: CMHeadBeretCOBlack
+      - id: RMCHeadCapFlippable # TODO: Check this is the service variant. If so, parent and rename.
+    - name: Service Extras
+      entries:
+      - id: CMCoatCOBomber
+    # - name: Dress  # TODO: Check if this is locked to Council Members; this seems weird for a CO to be able to wear
+    #   entries:
+    # - name: Dress Headwear
+    # - name: Dress Extras
+
+# Equipment Vend
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechCommandingOfficerEquipment
+  name: ColMarTech Commanding Officer Equipment Rack
+  description: An automated equipment vendor for the Commanding Officer. Contains a prime selection of equipment for only the UNMC's top officers.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessCO" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMCommandingOfficer
+    sections:
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: CMHeadsetSeniorCommand
+      - id: CMMRE
+    - name: Commanding Officer Essentials Kit
+      takeAll: CMBundle
+      entries:
+      - id: RMCCommandingOfficerEssentialsBundle # TODO RMC14 Megaphone , Paper Map
+    - name: Bags
+      choices: { CMBag: 1 }
+      entries:
+      - id: CMBackpackCommand
+      #- id: CMSatchelCommandSecure # TODO RMC14 Secure Satchel (ID LOCK)
+      - id: RMCBackpackRTO
+      - id: CMSatchelMarineIntel
+    - name: Combat Equipment
+      takeAll: CMCombatEquipment
+      entries:
+      - id: RMCArmorM3CO
+      - id: CMArmorHelmetM11CCO
+      - id: CMHandsInsulated
+      - id: CMBootsBlackFilled
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBrown
+        recommended: true
+      - id: CMWebbingBlack
+        recommended: true
+      #- id: CMTacticalWaistcoat # TODO Port Waistcoat
+      - id: CMWebbingPouch
+      - id: CMWebbing
+      - id: CMWebbingHolster
+    - name: Huds
+      choices: { CMHud: 1 }
+      entries:
+      - id: RMCGlassesMedicalHUDGlasses
+        recommended: true
+      - id: CMGlassesSecurity
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries:
+      - id: RMCBeltUtilityGeneral
+        recommended: true
+      - id: CMBeltSecurityMPFilled
+        name: M276 pattern security rig (Full)
+      - id: CMBeltMedicalFilled
+        name: M276 pattern medical storage rig (Full)
+        recommended: true
+      - id: CMBeltMedicBagFilled
+        name: M276 pattern lifesaver bag (Full)
+      - id: CMBeltMarine
+      - id: CMBeltUtilityCombat
+      #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
+      - id: RMCM276ShotgunShellLoadingRig
+    - name: Pouches
+      choices: { CMPouch: 2 }
+      entries:
+      - id: RMCPouchFirstAidInjectors
+        name: first-aid pouch (refillable injectors)
+      - id: RMCPouchFirstAidSplintsGauzeOintment
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+      - id: RMCPouchFirstAidPills
+        name: first-aid pouch (pills)
+        recommended: true
+      - id: RMCPouchMedkit
+      - id: RMCPouchAutoinjectorFill
+        recommended: true
+      - id: RMCPouchGeneralLarge
+      - id: RMCPouchMagazinePistolLarge
+      - id: RMCPouchMagazineLarge
+      - id: RMCPouchPistol
+      - id: RMCPouchShotgunLarge
+      - id: RMCPouchToolsFill
+    - name: Mask
+      choices: { CMMask: 1 }
+      entries:
+      - id: CMMaskGas
+      - id: CMMaskCoif
+      - id: RMCMaskRebreather
+
+# Weapon Vend
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechCommandingOfficerWeapon
+  name: ColMarTech Commanding Officer Weapon Rack
+  description: An automated weapons rack for the Commanding Officer. It features a robust selection of weaponry meant only for the UNMC's top officers.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessCO" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMCommandingOfficer
+    sections:
+    - name: Commander's Primary
+      takeOne: CMProtagGun
+      entries:
+      - id: WeaponRifleM59A
+        name: M59A Prototype Rifle
+      - id: CMCOSmartGunOperatorEquipmentCaseBelt
+        name: Commander's Smartgun
+        recommended: true # TODO RMC14 Make choices: colour the options brown
+    - name: Commander's Secondary
+      choices: { CMSecondary: 1 }
+      entries:
+      - id: RMCD50WinterWyvernBeltFilled
+      - id: RMCMatebaBeltFilled
+    - name: Primary Ammunition
+      entries:
+      - id: CMMagazineRifleM54CMK1
+        points: 30
+        recommended: true
+      - id: CMMagazineRifleM54CMK1AP
+        points: 40
+        recommended: true
+      - id: CMMagazineRifleM54CExt
+        points: 20
+      - id: CMMagazineRifleM54CAP # When MK1 is ported; replace first two mags with MK1 variants and uncomment this.
+        points: 20
+      - id: RMCMagazineSmartGun
+        points: 20
+    - name: Sidearm Ammunition
+      entries:
+      - id: RMCSpeedLoaderMatebaHighImpact
+        points: 15
+      - id: RMCSpeedLoaderMatebaHIAP
+        points: 20
+      - id: RMCMagazinePistolD50WinterWyvernHI
+        points: 15
+      - id: RMCMagazinePistolD50WinterWyvernHIAP
+        points: 20
+    - name: Shotgun Ammunition
+      entries:
+      - id: RMCBoxShotgunBuckshot
+        points: 20
+      - id: RMCBoxShotgunSlugs
+        points: 20
+      - id: RMCBoxShotgunFlechette
+        points: 20
+    - name: Special Ammunition
+      entries:
+      - id: RMCMagazineRifleM54CIncendiary
+        points: 65
+      #- id: M54C Rubber Magazine
+      - id: RMCBoxShotgunBeanbag
+        points: 10
+    - name: Explosives
+      entries:
+      - id: CMPacketGrenadeHighExplosiveFilled
+        points: 15
+      - id: CMPacketGrenadeFragFilled
+        points: 15
+      #- id: CMPacketGrenadesWPFilled # TODO RMC14 Port White Phosphorus (WP) Grenades
+    - name: Rail Attachments
+      entries:
+      - id: RMCAttachmentS5RedDotSight
+        points: 15
+      - id: RMCAttachmentS6ReflexSight
+        points: 15
+      - id: RMCAttachmentS42xTelescopicMiniscope
+        points: 15
+    - name: Helmet Visors # TODO RMC14 Port Helmet Visors
+      entries:
+      - id: RMCVisorNightVision
+        points: 10
+    - name: Underbarrel Attachments
+      entries:
+      - id: RMCAttachmentLaserSight
+        points: 15
+      - id: RMCAttachmentAngledGrip
+        points: 15
+      - id: RMCAttachmentVerticalGrip
+        points: 15
+      - id: RMCAttachmentU7UnderbarrelShotgun
+        points: 15
+      - id: RMCAttachmentUnderbarrelExtinguisher
+        points: 15
+      - id: RMCAttachmentMiniFlamethrower
+        points: 15
+      - id: RMCAttachmentU1GrenadeLauncher
+        points: 5
+    - name: Barrel Attachments
+      entries:
+      - id: RMCAttachmentExtendedBarrel
+        points: 15
+      - id: RMCAttachmentRecoilCompensator
+        points: 15
+      - id: RMCAttachmentSuppressor
+        points: 15

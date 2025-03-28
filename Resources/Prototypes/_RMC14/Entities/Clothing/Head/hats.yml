@@ -352,7 +352,7 @@
 
 - type: entity
   parent: CMHeadCap
-  id: CMHeadCapCorrespondent
+  id: RMCHeadCapCorrespondent
   name: combat correspondent cap
   description: A faithful cap for any terrain war correspondents may find themselves in.
   components:
@@ -541,7 +541,7 @@
 
 - type: entity
   parent: CMHeadCap
-  id: CMHeadCapFedoraTan
+  id: RMCHeadCapFedoraTan
   name: tan fedora
   description: A classic tan fedora.
   components:
@@ -552,7 +552,7 @@
 
 - type: entity
   parent: CMHeadCap
-  id: CMHeadCapFedoraBrown
+  id: RMCHeadCapFedoraBrown
   name: brown fedora
   description: A classic brown fedora.
   components:
@@ -563,7 +563,7 @@
 
 - type: entity
   parent: CMHeadCap
-  id: CMHeadCapFedoraGrey
+  id: RMCHeadCapFedoraGrey
   name: grey fedora
   description: A classic grey fedora.
   components:
