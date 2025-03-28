@@ -7,7 +7,7 @@
     actions:
     - !type:DeleteEntity
     edges:
-    - to: fenceMetalHybrisa
+    - to: fenceMetal
       completed:
       - !type:SnapToGrid
         southRotation: true
@@ -19,7 +19,7 @@
   - node: fenceMetal
     entity: RMCFenceHybrisa
     edges:
-    - to: rmcFenceBrokenHybrisa
+    - to: rmcFenceBroken
       steps:
       - tool: Cutting
         doAfter: 1.0
@@ -36,7 +36,7 @@
       steps:
       - tool: Cutting
         doAfter: 5.0
-    - to: fenceMetalHybrisa
+    - to: fenceMetal
       steps:
       - material: BarbedWire
         amount: 2
