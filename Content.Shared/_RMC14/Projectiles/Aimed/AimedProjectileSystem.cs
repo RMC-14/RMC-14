@@ -156,7 +156,7 @@ public sealed class AimedProjectileSystem : EntitySystem
         }
 
         // Small xenos don't get slowed
-        if (size != RMCSizes.SmallXeno || slowDuration > 0)
+        if (size != RMCSizes.SmallXeno && slowDuration > 0)
         {
             aimedEffect.SlowDuration = TimeSpan.FromSeconds(slowDuration);
 
