@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed fortified and crested defenders not getting stunned by rockets.
-      They will get stunned but still appear crested/fortified.
-    type: Fix
-  id: 986
-  time: '2024-11-17T04:45:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4853
-- author: Vermidia
-  changes:
   - message: Fixed fireaxe and pickaxe doing structural damage.
     type: Fix
   id: 987
@@ -5252,5 +5244,17 @@
   id: 1488
   time: '2025-03-28T04:26:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5976
+- author: Vermidia
+  changes:
+  - message: Fixed bipod not breaking on drop.
+    type: Fix
+  - message: Fixed bipod not slowing you down if toggled by anything but the action.
+      Manually undeploying the bipod with the action still won't slow you down.
+    type: Fix
+  - message: Fixed bipod being instant deployable on non-anchored barricades.
+    type: Fix
+  id: 1489
+  time: '2025-03-28T04:31:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5941
 Name: RMC14
 Order: -1
