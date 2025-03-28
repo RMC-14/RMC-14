@@ -288,6 +288,21 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         Dirty(ent);
     }
 
+    public bool HasWeedsNearby(Entity<MapGridComponent> grid, EntityCoordinates coordinates)
+    {
+        var range = 5;
+        var position = _mapSystem.LocalToTile(grid, grid, coordinates);
+        var checkArea = new Box2(position.X - range, position.Y - range, position.X + range, position.Y + range);
+        var enumerable = _mapSystem.GetLocalAnchoredEntities(grid, grid, checkArea);
+
+        foreach (var anchored in enumerable)
+        {
+            if (TryComp<XenoWeedsComponent>(anchored, out var weeds) && weeds.IsSource)
+                return true;
+        }
+        return false;
+    }
+
     public bool IsOnHiveWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates, bool sourceOnly = false)
     {
         var weed = GetWeedsOnFloor(grid, coordinates, sourceOnly);
