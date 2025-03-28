@@ -20,13 +20,12 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMCrowbar
-    - id: CMWrench
+    - id: RMCWeaponPistolM77
     - id: CMScrewdriver
-    - id: CMWirecutter
+    - id: CMWrench
     - id: CMWelder
+    - id: CMWirecutter
     - id: CMMultitool
-    - id: RMCCableCoil30
 
 - type: entity
   parent: CMBeltKnife

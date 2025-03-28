@@ -225,7 +225,7 @@
       - CMFireExtinguisherPortable
       - RMCShellShotgun
       - RMCNailgunCompact
-      #      - # TODO circuit board
+      #      - # TODO analyzer
       components:
       - Welder
       - PowerCell
