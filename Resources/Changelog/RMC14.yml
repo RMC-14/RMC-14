@@ -1,27 +1,4 @@
 ﻿Entries:
-- author: Cyberanarchbee
-  changes:
-  - message: M890 Tactical Shotgun
-    type: Add
-  - message: M890 Tactical Shotgun Stock
-    type: Add
-  id: 981
-  time: '2024-11-15T08:06:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4193
-- author: crystalHex
-  changes:
-  - message: The Mateba barrel can now be re-attached to the gun after being removed.
-    type: Fix
-  - message: The M44 and Mateba speedloaders are no longer interchangable.
-    type: Fix
-  - message: The Mateba can now be reloaded one bullet at a time.
-    type: Fix
-  - message: Tweaked the damage and AP values of Mateba ammunition and the damage
-      multiplier of the Mateba itself.
-    type: Fix
-  id: 982
-  time: '2024-11-15T08:23:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4784
 - author: crystalHex
   changes:
   - message: Fixed pistol, revolver and Mateba holster belts missing suit storage
@@ -5265,5 +5242,19 @@
   id: 1483
   time: '2025-03-25T06:49:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5954
+- author: Tyzemol
+  changes:
+  - message: Freezer crates will now actually keep things inside fresh.
+    type: Fix
+  id: 1484
+  time: '2025-03-28T03:15:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5971
+- author: CyberTropic
+  changes:
+  - message: Fixed map insert pass through.
+    type: Fix
+  id: 1485
+  time: '2025-03-28T03:15:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5969
 Name: RMC14
 Order: -1
