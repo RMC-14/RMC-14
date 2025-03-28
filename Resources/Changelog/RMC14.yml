@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed sec vest slowdown being less than intended
-    type: Fix
-  id: 998
-  time: '2024-11-19T12:38:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4867
-- author: CyberTropic
-  changes:
-  - message: Added bulletholes.
-    type: Add
-  id: 999
-  time: '2024-11-22T00:06:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4896
 - author: Rainbeon
   changes:
   - message: Tackling no longer goes on cooldown if it fails to connect on the server.
@@ -5221,5 +5207,19 @@
   id: 1500
   time: '2025-03-28T04:58:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5930
+- author: Ian321
+  changes:
+  - message: The current tech tier can now be seen in the intel objectives window.
+    type: Add
+  id: 1501
+  time: '2025-03-28T05:01:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5949
+- author: mmails
+  changes:
+  - message: Added aresannounce command for admins
+    type: Add
+  id: 1502
+  time: '2025-03-28T05:01:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5929
 Name: RMC14
 Order: -1
