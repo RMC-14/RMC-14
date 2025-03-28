@@ -62,7 +62,7 @@
       - id: RMCArmorM3LightPadded
       - id: RMCArmorM3MediumVariants
     - name: Jacket
-      choices: { CMCoat: 1}
+      choices: { CMCoat: 1 }
       entries:
       - id: RMCCoatService
     - name: Eyewear
