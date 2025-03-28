@@ -226,6 +226,12 @@ public sealed class XenoDevourSystem : EntitySystem
 
         args.Handled = true;
 
+        var attemptEv = new XenoTargetDevouredAttemptEvent();
+        RaiseLocalEvent(target, ref attemptEv);
+
+        if (attemptEv.Cancelled)
+            return;
+
         var container = _container.EnsureContainer<ContainerSlot>(xeno, xeno.Comp.DevourContainerId);
         if (!_container.Insert(target, container))
         {
@@ -501,6 +507,9 @@ public sealed class XenoDevourSystem : EntitySystem
         }
     }
 }
+
+[ByRefEvent]
+public record struct XenoTargetDevouredAttemptEvent(bool Cancelled = false);
 
 /// <summary>
 /// Event that is raised whenever a mob is devoured by another mob

@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Orders;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
+using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared.Armor;
@@ -114,6 +115,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
 
         SubscribeLocalEvent<ActiveDamageOnPulledWhileCritComponent, MoveEvent>(OnActiveDamageOnPulledMove);
         SubscribeLocalEvent<ActiveDamageOnPulledWhileCritComponent, MobStateChangedEvent>(OnActiveDamageOnPulledMobState);
+        SubscribeLocalEvent<ActiveDamageOnPulledWhileCritComponent, XenoTargetDevouredAttemptEvent>(OnActiveDamageOnPulledDevoured);
 
         _bruteTypes.Clear();
         _burnTypes.Clear();
@@ -297,6 +299,12 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     {
         if (args.NewMobState != MobState.Critical)
             RemCompDeferred<ActiveDamageOnPulledWhileCritComponent>(ent);
+    }
+
+    private void OnActiveDamageOnPulledDevoured(Entity<ActiveDamageOnPulledWhileCritComponent> ent, ref XenoTargetDevouredAttemptEvent args)
+    {
+        args.Cancelled = true;
+        _mobState.ChangeMobState(ent, MobState.Dead);
     }
 
     public DamageSpecifier DistributeHealing(Entity<DamageableComponent?> damageable, ProtoId<DamageGroupPrototype> groupId, FixedPoint2 amount, DamageSpecifier? equal = null)
