@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: crystalHex
-  changes:
-  - message: Fixed pistol, revolver and Mateba holster belts missing suit storage
-      sprites. Also fixed revolver holster belt using incorrect sprites.
-    type: Fix
-  id: 983
-  time: '2024-11-15T08:22:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4707
 - author: Dutch-VanDerLinde
   changes:
   - message: Xenos can no longer see through containers during hijack.
@@ -5256,5 +5248,12 @@
   id: 1485
   time: '2025-03-28T03:15:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5969
+- author: Vermidia
+  changes:
+  - message: Colony Corpses are now random species
+    type: Tweak
+  id: 1486
+  time: '2025-03-28T03:26:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5995
 Name: RMC14
 Order: -1
