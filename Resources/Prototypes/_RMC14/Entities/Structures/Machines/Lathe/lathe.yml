@@ -41,6 +41,8 @@
       CMSteel: 800
       CMGlass: 100
     whitelist:
+      components:
+      - FloorTile
       tags:
       - Metal
       - RMCGlass

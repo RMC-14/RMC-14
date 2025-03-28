@@ -24,6 +24,10 @@
     - CMFloorSteel
   - type: Stack
     stackType: RMCTileSteel
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 25
 
 - type: entity
   parent: CMTileItemBase
