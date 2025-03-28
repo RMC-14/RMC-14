@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Tackling no longer goes on cooldown if it fails to connect on the server.
-    type: Fix
-  - message: Fixed the tackle success popup not being unpredicted like the tackle
-      attempt message.
-    type: Fix
-  id: 1000
-  time: '2024-11-22T00:06:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4899
 - author: Vermidia
   changes:
   - message: Fixed Bodybags and Stasisbags letting you perform some actions by having
@@ -5221,5 +5211,14 @@
   id: 1502
   time: '2025-03-28T05:01:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5929
+- author: OmerF-afk
+  changes:
+  - message: Added MAR-50 LMG
+    type: Add
+  - message: Added Basira-Armstrong Hunting Rifle
+    type: Add
+  id: 1503
+  time: '2025-03-28T05:07:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5953
 Name: RMC14
 Order: -1
