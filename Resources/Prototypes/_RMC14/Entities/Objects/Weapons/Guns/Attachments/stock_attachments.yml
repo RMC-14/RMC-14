@@ -142,7 +142,7 @@
   - type: Tag
     tags:
     - RMCAttachmentStock
-    - RMCAttachmentMOU53Stock
+    - RMCAttachmentType23Stock
   - type: AttachableWeaponMeleeMods
     modifiers:
     - bonusDamage:
@@ -163,6 +163,26 @@
       accuracyAddMult: -0.05
       recoilFlat: -1
       scatterFlat: -2
+
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentType71Stock
+  name: Type 71 Stock
+  description: This isn't supposed to be separated from the gun, how'd this happen?
+  components:
+  - type: Sprite
+    state: type71_stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentType71Stock
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 15
 
 - type: entity
   parent: RMCStockAttachmentBase
@@ -926,3 +946,6 @@
 
 - type: Tag
   id: RMCAttachmentType23Stock
+
+- type: Tag
+  id: RMCAttachmentType71Stock

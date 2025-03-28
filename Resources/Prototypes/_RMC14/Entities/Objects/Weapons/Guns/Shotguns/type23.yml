@@ -13,6 +13,8 @@
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/type23.rsi
   - type: Gun
     shotsPerBurst: 1
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_small.ogg
   - type: ShootUseDelay
   - type: RMCSelectiveFire
     baseFireModes:
@@ -68,7 +70,7 @@
     offsets:
       rmc-aslot-barrel: 0.81, 0.06
       rmc-aslot-rail: -0.07, 0.125
-      rmc-aslot-stock: -0.594, -0.066
+      rmc-aslot-stock: -0.5, 0.06
       rmc-aslot-underbarrel: 0.4, -0.28
   - type: ItemCamouflage
     camouflageVariations: {}
