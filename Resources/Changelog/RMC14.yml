@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed Bodybags and Stasisbags letting you perform some actions by having
-      them down you on enter (you still don't your drop held items)
-    type: Fix
-  id: 1001
-  time: '2024-11-22T00:13:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4879
 - author: DummeHytteOst
   changes:
   - message: Xenos are now more tech illiterate.
@@ -5220,5 +5212,13 @@
   id: 1503
   time: '2025-03-28T05:07:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5953
+- author: Tyzemol
+  changes:
+  - message: Fixed hive weed sources (hive cluster/core) not spreading weeds onto
+      semi-weedable tiles directly.
+    type: Fix
+  id: 1504
+  time: '2025-03-28T05:10:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5914
 Name: RMC14
 Order: -1
