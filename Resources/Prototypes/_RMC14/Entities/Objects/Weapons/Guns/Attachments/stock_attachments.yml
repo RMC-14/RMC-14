@@ -131,41 +131,6 @@
 
 - type: entity
   parent: RMCStockAttachmentBase
-  id: RMCAttachmentType23Stock
-  name: Type 23 standard stock
-  description: A stamped wooden stock designed to absorb the ridiculous kick the 8 Gauge shotgun causes when fired. Not recommended to remove.
-  components:
-  - type: Sprite
-    state: type23_stock
-  - type: AttachableVisuals
-    suffix: ""
-  - type: Tag
-    tags:
-    - RMCAttachmentStock
-    - RMCAttachmentMOU53Stock
-  - type: AttachableWeaponMeleeMods
-    modifiers:
-    - bonusDamage:
-        types:
-          Blunt: 10
-  - type: AttachableWieldDelayMods
-    modifiers:
-      - delay: 0.3
-  - type: AttachableWeaponRangedMods
-    modifiers:
-    - conditions:
-        wieldedOnly: true
-      accuracyAddMult: 0.2
-      recoilFlat: -2
-      scatterFlat: -6
-    - conditions:
-        unwieldedOnly: true
-      accuracyAddMult: -0.05
-      recoilFlat: -1
-      scatterFlat: -2
-
-- type: entity
-  parent: RMCStockAttachmentBase
   id: RMCAttachmentXM51Stock # TODO RMC14 burst
   name: XM51 stock
   description: A specialized stock designed for XM51 breaching shotguns. Helps the user absorb the recoil of the weapon while also reducing scatter. Integrated mechanisms inside the stock allow use of a devastating two-shot burst. This comes at a cost of the gun becoming too unwieldy to holster, worse handling and mobility.
@@ -221,23 +186,6 @@
   components:
   - type: Sprite
     state: db-stock
-  - type: AttachableVisuals
-    suffix: ""
-  - type: Tag
-    tags:
-    - RMCAttachmentStock
-    - RMCAttachmentDoubleBarrelShotgunStock
-  - type: AttachableWieldDelayMods
-    modifiers: []
-
-- type: entity
-  parent: RMCStockAttachmentBase
-  id: RMCAttachmentHJRA12Back
-  name: HJRA12 Breach
-  description: Unremovable HJRA12 Breach
-  components:
-  - type: Sprite
-    state: hjra_breech
   - type: AttachableVisuals
     suffix: ""
   - type: Tag
@@ -897,9 +845,3 @@
 
 - type: Tag
   id: RMCAttachmentM54C2StockCollapsible
-
-- type: Tag
-  id: RMCAttachmentHJRA12Back
-
-- type: Tag
-  id: RMCAttachmentType23Stock
