@@ -39,7 +39,6 @@ public sealed class ItemCamouflageVisualizerSystem : VisualizerSystem<ItemCamouf
                 {
                     camoComp.Colors.TryGetValue(camo, out var camoColor);
                     {
-                        LogManager.RootSawmill.Log(LogLevel.Info, "Layers");
                         var newLayer = new PrototypeLayerData();
                         foreach (var (state, layer) in args.Layers)
                         {
