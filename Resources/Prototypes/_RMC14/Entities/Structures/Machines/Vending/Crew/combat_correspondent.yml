@@ -24,7 +24,7 @@
       - id: RMCCameraBroadcasting
         name: Press Broadcasting Camera
         recommended: true
-    #- name: Civilian Equipment
+    #- name: Civilian Equipment TODO - Some way to ensure only the civilian correspondent can buy this
     #  takeAll: CMStandard
     #  entries:
     #  - id: PortableFaxMachine
