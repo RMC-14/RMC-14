@@ -1,16 +1,6 @@
 ﻿Entries:
 - author: DummeHytteOst
   changes:
-  - message: Xenos are now more tech illiterate.
-    type: Tweak
-  - message: Fixed Xenos being able to use security cameras, the all-in-one grinder,
-      and the booze dispenser.
-    type: Fix
-  id: 1002
-  time: '2024-11-22T00:14:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4881
-- author: DummeHytteOst
-  changes:
   - message: Fixed Xenos not being able to devour standing victims that aren't moving.
     type: Fix
   id: 1003
@@ -5220,5 +5210,13 @@
   id: 1504
   time: '2025-03-28T05:10:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5914
+- author: Whisper
+  changes:
+  - message: Intelligence Officers and Senior Enlisted Advisors can now take both
+      armor and cosmetic items separately, no longer blocking taking the other.
+    type: Tweak
+  id: 1505
+  time: '2025-03-28T07:23:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5960
 Name: RMC14
 Order: -1
