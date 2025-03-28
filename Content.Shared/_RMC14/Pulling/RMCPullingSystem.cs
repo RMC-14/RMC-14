@@ -382,6 +382,9 @@ public sealed class RMCPullingSystem : EntitySystem
 
     public void PlayPullEffect(EntityUid puller, EntityUid pulled)
     {
+        if(!_timing.IsFirstTimePredicted)
+            return;
+
         var userXform = Transform(puller);
         var targetPos = _transform.GetWorldPosition(pulled);
         var localPos = Vector2.Transform(targetPos, _transform.GetInvWorldMatrix(userXform));
@@ -390,8 +393,7 @@ public sealed class RMCPullingSystem : EntitySystem
         _melee.DoLunge(puller, puller, Angle.Zero, localPos, null);
         _audio.PlayPredicted(_pullSound, pulled, puller);
 
-        if (_net.IsServer)
-            SpawnAttachedTo(PullEffect, pulled.ToCoordinates());
+        SpawnAttachedTo(PullEffect, pulled.ToCoordinates());
     }
 
     public override void Update(float frameTime)
