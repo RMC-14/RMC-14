@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Colorblind friendly mode (in Escape > Options > Accessibility) now changes
-      the color of Almayer radio messages from gray to green.
-    type: Add
-  id: 990
-  time: '2024-11-18T06:59:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4847
 - author: Vermidia
   changes:
   - message: Fixed being able to put anything back into MREs
@@ -5224,5 +5216,12 @@
   id: 1492
   time: '2025-03-28T04:40:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5996
+- author: Vermidia
+  changes:
+  - message: Fixed Vanguard shield starting to decay when taking 5 or less damage.
+    type: Fix
+  id: 1493
+  time: '2025-03-28T04:41:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5988
 Name: RMC14
 Order: -1
