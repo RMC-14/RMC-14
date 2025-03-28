@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Xenos can no longer see through containers during hijack.
-    type: Tweak
-  - message: Marines in lockers are now considered as escaped and no longer count
-      towards the xeno major condition.
-    type: Tweak
-  id: 984
-  time: '2024-11-16T01:33:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4843
 - author: Vermidia
   changes:
   - message: Fixed dead xenos counting towards xeno pop
@@ -5255,5 +5245,12 @@
   id: 1486
   time: '2025-03-28T03:26:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5995
+- author: OmerF-afk
+  changes:
+  - message: Added multiple props for telecommunications and ARES AI Core
+    type: Add
+  id: 1487
+  time: '2025-03-28T03:29:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6001
 Name: RMC14
 Order: -1
