@@ -330,4 +330,8 @@
     pullerWhitelist:
       components:
       - Xeno # TODO RMC14 not allied xenos
+  - type: IgnoreInteractionRange
+    whitelist:
+      components:
+      - OverwatchConsole
 
