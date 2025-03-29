@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/800f3950414b25174f1e81278dfe1cde4fbbf281/icons/obj/items/organs.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "brain1"
+    },
+    {
+      "name": "brain2"
+    },
+    {
+      "name": "xenobrain"
+    },
+    {
+      "name": "innards"
+    },
+    {
+      "name": "roro core"
+    },
+    {
+      "name": "heart-off"
+    },
+    {
+      "name": "heart-on",
+      "delays": [
+        [
+          0.6,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "appendix"
+    },
+    {
+      "name": "appendixinflamed"
+    },
+    {
+      "name": "lungs"
+    },
+    {
+      "name": "kidneys"
+    },
+    {
+      "name": "eyes"
+    },
+    {
+      "name": "liver"
+    },
+    {
+      "name": "heart-prosthetic"
+    },
+    {
+      "name": "brain-prosthetic"
+    },
+    {
+      "name": "lungs-prosthetic"
+    },
+    {
+      "name": "kidneys-prosthetic"
+    },
+    {
+      "name": "eyes-prosthetic"
+    },
+    {
+      "name": "liver-prosthetic"
+    },
+    {
+      "name": "heart_t3"
+    },
+    {
+      "name": "heart_t2"
+    },
+    {
+      "name": "heart_t1"
+    }
+  ]
+}

@@ -1,0 +1,310 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/2371a900cf89fd40a01610445305d37c6ebcfed7/icons/mob/humans/species/monkeys/monkey.dmi, https://github.com/cmss13-devs/cmss13/blob/2371a900cf89fd40a01610445305d37c6ebcfed7/icons/mob/humans/species/monkeys/r_monkey.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "monkey1",
+      "directions": 4
+    },
+    {
+      "name": "handcuff1",
+      "directions": 4
+    },
+    {
+      "name": "gas_mask",
+      "directions": 4
+    },
+    {
+      "name": "b_mask"
+    },
+    {
+      "name": "m_mask"
+    },
+    {
+      "name": "s_mask"
+    },
+    {
+      "name": "muzzle"
+    },
+    {
+      "name": "muggles1"
+    },
+    {
+      "name": "mrsmuggles1"
+    },
+    {
+      "name": "rathen1"
+    },
+    {
+      "name": "gas_alt",
+      "directions": 4
+    },
+    {
+      "name": "clown",
+      "directions": 4
+    },
+    {
+      "name": "mime",
+      "directions": 4
+    },
+    {
+      "name": "swat",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "cigon",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "cigoff",
+      "directions": 4
+    },
+    {
+      "name": "cigaron",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "cigaroff",
+      "directions": 4
+    },
+    {
+      "name": "owl",
+      "directions": 4
+    },
+    {
+      "name": "medical",
+      "directions": 4
+    },
+    {
+      "name": "facehugger"
+    },
+    {
+      "name": "facehugger_dead"
+    },
+    {
+      "name": "plaguedoctor",
+      "directions": 4
+    },
+    {
+      "name": "s-ninja",
+      "directions": 4
+    },
+    {
+      "name": "horsehead",
+      "directions": 4
+    },
+    {
+      "name": "death",
+      "directions": 4
+    },
+    {
+      "name": "fake-moustache",
+      "directions": 4
+    },
+    {
+      "name": "sexyclown",
+      "directions": 4
+    },
+    {
+      "name": "sexymime",
+      "directions": 4
+    },
+    {
+      "name": "cobpipeon",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "balaclava",
+      "directions": 4
+    },
+    {
+      "name": "luchador",
+      "directions": 4
+    },
+    {
+      "name": "luchag",
+      "directions": 4
+    },
+    {
+      "name": "luchar",
+      "directions": 4
+    },
+    {
+      "name": "tajkey1",
+      "directions": 4
+    },
+    {
+      "name": "stokkey1",
+      "directions": 4
+    },
+    {
+      "name": "skrellkey1",
+      "directions": 4
+    },
+    {
+      "name": "punpun1",
+      "directions": 4
+    },
+    {
+      "name": "yirenkey1",
+      "directions": 4
+    },
+    {
+      "name": "ceekay1",
+      "directions": 4
+    },
+    {
+      "name": "preview",
+      "directions": 4
+    }
+  ]
+}
