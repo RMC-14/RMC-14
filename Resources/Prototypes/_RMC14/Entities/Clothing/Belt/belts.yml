@@ -1123,3 +1123,13 @@
     - id: RMCMagazinePistolD50WinterWyvernHIAP
       amount: 2
     - id: RMCWeaponPistolCOD50WinterWyvern
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCM17BeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleM16
+      amount: 5
