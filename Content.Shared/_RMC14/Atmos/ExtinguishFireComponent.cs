@@ -12,4 +12,7 @@ public sealed partial class ExtinguishFireComponent : Component
 
     [DataField, AutoNetworkedField]
     public CollisionGroup Collision = CollisionGroup.MobLayer | CollisionGroup.MobMask;
+
+    [DataField, AutoNetworkedField]
+    public float? ExtinguishingPower;
 }
