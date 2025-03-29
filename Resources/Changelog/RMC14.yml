@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Scouts now uncloak when they get infected by a parasite.
-    type: Tweak
-  - message: Fix ghillie suit cloak breaking when you press the walk button.
-    type: Fix
-  id: 1004
-  time: '2024-11-22T00:18:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4877
 - author: Rainbeon
   changes:
   - message: Added the Assisted Reload mechanic. You can now perform an assisted reload
@@ -5218,5 +5209,15 @@
   id: 1506
   time: '2025-03-28T10:08:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5842
+- author: Vermidia
+  changes:
+  - message: Fixed resin traps being placeable under dead bodies
+    type: Fix
+  - message: Fixed dead infected hosts not being draggable if they're been infected
+      for awhile (stage 2 or higher)
+    type: Fix
+  id: 1507
+  time: '2025-03-29T01:55:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5989
 Name: RMC14
 Order: -1
