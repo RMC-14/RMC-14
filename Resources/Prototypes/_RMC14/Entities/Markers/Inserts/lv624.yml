@@ -24,10 +24,10 @@
   components:
   - type: MapInsert
     variations:
+    - spawn: "/Maps/_RMC14/Inserts/LV624/gym_alternate.yml"
+      probability: 0.30
     - spawn: "/Maps/_RMC14/Inserts/LV624/gym_pool.yml"
       probability: 0.20
-    - spawn: "/Maps/_RMC14/Inserts/LV624/armory_alternate.yml"
-      probability: 0.30
     clearEntities: true
     clearDecals: true
 
