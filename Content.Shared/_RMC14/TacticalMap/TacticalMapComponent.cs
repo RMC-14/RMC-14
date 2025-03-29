@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.TacticalMap;
@@ -20,7 +20,13 @@ public sealed partial class TacticalMapComponent : Component
     public Dictionary<int, TacticalMapBlip> XenoBlips = new();
 
     [DataField]
+    public Dictionary<int, TacticalMapBlip> XenoStructureBlips = new();
+
+    [DataField]
     public Dictionary<int, TacticalMapBlip> LastUpdateXenoBlips = new();
+
+    [DataField]
+    public Dictionary<int, TacticalMapBlip> LastUpdateXenoStructureBlips = new();
 
     [DataField]
     public List<TacticalMapLine> MarineLines = new();

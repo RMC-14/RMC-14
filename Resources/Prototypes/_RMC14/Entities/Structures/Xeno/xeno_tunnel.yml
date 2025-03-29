@@ -18,7 +18,7 @@
   - type: DestroyedByExplosionType
     explosion: RMCOBXenoTunnel
   - type: XenoTunnel
-  - type: XenoMapTracked
+  - type: XenoStructureMapTracked
   - type: TacticalMapTracked
   - type: TacticalMapIcon
     icon:

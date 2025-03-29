@@ -74,7 +74,7 @@
   - type: EvolutionBonus
   - type: WarpPoint
     location: hive core
-  - type: XenoMapTracked
+  - type: XenoStructureMapTracked
   - type: TacticalMapTracked
   - type: TacticalMapIcon
     icon:
