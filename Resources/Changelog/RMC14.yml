@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Irrlicht
-  changes:
-  - message: Adjusted Avali Front & Back Sprite to make wings look slightly more natural
-    type: Tweak
-  id: 1007
-  time: '2024-11-22T00:33:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4768
 - author: crystalHex
   changes:
   - message: The XM51 rig can now be equipped in the suit storage slot of marine armor.
@@ -5223,5 +5216,12 @@
   id: 1509
   time: '2025-03-29T08:10:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5944
+- author: SigmaTheDragon
+  changes:
+  - message: Updated 4 flashlight grip sprites and 2 magnetic harness sprites.
+    type: Tweak
+  id: 1510
+  time: '2025-03-29T08:11:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6008
 Name: RMC14
 Order: -1
