@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Xenonids.Animation;
@@ -94,6 +95,7 @@ public sealed class XenoChargeSystem : EntitySystem
         xeno.Comp.Charge = diff;
         Dirty(xeno);
 
+        EnsureComp<RMCObstacleSlamImmuneComponent>(xeno);
         _throwing.TryThrow(xeno, diff, xeno.Comp.Strength, animated: false);
     }
 

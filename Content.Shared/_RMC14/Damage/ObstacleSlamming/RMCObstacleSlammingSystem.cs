@@ -31,12 +31,15 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
 
     private static readonly ProtoId<DamageTypePrototype> SlamDamageType = "Blunt";
+    private readonly HashSet<EntityUid> _queuedImmuneEntities = new();
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<RMCObstacleSlammingComponent, ThrowDoHitEvent>(HandleCollide);
+
+        SubscribeLocalEvent<RMCObstacleSlamImmuneComponent, MapInitEvent>(OnImmuneMapInit);
     }
 
     private void HandleCollide(Entity<RMCObstacleSlammingComponent> ent, ref ThrowDoHitEvent args)
@@ -48,6 +51,9 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
             return;
 
         if (user != ent.Owner)
+            return;
+
+        if (HasComp<RMCObstacleSlamImmuneComponent>(user))
             return;
 
         if (!TryComp<PhysicsComponent>(user, out var body) || !TryComp<PhysicsComponent>(obstacle, out var bodyObstacle))
@@ -103,5 +109,33 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
         _popup.PopupPredicted(selfMessage, othersMessage, user, user, PopupType.MediumCaution);
 
         args.Handled = true;
+    }
+
+    private void OnImmuneMapInit(Entity<RMCObstacleSlamImmuneComponent> ent, ref MapInitEvent args)
+    {
+        ent.Comp.ExpireAt = _timing.CurTime + ent.Comp.ExpireIn;
+        Dirty(ent);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        _queuedImmuneEntities.Clear();
+
+        var query = EntityQueryEnumerator<RMCObstacleSlamImmuneComponent>();
+
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (comp.ExpireAt != null && comp.ExpireAt.Value > _timing.CurTime)
+                continue;
+
+            _queuedImmuneEntities.Add(uid);
+        }
+
+        foreach (var queued in _queuedImmuneEntities)
+        {
+            RemComp<RMCObstacleSlamImmuneComponent>(queued);
+        }
     }
 }
