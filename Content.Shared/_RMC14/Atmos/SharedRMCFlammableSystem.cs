@@ -408,39 +408,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         foreach (var cardinal in _rmcMap.CardinalDirections)
         {
             var target = coordinates.Offset(cardinal);
-            if (!_rmcMap.TryGetTileDef(target, out var tile) ||
-                tile.ID == ContentTileDefinition.SpaceID)
-            {
-                continue;
-            }
-
-            if (_rmcMap.HasAnchoredEntityEnumerator<TileFireComponent>(target, out var oldTileFire))
-            {
-                if (spawn == oldTileFire.Comp.Id)
-                    continue;
-
-                QueueDel(oldTileFire);
-            }
-
-            var nextRange = range - 1;
-            var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(target);
-            while (anchored.MoveNext(out var uid))
-            {
-                if (_blockTileFireQuery.HasComp(uid))
-                {
-                    nextRange = 0;
-                    break;
-                }
-
-                if (_tag.HasAnyTag(uid, StructureTag, WallTag) &&
-                    !_doorQuery.HasComp(uid))
-                {
-                    nextRange = 0;
-                    break;
-                }
-            }
-
-            SpawnFireChain(spawn, chain, target, intensity, duration);
+            var nextRange = SpawnFire(target, spawn, chain, range, intensity, duration);
             if (nextRange == 0)
                 continue;
 
@@ -456,6 +424,44 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     {
         var chain = _onCollide.SpawnChain();
         SpawnFires(spawn, center, range, chain, intensity, duration);
+    }
+
+    public int SpawnFire(EntityCoordinates target, EntProtoId spawn, EntityUid chain, int range, int? intensity, int? duration)
+    {
+        if (!_rmcMap.TryGetTileDef(target, out var tile) ||
+            tile.ID == ContentTileDefinition.SpaceID)
+        {
+            return range;
+        }
+
+        if (_rmcMap.HasAnchoredEntityEnumerator<TileFireComponent>(target, out var oldTileFire))
+        {
+            if (spawn == oldTileFire.Comp.Id)
+                return range;
+
+            QueueDel(oldTileFire);
+        }
+
+        var nextRange = range - 1;
+        var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(target);
+        while (anchored.MoveNext(out var uid))
+        {
+            if (_blockTileFireQuery.HasComp(uid))
+            {
+                nextRange = 0;
+                break;
+            }
+
+            if (_tag.HasAnyTag(uid, StructureTag, WallTag) &&
+                !_doorQuery.HasComp(uid))
+            {
+                nextRange = 0;
+                break;
+            }
+        }
+
+        SpawnFireChain(spawn, chain, target, intensity, duration);
+        return nextRange;
     }
 
     /// <summary>

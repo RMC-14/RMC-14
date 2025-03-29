@@ -17,4 +17,4 @@ rmc-power-loader-occupied-weapon = There's already a weapon installed there!
 rmc-power-loader-occupied-ammo = You need to unload the ammo crate inside first!
 rmc-power-loader-ammo-no-weapon = You need to install a weapon first!
 
-rmc-power-loader-occupied-utility = There's already a utility system installed there!
+rmc-power-loader-occupied = There's already something installed there!

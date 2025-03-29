@@ -28,9 +28,9 @@
     sprite: _RMC14/Structures/Machines/dropship_attachment_points.rsi
     layers:
     - state: "equip_base"
-      map: [ "enum.DropshipUtilityPointLayers.AttachedUtility"]
+      map: [ "enum.DropshipPointVisualsLayers.AttachedUtility"]
     - state: "equip_base"
-      map: [ "enum.DropshipUtilityPointLayers.AttachementBase"]
+      map: [ "enum.DropshipPointVisualsLayers.AttachmentBase"]
   - type: Icon
     sprite: _RMC14/Structures/Machines/dropship_attachment_points.rsi
     state: "equip_base"
@@ -41,7 +41,40 @@
   - type: InteractionOutline
   - type: Clickable
   - type: DropshipUtilityPoint
+  - type: DropshipPointVisuals
   - type: Appearance
   - type: Tag
     tags:
     - RMCDropshipUtilityPoint
+
+- type: entity
+  parent: CMBaseStructureCorrodible
+  id: RMCEngineAttachmentPoint
+  name: engine system attach point
+  description: A place where heavy equipment can be installed with a powerloader.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/dropship_attachments.rsi
+    layers:
+    - state: "fuel_base"
+      map: [ "enum.DropshipPointVisualsLayers.AttachedUtility"]
+    - state: "fuel_base"
+      map: [ "enum.DropshipPointVisualsLayers.AttachmentBase"]
+  - type: Icon
+    sprite: _RMC14/Objects/dropship_attachments.rsi
+    state: "fuel_base"
+  - type: Physics
+    canCollide: false
+  - type: Occluder
+    enabled: false
+  - type: InteractionOutline
+  - type: Clickable
+  - type: DropshipEnginePoint
+  - type: DropshipPointVisuals
+  - type: Appearance
+  - type: Tag
+    tags:
+    - RMCDropshipEnginePoint
+
+- type: Tag
+  id: RMCDropshipEnginePoint

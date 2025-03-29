@@ -9,6 +9,8 @@ using Content.Shared._RMC14.AlertLevel;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Dropship.AttachmentPoint;
+using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
@@ -24,6 +26,7 @@ using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Content.Shared.Timing;
 using Robust.Server.Audio;
+using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.Physics.Components;
@@ -37,6 +40,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly DoorSystem _door = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
@@ -245,7 +249,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
             {
                 var hasSkill = user != null && _skills.HasSkill(user.Value, computer.Comp.Skill, computer.Comp.MultiplierSkillLevel);
                 var rechargeMultiplier = hasSkill ? computer.Comp.SkillRechargeMultiplier : 1f;
-                if (dropship.Destination == destination)
+                var flyBy = dropship.Destination == destination;
+                if (flyBy)
                 {
                     hyperspaceTime = (float) _flyByTime.TotalSeconds;
                     if (hasSkill)
@@ -259,6 +264,29 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 }
 
                 dropship.RechargeTime = TimeSpan.FromSeconds(_config.GetCVar(CCVars.FTLCooldown) * rechargeMultiplier);
+
+                foreach (var point in dropship.AttachmentPoints)
+                {
+                    if (TryComp(point, out DropshipEnginePointComponent? engine) &&
+                        _container.TryGetContainer(point, engine.ContainerId, out var container))
+                    {
+                        foreach (var contained in container.ContainedEntities)
+                        {
+                            if (TryComp(contained, out DropshipFlightMultiplierComponent? flightMult))
+                            {
+                                if (flyBy)
+                                    hyperspaceTime /= flightMult.Multiplier;
+                                else
+                                    hyperspaceTime *= flightMult.Multiplier;
+                            }
+
+                            if (TryComp(contained, out DropshipRechargeMultiplierComponent? rechargeMult))
+                                dropship.RechargeTime *= rechargeMult.Multiplier;
+                        }
+                    }
+                }
+
+                hyperspaceTime += _config.GetCVar(CCVars.FTLArrivalTime);
             }
         }
 
