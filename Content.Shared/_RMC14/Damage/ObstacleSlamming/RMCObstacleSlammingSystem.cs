@@ -47,6 +47,9 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
         if (args.Handled)
             return;
 
+        if (user != ent.Owner)
+            return;
+
         if (!TryComp<PhysicsComponent>(user, out var body) || !TryComp<PhysicsComponent>(obstacle, out var bodyObstacle))
             return;
 
