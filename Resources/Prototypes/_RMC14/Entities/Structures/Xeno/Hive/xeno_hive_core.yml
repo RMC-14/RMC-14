@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   id: HiveCoreXeno
   parent: BaseHiveStructure
   name: hive core
@@ -57,6 +57,7 @@
     spawns: XenoHiveWeedsCore
     level: 3
     blockOtherWeeds: true
+    spreadsOnSemiWeedable: true
   - type: GhostRole
     name: roles-lesser-drone-name
     description: roles-lesser-drone-description
@@ -69,7 +70,7 @@
   - type: HiveConstructionLimited
     id: HiveCoreXeno
   - type: RoofingEntity
-    range: 10
+    range: 11.848 #rounded to 3 decimals
   - type: EvolutionBonus
   - type: WarpPoint
     location: hive core
@@ -143,7 +144,7 @@
   - type: HivePylon
   - type: XenoWeedsSpreading
   - type: RoofingEntity
-    range: 7
+    range: 8.463 #rounded to 3 decimals
     canOrbitalBombard: true
   - type: XenoWeeds
     range: 5

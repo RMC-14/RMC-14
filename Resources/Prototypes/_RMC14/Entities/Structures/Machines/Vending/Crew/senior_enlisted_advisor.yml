@@ -47,12 +47,23 @@
       - id: RMCPouchMedkit
       - id: RMCPouchPistol
       - id: RMCPouchSling
+    - name: Hat
+      choices: { CMHat: 1 }
+      entries:
+      - id: CMHeadCapDrill
+    - name: Helmet
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: ArmorHelmetM10
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
       - id: CMArmorM3VLBallistics
       - id: RMCArmorM3LightPadded
       - id: RMCArmorM3MediumVariants
+    - name: Jacket
+      choices: { CMCoat: 1 }
+      entries:
       - id: RMCCoatService
     - name: Eyewear
       choices: { CMEyewear: 1 }
@@ -71,11 +82,6 @@
       - id: CMWebbingHolster
       - id: CMWebbing
       - id: CMWebbingPouch
-    - name: Headwear
-      choices: { CMHeadwear: 1 }
-      entries:
-      - id: CMHeadCapDrill
-      - id: ArmorHelmetM10
 
 - type: entity
   parent: ColMarTechBase

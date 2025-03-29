@@ -326,7 +326,7 @@
   parent: CMArmorM2MP
   id: RMCArmorM3CO
   name: M3 pattern commanding officer armor
-  description: A robust, well-polished suit of armor for the Commanding Officer. Custom-made to fit its owner with special straps to operate a smartgun. Show those Marines who's really in charge.
+  description: A robust, well-polished suit of armor for the Commanding Officer. Custom-made to fit its owner with special straps to operate a smart gun. Show those Marines who's really in charge.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co.rsi

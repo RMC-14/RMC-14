@@ -290,4 +290,5 @@
     superSlowMultiplier: 0.33
   - type: RMCHandEmotes
   - type: RMCBuckleDrawDepth
+  - type: RMCObstacleSlamming
   - type: AllowPullWhileDeadAndInfected

@@ -44,6 +44,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
 
     protected override void Open()
     {
+        base.Open();
         if (Window != null)
             return;
 
