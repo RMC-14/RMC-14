@@ -1243,3 +1243,9 @@
     state: spike_light-foot__fluff-usta
   - type: PatronFigurine
     id: 0da8eb58-a13d-4c56-b038-edb161e1c375
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/m5_shoot.ogg
+      params:
+        volume: 5
+        maxDistance: 1
