@@ -119,6 +119,7 @@
   name: colonial militia hauberk
   description: The hauberk of a colonist militia member, created from boiled leather and some modern armored plates. While not the most powerful form of armor, and primitive compared to most modern suits of armor, it gives the wearer almost perfect mobility, which suits the needs of the local colonists. It is also quick to don, easy to hide, and cheap to produce in large workshops.
   components:
+  - type: AllowSuitStorage
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/rebel.rsi
   - type: Clothing
@@ -188,6 +189,7 @@
   parent: RMCCoatMilitia
   id: RMCCoatMilitiaHarness
   name: colonial militia harness
+  suffix: smart gun harness
   description: The hauberk of a colonist militia member, created from boiled leather and some modern armored plates. While not the most powerful form of armor, and primitive compared to most modern suits of armor, it gives the wearer almost perfect mobility, which suits the needs of the local colonists. It is also quick to don, easy to hide, and cheap to produce in large workshops. This one has straps interweaved with the plates, that allow the user to fire a captured smart gun, if a bit uncomfortably.
   components:
   - type: SmartGunArmor
