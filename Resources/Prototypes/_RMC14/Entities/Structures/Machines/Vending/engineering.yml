@@ -48,21 +48,23 @@
       #Meson scanner
       #Reagent scanner
       - id: CMTRayScanner
-        amount: 4
+        amount: 2
     - name: Tools
       entries:
-      - id: CMCrowbar
-        amount: 8
       - id: CMWelder
-        amount: 8
-      - id: CMWelderSmall
         amount: 4
+      - id: CMCrowbar
+        amount: 4
+      - id: CMWelderSmall
+        amount: 2
       - id: CMScrewdriver
-        amount: 8
+        amount: 4
       - id: CMWirecutter
-        amount: 8
+        amount: 4
       - id: CMWrench
-        amount: 8
+        amount: 4
+      - id: CMLightReplacer
+        amount: 4
 
 # Circuits
 - type: entity
@@ -100,7 +102,8 @@
         amount: 2
 #     - id: Air alarm
 #     - id: security camera monitor
-#     - id: television set
+      - id: RMCCircuitboardTelevision
+        amount: 4
 #     - id: station alerts
 #     - id: arcade
 #     - id: atmospheric monitor

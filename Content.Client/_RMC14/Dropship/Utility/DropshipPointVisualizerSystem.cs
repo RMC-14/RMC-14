@@ -5,10 +5,9 @@ using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Dropship.Utility;
 
-public sealed partial class DropshipUtilityPointVisualizerSystem : VisualizerSystem<DropshipUtilityPointComponent>
+public sealed partial class DropshipPointVisualizerSystem : VisualizerSystem<DropshipPointVisualsComponent>
 {
-    [Dependency] private readonly AppearanceSystem _appearance = default!;
-    protected override void OnAppearanceChange(EntityUid uid, DropshipUtilityPointComponent component, ref AppearanceChangeEvent args)
+    protected override void OnAppearanceChange(EntityUid uid, DropshipPointVisualsComponent component, ref AppearanceChangeEvent args)
     {
         base.OnAppearanceChange(uid, component, ref args);
         if (args.Sprite is not { } spriteComp)
@@ -20,20 +19,19 @@ public sealed partial class DropshipUtilityPointVisualizerSystem : VisualizerSys
             return;
         }
 
-        if (!spriteComp.LayerMapTryGet(DropshipUtilityPointLayers.AttachementBase, out var attachementBase))
-        {
+        if (!spriteComp.LayerMapTryGet(DropshipPointVisualsLayers.AttachmentBase, out var attachmentBase))
             return;
-        }
-        if (!spriteComp.LayerMapTryGet(DropshipUtilityPointLayers.AttachedUtility, out var attachedUtility))
+
+        if (!spriteComp.LayerMapTryGet(DropshipPointVisualsLayers.AttachedUtility, out var attachedUtility))
         {
-            spriteComp.LayerSetVisible(attachementBase, true);
+            spriteComp.LayerSetVisible(attachmentBase, true);
             //spriteComp.LayerSetVisible(attachedUtility, false);
             return;
         }
 
         if (string.IsNullOrWhiteSpace(sprite) || string.IsNullOrWhiteSpace(state))
         {
-            spriteComp.LayerSetVisible(attachementBase, true);
+            spriteComp.LayerSetVisible(attachmentBase, true);
             spriteComp.LayerSetVisible(attachedUtility, false);
             return;
         }
@@ -42,7 +40,7 @@ public sealed partial class DropshipUtilityPointVisualizerSystem : VisualizerSys
 
         //if (Enum.TryParse<SpriteComponent.DirectionOffset>(component.DirOffset, true, out var dir))
         //spriteComp.LayerSetDirOffset(layer, dir);
-        spriteComp.LayerSetVisible(attachementBase, false);
+        spriteComp.LayerSetVisible(attachmentBase, false);
         spriteComp.LayerSetVisible(attachedUtility, true);
     }
 }

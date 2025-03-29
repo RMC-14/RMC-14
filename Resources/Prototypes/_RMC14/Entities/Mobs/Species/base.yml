@@ -323,3 +323,15 @@
   - type: RMCBuckleDrawDepth
   - type: RMCObstacleSlamming
   - type: AllowPullWhileDeadAndInfected
+  - type: DamageOnPulledWhileCrit
+    damage:
+      types:
+        Asphyxiation: 1.6
+    pullerWhitelist:
+      components:
+      - Xeno # TODO RMC14 not allied xenos
+  - type: IgnoreInteractionRange
+    whitelist:
+      components:
+      - OverwatchConsole
+

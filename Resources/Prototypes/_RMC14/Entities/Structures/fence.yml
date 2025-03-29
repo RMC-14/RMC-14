@@ -87,6 +87,8 @@
   - type: Construction
     graph: CMFence
     node: rmcFenceBroken
+  - type: Tag
+    tags: []
 
 - type: entity
   parent: CMFence

@@ -31,6 +31,7 @@
     - Grenade
     - LauncherCompatibleGrenade
     - RMCAirburstGrenade
+    - RMCGrenadeAGMF
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
@@ -51,6 +52,12 @@
   - type: CartridgeAmmo
     deleteOnSpawn: true
     proto: RMCAirBurstProjectileIncendiary
+  - type: Tag
+    tags:
+    - Grenade
+    - LauncherCompatibleGrenade
+    - RMCAirburstGrenade
+    - RMCGrenadeAGMI
 
 - type: entity
   parent: RMC40MMGrenadeM74AGMF
@@ -169,7 +176,7 @@
 - type: entity
   parent: RMCBaseAirBurstProjectile
   id: RMCAirBurstProjectileIncendiary
-  name: M74 AGM-F 40mm Grenade
+  name: M74 AGM-I 40mm Grenade
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -439,3 +446,9 @@
         mask:
         - Impassable
         - BulletImpassable
+
+- type: Tag
+  id: RMCGrenadeAGMF
+
+- type: Tag
+  id: RMCGrenadeAGMI
