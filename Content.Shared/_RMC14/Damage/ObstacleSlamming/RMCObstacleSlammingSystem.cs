@@ -82,7 +82,7 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
         _physics.SetLinearVelocity(ent, Vector2.Zero);
         _physics.SetAngularVelocity(ent, 0f);
 
-        var vec = _transform.GetMoverCoordinates(user).Position - _transform.GetMoverCoordinates(args.OtherEntity).Position;
+        var vec = _transform.GetMoverCoordinates(user).Position - _transform.GetMoverCoordinates(obstacle).Position;
         if (vec.Length() != 0)
         {
             var direction = vec.Normalized() * ent.Comp.KnockbackPower;
@@ -90,13 +90,13 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
         }
 
         if (_timing.IsFirstTimePredicted)
-            _audio.PlayPvs(ent.Comp.SoundHit, user);
+            _audio.PlayPvs(ent.Comp.SoundHit, obstacle);
 
         if (_net.IsServer)
             SpawnAttachedTo(ent.Comp.HitEffect, user.ToCoordinates());
 
-        var selfMessage = Loc.GetString("rmc-obstacle-slam-self", ("ent", user), ("object", args.OtherEntity));
-        var othersMessage = Loc.GetString("rmc-obstacle-slam-others", ("ent", user), ("object", args.OtherEntity));
+        var selfMessage = Loc.GetString("rmc-obstacle-slam-self", ("ent", user), ("object", obstacle));
+        var othersMessage = Loc.GetString("rmc-obstacle-slam-others", ("ent", user), ("object", obstacle));
         _popup.PopupPredicted(selfMessage, othersMessage, user, user, PopupType.MediumCaution);
 
         args.Handled = true;
