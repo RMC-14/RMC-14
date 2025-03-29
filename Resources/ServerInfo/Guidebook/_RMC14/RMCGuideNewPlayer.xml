@@ -23,6 +23,10 @@
   - [color=yellow][bold][keybind="RMCCycleFireMode"][/bold][/color]: Cycle fire mode.
   - [color=yellow][bold][keybind="CMHolsterPrimary"][/bold][/color]: Holster primary.
   - [color=yellow][bold][keybind="CMHolsterSecondary"][/bold][/color]: Holster secondary.
+  - [color=yellow][bold][keybind="RMCPickUpDroppedItems"][/bold][/color]: Pick up last dropped item.
+  - [color=yellow][bold][keybind="RMCInteractWithOtherHand"][/bold][/color]: Interact using inactive hand.
+  - [color=yellow][bold][keybind="RMCActivateAttachableRail"][/bold][/color]: Activate rail attachment (Scopes).
+  - [color=yellow][bold][keybind="RMCActivateAttachableStock"][/bold][/color]: Activate underbarrel attachment.
 
   ## Movement
   You can move around the game world by using [color=yellow][bold][keybind="MoveUp"][keybind="MoveLeft"][keybind="MoveDown"][keybind="MoveRight"][/bold][/color].
