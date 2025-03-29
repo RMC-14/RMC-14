@@ -1,6 +1,7 @@
 using Content.Server.Administration;
 using Content.Shared._RMC14.Examine.Pose;
-using Content.Shared.Actions;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Database;
 using Content.Shared.Verbs;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
@@ -9,6 +10,7 @@ namespace Content.Server._RMC14.Examine;
 
 public sealed class RMCSetPoseSystem : SharedRMCSetPoseSystem
 {
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly QuickDialogSystem _quickDialog = default!;
 
     public override void Initialize()
@@ -39,6 +41,7 @@ public sealed class RMCSetPoseSystem : SharedRMCSetPoseSystem
             Act = () => _quickDialog.OpenDialog(actor.PlayerSession, Loc.GetString("rmc-set-pose-title"), setPosePrompt,
             (string pose) =>
             {
+                _adminLog.Add(LogType.RMCSetPose, $"{ToPrettyString(ent)} set their pose to {pose}");
                 ent.Comp.Pose = pose;
                 Dirty(ent);
             })
