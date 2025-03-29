@@ -35,6 +35,9 @@ public sealed partial class AmmoInFlightComponent : Component
     public int ShotsLeft;
 
     [DataField, AutoNetworkedField]
+    public int ShotsPerVolley;
+
+    [DataField, AutoNetworkedField]
     public int SoundEveryShots = 3;
 
     [DataField, AutoNetworkedField]
@@ -54,6 +57,9 @@ public sealed partial class AmmoInFlightComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan SoundTravelTime = TimeSpan.FromSeconds(1.1);
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? SoundMarker;
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier? SoundGround;

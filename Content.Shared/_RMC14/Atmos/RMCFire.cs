@@ -18,4 +18,7 @@ public sealed partial class RMCFire
 
     [DataField]
     public int? Duration;
+
+    [DataField]
+    public int? Total;
 }

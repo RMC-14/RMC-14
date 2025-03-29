@@ -39,6 +39,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 using static Content.Shared._RMC14.Dropship.Weapon.DropshipTerminalWeaponsComponent;
 using static Content.Shared._RMC14.Dropship.Weapon.DropshipTerminalWeaponsScreen;
 
@@ -324,6 +325,21 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (args.Handled)
             return;
 
+        // TODO RMC14 make this a whitelist check, not an id check
+        if (TryComp(args.Target, out DropshipWeaponPointComponent? point) &&
+            _container.TryGetContainer(args.Target, point.WeaponContainerSlotId, out var container) &&
+            container.ContainedEntities.TryFirstOrNull(out var weapon) &&
+            ent.Comp.Weapon.Id != Prototype(weapon.Value)?.ID)
+        {
+            args.Handled = true;
+            foreach (var buckled in args.Buckled)
+            {
+                _popup.PopupClient(Loc.GetString("rmc-power-loader-wrong-weapon"), args.Target, buckled, PopupType.SmallCaution);
+            }
+
+            return;
+        }
+
         if (!TryComp<DropshipAmmoComponent>(args.Target, out var otherAmmo))
             return;
 
@@ -529,15 +545,18 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             Target = targetCoords,
             MarkerAt = time + ammo.Comp.TravelTime,
             ShotsLeft = ammo.Comp.RoundsPerShot,
+            ShotsPerVolley = ammo.Comp.ShotsPerVolley,
             Damage = ammo.Comp.Damage,
             ArmorPiercing = ammo.Comp.ArmorPiercing,
             BulletSpread = ammo.Comp.BulletSpread,
             SoundTravelTime = ammo.Comp.SoundTravelTime,
+            SoundMarker = ammo.Comp.SoundMarker,
             SoundGround = ammo.Comp.SoundGround,
             SoundImpact = ammo.Comp.SoundImpact,
             ImpactEffect = ammo.Comp.ImpactEffect,
             Explosion = ammo.Comp.Explosion,
             Fire = ammo.Comp.Fire,
+            SoundEveryShots = ammo.Comp.SoundEveryShots,
         };
 
         AddComp(inFlight, inFlightComp, true);
@@ -930,6 +949,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 flight.SpawnedMarker = true;
                 flight.Marker = Spawn(DropshipTargetMarker, flight.Target);
                 Dirty(uid, flight);
+
+                _audio.PlayPvs(flight.SoundMarker, flight.Marker.Value);
             }
 
             if (flight.MarkerAt.Add(TimeSpan.FromSeconds(1)) > time)
@@ -949,7 +970,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
             if (flight.ShotsLeft > 0)
             {
-                flight.ShotsLeft--;
+                flight.ShotsLeft -= flight.ShotsPerVolley;
                 flight.NextShot = time + flight.ShotDelay;
                 flight.SoundShotsLeft--;
                 Dirty(uid, flight);
@@ -992,11 +1013,24 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 if (flight.Fire != null)
                 {
                     var chain = _onCollide.SpawnChain();
-                    for (var x = -flight.Fire.Range; x <= flight.Fire.Range; x++)
+                    if (flight.Fire.Total is { } total)
                     {
-                        for (var y = -flight.Fire.Range; y <= flight.Fire.Range; y++)
+                        var tiles = new List<Vector2i>();
+                        for (var x = -flight.Fire.Range; x <= flight.Fire.Range; x++)
                         {
-                            var coords = flight.Target.Offset(new Vector2(x, y));
+                            for (var y = -flight.Fire.Range; y <= flight.Fire.Range; y++)
+                            {
+                                tiles.Add((x, y));
+                            }
+                        }
+
+                        for (var i = 0; i < total; i++)
+                        {
+                            if (tiles.Count == 0)
+                                break;
+
+                            var tile = _random.PickAndTake(tiles);
+                            var coords = flight.Target.Offset(tile);
                             _rmcFlammable.SpawnFire(coords,
                                 flight.Fire.Type,
                                 chain,
@@ -1004,6 +1038,23 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                                 flight.Fire.Intensity,
                                 flight.Fire.Duration
                             );
+                        }
+                    }
+                    else
+                    {
+                        for (var x = -flight.Fire.Range; x <= flight.Fire.Range; x++)
+                        {
+                            for (var y = -flight.Fire.Range; y <= flight.Fire.Range; y++)
+                            {
+                                var coords = flight.Target.Offset(new Vector2(x, y));
+                                _rmcFlammable.SpawnFire(coords,
+                                    flight.Fire.Type,
+                                    chain,
+                                    flight.Fire.Range,
+                                    flight.Fire.Intensity,
+                                    flight.Fire.Duration
+                                );
+                            }
                         }
                     }
                 }

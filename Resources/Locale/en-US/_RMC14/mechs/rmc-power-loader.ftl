@@ -10,6 +10,7 @@ rmc-power-loader-transfer-ammo = You transfer {$rounds} {$rounds ->
   [one] round
   *[other] rounds
 } to {THE($ammo)}.
+rmc-power-loader-wrong-weapon = That's the wrong kind of ammo!
 rmc-power-loader-wrong-ammo = They're different types of ammo!
 rmc-power-loader-full-ammo = {CAPITALIZE(THE($ammo))} is full!
 

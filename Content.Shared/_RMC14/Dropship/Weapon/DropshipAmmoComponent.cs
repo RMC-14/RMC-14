@@ -28,6 +28,9 @@ public sealed partial class DropshipAmmoComponent : Component
     public int RoundsPerShot = 40;
 
     [DataField, AutoNetworkedField]
+    public int ShotsPerVolley = 1;
+
+    [DataField, AutoNetworkedField]
     public DamageSpecifier? Damage;
 
     [DataField, AutoNetworkedField]
@@ -46,6 +49,9 @@ public sealed partial class DropshipAmmoComponent : Component
     public SoundSpecifier? SoundCockpit;
 
     [DataField, AutoNetworkedField]
+    public SoundSpecifier? SoundMarker;
+
+    [DataField, AutoNetworkedField]
     public SoundSpecifier? SoundGround;
 
     [DataField, AutoNetworkedField]
@@ -62,6 +68,9 @@ public sealed partial class DropshipAmmoComponent : Component
 
     [DataField, AutoNetworkedField]
     public RMCFire? Fire;
+
+    [DataField, AutoNetworkedField]
+    public int SoundEveryShots = 3;
 
     [DataField, AutoNetworkedField]
     public bool DeleteOnEmpty;

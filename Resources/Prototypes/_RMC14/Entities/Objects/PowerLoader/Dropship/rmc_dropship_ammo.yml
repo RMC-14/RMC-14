@@ -123,6 +123,7 @@
     maxRounds: 1
     roundsPerShot: 1
     targetSpread: 3 # TODO RMC14 max 6 when no longer lased
+    bulletSpread: 0
     travelTime: 6
     weapon: RMCDropshipAttachmentGuidedMissileLauncher
     soundCockpit: /Audio/_RMC14/Effects/rocketpod_fire.ogg
