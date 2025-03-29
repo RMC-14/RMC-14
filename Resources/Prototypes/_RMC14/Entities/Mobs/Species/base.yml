@@ -334,4 +334,7 @@
     whitelist:
       components:
       - OverwatchConsole
+      tags:
+      - RMCDropshipEnginePoint
+    range: 2
 
