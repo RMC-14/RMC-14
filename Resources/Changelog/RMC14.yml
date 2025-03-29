@@ -1,42 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added orbital bombardment. The cannon is loaded far west first floor,
-      and fired through the overwatch console in CIC.
-    type: Add
-  - message: Added squad transfers through the overwatch console.
-    type: Add
-  - message: Added playtime medals, which make you spawn with one depending on your
-      playtime for that role.
-    type: Add
-  - message: Added xeno ranks, which change your name depending on your playtime with
-      that caste.
-    type: Add
-  - message: Added custom xeno names, which unlock with total xeno playtime.
-    type: Add
-  - message: Added Mizuno 'Kitty' Drakonovisch figurine.
-    type: Add
-  - message: Fixed tackles not working like 13, see the Discord for an explanation.
-    type: Fix
-  - message: Possibly fix a bug that would make it so long rounds lagged for anyone
-      that heavily used the overwatch console or security cameras.
-    type: Fix
-  - message: Fixed webbing verbs not showing up instantly when right clicking an uniform.
-    type: Fix
-  id: 1014
-  time: '2024-11-22T20:52:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4904
-- author: DrSmugleaf
-  changes:
-  - message: Fixed not being able to pull stunned marines.
-    type: Fix
-  - message: Fixed the mateba belt worn sprite being giant.
-    type: Fix
-  - message: Fixed the Queen not looking like she's in Ovi.
-    type: Fix
-  id: 1015
-  time: '2024-11-22T22:50:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4911
 - author: Vermidia
   changes:
   - message: Fixed hypersleep pods stunning on exit
@@ -5195,12 +5157,22 @@
   url: https://github.com/RMC-14/RMC-14/pull/6003
 - author: stranthbackup
   changes:
-  - message: M34 Incinerator Unit no longer has a cold flame. Now you can light your smokes and paper with it!
+  - message: M34 Incinerator Unit no longer has a cold flame. Now you can light your
+      smokes and paper with it!
     type: Add
   - message: Paper now turns to ashes.
     type: Fix
   id: 1517
   time: '2025-03-29T08:28:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5959
+- author: to4no_fix
+  changes:
+  - message: Now all heads of department headsets, squad leaders, and officers significantly
+      increase the size of text in the radio, the headset of the fireteam leader also
+      increases the text, but slightly less.
+    type: Add
+  id: 1518
+  time: '2025-03-29T08:34:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5924
 Name: RMC14
 Order: -1
