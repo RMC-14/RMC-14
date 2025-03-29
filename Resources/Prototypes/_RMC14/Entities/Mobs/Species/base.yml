@@ -307,6 +307,7 @@
       - CanBeSupplyDropped
   - type: NewPlayerLabel
   - type: MarineMapTracked
+  - type: RMCSetPose
   - type: Evasion
   - type: CanBeFirePatted
   - type: FirePatter
