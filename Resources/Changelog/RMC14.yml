@@ -1,41 +1,4 @@
 ﻿Entries:
-- author: Sigil
-  changes:
-  - message: The accuracy mechanic has been implemented. Projectiles can now miss
-      creatures and pass through them without doing damage. Accuracy depends on the
-      specific projectile and the firing weapon's multiplier. The latter can be seen
-      by examining any given weapon. Accuracy decays rapidly past a certain distance.
-    type: Add
-  - message: Evasion implemented. It is subtracted from any impacting projectiles'
-      accuracy. The spec invisibility items now grant a massive bonus to evasion against
-      friendly fire. Tasers ignore FF evasion.
-    type: Add
-  - message: 'A new attachment is now publicly available: the red-dot sight. It improves
-      the accuracy multiplier of the weapon it''s attached to. The exact values can
-      be seen by examining it. Some other attachments also affect accuracy. Examine
-      them to see the effects.'
-    type: Add
-  - message: 'THIS IS A PUBLIC SERVICE ANNOUNCEMENT: THE FOCUS ORDER IS BAD. DO NOT
-      USE IT. The focus order is now available to any marines able to use orders.
-      It slightly improves the accuracy of all projectiles fired while under its effect.'
-    type: Add
-  - message: PBs have been implemented. A "PB" is a point-blank shot. You need to
-      click directly on the target creature in melee range of you to make a PB. A
-      PB always hits the target, ignoring its evasion, the shot's accuracy and any
-      creatures between the shooter and the target. If the target is prone, it takes
-      +20% damage from the PB. Note that you can't PB yourself on full-auto and will
-      instead shoot normally.
-    type: Add
-  - message: Dual-wielding weapons in the same weapon group now worsens their scatter
-      and accuracy. Dual-wielding weapons no longer affects their damage.
-    type: Tweak
-  - message: The mobility order buffs the evasion of any marines under its effect.
-    type: Tweak
-  - message: The laser sight is now available in the SG gear rack.
-    type: Fix
-  id: 1010
-  time: '2024-11-22T08:49:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4752
 - author: Vermidia
   changes:
   - message: Added Acider Runner, who can apply acid to marines on hit, and gains
@@ -5219,5 +5182,13 @@
   id: 1512
   time: '2025-03-29T08:18:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6005
+- author: to4no_fix
+  changes:
+  - message: Squad and hive leaders speech in chat bubbles is now bold and significantly
+      larger for better visibility.
+    type: Add
+  id: 1513
+  time: '2025-03-29T08:23:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5912
 Name: RMC14
 Order: -1
