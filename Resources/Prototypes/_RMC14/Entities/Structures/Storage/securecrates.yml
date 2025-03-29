@@ -1,5 +1,15 @@
 - type: entity
+  abstract: true
   parent: BaseStructureDynamic
+  id: RMCCrateOpenableBase
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: RMCPlankWood
+      amount: 2 # TODO RMC14 other drops
+
+- type: entity
+  parent: RMCCrateOpenableBase
   id: RMCCrateLarge
   name: large crate
   description: A hefty wooden crate.
@@ -63,7 +73,7 @@
   - type: ItemSlots
 
 - type: entity
-  parent: BaseStructureDynamic
+  parent: RMCCrateOpenableBase
   id: RMCSecureCase
   name: storage case
   description: A black storage case.
@@ -139,7 +149,7 @@
     state: base
 
 - type: entity
-  parent: BaseStructureDynamic
+  parent: RMCCrateOpenableBase
   id: RMCSecureCaseChest
   name: chest
   description: hefty wooden crate.
@@ -215,7 +225,7 @@
     state: base
 
 - type: entity
-  parent: BaseStructureDynamic
+  parent: RMCCrateOpenableBase
   id: RMCSmallChestYellow
   name: small chest
   description: A small plastic crate wrapped with securing elastic straps.
@@ -345,7 +355,7 @@
     state: base
 
 - type: entity
-  parent: BaseStructureDynamic
+  parent: RMCCrateOpenableBase
   id: RMCSecureCaseMini
   name: small case
   description: A small hard-shell case. What could be inside?

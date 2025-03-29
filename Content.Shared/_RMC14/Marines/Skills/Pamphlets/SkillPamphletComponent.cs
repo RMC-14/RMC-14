@@ -17,6 +17,9 @@ public sealed partial class SkillPamphletComponent : Component
     public Dictionary<EntProtoId<SkillDefinitionComponent>, int> AddSkills = new();
 
     [DataField, AutoNetworkedField]
+    public Dictionary<EntProtoId<SkillDefinitionComponent>, int> SkillCap = new();
+
+    [DataField, AutoNetworkedField]
     public SpriteSpecifier.Rsi? GiveIcon;
 
     [DataField, AutoNetworkedField]

@@ -32,7 +32,7 @@
     - ActionXenoTailStab
     - ActionXenoAcidWeak
     - ActionXenoPheromones
-    - ActionXenoPlantWeeds # TODO RMC14 only near other weeds for lesser drones
+    - ActionLesserDronePlantWeeds
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
     tier: 0

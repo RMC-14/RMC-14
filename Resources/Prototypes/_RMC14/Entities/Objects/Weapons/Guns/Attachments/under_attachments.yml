@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: RMCAttachableBase
   id: RMCUnderAttachmentBase
@@ -51,6 +51,8 @@
     attachedOnly: true
     breakOnMove: true
     breakOnFullRotate: true
+    breakOnDrop: true
+    slowOnBreak: true
     doAfter: 1.5
     deactivateDoAfter: 0
     doAfterNeedHand: false

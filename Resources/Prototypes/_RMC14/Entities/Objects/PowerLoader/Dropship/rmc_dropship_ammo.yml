@@ -49,6 +49,7 @@
       path: /Audio/_RMC14/Dropship/gauimpact.ogg
       params:
         volume: -6
+    impactEffect: RMCEffectExplosionParticle
 
 - type: entity
   parent: RMCDropshipAttachmentAmmoGAU
@@ -91,3 +92,96 @@
     tileLimit: 4
     scatter: true
     randomRotation: true
+
+- type: entity
+  abstract: true
+  parent: RMCDropshipAttachmentAmmo
+  id: RMCDropshipAttachmentAmmoRocket
+  name: abstract rocket
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/dropship_ammo_64.rsi
+    offset: 0.5, 0.5
+    layers:
+    - state: single
+      map: [ "enum.DropshipAmmoVisuals.Fill"]
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49, -0.49, 1.49, 0.49"
+        density: 100
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: DropshipFabricatorPrintable
+    cost: 300
+  - type: DropshipAmmo
+    rounds: 1
+    maxRounds: 1
+    roundsPerShot: 1
+    targetSpread: 3 # TODO RMC14 max 6 when no longer lased
+    bulletSpread: 0
+    travelTime: 6
+    weapon: RMCDropshipAttachmentGuidedMissileLauncher
+    soundCockpit: /Audio/_RMC14/Effects/rocketpod_fire.ogg
+    deleteOnEmpty: true
+
+- type: entity
+  parent: RMCDropshipAttachmentAmmoRocket
+  id: RMCDropshipAttachmentAmmoRocketWidowmaker
+  name: AIM-224B 'Widowmaker'
+  description: The AIM-224B missile is a retrofit of the latest in air-to-air missile technology. Earning the nickname of 'Widowmaker' from various dropship pilots after improvements to its guidance warhead prevents it from being jammed leading to its high kill rate. Not well suited for ground bombardment but its high velocity makes it reach its target quickly. This one has been modified to be a free-fall bomb as a result of dropship ammo shortages. Can be loaded into the LAU-444 Guided Missile Launcher.
+  components:
+  - type: DropshipFabricatorPrintable
+    cost: 300
+  - type: DropshipAmmo
+    travelTime: 3
+    explosion:
+      total: 3000
+      slope: 5.5
+      max: 55
+
+- type: entity
+  parent: RMCDropshipAttachmentAmmoRocket
+  id: RMCDropshipAttachmentAmmoRocketKeeper
+  name: GBU-67 'Keeper II'
+  description: The GBU-67 'Keeper II' is the latest in a generation of laser guided weaponry that spans all the way back to the 20th century. Earning its nickname from a shortening of 'Peacekeeper' which comes from the program that developed its guidance system and the various uses of it during peacekeeping conflicts. Its payload is designed to devastate armored targets. Can be loaded into the LAU-444 Guided Missile Launcher.
+  components:
+  - type: Sprite
+    layers:
+    - state: paveway
+      map: [ "enum.DropshipAmmoVisuals.Fill"]
+  - type: DropshipFabricatorPrintable
+    cost: 300
+  - type: DropshipAmmo
+    travelTime: 2
+    explosion:
+      total: 905
+      slope: 15
+      max: 45
+
+- type: entity
+  parent: RMCDropshipAttachmentAmmoRocket
+  id: RMCDropshipAttachmentAmmoRocketNapalm
+  name: AGM-99 'Napalm'
+  description: The AGM-99 'Napalm' is an incendiary missile used to turn specific targeted areas into giant balls of fire for a long time. Can be loaded into the LAU-444 Guided Missile Launcher.
+  components:
+  - type: Sprite
+    layers:
+    - state: napalm
+      map: [ "enum.DropshipAmmoVisuals.Fill"]
+  - type: DropshipFabricatorPrintable
+    cost: 500
+  - type: DropshipAmmo # TODO RMC14 not usable in fire mission, only direct bombardment
+    travelTime: 6
+    explosion:
+      total: 1780
+      slope: 7.2
+      max: 50
+    fire:
+      intensity: 60
+      duration: 30
+      range: 3

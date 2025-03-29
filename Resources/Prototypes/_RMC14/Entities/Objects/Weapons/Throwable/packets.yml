@@ -326,3 +326,122 @@
 
 - type: Tag
   id: RMCPacketGrenade
+
+- type: entity
+  abstract: true
+  parent: CMPacketBase
+  id: RMCBoxBase
+  name: grenade box
+  description: A secure box holding grenades. High explosive, don't store near the flamer fuel.
+  components:
+  - type: Sprite
+    layers:
+    - state: d_nade_placeholder
+      map: [ "closedLayer" ]
+    - state: d_nade_placeholder_e
+      map: [ "openLayer", "emptyLayer" ]
+  - type: Item
+    size: Large
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,13,7
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-grenades
+      count: 25
+      whitelist: null
+  - type: Tag
+    tags: [ ]
+
+- type: entity
+  parent: RMCBoxBase
+  id: RMCBoxHEDP
+  name: M40 HEDP grenade box
+  description: A secure box holding 25 M40 High-Explosive Dual-Purpose grenades. High explosive, don't store near the flamer fuel.
+  components:
+  - type: Sprite
+    layers:
+    - state: d_nade_placeholder
+      map: [ "closedLayer" ]
+    - state: model_m40
+    - state: hedp
+    - state: d_nade_placeholder_e
+      map: [ "openLayer", "emptyLayer" ]
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCGrenadeHEDP
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeHighExplosive
+      amount: 25
+
+- type: entity
+  parent: RMCBoxBase
+  id: RMCBoxHEFA
+  name: M40 HEFA grenade box
+  description: A secure box holding 25 M40 High-Explosive Fragmenting-Antipersonnel grenades. High explosive, don't store near the flamer fuel.
+  components:
+  - type: Sprite
+    layers:
+    - state: d_nade_placeholder
+      map: [ "closedLayer" ]
+    - state: model_m40
+    - state: hefa
+    - state: d_nade_placeholder_e
+      map: [ "openLayer", "emptyLayer" ]
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCGrenadeHEFA
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFrag
+      amount: 25
+
+- type: entity
+  parent: RMCBoxBase
+  id: RMCBoxAGMF
+  name: M74 AGM-F grenade box
+  description: A secure box holding 25 M74 AGM Fragmentation grenades. Explosive, don't store near the flamer fuel.
+  components:
+  - type: Sprite
+    layers:
+    - state: d_nade_placeholder
+      map: [ "closedLayer" ]
+    - state: model_m74
+    - state: agmf
+    - state: d_nade_placeholder_e
+      map: [ "openLayer", "emptyLayer" ]
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCGrenadeAGMF
+  - type: StorageFill
+    contents:
+    - id: RMC40MMGrenadeM74AGMF
+      amount: 25
+
+- type: entity
+  parent: RMCBoxBase
+  id: RMCBoxAGMI
+  name: M74 AGM-I grenade box
+  description: A secure box holding 25 M74 AGM Incendiary grenades. Highly flammable, don't store near the flamer fuel.
+  components:
+  - type: Sprite
+    layers:
+    - state: d_nade_placeholder
+      map: [ "closedLayer" ]
+    - state: model_m74
+    - state: agmi
+    - state: d_nade_placeholder_e
+      map: [ "openLayer", "emptyLayer" ]
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCGrenadeAGMI
+  - type: StorageFill
+    contents:
+    - id: RMC40MMGrenadeM74AGMI
+      amount: 25

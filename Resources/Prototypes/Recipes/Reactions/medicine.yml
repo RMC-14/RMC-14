@@ -398,15 +398,15 @@
   products:
     Sigynate: 4
 
-- type: reaction
-  id: Saline
-  reactants:
-    Water:
-      amount: 4000
-    TableSalt:
-      amount: 1000
-  products:
-    Saline: 5000
+#- type: reaction
+#  id: Saline
+#  reactants:
+#    Water:
+#      amount: 4
+#    TableSalt:
+#      amount: 1
+#  products:
+#    Saline: 5
 
 - type: reaction
   id: Lacerinol

@@ -282,6 +282,88 @@
       sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_urban.rsi
       state: helmet
 
+# Feathers
+
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbFeather
+  name: lucky white feather
+  description: A sniper's greatest asset is his mind, not his rifle.
+  components:
+  - type: Sprite
+    sprite:  _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbFeather
+  id: RMCHelmetGarbFeatherRed
+  name: lucky red feather
+  description: It is a riotous red color, made of really crummy plastic and synthetic threading, you know, the same sort of material every Corporate Liaison's spine is made of.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather_red.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather_red.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather_red.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbFeather
+  id: RMCHelmetGarbFeatherBlue
+  name: lucky blue feather
+  description: It is a brilliant blue color. You think you might have seen a bluejay in a holo-theatre once.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather_blue.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather_blue.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather_blue.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbFeather
+  id: RMCHelmetGarbFeatherPurple
+  name: lucky purple feather
+  description: It is a plucky purple color. Legend has it a station AI known as Shakespeare simulated 1000 monkeys typing gibberish in order to replicate the actual works of Shakespeare. Art critics are on the fence if this is the first instance of true artificial abstract art.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather_purple.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather_purple.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather_purple.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbFeather
+  id: RMCHelmetGarbFeatherYellow
+  name: lucky yellow feather
+  description: It is an unyielding yellow color. They say the New Kansas colony produces more carpenters per capita than any other colony in all of UN controlled space.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather_yellow.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather_yellow.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather_yellow.rsi
+      state: helmet
+
 # Misc
 
 - type: entity

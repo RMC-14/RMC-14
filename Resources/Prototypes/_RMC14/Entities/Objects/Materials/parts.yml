@@ -31,6 +31,10 @@
   - type: RMCRefinable
     spawn:
     - id: CMSheetMetal1
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 50
     #RMC TODO: Lattice
 
 - type: entity

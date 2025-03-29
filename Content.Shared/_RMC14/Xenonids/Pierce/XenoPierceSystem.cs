@@ -12,7 +12,6 @@ using Content.Shared.Interaction;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
-using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Pierce;
@@ -21,7 +20,6 @@ public sealed class XenoPierceSystem : EntitySystem
 {
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
@@ -34,7 +32,7 @@ public sealed class XenoPierceSystem : EntitySystem
     [Dependency] private readonly LineSystem _line = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
 
-    private readonly HashSet<EntityUid> pierceEnts = new();
+    private readonly HashSet<EntityUid> _pierceEnts = new();
 
     public override void Initialize()
     {
@@ -49,8 +47,7 @@ public sealed class XenoPierceSystem : EntitySystem
         if (!_rmcActions.TryUseAction(xeno, args.Action))
             return;
 
-        if (_transform.GetGrid(args.Target) is not { } gridId ||
-    !TryComp(gridId, out MapGridComponent? grid))
+        if (_transform.GetGrid(args.Target) is not { } gridId || !HasComp<MapGridComponent>(gridId))
             return;
 
         var target = args.Target;
@@ -80,13 +77,12 @@ public sealed class XenoPierceSystem : EntitySystem
 
         foreach (var tile in tiles)
         {
-            pierceEnts.Clear();
+            _pierceEnts.Clear();
             var entTile = Spawn(xeno.Comp.Blocker, tile.Coordinates);
-            _lookup.GetEntitiesInRange(entTile, 0.5f, pierceEnts);
+            _lookup.GetEntitiesInRange(entTile, 0.5f, _pierceEnts);
 
-            foreach (var ent in pierceEnts)
+            foreach (var ent in _pierceEnts)
             {
-
                 if (!_interaction.InRangeUnobstructed(entTile, ent, xeno.Comp.Range.Float()))
                     continue;
 

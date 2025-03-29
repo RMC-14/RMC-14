@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: RMCAttachableBase
   id: RMCRailAttachmentBase
@@ -300,6 +300,19 @@
 
 - type: entity
   parent: RMCAttachmentS42xTelescopicMiniscope
+  id: RMCAttachmentHuntingScope
+  name: 2x hunting mini-scope
+  description: This civilian-grade scope is a common sight on hunting rifles due to its cheap price and great optics. Fixed at a modest 2x zoom.
+  components:
+  - type: Sprite
+    state: huntingscope
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCAttachmentHuntingScope
+
+- type: entity
+  parent: RMCAttachmentS42xTelescopicMiniscope
   id: RMCAttachmentS42xAdvancedTelescopicMiniscope
   name: WeYa S4 2x advanced telescopic mini-scope
   description: An AEGIS S4 telescoping eye piece, custom-tuned by WeYa scientists to be as ergonomic as possible.
@@ -428,6 +441,25 @@
       doAfter: 0
 
 - type: entity
+  parent: RMCM96SIntegratedScope
+  id: RMCXM43E1IntegratedScope
+  name: XM43E1 integrated scope
+  description: This isn't supposed to come off the gun. How did you get it?
+  components:
+  - type: Sprite
+    state: pmcscope
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCXM43E1IntegratedScope
+  - type: AttachableToggleable
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
+      state: pmcscope
+    actionName: Look through the XM43E1's Integrated Scope
+    actionDesc: Lets you see further.
+
+- type: entity
   parent: RMCAttachmentScopeBase
   id: RMCAttachmentXS-9
   name: XS-9 targeting relay
@@ -520,4 +552,10 @@
   id: RMCM96SIntegratedScope
 
 - type: Tag
+  id: RMCXM43E1IntegratedScope
+
+- type: Tag
   id: RMCAttachmentXS-9
+
+- type: Tag
+  id: RMCAttachmentHuntingScope
