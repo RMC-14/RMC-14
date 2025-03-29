@@ -1,7 +1,7 @@
 - type: entity
   id: HiveEggMorpherXeno
   parent: BaseHiveStructure
-  name: Egg Morpher
+  name: egg morpher
   description: A disgusting biomass generator that reeks of rotting flesh. Capable of producing parasites on its own.
   components:
   - type: Sprite

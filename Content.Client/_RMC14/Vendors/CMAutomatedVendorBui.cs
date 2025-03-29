@@ -93,7 +93,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                         var color = CMAutomatedVendorPanel.DefaultColor;
                         var borderColor = CMAutomatedVendorPanel.DefaultBorderColor;
                         var hoverColor = CMAutomatedVendorPanel.DefaultBorderColor;
-                        if (section.TakeAll != null || section.TakeOne != null)
+                        if (entry.Mandatory)
                         {
                             name = $"Mandatory: {name}";
                             color = Color.FromHex("#251A0C");
