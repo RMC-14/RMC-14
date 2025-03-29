@@ -387,7 +387,8 @@ public sealed class XenoDevourSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, xeno, devour.DevourDelay, new XenoDevourDoAfterEvent(), xeno, target)
         {
             BreakOnMove = true,
-            AttemptFrequency = AttemptFrequency.EveryTick
+            AttemptFrequency = AttemptFrequency.EveryTick,
+            ForceVisible = true,
         };
 
         _popup.PopupClient(Loc.GetString("cm-xeno-devour-start-self", ("target", target)), target, xeno);
