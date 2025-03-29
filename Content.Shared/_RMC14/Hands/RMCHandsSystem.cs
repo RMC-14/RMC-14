@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Storage;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
@@ -13,11 +14,12 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Hands;
 
-public sealed class CMHandsSystem : EntitySystem
+public sealed class RMCHandsSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCStorageSystem _rmcStorage = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
@@ -136,6 +138,12 @@ public sealed class CMHandsSystem : EntitySystem
             hand.HeldEntity is not { } held)
         {
             return false;
+        }
+
+        if (HasComp<InteractionActivateOnClickComponent>(held) &&
+            _interaction.InteractionActivate(user, held))
+        {
+            return true;
         }
 
         return TryStorageEjectHand(user, held);

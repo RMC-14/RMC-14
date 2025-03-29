@@ -64,7 +64,7 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly CMHandsSystem _rmcHands = default!;
+    [Dependency] private readonly RMCHandsSystem _rmcHands = default!;
     [Dependency] private readonly TagSystem _tags = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
