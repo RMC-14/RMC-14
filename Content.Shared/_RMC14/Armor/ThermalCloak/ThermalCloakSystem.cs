@@ -24,6 +24,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Content.Shared.Movement.Pulling.Components;
 
 namespace Content.Shared._RMC14.Armor.ThermalCloak;
 
@@ -125,6 +126,9 @@ public sealed class ThermalCloakSystem : EntitySystem
             activeInvisibility.Opacity = ent.Comp.Opacity;
             Dirty(user, activeInvisibility);
 
+            if (TryComp<PullableComponent>(user, out var pullable))
+                RemCompDeferred<PullableComponent>(user);// Removes the pullable component if invis (hopefully)
+
             ent.Comp.Enabled = true;
             turnInvisible.Enabled = true;
             if (TryComp<InstantActionComponent>(ent.Comp.Action, out var action))
@@ -199,6 +203,8 @@ public sealed class ThermalCloakSystem : EntitySystem
                 RemCompDeferred<EntityIFFComponent>(user);
 
             RemCompDeferred<EntityActiveInvisibleComponent>(user);
+
+            EnsureComp<PullableComponent>(user); //Give back pullable when not invis
 
             if (_net.IsServer)
                 _audio.PlayPvs(ent.Comp.UncloakSound, user);
