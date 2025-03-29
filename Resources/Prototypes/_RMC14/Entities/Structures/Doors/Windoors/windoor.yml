@@ -1,7 +1,7 @@
 - type: entity
   parent: BaseWindoor
   id: CMWindoor
-  name: glass door
+  name: Glass Door
   description: A window, that is also a door. A windoor if you will.
   components:
   - type: Sprite
@@ -70,7 +70,7 @@
 - type: entity
   parent: BaseSecureWindoor
   id: CMWindoorSecure
-  name: secure glass door
+  name: Secure Glass Door
   description: A thick chunk of tempered glass on metal track. Probably more robust than you.
   components:
   - type: Sprite

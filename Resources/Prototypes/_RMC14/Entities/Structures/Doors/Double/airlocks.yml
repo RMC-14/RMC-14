@@ -4,6 +4,7 @@
   - CMBaseDoor
   - CMBaseDoorConstructible
   id: CMDoubleDoorBase
+  name: Airlock
   components:
   - type: CMDoubleDoor
   - type: Door
@@ -32,7 +33,7 @@
 - type: entity
   parent: CMDoubleDoorBase
   id: CMDoubleDoorAlmayerGlass
-  suffix: Almayer, Glass
+  suffix: Double, Almayer, Glass
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/Double/almayer_glass.rsi
@@ -40,7 +41,7 @@
 - type: entity
   parent: CMDoubleDoorBase
   id: CMDoubleDoorAlmayerSolid
-  suffix: Almayer, Solid
+  suffix: Double, Almayer, Solid
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/Double/almayer_solid.rsi
@@ -49,7 +50,7 @@
 - type: entity
   parent: CMDoubleDoorBase
   id: CMDoubleDoorCommandGlass
-  suffix: Command, Glass
+  suffix: Double, Command, Glass
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/Double/command_glass.rsi
@@ -59,7 +60,7 @@
 - type: entity
   parent: CMDoubleDoorBase
   id: CMDoubleDoorCommandSolid
-  suffix: Command, Solid
+  suffix: Double, Command, Solid
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/Double/command_solid.rsi
@@ -70,7 +71,7 @@
 - type: entity
   parent: CMDoubleDoorBase
   id: CMDoubleDoorEngineerGlass
-  suffix: Engineer, Glass
+  suffix: Double, Engineer, Glass
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/Double/engineer_glass.rsi
@@ -80,7 +81,7 @@
 - type: entity
   parent: CMDoubleDoorBase
   id: CMDoubleDoorEngineerSolid
-  suffix: Engineer, Solid
+  suffix: Double, Engineer, Solid
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/Double/engineer_solid.rsi
@@ -91,7 +92,7 @@
 - type: entity
   parent: CMDoubleDoorBase
   id: CMDoubleDoorGenericGlass
-  suffix: Generic, Glass
+  suffix: Double, Generic, Glass
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/Double/generic_glass.rsi
@@ -99,7 +100,7 @@
 - type: entity
   parent: CMDoubleDoorBase
   id: RMCDoubleDoorGlassHybrisa
-  suffix: Hybrisa, Glass
+  suffix: Double, Hybrisa, Glass
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/Double/hybrisa_glass.rsi
@@ -107,7 +108,7 @@
 - type: entity
   parent: CMDoubleDoorBase
   id: RMCDoubleDoorSolidHybrisa
-  suffix: Hybrisa, Solid
+  suffix: Double, Hybrisa, Solid
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/Double/hybrisa_solid.rsi
@@ -116,7 +117,7 @@
 - type: entity
   parent: CMDoubleDoorBase
   id: RMCDoubleDoorHybrisaMecical
-  suffix: Hybrisa, Solid
+  suffix: Double, Hybrisa, Solid
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/Double/hybrisa_medical.rsi
@@ -125,7 +126,7 @@
 - type: entity
   parent: CMDoubleDoorBase
   id: RMCDoubleDoorHybrisaGlassMecical
-  suffix: Hybrisa, Glass
+  suffix: Double, Hybrisa, Glass
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/Double/hybrisa_medical_glass.rsi
@@ -133,7 +134,7 @@
 - type: entity
   parent: CMDoubleDoorBase
   id: CMDoubleDoorGenericSolid
-  suffix: Generic, Solid
+  suffix: Double, Generic, Solid
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/Double/generic_solid.rsi
@@ -142,7 +143,7 @@
 - type: entity
   parent: CMDoubleDoorBase
   id: CMDoubleDoorMedicalGlass
-  suffix: Medical, Glass
+  suffix: Double, Medical, Glass
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/Double/medical_glass.rsi
@@ -152,7 +153,7 @@
 - type: entity
   parent: CMDoubleDoorBase
   id: CMDoubleDoorMedicalSolid
-  suffix: Medical, Solid
+  suffix: Double, Medical, Solid
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/Double/medical_solid.rsi
@@ -163,7 +164,7 @@
 - type: entity
   parent: CMDoubleDoorBase
   id: CMDoubleDoorPersonalGlass
-  suffix: Personal, Glass
+  suffix: Double, Personal, Glass
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/Double/personal_glass.rsi
@@ -171,7 +172,7 @@
 - type: entity
   parent: CMDoubleDoorBase
   id: CMDoubleDoorPersonalSolid
-  suffix: Personal, Solid
+  suffix: Double, Personal, Solid
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/Double/personal_solid.rsi
@@ -180,7 +181,7 @@
 - type: entity
   parent: CMDoubleDoorBase
   id: CMDoubleDoorPreparations
-  suffix: Preparations
+  suffix: Double, Preparations
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/Double/preparations.rsi
@@ -188,7 +189,7 @@
 - type: entity
   parent: CMDoubleDoorBase
   id: CMDoubleDoorPreparationsAlpha
-  suffix: Preparations, Alpha
+  suffix: Double, Preparations, Alpha
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/Double/preparations_alpha.rsi
@@ -196,7 +197,7 @@
 - type: entity
   parent: CMDoubleDoorBase
   id: CMDoubleDoorPreparationsBravo
-  suffix: Preparations, Bravo
+  suffix: Double, Preparations, Bravo
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/Double/preparations_bravo.rsi
@@ -204,7 +205,7 @@
 - type: entity
   parent: CMDoubleDoorBase
   id: CMDoubleDoorPreparationsCharlie
-  suffix: Preparations, Charlie
+  suffix: Double, Preparations, Charlie
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/Double/preparations_charlie.rsi
@@ -212,7 +213,7 @@
 - type: entity
   parent: CMDoubleDoorBase
   id: CMDoubleDoorPreparationsDelta
-  suffix: Preparations, Delta
+  suffix: Double, Preparations, Delta
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/Double/preparations_delta.rsi
@@ -220,7 +221,7 @@
 - type: entity
   parent: CMDoubleDoorBase
   id: CMDoubleDoorSecurityGlass
-  suffix: Security, Glass
+  suffix: Double, Security, Glass
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/Double/security_glass.rsi
@@ -230,7 +231,7 @@
 - type: entity
   parent: CMDoubleDoorBase
   id: CMDoubleDoorSecuritySolid
-  suffix: Security, Solid
+  suffix: Double, Security, Solid
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/Double/security_solid.rsi

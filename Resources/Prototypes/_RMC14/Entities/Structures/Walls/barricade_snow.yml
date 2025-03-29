@@ -1,0 +1,33 @@
+- type: entity
+  parent: CMBarricadeBase
+  id: RMCBarricadeSnow
+  name: snow barricade
+  description: A mound of snow shaped into a sloped wall. Statistically better than thin air as cover.
+  components:
+  - type: Climbable
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
+    layers:
+    - state: snow
+    - map: [ "acided" ]
+    drawdepth: WallTops
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: CMSnowBarricade
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 75
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DamageVisuals
+    thresholds: [4, 8, 12]
+    damageDivisor: 6.3
+    trackAllDamage: true
+    damageOverlay:
+      sprite: _RMC14/Structures/Walls/Barricades/snow_cracks.rsi
+  - type: Construction
+    graph: BarricadeSnowGraph
+    node: nodeSnow
