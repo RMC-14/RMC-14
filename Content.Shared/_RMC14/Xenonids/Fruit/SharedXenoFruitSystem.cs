@@ -43,6 +43,7 @@ using Content.Shared.Movement.Components;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Aura;
+using Content.Shared._RMC14.Movement;
 using Robust.Shared.Spawners;
 
 namespace Content.Shared._RMC14.Xenonids.Fruit;
@@ -78,6 +79,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedAuraSystem _aura = default!;
     [Dependency] private readonly IComponentFactory _componentFactory = default!;
+    [Dependency] private readonly TemporarySpeedModifiersSystem _temporarySpeed = default!;
 
     private static readonly ProtoId<DamageTypePrototype> FruitPlantDamageType = "Blunt";
 
@@ -805,7 +807,12 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         var comp = EnsureComp<XenoFruitEffectSpeedComponent>(target);
 
         comp.Duration = fruit.Comp.Duration;
-        comp.SpeedModifier = fruit.Comp.SpeedModifier;
+
+        var multiplier = _temporarySpeed.CalculateSpeedModifier(target, fruit.Comp.SpeedModifier.Float()) ;
+        if(multiplier == null)
+            return;
+
+        comp.SpeedModifier = multiplier.Value;
 
         _movementSpeed.RefreshMovementSpeedModifiers(target);
     }
@@ -822,10 +829,10 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         if (!TryComp<MovementSpeedModifierComponent>(xeno, out var baseSpeed))
             return;
 
-        var modSpeedWalk = baseSpeed.BaseWalkSpeed + comp.SpeedModifier.Float();
-        var modSpeedSprint = baseSpeed.BaseSprintSpeed + comp.SpeedModifier.Float();
+        var modSpeedWalk = baseSpeed.BaseWalkSpeed * comp.SpeedModifier.Float();
+        var modSpeedSprint = baseSpeed.BaseSprintSpeed * comp.SpeedModifier.Float();
 
-        args.ModifySpeed(modSpeedWalk / baseSpeed.BaseWalkSpeed, modSpeedSprint / baseSpeed.BaseSprintSpeed);
+        args.ModifySpeed(comp.SpeedModifier.Float(), comp.SpeedModifier.Float());
     }
 
     // Shield (unstable fruit)
