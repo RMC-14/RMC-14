@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Added the Assisted Reload mechanic. You can now perform an assisted reload
-      on a SADAR (M5-ATL) by clicking on a player that is actively wielding a SADAR
-      while you are behind them. This will load the SADAR in just 3 seconds, as opposed
-      to the 6 second self-load time.
-    type: Add
-  id: 1005
-  time: '2024-11-22T00:23:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4898
 - author: DummeHytteOst
   changes:
   - message: Fixed food trays leaving behind an empty tray when eaten.
@@ -5219,5 +5209,17 @@
   id: 1507
   time: '2025-03-29T01:55:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5989
+- author: texas1234567889
+  changes:
+  - message: Fixed Solaris having M42A2 shotguns instead of the HG37, MAR-40 instead
+      of MAR-50, AR10 instead of Basira, riot armor in marshals instead of CMB armor
+      and masks, and MK45s instead of CMB spearheads.
+    type: Fix
+  - message: Fixed Solaris missing baton slugs and RC6 helmets in mining, and a pair
+      of binoculars and a cigar in admin dorms.
+    type: Fix
+  id: 1508
+  time: '2025-03-29T08:03:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6007
 Name: RMC14
 Order: -1
