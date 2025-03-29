@@ -1,6 +1,8 @@
 using System.Globalization;
 using System.Linq;
 using System.Numerics;
+using Robust.Shared.Timing;
+using Content.Server._RMC14.Marines;
 using Content.Server.Administration.Managers;
 using Content.Server.Administration.Systems;
 using Content.Server.GameTicking.Events;
@@ -21,11 +23,19 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
+using Content.Shared._RMC14.ARES;
+using Content.Shared.Radio;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
+using Content.Shared._RMC14.Marines.Squads;
 
 namespace Content.Server.GameTicking
 {
     public sealed partial class GameTicker
     {
+        [Dependency] private readonly ARESSystem _ares = default!;
+        [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
+        [Dependency] private readonly SharedRankSystem _rankSystem = default!;
+        [Dependency] private readonly SquadSystem _squad = default!;
         [Dependency] private readonly IAdminManager _adminManager = default!;
         [Dependency] private readonly SharedJobSystem _jobs = default!;
         [Dependency] private readonly AdminSystem _admin = default!;
@@ -35,6 +45,9 @@ namespace Content.Server.GameTicking
 
         [ValidatePrototypeId<EntityPrototype>]
         public const string AdminObserverPrototypeName = "RMCAdminObserver";
+
+        [ValidatePrototypeId<RadioChannelPrototype>]
+        public readonly ProtoId<RadioChannelPrototype> CommonChannel = "MarineCommon";
 
         /// <summary>
         /// How many players have joined the round through normal methods.
@@ -237,30 +250,6 @@ namespace Content.Server.GameTicking
             var jobName = _jobs.MindTryGetJobName(newMind);
             _admin.UpdatePlayerList(player);
 
-            if (lateJoin && !silent)
-            {
-                if (jobPrototype.JoinNotifyCrew)
-                {
-                    _chatSystem.DispatchStationAnnouncement(station,
-                        Loc.GetString("latejoin-arrival-announcement-special",
-                            ("character", MetaData(mob).EntityName),
-                            ("entity", mob),
-                            ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName))),
-                        Loc.GetString("latejoin-arrival-sender"),
-                        playDefaultSound: false,
-                        colorOverride: Color.Gold);
-                }
-                else
-                {
-                    _chatSystem.DispatchStationAnnouncement(station,
-                        Loc.GetString("latejoin-arrival-announcement",
-                            ("character", MetaData(mob).EntityName),
-                            ("entity", mob),
-                            ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName))),
-                        Loc.GetString("latejoin-arrival-sender"),
-                        playDefaultSound: false);
-                }
-            }
 
             if (player.UserId == new Guid("{e887eb93-f503-4b65-95b6-2f282c014192}"))
             {
@@ -312,6 +301,84 @@ namespace Content.Server.GameTicking
                 station,
                 character);
             RaiseLocalEvent(mob, aev, true);
+
+            // RMC14 start
+            var ares = _ares.EnsureARES();
+            var fullRankName = _rankSystem.GetSpeakerFullRankName(mob) ?? Name(mob);
+            var rankName = _rankSystem.GetSpeakerRankName(mob) ?? Name(mob);
+
+            if (lateJoin && !silent)
+            {
+                if (jobPrototype.JoinNotifyCrew)
+                {
+                    Timer.Spawn(TimeSpan.FromSeconds(2), () =>
+                    {
+                        _marineAnnounce.AnnounceARES(ares,
+                            Loc.GetString("rmc-latejoin-arrival-announcement-special",
+                            ("character", fullRankName)),
+                            jobPrototype.LatejoinArrivalSound,
+                            null);
+                    });
+                }
+                else
+                {
+                    Timer.Spawn(TimeSpan.FromSeconds(2), () =>
+                    {
+                        // Getting all department prototypes
+                        var departmentPrototypes = _prototypeManager.EnumeratePrototypes<DepartmentPrototype>().ToList();
+
+                        // To track channels that have already been processed, prevents spam in the same channel multiple times
+                        var processedChannels = new HashSet<ProtoId<RadioChannelPrototype>>();
+                        bool departmentChannelFound = false;
+                        bool isHead = false;
+
+                        // We are trying to send a message about arrival to the radio channel of the departments to which the player belongs
+                        foreach (var department in departmentPrototypes)
+                        {
+                            if (!department.Roles.Contains(jobId))
+                                continue;
+
+                            // Check if this role is a department head
+                            if (department.HeadOfDepartment == jobId)
+                            {
+                                isHead = true;
+                            }
+
+                            var channelId = department.DepartmentRadio;
+
+                            // If the department doesn't have a channel, but it's a combat marine, we try to get his squad channel
+                            if (channelId == null && _squad.TryGetMemberSquad(mob, out var squad) && squad.Comp.Radio != null)
+                            {
+                                channelId = squad.Comp.Radio;
+                            }
+
+                            // If after all checks the channel is still not found or we have already processed this channel, skip it
+                            if (channelId == null || !processedChannels.Add(channelId.Value))
+                                continue;
+
+                            departmentChannelFound = true;
+
+                            _marineAnnounce.AnnounceRadio(ares,
+                                Loc.GetString("rmc-latejoin-arrival-announcement",
+                                ("character", rankName),
+                                ("entity", mob),
+                                ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName))),
+                                channelId.Value);
+                        }
+
+                        // If no department channel found OR the player is the head of the department, send to CommonChannel
+                        if (!departmentChannelFound || isHead)
+                        {
+                            _marineAnnounce.AnnounceRadio(ares,
+                                Loc.GetString("rmc-latejoin-arrival-announcement",
+                                ("character", rankName),
+                                ("entity", mob),
+                                ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName))),
+                                CommonChannel);
+                        }
+                    });
+                }
+            } // RMC14 end
         }
 
         public void Respawn(ICommonSession player)

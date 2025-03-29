@@ -17,7 +17,7 @@
   startingGear: CMGearStaffOfficer
   icon: "CMJobIconStaffOfficer"
   requireAdminNotify: true
-  joinNotifyCrew: true
+  joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
   accessGroups:
   - MarineMain

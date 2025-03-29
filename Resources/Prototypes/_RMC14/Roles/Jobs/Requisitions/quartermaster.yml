@@ -22,7 +22,7 @@
   startingGear: CMGearQuartermaster
   icon: "CMJobIconQuartermaster"
   requireAdminNotify: true
-  joinNotifyCrew: true
+  joinNotifyCrew: false
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - CMQM

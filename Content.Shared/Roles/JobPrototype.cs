@@ -2,6 +2,7 @@ using Content.Shared.Access;
 using Content.Shared.Guidebook;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.StatusIcon;
+using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
@@ -153,6 +154,12 @@ namespace Content.Shared.Roles
         /// </summary>
         [DataField]
         public List<ProtoId<GuideEntryPrototype>>? Guides;
+
+        /// <summary>
+        /// RMC14 for arrival notification sound if <see cref="JoinNotifyCrew"/> true.
+        /// </summary>
+        [DataField]
+        public SoundSpecifier LatejoinArrivalSound { get; private set; } = new SoundPathSpecifier("/Audio/_RMC14/Announcements/ARES/sound_misc_boatswain.ogg");
     }
 
     /// <summary>
