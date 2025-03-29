@@ -343,6 +343,9 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
     private void BreakSlow(EntityUid user)
     {
+        if (_gameTiming.ApplyingState)
+            return;
+
         _slow.TrySlowdown(user, TimeSpan.FromSeconds(4));
         _slow.TrySuperSlowdown(user, TimeSpan.FromSeconds(2));
     }
