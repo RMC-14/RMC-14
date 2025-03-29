@@ -95,7 +95,7 @@
     sprintModifier: 0.62
   - type: CMArmor
     melee: 25 # CLOTHING_ARMOR_MEDIUMHIGH (melee)
-    bullet: # CLOTHING_ARMOR_HIGHPLUS (bullets) 
+    bullet: 35 # CLOTHING_ARMOR_HIGHPLUS (bullets) 
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 30 # CLOTHING_ARMOR_HIGH
   - type: Storage
