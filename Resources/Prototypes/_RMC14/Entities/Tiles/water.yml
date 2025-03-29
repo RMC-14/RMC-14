@@ -31,6 +31,15 @@
     sprintSpeedModifier: 0.5
   - type: Physics
     bodyType: Static
+  - type: StepTrigger
+    requiredTriggeredSpeed: 0
+    intersectRatio: 0.1
+    blacklist:
+      tags:
+      - Catwalk
+  - type: TileEntityEffect
+    effects:
+    - !type:ExtinguishReaction
   - type: Fixtures
     fixtures:
       fix1:
@@ -69,3 +78,4 @@
   - type: SpeedModifierContacts
     walkSpeedModifier: 0.25
     sprintSpeedModifier: 0.25
+
