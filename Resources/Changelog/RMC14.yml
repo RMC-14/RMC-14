@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: FungiFellow
-  changes:
-  - message: Added the Custom Built Shotgun, a 6 round semi auto shotgun that has
-      a 2 round burst (Surv/PMC Weapon)
-    type: Add
-  id: 1009
-  time: '2024-11-22T00:46:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4857
 - author: Sigil
   changes:
   - message: The accuracy mechanic has been implemented. Projectiles can now miss
@@ -5218,5 +5210,14 @@
   id: 1511
   time: '2025-03-29T08:16:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5992
+- author: Ramiris
+  changes:
+  - message: Added camouflage in-engine colouring.
+    type: Add
+  - message: Changed M83 GL's Sprite
+    type: Tweak
+  id: 1512
+  time: '2025-03-29T08:18:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6005
 Name: RMC14
 Order: -1
