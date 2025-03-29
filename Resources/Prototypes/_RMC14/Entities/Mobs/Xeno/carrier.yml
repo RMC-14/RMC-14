@@ -152,7 +152,8 @@
     layers:
     - map: [ "enum.XenoVisualLayers.Base" ]
       state: alive
-    - state: eggsac_3_active #TODO Visualizer
+    - map: [ "enum.XenoEggStorageVisualLayers.Base" ]
+      state: eggsac_0 #TODO Visualizer
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
 #    - map: [ "enum.XenoInhandVisualLayers.Left" ]
@@ -169,7 +170,7 @@
     - ActionXenoPheromones
     - ActionXenoPlantWeeds
     - ActionXenoRetrieveEgg
-#   - ActionXenoGenerateEgg
+    - ActionXenoGenerateEggs
     - ActionXenoDevolve
     hidden: true
   - type: XenoStrain
@@ -181,4 +182,8 @@
     pheroSuffix: strong
   - type: XenoEggRetriever
     maxEggs: 12
+  - type: XenoEggStorageVisuals
+  - type: EggPlantingDistance
+    distance: 2.5
+  - type: XenoGenerateEggs
     

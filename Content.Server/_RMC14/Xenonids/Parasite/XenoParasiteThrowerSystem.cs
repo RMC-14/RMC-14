@@ -193,7 +193,6 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
         if (args.NewMobState != MobState.Dead)
             return;
         DropAllStoredParasites(xeno, 0.75f);
-        RemCompDeferred<XenoParasiteThrowerComponent>(xeno.Owner);
     }
 
     private bool DropAllStoredParasites(Entity<XenoParasiteThrowerComponent> xeno, float chance = 1.0f)
@@ -307,7 +306,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
             return null;
         }
 
-        if(_mobState.IsDead(xeno))
+        if (_mobState.IsDead(xeno))
         {
             message = Loc.GetString("rmc-xeno-parasite-ghost-carrier-dead", ("xeno", xeno));
             return null;

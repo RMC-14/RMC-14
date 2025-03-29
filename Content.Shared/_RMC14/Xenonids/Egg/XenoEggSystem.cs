@@ -225,7 +225,8 @@ public sealed class XenoEggSystem : EntitySystem
         if (egg.Comp.State != XenoEggState.Item || !HasComp<TransformComponent>(egg))
             return;
 
-        if (!args.CanReach)
+        if ((!HasComp<EggPlantingDistanceComponent>(args.User) && !args.CanReach) ||
+            (TryComp<EggPlantingDistanceComponent>(args.User, out var plantDis) && !_interaction.InRangeUnobstructed(args.User, args.ClickLocation, plantDis.Distance)))
         {
             if (_timing.IsFirstTimePredicted)
                 _popup.PopupCoordinates(Loc.GetString("cm-xeno-cant-reach-there"), args.ClickLocation, Filter.Local(), true);
@@ -509,6 +510,8 @@ public sealed class XenoEggSystem : EntitySystem
                     capable.Actions[actionId] = action;
             }
         }
+
+        EnsureComp<EggPlantingDistanceComponent>(xeno).Distance = 3.5f;
     }
 
     private void DetachOvipositor(Entity<XenoAttachedOvipositorComponent> xeno)
@@ -527,6 +530,7 @@ public sealed class XenoEggSystem : EntitySystem
 
         RemoveOvipositorActions(xeno.Owner);
         _popup.PopupClient(Loc.GetString("cm-xeno-ovipositor-detach"), xeno, xeno);
+        RemCompDeferred<EggPlantingDistanceComponent>(xeno);
     }
 
     private bool TryTrigger(Entity<XenoEggComponent> egg, EntityUid tripper)
