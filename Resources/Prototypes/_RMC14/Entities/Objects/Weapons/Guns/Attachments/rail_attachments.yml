@@ -441,6 +441,25 @@
       doAfter: 0
 
 - type: entity
+  parent: RMCM96SIntegratedScope
+  id: RMCXM43E1IntegratedScope
+  name: XM43E1 integrated scope
+  description: This isn't supposed to come off the gun. How did you get it?
+  components:
+  - type: Sprite
+    state: pmcscope
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCXM43E1IntegratedScope
+  - type: AttachableToggleable
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
+      state: pmcscope
+    actionName: Look through the XM43E1's Integrated Scope
+    actionDesc: Lets you see further.
+
+- type: entity
   parent: RMCAttachmentScopeBase
   id: RMCAttachmentXS-9
   name: XS-9 targeting relay
@@ -531,6 +550,9 @@
 
 - type: Tag
   id: RMCM96SIntegratedScope
+
+- type: Tag
+  id: RMCXM43E1IntegratedScope
 
 - type: Tag
   id: RMCAttachmentXS-9
