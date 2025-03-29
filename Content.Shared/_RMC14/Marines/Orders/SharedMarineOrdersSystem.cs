@@ -104,7 +104,6 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         if(speed == null)
             return;
 
-        //var speed = 1 + (comp.MoveSpeedModifier * comp.Received[0].Multiplier).Float();
         args.ModifySpeed(speed.Value, speed.Value);
     }
 
