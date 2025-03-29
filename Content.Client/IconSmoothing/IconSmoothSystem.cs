@@ -382,7 +382,7 @@ namespace Content.Client.IconSmoothing
                 if (smoothQuery.TryGetComponent(entity, out var other) &&
                     other.Enabled)
                 {
-                    if (other.SmoothKey == smooth.SmoothKey ||
+                    if ((other.SmoothKey != null && (other.SmoothKey == smooth.SmoothKey || smooth.AdditionalKeys.Contains(other.SmoothKey))) ||
                         (_cmIconSmoothQuery.TryComp(smooth.Owner, out var cmSmooth) && cmSmooth.Smooth && _cmIconSmoothQuery.HasComp(entity)))
                     {
                         return true;

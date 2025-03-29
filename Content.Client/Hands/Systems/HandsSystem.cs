@@ -16,7 +16,6 @@ using Robust.Client.UserInterface;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Player;
-using Robust.Shared.Timing;
 
 namespace Content.Client.Hands.Systems
 {
@@ -156,7 +155,7 @@ namespace Content.Client.Hands.Systems
         /// <summary>
         ///     Called when a user clicked on their hands GUI
         /// </summary>
-        public void UIHandClick(HandsComponent hands, string handName)
+        public void UIHandClick(HandsComponent hands, string handName, bool switchHand = true)
         {
             if (!hands.Hands.TryGetValue(handName, out var pressedHand))
                 return;
@@ -175,7 +174,7 @@ namespace Content.Client.Hands.Systems
                 return;
             }
 
-            if (pressedHand != hands.ActiveHand && pressedEntity == null)
+            if (switchHand && pressedHand != hands.ActiveHand && pressedEntity == null)
             {
                 // change active hand
                 EntityManager.RaisePredictiveEvent(new RequestSetHandEvent(handName));

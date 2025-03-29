@@ -1,10 +1,12 @@
-﻿using Content.Client._RMC14.Attachable.Components;
+﻿using System.Linq;
+using Content.Client._RMC14.Attachable.Components;
 using Content.Client._RMC14.Attachable.Systems;
 using Content.Client.Items.Systems;
 using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Item;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Item;
+using Content.Shared.Hands;
 using Robust.Client.GameObjects;
 using Robust.Client.ResourceManagement;
 using Robust.Shared.Serialization.TypeSerializers.Implementations;
@@ -18,6 +20,42 @@ public sealed class ItemCamouflageVisualizerSystem : VisualizerSystem<ItemCamouf
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly ItemSystem _item = default!;
     [Dependency] private readonly IResourceCache _resource = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<ItemCamouflageComponent, GetInhandVisualsEvent>(OnGetVisuals, after: [typeof(ItemSystem)]);
+    }
+
+    // Add colour layer to in-hands of items that have a Camo Colour specified.
+    private void OnGetVisuals(EntityUid uid, ItemCamouflageComponent camoComp, GetInhandVisualsEvent args)
+    {
+        if (TryComp(uid, out AppearanceComponent? appearanceComponent))
+        {
+            AppearanceSystem.TryGetData(uid, ItemCamouflageVisuals.Camo, out CamouflageType camo, appearanceComponent);
+            {
+                if (camoComp.Colors != null)
+                {
+                    camoComp.Colors.TryGetValue(camo, out var camoColor);
+                    {
+                        var newLayer = new PrototypeLayerData();
+                        foreach (var (state, layer) in args.Layers)
+                        {
+                            newLayer.RsiPath = layer.RsiPath;
+                            newLayer.State = $"{state}-color";
+                            newLayer.MapKeys = new() { $"{state}-color" };
+                            newLayer.Color = camoColor;
+                        }
+                        if (newLayer.State is not null)
+                        {
+                            args.Layers.Add((newLayer.State, newLayer));
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     protected override void OnAppearanceChange(EntityUid uid, ItemCamouflageComponent component, ref AppearanceChangeEvent args)
     {
@@ -96,6 +134,17 @@ public sealed class ItemCamouflageVisualizerSystem : VisualizerSystem<ItemCamouf
 #pragma warning disable RA0002
                     toggleable.IconActive = new SpriteSpecifier.Rsi(toggleableActiveRsi.RsiPath, state);
 #pragma warning restore RA0002
+            }
+        }
+
+        if (component.Colors != null && component.Colors.TryGetValue(camo, out var color))
+        {
+            if (args.Sprite != null)
+            {
+                if (args.Sprite.LayerMapTryGet(ItemCamouflageLayers.Layer, out var layer))
+                {
+                    args.Sprite.LayerSetColor(layer, color);
+                }
             }
         }
 

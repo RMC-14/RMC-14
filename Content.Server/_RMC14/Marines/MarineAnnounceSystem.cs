@@ -33,6 +33,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
 
     public readonly SoundSpecifier DefaultAnnouncementSound = new SoundPathSpecifier("/Audio/_RMC14/Announcements/Marine/notice2.ogg");
     public readonly SoundSpecifier DefaultSquadSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/tech_notification.ogg");
+    public readonly SoundSpecifier AresAnnouncementSound = new SoundPathSpecifier("/Audio/_RMC14/AI/announce.ogg");
 
     public override void Initialize()
     {
@@ -117,7 +118,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
                 HasComp<GhostComponent>(e)
             );
 
-        filter.RemoveWhereAttachedEntity(HasComp<SurvivorComponent>);
+        filter.RemoveWhereAttachedEntity(HasComp<RMCSurvivorComponent>);
 
         _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
         _audio.PlayGlobal(sound ?? DefaultAnnouncementSound, filter, true, AudioParams.Default.WithVolume(-2f));
@@ -159,7 +160,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         announcement ??= "rmc-announcement-ares-message";
         message = Loc.GetString(announcement, ("message", FormattedMessage.EscapeText(message)));
 
-        AnnounceToMarines(message, sound);
+        AnnounceToMarines(message, sound ?? AresAnnouncementSound);
         _adminLogs.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(source):player} ARES announced message: {message}");
     }
 

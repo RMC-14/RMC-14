@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Content.Shared._RMC14.Marines.Squads;
 using Robust.Shared.Console;
+using Robust.Shared.Toolshed;
 using Robust.Shared.Toolshed.Errors;
 using Robust.Shared.Toolshed.Syntax;
 using Robust.Shared.Toolshed.TypeParsers;
@@ -33,7 +34,7 @@ public sealed class SquadTypeParser : TypeParser<SquadType>
         return true;
     }
 
-    public override CompletionResult TryAutocomplete(ParserContext parserContext, string? argName)
+    public override CompletionResult TryAutocomplete(ParserContext parserContext, CommandArgument? argName)
     {
         var squadsQuery = _entities.EntityQueryEnumerator<SquadTeamComponent, MetaDataComponent>();
         var squads = new List<CompletionOption>();

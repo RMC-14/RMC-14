@@ -75,8 +75,16 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMGrenadeHighExplosive
-      amount: 25
+    - id: RMCBoxHEDP
+
+- type: entity
+  parent: RMCCrateExplosives
+  id: RMCCrateGrenadesBoxHEFA
+  name: M40 HEFA fragmentation grenade box crate (x25)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxHEFA
 
 - type: entity
   parent: RMCCrateExplosives
@@ -85,8 +93,16 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMC40MMGrenadeM74AGMF
-      amount: 25
+    - id: RMCBoxAGMF
+
+- type: entity
+  parent: RMCCrateExplosives
+  id: RMCCrateBoxAGMI
+  name: M74 AGM-I 40mm incendiary grenades crate (x25)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxAGMI
 
 - type: entity
   parent: RMCCrateExplosives

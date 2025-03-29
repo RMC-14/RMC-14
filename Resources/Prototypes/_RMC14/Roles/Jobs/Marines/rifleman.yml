@@ -31,6 +31,7 @@
     components:
     - type: Skills
       skills:
+        RMCSkillEndurance: 1
         RMCSkillFirearms: 1
     - type: CMVendorUser
       points: 45
