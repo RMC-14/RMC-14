@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed infected marines from triggering reggs or parasite traps
-    type: Fix
-  id: 1018
-  time: '2024-11-27T01:15:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4951
 - author: Rainbeon
   changes:
   - message: Transferring ammo between magazines now functions again.
@@ -5175,5 +5168,14 @@
   id: 1520
   time: '2025-03-29T08:40:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5781
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added setting your character's pose. This can be updated in-round with
+      a right-click menu verb, useful for giving your character time-specific flavor
+      text.
+    type: Add
+  id: 1521
+  time: '2025-03-29T08:50:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/4682
 Name: RMC14
 Order: -1
