@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Being unstunned while a parasite is still on your face keeps you muffled
-      and blind.
-    type: Fix
-  id: 1020
-  time: '2024-11-27T01:20:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4909
 - author: Whisper
   changes:
   - message: Updated Stella 'Lake' Poley, added Merlin Leander, Kazi Priestess figurine.
@@ -5332,5 +5324,13 @@
   id: 1522
   time: '2025-03-29T13:44:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6011
+- author: noctyrnal
+  changes:
+  - message: Added Containments Walls and Windows, along with the movable central
+      containment wall.
+    type: Add
+  id: 1523
+  time: '2025-03-29T19:53:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6013
 Name: RMC14
 Order: -1
