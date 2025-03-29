@@ -1,6 +1,6 @@
 tiles-cm-default = metal tile
 tiles-cm-default-no-weeds = metal tile (no weeds)
-tiles-rmc-underplating-no-weeds = plating (no weeds)
+tiles-rmc-underplating-no-weeds = plating (rmc, no weeds)
 tiles-rmc-empty = empty space
 tiles-cm-plate = metal plate tile
 tiles-rmc-mono = mono tile
@@ -17,7 +17,7 @@ tiles-cm-freezer = freezer tile
 tiles-cm-black = black metal tile
 tiles-cm-tcomms = tcommunications tile
 tiles-cm-cargo = cargo tile
-tiles-cm-plating = plating tile
+tiles-cm-plating = plating tile (rmc)
 tiles-cm-striped = striped tile
 tiles-cm-test = test tile
 tiles-cm-wy = WE-YA tile
