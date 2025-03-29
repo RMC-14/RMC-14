@@ -5193,5 +5193,14 @@
   id: 1516
   time: '2025-03-29T08:26:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6003
+- author: stranthbackup
+  changes:
+  - message: M34 Incinerator Unit no longer has a cold flame. Now you can light your smokes and paper with it!
+    type: Add
+  - message: Paper now turns to ashes.
+    type: Fix
+  id: 1517
+  time: '2025-03-29T08:28:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5959
 Name: RMC14
 Order: -1
