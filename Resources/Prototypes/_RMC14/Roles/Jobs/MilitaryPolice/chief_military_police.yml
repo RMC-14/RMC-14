@@ -24,7 +24,7 @@
   startingGear: CMGearChiefMP
   icon: "CMJobIconChiefMP"
   requireAdminNotify: true
-  joinNotifyCrew: true
+  joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
   accessGroups:
   - CMP

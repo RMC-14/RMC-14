@@ -30,7 +30,7 @@
   startingGear: CMGearASO
   icon: "CMJobIconASO"
   requireAdminNotify: true
-  joinNotifyCrew: true
+  joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
   accessGroups:
   - ASO

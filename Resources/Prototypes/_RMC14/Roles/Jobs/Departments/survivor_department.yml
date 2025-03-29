@@ -6,3 +6,5 @@
   color: "#C38312"
   roles:
   - CMSurvivor
+  departmentRadio: null
+  headOfDepartment: null
