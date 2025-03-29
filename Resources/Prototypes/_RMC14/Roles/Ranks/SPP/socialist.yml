@@ -121,11 +121,3 @@
   name: General Armii
   prefix: GenArm.
   paygrade: O10
-
-# This is the equivalent of the UN President, never use it, it's just for the lore. I mean it, never ever use it. Ever. This person is the supreme leader of the SPP, and realistically would never be seen aboard the Almayer unless in some organized lore event.
-
-- type: rank
-  id: RMCRankSPPMarshal
-  name: Marshal of the Progressive People
-  prefix: Comrade
-  # This is (technically) a civilian rank, so it doesn't get a paygrade. Still the supreme leader of the SPP.
