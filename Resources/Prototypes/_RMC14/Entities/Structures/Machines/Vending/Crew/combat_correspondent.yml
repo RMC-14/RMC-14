@@ -1,3 +1,5 @@
+# Equipment Vendor
+
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCrewCombatCorrespondent
@@ -65,14 +67,18 @@
         name: Fedora
     - name: Refills
       entries:
-      #- id: /obj/item/device/camera 10
+      #- id: /obj/item/device/camera
       #  name: Camera
-      #- id: /obj/item/device/camera_film 5
+      #  points: 10
+      #- id: /obj/item/device/camera_film
       #  name: Camera Film
-      #- id: /obj/item/device/toner 5
+      #  points: 5
+      #- id: /obj/item/device/toner
       #  name: Toner
-      #- id: /obj/item/storage/box/tapes 15
+      # points: 5
+      #- id: /obj/item/storage/box/tapes
       #  name: Regulation Tapes
+      #  points: 15
       - id: CMPaperBin30
         name: Paper Bin
         points: 10
@@ -80,12 +86,10 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewCombatCorrespondent
-  name: essential reporter's set
-  description: Contains a pen and a clipboard, a flashlight and binoculars.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Misc/paper.rsi
-    state: pen
+    sprite: _RMC14/Objects/Tools/Light/flashlight.rsi
+    state: flashlight
   - type: CMVendorBundle
     bundle:
     - RMCFlashlight

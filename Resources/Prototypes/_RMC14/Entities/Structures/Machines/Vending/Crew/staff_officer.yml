@@ -108,16 +108,16 @@
         name: Drop Pouch
       - id: CMWebbing
         name: Webbing
-      #- id: CMWebbingB
-      #  name: Black Webbing
+      - id: RMCWebbingBlackSmall
+        name: Black Webbing
       - id: CMWebbingHolster
         name: Shoulder Holster
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
-      - id: CMBackpack
+      - id: CMBackpackMarine
         name: Backpack
-      - id: CMSatchel
+      - id: CMSatchelMarine
         name: Satchel
     - name: Other Supplies
       entries:
@@ -145,7 +145,7 @@
         name: Whistle
         points: 5
 
-# Armoury Vend
+# Armory Vendor
 
 - type: entity
   parent: ColMarTechBase
@@ -275,7 +275,7 @@
       - id: CMHandsInsulated
         name: Insulated Gloves
         points: 3
-      - id: CMEntrenchingTool
+      - id: RMCEntrenchingToolActivated
         name: Entrenching Tool
         points: 1
       - id: RMCAttachmentMagneticHarness

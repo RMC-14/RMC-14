@@ -30,3 +30,11 @@
   - type: EntrenchingTool
   - type: XenoTunnelFiller
   - type: Shovel
+
+- type: entity
+  parent: CMEntrenchingTool
+  id: RMCEntrenchingToolActivated
+  suffix: Open
+  components:
+  - type: ItemToggle
+    activated: true

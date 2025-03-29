@@ -65,6 +65,7 @@
     - CMBloodPackFull # TODO RMC14 O-
     - CMBloodPackFull # TODO RMC14 O-
     - RMCFlashlightPen
+    #- Stethoscope
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
@@ -87,7 +88,7 @@
   description: Contains 50 metal, 40 plasteel, 25 sandbags, a high-capacity power cell, an entrenching tool, a light replacer, and a nailgun.
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Bombs/c4.rsi
+    sprite: _RMC14/Objects/Weapons/Explosives/plastic_explosives.rsi
     state: icon
   - type: CMVendorBundle
     bundle:
@@ -95,10 +96,10 @@
     - CMSandbagEmpty25
     - CMSheetMetal50
     - CMSheetPlasteel40
+    - CMAPCElectronics
     - RMCPowerCellHigh
     - CMEntrenchingTool
     - CMLightReplacer
-#    - CMAPCElectronics # TODO RMC14 uncomment when power
     - RMCNailgunTactical
 
 - type: entity
