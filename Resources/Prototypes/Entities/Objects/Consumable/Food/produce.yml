@@ -1484,7 +1484,7 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 2
-        - ReagentId: Bicaridine
+        - ReagentId: CMBicaridine
           Quantity: 20
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/lily.rsi
@@ -1545,14 +1545,14 @@
       food:
         maxVol: 24
         reagents:
-        - ReagentId: Bicaridine
+        - ReagentId: CMBicaridine
           Quantity: 5
-        - ReagentId: Kelotane
+        - ReagentId: CMKelotane
           Quantity: 5
         - ReagentId: Nutriment
           Quantity: 2
-        - ReagentId: Desoxyephedrine
-          Quantity: 10
+#        - ReagentId: Desoxyephedrine
+#          Quantity: 10
         - ReagentId: Vitamin
           Quantity: 2
   - type: Sprite
