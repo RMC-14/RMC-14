@@ -214,9 +214,9 @@
       - id: CMWebbing
         name: Webbing
         points: 10
-      #- id: CMWebbingBlack
-      #  name: Black Webbing
-      #  points: 10
+      - id: RMCWebbingBlackSmall
+        name: Black Webbing
+        points: 10
       - id: CMWebbingBrown
         name: Brown Webbing Vest
         points: 15
