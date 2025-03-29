@@ -1,17 +1,4 @@
 ﻿Entries:
-- author: crystalHex
-  changes:
-  - message: The XM51 rig can now be equipped in the suit storage slot of marine armor.
-    type: Fix
-  - message: The pistol and revolver holster rigs can now be equipped in jacket storage
-      slots.
-    type: Fix
-  - message: The XM51 gun case can no longer store Mateba holster belts and G8-A general
-      utility pouches.
-    type: Fix
-  id: 1008
-  time: '2024-11-22T00:44:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4782
 - author: FungiFellow
   changes:
   - message: Added the Custom Built Shotgun, a 6 round semi auto shotgun that has
@@ -5223,5 +5210,13 @@
   id: 1510
   time: '2025-03-29T08:11:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6008
+- author: Dygon
+  changes:
+  - message: Doafter bars now have the same opacity as the entity performing the action,
+      except for some types of hostile doafters.
+    type: Tweak
+  id: 1511
+  time: '2025-03-29T08:16:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5992
 Name: RMC14
 Order: -1
