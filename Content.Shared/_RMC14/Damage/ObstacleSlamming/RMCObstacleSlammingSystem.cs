@@ -13,6 +13,7 @@ using Content.Shared.Throwing;
 using Robust.Shared.Physics.Systems;
 using System.Numerics;
 using Content.Shared.Popups;
+using Robust.Shared.Physics.Components;
 
 namespace Content.Shared._RMC14.Damage.ObstacleSlamming;
 
@@ -35,15 +36,22 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RMCObstacleSlammingComponent, StartCollideEvent>(HandleCollide);
+        SubscribeLocalEvent<RMCObstacleSlammingComponent, ThrowDoHitEvent>(HandleCollide);
     }
 
-    private void HandleCollide(Entity<RMCObstacleSlammingComponent> ent, ref StartCollideEvent args)
+    private void HandleCollide(Entity<RMCObstacleSlammingComponent> ent, ref ThrowDoHitEvent args)
     {
-        if (!args.OurFixture.Hard || !args.OtherFixture.Hard)
+        var user = args.Thrown;
+        var obstacle = args.Target;
+
+        if (args.Handled)
             return;
 
-        var user = args.OurEntity;
+        if (!TryComp<PhysicsComponent>(user, out var body) || !TryComp<PhysicsComponent>(obstacle, out var bodyObstacle))
+            return;
+
+        if (!body.Hard || !bodyObstacle.Hard)
+            return;
 
         if (!_size.TryGetSize(user, out var size))
             return;
@@ -51,7 +59,7 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
         if (!HasComp<DamageableComponent>(user))
             return;
 
-        var speed = args.OurBody.LinearVelocity.Length();
+        var speed = body.LinearVelocity.Length();
 
         if (speed < ent.Comp.MinimumSpeed)
             return;
@@ -90,5 +98,7 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
         var selfMessage = Loc.GetString("rmc-obstacle-slam-self", ("ent", user), ("object", args.OtherEntity));
         var othersMessage = Loc.GetString("rmc-obstacle-slam-others", ("ent", user), ("object", args.OtherEntity));
         _popup.PopupPredicted(selfMessage, othersMessage, user, user, PopupType.MediumCaution);
+
+        args.Handled = true;
     }
 }
