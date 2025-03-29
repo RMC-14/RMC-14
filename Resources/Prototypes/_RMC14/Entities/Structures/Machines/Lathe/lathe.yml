@@ -46,6 +46,10 @@
       tags:
       - Metal
       - RMCGlass
+      - RMCTablePartMetal
+      - RMCRackParts
+      - RMCTablePartMetalReinforced
+      - RodMetal1
   - type: Destructible
     thresholds:
     - trigger:
