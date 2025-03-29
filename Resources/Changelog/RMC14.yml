@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Updated Stella 'Lake' Poley, added Merlin Leander, Kazi Priestess figurine.
-    type: Add
-  id: 1021
-  time: '2024-11-27T01:20:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4914
 - author: Rainbeon
   changes:
   - message: Re-enabled tackle cooldown reduction on a miss. Missing a tackle will
@@ -5332,5 +5325,12 @@
   id: 1523
   time: '2025-03-29T19:53:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6013
+- author: CyberTropic
+  changes:
+  - message: 'Added LV624 Inserts for: sand temple, nexus barricade, armory, gym.'
+    type: Add
+  id: 1524
+  time: '2025-03-29T19:54:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5981
 Name: RMC14
 Order: -1
