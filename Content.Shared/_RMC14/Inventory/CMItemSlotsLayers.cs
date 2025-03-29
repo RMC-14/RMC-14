@@ -7,3 +7,9 @@ public enum CMItemSlotsLayers
 {
     Fill,
 }
+
+[Serializable, NetSerializable]
+public enum CMItemSlotsLayers2
+{
+    Fill,
+}

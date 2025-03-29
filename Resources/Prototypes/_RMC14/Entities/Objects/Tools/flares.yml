@@ -147,9 +147,9 @@
       endValue: 1.0
 
 - type: entity
-  parent: RMCBoxMagazineBase
+  parent: RMCBoxMagazineSupplyBase
   id: RMCBoxPackFlareEmpty
-  name: box of M94 flare packs
+  name: box of M94 flare packs (x10)
   description: A box of M94 marking flare packs, to brighten up your day.
   components:
   - type: Construction
@@ -165,27 +165,17 @@
         tags:
         - CMFlarePack
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     layers:
-    - state: supply_crate
-    - state: magaz_flares
+    - state: supply_box
+      color: "#887b67"
+    - state: supply_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: text_m94
-    - state: supply_crate_lid
+      color: "#867872"
+    - state: supply_box_lightflare
+      color: "#e0d5c2"
+    - state: supply_lid_closed
       map: [ "lid" ]
-  - type: GenericVisualizer
-    visuals:
-      enum.DeployableItemVisuals.Deployed:
-        lid:
-          True: { visible: false }
-          False: { visible: true }
-      enum.CMItemSlotsLayers.Fill:
-        enum.CMItemSlotsLayers.Fill:
-          Empty: { state: magaz_flares, visible: false }
-          Low: { state: magaz_flares_1, visible: true }
-          Medium: { state: magaz_flares_2, visible: true }
-          High: { state: magaz_flares_3, visible: true }
-          Full: { state: magaz_flares, visible: true }
+      color: "#887b67"
 
 - type: entity
   parent: RMCBoxPackFlareEmpty
@@ -196,9 +186,9 @@
     startingItem: CMPackFlare
 
 - type: entity
-  parent: RMCBoxMagazineBase
+  parent: RMCBoxMagazineSupplyBase
   id: RMCBoxPackFlareCASEmpty
-  name: box of M89-S flare packs
+  name: box of M89-S flare packs (x10)
   description: A box of M89 signal flare packs, to mark up the way.
   components:
   - type: Construction
@@ -214,27 +204,17 @@
         tags:
         - RMCPackFlareCAS
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     layers:
-    - state: supply_crate
-    - state: magaz_flares_signal
+    - state: supply_box
+      color: "#887b67"
+    - state: supply_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: text_m89
-    - state: supply_crate_lid
+      color: "#867872"
+    - state: supply_box_casflare
+      color: "#e0d5c2"
+    - state: supply_lid_closed
       map: [ "lid" ]
-  - type: GenericVisualizer
-    visuals:
-      enum.DeployableItemVisuals.Deployed:
-        lid:
-          True: { visible: false }
-          False: { visible: true }
-      enum.CMItemSlotsLayers.Fill:
-        enum.CMItemSlotsLayers.Fill:
-          Empty: { state: magaz_flares_signal, visible: false }
-          Low: { state: magaz_flares_signal_1, visible: true }
-          Medium: { state: magaz_flares_signal_2, visible: true }
-          High: { state: magaz_flares_signal_3, visible: true }
-          Full: { state: magaz_flares_signal, visible: true }
+      color: "#887b67"
 
 - type: entity
   parent: RMCBoxPackFlareCASEmpty
