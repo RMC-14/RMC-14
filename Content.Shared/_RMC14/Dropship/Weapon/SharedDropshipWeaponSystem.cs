@@ -1036,7 +1036,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                                 chain,
                                 flight.Fire.Range,
                                 flight.Fire.Intensity,
-                                flight.Fire.Duration
+                                flight.Fire.Duration,
+                                out _
                             );
                         }
                     }
@@ -1052,7 +1053,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                                     chain,
                                     flight.Fire.Range,
                                     flight.Fire.Intensity,
-                                    flight.Fire.Duration
+                                    flight.Fire.Duration,
+                                    out _
                                 );
                             }
                         }
