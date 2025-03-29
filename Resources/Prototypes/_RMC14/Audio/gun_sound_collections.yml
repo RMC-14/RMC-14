@@ -25,7 +25,6 @@
   id: CMM54CShoot
   files:
   - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m54c_1.ogg
-  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m54c_2.ogg
 
 - type: soundCollection
   id: CMSilencedShoot

@@ -56,6 +56,9 @@ public sealed partial class HiveComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan NewCoreCooldown = TimeSpan.FromMinutes(5);
 
+    [DataField, AutoNetworkedField]
+    public TimeSpan PreSetupCutoff = TimeSpan.FromMinutes(20);
+
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NewCoreAt;
 

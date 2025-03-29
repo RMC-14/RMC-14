@@ -56,4 +56,5 @@
     - state: bullet
       shader: unshaded
   - type: BulletholeGenerator
+  - type: RMCBullet
   - type: RMCProjectileAccuracy

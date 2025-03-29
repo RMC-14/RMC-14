@@ -48,7 +48,7 @@
     maxPlasma: 300
     plasmaRegenOnWeeds: 5
   - type: CMArmor
-    armor: 25
+    xenoArmor: 25
     explosionArmor: 80
   - type: XenoClaws
     clawType: VerySharp

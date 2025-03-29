@@ -53,6 +53,8 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
     private const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque);
 
+    private static readonly EntProtoId DisarmEffect = "RMCWeaponArcDisarm"; // RMC14
+
     /// <summary>
     /// Maximum amount of targets allowed for a wide-attack.
     /// </summary>
@@ -431,7 +433,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
                     if (!DoDisarm(user, disarm, weaponUid, weapon, session))
                         weapon.NextAttack = curTime + TimeSpan.FromSeconds(0.6);
 
-                    animation = weapon.Animation;
+                    animation = DisarmEffect; // RMC14 change disarm effect
                     break;
                 case HeavyAttackEvent heavy:
                     if (!DoHeavyAttack(user, heavy, weaponUid, weapon, session))
