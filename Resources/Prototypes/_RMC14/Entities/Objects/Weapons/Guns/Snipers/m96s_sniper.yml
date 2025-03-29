@@ -235,7 +235,7 @@
     amount: 0
   - type: AimedShotEffect
     extraHits: 1
-    superSlowDuration: 7
+    superSlowDuration: 14
   - type: RMCAreaDamage
     damageArea: 2.5
     falloffDistance: 1.5
