@@ -9,13 +9,16 @@
   components:
   - type: GhostRole
     name: cm-job-name-xeno-queen
+  - type: OwOAccent
+  - type: Speech
+    speechSounds: Cat
   - type: Sprite
-    sprite: _RMC14/Mobs/Xenonids/Queen/queen.rsi
+    sprite: _RMC14/Mobs/Xenonids/Extras/queen.rsi
     layers:
     - map: [ "enum.XenoVisualLayers.Base" ]
       state: alive
     - map: [ "enum.XenoVisualLayers.Ovipositor" ]
-      sprite: _RMC14/Mobs/Xenonids/Queen/ovipositor.rsi
+      sprite: _RMC14/Mobs/Xenonids/Extras/ovipositor.rsi
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Left" ]
