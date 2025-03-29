@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: Fixed food trays leaving behind an empty tray when eaten.
-    type: Fix
-  id: 1006
-  time: '2024-11-22T00:26:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4876
 - author: Irrlicht
   changes:
   - message: Adjusted Avali Front & Back Sprite to make wings look slightly more natural
@@ -5221,5 +5214,14 @@
   id: 1508
   time: '2025-03-29T08:03:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6007
+- author: stranthbackup
+  changes:
+  - message: Fixed armors using the same value when resisting bullet and melee damage.
+      This makes the M3-VL and M3-EOD heavy armor better at resisting bullet damage
+      for example.
+    type: Fix
+  id: 1509
+  time: '2025-03-29T08:10:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5944
 Name: RMC14
 Order: -1
