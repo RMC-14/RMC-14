@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed hypersleep pods stunning on exit
-    type: Fix
-  id: 1016
-  time: '2024-11-24T07:22:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4927
-- author: Vermidia
-  changes:
   - message: Fixed acider runners being able to acid some walls.
     type: Fix
   id: 1017
@@ -5174,5 +5167,13 @@
   id: 1518
   time: '2025-03-29T08:34:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5924
+- author: Tyzemol
+  changes:
+  - message: Fixed Hive core not being able to be destroyed and rebuilt without a
+      cooldown in the first 20 minutes of the game.
+    type: Fix
+  id: 1519
+  time: '2025-03-29T08:38:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5921
 Name: RMC14
 Order: -1
