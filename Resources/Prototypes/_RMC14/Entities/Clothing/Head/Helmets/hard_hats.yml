@@ -20,8 +20,8 @@
       head:
       - state: off-equipped-HELMET
   - type: CMArmor
-    meleeArmor: 20
-    bulletArmor: 10
+    melee: 20
+    bullet: 10
     explosionArmor: 0
   - type: CMHardArmor
   - type: Appearance

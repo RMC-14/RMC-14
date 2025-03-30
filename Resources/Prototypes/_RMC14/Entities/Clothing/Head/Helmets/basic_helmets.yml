@@ -91,8 +91,8 @@
   abstract: true
   components:
   - type: CMArmor
-    meleeArmor: 20
-    bulletArmor: 20
+    melee: 20
+    bullet: 20
     explosionArmor: 10
   - type: RMCBulkyArmor
   - type: OverwatchCamera
@@ -135,8 +135,8 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/riot.rsi
   - type: CMArmor
-    meleeArmor: 30
-    bulletArmor: 10
+    melee: 30
+    bullet: 10
     explosionArmor: 0
   - type: CMHardArmor
 
