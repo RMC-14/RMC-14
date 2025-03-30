@@ -147,6 +147,7 @@
 - type: entity
   parent: ActionMarineToggleable
   id: RMCActionSpotTarget
+  description: Press the unique action key while hovering your mouse over a target to start spotting.
   name: Spot Target
   components:
   - type: InstantAction
@@ -174,6 +175,7 @@
   parent: ActionMarineToggleable
   id: RMCActionAimedShot
   name: Aimed Shot
+  description: Press the unique action key while hovering your mouse over a target while in combat mode to start aiming.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
