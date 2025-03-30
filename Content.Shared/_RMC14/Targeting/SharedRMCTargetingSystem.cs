@@ -21,6 +21,9 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
         SubscribeLocalEvent<TargetingComponent, RMCDroppedEvent>(OnTargetingDropped);
         SubscribeLocalEvent<TargetingComponent, GotUnequippedHandEvent>(OnTargetingDropped);
         SubscribeLocalEvent<TargetingComponent, HandDeselectedEvent>(OnTargetingDropped);
+
+        SubscribeLocalEvent<RMCTargetedComponent, ComponentRemove>(OnTargetedRemove);
+        SubscribeLocalEvent<RMCTargetedComponent, EntityTerminatingEvent>(OnTargetedRemove);
     }
 
     /// <summary>
@@ -36,7 +39,7 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
 
         while (targeting.Comp.Targets.Count > 0)
         {
-            StopTargeting(targeting, targeting.Comp.Targets[0]);
+            StopTargeting((targeting, targeting), targeting.Comp.Targets[0]);
         }
     }
 
@@ -50,29 +53,43 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
 
         while (targeting.Comp.Targets.Count > 0)
         {
-            StopTargeting(targeting, targeting.Comp.Targets[0]);
+            StopTargeting((targeting, targeting), targeting.Comp.Targets[0]);
+        }
+    }
+
+    private void OnTargetedRemove<T>(Entity<RMCTargetedComponent> ent, ref T args)
+    {
+        foreach (var targeting in ent.Comp.TargetedBy)
+        {
+            if (!TryComp(targeting, out TargetingComponent? targetingComp))
+                continue;
+
+            targetingComp.Targets.Remove(ent);
+            targetingComp.LaserDurations.Remove(ent);
+            targetingComp.OriginalLaserDurations.Remove(ent);
+            Dirty(targeting, targetingComp);
         }
     }
 
     /// <summary>
     ///     Remove the laser and replace targeting effects originating from the given entity.
     /// </summary>
-    /// <param name="targetingUid">The entity that is targeting</param>
+    /// <param name="targeting">The entity that is targeting</param>
     /// <param name="target">The entity being targeted</param>
     /// <param name="targeting">The <see cref="TargetingComponent"/> belonging to the targing entity</param>
-    public void StopTargeting(EntityUid targetingUid, EntityUid target, TargetingComponent? targeting = null)
+    public void StopTargeting(Entity<TargetingComponent?> targeting, EntityUid target)
     {
-        if(!Resolve(targetingUid, ref targeting))
+        if (!Resolve(targeting, ref targeting.Comp, false))
             return;
+
+        targeting.Comp.Targets.Remove(target);
+        Dirty(targeting);
 
         if (!TryComp(target, out RMCTargetedComponent? targeted))
             return;
 
-        targeted.TargetedBy.Remove(targetingUid);
+        targeted.TargetedBy.Remove(targeting);
         Dirty(target, targeted);
-
-        targeting.Targets.Remove(target);
-        Dirty(targetingUid, targeting);
 
         // Find the next target marker with the highest priority
         var highestMark = TargetedEffects.None;
@@ -108,8 +125,8 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
         // Remove the target's targeted component if it has nothing targeting it anymore
         RemComp<RMCTargetedComponent>(target);
 
-        if(targeting.Targets.Count == 0)
-            RemComp<TargetingComponent>(targetingUid);
+        if (targeting.Comp.Targets.Count == 0)
+            RemComp<TargetingComponent>(targeting);
     }
 
     /// <summary>
@@ -237,8 +254,11 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
                     if (targeting.LaserDurations[target][laserNumber] <= 0)
                     {
                         RemoveLaser((uid, targeting), target, laserNumber);
-                        var ev = new TargetingFinishedEvent(targeting.User, Transform(target).Coordinates, target);
-                        RaiseLocalEvent(uid, ref ev);
+                        if (TryComp(target, out TransformComponent? targetTransform))
+                        {
+                            var ev = new TargetingFinishedEvent(targeting.User, targetTransform.Coordinates, target);
+                            RaiseLocalEvent(uid, ref ev);
+                        }
                         break;
                     }
                     laserNumber++;
@@ -247,7 +267,8 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
             }
 
             // Remove the active component and raise an event if the user moves.
-            if (!_transform.InRange(Transform(xform.ParentUid).Coordinates, targeting.Origin, 0.1f))
+            if (TryComp(xform.ParentUid, out TransformComponent? parentTransform) &&
+                !_transform.InRange(parentTransform.Coordinates, targeting.Origin, 0.1f))
             {
                 var ev = new TargetingCancelledEvent();
                 RaiseLocalEvent(uid, ref ev);
@@ -257,7 +278,7 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
                 Dirty(uid, targeting);
                 while (targeting.Targets.Count > 0)
                 {
-                    StopTargeting(uid, targeting.Targets[0]);
+                    StopTargeting((uid, targeting), targeting.Targets[0]);
                 }
             }
         }
