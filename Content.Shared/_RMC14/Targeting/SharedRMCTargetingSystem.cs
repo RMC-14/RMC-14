@@ -21,6 +21,8 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
         SubscribeLocalEvent<TargetingComponent, RMCDroppedEvent>(OnTargetingDropped);
         SubscribeLocalEvent<TargetingComponent, GotUnequippedHandEvent>(OnTargetingDropped);
         SubscribeLocalEvent<TargetingComponent, HandDeselectedEvent>(OnTargetingDropped);
+
+        SubscribeLocalEvent<RMCTargetedComponent, ComponentShutdown>(OnTargetedRemoved);
     }
 
     /// <summary>
@@ -55,6 +57,27 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
     }
 
     /// <summary>
+    ///     Stop targeting an entity when it's deleted.
+    /// </summary>
+    private void OnTargetedRemoved(Entity<RMCTargetedComponent> targeted, ref ComponentShutdown args)
+    {
+        if (_net.IsClient)
+            return;
+
+        foreach (var targeting in targeted.Comp.TargetedBy)
+        {
+            var ev = new TargetingCancelledEvent();
+            RaiseLocalEvent(targeting, ref ev);
+
+            if (!TryComp(targeting, out TargetingComponent? targetingComp))
+                continue;
+
+            var target = targetingComp.Targets.Find(i => i == targeted.Owner);
+            StopTargeting(targeting, target);
+        }
+    }
+
+    /// <summary>
     ///     Remove the laser and replace targeting effects originating from the given entity.
     /// </summary>
     /// <param name="targetingUid">The entity that is targeting</param>
@@ -65,14 +88,14 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
         if(!Resolve(targetingUid, ref targeting))
             return;
 
+        targeting.Targets.Remove(target);
+        Dirty(targetingUid, targeting);
+
         if (!TryComp(target, out RMCTargetedComponent? targeted))
             return;
 
         targeted.TargetedBy.Remove(targetingUid);
         Dirty(target, targeted);
-
-        targeting.Targets.Remove(target);
-        Dirty(targetingUid, targeting);
 
         // Find the next target marker with the highest priority
         var highestMark = TargetedEffects.None;
