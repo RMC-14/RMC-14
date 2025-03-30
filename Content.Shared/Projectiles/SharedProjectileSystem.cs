@@ -170,12 +170,12 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         {
             _guns.PlayImpactSound(target, modifiedDamage, component.SoundHit, component.ForceSound, filter, projectile);
 
-            if (!ourBody.LinearVelocity.IsLengthZero())
-            {
-                var direction = ourBody.LinearVelocity.Normalized();
-                if (!float.IsNaN(direction.X))
-                    _sharedCameraRecoil.KickCamera(target, direction);
-            }
+            // if (!ourBody.LinearVelocity.IsLengthZero())
+            // {
+            //     var direction = ourBody.LinearVelocity.Normalized();
+            //     if (!float.IsNaN(direction.X))
+            //         _sharedCameraRecoil.KickCamera(target, direction);
+            // }
         }
 
         component.ProjectileSpent = true;

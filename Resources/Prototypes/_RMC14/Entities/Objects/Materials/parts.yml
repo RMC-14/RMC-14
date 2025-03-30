@@ -85,6 +85,9 @@
     node: CMRodPlasteel
   - type: StackPrice
     price: 15
+  - type: RMCRefinable
+    spawn:
+    - id: CMSheetPlasteel1
 
 - type: entity
   parent: CMRodPlasteel

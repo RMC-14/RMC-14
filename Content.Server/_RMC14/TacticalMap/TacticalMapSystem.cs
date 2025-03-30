@@ -56,6 +56,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private EntityQuery<TransformComponent> _transformQuery;
     private EntityQuery<XenoMapTrackedComponent> _xenoMapTrackedQuery;
 
+    private readonly HashSet<Entity<TacticalMapTrackedComponent>> _toInit = new();
     private readonly HashSet<Entity<ActiveTacticalMapTrackedComponent>> _toUpdate = new();
     private readonly List<TacticalMapLine> _emptyLines = new();
 
@@ -202,9 +203,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void OnTrackedMapInit(Entity<TacticalMapTrackedComponent> ent, ref MapInitEvent args)
     {
-        var state = _mobStateQuery.CompOrNull(ent)?.CurrentState ?? MobState.Alive;
-        UpdateActiveTracking(ent, state);
-
+        _toInit.Add(ent);
         if (TryComp(ent, out ActiveTacticalMapTrackedComponent? active))
             _toUpdate.Add((ent, active));
     }
@@ -568,6 +567,19 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     public override void Update(float frameTime)
     {
+        try
+        {
+            foreach (var init in _toInit)
+            {
+                var state = _mobStateQuery.CompOrNull(init)?.CurrentState ?? MobState.Alive;
+                UpdateActiveTracking(init, state);
+            }
+        }
+        finally
+        {
+            _toInit.Clear();
+        }
+
         try
         {
             foreach (var update in _toUpdate)
