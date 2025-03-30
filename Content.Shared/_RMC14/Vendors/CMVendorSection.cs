@@ -65,6 +65,9 @@ public sealed partial record CMVendorEntry
     [DataField]
     public int? Max;
 
+    [DataField]
+    public List<EntProtoId> LinkedEntries = new();
+
     [DataField, AutoNetworkedField]
     public EntProtoId? Box;
 

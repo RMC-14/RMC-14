@@ -1,82 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Re-enabled tackle cooldown reduction on a miss. Missing a tackle will
-      now put it on a 0.6 second cooldown, instead of a full-length cooldown.
-    type: Fix
-  - message: Fixed no visual effect occuring on a tackle miss.
-    type: Fix
-  - message: Fixed being able to try to tackle a very far away object that you would
-      otherwise always fail to tackle.
-    type: Fix
-  id: 1022
-  time: '2024-11-27T01:22:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4917
-- author: Rainbeon
-  changes:
-  - message: Fixed under-tile plating slowing pulls by ~10%.
-    type: Fix
-  id: 1023
-  time: '2024-11-27T01:26:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4934
-- author: Vermidia
-  changes:
-  - message: Fixed new stasis mechanics not working
-    type: Fix
-  id: 1024
-  time: '2024-11-27T01:25:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4919
-- author: beck-thompson
-  changes:
-  - message: Body armor lights are now predicted. Yay!
-    type: Fix
-  id: 1025
-  time: '2024-11-27T01:27:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4932
-- author: CyberTropic
-  changes:
-  - message: Added fuel pump animation.
-    type: Add
-  id: 1026
-  time: '2024-11-27T01:30:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4905
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added an option to automatically punctuate character messages in the
-      settings
-    type: Add
-  id: 1027
-  time: '2024-11-27T01:36:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4924
-- author: DrSmugleaf
-  changes:
-  - message: Fixed parasites being able to hide under generators.
-    type: Fix
-  id: 1028
-  time: '2024-11-27T10:40:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4966
-- author: Whisper
-  changes:
-  - message: Added Marrik', Xalos-of-Europa figurines.
-    type: Add
-  id: 1029
-  time: '2024-11-28T01:29:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4965
-- author: blueDev2
-  changes:
-  - message: Fixed a case where resin traps would not be shown above weeds if the
-      weeds they are on are removed and then built back again.
-    type: Fix
-  id: 1030
-  time: '2024-11-28T06:32:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4968
-- author: Rainbeon
-  changes:
-  - message: Fixed Xenos being stunned by 50% longer than they were supposed to be.
-    type: Fix
-  id: 1031
-  time: '2024-11-29T04:39:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4970
 - author: DummeHytteOst
   changes:
   - message: XOs have been given a coat, senior command headset, Leather satchle,
@@ -5332,5 +5254,114 @@
   id: 1524
   time: '2025-03-29T19:54:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5981
+- author: to4no_fix
+  changes:
+  - message: Increase text size in radio for commander headsets slightly reduced (FTL
+      remained unchanged)
+    type: Tweak
+  id: 1525
+  time: '2025-03-30T00:14:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6024
+- author: DrSmugleaf
+  changes:
+  - message: Fixed most marines not showing up on the live tactical map.
+    type: Fix
+  - message: Fixed marines and xenos taking camera recoil from projectiles.
+    type: Fix
+  - message: Fixed visual glitches sometimes when moving with a bipod deployed.
+    type: Fix
+  - message: Fixed some laser cannon fire values being incorrect, fixes duration not
+      being 5 seconds.
+    type: Fix
+  - message: Fixed plasteel rods refining into metal instead of plasteel.
+    type: Fix
+  - message: Fixed soda fountain not being unanchorable.
+    type: Fix
+  id: 1526
+  time: '2025-03-30T00:17:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6025
+- author: Vermidia
+  changes:
+  - message: Fixed laser fire looking like normal fire.
+    type: Fix
+  id: 1527
+  time: '2025-03-30T03:17:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6026
+- author: DrSmugleaf
+  changes:
+  - message: Fixed aimed shot and spotter designator causing the game to freeze and
+      crash. This re-enables both.
+    type: Fix
+  - message: Fixed not being able to pull ammo out of CAS weapons with the power loader.
+    type: Fix
+  - message: Fixed the tactical map not showing communication towers, sensor tower,
+      and Queen.
+    type: Fix
+  - message: Fixed the HIRR baton slug fitting into underbarrel grenade launcher attachments.
+    type: Fix
+  - message: Fixed ladders leaving behind ghosts of people climbing through them.
+    type: Fix
+  - message: Fixed the soda fountain not being able to be pulled and not starting
+      anchored.
+    type: Fix
+  - message: Fixed aimed shot and spotter designator laser drawing being hidden under
+      some things.
+    type: Fix
+  id: 1528
+  time: '2025-03-30T03:34:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6030
+- author: DrSmugleaf
+  changes:
+  - message: Fixed tactical map blips not being shown.
+    type: Fix
+  id: 1529
+  time: '2025-03-30T05:28:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6031
+- author: noctyrnal
+  changes:
+  - message: The AMR and its magazine have received new sprites.
+    type: Tweak
+  id: 1530
+  time: '2025-03-30T22:07:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6041
+- author: Dygon
+  changes:
+  - message: Crushers, aciders and praetorians now have correct armor values again.
+    type: Fix
+  - message: Xenonid abilities don't ignore armor anymore.
+    type: Fix
+  id: 1531
+  time: '2025-03-30T22:09:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6039
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed parasites thrown by carriers slamming into walls
+    type: Fix
+  - message: Fixed defender headbutt slamming victims
+    type: Fix
+  - message: Fixed ravager assault slamming victims into themselves
+    type: Fix
+  id: 1532
+  time: '2025-03-30T22:12:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6038
+- author: DummeHytteOst
+  changes:
+  - message: Added groundside warning sound for inbound rockets, played when the green
+      dot appears.
+    type: Add
+  id: 1533
+  time: '2025-03-30T22:23:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6034
+- author: Dygon
+  changes:
+  - message: The spotting and aimed shot action descriptions now explain how to use
+      them.
+    type: Add
+  - message: Fixed the sniper kit and the anti-materiel sniper kit not sharing the
+      same specialist limit.
+    type: Fix
+  id: 1534
+  time: '2025-03-30T22:28:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6035
 Name: RMC14
 Order: -1

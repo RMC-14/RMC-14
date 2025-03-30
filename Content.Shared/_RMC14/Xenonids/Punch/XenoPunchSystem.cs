@@ -48,7 +48,7 @@ public sealed class XenoPunchSystem : EntitySystem
         var targetId = args.Target;
         _rmcPulling.TryStopAllPullsFromAndOn(targetId);
 
-        var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage);
+        var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage, origin: xeno, tool: xeno);
         if (damage?.GetTotal() > FixedPoint2.Zero)
         {
             var filter = Filter.Pvs(targetId, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);

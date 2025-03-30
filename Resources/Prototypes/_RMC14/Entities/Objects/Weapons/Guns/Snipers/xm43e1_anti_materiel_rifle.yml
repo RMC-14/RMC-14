@@ -2,22 +2,26 @@
   parent: RMCBaseWeaponSniperRifle
   id: RMCXM43E1AntiMaterielRifle
   name: XM43E1 anti-materiel rifle
-  description: An experimental anti-materiel rifle produced by Aegis Armaments, recently reacquired from the deep storage of an abandoned prototyping facility. This one in particular is currently undergoing field testing. Chambered in 10x99mm Caseless.\n\nThis weapon can punch through thin metal plating and walls, though it'll lose most of its lethality in the process. It can even work for demolitions, with experienced users known to disassemble segments of solid, reinforced walls in the field with just a single standard magazine of 10x99mm. In lieu of explosives or an engineer, they instead use each of the 8 shots to break down vital structural supports, taking the wall apart in the process.
+  description: An experimental anti-materiel rifle produced by Aegis Armaments, recently reacquired from the deep storage of an abandoned prototyping facility. This one in particular is currently undergoing field testing. Chambered in 10x99mm Caseless. This weapon can punch through thin metal plating and walls, though it'll lose most of its lethality in the process. It can even work for demolitions, with experienced users known to disassemble segments of solid, reinforced walls in the field with just a single standard magazine of 10x99mm. In lieu of explosives or an engineer, they instead use each of the 8 shots to break down vital structural supports, taking the wall apart in the process.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Snipers/xm43e1.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Snipers/xm43e1/xm43e1_inhands.rsi
     layers:
+    - state: base
+      sprite: _RMC14/Objects/Weapons/Guns/Snipers/xm43e1/xm43e1_icon.rsi
     - state: bolt-open
+      sprite: _RMC14/Objects/Weapons/Guns/Snipers/xm43e1/xm43e1_icon.rsi
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
+      sprite: _RMC14/Objects/Weapons/Guns/Snipers/xm43e1/xm43e1_icon.rsi
       map: [ "enum.GunVisualLayers.Mag" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
-      state: pmc_sniperbarrel
-      offset: 0.500, 0.050
+#    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/barrel.rsi
+#      state: pmc_sniperbarrel
+#      offset: 0.500, 0.050
   - type: Item
     size: Large
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Snipers/xm43e1.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Snipers/xm43e1/xm43e1_inhands.rsi
   - type: Tag
     tags:
     - RMCXM43E1AntiMaterielRifle
@@ -97,7 +101,7 @@
     proto: RMCCartridgeSniper10x99mmAntiMateriel
     capacity: 8
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m42c.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/xm43e1.rsi
     layers:
     - state: mag-0
       map: ["enum.GunVisualLayers.Base"]

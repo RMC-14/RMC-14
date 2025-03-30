@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: RMCDropshipAttachmentBase
   id: RMCDropshipAttachmentAmmo
@@ -127,6 +127,7 @@
     travelTime: 6
     weapon: RMCDropshipAttachmentGuidedMissileLauncher
     soundCockpit: /Audio/_RMC14/Effects/rocketpod_fire.ogg
+    soundMarker: /Audio/_RMC14/Effects/rocketpod_fire.ogg #IncommingRocket.ogg sounds better, and more accurate, but this is what is used in parity, i believe it to be a mistake in the original PR, but we can change it in the future
     deleteOnEmpty: true
 
 - type: entity

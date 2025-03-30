@@ -58,8 +58,9 @@
       params:
         volume: -6
     fire:
+      type: RMCTileFireLaser
       range: 3
-      intensity: 75
+      intensity: 55
       duration: 5
       total: 16
     deleteOnEmpty: true
