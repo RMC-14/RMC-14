@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed new stasis mechanics not working
-    type: Fix
-  id: 1024
-  time: '2024-11-27T01:25:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4919
 - author: beck-thompson
   changes:
   - message: Body armor lights are now predicted. Yay!
@@ -5338,5 +5331,12 @@
   id: 1526
   time: '2025-03-30T00:17:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6025
+- author: Vermidia
+  changes:
+  - message: Fixed laser fire looking like normal fire.
+    type: Fix
+  id: 1527
+  time: '2025-03-30T03:17:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6026
 Name: RMC14
 Order: -1
