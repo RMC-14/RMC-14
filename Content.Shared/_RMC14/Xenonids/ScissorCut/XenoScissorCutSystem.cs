@@ -94,7 +94,7 @@ public sealed class XenoScissorCutSystem : EntitySystem
 
             if (TryComp<DamageOnXenoScissorsComponent>(des, out var destruct))
             {
-                var dam = _damage.TryChangeDamage(des, destruct.Damage);
+                var dam = _damage.TryChangeDamage(des, destruct.Damage, origin: xeno);
 
                 if (dam?.GetTotal() > FixedPoint2.Zero)
                 {
