@@ -241,14 +241,14 @@
       - id: RMCLaserDesignator
         name: Laser Designator
         points: 15
-    - name: Helmet Optics
-      entries: [ ]
-      #- id: CMMedicalHelmetOptic
-      #  name: Medical Helmet Optic
-      #  points: 12
-      #- id: RMCVisorWelding
-      #  name: Welding Visor
-      #  points: 5
+    #- name: Helmet Optics
+    #  entries:
+    #  - id: CMMedicalHelmetOptic
+    #    name: Medical Helmet Optic
+    #    points: 12
+    #  - id: RMCVisorWelding
+    #    name: Welding Visor
+    #    points: 5
     - name: Pamphlets
       entries:
       - id: CMPamphletJTAC
@@ -295,9 +295,9 @@
       #- id: CMMap # TODO: Make a map
       #  name: Map
       #  mandatory: true
-    - name: Helmet
-      choices: { CMHelmet: 1 }
-      entries: [ ]
+    #- name: Helmet
+    #  choices: { CMHelmet: 1 }
+    #  entries:
     #  - id: TechHelmet
     #    name: M10 technician helmet
     #  - id: WeldingHelmet
@@ -483,8 +483,8 @@
       - id: CMLightReplacer
         name: Light Replacer
         amount: 4
-    - name: Utility
-      entries: [ ]
+    #- name: Utility
+    #  entries:
     #  - id: SentryGunLaptop
     #    name: Sentry Gun Network Laptop
     #    amount: 4

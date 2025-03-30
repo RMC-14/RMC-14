@@ -284,14 +284,14 @@
       - id: RMCLaserDesignator
         name: Laser Designator
         points: 15
-    - name: Helmet Optics
-      entries: [ ]
-    #- id: CMMedicalHelmetOptic
-    #  name: Medical Helmet Optic
-    #  points: 15
-    #- id: CMWeldingVisor
-    #  name: Welding Visor
-    #  points: 5
+    #- name: Helmet Optics
+    #  entries:
+    #  - id: CMMedicalHelmetOptic
+    #    name: Medical Helmet Optic
+    #    points: 15
+    #  - id: CMWeldingVisor
+    #    name: Welding Visor
+    #    points: 5
     - name: Pamphlets
       entries:
       - id: CMPamphletJTAC
