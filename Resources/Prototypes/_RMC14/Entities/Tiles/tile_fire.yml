@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: RMCTileFire
   name: fire
   placement:
@@ -126,9 +126,25 @@
   parent: RMCTileFire
   id: RMCTileFireLaser
   components:
+  - type: Sprite
+    color: "#EE6515"
+    layers:
+    - map: [ "base" ]
+      state: white_4
   - type: RMCIgniteOnCollide
     tileDamage:
       types:
         Heat: 0.13
   - type: TileFire
     duration: 5
+  - type: PointLight
+    radius: 5
+    color: "#EE6515"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: white_1 }
+          Two: { state: white_2 }
+          Three: { state: white_3 }
+          Four: { state: white_4 }
