@@ -118,7 +118,7 @@ public sealed class XenoHeadbuttSystem : EntitySystem
             finalDamage.ExclusiveAdd(xeno.Comp.CrestedDamageReduction);
         }
 
-        var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage, armorPiercing: xeno.Comp.AP);
+        var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage, armorPiercing: xeno.Comp.AP, origin: xeno, tool: xeno);
         if (damage?.GetTotal() > FixedPoint2.Zero)
         {
             var filter = Filter.Pvs(targetId, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);

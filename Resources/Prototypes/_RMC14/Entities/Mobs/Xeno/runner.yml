@@ -191,7 +191,7 @@
     description: rmc-xeno-acider-description
     popup: rmc-xeno-acider-popup
   - type: CMArmor
-    armor: 15
+    xenoArmor: 15
   - type: MovementSpeedModifier
     baseWalkSpeed: 3.5
     baseSprintSpeed: 6.5

@@ -202,7 +202,7 @@ public sealed class XenoSprayAcidSystem : EntitySystem
                 continue;
 
             acided.NextDamageAt = time + acided.DamageEvery;
-            _damageable.TryChangeDamage(uid, acided.Damage);
+            _damageable.TryChangeDamage(uid, acided.Damage, origin: uid);
         }
     }
 }
