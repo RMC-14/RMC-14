@@ -1,19 +1,6 @@
 ﻿Entries:
 - author: Rainbeon
   changes:
-  - message: Re-enabled tackle cooldown reduction on a miss. Missing a tackle will
-      now put it on a 0.6 second cooldown, instead of a full-length cooldown.
-    type: Fix
-  - message: Fixed no visual effect occuring on a tackle miss.
-    type: Fix
-  - message: Fixed being able to try to tackle a very far away object that you would
-      otherwise always fail to tackle.
-    type: Fix
-  id: 1022
-  time: '2024-11-27T01:22:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4917
-- author: Rainbeon
-  changes:
   - message: Fixed under-tile plating slowing pulls by ~10%.
     type: Fix
   id: 1023
@@ -5332,5 +5319,13 @@
   id: 1524
   time: '2025-03-29T19:54:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5981
+- author: to4no_fix
+  changes:
+  - message: Increase text size in radio for commander headsets slightly reduced (FTL
+      remained unchanged)
+    type: Tweak
+  id: 1525
+  time: '2025-03-30T00:14:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6024
 Name: RMC14
 Order: -1
