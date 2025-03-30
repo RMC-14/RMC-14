@@ -28,10 +28,10 @@
         name: M63 Submachine Gun
         amount: 10
       - id: WeaponRifleM54C
-        name: M54C Pulse Rifle MK2
+        name: M54C Assault Rifle MK2
         amount: 15
         recommended: true
-    - name: Primary ammunition
+    - name: Primary Ammunition
       entries:
       - id: RMCBoxShotgunFlechette
         name: Box of Flechette Shells (12g)
