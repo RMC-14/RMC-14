@@ -190,7 +190,7 @@ public sealed class XenoEmpowerSystem : EntitySystem
 
         _rmcPulling.TryStopAllPullsFromAndOn(args.Hit);
 
-        var damage = _damagable.TryChangeDamage(args.Hit, xeno.Comp.LeapDamage, origin: xeno);
+        var damage = _damagable.TryChangeDamage(args.Hit, xeno.Comp.LeapDamage, origin: xeno, tool: xeno);
         if (damage?.GetTotal() > FixedPoint2.Zero)
         {
             var filter = Filter.Pvs(args.Hit, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);
