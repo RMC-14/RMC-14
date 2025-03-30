@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.CriticalGrace;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -43,6 +44,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
     [Dependency] private readonly IPrototypeManager _protoManager = default!;
+    [Dependency] private readonly TemporarySpeedModifiersSystem _temporarySpeed = default!;
 
     private readonly TimeSpan _pheromonePlasmaUseDelay = TimeSpan.FromSeconds(1);
 
@@ -196,11 +198,16 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
 
     private void OnFrenzyMovementSpeedModifiers(Entity<XenoFrenzyPheromonesComponent> frenzy, ref RefreshMovementSpeedModifiersEvent args)
     {
-        var speed = 1 + (frenzy.Comp.MovementSpeedModifier * frenzy.Comp.Multiplier).Float();
+        var speed = _temporarySpeed.CalculateSpeedModifier(frenzy,
+            (frenzy.Comp.MovementSpeedModifier * frenzy.Comp.Multiplier).Float());
         if (HasComp<PullingSlowedComponent>(frenzy.Owner))
-            speed = 1 + (frenzy.Comp.PullMovementSpeedModifier * frenzy.Comp.Multiplier).Float();
+            speed = _temporarySpeed.CalculateSpeedModifier(frenzy,
+                (frenzy.Comp.PullMovementSpeedModifier * frenzy.Comp.Multiplier).Float());
 
-        args.ModifySpeed(speed, speed);
+        if(speed == null)
+            return;
+
+        args.ModifySpeed(speed.Value, speed.Value);
     }
 
     private void OnFrenzyPullStarted(Entity<XenoFrenzyPheromonesComponent> frenzy, ref PullStartedMessage args)

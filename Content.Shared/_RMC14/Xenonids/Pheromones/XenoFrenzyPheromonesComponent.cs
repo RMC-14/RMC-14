@@ -21,10 +21,10 @@ public sealed partial class XenoFrenzyPheromonesComponent : Component
     public float AttackDamageAddPerMult = 2;
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 MovementSpeedModifier = 0.06;
+    public FixedPoint2 MovementSpeedModifier = -0.05;
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 PullMovementSpeedModifier = 0.03;
+    public FixedPoint2 PullMovementSpeedModifier = -0.025;
 
     [DataField, AutoNetworkedField]
     public ProtoId<DamageGroupPrototype> DamageGroup = "Brute";

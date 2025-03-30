@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Movement;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.Inventory;
@@ -20,6 +21,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly TemporarySpeedModifiersSystem _temporarySpeed = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _receivers = new();
 
@@ -97,8 +99,12 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         if (!hasArmor)
             return;
 
-        var speed = 1 + (comp.MoveSpeedModifier * comp.Received[0].Multiplier).Float();
-        args.ModifySpeed(speed, speed);
+        var speed = _temporarySpeed.CalculateSpeedModifier(orders, (comp.MoveSpeedModifier * comp.Received[0].Multiplier).Float());
+
+        if(speed == null)
+            return;
+
+        args.ModifySpeed(speed.Value, speed.Value);
     }
 
     private void OnMoveShutdown(Entity<MoveOrderComponent> uid, ref ComponentShutdown ev)
