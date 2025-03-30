@@ -419,7 +419,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         if (_mind.TryGetMind(tracked, out var mindId, out _) &&
             _job.MindTryGetJob(mindId, out var jobProto) &&
-            jobProto.MinimapIcon == null)
+            jobProto.MinimapIcon != null)
         {
             tracked.Comp.Icon = mapBlipOverride ?? jobProto.MinimapIcon;
             tracked.Comp.Background = jobProto.MinimapBackground;
@@ -582,10 +582,11 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         {
             foreach (var init in _toInit)
             {
+                var wasActive = HasComp<ActiveTacticalMapTrackedComponent>(init);
                 var state = _mobStateQuery.CompOrNull(init)?.CurrentState ?? MobState.Alive;
                 UpdateActiveTracking(init, state);
 
-                if (TryComp(init, out ActiveTacticalMapTrackedComponent? active))
+                if (!wasActive && TryComp(init, out ActiveTacticalMapTrackedComponent? active))
                     UpdateTracked((init, active));
             }
         }
