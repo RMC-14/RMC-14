@@ -130,13 +130,12 @@
     color: "#EE6515"
     layers:
     - map: [ "base" ]
-      state: white_4
+      state: dynamic_4
   - type: RMCIgniteOnCollide
     tileDamage:
       types:
         Heat: 0.13
   - type: TileFire
-    duration: 5
   - type: PointLight
     radius: 5
     color: "#EE6515"
@@ -144,7 +143,7 @@
     visuals:
       enum.TileFireLayers.Base:
         base:
-          One: { state: white_1 }
-          Two: { state: white_2 }
-          Three: { state: white_3 }
-          Four: { state: white_4 }
+          One: { state: dynamic_1 }
+          Two: { state: dynamic_2 }
+          Three: { state: dynamic_3 }
+          Four: { state: dynamic_4 }
