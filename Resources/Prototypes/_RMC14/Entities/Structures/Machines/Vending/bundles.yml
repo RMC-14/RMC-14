@@ -45,8 +45,7 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleSquadMedicalEssentials
-  name: essential medical set
-  description: Contains a stasis bag, a defibrillator, a roller bed, medical tools, and two blood packs.
+  name: Essential Medical Set
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Medical/stasisbag.rsi
@@ -84,8 +83,7 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleCombatTechnicianEssentials
-  name: essential engineer set
-  description: Contains 50 metal, 40 plasteel, 25 sandbags, a high-capacity power cell, an entrenching tool, a light replacer, and a nailgun.
+  name: Essential Engineer Set
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Explosives/plastic_explosives.rsi

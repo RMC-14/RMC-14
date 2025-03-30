@@ -419,8 +419,7 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewLeader
-  name: essential SL kit
-  description: Contains a laser designator, a pack of signal flares, a breaching charge and a fire extinguisher.
+  name: Essential SL Kit
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Explosives/plastic_explosives.rsi
@@ -430,7 +429,7 @@
     - RMCExplosivePlastic
     - RMCLaserDesignator
     - RMCPackFlareCAS
-    - CMFireExtinguisher
+    - CMFireExtinguisherPortable
     - RMCBoxZiptie
 
 - type: entity
@@ -472,8 +471,7 @@
 - type: entity
   parent: RMCKitBase
   id: RMCKitEngineering
-  name: engineering supply kit
-  description: Contains a construction pouch with 50 metal, 30 plasteel and 15 barbed wire, and an electronics pouch with three high-capacity power cells.
+  name: Engineering Supply Kit
   components:
   - type: Storage
     maxItemSize: Huge
