@@ -45,6 +45,7 @@
           - GlassBeaker
           - ChemDispensable
           - DrinkGlass
+  - type: Anchorable
 
 - type: entity
   parent: RMCChemStorageBase
