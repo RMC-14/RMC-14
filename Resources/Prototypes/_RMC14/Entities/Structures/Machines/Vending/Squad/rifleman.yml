@@ -1,4 +1,4 @@
-# RIFLEMAN
+# EQUIPMENT VENDOR
 
 - type: entity
   parent: ColMarTechBase
@@ -18,15 +18,18 @@
       entries:
       - id: CMVendorBundleRiflemanApparel
         name: Standard Marine Apparel
+        mandatory: true
       - id: CMMRE
         name: MRE
+        mandatory: true
       #- id: CMMap # TODO: Make a map
       #  name: Map
+      #  mandatory: true
     - name: Armor
       choices: { CMArmour: 1 }
       entries:
       - id: RMCArmorM3LightVariants
-        name: light Armor
+        name: Light Armor
       - id: RMCArmorM3MediumVariants
         name: Medium Armor
       - id: RMCArmorM3HeavyVariants
@@ -244,7 +247,7 @@
       - id: RMCWeldingGoggles
         name: Welding Goggles
         points: 5
-      #- id: CMSlingPouch
+      #- id: RMCSlingPouch
       #  name: Sling Pouch
       #  points: 15
       - id: RMCPouchGeneralLarge

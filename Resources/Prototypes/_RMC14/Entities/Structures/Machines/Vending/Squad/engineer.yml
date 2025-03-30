@@ -295,8 +295,8 @@
       #- id: CMMap # TODO: Make a map
       #  name: Map
       #  mandatory: true
-    #- name: Helmet
-    #  choices: { CMHelmet: 1 }
+    - name: Helmet
+      choices: [ ] #{ CMHelmet: 1 }
     #  entries:
     #  - id: TechHelmet
     #    name: M10 technician helmet
@@ -483,8 +483,8 @@
       - id: CMLightReplacer
         name: Light Replacer
         amount: 4
-    #- name: Utility
-    #  entries:
+    - name: Utility
+      entries: [ ]
     #  - id: SentryGunLaptop
     #    name: Sentry Gun Network Laptop
     #    amount: 4

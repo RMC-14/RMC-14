@@ -415,6 +415,6 @@
       - id: CMMaskSterile
         name: Sterile Mask
       - id: CMMaskGas
-        name: Gask Mask
+        name: Gas Mask
       - id: CMMaskCoif
         name: Heat Absorbent Coif
