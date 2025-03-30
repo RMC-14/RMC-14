@@ -23,6 +23,7 @@ using Content.Shared.UserInterface;
 using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -38,6 +39,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -415,15 +417,18 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             return;
         }
 
-        if (!_mind.TryGetMind(tracked, out var mindId, out _) ||
-            !_job.MindTryGetJob(mindId, out var jobProto) ||
+        if (_mind.TryGetMind(tracked, out var mindId, out _) &&
+            _job.MindTryGetJob(mindId, out var jobProto) &&
             jobProto.MinimapIcon == null)
         {
-            return;
+            tracked.Comp.Icon = mapBlipOverride ?? jobProto.MinimapIcon;
+            tracked.Comp.Background = jobProto.MinimapBackground;
+        }
+        else
+        {
+            tracked.Comp.Icon = mapBlipOverride;
         }
 
-        tracked.Comp.Icon = mapBlipOverride ?? jobProto.MinimapIcon;
-        tracked.Comp.Background = jobProto.MinimapBackground;
         UpdateSquadBackground(tracked);
     }
 
@@ -567,12 +572,21 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     public override void Update(float frameTime)
     {
+        if (_net.IsClient)
+        {
+            _toInit.Clear();
+            _toUpdate.Clear();
+        }
+
         try
         {
             foreach (var init in _toInit)
             {
                 var state = _mobStateQuery.CompOrNull(init)?.CurrentState ?? MobState.Alive;
                 UpdateActiveTracking(init, state);
+
+                if (TryComp(init, out ActiveTacticalMapTrackedComponent? active))
+                    UpdateTracked((init, active));
             }
         }
         finally
