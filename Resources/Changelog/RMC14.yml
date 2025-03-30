@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Fixed Xenos being stunned by 50% longer than they were supposed to be.
-    type: Fix
-  id: 1031
-  time: '2024-11-29T04:39:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4970
 - author: DummeHytteOst
   changes:
   - message: XOs have been given a coat, senior command headset, Leather satchle,
@@ -5359,5 +5352,16 @@
   id: 1533
   time: '2025-03-30T22:23:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6034
+- author: Dygon
+  changes:
+  - message: The spotting and aimed shot action descriptions now explain how to use
+      them.
+    type: Add
+  - message: Fixed the sniper kit and the anti-materiel sniper kit not sharing the
+      same specialist limit.
+    type: Fix
+  id: 1534
+  time: '2025-03-30T22:28:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6035
 Name: RMC14
 Order: -1
