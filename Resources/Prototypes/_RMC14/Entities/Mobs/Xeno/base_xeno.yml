@@ -95,6 +95,7 @@
   - type: Examiner
   - type: Eye
   - type: ContentEye
+  - type: CameraRecoil
   - type: MindContainer
     showExamineInfo: true
   - type: StatusIcon
@@ -120,6 +121,49 @@
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
       visible: false
+    - map: [ "focused" ]
+      sprite: _RMC14/Interface/xeno_hud.rsi
+      state: hudeye
+      visible: false
+    - map: [ "targetedDirection" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_direction
+      visible: false
+    - map: [ "targetedDirectionIntense" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_intense_direction
+      visible: false
+  - type: GenericVisualizer
+    visuals:
+      enum.TargetedVisuals.Targeted:
+        targeted:
+          None:
+            visible: false
+          Spotted:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: spotter_lockon
+            visible: true
+          Targeted:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: sniper_lockon
+            visible: true
+          TargetedIntense:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: sniper_lockon_intense
+            visible: true
+      enum.TargetedVisuals.TargetedDirection:
+        targetedDirection:
+          True: { visible: true}
+          False: { visible: false}
+      enum.TargetedVisuals.TargetedDirectionIntense:
+        targetedDirectionIntense:
+          True: { visible: true }
+          False: { visible: false }
+      enum.FocusedVisuals.Focused:
+        focused:
+          True: { visible: true}
+          False: { visible: false}
+  - type: Spottable
   - type: Physics
     bodyType: KinematicController
   - type: Fixtures
@@ -205,6 +249,7 @@
     - SlowedDown
     - Muted
     - Dazed
+    - Blinded
   - type: ImmuneToClothingRequiredStepTrigger
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
@@ -297,8 +342,20 @@
     durationMultiplier: 0.666
   - type: RMCCanBeFultoned
   - type: CMArmor
+    explosionArmorStep: 10
   - type: CriticalGraceTime
   - type: RMCObstacleSlamming
+  - type: Buckle
+    buckleDelay: 0
+    clickUnbuckle: false
+  - type: BuckleWhitelist
+    whitelist:
+      tags:
+      - CMRollerBed
+  - type: RMCBuckleDrawDepth
+    buckleDepth: Mobs
+  - type: RMCBuckleOffset
+    offset: 0, 0.5
 
 - type: entity
   abstract: true
@@ -390,17 +447,6 @@
   - type: ParalyzeOnPullAttempt
   - type: FirePatter
   - type: RMCHandEmotes
-  - type: Buckle
-    buckleDelay: 0
-    clickUnbuckle: false
-  - type: BuckleWhitelist
-    whitelist:
-      tags:
-      - CMRollerBed
-  - type: RMCBuckleDrawDepth
-    buckleDepth: Mobs
-  - type: RMCBuckleOffset
-    offset: 0, 0.5
 
 - type: entity
   abstract: true
@@ -410,6 +456,7 @@
     tailDamage:
       groups:
         Brute: 30
+    tailRange: 2.5
 
 - type: entity
   abstract: true

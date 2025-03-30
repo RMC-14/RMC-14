@@ -41,9 +41,15 @@
       CMSteel: 800
       CMGlass: 100
     whitelist:
+      components:
+      - FloorTile
       tags:
       - Metal
       - RMCGlass
+      - RMCTablePartMetal
+      - RMCRackParts
+      - RMCTablePartMetalReinforced
+      - RodMetal1
   - type: Destructible
     thresholds:
     - trigger:
@@ -69,6 +75,8 @@
         type: ResearchClientBoundUserInterface
   - type: Transform
     anchored: true
+  - type: Anchorable
+    flags: None
   - type: StaticPrice
     price: 800
   - type: Machine

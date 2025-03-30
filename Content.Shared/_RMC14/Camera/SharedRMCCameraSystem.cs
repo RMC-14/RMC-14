@@ -50,6 +50,9 @@ public abstract class SharedRMCCameraSystem : EntitySystem
 
     private void OnCameraMapInit(Entity<RMCCameraComponent> ent, ref MapInitEvent args)
     {
+        if (!ent.Comp.Rename)
+            return;
+
         if (ent.Comp.Id is { } id)
             _refresh.Add(id);
 

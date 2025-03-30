@@ -1,7 +1,7 @@
 # Prisoner
-- type: entity
-  parent: RMCHumanCorpse
-  id: RMCHumanCorpsePrisoner
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpsePrisoner
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpsePrisoner ]
@@ -19,9 +19,9 @@
     - RMCRadioHandheldColonyOff
 
 # Chef
-- type: entity
-  parent: RMCHumanCorpse
-  id: RMCHumanCorpseChef
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseChef
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseChef ]
@@ -41,9 +41,9 @@
 #    # radio
 
 # Doctor
-- type: entity
-  parent: RMCHumanCorpse
-  id: RMCHumanCorpseDoctor
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseDoctor
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseDoctor ]
@@ -64,9 +64,9 @@
     - RMCRadioHandheldColonyOff
 
 # Engineer
-- type: entity
-  parent: RMCHumanCorpse
-  id: RMCHumanCorpseEngineer
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseEngineer
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseEngineer ]
@@ -90,9 +90,9 @@
     - RMCRadioHandheldColonyOff
 
 # Scientist
-- type: entity
-  parent: RMCHumanCorpse
-  id: RMCHumanCorpseScientist
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseScientist
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseScientist ]
@@ -115,9 +115,9 @@
 #    # good research notes
 
 # Miner
-- type: entity
-  parent: RMCHumanCorpse
-  id: RMCHumanCorpseMiner
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseMiner
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseMiner ]
@@ -140,9 +140,9 @@
     - RMCRadioHandheldColonyOff
 
 # Security
-- type: entity
-  parent: RMCHumanCorpse
-  id: RMCHumanCorpseSecurity
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseSecurity
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseSecurity ]
@@ -165,9 +165,9 @@
     - RMCRadioHandheldColonyOff
 
 # Marshal Bureau Deputy
-- type: entity
-  parent: RMCHumanCorpse
-  id: RMCHumanCorpseDeputy
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseDeputy
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseDeputy ]
@@ -186,9 +186,9 @@
 #    belt: /obj/item/storage/belt/gun/m4a3/heavy
 
 # Corporate Liaison
-- type: entity
-  parent: RMCHumanCorpse
-  id: RMCHumanCorpseLiaison
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseLiaison
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseLiaison ]
@@ -209,9 +209,9 @@
     - RMCRadioHandheldColonyOff
 
 # Prison Guard
-- type: entity
-  parent: RMCHumanCorpse
-  id: RMCHumanCorpsePrisonGuard
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpsePrisonGuard
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpsePrisonGuard ]
@@ -230,9 +230,9 @@
     - RMCRadioHandheldColonyOff
 
 # Colonist
-- type: entity
-  parent: RMCHumanCorpse
-  id: RMCHumanCorpseColonist
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseColonist
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseColonist ]
@@ -246,15 +246,15 @@
     id: CMIDCardColonist
     ears: CMHeadsetColony
 
-- type: entity
-  parent: RMCHumanCorpseColonist
-  id: RMCHumanCorpseColonistBurst
+- type: randomHumanoidSettings
+  parent: RMCCorpseColonist
+  id: RMCCorpseColonistBurst
   components:
   - type: VictimBurst
   
-- type: entity
-  parent: RMCHumanCorpse
-  id: RMCHumanCorpseColonistKutjevo
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseColonistKutjevo
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseColonistKutjevo, RMCGearCorpseColonistKutjevoDrysuit ]
@@ -274,16 +274,16 @@
   equipment:
     jumpsuit: RMCJumpsuitKutjevoDrysuit
 
-- type: entity
-  parent: RMCHumanCorpseColonistKutjevo
-  id: RMCHumanCorpseColonistKutjevoBurst
+- type: randomHumanoidSettings
+  parent: RMCCorpseColonistKutjevo
+  id: RMCCorpseColonistKutjevoBurst
   components:
   - type: VictimBurst
 
 # We-Ya Goon
-- type: entity
-  parent: RMCHumanCorpse
-  id: RMCHumanCorpseWeYaGoon
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseWeYaGoon
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseWeYaGoon ]
@@ -308,9 +308,9 @@
     - CMMagazinePistolM77AP
     - CMMagazinePistolM77AP
 
-- type: entity
-  parent: RMCHumanCorpse
-  id: RMCHumanCorpseWeYaGoonKutjevo
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseWeYaGoonKutjevo
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseWeYaGoonKutjevo ]
@@ -322,4 +322,3 @@
     head: RMCArmorHelmetPMCKutjevoSecurity
     jumpsuit: RMCJumpsuitVeteranPMCKutjevo
     eyes: RMCGogglesKutjevo
-    

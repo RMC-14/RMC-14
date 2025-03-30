@@ -491,7 +491,33 @@
 #        box: CMMagazineSMGM63
 #      - name: Magazine Box (UT-Napthal Fuel x 8)
 #        box: CMMagazineSMGM63
-
+    - name: Ammunition Boxes
+      hasBoxes: true
+      entries:
+      - id: RMCBoxBulletsSMG
+        name: SMG HV ammunition box (10x20mm) (M63)
+        box: CMMagazineSMGM63
+        boxSlots: 13 # 600 / 48, yes we loose half a mag to the void
+      - id: RMCBoxBulletsSMGAP
+        name: SMG ammunition box (10x20mm AP) (M63)
+        box: CMMagazineSMGM63AP
+        boxSlots: 13 # 600 / 48, yes we loose half a mag to the void
+      - id: RMCBoxBulletsRifle
+        name: rifle ammunition box (10x24mm) (M4SPR)
+        box: CMMagazineRifleM4SPR
+        boxSlots: 24 # 600 / 25
+      - id: RMCBoxBulletsRifleAP
+        name: rifle ammunition box (10x24mm AP) (M4SPR)
+        box: CMMagazineRifleM4SPRAP
+        boxSlots: 24 # 600 / 25
+      - id: RMCBoxBulletsRifle
+        name: rifle ammunition box (10x24mm) (M54C)
+        box: CMMagazineRifleM54C
+        boxSlots: 15 # 600 / 40
+      - id: RMCBoxBulletsRifleAP
+        name: rifle ammunition box (10x24mm AP) (M54C)
+        box: CMMagazineRifleM54CAP
+        boxSlots: 15 # 600 / 40
  #ATTACHMENTS VENDOR
 
 - type: entity

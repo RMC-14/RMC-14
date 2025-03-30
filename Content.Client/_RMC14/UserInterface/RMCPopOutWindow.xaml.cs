@@ -16,6 +16,7 @@ public partial class RMCPopOutWindow : DefaultWindow
     protected virtual Control Control { get; } = default!;
 
     public event Action? OnFinalClose;
+    public event Action? OnPopout;
 
     private IClydeWindow? _popOutWindow;
 
@@ -63,6 +64,8 @@ public partial class RMCPopOutWindow : DefaultWindow
 
             var root = IoCManager.Resolve<IUserInterfaceManager>().CreateWindowRoot(_popOutWindow);
             root.AddChild(panel);
+
+            OnPopout?.Invoke();
         };
     }
 

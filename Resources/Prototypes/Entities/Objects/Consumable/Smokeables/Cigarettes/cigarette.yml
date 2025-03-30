@@ -203,7 +203,7 @@
         reagents:
           - ReagentId: Nicotine
             Quantity: 10
-          - ReagentId: Bicaridine
+          - ReagentId: CMBicaridine
             Quantity: 10
 
 - type: entity

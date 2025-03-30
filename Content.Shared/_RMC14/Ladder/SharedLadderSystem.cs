@@ -7,6 +7,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
+using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -161,6 +162,9 @@ public abstract class SharedLadderSystem : EntitySystem
             return;
 
         var coordinates = _transform.GetMapCoordinates(other);
+        if (coordinates.MapId == MapId.Nullspace)
+            return;
+
         _transform.SetMapCoordinates(user, coordinates);
 
         var selfMessage = Loc.GetString("rmc-ladder-finish-climbing-self");

@@ -1,12 +1,84 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a1079f4912a96473dae51cceaa1d74eafb3939e2/icons/obj/items/weapons/grenade.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/obj/items/storage/packets.dmi",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
+    {
+      "name": "nade_placeholder"
+    },
+    {
+      "name": "nade_placeholder_e"
+    },
+    {
+      "name": "s_nade_placeholder"
+    },
+    {
+      "name": "s_nade_placeholder_e"
+    },
+    {
+      "name": "d_nade_placeholder"
+    },
+    {
+      "name": "d_nade_placeholder_e"
+    },
+    {
+      "name": "c_nade_placeholder"
+    },
+    {
+      "name": "c_nade_placeholder_e"
+    },
+    {
+      "name": "u_nade_placeholder"
+    },
+    {
+      "name": "u_nade_placeholder_e"
+    },
+    {
+      "name": "train_nade_placeholder"
+    },
+    {
+      "name": "train_nade_placeholder_e"
+    },
+    {
+      "name": "teargas_nade_placeholder"
+    },
+    {
+      "name": "teargas_nade_placeholder_e"
+    },
+    {
+      "name": "m94"
+    },
+    {
+      "name": "m94_e"
+    },
+    {
+      "name": "m89"
+    },
+    {
+      "name": "m89_e"
+    },
+    {
+      "name": "minebox"
+    },
+    {
+      "name": "minebox_e"
+    },
+    {
+      "name": "flashbang"
+    },
+    {
+      "name": "flashbang_e"
+    },
+    {
+      "name": "emp"
+    },
+    {
+      "name": "emp_e"
+    },
     {
       "name": "general_packet"
     },
@@ -84,6 +156,60 @@
     },
     {
       "name": "starshell_packet_e"
+    },
+    {
+      "name": "sebb_packet_e"
+    },
+    {
+      "name": "sebb_packet"
+    },
+    {
+      "name": "model_m40"
+    },
+    {
+      "name": "model_mo7"
+    },
+    {
+      "name": "model_m74"
+    },
+    {
+      "name": "model_m66"
+    },
+    {
+      "name": "hedp"
+    },
+    {
+      "name": "hidp"
+    },
+    {
+      "name": "agmi"
+    },
+    {
+      "name": "hefa"
+    },
+    {
+      "name": "agmf"
+    },
+    {
+      "name": "ccdp"
+    },
+    {
+      "name": "ccdp_packet"
+    },
+    {
+      "name": "ccdp_packet_e"
+    },
+    {
+      "name": "wpdp_packet"
+    },
+    {
+      "name": "wpdp_packet_e"
+    },
+    {
+      "name": "mfhs_packet"
+    },
+    {
+      "name": "mfhs_packet_e"
     }
   ]
 }

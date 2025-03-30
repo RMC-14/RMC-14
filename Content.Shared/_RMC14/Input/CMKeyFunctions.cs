@@ -18,6 +18,7 @@ public sealed class CMKeyFunctions
     public static readonly BoundKeyFunction CMHolsterQuaternary = "CMHolsterQuaternary";
     public static readonly BoundKeyFunction RMCPickUpDroppedItems = "RMCPickUpDroppedItems";
     public static readonly BoundKeyFunction RMCFocusMentorChat = "RMCFocusMentorChat";
+    public static readonly BoundKeyFunction RMCInteractWithOtherHand = "RMCInteractWithOtherHand";
 
     // Xeno
     public static readonly BoundKeyFunction CMXenoWideSwing = "CMXenoWideSwing";

@@ -11,6 +11,7 @@ using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
@@ -101,7 +102,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
         if (!TryComp<RMCSizeComponent>(args.Target, out var size))
             return;
 
-        KnockBack(args.Target, bullet);
+        KnockBack(args.Target, bullet.Comp.ShotFrom, bullet.Comp.KnockBackPowerMin, bullet.Comp.KnockBackPowerMax, bullet.Comp.KnockBackSpeed);
 
         if (_net.IsClient)
             return;
@@ -148,25 +149,25 @@ public sealed class RMCSizeStunSystem : EntitySystem
     /// <summary>
     ///     Tries to knock back the target.
     /// </summary>
-    private void KnockBack(EntityUid target, Entity<RMCStunOnHitComponent> bullet)
+    public void KnockBack(EntityUid target, EntityCoordinates? shotFrom, float knockBackPowerMin = 1f, float knockBackPowerMax = 1f, float knockBackSpeed = 5f)
     {
         if (!TryComp<RMCSizeComponent>(target, out var size) || size.Size >= RMCSizes.Big)
             return;
 
-        if(bullet.Comp.ShotFrom == null)
+        if(shotFrom == null)
             return;
 
         //TODO Camera Shake
         _physics.SetLinearVelocity(target, Vector2.Zero);
         _physics.SetAngularVelocity(target, 0f);
 
-        var vec = _transform.GetMoverCoordinates(target).Position - bullet.Comp.ShotFrom.Value.Position;
+        var vec = _transform.GetMoverCoordinates(target).Position - shotFrom.Value.Position;
         if (vec.Length() != 0)
         {
             _rmcPulling.TryStopPullsOn(target);
-            var knockBackPower = _random.NextFloat(bullet.Comp.KnockBackPowerMin, bullet.Comp.KnockBackPowerMax);
+            var knockBackPower = _random.NextFloat(knockBackPowerMin, knockBackPowerMax);
             var direction = vec.Normalized() * knockBackPower;
-            _throwing.TryThrow(target, direction, bullet.Comp.KnockBackSpeed, animated: false, playSound: false, doSpin: false);
+            _throwing.TryThrow(target, direction, knockBackSpeed, animated: false, playSound: false, doSpin: false);
             // RMC-14 TODO Thrown into obstacle mechanics
         }
     }
@@ -183,7 +184,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
         foreach (var target in location)
         {
             ApplyEffects(target, ent.Comp.StunTime, ent.Comp.SlowTime, ent.Comp.SuperSlowTime);
-            KnockBack(target, ent);
+            KnockBack(target, ent.Comp.ShotFrom, ent.Comp.KnockBackPowerMin, ent.Comp.KnockBackPowerMax, ent.Comp.KnockBackSpeed);
             break;
         }
     }

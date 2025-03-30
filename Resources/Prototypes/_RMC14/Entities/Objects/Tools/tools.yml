@@ -149,6 +149,8 @@
     - Suitstorage
   - type: Prying
     speedModifier: 100000
+  - type: ToolTileCompatible
+    delay: 0
 
 - type: entity
   parent: CMCrowbar
