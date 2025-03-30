@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Aura;
+using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Shields;
@@ -207,6 +208,7 @@ public sealed class XenoEmpowerSystem : EntitySystem
         var diff = target.Position - origin.Position;
         diff = diff.Normalized() * xeno.Comp.FlingDistance;
 
+        EnsureComp<RMCObstacleSlamImmuneComponent>(args.Hit);
         _throwing.TryThrow(args.Hit, diff, 10);
     }
 
