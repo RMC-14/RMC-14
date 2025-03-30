@@ -7,7 +7,7 @@ namespace Content.Shared._RMC14.Atmos;
 [Serializable, NetSerializable]
 public sealed partial class RMCFire
 {
-    [DataField,]
+    [DataField]
     public EntProtoId Type = "RMCTileFire";
 
     [DataField]
