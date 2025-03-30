@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: beck-thompson
-  changes:
-  - message: Body armor lights are now predicted. Yay!
-    type: Fix
-  id: 1025
-  time: '2024-11-27T01:27:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4932
 - author: CyberTropic
   changes:
   - message: Added fuel pump animation.
@@ -5338,5 +5331,28 @@
   id: 1527
   time: '2025-03-30T03:17:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6026
+- author: DrSmugleaf
+  changes:
+  - message: Fixed aimed shot and spotter designator causing the game to freeze and
+      crash. This re-enables both.
+    type: Fix
+  - message: Fixed not being able to pull ammo out of CAS weapons with the power loader.
+    type: Fix
+  - message: Fixed the tactical map not showing communication towers, sensor tower,
+      and Queen.
+    type: Fix
+  - message: Fixed the HIRR baton slug fitting into underbarrel grenade launcher attachments.
+    type: Fix
+  - message: Fixed ladders leaving behind ghosts of people climbing through them.
+    type: Fix
+  - message: Fixed the soda fountain not being able to be pulled and not starting
+      anchored.
+    type: Fix
+  - message: Fixed aimed shot and spotter designator laser drawing being hidden under
+      some things.
+    type: Fix
+  id: 1528
+  time: '2025-03-30T03:34:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6030
 Name: RMC14
 Order: -1
