@@ -718,6 +718,7 @@
     whitelist:
       components:
       - SniperWhitelist
+      - SpotterWhitelist
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/jungle.rsi
