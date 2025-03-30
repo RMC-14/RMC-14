@@ -382,7 +382,7 @@
         name: Flare Pouch (Full)
       - id: RMCPouchGeneralLarge
         name: Large General Pouch
-     #- id: RMCSlingPouch
+     #- id: RMCPouchSling
      #  name: Sling Pouch
       - id: RMCPouchMagazinePistolLarge
         name: Large Pistol Magazine Pouch

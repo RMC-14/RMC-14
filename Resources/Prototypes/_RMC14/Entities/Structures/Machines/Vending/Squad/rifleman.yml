@@ -247,7 +247,7 @@
       - id: RMCWeldingGoggles
         name: Welding Goggles
         points: 5
-      #- id: RMCSlingPouch
+      #- id: RMCPouchSling
       #  name: Sling Pouch
       #  points: 15
       - id: RMCPouchGeneralLarge

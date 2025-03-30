@@ -230,7 +230,7 @@
         name: Pistol Pouch
       - id: RMCPouchMacheteFilled
         name: Machete Pouch (Full)
-      #- id: RMCSlingPouch
+      #- id: RMCPouchSling
       #  name: Sling Pouch
     - name: Accessories
       choices: { CMAccessories: 1 }
