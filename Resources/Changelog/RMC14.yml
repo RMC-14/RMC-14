@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Added fuel pump animation.
-    type: Add
-  id: 1026
-  time: '2024-11-27T01:30:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4905
 - author: Dutch-VanDerLinde
   changes:
   - message: Added an option to automatically punctuate character messages in the
@@ -5354,5 +5347,12 @@
   id: 1528
   time: '2025-03-30T03:34:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6030
+- author: DrSmugleaf
+  changes:
+  - message: Fixed tactical map blips not being shown.
+    type: Fix
+  id: 1529
+  time: '2025-03-30T05:28:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6031
 Name: RMC14
 Order: -1
