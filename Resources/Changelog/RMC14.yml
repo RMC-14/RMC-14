@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Fixed under-tile plating slowing pulls by ~10%.
-    type: Fix
-  id: 1023
-  time: '2024-11-27T01:26:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4934
 - author: Vermidia
   changes:
   - message: Fixed new stasis mechanics not working
@@ -5327,5 +5320,23 @@
   id: 1525
   time: '2025-03-30T00:14:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6024
+- author: DrSmugleaf
+  changes:
+  - message: Fixed most marines not showing up on the live tactical map.
+    type: Fix
+  - message: Fixed marines and xenos taking camera recoil from projectiles.
+    type: Fix
+  - message: Fixed visual glitches sometimes when moving with a bipod deployed.
+    type: Fix
+  - message: Fixed some laser cannon fire values being incorrect, fixes duration not
+      being 5 seconds.
+    type: Fix
+  - message: Fixed plasteel rods refining into metal instead of plasteel.
+    type: Fix
+  - message: Fixed soda fountain not being unanchorable.
+    type: Fix
+  id: 1526
+  time: '2025-03-30T00:17:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6025
 Name: RMC14
 Order: -1
