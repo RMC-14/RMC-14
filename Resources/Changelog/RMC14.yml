@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added an option to automatically punctuate character messages in the
-      settings
-    type: Add
-  id: 1027
-  time: '2024-11-27T01:36:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4924
 - author: DrSmugleaf
   changes:
   - message: Fixed parasites being able to hide under generators.
@@ -5354,5 +5346,12 @@
   id: 1529
   time: '2025-03-30T05:28:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6031
+- author: noctyrnal
+  changes:
+  - message: The AMR and its magazine have received new sprites.
+    type: Tweak
+  id: 1530
+  time: '2025-03-30T22:07:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6041
 Name: RMC14
 Order: -1
