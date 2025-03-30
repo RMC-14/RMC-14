@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed parasites being able to hide under generators.
-    type: Fix
-  id: 1028
-  time: '2024-11-27T10:40:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4966
 - author: Whisper
   changes:
   - message: Added Marrik', Xalos-of-Europa figurines.
@@ -5353,5 +5346,14 @@
   id: 1530
   time: '2025-03-30T22:07:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6041
+- author: Dygon
+  changes:
+  - message: Crushers, aciders and praetorians now have correct armor values again.
+    type: Fix
+  - message: Xenonid abilities don't ignore armor anymore.
+    type: Fix
+  id: 1531
+  time: '2025-03-30T22:09:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6039
 Name: RMC14
 Order: -1
