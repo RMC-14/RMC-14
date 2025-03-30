@@ -136,8 +136,8 @@
       types:
         Heat: 0.13
   - type: TileFire
+    duration: 5
   - type: PointLight
-    radius: 5
     color: "#EE6515"
   - type: GenericVisualizer
     visuals:
