@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: Fixed a case where resin traps would not be shown above weeds if the
-      weeds they are on are removed and then built back again.
-    type: Fix
-  id: 1030
-  time: '2024-11-28T06:32:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4968
 - author: Rainbeon
   changes:
   - message: Fixed Xenos being stunned by 50% longer than they were supposed to be.
@@ -5359,5 +5351,13 @@
   id: 1532
   time: '2025-03-30T22:12:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6038
+- author: DummeHytteOst
+  changes:
+  - message: Added groundside warning sound for inbound rockets, played when the green
+      dot appears.
+    type: Add
+  id: 1533
+  time: '2025-03-30T22:23:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6034
 Name: RMC14
 Order: -1
