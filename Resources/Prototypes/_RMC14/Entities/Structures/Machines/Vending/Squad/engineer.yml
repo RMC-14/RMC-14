@@ -97,10 +97,10 @@
         points: 9
       - id: RMCPacketGrenadeM74AGMFFilled
         name: M74 AGM-Frag Airburst Packet (x3 airburst grenades)
-        points: 20
+        points: 18
       - id: RMCPacketGrenadeM74AGMIFilled
         name: M74 AGM-Incendiary Airburst Packet (x3 airburst grenades)
-        points: 20
+        points: 18
       - id: RMCPacketGrenadeM74AGMSFilled
         name: M74 AGM-Smoke Airburst Packet (x3 airburst grenades)
         points: 10
@@ -109,7 +109,7 @@
         points: 20
       #- id: CMM20MineBox4
       #  name: M20 Mine Box (x5 mines)
-      #  points: 20
+      #  points: 18
       #- id: CMM40MFHSMetalFoamGrenade
       #  name: M40 MFHS Metal Foam Grenade
       #  points: 5
