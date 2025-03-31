@@ -13,7 +13,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: rifle_box
-    color: "#7b8246"
+  iconColor: "#7b8246"
   objectType: Item
 
 - type: construction
@@ -28,7 +28,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: rifle_box
-    color: "#7b8246"
+  iconColor: "#7b8246"
   objectType: Item
 
 - type: construction
@@ -43,7 +43,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: rifle_box
-    color: "#7b8246"
+  iconColor: "#7b8246"
   objectType: Item
 
 - type: construction
@@ -58,7 +58,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: rifle_box
-    color: "#7b8246"
+  iconColor: "#7b8246"
   objectType: Item
 
 - type: construction
@@ -73,7 +73,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: rifle_box
-    color: "#7b8246"
+  iconColor: "#7b8246"
   objectType: Item
 
 # M63
@@ -89,7 +89,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: smg_box
-    color: "#727e90"
+  iconColor: "#727e90"
   objectType: Item
 
 - type: construction
@@ -104,7 +104,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: smg_box
-    color: "#727e90"
+  iconColor: "#727e90"
   objectType: Item
 
 - type: construction
@@ -119,7 +119,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: smg_box
-    color: "#727e90"
+  iconColor: "#727e90"
   objectType: Item
 
 - type: construction
@@ -134,7 +134,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: smg_box
-    color: "#727e90"
+  iconColor: "#727e90"
   objectType: Item
 
 - type: construction
@@ -149,7 +149,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: smg_box
-    color: "#727e90"
+  iconColor: "#727e90"
   objectType: Item
 
 # M4SPR
@@ -165,7 +165,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: rifle_box
-    color: "#695d42"
+  iconColor: "#695d42"
   objectType: Item
 
 - type: construction
@@ -180,7 +180,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: rifle_box
-    color: "#695d42"
+  iconColor: "#695d42"
   objectType: Item
 
 - type: construction
@@ -195,7 +195,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: rifle_box
-    color: "#695d42"
+  iconColor: "#695d42"
   objectType: Item
 
 # M1984
@@ -211,7 +211,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: pistol_box
-    color: "#b2976e"
+  iconColor: "#b2976e"
   objectType: Item
 
 - type: construction
@@ -226,7 +226,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: pistol_box
-    color: "#b2976e"
+  iconColor: "#b2976e"
   objectType: Item
 
 # 88 mod 4 / 88m4
@@ -242,7 +242,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: pistol_box
-    color: "#7c7e83"
+  iconColor: "#7c7e83"
   objectType: Item
 
 # MK80
@@ -258,7 +258,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: pistol_box
-    color: "#4a4a4a"
+  iconColor: "#4a4a4a"
   objectType: Item
 
 # SU-6 Smart pistol
@@ -274,7 +274,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: pistol_box
-    color: "#6b5c58"
+  iconColor: "#6b5c58"
   objectType: Item
 
 # M44
@@ -290,7 +290,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: pistol_box
-    color: "#727e90"
+  iconColor: "#727e90"
   objectType: Item
 
 - type: construction
@@ -305,7 +305,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: pistol_box
-    color: "#727e90"
+  iconColor: "#727e90"
   objectType: Item
 
 # Nailgun
@@ -321,7 +321,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: supply_box
-    color: "#709bff"
+  iconColor: "#709bff"
   objectType: Item
 
 # Shotgun
@@ -337,7 +337,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: shell_box
-    color: "#944444"
+  iconColor: "#944444"
   objectType: Item
 
 - type: construction
@@ -352,7 +352,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: shell_box
-    color: "#578e75"
+  iconColor: "#578e75"
   objectType: Item
 
 - type: construction
@@ -367,7 +367,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: shell_box
-    color: "#6551a0"
+  iconColor: "#6551a0"
   objectType: Item
 
 - type: construction
@@ -382,7 +382,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: shell_box
-    color: "#c6cdd3"
+  iconColor: "#c6cdd3"
   objectType: Item
 
 # - type: construction
@@ -412,7 +412,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: shell_box
-    color: "#c6cdd3"
+  iconColor: "#c6cdd3"
   objectType: Item
 
 - type: construction
@@ -427,7 +427,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: shell_box
-    color: "#595959"
+  iconColor: "#595959"
   objectType: Item
 
 # Misc
@@ -444,7 +444,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: supply_box
-    color: "#887b67"
+  iconColor: "#887b67"
   objectType: Item
 
 - type: construction
@@ -459,7 +459,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: supply_box
-    color: "#887b67"
+  iconColor: "#887b67"
   objectType: Item
 
 - type: construction
@@ -474,7 +474,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: supply_box
-    color: "#887b67"
+  iconColor: "#887b67"
   objectType: Item
 
 - type: construction
@@ -489,7 +489,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: supply_box
-    color: "#887b67"
+  iconColor: "#887b67"
   objectType: Item
 
 - type: construction
@@ -504,7 +504,7 @@
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: supply_box
-    color: "#887b67"
+  iconColor: "#887b67"
   objectType: Item
 
 # Construct graphs
