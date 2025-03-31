@@ -150,6 +150,13 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void OnTacticalMapMapInit(Entity<TacticalMapComponent> ent, ref MapInitEvent args)
     {
+        var tracked = EntityQueryEnumerator<ActiveTacticalMapTrackedComponent, TacticalMapTrackedComponent>();
+        while (tracked.MoveNext(out var uid, out var active, out var comp))
+        {
+            UpdateActiveTracking((uid, comp));
+            UpdateTracked((uid, active));
+        }
+
         var users = EntityQueryEnumerator<TacticalMapUserComponent>();
         while (users.MoveNext(out var userId, out var userComp))
         {
@@ -390,6 +397,12 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         UpdateColor(activeEnt);
     }
 
+    private void UpdateActiveTracking(Entity<TacticalMapTrackedComponent> tracked)
+    {
+        var state = _mobStateQuery.CompOrNull(tracked)?.CurrentState ?? MobState.Alive;
+        UpdateActiveTracking(tracked, state);
+    }
+
     private void BreakTracking(Entity<ActiveTacticalMapTrackedComponent> tracked)
     {
         if (!_tacticalMapQuery.TryComp(tracked.Comp.Map, out var tacticalMap))
@@ -583,8 +596,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             foreach (var init in _toInit)
             {
                 var wasActive = HasComp<ActiveTacticalMapTrackedComponent>(init);
-                var state = _mobStateQuery.CompOrNull(init)?.CurrentState ?? MobState.Alive;
-                UpdateActiveTracking(init, state);
+                UpdateActiveTracking(init);
 
                 if (!wasActive && TryComp(init, out ActiveTacticalMapTrackedComponent? active))
                     UpdateTracked((init, active));

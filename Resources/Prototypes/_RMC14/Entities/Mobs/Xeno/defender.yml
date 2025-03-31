@@ -153,7 +153,7 @@
         Brute: 30
   - type: XenoFortify
     frontalArmor: 15
-    armor: 10
+    xenoArmor: 10
     changeExplosionWeakness: false
     canHeadbuttFortified: true
     canMoveFortified: true

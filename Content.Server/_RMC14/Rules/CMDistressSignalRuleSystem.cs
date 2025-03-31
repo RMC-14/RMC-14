@@ -34,6 +34,7 @@ using Content.Shared._RMC14.Bioscan;
 using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Item;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines;
@@ -138,6 +139,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly SharedGhillieSuitSystem _ghillieSuit = default!;
     [Dependency] private readonly MapInsertSystem _mapInsert = default!;
     [Dependency] private readonly SharedDestructibleSystem _destruction = default!;
+    [Dependency] private readonly IntelSystem _intel = default!;
 
 
     private readonly HashSet<string> _operationNames = new();
@@ -250,6 +252,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 // TODO: how should the gamemode handle failure? restart immediately or create an alert for admins
                 continue;
             }
+
+            _intel.RunSpawners();
 
             SetFriendlyHives(comp.Hive);
 

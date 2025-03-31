@@ -111,7 +111,7 @@ public sealed class XenoLifestealSystem : EntitySystem
 
         var amount = -FixedPoint2.Clamp(total * lifesteal, xeno.Comp.MinHeal, xeno.Comp.MaxHeal);
         var heal = _rmcDamageable.DistributeTypes(xeno.Owner, amount);
-        _damageable.TryChangeDamage(xeno, heal, true);
+        _damageable.TryChangeDamage(xeno, heal, true, origin: xeno, tool: xeno);
 
         if (lifesteal >= xeno.Comp.MaxPercentage)
         {

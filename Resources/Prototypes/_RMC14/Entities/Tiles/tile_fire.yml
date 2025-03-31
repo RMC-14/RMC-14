@@ -21,7 +21,7 @@
   - type: Sprite
     sprite: _RMC14/Effects/fire.rsi
     noRot: true
-    drawdepth: FloorObjects
+    drawdepth: WallTops
     layers:
     - map: [ "base" ]
       state: red_4

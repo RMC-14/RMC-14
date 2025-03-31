@@ -1,63 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added an option to automatically punctuate character messages in the
-      settings
-    type: Add
-  id: 1027
-  time: '2024-11-27T01:36:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4924
-- author: DrSmugleaf
-  changes:
-  - message: Fixed parasites being able to hide under generators.
-    type: Fix
-  id: 1028
-  time: '2024-11-27T10:40:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4966
-- author: Whisper
-  changes:
-  - message: Added Marrik', Xalos-of-Europa figurines.
-    type: Add
-  id: 1029
-  time: '2024-11-28T01:29:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4965
-- author: blueDev2
-  changes:
-  - message: Fixed a case where resin traps would not be shown above weeds if the
-      weeds they are on are removed and then built back again.
-    type: Fix
-  id: 1030
-  time: '2024-11-28T06:32:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4968
-- author: Rainbeon
-  changes:
-  - message: Fixed Xenos being stunned by 50% longer than they were supposed to be.
-    type: Fix
-  id: 1031
-  time: '2024-11-29T04:39:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4970
-- author: DummeHytteOst
-  changes:
-  - message: XOs have been given a coat, senior command headset, Leather satchle,
-      and the MP radio channel.
-    type: Add
-  id: 1032
-  time: '2024-11-29T05:04:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4977
-- author: DummeHytteOst
-  changes:
-  - message: Fixed M16 bullets doing too much damage (56 > 40)
-    type: Fix
-  id: 1033
-  time: '2024-11-29T05:06:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4976
-- author: DummeHytteOst
-  changes:
-  - message: Legal Closet is no longer movable
-    type: Fix
-  id: 1034
-  time: '2024-11-29T05:07:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4975
 - author: Rainbeon
   changes:
   - message: Xeno ghosts will now retain their full xeno names, including rank, caste,
@@ -5354,5 +5295,104 @@
   id: 1529
   time: '2025-03-30T05:28:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6031
+- author: noctyrnal
+  changes:
+  - message: The AMR and its magazine have received new sprites.
+    type: Tweak
+  id: 1530
+  time: '2025-03-30T22:07:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6041
+- author: Dygon
+  changes:
+  - message: Crushers, aciders and praetorians now have correct armor values again.
+    type: Fix
+  - message: Xenonid abilities don't ignore armor anymore.
+    type: Fix
+  id: 1531
+  time: '2025-03-30T22:09:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6039
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed parasites thrown by carriers slamming into walls
+    type: Fix
+  - message: Fixed defender headbutt slamming victims
+    type: Fix
+  - message: Fixed ravager assault slamming victims into themselves
+    type: Fix
+  id: 1532
+  time: '2025-03-30T22:12:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6038
+- author: DummeHytteOst
+  changes:
+  - message: Added groundside warning sound for inbound rockets, played when the green
+      dot appears.
+    type: Add
+  id: 1533
+  time: '2025-03-30T22:23:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6034
+- author: Dygon
+  changes:
+  - message: The spotting and aimed shot action descriptions now explain how to use
+      them.
+    type: Add
+  - message: Fixed the sniper kit and the anti-materiel sniper kit not sharing the
+      same specialist limit.
+    type: Fix
+  id: 1534
+  time: '2025-03-30T22:28:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6035
+- author: DrSmugleaf
+  changes:
+  - message: Fixed comms towers not being shown in the tactical map, and hopefully
+      some of the marines too.
+    type: Fix
+  - message: Fixed laser designator working inside some buildings. Shoutout to Alec
+      for actually reporting this bug instead of posting unconstructive toxic feedback
+      making up shit about how the game should work. Rangefinder still works.
+    type: Fix
+  - message: Fixed rangefinder and laser designator dot being hidden by doors. Shoutout
+      for this one goes to truthe.
+    type: Fix
+  - message: Fixed uniforms not having 10 bullet armor.
+    type: Fix
+  - message: Fixed ladders leaving behind ghosts of other players.
+    type: Fix
+  id: 1535
+  time: '2025-03-31T01:32:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6045
+- author: DrSmugleaf
+  changes:
+  - message: Fixed ladders not working.
+    type: Fix
+  - message: Fixed correspondent cameras sometimes not showing up on tvs.
+    type: Fix
+  - message: Fixed the overwatch console freaking out when using any filters.
+    type: Fix
+  - message: Fixed tile fires not drawing over walls. Doors still hide them.
+    type: Fix
+  - message: Fixed signal flares sometimes dropping on your feet when thrown.
+    type: Fix
+  - message: Fixed Oppressor Praetorian abduct targets being bounced against each
+      other.
+    type: Fix
+  - message: Fixed set pose verb popping up after a short delay.
+    type: Fix
+  - message: Fixed soda fountains not fitting through doors.
+    type: Fix
+  - message: Fixed interact with other hand label in options being broken.
+    type: Fix
+  - message: Fixed rangefinders showing a switch to designator mode that does nothing
+      when used. Laser designators can still be switched normally.
+    type: Fix
+  id: 1536
+  time: '2025-03-31T04:38:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6048
+- author: CyberTropic
+  changes:
+  - message: Fixed extra intel spawning on map inserts.
+    type: Fix
+  id: 1537
+  time: '2025-03-31T04:32:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6043
 Name: RMC14
 Order: -1
