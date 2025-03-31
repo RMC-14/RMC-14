@@ -150,7 +150,7 @@ public abstract class SharedLadderSystem : EntitySystem
     private void OnLadderDoAfter(Entity<LadderComponent> ent, ref LadderDoAfterEvent args)
     {
         var user = args.User;
-        if (user != _player.LocalEntity)
+        if (_net.IsClient && user != _player.LocalEntity)
             return;
 
         if (_actorQuery.TryComp(user, out var actor))
