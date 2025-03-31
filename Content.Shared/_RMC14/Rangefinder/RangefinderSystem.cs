@@ -248,6 +248,9 @@ public sealed class RangefinderSystem : EntitySystem
             return;
 
         var nextMode = rangefinder.Comp.Mode == RangefinderMode.Rangefinder ? Designator : RangefinderMode.Rangefinder;
+        if (nextMode == Designator && !rangefinder.Comp.CanDesignate)
+            return;
+
         args.Verbs.Add(new AlternativeVerb
         {
             Priority = 100,
