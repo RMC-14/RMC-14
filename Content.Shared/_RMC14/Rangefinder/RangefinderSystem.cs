@@ -132,7 +132,7 @@ public sealed class RangefinderSystem : EntitySystem
             return;
         }
 
-        if (!_area.CanCAS(coordinates))
+        if (!_area.CanCAS(coordinates) || (rangefinder.Comp.Mode == Designator && !_area.CanLase(coordinates)))
         {
             msg = Loc.GetString("rmc-laser-designator-not-cas");
             _popup.PopupClient(msg, coordinates, user, PopupType.SmallCaution);
