@@ -485,7 +485,7 @@
 
 - type: entity
   parent: CMPlatformBroken
-  id: RMCPlatformKutjevoRockBroken
+  id: RMCPlatformStrataRockBroken
   name: destroyed ice rock edge
   description: A solid chunk of desolate rocks and ice. Looks like you could climb it with some difficulty. It has been destroyed.
   components:
