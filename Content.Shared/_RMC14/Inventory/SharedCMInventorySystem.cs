@@ -288,7 +288,13 @@ public abstract class SharedCMInventorySystem : EntitySystem
         if (!_pickupDroppedItemsQuery.TryComp(user, out var pickupDroppedItems))
             return;
 
-        foreach (var item in pickupDroppedItems.DroppedItems.Distinct().Reverse())
+        // Sort items by importance
+        var sortedItems = pickupDroppedItems.DroppedItems
+            .OrderByDescending(item => HasComp<GunComponent>(item))
+            .ThenByDescending(item => HasComp<MeleeWeaponComponent>(item))
+            .ToList();
+
+        foreach (var item in sortedItems.Distinct())
         {
             if (!_container.IsEntityInContainer(item) && _interaction.InRangeUnobstructed(user, item))
             {
@@ -390,7 +396,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
         Unholster(user, startIndex, choose);
     }
 
-    private void Holster(EntityUid user, EntityUid item)
+    public bool Holster(EntityUid user, EntityUid item, bool act = true)
     {
         // TODO RMC14 try uniform-attached weapon and ammo holsters first
         var validSlots = new List<HolsterSlot>();
@@ -455,15 +461,25 @@ public abstract class SharedCMInventorySystem : EntitySystem
             // Try equip to inventory slot
             if (!slot.IsHolster &&
                 slot.Slot != null &&
-                _inventory.TryEquip(user, item, slot.Slot.ID, true, checkDoafter: true))
-                return;
+                _inventory.CanEquip(user, item, slot.Slot.ID, out _))
+            {
+                if (act)
+                    _inventory.TryEquip(user, item, slot.Slot.ID, true, checkDoafter: true);
+
+                return true;
+            }
 
             // Try insert into ItemSlot-based holster
             if (slot.ItemSlot != null &&
-                _itemSlots.TryInsert(slot.Ent, slot.ItemSlot, item, user, excludeUserAudio: true))
+                _itemSlots.CanInsert(slot.Ent, item, user, slot.ItemSlot))
             {
-                _adminLog.Add(LogType.RMCHolster, $"{ToPrettyString(user)} holstered {ToPrettyString(item)}");
-                return;
+                if (act)
+                {
+                    _itemSlots.TryInsert(slot.Ent, slot.ItemSlot, item, user, excludeUserAudio: true);
+                    _adminLog.Add(LogType.RMCHolster, $"{ToPrettyString(user)} holstered {ToPrettyString(item)}");
+                }
+
+                return true;
             }
 
             // Try insert into Storage-based holster
@@ -471,17 +487,27 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 TryComp(slot.Ent, out StorageComponent? storage) &&
                 TryComp(slot.Ent, out CMHolsterComponent? holster) &&
                 !holster.Contents.Contains(item) &&
-                _hands.TryDrop(user, item) &&
-                _storage.Insert(slot.Ent, item, out _, user, storage, playSound: false))
+                _hands.CanDrop(user, item) &&
+                _storage.CanInsert(slot.Ent, item, user, out _, storage))
             {
-                holster.Contents.Add(item);
-                _audio.PlayPredicted(holster.InsertSound, item, user);
-                _adminLog.Add(LogType.RMCHolster, $"{ToPrettyString(user)} holstered {ToPrettyString(item)}");
-                return;
+                if (act && _hands.TryDrop(user, item))
+                {
+                    _storage.Insert(slot.Ent, item, out _, user, storage, playSound: false);
+                    _audio.PlayPredicted(holster.InsertSound, item, user);
+                    _adminLog.Add(LogType.RMCHolster, $"{ToPrettyString(user)} holstered {ToPrettyString(item)}");
+                }
+
+                return true;
             }
         }
 
         _popup.PopupClient(Loc.GetString("cm-inventory-unable-equip"), user, user, PopupType.SmallCaution);
+        return false;
+    }
+
+    public bool CanHolster(EntityUid user, EntityUid item)
+    {
+        return Holster(user, item, false);
     }
 
     private readonly record struct HolsterSlot(

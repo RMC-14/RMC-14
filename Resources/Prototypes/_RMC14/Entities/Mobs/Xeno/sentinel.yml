@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
@@ -51,9 +51,12 @@
   - type: CMArmor
     explosionArmor: 10
   - type: XenoEvolution
+    canEvolveWithoutGranter: true
     max: 200
     evolvesTo:
     - CMXenoSpitter
+    evolvesToWithoutPoints:
+    - CMXenoQueen
   - type: XenoAcid
   - type: XenoParalyzingSlash
   - type: XenoSlowingSpit
@@ -82,3 +85,5 @@
     trapLevel: 1
     cost: 70
     spray: XenoAcidSprayTrapWeak
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.1

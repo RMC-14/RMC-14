@@ -1,6 +1,8 @@
-﻿using Content.Server.GameTicking;
+using Content.Server.GameTicking;
+using Content.Server.Humanoid.Systems;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Intel;
 using Content.Shared.Coordinates;
 using Content.Shared.GameTicking;
 using Robust.Shared.Configuration;
@@ -17,6 +19,7 @@ public sealed class RMCSpawnerSystem : EntitySystem
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly RandomHumanoidSystem _randomHumanoid = default!;
 
     private readonly Dictionary<EntProtoId, List<Entity<ProportionalSpawnerComponent>>> _spawners = new();
     private readonly List<Entity<CorpseSpawnerComponent>> _corpseSpawners = new();
@@ -26,6 +29,7 @@ public sealed class RMCSpawnerSystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<DropshipLaunchedFromWarshipEvent>(OnDropshipLaunchedFromWarship);
         SubscribeLocalEvent<DropshipLandedOnPlanetEvent>(OnDropshipLandedOnPlanet);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
@@ -37,6 +41,15 @@ public sealed class RMCSpawnerSystem : EntitySystem
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
         _corpsesSpawned = 0;
+    }
+
+    private void OnDropshipLaunchedFromWarship(ref DropshipLaunchedFromWarshipEvent ev)
+    {
+        var deleteQuery = EntityQueryEnumerator<DeleteOnDropshipLaunchFromWarshipComponent>();
+        while (deleteQuery.MoveNext(out var uid, out _))
+        {
+            QueueDel(uid);
+        }
     }
 
     private void OnDropshipLandedOnPlanet(ref DropshipLandedOnPlanetEvent ev)
@@ -97,8 +110,9 @@ public sealed class RMCSpawnerSystem : EntitySystem
             if (_corpsesSpawned >= _maxCorpses)
                 continue;
 
-            Spawn(spawner.Comp.Spawn, _transform.GetMoverCoordinates(spawner));
             _corpsesSpawned++;
+            var corpse = _randomHumanoid.SpawnRandomHumanoid(spawner.Comp.Spawn, _transform.GetMoverCoordinates(spawner), MetaData(spawner).EntityName);
+            EnsureComp<IntelRecoverCorpseObjectiveComponent>(corpse);
         }
 
         var proportional = EntityQueryEnumerator<ProportionalSpawnerComponent>();

@@ -5,7 +5,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Marines.Announce;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
 [Access(typeof(SharedMarineAnnounceSystem))]
 public sealed partial class MarineCommunicationsComputerComponent : Component
 {
@@ -16,10 +16,22 @@ public sealed partial class MarineCommunicationsComputerComponent : Component
     public TimeSpan? LastAnnouncement;
 
     [DataField, AutoNetworkedField]
+    public EntProtoId<SkillDefinitionComponent> AnnounceSkill = "RMCSkillLeadership";
+
+    [DataField, AutoNetworkedField]
+    public int AnnounceSkillLevel = 1;
+
+    [DataField, AutoNetworkedField]
     public EntProtoId<SkillDefinitionComponent> OverwatchSkill = "RMCSkillOverwatch";
 
     [DataField, AutoNetworkedField]
     public int OverwatchSkillLevel = 1;
+
+    [DataField, AutoNetworkedField]
+    public bool CanCreateEcho = true;
+
+    [DataField, AutoNetworkedField]
+    public bool CanGiveMedals;
 
     /*
     [DataField, AutoNetworkedField]

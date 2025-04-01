@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -10,6 +10,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Content.Shared._RMC14.Xenonids.Charge;
 using Content.Shared.Actions;
+using Content.Shared._RMC14.Shields;
 
 namespace Content.Shared._RMC14.Xenonids.Brutalize;
 
@@ -58,7 +59,7 @@ public sealed class XenoBrutalizeSystem : EntitySystem
 
             currHits++;
 
-            var myDamage = _damageable.TryChangeDamage(extra, damage);
+            var myDamage = _damageable.TryChangeDamage(extra, damage, origin: xeno, tool: xeno);
             if (myDamage?.GetTotal() > FixedPoint2.Zero)
             {
                 var filter = Filter.Pvs(extra, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);
@@ -72,15 +73,25 @@ public sealed class XenoBrutalizeSystem : EntitySystem
                 SpawnAttachedTo(xeno.Comp.Effect, extra.Owner.ToCoordinates());
         }
 
-        if (!TryComp<XenoComponent>(xeno, out var act))
-            return;
+        RefreshCooldowns(xeno, currHits);
+    }
 
-        if (TryComp<InstantActionComponent>(act.Actions[xeno.Comp.BaseCooldownAction], out var basAct) && basAct.Cooldown != null)
-            _actions.SetCooldown(act.Actions[xeno.Comp.BaseCooldownAction], basAct.Cooldown.Value.Start, basAct.Cooldown.Value.End - xeno.Comp.BaseCooldownReduction);
+    private void RefreshCooldowns(Entity<XenoBrutalizeComponent> xeno, int hits)
+    {
+        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        {
+            if ((action.BaseEvent is XenoChargeActionEvent || action.BaseEvent is XenoDefensiveShieldActionEvent)
+                && action.Cooldown != null)
+            {
+                //Additional cooldown only on Charge
+                var cooldownEnd = action.Cooldown.Value.End - (xeno.Comp.BaseCooldownReduction +
+                    (action.BaseEvent is XenoChargeActionEvent ? hits * xeno.Comp.AddtionalCooldownReductions : TimeSpan.Zero));
 
-
-        if (TryComp<WorldTargetActionComponent>(act.Actions[xeno.Comp.CummulativeCooldownAction], out var culAct) && culAct.Cooldown != null)
-            _actions.SetCooldown(act.Actions[xeno.Comp.CummulativeCooldownAction], culAct.Cooldown.Value.Start, culAct.Cooldown.Value.End - (xeno.Comp.BaseCooldownReduction + currHits
-             * xeno.Comp.AddtionalCooldownReductions));
+                if (cooldownEnd < action.Cooldown.Value.Start)
+                    _actions.ClearCooldown(actionId);
+                else
+                    _actions.SetCooldown(actionId, action.Cooldown.Value.Start, cooldownEnd);
+            }
+        }
     }
 }

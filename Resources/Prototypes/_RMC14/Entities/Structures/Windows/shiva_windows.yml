@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: RMCBaseWindowFrame
   id: RMCWindowFrameShiva
   components:
@@ -63,6 +63,10 @@
   - type: Construction
     graph: RMCWindowShiva
     node: windowShiva
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameShiva
+    sound:
+      collection: WindowShatter
 
 - type: entity
   parent: CMBaseWindow

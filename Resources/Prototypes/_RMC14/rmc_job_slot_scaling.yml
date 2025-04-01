@@ -46,11 +46,11 @@
         c: 0
         min: 2
         max: 3
-#      CMIntelOfficer:
-#        factor: 30
-#        c: 1
-#        min: 1
-#        max: 3
+      CMIntelOfficer:
+        factor: 30
+        c: 1
+        min: 1
+        max: 3
       CMWeaponsSpecialist:
         factor: 20
         c: 1
@@ -61,8 +61,8 @@
         c: 1
         min: 2
         max: 4
-#      CMMessTech:
-#        factor: 70
-#        c: 1
-#        min: 1
-#        max: 2
+      CMMessTech:
+        factor: 70
+        c: 1
+        min: 1
+        max: 2

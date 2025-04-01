@@ -1,13 +1,11 @@
 using System.Linq;
 using Content.Server.Body.Components;
-using Content.Server.Chemistry.Containers.EntitySystems;
-using Content.Server.Interaction;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
-using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Chemistry.Hypospray.Events;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
@@ -18,11 +16,6 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Timing;
 using Content.Shared.Weapons.Melee.Events;
-using Content.Server.Interaction;
-using Content.Server.Body.Components;
-using Robust.Shared.GameStates;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using Robust.Server.Audio;
 
 namespace Content.Server.Chemistry.EntitySystems;
@@ -31,7 +24,6 @@ public sealed class HypospraySystem : SharedHypospraySystem
 {
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly InteractionSystem _interaction = default!;
 
     public override void Initialize()
     {
@@ -40,6 +32,8 @@ public sealed class HypospraySystem : SharedHypospraySystem
         SubscribeLocalEvent<HyposprayComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<HyposprayComponent, MeleeHitEvent>(OnAttack);
         SubscribeLocalEvent<HyposprayComponent, UseInHandEvent>(OnUseInHand);
+
+        // RMC14
         SubscribeLocalEvent<HyposprayComponent, HyposprayDoAfterEvent>(OnHyposprayDoAfter);
     }
 
@@ -58,13 +52,43 @@ public sealed class HypospraySystem : SharedHypospraySystem
         var uid = ent.Owner;
         string? msgFormat = null;
 
-        if (target == user)
-            msgFormat = "hypospray-component-inject-self-message";
-        else if (EligibleEntity(user, EntityManager, component) && _interaction.TryRollClumsy(user, component.ClumsyFailChance))
+        // Self event
+        var selfEvent = new SelfBeforeHyposprayInjectsEvent(user, ent, target);
+        RaiseLocalEvent(user, selfEvent);
+
+        if (selfEvent.Cancelled)
         {
-            msgFormat = "hypospray-component-inject-self-clumsy-message";
-            target = user;
+            _popup.PopupEntity(Loc.GetString(selfEvent.InjectMessageOverride ?? "hypospray-cant-inject", ("owner", Identity.Entity(target, EntityManager))), target, user);
+            return;
         }
+
+        target = selfEvent.TargetGettingInjected;
+
+        if (!EligibleEntity(target, EntityManager, component))
+            return;
+
+        // Target event
+        var targetEvent = new TargetBeforeHyposprayInjectsEvent(user, ent, target);
+        RaiseLocalEvent(target, targetEvent);
+
+        if (targetEvent.Cancelled)
+        {
+            _popup.PopupEntity(Loc.GetString(targetEvent.InjectMessageOverride ?? "hypospray-cant-inject", ("owner", Identity.Entity(target, EntityManager))), target, user);
+            return;
+        }
+
+        target = targetEvent.TargetGettingInjected;
+
+        if (!EligibleEntity(target, EntityManager, component))
+            return;
+
+        // The target event gets priority for the overriden message.
+        if (targetEvent.InjectMessageOverride != null)
+            msgFormat = targetEvent.InjectMessageOverride;
+        else if (selfEvent.InjectMessageOverride != null)
+            msgFormat = selfEvent.InjectMessageOverride;
+        else if (target == user)
+            msgFormat = "hypospray-component-inject-self-message";
 
         if (!_solutionContainers.TryGetSolution(uid, component.SolutionName, out var hypoSpraySoln, out var hypoSpraySolution) || hypoSpraySolution.Volume == 0)
         {

@@ -148,6 +148,7 @@ public abstract partial class InteractionTest
     tags:
     - CanPilot
   - type: UserInterface
+  - type: Sprite
 ";
 
     [SetUp]
@@ -260,7 +261,7 @@ public abstract partial class InteractionTest
     [TearDown]
     public async Task TearDownInternal()
     {
-        await Server.WaitPost(() => MapMan.DeleteMap(MapId));
+        await Server.WaitPost(() => MapSystem.DeleteMap(MapId));
         await Pair.CleanReturnAsync();
         await TearDown();
     }

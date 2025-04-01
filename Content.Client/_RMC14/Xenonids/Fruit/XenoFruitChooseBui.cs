@@ -5,6 +5,7 @@ using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Xenonids.Fruit;
 
@@ -30,6 +31,7 @@ public sealed class XenoFruitChooseBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         _window = new XenoFruitChooseWindow();
         _window.OnClose += Close;
 
@@ -44,12 +46,15 @@ public sealed class XenoFruitChooseBui : BoundUserInterface
                 if (!_prototype.TryIndex(fruitId, out var fruit))
                     continue;
 
+                var sprite = _xenoFruit.GetFruitSprite(fruit);
+
                 var control = new XenoChoiceControl();
                 control.Button.Group = group;
 
                 var name = fruit.Name;
 
-                control.Set(name, _sprite.Frame0(fruit));
+                var specifier = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Structures/Xenos/xeno_fruit.rsi"), sprite);
+                control.Set(name, _sprite.Frame0(specifier));
                 control.Button.OnPressed += _ => SendPredictedMessage(new XenoFruitChooseBuiMsg(fruitId));
                 control.Button.ToolTip = fruit.Description;
                 control.Button.TooltipDelay = 0.1f;

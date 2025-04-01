@@ -59,6 +59,10 @@
     blacklist:
       components:
       - Xeno
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/matches/matches_mre.rsi
+      state: helmet
 
 - type: entity
   parent: CMMatchBook

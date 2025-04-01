@@ -38,9 +38,40 @@
     - RMCGrenadeM40
 
 - type: entity
+  name: flashbang
+  description: Excellent for stopping groups of Rioters. Don't expect sunglasses to protect you...
+  parent: CMGrenadeBase
+  id: RMCGrenadeFlashBang
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/flashbang.rsi
+  - type: RMCStunOnTrigger
+    range: 7
+  - type: FlashOnTrigger
+    range: 7
+  - type: SoundOnTrigger
+    sound:
+      path: "/Audio/Effects/flash_bang.ogg"
+  - type: DeleteOnTrigger
+  - type: SpawnOnTrigger
+    proto: GrenadeFlashEffect
+  - type: Appearance
+  - type: TimerTriggerVisuals
+    primingSound:
+      path: /Audio/Effects/countdown.ogg
+  - type: Tag
+    tags:
+    - RMCGrenadeRiot
+    - Grenade
+    - RMCGrenadeFlashBang
+  - type: RequiresSkill
+    skills:
+      RMCSkillPolice: 2
+
+- type: entity
   parent:
   - CMGrenadeBase
-  - RMCM40DPTags 
+  - RMCM40DPTags
   id: CMGrenadeHighExplosive
   name: M40 HEDP grenade
   description: High-Explosive Dual-Purpose. A small, but deceptively strong blast grenade that has been phasing out the M15 HE grenades alongside the M40 HEFA. Capable of being loaded in grenade launchers, or thrown by hand.
@@ -57,11 +88,17 @@
   - type: CMExplosionEffect
   - type: CMVocalizeTrigger
   - type: RMCScorchEffect
+  - type: Tag
+    tags:
+    - Grenade
+    - LauncherCompatibleGrenade
+    - RMCGrenadeM40
+    - RMCGrenadeHEDP
 
 - type: entity
   parent:
   - CMGrenadeBase
-  - RMCM40DPTags 
+  - RMCM40DPTags
   id: CMGrenadeSmoke
   name: M40 HSDP smoke grenade
   description: The M40 HSDP is a small, but powerful smoke grenade. Based off the same platform as the M40 HEDP. It is set to detonate in 2 seconds.
@@ -84,6 +121,7 @@
     - Grenade
     - LauncherCompatibleGrenade
     - RMCGrenadeM40
+    - RMCGrenadeRiot
   - type: Ammo
 
 - type: entity
@@ -123,11 +161,9 @@
     intensitySlope: 4
     totalIntensity: 110
     deleteAfterExplosion: false
-  - type: ClusterGrenade
+  - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
-    maxGrenadesCount: 48
-    grenadeType: enum.GrenadeType.Shoot
-    triggerGrenades: false
+    capacity: 48
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
@@ -137,6 +173,12 @@
     maxShrapnel: 0
   - type: CMVocalizeTrigger
   - type: RMCScorchEffect
+  - type: Tag
+    tags:
+    - Grenade
+    - LauncherCompatibleGrenade
+    - RMCGrenadeM40
+    - RMCGrenadeHEFA
 
 - type: entity
   parent: CMGrenadeHighExplosive
@@ -151,11 +193,39 @@
     intensitySlope: 6
     totalIntensity: 240
     deleteAfterExplosion: false
-  - type: ClusterGrenade
+  - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
-    maxGrenadesCount: 48 #same as HEFA
-    grenadeType: enum.GrenadeType.Shoot
-    triggerGrenades: false
+    capacity: 48 #same as HEFA
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: Tag
+    tags:
+    - Grenade
+    - LauncherCompatibleGrenade
+  - type: Ammo
+  - type: ClusterLimitHits
+  - type: CMExplosionEffect
+    maxShrapnel: 0
+  - type: CMVocalizeTrigger
+  - type: RMCScorchEffect
+
+- type: entity
+  parent: CMGrenadeFragOld
+  id: RMCGrenadeBlastM12
+  name: M12 blast grenade
+  description: A high-explosive grenade produced for private security firms. It explodes around 3 seconds after the pin has been pulled.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/m12blast.rsi
+  - type: Explosive
+    maxIntensity: 20
+    intensitySlope: 8
+    totalIntensity: 280
+    deleteAfterExplosion: false
+  - type: ProjectileGrenade
+    fillPrototype: CMProjectileShrapnel
+    capacity: 1 #same as HEFA
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
@@ -166,7 +236,6 @@
   - type: ClusterLimitHits
   - type: CMExplosionEffect
     maxShrapnel: 0
-  - type: CMVocalizeTrigger
   - type: RMCScorchEffect
 
 - type: entity
@@ -202,6 +271,8 @@
   - type: CMVocalizeTrigger
   - type: TileFireOnTrigger
     spawn: RMCTileFireGreen
+    sound:
+      path: /Audio/_RMC14/Weapons/Guns/Flamer/gun_flamethrower2.ogg
 
 - type: entity
   parent: RMCGrenadeIncendiary
@@ -278,7 +349,19 @@
     state: shrapnel_bright2
 
 - type: Tag
+  id: RMCGrenadeHEDP
+
+- type: Tag
+  id: RMCGrenadeHEFA
+
+- type: Tag
   id: RMCGrenadeM40
 
 - type: Tag
   id: RMCGrenadeTraining
+
+- type: Tag
+  id: RMCGrenadeRiot
+
+- type: Tag
+  id: RMCGrenadeFlashBang

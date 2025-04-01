@@ -32,7 +32,7 @@
       "name": "s_stock"
     },
     {
-      "name": "d-stock"
+      "name": "d_stock"
     },
     {
       "name": "c_stock"
@@ -177,6 +177,9 @@
     },
     {
       "name": "tactical_stock"
+    },
+    {
+      "name": "tactical_stock_a"
     },
     {
       "name": "m44r_stock"

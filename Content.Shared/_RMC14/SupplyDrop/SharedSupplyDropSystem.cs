@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CameraShake;
@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Extensions;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Rules;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
@@ -27,6 +28,7 @@ public abstract class SharedSupplyDropSystem : EntitySystem
 {
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
@@ -34,11 +36,13 @@ public abstract class SharedSupplyDropSystem : EntitySystem
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly RMCCameraShakeSystem _rmcCameraShake = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcpulling = default!;
 
     private int _supplyDropCount;
     private MapId? _supplyDropMap;
@@ -169,28 +173,29 @@ public abstract class SharedSupplyDropSystem : EntitySystem
             return false;
 
         if (computer.Comp.Squad is not { } squad ||
-            !_rmcPlanet.TryPlanetToCoordinates(computer.Comp.Coordinates, out var mapCoordinates))
+            !_rmcPlanet.TryPlanetToCoordinates(computer.Comp.Coordinates, out var mapCoordinates) ||
+            !CanSupplyDropSquad(squad))
         {
-            _popup.PopupCursor("Supply drop pad is not operational.", user, PopupType.MediumCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-supply-drop-not-operational"), user, PopupType.MediumCaution);
             return false;
         }
 
         if (!TryFindCrate(computer, out var crate))
         {
-            _popup.PopupCursor("No crate was detected on the drop pad. Get Requisitions on the line!", user, PopupType.MediumCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-supply-drop-no-crate"), user, PopupType.MediumCaution);
             return false;
         }
 
         if (!_area.CanSupplyDrop(mapCoordinates))
         {
-            _popup.PopupCursor("The landing zone is underground. The supply drop cannot reach here.", user, PopupType.MediumCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-supply-drop-underground"), user, PopupType.MediumCaution);
             return false;
         }
 
         if (_rmcMap.IsTileBlocked(mapCoordinates) ||
             _rmcMap.TryGetTileDef(mapCoordinates, out var tile) && tile.ID == ContentTileDefinition.SpaceID)
         {
-            _popup.PopupCursor("The landing zone appears to be obstructed or out of bounds. Package would be lost on drop.", user, PopupType.MediumCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-supply-drop-blocked"), user, PopupType.MediumCaution);
             return false;
         }
 
@@ -198,14 +203,15 @@ public abstract class SharedSupplyDropSystem : EntitySystem
         if (_entityStorage.ResolveStorage(crate, ref storage) &&
             storage.Open)
         {
-            _popup.PopupCursor("The crate is not secure on the drop pad. Please close it!", user, PopupType.MediumCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-supply-drop-crate-open"), user, PopupType.MediumCaution);
             return false;
         }
 
         var crateCoordinates = _transform.GetMoverCoordinates(crate);
-        _popup.PopupClient($"{Name(crate)} loads into a launch tube. Stand clear!", crateCoordinates, user, PopupType.Medium);
+        _popup.PopupClient(Loc.GetString("rmc-supply-drop-crate-load", ("crate", crate)), crateCoordinates, user, PopupType.Medium);
         _audio.PlayPredicted(crate.Comp.LaunchSound, crateCoordinates, user);
-        _marineAnnounce.AnnounceSquad($"{Name(crate)} supply drop incoming. Heads up!", squad);
+        _marineAnnounce.AnnounceSquad(Loc.GetString("rmc-supply-drop-squad-announcement", ("crate", crate)), squad);
+        _rmcpulling.TryStopAllPullsFromAndOn(crate);
 
         var mapId = EnsureMap();
         _transform.SetMapCoordinates(crate, new MapCoordinates(_supplyDropCount++ * 50, 0, mapId));
@@ -247,6 +253,14 @@ public abstract class SharedSupplyDropSystem : EntitySystem
             return;
 
         Dirty(ent);
+    }
+
+    private bool CanSupplyDropSquad(EntProtoId<SquadTeamComponent> squad)
+    {
+        if (!squad.TryGet(out var comp, _prototypes, _compFactory))
+            return true;
+
+        return comp.CanSupplyDrop;
     }
 
     public override void Update(float frameTime)

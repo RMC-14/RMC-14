@@ -1,0 +1,45 @@
+- type: constructionGraph
+  id: RMCGrilleElectrified
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: GrilleElectrified
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      steps:
+      - material: CMRodMetal
+        amount: 4
+        doAfter: 1
+
+  - node: GrilleElectrified
+    entity: RMCGrilleElectrified
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMRodMetal1
+        amount: 1
+      - !type:DeleteEntity
+      steps:
+      - tool: Cutting
+        doAfter: 0.25
+
+  - node: grilleBrokenElectrified
+    entity: RMCGrilleElectrifiedBroken
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMRodMetal1
+        amount: 1
+      - !type:DeleteEntity
+      steps:
+      - tool: Cutting
+        doAfter: 0.25
+    - to: GrilleElectrified
+      steps:
+      - material: CMRodMetal
+        amount: 1
+        doAfter: 0.5

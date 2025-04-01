@@ -1,0 +1,324 @@
+﻿- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RMCIntelBase
+  name: intel item
+  components:
+  - type: Corrodible
+    isCorrodible: false
+  - type: IntelDetectorTracked
+
+- type: entity
+  abstract: true
+  parent: RMCIntelBase
+  id: RMCIntelReadableBase
+  components:
+  - type: IntelReadObjective
+    value: 0.1
+  - type: IntelRetrieveItemObjective
+    value: 0.1
+  - type: Tag
+    tags:
+    - RMCIntelItem
+
+- type: entity
+  parent: RMCIntelReadableBase
+  id: RMCIntelPaperScrap
+  name: paper scrap
+  description: A scrap of paper, you think some of the words might still be readable.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/paper.rsi
+    state: paper_words
+  - type: Item
+    size: Tiny
+  - type: IntelReadObjective
+    state: Active
+  - type: IntelClues
+    clue: rmc-intel-clue-paper-scrap
+
+- type: entity
+  parent: RMCIntelReadableBase
+  id: RMCIntelProgressReport
+  name: progress report
+  description: A written report from someone for their supervisor about the status of some kind of project.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/paper.rsi
+    state: paper_p_words
+  - type: Item
+    size: Tiny
+  - type: IntelReadObjective
+    value: 0.2
+    delay: 6
+  - type: IntelClues
+    clue: rmc-intel-clue-progress-report
+    category: rmc-intel-reports
+
+- type: entity
+  parent: RMCIntelReadableBase
+  id: RMCIntelFolder
+  name: intel folder
+  description: A folder with some documents inside.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/paper.rsi
+    layers:
+    - state: folder
+      map: ["base" ]
+  - type: Item
+    size: Tiny
+  - type: IntelReadObjective
+    value: 0.2
+    delay: 4
+  - type: IntelRequires
+    requiresCount: 2
+  - type: IntelClues
+    clue: rmc-intel-clue-folder
+    category: rmc-intel-folders
+  - type: RandomSprite
+    available:
+    - base:
+        folder: ""
+        folder_black: ""
+        folder_blue: ""
+        folder_red: ""
+        folder_yellow: ""
+
+- type: entity
+  parent: RMCIntelReadableBase
+  id: RMCIntelTechnicalManual
+  name: technical manual
+  description: A highly specified technical manual, may be of use to someone in the relevant field.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/books.rsi
+    state: book
+  - type: Item
+    size: Tiny
+  - type: IntelReadObjective
+    value: 0.35
+    delay: 20
+  - type: IntelRequires
+    requiresCount: 2
+  - type: IntelClues
+    clue: rmc-intel-clue-technical-manual
+    category: rmc-intel-manuals
+
+- type: entity
+  abstract: true
+  parent: RMCIntelBase
+  id: RMCIntelRetrieveDeviceBase
+  components:
+  - type: IntelRetrieveItemObjective
+    state: Active
+    value: 0.7
+  - type: IntelClues
+    clues: 8
+  - type: IntelSerial
+
+- type: entity
+  parent: [CMHealthAnalyzer, RMCIntelRetrieveDeviceBase]
+  id: RMCIntelRetrieveHealthAnalyzer
+  suffix: Intel, Experimental Device
+  components:
+  - type: IntelClues
+    clue: rmc-intel-clue-experimental-device
+
+- type: entity
+  parent: RMCCommunicationsConsoleBase
+  id: RMCTechTreeConsole
+  name: tech tree console
+  description: A console used to make tech purchases.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: techweb
+  - type: InteractionOutline
+  - type: ActivatableUI
+    key: enum.TechControlConsoleUI.Key
+  - type: UserInterface
+    interfaces:
+      enum.TechControlConsoleUI.Key:
+        type: TechControlConsoleBui
+  - type: TechControlConsole
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: RMCCommunicationsConsoleBase
+  id: RMCComputerIntel
+  name: intel computer
+  description: An UNMC Intel Computer for data cataloguing and distribution.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: terminal1_old
+  - type: InteractionOutline
+  - type: IntelConsole
+
+- type: entity
+  id: RMCIntelTechTree
+  name: intel tech tree
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: IntelTechTree
+    tree:
+      options:
+      -
+        - name: Unlock Tier 1
+          description: Transitions the tree to another tier.
+          cost: 0
+          events:
+          - !type:TechUnlockTierEvent
+            tier: 1
+          - !type:TechAnnounceEvent
+            author: ALMAYER DEFCON LEVEL INCREASED
+            message: "THREAT ASSESSMENT LEVEL INCREASED TO LEVEL 1.
+
+              LEVEL 1 assets have been authorised to handle the situation."
+            sound: /Audio/_RMC14/AI/commandreport.ogg
+          icon:
+            sprite: _RMC14/Interface/tech_tree.rsi
+            state: upgrade
+      -
+        - name: Requisition Budget Increase
+          description: Distributes resources to requisitions for spending.
+          cost: 7
+          increase: 1
+          repurchasable: true
+          events:
+          - !type:TechRequisitionsBudgetEvent
+            amount: 5000
+          - !type:TechAnnounceEvent
+            author: ALMAYER SPECIAL ASSETS AUTHORIZED
+            message: Additional supply budget has been authorised for this operation.
+          icon:
+            sprite: _RMC14/Interface/tech_tree.rsi
+            state: budget_req
+        - name: Dropship Budget Increase
+          description: Distributes resources to the dropship fabricator.
+          cost: 6
+          increase: 1
+          repurchasable: true
+          events:
+          - !type:TechDropshipBudgetEvent
+            amount: 2000
+          - !type:TechAnnounceEvent
+            author: ALMAYER SPECIAL ASSETS AUTHORIZED
+            message: Additional dropship part fabricator points have been authorised for this operation.
+          icon:
+            sprite: _RMC14/Interface/tech_tree.rsi
+            state: budget_ds
+        - name: Unlock Tier 2
+          description: Transitions the tree to another tier.
+          cost: 5
+          events:
+          - !type:TechUnlockTierEvent
+            tier: 2
+          - !type:TechAnnounceEvent
+            author: ALMAYER DEFCON LEVEL INCREASED
+            message: "THREAT ASSESSMENT LEVEL INCREASED TO LEVEL 2.
+
+              LEVEL 2 assets have been authorised to handle the situation."
+            sound: /Audio/_RMC14/AI/commandreport.ogg
+          icon:
+            sprite: _RMC14/Interface/tech_tree.rsi
+            state: upgrade
+      -
+        - name: Additional OB projectiles - HE
+          description: Highly explosive bombardment ammo, to be loaded into the orbital cannon.
+          cost: 5
+          increase: 2
+          repurchasable: true
+          events:
+          - !type:TechWarheadEvent
+            warhead: RMCOrbitalCannonWarheadExplosive
+          - !type:TechAnnounceEvent
+            author: ALMAYER SPECIAL ASSETS AUTHORIZED
+            message: Additional Orbital Bombardment warheads (HE) have been delivered to Requisitions' ASRS.
+          icon:
+            sprite: _RMC14/Interface/tech_tree.rsi
+            state: ob_he
+        - name: Additional OB projectiles - Incendiary
+          description: Highly flammable bombardment ammo, to be loaded into the orbital cannon.
+          cost: 5
+          increase: 2
+          repurchasable: true
+          events:
+          - !type:TechWarheadEvent
+            warhead: RMCOrbitalCannonWarheadIncendiary
+          - !type:TechAnnounceEvent
+            author: ALMAYER SPECIAL ASSETS AUTHORIZED
+            message: Additional Orbital Bombardment warheads (Incendiary) have been delivered to Requisitions' ASRS.
+          icon:
+            sprite: _RMC14/Interface/tech_tree.rsi
+            state: ob_incend
+        - name: Additional OB projectiles - Cluster
+          description: Highly explosive bombardment ammo that fragments, to be loaded into the orbital cannon.
+          cost: 5
+          increase: 2
+          repurchasable: true
+          events:
+          - !type:TechWarheadEvent
+            warhead: RMCOrbitalCannonWarheadCluster
+          - !type:TechAnnounceEvent
+            author: ALMAYER SPECIAL ASSETS AUTHORIZED
+            message: Additional Orbital Bombardment warheads (Cluster) have been delivered to Requisitions' ASRS.
+          icon:
+            sprite: _RMC14/Interface/tech_tree.rsi
+            state: ob_cluster
+        - name: Unlock Tier 3
+          description: Transitions the tree to another tier.
+          cost: 5
+          events:
+          - !type:TechUnlockTierEvent
+            tier: 3
+          - !type:TechAnnounceEvent
+            author: ALMAYER DEFCON LEVEL INCREASED
+            message: "THREAT ASSESSMENT LEVEL INCREASED TO LEVEL 3.
+
+              LEVEL 3 assets have been authorised to handle the situation."
+            sound: /Audio/_RMC14/AI/commandreport.ogg
+          icon:
+            sprite: _RMC14/Interface/tech_tree.rsi
+            state: upgrade
+      -
+        - name: Wake Up Additional Troops
+          description: Wakes up additional troops to fight against any threats.
+          cost: 6
+          increase: 6
+          repurchasable: true
+          events:
+          - !type:TechCryoMarinesEvent
+          - !type:TechAnnounceEvent
+            author: ALMAYER SPECIAL ASSETS AUTHORIZED
+            message: Additional troops are being taken out of cryo.
+          icon:
+            sprite: _RMC14/Interface/tech_tree.rsi
+            state: cryotroops
+        - name: Wake Up Additional Specialist
+          description: Wakes up an additional specialist to fight against any threats.
+          cost: 8
+          events:
+          - !type:TechCryoSpecEvent
+          - !type:TechAnnounceEvent
+            author: ALMAYER SPECIAL ASSETS AUTHORIZED
+            message: An additional specialist is being taken out of cryo.
+          icon:
+            sprite: _RMC14/Interface/tech_tree.rsi
+            state: overshield
+
+- type: Tag
+  id: RMCIntelItem
+
+- type: entity
+  parent: RMCIntelPaperScrap
+  id: RMCIntelDebug
+  suffix: DEBUG, DO NOT MAP
+  components:
+  - type: IntelReadObjective
+    state: Active
+    value: 999

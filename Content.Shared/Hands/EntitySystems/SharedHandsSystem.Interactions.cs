@@ -16,7 +16,7 @@ namespace Content.Shared.Hands.EntitySystems;
 
 public abstract partial class SharedHandsSystem : EntitySystem
 {
-    [Dependency] private readonly CMHandsSystem _rmcHands = default!;
+    [Dependency] private readonly RMCHandsSystem _rmcHands = default!;
 
     private void InitializeInteractions()
     {
@@ -91,8 +91,8 @@ public abstract partial class SharedHandsSystem : EntitySystem
         if (!TryComp(session?.AttachedEntity, out HandsComponent? component))
             return;
 
-        if (!_actionBlocker.CanInteract(session.AttachedEntity.Value, null))
-            return;
+        // if (!_actionBlocker.CanInteract(session.AttachedEntity.Value, null))
+        //     return;
 
         if (component.ActiveHand == null || component.Hands.Count < 2)
             return;
@@ -186,8 +186,8 @@ public abstract partial class SharedHandsSystem : EntitySystem
         if (!CanPickupToHand(uid, entity, handsComp.ActiveHand, checkActionBlocker, handsComp))
             return false;
 
-        DoDrop(uid, hand, false, handsComp);
-        DoPickup(uid, handsComp.ActiveHand, entity, handsComp);
+        DoDrop(uid, hand, false, handsComp, log:false);
+        DoPickup(uid, handsComp.ActiveHand, entity, handsComp, log: false);
         return true;
     }
 
@@ -196,11 +196,13 @@ public abstract partial class SharedHandsSystem : EntitySystem
         if (args.Handled)
             return;
 
-        // TODO: this pattern is super uncommon, but it might be worth changing GetUsedEntityEvent to be recursive.
-        if (TryComp<VirtualItemComponent>(component.ActiveHandEntity, out var virtualItem))
-            args.Used = virtualItem.BlockingEntity;
-        else
-            args.Used = component.ActiveHandEntity;
+        if (component.ActiveHandEntity.HasValue)
+        {
+            // allow for the item to return a different entity, e.g. virtual items
+            RaiseLocalEvent(component.ActiveHandEntity.Value, ref args);
+        }
+
+        args.Used ??= component.ActiveHandEntity;
     }
 
     //TODO: Actually shows all items/clothing/etc.

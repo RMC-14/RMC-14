@@ -1,0 +1,72 @@
+﻿# LV624
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertLV624Armory
+  name: Armory
+  suffix: Insert LV624
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/LV624/armory_looted.yml"
+      probability: 0.10
+    - spawn: "/Maps/_RMC14/Inserts/LV624/armory_extra.yml"
+      probability: 0.10
+    - spawn: "/Maps/_RMC14/Inserts/LV624/armory_cheese.yml"
+      probability: 0.10
+    clearEntities: true
+    clearDecals: true
+    
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertLV624Gym
+  name: Gym
+  suffix: Insert LV624
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/LV624/gym_alternate.yml"
+      probability: 0.30
+    - spawn: "/Maps/_RMC14/Inserts/LV624/gym_pool.yml"
+      probability: 0.20
+    clearEntities: true
+    clearDecals: true
+
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertLV624NexusCenter
+  name: Nexus Barricaded
+  suffix: Insert LV624
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/LV624/nexuscenter_barricaded.yml"
+      probability: 0.3
+    clearEntities: true
+    clearDecals: true
+    
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertLV624SandtempleSE
+  name: Sandtemple LZ1
+  suffix: Insert LV624
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/LV624/sandtemple-se.yml"
+      probability: 0.25
+    clearEntities: true
+    clearDecals: true
+    
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertLV624SandtempleJungle
+  name: Sandtemple Jungle
+  suffix: Insert LV624
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/LV624/sandtemple-jungle.yml"
+      probability: 0.25
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: true

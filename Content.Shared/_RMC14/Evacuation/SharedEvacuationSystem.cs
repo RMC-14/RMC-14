@@ -4,7 +4,6 @@ using System.Text;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Explosion;
-using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.HyperSleep;
 using Content.Shared._RMC14.Power;
@@ -23,6 +22,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
+using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
@@ -41,17 +41,16 @@ public abstract class SharedEvacuationSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly SharedHyperSleepChamberSystem _hyperSleep = default!;
+    [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
 
     private EntityQuery<AreaComponent> _areaQuery;
@@ -175,14 +174,13 @@ public abstract class SharedEvacuationSystem : EntitySystem
             _map = mapId;
         }
 
-        var matrix = Matrix3x2.CreateTranslation(_index * 50, _index * 50);
+        var offset = new Vector2(_index * 50, _index * 50);
         _index++;
 
-        _rmcMap.TryLoad(_map.Value, spawn.ToString(), out var grids, matrix);
-        if (grids == null || grids.Count == 0)
+        if (!_mapLoader.TryLoadGrid(_map.Value, spawn, out var result, offset: offset))
             return;
 
-        var grid = grids[0];
+        var grid = result.Value;
         var xform = Transform(ent);
         var coordinates = _transform.GetMapCoordinates(ent, xform);
         coordinates = coordinates.Offset(ent.Comp.Offset);
@@ -599,7 +597,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
                     if (offAreas.Length == 0)
                         marineAnnounce += " All fueling areas operational.";
                     else
-                        marineAnnounce += $"To increase speed, restore power to the following areas: {offAreas}";
+                        marineAnnounce += $" To increase speed, restore power to the following areas: {offAreas}";
 
                     _marineAnnounce.AnnounceARES(null, marineAnnounce);
 

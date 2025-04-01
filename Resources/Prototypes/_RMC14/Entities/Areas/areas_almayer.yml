@@ -19,6 +19,7 @@
     hijackEvacuationArea: false
     hijackEvacuationWeight: 0
     hijackEvacuationType: None
+  - type: IntelRescueSurvivorArea
 
 - type: entity
   parent: RMCAreaAlmayer
@@ -75,6 +76,7 @@
     state: corporatespace
   - type: Area
     zLevel: 1
+    retrieveItemObjective: true
 
 - type: entity
   parent: RMCAreaAlmayerCommand
@@ -85,6 +87,7 @@
     state: ceroom
   - type: Area
     zLevel: 1
+    retrieveItemObjective: true
 
 - type: entity
   parent: RMCAreaAlmayerCommand
@@ -1154,6 +1157,7 @@
     state: operating
   - type: Area
     zLevel: 1
+  - type: IntelRecoverCorpsesArea
 
 - type: entity
   parent: RMCAreaAlmayerMedical
@@ -1204,6 +1208,7 @@
     state: science
   - type: Area
     zLevel: 1
+    retrieveItemObjective: true
 
 - type: entity
   parent: RMCAreaAlmayerMedical
@@ -1224,6 +1229,7 @@
     state: science
   - type: Area
     zLevel: 1
+  - type: IntelRecoverCorpsesArea
 
 - type: entity
   parent: RMCAreaAlmayerMedicalContainment

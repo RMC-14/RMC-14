@@ -9,4 +9,4 @@
     layers:
     - state: corpse_spawner
   - type: CorpseSpawner
-    spawn: RMCHumanCorpse
+    spawn: RMCCorpse

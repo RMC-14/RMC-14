@@ -1,33 +1,6 @@
 ﻿<controls:TacticalMapWindow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.TacticalMap"
-    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
     Title="Map" MinSize="600 600">
-    <TabContainer Name="Tabs" Access="Public">
-        <BoxContainer Name="MapTab" Access="Public" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
-            <controls:TacticalMapControl Name="Map" Access="Public" Stretch="Keep" TextureScale="3 3" />
-        </BoxContainer>
-        <BoxContainer Name="CanvasTab" Access="Public" Orientation="Vertical" Visible="False"
-                      HorizontalExpand="True" VerticalExpand="True">
-            <Label Text="Canvas Options" />
-            <BoxContainer Orientation="Horizontal">
-                <Button Name="UpdateCanvasButton" Access="Public" Text="Update Canvas" StyleClasses="OpenBoth"
-                        HorizontalExpand="True" />
-                <Button Name="ClearCanvasButton" Access="Public" Text="Clear Canvas" StyleClasses="OpenBoth"
-                        HorizontalExpand="True" />
-                <Button Name="UndoButton" Access="Public" Text="Undo" StyleClasses="OpenBoth"
-                        HorizontalExpand="True" />
-                <OptionButton Name="ColorsButton" Access="Public" StyleClasses="OpenBoth"
-                              HorizontalExpand="True" />
-            </BoxContainer>
-            <ui:BlueHorizontalSeparator />
-            <ProgressBar Name="CooldownBar" Access="Public" Visible="False"
-                         HorizontalExpand="True" MinHeight="25">
-                <Label Name="CooldownLabel" Access="Public"
-                       HorizontalAlignment="Center" />
-            </ProgressBar>
-            <controls:TacticalMapControl Name="Canvas" Access="Public" Stretch="Keep"
-                                         TextureScale="3 3" Drawing="True" MouseFilter="Pass" />
-        </BoxContainer>
-    </TabContainer>
+    <controls:TacticalMapWrapper Name="Wrapper" Access="Public" />
 </controls:TacticalMapWindow>

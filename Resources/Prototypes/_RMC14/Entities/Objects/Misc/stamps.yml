@@ -122,6 +122,7 @@
   parent: CMStampBase
   id: CMStampWeYa
   name: WEYA rubber stamp
+  suffix: Admin
   components:
   - type: Sprite
     state: stamp-we_ya
@@ -134,6 +135,7 @@
   parent: CMStampBase
   id: CMStampMarine
   name: Marine rubber stamp
+  suffix: Admin
   components:
   - type: Sprite
     state: stamp-marine
@@ -146,6 +148,7 @@
   parent: CMStampBase
   id: CMStampCMB
   name: CMB rubber stamp
+  suffix: Admin
   components:
   - type: Sprite
     state: stamp-cmb
@@ -153,3 +156,16 @@
     stampedName: stamp-component-stamped-name-cm-cmb
     stampedColor: "#b0901b"
     stampState: "paper_stamp-cmb"
+
+- type: entity
+  parent: CMStampBase
+  id: CMStampProvost
+  name: provost rubber stamp
+  suffix: Admin
+  components:
+  - type: Sprite
+    state: stamp-provost # update sprite
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-provost
+    stampedColor: "#cb0000"
+    stampState: "paper_stamp-provost"

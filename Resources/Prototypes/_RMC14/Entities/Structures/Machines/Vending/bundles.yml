@@ -38,7 +38,6 @@
   components:
   - type: CMVendorBundle
     bundle:
-    - CMArmorHelmetM10Medic # TODO RMC14 M4
     - CMVendorHeadsetSquadCorpsman
     - CMJumpsuitMarineMedic
     - CMBootsBlackFilled
@@ -85,14 +84,14 @@
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleCombatTechnicianEssentials
   name: essential engineer set
-  description: Contains 50 metal, 40 plasteel, 25 sandbags, a high-capacity power cell, an entrenching tool and a light replacer.
+  description: Contains 50 metal, 40 plasteel, 25 sandbags, a high-capacity power cell, an entrenching tool, a light replacer, and a nailgun.
   components:
   - type: Sprite
     sprite: Objects/Weapons/Bombs/c4.rsi
     state: icon
   - type: CMVendorBundle
     bundle:
-#      - # TODO RMC14 plastic explosives
+    - RMCExplosivePlastic
     - CMSandbagEmpty25
     - CMSheetMetal50
     - CMSheetPlasteel40
@@ -100,6 +99,7 @@
     - CMEntrenchingTool
     - CMLightReplacer
 #    - CMAPCElectronics # TODO RMC14 uncomment when power
+    - RMCNailgunTactical
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
@@ -162,3 +162,19 @@
     - CMSurgicalCaseFilled
     - RMCFlashlightPen
 #   - Syringe case # TODO RMC14 syringe cases
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCCommandingOfficerEssentialsBundle
+  name: Commanding Officer Essentials kit
+  description: Contains a laser designator, whistle, and a disabler.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/binoculars.rsi
+    state: rangefinder
+  - type: CMVendorBundle
+    bundle:
+    - RMCLaserDesignator
+    - RMCWhistle
+    - RMCWeaponTaser
+    #TODO RMC14 Megaphone, Paper Map.
