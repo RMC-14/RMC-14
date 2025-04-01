@@ -20,7 +20,7 @@
       entries:
       - id: CMVendorBundleCrewMaintenanceEssentials
         name: Essential Maintenance Set
-        mandatory: trie
+        mandatory: true
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
@@ -124,7 +124,7 @@
         name: Black Webbing Vest
       - id: CMWebbing
         name: Webbing
-      - id: RMCBlackWebbingSmall
+      - id: RMCWebbingBlackSmall
         name: Black Webbing
     #- name: Spare Gear
     #  entries:

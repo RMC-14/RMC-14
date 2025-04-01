@@ -145,8 +145,7 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleCrewMedicalEssentialsNurse
-  name: essential medical set
-  description: Contains a defibrillator, a first-aid kit, medical tools and a flashlight.
+  name: Essential Medical Set
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Medical/defib.rsi
@@ -158,9 +157,48 @@
     - CMHealthAnalyzer
     - CMSurgicalLine
     - CMSynthGraft
+    #- syringe case TODO RMC14 syringe cases
     - CMSurgicalCaseFilled
+    #- stethoscope
     - RMCFlashlightPen
-#   - Syringe case # TODO RMC14 syringe cases
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: CMVendorBundleCrewMedicalEssentialsDoctor
+  name: Essential Medical Set
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/defib.rsi
+    state: defib
+  - type: CMVendorBundle
+    bundle:
+    - CMDefibrillator
+    - CMAdvFirstAidKitFilled
+    - CMHealthAnalyzer
+    - CMSurgicalLine
+    - CMSynthGraft
+    #- stethoscope
+    - RMCFlashlightPen
+    #- syringe case
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: CMVendorBundleCrewMedicalEssentialsCMO
+  name: Essential Medical Set
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/defib.rsi
+    state: defib
+  - type: CMVendorBundle
+    bundle:
+    - CMDefibrillator
+    - CMAdvFirstAidKitFilled
+    - CMHealthAnalyzer
+    - CMSurgicalLine
+    - CMSynthGraft
+    - RMCFlashlightPen
+    #- stethoscope
+    #- syringe case
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel

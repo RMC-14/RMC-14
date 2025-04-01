@@ -1,4 +1,4 @@
-# WEAPON VENDOR
+# WEAPONS VENDOR
 
 - type: entity
   parent: ColMarTechBase
@@ -416,7 +416,7 @@
     #    name: Squad Optic
     #    amount: 15
 
-# MUNITION VENDOR
+# AMMUNITION VENDOR
 
 - type: entity
   parent: ColMarTechBase
@@ -508,7 +508,7 @@
         name: M74 AGM-H Hornet Shell
         amount: 4
 
-# ARMAMENTS VENDOR
+# UTILITIES VENDOR
 
 - type: entity
   parent: ColMarTechBase

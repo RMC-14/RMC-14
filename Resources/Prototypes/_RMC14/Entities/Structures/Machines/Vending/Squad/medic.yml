@@ -405,7 +405,7 @@
         name: Shoulder Holster
       - id: CMWebbing
         name: Webbing
-      - id: RMCBlackWebbingSmall
+      - id: RMCWebbingBlackSmall
         name: Black Webbing
       - id: CMWebbingPouch
         name: Drop Pouch
