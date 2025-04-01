@@ -382,7 +382,7 @@ public sealed class RMCPullingSystem : EntitySystem
 
     public void PlayPullEffect(EntityUid puller, EntityUid pulled)
     {
-        if(!_timing.IsFirstTimePredicted)
+        if (!_timing.IsFirstTimePredicted)
             return;
 
         var userXform = Transform(puller);
@@ -393,7 +393,8 @@ public sealed class RMCPullingSystem : EntitySystem
         _melee.DoLunge(puller, puller, Angle.Zero, localPos, null);
         _audio.PlayPredicted(_pullSound, pulled, puller);
 
-        SpawnAttachedTo(PullEffect, pulled.ToCoordinates());
+        if (_net.IsServer)
+             SpawnAttachedTo(PullEffect, pulled.ToCoordinates());
     }
 
     private bool CanPullDead(EntityUid puller, EntityUid pulled)
