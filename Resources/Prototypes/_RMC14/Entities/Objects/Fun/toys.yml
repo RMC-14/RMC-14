@@ -178,3 +178,22 @@
   - type: MeleeWeapon
     soundHit:
       collection: XenoHelp
+
+- type: entity
+  parent: CMPlushieBase
+  id: RMCPlushieGnarpGnarp
+  name: gnarp plush
+  description: gnarp gnarp.
+  components:
+  - type: Sprite
+    state: gnarp
+
+- type: entity
+  parent: RMCPlushieGnarpGnarp
+  id: RMCPlushieGnarpGnarpAlt
+  name: gnarp plush
+  suffix: Alternate
+  description: gnarp gnarp.
+  components:
+  - type: Sprite
+    state: gnarp_alt

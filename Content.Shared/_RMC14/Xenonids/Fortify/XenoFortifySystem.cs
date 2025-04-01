@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Stun;
@@ -82,7 +82,7 @@ public sealed class XenoFortifySystem : EntitySystem
     {
         if (xeno.Comp.Fortified)
         {
-            args.Armor += xeno.Comp.Armor;
+            args.XenoArmor += xeno.Comp.Armor;
             args.FrontalArmor += xeno.Comp.FrontalArmor;
         }
     }

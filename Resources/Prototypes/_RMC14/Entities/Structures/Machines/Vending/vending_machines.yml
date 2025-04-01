@@ -398,6 +398,8 @@
     PumpkinSeeds: 3
     # CherrySeed: 3
     RiceSeeds: 3
+    GarlicSeeds: 3
+    OnionSeeds: 3
 
 
 # Dinnerware
@@ -417,13 +419,37 @@
   startingInventory:
     # TODO RMC14 Tray: 8
     RMCFork: 6
-    RMCKitchenKnifeChef: 3
+    RMCSpoon: 4
+    RMCKitchenKnife: 5
     DrinkGlass: 8
     ClothingOuterApronChef: 2
     RMCCondimentSmallSalt: 4
     RMCCondimentSmallPepper: 4
     RMCCondimentEnzyme: 1
     RMCCondiment: 8
+    FoodPlateTin: 5
+    FoodBowlBig: 10
+    RMCKitchenKnifeButcher: 1
+    RMCKitchenKnifeChef: 3
+    RMCRollingPin: 4
+    PairedChopsticks: 4
+    FoodPlate: 10
+    FoodPlateSmall: 10
+    FoodPlateMuffinTin: 5
+    FoodKebabSkewer: 5
+    CMBeaker: 5
+    CMBeakerLarge: 5
+    Pitcher: 2
+    DrinkMug: 5
+    DrinkMugBlack: 2
+    DrinkMugBlue: 2
+    DrinkMugGreen: 2
+    DrinkMugHeart: 1
+    DrinkMugMetal: 2
+    DrinkMugMoebius: 1
+    DrinkMugOne: 1
+    DrinkMugRainbow: 2
+    DrinkMugRed: 2
 
 # BODA
 - type: entity
@@ -460,8 +486,8 @@
   startingInventory:
     FoodContainerEgg: 12
     FoodMeatFish: 12
-    FoodMeat: 12
-    DrinkMilkCarton: 12
+    FoodMeat: 24
+    DrinkMilkCarton: 24
     DrinkSoyMilkCarton: 12
     RMCCondimentEnzyme: 12
     ReagentContainerFlour: 12
@@ -485,3 +511,6 @@
     FoodPotato: 12
     FoodTomato: 12
     # TODO RMC14 Whitebeet 12
+    FoodOnion: 12
+    FoodGarlic: 12
+    ReagentContainerRice: 12

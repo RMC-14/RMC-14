@@ -23,7 +23,6 @@
   copyright: "Contributed by the RMC community member wendyribstonofpippin."
   source: "https://linktr.ee/curatrix_ribston"
 
-
 - files: ["MarineMajor.png"]
   license: "CC-BY-4.0"
   copyright: "Marine major by Wrath is licensed under Creative Commons Attribution 4.0 International"
@@ -38,3 +37,8 @@
   license: "CC-BY-4.0"
   copyright: "Made by tobinator(Discord)"
   source: "https://discord.com/channels/1168210010233376858/1168210011823026270/1327663432979316877"
+
+- files: ["Cornered.png", "Eyes_Up.png", "Focus_Fire.png"]
+  license: "CC-BY-4.0"
+  copyright: "Made by loganix(Discord)"
+  source: "https://discord.com/channels/1168210010233376858/1168217254358425790/1350673232625139712"

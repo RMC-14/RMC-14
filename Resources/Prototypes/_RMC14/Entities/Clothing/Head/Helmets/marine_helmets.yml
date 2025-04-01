@@ -167,10 +167,10 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m11/co.rsi
   - type: CMArmor
-    armor: 30
+    melee: 25
+    bullet: 30
     bio: 25
     explosionArmor: 10 #same as base m10 helmet
-    #todo RMC: melee armor: 25
     #todo RMC: energy armor: 15
   - type: ItemCamouflage
     camouflageVariations:
@@ -191,15 +191,13 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m11/ceremonial.rsi
   - type: CMArmor
-    armor: 30
+    melee: 25
+    bullet: 30
     bio: 25
     explosionArmor: 10 #same as base m10 helmet
-    #todo RMC: melee armor: 25
     #todo RMC: energy armor: 15
   - type: ItemCamouflage
     camouflageVariations: { }
-
-
 
 # M12
 - type: entity
@@ -284,7 +282,8 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/g4/jungle.rsi
   - type: CMArmor
-    armor: 25
+    melee: 25
+    bullet: 25
     explosionArmor: 50
   - type: ParasiteResistance
     maxCount: 6
@@ -372,7 +371,8 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m12/jungle.rsi
   - type: CMArmor
-    armor: 25
+    melee: 25
+    bullet: 25
     bio: 25 # TODO RMC14 max 2 visors
   - type: ItemCamouflage
     camouflageVariations:

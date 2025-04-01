@@ -212,6 +212,21 @@ public abstract partial class SharedGunSystem : EntitySystem
         EntityManager.DirtyField(uid, gun, nameof(GunComponent.ShotCounter));
     }
 
+    // RMC14 Needed to check if the attempted shot actually shot any projectiles.
+    /// <summary>
+    ///     Attempts to shoot at the target coordinates. Resets the shot counter after every shot.
+    /// </summary>
+    /// <returns>Returns a list containing all successfully shot projectiles, returns null if no projectiles have been shot</returns>
+    public List<EntityUid>? AttemptShoot(Entity<GunComponent> ent, EntityUid user, EntityCoordinates coordinates)
+    {
+        ent.Comp.ShootCoordinates = coordinates;
+        var projectiles = AttemptShoot(user, ent, ent);
+        ent.Comp.ShotCounter = 0;
+        EntityManager.DirtyField(ent.Owner, ent.Comp, nameof(GunComponent.ShotCounter));
+
+        return projectiles;
+    }
+
     /// <summary>
     /// Attempts to shoot at the target coordinates. Resets the shot counter after every shot.
     /// </summary>
@@ -743,6 +758,7 @@ public abstract partial class SharedGunSystem : EntitySystem
             Audio.PlayPredicted(gun.SoundGunshotModified, gunUid, user);
         }
 
+        Logs.Add(LogType.RMCGunShot, LogImpact.Low, $"{ToPrettyString(user)} shot {ToPrettyString(gunUid)} with {shotProjectiles.Count} projectiles aiming at {toCoordinates}.");
         return shotProjectiles;
     }
 
