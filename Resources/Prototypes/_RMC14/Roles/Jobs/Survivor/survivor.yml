@@ -30,12 +30,14 @@
         RMCSkillConstruction: 1
         RMCSkillEndurance: 2
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetCivilian
-    - type: Survivor
+    - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: UserIFF
       faction: FactionSurvivor
+    - type: IntelRescueSurvivorObjective
   hasIcon: false
 
 - type: startingGear
@@ -56,11 +58,21 @@
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
-  - type: Sprite
+  - type: Sprite # TODO: Replace with landmark sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
-    - state: survivor
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
+
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleSurvivor
+  name: Survivor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: survivor
 
 - type: playTimeTracker
   id: CMJobSurvivor

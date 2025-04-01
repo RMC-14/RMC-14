@@ -9,10 +9,12 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
+using Content.Shared.Tag;
 using Content.Shared.Verbs;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using static Robust.Shared.Utility.SpriteSpecifier;
 
@@ -27,9 +29,12 @@ public sealed class DeployableItemSystem : EntitySystem
     [Dependency] private readonly SharedCMInventorySystem _cmInventory = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private readonly HashSet<Entity<DeployableItemComponent>> _deployables = new();
+
+    private static readonly ProtoId<TagPrototype> CatwalkTag = "Catwalk";
 
     public override void Initialize()
     {
@@ -125,7 +130,10 @@ public sealed class DeployableItemSystem : EntitySystem
 
     private void OnAfterInteract(Entity<DeployableItemComponent> ent, ref AfterInteractEvent args)
     {
-        if (!args.CanReach || args.Target != null)
+        if (!args.CanReach)
+            return;
+
+        if (args.Target != null && !_tag.HasTag(args.Target.Value, CatwalkTag))
             return;
 
         args.Handled = true;

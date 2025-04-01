@@ -384,15 +384,70 @@
 
 - type: entity
   parent: RMCBarricadeHandrail
-  id: RMCBarricadeSmallWire
+  id: RMCBarricadeHybrisa
   components:
     - type: Sprite
       layers:
-      - state: small_wire
+      - state: handrail_hybrisa
       - map: [ "acided" ]
     - type: Construction
       graph: BarricadeHandrailGraph
       node: nodeHandrail
+
+- type: entity
+  parent: RMCBarricadeHandrail
+  id: RMCBarricadeHybrisaCenterRoad
+  components:
+    - type: Sprite
+      layers:
+      - state: centerroadbarrier2
+      - map: [ "acided" ]
+    - type: Construction
+      graph: BarricadeHandrailGraph
+      node: nodeHandrail
+
+- type: entity
+  parent: RMCBarricadeHybrisaCenterRoad
+  id: RMCBarricadeHybrisaCenterRoadDouble
+  suffix: Double
+  components:
+    - type: Sprite
+      offset: 0,-0.15
+      layers:
+      - state: centerroadbarrier1
+      - map: [ "acided" ]
+
+
+- type: entity
+  parent: RMCBarricadeHandrail
+  id: RMCBarricadeHybrisaPlasticRoadBarrier
+  name: plastic road barrier
+  components:
+    - type: Sprite
+      layers:
+      - state: plasticroadbarrierred
+      - map: [ "acided" ]
+    - type: Construction
+      graph: BarricadeHandrailGraph
+      node: nodeHandrail
+
+- type: entity
+  parent: RMCBarricadeHybrisaPlasticRoadBarrier
+  id: RMCBarricadeHybrisaPlasticRoadBarrierBlue
+  components:
+    - type: Sprite
+      layers:
+      - state: plasticroadbarrierblue
+      - map: [ "acided" ]
+
+- type: entity
+  parent: RMCBarricadeHybrisaPlasticRoadBarrier
+  id: RMCBarricadeHybrisaPlasticRoadBarrierBlack
+  components:
+    - type: Sprite
+      layers:
+      - state: plasticroadbarrierblack
+      - map: [ "acided" ]
 
 # Metal Barricade Doors
 - type: entity

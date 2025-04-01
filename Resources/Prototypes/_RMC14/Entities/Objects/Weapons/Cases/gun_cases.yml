@@ -184,7 +184,7 @@
     contents:
     - id: WeaponRifleM54CE2
     - id: CMMagazineRifleM54CE2
-    - id: CMMagazineRifleM54CE2 # Replace with a holotargeting mag once that ammo is implemented.
+    - id: CMMagazineRifleM54CE2HT
 
 # XM88
 - type: entity
@@ -243,6 +243,11 @@
     - id: RMCBoxShotgunBreaching
       amount: 2
     - id: RMCBeltXM51
+  - type: RemoveOnlyStorage
+    blacklist:
+      tags:
+      - RMCBoxShotgunBreaching
+    whitelist: null
 
 # MOU53
 - type: entity
@@ -303,3 +308,96 @@
     - id: WeaponRifleM54CMK1AP
     - id: CMMagazineRifleM54CMK1AP
     - id: CMMagazineRifleM54CMK1AP
+
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCM54CMK2Case
+  name: M54C assault rifle MK2 case
+  description: A gun case containing the M54C assault rifle MK2.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,9,1 # 5 slots
+    whitelist:
+      tags:
+      - RMCWeaponRifleM54CMK2
+      - CMMagazineRifleM54C
+  - type: StorageFill
+    contents:
+    - id: WeaponRifleM54C
+    - id: CMMagazineRifleM54C
+    - id: CMMagazineRifleM54C
+    - id: CMMagazineRifleM54C
+    - id: CMMagazineRifleM54C
+
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCM42A2ShotgunCase
+  name: M42A2 pump shotgun case
+  description: A gun case containing the M42A2 pump shotgun.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,3,1 # 4 slots
+    whitelist:
+      tags:
+      - RMCWeaponShotgunM42A2
+      - RMCHandful
+  - type: StorageFill
+    contents:
+    - id: WeaponShotgunM42A2
+    # Group 1
+    - id: CMShellShotgunBuckshot # Spawn 3 handfuls of shells, each group being random
+      prob: 0.25
+      orGroup: ShellOne
+    - id: CMShellShotgunSlugs
+      prob: 0.25
+      orGroup: ShellOne
+    - id: CMShellShotgunFlechette
+      prob: 0.25
+      orGroup: ShellOne
+    # Group 2
+    - id: CMShellShotgunBuckshot
+      prob: 0.25
+      orGroup: ShellTwo
+    - id: CMShellShotgunSlugs
+      prob: 0.25
+      orGroup: ShellTwo
+    - id: CMShellShotgunFlechette
+      prob: 0.25
+      orGroup: ShellTwo
+    # Group 3
+    - id: CMShellShotgunBuckshot
+      prob: 0.25
+      orGroup: ShellThree
+    - id: CMShellShotgunSlugs
+      prob: 0.25
+      orGroup: ShellThree
+    - id: CMShellShotgunFlechette
+      prob: 0.25
+      orGroup: ShellThree
+
+# Launchers
+# M79
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCM79Case
+  name: M79 grenade launcher case
+  description: A gun case containing the M79 grenade launcher. Comes with three different grenade packets
+  components:
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - RMCWeaponLauncherM79
+      - RMCPacketGrenade
+  - type: StorageFill
+    contents:
+    - id: CMWeaponLauncherM79
+    - id: RMCPacketGrenadeM74AGMSStarShellFilled
+    - id: RMCPacketGrenadeM74AGMSHornetFilled
+    - id: RMCPacketGrenadeBatonSlugHIRRFilled

@@ -180,7 +180,7 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
 
         // Emit the popup on a successful call.
         // Check for the marine component cause we don't want walls calling phones.
-        if (TryComp<MarineComponent>(user, out var marine) && TryComp(user, out MetaDataComponent? marinemeta) && TryComp(ent, out MetaDataComponent? phonemeta))
+        if (HasComp<MarineComponent>(user) && TryComp(user, out MetaDataComponent? marinemeta) && TryComp(ent, out MetaDataComponent? phonemeta))
         {
             _popup.PopupEntity($"{marinemeta.EntityName} dials a number on the {phonemeta.EntityName}.", ent);
         }
@@ -205,6 +205,7 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
                 _ambientSound.SetSound(ent, dialingSound, selfSound);
                 _ambientSound.SetRange(ent, 16, selfSound);
                 _ambientSound.SetVolume(ent, dialingSound.Params.Volume, selfSound);
+                _ambientSound.SetAmbience(ent, true, selfSound);
             }
 
             if (ent.Comp.ReceivingSound is { } receivingSound)
@@ -213,6 +214,9 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
                 _ambientSound.SetSound(target, receivingSound, otherSound);
                 _ambientSound.SetRange(target, 16, otherSound);
                 _ambientSound.SetVolume(target, receivingSound.Params.Volume, otherSound);
+                _ambientSound.SetAmbience(target, true, otherSound);
+                var ev = new RMCTelephoneRingEvent(target);
+                RaiseLocalEvent(ref ev);
             }
         }
 
@@ -293,6 +297,7 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
         {
             _ambientSound.SetSound(other, BusySound);
             _ambientSound.SetVolume(other, BusySound.Params.Volume);
+            _ambientSound.SetAmbience(other, true);
         }
 
         if (!HasPickedUp(other))
@@ -304,7 +309,7 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
 
     private void StopSound(EntityUid ent)
     {
-        _ambientSound.SetSound(ent, new SoundPathSpecifier(""));
+        _ambientSound.SetAmbience(ent, false);
     }
 
     private void PlayGrabSound(EntityUid rotary)
@@ -494,6 +499,7 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
 
                 _ambientSound.SetSound(uid, BusySound);
                 _ambientSound.SetVolume(uid, BusySound.Params.Volume);
+                _ambientSound.SetAmbience(uid, true);
             }
 
             if (dialing.Other is not { } other)
@@ -538,6 +544,7 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
 
                 _ambientSound.SetSound(uid, sound);
                 _ambientSound.SetVolume(uid, sound.Params.Volume);
+                _ambientSound.SetAmbience(uid, true);
             }
         }
 

@@ -42,13 +42,33 @@
     sprite: _RMC14/Objects/Clothing/Pouches/pistol.rsi
     layers:
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: m1984 # TODO RMC14 per-gun underlay
-      map: [ "enum.CMItemSlotsLayers.Fill" ]
-      visible: false
+      state: _m77
+      map: [ "_m77_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m1984
+      map: [ "m1984_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: mk80
+      map: [ "mk80_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: smartpistol
+      map: [ "su6_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: cmateba
+      map: [ "mateba_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: b92fs 
+      map: [ "b92fs_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: highpower
+      map: [ "mk45_fill" ]
     - state: icon
+    - state: closed
+      map: [ "holstered" ]
   - type: ContainerContainer
     containers:
       pouch: !type:ContainerSlot
+      storagebase: !type:Container
   - type: ItemSlots
     slots:
       pouch:
@@ -57,8 +77,54 @@
         ejectSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_draw.ogg
         whitelist:
           tags:
-          - Sidearm
+          - Sidearm #Pistols
+          - RMCRevolver
 #          - FlareGun
+  - type: ItemMapper
+    spriteLayers:
+    - holstered
+    - _m77_fill
+    - m1984_fill
+    - mk80_fill
+    - su6_fill
+    - mateba_fill
+    - b92fs_fill
+    - mk45_fill
+    mapLayers:
+      holstered:
+        whitelist:
+          tags:
+          - Sidearm
+      _m77_fill:
+        whitelist:
+          tags:
+          - RMCWeaponPistolM77
+      m1984_fill:
+        whitelist:
+          tags:
+          - CMWeaponPistolM1984
+      mk80_fill:
+        whitelist:
+          tags:
+          - RMCMK80
+      su6_fill:
+        whitelist:
+          tags:
+          - RMCSmartPistol
+      mateba_fill:
+        whitelist:
+          tags:
+          - RMCMateba
+      b92fs_fill:
+        whitelist:
+          tags:
+          - RMCb92fs
+      mk45_fill:
+        whitelist:
+          tags:
+          - RMCMK45
+  - type: Storage
+    maxItemSize: Normal
   - type: CMHolster
   - type: CMItemSlots
 

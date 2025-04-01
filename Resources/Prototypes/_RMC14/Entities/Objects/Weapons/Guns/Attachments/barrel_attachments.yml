@@ -11,7 +11,7 @@
 
 - type: entity
   parent: RMCBarrelAttachmentBase
-  id: RMCAttachmentExtendedBarrel
+  id: RMCAttachmentExtendedBarrel # extended_barrel
   name: extended barrel
   description: The lengthened barrel speeds up and stabilizes the bullet, increasing velocity. # and accuracy.
   components:
@@ -31,6 +31,24 @@
   - type: AttachableWieldDelayMods
     modifiers:
     - delay: 0.4
+
+- type: entity
+  parent: RMCBarrelAttachmentBase
+  id: RMCAttachmentBarrelMar50
+  name: MAR-50 barrel
+  description: A heavy barrel.
+  components:
+  - type: Sprite
+    state: mar50barrel
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentBarrelMar50
+  - type: AttachableVisuals
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - accuracyAddMult: 0.15
+    - scatterFlat: -6
 
 - type: entity
   parent: RMCBarrelAttachmentBase
@@ -67,7 +85,7 @@
 
 - type: entity
   parent: RMCBarrelAttachmentBase
-  id: RMCAttachmentRecoilCompensator
+  id: RMCAttachmentRecoilCompensator # compensator
   name: recoil compensator
   description: "A muzzle attachment that reduces recoil by diverting expelled gasses upwards.
     Reduces recoil, at the cost of a small amount of weapon damage." # increases accuracy and reduces recoil
@@ -93,7 +111,7 @@
 
 - type: entity
   parent: RMCBarrelAttachmentBase
-  id: RMCAttachmentSuppressor
+  id: RMCAttachmentSuppressor # suppressor
   name: suppressor
   description: "A small tube with exhaust ports to expel noise and gas.
     Does not completely silence a weapon, but does make it much quieter at the cost of slightly reduced damage."
@@ -116,6 +134,31 @@
     - damageFalloffAddMult: 0.1
 
 - type: entity
+  parent: RMCAttachmentSuppressor
+  id: RMCAttachmentSuppressorXM40 # XM40 suppressor
+  name: XM40 suppressor
+  description: "A small tube with exhaust ports to expel noise and gas.
+    Does not completely silence a weapon, but does make it much quieter at the cost of slightly reduced damage."
+  components:
+  - type: Sprite
+    state: m40sd_suppressor
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentSuppressor
+  - type: AttachableVisuals
+    prefix: m40sd_suppressor
+  - type: AttachableSilencer
+    sound:
+      collection: CMSilencedShoot
+      params:
+        maxDistance: 6
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - damageFalloffAddMult: 0.1
+
+
+- type: entity
   parent: RMCBarrelAttachmentBase
   id: RMCAttachmentMatebaStandard
   name: Standard Mateba Barrel
@@ -130,8 +173,83 @@
   - type: AttachableVisuals
   - type: AttachableWeaponRangedMods
 
+- type: entity
+  parent: RMCBarrelAttachmentBase
+  id: RMCAttachmentMatebaMarksman
+  name: Marksman Mateba Barrel
+  description: A marksman mateba barrel. Offers a greater accuracy at the cost of fire rate.
+  components:
+  - type: Sprite
+    state: mateba_long
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentMatebaMarksman
+  - type: AttachableVisuals
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - accuracyAddMult: 0.2
+    - scatterFlat: -0.5
+    - fireDelayFlat: 0.5
+
+- type: entity
+  parent: RMCBarrelAttachmentBase
+  id: RMCAttachmentMatebaSnubNose
+  name: Snubnose Mateba Barrel
+  description: A snubnosed mateba barrel. Offers a fast fire rate at the cost of accuracy.
+  components:
+  - type: Sprite
+    state: mateba_short
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentMatebaSnubNose
+  - type: AttachableVisuals
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - accuracyAddMult: -0.2
+    - scatterFlat: 0.5
+    - fireDelayFlat: -0.5
+
+- type: entity
+  parent: RMCAttachmentMatebaMarksman
+  id: RMCAttachmentMatebaStandardGolden
+  components:
+  - type: Sprite
+    state: amateba_medium
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentMatebaStandardGolden
+
+- type: entity
+  parent: RMCAttachmentMatebaStandard
+  id: RMCAttachmentMatebaMarksmanGolden
+  components:
+  - type: Sprite
+    state: amateba_long
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentMatebaMarksmanGolden
+
+- type: entity
+  parent: RMCAttachmentMatebaSnubNose
+  id: RMCAttachmentMatebaSnubNoseGolden
+  components:
+  - type: Sprite
+    state: amateba_short
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentMatebaSnubNoseGolden
+
+
 - type: Tag
   id: RMCAttachmentBarrel
+
+- type: Tag
+  id: RMCAttachmentBarrelMar50
 
 - type: Tag
   id: RMCAttachmentExtendedBarrel
@@ -143,7 +261,25 @@
   id: RMCAttachmentSuppressor
 
 - type: Tag
+  id: RMCAttachmentSuppressorXM40
+
+- type: Tag
   id: RMCAttachmentBarrelCharger
 
 - type: Tag
   id: RMCAttachmentMatebaStandard
+
+- type: Tag
+  id: RMCAttachmentMatebaMarksman
+
+- type: Tag
+  id: RMCAttachmentMatebaSnubNose
+
+- type: Tag
+  id: RMCAttachmentMatebaStandardGolden
+
+- type: Tag
+  id: RMCAttachmentMatebaMarksmanGolden
+
+- type: Tag
+  id: RMCAttachmentMatebaSnubNoseGolden

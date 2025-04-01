@@ -35,14 +35,14 @@
     #  points: 30
       - id: RMCPacketGrenadeSmokeFilled
         points: 15
-    #- id: CMM74AGM-FragAirburstPacketx3
-    #  points: 20
-    #- id: CMM74AGM-IncendiaryAirburstPacketx3
-    #  points: 20
-    #- id: CMM74AGM-SmokeAirburstPacketx3
-    #  points: 10
-    #- id: CMM74AGM-HornetAirburstPacketx3
-    #  points: 20
+      - id: RMCPacketGrenadeM74AGMFFilled
+        points: 20
+      - id: RMCPacketGrenadeM74AGMIFilled
+        points: 20
+      - id: RMCPacketGrenadeM74AGMSFilled
+        points: 10
+      - id: RMCPacketGrenadeM74AGMSHornetFilled
+        points: 20
     #- id: CMM20MineBox4
     #  points: 20
     - name: Sidearm Ammunitions
@@ -61,8 +61,8 @@
       entries:
       - id: RMCScabbardMacheteSGFilled
         points: 15
-    #- id: CMFuelTankStrapPouch
-    #  points: 5
+      - id: RMCPouchFuelTank
+        points: 5
       - id: RMCPouchGeneralLarge
         points: 6
     - name: Utilities
@@ -73,8 +73,8 @@
         points: 5
       - id: CMRollerBedSpawnFolded
         points: 5
-    #- id: CMFultonDeviceStack
-    #  points: 5
+      - id: RMCFulton20
+        points: 5
       - id: RMCPowerCellSmartgun
         points: 15
     - name: Binoculars
@@ -132,7 +132,7 @@
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      - id: CMBeltSmartGunOperator
+      - id: CMBeltSmartGunOperatorFilled
       - id: RMCBeltSmartGunOperatorPistolFilled
     - name: Pouches
       choices: { RMCPouch: 2 }

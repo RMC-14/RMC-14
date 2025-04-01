@@ -17,6 +17,9 @@
   - !type:DepartmentTimeRequirement
     department: CMAuxiliarySupport
     time: 18000 # 5 hours
+  - !type:DepartmentTimeRequirement
+    department: CMCommand
+    time: 3600 # 1 hour
   ranks:
     RMCRankCaptain:
     - !type:RoleTimeRequirement
@@ -62,6 +65,8 @@
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-aso
+    - type: ViewIntelObjectives
+    - type: CommandAccent
 
 - type: startingGear
   id: CMGearASO
@@ -84,11 +89,21 @@
   components:
   - type: SpawnPoint
     job_id: CMAuxiliarySupportOfficer
-  - type: Sprite
+  - type: Sprite # TODO: Replace with landmark sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
-    - state: auxiliary_support_officer
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: auxiliary_support_officer
+
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleASO
+  name: Auxiliary Support Officer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: auxiliary_support_officer
 
 - type: playTimeTracker
   id: CMJobAuxiliarySupportOfficer

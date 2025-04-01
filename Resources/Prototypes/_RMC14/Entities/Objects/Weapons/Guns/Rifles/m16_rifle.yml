@@ -10,9 +10,6 @@
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
-    - sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi # TODO RMC14 effects
-      state: m16-stock
-      offset: -0.5, 0
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
@@ -42,7 +39,7 @@
         shotsToMaxScatter: 6
       FullAuto:
         fireDelay: 0
-        maxScatterModifier: 26
+        maxScatterModifier: 13
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 4
@@ -66,6 +63,7 @@
   - type: GunDamageModifier
     multiplier: 1.3
   - type: AttachableHolder
+    randomAttachmentChance: 0.42
     slots:
       rmc-aslot-barrel:
         whitelist:
@@ -74,8 +72,12 @@
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentSuppressor
           - RMCM5Bayonet
+        random:
+        - RMCAttachmentSuppressor
+        - RMCM5Bayonet
+        - RMCAttachmentRecoilCompensator
+        - RMCAttachmentExtendedBarrel
       rmc-aslot-rail:
-        startingAttachable: RMCAttachmentS42xTelescopicMiniscope
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight
@@ -84,14 +86,51 @@
           - RMCAttachmentS6ReflexSight
           - RMCAttachmentS84xTelescopicScope
           - RMCAttachmentS42xTelescopicMiniscope
+        random:
+        - RMCAttachmentS5RedDotSight
+        - RMCAttachmentS6ReflexSight
+        - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentM16Stock
+        whitelist:
+          tags:
+          - RMCAttachmentM16Stock
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentBipod
+          - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer # TODO RMC14 advanced flamer
+          - RMCAttachmentU1GrenadeLauncher
+          - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentLaserSight
+          - RMCAttachmentM203GrenadeLauncher
+        random:
+        - RMCAttachmentAngledGrip
+        - RMCAttachmentVerticalGrip
+        - RMCAttachmentGyroscopicStabilizer
+        - RMCAttachmentBurstFireAssembly
+        - RMCAttachmentBipod
+        - RMCAttachmentUnderbarrelExtinguisher
+        - RMCAttachmentU7UnderbarrelShotgun
+        - RMCAttachmentLaserSight
+        - RMCAttachmentM203GrenadeLauncher
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.81, -0.03
       rmc-aslot-rail: -0.15, 0.12
+      rmc-aslot-stock: -0.5, 0
+      rmc-aslot-underbarrel: 0.28, -0.33
 
 - type: entity
   parent: CMMagazineRifleBase
-  id: RMCMagazineRifleM16 # TODO RMC14 attachments
+  id: RMCMagazineRifleM16
   name: "M16 Magazine (5.56x45mm)"
   components:
   - type: Tag
@@ -125,11 +164,11 @@
     - Cartridge
     - RMCCartridgeRifleM16
   - type: CartridgeAmmo
-    proto: BulletRifle5.56x45mm
+    proto: BulletRifle556x45mm
 
 - type: entity
   parent: BulletRifle10x24mm
-  id: BulletRifle5.56x45mm
+  id: BulletRifle556x45mm
   components:
   - type: Projectile
     damage:

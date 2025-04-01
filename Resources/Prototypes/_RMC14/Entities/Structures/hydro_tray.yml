@@ -86,4 +86,5 @@
     blacklist:
       components:
       - Xeno
+  - type: RequireProjectileTarget
 

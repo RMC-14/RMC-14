@@ -15,10 +15,22 @@
   - type: SolutionContainerManager
     solutions:
       drink:
-        maxVol: 50
+        maxVol: 60
         reagents:
         - ReagentId: Water
-          Quantity: 50
+          Quantity: 60
+  - type: SolutionTransfer
+    transferAmount: 60
+    maxTransferAmount: 60
+    canChangeTransferAmount: true
+    transferAmounts:
+    - 5
+    - 10
+    - 15
+    - 25
+    - 30
+    - 40
+    - 60
   - type: Damageable
     damageContainer: Inorganic
   - type: Destructible
@@ -49,9 +61,14 @@
   id: CMMetalFlask
   name: metal flask
   description: A metal flask with a decent liquid capacity.
+  suffix: Empty
   components:
   - type: Sprite
     state: flask
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 60
 
 - type: entity
   parent: CMCanteenBase

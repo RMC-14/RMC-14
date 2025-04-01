@@ -2,6 +2,7 @@
 using Content.Client.Eye;
 using Content.Client.UserInterface.ControlExtensions;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
+using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Weapon;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
@@ -36,6 +37,7 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         _window = new DropshipWeaponsWindow();
         _window.OnClose += Close;
 
@@ -130,15 +132,20 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
                 ("yOffset", terminal.Offset.Y));
         }
 
-        void AddTargets(
+        void AddButtons(
+            Func<NetEntity, BoundUserInterfaceMessage> selectMsg,
+            BoundUserInterfaceMessage previousMsg,
+            BoundUserInterfaceMessage nextMsg,
+            DropshipWeaponsButtonRow row,
+            List<TargetEnt> targets,
+            int page,
             out DropshipWeaponsButtonData? previous,
             out DropshipWeaponsButtonData? next)
         {
             previous = default;
             next = default;
 
-            var firstTarget = terminal.TargetsPage * 5;
-            var targets = terminal.Targets;
+            var firstTarget = page * 5;
             if (targets.Count <= 5)
                 firstTarget = 0;
             else if (firstTarget > targets.Count - 5)
@@ -149,58 +156,36 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
                 if (!targets.TryGetValue(index, out var target))
                     return null;
 
-                var msg = new DropshipTerminalWeaponsTargetsSelectMsg(target.Id);
+                var msg = selectMsg(target.Id);
                 return new DropshipWeaponsButtonData(target.Name, _ => SendPredictedMessage(msg));
             }
 
             if (firstTarget > 0)
-                previous = ButtonAction("previous", _ => SendPredictedMessage(new DropshipTerminalWeaponsTargetsPreviousMsg()));
+                previous = ButtonAction("previous", _ => SendPredictedMessage(previousMsg));
 
             if (firstTarget + 4 < targets.Count - 1)
-                next = ButtonAction("next", _ => SendPredictedMessage(new DropshipTerminalWeaponsTargetsNextMsg()));
+                next = ButtonAction("next", _ => SendPredictedMessage(nextMsg));
 
             var one = GetTargetData(firstTarget);
             var two = GetTargetData(firstTarget + 1);
             var three = GetTargetData(firstTarget + 2);
             var four = GetTargetData(firstTarget + 3);
             var five = GetTargetData(firstTarget + 4);
-            screen.RightRow.SetData(one, two, three, four, five);
+            row.SetData(one, two, three, four, five);
         }
 
-        void AddMedevacs(
-            out DropshipWeaponsButtonData? previous,
-            out DropshipWeaponsButtonData? next)
+        void AddTargets(out DropshipWeaponsButtonData? previous, out DropshipWeaponsButtonData? next)
         {
-            var firstTarget = terminal.MedevacsPage * 5;
-            var targets = terminal.Medevacs;
-            if (targets.Count <= 5)
-                firstTarget = 0;
-            else if (firstTarget > targets.Count - 5)
-                firstTarget = targets.Count - 5;
-
-            DropshipWeaponsButtonData? GetTargetData(int index)
-            {
-                if (!targets.TryGetValue(index, out var target))
-                    return null;
-
-                var msg = new DropshipTerminalWeaponsMedevacSelectMsg(target.Id);
-                return new DropshipWeaponsButtonData(target.Name, _ => SendPredictedMessage(msg));
-            }
-
-            previous = default;
-            if (firstTarget > 0)
-                previous = ButtonAction("previous", _ => SendPredictedMessage(new DropshipTerminalWeaponsMedevacPreviousMsg()));
-
-            next = default;
-            if (firstTarget + 4 < targets.Count - 1)
-                next = ButtonAction("next", _ => SendPredictedMessage(new DropshipTerminalWeaponsMedevacNextMsg()));
-
-            var one = GetTargetData(firstTarget);
-            var two = GetTargetData(firstTarget + 1);
-            var three = GetTargetData(firstTarget + 2);
-            var four = GetTargetData(firstTarget + 3);
-            var five = GetTargetData(firstTarget + 4);
-            screen.LeftRow.SetData(one, two, three, four, five);
+            AddButtons(
+                id => new DropshipTerminalWeaponsTargetsSelectMsg(id),
+                new DropshipTerminalWeaponsTargetsPreviousMsg(),
+                new DropshipTerminalWeaponsTargetsNextMsg(),
+                screen.RightRow,
+                terminal.Targets,
+                terminal.TargetsPage,
+                out previous,
+                out next
+            );
         }
 
         var equip = Button("equip", Equip);
@@ -352,7 +337,33 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
                 break;
             case Medevac:
             {
-                AddMedevacs(out var previous, out var next);
+                AddButtons(
+                    id => new DropshipTerminalWeaponsMedevacSelectMsg(id),
+                    new DropshipTerminalWeaponsMedevacPreviousMsg(),
+                    new DropshipTerminalWeaponsMedevacNextMsg(),
+                    screen.LeftRow,
+                    terminal.Medevacs,
+                    terminal.MedevacsPage,
+                    out var previous,
+                    out var next
+                );
+                screen.TopRow.SetData(equip);
+                screen.BottomRow.SetData(exit);
+                screen.RightRow.SetData(one: previous, five: next);
+                break;
+            }
+            case Fulton:
+            {
+                AddButtons(
+                    id => new DropshipTerminalWeaponsFultonSelectMsg(id),
+                    new DropshipTerminalWeaponsFultonPreviousMsg(),
+                    new DropshipTerminalWeaponsFultonNextMsg(),
+                    screen.LeftRow,
+                    terminal.Fultons,
+                    terminal.FultonsPage,
+                    out var previous,
+                    out var next
+                );
                 screen.TopRow.SetData(equip);
                 screen.BottomRow.SetData(exit);
                 screen.RightRow.SetData(one: previous, five: next);
@@ -402,14 +413,27 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
                 _container.TryGetContainer(pointId, utilityComp.UtilitySlotId, out var utilityContainer) &&
                 utilityContainer.ContainedEntities.Count > 0)
             {
+                string text;
+                BoundUserInterfaceMessage msg;
                 var utilityMount = utilityContainer.ContainedEntities[0];
-                if (!EntMan.HasComponent<MedevacComponent>(utilityMount))
+                if (EntMan.HasComponent<MedevacComponent>(utilityMount))
+                {
+                    text = "Medeva";
+                    msg = new DropshipTerminalWeaponsChooseMedevacMsg(first);
+                }
+                else if (EntMan.HasComponent<RMCFultonComponent>(utilityMount))
+                {
+                    text = "Fulton";
+                    msg = new DropshipTerminalWeaponsChooseFultonMsg(first);
+                }
+                else
+                {
                     continue;
+                }
 
                 var netEnt = EntMan.GetNetEntity(utilityMount);
-                var msg = new DropshipTerminalWeaponsChooseMedevacMsg(first);
                 var data = new DropshipWeaponsButtonData(
-                    "Medeva",
+                    text,
                     _ => SendPredictedMessage(msg),
                     netEnt
                 );

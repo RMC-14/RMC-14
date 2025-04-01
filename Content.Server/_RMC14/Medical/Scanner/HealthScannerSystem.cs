@@ -3,9 +3,9 @@ using Content.Server.DoAfter;
 using Content.Server.Popups;
 using Content.Server.Storage.Components;
 using Content.Server.Temperature.Components;
+using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Scanner;
-using Content.Shared._RMC14.Medical.Stasis;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
@@ -25,6 +25,7 @@ public sealed class HealthScannerSystem : EntitySystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly DoAfterSystem _doAfter = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly RMCHandsSystem _rmcHands = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -161,6 +162,9 @@ public sealed class HealthScannerSystem : EntitySystem
             scanner.Comp.Target = null;
             return;
         }
+
+        if (!_rmcHands.TryGetHolder(scanner, out _))
+            return;
 
         FixedPoint2 blood = 0;
         FixedPoint2 maxBlood = 0;

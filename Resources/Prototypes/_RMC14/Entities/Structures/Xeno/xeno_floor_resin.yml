@@ -1,7 +1,6 @@
 - type: entity
-  id: XenoStickyResin
-  name: sticky resin
-  description: A layer of disgusting sticky slime.
+  id: XenoBaseFloorResin
+  abstract: true
   placement:
     mode: SnapgridCenter
     snap:
@@ -46,12 +45,9 @@
       Brute:
         collection: XenoMove
   - type: XenoConstruct
-    destroyWeeds: false
   - type: RMCNightVisionVisible
     priority: -1
     transparency: 0.2
-  - type: XenoConstructionPlasmaCost
-    plasma: 55
   - type: XenoConstructionBuildSpeed
     buildTimeMult: 0.5
   - type: MeleeReceivedMultiplier
@@ -60,7 +56,17 @@
       types:
         Slash: 45
   - type: StickyResinSurgeBlocker
-  - type: FloorResinSpeedModifier
+  - type: DeletedByWeedKiller
+
+- type: entity
+  parent: XenoBaseFloorResin
+  id: XenoStickyResin
+  name: sticky resin
+  description: A layer of disgusting sticky slime.
+  components:
+  - type: XenoConstructionPlasmaCost
+    plasma: 55
+  - type: ResinSlowdownModifier
     outsiderSpeedModifier: 0.2053
     outsiderSpeedModifierArmor: 0.2801
 
@@ -75,12 +81,12 @@
     state: sticky_weak
   - type: TimedDespawn
     lifetime: 20
-  - type: FloorResinSpeedModifier # Equal to Hive speed debuff
+  - type: ResinSlowdownModifier # Equal to Hive speed debuff
     outsiderSpeedModifier: 0.338
     outsiderSpeedModifierArmor: 0.4856
 
 - type: entity
-  parent: XenoStickyResin
+  parent: XenoBaseFloorResin
   id: XenoFastResin
   name: fast resin
   description: A layer of disgusting sleek slime.
@@ -89,8 +95,6 @@
     state: fast
   - type: XenoConstructionPlasmaCost
     plasma: 35
-  - type: FloorResinSpeedModifier
-    outsiderSpeedModifier: null
-    outsiderSpeedModifierArmor: null
+  - type: ResinSpeedupModifier
     hiveSpeedModifier: 1.33 #MOVE_DELAY * 0.8 on CM, stacks with weed speed
 

@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids.GasToggle;
@@ -146,6 +146,9 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
         // TODO RMC14 sounds
         // TODO RMC14 lag compensation
         var damage = new DamageSpecifier(stab.Comp.TailDamage);
+        var eve = new RMCGetTailStabBonusDamageEvent(new DamageSpecifier());
+        RaiseLocalEvent(stab, ref eve);
+        damage += eve.Damage;
         if (actualResults.Count == 0)
         {
             var missEvent = new MeleeHitEvent(new List<EntityUid>(), stab, stab, damage, null);
@@ -180,7 +183,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                     RaiseLocalEvent(hit, attackedEv);
 
                     var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEv.BonusDamage, hitEvent.ModifiersList);
-                    var change = _damageable.TryChangeDamage(hit, modifiedDamage, origin: stab);
+                    var change = _damageable.TryChangeDamage(hit, modifiedDamage, origin: stab , tool: stab);
 
                     if (change?.GetTotal() > FixedPoint2.Zero)
                         _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { hit }, filter);

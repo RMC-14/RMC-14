@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: RMCBaseWindowFrame
   id: RMCWindowFrameStrata
   components:
@@ -81,6 +81,10 @@
   - type: Construction
     graph: RMCWindowStrata
     node: windowStrata
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameStrata
+    sound:
+      collection: WindowShatter
 
 - type: entity
   parent: CMBaseWindow
@@ -132,3 +136,7 @@
   - type: Construction
     graph: RMCWindowStrata
     node: windowStrata
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameStrataReinforced
+    sound:
+      collection: WindowShatter

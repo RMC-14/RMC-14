@@ -46,7 +46,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -451,6 +451,9 @@ public sealed class OrbitalCannonSystem : EntitySystem
 
         _popup.PopupCursor("Orbital bombardment launched!", user);
         _adminLog.Add(LogType.RMCOrbitalBombardment, $"{ToPrettyString(user)} launched orbital bombardment at {fireCoordinates} for squad {ToPrettyString(squad)}, misfuel: {misfuel}, final coords: {adjustedCoords}");
+
+        var ev = new OrbitalCannonLaunchEvent(cannon.Comp.FireCooldown + firing.ImpactDelay);
+        RaiseLocalEvent(ref ev);
         return true;
     }
 
@@ -483,7 +486,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
                 var msg = "[font size=16][color=red]Orbital bombardment launch command detected![/color][/font]";
                 _rmcChat.ChatMessageToMany(msg, msg, groundFilter, ChatChannel.Radio);
 
-                if (_area.TryGetArea(planetCoordinates, out _, out var areaProto, out _))
+                if (_area.TryGetArea(planetCoordinates, out _, out var areaProto))
                 {
                     msg = $"[color=red]Launch command informs {firing.WarheadName}. Estimated impact area: {areaProto.Name}[/color]";
                     _rmcChat.ChatMessageToMany(msg, msg, groundFilter, ChatChannel.Radio);
@@ -567,9 +570,9 @@ public sealed class OrbitalCannonSystem : EntitySystem
                 Spawn(OrbitalTargetMarker, _transform.GetMapCoordinates(uid));
             }
 
-            if (explosion.Current == default && explosion.LastStepAt == default)
+            if (explosion.Current == default && explosion.LastAt == default)
             {
-                explosion.LastStepAt = time;
+                explosion.LastAt = time;
                 Dirty(uid, explosion);
             }
 
@@ -580,21 +583,49 @@ public sealed class OrbitalCannonSystem : EntitySystem
             }
 
             var step = explosion.Steps[explosion.Current];
-            if (time >= explosion.LastStepAt + step.Delay)
+            if (time >= explosion.LastAt + step.Delay)
             {
-                explosion.Current++;
-                Dirty(uid, explosion);
-
-                if (step.Type != default)
+                if (step.Times <= 1)
                 {
-                    var coordinates = _transform.GetMapCoordinates(uid);
-                    _rmcExplosion.QueueExplosion(coordinates, step.Type, step.Total, step.Slope, step.Max, uid);
+                    explosion.Current++;
+                    Dirty(uid, explosion);
+                }
+                else
+                {
+                    if (time < explosion.LastStepAt + step.DelayPer)
+                        continue;
+
+                    explosion.Step++;
+                    explosion.LastStepAt = time;
+                    if (explosion.Step >= step.Times)
+                    {
+                        explosion.Current++;
+                        explosion.Step = 0;
+                        explosion.LastStepAt = default;
+                        Dirty(uid, explosion);
+                    }
                 }
 
-                if (step.Fire is { } fire && step.FireRange > 0)
+                // TODO RMC14 cluster laser pointers
+                for (var i = 0; i < step.TimesPer; i++)
                 {
+                    var mapCoordinates = _transform.GetMapCoordinates(uid);
                     var coordinates = _transform.GetMoverCoordinates(uid);
-                    _rmcFlammable.SpawnFireDiamond(fire, coordinates, step.FireRange);
+                    if (step.Spread > 0)
+                    {
+                        var spread = _random.NextVector2(-step.Spread, step.Spread);
+                        mapCoordinates = mapCoordinates.Offset(spread);
+                        coordinates = coordinates.Offset(spread);
+                    }
+
+                    if (step.CheckProtectionPer && !_area.CanOrbitalBombard(coordinates, out _))
+                        continue;
+
+                    if (step.Type is { } type)
+                        _rmcExplosion.QueueExplosion(mapCoordinates, type, step.Total, step.Slope, step.Max, uid, canCreateVacuum: false);
+
+                    if (step.Fire is { } fire && step.FireRange > 0)
+                        _rmcFlammable.SpawnFireDiamond(fire, coordinates, step.FireRange);
                 }
             }
         }

@@ -10,7 +10,8 @@ namespace Content.Shared.Explosion.Components;
 /// Use this component if the grenade splits into entities that make use of Timers
 /// or if you just want it to throw entities out in the world
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, Access(typeof(SharedScatteringGrenadeSystem))]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, Access(typeof(SharedScatteringGrenadeSystem),
+     typeof(RMCSharedScatteringGrenadeSystem))]
 public sealed partial class ScatteringGrenadeComponent : Component
 {
     public Container Container = default!;
@@ -27,7 +28,7 @@ public sealed partial class ScatteringGrenadeComponent : Component
     /// <summary>
     /// If we have a pre-fill how many more can we spawn.
     /// </summary>
-    [AutoNetworkedField]
+    [ViewVariables(VVAccess.ReadOnly), AutoNetworkedField]
     public int UnspawnedCount;
 
     /// <summary>
@@ -35,6 +36,12 @@ public sealed partial class ScatteringGrenadeComponent : Component
     /// </summary>
     [DataField]
     public int Capacity = 3;
+
+    /// <summary>
+    /// Number of grenades currently contained in the cluster (both spawned and unspawned)
+    /// </summary>
+    [ViewVariables(VVAccess.ReadOnly)]
+    public int Count => UnspawnedCount + Container.ContainedEntities.Count;
 
     /// <summary>
     /// Decides if contained entities trigger after getting launched

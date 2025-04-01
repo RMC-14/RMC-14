@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: RMCBaseWindowFrame
   id: RMCWindowFrameSolaris
   components:
@@ -81,6 +81,10 @@
   - type: Construction
     graph: RMCWindowSolaris
     node: windowSolaris
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameSolaris
+    sound:
+      collection: WindowShatter
 
 - type: entity
   parent: CMBaseWindow
@@ -132,9 +136,13 @@
   - type: Construction
     graph: RMCWindowSolarisReinforced
     node: windowSolarisReinforced
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameSolarisReinforced
+    sound:
+      collection: WindowShatter
 
 - type: entity
-  parent: CMBaseWindow
+  parent: CMBaseWindowIndestructible
   id: CMWindowSolarisHull
   name: hull window
   description: A glass window. Something tells you this one is somehow indestructible.

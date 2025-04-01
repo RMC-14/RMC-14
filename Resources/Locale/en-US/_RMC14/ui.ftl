@@ -61,3 +61,7 @@ rmc-other-credits-tab = Other
 
 rmc-ui-auto-punctuate = Automatically punctuate in-character messages
 rmc-ui-auto-eject-magazines = Automatically eject magazines from guns
+rmc-ui-damage-yourself = Enable being able to hurt yourself with melee and guns
+
+rmc-tacmap-alert-area = Current Area: {$area}
+rmc-tacmap-alert-no-area = Unknown

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: RMCAttachableBase
   id: RMCUnderAttachmentBase
@@ -11,7 +11,7 @@
 
 - type: entity
   parent: RMCUnderAttachmentBase
-  id: RMCAttachmentAngledGrip
+  id: RMCAttachmentAngledGrip # angledgrip
   name: angled grip
   description: "An angled foregrip that improves weapon ergonomics resulting in faster wielding time.
     However, it also increases weapon size."
@@ -51,6 +51,8 @@
     attachedOnly: true
     breakOnMove: true
     breakOnFullRotate: true
+    breakOnDrop: true
+    slowOnBreak: true
     doAfter: 1.5
     deactivateDoAfter: 0
     doAfterNeedHand: false
@@ -142,9 +144,10 @@
           tags:
           - RMCWeaponLMGM60
       fireDelayFlat: -0.1
+
 - type: entity
   parent: RMCUnderAttachmentBase
-  id: RMCAttachmentBurstFireAssembly
+  id: RMCAttachmentBurstFireAssembly # burstfire_assembly
   name: burst fire assembly
   description: A small angled piece of fine machinery that increases the burst count on some weapons.
   components:
@@ -229,12 +232,56 @@
 
 - type: entity
   parent: RMCUnderAttachmentBase
-  id: CMAttachmentMiniFlamethrower
-  name: mini flamethrower
+  id: RMCAttachmentMiniFlamethrower
+  name: mini flamethrower # TODO RMC14 intensity toggle
   description: A weapon-mounted refillable flamethrower attachment. It has a secondary setting for a more intense flame with far less propulsion ability and heavy fuel usage.
   components:
   - type: Sprite
     state: flamethrower
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentFlamer
+  - type: Item
+    size: Normal
+  - type: Gun
+    cameraRecoilScalar: 0
+    fireRate: 0.333
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      collection: RMCFlamerShoot
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 40
+        reagents:
+        - ReagentId: RMCNapalmUT
+          Quantity: 40
+  - type: RMCFlamerAmmoProvider
+  - type: RMCFlamerTank
+  - type: AttachableToggleable
+    userOnly: true
+    attachedOnly: true
+    supercedeHolder: true
+    wieldedUseOnly: true
+    activatePopupText: attachable-popup-switch-to-generic
+    deactivatePopupText: attachable-popup-switch-from-generic
+    activateSound:
+      path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg # TODO RMC14
+      params:
+        volume: -2
+    actionName: Switch to the mini flamethrower.
+    actionDesc: Switch to using the mini flamethrower.
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: flamethrower
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: flamethrower-on
+  - type: AttachableVisuals
+    offset: -0.125, 0.245
 
 - type: entity
   parent: RMCUnderAttachmentBase
@@ -257,6 +304,8 @@
     tags:
     - RMCAttachmentUnderbarrel
     - RMCAttachmentU7UnderbarrelShotgun
+  - type: Item
+    size: Normal
   - type: Gun
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_u7.ogg
@@ -318,6 +367,62 @@
   components:
   - type: Sprite
     state: extinguisher
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentExtinguisher
+  - type: Item
+    size: Normal
+  - type: Gun
+    cameraRecoilScalar: 0
+    fireRate: 0.5
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      collection: RMCFlamerShoot
+  - type: SolutionContainerManager
+    solutions:
+      spray:
+        maxVol: 60
+        reagents:
+        - ReagentId: Water
+          Quantity: 60
+  - type: AttachableToggleable
+    userOnly: true
+    attachedOnly: true
+    supercedeHolder: true
+    wieldedUseOnly: false
+    activatePopupText: attachable-popup-switch-to-generic
+    deactivatePopupText: attachable-popup-switch-from-generic
+    activateSound:
+      path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg # TODO RMC14
+      params:
+        volume: -2
+    actionName: Switch to the underbarrel extinguisher.
+    actionDesc: Switch to using the underbarrel extinguisher.
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: extinguisher
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: extinguisher-on
+  - type: AttachableVisuals
+    offset: 0.061, 0.028
+  - type: RMCSprayAmmoProvider
+  - type: Spray
+    transferAmount: 5
+    sprayedPrototype: RMCExtinguisherSpray
+    vaporAmount: 3
+    sprayDistance: 5
+    sprayVelocity: 5
+    spraySound:
+      path: /Audio/Effects/extinguish.ogg
+  - type: RefillableSolution
+    solution: spray
+  - type: SolutionTransfer
+    maxTransferAmount: 60
+    transferAmount: 60
 
 - type: entity
   parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
@@ -329,6 +434,8 @@
     layers:
     - state: grenade
       map: [ "enum.BreechVisuals.Open" ]
+  - type: Item
+    size: Normal
   - type: ContainerContainer
     containers:
       ballistic-ammo: !type:Container
@@ -350,6 +457,7 @@
     whitelist:
       tags:
       - RMCGrenadeM40
+      - RMCAirburstGrenade
     capacity: 3
     soundInsert:
       path: /Audio/_RMC14/Weapons/Guns/Reload/grenade_insert.ogg
@@ -408,6 +516,8 @@
     layers:
       - state: grenade-mk1
         map: [ "enum.BreechVisuals.Open" ]
+  - type: Item
+    size: Normal
   - type: BallisticAmmoProvider
     capacity: 5
   - type: ShootAtFixedPoint
@@ -436,8 +546,45 @@
     - RMCAttachmentMK1GrenadeLauncher
 
 - type: entity
+  parent: RMCAttachmentU1GrenadeLauncher
+  id: RMCAttachmentM203GrenadeLauncher
+  name: M203 grenade launcher
+  description: An antique underbarrel grenade launcher. Adopted in 1969 for the M16, it was made obsolete centuries ago; how its ended up here is a mystery to you. Holds only one propriatary 40mm grenade, does not have modern IFF systems, it won't pass through your friends.
+  components:
+  - type: Sprite # TODO: No IFF for this launcher
+    layers:
+      - state: grenade-m203
+        map: [ "enum.BreechVisuals.Open" ]
+  - type: BallisticAmmoProvider
+    capacity: 1
+  - type: ShootAtFixedPoint
+    maxFixedRange: 10
+  - type: RMCSelectiveFire
+    baseFireRate: 0.334
+  - type: GenericVisualizer
+    visuals:
+      enum.BreechVisuals.Open:
+        enum.BreechVisuals.Open:
+          True: { state: grenade-m203-open }
+          False: { state: grenade-m203 }
+  - type: AttachableToggleable
+    actionName: Switch to the MK1 Underslung Grenade Launcher
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: grenade-m203
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
+      state: grenade-m203-on
+  - type: AttachableVisuals
+    offset: -0.1, 0.218
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentM203GrenadeLauncher
+
+- type: entity
   parent: RMCUnderAttachmentBase
-  id: RMCAttachmentVerticalGrip
+  id: RMCAttachmentVerticalGrip # verticalgrip
   name: vertical grip
   description: "A vertical foregrip that offers better accuracy, less recoil, and less scatter, especially during burst fire.
     However, it also increases weapon size."
@@ -468,7 +615,7 @@
 
 - type: entity
   parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
-  id: RMCAttachmentFlashlightGrip
+  id: RMCAttachmentFlashlightGrip # flashlight/grip
   name: underbarrel flashlight grip
   description: Holy smokes RO man, they put a grip on a flashlight! Reduces recoil and scatter by a tiny amount. Works as a light source. # Boosts accuracy by a tiny amount.
   components:
@@ -484,6 +631,7 @@
     addPrefix: false
     blinkingBehaviourId: blinking
     radiatingBehaviourId: radiating
+  - type: NoHandsInteractionBlocked
   - type: LightBehaviour
     behaviours:
     - !type:FadeBehaviour
@@ -617,6 +765,9 @@
   id: RMCAttachmentMK1GrenadeLauncher
 
 - type: Tag
+  id: RMCAttachmentM203GrenadeLauncher
+
+- type: Tag
   id: RMCAttachmentVerticalGrip
 
 - type: Tag
@@ -624,3 +775,9 @@
 
 - type: Tag
   id: RMCAttachmentLaserLightModule
+
+- type: Tag
+  id: RMCAttachmentFlamer
+
+- type: Tag
+  id: RMCAttachmentExtinguisher

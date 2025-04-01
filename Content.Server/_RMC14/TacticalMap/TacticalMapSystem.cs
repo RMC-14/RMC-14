@@ -23,7 +23,9 @@ using Content.Shared.UserInterface;
 using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Network;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.TacticalMap;
 
@@ -37,6 +39,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -55,6 +58,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private EntityQuery<TransformComponent> _transformQuery;
     private EntityQuery<XenoMapTrackedComponent> _xenoMapTrackedQuery;
 
+    private readonly HashSet<Entity<TacticalMapTrackedComponent>> _toInit = new();
     private readonly HashSet<Entity<ActiveTacticalMapTrackedComponent>> _toUpdate = new();
     private readonly List<TacticalMapLine> _emptyLines = new();
 
@@ -97,6 +101,8 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, SquadMemberUpdatedEvent>(OnActiveSquadMemberUpdated);
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, MobStateChangedEvent>(OnActiveMobStateChanged);
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, HiveLeaderStatusChangedEvent>(OnHiveLeaderStatusChanged);
+
+        SubscribeLocalEvent<MapBlipIconOverrideComponent, MapInitEvent>(OnMapBlipOverrideMapInit);
 
         SubscribeLocalEvent<RottingComponent, MapInitEvent>(OnRottingMapInit);
         SubscribeLocalEvent<RottingComponent, ComponentRemove>(OnRottingRemove);
@@ -144,6 +150,13 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void OnTacticalMapMapInit(Entity<TacticalMapComponent> ent, ref MapInitEvent args)
     {
+        var tracked = EntityQueryEnumerator<ActiveTacticalMapTrackedComponent, TacticalMapTrackedComponent>();
+        while (tracked.MoveNext(out var uid, out var active, out var comp))
+        {
+            UpdateActiveTracking((uid, comp));
+            UpdateTracked((uid, active));
+        }
+
         var users = EntityQueryEnumerator<TacticalMapUserComponent>();
         while (users.MoveNext(out var userId, out var userComp))
         {
@@ -199,9 +212,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void OnTrackedMapInit(Entity<TacticalMapTrackedComponent> ent, ref MapInitEvent args)
     {
-        var state = _mobStateQuery.CompOrNull(ent)?.CurrentState ?? MobState.Alive;
-        UpdateActiveTracking(ent, state);
-
+        _toInit.Add(ent);
         if (TryComp(ent, out ActiveTacticalMapTrackedComponent? active))
             _toUpdate.Add((ent, active));
     }
@@ -263,6 +274,15 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         UpdateIcon(ent);
         UpdateHiveLeader(ent, args.BecameLeader);
         UpdateTracked(ent);
+    }
+
+    private void OnMapBlipOverrideMapInit(Entity<MapBlipIconOverrideComponent> ent, ref MapInitEvent args)
+    {
+        if (_activeTacticalMapTrackedQuery.TryComp(ent, out var active))
+        {
+            UpdateIcon((ent.Owner, active));
+            UpdateTracked((ent.Owner, active));
+        }
     }
 
     private void OnRottingMapInit(Entity<RottingComponent> ent, ref MapInitEvent args)
@@ -377,6 +397,12 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         UpdateColor(activeEnt);
     }
 
+    private void UpdateActiveTracking(Entity<TacticalMapTrackedComponent> tracked)
+    {
+        var state = _mobStateQuery.CompOrNull(tracked)?.CurrentState ?? MobState.Alive;
+        UpdateActiveTracking(tracked, state);
+    }
+
     private void BreakTracking(Entity<ActiveTacticalMapTrackedComponent> tracked)
     {
         if (!_tacticalMapQuery.TryComp(tracked.Comp.Map, out var tacticalMap))
@@ -390,9 +416,13 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void UpdateIcon(Entity<ActiveTacticalMapTrackedComponent> tracked)
     {
+        SpriteSpecifier.Rsi? mapBlipOverride = null;
+        if (TryComp<MapBlipIconOverrideComponent>(tracked, out var mapBlipOverrideComp) && mapBlipOverrideComp.Icon != null)
+            mapBlipOverride = mapBlipOverrideComp.Icon;
+
         if (_tacticalMapIconQuery.TryComp(tracked, out var iconComp))
         {
-            tracked.Comp.Icon = iconComp.Icon;
+            tracked.Comp.Icon = mapBlipOverride ?? iconComp.Icon;
             tracked.Comp.Background = iconComp.Background;
 
             UpdateSquadBackground(tracked);
@@ -400,17 +430,19 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             return;
         }
 
-        if (!_mind.TryGetMind(tracked, out var mindId, out _) ||
-            !_job.MindTryGetJob(mindId, out var jobProto) ||
-            jobProto.MinimapIcon == null)
+        if (_mind.TryGetMind(tracked, out var mindId, out _) &&
+            _job.MindTryGetJob(mindId, out var jobProto) &&
+            jobProto.MinimapIcon != null)
         {
-            return;
+            tracked.Comp.Icon = mapBlipOverride ?? jobProto.MinimapIcon;
+            tracked.Comp.Background = jobProto.MinimapBackground;
+        }
+        else
+        {
+            tracked.Comp.Icon = mapBlipOverride;
         }
 
-        tracked.Comp.Icon = jobProto.MinimapIcon;
-        tracked.Comp.Background = jobProto.MinimapBackground;
         UpdateSquadBackground(tracked);
-
     }
 
     private void UpdateSquadBackground(Entity<ActiveTacticalMapTrackedComponent> tracked)
@@ -553,6 +585,28 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     public override void Update(float frameTime)
     {
+        if (_net.IsClient)
+        {
+            _toInit.Clear();
+            _toUpdate.Clear();
+        }
+
+        try
+        {
+            foreach (var init in _toInit)
+            {
+                var wasActive = HasComp<ActiveTacticalMapTrackedComponent>(init);
+                UpdateActiveTracking(init);
+
+                if (!wasActive && TryComp(init, out ActiveTacticalMapTrackedComponent? active))
+                    UpdateTracked((init, active));
+            }
+        }
+        finally
+        {
+            _toInit.Clear();
+        }
+
         try
         {
             foreach (var update in _toUpdate)

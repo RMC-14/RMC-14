@@ -1,0 +1,52 @@
+﻿- type: entity
+  parent: [ BaseMachinePowered, RMCConstructibleMachine ]
+  id: RMCTelevision
+  name: television set
+  description: It produces items using metal and glass.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    layers:
+    - state: security_det # TODO RMC14 unpowered and broken sprite
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 300
+    activeLoad: 300
+    channel: Equipment
+  - type: Appearance
+  - type: ActivatableUI
+    key: enum.RMCCameraUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.RMCCameraUiKey.Key:
+        type: RMCCameraBui
+  - type: RMCCameraComputer
+    id: RMCTelevision
+    title: rmc-television-title
+  - type: Machine
+    board: RMCCircuitboardTelevision
+
+- type: entity
+  parent: CMBaseMachineCircuitboard
+  id: RMCCircuitboardTelevision
+  name: circuit board (television set)
+  description: A machine printed circuit board for a television set.
+  components:
+  - type: MachineBoard
+    prototype: RMCTelevision

@@ -350,7 +350,7 @@
   description: BBQ ribs, slathered in a healthy coating of BBQ sauce. The least vegan thing to ever exist.
   components:
   - type: Food
-    trash: 
+    trash:
     - FoodKebabSkewer
   - type: FlavorProfile
     flavors:
@@ -597,9 +597,9 @@
           Quantity: 15
         - ReagentId: Water
           Quantity: 5
-        - ReagentId: Bicaridine
+        - ReagentId: CMBicaridine
           Quantity: 5
-        - ReagentId: Kelotane
+        - ReagentId: CMKelotane
           Quantity: 5
   - type: Tag
     tags:
@@ -612,7 +612,7 @@
   description: Buttery.
   components:
   - type: Food
-    trash: 
+    trash:
     - FoodPlate
   - type: FlavorProfile
     flavors:

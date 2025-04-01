@@ -45,7 +45,7 @@
       - id: CMBeltMarine
         recommended: true
       - id: CMBeltKnifeFilled
-        name: M276 knife rig (full)
+        name: M276 knife rig (Full)
       - id: RMCBeltHolsterPistol
       - id: RMCBeltHolsterRevolver
       - id: RMCBeltHolsterSMG
@@ -72,7 +72,7 @@
       - id: RMCPouchFlareFilled
         name: Flare pouch (Full)
         recommended: true
-      #    CMSmallDocumentPouch #TODO: Make this
+      - id: RMCPouchDocumentSmall
       - id: RMCPouchMagazine
       - id: RMCPouchShotgun
       - id: RMCPouchGeneral
@@ -101,8 +101,8 @@
         points: 15
       - id: RMCGunCasePistolSmart
         points: 15
-    #- id: CMM79GrenadeLauncher
-    #  points: 30
+      - id: RMCM79Case
+        points: 30
     - name: Explosives
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
@@ -113,14 +113,14 @@
     #  points: 20
       - id: RMCPacketGrenadeSmokeFilled
         points: 10
-    #- id: CMM74AGMFragAirburstPacket3
-    #  points: 15
-    #- id: CMM74AGMIncendiaryAirburstPacket3
-    #  points: 15
-    #- id: CMM74AGMSmokeAirburstPacket3
-    #  points: 10
-    #- id: CMM74AGMHornetAirburstPacket3
-    #  points: 15
+      - id: RMCPacketGrenadeM74AGMFFilled
+        points: 15
+      - id: RMCPacketGrenadeM74AGMIFilled
+        points: 15
+      - id: RMCPacketGrenadeM74AGMSFilled
+        points: 10
+      - id: RMCPacketGrenadeM74AGMSHornetFilled
+        points: 15
     #- id: CMM20MineBox4
     #  points: 20
     - name: Primary Ammunition
@@ -137,8 +137,14 @@
         points: 10
     - name: Sidearm Ammunition
       entries:
+      #- id: M44 Heavy Speedloader
+      #  points: 10
       - id: RMCSpeedLoader44Marksman
         points: 10
+      #- id: M1984 Hollow Point magazine
+      #  points: 5
+      - id: RMCMagazinePistolM1984AP
+        points: 5
       - id: CMMagazinePistolMK80
         points: 5
       - id: RMCMagazinePistolSU6
@@ -169,8 +175,8 @@
         points: 15
       - id: RMCBackpackRTO
         points: 15
-    #- id: CMFuelTankStrapPouch
-    #  points: 5
+      - id: RMCPouchFuelTank
+        points: 5
     #- id: CMWeldingGoggles
     #  points: 5
     #- id: CMSlingPouch
@@ -181,16 +187,14 @@
       entries:
       - id: CMRollerBedSpawnFolded
         points: 5
-    #- id: CMFultonDeviceStack
-    #  points: 5
+      - id: RMCFulton20
+        points: 5
       - id: CMFireExtinguisherPortable
         points: 5
       - id: RMCMotionDetector
         points: 15
-    #- id: CMMotionDetector
-    #  points: 15
-    #- id: CMDataDetector
-    #  points: 15
+      - id: RMCIntelDetector
+        points: 15
       - id: RMCWhistle
         points: 5
     - name: Binoculars

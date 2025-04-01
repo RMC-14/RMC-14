@@ -1,0 +1,141 @@
+﻿- type: job
+  parent: CMJobBase
+  id: CMProvostTeamLeader
+  name: rmc-job-name-provost-team-leader
+  description: rmc-job-description-provost-team-leader
+  playTimeTracker: CMJobProvostTeamLeader
+  ranks:
+    RMCRankProvostProvostTeamLeader: []
+  startingGear: RMCGearProvostTeamLeader
+  icon: RMCJobIconProvostTeamLeader
+  joinNotifyCrew: false
+  accessGroups:
+  - ShipMasterAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 2
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillExecution: 1
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillIntel: 1
+        RMCSkillJtac: 3
+        RMCSkillLeadership: 2
+        RMCSkillMedical: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 2
+    - type: JobPrefix
+      prefix: rmc-job-prefix-provost-team-leader
+    - type: MarineOrders
+  hidden: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerProvostTeamLeader
+  name: provost spawner team leader
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCRandomHumanoidProvostTeamLeader
+
+- type: entity
+  id: RMCRandomHumanoidProvostTeamLeader
+  name: provost ghost role team leader
+  suffix: Role, Player
+  components:
+  - type: Sprite
+    sprite: Markers/cross.rsi
+    state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCProvostTeamLeader
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCProvostTeamLeader
+  components:
+  - type: GhostRole
+    name: rmc-ghost-role-information-provost-team-leader-name
+    description: rmc-ghost-role-information-provost-team-leader-description
+    rules: ghost-role-information-nonantagonist-rules
+    raffle:
+      settings: short
+  - type: Loadout
+    prototypes: [ RMCGearProvostTeamLeader ]
+  - type: Skills
+    skills:
+      RMCSkillConstruction: 2
+      RMCSkillCqc: 1
+      RMCSkillEndurance: 5
+      RMCSkillEngineer: 2
+      RMCSkillExecution: 1
+      RMCSkillFirearms: 1
+      RMCSkillFireman: 2
+      RMCSkillIntel: 2
+      RMCSkillJtac: 4
+      RMCSkillLeadership: 3
+      RMCSkillMedical: 3
+      RMCSkillMeleeWeapons: 1
+      RMCSkillOverwatch: 1
+      RMCSkillPolice: 2
+      RMCSkillPowerLoader: 2
+      RMCSkillSmartGun: 1
+      RMCSkillVehicles: 2
+  - type: MarineOrders
+  - type: DemoSpecWhitelist
+  - type: GrenadeSpecWhitelist
+  - type: ScoutWhitelist
+  - type: SniperWhitelist
+  - type: PyroWhitelist
+
+- type: startingGear
+  id: RMCGearProvostTeamLeader
+  equipment:
+    head: RMCHeadBeretProvostSenior
+    eyes: CMGlassesSecurity
+    ears: CMHeadsetHighCommand
+    jumpsuit: CMJumpsuitProvostSenior
+    outerClothing: RMCArmorProvostSeniorFilled
+    gloves: CMHandsBlackMarine # TODO RMC14 black gloves
+    shoes: CMBootsBlackFilled
+    suitstorage: WeaponShotgunM890
+    id: RMCIDCardProvostTeamLeader
+    belt: RMCMK80BeltFilled
+    back: CMSatchelSecurityFilledProvostEnforcer
+    pocket1: RMCPouchShotgunLargeBeanbag
+    pocket2: RMCPouchShotgunLargeSlugs # TODO RMC14 big tear gas grenade box, riot shield
+
+- type: playTimeTracker
+  id: CMJobProvostTeamLeader
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconProvostTeamLeader
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_pvtml
+
+- type: entity
+  parent: CMIDCardGold # TODO RMC14 provost id
+  id: RMCIDCardProvostTeamLeader
+  name: provost team leader ID card
+  description: Issued to members of the Provost Office.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+  - type: PresetIdCard
+    job: CMProvostTeamLeader

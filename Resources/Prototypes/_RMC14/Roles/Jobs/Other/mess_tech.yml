@@ -4,6 +4,16 @@
   name: cm-job-name-messtech
   description: cm-job-description-messtech
   playTimeTracker: CMJobMessTech
+  ranks:
+    RMCRankLanceCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobMessTech
+      time: 252000 # 70 hours
+    RMCRankPrivateFirstClass:
+    - !type:RoleTimeRequirement
+      role: CMJobMessTech
+      time: 36000 # 10 hours
+    RMCRankPrivate: []
   startingGear: CMGearMessTech
   icon: "CMJobIconMessTech"
   joinNotifyCrew: false
@@ -29,7 +39,6 @@
         RMCSkillFireman: 1
     - type: JobPrefix
       prefix: cm-job-prefix-messtech
-  hidden: true # TODO RMC14
 
 - type: startingGear
   id: CMGearMessTech
@@ -52,10 +61,7 @@
   - type: SpawnPoint
     job_id: CMMessTech
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: mess_tech
+    state: chef_spawn
 
 - type: playTimeTracker
   id: CMJobMessTech

@@ -27,7 +27,7 @@ using Content.Shared.Radio.EntitySystems;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Content.Shared.Storage;
-using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Whitelist;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -40,6 +40,7 @@ public sealed class SquadSystem : EntitySystem
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly EncryptionKeySystem _encryptionKey = default!;
+    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly SharedIdCardSystem _id = default!;
     [Dependency] private readonly SharedCMInventorySystem _cmInventory = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
@@ -54,9 +55,9 @@ public sealed class SquadSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedRMCBanSystem _rmcBan = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
 
     private static readonly ProtoId<JobPrototype> SquadLeaderJob = "CMSquadLeader";
+    private static readonly ProtoId<JobPrototype> IntelOfficerJob = "CMIntelOfficer";
     public static readonly EntProtoId<SquadTeamComponent> EchoSquadId = "SquadEcho";
 
     public ImmutableArray<EntityPrototype> SquadPrototypes { get; private set; }
@@ -89,12 +90,15 @@ public sealed class SquadSystem : EntitySystem
         SubscribeLocalEvent<SquadMemberComponent, GetMarineIconEvent>(OnSquadRoleGetIcon, after: [typeof(SharedMarineSystem)]);
         SubscribeLocalEvent<SquadMemberComponent, EnteredCryostorageEvent>(OnSquadMemberEnteredCryo);
         SubscribeLocalEvent<SquadMemberComponent, LeftCryostorageEvent>(OnSquadMemberLeftCryo);
+        SubscribeLocalEvent<SquadMemberComponent, GetMarineSquadNameEvent>(OnSquadRoleGetName);
 
         SubscribeLocalEvent<SquadLeaderComponent, EntityTerminatingEvent>(OnSquadLeaderTerminating);
         SubscribeLocalEvent<SquadLeaderComponent, GetMarineIconEvent>(OnSquadLeaderGetMarineIcon, after: [typeof(SharedMarineSystem)]);
 
         SubscribeLocalEvent<SquadLeaderHeadsetComponent, EncryptionChannelsChangedEvent>(OnSquadLeaderHeadsetChannelsChanged);
         SubscribeLocalEvent<SquadLeaderHeadsetComponent, EntityTerminatingEvent>(OnSquadLeaderHeadsetTerminating);
+
+        SubscribeLocalEvent<AssignSquadComponent, MapInitEvent>(OnAssignSquadMapInit);
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
@@ -114,6 +118,9 @@ public sealed class SquadSystem : EntitySystem
         {
             return;
         }
+
+        if (member.BlacklistedSquadArmor.Contains(ent.Comp.Layer))
+            return;
 
         var rsi = wearer.Leader ? ent.Comp.LeaderRsi : ent.Comp.Rsi;
         var layer = $"enum.{nameof(SquadArmorLayers)}.{ent.Comp.Layer}";
@@ -179,6 +186,24 @@ public sealed class SquadSystem : EntitySystem
         args.BackgroundColor = member.Comp.BackgroundColor;
     }
 
+    private void OnSquadRoleGetName(Entity<SquadMemberComponent> member, ref GetMarineSquadNameEvent args)
+    {
+        if (TryGetMemberSquad(member.Owner, out var squadTeam))
+            args.SquadName = Name(squadTeam);
+
+        var jobId = _originalRoleQuery.CompOrNull(member)?.Job;
+
+        if (_prototypes.TryIndex(jobId, out var jobProto))
+        {
+            args.RoleName = jobProto.LocalizedName;
+        }
+        else if (_mind.TryGetMind(member, out var mindId, out _) &&
+                 _job.MindTryGetJobName(mindId, out var name))
+        {
+            args.RoleName = name;
+        }
+    }
+
     private void OnSquadMemberEnteredCryo(Entity<SquadMemberComponent> ent, ref EnteredCryostorageEvent args)
     {
         if (!_originalRoleQuery.TryComp(ent, out var role) || role.Job is not { } jobId)
@@ -233,6 +258,18 @@ public sealed class SquadSystem : EntitySystem
         {
             leader.Headset = null;
             Dirty(ent.Comp.Leader, leader);
+        }
+    }
+
+    private void OnAssignSquadMapInit(Entity<AssignSquadComponent> ent, ref MapInitEvent args)
+    {
+        var query = EntityQueryEnumerator<SquadTeamComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (!_entityWhitelist.IsWhitelistPass(ent.Comp.Whitelist, uid))
+                continue;
+
+            AssignSquad(ent, (uid, comp), null);
         }
     }
 
@@ -320,6 +357,9 @@ public sealed class SquadSystem : EntitySystem
             if (job.HasSquad)
                 jobBuilder.Add(job);
         }
+
+        if (_prototypes.TryIndex(IntelOfficerJob, out var intelJob))
+            jobBuilder.Add(intelJob);
 
         SquadRolePrototypes = jobBuilder.ToImmutable();
     }
@@ -419,6 +459,7 @@ public sealed class SquadSystem : EntitySystem
         member.Squad = team;
         member.Background = team.Comp.Background;
         member.BackgroundColor = team.Comp.Color;
+        member.BlacklistedSquadArmor = team.Comp.BlacklistedSquadArmor;
         Dirty(marine, member);
 
         var grant = EnsureComp<SquadGrantAccessComponent>(marine);
@@ -458,11 +499,21 @@ public sealed class SquadSystem : EntitySystem
         if (Prototype(team)?.ID is { } squadProto)
             _appearance.SetData(marine, SquadVisuals.Squad, squadProto);
 
+        UpdateSquadTitle(marine);
+
         // Search for any squad-specific items to map
         SearchForMappedItems((marine, member), member.Squad.Value);
     }
 
-    private void MarineSetTitle(EntityUid marine, string title)
+    public void UpdateSquadTitle(EntityUid marine)
+    {
+        var ev = new GetMarineSquadNameEvent();
+        RaiseLocalEvent(marine, ref ev);
+
+        MarineSetTitle(marine, $"{ev.SquadName} {ev.RoleName}");
+    }
+
+    public void MarineSetTitle(EntityUid marine, string title)
     {
         foreach (var item in _inventory.GetHandOrInventoryEntities(marine))
         {
@@ -656,7 +707,7 @@ public sealed class SquadSystem : EntitySystem
         while (query.MoveNext(out var uid, out var grant))
         {
             if (grant.RoleName != null)
-                MarineSetTitle(uid, grant.RoleName);
+                UpdateSquadTitle(uid);
 
             foreach (var item in _inventory.GetHandOrInventoryEntities(uid))
             {

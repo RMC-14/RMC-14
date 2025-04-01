@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: BaseStructure
   id: CMBaseStructure
   abstract: true
@@ -51,6 +51,7 @@
     hitsToInvulnerability: 3
   - type: DamageMultiplierFlags
     flags: Breaching
+  - type: DeletedByWeedKiller
 
 - type: entity
   id: CMCorrodible
@@ -122,6 +123,7 @@
   - type: Corrodible
     isCorrodible: true
     structure: true
+    meltTimeMult: 3
   - type: Clickable
   - type: RMCWallExplosionDeletable
   - type: DestroyedByExplosionType
@@ -156,6 +158,10 @@
     flags:
     - Turf
     - Xeno
+  - type: ResinSurgeReinforcable
+  - type: Tag
+    tags:
+    - SpreaderIgnore
 
 # Invisible Wall
 

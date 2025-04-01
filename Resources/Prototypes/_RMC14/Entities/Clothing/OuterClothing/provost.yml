@@ -2,13 +2,15 @@
 - type: entity
   parent: CMArmorM2MP
   id: RMCArmorProvost
-  name: M3 pattern Provost armor
+  name: M3 pattern provost armor
   description: A standard Provost M3 Pattern Chestplate. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Provost/medium.rsi
+  - type: Item
+    size: Normal
   - type: CMArmor
-    armor: 20 # CLOTHING_ARMOR_MEDIUM
+    bullet: 20 # CLOTHING_ARMOR_MEDIUM
     bio: 15
     explosionArmor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
   - type: RMCArmorSpeedTier
@@ -25,16 +27,25 @@
 - type: entity
   parent: RMCArmorProvost
   id: RMCArmorProvostSenior
-  name: M3 pattern Senior Provost armor
+  name: M3 pattern senior provost armor
   description: A more refined Provost M3 Pattern Chestplate for senior officers. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Provost/senior.rsi
 
 - type: entity
+  parent: RMCArmorProvostSenior
+  id: RMCArmorProvostSeniorFilled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMFlash
+    - id: RMCHandcuffs
+
+- type: entity
   parent: RMCArmorProvost
   id: RMCArmorProvostMarshal
-  name: M5 pattern Provost Marshal armor
+  name: M5 pattern provost marshal armor
   description: A custom fit luxury armor suit for Provost Marshals. Useful for letting your men know who is in charge when taking to the field.
   components:
   - type: Sprite
@@ -46,7 +57,7 @@
 - type: entity
   parent: RMCArmorProvost
   id: RMCArmorProvostLight
-  name: M3 pattern Provost light armor
+  name: M3 pattern provost light armor
   description: A lighter Provost M3 Pattern Chestplate. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage.
   components:
   - type: Sprite
@@ -60,7 +71,7 @@
 - type: entity
   parent: RMCArmorProvost
   id: RMCArmorProvostFlexi
-  name: M3 pattern Provost flexi-armor
+  name: M3 pattern provost flexi-armor
   description: A more refined Provost M3 Pattern Chestplate for senior officers. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage.
   components:
   - type: Sprite
@@ -75,15 +86,18 @@
 - type: entity
   parent: [CMArmorM3Medium, RMCAllowSuitStorageClothingArmorMP]
   id: RMCArmorProvostAgent
-  name: M3 pattern Special Agent Armor
+  name: M3 pattern special agent armor
   description: A modified luxury armor, originally meant for a Provost Marshall, modified to use the colors and insignia of the intelligence service.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Provost/special.rsi
   - type: CMArmor
-    armor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
+    melee: 25
+    bullet: 25 # CLOTHING_ARMOR_MEDIUMHIGH
     bio: 20
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
+  - type: ItemCamouflage
+    camouflageVariations: { }

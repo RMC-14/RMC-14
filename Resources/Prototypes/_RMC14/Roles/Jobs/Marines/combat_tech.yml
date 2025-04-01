@@ -25,7 +25,7 @@
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - CombatTech
-  overwatchSortPriority: 0
+  overwatchSortPriority: -1
   overwatchRoleName: Combat Technicians
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
@@ -77,10 +77,7 @@
   - type: SpawnPoint
     job_id: CMCombatTech
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: combat_tech
+    state: engi_spawn
 
 - type: entity
   parent: CMSpawnPointCombatTech
@@ -90,6 +87,8 @@
   - type: SquadSpawner
     squad: SquadAlpha
     role: CMCombatTech
+  - type: Sprite
+    state: engi_spawn_alpha
 
 - type: entity
   parent: CMSpawnPointCombatTech
@@ -99,6 +98,8 @@
   - type: SquadSpawner
     squad: SquadBravo
     role: CMCombatTech
+  - type: Sprite
+    state: engi_spawn_bravo
 
 - type: entity
   parent: CMSpawnPointCombatTech
@@ -108,6 +109,8 @@
   - type: SquadSpawner
     squad: SquadCharlie
     role: CMCombatTech
+  - type: Sprite
+    state: engi_spawn_charlie
 
 - type: entity
   parent: CMSpawnPointCombatTech
@@ -117,3 +120,22 @@
   - type: SquadSpawner
     squad: SquadDelta
     role: CMCombatTech
+  - type: Sprite
+    state: engi_spawn_delta
+
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCCombatTech
+  components:
+  - type: GhostRole
+    name: cm-job-name-combat-tech
+    description: cm-job-description-combat-tech
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    raffle:
+      settings: default
+    job: CMCombatTech
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobCombatTech
+      time: 1

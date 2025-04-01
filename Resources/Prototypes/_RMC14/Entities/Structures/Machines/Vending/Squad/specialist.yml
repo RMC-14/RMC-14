@@ -18,7 +18,7 @@
     pointsType: Specialist
     sections:
     - name: Weapons Specialist Sets
-      choices: { SquadSpecKit: 1 }
+      takeOne: SquadSpecKit
       sharedSpecLimit: 2 # 2 as requested until Pyro is added
       entries:
       - id: RMCDemoSpecEquipmentCase
@@ -28,6 +28,11 @@
       #  points: 0
       - id: RMCScoutSpecEquipmentCase
       - id: CMSniperEquipmentCase
+        linkedEntries:
+        - RMCAntiMaterielEquipmentCase
+      - id: RMCAntiMaterielEquipmentCase
+        linkedEntries:
+        - CMSniperEquipmentCase
     - name: Extra Scout Ammunition
       entries:
       - id: RMCMagazineRifleM4SPRA19Impact
@@ -38,11 +43,13 @@
         points: 40
     - name: Extra Sniper Ammunition
       entries:
-#      - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
-#        points: 40
+      - id: CMMagazineSniperM96SFlak
+        points: 40
       - id: CMMagazineSniperM96SIncendiary
         points: 40
       - id: CMMagazineSniperM96S
+        points: 40
+      - id: RMCMagazineSniperXM43E1AntiMateriel
         points: 40
     - name: Extra Demolitionist Ammunition
       entries:
@@ -72,12 +79,15 @@
         spawn: 6
     #- id: M40HPDPWhitePhosphorusGrenadesx6
     #  points: 40
-    #- id: M74AGMFFragmentationGrenadesx6
-    #  points: 40
-    #- id: M74AGMIIncendiaryGrenadesx6
-    #  points: 40
-    #- id: M74AGMSSmokeGrenadesx6
-    #  points: 20
+      - id: RMC40MMGrenadeM74AGMF
+        points: 40
+        spawn: 6
+      - id: RMC40MMGrenadeM74AGMI
+        points: 40
+        spawn: 6
+      - id: RMC40MMGrenadeM74AGMS
+        points: 20
+        spawn: 6
     - name: Extra Flamethrower Tanks
       entries: [ ]
     #- id: LargeIncineratorTank
@@ -186,7 +196,8 @@
         points: 15
       - id: RMCBackpackRTO
         points: 15
-    #- id: CMFuelTankStrapPouch
+      - id: RMCPouchFuelTank
+        points: 5
     #- id: CMWeldingGoggles
       - id: RMCPouchGeneralLarge
         points: 10
@@ -199,12 +210,12 @@
       entries:
       - id: CMRollerBedSpawnFolded
         points: 5
+      - id: RMCFulton20
+        points: 5
       - id: CMFireExtinguisherPortable
         points: 5
       - id: RMCMotionDetector
         points: 10
-    #- id: CMFultonDeviceStack
-    #- id: CMMotionDetector
       - id: RMCWhistle
         points: 5
     - name: Binoculars

@@ -1,47 +1,71 @@
+- type: job
+  parent: CMJobBase
+  id: CMPizzaDeliverer
+  name: cm-job-name-pizza-deliverer
+  description: cm-job-description-pizza-deliverer
+  playTimeTracker: CMJobPizzaDeliverer
+  ranks:
+    RMCRankCivilian: [ ]
+  startingGear: RMCGearPizzaDeliveryBoy
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  accessGroups:
+  - CMPizzaDeliverer
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillVehicles: 1
+    - type: JobPrefix
+      prefix: cm-job-prefix-pizza-deliverer
+  hasIcon: false
+  hidden: true
+
 - type: entity
   parent: MarkerBase
   id: RMCSpawnerPizzaDeliveryBoy
   name: pizza delivery boy spawner
   suffix: Spawner
   components:
-    - type: Sprite
-      layers:
-      - state: red
-      - sprite: Objects/Consumable/Food/Baked/pizza.rsi
-        state: box
-    - type: ConditionalSpawner
-      prototypes:
-      - RMCRandomHumanoidPizzaDeliveryBoy
+  - type: Sprite
+    layers:
+    - state: red
+    - sprite: Objects/Consumable/Food/Baked/pizza.rsi
+      state: box
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCRandomHumanoidPizzaDeliveryBoy
 
 - type: entity
   id: RMCRandomHumanoidPizzaDeliveryBoy
   name: pizza delivery boy ghost role
   suffix: Role
   components:
-    - type: Sprite
-      sprite: Objects/Consumable/Food/Baked/pizza.rsi
-      state: box
-    - type: RandomHumanoidSpawner
-      settings: RMCPizzaDeliveryBoy
+  - type: Sprite
+    sprite: Objects/Consumable/Food/Baked/pizza.rsi
+    state: box
+  - type: RandomHumanoidSpawner
+    settings: RMCPizzaDeliveryBoy
 
 - type: randomHumanoidSettings
   parent: EventHumanoid
   id: RMCPizzaDeliveryBoy
   components:
-    - type: GhostRole
-      name: rmc-ghost-role-information-pizza-delivery-boy-name
-      description: rmc-ghost-role-information-pizza-delivery-boy-description
-      rules: ghost-role-information-nonantagonist-rules
-      raffle:
-        settings: short
-    - type: Loadout
-      prototypes: [ RMCGearPizzaDeliveryBoy ]
-    - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillVehicles: 1
+  - type: GhostRole
+    name: rmc-ghost-role-information-pizza-delivery-boy-name
+    description: rmc-ghost-role-information-pizza-delivery-boy-description
+    rules: ghost-role-information-nonantagonist-rules
+    raffle:
+      settings: short
+  - type: Loadout
+    prototypes: [ RMCGearPizzaDeliveryBoy ]
+  - type: Skills
+    skills:
+      RMCSkillConstruction: 1
+      RMCSkillEndurance: 2
+      RMCSkillFireman: 1
+      RMCSkillVehicles: 1
 
 - type: startingGear
   id: RMCGearPizzaDeliveryBoy
@@ -51,5 +75,11 @@
     jumpsuit: RMCJumpsuitPizza
     shoes: ClothingShoesColorRed
     id: RMCIDCardPizza
-    ears: CMHeadset
-    pocket1: RMCFlashlight
+    belt: RMCFlashlight
+    pocket1: CMDrinkCanDrGibb
+    pocket2: RMCRadioHandheldAlmayer
+  inhand:
+  - RMCBoxPizzaMargherita
+
+- type: playTimeTracker
+  id: CMJobPizzaDeliverer

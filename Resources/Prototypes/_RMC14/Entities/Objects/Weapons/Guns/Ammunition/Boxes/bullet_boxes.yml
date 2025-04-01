@@ -1,29 +1,40 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: BaseItem
   id: RMCBoxBulletsBase
-  name: rifle ammunition box (10x24mm)
-  description: A 10x24mm ammunition box. Used to refill M54C MK1, MK2, M4SPR and M54CE2 HAR magazines. It comes with a leather strap allowing to wear it on the back.
+  name: rifle ammunition box (???)
+  description: An unknown ammunition box. It comes with a leather strap allowing to wear it on the back.
   components:
   - type: Item
     size: Huge
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     layers:
-    - state: base_m54
-    - sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/bullet_boxes.rsi
-      state: rounds_reg
+    - state: rifle_box
+      color: "#ff0000"
+    - state: rifle_box_marking
+      color: "#00ff00"
+    - state: rifle_ammo_full_rounds_base
       map: [ "enum.BulletBoxLayers.Fill" ]
-  - type: Appearance
+    - state: rifle_ammo_full_rounds_color
+      map: [ "enum.BulletBoxLayers2.Fill" ]
+      color: "#0000ff"
   - type: GenericVisualizer
     visuals:
       enum.BulletBoxLayers.Fill:
         enum.BulletBoxLayers.Fill:
-          Empty: { state: rounds_reg, visible: false }
-          Low: { state: rounds_reg_1, visible: true }
-          Medium: { state: rounds_reg_2, visible: true }
-          High: { state: rounds_reg_3, visible: true }
-          Full: { state: rounds_reg, visible: true }
+          Empty: { state: rifle_ammo_full_rounds_base, visible: false }
+          Low: { state: rifle_ammo_low_rounds_base, visible: true }
+          Medium: { state: rifle_ammo_medium_rounds_base, visible: true }
+          High: { state: rifle_ammo_high_rounds_base, visible: true }
+          Full: { state: rifle_ammo_full_rounds_base, visible: true }
+        enum.BulletBoxLayers2.Fill:
+          Empty: { state: rifle_ammo_full_rounds_color, visible: false }
+          Low: { state: rifle_ammo_low_rounds_color, visible: true }
+          Medium: { state: rifle_ammo_medium_rounds_color, visible: true }
+          High: { state: rifle_ammo_high_rounds_color, visible: true }
+          Full: { state: rifle_ammo_full_rounds_color, visible: true }
+  - type: Appearance
   - type: RMCUnfoldCardboard
     spawns:
     - id: RMCSheetCardboard1
@@ -44,9 +55,34 @@
 - type: entity
   parent: RMCBoxBulletsBase
   id: RMCBoxBulletsRifle
+  name: rifle ammunition box (10x24mm)
+  description: A 10x24mm ammunition box. Used to refill M54C MK1, MK2, M4SPR and M54CE2 HAR magazines. It comes with a leather strap allowing to wear it on the back.
   components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#7b8246"
+    - state: rifle_box_marking
+      color: "#7c4c1b"
+    - state: rifle_ammo_full_rounds_base
+      map: [ "enum.BulletBoxLayers.Fill" ]
+    - state: rifle_ammo_full_rounds_color
+      map: [ "enum.BulletBoxLayers2.Fill" ]
+      color: "#ffc000"
   - type: BulletBox
     bulletType: RMCBoxBulletsRifle
+
+- type: entity
+  parent: RMCBoxBulletsRifle
+  id: RMCBoxBulletsRifleEmpty
+  suffix: Empty
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxBulletsRifleEmpty
+  - type: BulletBox
+    bulletType: RMCBoxBulletsRifle
+    amount: 0
 
 - type: entity
   parent: RMCBoxBulletsBase
@@ -55,48 +91,62 @@
   description: A 10x24mm armor-piercing ammunition box. Used to refill M54C MK2, and M4SPR AP magazines. It comes with a leather strap allowing to wear it on the back.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     layers:
-    - state: base_m54
-    - sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/bullet_boxes.rsi
-      state: rounds_ap
+    - state: rifle_box
+      color: "#7b8246"
+    - state: rifle_box_marking
+      color: "#318b11"
+    - state: rifle_ammo_full_rounds_base
       map: [ "enum.BulletBoxLayers.Fill" ]
-  - type: GenericVisualizer
-    visuals:
-      enum.BulletBoxLayers.Fill:
-        enum.BulletBoxLayers.Fill:
-          Empty: { state: rounds_ap, visible: false }
-          Low: { state: rounds_ap_1, visible: true }
-          Medium: { state: rounds_ap_2, visible: true }
-          High: { state: rounds_ap_3, visible: true }
-          Full: { state: rounds_ap, visible: true }
+    - state: rifle_ammo_full_rounds_color
+      map: [ "enum.BulletBoxLayers2.Fill" ]
+      color: "#318b11"
   - type: BulletBox
     bulletType: RMCBoxBulletsRifleAP
 
 - type: entity
+  parent: RMCBoxBulletsRifleAP
+  id: RMCBoxBulletsRifleAPEmpty
+  suffix: Empty
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxBulletsRifleAPEmpty
+  - type: BulletBox
+    bulletType: RMCBoxBulletsRifleAP
+    amount: 0
+
+- type: entity
   parent: RMCBoxBulletsBase
   id: RMCBoxBulletsSMG
-  name: SMG HV ammunition box (10x20mm)
+  name: SMG ammunition box (10x20mm)
   description: A 10x20mm ammunition box. Used to refill M63 HV and extended magazines. It comes with a leather strap allowing to wear it on the back.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     layers:
-    - state: base_m63
-    - sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/bullet_boxes.rsi
-      state: rounds_hv
+    - state: smg_box
+      color: "#727e90"
+    - state: smg_box_marking
+      color: "#7c4c1b"
+    - state: rifle_ammo_full_rounds_base
       map: [ "enum.BulletBoxLayers.Fill" ]
-  - type: GenericVisualizer
-    visuals:
-      enum.BulletBoxLayers.Fill:
-        enum.BulletBoxLayers.Fill:
-          Empty: { state: rounds_hv, visible: false }
-          Low: { state: rounds_hv_1, visible: true }
-          Medium: { state: rounds_hv_2, visible: true }
-          High: { state: rounds_hv_3, visible: true }
-          Full: { state: rounds_hv, visible: true }
+    - state: rifle_ammo_full_rounds_color
+      map: [ "enum.BulletBoxLayers2.Fill" ]
+      color: "#727e90"
   - type: BulletBox
     bulletType: RMCBoxBulletsSMG
+
+- type: entity
+  parent: RMCBoxBulletsSMG
+  id: RMCBoxBulletsSMGEmpty
+  suffix: Empty
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxBulletsSMGEmpty
+  - type: BulletBox
+    bulletType: RMCBoxBulletsSMG
+    amount: 0
 
 - type: entity
   parent: RMCBoxBulletsBase
@@ -105,20 +155,27 @@
   description: A 10x20mm armor-piercing ammunition box. Used to refill M63 AP magazines. It comes with a leather strap allowing to wear it on the back.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     layers:
-    - state: base_m63
-    - sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/bullet_boxes.rsi
-      state: rounds_ap
+    - state: smg_box
+      color: "#727e90"
+    - state: smg_box_marking
+      color: "#318b11"
+    - state: rifle_ammo_full_rounds_base
       map: [ "enum.BulletBoxLayers.Fill" ]
-  - type: GenericVisualizer
-    visuals:
-      enum.BulletBoxLayers.Fill:
-        enum.BulletBoxLayers.Fill:
-          Empty: { state: rounds_ap, visible: false }
-          Low: { state: rounds_ap_1, visible: true }
-          Medium: { state: rounds_ap_2, visible: true }
-          High: { state: rounds_ap_3, visible: true }
-          Full: { state: rounds_ap, visible: true }
+    - state: rifle_ammo_full_rounds_color
+      map: [ "enum.BulletBoxLayers2.Fill" ]
+      color: "#318b11"
   - type: BulletBox
     bulletType: RMCBoxBulletsSMGAP
+
+- type: entity
+  parent: RMCBoxBulletsSMGAP
+  id: RMCBoxBulletsSMGAPEmpty
+  suffix: Empty
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxBulletsSMGAPEmpty
+  - type: BulletBox
+    bulletType: RMCBoxBulletsSMGAP
+    amount: 0

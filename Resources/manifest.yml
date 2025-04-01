@@ -1,5 +1,6 @@
-﻿defaultWindowTitle: Rouny's Marine Corps 14
+defaultWindowTitle: Rouny's Marine Corps 14
 windowIconSet: /Textures/Logo/sleeping
 splashLogo: /Textures/Logo/logo.png
+multiWindow: true
 
 # PJB PLEASE

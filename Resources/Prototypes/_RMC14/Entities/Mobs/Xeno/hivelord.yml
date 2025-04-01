@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent:
   - CMXenoDeveloped
@@ -34,6 +34,7 @@
   - type: XenoDevour
   - type: XenoPheromones
     pheromonesMultiplier: 2.5
+    pheroSuffix: hivelord
   - type: CMArmor
     explosionArmor: 10
   - type: XenoResinWalker
@@ -110,7 +111,7 @@
     - ActionXenoPlantWeeds
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
-    - ActionXenoTransferPlasma
+    - ActionXenoTransferPlasmaHivelord
     - ActionXenoResinWalker
     - ActionXenoDevolve
   - type: XenoConstruction
@@ -123,15 +124,21 @@
     - XenoFastResin
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
+    - HiveEggMorpherXenoConstructionNode
+    - HiveClusterXenoConstructionNode
+    - HiveRecoveryNodeXenoConstructionNode
     canUpgrade: true
   - type: XenoPlasma
     plasma: 1000
     maxPlasma: 1000
     plasmaRegenOnWeeds: 5.5
+    plasmaTransferDelay: 0.5
   - type: AcidTrap
   - type: XenoEvolution
     strains:
     - CMXenoHivelordResinWhisperer
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.2
 
 - type: entity
   parent: CMXenoHivelordBase
@@ -152,7 +159,7 @@
     - ActionXenoChooseStructure
     - ActionXenoCoerceResin
     - ActionXenoZoom
-    - ActionXenoTransferPlasma
+    - ActionXenoTransferPlasmaHivelord
     - ActionXenoResinWalker
     - ActionXenoDevolve
     hidden: true
@@ -167,13 +174,17 @@
     - XenoWeedsSource
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
+    - HiveEggMorpherXenoConstructionNode
+    - HiveClusterXenoConstructionNode
+    - HiveRecoveryNodeXenoConstructionNode
   - type: XenoPlasma
     plasma: 800
     maxPlasma: 800
     plasmaRegenOnWeeds: 5.5
+    plasmaTransferDelay: 0.5
   - type: XenoZoom
   - type: ResinWhisperer
-    maxRemoteConstructDistance: 13
+    maxRemoteConstructDistance: 11
   - type: XenoStrain
     name: rmc-xeno-resin-whisperer-name
     description: rmc-xeno-resin-whisperer-description

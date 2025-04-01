@@ -89,6 +89,7 @@ public sealed class RMCActionsSystem : EntitySystem
             }
 
             comp.Enabled = newStatus;
+            Dirty(actionId, comp);
         }
     }
 

@@ -1,18 +1,18 @@
 ﻿- type: entity
   parent: CMBaseWeaponRifle
-  name: M54C MK1 assault rifle
+  name: M54C assault rifle MK1
   id: WeaponRifleM54CMK1
   description: An older design of the Assault Rifle commonly used by the Marine Corps. Uses 10x24mm caseless ammunition.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54cmk1/desert.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54cmk1.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54cmk1/desert.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54cmk1.rsi
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -35,7 +35,7 @@
     scatterWielded: 4
     scatterUnwielded: 20
     baseFireRate: 4
-    burstScatterMult: 2
+    burstScatterMult: 1
     modifiers:
       Burst:
         fireDelay: 0.1665
@@ -45,7 +45,7 @@
         shotsToMaxScatter: 6
       FullAuto:
         fireDelay: 0
-        maxScatterModifier: 26
+        maxScatterModifier: 13
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 4
@@ -63,6 +63,8 @@
           tags:
           - CMMagazineRifleM54CMK1
           - CMMagazineRifleM54CMK1AP
+          - RMCMagazineRifleM54CMK1Incendiary
+          - RMCMagazineRifleM54CMK1HEAP
         startingItem: CMMagazineRifleM54CMK1
   - type: GunDamageModifier
     multiplier: 1.1
@@ -81,7 +83,7 @@
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
       rmc-aslot-stock:
-        startingAttachable: RMCAttachmentM54CStockCollapsible
+        startingAttachable: RMCAttachmentM54CMK1StockCollapsible
         whitelist:
           tags:
           - RMCAttachmentM54CStockCollapsible
@@ -96,14 +98,7 @@
       rmc-aslot-barrel: 0.75, 0.00
       rmc-aslot-rail: 0.1, 0.16
       rmc-aslot-stock: -0.78, 0.0325
-      rmc-aslot-underbarrel: 0.35, -0.343
-  - type: ItemCamouflage
-    camouflageVariations:
-      Jungle: _RMC14/Objects/Weapons/Guns/Rifles/m54cmk1/jungle.rsi
-      Desert: _RMC14/Objects/Weapons/Guns/Rifles/m54cmk1/desert.rsi
-      Snow: _RMC14/Objects/Weapons/Guns/Rifles/m54cmk1/snow.rsi
-      Classic: _RMC14/Objects/Weapons/Guns/Rifles/m54cmk1/classic.rsi
-      Urban: _RMC14/Objects/Weapons/Guns/Rifles/m54cmk1/urban.rsi
+      rmc-aslot-underbarrel: 0.28, -0.343
   - type: Tag
     tags:
     - RMCWeaponRifleM54CMK1
@@ -179,6 +174,60 @@
   - type: RefillableByBulletBox
     bulletType: RMCBoxBulletsRifleAP
 
+- type: entity
+  parent: CMMagazineRifleM54CMK1
+  id: RMCMagazineRifleM54CMK1Incendiary
+  name: "M54C MK1 Incendiary magazine (10x24mm)"
+  suffix: AP
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleM54CMK1Incendiary
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmIncendiary
+    proto: RMCCartridgeRifle10x24mmIncendiary
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54cmk1.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#771A10"
+# - type: RefillableByBulletBox no ammo box
+#   bulletType: RMCBoxBulletsRifleAP
+
+- type: entity
+  parent: CMMagazineRifleM54CMK1
+  id: RMCMagazineRifleM54CMK1HEAP
+  name: "M54C MK1 HEAP magazine (10x24mm)"
+  suffix: HEAP
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleM54CMK1HEAP
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmHEAP
+    proto: RMCCartridgeRifle10x24mmHEAP
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54cmk1.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#9C9A19"
+#  - type: RefillableByBulletBox disabled till HEAP bulletboxes
+#    bulletType: RMCBoxBulletsRifleAP
+
 - type: Tag
   id: RMCWeaponRifleM54CMK1
 
@@ -187,3 +236,9 @@
 
 - type: Tag
   id: CMMagazineRifleM54CMK1AP
+
+- type: Tag
+  id: RMCMagazineRifleM54CMK1Incendiary
+
+- type: Tag
+  id: RMCMagazineRifleM54CMK1HEAP

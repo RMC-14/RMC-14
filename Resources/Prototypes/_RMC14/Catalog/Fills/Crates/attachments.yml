@@ -1,6 +1,6 @@
 - type: entity
   id: RMCCrateAttachmentRedDot
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: red-dot sight attachment crate (x8)
   components:
   - type: StorageFill
@@ -10,7 +10,7 @@
 
 - type: entity
   id: RMCCrateAttachmentSmartScope
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: B8 smart-scope attachment crate (x4)
   components:
   - type: StorageFill
@@ -20,7 +20,7 @@
 
 - type: entity
   id: RMCCrateAttachmentRailFlashlight
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: rail flashlight crate (x8)
   components:
   - type: StorageFill
@@ -30,7 +30,7 @@
 
 - type: entity
   id: RMCCrateAttachmentTelescopicScope
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: railscope attachment crate (x2)
   components:
   - type: StorageFill
@@ -40,7 +40,7 @@
 
 - type: entity
   id: RMCCrateAttachmentMiniScope
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: mini railscope attachment crate (x2)
   components:
   - type: StorageFill
@@ -50,7 +50,7 @@
 
 - type: entity
   id: RMCCrateAttachmentMagneticHarness
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: magnetic harness attachment crate (x6)
   components:
   - type: StorageFill
@@ -60,7 +60,7 @@
 
 - type: entity
   id: RMCCrateAttachmentSuppressor
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: suppressor attachment crate (x8)
   components:
   - type: StorageFill
@@ -70,7 +70,7 @@
 
 - type: entity
   id: RMCCrateAttachmentExtendedBarrel
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: extended barrel attachment crate (x6)
   components:
   - type: StorageFill
@@ -80,7 +80,7 @@
 
 - type: entity
   id: RMCCrateAttachmentCompensator
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: compensator attachment crate (x6)
   components:
   - type: StorageFill
@@ -90,7 +90,7 @@
 
 - type: entity
   id: RMCCrateAttachmentForegrip
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: foregrip attachment crate (x8)
   components:
   - type: StorageFill
@@ -102,7 +102,7 @@
 
 - type: entity
   id: RMCCrateAttachmentGyro
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: gyroscopic stabilizer attachment crate (x2)
   components:
   - type: StorageFill
@@ -112,7 +112,7 @@
 
 - type: entity
   id: RMCCrateAttachmentBipod
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: bipod attachment crate (x6)
   components:
   - type: StorageFill
@@ -122,7 +122,7 @@
 
 - type: entity
   id: RMCCrateAttachmentUnderbarrelShotgun
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: underbarrel shotgun attachment crate (x4)
   components:
   - type: StorageFill
@@ -132,7 +132,7 @@
 
 - type: entity
   id: RMCCrateAttachmentUnderbarrelExtinguisher
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: underbarrel extinguisher attachment crate (x4)
   components:
   - type: StorageFill
@@ -142,17 +142,17 @@
 
 - type: entity
   id: RMCCrateAttachmentUnderbarrelFlamer
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: underbarrel flamer attachment crate (x4)
   components:
   - type: StorageFill
     contents:
-      - id: CMAttachmentMiniFlamethrower
-        amount: 4
+    - id: RMCAttachmentMiniFlamethrower
+      amount: 4
 
 - type: entity
   id: RMCCrateAttachmentBurstfire
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: burstfire assembly attachment crate (x2)
   components:
   - type: StorageFill
@@ -162,7 +162,7 @@
 
 - type: entity
   id: RMCCrateAttachmentAllStocks
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: stock attachments crate (x3 each, x1 paratroopers)
   components:
   - type: StorageFill
@@ -180,7 +180,7 @@
 
 - type: entity
   id: RMCCrateAttachmentRevolverStock
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: revolver stock attachment crate (x4)
   components:
   - type: StorageFill
@@ -190,7 +190,7 @@
 
 - type: entity
   id: RMCCrateAttachmentRifleStock
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: rifle stock attachment crate (x4)
   components:
   - type: StorageFill
@@ -200,7 +200,7 @@
 
 - type: entity
   id: RMCCrateAttachmentShotgunStock
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: shotgun stock attachment crate (x4)
   components:
   - type: StorageFill
@@ -210,7 +210,7 @@
 
 - type: entity
   id: RMCCrateAttachmentSmgStock
-  parent: RMCCrateWeldable
+  parent: RMCCrateBase
   name: submachinegun stock attachment crate (x4)
   components:
   - type: StorageFill

@@ -18,7 +18,7 @@ public abstract class SharedXenoResinHoleSystem : EntitySystem
 {
     [Dependency] protected readonly SharedAppearanceSystem _appearanceSystem = default!;
     [Dependency] protected readonly MobStateSystem _mobState = default!;
-    [Dependency] protected readonly CMHandsSystem _rmcHands = default!;
+    [Dependency] protected readonly RMCHandsSystem _rmcHands = default!;
     [Dependency] protected readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] protected readonly INetManager _net = default!;
     [Dependency] protected readonly SharedPopupSystem _popup = default!;
@@ -109,8 +109,7 @@ public abstract class SharedXenoResinHoleSystem : EntitySystem
         if (resinHole.Comp.TrapPrototype != null)
             return;
 
-        resinHole.Comp.TrapPrototype = XenoResinHoleComponent.ParasitePrototype;
-        Dirty(resinHole);
+        SetTrapType(resinHole, XenoResinHoleComponent.ParasitePrototype);
         _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-resin-hole-enter-parasite", ("parasite", args.User)), resinHole);
         // Yes, parasites claim any resin traps as their own
         _hive.SetSameHive(args.User, resinHole.Owner);
@@ -126,16 +125,26 @@ public abstract class SharedXenoResinHoleSystem : EntitySystem
 
         var locationName = "Unknown";
 
-        if (_areas.TryGetArea(ent, out _, out var areaProto, out _))
+        if (_areas.TryGetArea(ent, out _, out var areaProto))
             locationName = areaProto.Name;
 
         var msg = Loc.GetString(args.message, ("location", locationName), ("type", GetTrapTypeName(ent)));
         _announce.AnnounceToHive(ent.Owner, hive, msg, color: ent.Comp.MessageColor);
     }
 
+    protected void SetTrapType(Entity<XenoResinHoleComponent> resinHole, string? newTrapPrototype)
+    {
+        resinHole.Comp.TrapPrototype = newTrapPrototype;
+        if (TryComp(resinHole.Owner, out XenoAnnounceStructureDestructionComponent? structureDestructionComp))
+        {
+            structureDestructionComp.StructureName = GetTrapTypeName(resinHole);
+        }
+        Dirty(resinHole);
+    }
+
     public string GetTrapTypeName(Entity<XenoResinHoleComponent> resinHole)
     {
-        switch(resinHole.Comp.TrapPrototype)
+        switch (resinHole.Comp.TrapPrototype)
         {
             case XenoResinHoleComponent.ParasitePrototype:
                 return Loc.GetString("rmc-xeno-construction-resin-hole-parasite-name");

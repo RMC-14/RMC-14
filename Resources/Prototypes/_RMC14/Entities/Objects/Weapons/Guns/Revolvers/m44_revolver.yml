@@ -17,6 +17,7 @@
     whitelist:
       tags:
       - RMCSpeedLoaderM44
+      - RMCSpeedLoader44Marksman
       - RMCCartridgeRevolver44
     proto: RMCCartridgeRevolver44
     capacity: 7
@@ -64,6 +65,7 @@
   components:
   - type: RevolverAmmoProvider
     proto: null
+    chambers: [ null, null, null, null, null, null, null ]
 
 - type: entity
   id: RMCBaseSpeedLoader44

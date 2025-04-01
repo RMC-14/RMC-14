@@ -16,9 +16,15 @@
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
       shader: unshaded
   - type: AccessReader
-    access: [["CMAccessCombatTechPrep"], ["CMAccessEngineering"], ["CMAccessColonyEngineering"]]
+    access: [["CMAccessCombatTechPrep"], ["CMAccessEngineering"], ["CMAccessColonyEngineering"], ["CMAccessColonyPublic"]] # TODO RMC14 remove public when surv jobs and hacking are in
   - type: CMAutomatedVendor
-    sections:    
+    access:
+    - "CMAccessCombatTechPrep"
+    - "CMAccessEngineering"
+    - "CMAccessColonyEngineering"
+    - "CMAccessColonyPublic"
+    hackable: true
+    sections:
     - name: Equipment
       entries:
       - id: RMCFlashlight
@@ -42,21 +48,23 @@
       #Meson scanner
       #Reagent scanner
       - id: CMTRayScanner
-        amount: 4
+        amount: 2
     - name: Tools
       entries:
-      - id: CMCrowbar
-        amount: 8
       - id: CMWelder
-        amount: 8
-      - id: CMWelderSmall
         amount: 4
+      - id: CMCrowbar
+        amount: 4
+      - id: CMWelderSmall
+        amount: 2
       - id: CMScrewdriver
-        amount: 8
+        amount: 4
       - id: CMWirecutter
-        amount: 8
+        amount: 4
       - id: CMWrench
-        amount: 8
+        amount: 4
+      - id: CMLightReplacer
+        amount: 4
 
 # Circuits
 - type: entity
@@ -68,7 +76,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/robotics.rsi
   - type: CMAutomatedVendor
-    sections:    
+    hackable: true
+    sections:
     - name: Circuitboards
       entries:
       - id: FireAlarmElectronics
@@ -93,7 +102,8 @@
         amount: 2
 #     - id: Air alarm
 #     - id: security camera monitor
-#     - id: television set
+      - id: RMCCircuitboardTelevision
+        amount: 4
 #     - id: station alerts
 #     - id: arcade
 #     - id: atmospheric monitor
@@ -109,7 +119,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/engivend.rsi
   - type: CMAutomatedVendor
-    sections:    
+    hackable: true
+    sections:
     - name: Tools
       entries:
       - id: RMCCableCoil
@@ -140,7 +151,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/engi.rsi
   - type: CMAutomatedVendor
-    sections:    
+    hackable: true
+    sections:
     - name: Assembly Components
       entries:
       - id: Igniter
@@ -186,7 +198,10 @@
   - type: AccessReader
     access: [["CMAccessResearch"]]
   - type: CMAutomatedVendor
-    sections:    
+    access:
+    - "CMAccessResearch"
+    hackable: true
+    sections:
     - name: Equipment
       entries:
       - id: ClothingHeadHatHoodBioScientist
@@ -215,7 +230,8 @@
   description: All the tools you need to create your own robot army.
   components:
   - type: CMAutomatedVendor
-    sections:    
+    hackable: true
+    sections:
     - name: Equipment
       entries:
       # Labcoat

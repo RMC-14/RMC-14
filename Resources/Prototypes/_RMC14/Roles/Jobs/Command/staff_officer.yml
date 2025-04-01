@@ -44,13 +44,16 @@
         RMCSkillOverwatch: 1
         RMCSkillPolice: 1
         RMCSkillPowerLoader: 1
-        RMCSkillVehicles: 1
+        RMCSkillSurgery: 1
+        RMCSkillVehicles: 2
     - type: MarineOrders
     - type: CMVendorUser
       points: 45
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-staff-officer
+    - type: ViewIntelObjectives
+    - type: CommandAccent
 
 - type: startingGear
   id: CMGearStaffOfficer
@@ -73,10 +76,7 @@
   - type: SpawnPoint
     job_id: CMStaffOfficer
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: staff_officer
+    state: so_spawn
 
 - type: playTimeTracker
   id: CMJobStaffOfficer

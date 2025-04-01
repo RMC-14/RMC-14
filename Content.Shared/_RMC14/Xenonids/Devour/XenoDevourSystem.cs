@@ -3,7 +3,6 @@ using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
-using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
@@ -227,6 +226,12 @@ public sealed class XenoDevourSystem : EntitySystem
 
         args.Handled = true;
 
+        var attemptEv = new XenoTargetDevouredAttemptEvent();
+        RaiseLocalEvent(target, ref attemptEv);
+
+        if (attemptEv.Cancelled)
+            return;
+
         var container = _container.EnsureContainer<ContainerSlot>(xeno, xeno.Comp.DevourContainerId);
         if (!_container.Insert(target, container))
         {
@@ -273,8 +278,6 @@ public sealed class XenoDevourSystem : EntitySystem
             RaiseLocalEvent(xeno, ev);
 
             _stun.TryStun(ent, xeno.Comp.RegurgitationStun, true);
-            if (_net.IsServer)
-                SpawnAttachedTo(xeno.Comp.RegurgitateEffect, ent.ToCoordinates());
         }
     }
 
@@ -390,7 +393,8 @@ public sealed class XenoDevourSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, xeno, devour.DevourDelay, new XenoDevourDoAfterEvent(), xeno, target)
         {
             BreakOnMove = true,
-            AttemptFrequency = AttemptFrequency.EveryTick
+            AttemptFrequency = AttemptFrequency.EveryTick,
+            ForceVisible = true,
         };
 
         _popup.PopupClient(Loc.GetString("cm-xeno-devour-start-self", ("target", target)), target, xeno);
@@ -504,6 +508,9 @@ public sealed class XenoDevourSystem : EntitySystem
         }
     }
 }
+
+[ByRefEvent]
+public record struct XenoTargetDevouredAttemptEvent(bool Cancelled = false);
 
 /// <summary>
 /// Event that is raised whenever a mob is devoured by another mob
