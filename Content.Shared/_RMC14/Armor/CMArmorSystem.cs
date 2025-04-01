@@ -1,16 +1,13 @@
 using System.Linq;
 using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Medical.Surgery.Steps;
-using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Xenonids;
-using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Slowing;
 using Content.Shared.Alert;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
-using Content.Shared.Destructible;
 using Content.Shared.Explosion;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
@@ -264,30 +261,26 @@ public sealed class CMArmorSystem : EntitySystem
                 }
             }
         }
-        int meleeMod = 4;
-        int rangedMod = 4;
 
-        if(TryComp<RMCArmorModifierComponent>(ent, out var mod))
-        {
-            meleeMod = mod.MeleeArmorModifier;
-            rangedMod = mod.RangedArmorModifier;
-        }
+        //Default modifier
+        var mod = EnsureComp<RMCArmorModifierComponent>(ent);
+
         args.Damage = new DamageSpecifier(args.Damage);
         if (!HasComp<XenoComponent>(ent))
         {
             if (HasComp<RMCBulletComponent>(args.Tool))
             {
-                Resist(args.Damage, ev.Bullet, ArmorGroup, rangedMod);
+                Resist(args.Damage, ev.Bullet, ArmorGroup, mod.RangedArmorModifier);
             }
             else if (HasComp<MeleeWeaponComponent>(args.Tool))
             {
-                Resist(args.Damage, ev.Melee, ArmorGroup, meleeMod);
+                Resist(args.Damage, ev.Melee, ArmorGroup, mod.MeleeArmorModifier);
             }
-            Resist(args.Damage, ev.Bio, BioGroup, rangedMod);
+            Resist(args.Damage, ev.Bio, BioGroup, mod.RangedArmorModifier);
         }
         else
         {
-            Resist(args.Damage, ev.XenoArmor, ArmorGroup, rangedMod);
+            Resist(args.Damage, ev.XenoArmor, ArmorGroup, mod.RangedArmorModifier);
         }
     }
 
