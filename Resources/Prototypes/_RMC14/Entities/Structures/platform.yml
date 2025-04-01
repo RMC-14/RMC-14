@@ -49,9 +49,6 @@
             node: platformBroken
           - !type:DoActsBehavior
             acts: ["Breakage"]
-  - type: ReceiverXenoClaws
-    maxHealth: 100
-    hitsToDestroy: 3 # not parity but someone can fix this for me :3
 
 - type: entity
   parent: CMPlatformBaseBroken
