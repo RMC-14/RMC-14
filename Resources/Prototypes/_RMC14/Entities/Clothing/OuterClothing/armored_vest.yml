@@ -16,3 +16,23 @@
     bio: 20
     explosionArmor: 10
   - type: CMHardArmor
+
+- type: entity
+  parent: RMCArmorVest
+  id: RMCArmorVestFlak
+  name: M70 flak jacket
+  description: A flak jacket used by dropship pilots to protect themselves while flying in the cockpit. Excels in protecting the wearer against high-velocity solid projectiles.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/pilot/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/pilot/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/pilot/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/pilot/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/pilot/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/pilot/urban.rsi
+  - type: CMArmor
+    armor: 15 #20 bullet
+    bio: 10
+    explosionArmor: 10

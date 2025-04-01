@@ -214,3 +214,15 @@
     - RMCWhistle
     - RMCWeaponTaser
     #TODO RMC14 Megaphone, Paper Map.
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleCrewPilot
+  name: PO Flightsuit Kit
+  components:
+  - type: Sprite
+    sprite:
+  - type: CMVendorBundle
+    bundle:
+    - suit
+    - suit
