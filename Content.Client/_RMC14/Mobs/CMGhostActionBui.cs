@@ -12,6 +12,7 @@ public sealed class CMGhostActionBui(EntityUid owner, Enum uiKey) : BoundUserInt
 
     protected override void Open()
     {
+        base.Open();
         if (_window != null)
             return;
 

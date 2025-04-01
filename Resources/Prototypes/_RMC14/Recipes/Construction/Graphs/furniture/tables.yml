@@ -84,6 +84,8 @@
               prototype: RMCTablePartReinforced
               amount: 1
           steps:
+            - tool: Welding
+              doAfter: 5
             - tool: Anchoring
               doAfter: 5
 

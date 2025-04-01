@@ -1,0 +1,142 @@
+﻿- type: entity
+  parent: [ RMCBaseBreechloader, RMCBaseAttachableHolder ]
+  name: Basira-Armstrong bolt-action hunting rifle
+  id: RMCWeaponBoltActionRifle
+  description: Named after its eccentric designers, the Basira-Armstrong is a cheap but reliable civilian bolt-action rifle frequently found in the outer colonies. Despite its legally-mandated limited magazine capacity, its light weight and legendary accuracy makes it popular among hunters and competitive shooters.
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/hunting.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/hunting.rsi
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_boltaction.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 2
+    recoilUnwielded: 4
+    scatterWielded: 10
+    scatterUnwielded: 20
+    baseFireRate: 1.25
+    burstScatterMult: 5
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1
+    accuracyMultiplierUnwielded: 0.95
+  - type: UniqueAction
+  - type: BreechLoaded
+    needOpenClose: true
+    openSound:
+      path: "/Audio/_RMC14/Weapons/Guns/Breech/pkd_open_chamber.ogg"
+    closeSound:
+      path: "/Audio/_RMC14/Weapons/Guns/Breech/pkd_close_chamber.ogg"
+  - type: MagazineAmmoProvider
+    autoEject: false
+    soundAutoEject: null
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineRifleHunting
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineRifleHunting
+  - type: GunDamageModifier
+    multiplier: 1.4
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        startingAttachable: RMCAttachmentHuntingScope
+        whitelist:
+          tags:
+          - RMCAttachmentHuntingScope
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentHuntingStock
+        whitelist:
+          tags:
+          - RMCAttachmentHuntingStock
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.80, 0.06
+      rmc-aslot-rail: -0.28, 0.06
+      rmc-aslot-stock: -0.74, -0.14
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: Corrodible
+    isCorrodible: false
+  - type: GunRequiresWield
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineRifleHunting
+  name: "Basira-Armstrong magazine (6.5mm)"
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleHunting
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeBoltActionRifle
+    proto: RMCCartridgeBoltActionRifle
+    capacity: 10
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/hunting.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeBoltActionRifle
+  name: Cartridge (5.56x45)
+  description: A Cartridge for the Basira-Armstrong hunting rifle. Compliant with the 15-cartridge limit on civilian hunting rifles.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeBoltActionRifle
+  - type: CartridgeAmmo
+    proto: RMCBulletRifleHunting
+
+- type: entity
+  parent: BulletRifle10x24mm
+  id: RMCBulletRifleHunting
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 40
+  - type: CMArmorPiercing
+    amount: 30
+
+- type: Tag
+  id: RMCMagazineRifleHunting
+
+- type: Tag
+  id: RMCCartridgeBoltActionRifle
+
+- type: Tag
+  id: RMCWeaponBoltActionRifle

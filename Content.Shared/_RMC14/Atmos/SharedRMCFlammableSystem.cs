@@ -54,7 +54,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly TagSystem _tag = default!;
@@ -408,46 +408,21 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         foreach (var cardinal in _rmcMap.CardinalDirections)
         {
             var target = coordinates.Offset(cardinal);
-            if (!_rmcMap.TryGetTileDef(target, out var tile) ||
-                tile.ID == ContentTileDefinition.SpaceID)
-            {
-                continue;
-            }
-
-            if (_rmcMap.HasAnchoredEntityEnumerator<TileFireComponent>(target, out var oldTileFire))
-            {
-                if (spawn == oldTileFire.Comp.Id)
-                    continue;
-
-                QueueDel(oldTileFire);
-            }
-
-            var nextRange = range - 1;
-            var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(target);
-            while (anchored.MoveNext(out var uid))
-            {
-                if (_blockTileFireQuery.HasComp(uid))
-                {
-                    nextRange = 0;
-                    break;
-                }
-
-                if (_tag.HasAnyTag(uid, StructureTag, WallTag) &&
-                    !_doorQuery.HasComp(uid))
-                {
-                    nextRange = 0;
-                    break;
-                }
-            }
-
-            SpawnFireChain(spawn, chain, target, intensity, duration);
-            if (nextRange == 0)
+            var nextRange = SpawnFire(target, spawn, chain, range, intensity, duration, out var cont);
+            if (nextRange == 0 || cont)
                 continue;
 
             Timer.Spawn(TimeSpan.FromMilliseconds(50),
                 () =>
                 {
-                    SpawnFires(spawn, target, nextRange, chain, intensity, duration);
+                    try
+                    {
+                        SpawnFires(spawn, target, nextRange, chain, intensity, duration);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Error($"Error occurred spawning fires:\n{e}");
+                    }
                 });
         }
     }
@@ -456,6 +431,49 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     {
         var chain = _onCollide.SpawnChain();
         SpawnFires(spawn, center, range, chain, intensity, duration);
+    }
+
+    public int SpawnFire(EntityCoordinates target, EntProtoId spawn, EntityUid chain, int range, int? intensity, int? duration, out bool cont)
+    {
+        cont = false;
+        if (!_rmcMap.TryGetTileDef(target, out var tile) ||
+            tile.ID == ContentTileDefinition.SpaceID)
+        {
+            cont = true;
+            return range;
+        }
+
+        if (_rmcMap.HasAnchoredEntityEnumerator<TileFireComponent>(target, out var oldTileFire))
+        {
+            if (spawn == oldTileFire.Comp.Id)
+            {
+                cont = true;
+                return range;
+            }
+
+            QueueDel(oldTileFire);
+        }
+
+        var nextRange = range - 1;
+        var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(target);
+        while (anchored.MoveNext(out var uid))
+        {
+            if (_blockTileFireQuery.HasComp(uid))
+            {
+                nextRange = 0;
+                break;
+            }
+
+            if (_tag.HasAnyTag(uid, StructureTag, WallTag) &&
+                !_doorQuery.HasComp(uid))
+            {
+                nextRange = 0;
+                break;
+            }
+        }
+
+        SpawnFireChain(spawn, chain, target, intensity, duration);
+        return nextRange;
     }
 
     /// <summary>

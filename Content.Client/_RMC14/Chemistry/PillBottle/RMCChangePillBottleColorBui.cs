@@ -16,6 +16,7 @@ public sealed partial class RMCChangePillBottleColorBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         _window = new RMCChangePillBottleColorWindow(this);
         _window.OnClose += Close;
         _window.OpenCentered();

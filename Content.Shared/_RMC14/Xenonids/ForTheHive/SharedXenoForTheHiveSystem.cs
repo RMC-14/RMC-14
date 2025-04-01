@@ -216,7 +216,7 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
 
                         var damage = ((burnRange - distance) * maxBurnDamage) / burnRange;
 
-                        _damage.TryChangeDamage(mob, active.BaseDamage * damage, true, origin: xeno);
+                        _damage.TryChangeDamage(mob, active.BaseDamage * damage, true, origin: xeno, tool: xeno);
 
                     }
 

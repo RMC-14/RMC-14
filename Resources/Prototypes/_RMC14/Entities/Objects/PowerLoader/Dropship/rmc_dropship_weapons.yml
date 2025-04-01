@@ -47,3 +47,28 @@
     ammoAttachedSprite:
       sprite: _RMC14/Objects/dropship_attachments.rsi
       state: 30mm_cannon_loaded1
+
+- type: entity
+  parent: RMCDropshipAttachmentWeapon
+  id: RMCDropshipAttachmentGuidedMissileLauncher
+  name: LAU-444 guided missile launcher
+  description: A missile pod weapon system capable of launching a single laser-guided missile. Moving this will require some sort of lifter. Accepts AGM, AIM, BLU, and GBU missile systems.
+  components:
+  - type: Sprite
+    layers:
+    - state: rocket_pod
+      offset: 0.5, 0.5
+  - type: DropshipFabricatorPrintable
+    cost: 600
+  - type: DropshipWeapon
+    abbreviation: MSL
+    fireDelay: 5
+    weaponAttachedSprite:
+      sprite: _RMC14/Objects/dropship_attachments.rsi
+      state: rocket_pod_installed
+    ammoEmptyAttachedSprite:
+      sprite: _RMC14/Objects/dropship_attachments.rsi
+      state: rocket_pod_installed
+    ammoAttachedSprite:
+      sprite: _RMC14/Objects/dropship_attachments.rsi
+      state: rocket_pod_loaded
