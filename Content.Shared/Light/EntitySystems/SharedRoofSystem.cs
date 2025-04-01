@@ -1,4 +1,5 @@
 using System.Diagnostics.Contracts;
+using Content.Shared._RMC14.Areas;
 using Content.Shared.Light.Components;
 using Content.Shared.Maps;
 using Robust.Shared.Map;
@@ -12,6 +13,7 @@ namespace Content.Shared.Light.EntitySystems;
 public abstract class SharedRoofSystem : EntitySystem
 {
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly AreaSystem _area = default!;
 
     private HashSet<Entity<IsRoofComponent>> _roofSet = new();
 
@@ -24,6 +26,10 @@ public abstract class SharedRoofSystem : EntitySystem
     {
         var roof = grid.Comp2;
         var chunkOrigin = SharedMapSystem.GetChunkIndices(index, RoofComponent.ChunkSize);
+
+        //RMC14 - Check if the area has weather enabled
+        if (_area.IsWeatherEnabled(grid, index))
+            return true;
 
         if (roof.Data.TryGetValue(chunkOrigin, out var bitMask))
         {
