@@ -131,7 +131,6 @@
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleMilitaryPoliceApparel
   name: Essential Police Set
-  description: Contains security HUD-glasses, a filled security belt and a M10 helmet.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses.rsi
