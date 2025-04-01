@@ -328,7 +328,7 @@
 
 # Pilot Officer
 - type: entity
-  parent: [RMCBaseJacket, BaseFoldable]
+  parent: RMCBaseJacketButtonable
   id: RMCCoatPilot
   name: M70B1 light flak jacket
   description: A light flak jacket used by dropship pilots to protect themselves while flying in the cockpit. This specific flak jacket has been designed for style and comfort over protection, and it shows. Don't get hit by any stray bullets!
@@ -345,11 +345,6 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/pilot.rsi
   - type: CMArmor
     armor: 10
-  - type: Appearance
-  - type: Foldable
-    canFoldInsideContainer: true
-    unfoldVerbText: rmc-buttons-verb-fold
-    foldVerbText: rmc-buttons-verb-fold
   - type: FoldableClothing
     foldedEquippedPrefix: jacket
     foldedHeldPrefix: jacket

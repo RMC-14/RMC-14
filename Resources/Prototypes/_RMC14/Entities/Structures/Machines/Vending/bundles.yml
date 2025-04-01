@@ -221,8 +221,9 @@
   name: PO Flightsuit Kit
   components:
   - type: Sprite
-    sprite:
+    sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt.rsi
+    state: icon
   - type: CMVendorBundle
     bundle:
-    - suit
-    - suit
+    - RMCJumpsuitPilotAlt
+    - RMCCoatPilot

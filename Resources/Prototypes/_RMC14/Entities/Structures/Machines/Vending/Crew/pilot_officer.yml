@@ -359,9 +359,9 @@
       - CMPilotDropship
       - CMPilotGunship
       entries:
-      #- id: PO Flightsuit Kit
-      #  name: PO Flightsuit Kit
-      #  points: 10
+      - id: RMCVendorBundleCrewPilot
+        name: PO Flightsuit Kit
+        points: 10
       - id: CMFireExtinguisherPortable
         name: Fire Extinguisher (portable)
         points: 5
@@ -386,14 +386,13 @@
 
     - name: Standard Equipment
       jobs:
-      - CMPilotDropship
-      - CMPilotGunship
+      - CMDropshipCrewChief
       takeAll: CMEquipment
       entries:
       - id: CMHandsInsulated
         name: Gloves
         mandatory: true
-      - id: RMCHeadCapFlippable #Replace w/ patrol cap
+      - id: RMCHeadCapFlippable
         name: Patrol Cap
         mandatory: true
       - id: CMSatchel
@@ -404,8 +403,7 @@
         mandatory: true
     - name: Armour
       jobs:
-      - CMPilotDropship
-      - CMPilotGunship
+      - CMDropshipCrewChief
       choices: { CMArmour: 1 }
       entries:
       - id: RMCArmorVestFlak
@@ -416,8 +414,7 @@
         mandatory: true
     - name: Personal Sidearm
       jobs:
-      - CMPilotDropship
-      - CMPilotGunship
+      - CMDropshipCrewChief
       choices: { CMSidearm: 1 }
       entries:
       - id: RMCWeaponPistolM77Empty
@@ -426,8 +423,7 @@
         name: MK80 Pistol
     - name: Belt
       jobs:
-      - CMPilotDropship
-      - CMPilotGunship
+      - CMDropshipCrewChief
       choices: { CMBelt: 1 }
       entries:
       - id: RMCBeltUtilityGeneral
@@ -452,8 +448,7 @@
         name: M276 Shotgun Shell Loading Rig
     - name: Pouches
       jobs:
-      - CMPilotDropship
-      - CMPilotGunship
+      - CMDropshipCrewChief
       choices: { CMPouches: 2 }
       entries:
       - id: RMCPouchFirstAidInjectors
@@ -487,8 +482,7 @@
       #  name: Sling Pouch
     - name: Accessories
       jobs:
-      - CMPilotDropship
-      - CMPilotGunship
+      - CMDropshipCrewChief
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBlack
@@ -504,8 +498,7 @@
         name: Drop Pouch
     - name: Glasses
       jobs:
-      - CMPilotDropship
-      - CMPilotGunship
+      - CMDropshipCrewChief
       choices: { CMGlasses: 1 }
       entries:
       - id: RMCGlassesAviators
@@ -517,8 +510,7 @@
         name: Sunglasses
     - name: Masks
       jobs:
-      - CMPilotDropship
-      - CMPilotGunship
+      - CMDropshipCrewChief
       choices: { CMMasks: 1 }
       entries:
       - id: CMMaskGas
@@ -527,8 +519,7 @@
         name: Heat Absorbent Coif
     - name: Attachments
       jobs:
-      - CMPilotDropship
-      - CMPilotGunship
+      - CMDropshipCrewChief
       entries:
       - id: RMCAttachmentAngledGrip
         name: Angled Grip
@@ -571,8 +562,7 @@
         points: 10
     - name: Ammunition
       jobs:
-      - CMPilotDropship
-      - CMPilotGunship
+      - CMDropshipCrewChief
       entries:
       - id: CMMagazineRifleM4SPRAP
         name: M4SPR AP Magazine (10x24mm)
@@ -597,8 +587,7 @@
       #  points: 10
     - name: Utilities
       jobs:
-      - CMPilotDropship
-      - CMPilotGunship
+      - CMDropshipCrewChief
       entries:
       - id: CMFireExtinguisherPortable
         name: Fire Extinguisher (portable)
