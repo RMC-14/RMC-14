@@ -72,6 +72,25 @@ public sealed class AreaSystem : EntitySystem
         areaGrid.Areas[position] = area;
     }
 
+    public void UpdateRoofFromAreaGrid()
+    {
+        var query = EntityManager.AllEntityQueryEnumerator<AreaGridComponent, MapGridComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var areas, out var mapGrid, out var xform))
+        {
+            foreach (var (position, protoId) in areas.Areas)
+            {
+                if (!_prototypes.TryIndex(protoId, out var proto))
+                    continue;
+
+                if (!proto.TryGetComponent(out AreaComponent? areaComp, _compFactory))
+                    continue;
+
+                var coordinates = _map.ToCoordinates(uid, position, mapGrid);
+                Spawn(protoId, coordinates);
+            }
+        }
+    }
+
     public bool TryGetArea(
         Entity<MapGridComponent, AreaGridComponent?> grid,
         Vector2i indices,
