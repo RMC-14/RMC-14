@@ -306,22 +306,22 @@
         name: Heat Absorbent Coif
       - id: RMCMaskRebreather
         name: Rebreather
-    - name: Patches (Discretionary)
-      entries:
-      - id: FallingFalconsShoulderPatch
-        name: Falling Falcons Shoulder Patch
-      - id: FallingFalconsUNShoulderPatch
-        name: Falling Falcons UN Shoulder Patch
-      - id: UNMCLargeChestPatch
-        name: UNMC Large Chest Patch
-      - id: UNMCShoulderPatch
-        name: UNMC Shoulder Patch
-      - id: UnitedNationsShoulderPatch
-        name: United Nations Shoulder patch
-      - id: UnitedNationsFlagShoulderPatch
-        name: United Nations Flag Shoulder patch
-      - id: FallingFalconsChallengeCoin
-        name: Falling Falcons Challenge Coin
+    #- name: Patches (Discretionary)
+    #  entries:
+    #  - id: FallingFalconsShoulderPatch
+    #    name: Falling Falcons Shoulder Patch
+    #  - id: FallingFalconsUNShoulderPatch
+    #    name: Falling Falcons UN Shoulder Patch
+    #  - id: UNMCLargeChestPatch
+    #    name: UNMC Large Chest Patch
+    #  - id: UNMCShoulderPatch
+    #    name: UNMC Shoulder Patch
+    #  - id: UnitedNationsShoulderPatch
+    #    name: United Nations Shoulder patch
+    #  - id: UnitedNationsFlagShoulderPatch
+    #    name: United Nations Flag Shoulder patch
+    #  - id: FallingFalconsChallengeCoin
+    #    name: Falling Falcons Challenge Coin
 
 # CLOTHING VENDOR TODO From personal uniform vendor ingame
 

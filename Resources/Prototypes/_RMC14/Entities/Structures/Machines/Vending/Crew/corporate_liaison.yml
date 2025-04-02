@@ -1,4 +1,5 @@
-# Corporate Liaison
+# CLOTHING VENDOR
+
 # TODO Add Clothing options as they become ported
 - type: entity
   parent: ColMarTechBase
@@ -7,127 +8,191 @@
   description: A wardrobe containing all the clothes an executive would ever need.
   suffix: Corp
   components:
-  - type: AccessReader
-    access: [["RMCAccessWeYa"]] # TODO Add Access (Survivor, Trainee, All Executive & WeYa)
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/corp_wardrobe.rsi
     layers:
     - state: "base"
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded", "enum.VendingMachineVisualLayers.Base" ]
   - type: CMAutomatedVendor
+    jobs:
+    - CMLiaison #TODO - Add other WeYa jobs as they are added
     sections:
-    - name: Suits
+    - name: Suits And Undershirts
+      choices: { CMUniform: 5 }
       entries:
       - id: CMJumpsuitLiaisonBlack
-        amount: 1
+        name: Black Suit Pants
+        recommended: true
       - id: RMCJumpsuitLiaisonBlackSuitskirt
-        amount: 1
+        name: Black Suit Skirt
+        recommended: true
       - id: CMJumpsuitLiaisonBlue
-        amount: 1
+        name: Blue Suit Pants
       - id: CMJumpsuitLiaisonBrown
-        amount: 1
+        name: Brown Suit Pants
       - id: CMJumpsuitLiaisonCorporateFormal
-        amount: 1
+        name: White Suit Pants
+      #- id: clothing/under/detective/grey
+      #  name: Grey Suit Pants
+      #- id: detective/neutral
+      #  name: Worn Suit
       - id: CMJumpsuitLiaison
-        amount: 1
+        name: Liaison's Tan Suit
       - id: CMJumpsuitLiaisonCharcoal
-        amount: 1
+        name: Liaison's Charcoal Suit
       - id: RMCJumpsuitLiaisonCharcoalSuitskirt
-        amount: 1
+        name: Liaison's Charcoal Suit Skirt
       - id: CMJumpsuitLiaisonFormal
-        amount: 1
+        name: Liaison's White Suit
       - id: CMJumpsuitLiaisonBlazer
-        amount: 1
+        name: Liaison's Blue Blazer
       - id: CMJumpsuitLiaisonSuspenders
-        amount: 1
-#      - id: LiaisonsSkirt
-#      - id: TraineesUniform
+        name: Liaison's Suspenders
+      #- id: LiaisonsSkirt
+      #  name: Liaison's Skirt
+      #- id: TraineesUniform
+      #  name: Trainee's Uniform
       - id: CMJumpsuitLiaisonIvy
-        amount: 1
-#      - id: OrangeOutfit
+        name: Country Club Uniform
+      #- id: OrangeOutfit
+      #  name: Orange Outfit
       - id: CMJumpsuitLiaisonField
-        amount: 1
+        name: Corporate Casual
       - id: RMCJumpsuitLiaisonFieldSuitskirt
-        amount: 1
-      - id: CMJumpsuitLiaisonOutingRed
-        amount: 1
-      - id: CMJumpsuitLiaisonOuting
-        amount: 1
-#      - id: PinkWorkwear
-#      - id: GreenWorkwear
-    - name: Coat
+        name: Corporate Casual Suit Skirt
+      #- id: GreyWorkwear
+      #  name: Grey Workwear
+      #- id: KhakiWorkwear
+      #  name: Khaki Workwear
+      #- id: PinkWorkwear
+      #  name: Pink Workwear
+      #- id: GreenWorkwear
+      #  name: Green Workwear
+      #- id: BlueWorkwear
+      #  name: Blue Workwear
+    - name: Suit
+      choices: { CMSuit: 5 }
       entries:
       - id: RMCJacketCorporateBlack
-        amount: 1
+        name: Black Suit Jacket
+        recommended: true
       - id: RMCJacketCorporateKhaki
-        amount: 1
+        name: Khaki Suit Jacket
       - id: RMCJacketCorporateBrown
-        amount: 1
+        name: Brown Suit Jacket
       - id: RMCJacketCorporateBlue
-        amount: 1
+        name: Blue Suit Jacket
       - id: RMCJacketCorporateFormal
-        amount: 1
-#      - id: GreyBomberJacket
-#        amount: 1
-#      - id: RedBomberJacket
-#        amount: 1
-#      - id: KhakiBomberJacket
-#        amount: 1
-#      - id: BrownBomberJacket
-#        amount: 1
-#      - id: BlackBomberJacket
-#        amount: 1
-#      - id: LiaisonsWinterCoat
-#        amount: 1
-#      - id: Labcoat
-#        amount: 1
-#      - id: Grey Vest
-#        amount: 1
-#      - id: Brown Vest
-#        amount: 1
-#      - id: Tan Vest
-#        amount: 1
-#    - name: Ties
-#      entries:
-#      - id: BlackTie
-#      - id: RedTie
-#      - id: PurpleTie
-#      - id: BlueTie
-#      - id: GreenTie
-#      - id: GoldTie
-#      - id: SpecialTie
+        name: Formal Suit Jacket
+      #- id: GreyBomberJacket
+      #  name: Grey Bomber Jacket
+      #- id: RedBomberJacket
+      #  name: Red Bomber Jacket
+      #- id: KhakiBomberJacket
+      #  name: Khaki Bomber Jacket
+      #- id: BrownBomberJacket
+      #  name: Brown Bomber Jackets
+      #- id: BlackBomberJacket
+      #  name: Black Bomber Jacket
+      #- id: BrownWindbreaker
+      #  name: Brown Windbreaker
+      #- id: GreyWindbreaker
+      #  name: GreyWindbreaker
+      #- id: GreenWindbreaker
+      #  name: Green Windbreaker
+      #- id: ExpeditionWindbreaker
+      #  name: Expedition Windbreaker
+      #- id: LiaisonsWinterCoat
+      #  name: Liaison's Winter Coat
+      #- id: BeigeTrenchcoat
+      #  name: Beige Trenchcoat
+      #- id: BrownTrenchcoat
+      #  name: Brown Trenchcoat
+      #- id: GreyTrenchcoat
+      #  name: Grey Trenchcoat
+      - id: RMCLabcoat
+        name: Labcoat
+      #- id: Grey Vest
+      #  name: Grey Vest
+      #- id: Brown Vest
+      #  name: Brown Vest
+     # - id: Tan Vest
+     #   name: Tan Vest
+    - name: Hats
+      choices: { CMHats: 5 }
+      entries:
+      #- id: BaseballCap
+      #  name: Company Baseball Cap
+      #  recommended: true
+      #- id: TanBeret
+      #  name: Tan Beret
+      #- id: BrownBeret
+      #  name: Brown Beret
+      #- id: BlackBeret
+      #  name: Black Beret
+      #- id: WhiteBeret
+      #  name: White Beret
+      - id: RMCHeadCapFedoraTan
+        name: Tan Fedora
+      - id: RMCHeadCapFedoraBrown
+        name: Brown Fedora
+      - id: RMCHeadCapFedoraGrey
+        name: Grey Fedora
     - name: Glasses
+      choices: { CMGlasses: 2 }
       entries:
-      - id: RMCGlassesMarineRpg #Placeholder
-        amount: 1
-      - id: RMCGlassesMarineRpgOld #Placeholder
-        amount: 1
       - id: RMCSunglassesBig
-        amount: 1
+        name: BiMex Shades
+        recommended: true
       - id: RMCGlassesAviators
-        amount: 1
+        name: Bronze Aviator Shades
+      #- id: SilverAviators
+      #  name: Silver Aviator Shades
       - id: RMCSunglasses
-        amount: 1
-#      - id: Prescription Sunglasses
+        name: Sunglasses
+      #- id: Prescription Sunglasses
+      #  name: Prescription Sunglasses
       - id: RMCHipsterGlasses
-        amount: 1
-    - name: Gloves
-      entries:
-      - id: CMHandsBrown #Placeholder
-        amount: 1
-#      - id: BlackGloves
-#      - id: DressGloves
+        name: Prescription Glasses
+      #- id: Monocle
+      #  name: Fancy Monocle
     - name: Shoes
+      choices: { CMShoes: 1 }
       entries:
       - id: RMCShoesLaceup
-        amount: 1
+        name: Laceup Shoes, Black
+        recommended: true
       - id: RMCShoesLaceupBrown
-        amount: 1
+        name: Laceup Shoes, Brown
       - id: RMCShoesBlack
-        amount: 1
-#      - id: CorporateBoots
-#    - name: Hats
-#      entries:
-#      - id: BlackBeret
-#      - id: WhiteBeret
-#      - id: Fedora
+        name: Sneakers, Black
+      #- id: CorporateBoots
+      #  name; Corporate Boots
+    - name: Gloves
+      choices: { CMGloves: 2 }
+      entries:
+      #- id: BlackGloves
+      #  name: Black Gloves
+      #  recommended: true
+      - id: CMHandsBrown #Placeholder
+        name: Brown Gloves
+      #- id: DressGloves
+      #  name: Dress Gloves
+    #- name: Accessories
+    #  choices: { CMAccessories: 5 }
+    #  entries:
+    #  - id: BlackTie
+    #    name: Black Tie
+    #    recommended: true
+    #  - id: RedTie
+    #    name: Red Tie
+    #  - id: PurpleTie
+    #    name: Purple Tie
+    #  - id: BlueTie
+    #    name: Blue Tie
+    #  - id: GreenTie
+    #    name: Green Tie
+    #  - id: GoldTie
+    #    name: Gold Tie
+    #  - id: SpecialTie
+    #    name: Special Tie
