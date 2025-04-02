@@ -114,7 +114,7 @@
                                             </PanelContainer.PanelOverride>
                                             <BoxContainer Orientation="Horizontal">
                                                 <Control HorizontalExpand="True" />
-                                                <Label Text="Location" HorizontalAlignment="Center" />
+                                                <Label Text="{Loc rmc-overwatch-squad-view-location-header}" HorizontalAlignment="Center" />
                                                 <Control HorizontalExpand="True" />
                                             </BoxContainer>
                                         </PanelContainer>

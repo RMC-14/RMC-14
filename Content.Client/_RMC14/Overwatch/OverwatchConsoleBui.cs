@@ -49,7 +49,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
             return;
 
         Window = this.CreatePopOutableWindow<OverwatchConsoleWindow>();
-        Window.OverwatchHeader.SetMarkupPermissive("[color=#88C7FA]OVERWATCH DISABLED - SELECT SQUAD[/color]");
+        Window.OverwatchHeader.SetMarkupPermissive(Loc.GetString("rmc-overwatch-window-title-disabled"));
 
         if (State is OverwatchConsoleBuiState s)
             RefreshState(s);
@@ -353,7 +353,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                         StyleClasses = { "OpenBoth" },
                         Text = "-",
                         ModulateSelfOverride = Color.FromHex("#BB1F1D"),
-                        ToolTip = "Hide marine",
+                        ToolTip = Loc.GetString("rmc-overwatch-squad-view-hide-marine-tooltip"),
                     };
 
                     var promoteButton = new Button
@@ -364,7 +364,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                         StyleClasses = { "OpenBoth" },
                         Text = "^",
                         ModulateSelfOverride = Color.FromHex(GreenColor),
-                        ToolTip = "Promote marine to Squad Leader",
+                        ToolTip = Loc.GetString("rmc-overwatch-squad-view-promote-marine-tooltip"),
                     };
 
                     hideButton.OnPressed += _ =>
@@ -414,7 +414,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
 
                 if (marine.Camera == default)
                 {
-                    row.Name.Label.SetMarkupPermissive($"[color={YellowColor}]{name} (NO CAMERA)[/color]");
+                    row.Name.Label.SetMarkupPermissive(Loc.GetString("rmc-overwatch-squad-view-no-helmet-suffix", ("color", YellowColor), ("name", name)));
                     row.Name.Button.Text = null;
                     row.Name.Button.Disabled = true;
                 }
@@ -454,13 +454,13 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 {
                     row.Buttons.Hide.Text = "+";
                     row.Buttons.Hide.ModulateSelfOverride = Color.FromHex("#248E34");
-                    row.Buttons.Hide.ToolTip = "Show marine";
+                    row.Buttons.Hide.ToolTip = Loc.GetString("rmc-overwatch-squad-view-show-marine-tooltip");
                 }
                 else
                 {
                     row.Buttons.Hide.Text = "-";
                     row.Buttons.Hide.ModulateSelfOverride = Color.FromHex("#BB1F1D");
-                    row.Buttons.Hide.ToolTip = "Hide marine";
+                    row.Buttons.Hide.ToolTip = Loc.GetString("rmc-overwatch-squad-view-hide-marine-tooltip");
                 }
 
                 if (squad.Leader == marine.Id)

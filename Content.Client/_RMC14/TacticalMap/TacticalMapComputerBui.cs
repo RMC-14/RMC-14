@@ -21,7 +21,7 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
         base.Open();
         Window = this.CreatePopOutableWindow<TacticalMapWindow>();
 
-        TabContainer.SetTabTitle(Window.Wrapper.MapTab, "Map");
+        TabContainer.SetTabTitle(Window.Wrapper.MapTab, Loc.GetString("rmc-tactical-map-map-tab-title"));
         TabContainer.SetTabVisible(Window.Wrapper.MapTab, true);
 
         var computer = EntMan.GetComponentOrNull<TacticalMapComputerComponent>(Owner);
@@ -30,7 +30,7 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
             _player.LocalEntity is { } player &&
             skills.HasSkill(player, computer.Skill, computer.SkillLevel))
         {
-            TabContainer.SetTabTitle(Window.Wrapper.CanvasTab, "Canvas");
+            TabContainer.SetTabTitle(Window.Wrapper.CanvasTab, Loc.GetString("rmc-tactical-map-canvas-tab-title"));
             TabContainer.SetTabVisible(Window.Wrapper.CanvasTab, true);
         }
         else

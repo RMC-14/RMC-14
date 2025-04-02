@@ -12,7 +12,7 @@ rmc-overwatch-squad-view-message-squad = Message Squad
 rmc-overwatch-squad-view-squad-roles-label = Squad Roles
 
 rmc-overwatch-squad-view-role-none = None
-rmc-overwatch-squad-view-no-helmet-suffix = (NO HELMET)
+rmc-overwatch-squad-view-no-helmet-suffix = [color={$color}]{$name} (NO CAMERA)[/color]
 
 rmc-overwatch-squad-view-mob-state-conscious = Conscious
 rmc-overwatch-squad-view-mob-state-unconscious = Unconscious

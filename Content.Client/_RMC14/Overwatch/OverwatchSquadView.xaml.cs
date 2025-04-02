@@ -201,7 +201,7 @@ public sealed partial class OverwatchSquadView : Control
         var supplyTimeLeft = NextLaunchAt - time;
         if (supplyTimeLeft > TimeSpan.Zero)
         {
-            CrateStatus.Text = $"[color=#D3B400][bold]Cooldown - {(int)supplyTimeLeft.TotalSeconds} seconds[/bold][/color]";
+            CrateStatus.Text = Loc.GetString("rmc-overwatch-squad-view-status-cooldown", ("seconds", (int)supplyTimeLeft.TotalSeconds));
             LaunchButton.Disabled = true;
         }
         else
@@ -212,14 +212,14 @@ public sealed partial class OverwatchSquadView : Control
         var orbitalTimeLeft = NextOrbitalAt - time;
         if (orbitalTimeLeft > TimeSpan.Zero)
         {
-            OrbitalStatus.Text = $"[color=#D3B400][bold]Cooldown - {(int)orbitalTimeLeft.TotalSeconds} seconds[/bold][/color]";
+            OrbitalStatus.Text = Loc.GetString("rmc-overwatch-squad-view-status-cooldown", ("seconds", (int)orbitalTimeLeft.TotalSeconds));
             OrbitalFireButton.Disabled = true;
         }
         else
         {
             OrbitalStatus.Text = HasOrbital
-                ? "[color=green][bold]Ready[/bold][/color]"
-                : "[color=red][bold]Not ready[/bold][/color]";
+                ? Loc.GetString("rmc-overwatch-squad-view-status-ready")
+                : Loc.GetString("rmc-overwatch-squad-view-status-not-ready");
             OrbitalFireButton.Disabled = false;
         }
     }

@@ -1,6 +1,8 @@
 rmc-tactical-map-map-tab-title = Map
 rmc-tactical-map-canvas-tab-title = Canvas
 
+rmc-tactical-map-show-labels = Show Area Labels
+
 rmc-tactical-map-canvas-options-label = Canvas Options
 rmc-tactical-map-update-canvas-button = Update Canvas
 rmc-tactical-map-clear-canvas-button = Clear Canvas
