@@ -715,6 +715,8 @@
         name: M44 Magnum Sharpshooter Stock
         amount: 2
 
+# CIVILIAN CLOTHING VENDOR
+
 - type: entity
   parent: ColMarTechBase
   id: RMCVendorCivilianClothing

@@ -109,17 +109,17 @@
         name: M40 HSDP Smoke Grenades (x6)
         points: 20
         spawn: 6
-    - name: Extra Flamethrower Tanks
-      entries: [ ]
-      #- id: LargeIncineratorTank
-      #  name: Large Incinerator Tank
-      #  points: 40
-      #- id: LargeIncineratorTankB
-      #  name: Large Incinerator Tank (B) (Green Flame)
-      #  points: 40
-      #- id: LargeIncineratorTankX
-      #  name: Large Incinerator Tank (X) (Blue Flame)
-      #  points: 40
+    #- name: Extra Flamethrower Tanks
+    #  entries:
+    #  - id: LargeIncineratorTank
+    #    name: Large Incinerator Tank
+    #    points: 40
+    #  - id: LargeIncineratorTankB
+    #    name: Large Incinerator Tank (B) (Green Flame)
+    #    points: 40
+    #  - id: LargeIncineratorTankX
+    #    name: Large Incinerator Tank (X) (Blue Flame)
+    #    points: 40
 
 # EQUIPMENT VENDOR
 

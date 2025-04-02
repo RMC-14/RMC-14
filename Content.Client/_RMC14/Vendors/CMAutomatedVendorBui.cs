@@ -60,7 +60,10 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                         if (!_job.MindHasJobWithId(mindId, job.Id))
                             validJob = false;
                         else
+                        {
                             validJob = true;
+                            break;
+                        }
                     }
                 }
 
