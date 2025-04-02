@@ -19,6 +19,18 @@
 
 - type: entity
   parent: RMCArmorVest
+  id: RMCArmorVestBulletproof
+  name: bulletproof vest
+  description: A vest that excels in protecting the wearer against high-velocity solid projectiles.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/bulletproof_vest.rsi
+  - type: CMArmor
+    armor: 15 #30 bullet
+    bio: 20
+
+- type: entity
+  parent: RMCArmorVest
   id: RMCArmorVestFlak
   name: M70 flak jacket
   description: A flak jacket used by dropship pilots to protect themselves while flying in the cockpit. Excels in protecting the wearer against high-velocity solid projectiles.
