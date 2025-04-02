@@ -1,5 +1,4 @@
 using System.Numerics;
-using Content.Shared._RMC14.Weather;
 using Content.Shared.Light.Components;
 using Content.Shared.Weather;
 using Robust.Client.Audio;
@@ -20,7 +19,6 @@ public sealed class WeatherSystem : SharedWeatherSystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly RMCWeatherSystem _rmcWeather = default!;
 
     public override void Initialize()
     {
@@ -75,7 +73,7 @@ public sealed class WeatherSystem : SharedWeatherSystem
                 if (!visited.Add(node.GridIndices))
                     continue;
 
-                if (!_rmcWeather.CanWeatherAffectArea(entXform.GridUid.Value, grid, node, roofComp))
+                if (!CanWeatherAffect(entXform.GridUid.Value, grid, node, roofComp))
                 {
                     // Add neighbors
                     // TODO: Ideally we pick some deterministically random direction and use that
