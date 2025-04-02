@@ -46,6 +46,7 @@
 - files: ["fuel_pump_active.ogg", "fuel_pump_idle.ogg"]
   license: "CC-BY-SA-4.0"
   copyright: "Recorded and mixed by exincore"
+  source: "https://github.com/RMC-14/RMC-14/pull/6056"
 
 - files: ["suitlight_on.ogg"]
   license: "CC-BY-SA-3.0"
