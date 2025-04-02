@@ -63,6 +63,10 @@ public abstract class SharedRoofSystem : EntitySystem
         var roof = grid.Comp2;
         var chunkOrigin = SharedMapSystem.GetChunkIndices(index, RoofComponent.ChunkSize);
 
+        //RMC14 - Check if the area has weather enabled
+        if (_area.IsWeatherEnabled(grid, index))
+            return roof.Color;
+
         if (roof.Data.TryGetValue(chunkOrigin, out var bitMask))
         {
             var chunkRelative = SharedMapSystem.GetChunkRelative(index, RoofComponent.ChunkSize);
