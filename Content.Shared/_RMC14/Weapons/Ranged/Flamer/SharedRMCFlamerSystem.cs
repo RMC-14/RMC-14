@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Fluids;
 using Content.Shared._RMC14.Line;
@@ -9,6 +9,7 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Content.Shared.Temperature;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -27,6 +28,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly LineSystem _line = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -53,6 +55,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
         SubscribeLocalEvent<RMCIgniterComponent, MapInitEvent>(OnIgniterMapInit, after: [typeof(SharedSolutionContainerSystem)]);
         SubscribeLocalEvent<RMCIgniterComponent, UniqueActionEvent>(OnIgniterUniqueAction);
+        SubscribeLocalEvent<RMCIgniterComponent, IsHotEvent>(OnIgniterToggle);
         SubscribeLocalEvent<RMCIgniterComponent, AttemptShootEvent>(OnIgniterAttemptShoot);
     }
 
@@ -164,6 +167,11 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         _appearance.SetData(ent, RMCIgniterVisuals.Ignited, ent.Comp.Enabled);
     }
 
+    private void OnIgniterToggle(Entity<RMCIgniterComponent> ent, ref IsHotEvent args)
+    {
+        args.IsHot = ent.Comp.Enabled;
+    }
+
     protected virtual void OnIgniterAttemptShoot(Entity<RMCIgniterComponent> ent, ref AttemptShootEvent args)
     {
         if (args.Cancelled)
@@ -226,6 +234,8 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
             toCoordinates = fromCoordinates.Offset(normalized * range);
 
         var tiles = _line.DrawLine(fromCoordinates, toCoordinates, flamer.Comp.DelayPer, out _);
+        if (tiles.Count == 0 || !_interaction.InRangeUnobstructed(flamer, tiles[0].Coordinates, 3))
+            return;
 
         ProtoId<ReagentPrototype>? reagent = null;
         if (solutionEnt.Value.Comp.Solution.TryFirstOrNull(out var firstReagent))

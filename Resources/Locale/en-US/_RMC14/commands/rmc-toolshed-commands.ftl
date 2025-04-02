@@ -43,6 +43,7 @@ command-description-requisitions-removebudget = Removes budget from the default 
 
 command-description-intel-addpoints = Adds points to the default Intel tech tree.
 command-description-intel-removepoints = Removes points from the default Intel tech tree.
+command-description-intel-spawnintel = Spawns intel on all initialized maps.
 
 command-description-prototypecontains = Filters entities by whether or not their prototype ID contains the given text.
 
@@ -61,3 +62,5 @@ command-description-xenomature = Instantly matures a xeno. Applicable to the Que
 command-description-weedkiller = Runs weed killer on the current location's area. This kills all weeds and resin structures nearby.
 
 command-description-withxenotier = Filters entities or entity prototypes to those of a specific xenonid tier.
+
+command-description-spawnallmapinserts = Spawns all map inserts, with forced guaranteed spawn probability.

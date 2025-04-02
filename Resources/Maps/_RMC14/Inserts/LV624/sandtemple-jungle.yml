@@ -1,0 +1,1163 @@
+meta:
+  format: 6
+  postmapinit: false
+tilemap:
+  0: Space
+  198: CMFloorPlating
+  7: CMPlanetDesert
+  2: CMPlanetGrass1
+  1: CMPlanetGrass2
+  14: CMPlanetGrassDirtEast
+  13: CMPlanetGrassDirtNE
+  12: CMPlanetGrassDirtNE2
+  5: CMPlanetGrassDirtNW
+  8: CMPlanetGrassDirtNW2
+  9: CMPlanetGrassDirtNorth
+  10: CMPlanetGrassDirtSE
+  11: CMPlanetGrassDirtSE2
+  3: CMPlanetGrassDirtSW
+  6: CMPlanetGrassDirtSouth
+  4: CMPlanetGrassDirtWest
+entities:
+- proto: ""
+  entities:
+  - uid: 1
+    components:
+    - type: MetaData
+      name: Map Entity
+    - type: Transform
+    - type: MapGrid
+      chunks:
+        0,0:
+          ind: 0,0
+          tiles: AQAAAAAAAQAAAAAAAQAAAAAAAgAAAAAAAQAAAAAAAQAAAAAAAgAAAAAAAgAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAAAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAwAAAAAABgAAAAAABgAAAAAACgAAAAAAAgAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAgAAAAAAAgAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAgAAAAAABAAAAAAABwAAAAAABwAAAAAACwAAAAAACgAAAAAAAgAAAAAAAQAAAAAAAQAAAAAAAgAAAAAAAQAAAAAAAgAAAAAAAgAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAABAAAAAAABwAAAAAABwAAAAAABwAAAAAADgAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAABQAAAAAACAAAAAAABwAAAAAADAAAAAAADQAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAQAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAABQAAAAAACQAAAAAADQAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAQAAAAAAAQAAAAAAAAAAAAAAAgAAAAAAAgAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAAAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAAAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAQAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAQAAAAAAAQAAAAAAAgAAAAAAAgAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAQAAAAAAAgAAAAAAAgAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAQAAAAAAAgAAAAAAAgAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAQAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAQAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAQAAAAAAAQAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAQAAAAAAAgAAAAAAAgAAAAAAAgAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          version: 6
+    - type: Broadphase
+    - type: Physics
+      bodyStatus: InAir
+      angularDamping: 0.05
+      linearDamping: 0.05
+      fixedRotation: False
+      bodyType: Dynamic
+    - type: Fixtures
+      fixtures: {}
+    - type: OccluderTree
+    - type: SpreaderGrid
+    - type: Shuttle
+    - type: GridPathfinding
+    - type: Gravity
+      gravityShakeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/alert.ogg
+    - type: DecalGrid
+      chunkCollection:
+        version: 2
+        nodes: []
+    - type: GridAtmosphere
+      version: 2
+      data:
+        chunkSize: 4
+    - type: GasTileOverlay
+    - type: RadiationGridResistance
+    - type: AreaGrid
+      labels: {}
+      areaEntities: {}
+      colors: {}
+      areas:
+        4,5: RMCAreaLv624GroundJungleSouthWestJungle
+        5,5: RMCAreaLv624GroundJungleSouthWestJungle
+        4,4: RMCAreaLv624GroundJungleSouthWestJungle
+        0,13: RMCAreaLv624GroundJungleSouthWestJungle
+        1,13: RMCAreaLv624GroundJungleSouthWestJungle
+        2,13: RMCAreaLv624GroundJungleSouthWestJungle
+        3,13: RMCAreaLv624GroundJungleSouthWestJungle
+        4,13: RMCAreaLv624GroundJungleSouthWestJungle
+        5,13: RMCAreaLv624GroundJungleSouthWestJungle
+        6,13: RMCAreaLv624GroundJungleSouthWestJungle
+        7,13: RMCAreaLv624GroundJungleSouthWestJungle
+        8,13: RMCAreaLv624GroundJungleSouthWestJungle
+        9,13: RMCAreaLv624GroundJungleSouthWestJungle
+        10,13: RMCAreaLv624GroundJungleSouthWestJungle
+        12,13: RMCAreaLv624GroundJungleSouthWestJungle
+        11,13: RMCAreaLv624GroundJungleSouthWestJungle
+        13,13: RMCAreaLv624GroundJungleSouthWestJungle
+        14,13: RMCAreaLv624GroundJungleSouthWestJungle
+        14,12: RMCAreaLv624GroundJungleSouthWestJungle
+        14,11: RMCAreaLv624GroundJungleSouthWestJungle
+        14,10: RMCAreaLv624GroundJungleSouthWestJungle
+        14,9: RMCAreaLv624GroundJungleSouthWestJungle
+        14,8: RMCAreaLv624GroundJungleSouthWestJungle
+        14,7: RMCAreaLv624GroundJungleSouthWestJungle
+        14,6: RMCAreaLv624GroundJungleSouthWestJungle
+        14,5: RMCAreaLv624GroundJungleSouthWestJungle
+        14,4: RMCAreaLv624GroundJungleSouthWestJungle
+        14,3: RMCAreaLv624GroundJungleSouthWestJungle
+        14,2: RMCAreaLv624GroundJungleSouthWestJungle
+        14,1: RMCAreaLv624GroundJungleSouthWestJungle
+        14,0: RMCAreaLv624GroundJungleSouthWestJungle
+        13,0: RMCAreaLv624GroundJungleSouthWestJungle
+        12,0: RMCAreaLv624GroundJungleSouthWestJungle
+        11,0: RMCAreaLv624GroundJungleSouthWestJungle
+        10,0: RMCAreaLv624GroundJungleSouthWestJungle
+        9,0: RMCAreaLv624GroundJungleSouthWestJungle
+        8,0: RMCAreaLv624GroundJungleSouthWestJungle
+        7,0: RMCAreaLv624GroundJungleSouthWestJungle
+        6,0: RMCAreaLv624GroundJungleSouthWestJungle
+        5,0: RMCAreaLv624GroundJungleSouthWestJungle
+        4,0: RMCAreaLv624GroundJungleSouthWestJungle
+        3,0: RMCAreaLv624GroundJungleSouthWestJungle
+        2,0: RMCAreaLv624GroundJungleSouthWestJungle
+        1,0: RMCAreaLv624GroundJungleSouthWestJungle
+        0,0: RMCAreaLv624GroundJungleSouthWestJungle
+        0,1: RMCAreaLv624GroundJungleSouthWestJungle
+        0,2: RMCAreaLv624GroundJungleSouthWestJungle
+        0,3: RMCAreaLv624GroundJungleSouthWestJungle
+        0,4: RMCAreaLv624GroundJungleSouthWestJungle
+        0,5: RMCAreaLv624GroundJungleSouthWestJungle
+        0,6: RMCAreaLv624GroundJungleSouthWestJungle
+        0,7: RMCAreaLv624GroundJungleSouthWestJungle
+        0,8: RMCAreaLv624GroundJungleSouthWestJungle
+        0,9: RMCAreaLv624GroundJungleSouthWestJungle
+        0,10: RMCAreaLv624GroundJungleSouthWestJungle
+        0,11: RMCAreaLv624GroundJungleSouthWestJungle
+        0,12: RMCAreaLv624GroundJungleSouthWestJungle
+        1,12: RMCAreaLv624GroundJungleSouthWestJungle
+        2,12: RMCAreaLv624GroundJungleSouthWestJungle
+        3,12: RMCAreaLv624GroundJungleSouthWestJungle
+        4,12: RMCAreaLv624GroundJungleSouthWestJungle
+        5,12: RMCAreaLv624GroundJungleSouthWestJungle
+        6,12: RMCAreaLv624GroundJungleSouthWestJungle
+        7,12: RMCAreaLv624GroundJungleSouthWestJungle
+        8,12: RMCAreaLv624GroundJungleSouthWestJungle
+        9,12: RMCAreaLv624GroundJungleSouthWestJungle
+        10,12: RMCAreaLv624GroundJungleSouthWestJungle
+        11,12: RMCAreaLv624GroundJungleSouthWestJungle
+        12,12: RMCAreaLv624GroundJungleSouthWestJungle
+        13,12: RMCAreaLv624GroundJungleSouthWestJungle
+        13,11: RMCAreaLv624GroundJungleSouthWestJungle
+        13,10: RMCAreaLv624GroundJungleSouthWestJungle
+        13,9: RMCAreaLv624GroundJungleSouthWestJungle
+        13,8: RMCAreaLv624GroundJungleSouthWestJungle
+        13,7: RMCAreaLv624GroundJungleSouthWestJungle
+        13,6: RMCAreaLv624GroundJungleSouthWestJungle
+        13,5: RMCAreaLv624GroundJungleSouthWestJungle
+        13,4: RMCAreaLv624GroundJungleSouthWestJungle
+        13,3: RMCAreaLv624GroundJungleSouthWestJungle
+        13,2: RMCAreaLv624GroundJungleSouthWestJungle
+        13,1: RMCAreaLv624GroundJungleSouthWestJungle
+        12,1: RMCAreaLv624GroundJungleSouthWestJungle
+        11,1: RMCAreaLv624GroundJungleSouthWestJungle
+        10,1: RMCAreaLv624GroundJungleSouthWestJungle
+        9,1: RMCAreaLv624GroundJungleSouthWestJungle
+        8,1: RMCAreaLv624GroundJungleSouthWestJungle
+        7,1: RMCAreaLv624GroundJungleSouthWestJungle
+        6,1: RMCAreaLv624GroundJungleSouthWestJungle
+        5,1: RMCAreaLv624GroundJungleSouthWestJungle
+        4,1: RMCAreaLv624GroundJungleSouthWestJungle
+        3,1: RMCAreaLv624GroundJungleSouthWestJungle
+        2,1: RMCAreaLv624GroundJungleSouthWestJungle
+        1,1: RMCAreaLv624GroundJungleSouthWestJungle
+        1,2: RMCAreaLv624GroundJungleSouthWestJungle
+        1,3: RMCAreaLv624GroundJungleSouthWestJungle
+        1,4: RMCAreaLv624GroundJungleSouthWestJungle
+        1,5: RMCAreaLv624GroundJungleSouthWestJungle
+        1,6: RMCAreaLv624GroundJungleSouthWestJungle
+        1,7: RMCAreaLv624GroundJungleSouthWestJungle
+        1,8: RMCAreaLv624GroundJungleSouthWestJungle
+        1,9: RMCAreaLv624GroundJungleSouthWestJungle
+        1,10: RMCAreaLv624GroundJungleSouthWestJungle
+        1,11: RMCAreaLv624GroundJungleSouthWestJungle
+        2,11: RMCAreaLv624GroundJungleSouthWestJungle
+        3,11: RMCAreaLv624GroundJungleSouthWestJungle
+        4,11: RMCAreaLv624GroundJungleSouthWestJungle
+        5,11: RMCAreaLv624GroundJungleSouthWestJungle
+        6,11: RMCAreaLv624GroundJungleSouthWestJungle
+        7,11: RMCAreaLv624GroundJungleSouthWestJungle
+        8,11: RMCAreaLv624GroundJungleSouthWestJungle
+        9,11: RMCAreaLv624GroundJungleSouthWestJungle
+        10,11: RMCAreaLv624GroundJungleSouthWestJungle
+        11,11: RMCAreaLv624GroundJungleSouthWestJungle
+        12,11: RMCAreaLv624GroundJungleSouthWestJungle
+        12,10: RMCAreaLv624GroundJungleSouthWestJungle
+        12,9: RMCAreaLv624GroundJungleSouthWestJungle
+        12,8: RMCAreaLv624GroundJungleSouthWestJungle
+        12,7: RMCAreaLv624GroundJungleSouthWestJungle
+        12,6: RMCAreaLv624GroundJungleSouthWestJungle
+        12,5: RMCAreaLv624GroundJungleSouthWestJungle
+        12,4: RMCAreaLv624GroundJungleSouthWestJungle
+        12,3: RMCAreaLv624GroundJungleSouthWestJungle
+        12,2: RMCAreaLv624GroundJungleSouthWestJungle
+        11,2: RMCAreaLv624GroundJungleSouthWestJungle
+        10,2: RMCAreaLv624GroundJungleSouthWestJungle
+        9,2: RMCAreaLv624GroundJungleSouthWestJungle
+        8,2: RMCAreaLv624GroundJungleSouthWestJungle
+        7,2: RMCAreaLv624GroundJungleSouthWestJungle
+        6,2: RMCAreaLv624GroundJungleSouthWestJungle
+        5,2: RMCAreaLv624GroundJungleSouthWestJungle
+        4,2: RMCAreaLv624GroundJungleSouthWestJungle
+        3,2: RMCAreaLv624GroundJungleSouthWestJungle
+        2,2: RMCAreaLv624GroundJungleSouthWestJungle
+        2,3: RMCAreaLv624GroundJungleSouthWestJungle
+        2,4: RMCAreaLv624GroundJungleSouthWestJungle
+        2,5: RMCAreaLv624GroundJungleSouthWestJungle
+        2,6: RMCAreaLv624GroundJungleSouthWestJungle
+        2,7: RMCAreaLv624GroundJungleSouthWestJungle
+        2,8: RMCAreaLv624GroundJungleSouthWestJungle
+        2,9: RMCAreaLv624GroundJungleSouthWestJungle
+        2,10: RMCAreaLv624GroundJungleSouthWestJungle
+        3,10: RMCAreaLv624GroundJungleSouthWestJungle
+        4,10: RMCAreaLv624GroundJungleSouthWestJungle
+        5,10: RMCAreaLv624GroundJungleSouthWestJungle
+        6,10: RMCAreaLv624GroundJungleSouthWestJungle
+        7,10: RMCAreaLv624GroundJungleSouthWestJungle
+        8,10: RMCAreaLv624GroundJungleSouthWestJungle
+        9,10: RMCAreaLv624GroundJungleSouthWestJungle
+        10,10: RMCAreaLv624GroundJungleSouthWestJungle
+        11,10: RMCAreaLv624GroundJungleSouthWestJungle
+        11,9: RMCAreaLv624GroundJungleSouthWestJungle
+        11,8: RMCAreaLv624GroundJungleSouthWestJungle
+        11,7: RMCAreaLv624GroundJungleSouthWestJungle
+        11,6: RMCAreaLv624GroundJungleSouthWestJungle
+        11,5: RMCAreaLv624GroundJungleSouthWestJungle
+        11,4: RMCAreaLv624GroundJungleSouthWestJungle
+        11,3: RMCAreaLv624GroundJungleSouthWestJungle
+        10,3: RMCAreaLv624GroundJungleSouthWestJungle
+        9,3: RMCAreaLv624GroundJungleSouthWestJungle
+        8,3: RMCAreaLv624GroundJungleSouthWestJungle
+        7,3: RMCAreaLv624GroundJungleSouthWestJungle
+        6,3: RMCAreaLv624GroundJungleSouthWestJungle
+        5,3: RMCAreaLv624GroundJungleSouthWestJungle
+        4,3: RMCAreaLv624GroundJungleSouthWestJungle
+        3,3: RMCAreaLv624GroundJungleSouthWestJungle
+        3,4: RMCAreaLv624GroundJungleSouthWestJungle
+        3,5: RMCAreaLv624GroundJungleSouthWestJungle
+        3,6: RMCAreaLv624GroundJungleSouthWestJungle
+        3,7: RMCAreaLv624GroundJungleSouthWestJungle
+        3,8: RMCAreaLv624GroundJungleSouthWestJungle
+        3,9: RMCAreaLv624GroundJungleSouthWestJungle
+        4,9: RMCAreaLv624GroundJungleSouthWestJungle
+        5,9: RMCAreaLv624GroundJungleSouthWestJungle
+        6,9: RMCAreaLv624GroundJungleSouthWestJungle
+        7,9: RMCAreaLv624GroundJungleSouthWestJungle
+        8,9: RMCAreaLv624GroundJungleSouthWestJungle
+        9,9: RMCAreaLv624GroundJungleSouthWestJungle
+        10,9: RMCAreaLv624GroundJungleSouthWestJungle
+        10,8: RMCAreaLv624GroundJungleSouthWestJungle
+        10,7: RMCAreaLv624GroundJungleSouthWestJungle
+        10,6: RMCAreaLv624GroundJungleSouthWestJungle
+        10,5: RMCAreaLv624GroundJungleSouthWestJungle
+        10,4: RMCAreaLv624GroundJungleSouthWestJungle
+        9,4: RMCAreaLv624GroundJungleSouthWestJungle
+        7,4: RMCAreaLv624GroundJungleSouthWestJungle
+        8,4: RMCAreaLv624GroundJungleSouthWestJungle
+        6,4: RMCAreaLv624GroundJungleSouthWestJungle
+        5,4: RMCAreaLv624GroundJungleSouthWestJungle
+        4,6: RMCAreaLv624GroundJungleSouthWestJungle
+        4,7: RMCAreaLv624GroundJungleSouthWestJungle
+        4,8: RMCAreaLv624GroundJungleSouthWestJungle
+        5,8: RMCAreaLv624GroundJungleSouthWestJungle
+        6,8: RMCAreaLv624GroundJungleSouthWestJungle
+        7,8: RMCAreaLv624GroundJungleSouthWestJungle
+        8,8: RMCAreaLv624GroundJungleSouthWestJungle
+        9,8: RMCAreaLv624GroundJungleSouthWestJungle
+        9,7: RMCAreaLv624GroundJungleSouthWestJungle
+        9,6: RMCAreaLv624GroundJungleSouthWestJungle
+        9,5: RMCAreaLv624GroundJungleSouthWestJungle
+        8,5: RMCAreaLv624GroundJungleSouthWestJungle
+        7,5: RMCAreaLv624GroundJungleSouthWestJungle
+        6,5: RMCAreaLv624GroundJungleSouthWestJungle
+        5,6: RMCAreaLv624GroundJungleSouthWestJungle
+        5,7: RMCAreaLv624GroundJungleSouthWestJungle
+        7,7: RMCAreaLv624GroundJungleSouthWestJungle
+        6,7: RMCAreaLv624GroundJungleSouthWestJungle
+        8,7: RMCAreaLv624GroundJungleSouthWestJungle
+        8,6: RMCAreaLv624GroundJungleSouthWestJungle
+        7,6: RMCAreaLv624GroundJungleSouthWestJungle
+        6,6: RMCAreaLv624GroundJungleSouthWestJungle
+- proto: CMVinesHeavy
+  entities:
+  - uid: 65
+    components:
+    - type: Transform
+      pos: 0.5,12.5
+      parent: 1
+  - uid: 66
+    components:
+    - type: Transform
+      pos: 2.5,13.5
+      parent: 1
+  - uid: 67
+    components:
+    - type: Transform
+      pos: 4.5,12.5
+      parent: 1
+  - uid: 80
+    components:
+    - type: Transform
+      pos: 3.5,9.5
+      parent: 1
+  - uid: 83
+    components:
+    - type: Transform
+      pos: 1.5,1.5
+      parent: 1
+  - uid: 84
+    components:
+    - type: Transform
+      pos: 0.5,2.5
+      parent: 1
+  - uid: 85
+    components:
+    - type: Transform
+      pos: 1.5,2.5
+      parent: 1
+  - uid: 87
+    components:
+    - type: Transform
+      pos: 2.5,2.5
+      parent: 1
+  - uid: 88
+    components:
+    - type: Transform
+      pos: 3.5,1.5
+      parent: 1
+  - uid: 89
+    components:
+    - type: Transform
+      pos: 4.5,0.5
+      parent: 1
+  - uid: 101
+    components:
+    - type: Transform
+      pos: 0.5,7.5
+      parent: 1
+  - uid: 102
+    components:
+    - type: Transform
+      pos: 1.5,7.5
+      parent: 1
+  - uid: 103
+    components:
+    - type: Transform
+      pos: 1.5,8.5
+      parent: 1
+  - uid: 116
+    components:
+    - type: Transform
+      pos: 13.5,10.5
+      parent: 1
+  - uid: 117
+    components:
+    - type: Transform
+      pos: 13.5,9.5
+      parent: 1
+  - uid: 118
+    components:
+    - type: Transform
+      pos: 14.5,9.5
+      parent: 1
+  - uid: 119
+    components:
+    - type: Transform
+      pos: 14.5,8.5
+      parent: 1
+- proto: CMVinesLight
+  entities:
+  - uid: 68
+    components:
+    - type: Transform
+      pos: 1.5,13.5
+      parent: 1
+  - uid: 69
+    components:
+    - type: Transform
+      pos: 1.5,12.5
+      parent: 1
+  - uid: 70
+    components:
+    - type: Transform
+      pos: 2.5,12.5
+      parent: 1
+  - uid: 71
+    components:
+    - type: Transform
+      pos: 0.5,11.5
+      parent: 1
+  - uid: 72
+    components:
+    - type: Transform
+      pos: 1.5,11.5
+      parent: 1
+  - uid: 73
+    components:
+    - type: Transform
+      pos: 2.5,11.5
+      parent: 1
+  - uid: 74
+    components:
+    - type: Transform
+      pos: 3.5,13.5
+      parent: 1
+  - uid: 75
+    components:
+    - type: Transform
+      pos: 3.5,12.5
+      parent: 1
+  - uid: 76
+    components:
+    - type: Transform
+      pos: 3.5,11.5
+      parent: 1
+  - uid: 77
+    components:
+    - type: Transform
+      pos: 4.5,11.5
+      parent: 1
+  - uid: 78
+    components:
+    - type: Transform
+      pos: 5.5,11.5
+      parent: 1
+  - uid: 79
+    components:
+    - type: Transform
+      pos: 3.5,10.5
+      parent: 1
+  - uid: 81
+    components:
+    - type: Transform
+      pos: 2.5,9.5
+      parent: 1
+  - uid: 82
+    components:
+    - type: Transform
+      pos: 1.5,0.5
+      parent: 1
+  - uid: 86
+    components:
+    - type: Transform
+      pos: 0.5,1.5
+      parent: 1
+  - uid: 90
+    components:
+    - type: Transform
+      pos: 3.5,0.5
+      parent: 1
+  - uid: 91
+    components:
+    - type: Transform
+      pos: 2.5,0.5
+      parent: 1
+  - uid: 92
+    components:
+    - type: Transform
+      pos: 2.5,1.5
+      parent: 1
+  - uid: 93
+    components:
+    - type: Transform
+      pos: 1.5,3.5
+      parent: 1
+  - uid: 94
+    components:
+    - type: Transform
+      pos: 2.5,3.5
+      parent: 1
+  - uid: 95
+    components:
+    - type: Transform
+      pos: 3.5,2.5
+      parent: 1
+  - uid: 96
+    components:
+    - type: Transform
+      pos: 4.5,1.5
+      parent: 1
+  - uid: 97
+    components:
+    - type: Transform
+      pos: 5.5,1.5
+      parent: 1
+  - uid: 98
+    components:
+    - type: Transform
+      pos: 1.5,5.5
+      parent: 1
+  - uid: 99
+    components:
+    - type: Transform
+      pos: 1.5,6.5
+      parent: 1
+  - uid: 100
+    components:
+    - type: Transform
+      pos: 0.5,6.5
+      parent: 1
+  - uid: 104
+    components:
+    - type: Transform
+      pos: 0.5,8.5
+      parent: 1
+  - uid: 105
+    components:
+    - type: Transform
+      pos: 1.5,9.5
+      parent: 1
+  - uid: 106
+    components:
+    - type: Transform
+      pos: 6.5,13.5
+      parent: 1
+  - uid: 107
+    components:
+    - type: Transform
+      pos: 8.5,13.5
+      parent: 1
+  - uid: 108
+    components:
+    - type: Transform
+      pos: 9.5,13.5
+      parent: 1
+  - uid: 109
+    components:
+    - type: Transform
+      pos: 12.5,10.5
+      parent: 1
+  - uid: 110
+    components:
+    - type: Transform
+      pos: 12.5,13.5
+      parent: 1
+  - uid: 111
+    components:
+    - type: Transform
+      pos: 13.5,13.5
+      parent: 1
+  - uid: 112
+    components:
+    - type: Transform
+      pos: 12.5,11.5
+      parent: 1
+  - uid: 113
+    components:
+    - type: Transform
+      pos: 11.5,13.5
+      parent: 1
+  - uid: 114
+    components:
+    - type: Transform
+      pos: 12.5,9.5
+      parent: 1
+  - uid: 115
+    components:
+    - type: Transform
+      pos: 11.5,9.5
+      parent: 1
+  - uid: 120
+    components:
+    - type: Transform
+      pos: 13.5,8.5
+      parent: 1
+- proto: CMWallJungle
+  entities:
+  - uid: 3
+    components:
+    - type: Transform
+      pos: 0.5,0.5
+      parent: 1
+  - uid: 4
+    components:
+    - type: Transform
+      pos: 4.5,0.5
+      parent: 1
+  - uid: 5
+    components:
+    - type: Transform
+      pos: 5.5,0.5
+      parent: 1
+  - uid: 6
+    components:
+    - type: Transform
+      pos: 8.5,0.5
+      parent: 1
+  - uid: 7
+    components:
+    - type: Transform
+      pos: 8.5,1.5
+      parent: 1
+  - uid: 8
+    components:
+    - type: Transform
+      pos: 9.5,1.5
+      parent: 1
+  - uid: 9
+    components:
+    - type: Transform
+      pos: 9.5,2.5
+      parent: 1
+  - uid: 10
+    components:
+    - type: Transform
+      pos: 9.5,3.5
+      parent: 1
+  - uid: 11
+    components:
+    - type: Transform
+      pos: 8.5,3.5
+      parent: 1
+  - uid: 12
+    components:
+    - type: Transform
+      pos: 10.5,3.5
+      parent: 1
+  - uid: 13
+    components:
+    - type: Transform
+      pos: 10.5,2.5
+      parent: 1
+  - uid: 14
+    components:
+    - type: Transform
+      pos: 10.5,1.5
+      parent: 1
+  - uid: 15
+    components:
+    - type: Transform
+      pos: 10.5,0.5
+      parent: 1
+  - uid: 16
+    components:
+    - type: Transform
+      pos: 9.5,0.5
+      parent: 1
+  - uid: 17
+    components:
+    - type: Transform
+      pos: 11.5,0.5
+      parent: 1
+  - uid: 18
+    components:
+    - type: Transform
+      pos: 12.5,0.5
+      parent: 1
+  - uid: 19
+    components:
+    - type: Transform
+      pos: 13.5,0.5
+      parent: 1
+  - uid: 20
+    components:
+    - type: Transform
+      pos: 14.5,0.5
+      parent: 1
+  - uid: 21
+    components:
+    - type: Transform
+      pos: 11.5,1.5
+      parent: 1
+  - uid: 22
+    components:
+    - type: Transform
+      pos: 14.5,3.5
+      parent: 1
+  - uid: 23
+    components:
+    - type: Transform
+      pos: 14.5,4.5
+      parent: 1
+  - uid: 24
+    components:
+    - type: Transform
+      pos: 12.5,8.5
+      parent: 1
+  - uid: 25
+    components:
+    - type: Transform
+      pos: 11.5,8.5
+      parent: 1
+  - uid: 26
+    components:
+    - type: Transform
+      pos: 11.5,7.5
+      parent: 1
+  - uid: 27
+    components:
+    - type: Transform
+      pos: 12.5,7.5
+      parent: 1
+  - uid: 28
+    components:
+    - type: Transform
+      pos: 12.5,6.5
+      parent: 1
+  - uid: 29
+    components:
+    - type: Transform
+      pos: 13.5,6.5
+      parent: 1
+  - uid: 30
+    components:
+    - type: Transform
+      pos: 13.5,7.5
+      parent: 1
+  - uid: 31
+    components:
+    - type: Transform
+      pos: 14.5,7.5
+      parent: 1
+  - uid: 32
+    components:
+    - type: Transform
+      pos: 14.5,6.5
+      parent: 1
+  - uid: 33
+    components:
+    - type: Transform
+      pos: 14.5,5.5
+      parent: 1
+  - uid: 34
+    components:
+    - type: Transform
+      pos: 13.5,5.5
+      parent: 1
+  - uid: 35
+    components:
+    - type: Transform
+      pos: 13.5,4.5
+      parent: 1
+  - uid: 36
+    components:
+    - type: Transform
+      pos: 13.5,11.5
+      parent: 1
+  - uid: 37
+    components:
+    - type: Transform
+      pos: 14.5,11.5
+      parent: 1
+  - uid: 38
+    components:
+    - type: Transform
+      pos: 14.5,12.5
+      parent: 1
+  - uid: 39
+    components:
+    - type: Transform
+      pos: 14.5,13.5
+      parent: 1
+  - uid: 40
+    components:
+    - type: Transform
+      pos: 10.5,13.5
+      parent: 1
+  - uid: 41
+    components:
+    - type: Transform
+      pos: 5.5,13.5
+      parent: 1
+  - uid: 42
+    components:
+    - type: Transform
+      pos: 4.5,13.5
+      parent: 1
+  - uid: 43
+    components:
+    - type: Transform
+      pos: 4.5,11.5
+      parent: 1
+  - uid: 44
+    components:
+    - type: Transform
+      pos: 3.5,9.5
+      parent: 1
+  - uid: 45
+    components:
+    - type: Transform
+      pos: 2.5,9.5
+      parent: 1
+  - uid: 46
+    components:
+    - type: Transform
+      pos: 1.5,9.5
+      parent: 1
+  - uid: 47
+    components:
+    - type: Transform
+      pos: 0.5,9.5
+      parent: 1
+  - uid: 48
+    components:
+    - type: Transform
+      pos: 0.5,10.5
+      parent: 1
+  - uid: 49
+    components:
+    - type: Transform
+      pos: 0.5,11.5
+      parent: 1
+  - uid: 50
+    components:
+    - type: Transform
+      pos: 1.5,10.5
+      parent: 1
+  - uid: 51
+    components:
+    - type: Transform
+      pos: 2.5,10.5
+      parent: 1
+  - uid: 52
+    components:
+    - type: Transform
+      pos: 0.5,5.5
+      parent: 1
+  - uid: 53
+    components:
+    - type: Transform
+      pos: 0.5,4.5
+      parent: 1
+  - uid: 54
+    components:
+    - type: Transform
+      pos: 0.5,2.5
+      parent: 1
+  - uid: 55
+    components:
+    - type: Transform
+      pos: 0.5,3.5
+      parent: 1
+  - uid: 56
+    components:
+    - type: Transform
+      pos: 1.5,3.5
+      parent: 1
+  - uid: 57
+    components:
+    - type: Transform
+      pos: 1.5,4.5
+      parent: 1
+  - uid: 58
+    components:
+    - type: Transform
+      pos: 2.5,3.5
+      parent: 1
+  - uid: 59
+    components:
+    - type: Transform
+      pos: 2.5,4.5
+      parent: 1
+  - uid: 60
+    components:
+    - type: Transform
+      pos: 2.5,5.5
+      parent: 1
+  - uid: 61
+    components:
+    - type: Transform
+      pos: 2.5,6.5
+      parent: 1
+  - uid: 62
+    components:
+    - type: Transform
+      pos: 3.5,6.5
+      parent: 1
+  - uid: 63
+    components:
+    - type: Transform
+      pos: 4.5,6.5
+      parent: 1
+  - uid: 64
+    components:
+    - type: Transform
+      pos: 3.5,5.5
+      parent: 1
+- proto: RMCAlienTree01
+  entities:
+  - uid: 121
+    components:
+    - type: Transform
+      pos: 7.458003,13.239284
+      parent: 1
+- proto: RMCBushd3
+  entities:
+  - uid: 124
+    components:
+    - type: Transform
+      pos: 14.5,10.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+  - uid: 129
+    components:
+    - type: Transform
+      pos: 11.5,4.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: RMCBushe3
+  entities:
+  - uid: 128
+    components:
+    - type: Transform
+      pos: 10.5,6.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: RMCBushf3
+  entities:
+  - uid: 123
+    components:
+    - type: Transform
+      pos: 13.5,12.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: RMCBushg1
+  entities:
+  - uid: 122
+    components:
+    - type: Transform
+      pos: 6.5,12.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: RMCBushj1
+  entities:
+  - uid: 130
+    components:
+    - type: Transform
+      pos: 7.5,0.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: RMCBushl1
+  entities:
+  - uid: 131
+    components:
+    - type: Transform
+      pos: 2.5,7.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: RMCFlowersy2
+  entities:
+  - uid: 125
+    components:
+    - type: Transform
+      pos: 10.5,12.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: RMCGrassc4
+  entities:
+  - uid: 127
+    components:
+    - type: Transform
+      pos: 13.5,2.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: RMCGrasse2
+  entities:
+  - uid: 126
+    components:
+    - type: Transform
+      pos: 10.5,11.5
+      parent: 1
+    - type: Fixtures
+      fixtures: {}
+- proto: RMCGrassTallCornerJungle
+  entities:
+  - uid: 133
+    components:
+    - type: Transform
+      pos: 6.5,11.5
+      parent: 1
+  - uid: 134
+    components:
+    - type: Transform
+      pos: 5.5,10.5
+      parent: 1
+  - uid: 135
+    components:
+    - type: Transform
+      pos: 4.5,9.5
+      parent: 1
+  - uid: 136
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,8.5
+      parent: 1
+  - uid: 137
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 8.5,11.5
+      parent: 1
+  - uid: 138
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 10.5,10.5
+      parent: 1
+  - uid: 139
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 10.5,8.5
+      parent: 1
+  - uid: 147
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 9.5,5.5
+      parent: 1
+  - uid: 148
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 7.5,5.5
+      parent: 1
+  - uid: 149
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 6.5,6.5
+      parent: 1
+- proto: RMCGrassTallJungle
+  entities:
+  - uid: 150
+    components:
+    - type: Transform
+      pos: 7.5,6.5
+      parent: 1
+  - uid: 151
+    components:
+    - type: Transform
+      pos: 8.5,6.5
+      parent: 1
+  - uid: 152
+    components:
+    - type: Transform
+      pos: 8.5,7.5
+      parent: 1
+  - uid: 153
+    components:
+    - type: Transform
+      pos: 7.5,7.5
+      parent: 1
+  - uid: 154
+    components:
+    - type: Transform
+      pos: 6.5,8.5
+      parent: 1
+  - uid: 155
+    components:
+    - type: Transform
+      pos: 7.5,8.5
+      parent: 1
+  - uid: 156
+    components:
+    - type: Transform
+      pos: 8.5,8.5
+      parent: 1
+  - uid: 157
+    components:
+    - type: Transform
+      pos: 9.5,8.5
+      parent: 1
+  - uid: 158
+    components:
+    - type: Transform
+      pos: 9.5,9.5
+      parent: 1
+  - uid: 159
+    components:
+    - type: Transform
+      pos: 8.5,9.5
+      parent: 1
+  - uid: 160
+    components:
+    - type: Transform
+      pos: 8.5,10.5
+      parent: 1
+  - uid: 161
+    components:
+    - type: Transform
+      pos: 7.5,10.5
+      parent: 1
+  - uid: 162
+    components:
+    - type: Transform
+      pos: 6.5,10.5
+      parent: 1
+  - uid: 163
+    components:
+    - type: Transform
+      pos: 6.5,9.5
+      parent: 1
+  - uid: 164
+    components:
+    - type: Transform
+      pos: 5.5,9.5
+      parent: 1
+  - uid: 165
+    components:
+    - type: Transform
+      pos: 7.5,9.5
+      parent: 1
+- proto: RMCGrassTallSidesJungle
+  entities:
+  - uid: 132
+    components:
+    - type: Transform
+      pos: 7.5,11.5
+      parent: 1
+  - uid: 140
+    components:
+    - type: Transform
+      pos: 9.5,10.5
+      parent: 1
+  - uid: 141
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 10.5,9.5
+      parent: 1
+  - uid: 142
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 9.5,7.5
+      parent: 1
+  - uid: 143
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 9.5,6.5
+      parent: 1
+  - uid: 144
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 8.5,5.5
+      parent: 1
+  - uid: 145
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 6.5,7.5
+      parent: 1
+  - uid: 146
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 5.5,8.5
+      parent: 1
+- proto: RMCSpawnerIntelFar
+  entities:
+  - uid: 166
+    components:
+    - type: Transform
+      pos: 6.5,7.5
+      parent: 1
+...

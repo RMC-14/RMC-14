@@ -1,14 +1,14 @@
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Audio;
 
 namespace Content.Shared._RMC14.Xenonids.Pierce;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-
+[Access(typeof(XenoPierceSystem))]
 public sealed partial class XenoPierceComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -18,7 +18,7 @@ public sealed partial class XenoPierceComponent : Component
     public int AP = 20;
 
     [DataField, AutoNetworkedField]
-    public int? MaxTargets;
+    public int? MaxTargets = 4;
 
     [DataField, AutoNetworkedField]
     public EntProtoId AttackEffect = "RMCEffectExtraSlash";
@@ -37,4 +37,7 @@ public sealed partial class XenoPierceComponent : Component
 
     [DataField, AutoNetworkedField]
     public int RechargeTargetsRequired = 2;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId Blocker = "RMCEffectXenoTelegraphInvisible";
 }

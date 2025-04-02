@@ -17,6 +17,7 @@ public sealed class DropshipHijackerBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         if (State is DropshipHijackerBuiState s)
             Set(s);
     }

@@ -1,0 +1,431 @@
+﻿- type: entity
+  parent: BaseItem
+  id: RMCHelmetGarbBase
+  abstract: true
+  components:
+  - type: Sprite
+  - type: Item
+    size: Tiny
+  - type: HelmetAccessory
+
+# NVG
+
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbNightVision
+  name: old M2 night vision goggles
+  description: This pair has been gutted of all electronics and therefore not working. But hey, they make you feel tacticool, and that's all that matters, right?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/nv_goggles.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/nv_goggles.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/nv_goggles.rsi
+      state: helmet
+
+# Netting
+
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbNetting
+  name: combat netting
+  description: Probably combat netting for a helmet. Probably just an extra hairnet that got ordered for the phantom Almayer cooking staff. Probably useless.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbNetting
+  id: RMCHelmetGarbNettingUrban
+  name: urban combat netting
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_urban.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_urban.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_urban.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbNetting
+  id: RMCHelmetGarbNettingDesert
+  name: desert combat netting
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_desert.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_desert.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_desert.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbNetting
+  id: RMCHelmetGarbNettingJungle
+  name: jungle combat netting
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_jungle.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_jungle.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_jungle.rsi
+      state: helmet
+
+# Rain Cover
+
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbRainCover
+  name: raincover
+  description: The standard M10 combat helmet is already water-resistant at depths of up to 10 meters. This makes the top potentially water-proof. At least it's something.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbRainCover
+  id: RMCHelmetGarbRainCoverUrban
+  name: urban raincover
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover_urban.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover_urban.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover_urban.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbRainCover
+  id: RMCHelmetGarbRainCoverDesert
+  name: desert raincover
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover_desert.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover_desert.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover_desert.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbRainCover
+  id: RMCHelmetGarbRainCoverJungle
+  name: jungle raincover
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover_jungle.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover_jungle.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/raincover_jungle.rsi
+      state: helmet
+
+# Ammo
+
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbBuckshot
+  name: spent buckshot
+  description: Three spent rounds of good ol' buckshot. You know they used to paint these green? Strange times.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/buckshot.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/buckshot.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/buckshot.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbFlechette
+  name: spent flechette
+  description: The more you fire these, the more you're reminded that a fragmentation grenade is probably more effective at fulfilling the same purpose. Say, aren't these supposed to eject from your gun?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/flechette.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/flechette.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/flechette.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbSlug
+  name: spent slugs
+  description: For when you need to knock your target down with superior stopping power. These three have already been fired.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/slug.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/slug.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/slug.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbCartridge
+  name: cartridge
+  description: This is the bullet from a Type 54 Assault Rifle. It is deformed from impact against an armored surface. It's been reduced to a lucky keepsake now.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/cartridge.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/cartridge.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/cartridge.rsi
+      state: helmet
+
+# Visors
+
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbGasmask
+  name: M5 integrated gasmask
+  description: The UNMC had its funding pulled for these when it became apparent that not every deployed enlisted was wearing a helmet 24/7; much to the bafflement of UN High Command.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbGasmask
+  id: RMCHelmetGarbGasmaskDesert
+  name: Desert M5 integrated gasmask
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_desert.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_desert.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_desert.rsi
+      state: helmet
+
+
+- type: entity
+  parent: RMCHelmetGarbGasmask
+  id: RMCHelmetGarbGasmaskJungle
+  name: Jungle M5 integrated gasmask
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_jungle.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_jungle.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_jungle.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbGasmask
+  id: RMCHelmetGarbGasmaskUrban
+  name: Urban M5 integrated gasmask
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_urban.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_urban.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Gasmasks/gasmask_urban.rsi
+      state: helmet
+
+# Feathers
+
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbFeather
+  name: lucky white feather
+  description: A sniper's greatest asset is his mind, not his rifle.
+  components:
+  - type: Sprite
+    sprite:  _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbFeather
+  id: RMCHelmetGarbFeatherRed
+  name: lucky red feather
+  description: It is a riotous red color, made of really crummy plastic and synthetic threading, you know, the same sort of material every Corporate Liaison's spine is made of.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather_red.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather_red.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather_red.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbFeather
+  id: RMCHelmetGarbFeatherBlue
+  name: lucky blue feather
+  description: It is a brilliant blue color. You think you might have seen a bluejay in a holo-theatre once.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather_blue.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather_blue.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather_blue.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbFeather
+  id: RMCHelmetGarbFeatherPurple
+  name: lucky purple feather
+  description: It is a plucky purple color. Legend has it a station AI known as Shakespeare simulated 1000 monkeys typing gibberish in order to replicate the actual works of Shakespeare. Art critics are on the fence if this is the first instance of true artificial abstract art.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather_purple.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather_purple.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather_purple.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbFeather
+  id: RMCHelmetGarbFeatherYellow
+  name: lucky yellow feather
+  description: It is an unyielding yellow color. They say the New Kansas colony produces more carpenters per capita than any other colony in all of UN controlled space.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather_yellow.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather_yellow.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Feathers/feather_yellow.rsi
+      state: helmet
+
+# Misc
+
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbGunOil
+  name: gun oil
+  description: It is a bottle of oil, for your gun. Don't fall for the rumors, the M54C is NOT a self-cleaning firearm.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/gun_oil.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/gun_oil.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/gun_oil.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbRosary
+  name: rosary
+  description: Jesus Saves Lives!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/rosary.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/rosary.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/rosary.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbPrescription
+  name: prescription medication
+  description: Anti-anxiety meds? Amphetamines? The cure for Sudden Sleep Disorder? The label can't be read, leaving the now absent contents forever a mystery. The cap is screwed on tighter than any ID lock.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/prescription.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/prescription.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/prescription.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbWire
+  name: trimmed barbed wire
+  description: It is a length of barbed wire that's had most of the sharp points filed down so that it is safe to handle.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/trimmed_barb_wire.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/trimmed_barb_wire.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/trimmed_barb_wire.rsi
+      state: helmet

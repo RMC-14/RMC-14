@@ -21,6 +21,17 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_charcoal.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_charcoal.rsi
+    
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitLiaisonCharcoalSuitskirt
+  name: liaison's charcoal suitskirt
+  description: A stiff, stylish charcoal suit commonly worn by businesswomen from the We-Ya corporation. Expertly crafted to make you look like a prick.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_charcoal_suitskirt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_charcoal_suitskirt.rsi
 
 - type: entity
   parent: CMJumpsuitLiaison
@@ -85,6 +96,17 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_field.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_field.rsi
+    
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitLiaisonFieldSuitskirt
+  name: corporate field suitskirt
+  description: A black pencil skirt paired with a dark blue button-down shirt. A popular look among those in the corporate world that conduct the majority of their business from night clubs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_field_suitskirt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_field_suitskirt.rsi
 
 - type: entity
   parent: CMJumpsuitLiaison
@@ -118,6 +140,17 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_black.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_black.rsi
+    
+- type: entity
+  parent: CMJumpsuitLiaison
+  id: RMCJumpsuitLiaisonBlackSuitskirt
+  name: black suitskirt
+  description: A simple black pencil skirt paired with a white shirt. A common pairing among corporate workers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_black_suitskirt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/corporate_black_suitskirt.rsi
 
 - type: entity
   parent: CMJumpsuitLiaison

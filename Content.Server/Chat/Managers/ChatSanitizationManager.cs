@@ -156,7 +156,7 @@ public sealed class ChatSanitizationManager : IChatSanitizationManager
             message = r.Replace(message, string.Empty);
         }
 
-        sanitized = message.Trim();
+        sanitized = message; // RMC14
         return emote is not null;
     }
 }

@@ -60,6 +60,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/fences.rsi
     state: brokenfence0
+  - type: Clickable
+  - type: InteractionOutline
   - type: PlacementReplacement
     key: walls
   - type: IconSmooth
@@ -85,6 +87,8 @@
   - type: Construction
     graph: CMFence
     node: rmcFenceBroken
+  - type: Tag
+    tags: []
 
 - type: entity
   parent: CMFence
@@ -95,7 +99,7 @@
     state: fence0
   - type: Construction
     graph: RMCFenceHybrisa
-    node: fenceMetalHybrisa
+    node: fenceMetal
 
 - type: entity
   parent: RMCFenceBroken
@@ -103,10 +107,10 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/hybrisa_fences.rsi
-    state: fence0
+    state: brokenfence0
   - type: Construction
     graph: RMCFenceHybrisa
-    node: rmcFenceBrokenHybrisa
+    node: rmcFenceBroken
 
 - type: entity
   parent: CMFence
@@ -117,8 +121,8 @@
     sprite: _RMC14/Structures/hybrisa_fences_electric.rsi
     state: fence0
   - type: Construction
-    graph: RMCFenceHybrisa
-    node: fenceMetalHybrisaElectric
+    graph: RMCFenceHybrisaElectric
+    node: fenceMetal
 
 - type: entity
   parent: RMCFenceBroken
@@ -127,7 +131,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/hybrisa_fences_electric.rsi
-    state: fence0
+    state: brokenfence0
   - type: Construction
-    graph: RMCFenceHybrisa
-    node: rmcFenceBrokenHybrisaElectric
+    graph: RMCFenceHybrisaElectric
+    node: rmcFenceBroken

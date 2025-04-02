@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/ad5daf73527c723bc4dc496366812c7e536df548/icons/effects/Targeted.dmi, https://github.com/cmss13-devs/cmss13/blob/18e0f698bd58944a46b04d1e147c21d4b05057d5/icons/effects/beam.dmi, https://github.com/cmss13-devs/cmss13/blob/1fae8ef420342ad5eb5d8a850ee898560c094669/icons/mob/hud/actions.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "sniper_lockon",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "spotter_lockon",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "sniper_lockon_intense",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "sniper_lockon_direction",
+      "directions": 4
+    },
+    {
+      "name": "sniper_lockon_intense_direction",
+      "directions": 4
+    }
+  ]
+}

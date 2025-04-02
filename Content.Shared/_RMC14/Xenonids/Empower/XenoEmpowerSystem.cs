@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Aura;
+using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Shields;
@@ -145,9 +146,9 @@ public sealed class XenoEmpowerSystem : EntitySystem
         }
 
         if (hits > 0)
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-ravager-empower"), xeno, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-ravager-empower"), xeno, xeno, PopupType.SmallCaution);
         else
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-ravager-empower-fizzle"), xeno, PopupType.SmallCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-ravager-empower-fizzle"), xeno, xeno, PopupType.SmallCaution);
 
         _shield.ApplyShield(xeno, XenoShieldSystem.ShieldType.Ravager, hits * xeno.Comp.ShieldPerTarget);
         //Reset shield time
@@ -190,7 +191,7 @@ public sealed class XenoEmpowerSystem : EntitySystem
 
         _rmcPulling.TryStopAllPullsFromAndOn(args.Hit);
 
-        var damage = _damagable.TryChangeDamage(args.Hit, xeno.Comp.LeapDamage);
+        var damage = _damagable.TryChangeDamage(args.Hit, xeno.Comp.LeapDamage, origin: xeno, tool: xeno);
         if (damage?.GetTotal() > FixedPoint2.Zero)
         {
             var filter = Filter.Pvs(args.Hit, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);
@@ -207,6 +208,7 @@ public sealed class XenoEmpowerSystem : EntitySystem
         var diff = target.Position - origin.Position;
         diff = diff.Normalized() * xeno.Comp.FlingDistance;
 
+        EnsureComp<RMCObstacleSlamImmuneComponent>(args.Hit);
         _throwing.TryThrow(args.Hit, diff, 10);
     }
 
@@ -241,7 +243,7 @@ public sealed class XenoEmpowerSystem : EntitySystem
             if (super.ExpiresAt != null & time >= super.ExpiresAt)
             {
                 RemCompDeferred<XenoSuperEmpoweredComponent>(uid);
-                _popup.PopupEntity(Loc.GetString("rmc-xeno-ravager-super-empower-fade"), uid, PopupType.SmallCaution);
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-ravager-super-empower-fade"), uid, uid, PopupType.SmallCaution);
                 continue;
             }
 

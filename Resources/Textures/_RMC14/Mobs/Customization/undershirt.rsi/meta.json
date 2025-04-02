@@ -90,6 +90,18 @@
     {
       "name": "blank",
       "directions": 4
+    },
+    {
+      "name": "u_strapless",
+      "directions": 4
+    },
+    {
+      "name": "u_bra",
+      "directions": 4
+    },
+    {
+      "name": "u_sports",
+      "directions": 4
     }
   ]
 }

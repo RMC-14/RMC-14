@@ -90,7 +90,7 @@ public sealed class GunStacksSystem : EntitySystem
             return;
 
         if (TryComp(ent, out ProjectileComponent? projectile) &&
-            projectile.DamagedEntity)
+            projectile.ProjectileSpent)
         {
             return;
         }

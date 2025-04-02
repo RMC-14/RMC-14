@@ -1,8 +1,6 @@
 - type: entity
+  id: RMCDispenserBase
   abstract: true
-  id: RMCChemDispenserBase
-  name: chemical dispenser
-  description: A complex machine for mixing elements into chemicals. A We-Ya product.
   placement:
     mode: SnapgridCenter
   components:
@@ -13,8 +11,8 @@
     fixtures:
       fix1:
         shape:
-          !type:PhysShapeAabb
-          bounds: "-0.49, -0.49, 0.49, 0.49"
+          !type:PhysShapeCircle
+          radius: 0.40
         density: 190
         mask:
         - MachineMask
@@ -22,31 +20,10 @@
         - MachineLayer
   - type: Clickable
   - type: InteractionOutline
-  - type: Sprite
-    sprite: _RMC14/Structures/Machines/Science/dispenser.rsi
-    layers:
-    - state: base
-    - state: onlight
-      shader: unshaded
-      map: ["enum.PowerDeviceVisualLayers.Powered"]
-    snapCardinals: true
-  - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.PowerDeviceVisuals.Powered:
-        enum.PowerDeviceVisualLayers.Powered:
-          True: { visible: true }
-          False: { visible: false }
   - type: RMCChemicalDispenser
-    network: RMCDispenserChem
-  - type: Machine
-    board: CMCircuitboardDispenserChem
   - type: ApcPowerReceiver
     needsPower: false # TODO RMC14
     powerLoad: 0
-  - type: RequiresSkill
-    skills:
-      RMCSkillMedical: 3
   - type: ItemSlots
     slots:
       chemical_dispenser_slot:
@@ -70,6 +47,46 @@
     blacklist:
       components:
       - Xeno
+
+- type: entity
+  abstract: true
+  parent: RMCDispenserBase
+  id: RMCChemDispenserBase
+  name: chemical dispenser
+  description: A complex machine for mixing elements into chemicals. A We-Ya product.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/Science/dispenser.rsi
+    layers:
+    - state: base
+    - state: onlight
+      shader: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+    snapCardinals: true
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: RMCChemicalDispenser
+    network: RMCDispenserChem
+  - type: Machine
+    board: CMCircuitboardDispenserChem
+  - type: RequiresSkill
+    skills:
+      RMCSkillMedical: 3
+  - type: ItemSlots
+    slots:
+      chemical_dispenser_slot:
+        name: Chemical Dispenser
+        whitelist:
+          tags:
+          - GlassBeaker
+          - ChemDispensable
 
 - type: entity
   parent: RMCChemDispenserBase
@@ -179,6 +196,7 @@
         enum.PowerDeviceVisualLayers.Powered:
           True: { visible: true }
   - type: RMCChemicalDispenser
+    network: RMCChemStorageGround
     reagents:
       - CMBicaridine
       - CMKelotane
@@ -195,5 +213,5 @@
   suffix: Medbay
   components:
   - type: RMCChemicalDispenser
-    network: RMCChemStorageMedbay
+    network: RMCChemStorageGround
 

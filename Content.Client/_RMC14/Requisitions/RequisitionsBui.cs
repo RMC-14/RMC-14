@@ -5,13 +5,12 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using Robust.Shared.Log;
 using static Content.Shared._RMC14.Requisitions.Components.RequisitionsElevatorMode;
 
 namespace Content.Client._RMC14.Requisitions;
 
 [UsedImplicitly]
-public sealed class RequisitionsBui : BoundUserInterface
+public sealed class RequisitionsBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     [Dependency] private readonly IEntityManager _entities = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
@@ -19,12 +18,9 @@ public sealed class RequisitionsBui : BoundUserInterface
     [ViewVariables]
     private RequisitionsWindow? _window;
 
-    public RequisitionsBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
-    {
-    }
-
     protected override void Open()
     {
+        base.Open();
         _window = new RequisitionsWindow();
         _window.OnClose += Close;
 

@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Construction;
@@ -10,6 +10,7 @@ using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -17,6 +18,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Shared._RMC14.Xenonids.Hive;
 
@@ -24,7 +26,6 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -80,6 +81,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         if (GetHive(ent.Owner) is {} hive)
         {
             hive.Comp.LastQueenDeath = _timing.CurTime;
+            hive.Comp.CurrentQueen = null;
             Dirty(hive);
         }
     }
@@ -141,6 +143,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
     /// <summary>
     /// Sets the hive for a member, if it's different.
     /// If it does not have HiveMemberComponent this method adds it.
+    /// If the new HiveMember is a queen, it is now the new hiveQueen
     /// </summary>
     public void SetHive(Entity<HiveMemberComponent?> member, EntityUid? hive)
     {
@@ -161,6 +164,9 @@ public abstract class SharedXenoHiveSystem : EntitySystem
 
         comp.Hive = hive;
         Dirty(member, comp);
+
+        if (HasComp<XenoEvolutionGranterComponent>(member) && hiveEnt.HasValue)
+            SetHiveQueen(member, hiveEnt.Value);
 
         var ev = new HiveChangedEvent(hiveEnt, old);
         RaiseLocalEvent(member, ref ev);
@@ -201,6 +207,45 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         return memberHive.Owner == hive;
     }
 
+    public bool HasHiveQueen(Entity<HiveComponent> hive)
+    {
+        return (hive.Comp.CurrentQueen is not null);
+    }
+    public bool SetHiveQueen(EntityUid queen, Entity<HiveComponent> hive)
+    {
+        hive.Comp.CurrentQueen = queen;
+        Dirty(hive);
+        return true;
+    }
+
+    public bool HasHiveCore(Entity<HiveComponent> hive)
+    {
+        return GetHiveCore(hive) is not null;
+    }
+
+    public EntityUid? GetHiveCore(Entity<HiveComponent> hive)
+    {
+        var hiveCoreQuerry = EntityQueryEnumerator<HiveCoreComponent>();
+        while (hiveCoreQuerry.MoveNext(out var hiveCoreEnt, out _))
+        {
+            if (GetHive(hiveCoreEnt) == hive)
+            {
+                return hiveCoreEnt;
+            }
+        }
+        return null;
+    }
+
+    public void ResetHiveCoreCooldown(Entity<HiveComponent> hive)
+    {
+        hive.Comp.NewCoreAt = _timing.CurTime;
+        Dirty(hive);
+    }
+
+    public bool TryGetStructureLimit(Entity<HiveComponent> hive, EntProtoId structureProtoId, out int limit)
+    {
+        return hive.Comp.HiveStructureSlots.TryGetValue(structureProtoId, out limit);
+    }
     public void SetSeeThroughContainers(Entity<HiveComponent?> hive, bool see)
     {
         if (!_query.Resolve(hive, ref hive.Comp, false))
@@ -316,7 +361,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         Dirty(hive);
 
         _xeno.MakeXeno(larva.Value);
-        _hive.SetHive(larva.Value, hive);
+        SetHive(larva.Value, hive);
 
         if (TryComp(user, out ActorComponent? actor))
         {

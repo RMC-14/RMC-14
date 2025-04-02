@@ -1,4 +1,5 @@
 - type: entity
+  parent: RMCBaseEffect
   id: RMCEffectDisarm
   categories: [ HideSpawnMenu ]
   components:
@@ -13,3 +14,16 @@
   - type: Tag
     tags:
     - HideContextMenu
+
+- type: entity
+  parent: [WeaponArcClaw, RMCBaseEffect]
+  id: RMCWeaponArcDisarm
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.4
+  - type: Sprite
+    sprite: _RMC14/Effects/attacks.rsi
+    noRot: true
+    state: disarm
+    drawdepth: Effects

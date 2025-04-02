@@ -132,7 +132,7 @@ public sealed class RangefinderSystem : EntitySystem
             return;
         }
 
-        if (!_area.CanCAS(coordinates))
+        if (!_area.CanCAS(coordinates) || (rangefinder.Comp.Mode == Designator && !_area.CanLase(coordinates)))
         {
             msg = Loc.GetString("rmc-laser-designator-not-cas");
             _popup.PopupClient(msg, coordinates, user, PopupType.SmallCaution);
@@ -185,6 +185,8 @@ public sealed class RangefinderSystem : EntitySystem
                 position += offset;
 
             rangefinder.Comp.LastTarget = position;
+            rangefinder.Comp.LastCoords = mapCoords;
+
             Dirty(rangefinder);
 
             _ui.OpenUi(rangefinder.Owner, RangefinderUiKey.Key, args.User);
@@ -246,6 +248,9 @@ public sealed class RangefinderSystem : EntitySystem
             return;
 
         var nextMode = rangefinder.Comp.Mode == RangefinderMode.Rangefinder ? Designator : RangefinderMode.Rangefinder;
+        if (nextMode == Designator && !rangefinder.Comp.CanDesignate)
+            return;
+
         args.Verbs.Add(new AlternativeVerb
         {
             Priority = 100,

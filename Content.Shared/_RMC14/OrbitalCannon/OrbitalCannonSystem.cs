@@ -46,7 +46,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -451,6 +451,9 @@ public sealed class OrbitalCannonSystem : EntitySystem
 
         _popup.PopupCursor("Orbital bombardment launched!", user);
         _adminLog.Add(LogType.RMCOrbitalBombardment, $"{ToPrettyString(user)} launched orbital bombardment at {fireCoordinates} for squad {ToPrettyString(squad)}, misfuel: {misfuel}, final coords: {adjustedCoords}");
+
+        var ev = new OrbitalCannonLaunchEvent(cannon.Comp.FireCooldown + firing.ImpactDelay);
+        RaiseLocalEvent(ref ev);
         return true;
     }
 

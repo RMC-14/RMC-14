@@ -1,0 +1,72 @@
+- type: entity
+  parent: RMCBaseMarineArmorLight
+  id: RMCArmorM4RLight
+  name: M4R pattern CMB light armor
+  description: A dark set of armor, which is a modification of the security variant of Armat Systems M3 armor. Designed for riot control and protest suppression in mind. The side of it has a metallic insignia with 'CMB RIOT CONTROL' on it. The laws of the Earth stretch beyond the Sol.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/CMB/cmb_light_armor.rsi
+  - type: CMArmor
+    melee: 20
+    bullet: 25
+    bio: 15
+    explosionArmor: 20
+  - type: RMCArmorSpeedTier
+    speedTier: medium
+  - type: ClothingSpeedModifier # light armor speed
+    walkModifier: .725
+    sprintModifier: .725
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+
+- type: entity
+  parent: RMCBaseMarineArmorLight
+  id: RMCArmorM4RMedium
+  name: M4R pattern CMB armor
+  description: A dark set of armor, which is a modification of the security variant of Armat Systems M3 armor. Designed for riot control and protest suppression in mind. The side of it has a metallic insignia with 'CMB RIOT CONTROL' on it. The laws of the Earth stretch beyond the Sol.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/CMB/cmb_heavy_armor.rsi
+  - type: CMArmor
+    melee: 25
+    bullet: 25
+    bio: 15
+    explosionArmor: 25
+  - type: RMCArmorSpeedTier
+    speedTier: medium
+  - type: ClothingSpeedModifier
+    walkModifier: 0.666
+    sprintModifier: 0.666
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
+  parent: RMCBaseMarineArmorLight
+  id: RMCArmorM4RMarshallMedium
+  name: M4R pattern CMB Marshal armor
+  description: A custom fit variation of the CMB Riot armor, intended to be worn the Marshals themselves, has a golden lining with rank insignia. Has additional layer of lightweigh protective materials.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/CMB/cmb_sheriff_armor.rsi
+  - type: CMArmor
+    melee: 25
+    bullet: 30
+    bio: 15
+    explosionArmor: 30
+  - type: RMCArmorSpeedTier
+    speedTier: medium
+  - type: ClothingSpeedModifier
+    walkModifier: 0.666
+    sprintModifier: 0.666
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
+  - type: ItemCamouflage
+    camouflageVariations: { }
