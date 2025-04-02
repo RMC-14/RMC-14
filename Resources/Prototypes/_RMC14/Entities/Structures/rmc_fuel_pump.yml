@@ -24,6 +24,8 @@
   - type: InteractionOutline
   - type: Clickable
   - type: EvacuationPump
+    sound:
+      path: /Audio/_RMC14/Machines/fuel_pump_active.ogg
   - type: ApcPowerReceiver
   - type: RMCPowerReceiver
     idleLoad: 5
@@ -55,4 +57,10 @@
         unpowered:
           True: { visible: false }
           False: { visible: true }
-        
+  - type: AmbientOnPowered
+  - type: AmbientSound
+    enabled: true
+    sound:
+      path: /Audio/_RMC14/Machines/fuel_pump_idle.ogg
+    range: 12
+    volume: -3
