@@ -346,6 +346,15 @@
     leaderRsi:
       sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
       state: snpr-helmet
+  - type: FoldableClothing
+    foldedEquippedPrefix: closed
+    foldedHeldPrefix: closed
+    foldedHideLayers:
+    - Hair
+    - HeadTop
+    - HeadSide
+    unfoldedHideLayers:
+    - Snout
 
 # M3-T Demo Spec
 - type: entity
