@@ -27,10 +27,6 @@ public abstract class SharedRoofSystem : EntitySystem
         var roof = grid.Comp2;
         var chunkOrigin = SharedMapSystem.GetChunkIndices(index, RoofComponent.ChunkSize);
 
-        //RMC14 - Check if the area has weather enabled
-        if (_area.IsWeatherEnabled(grid, index))
-            return true;
-
         if (roof.Data.TryGetValue(chunkOrigin, out var bitMask))
         {
             var chunkRelative = SharedMapSystem.GetChunkRelative(index, RoofComponent.ChunkSize);
@@ -54,6 +50,10 @@ public abstract class SharedRoofSystem : EntitySystem
             return true;
         }
 
+        //RMC14 - Check if the area has weather enabled
+        if (_area.IsWeatherEnabled(grid, index))
+            return false;
+
         return false;
     }
 
@@ -62,10 +62,6 @@ public abstract class SharedRoofSystem : EntitySystem
     {
         var roof = grid.Comp2;
         var chunkOrigin = SharedMapSystem.GetChunkIndices(index, RoofComponent.ChunkSize);
-
-        //RMC14 - Check if the area has weather enabled
-        if (_area.IsWeatherEnabled(grid, index))
-            return roof.Color;
 
         if (roof.Data.TryGetValue(chunkOrigin, out var bitMask))
         {
@@ -91,6 +87,10 @@ public abstract class SharedRoofSystem : EntitySystem
 
             return isRoofEnt.Comp.Color ?? roof.Color;
         }
+
+        //RMC14
+        if (_area.IsLightBlocked(grid, index))
+            return roof.Color;
 
         return null;
     }
