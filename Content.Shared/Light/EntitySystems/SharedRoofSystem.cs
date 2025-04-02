@@ -50,10 +50,6 @@ public abstract class SharedRoofSystem : EntitySystem
             return true;
         }
 
-        //RMC14 - Check if the area has weather enabled
-        if (_area.IsWeatherEnabled(grid, index))
-            return false;
-
         return false;
     }
 

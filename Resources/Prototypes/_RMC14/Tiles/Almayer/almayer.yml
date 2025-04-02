@@ -8,6 +8,7 @@
     collection: FootstepFloor
   itemDrop: CMTileItemSteel
   heatCapacity: 10000
+  weather: true
 
 - type: tile
   parent: CMTileBase

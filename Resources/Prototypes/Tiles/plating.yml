@@ -8,6 +8,7 @@
     collection: FootstepPlating
   friction: 0.2
   heatCapacity: 10000
+  weather: true
 
 - type: tile
   id: PlatingDamaged
