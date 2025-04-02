@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Client.Parallax;
 using Content.Client.Weather;
+using Content.Shared._RMC14.Weather;
 using Content.Shared.Salvage;
 using Content.Shared.Weather;
 using Robust.Client.GameObjects;
@@ -27,6 +28,7 @@ public sealed partial class StencilOverlay : Overlay
     private readonly SharedMapSystem _map;
     private readonly SpriteSystem _sprite;
     private readonly WeatherSystem _weather;
+    private readonly RMCWeatherSystem _rmcWeather;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 

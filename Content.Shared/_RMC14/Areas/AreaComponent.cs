@@ -53,9 +53,6 @@ public sealed partial class AreaComponent : Component
     public bool WeatherEnabled = true;
 
     [DataField, AutoNetworkedField]
-    public bool HasRoof;
-
-    [DataField, AutoNetworkedField]
     public bool HijackEvacuationArea;
 
     // TODO RMC14 does this need to be a double?
