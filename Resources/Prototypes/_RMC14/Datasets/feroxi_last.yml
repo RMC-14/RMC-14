@@ -1,0 +1,5 @@
+- type: localizedDataset
+  id: names_feroxi_last
+  values:
+    prefix: rmc-name-feroxi-last-
+    count: 49
