@@ -218,6 +218,23 @@
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
+  id: RMCCEEssentialsBundle
+  name: Standard Equipment
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/insulated.rsi
+    state: icon
+  - type: CMVendorBundle
+    bundle:
+    - CMHandsInsulated
+    - CMHeadsetCE
+    - CMBootsBlack
+    - RMCWeldingGoggles
+    #- WorkingJoePDA
+    - RMCNailgunTactical
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewPilot
   name: PO Flightsuit Kit
   components:
