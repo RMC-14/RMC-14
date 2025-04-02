@@ -1,4 +1,4 @@
-# Equipment Vendor
+# EQUIPMENT VENDOR
 
 - type: entity
   parent: ColMarTechBase
@@ -145,12 +145,12 @@
         name: Whistle
         points: 5
 
-# Armory Vendor
+# ARMORY VENDOR
 
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechStaffOfficerWeapon
-  name: ColMarTech Staff Officer Armory Weapon Rack
+  name: ColMarTech Staff Officer Armory Equipment Rack
   description: An automated combat equipment vendor for Staff Officers.
   components:
   - type: AccessReader
