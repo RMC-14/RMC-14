@@ -846,7 +846,6 @@
     medevac: true
     OB: true
     supplyDrop: true
-    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaLv624

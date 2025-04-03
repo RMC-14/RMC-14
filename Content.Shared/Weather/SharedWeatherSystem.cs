@@ -47,6 +47,7 @@ public abstract class SharedWeatherSystem : EntitySystem
 
     public bool CanWeatherAffect(EntityUid uid, MapGridComponent grid, TileRef tileRef, RoofComponent? roofComp = null)
     {
+        //RMC14 - This goes first, if the grid uses areas, we use the RMC Area Weather system instead of upstream.
         if (TryComp<AreaGridComponent>(uid, out _))
             return _rmcWeather.CanWeatherAffectArea(uid, grid, tileRef, roofComp);
 

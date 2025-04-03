@@ -84,7 +84,7 @@ public abstract class SharedRoofSystem : EntitySystem
             return isRoofEnt.Comp.Color ?? roof.Color;
         }
 
-        //RMC14
+        //RMC14 - This goes last so we can still use upstream methods to define additional roof colors
         if (_area.IsLightBlocked(grid, index))
             return roof.Color;
 
