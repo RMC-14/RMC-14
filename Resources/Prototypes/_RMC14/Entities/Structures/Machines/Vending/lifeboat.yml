@@ -1,7 +1,9 @@
-﻿- type: entity
+﻿# LIFEBOAT MEDICAL VENDOR
+
+- type: entity
   parent: RMCNanoMed
   id: RMCVendorLifeboatMedical
-  name: lifeboat medical cabinet
+  name: Lifeboat Medical Cabinet
   description: A wall-mounted cabinet containing medical supplies vital to survival. While better equipped, it can only refill basic supplies.
   components:
   - type: Transform
@@ -18,31 +20,41 @@
     sections:
     - name: Autoinjectors
       entries:
-      # - id: CMPainStopAutoinjector
-      #   amount: 8
       - id: CMTricordrazineAutoInjectorNoSkill
+        name: First-Aid Autoinjector
         amount: 8
+      #- id: CMPainStopAutoinjector
+      #  name: Pain-Stop Autoinjector
+      #  amount: 8
     - name: Devices
       entries:
       - id: CMHealthAnalyzer
+        name: Health Analyzer
         amount: 8
     - name: Field Supplies
       entries:
       - id: CMBurnKit10
+        name: Burn Kit
         amount: 8
       - id: CMTraumaKit10
+        name: Trauma Kit
         amount: 8
       - id: CMOintment10
+        name: Ointment
         amount: 8
       - id: CMGauze10
+        name: Roll of Gauze
         amount: 8
-      # - id: CMMedicalSplints5
-      #   amount: 8
+      #- id: CMMedicalSplints5
+      #  name: Splints
+      #  amount: 8
+
+# LIFEBOAT SUPPLIES VENDOR
 
 - type: entity
   parent: ColMarTechBase
   id: RMCVendorLifeboatWall
-  name: lifeboat wall cabinet
+  name: Lifeboat Wall Cabinet
   description: A wall-mounted emergency cabinet containing survival supplies.
   components:
   - type: Sprite
@@ -53,25 +65,33 @@
   - type: CMAutomatedVendor
     hackable: false
     sections:
-    - name: Food and beverage
+    - name: Food And Beverage
       entries:
-       - id: CMMRE
-         amount: 25
+       - id: CMMRE #Replace with emergency MRE boxes
+         name: Emergency Rations
+         amount: 40
        - id: CMDrinkWEYAWaterBottle30
+         name: Water Bottles
          amount: 25
     - name: Utility
       entries:
-      - id: CMPackFlare
+      - id: RMCBoxPackFlare
+        name: M94 Marking Flare Pack
         amount: 5
       - id: RMCM5Bayonet
+        name: M5 Bayonet
         amount: 8
       - id: RMCRadioHandheldAlmayer
+        name: Handheld Radio
         amount: 5
-#      - id: # deck of playing cards
-#        amount: 5
+      #- id: cards
+      #  name: deck of UNO cards
+      #  amount: 5
     - name: Clothing
       entries:
       - id: CMMaskGas
+        name: Gas Mask
         amount: 15
       - id: CMMaskCoif
+        name: Heat Absorbent Coif
         amount: 15
