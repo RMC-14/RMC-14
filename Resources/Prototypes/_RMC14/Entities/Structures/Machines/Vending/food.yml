@@ -22,7 +22,7 @@
         name: Xmas Prepared Meal (Gingerbread Cookies)
         amount: 25
       - id: RMCMarinePreparedMealGingerbread
-        name: Xmas Prepared Meal (Sugar Cookes)
+        name: Xmas Prepared Meal (Sugar Cookies)
         amount: 25
     - name: Prepared Meals
       entries:
@@ -150,7 +150,7 @@
     #  - id: Pendleton
     #    name: Pendleton's Triple Star
     #    amount: 5
-    #  - id: Tuxexo
+    #  - id: Tuxedo
     #    name: Tuxedo Premium
     #    amount: 5
     #  - id: Gannuci
@@ -162,8 +162,8 @@
     #  - id: PartyPopper
     #    name: Party Popper Ale
     #    amount: 5
-    #  - id: Tazhuska
-    #    name: Tazhushka's Turqoise Beer
+    #  - id: Tazhushka
+    #    name: Tazhushka's Turquoise Beer
     #    amount: 5
     #  - id: Reaper
     #    name: Reaper Red
@@ -228,47 +228,43 @@
   - type: CMAutomatedVendor
     hackable: true
     sections:
-    - name: Chess #Should be removed when drinks are ported.
+    - name: White Pieces
       entries:
-      - id: ChessBoard
-        amount: 5
-    #- name: White Pieces TODO RMC14 vodka chess pieces
-    #  entries:
-    #  - id: VodkaPawnW
-    #    name: Pawn
-    #    amount: 2
-    #  - id: VodkaBishopW
-    #    name: Bishop
-    #    amount: 2
-    #  - id: VodkaKnightW
-    #    name: Knight
-    #    amount: 2
-    #  - id: VodkaRookW
-    #    name: Rook
-    #    amount: 2
-    #  - id: VodkaKingW
-    #    name: King
-    #    amount: 2
-    #  - id: VodkaQueenW
-    #    name: Queen
-    #    amount: 2
-    #- name: Black Pieces
-    #  entries:
-    #  - id: VodkaPawnB
-    #    name: Pawn
-    #    amount: 2
-    #  - id: VodkaBishopB
-    #    name: Bishop
-    #    amount: 2
-    #  - id: VodkaKnightB
-    #    name: Knight
-    #    amount: 2
-    #  - id: VodkaRookB
-    #    name: Rook
-    #    amount: 2
-    #  - id: VodkaKingB
-    #    name: King
-    #    amount: 2
-    #  - id: VodkaQueenB
-    #    name: Queen
-    #    amount: 2
+      - id: RMCDrinkAlcoholVodkaChessWhitePawn
+        name: Pawn
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessWhiteBishop
+        name: Bishop
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessWhiteKnight
+        name: Knight
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessWhiteRook
+        name: Rook
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessWhiteKing
+        name: King
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessWhiteQueen
+        name: Queen
+        amount: 2
+    - name: Black Pieces
+      entries:
+      - id: RMCDrinkAlcoholVodkaChessBlackPawn
+        name: Pawn
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessBlackBishop
+        name: Bishop
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessBlackKnight
+        name: Knight
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessBlackRook
+        name: Rook
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessBlackKing
+        name: King
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessBlackQueen
+        name: Queen
+        amount: 2

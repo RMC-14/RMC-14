@@ -220,7 +220,7 @@
         name: Bucket
         amount: 6
       - id: CMBucketMop
-        name: Mop Buckt
+        name: Mop Bucket
         amount: 2
     - name: Stock Parts
       entries:

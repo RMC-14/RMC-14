@@ -456,7 +456,7 @@
       takeAll: CMStandard
       entries:
       - id: CMArmorM3WO
-        name: Military Police Chief M4 Armor
+        name: Military Police Chief M3 Armor
         recommended: true
       - id: CMArmorHelmetM10ChiefMP
         name: Chief MP M10 Helmet
