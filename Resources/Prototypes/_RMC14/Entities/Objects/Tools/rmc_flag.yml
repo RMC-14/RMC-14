@@ -1,4 +1,5 @@
-﻿- type: entity
+- type: entity
+  abstract: true
   parent: BaseItem
   id: RMCFlagCarriableBase
   name: flag
