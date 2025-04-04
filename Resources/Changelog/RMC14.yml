@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: Rainbeon
   changes:
-  - message: Xeno ghosts will now retain their full xeno names, including rank, caste,
-      letters, and number ID.
-    type: Fix
-  id: 1035
-  time: '2024-11-29T05:08:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4921
-- author: Rainbeon
-  changes:
   - message: Fixed being knocked down causing you to be dragged faster by ~25%. This
       means Xenos can not drag away Marines as quickly, and Marines can not drag critical
       or dead Marines as fast either without the assistance of a Rollerbed.
@@ -5394,5 +5386,12 @@
   id: 1537
   time: '2025-03-31T04:32:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6043
+- author: Vermidia
+  changes:
+  - message: There is now an option to use non-trypophobia inducing sprites.
+    type: Add
+  id: 1538
+  time: '2025-04-04T23:25:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6068
 Name: RMC14
 Order: -1
