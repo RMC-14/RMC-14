@@ -16,4 +16,7 @@ public sealed partial class ConstructionPrototype : IInheritingPrototype, ICMSpe
 
     [DataField]
     public bool IsCM { get; }
+
+    [DataField("iconColor")]
+    public Color IconColor = Color.FromHex("#ffffff");
 }

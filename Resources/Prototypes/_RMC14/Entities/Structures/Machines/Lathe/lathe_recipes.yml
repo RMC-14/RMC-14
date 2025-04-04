@@ -218,7 +218,7 @@
   result: RMCTablePartReinforced
   completetime: 4
   materials:
-    CMSteel: 400 # 15000
+    CMSteel: 500 # 18750
 
 - type: latheRecipe
   id: RMCRackParts

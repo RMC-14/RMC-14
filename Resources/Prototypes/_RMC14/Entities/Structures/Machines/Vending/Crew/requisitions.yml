@@ -731,6 +731,33 @@
       #- id: FlamerTankBox
       #- name: Flamer Tank Box (UT-Napthal Fuel x 8)
       #  box: RMCTankFlamer
+    - name: Ammunition Boxes
+      hasBoxes: true
+      entries:
+      - id: RMCBoxBulletsSMG
+        name: SMG HV Ammunition Box (10x20mm) (M63)
+        box: CMMagazineSMGM63
+        boxSlots: 13 # 600 / 48, yes we loose half a mag to the void
+      - id: RMCBoxBulletsSMGAP
+        name: SMG AP Ammunition Box (10x20mm AP) (M63)
+        box: CMMagazineSMGM63AP
+        boxSlots: 13 # 600 / 48, yes we loose half a mag to the void
+      - id: RMCBoxBulletsRifle
+        name: Rifle Ammunition Box (10x24mm) (M4SPR)
+        box: CMMagazineRifleM4SPR
+        boxSlots: 24 # 600 / 25
+      - id: RMCBoxBulletsRifleAP
+        name: Rifle AP Ammunition Box (10x24mm AP) (M4SPR)
+        box: CMMagazineRifleM4SPRAP
+        boxSlots: 24 # 600 / 25
+      - id: RMCBoxBulletsRifle
+        name: Rifle Ammunition Box (10x24mm) (M54C)
+        box: CMMagazineRifleM54C
+        boxSlots: 15 # 600 / 40
+      - id: RMCBoxBulletsRifleAP
+        name: Rifle AP Ammunition Box (10x24mm AP) (M54C)
+        box: CMMagazineRifleM54CAP
+        boxSlots: 15 # 600 / 40
 
 # ATTACHMENTS VENDOR
 

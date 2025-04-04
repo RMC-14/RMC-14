@@ -188,6 +188,9 @@
       - id: RMCArmorM3LightVariants
         name: M3-L Pattern Light Armor
         mandatory: true
+    - name: Jacket
+      choices: { CMCoat: 1 }
+      entries:
       - id: RMCCoatService
         name: Service Jacket
         mandatory: true
@@ -208,6 +211,9 @@
       - id: RMCArmorHelmetM12Intel
         name: XM12 Officer Helmet
         recommended: true
+    - name: Hats
+      choices: { CMHat: 1 }
+      entries:
       - id: RMCHeadBeret
         name: Beret, Standard
       - id: CMHeadBeretTan

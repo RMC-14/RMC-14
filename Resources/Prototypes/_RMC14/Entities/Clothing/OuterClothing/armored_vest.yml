@@ -12,7 +12,8 @@
     walkModifier: 0.725
     sprintModifier: 0.725
   - type: CMArmor
-    armor: 15 # TODO RMC14 20 bullet
+    melee: 15
+    bullet: 20
     bio: 20
     explosionArmor: 10
   - type: CMHardArmor

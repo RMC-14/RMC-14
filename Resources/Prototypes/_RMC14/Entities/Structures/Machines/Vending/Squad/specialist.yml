@@ -32,9 +32,13 @@
       - id: CMSniperEquipmentCase
         name: Sniper Set
         recommended: true
-      #- id: AMR Spec
-      #  name: Anti-Materiel Sniper Set
-      #  recommended: true
+        linkedEntries:
+        - RMCAntiMaterielEquipmentCase
+      - id: RMCAntiMaterielEquipmentCase
+        name: Anti-Materiel Sniper Set
+        recommended: true
+        linkedEntries:
+        - CMSniperEquipmentCase
     - name: Extra Scout Ammunition
       entries:
       - id: RMCMagazineRifleM4SPRA19Impact
@@ -48,18 +52,18 @@
         points: 40
     - name: Extra Sniper Ammunition
       entries:
-      #- id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
-      #  name: M96S Flak Magazine (10x28mm)
-      #  points: 40
+      - id: CMMagazineSniperM96SFlak
+        name: M96S Flak Magazine (10x28mm)
+        points: 40
       - id: CMMagazineSniperM96SIncendiary
         name: M96S Incendiary Magazine (10x28mm)
         points: 40
       - id: CMMagazineSniperM96S
         name: M96S Marksman Magazine (10x28mm Caseless)
         points: 40
-      #- id: AMR Mag
-      #  name: XM43E1 Marksman Magazine (10x99mm Caseless)
-      #  points: 40
+      - id: RMCMagazineSniperXM43E1AntiMateriel
+        name: XM43E1 Marksman Magazine (10x99mm Caseless)
+        points: 40
     - name: Extra Demolitionist Ammunition
       entries:
       - id: RMCRocket84mmAntiArmor

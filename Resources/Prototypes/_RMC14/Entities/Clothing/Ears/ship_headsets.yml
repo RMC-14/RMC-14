@@ -70,6 +70,8 @@
     - MarineFoxtrot
   - type: HeadsetMultiBroadcast
     cooldown: 60
+  - type: Headset
+    radioTextIncrease: 3
 
 - type: entity
   parent: RMCHeadsetShip
@@ -94,6 +96,8 @@
     - MarineFoxtrot
   - type: HeadsetMultiBroadcast
     cooldown: 60
+  - type: Headset
+    radioTextIncrease: 3
 
 - type: entity
   parent: RMCHeadsetShip
@@ -181,6 +185,8 @@
     - MarineMedical
   - type: HeadsetMultiBroadcast
     cooldown: 60
+  - type: Headset
+    radioTextIncrease: 3
 
 - type: entity
   parent: RMCHeadsetShip
@@ -223,6 +229,8 @@
     - MarineDelta
     - MarineEcho
     - MarineFoxtrot
+  - type: Headset
+    radioTextIncrease: 3
 
 - type: entity
   parent: RMCHeadsetShip
@@ -239,6 +247,8 @@
       - RMCEncryptionKeyMarineCommand
   - type: HeadsetMultiBroadcast
     cooldown: 60
+  - type: Headset
+    radioTextIncrease: 3
 
 - type: entity
   parent: RMCHeadsetMarineCommand
@@ -264,6 +274,8 @@
       - CMEncryptionKeyPilot
   - type: HeadsetMultiBroadcast
     cooldown: 60
+  - type: Headset
+    radioTextIncrease: 3
 
 - type: entity
   parent: RMCHeadsetMarine
@@ -284,6 +296,8 @@
     - MarineDelta
     - MarineEcho
     - MarineFoxtrot
+  - type: Headset
+    radioTextIncrease: 3
 
 - type: entity
   parent: RMCHeadsetShip
@@ -326,6 +340,8 @@
       - RMCEncryptionKeySeniorCommand
   - type: HeadsetMultiBroadcast
     cooldown: 60
+  - type: Headset
+    radioTextIncrease: 3
 
 - type: entity
   parent: RMCHeadsetShip
@@ -343,6 +359,8 @@
       - RMCEncryptionKeyHighCommand
   - type: HeadsetMultiBroadcast
     cooldown: 60
+  - type: Headset
+    radioTextIncrease: 3
 
 - type: entity
   parent: CMHeadsetSeniorCommand
@@ -359,3 +377,5 @@
       - RMCEncryptionKeySeniorCommand
   - type: HeadsetMultiBroadcast
     cooldown: 60
+  - type: Headset
+    radioTextIncrease: 3

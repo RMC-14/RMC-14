@@ -47,6 +47,13 @@ public sealed partial class DoAfterArgs
     [DataField]
     public bool Hidden;
 
+    /// <summary>
+    /// RMC14
+    /// Whether the progress bar for this DoAfter should be visible regardless of other conditions.
+    /// </summary>
+    [DataField]
+    public bool ForceVisible;
+
     #region Event options
     /// <summary>
     ///     The event that will get raised when the DoAfter has finished. If null, this will simply raise a <see cref="SimpleDoAfterEvent"/>
@@ -271,6 +278,7 @@ public sealed partial class DoAfterArgs
         BlockDuplicate = other.BlockDuplicate;
         CancelDuplicate = other.CancelDuplicate;
         DuplicateCondition = other.DuplicateCondition;
+        ForceVisible = other.ForceVisible;
 
         // Networked
         NetUser = other.NetUser;

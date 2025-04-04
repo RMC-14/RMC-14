@@ -125,7 +125,7 @@
   - GreenBeretRMC
   - TanBeretRMC
   - BoonieRMC
-  - BoonieTanRMC 
+  - BoonieTanRMC
   - CapRMC
   - BrownHeadbandRMC
   - GreenHeadbandRMC
@@ -158,6 +158,11 @@
   - HelmetGasmaskDesertRMC
   - HelmetGasmaskJungleRMC
   - HelmetGasmaskUrbanRMC
+  - FeatherRMC
+  - FeatherRedRMC
+  - FeatherBlueRMC
+  - FeatherPurpleRMC
+  - FeatherYellowRMC
   - GunOilRMC
   - RosaryRMC
   - PrescriptionRMC
@@ -195,6 +200,8 @@
   - PlushieMothRMC
   - PlushieRockRMC
   - PlushieTherapyRMC
+  - PlushieGnarpGnarpRMC
+  - PlushieGnarpGnarpAltRMC
 
 # Weapons
 - type: loadoutGroup

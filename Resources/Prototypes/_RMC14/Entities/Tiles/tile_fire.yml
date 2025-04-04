@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: RMCTileFire
   name: fire
   placement:
@@ -21,7 +21,7 @@
   - type: Sprite
     sprite: _RMC14/Effects/fire.rsi
     noRot: true
-    drawdepth: FloorObjects
+    drawdepth: WallTops
     layers:
     - map: [ "base" ]
       state: red_4
@@ -121,3 +121,29 @@
           Two: { state: white_2 }
           Three: { state: white_3 }
           Four: { state: white_4 }
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCTileFireLaser
+  components:
+  - type: Sprite
+    color: "#EE6515"
+    layers:
+    - map: [ "base" ]
+      state: dynamic_4
+  - type: RMCIgniteOnCollide
+    tileDamage:
+      types:
+        Heat: 0.13
+  - type: TileFire
+    duration: 5
+  - type: PointLight
+    color: "#EE6515"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: dynamic_1 }
+          Two: { state: dynamic_2 }
+          Three: { state: dynamic_3 }
+          Four: { state: dynamic_4 }

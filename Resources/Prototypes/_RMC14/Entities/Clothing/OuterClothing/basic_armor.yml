@@ -16,7 +16,8 @@
     walkModifier: 0.62
     sprintModifier: 0.62
   - type: CMArmor
-    armor: 30
+    melee: 30
+    bullet: 30
     explosionArmor: 10
   - type: CMHardArmor
   - type: RMCNameItemOnVend

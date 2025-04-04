@@ -2,7 +2,6 @@ using Content.Shared._RMC14.Marines.Skills;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Dropship.Utility.Components;
 
@@ -20,9 +19,6 @@ public sealed partial class DropshipUtilityComponent : Component
 
     [DataField, AutoNetworkedField]
     public SkillWhitelist? Skills;
-
-    [DataField, AutoNetworkedField]
-    public SpriteSpecifier.Rsi? UtilityAttachedSprite;
 
     public EntityUid? AttachmentPoint;
 

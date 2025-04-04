@@ -553,6 +553,8 @@
     NettleSeeds: 1 #Contraband
     LingzhiSeeds: 1 #ReishiMycelium #Contraband
     #WaterFlower: 1 #Premium
+    GarlicSeeds: 3
+    OnionSeeds: 3
 
 # DINNERWARE
 
@@ -572,6 +574,7 @@
   startingInventory:
     # TODO RMC14 Tray: 8
     RMCFork: 6
+    RMCSpoon: 4
     RMCKitchenKnifeChef: 3
     DrinkGlass: 8
     ClothingOuterApronChef: 2
@@ -583,6 +586,26 @@
     RMCKitchenKnife: 2 #Contraband
     RMCRollingPin: 2 #Contraband
     RMCKitchenKnifeButcher: 2 #Contraband
+    FoodPlateTin: 5
+    FoodBowlBig: 10
+    PairedChopsticks: 4
+    FoodPlate: 10
+    FoodPlateSmall: 10
+    FoodPlateMuffinTin: 5
+    FoodKebabSkewer: 5
+    CMBeaker: 5
+    CMBeakerLarge: 5
+    Pitcher: 2
+    DrinkMug: 5
+    DrinkMugBlack: 2
+    DrinkMugBlue: 2
+    DrinkMugGreen: 2
+    DrinkMugHeart: 1
+    DrinkMugMetal: 2
+    DrinkMugMoebius: 1
+    DrinkMugOne: 1
+    DrinkMugRainbow: 2
+    DrinkMugRed: 2
 
 # BODA
 
@@ -667,8 +690,8 @@
   startingInventory:
     FoodContainerEgg: 12
     FoodMeatFish: 12
-    FoodMeat: 12
-    DrinkMilkCarton: 12
+    FoodMeat: 24
+    DrinkMilkCarton: 24
     DrinkSoyMilkCarton: 12
     RMCCondimentEnzyme: 12
     ReagentContainerFlour: 12
@@ -691,5 +714,8 @@
     FoodPotato: 12
     FoodTomato: 12
     # TODO RMC14 Whitebeet 12
+    FoodOnion: 12
+    FoodGarlic: 12
+    ReagentContainerRice: 12
 
 #TODO RMC14 UPP CO Uniform Vendor

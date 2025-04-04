@@ -37,3 +37,15 @@
 - type: lobbyBackground
   id: MoveOut
   background: /Textures/_RMC14/Lobby/Move_Out.png
+
+- type: lobbyBackground
+  id: Cornered
+  background: /Textures/_RMC14/Lobby/Cornered.png
+
+- type: lobbyBackground
+  id: EyesUp
+  background: /Textures/_RMC14/Lobby/Eyes_Up.png
+
+- type: lobbyBackground
+  id: FocusFire
+  background: /Textures/_RMC14/Lobby/Focus_Fire.png
