@@ -204,8 +204,17 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/32730c731936c6737668ead7bde83a6cf296010f/sound/weapons/gun_shotgun_tactical_4.ogg"
 
-
 - files: ["gun_boltaction.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/32730c731936c6737668ead7bde83a6cf296010f/sound/weapons/gun_boltaction.ogg"
+
+- files: ["gun_ssg45_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/eb11a226994fb140fb0f713dd05525a0f8b3b3ae/sound/weapons/gun_nsg23_1.ogg"
+
+- files: ["gun_ssg45_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/eb11a226994fb140fb0f713dd05525a0f8b3b3ae/sound/weapons/gun_nsg23_2.ogg"

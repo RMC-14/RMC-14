@@ -1,0 +1,147 @@
+﻿- type: entity
+  parent: CMBaseWeaponRifle
+  name: SSG-45 Assault Rifle
+  id: WeaponRifleSSG45
+  description: Developed by Weston-Yamada as a modern successor to the aging M5 platform, the SpezialSturmGewehr is engineered for precision mid-to-long range combat. Chambered in 7x62mm caseless rounds, it offers superior stopping power and ammunition efficiency compared to the M54C MK2, while maintaining comparable performance in close-quarters engagements. Weston-Yamada’s PMC forces found the UNMC’s M54C increasingly ill-suited to their operational demands, particularly in extended-range missions where precision and firepower were paramount. This dissatisfaction prompted Weston-Yamada’s R&D division to design the SSG, tailoring it to meet the specific needs of their operatives.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/ssg45/ssg45_inhands.rsi
+    layers:
+    - state: base
+      sprite: _RMC14/Objects/Weapons/Guns/Rifles/ssg45/ssg45_icon.rsi
+    - state: bolt-open
+      sprite: _RMC14/Objects/Weapons/Guns/Rifles/ssg45/ssg45_icon.rsi
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      sprite: _RMC14/Objects/Weapons/Guns/Rifles/ssg45/ssg45_icon.rsi
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/ssg45/ssg45_inhands.rsi
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: Gun
+    selectedMode: FullAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    soundGunshot:
+      collection: RMCSSG45Shoot
+    shotsPerBurst: 4
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilUnwielded: 4
+    scatterWielded: 4
+    scatterUnwielded: 20
+    baseFireRate: 4
+    burstScatterMult: 1
+    modifiers:
+      Burst:
+        fireDelay: 0.1665
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+      FullAuto:
+        fireDelay: 0
+        maxScatterModifier: 13
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 4
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.15
+    accuracyMultiplierUnwielded: 0.65
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineRifleSSG45
+        startingItem: RMCMagazineRifleSSG45
+  - type: GunDamageModifier
+    multiplier: 1.1
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-stock:
+        whitelist:
+          tags:
+          - RMCAttachmentM54CStockCollapsible
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentMiniFlamethrower
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.875, 0.095
+      rmc-aslot-rail: 0.095, 0.25
+      rmc-aslot-stock: -0.78, 0.0325
+      rmc-aslot-underbarrel: 0.345, -0.245
+  - type: Tag
+    tags:
+    - RMCWeaponRifleSSG45
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineRifleSSG45
+  name: "SSG45 magazine (7x62mm)"
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleSSG45
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgeRifle10x24mm
+    proto: CMCartridgeRifle10x24mm
+    capacity: 30
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/ssg45.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifle
+
+- type: Tag
+  id: RMCWeaponRifleSSG45
+
+- type: Tag
+  id: RMCMagazineRifleSSG45
