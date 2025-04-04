@@ -32,6 +32,11 @@
         RMCSkillMedical: 1
         RMCSkillVehicles: 1
         RMCSkillPolice: 1
+    - type: MarineOrders
+    - type: SquadArmorWearer
+      leader: true
+    - type: SquadLeader
+    - type: RMCPointing
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-leader
   hidden: true
@@ -68,6 +73,7 @@
   equipment:
     head: CMHeadCapSPPBeret
     ears: RMCHeadsetSPPCommand
+    ears2: RMCM5CameraGear
     jumpsuit: CMJumpsuitSPP
     outerClothing: RMCArmorSPPRifleman
     gloves: RMCHandsVeteranSPP

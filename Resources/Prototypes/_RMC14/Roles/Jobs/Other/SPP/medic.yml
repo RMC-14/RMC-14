@@ -25,6 +25,7 @@
         RMCSkillJtac: 1
         RMCSkillMedical: 2
         RMCSkillSurgery: 1
+    - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-medic
   hidden: true
@@ -61,6 +62,7 @@
   equipment:
     head: CMHeadCapSPP
     ears: RMCHeadsetSPPMedic
+    ears2: RMCM5CameraGear
     eyes: RMCGlassesMedicalHUDGlasses
     jumpsuit: CMJumpsuitSPPMedic
     outerClothing: RMCArmorSPPSupport
