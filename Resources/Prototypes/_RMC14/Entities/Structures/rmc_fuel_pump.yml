@@ -24,7 +24,7 @@
   - type: InteractionOutline
   - type: Clickable
   - type: EvacuationPump
-    sound:
+    activeSound:
       path: /Audio/_RMC14/Machines/fuel_pump_active.ogg
   - type: ApcPowerReceiver
   - type: RMCPowerReceiver

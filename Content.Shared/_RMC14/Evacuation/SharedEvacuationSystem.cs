@@ -383,7 +383,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
         var pumps = EntityQueryEnumerator<EvacuationPumpComponent>();
         while (pumps.MoveNext(out var uid, out var pump))
         {
-            _ambientSound.SetSound(uid, pump.Sound);
+            _ambientSound.SetSound(uid, pump.ActiveSound);
         }
     }
 

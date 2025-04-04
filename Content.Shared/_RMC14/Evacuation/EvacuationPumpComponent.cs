@@ -8,9 +8,9 @@ namespace Content.Shared._RMC14.Evacuation;
 [Access(typeof(SharedEvacuationSystem))]
 public sealed partial class EvacuationPumpComponent : Component
 {
-    [DataField("sound", required: true)]
+    [DataField("activeSound", required: true)]
     [ViewVariables(VVAccess.ReadWrite)]
-    public SoundSpecifier Sound = default!;
+    public SoundSpecifier ActiveSound = default!;
 }
 
 [Serializable, NetSerializable]
