@@ -51,6 +51,8 @@
   - type: Sprite
     sprite: Markers/cross.rsi
     state: red
+  - type: SpawnPoint
+    job_id: RMCSPPSpecialist
   - type: RandomHumanoidSpawner
     settings: RMCSPPSpecialist
 
@@ -95,7 +97,8 @@
     pocket1: RMCPouchAutoinjectorFill
     pocket2: RMCPouchExplosiveFilledC4SPP
   storage:
-    back: RMCMotionDetector
+    back:
+    - RMCMotionDetector
 
 - type: playTimeTracker
   id: CMJobSPPSpecialist

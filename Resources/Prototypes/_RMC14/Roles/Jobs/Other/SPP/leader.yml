@@ -54,6 +54,8 @@
   - type: Sprite
     sprite: Markers/cross.rsi
     state: red
+  - type: SpawnPoint
+    job_id: RMCSPPLeader
   - type: RandomHumanoidSpawner
     settings: RMCSPPLeader
 

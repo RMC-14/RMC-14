@@ -47,6 +47,8 @@
   - type: Sprite
     sprite: Markers/cross.rsi
     state: red
+  - type: SpawnPoint
+    job_id: RMCSPPMedic
   - type: RandomHumanoidSpawner
     settings: RMCSPPMedic
 

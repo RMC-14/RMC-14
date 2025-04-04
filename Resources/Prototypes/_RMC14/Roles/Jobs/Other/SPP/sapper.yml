@@ -48,6 +48,8 @@
   - type: Sprite
     sprite: Markers/cross.rsi
     state: red
+  - type: SpawnPoint
+    job_id: RMCSPPEngineer
   - type: RandomHumanoidSpawner
     settings: RMCSPPEngineer
 
@@ -90,7 +92,8 @@
     back: RMCSatchelSPPWelderEngineer
     pocket1: RMCPouchAutoinjectorFill
     pocket2: RMCPouchConstructionFillFull
-  inhand: RMCToolWebbingSmallFilled
+  inhand:
+    - RMCToolWebbingSmallFilled
 
 - type: playTimeTracker
   id: CMJobSPPEngineer
