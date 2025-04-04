@@ -15,6 +15,9 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
     - type: Skills
       skills:
         RMCSkillConstruction: 2
@@ -29,25 +32,13 @@
 
 - type: entity
   parent: MarkerBase
-  id: RMCSpawnerSPPEngineer
-  name: spp spawner engineer
+  id: RMCRandomHumanoidSPPEngineer
+  name: spp ghost role engineer
   suffix: Spawner, Player
   components:
   - type: Sprite
     layers:
     - state: red
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCRandomHumanoidSPPEngineer
-
-- type: entity
-  id: RMCRandomHumanoidSPPEngineer
-  name: spp ghost role engineer
-  suffix: Role, Player
-  components:
-  - type: Sprite
-    sprite: Markers/cross.rsi
-    state: red
   - type: RandomHumanoidSpawner
     settings: RMCSPPEngineer
 
@@ -59,18 +50,12 @@
     name: rmc-job-name-spp-engineer
     description: rmc-job-description-spp-engineer
     rules: rmc-ghost-role-information-spp-rules
+    reregister: false
+    job: RMCSPPEngineer
     raffle:
       settings: short
-  - type: Loadout
-    prototypes: [ RMCGearSPPEngineer ]
-  - type: Skills
-    skills:
-      RMCSkillConstruction: 2
-      RMCSkillEngineer: 3
-      RMCSkillFirearms: 1
-      RMCSkillFireman: 1
-      RMCSkillJtac: 1
-      RMCSkillVehicles: 1
+  - type: GhostRoleApplySpecial
+    squad: SquadSPP
 
 - type: startingGear
   id: RMCGearSPPEngineer
@@ -89,6 +74,8 @@
     back: RMCSatchelSPPWelderEngineer
     pocket1: RMCPouchAutoinjectorFill
     pocket2: RMCPouchConstructionFillFull
+  inhand:
+  - RMCToolWebbingSmallFilled
 
 - type: playTimeTracker
   id: CMJobSPPEngineer

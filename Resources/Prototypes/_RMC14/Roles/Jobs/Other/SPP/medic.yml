@@ -15,6 +15,9 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
     - type: Skills
       skills:
         RMCSkillFirearms: 1
@@ -28,25 +31,13 @@
 
 - type: entity
   parent: MarkerBase
-  id: RMCSpawnerSPPMedic
-  name: spp spawner medic
+  id: RMCRandomHumanoidSPPMedic
+  name: spp ghost role medic
   suffix: Spawner, Player
   components:
   - type: Sprite
     layers:
     - state: red
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCRandomHumanoidSPPMedic
-
-- type: entity
-  id: RMCRandomHumanoidSPPMedic
-  name: spp ghost role medic
-  suffix: Role, Player
-  components:
-  - type: Sprite
-    sprite: Markers/cross.rsi
-    state: red
   - type: RandomHumanoidSpawner
     settings: RMCSPPMedic
 
@@ -58,17 +49,12 @@
     name: rmc-job-name-spp-medic
     description: rmc-job-description-spp-medic
     rules: rmc-ghost-role-information-spp-rules
+    reregister: false
+    job: RMCSPPMedic
     raffle:
       settings: short
-  - type: Loadout
-    prototypes: [ RMCGearSPPMedic ]
-  - type: Skills
-    skills:
-      RMCSkillFirearms: 1
-      RMCSkillFireman: 1
-      RMCSkillJtac: 1
-      RMCSkillMedical: 2
-      RMCSkillSurgery: 1
+  - type: GhostRoleApplySpecial
+    squad: SquadSPP
 
 - type: startingGear
   id: RMCGearSPPMedic
