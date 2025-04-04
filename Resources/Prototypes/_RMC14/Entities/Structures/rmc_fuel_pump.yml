@@ -42,7 +42,7 @@
       visible: false
   - type: Appearance
   - type: GenericVisualizer
-    visuals:      
+    visuals:
       enum.EvacuationPumpLayers.Layer:
         enum.EvacuationPumpLayers.Layer:
           Empty: { state: fuelpump_0 }
