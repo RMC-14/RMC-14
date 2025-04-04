@@ -30,6 +30,8 @@
         RMCSkillSpecialistWeapons: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-specialist
+    - type: UserIFF
+      faction: FactionSPP
   hidden: true
 
 - type: entity

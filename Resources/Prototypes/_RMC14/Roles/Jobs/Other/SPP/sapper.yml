@@ -28,6 +28,8 @@
         RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-engineer
+    - type: UserIFF
+      faction: FactionSPP
   hidden: true
 
 - type: entity

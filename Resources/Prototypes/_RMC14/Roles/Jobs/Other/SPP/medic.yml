@@ -27,6 +27,8 @@
         RMCSkillSurgery: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-medic
+    - type: UserIFF
+      faction: FactionSPP
   hidden: true
 
 - type: entity

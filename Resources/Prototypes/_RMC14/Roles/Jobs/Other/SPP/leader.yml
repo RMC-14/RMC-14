@@ -34,6 +34,8 @@
         RMCSkillPolice: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-leader
+    - type: UserIFF
+      faction: FactionSPP
   hidden: true
 
 - type: entity

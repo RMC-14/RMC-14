@@ -22,6 +22,8 @@
         RMCSkillFirearms: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-soldier
+    - type: UserIFF
+      faction: FactionSPP
   hidden: true
 
 - type: entity
