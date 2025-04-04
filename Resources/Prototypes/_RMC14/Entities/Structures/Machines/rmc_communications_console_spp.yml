@@ -4,6 +4,7 @@
   suffix: SPP
   components:
   - type: OverwatchConsole
+    canOrbitalBombardment: false
     group: SPP
   - type: TacticalMapComputer
     group: SPP
