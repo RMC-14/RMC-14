@@ -1,0 +1,26 @@
+- type: entity
+  parent: RMCOverwatchConsole
+  id: RMCOverwatchConsoleSPP
+  suffix: SPP
+  components:
+  - type: OverwatchConsole
+    group: SPP
+  - type: TacticalMapComputer
+    group: SPP
+
+- type: entity
+  parent: RMCOverwatchConsoleSPP
+  id: RMCOverwatchConsoleSPPRotating
+  suffix: SPP, Rotating
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: false
+
+- type: entity
+  parent: RMCTacticalMapTable
+  id: RMCTacticalMapTableSPP
+  suffix: SPP
+  components:
+  - type: TacticalMapComputer
+    group: SPP

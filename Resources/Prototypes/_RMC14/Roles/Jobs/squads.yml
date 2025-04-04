@@ -149,4 +149,5 @@
     minimapBackground:
       sprite: _RMC14/Interface/map_blips.rsi
       state: background_spp
-    # RMC14-TODO: squad groups
+    canSupplyDrop: false
+    group: SPP
