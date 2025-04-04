@@ -8,7 +8,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/pmc.rsi
   - type: CMArmor
-    armor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
+    bullet: 25 # CLOTHING_ARMOR_MEDIUMHIGH
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
@@ -29,7 +29,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/sniper.rsi
   - type: CMArmor
-    armor: 20 # CLOTHING_ARMOR_MEDIUM
+    melee: 15
+    bullet: 20 # CLOTHING_ARMOR_MEDIUM
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 15 # CLOTHING_ARMOR_MEDIUMLOW
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
@@ -73,7 +74,10 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/sniper.rsi
-
+  - type: CMArmor
+    bullet: 25
+    explosionArmor: 20
+    
 - type: entity
   parent: CMArmorM4PMCLight
   id: CMArmorM4PMCSynth
@@ -84,7 +88,10 @@
     equipDelay: 1
     unequipDelay: 0.5
   - type: CMArmor
-    armor: 0 # CLOTHING_ARMOR_NONE
+    melee: 0 # CLOTHING_ARMOR_NONE
+    bullet: 0
+    bio: 0
+    explosionArmor: 0
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_SUPER_LIGHT
     walkModifier: 0.949
     sprintModifier: 0.949
@@ -101,7 +108,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/heavy.rsi
   - type: CMArmor
-    armor: 25 # CLOTHING_ARMOR_MEDIUMHIGH
+    bullet: 25 # CLOTHING_ARMOR_MEDIUMHIGH
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
   - type: ItemCamouflage
@@ -116,7 +123,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/commando.rsi
   - type: CMArmor
-    armor: 40 # CLOTHING_ARMOR_HIGH (melee); CLOTHING_ARMOR_ULTRAHIGH (bullets); going with an intermediate value until more damage types get implemented
+    melee: 30 # CLOTHING_ARMOR_HIGH (melee) 
+    bullet: 50 # CLOTHING_ARMOR_ULTRAHIGH (bullets)
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 40 # CLOTHING_ARMOR_VERYHIGH
   - type: RMCArmorSpeedTier
@@ -136,7 +144,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/commando.rsi
   - type: CMArmor
-    armor: 45 # CLOTHING_ARMOR_VERYHIGH (melee); CLOTHING_ARMOR_ULTRAHIGH (bullets); going with an intermediate value until more damage types get implemented (more likely to be hit by bullets than melee)
+    melee: 40 # CLOTHING_ARMOR_VERYHIGH (melee); 
+    bullet: 50 # CLOTHING_ARMOR_ULTRAHIGH (bullets); going with an intermediate value until more damage types get implemented (more likely to be hit by bullets than melee)
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 40 # CLOTHING_ARMOR_VERYHIGH
   - type: RMCArmorSpeedTier

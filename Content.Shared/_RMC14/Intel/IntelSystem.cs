@@ -621,7 +621,7 @@ public sealed class IntelSystem : EntitySystem
         return false;
     }
 
-    private void RunSpawners()
+    public void RunSpawners()
     {
         try
         {
@@ -821,8 +821,6 @@ public sealed class IntelSystem : EntitySystem
     {
         if (_net.IsClient)
             return;
-
-        RunSpawners();
 
         var time = _timing.CurTime;
         if (TryGetTechTree(out var tree) &&

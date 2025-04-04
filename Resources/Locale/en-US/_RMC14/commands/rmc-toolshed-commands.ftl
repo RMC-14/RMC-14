@@ -43,6 +43,7 @@ command-description-requisitions-removebudget = Removes budget from the default 
 
 command-description-intel-addpoints = Adds points to the default Intel tech tree.
 command-description-intel-removepoints = Removes points from the default Intel tech tree.
+command-description-intel-spawnintel = Spawns intel on all initialized maps.
 
 command-description-prototypecontains = Filters entities by whether or not their prototype ID contains the given text.
 

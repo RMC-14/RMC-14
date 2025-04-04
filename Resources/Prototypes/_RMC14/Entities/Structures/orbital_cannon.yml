@@ -52,6 +52,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_fuel
+    drawdepth: SmallObjects
   - type: Clickable
   - type: InteractionOutline
   - type: PowerLoaderGrabbable

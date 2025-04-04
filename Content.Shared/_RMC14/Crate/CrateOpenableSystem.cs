@@ -33,6 +33,7 @@ public sealed class CrateOpenableSystem : EntitySystem
             return;
         }
 
+        args.Handled = true;
         _audio.PlayPredicted(ent.Comp.Sound, _transform.GetMoverCoordinates(ent), args.User);
 
         if (_net.IsClient)

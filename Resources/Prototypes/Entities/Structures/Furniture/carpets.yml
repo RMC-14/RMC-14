@@ -27,9 +27,9 @@
     - trigger:
         !type:DamageTrigger
         damage: 10
-        behaviors:
-        - !type:DoActsBehavior
-          acts: [ "Destruction" ]
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
   - type: Butcherable
     butcheringType: Knife
     butcherDelay: 2
