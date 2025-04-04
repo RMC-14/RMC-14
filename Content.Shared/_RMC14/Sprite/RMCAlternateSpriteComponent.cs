@@ -3,7 +3,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._RMC14.Sprite;
 
 /// <summary>
-/// Used for showing different sprites to clients due to some sprites causing tryptophobia etc
+/// Used for showing different sprites to clients due to some sprites causing trypophobia etc
 /// </summary>
 ///
 [RegisterComponent, NetworkedComponent]
