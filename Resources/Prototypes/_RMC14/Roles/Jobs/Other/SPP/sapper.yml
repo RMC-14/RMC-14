@@ -7,7 +7,7 @@
   ranks:
     RMCRankSPPMladshiySerzhant: []
   startingGear: RMCGearSPPEngineer
-  icon: "RMCJobIconSPPEngineer"
+  icon: RMCJobIconSPPEngineer
   joinNotifyCrew: false
   accessGroups:
   - Colonist
@@ -61,6 +61,7 @@
     rules: rmc-ghost-role-information-spp-rules
     raffle:
       settings: short
+    job: RMCSPPEngineer
   - type: Loadout
     prototypes: [ RMCGearSPPEngineer ]
   - type: Skills
@@ -89,6 +90,7 @@
     back: RMCSatchelSPPWelderEngineer
     pocket1: RMCPouchAutoinjectorFill
     pocket2: RMCPouchConstructionFillFull
+  inhand: RMCToolWebbingSmallFilled
 
 - type: playTimeTracker
   id: CMJobSPPEngineer

@@ -7,7 +7,7 @@
   ranks:
     RMCRankSPPSerzhant: []
   startingGear: RMCGearSPPSpecialist
-  icon: "RMCJobIconSPPSpecialist"
+  icon: RMCJobIconSPPSpecialist
   joinNotifyCrew: false
   accessGroups:
   - Colonist
@@ -64,6 +64,7 @@
     rules: rmc-ghost-role-information-spp-rules
     raffle:
       settings: short
+    job: RMCSPPSpecialist
   - type: Loadout
     prototypes: [ RMCGearSPPSpecialist ]
   - type: Skills
@@ -93,6 +94,8 @@
     back: RMCSatchelSPPRifleman
     pocket1: RMCPouchAutoinjectorFill
     pocket2: RMCPouchExplosiveFilledC4SPP
+  storage:
+    back: RMCMotionDetector
 
 - type: playTimeTracker
   id: CMJobSPPSpecialist

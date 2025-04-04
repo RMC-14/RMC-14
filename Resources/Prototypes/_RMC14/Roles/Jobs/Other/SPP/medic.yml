@@ -7,7 +7,7 @@
   ranks:
     RMCRankSPPMladshiySerzhant: []
   startingGear: RMCGearSPPMedic
-  icon: "RMCJobIconSPPMedic"
+  icon: RMCJobIconSPPMedic
   joinNotifyCrew: false
   accessGroups:
   - Colonist
@@ -60,6 +60,7 @@
     rules: rmc-ghost-role-information-spp-rules
     raffle:
       settings: short
+    job: RMCSPPMedic
   - type: Loadout
     prototypes: [ RMCGearSPPMedic ]
   - type: Skills

@@ -7,7 +7,7 @@
   ranks:
     RMCRankSPPRyadovoy: []
   startingGear: RMCGearSPPRifleman
-  icon: "RMCJobIconSPPRifleman"
+  icon: RMCJobIconSPPRifleman
   joinNotifyCrew: false
   accessGroups:
   - Colonist
@@ -55,6 +55,7 @@
     rules: rmc-ghost-role-information-spp-rules
     raffle:
       settings: short
+    job: RMCSPPRifleman
   - type: Loadout
     prototypes: [ RMCGearSPPRifleman ]
   - type: Skills

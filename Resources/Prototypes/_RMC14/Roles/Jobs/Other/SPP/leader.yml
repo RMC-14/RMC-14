@@ -7,7 +7,7 @@
   ranks:
     RMCRankSPPSerzhant: []
   startingGear: RMCGearSPPLeader
-  icon: "RMCJobIconSPPLeader"
+  icon: RMCJobIconSPPLeader
   joinNotifyCrew: false
   accessGroups:
   - Colonist
@@ -67,6 +67,7 @@
     rules: rmc-ghost-role-information-spp-rules
     raffle:
       settings: short
+    job: RMCSPPLeader
   - type: Loadout
     prototypes: [ RMCGearSPPLeader ]
   - type: Skills
@@ -99,6 +100,9 @@
     back: RMCSatchelSPPRifleman
     pocket1: RMCPouchAutoinjectorFill
     pocket2: RMCPouchFuelTankFilledExtinguisher
+  storage:
+    back:
+    - RMCBoxZiptie
 
 - type: playTimeTracker
   id: CMJobSPPLeader
