@@ -417,7 +417,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             return;
         }
 
-        _squad.PromoteSquadLeader((target.Value, member), args.Actor);
+        _squad.PromoteSquadLeader((target.Value, member), args.Actor, args.Icon);
         var state = GetOverwatchBuiState(ent);
         _ui.SetUiState(ent.Owner, OverwatchConsoleUI.Key, state);
     }

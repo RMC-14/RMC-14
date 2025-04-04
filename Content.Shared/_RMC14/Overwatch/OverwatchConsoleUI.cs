@@ -3,6 +3,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Overwatch;
 
@@ -80,9 +81,10 @@ public sealed class OverwatchConsoleHideBuiMsg(NetEntity target, bool hide) : Bo
 }
 
 [Serializable, NetSerializable]
-public sealed class OverwatchConsolePromoteLeaderBuiMsg(NetEntity target) : BoundUserInterfaceMessage
+public sealed class OverwatchConsolePromoteLeaderBuiMsg(NetEntity target, SpriteSpecifier.Rsi icon) : BoundUserInterfaceMessage
 {
     public readonly NetEntity Target = target;
+    public readonly SpriteSpecifier.Rsi Icon = icon;
 }
 
 [Serializable, NetSerializable]
