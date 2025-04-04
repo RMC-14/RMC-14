@@ -58,7 +58,7 @@
   id: RMCSPPSpecialist
   components:
   - type: GhostRole
-    name: rmc-job-name-spp-specialist
+    name: rmc-ghost-role-name-spp-specialist
     description: rmc-job-description-spp-specialist
     rules: rmc-ghost-role-information-spp-rules
     raffle:
@@ -87,7 +87,7 @@
     gloves: RMCHandsVeteranSPP
     shoes: CMBootsBlackFilled
     suitstorage: RMCWeaponLMGM60 # TODO RMC14 : Replace with PKP
-    id: RMCIDSPP
+    id: RMCIDSPPSpecialist
     belt: CMM77BeltFilled # TODO RMC14 : Replace with T73, NP92 or Revolver
     back: RMCSatchelSPPRifleman
     pocket1: RMCPouchAutoinjectorFill

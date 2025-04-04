@@ -45,15 +45,7 @@
   - type: ItemSlots
     slots:
       gun_magazine:
-        name: Magazine
-        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
-        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - RMCMagazineRifleType71
-          - RMCMagazineRifleType71AP
-          - RMCMagazineRifleType71HEAP
+        startingItem: RMCMagazineRifleType71
   - type: GunDamageModifier
     multiplier: 1
   - type: AttachableHolder
@@ -128,6 +120,31 @@
   - type: Appearance
 #  - type: RefillableByBulletBox no bullet box yet
 #    bulletType: RMCBoxBulletsRifle
+
+- type: entity
+  parent: RMCWeaponRifleType71
+  id: RMCWeaponRifleType71FilledAP
+  suffix: AP
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        startingItem: RMCMagazineRifleType71AP
+
+- type: entity
+  parent: RMCWeaponRifleType71
+  name: Type 71-F assault rifle
+  id: RMCWeaponRifleType71Flamer
+  description: This appears to be a less common variant of the Type 71 with an integrated flamethrower that seems especially powerful.
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-underbarrel:
+        locked: true
+        startingAttachable: RMCAttachmentMiniFlamethrower
+        whitelist:
+          tags:
+          - RMCAttachmentFlamer
 
 - type: entity
   parent: RMCMagazineRifleType71

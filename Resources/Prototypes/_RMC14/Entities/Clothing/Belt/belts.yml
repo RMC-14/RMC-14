@@ -1126,10 +1126,10 @@
 
 - type: entity
   parent: CMBeltMarine
-  id: RMCM17BeltFilled
+  id: RMCType71BeltFilled
   suffix: Filled
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazineRifleM16
+    - id: RMCMagazineRifleType71
       amount: 5

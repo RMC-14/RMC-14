@@ -55,7 +55,7 @@
   id: RMCSPPMedic
   components:
   - type: GhostRole
-    name: rmc-job-name-spp-medic
+    name: rmc-ghost-role-name-spp-medic
     description: rmc-job-description-spp-medic
     rules: rmc-ghost-role-information-spp-rules
     raffle:
@@ -81,7 +81,7 @@
     gloves: RMCHandsVeteranSPP
     shoes: CMBootsBlackFilled
     suitstorage: WeaponSMGMP5 # TODO RMC14 : Replace with Bizon SMG
-    id: RMCIDSPP
+    id: RMCIDSPPMedic
     belt: CMBeltMedicBagFilled
     back: RMCSatchelSPPMedic
     pocket1: RMCPouchMedkitFillSPP

@@ -50,7 +50,7 @@
   id: RMCSPPRifleman
   components:
   - type: GhostRole
-    name: rmc-job-name-spp-soldier
+    name: rmc-ghost-role-name-spp-soldier
     description: rmc-job-description-spp-soldier
     rules: rmc-ghost-role-information-spp-rules
     raffle:
@@ -70,9 +70,9 @@
     outerClothing: RMCArmorSPPRifleman
     gloves: RMCHandsVeteranSPP
     shoes: CMBootsBlackFilled
-    suitstorage: WeaponRifleM16 # TODO RMC14 : Replace with Type-71 Rifle
-    id: RMCIDSPP
-    belt: RMCM17BeltFilled # TODO RMC14 : Replace with Type-71 Ammo Belt
+    suitstorage: RMCWeaponRifleType71
+    id: RMCIDSPPRifleman
+    belt: RMCType71BeltFilled
     back: RMCSatchelSPPRifleman
     pocket1: RMCPouchAutoinjectorFill
     pocket2: RMCPouchExplosiveFilledSPP
