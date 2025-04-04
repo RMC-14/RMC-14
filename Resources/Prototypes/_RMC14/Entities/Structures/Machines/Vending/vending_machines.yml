@@ -574,7 +574,6 @@
   startingInventory:
     # TODO RMC14 Tray: 8
     RMCFork: 6
-    RMCSpoon: 4
     RMCKitchenKnifeChef: 3
     DrinkGlass: 8
     ClothingOuterApronChef: 2
