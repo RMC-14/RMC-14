@@ -11,7 +11,6 @@
   joinNotifyCrew: false
   accessGroups:
   - Colonist
-  - HospitalCorpsman
   special:
   - !type:AddComponentSpecial
     components:
@@ -51,8 +50,6 @@
   - type: Sprite
     sprite: Markers/cross.rsi
     state: red
-  - type: SpawnPoint
-    job_id: RMCSPPSpecialist
   - type: RandomHumanoidSpawner
     settings: RMCSPPSpecialist
 
@@ -67,8 +64,6 @@
     raffle:
       settings: short
     job: RMCSPPSpecialist
-  - type: Loadout
-    prototypes: [ RMCGearSPPSpecialist ]
   - type: Skills
     skills:
       RMCSkillCqc: 1
@@ -80,6 +75,7 @@
       RMCSkillJtac: 1
       RMCSkillMeleeWeapons: 1
       RMCSkillSpecialistWeapons: 1
+  - type: GhostRoleApplySpecial
 
 - type: startingGear
   id: RMCGearSPPSpecialist

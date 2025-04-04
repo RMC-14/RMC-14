@@ -54,8 +54,6 @@
   - type: Sprite
     sprite: Markers/cross.rsi
     state: red
-  - type: SpawnPoint
-    job_id: RMCSPPLeader
   - type: RandomHumanoidSpawner
     settings: RMCSPPLeader
 
@@ -69,9 +67,8 @@
     rules: rmc-ghost-role-information-spp-rules
     raffle:
       settings: short
+    reregister: false
     job: RMCSPPLeader
-  - type: Loadout
-    prototypes: [ RMCGearSPPLeader ]
   - type: Skills
     skills:
       RMCSkillConstruction: 2
@@ -86,6 +83,7 @@
       RMCSkillMedical: 1
       RMCSkillVehicles: 1
       RMCSkillPolice: 1
+  - type: GhostRoleApplySpecial
 
 - type: startingGear
   id: RMCGearSPPLeader

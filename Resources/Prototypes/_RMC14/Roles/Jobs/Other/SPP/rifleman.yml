@@ -42,8 +42,6 @@
   - type: Sprite
     sprite: Markers/cross.rsi
     state: red
-  - type: SpawnPoint
-    job_id: RMCSPPRifleman
   - type: RandomHumanoidSpawner
     settings: RMCSPPRifleman
 
@@ -58,11 +56,10 @@
     raffle:
       settings: short
     job: RMCSPPRifleman
-  - type: Loadout
-    prototypes: [ RMCGearSPPRifleman ]
   - type: Skills
     skills:
       RMCSkillFirearms: 1
+  - type: GhostRoleApplySpecial
 
 - type: startingGear
   id: RMCGearSPPRifleman

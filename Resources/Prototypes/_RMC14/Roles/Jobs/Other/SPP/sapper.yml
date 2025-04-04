@@ -48,8 +48,6 @@
   - type: Sprite
     sprite: Markers/cross.rsi
     state: red
-  - type: SpawnPoint
-    job_id: RMCSPPEngineer
   - type: RandomHumanoidSpawner
     settings: RMCSPPEngineer
 
@@ -64,8 +62,6 @@
     raffle:
       settings: short
     job: RMCSPPEngineer
-  - type: Loadout
-    prototypes: [ RMCGearSPPEngineer ]
   - type: Skills
     skills:
       RMCSkillConstruction: 2
@@ -74,6 +70,7 @@
       RMCSkillFireman: 1
       RMCSkillJtac: 1
       RMCSkillVehicles: 1
+  - type: GhostRoleApplySpecial
 
 - type: startingGear
   id: RMCGearSPPEngineer
