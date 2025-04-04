@@ -15,6 +15,9 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
     - type: Skills
       skills:
         RMCSkillConstruction: 2
@@ -35,25 +38,13 @@
 
 - type: entity
   parent: MarkerBase
-  id: RMCSpawnerSPPLeader
-  name: spp spawner leader
+  id: RMCRandomHumanoidSPPLeader
+  name: spp ghost role leader
   suffix: Spawner, Player
   components:
   - type: Sprite
     layers:
     - state: red
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCRandomHumanoidSPPLeader
-
-- type: entity
-  id: RMCRandomHumanoidSPPLeader
-  name: spp ghost role leader
-  suffix: Role, Player
-  components:
-  - type: Sprite
-    sprite: Markers/cross.rsi
-    state: red
   - type: RandomHumanoidSpawner
     settings: RMCSPPLeader
 
@@ -65,24 +56,12 @@
     name: rmc-job-name-spp-leader
     description: rmc-job-description-spp-leader
     rules: rmc-ghost-role-information-spp-rules
+    reregister: false
+    job: RMCSPPLeader
     raffle:
       settings: short
-  - type: Loadout
-    prototypes: [ RMCGearSPPLeader ]
-  - type: Skills
-    skills:
-      RMCSkillConstruction: 2
-      RMCSkillCqc: 1
-      RMCSkillEndurance: 2
-      RMCSkillEngineer: 2
-      RMCSkillFirearms: 1
-      RMCSkillFireman: 1
-      RMCSkillIntel: 1
-      RMCSkillJtac: 2
-      RMCSkillLeadership: 1
-      RMCSkillMedical: 1
-      RMCSkillVehicles: 1
-      RMCSkillPolice: 1
+  - type: GhostRoleApplySpecial
+    squad: SquadSPP
 
 - type: startingGear
   id: RMCGearSPPLeader
@@ -99,6 +78,9 @@
     back: RMCSatchelSPPRifleman
     pocket1: RMCPouchAutoinjectorFill
     pocket2: RMCPouchFuelTankFilledExtinguisher
+  storage:
+    back:
+    - RMCBoxZiptie
 
 - type: playTimeTracker
   id: CMJobSPPLeader

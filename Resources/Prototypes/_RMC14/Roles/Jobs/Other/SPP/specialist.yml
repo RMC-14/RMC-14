@@ -15,6 +15,9 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
     - type: Skills
       skills:
         RMCSkillCqc: 1
@@ -32,25 +35,13 @@
 
 - type: entity
   parent: MarkerBase
-  id: RMCSpawnerSPPSpecialist
-  name: spp spawner specialist
+  id: RMCRandomHumanoidSPPSpecialist
+  name: spp ghost role specialist
   suffix: Spawner, Player
   components:
   - type: Sprite
     layers:
     - state: red
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCRandomHumanoidSPPSpecialist
-
-- type: entity
-  id: RMCRandomHumanoidSPPSpecialist
-  name: spp ghost role specialist
-  suffix: Role, Player
-  components:
-  - type: Sprite
-    sprite: Markers/cross.rsi
-    state: red
   - type: RandomHumanoidSpawner
     settings: RMCSPPSpecialist
 
@@ -62,21 +53,12 @@
     name: rmc-job-name-spp-specialist
     description: rmc-job-description-spp-specialist
     rules: rmc-ghost-role-information-spp-rules
+    reregister: false
+    job: RMCSPPSpecialist
     raffle:
       settings: short
-  - type: Loadout
-    prototypes: [ RMCGearSPPSpecialist ]
-  - type: Skills
-    skills:
-      RMCSkillCqc: 1
-      RMCSkillConstruction: 1
-      RMCSkillEndurance: 2
-      RMCSkillEngineer: 1
-      RMCSkillFirearms: 1
-      RMCSkillFireman: 1
-      RMCSkillJtac: 1
-      RMCSkillMeleeWeapons: 1
-      RMCSkillSpecialistWeapons: 1
+  - type: GhostRoleApplySpecial
+    squad: SquadSPP
 
 - type: startingGear
   id: RMCGearSPPSpecialist
@@ -93,6 +75,9 @@
     back: RMCSatchelSPPRifleman
     pocket1: RMCPouchAutoinjectorFill
     pocket2: RMCPouchExplosiveFilledC4SPP
+  storage:
+    back:
+    - RMCMotionDetector
 
 - type: playTimeTracker
   id: CMJobSPPSpecialist
