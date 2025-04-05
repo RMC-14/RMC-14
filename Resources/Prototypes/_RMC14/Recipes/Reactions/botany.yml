@@ -1,0 +1,19 @@
+- type: reaction
+  id: RMCAmmoniumNitrate
+  reactants:
+    RMCAmmonia:
+      amount: 1
+    RMCPolytrinicAcid:
+      amount: 1
+  products:
+    RMCAmmoniumNitrate: 2
+    
+- type: reaction
+  id: RMCAmmonia
+  reactants:
+    RMCHydrogen:
+      amount: 3
+    RMCNitrogen:
+      amount: 1
+  products:
+    RMCAmmonia: 3
