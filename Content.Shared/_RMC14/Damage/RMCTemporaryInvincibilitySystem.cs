@@ -57,7 +57,7 @@ public sealed class RMCTemporaryInvincibilitySystem : EntitySystem
                 continue;
 
             RemCompDeferred<RMCTemporaryInvincibilityComponent>(uid);
-            _evasion.RefreshEvasionModifiers(ent);
+            _evasion.RefreshEvasionModifiers(uid);
         }
     }
 }
