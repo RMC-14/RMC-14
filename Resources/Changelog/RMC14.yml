@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: TsjipTsjip
-  changes:
-  - message: Phones now make a popup including the name of who initiated the call.
-    type: Add
-  id: 1046
-  time: '2024-11-30T12:14:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4988
 - author: Rainbeon
   changes:
   - message: Turning into a Xeno strain no longer consumes points.
@@ -5381,5 +5374,12 @@
   id: 1548
   time: '2025-04-05T01:51:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5475
+- author: DummeHytteOst
+  changes:
+  - message: Ported new bullet impact sounds.
+    type: Add
+  id: 1549
+  time: '2025-04-05T02:16:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6033
 Name: RMC14
 Order: -1
