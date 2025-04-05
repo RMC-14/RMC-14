@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Sprites by @aleksh and @.sigma_draconis.",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "carrier_rest_2"
+    },
+    {
+      "name": "carrier_rest_3"
+    },
+    {
+      "name": "carrier_walk_0",
+      "directions": 4
+    },
+    {
+      "name": "carrier_walk_1",
+      "directions": 4
+    },
+    {
+      "name": "carrier_walk_2",
+      "directions": 4
+    },
+    {
+      "name": "carrier_walk_3",
+      "directions": 4
+    },
+    {
+      "name": "crit"
+    },
+    {
+      "name": "dead"
+    },
+    {
+      "name": "sleeping"
+    },
+    {
+      "name": "alive",
+      "directions": 4
+    },
+    {
+      "name": "carrier_downed_0"
+    },
+    {
+      "name": "carrier_downed_1"
+    },
+    {
+      "name": "carrier_downed_2"
+    },
+    {
+      "name": "carrier_downed_3"
+    },
+    {
+      "name": "carrier_rest_0"
+    },
+    {
+      "name": "carrier_rest_1"
+    },
+    {
+      "name": "carrier_parasite_right"
+    },
+    {
+      "name": "carrier_egg_left"
+    },
+    {
+      "name": "carrier_egg_right"
+    },
+    {
+      "name": "carrier_parasite_left"
+    }
+  ]
+}
