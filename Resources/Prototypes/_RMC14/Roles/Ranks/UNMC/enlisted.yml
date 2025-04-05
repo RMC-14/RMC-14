@@ -51,6 +51,8 @@
   name: Lance Corporal
   prefix: LCpl.
   paygrade: E3
+  roleLimits:
+    CMRifleman: 2
 
 - type: rank
   id: RMCRankPrivateFirstClass

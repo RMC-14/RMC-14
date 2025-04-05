@@ -1,4 +1,5 @@
-﻿using Content.Server.Players.PlayTimeTracking;
+﻿using Content.Server._RMC14.Rules;
+using Content.Server.Players.PlayTimeTracking;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared.Chat;
 using Content.Shared.GameTicking;
@@ -12,6 +13,7 @@ public sealed class RankSystem : SharedRankSystem
     [Dependency] private readonly PlayTimeTrackingManager _tracking = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
 
     public override void Initialize()
     {
@@ -64,9 +66,18 @@ public sealed class RankSystem : SharedRankSystem
                     }
                 }
 
+                _distressSignal.RoleRankLimits.TryGetValue(ev.JobId, out var currentCount);
+
+                if (rankPrototype.RoleLimits != null && !rankPrototype.RoleLimits.TryGetValue(ev.JobId, out var maxLimit))
+                {
+                    if (currentCount >= maxLimit)
+                        failed = true;
+                }
+
                 if (!failed)
                 {
                     SetRank(ev.Mob, rankPrototype);
+                    _distressSignal.RoleRankLimits[ev.JobId] = currentCount + 1;
                     break;
                 }
             }
