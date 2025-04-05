@@ -1,22 +1,22 @@
 ﻿- type: entity
   parent: CMBaseWeaponRifle
-  name: SSG-45 Assault Rifle
-  id: WeaponRifleSSG45
-  description: Developed by Weston-Yamada as a modern successor to the aging M5 platform, the SpezialSturmGewehr is engineered for precision mid-to-long range combat. Chambered in 7x62mm caseless rounds, it offers superior stopping power and ammunition efficiency compared to the M54C MK2, while maintaining comparable performance in close-quarters engagements. Weston-Yamada’s PMC forces found the UNMC’s M54C increasingly ill-suited to their operational demands, particularly in extended-range missions where precision and firepower were paramount. This dissatisfaction prompted Weston-Yamada’s R&D division to design the SSG, tailoring it to meet the specific needs of their operatives.
+  name: weston yamada storm rifle
+  id: WeaponRifleWYSR
+  description: Developed by Weston-Yamada as a modern successor to the aging M5 platform, the WYSR is engineered for precision mid-to-long range combat. Chambered in 7x62mm caseless rounds, it offers superior stopping power and ammunition efficiency compared to the M54C MK2, while maintaining comparable performance in close-quarters engagements. Weston-Yamada’s PMC forces found the UNMC’s M54C increasingly ill-suited to their operational demands, particularly in extended-range missions where precision and firepower were paramount. This dissatisfaction prompted Weston-Yamada’s R&D division to design the storm rifle, tailoring it to meet the specific needs of their operatives.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/ssg45/ssg45_inhands.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/wysr/wysr_inhands.rsi
     layers:
     - state: base
-      sprite: _RMC14/Objects/Weapons/Guns/Rifles/ssg45/ssg45_icon.rsi
+      sprite: _RMC14/Objects/Weapons/Guns/Rifles/wysr/wysr_icon.rsi
     - state: bolt-open
-      sprite: _RMC14/Objects/Weapons/Guns/Rifles/ssg45/ssg45_icon.rsi
+      sprite: _RMC14/Objects/Weapons/Guns/Rifles/wysr/wysr_icon.rsi
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
-      sprite: _RMC14/Objects/Weapons/Guns/Rifles/ssg45/ssg45_icon.rsi
+      sprite: _RMC14/Objects/Weapons/Guns/Rifles/wysr/wysr_icon.rsi
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/ssg45/ssg45_inhands.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/wysr/wysr_inhands.rsi
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -28,7 +28,7 @@
     - Burst
     - FullAuto
     soundGunshot:
-      collection: RMCSSG45Shoot
+      collection: RMCWYSRShoot
     shotsPerBurst: 3
   - type: RMCSelectiveFire
     baseFireModes:
@@ -66,12 +66,12 @@
         priority: 2
         whitelist:
           tags:
-          - RMCMagazineRifleSSG45
-          - RMCMagazineRifleSSG45Ext
-          - RMCMagazineRifleSSG45AP
-          - RMCMagazineRifleSSG45HEAP
-          - RMCMagazineRifleSSG45Incend
-        startingItem: RMCMagazineRifleSSG45
+          - RMCMagazineRifleWYSR
+          - RMCMagazineRifleWYSRExt
+          - RMCMagazineRifleWYSRAP
+          - RMCMagazineRifleWYSRHEAP
+          - RMCMagazineRifleWYSRIncend
+        startingItem: RMCMagazineRifleWYSR
   - type: GunDamageModifier
     multiplier: 1.1
   - type: AttachableHolder
@@ -94,10 +94,10 @@
           - RMCAttachmentS42xTelescopicMiniscope
       rmc-aslot-stock:
         locked: true
-        startingAttachable: RMCAttachmentSSG45Stock
+        startingAttachable: RMCAttachmentWYSRStock
         whitelist:
           tags:
-          - RMCAttachmentSSG45Stock
+          - RMCAttachmentWYSRStock
       rmc-aslot-underbarrel:
         startingAttachable: RMCAttachmentMiniFlamethrower
         whitelist:
@@ -118,17 +118,17 @@
       rmc-aslot-underbarrel: 0.345, -0.245
   - type: Tag
     tags:
-    - RMCWeaponRifleSSG45
+    - RMCWeaponRifleWYSR
 
 - type: entity
   parent: CMMagazineRifleBase
-  id: RMCMagazineRifleSSG45
-  name: "SSG45 magazine (7x62mm)"
+  id: RMCMagazineRifleWYSR
+  name: "WYSR magazine (7x62mm)"
   components:
   - type: Tag
     tags:
     - CMMagazineRifle
-    - RMCMagazineRifleSSG45
+    - RMCMagazineRifleWYSR
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -137,7 +137,7 @@
     proto: CMCartridgeRifle10x24mm
     capacity: 30
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/ssg45.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/wysr.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -148,14 +148,14 @@
     bulletType: RMCBoxBulletsRifle
 
 - type: entity
-  parent: RMCMagazineRifleSSG45
-  id: RMCMagazineRifleSSG45Extended
-  name: "SSG45 extended magazine (7x62mm)"
+  parent: RMCMagazineRifleWYSR
+  id: RMCMagazineRifleWYSRExtended
+  name: "WYSR extended magazine (7x62mm)"
   components:
   - type: Tag
     tags:
     - CMMagazineRifle
-    - RMCMagazineRifleSSG45Ext
+    - RMCMagazineRifleWYSRExt
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -164,7 +164,7 @@
     proto: CMCartridgeRifle10x24mm
     capacity: 45
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/ssg45e.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/wysre.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -176,14 +176,14 @@
     zeroVisible: false
 
 - type: entity
-  parent: RMCMagazineRifleSSG45
-  id: RMCMagazineRifleSSG45AP
-  name: "SSG45 AP magazine (7x62mm)"
+  parent: RMCMagazineRifleWYSR
+  id: RMCMagazineRifleWYSRAP
+  name: "WYSR AP magazine (7x62mm)"
   components:
   - type: Tag
     tags:
     - CMMagazineRifle
-    - RMCMagazineRifleSSG45AP
+    - RMCMagazineRifleWYSRAP
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -192,7 +192,7 @@
     proto: CMCartridgeRifle10x24mmAP
     capacity: 30
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/ssg45.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/wysr.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -202,14 +202,14 @@
       color: "#1F951F"
 
 - type: entity
-  parent: RMCMagazineRifleSSG45
-  id: RMCMagazineRifleSSG45HEAP
-  name: "SSG45 HEAP magazine (7x62mm)"
+  parent: RMCMagazineRifleWYSR
+  id: RMCMagazineRifleWYSRHEAP
+  name: "WYSR HEAP magazine (7x62mm)"
   components:
   - type: Tag
     tags:
     - CMMagazineRifle
-    - RMCMagazineRifleSSG45HEAP
+    - RMCMagazineRifleWYSRHEAP
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -218,7 +218,7 @@
     proto: RMCCartridgeRifle10x24mmHEAP
     capacity: 30
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/ssg45.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/wysr.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -228,14 +228,14 @@
       color: "#9C9A19"
 
 - type: entity
-  parent: RMCMagazineRifleSSG45
-  id: RMCMagazineRifleSSG45Incend
-  name: "SSG45 Incendiary magazine (7x62mm)"
+  parent: RMCMagazineRifleWYSR
+  id: RMCMagazineRifleWYSRIncend
+  name: "WYSR Incendiary magazine (7x62mm)"
   components:
   - type: Tag
     tags:
     - CMMagazineRifle
-    - RMCMagazineRifleSSG45Incend
+    - RMCMagazineRifleWYSRIncend
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -244,7 +244,7 @@
     proto: RMCCartridgeRifle10x24mmIncendiary
     capacity: 30
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/ssg45.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/wysr.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -254,19 +254,19 @@
       color: "#771A10"
 
 - type: Tag
-  id: RMCWeaponRifleSSG45
+  id: RMCWeaponRifleWYSR
 
 - type: Tag
-  id: RMCMagazineRifleSSG45
+  id: RMCMagazineRifleWYSR
 
 - type: Tag
-  id: RMCMagazineRifleSSG45Ext
+  id: RMCMagazineRifleWYSRExt
 
 - type: Tag
-  id: RMCMagazineRifleSSG45AP
+  id: RMCMagazineRifleWYSRAP
 
 - type: Tag
-  id: RMCMagazineRifleSSG45HEAP
+  id: RMCMagazineRifleWYSRHEAP
 
 - type: Tag
-  id: RMCMagazineRifleSSG45Incend
+  id: RMCMagazineRifleWYSRIncend

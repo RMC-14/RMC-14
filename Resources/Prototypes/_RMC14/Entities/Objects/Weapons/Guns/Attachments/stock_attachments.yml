@@ -877,19 +877,19 @@
 
 - type: entity
   parent: RMCAttachableBase
-  id: RMCAttachmentSSG45Stock
-  name: SSG45 solid stock
-  description: Intergrated into the SSG45. You shouldn't have this.
+  id: RMCAttachmentWYSRStock
+  name: WYSR solid stock
+  description: Intergrated into the WYSR. You shouldn't have this.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
-    state: ssg45_stock
+    state: wysr_stock
   - type: AttachableVisuals
     suffix: ""
   - type: Tag
     tags:
     - RMCAttachmentStock
-    - RMCAttachmentSSG45Stock
+    - RMCAttachmentWYSRStock
 
 - type: Tag
   id: RMCAttachmentHG3712Stock
@@ -967,4 +967,4 @@
   id: RMCAttachmentType71Stock
 
 - type: Tag
-  id: RMCAttachmentSSG45Stock
+  id: RMCAttachmentWYSRStock
