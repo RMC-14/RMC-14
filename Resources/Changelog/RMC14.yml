@@ -1,22 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Added the Dancer Praetorian strain, which focuses on how single target
-      melee damage
-    type: Add
-  - message: Added the Vanguard Praetorian strain, which has a strong one hit shield
-      and has various melee AOE moves.
-    type: Add
-  - message: Fixed warrior's fling and punch range being too long
-    type: Fix
-  - message: Fix crusher's melee AOE not having the same range as similar moves. Removed
-      it's max target cap.
-    type: Fix
-  - message: Fixed praetorian's dash plasma cost and cooldown being wrong.
-    type: Fix
-  id: 1049
-  time: '2024-11-30T13:31:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4987
 - author: DrSmugleaf
   changes:
   - message: Added fire, incendiary ammo, mortar, ob, grenades, molotovs, but not
@@ -5376,5 +5358,12 @@
   id: 1551
   time: '2025-04-05T07:21:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6076
+- author: CyberTropic
+  changes:
+  - message: Added area based weather and lighting.
+    type: Add
+  id: 1552
+  time: '2025-04-05T07:26:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6058
 Name: RMC14
 Order: -1
