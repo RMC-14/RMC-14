@@ -470,7 +470,7 @@
           Quantity: 5
         - ReagentId: Vitamin
           Quantity: 4
-        - ReagentId: Oculine
+        - ReagentId: CMImidazoline
           Quantity: 3
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/carrot.rsi
