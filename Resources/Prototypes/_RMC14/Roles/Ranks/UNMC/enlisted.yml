@@ -52,7 +52,7 @@
   prefix: LCpl.
   paygrade: E3
   roleLimits:
-    CMRifleman: 2
+    CMRifleman: 7
 
 - type: rank
   id: RMCRankPrivateFirstClass
