@@ -134,8 +134,8 @@
     - name: Eyewear
       choices: { CMEyewear: 1 }
       entries:
-      - id: RMCWeldingGoggles
-        name: Welding Goggles
+      #- id: RMCWeldingGoggles
+      #  name: Welding Goggles
       - id: RMCGlassesMedicalHUDGlasses
         name: Medical HUD Glasses
       #- id: Prescription Medical HUD Glasses

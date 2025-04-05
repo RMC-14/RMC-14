@@ -244,9 +244,9 @@
       - id: RMCPouchFuelTank
         name: Fuel Tank Strap Pouch
         points: 5
-      - id: RMCWeldingGoggles
-        name: Welding Goggles
-        points: 5
+      #- id: RMCWeldingGoggles
+      #  name: Welding Goggles
+      #  points: 5
       #- id: RMCPouchSling
       #  name: Sling Pouch
       #  points: 15

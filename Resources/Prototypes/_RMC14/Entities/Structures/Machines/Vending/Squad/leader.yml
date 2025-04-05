@@ -127,9 +127,9 @@
       - id: RMCPouchToolsFill
         name: Tools Pouch (Full)
         points: 5
-      - id: RMCWeldingGoggles
-        name: Welding Goggles
-        points: 5
+      #- id: RMCWeldingGoggles
+      #  name: Welding Goggles
+      #  points: 5
     - name: Explosives
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
@@ -485,7 +485,7 @@
     contents:
     - id: RMCPouchConstructionFillLowGrade
     - id: RMCPouchElectronicsFill
-    - id: RMCWeldingGoggles
+    #- id: RMCWeldingGoggles
 
 - type: entity
   parent: RMCKitBase

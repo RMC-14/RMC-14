@@ -229,7 +229,7 @@
     - CMHandsInsulated
     - CMHeadsetCE
     - CMBootsBlack
-    - RMCWeldingGoggles
+    #- RMCWeldingGoggles
     #- WorkingJoePDA
     - RMCNailgunTactical
 

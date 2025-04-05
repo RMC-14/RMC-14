@@ -282,9 +282,9 @@
       - id: RMCPouchFuelTank
         name: Fuel Tank Strap Pouch
         points: 5
-      - id: RMCWeldingGoggles
-        name: Welding Goggles
-        points: 3
+      #- id: RMCWeldingGoggles
+      #  name: Welding Goggles
+      #  points: 3
       - id: RMCPouchGeneralLarge
         name: Large General Pouch
         points: 10

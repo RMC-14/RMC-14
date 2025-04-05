@@ -331,9 +331,9 @@
       - id: RMCLaserDesignator
         name: Laser Designator
         amount: 1
-      - id: RMCWeldingGoggles
-        name: Welding Goggles
-        amount: 3
+      #- id: RMCWeldingGoggles
+      #  name: Welding Goggles
+      #  amount: 3
       - id: CMFireExtinguisherPortable
         name: Fire Extinguisher (Portable)
         amount: 3

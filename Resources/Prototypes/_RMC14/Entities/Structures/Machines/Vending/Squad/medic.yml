@@ -230,9 +230,9 @@
       - id: RMCBackpackRTO
         name: UNMC Radio Telephone Pack
         points: 15
-      - id: RMCWeldingGoggles
-        name: Welding Goggles
-        points: 3
+      #- id: RMCWeldingGoggles
+      #  name: Welding Goggles
+      #  points: 3
     - name: Utilities
       entries:
       - id: CMFireExtinguisherPortable

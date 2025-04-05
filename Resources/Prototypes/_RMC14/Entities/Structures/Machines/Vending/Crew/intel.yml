@@ -29,9 +29,9 @@
       - id: RMCExplosivePlastic
         name: Plastic Explosive
         points: 10
-      - id: RMCWeldingGoggles
-        name: Welding Goggles
-        points: 5
+      #- id: RMCWeldingGoggles
+      #  name: Welding Goggles
+      #  points: 5
     - name: Primary Ammunition
       entries:
       - id: CMMagazineRifleM4SPRAP

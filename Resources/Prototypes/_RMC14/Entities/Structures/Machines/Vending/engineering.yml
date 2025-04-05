@@ -33,8 +33,8 @@
       - id: CMBeltUtility
         name: Utility Tool Belt
         amount: 2
-      - id: RMCWeldingGoggles
-        amount: 2
+      #- id: RMCWeldingGoggles
+      #  amount: 2
       - id: ClothingHeadHatWelding
         name: Welding Helmet
         amount: 2

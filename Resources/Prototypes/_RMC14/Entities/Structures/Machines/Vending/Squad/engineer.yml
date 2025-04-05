@@ -451,9 +451,9 @@
       - id: RMCCableCoil
         name: Cable Coil
         amount: 4
-      - id: RMCWeldingGoggles
-        name: Welding Goggles
-        amount: 2
+      #- id: RMCWeldingGoggles
+      #  name: Welding Goggles
+      #  amount: 2
       - id: RMCEngineerKit
         name: Engineer Kit
         amount: 2
