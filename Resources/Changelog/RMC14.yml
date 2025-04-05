@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed Humanoids being slower than intended when unarmored. Armor speeds
-      have mostly not changed.
-    type: Fix
-  - message: Slowing effects caused by Xenos should slow marines more (they weren't
-      slowing enough before).
-    type: Fix
-  - message: Fixed IMP ammo rack slowing marines down more than intended.
-    type: Fix
-  - message: Bodybags and stasis bags slow on drag.
-    type: Fix
-  - message: Fix bonechips slowing the wrong amount.
-    type: Fix
-  id: 1044
-  time: '2024-11-30T07:41:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4931
 - author: blueDev2
   changes:
   - message: Add Burrower, a xeno that can build tunnels and burrow into the ground
@@ -5386,5 +5369,16 @@
   id: 1546
   time: '2025-04-05T01:35:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6051
+- author: noctyrnal
+  changes:
+  - message: The Sniper's Ghillie, Helmet and Smock have received new sprites.
+    type: Tweak
+  - message: The M3 sniper's smock is now the M3 sniper's waist-rig
+    type: Tweak
+  - message: Added Urban camoflague to the Sniper's Ghillie.
+    type: Add
+  id: 1547
+  time: '2025-04-05T01:46:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6050
 Name: RMC14
 Order: -1
