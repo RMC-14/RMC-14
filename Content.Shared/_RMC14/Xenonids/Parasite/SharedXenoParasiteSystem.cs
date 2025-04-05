@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -789,7 +790,12 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (_container.TryGetContainer(ent, ent.Comp.LarvaContainerId, out var container))
         {
             foreach (var larva in container.ContainedEntities)
+            {
                 RemCompDeferred<BursterComponent>(larva);
+                var invc = EnsureComp<RMCTemporaryInvincibilityComponent>(larva);
+                invc.ExpiresAt = _timing.CurTime + ent.Comp.LarvaInvincibilityTime;
+                Dirty(larva, invc);
+            }
 
             _container.EmptyContainer(container, destination: coords);
         }
