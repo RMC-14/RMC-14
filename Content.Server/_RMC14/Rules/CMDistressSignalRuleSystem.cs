@@ -141,6 +141,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly MapInsertSystem _mapInsert = default!;
     [Dependency] private readonly SharedDestructibleSystem _destruction = default!;
     [Dependency] private readonly IntelSystem _intel = default!;
+    [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
 
 
     private readonly HashSet<string> _operationNames = new();
@@ -296,7 +297,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 return true;
             }
 
-            NetUserId? SpawnXeno(List<NetUserId> list, EntProtoId ent)
+            NetUserId? SpawnXeno(List<NetUserId> list, EntProtoId ent, bool doBurst = false)
             {
                 var playerId = _random.PickAndTake(list);
                 if (!_player.TryGetSessionById(playerId, out var player))
@@ -307,7 +308,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
                 ev.PlayerPool.Remove(player);
                 GameTicker.PlayerJoinGame(player);
-                var xenoEnt = SpawnXenoEnt(ent);
+                var xenoEnt = SpawnXenoEnt(ent, player, doBurst);
 
                 if (!_mind.TryGetMind(playerId, out var mind))
                     mind = _mind.CreateMind(playerId);
@@ -424,13 +425,43 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 return playerId;
             }
 
-            EntityUid SpawnXenoEnt(EntProtoId ent)
+            EntityUid SpawnXenoEnt(EntProtoId ent, ICommonSession player, bool doBurst = false)
             {
                 var leader = _prototypes.TryIndex(ent, out var proto) &&
                              proto.TryGetComponent(out XenoComponent? xeno, _compFactory) &&
                              xeno.SpawnAtLeaderPoint;
 
                 var point = _random.Pick(leader ? xenoLeaderSpawnPoints : xenoSpawnPoints);
+
+                if (doBurst)
+                {
+                    var profile = GameTicker.GetPlayerProfile(player);
+                    var coordinates = _transform.GetMoverCoordinates(point);
+                    var corpseMob = _stationSpawning.SpawnPlayerMob(coordinates, comp.XenoSurvivorCorpseJob, profile, null);
+
+                    var spawnEv = new PlayerSpawnCompleteEvent( // for ranks and such
+                        corpseMob,
+                        player,
+                        comp.XenoSurvivorCorpseJob,
+                        false,
+                        true,
+                        0,
+                        default,
+                        profile
+                    );
+
+                    RaiseLocalEvent(corpseMob, spawnEv, true);
+
+                    var victimInfected = EnsureComp<VictimInfectedComponent>(corpseMob);
+                    _parasite.SetBurstSpawn((corpseMob, victimInfected), ent);
+                    _parasite.SetHive((corpseMob, victimInfected), comp.Hive);
+                    _parasite.SpawnLarva((corpseMob, victimInfected), out var newXeno);
+                    _parasite.SetBurstDelay((corpseMob, victimInfected), comp.XenoSurvivorCorpseBurstDelay);
+
+                    _xeno.MakeXeno(newXeno);
+                    return newXeno;
+                }
+
                 var xenoEnt = SpawnAtPosition(ent, point.ToCoordinates());
 
                 _xeno.MakeXeno(xenoEnt);
@@ -539,7 +570,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 var list = xenoCandidates[i];
                 while (list.Count > 0 && selectedXenos < totalXenos)
                 {
-                    if (SpawnXeno(list, comp.LarvaEnt) != null)
+                    if (SpawnXeno(list, comp.LarvaEnt, true) != null)
                         selectedXenos++;
                 }
             }
