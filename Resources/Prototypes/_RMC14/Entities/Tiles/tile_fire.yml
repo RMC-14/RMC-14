@@ -131,7 +131,12 @@
     layers:
     - map: [ "base" ]
       state: dynamic_4
+  - type: DamageOnCollide
+    damage:
+      types:
+        Heat: 100
   - type: RMCIgniteOnCollide
+    maxStacks: 5
     tileDamage:
       types:
         Heat: 0.13
@@ -147,3 +152,10 @@
           Two: { state: dynamic_2 }
           Three: { state: dynamic_3 }
           Four: { state: dynamic_4 }
+
+- type: entity
+  parent: RMCTileFireLaser
+  id: RMCTileFireNapalm
+  components:
+  - type: TileFire
+    duration: 30

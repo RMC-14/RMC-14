@@ -60,7 +60,7 @@
     fire:
       type: RMCTileFireLaser
       range: 3
-      intensity: 55
+      intensity: 75
       duration: 5
       total: 16
     deleteOnEmpty: true
