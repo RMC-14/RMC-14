@@ -10,6 +10,9 @@
   alert: Stun
 
 - type: statusEffect
+  id: PainKnockOut
+
+- type: statusEffect
   id: SlowedDown
 
 - type: statusEffect
