@@ -206,12 +206,12 @@
       - id: DrinkGlass
         name: Glass
         amount: 30
-      - id: IceCup
-        name: Ice Cup
-        amount: 30
-      - id: VacuumFlask
-        name: Vacuum Flask
-        amount: 5
+      #- id: IceCup
+      #  name: Ice Cup
+      #  amount: 30
+      #- id: VacuumFlask
+      #  name: Vacuum Flask
+      #  amount: 5
 
 # CHESS ALCOHOL VENDOR
 
