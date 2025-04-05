@@ -46,4 +46,8 @@ public sealed partial class RankPrototype : IPrototype, IInheritingPrototype
     [AlwaysPushInheritance]
     [DataField]
     public string? Paygrade { get; set; }
+
+    [AlwaysPushInheritance]
+    [DataField]
+    public Dictionary<ProtoId<JobPrototype>, int>? RoleLimits { get; set; }
 }

@@ -178,6 +178,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [ViewVariables]
     public string? OperationName { get; private set; }
 
+    [ViewVariables]
+    public Dictionary<ProtoId<JobPrototype>, int> RoleRankLimits = new();
+
     private readonly Dictionary<EntProtoId<RMCPlanetMapPrototypeComponent>, int> _carryoverVotes = new();
 
     public override void Initialize()
@@ -771,6 +774,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     {
         StartPlanetVote();
         ResetSelectedPlanet();
+        RoleRankLimits.Clear();
         _config.SetCVar(CCVars.GameDisallowLateJoins, false);
 
         if (!_autoBalance)
