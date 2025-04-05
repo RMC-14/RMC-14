@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Evasion;
 using Content.Shared.Damage;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
@@ -16,6 +17,7 @@ public sealed class RMCTemporaryInvincibilitySystem : EntitySystem
 
         SubscribeLocalEvent<RMCTemporaryInvincibilityComponent, RMCIgniteAttemptEvent>(OnIgnite);
         SubscribeLocalEvent<RMCTemporaryInvincibilityComponent, BeforeDamageChangedEvent>(OnBeforeDamage);
+        SubscribeLocalEvent<RMCTemporaryInvincibilityComponent, EvasionRefreshModifiersEvent>(OnGetEvasion);
     }
 
     private void OnIgnite(Entity<RMCTemporaryInvincibilityComponent> ent, ref RMCIgniteAttemptEvent args)
@@ -28,6 +30,10 @@ public sealed class RMCTemporaryInvincibilitySystem : EntitySystem
         args.Cancelled = true;
     }
 
+    private void OnGetEvasion(Entity<RMCTemporaryInvincibilityComponent> ent, ref EvasionRefreshModifiersEvent args)
+    {
+        args.Evasion += 1000; // Bullets need to always miss
+    }
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
