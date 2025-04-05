@@ -726,6 +726,15 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/urban.rsi
+  - type: SquadArmor
+    layer: Armor
+    slot: OUTERCLOTHING
+    rsi:
+      sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: snpr-armor
+    leaderRsi:
+      sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: snpr-armor
 
 # Smart Gun
 - type: entity
