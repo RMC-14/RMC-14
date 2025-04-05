@@ -1422,6 +1422,7 @@
   parent: RMCAreaBigredv2Landing
   id: RMCAreaBigredv2LandingConsole2
   name: LZ2 'Cargo'
+  components:
   - type: Area
     weatherEnabled: false
 
