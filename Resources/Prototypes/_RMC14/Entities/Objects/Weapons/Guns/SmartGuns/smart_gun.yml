@@ -160,8 +160,8 @@
 - type: entity
   parent: [ CMBaseWeaponGun, BaseItem, RMCBaseAttachableHolder ]
   id: RMCSmartGunWhiteOut
-  name: ML79A smart gun
-  description: The actual firearm in the 4-piece ML79A Smartgun System. If you have this, you're about to bring some serious pain to anyone in your way. You may toggle firing restrictions by using a special action.
+  name: ML79T 'terminator' smart gun
+  description: Part of the high-end 4-piece ML79T Smartgun System, this advanced smart gun is engineered for maximum lethality and precision. Equipped with a cutting-edge targeting interface, the ML79T turns its wielder into an unstoppable force. If you’ve got this in your hands, you’re about to deliver the kind of pain Weston-Yamada's enemies never see coming. You may toggle firing restrictions by using a special action.
   components:
   - type: Wieldable
   - type: Item
@@ -241,14 +241,13 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: RMCMagazineSmartGunirradiated
+        startingItem: RMCMagazineSmartGunIrradiated
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_unload.ogg
         priority: 2
         whitelist:
           tags:
-          - RMCMagazineSmartGunirradiated
-          - RMCMagazineSmartGun #For some reason when this is removed mags literally becomes unusable :confused:
+          - RMCMagazineSmartGunIrradiated
       cell_slot:
         name: power-cell-slot-component-slot-name-default
         startingItem: RMCPowerCellSmartgun
@@ -471,6 +470,7 @@
   parent: CMMagazineRifleBase
   id: RMCMagazineSmartGun
   name: "ML66A drum magazine (10x30mm)"
+  description: "A 500 round drum magazine for the standard UN-issue ML66A smart gun, this magazine is designed to only be compatible with the ML66A and its variants."
   components:
   - type: Tag
     tags:
@@ -501,12 +501,13 @@
 
 - type: entity
   parent: CMMagazineRifleBase
-  id: RMCMagazineSmartGunirradiated
-  name: "ML79A drum magazine irradiated (10x30mm)"
+  id: RMCMagazineSmartGunIrradiated
+  name: "ML79 drum magazine irradiated (10x30mm)"
+  description: "What at first glance appears to be a standard 500 round smart gun drum, is actually a drum loaded with irradiated rounds, providing an extra 'oomph' to to its bullets. The magazine itself is slightly modified to only fit in ML79D or ML79T smartguns, and is not compatible with the standard UNMC-issue ML66A smartgun."
   components:
   - type: Tag
     tags:
-    - RMCMagazineSmartGun
+    - RMCMagazineSmartGunIrradiated
   - type: BallisticAmmoProvider
     whitelist:
       tags:
@@ -622,10 +623,164 @@
   id: RMCMagazineSmartGun
 
 - type: Tag
-  id: RMCMagazineSmartGunirradiated
+  id: RMCMagazineSmartGunIrradiated
 
 - type: Tag
   id: CMCartridgeSmartGun10x30mm
 
 - type: Tag
   id: RMCCartridgeSmartGun10x30mmirradiated
+
+- type: entity
+  parent: [ CMBaseWeaponGun, BaseItem, RMCBaseAttachableHolder ]
+  id: RMCSmartGunPMC
+  name: ML79D 'dirty' smart gun
+  description: Designed for Weston-Yamada's PMC forces, the ML79D smart gun is a deadly weapon chambered in irradiated depleted uranium rounds, delivering devastating damage. Its advanced targeting system ensures pinpoint accuracy, making it effective in both close-quarters and long-range engagements. You may toggle firing restrictions by using a special action.
+  components:
+  - type: Wieldable
+  - type: Item
+    size: Huge
+  - type: AmmoCounter
+  - type: StaticPrice
+    price: 500
+  - type: MagazineAmmoProvider
+    autoEject: true
+  - type: RMCAmmoEject
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
+  - type: GunRequiresWield
+  - type: Corrodible
+    isCorrodible: false
+  - type: GunIFF
+    enabled: true
+  - type: WieldDelay
+    baseDelay: 0.4
+  - type: WieldableSpeedModifiers
+    base: 0.5
+    light: 0.69
+    medium: 0.75
+    heavy: 0.806
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml79a.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml79a.rsi
+    slots:
+    - suitStorage
+    - Back
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 20
+  - type: Gun
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a_2.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - FullAuto
+    recoilWielded: 3
+    scatterWielded: 10
+    baseFireRate: 10
+    burstScatterMult: 1
+    modifiers:
+      FullAuto:
+        maxScatterModifier: 0
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 80
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.05
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+      cell_slot: !type:ContainerSlot { }
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineSmartGunIrradiated
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineSmartGunIrradiated
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: RMCPowerCellSmartgun
+        whitelist:
+          components:
+          - SmartGunBattery
+  - type: GunDamageModifier
+    multiplier: 1
+  - type: GunToggleableAmmo
+    settings:
+    - damage:
+        types:
+          Piercing: 40
+      armorPiercing: 0
+      name: rmc-toggleable-ammo-highly-precise
+      icon:
+        sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
+        state: ammo_swap_normal
+    - damage:
+        types:
+          Piercing: 30
+      armorPiercing: 35
+      name: rmc-toggleable-ammo-armor-shredding
+      icon:
+        sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
+        state: ammo_swap_ap
+  - type: RMCMagneticItem
+  - type: GunRequiresSkills
+    skills:
+      RMCSkillSmartGun: 1
+  - type: GunSkilledRecoil
+    skills:
+      RMCSkillFirearms: 100
+  - type: GunDrainBatteryOnShoot
+  - type: GunRequireEquipped
+    whitelist:
+      components:
+      - SmartGunArmor
+  - type: GunToggleableRecoil
+  - type: GunToggleableAutoFire
+  - type: ToggleableMotionDetector
+  - type: IFFToggle
+  - type: MotionDetector
+    handToggleable: false
+    deactivateOnDrop: false
+    toggleSound: null
+  - type: SmartGun
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: -0.1875, 0.125
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/smartgun_mouse.rsi
+      state: all
