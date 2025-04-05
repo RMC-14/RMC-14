@@ -588,8 +588,18 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     var list = players[i];
                     while (list.Count > 0 && selectedSurvivors < totalSurvivors)
                     {
-                        if (SpawnSurvivor(job, list, out var stop) != null)
+                        if (SpawnSurvivor(job, list, out var stop) is { } id)
+                        {
+                            foreach (var (_, otherPlayersLists) in survivorCandidates)
+                            {
+                                foreach (var otherPlayers in otherPlayersLists)
+                                {
+                                    otherPlayers.Remove(id);
+                                }
+                            }
+
                             selectedSurvivors++;
+                        }
 
                         if (stop)
                             break;
