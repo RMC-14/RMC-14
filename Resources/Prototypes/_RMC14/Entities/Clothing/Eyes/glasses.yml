@@ -442,7 +442,6 @@
     slots:
     - MASK
     - EYES
-  - type: FlashImmunity
 
 - type: entity
   parent: ClothingEyesBase

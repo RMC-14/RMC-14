@@ -207,6 +207,18 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                     else if (stab.Comp.Inject != null &&
                         _solutionContainer.TryGetInjectableSolution(hit, out var solutionEnt, out _))
                     {
+                        var total = FixedPoint2.Zero;
+                        foreach (var amount in stab.Comp.Inject.Values)
+                        {
+                            total += amount;
+                        }
+
+                        var available = solutionEnt.Value.Comp.Solution.AvailableVolume;
+                        if (available < total)
+                        {
+                            _solutionContainer.SplitSolution(solutionEnt.Value, total - available);
+                        }
+
                         foreach (var (reagent, amount) in stab.Comp.Inject)
                         {
                             _solutionContainer.TryAddReagent(solutionEnt.Value, reagent, amount);

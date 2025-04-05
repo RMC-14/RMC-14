@@ -6,3 +6,7 @@
   color: "#C38312"
   roles:
   - CMSurvivor
+  - CMSurvivorDoctor
+  - CMSurvivorEngineer
+  - CMSurvivorSecurity
+  - CMSurvivorCorporate

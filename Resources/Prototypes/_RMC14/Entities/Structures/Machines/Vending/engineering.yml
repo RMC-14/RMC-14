@@ -16,13 +16,12 @@
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
       shader: unshaded
   - type: AccessReader
-    access: [["CMAccessCombatTechPrep"], ["CMAccessEngineering"], ["CMAccessColonyEngineering"], ["CMAccessColonyPublic"]] # TODO RMC14 remove public when surv jobs and hacking are in
+    access: [["CMAccessCombatTechPrep"], ["CMAccessEngineering"], ["CMAccessColonyEngineering"]]
   - type: CMAutomatedVendor
     access:
     - "CMAccessCombatTechPrep"
     - "CMAccessEngineering"
     - "CMAccessColonyEngineering"
-    - "CMAccessColonyPublic"
     hackable: true
     sections:
     - name: Equipment

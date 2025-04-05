@@ -35,6 +35,13 @@
     - type: RMCUserBulkyArmorIncapable
     - type: JobPrefix
       prefix: cm-job-prefix-doctor
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: doctor
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_medical
 
 - type: startingGear
   id: CMGearDoctor

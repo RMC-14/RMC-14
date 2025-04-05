@@ -1262,3 +1262,13 @@
       params:
         volume: 5
         maxDistance: 1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronFast-pawsChip
+  name: Fast-paws Chip figurine
+  components:
+  - type: Sprite
+    state: fast-paws_chip
+  - type: PatronFigurine
+    id: c5f5b62a-5206-4948-9745-e4d9bbb87764

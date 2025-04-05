@@ -183,6 +183,7 @@
       slope: 7.2
       max: 50
     fire:
+      type: RMCTileFireNapalm
       intensity: 60
       duration: 30
       range: 3

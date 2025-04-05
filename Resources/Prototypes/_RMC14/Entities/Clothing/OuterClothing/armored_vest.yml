@@ -17,3 +17,9 @@
     bio: 20
     explosionArmor: 10
   - type: CMHardArmor
+
+- type: entity
+  parent: RMCArmorVest
+  id: RMCArmorVestWeYa
+  name: We-Ya security armor
+  description: An armored vest that protects against some damage. This one has a Weston-Yamada corporate badge.

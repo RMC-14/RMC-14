@@ -47,6 +47,10 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: cm-job-prefix-combat-tech
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: engi
 
 - type: startingGear
   id: CMGearCombatTech
