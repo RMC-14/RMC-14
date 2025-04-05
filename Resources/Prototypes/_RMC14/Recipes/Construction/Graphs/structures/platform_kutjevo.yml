@@ -1,5 +1,5 @@
 - type: constructionGraph
-  id: RMCPlatformKujetvoDestructible
+  id: RMCPlatformKutjevoDestructible
   start: start
   graph:
   - node: start

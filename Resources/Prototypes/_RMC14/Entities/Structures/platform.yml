@@ -221,7 +221,7 @@
   - type: Sprite
     state: kutjevo_platform
   - type: Construction
-    graph: RMCPlatformKujetvoDestructible
+    graph: RMCPlatformKutjevoDestructible
     node: start
 
 - type: entity
@@ -231,7 +231,7 @@
   - type: Sprite
     state: kutjevo_platform_broken
   - type: Construction
-    graph: RMCPlatformKujetvoDestructible
+    graph: RMCPlatformKutjevoDestructible
     node: platformBroken
 
 - type: entity
@@ -252,7 +252,7 @@
   - type: Sprite
     state: kutjevo_platform_sm
   - type: Construction
-    graph: RMCPlatformKujetvoDestructible
+    graph: RMCPlatformKutjevoDestructible
     node: start
 
 - type: entity
