@@ -1265,6 +1265,17 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNells-the-Jobs
+  name: Nells-the-Jobs figurine
+  description: "A silly little lizard that is known for enjoying Slaw."
+  components:
+  - type: Sprite
+    state: nells-the-jobs
+  - type: PatronFigurine
+    id: 6472b9d8-4e6a-447e-af75-4b2a6d3961d1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronFast-pawsChip
   name: Fast-paws Chip figurine
   components:
