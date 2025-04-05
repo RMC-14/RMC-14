@@ -355,6 +355,7 @@
     buckleDepth: Mobs
   - type: RMCBuckleOffset
     offset: 0, 0.5
+  - type: RMCArmorModifier
 
 - type: entity
   abstract: true
