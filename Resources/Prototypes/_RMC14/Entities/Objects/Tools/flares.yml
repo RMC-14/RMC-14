@@ -74,12 +74,12 @@
     - map: [ "enum.ExpendableLightVisualLayers.Base" ]
       state: flare
     - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
-      sprite: _RMC14/Objects/Misc/flares.rsi
+      sprite: _RMC14/Objects/Misc/cas_flares.rsi
       state: flare_flame
       color: "#A7FFA7"
       visible: false
     - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
-      sprite: _RMC14/Objects/Misc/flares.rsi
+      sprite: _RMC14/Objects/Misc/cas_flares.rsi
       state: overlay
   - type: Icon
     sprite: _RMC14/Objects/Misc/cas_flares.rsi
