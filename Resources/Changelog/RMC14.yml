@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: Add Burrower, a xeno that can build tunnels and burrow into the ground
-      to ambush marines
-    type: Add
-  - message: Add Tunnels that xenos can use to fast travel across the map
-    type: Add
-  id: 1045
-  time: '2024-11-30T11:28:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4670
 - author: TsjipTsjip
   changes:
   - message: Phones now make a popup including the name of who initiated the call.
@@ -5380,5 +5370,16 @@
   id: 1547
   time: '2025-04-05T01:46:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6050
+- author: Vermidia
+  changes:
+  - message: Fixed boiler gas armor effecting damage being 1/2 as much as its supposed
+      to be
+    type: Fix
+  - message: Fixed marines armor reducing melee damage slightly more than it should
+      have.
+    type: Fix
+  id: 1548
+  time: '2025-04-05T01:51:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5475
 Name: RMC14
 Order: -1
