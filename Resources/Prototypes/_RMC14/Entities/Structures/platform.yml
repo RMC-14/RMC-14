@@ -442,7 +442,7 @@
   - type: Physics
     bodyType: Static
   - type: Construction
-    graph: RMCPlatformKutjevoRockDestructible
+    graph: RMCPlatformKujetvoRockDestructible
     node: start
 
 - type: entity
@@ -454,7 +454,7 @@
   - type: Sprite
     state: kutjevo_rock_broken
   - type: Construction
-    graph: RMCPlatformKutjevoRockDestructible
+    graph: RMCPlatformKujetvoRockDestructible
     node: platformBroken
 
 - type: entity
