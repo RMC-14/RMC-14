@@ -89,6 +89,19 @@
   - type: Sprite
     state: cryo_key
 
+# Quebec
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyQuebec
+  name: quebec encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineQuebec
+    defaultChannel: MarineQuebec
+  - type: Sprite
+    state: quebec_key
+
 # Marine Special Forces (ERT)
 - type: entity
   parent: CMEncryptionKey

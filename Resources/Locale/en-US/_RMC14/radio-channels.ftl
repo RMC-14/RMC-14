@@ -15,6 +15,7 @@ chat-radio-marine-charlie = Charlie
 chat-radio-marine-delta = Delta
 chat-radio-marine-echo = Echo
 chat-radio-marine-foxtrot = Foxtrot
+chat-radio-marine-quebec = Quebec
 
 chat-radio-colony = Colony
 chat-radio-WY = We-Ya

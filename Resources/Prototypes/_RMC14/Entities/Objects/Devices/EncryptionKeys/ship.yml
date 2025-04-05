@@ -155,6 +155,7 @@
     - MarineDelta
     - MarineEcho
     - MarineFoxtrot
+    - MarineQuebec
     - MarineEngineer
     - MarineMedical
     - MarineRequisition
@@ -179,6 +180,7 @@
     - MarineDelta
     - MarineEcho
     - MarineFoxtrot
+    - MarineQuebec
     - MarineEngineer
     - MarineMedical
     - MarineRequisition
@@ -208,6 +210,7 @@
     - MarineDelta
     - MarineEcho
     - MarineFoxtrot
+    - MarineQuebec
     defaultChannel: MarineCommand
 
 
@@ -243,6 +246,7 @@
     - MarineDelta
     - MarineEcho
     - MarineFoxtrot
+    - MarineQuebec
     defaultChannel: MarineEngineer
   - type: Sprite
     state: ce_key
@@ -279,6 +283,7 @@
     - MarineDelta
     - MarineEcho
     - MarineFoxtrot
+    - MarineQuebec
     - MarineEngineer
     defaultChannel: MarineMedical
 
@@ -328,6 +333,7 @@
     - MarineDelta
     - MarineEcho
     - MarineFoxtrot
+    - MarineQuebec
     defaultChannel: MarineMilitaryPolice
   - type: Sprite
     state: cmp_key
@@ -348,6 +354,7 @@
     - MarineDelta
     - MarineEcho
     - MarineFoxtrot
+    - MarineQuebec
     - MarineEngineer
     - MarineMedical
     defaultChannel: MarineMilitaryPolice
@@ -385,6 +392,7 @@
     - MarineDelta
     - MarineEcho
     - MarineFoxtrot
+    - MarineQuebec
     defaultChannel: MarineRequisition
   - type: Sprite
     state: ce_key
@@ -445,6 +453,7 @@
     - MarineDelta
     - MarineEcho
     - MarineFoxtrot
+    - MarineQuebec
     defaultChannel: MarineCommon
   - type: Sprite
     state: cap_key
@@ -480,6 +489,7 @@
     - MarineDelta
     - MarineEcho
     - MarineFoxtrot
+    - MarineQuebec
     defaultChannel: MarineAlpha
 
 # All Almayer
