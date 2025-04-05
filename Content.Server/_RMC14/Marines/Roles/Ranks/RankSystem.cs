@@ -77,7 +77,10 @@ public sealed class RankSystem : SharedRankSystem
                 if (!failed)
                 {
                     SetRank(ev.Mob, rankPrototype);
-                    _distressSignal.RoleRankLimits[ev.JobId] = currentCount + 1;
+
+                    if (rankPrototype.RoleLimits != null && rankPrototype.RoleLimits.TryGetValue(ev.JobId, out var limit) && limit > 0)
+                        _distressSignal.RoleRankLimits[ev.JobId] = currentCount + 1;
+
                     break;
                 }
             }
