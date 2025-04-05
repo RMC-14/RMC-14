@@ -7,9 +7,16 @@
   id: RMCXeno
   hostile:
   - UNMC
+  - SPP
 
 - type: npcFaction
   id: RMCDumb
   hostile:
   - UNMC
+  - RMCXeno
+  - SPP
+
+- type: npcFaction
+  id: SPP
+  hostile:
   - RMCXeno

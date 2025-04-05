@@ -39,13 +39,16 @@
   longRange: true
 
 - type: entity
-  abstract: true
   parent: CMEncryptionKey
   id: RMCEncryptionKeySPP
   name: SPP radio encryption key
   components:
   - type: Sprite
     state: upp_key
+  - type: EncryptionKey
+    channels:
+    - SPP
+    defaultChannel: SPP
 
 - type: entity
   parent: RMCEncryptionKeySPP
@@ -86,44 +89,53 @@
     defaultChannel: SPP
 
 - type: entity
+  abstract: true
   parent: RMCHeadsetIcons
+  id: RMCHeadsetSPPAbstract
+  components:
+  - type: GrantSquadLeaderTracker
+  - type: GrantTacMapAlert
+
+- type: entity
+  parent: RMCHeadsetSPPAbstract
   id: RMCHeadsetSPP
-  name: SPP-CMD headset
+  name: SPP headset
   components:
   - type: ContainerFill
     containers:
       key_slots:
       - CMEncryptionKeyColony
+      - RMCEncryptionKeySPP
 
 - type: entity
-  parent: RMCHeadsetIcons
+  parent: RMCHeadsetSPPAbstract
   id: RMCHeadsetSPPCommand
   name: SPP-CMD headset
   components:
   - type: ContainerFill
     containers:
       key_slots:
-      - RMCEncryptionKeySPPCommand
       - CMEncryptionKeyColony
+      - RMCEncryptionKeySPPCommand
 
 - type: entity
-  parent: RMCHeadsetIcons
+  parent: RMCHeadsetSPPAbstract
   id: RMCHeadsetSPPEngineer
   name: SPP-CCT headset
   components:
   - type: ContainerFill
     containers:
       key_slots:
-      - RMCEncryptionKeySPPEngineer
       - CMEncryptionKeyColony
+      - RMCEncryptionKeySPPEngineer
 
 - type: entity
-  parent: RMCHeadsetIcons
+  parent: RMCHeadsetSPPAbstract
   id: RMCHeadsetSPPMedic
   name: SPP-MED headset
   components:
   - type: ContainerFill
     containers:
       key_slots:
-      - RMCEncryptionKeySPPMedic
       - CMEncryptionKeyColony
+      - RMCEncryptionKeySPPMedic

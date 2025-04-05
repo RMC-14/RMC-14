@@ -24,4 +24,7 @@ public sealed partial class ActiveTacticalMapTrackedComponent : Component
 
     [DataField]
     public bool HiveLeader;
+
+    [DataField]
+    public string Group;
 }

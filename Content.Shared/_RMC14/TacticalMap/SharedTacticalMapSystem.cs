@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.CCVar;
+﻿using System.Linq;
+using Content.Shared._RMC14.CCVar;
 using Robust.Shared.Configuration;
 
 namespace Content.Shared._RMC14.TacticalMap;
@@ -57,7 +58,11 @@ public abstract class SharedTacticalMapSystem : EntitySystem
         }
         else
         {
-            computer.Comp.Blips = map.MarineBlips;
+            // TODO RMC14: Find a better way to include non squad members (survivors, CO, ...).
+            if (computer.Comp.Group == "UNMC")
+                computer.Comp.Blips = map.MarineBlips.Where((a) => a.Value.Group == "" || a.Value.Group == computer.Comp.Group).ToDictionary();
+            else
+                computer.Comp.Blips = map.MarineBlips.Where((a) => a.Value.Group == computer.Comp.Group).ToDictionary();
         }
 
         Dirty(computer);
