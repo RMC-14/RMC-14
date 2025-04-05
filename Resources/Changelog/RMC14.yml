@@ -1,24 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Turning into a Xeno strain no longer consumes points.
-    type: Fix
-  id: 1047
-  time: '2024-11-30T12:14:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4989
-- author: DoguhanOzgurAkca
-  changes:
-  - message: Changed the MK80, M1984, M44 and M77 sidearms in XO vendor to come with
-      belts and ammunition.
-    type: Add
-  - message: Added descriptions to the DDC vendor first-aid pouches.
-    type: Fix
-  - message: Adding the sidearm ammunition tab to CO vendor which currently only has
-      Mateba speedloader.
-    type: Fix
-  id: 1048
-  time: '2024-11-30T13:11:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4796
 - author: Vermidia
   changes:
   - message: Added the Dancer Praetorian strain, which focuses on how single target
@@ -5381,5 +5361,20 @@
   id: 1549
   time: '2025-04-05T02:16:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6033
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed parasite infect blindness being applied incorrectly.
+    type: Fix
+  id: 1550
+  time: '2025-04-05T07:20:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6010
+- author: Vermidia
+  changes:
+  - message: Spray acid now works more like spit and pierce and allows targeting past
+      max range (it clamps the spray max range)
+    type: Tweak
+  id: 1551
+  time: '2025-04-05T07:21:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6076
 Name: RMC14
 Order: -1
