@@ -443,6 +443,21 @@
     - 15
     - 25
     - 30
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+      - !type:SpillBehavior { }
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: RMCFlask
 
 - type: entity
   parent: RMCBaseFigurinePatron
