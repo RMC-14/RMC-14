@@ -45,6 +45,13 @@
     - type: JobPrefix
       prefix: cm-job-prefix-dropship-pilot
     - type: ViewIntelObjectives
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: pilot
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_command
 
 - type: startingGear
   id: CMGearPilotDropship

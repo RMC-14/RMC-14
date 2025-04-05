@@ -42,6 +42,10 @@
         RMCSkillPowerLoader: 2
     - type: JobPrefix
       prefix: cm-job-prefix-cargotech
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: cargo
 
 - type: startingGear
   id: CMGearCargoTech
