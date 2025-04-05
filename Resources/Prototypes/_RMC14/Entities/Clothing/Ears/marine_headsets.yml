@@ -434,3 +434,75 @@
       - CMEncryptionKeyFoxtrot
       - CMEncryptionKeyMedical
       - CMEncryptionKeyCommon
+
+
+# Quebec
+- type: entity
+  parent: RMCHeadsetMarine
+  id: CMHeadsetQuebec
+  name: marine quebec radio headset
+  description: This is used by Quebec squad members.
+  components:
+  - type: Sprite
+    state: quebec_headset
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyQuebec
+      - CMEncryptionKeyCommon
+
+- type: entity
+  parent: CMHeadsetQuebec
+  id: CMHeadsetQuebecLeader
+  name: marine quebec leader radio headset
+  description: This is used by the marine Quebec squad leader.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyQuebec
+      - CMEncryptionKeyCommon
+      - CMEncryptionKeySquadLeader
+  - type: Headset
+    radioTextIncrease: 3
+
+- type: entity
+  parent: CMHeadsetQuebec
+  id: CMHeadsetQuebecTeamLeader
+  name: marine quebec team leader radio headset
+  description: This is used by the marine Quebec team leader.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyQuebec
+      - CMEncryptionKeyCommon
+      - CMEncryptionKeyJTAC
+  - type: Headset
+    radioTextIncrease: 2
+
+- type: entity
+  parent: CMHeadsetQuebec
+  id: CMHeadsetQuebecEngineer
+  name: marine quebec engineer radio headset
+  description: This is used by the marine Quebec combat engineers.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyQuebec
+      - CMEncryptionKeyEngineer
+      - CMEncryptionKeyCommon
+
+- type: entity
+  parent: CMHeadsetQuebec
+  id: CMHeadsetQuebecMedic
+  name: marine quebec corpsman radio headset
+  description: This is used by the marine Quebec combat medics.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyQuebec
+      - CMEncryptionKeyMedical
+      - CMEncryptionKeyCommon

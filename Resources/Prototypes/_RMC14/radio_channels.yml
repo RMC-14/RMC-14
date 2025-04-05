@@ -137,6 +137,15 @@
   longRange: true
   tower: true
 
+- type: radioChannel
+  id: MarineQuebec
+  name: chat-radio-marine-quebec
+  keycode: "q"
+  frequency: 1497
+  color: "#840084"
+  longRange: true
+  tower: true
+
 # Non Marine
 - type: radioChannel
   id: Colony

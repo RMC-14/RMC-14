@@ -55,3 +55,10 @@
   components:
   - type: GhostRoleApplySpecial
     squad: SquadIntel
+
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCQuebecBase
+  components:
+  - type: GhostRoleApplySpecial
+    squad: SquadQuebec
