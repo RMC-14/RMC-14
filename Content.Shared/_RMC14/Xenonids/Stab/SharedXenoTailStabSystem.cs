@@ -183,7 +183,7 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                     RaiseLocalEvent(hit, attackedEv);
 
                     var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage + hitEvent.BonusDamage + attackedEv.BonusDamage, hitEvent.ModifiersList);
-                    var change = _damageable.TryChangeDamage(hit, modifiedDamage, origin: stab);
+                    var change = _damageable.TryChangeDamage(hit, modifiedDamage, origin: stab , tool: stab);
 
                     if (change?.GetTotal() > FixedPoint2.Zero)
                         _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { hit }, filter);
@@ -207,6 +207,18 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                     else if (stab.Comp.Inject != null &&
                         _solutionContainer.TryGetInjectableSolution(hit, out var solutionEnt, out _))
                     {
+                        var total = FixedPoint2.Zero;
+                        foreach (var amount in stab.Comp.Inject.Values)
+                        {
+                            total += amount;
+                        }
+
+                        var available = solutionEnt.Value.Comp.Solution.AvailableVolume;
+                        if (available < total)
+                        {
+                            _solutionContainer.SplitSolution(solutionEnt.Value, total - available);
+                        }
+
                         foreach (var (reagent, amount) in stab.Comp.Inject)
                         {
                             _solutionContainer.TryAddReagent(solutionEnt.Value, reagent, amount);

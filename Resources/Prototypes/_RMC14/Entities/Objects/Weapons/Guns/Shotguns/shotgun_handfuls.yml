@@ -28,6 +28,11 @@
     - RMCShellShotgun
     - RMCShellShotgunBuckshot
 
+- type: entity
+  parent: CMShellShotgunBuckshot
+  id: CMShellShotgunBuckshot1
+  suffix: 1
+
 - type: stack
   id: RMCShellShotgunBuckshot
   name: handful of buckshot shells

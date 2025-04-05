@@ -54,6 +54,9 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
     [DataField]
     public ProtoId<StartingGearPrototype>? DummyStartingGear { get; private set; }
 
+    [DataField]
+    public LocId? Greeting;
+
     /// <summary>
     /// RMC14 for arrival notification sound if <see cref="JoinNotifyCrew"/> true.
     /// </summary>

@@ -1,0 +1,79 @@
+﻿- type: job
+  parent: CMSurvivor
+  id: CMSurvivorDoctor
+  name: cm-job-name-survivor-doctor
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorDoctor
+  ranks:
+    RMCRankCivilianDoctor: []
+  startingGear: RMCGearSurvivorDoctor
+  accessGroups:
+  - ColonistMedical
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetDoctor
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: UserIFF
+      faction: FactionSurvivor
+    - type: IntelRescueSurvivorObjective
+
+- type: startingGear
+  id: RMCGearSurvivorDoctor
+  equipment:
+    mask: CMMaskSterile
+    ears: CMHeadsetColony
+    jumpsuit: CMJumpsuitLiaison
+    outerClothing: RMCLabcoat
+    gloves: CMHandsLatex
+    shoes: RMCShoesLaceup
+    back: CMSatchelMedical
+    id: CMIDCardColonistDoctor
+    pocket1: RMCPouchSurvivalFill
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorDoctor
+  name: survivor doctor spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
+
+- type: playTimeTracker
+  id: CMJobSurvivorDoctor
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetCivilian
+  id: RMCSurvivorPresetDoctor
+  name: doctor survivor preset
+  components:
+  - type: SurvivorPreset
+    randomGearOther:
+    -
+      - [ RMCPouchFirstAidSplintsGauzeOintment ]
+      - [ RMCPouchMedicalFill ]
+      - [ RMCPouchFirstAidInjectors ]
+      - [ RMCPouchFirstResponderFill ]
+      - [ RMCPouchMedkitFillAdvanced ]
+    -
+      - [ RMCGlassesMedicalHUDGlasses ]
+      - [ CMFirstAidKitFilledRobust ]
+      - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust ]
+      - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust, CMFirstAidKitSurgeryFilled ]

@@ -13,6 +13,7 @@ using Content.Shared.Throwing;
 using Robust.Shared.Physics.Systems;
 using System.Numerics;
 using Content.Shared.Popups;
+using Robust.Shared.Physics.Components;
 
 namespace Content.Shared._RMC14.Damage.ObstacleSlamming;
 
@@ -30,20 +31,36 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
 
     private static readonly ProtoId<DamageTypePrototype> SlamDamageType = "Blunt";
+    private readonly HashSet<EntityUid> _queuedImmuneEntities = new();
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RMCObstacleSlammingComponent, StartCollideEvent>(HandleCollide);
+        SubscribeLocalEvent<RMCObstacleSlammingComponent, ThrowDoHitEvent>(HandleCollide);
+
+        SubscribeLocalEvent<RMCObstacleSlamImmuneComponent, MapInitEvent>(OnImmuneMapInit);
     }
 
-    private void HandleCollide(Entity<RMCObstacleSlammingComponent> ent, ref StartCollideEvent args)
+    private void HandleCollide(Entity<RMCObstacleSlammingComponent> ent, ref ThrowDoHitEvent args)
     {
-        if (!args.OurFixture.Hard || !args.OtherFixture.Hard)
+        var user = args.Thrown;
+        var obstacle = args.Target;
+
+        if (args.Handled)
             return;
 
-        var user = args.OurEntity;
+        if (user != ent.Owner)
+            return;
+
+        if (HasComp<RMCObstacleSlamImmuneComponent>(user))
+            return;
+
+        if (!TryComp<PhysicsComponent>(user, out var body) || !TryComp<PhysicsComponent>(obstacle, out var bodyObstacle))
+            return;
+
+        if (!body.Hard || !bodyObstacle.Hard)
+            return;
 
         if (!_size.TryGetSize(user, out var size))
             return;
@@ -51,7 +68,7 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
         if (!HasComp<DamageableComponent>(user))
             return;
 
-        var speed = args.OurBody.LinearVelocity.Length();
+        var speed = body.LinearVelocity.Length();
 
         if (speed < ent.Comp.MinimumSpeed)
             return;
@@ -74,7 +91,7 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
         _physics.SetLinearVelocity(ent, Vector2.Zero);
         _physics.SetAngularVelocity(ent, 0f);
 
-        var vec = _transform.GetMoverCoordinates(user).Position - _transform.GetMoverCoordinates(args.OtherEntity).Position;
+        var vec = _transform.GetMoverCoordinates(user).Position - _transform.GetMoverCoordinates(obstacle).Position;
         if (vec.Length() != 0)
         {
             var direction = vec.Normalized() * ent.Comp.KnockbackPower;
@@ -82,13 +99,43 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
         }
 
         if (_timing.IsFirstTimePredicted)
-            _audio.PlayPvs(ent.Comp.SoundHit, user);
+            _audio.PlayPvs(ent.Comp.SoundHit, obstacle);
 
         if (_net.IsServer)
             SpawnAttachedTo(ent.Comp.HitEffect, user.ToCoordinates());
 
-        var selfMessage = Loc.GetString("rmc-obstacle-slam-self", ("ent", user), ("object", args.OtherEntity));
-        var othersMessage = Loc.GetString("rmc-obstacle-slam-others", ("ent", user), ("object", args.OtherEntity));
+        var selfMessage = Loc.GetString("rmc-obstacle-slam-self", ("ent", user), ("object", obstacle));
+        var othersMessage = Loc.GetString("rmc-obstacle-slam-others", ("ent", user), ("object", obstacle));
         _popup.PopupPredicted(selfMessage, othersMessage, user, user, PopupType.MediumCaution);
+
+        args.Handled = true;
+    }
+
+    private void OnImmuneMapInit(Entity<RMCObstacleSlamImmuneComponent> ent, ref MapInitEvent args)
+    {
+        ent.Comp.ExpireAt = _timing.CurTime + ent.Comp.ExpireIn;
+        Dirty(ent);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        _queuedImmuneEntities.Clear();
+
+        var query = EntityQueryEnumerator<RMCObstacleSlamImmuneComponent>();
+
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (comp.ExpireAt != null && comp.ExpireAt.Value > _timing.CurTime)
+                continue;
+
+            _queuedImmuneEntities.Add(uid);
+        }
+
+        foreach (var queued in _queuedImmuneEntities)
+        {
+            RemComp<RMCObstacleSlamImmuneComponent>(queued);
+        }
     }
 }

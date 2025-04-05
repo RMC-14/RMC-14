@@ -87,6 +87,10 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                         uiEntry.Texture.Textures = SpriteComponent.GetPrototypeTextures(entity, _resource)
                             .Select(o => o.Default)
                             .ToList();
+                        if(entity.TryGetComponent<SpriteComponent>("Sprite", out var entitySprites))
+                        {
+                            uiEntry.Texture.Modulate = entitySprites.AllLayers.First().Color;
+                        }
                         uiEntry.Panel.Button.Label.Text = entry.Name?.Replace("\\n", "\n") ?? entity.Name;
 
                         var name = entity.Name;
@@ -128,7 +132,21 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
 
                         var sectionI = sectionIndex;
                         var entryI = entryIndex;
-                        uiEntry.Panel.Button.OnPressed += _ => OnButtonPressed(sectionI, entryI);
+                        var linkedEntryIndexes = new List<int>();
+
+                        foreach (var linkedEntry in entry.LinkedEntries)
+                        {
+                            var linkedEntryIndex = 0;
+                            foreach (var vendorEntry in section.Entries)
+                            {
+                                if(vendorEntry.Id == linkedEntry)
+                                    linkedEntryIndexes.Add(linkedEntryIndex);
+
+                                linkedEntryIndex++;
+                            }
+                        }
+
+                        uiEntry.Panel.Button.OnPressed += _ => OnButtonPressed(sectionI, entryI, linkedEntryIndexes);
                     }
 
                     uiSection.Entries.AddChild(uiEntry);
@@ -145,9 +163,9 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
         _window.OpenCentered();
     }
 
-    private void OnButtonPressed(int sectionIndex, int entryIndex)
+    private void OnButtonPressed(int sectionIndex, int entryIndex, List<int> linkedEntryIndexes)
     {
-        var msg = new CMVendorVendBuiMsg(sectionIndex, entryIndex);
+        var msg = new CMVendorVendBuiMsg(sectionIndex, entryIndex, linkedEntryIndexes);
         SendMessage(msg);
     }
 

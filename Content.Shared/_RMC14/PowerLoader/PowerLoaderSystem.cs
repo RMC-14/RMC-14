@@ -877,8 +877,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         slot = null;
         if (args.Cancelled ||
             args.Handled ||
-            args.Target == null ||
-            args.Used == null)
+            args.Target == null)
         {
             return false;
         }

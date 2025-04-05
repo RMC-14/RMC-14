@@ -25,6 +25,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv759
@@ -62,6 +63,7 @@
     noTunnel: true
     unweedable: false
     minimapColor: '#3A3A3AFF'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv759
@@ -84,6 +86,7 @@
     noTunnel: true
     unweedable: false
     minimapColor: '#3A3A3AFF'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv759Bunker

@@ -408,14 +408,21 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         foreach (var cardinal in _rmcMap.CardinalDirections)
         {
             var target = coordinates.Offset(cardinal);
-            var nextRange = SpawnFire(target, spawn, chain, range, intensity, duration);
-            if (nextRange == 0)
+            var nextRange = SpawnFire(target, spawn, chain, range, intensity, duration, out var cont);
+            if (nextRange == 0 || cont)
                 continue;
 
             Timer.Spawn(TimeSpan.FromMilliseconds(50),
                 () =>
                 {
-                    SpawnFires(spawn, target, nextRange, chain, intensity, duration);
+                    try
+                    {
+                        SpawnFires(spawn, target, nextRange, chain, intensity, duration);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Error($"Error occurred spawning fires:\n{e}");
+                    }
                 });
         }
     }
@@ -426,18 +433,23 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         SpawnFires(spawn, center, range, chain, intensity, duration);
     }
 
-    public int SpawnFire(EntityCoordinates target, EntProtoId spawn, EntityUid chain, int range, int? intensity, int? duration)
+    public int SpawnFire(EntityCoordinates target, EntProtoId spawn, EntityUid chain, int range, int? intensity, int? duration, out bool cont)
     {
+        cont = false;
         if (!_rmcMap.TryGetTileDef(target, out var tile) ||
             tile.ID == ContentTileDefinition.SpaceID)
         {
+            cont = true;
             return range;
         }
 
         if (_rmcMap.HasAnchoredEntityEnumerator<TileFireComponent>(target, out var oldTileFire))
         {
             if (spawn == oldTileFire.Comp.Id)
+            {
+                cont = true;
                 return range;
+            }
 
             QueueDel(oldTileFire);
         }

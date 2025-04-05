@@ -99,7 +99,17 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public EntProtoId? LandingZoneGas = "RMCLandingZoneGas";
 
     [DataField]
-    public ProtoId<JobPrototype> SurvivorJob = "CMSurvivor";
+    public ProtoId<JobPrototype> CivilianSurvivorJob = "CMSurvivor";
+
+    [DataField]
+    public List<(ProtoId<JobPrototype> Job, int Amount)> SurvivorJobs =
+    [
+        ("CMSurvivorEngineer", 4),
+        ("CMSurvivorDoctor", 3),
+        ("CMSurvivorSecurity", 2),
+        ("CMSurvivorCorporate", 2),
+        ("CMSurvivor", -1),
+    ];
 
     [DataField]
     public TimeSpan AresGreetingDelay = TimeSpan.FromSeconds(5);

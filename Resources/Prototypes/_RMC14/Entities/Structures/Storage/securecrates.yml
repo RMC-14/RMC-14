@@ -5,7 +5,7 @@
   components:
   - type: CrateOpenable
     spawn:
-    - id: RMCPlankWood
+    - id: RMCPlankWood1
       amount: 2 # TODO RMC14 other drops
 
 - type: entity
