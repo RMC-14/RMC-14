@@ -87,3 +87,5 @@
     spray: XenoAcidSprayTrapWeak
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.1
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT1

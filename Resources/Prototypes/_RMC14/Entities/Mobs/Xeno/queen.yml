@@ -243,6 +243,8 @@
     debuffModifier: 1.4
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 1.4
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartTQ
 
 - type: entity
   id: XenoLeaderPheromoneRelay

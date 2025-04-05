@@ -96,6 +96,8 @@
       state: defender
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.1
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT1
 
 - type: entity
   parent: CMXenoDefenderBase
@@ -165,4 +167,3 @@
       types:
         Blunt: 37.5
   - type: XenoSoak
-
