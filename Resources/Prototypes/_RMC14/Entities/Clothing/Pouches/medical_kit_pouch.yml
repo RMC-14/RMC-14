@@ -101,3 +101,15 @@
     - id: CMBurnKit10
     - id: CMBurnKit10
 #    - id: CMSplints5 # TODO RMC14
+
+- type: entity
+  parent: RMCPouchMedkit
+  id: RMCPouchMedkitFillSPP
+  suffix: Filled, SPP
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSurgicalLine
+    - id: CMSynthGraft
+    - id: CMHealthAnalyzer
+    - id: CMHyposprayFilledTricord
