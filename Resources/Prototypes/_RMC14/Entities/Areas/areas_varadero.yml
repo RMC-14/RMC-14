@@ -64,6 +64,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaVaradero
@@ -81,6 +82,7 @@
     medevac: false
     OB: true
     supplyDrop: false
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaVaraderoInterior
