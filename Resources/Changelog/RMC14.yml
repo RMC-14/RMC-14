@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Sigil
-  changes:
-  - message: Fixed the smartgun being able to PB.
-    type: Fix
-  id: 1037
-  time: '2024-11-30T05:52:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4944
 - author: PolarTundraa
   changes:
   - message: Allowed Vulpkanin to use gauze/scar markings
@@ -5388,5 +5381,13 @@
   id: 1539
   time: '2025-04-04T23:26:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6067
+- author: exincore
+  changes:
+  - message: (Already uploaded) Fixed Steelcrest Defender having 80 total frontal
+      armor when fortified instead of 60.
+    type: Fix
+  id: 1540
+  time: '2025-04-05T01:20:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6066
 Name: RMC14
 Order: -1
