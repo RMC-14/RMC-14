@@ -239,7 +239,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/cmp.rsi
   - type: CMArmor
-    armor: 10
+    melee: 10
 
 
 # Military Warden
@@ -254,7 +254,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/warden.rsi
   - type: CMArmor
-    armor: 10
+    melee: 10
 
 # Military Police
 - type: entity
@@ -268,7 +268,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/mp.rsi
   - type: CMArmor
-    armor: 10
+    melee: 10
   - type: Appearance
   - type: Foldable
     canFoldInsideContainer: true
@@ -302,7 +302,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/chef.rsi
   - type: CMArmor
-    armor: 10
+    melee: 10
 
 # Auxiliary Supply Officer
 - type: entity
@@ -316,7 +316,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/jungle.rsi
   - type: CMArmor
-    armor: 10
+    melee: 10
   - type: Appearance
   - type: ItemCamouflage
     camouflageVariations:
@@ -338,7 +338,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/jacket.rsi
   - type: CMArmor
-    armor: 10
+    melee: 10
 
 - type: entity
   parent: CMCoatCO
@@ -351,7 +351,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/bomber.rsi
   - type: CMArmor
-    armor: 10
+    melee: 10
   - type: Appearance
   - type: Foldable
     canFoldInsideContainer: true
@@ -371,7 +371,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/formal_black.rsi
   - type: CMArmor
-    armor: 10
+    melee: 10
 
 - type: entity
   parent: CMCoatCO
@@ -384,7 +384,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/formal_white.rsi
   - type: CMArmor
-    armor: 10
+    melee: 10
 
 # Executive Officer
 
@@ -399,7 +399,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/coat_formal.rsi
   - type: CMArmor
-    armor: 10
+    melee: 10
   - type: Appearance
   - type: Foldable
     canFoldInsideContainer: true
@@ -411,27 +411,27 @@
 - type: entity
   parent: RMCBaseJacket
   id: CMCoatOfficer
-  name: marine service jacket
-  description: A service jacket typically worn by officers of the UNMC.
+  abstract: true
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/officer.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/officer.rsi
   - type: CMArmor
-    armor: 10
+    melee: 10
 
 - type: entity
   parent: CMCoatOfficer
   id: RMCCoatService
-  description: A service jacket typically worn by officers of the UNMC. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  name: marine service jacket
+  description: A service jacket typically worn by officers of the UNMC.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/service/jungle.rsi
   - type: CMArmor
-    armor: 10 # TODO RMC14 10 melee
+    melee: 10
   - type: Appearance
   - type: Foldable
     canFoldInsideContainer: true

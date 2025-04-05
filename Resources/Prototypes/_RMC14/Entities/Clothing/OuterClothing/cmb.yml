@@ -7,7 +7,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/CMB/cmb_light_armor.rsi
   - type: CMArmor
-    armor: 25
+    melee: 20
+    bullet: 25
     bio: 15
     explosionArmor: 20
   - type: RMCArmorSpeedTier
@@ -31,7 +32,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/CMB/cmb_heavy_armor.rsi
   - type: CMArmor
-    armor: 25
+    melee: 25
+    bullet: 25
     bio: 15
     explosionArmor: 25
   - type: RMCArmorSpeedTier
@@ -54,7 +56,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/CMB/cmb_sheriff_armor.rsi
   - type: CMArmor
-    armor: 25
+    melee: 25
+    bullet: 30
     bio: 15
     explosionArmor: 30
   - type: RMCArmorSpeedTier

@@ -414,7 +414,7 @@
     color: green
 
 - type: entity
-  parent: RMCBaseFigurinePatron
+  parent: [ RMCBaseFigurinePatron, CMCanteenBase ]
   id: RMCFigurinePatronNesartOnan
   name: Nesart Onan figurine
   description: "Blood loss is no joke! Come get some gauze from your local medbay today!"
@@ -430,6 +430,19 @@
     solutions:
       drink:
         maxVol: 30
+        reagents:
+        - ReagentId: IceCream
+          Quantity: 30
+  - type: SolutionTransfer
+    transferAmount: 30
+    maxTransferAmount: 30
+    canChangeTransferAmount: true
+    transferAmounts:
+    - 5
+    - 10
+    - 15
+    - 25
+    - 30
   - type: Damageable
     damageContainer: Inorganic
   - type: Destructible
@@ -1221,3 +1234,41 @@
     state: rosalind_hex_volkov
   - type: PatronFigurine
     id: 8de95861-fbb6-4ee4-b38b-6de75f483f37
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronColtenRipcordBailey
+  name: Colten 'Ripcord' Bailey figurine
+  description: "This figure's tail appears to have broken off and been glued back on. Twice."
+  components:
+  - type: Sprite
+    state: colten_ripcord_bailey
+  - type: PatronFigurine
+    id: 8736ab09-f5f8-4656-ab35-9dcebf1f6400
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSpikeLight-FootFluff-Usta
+  name: Spike Light-Foot Fluff-Usta figurine
+  description: "This abomination vulp-slime hybrid dosent seem to stay dead long yet always seem to be killed often."
+  components:
+  - type: Sprite
+    state: spike_light-foot__fluff-usta
+  - type: PatronFigurine
+    id: 0da8eb58-a13d-4c56-b038-edb161e1c375
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/m5_shoot.ogg
+      params:
+        volume: 5
+        maxDistance: 1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronFast-pawsChip
+  name: Fast-paws Chip figurine
+  components:
+  - type: Sprite
+    state: fast-paws_chip
+  - type: PatronFigurine
+    id: c5f5b62a-5206-4948-9745-e4d9bbb87764

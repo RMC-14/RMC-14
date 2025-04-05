@@ -1,7 +1,6 @@
 ﻿using System.Numerics;
 using Content.Client.UserInterface.Controls;
 using Content.Shared._RMC14.Construction.Upgrades;
-using Content.Shared._RMC14.Sentry;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -34,6 +33,7 @@ public sealed class RMCConstructionUpgradeBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         _menu = new RMCConstructionUpgradeMenu();
         _menu.OnClose += Close;
 

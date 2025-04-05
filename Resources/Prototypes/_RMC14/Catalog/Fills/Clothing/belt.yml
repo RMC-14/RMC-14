@@ -168,3 +168,43 @@
     contents:
     - id: RMCMagazineRifleAR10
       amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: CMBeltMarineHunting
+  suffix: Filled, Basira Armstrong
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleHunting
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: CMBeltMarineBuckshot
+  suffix: Filled, Buckshot
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: CMBeltMarineMP5
+  suffix: Filled, MP5
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineSMGMP5
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: CMBeltMarineM16
+  suffix: Filled, M16
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleM16
+      amount: 5

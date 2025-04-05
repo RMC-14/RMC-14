@@ -162,7 +162,7 @@
     - state: mag-1
       map: [ "enum.GunVisualLayers.Mag" ]
     - state: ammo_band
-      color: "#276A74"
+      color: "#38CBE0"
 
 - type: entity
   parent: CMCartridgeRifle10x24mm
@@ -191,7 +191,7 @@
 - type: entity
   parent: CMMagazineRifleM54CE2
   id: CMMagazineRifleM54CE2AP
-  name: "M54CE2 ap magazine (10x24mm)"
+  name: "M54CE2 AP magazine (10x24mm)"
   components:
   - type: BallisticAmmoProvider
     mayTransfer: True

@@ -116,7 +116,7 @@ public sealed class XenoSpitSystem : EntitySystem
 
     private void OnActiveChargingSpitGetArmor(Entity<XenoActiveChargingSpitComponent> ent, ref CMGetArmorEvent args)
     {
-        args.Armor += ent.Comp.Armor;
+        args.XenoArmor += ent.Comp.Armor;
     }
 
     private void OnActiveChargingSpitRefreshSpeed(Entity<XenoActiveChargingSpitComponent> ent, ref RefreshMovementSpeedModifiersEvent args)

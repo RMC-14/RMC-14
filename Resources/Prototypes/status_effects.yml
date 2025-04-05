@@ -75,3 +75,6 @@
 
 - type: statusEffect
   id: Dazed
+
+- type: statusEffect
+  id: Blinded

@@ -57,7 +57,7 @@ public sealed class PlaytimeMedalSystem : SharedPlaytimeMedalSystem
         }
 
         EntProtoId? medalId = null;
-        if (HasComp<SurvivorComponent>(ev.Mob))
+        if (HasComp<RMCSurvivorComponent>(ev.Mob))
         {
             if (time >= _platinumTime)
                 medalId = BlueRibbon;

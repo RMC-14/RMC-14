@@ -28,6 +28,11 @@
       #  points: 0
       - id: RMCScoutSpecEquipmentCase
       - id: CMSniperEquipmentCase
+        linkedEntries:
+        - RMCAntiMaterielEquipmentCase
+      - id: RMCAntiMaterielEquipmentCase
+        linkedEntries:
+        - CMSniperEquipmentCase
     - name: Extra Scout Ammunition
       entries:
       - id: RMCMagazineRifleM4SPRA19Impact
@@ -38,11 +43,13 @@
         points: 40
     - name: Extra Sniper Ammunition
       entries:
-#      - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
-#        points: 40
+      - id: CMMagazineSniperM96SFlak
+        points: 40
       - id: CMMagazineSniperM96SIncendiary
         points: 40
       - id: CMMagazineSniperM96S
+        points: 40
+      - id: RMCMagazineSniperXM43E1AntiMateriel
         points: 40
     - name: Extra Demolitionist Ammunition
       entries:

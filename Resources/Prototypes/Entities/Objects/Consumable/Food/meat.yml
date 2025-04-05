@@ -302,7 +302,7 @@
     solutions:
       food:
         reagents:
-        - ReagentId: Bicaridine
+        - ReagentId: CMBicaridine
           Quantity: 20
   - type: StaticPrice
     price: 750

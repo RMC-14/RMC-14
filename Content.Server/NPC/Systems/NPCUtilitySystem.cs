@@ -29,6 +29,7 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Standing;
 using Content.Shared.Tools.Systems;
+using Content.Shared.Turrets;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -61,6 +62,7 @@ public sealed class NPCUtilitySystem : EntitySystem
     [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly MobThresholdSystem _thresholdSystem = default!;
+    [Dependency] private readonly TurretTargetSettingsSystem _turretTargetSettings = default!;
     [Dependency] private readonly RMCInteractionSystem _rmcInteraction = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
 
@@ -366,6 +368,14 @@ public sealed class NPCUtilitySystem : EntitySystem
                 {
                     if (TryComp(targetUid, out FlammableComponent? fire) && fire.OnFire)
                         return 1f;
+                    return 0f;
+                }
+            case TurretTargetingCon:
+                {
+                    if (!TryComp<TurretTargetSettingsComponent>(owner, out var turretTargetSettings) ||
+                        _turretTargetSettings.EntityIsTargetForTurret((owner, turretTargetSettings), targetUid))
+                        return 1f;
+
                     return 0f;
                 }
             case TargetIsNotDeadCon:

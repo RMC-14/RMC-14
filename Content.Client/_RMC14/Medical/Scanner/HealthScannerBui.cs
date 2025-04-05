@@ -50,6 +50,7 @@ public sealed class HealthScannerBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         if (State is HealthScannerBuiState state)
             UpdateState(state);
     }

@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Xenonids.Animation;
@@ -94,6 +95,7 @@ public sealed class XenoChargeSystem : EntitySystem
         xeno.Comp.Charge = diff;
         Dirty(xeno);
 
+        EnsureComp<RMCObstacleSlamImmuneComponent>(xeno);
         _throwing.TryThrow(xeno, diff, xeno.Comp.Strength, animated: false);
     }
 
@@ -137,7 +139,7 @@ public sealed class XenoChargeSystem : EntitySystem
         if (_net.IsServer)
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
 
-        var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage);
+        var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage, origin: xeno, tool: xeno);
         if (damage?.GetTotal() > FixedPoint2.Zero)
         {
             var filter = Filter.Pvs(targetId, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);

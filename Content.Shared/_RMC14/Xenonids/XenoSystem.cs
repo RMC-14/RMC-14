@@ -329,12 +329,12 @@ public sealed class XenoSystem : EntitySystem
             multiplier = xeno.Comp.StandHealingMultiplier;
 
         var passiveHeal = threshold.Value / 65 + xeno.Comp.FlatHealing;
-        var recovery = (CompOrNull<XenoRecoveryPheromonesComponent>(xeno)?.Multiplier ?? 0) / 2;
+        var recovery = (CompOrNull<XenoRecoveryPheromonesComponent>(xeno)?.Multiplier ?? 0);
         if (!CanHeal(xeno))
             recovery = FixedPoint2.Zero;
 
         var recoveryHeal = (threshold.Value / 65) * (recovery / 2);
-        return (passiveHeal + recoveryHeal) * multiplier; // TODO RMC14 add Strain based multiplier for Gardener Drone
+        return (passiveHeal + recoveryHeal) * multiplier / 2; // TODO RMC14 add Strain based multiplier for Gardener Drone
     }
 
     public void HealDamage(Entity<DamageableComponent?> xeno, FixedPoint2 amount)
@@ -362,7 +362,7 @@ public sealed class XenoSystem : EntitySystem
             return;
         }
 
-        _damageable.TryChangeDamage(xeno, heal, true);
+        _damageable.TryChangeDamage(xeno, heal, true, origin: xeno);
     }
 
     public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target, bool hitNonMarines = false)

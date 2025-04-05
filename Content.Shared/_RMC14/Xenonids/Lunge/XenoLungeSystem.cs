@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -73,6 +74,7 @@ public sealed class XenoLungeSystem : EntitySystem
         xeno.Comp.Charge = diff;
         Dirty(xeno);
 
+        EnsureComp<RMCObstacleSlamImmuneComponent>(xeno);
         _throwing.TryThrow(xeno, diff, 30, animated: false);
 
         if (!_physicsQuery.TryGetComponent(xeno, out var physics))

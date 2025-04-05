@@ -52,7 +52,7 @@
     maxPlasma: 800
     plasmaRegenOnWeeds: 3
   - type: CMArmor
-    armor: 25
+    xenoArmor: 25
     explosionArmor: 40
   - type: MeleeWeapon
     damage:
@@ -96,6 +96,7 @@
       types:
         Heat: 5
     doAfter: 0.5
+    range: 7
   - type: TacticalMapIcon
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
@@ -198,7 +199,7 @@
         components:
         - XenoHeavy
   - type: CMArmor
-    armor: 35
+    xenoArmor: 35
   - type: XenoClaws
     clawType: VerySharp
   - type: XenoTailFountain
@@ -235,7 +236,7 @@
     popup: rmc-xeno-dancer-popup
   - type: AcidTrap
   - type: CMArmor
-    armor: 20
+    xenoArmor: 20
   - type: XenoClaws
     clawType: Sharp
   - type: XenoFinesse
@@ -340,7 +341,7 @@
   - type: XenoClaws
     clawType: Sharp
   - type: CMArmor
-    armor: 25
+    xenoArmor: 25
     explosionArmor: 60
   - type: StunOnExplosionReceived
     weak: false

@@ -4,3 +4,4 @@
   components:
   - type: RMCNightVisionVisible
     priority: 1
+  - type: RMCEffect
