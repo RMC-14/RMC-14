@@ -42,6 +42,9 @@
   - type: MagazineAmmoProvider
     autoEject: false
     soundAutoEject: null
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
   - type: ItemSlots
     slots:
       gun_magazine:

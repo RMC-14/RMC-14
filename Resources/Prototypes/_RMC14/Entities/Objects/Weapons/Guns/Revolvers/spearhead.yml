@@ -80,7 +80,13 @@
   components:
   - type: RevolverAmmoProvider
     proto: null
-    chambers: [ null, null, null, null, null, null, null ]
+    chambers:
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
 
 - type: entity
   id: RMCBaseSpeedLoader357
