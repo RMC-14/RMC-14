@@ -8,9 +8,9 @@ namespace Content.Shared._RMC14.Damage;
 
 public sealed class RMCTemporaryInvincibilitySystem : EntitySystem
 {
-
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly EvasionSystem _evasion = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -18,6 +18,12 @@ public sealed class RMCTemporaryInvincibilitySystem : EntitySystem
         SubscribeLocalEvent<RMCTemporaryInvincibilityComponent, RMCIgniteAttemptEvent>(OnIgnite);
         SubscribeLocalEvent<RMCTemporaryInvincibilityComponent, BeforeDamageChangedEvent>(OnBeforeDamage);
         SubscribeLocalEvent<RMCTemporaryInvincibilityComponent, EvasionRefreshModifiersEvent>(OnGetEvasion);
+        SubscribeLocalEvent<RMCTemporaryInvincibilityComponent, ComponentStartup>(OnAdded);
+    }
+
+    private void OnAdded(Entity<RMCTemporaryInvincibilityComponent> ent, ref ComponentStartup args)
+    {
+        _evasion.RefreshEvasionModifiers(ent);
     }
 
     private void OnIgnite(Entity<RMCTemporaryInvincibilityComponent> ent, ref RMCIgniteAttemptEvent args)
@@ -51,6 +57,7 @@ public sealed class RMCTemporaryInvincibilitySystem : EntitySystem
                 continue;
 
             RemCompDeferred<RMCTemporaryInvincibilityComponent>(uid);
+            _evasion.RefreshEvasionModifiers(ent);
         }
     }
 }
