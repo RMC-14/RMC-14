@@ -1,0 +1,274 @@
+# Trash Parent
+
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RMCFoodPacketTrash
+  description: This is rubbish.
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
+    - type: Item
+      sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
+      heldPrefix: packet
+      size: Small
+
+#Wrappers
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketBarcardineTrash
+  name: Barcardine Bar wrapper
+  description: An empty wrapper from a barcardine bar. You notice the inside has several medical labels. You're not sure if you care or not about that.
+  components:
+    - type: Sprite
+      state: barcardine_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketBoonieTrash
+  name: Boonie Bar wrapper
+  description: A minty green wrapper. Reminds you of another terrible decision involving minty green, but you can't remember what...
+  components:
+    - type: Sprite
+      state: boonie_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketPackagedBurgerTrash
+  name: Burger wrapper
+  description: A greasy plastic film that once held a Cheeseburger. Packaged by the Weston-Yamada Corporation.
+  components:
+    - type: Sprite
+      state: burger_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketBurritoTrash
+  name: Burrito wrapper
+  description: A foul-smelling plastic film that once held a microwave burrito. Packaged by the Weston-Yamada Corporation.
+  components:
+    - type: Sprite
+      state: burrito_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketCandyTrash
+  name: Candy
+  components:
+    - type: Sprite
+      state: candy_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketCheesieHonkersTrash
+  name: Cheesie Honkers
+  components:
+    - type: Sprite
+      state: cheesie_honkers_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketChipsTrash
+  name: Chips
+  components:
+    - type: Sprite
+      state: chips_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketCHUNKTrash
+  name: Chunk Bar Box
+  description: An empty box from a chunk bar. Significantly less heavy.
+  components:
+    - type: Sprite
+      state: chunk_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketHUNKTrash
+  name: Hunk Bar crate
+  description: An empty crate from a hunk bar. Tremendously less heavy.
+  components:
+    - type: Sprite
+      state: hunk_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketEATBarTrash
+  name: EAT Bar wrapper
+  components:
+    - type: Sprite
+      state: eat
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketHotdogTrash
+  name: Hotdog wrapper
+  description: A musty plastic film that once held a hotdog. Packaged by the Weston-Yamada Corporation.
+  components:
+    - type: Sprite
+      state: hotdog_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketKeplerCrispsTrash
+  name: Keplar wrapper
+  components:
+    - type: Sprite
+      state: kepler_chips_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketKeplerCrispsFlamehotTrash
+  name: Keplar Flamehot wrapper
+  components:
+    - type: Sprite
+      state: kepler_chips_flame_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketLiqiudFoodTrash
+  name: '"LiquidFood" Ration'
+  components:
+    - type: Sprite
+      state: liquidfood_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketPistachiosTrash
+  name: Pistachios pack
+  components:
+    - type: Sprite
+      state: pistachios_pack_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketPopcornTrash
+  name: Popcorn
+  components:
+    - type: Sprite
+      state: popcorn_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketRaisinsTrash
+  name: 4no raisins
+  components:
+    - type: Sprite
+      state: 4no_raisins_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketSemkiTrash
+  name: Semki pack
+  components:
+    - type: Sprite
+      state: semki_pack_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketSosjerkyTrash
+  name: Scaredy's Private Reserve Beef Jerky
+  components:
+    - type: Sprite
+      state: sosjerky_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketSyndicakesTrash
+  name: Syndi-Cakes
+  components:
+    - type: Sprite
+      state: syndi_cakes_trash
+
+#mres
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketWafflesTrash
+  name: Waffles
+  components:
+    - type: Sprite
+      state: waffles_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketPepperChipsTrash
+  name: Weston-Yamada Pepper Chips
+  description: An oily empty bag that once held Weston-Yamada Pepper Chips.
+  components:
+    - type: Sprite
+      state: wy_chips_pepper_trash
+
+#Cigarette Butts
+
+#Dishes
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketPlateTrash
+  name: Plate
+  components:
+    - type: Sprite
+      state: plate_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketCeramicPlateTrash
+  name: Ceramic plate
+  description: A ceramic plate, it doesn't seem like it's done its patriotic duty of being a stand for food yet. Now that you look at it, this might make a good throwing weapon...
+  components:
+    - type: Sprite
+      state: ceramic_plate_trash
+    - type: DamageOnLand
+      damage:
+        types:
+          Blunt: 5
+    - type: DamageOtherOnHit
+      damage:
+        types:
+          Blunt: 5
+    - type: Damageable
+      damageContainer: Inorganic
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 5
+          behaviors:
+            - !type:PlaySoundBehavior
+              sound:
+                collection: RMCShatter
+                params:
+                  volume: -5
+                  variation: 0.125
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketBowlTrash
+  name: Snack bowl
+  components:
+    - type: Sprite
+      state: snack_bowl_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketTrayTrash
+  name: Tray
+  components:
+    - type: Sprite
+      state: tray_trash
+
+- type: entity
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketUSCMTrayTrash
+  name: USCM Tray
+  description: Finished with its tour of duty.
+  components:
+    - type: Sprite
+      state: MREtray_empty
+
+#Misc
