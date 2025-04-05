@@ -15,6 +15,7 @@ using Content.Server.GameTicking.Rules;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Mind;
 using Content.Server.Players.PlayTimeTracking;
+using Content.Server.Power.Components;
 using Content.Server.Preferences.Managers;
 using Content.Server.Roles;
 using Content.Server.RoundEnd;
@@ -256,6 +257,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             _intel.RunSpawners();
 
             SetFriendlyHives(comp.Hive);
+            UnpowerFaxes(_transform.GetMapId(comp.XenoMap));
 
             SetCamoType();
 
@@ -1651,6 +1653,19 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         {
             _xenoTunnel.TryPlaceTunnel(hive, null, tunnel.ToCoordinates(), out _);
             QueueDel(tunnel);
+        }
+    }
+
+    private void UnpowerFaxes(MapId map)
+    {
+        var faxes = EntityQueryEnumerator<FaxMachineComponent, ApcPowerReceiverComponent, TransformComponent>();
+        while (faxes.MoveNext(out _, out var power, out var xform))
+        {
+            if (xform.MapID != map)
+                continue;
+
+            power.Load = 5;
+            power.NeedsPower = true;
         }
     }
 
