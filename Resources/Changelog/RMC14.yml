@@ -1,23 +1,4 @@
 ﻿Entries:
-- author: MACMAN2003
-  changes:
-  - message: Ported the M3 Officer armor, M10 Officer helmet, M3 Commanding Officer
-      armor, M10 Commanding Officer helmet, and the Commanding Officer's gloves.
-    type: Add
-  id: 1040
-  time: '2024-11-30T07:31:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4981
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added the M277 pattern construction rig; it can carry materials, sentries,
-      sandbags, and various tools. You can get it from the combat technician vendor.
-    type: Add
-  - message: Added the small tool webbing to the combat technician vendor, it is a
-      webbing that carries tools. It has 6 slots.
-    type: Add
-  id: 1041
-  time: '2024-11-30T07:32:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4974
 - author: CyberTropic
   changes:
   - message: Added nailgun repair functionality.
@@ -5389,5 +5370,21 @@
   id: 1542
   time: '2025-04-05T01:25:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5986
+- author: Djvarik
+  changes:
+  - message: XM43E1 Magazines now fit in magazine pouches and all other related storages.
+    type: Fix
+  - message: Potted plants can now only hold Tiny items.
+    type: Fix
+  id: 1543
+  time: '2025-04-05T01:26:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6062
+- author: DummeHytteOst
+  changes:
+  - message: Fixed hive weeds having 5 hp instead of 15.
+    type: Fix
+  id: 1544
+  time: '2025-04-05T01:27:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6060
 Name: RMC14
 Order: -1
