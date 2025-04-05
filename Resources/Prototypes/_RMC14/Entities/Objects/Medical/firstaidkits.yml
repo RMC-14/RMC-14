@@ -71,6 +71,44 @@
 
 - type: entity
   parent: CMFirstAidKit
+  id: CMFirstAidKitSurgery
+  name: basic field surgery kit
+  components:
+  - type: Storage # TODO RMC14 require medical skill for opening this while in another container
+    maxItemSize: Small
+    grid:
+    - 0,0,13,1 # 7 slots
+    whitelist:
+      tags:
+      - DiscreteHealthAnalyzer
+      - Dropper
+      - Pill
+      - Bottle
+      - Syringe
+      - PillCanister
+      - CMTraumaKit
+      - CMBurnKit
+      - Ointment
+      - CMOintment
+      - Brutepack
+      - Bloodpack
+      #      - TODO RMC14 splint
+      - RMCPenlight
+      - CMAutoInjector
+      #      - TODO RMC14 syringe cases
+      - CMSurgicalLine
+      - CMSynthGraft
+      - CMRollerItem
+      - BodyBag
+      - Hypospray
+      - CMBloodPack
+      - CMSurgicalCase
+      components:
+      - Hypospray
+      - CMSurgeryTool
+
+- type: entity
+  parent: CMFirstAidKit
   id: CMFirstAidKitFilled
   description: It's an emergency medical kit containing basic medication and equipment. No training required to use. # With medical training you can fit this in a backpack. # TODO RMC14
   suffix: Filled
@@ -84,6 +122,37 @@
     - id: CMGauze10
     - id: CMOintment10
 #    - id: CMMedicalSplint5
+
+- type: entity
+  parent: CMFirstAidKit
+  id: CMFirstAidKitFilledRobust
+  suffix: Filled, Robust
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMHealthAnalyzer
+    - id: CMPillCanisterBicaridine
+    - id: CMPillCanisterKelotane
+    #    - id: CMPillCanisterTramadol # TODO RMC14
+    - id: CMGauze10
+    - id: CMBurnKit10
+#    - id: CMSplints5 # TODO RMC14
+
+- type: entity
+  parent: CMFirstAidKitSurgery
+  id: CMFirstAidKitSurgeryFilled
+  description: Contains a surgical line, cautery, scalpel, hemostat, retractor, drapes and an oxycodone injector for tending wounds surgically. # With medical training you can fit this in a backpack. # TODO RMC14
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSurgicalLine
+    - id: CMCautery
+    - id: CMScalpel
+    - id: CMHemostat
+    - id: CMRetractor
+#    - id: CMOxycodoneAutoinjector # TODO RMC14
+#    - id: CMOxycodoneAutoinjector # TODO RMC14
 
 - type: entity
   parent: CMFirstAidKit

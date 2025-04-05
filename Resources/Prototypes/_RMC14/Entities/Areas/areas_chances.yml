@@ -12,7 +12,7 @@
 - type: entity
   parent: RMCAreaLv522
   id: RMCAreaLv522Indoors
-  name: Chance's Claim - Outdoors
+  name: Chance's Claim - Indoors
   components:
   - type: Sprite
     state: cliff_blocked
@@ -25,6 +25,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv522
@@ -63,6 +64,7 @@
     avoidBioscan: false
     noTunnel: true
     unweedable: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv522Oob
@@ -97,6 +99,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv522LandingZone1
@@ -112,6 +115,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv522LandingZone1Tunnel
@@ -128,6 +132,7 @@
     OB: true
     supplyDrop: true
     landingZone: false
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaShuttleDrop1
@@ -173,6 +178,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaShuttleDrop2
@@ -209,6 +215,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv522LandingZoneForecon
@@ -226,6 +233,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaLv522LandingZoneForecon
@@ -243,6 +251,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaLv522LandingZoneForecon
@@ -451,6 +460,7 @@
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz1
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaLv522IndoorsLoneBuildings
@@ -1004,6 +1014,7 @@
     OB: false
     supplyDrop: false
     minimapColor: '#C19504E7'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv522Atmos

@@ -75,7 +75,7 @@
   description: It is very thin.
   components:
   - type: Corrodible
-    isCorrodible: false
+    isCorrodible: true
   - type: Sprite
     sprite: _RMC14/Structures/Windows/ice.rsi
     state: ice_wall

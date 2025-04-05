@@ -49,3 +49,7 @@
     armor: 15 #20 bullet
     bio: 10
     explosionArmor: 10
+
+  id: RMCArmorVestWeYa
+  name: We-Ya security armor
+  description: An armored vest that protects against some damage. This one has a Weston-Yamada corporate badge.

@@ -24,6 +24,8 @@
   - type: InteractionOutline
   - type: Clickable
   - type: EvacuationPump
+    activeSound:
+      path: /Audio/_RMC14/Machines/fuel_pump_active.ogg
   - type: ApcPowerReceiver
   - type: RMCPowerReceiver
     idleLoad: 5
@@ -40,7 +42,7 @@
       visible: false
   - type: Appearance
   - type: GenericVisualizer
-    visuals:      
+    visuals:
       enum.EvacuationPumpLayers.Layer:
         enum.EvacuationPumpLayers.Layer:
           Empty: { state: fuelpump_0 }
@@ -55,4 +57,10 @@
         unpowered:
           True: { visible: false }
           False: { visible: true }
-        
+  - type: AmbientOnPowered
+  - type: AmbientSound
+    enabled: true
+    sound:
+      path: /Audio/_RMC14/Machines/fuel_pump_idle.ogg
+    range: 12
+    volume: -3

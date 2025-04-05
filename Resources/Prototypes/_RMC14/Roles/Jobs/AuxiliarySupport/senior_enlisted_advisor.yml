@@ -79,6 +79,13 @@
     - type: SeeNewPlayers
     - type: ViewIntelObjectives
     - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: sea
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_medical
 
 - type: startingGear
   id: CMGearSeniorEnlistedAdvisor

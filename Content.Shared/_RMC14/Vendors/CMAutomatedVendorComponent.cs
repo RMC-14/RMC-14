@@ -44,4 +44,7 @@ public sealed partial class CMAutomatedVendorComponent : Component
 
     [DataField, AutoNetworkedField]
     public List<ProtoId<AccessLevelPrototype>> Access = new();
+
+    [DataField, AutoNetworkedField]
+    public bool Scaling = true;
 }

@@ -52,6 +52,10 @@
     - type: JobPrefix
       prefix: cm-job-prefix-militarywarden
     - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: warden
 
 - type: startingGear
   id: CMGearMilitaryWarden

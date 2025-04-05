@@ -91,6 +91,7 @@
     - "CMAccessKitchen"
     - "CMAccessColonyPublic"
     hackable: true
+    scaling: false
     sections:
     - name: Alcohol
       entries:
@@ -108,7 +109,7 @@
       #  amount: 5
       - id: RMCDrinkAlcoholRum
         name: Captain Pete's Cuban Spiced Rum
-        amount: 5
+        amount: 27 # TODO RMC14 5
       - id: RMCDrinkAlcoholCognac
         name: Chateau De Baton Premium Cognac
         amount: 5
@@ -126,7 +127,7 @@
       #  amount: 5
       - id: RMCDrinkAlcoholGin
         name: Griffeater Gin
-        amount: 5
+        amount: 10 # TODO RMC14 5
       - id: RMCDrinkAlcoholAbsinthe
         name: Jailbreaker Verte
         amount: 2

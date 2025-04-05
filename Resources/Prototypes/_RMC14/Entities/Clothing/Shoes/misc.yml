@@ -35,7 +35,7 @@
     sprite: _RMC14/Objects/Clothing/Shoes/laceup_brown.rsi
 
 - type: entity
-  parent: CMBootsBlackFilled
+  parent: CMBootsBlack
   id: RMCShoesJackboots
   name: jackboots
   description: Security combat boots for combat scenarios or combat situations. All combat, all the time.
@@ -44,3 +44,8 @@
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/jackboots.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/jackboots.rsi
+
+- type: entity
+  parent: [RMCItemSlotM5Bayonet, RMCShoesJackboots]
+  id: RMCShoesJackbootsFilled
+  suffix: Filled

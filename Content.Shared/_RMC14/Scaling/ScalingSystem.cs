@@ -130,6 +130,10 @@ public sealed class ScalingSystem : EntitySystem
         var vendors = EntityQueryEnumerator<CMAutomatedVendorComponent>();
         while (vendors.MoveNext(out var vendorId, out var vendor))
         {
+            var scale = scaling.Comp.Scale;
+            if (!vendor.Scaling)
+                scale = 1;
+
             foreach (var section in vendor.Sections)
             {
                 for (var i = 0; i < section.Entries.Count; i++)
@@ -138,7 +142,7 @@ public sealed class ScalingSystem : EntitySystem
                     if (entry.Amount is not { } amount || entry.Box != null)
                         continue;
 
-                    amount = (int) Math.Round(amount * scaling.Comp.Scale);
+                    amount = (int) Math.Round(amount * scale);
                     section.Entries[i] = entry with
                     {
                         Amount = amount,
