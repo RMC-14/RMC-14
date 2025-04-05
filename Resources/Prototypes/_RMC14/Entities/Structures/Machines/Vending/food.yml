@@ -1,9 +1,9 @@
-# FOOD
+#CANTEEN MRE VENDOR
 
 - type: entity
   parent: ColMarTechBaseAnchorable
   id: ColMarTechFood
-  name: ColMarTech food vendor
+  name: ColMarTech Food Vendor
   description: Marine Food Vendor, containing standard military Prepared Meals.
   components:
   - type: Sprite
@@ -15,42 +15,61 @@
       holidays:
       - FestiveSeason
       entries:
+      - id: RMCMarinePreparedMealFruitcake
+        name: Xmas Prepared Meal (Fruitcake)
+        amount: 25
       - id: RMCMarinePreparedMealCookies
+        name: Xmas Prepared Meal (Gingerbread Cookies)
         amount: 25
       - id: RMCMarinePreparedMealGingerbread
-        amount: 25
-      - id: RMCMarinePreparedMealFruitcake
+        name: Xmas Prepared Meal (Sugar Cookies)
         amount: 25
     - name: Prepared Meals
       entries:
-      - id: CMMRE
-        name: UNMC Meal Ready to Eat
-        amount: 15
       - id: CMMarinePreparedMealChicken
+        name: UNMC Prepare Meal (Chicken)
         amount: 15
       - id: CMMarinePreparedMealCornbread
+        name: UNMC Prepare Meal (Cornbread)
         amount: 15
       - id: CMMarinePreparedMealPasta
+        name: UNMC Prepare Meal (Pasta)
         amount: 15
       - id: CMMarinePreparedMealPizza
+        name: UNMC Prepare Meal (Pizza)
         amount: 15
       - id: CMMarinePreparedMealPork
+        name: UNMC Prepare Meal (Pork)
         amount: 15
       - id: CMMarinePreparedMealTofu
+        name: UNMC Prepare Meal (Tofu)
         amount: 15
       - id: CMMarineProteinBar
+        name: UNMC Protein Bar
         amount: 50
     - name: Flasks
       entries:
       - id: CMCanteen
+        name: Canteen
         amount: 10
       - id: CMMetalFlask
-        name: metal flask (empty)
+        name: Metal Flask
         amount: 10
       - id: CMMarineFlask
+        name: UNMC Flask
         amount: 5
       - id: CMWEYAFlask
+        name: We-Ya Flask
         amount: 5
+    #- name: Utilities
+    #  holidays:
+    #  - FestiveSeason
+    #  entries:
+    #  - id: Festivizer
+    #    name: C92 pattern 'Festivizer' decorate
+    #    amount: 10
+
+# BOOZE-O-MAT VENDOR
 
 - type: entity
   parent: ColMarTechBaseAnchorable
@@ -76,69 +95,131 @@
     sections:
     - name: Alcohol
       entries:
-#      - id: DrinkAleBottleFull
-#        amount: 6
-#      - id: DrinkBeerBottleFull
-#        amount: 6
-#      - id: DrinkGrenadineBottleFull
-#        amount: 5
-#      - id: DrinkTequilaBottleFull
-#        amount: 5
+      #- id: DrinkAleBottleFull
+      #  name: Ale
+      #  amount: 6
+      #- id: DrinkBeerBottleFull
+      #  name: Beer
+      #  amount: 6
+      #- id: DrinkGrenadineBottleFull
+      #  name: Briar Rose Grenadine Syrup
+      #  amount: 5
+      #- id: DrinkTequilaBottleFull
+      #  name: Caccavo Guaranteed Quality Tequila
+      #  amount: 5
       - id: RMCDrinkAlcoholRum
+        name: Captain Pete's Cuban Spiced Rum
         amount: 27 # TODO RMC14 5
       - id: RMCDrinkAlcoholCognac
+        name: Chateau De Baton Premium Cognac
         amount: 5
-      - id: RMCDrinkAlcoholWhiskey
-        amount: 5
+      #- id: RMCDrinkAlcoholDavenport
+      #  name: Davenport Rye Whiskey
+      #  amount: 3
       - id: RMCDrinkAlcoholPurpleWine
+        name: Doublebeard Bearded Special Wine
         amount: 5
       - id: RMCDrinkAlcoholMelonLiquor
+        name: Emeraldine Melon Liquor
         amount: 2
-#      - id: DrinkVermouthBottleFull
-#        amount: 5
+      #- id: DrinkVermouthBottleFull
+      #  name: Goldeneye Vermouth
+      #  amount: 5
       - id: RMCDrinkAlcoholGin
+        name: Griffeater Gin
         amount: 10 # TODO RMC14 5
       - id: RMCDrinkAlcoholAbsinthe
+        name: Jailbreaker Verte
         amount: 2
-#      - id: DrinkBlueCuracaoBottleFull
-#        amount: 2
+      #- id: DrinkBlueCuracaoBottleFull
+      #  name: Miss Blue Curacao
+      #  amount: 2
       - id: RMCDrinkAlcoholVodka
-        amount: 12 # TODO RMC14 5
-#      - id: DrinkCoffeeLiqueurBottleFull
-#        amount: 5
-    - name: Craft Beers
-      entries: []
+        name: Red Star Vodka
+        amount: 5
+      #- id: DrinkCoffeeLiqueurBottleFull
+      #  name: Robert Robust's Coffee Liqueur
+      #  amount: 5
+      - id: RMCDrinkAlcoholWhiskey
+        name: Uncle Git's Special Reserve
+        amount: 5
+      #- id: WeYaAspenBeer
+      #  name: Weston-Yamada Aspen Beer
+      #  amount: 20
+    #- name: Craft Beers
+    #  entries:
+    #  - id: Pendleton
+    #    name: Pendleton's Triple Star
+    #    amount: 5
+    #  - id: Tuxedo
+    #    name: Tuxedo Premium
+    #    amount: 5
+    #  - id: Gannuci
+    #    name: Ganucci's Genuine Light
+    #    amount: 5
+    #  - id: BlueMalt
+    #    name: Blue Malt
+    #    amount: 5
+    #  - id: PartyPopper
+    #    name: Party Popper Ale
+    #    amount: 5
+    #  - id: Tazhushka
+    #    name: Tazhushka's Turquoise Beer
+    #    amount: 5
+    #  - id: Reaper
+    #    name: Reaper Red
+    #    amount: 5
+    #  - id: Mono
+    #    name: Mono Lager
+    #    amount: 5
     - name: Non-Alcohol
       entries:
+      #- id: Tea
+      #  name: Duke Purple Tea
+      #  amount: 10
       - id: CMDrinkCanFruitBeer
+        name: Fruit-Beer
         amount: 8
       - id: DrinkJuiceLimeCarton
+        name: Lime Juice
         amount: 4
       - id: DrinkCreamCarton
+        name: Milk Cream
         amount: 4
       - id: DrinkJuiceOrangeCarton
+        name: Orange Juice
         amount: 4
       - id: CMDrinkCanSoda
+        name: Soda Water
         amount: 15
       - id: DrinkJuiceTomatoCarton
+        name: Tomato Juice
         amount: 4
       - id: CMDrinkCanTonic
+        name: Tonic Water
         amount: 8
     - name: Containers
       entries:
       - id: CMMetalFlask
-        name: metal flask (empty)
+        name: Flask
         amount: 5
       - id: DrinkGlass
+        name: Glass
         amount: 30
-      - id: CMMarineFlask
-        amount: 5
+      #- id: IceCup
+      #  name: Ice Cup
+      #  amount: 30
+      #- id: VacuumFlask
+      #  name: Vacuum Flask
+      #  amount: 5
+
+# CHESS ALCOHOL VENDOR
 
 - type: entity
   parent: ColMarTechBaseAnchorable
   id: CMVendorChess
-  name: Chess-o-mat
-  description: In 2143 Red Star Drinks, a SPP-CA (Colony Administration) affiliated corporation ran a promotional sweepstakes for drinkers who had found special codes on the inside of the caps of a limited run of Red Star Vodka, shipping them a Chess-O-Mat with unlimited refills.
+  name: Chess-O-Mat
+  description: In 2143 Red Star Drinks, an SPP-CA (Colonial Administration) affiliated corporation ran a promotional sweepstakes for drinkers who had found special codes on the inside of the caps of a limited run of Red Star Vodka, shipping them a Chess-O-Mat with unlimited refills.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/chessomat.rsi
@@ -148,12 +229,43 @@
   - type: CMAutomatedVendor
     hackable: true
     sections:
-    - name: Chess
-      entries:
-      - id: ChessBoard
-        amount: 5
     - name: White Pieces
-      entries: []
+      entries:
+      - id: RMCDrinkAlcoholVodkaChessWhitePawn
+        name: Pawn
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessWhiteBishop
+        name: Bishop
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessWhiteKnight
+        name: Knight
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessWhiteRook
+        name: Rook
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessWhiteKing
+        name: King
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessWhiteQueen
+        name: Queen
+        amount: 2
     - name: Black Pieces
-      entries: []
-    # TODO RMC14 vodka chess pieces
+      entries:
+      - id: RMCDrinkAlcoholVodkaChessBlackPawn
+        name: Pawn
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessBlackBishop
+        name: Bishop
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessBlackKnight
+        name: Knight
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessBlackRook
+        name: Rook
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessBlackKing
+        name: King
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessBlackQueen
+        name: Queen
+        amount: 2

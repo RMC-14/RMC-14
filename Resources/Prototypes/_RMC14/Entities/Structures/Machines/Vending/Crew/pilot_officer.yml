@@ -1,0 +1,611 @@
+# WEAPONS VENDOR
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechDropshipCrewWeapon
+  name: ColMarTech Dropship Crew Weapons Rack
+  description: An automated weapon rack hooked up to a small storage of standard-issue weapons. Can be accessed only by the dropship crew.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessDropship" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMDropshipCrewChief
+    - CMPilotDropship
+    - CMPilotGunship
+    sections:
+    - name: Primary Firearms
+      entries:
+      - id: WeaponRifleM4SPR
+        name: M4SPR Battle Rifle
+        amount: 4
+      - id: WeaponSMGM63
+        name: M63 Submachine Gun
+        amount: 4
+      - id: WeaponShotgunM42A2
+        name: M42A2 Pump Shotgun
+        amount: 4
+      - id: WeaponRifleM54C
+        name: M54C Assault Rifle MK2
+        amount: 4
+    - name: Primary Ammunition
+      entries:
+      - id: RMCBoxShotgunBuckshot
+        name: Box Of Buckshot Shells (12g)
+        amount: 12
+      - id: RMCBoxShotgunFlechette
+        name: Box Of Flechette Shells (12g)
+        amount: 12
+      - id: RMCBoxShotgunSlugs
+        name: Box Of Shotgun Slugs (12g)
+        amount: 12
+      - id: CMMagazineRifleM4SPR
+        name: M4SPR Magazine (10x24mm)
+        amount: 24
+      - id: CMMagazineSMGM63
+        name: M63 HV Magazine (10x20mm)
+        amount: 24
+      - id: CMMagazineRifleM54C
+        name: M54C Magazine (10x24mm)
+        amount: 24
+    - name: Sidearms
+      entries:
+      #- id: RMCWeaponPistolM10Empty
+      #  name: M10 Auto Pistol
+      #  amount: 4
+      - id: RMCWeaponPistolM77Empty
+        name: M77 Combat Pistol
+        amount: 4
+      - id: RMCWeaponRevolverM44Empty
+        name: M44 Combat Revolver
+        amount: 4
+      - id: CMWeaponPistolM1984Empty
+        name: M1984 Service Pistol
+        amount: 4
+      #- id: WeaponFlareM82F
+      #  name: M82F Flare Gun
+      #  amount: 4
+    - name: Sidearm Ammunition
+      entries:
+      #- id: M10HVExt
+      #  name: M10 HV extended magazine (10x20mm)
+      #  amount: 10
+      #- id: M10HVDrum
+      #  name: M10 HV drum magazine (10x20mm)
+      #  amount: 15
+      - id: CMMagazinePistolM77AP
+        name: M77 AP Magazine (9mm)
+        amount: 20
+      - id: RMCSpeedLoaderM44
+        name: M44 Speedloader (.44)
+        amount: 20
+      - id: CMMagazinePistolM1984
+        name: M1984 Magazine (9mm)
+        amount: 20
+      - id: RMCMagazinePistolM1984AP
+        name: M1984 AP Magazine (9mm)
+        amount: 12
+      #- id: M1984HPMag
+      #  name: M1984 HP Magazine (9mm)
+      #  amount: 12
+      - id: CMMagazinePistolMK80
+        name: MK80 Magazine (9mm)
+        amount: 16
+    - name: Attachments
+      entries:
+      - id: RMCAttachmentRailFlashlight
+        name: Rail Flashlight
+        amount: 8
+      - id: RMCAttachmentFlashlightGrip
+        name: Underbarrel Flashlight Grip
+        amount: 4
+    - name: Utilities
+      entries:
+      - id: RMCFlashlight #TODO RMC14 replace with combat flashlights
+        name: Flashlight
+        amount: 4
+      - id: RMCM5Bayonet
+        name: M5 Bayonet
+        amount: 4
+      - id: RMCPackFlareCAS
+        name: M89-S Signal Flare Pack
+        amount: 1
+      - id: CMPackFlare
+        name: M94 Marking Flare Pack
+        amount: 10
+
+# EQUIPMENT VENDOR
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechDropshipCrewEquipment
+  name: ColMarTech Dropship Crew Equipment Rack
+  description: An automated rack hooked up to a colossal storage of Dropship Crew standard-issue equipment.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessPilot" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMDropshipCrewChief
+    - CMPilotDropship
+    - CMPilotGunship
+    sections:
+
+# PILOT OFFICER
+
+    - name: Standard Equipment
+      jobs:
+      - CMPilotDropship
+      - CMPilotGunship
+      takeAll: CMEquipment
+      entries:
+      - id: CMHandsInsulated
+        name: Gloves
+        mandatory: true
+      - id: CMArmorHelmetM30
+        name: M30 Tactical Helmet
+        mandatory: true
+      - id: CMSatchel
+        name: Leather Satchel
+        mandatory: true
+      - id: CMMRE
+        name: MRE
+        mandatory: true
+    - name: Armour
+      jobs:
+      - CMPilotDropship
+      - CMPilotGunship
+      choices: { CMArmour: 1 }
+      entries:
+      - id: RMCArmorVestFlak
+        name: M70 Flack Jacket
+        mandatory: true
+      - id: CMArmorM3VLFlakVest
+        name: M3-VL Pattern Flak Vest
+        mandatory: true
+    - name: Personal Sidearm
+      jobs:
+      - CMPilotDropship
+      - CMPilotGunship
+      choices: { CMSidearm: 1 }
+      entries:
+      - id: RMCWeaponPistolM77Empty
+        name: M77 Combat Pistol
+      - id: RMCMK80
+        name: MK80 Pistol
+    - name: Belt
+      jobs:
+      - CMPilotDropship
+      - CMPilotGunship
+      choices: { CMBelt: 1 }
+      entries:
+      - id: RMCBeltUtilityGeneral
+        name: G8-A General Utility Pouch
+      - id: CMBeltMarine
+        name: M276 Ammo Load Rig
+      - id: CMBeltMedicBagFilled
+        name: M276 Lifesaver Bag (Full)
+        recommended: true
+      - id: CMBeltMedicalFilled
+        name: M276 Medical Storage Rig (Full)
+        recommended: true
+      - id: RMCBeltHolsterSMGPouch
+        name: M276 M63 Holster Rig
+      #- id: M10HolsterRig
+      #  name: M276 M10 Holster Rig
+      - id: RMCBeltHolsterRevolver
+        name: M276 General Revolver Holster Rig
+      #- id: RMCBeltHolsterFlareGun
+      #  name: M276 M82F Holster Rig
+      - id: RMCBeltHolsterPistol
+        name: M276 General Pistol Holster Rig
+      - id: RMCM276ShotgunShellLoadingRig
+        name: M276 Shotgun Shell Loading Rig
+    - name: Pouches
+      jobs:
+      - CMPilotDropship
+      - CMPilotGunship
+      choices: { CMPouches: 2 }
+      entries:
+      - id: RMCPouchFirstAidInjectors
+        name: First-Aid Pouch (Refillable Injectors)
+        recommended: true
+      - id: RMCPouchFirstAidSplintsGauzeOintment
+        name: First-Aid Pouch (Gauze, Ointment) # TODO RMC14 splints comma
+        recommended: true
+      - id: RMCPouchFirstAidPills
+        name: First-Aid Pouch (Pill Packets)
+        recommended: true
+      - id: RMCPouchFirstResponder
+        name: First Responder Pouch
+      - id: RMCPouchFlareFilled
+        name: Flare Pouch (Full)
+      - id: RMCPouchGeneralLarge
+        name: Large General Pouch
+      - id: RMCPouchMagazineLarge
+        name: Large Magazine Pouch
+      - id: RMCPouchMagazinePistolLarge
+        name: Large Pistol Magazine Pouch
+      - id: RMCPouchShotgunLarge
+        name: Large Shotgun Shell Pouch
+      - id: RMCPouchMedical
+        name: Medical Pouch
+      - id: RMCPouchMedkit
+        name: Medical Kit Pouch
+      - id: RMCPouchPistol
+        name: Sidearm Pouch
+      #- id: RMCPouchSling
+      #  name: Sling Pouch
+    - name: Accessories
+      jobs:
+      - CMPilotDropship
+      - CMPilotGunship
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBlack
+        name: Black Webbing Vest
+      - id: CMWebbingBrown
+        name: Brown Webbing Vest
+        recommended: true
+      - id: CMWebbingHolster
+        name: Shoulder Holster
+      - id: CMWebbing
+        name: Webbing
+      - id: RMCWebbingBlackSmall
+        name: Black Webbing
+    - name: Glasses
+      jobs:
+      - CMPilotDropship
+      - CMPilotGunship
+      choices: { CMGlasses: 1 }
+      entries:
+      - id: RMCGlassesAviators
+        name: Aviator Shades
+      - id: RMCGlassesMedicalHUDGlasses
+        name: Medical HUD Glasses
+        recommended: true
+      - id: RMCSunglasses
+        name: Sunglasses
+    - name: Masks
+      jobs:
+      - CMPilotDropship
+      - CMPilotGunship
+      choices: { CMMasks: 1 }
+      entries:
+      - id: CMMaskGas
+        name: Gas Mask
+      - id: CMMaskCoif
+        name: Heat Absorbent Coif
+    - name: Attachments
+      jobs:
+      - CMPilotDropship
+      - CMPilotGunship
+      entries:
+      - id: RMCAttachmentAngledGrip
+        name: Angled Grip
+        points: 10
+      - id: RMCAttachmentExtendedBarrel
+        name: Extended Barrel
+        points: 10
+      - id: RMCAttachmentGyroscopicStabilizer
+        name: Gyroscopic Stabilizer
+        points: 10
+      - id: RMCAttachmentLaserSight
+        name: Laser Sight
+        points: 10
+      - id: RMCAttachmentU7UnderbarrelShotgun
+        name: U7 Underbarrel Shotgun
+        points: 10
+      - id: RMCAttachmentM42A2WoodenStock
+        name: M42 Wooden Stock
+        points: 10
+      - id: RMCAttachmentM63Stock
+        name: M63 Stock
+        points: 10
+      - id: RMCAttachmentM54CStockSolid
+        name: M54C Solid Stock
+        points: 10
+      - id: RMCAttachmentRecoilCompensator
+        name: Recoil Compensator
+        points: 10
+      - id: RMCAttachmentS5RedDotSight
+        name: Red-Dot Sight
+        points: 10
+      - id: RMCAttachmentS6ReflexSight
+        name: Reflex Sight
+        points: 10
+      - id: RMCAttachmentSuppressor
+        name: Suppressor
+        points: 10
+      - id: RMCAttachmentVerticalGrip
+        name: Vertical Grip
+        points: 10
+    - name: Ammunition
+      jobs:
+      - CMPilotDropship
+      - CMPilotGunship
+      entries:
+      #- id: RMCMagazinePistolM10
+      #  name: M10 HV magazine (10x20mm)
+      #  amount: 10
+      - id: CMMagazineRifleM4SPRAP
+        name: M4SPR AP Magazine (10x24mm)
+        points: 10
+      #- id: RMCMagazineRifleM4SPRExt
+      #  name: M4SPR Extended Magazine (10x24mm)
+      #  points: 10
+      - id: CMMagazineSMGM63AP
+        name: M63 AP Magazine (10x20mm)
+        points: 10
+      - id: CMMagazineSMGM63Ext
+        name: M63 Extended Magazine (10x20mm)
+        points: 10
+      - id: CMMagazineRifleM54CAP
+        name: M54C AP Magazine (10x24mm)
+        points: 10
+      - id: CMMagazineRifleM54CExt
+        name: M54C Extended Magazine (10x24mm)
+        points: 10
+      #- id: M44HeavySpeedloader
+      #  name: M44 Heavy Speed Loader (.44)
+      #  points: 10
+    - name: Utilities
+      jobs:
+      - CMPilotDropship
+      - CMPilotGunship
+      entries:
+      - id: RMCVendorBundleCrewPilot
+        name: PO Flightsuit Kit
+        points: 10
+      - id: CMFireExtinguisherPortable
+        name: Fire Extinguisher (portable)
+        points: 5
+      - id: RMCPouchGeneralLarge
+        name: Large General Pouch
+        points: 15
+      - id: RMCPouchMagazineLarge
+        name: Large Magazine Pouch
+        points: 15
+      - id: RMCScabbardMacheteFilled
+        name: Machete Scabbard (Full)
+        points: 10
+      - id: RMCPouchMacheteFilled
+        name: Machete Pouch (Full)
+        points: 15
+      - id: RMCMotionDetector
+        name: Motion Detector
+        points: 15
+        recommended: true
+
+# DROPSHIP CREW CHIEF
+
+    - name: Standard Equipment
+      jobs:
+      - CMDropshipCrewChief
+      takeAll: CMEquipment
+      entries:
+      - id: CMHandsInsulated
+        name: Gloves
+        mandatory: true
+      - id: RMCHeadCapFlippable
+        name: Patrol Cap
+        mandatory: true
+      - id: CMSatchel
+        name: Leather Satchel
+        mandatory: true
+      - id: CMMRE
+        name: MRE
+        mandatory: true
+    - name: Armour
+      jobs:
+      - CMDropshipCrewChief
+      choices: { CMArmour: 1 }
+      entries:
+      - id: RMCArmorVestFlak
+        name: M70 Flack Jacket
+        mandatory: true
+      - id: CMArmorM3VLFlakVest
+        name: M3-VL Pattern Flak Vest
+        mandatory: true
+    - name: Personal Sidearm
+      jobs:
+      - CMDropshipCrewChief
+      choices: { CMSidearm: 1 }
+      entries:
+      - id: RMCWeaponPistolM77Empty
+        name: M77 Combat Pistol
+      - id: RMCMK80
+        name: MK80 Pistol
+    - name: Belt
+      jobs:
+      - CMDropshipCrewChief
+      choices: { CMBelt: 1 }
+      entries:
+      - id: RMCBeltUtilityGeneral
+        name: G8-A General Utility Pouch
+      - id: CMBeltMarine
+        name: M276 Ammo Load Rig
+      - id: CMBeltMedicBagFilled
+        name: M276 Lifesaver Bag (Full)
+        recommended: true
+      - id: CMBeltMedicalFilled
+        name: M276 Medical Storage Rig (Full)
+        recommended: true
+      - id: RMCBeltHolsterSMGPouch
+        name: M276 M63 Holster Rig
+      - id: RMCBeltHolsterRevolver
+        name: M276 General Revolver Holster Rig
+      #- id: RMCBeltHolsterFlareGun
+      #  name: M276 M82F Holster Rig
+      - id: RMCBeltHolsterPistol
+        name: M276 General Pistol Holster Rig
+      - id: RMCM276ShotgunShellLoadingRig
+        name: M276 Shotgun Shell Loading Rig
+    - name: Pouches
+      jobs:
+      - CMDropshipCrewChief
+      choices: { CMPouches: 2 }
+      entries:
+      - id: RMCPouchFirstAidInjectors
+        name: First-Aid Pouch (Refillable Injectors)
+        recommended: true
+      - id: RMCPouchFirstAidSplintsGauzeOintment
+        name: First-Aid Pouch (Gauze, Ointment) # TODO RMC14 splints comma
+        recommended: true
+      - id: RMCPouchFirstAidPills
+        name: First-Aid Pouch (Pill Packets)
+        recommended: true
+      - id: RMCPouchFirstResponder
+        name: First Responder Pouch
+      - id: RMCPouchFlareFilled
+        name: Flare Pouch (Full)
+      - id: RMCPouchGeneralLarge
+        name: Large General Pouch
+      - id: RMCPouchMagazineLarge
+        name: Large Magazine Pouch
+      - id: RMCPouchMagazinePistolLarge
+        name: Large Pistol Magazine Pouch
+      - id: RMCPouchShotgunLarge
+        name: Large Shotgun Shell Pouch
+      - id: RMCPouchMedical
+        name: Medical Pouch
+      - id: RMCPouchMedkit
+        name: Medical Kit Pouch
+      - id: RMCPouchPistol
+        name: Sidearm Pouch
+      #- id: RMCPouchSling
+      #  name: Sling Pouch
+    - name: Accessories
+      jobs:
+      - CMDropshipCrewChief
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBlack
+        name: Black Webbing Vest
+      - id: CMWebbingBrown
+        name: Brown Webbing Vest
+        recommended: true
+      - id: CMWebbingHolster
+        name: Shoulder Holster
+      - id: CMWebbing
+        name: Webbing
+      - id: CMWebbingPouch
+        name: Drop Pouch
+    - name: Glasses
+      jobs:
+      - CMDropshipCrewChief
+      choices: { CMGlasses: 1 }
+      entries:
+      - id: RMCGlassesAviators
+        name: Aviator Shades
+      - id: RMCGlassesMedicalHUDGlasses
+        name: Medical HUD Glasses
+        recommended: true
+      - id: RMCSunglasses
+        name: Sunglasses
+    - name: Masks
+      jobs:
+      - CMDropshipCrewChief
+      choices: { CMMasks: 1 }
+      entries:
+      - id: CMMaskGas
+        name: Gas Mask
+      - id: CMMaskCoif
+        name: Heat Absorbent Coif
+    - name: Attachments
+      jobs:
+      - CMDropshipCrewChief
+      entries:
+      - id: RMCAttachmentAngledGrip
+        name: Angled Grip
+        points: 10
+      - id: RMCAttachmentExtendedBarrel
+        name: Extended Barrel
+        points: 10
+      - id: RMCAttachmentGyroscopicStabilizer
+        name: Gyroscopic Stabilizer
+        points: 10
+      - id: RMCAttachmentLaserSight
+        name: Laser Sight
+        points: 10
+      - id: RMCAttachmentU7UnderbarrelShotgun
+        name: U7 Underbarrel Shotgun
+        points: 10
+      - id: RMCAttachmentM42A2WoodenStock
+        name: M42 Wooden Stock
+        points: 10
+      - id: RMCAttachmentM63Stock
+        name: M63 Stock
+        points: 10
+      - id: RMCAttachmentM54CStockSolid
+        name: M54C Solid Stock
+        points: 10
+      - id: RMCAttachmentRecoilCompensator
+        name: Recoil Compensator
+        points: 10
+      - id: RMCAttachmentS5RedDotSight
+        name: Red-Dot Sight
+        points: 10
+      - id: RMCAttachmentS6ReflexSight
+        name: Reflex Sight
+        points: 10
+      - id: RMCAttachmentSuppressor
+        name: Suppressor
+        points: 10
+      - id: RMCAttachmentVerticalGrip
+        name: Vertical Grip
+        points: 10
+    - name: Ammunition
+      jobs:
+      - CMDropshipCrewChief
+      entries:
+      - id: CMMagazineRifleM4SPRAP
+        name: M4SPR AP Magazine (10x24mm)
+        points: 10
+      #- id: RMCMagazineRifleM4SPRExt
+      #  name: M4SPR Extended Magazine (10x24mm)
+      #  points: 10
+      - id: CMMagazineSMGM63AP
+        name: M63 AP Magazine (10x20mm)
+        points: 10
+      - id: CMMagazineSMGM63Ext
+        name: M63 Extended Magazine (10x20mm)
+        points: 10
+      - id: CMMagazineRifleM54CAP
+        name: M54C AP Magazine (10x24mm)
+        points: 10
+      - id: CMMagazineRifleM54CExt
+        name: M54C Extended Magazine (10x24mm)
+        points: 10
+      #- id: M44HeavySpeedloader
+      #  name: M44 Heavy Speed Loader (.44)
+      #  points: 10
+    - name: Utilities
+      jobs:
+      - CMDropshipCrewChief
+      entries:
+      - id: CMFireExtinguisherPortable
+        name: Fire Extinguisher (portable)
+        points: 5
+      - id: RMCPouchGeneralLarge
+        name: Large General Pouch
+        points: 15
+      - id: RMCPouchMagazineLarge
+        name: Large Magazine Pouch
+        points: 15
+      - id: RMCScabbardMacheteFilled
+        name: Machete Scabbard (Full)
+        points: 10
+      - id: RMCPouchMacheteFilled
+        name: Machete Pouch (Full)
+        points: 15
+      - id: RMCMotionDetector
+        name: Motion Detector
+        points: 15
+        recommended: true

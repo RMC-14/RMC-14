@@ -57,6 +57,9 @@ public sealed partial record CMVendorEntry
     public int Spawn = 1;
 
     [DataField]
+    public bool Mandatory;
+
+    [DataField]
     public bool Recommended;
 
     [DataField]

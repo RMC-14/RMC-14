@@ -1,9 +1,9 @@
-# MEDICAL
+# EQUIPMENT VENDOR
 
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCrewMedicalEquipment
-  name: ColMarTech medical equipment rack
+  name: ColMarTech Medical Equipment Rack
   description: An automated equipment vendor for the Medical Department.
   components:
   - type: AccessReader
@@ -18,107 +18,725 @@
     - CMResearcher
     - CMCMO
     sections:
+
+# DOCTOR
+
     - name: Medical Set (Mandatory)
+      jobs:
+      - CMDoctor
       takeAll: CMMedicalSet
       entries:
-      - id: CMVendorBundleCrewMedicalEssentialsNurse
+      - id: CMVendorBundleCrewMedicalEssentialsDoctor
+        name: Essential Medical Set
+        mandatory: true
     - name: Standard Equipment
+      jobs:
+      - CMDoctor
       takeAll: CMStandard
       entries:
       - id: CMHandsLatex
+        name: Gloves
+        mandatory: true
       - id: CMHeadsetMedical
+        name: Headset
+        mandatory: true
     - name: Eyewear
+      jobs:
+      - CMDoctor
       choices: { CMEyewear: 1 }
       entries:
       - id: RMCGlassesMedicalHUDGlasses
-#      - id: Prescription Medical HUD Glasses
+        name: Medical HUD Glasses
+        mandatory: true
+      #- id: Prescription Medical HUD Glasses
+      #  name: Prescription Medical HUD Glasses
+      #  mandatory: true
     - name: Uniform
+      jobs:
+      - CMDoctor
       choices: { CMUniform: 1 }
       entries:
       - id: CMScrubsGreen
+        name: Green Scrubs
+        recommended: true
       - id: CMScrubsBlue
+        name: Blue Scrubs
       - id: RMCScrubsLightBlue
+        name: Light Blue Scrubs
       - id: CMScrubsPurple
+        name: Purple Scrubs
       - id: RMCScrubsOlive
+        name: Olive Scrubs
       - id: RMCScrubsGrey
-    - name: Suit
-      jobs:
-      - CMNurse
-      choices: { CMSuit: 1 }
-      entries:
-      - id: RMCMedicalApron
+        name: Grey Scrubs
     - name: Suit
       jobs:
       - CMDoctor
       choices: { CMSuit: 1 }
       entries:
       - id: RMCLabcoat
+        name: Labcoat
       - id: RMCMedicalApron
-#    - name: Snow gear (Snow use only)
-#      takeall: CMSnowgear
-#      entries:
-#      - id: Snowcoat
-#      - id: Balaclava
-#      - id: Snow Scarf
+        name: Medical's apron
+    #- name: Snow Gear (Snow Use Only)
+    #  jobs:
+    #  - CMDoctor
+    #  takeAll: CMSnowGear
+    #  entries:
+    #  - id: Snowcoat
+    #    name: Snowcoat
+    #    mandatory: true
+    #  - id: Balaclava
+    #    name: Balaclava
+    #    mandatory: true
+    #  - id: Snow Scarf
+    #    name: Snow Scarf
+    #    mandatory: true
     - name: Headwear
+      jobs:
+      - CMDoctor
       choices: { CMHeadwear: 1 }
       entries:
-      - id: CMHeadCapSurgOrange
       - id: CMHeadCapSurgBlue
+        name: Surgical Cap, Blue
       - id: CMHeadCapSurgPurple
+        name: Surgical Cap, Purple
       - id: CMHeadCapSurgGreen
+        name: Surgical Cap, Green
+    - name: Bag
+      jobs:
+      - CMDoctor
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: CMSatchelMarine
+        name: Standard Satchel
+      - id: CMBackpackMarine
+        name: Standard Backpack
+      - id: CMSatchelMedical
+        name: Medical Satchel
+        recommended: true
+      - id: CMBackpackMedical
+        name: Medical Backpack
+        recommended: true
     - name: Belt
+      jobs:
+      - CMDoctor
       choices: { CMBelt: 1 }
       entries:
       - id: CMBeltMedicBagFilled
-        name: M276 pattern lifesaver bag (Full)
+        name: M276 Lifesaver Bag (Full)
+        recommended: true
       - id: CMBeltMedicalFilled
-        name: M276 pattern medical storage rig (Full)
-    - name: Backpack
-      choices: { CMBackpack: 1 }
-      entries:
-      - id: CMBackpackMarine
-        name: backpack
-      - id: CMSatchelMarine
-        name: satchel
-      - id: CMBackpackMedical
-      - id: CMSatchelMedical
+        name: M276 Medical Storage Rig (Full)
+        recommended: true
     - name: Pouches
+      jobs:
+      - CMDoctor
       choices: { RMCPouch: 2 }
       entries:
       - id: RMCPouchAutoinjector
+        name: Autoinjector Pouch
       - id: RMCPouchFirstAidInjectors
-        name: first-aid pouch (refillable injectors)
+        name: First-Aid Pouch (Refillable Injectors)
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        name: First-Aid Pouch (Gauze, Ointment) # TODO RMC14 splints comma
       - id: RMCPouchFirstAidPills
-        name: first-aid pouch (pills)
+        name: First-Aid Pouch (Pill Packets)
       - id: RMCPouchFirstResponder
+        name: First Responder Pouch
       - id: RMCPouchMedical
+        name: Medical Pouch
+        recommended: true
       - id: RMCPouchMedkit
+        name: Medical Kit Pouch
         recommended: true
       - id: RMCPouchReagentCanisterBicaridine
-        recommended: true
         name: Pressurized Reagent Canister Pouch\n(Bicaridine)
+        recommended: true
       - id: RMCPouchReagentCanisterKelotane
-        recommended: true
         name: Pressurized Reagent Canister Pouch\n(Kelotane)
+        recommended: true
       - id: RMCPouchReagentCanisterTricordrazineRevival
+        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine
         recommended: true
-        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
-      #      - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
-      #        recommended: true
-      #        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
+      #- id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
+      #  name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
+      #  recommended: true
       - id: RMCPouchReagentCanisterTricordrazine
-        recommended: true
         name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
-      - id: RMCPouchReagentCanister
         recommended: true
+      - id: RMCPouchReagentCanister
         name: Pressurized Reagent Canister Pouch\n(EMPTY)
+        recommended: true
       #- id: CMSlingPouch
+      #  name: Sling Pouch
     - name: Accessories
+      jobs:
+      - CMDoctor
       choices: { CMAccessories: 1 }
       entries:
-      - id: CMWebbingBrown
       - id: CMWebbingBlack
+        name: Black Webbing Vest
+      - id: CMWebbingBrown
+        name: Brown Webbing Vest
       - id: CMWebbing
+        name: Webbing
+      - id: RMCWebbingBlackSmall
+        name: Black Webbing
+
+# NURSE
+
+    - name: Medical Set (Mandatory)
+      jobs:
+      - CMNurse
+      takeAll: CMMedicalSet
+      entries:
+      - id: CMVendorBundleCrewMedicalEssentialsNurse
+        name: Essential Medical Set
+        mandatory: true
+    - name: Standard Equipment
+      jobs:
+      - CMNurse
+      takeAll: CMStandard
+      entries:
+      - id: CMHandsLatex
+        name: Gloves
+        mandatory: true
+      - id: CMHeadsetMedical
+        name: Headset
+        mandatory: true
+    - name: Eyewear
+      jobs:
+      - CMNurse
+      choices: { CMEyewear: 1 }
+      entries:
+      - id: RMCGlassesMedicalHUDGlasses
+        name: Medical HUD Glasses
+        mandatory: true
+      #- id: Prescription Medical HUD Glasses
+      #  name: Prescription Medical HUD Glasses
+      #  mandatory: true
+    - name: Uniform
+      jobs:
+      - CMNurse
+      choices: { CMUniform: 1 }
+      entries:
+      - id: RMCScrubsLightBlue
+        name: Light Blue Scrubs
+        mandatory: true
+      - id: CMScrubsGreen
+        name: Green Scrubs
+        recommended: true
+      - id: CMScrubsBlue
+        name: Blue Scrubs
+      - id: CMScrubsPurple
+        name: Purple Scrubs
+      - id: RMCScrubsOlive
+        name: Olive Scrubs
+      - id: RMCScrubsGrey
+        name: Grey Scrubs
+    - name: Suit
+      jobs:
+      - CMNurse
+      choices: { CMSuit: 1 }
+      entries:
+      - id: RMCMedicalApron
+        name: Medical's apron
+    #- name: Snow Gear (Snow Use Only)
+    #  jobs:
+    #  - CMNurse
+    #  takeAll: CMSnowGear
+    #  entries:
+    #  - id: Snowcoat
+    #    name: Snowcoat
+    #    mandatory: true
+    #  - id: Balaclava
+    #    name: Balaclava
+    #    mandatory: true
+    #  - id: Snow Scarf
+    #    name: Snow Scarf
+    #    mandatory: true
+    - name: Headwear
+      jobs:
+      - CMNurse
+      choices: { CMHeadwear: 1 }
+      entries:
+      - id: CMHeadCapSurgOrange
+        name: Surgical Cap, Orange
+        recommended: true
+      - id: CMHeadCapSurgBlue
+        name: Surgical Cap, Blue
+      - id: CMHeadCapSurgPurple
+        name: Surgical Cap, Purple
+      - id: CMHeadCapSurgGreen
+        name: Surgical Cap, Green
+    - name: Bag
+      jobs:
+      - CMNurse
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: CMSatchelMarine
+        name: Standard Satchel
+      - id: CMBackpackMarine
+        name: Standard Backpack
+      - id: CMSatchelMedical
+        name: Medical Satchel
+        recommended: true
+      - id: CMBackpackMedical
+        name: Medical Backpack
+        recommended: true
+    - name: Belt
+      jobs:
+      - CMNurse
+      choices: { CMBelt: 1 }
+      entries:
+      - id: CMBeltMedicBagFilled
+        name: M276 Lifesaver Bag (Full)
+        recommended: true
+      - id: CMBeltMedicalFilled
+        name: M276 Medical Storage Rig (Full)
+        recommended: true
+    - name: Pouches
+      jobs:
+      - CMNurse
+      choices: { RMCPouch: 2 }
+      entries:
+      - id: RMCPouchAutoinjector
+        name: Autoinjector Pouch
+      - id: RMCPouchFirstAidInjectors
+        name: First-Aid Pouch (Refillable Injectors)
+      - id: RMCPouchFirstAidSplintsGauzeOintment
+        name: First-Aid Pouch (Gauze, Ointment) # TODO RMC14 splints comma
+      - id: RMCPouchFirstAidPills
+        name: First-Aid Pouch (Pill Packets)
+      - id: RMCPouchFirstResponder
+        name: First Responder Pouch
+      - id: RMCPouchMedical
+        name: Medical Pouch
+        recommended: true
+      - id: RMCPouchMedkit
+        name: Medical Kit Pouch
+        recommended: true
+      - id: RMCPouchReagentCanisterBicaridine
+        name: Pressurized Reagent Canister Pouch\n(Bicaridine)
+        recommended: true
+      - id: RMCPouchReagentCanisterKelotane
+        name: Pressurized Reagent Canister Pouch\n(Kelotane)
+        recommended: true
+      - id: RMCPouchReagentCanisterTricordrazineRevival
+        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine
+        recommended: true
+      #- id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
+      #  name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
+      #  recommended: true
+      - id: RMCPouchReagentCanisterTricordrazine
+        name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
+        recommended: true
+      - id: RMCPouchReagentCanister
+        name: Pressurized Reagent Canister Pouch\n(EMPTY)
+        recommended: true
+      #- id: CMSlingPouch
+      #  name: Sling Pouch
+    - name: Accessories
+      jobs:
+      - CMNurse
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBlack
+        name: Black Webbing Vest
+      - id: CMWebbingBrown
+        name: Brown Webbing Vest
+      - id: CMWebbing
+        name: Webbing
+
+# RESEARCHER
+
+    - name: Medical Set (Mandatory)
+      jobs:
+      - CMResearcher
+      takeAll: CMMedicalSet
+      entries:
+      - id: CMVendorBundleCrewMedicalEssentialsDoctor
+        name: Essential Medical Set
+        mandatory: true
+    - name: Standard Equipment
+      jobs:
+      - CMResearcher
+      takeAll: CMStandard
+      entries:
+      - id: CMHandsLatex
+        name: Gloves
+        mandatory: true
+      - id: CMHeadsetResearcher
+        name: Headset
+        mandatory: true
+    - name: Eyewear
+      jobs:
+      - CMResearcher
+      choices: { CMEyewear: 1 }
+      entries:
+      - id: RMCGlassesMedicalHUDGlasses
+        name: Medical HUD Glasses
+        recommended: true
+      #- id: Prescription Medical HUD Glasses
+      #  name: Prescription Medical HUD Glasses
+      #  recommended: true
+      #- id: Reagent Scanner HUD Goggles
+      #  name: Reagent Scanner HUD Goggles
+      #  mandatory: true
+      #- id: Prescription Reagent Scanner HUD Goggles
+      #  name: Prescription Reagent Scanner HUD Goggles
+      #  mandatory: true
+    - name: Uniform
+      jobs:
+      - CMResearcher
+      choices: { CMUniform: 1 }
+      entries:
+      #- id: Researcher Uniform
+      #  name: Researcher Uniform
+      #  recommended: true
+      - id: CMScrubsGreen
+        name: Green Scrubs
+        recommended: true
+      - id: CMScrubsBlue
+        name: Blue Scrubs
+      - id: RMCScrubsLightBlue
+        name: Light Blue Scrubs
+      - id: CMScrubsPurple
+        name: Purple Scrubs
+      - id: RMCScrubsOlive
+        name: Olive Scrubs
+      - id: RMCScrubsGrey
+        name: Grey Scrubs
+    - name: Suit
+      jobs:
+      - CMResearcher
+      choices: { CMSuit: 1 }
+      entries:
+      - id: RMCLabcoat
+        name: Labcoat
+        recommended: true
+    #- name: Snow Gear (Snow Use Only)
+    #  jobs:
+    #  - CMResearcher
+    #  takeAll: CMSnowGear
+    #  entries:
+    #  - id: Snowcoat
+    #    name: Snowcoat
+    #    mandatory: true
+    #  - id: Balaclava
+    #    name: Balaclava
+    #    mandatory: true
+    #  - id: Snow Scarf
+    #    name: Snow Scarf
+    #    mandatory: true
+    - name: Headwear
+      jobs:
+      - CMResearcher
+      choices: { CMHeadwear: 1 }
+      entries:
+      - id: CMHeadCapSurgOrange
+        name: Surgical Cap, Orange
+      - id: CMHeadCapSurgBlue
+        name: Surgical Cap, Blue
+      - id: CMHeadCapSurgPurple
+        name: Surgical Cap, Purple
+      - id: CMHeadCapSurgGreen
+        name: Surgical Cap, Green
+    - name: Bag
+      jobs:
+      - CMResearcher
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: CMSatchelMarine
+        name: Standard Satchel
+      - id: CMBackpackMarine
+        name: Standard Backpack
+      - id: CMSatchelMedical
+        name: Medical Satchel
+        recommended: true
+      - id: CMBackpackMedical
+        name: Medical Backpack
+        recommended: true
+    - name: Belt
+      jobs:
+      - CMResearcher
+      choices: { CMBelt: 1 }
+      entries:
+      - id: CMBeltMedicBagFilled
+        name: M276 Lifesaver Bag (Full)
+        recommended: true
+      - id: CMBeltMedicalFilled
+        name: M276 Medical Storage Rig (Full)
+        recommended: true
+    - name: Pouches
+      jobs:
+      - CMResearcher
+      choices: { RMCPouch: 2 }
+      entries:
+      #- id: RMCPouchVials
+      #  name: Vials Pouch
+      #  mandatory: true
+      #- id: RMCPouchChemist
+      #  name: Chemist Pouch
+      #  mandatory: true
+      - id: RMCPouchAutoinjector
+        name: Autoinjector Pouch
+      - id: RMCPouchFirstAidInjectors
+        name: First-Aid Pouch (Refillable Injectors)
+      - id: RMCPouchFirstAidSplintsGauzeOintment
+        name: First-Aid Pouch (Gauze, Ointment) # TODO RMC14 splints comma
+      - id: RMCPouchFirstAidPills
+        name: First-Aid Pouch (Pill Packets)
+      - id: RMCPouchFirstResponder
+        name: First Responder Pouch
+        recommended: true
+      - id: RMCPouchMedical
+        name: Medical Pouch
+      - id: RMCPouchMedkit
+        name: Medical Kit Pouch
+        recommended: true
+      - id: RMCPouchReagentCanisterBicaridine
+        name: Pressurized Reagent Canister Pouch\n(Bicaridine)
+        recommended: true
+      - id: RMCPouchReagentCanisterKelotane
+        name: Pressurized Reagent Canister Pouch\n(Kelotane)
+        recommended: true
+      - id: RMCPouchReagentCanisterTricordrazineRevival
+        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine
+        recommended: true
+      #- id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
+      #  name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
+      #  recommended: true
+      - id: RMCPouchReagentCanisterTricordrazine
+        name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
+        recommended: true
+      - id: RMCPouchReagentCanister
+        name: Pressurized Reagent Canister Pouch\n(EMPTY)
+        recommended: true
+      #- id: CMSlingPouch
+      #  name: Sling Pouch
+    - name: Accessories
+      jobs:
+      - CMResearcher
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBlack
+        name: Black Webbing Vest
+      - id: CMWebbingBrown
+        name: Brown Webbing Vest
+      - id: CMWebbing
+        name: Webbing
+
+# CMO - Identical to Senior Officer Equipment Vendor
+
+    - name: Medical Set (Mandatory)
+      jobs:
+      - CMCMO
+      takeAll: CMMedicalSet
+      entries:
+      - id: CMVendorBundleCrewMedicalEssentialsCMO
+        name: Essential Medical Set
+        mandatory: true
+    - name: Standard Equipment
+      jobs:
+      - CMCMO
+      takeAll: CMStandard
+      entries:
+      - id: CMHandsLatex
+        name: Gloves
+        mandatory: true
+      - id: CMHeadsetCMO
+        name: Headset
+        mandatory: true
+    - name: Eyewear
+      jobs:
+      - CMCMO
+      choices: { CMEyewear: 1 }
+      entries:
+      - id: RMCGlassesMedicalHUDGlasses #TODO - Replace w/ combined version when made
+      #- id: Medical/Reagent HUD
+      #  name: Combined Medical and Reagent Scanner HUD Glasses
+      #  mandatory: true
+      #- id: Prescription Medical/Reagent HUD
+      #  name: Prescription Combined Medical and Reagent Scanner HUD Glasses
+      #  mandatory: true
+    - name: Uniform
+      jobs:
+      - CMCMO
+      choices: { CMUniform: 1 }
+      entries:
+      - id: CMJumpsuitCMO
+        name: Chief Medical Officer's Uniform
+        recommended: true
+      #- id: Doctor Uniform
+      #  name: Doctor Uniform
+      - id: CMScrubsGreen
+        name: Green Scrubs
+      - id: CMScrubsBlue
+        name: Blue Scrubs
+      - id: RMCScrubsLightBlue
+        name: Light Blue Scrubs
+      - id: CMScrubsPurple
+        name: Purple Scrubs
+      - id: RMCScrubsOlive
+        name: Olive Scrubs
+      - id: RMCScrubsGrey
+        name: Grey Scrubs
+    - name: Suit
+      jobs:
+      - CMCMO
+      choices: { CMSuit: 1 }
+      entries:
+      - id: RMCLabcoatCMO
+        name: Chief Medical Officer's Labcoat
+        recommended: true
+      - id: RMCLabcoat
+        name: Labcoat
+        recommended: true
+      - id: RMCMedicalApron
+        name: Medical's apron
+    #- name: Snow Gear (Snow Use Only)
+    #  jobs:
+    #  - CMResearcher
+    #  takeAll: CMSnowGear
+    #  entries:
+    #  - id: DoctorSnowcoat
+    #    name: Snowcoat
+    #    mandatory: true
+    #  - id: Balaclava
+    #    name: Balaclava
+    #    mandatory: true
+    #  - id: TornScarf
+    #    name: Snow Scarf
+    #    mandatory: true
+    - name: Headwear
+      jobs:
+      - CMCMO
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: CMHeadCapCMO
+        name: Chief Medical Officer's Peaked Cap
+        recommended: true
+      - id: CMHeadCapSurgOrange
+        name: Surgical Cap, Orange
+      - id: CMHeadCapSurgBlue
+        name: Surgical Cap, Blue
+      - id: CMHeadCapSurgPurple
+        name: Surgical Cap, Purple
+      - id: CMHeadCapSurgGreen
+        name: Surgical Cap, Green
+    - name: Bag
+      jobs:
+      - CMCMO
+      choices: { CMBag: 1 }
+      entries:
+      - id: CMSatchelMarine
+        name: Standard Satchel
+      - id: CMBackpackMarine
+        name: Standard Backpack
+      - id: CMSatchelMedical
+        name: Medical Satchel
+        recommended: true
+      - id: CMBackpackMedical
+        name: Medical Backpack
+        recommended: true
+    - name: Belt
+      jobs:
+      - CMCMO
+      choices: { CMBelt: 1 }
+      entries:
+      - id: CMBeltMedicBagFilled
+        name: M276 Lifesaver Bag (Full)
+        recommended: true
+      - id: CMBeltMedicalFilled
+        name: M276 Medical Storage Rig (Full)
+        recommended: true
+    - name: Personal Sidearm
+      jobs:
+      - CMCMO
+      choices: { CMWeapon: 1 }
+      entries:
+      - id: RMCM1984BeltFilled
+        name: M1984 Service Pistol
+      - id: CMM77BeltFilled
+        name: M77 Pistol
+      - id: RMCM44BeltFilled
+        name: M44 Revolver
+        recommended: true
+    - name: Combat Equipment (Combat Use Only)
+      jobs:
+      - CMCMO
+      takeAll: CMStandard
+      entries:
+      - id: RMCArmorM3SO
+        name: Officer M3 Armor
+        mandatory: true
+      - id: RMCArmorHelmetM10SO
+        name: Officer M10 Helmet
+        mandatory: true
+      - id: CMBootsBlackFilled
+        name: Marine Combat Boots
+        mandatory: true
+    - name: Pouches
+      jobs:
+      - CMCMO
+      choices: { CMPouches: 2 }
+      entries:
+      - id: RMCPouchAutoinjector
+        name: Autoinjector Pouch
+      - id: RMCPouchFirstAidInjectors
+        name: First-Aid Pouch (Refillable Injectors)
+      - id: RMCPouchFirstAidSplintsGauzeOintment
+        name: First-Aid Pouch (Gauze, Ointment) # TODO RMC14 splints comma
+      - id: RMCPouchFirstAidPills
+        name: First-Aid Pouch (Pill Packets)
+      - id: RMCPouchFirstResponder
+        name: First Responder Pouch
+      - id: RMCPouchMedical
+        name: Medical Pouch
+        recommended: true
+      - id: RMCPouchMedkit
+        name: Medical Kit Pouch
+        recommended: true
+      - id: RMCPouchReagentCanisterBicaridine
+        name: Pressurized Reagent Canister Pouch\n(Bicaridine)
+        recommended: true
+      - id: RMCPouchReagentCanisterKelotane
+        name: Pressurized Reagent Canister Pouch\n(Kelotane)
+        recommended: true
+      - id: RMCPouchReagentCanisterTricordrazineRevival
+        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine
+        recommended: true
+      #- id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
+      #  name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
+      #  recommended: true
+      - id: RMCPouchReagentCanisterTricordrazine
+        name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
+        recommended: true
+      - id: RMCPouchReagentCanister
+        name: Pressurized Reagent Canister Pouch\n(EMPTY)
+        recommended: true
+      - id: RMCPouchGeneralLarge
+        name: Large General Pouch
+      #- id: CMSlingPouch
+      #  name: Sling Pouch
+    - name: Accessories
+      jobs:
+      - CMCMO
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBlack
+        name: Black Webbing Vest
+      - id: CMWebbingBrown
+        name: Brown Webbing Vest
+      - id: CMWebbing
+        name: Webbing
+    - name: Spare Equipment
+      jobs:
+      - CMCMO
+      entries:
+      - id: CMHeadsetMedical
+        points: 15
+      - id: CMHeadsetResearcher
+        points: 15

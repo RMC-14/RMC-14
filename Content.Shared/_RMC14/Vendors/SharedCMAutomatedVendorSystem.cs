@@ -23,6 +23,7 @@ using Content.Shared.Item;
 using Content.Shared.Mind;
 using Content.Shared.Popups;
 using Content.Shared.Roles.Jobs;
+using Content.Shared.Silicons.StationAi;
 using Content.Shared.UserInterface;
 using Content.Shared.Wall;
 using Robust.Shared.Network;
@@ -317,7 +318,10 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 if (!_job.MindHasJobWithId(mindId, job.Id))
                     validJob = false;
                 else
+                {
                     validJob = true;
+                    break;
+                }
             }
         }
 
