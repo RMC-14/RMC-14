@@ -11,6 +11,7 @@
       SquadDelta: CMHeadsetDelta
       SquadEcho: CMHeadsetEcho
       SquadFoxtrot: CMHeadsetFoxtrot
+      SquadQuebec: CMHeadsetQuebec
 
 - type: entity
   id: CMVendorHeadsetSquadLeader
@@ -25,6 +26,7 @@
       SquadDelta: CMHeadsetDeltaLeader
       SquadEcho: CMHeadsetEchoLeader
       SquadFoxtrot: CMHeadsetFoxtrotLeader
+      SquadQuebec: CMHeadsetQuebecLeader
 
 - type: entity
   id: CMVendorHeadsetSquadFTL
@@ -39,6 +41,7 @@
       SquadDelta: CMHeadsetDeltaTeamLeader
       SquadEcho: CMHeadsetEchoTeamLeader
       SquadFoxtrot: CMHeadsetFoxtrotTeamLeader
+      SquadQuebec: CMHeadsetQuebecTeamLeader
 
 - type: entity
   id: CMVendorHeadsetSquadComTech
@@ -53,6 +56,7 @@
       SquadDelta: CMHeadsetDeltaEngineer
       SquadEcho: CMHeadsetEchoEngineer
       SquadFoxtrot: CMHeadsetFoxtrotEngineer
+      SquadQuebec: CMHeadsetQuebecEngineer
 
 - type: entity
   id: CMVendorHeadsetSquadCorpsman
@@ -67,3 +71,4 @@
       SquadDelta: CMHeadsetDeltaMedic
       SquadEcho: CMHeadsetEchoMedic
       SquadFoxtrot: CMHeadsetFoxtrotMedic
+      SquadQuebec: CMHeadsetQuebecMedic
