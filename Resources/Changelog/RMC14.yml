@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Changed xeno melee effect into a red claw.
-    type: Tweak
-  id: 1039
-  time: '2024-11-30T05:54:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4821
 - author: MACMAN2003
   changes:
   - message: Ported the M3 Officer armor, M10 Officer helmet, M3 Commanding Officer
@@ -5389,5 +5382,12 @@
   id: 1541
   time: '2025-04-05T01:22:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6056
+- author: mmails
+  changes:
+  - message: SPP paygrades and final rank
+    type: Add
+  id: 1542
+  time: '2025-04-05T01:25:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5986
 Name: RMC14
 Order: -1
