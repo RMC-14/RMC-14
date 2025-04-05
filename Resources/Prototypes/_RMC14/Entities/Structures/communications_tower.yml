@@ -69,6 +69,10 @@
   - type: MarineMapTracked
   - type: XenoMapTracked
   - type: TacticalMapTracked
+  - type: ActiveTacticalMapTracked
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: supply
   - type: TacticalMapIcon
     icon:
       sprite: _RMC14/Interface/map_blips.rsi

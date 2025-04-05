@@ -342,7 +342,6 @@
     durationMultiplier: 0.666
   - type: RMCCanBeFultoned
   - type: CMArmor
-    explosionArmorStep: 10
   - type: CriticalGraceTime
   - type: RMCObstacleSlamming
   - type: Buckle
@@ -356,6 +355,7 @@
     buckleDepth: Mobs
   - type: RMCBuckleOffset
     offset: 0, 0.5
+  - type: RMCArmorModifier
 
 - type: entity
   abstract: true

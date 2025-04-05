@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.HyperSleep;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Xenonids.Announce;
+using Content.Shared.Audio;
 using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
 using Content.Shared.Doors;
@@ -34,6 +35,7 @@ namespace Content.Shared._RMC14.Evacuation;
 
 public abstract class SharedEvacuationSystem : EntitySystem
 {
+    [Dependency] private readonly SharedAmbientSoundSystem _ambientSound = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -376,6 +378,15 @@ public abstract class SharedEvacuationSystem : EntitySystem
         }
     }
 
+    private void SetPumpAmbience()
+    {
+        var pumps = EntityQueryEnumerator<EvacuationPumpComponent>();
+        while (pumps.MoveNext(out var uid, out var pump))
+        {
+            _ambientSound.SetSound(uid, pump.ActiveSound);
+        }
+    }
+
     private IEnumerable<EntityUid> GetEvacuationAreas(EntityCoordinates coordinates)
     {
         if (!_area.TryGetAllAreas(coordinates, out var areaGrid))
@@ -479,6 +490,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
             {
                 progress.StartAnnounced = true;
                 SetPumpAppearance(EvacuationPumpVisuals.Empty);
+                SetPumpAmbience();
 
                 var areas = new StringBuilder();
                 foreach (var areaId in GetEvacuationAreas(uid.ToCoordinates()))

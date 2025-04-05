@@ -307,7 +307,7 @@
       state: spray_acid
     event: !type:XenoSprayAcidActionEvent
     useDelay: 8
-    range: 6
+    range: 15
   - type: ActionBlockIfResting
 
 
@@ -329,7 +329,6 @@
   description: Sprays acid along the ground in a line, covering tiles with it. [color=red]Will coat barricades in acid![/color]
   components:
   - type: WorldTargetAction
-    range: 7
     useDelay: 10
 
 - type: entity

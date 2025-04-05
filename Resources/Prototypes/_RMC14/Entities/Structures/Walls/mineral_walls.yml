@@ -14,7 +14,7 @@
   - type: IconSmooth
     key: walls
     base: stone
-    
+
 - type: entity
   parent: CMWallRock
   id: RMCWallSandstoneRuned
@@ -26,7 +26,7 @@
     state: runedstone
     color: "#c6a480"
   - type: Icon
-    sprite: _RMC14/Structures/Walls/stone.rsi
+    sprite: _RMC14/Structures/Walls/runedstone.rsi
     state: runedstone
   - type: IconSmooth
     key: walls

@@ -434,7 +434,6 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         _stun.TryParalyze(victim, parasite.Comp.ParalyzeTime, true);
         _status.TryAddStatusEffect(victim, "Muted", parasite.Comp.ParalyzeTime, true, "Muted");
-        _status.TryAddStatusEffect(victim, "TemporaryBlindness", parasite.Comp.ParalyzeTime, true, "TemporaryBlindness");
         RefreshIncubationMultipliers(victim);
 
         _inventory.TryEquip(victim, parasite.Owner, "mask", true, true, true);
@@ -535,6 +534,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
                 var victimComp = EnsureComp<VictimInfectedComponent>(infectedVictim);
                 victimComp.Hive = _hive.GetHive(uid)?.Owner;
+
+                _status.TryAddStatusEffect(infectedVictim, "TemporaryBlindness", para.ParalyzeTime, true, "TemporaryBlindness");
 
                 // TODO RMC14 also do damage to the parasite
                 EnsureComp<ParasiteSpentComponent>(uid);
@@ -795,6 +796,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 invc.ExpiresAt = _timing.CurTime + ent.Comp.LarvaInvincibilityTime;
                 Dirty(larva, invc);
             }
+
             _container.EmptyContainer(container, destination: coords);
         }
 

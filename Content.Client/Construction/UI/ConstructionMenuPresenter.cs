@@ -233,6 +233,7 @@ namespace Content.Client.Construction.UI
                     var itemButton = new TextureButton
                     {
                         TextureNormal = _spriteSystem.Frame0(recipe.Icon),
+                        Modulate = recipe.IconColor,
                         VerticalAlignment = Control.VAlignment.Center,
                         Name = recipe.Name,
                         ToolTip = recipe.Name,
@@ -281,7 +282,7 @@ namespace Content.Client.Construction.UI
             if (button.Parent is not PanelContainer buttonPanel)
                 return;
 
-            button.Modulate = select ? Color.Green : Color.White;
+            //button.Modulate = select ? Color.Green : Color.White;
             var buttonColor = select ? StyleNano.ButtonColorDefault : Color.Transparent;
             buttonPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = buttonColor };
         }
@@ -337,7 +338,10 @@ namespace Content.Client.Construction.UI
             _constructionView.ClearRecipeInfo();
 
             _constructionView.SetRecipeInfo(
-                prototype.Name, prototype.Description, _spriteSystem.Frame0(prototype.Icon),
+                prototype.Name,
+                prototype.Description,
+                _spriteSystem.Frame0(prototype.Icon),
+                prototype.IconColor,
                 prototype.Type != ConstructionType.Item,
                 !_favoritedRecipes.Contains(prototype));
 
@@ -377,6 +381,7 @@ namespace Content.Client.Construction.UI
                 Metadata = recipe,
                 Text = recipe.Name,
                 Icon = _spriteSystem.Frame0(recipe.Icon),
+                IconModulate = recipe.IconColor,
                 TooltipEnabled = true,
                 TooltipText = recipe.Description,
             };

@@ -18,8 +18,8 @@
 - type: entity
   parent: CMSatchel
   id: CMBackpackSniper
-  name: M3 sniper's smock
-  description: A specially-designed smock with pockets for all your sniper needs.
+  name: M3 sniper's waist-rig
+  description: A specially-designed rig attached to the waist with a pocket, designed for marksmen.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/jungle-classic.rsi
