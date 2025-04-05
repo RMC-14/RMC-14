@@ -790,10 +790,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (_container.TryGetContainer(ent, ent.Comp.LarvaContainerId, out var container))
         {
             foreach (var larva in container.ContainedEntities)
-            {
-                EnsureComp<RMCTimedInvincibilityComponent>(larva);
                 RemCompDeferred<BursterComponent>(larva);
-            }
 
             _container.EmptyContainer(container, destination: coords);
         }
