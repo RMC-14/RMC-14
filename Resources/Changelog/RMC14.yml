@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the M54C folding stock do-after cancelling when you move
-    type: Fix
-  id: 1051
-  time: '2024-11-30T23:06:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4991
 - author: DrSmugleaf
   changes:
   - message: Fixed M40 HIDP incendiary grenades not fitting into grenade launchers
@@ -5323,5 +5316,13 @@
   id: 1553
   time: '2025-04-05T08:36:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6075
+- author: Vermidia
+  changes:
+  - message: Fixed larva being able to be ignited and take damage for 1 second after
+      bursting.
+    type: Fix
+  id: 1554
+  time: '2025-04-05T08:37:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6073
 Name: RMC14
 Order: -1
