@@ -342,7 +342,6 @@
     durationMultiplier: 0.666
   - type: RMCCanBeFultoned
   - type: CMArmor
-    explosionArmor: 10
   - type: CriticalGraceTime
   - type: RMCObstacleSlamming
   - type: Buckle
