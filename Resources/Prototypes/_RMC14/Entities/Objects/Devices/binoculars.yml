@@ -165,6 +165,7 @@
   - type: Sprite
     sprite: _RMC14/Effects/laser.rsi
     state: laser_target3
+    drawdepth: Effects
   - type: PointLight
     enabled: true
     radius: 3
