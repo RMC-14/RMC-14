@@ -37,6 +37,8 @@
   icon: "CMJobIconSEA"
   requireAdminNotify: true
   joinNotifyCrew: true
+  latejoinArrivalSound:
+    path: /Audio/_RMC14/Announcements/ARES/attention_jingle.ogg
   supervisors: cm-job-supervisors-co
   whitelisted: true
   accessGroups:
