@@ -60,7 +60,7 @@ public sealed class ItemGridPiece : Control, IEntityControl
         Location = location;
 
         Visible = true;
-        MouseFilter = MouseFilterMode.Pass;
+        MouseFilter = MouseFilterMode.Stop;
 
         TooltipSupplier = SupplyTooltip;
 
@@ -106,16 +106,20 @@ public sealed class ItemGridPiece : Control, IEntityControl
             return;
         }
 
-        if (_storageController.IsDragging && _storageController.DraggingGhost?.Entity == Entity && _storageController.DraggingGhost != this)
-            return;
-
-        if (_storageController._container?.StorageEntity is not { } storage ||
-            !_entityManager.TryGetComponent(storage, out StorageComponent? storageComp))
+        if (_storageController.IsDragging && _storageController.DraggingGhost?.Entity == Entity &&
+            _storageController.DraggingGhost != this)
         {
             return;
         }
 
-        var adjustedShape = _entityManager.System<ItemSystem>().GetAdjustedItemShape((storage, storageComp), (Entity, itemComponent), Location.Rotation, Vector2i.Zero);
+        var containerSystem = _entityManager.System<ContainerSystem>();
+        if (!containerSystem.TryGetContainingContainer((Entity, null), out var container) ||
+            !_entityManager.TryGetComponent(container.Owner, out StorageComponent? storageComp))
+        {
+            return;
+        }
+
+        var adjustedShape = _entityManager.System<ItemSystem>().GetAdjustedItemShape((container.Owner, storageComp), (Entity, itemComponent), Location.Rotation, Vector2i.Zero);
         var boundingGrid = adjustedShape.GetBoundingBox();
         var size = _centerTexture!.Size * 2 * UIScale;
 

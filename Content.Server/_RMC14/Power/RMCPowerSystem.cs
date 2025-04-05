@@ -32,7 +32,6 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
     [ViewVariables]
     private float _powerLoadMultiplier;
 
-    private EntityQuery<ApcPowerReceiverComponent> _apcPowerReceiverQuery;
     private EntityQuery<RMCApcComponent> _apcQuery;
     private EntityQuery<AppearanceComponent> _appearanceQuery;
     private EntityQuery<RMCAreaPowerComponent> _areaPowerQuery;
@@ -45,7 +44,6 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
     {
         base.Initialize();
 
-        _apcPowerReceiverQuery = GetEntityQuery<ApcPowerReceiverComponent>();
         _apcQuery = GetEntityQuery<RMCApcComponent>();
         _appearanceQuery = GetEntityQuery<AppearanceComponent>();
         _areaPowerQuery = GetEntityQuery<RMCAreaPowerComponent>();
@@ -100,22 +98,7 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
         var ev = new PowerChangedEvent(on, 0);
         foreach (var receiver in receivers)
         {
-            if (!_apcPowerReceiverQuery.TryComp(receiver, out var receiverComp))
-                continue;
-
-            if (receiverComp.Powered == on)
-                continue;
-
-            if (!receiverComp.NeedsPower)
-                continue;
-
-            receiverComp.Powered = on;
-            Dirty(receiver, receiverComp);
-
-            RaiseLocalEvent(receiver, ref ev);
-
-            if (_appearanceQuery.TryComp(receiver, out var appearance))
-                _appearance.SetData(receiver, PowerDeviceVisuals.Powered, on, appearance);
+            UpdateReceiverPower(receiver, ref ev);
         }
     }
 

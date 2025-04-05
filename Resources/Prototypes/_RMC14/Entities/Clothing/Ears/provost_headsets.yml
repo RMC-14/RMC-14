@@ -17,3 +17,5 @@
     - MarineFoxtrot
     - MarineRequisition
     - MarineJTAC
+  - type: Headset
+    radioTextIncrease: 4

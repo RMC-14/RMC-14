@@ -8,7 +8,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padded/jungle.rsi
   - type: CMArmor
-    armor: 20
+    melee: 20
+    bullet: 20
     bio: 20
     explosionArmor: 15
   - type: RMCArmorSpeedTier
@@ -136,7 +137,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/b12/jungle.rsi
   - type: CMArmor
-    armor: 25
+    melee: 25
     bio: 25
     explosionArmor: 20
   - type: ItemCamouflage
@@ -156,7 +157,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padded/jungle.rsi
   - type: CMArmor
-    armor: 25
+    melee: 25
+    bullet: 35
     bio: 25
     explosionArmor: 35
   - type: RMCArmorSpeedTier
@@ -326,12 +328,12 @@
   parent: CMArmorM2MP
   id: RMCArmorM3CO
   name: M3 pattern commanding officer armor
-  description: A robust, well-polished suit of armor for the Commanding Officer. Custom-made to fit its owner with special straps to operate a smartgun. Show those Marines who's really in charge.
+  description: A robust, well-polished suit of armor for the Commanding Officer. Custom-made to fit its owner with special straps to operate a smart gun. Show those Marines who's really in charge.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co.rsi
   - type: CMArmor
-    armor: 30
+    bullet: 30
     bio: 20
     explosionArmor: 15
   - type: SmartGunArmor
@@ -356,7 +358,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/ceremonial.rsi
   - type: CMArmor
-    armor: 30
+    bullet: 30
     bio: 20
     explosionArmor: 15
   - type: SmartGunArmor
@@ -376,7 +378,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/g4/jungle.rsi
   - type: CMArmor
-    armor: 25
+    melee: 25
+    bullet: 25
     bio: 15
     explosionArmor: 40
   - type: Corrodible
@@ -423,7 +426,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/padded/jungle.rsi
   - type: CMArmor
-    armor: 15
+    melee: 15
+    bullet: 15
     bio: 15
     explosionArmor: 20
   - type: RMCArmorSpeedTier
@@ -567,7 +571,7 @@
     walkModifier: .725
     sprintModifier: .725
   - type: CMArmor
-    armor: 25
+    melee: 25
   - type: Tag
     tags:
       - RMCScoutArmor
@@ -588,7 +592,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl.rsi
   - type: CMArmor
-    armor: 15
+    melee: 15
+    bullet: 30
     bio: 15
     explosionArmor: 10
   - type: Storage
@@ -625,7 +630,10 @@
     equipDelay: 1
     unequipDelay: 0.5
   - type: CMArmor
-    armor: 0 # CLOTHING_ARMOR_NONE
+    melee: 0 # CLOTHING_ARMOR_NONE
+    bullet: 0
+    bio: 0
+    explosionArmor: 0
   - type: RMCArmorSpeedTier
     speedTier: super light
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_SUPER_LIGHT
@@ -678,6 +686,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/jungle.rsi
   - type: Corrodible
     isCorrodible: false
+  - type: CMArmor
+    bio: 25
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/jungle.rsi
@@ -697,6 +707,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/jungle.rsi
   - type: Corrodible
     isCorrodible: false
+  - type: CMArmor
+    bio: 25
   - type: RMCArmorSpeedTier
     speedTier: light
   - type: ClothingSpeedModifier # light armor speed
@@ -727,6 +739,8 @@
     maxItemSize: Small
     grid:
     - 0,0,3,1 # 2 slots
+  - type: CMArmor
+    explosionArmor: 20
   - type: RMCArmorSpeedTier
     speedTier: light
   - type: ClothingSpeedModifier
@@ -752,7 +766,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/jungle.rsi
   - type: CMArmor
-    armor: 25
+    melee: 25
+    bullet: 20
     bio: 15
     explosionArmor: 20
   - type: RMCArmorSpeedTier

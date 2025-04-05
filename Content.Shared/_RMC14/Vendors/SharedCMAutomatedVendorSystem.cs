@@ -45,7 +45,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedWebbingSystem _webbing = default!;
@@ -459,7 +459,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                             continue;
 
                         vendorEntry.Amount -= GetBoxRemoveAmount(entry);
-                        entry.Amount--;
+                        Dirty(vendor);
+                        AmountUpdated(vendor, vendorEntry);
                         foundEntry = true;
                         break;
                     }
@@ -467,9 +468,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                     if (foundEntry)
                         break;
                 }
-
-                if (foundEntry)
-                    Dirty(vendor);
             }
             else
             {

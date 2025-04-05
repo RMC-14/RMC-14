@@ -65,11 +65,21 @@
   id: CMPamphletSpotter
   name: spotter instructional pamphlet
   description: A pamphlet used to quickly impart vital knowledge. This one has the image of a pair of binoculars on it.
-  suffix: NOT IMPLEMENTED
   components:
   - type: Sprite
     state: pamphlet_spotter
   - type: SkillPamphlet
+    addComps:
+    - type: SpotterWhitelist
+    addSkills:
+      RMCSkillJtac: 1
+    giveJobTitle: rmc-job-name-spotter
+    giveIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: hudsquad_ass
+    giveMapBlip:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: spotter
     jobWhitelists:
     - popup: rmc-pamphlets-rifleman-warning
       jobProto: CMRifleman
@@ -139,7 +149,9 @@
     state: pamphlet_loader
   - type: SkillPamphlet
     addSkills:
-      RMCSkillEndurance: 1 # TODO max 2
+      RMCSkillEndurance: 1
+    skillCap:
+      RMCSkillEndurance: 2
     giveJobTitle: rmc-job-name-loader
     giveIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
@@ -163,7 +175,10 @@
   - type: SkillPamphlet
     addSkills:
       RMCSkillEngineer: 1
-      RMCSkillJtac: 2 # TODO RMC14 max 1 engineering, max 2 jtac
+      RMCSkillJtac: 2
+    skillCap:
+      RMCSkillEngineer: 1
+      RMCSkillJtac: 2
     giveJobTitle: rmc-job-name-mortar-operator
     giveIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi

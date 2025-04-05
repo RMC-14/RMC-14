@@ -52,7 +52,7 @@
     maxPlasma: 800
     plasmaRegenOnWeeds: 3
   - type: CMArmor
-    armor: 25
+    xenoArmor: 25
     explosionArmor: 40
   - type: MeleeWeapon
     damage:

@@ -35,7 +35,7 @@ public abstract partial class InventorySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly SharedStrippableSystem _strippable = default!;
-    [Dependency] private readonly CMHandsSystem _rmcHands = default!;
+    [Dependency] private readonly RMCHandsSystem _rmcHands = default!;
 
     [ValidatePrototypeId<ItemSizePrototype>]
     private const string PocketableItemSize = "Small";

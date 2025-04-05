@@ -43,6 +43,7 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/pistol_mouse.rsi
       state: all
+  - type: InteractionActivateOnClick
 
 - type: entity
   parent: BaseBullet
@@ -55,4 +56,5 @@
     - state: bullet
       shader: unshaded
   - type: BulletholeGenerator
+  - type: RMCBullet
   - type: RMCProjectileAccuracy

@@ -114,7 +114,7 @@ public sealed class DropshipFabricatorSystem : EntitySystem
                 printables.Add(prototype);
         }
 
-        printables.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name));
+        printables.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.OrdinalIgnoreCase));
         Printables = printables.Select(e => new EntProtoId<DropshipFabricatorPrintableComponent>(e.ID)).ToImmutableArray();
     }
 

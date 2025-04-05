@@ -12,6 +12,7 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
 
     protected override void Open()
     {
+        base.Open();
         _window = this.CreateWindow<ViewIntelObjectivesWindow>();
         Refresh();
     }
@@ -26,6 +27,7 @@ public sealed class ViewIntelObjectivesBui(EntityUid owner, Enum uiKey) : BoundU
 
         var tree = comp.Tree;
         _window.CurrentPointsLabel.Text = $"{tree.Points.Double():F1}";
+        _window.CurrentTierLabel.Text = $"{tree.Tier}";
         _window.TotalPointsLabel.Text = $"Total earned credits: {tree.TotalEarned.Double():F1}";
         _window.DocumentsLabel.Text = $"{tree.Documents.Current} / {tree.Documents.Total}";
         // _window.UploadDataLabel.Text = $"{tree.UploadData.Current} / {tree.UploadData.Total}";
