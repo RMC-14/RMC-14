@@ -107,6 +107,8 @@
       state: white_4
   - type: PointLight
     color: "#8fcbeb"
+  - type: RgbLightController
+    layers: [ 0 ]
   - type: RMCIgniteOnCollide
     intensity: 80
     duration: 70
