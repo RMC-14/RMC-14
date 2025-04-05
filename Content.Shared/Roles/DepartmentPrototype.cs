@@ -1,4 +1,3 @@
-using Content.Shared.Radio;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Roles;
@@ -48,18 +47,6 @@ public sealed partial class DepartmentPrototype : IPrototype
     /// </summary>
     [DataField]
     public bool EditorHidden;
-
-    /// <summary>
-    /// RMC14 for logical communication of the department and its radio channel.
-    /// </summary>
-    [DataField]
-    public ProtoId<RadioChannelPrototype>? DepartmentRadio { get; private set; }
-
-    /// <summary>
-    /// RMC14 to logical determine if a role is a department head.
-    /// </summary>
-    [DataField]
-    public ProtoId<JobPrototype>? HeadOfDepartment { get; private set; }
 }
 
 /// <summary>
