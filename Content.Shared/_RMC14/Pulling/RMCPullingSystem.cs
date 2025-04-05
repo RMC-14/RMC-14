@@ -393,7 +393,7 @@ public sealed class RMCPullingSystem : EntitySystem
         _melee.DoLunge(puller, puller, Angle.Zero, localPos, null);
         _audio.PlayPredicted(_pullSound, pulled, puller);
 
-        if (_net.IsServer)
+        if (_net.IsClient)
              SpawnAttachedTo(PullEffect, pulled.ToCoordinates());
     }
 
