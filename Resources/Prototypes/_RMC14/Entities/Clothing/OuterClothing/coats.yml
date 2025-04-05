@@ -344,7 +344,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/pilot.rsi
   - type: CMArmor
-    armor: 10
+    melee: 10
   - type: FoldableClothing
     foldedEquippedPrefix: jacket
     foldedHeldPrefix: jacket

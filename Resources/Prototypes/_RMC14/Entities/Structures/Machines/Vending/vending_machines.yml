@@ -633,7 +633,7 @@
   name: Rec-Vend
   description: Contains Weston-Yamada approved recreational items, like Walkmans and Cards.
   suffix: Vending Machine
-  component:
+  components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/walkman.rsi
   - type: VendingMachine

@@ -27,7 +27,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/bulletproof_vest.rsi
   - type: CMArmor
-    armor: 15 #30 bullet
+    melee: 15
+    bullet: 30
     bio: 20
 
 - type: entity
@@ -46,7 +47,8 @@
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/pilot/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/pilot/urban.rsi
   - type: CMArmor
-    armor: 15 #20 bullet
+    melee: 15
+    bullet: 20
     bio: 10
     explosionArmor: 10
 - type: entity

@@ -1123,9 +1123,9 @@
       - id: RMCGrenadeTraining
         name: M07 Training Grenade
         amount: 15
-      - id: RMCGrenadeRubber
-        name: M15 Rubber Pellet Grenade
-        amount: 10
+      #- id: RMCGrenadeRubber
+      #  name: M15 Rubber Pellet Grenade
+      #  amount: 10
       - id: RMCM5Bayonet
         name: M5 Bayonet
         amount: 25

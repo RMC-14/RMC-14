@@ -151,7 +151,7 @@
       - id: RMCFulton20
         name: Fulton Recovery Device
         points: 5
-      - id: RMCSpaceCleaner #Replace w/ RMC space cleaner
+      - id: SprayBottleSpaceCleaner #Replace w/ RMC space cleaner
         name: Space Cleaner
         points: 2
       - id: RMCWhistle
