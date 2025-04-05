@@ -439,7 +439,7 @@
 # Quebec
 - type: entity
   parent: RMCHeadsetMarine
-  id: CMHeadsetQuebec
+  id: RMCHeadsetQuebec
   name: marine quebec radio headset
   description: This is used by Quebec squad members.
   components:
@@ -452,8 +452,8 @@
       - CMEncryptionKeyCommon
 
 - type: entity
-  parent: CMHeadsetQuebec
-  id: CMHeadsetQuebecLeader
+  parent: RMCHeadsetQuebec
+  id: RMCHeadsetQuebecLeader
   name: marine quebec leader radio headset
   description: This is used by the marine Quebec squad leader.
   components:
@@ -467,8 +467,8 @@
     radioTextIncrease: 3
 
 - type: entity
-  parent: CMHeadsetQuebec
-  id: CMHeadsetQuebecTeamLeader
+  parent: RMCHeadsetQuebec
+  id: RMCHeadsetQuebecTeamLeader
   name: marine quebec team leader radio headset
   description: This is used by the marine Quebec team leader.
   components:
@@ -482,8 +482,8 @@
     radioTextIncrease: 2
 
 - type: entity
-  parent: CMHeadsetQuebec
-  id: CMHeadsetQuebecEngineer
+  parent: RMCHeadsetQuebec
+  id: RMCHeadsetQuebecEngineer
   name: marine quebec engineer radio headset
   description: This is used by the marine Quebec combat engineers.
   components:
@@ -495,8 +495,8 @@
       - CMEncryptionKeyCommon
 
 - type: entity
-  parent: CMHeadsetQuebec
-  id: CMHeadsetQuebecMedic
+  parent: RMCHeadsetQuebec
+  id: RMCHeadsetQuebecMedic
   name: marine quebec corpsman radio headset
   description: This is used by the marine Quebec combat medics.
   components:
