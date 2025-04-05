@@ -68,7 +68,7 @@ public sealed class RankSystem : SharedRankSystem
 
                 _distressSignal.RoleRankLimits.TryGetValue(ev.JobId, out var currentCount);
 
-                if (rankPrototype.RoleLimits != null && !rankPrototype.RoleLimits.TryGetValue(ev.JobId, out var maxLimit))
+                if (rankPrototype.RoleLimits != null && rankPrototype.RoleLimits.TryGetValue(ev.JobId, out var maxLimit))
                 {
                     if (currentCount >= maxLimit)
                         failed = true;
