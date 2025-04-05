@@ -1,5 +1,4 @@
 using Content.Shared._RMC14.Atmos;
-using Content.Shared._RMC14.Damage.TimedInvincibility;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Hive;
