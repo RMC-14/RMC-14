@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Added nailgun repair functionality.
-    type: Add
-  id: 1042
-  time: '2024-11-30T07:37:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4979
 - author: DummeHytteOst
   changes:
   - message: Xenos can't burn them self on lights anymore.
@@ -5386,5 +5379,12 @@
   id: 1544
   time: '2025-04-05T01:27:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6060
+- author: CyberTropic
+  changes:
+  - message: Fixed map inserts not spawning.
+    type: Fix
+  id: 1545
+  time: '2025-04-05T01:29:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6044
 Name: RMC14
 Order: -1
