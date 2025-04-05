@@ -53,7 +53,7 @@
   - /Audio/_RMC14/Weapons/Guns/Flamer/gun_flamethrower3.ogg
 
 - type: soundCollection
-  id: RMCSSG45Shoot
+  id: RMCWYSRShoot
   files:
-  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ssg45_1.ogg
-  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ssg45_2.ogg
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_wysr_1.ogg
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_wysr_2.ogg
