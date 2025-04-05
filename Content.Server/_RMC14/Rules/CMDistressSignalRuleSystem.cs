@@ -1065,14 +1065,14 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         rule.Comp.XenoMap = grids.First();
 
+        _mapSystem.InitializeMap((map, map));
+
         //Process map inserts
         var mapInsertQuery = EntityQueryEnumerator<MapInsertComponent>();
         while (mapInsertQuery.MoveNext(out var uid, out var mapInsert))
         {
             _mapInsert.ProcessMapInsert((uid, mapInsert));
         }
-
-        _mapSystem.InitializeMap((map, map));
 
         // TODO RMC14 this should be delayed by 3 minutes + 13 second warning for immersion
         if (_landingZoneMiasmaEnabled &&

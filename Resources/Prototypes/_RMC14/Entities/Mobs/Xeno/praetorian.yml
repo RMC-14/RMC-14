@@ -96,6 +96,7 @@
       types:
         Heat: 5
     doAfter: 0.5
+    range: 7
   - type: TacticalMapIcon
     icon:
       sprite: _RMC14/Interface/map_blips.rsi

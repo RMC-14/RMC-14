@@ -327,12 +327,9 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m45/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m45/jungle.rsi
-  - type: HideLayerClothing # coif
+  - type: HideLayerClothing
     slots:
-    - Hair
     - Snout
-    - HeadTop
-    - HeadSide
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Head/Helmets/m45/jungle.rsi
@@ -340,6 +337,24 @@
       Snow: _RMC14/Objects/Clothing/Head/Helmets/m45/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m45/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m45/urban.rsi
+  - type: SquadArmor
+    layer: Helmet
+    slot: HEAD
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
+      state: snpr-helmet
+    leaderRsi:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/helmet_overlays.rsi
+      state: snpr-helmet
+  - type: FoldableClothing
+    foldedEquippedPrefix: closed
+    foldedHeldPrefix: closed
+    foldedHideLayers:
+    - Hair
+    - HeadTop
+    - HeadSide
+    unfoldedHideLayers:
+    - Snout
 
 # M3-T Demo Spec
 - type: entity
