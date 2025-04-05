@@ -1283,3 +1283,14 @@
     state: fast-paws_chip
   - type: PatronFigurine
     id: c5f5b62a-5206-4948-9745-e4d9bbb87764
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronDryWetbrush
+  name: Dry Wetbrush figurine
+  description: "He wonders what you are thinking about."
+  components:
+  - type: Sprite
+    state: dry_wetbrush
+  - type: PatronFigurine
+    id: 72a61df6-9a4f-4d32-840b-f1d0c4e2b051
