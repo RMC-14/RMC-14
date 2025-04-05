@@ -68,6 +68,9 @@
     shoes: ClothingShoesColorWhite
     id: CMIDCardCMO
     # TODO RMC14 random chemical synthesis note
+  storage:
+    back:
+    - CMStampCMO
 
 - type: startingGear
   id: CMGearCMOEquipped
@@ -80,6 +83,9 @@
     id: CMIDCardCMO
     ears: CMHeadsetCMO
     belt: CMBeltMedicalFilled
+  storage:
+    back:
+    - CMStampCMO
 
 - type: entity
   parent: CMSpawnPointJobBase
