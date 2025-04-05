@@ -1,4 +1,5 @@
 ﻿- type: entity
+  abstract: true
   parent: BaseItem
   id: RMCFlagCarriableBase
   name: flag
@@ -7,7 +8,6 @@
     layers:
     - state: icon
       map: [ "base" ]
-    state: icon
   - type: Item
     size: Large
   - type: Corrodible
