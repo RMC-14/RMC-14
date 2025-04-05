@@ -1,0 +1,71 @@
+﻿- type: job
+  parent: CMSurvivor
+  id: CMSurvivorEngineer
+  name: cm-job-name-survivor-engineer
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorEngineer
+  startingGear: RMCGearSurvivorEngineer
+  accessGroups:
+  - ColonistEngi
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 1
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetEngineer
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: UserIFF
+      faction: FactionSurvivor
+    - type: IntelRescueSurvivorObjective
+
+- type: startingGear
+  id: RMCGearSurvivorEngineer
+  equipment:
+    head: RMCHardhatWhite
+    ears: CMHeadsetColony
+    eyes: RMCWeldingGoggles
+    jumpsuit: CMJumpsuitLiaisonBrown
+    outerClothing: RMCHazardVestYellow
+    gloves: CMHandsInsulated
+    shoes: RMCShoesJackboots
+    back: CMSatchelEngineerSurvivorFill
+    id: CMIDCardColonistEngineer
+    pocket1: RMCPouchSurvivalFill
+    pocket2: CMWelder # TODO RMC14 industrial welder
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorEngineer
+  name: survivor engineer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
+
+- type: playTimeTracker
+  id: CMJobSurvivorEngineer
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetCivilian
+  id: RMCSurvivorPresetEngineer
+  name: engineer survivor preset
+  components:
+  - type: SurvivorPreset
+    randomGearOther:
+    -
+      - [ CMBeltUtilityFilled ]
