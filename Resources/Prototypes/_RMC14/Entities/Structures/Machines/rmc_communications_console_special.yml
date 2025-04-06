@@ -55,3 +55,32 @@
   components:
   - type: TacticalMapComputer
     group: ADMINISTRATOR
+
+# PMC
+- type: entity
+  parent: RMCOverwatchConsole
+  id: RMCOverwatchConsolePMC
+  suffix: PMC
+  components:
+  - type: OverwatchConsole
+    canOrbitalBombardment: false
+    group: PMC
+  - type: TacticalMapComputer
+    group: PMC
+
+- type: entity
+  parent: RMCOverwatchConsolePMC
+  id: RMCOverwatchConsolePMCRotating
+  suffix: PMC, Rotating
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: false
+
+- type: entity
+  parent: RMCTacticalMapTable
+  id: RMCTacticalMapTablePMC
+  suffix: PMC
+  components:
+  - type: TacticalMapComputer
+    group: PMC

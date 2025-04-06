@@ -452,3 +452,16 @@
     contents:
       - id: CMM11Knife
         amount: 5
+
+- type: entity
+  parent: CMWebbingBlack
+  id: RMCWebbingPMC
+  suffix: PMC, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGauze10
+    - id: CMGauze10
+    # - id: CMSplint5
+    - id: CMFireExtinguisherPortable
+    - id: CMHealthAnalyzer

@@ -136,6 +136,17 @@
   id: RMCIDCardPMC
   name: PMC holo-badge
   description: A corporate holo-badge. It has a unique uncapped bottom.
+  components:
+  - type: ItemIFF
+    faction: FactionPMC
+
+- type: entity
+  id: FactionPMC
+  components:
+  - type: IFFFaction
+  - type: FactionFrequencies
+    channels:
+    - WEYA
 
 - type: entity
   parent: RMCIDCardPMC

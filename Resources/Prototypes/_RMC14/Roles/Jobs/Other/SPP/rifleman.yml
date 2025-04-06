@@ -42,7 +42,7 @@
   id: RMCSPPRifleman
   components:
   - type: GhostRole
-    name: rmc-job-name-spp-soldier
+    name: rmc-ghost-name-spp-soldier
     description: rmc-job-description-spp-soldier
     rules: rmc-ghost-role-information-spp-rules
     reregister: false

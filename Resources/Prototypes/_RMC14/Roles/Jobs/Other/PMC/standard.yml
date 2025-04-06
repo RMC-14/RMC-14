@@ -1,64 +1,175 @@
-# We-Ya PMC
-
-- type: entity
-  parent: MarkerBase
-  id: RMCSpawnerPMCStandard
-  name: We-Ya PMC Standard spawner
-  suffix: Spawner
-  components:
-    - type: Sprite
-      layers:
-      - state: red
-      - sprite: _RMC14/Objects/Clothing/Uniforms/PMC/standard.rsi
-        state: icon
-    - type: ConditionalSpawner
-      prototypes:
-      - RMCRandomHumanoidPMCStandard
-
-- type: entity
-  id: RMCRandomHumanoidPMCStandard
-  name: We-Ya PMC Standard ghost role
-  suffix: Role
-  components:
-    - type: Sprite
-      sprite: _RMC14/Objects/Clothing/Uniforms/PMC/standard.rsi
-      state: icon
-    - type: RandomHumanoidSpawner
-      settings: RMCPMCStandard
-
-- type: randomHumanoidSettings
-  parent: EventHumanoid
-  id: RMCPMCStandard
-  components:
-    - type: GhostRole
-      name: rmc-ghost-role-information-pmc-standard-name
-      description: rmc-ghost-role-information-pmc-standard-description
-      rules: ghost-role-information-nonantagonist-rules
-      raffle:
-        settings: short
-    - type: Loadout
-      prototypes: [ RMCGearPMCStandard ]
+# M63B2
+- type: job
+  parent: CMJobBase
+  id: RMCPMCStandardM63B2
+  name: rmc-job-name-pmc-standard
+  description: rmc-ghost-role-information-pmc-description
+  playTimeTracker: RMCJobPMCStandardM63B2
+  ranks:
+    RMCRankWeYaOperator: []
+  startingGear: RMCJobPMCStandardM63B2
+  icon: RMCJobIconPMCStandard
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - PMC
     - type: Skills
       skills:
         RMCSkillCqc: 1
-        RMCSkillFirearms: 2
+        RMCSkillFirearms: 3
         RMCSkillPolice: 2
         RMCSkillFireman: 2
         RMCSkillConstruction: 2
         RMCSkillEngineer: 1
-        RMCSkillEndurance: 3
+        RMCSkillEndurance: 5
+    - type: SquadArmorWearer
+
+- type: playTimeTracker
+  id: RMCJobPMCStandardM63B2
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidPMCStandardM63B2
+  name: pmc ghost role standard m63b2
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCPMCStandardM63B2
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCPMCStandardM63B2
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-pmc-standard
+    description: rmc-ghost-role-information-pmc-description
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    job: RMCPMCStandardM63B2
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+    squad: SquadPMC
 
 - type: startingGear
-  id: RMCGearPMCStandard
+  id: RMCJobPMCStandardM63B2
   equipment:
-    # head: /obj/item/clothing/head/helmet/marine/veteran/pmc
-    eyes: CMGlassesSecurity
-    back: RMCSatchelLightpack
-    gloves: RMCHandsVeteranPMC
-    jumpsuit: RMCJumpsuitVeteranPMC
-    # outerClothing: /obj/item/clothing/suit/storage/marine/veteran/pmc/light
-    shoes: RMCBootsPMCFilled
     id: RMCIDCardPMC
+    jumpsuit: RMCJumpsuitVeteranPMC
+    outerClothing: CMArmorM4PMC
+    gloves: RMCHandsVeteranPMC
+    head: ArmorHelmetPMC
+    shoes: RMCBootsPMCFilled
+    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava
     ears: RMCHeadsetDistressPMC
-    pocket1: RMCPouchFirstAidSplintsGauzeOintment
-    pocket2: RMCWeaponPistolM77
+    back: RMCSatchelLightpack
+    belt: CMM77BeltFilled
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchMagazineLarge
+    suitstorage: RMCWeaponSMGM63B2
+  inhand:
+  - RMCWebbingPMC
+  storage:
+    back:
+    - RMCGrenadeBlastM12
+    - RMCExplosivePlastic
+    - CMStunbaton
+    - CMCrowbar
+    - CMMRE # TODO RMC14: PMC CFR ration
+    - CMMagazineSMGM63AP
+    - CMMagazineSMGM63AP
+    - CMMagazineSMGM63AP
+    pocket2:
+    - CMMagazineSMGM63AP
+    - CMMagazineSMGM63AP
+    - CMMagazineSMGM63AP
+    - CMMagazineSMGM63AP
+
+# TODO RMC14: NSG-23
+
+# M54C2
+- type: job
+  parent: RMCPMCStandardM63B2
+  id: RMCPMCStandardM54C2
+  playTimeTracker: RMCJobPMCStandardM54C2
+  startingGear: RMCJobPMCStandardM54C2
+
+- type: playTimeTracker
+  id: RMCJobPMCStandardM54C2
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidPMCStandardM54C2
+  name: pmc ghost role standard m54c2
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCPMCStandardM54C2
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCPMCStandardM54C2
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-pmc-standard
+    description: rmc-ghost-role-information-pmc-description
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    job: RMCPMCStandardM54C2
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+    squad: SquadPMC
+
+- type: startingGear
+  id: RMCJobPMCStandardM54C2
+  equipment:
+    id: RMCIDCardPMC
+    jumpsuit: RMCJumpsuitVeteranPMC
+    outerClothing: CMArmorM4PMC
+    gloves: RMCHandsVeteranPMC
+    head: ArmorHelmetPMC
+    shoes: RMCBootsPMCFilled
+    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava
+    ears: RMCHeadsetDistressPMC
+    back: RMCSatchelLightpack
+    belt: CMM77BeltFilled
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchMagazineLarge
+    suitstorage: RMCWeaponRifleM54C2
+  inhand:
+  - RMCWebbingPMC
+  storage:
+    back:
+    - RMCGrenadeBlastM12
+    - RMCExplosivePlastic
+    - CMStunbaton
+    - CMCrowbar
+    - CMMRE # TODO RMC14: PMC CFR ration
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+    pocket2:
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+
+# Shared
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconPMCStandard
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: pmc_gun

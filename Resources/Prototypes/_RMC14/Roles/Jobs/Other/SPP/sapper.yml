@@ -48,7 +48,7 @@
   id: RMCSPPEngineer
   components:
   - type: GhostRole
-    name: rmc-job-name-spp-engineer
+    name: rmc-ghost-name-spp-engineer
     description: rmc-job-description-spp-engineer
     rules: rmc-ghost-role-information-spp-rules
     reregister: false

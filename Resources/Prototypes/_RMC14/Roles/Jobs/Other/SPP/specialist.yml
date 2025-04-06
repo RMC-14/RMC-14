@@ -51,7 +51,7 @@
   id: RMCSPPSpecialist
   components:
   - type: GhostRole
-    name: rmc-job-name-spp-specialist
+    name: rmc-ghost-name-spp-specialist
     description: rmc-job-description-spp-specialist
     rules: rmc-ghost-role-information-spp-rules
     reregister: false

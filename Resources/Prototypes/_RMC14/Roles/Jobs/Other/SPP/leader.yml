@@ -61,7 +61,7 @@
   id: RMCSPPLeader
   components:
   - type: GhostRole
-    name: rmc-job-name-spp-leader
+    name: rmc-ghost-name-spp-leader
     description: rmc-job-description-spp-leader
     rules: rmc-ghost-role-information-spp-rules
     reregister: false

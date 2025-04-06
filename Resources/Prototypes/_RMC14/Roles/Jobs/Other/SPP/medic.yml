@@ -47,7 +47,7 @@
   id: RMCSPPMedic
   components:
   - type: GhostRole
-    name: rmc-job-name-spp-medic
+    name: rmc-ghost-name-spp-medic
     description: rmc-job-description-spp-medic
     rules: rmc-ghost-role-information-spp-rules
     reregister: false

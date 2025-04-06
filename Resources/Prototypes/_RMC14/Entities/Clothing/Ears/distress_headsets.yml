@@ -46,6 +46,9 @@
       key_slots:
       - CMEncryptionKeyCommon
       - RMCEncryptionKeyLiaison
+  - type: GrantMarineIcons
+  - type: GrantSquadLeaderTracker
+  - type: GrantTacMapAlert
 
 # For Duke's Dozen/Freelancer
 - type: entity
