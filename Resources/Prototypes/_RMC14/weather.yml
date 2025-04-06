@@ -91,3 +91,14 @@
     params:
       loop: true
       volume: -6
+
+- type: weather
+  id: RMCHybrisaRainLight
+  sprite:
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: hybrisa_rain_light
+  sound:
+    collection: Rain
+    params:
+      loop: true
+      volume: -6
