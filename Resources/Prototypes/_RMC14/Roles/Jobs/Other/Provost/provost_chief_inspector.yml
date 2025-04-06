@@ -74,11 +74,11 @@
 - type: startingGear
   id: RMCGearProvostChiefInspector
   equipment:
-    head: RMCHeadBeretProvostSenior # TODO RMC14 UNMC provost command beret
+    head: RMCProvostCommandBeret
     eyes: CMGlassesSecurity
     ears: RMCHeadsetProvost
     jumpsuit: CMJumpsuitProvostSenior # TODO RMC14 provost command uniform
-#    outerClothing: # TODO RMC14 provost jacket, with handcuffs and flash
+    outerClothing: RMCProvostCommandJacketFilled
     gloves: CMHandsBlackMarine # TODO RMC14 black gloves
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostChiefInspector
@@ -101,6 +101,14 @@
   parent: CMIDCardGold # TODO RMC14 provost id
   id: RMCIDCardProvostChiefInspector
   name: provost chief inspector ID card
+  description: Issued to members of the Provost Office.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
   - type: PresetIdCard
     job: CMProvostChiefInspector

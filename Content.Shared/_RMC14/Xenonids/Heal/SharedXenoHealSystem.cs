@@ -179,7 +179,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
                 [BluntGroup] = damageTaken,
             },
         };
-        _damageable.TryChangeDamage(ent, damageTakenSpecifier, ignoreResistances: true, interruptsDoAfters: false);
+        _damageable.TryChangeDamage(ent, damageTakenSpecifier, ignoreResistances: true, interruptsDoAfters: false, origin: args.Performer);
         _popup.PopupClient(Loc.GetString("rmc-xeno-apply-salve-self", ("target_xeno", target)), ent, PopupType.Medium);
 
         args.Handled = true;
@@ -319,7 +319,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
                 [BluntGroup] = remainingHealth * 100 + 3000,
             },
         };
-        _damageable.TryChangeDamage(ent, killDamageSpecifier, ignoreResistances: true, interruptsDoAfters: false);
+        _damageable.TryChangeDamage(ent, killDamageSpecifier, ignoreResistances: true, interruptsDoAfters: false, origin: args.Performer);
 
         if (!TryComp(ent, out XenoEnergyComponent? xenoEnergyComp) ||
             !_xenoEnergy.HasEnergy((ent, xenoEnergyComp), xenoEnergyComp.Max))
@@ -333,7 +333,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
             SacraficialHealRespawn(ent, args.RespawnDelay, true, corpsePosition);
     }
 
-    private void Heal(EntityUid target, FixedPoint2 amount)
+    public void Heal(EntityUid target, FixedPoint2 amount)
     {
         var damage = _rmcDamageable.DistributeHealing(target, BruteGroup, amount);
         var totalHeal = damage.GetTotal();

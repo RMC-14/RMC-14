@@ -3,7 +3,6 @@ using Content.Client.Projectiles;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Events;
-using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Client.GameObjects;
 using Robust.Client.Physics;
 using Robust.Client.Player;
@@ -17,7 +16,6 @@ namespace Content.Client._RMC14.Weapons.Ranged.Prediction;
 
 public sealed class GunPredictionSystem : SharedGunPredictionSystem
 {
-    [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly PhysicsSystem _physics = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly ProjectileSystem _projectile = default!;

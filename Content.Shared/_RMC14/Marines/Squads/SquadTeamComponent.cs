@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Tracker.SquadLeader;
 using Content.Shared.Access;
+using Content.Shared.Radio;
 using Content.Shared.Roles;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -17,6 +18,9 @@ public sealed partial class SquadTeamComponent : Component
 
     [DataField(required: true)]
     public Color Color;
+
+    [DataField(required: true)]
+    public ProtoId<RadioChannelPrototype>? Radio;
 
     [DataField(required: true)]
     public SpriteSpecifier Background;
@@ -38,6 +42,9 @@ public sealed partial class SquadTeamComponent : Component
 
     [DataField]
     public bool CanSupplyDrop = true;
+
+    [DataField]
+    public List<SquadArmorLayers> BlacklistedSquadArmor = new();
 
     [DataField]
     [Access(typeof(SquadLeaderTrackerSystem))]

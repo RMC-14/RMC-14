@@ -1,0 +1,99 @@
+﻿- type: entity
+  parent: CMBaseWeaponRifle
+  name: Type 71C assault carbine
+  id: RMCWeaponRifleType71C
+  description: A carbine variant of the Type 71, easier to handle at the cost of lesser damage, but negative soldier reviews have shifted it out of active use, given only to reserves or troops not expected to face much combat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/type71c.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/type71c.rsi
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: Gun
+    shotsPerBurst: 4
+    selectedMode: FullAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    soundGunshot:
+      collection: CMM54CShoot
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilUnwielded: 3
+    scatterWielded: 10
+    scatterUnwielded: 12
+    baseFireRate: 4
+    burstScatterMult: 1
+    modifiers:
+      Burst:
+        fireDelay: 0.2331
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.2
+    accuracyMultiplierUnwielded: 0.65
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineRifleType71
+          - RMCMagazineRifleType71AP
+          - RMCMagazineRifleType71HEAP
+  - type: GunDamageModifier
+    multiplier: 0.8
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+          - RMCAttachmentBarrelCharger
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentLaserSight
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
+          - RMCAttachmentBurstFireAssembly
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.8, 0.00
+      rmc-aslot-rail: 0.05, 0.185
+      rmc-aslot-underbarrel: 0.4, -0.28
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: Tag
+    tags:
+    - RMCWeaponRifleType71C
+
+- type: Tag
+  id: RMCWeaponRifleType71C

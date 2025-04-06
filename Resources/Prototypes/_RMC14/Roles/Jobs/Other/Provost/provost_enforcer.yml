@@ -102,6 +102,14 @@
   parent: CMIDCardGold # TODO RMC14 provost id
   id: RMCIDCardProvostEnforcer
   name: provost enforcer ID card
+  description: Issued to members of the Provost Office.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
   - type: PresetIdCard
     job: CMProvostEnforcer

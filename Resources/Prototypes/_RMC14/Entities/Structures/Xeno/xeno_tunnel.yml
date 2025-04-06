@@ -30,6 +30,7 @@
         type: SelectDestinationTunnelBui
       enum.NameTunnelUI.Key:
         type: NameTunnelBui
+  - type: DeletedByWeedKiller
 
 - type: entity
   parent: XenoTunnel

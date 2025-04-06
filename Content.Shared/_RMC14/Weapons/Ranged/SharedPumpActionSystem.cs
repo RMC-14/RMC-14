@@ -51,25 +51,8 @@ public abstract class SharedPumpActionSystem : EntitySystem
         if (args.Handled)
             return;
 
-        var ammo = new GetAmmoCountEvent();
-        RaiseLocalEvent(ent.Owner, ref ammo);
-
-        if (ammo.Count <= 0)
-        {
-            _popup.PopupClient(Loc.GetString("cm-gun-no-ammo-message"), args.UserUid, args.UserUid);
+        if (Pump(ent, args.UserUid))
             args.Handled = true;
-            return;
-        }
-
-        if (!ent.Comp.Running || ent.Comp.Pumped)
-            return;
-
-        ent.Comp.Pumped = true;
-        Dirty(ent);
-
-        args.Handled = true;
-
-        _audio.PlayPredicted(ent.Comp.Sound, ent, args.UserUid);
     }
 
     private void OnEntRemovedFromContainer(Entity<PumpActionComponent> ent, ref EntRemovedFromContainerMessage args)
@@ -78,5 +61,26 @@ public abstract class SharedPumpActionSystem : EntitySystem
             return;
 
         ent.Comp.Pumped = false;
+    }
+
+    public bool Pump(Entity<PumpActionComponent> ent, EntityUid user)
+    {
+        var ammo = new GetAmmoCountEvent();
+        RaiseLocalEvent(ent.Owner, ref ammo);
+
+        if (ammo.Count <= 0)
+        {
+            _popup.PopupClient(Loc.GetString("cm-gun-no-ammo-message"), user, user);
+            return true;
+        }
+
+        if (!ent.Comp.Running || ent.Comp.Pumped)
+            return false;
+
+        ent.Comp.Pumped = true;
+        Dirty(ent);
+
+        _audio.PlayPredicted(ent.Comp.Sound, ent, user);
+        return true;
     }
 }

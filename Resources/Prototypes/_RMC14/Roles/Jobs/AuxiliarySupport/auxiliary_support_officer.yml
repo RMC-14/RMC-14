@@ -17,6 +17,9 @@
   - !type:DepartmentTimeRequirement
     department: CMAuxiliarySupport
     time: 18000 # 5 hours
+  - !type:DepartmentTimeRequirement
+    department: CMCommand
+    time: 3600 # 1 hour
   ranks:
     RMCRankCaptain:
     - !type:RoleTimeRequirement
@@ -64,6 +67,13 @@
       prefix: cm-job-prefix-aso
     - type: ViewIntelObjectives
     - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: aso
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_command
 
 - type: startingGear
   id: CMGearASO

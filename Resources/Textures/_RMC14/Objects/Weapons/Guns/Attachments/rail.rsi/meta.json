@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7e38a6a747b200b3854888a3eacd18b47992d066/icons/obj/items/weapons/guns/attachments/rail.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7e38a6a747b200b3854888a3eacd18b47992d066/icons/obj/items/weapons/guns/attachments/rail.dmi, edited iffbarrel & iffbarrel_a by SG6732, magnetic magnetic_a made by Sigma Draconis, XM43E1 scope by github noctyrnal",
   "size": {
     "x": 32,
     "y": 32
@@ -26,6 +26,7 @@
       "name": "iffbarrel",
       "delays": [
         [
+          0.2,
           0.2,
           0.2,
           0.2,
@@ -98,6 +99,9 @@
       "name": "huntingscope"
     },
     {
+      "name": "huntingscope_a"
+    },
+    {
       "name": "vulture_scope"
     },
     {
@@ -156,6 +160,9 @@
     },
     {
       "name": "boomslang-scope_a"
+    },
+    {
+      "name": "xm43e1_scope"
     }
   ]
 }

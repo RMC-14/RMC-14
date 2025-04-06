@@ -128,7 +128,7 @@
 - type: entity
   parent: RMCBoxShotgunBase
   id: RMCBox458SOCOM
-  name: box of .458 SOCOM
+  name: box of .458 SOCOM rounds
   description: A box filled with handfuls of .458 SOCOM rounds, designed for use with the XM88 heavy rifle.
   components:
   - type: Storage
@@ -142,12 +142,19 @@
     - id: RMCCartridge458SOCOM
       amount: 11
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/SOCOM_box.rsi
     layers:
-    - state: SOCOMFULL32subdiv
+    - state: smallshell_box
+      color: "#62757b"
+    - state: smallshell_box_458
+      color: "#e0d5c2"
+    - state: smallshell_ammo_full_12g_base
+      color: "#ffffff"
+    - state: smallshell_ammo_full_12g_color
+      color: "#719380"
       map: [ "full" ]
-    - state: Socom32e
+    - state: smallshell_empty
       map: [ "empty" ]
+      color: "#62757b"
   - type: RMCStorageEjectHand
   - type: Tag
     tags:

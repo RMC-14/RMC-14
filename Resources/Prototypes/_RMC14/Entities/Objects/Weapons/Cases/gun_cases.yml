@@ -184,7 +184,7 @@
     contents:
     - id: WeaponRifleM54CE2
     - id: CMMagazineRifleM54CE2
-    - id: CMMagazineRifleM54CE2 # Replace with a holotargeting mag once that ammo is implemented.
+    - id: CMMagazineRifleM54CE2HT
 
 # XM88
 - type: entity
@@ -243,6 +243,11 @@
     - id: RMCBoxShotgunBreaching
       amount: 2
     - id: RMCBeltXM51
+  - type: RemoveOnlyStorage
+    blacklist:
+      tags:
+      - RMCBoxShotgunBreaching
+    whitelist: null
 
 # MOU53
 - type: entity
@@ -373,3 +378,26 @@
     - id: CMShellShotgunFlechette
       prob: 0.25
       orGroup: ShellThree
+
+# Launchers
+# M79
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCM79Case
+  name: M79 grenade launcher case
+  description: A gun case containing the M79 grenade launcher. Comes with three different grenade packets
+  components:
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - RMCWeaponLauncherM79
+      - RMCPacketGrenade
+  - type: StorageFill
+    contents:
+    - id: CMWeaponLauncherM79
+    - id: RMCPacketGrenadeM74AGMSStarShellFilled
+    - id: RMCPacketGrenadeM74AGMSHornetFilled
+    - id: RMCPacketGrenadeBatonSlugHIRRFilled

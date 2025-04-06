@@ -23,8 +23,8 @@
   id: RMCMortar
   damagePerIntensity:
     types:
-      Blunt: 5
-      Heat: 5
+      Blunt: 6.25
+      Heat: 6.25
       Structural: 90
   tileBreakChance: [0, 0.5, 1]
   tileBreakIntensity: [0, 10, 30]

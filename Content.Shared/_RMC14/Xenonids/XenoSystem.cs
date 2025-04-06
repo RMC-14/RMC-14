@@ -35,6 +35,7 @@ using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Radio;
 using Content.Shared.Standing;
+using Content.Shared.StatusEffect;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Tools.Systems;
@@ -63,10 +64,12 @@ public sealed class XenoSystem : EntitySystem
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly WeldableSystem _weldable = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
     [Dependency] private readonly EntityManager _entities = default!;
 
     private static readonly ProtoId<DamageTypePrototype> HeatDamage = "Heat";
@@ -84,6 +87,7 @@ public sealed class XenoSystem : EntitySystem
     private float _xenoDamageDealtMultiplier;
     private float _xenoDamageReceivedMultiplier;
     private float _xenoSpeedMultiplier;
+    private TimeSpan _xenoSpawnMuteDuration;
 
     public override void Initialize()
     {
@@ -115,12 +119,14 @@ public sealed class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, RMCIgniteEvent>(OnXenoIgnite);
         SubscribeLocalEvent<XenoComponent, CanDragEvent>(OnXenoCanDrag);
         SubscribeLocalEvent<XenoComponent, BuckleAttemptEvent>(OnXenoBuckleAttempt);
+        SubscribeLocalEvent<XenoComponent, DamageStateCritBeforeDamageEvent>(OnXenoBeforeCritDamage, before: [typeof(SharedXenoPheromonesSystem)]);
 
         SubscribeLocalEvent<XenoComponent, ValidateDamageOnStepperEvent>(OnXenoStepOnSharp);
 
         Subs.CVar(_config, RMCCVars.CMXenoDamageDealtMultiplier, v => _xenoDamageDealtMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMXenoDamageReceivedMultiplier, v => _xenoDamageReceivedMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMXenoSpeedMultiplier, UpdateXenoSpeedMultiplier, true);
+        Subs.CVar(_config, RMCCVars.RMCXenoSpawnInitialMuteDurationSeconds, v => _xenoSpawnMuteDuration = TimeSpan.FromSeconds(v), true);
 
         UpdatesAfter.Add(typeof(SharedXenoPheromonesSystem));
     }
@@ -141,6 +147,11 @@ public sealed class XenoSystem : EntitySystem
 
         if (!MathHelper.CloseTo(_xenoSpeedMultiplier, 1))
             _movementSpeed.RefreshMovementSpeedModifiers(xeno);
+
+        if (xeno.Comp.MuteOnSpawn)
+        {
+            _status.TryAddStatusEffect(xeno, "Muted", _xenoSpawnMuteDuration, true, "Muted");
+        }
     }
 
     private void OnXenoGetAdditionalAccess(Entity<XenoComponent> xeno, ref GetAccessTagsEvent args)
@@ -294,6 +305,15 @@ public sealed class XenoSystem : EntitySystem
             args.Cancelled = true;
     }
 
+    private void OnXenoBeforeCritDamage(Entity<XenoComponent> ent, ref DamageStateCritBeforeDamageEvent args)
+    {
+        if (!_rmcFlammable.IsOnFire(ent.Owner) || (!ent.Comp.HealOffWeeds && !_weeds.IsOnWeeds(ent.Owner)))
+            return;
+
+        //Don't take bleedout damage on fire or on weeds
+        args.Damage.ClampMax(0);
+    }
+
     private void UpdateXenoSpeedMultiplier(float speed)
     {
         _xenoSpeedMultiplier = speed;
@@ -327,12 +347,12 @@ public sealed class XenoSystem : EntitySystem
             multiplier = xeno.Comp.StandHealingMultiplier;
 
         var passiveHeal = threshold.Value / 65 + xeno.Comp.FlatHealing;
-        var recovery = (CompOrNull<XenoRecoveryPheromonesComponent>(xeno)?.Multiplier ?? 0) / 2;
+        var recovery = (CompOrNull<XenoRecoveryPheromonesComponent>(xeno)?.Multiplier ?? 0);
         if (!CanHeal(xeno))
             recovery = FixedPoint2.Zero;
 
         var recoveryHeal = (threshold.Value / 65) * (recovery / 2);
-        return (passiveHeal + recoveryHeal) * multiplier; // TODO RMC14 add Strain based multiplier for Gardener Drone
+        return (passiveHeal + recoveryHeal) * multiplier / 2; // TODO RMC14 add Strain based multiplier for Gardener Drone
     }
 
     public void HealDamage(Entity<DamageableComponent?> xeno, FixedPoint2 amount)
@@ -360,7 +380,7 @@ public sealed class XenoSystem : EntitySystem
             return;
         }
 
-        _damageable.TryChangeDamage(xeno, heal, true);
+        _damageable.TryChangeDamage(xeno, heal, true, origin: xeno);
     }
 
     public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target, bool hitNonMarines = false)

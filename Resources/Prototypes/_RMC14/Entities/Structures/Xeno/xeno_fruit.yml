@@ -78,6 +78,7 @@
     itemState: fruit_lesser_item
     growingState: fruit_lesser_immature
     grownState: fruit_lesser
+    eatenState: fruit_lesser_spent
     growTime: 15
     popup: rmc-xeno-fruit-effect-lesser
     canConsumeAtFull: false
@@ -95,6 +96,7 @@
     itemState: fruit_greater_item
     growingState: fruit_greater_immature
     grownState: fruit_greater
+    eatenState: fruit_greater_spent
     growTime: 30
     popup: rmc-xeno-fruit-effect-greater
     canConsumeAtFull: false
@@ -116,6 +118,7 @@
     itemState: fruit_unstable_item
     growingState: fruit_unstable_immature
     grownState: fruit_unstable
+    eatenState: fruit_unstable_spent
     growTime: 45
     popup: rmc-xeno-fruit-effect-unstable
     color: "#179973"
@@ -140,6 +143,7 @@
     itemState: fruit_spore_item
     growingState: fruit_spore_immature
     grownState: fruit_spore
+    eatenState: fruit_spore_spent
     growTime: 15
     popup: rmc-xeno-fruit-effect-spore
     color: "#994617"
@@ -162,11 +166,13 @@
     itemState: fruit_speed_item
     growingState: fruit_speed_immature
     grownState: fruit_speed
+    eatenState: fruit_speed_spent
     growTime: 35
     popup: rmc-xeno-fruit-effect-speed
     color: "#5B248C"
     outlineColor: "#9061BA80"
   - type: XenoFruitSpeed
+    speedModifier: 0.2
 
 - type: entity
   parent: XenoFruitBase
@@ -178,6 +184,7 @@
     itemState: fruit_plasma_item
     growingState: fruit_plasma_immature
     grownState: fruit_plasma
+    eatenState: fruit_plasma_spent
     growTime: 25
     popup: rmc-xeno-fruit-effect-plasma
     color: "#287A90"

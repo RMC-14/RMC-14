@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Damage;
 using Content.Shared.Damage;
 using Content.Shared.Explosion;
@@ -36,7 +36,7 @@ public sealed class VanguardShieldSystem : EntitySystem
         if (_net.IsServer)
             xeno.Comp.LastTimeHit = _timing.CurTime;
 
-        if (!xeno.Comp.WasHit)
+        if (!xeno.Comp.WasHit && args.Damage.GetTotal() > xeno.Comp.DecayThreshold)
         {
             xeno.Comp.WasHit = true;
             _popup.PopupEntity(Loc.GetString("rmc-xeno-shield-vanguard-hit"), xeno, xeno, PopupType.MediumCaution);

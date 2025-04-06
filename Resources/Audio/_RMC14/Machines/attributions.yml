@@ -43,6 +43,11 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/effects/escape_pod_launch.ogg"
 
+- files: ["fuel_pump_active.ogg", "fuel_pump_idle.ogg"]
+  license: "CC-BY-SA-4.0"
+  copyright: "Recorded and mixed by exincore"
+  source: "https://github.com/RMC-14/RMC-14/pull/6056"
+
 - files: ["suitlight_on.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"

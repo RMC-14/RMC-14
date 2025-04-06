@@ -1,0 +1,10 @@
+﻿- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaERT
+  name: ERT station
+  components:
+  - type: Sprite
+    state: green
+  - type: Area
+    powerNet: ert
+    avoidBioscan: true

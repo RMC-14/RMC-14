@@ -1,4 +1,4 @@
-﻿using Content.Shared.Actions;
+using Content.Shared.Actions;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -37,6 +37,9 @@ public sealed partial class XenoEvolutionComponent : Component
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 PointsPerSecond = 0.5;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 EarlyPointsPerSecond = 1;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan LastPointsAt;

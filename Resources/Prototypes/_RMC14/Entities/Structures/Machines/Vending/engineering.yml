@@ -16,8 +16,13 @@
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
       shader: unshaded
   - type: AccessReader
-    access: [["CMAccessCombatTechPrep"], ["CMAccessEngineering"], ["CMAccessColonyEngineering"], ["CMAccessColonyPublic"]] # TODO RMC14 remove public when surv jobs and hacking are in
+    access: [["CMAccessCombatTechPrep"], ["CMAccessEngineering"], ["CMAccessColonyEngineering"]]
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessCombatTechPrep"
+    - "CMAccessEngineering"
+    - "CMAccessColonyEngineering"
+    hackable: true
     sections:
     - name: Equipment
       entries:
@@ -42,21 +47,23 @@
       #Meson scanner
       #Reagent scanner
       - id: CMTRayScanner
-        amount: 4
+        amount: 2
     - name: Tools
       entries:
-      - id: CMCrowbar
-        amount: 8
       - id: CMWelder
-        amount: 8
-      - id: CMWelderSmall
         amount: 4
+      - id: CMCrowbar
+        amount: 4
+      - id: CMWelderSmall
+        amount: 2
       - id: CMScrewdriver
-        amount: 8
+        amount: 4
       - id: CMWirecutter
-        amount: 8
+        amount: 4
       - id: CMWrench
-        amount: 8
+        amount: 4
+      - id: CMLightReplacer
+        amount: 4
 
 # Circuits
 - type: entity
@@ -68,6 +75,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/robotics.rsi
   - type: CMAutomatedVendor
+    hackable: true
     sections:
     - name: Circuitboards
       entries:
@@ -93,7 +101,8 @@
         amount: 2
 #     - id: Air alarm
 #     - id: security camera monitor
-#     - id: television set
+      - id: RMCCircuitboardTelevision
+        amount: 4
 #     - id: station alerts
 #     - id: arcade
 #     - id: atmospheric monitor
@@ -109,6 +118,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/engivend.rsi
   - type: CMAutomatedVendor
+    hackable: true
     sections:
     - name: Tools
       entries:
@@ -140,6 +150,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/engi.rsi
   - type: CMAutomatedVendor
+    hackable: true
     sections:
     - name: Assembly Components
       entries:
@@ -186,6 +197,9 @@
   - type: AccessReader
     access: [["CMAccessResearch"]]
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessResearch"
+    hackable: true
     sections:
     - name: Equipment
       entries:
@@ -215,6 +229,7 @@
   description: All the tools you need to create your own robot army.
   components:
   - type: CMAutomatedVendor
+    hackable: true
     sections:
     - name: Equipment
       entries:

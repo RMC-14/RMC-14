@@ -77,7 +77,9 @@
           - CMMagazineRifleM54CExt
           - CMMagazineRifleM54CMK1
           - CMMagazineRifleM54CMK1AP
-        startingItem: CMMagazineRifleM54C #TODO RMC: Change to incend magazine when that is added, parity.
+          - RMCMagazineRifleM54CIncendiary
+          - RMCMagazineRifleM54CMK1Incendiary
+        startingItem: RMCMagazineRifleM54CIncendiary
   - type: GunDamageModifier
     multiplier: 1.15
   - type: RMCMagneticItem

@@ -1,5 +1,7 @@
+using Content.Server._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Roles.FindParasite;
+using Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 using Content.Shared.Coordinates;
@@ -16,6 +18,7 @@ public sealed partial class FindParasiteSystem : EntitySystem
     [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly AreaSystem _areas = default!;
+    [Dependency] private readonly XenoEggRoleSystem _parasiteRole = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -29,11 +32,10 @@ public sealed partial class FindParasiteSystem : EntitySystem
 
     private void FindParasites(Entity<FindParasiteComponent> parasiteFinderEnt, ref FindParasiteActionEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || !_parasiteRole.UserCheck(parasiteFinderEnt.Owner))
         {
             return;
         }
-        var ent = args.Performer;
 
         _ui.OpenUi(parasiteFinderEnt.Owner, XenoFindParasiteUI.Key, parasiteFinderEnt);
         args.Handled = true;
@@ -45,6 +47,7 @@ public sealed partial class FindParasiteSystem : EntitySystem
         var uiState = new FindParasiteUIState();
 
         var eggs = EntityQueryEnumerator<XenoEggComponent>();
+        var eggMorphers = EntityQueryEnumerator<EggMorpherComponent>();
         var parasiteThrowers = EntityQueryEnumerator<XenoParasiteThrowerComponent>();
 
         var spawners = new List<NetEntity>();
@@ -57,6 +60,16 @@ public sealed partial class FindParasiteSystem : EntitySystem
 
             var netEnt = _entities.GetNetEntity(eggEnt);
             spawners.Add(netEnt);
+        }
+
+        while (eggMorphers.MoveNext(out var eggMorpherEnt, out var eggMorpherComp))
+        {
+            if (eggMorpherComp.CurParasites <= eggMorpherComp.ReservedParasites ||
+                eggMorpherComp.CurParasites == 0)
+            {
+                continue;
+            }
+            spawners.Add(_entities.GetNetEntity(eggMorpherEnt));
         }
 
         while (parasiteThrowers.MoveNext(out var throwerEnt, out var parasiteThrower))

@@ -34,7 +34,7 @@
   supervisors: cm-job-supervisors-co
   accessGroups:
   - SquadLeader
-  overwatchSortPriority: -5
+  overwatchSortPriority: -6
   overwatchShowName: true
   overwatchRoleName: Squad Leader
   minimapIcon:
@@ -69,6 +69,10 @@
       prefix: cm-job-prefix-squad-leader
     - type: ViewIntelObjectives
     - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: leader
 
 - type: startingGear
   id: CMGearSquadLeader
@@ -144,3 +148,19 @@
   - type: Sprite
     state: leader_spawn_delta
 
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCSquadLeader
+  components:
+  - type: GhostRole
+    name: cm-job-name-squad-leader
+    description: cm-job-description-squad-leader
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    raffle:
+      settings: default
+    job: CMSquadLeader
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 1

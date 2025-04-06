@@ -41,6 +41,11 @@
         behaviors:
           - !type:DoActsBehavior
             acts: ["Destruction"]
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMSheetMetal1:
+                min: 2
+                max: 2
   - type: InteractionOutline
   - type: Clickable
   - type: Climbable

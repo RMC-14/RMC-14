@@ -33,7 +33,7 @@
     containers:
       board: !type:Container
   - type: Door
-    openDrawDepth: BlastDoors
+    openDrawDepth: Walls
     closedDrawDepth: BlastDoors
     bumpOpen: false
     clickOpen: false

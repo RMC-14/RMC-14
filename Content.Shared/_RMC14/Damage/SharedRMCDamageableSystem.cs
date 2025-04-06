@@ -3,7 +3,9 @@ using Content.Shared._RMC14.Damage.Event;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Orders;
+using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
+using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared.Armor;
@@ -46,8 +48,10 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedMoverController _mover = default!;
     [Dependency] private readonly EntityManager _entities = default!;
@@ -85,7 +89,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
             after:
             [
                 typeof(SharedArmorSystem), typeof(BlockingSystem), typeof(InventorySystem), typeof(SharedBorgSystem),
-                typeof(SharedMarineOrdersSystem), typeof(CMArmorSystem), typeof(SharedXenoPheromonesSystem)
+                typeof(SharedMarineOrdersSystem), typeof(CMArmorSystem), typeof(SharedXenoPheromonesSystem),
             ]);
 
         SubscribeLocalEvent<GunDamageMultipliersComponent, AmmoShotEvent>(OnGunDamageMultipliersAmmoShot);
@@ -104,15 +108,21 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
             after:
             [
                 typeof(SharedArmorSystem), typeof(BlockingSystem), typeof(InventorySystem), typeof(SharedBorgSystem),
-                typeof(SharedMarineOrdersSystem), typeof(CMArmorSystem), typeof(SharedXenoPheromonesSystem)
+                typeof(SharedMarineOrdersSystem), typeof(CMArmorSystem), typeof(SharedXenoPheromonesSystem),
             ]);
 
         SubscribeLocalEvent<ProjectileDamageReceivedComponent, DamageModifyEvent>(OnProjectileDamageReceivedModify,
             after:
             [
                 typeof(SharedArmorSystem), typeof(BlockingSystem), typeof(InventorySystem), typeof(SharedBorgSystem),
-                typeof(SharedMarineOrdersSystem), typeof(CMArmorSystem), typeof(SharedXenoPheromonesSystem)
+                typeof(SharedMarineOrdersSystem), typeof(CMArmorSystem), typeof(SharedXenoPheromonesSystem),
             ]);
+
+        SubscribeLocalEvent<DamageOnPulledWhileCritComponent, MobStateChangedEvent>(OnDamageOnPulledMobState);
+
+        SubscribeLocalEvent<ActiveDamageOnPulledWhileCritComponent, MoveEvent>(OnActiveDamageOnPulledMove);
+        SubscribeLocalEvent<ActiveDamageOnPulledWhileCritComponent, MobStateChangedEvent>(OnActiveDamageOnPulledMobState);
+        SubscribeLocalEvent<ActiveDamageOnPulledWhileCritComponent, XenoTargetDevouredAttemptEvent>(OnActiveDamageOnPulledDevoured);
 
         _bruteTypes.Clear();
         _burnTypes.Clear();
@@ -249,6 +259,59 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
             else if (ent.Comp.BurnMultiplier != 1 && _burnTypes.Contains(type))
                 args.Damage.DamageDict[type] *= ent.Comp.BurnMultiplier;
         }
+    }
+
+    private void OnDamageOnPulledMobState(Entity<DamageOnPulledWhileCritComponent> ent, ref MobStateChangedEvent args)
+    {
+        if (args.NewMobState != MobState.Critical)
+            return;
+
+        if (EnsureComp(ent, out ActiveDamageOnPulledWhileCritComponent active))
+            return;
+
+        active.Damage = ent.Comp.Damage;
+        active.PullerWhitelist = ent.Comp.PullerWhitelist;
+        active.Every = ent.Comp.Every;
+        Dirty(ent, active);
+    }
+
+    private void OnActiveDamageOnPulledMove(Entity<ActiveDamageOnPulledWhileCritComponent> ent, ref MoveEvent args)
+    {
+        if (ent.Comp.Damage == null)
+            return;
+
+        if (!_rmcPulling.IsBeingPulled(ent.Owner, out var user) ||
+            !_entityWhitelist.IsWhitelistPassOrNull(ent.Comp.PullerWhitelist, user))
+        {
+            if (ent.Comp.Pulled)
+            {
+                ent.Comp.Pulled = false;
+                Dirty(ent);
+            }
+
+            return;
+        }
+
+        if (!args.NewPosition.TryDistance(EntityManager, _transform, args.OldPosition, out var distance))
+            return;
+
+        if (!ent.Comp.Pulled)
+            ent.Comp.Pulled = true;
+
+        ent.Comp.Accumulator += distance;
+        Dirty(ent);
+    }
+
+    private void OnActiveDamageOnPulledMobState(Entity<ActiveDamageOnPulledWhileCritComponent> ent, ref MobStateChangedEvent args)
+    {
+        if (args.NewMobState != MobState.Critical)
+            RemCompDeferred<ActiveDamageOnPulledWhileCritComponent>(ent);
+    }
+
+    private void OnActiveDamageOnPulledDevoured(Entity<ActiveDamageOnPulledWhileCritComponent> ent, ref XenoTargetDevouredAttemptEvent args)
+    {
+        args.Cancelled = true;
+        _mobState.ChangeMobState(ent, MobState.Dead);
     }
 
     public DamageSpecifier DistributeHealing(Entity<DamageableComponent?> damageable, ProtoId<DamageGroupPrototype> groupId, FixedPoint2 amount, DamageSpecifier? equal = null)
@@ -398,8 +461,23 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
                     break;
                 case MobState.Critical:
                     _damageable.TryChangeDamage(uid, comp.NonDeadDamage, true, damageable: damageable);
-                    _damageable.TryChangeDamage(uid, comp.CritDamage, true, damageable: damageable);
+                    var ev = new DamageStateCritBeforeDamageEvent(comp.CritDamage);
+                    RaiseLocalEvent(uid, ref ev);
+                    _damageable.TryChangeDamage(uid, ev.Damage, true, damageable: damageable);
                     break;
+            }
+        }
+
+        var pulledQuery = EntityQueryEnumerator<ActiveDamageOnPulledWhileCritComponent>();
+        while (pulledQuery.MoveNext(out var uid, out var comp))
+        {
+            if (comp.Accumulator >= comp.Every)
+            {
+                var (div, rem) = (comp.Accumulator / comp.Every, comp.Accumulator % comp.Every);
+                if (comp.Damage != null)
+                    _damageable.TryChangeDamage(uid, comp.Damage * div);
+
+                comp.Accumulator = rem;
             }
         }
 

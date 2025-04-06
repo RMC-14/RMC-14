@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f70a04a0fc7c5365a4f8799cd055a5df43ba7487/icons/ui_icons/map_blips.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/d4c9feba35665e779300ef64ef652328078939cf/icons/ui_icons/map_blips.dmi",
   "size": {
     "x": 7,
     "y": 7
@@ -41,13 +41,82 @@
       "name": "unknown"
     },
     {
-      "name": "placeholder"
+      "name": "defibbable",
+      "delays": [
+        [
+          0.135,
+          0.135,
+          0.135,
+          0.135,
+          0.135,
+          0.135,
+          0.135
+        ]
+      ]
     },
     {
-      "name": "defibbable"
+      "name": "defibbable2",
+      "delays": [
+        [
+          0.135,
+          0.135,
+          0.135,
+          0.135,
+          0.135,
+          0.135,
+          0.135
+        ]
+      ]
     },
     {
-      "name": "undefibbable"
+      "name": "defibbable3",
+      "delays": [
+        [
+          0.135,
+          0.135,
+          0.135,
+          0.135,
+          0.135,
+          0.135,
+          0.135,
+          0.135,
+          0.135,
+          0.135
+        ]
+      ]
+    },
+    {
+      "name": "defibbable4",
+      "delays": [
+        [
+          0.135,
+          0.135,
+          0.135,
+          0.135,
+          0.135,
+          0.135,
+          0.135,
+          0.135,
+          0.135,
+          0.135,
+          0.135,
+          0.135
+        ]
+      ]
+    },
+    {
+      "name": "undefibbable",
+      "delays": [
+        [
+          0.135,
+          0.13,
+          0.13,
+          0.13,
+          0.13,
+          0.13,
+          0.13
+        ]
+      ]
     },
     {
       "name": "vc"
@@ -69,6 +138,12 @@
     },
     {
       "name": "spec"
+    },
+    {
+      "name": "spotter"
+    },
+    {
+      "name": "loader"
     },
     {
       "name": "smartgunner"
@@ -96,9 +171,6 @@
     },
     {
       "name": "surv"
-    },
-    {
-      "name": "cl"
     },
     {
       "name": "background_xeno"
@@ -131,13 +203,13 @@
       "name": "defender"
     },
     {
-      "name": "burrower"
-    },
-    {
       "name": "sentinel"
     },
     {
       "name": "hivelord"
+    },
+    {
+      "name": "burrower"
     },
     {
       "name": "carrier"
@@ -225,6 +297,17 @@
       ]
     },
     {
+      "name": "sensor_tower",
+      "delays": [
+        [
+          0.4,
+          0.4,
+          0.4,
+          0.4
+        ]
+      ]
+    },
+    {
       "name": "asrs",
       "delays": [
         [
@@ -301,9 +384,6 @@
     },
     {
       "name": "pve_inspector"
-    },
-    {
-      "name": "pve_chief_inspector"
     },
     {
       "name": "pve_advisor"
@@ -396,6 +476,9 @@
       "name": "sof_sl"
     },
     {
+      "name": "pve_chief_inspector"
+    },
+    {
       "name": "background_cmb"
     },
     {
@@ -411,6 +494,12 @@
       "name": "obs"
     },
     {
+      "name": "cmb_spc"
+    },
+    {
+      "name": "background_nspa"
+    },
+    {
       "name": "background_twe"
     },
     {
@@ -423,7 +512,13 @@
       "name": "rmc_commander"
     },
     {
+      "name": "rmc_major"
+    },
+    {
       "name": "rmc_rifleman"
+    },
+    {
+      "name": "rmc_medic"
     },
     {
       "name": "rmc_sg"
@@ -447,7 +542,25 @@
       "name": "pmc_md"
     },
     {
+      "name": "pmc_mi"
+    },
+    {
       "name": "pmc_td"
+    },
+    {
+      "name": "pmc_spec"
+    },
+    {
+      "name": "pmc_gun"
+    },
+    {
+      "name": "pmc_vc"
+    },
+    {
+      "name": "pmc_mp"
+    },
+    {
+      "name": "pmc_handler"
     },
     {
       "name": "pmc_sg"
@@ -468,13 +581,61 @@
       "name": "goon_leader"
     },
     {
+      "name": "goon_med"
+    },
+    {
       "name": "goon_engi"
     },
     {
       "name": "goon_sci"
     },
     {
+      "name": "trainee"
+    },
+    {
+      "name": "cl"
+    },
+    {
+      "name": "junior_exec"
+    },
+    {
+      "name": "senior_exec"
+    },
+    {
+      "name": "exec_spec"
+    },
+    {
+      "name": "exec_super"
+    },
+    {
+      "name": "background_wy_management"
+    },
+    {
+      "name": "ass_man"
+    },
+    {
+      "name": "div_man"
+    },
+    {
+      "name": "chief_man"
+    },
+    {
+      "name": "director"
+    },
+    {
       "name": "background_spp"
+    },
+    {
+      "name": "background_spp_alpha"
+    },
+    {
+      "name": "background_spp_bravo"
+    },
+    {
+      "name": "background_spp_charlie"
+    },
+    {
+      "name": "background_spp_delta"
     },
     {
       "name": "spp_slt"
@@ -618,7 +779,19 @@
       "name": "hellhound"
     },
     {
-      "name": "sensor_tower"
+      "name": "mortar"
+    },
+    {
+      "name": "background_visit_command"
+    },
+    {
+      "name": "dep_director"
+    },
+    {
+      "name": "goon_sci_lead"
+    },
+    {
+      "name": "field_doctor"
     }
   ]
 }

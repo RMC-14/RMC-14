@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+using System.Numerics;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Marines.Orders;
 using Content.Shared._RMC14.Marines.Skills;
@@ -20,6 +21,8 @@ using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Standing;
 using Content.Shared.Timing;
+using Content.Shared.Weapons.Melee;
+using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -28,11 +31,13 @@ using Content.Shared.Whitelist;
 using Content.Shared.Wieldable;
 using Content.Shared.Wieldable.Components;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
@@ -45,14 +50,16 @@ public sealed class CMGunSystem : EntitySystem
     [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SharedProjectileSystem _projectile = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly ItemSlotsSystem _slots = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly INetConfigurationManager _netConfig = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedProjectileSystem _projectile = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly ItemSlotsSystem _slots = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -73,6 +80,7 @@ public sealed class CMGunSystem : EntitySystem
         _projectileQuery = GetEntityQuery<ProjectileComponent>();
 
         SubscribeLocalEvent<ShootAtFixedPointComponent, AmmoShotEvent>(OnShootAtFixedPointShot);
+        SubscribeLocalEvent<IgnoreArcComponent, BeforeArcEvent>(OnBeforeArc);
 
         SubscribeLocalEvent<RMCWeaponDamageFalloffComponent, AmmoShotEvent>(OnWeaponDamageFalloffShot);
         SubscribeLocalEvent<RMCWeaponDamageFalloffComponent, GunRefreshModifiersEvent>(OnWeaponDamageFalloffRefreshModifiers);
@@ -185,8 +193,12 @@ public sealed class CMGunSystem : EntitySystem
             // and will trigger the OnEventToStopProjectile function once the PFD Component is deleted at that time. See Update()
             var comp = EnsureComp<ProjectileFixedDistanceComponent>(projectile);
 
+            // Check if the arcing should be disabled.
+            var ev = new BeforeArcEvent();
+            RaiseLocalEvent(projectile, ref ev);
+
             // Transfer arcing to the projectile.
-            if (Comp<ShootAtFixedPointComponent>(ent).ShootArcProj)
+            if (Comp<ShootAtFixedPointComponent>(ent).ShootArcProj && !ev.Cancelled)
                 comp.ArcProj = true;
 
             // Take the lowest nonzero MaxFixedRange between projectile and gun for the capped vector length.
@@ -368,6 +380,20 @@ public sealed class CMGunSystem : EntitySystem
         }
     }
 
+    private void OnGunPointBlankMeleeHit(Entity<GunPointBlankComponent> gun, ref MeleeHitEvent args)
+    {
+        if (!TryComp<MeleeWeaponComponent>(gun, out var melee))
+            return;
+
+        if (!TryGetGunUser(gun.Owner, out var user))
+            return;
+
+        var userDelay = EnsureComp<UserPointblankCooldownComponent>(user);
+
+        //After meleeing can't PB
+        userDelay.LastPBAt = _timing.CurTime;
+    }
+
     private void OnGunPointBlankAmmoShot(Entity<GunPointBlankComponent> gun, ref AmmoShotEvent args)
     {
         if (!TryComp(gun.Owner, out GunComponent? gunComp) ||
@@ -378,7 +404,26 @@ public sealed class CMGunSystem : EntitySystem
             return;
         }
 
-        if (gunComp.SelectedMode == SelectiveFire.FullAuto && TryGetGunUser(gun.Owner, out var user) && gunComp.Target.Value == user.Owner)
+        if (!TryGetGunUser(gun.Owner, out var user))
+            return;
+
+        var userDelay = EnsureComp<UserPointblankCooldownComponent>(user);
+        if (_timing.CurTime < userDelay.LastPBAt + userDelay.TimeBetweenPBs)
+            return;
+
+        if (gunComp.Target.Value == user.Owner)
+        {
+            if (gunComp.SelectedMode == SelectiveFire.FullAuto)
+                return;
+
+            if (TryComp(user, out ActorComponent? actor) &&
+                !_netConfig.GetClientCVar(actor.PlayerSession.Channel, RMCCVars.RMCDamageYourself))
+            {
+                return;
+            }
+        }
+
+        if (!_interaction.InRangeUnobstructed(gun.Owner, gunComp.Target.Value, gun.Comp.Range))
             return;
 
         foreach (var projectile in args.FiredProjectiles)
@@ -398,6 +443,15 @@ public sealed class CMGunSystem : EntitySystem
 
             _projectile.ProjectileCollide((projectile, projectileComp, physicsComp), gunComp.Target.Value);
         }
+
+        userDelay.LastPBAt = _timing.CurTime;
+
+        if (!TryComp<MeleeWeaponComponent>(gun, out var melee))
+            return;
+
+        //Can't melee right after a PB
+        melee.NextAttack = userDelay.LastPBAt + userDelay.TimeBetweenPBs;
+        Dirty(gun, melee);
     }
 
     private void OnRecoilSkilledRefreshModifiers(Entity<GunSkilledRecoilComponent> ent, ref GunRefreshModifiersEvent args)
@@ -762,6 +816,12 @@ public sealed class CMGunSystem : EntitySystem
             return;
 
         RemCompDeferred<AssistedReloadReceiverComponent>(wielder);
+    }
+
+    // Do not arc the projectile if it has the IgnoreArcComponent
+    private void OnBeforeArc(Entity<IgnoreArcComponent> ent, ref BeforeArcEvent args)
+    {
+        args.Cancelled = true;
     }
 }
 

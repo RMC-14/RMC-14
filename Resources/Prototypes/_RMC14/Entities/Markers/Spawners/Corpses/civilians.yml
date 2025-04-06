@@ -4,7 +4,7 @@
   name: Corpse Spawner - Prisoner
   components:
   - type: CorpseSpawner
-    spawn: RMCHumanCorpsePrisoner
+    spawn: RMCCorpsePrisoner
 
 - type: entity
   parent: RMCSpawnerCorpse
@@ -12,7 +12,7 @@
   name: Corpse Spawner - Chef
   components:
   - type: CorpseSpawner
-    spawn: RMCHumanCorpseChef
+    spawn: RMCCorpseChef
 
 - type: entity
   parent: RMCSpawnerCorpse
@@ -20,7 +20,7 @@
   name: Corpse Spawner - Doctor
   components:
   - type: CorpseSpawner
-    spawn: RMCHumanCorpseDoctor
+    spawn: RMCCorpseDoctor
 
 - type: entity
   parent: RMCSpawnerCorpse
@@ -28,7 +28,7 @@
   name: Corpse Spawner - Engineer
   components:
   - type: CorpseSpawner
-    spawn: RMCHumanCorpseEngineer
+    spawn: RMCCorpseEngineer
 
 - type: entity
   parent: RMCSpawnerCorpse
@@ -36,7 +36,7 @@
   name: Corpse Spawner - Scientist
   components:
   - type: CorpseSpawner
-    spawn: RMCHumanCorpseScientist
+    spawn: RMCCorpseScientist
 
 - type: entity
   parent: RMCSpawnerCorpse
@@ -44,7 +44,7 @@
   name: Corpse Spawner - Shaft Miner
   components:
   - type: CorpseSpawner
-    spawn: RMCHumanCorpseMiner
+    spawn: RMCCorpseMiner
 
 - type: entity
   parent: RMCSpawnerCorpse
@@ -52,7 +52,7 @@
   name: Corpse Spawner - Security Officer
   components:
   - type: CorpseSpawner
-    spawn: RMCHumanCorpseSecurity
+    spawn: RMCCorpseSecurity
 
 - type: entity
   parent: RMCSpawnerCorpse
@@ -60,7 +60,7 @@
   name: Corpse Spawner - Bureau Deputy
   components:
   - type: CorpseSpawner
-    spawn: RMCHumanCorpseDeputy
+    spawn: RMCCorpseDeputy
 
 - type: entity
   parent: RMCSpawnerCorpse
@@ -68,7 +68,7 @@
   name: Corpse Spawner - Corporate Liaison
   components:
   - type: CorpseSpawner
-    spawn: RMCHumanCorpseLiaison
+    spawn: RMCCorpseLiaison
 
 - type: entity
   parent: RMCSpawnerCorpse
@@ -76,7 +76,7 @@
   name: Corpse Spawner - Prison Guard
   components:
   - type: CorpseSpawner
-    spawn: RMCHumanCorpsePrisonGuard
+    spawn: RMCCorpsePrisonGuard
 
 - type: entity
   parent: RMCSpawnerCorpse
@@ -84,7 +84,7 @@
   name: Corpse Spawner - Colonist
   components:
   - type: CorpseSpawner
-    spawn: RMCHumanCorpseColonist
+    spawn: RMCCorpseColonist
 
 - type: entity
   parent: RMCSpawnerCorpseColonist
@@ -93,7 +93,24 @@
   suffix: RMC14, Burst
   components:
   - type: CorpseSpawner
-    spawn: RMCHumanCorpseColonistBurst
+    spawn: RMCCorpseColonistBurst
+    
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseColonistKutjevo
+  name: Corpse Spawner - Colonist Kutjevo
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseColonistKutjevo
+
+- type: entity
+  parent: RMCSpawnerCorpseColonist
+  id: RMCSpawnerCorpseColonistKutjevoBust
+  name: Corpse Spawner - Colonist Kutjevo
+  suffix: RMC14, Burst
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseColonistKutjevoBurst
 
 - type: entity
   parent: RMCSpawnerCorpse
@@ -101,4 +118,12 @@
   name: Corpse Spawner - We-Ya Goon
   components:
   - type: CorpseSpawner
-    spawn: RMCHumanCorpseWeYaGoon
+    spawn: RMCCorpseWeYaGoon
+    
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseWeYaGoonKutjevo
+  name: Corpse Spawner - We-Ya Goon Kutjevo
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseWeYaGoonKutjevo

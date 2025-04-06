@@ -53,6 +53,7 @@
       tags:
       - Bottle
   - type: CMAutomatedVendor # TODO RMC14 different ui style
+    hackable: true
     sections:
     - name: Field supplies
       entries:
@@ -288,6 +289,7 @@
       components:
       - Hypospray
   - type: CMAutomatedVendor
+    hackable: true
     sections:
     - name: Supplies
       entries:
@@ -331,6 +333,7 @@
     access:
     - [ "CMAccessMedical" ]
   - type: CMAutomatedVendor
+    hackable: true
     sections:
     - name: Blood Packs
       entries:

@@ -474,7 +474,8 @@ public sealed class XenoHudOverlay : Overlay
         _mobThresholds.TryGetDeadThreshold(uid, out var deadThresholdNullable, mobThresholds);
 
         string state;
-        if (_mobState.IsCritical(uid, mobState))
+        if (_mobState.IsCritical(uid, mobState) ||
+            (_mobState.IsAlive(uid) && critThresholdNullable != null && damageable.TotalDamage > critThresholdNullable))
         {
             if (critThresholdNullable is not { } critThreshold || deadThresholdNullable is not { } deadThreshold)
                 return;

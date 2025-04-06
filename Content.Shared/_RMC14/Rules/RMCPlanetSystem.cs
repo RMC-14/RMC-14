@@ -48,6 +48,9 @@ public sealed class RMCPlanetSystem : EntitySystem
         var x = _random.Next(-_coordinateVariance, _coordinateVariance + 1);
         var y = _random.Next(-_coordinateVariance, _coordinateVariance + 1);
         ent.Comp.Offset = (x, y);
+
+        var ev = new RMCPlanetAddedEvent();
+        RaiseLocalEvent(ent, ref ev);
     }
 
     public bool IsOnPlanet(EntityCoordinates coordinates)

@@ -1,0 +1,122 @@
+- type: entity
+  parent: BaseStructureDynamic
+  id: RMCCanisterBase
+  name: canister
+  description: A gas canister.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/atmos.rsi
+    state: yellow
+    noRot: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.3
+        density: 155
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: null
+  - type: InteractionOutline
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/spray.ogg
+      - !type:SpawnEntitiesBehavior
+        offset: 0
+        spawn:
+          RMCCanisterBrokenBase:
+            min: 1
+            max: 1
+
+- type: entity
+  parent: RMCCanisterBase
+  id: RMCCanisterGrey
+  name: canister (Air)
+  description: A gas canister.
+  components:
+  - type: Sprite
+    state: grey 
+
+- type: entity
+  parent: RMCCanisterBase
+  id: RMCCanisterBlack
+  name: canister (CO2)
+  description: A gas canister.
+  components:
+  - type: Sprite
+    state: black 
+    
+- type: entity
+  parent: RMCCanisterBase
+  id: RMCCanisterBlue
+  name: canister (O2)
+  description: A gas canister.
+  components:
+  - type: Sprite
+    state: blue
+    
+- type: entity
+  parent: RMCCanisterBase
+  id: RMCCanisterRed
+  name: canister (N2)
+  description: A gas canister.
+  components:
+  - type: Sprite
+    state: red
+
+- type: entity
+  parent: RMCCanisterBase
+  id: RMCCanisterOrange
+  name: canister (Phoron)
+  description: A gas canister.
+  components:
+  - type: Sprite
+    state: orange 
+    
+- type: entity
+  parent: RMCCanisterBase
+  id: RMCCanisterRedWhite
+  name: canister (N2O)
+  description: A gas canister.
+  components:
+  - type: Sprite
+    state: redws
+    
+# Broken
+- type: entity
+  parent: RMCCanisterBase
+  id: RMCCanisterBrokenBase
+  name: broken canister
+  description: A broken gas canister. Completely useless.
+  components:  
+  - type: Sprite
+    sprite: _RMC14/Structures/atmos.rsi
+    state: yellow-1
+    noRot: true
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: Anchorable
+    flags:
+    - Unanchorable

@@ -171,8 +171,8 @@
 - type: entity
   parent: BaseStructure
   id: RMCLZFloodlight
-  name: LZ floodlight
-  description: An indestructible bit of light in the darkness. Never seems to run out of power.
+  name: landing light
+  description: A powerful light usually stationed near landing zones to provide better visibility. This one seems to have been bolted down and is unable to be moved.
   placement:
     mode: SnapgridCenter
   components:
@@ -247,6 +247,7 @@
     netsync: true
   - type: RMCReactorPoweredLight
   - type: PreventAttackLightOff
+  - type: RequireProjectileTarget
 
 - type: entity
   parent: RMCFloodlightBroken

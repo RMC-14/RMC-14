@@ -25,6 +25,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv759
@@ -62,6 +63,7 @@
     noTunnel: true
     unweedable: false
     minimapColor: '#3A3A3AFF'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv759
@@ -84,6 +86,7 @@
     noTunnel: true
     unweedable: false
     minimapColor: '#3A3A3AFF'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv759Bunker
@@ -481,7 +484,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsCaves
   id: RMCAreaLv759IndoorsCavesWyResearchComplexEntrance
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - North Main Entrance
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - North Main Entrance
   components:
   - type: Sprite
     state: wylab
@@ -999,7 +1002,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsSpaceport
   id: RMCAreaLv759IndoorsSpaceportHallwayNortheast
-  name: Weyland-Yutani Celestia Gateway Space-Port - Hallway - Northeast
+  name: Weston-Yamada Celestia Gateway Space-Port - Hallway - Northeast
   components:
   - type: Sprite
     state: wyspaceport
@@ -1007,7 +1010,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsSpaceport
   id: RMCAreaLv759IndoorsSpaceportHallwayNorth
-  name: Weyland-Yutani Celestia Gateway Space-Port - Hallway - North
+  name: Weston-Yamada Celestia Gateway Space-Port - Hallway - North
   components:
   - type: Sprite
     state: wyspaceport
@@ -1015,7 +1018,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsSpaceport
   id: RMCAreaLv759IndoorsSpaceportHallwayNorthwest
-  name: Weyland-Yutani Celestia Gateway Space-Port - Hallway - Northwest
+  name: Weston-Yamada Celestia Gateway Space-Port - Hallway - Northwest
   components:
   - type: Sprite
     state: wyspaceport
@@ -1023,7 +1026,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsSpaceport
   id: RMCAreaLv759IndoorsSpaceportHallwayEast
-  name: Weyland-Yutani Celestia Gateway Space-Port - Hallway - East
+  name: Weston-Yamada Celestia Gateway Space-Port - Hallway - East
   components:
   - type: Sprite
     state: wyspaceport
@@ -1031,7 +1034,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsSpaceport
   id: RMCAreaLv759IndoorsSpaceportHeavyequip
-  name: Weyland-Yutani Celestia Gateway Space-Port - Heavy Equipment Storage
+  name: Weston-Yamada Celestia Gateway Space-Port - Heavy Equipment Storage
   components:
   - type: Sprite
     state: wyspaceport
@@ -1039,7 +1042,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsSpaceport
   id: RMCAreaLv759IndoorsSpaceportEngineering
-  name: Weyland-Yutani Celestia Gateway Space-Port - Fuel Storage & Processing
+  name: Weston-Yamada Celestia Gateway Space-Port - Fuel Storage & Processing
   components:
   - type: Sprite
     state: wyspaceport
@@ -1047,7 +1050,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsSpaceport
   id: RMCAreaLv759IndoorsSpaceportJanitor
-  name: Weyland-Yutani Celestia Gateway Space-Port - Janitorial Storage Room
+  name: Weston-Yamada Celestia Gateway Space-Port - Janitorial Storage Room
   components:
   - type: Sprite
     state: wyspaceport
@@ -1055,7 +1058,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsSpaceport
   id: RMCAreaLv759IndoorsSpaceportMaintenanceEast
-  name: Weyland-Yutani Celestia Gateway Space-Port - Maintenance - East
+  name: Weston-Yamada Celestia Gateway Space-Port - Maintenance - East
   components:
   - type: Sprite
     state: wyspaceport
@@ -1063,7 +1066,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsSpaceport
   id: RMCAreaLv759IndoorsSpaceportCommunicationsOffice
-  name: Weyland-Yutani Celestia Gateway Space-Port - Communications & Administration Office
+  name: Weston-Yamada Celestia Gateway Space-Port - Communications & Administration Office
   components:
   - type: Sprite
     state: wyspaceportadmin
@@ -1071,7 +1074,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsSpaceport
   id: RMCAreaLv759IndoorsSpaceportFlightControlRoom
-  name: Weyland-Yutani Celestia Gateway Space-Port - Flight Control Room
+  name: Weston-Yamada Celestia Gateway Space-Port - Flight Control Room
   components:
   - type: Sprite
     state: wyspaceportadmin
@@ -1079,7 +1082,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsSpaceport
   id: RMCAreaLv759IndoorsSpaceportSecurity
-  name: Weyland-Yutani Celestia Gateway Space-Port - Security- Observation & Office
+  name: Weston-Yamada Celestia Gateway Space-Port - Security- Observation & Office
   components:
   - type: Sprite
     state: security_checkpoint
@@ -1087,7 +1090,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsSpaceport
   id: RMCAreaLv759IndoorsSpaceportSecurityOffice
-  name: Weyland-Yutani Celestia Gateway Space-Port - Office
+  name: Weston-Yamada Celestia Gateway Space-Port - Office
   components:
   - type: Sprite
     state: security_checkpoint
@@ -1095,7 +1098,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsSpaceport
   id: RMCAreaLv759IndoorsSpaceportCargo
-  name: Weyland-Yutani Celestia Gateway Space-Port - Cargo Bay
+  name: Weston-Yamada Celestia Gateway Space-Port - Cargo Bay
   components:
   - type: Sprite
     state: wyspaceportcargo
@@ -1103,7 +1106,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsSpaceport
   id: RMCAreaLv759IndoorsSpaceportCargoMaintenance
-  name: Weyland-Yutani Celestia Gateway Space-Port - Cargo - Maintenance
+  name: Weston-Yamada Celestia Gateway Space-Port - Cargo - Maintenance
   components:
   - type: Sprite
     state: wyspaceportcargo
@@ -1111,7 +1114,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsSpaceport
   id: RMCAreaLv759IndoorsSpaceportBaggagehandling
-  name: Weyland-Yutani Celestia Gateway Space-Port - Baggage Storage & Handling
+  name: Weston-Yamada Celestia Gateway Space-Port - Baggage Storage & Handling
   components:
   - type: Sprite
     state: wyspaceportbaggage
@@ -1119,7 +1122,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsSpaceport
   id: RMCAreaLv759IndoorsSpaceportCuppajoes
-  name: Weyland-Yutani Celestia Gateway Space-Port - Cuppa Joe's
+  name: Weston-Yamada Celestia Gateway Space-Port - Cuppa Joe's
   components:
   - type: Sprite
     state: cuppajoes
@@ -1127,7 +1130,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsSpaceport
   id: RMCAreaLv759IndoorsSpaceportKitchen
-  name: Weyland-Yutani Celestia Gateway Space-Port - Kitchen
+  name: Weston-Yamada Celestia Gateway Space-Port - Kitchen
   components:
   - type: Sprite
     state: wyspaceportblue
@@ -1135,7 +1138,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsSpaceport
   id: RMCAreaLv759IndoorsSpaceportDockingBay2
-  name: 'Weyland-Yutani Celestia Gateway Space-Port - Docking Bay: 2 - Refueling and Maintenance'
+  name: 'Weston-Yamada Celestia Gateway Space-Port - Docking Bay: 2 - Refueling and Maintenance'
   components:
   - type: Sprite
     state: wyspaceportblue
@@ -1143,7 +1146,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsSpaceport
   id: RMCAreaLv759IndoorsSpaceportDockingBay1
-  name: 'Weyland-Yutani Celestia Gateway Space-Port - Docking Bay: 1'
+  name: 'Weston-Yamada Celestia Gateway Space-Port - Docking Bay: 1'
   components:
   - type: Sprite
     state: wyspaceport
@@ -1398,8 +1401,8 @@
 
 - type: entity
   parent: RMCAreaLv759Indoors
-  id: RMCAreaLv759IndoorsWeyyuOffice
-  name: Weyland-Yutani Offices - Reception Hallway
+  id: RMCAreaLv759IndoorsWeyaOffice
+  name: Weston-Yamada Offices - Reception Hallway
   components:
   - type: Sprite
     state: wyoffice
@@ -1407,37 +1410,37 @@
     minimapColor: '#2D3FA2EE'
 
 - type: entity
-  parent: RMCAreaLv759IndoorsWeyyuOffice
-  id: RMCAreaLv759IndoorsWeyyuOfficeHallway
-  name: Weyland-Yutani Offices - West Foyer
+  parent: RMCAreaLv759IndoorsWeyaOffice
+  id: RMCAreaLv759IndoorsWeyaOfficeHallway
+  name: Weston-Yamada Offices - West Foyer
   components:
   - type: Sprite
     state: wyoffice
 
 - type: entity
-  parent: RMCAreaLv759IndoorsWeyyuOffice
-  id: RMCAreaLv759IndoorsWeyyuOfficeFloor
-  name: Weyland-Yutani Offices - Main Office Floor
+  parent: RMCAreaLv759IndoorsWeyaOffice
+  id: RMCAreaLv759IndoorsWeyaOfficeFloor
+  name: Weston-Yamada Offices - Main Office Floor
 
 - type: entity
-  parent: RMCAreaLv759IndoorsWeyyuOffice
-  id: RMCAreaLv759IndoorsWeyyuOfficeBreakroom
-  name: Weyland-Yutani Offices - Breakroom
+  parent: RMCAreaLv759IndoorsWeyaOffice
+  id: RMCAreaLv759IndoorsWeyaOfficeBreakroom
+  name: Weston-Yamada Offices - Breakroom
 
 - type: entity
-  parent: RMCAreaLv759IndoorsWeyyuOffice
-  id: RMCAreaLv759IndoorsWeyyuOfficeVip
-  name: Weyland-Yutani Offices - Conference Room
+  parent: RMCAreaLv759IndoorsWeyaOffice
+  id: RMCAreaLv759IndoorsWeyaOfficeVip
+  name: Weston-Yamada Offices - Conference Room
 
 - type: entity
-  parent: RMCAreaLv759IndoorsWeyyuOffice
-  id: RMCAreaLv759IndoorsWeyyuOfficePressroom
-  name: Weyland-Yutani Offices - Assembly Hall
+  parent: RMCAreaLv759IndoorsWeyaOffice
+  id: RMCAreaLv759IndoorsWeyaOfficePressroom
+  name: Weston-Yamada Offices - Assembly Hall
 
 - type: entity
-  parent: RMCAreaLv759IndoorsWeyyuOffice
-  id: RMCAreaLv759IndoorsWeyyuOfficeSupervisor
-  name: Weyland-Yutani Offices - Colony Supervisors Office
+  parent: RMCAreaLv759IndoorsWeyaOffice
+  id: RMCAreaLv759IndoorsWeyaOfficeSupervisor
+  name: Weston-Yamada Offices - Colony Supervisors Office
 
 - type: entity
   parent: RMCAreaLv759Indoors
@@ -1821,7 +1824,7 @@
 - type: entity
   parent: RMCAreaLv759Indoors
   id: RMCAreaLv759IndoorsPowerPlant
-  name: Weyland-Yutani DynaGrid Nexus - Central Hallway
+  name: Weston-Yamada DynaGrid Nexus - Central Hallway
   components:
   - type: Sprite
     state: power0
@@ -1831,7 +1834,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsPowerPlant
   id: RMCAreaLv759IndoorsPowerPlantHallwayEast
-  name: Weyland-Yutani DynaGrid Nexus - East Hallway
+  name: Weston-Yamada DynaGrid Nexus - East Hallway
   components:
   - type: Sprite
     state: power0
@@ -1842,17 +1845,17 @@
 - type: entity
   parent: RMCAreaLv759IndoorsPowerPlant
   id: RMCAreaLv759IndoorsPowerPlantSouthHallway
-  name: Weyland-Yutani DynaGrid Nexus - South Hallway
+  name: Weston-Yamada DynaGrid Nexus - South Hallway
 
 - type: entity
   parent: RMCAreaLv759IndoorsPowerPlant
   id: RMCAreaLv759IndoorsPowerPlantGeothermalGenerators
-  name: Weyland-Yutani DynaGrid Nexus - Geothermal Generators Room
+  name: Weston-Yamada DynaGrid Nexus - Geothermal Generators Room
 
 - type: entity
   parent: RMCAreaLv759IndoorsPowerPlant
   id: RMCAreaLv759IndoorsPowerPlantPowerStorage
-  name: Weyland-Yutani DynaGrid Nexus - Power Storage Room
+  name: Weston-Yamada DynaGrid Nexus - Power Storage Room
 
 - type: entity
   abstract: true
@@ -1862,7 +1865,7 @@
 - type: entity
   parent: RMCAreaLv759OutdoorsPowerPlant
   id: RMCAreaLv759OutdoorsPowerPlantTransformersNorth
-  name: Weyland-Yutani DynaGrid Nexus - Transformers - North
+  name: Weston-Yamada DynaGrid Nexus - Transformers - North
   components:
   - type: Area
     minimapColor: '#91BDCFE7'
@@ -1871,7 +1874,7 @@
 - type: entity
   parent: RMCAreaLv759OutdoorsPowerPlant
   id: RMCAreaLv759OutdoorsPowerPlantTransformersSouth
-  name: Weyland-Yutani DynaGrid Nexus - Transformers - South
+  name: Weston-Yamada DynaGrid Nexus - Transformers - South
   components:
   - type: Area
     minimapColor: '#91BDCFE7'
@@ -1880,27 +1883,27 @@
 - type: entity
   parent: RMCAreaLv759IndoorsPowerPlant
   id: RMCAreaLv759IndoorsPowerPlantTransformersNorth
-  name: Weyland-Yutani DynaGrid Nexus - Transformers - North
+  name: Weston-Yamada DynaGrid Nexus - Transformers - North
 
 - type: entity
   parent: RMCAreaLv759IndoorsPowerPlant
   id: RMCAreaLv759IndoorsPowerPlantTransformersSouth
-  name: Weyland-Yutani DynaGrid Nexus - Transformers - South
+  name: Weston-Yamada DynaGrid Nexus - Transformers - South
 
 - type: entity
   parent: RMCAreaLv759IndoorsPowerPlant
   id: RMCAreaLv759IndoorsPowerPlantGasGenerators
-  name: Weyland-Yutani DynaGrid Nexus - Gas Mixing & Storage
+  name: Weston-Yamada DynaGrid Nexus - Gas Mixing & Storage
 
 - type: entity
   parent: RMCAreaLv759IndoorsPowerPlant
   id: RMCAreaLv759IndoorsPowerPlantFusionGenerators
-  name: Weyland-Yutani DynaGrid Nexus - Control Center
+  name: Weston-Yamada DynaGrid Nexus - Control Center
 
 - type: entity
   parent: RMCAreaLv759IndoorsPowerPlant
   id: RMCAreaLv759IndoorsPowerPlantTelecomms
-  name: Weyland-Yutani DynaGrid Nexus - Telecommunications
+  name: Weston-Yamada DynaGrid Nexus - Telecommunications
   components:
   - type: Sprite
     state: comms_1
@@ -1911,7 +1914,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsPowerPlant
   id: RMCAreaLv759IndoorsPowerPlantWorkersCanteen
-  name: Weyland-Yutani DynaGrid Nexus - Worker's Canteen
+  name: Weston-Yamada DynaGrid Nexus - Worker's Canteen
   components:
   - type: Area
     linkedLz: dropship_lz1
@@ -1919,7 +1922,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsPowerPlant
   id: RMCAreaLv759IndoorsPowerPlantWorkersCanteenKitchen
-  name: Weyland-Yutani DynaGrid Nexus - Worker's Canteen - Kitchen
+  name: Weston-Yamada DynaGrid Nexus - Worker's Canteen - Kitchen
   components:
   - type: Area
     linkedLz: dropship_lz2
@@ -1927,12 +1930,12 @@
 - type: entity
   parent: RMCAreaLv759IndoorsPowerPlant
   id: RMCAreaLv759IndoorsPowerPlantEquipmentEast
-  name: Weyland-Yutani DynaGrid Nexus - Equipment Storage Room - East
+  name: Weston-Yamada DynaGrid Nexus - Equipment Storage Room - East
 
 - type: entity
   parent: RMCAreaLv759IndoorsPowerPlant
   id: RMCAreaLv759IndoorsPowerPlantEquipmentWest
-  name: Weyland-Yutani DynaGrid Nexus - Equipment Storage Room - West
+  name: Weston-Yamada DynaGrid Nexus - Equipment Storage Room - West
 
 - type: entity
   parent: RMCAreaLv759Indoors
@@ -2118,7 +2121,7 @@
 - type: entity
   parent: RMCAreaLv759Indoors
   id: RMCAreaLv759IndoorsRecyclingPlant
-  name: Weyland-Yutani - Resource Recovery Facility
+  name: Weston-Yamada - Resource Recovery Facility
   components:
   - type: Sprite
     state: recycling
@@ -2129,7 +2132,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsRecyclingPlant
   id: RMCAreaLv759IndoorsRecyclingPlantGarage
-  name: Weyland-Yutani - Resource Recovery Facility - Garage
+  name: Weston-Yamada - Resource Recovery Facility - Garage
   components:
   - type: Area
     linkedLz: dropship_lz1
@@ -2147,7 +2150,7 @@
 - type: entity
   parent: RMCAreaLv759Indoors
   id: RMCAreaLv759IndoorsRecyclingPlantOffice
-  name: Weyland-Yutani - Resource Recovery Facility - Office
+  name: Weston-Yamada - Resource Recovery Facility - Office
   components:
   - type: Sprite
     state: recycling
@@ -2157,7 +2160,7 @@
 - type: entity
   parent: RMCAreaLv759Indoors
   id: RMCAreaLv759IndoorsRecyclingPlantWasteDisposalIncinerator
-  name: Weyland-Yutani - Resource Recovery Facility - Waste Disposal Incinerating Room
+  name: Weston-Yamada - Resource Recovery Facility - Waste Disposal Incinerating Room
   components:
   - type: Sprite
     state: recycling
@@ -2276,7 +2279,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWySecurity
   id: RMCAreaLv759IndoorsWySecurityCheckpointNortheast
-  name: Weyland-Yutani Security Checkpoint - North East
+  name: Weston-Yamada Security Checkpoint - North East
   components:
   - type: Sprite
     state: security_checkpoint_northeast
@@ -2287,7 +2290,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWySecurity
   id: RMCAreaLv759IndoorsWySecurityCheckpointEast
-  name: Weyland-Yutani Security Checkpoint - East
+  name: Weston-Yamada Security Checkpoint - East
   components:
   - type: Sprite
     state: security_checkpoint_east
@@ -2297,7 +2300,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWySecurity
   id: RMCAreaLv759IndoorsWySecurityCheckpointCentral
-  name: Weyland-Yutani Security Checkpoint - Central
+  name: Weston-Yamada Security Checkpoint - Central
   components:
   - type: Sprite
     state: security_checkpoint_central
@@ -2305,7 +2308,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWySecurity
   id: RMCAreaLv759IndoorsWySecurityCheckpointWest
-  name: Weyland-Yutani Security Checkpoint - West
+  name: Weston-Yamada Security Checkpoint - West
   components:
   - type: Sprite
     state: security_checkpoint_west
@@ -2313,7 +2316,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWySecurity
   id: RMCAreaLv759IndoorsWySecurityCheckpointNorthwest
-  name: Weyland-Yutani Security Checkpoint - North West
+  name: Weston-Yamada Security Checkpoint - North West
   components:
   - type: Sprite
     state: security_checkpoint_northwest
@@ -2343,7 +2346,7 @@
 - type: entity
   parent: RMCAreaLv759Indoors
   id: RMCAreaLv759IndoorsWyResearchComplex
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex
   components:
   - type: Sprite
     state: wylab
@@ -2361,7 +2364,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexMedicalAnnex
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - Medical Annex Building
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Medical Annex Building
   components:
   - type: Sprite
     state: wylab
@@ -2369,7 +2372,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexReception
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - Reception & Administration
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Reception & Administration
   components:
   - type: Sprite
     state: wylab
@@ -2377,7 +2380,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexCargo
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - Requisitions & Cargo
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Requisitions & Cargo
   components:
   - type: Sprite
     state: wylab
@@ -2385,7 +2388,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexResearchanddevelopment
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - Technology Research & Development Lab
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Technology Research & Development Lab
   components:
   - type: Sprite
     state: wylab
@@ -2393,7 +2396,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexMainlabs
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - Advanced Chemical Testing & Research Lab
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Advanced Chemical Testing & Research Lab
   components:
   - type: Sprite
     state: wylab
@@ -2401,7 +2404,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexXenobiology
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - Advanced Xenobiology Lab
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Advanced Xenobiology Lab
   components:
   - type: Sprite
     state: wylab
@@ -2409,7 +2412,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexWeaponresearchlab
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - Advanced Weapon Research Lab
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Advanced Weapon Research Lab
   components:
   - type: Sprite
     state: wylab
@@ -2417,7 +2420,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexWeaponresearchlabtesting
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - Advanced Weapon Research Lab - Weapons Testing Range
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Advanced Weapon Research Lab - Weapons Testing Range
   components:
   - type: Sprite
     state: wylab
@@ -2425,7 +2428,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexXenoarcheology
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - Xenoarcheology Research Lab
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Xenoarcheology Research Lab
   components:
   - type: Sprite
     state: wylab
@@ -2433,7 +2436,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexVehicledeploymentbay
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - Vehicle Deployment & Maintenance Bay
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Vehicle Deployment & Maintenance Bay
   components:
   - type: Sprite
     state: wylab
@@ -2441,7 +2444,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexJanitor
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - Janitorial Supplies Storage
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Janitorial Supplies Storage
   components:
   - type: Sprite
     state: wylab
@@ -2449,7 +2452,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexCafeteria
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - Cafeteria
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Cafeteria
   components:
   - type: Sprite
     state: wylab
@@ -2457,7 +2460,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexCafeteriakitchen
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - Cafeteria - Kitchen
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Cafeteria - Kitchen
   components:
   - type: Sprite
     state: wylab
@@ -2465,7 +2468,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexDormsfoyer
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - Dorms Foyer
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Dorms Foyer
   components:
   - type: Sprite
     state: wylab
@@ -2473,7 +2476,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexDormsbedroom
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - Dorms
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Dorms
   components:
   - type: Sprite
     state: wylab
@@ -2481,7 +2484,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexSecuritycommand
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - Security Command Center & Deployment
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Security Command Center & Deployment
   components:
   - type: Sprite
     state: wylab
@@ -2489,7 +2492,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexSecurityarmory
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - Armory
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Armory
   components:
   - type: Sprite
     state: wylab
@@ -2497,7 +2500,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexHangarbay
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - Hangar Bay
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Hangar Bay
   components:
   - type: Sprite
     state: wylab
@@ -2505,7 +2508,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexHangarbayshuttle
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - Hangar Bay - Weyland-Yutani PMC ERT Shuttle
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Hangar Bay - Weston-Yamada PMC ERT Shuttle
   components:
   - type: Sprite
     state: wylab
@@ -2515,7 +2518,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexHallwaynorth
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - North Hallway
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - North Hallway
   components:
   - type: Sprite
     state: wylab
@@ -2523,7 +2526,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexHallwaynorthexit
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - North Hallway - Personnel Exit East
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - North Hallway - Personnel Exit East
   components:
   - type: Sprite
     state: wylab
@@ -2531,7 +2534,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexHallwayeast
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - Hallway East
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Hallway East
   components:
   - type: Sprite
     state: wylab
@@ -2539,7 +2542,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexHallwaycentral
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - Central Hallway
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Central Hallway
   components:
   - type: Sprite
     state: wylab
@@ -2547,7 +2550,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexHallwaysouthwest
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - South West Hallway
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - South West Hallway
   components:
   - type: Sprite
     state: wylab
@@ -2555,7 +2558,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexHallwaysoutheast
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - South East Hallway
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - South East Hallway
   components:
   - type: Sprite
     state: wylab
@@ -2563,7 +2566,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexSoutheastexit
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - South East Maintenace & Emergency Exit
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - South East Maintenace & Emergency Exit
   components:
   - type: Sprite
     state: wylab
@@ -2571,7 +2574,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexChangingroom
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - Locker Room
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Locker Room
   components:
   - type: Sprite
     state: wylab
@@ -2579,7 +2582,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
   id: RMCAreaLv759IndoorsWyResearchComplexHeadResearchOffice
-  name: Weyland-Yutani - Advanced Bio-Genomic Research Complex - Head of Research's Office
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Head of Research's Office
   components:
   - type: Sprite
     state: wylab

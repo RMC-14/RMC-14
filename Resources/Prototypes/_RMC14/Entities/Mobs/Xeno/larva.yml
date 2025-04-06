@@ -76,6 +76,8 @@
   - type: Tag
     tags:
     - RMCXenoLarva
+  - type: RMCBuckleOffset
+    offset: 0, 0
 
 # For surgeries/failed incubations
 - type: entity

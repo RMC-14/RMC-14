@@ -1,4 +1,5 @@
-﻿using Content.Shared.Coordinates;
+﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared.Coordinates;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
@@ -18,12 +19,14 @@ public sealed class RMCToolSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedStackSystem _stack = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCRefinableComponent, ExaminedEvent>(OnRefinableExamined);
         SubscribeLocalEvent<RMCRefinableComponent, InteractUsingEvent>(OnRefinableInteractUsing);
         SubscribeLocalEvent<RMCRefinableComponent, RMCRefinableDoAfterEvent>(OnRefinableDoAfter);
+        SubscribeLocalEvent<ToolComponent, RMCToolUseEvent>(OnToolUse);
     }
 
     private void OnRefinableExamined(Entity<RMCRefinableComponent> ent, ref ExaminedEvent args)
@@ -92,4 +95,22 @@ public sealed class RMCToolSystem : EntitySystem
             SpawnAtPosition(spawn, ent.Owner.ToCoordinates());
         }
     }
+
+    /// <summary>
+    ///     Reduce the DoAfter duration of the tool action based on it's skill specialisation.
+    /// </summary>
+    private void OnToolUse(Entity<ToolComponent> ent, ref RMCToolUseEvent args)
+    {
+        if (!TryComp(args.User, out SkillsComponent? skills) || args.Handled)
+            return;
+
+        args.Delay *= _skills.GetSkillDelayMultiplier(args.User, ent.Comp.Skill);
+        args.Handled = true;
+    }
 }
+
+/// <summary>
+///     Raised on a tool when it's being used to possibly alter the delay of it's action.
+/// </summary>
+[ByRefEvent]
+public record struct RMCToolUseEvent(EntityUid User, TimeSpan Delay, bool Handled = false);

@@ -1,4 +1,7 @@
 - type: Tag
+  id: CMRollerItem
+
+- type: Tag
   id: CMRollerBed
 
 - type: entity
@@ -9,6 +12,7 @@
   components:
   - type: Tag
     tags:
+    - CMRollerItem
     - CMRollerBed
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/rollerbeds.rsi
@@ -45,6 +49,7 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: RMCStrapNoDrawDepthChange
 
 - type: entity
   parent: CMRollerBed
@@ -162,7 +167,7 @@
   - type: MedevacStretcher
   - type: Tag
     tags:
-    - CMRollerBed
+    - CMRollerItem
 
 - type: entity
   parent: RMCMedevacStretcher

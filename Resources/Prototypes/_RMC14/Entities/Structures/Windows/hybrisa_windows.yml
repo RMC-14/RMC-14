@@ -134,7 +134,7 @@
     node: windowHybrisa
 
 - type: entity
-  parent: CMBaseWindow
+  parent: CMBaseWindowIndestructible
   id: RMCWindowHybrisaHull
   name: hull window
   description: A glass window. Light refracts incorrectly when looking through. It looks rather strong. No way to get through here.

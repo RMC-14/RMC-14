@@ -45,7 +45,7 @@
     state: cl
   minimapBackground:
    sprite: _RMC14/Interface/map_blips.rsi
-   state: background_civillian
+   state: background_goon
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -58,6 +58,10 @@
       points: 50
     - type: JobPrefix
       prefix: cm-job-prefix-liaison
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: cl
 
 - type: startingGear
   id: CMGearLiaison

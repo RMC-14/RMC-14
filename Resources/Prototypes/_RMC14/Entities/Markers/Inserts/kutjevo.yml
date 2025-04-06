@@ -6,8 +6,9 @@
   suffix: Insert Kutjevo
   components:
   - type: MapInsert
-    spawn: "/Maps/_RMC14/Inserts/Kutjevo/communications.yml"
-    probability: 0.35
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/communications.yml"
+      probability: 0.35
     clearEntities: true
     clearDecals: true
     replaceAreas: false
@@ -19,8 +20,9 @@
   suffix: Insert Kutjevo
   components:
   - type: MapInsert
-    spawn: "/Maps/_RMC14/Inserts/Kutjevo/cleaningprog_botany.yml"
-    probability: 0.25
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/cleaningprog_botany.yml"
+      probability: 0.25
     clearEntities: true
     clearDecals: true
     replaceAreas: false
@@ -32,8 +34,9 @@
   suffix: Insert Kutjevo
   components:
   - type: MapInsert
-    spawn: "/Maps/_RMC14/Inserts/Kutjevo/trappedmonke_andclown.yml"
-    probability: 0.05
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/trappedmonke_andclown.yml"
+      probability: 0.05
     clearEntities: false
     clearDecals: false
     replaceAreas: false
@@ -45,8 +48,9 @@
   suffix: Insert Kutjevo
   components:
   - type: MapInsert
-    spawn: "/Maps/_RMC14/Inserts/Kutjevo/plinkingspot_northlz.yml"
-    probability: 0.25
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Kutjevo/plinkingspot_northlz.yml"
+      probability: 0.25
     clearEntities: false
     clearDecals: false
     replaceAreas: false

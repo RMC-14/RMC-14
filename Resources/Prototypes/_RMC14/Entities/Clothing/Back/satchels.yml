@@ -17,9 +17,18 @@
 
 - type: entity
   parent: CMSatchel
+  id: CMSatchelFillSurvivor
+  suffix: Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetMetal20
+
+- type: entity
+  parent: CMSatchel
   id: CMBackpackSniper
-  name: M3 sniper's smock
-  description: A specially-designed smock with pockets for all your sniper needs.
+  name: M3 sniper's waist-rig
+  description: A specially-designed rig attached to the waist with a pocket, designed for marksmen.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/sniper_smock/jungle-classic.rsi
@@ -83,6 +92,16 @@
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/engineer.rsi
 
 - type: entity
+  parent: CMSatchelEngineer
+  id: CMSatchelEngineerSurvivorFill
+  suffix: Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetPlasteel20
+    - id: CMSheetMetal20
+
+- type: entity
   parent: CMSatchel
   id: CMSatchelMedical
   name: medical satchel
@@ -90,6 +109,15 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/medical.rsi
+
+- type: entity
+  parent: CMSatchelMedical
+  id: CMSatchelMedicalSurvivorFill
+  suffix: Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSheetMetal20
 
 - type: entity
   parent: CMSatchel
@@ -102,13 +130,22 @@
 
 - type: entity
   parent: CMSatchelSecurity
+  id: CMSatchelSecuritySurvivorFill
+  suffix: Survivor
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/security.rsi
+  - type: StorageFill
+    contents:
+    - id: CMSheetMetal20
+
+- type: entity
+  parent: CMSatchelSecurity
   id: CMSatchelSecurityFilledProvost
   components:
   - type: StorageFill
     contents:
     - id: RMCArmorProvostFlexi # TODO RMC14 provost office handheld beacon
-    - id: CMFlash # TODO RMC14 remove once provost jacket has it
-    - id: RMCHandcuffs # TODO RMC14 remove once provost jacket has it
 
 - type: entity
   parent: CMSatchelSecurity
@@ -117,8 +154,6 @@
   - type: StorageFill
     contents:
     - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
-    - id: CMFlash # TODO RMC14 remove once provost jacket has it
-    - id: RMCHandcuffs # TODO RMC14 remove once provost jacket has it
 
 - type: entity
   parent: CMSatchelSecurity
@@ -128,8 +163,7 @@
     contents:
     - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
     - id: RMCTabletCO
-    - id: CMFlash # TODO RMC14 remove once provost jacket has it
-    - id: RMCHandcuffs # TODO RMC14 remove once provost jacket has it
+
 
 - type: entity
   parent: CMSatchelSecurity
@@ -256,7 +290,7 @@
   - type: Storage
     maxItemSize: Normal
     grid:
-    - 0,0,23,1 # Can hold 12 grenades of size 2x2.
+    - 0,0,11,3 # Can hold 12 grenades of size 2x2.
     whitelist:
       tags:
       - Grenade

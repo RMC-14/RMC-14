@@ -25,6 +25,7 @@ public sealed class XenoFruitVisualizerSystem : EntitySystem
             XenoFruitState.Item => ent.Comp.ItemState,
             XenoFruitState.Growing => ent.Comp.GrowingState,
             XenoFruitState.Grown => ent.Comp.GrownState,
+            XenoFruitState.Eaten => ent.Comp.EatenState,
             _ => null
         };
 

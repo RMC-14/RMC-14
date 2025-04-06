@@ -40,10 +40,12 @@ public sealed class RMCStorageSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     private readonly List<EntityUid> _toRemove = new();
+    private readonly List<EntityUid> _toClose = new();
 
     private EntityQuery<StorageComponent> _storageQuery;
 
-    private readonly TimeSpan STUN_STORAGE = TimeSpan.FromSeconds(4);
+    private readonly TimeSpan _stunStorage = TimeSpan.FromSeconds(4);
+
     public override void Initialize()
     {
         _storageQuery = GetEntityQuery<StorageComponent>();
@@ -202,7 +204,7 @@ public sealed class RMCStorageSystem : EntitySystem
             return;
 
         if (!HasComp<NoStunOnExitComponent>(args.Container.Owner))
-            _stun.TryStun(ent, STUN_STORAGE, true);
+            _stun.TryStun(ent, _stunStorage, true);
     }
 
     private void OnNestedSkillRequiredInteractAttempt(Entity<StorageNestedOpenSkillRequiredComponent> ent, ref StorageInteractAttemptEvent args)
@@ -236,18 +238,7 @@ public sealed class RMCStorageSystem : EntitySystem
 
     private void OnEntityStorageClose(Entity<EntityStorageCloseOnMapInitComponent> ent, ref MapInitEvent args)
     {
-        if (_net.IsClient)
-            return;
-
-        var locked = _lock.IsLocked(ent.Owner);
-        if (locked)
-            _lock.Unlock(ent.Owner, null);
-
-        _entityStorage.OpenStorage(ent);
-        _entityStorage.CloseStorage(ent);
-
-        if (locked)
-            _lock.Lock(ent.Owner, null);
+        _toClose.Add(ent);
     }
 
     private void OnCloseOnMoveUIOpened(Entity<StorageCloseOnMoveComponent> ent, ref BoundUIOpenedEvent args)
@@ -290,7 +281,10 @@ public sealed class RMCStorageSystem : EntitySystem
 
         foreach (var limit in limited.Comp2.Limits)
         {
-            if (!_entityWhitelist.IsWhitelistPass(limit.Whitelist, toInsert))
+            if (!_entityWhitelist.IsWhitelistPassOrNull(limit.Whitelist, toInsert))
+                continue;
+
+            if (_entityWhitelist.IsBlacklistPass(limit.Blacklist, toInsert))
                 continue;
 
             var storedCount = 0;
@@ -299,7 +293,10 @@ public sealed class RMCStorageSystem : EntitySystem
                 if (stored == toInsert)
                     continue;
 
-                if (!_entityWhitelist.IsWhitelistPass(limit.Whitelist, stored))
+                if (!_entityWhitelist.IsWhitelistPassOrNull(limit.Whitelist, stored))
+                    continue;
+
+                if (_entityWhitelist.IsBlacklistPass(limit.Blacklist, stored))
                     continue;
 
                 storedCount++;
@@ -385,12 +382,38 @@ public sealed class RMCStorageSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
+        try
+        {
+            if (_net.IsServer)
+            {
+                foreach (var toClose in _toClose)
+                {
+                    var locked = _lock.IsLocked(toClose);
+                    if (locked)
+                        _lock.Unlock(toClose, null);
+
+                    _entityStorage.OpenStorage(toClose);
+                    _entityStorage.CloseStorage(toClose);
+
+                    if (locked)
+                        _lock.Lock(toClose, null);
+                }
+            }
+        }
+        finally
+        {
+            _toClose.Clear();
+        }
+
         var removeOnlyQuery = EntityQueryEnumerator<RemoveOnlyStorageComponent>();
-        while (removeOnlyQuery.MoveNext(out var uid, out _))
+        while (removeOnlyQuery.MoveNext(out var uid, out var comp))
         {
             if (TryComp(uid, out StorageComponent? storage))
             {
-                storage.Whitelist = new EntityWhitelist();
+                if (comp.Blacklist != null)
+                    storage.Blacklist = comp.Blacklist;
+
+                storage.Whitelist = comp.Whitelist;
                 Dirty(uid, storage);
             }
 

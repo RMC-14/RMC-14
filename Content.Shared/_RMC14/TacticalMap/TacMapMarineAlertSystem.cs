@@ -8,7 +8,6 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
-
 namespace Content.Shared._RMC14.TacticalMap;
 
 public sealed class TacMapMarineAlertSystem : EntitySystem
@@ -77,7 +76,6 @@ public sealed class TacMapMarineAlertSystem : EntitySystem
             return;
 
         var time = _timing.CurTime;
-
         if (_marineAlertQueue.Count > 0)
         {
             while (_marineAlertQueue.TryDequeue(out var ent))
@@ -93,7 +91,6 @@ public sealed class TacMapMarineAlertSystem : EntitySystem
         }
 
         var tacMapQuery = EntityQueryEnumerator<TacMapMarineAlertComponent>();
-
         while (tacMapQuery.MoveNext(out var uid, out var alert))
         {
             if (time < alert.NextUpdateTime)

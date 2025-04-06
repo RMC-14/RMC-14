@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: RMCSmallHost
   name: abstract small host
   abstract: true
@@ -522,3 +522,12 @@
     prototypes:
     - RMCMobGarry
 
+- type: entity
+  parent: SpawnMobMouse
+  id: RMCSpawnMobDoc
+  name: doc spawner
+  suffix: RMC
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCMobMouseDoc

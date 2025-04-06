@@ -40,7 +40,6 @@
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
     - type: SniperWhitelist
-    - type: AMRWhitelist
     - type: PyroWhitelist
   hidden: true
 
@@ -104,7 +103,6 @@
   - type: GrenadeSpecWhitelist
   - type: ScoutWhitelist
   - type: SniperWhitelist
-  - type: AMRWhitelist
   - type: PyroWhitelist
 
 - type: startingGear
@@ -114,11 +112,11 @@
     eyes: CMGlassesSecurity
     ears: CMHeadsetHighCommand
     jumpsuit: CMJumpsuitProvostMarshal
-    #    outerClothing: # TODO RMC14 provost marshal coat, with handcuffs and flash
+    outerClothing: RMCProvostCoatMarshalFilled
     gloves: CMHandsBlackMarine # TODO RMC14 black gloves
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostMarshal
-    belt: RMCMatebaBeltFilled
+    belt: RMCMatebaBeltLuxuriousFilled
     back: CMSatchelSecurityFilledProvostMarshal
     #    pocket1: # TODO RMC14 tape recorder
     pocket2: RMCPouchMagazinePistolFilledMateba # TODO RMC14 3 listening devices
@@ -137,6 +135,14 @@
   parent: CMIDCardGold # TODO RMC14 provost id
   id: RMCIDCardProvostMarshal
   name: provost marshal ID card
+  description: Issued to members of the Provost Office.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
   - type: PresetIdCard
     job: CMProvostMarshal

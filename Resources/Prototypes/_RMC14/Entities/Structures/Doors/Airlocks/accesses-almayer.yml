@@ -1,21 +1,14 @@
 # Req
 - type: entity
-  parent: CMAirlockEngineer
+  parent: CMAirlockPrep
   id: CMAirlockRequisitionsLocked
+  name: requisitions bay
   suffix: Requisitions, Locked
   components:
   - type: AccessReader
-    access: [ [ "CMAccessRequisitions" ] ]
+    access: [ ["CMAccessRequisitions"], ["CMAccessCommand"] ]
   - type: PaintableAirlock
     department: CMRequisitions
-
-- type: entity
-  parent: CMAirlockGlassEngineer
-  id: CMAirlockGlassRequisitionsLocked
-  suffix: Requisitions, Locked, Glass
-  components:
-  - type: AccessReader
-    access: [ [ "CMAccessRequisitions" ] ]
 
 - type: entity
   parent: CMAirlockMaint
@@ -23,7 +16,7 @@
   suffix: Requisitions, Locked, Maint
   components:
   - type: AccessReader
-    access: [ [ "CMAccessRequisitions" ] ]
+    access: [ [ "CMAccessRequisitions" ], ["CMAccessCommand"] ]
   - type: PaintableAirlock
     department: CMRequisitions
 
@@ -64,7 +57,7 @@
   suffix: Engineering, Locked
   components:
   - type: AccessReader
-    access: [ [ "CMAccessEngineering" ] ]
+    access: [ [ "CMAccessEngineering" ], ["CMAccessCommand"] ]
 
 - type: entity
   parent: CMAirlockGlassEngineer
@@ -72,7 +65,7 @@
   suffix: Engineering, Locked, Glass
   components:
   - type: AccessReader
-    access: [ [ "CMAccessEngineering" ] ]
+    access: [ [ "CMAccessEngineering" ], ["CMAccessCommand"] ]
 
 - type: entity
   parent: CMAirlockMaint
@@ -80,7 +73,7 @@
   suffix: Engineering, Locked, Maint
   components:
   - type: AccessReader
-    access: [ [ "CMAccessEngineering" ] ]
+    access: [ [ "CMAccessEngineering" ], ["CMAccessCommand"] ]
   - type: PaintableAirlock
     department: CMEngineering
 

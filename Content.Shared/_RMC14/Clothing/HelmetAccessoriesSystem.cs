@@ -48,14 +48,15 @@ public sealed class HelmetAccessoriesSystem : EntitySystem
         if (!_storageQuery.TryComp(ent.Owner, out var storage))
             return;
 
-        var layer = $"enum.{nameof(HelmetAccessoryLayers)}.{HelmetAccessoryLayers.Helmet}";
-
         // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
         if (storage.Container == null)
             return;
 
+        var index = 0;
         foreach (var item in storage.Container.ContainedEntities)
         {
+            var layer = $"enum.{nameof(HelmetAccessoryLayers)}.{HelmetAccessoryLayers.Helmet}{index}_{Name(ent.Owner)}";
+
             if (!_accessoryQuery.TryComp(item, out var accessoryComp))
                 continue;
 
@@ -65,6 +66,8 @@ public sealed class HelmetAccessoriesSystem : EntitySystem
                 State = accessoryComp.Rsi.RsiState,
                 Visible = true,
             }));
+
+            index++;
         }
     }
 }

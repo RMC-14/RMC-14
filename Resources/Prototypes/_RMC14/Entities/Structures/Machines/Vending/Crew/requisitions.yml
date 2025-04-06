@@ -55,8 +55,8 @@
       #  amount: 2
       - id: RMCCaseFlamer
         amount: 2
-      #- id: M79 Grenade Launcher
-      #  amount: 3
+      - id: RMCM79Case
+        amount: 3
       - id: RMCXM51Case
         amount: 3
     - name: Explosives
@@ -73,18 +73,18 @@
       #  amount: 4
       - id: CMGrenadeSmoke
         amount: 5
-      #- id: M74 AGM-Frag Airburst Grenade
-      #  amount: 4
-      #- id: M74 AGM-Incendiary Airburst Grenade
-      #  amount: 4
-      #- id: M74 AGM-Smoke Airburst Grenade
-      #  amount: 4
-      #- id: M74 AGM-Star Shell
-      #  amount: 2
-      #- id: M74 AGM-Hornet Shell
-      #  amount: 4
-      #- id: M40 HIRR Baton Slug
-      #  amount: 8
+      - id: RMC40MMGrenadeM74AGMF
+        amount: 4
+      - id: RMC40MMGrenadeM74AGMI
+        amount: 4
+      - id: RMC40MMGrenadeM74AGMS
+        amount: 4
+      - id: RMCStarShellM74AGMS
+        amount: 2
+      - id: RMCHornetShellM74AGMS
+        amount: 4
+      - id: RMCBatonSlugHIRR
+        amount: 8
       #- id: M40 MFHS Metal Foam Grenade
       #  amount: 6
       - id: RMCExplosivePlastic
@@ -105,6 +105,8 @@
         amount: 2
       - id: CMWebbingKnivesFilled
         amount: 1
+      - id: RMCOuterClothingExternalWebbing
+        amount: 2
     - name: Backpacks
       entries:
       - id: CMBackpackMarine
@@ -276,6 +278,36 @@
         box: CMGrenadeSmoke
         boxAmount: 3
         boxSlots: 3
+      - id: RMCPacketGrenadeM74AGMFFilled
+        name: M74AGM-F grenade packet
+        box: RMC40MMGrenadeM74AGMF
+        boxAmount: 3
+        boxSlots: 3
+      - id: RMCPacketGrenadeM74AGMIFilled
+        name: M74AGM-I grenade packet
+        box: RMC40MMGrenadeM74AGMI
+        boxAmount: 3
+        boxSlots: 3
+      - id: RMCPacketGrenadeM74AGMSFilled
+        name: M74AGM-S grenade packet
+        box: RMC40MMGrenadeM74AGMS
+        boxAmount: 3
+        boxSlots: 3
+      - id: RMCPacketGrenadeM74AGMSStarShellFilled
+        name: M74AGM-S Starshell grenade packet
+        box: RMCStarShellM74AGMS
+        boxAmount: 3
+        boxSlots: 3
+      - id: RMCPacketGrenadeM74AGMSHornetFilled
+        name: M74AGM-S Hornet grenade packet
+        box: RMCHornetShellM74AGMS
+        boxAmount: 3
+        boxSlots: 3
+      - id: RMCPacketGrenadeBatonSlugHIRRFilled
+        name: HIRR Baton Slug packet
+        box: RMCBatonSlugHIRR
+        boxAmount: 3
+        boxSlots: 3
 
 #AMMUNITION VENDOR
 
@@ -342,8 +374,8 @@
         amount: 16 # TODO RMC14 6 once heavy is in
       #- id: M4A3 HP Magazine (9mm)
       #  amount: 2
-      #- id: M54CE2 Holo Target Rounds (10x24mm)
-      #  amount: 2
+      - id: CMMagazineRifleM54CE2HT
+        amount: 2
       - id: RMCBox458SOCOM
         amount: 4
     - name: Restricted firearm ammunition
@@ -459,7 +491,33 @@
 #        box: CMMagazineSMGM63
 #      - name: Magazine Box (UT-Napthal Fuel x 8)
 #        box: CMMagazineSMGM63
-
+    - name: Ammunition Boxes
+      hasBoxes: true
+      entries:
+      - id: RMCBoxBulletsSMG
+        name: SMG HV ammunition box (10x20mm) (M63)
+        box: CMMagazineSMGM63
+        boxSlots: 13 # 600 / 48, yes we loose half a mag to the void
+      - id: RMCBoxBulletsSMGAP
+        name: SMG ammunition box (10x20mm AP) (M63)
+        box: CMMagazineSMGM63AP
+        boxSlots: 13 # 600 / 48, yes we loose half a mag to the void
+      - id: RMCBoxBulletsRifle
+        name: rifle ammunition box (10x24mm) (M4SPR)
+        box: CMMagazineRifleM4SPR
+        boxSlots: 24 # 600 / 25
+      - id: RMCBoxBulletsRifleAP
+        name: rifle ammunition box (10x24mm AP) (M4SPR)
+        box: CMMagazineRifleM4SPRAP
+        boxSlots: 24 # 600 / 25
+      - id: RMCBoxBulletsRifle
+        name: rifle ammunition box (10x24mm) (M54C)
+        box: CMMagazineRifleM54C
+        boxSlots: 15 # 600 / 40
+      - id: RMCBoxBulletsRifleAP
+        name: rifle ammunition box (10x24mm AP) (M54C)
+        box: CMMagazineRifleM54CAP
+        boxSlots: 15 # 600 / 40
  #ATTACHMENTS VENDOR
 
 - type: entity
@@ -615,6 +673,8 @@
         amount: 5
       - id: CMEncryptionKeyEcho
         amount: 5
+      - id: CMEncryptionKeyFoxtrot
+        amount: 5
       - id: CMEncryptionKeyEngineer
         amount: 5
       - id: CMEncryptionKeyIntel
@@ -639,3 +699,5 @@
       entries:
       - id: BedrollFolded
         amount: 30
+      - id: RMCM5CameraGear
+        amount: 3

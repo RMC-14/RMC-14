@@ -8,10 +8,10 @@
   - type: Item
     size: Normal
     storedRotation: 0
-  - type: Storage #hopefully in the future someone smarter than me can add storage(?) for integrated things like netting, HUD, etc. but for now this is for hiding snacks
+  - type: Storage
     maxItemSize: Tiny
     grid:
-    - 0,0,7,1 # 4 slots, 2 reserved for helmet accessories
+    - 0,0,7,1 # 4 slots, only 2 can fit useful items (meds, cigarettes)
     blacklist:
       tags:
       - Pouch
@@ -21,14 +21,10 @@
       count: 2
       whitelist:
         components:
-        - RMCLighter
         - RMCFlask
         - CMScalpel
         - Figurine
-        - Matchbox
         tags:
-        - CigPack
-        - Cigarette
 #       - TODO RMC14 cards
         - Slice
 #       - TODO RMC14 glasses (eyewear)
@@ -41,11 +37,8 @@
         - CMOintment
         - CMAutoInjector
         - PillPacket
-    - popup: rmc-storage-limit-accessories
-      count: 2
-      whitelist:
-        components:
-        - HelmetAccessory
+        - Syringe
+        - Pill
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
@@ -98,7 +91,8 @@
   abstract: true
   components:
   - type: CMArmor
-    armor: 20
+    melee: 20
+    bullet: 20
     explosionArmor: 10
   - type: RMCBulkyArmor
   - type: OverwatchCamera
@@ -128,33 +122,3 @@
     - HeadSide
     unfoldedHideLayers: []
   - type: HideLayerClothing
-
-# riot
-- type: entity
-  parent: [RMCHelmetBase, RMCFoldableHelmetBase]
-  id: ArmorHelmetRiot
-  name: riot helmet
-  description: It's a helmet specifically designed to protect against close range attacks. It covers your ears.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/riot.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/riot.rsi
-  - type: CMArmor
-    armor: 20 # 30 melee, 10 bullet
-    explosionArmor: 0
-  - type: CMHardArmor
-
-- type: entity
-  parent: ArmorHelmetRiot
-  id: ArmorHelmetRiotOld
-  description: BA scarred riot helmet covered in cobwebs. It still protects your ears.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/old_riot.rsi
-    layers:
-    - state: icon
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/old_riot.rsi
-    equipDelay: 2
-    unequipDelay: 2

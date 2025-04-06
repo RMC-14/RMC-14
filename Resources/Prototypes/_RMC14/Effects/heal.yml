@@ -1,4 +1,5 @@
 ﻿- type: entity
+  parent: RMCBaseEffect
   id: RMCEffectHeal
   categories: [ HideSpawnMenu ]
   components:

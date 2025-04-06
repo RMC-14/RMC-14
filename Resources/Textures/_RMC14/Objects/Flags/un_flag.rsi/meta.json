@@ -4,14 +4,14 @@
   "copyright": "Pole taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/plantable_flag.dmi and remade into UN by Github KittenColony / Discord kittencolony (297865728374210561)",
   "size": {
     "x": 64,
-    "y": 128
+    "y": 64
   },
   "states": [
     {
-      "name": "un_icon"
+      "name": "icon"
     },
     {
-      "name": "un_deploy",
+      "name": "deploy",
       "delays": [
         [
           0.5,
@@ -22,8 +22,27 @@
       ]
     },
     {
-      "name": "un_inhand_left",
+      "name": "inhand-left",
+      "directions": 4,
       "delays": [
+        [
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ],
+        [
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ],
+        [
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ],
         [
           0.5,
           0.5,
@@ -33,8 +52,27 @@
       ]
     },
     {
-      "name": "un_inhand_right",
+      "name": "inhand-right",
+      "directions": 4,
       "delays": [
+        [
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ],
+        [
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ],
+        [
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ],
         [
           0.5,
           0.5,

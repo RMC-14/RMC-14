@@ -77,6 +77,9 @@
     buildDelay: 2
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
+    - HiveEggMorpherXenoConstructionNode
+    - HiveClusterXenoConstructionNode
+    - HiveRecoveryNodeXenoConstructionNode
   - type: XenoEvolution
     canEvolveWithoutGranter: true
     max: 200
@@ -153,6 +156,18 @@
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
       visible: false
+    - map: [ "focused" ]
+      sprite: _RMC14/Interface/xeno_hud.rsi
+      state: hudeye
+      visible: false
+    - map: [ "targetedDirection" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_direction
+      visible: false
+    - map: [ "targetedDirectionIntense" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_intense_direction
+      visible: false
   - type: XenoFruitPlanterVisuals
     rsi: _RMC14/Mobs/Xenonids/Drone/gardener_drone.rsi
     prefix: gardener
@@ -207,6 +222,18 @@
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
       visible: false
+    - map: [ "focused" ]
+      sprite: _RMC14/Interface/xeno_hud.rsi
+      state: hudeye
+      visible: false
+    - map: [ "targetedDirection" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_direction
+      visible: false
+    - map: [ "targetedDirectionIntense" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_intense_direction
+      visible: false
   - type: RMCXenoDamageVisuals
     prefix: drone
   - type: Xeno
@@ -233,9 +260,14 @@
   - type: MeleeWeapon
     damage:
       groups:
-        Brute: 17
+        Brute: 17.5
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 25
   - type: XenoPheromones
     pheromonesMultiplier: 3
+    pheroSuffix: strong
   - type: XenoStrain
     name: rmc-xeno-healer-name
     description: rmc-xeno-healer-description
@@ -258,4 +290,3 @@
     gainAttackDowned: 0
   - type: XenoAcid
   - type: XenoSalveVisuals
-  #- type: XenoHealer

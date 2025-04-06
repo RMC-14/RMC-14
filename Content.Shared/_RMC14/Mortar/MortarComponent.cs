@@ -50,7 +50,10 @@ public sealed partial class MortarComponent : Component
     public int MaxDial = 10;
 
     [DataField, AutoNetworkedField]
-    public int MinimumRange = 10;
+    public int MinimumRange = 25;
+
+    [DataField, AutoNetworkedField]
+    public int MaximumRange = 75;
 
     [DataField, AutoNetworkedField]
     public string FixtureId = "mortar";
@@ -84,4 +87,7 @@ public sealed partial class MortarComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId Drop = "RMCMortarKit";
+
+    [DataField, AutoNetworkedField]
+    public int[] FireRandomOffset = new[] { -1, 0, 0, 1 };
 }

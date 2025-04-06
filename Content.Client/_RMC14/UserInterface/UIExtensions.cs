@@ -1,4 +1,5 @@
 ﻿using Content.Client.UserInterface.ControlExtensions;
+using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using static Robust.Client.UserInterface.Controls.FloatSpinBox;
 
@@ -20,5 +21,13 @@ public static class UIExtensions
         }
 
         return spinBox;
+    }
+
+    public static T CreatePopOutableWindow<T>(this BoundUserInterface bui) where T : RMCPopOutWindow, new()
+    {
+        var window = bui.CreateDisposableControl<T>();
+        window.SetBui(bui);
+        window.OpenCentered();
+        return window;
     }
 }

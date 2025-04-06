@@ -97,6 +97,8 @@
   - type: RMCDropshipBlocked
   - type: MinimapColor
     color: "#ebe5e5ee"
+  - type: IsRoof
+  - type: SunShadowCast
 
 - type: entity
   abstract: true
@@ -123,6 +125,7 @@
   - type: Corrodible
     isCorrodible: true
     structure: true
+    meltTimeMult: 3
   - type: Clickable
   - type: RMCWallExplosionDeletable
   - type: DestroyedByExplosionType
@@ -158,6 +161,9 @@
     - Turf
     - Xeno
   - type: ResinSurgeReinforcable
+  - type: Tag
+    tags:
+    - SpreaderIgnore
 
 # Invisible Wall
 

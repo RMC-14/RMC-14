@@ -1,0 +1,194 @@
+- type: entity
+  parent: CMWeaponPistolBase
+  id: RMCWeaponPistolCOD50WinterWyvern
+  name: vintage D50 Winter Wyvern
+  description: A bulky 50 caliber pistol with a serious kick. Hand crafted from the finest blacksteel with an ivory grip bolted together with gold studs. Very elegant.
+  components:
+  - type: Gun
+    shotsPerBurst: 2
+    availableModes:
+    - SemiAuto
+    - Burst
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_DE50.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    scatterWielded: 10
+    scatterUnwielded: 10
+    baseFireRate: 1.43
+    burstScatterMult: 5
+    modifiers:
+      Burst:
+        fireDelay: 0.2 #Suppoed to be 0.6 but it's two slow that way
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/d50winterwyvernvintage.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/d50winterwyvernvintage.rsi
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.0
+    accuracyMultiplierUnwielded: 0.75
+  - type: GunDamageModifier
+    multiplier: 1.4
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazinePistolD50WinterWyvernHI
+          - RMCMagazinePistolD50WinterWyvernHIAP
+        startingItem: RMCMagazinePistolD50WinterWyvernHI
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentLaserSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.75, 0.070
+      rmc-aslot-rail: 0.090, 0.125
+      rmc-aslot-underbarrel: 0.312, -0.25
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolD50WinterWyvernHI
+  name: D50 winter wyvern HI magazine (.50AE)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolD50WinterWyvernHI
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgePistolHI50AE
+    proto: RMCCartridgePistolHI50AE
+    capacity: 7
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/d50winterwyvern.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#00CDEA"
+
+- type: entity
+  id: RMCCartridgePistolHI50AE
+  name: cartridge (High Impact .50AE)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistolHI50AE
+  - type: CartridgeAmmo
+    proto: RMCBulletPistolHI50AE
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletPistolHI50AE
+  name: bullet (HI50AE)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 60
+  - type: CMArmorPiercing
+    amount: 5
+  - type: RMCStunOnHit
+    maxRange: 4.5
+    stunTime: 1
+  - type: RMCProjectileAccuracy
+    accuracy: 70
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolD50WinterWyvernHIAP
+  name: D50 winter wyvern HIAP Magazine (.50AE)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolD50WinterWyvernHIAP
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgePistolHIAP50AE
+    proto: RMCCartridgePistolHIAP50AE
+    capacity: 7
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/d50winterwyvern.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#1F951F"
+
+- type: entity
+  id: RMCCartridgePistolHIAP50AE
+  name: cartridge (High Impact Armor-Piercing .50AE)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistolHIAP50AE
+  - type: CartridgeAmmo
+    proto: RMCBulletPistolHIAP50AE
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletPistolHIAP50AE
+  name: bullet (HIAP50AE)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 45
+  - type: CMArmorPiercing
+    amount: 50
+  - type: RMCStunOnHit
+    maxRange: 4.5
+    stunTime: 1
+  - type: RMCProjectileAccuracy
+    accuracy: 70
+
+- type: Tag
+  id: RMCMagazinePistolD50WinterWyvernHI
+
+- type: Tag
+  id: RMCCartridgePistolHI50AE
+
+- type: Tag
+  id: RMCMagazinePistolD50WinterWyvernHIAP
+
+- type: Tag
+  id: RMCCartridgePistolHIAP50AE
