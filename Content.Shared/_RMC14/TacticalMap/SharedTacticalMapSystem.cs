@@ -59,7 +59,9 @@ public abstract class SharedTacticalMapSystem : EntitySystem
         else
         {
             // TODO RMC14: Find a better way to include non squad members (survivors, CO, ...).
-            if (computer.Comp.Group == "UNMC")
+            if (computer.Comp.Group == "ADMINISTRATOR")
+                computer.Comp.Blips = map.MarineBlips;
+            else if (computer.Comp.Group == "UNMC")
                 computer.Comp.Blips = map.MarineBlips.Where((a) => a.Value.Group == "" || a.Value.Group == computer.Comp.Group).ToDictionary();
             else
                 computer.Comp.Blips = map.MarineBlips.Where((a) => a.Value.Group == computer.Comp.Group).ToDictionary();

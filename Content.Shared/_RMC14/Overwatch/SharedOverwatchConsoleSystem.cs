@@ -564,11 +564,11 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         var query = EntityQueryEnumerator<SquadTeamComponent>();
         while (query.MoveNext(out var uid, out var team))
         {
-            if (team.Group != console.Group)
+            if (console.Group != "ADMINISTRATOR" && team.Group != console.Group)
                 continue;
 
             var netUid = GetNetEntity(uid);
-            var squad = new OverwatchSquad(netUid, Name(uid), team.Color, null, team.CanSupplyDrop);
+            var squad = new OverwatchSquad(netUid, Name(uid), team.Color, null, team.CanSupplyDrop, team.LeaderIcon);
             var members = marines.GetOrNew(netUid);
 
             foreach (var member in team.Members)

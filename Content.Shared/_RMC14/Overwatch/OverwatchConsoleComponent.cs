@@ -55,7 +55,4 @@ public sealed partial class OverwatchConsoleComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool CanOrbitalBombardment = true;
-
-    [DataField, AutoNetworkedField]
-    public SpriteSpecifier.Rsi LeaderIcon = new(new ResPath("_RMC14/Interface/cm_job_icons.rsi"), "hudsquad_leader_a");
 }

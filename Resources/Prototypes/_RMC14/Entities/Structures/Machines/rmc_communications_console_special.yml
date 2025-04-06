@@ -1,0 +1,57 @@
+# SPP
+- type: entity
+  parent: RMCOverwatchConsole
+  id: RMCOverwatchConsoleSPP
+  suffix: SPP
+  components:
+  - type: OverwatchConsole
+    canOrbitalBombardment: false
+    group: SPP
+  - type: TacticalMapComputer
+    group: SPP
+
+- type: entity
+  parent: RMCOverwatchConsoleSPP
+  id: RMCOverwatchConsoleSPPRotating
+  suffix: SPP, Rotating
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: false
+
+- type: entity
+  parent: RMCTacticalMapTable
+  id: RMCTacticalMapTableSPP
+  suffix: SPP
+  components:
+  - type: TacticalMapComputer
+    group: SPP
+
+# Admin
+- type: entity
+  parent: RMCOverwatchConsole
+  id: RMCOverwatchConsoleAdmin
+  suffix: Admin
+  components:
+  - type: OverwatchConsole
+    canOrbitalBombardment: false
+    group: ADMINISTRATOR
+  - type: TacticalMapComputer
+    group: ADMINISTRATOR
+
+- type: entity
+  parent: RMCOverwatchConsoleAdmin
+  id: RMCOverwatchConsoleAdminRotating
+  suffix: Admin, Rotating
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: false
+
+- type: entity
+  parent: RMCTacticalMapTable
+  id: RMCTacticalMapTableAdmin
+  suffix: Admin
+  components:
+  - type: TacticalMapComputer
+    group: ADMINISTRATOR

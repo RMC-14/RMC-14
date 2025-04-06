@@ -152,7 +152,7 @@ public sealed class OverwatchConsoleSendMessageBuiMsg(string message) : BoundUse
 }
 
 [Serializable, NetSerializable]
-public record struct OverwatchSquad(NetEntity Id, string Name, Color Color, NetEntity? Leader, bool CanSupplyDrop);
+public record struct OverwatchSquad(NetEntity Id, string Name, Color Color, NetEntity? Leader, bool CanSupplyDrop, SpriteSpecifier.Rsi LeaderIcon);
 
 [Serializable, NetSerializable]
 public readonly record struct OverwatchMarine(
