@@ -438,7 +438,7 @@
     RMCMagazineRifleM54CRubber: 40
     RMCMagazineRifleM4SPRRubber: 40
     CMArmorHelmetM10MP: 8
-    #RMCBreachingChargeRiot: 6
+    RMCExplosiveBreachingCharge: 6 #Replace with Riot Breaching Charges
     RMCSunglasses: 2 #Contraband - inherited from SecTech
     RMCBoxDonut: 2 #Contraband
 
