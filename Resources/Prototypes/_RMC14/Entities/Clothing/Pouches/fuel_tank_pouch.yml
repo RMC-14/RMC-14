@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
   id: RMCPouchFuelTank
   name: fuel tank strap pouch
@@ -26,6 +26,7 @@
 - type: entity
   parent: RMCPouchFuelTank
   id: RMCPouchFuelTankFilledExtinguisher
+  suffix: Extinguishers
   components:
   - type: StorageFill
     contents:
