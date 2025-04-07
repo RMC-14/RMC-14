@@ -2,3 +2,43 @@
   parent: CMIDCardStandardDogtag
   id: RMCIDSPP
   description: A soldier dog tag.
+
+- type: entity
+  parent: RMCIDSPP
+  id: RMCIDSPPRifleman
+  name: soldier's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCSPPRifleman
+
+- type: entity
+  parent: RMCIDSPP
+  id: RMCIDSPPSapper
+  name: sapper's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCSPPEngineer
+
+- type: entity
+  parent: RMCIDSPP
+  id: RMCIDSPPLeader
+  name: squad leader's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCSPPLeader
+
+- type: entity
+  parent: RMCIDSPP
+  id: RMCIDSPPSpecialist
+  name: specialist's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCSPPSpecialist
+
+- type: entity
+  parent: RMCIDSPP
+  id: RMCIDSPPMedic
+  name: medic's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCSPPMedic
