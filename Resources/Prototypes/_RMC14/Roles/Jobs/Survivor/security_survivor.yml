@@ -5,6 +5,10 @@
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
   ranks:
+    RMCRankCivilianSeniorOfficer:
+    - !type:RoleTimeRequirement
+      role: CMJobSurvivorSecurity
+      time: 252000 # 70 hours
     RMCRankCivilianOfficer: []
   startingGear: RMCGearSurvivorSecurity
   accessGroups:
