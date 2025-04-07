@@ -464,7 +464,8 @@ namespace Content.IntegrationTests.Tests
 
             var gameMaps = protoMan.EnumeratePrototypes<GameMapPrototype>()
                 .Where(x => !pair.IsTestPrototype(x))
-                .Where(x => x.MapPath.ToString().StartsWith("/Maps/_RMC14")) // RMC14
+                .Where(x => x.ID == PoolManager.TestMap // RMC14
+                    || x.MapPath.ToString().StartsWith("/Maps/_RMC14"))
                 .Select(x => x.ID)
                 .ToHashSet();
 
