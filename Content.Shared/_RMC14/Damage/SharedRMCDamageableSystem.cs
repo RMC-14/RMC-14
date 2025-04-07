@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Damage.Event;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Orders;
@@ -17,6 +18,9 @@ using Content.Shared.Inventory;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Components;
+using Content.Shared.Movement.Events;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Silicons.Borgs;
@@ -48,6 +52,9 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly SharedMoverController _mover = default!;
+    [Dependency] private readonly EntityManager _entities = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
@@ -572,6 +579,50 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
 
                 break;
             }
+        }
+
+        var damageOnStepQuery = EntityQueryEnumerator<DamageOnStepComponent>();
+        while (damageOnStepQuery.MoveNext(out var damagingEnt, out var damageOnStepComp))
+        {
+            if (time < damageOnStepComp.NextDamageAt)
+            {
+                continue;
+            }
+
+            var canidateEntities = _lookup.GetEntitiesIntersecting(damagingEnt);
+            List<EntityUid> validTargets = new();
+
+            foreach (var stepper in canidateEntities)
+            {
+                if (!TryComp(stepper, out InputMoverComponent? possibleMoverComp))
+                {
+                    continue;
+                }
+
+                var velocities = _mover.GetVelocityInput(possibleMoverComp);
+                if (velocities.Sprinting.IsLengthZero() && velocities.Sprinting.IsLengthZero())
+                {
+                    continue;
+                }
+
+                var ev = new ValidateDamageOnStepperEvent(_entities.GetNetEntity(damagingEnt), _entities.GetNetEntity(stepper));
+                RaiseLocalEvent(damagingEnt, ev);
+                RaiseLocalEvent(stepper, ev);
+                if (!ev.Cancelled)
+                {
+                    validTargets.Add(stepper);
+                }
+            }
+
+            if (validTargets.Count > 0)
+            {
+                foreach (var target in validTargets)
+                {
+                    _damageable.TryChangeDamage(target, damageOnStepComp.Damage);
+                }
+                damageOnStepComp.NextDamageAt = time + damageOnStepComp.Cooldown;
+            }
+
         }
     }
 }
