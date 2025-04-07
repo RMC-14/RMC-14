@@ -137,3 +137,21 @@
 
 - type: Tag
   id: RMCSquadIntel
+
+- type: entity
+  parent: SquadBase
+  id: SquadQuebec
+  name: Quebec
+  components:
+  - type: SquadTeam
+    color: "#36003B"
+    radio: MarineQuebec
+    accessLevels:
+    - CMAccessAlpha
+    - CMAccessBravo
+    - CMAccessCharlie
+    - CMAccessDelta
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_quebec
+    canSupplyDrop: false
