@@ -4,7 +4,7 @@
   parent: ColMarTechBaseAnchorable
   id: CMVendorWalkman
   name: Rec-Vend
-  description: Contains We-Ya approved recreational items, like Walkmans and Cards.
+  description: Contains Weston-Yamada approved recreational items, like Walkmans and Cards.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/walkman.rsi
@@ -12,14 +12,54 @@
     - state: "off"
     - state: "normal-unshaded"
   - type: CMAutomatedVendor
-    hackable: true
     sections:
-    - name: WalkMan
-      entries: []
-    - name: Cards
-      entries: []
-    #TODO RMC14 Walkman and music
-    - name: Other
+    #- name: Walkman TODO RMC14 Walkman and music
+    #  entries:
+    #  - id: Pop1
+    #    name: Blue Cassette
+    #    amount: 10
+    #  - id: HipHop
+    #    name: Blue Stripe Cassette
+    #    amount: 10
+    #  - id: Nam
+    #    name: Green Cassette
+    #    amount: 10
+    #  - id: Ocean
+    #    name: Ocean Cassette
+    #    amount: 10
+    #  - id: Pop3
+    #    name: Orange Cassette
+    #    amount: 10
+    #  - id: Pop4
+    #    name: Pink Cassette
+    #    amount: 10
+    #  - id: Pop2
+    #    name: Rainbow Cassette
+    #    amount: 10
+    #  - id: HeavyMetal
+    #    name: Red-Black Cassette
+    #    amount: 10
+    #  - id: HairMetal
+    #    name: Red Striped Cassette
+    #    amount: 10
+    #  - id: Indie
+    #    name: Rising Sun Cassette
+    #    amount: 10
+    #  - id: Walkman
+    #    name: Walkman
+    #    amount: 50
+    #  - id: Cassette Pouch
+    #    name: Cassette Pouch
+    #    amount: 15
+    #- name: Cards
+    #  entries:
+    #  - id: Cards
+    #    name: Deck of Cards
+    #    amount: 5
+    #  - id: UNO
+    #    name: Deck of UNO Cards
+    #    amount: 5
+    - name: Other #Should be removed once other rec-vend is mapped
       entries:
       - id: CMPaper
         amount: 15

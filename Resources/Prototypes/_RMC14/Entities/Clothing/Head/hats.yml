@@ -350,6 +350,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/cmo_cap.rsi
 
+- type: entity
+  parent: CMHeadCap
+  id: RMCHeadCapCorrespondent
+  name: combat correspondent cap
+  description: A faithful cap for any terrain war correspondents may find themselves in.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/correspondent_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/correspondent_cap.rsi
+
 # surgical caps
 - type: entity
   parent: CMHeadCap
@@ -525,3 +536,38 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/pvciberet.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/pvciberet.rsi
+
+# Misc Caps
+
+- type: entity
+  parent: CMHeadCap
+  id: RMCHeadCapFedoraTan
+  name: tan fedora
+  description: A classic tan fedora.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/tan.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/tan.rsi
+
+- type: entity
+  parent: CMHeadCap
+  id: RMCHeadCapFedoraBrown
+  name: brown fedora
+  description: A classic brown fedora.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/brown.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/brown.rsi
+
+- type: entity
+  parent: CMHeadCap
+  id: RMCHeadCapFedoraGrey
+  name: grey fedora
+  description: A classic grey fedora.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/grey.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/grey.rsi

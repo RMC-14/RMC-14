@@ -1,0 +1,382 @@
+# WEAPONS VENDOR
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechCommandingOfficerWeapon
+  name: ColMarTech Commanding Officer Weapon Rack
+  description: An automated weapons rack for the Commanding Officer. It features a robust selection of weaponry meant only for the UNMC's top officers.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessCO" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMCommandingOfficer
+    sections:
+    - name: Commander's Primary
+      takeOne: CMProtagGun
+      entries:
+      - id: WeaponRifleM59A
+        name: M59A Prototype Rifle
+        mandatory: true
+      - id: CMCOSmartGunOperatorEquipmentCaseBelt
+        name: ML66B Smart Gun
+        mandatory: true
+    - name: Primary Ammunition
+      entries:
+      - id: CMMagazineRifleM54CMK1
+        name: M54C MK1 Magazine
+        points: 30
+        recommended: true
+      - id: CMMagazineRifleM54CMK1AP
+        name: M54C MK1 AP Magazine
+        points: 40
+        recommended: true
+      - id: CMMagazineRifleM54CExt
+        name: M54C Extended Magazine
+        points: 20
+      - id: CMMagazineRifleM54CAP
+        name: M54C AP Magazine
+        points: 20
+      - id: RMCMagazineSmartGun
+        name: ML66A Smart Gun Drum
+        points: 20
+    - name: Commander's Secondary #TODO - move to lobby preferences menu
+      choices: { CMSecondary: 1 }
+      entries:
+      - id: RMCD50WinterWyvernBeltFilled
+        name: D50 Winter Wyvern
+      - id: RMCMatebaBeltFilled
+        name: Mateba Autorevolver
+    - name: Sidearm Ammunition
+      entries:
+      - id: RMCSpeedLoaderMatebaHighImpact
+        name: High Impact Mateba Speedloader (.454)
+        points: 15
+        recommended: true
+      - id: RMCSpeedLoaderMatebaHIAP
+        name: High Impact AP Mateba Speedloader (.454)
+        points: 20
+      - id: RMCMagazinePistolD50WinterWyvernHI
+        name: High Impact D50 Winter Wyvern Magazine (.50)
+        points: 15
+        recommended: true
+      - id: RMCMagazinePistolD50WinterWyvernHIAP
+        name: High Impact AP D50 Winter Wyvern Magazine (.50)
+        points: 20
+    - name: Shotgun Ammunition
+      entries:
+      - id: RMCBoxShotgunBuckshot
+        name: Buckshot Shells
+        points: 20
+      - id: RMCBoxShotgunSlugs
+        name: Shotgun Slugs
+        points: 20
+      - id: RMCBoxShotgunFlechette
+        name: Flechette Shells
+        points: 20
+    - name: Special Ammunition
+      entries:
+      - id: RMCMagazineRifleM54CIncendiary
+        name: M54C Incendiary Magazine
+        points: 65
+      #- id: M54C Rubber Magazine
+      #  name: M54C Rubber Shot Magazine
+      #  points: 10
+      - id: RMCBoxShotgunBeanbag
+        name: Beanbag Slugs
+        points: 10
+    - name: Explosives
+      entries:
+      - id: CMPacketGrenadeHighExplosiveFilled
+        name: HEDP Grenade Pack
+        points: 15
+      - id: CMPacketGrenadeFragFilled
+        name: HEFA Grenade Pack
+        points: 15
+      #- id: CMPacketGrenadesWPFilled # TODO RMC14 Port White Phosphorus (WP) Grenades
+      #  name: WP Grenade Pack
+      #  points: 15
+      #- id: G2 Electric Grenades
+      #  name: G2 Electroshock Grenade Packet (x3 grenades)
+      #  points: 15
+    - name: Rail Attachments
+      entries:
+      - id: RMCAttachmentS5RedDotSight
+        name: Red-Dot Sigh
+        points: 15
+      - id: RMCAttachmentS6ReflexSight
+        name: Reflex Sight
+        points: 15
+      - id: RMCAttachmentS42xTelescopicMiniscope
+        name: S4 2x Telescopic Mini-Scope
+        points: 15
+    - name: Helmet Visors # TODO RMC14 Port Helmet Visors
+      entries:
+      - id: RMCVisorNightVision
+        name: Night Vision Visor
+        points: 10
+        recommended: true
+      #- id: MedicalVisor
+      #  name: Medical Visor
+      #  points: 5
+      #- id: WeldingVisor
+      #  name: Welding Visor
+      #  points: 5
+    - name: Underbarrel Attachments
+      entries:
+      - id: RMCAttachmentLaserSight
+        name: Laser Sight
+        points: 15
+      - id: RMCAttachmentAngledGrip
+        name: Angled Grip
+        points: 15
+      - id: RMCAttachmentVerticalGrip
+        name: Vertical Grip
+        points: 15
+      - id: RMCAttachmentU7UnderbarrelShotgun
+        name: Underbarrel Shotgun
+        points: 15
+      - id: RMCAttachmentUnderbarrelExtinguisher
+        name: Underbarrel Extinguisher
+        points: 15
+      - id: RMCAttachmentMiniFlamethrower
+        name: Underbarrel Flamethrower
+        points: 15
+      - id: RMCAttachmentU1GrenadeLauncher
+        name: Underbarrel Grenade Launcher
+        points: 5
+    - name: Barrel Attachments
+      entries:
+      - id: RMCAttachmentExtendedBarrel
+        name: Extended Barrel
+        points: 15
+      - id: RMCAttachmentRecoilCompensator
+        name: Recoil Compensator
+        points: 15
+      - id: RMCAttachmentSuppressor
+        name: Suppressor
+        points: 15
+
+# EQUIPMENT VENDOR
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechCommandingOfficerEquipment
+  name: ColMarTech Commanding Officer Equipment Rack
+  description: An automated equipment vendor for the Commanding Officer. Contains a prime selection of equipment for only the UNMC's top officers.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessCO" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMCommandingOfficer
+    sections:
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: CMHeadsetSeniorCommand
+        name: Headset
+        mandatory: true
+      - id: CMMRE
+        name: MRE
+        mandatory: true
+    - name: Commanding Officer Essentials Kit
+      takeAll: CMBundle
+      entries:
+      - id: RMCCommandingOfficerEssentialsBundle
+        name: Commanding Officer Essentials Kit
+        mandatory: true
+    - name: Bags
+      choices: { CMBag: 1 }
+      entries:
+      - id: CMBackpackCommand
+        name: Commanding Officer Backpack
+        mandatory: true
+      #- id: CMSatchelCommandSecure # TODO RMC14 Secure Satchel (ID LOCK)
+      #  name: Secure Satchel
+      #  mandatory: true
+      - id: RMCBackpackRTO
+        name: RTO Telephone Pack
+        mandatory: true
+      - id: CMSatchelMarineIntel
+        name: Intel Expedition Pack
+        mandatory: true
+    - name: Armor
+      choices: { CMArmor: 1 }
+      entries:
+      - id: RMCArmorM3CO
+        name: Commanding Officer's M3 Armor
+        mandatory: true
+    - name: Combat Equipment
+      takeAll: CMCombatEquipment
+      entries:
+      - id: CMArmorHelmetM11CCO
+        name: M11C Helmet
+        mandatory: true
+      - id: CMHandsInsulated
+        name: Insulated Combat Gloves
+        mandatory: true
+      - id: CMBootsBlackFilled
+        name: Marine Combat Boots
+        mandatory: true
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBrown
+        name: Brown Webbing Vest
+        recommended: true
+      - id: CMWebbingBlack
+        name: Black Webbing Vest
+        recommended: true
+      - id: CMWebbingHolster
+        name: Shoulder Holster
+      - id: CMWebbing
+        name: Webbing
+      - id: RMCWebbingBlackSmall
+        name: Black Webbing
+      - id: CMWebbingPouch
+        name: Drop Pouch
+    - name: HUDs
+      choices: { CMHud: 1 }
+      entries:
+      - id: RMCGlassesMedicalHUDGlasses
+        name: Medical HUD Glasses
+        recommended: true
+      - id: CMGlassesSecurity
+        name: Security HUD Glasses
+    - name: Belts
+      choices: { CMBelt: 1 }
+      entries:
+      - id: RMCBeltUtilityGeneral
+        name: G8-A General Utility Pouch
+        recommended: true
+      - id: CMBeltSecurityMPFilled
+        name: Military Police Belt
+      - id: CMBeltMedicalFilled
+        name: M276 Medical Storage Rig (Full)
+        recommended: true
+      - id: CMBeltMedicBagFilled
+        name: M276 Lifesaver Bag (Full)
+      - id: CMBeltMarine
+        name: M276 Ammo Load Rig
+        recommended: true
+      - id: CMBeltUtilityCombat
+        name: M276 Holster Toolrig
+      #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
+      #  name: M276 M82F Holster Rig
+    - name: Pouches
+      choices: { CMPouch: 2 }
+      entries:
+      - id: RMCPouchFirstAidInjectors
+        name: First-Aid Pouch (Refillable Injectors)
+      - id: RMCPouchFirstAidSplintsGauzeOintment
+        name: First-Aid Pouch (Gauze, Ointment) # TODO RMC14 splints comma
+      - id: RMCPouchFirstAidPills
+        name: First-Aid Pouch (Pill Packets)
+        recommended: true
+      - id: RMCPouchMedkit
+        name: Medical Kit Pouch
+      - id: RMCPouchAutoinjectorFill
+        name: Autoinjector Pouch
+        recommended: true
+      - id: RMCPouchGeneralLarge
+        name: Large General Pouch
+      - id: RMCPouchMagazinePistolLarge
+        name: Large Pistol Magazine Pouch
+      - id: RMCPouchMagazineLarge
+        name: Large Magazine Pouch
+      - id: RMCPouchPistol
+        name: Sidearm Pouch
+      - id: RMCPouchShotgunLarge
+        name: Large Shotgun Shell Pouch
+      - id: RMCPouchToolsFill
+        name: Tools Pouch (Full)
+    - name: Mask
+      choices: { CMMask: 1 }
+      entries:
+      - id: CMMaskGas
+        name: Gas Mask
+      - id: CMMaskCoif
+        name: Heat Absorbent Coif
+      - id: RMCMaskRebreather
+        name: Rebreather
+    #- name: Patches (Discretionary)
+    #  entries:
+    #  - id: FallingFalconsShoulderPatch
+    #    name: Falling Falcons Shoulder Patch
+    #  - id: FallingFalconsUNShoulderPatch
+    #    name: Falling Falcons UN Shoulder Patch
+    #  - id: UNMCLargeChestPatch
+    #    name: UNMC Large Chest Patch
+    #  - id: UNMCShoulderPatch
+    #    name: UNMC Shoulder Patch
+    #  - id: UnitedNationsShoulderPatch
+    #    name: United Nations Shoulder patch
+    #  - id: UnitedNationsFlagShoulderPatch
+    #    name: United Nations Flag Shoulder patch
+    #  - id: FallingFalconsChallengeCoin
+    #    name: Falling Falcons Challenge Coin
+
+# CLOTHING VENDOR TODO From personal uniform vendor ingame
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechCommandingOfficerClothing
+  name: ColMarTech Commanding Officer Clothing Rack
+  description: An automated closet hooked up to a colossal storage of standard-issue dress uniform variants.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessCO" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMCommandingOfficer
+    sections:
+    - name: Utility
+      entries:
+      - id: CMJumpsuitBO
+      - id: CMJumpsuitCO
+      - id: CMJumpsuitOperations
+      - id: CMHeadCapCO
+      - id: CMHeadBeretCO
+      - id: CMBootsBlackFilled
+      - id: CMBootsBrown
+      - id: CMHandsBlackMarine
+      - id: CMHandsBrown
+    - name: Utility Extras
+      entries:
+      - id: RMCSunglasses
+      - id: RMCSunglassesBig
+      - id: RMCGlassesAviators
+      - id: RMCGlassesMarineRpg
+      - id: RMCGlassesMarineRpgOld
+    - name: Service
+      entries:
+      - id: CMJumpsuitCOService
+      - id: CMJumpsuitCOFormalWhite
+      - id: CMJumpsuitCOFormalBlack
+      - id: RMCCoatService
+      - id: CMCoatMP
+      - id: RMCShoesLaceup
+      - id: RMCShoesLaceupBrown # RMC Addition
+    - name: Service Headwear
+      entries:
+      - id: CMHeadBeretCO
+      - id: CMHeadBeretCOWhite
+      - id: CMHeadBeretCOBlack
+      - id: RMCHeadCapFlippable # TODO: Check this is the service variant. If so, parent and rename.
+    - name: Service Extras
+      entries:
+      - id: CMCoatCOBomber
+    # - name: Dress  # TODO: Check if this is locked to Council Members; this seems weird for a CO to be able to wear
+    #   entries:
+    # - name: Dress Headwear
+    # - name: Dress Extras

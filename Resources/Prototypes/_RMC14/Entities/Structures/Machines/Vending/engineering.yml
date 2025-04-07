@@ -1,10 +1,9 @@
-# ENGINEERING
+# TOOL VENDOR
 
-# Tools
 - type: entity
   parent: ColMarTechBaseAnchorable
   id: CMVendorTool
-  name: tool storage machine
+  name: Tool Storage Machine
   description: A large storage machine containing various tools and devices for general repair.
   components:
   - type: Sprite
@@ -16,60 +15,79 @@
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
       shader: unshaded
   - type: AccessReader
-    access: [["CMAccessCombatTechPrep"], ["CMAccessEngineering"], ["CMAccessColonyEngineering"]]
+    access: [["CMAccessEngineering"], ["CMAccessColonyEngineering"]]
   - type: CMAutomatedVendor
-    access:
-    - "CMAccessCombatTechPrep"
-    - "CMAccessEngineering"
-    - "CMAccessColonyEngineering"
     hackable: true
     sections:
     - name: Equipment
       entries:
-      - id: RMCFlashlight
-        amount: 4
-      - id: RMCHardhatBlue
-        amount: 4
+      - id: RMCFlashlight #Replace w/ Combat Flashlight
+        name: Flashlight
+        amount: 2
+      - id: RMCHardHat
+        name: Hardhat
+        amount: 2
       - id: CMHandsInsulated
-        amount: 4
+        name: Insulated Gloves
+        amount: 2
       - id: CMBeltUtility
-        amount: 4
-      - id: ClothingEyesGlassesMeson
-        amount: 4
+        name: Utility Tool Belt
+        amount: 2
+      #- id: RMCWeldingGoggles
+      #  amount: 2
       - id: ClothingHeadHatWelding
-        amount: 4
+        name: Welding Helmet
+        amount: 2
       - id: RMCEngineerKit
+        name: Engineer Kit
         amount: 2
     - name: Scanners
       entries:
-      #Atmos scanner
-      #Demo scanner
-      #Meson scanner
-      #Reagent scanner
+      #- id: RMCAtmosScanner
+      #  name: Atmos Scanner
+      #  amount: 2
+      #- id: RMCDemoScanner
+      #  name: Demolitions Scanner
+      #  amount: 1
+      #- id: RMCMesonScanner
+      #  name: Meson Scanner
+      #  amount: 2
+      #- id: RMCReagentScanner
+      #  name: Reagent Scanner
+      #  amount: 2
       - id: CMTRayScanner
+        name: T-Ray Scanner
         amount: 2
     - name: Tools
       entries:
       - id: CMWelder
+        name: Blowtorch
         amount: 4
       - id: CMCrowbar
+        name: Crowbar
         amount: 4
       - id: CMWelderSmall
+        name: ME3 Hand Welder
         amount: 2
       - id: CMScrewdriver
+        name: Screwdriver
         amount: 4
       - id: CMWirecutter
+        name: Wirecutters
         amount: 4
       - id: CMWrench
+        name: Wrench
         amount: 4
       - id: CMLightReplacer
+        name: Light Replacer
         amount: 4
 
-# Circuits
+# CIRCUITS VENDOR
+
 - type: entity
   parent: CMVendorTool
   id: CMVendorCircuits
-  name: circuit board vendor
+  name: Circuit Board Vendor
   description: A safe storage for pre-programmed circuit boards, it has an internal gyroscope to keep any external force from moving the boards, thick insulation and a custom 2.1mm UPS port for charging various We-Ya exclusive devices (sold separately).
   components:
   - type: Sprite
@@ -79,40 +97,64 @@
     sections:
     - name: Circuitboards
       entries:
-      - id: FireAlarmElectronics
-        amount: 5
+      #- id: RMCFireAlarmElectronics
+      #  name: Fire Alarm
+      #  amount: 5
       - id: CMAPCElectronics
+        name: APC
         amount: 6
-#      - id: CMAutolatheMachineCircuitboard
-#        amount: 2 # TODO RMC14
-      - id: TelecomServerCircuitboard
-        amount: 1
-      - id: CrewMonitoringComputerCircuitboard
-        amount: 2
-      - id: IDComputerCircuitboard
-        amount: 2
-      - id: StationRecordsComputerCircuitboard
-        amount: 2
-#     - id: Supply ordering console
-#     - id: Reserach data terminal
-#     - id: CMPortableGeneratorPacmanMachineCircuitBoard
-#       amount: 5
-      - id: CMSMESMachineCircuitboard
-        amount: 2
-#     - id: Air alarm
-#     - id: security camera monitor
-      - id: RMCCircuitboardTelevision
-        amount: 4
-#     - id: station alerts
-#     - id: arcade
-#     - id: atmospheric monitor
+      #- id: CMAutolatheMachineCircuitboard
+      #  name: Autolathe
+      #  amount: 2 # TODO RMC14
+      #- id: CommsBoard
+      #  name: TC-4T Telecommunications
+      #  amount: 1
+      #- id: CrewMonitorBoard
+      #  name: Crew Monitoring Computer
+      #  amount: 2
+      #- id: IDCompBoard
+      #  name: ID Computer
+      #  amount: 2
+      #- id: SecRecordBoard
+      #  name: Security Records
+      #  amount: 2
+      #- id: SupplyBoard
+      #  name: Supply Ordering Console
+      #  amount: 2
+      #- id: ResearchBoard
+      #  name: Research Data Terminal
+      #  amount: 2
+      #- id: PACMANBoard
+      #  name: P.A.C.M.A.N. Generator
+      #  amount: 1
+      #- id: GhettoSMESBoard
+      #  name: Auxiliary Power Storage Unit
+      #  amount: 2
+      #- id: AirAlarmBoard
+      #  name: Air Alarm Electronics
+      #  amount: 2
+      #- id: CameraBoard
+      #  name: Security Camera Monitor
+      #  amount: 2
+      #- id: TVBoard
+      #  name: Television Set
+      #  amount: 4
+      #- id: AlertBoard
+      #  name: Station Alerts
+      #  amount: 2
+      #- id: ArcadeBoard
+      #  name: Arcade
+      #  amount: 2
+      #- id: AtmosBoard
+      #  name: Atmospheric Monitor
+      #  amount: 2
 
+# ELECTRONICS VENDOR
 
-# Electronics
 - type: entity
   parent: CMVendorTool
   id: CMVendorElectronics
-  name: electronics vendor
+  name: Electronics Vendor
   description: Spare tool vendor. What? Did you expect some witty description?
   components:
   - type: Sprite
@@ -123,28 +165,34 @@
     - name: Tools
       entries:
       - id: RMCCableCoil
-        amount: 6
+        name: Cable Coil
+        amount: 3
       - id: CMMultitool
-        amount: 6
+        name: Multitool
+        amount: 2
     - name: Circuitboards
       entries:
       - id: DoorElectronics
-        amount: 8
+        name: Airlock Circuit Board
+        amount: 4
       - id: CMAPCElectronics
-        amount: 8
+        name: APC Circuit Board
+        amount: 4
     - name: Batteries
       entries:
       - id: RMCPowerCellHigh
-        amount: 6
+        name: High-Capacity Power Cell
+        amount: 3
       - id: RMCPowerCell
-        amount: 14
+        name: Low-Capacity Power Cell
+        amount: 7
 
+# COMPONENT VENDOR
 
-# Components
 - type: entity
   parent: CMVendorTool
   id: CMVendorComponent
-  name: component storage machine
+  name: Component Storage Machine
   description: A large storage machine containing various components.
   components:
   - type: Sprite
@@ -155,31 +203,51 @@
     - name: Assembly Components
       entries:
       - id: Igniter
+        name: Igniter
         amount: 8
       - id: TimerTrigger
+        name: Timer
         amount: 4
       - id: ProximitySensor
+        name: Proximity Sensor
         amount: 4
       - id: RemoteSignaller
+        name: Signaller
         amount: 4
-    - name: Container
+    - name: Containers
       entries:
       - id: RMCBucket
+        name: Bucket
         amount: 6
       - id: CMBucketMop
+        name: Mop Bucket
         amount: 2
     - name: Stock Parts
       entries:
+      - id: CMStockPartScreen
+        name: Console Screen
+        amount: 4
       - id: CMStockPartMatterBin
-        amount: 8
+        name: Matter Bin
+        amount: 4
+      - id: CMStockPartMicroLaser
+        name: Micro Laser
+        amount: 4
       - id: CMStockPartManipulatorMicro
-        amount: 8
+        name: Micro Manipulator
+        amount: 4
+      - id: CMStockPartScanningModule
+        name: Scanning Module
+        amount: 4
       - id: CMStockPartCapacitor
-        amount: 8
+        name: Capacitor
+        amount: 3
     #TODO Console screen, scanning module
 
+# COLONY-SPECIFIC VENDORS
 
-# Science
+# SCIENCE VENDOR
+
 - type: entity
   parent: ColMarTechBaseAnchorable
   id: CMVendorScience
@@ -204,24 +272,34 @@
     - name: Equipment
       entries:
       - id: ClothingHeadHatHoodBioScientist
+        name: Bio Hood
         amount: 2
       - id: ClothingOuterBioScientist
+        name: Bio Suit
         amount: 2
       - id: CMJumpsuitResearch
+        name: Scientist's Jumpsuit
         amount: 2
     - name: Assembly Components
       entries:
       - id: Igniter
+        name: Igniter
         amount: 8
       - id: ProximitySensor
+        name: Proximity Sensor
         amount: 4
       - id: RemoteSignaller
+        name: Signaller
         amount: 4
-      # Tank transfer valve
-      # Timer
+      #- id: TTV
+      #  name: Tank Transfer Valve
+      #  amount: 4
+      - id: TimerTrigger
+        name: Timer
+        amount: 4
 
+# ROBOTICS VENDOR
 
-# Robotics
 - type: entity
   parent: CMVendorScience
   id: CMVendorRobotics
@@ -233,35 +311,51 @@
     sections:
     - name: Equipment
       entries:
-      # Labcoat
-      - id: CMMaskGasMedical
+      - id: RMCLabcoat
+        name: Labcoat
         amount: 2
-      # Roboticist Jumpsuit
+      - id: CMMaskGasMedical
+        name: Medical Mask
+        amount: 2
+      #- id: RoboticsJumpsuit
+      #  name: Roboticist's Jumpsuit
+      #  amount: 2
     - name: Tools
       entries:
       - id: RMCCableCoil
+        name: Cable Coil
         amount: 4
       - id: SawElectric
+        name: Circular Saw
         amount: 2
       - id: CMCrowbar
+        name: Crowbar
         amount: 2
       - id: CMScalpel
+        name: Scalpel
         amount: 2
       - id: CMScrewdriver
+        name: Screwdriver
         amount: 2
     - name: Assembly Components
       entries:
       - id: CMFlash
+        name: Flash
         amount: 4
       - id: RMCPowerCellHigh
+        name: High-Capacity Power Cell
         amount: 4
       - id: ProximitySensor
+        name: Proximity Sensor
         amount: 4
       - id: RemoteSignaller
+        name: Signaller
         amount: 4
     - name: Miscellaneous
       entries:
       - id: NitrousOxideTankFilled
+        name: Anesthetic Tank
         amount: 2
       - id: CMHealthAnalyzer
+        name: Health Analyzer
         amount: 2

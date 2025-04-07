@@ -1,0 +1,231 @@
+# EQUIPMENT VENDOR
+
+# MILITARY POLICE
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechMilitaryPoliceEquipment
+  name: ColMarTech Military Police Equipment Rack
+  description: An automated rack hooked up to a colossal storage of Military Police standard-issue equipment.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessBrig" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMMilitaryPolice
+    sections:
+    - name: Police Set (Mandatory)
+      takeAll: RMCMPSet
+      entries:
+      - id: RMCVendorBundleMilitaryPoliceApparel
+        name: Essential Police Set
+        mandatory: true
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: CMHandsBlackMarine
+        name: Gloves
+        mandatory: true
+      - id: CMJumpsuitMP
+        name: Uniform
+        mandatory: true
+      - id: CMHeadsetMPO
+        name: Headset
+        mandatory: true
+      - id: CMBootsBlackFilled
+        name: Marine Combat Boots
+        mandatory: true
+    - name: Armor
+      takeAll: CMArmor
+      entries:
+      - id: CMArmorM2MP
+        name: Military Police M2 Armor
+        mandatory: true
+      - id: CMHeadBeretRed
+        name: MP Beret
+        mandatory: true
+    - name: Handgun Case
+      choices: { CMGunCase: 1 }
+      entries:
+      - id: RMCGunCasePistolM77
+        name: M77 Combat Pistol Case
+        mandatory: true
+      - id: RMCGunCasePistolM44
+        name: M44 Combat Revolver Case
+        mandatory: true
+      - id: RMCGunCasePistolM1984
+        name: M1984 Service Pistol Case
+        mandatory: true
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: CMSatchelSecurity
+        name: Military Police Satchel
+        mandatory: true
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries:
+      - id: RMCBeltHolsterPistol
+        name: M276 General Pistol Holster Rig
+      - id: RMCBeltHolsterRevolver
+        name: M276 General Revolver Holster Rig
+      - id: RMCBeltUtilityGeneral
+        name: M276 G8-A General Utility Pouch
+    - name: Pouches
+      choices: { RMCPouch: 2 }
+      entries:
+      - id: RMCPouchGeneralMedium
+        name: Medium General Pouch
+      - id: RMCPouchFirstAidInjectors
+        name: First-Aid Pouch (Refillable Injectors)
+        recommended: true
+      - id: RMCPouchFirstAidSplintsGauzeOintment
+        name: First-Aid Pouch (Gauze, Ointment) # TODO RMC14 splints comma
+        recommended: true
+      - id: RMCPouchFirstAidPills
+        name: First-Aid Pouch (Pill Packets)
+        recommended: true
+      - id: RMCPouchMagazinePistol
+        name: Pistol Magazine Pouch
+      - id: RMCPouchPistol
+        name: Pistol Pouch
+    - name: Mask
+      choices: { CMMask: 1 }
+      entries:
+      - id: CMMaskGas
+        name: Gas Mask
+      - id: CMMaskCoif
+        name: Heat Absorbent Coif
+      - id: RMCMaskRebreather
+        name: Rebreather
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBrown
+        name: Brown Webbing Vest
+        recommended: true
+      - id: CMWebbingBlack
+        name: Black Webbing Vest
+      - id: CMWebbingHolster
+        name: Shoulder Holster
+      - id: CMWebbing
+        name: Webbing
+      - id: RMCWebbingBlackSmall
+        name: Black Webbing
+
+# WARDEN
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechWardenEquipment
+  name: ColMarTech Military Warden Equipment Rack
+  description: An automated rack hooked up to a colossal storage of Military Police standard-issue equipment.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessArmory" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMMilitaryWarden
+    sections:
+    - name: Police Set (Mandatory)
+      takeAll: RMCMPSet
+      entries:
+      - id: RMCVendorBundleMilitaryPoliceApparel
+        name: Essential Police Set
+        mandatory: true
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: CMHandsBlackMarine
+        name: Gloves
+        mandatory: true
+      - id: CMJumpsuitWarden
+        name: Warden Uniform
+        mandatory: true
+      - id: RMCHeadsetMW
+        name: Headset
+        mandatory: true
+      - id: CMBootsBlackFilled
+        name: Marine Combat Boots
+        mandatory: true
+    - name: Armor
+      takeAll: CMArmor
+      entries:
+      - id: CMArmorM3Warden
+        name: Military Warden M3 Armor
+        mandatory: true
+      - id: CMHeadCapWarden
+        name: Warden Peaked Cap
+        mandatory: true
+    - name: Handgun Case
+      choices: { CMGunCase: 1 }
+      entries:
+      - id: RMCGunCasePistolM77
+        name: M77 Combat Pistol Case
+        mandatory: true
+      - id: RMCGunCasePistolM44
+        name: M44 Combat Revolver Case
+        mandatory: true
+      - id: RMCGunCasePistolM1984
+        name: M1984 Service Pistol Case
+        mandatory: true
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: CMSatchelSecurity
+        name: Military Police Satchel
+        mandatory: true
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries:
+      - id: RMCBeltHolsterPistol
+        name: M276 General Pistol Holster Rig
+      - id: RMCBeltHolsterRevolver
+        name: M276 General Revolver Holster Rig
+      - id: RMCBeltUtilityGeneral
+        name: M276 G8-A General Utility Pouch
+    - name: Pouches
+      choices: { RMCPouch: 2 }
+      entries:
+      - id: RMCPouchGeneralMedium
+        name: Medium General Pouch
+      - id: RMCPouchFirstAidInjectors
+        name: First-Aid Pouch (Refillable Injectors)
+        recommended: true
+      - id: RMCPouchFirstAidSplintsGauzeOintment
+        name: First-Aid Pouch (Gauze, Ointment) # TODO RMC14 splints comma
+        recommended: true
+      - id: RMCPouchFirstAidPills
+        name: First-Aid Pouch (Pill Packets)
+        recommended: true
+      - id: RMCPouchMagazinePistol
+        name: Pistol Magazine Pouch
+      - id: RMCPouchPistol
+        name: Pistol Pouch
+    - name: Mask
+      choices: { CMMask: 1 }
+      entries:
+      - id: CMMaskGas
+        name: Gas Mask
+      - id: CMMaskCoif
+        name: Heat Absorbent Coif
+      - id: RMCMaskRebreather
+        name: Rebreather
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBrown
+        name: Brown Webbing Vest
+        recommended: true
+      - id: CMWebbingBlack
+        name: Black Webbing Vest
+      - id: CMWebbingHolster
+        name: Shoulder Holster
+      - id: CMWebbing
+        name: Webbing
