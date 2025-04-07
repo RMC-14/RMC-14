@@ -417,4 +417,10 @@ public sealed class RMCCVars : CVars
 
     public static readonly CVarDef<float> RMCOverwatchConsoleUpdateEverySeconds =
         CVarDef.Create("rmc.overwatch_console_update_every_seconds", 0.5f, CVar.REPLICATED | CVar.SERVER);
+
+    /// <summary>
+    /// Whether this client uses alternate non-phobia inducing sprites
+    /// </summary>
+    public static readonly CVarDef<bool> RMCUseAlternateSprites =
+        CVarDef.Create("rmc.use_alternate_sprites", false, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
 }

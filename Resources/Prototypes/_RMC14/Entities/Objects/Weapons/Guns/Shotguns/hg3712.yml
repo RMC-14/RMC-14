@@ -1,6 +1,6 @@
 ﻿- type: entity
   parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
-  name: HG 37-12
+  name: HG 37-12 pump shotgun
   id: RMCWeaponShotgunHG3712
   description: A eight-round pump action shotgun with four-round capacity dual internal tube magazines allowing for quick reloading and highly accurate fire. Used exclusively by Colony Marshals. You can switch the active internal magazine by toggling the shotgun tube.
   components:
@@ -26,6 +26,7 @@
     baseFireRate: 0.625
     burstScatterMult: 5
   - type: BallisticAmmoProvider
+    proto: CMShellShotgunBuckshot1
     whitelist:
       tags:
       - RMCShellShotgunBuckshot

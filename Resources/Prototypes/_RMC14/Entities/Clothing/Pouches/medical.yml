@@ -121,7 +121,9 @@
   - type: StorageFill
     contents:
     - id: CMHealthAnalyzer
-    # todo rmc14 roller cryobag
+    - id: CMRollerBedSpawnFolded
+    - id: CMFireExtinguisherPortable
+    - id: CMStasisBagFolded
 
 
 # Vial Pouch
@@ -242,7 +244,6 @@
     contents:
     - id: CMSyringe
       amount: 6
-
 
 # MedKit Pouch
 - type: entity

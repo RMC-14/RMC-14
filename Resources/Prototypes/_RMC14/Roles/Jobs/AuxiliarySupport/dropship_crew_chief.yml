@@ -54,6 +54,13 @@
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-dcc
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: dcc
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_shipside
   hidden: false
 
 - type: startingGear

@@ -8,11 +8,11 @@
   - !type:DepartmentTimeRequirement
     department: CMSquad
     time: 18000 # 5 hours
-  - !type:TotalJobsTimeRequirement
-    group: CMJobsEngineering
+  - !type:RoleTimeRequirement
+    role: CMJobCombatTech
     time: 18000 # 5 hours
-  - !type:TotalJobsTimeRequirement
-    group: CMJobsMedical
+  - !type:RoleTimeRequirement
+    role: CMJobHospitalCorpsman
     time: 18000 # 5 hours
   ranks:
     RMCRankCivilian: []
@@ -29,8 +29,8 @@
       skills:
         RMCSkillConstruction: 1
         RMCSkillEndurance: 2
-        RMCSkillFirearms: 1
         RMCSkillFireman: 1
+        RMCSkillFirearms: 1
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetCivilian
     - type: RMCSurvivor
@@ -38,6 +38,7 @@
     - type: UserIFF
       faction: FactionSurvivor
     - type: IntelRescueSurvivorObjective
+  greeting: rmc-job-greeting-survivor
   hasIcon: false
 
 - type: startingGear
@@ -77,3 +78,28 @@
 - type: playTimeTracker
   id: CMJobSurvivor
   isHumanoid: true
+
+- type: entity
+  id: RMCSurvivorPresetCivilian
+  name: civilian survivor preset
+  components:
+  - type: SurvivorPreset
+    randomGear:
+    - [ RMCGrenadeMolotov ]
+    - [ CMPackFlare ]
+    - [ WeaponNailgun ]
+    - [ RMCFireAxe ]
+    - [ CMWelder ] # TODO RMC14 industrial welder
+    - [ CMAdvFirstAidKitFilled ]
+    randomWeapon:
+    - [ RMCWeaponPistolB92FS, RMCMagazinePistolB92FS ]
+    - [ RMCWeaponRevolverSpearhead, RMCSpeedLoader357Hollowpoint ]
+    - [ RMCWeaponPistolMK45, RMCMagazinePistolMK45 ]
+    - [ CMWeaponPistolM1984, CMMagazinePistolM1984 ]
+    # TODO RMC14 S&W .38 model 37 revolver
+    primaryWeapons:
+    - [ CMBeltMarineHunting, RMCWeaponBoltActionRifle ]
+    #    - [ CMBeltMarineHunting, RMCWeaponBoltActionRifle ] # TODO RMC14 uzi
+    - [ CMBeltMarineBuckshot, RMCWeaponShotgunHG3712 ]
+    - [ CMBeltMarineAR10, WeaponRifleAR10 ]
+    primaryWeaponChance: 0.6

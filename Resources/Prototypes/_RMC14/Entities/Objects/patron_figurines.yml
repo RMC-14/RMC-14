@@ -414,7 +414,7 @@
     color: green
 
 - type: entity
-  parent: RMCBaseFigurinePatron
+  parent: [ RMCBaseFigurinePatron, CMCanteenBase ]
   id: RMCFigurinePatronNesartOnan
   name: Nesart Onan figurine
   description: "Blood loss is no joke! Come get some gauze from your local medbay today!"
@@ -430,6 +430,19 @@
     solutions:
       drink:
         maxVol: 30
+        reagents:
+        - ReagentId: IceCream
+          Quantity: 30
+  - type: SolutionTransfer
+    transferAmount: 30
+    maxTransferAmount: 30
+    canChangeTransferAmount: true
+    transferAmounts:
+    - 5
+    - 10
+    - 15
+    - 25
+    - 30
   - type: Damageable
     damageContainer: Inorganic
   - type: Destructible
@@ -1249,3 +1262,13 @@
       params:
         volume: 5
         maxDistance: 1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronFast-pawsChip
+  name: Fast-paws Chip figurine
+  components:
+  - type: Sprite
+    state: fast-paws_chip
+  - type: PatronFigurine
+    id: c5f5b62a-5206-4948-9745-e4d9bbb87764

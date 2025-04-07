@@ -156,6 +156,28 @@ public sealed class AreaSystem : EntitySystem
         return area.Value.Comp.AvoidBioscan;
     }
 
+    public bool IsWeatherEnabled(Entity<MapGridComponent> grid, Vector2i indices)
+    {
+        if (!TryGetArea(grid, indices, out var area, out _))
+            return false;
+
+        if (IsRoofed(new EntityCoordinates(grid.Owner, indices), r => !r.Comp.CanMortar))
+            return false;
+
+        return area.Value.Comp.WeatherEnabled;
+    }
+
+    public bool IsLightBlocked(Entity<MapGridComponent> grid, Vector2i indices)
+    {
+        if (!TryGetArea(grid, indices, out var area, out _))
+            return false;
+
+        if (IsRoofed(new EntityCoordinates(grid.Owner, indices), r => !r.Comp.CanMortar))
+            return true;
+
+        return !area.Value.Comp.WeatherEnabled;
+    }
+
     public bool CanCAS(EntityCoordinates coordinates)
     {
         if (!TryGetArea(coordinates, out var area, out _))

@@ -126,6 +126,9 @@ entities:
     - type: MovedGrids
     - type: Broadphase
     - type: OccluderTree
+    - type: MapLight
+    - type: Roof
+      data: {}
     - type: LoadedMap
     - type: MapGrid
       chunks:
