@@ -10,8 +10,8 @@ namespace Content.Shared._RMC14.Explosion;
 public sealed partial class MobGibbedByExplosionTypeComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public ProtoId<ExplosionPrototype>[] Explosions = ["RMCOB", "RMCOBXenoTunnel"];
+    public ProtoId<ExplosionPrototype>[] Explosions = ["RMCOB", "RMCOBXenoTunnel", "RMC"];
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 Threshold = 600;
+    public FixedPoint2 Threshold = 200;
 }
