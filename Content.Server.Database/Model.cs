@@ -76,6 +76,10 @@ namespace Content.Server.Database
                 .HasDefaultValue(true);
 
             modelBuilder.Entity<Profile>()
+                .Property(p => p.QueenName)
+                .HasDefaultValue(true);
+
+            modelBuilder.Entity<Profile>()
                 .Property(p => p.XenoPrefix)
                 .HasDefaultValue(string.Empty);
 
@@ -535,6 +539,7 @@ namespace Content.Server.Database
         public RMCSquadPreference? SquadPreference { get; set; }
         public string ArmorPreference { get; set; } = null!;
         public bool PlaytimePerks { get; set; } = true;
+        public bool QueenName { get; set; } = true;
         public string XenoPrefix { get; set; } = string.Empty;
         public string XenoPostfix { get; set; } = string.Empty;
     }
