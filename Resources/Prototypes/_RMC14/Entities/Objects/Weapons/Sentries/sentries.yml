@@ -267,6 +267,18 @@
     upgrades: null
 
 - type: entity
+  parent: RMCSentryMini
+  id: RMCSentryMiniWeYa
+  name: WeYa 512-M mini sentry
+  description: A compact version of the UNMC defenses. Designed for quick deployment of the associated type in the field. This one has been modified for use by the mercenaries employed by Weston-Yamada.
+  components:
+  - type: NpcFactionMember
+    factions:
+    - WeYa
+  - type: UserIFF
+    faction: FactionWeYa
+
+- type: entity
   parent: RMCSentry
   id: RMCSentrySniper
   name: UN 725-D sniper sentry

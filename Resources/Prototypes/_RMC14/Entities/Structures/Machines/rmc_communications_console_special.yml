@@ -56,22 +56,27 @@
   - type: TacticalMapComputer
     group: ADMINISTRATOR
 
-# PMC
+# WeYa
 - type: entity
   parent: RMCOverwatchConsole
-  id: RMCOverwatchConsolePMC
-  suffix: PMC
+  id: RMCOverwatchConsoleWeYa
+  suffix: WeYa
   components:
   - type: OverwatchConsole
     canOrbitalBombardment: false
-    group: PMC
+    group: WeYa
   - type: TacticalMapComputer
-    group: PMC
+    group: WeYa
+  - type: AccessReader
+    access: [ [ "RMCAccessWeYa" ] ]
+  - type: RequiresSkill
+    skills:
+      RMCSkillOverwatch: 0 # So that CL may use it.
 
 - type: entity
-  parent: RMCOverwatchConsolePMC
-  id: RMCOverwatchConsolePMCRotating
-  suffix: PMC, Rotating
+  parent: RMCOverwatchConsoleWeYa
+  id: RMCOverwatchConsoleWeYaRotating
+  suffix: WeYa, Rotating
   components:
   - type: Sprite
     overrideDir: South
@@ -79,8 +84,10 @@
 
 - type: entity
   parent: RMCTacticalMapTable
-  id: RMCTacticalMapTablePMC
-  suffix: PMC
+  id: RMCTacticalMapTableWeYa
+  suffix: WeYa
   components:
   - type: TacticalMapComputer
-    group: PMC
+    group: WeYa
+  - type: AccessReader
+    access: [ [ "RMCAccessWeYa" ] ]

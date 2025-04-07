@@ -18,7 +18,7 @@
     components:
     - type: NpcFactionMember
       factions:
-      - PMC
+      - WeYa
     - type: Skills
       skills:
         RMCSkillCqc: 1
@@ -36,7 +36,7 @@
 - type: entity
   parent: MarkerBase
   id: RMCRandomHumanoidPMCStandardM63B2
-  name: pmc ghost role standard m63b2
+  name: weya pmc ghost role standard m63b2
   suffix: Spawner, Player
   components:
   - type: Sprite
@@ -108,7 +108,7 @@
 - type: entity
   parent: MarkerBase
   id: RMCRandomHumanoidPMCStandardSSG45
-  name: pmc ghost role standard ssg45
+  name: weya pmc ghost role standard ssg45
   suffix: Spawner, Player
   components:
   - type: Sprite
@@ -178,7 +178,7 @@
 - type: entity
   parent: MarkerBase
   id: RMCRandomHumanoidPMCStandardM54C2
-  name: pmc ghost role standard m54c2
+  name: weya pmc ghost role standard m54c2
   suffix: Spawner, Player
   components:
   - type: Sprite

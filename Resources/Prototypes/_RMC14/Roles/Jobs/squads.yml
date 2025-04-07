@@ -167,7 +167,7 @@
       sprite: _RMC14/Interface/map_blips.rsi
       state: background_pmc
     canSupplyDrop: false
-    group: PMC
+    group: WeYa
     leaderIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: pmc_ld
