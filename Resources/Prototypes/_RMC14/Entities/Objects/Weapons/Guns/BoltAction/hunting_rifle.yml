@@ -42,12 +42,6 @@
   - type: MagazineAmmoProvider
     autoEject: false
     soundAutoEject: null
-  # - type: ContainerContainer
-  #   containers:
-  #     gun_magazine: !type:ContainerSlot
-  #     gun_chamber: !type:ContainerSlot
-  #     ballistic-ammo: !type:Container
-  #       ents: []
   - type: GenericVisualizer
     visuals:
       enum.BreechVisuals.Open:
