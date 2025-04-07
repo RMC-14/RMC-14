@@ -113,3 +113,26 @@
     - id: CMSynthGraft
     - id: CMHealthAnalyzer
     - id: CMHyposprayFilledTricord
+
+- type: entity
+  parent: RMCPouchMedkit
+  id: RMCPouchMedkitPMC
+  suffix: PMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/wy_medkit.rsi
+
+- type: entity
+  parent: RMCPouchMedkitPMC
+  id: RMCPouchMedkitPMCFilled
+  suffix: Filled, PMC
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSurgicalLine
+    - id: CMSynthGraft
+    - id: CMRollerBedSpawnFolded
+    - id: CMSurgicalCaseFilled
+    - id: CMBloodPackFull
+    - id: CMBloodPackFull
+    # TODO RMC14: splint nano
