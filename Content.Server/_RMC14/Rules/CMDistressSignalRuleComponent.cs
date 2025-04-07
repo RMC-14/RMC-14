@@ -152,4 +152,10 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 
     [DataField]
     public ResPath Thunderdome = new("/Maps/_RMC14/thunderdome.yml");
+
+    [DataField]
+    public ProtoId<JobPrototype> XenoSurvivorCorpseJob = "CMSurvivor";
+
+    [DataField]
+    public TimeSpan XenoSurvivorCorpseBurstDelay = TimeSpan.FromSeconds(0);
 }
