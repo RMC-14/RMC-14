@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added Ranuko figurine.
-    type: Add
-  - message: Reduced use delay of some figurines, as they only play on the same tile
-      they are used.
-    type: Fix
-  id: 1060
-  time: '2024-12-03T05:55:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5036
 - author: Vermidia
   changes:
   - message: Fixed marine base movement speed being 10% too slow.
@@ -5359,5 +5349,13 @@
   id: 1562
   time: '2025-04-07T05:36:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6094
+- author: SG6732
+  changes:
+  - message: Added new M42A2 Pump Shotgun handle sprites + Wooden Stock attachment
+      sprites of all camo types.
+    type: Add
+  id: 1563
+  time: '2025-04-07T05:49:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5337
 Name: RMC14
 Order: -1
