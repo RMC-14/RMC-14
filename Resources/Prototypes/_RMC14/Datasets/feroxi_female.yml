@@ -1,0 +1,5 @@
+- type: localizedDataset
+  id: names_feroxi_female
+  values:
+    prefix: rmc-name-feroxi-female-
+    count: 49

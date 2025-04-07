@@ -289,6 +289,21 @@ cm-chatsan-replacement-mouse = squeaking host
 cm-chatsan-word-mice = mice
 cm-chatsan-replacement-mice = squeaking hosts
 
+cm-chatsan-word-feroxi = feroxi
+cm-chatsan-replacement-feroxi = aquatic host
+
+cm-chatsan-word-feroxis = feroxis
+cm-chatsan-replacement-feroxis = aquatic hosts
+
+cm-chatsan-word-shark = shark
+cm-chatsan-replacement-shark = aquatic host
+
+cm-chatsan-word-sharks = sharks
+cm-chatsan-replacement-sharks = aquatic hosts
+
+cm-chatsan-word-fish = fish
+cm-chatsan-replacement-fish = aquatic host
+
 cm-chatsan-word-grenade = grenade
 cm-chatsan-replacement-grenade = boomstick
 
