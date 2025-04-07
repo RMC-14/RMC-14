@@ -434,6 +434,17 @@ namespace Content.Server.Atmos.EntitySystems
 
         public override void Update(float frameTime)
         {
+            var flammablequery = EntityQueryEnumerator<FlammableComponent>();
+
+            while (flammablequery.MoveNext(out var uid, out var flammableComponent))
+            {
+                if (flammableComponent.Resisting)
+                {
+                    RaiseLocalEvent(uid, new EntityResistingFireEvent(uid));
+                    Logger.Debug("RAISING LOCAL EVENT FROM UPDATE GRRRR");
+                }
+            }
+
             // process all fire events
             foreach (var (flammable, deltaTemp) in _fireEvents)
             {

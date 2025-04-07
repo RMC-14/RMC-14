@@ -96,4 +96,15 @@ namespace Content.Shared.Atmos.Components
         [DataField, AutoNetworkedField]
         public TimeSpan ResistDuration = TimeSpan.FromSeconds(8);
     }
+
+    public sealed partial class EntityResistingFireEvent : EntityEventArgs
+    {
+        public EntityUid ResistingEntity;
+
+        public EntityResistingFireEvent(EntityUid entity)
+        {
+            Logger.Debug("ENTITY IS RESISITING, RAISED EVENT");
+            ResistingEntity = entity;
+        }
+    }
 }
