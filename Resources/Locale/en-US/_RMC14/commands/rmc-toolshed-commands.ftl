@@ -64,3 +64,5 @@ command-description-weedkiller = Runs weed killer on the current location's area
 command-description-withxenotier = Filters entities or entity prototypes to those of a specific xenonid tier.
 
 command-description-spawnallmapinserts = Spawns all map inserts, with forced guaranteed spawn probability.
+
+command-description-marineplayersinrange = Rejuvenates all marines within a specific range, restoring them to full health, clearing status effects, etc.
