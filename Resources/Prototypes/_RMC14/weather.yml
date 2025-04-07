@@ -1,0 +1,104 @@
+# Solaris
+
+- type: weather
+  id: RMCBigRedDust
+  sprite:
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: bigred_dust
+  sound:
+    path: /Audio/Effects/Weather/snowstorm_weak.ogg
+    params:
+      loop: true
+      volume: -6
+
+- type: weather
+  id: RMCBigRedSand
+  sprite:
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: bigred_sand
+  sound:
+    path: /Audio/Effects/Weather/snowstorm_weak.ogg
+    params:
+      loop: true
+      volume: -6
+
+- type: weather
+  id: RMCBigRedRocks
+  sprite:
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: bigred_rocks
+  sound:
+    path: /Audio/Effects/Weather/snowstorm.ogg
+    params:
+      loop: true
+      volume: -6
+
+# Strata
+
+- type: weather
+  id: RMCStrataClearsky
+  sprite:
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: strata_clearsky
+  sound:
+    path: /Audio/Effects/Weather/snowstorm_weak.ogg
+    params:
+      loop: true
+      volume: -6
+
+- type: weather
+  id: RMCStrataSnowing
+  sprite:
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: strata_snowing
+  sound:
+    path: /Audio/Effects/Weather/snowstorm_weak.ogg
+    params:
+      loop: true
+      volume: -6
+
+- type: weather
+  id: RMCStrataBlizzard
+  sprite:
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: strata_blizzard
+  sound:
+    path: /Audio/Effects/Weather/snowstorm.ogg
+    params:
+      loop: true
+      volume: -6
+
+- type: weather
+  id: RMCStrataStorm
+  sprite:
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: strata_storm
+  sound:
+    collection: Rain
+    params:
+      loop: true
+      volume: -6
+
+# Hybrisa
+
+- type: weather
+  id: RMCHybrisaRain
+  sprite:
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: hybrisa_rain
+  sound:
+    collection: Rain
+    params:
+      loop: true
+      volume: -6
+
+- type: weather
+  id: RMCHybrisaRainLight
+  sprite:
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: hybrisa_rain_light
+  sound:
+    collection: Rain
+    params:
+      loop: true
+      volume: -6
