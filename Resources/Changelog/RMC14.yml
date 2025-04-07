@@ -1,25 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed Defender being immune to explosion stuns when unfortified.
-    type: Fix
-  id: 1058
-  time: '2024-12-03T05:00:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5021
-- author: DrSmugleaf
-  changes:
-  - message: Fixed APC description mentioning that you can't swap the battery yet.
-    type: Fix
-  - message: Fixed playtime perks not being enabled by default.
-    type: Fix
-  - message: Fixed incendiary slugs not stunning.
-    type: Fix
-  - message: Fixed the Weapons Specialist's vendors giving you HIDP packets instead
-      of individual HIDP grenades.
-    type: Fix
-  id: 1059
-  time: '2024-12-03T05:12:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5037
 - author: Whisper
   changes:
   - message: Added Ranuko figurine.
@@ -5366,5 +5345,19 @@
   id: 1560
   time: '2025-04-07T05:34:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6098
+- author: Vermidia
+  changes:
+  - message: Fixed fast and sticky resin deleting nodes when placed.
+    type: Fix
+  id: 1561
+  time: '2025-04-07T05:37:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6096
+- author: noctyrnal
+  changes:
+  - message: Added missing weather types.
+    type: Add
+  id: 1562
+  time: '2025-04-07T05:36:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6094
 Name: RMC14
 Order: -1
