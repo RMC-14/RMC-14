@@ -94,7 +94,76 @@
     - CMMagazineSMGM63AP
     - CMMagazineSMGM63AP
 
-# TODO RMC14: NSG-23
+# SSG-45
+
+- type: job
+  parent: RMCPMCStandardM63B2
+  id: RMCPMCStandardSSG45
+  playTimeTracker: RMCJobPMCStandardSSG45
+  startingGear: RMCJobPMCStandardSSG45
+
+- type: playTimeTracker
+  id: RMCJobPMCStandardSSG45
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidPMCStandardSSG45
+  name: pmc ghost role standard ssg45
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCPMCStandardSSG45
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCPMCStandardSSG45
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-pmc-standard
+    description: rmc-ghost-role-information-pmc-description
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    job: RMCPMCStandardSSG45
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+    squad: SquadPMC
+
+- type: startingGear
+  id: RMCJobPMCStandardSSG45
+  equipment:
+    id: RMCIDCardPMC
+    jumpsuit: RMCJumpsuitVeteranPMC
+    outerClothing: CMArmorM4PMC
+    gloves: RMCHandsVeteranPMC
+    head: ArmorHelmetPMC
+    shoes: RMCBootsPMCFilled
+    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava
+    ears: RMCHeadsetDistressPMC
+    back: RMCSatchelLightpack
+    belt: CMM77BeltFilled
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchMagazineLarge
+    suitstorage: WeaponRifleSSG45
+  inhand:
+  - RMCWebbingPMC
+  storage:
+    back:
+    - RMCGrenadeBlastM12
+    - RMCExplosivePlastic
+    - CMStunbaton
+    - CMCrowbar
+    - CMMRE # TODO RMC14: PMC CFR ration
+    - RMCMagazineRifleSSG45Extended
+    - RMCMagazineRifleSSG45Extended
+    pocket2:
+    - RMCMagazineRifleSSG45AP
+    - RMCMagazineRifleSSG45AP
+    - RMCMagazineRifleSSG45AP
+    - RMCMagazineRifleSSG45AP
 
 # M54C2
 - type: job
