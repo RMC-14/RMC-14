@@ -5,6 +5,44 @@
     MinSize="300 400">
     <BoxContainer Orientation="Vertical">
         <Label Name="BurrowedLarvaLabel" Access="Public" Text="Burrowed Larva: 0" />
+        <TabContainer>
+        <BoxContainer Name="Tiers" Orientation="Horizontal">
+            <Button Name="Tier4" Text="Tier 4" ToggleMode="True" Access="Public"/>
+                <Button Name="Tier3" Text="Tier 3" ToggleMode="True" Access="Public"/>
+                <Button Name="Tier2" Text="Tier 2" ToggleMode="True" Access="Public"/>
+                <Button Name="Tier1" Text="Tier 1" ToggleMode="True" Access="Public"/>
+                <Button Name="Tier0" Text="Tier 0" ToggleMode="True" Access="Public"/>
+        </BoxContainer>
+            <BoxContainer Name="Castes" Orientation="Vertical">
+                <BoxContainer>
+                    <Button Name="Queen" Text="Queen" ToggleMode="True" Access="Public"/>
+                </BoxContainer>
+                <BoxContainer>
+                <Button Name="Ravager" Text="Ravager" ToggleMode="True" Access="Public"/>
+                <Button Name="Boiler" Text="Boiler" ToggleMode="True" Access="Public"/>
+                <Button Name="Praetorian" Text="Praetorian" ToggleMode="True" Access="Public"/>
+                <Button Name="Crusher" Text="Crusher" ToggleMode="True" Access="Public"/>
+                </BoxContainer>
+                <BoxContainer>
+                    <Button Name="Spitter" Text="Spitter" ToggleMode="True" Access="Public"/>
+                    <Button Name="Warrior" Text="Warrior" ToggleMode="True" Access="Public"/>
+                    <Button Name="Lurker" Text="Lurker" ToggleMode="True" Access="Public"/>
+                    <Button Name="Hivelord" Text="Hivelord" ToggleMode="True" Access="Public"/>
+                    <Button Name="Carrier" Text="Carrier" ToggleMode="True" Access="Public"/>
+                    <Button Name="Burrower" Text="Burrower" ToggleMode="True" Access="Public"/>
+                </BoxContainer>
+                <BoxContainer>
+                    <Button Name="Drone" Text="Drone" ToggleMode="True" Access="Public"/>
+                    <Button Name="Defender" Text="Defender" ToggleMode="True" Access="Public"/>
+                    <Button Name="Sentinel" Text="Sentinel" ToggleMode="True" Access="Public"/>
+                    <Button Name="Runner" Text="Runner" ToggleMode="True" Access="Public"/>
+                </BoxContainer>
+                <BoxContainer>
+                    <Button Name="Parasite" Text="Parasite" ToggleMode="True" Access="Public"/>
+                    <Button Name="Lesser" Text="Lesser Drone" ToggleMode="True" Access="Public"/>
+                </BoxContainer>
+            </BoxContainer>
+        </TabContainer>
         <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
             <BoxContainer Orientation="Vertical" Name="XenoContainer" Access="Public" />
         </ScrollContainer>
