@@ -51,7 +51,6 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, AttachableDetachDoAfterEvent>(OnDetachDoAfter);
         SubscribeLocalEvent<AttachableHolderComponent, AttachableHolderAttachToSlotMessage>(OnAttachableHolderAttachToSlotMessage);
         SubscribeLocalEvent<AttachableHolderComponent, AttachableHolderDetachMessage>(OnAttachableHolderDetachMessage);
-        SubscribeLocalEvent<AttachableHolderComponent, AttemptShootEvent>(OnAttachableHolderAttemptShoot);
         SubscribeLocalEvent<AttachableHolderComponent, GunShotEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, BoundUIOpenedEvent>(OnAttachableHolderUiOpened);
         SubscribeLocalEvent<AttachableHolderComponent, EntInsertedIntoContainerMessage>(OnAttached);
@@ -244,30 +243,6 @@ public sealed class AttachableHolderSystem : EntitySystem
         RaiseLocalEvent(holder.Comp.SupercedingAttachable.Value, activateInWorldEvent);
 
         args.Handled = activateInWorldEvent.Handled;
-    }
-
-    private void OnAttachableHolderAttemptShoot(Entity<AttachableHolderComponent> holder, ref AttemptShootEvent args)
-    {
-        if (args.Cancelled)
-            return;
-
-        if (holder.Comp.SupercedingAttachable == null)
-            return;
-
-        args.Cancelled = true;
-
-        if (!TryComp<GunComponent>(holder.Owner, out var holderGunComponent) ||
-            holderGunComponent.ShootCoordinates == null ||
-            !TryComp<GunComponent>(holder.Comp.SupercedingAttachable,
-                out var attachableGunComponent))
-        {
-            return;
-        }
-
-        _gun.AttemptShoot(args.User,
-            holder.Comp.SupercedingAttachable.Value,
-            attachableGunComponent,
-            holderGunComponent.ShootCoordinates.Value);
     }
 
     private void OnAttachableHolderUniqueAction(Entity<AttachableHolderComponent> holder, ref UniqueActionEvent args)
@@ -704,6 +679,26 @@ public sealed class AttachableHolderSystem : EntitySystem
     {
         holder.Comp.SupercedingAttachable = supercedingAttachable;
         Dirty(holder);
+    }
+
+    public bool TryGetInhandSupercedingGun(EntityUid user, out EntityUid attachable, [NotNullWhen(true)] out GunComponent? gunComp)
+    {
+        attachable = default;
+
+        if (!TryComp(user, out HandsComponent? hands) ||
+            hands.ActiveHandEntity == null ||
+            !TryComp(hands.ActiveHandEntity, out AttachableHolderComponent? holderComp) ||
+            holderComp.SupercedingAttachable == null)
+        {
+            gunComp = null;
+            return false;
+        }
+
+        if(!TryComp(holderComp.SupercedingAttachable, out gunComp))
+            return false;
+
+        attachable = holderComp.SupercedingAttachable.Value;
+        return true;
     }
 
     public bool TryGetSlotId(EntityUid holderUid, EntityUid attachableUid, [NotNullWhen(true)] out string? slotId)

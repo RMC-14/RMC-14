@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
+using Content.Shared._RMC14.Attachable.Systems;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Random;
 using Content.Shared._RMC14.Weapons.Ranged.Flamer;
@@ -88,6 +89,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] private   readonly INetConfigurationManager _netConfig = default!;
 
     // RMC14
+    [Dependency] private readonly AttachableHolderSystem _attachableHolder = default!;
     [Dependency] private readonly SharedRMCFlamerSystem _flamer = default!;
 
     private const float InteractNextFire = 0.3f;
@@ -178,6 +180,9 @@ public abstract partial class SharedGunSystem : EntitySystem
 
     public bool TryGetGun(EntityUid entity, out EntityUid gunEntity, [NotNullWhen(true)] out GunComponent? gunComp)
     {
+        if(_attachableHolder.TryGetInhandSupercedingGun(entity, out gunEntity, out gunComp))
+            return true;
+
         gunEntity = default;
         gunComp = null;
 
