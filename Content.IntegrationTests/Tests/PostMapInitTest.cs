@@ -31,7 +31,7 @@ namespace Content.IntegrationTests.Tests
     public sealed class PostMapInitTest
     {
         private const bool SkipTestMaps = true;
-        private const string TestMapsPath = "/Maps/Test/";
+        private const string TestMapsPath = "/Maps/_RMC14/Test/"; // RMC14
 
         private static readonly string[] NoSpawnMaps =
         {
