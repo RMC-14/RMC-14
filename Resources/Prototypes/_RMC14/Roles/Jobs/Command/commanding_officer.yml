@@ -113,6 +113,9 @@
     pocket2: RMCPouchGeneralLarge
   inhand:
     - RMCMatebaCustomizationCase
+  storage:
+    back:
+    - CMStampCO
 
 - type: entity
   parent: CMSpawnPointJobBase
