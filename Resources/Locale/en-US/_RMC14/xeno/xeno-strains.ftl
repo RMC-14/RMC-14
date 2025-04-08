@@ -88,6 +88,6 @@ rmc-xeno-steelcrest-popup = This one, like my will, is indomitable. It will beco
 
 rmc-xeno-maid-name = Cat Maid
 rmc-xeno-maid-description = You trade your dignity.
-    you gain the ability to:
+    You gain the ability to:
     - Cause mental anguish in friends and foes alike.
 rmc-xeno-maid-popup = Rawr :3
