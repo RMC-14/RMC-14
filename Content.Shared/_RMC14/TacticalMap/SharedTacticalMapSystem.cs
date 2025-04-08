@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Content.Shared._RMC14.CCVar;
+﻿using Content.Shared._RMC14.CCVar;
 using Robust.Shared.Configuration;
 
 namespace Content.Shared._RMC14.TacticalMap;

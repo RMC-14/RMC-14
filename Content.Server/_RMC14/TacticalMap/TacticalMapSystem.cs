@@ -452,7 +452,6 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     {
         if (_squad.TryGetMemberSquad(tracked.Owner, out var squad))
         {
-            tracked.Comp.Group = squad.Comp.Group;
             if (squad.Comp.MinimapBackground == null)
                 tracked.Comp.Color = squad.Comp.Color;
             else
@@ -511,7 +510,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         else if (_mobState.IsDead(ent))
             status = TacticalMapBlipStatus.Defibabble;
 
-        var blip = new TacticalMapBlip(indices, icon, ent.Comp.Color, status, ent.Comp.Background, ent.Comp.HiveLeader, ent.Comp.Group);
+        var blip = new TacticalMapBlip(indices, icon, ent.Comp.Color, status, ent.Comp.Background, ent.Comp.HiveLeader);
         if (_marineMapTrackedQuery.HasComp(ent))
         {
             tacticalMap.MarineBlips[ent.Owner.Id] = blip;
