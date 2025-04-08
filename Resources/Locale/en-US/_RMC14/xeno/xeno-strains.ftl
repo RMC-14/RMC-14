@@ -85,3 +85,9 @@ rmc-xeno-steelcrest-description = You trade your tail sweep and a small amount o
    - Headbutt while fortified. Headbutt doesn't lose damage and keeps it's higher range with high knockback.
    - Soak in damage for 6 seconds for a small heal that also refreshes your tail slam.
 rmc-xeno-steelcrest-popup = This one, like my will, is indomitable. It will become my steel crest against all that defy me.
+
+rmc-xeno-maid-name = Cat Maid
+rmc-xeno-maid-description = You trade your dignity.
+    you gain the ability to:
+    - Cause mental anguish in friends and foes alike.
+rmc-xeno-maid-popup = Rawr :3
