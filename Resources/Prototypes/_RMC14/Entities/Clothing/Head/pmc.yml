@@ -139,3 +139,14 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/PMC/engineer.rsi
   - type: EyeProtection
+
+- type: entity
+  parent: ArmorHelmetPMC
+  id: ArmorHelmetPMCDirector
+  name: director's hat
+  description: Belongs to someone very important. Has minor protection to all damage types.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/director.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/director.rsi

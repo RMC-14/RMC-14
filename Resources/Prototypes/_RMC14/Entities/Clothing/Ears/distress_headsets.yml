@@ -59,6 +59,23 @@
   - type: Headset
     radioTextIncrease: 2
 
+- type: entity
+  parent: CMHeadset
+  id: RMCHeadsetDistressPMCDirector
+  name: PMC headset
+  description: A special headset used by corporate personnel.
+  suffix: Director
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
+      - RMCEncryptionKeyLiaison
+  - type: GrantMarineIcons
+  - type: GrantTacMapAlert
+  - type: Headset
+    radioTextIncrease: 3
+
 # For Duke's Dozen/Freelancer
 - type: entity
   parent: CMHeadset

@@ -13,7 +13,7 @@ rmc-job-name-pmc-crewman = Vehicle Crewman
 rmc-job-name-pmc-xeno-handler = Xeno Handler
 rmc-job-name-pmc-leader = Leader
 rmc-job-name-pmc-lead-investigator = Lead Investigator
-rmc-job-name-pmc-directory = Site Director
+rmc-job-name-pmc-director = Site Director
 rmc-job-name-pmc-synth = Support Synthetic
 
 rmc-ghost-name-pmc-standard = Weston-Yamada PMC (Standard)
@@ -28,5 +28,5 @@ rmc-ghost-name-pmc-crewman = Weston-Yamada PMC (Crewman)
 rmc-ghost-name-pmc-xeno-handler = Weston-Yamada PMC (Xeno Handler)
 rmc-ghost-name-pmc-leader = Weston-Yamada PMC (Leader)
 rmc-ghost-name-pmc-lead-investigator = Weston-Yamada PMC (Lead Investigator)
-rmc-ghost-name-pmc-directory = Weston-Yamada PMC (Site Director)
+rmc-ghost-name-pmc-director = Weston-Yamada PMC (Site Director)
 rmc-ghost-name-pmc-synth = Weston-Yamada PMC (Support Synthetic)
