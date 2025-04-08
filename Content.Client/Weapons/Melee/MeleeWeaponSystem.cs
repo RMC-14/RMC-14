@@ -163,7 +163,7 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
         var targetCoordinates = xform.Coordinates;
         var targetLocalAngle = xform.LocalRotation;
 
-        return Interaction.InRangeUnobstructed(user, target, targetCoordinates, targetLocalAngle, range);
+        return Interaction.InRangeUnobstructed(user, target, targetCoordinates, targetLocalAngle, range, overlapCheck: false);
     }
 
     protected override void DoDamageEffect(List<EntityUid> targets, EntityUid? user, TransformComponent targetXform)
@@ -238,15 +238,14 @@ public sealed partial class MeleeWeaponSystem : SharedMeleeWeaponSystem
 
     private void ClientDisarm(EntityUid attacker, MapCoordinates mousePos, EntityCoordinates coordinates, MeleeWeaponComponent meleeComponent)
     {
-        var attackerPos = TransformSystem.GetMapCoordinates(attacker);
-
-        if (mousePos.MapId != attackerPos.MapId || (attackerPos.Position - mousePos.Position).Length() > meleeComponent.Range)
-            return;
-
         EntityUid? target = null;
 
         if (_stateManager.CurrentState is GameplayStateBase screen)
             target = screen.GetClickedEntity(mousePos);
+
+        var attackerPos = TransformSystem.GetMapCoordinates(attacker);
+        if (mousePos.MapId != attackerPos.MapId || (attackerPos.Position - mousePos.Position).Length() > meleeComponent.Range)
+            return;
 
         RaisePredictiveEvent(new DisarmAttackEvent(GetNetEntity(target), GetNetCoordinates(coordinates)));
     }

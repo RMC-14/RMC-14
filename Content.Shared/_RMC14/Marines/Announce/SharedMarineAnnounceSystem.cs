@@ -92,6 +92,12 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
 
     private void OnMarineCommunicationsComputerMsg(Entity<MarineCommunicationsComputerComponent> ent, ref MarineCommunicationsComputerMsg args)
     {
+        if (!_skills.HasSkill(args.Actor, ent.Comp.AnnounceSkill, ent.Comp.AnnounceSkillLevel))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-skills-no-training", ("target", ent)), args.Actor, PopupType.MediumCaution);
+            return;
+        }
+
         var time = _timing.CurTime;
         if (_timing.CurTime < ent.Comp.LastAnnouncement + ent.Comp.Cooldown)
         {

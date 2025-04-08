@@ -107,3 +107,5 @@
     downSound: null
   - type: XenoInhandSprite
     stateName: parasite
+  - type: RMCBuckleOffset
+    offset: 0, 0

@@ -17,7 +17,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly SolutionTransferSystem _solutionTransfer = default!;

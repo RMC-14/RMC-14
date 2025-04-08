@@ -60,7 +60,9 @@ public sealed class XenoZoomSystem : EntitySystem
         }
 
         _movementSpeed.RefreshMovementSpeedModifiers(xeno);
-        _contentEye.UpdateEyeOffset(xeno.Owner);
+
+        if (TryComp(xeno, out EyeComponent? eye))
+            _contentEye.UpdateEyeOffset((xeno.Owner, eye));
     }
 
     private void OnXenoZoomGetEyeOffset(Entity<XenoZoomComponent> ent, ref GetEyeOffsetEvent args)

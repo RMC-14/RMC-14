@@ -72,6 +72,7 @@
     - "CMAccessKitchen"
     - "CMAccessColonyPublic"
     hackable: true
+    scaling: false
     sections:
     - name: Alcohol
       entries:
@@ -84,7 +85,7 @@
 #      - id: DrinkTequilaBottleFull
 #        amount: 5
       - id: RMCDrinkAlcoholRum
-        amount: 5
+        amount: 27 # TODO RMC14 5
       - id: RMCDrinkAlcoholCognac
         amount: 5
       - id: RMCDrinkAlcoholWhiskey
@@ -96,13 +97,13 @@
 #      - id: DrinkVermouthBottleFull
 #        amount: 5
       - id: RMCDrinkAlcoholGin
-        amount: 5
+        amount: 10 # TODO RMC14 5
       - id: RMCDrinkAlcoholAbsinthe
         amount: 2
 #      - id: DrinkBlueCuracaoBottleFull
 #        amount: 2
       - id: RMCDrinkAlcoholVodka
-        amount: 5
+        amount: 12 # TODO RMC14 5
 #      - id: DrinkCoffeeLiqueurBottleFull
 #        amount: 5
     - name: Craft Beers

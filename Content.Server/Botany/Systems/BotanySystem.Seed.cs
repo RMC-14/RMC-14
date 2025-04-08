@@ -11,7 +11,6 @@ using Content.Shared.Popups;
 using Content.Shared.Random;
 using Robust.Server.GameObjects;
 using Robust.Shared.Map;
-using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -24,10 +23,8 @@ public sealed partial class BotanySystem : EntitySystem
     [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedPointLightSystem _light = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly FixtureSystem _fixtureSystem = default!;
     [Dependency] private readonly RandomHelperSystem _randomHelper = default!;
 
     public override void Initialize()
@@ -83,7 +80,7 @@ public sealed partial class BotanySystem : EntitySystem
         if (!TryGetSeed(component, out var seed))
             return;
 
-        using (args.PushGroup(nameof(SeedComponent)))
+        using (args.PushGroup(nameof(SeedComponent), 1))
         {
             var name = Loc.GetString(seed.DisplayName);
             args.PushMarkup(Loc.GetString($"seed-component-description", ("seedName", name)));

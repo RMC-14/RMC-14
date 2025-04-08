@@ -23,6 +23,7 @@ public sealed class XenoDevolveBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         _window = new XenoDevolveWindow();
         _window.OnClose += Close;
 

@@ -67,7 +67,7 @@
       groups:
         Brute: 36
   - type: CMArmor
-    armor: 15
+    xenoArmor: 15
     explosionArmor: 20
   - type: MeleeWeapon
     damage:

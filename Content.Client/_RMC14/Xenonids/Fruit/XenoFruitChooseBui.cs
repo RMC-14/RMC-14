@@ -31,6 +31,7 @@ public sealed class XenoFruitChooseBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         _window = new XenoFruitChooseWindow();
         _window.OnClose += Close;
 

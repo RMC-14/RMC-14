@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -50,7 +51,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly CMHandsSystem _cmHands = default!;
+    [Dependency] private readonly RMCHandsSystem _rmcHands = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -137,7 +138,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
     private void OnParasiteAfterInteract(Entity<XenoParasiteComponent> ent, ref AfterInteractEvent args)
     {
-        if (!args.CanReach || args.Target == null || args.Handled || !_cmHands.IsPickupByAllowed(ent.Owner, args.User))
+        if (!args.CanReach || args.Target == null || args.Handled || !_rmcHands.IsPickupByAllowed(ent.Owner, args.User))
             return;
 
         if (StartInfect(ent, args.Target.Value, args.User))
@@ -182,7 +183,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
     private void OnParasiteCanDropDragged(Entity<XenoParasiteComponent> ent, ref CanDropDraggedEvent args)
     {
-        if (args.User != ent.Owner && !_cmHands.IsPickupByAllowed(ent.Owner, args.User))
+        if (args.User != ent.Owner && !_rmcHands.IsPickupByAllowed(ent.Owner, args.User))
             return;
 
         if (!CanInfectPopup(ent, args.Target, args.User, false))
@@ -194,7 +195,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
     private void OnParasiteDragDropDragged(Entity<XenoParasiteComponent> ent, ref DragDropDraggedEvent args)
     {
-        if (args.User != ent.Owner && !_cmHands.IsPickupByAllowed(ent.Owner, args.User))
+        if (args.User != ent.Owner && !_rmcHands.IsPickupByAllowed(ent.Owner, args.User))
             return;
 
         StartInfect(ent, args.Target, args.User);
@@ -433,7 +434,6 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         _stun.TryParalyze(victim, parasite.Comp.ParalyzeTime, true);
         _status.TryAddStatusEffect(victim, "Muted", parasite.Comp.ParalyzeTime, true, "Muted");
-        _status.TryAddStatusEffect(victim, "TemporaryBlindness", parasite.Comp.ParalyzeTime, true, "TemporaryBlindness");
         RefreshIncubationMultipliers(victim);
 
         _inventory.TryEquip(victim, parasite.Owner, "mask", true, true, true);
@@ -534,6 +534,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
                 var victimComp = EnsureComp<VictimInfectedComponent>(infectedVictim);
                 victimComp.Hive = _hive.GetHive(uid)?.Owner;
+
+                _status.TryAddStatusEffect(infectedVictim, "TemporaryBlindness", para.ParalyzeTime, true, "TemporaryBlindness");
 
                 // TODO RMC14 also do damage to the parasite
                 EnsureComp<ParasiteSpentComponent>(uid);
@@ -788,7 +790,13 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (_container.TryGetContainer(ent, ent.Comp.LarvaContainerId, out var container))
         {
             foreach (var larva in container.ContainedEntities)
+            {
                 RemCompDeferred<BursterComponent>(larva);
+                var invc = EnsureComp<RMCTemporaryInvincibilityComponent>(larva);
+                invc.ExpiresAt = _timing.CurTime + ent.Comp.LarvaInvincibilityTime;
+                Dirty(larva, invc);
+            }
+
             _container.EmptyContainer(container, destination: coords);
         }
 

@@ -447,6 +447,7 @@
     OB: true
     supplyDrop: false
     minimapColor: '#3F3C3CEF'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv624GroundCaves
@@ -552,6 +553,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv624Lazarus
@@ -567,6 +569,7 @@
     OB: true
     supplyDrop: true
     landingZone: true
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaLv624LazarusLandingZones
@@ -610,6 +613,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaLv624Lazarus
@@ -762,6 +766,7 @@
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz1
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaLv624Lazarus

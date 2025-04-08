@@ -37,6 +37,7 @@ public sealed class DropshipWeaponsBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         _window = new DropshipWeaponsWindow();
         _window.OnClose += Close;
 

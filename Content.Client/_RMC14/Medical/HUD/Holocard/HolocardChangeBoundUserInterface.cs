@@ -19,6 +19,7 @@ public sealed class HolocardChangeBoundUserInterface : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         _window = new HolocardChangeWindow(this);
         _window.OnClose += Close;
         _window.OpenCentered();

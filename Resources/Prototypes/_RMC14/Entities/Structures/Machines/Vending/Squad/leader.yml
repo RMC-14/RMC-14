@@ -33,7 +33,8 @@
       - id: RMCKitEngineering
     - name: Armors
       entries:
-      - id: CMArmorM4
+      - id: RMCArmorM4Zipties
+        name: leader M4 pattern marine armor (zipties)
         points: 16
     - name: Clothing Items
       entries:
@@ -218,10 +219,10 @@
       takeAll: CMStandard
       entries:
       - id: CMVendorBundleSquadLeaderApparel
-      - id: CMArmorB12
+      - id: RMCArmorB12Zipties
+        name: leader B12 pattern marine armor (zipties)
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
-      - id: RMCBoxZiptie
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
@@ -378,3 +379,47 @@
     - id: RMCTankFlamer # TODO RMC14 +1 b gel, -1 regular
       amount: 3 # TODO RMC14 projectile nozzle
     - id: CMFireExtinguisherPortable
+
+- type: entity
+  parent: CMArmorB12
+  id: RMCArmorB12Zipties
+  name: leader B12 pattern marine armor
+  description: A lightweight suit of carbon fiber body armor built for quick movement. Designed in a lovely forest green. Use it to toggle the built-in flashlight. This one has a separate pouch for a ziptie box.
+  suffix: Zipties
+  components:
+  - type: Storage
+    grid:
+    - 0,0,7,1
+  - type: StorageFill
+    contents:
+    - id: RMCBoxZiptie
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-not-ziptie-box
+      blacklist:
+        tags:
+        - RMCBoxZipties
+      whitelist: null
+      count: 3
+
+- type: entity
+  parent: CMArmorM4
+  id: RMCArmorM4Zipties
+  name: leader M4 pattern marine armor
+  description: A well tinkered and crafted hybrid of Smart-Gunner mesh and M3 pattern plates. Robust, yet nimble, with room for all your pouches. This one has a separate pouch for a ziptie box.
+  suffix: Zipties
+  components:
+  - type: Storage
+    grid:
+    - 0,0,9,1
+  - type: StorageFill
+    contents:
+    - id: RMCBoxZiptie
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-not-ziptie-box
+      blacklist:
+        tags:
+        - RMCBoxZipties
+      whitelist: null
+      count: 4

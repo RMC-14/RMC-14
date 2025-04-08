@@ -14,4 +14,7 @@ public sealed partial class UsedSkillPamphletComponent : Component
 
     [DataField, AutoNetworkedField]
     public LocId? JobTitle;
+
+    [DataField, AutoNetworkedField]
+    public bool Used;
 }

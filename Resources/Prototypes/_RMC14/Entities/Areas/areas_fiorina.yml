@@ -18,6 +18,7 @@
     OB: true
     supplyDrop: true
     minimapColor: '#6C6767D8'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaFiorina

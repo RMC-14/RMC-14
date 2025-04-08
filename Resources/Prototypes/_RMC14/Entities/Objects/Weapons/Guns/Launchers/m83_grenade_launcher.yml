@@ -5,12 +5,23 @@
   description: A heavy, 6-shot grenade launcher used by the UNMC for area denial and big explosions.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/desert.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83_inhands.rsi
     layers:
-    - state: icon
-      map: [ "enum.GunVisualLayers.Base" ]
-  - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/desert.rsi
+    - state: base
+      sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83_main.rsi
+    - state: camo
+      sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83_main.rsi
+      map: [ "enum.ItemCamouflageLayers.Layer" ]
+    - state: mag-0
+      sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83_main.rsi
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+    zeroOnlyOnEmpty: true
+  #- type: Clothing
+  #  sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83inhands.rsi
   - type: RMCSelectiveFire
     baseFireRate: 0.3125
   - type: GunUserWhitelist
@@ -34,9 +45,9 @@
     offsets:
       rmc-aslot-rail: 0.0, 0.185
   - type: ItemCamouflage
-    camouflageVariations:
-      Jungle: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/jungle.rsi
-      Desert: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/desert.rsi
-      Snow: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/snow.rsi
-      Classic: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/classic.rsi
-      Urban: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83/urban.rsi
+    colors:
+      Jungle: "#ccd08d"
+      Desert: "#ffd2a6"
+      Snow: "#ddcbc9"
+      Classic: "#c7e7d9"
+      Urban: "#acb8c7"
