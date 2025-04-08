@@ -171,7 +171,7 @@ public sealed class LineSystem : EntitySystem
         var beamStartPos = sourceMapPos.Offset(calculatedDistance.Normalized());
 
         //Don't divide by zero or make a mega beam
-        if (calculatedDistance.Length() == 0 && calculatedDistance.Length() > MaxBeamDistance)
+        if (calculatedDistance.Length() == 0 || calculatedDistance.Length() > MaxBeamDistance)
             return false;
 
         var distanceCorrection = calculatedDistance - calculatedDistance.Normalized();
