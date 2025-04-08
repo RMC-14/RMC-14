@@ -749,8 +749,8 @@
     layers:
     - state: icon
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: m63
-      map: [ "enum.CMItemSlotsLayers.Fill" ] # This one's fine to use the CMItemSlots visualizer
+      state: m63 # TODO RMC14 per-gun underlay
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
       visible: false
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/holster_smg.rsi
@@ -771,10 +771,12 @@
         whitelist:
           tags:
           - RMCWeaponSMGM63
+          - RMCWeaponSMGM63B2
   - type: CMHolster
     whitelist:
       tags:
       - RMCWeaponSMGM63
+      - RMCWeaponSMGM63B2
   - type: CMItemSlots
   - type: Tag
     tags:
@@ -852,6 +854,7 @@
     whitelist:
       tags:
       - RMCWeaponSMGM63
+      - RMCWeaponSMGM63B2
       - CMMagazineSmg
   - type: FixedItemSizeStorage
   - type: LimitedStorage
@@ -1170,3 +1173,20 @@
       amount: 2
     - id: RMCMagazineSmartGunirradiated
       amount: 2
+
+- type: entity
+  parent: RMCBeltHolsterSMG
+  id: RMCBeltHolsterSMGFilledSMGM63B2
+  suffix: Filled, SMGM63B2
+  components:
+  - type: ItemSlots
+    slots:
+      pouch:
+        name: M63 holster
+        startingItem: RMCWeaponSMGM63B2
+        insertSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_sheathe.ogg # TODO RMC14 sounds
+        ejectSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_draw.ogg
+        whitelist:
+          tags:
+          - RMCWeaponSMGM63
+          - RMCWeaponSMGM63B2
