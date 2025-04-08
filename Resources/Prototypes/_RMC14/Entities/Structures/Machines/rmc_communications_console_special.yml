@@ -7,8 +7,6 @@
   - type: OverwatchConsole
     canOrbitalBombardment: false
     group: SPP
-  - type: TacticalMapComputer
-    group: SPP
 
 - type: entity
   parent: RMCOverwatchConsoleSPP
@@ -19,14 +17,6 @@
     overrideDir: South
     enableOverrideDir: false
 
-- type: entity
-  parent: RMCTacticalMapTable
-  id: RMCTacticalMapTableSPP
-  suffix: SPP
-  components:
-  - type: TacticalMapComputer
-    group: SPP
-
 # Admin
 - type: entity
   parent: RMCOverwatchConsole
@@ -35,8 +25,6 @@
   components:
   - type: OverwatchConsole
     canOrbitalBombardment: false
-    group: ADMINISTRATOR
-  - type: TacticalMapComputer
     group: ADMINISTRATOR
 
 - type: entity
@@ -48,14 +36,6 @@
     overrideDir: South
     enableOverrideDir: false
 
-- type: entity
-  parent: RMCTacticalMapTable
-  id: RMCTacticalMapTableAdmin
-  suffix: Admin
-  components:
-  - type: TacticalMapComputer
-    group: ADMINISTRATOR
-
 # WeYa
 - type: entity
   parent: RMCOverwatchConsole
@@ -64,8 +44,6 @@
   components:
   - type: OverwatchConsole
     canOrbitalBombardment: false
-    group: WeYa
-  - type: TacticalMapComputer
     group: WeYa
   - type: AccessReader
     access: [ [ "RMCAccessWeYa" ] ]
@@ -81,13 +59,3 @@
   - type: Sprite
     overrideDir: South
     enableOverrideDir: false
-
-- type: entity
-  parent: RMCTacticalMapTable
-  id: RMCTacticalMapTableWeYa
-  suffix: WeYa
-  components:
-  - type: TacticalMapComputer
-    group: WeYa
-  - type: AccessReader
-    access: [ [ "RMCAccessWeYa" ] ]

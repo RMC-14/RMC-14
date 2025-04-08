@@ -26,7 +26,4 @@ public sealed partial class TacticalMapComputerComponent : Component
 
     [DataField, AutoNetworkedField]
     public int SkillLevel = 2;
-
-    [DataField]
-    public string Group = "UNMC";
 }
