@@ -9,8 +9,10 @@ using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.Buckle.Components;
+using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Database;
+using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Ghost;
@@ -73,6 +75,7 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedDestructibleSystem _destruction = default!;
 
     private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
@@ -104,6 +107,7 @@ public sealed class XenoEggSystem : EntitySystem
         SubscribeLocalEvent<XenoEggComponent, StepTriggeredOffEvent>(OnXenoEggStepTriggered);
         SubscribeLocalEvent<XenoEggComponent, BeforeDamageChangedEvent>(OnXenoEggBeforeDamageChanged);
         SubscribeLocalEvent<XenoEggComponent, GetVerbsEvent<ActivationVerb>>(OnGetVerbs);
+        SubscribeLocalEvent<XenoEggComponent, DestructionEventArgs>(OnDestruction);
     }
 
     private void OnDropshipHijackStart(ref DropshipHijackStartEvent ev)
@@ -660,6 +664,22 @@ public sealed class XenoEggSystem : EntitySystem
         capable.Comp.Actions.Clear();
     }
 
+    private void OnDestruction(Entity<XenoEggComponent> ent, ref DestructionEventArgs args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (TryComp<XenoFragileEggComponent>(ent, out var fragile))
+        {
+            if (fragile.SustainedBy != null)
+                SpawnAtPosition(ent.Comp.EggDestroyedSustained, ent.Owner.ToCoordinates());
+            else
+                SpawnAtPosition(ent.Comp.EggDestroyed, ent.Owner.ToCoordinates());
+        }
+        else
+            SpawnAtPosition(ent.Comp.EggDestroyed, ent.Owner.ToCoordinates());
+    }
+
     public override void Update(float frameTime)
     {
         if (_net.IsClient)
@@ -711,6 +731,31 @@ public sealed class XenoEggSystem : EntitySystem
             if (!xform.Anchored)
                 continue;
 
+            if (time >= egg.CheckWeedsAt)
+            {
+                egg.CheckWeedsAt = time + egg.CheckWeedsDelay;
+
+                if (_transform.GetGrid(uid.ToCoordinates()) is not { } gridId ||
+    !TryComp(gridId, out MapGridComponent? grid))
+                {
+                    continue;
+                }
+
+                if (_weeds.IsOnHiveWeeds((gridId, grid), uid.ToCoordinates()))
+                {
+                    if (HasComp<XenoFragileEggComponent>(uid))
+                        RemCompDeferred<XenoFragileEggComponent>(uid);
+                }
+                else
+                {
+                    if (!EnsureComp<XenoFragileEggComponent>(uid, out var fragile))
+                    {
+                        fragile.ExpireAt = time + egg.FragileEggDuration;
+                    }
+                }
+
+            }
+
             if (egg.State == XenoEggState.Growing)
             {
                 egg.GrowAt ??= time + _random.Next(egg.MinTime, egg.MaxTime);
@@ -754,6 +799,39 @@ public sealed class XenoEggSystem : EntitySystem
                 egg.OpenAt = null;
                 Dirty(uid, egg);
             }
+        }
+
+        var fragilEggQuery = EntityQueryEnumerator<XenoEggComponent, XenoFragileEggComponent>();
+        while (fragilEggQuery.MoveNext(out var uid, out var egg, out var fragile))
+        {
+            if (fragile.BurstAt != null)
+            {
+                if (time < fragile.BurstAt)
+                    continue;
+
+                _destruction.DestroyEntity(uid);
+                continue;
+            }
+
+            if (fragile.SustainedBy != null && fragile.ShortExpireAt != null && time >= fragile.ShortExpireAt)
+            {
+                if (uid.ToCoordinates().TryDistance(EntityManager, fragile.SustainedBy.Value.ToCoordinates(), out var distance))
+                    continue;
+
+                if (distance > fragile.SustainRange)
+                {
+                    fragile.BurstAt = time + fragile.BurstDelay;
+                }
+                else
+                {
+                    fragile.ShortExpireAt = time + fragile.SustainCheckEvery;
+                }
+            }
+
+            if (time < fragile.ExpireAt)
+                continue;
+
+            fragile.BurstAt = time + fragile.BurstDelay;
         }
     }
 }

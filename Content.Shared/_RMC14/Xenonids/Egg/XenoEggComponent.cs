@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -48,6 +48,24 @@ public sealed partial class XenoEggComponent : Component
     [DataField, AutoNetworkedField]
     public EntProtoId Spawn = "CMXenoParasite";
 
+    [DataField, AutoNetworkedField]
+    public string NormalSprite = "_RMC14/Structures/Xenos/xeno_egg.rsi";
+
+    [DataField, AutoNetworkedField]
+    public string FragileSprite = "_RMC14/Structures/Xenos/xeno_egg_fragile.rsi";
+
+    [DataField, AutoNetworkedField]
+    public string SustainedSprite = "_RMC14/Structures/Xenos/xeno_egg_fragile_eggsac.rsi";
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan CheckWeedsAt;
+
+    [DataField]
+    public TimeSpan CheckWeedsDelay = TimeSpan.FromSeconds(2); //To not check constantly for weeds
+
+    [DataField]
+    public TimeSpan FragileEggDuration = TimeSpan.FromMinutes(6);
+
     /// <summary>
     ///     The container ID of where the creature is stored in the egg.
     /// </summary>
@@ -67,6 +85,24 @@ public sealed partial class XenoEggComponent : Component
     public EntityUid? InfectTarget;
 
     /// <summary>
+    ///     The ent to spawn on normal destruction.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntProtoId EggDestroyed = "XenoEggDestroyed";
+
+    /// <summary>
+    ///     The ent to spawn on fragile destruction.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntProtoId EggDestroyedFragile = "XenoEggDestroyedFragile";
+
+    /// <summary>
+    ///     The ent to spawn on sustained destruction.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntProtoId EggDestroyedSustained = "XenoEggDestroyedFragileSustained";
+
+    /// <summary>
     ///     How long the creature jitters for when it exits the egg.
     /// </summary>
     [DataField, AutoNetworkedField]
@@ -84,7 +120,9 @@ public enum XenoEggState
     Growing,
     Grown,
     Opening,
-    Opened
+    Opened,
+    Fragile,
+    Sustained
 }
 
 [Serializable, NetSerializable]

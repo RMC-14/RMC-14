@@ -165,13 +165,13 @@
     - map: [ "enum.XenoVisualLayers.Base" ]
       state: alive
     - map: [ "enum.XenoEggStorageVisualLayers.Base" ]
-      state: eggsac_0 #TODO Visualizer
+      state: eggsac_0
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
-#    - map: [ "enum.XenoInhandVisualLayers.Left" ]
-#      visible: false
-#    - map: [ "enum.XenoInhandVisualLayers.Right" ]
-#      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
     - map: [ "focused" ]
       sprite: _RMC14/Interface/xeno_hud.rsi
       state: hudeye
