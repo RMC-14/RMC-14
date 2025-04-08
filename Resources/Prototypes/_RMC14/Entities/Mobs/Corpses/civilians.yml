@@ -283,14 +283,13 @@
 # Guidebook Colonist
 - type: entity
   id: RMCGuidebookCorpseColonistBurst
-  parent: CMMobHuman
+  parent: MobHuman
   name: Dead Colonist
   categories: [ DoNotMap, HideSpawnMenu ]
   components:
   - type: VictimBurst
   - type: Loadout
     prototypes: [ RMCGearCorpseColonist ]
-  - type: RandomHumanoidAppearance
   - type: Damageable
     damage:
       types:
