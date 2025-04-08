@@ -84,7 +84,7 @@ public sealed class XenoHeadbiteSystem : EntitySystem
             SpawnAttachedTo(xeno.Comp.HealEffect, xeno.Owner.ToCoordinates());
             SpawnAttachedTo(xeno.Comp.HeadbiteEffect, target.ToCoordinates());
             _emote.TryEmoteWithChat(xeno, xeno.Comp.Emote, cooldown: xeno.Comp.EmoteCooldown);
-            _audio.PlayPvs(xeno.Comp.Sound, xeno);
+            _audio.PlayPvs(xeno.Comp.HitSound, xeno);
         }
 
         _xenoHeal.CreateHealStacks(xeno, xeno.Comp.HealAmount, xeno.Comp.HealDelay, 1, xeno.Comp.HealDelay);
