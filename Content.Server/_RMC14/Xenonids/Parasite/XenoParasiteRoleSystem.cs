@@ -1,6 +1,5 @@
 using Content.Server.GameTicking;
 using Content.Server.Ghost.Roles;
-using Content.Server.Ghost.Roles.Components;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
 using Content.Shared._RMC14.Xenonids.Egg;
