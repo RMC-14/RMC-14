@@ -1,12 +1,15 @@
-﻿using Content.Shared._RMC14.Xenonids.Egg;
+using Content.Shared._RMC14.Xenonids.Egg;
 using Robust.Client.Animations;
 using Robust.Client.GameObjects;
+using Robust.Client.ResourceManagement;
+using Robust.Shared.Serialization.TypeSerializers.Implementations;
 
 namespace Content.Client._RMC14.Xenonids.Egg;
 
 public sealed class XenoEggVisualizerSystem : EntitySystem
 {
     [Dependency] private readonly AnimationPlayerSystem _animation = default!;
+    [Dependency] private readonly IResourceCache _resourceCache = default!;
 
     private const string AnimationKey = "rmc_egg_destroying";
 
@@ -24,6 +27,16 @@ public sealed class XenoEggVisualizerSystem : EntitySystem
     {
         if (!TryComp(ent, out SpriteComponent? sprite))
             return;
+
+        var expectedSprite = ent.Comp.CurrentSprite;
+
+        if (!_resourceCache.TryGetResource<RSIResource>(SpriteSpecifierSerializer.TextureRoot / expectedSprite, out var res))
+            return;
+
+        if (sprite.BaseRSI != res.RSI)
+        {
+            sprite.BaseRSI = res.RSI;
+        }
 
         var state = ent.Comp.State switch
         {

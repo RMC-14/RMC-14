@@ -1,10 +1,11 @@
-﻿using Content.Server._RMC14.NPC.Components;
+using Content.Server._RMC14.NPC.Components;
 using Content.Server.DoAfter;
 using Content.Server.Interaction;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Server._RMC14.NPC.Systems;
 
@@ -27,9 +28,9 @@ public sealed partial class NPCLeapSystem : EntitySystem
 
     private void OnShutdown(Entity<NPCLeapComponent> ent, ref ComponentShutdown args)
     {
-        if (ent.Comp.CurrentDoAfter != null && TryComp<DoAfterComponent>(ent, out var after))
+        if (ent.Comp.CurrentDoAfter != null)
         {
-            _doafter.Cancel(after.DoAfters[ent.Comp.CurrentDoAfter.Value].Id);
+            _doafter.Cancel(ent.Comp.CurrentDoAfter);
         }
     }
 
@@ -61,7 +62,7 @@ public sealed partial class NPCLeapSystem : EntitySystem
 
             if (comp.CurrentDoAfter != null)
             {
-                var status = _doafter.GetStatus(uid, comp.CurrentDoAfter.Value, after);
+                var status = _doafter.GetStatus(comp.CurrentDoAfter.Value, after);
                 comp.Status = status switch
                 {
                     DoAfterStatus.Running => LeapStatus.Normal,
@@ -88,7 +89,7 @@ public sealed partial class NPCLeapSystem : EntitySystem
 
                 if (!_interaction.InRangeUnobstructed(uid, comp.Target, range, comp.Mask))
                 {
-                    _doafter.Cancel(after.DoAfters[comp.CurrentDoAfter.Value].Id);
+                    _doafter.Cancel(comp.CurrentDoAfter.Value);
                     comp.CurrentDoAfter = null;
                     comp.Status = LeapStatus.TargetOutOfRange;
                     continue;
@@ -100,7 +101,7 @@ public sealed partial class NPCLeapSystem : EntitySystem
 
                 if (angle > Angle.FromDegrees(comp.MaxAngleDegrees))
                 {
-                    _doafter.Cancel(after.DoAfters[comp.CurrentDoAfter.Value].Id);
+                    _doafter.Cancel(comp.CurrentDoAfter.Value);
                     comp.CurrentDoAfter = null;
                     comp.Status = LeapStatus.TargetBadAngle;
                     continue;
@@ -145,13 +146,18 @@ public sealed partial class NPCLeapSystem : EntitySystem
                     action.Event.Target = destination;
                 }
 
-                comp.CurrentDoAfter = after.NextId;
+                var doafter = after.NextId;
 
                 _actions.PerformAction(uid, null, xeno.Actions[comp.ActionId], action, action.BaseEvent, _timing.CurTime);
 
                 // Means the action was cancelled for some reason
-                if (comp.CurrentDoAfter == after.NextId)
+                if (doafter == after.NextId)
                     comp.CurrentDoAfter = null;
+                else // Note instant doafter increment the counter but don't make a doafter so count has to be checked
+                {
+                    if (after.DoAfters.Count > 0)
+                        comp.CurrentDoAfter = after.DoAfters[doafter].Id;
+                }
 
             }
         }
