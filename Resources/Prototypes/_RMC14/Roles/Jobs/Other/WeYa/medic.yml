@@ -48,7 +48,7 @@
     belt: RMCBeltMedicBagPMCFilled
     suitstorage: RMCWeaponSMGM63B2
     pocket1: RMCPouchMedkitPMCFilled
-    pocket2: RMCPouchMagazineLarge
+    pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
   inhand:
   - RMCWebbingPMCMedic
   storage:

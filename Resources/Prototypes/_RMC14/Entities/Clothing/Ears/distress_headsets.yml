@@ -50,6 +50,15 @@
   - type: GrantSquadLeaderTracker
   - type: GrantTacMapAlert
 
+- type: entity
+  parent: RMCHeadsetDistressPMC
+  id: RMCHeadsetDistressPMCLeader
+  suffix: Leader
+  description:
+  components:
+  - type: Headset
+    radioTextIncrease: 2
+
 # For Duke's Dozen/Freelancer
 - type: entity
   parent: CMHeadset

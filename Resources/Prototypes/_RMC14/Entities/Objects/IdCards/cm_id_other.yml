@@ -149,6 +149,10 @@
   components:
   - type: ItemIFF
     faction: FactionWeYa
+  - type: Access
+    groups:
+    - Colony
+    - RMCWeYa
 
 - type: entity
   id: FactionWeYa
@@ -158,14 +162,6 @@
     channels:
     - Colony
     - WEYA
-
-- type: entity
-  parent: RMCIDCardPMC
-  id: RMCIDCardPMCColony
-  components:
-  - type: Access
-    groups:
-    - Colony
 
 - type: entity
   parent: CMIDCardLanyard
