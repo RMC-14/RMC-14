@@ -343,6 +343,21 @@ public abstract class SharedXenoHealSystem : EntitySystem
         _damageable.TryChangeDamage(target, -damage, true);
     }
 
+    public void CreateHealStacks(EntityUid target, FixedPoint2 healAmount, TimeSpan timeBetweenHeals, int charges, TimeSpan nextHealAt)
+    {
+        var heal = EnsureComp<XenoBeingHealedComponent>(target);
+        var healStack = new XenoHealStack()
+        {
+            Charges = charges,
+            TimeBetweenHeals = timeBetweenHeals,
+        };
+
+        healStack.HealAmount = healAmount;
+        healStack.NextHealAt = _timing.CurTime + nextHealAt;
+        heal.HealStacks.Add(healStack);
+        heal.ParallizeHealing = true;
+    }
+
     private bool GetHiveCore(EntityUid xeno)
     {
         var cores = EntityQueryEnumerator<HiveCoreComponent, HiveMemberComponent>();
