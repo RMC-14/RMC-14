@@ -1,4 +1,5 @@
-﻿using Content.Server._RMC14.TacticalMap;
+﻿using Content.Server._RMC14.Marines;
+using Content.Server._RMC14.TacticalMap;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Systems;
 using Content.Server.EUI;
@@ -11,6 +12,7 @@ using Content.Server.Roles.Jobs;
 using Content.Server.Station.Systems;
 using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.Database;
 using Content.Shared.Humanoid.Prototypes;
@@ -38,6 +40,7 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly MarineSystem _marine = default!;
 
     public readonly Queue<(Guid Id, List<TacticalMapLine> Lines, string Actor, int Round)> LinesDrawn = new();
 
@@ -93,6 +96,12 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
 
         if (mobUid != null)
             _transform.SetCoordinates(mobUid.Value, coords.Value);
+
+        if (HasComp<MarineComponent>(mobUid) &&
+            _prototypes.TryIndex(ev.JobId, out var job) &&
+            job.Icon != "CMJobIconEmpty" &&
+            _prototypes.TryIndex(job.Icon, out var icon))
+            _marine.SetMarineIcon(mobUid.Value, icon.Icon);
 
         _adminLog.Add(LogType.RMCSpawnJob, $"{ToPrettyString(user)} spawned {ToPrettyString(mobUid)} as job {jobName}");
     }
