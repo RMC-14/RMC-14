@@ -1,14 +1,14 @@
-# Corporate Medic
+# Gunner
 - type: job
   parent: CMJobBase
-  id: RMCPMCMedic
-  name: rmc-job-name-pmc-medic
+  id: RMCPMCGunner
+  name: rmc-job-name-pmc-gunner
   description: rmc-ghost-role-information-pmc-description
-  playTimeTracker: RMCJobPMCMedic
+  playTimeTracker: RMCJobPMCGunner
   ranks:
-    RMCRankWeYaMedicalSpecialist: []
-  startingGear: RMCJobPMCMedic
-  icon: RMCJobIconPMCMedic
+    RMCRankWeYaSupportSpecialist: []
+  startingGear: RMCJobPMCGunner
+  icon: RMCJobIconPMCGunner
   joinNotifyCrew: false
   accessGroups:
   - Colony
@@ -27,79 +27,69 @@
         RMCSkillFireman: 2
         RMCSkillConstruction: 2
         RMCSkillEngineer: 2
-        RMCSkillMedical: 2
-        RMCSkillSurgery: 1
+        RMCSkillSmartGun: 1
         RMCSkillEndurance: 3
+        RMCSkillJtac: 1
     - type: SquadArmorWearer
 
+- type: playTimeTracker
+  id: RMCJobPMCGunner
+
 - type: startingGear
-  id: RMCJobPMCMedic
+  id: RMCJobPMCGunner
   equipment:
     id: RMCIDCardPMC
     ears: RMCHeadsetDistressPMC
     jumpsuit: RMCJumpsuitVeteranPMC
-    outerClothing: CMArmorM4PMCLight
+    outerClothing: CMArmorM4PMCSmartGunHarness
     gloves: RMCHandsVeteranPMC
-    head: ArmorHelmetPMC
+    head: ArmorHelmetPMCGunner
     shoes: RMCBootsPMCFilled
-    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava
-    eyes: RMCGlassesMedicalHUDGlasses
-    back: RMCSatchelPMCMedic
-    belt: RMCBeltMedicBagPMCFilled
-    suitstorage: RMCWeaponSMGM63B2
-    pocket1: RMCPouchMedkitPMCFilled
-    pocket2: RMCPouchMagazineLarge
+    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava (leader)
+    suitstorage: RMCSmartGunWhiteOut
+    pocket1: RMCPouchFirstAidPMCFill
+    pocket2: RMCPouchDrumPMCFill
+    belt: RMCBeltSmartGunOperatorPistolPMCFilled
+    eyes: RMCGlassesSmartGunSight
   inhand:
-  - RMCWebbingPMCMedic
+  - RMCWebbingPMCGunner
   storage:
     outerClothing:
-    - CMMagazineSMGM63Ext
-    - CMMagazineSMGM63Ext
-    back:
-    - CMDefibrillator
-    - CMAdvFirstAidKitFilled
-    - CMAdvFirstAidKitFilled
-    - CMStunbaton
-    - RMCZipties
-    - CMFireExtinguisherPortable
-    pocket2:
-    - CMMagazineSMGM63AP
-    - CMMagazineSMGM63AP
-    - CMMagazineSMGM63AP
-    - CMMagazineSMGM63AP
-
-- type: playTimeTracker
-  id: RMCJobPMCMedic
+    - CMMagazinePistolMK80
+    - CMMagazinePistolMK80
+    head:
+    - CMGauze10
+    - CMGauze10
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconPMCMedic
+  id: RMCJobIconPMCGunner
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: pmc_md
+    state: pmc_sg
 
 - type: entity
   parent: MarkerBase
-  id: RMCRandomHumanoidPMCMedic
-  name: weya pmc ghost role medic
+  id: RMCRandomHumanoidPMCGunner
+  name: weya pmc ghost role gunner
   suffix: Spawner, Player
   components:
   - type: Sprite
     layers:
     - state: red
   - type: RandomHumanoidSpawner
-    settings: RMCPMCMedic
+    settings: RMCPMCGunner
 
 - type: randomHumanoidSettings
   parent: EventHumanoid
-  id: RMCPMCMedic
+  id: RMCPMCGunner
   components:
   - type: GhostRole
-    name: rmc-ghost-name-pmc-medic
+    name: rmc-ghost-name-pmc-gunner
     description: rmc-ghost-role-information-pmc-description
     rules: ghost-role-information-nonantagonist-rules
     reregister: false
-    job: RMCPMCMedic
+    job: RMCPMCGunner
     raffle:
       settings: short
   - type: GhostRoleApplySpecial

@@ -1133,3 +1133,40 @@
     contents:
     - id: RMCMagazineRifleM16
       amount: 5
+
+- type: entity
+  parent: RMCBeltSmartGunOperatorPistol
+  id: RMCBeltSmartGunOperatorPistolPMC
+  name: WY-TM410 pattern smargunner sidearm rig
+  description: A special pattern of We-Ya made combat belt, designed to carry smartgun ammunition and a sidearm.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator_pistol_wy.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m1984 # TODO RMC14 per-gun underlay
+      offset: 0.15625, 0.0
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      visible: false
+    - sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator_pistol_wy.rsi
+      state: icon-front
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator_pistol_wy.rsi
+
+- type: entity
+  parent: RMCBeltSmartGunOperatorPistolPMC
+  id: RMCBeltSmartGunOperatorPistolPMCFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMK80
+    - id: CMMagazinePistolMK80
+      amount: 2
+    - id: RMCMagazineSmartGunirradiated
+      amount: 2

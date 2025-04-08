@@ -50,7 +50,7 @@
     pocket1: RMCPouchToolsSocFill
     pocket2: RMCPouchConstructionFillFull
   inhand:
-  - RMCWebbingPMCAlt1
+  - RMCWebbingPMCEngineer
   storage:
     belt:
     - RMCMagazineRifleSSG45Extended

@@ -468,8 +468,8 @@
 
 - type: entity
   parent: CMWebbingBlack
-  id: RMCWebbingPMCAlt1
-  suffix: PMC, Alt1, Filled
+  id: RMCWebbingPMCEngineer
+  suffix: PMC, Engineer, Filled
   components:
   - type: StorageFill
     contents:
@@ -481,8 +481,8 @@
 
 - type: entity
   parent: CMWebbingBlack
-  id: RMCWebbingPMCAlt2
-  suffix: PMC, Alt2, Filled
+  id: RMCWebbingPMCMedic
+  suffix: PMC, Medic, Filled
   components:
   - type: StorageFill
     contents:
@@ -491,3 +491,16 @@
     - id: CMCrowbar # TODO RMC14: tactical prybar
     - id: RMCGrenadeBlastM12
     - id: RMCExplosivePlastic
+
+- type: entity
+  parent: CMWebbingBlack
+  id: RMCWebbingPMCGunner
+  suffix: PMC, Gunner, Filled
+  components:
+  - type: StorageFill
+    contents:
+    # - id: CMSplint5
+    - id: CMFireExtinguisherPortable
+    - id: CMMRE # TODO RMC14: PMC CFR ration
+    - id: RMCGrenadeBlastM12
+    - id: RMCPowerCellSmartgun
