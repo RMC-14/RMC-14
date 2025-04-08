@@ -7,6 +7,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
+using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -149,6 +150,9 @@ public abstract class SharedLadderSystem : EntitySystem
     private void OnLadderDoAfter(Entity<LadderComponent> ent, ref LadderDoAfterEvent args)
     {
         var user = args.User;
+        if (_net.IsClient && user != _player.LocalEntity)
+            return;
+
         if (_actorQuery.TryComp(user, out var actor))
             RemoveViewer(ent, actor.PlayerSession);
 
@@ -161,6 +165,9 @@ public abstract class SharedLadderSystem : EntitySystem
             return;
 
         var coordinates = _transform.GetMapCoordinates(other);
+        if (coordinates.MapId == MapId.Nullspace)
+            return;
+
         _transform.SetMapCoordinates(user, coordinates);
 
         var selfMessage = Loc.GetString("rmc-ladder-finish-climbing-self");

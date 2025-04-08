@@ -875,6 +875,22 @@
         types:
           Blunt: 10
 
+- type: entity
+  parent: RMCAttachableBase
+  id: RMCAttachmentSSG45Stock
+  name: SSG45 solid stock
+  description: Intergrated into the SSG45. You shouldn't have this.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    state: ssg45_stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentSSG45Stock
+
 - type: Tag
   id: RMCAttachmentHG3712Stock
 
@@ -949,3 +965,6 @@
 
 - type: Tag
   id: RMCAttachmentType71Stock
+
+- type: Tag
+  id: RMCAttachmentSSG45Stock

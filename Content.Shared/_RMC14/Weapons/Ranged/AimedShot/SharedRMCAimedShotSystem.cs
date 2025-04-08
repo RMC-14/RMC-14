@@ -301,7 +301,7 @@ public abstract class SharedRMCAimedShotSystem : EntitySystem
     /// <param name="target">The target to be removed from the target list</param>
     private void RemoveTarget(Entity<AimedShotComponent> ent, EntityUid target)
     {
-        _targeting.StopTargeting(ent, target);
+        _targeting.StopTargeting(ent.Owner, target);
         ent.Comp.Targets.Remove(target);
         ent.Comp.CurrentTarget = null;
         Dirty(ent);

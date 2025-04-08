@@ -1,16 +1,13 @@
 using System.Linq;
 using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Medical.Surgery.Steps;
-using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Xenonids;
-using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Slowing;
 using Content.Shared.Alert;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
-using Content.Shared.Destructible;
 using Content.Shared.Explosion;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
@@ -265,26 +262,29 @@ public sealed class CMArmorSystem : EntitySystem
             }
         }
 
+        //Default modifier
+        var mod = EnsureComp<RMCArmorModifierComponent>(ent);
+
         args.Damage = new DamageSpecifier(args.Damage);
         if (!HasComp<XenoComponent>(ent))
         {
             if (HasComp<RMCBulletComponent>(args.Tool))
             {
-                Resist(args.Damage, ev.Bullet, ArmorGroup);
+                Resist(args.Damage, ev.Bullet, ArmorGroup, mod.RangedArmorModifier);
             }
             else if (HasComp<MeleeWeaponComponent>(args.Tool))
             {
-                Resist(args.Damage, ev.Melee, ArmorGroup);
+                Resist(args.Damage, ev.Melee, ArmorGroup, mod.MeleeArmorModifier);
             }
-            Resist(args.Damage, ev.Bio, BioGroup);
+            Resist(args.Damage, ev.Bio, BioGroup, mod.RangedArmorModifier);
         }
         else
         {
-            Resist(args.Damage, ev.XenoArmor, ArmorGroup);
+            Resist(args.Damage, ev.XenoArmor, ArmorGroup, mod.RangedArmorModifier);
         }
     }
 
-    private void Resist(DamageSpecifier damage, int armor, ProtoId<DamageGroupPrototype> group)
+    private void Resist(DamageSpecifier damage, int armor, ProtoId<DamageGroupPrototype> group, int mult)
     {
         armor = Math.Max(armor, 0);
         if (armor <= 0)
@@ -305,14 +305,15 @@ public sealed class CMArmorSystem : EntitySystem
         var newDamage = damage.GetTotal();
         if (newDamage != FixedPoint2.Zero && newDamage < armor * 2)
         {
-            var damageWithArmor = FixedPoint2.Max(0, newDamage * 4 - armor);
+
+            var damageWithArmor = FixedPoint2.Max(0, newDamage * mult - armor);
 
             foreach (var type in types)
             {
                 if (damage.DamageDict.TryGetValue(type, out var amount) &&
                     amount > FixedPoint2.Zero)
                 {
-                    damage.DamageDict[type] = amount * damageWithArmor / (newDamage * 4);
+                    damage.DamageDict[type] = amount * damageWithArmor / (newDamage * mult);
                 }
             }
         }

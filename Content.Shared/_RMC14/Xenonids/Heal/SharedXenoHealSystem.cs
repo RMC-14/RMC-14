@@ -179,7 +179,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
                 [BluntGroup] = damageTaken,
             },
         };
-        _damageable.TryChangeDamage(ent, damageTakenSpecifier, ignoreResistances: true, interruptsDoAfters: false);
+        _damageable.TryChangeDamage(ent, damageTakenSpecifier, ignoreResistances: true, interruptsDoAfters: false, origin: args.Performer);
         _popup.PopupClient(Loc.GetString("rmc-xeno-apply-salve-self", ("target_xeno", target)), ent, PopupType.Medium);
 
         args.Handled = true;

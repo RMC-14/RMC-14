@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -433,7 +434,6 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
         _stun.TryParalyze(victim, parasite.Comp.ParalyzeTime, true);
         _status.TryAddStatusEffect(victim, "Muted", parasite.Comp.ParalyzeTime, true, "Muted");
-        _status.TryAddStatusEffect(victim, "TemporaryBlindness", parasite.Comp.ParalyzeTime, true, "TemporaryBlindness");
         RefreshIncubationMultipliers(victim);
 
         _inventory.TryEquip(victim, parasite.Owner, "mask", true, true, true);
@@ -534,6 +534,8 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
                 var victimComp = EnsureComp<VictimInfectedComponent>(infectedVictim);
                 victimComp.Hive = _hive.GetHive(uid)?.Owner;
+
+                _status.TryAddStatusEffect(infectedVictim, "TemporaryBlindness", para.ParalyzeTime, true, "TemporaryBlindness");
 
                 // TODO RMC14 also do damage to the parasite
                 EnsureComp<ParasiteSpentComponent>(uid);
@@ -788,7 +790,13 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         if (_container.TryGetContainer(ent, ent.Comp.LarvaContainerId, out var container))
         {
             foreach (var larva in container.ContainedEntities)
+            {
                 RemCompDeferred<BursterComponent>(larva);
+                var invc = EnsureComp<RMCTemporaryInvincibilityComponent>(larva);
+                invc.ExpiresAt = _timing.CurTime + ent.Comp.LarvaInvincibilityTime;
+                Dirty(larva, invc);
+            }
+
             _container.EmptyContainer(container, destination: coords);
         }
 

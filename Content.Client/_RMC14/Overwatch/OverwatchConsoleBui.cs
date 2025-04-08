@@ -113,6 +113,9 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
             {
                 int Sorting(OverwatchMarine marine)
                 {
+                    if (squad.Leader == marine.Id)
+                        return 1000;
+
                     if (marine.Role is not { } role)
                         return 0;
 

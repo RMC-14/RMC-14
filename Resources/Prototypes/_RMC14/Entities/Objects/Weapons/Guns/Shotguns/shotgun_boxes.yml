@@ -10,7 +10,20 @@
     grid:
     - 0,0,9,1 # 5 slots
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/shotgun_boxes.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    layers:
+    - state: smallshell_box
+      color: "#ff0000"
+    - state: smallshell_box_12g
+      color: "#00ff00"
+    - state: smallshell_ammo_full_12g_base
+      color: "#ffffff"
+    - state: smallshell_ammo_full_12g_color
+      color: "#0000ff"
+      map: [ "full" ]
+    - state: smallshell_empty
+      map: [ "empty" ]
+      color: "#ff0000"
   - type: Appearance
   - type: Tag
     tags:
@@ -42,15 +55,23 @@
       amount: 5
   - type: Sprite
     layers:
-    - state: buckshot
+    - state: smallshell_box
+      color: "#944444"
+    - state: shell_box_buckshot
+      color: "#e0d5c2"
+    - state: smallshell_ammo_full_12g_base
+      color: "#ffffff"
+    - state: smallshell_ammo_full_12g_color
+      color: "#944444"
       map: [ "full" ]
-    - state: buckshot_e
+    - state: smallshell_empty
       map: [ "empty" ]
+      color: "#944444"
 
 - type: entity
   parent: RMCBoxShotgunBase
   id: RMCBoxShotgunSlugs
-  name: box of shotgun slugs
+  name: box of slug shells
   description: A box filled with heavy shotgun shells. A timeless classic. 12 Gauge.
   components:
   - type: Storage
@@ -63,15 +84,23 @@
       amount: 5
   - type: Sprite
     layers:
-    - state: slugs
+    - state: smallshell_box
+      color: "#578e75"
+    - state: shell_box_slugs
+      color: "#e0d5c2"
+    - state: smallshell_ammo_full_12g_base
+      color: "#ffffff"
+    - state: smallshell_ammo_full_12g_color
+      color: "#578e75"
       map: [ "full" ]
-    - state: slugs_e
+    - state: smallshell_empty
       map: [ "empty" ]
+      color: "#578e75"
 
 - type: entity
   parent: RMCBoxShotgunBase
   id: RMCBoxShotgunIncendiary
-  name: box of incendiary slugs
+  name: box of incendiary slug shells
   description: A box filled with self-detonating incendiary shotgun rounds. 12 Gauge.
   components:
   - type: Storage
@@ -84,15 +113,25 @@
       amount: 5
   - type: Sprite
     layers:
-    - state: incendiary
+    - state: smallshell_box
+      color: "#c6cdd3"
+    - state: smallshell_box_marking
+      color: "#ffcb26"
+    - state: shell_box_incendiary
+      color: "#b8533d"
+    - state: smallshell_ammo_full_12g_base
+      color: "#ffffff"
+    - state: smallshell_ammo_full_12g_color
+      color: "#ffcb26"
       map: [ "full" ]
-    - state: incendiary_e
+    - state: smallshell_empty
       map: [ "empty" ]
+      color: "#c6cdd3"
 
 - type: entity
   parent: RMCBoxShotgunBase
   id: RMCBoxShotgunBeanbag
-  name: box of beanbag slugs
+  name: box of beanbag shells
   description: A box filled with beanbag shotgun shells used for non-lethal crowd control. 12 Gauge.
   components:
   - type: Storage
@@ -105,10 +144,18 @@
       amount: 5
   - type: Sprite
     layers:
-    - state: beanbag
+    - state: smallshell_box
+      color: "#5786be"
+    - state: shell_box_beanbag
+      color: "#e0d5c2"
+    - state: smallshell_ammo_full_12g_base
+      color: "#ffffff"
+    - state: smallshell_ammo_full_12g_color
+      color: "#5786be"
       map: [ "full" ]
-    - state: beanbag_e
+    - state: smallshell_empty
       map: [ "empty" ]
+      color: "#5786be"
 
 - type: entity
   parent: RMCBoxShotgunBase
@@ -126,15 +173,23 @@
       amount: 5
   - type: Sprite
     layers:
-    - state: flechette
+    - state: smallshell_box
+      color: "#6551a0"
+    - state: shell_box_flechette
+      color: "#e0d5c2"
+    - state: smallshell_ammo_full_12g_base
+      color: "#ffffff"
+    - state: smallshell_ammo_full_12g_color
+      color: "#6551a0"
       map: [ "full" ]
-    - state: flechette_e
+    - state: smallshell_empty
       map: [ "empty" ]
+      color: "#6551a0"
 
 - type: entity
   parent: RMCBoxShotgunBase
   id: RMCBoxShotgunIncendiaryBuckshot
-  name: box of incendiary buckshots
+  name: box of incendiary buckshot shells
   description: A box filled with self-detonating buckshot incendiary shotgun rounds. 12 Gauge.
   components:
   - type: Storage
@@ -147,10 +202,20 @@
       amount: 5
   - type: Sprite
     layers:
-    - state: incendiarybuck
+    - state: smallshell_box
+      color: "#c6cdd3"
+    - state: smallshell_box_marking
+      color: "#e49331"
+    - state: shell_box_incendiary
+      color: "#b8533d"
+    - state: smallshell_ammo_full_12g_base
+      color: "#ffffff"
+    - state: smallshell_ammo_full_12g_color
+      color: "#e49331"
       map: [ "full" ]
-    - state: incendiarybuck_e
+    - state: smallshell_empty
       map: [ "empty" ]
+      color: "#c6cdd3"
 
 - type: entity
   parent: RMCBoxShotgunBase
@@ -168,13 +233,51 @@
       amount: 5
   - type: Sprite
     layers:
-    - state: breaching
+    - state: smallshell_box
+      color: "#595959"
+    - state: shell_box_breaching
+      color: "#e0d5c2"
+    - state: smallshell_ammo_full_12g_base
+      color: "#ffffff"
+    - state: smallshell_ammo_full_12g_color
+      color: "#595959"
       map: [ "full" ]
-    - state: breaching_e
+    - state: smallshell_empty
       map: [ "empty" ]
+      color: "#595959"
   - type: Tag
     tags:
     - RMCBoxShotgunBreaching
 
 - type: Tag
   id: RMCBoxShotgunBreaching
+
+
+- type: entity
+  parent: RMCBoxShotgunBase
+  id: RMCBoxShotgunBuckshot8g
+  name: box of buckshot shells
+  description: A box filled with buckshot spread shotgun shells. 8 Gauge.
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCShellShotgunBuckshot
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 5
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#944444"
+    - state: shell_box_buckshot
+      color: "#e0d5c2"
+    - state: smallshell_ammo_full_8g_base
+      color: "#ffffff"
+    - state: smallshell_ammo_full_8g_color
+      color: "#944444"
+      map: [ "full" ]
+    - state: smallshell_empty
+      map: [ "empty" ]
+      color: "#944444"

@@ -65,3 +65,5 @@ rmc-ui-damage-yourself = Enable being able to hurt yourself with melee and guns
 
 rmc-tacmap-alert-area = Current Area: {$area}
 rmc-tacmap-alert-no-area = Unknown
+
+rmc-ui-options-alternate-sprites = Use non-trypophobia inducing sprites

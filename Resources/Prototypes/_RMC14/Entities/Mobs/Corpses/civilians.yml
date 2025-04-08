@@ -201,7 +201,7 @@
     back: CMSatchel
     shoes: RMCShoesLaceup
     eyes: RMCGlassesAviators
-    id: CMIDCardLiaison
+    id: CMIDCardLiaisonColony
     ears: RMCHeadsetDistressWeYa
 #    belt: /obj/item/storage/belt/gun/m4a3/mod88
   storage:
@@ -251,14 +251,14 @@
   id: RMCCorpseColonistBurst
   components:
   - type: VictimBurst
-  
+
 - type: randomHumanoidSettings
   parent: RMCCorpse
   id: RMCCorpseColonistKutjevo
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseColonistKutjevo, RMCGearCorpseColonistKutjevoDrysuit ]
-    
+
 - type: startingGear
   id: RMCGearCorpseColonistKutjevo
   parent: RMCGearCorpseColonist
@@ -267,7 +267,7 @@
     head: ArmorHelmetPMCKutjevo
     mask: RMCMaskKutjevoRespirator
     jumpsuit: RMCJumpsuitKutjevoJumper
-    
+
 - type: startingGear
   id: RMCGearCorpseColonistKutjevoDrysuit
   parent: RMCGearCorpseColonistKutjevo
