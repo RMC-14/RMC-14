@@ -1,10 +1,5 @@
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Content.Shared._RMC14.Xenonids.Egg;
 
@@ -18,6 +13,9 @@ public sealed partial class XenoFragileEggComponent : Component
     public TimeSpan? ShortExpireAt;
 
     [DataField, AutoNetworkedField]
+    public TimeSpan? CheckSustainAt;
+
+    [DataField, AutoNetworkedField]
     public EntityUid? SustainedBy;
 
     [DataField, AutoNetworkedField]
@@ -26,9 +24,15 @@ public sealed partial class XenoFragileEggComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan? BurstAt;
 
-    [DataField, AutoNetworkedField]
-    public TimeSpan? BurstDelay = TimeSpan.FromSeconds(10);
+    [DataField]
+    public TimeSpan BurstDelay = TimeSpan.FromSeconds(10);
 
     [DataField]
-    public TimeSpan SustainCheckEvery = TimeSpan.FromMinutes(1);
+    public TimeSpan SustainDuration = TimeSpan.FromMinutes(1);
+
+    [DataField]
+    public TimeSpan SustainCheckEvery = TimeSpan.FromSeconds(2);
+
+    [DataField, AutoNetworkedField]
+    public bool InRange = true;
 }

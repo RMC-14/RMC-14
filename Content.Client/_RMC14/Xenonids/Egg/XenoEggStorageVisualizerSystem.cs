@@ -29,5 +29,10 @@ public sealed partial class XenoEggStorageVisualizerSystem : VisualizerSystem<Xe
             layerState += "_active";
 
         sprite.LayerSetState(layer, layerState);
+
+        if (AppearanceSystem.TryGetData(uid, XenoEggStorageVisuals.Dead, out bool dead) && dead)
+            sprite.LayerSetVisible(layer, false);
+        else
+            sprite.LayerSetVisible(layer, true);
     }
 }

@@ -160,7 +160,7 @@
   suffix: Eggsac
   components:
   - type: Sprite
-    sprite: _RMC14/Mobs/OldXenonids/Carrier/eggsac_carrier.rsi
+    sprite: _RMC14/Mobs/Xenonids/Carrier/eggsac_carrier.rsi
     layers:
     - map: [ "enum.XenoVisualLayers.Base" ]
       state: alive
@@ -193,8 +193,8 @@
     - ActionXenoOrderConstruction
     - ActionXenoPheromones
     - ActionXenoPlantWeeds
-    - ActionXenoRetrieveEgg
     - ActionXenoGenerateEggs
+    - ActionXenoRetrieveEgg
     - ActionXenoDevolve
     hidden: true
   - type: XenoStrain
@@ -210,4 +210,5 @@
   - type: EggPlantingDistance
     distance: 2.5
   - type: XenoGenerateEggs
+  - type: XenoEggSustainer
     

@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
+using Content.Shared._RMC14.Xenonids.Egg.EggRetriever;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -26,6 +27,7 @@ using Content.Shared.Maps;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.StepTrigger.Components;
 using Content.Shared.StepTrigger.Systems;
@@ -76,6 +78,7 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDestructibleSystem _destruction = default!;
+    [Dependency] private readonly NameModifierSystem _nameModifier = default!;
 
     private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
@@ -108,6 +111,13 @@ public sealed class XenoEggSystem : EntitySystem
         SubscribeLocalEvent<XenoEggComponent, BeforeDamageChangedEvent>(OnXenoEggBeforeDamageChanged);
         SubscribeLocalEvent<XenoEggComponent, GetVerbsEvent<ActivationVerb>>(OnGetVerbs);
         SubscribeLocalEvent<XenoEggComponent, DestructionEventArgs>(OnDestruction);
+
+        SubscribeLocalEvent<XenoFragileEggComponent, ComponentShutdown>(OnFragileConvert);
+        SubscribeLocalEvent<XenoFragileEggComponent, RefreshNameModifiersEvent>(OnFragileRefreshModifier);
+        SubscribeLocalEvent<XenoFragileEggComponent, EntityTerminatingEvent>(OnFragileDelete);
+
+        SubscribeLocalEvent<XenoEggSustainerComponent, EntityTerminatingEvent>(OnEggSustainerDelete);
+        SubscribeLocalEvent<XenoEggSustainerComponent, MobStateChangedEvent>(OnEggSustainerDeath);
     }
 
     private void OnDropshipHijackStart(ref DropshipHijackStartEvent ev)
@@ -238,7 +248,7 @@ public sealed class XenoEggSystem : EntitySystem
             return;
         }
 
-        if (!CanPlaceEggPopup(args.User, egg, args.ClickLocation, args.Handled))
+        if (!CanPlaceEggPopup(args.User, egg, args.ClickLocation, args.Handled, out _))
         {
             args.Handled = true;
             return;
@@ -271,11 +281,15 @@ public sealed class XenoEggSystem : EntitySystem
         args.Handled = true;
 
         var coordinates = GetCoordinates(args.Coordinates);
-        if (!CanPlaceEggPopup(args.User, egg, coordinates, false))
+        if (!CanPlaceEggPopup(args.User, egg, coordinates, false, out var hiveweeds))
             return;
 
         if (!_plasma.TryRemovePlasmaPopup(args.User, 30))
             return;
+
+        //Eggsac code
+        if (!hiveweeds)
+            EggsacSustain(args.User, egg);
 
         // Hand code is god-awful and its reach distance is inconsistent with args.CanReach
         // so we need to set the position ourselves.
@@ -285,6 +299,38 @@ public sealed class XenoEggSystem : EntitySystem
         SetEggState(egg, XenoEggState.Growing);
         _transform.AnchorEntity(egg, Transform(egg));
         _audio.PlayPredicted(egg.Comp.PlantSound, egg, args.User);
+    }
+
+    private void EggsacSustain(EntityUid user, Entity<XenoEggComponent> egg)
+    {
+        SetEggSprite(egg, egg.Comp.SustainedSprite);
+        if (_net.IsClient)
+            return;
+
+        //Means we must have the eggSustainer comp
+        if (!TryComp<XenoEggSustainerComponent>(user, out var sustainer))
+            return;
+
+        var fragile = EnsureComp<XenoFragileEggComponent>(egg);
+        fragile.SustainedBy = user;
+        fragile.SustainRange = sustainer.SustainedEggsRange;
+        fragile.ExpireAt = _timing.CurTime + sustainer.SustainedEggMaxTime;
+        fragile.ShortExpireAt = _timing.CurTime + fragile.SustainDuration;
+        fragile.CheckSustainAt = _timing.CurTime + fragile.SustainCheckEvery;
+        _nameModifier.RefreshNameModifiers(egg.Owner);
+        Dirty(egg, fragile);
+
+        sustainer.SustainedEggs.Add(egg);
+        if (sustainer.SustainedEggs.Count > sustainer.MaxSustainedEggs)
+        {
+            var decayEgg = sustainer.SustainedEggs[0];
+            sustainer.SustainedEggs.Remove(decayEgg);
+            if (TryComp<XenoFragileEggComponent>(decayEgg, out var fragileDecay) && TryComp<XenoEggComponent>(decayEgg, out var eggDecay))
+            {
+                UnsustainEgg(decayEgg, eggDecay, fragileDecay, true);
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-sustain-egg-decaying", ("max", sustainer.MaxSustainedEggs)), user, user, PopupType.SmallCaution);
+            }
+        }
     }
 
     private void OnXenoEggActivateInWorld(Entity<XenoEggComponent> egg, ref ActivateInWorldEvent args)
@@ -377,6 +423,9 @@ public sealed class XenoEggSystem : EntitySystem
             return;
 
         if (ent.Comp.State != XenoEggState.Grown)
+            return;
+
+        if (TryComp<XenoFragileEggComponent>(ent, out var fragile) && fragile.SustainedBy != null)
             return;
 
         var parasiteVerb = new ActivationVerb
@@ -486,6 +535,19 @@ public sealed class XenoEggSystem : EntitySystem
         if (state == XenoEggState.Opened)
             RemCompDeferred<XenoFriendlyComponent>(egg);
 
+        UpdateEggSprite(egg);
+    }
+
+    private void SetEggSprite(Entity<XenoEggComponent> egg, string sprite)
+    {
+        egg.Comp.CurrentSprite = sprite;
+        Dirty(egg);
+
+        UpdateEggSprite(egg);
+    }
+
+    private void UpdateEggSprite(Entity<XenoEggComponent> egg)
+    {
         var ev = new XenoEggStateChangedEvent();
         RaiseLocalEvent(egg, ref ev);
     }
@@ -558,8 +620,9 @@ public sealed class XenoEggSystem : EntitySystem
         return true;
     }
 
-    private bool CanPlaceEggPopup(EntityUid user, Entity<XenoEggComponent> egg, EntityCoordinates coordinates, bool handled)
+    private bool CanPlaceEggPopup(EntityUid user, Entity<XenoEggComponent> egg, EntityCoordinates coordinates, bool handled, out bool hasHiveWeeds)
     {
+        hasHiveWeeds = false;
         if (HasComp<MarineComponent>(user))
         {
             // TODO RMC14 this should have a better filter than marine component
@@ -580,7 +643,7 @@ public sealed class XenoEggSystem : EntitySystem
 
         var tile = _map.TileIndicesFor(gridId, grid, coordinates);
         var anchored = _map.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
-        var hasHiveWeeds = _weeds.IsOnHiveWeeds((gridId, grid), coordinates);
+        hasHiveWeeds = _weeds.IsOnHiveWeeds((gridId, grid), coordinates);
         while (anchored.MoveNext(out var uid))
         {
             if (HasComp<XenoEggComponent>(uid))
@@ -610,7 +673,13 @@ public sealed class XenoEggSystem : EntitySystem
 
         if (!hasHiveWeeds)
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-egg-failed-must-hive-weeds"), user, user);
+            if (!HasComp<XenoEggSustainerComponent>(user))
+                _popup.PopupClient(Loc.GetString("cm-xeno-egg-failed-must-hive-weeds"), user, user);
+            else if (!_weeds.IsOnWeeds((gridId, grid), coordinates))
+                _popup.PopupClient(Loc.GetString("cm-xeno-egg-failed-must-weeds"), user, user);
+            else
+                return true;
+
             return false;
         }
 
@@ -669,15 +738,90 @@ public sealed class XenoEggSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (TryComp<XenoFragileEggComponent>(ent, out var fragile))
+        string? proto = ent.Comp.EggDestroyed;
+
+        if (ent.Comp.CurrentSprite == ent.Comp.FragileSprite)
+            proto = ent.Comp.EggDestroyedFragile;
+        else if (ent.Comp.CurrentSprite == ent.Comp.SustainedSprite)
+            proto = ent.Comp.EggDestroyedSustained;
+
+        var egg = SpawnAtPosition(proto, ent.Owner.ToCoordinates());
+
+        _audio.PlayPvs(ent.Comp.BurstSound, egg);
+    }
+
+    private void OnFragileConvert(Entity<XenoFragileEggComponent> ent, ref ComponentShutdown args)
+    {
+        if (ent.Comp.SustainedBy != null && TryComp<XenoEggSustainerComponent>(ent.Comp.SustainedBy, out var sustain))
         {
-            if (fragile.SustainedBy != null)
-                SpawnAtPosition(ent.Comp.EggDestroyedSustained, ent.Owner.ToCoordinates());
-            else
-                SpawnAtPosition(ent.Comp.EggDestroyed, ent.Owner.ToCoordinates());
+            sustain.SustainedEggs.Remove(ent);
         }
-        else
-            SpawnAtPosition(ent.Comp.EggDestroyed, ent.Owner.ToCoordinates());
+        if (TryComp<XenoEggComponent>(ent, out var egg))
+            SetEggSprite((ent, egg), egg.NormalSprite);
+        _nameModifier.RefreshNameModifiers(ent.Owner);
+    }
+
+    private void OnFragileDelete(Entity<XenoFragileEggComponent> ent, ref EntityTerminatingEvent args)
+    {
+        if (ent.Comp.SustainedBy != null && TryComp<XenoEggSustainerComponent>(ent.Comp.SustainedBy, out var sustain))
+            sustain.SustainedEggs.Remove(ent);
+    }
+
+    private void OnFragileRefreshModifier(Entity<XenoFragileEggComponent> ent, ref RefreshNameModifiersEvent args)
+    {
+        if (!TerminatingOrDeleted(ent))
+            args.AddModifier("rmc-xeno-fragile-egg-prefix");
+    }
+
+    private void UnsustainEgg(EntityUid egg, XenoEggComponent eggComp, XenoFragileEggComponent fragile, bool decay = false)
+    {
+        if (_net.IsClient)
+            return;
+
+        SetEggSprite((egg, eggComp), eggComp.FragileSprite);
+        fragile.SustainedBy = null;
+        Dirty(egg, fragile);
+        if (decay && fragile.BurstAt == null)
+        {
+            fragile.BurstAt = _timing.CurTime + fragile.BurstDelay;
+            _jitter.DoJitter(egg, fragile.BurstDelay / 2, true, 40, 8, true);
+        }
+    }
+
+    private void OnEggSustainerDelete(Entity<XenoEggSustainerComponent> ent, ref EntityTerminatingEvent args)
+    {
+        foreach (var egg in ent.Comp.SustainedEggs)
+        {
+            if (!TryComp<XenoFragileEggComponent>(egg, out var frag) || !TryComp<XenoEggComponent>(egg, out var eggComp))
+                continue;
+
+            UnsustainEgg(egg, eggComp, frag);
+        }
+    }
+
+    private void OnEggSustainerDeath(Entity<XenoEggSustainerComponent> ent, ref MobStateChangedEvent args)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        if (args.NewMobState != MobState.Dead)
+            return;
+
+        foreach (var egg in ent.Comp.SustainedEggs)
+        {
+            if (!TryComp<XenoFragileEggComponent>(egg, out var frag) || !TryComp<XenoEggComponent>(egg, out var eggComp))
+                continue;
+
+            UnsustainEgg(egg, eggComp, frag, true);
+        }
+
+        ent.Comp.SustainedEggs.Clear();
+
+        if (_timing.IsFirstTimePredicted)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-sustain-death", ("xeno", ent)), ent, PopupType.MediumCaution);
+            _audio.PlayPredicted(ent.Comp.DeathSound, ent, ent);
+        }
     }
 
     public override void Update(float frameTime)
@@ -744,13 +888,17 @@ public sealed class XenoEggSystem : EntitySystem
                 if (_weeds.IsOnHiveWeeds((gridId, grid), uid.ToCoordinates()))
                 {
                     if (HasComp<XenoFragileEggComponent>(uid))
+                    {
                         RemCompDeferred<XenoFragileEggComponent>(uid);
+                    }
                 }
                 else
                 {
                     if (!EnsureComp<XenoFragileEggComponent>(uid, out var fragile))
                     {
                         fragile.ExpireAt = time + egg.FragileEggDuration;
+                        SetEggSprite((uid, egg), egg.FragileSprite);
+                        _nameModifier.RefreshNameModifiers(uid);
                     }
                 }
 
@@ -801,8 +949,8 @@ public sealed class XenoEggSystem : EntitySystem
             }
         }
 
-        var fragilEggQuery = EntityQueryEnumerator<XenoEggComponent, XenoFragileEggComponent>();
-        while (fragilEggQuery.MoveNext(out var uid, out var egg, out var fragile))
+        var fragileEggQuery = EntityQueryEnumerator<XenoFragileEggComponent>();
+        while (fragileEggQuery.MoveNext(out var uid, out var fragile))
         {
             if (fragile.BurstAt != null)
             {
@@ -813,18 +961,29 @@ public sealed class XenoEggSystem : EntitySystem
                 continue;
             }
 
-            if (fragile.SustainedBy != null && fragile.ShortExpireAt != null && time >= fragile.ShortExpireAt)
+            if (fragile.SustainedBy != null)
             {
-                if (uid.ToCoordinates().TryDistance(EntityManager, fragile.SustainedBy.Value.ToCoordinates(), out var distance))
-                    continue;
-
-                if (distance > fragile.SustainRange)
+                if (!fragile.InRange && time >= fragile.ShortExpireAt)
                 {
                     fragile.BurstAt = time + fragile.BurstDelay;
+                    _jitter.DoJitter(uid, fragile.BurstDelay / 2, true, 40, 8, true);
+                    continue;
                 }
-                else
+
+
+                if (time >= fragile.CheckSustainAt)
                 {
-                    fragile.ShortExpireAt = time + fragile.SustainCheckEvery;
+                    fragile.CheckSustainAt = time + fragile.SustainCheckEvery;
+                    if (!uid.ToCoordinates().TryDistance(EntityManager, fragile.SustainedBy.Value.ToCoordinates(), out var distance))
+                        continue;
+
+                    if (distance > fragile.SustainRange)
+                        fragile.InRange = false;
+                    else
+                    {
+                        fragile.InRange = true;
+                        fragile.ShortExpireAt = time + fragile.SustainDuration;
+                    }
                 }
             }
 
@@ -832,6 +991,7 @@ public sealed class XenoEggSystem : EntitySystem
                 continue;
 
             fragile.BurstAt = time + fragile.BurstDelay;
+            _jitter.DoJitter(uid, fragile.BurstDelay / 2, true, 40, 8, true);
         }
     }
 }

@@ -25,5 +25,6 @@ public enum XenoEggStorageVisuals
     Resting,
     Downed,
     Active,
+    Dead,
     Number
 }

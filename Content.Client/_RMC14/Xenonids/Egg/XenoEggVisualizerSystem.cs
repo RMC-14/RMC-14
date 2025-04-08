@@ -28,14 +28,7 @@ public sealed class XenoEggVisualizerSystem : EntitySystem
         if (!TryComp(ent, out SpriteComponent? sprite))
             return;
 
-        var expectedSprite = ent.Comp.NormalSprite;
-        if (TryComp<XenoFragileEggComponent>(ent, out var fragile))
-        {
-            if (fragile.SustainedBy != null)
-                expectedSprite = ent.Comp.SustainedSprite;
-            else
-                expectedSprite = ent.Comp.FragileSprite;
-        }
+        var expectedSprite = ent.Comp.CurrentSprite;
 
         if (!_resourceCache.TryGetResource<RSIResource>(SpriteSpecifierSerializer.TextureRoot / expectedSprite, out var res))
             return;

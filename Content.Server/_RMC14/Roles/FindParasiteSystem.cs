@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Roles.FindParasite;
 using Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
 using Content.Shared._RMC14.Xenonids.Egg;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 using Content.Shared.Coordinates;
 using Content.Shared.Mobs.Systems;
@@ -49,11 +50,12 @@ public sealed partial class FindParasiteSystem : EntitySystem
         var eggs = EntityQueryEnumerator<XenoEggComponent>();
         var eggMorphers = EntityQueryEnumerator<EggMorpherComponent>();
         var parasiteThrowers = EntityQueryEnumerator<XenoParasiteThrowerComponent>();
+        var parasites = EntityQueryEnumerator<ParasiteAIComponent>();
 
         var spawners = new List<NetEntity>();
         while (eggs.MoveNext(out var eggEnt, out var egg))
         {
-            if (egg.State != XenoEggState.Grown)
+            if (egg.State != XenoEggState.Grown || (TryComp<XenoFragileEggComponent>(eggEnt, out var fragile) && fragile.SustainedBy != null))
             {
                 continue;
             }
@@ -81,6 +83,27 @@ public sealed partial class FindParasiteSystem : EntitySystem
                 continue;
             }
             spawners.Add(_entities.GetNetEntity(throwerEnt));
+        }
+
+        while (parasiteThrowers.MoveNext(out var throwerEnt, out var parasiteThrower))
+        {
+            if (parasiteThrower.CurParasites <= parasiteThrower.ReservedParasites ||
+                parasiteThrower.CurParasites == 0 ||
+                _mob.IsDead(throwerEnt))
+            {
+                continue;
+            }
+            spawners.Add(_entities.GetNetEntity(throwerEnt));
+        }
+
+
+        while (parasites.MoveNext(out var paraEnt, out var parasite))
+        {
+            if (!_mob.IsAlive(paraEnt))
+            {
+                continue;
+            }
+            spawners.Add(_entities.GetNetEntity(paraEnt));
         }
 
         foreach (var spawner in spawners)

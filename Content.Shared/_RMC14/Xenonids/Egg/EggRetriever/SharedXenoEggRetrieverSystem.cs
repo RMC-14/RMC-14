@@ -34,6 +34,7 @@ public abstract partial class SharedXenoEggRetrieverSystem : EntitySystem
         SubscribeLocalEvent<XenoEggStorageVisualsComponent, StatusEffectEndedEvent>(OnVisualsStatusEffectEnded);
 
         SubscribeLocalEvent<XenoGenerateEggsComponent, XenoGenerateEggsActionEvent>(OnXenoProduceEggsAction);
+        SubscribeLocalEvent<XenoGenerateEggsComponent, MobStateChangedEvent>(OnXenoProduceEggsDeath);
     }
 
     private void OnEggRetrieverExamine(Entity<XenoEggRetrieverComponent> retriever, ref ExaminedEvent args)
@@ -54,6 +55,7 @@ public abstract partial class SharedXenoEggRetrieverSystem : EntitySystem
             return;
 
         _appearance.SetData(xeno, XenoEggStorageVisuals.Downed, args.NewMobState != MobState.Alive);
+        _appearance.SetData(xeno, XenoEggStorageVisuals.Dead, args.NewMobState == MobState.Dead);
     }
 
     private void OnVisualsRest(Entity<XenoEggStorageVisualsComponent> xeno, ref XenoRestEvent args)
@@ -111,5 +113,17 @@ public abstract partial class SharedXenoEggRetrieverSystem : EntitySystem
                 _actions.SetToggled(actionId, produce.Active);
         }
         Dirty(xeno, produce);
+    }
+
+    private void OnXenoProduceEggsDeath(Entity<XenoGenerateEggsComponent> xeno, ref MobStateChangedEvent args)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        if (args.NewMobState != MobState.Dead)
+            return;
+
+        if (xeno.Comp.Active)
+            ToggleProduceEggs(xeno, xeno.Comp);
     }
 }

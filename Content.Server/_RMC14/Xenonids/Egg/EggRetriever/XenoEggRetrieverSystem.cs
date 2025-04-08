@@ -37,11 +37,17 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
     {
         base.Initialize();
 
+        SubscribeLocalEvent<XenoEggRetrieverComponent, MapInitEvent>(OnXenoRetrieverInit);
         SubscribeLocalEvent<XenoEggRetrieverComponent, XenoRetrieveEggActionEvent>(OnXenoRetrieveEgg);
         SubscribeLocalEvent<XenoEggRetrieverComponent, XenoEggUseInHandEvent>(OnXenoRetrieverUseInHand);
         SubscribeLocalEvent<XenoEggRetrieverComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
         SubscribeLocalEvent<XenoEggRetrieverComponent, XenoDevolveBuiMsg>(OnXenoDevolveDoAfter);
         SubscribeLocalEvent<XenoEggRetrieverComponent, MobStateChangedEvent>(OnDeathMobStateChanged);
+    }
+
+    private void OnXenoRetrieverInit(Entity<XenoEggRetrieverComponent> eggRetriever, ref MapInitEvent args)
+    {
+        _appearance.SetData(eggRetriever, XenoEggStorageVisuals.Number, eggRetriever.Comp.CurEggs);
     }
 
     private void OnXenoRetrieveEgg(Entity<XenoEggRetrieverComponent> eggRetriever, ref XenoRetrieveEggActionEvent args)
@@ -228,7 +234,7 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
             {
                 if (!_plasma.TryRemovePlasma(uid, produce.PlasmaDrain))
                 {
-                    _popup.PopupEntity(Loc.GetString("rmc-xeno-produce-eggs-no-plasma"), uid, PopupType.SmallCaution);
+                    _popup.PopupEntity(Loc.GetString("rmc-xeno-produce-eggs-no-plasma"), uid, uid, PopupType.SmallCaution);
                     ToggleProduceEggs(uid, produce);
                 }
 
@@ -239,7 +245,7 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
             {
                 egg.CurEggs++;
                 _appearance.SetData(uid, XenoEggStorageVisuals.Number, egg.CurEggs);
-                _popup.PopupEntity(Loc.GetString("rmc-xeno-produce-eggs-new-egg", ("cur_eggs", egg.CurEggs), ("max_eggs", egg.MaxEggs)), uid);
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-produce-eggs-new-egg", ("cur_eggs", egg.CurEggs), ("max_eggs", egg.MaxEggs)), uid, uid);
 
                 Dirty(uid, egg);
                 produce.NextEgg = time + produce.EggEvery;

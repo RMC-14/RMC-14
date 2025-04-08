@@ -48,14 +48,17 @@ public sealed partial class XenoEggComponent : Component
     [DataField, AutoNetworkedField]
     public EntProtoId Spawn = "CMXenoParasite";
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public string NormalSprite = "_RMC14/Structures/Xenos/xeno_egg.rsi";
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public string FragileSprite = "_RMC14/Structures/Xenos/xeno_egg_fragile.rsi";
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public string SustainedSprite = "_RMC14/Structures/Xenos/xeno_egg_fragile_eggsac.rsi";
+
+    [DataField, AutoNetworkedField]
+    public string CurrentSprite = "_RMC14/Structures/Xenos/xeno_egg.rsi";
 
     [DataField, AutoNetworkedField]
     public TimeSpan CheckWeedsAt;
@@ -87,19 +90,19 @@ public sealed partial class XenoEggComponent : Component
     /// <summary>
     ///     The ent to spawn on normal destruction.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public EntProtoId EggDestroyed = "XenoEggDestroyed";
 
     /// <summary>
     ///     The ent to spawn on fragile destruction.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public EntProtoId EggDestroyedFragile = "XenoEggDestroyedFragile";
 
     /// <summary>
     ///     The ent to spawn on sustained destruction.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public EntProtoId EggDestroyedSustained = "XenoEggDestroyedFragileSustained";
 
     /// <summary>
@@ -107,6 +110,9 @@ public sealed partial class XenoEggComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan CreatureExitEggJitterDuration = TimeSpan.FromSeconds(6);
+
+    [DataField]
+    public SoundSpecifier BurstSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_egg_burst.ogg");
 
     public SoundSpecifier PlantSound = new SoundPathSpecifier("/Audio/Effects/Fluids/splat.ogg");
 
