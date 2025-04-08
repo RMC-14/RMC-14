@@ -23,8 +23,9 @@
       preset: RMCSurvivorPresetEngineer
     - type: RMCSurvivor
     - type: MotionDetectorTracked
-    - type: UserIFF
-      faction: FactionSurvivor
+    - type: NpcFactionMember
+      factions:
+      - Survivor
     - type: IntelRescueSurvivorObjective
 
 - type: startingGear

@@ -35,8 +35,9 @@
       preset: RMCSurvivorPresetCivilian
     - type: RMCSurvivor
     - type: MotionDetectorTracked
-    - type: UserIFF
-      faction: FactionSurvivor
+    - type: NpcFactionMember
+      factions:
+      - Survivor
     - type: IntelRescueSurvivorObjective
   greeting: rmc-job-greeting-survivor
   hasIcon: false

@@ -1,0 +1,89 @@
+# Site Director
+- type: job
+  parent: CMJobBase
+  id: RMCPMCDirector
+  name: rmc-job-name-pmc-director
+  description: rmc-ghost-role-information-pmc-description
+  playTimeTracker: RMCJobPMCDirector
+  ranks:
+    RMCRankWeYaSiteDirector: []
+  startingGear: RMCJobPMCDirector
+  icon: RMCJobIconPMCDirector
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillMedical: 2
+        RMCSkillCqc: 1
+        RMCSkillLeadership: 3
+        RMCSkillOverwatch: 1
+        RMCSkillEndurance: 3
+        RMCSkillJtac: 4
+        RMCSkillExecution: 1
+
+- type: startingGear
+  id: RMCJobPMCDirector
+  equipment:
+    id: RMCIDCardPMC
+    ears: RMCHeadsetDistressPMCDirector
+    head: ArmorHelmetPMCDirector
+    jumpsuit: RMCJumpsuitVeteranPMCDirector
+    outerClothing: RMCArmorPMCDirector
+    belt: RMCMatebaBeltLuxuriousFilled
+    shoes: RMCBootsPMCFilled
+    back: CMSatchel # TODO RMC14: secure leather satchel
+    pocket1: RMCPouchCommand
+    pocket2: RMCPouchGeneralLarge
+  storage:
+    pocket1:
+    # TODO RMC14: RMCTabletPMC
+    - RMCRangefinder
+
+- type: playTimeTracker
+  id: RMCJobPMCDirector
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconPMCDirector
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: pmc_sd
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidPMCDirector
+  name: weya pmc ghost role director
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCPMCDirector
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCPMCDirector
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-pmc-director
+    description: rmc-ghost-role-information-pmc-description
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    job: RMCPMCDirector
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial

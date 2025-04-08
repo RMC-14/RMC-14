@@ -218,7 +218,6 @@
     - id: CMEmergencyAutoInjector
       amount: 1
 
-
 # Syringe Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]

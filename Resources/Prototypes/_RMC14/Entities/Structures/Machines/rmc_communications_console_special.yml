@@ -1,0 +1,61 @@
+# SPP
+- type: entity
+  parent: RMCOverwatchConsole
+  id: RMCOverwatchConsoleSPP
+  suffix: SPP
+  components:
+  - type: OverwatchConsole
+    canOrbitalBombardment: false
+    group: SPP
+
+- type: entity
+  parent: RMCOverwatchConsoleSPP
+  id: RMCOverwatchConsoleSPPRotating
+  suffix: SPP, Rotating
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: false
+
+# Admin
+- type: entity
+  parent: RMCOverwatchConsole
+  id: RMCOverwatchConsoleAdmin
+  suffix: Admin
+  components:
+  - type: OverwatchConsole
+    canOrbitalBombardment: false
+    group: ADMINISTRATOR
+
+- type: entity
+  parent: RMCOverwatchConsoleAdmin
+  id: RMCOverwatchConsoleAdminRotating
+  suffix: Admin, Rotating
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: false
+
+# WeYa
+- type: entity
+  parent: RMCOverwatchConsole
+  id: RMCOverwatchConsoleWeYa
+  suffix: WeYa
+  components:
+  - type: OverwatchConsole
+    canOrbitalBombardment: false
+    group: WeYa
+  - type: AccessReader
+    access: [ [ "RMCAccessWeYa" ] ]
+  - type: RequiresSkill
+    skills:
+      RMCSkillOverwatch: 0 # So that CL may use it.
+
+- type: entity
+  parent: RMCOverwatchConsoleWeYa
+  id: RMCOverwatchConsoleWeYaRotating
+  suffix: WeYa, Rotating
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: false

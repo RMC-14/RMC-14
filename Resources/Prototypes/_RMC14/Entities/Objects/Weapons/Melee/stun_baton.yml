@@ -21,3 +21,12 @@
       components:
       - Marine
 
+# TODO RMC14: Actually implement the telescopic baton
+- type: entity
+  parent: CMStunbaton
+  id: RMCTelescopicBaton
+  name: telescopic baton
+  description: A compact yet rebalanced personal defense weapon. Can be concealed when folded.
+  components:
+  - type: Item
+    size: Small

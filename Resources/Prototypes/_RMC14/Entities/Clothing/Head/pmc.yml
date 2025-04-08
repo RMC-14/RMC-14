@@ -127,3 +127,26 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/kutjevo_medical.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/PMC/kutjevo_medical.rsi
+
+- type: entity
+  parent: ArmorHelmetPMC
+  id: ArmorHelmetPMCEngineer
+  name: pmc engineer helmet
+  description: An advanced technician helmet with a black finish, including advanced welding protection and resistence to the potential industrial hazards, but has less kevlar against potential firefights.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/engineer.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/engineer.rsi
+  - type: EyeProtection
+
+- type: entity
+  parent: ArmorHelmetPMC
+  id: ArmorHelmetPMCDirector
+  name: director's hat
+  description: Belongs to someone very important. Has minor protection to all damage types.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/director.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/director.rsi

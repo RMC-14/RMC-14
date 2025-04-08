@@ -254,6 +254,15 @@
       "name": "pmc_md"
     },
     {
+      "name": "pmc_gun"
+    },
+    {
+      "name": "pmc_sg"
+    },
+    {
+      "name": "pmc_spec"
+    },
+    {
       "name": "upp_med"
     },
     {
