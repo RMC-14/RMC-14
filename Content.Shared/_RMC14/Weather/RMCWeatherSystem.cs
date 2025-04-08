@@ -11,9 +11,6 @@ namespace Content.Shared._RMC14.Weather;
 
 public sealed class RMCWeatherSystem : EntitySystem
 {
-    [Dependency] private readonly ITileDefinitionManager _tileDefManager = default!;
-    [Dependency] private readonly MetaDataSystem _metadata = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedRoofSystem _roof = default!;
     [Dependency] private readonly AreaSystem _area = default!;
@@ -25,6 +22,8 @@ public sealed class RMCWeatherSystem : EntitySystem
         base.Initialize();
         _blockQuery = GetEntityQuery<BlockWeatherComponent>();
     }
+
+
 
     public bool CanWeatherAffectArea(EntityUid uid, MapGridComponent grid, TileRef tileRef, RoofComponent? roofComp = null)
     {
