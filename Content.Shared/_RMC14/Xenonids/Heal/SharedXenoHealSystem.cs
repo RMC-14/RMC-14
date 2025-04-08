@@ -310,16 +310,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
 
         var corpsePosition = _transform.GetMoverCoordinates(ent);
 
-        // This damage is completely arbitrary, just to ensure the drone dies EVEN WITH WARDING.
         // TODO: Gib the healing xeno here
-        var killDamageSpecifier = new DamageSpecifier
-        {
-            DamageDict =
-            {
-                [BluntGroup] = remainingHealth * 100 + 3000,
-            },
-        };
-        _damageable.TryChangeDamage(ent, killDamageSpecifier, ignoreResistances: true, interruptsDoAfters: false, origin: args.Performer);
 
         if (!TryComp(ent, out XenoEnergyComponent? xenoEnergyComp) ||
             !_xenoEnergy.HasEnergy((ent, xenoEnergyComp), xenoEnergyComp.Max))
@@ -331,6 +322,8 @@ public abstract class SharedXenoHealSystem : EntitySystem
             SacraficialHealRespawn(ent, args.RespawnDelay);
         else
             SacraficialHealRespawn(ent, args.RespawnDelay, true, corpsePosition);
+
+        QueueDel(ent);
     }
 
     public void Heal(EntityUid target, FixedPoint2 amount)
