@@ -7,11 +7,22 @@
   - type: Item
     size: Tiny
   - type: HelmetAccessory
+  - type: Appearance
+
+- type: entity
+  parent: RMCHelmetGarbBase
+  id: RMCHelmetGarbToggleableBase
+  abstract: true
+  components:
+  - type: ItemToggle
+    activated: false
+    verbToggleOff: rmc-helmetgarbs-off
+    verbToggleOn: rmc-helmetgarbs-on
 
 # NVG
 
 - type: entity
-  parent: RMCHelmetGarbBase
+  parent: RMCHelmetGarbToggleableBase
   id: RMCHelmetGarbNightVision
   name: old M2 night vision goggles
   description: This pair has been gutted of all electronics and therefore not working. But hey, they make you feel tacticool, and that's all that matters, right?
@@ -25,6 +36,9 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/nv_goggles.rsi
       state: helmet
+    toggledRsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/nv_goggles.rsi
+      state: helmet-down
 
 # Netting
 

@@ -68,7 +68,7 @@
     - Mask
   - type: Item
     size: Small
-    
+
 - type: entity
   parent: CMBaseMask
   id: RMCMaskKutjevoRespirator
@@ -228,7 +228,7 @@
     size: Small
 
 - type: entity
-  parent: CMBaseMask
+  parent: [CMBaseMask, RMCHelmetGarbToggleableBase]
   id: RMCVisorSWAT
   name: TC2 CMB riot shield
   description: Yellowish protective glass piece, can be lifted up when needed, makes you see everything in yellow.
@@ -245,6 +245,9 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Mask/swat_shield.rsi
       state: helmet
+    toggledRsi:
+      sprite: _RMC14/Objects/Clothing/Mask/swat_shield.rsi
+      state: helmet-down
 
 
 # Keffiyehs

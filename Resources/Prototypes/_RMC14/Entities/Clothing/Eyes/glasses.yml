@@ -202,7 +202,7 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/old_rpg_glasses.rsi
 
 - type: entity
-  parent: ClothingEyesBase
+  parent: [ClothingEyesBase, RMCHelmetGarbToggleableBase]
   id: RMCGogglesBallistic
   name: marine ballistic goggles
   description: Standard issue UNMC goggles. While commonly found mounted atop M10 pattern helmets, they are also capable of preventing insects, dust, and other things from getting into one's eyes.
@@ -220,6 +220,9 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ballistic_goggles.rsi
       state: helmet
+    toggledRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ballistic_goggles.rsi
+      state: helmet-down
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -231,6 +234,13 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/black_ballistic_goggles.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/black_ballistic_goggles.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/black_ballistic_goggles.rsi
+      state: helmet
+    toggledRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/black_ballistic_goggles.rsi
+      state: helmet-down
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -246,6 +256,9 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/orange_ballistic_goggles.rsi
       state: helmet
+    toggledRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/orange_ballistic_goggles.rsi
+      state: helmet-down
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -261,6 +274,9 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/red_ballistic_goggles.rsi
       state: helmet
+    toggledRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/red_ballistic_goggles.rsi
+      state: helmet-down
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -276,6 +292,9 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/blue_ballistic_goggles.rsi
       state: helmet
+    toggledRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/blue_ballistic_goggles.rsi
+      state: helmet-down
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -291,6 +310,9 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/purple_ballistic_goggles.rsi
       state: helmet
+    toggledRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/purple_ballistic_goggles.rsi
+      state: helmet-down
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -306,6 +328,9 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/yellow_ballistic_goggles.rsi
       state: helmet
+    toggledRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/yellow_ballistic_goggles.rsi
+      state: helmet-down
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -321,6 +346,9 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/blue_polarized_ballistic_goggles.rsi
       state: helmet
+    toggledRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/blue_polarized_ballistic_goggles.rsi
+      state: helmet-down
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -336,6 +364,9 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/orange_polarized_ballistic_goggles.rsi
       state: helmet
+    toggledRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/orange_polarized_ballistic_goggles.rsi
+      state: helmet-down
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -351,6 +382,9 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles.rsi
       state: helmet
+    toggledRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles.rsi
+      state: helmet-down
 
 - type: entity
   parent: RMCGogglesBallistic
@@ -372,6 +406,9 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles_blue.rsi
       state: helmet
+    toggledRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/M1A1_Ballistic_goggles_blue.rsi
+      state: helmet-down
 
 - type: entity
   parent: ClothingEyesBase
@@ -509,6 +546,9 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
       state: helmet
+    toggledRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/welding_goggles.rsi
+      state: helmet-down
 
 - type: Tag
   id: RMCWeldingGoggle
