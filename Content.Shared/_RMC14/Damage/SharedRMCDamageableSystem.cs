@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
@@ -52,6 +53,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
 
+    private static readonly ProtoId<DamageTypePrototype> LethalDamageType = "Asphyxiation";
     private readonly HashSet<ProtoId<DamageTypePrototype>> _bruteTypes = new();
     private readonly HashSet<ProtoId<DamageTypePrototype>> _burnTypes = new();
     private readonly List<string> _types = [];
@@ -303,8 +305,16 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
 
     private void OnActiveDamageOnPulledDevoured(Entity<ActiveDamageOnPulledWhileCritComponent> ent, ref XenoTargetDevouredAttemptEvent args)
     {
+        if (TryComp<MobThresholdsComponent>(ent, out var mobThresholds) && TryComp<DamageableComponent>(ent, out var damageable))
+        {
+            // Kill the mob
+            var lethalAmountOfDamage = mobThresholds.Thresholds.Keys.Last() - damageable.TotalDamage;
+            var type = _prototypes.Index<DamageTypePrototype>(LethalDamageType);
+            var damage = new DamageSpecifier(type, lethalAmountOfDamage);
+            _damageable.TryChangeDamage(ent.Owner, damage, true);
+        }
+
         args.Cancelled = true;
-        _mobState.ChangeMobState(ent, MobState.Dead);
     }
 
     public DamageSpecifier DistributeHealing(Entity<DamageableComponent?> damageable, ProtoId<DamageGroupPrototype> groupId, FixedPoint2 amount, DamageSpecifier? equal = null)
