@@ -84,6 +84,9 @@
           tags:
           - RMCAttachmentBurstFireAssembly
           - RMCAttachmentLaserSight
+  - type: RMCGunRecoil
+    strength: 1
+    strengthUnwielded: 3
 
 - type: entity
   abstract: true

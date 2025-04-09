@@ -56,6 +56,9 @@
   - type: GunPointBlank
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 0.85
+  - type: RMCGunRecoil
+    strength: 1
+    strengthUnwielded: 3
 
 - type: Tag
   id: RMCMagazineRevolver
