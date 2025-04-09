@@ -198,22 +198,6 @@
   iconColor: "#695d42"
   objectType: Item
 
-# M16
-- type: construction
-  parent: RMC
-  name: Magazine Box (M16 Reg)
-  id: RMCBoxMagazineRifleM16
-  graph: RMCBoxMagazine
-  startNode: start
-  targetNode: RMCBoxMagazineRifleM16Empty
-  category: construction-category-cm-box-magazine
-  description: A magazine box that can contain regular M16 mags.
-  icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
-    state: rifle_box
-  iconColor: "#485c63"
-  objectType: Item
-
 # M1984
 - type: construction
   parent: RMC
