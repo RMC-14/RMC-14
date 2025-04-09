@@ -12,3 +12,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/7853d79df1827a2a4907fb3162b6319662dbc1ba/sound/weapons/handling/flamer_unload.ogg"
+
+- files: ["target_on.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/1a1c3dec3c4995936a25bea017d5ab41f2bf2e6b/sound/weapons/TargetOn.ogg"

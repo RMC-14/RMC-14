@@ -20,6 +20,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Content.Shared.StepTrigger.Systems;
@@ -53,6 +54,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly DestructibleSystem _destructible = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
@@ -404,6 +406,16 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
                 _popup.PopupEntity(msg, user, user, PopupType.SmallCaution);
                 return false;
             }
+        }
+
+        foreach (var body in _lookup.GetEntitiesInRange<MobStateComponent>(coords, 0.5f))
+        {
+            if (!_mobState.IsDead(body))
+                continue;
+
+            var msg = Loc.GetString("rmc-xeno-construction-dead-body");
+            _popup.PopupEntity(msg, user, user, PopupType.SmallCaution);
+            return false;
         }
 
         return true;

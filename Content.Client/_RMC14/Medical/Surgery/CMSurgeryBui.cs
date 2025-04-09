@@ -2,8 +2,6 @@
 using Content.Client.Administration.UI.CustomControls;
 using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared.Body.Part;
-using Content.Shared.Rotation;
-using Content.Shared.Standing;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
@@ -35,6 +33,7 @@ public sealed class CMSurgeryBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         _system.OnRefresh += () =>
         {
             UpdateDisabledPanel();

@@ -8,7 +8,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/spp.rsi
   - type: CMArmor
-    armor: 30 # CLOTHING_ARMOR_HIGH
+    bullet: 30 # CLOTHING_ARMOR_HIGH
     bio: 15 # CLOTHING_ARMOR_MEDIUMLOW
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
   - type: RMCArmorSpeedTier
@@ -30,6 +30,8 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/support.rsi
+  - type: CMArmor
+    melee: 30 # CLOTHING_ARMOR_HIGH
   - type: RMCArmorSpeedTier
     speedTier: light
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
@@ -51,7 +53,10 @@
     equipDelay: 1
     unequipDelay: 0.5
   - type: CMArmor
-    armor: 0 # CLOTHING_ARMOR_NONE
+    melee: 0 # CLOTHING_ARMOR_NONE
+    bullet: 0
+    bio: 0
+    explosionArmor: 0
   - type: RMCArmorSpeedTier
     speedTier: very light
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
@@ -89,7 +94,8 @@
     walkModifier: 0.62
     sprintModifier: 0.62
   - type: CMArmor
-    armor: 30 # CLOTHING_ARMOR_HIGHPLUS (bullets), CLOTHING_ARMOR_MEDIUMHIGH (melee); choosing an intermediate value until more damage types are implemented
+    melee: 25 # CLOTHING_ARMOR_MEDIUMHIGH (melee)
+    bullet: 35 # CLOTHING_ARMOR_HIGHPLUS (bullets) 
     bio: 20 # CLOTHING_ARMOR_MEDIUM
     explosionArmor: 30 # CLOTHING_ARMOR_HIGH
   - type: Storage
@@ -108,7 +114,8 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/officer.rsi
   - type: CMArmor
-    armor: 10
+    melee: 10
+    bullet: 10
     bio: 10
     explosionArmor: 10
   - type: ExplosionResistance
@@ -129,6 +136,11 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/senior.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/senior.rsi
+  - type: CMArmor
+    melee: 10
+    bullet: 10
+    bio: 10
+    explosionArmor: 10
   - type: Storage
     grid:
     - 0,0,7,1 # 4 slots
@@ -143,3 +155,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/mp.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/mp.rsi
+  - type: CMArmor
+    melee: 10
+    bullet: 10
+    bio: 10
+    explosionArmor: 10

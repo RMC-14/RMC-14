@@ -23,6 +23,7 @@ public sealed class XenoOrderConstructionBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         _window = new XenoChooseStructureWindow();
         _window.OnClose += Close;
 

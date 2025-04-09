@@ -11,8 +11,9 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular M54C mags.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m54
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: rifle_box
+  iconColor: "#7b8246"
   objectType: Item
 
 - type: construction
@@ -25,8 +26,9 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain armor piercing M54C mags.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m54
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: rifle_box
+  iconColor: "#7b8246"
   objectType: Item
 
 - type: construction
@@ -39,8 +41,9 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain extended M54C mags.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m54
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: rifle_box
+  iconColor: "#7b8246"
   objectType: Item
 
 - type: construction
@@ -53,8 +56,9 @@
   category: construction-category-cm-box-magazine
   description: A 10x24mm ammunition box. Used to refill M54C MK1, MK2, M4SPR and M54CE2 HAR magazines. It comes with a leather strap allowing to wear it on the back.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m54
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: rifle_box
+  iconColor: "#7b8246"
   objectType: Item
 
 - type: construction
@@ -67,8 +71,9 @@
   category: construction-category-cm-box-magazine
   description: A 10x24mm armor-piercing ammunition box. Used to refill M54C MK2, and M4SPR AP magazines. It comes with a leather strap allowing to wear it on the back.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m54
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: rifle_box
+  iconColor: "#7b8246"
   objectType: Item
 
 # M63
@@ -82,8 +87,9 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular M63 mags.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m63
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: smg_box
+  iconColor: "#727e90"
   objectType: Item
 
 - type: construction
@@ -96,8 +102,9 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain armor piercing M63 mags.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m63
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: smg_box
+  iconColor: "#727e90"
   objectType: Item
 
 - type: construction
@@ -110,8 +117,9 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain extended M63 mags.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m63
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: smg_box
+  iconColor: "#727e90"
   objectType: Item
 
 - type: construction
@@ -124,8 +132,9 @@
   category: construction-category-cm-box-magazine
   description: A 10x20mm ammunition box. Used to refill M63 HV and extended magazines. It comes with a leather strap allowing to wear it on the back.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m63
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: smg_box
+  iconColor: "#727e90"
   objectType: Item
 
 - type: construction
@@ -138,8 +147,9 @@
   category: construction-category-cm-box-magazine
   description: A 10x20mm armor-piercing ammunition box. Used to refill M63 AP magazines. It comes with a leather strap allowing to wear it on the back.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m63
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: smg_box
+  iconColor: "#727e90"
   objectType: Item
 
 # M4SPR
@@ -153,8 +163,9 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular M4SPR mags.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m4spr
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: rifle_box
+  iconColor: "#695d42"
   objectType: Item
 
 - type: construction
@@ -167,8 +178,9 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain armor piercing M4SPR mags.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m4spr
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: rifle_box
+  iconColor: "#695d42"
   objectType: Item
 
 - type: construction
@@ -181,8 +193,9 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain extended M4SPR mags.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m4spr
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: rifle_box
+  iconColor: "#695d42"
   objectType: Item
 
 # M1984
@@ -196,8 +209,9 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular M1984 mags.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m1984
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: pistol_box
+  iconColor: "#b2976e"
   objectType: Item
 
 - type: construction
@@ -210,8 +224,9 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain armor piercing M1984 mags.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m1984
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: pistol_box
+  iconColor: "#b2976e"
   objectType: Item
 
 # 88 mod 4 / 88m4
@@ -225,8 +240,9 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain armor piercing M77 mags.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m77
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: pistol_box
+  iconColor: "#7c7e83"
   objectType: Item
 
 # MK80
@@ -240,8 +256,9 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular MK80 mags.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_mk80
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: pistol_box
+  iconColor: "#4a4a4a"
   objectType: Item
 
 # SU-6 Smart pistol
@@ -255,8 +272,9 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain regular SU-6 mags.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_su6
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: pistol_box
+  iconColor: "#6b5c58"
   objectType: Item
 
 # M44
@@ -270,8 +288,9 @@
   category: construction-category-cm-box-magazine
   description: A box for holding many speedloaders with a carrying handle.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m54
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: pistol_box
+  iconColor: "#727e90"
   objectType: Item
 
 - type: construction
@@ -284,8 +303,9 @@
   category: construction-category-cm-box-magazine
   description: A box for holding many marksman speedloaders with a carrying handle.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_m54
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: pistol_box
+  iconColor: "#727e90"
   objectType: Item
 
 # Nailgun
@@ -299,8 +319,9 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain nailgun mags.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_nailgun
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: supply_box
+  iconColor: "#709bff"
   objectType: Item
 
 # Shotgun
@@ -314,8 +335,9 @@
   category: construction-category-cm-box-magazine
   description: A box for holding shells.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_buck
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: shell_box
+  iconColor: "#944444"
   objectType: Item
 
 - type: construction
@@ -328,8 +350,9 @@
   category: construction-category-cm-box-magazine
   description: A box for holding shells.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_slug
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: shell_box
+  iconColor: "#578e75"
   objectType: Item
 
 - type: construction
@@ -342,8 +365,9 @@
   category: construction-category-cm-box-magazine
   description: A box for holding shells.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_flech
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: shell_box
+  iconColor: "#6551a0"
   objectType: Item
 
 - type: construction
@@ -356,8 +380,9 @@
   category: construction-category-cm-box-magazine
   description: A box for holding shells.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_inc
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: shell_box
+  iconColor: "#c6cdd3"
   objectType: Item
 
 # - type: construction
@@ -370,8 +395,9 @@
   # category: construction-category-cm-box-magazine
   # description: A box for holding shells.
   # icon:
-    # sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    # state: base_bean
+    # sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    # state: shell_box
+    # color: "#5786be"
   # objectType: Item
 
 - type: construction
@@ -384,8 +410,9 @@
   category: construction-category-cm-box-magazine
   description: A box for holding shells.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_incbuck
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: shell_box
+  iconColor: "#c6cdd3"
   objectType: Item
 
 - type: construction
@@ -398,8 +425,9 @@
   category: construction-category-cm-box-magazine
   description: A box for holding shells.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: base_breach
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: shell_box
+  iconColor: "#595959"
   objectType: Item
 
 # Misc
@@ -414,8 +442,9 @@
   category: construction-category-cm-box-magazine
   description: A box of MREs. Nutritious, but not delicious.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: supply_crate
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: supply_box
+  iconColor: "#887b67"
   objectType: Item
 
 - type: construction
@@ -428,8 +457,9 @@
   category: construction-category-cm-box-magazine
   description: A box of M94 marking flare packs, to brighten up your day.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: supply_crate
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: supply_box
+  iconColor: "#887b67"
   objectType: Item
 
 - type: construction
@@ -442,8 +472,9 @@
   category: construction-category-cm-box-magazine
   description: A box of M89 signal flare packs, to mark up the way.
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: supply_crate
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: supply_box
+  iconColor: "#887b67"
   objectType: Item
 
 - type: construction
@@ -456,8 +487,9 @@
   category: construction-category-cm-box-magazine
   description: A box of flashlights to brighten your day!
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: flashlightbox
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: supply_box
+  iconColor: "#887b67"
   objectType: Item
 
 - type: construction
@@ -470,8 +502,9 @@
   category: construction-category-cm-box-magazine
   description: A box of High-Capacity Power Cells to keep your electronics going all night long!
   icon:
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
-    state: batterybox
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: supply_box
+  iconColor: "#887b67"
   objectType: Item
 
 # Construct graphs

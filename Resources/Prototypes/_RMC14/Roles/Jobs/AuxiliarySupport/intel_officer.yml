@@ -49,6 +49,12 @@
         tags:
         - RMCSquadIntel
     - type: SquadArmorWearer
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: io
+    - type: SquadNameOverride
+      name: cm-job-name-intel
 
 - type: startingGear
   id: CMGearIntelOfficer

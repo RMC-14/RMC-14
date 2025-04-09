@@ -17,6 +17,7 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
 
     protected override void Open()
     {
+        base.Open();
         if (_window != null)
             return;
 

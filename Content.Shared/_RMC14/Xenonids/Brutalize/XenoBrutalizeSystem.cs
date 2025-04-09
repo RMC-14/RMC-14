@@ -59,7 +59,7 @@ public sealed class XenoBrutalizeSystem : EntitySystem
 
             currHits++;
 
-            var myDamage = _damageable.TryChangeDamage(extra, damage);
+            var myDamage = _damageable.TryChangeDamage(extra, damage, origin: xeno, tool: xeno);
             if (myDamage?.GetTotal() > FixedPoint2.Zero)
             {
                 var filter = Filter.Pvs(extra, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);

@@ -59,7 +59,7 @@ public sealed class XenoSoakSystem : EntitySystem
             return;
 
         var amount = -_rmcdamage.DistributeTypesTotal(xeno.Owner, xeno.Comp.Heal);
-        _damage.TryChangeDamage(xeno, amount);
+        _damage.TryChangeDamage(xeno, amount, origin: xeno, tool: xeno);
 
         foreach (var (actionId, action) in _action.GetActions(xeno))
         {

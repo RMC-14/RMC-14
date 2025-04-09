@@ -34,6 +34,24 @@
 
 - type: entity
   parent: RMCBarrelAttachmentBase
+  id: RMCAttachmentBarrelMar50
+  name: MAR-50 barrel
+  description: A heavy barrel.
+  components:
+  - type: Sprite
+    state: mar50barrel
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentBarrelMar50
+  - type: AttachableVisuals
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - accuracyAddMult: 0.15
+    - scatterFlat: -6
+
+- type: entity
+  parent: RMCBarrelAttachmentBase
   id: RMCAttachmentBarrelCharger
   name: barrel charger
   description: A hyper threaded barrel extender that fits to the muzzle of most firearms. Greatly increases projectile damage at the cost of firing speed.
@@ -229,6 +247,9 @@
 
 - type: Tag
   id: RMCAttachmentBarrel
+
+- type: Tag
+  id: RMCAttachmentBarrelMar50
 
 - type: Tag
   id: RMCAttachmentExtendedBarrel

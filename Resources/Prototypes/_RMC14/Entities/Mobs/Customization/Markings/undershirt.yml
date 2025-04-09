@@ -6,7 +6,7 @@
   markingCategory: Undershirt
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
   sprites:
   - sprite: _RMC14/Mobs/Customization/undershirt.rsi
     state: t_undershirt
@@ -28,7 +28,7 @@
   markingCategory: Undershirt
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
   sprites:
   - sprite: _RMC14/Mobs/Customization/undershirt.rsi
     state: t_rolled_undershirt
@@ -50,7 +50,7 @@
   markingCategory: Undershirt
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
   sprites:
   - sprite: _RMC14/Mobs/Customization/undershirt.rsi
     state: t_long_undershirt
@@ -63,7 +63,7 @@
   markingCategory: Undershirt
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Moth, SlimePerson]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
   sprites:
   - sprite: _RMC14/Mobs/Customization/undershirt.rsi
     state: b_undershirt
@@ -74,7 +74,7 @@
   markingCategory: Undershirt
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
   sprites:
   - sprite: _RMC14/Mobs/Customization/undershirt.rsi
     state: b_undershirt_sleeveless
@@ -85,7 +85,7 @@
   markingCategory: Undershirt
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Moth, SlimePerson]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
   sprites:
   - sprite: _RMC14/Mobs/Customization/undershirt.rsi
     state: b_long_undershirt
@@ -133,7 +133,7 @@
   markingCategory: Undershirt
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
   sprites:
   - sprite: _RMC14/Mobs/Customization/undershirt.rsi
     state: d_classic
@@ -144,7 +144,7 @@
   markingCategory: Undershirt
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
   sprites:
   - sprite: _RMC14/Mobs/Customization/undershirt.rsi
     state: d_sports
@@ -155,7 +155,7 @@
   markingCategory: Undershirt
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
   sprites:
   - sprite: _RMC14/Mobs/Customization/undershirt.rsi
     state: d_strapless
@@ -168,7 +168,7 @@
   markingCategory: Undershirt
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
   sprites:
   - sprite: _RMC14/Mobs/Customization/undershirt.rsi
     state: j_classic
@@ -179,7 +179,7 @@
   markingCategory: Undershirt
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
   sprites:
   - sprite: _RMC14/Mobs/Customization/undershirt.rsi
     state: j_sports
@@ -190,7 +190,7 @@
   markingCategory: Undershirt
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
   sprites:
   - sprite: _RMC14/Mobs/Customization/undershirt.rsi
     state: j_strapless
@@ -203,7 +203,7 @@
   markingCategory: Undershirt
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
   sprites:
   - sprite: _RMC14/Mobs/Customization/undershirt.rsi
     state: s_classic
@@ -214,7 +214,7 @@
   markingCategory: Undershirt
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
   sprites:
   - sprite: _RMC14/Mobs/Customization/undershirt.rsi
     state: s_sports
@@ -225,7 +225,7 @@
   markingCategory: Undershirt
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
   sprites:
   - sprite: _RMC14/Mobs/Customization/undershirt.rsi
     state: s_strapless
@@ -238,7 +238,7 @@
   markingCategory: Undershirt
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
   sprites:
   - sprite: _RMC14/Mobs/Customization/undershirt.rsi
     state: u_bra
@@ -249,7 +249,7 @@
   markingCategory: Undershirt
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
   sprites:
   - sprite: _RMC14/Mobs/Customization/undershirt.rsi
     state: u_sports
@@ -260,7 +260,7 @@
   markingCategory: Undershirt
   forcedColoring: true
   RMCFollowSkinColor: false
-  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson]
+  speciesRestriction: [Human, Dwarf, Felinid, Arachnid, Reptilian, Diona, Moth, SlimePerson, Avali, Vulpkanin, Rodentia]
   sprites:
   - sprite: _RMC14/Mobs/Customization/undershirt.rsi
     state: u_strapless

@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -8,6 +9,7 @@ using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Content.Shared.Weapons.Melee;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
@@ -72,6 +74,7 @@ public sealed class XenoLungeSystem : EntitySystem
         xeno.Comp.Charge = diff;
         Dirty(xeno);
 
+        EnsureComp<RMCObstacleSlamImmuneComponent>(xeno);
         _throwing.TryThrow(xeno, diff, 30, animated: false);
 
         if (!_physicsQuery.TryGetComponent(xeno, out var physics))
@@ -125,6 +128,12 @@ public sealed class XenoLungeSystem : EntitySystem
             var stunned = EnsureComp<XenoLungeStunnedComponent>(targetId);
             stunned.ExpireAt = _timing.CurTime + xeno.Comp.StunTime;
             Dirty(targetId, stunned);
+        }
+
+        if (TryComp(xeno, out MeleeWeaponComponent? melee))
+        {
+            melee.NextAttack = _timing.CurTime;
+            Dirty(xeno, melee);
         }
 
         _pulling.TryStartPull(xeno, targetId);

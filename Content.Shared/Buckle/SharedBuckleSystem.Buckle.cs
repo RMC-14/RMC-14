@@ -397,7 +397,7 @@ public abstract partial class SharedBuckleSystem
         RaiseLocalEvent(strap, ref ev);
 
         var gotEv = new BuckledEvent(strap, buckle);
-        RaiseLocalEvent(buckle, ref gotEv);
+        RaiseLocalEvent(buckle, ref gotEv, true);
 
         if (TryComp<PhysicsComponent>(buckle, out var physics))
             _physics.ResetDynamics(buckle, physics);
@@ -425,7 +425,7 @@ public abstract partial class SharedBuckleSystem
 
     public bool TryUnbuckle(Entity<BuckleComponent?> buckle, EntityUid? user, bool popup)
     {
-        if (!Resolve(buckle.Owner, ref buckle.Comp))
+        if (!Resolve(buckle.Owner, ref buckle.Comp, false))
             return false;
 
         if (!CanUnbuckle(buckle, user, popup, out var strap))
@@ -495,7 +495,7 @@ public abstract partial class SharedBuckleSystem
         _joints.RefreshRelay(buckle);
 
         var buckleEv = new UnbuckledEvent(strap, buckle);
-        RaiseLocalEvent(buckle, ref buckleEv);
+        RaiseLocalEvent(buckle, ref buckleEv, true);
 
         var strapEv = new UnstrappedEvent(strap, buckle);
         RaiseLocalEvent(strap, ref strapEv);

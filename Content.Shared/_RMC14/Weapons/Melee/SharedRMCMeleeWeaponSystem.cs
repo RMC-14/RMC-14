@@ -175,8 +175,8 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
         TryMeleeReset(weaponUid, weapon, true);
     }
 
-
-    private void TryMeleeReset(EntityUid weaponUid, MeleeWeaponComponent weapon, bool disarm){
+    private void TryMeleeReset(EntityUid weaponUid, MeleeWeaponComponent weapon, bool disarm)
+    {
         if (!TryComp<MeleeResetComponent>(weaponUid, out var reset))
             return;
 

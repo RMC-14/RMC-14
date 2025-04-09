@@ -56,9 +56,8 @@
       - !type:EntityAnchored {}
       steps:
       - tool: Screwing
-        doAfter: 2
       - tool: Prying
-        doAfter: 2
+      - tool: Screwing
 
   - node: windowPrisonReinforced
     entity: RMCWindowPrisonReinforced
@@ -74,6 +73,5 @@
       - !type:EntityAnchored {}
       steps:
       - tool: Screwing
-        doAfter: 2
       - tool: Prying
-        doAfter: 2
+      - tool: Screwing

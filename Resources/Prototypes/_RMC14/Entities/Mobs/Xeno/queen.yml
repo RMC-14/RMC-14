@@ -22,6 +22,18 @@
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
       visible: false
+    - map: [ "focused" ]
+      sprite: _RMC14/Interface/xeno_hud.rsi
+      state: hudeye
+      visible: false
+    - map: [ "targetedDirection" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_direction
+      visible: false
+    - map: [ "targetedDirectionIntense" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_intense_direction
+      visible: false
   - type: MobState
     allowedStates:
     - Alive
@@ -65,6 +77,7 @@
   - type: XenoHeavy
   - type: XenoAcid
   - type: XenoConstruction
+    buildDelay: 2
     canBuild:
     - WallXenoResin
     - WallXenoMembrane
@@ -85,7 +98,7 @@
     maxPlasma: 1000
     plasmaRegenOnWeeds: 4
   - type: CMArmor
-    armor: 25
+    xenoArmor: 25
     explosionArmor: 100
   - type: XenoWordQueen
   - type: XenoGut

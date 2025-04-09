@@ -80,7 +80,7 @@ public sealed class XenoTailSweepSystem : EntitySystem
             diff = diff.Normalized() * xeno.Comp.Range;
 
             if (xeno.Comp.Damage is { } damage)
-                _damageable.TryChangeDamage(marine, damage);
+                _damageable.TryChangeDamage(marine, damage, origin: xeno, tool: xeno);
 
             var filter = Filter.Pvs(marine, entityManager: EntityManager);
             _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { marine }, filter);
