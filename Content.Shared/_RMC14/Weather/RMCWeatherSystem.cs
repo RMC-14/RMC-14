@@ -1,11 +1,17 @@
 ﻿using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Medical.Stasis;
+using Content.Shared.Coordinates;
 using Content.Shared.Light.Components;
 using Content.Shared.Light.EntitySystems;
 using Content.Shared.Maps;
+using Content.Shared.Popups;
 using Content.Shared.Weather;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Weather;
 
@@ -14,6 +20,10 @@ public sealed class RMCWeatherSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedRoofSystem _roof = default!;
     [Dependency] private readonly AreaSystem _area = default!;
+    [Dependency] private readonly SharedWeatherSystem _weather = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
 
     private EntityQuery<BlockWeatherComponent> _blockQuery;
 
@@ -21,9 +31,17 @@ public sealed class RMCWeatherSystem : EntitySystem
     {
         base.Initialize();
         _blockQuery = GetEntityQuery<BlockWeatherComponent>();
+
+        SubscribeLocalEvent<RMCWeatherCycleComponent, MapInitEvent>(OnMapInit);
     }
 
+    private void OnMapInit(Entity<RMCWeatherCycleComponent> ent, ref MapInitEvent args)
+    {
+        if (ent.Comp.WeatherEvents.Count <= 0)
+            return;
 
+        ent.Comp.LastEventCooldown = _random.Next(ent.Comp.MinTimeBetweenEvents);
+    }
 
     public bool CanWeatherAffectArea(EntityUid uid, MapGridComponent grid, TileRef tileRef, RoofComponent? roofComp = null)
     {
@@ -42,5 +60,26 @@ public sealed class RMCWeatherSystem : EntitySystem
         }
 
         return true;
+    }
+
+    public override void Update(float frameTime)
+    {
+        if (_net.IsClient)
+            return;
+
+        var weatherQuery = EntityQueryEnumerator<RMCWeatherCycleComponent>();
+
+        while (weatherQuery.MoveNext(out var uid, out var cycle))
+        {
+            cycle.LastEventCooldown -= TimeSpan.FromSeconds(frameTime);
+
+            if(cycle.LastEventCooldown <= TimeSpan.Zero)
+            {
+                var weather = _random.Pick(cycle.WeatherEvents);
+                _proto.TryIndex(weather.WeatherType, out var weatherProto);
+                _weather.SetWeather(Transform(uid).MapID, weatherProto, weather.Duration);
+                cycle.LastEventCooldown = weather.Duration + cycle.MinTimeBetweenEvents;
+            }
+        }
     }
 }

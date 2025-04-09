@@ -86,7 +86,6 @@
   sprite:
     sprite: /Textures/_RMC14/Effects/weather.rsi
     state: hybrisa_rain
-    color: "#ffffff28"
   sound:
     collection: Rain
     params:

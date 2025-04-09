@@ -1,6 +1,7 @@
 ﻿using Content.Shared.Weather;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Weather;
 
@@ -9,26 +10,28 @@ namespace Content.Shared._RMC14.Weather;
 public sealed partial class RMCWeatherCycleComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public List<EntProtoId<RMCWeatherEventComponent>> WeatherEvent;
+    public List<RMCWeatherEventComponent> WeatherEvents;
 
     [DataField, AutoNetworkedField]
     public TimeSpan MinTimeBetweenEvents;
 
     [DataField, AutoNetworkedField]
     public TimeSpan LastEventCooldown;
+
+
+    [DataDefinition]
+    [Serializable, NetSerializable]
+    public partial struct RMCWeatherEventComponent()
+    {
+        [DataField, AutoNetworkedField]
+        public string Name = "rmcWeatherEvent";
+
+        [DataField, AutoNetworkedField]
+        public TimeSpan Duration;
+
+        [DataField, AutoNetworkedField]
+        public ProtoId<WeatherPrototype> WeatherType;
+    }
 }
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(RMCWeatherSystem))]
-public sealed partial class RMCWeatherEventComponent : Component
-{
-    [DataField, AutoNetworkedField]
-    public string Name;
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan Duration;
-
-    [DataField, AutoNetworkedField]
-    public ProtoId<WeatherPrototype> WeatherType;
-}
 
