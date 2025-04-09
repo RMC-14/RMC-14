@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Wieldable.Components;
 using Robust.Shared.Timing;
