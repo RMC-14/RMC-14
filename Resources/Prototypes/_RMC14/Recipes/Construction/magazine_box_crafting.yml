@@ -630,7 +630,6 @@
         amount: 1
         doAfter: 0.25
 
-
     # M44
     - to: RMCBoxMagazineRevolverM44Empty
       steps:
