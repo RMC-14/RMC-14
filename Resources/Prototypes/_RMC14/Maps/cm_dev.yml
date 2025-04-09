@@ -1,7 +1,7 @@
 ﻿- type: gameMap
   id: RMCDev
   mapName: RMCDev
-  mapPath: /Maps/_RMC14/dev_map.yml
+  mapPath: /Maps/_RMC14/Test/dev_map.yml
   minPlayers: 0
   maxRandomOffset: 0
   randomRotation: false

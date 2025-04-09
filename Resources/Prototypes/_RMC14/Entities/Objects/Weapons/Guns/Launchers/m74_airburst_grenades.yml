@@ -296,6 +296,9 @@
         Piercing: 2.5
     soundHit:
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
   - type: ScatteringGrenade
     triggerOnWallCollide: true
     fillPrototype: RMCStarShellAsh
@@ -433,6 +436,9 @@
     thresholds:
     - range: 7
       falloff: 10
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
   - type: ScatteringGrenade
     spreadAngle: 45
     directHitTrigger: true

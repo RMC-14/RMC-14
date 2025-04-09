@@ -17,7 +17,7 @@
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: MagazineVisuals
     magState: mag
-    steps: 1
+    steps: 2
     zeroVisible: true
     zeroOnlyOnEmpty: true
   #- type: Clothing

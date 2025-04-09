@@ -49,6 +49,10 @@
   id: RMCCurtainMedicalOpen
   suffix: Open
   components:
+  - type: Physics
+    canCollide: false
+  - type: Occluder
+    enabled: false
   - type: Door
     state: Open
 

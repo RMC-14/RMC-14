@@ -94,7 +94,7 @@
   components:
   - type: CorpseSpawner
     spawn: RMCCorpseColonistBurst
-    
+
 - type: entity
   parent: RMCSpawnerCorpse
   id: RMCSpawnerCorpseColonistKutjevo
@@ -119,7 +119,7 @@
   components:
   - type: CorpseSpawner
     spawn: RMCCorpseWeYaGoon
-    
+
 - type: entity
   parent: RMCSpawnerCorpse
   id: RMCSpawnerCorpseWeYaGoonKutjevo

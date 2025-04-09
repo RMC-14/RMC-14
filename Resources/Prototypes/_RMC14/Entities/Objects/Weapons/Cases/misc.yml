@@ -3,6 +3,8 @@
   id: RMCKitHonorGuard
   name: honor guard kit
   components:
+  - type: Item
+    size: Ginormous
   - type: Storage
     maxItemSize: Ginormous
     grid:

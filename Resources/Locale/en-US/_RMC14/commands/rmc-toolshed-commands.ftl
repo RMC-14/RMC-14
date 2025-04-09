@@ -41,6 +41,8 @@ command-description-removeinvalidweeds = Removes any weeds that should not have 
 command-description-requisitions-addbudget = Adds budget to the default Requisitions account.
 command-description-requisitions-removebudget = Removes budget from the default Requisitions account.
 
+command-description-rmcrejuvenate-marineplayersinrange = Rejuvenates all marines within a specific range, restoring them to full health, clearing status effects, etc.
+
 command-description-intel-addpoints = Adds points to the default Intel tech tree.
 command-description-intel-removepoints = Removes points from the default Intel tech tree.
 command-description-intel-spawnintel = Spawns intel on all initialized maps.
