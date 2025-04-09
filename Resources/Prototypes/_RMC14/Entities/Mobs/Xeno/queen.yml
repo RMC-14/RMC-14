@@ -248,9 +248,9 @@
   parent: RMCXenoQueenBase
   id: CMXenoQueen
   components:
-  - type: XenoEvolution
-    strains:
-    - RMCQueenMaid
+  # - type: XenoEvolution #can be enabled for events like april fools.
+  #   strains:
+  #   - RMCQueenMaid
 
 - type: entity
   id: XenoLeaderPheromoneRelay
