@@ -3,7 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - RMCXenoSpeechSounds
-  id: CMXenoQueen
+  id: RMCXenoQueenBase
   name: Queen
   description: A huge, looming alien creature. The biggest and the baddest.
   components:
@@ -243,6 +243,11 @@
     debuffModifier: 1.4
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 1.4
+
+- type: entity
+  parent: RMCXenoQueenBase
+  id: CMXenoQueen
+  components:
   - type: XenoEvolution
     strains:
     - RMCQueenMaid
@@ -253,7 +258,7 @@
   - type: XenoPheromones
 
 - type: entity
-  parent: CMXenoQueen
+  parent: RMCXenoQueenBase
   id: RMCQueenMaid
   suffix: Cat Maid Queen
   components:
