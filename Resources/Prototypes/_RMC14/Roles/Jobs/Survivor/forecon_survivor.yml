@@ -31,7 +31,6 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForecon
     - type: RMCSurvivor
-    - type: MotionDetectorTracked
     - type: UserIFF
       faction: FactionMarine
     - type: IntelRescueSurvivorObjective
