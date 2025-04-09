@@ -18,6 +18,7 @@
   type: "Whitelist"
   on_paths:
   - "admin_fax.yml"
+  - "admin_fax_old.yml"
   - "dev_map.yml"
   entityMatchers:
   - ".*"
