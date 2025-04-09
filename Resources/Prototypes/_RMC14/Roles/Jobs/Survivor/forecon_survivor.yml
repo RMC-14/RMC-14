@@ -1,0 +1,68 @@
+﻿- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorForecon
+  name: rmc-job-name-survivor-forecon
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorForecon
+  ranks:
+    RMCRankSergeant: []
+  startingGear: RMCGearSurvivorFORECON
+  accessGroups:
+  - ColonistSec
+  # availableOnPlanets:
+  # - RMCPlanetChances TODO RMC
+  hidden: true # todo
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 1
+        RMCSkillConstruction: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 2
+        RMCSkillVehicles: 1
+        RMCSkillLeadership: 1
+        RMCSkillJtac: 1
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetForecon
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: UserIFF
+      faction: FactionMarine
+    - type: IntelRescueSurvivorObjective
+
+- type: startingGear
+  id: RMCGearSurvivorFORECON # Todo Gear
+  equipment:
+    head: RMCArmorHelmetSecurity
+    eyes: CMGlassesSecurity
+    jumpsuit: CMJumpsuitSurvivorMarine
+    outerClothing: RMCOuterClothingExternalWebbing
+    gloves: RMCHandsVeteran
+    shoes: RMCShoesJackboots
+    id: CMIDCardColonistSecurity
+    back: CMSatchelSecuritySurvivorFill
+    ears: CMHeadsetColony
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchMagazine
+
+- type: playTimeTracker
+  id: CMJobSurvivorForecon
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetCivilian
+  id: RMCSurvivorPresetForecon
+  name: FORECON survivor preset
+  components:
+  - type: SurvivorPreset
+    primaryWeapons:
+#    - [ CMBeltMarineMP5, WeaponSMGMP5 ] # TODO RMC14 mar30
+    - [ CMBeltMarineMP5, WeaponSMGMP5 ]
+    - [ CMBeltMarineBuckshot, RMCWeaponShotgunHG3712 ]
+    - [ CMBeltMarineM16, WeaponRifleM16 ]

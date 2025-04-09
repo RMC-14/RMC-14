@@ -21,3 +21,6 @@ rmc-job-greeting-survivor = You are a survivor of the attack on the colony. You 
   You are NOT aware of the marines or their intentions.
 
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-name-survivor-forecon = FORECON Rifleman
+RMCSurvivorForecon = FORECON Rifleman

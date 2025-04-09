@@ -41,7 +41,6 @@ using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.HyperSleep;
 using Content.Shared._RMC14.Marines.Squads;
-using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Scaling;
 using Content.Shared._RMC14.Spawners;
 using Content.Shared._RMC14.Survivor;
@@ -56,6 +55,7 @@ using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared._RMC14.Rules;
 using Content.Shared.Actions;
 using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
@@ -315,6 +315,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 _mind.TransferTo(mind.Value, xenoEnt);
                 return playerId;
             }
+
+            if (SelectedPlanetMap != null)
+                comp.SurvivorJobs = SelectedPlanetMap.Value.Comp.SurvivorJobs;
 
             var survivorSpawners = new Dictionary<ProtoId<JobPrototype>, List<EntityUid>>();
             var spawnerQuery = EntityQueryEnumerator<SpawnPointComponent>();
@@ -1474,13 +1477,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             return SelectedPlanetMap.Value;
 
         var planet = _random.Pick(_rmcPlanet.GetCandidates());
-        SelectedPlanetMap = planet;
+        SelectPlanetMap(planet);
         return planet;
     }
 
     private void ResetSelectedPlanet()
     {
-        SelectedPlanetMap = null;
+        SelectPlanetMap(null);
     }
 
     private void StartPlanetVote()
@@ -1548,8 +1551,16 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             }
 
             _carryoverVotes[picked.Proto.ID] = 0;
-            SelectedPlanetMap = picked;
+            SelectPlanetMap(picked);
         };
+    }
+
+    private void SelectPlanetMap(RMCPlanet? map)
+    {
+        SelectedPlanetMap = map;
+
+        if (SelectedPlanetMap != null)
+            RaiseNetworkEvent(new RMCGetPlanetMapNetworkEvent(SelectedPlanetMap.Value.Proto.ID));
     }
 
     private string GetRandomOperationName()

@@ -5,6 +5,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Rules;
 
@@ -146,5 +147,16 @@ public sealed class RMCPlanetSystem : EntitySystem
         }
 
         return candidates;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class RMCGetPlanetMapNetworkEvent : EntityEventArgs
+{
+    public string? PlanetId;
+
+    public RMCGetPlanetMapNetworkEvent(string? planetId)
+    {
+        PlanetId = planetId;
     }
 }
