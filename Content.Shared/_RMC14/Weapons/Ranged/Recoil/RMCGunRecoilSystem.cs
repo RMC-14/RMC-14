@@ -18,6 +18,7 @@ public sealed class RMCGunRecoilSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<RMCGunRecoilComponent, GunShotEvent>(OnRecoilGunShot);
+        SubscribeLocalEvent<RMCGunRecoilComponent, GunRefreshModifiersEvent>(OnRecoilSkilledRefreshModifiers);
     }
 
     private void OnRecoilGunShot(Entity<RMCGunRecoilComponent> ent, ref GunShotEvent args)
@@ -58,6 +59,11 @@ public sealed class RMCGunRecoilSystem : EntitySystem
             _cameraShake.ShakeCamera(user, finalRecoil, finalRecoil);
         else
             _cameraShake.ShakeCamera(user, 1, finalRecoil);
+    }
+
+    private void OnRecoilSkilledRefreshModifiers(Entity<RMCGunRecoilComponent> ent, ref GunRefreshModifiersEvent args)
+    {
+        args.CameraRecoilScalar = 0;
     }
 
     private void UpdateRecoilBuildup(Entity<RMCGunRecoilComponent> ent, GunComponent gun)
