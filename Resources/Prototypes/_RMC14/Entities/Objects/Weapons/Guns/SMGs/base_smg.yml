@@ -45,6 +45,8 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/pistol_mouse.rsi
       state: all
+  - type: RMCGunRecoil
+    strengthUnwielded: 1
 
 - type: entity
   parent: BaseCartridgeCaselessRifle
