@@ -11,6 +11,7 @@ using Robust.Client.State;
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Audio;
+using Content.Shared._RMC14.Rules;
 
 namespace Content.Client.GameTicking.Managers
 {
@@ -33,6 +34,7 @@ namespace Content.Client.GameTicking.Managers
         [ViewVariables] public string? ServerInfoBlob { get; private set; }
         [ViewVariables] public TimeSpan StartTime { get; private set; }
         [ViewVariables] public new bool Paused { get; private set; }
+        [ViewVariables] public string? SelectedPlanet { get; private set; } // RMC14
 
         [ViewVariables] public IReadOnlyDictionary<NetEntity, Dictionary<ProtoId<JobPrototype>, int?>> JobsAvailable => _jobsAvailable;
         [ViewVariables] public IReadOnlyDictionary<NetEntity, string> StationNames => _stationNames;
@@ -56,6 +58,7 @@ namespace Content.Client.GameTicking.Managers
             SubscribeNetworkEvent<RequestWindowAttentionEvent>(OnAttentionRequest);
             SubscribeNetworkEvent<TickerLateJoinStatusEvent>(LateJoinStatus);
             SubscribeNetworkEvent<TickerJobsAvailableEvent>(UpdateJobsAvailable);
+            SubscribeNetworkEvent<RMCGetPlanetMapNetworkEvent>(PlanetInfo); // RMC14
 
             _admin.AdminStatusUpdated += OnAdminUpdated;
             OnAdminUpdated();
@@ -152,6 +155,11 @@ namespace Content.Client.GameTicking.Managers
             RestartSound = message.RestartSound;
 
             _userInterfaceManager.GetUIController<RoundEndSummaryUIController>().OpenRoundEndSummaryWindow(message);
+        }
+
+        private void PlanetInfo(RMCGetPlanetMapNetworkEvent message) // RMC14
+        {
+            SelectedPlanet = message.PlanetId;
         }
     }
 }

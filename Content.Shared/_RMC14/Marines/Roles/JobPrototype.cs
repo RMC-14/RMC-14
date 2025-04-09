@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Prototypes;
+using Content.Shared._RMC14.Rules;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 using Robust.Shared.Utility;
@@ -55,4 +56,7 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
 
     [DataField]
     public LocId? Greeting;
+
+    [DataField]
+    public List<EntProtoId<RMCPlanetMapPrototypeComponent>>? AvailableOnPlanets;
 }

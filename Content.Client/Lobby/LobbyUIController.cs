@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Client._RMC14.LinkAccount;
+using Content.Client.GameTicking.Managers;
 using Content.Client.Guidebook;
 using Content.Client.Humanoid;
 using Content.Client.Inventory;
@@ -47,6 +48,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     [UISystemDependency] private readonly StationSpawningSystem _spawn = default!;
     [UISystemDependency] private readonly GuidebookSystem _guide = default!;
     [UISystemDependency] private readonly CMArmorSystem _armorSystem = default!;
+    [UISystemDependency] private readonly ClientGameTicker _clientGameTicker = default!; // RMC14
 
     private CharacterSetupGui? _characterSetup;
     private HumanoidProfileEditor? _profileEditor;
@@ -281,7 +283,8 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
             _prototypeManager,
             _resourceCache,
             _requirements,
-            _markings);
+            _markings,
+            _clientGameTicker);
 
         _profileEditor.OnOpenGuidebook += _guide.OpenHelp;
 
