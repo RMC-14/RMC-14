@@ -14,9 +14,10 @@
   id: RMCHelmetGarbToggleableBase
   abstract: true
   components:
-  - type: HelmetAccessory
   - type: ItemToggle
     activated: false
+    verbToggleOff: rmc-helmetgarbs-off
+    verbToggleOn: rmc-helmetgarbs-on
 
 # NVG
 
