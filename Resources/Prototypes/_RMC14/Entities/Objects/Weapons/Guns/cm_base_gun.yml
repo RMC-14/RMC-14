@@ -60,4 +60,4 @@
   - type: RMCProjectileAccuracy
   - type: Projectile
     soundHit:
-     collection: RMCBallisticHit
+      path: /Audio/_RMC14/Bullets/bullet_impact1.ogg

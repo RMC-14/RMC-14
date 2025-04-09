@@ -1,51 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fix tunnels not appearing on the tacmap
-    type: Fix
-  id: 1056
-  time: '2024-12-03T04:56:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5010
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed xenos being able to see ID card / dogtag names by examining.
-    type: Fix
-  id: 1057
-  time: '2024-12-03T05:01:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5004
-- author: Vermidia
-  changes:
-  - message: Fixed Defender being immune to explosion stuns when unfortified.
-    type: Fix
-  id: 1058
-  time: '2024-12-03T05:00:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5021
-- author: DrSmugleaf
-  changes:
-  - message: Fixed APC description mentioning that you can't swap the battery yet.
-    type: Fix
-  - message: Fixed playtime perks not being enabled by default.
-    type: Fix
-  - message: Fixed incendiary slugs not stunning.
-    type: Fix
-  - message: Fixed the Weapons Specialist's vendors giving you HIDP packets instead
-      of individual HIDP grenades.
-    type: Fix
-  id: 1059
-  time: '2024-12-03T05:12:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5037
-- author: Whisper
-  changes:
-  - message: Added Ranuko figurine.
-    type: Add
-  - message: Reduced use delay of some figurines, as they only play on the same tile
-      they are used.
-    type: Fix
-  id: 1060
-  time: '2024-12-03T05:55:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5036
-- author: Vermidia
-  changes:
   - message: Fixed marine base movement speed being 10% too slow.
     type: Fix
   id: 1061
@@ -5366,5 +5321,41 @@
   id: 1558
   time: '2025-04-05T19:24:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5913
+- author: Ian321
+  changes:
+  - message: Foxtrot Squad Leaders can now reliably be woken up.
+    type: Fix
+  id: 1559
+  time: '2025-04-07T05:33:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6102
+- author: DummeHytteOst
+  changes:
+  - message: Removed a fleshy bullet impact sound.
+    type: Fix
+  id: 1560
+  time: '2025-04-07T05:34:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6098
+- author: Vermidia
+  changes:
+  - message: Fixed fast and sticky resin deleting nodes when placed.
+    type: Fix
+  id: 1561
+  time: '2025-04-07T05:37:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6096
+- author: noctyrnal
+  changes:
+  - message: Added missing weather types.
+    type: Add
+  id: 1562
+  time: '2025-04-07T05:36:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6094
+- author: SG6732
+  changes:
+  - message: Added new M42A2 Pump Shotgun handle sprites + Wooden Stock attachment
+      sprites of all camo types.
+    type: Add
+  id: 1563
+  time: '2025-04-07T05:49:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5337
 Name: RMC14
 Order: -1
