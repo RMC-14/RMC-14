@@ -23,21 +23,18 @@ public sealed partial class RMCGunRecoilComponent : Component
     /// <summary>
     /// Amount recoil is added if the user is unskilled
     /// </summary>
-
     [DataField, AutoNetworkedField]
     public int UnskilledStrength = 1;
 
     /// <summary>
     /// Amount recoil is removed if the user is unskilled
     /// </summary>
-
     [DataField, AutoNetworkedField]
     public int SkilledStrength = 1;
 
     /// <summary>
     /// Recoil buildup loss per second
     /// </summary>
-
     [DataField, AutoNetworkedField]
     public float RecoilLossPerSecond = 5;
 
