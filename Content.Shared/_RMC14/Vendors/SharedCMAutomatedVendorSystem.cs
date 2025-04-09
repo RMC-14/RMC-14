@@ -362,7 +362,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 user.TakeOne.Remove(takeOne);
         }
 
-        if (section.SharedSpecLimit is { } globalLimit)
+        if (section.SharedSpecLimit is { } globalLimit && !HasComp<IgnoreSpecLimitsComponent>(actor))
         {
             if (HasComp<RMCVendorSpecialistComponent>(vendor))
             {
