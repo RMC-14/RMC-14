@@ -9,14 +9,11 @@ public sealed partial class RMCLightAnimationComponent : Component
     public TimeSpan Duration;
 
     [DataField, AutoNetworkedField]
-    public List<string> ColorHexes;
+    public TimeSpan StartTime = TimeSpan.Zero;
+
+    [ViewVariables]
+    public TimeSpan EndTime => StartTime + Duration;
 
     [DataField, AutoNetworkedField]
-    public float StepPercent;
-
-    [DataField, AutoNetworkedField]
-    public Color PreviousColor;
-
-    [DataField, AutoNetworkedField]
-    public Color NextColor;
+    public List<string> ColorHexes = new();
 }
