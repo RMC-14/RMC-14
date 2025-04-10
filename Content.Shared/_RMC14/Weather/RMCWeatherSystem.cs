@@ -12,11 +12,13 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weather;
 
 public sealed class RMCWeatherSystem : EntitySystem
 {
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedRoofSystem _roof = default!;
     [Dependency] private readonly AreaSystem _area = default!;
@@ -77,9 +79,11 @@ public sealed class RMCWeatherSystem : EntitySystem
             {
                 var weatherPick = _random.Pick(cycle.WeatherEvents);
                 _proto.TryIndex(weatherPick.WeatherType, out var weatherProto);
-                _weather.SetWeather(Transform(uid).MapID, weatherProto, weatherPick.Duration);
+                var endTime = _timing.CurTime + weatherPick.Duration;
 
-                var minTimeVariance = (-cycle.MinTimeVariance * 0.5) + _random.Next(cycle.MinTimeVariance);
+                _weather.SetWeather(Transform(uid).MapID, weatherProto, endTime);
+
+                var minTimeVariance = (-cycle.MinTimeVariance * 0.5) + _random.Next(cycle.MinTimeVariance * 0.5);
                 cycle.LastEventCooldown = weatherPick.Duration + cycle.MinTimeBetweenEvents + minTimeVariance;
             }
         }

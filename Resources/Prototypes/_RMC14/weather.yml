@@ -79,6 +79,28 @@
       loop: true
       volume: -6
 
+- type: weather
+  id: RMCStrataStormLight
+  sprite:
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: strata_storm_light
+  sound:
+    collection: Rain
+    params:
+      loop: true
+      volume: -6
+
+- type: weather
+  id: RMCStrataStormVeryLight
+  sprite:
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: strata_storm_very_light
+  sound:
+    collection: Rain
+    params:
+      loop: true
+      volume: -6
+
 # Hybrisa
 
 - type: weather
@@ -97,6 +119,17 @@
   sprite:
     sprite: /Textures/_RMC14/Effects/weather.rsi
     state: hybrisa_rain_light
+  sound:
+    collection: Rain
+    params:
+      loop: true
+      volume: -6
+      
+- type: weather
+  id: RMCHybrisaRainVeryLight
+  sprite:
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: hybrisa_rain_very_light
   sound:
     collection: Rain
     params:
