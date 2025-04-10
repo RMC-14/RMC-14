@@ -1,12 +1,7 @@
 ﻿using Content.Shared._RMC14.Areas;
-using Content.Shared._RMC14.Medical.Stasis;
-using Content.Shared.Coordinates;
 using Content.Shared.Light.Components;
 using Content.Shared.Light.EntitySystems;
-using Content.Shared.Maps;
-using Content.Shared.Popups;
 using Content.Shared.Weather;
-using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
