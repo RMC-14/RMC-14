@@ -78,7 +78,7 @@ public sealed class RMCWeatherSystem : EntitySystem
 
                 _weather.SetWeather(Transform(uid).MapID, weatherProto, endTime);
 
-                var minTimeVariance = (-cycle.MinTimeVariance * 0.5) + _random.Next(cycle.MinTimeVariance * 0.5);
+                var minTimeVariance = (-cycle.MinTimeVariance * 0.5) + _random.Next(cycle.MinTimeVariance);
                 cycle.LastEventCooldown = weatherPick.Duration + cycle.MinTimeBetweenEvents + minTimeVariance;
             }
         }
