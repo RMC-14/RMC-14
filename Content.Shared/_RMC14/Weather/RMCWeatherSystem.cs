@@ -75,10 +75,12 @@ public sealed class RMCWeatherSystem : EntitySystem
 
             if(cycle.LastEventCooldown <= TimeSpan.Zero)
             {
-                var weather = _random.Pick(cycle.WeatherEvents);
-                _proto.TryIndex(weather.WeatherType, out var weatherProto);
-                _weather.SetWeather(Transform(uid).MapID, weatherProto, weather.Duration);
-                cycle.LastEventCooldown = weather.Duration + cycle.MinTimeBetweenEvents;
+                var weatherPick = _random.Pick(cycle.WeatherEvents);
+                _proto.TryIndex(weatherPick.WeatherType, out var weatherProto);
+                _weather.SetWeather(Transform(uid).MapID, weatherProto, weatherPick.Duration);
+
+                var minTimeVariance = (-cycle.MinTimeVariance * 0.5) + _random.Next(cycle.MinTimeVariance);
+                cycle.LastEventCooldown = weatherPick.Duration + cycle.MinTimeBetweenEvents + minTimeVariance;
             }
         }
     }

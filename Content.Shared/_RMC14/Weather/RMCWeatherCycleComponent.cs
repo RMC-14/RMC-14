@@ -16,6 +16,9 @@ public sealed partial class RMCWeatherCycleComponent : Component
     public TimeSpan MinTimeBetweenEvents;
 
     [DataField, AutoNetworkedField]
+    public TimeSpan MinTimeVariance = TimeSpan.FromMinutes(10);
+
+    [DataField, AutoNetworkedField]
     public TimeSpan LastEventCooldown;
 
 
