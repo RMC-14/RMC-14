@@ -243,6 +243,13 @@
     debuffModifier: 1.4
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 1.4
+  - type: XenoRankNames
+    rankNames:
+      0: rmc-xeno-young
+      2: rmc-xeno-mature
+      3: rmc-xeno-elder-queen
+      4: rmc-xeno-ancient-queen
+      5: rmc-xeno-prime-queen
 
 - type: entity
   id: XenoLeaderPheromoneRelay

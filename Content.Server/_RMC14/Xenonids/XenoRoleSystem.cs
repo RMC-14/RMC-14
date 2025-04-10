@@ -1,4 +1,4 @@
-﻿using Content.Server.GameTicking;
+using Content.Server.GameTicking;
 using Content.Server.Mind;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Roles;
@@ -114,18 +114,10 @@ public sealed class XenoRoleSystem : EntitySystem
 
     private void OnRankRefreshName(Entity<XenoRankComponent> ent, ref RefreshNameModifiersEvent args)
     {
-        if (HasComp<XenoMaturingComponent>(ent))
+        if (HasComp<XenoMaturingComponent>(ent) || !TryComp<XenoRankNamesComponent>(ent, out var rankNamesComp))
             return;
 
-        var rank = ent.Comp.Rank switch
-        {
-            0 => "rmc-xeno-young",
-            2 => "rmc-xeno-mature",
-            3 => "rmc-xeno-elder",
-            4 => "rmc-xeno-ancient",
-            5 => "rmc-xeno-prime",
-            _ => null,
-        };
+        var rank = rankNamesComp.RankNames.ContainsKey(ent.Comp.Rank) ? rankNamesComp.RankNames[ent.Comp.Rank] : null;
 
         if (rank == null)
             return;
