@@ -135,3 +135,16 @@
     params:
       loop: true
       volume: -6
+
+# Trijent
+- type: weather
+  id: RMCTrijentRainLight
+  sprite:
+    sprite: /Textures/_RMC14/Effects/weather.rsi
+    state: trijent_rain_light
+  sound:
+    collection: Rain
+    params:
+      loop: true
+      volume: -6
+
