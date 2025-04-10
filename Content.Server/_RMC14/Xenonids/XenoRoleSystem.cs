@@ -117,12 +117,12 @@ public sealed class XenoRoleSystem : EntitySystem
         if (HasComp<XenoMaturingComponent>(ent) || !TryComp<XenoRankNamesComponent>(ent, out var rankNamesComp))
             return;
 
-        var rank = rankNamesComp.RankNames.ContainsKey(ent.Comp.Rank) ? rankNamesComp.RankNames[ent.Comp.Rank] : null;
+        LocId? rank = rankNamesComp.RankNames.ContainsKey(ent.Comp.Rank) ? rankNamesComp.RankNames[ent.Comp.Rank] : null;
 
         if (rank == null)
             return;
 
-        args.AddModifier(rank);
+        args.AddModifier(rank.Value);
     }
 
     private void UpdateRank(EntityUid xeno, ICommonSession player, string jobId, HumanoidCharacterProfile profile)
