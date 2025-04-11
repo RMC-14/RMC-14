@@ -66,6 +66,7 @@
     - Flashed
     - Dazed
     - Blinded
+    - PainAsphyxationDisabled
   - type: Blindable
   - type: Tag
     tags:
@@ -239,13 +240,12 @@
     - !type:HealthChange
       damage:
         types:
-          Asphyxiation: 0.1
+          Asphyxiation: 5
       conditions:
       - !type:PainLevel
         level: 5
       - !type:HasStatusEffect
         key: PainAsphyxationDisabled
-        component: PainAsphyxationDisabled
         reversed: true
     - !type:PopupMessage
       type: Local
@@ -290,13 +290,12 @@
     - !type:HealthChange
       damage:
         types:
-          Asphyxiation: 0.5
+          Asphyxiation: 5
       conditions:
       - !type:PainLevel
         level: 6
       - !type:HasStatusEffect
         key: PainAsphyxationDisabled
-        component: PainAsphyxationDisabled
         reversed: true
     - !type:PopupMessage
       type: Local

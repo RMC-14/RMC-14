@@ -1,4 +1,6 @@
+using Robust.Shared.GameStates;
+
 namespace Content.Shared._RMC14.Medical.Pain;
 
-[RegisterComponent]
+[NetworkedComponent, RegisterComponent]
 public sealed partial class PainAsphyxationDisabledComponent : Component {}

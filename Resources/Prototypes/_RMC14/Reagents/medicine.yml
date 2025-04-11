@@ -378,7 +378,6 @@
           groups:
             Airloss: 3
 
-# TODO pain related effects
 # TODO heart damage over 100u
 # TODO RMC14 allow breathing in crit instead of reducing asphyxiation
 - type: reagent
@@ -395,6 +394,7 @@
       - !type:GenericStatusEffect
         key: PainAsphyxationDisabled
         component: PainAsphyxationDisabled
+        time: 1
         refresh: true
         type: Add
       - !type:DecreasePain
