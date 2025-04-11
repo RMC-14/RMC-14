@@ -1,0 +1,17 @@
+﻿- type: job
+  parent: CMJobXenoBase
+  id: RMCXenoKing
+  name: rmc-job-name-xeno-king
+  playTimeTracker: RMCJobXenoKing
+  accessGroups:
+  - CMAccessXeno
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: xenoking
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: xeno_ruler
+
+- type: playTimeTracker
+  id: RMCJobXenoKing
+  isXeno: true
