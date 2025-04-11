@@ -94,7 +94,7 @@
   - type: SlowOnDamage # nullify from BaseMobSpecies
     speedModifierThresholds:
       0: 1
-  - type: Pain # TODO change to normal from testing
+  - type: Pain
     painLevels:
     - !type:TryChangePainLevelTo
       level: 0

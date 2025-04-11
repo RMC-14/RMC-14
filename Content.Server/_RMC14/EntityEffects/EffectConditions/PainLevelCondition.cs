@@ -1,8 +1,8 @@
 using Content.Shared.EntityEffects;
-using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
+using Content.Shared._RMC14.Medical.Pain;
 
-namespace Content.Shared._RMC14.Medical.Pain;
+namespace Content.Server._RMC14.EntityEffects.Effects;
 
 public sealed partial class PainLevel : EntityEffectCondition
 {
