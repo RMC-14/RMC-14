@@ -97,6 +97,8 @@
   - type: RMCDropshipBlocked
   - type: MinimapColor
     color: "#ebe5e5ee"
+  - type: IsRoof
+  - type: SunShadowCast
 
 - type: entity
   abstract: true

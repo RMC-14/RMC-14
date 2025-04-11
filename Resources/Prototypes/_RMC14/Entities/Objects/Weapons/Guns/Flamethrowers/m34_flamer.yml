@@ -46,6 +46,11 @@
           components:
           - RMCFlamerTank
   - type: Wieldable
+  - type: WieldableSpeedModifiers
+    base: 0.5
+    light: 0.69
+    medium: 0.75
+    heavy: 0.806
   - type: GunRequiresWield
   - type: RMCFlamerAmmoProvider
   - type: MagazineVisuals
