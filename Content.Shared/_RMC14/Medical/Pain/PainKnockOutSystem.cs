@@ -1,4 +1,3 @@
-using Content.Shared.StatusEffect;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Mobs.Components;
@@ -8,10 +7,6 @@ namespace Content.Shared._RMC14.Medical.Pain;
 public sealed class PainKnockOutSystem : EntitySystem
 {
     [Dependency] private readonly MobStateSystem _mobState = default!;
-
-
-    [ValidatePrototypeId<StatusEffectPrototype>]
-    private const string PainKnockOutKey = "PainKnockOut";
 
     public override void Initialize()
     {
