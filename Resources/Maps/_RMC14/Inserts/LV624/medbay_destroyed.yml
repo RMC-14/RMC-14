@@ -4,8 +4,8 @@ meta:
   engineVersion: 248.0.3
   forkId: ""
   forkVersion: ""
-  time: 04/11/2025 04:06:06
-  entityCount: 145
+  time: 04/11/2025 04:22:46
+  entityCount: 148
 maps: []
 grids:
 - 1
@@ -833,6 +833,23 @@ entities:
     components:
     - type: Transform
       pos: 3.5,8.5
+      parent: 1
+- proto: RMCSpawnerFigurinePatron
+  entities:
+  - uid: 146
+    components:
+    - type: Transform
+      pos: 4.5,4.5
+      parent: 1
+  - uid: 147
+    components:
+    - type: Transform
+      pos: 12.5,4.5
+      parent: 1
+  - uid: 148
+    components:
+    - type: Transform
+      pos: 12.5,13.5
       parent: 1
 - proto: RMCSpawnerIntelClose
   entities:
