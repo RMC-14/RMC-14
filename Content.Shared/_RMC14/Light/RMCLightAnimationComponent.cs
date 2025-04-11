@@ -15,5 +15,5 @@ public sealed partial class RMCLightAnimationComponent : Component
     public TimeSpan EndTime => StartTime + Duration;
 
     [DataField, AutoNetworkedField]
-    public List<string> ColorHexes = new();
+    public List<Color> Colors = new();
 }
