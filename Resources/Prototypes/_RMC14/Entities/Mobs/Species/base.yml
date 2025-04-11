@@ -240,7 +240,7 @@
     - !type:HealthChange
       damage:
         types:
-          Asphyxiation: 5
+          Asphyxiation: 0.1
       conditions:
       - !type:PainLevel
         level: 5
@@ -290,7 +290,7 @@
     - !type:HealthChange
       damage:
         types:
-          Asphyxiation: 5
+          Asphyxiation: 0.5
       conditions:
       - !type:PainLevel
         level: 6

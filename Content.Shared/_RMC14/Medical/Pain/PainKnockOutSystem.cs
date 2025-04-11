@@ -11,11 +11,20 @@ public sealed class PainKnockOutSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<PainKnockOutComponent, ComponentStartup>(OnComponentStart);
+        SubscribeLocalEvent<PainKnockOutComponent, ComponentShutdown>(OnComponentShutdown);
         SubscribeLocalEvent<PainKnockOutComponent, UpdateMobStateEvent>(OnMobStateUpdate);
         SubscribeLocalEvent<PainKnockOutComponent, MobStateChangedEvent>(OnMobStateChanged);
     }
 
     private void OnComponentStart(EntityUid uid, PainKnockOutComponent comp, ComponentStartup args)
+    {
+        if(TryComp<MobStateComponent>(uid, out var state))
+        {
+            _mobState.UpdateMobState(uid, state);
+        }
+    }
+
+    private void OnComponentShutdown(EntityUid uid, PainKnockOutComponent comp, ComponentShutdown args)
     {
         if(TryComp<MobStateComponent>(uid, out var state))
         {
