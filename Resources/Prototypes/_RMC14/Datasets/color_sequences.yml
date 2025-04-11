@@ -1,5 +1,5 @@
 - type: dataset
-  id: WarmSunsetProgression 
+  id: WarmSunsetColorProgression 
   values:
   - "#e3a979"
   - "#e29658"
@@ -13,7 +13,7 @@
   - "#000000"
 
 - type: dataset
-  id: ColdSunsetProgression 
+  id: ColdSunsetColorProgression 
   values:
   - "#a8c3cf"
   - "#7a9abb"
