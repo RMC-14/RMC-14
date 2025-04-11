@@ -210,7 +210,7 @@
       pen:
         maxVol: 15
         reagents:
-        - ReagentId: CMTricordrazine
+        - ReagentId: CMTramadol
           Quantity: 15
   - type: SolutionContainerVisuals # TODO fix this
     maxFillLevels: 1
