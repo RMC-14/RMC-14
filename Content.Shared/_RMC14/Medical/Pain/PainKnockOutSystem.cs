@@ -1,9 +1,4 @@
 using Content.Shared.StatusEffect;
-using Content.Shared.Stunnable;
-using Robust.Shared.Prototypes;
-using Content.Shared.Damage;
-using Content.Shared.Damage.Prototypes;
-using Content.Shared.Chat;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Mobs.Components;
@@ -12,18 +7,11 @@ namespace Content.Shared._RMC14.Medical.Pain;
 
 public sealed class PainKnockOutSystem : EntitySystem
 {
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
-    [Dependency] private readonly SharedSuicideSystem _suicide = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
 
 
     [ValidatePrototypeId<StatusEffectPrototype>]
     private const string PainKnockOutKey = "PainKnockOut";
-
-    private static readonly ProtoId<DamageTypePrototype> AsphyxiationType = "Asphyxiation";
 
     public override void Initialize()
     {
