@@ -242,7 +242,11 @@
           Asphyxiation: 0.1
       conditions:
       - !type:PainLevel
-          level: 5
+        level: 5
+      - !type:HasStatusEffect
+        key: PainAsphyxationDisabled
+        component: PainAsphyxationDisabled
+        reversed: true
     - !type:PopupMessage
       type: Local
       messages: [ "rmc-pain-severe-inner" ]
@@ -289,7 +293,11 @@
           Asphyxiation: 0.5
       conditions:
       - !type:PainLevel
-          level: 6
+        level: 6
+      - !type:HasStatusEffect
+        key: PainAsphyxationDisabled
+        component: PainAsphyxationDisabled
+        reversed: true
     - !type:PopupMessage
       type: Local
       messages: [ "rmc-pain-horrible-inner" ]

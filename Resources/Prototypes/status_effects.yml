@@ -81,3 +81,6 @@
 
 - type: statusEffect
   id: Blinded
+
+- type: statusEffect
+  id: PainAsphyxationDisabled

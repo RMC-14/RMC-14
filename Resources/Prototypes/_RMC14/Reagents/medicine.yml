@@ -392,6 +392,11 @@
     Medicine:
       metabolismRate: 0.1
       effects:
+      - !type:GenericStatusEffect
+        key: PainAsphyxationDisabled
+        component: PainAsphyxationDisabled
+        refresh: true
+        type: Add
       - !type:DecreasePain
         strength: 30
       - !type:HealthChange
