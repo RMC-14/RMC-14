@@ -117,7 +117,10 @@ public sealed class XenoRoleSystem : EntitySystem
         if (HasComp<XenoMaturingComponent>(ent) || !TryComp<XenoRankNamesComponent>(ent, out var rankNamesComp))
             return;
 
-        LocId? rank = rankNamesComp.RankNames.ContainsKey(ent.Comp.Rank) ? rankNamesComp.RankNames[ent.Comp.Rank] : null;
+        LocId? rank = null;
+
+        if (rankNamesComp.RankNames.ContainsKey(ent.Comp.Rank))
+            rank = rankNamesComp.RankNames[ent.Comp.Rank];
 
         if (rank == null)
             return;
