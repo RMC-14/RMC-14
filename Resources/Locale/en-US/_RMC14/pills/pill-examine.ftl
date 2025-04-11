@@ -9,3 +9,5 @@ cm-pill-contents-dylovene = An anti-toxin pill. It neutralizes many common toxin
 cm-pill-contents-inaprovaline = An Inaprovaline pill. Used to stabilize patients.
 cm-pill-contents-kelotane = A Kelotane pill. Used to treat burns.
 cm-pill-contents-tricordrazine = A Tricordrazine pill. A weak general use medicine for treating damage.
+cm-pill-contents-tramadol = A Tramadol pill. A simple painkiller.
+cm-pill-contents-oxycodone = A Oxycodone pill. A powerful painkiller.

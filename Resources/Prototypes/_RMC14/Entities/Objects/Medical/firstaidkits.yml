@@ -117,7 +117,7 @@
     contents:
     - id: CMHealthAnalyzer
     - id: CMTricordrazineAutoInjectorNoSkill
-#    - id: CMPainStopAutoInjectorNoSkill
+    - id: CMTramadolAutoInjectorNoSkill
     - id: CMInaprovalineAutoInjector
     - id: CMGauze10
     - id: CMOintment10
@@ -181,7 +181,8 @@
       amount: 2
     - id: CMKelotaneAutoInjector
       amount: 3
-#    - id: CMPainStopAutoInjectorNoSkill
+    - id: CMTramadolAutoInjectorNoSkill
+      amount: 1
 
 - type: entity
   parent: CMFirstAidKit

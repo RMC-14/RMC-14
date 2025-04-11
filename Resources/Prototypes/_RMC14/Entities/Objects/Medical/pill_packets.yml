@@ -81,5 +81,32 @@
   - type: IconLabel
     labelTextLocId: rmc-kelotane-container-label-text
 
-# TODO RMC14 tramadol pill packet
-# TODO RMC14 oxycodone pill packet
+- type: entity
+  parent: CMPacketPills
+  id: CMPacketPillsTramadol
+  name: tramadol pill packet
+  description: This packet contains tramadol pills, a mild painkiller. Once you take them out, they don't go back in. Don't take more than 2 pills in a short period.
+  components:
+  - type: Sprite
+    state: tramadol_packet
+  - type: StorageFill
+    contents:
+    - id: CMPillTramadol
+      amount: 4
+  - type: IconLabel
+    labelTextLocId: rmc-tramadol-container-label-text
+
+- type: entity
+  parent: CMPacketPills
+  id: CMPacketPillsOxycodone
+  name: oxycodone pill packet
+  description: This packet contains oxycodone pills. A highly effective painkiller. Once you take them out, they don't go back in. Don't take more than 1 pill in a short period.
+  components:
+  - type: Sprite
+    state: oxycodone_packet
+  - type: StorageFill
+    contents:
+    - id: CMPillOxycodone
+      amount: 4
+  - type: IconLabel
+    labelTextLocId: rmc-oxycodone-container-label-text
