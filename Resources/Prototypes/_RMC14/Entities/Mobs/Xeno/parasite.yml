@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoUndeveloped
   - CMXenoFlammable
@@ -109,3 +109,11 @@
     stateName: parasite
   - type: RMCBuckleOffset
     offset: 0, 0
+  - type: XenoRankNames #TODO change ranks based on total hugs done
+    rankNames:
+      0: rmc-xeno-young
+      1: rmc-xeno-young
+      2: rmc-xeno-mature-parasite
+      3: rmc-xeno-elder-parasite
+      4: rmc-xeno-ancient-parasite
+      5: rmc-xeno-prime-parasite
