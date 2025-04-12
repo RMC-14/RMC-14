@@ -40,6 +40,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly MobThresholdSystem _mobThresholds = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
@@ -305,10 +306,9 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
 
     private void OnActiveDamageOnPulledDevoured(Entity<ActiveDamageOnPulledWhileCritComponent> ent, ref XenoTargetDevouredAttemptEvent args)
     {
-        if (TryComp<MobThresholdsComponent>(ent, out var mobThresholds) && TryComp<DamageableComponent>(ent, out var damageable))
+        if (_mobThresholds.TryGetDeadThreshold(ent.Owner, out var mobThreshold) && TryComp<DamageableComponent>(ent, out var damageable))
         {
-            // Kill the mob
-            var lethalAmountOfDamage = mobThresholds.Thresholds.Keys.Last() - damageable.TotalDamage;
+            var lethalAmountOfDamage = mobThreshold.Value - damageable.TotalDamage;
             var type = _prototypes.Index<DamageTypePrototype>(LethalDamageType);
             var damage = new DamageSpecifier(type, lethalAmountOfDamage);
             _damageable.TryChangeDamage(ent.Owner, damage, true);
