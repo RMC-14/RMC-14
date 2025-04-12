@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: Rainbeon
   changes:
-  - message: Halved the speed bonus Frenzy gives while pulling to more closely match
-      CM13. This means overall pulling speeds are reduced by ~10% total.
-    type: Fix
-  id: 1065
-  time: '2024-12-05T23:56:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5057
-- author: Rainbeon
-  changes:
   - message: Fixed Resin Hole Acid Traps not triggering when a Marine stands up after
       being dragged in.
     type: Fix
@@ -5367,5 +5359,13 @@
   id: 1567
   time: '2025-04-12T05:34:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6120
+- author: AverageNotDoingAnythingEnjoyer
+  changes:
+  - message: Replaced some placeholder guns in Kutjevo Refinery with the intended
+      gun.
+    type: Tweak
+  id: 1568
+  time: '2025-04-12T05:35:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6133
 Name: RMC14
 Order: -1
