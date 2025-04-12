@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared._RMC14.Projectiles.Aimed;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Weapons.Ranged.AimedShot.FocusedShooting;
 using Content.Shared._RMC14.Xenonids.Fortify;
 using Content.Shared.Camera;
 using Content.Shared.Damage.Components;
@@ -39,9 +40,21 @@ public sealed class RMCStoppingPowerSystem : EntitySystem
     /// </summary>
     private void OnStoppingPowerHit(Entity<RMCStoppingPowerComponent> ent, ref ProjectileHitEvent args)
     {
+        ent.Comp.CurrentStoppingPower = 0;
+        Dirty(ent);
+
+        if (ent.Comp.RequiresAimedShot && !TryComp<AimedProjectileComponent>(ent, out var aimedShot))
+            return;
+
+        // TODO Clean up by storing the focused counter somewhere on the bullet. Currently it has to try to get the previous state because this effect happens
+        // After focused updates
+        if (ent.Comp.FocusedCounterThreshold != null && TryComp<AimedProjectileComponent>(ent, out aimedShot) &&
+            TryComp<RMCFocusedShootingComponent>(aimedShot.Source, out var focused) && focused.FocusCounter == ent.Comp.FocusedCounterThreshold)
+            return;
+
         var stoppingPower = (float)Math.Min(Math.Ceiling(args.Damage.GetTotal().Float() / ent.Comp.StoppingPowerDivider), ent.Comp.MaxStoppingPower);
 
-        if (!(stoppingPower >= ent.Comp.StoppingThreshold))
+        if (!(stoppingPower > ent.Comp.StoppingThreshold))
             return;
 
         var target = args.Target;
