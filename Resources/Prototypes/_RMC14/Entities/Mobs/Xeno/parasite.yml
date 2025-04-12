@@ -7,7 +7,7 @@
   components:
   - type: GhostRole
     name: cm-job-name-xeno-parasite
-    prob: 0.25
+    prob: 0
     raffle:
       settings: timeRequirement
   - type: Sprite
