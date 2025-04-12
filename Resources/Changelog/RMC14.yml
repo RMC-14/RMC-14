@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: Basic, green and white fires, no longer emit a basic white light, they
-      emit their own unique color of light.
-    type: Add
-  id: 1072
-  time: '2024-12-06T00:27:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5026
-- author: MetalSage
-  changes:
-  - message: Added flashlight boxes and crafting them with cardboard sheets.
-    type: Add
-  id: 1073
-  time: '2024-12-06T00:26:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4994
 - author: Rainbeon
   changes:
   - message: Fixed Burrowed Larva not registering as a new entity on the round end
@@ -5365,5 +5350,19 @@
   id: 1574
   time: '2025-04-12T06:06:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6077
+- author: CyberTropic
+  changes:
+  - message: Added dynamic weather events.
+    type: Add
+  id: 1575
+  time: '2025-04-12T06:07:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6135
+- author: CyberTropic
+  changes:
+  - message: Added more LV624 inserts.
+    type: Add
+  id: 1576
+  time: '2025-04-12T06:08:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6138
 Name: RMC14
 Order: -1
