@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Fixed evac shuttles landing offset from game grid.
-    type: Fix
-  id: 1062
-  time: '2024-12-04T06:44:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5048
 - author: Vermidia
   changes:
   - message: Fixed xeno AOE abilities hitting devoured marines
@@ -5358,5 +5351,15 @@
   id: 1564
   time: '2025-04-12T05:05:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6114
+- author: exincore
+  changes:
+  - message: Hybrisa window shutters no longer obstruct vision while closed.
+    type: Fix
+  - message: The Basira-Armstrong bolt-action hunting rifle is no longer a double-barrel
+      shotgun and can no longer accept nor fire shotgun shells.
+    type: Fix
+  id: 1565
+  time: '2025-04-12T05:09:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6105
 Name: RMC14
 Order: -1
