@@ -94,6 +94,7 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
 
         if (mobUid != null)
         {
+            EnsureComp<RMCAdminSpawnedComponent>(mobUid.Value);
             _transform.SetCoordinates(mobUid.Value, coords.Value);
 
             var spawnEv = new PlayerSpawnCompleteEvent(
