@@ -241,7 +241,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
         }
 
         _marinePresenceAnnounce.AnnounceEarlyLeave(ent, recordId, station, jobName); // RMC14
-        if (false) // RMC14
+        return; // RMC14
         _chatSystem.DispatchStationAnnouncement(station.Value,
             Loc.GetString(
                 "earlyleave-cryo-announcement",
