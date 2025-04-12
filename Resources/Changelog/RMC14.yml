@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed Dancer Praetorian's dodge double speed buff counting downed marines.
-    type: Fix
-  id: 1064
-  time: '2024-12-05T23:55:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5058
 - author: Rainbeon
   changes:
   - message: Halved the speed bonus Frenzy gives while pulling to more closely match
@@ -5361,5 +5354,18 @@
   id: 1566
   time: '2025-04-12T05:30:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6122
+- author: AverageNotDoingAnythingEnjoyer
+  changes:
+  - message: Added a lot of missing props, med vendors, metal, and buttons to Chance's
+      Claim.
+    type: Add
+  - message: Fixed reactor control room pod doors in Chance's Claim being corrodible.
+    type: Fix
+  - message: Replaced some old placeholder guns in Chance's Claim with CMB revolvers
+      and basira-armstrong hunting rifles.
+    type: Tweak
+  id: 1567
+  time: '2025-04-12T05:34:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6120
 Name: RMC14
 Order: -1
