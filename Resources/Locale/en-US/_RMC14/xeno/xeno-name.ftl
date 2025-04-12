@@ -7,15 +7,10 @@ rmc-xeno-elder = Elder {$baseName}
 rmc-xeno-ancient = Ancient {$baseName}
 rmc-xeno-prime = Prime {$baseName}
 
-# Uses normal young and mature
-rmc-xeno-elder-queen = Elder Empress
-rmc-xeno-ancient-queen = Ancient Empress
-rmc-xeno-prime-queen = Prime Empress
-
 rmc-xeno-mature-parasite = Fledgling {$baseName}
 rmc-xeno-elder-parasite = Veteran {$baseName}
 rmc-xeno-ancient-parasite = Baneful {$baseName}
-rmc-xeno-prime-parasite = Royal {$baseName}
+rmc-xeno-prime-parasite = Merciless {$baseName}
 
 # Only 1 because getting king multiple times will be rare
 rmc-xeno-mature-king = Ruthless {$baseName}
