@@ -25,6 +25,33 @@
           !type:DamageTrigger
           damage: 10
         behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+
+- type: entity
+  id: RMCCarpetBaseNonIconsmooth
+  parent: BaseStructure
+  name: carpet
+  description: Fancy walking surface.
+  abstract: true
+  components:
+  - type: Sprite
+    drawdepth: FloorTiles
+  - type: Icon
+    state: full
+  - type: Tag
+    tags: [ Carpet ]
+  - type: Physics
+    canCollide: false
+  - type: Fixtures
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 10
+        behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
 
@@ -38,3 +65,427 @@
   - type: Icon
     sprite: _RMC14/Structures/Furniture/Carpets/prison_carpet.rsi
 
+- type: entity
+  id: RMCCarpetBlue1
+  parent: RMCCarpetBaseNonIconsmooth
+  name: blue carpet
+  components:
+  - type: Clickable
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Carpets/blue_carpet.rsi
+    state: bcarpet01
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Carpets/blue_carpet.rsi
+    state: bcarpet01
+
+- type: entity
+  id: RMCCarpetBlue2
+  parent: RMCCarpetBlue1
+  components:
+  - type: Sprite
+    state: bcarpet02
+  - type: Icon
+    state: bcarpet02
+
+- type: entity
+  id: RMCCarpetBlue3
+  parent: RMCCarpetBlue1
+  components:
+  - type: Sprite
+    state: bcarpet03
+  - type: Icon
+    state: bcarpet03
+
+- type: entity
+  id: RMCCarpetBlue4
+  parent: RMCCarpetBlue1
+  components:
+  - type: Sprite
+    state: bcarpet04
+  - type: Icon
+    state: bcarpet04
+
+- type: entity
+  id: RMCCarpetBlue5
+  parent: RMCCarpetBlue1
+  components:
+  - type: Sprite
+    state: bcarpet05
+  - type: Icon
+    state: bcarpet05
+
+- type: entity
+  id: RMCCarpetBlue6
+  parent: RMCCarpetBlue1
+  components:
+  - type: Sprite
+    state: bcarpet06
+  - type: Icon
+    state: bcarpet06
+
+- type: entity
+  id: RMCCarpetBlue7
+  parent: RMCCarpetBlue1
+  components:
+  - type: Sprite
+    state: bcarpet07
+  - type: Icon
+    state: bcarpet07
+
+- type: entity
+  id: RMCCarpetBlue8
+  parent: RMCCarpetBlue1
+  components:
+  - type: Sprite
+    state: bcarpet08
+  - type: Icon
+    state: bcarpet08
+
+- type: entity
+  id: RMCCarpetBlue9
+  parent: RMCCarpetBlue1
+  components:
+  - type: Sprite
+    state: bcarpet09
+  - type: Icon
+    state: bcarpet09
+
+- type: entity
+  id: RMCCarpetBeige1
+  parent: RMCCarpetBaseNonIconsmooth
+  name: beige carpet
+  components:
+  - type: Clickable
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Carpets/beige_carpet.rsi
+    state: bcarpet01
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Carpets/beige_carpet.rsi
+    state: bcarpet01
+
+- type: entity
+  id: RMCCarpetBeige2
+  parent: RMCCarpetBeige1
+  components:
+  - type: Sprite
+    state: bcarpet02
+  - type: Icon
+    state: bcarpet02
+
+- type: entity
+  id: RMCCarpetBeige3
+  parent: RMCCarpetBeige1
+  components:
+  - type: Sprite
+    state: bcarpet03
+  - type: Icon
+    state: bcarpet03
+
+- type: entity
+  id: RMCCarpetBeige4
+  parent: RMCCarpetBeige1
+  components:
+  - type: Sprite
+    state: bcarpet04
+  - type: Icon
+    state: bcarpet04
+
+- type: entity
+  id: RMCCarpetBeige5
+  parent: RMCCarpetBeige1
+  components:
+  - type: Sprite
+    state: bcarpet05
+  - type: Icon
+    state: bcarpet05
+
+- type: entity
+  id: RMCCarpetBeige6
+  parent: RMCCarpetBeige1
+  components:
+  - type: Sprite
+    state: bcarpet06
+  - type: Icon
+    state: bcarpet06
+
+- type: entity
+  id: RMCCarpetBeige7
+  parent: RMCCarpetBeige1
+  components:
+  - type: Sprite
+    state: bcarpet07
+  - type: Icon
+    state: bcarpet07
+
+- type: entity
+  id: RMCCarpetBeige8
+  parent: RMCCarpetBeige1
+  components:
+  - type: Sprite
+    state: bcarpet08
+  - type: Icon
+    state: bcarpet08
+
+- type: entity
+  id: RMCCarpetBeige9
+  parent: RMCCarpetBeige1
+  components:
+  - type: Sprite
+    state: bcarpet09
+  - type: Icon
+    state: bcarpet09
+
+- type: entity
+  id: RMCCarpetGreyBlue1
+  parent: RMCCarpetBaseNonIconsmooth
+  name: grey blue carpet
+  components:
+  - type: Clickable
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Carpets/grey_blue_carpet.rsi
+    state: bcarpet01
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Carpets/grey_blue_carpet.rsi
+    state: bcarpet01
+
+- type: entity
+  id: RMCCarpetGreyBlue2
+  parent: RMCCarpetGreyBlue1
+  components:
+  - type: Sprite
+    state: bcarpet02
+  - type: Icon
+    state: bcarpet02
+
+- type: entity
+  id: RMCCarpetGreyBlue3
+  parent: RMCCarpetGreyBlue1
+  components:
+  - type: Sprite
+    state: bcarpet03
+  - type: Icon
+    state: bcarpet03
+
+- type: entity
+  id: RMCCarpetGreyBlue4
+  parent: RMCCarpetGreyBlue1
+  components:
+  - type: Sprite
+    state: bcarpet04
+  - type: Icon
+    state: bcarpet04
+
+- type: entity
+  id: RMCCarpetGreyBlue5
+  parent: RMCCarpetGreyBlue1
+  components:
+  - type: Sprite
+    state: bcarpet05
+  - type: Icon
+    state: bcarpet05
+
+- type: entity
+  id: RMCCarpetGreyBlue6
+  parent: RMCCarpetGreyBlue1
+  components:
+  - type: Sprite
+    state: bcarpet06
+  - type: Icon
+    state: bcarpet06
+
+- type: entity
+  id: RMCCarpetGreyBlue7
+  parent: RMCCarpetGreyBlue1
+  components:
+  - type: Sprite
+    state: bcarpet07
+  - type: Icon
+    state: bcarpet07
+
+- type: entity
+  id: RMCCarpetGreyBlue8
+  parent: RMCCarpetGreyBlue1
+  components:
+  - type: Sprite
+    state: bcarpet08
+  - type: Icon
+    state: bcarpet08
+
+- type: entity
+  id: RMCCarpetGreyBlue9
+  parent: RMCCarpetGreyBlue1
+  components:
+  - type: Sprite
+    state: bcarpet09
+  - type: Icon
+    state: bcarpet09
+
+- type: entity
+  id: RMCCarpetPink1
+  parent: RMCCarpetBaseNonIconsmooth
+  name: pink carpet
+  components:
+  - type: Clickable
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Carpets/pink_carpet.rsi
+    state: bcarpet01
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Carpets/pink_carpet.rsi
+    state: bcarpet01
+
+- type: entity
+  id: RMCCarpetPink2
+  parent: RMCCarpetPink1
+  components:
+  - type: Sprite
+    state: bcarpet02
+  - type: Icon
+    state: bcarpet02
+
+- type: entity
+  id: RMCCarpetPink3
+  parent: RMCCarpetPink1
+  components:
+  - type: Sprite
+    state: bcarpet03
+  - type: Icon
+    state: bcarpet03
+
+- type: entity
+  id: RMCCarpetPink4
+  parent: RMCCarpetPink1
+  components:
+  - type: Sprite
+    state: bcarpet04
+  - type: Icon
+    state: bcarpet04
+
+- type: entity
+  id: RMCCarpetPink5
+  parent: RMCCarpetPink1
+  components:
+  - type: Sprite
+    state: bcarpet05
+  - type: Icon
+    state: bcarpet05
+
+- type: entity
+  id: RMCCarpetPink6
+  parent: RMCCarpetPink1
+  components:
+  - type: Sprite
+    state: bcarpet06
+  - type: Icon
+    state: bcarpet06
+
+- type: entity
+  id: RMCCarpetPink7
+  parent: RMCCarpetPink1
+  components:
+  - type: Sprite
+    state: bcarpet07
+  - type: Icon
+    state: bcarpet07
+
+- type: entity
+  id: RMCCarpetPink8
+  parent: RMCCarpetPink1
+  components:
+  - type: Sprite
+    state: bcarpet08
+  - type: Icon
+    state: bcarpet08
+
+- type: entity
+  id: RMCCarpetPink9
+  parent: RMCCarpetPink1
+  components:
+  - type: Sprite
+    state: bcarpet09
+  - type: Icon
+    state: bcarpet09
+
+- type: entity
+  id: RMCCarpetBlack1
+  parent: RMCCarpetBaseNonIconsmooth
+  name: black carpet
+  components:
+  - type: Clickable
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Carpets/black_carpet.rsi
+    state: bcarpet01
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Carpets/black_carpet.rsi
+    state: bcarpet01
+
+- type: entity
+  id: RMCCarpetBlack2
+  parent: RMCCarpetBlack1
+  components:
+  - type: Sprite
+    state: bcarpet02
+  - type: Icon
+    state: bcarpet02
+
+- type: entity
+  id: RMCCarpetBlack3
+  parent: RMCCarpetBlack1
+  components:
+  - type: Sprite
+    state: bcarpet03
+  - type: Icon
+    state: bcarpet03
+
+- type: entity
+  id: RMCCarpetBlack4
+  parent: RMCCarpetBlack1
+  components:
+  - type: Sprite
+    state: bcarpet04
+  - type: Icon
+    state: bcarpet04
+
+- type: entity
+  id: RMCCarpetBlack5
+  parent: RMCCarpetBlack1
+  components:
+  - type: Sprite
+    state: bcarpet05
+  - type: Icon
+    state: bcarpet05
+
+- type: entity
+  id: RMCCarpetBlack6
+  parent: RMCCarpetBlack1
+  components:
+  - type: Sprite
+    state: bcarpet06
+  - type: Icon
+    state: bcarpet06
+
+- type: entity
+  id: RMCCarpetBlack7
+  parent: RMCCarpetBlack1
+  components:
+  - type: Sprite
+    state: bcarpet07
+  - type: Icon
+    state: bcarpet07
+
+- type: entity
+  id: RMCCarpetBlack8
+  parent: RMCCarpetBlack1
+  components:
+  - type: Sprite
+    state: bcarpet08
+  - type: Icon
+    state: bcarpet08
+
+- type: entity
+  id: RMCCarpetBlack9
+  parent: RMCCarpetBlack1
+  components:
+  - type: Sprite
+    state: bcarpet09
+  - type: Icon
+    state: bcarpet09

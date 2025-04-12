@@ -1,7 +1,6 @@
 ﻿using Content.Server.Hands.Systems;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Shared._RMC14.CCVar;
-using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Medal;
 using Content.Shared._RMC14.Survivor;
 using Content.Shared.Coordinates;
@@ -24,6 +23,11 @@ public sealed class PlaytimeMedalSystem : SharedPlaytimeMedalSystem
     private static readonly EntProtoId GoldMedal = "RMCMedalGoldService";
     private static readonly EntProtoId PlatinumMedal = "RMCMedalPlatinumService";
 
+    private static readonly EntProtoId WhiteRibbon = "RMCMedalRibbonWhiteService";
+    private static readonly EntProtoId YellowRibbon = "RMCMedalRibbonYellowService";
+    private static readonly EntProtoId RedRibbon = "RMCMedalRibbonRedService";
+    private static readonly EntProtoId BlueRibbon = "RMCMedalRibbonBlueService";
+
     private TimeSpan _bronzeTime;
     private TimeSpan _silverTime;
     private TimeSpan _goldTime;
@@ -45,9 +49,6 @@ public sealed class PlaytimeMedalSystem : SharedPlaytimeMedalSystem
         if (!ev.Profile.PlaytimePerks)
             return;
 
-        if (!HasComp<MarineComponent>(ev.Mob) || HasComp<SurvivorComponent>(ev.Mob))
-            return;
-
         if (ev.JobId == null ||
             !_prototype.TryIndex(ev.JobId, out JobPrototype? job) ||
             !_playTimeTracking.TryGetTrackerTime(ev.Player, job.PlayTimeTracker, out var time))
@@ -56,14 +57,28 @@ public sealed class PlaytimeMedalSystem : SharedPlaytimeMedalSystem
         }
 
         EntProtoId? medalId = null;
-        if (time >= _platinumTime)
-            medalId = PlatinumMedal;
-        else if (time >= _goldTime)
-            medalId = GoldMedal;
-        else if (time >= _silverTime)
-            medalId = SilverMedal;
-        else if (time >= _bronzeTime)
-            medalId = BronzeMedal;
+        if (HasComp<RMCSurvivorComponent>(ev.Mob))
+        {
+            if (time >= _platinumTime)
+                medalId = BlueRibbon;
+            else if (time >= _goldTime)
+                medalId = RedRibbon;
+            else if (time >= _silverTime)
+                medalId = YellowRibbon;
+            else if (time >= _bronzeTime)
+                medalId = WhiteRibbon;
+        }
+        else
+        {
+            if (time >= _platinumTime)
+                medalId = PlatinumMedal;
+            else if (time >= _goldTime)
+                medalId = GoldMedal;
+            else if (time >= _silverTime)
+                medalId = SilverMedal;
+            else if (time >= _bronzeTime)
+                medalId = BronzeMedal;
+        }
 
         if (medalId == null)
             return;

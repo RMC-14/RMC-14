@@ -17,7 +17,7 @@
     - CMChiefMP # TODO RMC14 chief mp vendor
     sections:
     - name: Police Set (Mandatory)
-      takeAll: CMPoliceSet
+      takeAll: RMCMPSet
       entries:
       - id: RMCVendorBundleMilitaryPoliceApparel
     - name: Standard Equipment
@@ -32,11 +32,11 @@
       - id: CMArmorM2MP
       - id: CMHeadBeretRed
     - name: Handgun Case
-#     choices: { CMGunCase: 1 }
-      entries: []
-#     - id: M77 Gun case
-#     - id: Combat Revolver Gun case
-#     - id: M1984 Gun case
+      choices: { CMGunCase: 1 }
+      entries:
+      - id: RMCGunCasePistolM77
+      - id: RMCGunCasePistolM44
+      - id: RMCGunCasePistolM1984
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
@@ -90,7 +90,7 @@
     - CMMilitaryWarden
     sections:
     - name: Police Set (Mandatory)
-      takeAll: CMPoliceSet
+      takeAll: RMCMPSet
       entries:
       - id: RMCVendorBundleMilitaryPoliceApparel
     - name: Standard Equipment
@@ -105,11 +105,11 @@
       - id: CMArmorM3Warden
       - id: CMHeadCapWarden
     - name: Handgun Case
-#     choices: { CMGunCase: 1 }
-      entries: []
-#     - id: M77 Gun case
-#     - id: Combat Revolver Gun case
-#     - id: M1984 Gun case
+      choices: { CMGunCase: 1 }
+      entries:
+      - id: RMCGunCasePistolM77
+      - id: RMCGunCasePistolM44
+      - id: RMCGunCasePistolM1984
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:

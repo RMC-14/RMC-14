@@ -21,3 +21,13 @@
  ##       - id: EmergencyOxygenTankFilled
         - id: CMFireExtinguisher
         - id: CMBurnAidKitFilled
+
+- type: entity
+  parent: CMLockerCommanderSecure
+  id: CMLockerCommanderSecureFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCKitHonorGuard
+      - id: RMCKitHonorGuard

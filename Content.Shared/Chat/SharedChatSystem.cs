@@ -46,7 +46,7 @@ public abstract class SharedChatSystem : EntitySystem
     /// <summary>
     /// Cache of the keycodes for faster lookup.
     /// </summary>
-    private FrozenDictionary<char, RadioChannelPrototype> _keyCodes = default!;
+    public FrozenDictionary<char, RadioChannelPrototype> _keyCodes = default!;
 
     public override void Initialize()
     {
@@ -90,6 +90,35 @@ public abstract class SharedChatSystem : EntitySystem
 
         // if no applicable suffix verb return the normal one used by the entity
         return current ?? _prototypeManager.Index<SpeechVerbPrototype>(speech.SpeechVerb);
+    }
+
+    /// <summary>
+    /// Splits the input message into a radio prefix part and the rest to preserve it during sanitization.
+    /// </summary>
+    /// <remarks>
+    /// This is primarily for the chat emote sanitizer, which can match against ":b" as an emote, which is a valid radio keycode.
+    /// </remarks>
+    public void GetRadioKeycodePrefix(EntityUid source,
+        string input,
+        out string output,
+        out string prefix)
+    {
+        prefix = string.Empty;
+        output = input;
+
+        // If the string is less than 2, then it's probably supposed to be an emote.
+        // No one is sending empty radio messages!
+        if (input.Length <= 2)
+            return;
+
+        if (!(input.StartsWith(RadioChannelPrefix) || input.StartsWith(RadioChannelAltPrefix)))
+            return;
+
+        if (!_keyCodes.TryGetValue(char.ToLower(input[1]), out _))
+            return;
+
+        prefix = input[..2];
+        output = input[2..];
     }
 
     /// <summary>

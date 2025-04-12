@@ -1,0 +1,4 @@
+﻿- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RMCIDSPP
+  description: A soldier dog tag.

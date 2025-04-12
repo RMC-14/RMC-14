@@ -1,5 +1,6 @@
 ﻿using Content.Client._RMC14.LinkAccount;
 using Content.Client._RMC14.Roadmap;
+using Content.Client.Credits;
 using Content.Client.Gameplay;
 using Content.Client.UserInterface.Controls;
 using Content.Client.UserInterface.Systems.Guidebook;
@@ -81,6 +82,8 @@ public sealed class EscapeUIController : UIController, IOnStateEntered<GameplayS
             CloseEscapeWindow();
             _changelog.ToggleWindow();
         };
+
+        _escapeWindow.CreditsButton.OnPressed += _ => new CreditsWindow().OpenCentered();
 
         _escapeWindow.PatronPerksButton.Visible = _linkAccount.CanViewPatronPerks();
         _escapeWindow.PatronPerksButton.OnPressed += _ =>

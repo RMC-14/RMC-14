@@ -8,6 +8,8 @@
   - !type:TotalDepartmentsTimeRequirement
     group: CMDepartmentsHuman
     time: 36000 # 10 hours
+  ranks:
+    RMCRankCivilian: []
   startingGear: CMGearCorrespondent
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
@@ -29,7 +31,11 @@
         RMCSkillFirearms: 0
         RMCSkillVehicles: 1
     - type: JobPrefix
-      prefix: "PRESS" # TODO RMC14 combat correspondent is CC
+      prefix: cm-job-prefix-correspondent # TODO RMC14 combat correspondent is CC
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: correspondent
   hasIcon: false
 
 - type: startingGear
@@ -52,10 +58,7 @@
   - type: SpawnPoint
     job_id: CMCorrespondent
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: combat_correspondent
+    state: marine_spawn
 
 - type: playTimeTracker
   id: CMJobCorrespondent

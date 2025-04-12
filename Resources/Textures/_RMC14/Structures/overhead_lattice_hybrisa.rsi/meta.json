@@ -1,0 +1,83 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/props/industrial/hybrisa_lattice.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "lattice1_a"
+    },
+    {
+      "name": "lattice1_b"
+    },
+    {
+      "name": "lattice1_c"
+    },
+    {
+      "name": "lattice1_d"
+    },
+    {
+      "name": "lattice2_a"
+    },
+    {
+      "name": "lattice2_b"
+    },
+    {
+      "name": "lattice2_c"
+    },
+    {
+      "name": "lattice2_d"
+    },
+    {
+      "name": "lattice3_a"
+    },
+    {
+      "name": "lattice3_b"
+    },
+    {
+      "name": "lattice3_c"
+    },
+    {
+      "name": "lattice3_d"
+    },
+    {
+      "name": "lattice4_a"
+    },
+    {
+      "name": "lattice4_b"
+    },
+    {
+      "name": "lattice4_c"
+    },
+    {
+      "name": "lattice4_d"
+    },
+    {
+      "name": "lattice5_a"
+    },
+    {
+      "name": "lattice5_b"
+    },
+    {
+      "name": "lattice5_c"
+    },
+    {
+      "name": "lattice5_d"
+    },
+    {
+      "name": "lattice6_a"
+    },
+    {
+      "name": "lattice6_b"
+    },
+    {
+      "name": "lattice6_c"
+    },
+    {
+      "name": "lattice6_d"
+    }
+  ]
+}

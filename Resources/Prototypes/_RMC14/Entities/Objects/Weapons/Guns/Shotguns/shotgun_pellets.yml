@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: CMBulletBase
   id: CMPelletShotgunBase
@@ -26,10 +26,12 @@
     damage:
       types:
         Piercing: 65
+  - type: CMArmorPiercing
+    amount: 5
   - type: ProjectileSpread
     proto: CMPelletShotgunBuckshot
     count: 4
-    spread: 20
+    spread: 15
   - type: RMCProjectileDamageFalloff
     thresholds:
     - range: 4
@@ -86,6 +88,8 @@
     damage:
       types:
         Heat: 55
+  - type: CMArmorPiercing
+    amount: 5
   - type: RMCProjectileDamageFalloff
     thresholds:
     - range: 12
@@ -139,8 +143,8 @@
         Piercing: 30
   - type: ProjectileSpread
     proto: CMPelletShotgunFlechette
-    count: 3
-    spread: 15
+    count: 4
+    spread: 6
   - type: RMCProjectileDamageFalloff
     thresholds:
     - range: 12
@@ -157,7 +161,7 @@
   - type: ProjectileSpread
     proto: CMPelletShotgunIncendiaryBuckshot
     count: 4
-    spread: 20
+    spread: 15
   - type: IgniteOnProjectileHit
 
 - type: entity
@@ -179,4 +183,4 @@
   - type: ProjectileSpread
     proto: RMCPelletShotgunBreaching
     count: 4
-    spread: 16
+    spread: 8

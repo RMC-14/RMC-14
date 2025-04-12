@@ -10,3 +10,8 @@ rmc-pants-verb-fold = Roll up pants
 rmc-pants-verb-unfold = Roll down pants
 
 rmc-buttons-verb-fold = Toggle buttons
+
+rmc-jacket-verb = Toggle Jacket
+rmc-sleeves-verb = Toggle Sleeves
+
+rmc-sleeves-cannot = You can't roll down the sleeves! Try putting on your jacket.

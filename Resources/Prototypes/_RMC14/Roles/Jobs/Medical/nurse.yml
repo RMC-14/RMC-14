@@ -8,6 +8,12 @@
   - !type:TotalDepartmentsTimeRequirement
     group: CMDepartmentsHuman
     time: 3600 # 1 hour
+  ranks:
+    RMCRankSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobNurse
+      time: 36000 # 10 hours
+    RMCRankCorporal: []
   startingGear: CMGearNurse
   icon: "CMJobIconNurse"
   joinNotifyCrew: false
@@ -31,7 +37,14 @@
         RMCSkillSurgery: 1
     - type: RMCUserBulkyArmorIncapable
     - type: JobPrefix
-      prefix: "Nurse"
+      prefix: cm-job-prefix-nurse
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: nurse
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_shipside
 
 - type: startingGear
   id: CMGearNurse
@@ -40,7 +53,6 @@
     neck: RMCNurseArmband
     shoes: ClothingShoesColorWhite
     id: CMIDCardNurse
-    ears: CMHeadsetMedical # TODO RMC14 Medical Vender
 
 - type: startingGear
   id: CMGearNurseEquipped
@@ -62,10 +74,7 @@
   - type: SpawnPoint
     job_id: CMNurse
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: nurse
+    state: nur_spawn
 
 - type: playTimeTracker
   id: CMJobNurse

@@ -6,8 +6,6 @@ using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
-using Robust.Shared.Timing;
 
 namespace Content.Shared.Damage.Systems;
 
@@ -58,6 +56,13 @@ public sealed class DamageOnInteractSystem : EntitySystem
             {
                 totalDamage = DamageSpecifier.ApplyModifierSet(totalDamage, protectiveEntity.Comp.DamageProtection);
             }
+            else
+            {
+                var ev = new LightBurnHandAttemptEvent(args.User, entity);
+                RaiseLocalEvent(ref ev);
+                if (ev.Cancelled)
+                    return;
+            }
         }
 
         totalDamage = _damageableSystem.TryChangeDamage(args.User, totalDamage,  origin: args.Target);
@@ -65,11 +70,6 @@ public sealed class DamageOnInteractSystem : EntitySystem
         if (totalDamage != null && totalDamage.AnyPositive())
         {
             args.Handled = true;
-
-            var ev = new LightBurnHandAttemptEvent(args.User, entity);
-            RaiseLocalEvent(ref ev);
-            if (ev.Cancelled)
-                return;
 
             _adminLogger.Add(LogType.Damaged, $"{ToPrettyString(args.User):user} injured their hand by interacting with {ToPrettyString(args.Target):target} and received {totalDamage.GetTotal():damage} damage");
             _audioSystem.PlayPredicted(entity.Comp.InteractSound, args.Target, args.User);

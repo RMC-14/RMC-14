@@ -2,12 +2,12 @@
   parent: CMCrowbar
   id: Test
   name: jungle camo test
-  suffix: Jungle
   description: junjle
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/camotest/jungle.rsi
     state: icon
+  - type: Appearance
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Misc/camotest/jungle.rsi

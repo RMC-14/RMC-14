@@ -1,6 +1,6 @@
 
 - type: entity
-  parent: JumpsuitMarine
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitProvost
   name: provost uniform
   description: The crisp uniform of a Provost Officer.

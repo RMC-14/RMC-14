@@ -44,6 +44,9 @@ public sealed class RMCArmorSystem : EntitySystem
         var equipmentEntity = Spawn(equipmentEntityID, _transform.GetMapCoordinates(ent));
         InventorySystem.TryEquip(ent, equipmentEntity, "outerClothing", force: true, predicted: false);
 
+        var ev = new RMCArmorVariantCreatedEvent(ent, equipmentEntity);
+        RaiseLocalEvent(ent, ref ev);
+
         QueueDel(args.Item);
     }
 }

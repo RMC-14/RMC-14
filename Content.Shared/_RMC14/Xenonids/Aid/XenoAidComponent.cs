@@ -1,4 +1,4 @@
-﻿using Content.Shared.FixedPoint;
+using Content.Shared.FixedPoint;
 using Content.Shared.StatusEffect;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -9,9 +9,6 @@ namespace Content.Shared._RMC14.Xenonids.Aid;
 [Access(typeof(XenoAidSystem))]
 public sealed partial class XenoAidComponent : Component
 {
-    [DataField, AutoNetworkedField]
-    public XenoAidMode Mode = XenoAidMode.Healing;
-
     [DataField, AutoNetworkedField]
     public FixedPoint2 Heal = 150;
 
@@ -31,5 +28,8 @@ public sealed partial class XenoAidComponent : Component
     public TimeSpan AilmentsJitterDuration = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]
-    public ProtoId<StatusEffectPrototype>[] AilmentsRemove = ["KnockedDown", "Stun", "SlowedDown"];
+    public ProtoId<StatusEffectPrototype>[] AilmentsRemove = ["KnockedDown", "Stun"];
+
+    [DataField]
+    public ComponentRegistry ComponentsRemove;
 }

@@ -216,7 +216,7 @@
 - type: entity
   parent: RMCAreaShuttleDistress
   id: RMCAreaShuttleDistressTransitUpp
-  name: Distress Shuttle UPP Transit
+  name: Distress Shuttle SPP Transit
   components:
   - type: Sprite
     state: away2

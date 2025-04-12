@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: XenoAcidNormal
   name: corrosive acid
   description: Burbling corrosive stuff. I wouldn't want to touch it.
@@ -167,3 +167,20 @@
         Heat: 21.3
   - type: TimedDespawn
     lifetime: 3.0
+
+- type: entity
+  id: XenoAcidExtinguishEffect
+  description: It's cold...
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Effects/xeno_acid.rsi
+    state: acid-extinguish
+    drawdepth: Effects
+  - type: TimedDespawn
+    lifetime: 1
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+

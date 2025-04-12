@@ -96,7 +96,7 @@
 - type: entity
   parent: CMPlushieBase
   id: CMPlushieRunnerBeret
-  name: XX-121 therapy plush
+  name: XX therapy plush
   description: Don't be sad! Be glad (that you're alive)!
   components:
   - type: Sprite
@@ -111,3 +111,89 @@
   components:
   - type: Sprite
     state: rouny_plushie
+
+- type: entity
+  parent: CMPlushieBase
+  id: RMCPlushieAlec
+  name: conspicuous plush
+  description: You can almost feel spite emanating from it. On it's back is a small tag listing the several cheap and hyper allergenic textiles it's made of. At the very bottom is the name of the maker, Drake Industries.
+  components:
+  - type: Sprite
+    state: alec_plushie
+  - type: EmitSoundOnUse
+    sound:
+      collection: bottleOpenSounds
+  - type: EmitSoundOnActivate
+    sound:
+      collection: bottleOpenSounds
+
+- type: entity
+  parent: CMPlushieBase
+  id: RMCPlushieNyx
+  name: accursed plush
+  description: It's rumoured if you ask this plushie for metal, your soul gets trapped in the pit. It's also rumoured that this plushie was made with 99% cotton.
+  components:
+  - type: Sprite
+    state: plushie_moth
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Voice/Moth/moth_chitter.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Voice/Moth/moth_chitter.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Voice/Moth/moth_chitter.ogg
+  - type: EmitSoundOnTrigger
+    sound:
+      path: /Audio/Voice/Moth/moth_chitter.ogg
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Voice/Moth/moth_chitter.ogg
+  - type: Food
+    requiresSpecialDigestion: true
+    useSound:
+      path: /Audio/Voice/Moth/moth_chitter.ogg
+
+- type: entity
+  parent: CMPlushieBase
+  id: RMCPlushieXippy
+  name: xippy
+  description: An accursed agent of chaos and violence.
+  components:
+  - type: Sprite
+    state: xippy
+  - type: EmitSoundOnUse
+    sound:
+      collection: XenoRoar
+  - type: EmitSoundOnLand
+    sound:
+      collection: XenoHelp
+  - type: EmitSoundOnActivate
+    sound:
+      collection: XenoRoar
+  - type: EmitSoundOnTrigger
+    sound:
+      collection: XenoRoar
+  - type: MeleeWeapon
+    soundHit:
+      collection: XenoHelp
+
+- type: entity
+  parent: CMPlushieBase
+  id: RMCPlushieGnarpGnarp
+  name: gnarp plush
+  description: gnarp gnarp.
+  components:
+  - type: Sprite
+    state: gnarp
+
+- type: entity
+  parent: RMCPlushieGnarpGnarp
+  id: RMCPlushieGnarpGnarpAlt
+  name: gnarp plush
+  suffix: Alternate
+  description: gnarp gnarp.
+  components:
+  - type: Sprite
+    state: gnarp_alt

@@ -1,0 +1,77 @@
+﻿- type: job
+  parent: CMSurvivor
+  id: CMSurvivorSecurity
+  name: cm-job-name-survivor-security
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorSecurity
+  ranks:
+    RMCRankCivilianOfficer: []
+  startingGear: RMCGearSurvivorSecurity
+  accessGroups:
+  - ColonistSec
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillConstruction: 1
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 2
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 1
+        RMCSkillPolice: 0 # RMC14
+        RMCSkillFireman: 2
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetSecurity
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: UserIFF
+      faction: FactionSurvivor
+    - type: IntelRescueSurvivorObjective
+
+- type: startingGear
+  id: RMCGearSurvivorSecurity
+  equipment:
+    head: RMCArmorHelmetSecurity
+    eyes: CMGlassesSecurity
+    jumpsuit: RMCJumpsuitCivilianSecurity
+    outerClothing: RMCArmorVestWeYa
+    gloves: RMCHandsVeteran
+    shoes: RMCShoesJackboots
+    id: CMIDCardColonistSecurity
+    back: CMSatchelSecuritySurvivorFill
+    ears: CMHeadsetColony
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchMagazine
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorSecurity
+  name: survivor security spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
+
+- type: playTimeTracker
+  id: CMJobSurvivorSecurity
+  isHumanoid: true
+
+- type: entity
+  parent: RMCSurvivorPresetCivilian
+  id: RMCSurvivorPresetSecurity
+  name: security survivor preset
+  components:
+  - type: SurvivorPreset
+    primaryWeapons:
+#    - [ CMBeltMarineMP5, WeaponSMGMP5 ] # TODO RMC14 mar30
+    - [ CMBeltMarineMP5, WeaponSMGMP5 ]
+    - [ CMBeltMarineBuckshot, RMCWeaponShotgunHG3712 ]
+    - [ CMBeltMarineM16, WeaponRifleM16 ]

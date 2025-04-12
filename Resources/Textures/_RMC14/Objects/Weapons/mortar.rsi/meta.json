@@ -1,7 +1,7 @@
 ﻿{
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/ca94d2e8715b73103fa9f213be53d343359b4107/icons/obj/structures/mortar.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/ca94d2e8715b73103fa9f213be53d343359b4107/icons/obj/structures/mortar.dmi, https://github.com/cmss13-devs/cmss13/blob/8d3eabd2575fcb859ab4320a298cdbc185910f6f/icons/mob/humans/onmob/inhands/weapons/ammo_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/8d3eabd2575fcb859ab4320a298cdbc185910f6f/icons/mob/humans/onmob/inhands/weapons/ammo_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/8d3eabd2575fcb859ab4320a298cdbc185910f6f/icons/mob/humans/onmob/inhands/items_by_map/classic_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/8d3eabd2575fcb859ab4320a298cdbc185910f6f/icons/mob/humans/onmob/inhands/items_by_map/desert_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/8d3eabd2575fcb859ab4320a298cdbc185910f6f/icons/mob/humans/onmob/inhands/items_by_map/jungle_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/8d3eabd2575fcb859ab4320a298cdbc185910f6f/icons/mob/humans/onmob/inhands/items_by_map/snow_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/8d3eabd2575fcb859ab4320a298cdbc185910f6f/icons/mob/humans/onmob/inhands/items_by_map/urban_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/8d3eabd2575fcb859ab4320a298cdbc185910f6f/icons/mob/humans/onmob/inhands/items_by_map/classic_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/8d3eabd2575fcb859ab4320a298cdbc185910f6f/icons/mob/humans/onmob/inhands/items_by_map/desert_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/8d3eabd2575fcb859ab4320a298cdbc185910f6f/icons/mob/humans/onmob/inhands/items_by_map/jungle_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/8d3eabd2575fcb859ab4320a298cdbc185910f6f/icons/mob/humans/onmob/inhands/items_by_map/snow_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/8d3eabd2575fcb859ab4320a298cdbc185910f6f/icons/mob/humans/onmob/inhands/items_by_map/urban_righthand.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -103,6 +103,86 @@
     },
     {
       "name": "mortar_ammo_custom_locked"
+    },
+    {
+      "name": "custom-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "custom-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "flr-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "flr-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "frag-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "frag-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "he-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "he-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "inc-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inc-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "mortar-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "mortar-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "c_mortar-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "c_mortar-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "d_mortar-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "d_mortar-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "s_mortar-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "s_mortar-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "u_mortar-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "u_mortar-inhand-right",
+      "directions": 4
     }
   ]
 }

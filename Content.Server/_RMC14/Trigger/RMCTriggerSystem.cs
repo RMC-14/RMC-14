@@ -1,4 +1,4 @@
-﻿using Content.Server.Explosion.EntitySystems;
+using Content.Server.Explosion.EntitySystems;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Events;
@@ -14,6 +14,8 @@ public sealed class RMCTriggerSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<OnShootTriggerAmmoTimerComponent, AmmoShotEvent>(OnTriggerTimerAmmoShot);
+        SubscribeLocalEvent<TriggerOnThrowEndComponent, StopThrowEvent>(OnThrownAmmoStops);
+
         SubscribeLocalEvent<TriggerOnFixedDistanceStopComponent, ProjectileFixedDistanceStopEvent>(OnTriggerOnFixedDistanceStop);
     }
 
@@ -21,8 +23,26 @@ public sealed class RMCTriggerSystem : EntitySystem
     {
         foreach (var projectile in args.FiredProjectiles)
         {
-            _trigger.HandleTimerTrigger(projectile, null, ent.Comp.Delay, ent.Comp.BeepInterval, ent.Comp.InitialBeepDelay, ent.Comp.BeepSound);
+            switch (ent.Comp.TimerStart)
+            {
+                case TimerStartMode.OnShoot:
+                    _trigger.HandleTimerTrigger(projectile, null, ent.Comp.Delay, ent.Comp.BeepInterval, ent.Comp.InitialBeepDelay, ent.Comp.BeepSound);
+                    break;
+                case TimerStartMode.OnHitGround:
+                    var primedAmmoComp = EnsureComp<TriggerOnThrowEndComponent>(projectile);
+                    primedAmmoComp.Delay = TimeSpan.FromSeconds(ent.Comp.Delay);
+                    primedAmmoComp.BeepInterval = ent.Comp.BeepInterval;
+                    primedAmmoComp.InitialBeepDelay = ent.Comp.InitialBeepDelay;
+                    primedAmmoComp.BeepSound = ent.Comp.BeepSound;
+                    break;
+
+            }
         }
+    }
+
+    private void OnThrownAmmoStops(Entity<TriggerOnThrowEndComponent> ent, ref StopThrowEvent args)
+    {
+        _trigger.HandleTimerTrigger(ent, null, ((float)ent.Comp.Delay.TotalSeconds), ent.Comp.BeepInterval, ent.Comp.InitialBeepDelay, ent.Comp.BeepSound);
     }
 
     private void OnTriggerOnFixedDistanceStop(Entity<TriggerOnFixedDistanceStopComponent> ent, ref ProjectileFixedDistanceStopEvent args)

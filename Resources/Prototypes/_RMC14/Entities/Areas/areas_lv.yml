@@ -72,7 +72,7 @@
   - type: Sprite
     state: west
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaLv624GroundJungleWestJungle
@@ -135,6 +135,8 @@
   components:
   - type: Sprite
     state: west
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaLv624GroundJungle
@@ -337,6 +339,8 @@
   components:
   - type: Sprite
     state: north
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaLv624GroundColony
@@ -345,6 +349,8 @@
   components:
   - type: Sprite
     state: west
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaLv624GroundColony
@@ -362,12 +368,15 @@
     medevac: false
     OB: true
     supplyDrop: false
-    resinAllowed: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaLv624GroundColonyTelecomm
   id: RMCAreaLv624GroundColonyTelecommCargo
   name: Far North Storage Dome Communications Relay
+  components:
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaLv624GroundColonyTelecomm
@@ -383,6 +392,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaLv624GroundColonyTelecomm
@@ -418,6 +428,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaLv624Ground
@@ -436,6 +447,7 @@
     OB: true
     supplyDrop: false
     minimapColor: '#3F3C3CEF'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv624GroundCaves
@@ -541,6 +553,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv624Lazarus
@@ -555,18 +568,24 @@
     medevac: true
     OB: true
     supplyDrop: true
-    resinAllowed: false
     landingZone: true
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaLv624LazarusLandingZones
   id: RMCAreaLv624LazarusLandingZonesLz1
   name: Alamo Landing Zone
+  components:
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaLv624LazarusLandingZones
   id: RMCAreaLv624LazarusLandingZonesLz2
   name: Normandy Landing Zone
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaLv624Lazarus
@@ -575,6 +594,8 @@
   components:
   - type: Sprite
     state: green
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaLv624Lazarus
@@ -592,6 +613,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaLv624Lazarus
@@ -651,7 +673,7 @@
   - type: Sprite
     state: kitchen
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaLv624Lazarus
@@ -661,7 +683,7 @@
   - type: Sprite
     state: cafeteria
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaLv624Lazarus
@@ -671,7 +693,7 @@
   - type: Sprite
     state: hallc1
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaLv624Lazarus
@@ -705,7 +727,7 @@
   - type: Sprite
     state: sleep
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaLv624Lazarus
@@ -715,7 +737,7 @@
   - type: Sprite
     state: quart
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaLv624Lazarus
@@ -725,7 +747,7 @@
   - type: Sprite
     state: quartstorage
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaLv624LazarusQuartstorage
@@ -743,7 +765,8 @@
     medevac: true
     OB: true
     supplyDrop: true
-    resinAllowed: false
+    linkedLz: dropship_lz1
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaLv624Lazarus
@@ -776,6 +799,7 @@
     avoidBioscan: false
     noTunnel: true
     unweedable: false
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaLv624Lazarus
@@ -786,7 +810,7 @@
     sprite: _RMC14/Areas/areas.rsi
     state: ass_line
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaLv624Lazarus

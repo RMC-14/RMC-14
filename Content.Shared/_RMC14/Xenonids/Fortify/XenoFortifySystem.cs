@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Stun;
@@ -35,6 +35,7 @@ public sealed class XenoFortifySystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _explode = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
+    [Dependency] private readonly CMArmorSystem _armor = default!;
 
     public override void Initialize()
     {
@@ -81,7 +82,7 @@ public sealed class XenoFortifySystem : EntitySystem
     {
         if (xeno.Comp.Fortified)
         {
-            args.Armor += xeno.Comp.Armor;
+            args.XenoArmor += xeno.Comp.Armor;
             args.FrontalArmor += xeno.Comp.FrontalArmor;
         }
     }
@@ -96,8 +97,7 @@ public sealed class XenoFortifySystem : EntitySystem
     {
         if (xeno.Comp.Fortified)
         {
-            // TODO RMC14 halved like armor for now
-            var armor = xeno.Comp.ExplosionArmor / 2;
+            var armor = xeno.Comp.ExplosionArmor;
 
             if (armor <= 0)
                 return;
@@ -243,6 +243,9 @@ public sealed class XenoFortifySystem : EntitySystem
             if (action.BaseEvent is XenoFortifyActionEvent)
                 _actions.SetToggled(actionId, xeno.Comp.Fortified);
         }
+
+        _armor.UpdateArmorValue((xeno, null));
+
 
         Dirty(xeno);
 

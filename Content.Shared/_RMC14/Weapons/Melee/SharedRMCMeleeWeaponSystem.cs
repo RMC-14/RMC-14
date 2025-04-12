@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
 using Content.Shared.Interaction.Events;
@@ -6,6 +7,8 @@ using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
+using Robust.Shared.Configuration;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Melee;
@@ -13,6 +16,7 @@ namespace Content.Shared._RMC14.Weapons.Melee;
 public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
 {
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private readonly INetConfigurationManager _netConfig = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -25,6 +29,8 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
     {
         _meleeWeaponQuery = GetEntityQuery<MeleeWeaponComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
+
+        SubscribeLocalEvent<ActorComponent, AttackAttemptEvent>(OnActorAttackAttempt);
 
         SubscribeLocalEvent<ImmuneToUnarmedComponent, GettingAttackedAttemptEvent>(OnImmuneToUnarmedGettingAttacked);
 
@@ -86,6 +92,17 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
                 break;
             }
         }
+    }
+
+    private void OnActorAttackAttempt(Entity<ActorComponent> ent, ref AttackAttemptEvent args)
+    {
+        if (args.Uid != args.Target)
+            return;
+
+        if (_netConfig.GetClientCVar(ent.Comp.PlayerSession.Channel, RMCCVars.RMCDamageYourself))
+            return;
+
+        args.Cancel();
     }
 
     private void OnImmuneToUnarmedGettingAttacked(Entity<ImmuneToUnarmedComponent> ent, ref GettingAttackedAttemptEvent args)
@@ -158,8 +175,8 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
         TryMeleeReset(weaponUid, weapon, true);
     }
 
-
-    private void TryMeleeReset(EntityUid weaponUid, MeleeWeaponComponent weapon, bool disarm){
+    private void TryMeleeReset(EntityUid weaponUid, MeleeWeaponComponent weapon, bool disarm)
+    {
         if (!TryComp<MeleeResetComponent>(weaponUid, out var reset))
             return;
 

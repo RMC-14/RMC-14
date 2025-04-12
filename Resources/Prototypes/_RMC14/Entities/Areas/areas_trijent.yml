@@ -24,6 +24,7 @@
     medevac: false
     OB: true
     supplyDrop: false
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaDesertDamInterior
@@ -330,6 +331,8 @@
   components:
   - type: Sprite
     state: hangar
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaDesertDamInteriorDamInterior
@@ -519,6 +522,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaDesertDamBuilding
@@ -527,7 +531,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Areas/areas_dam.rsi
-    state: northewestern_ss
+    state: central_ss
   - type: Area
     minimapColor: '#C19504E7'
 
@@ -540,6 +544,7 @@
     state: northewestern_ss
   - type: Area
     landingZone: true
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaDesertDamBuildingSubstation
@@ -589,7 +594,7 @@
   - type: Sprite
     state: western_ss
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaDesertDamBuilding
@@ -606,7 +611,7 @@
   - type: Sprite
     state: yellow
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaDesertDamBuildingAdministration
@@ -616,7 +621,7 @@
   - type: Sprite
     state: green
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaDesertDamBuildingAdministration
@@ -626,7 +631,7 @@
   - type: Sprite
     state: purple
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaDesertDamBuildingAdministration
@@ -636,7 +641,7 @@
   - type: Sprite
     state: blue-red
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaDesertDamBuildingAdministration
@@ -646,7 +651,7 @@
   - type: Sprite
     state: red
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaDesertDamBuildingAdministration
@@ -656,7 +661,7 @@
   - type: Sprite
     state: yellow
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaDesertDamBuildingAdministration
@@ -666,7 +671,7 @@
   - type: Sprite
     state: green
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz1
 
 - type: entity
   abstract: true
@@ -701,7 +706,10 @@
   abstract: true
   parent: RMCAreaDesertDamBuilding
   id: RMCAreaDesertDamBuildingCafeteria
-  name: Cafeteria
+  name: DO NOT USE
+  components:
+  - type: Sprite
+    state: purple
 
 - type: entity
   parent: RMCAreaDesertDamBuildingCafeteria
@@ -747,6 +755,10 @@
   abstract: true
   parent: RMCAreaDesertDamBuilding
   id: RMCAreaDesertDamBuildingDorms
+  name: DO NOT USE
+  components:
+  - type: Sprite
+    state: purple
 
 - type: entity
   parent: RMCAreaDesertDamBuildingDorms
@@ -971,7 +983,7 @@
   - type: Sprite
     state: yellow
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaDesertDamBuildingWarehouse
@@ -981,7 +993,7 @@
   - type: Sprite
     state: red
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaDesertDamBuildingWarehouse
@@ -991,7 +1003,7 @@
   - type: Sprite
     state: green
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaDesertDamBuilding
@@ -1034,18 +1046,7 @@
 
 - type: entity
   parent: RMCAreaDesertDamBuilding
-  id: RMCAreaDesertDamBuildingTelecommunication
-  name: Telecommunications
-  components:
-  - type: Sprite
-    state: yellow
-  - type: Area
-    resinAllowed: false
-
-- type: entity
-  parent: RMCAreaDesertDamBuilding
   id: RMCAreaDesertDamBuildingWaterTreatmentOne
-  name: Water Treatment One
   components:
   - type: Sprite
     state: yellow
@@ -1223,6 +1224,35 @@
     state: green
 
 - type: entity
+  abstract: true
+  parent: RMCAreaDesertDamBuilding
+  id: RMCAreaDesertDamBuildingLibrary
+
+- type: entity
+  parent: RMCAreaDesertDamBuildingLibrary
+  id: RMCAreaDesertDamBuildingLibraryLibrary
+  name: Library
+  components:
+  - type: Sprite
+    state: library
+
+- type: entity
+  parent: RMCAreaDesertDamBuildingLibrary
+  id: RMCAreaDesertDamBuildingLibraryRestroom
+  name: Library Restroom
+  components:
+  - type: Sprite
+    state: green
+
+- type: entity
+  parent: RMCAreaDesertDamBuildingLibrary
+  id: RMCAreaDesertDamBuildingLibraryStudyroom
+  name: Library Study Room
+  components:
+  - type: Sprite
+    state: purple
+
+- type: entity
   parent: RMCAreaDesertDamBuilding
   id: RMCAreaDesertDamBuildingSecurity
   components:
@@ -1381,12 +1411,16 @@
   - type: Sprite
     state: courtroom
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz2
 
 - type: entity
   abstract: true
   parent: RMCAreaDesertDamBuilding
   id: RMCAreaDesertDamBuildingMining
+  name: DO NOT USE
+  components:
+  - type: Sprite
+    state: purple
 
 - type: entity
   parent: RMCAreaDesertDamBuildingMining
@@ -1540,7 +1574,7 @@
   - type: Sprite
     state: landing_pad
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz1
     landingZone: true
     minimapColor: '#EBE5E5E3'
 
@@ -1563,7 +1597,7 @@
   - type: Sprite
     state: landing_pad
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz2
     landingZone: true
     minimapColor: '#EBE5E5E3'
 
@@ -1581,6 +1615,10 @@
 - type: entity
   parent: RMCAreaDesertDamExterior
   id: RMCAreaDesertDamExteriorValley
+  name: Valley
+  components:
+  - type: Sprite
+    state: red
 
 - type: entity
   parent: RMCAreaDesertDamExteriorValley
@@ -1590,7 +1628,7 @@
   - type: Sprite
     state: valley_north_west
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaDesertDamExteriorValley
@@ -1600,7 +1638,7 @@
   - type: Sprite
     state: valley_south_west
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaDesertDamExteriorValley
@@ -1610,7 +1648,15 @@
   - type: Sprite
     state: valley_west
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaDesertDamExteriorValley
+  id: RMCAreaDesertDamExteriorValleyValleySecurity
+  name: Security Valley
+  components:
+  - type: Sprite
+    state: valley_west
 
 - type: entity
   parent: RMCAreaDesertDamExteriorValley
@@ -1627,38 +1673,54 @@
   components:
   - type: Sprite
     state: ass_line
-  - type: Area
-    resinAllowed: false
 
 - type: entity
   parent: RMCAreaDesertDamExteriorTelecomm
   id: RMCAreaDesertDamExteriorTelecommLz2Containers
   name: Containers Communications Relay
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaDesertDamExteriorTelecomm
   id: RMCAreaDesertDamExteriorTelecommLz2Tcomms
   name: Telecomms Communications Relay
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaDesertDamExteriorTelecomm
   id: RMCAreaDesertDamExteriorTelecommLz2Storage
   name: East LZ2 Communications Relay
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaDesertDamExteriorTelecomm
   id: RMCAreaDesertDamExteriorTelecommLz1South
   name: South LZ1 Communications Relay
+  components:
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaDesertDamExteriorTelecomm
   id: RMCAreaDesertDamExteriorTelecommLz1Valley
   name: LZ1 Valley Communications Relay
+  components:
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaDesertDamExteriorTelecomm
   id: RMCAreaDesertDamExteriorTelecommLz1Xenoflora
   name: Xenoflora Communications Relay
+  components:
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaDesertDamExteriorValley

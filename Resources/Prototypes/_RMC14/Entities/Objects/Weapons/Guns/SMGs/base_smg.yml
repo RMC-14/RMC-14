@@ -1,6 +1,6 @@
 ﻿- type: entity
   abstract: true
-  parent: CMBaseWeaponRifle
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: CMBaseWeaponSMG
   components:
   - type: Item
@@ -41,6 +41,10 @@
     weaponGroup: Submachinegun
   - type: GunPointBlank
   - type: GunGroupPenalty
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/pistol_mouse.rsi
+      state: all
 
 - type: entity
   parent: BaseCartridgeCaselessRifle

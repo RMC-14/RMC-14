@@ -12,6 +12,16 @@
   icon: "CMJobIconOrdnanceTech"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-ce
+  ranks:
+    RMCRankLanceCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobOrdnanceTech
+      time: 252000 # 70 hours
+    RMCRankPrivateFirstClass:
+    - !type:RoleTimeRequirement
+      role: CMJobOrdnanceTech
+      time: 36000 # 10 hours
+    RMCRankPrivate: []
   accessGroups:
   - OT
   minimapIcon:
@@ -32,7 +42,14 @@
         RMCSkillFireman: 1
         RMCSkillPowerLoader: 2
     - type: JobPrefix
-      prefix: "OT"
+      prefix: cm-job-prefix-ordnance-tech
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: ot
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_shipside
   hidden: true # TODO RMC14
 
 - type: startingGear
@@ -55,10 +72,7 @@
   - type: SpawnPoint
     job_id: CMOrdnanceTech
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: ordnance_tech
+    state: ot_spawn
 
 - type: playTimeTracker
   id: CMJobOrdnanceTech

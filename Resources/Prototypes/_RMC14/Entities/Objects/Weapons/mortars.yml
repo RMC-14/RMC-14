@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: BaseItem
   id: RMCMortarKit
   name: M402 mortar portable kit
@@ -89,6 +89,15 @@
       Snow: _RMC14/Objects/Weapons/mortar/snow.rsi
       Classic: _RMC14/Objects/Weapons/mortar/classic.rsi
       Urban: _RMC14/Objects/Weapons/mortar/urban.rsi
+  - type: ReceiverXenoClaws
+    maxHealth: 100
+    hitsToDestroy: 1
+    minimumClawStrength: Normal
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        path:
+          "/Audio/_RMC14/Structures/metalhit.ogg"
 
 - type: entity
   abstract: true
@@ -110,12 +119,14 @@
   name: 80mm high explosive mortar shell
   description: An 80mm mortar shell, loaded with a high explosive charge.
   components:
+  - type: Item
+    heldPrefix: he
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/mortar.rsi
     state: mortar_ammo_he
   - type: Explosive
     explosionType: RMCMortar
-    maxIntensity: 30 # max 150 brute, 150 burn
+    maxIntensity: 30.1 # max 150 brute, 150 burn
     intensitySlope: 5
     totalIntensity: 800
     canCreateVacuum: false
@@ -129,16 +140,17 @@
   name: 80mm incendiary mortar shell
   description: An 80mm mortar shell, loaded with a Type B napalm charge. Perfect for long-range area denial.
   components:
+  - type: Item
+    heldPrefix: inc
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/mortar.rsi
     state: mortar_ammo_inc
   - type: Explosive
     explosionType: RMCMortar
-    maxIntensity: 30 # max 150 brute, 150 burn
-    intensitySlope: 6
-    totalIntensity: 800
+    maxIntensity: 0
+    intensitySlope: 0
+    totalIntensity: 0
     canCreateVacuum: false
-  - type: CMExplosionEffect
   - type: RMCScorchEffect
   - type: MortarShell
   - type: TileFireOnTrigger
@@ -151,6 +163,8 @@
   name: 80mm flare/camera mortar shell
   description: An 80mm mortar shell, loaded with an illumination flare / camera combo, attached to a parachute.
   components:
+  - type: Item
+    heldPrefix: flr
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/mortar.rsi
     state: mortar_ammo_flr

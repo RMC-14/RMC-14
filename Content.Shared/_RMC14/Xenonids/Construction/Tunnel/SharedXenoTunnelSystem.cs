@@ -3,7 +3,6 @@ using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Actions;
-using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Robust.Shared.Map;
@@ -94,10 +93,9 @@ public abstract partial class SharedXenoTunnelSystem : EntitySystem
             var mapCoords = _transform.ToMapCoordinates(buildLocation.AlignWithClosestGridTile());
             var areaName = Loc.GetString("rmc-xeno-construction-default-area-name");
             var randomGreekLetter = _random.Pick(_greekLetters);
-            if (Area.TryGetArea(buildLocation, out _, out var areaProto, out _))
-            {
+            if (Area.TryGetArea(buildLocation, out _, out var areaProto))
                 areaName = areaProto.Name;
-            }
+
             name = Loc.GetString("rmc-xeno-construction-default-tunnel-name", ("areaName", areaName), ("coordX", mapCoords.X), ("coordY", mapCoords.Y), ("greekLetter", randomGreekLetter));
         }
 

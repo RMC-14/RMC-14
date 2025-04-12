@@ -8,7 +8,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padded/jungle.rsi
   - type: CMArmor
-    armor: 20
+    melee: 20
+    bullet: 20
     bio: 20
     explosionArmor: 15
   - type: RMCArmorSpeedTier
@@ -51,13 +52,11 @@
   parent: CMArmorM3Medium
   id: RMCArmorM3MediumPadded
   name: M3 pattern padded marine armor
-  suffix: Jungle
 
 - type: entity
   parent: CMArmorM3Medium
   id: RMCArmorM3MediumPadless
   name: M3 pattern padless marine armor
-  suffix: Jungle
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padless/jungle.rsi
@@ -73,7 +72,6 @@
   parent: CMArmorM3Medium
   id: RMCArmorM3MediumRidged
   name: M3 pattern ridged marine armor
-  suffix: Jungle
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/ridged/jungle.rsi
@@ -89,7 +87,6 @@
   parent: CMArmorM3Medium
   id: RMCArmorM3MediumCarrier
   name: M3 pattern carrier marine armor
-  suffix: Jungle
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/carrier/jungle.rsi
@@ -105,7 +102,6 @@
   parent: CMArmorM3Medium
   id: RMCArmorM3MediumSkull
   name: M3 pattern skull marine armor
-  suffix: Jungle
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/skull/jungle.rsi
@@ -121,7 +117,6 @@
   parent: CMArmorM3Medium
   id: RMCArmorM3MediumSmooth
   name: M3 pattern smooth marine armor
-  suffix: Jungle
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/smooth/jungle.rsi
@@ -138,12 +133,11 @@
   id: CMArmorB12
   name: B12 pattern marine armor
   description: A lightweight suit of carbon fiber body armor built for quick movement. Designed in a lovely forest green. Use it to toggle the built-in flashlight. #cm13 calls all camo variants forest green. parity.
-  suffix: Jungle
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/b12/jungle.rsi
   - type: CMArmor
-    armor: 25
+    melee: 25
     bio: 25
     explosionArmor: 20
   - type: ItemCamouflage
@@ -163,7 +157,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padded/jungle.rsi
   - type: CMArmor
-    armor: 25
+    melee: 25
+    bullet: 35
     bio: 25
     explosionArmor: 35
   - type: RMCArmorSpeedTier
@@ -205,12 +200,10 @@
 - type: entity
   parent: CMArmorM3Heavy
   id: RMCArmorM3HeavyPadded
-  suffix: Jungle
 
 - type: entity
   parent: CMArmorM3Heavy
   id: RMCArmorM3HeavyPadless
-  suffix: Jungle
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padless/jungle.rsi
@@ -225,7 +218,6 @@
 - type: entity
   parent: CMArmorM3Heavy
   id: RMCArmorM3HeavyRidged
-  suffix: Jungle
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/ridged/jungle.rsi
@@ -240,7 +232,6 @@
 - type: entity
   parent: CMArmorM3Heavy
   id: RMCArmorM3HeavyCarrier
-  suffix: Jungle
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/carrier/jungle.rsi
@@ -255,7 +246,6 @@
 - type: entity
   parent: CMArmorM3Heavy
   id: RMCArmorM3HeavySkull
-  suffix: Jungle
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/skull/jungle.rsi
@@ -270,7 +260,6 @@
 - type: entity
   parent: CMArmorM3Heavy
   id: RMCArmorM3HeavySmooth
-  suffix: Jungle
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/smooth/jungle.rsi
@@ -283,16 +272,13 @@
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/smooth/urban.rsi
 
 - type: entity
-  parent: CMArmorM3Medium
+  parent: CMArmorM2MP
   id: CMArmorM3Warden
   name: M3 pattern warden MP armor
-  suffix: Jungle
   description: A well-crafted suit of M3 Pattern Armor typically distributed to Wardens. Useful for letting your men know who is in charge.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/jungle.rsi
-  - type: CMArmor
-    bio: 15
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/jungle.rsi
@@ -305,7 +291,6 @@
   parent: CMArmorM2MP
   id: CMArmorM3WO
   name: M3 pattern chief MP armor
-  suffix: Jungle
   description: A well-crafted suit of M3 Pattern Armor typically distributed to Chief MPs. Useful for letting your men know who is in charge.
   components:
   - type: Sprite
@@ -324,7 +309,6 @@
   id: RMCArmorM3SO
   name: M3 pattern officer armor
   description: A well-crafted suit of M3 Pattern Armor typically found in the hands of higher-ranking officers. Useful for letting your men know who is in charge when taking to the field.
-  suffix: Jungle
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/officer/jungle.rsi
@@ -344,12 +328,12 @@
   parent: CMArmorM2MP
   id: RMCArmorM3CO
   name: M3 pattern commanding officer armor
-  description: A robust, well-polished suit of armor for the Commanding Officer. Custom-made to fit its owner with special straps to operate a smartgun. Show those Marines who's really in charge.
+  description: A robust, well-polished suit of armor for the Commanding Officer. Custom-made to fit its owner with special straps to operate a smart gun. Show those Marines who's really in charge.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co.rsi
   - type: CMArmor
-    armor: 30
+    bullet: 30
     bio: 20
     explosionArmor: 15
   - type: SmartGunArmor
@@ -357,18 +341,45 @@
     maxItemSize: Small
     grid:
     - 0,0,5,1 # 3 slots
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/urban.rsi
+
+- type: entity
+  parent: CMArmorM2MP
+  id: RMCArmorM3General
+  name: M3 pattern general officer armor
+  description: A well-crafted suit of M3 Pattern Armor with a gold shine. It looks very expensive, but shockingly fairly easy to carry and wear.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/ceremonial.rsi
+  - type: CMArmor
+    bullet: 30
+    bio: 20
+    explosionArmor: 15
+  - type: SmartGunArmor
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,5,1 # 3 slots
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: entity
   parent: CMArmorM3Medium
   id: RMCArmorM3G4
   name: M3-G4 grenadier armor
-  suffix: Jungle
   description: A custom set of M3 armor packed to the brim with padding, plating, and every form of ballistic protection under the sun. Used exclusively by Marine Grenadiers.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/g4/jungle.rsi
   - type: CMArmor
-    armor: 25
+    melee: 25
+    bullet: 25
     bio: 15
     explosionArmor: 40
   - type: Corrodible
@@ -385,7 +396,6 @@
   parent: CMArmorM3Medium
   id: RMCArmorM3TDemo
   name: M3-T light armor
-  suffix: Jungle
   description: A custom set of M3 armor designed for users of long-ranged explosive weaponry. Provides better protection against explosives than standard M3 armor, while remaining nimble.
   components:
   - type: Sprite
@@ -416,7 +426,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/padded/jungle.rsi
   - type: CMArmor
-    armor: 15
+    melee: 15
+    bullet: 15
     bio: 15
     explosionArmor: 20
   - type: RMCArmorSpeedTier
@@ -463,7 +474,6 @@
 - type: entity
   parent: CMArmorM3Light
   id: RMCArmorM3LightPadless
-  suffix: Jungle
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/padless/jungle.rsi
@@ -478,7 +488,6 @@
 - type: entity
   parent: CMArmorM3Light
   id: RMCArmorM3LightRidged
-  suffix: Jungle
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/ridged/jungle.rsi
@@ -493,7 +502,6 @@
 - type: entity
   parent: CMArmorM3Light
   id: RMCArmorM3LightCarrier
-  suffix: Jungle
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/carrier/jungle.rsi
@@ -508,7 +516,6 @@
 - type: entity
   parent: CMArmorM3Light
   id: RMCArmorM3LightSkull
-  suffix: Jungle
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/skull/jungle.rsi
@@ -523,7 +530,6 @@
 - type: entity
   parent: CMArmorM3Light
   id: RMCArmorM3LightSmooth
-  suffix: Jungle
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/smooth/jungle.rsi
@@ -536,28 +542,15 @@
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/smooth/urban.rsi
 
 - type: entity
-  parent: RMCBaseMarineArmor
+  parent: CMArmorM3Light
   id: CMArmorPress
   name: press body armor
   description: Body armor used by war correspondents in battles and wars across the universe.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/press.rsi
-  - type: CMArmor
-    armor: 15
-    bio: 15
-    explosionArmor: 20
-  - type: RMCArmorSpeedTier
-    speedTier: light
-  - type: ClothingSpeedModifier
-    walkModifier: .725
-    sprintModifier: .725
-  - type: Storage
-    grid:
-    - 0,0,3,1 # 2 slots
-  - type: ExplosionResistance
-    damageCoefficient: 0
-    worn: false
+  - type: ItemCamouflage # this is needed, otherwise it looks like M3MediumArmor
+    camouflageVariations: { }
 
 - type: Tag
   id: RMCScoutArmor
@@ -566,7 +559,6 @@
   parent: CMArmorM3Medium
   id: RMCArmorM3Scout
   name: M3-S light armor
-  suffix: Jungle
   description: A custom set of M3 armor designed for Marine Scouts.
   components:
   - type: Sprite
@@ -579,7 +571,7 @@
     walkModifier: .725
     sprintModifier: .725
   - type: CMArmor
-    armor: 25
+    melee: 25
   - type: Tag
     tags:
       - RMCScoutArmor
@@ -595,12 +587,13 @@
   parent: CMArmorM3Light
   id: CMArmorM3VLBallistics
   name: M3-VL pattern ballistics vest
-  description: Up until 2182 Marine non-combat personnel were issued non-standardized ballistics vests, though the lack of IMP compatibility and suit lamps proved time and time again inefficient. This modified M3-L shell is the result of a 6-year R&D program; It provides utility, protection, AND comfort to all Marine non-combat personnel.
+  description: Up until 2122 Marine non-combat personnel were issued non-standardized ballistics vests, though the lack of IMP compatibility and suit lamps proved time and time again inefficient. This modified M3-L shell is the result of a 6-year R&D program; It provides utility, protection, AND comfort to all Marine non-combat personnel.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl.rsi
   - type: CMArmor
-    armor: 15
+    melee: 15
+    bullet: 30
     bio: 15
     explosionArmor: 10
   - type: Storage
@@ -608,6 +601,8 @@
     - 0,0,1,1 # 2 slots
   - type: RMCBulkyArmor
     isBulky: false
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: entity
   parent: CMArmorM3VLBallistics
@@ -620,12 +615,13 @@
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: entity
   parent: CMArmorM3Medium
   id: CMArmorM3VLSynth
   name: M3A1 Synthetic Utility Vest
-  suffix: Jungle
   description: This variant of the ubiquitous M3 pattern vest has been extensively modified, providing no protection in exchange for maximum mobility and added storage. Synthetic programming compliant.
   components:
   - type: Sprite
@@ -634,7 +630,10 @@
     equipDelay: 1
     unequipDelay: 0.5
   - type: CMArmor
-    armor: 0 # CLOTHING_ARMOR_NONE
+    melee: 0 # CLOTHING_ARMOR_NONE
+    bullet: 0
+    bio: 0
+    explosionArmor: 0
   - type: RMCArmorSpeedTier
     speedTier: super light
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_SUPER_LIGHT
@@ -658,7 +657,6 @@
   parent: CMArmorM3Medium
   id: CMArmorM4
   name: M4 pattern marine armor
-  suffix: Jungle
   description: A well tinkered and crafted hybrid of Smart-Gunner mesh and M3 pattern plates. Robust, yet nimble, with room for all your pouches.
   components:
   - type: Sprite
@@ -682,13 +680,14 @@
   parent: CMArmorM3Medium
   id: CMArmorM35
   name: M35 pyrotechnician armor
-  suffix: Jungle
   description: A custom set of M35 armor designed for use by Marine Pyrotechnicians.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/jungle.rsi
   - type: Corrodible
     isCorrodible: false
+  - type: CMArmor
+    bio: 25
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/jungle.rsi
@@ -702,13 +701,14 @@
   parent: CMArmorM3Medium
   id: CMArmorM45
   name: M45 pattern ghillie armor # TODO id lock
-  suffix: Jungle
   description: A lightweight ghillie camouflage suit, used by UNMC snipers on recon missions. Very lightweight, but doesn't protect much.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/jungle.rsi
   - type: Corrodible
     isCorrodible: false
+  - type: CMArmor
+    bio: 25
   - type: RMCArmorSpeedTier
     speedTier: light
   - type: ClothingSpeedModifier # light armor speed
@@ -718,6 +718,7 @@
     whitelist:
       components:
       - SniperWhitelist
+      - SpotterWhitelist
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/jungle.rsi
@@ -725,13 +726,21 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/urban.rsi
+  - type: SquadArmor
+    layer: Armor
+    slot: OUTERCLOTHING
+    rsi:
+      sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: snpr-armor
+    leaderRsi:
+      sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: snpr-armor
 
 # Smart Gun
 - type: entity
   parent: [ RMCAllowSuitStorageClothingSmartgunner, CMArmorM3Medium ]
   id: CMArmorSmartGunCombatHarness
   name: ML66A combat harness
-  suffix: Jungle
   description: A heavy protective vest designed to be worn with the ML66A Smart Gun System. It has specially designed straps and reinforcement to carry the Smartgun and accessories.
   components:
   - type: Sprite
@@ -740,6 +749,8 @@
     maxItemSize: Small
     grid:
     - 0,0,3,1 # 2 slots
+  - type: CMArmor
+    explosionArmor: 20
   - type: RMCArmorSpeedTier
     speedTier: light
   - type: ClothingSpeedModifier
@@ -760,13 +771,13 @@
   parent: [ RMCAllowSuitStorageClothingArmorMP, CMArmorM3Medium ]
   id: CMArmorM2MP
   name: M2 pattern mp armor
-  suffix: Jungle
-  description: M2 Armor offers higher protection against melee attacks but less protection against projectile attacks
+  description: A standard UNMC M2 Pattern Chestplate. Protects the chest from ballistic rounds, bladed objects and accidents. It has a small leather pouch strapped to it for limited storage.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/jungle.rsi
   - type: CMArmor
-    armor: 25
+    melee: 25
+    bullet: 20
     bio: 15
     explosionArmor: 20
   - type: RMCArmorSpeedTier
@@ -785,3 +796,35 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/urban.rsi
+
+- type: entity
+  parent: CMArmorM4
+  id: RMCArmorXM4
+  name: XM4 pattern intel armor
+  description: Tougher than steel, quieter than whispers, the XM4 Intel Armor provides capable protection combined with an experimental integrated motion tracker. It took an R&D team a weekend to develop and costs more than the Chinook Station... probably. When worn, uniform accessories such as webbing cannot be attached due to the motion sensors occupying the clips.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/io/jungle.rsi
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,9,1 # 5 slots
+  - type: ClothingBlockWebbing
+  - type: ClothingRequireEquipped
+    denyReason: rmc-intel-not-intel-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformIntel
+  - type: MotionDetector
+    handToggleable: false
+  - type: ToggleableMotionDetector
+    slots:
+    - OUTERCLOTHING
+    batteryDrain: 0
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/io/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/io/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/io/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/io/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/io/urban.rsi

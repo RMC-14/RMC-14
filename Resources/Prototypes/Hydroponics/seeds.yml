@@ -766,7 +766,7 @@
   plantRsi: Objects/Specific/Hydroponics/golden_apple.rsi
   packetPrototype: GoldenAppleSeeds
   productPrototypes:
-    - FoodGoldenApple
+    - RMCFoodGoldenApple
   harvestRepeat: Repeat
   lifespan: 55
   maturation: 6
@@ -1136,7 +1136,7 @@
   idealLight: 9
   idealHeat: 298
   chemicals:
-    Frostoil:
+    FrostOil:
       Min: 1
       Max: 10
       PotencyDivisor: 10

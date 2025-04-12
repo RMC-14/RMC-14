@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.Alert;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
+using Content.Shared.Jittering;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Rounding;
@@ -19,6 +20,7 @@ public sealed class XenoPlasmaSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
 
     private EntityQuery<XenoPlasmaComponent> _xenoPlasmaQuery;
 
@@ -83,7 +85,8 @@ public sealed class XenoPlasmaSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.PlasmaTransferDelay, ev, xeno, args.Target)
         {
             BreakOnMove = true,
-            DistanceThreshold = args.Range
+            DistanceThreshold = args.Range,
+            TargetEffect = "RMCEffectHealBusy",
         };
 
         _doAfter.TryStartDoAfter(doAfter);
@@ -104,6 +107,8 @@ public sealed class XenoPlasmaSystem : EntitySystem
 
         args.Handled = true;
         RegenPlasma(target, args.Amount);
+
+        _jitter.DoJitter(target, TimeSpan.FromSeconds(1), true, 80, 8, true);
 
         // for some reason the popup will sometimes not show for the predicting client here
         if (_net.IsClient)

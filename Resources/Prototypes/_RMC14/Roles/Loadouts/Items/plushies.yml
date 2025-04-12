@@ -47,3 +47,17 @@
   storage:
     back:
     - CMPlushieTherapy
+
+- type: loadout
+  id: PlushieGnarpGnarpRMC
+  cost: 4
+  storage:
+    back:
+    - RMCPlushieGnarpGnarp
+
+- type: loadout
+  id: PlushieGnarpGnarpAltRMC
+  cost: 4
+  storage:
+    back:
+    - RMCPlushieGnarpGnarpAlt

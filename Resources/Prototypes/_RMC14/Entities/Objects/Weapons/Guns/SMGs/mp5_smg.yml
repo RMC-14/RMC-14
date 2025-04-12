@@ -1,7 +1,7 @@
 ﻿- type: entity
   parent: CMBaseWeaponSMG
-  name: MP5 submachine gun
-  id: WeaponSMGMP5 # TODO RMC14 10% chance to have an underbarrel grenade launcher
+  name: MP5 submachinegun
+  id: WeaponSMGMP5
   description: A German design, this was one of the most widely used submachine guns in the world. It's still possible to find this firearm in the hands of collectors or gun fanatics.
   suffix: Filled
   components:
@@ -59,6 +59,7 @@
           tags:
           - CMMagazineSMGMP5
   - type: AttachableHolder
+    randomAttachmentChance: 0.1
     slots:
       rmc-aslot-barrel:
         whitelist:
@@ -83,6 +84,9 @@
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentLaserSight
           - RMCAttachmentBipod
+          - RMCAttachmentM203GrenadeLauncher
+        random:
+        - RMCAttachmentM203GrenadeLauncher
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.84, 0

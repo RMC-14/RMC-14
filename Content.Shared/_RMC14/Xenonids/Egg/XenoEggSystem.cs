@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction;
+using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -58,11 +59,12 @@ public sealed class XenoEggSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
+    [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly CMHandsSystem _rmcHands = default!;
+    [Dependency] private readonly RMCHandsSystem _rmcHands = default!;
     [Dependency] private readonly TagSystem _tags = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
@@ -570,7 +572,7 @@ public sealed class XenoEggSystem : EntitySystem
 
         var tile = _map.TileIndicesFor(gridId, grid, coordinates);
         var anchored = _map.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
-        var hasWeeds = false;
+        var hasHiveWeeds = _weeds.IsOnHiveWeeds((gridId, grid), coordinates);
         while (anchored.MoveNext(out var uid))
         {
             if (HasComp<XenoEggComponent>(uid))
@@ -582,15 +584,13 @@ public sealed class XenoEggSystem : EntitySystem
 
             if (HasComp<XenoConstructComponent>(uid) ||
                 _tags.HasAnyTag(uid.Value, StructureTag, AirlockTag) ||
-                HasComp<StrapComponent>(uid))
+                HasComp<StrapComponent>(uid) ||
+                HasComp<XenoTunnelComponent>(uid))
             {
                 var msg = Loc.GetString("cm-xeno-egg-blocked");
                 _popup.PopupClient(msg, uid.Value, user, PopupType.SmallCaution);
                 return false;
             }
-
-            if (HasComp<XenoWeedsComponent>(uid))
-                hasWeeds = true;
         }
 
         if (_turf.IsTileBlocked(gridId, tile, Impassable | MidImpassable | HighImpassable, grid))
@@ -600,10 +600,9 @@ public sealed class XenoEggSystem : EntitySystem
             return false;
         }
 
-        // TODO RMC14 only on hive weeds
-        if (!hasWeeds)
+        if (!hasHiveWeeds)
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-egg-failed-must-weeds"), user, user);
+            _popup.PopupClient(Loc.GetString("cm-xeno-egg-failed-must-hive-weeds"), user, user);
             return false;
         }
 

@@ -1,74 +1,61 @@
 using System.Numerics;
-using Content.Server.Weapons.Ranged.Systems;
+using Content.Server.Destructible;
+using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared._RMC14.Xenonids.Bombard;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
-using Content.Shared._RMC14.OnCollide;
-using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Weeds;
-using Content.Shared.Hands.Components;
-using Content.Shared.Maps;
-using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
-using Content.Shared.Buckle.Components;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
+using Content.Shared.Examine;
+using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
-using Content.Shared.Interaction.Events;
+using Content.Shared.Maps;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Standing;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Stunnable;
-using Content.Shared.Tag;
 using Robust.Server.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using static Content.Shared.Physics.CollisionGroup;
-using Content.Shared.Examine;
-using Content.Shared.Standing;
 
 namespace Content.Server._RMC14.Xenonids.Construction.ResinHole;
 
-public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
+public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLogs = default!;
-    [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedInteractionSystem _interact = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly TagSystem _tags = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly GunSystem _gun = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly SharedOnCollideSystem _onCollide = default!;
-    [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruct = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly DestructibleSystem _destructible = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
 
-    private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
-    private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
-
-    private static readonly EntProtoId ResinHolePrototype = "XenoResinHole";
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
     public override void Initialize()
@@ -171,8 +158,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         if (!CanPlaceInHole(args.Used.Value, resinHole, args.User))
             return;
 
-        resinHole.Comp.TrapPrototype = XenoResinHoleComponent.ParasitePrototype;
-        Dirty(resinHole);
+        SetTrapType(resinHole, XenoResinHoleComponent.ParasitePrototype);
         _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-resin-hole-finished-parasite"), resinHole, args.User);
         QueueDel(args.Used);
 
@@ -242,9 +228,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
             QueueDel(para);
             return;
         }
-
-        resinHole.Comp.TrapPrototype = null;
-        Dirty(resinHole);
+        SetTrapType(resinHole, null);
         _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Empty);
         args.Handled = true;
     }
@@ -263,12 +247,12 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
             switch (bombardComp.Projectile.Id)
             {
                 case XenoResinHoleComponent.BoilerAcid:
-                    resinHole.Comp.TrapPrototype = XenoResinHoleComponent.AcidGasPrototype;
+                    SetTrapType(resinHole, XenoResinHoleComponent.AcidGasPrototype);
                     _appearanceSystem.SetData(resinHole, XenoResinHoleVisuals.Contained, ContainedTrap.AcidGas);
                     break;
 
                 case XenoResinHoleComponent.BoilerNeuro:
-                    resinHole.Comp.TrapPrototype = XenoResinHoleComponent.NeuroGasPrototype;
+                    SetTrapType(resinHole, XenoResinHoleComponent.NeuroGasPrototype);
                     _appearanceSystem.SetData(resinHole, XenoResinHoleVisuals.Contained, ContainedTrap.NeuroticGas);
                     break;
             }
@@ -286,7 +270,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
             if (!_xenoPlasma.TryRemovePlasmaPopup(args.User, acid.Cost))
                 return;
 
-            resinHole.Comp.TrapPrototype = acid.Spray;
+            SetTrapType(resinHole, acid.Spray);
             switch (acid.Spray.Id)
             {
                 case XenoResinHoleComponent.WeakAcidPrototype:
@@ -317,7 +301,11 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
         if (args.DamageDelta == null)
             return;
 
-        var destroyed = args.Damageable.TotalDamage + args.DamageDelta.GetTotal() > resinHole.Comp.TotalHealth;
+        var destroyed = false;
+        if (_destructible.TryGetDestroyedAt(resinHole.Owner, out var totalHealth))
+        {
+            destroyed = args.Damageable.TotalDamage + args.DamageDelta.GetTotal() > totalHealth;
+        }
         ActivateTrap(resinHole, destroyed);
     }
 
@@ -328,26 +316,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
         using (args.PushGroup(nameof(XenoResinHoleComponent)))
         {
-            if (resinHole.Comp.TrapPrototype == null)
-                args.PushMarkup(Loc.GetString("rmc-xeno-construction-resin-hole-empty"));
-            else
-            {
-                switch (resinHole.Comp.TrapPrototype)
-                {
-                    case XenoResinHoleComponent.AcidGasPrototype:
-                    case XenoResinHoleComponent.NeuroGasPrototype:
-                        args.PushMarkup(Loc.GetString("rmc-xeno-construction-resin-hole-gas"));
-                        break;
-                    case XenoResinHoleComponent.WeakAcidPrototype:
-                    case XenoResinHoleComponent.AcidPrototype:
-                    case XenoResinHoleComponent.StrongAcidPrototype:
-                        args.PushMarkup(Loc.GetString("rmc-xeno-construction-resin-hole-acid"));
-                        break;
-                    case XenoResinHoleComponent.ParasitePrototype:
-                        args.PushMarkup(Loc.GetString("rmc-xeno-construction-resin-hole-parasite"));
-                        break;
-                }
-            }
+            args.PushMarkup(GetTrapExamineMessage(resinHole));
         }
     }
 
@@ -377,7 +346,9 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
                 && !HasComp<VictimInfectedComponent>(args.Tripper);
             return;
         }
-        else if (_mobState.IsDead(args.Tripper) || _standing.IsDown(args.Tripper))
+        else if (_mobState.IsDead(args.Tripper) ||
+                 _standing.IsDown(args.Tripper) ||
+                 !_interaction.InRangeUnobstructed(args.Source, args.Tripper, 1.5f))
         {
             var inRange = EnsureComp<InResinHoleRangeComponent>(args.Tripper);
             if (!inRange.HoleList.Contains(resinHole))
@@ -391,6 +362,9 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
     private void OnXenoResinHoleStepTriggered(Entity<XenoResinHoleComponent> resinHole, ref StepTriggeredOffEvent args)
     {
+        if (_mobState.IsDead(args.Tripper))
+            return;
+
         if (resinHole.Comp.TrapPrototype == XenoResinHoleComponent.ParasitePrototype)
         {
             _stun.TryParalyze(args.Tripper, resinHole.Comp.StepStunDuration, true);
@@ -400,45 +374,7 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
 
     private void OnInRangeStand(Entity<InResinHoleRangeComponent> tripper, ref StoodEvent args)
     {
-        for (var i  = tripper.Comp.HoleList.Count - 1; i >= 0; i--)
-        {
-            var resinHole = tripper.Comp.HoleList[i];
-
-            if (!TryComp<XenoResinHoleComponent>(resinHole, out var holeComponent))
-            {
-                tripper.Comp.HoleList.Remove(resinHole);
-                continue;
-            }
-
-            //Continue if trap has emptied or been replaced with a parasite
-            if (holeComponent.TrapPrototype is null || holeComponent.TrapPrototype == XenoResinHoleComponent.ParasitePrototype)
-                continue;
-
-            //Check if each Resin Hole is still colliding with tripper
-            if (!_physicsQuery.TryGetComponent(resinHole, out var physics))
-            {
-                tripper.Comp.HoleList.Remove(resinHole);
-                continue;
-            }
-
-            foreach (var ent in _physics.GetContactingEntities(resinHole, physics))
-            {
-                if (ent != tripper.Owner)
-                    continue;
-
-                ActivateTrap((resinHole, holeComponent));
-                tripper.Comp.HoleList.Remove(resinHole);
-
-                if (tripper.Comp.HoleList.Count == 0)
-                {
-                    RemCompDeferred<InResinHoleRangeComponent>(tripper);
-                }
-                //Only trigger one trap maximum per stand-up
-                return;
-            }
-        }
-
-        RemCompDeferred<InResinHoleRangeComponent>(tripper);
+        UpdateInRange(tripper, true);
     }
 
     private bool CanPlaceResinHole(EntityUid user, EntityCoordinates coords)
@@ -470,6 +406,16 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
                 _popup.PopupEntity(msg, user, user, PopupType.SmallCaution);
                 return false;
             }
+        }
+
+        foreach (var body in _lookup.GetEntitiesInRange<MobStateComponent>(coords, 0.5f))
+        {
+            if (!_mobState.IsDead(body))
+                continue;
+
+            var msg = Loc.GetString("rmc-xeno-construction-dead-body");
+            _popup.PopupEntity(msg, user, user, PopupType.SmallCaution);
+            return false;
         }
 
         return true;
@@ -524,16 +470,48 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
                 EnsureComp<TrapParasiteComponent>(trapEntity);
         }
 
-        string msg = destroyed ? "cm-xeno-construction-resin-hole-destroyed" : "rmc-xeno-construction-resin-hole-activate";
+        string msg = "rmc-xeno-construction-resin-hole-activate";
 
         var ev = new XenoResinHoleActivationEvent(msg);
-        RaiseLocalEvent(ent, ev);
 
-        comp.TrapPrototype = null;
-        Dirty(resinHole);
-        _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Empty);
+        // If the resin hole is destroyed, it's the XenoAnnounceStructureDestructionComponent job to announce
+        // the entity's destruction
+        if (!destroyed)
+        {
+            RaiseLocalEvent(ent, ev);
+
+            SetTrapType(resinHole, null);
+            _appearanceSystem.SetData(resinHole.Owner, XenoResinHoleVisuals.Contained, ContainedTrap.Empty);
+        }
 
         return true;
+    }
+
+    private string GetTrapExamineMessage(Entity<XenoResinHoleComponent> resinHole)
+    {
+        var msgID = "";
+        if (resinHole.Comp.TrapPrototype == null)
+            msgID = "rmc-xeno-construction-resin-hole-empty";
+        else
+        {
+            switch (resinHole.Comp.TrapPrototype)
+            {
+                case XenoResinHoleComponent.AcidGasPrototype:
+                case XenoResinHoleComponent.NeuroGasPrototype:
+                    msgID = "rmc-xeno-construction-resin-hole-gas";
+                    break;
+                case XenoResinHoleComponent.WeakAcidPrototype:
+                case XenoResinHoleComponent.AcidPrototype:
+                case XenoResinHoleComponent.StrongAcidPrototype:
+                    msgID = "rmc-xeno-construction-resin-hole-acid";
+                    break;
+                case XenoResinHoleComponent.ParasitePrototype:
+                    msgID = "rmc-xeno-construction-resin-hole-parasite";
+                    break;
+            }
+        }
+
+        return Loc.GetString(msgID);
     }
 
     private bool IsAcidPrototype(string proto, out int level)
@@ -552,6 +530,104 @@ public sealed partial class XenoResinHoleSystem : SharedXenoResinHoleSystem
                 return true;
             default:
                 return false;
+        }
+    }
+
+    private void UpdateInRange(Entity<InResinHoleRangeComponent> tripper, bool stoodUp)
+    {
+        if (_standing.IsDown(tripper))
+            return;
+
+        for (var i = tripper.Comp.HoleList.Count - 1; i >= 0; i--)
+        {
+            var resinHole = tripper.Comp.HoleList[i];
+
+            if (!TryComp<XenoResinHoleComponent>(resinHole, out var holeComponent))
+            {
+                tripper.Comp.HoleList.Remove(resinHole);
+                continue;
+            }
+
+            //Continue if trap has emptied or been replaced with a parasite
+            if (holeComponent.TrapPrototype is null || holeComponent.TrapPrototype == XenoResinHoleComponent.ParasitePrototype)
+                continue;
+
+            //Check if each Resin Hole is still colliding with tripper
+            if (!_physicsQuery.TryGetComponent(resinHole, out var physics))
+            {
+                tripper.Comp.HoleList.Remove(resinHole);
+                continue;
+            }
+
+            foreach (var ent in _physics.GetContactingEntities(resinHole, physics))
+            {
+                if (ent != tripper.Owner)
+                    continue;
+
+                if (!IsVisibleToTrap(resinHole, ent))
+                    continue;
+
+                ActivateTrap((resinHole, holeComponent));
+                tripper.Comp.HoleList.Remove(resinHole);
+
+                if (tripper.Comp.HoleList.Count == 0)
+                {
+                    RemCompDeferred<InResinHoleRangeComponent>(tripper);
+                }
+                //Only trigger one trap maximum per stand-up
+                return;
+            }
+        }
+
+        if (stoodUp || tripper.Comp.HoleList.Count == 0)
+            RemCompDeferred<InResinHoleRangeComponent>(tripper);
+    }
+
+    public bool IsVisibleToTrap(EntityUid resinHole, EntityUid ent)
+    {
+        //Basic case, can see each other clearly, open LoS
+        if (_interaction.InRangeUnobstructed(resinHole, ent, 1.5f))
+            return true;
+
+        //Advanced case, checks if any point 1 tile away in any cardinal direction is capable of seeing the target.
+        //Allows slipping around open passages, but NOT through encasing walls, as offset check fails if the origin coordinate is inside a wall.
+        var holeCoordinates = _transform.GetMapCoordinates(resinHole);
+        var offsetCoordinates = holeCoordinates;
+
+        for (int i = 0; i < 4; i++)
+        {
+            switch (i)
+            {
+                case 0:
+                    offsetCoordinates = holeCoordinates.Offset(1, 0);
+                    break;
+                case 1:
+                    offsetCoordinates = holeCoordinates.Offset(-1, 0);
+                    break;
+                case 2:
+                    offsetCoordinates = holeCoordinates.Offset(0, 1);
+                    break;
+                case 3:
+                    offsetCoordinates = holeCoordinates.Offset(0, -1);
+                    break;
+                default:
+                    break;
+            }
+
+            //Trigger Range is preserved by the ContactingEntities check in the parent function, this just checks vision
+            if (_interaction.InRangeUnobstructed(offsetCoordinates, ent, 1.5f))
+                return true;
+        }
+
+        return false;
+    }
+
+    public override void Update(float frameTime)
+    {
+        var inRangeQuery = EntityQueryEnumerator<InResinHoleRangeComponent>();
+        while (inRangeQuery.MoveNext(out var uid, out var comp))
+        {
+            UpdateInRange((uid, comp), false);
         }
     }
 }

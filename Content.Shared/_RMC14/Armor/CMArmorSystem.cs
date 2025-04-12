@@ -1,6 +1,7 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Medical.Surgery.Steps;
+using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Slowing;
 using Content.Shared.Alert;
@@ -12,6 +13,8 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Preferences;
+using Content.Shared.Rounding;
+using Content.Shared.Weapons.Melee;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Armor;
@@ -25,6 +28,7 @@ public sealed class CMArmorSystem : EntitySystem
 
     private static readonly ProtoId<DamageGroupPrototype> ArmorGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BioGroup = "Burn";
+    private static readonly int MaxXenoArmor = 55;
 
     public override void Initialize()
     {
@@ -63,9 +67,23 @@ public sealed class CMArmorSystem : EntitySystem
 
     private void OnMapInit(Entity<CMArmorComponent> armored, ref MapInitEvent args)
     {
-        if (TryComp<XenoComponent>(armored, out var xeno)){
-            string? armorMessage = armored.Comp.Armor + " / " + armored.Comp.Armor;
-            _alerts.ShowAlert(armored, xeno.ArmorAlert, 0, dynamicMessage: armorMessage); //TODO RMC14 update message when Armor level can actually change
+        UpdateArmorValue((armored, armored.Comp));
+    }
+
+    public void UpdateArmorValue(Entity<CMArmorComponent?> armored)
+    {
+        if (!Resolve(armored, ref armored.Comp, false))
+            return;
+
+        if (TryComp<XenoComponent>(armored, out var xeno))
+        {
+            var ev = new CMGetArmorEvent(SlotFlags.OUTERCLOTHING | SlotFlags.INNERCLOTHING);
+            RaiseLocalEvent(armored, ref ev);
+            string? armorMessage = FixedPoint2.New(ev.XenoArmor * ev.ArmorModifier) + " / " + armored.Comp.XenoArmor;
+            var max = _alerts.GetMaxSeverity(xeno.ArmorAlert);
+
+            var severity = max - ContentHelpers.RoundToLevels(ev.XenoArmor * ev.ArmorModifier, MaxXenoArmor, max + 1);
+            _alerts.ShowAlert(armored, xeno.ArmorAlert, (short)severity, dynamicMessage: armorMessage);
         }
     }
 
@@ -82,21 +100,35 @@ public sealed class CMArmorSystem : EntitySystem
 
     private void OnGetArmor(Entity<CMArmorComponent> armored, ref CMGetArmorEvent args)
     {
-        args.Armor += armored.Comp.Armor;
-        args.Bio += armored.Comp.Bio;
+        if (HasComp<XenoComponent>(armored))
+        {
+            args.XenoArmor += armored.Comp.XenoArmor;
+        }
+        else
+        {
+            args.Melee += armored.Comp.Melee;
+            args.Bullet += armored.Comp.Bullet;
+            args.Bio += armored.Comp.Bio;
+        }
     }
 
     private void OnGetArmorRelayed(Entity<CMArmorComponent> armored, ref InventoryRelayedEvent<CMGetArmorEvent> args)
     {
-        args.Args.Armor += armored.Comp.Armor;
-        args.Args.Bio += armored.Comp.Bio;
+        if (HasComp<XenoComponent>(armored))
+        {
+            args.Args.XenoArmor += armored.Comp.XenoArmor;
+        }
+        else
+        {
+            args.Args.Melee += armored.Comp.Melee;
+            args.Args.Bullet += armored.Comp.Bullet;
+            args.Args.Bio += armored.Comp.Bio;
+        }
     }
 
     private void OnGetExplosionResistanceRelayed(Entity<CMArmorComponent> ent, ref InventoryRelayedEvent<GetExplosionResistanceEvent> args)
     {
-        // TODO RMC14 unhalve this when we can calculate explosion damage better
-        var armor = ent.Comp.ExplosionArmor / 2;
-
+        var armor = ent.Comp.ExplosionArmor;
         if (armor <= 0)
             return;
 
@@ -106,9 +138,7 @@ public sealed class CMArmorSystem : EntitySystem
 
     private void OnGetExplosionResistance(Entity<CMArmorComponent> armored, ref GetExplosionResistanceEvent args)
     {
-        // TODO RMC14 unhalve this when we can calculate explosion damage better
-        var armor = armored.Comp.ExplosionArmor / 2;
-
+        var armor = armored.Comp.ExplosionArmor;
         if (armor <= 0)
             return;
 
@@ -201,9 +231,21 @@ public sealed class CMArmorSystem : EntitySystem
             armorPiercing += piercingEv.Piercing;
         }
 
-        ev.Armor = (int) (ev.Armor * ev.ArmorModifier);
-        ev.Armor -= armorPiercing;
-        ev.Bio -= armorPiercing;
+        if (HasComp<XenoComponent>(ent))
+        {
+            ev.XenoArmor = (int)(ev.XenoArmor * ev.ArmorModifier);
+            ev.XenoArmor -= armorPiercing;
+        }
+        else
+        {
+            ev.Melee = (int)(ev.Melee * ev.ArmorModifier);
+            ev.Melee -= armorPiercing;
+
+            ev.Bullet = (int)(ev.Bullet * ev.ArmorModifier);
+            ev.Bullet -= armorPiercing;
+
+            ev.Bio -= armorPiercing;
+        }
 
         if (args.Origin is { } origin)
         {
@@ -215,17 +257,34 @@ public sealed class CMArmorSystem : EntitySystem
                 var diff = (originCoords.Position - armorCoords.Position).ToWorldAngle().GetCardinalDir();
                 if (diff == _transform.GetWorldRotation(ent).GetCardinalDir())
                 {
-                    ev.Armor += ev.FrontalArmor;
+                    ev.XenoArmor += ev.FrontalArmor;
                 }
             }
         }
 
+        //Default modifier
+        var mod = EnsureComp<RMCArmorModifierComponent>(ent);
+
         args.Damage = new DamageSpecifier(args.Damage);
-        Resist(args.Damage, ev.Armor, ArmorGroup);
-        Resist(args.Damage, ev.Bio, BioGroup);
+        if (!HasComp<XenoComponent>(ent))
+        {
+            if (HasComp<RMCBulletComponent>(args.Tool))
+            {
+                Resist(args.Damage, ev.Bullet, ArmorGroup, mod.RangedArmorModifier);
+            }
+            else if (HasComp<MeleeWeaponComponent>(args.Tool))
+            {
+                Resist(args.Damage, ev.Melee, ArmorGroup, mod.MeleeArmorModifier);
+            }
+            Resist(args.Damage, ev.Bio, BioGroup, mod.RangedArmorModifier);
+        }
+        else
+        {
+            Resist(args.Damage, ev.XenoArmor, ArmorGroup, mod.RangedArmorModifier);
+        }
     }
 
-    private void Resist(DamageSpecifier damage, int armor, ProtoId<DamageGroupPrototype> group)
+    private void Resist(DamageSpecifier damage, int armor, ProtoId<DamageGroupPrototype> group, int mult)
     {
         armor = Math.Max(armor, 0);
         if (armor <= 0)
@@ -246,14 +305,15 @@ public sealed class CMArmorSystem : EntitySystem
         var newDamage = damage.GetTotal();
         if (newDamage != FixedPoint2.Zero && newDamage < armor * 2)
         {
-            var damageWithArmor = FixedPoint2.Max(0, newDamage * 4 - armor);
+
+            var damageWithArmor = FixedPoint2.Max(0, newDamage * mult - armor);
 
             foreach (var type in types)
             {
                 if (damage.DamageDict.TryGetValue(type, out var amount) &&
                     amount > FixedPoint2.Zero)
                 {
-                    damage.DamageDict[type] = amount * damageWithArmor / (newDamage * 4);
+                    damage.DamageDict[type] = amount * damageWithArmor / (newDamage * mult);
                 }
             }
         }

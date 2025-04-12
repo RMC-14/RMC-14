@@ -212,7 +212,7 @@
   id: MobRespirator
   abstract: true
   components:
-  - type: Internals
+#  - type: Internals
   - type: Respirator
     damage:
       types:

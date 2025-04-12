@@ -40,7 +40,7 @@ public sealed partial class XenoApplySalveActionEvent : EntityTargetActionEvent
     public TimeSpan TotalHealDuration = TimeSpan.FromSeconds(5);
 
     [DataField]
-    public EntProtoId HealEffect = "RMCEffectHeal";
+    public EntProtoId HealEffect = "RMCEffectHealHealer";
 
     [DataField]
     public SoundSpecifier HealSound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_drool1.ogg");

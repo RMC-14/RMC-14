@@ -287,6 +287,9 @@ public abstract partial class SharedScopeSystem : EntitySystem
         _actionsSystem.SetToggled(scope.Comp.ScopingToggleActionEntity, true);
         _contentEye.SetZoom(user, Vector2.One * zoomLevel.Zoom, true);
         UpdateOffset(user);
+
+        var ev = new ScopedEvent(user, scope);
+        RaiseLocalEvent(user, ref ev);
     }
 
     protected virtual bool Unscope(Entity<ScopeComponent> scope)

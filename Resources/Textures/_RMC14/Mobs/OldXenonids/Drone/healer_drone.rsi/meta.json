@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/bb00705387c77af87cf86b948e6b34441c60300c/icons/mob/xenonids/drone.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/bb00705387c77af87cf86b948e6b34441c60300c/icons/mob/xenonids/drone.dmi, modified by Vermidia",
   "size": {
     "x": 48,
     "y": 48
@@ -71,13 +71,7 @@
       "name": "salved_rest"
     },
     {
-      "name": "salved_downed",
-      "delays": [
-        [
-          0.1,
-          0.1
-        ]
-      ]
+      "name": "salved_downed"
     }
   ]
 }

@@ -14,5 +14,4 @@ public sealed partial class WebbingComponent : Component
 
     [DataField(required: true)]
     public ComponentRegistry Components = new();
-
 }

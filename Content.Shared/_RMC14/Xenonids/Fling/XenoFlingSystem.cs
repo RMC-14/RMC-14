@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Effects;
@@ -23,6 +24,7 @@ public sealed class XenoFlingSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
 
     public override void Initialize()
     {
@@ -53,7 +55,7 @@ public sealed class XenoFlingSystem : EntitySystem
         var targetId = args.Target;
         _rmcPulling.TryStopAllPullsFromAndOn(targetId);
 
-        var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage);
+        var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage, origin: xeno, tool: xeno);
         if (damage?.GetTotal() > FixedPoint2.Zero)
         {
             var filter = Filter.Pvs(targetId, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);
@@ -65,12 +67,15 @@ public sealed class XenoFlingSystem : EntitySystem
         var diff = target.Position - origin.Position;
         diff = diff.Normalized() * xeno.Comp.Range;
 
+        _rmcMelee.DoLunge(xeno, targetId);
+
+
         if (_net.IsServer)
         {
             _stun.TryParalyze(targetId, xeno.Comp.ParalyzeTime, true);
             _throwing.TryThrow(targetId, diff, 10);
 
             SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());
-        } 
+        }
     }
 }

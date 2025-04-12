@@ -75,6 +75,6 @@
     icon:
       sprite: _RMC14/Actions/marine_smart_gun_actions.rsi
       state: motion_detector
-    event: !type:GunToggleableMotionDetectorActionEvent
+    event: !type:ToggleableMotionDetectorActionEvent
     useDelay: 0.25
     itemIconStyle: NoItem

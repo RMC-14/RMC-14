@@ -104,7 +104,7 @@
     icon:
       sprite: _RMC14/Objects/phone.rsi
       state: rpb_phone
-    event: !type:TelephoneActionEvent
+    event: !type:RMCTelephoneActionEvent
     useDelay: 0.5
 
 - type: Tag
@@ -129,3 +129,57 @@
   - type: InstantAction
     itemIconStyle: BigItem
     event: !type:ToggleActionEvent
+
+- type: entity
+  parent: ActionMarineBase
+  id: RMCActionCycleVisor
+  name: Cycle helmet HUD
+  description: Cycles the currently active visor.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+      state: sight_up
+    event: !type:CycleVisorActionEvent
+    useDelay: 0.5
+
+- type: entity
+  parent: ActionMarineToggleable
+  id: RMCActionSpotTarget
+  description: Hover your mouse over a target and press the unique action key to start spotting.
+  name: Spot Target
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/marine_sniper_actions.rsi
+      state: spotter_target
+    event: !type:SpotTargetActionEvent
+
+- type: entity
+  parent: ActionMarineBase
+  id: RMCActionToggleLaser
+  name: Toggle Laser
+  description: Toggles your laser on or off
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/marine_sniper_actions.rsi
+      state: sniper_toggle_laser_on
+    event: !type:GunToggleLaserActionEvent
+    useDelay: 0.25
+
+- type: entity
+  parent: ActionMarineToggleable
+  id: RMCActionAimedShot
+  name: Aimed Shot
+  description: While in combat mode and hovering your mouse over a target, press the unique action key to begin aiming.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/marine_sniper_actions.rsi
+      state: sniper_aim
+    event: !type:AimedShotActionEvent

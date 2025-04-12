@@ -1,0 +1,148 @@
+﻿- type: job
+  parent: CMJobBase
+  id: CMProvostMarshal
+  name: rmc-job-name-provost-marshal
+  description: rmc-job-description-provost-marshal
+  playTimeTracker: CMJobProvostMarshal
+  ranks:
+    RMCRankProvostMarshal: []
+  startingGear: RMCGearProvostMarshal
+  icon: RMCJobIconProvostMarshal
+  joinNotifyCrew: false
+  accessGroups:
+  - ShipMasterAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 1
+        RMCSkillEndurance: 5
+        RMCSkillEngineer: 2
+        RMCSkillExecution: 1
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillIntel: 2
+        RMCSkillJtac: 4
+        RMCSkillLeadership: 3
+        RMCSkillMedical: 3
+        RMCSkillMeleeWeapons: 1
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillSmartGun: 1
+        RMCSkillVehicles: 2
+    - type: JobPrefix
+      prefix: rmc-job-prefix-provost-marshal
+    - type: MarineOrders
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+  hidden: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerProvostMarshal
+  name: provost spawner marshal
+  suffix: Spawner, Admin, Low Law Understanding or Lower Rank
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCRandomHumanoidProvostMarshal
+
+- type: entity
+  id: RMCRandomHumanoidProvostMarshal
+  name: provost ghost role marshal
+  suffix: Role, Admin, Low Law Understanding or Lower Rank
+  components:
+  - type: Sprite
+    sprite: Markers/cross.rsi
+    state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCProvostMarshal
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCProvostMarshal
+  components:
+  - type: GhostRole
+    name: rmc-ghost-role-information-provost-marshal-name
+    description: rmc-ghost-role-information-provost-marshal-description
+    rules: ghost-role-information-nonantagonist-rules
+    raffle:
+      settings: short
+  - type: Loadout
+    prototypes: [ RMCGearProvostMarshal ]
+  - type: Skills
+    skills:
+      RMCSkillConstruction: 2
+      RMCSkillCqc: 1
+      RMCSkillEndurance: 5
+      RMCSkillEngineer: 2
+      RMCSkillExecution: 1
+      RMCSkillFirearms: 1
+      RMCSkillFireman: 2
+      RMCSkillIntel: 2
+      RMCSkillJtac: 4
+      RMCSkillLeadership: 3
+      RMCSkillMedical: 3
+      RMCSkillMeleeWeapons: 1
+      RMCSkillOverwatch: 1
+      RMCSkillPolice: 2
+      RMCSkillPowerLoader: 2
+      RMCSkillSmartGun: 1
+      RMCSkillVehicles: 2
+  - type: MarineOrders
+  - type: DemoSpecWhitelist
+  - type: GrenadeSpecWhitelist
+  - type: ScoutWhitelist
+  - type: SniperWhitelist
+  - type: PyroWhitelist
+
+- type: startingGear
+  id: RMCGearProvostMarshal
+  equipment:
+    head: RMCArmorCapProvost
+    eyes: CMGlassesSecurity
+    ears: CMHeadsetHighCommand
+    jumpsuit: CMJumpsuitProvostMarshal
+    outerClothing: RMCProvostCoatMarshalFilled
+    gloves: CMHandsBlackMarine # TODO RMC14 black gloves
+    shoes: CMBootsBlackFilled
+    id: RMCIDCardProvostMarshal
+    belt: RMCMatebaBeltLuxuriousFilled
+    back: CMSatchelSecurityFilledProvostMarshal
+    #    pocket1: # TODO RMC14 tape recorder
+    pocket2: RMCPouchMagazinePistolFilledMateba # TODO RMC14 3 listening devices
+
+- type: playTimeTracker
+  id: CMJobProvostMarshal
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconProvostMarshal
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_pvm
+
+- type: entity
+  parent: CMIDCardGold # TODO RMC14 provost id
+  id: RMCIDCardProvostMarshal
+  name: provost marshal ID card
+  description: Issued to members of the Provost Office.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+  - type: PresetIdCard
+    job: CMProvostMarshal

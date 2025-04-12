@@ -22,6 +22,7 @@
   - type: SquadTeam
     roundStart: true
     color: "#E61919"
+    radio: MarineAlpha
     accessLevels:
     - CMAccessAlpha
     minimapBackground:
@@ -36,6 +37,7 @@
   - type: SquadTeam
     roundStart: true
     color: "#FFC32D"
+    radio: MarineBravo
     accessLevels:
     - CMAccessBravo
     minimapBackground:
@@ -50,6 +52,7 @@
   - type: SquadTeam
     roundStart: true
     color: "#C864C8"
+    radio: MarineCharlie
     accessLevels:
     - CMAccessCharlie
     minimapBackground:
@@ -64,6 +67,7 @@
   - type: SquadTeam
     roundStart: true
     color: "#4148C8"
+    radio: MarineDelta
     accessLevels:
     - CMAccessDelta
     minimapBackground:
@@ -72,27 +76,12 @@
 
 - type: entity
   parent: SquadBase
-  id: SquadEcho
-  name: Echo
-  components:
-  - type: SquadTeam
-    color: "#67D692"
-    accessLevels:
-    - CMAccessAlpha
-    - CMAccessBravo
-    - CMAccessCharlie
-    - CMAccessDelta
-    minimapBackground:
-     sprite: _RMC14/Interface/map_blips.rsi
-     state: background_echo
-
-- type: entity
-  parent: SquadBase
   id: SquadFoxtrot
   name: Foxtrot
   components:
   - type: SquadTeam
     color: "#C47A50"
+    radio: MarineFoxtrot
     accessLevels:
     - CMAccessAlpha
     - CMAccessBravo
@@ -101,5 +90,50 @@
     minimapBackground:
      sprite: _RMC14/Interface/map_blips.rsi
      state: background_foxtrot
+    canSupplyDrop: false
 
-#TODO RMC-14 Intel needs to use their custom background
+- type: entity
+  parent: SquadBase
+  id: SquadEcho
+  name: Echo
+  components:
+  - type: SquadTeam
+    color: "#67D692"
+    radio: MarineEcho
+    accessLevels:
+    - CMAccessAlpha
+    - CMAccessBravo
+    - CMAccessCharlie
+    - CMAccessDelta
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_echo
+
+- type: entity
+  parent: SquadBase
+  id: SquadIntel
+  name: Intel
+  components:
+  - type: SquadTeam
+    color: "#053818"
+    blacklistedSquadArmor:
+    - Helmet
+    - Armor
+    radio: MarineIntel
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_intel
+    canSupplyDrop: false
+    maxRoles:
+      CMCombatTech: 3
+      CMHospitalCorpsman: 4
+      CMSmartGunOperator: 1 # for astor
+      CMWeaponsSpecialist: 1
+      CMFireteamLeader: 1
+      CMSquadLeader: 0
+  - type: Tag
+    tags:
+    - RMCSquadIntel
+
+- type: Tag
+  id: RMCSquadIntel

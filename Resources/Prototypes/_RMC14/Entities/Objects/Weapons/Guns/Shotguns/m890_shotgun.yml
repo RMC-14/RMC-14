@@ -14,12 +14,11 @@
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
-    - Burst
     recoilWielded: 2
     recoilUnwielded: 4
     scatterWielded: 5
     scatterUnwielded: 10
-    baseFireRate: 0.5
+    baseFireRate: 0.7
     burstScatterMult: 5
   - type: BallisticAmmoProvider
     cycleable: false

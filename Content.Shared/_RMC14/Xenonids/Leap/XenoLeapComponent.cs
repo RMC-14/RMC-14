@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -35,4 +35,7 @@ public sealed partial class XenoLeapComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool UnrootOnMelee = false;
+
+    [DataField, AutoNetworkedField]
+    public bool DestroyObjects = false;
 }

@@ -64,6 +64,9 @@ namespace Content.Server.Atmos.EntitySystems
 
         private readonly Dictionary<Entity<FlammableComponent>, float> _fireEvents = new();
 
+        // RMC14
+        private EntityQuery<SteppingOnFireComponent> _steppingOnFireQuery;
+
         public override void Initialize()
         {
             UpdatesAfter.Add(typeof(AtmosphereSystem));
@@ -87,6 +90,9 @@ namespace Content.Server.Atmos.EntitySystems
             SubscribeLocalEvent<ExtinguishOnInteractComponent, ActivateInWorldEvent>(OnExtinguishActivateInWorld);
 
             SubscribeLocalEvent<IgniteOnHeatDamageComponent, DamageChangedEvent>(OnDamageChanged);
+
+            // RMC14
+            _steppingOnFireQuery = GetEntityQuery<SteppingOnFireComponent>();
         }
 
         private void OnMeleeHit(EntityUid uid, IgniteOnMeleeHitComponent component, MeleeHitEvent args)
@@ -415,7 +421,7 @@ namespace Content.Server.Atmos.EntitySystems
             Dirty(uid, flammable);
 
             _popup.PopupEntity(Loc.GetString("flammable-component-resist-message"), uid, uid);
-            _stunSystem.TryParalyze(uid, flammable.ResistDuration, true);
+            _stunSystem.TryParalyze(uid, flammable.ResistDuration, true, force: true);
 
             // TODO FLAMMABLE: Make this not use TimerComponent...
             uid.SpawnTimer(2000, () =>
@@ -498,6 +504,9 @@ namespace Content.Server.Atmos.EntitySystems
                         damage = flammable.Intensity * (flammable.FireStacks / flammable.Duration * 0.2 + 0.8) * ev.Multiplier * flammable.Damage / 2;
                     else
                         damage = flammable.Intensity / 5f * flammable.Damage;
+
+                    if (_steppingOnFireQuery.HasComp(uid))
+                        damage *= 2;
 
                     _damageableSystem.TryChangeDamage(uid, damage, true, false);
 

@@ -13,9 +13,9 @@ public sealed class IconCommand : ToolshedCommand
     private SharedMarineSystem? _marineSystem;
 
     [CommandImplementation("get_human_readable")]
-    public String? GetHumanReadable([PipedArgument] EntityUid marine)
+    public string GetHumanReadable([PipedArgument] EntityUid marine)
     {
-        SpriteSpecifier? icon = EntityManager.GetComponentOrNull<MarineComponent>(marine)?.Icon;
+        var icon = EntityManager.GetComponentOrNull<MarineComponent>(marine)?.Icon;
 
         switch (icon)
         {
@@ -41,11 +41,11 @@ public sealed class IconCommand : ToolshedCommand
     [CommandImplementation("set")]
     public EntityUid Set([CommandInvocationContext] IInvocationContext ctx,
         [PipedArgument] EntityUid marine,
-        [CommandArgument] String rsiState)
+        [CommandArgument] string rsiState)
     {
         _marineSystem ??= GetSys<SharedMarineSystem>();
 
-        SpriteSpecifier.Rsi icon = new SpriteSpecifier.Rsi(new("_RMC14/Interface/cm_job_icons.rsi"), rsiState);
+        var icon = new SpriteSpecifier.Rsi(new("_RMC14/Interface/cm_job_icons.rsi"), rsiState);
 
         // TODO RMC14: Make this idiot proof. Right now it's very easy to cause this command to render a big ol' error on everyone's screen.
 
@@ -57,7 +57,7 @@ public sealed class IconCommand : ToolshedCommand
     [CommandImplementation("set")]
     public IEnumerable<EntityUid> Set([CommandInvocationContext] IInvocationContext ctx,
         [PipedArgument] IEnumerable<EntityUid> marines,
-        [CommandArgument] String rsiState)
+        [CommandArgument] string rsiState)
     {
         return marines.Select(marine => Set(ctx, marine, rsiState));
     }

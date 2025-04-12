@@ -1,0 +1,14 @@
+- type: rank
+  id: RMCRankOperator
+  name: Operator
+  prefix: OPR.
+
+- type: rank
+  id: RMCRankOperative
+  name: Operative
+  prefix: OPR.
+
+- type: rank
+  id: RMCRankSynthetic
+  name: Synthetic
+  prefix: Syn.

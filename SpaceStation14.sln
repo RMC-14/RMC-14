@@ -137,6 +137,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Robust.Xaml", "RobustToolbo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Content.Scripts", "Content.Scripts\Content.Scripts.csproj", "{A3E84789-6722-4241-90B0-738A6D335EC9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceWizards.RsiLib", "RSI.NET\SpaceWizards.RsiLib\SpaceWizards.RsiLib.csproj", "{0F27BA07-5D9F-4693-8D0C-2E2A0012893D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -464,6 +466,14 @@ Global
 		{A3E84789-6722-4241-90B0-738A6D335EC9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A3E84789-6722-4241-90B0-738A6D335EC9}.Tools|Any CPU.ActiveCfg = Debug|Any CPU
 		{A3E84789-6722-4241-90B0-738A6D335EC9}.Tools|Any CPU.Build.0 = Debug|Any CPU
+		{0F27BA07-5D9F-4693-8D0C-2E2A0012893D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F27BA07-5D9F-4693-8D0C-2E2A0012893D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F27BA07-5D9F-4693-8D0C-2E2A0012893D}.DebugOpt|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F27BA07-5D9F-4693-8D0C-2E2A0012893D}.DebugOpt|Any CPU.Build.0 = Debug|Any CPU
+		{0F27BA07-5D9F-4693-8D0C-2E2A0012893D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F27BA07-5D9F-4693-8D0C-2E2A0012893D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F27BA07-5D9F-4693-8D0C-2E2A0012893D}.Tools|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F27BA07-5D9F-4693-8D0C-2E2A0012893D}.Tools|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

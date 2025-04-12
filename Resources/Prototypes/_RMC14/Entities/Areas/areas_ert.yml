@@ -1,0 +1,36 @@
+﻿- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaERT
+  name: ERT station
+  components:
+  - type: Sprite
+    state: green
+  - type: Area
+    powerNet: ert
+    avoidBioscan: true
+
+# Fax Base
+
+- type: entity
+  parent: RMCAreaERT
+  id: RMCAreaERTFax
+  name: Sector Comms Relay
+  suffix: Fax Base, Interior
+  components:
+  - type: Sprite
+    state: green
+  - type: Area
+    powerNet: fax
+    avoidBioscan: true
+
+- type: entity
+  parent: RMCAreaERT
+  id: RMCAreaERTFaxExterior
+  name: Sector Comms Relay
+  suffix: Fax Base, Exterior
+  components:
+  - type: Sprite
+    state: red
+  - type: Area
+    powerNet: faxexterior
+    avoidBioscan: true

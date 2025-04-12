@@ -30,6 +30,7 @@ public sealed class ClockSystem : SharedClockSystem
     private void OnMapInit(Entity<GlobalTimeManagerComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.TimeOffset = TimeSpan.FromHours(_robustRandom.NextFloat(0, 24));
+        ent.Comp.DateOffset = DateTime.Today.AddYears(100);
         _pvsOverride.AddGlobalOverride(ent);
         Dirty(ent);
     }

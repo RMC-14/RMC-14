@@ -2,7 +2,7 @@
   abstract: true
   parent: CMBaseWallInvincible
   id: RMCBaseERTShuttleWall
-  name: shuttle wall
+  name: ERT Shuttle Wall
   components:
   - type: Corrodible
     isCorrodible: false
@@ -11,554 +11,1133 @@
   - type: Icon
     sprite: _RMC14/Structures/Dropships/ert_shuttle.rsi
 
+#Base Shuttle Engines
+
 - type: entity
+  abstract: true
   parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleEngineLeft1
-  name: engine
-  suffix: Left
+  id: RMCBaseERTShuttleEngine
+  name: Shuttle Engine
   components:
-  - type: Sprite
-    state: leftengine_1
-  - type: Icon
-    state: leftengine_1
   - type: Occluder
     enabled: false
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleEngineLeft2
-  name: engine
-  suffix: Left
+  parent: RMCBaseERTShuttleEngine
+  id: RMCERTShuttleEngineLeft01
+  suffix: Left 01
   components:
   - type: Sprite
-    state: leftengine_2
+    state: left_engine_01
   - type: Icon
-    state: leftengine_2
-  - type: Occluder
-    enabled: false
+    state: left_engine_01
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleEngineLeft3
-  name: engine
-  suffix: Left
+  parent: RMCBaseERTShuttleEngine
+  id: RMCERTShuttleEngineLeft02
+  suffix: Left 02
   components:
   - type: Sprite
-    state: leftengine_3
+    state: left_engine_02
   - type: Icon
-    state: leftengine_3
-  - type: Occluder
-    enabled: false
+    state: left_engine_02
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleEngineRight1
-  name: engine
-  suffix: Right
+  parent: RMCBaseERTShuttleEngine
+  id: RMCERTShuttleEngineLeft03
+  suffix: Left 03
   components:
   - type: Sprite
-    state: rightengine_1
+    state: left_engine_03
   - type: Icon
-    state: rightengine_1
-  - type: Occluder
-    enabled: false
+    state: left_engine_03
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleEngineRight2
-  name: engine
-  suffix: Right
+  parent: RMCBaseERTShuttleEngine
+  id: RMCERTShuttleEngineRight01
+  suffix: Right 01
   components:
   - type: Sprite
-    state: rightengine_2
+    state: right_engine_01
   - type: Icon
-    state: rightengine_2
-  - type: Occluder
-    enabled: false
+    state: right_engine_01
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleEngineRight3
-  name: engine
-  suffix: Right
+  parent: RMCBaseERTShuttleEngine
+  id: RMCERTShuttleEngineRight02
+  suffix: Right 02
   components:
   - type: Sprite
-    state: rightengine_3
+    state: right_engine_02
   - type: Icon
-    state: rightengine_3
-  - type: Occluder
-    enabled: false
+    state: right_engine_02
 
 - type: entity
+  parent: RMCBaseERTShuttleEngine
+  id: RMCERTShuttleEngineRight03
+  suffix: Right 03
+  components:
+  - type: Sprite
+    state: right_engine_03
+  - type: Icon
+    state: right_engine_03
+
+#Standard ERT Shuttle
+
+- type: entity
+  abstract: true
   parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallStandard
+  name: Standard Shuttle Wall
+
+- type: entity
+  parent: RMCERTShuttleWallStandard
   id: RMCERTShuttleWallStandardEngineLeft
+  name: Standard Shuttle Engine
   suffix: Left
   components:
   - type: Sprite
-    state: stan_leftengine
+    state: standard_left_engine
   - type: Icon
-    state: stan_leftengine
+    state: standard_left_engine
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
+  parent: RMCERTShuttleWallStandard
   id: RMCERTShuttleWallStandardEngineRight
+  name: Standard Shuttle Engine
   suffix: Right
   components:
   - type: Sprite
-    state: stan_rightengine
+    state: standard_right_engine
   - type: Icon
-    state: stan_rightengine
+    state: standard_right_engine
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallStandard1
-  suffix: 1
+  parent: RMCERTShuttleWallStandard
+  id: RMCERTShuttleWallStandard01
+  suffix: 01
   components:
   - type: Sprite
-    state: stan_black_t_down
+    state: standard_t_wall
   - type: Icon
-    state: stan_black_t_down
+    state: standard_t_wall
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallStandard2
-  suffix: 2
+  parent: RMCERTShuttleWallStandard
+  id: RMCERTShuttleWallStandard02
+  suffix: 02
   components:
   - type: Sprite
-    state: stan_black_t_up
+    state: standard_t_wall_inverted
   - type: Icon
-    state: stan_black_t_up
+    state: standard_t_wall_inverted
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallStandard3
-  suffix: 3
+  parent: RMCERTShuttleWallStandard
+  id: RMCERTShuttleWallStandard03
+  suffix: 03
   components:
   - type: Sprite
-    state: stan_inner_dark
+    state: standard_outer_wall
   - type: Icon
-    state: stan_inner_dark
+    state: standard_outer_wall
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallStandard4
-  suffix: 4
+  parent: RMCERTShuttleWallStandard
+  id: RMCERTShuttleWallStandard04
+  suffix: 04
   components:
   - type: Sprite
-    state: stan_inner_s_w
+    state: standard_inner_southward_wall
   - type: Icon
-    state: stan_inner_s_w
- 
-- type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallStandard5
-  suffix: 5
-  components:
-  - type: Sprite
-    state: stan_inner_t_left
-  - type: Icon
-    state: stan_inner_t_left
+    state: standard_inner_southward_wall
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallStandard6
-  suffix: 6
+  parent: RMCERTShuttleWallStandard
+  id: RMCERTShuttleWallStandard05
+  suffix: 05
   components:
   - type: Sprite
-    state: stan_inner_t_right
+    state: standard_inner_leftward_t_wall
   - type: Icon
-    state: stan_inner_t_right
+    state: standard_inner_leftward_t_wall
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallStandard7
-  suffix: 7
+  parent: RMCERTShuttleWallStandard
+  id: RMCERTShuttleWallStandard06
+  suffix: 06
   components:
   - type: Sprite
-    state: stan_inner_w_1
+    state: standard_inner_rightward_t_wall
   - type: Icon
-    state: stan_inner_w_1
+    state: standard_inner_rightward_t_wall
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallStandard8
-  suffix: 8
+  parent: RMCERTShuttleWallStandard
+  id: RMCERTShuttleWallStandard07
+  suffix: 07
   components:
   - type: Sprite
-    state: stan_inner_w_2
+    state: standard_inner_wall_01
   - type: Icon
-    state: stan_inner_w_2
+    state: standard_inner_wall_01
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallStandard9
-  suffix: 9
+  parent: RMCERTShuttleWallStandard
+  id: RMCERTShuttleWallStandard08
+  suffix: 08
   components:
   - type: Sprite
-    state: stan_l_w
+    state: standard_inner_wall_02
   - type: Icon
-    state: stan_l_w
+    state: standard_inner_wall_02
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
+  parent: RMCERTShuttleWallStandard
+  id: RMCERTShuttleWallStandard09
+  suffix: 09
+  components:
+  - type: Sprite
+    state: standard_leftward_wall
+  - type: Icon
+    state: standard_leftward_wall
+
+- type: entity
+  parent: RMCERTShuttleWallStandard
   id: RMCERTShuttleWallStandard10
   suffix: 10
   components:
   - type: Sprite
-    state: stan_r_w
+    state: standard_rightward_wall
   - type: Icon
-    state: stan_r_w
+    state: standard_rightward_wall
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
+  parent: RMCERTShuttleWallStandard
   id: RMCERTShuttleWallStandard11
   suffix: 11
   components:
   - type: Sprite
-    state: stan_white_t_up
+    state: standard_inner_t_wall
   - type: Icon
-    state: stan_white_t_up
+    state: standard_inner_t_wall
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
+  parent: RMCERTShuttleWallStandard
   id: RMCERTShuttleWallStandard12
   suffix: 12
   components:
   - type: Sprite
-    state: stan1
+    state: standard_wall_01
   - type: Icon
-    state: stan1
+    state: standard_wall_01
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
+  parent: RMCERTShuttleWallStandard
   id: RMCERTShuttleWallStandard13
   suffix: 13
   components:
   - type: Sprite
-    state: stan2
+    state: standard_wall_02
   - type: Icon
-    state: stan2
+    state: standard_wall_02
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
+  parent: RMCERTShuttleWallStandard
   id: RMCERTShuttleWallStandard14
   suffix: 14
   components:
   - type: Sprite
-    state: stan3
+    state: standard_wall_03
   - type: Icon
-    state: stan3
+    state: standard_wall_03
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
+  parent: RMCERTShuttleWallStandard
   id: RMCERTShuttleWallStandard15
   suffix: 15
   components:
   - type: Sprite
-    state: stan4
+    state: standard_wall_04
   - type: Icon
-    state: stan4
+    state: standard_wall_04
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
+  parent: RMCERTShuttleWallStandard
   id: RMCERTShuttleWallStandard16
   suffix: 16
   components:
   - type: Sprite
-    state: stan5
+    state: standard_wall_05
   - type: Icon
-    state: stan5
+    state: standard_wall_05
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
+  parent: RMCERTShuttleWallStandard
   id: RMCERTShuttleWallStandard17
   suffix: 17
   components:
   - type: Sprite
-    state: stan8
+    state: standard_wall_08
   - type: Icon
-    state: stan8
+    state: standard_wall_08
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
+  parent: RMCERTShuttleWallStandard
   id: RMCERTShuttleWallStandard18
   suffix: 18
   components:
   - type: Sprite
-    state: stan9
+    state: standard_wall_09
   - type: Icon
-    state: stan9
+    state: standard_wall_09
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
+  parent: RMCERTShuttleWallStandard
   id: RMCERTShuttleWallStandard19
   suffix: 19
   components:
   - type: Sprite
-    state: stan20
+    state: standard_wall_20
   - type: Icon
-    state: stan20
+    state: standard_wall_20
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
+  parent: RMCERTShuttleWallStandard
   id: RMCERTShuttleWallStandard20
   suffix: 20
   components:
   - type: Sprite
-    state: stan21
+    state: standard_wall_21
   - type: Icon
-    state: stan21
+    state: standard_wall_21
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
+  parent: RMCERTShuttleWallStandard
   id: RMCERTShuttleWallStandard21
   suffix: 21
   components:
   - type: Sprite
-    state: stan22
+    state: standard_wall_22
   - type: Icon
-    state: stan22
+    state: standard_wall_22
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
+  parent: RMCERTShuttleWallStandard
   id: RMCERTShuttleWallStandard22
   suffix: 22
   components:
   - type: Sprite
-    state: stan23
+    state: standard_wall_23
   - type: Icon
-    state: stan23
+    state: standard_wall_23
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
+  parent: RMCERTShuttleWallStandard
   id: RMCERTShuttleWallStandard23
   suffix: 23
   components:
   - type: Sprite
-    state: stan25
+    state: standard_wall_25
   - type: Icon
-    state: stan25
+    state: standard_wall_25
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
+  parent: RMCERTShuttleWallStandard
   id: RMCERTShuttleWallStandard24
   suffix: 24
   components:
   - type: Sprite
-    state: stan27
+    state: standard_wall_27
   - type: Icon
-    state: stan27
+    state: standard_wall_27
   - type: Occluder
     enabled: false
 
+#WeYa ERT Shuttle
+
 - type: entity
+  abstract: true
   parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallWhiteEngineLeft
+  id: RMCERTShuttleWallWeYa
+  name: WeYa Shuttle Wall
+
+- type: entity
+  parent: RMCERTShuttleWallWeYa
+  id: RMCERTShuttleWallWeYaEngineLeft
+  name: WeYa Shuttle Engine
   suffix: Left
   components:
   - type: Sprite
-    state: wy_leftengine
+    state: weya_left_engine
   - type: Icon
-    state: wy_leftengine
+    state: weya_left_engine
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallWhiteEngineRight
+  parent: RMCERTShuttleWallWeYa
+  id: RMCERTShuttleWallWeYaEngineRight
+  name: WeYa Shuttle Engine
   suffix: Right
   components:
   - type: Sprite
-    state: wy_rightengine
+    state: weya_right_engine
   - type: Icon
-    state: wy_rightengine
+    state: weya_right_engine
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallWhite1
-  suffix: 1
+  parent: RMCERTShuttleWallWeYa
+  id: RMCERTShuttleWallWeYa01
+  suffix: 01
   components:
   - type: Sprite
-    state: wy1
+    state: weya_wall_01
   - type: Icon
-    state: wy1
+    state: weya_wall_01
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallWhite2
-  suffix: 2
+  parent: RMCERTShuttleWallWeYa
+  id: RMCERTShuttleWallWeYa02
+  suffix: 02
   components:
   - type: Sprite
-    state: wy2
+    state: weya_wall_02
   - type: Icon
-    state: wy2
+    state: weya_wall_02
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallWhite3
-  suffix: 3
+  parent: RMCERTShuttleWallWeYa
+  id: RMCERTShuttleWallWeYa03
+  suffix: 03
   components:
   - type: Sprite
-    state: wy3
+    state: weya_wall_03
   - type: Icon
-    state: wy3
+    state: weya_wall_03
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallWhite4
-  suffix: 4
+  parent: RMCERTShuttleWallWeYa
+  id: RMCERTShuttleWallWeYa04
+  suffix: 04
   components:
   - type: Sprite
-    state: wy4
+    state: weya_wall_04
   - type: Icon
-    state: wy4
+    state: weya_wall_04
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallWhite5
-  suffix: 5
+  parent: RMCERTShuttleWallWeYa
+  id: RMCERTShuttleWallWeYa05
+  suffix: 05
   components:
   - type: Sprite
-    state: wy5
+    state: weya_wall_05
   - type: Icon
-    state: wy5
+    state: weya_wall_05
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallWhite6
-  suffix: 6
+  parent: RMCERTShuttleWallWeYa
+  id: RMCERTShuttleWallWeYa06
+  suffix: 06
   components:
   - type: Sprite
-    state: wy8
+    state: weya_wall_08
   - type: Icon
-    state: wy8
+    state: weya_wall_08
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallWhite7
-  suffix: 7
+  parent: RMCERTShuttleWallWeYa
+  id: RMCERTShuttleWallWeYa07
+  suffix: 07
   components:
   - type: Sprite
-    state: wy9
+    state: weya_wall_09
   - type: Icon
-    state: wy9
+    state: weya_wall_09
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallWhite8
-  suffix: 8
+  parent: RMCERTShuttleWallWeYa
+  id: RMCERTShuttleWallWeYa08
+  suffix: 08
   components:
   - type: Sprite
-    state: wy12
+    state: weya_wall_12
   - type: Icon
-    state: wy12
+    state: weya_wall_12
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallWhite9
-  suffix: 9
+  parent: RMCERTShuttleWallWeYa
+  id: RMCERTShuttleWallWeYa09
+  suffix: 09
   components:
   - type: Sprite
-    state: wy13
+    state: weya_wall_13
   - type: Icon
-    state: wy13
+    state: weya_wall_13
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallWhite10
+  parent: RMCERTShuttleWallWeYa
+  id: RMCERTShuttleWallWeYa10
   suffix: 10
   components:
   - type: Sprite
-    state: wy14
+    state: weya_wall_14
   - type: Icon
-    state: wy14
+    state: weya_wall_14
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallWhite11
+  parent: RMCERTShuttleWallWeYa
+  id: RMCERTShuttleWallWeYa11
   suffix: 11
   components:
   - type: Sprite
-    state: wy15
+    state: weya_wall_15
   - type: Icon
-    state: wy15
+    state: weya_wall_15
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallWhite12
+  parent: RMCERTShuttleWallWeYa
+  id: RMCERTShuttleWallWeYa12
   suffix: 12
   components:
   - type: Sprite
-    state: wy16
+    state: weya_wall_16
   - type: Icon
-    state: wy16
+    state: weya_wall_16
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallWhite13
+  parent: RMCERTShuttleWallWeYa
+  id: RMCERTShuttleWallWeYa13
   suffix: 13
   components:
   - type: Sprite
-    state: wy17
+    state: weya_wall_17
   - type: Icon
-    state: wy17
+    state: weya_wall_17
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallWhite14
+  parent: RMCERTShuttleWallWeYa
+  id: RMCERTShuttleWallWeYa14
   suffix: 14
   components:
   - type: Sprite
-    state: wy20
+    state: weya_wall_18
   - type: Icon
-    state: wy20
+    state: weya_wall_18
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallWhite15
+  parent: RMCERTShuttleWallWeYa
+  id: RMCERTShuttleWallWeYa15
   suffix: 15
   components:
   - type: Sprite
-    state: wy21
+    state: weya_wall_19
   - type: Icon
-    state: wy21
+    state: weya_wall_19
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallWhite16
+  parent: RMCERTShuttleWallWeYa
+  id: RMCERTShuttleWallWeYa16
   suffix: 16
   components:
   - type: Sprite
-    state: wy22
+    state: weya_wall_20
   - type: Icon
-    state: wy22
+    state: weya_wall_20
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallWhite17
+  parent: RMCERTShuttleWallWeYa
+  id: RMCERTShuttleWallWeYa17
   suffix: 17
   components:
   - type: Sprite
-    state: wy23
+    state: weya_wall_21
   - type: Icon
-    state: wy23
+    state: weya_wall_21
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallWhite18
+  parent: RMCERTShuttleWallWeYa
+  id: RMCERTShuttleWallWeYa18
   suffix: 18
   components:
   - type: Sprite
-    state: wy25
+    state: weya_wall_22
   - type: Icon
-    state: wy25
+    state: weya_wall_22
 
 - type: entity
-  parent: RMCBaseERTShuttleWall
-  id: RMCERTShuttleWallWhite19
+  parent: RMCERTShuttleWallWeYa
+  id: RMCERTShuttleWallWeYa19
   suffix: 19
   components:
   - type: Sprite
-    state: wy27
+    state: weya_wall_23
   - type: Icon
-    state: wy27
+    state: weya_wall_23
+
+- type: entity
+  parent: RMCERTShuttleWallWeYa
+  id: RMCERTShuttleWallWeYa20
+  suffix: 20
+  components:
+  - type: Sprite
+    state: weya_wall_25
+  - type: Icon
+    state: weya_wall_25
+
+- type: entity
+  parent: RMCERTShuttleWallWeYa
+  id: RMCERTShuttleWallWeYa21
+  suffix: 21
+  components:
+  - type: Sprite
+    state: weya_wall_27
+  - type: Icon
+    state: weya_wall_27
   - type: Occluder
     enabled: false
+
+#SPP ERT Shuttle
+
+- type: entity
+  abstract: true
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallSPP
+  name: SPP Shuttle Wall
+
+- type: entity
+  parent: RMCERTShuttleWallSPP
+  id: RMCERTShuttleWallSPPEngineLeft
+  name: SPP Shuttle Engine
+  suffix: Left
+  components:
+  - type: Sprite
+    state: spp_left_engine
+  - type: Icon
+    state: spp_left_engine
+
+- type: entity
+  parent: RMCERTShuttleWallSPP
+  id: RMCERTShuttleWallSPPEngineRight
+  name: SPP Shuttle Engine
+  suffix: Right
+  components:
+  - type: Sprite
+    state: spp_right_engine
+  - type: Icon
+    state: spp_right_engine
+
+- type: entity
+  parent: RMCERTShuttleWallSPP
+  id: RMCERTShuttleWallSPP01
+  suffix: 01
+  components:
+  - type: Sprite
+    state: spp_wall_01
+  - type: Icon
+    state: spp_wall_01
+
+- type: entity
+  parent: RMCERTShuttleWallSPP
+  id: RMCERTShuttleWallSPP02
+  suffix: 02
+  components:
+  - type: Sprite
+    state: spp_wall_02
+  - type: Icon
+    state: spp_wall_02
+
+- type: entity
+  parent: RMCERTShuttleWallSPP
+  id: RMCERTShuttleWallSPP03
+  suffix: 03
+  components:
+  - type: Sprite
+    state: spp_wall_03
+  - type: Icon
+    state: spp_wall_03
+
+- type: entity
+  parent: RMCERTShuttleWallSPP
+  id: RMCERTShuttleWallSPP04
+  suffix: 04
+  components:
+  - type: Sprite
+    state: spp_wall_04
+  - type: Icon
+    state: spp_wall_04
+
+- type: entity
+  parent: RMCERTShuttleWallSPP
+  id: RMCERTShuttleWallSPP05
+  suffix: 05
+  components:
+  - type: Sprite
+    state: spp_wall_05
+  - type: Icon
+    state: spp_wall_05
+
+- type: entity
+  parent: RMCERTShuttleWallSPP
+  id: RMCERTShuttleWallSPP06
+  suffix: 06
+  components:
+  - type: Sprite
+    state: spp_wall_08
+  - type: Icon
+    state: spp_wall_08
+
+- type: entity
+  parent: RMCERTShuttleWallSPP
+  id: RMCERTShuttleWallSPP07
+  suffix: 07
+  components:
+  - type: Sprite
+    state: spp_wall_09
+  - type: Icon
+    state: spp_wall_09
+
+- type: entity
+  parent: RMCERTShuttleWallSPP
+  id: RMCERTShuttleWallSPP08
+  suffix: 08
+  components:
+  - type: Sprite
+    state: spp_wall_16
+  - type: Icon
+    state: spp_wall_16
+
+- type: entity
+  parent: RMCERTShuttleWallSPP
+  id: RMCERTShuttleWallSPP09
+  suffix: 09
+  components:
+  - type: Sprite
+    state: spp_wall_20
+  - type: Icon
+    state: spp_wall_20
+
+- type: entity
+  parent: RMCERTShuttleWallSPP
+  id: RMCERTShuttleWallSPP10
+  suffix: 10
+  components:
+  - type: Sprite
+    state: spp_wall_21
+  - type: Icon
+    state: spp_wall_21
+
+- type: entity
+  parent: RMCERTShuttleWallSPP
+  id: RMCERTShuttleWallSPP11
+  suffix: 11
+  components:
+  - type: Sprite
+    state: spp_wall_22
+  - type: Icon
+    state: spp_wall_22
+
+- type: entity
+  parent: RMCERTShuttleWallSPP
+  id: RMCERTShuttleWallSPP12
+  suffix: 12
+  components:
+  - type: Sprite
+    state: spp_wall_23
+  - type: Icon
+    state: spp_wall_23
+
+- type: entity
+  parent: RMCERTShuttleWallSPP
+  id: RMCERTShuttleWallSPP13
+  suffix: 13
+  components:
+  - type: Sprite
+    state: spp_wall_25
+  - type: Icon
+    state: spp_wall_25
+
+- type: entity
+  parent: RMCERTShuttleWallSPP
+  id: RMCERTShuttleWallSPP14
+  suffix: 14
+  components:
+  - type: Sprite
+    state: spp_wall_27
+  - type: Icon
+    state: spp_wall_27
+  - type: Occluder
+    enabled: false
+
+#TSE ERT Shuttle
+
+- type: entity
+  abstract: true
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallTSE
+  name: TSE Shuttle Wall
+
+- type: entity
+  parent: RMCERTShuttleWallTSE
+  id: RMCERTShuttleWallTSEEngineLeft
+  name: TSE Shuttle Engine
+  suffix: Left
+  components:
+  - type: Sprite
+    state: tse_left_engine
+  - type: Icon
+    state: tse_left_engine
+
+- type: entity
+  parent: RMCERTShuttleWallTSE
+  id: RMCERTShuttleWallTSEEngineRight
+  name: TSE Shuttle Engine
+  suffix: Right
+  components:
+  - type: Sprite
+    state: tse_right_engine
+  - type: Icon
+    state: tse_right_engine
+
+- type: entity
+  parent: RMCERTShuttleWallTSE
+  id: RMCERTShuttleWallTSE01
+  suffix: 01
+  components:
+  - type: Sprite
+    state: tse_wall_01
+  - type: Icon
+    state: tse_wall_01
+
+- type: entity
+  parent: RMCERTShuttleWallTSE
+  id: RMCERTShuttleWallTSE02
+  suffix: 02
+  components:
+  - type: Sprite
+    state: tse_wall_02
+  - type: Icon
+    state: tse_wall_02
+
+- type: entity
+  parent: RMCERTShuttleWallTSE
+  id: RMCERTShuttleWallTSE03
+  suffix: 03
+  components:
+  - type: Sprite
+    state: tse_wall_03
+  - type: Icon
+    state: tse_wall_03
+
+- type: entity
+  parent: RMCERTShuttleWallTSE
+  id: RMCERTShuttleWallTSE04
+  suffix: 04
+  components:
+  - type: Sprite
+    state: tse_wall_04
+  - type: Icon
+    state: tse_wall_04
+
+- type: entity
+  parent: RMCERTShuttleWallTSE
+  id: RMCERTShuttleWallTSE05
+  suffix: 05
+  components:
+  - type: Sprite
+    state: tse_wall_05
+  - type: Icon
+    state: tse_wall_05
+
+- type: entity
+  parent: RMCERTShuttleWallTSE
+  id: RMCERTShuttleWallTSE06
+  suffix: 06
+  components:
+  - type: Sprite
+    state: tse_wall_08
+  - type: Icon
+    state: tse_wall_08
+
+- type: entity
+  parent: RMCERTShuttleWallTSE
+  id: RMCERTShuttleWallTSE07
+  suffix: 07
+  components:
+  - type: Sprite
+    state: tse_wall_09
+  - type: Icon
+    state: tse_wall_09
+
+- type: entity
+  parent: RMCERTShuttleWallTSE
+  id: RMCERTShuttleWallTSE08
+  suffix: 08
+  components:
+  - type: Sprite
+    state: tse_wall_16
+  - type: Icon
+    state: tse_wall_16
+
+- type: entity
+  parent: RMCERTShuttleWallTSE
+  id: RMCERTShuttleWallTSE09
+  suffix: 09
+  components:
+  - type: Sprite
+    state: tse_wall_20
+  - type: Icon
+    state: tse_wall_20
+
+- type: entity
+  parent: RMCERTShuttleWallTSE
+  id: RMCERTShuttleWallTSE10
+  suffix: 10
+  components:
+  - type: Sprite
+    state: tse_wall_21
+  - type: Icon
+    state: tse_wall_21
+
+- type: entity
+  parent: RMCERTShuttleWallTSE
+  id: RMCERTShuttleWallTSE11
+  suffix: 11
+  components:
+  - type: Sprite
+    state: tse_wall_22
+  - type: Icon
+    state: tse_wall_22
+
+- type: entity
+  parent: RMCERTShuttleWallTSE
+  id: RMCERTShuttleWallTSE12
+  suffix: 12
+  components:
+  - type: Sprite
+    state: tse_wall_23
+  - type: Icon
+    state: tse_wall_23
+
+- type: entity
+  parent: RMCERTShuttleWallTSE
+  id: RMCERTShuttleWallTSE13
+  suffix: 13
+  components:
+  - type: Sprite
+    state: tse_wall_25
+  - type: Icon
+    state: tse_wall_25
+
+- type: entity
+  parent: RMCERTShuttleWallTSE
+  id: RMCERTShuttleWallTSE14
+  suffix: 14
+  components:
+  - type: Sprite
+    state: tse_wall_27
+  - type: Icon
+    state: tse_wall_27
+  - type: Occluder
+    enabled: false
+
+#Nightmare SPP Shuttle
+
+- type: entity
+  abstract: true
+  parent: RMCBaseERTShuttleWall
+  id: RMCERTShuttleWallNightmareSPP
+  name: Nightmare SPP Shuttle Wall
+
+- type: entity
+  parent: RMCERTShuttleWallNightmareSPP
+  id: RMCERTShuttleWallNightmareSPPEngineLeft01
+  name: Nightmare SPP Shuttle Engine
+  suffix: Left 01
+  components:
+  - type: Sprite
+    state: nightmare_spp_left_engine_01
+  - type: Icon
+    state: nightmare_spp_left_engine_01
+
+- type: entity
+  parent: RMCERTShuttleWallNightmareSPP
+  id: RMCERTShuttleWallNightmareSPPEngineLeft02
+  name: Nightmare SPP Shuttle Engine
+  suffix: Left 02
+  components:
+  - type: Sprite
+    state: nightmare_spp_left_engine_02
+  - type: Icon
+    state: nightmare_spp_left_engine_02
+
+- type: entity
+  parent: RMCERTShuttleWallNightmareSPP
+  id: RMCERTShuttleWallNightmareSPPEngineRight01
+  name: Nightmare SPP Shuttle Engine
+  suffix: Right 01
+  components:
+  - type: Sprite
+    state: nightmare_spp_right_engine_01
+  - type: Icon
+    state: nightmare_spp_right_engine_01
+
+- type: entity
+  parent: RMCERTShuttleWallNightmareSPP
+  id: RMCERTShuttleWallNightmareSPPEngineRight02
+  name: Nightmare SPP Shuttle Engine
+  suffix: Right 02
+  components:
+  - type: Sprite
+    state: nightmare_spp_right_engine_02
+  - type: Icon
+    state: nightmare_spp_right_engine_02
+
+- type: entity
+  parent: RMCERTShuttleWallNightmareSPP
+  id: RMCERTShuttleWallNightmareSPP01
+  suffix: 01
+  components:
+  - type: Sprite
+    state: nightmare_spp_wall_01
+  - type: Icon
+    state: nightmare_spp_wall_01
+
+- type: entity
+  parent: RMCERTShuttleWallNightmareSPP
+  id: RMCERTShuttleWallNightmareSPP02
+  suffix: 02
+  components:
+  - type: Sprite
+    state: nightmare_spp_wall_02
+  - type: Icon
+    state: nightmare_spp_wall_02
+
+- type: entity
+  parent: RMCERTShuttleWallNightmareSPP
+  id: RMCERTShuttleWallNightmareSPP03
+  suffix: 03
+  components:
+  - type: Sprite
+    state: nightmare_spp_wall_03
+  - type: Icon
+    state: nightmare_spp_wall_03
+
+- type: entity
+  parent: RMCERTShuttleWallNightmareSPP
+  id: RMCERTShuttleWallNightmareSPP04
+  suffix: 04
+  components:
+  - type: Sprite
+    state: nightmare_spp_wall_04
+  - type: Icon
+    state: nightmare_spp_wall_04
+
+- type: entity
+  parent: RMCERTShuttleWallNightmareSPP
+  id: RMCERTShuttleWallNightmareSPP05
+  suffix: 05
+  components:
+  - type: Sprite
+    state: nightmare_spp_wall_05
+  - type: Icon
+    state: nightmare_spp_wall_05
+
+- type: entity
+  parent: RMCERTShuttleWallNightmareSPP
+  id: RMCERTShuttleWallNightmareSPP06
+  suffix: 06
+  components:
+  - type: Sprite
+    state: nightmare_spp_wall_06
+  - type: Icon
+    state: nightmare_spp_wall_06
+
+- type: entity
+  parent: RMCERTShuttleWallNightmareSPP
+  id: RMCERTShuttleWallNightmareSPP07
+  suffix: 07
+  components:
+  - type: Sprite
+    state: nightmare_spp_wall_07
+  - type: Icon
+    state: nightmare_spp_wall_07
+
+- type: entity
+  parent: RMCERTShuttleWallNightmareSPP
+  id: RMCERTShuttleWallNightmareSPP08
+  suffix: 08
+  components:
+  - type: Sprite
+    state: nightmare_spp_wall_08
+  - type: Icon
+    state: nightmare_spp_wall_08
+
+- type: entity
+  parent: RMCERTShuttleWallNightmareSPP
+  id: RMCERTShuttleWallNightmareSPP09
+  suffix: 09
+  components:
+  - type: Sprite
+    state: nightmare_spp_wall_11
+  - type: Icon
+    state: nightmare_spp_wall_11
+
+- type: entity
+  parent: RMCERTShuttleWallNightmareSPP
+  id: RMCERTShuttleWallNightmareSPP10
+  suffix: 10
+  components:
+  - type: Sprite
+    state: nightmare_spp_wall_12
+  - type: Icon
+    state: nightmare_spp_wall_12
+
+- type: entity
+  parent: RMCERTShuttleWallNightmareSPP
+  id: RMCERTShuttleWallNightmareSPP11
+  suffix: 11
+  components:
+  - type: Sprite
+    state: nightmare_spp_wall_13
+  - type: Icon
+    state: nightmare_spp_wall_13
+
+- type: entity
+  parent: RMCERTShuttleWallNightmareSPP
+  id: RMCERTShuttleWallNightmareSPP12
+  suffix: 12
+  components:
+  - type: Sprite
+    state: nightmare_spp_wall_14
+  - type: Icon
+    state: nightmare_spp_wall_14
+
+- type: entity
+  parent: RMCERTShuttleWallNightmareSPP
+  id: RMCERTShuttleWallNightmareSPP13
+  suffix: 13
+  components:
+  - type: Sprite
+    state: nightmare_spp_wall_15
+  - type: Icon
+    state: nightmare_spp_wall_15
+
+- type: entity
+  parent: RMCERTShuttleWallNightmareSPP
+  id: RMCERTShuttleWallNightmareSPP14
+  suffix: 14
+  components:
+  - type: Sprite
+    state: nightmare_spp_wall_16
+  - type: Icon
+    state: nightmare_spp_wall_16
+
+- type: entity
+  parent: RMCERTShuttleWallNightmareSPP
+  id: RMCERTShuttleWallNightmareSPP15
+  suffix: 15
+  components:
+  - type: Sprite
+    state: nightmare_spp_wall_20
+  - type: Icon
+    state: nightmare_spp_wall_20

@@ -45,6 +45,52 @@
   - type: RMCPodDoor
 
 - type: entity
+  parent: RMCShutterBaseIndestructible
+  id: RMCPodDoorNonOccluderIndestructible
+  abstract: true
+  name: podlock
+  description: That looks like it doesn't open easily.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Shutters/poddoor.rsi
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49" # don't want this colliding with walls or they won't close
+        density: 100
+        mask:
+        - FullTileMask
+        layer:
+        - FullTileLayer
+  - type: AccessReader
+  - type: Door
+    canPry: false # TODO RMC14
+    crushDamage:
+      types:
+        Blunt: 25 # yowch
+    performCollisionCheck: false
+    canCrush: false
+  - type: Appearance
+  - type: RadiationBlocker
+    resistance: 8
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronics ]
+  #- type: Construction
+  #  graph: BlastDoor
+  #  node: blastdoor
+  #  containers:
+  #  - board
+  - type: StaticPrice
+    price: 280
+  - type: RMCPodDoor
+
+- type: entity
   parent:
   - RMCPodDoorIndestructible
   - RMCShutterBase
@@ -64,6 +110,24 @@
     color: "#451e5eb8"
 
 - type: entity
+  parent: RMCPodDoor
+  id: RMCPodDoorHybrisaWhite
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Shutters/Hybrisa/whitepoddoor.rsi
+  - type: MinimapColor
+    color: "#451e5eb8"
+
+- type: entity
+  parent: RMCPodDoor
+  id: RMCPodDoorHybrisaRed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Shutters/Hybrisa/redpoddoor.rsi
+  - type: MinimapColor
+    color: "#451e5eb8"
+
+- type: entity
   parent: RMCPodDoorIndestructible
   id: RMCPodDoorAlmayerIndestructible
   components:
@@ -71,6 +135,37 @@
     sprite: _RMC14/Structures/Doors/Shutters/Almayer/poddoor.rsi
   - type: MinimapColor
     color: "#451e5eb8"
+
+- type: entity
+  parent: RMCPodDoorIndestructible
+  id: RMCPodDoorAlmayerContainmentIndestructible
+  name: cell wall
+  description: A metal wall used to separate rooms and make up the ship.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Shutters/Almayer/containment.rsi
+  - type: MinimapColor
+    color: "#451e5eb8"
+
+- type: entity
+  parent: RMCPodDoorIndestructible
+  id: RMCPodDoorHybrisaIndestructible
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Shutters/Hybrisa/redpoddoor.rsi
+  - type: MinimapColor
+    color: "#451e5eb8"
+
+- type: entity
+  parent: RMCPodDoorIndestructible
+  id: RMCPodDoorHybrisaIndestructibleUltra
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Shutters/Hybrisa/ultra_reinforced.rsi # the sprites on these are a little fucked but ive spent 2 weeks porting this fucking map and im not wasting time fixing an animated sprite that is 1 tile too long someone else do this please im going mad
+  - type: MinimapColor
+    color: "#451e5eb8"
+  - type: Corrodible
+    isCorrodible: false
 
 - type: entity
   parent: RMCPodDoorAlmayer

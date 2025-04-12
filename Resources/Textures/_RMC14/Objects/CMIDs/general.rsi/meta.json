@@ -1,0 +1,26 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a2d5ca6e69725341f0fa261a4a3f89c737e843b3/icons/obj/items/card.dmi, Other sprites are made by Merfarukier on Discord replicating onmob id.dmi https://github.com/cmss13-devs/cmss13/blob/a2d5ca6e69725341f0fa261a4a3f89c737e843b3/icons/obj/mob/humans/onmob/ids.dmi",
+    "size": {
+      "x": 32,
+      "y": 32
+    },
+    "states": [
+      {
+        "name": "default-inhand-right",
+        "directions": 4
+      },
+      {
+        "name": "equipped-IDCARD",
+        "directions": 4
+      },
+      {
+        "name": "general"
+      },
+      {
+        "name": "default-inhand-left",
+        "directions": 4
+      }
+    ]
+  }

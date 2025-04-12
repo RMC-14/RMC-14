@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Commendations;
+﻿using Content.Shared._RMC14.AlertLevel;
+using Content.Shared._RMC14.Commendations;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Evacuation;
 using Content.Shared._RMC14.Survivor;
@@ -13,6 +14,7 @@ namespace Content.Shared._RMC14.Marines.ControlComputer;
 
 public abstract class SharedMarineControlComputerSystem : EntitySystem
 {
+    [Dependency] private readonly RMCAlertLevelSystem _alertLevel = default!;
     [Dependency] private readonly SharedCommendationSystem _commendation = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedEvacuationSystem _evacuation = default!;
@@ -39,10 +41,12 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         SubscribeLocalEvent<MarineControlComputerComponent, MarineControlComputerMedalMarineEvent>(OnComputerMedalMarine);
         SubscribeLocalEvent<MarineControlComputerComponent, MarineControlComputerMedalNameEvent>(OnComputerMedalName);
         SubscribeLocalEvent<MarineControlComputerComponent, MarineControlComputerMedalMessageEvent>(OnComputerMedalMessage);
+        SubscribeLocalEvent<MarineControlComputerComponent, MarineControlComputerAlertEvent>(OnComputerAlert);
 
         Subs.BuiEvents<MarineControlComputerComponent>(MarineControlComputerUi.Key,
             subs =>
             {
+                subs.Event<MarineControlComputerAlertLevelMsg>(OnAlertLevel);
                 subs.Event<MarineControlComputerMedalMsg>(OnMedal);
                 subs.Event<MarineControlComputerToggleEvacuationMsg>(OnToggleEvacuationMsg);
             });
@@ -116,14 +120,48 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         _popup.PopupCursor("Medal awarded", actor.Value, PopupType.Large);
     }
 
+    private void OnComputerAlert(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerAlertEvent args)
+    {
+        _alertLevel.Set(args.Level, GetEntity(args.User));
+    }
+
+    private void OnAlertLevel(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerAlertLevelMsg args)
+    {
+        var current = _alertLevel.Get();
+        var options = new List<DialogOption>();
+        foreach (var level in Enum.GetValues<RMCAlertLevels>())
+        {
+            if (level == current)
+                continue;
+
+            if (level >= RMCAlertLevels.Red)
+                continue;
+
+            var text = Loc.GetString($"rmc-alert-{level.ToString().ToLowerInvariant()}");
+            options.Add(new DialogOption(text, new MarineControlComputerAlertEvent(GetNetEntity(args.Actor), level)));
+        }
+
+        _dialog.OpenOptions(ent,
+            args.Actor,
+            Loc.GetString("rmc-alert-level"),
+            options,
+            Loc.GetString("rmc-alert-level-which")
+        );
+    }
+
     private void OnMedal(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerMedalMsg args)
     {
-        if (!TryComp(args.Actor, out ActorComponent? actorComp))
+        GiveMedal(ent, args.Actor);
+    }
+
+    public void GiveMedal(EntityUid computer, EntityUid actor)
+    {
+        if (!TryComp(actor, out ActorComponent? actorComp))
             return;
 
-        if (!HasComp<CommendationGiverComponent>(args.Actor))
+        if (!HasComp<CommendationGiverComponent>(actor))
         {
-            _popup.PopupClient("Only a Senior Officer can award medals!", args.Actor, PopupType.MediumCaution);
+            _popup.PopupClient("Only a Senior Officer can award medals!", actor, PopupType.MediumCaution);
             return;
         }
 
@@ -131,7 +169,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
             return;
 
         // TODO RMC14 gibbed marines
-        var actor = GetNetEntity(args.Actor);
+        var netActor = GetNetEntity(actor);
         var options = new List<DialogOption>();
         var receivers = EntityQueryEnumerator<CommendationReceiverComponent, MarineComponent>();
         while (receivers.MoveNext(out var uid, out var receiver, out _))
@@ -142,16 +180,16 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
                 continue;
             }
 
-            if (HasComp<SurvivorComponent>(uid))
+            if (HasComp<RMCSurvivorComponent>(uid))
                 continue;
 
-            if (uid == args.Actor)
+            if (uid == actor)
                 continue;
 
-            options.Add(new DialogOption(Name(uid), new MarineControlComputerMedalMarineEvent(actor, GetNetEntity(uid))));
+            options.Add(new DialogOption(Name(uid), new MarineControlComputerMedalMarineEvent(netActor, GetNetEntity(uid))));
         }
 
-        _dialog.OpenOptions(ent, args.Actor, "Medal Recipient", options, "Who do you want to award a medal to?");
+        _dialog.OpenOptions(computer, actor, "Medal Recipient", options, "Who do you want to award a medal to?");
     }
 
     private void OnToggleEvacuationMsg(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerToggleEvacuationMsg args)

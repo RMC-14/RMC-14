@@ -2,11 +2,11 @@ name: Build & Test Debug
 
 on:
   push:
-    branches: [ master, staging, trying ]
+    branches: [ master, staging, stable ]
   merge_group:
   pull_request:
     types: [ opened, reopened, synchronize, ready_for_review ]
-    branches: [ master ]
+    branches: [ master, staging, stable ]
 
 jobs:
   build:
@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: [ubuntu-22.04]
+        os: [ubuntu-latest]
 
     runs-on: ${{ matrix.os }}
 
@@ -37,7 +37,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v3.2.0
       with:
-        dotnet-version: 8.0.204
+        dotnet-version: 9.0.x
 
     - name: Install dependencies
       run: dotnet restore

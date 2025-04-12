@@ -24,6 +24,7 @@
       RMCSkillMedical: 1
   - type: Pill
   - type: Food
+    delay: 0
     forceFeedDelay: 1
     transferAmount: null
     eatMessage: food-swallow
@@ -44,6 +45,10 @@
   - type: Tag
     tags:
     - Pill
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 # TODO RMC14 these need to have a random state per round
 - type: entity

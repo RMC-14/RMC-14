@@ -31,7 +31,7 @@ public sealed class DialogSystem : EntitySystem
         RaiseLocalEvent(ent, ref ev);
 
         if (option.Event != null)
-            RaiseLocalEvent(ent, ref option.Event);
+            RaiseLocalEvent(ent, ref option.Event, true);
     }
 
     private void OnDialogInput(Entity<DialogComponent> ent, ref DialogInputBuiMsg args)

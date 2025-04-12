@@ -49,7 +49,10 @@ public sealed class FoldableClothingSystem : EntitySystem
                 _itemSystem.SetHeldPrefix(ent.Owner, ent.Comp.FoldedHeldPrefix, false, itemComp);
 
             if (TryComp<HideLayerClothingComponent>(ent.Owner, out var hideLayerComp))
+            {
                 hideLayerComp.Slots = ent.Comp.FoldedHideLayers;
+                _clothingSystem.CheckEquipmentForLayerHide(ent.Owner, Transform(ent.Owner).ParentUid); // RMC14
+            }
 
         }
         else
@@ -64,7 +67,10 @@ public sealed class FoldableClothingSystem : EntitySystem
                 _itemSystem.SetHeldPrefix(ent.Owner, null, false, itemComp);
 
             if (TryComp<HideLayerClothingComponent>(ent.Owner, out var hideLayerComp))
+            {
                 hideLayerComp.Slots = ent.Comp.UnfoldedHideLayers;
+                _clothingSystem.CheckEquipmentForLayerHide(ent.Owner, Transform(ent.Owner).ParentUid); // RMC14
+            }
 
         }
     }

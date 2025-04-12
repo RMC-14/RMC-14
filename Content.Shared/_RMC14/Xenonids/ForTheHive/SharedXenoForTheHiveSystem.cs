@@ -20,6 +20,7 @@ using Content.Shared.Interaction;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Robust.Shared.Map;
 using Content.Shared.Movement.Systems;
+using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.ForTheHive;
 
@@ -216,7 +217,7 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
 
                         var damage = ((burnRange - distance) * maxBurnDamage) / burnRange;
 
-                        _damage.TryChangeDamage(mob, active.BaseDamage * damage, true, origin: xeno);
+                        _damage.TryChangeDamage(mob, active.BaseDamage * damage, true, origin: xeno, tool: xeno);
 
                     }
 
@@ -235,14 +236,14 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
                     }
 
                     //TODO CM gibs the runner
-                    _damage.TryChangeDamage(xeno, active.BaseDamage * 5000, true);
-                    _audio.PlayPvs(active.KaboomSound, xeno);
-                    RemCompDeferred<ActiveForTheHiveComponent>(xeno);
-
                     if (GetHiveCore(xeno, out var core))
                         ForTheHiveRespawn(xeno, active.CoreSpawnTime);
                     else
                         ForTheHiveRespawn(xeno, active.CorpseSpawnTime, true, origin);
+
+                    _audio.PlayStatic(active.KaboomSound, Filter.PvsExcept(xeno), origin, true);
+                    QueueDel(xeno);
+                    RemCompDeferred<ActiveForTheHiveComponent>(xeno);
                 }
             }
         }

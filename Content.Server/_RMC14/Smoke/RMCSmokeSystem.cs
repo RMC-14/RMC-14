@@ -11,7 +11,7 @@ namespace Content.Server._RMC14.Smoke;
 public sealed class RMCSmokeSystem : SharedRMCSmokeSystem
 {
     [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
 
     private readonly List<(MapGridComponent Grid, TileRef Tile)> _tiles = new();
 
