@@ -466,7 +466,7 @@ public sealed class MobThresholdSystem : EntitySystem
     {
         if (!component.AllowRevives && component.CurrentThresholdState == MobState.Dead)
         {
-            var ev = new BeforeThresholdMobStateUpdateEvent(target, MobState.Dead);
+            var ev = new BeforeThresholdMobStateUpdateEvent(target, args.Component.CurrentState, MobState.Dead);
             RaiseLocalEvent(target, ev);
             if (ev.Cancelled)
                 return;
@@ -475,7 +475,7 @@ public sealed class MobThresholdSystem : EntitySystem
         }
         else if (component.CurrentThresholdState != MobState.Invalid)
         {
-            var ev = new BeforeThresholdMobStateUpdateEvent(target, component.CurrentThresholdState);
+            var ev = new BeforeThresholdMobStateUpdateEvent(target, args.Component.CurrentState, component.CurrentThresholdState);
             RaiseLocalEvent(target, ev);
             if (ev.Cancelled)
                 return;

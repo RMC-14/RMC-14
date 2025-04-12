@@ -71,7 +71,8 @@ public sealed class PainKnockOutSystem : EntitySystem
 
     private void OnThresholdMobStateChangeCancel(Entity<PainKnockOutComponent> ent, ref BeforeThresholdMobStateUpdateEvent args)
     {
-        if (args.ChangeMobStateTo != MobState.Dead)
-            args.Cancel();
+        if (args.ChangeMobStateTo == MobState.Dead || args.ChangeMobStateFrom == MobState.Dead)
+            return;
+        args.Cancel();
     }
 }
