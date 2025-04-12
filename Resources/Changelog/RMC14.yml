@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: You can now freely switch hands and wield/unwield while deploying and
-      using a Bipod.
-    type: Tweak
-  id: 1068
-  time: '2024-12-06T00:01:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5052
-- author: Rainbeon
-  changes:
-  - message: The buttons for choosing resin structures for Drone castes are now much
-      more responsive. It will now immediately select the option you click on, instead
-      of cancelling if you drag your mouse away before letting go of the mouse button.
-    type: Tweak
-  id: 1069
-  time: '2024-12-06T00:00:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5050
 - author: CyberTropic
   changes:
   - message: Strange plants on LV now emit light.
@@ -5366,5 +5349,20 @@
   id: 1570
   time: '2025-04-12T05:46:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6124
+- author: Ian321
+  changes:
+  - message: Fixed Intelligence Officers not having pilot access.
+    type: Fix
+  id: 1571
+  time: '2025-04-12T05:56:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6101
+- author: Dutch-VanDerLinde
+  changes:
+  - message: You can now toggle helmet accessories by pressing E or using a verb on
+      it.
+    type: Add
+  id: 1572
+  time: '2025-04-12T05:57:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6117
 Name: RMC14
 Order: -1
