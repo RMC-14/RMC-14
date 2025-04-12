@@ -1,6 +1,5 @@
 using System.Globalization;
-using System.Linq;
-using Content.Server._RMC14.Marines;
+using Content.Server._RMC14.Announce;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.Ghost;
@@ -11,10 +10,7 @@ using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Server.StationRecords;
 using Content.Server.StationRecords.Systems;
-using Content.Shared._RMC14.ARES;
 using Content.Shared._RMC14.Cryostorage;
-using Content.Shared._RMC14.Marines.Roles.Ranks;
-using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared.Access.Systems;
 using Content.Shared.Bed.Cryostorage;
 using Content.Shared.Chat;
@@ -23,8 +19,6 @@ using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Content.Shared.Hands.Components;
 using Content.Shared.Mind.Components;
-using Content.Shared.Radio;
-using Content.Shared.Roles;
 using Content.Shared.StationRecords;
 using Content.Shared.UserInterface;
 using Robust.Server.Audio;
@@ -35,7 +29,6 @@ using Robust.Shared.Containers;
 using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.Bed.Cryostorage;
 
@@ -58,14 +51,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
     [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly ARESSystem _ares = default!;
-    [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
-    [Dependency] private readonly SharedRankSystem _rankSystem = default!;
-    [Dependency] private readonly SquadSystem _squad = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-
-    [ValidatePrototypeId<RadioChannelPrototype>]
-    public readonly ProtoId<RadioChannelPrototype> CommonChannel = "MarineCommon";
+    [Dependency] private readonly MarinePresenceAnnounceSystem _marinePresenceAnnounce = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -254,92 +240,18 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
             _stationRecords.RemoveRecord(key, stationRecords);
         }
 
-        // RMC14 start
-        var ares = _ares.EnsureARES();
-        var rankName = _rankSystem.GetSpeakerRankName(ent.Owner) ?? Name(ent.Owner);
-        JobPrototype? jobProto = null;
-        if (recordId != null)
-        {
-            var key = new StationRecordKey(recordId.Value, station.Value);
-            if (_stationRecords.TryGetRecord<GeneralStationRecord>(key, out var entry, stationRecords) && !string.IsNullOrWhiteSpace(entry.JobPrototype))
-                _prototypeManager.TryIndex(entry.JobPrototype, out jobProto);
-        }
-
-        // Getting all department prototypes
-        var departmentPrototypes = _prototypeManager.EnumeratePrototypes<DepartmentPrototype>().ToList();
-
-        // To track channels that have already been processed, prevents spam in the same channel multiple times
-        var processedChannels = new HashSet<ProtoId<RadioChannelPrototype>>();
-        bool departmentChannelFound = false;
-        bool isHead = false;
-
-        if (jobProto != null)
-        {
-            // We are trying to send a message about earlyleave to the radio channel of the departments to which the player belongs
-            foreach (var department in departmentPrototypes)
-            {
-                if (!department.Roles.Contains(jobProto.ID))
-                    continue;
-
-                // Check if this role is a department head
-                if (department.HeadOfDepartment == jobProto.ID)
-                {
-                    isHead = true;
-                }
-
-                var channelId = department.DepartmentRadio;
-
-                // If the department doesn't have a channel, but it's a combat marine, we try to get his squad channel
-                if (channelId == null && _squad.TryGetMemberSquad(ent.Owner, out var squad) && squad.Comp.Radio != null)
-                {
-                    channelId = squad.Comp.Radio;
-                }
-
-                // If after all checks the channel is still not found or we have already processed this channel, skip it
-                if (channelId == null || !processedChannels.Add(channelId.Value))
-                    continue;
-
-                departmentChannelFound = true;
-
-                _marineAnnounce.AnnounceRadio(ares,
-                    Loc.GetString("earlyleave-cryo-announcement",
-                    ("character", rankName),
-                    ("entity", ent.Owner),
-                    ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName))),
-                    channelId.Value);
-            }
-
-            // If no department channel found OR the player is the head of the department, send to CommonChannel
-            if (!departmentChannelFound || isHead)
-            {
-                _marineAnnounce.AnnounceRadio(ares,
-                    Loc.GetString("earlyleave-cryo-announcement",
-                    ("character", rankName),
-                    ("entity", ent.Owner),
-                    ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName))),
-                    CommonChannel);
-            }
-        }
-        else
-        {
-            _marineAnnounce.AnnounceRadio(ares,
-                    Loc.GetString("earlyleave-cryo-announcement",
-                    ("character", rankName),
-                    ("entity", ent.Owner),
-                    ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName))),
-                    CommonChannel);
-        }
-
-        //_chatSystem.DispatchStationAnnouncement(station.Value,
-        //    Loc.GetString(
-        //        "earlyleave-cryo-announcement",
-        //        ("character", name),
-        //        ("entity", ent.Owner), // gender things for supporting downstreams with other languages
-        //        ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName))
-        //    ), Loc.GetString("earlyleave-cryo-sender"),
-        //    playDefaultSound: false
-        //);
-    }// RMC14 end
+        _marinePresenceAnnounce.AnnounceEarlyLeave(ent, recordId, station, jobName); // RMC14
+        if (false) // RMC14
+        _chatSystem.DispatchStationAnnouncement(station.Value,
+            Loc.GetString(
+                "earlyleave-cryo-announcement",
+                ("character", name),
+                ("entity", ent.Owner), // gender things for supporting downstreams with other languages
+                ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName))
+            ), Loc.GetString("earlyleave-cryo-sender"),
+            playDefaultSound: false
+        );
+    }
 
     private void HandleCryostorageReconnection(Entity<CryostorageContainedComponent> entity)
     {
