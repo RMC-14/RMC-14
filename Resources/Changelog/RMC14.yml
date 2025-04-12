@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed marine base movement speed being 10% too slow.
-    type: Fix
-  id: 1061
-  time: '2024-12-04T01:07:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5043
 - author: CyberTropic
   changes:
   - message: Fixed evac shuttles landing offset from game grid.
@@ -5357,5 +5350,13 @@
   id: 1563
   time: '2025-04-07T05:49:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5337
+- author: Vermidia
+  changes:
+  - message: Fixed rare cases where too many lines could be made lagging the server
+      to death.
+    type: Fix
+  id: 1564
+  time: '2025-04-12T05:05:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6114
 Name: RMC14
 Order: -1
