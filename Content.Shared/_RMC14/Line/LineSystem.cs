@@ -24,6 +24,7 @@ public sealed class LineSystem : EntitySystem
 
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
+    private static readonly float MaxBeamDistance = 500;
 
     private EntityQuery<BarricadeComponent> _barricadeQuery;
     private EntityQuery<DoorComponent> _doorQuery;
@@ -155,6 +156,9 @@ public sealed class LineSystem : EntitySystem
         if (Deleted(source) || Deleted(target))
             return false;
 
+        if (_transform.GetMapId(source) != _transform.GetMapId(target))
+            return false;
+
         var sourceMapPos = _transform.GetMapCoordinates(source);
         var targetMapPos = _transform.GetMapCoordinates(target);
 
@@ -166,8 +170,8 @@ public sealed class LineSystem : EntitySystem
 
         var beamStartPos = sourceMapPos.Offset(calculatedDistance.Normalized());
 
-        //Don't divide by zero
-        if (calculatedDistance.Length() == 0)
+        //Don't divide by zero or make a mega beam
+        if (calculatedDistance.Length() == 0 || calculatedDistance.Length() > MaxBeamDistance)
             return false;
 
         var distanceCorrection = calculatedDistance - calculatedDistance.Normalized();
