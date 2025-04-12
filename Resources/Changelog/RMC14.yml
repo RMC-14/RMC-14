@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Fixed Burrowed Larva not registering as a new entity on the round end
-      summary.
-    type: Fix
-  id: 1074
-  time: '2024-12-06T04:18:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5064
 - author: blueDev2
   changes:
   - message: Fixed tunnels renaming, they are now only renamable by a xeno of drone
@@ -5364,5 +5356,12 @@
   id: 1576
   time: '2025-04-12T06:08:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6138
+- author: Ian321
+  changes:
+  - message: '"Spawn here as job" now also sets the respective icon.'
+    type: Tweak
+  id: 1577
+  time: '2025-04-12T10:29:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6112
 Name: RMC14
 Order: -1
