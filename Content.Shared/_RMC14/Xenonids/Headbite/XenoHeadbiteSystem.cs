@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -10,7 +9,6 @@ using Content.Shared.DoAfter;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Jittering;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
@@ -24,6 +22,7 @@ public sealed class XenoHeadbiteSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly MobThresholdSystem _mobThresholds = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
@@ -39,6 +38,8 @@ public sealed class XenoHeadbiteSystem : EntitySystem
 
     public override void Initialize()
     {
+        base.Initialize();
+
         SubscribeLocalEvent<XenoHeadbiteComponent, XenoHeadbiteActionEvent>(OnXenoHeadbiteAction);
         SubscribeLocalEvent<XenoHeadbiteComponent, XenoHeadbiteDoAfterEvent>(OnXenoHeadbiteDoAfter);
     }
@@ -97,12 +98,9 @@ public sealed class XenoHeadbiteSystem : EntitySystem
             _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { target }, filter);
         }
 
-        if (TryComp<MobThresholdsComponent>(target, out var mobThresholds) && TryComp<DamageableComponent>(target, out var damageable))
+        if (_mobThresholds.TryGetDeadThreshold(target, out var mobThreshold) && TryComp<DamageableComponent>(target, out var damageable))
         {
-            // Mob thresholds are sorted from alive -> crit -> dead,
-            // grabbing the last key will give us how much damage is needed to kill a target from zero
-            // The exact lethal damage amount is adjusted based on their current damage taken
-            var lethalAmountOfDamage = mobThresholds.Thresholds.Keys.Last() - damageable.TotalDamage;
+            var lethalAmountOfDamage = mobThreshold.Value - damageable.TotalDamage;
             var type = _prototypeManager.Index<DamageTypePrototype>(LethalDamageType);
             var damage = new DamageSpecifier(type, lethalAmountOfDamage);
             _damage.TryChangeDamage(target, damage, true, origin: xeno);
