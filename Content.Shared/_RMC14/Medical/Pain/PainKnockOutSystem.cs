@@ -16,42 +16,23 @@ public sealed class PainKnockOutSystem : EntitySystem
 
     public override void Initialize()
     {
-        //SubscribeLocalEvent<PainKnockOutComponent, ComponentStartup>(OnComponentStart);
-        //SubscribeLocalEvent<PainKnockOutComponent, ComponentShutdown>(OnComponentShutdown);
         SubscribeLocalEvent<PainKnockOutComponent, StatusEffectAddedEvent>(OnStatusEffectAdded);
-        //SubscribeLocalEvent<PainKnockOutComponent, StatusEffectEndedEvent>(OnStatusEffectEnded);
-        //SubscribeLocalEvent<PainKnockOutComponent, UpdateMobStateEvent>(OnMobStateUpdate);
-        //SubscribeLocalEvent<PainKnockOutComponent, BeforeThresholdMobStateUpdateEvent>(OnThresholdMobStateChangeCancel);
+        SubscribeLocalEvent<PainKnockOutComponent, StatusEffectEndedEvent>(OnStatusEffectEnded);
+        SubscribeLocalEvent<PainKnockOutComponent, UpdateMobStateEvent>(OnMobStateUpdate);
+        SubscribeLocalEvent<PainKnockOutComponent, BeforeThresholdMobStateUpdateEvent>(OnThresholdMobStateChangeCancel);
     }
-/*
-    private void OnComponentStart(EntityUid uid, PainKnockOutComponent comp, ComponentStartup args)
-    {
-        if (TryComp<MobStateComponent>(uid, out var state))
-        {
-            _mobState.UpdateMobState(uid, state);
-        }
-    }
-*/
-/*
-    private void OnComponentShutdown(EntityUid uid, PainKnockOutComponent comp, ComponentShutdown args)
-    {
-        if (TryComp<MobStateComponent>(uid, out var state))
-        {
-            _mobState.UpdateMobState(uid, state);
-        }
-    }
-*/
+
     private void OnStatusEffectAdded(Entity<PainKnockOutComponent> ent, ref StatusEffectAddedEvent args)
     {
         if (args.Key != _painKnockOutKey)
             return;
 
-        if (TryComp<MobStateComponent>(ent, out var state))
+        if (TryComp<MobStateComponent>(ent, out var state) && state.CurrentState != MobState.Dead)
         {
-            _mobState.UpdateMobState(ent, state);
+            _mobState.ChangeMobState(ent, MobState.Critical, state);
         }
     }
-/*
+
     private void OnStatusEffectEnded(Entity<PainKnockOutComponent> ent, ref StatusEffectEndedEvent args)
     {
         if (args.Key != _painKnockOutKey)
@@ -62,8 +43,7 @@ public sealed class PainKnockOutSystem : EntitySystem
             _mobState.UpdateMobState(ent, state);
         }
     }
-*/
-/*
+
     private void OnMobStateUpdate(Entity<PainKnockOutComponent> ent, ref UpdateMobStateEvent args)
     {
         if (args.State == MobState.Dead || args.Component.CurrentState == MobState.Dead)
@@ -77,5 +57,4 @@ public sealed class PainKnockOutSystem : EntitySystem
             return;
         args.Cancel();
     }
-    */
 }
