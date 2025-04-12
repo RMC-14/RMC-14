@@ -12,7 +12,7 @@ public sealed class PainKnockOutSystem : EntitySystem
 
 
     [ValidatePrototypeId<StatusEffectPrototype>]
-    private readonly String PainKnockOutKey = "PainKnockOut";
+    private readonly string _painKnockOutKey = "PainKnockOut";
 
     public override void Initialize()
     {
@@ -22,7 +22,6 @@ public sealed class PainKnockOutSystem : EntitySystem
         SubscribeLocalEvent<PainKnockOutComponent, StatusEffectEndedEvent>(OnStatusEffectEnded);
         SubscribeLocalEvent<PainKnockOutComponent, UpdateMobStateEvent>(OnMobStateUpdate);
         SubscribeLocalEvent<PainKnockOutComponent, BeforeThresholdMobStateUpdateEvent>(OnThresholdMobStateChangeCancel);
-        //SubscribeLocalEvent<PainKnockOutComponent, MobStateChangedEvent>(OnMobStateChanged);
     }
 
     private void OnComponentStart(EntityUid uid, PainKnockOutComponent comp, ComponentStartup args)
@@ -43,7 +42,7 @@ public sealed class PainKnockOutSystem : EntitySystem
 
     private void OnStatusEffectAdded(Entity<PainKnockOutComponent> ent, ref StatusEffectAddedEvent args)
     {
-        if (args.Key != PainKnockOutKey)
+        if (args.Key != _painKnockOutKey)
             return;
 
         if (TryComp<MobStateComponent>(ent, out var state))
@@ -54,7 +53,7 @@ public sealed class PainKnockOutSystem : EntitySystem
 
     private void OnStatusEffectEnded(Entity<PainKnockOutComponent> ent, ref StatusEffectEndedEvent args)
     {
-        if (args.Key != PainKnockOutKey)
+        if (args.Key != _painKnockOutKey)
             return;
 
         if (TryComp<MobStateComponent>(ent, out var state))
