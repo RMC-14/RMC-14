@@ -335,7 +335,7 @@ rmc-xeno-tail-lash-no-room = We don't have any room to do our tail lash!
 
 # Headbite
 rmc-xeno-headbite-others = {$xeno} grabs {$target}'s head aggressively.
-rmc-xeno-headbite-self = We grabs {$target}'s head aggressively.
+rmc-xeno-headbite-self = We grab {$target}'s head aggressively.
 rmc-xeno-headbite-warning-larva = We should not harm this host! It has a sister inside.
 rmc-xeno-headbite-warning = We can only headbite an unconscious, adjacent target!
 rmc-xeno-headbite-hit-self = We pierce {$target}'s head with our inner jaw!
