@@ -10,7 +10,7 @@ namespace Content.Shared._RMC14.Weather;
 public sealed partial class RMCWeatherCycleComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public List<RMCWeatherEventComponent> WeatherEvents;
+    public List<RMCWeatherEventComponent> WeatherEvents = new();
 
     [DataField, AutoNetworkedField]
     public TimeSpan MinTimeBetweenEvents;
@@ -20,7 +20,6 @@ public sealed partial class RMCWeatherCycleComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan LastEventCooldown;
-
 
     [DataDefinition]
     [Serializable, NetSerializable]
