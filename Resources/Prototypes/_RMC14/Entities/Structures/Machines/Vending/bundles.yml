@@ -45,8 +45,7 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleSquadMedicalEssentials
-  name: essential medical set
-  description: Contains a stasis bag, a defibrillator, a roller bed, medical tools, and two blood packs.
+  name: Essential Medical Set
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Medical/stasisbag.rsi
@@ -65,6 +64,7 @@
     - CMBloodPackFull # TODO RMC14 O-
     - CMBloodPackFull # TODO RMC14 O-
     - RMCFlashlightPen
+    #- Stethoscope
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
@@ -83,11 +83,10 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleCombatTechnicianEssentials
-  name: essential engineer set
-  description: Contains 50 metal, 40 plasteel, 25 sandbags, a high-capacity power cell, an entrenching tool, a light replacer, and a nailgun.
+  name: Essential Engineer Set
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Bombs/c4.rsi
+    sprite: _RMC14/Objects/Weapons/Explosives/plastic_explosives.rsi
     state: icon
   - type: CMVendorBundle
     bundle:
@@ -95,10 +94,10 @@
     - CMSandbagEmpty25
     - CMSheetMetal50
     - CMSheetPlasteel40
+    - CMAPCElectronics
     - RMCPowerCellHigh
     - CMEntrenchingTool
     - CMLightReplacer
-#    - CMAPCElectronics # TODO RMC14 uncomment when power
     - RMCNailgunTactical
 
 - type: entity
@@ -132,7 +131,6 @@
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleMilitaryPoliceApparel
   name: Essential Police Set
-  description: Contains security HUD-glasses, a filled security belt and a M10 helmet.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses.rsi
@@ -146,8 +144,7 @@
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: CMVendorBundleCrewMedicalEssentialsNurse
-  name: essential medical set
-  description: Contains a defibrillator, a first-aid kit, medical tools and a flashlight.
+  name: Essential Medical Set
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Medical/defib.rsi
@@ -159,15 +156,53 @@
     - CMHealthAnalyzer
     - CMSurgicalLine
     - CMSynthGraft
+    #- syringe case TODO RMC14 syringe cases
     - CMSurgicalCaseFilled
+    #- stethoscope
     - RMCFlashlightPen
-#   - Syringe case # TODO RMC14 syringe cases
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: CMVendorBundleCrewMedicalEssentialsDoctor
+  name: Essential Medical Set
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/defib.rsi
+    state: defib
+  - type: CMVendorBundle
+    bundle:
+    - CMDefibrillator
+    - CMAdvFirstAidKitFilled
+    - CMHealthAnalyzer
+    - CMSurgicalLine
+    - CMSynthGraft
+    #- stethoscope
+    - RMCFlashlightPen
+    #- syringe case
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: CMVendorBundleCrewMedicalEssentialsCMO
+  name: Essential Medical Set
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/defib.rsi
+    state: defib
+  - type: CMVendorBundle
+    bundle:
+    - CMDefibrillator
+    - CMAdvFirstAidKitFilled
+    - CMHealthAnalyzer
+    - CMSurgicalLine
+    - CMSynthGraft
+    - RMCFlashlightPen
+    #- stethoscope
+    #- syringe case
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCCommandingOfficerEssentialsBundle
   name: Commanding Officer Essentials kit
-  description: Contains a laser designator, whistle, and a disabler.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Devices/binoculars.rsi
@@ -175,6 +210,38 @@
   - type: CMVendorBundle
     bundle:
     - RMCLaserDesignator
+    #- Map
     - RMCWhistle
     - RMCWeaponTaser
+    #- Megaphone
     #TODO RMC14 Megaphone, Paper Map.
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCCEEssentialsBundle
+  name: Standard Equipment
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/insulated.rsi
+    state: icon
+  - type: CMVendorBundle
+    bundle:
+    - CMHandsInsulated
+    - CMHeadsetCE
+    - CMBootsBlack
+    #- RMCWeldingGoggles
+    #- WorkingJoePDA
+    - RMCNailgunTactical
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleCrewPilot
+  name: PO Flightsuit Kit
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt.rsi
+    state: icon
+  - type: CMVendorBundle
+    bundle:
+    - RMCJumpsuitPilotAlt
+    - RMCCoatPilot

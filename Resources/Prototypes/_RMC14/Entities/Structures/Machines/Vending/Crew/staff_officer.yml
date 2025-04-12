@@ -1,0 +1,317 @@
+# EQUIPMENT VENDOR
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechStaffOfficerEquipment
+  name: ColMarTech Staff Officer Equipment Rack
+  description: An automated equipment vendor for Staff Officers.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessCommand" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMStaffOfficer
+    sections:
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: CMBootsBlackFilled
+        name: Boots
+        mandatory: true
+      - id: RMCHeadsetMarineCommand
+        name: Headset
+        mandatory: true
+      - id: CMMRE
+        name: MRE
+        mandatory: true
+    - name: Standard Equipment
+      takeAll: CMUniform
+      entries:
+      - id: CMJumpsuitBO
+        name: Service Uniform
+      - id: CMJumpsuitOperations
+        name: Operations Uniform
+        recommended: true
+      - id: CMHandsBlackMarine
+        name: Gloves
+    - name: Jacket
+      choices: { CMCoat: 1}
+      entries:
+      - id: RMCCoatService
+        name: Service Jacket
+        recommended: true
+    - name: Hat
+      choices: { CMHat: 1 }
+      entries:
+      - id: RMCHeadBeretGreen
+        name: Beret, Green
+        recommended: true
+      - id: CMHeadBeretTan
+        name: Beret, Tan
+        recommended: true
+      - id: RMCHeadCapFlippable
+        name: Patrol Cap
+        recommended: true
+      - id: CMHeadCapOfficer
+        name: Officer Cap
+        recommended: true
+      - id: CMHeadCapPeakedService
+        name: Service Peaked Cap
+        recommended: true
+    #- name: Patches
+    #  entries:
+    #  - id: PatchId
+    #    name: Falling Falcons Shoulder Patch
+    #    points: 1
+    #  - id: PatchId
+    #    name: Falling Falcons UN Shoulder Patch
+    #    points: 1
+    #  - id: PatchId
+    #    name: UNMC Large Chest Patch
+    #    points: 1
+    #  - id: PatchId
+    #    name: UNMC Shoulder Patch
+    #    points: 1
+    #  - id: PatchId
+    #    name: United Nations Shoulder patch
+    #    points: 1
+    #  - id: PatchId
+    #    name: United Nations Flag Shoulder patch
+    #    points: 1
+    - name: Personal Sidearm
+      choices: { CMWeapon: 1 }
+      entries:
+      - id: RMCM44BeltFilled
+        name: M44 Revolver
+        recommended: true
+      - id: CMM77BeltFilled
+        name: M77 Pistol
+        recommended: true
+      - id: RMCM1984BeltFilled
+        name: M1984 Pistol
+        recommended: true
+      - id: RMCMK80BeltFilled
+        name: MK80 Pistol
+        recommended: true
+    - name: Accessories
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBlack
+        name: Black Webbing Vest
+        recommended: true
+      - id: CMWebbingBrown
+        name: Brown Webbing Vest
+      - id: CMWebbingPouch
+        name: Drop Pouch
+      - id: CMWebbing
+        name: Webbing
+      - id: RMCWebbingBlackSmall
+        name: Black Webbing
+      - id: CMWebbingHolster
+        name: Shoulder Holster
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: CMBackpackMarine
+        name: Backpack
+      - id: CMSatchelMarine
+        name: Satchel
+    - name: Other Supplies
+      entries:
+      - id: RMCBinoculars
+        name: Binoculars
+        points: 5
+      - id: RMCRangefinder
+        name: Rangefinder
+        points: 8
+      - id: RMCLaserDesignator
+        name: Laser Designator
+        points: 12
+        recommended: true
+      - id: RMCFlashlight
+        name: Flashlight
+        points: 1
+      - id: RMCMotionDetector
+        name: Motion Detector
+        points: 5
+        recommended: true
+      - id: SprayBottleSpaceCleaner #TODO Replace with RMC space cleaner
+        name: Space Cleaner
+        points: 2
+      - id: RMCWhistle
+        name: Whistle
+        points: 5
+
+# ARMORY VENDOR
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechStaffOfficerWeapon
+  name: ColMarTech Staff Officer Armory Equipment Rack
+  description: An automated combat equipment vendor for Staff Officers.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessCommand" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMStaffOfficer
+    sections:
+    - name: Combat Equipment
+      takeAll: CMCombatEquipment
+      entries:
+      - id: RMCArmorM3SO
+        name: Officer M3 Armor
+        mandatory: true
+      - id: RMCArmorHelmetM10SO
+        name: Officer M10 Helmet
+        mandatory: true
+      - id: CMBootsBlackFilled
+        name: Marine Combat Boots
+        mandatory: true
+      - id: CMHandsBlackMarine
+        name: Marine Combat Gloves
+        mandatory: true
+      - id: CMMRE
+        name: MRE
+        mandatory: true
+      - id: RMCGlassesAviators
+        name: Aviator Shades
+      - id: RMCM5Bayonet
+        name: Bayonet
+    - name: Specialisation Kit
+      choices: { CMBundle: 1 }
+      entries:
+      - id: CMVendorBundleCombatTechnicianEssentials
+        name: Essential Engineer Set
+        mandatory: true
+      - id: CMVendorBundleSquadMedicalEssentials
+        name: Essential Medical Set
+        mandatory: true
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries:
+      - id: RMCBeltUtilityGeneral
+        name: G8-A General Utility Pouch
+      - id: CMBeltMarine
+        name: M276 Ammo Load Rig
+        recommended: true
+      - id: RMCM276ShotgunShellLoadingRig
+        name: M276 Shotgun Shell Loading Rig
+        recommended: true
+      - id: CMBeltUtilityFilled
+        name: M276 Toolbelt Rig (Full)
+        recommended: true
+      - id: CMBeltMedicBagFilled
+        name: M276 Lifesaver Bag (Full)
+        recommended: true
+      - id: CMBeltMedicalFilled
+        name: M276 Medical Storage Rig (Full)
+      - id: RMCBeltHolsterSMGPouch
+        name: M276 M63 Holster Rig
+      - id: CMBeltUtilityCombatFilled
+        name: M276 Holster Toolrig (Full)
+      #- id: CMBeltM82F # TODO RMC14 M82F Flare Gun Belt
+      #  name: M276 M82F Holster Rig
+      - id: RMCBeltGrenade
+        name: M276 M40 Grenade Rig
+    - name: Pouches
+      choices: { CMPouches: 2 }
+      entries:
+      - id: RMCPouchAutoinjectorFill
+        name: Autoinjector Pouch
+        recommended: true
+      - id: RMCPouchFirstAidSplintsGauzeOintment
+        name: First-Aid Pouch (Gauze, Ointment) # TODO RMC14 splints comma
+      - id: RMCPouchFirstAidPills
+        name: First-Aid Pouch (Pill Packets)
+      - id: RMCPouchGeneralLarge
+        name: Large General Pouch
+        recommended: true
+      - id: RMCPouchMagazineLarge
+        name: Large Magazine Pouch
+        recommended: true
+      - id: RMCPouchShotgunLarge
+        name: Large Shotgun Shell Pouch
+        recommended: true
+      - id: RMCPouchMagazinePistolLarge
+        name: Large Pistol Magazine Pouch
+      - id: RMCPouchMedical
+        name: Medical Pouch
+      - id: RMCPouchMedkit
+        name: Medical Kit Pouch
+      - id: RMCPouchPistol
+        name: Pistol Pouch
+      #- id: RMCPouchSling # TODO RMC14 Sling Pouch
+      #  name: Sling Pouch
+      - id: RMCPouchToolsFill
+        name: Tools Pouch (Full)
+        recommended: true
+      - id: RMCPouchConstruction
+        name: Construction Pouch
+      - id: RMCPouchElectronicsFill
+        name: Electronics Pouch (Full)
+      - id: RMCPouchFlareFilled
+        name: Flare Pouch (Full)
+      - id: RMCPouchFuelTank
+        name: Fuel Tank Strap Pouch
+    - name: Mask
+      choices: { CMMask: 1 }
+      entries:
+      - id: CMMaskGas
+        name: Gas Mask
+      - id: CMMaskCoif
+        name: Heat Absorbent Coif
+    - name: Other Supplies
+      entries:
+      #- id: CMHelmetVisorWelding
+      #  name: Welding Visor
+      #   points: 5
+      - id: CMHandsInsulated
+        name: Insulated Gloves
+        points: 3
+      - id: RMCEntrenchingToolActivated
+        name: Entrenching Tool
+        points: 1
+      - id: RMCAttachmentMagneticHarness
+        name: Magnetic Harness
+        points: 12
+        recommended: true
+      - id: RMCBackpackRTO
+        name: Radio Telephone Pack
+        points: 15
+        recommended: true
+      - id: RMCMotionDetector
+        name: Motion Detector
+        points: 5
+        recommended: true
+      - id: RMCScabbardMacheteFilled
+        name: Machete Scabbard (Full)
+        points: 5
+      - id: RMCBinoculars
+        name: Binoculars
+        points: 5
+      - id: RMCRangefinder
+        name: Rangefinder
+        points: 8
+      - id: RMCLaserDesignator
+        name: Laser Designator
+        points: 12
+        recommended: true
+      - id: RMCFulton20
+        name: Fulton Recovery Device
+        points: 5
+      - id: SprayBottleSpaceCleaner #TODO replace with RMC space cleaner
+        name: Space Cleaner
+        points: 2
+      - id: RMCWhistle
+        name: Whistle
+        points: 5
+      - id: RMCFlashlight
+        name: Flashlight
+        points: 1

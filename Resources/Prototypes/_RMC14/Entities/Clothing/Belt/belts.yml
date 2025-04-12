@@ -116,7 +116,8 @@
       - CMFireExtinguisherPortable
       - RMCExplosiveBreachingCharge
       - RMCNailgunCompact
-      #      - # TODO circuit board
+      - RMCCircuitboard
+      #     - # TODO stock parts
       components:
       - Welder
       - PowerCell
@@ -158,7 +159,8 @@
       - RMCExplosiveBreachingCharge
       - RodMetal1
       - RMCNailgunCompact
-      #     - # TODO circuit board, stock parts
+      - RMCCircuitboard
+      #     - # TODO stock parts
       components:
       - Welder
       - PowerCell
@@ -223,7 +225,7 @@
       - CMFireExtinguisherPortable
       - RMCShellShotgun
       - RMCNailgunCompact
-      #      - # TODO circuit board
+      #      - # TODO analyzer
       components:
       - Welder
       - PowerCell

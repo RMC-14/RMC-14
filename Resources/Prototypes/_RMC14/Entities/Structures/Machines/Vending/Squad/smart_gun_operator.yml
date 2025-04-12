@@ -1,9 +1,9 @@
-# SMART GUN OPERATOR
+# GEAR VENDOR
 
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechSGGear
-  name: ColMarTech squad smart gun operator gear rack
+  name: ColMarTech Squad Smart Gun Operator Gear Rack
   description: An automated gear rack for Squad Smart Gun Operators.
   components:
   - type: AccessReader
@@ -19,99 +19,156 @@
       takeAll: CMSmartGunSet
       entries:
       - id: CMSmartGunOperatorEquipmentCase
+        name: Essential Smart Gun Operator Set
+        mandatory: true
     - name: Gun Attachments
       choices: { CMGunAttachments: 1 }
       entries:
       - id: RMCAttachmentLaserSight
+        name: Laser Sight
       - id: RMCAttachmentS5RedDotSight
+        name: Red-Dot Sight
       - id: RMCAttachmentS6ReflexSight
+        name: Reflex Sight
     - name: Explosives
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
+        name: M40 HEDP High Explosive Packet (x3 grenades)
         points: 30
       - id: RMCPacketGrenadeIncendiaryFilled
+        name: M40 HIDP Incendiary Packet (x3 grenades)
         points: 30
-    #- id: CMM40HPDPWhitePhosphorusPacketx3
-    #  points: 30
+      #- id: CMM40HPDPPhosphorusPacket3
+      #  name: M40 WPDP White Phosphorus Packet (x3 grenades)
+      #  points: 30
       - id: RMCPacketGrenadeSmokeFilled
+        name: M40 HSDP Smoke Packet (x3 grenades)
         points: 15
       - id: RMCPacketGrenadeM74AGMFFilled
+        name: M74 AGM-Frag Airburst Packet (x3 airburst grenades)
         points: 20
       - id: RMCPacketGrenadeM74AGMIFilled
+        name: M74 AGM-Incendiary Airburst Packet (x3 airburst grenades)
         points: 20
       - id: RMCPacketGrenadeM74AGMSFilled
+        name: M74 AGM-Smoke Airburst Packet (x3 airburst grenades)
         points: 10
       - id: RMCPacketGrenadeM74AGMSHornetFilled
+        name: M74 AGM-Hornet Airburst Packet (x3 airburst grenades
         points: 20
-    #- id: CMM20MineBox4
-    #  points: 20
-    - name: Sidearm Ammunitions
+      #- id: CMM20MineBox4
+      #  name: M20 Mine Box (x5 mines)
+      #  points: 20
+    - name: Sidearm Ammunition
       entries:
+      #- id: M10HVExt
+      #  name: M10 HV extended magazine (10x20mm)
+      #  points: 10
+      #- id: M10HVDrum
+      #  name: M10 HV drum magazine (10x20mm)
+      #  points: 15
+      #- id: M44HeavySpeedloader
+      #  name: M44 Heavy Speed Loader (.44)
+      #  points: 10
+      - id: RMCSpeedLoader44Marksman
+        name: M44 Marksman Speed Loader (.44)
+        points: 10
+      #- id: M1984HPMag
+      #  name: M1984 HP Magazine
+      #  points: 5
+      - id: RMCMagazinePistolM1984AP
+        name: M1984 AP Magazine
+        points: 5
       - id: CMMagazinePistolMK80
+        name: MK80 Magazine
         points: 5
       - id: RMCMagazinePistolSU6
+        name: SU-6 Smartpistol Magazine (.45)
         points: 10
     - name: Restricted Firearms
       entries:
       - id: RMCGunCasePistolMK80
+        name: MK80 Pistol
         points: 15
       - id: RMCGunCasePistolSmart
+        name: SU-6 Smart Pistol
         points: 15
     - name: Clothing Items
       entries:
       - id: RMCScabbardMacheteSGFilled
+        name: Smart Gun Operator Machete Scabbard
         points: 15
       - id: RMCPouchFuelTank
+        name: Fuel Tank Strap Pouch
         points: 5
       - id: RMCPouchGeneralLarge
+        name: Large General Pouch
         points: 6
     - name: Utilities
       entries:
       - id: CMFireExtinguisherPortable
+        name: Fire Extinguisher (Portable)
         points: 5
       - id: RMCWhistle
+        name: Whistle
         points: 5
       - id: CMRollerBedSpawnFolded
+        name: Roller Bed
         points: 5
       - id: RMCFulton20
+        name: Fulton Device Stack
         points: 5
       - id: RMCPowerCellSmartgun
+        name: 9V Smart Gun Battery
         points: 15
     - name: Binoculars
       entries:
       - id: RMCBinoculars
+        name: Binoculars
         points: 5
       - id: RMCRangefinder
+        name: Range Finder
         points: 10
       - id: RMCLaserDesignator
+        name: Laser Designator
         points: 15
-    - name: Helmet Optics
-      entries: [ ]
-    #- id: CMMedicalHelmetOptic
-    #  points: 15
-    #- id: CMWeldingVisor
-    #  points: 5
+    #- name: Helmet Optics
+    #  entries:
+    #  - id: CMMedicalHelmetOptic
+    #    name: Medical Helmet Optic
+    #    points: 15
+    #  - id: CMWeldingVisor
+    #    name: Welding Visor
+    #    points: 5
     - name: Pamphlets
       entries:
       - id: CMPamphletJTAC
+        name: JTAC Pamphlet
         points: 15
       - id: CMPamphletEngineer
+        name: Engineering Pamphlet
         points: 15
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer
+        name: Engineering Radio Encryption Key
         points: 5
       - id: CMEncryptionKeyIntel
+        name: Intel Radio Encryption Key
         points: 5
       - id: CMEncryptionKeyJTAC
+        name: JTAC Radio Encryption Key
         points: 5
       - id: CMEncryptionKeyRequisition
+        name: Supply Radio Encryption Key
         points: 5
+
+# EQUIPMENT VENDOR
 
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechSGEquipment
-  name: ColMarTech squad Smart Gun equipment rack
+  name: ColMarTech squad Smart Gun Equipment Rack
   description: An automated rack hooked up to a colossal storage of Squad Smart Gun standard-issue equipment.
   components:
   - type: AccessReader
@@ -127,49 +184,74 @@
       takeAll: CMStandard
       entries:
       - id: CMVendorBundleRiflemanApparel
+        name: Standard Marine Apparel
+        mandatory: true
       - id: CMMRE
+        name: MRE
+        mandatory: true
       #- id: CMMap # TODO: Make a map
+      #  name: Map
+      #  mandatory: true
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
-      - id: CMBeltSmartGunOperatorFilled
       - id: RMCBeltSmartGunOperatorPistolFilled
+        name: M802 Smart Gun Operator Sidearm Belt
+        mandatory: true
+      - id: CMBeltSmartGunOperatorFilled
+        name: M280 Smart Gun Operator Drum Belt
+        mandatory: true
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
       - id: RMCPouchFlareFilled
-        name: Flare pouch (Full)
-#      - id: RMCPouchElectronics # TODO RMC14
+        name: Flare Pouch (Full)
+      - id: RMCPouchElectronics
+        name: Electronics Pouch
       - id: RMCPouchFirstAidInjectors
-        name: first-aid pouch (refillable injectors)
+        name: First-Aid Pouch (Refillable Injectors)
         recommended: true
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        name: First-Aid Pouch (Gauze, Ointment) # TODO RMC14 splints comma
         recommended: true
       - id: RMCPouchFirstAidPills
-        name: first-aid pouch (pills)
+        name: First-Aid Pouch (Pill Packets)
         recommended: true
       - id: RMCPouchMagazinePistolLarge
+        name: Large Pistol Magazine Pouch
         recommended: true
       - id: RMCPouchMagazine
+        name: Magazine Pouch
       - id: RMCPouchShotgun
-      - id: RMCPouchGeneralMedium
+        name: Shotgun Shell Pouch
+      - id: RMCPouchGeneral
+        name: Medium General Pouch
       - id: RMCPouchPistol
+        name: Pistol Pouch
       - id: RMCPouchMacheteFilled
-        name: machete pouch (Full)
-    #- id: CMSlingPouch
+        name: Machete Pouch (Full)
+      #- id: RMCPouchSling
+      #  name: Sling Pouch
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBrown
+        name: Brown Webbing Vest
         recommended: true
       - id: CMWebbingBlack
-      - id: CMWebbing
-      - id: CMWebbingPouch
+        name: Black Webbing Vest
       - id: CMWebbingHolster
+        name: Shoulder Holster
+      - id: CMWebbing
+        name: Webbing
+      - id: RMCWebbingBlackSmall
+        name: Black Webbing
+      - id: CMWebbingPouch
+        name: Drop Pouch
     - name: Mask
       choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
+        name: Gas Mask
       - id: CMMaskCoif
-      - id: RMCMaskRebreather
+        name: Heat Absorbent Coif

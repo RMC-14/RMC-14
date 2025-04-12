@@ -1,0 +1,149 @@
+# EQUIPMENT VENDOR
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechCrewMaintTech
+  name: ColMarTech Maintenance Technician Equipment Rack
+  description: An automated rack hooked up to a colossal storage of Maintenance Technician standard-issue equipment.
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessEngineering" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMMaintTech
+    sections:
+    - name: Maintenance Set (Mandatory)
+      takeAll: CMMaintenanceSet
+      entries:
+      - id: CMVendorBundleCrewMaintenanceEssentials
+        name: Essential Maintenance Set
+        mandatory: true
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      - id: CMHandsInsulated
+        name: Insulated Gloves
+        mandatory: true
+      - id: CMHeadsetEngineer
+        name: Headset
+        mandatory: true
+      - id: CMMRE
+        name: MRE
+        mandatory: true
+      #- id: Map
+      #  name: Map
+      #  mandatory: true
+    - name: Helmet
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: CMHeadBeretEngineer
+        name: Beret, Engineering
+      - id: RMCHardhatWhite
+        name: White Hardhat
+      - id: RMCHardhatOrange
+        name: Orange Hardhat
+      - id: RMCHardhatBlue
+        name: Blue Hardhat
+      #- id: Welding Helmet
+      #  name: Welding Helmet
+    - name: Suit
+      choices: { CMSuit: 1 }
+      entries:
+      - id: RMCHazardVestBlack
+        name: Black Hazard Vest
+      - id: RMCHazardVestBlue
+        name: Blue Hazard Vest
+      - id: RMCHazardVest
+        name: Orange Hazard Vest
+      - id: RMCHazardVestYellow
+        name: Yellow Hazard Vest
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: CMBackpackMarineTech
+        name: Technician Backpack
+      - id: CMSatchelMarineTech
+        name: Technician Satchel
+      - id: CMBackpackWelder
+        name: Technician Welderpack
+      - id: RMCSatchelWelder
+        name: Technician Welder-Satchel
+        recommended: true
+      - id: RMCSatchelWelderChestrig
+        name: Technician Welder Chestrig
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries:
+      - id: RMCBeltUtilityGeneral
+        name: G8-A General Utility Pouch
+      - id: CMBeltUtilityFilled
+        name: M276 Toolbelt Rig (Full)
+        mandatory: true
+    - name: Pouches
+      choices: { RMCPouch: 2 }
+      entries:
+      - id: RMCPouchGeneralMedium
+        name: Medium General Pouch
+      - id: RMCPouchFirstAidInjectors
+        name: First-Aid Pouch (Refillable Injectors)
+        recommended: true
+      - id: RMCPouchFirstAidSplintsGauzeOintment
+        name: First-Aid Pouch (Gauze, Ointment) # TODO RMC14 splints comma
+        recommended: true
+      - id: RMCPouchFirstAidPills
+        name: First-Aid Pouch (Pill Packets)
+        recommended: true
+      - id: RMCPouchConstruction
+        name: Construction Pouch
+        recommended: true
+      - id: RMCPouchElectronicsFill
+        name: Electronics Pouch (Full)
+      - id: RMCPouchToolsFill
+        name: Tools Pouch (Full)
+      - id: RMCPouchFlareFilled
+        name: Flare Pouch (Full)
+    - name: Mask
+      choices: { CMMask: 1 }
+      entries:
+      - id: CMMaskGas
+        name: Gas Mask
+      - id: CMMaskCoif
+        name: Heat Absorbent Coif
+      - id: RMCMaskRebreather
+        name: Rebreather
+    - name: Accessories
+      choices: { CMAccessory: 1 }
+      entries:
+      - id: CMWebbingBrown
+        name: Brown Webbing Vest
+        recommended: true
+      - id: CMWebbingBlack
+        name: Black Webbing Vest
+      - id: CMWebbing
+        name: Webbing
+      - id: RMCWebbingBlackSmall
+        name: Black Webbing
+    #- name: Spare Gear
+    #  entries:
+    #  - id: SynthKey
+    #    name: Synthetic Reset Key
+    #    points: 20
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: CMVendorBundleCrewMaintenanceEssentials
+  name: Essential Maintenance Set
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Janitorial/light_replacer.rsi
+    state: lightreplacer0
+  - type: CMVendorBundle
+    bundle:
+    - CMLightReplacer
+    #- RMCDemoScanner
+    - TrashBag
+    - RMCToolboxMechanicalFilled
+    - RMCFlashlight

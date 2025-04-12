@@ -1,7 +1,9 @@
-﻿- type: entity
+﻿# GEAR VENDOR
+
+- type: entity
   parent: ColMarTechBase
   id: ColMarTechIntelGear
-  name: ColMarTech intelligence officer gear rack
+  name: ColMarTech Intelligence Officer Gear Rack
   description: An automated gear rack for IOs.
   components:
   - type: AccessReader
@@ -17,96 +19,143 @@
       takeAll: RMCIntelSet
       entries:
       - id: RMCVendorBundleIntel
+        name: Essential Intelligence Set
+        mandatory: true
     - name: Engineering Supplies
       entries:
       - id: CMAPCElectronics
+        name: Power Control Module
         points: 5
       - id: RMCExplosivePlastic
+        name: Plastic Explosive
         points: 10
-      - id: RMCWeldingGoggles
-        points: 5
+      #- id: RMCWeldingGoggles
+      #  name: Welding Goggles
+      #  points: 5
     - name: Primary Ammunition
       entries:
       - id: CMMagazineRifleM4SPRAP
+        name: M4SPR AP Magazine (10x24mm)
         points: 10
+      #- id: RMCMagazineRifleM4SPRExt
+      #  name: M4SPR Extended Magazine (10x24mm)
+      #  points: 10
       - id: CMMagazineSMGM63AP
+        name: M63 AP Magazine (10x20mm)
         points: 10
       - id: CMMagazineSMGM63Ext
+        name: M63 Extended Magazine (10x20mm)
         points: 10
-      - id: CMMagazineRifleM54C
+      - id: CMMagazineRifleM54CAP
+        name: M54C AP Magazine (10x24mm)
         points: 10
       - id: CMMagazineRifleM54CExt
+        name: M54C Extended Magazine (10x24mm)
         points: 10
     - name: Sidearm Ammunition
       entries:
+      #- id: M44HeavySpeedloader
+      #  name: M44 Heavy Speed Loader (.44)
+      #  points: 10
       - id: RMCSpeedLoader44Marksman
-        points: 10 # TODO RMC14 M1984 HP magazine
+        name: M44 Marksman Speed Loader (.44)
+        points: 10
+      #- id: M1984HPMag
+      #  name: M1984 HP Magazine
+      #  points: 5
       - id: RMCMagazinePistolM1984AP
+        name: M1984 AP Magazine
         points: 5
       - id: CMMagazinePistolMK80
-        points: 10
+        name: MK80 Magazine
+        points: 5
       - id: RMCMagazinePistolSU6
+        name: SU-6 Smartpistol Magazine (.45)
         points: 10
-    - name: Personal Sidearm
+    - name: Restricted Firearms
       entries:
       - id: RMCGunCasePistolMK80
+        name: MK80 Pistol
         points: 15
       - id: RMCGunCasePistolSmart
+        name: SU-6 Smart Pistol
         points: 15
+    - name: Restricted Gear
+      entries:
+      - id: CMBeltUtilityCombat
+        name: M276 Pattern Combat Toolbelt Rig
+        points: 15
+        recommended: true
     - name: Pouches
       entries:
       - id: RMCPouchMagazineLarge
+        name: Large Magazine Pouch
         points: 10
       - id: RMCPouchShotgunLarge
+        name: Large Shotgun Shell Pouch
         points: 10
-      - id: RMCPouchAutoinjector
+      - id: RMCPouchAutoinjectorFill
+        name: Autoinjector Pouch (Full)
         points: 15
         recommended: true
       - id: RMCPouchMacheteFilled
-        name: machete pouch (Full)
+        name: Machete Pouch (Full)
         points: 10
     - name: Utilities
       entries:
       - id: CMFireExtinguisherPortable
+        name: Fire Extinguisher (Portable)
         points: 5
       - id: RMCFulton20
+        name: Fulton Device Stack
         points: 10
       - id: RMCMotionDetector
+        name: Motion Detector
         points: 15
         recommended: true
       - id: RMCIntelDetector
+        name: Data Detector
         points: 5
     - name: Binoculars
       entries:
       - id: RMCBinoculars
+        name: Binoculars
         points: 5
       - id: RMCRangefinder
+        name: Range Finder
         points: 10
       - id: RMCLaserDesignator
+        name: Laser Designator
         points: 15
     - name: Helmet Optics
       entries:
-#      - id: TODO RMC14 medical helmet optic
-#        points: 5
-#      - id: TOOD RMC14 welding visor
-#        points: 5
+      #- id: TODO Medical Helmet Optic
+      #  name: Medical Helmet Optic
+      #  points: 5
+      #- id: TODO Welding Visor
+      #  name: Welding Visor
+      #  points: 5
       - id: RMCVisorNightVision
+        name: Night Vision Optic
         points: 25
         recommended: true
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyIntel
+        name: Intel Radio Encryption Key
         points: 5
     - name: Spare Intel Kit
       entries:
       - id: RMCKitIntel
-        name: field intelligence support kit (for untrained personnel)
+        name: Field Intelligence Support Kit (For untrained personnel)
         points: 20
+
+# EQUIPMENT VENDOR
 
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechIntelEquipment
-  name: ColMarTech intelligence officer equipment rack
+  name: ColMarTech Intelligence Officer Equipment Rack
   description: An automated rack hooked up to a colossal storage of IO standard-issue equipment.
   components:
   - type: AccessReader
@@ -122,91 +171,135 @@
       takeAll: RMCIntelEquipment
       entries:
       - id: CMHandsInsulated
+        name: Gloves
+        mandatory: true
       - id: CMHeadsetIntel
+        name: Headset
+        mandatory: true
       - id: CMMRE
+        name: MRE
+        mandatory: true
     - name: Armor
       takeOne: CMArmor
       entries:
       - id: RMCArmorXM4
+        name: XM4 Pattern Intel Armor
+        mandatory: true
       - id: RMCArmorM3LightVariants
+        name: M3-L Pattern Light Armor
+        mandatory: true
     - name: Jacket
       choices: { CMCoat: 1 }
       entries:
       - id: RMCCoatService
+        name: Service Jacket
+        mandatory: true
     - name: Backpack
       choices: { CMBag: 1 }
       entries:
       - id: CMSatchelMarineIntel
+        name: Expedition Pack
         recommended: true
       - id: RMCSatchelMarineIntelChestrig
+        name: Expedition Chestrig
         recommended: true
       - id: RMCBackpackRTO
+        name: Radio Telephone Pack
     - name: Helmet
       choices: { CMHelmet: 1 }
       entries:
       - id: RMCArmorHelmetM12Intel
+        name: XM12 Officer Helmet
         recommended: true
-    - name: Hat
+    - name: Hats
       choices: { CMHat: 1 }
       entries:
-      - id: RMCHeadBeretGreen
+      - id: RMCHeadBeret
+        name: Beret, Standard
       - id: CMHeadBeretTan
+        name: Beret, Tan
       - id: CMHeadCapOfficer
+        name: UNMC Officer Cap
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
       - id: RMCBeltUtilityGeneral
+        name: G8-A General Utility Pouch
       - id: CMBeltMarine
+        name: M276 Ammo Load Rig
         recommended: true
       - id: RMCBeltHolsterPistol
-      - id: RMCBeltHolsterSMG
+        name: M276 General Pistol Holster Rig
+      - id: RMCBeltHolsterSMGPouch
+        name: M276 M63 Holster Rig
       - id: RMCBeltHolsterRevolver
+        name: M276 General Revolver Holster Rig
       - id: RMCM276ShotgunShellLoadingRig
+        name: M276 Shotgun Shell Loading Rig
       - id: CMBeltUtilityFilled
-        name: M276 pattern toolbelt rig (Full)
+        name: M276 Toolbelt Rig (Full)
         recommended: true
     - name: Pouches
       choices: { CMPouches: 2 }
       entries:
       - id: RMCPouchDocument
+        name: Document Pouch
         recommended: true
       - id: RMCPouchFirstAidInjectors
-        name: first-aid pouch (refillable injectors)
+        name: First-Aid Pouch (Refillable Injectors)
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        name: First-Aid Pouch (Gauze, Ointment) # TODO RMC14 splints comma
       - id: RMCPouchFirstAidPills
-        name: first-aid pouch (pill packets)
+        name: First-Aid Pouch (Pill Packets)
       - id: RMCPouchFlareFilled
-        name: flare pouch (Full)
+        name: Flare Pouch (Full)
       - id: RMCPouchFuelTank
+        name: Fuel Tank Strap Pouch
       - id: RMCPouchGeneralLarge
+        name: Large General Pouch
       - id: RMCPouchMagazinePistolLarge
+        name: Large Pistol Magazine Pouch
       - id: RMCPouchMagazine
+        name: Magazine Pouch
       - id: RMCPouchShotgun
+        name: Shotgun Shell Pouch
       - id: RMCPouchPistol
+        name: Sidearm Pouch
       - id: RMCPouchToolsFill
-        name: tools pouch (Full)
+        name: Tools Pouch (Full)
         recommended: true
       #- id: RMCPouchSling # TODO RMC14 Sling Pouch
+      #  name: Sling Pouch
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBlack
+        name: Black Webbing Vest
       - id: CMWebbingBrown
+        name: Brown Webbing Vest
         recommended: true
       - id: CMWebbingHolster
+        name: Shoulder Holster
       - id: CMWebbing
+        name: Webbing
+      - id: RMCWebbingBlackSmall
+        name: Black Webbing
       - id: CMWebbingPouch
+        name: Drop Pouch
     - name: Mask
       choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
+        name: Gas Mask
       - id: CMMaskCoif
+        name: Heat Absorbent Coif
+
+# WEAPONS VENDOR
 
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechIntelWeapons
-  name: ColMarTech intelligence officer weapons rack
+  name: ColMarTech Intelligence Officer Weapons Rack
   description: An automated weapon rack hooked up to a small storage of standard-issue weapons. Can be accessed only by the Intelligence Officers.
   components:
   - type: AccessReader
@@ -221,75 +314,101 @@
     - name: Primary Firearms
       entries:
       - id: WeaponRifleM4SPR
+        name: M4SPR Battle Rifle
         amount: 4
       - id: WeaponSMGM63
+        name: M63 Submachine Gun
         amount: 4
       - id: WeaponShotgunM42A2
+        name: M42A2 Pump Shotgun
         amount: 4
       - id: WeaponRifleM54C
+        name: M54C Assault Rifle MK2
         amount: 4
     - name: Primary Ammunition
       entries:
-      - id: RMCBoxShotgunBuckshot
-        amount: 12
       - id: RMCBoxShotgunFlechette
+        name: Box of Flechette Shells (12g)
+        amount: 12
+      - id: RMCBoxShotgunBuckshot
+        name: Box of Buckshot Shells (12g)
         amount: 12
       - id: RMCBoxShotgunSlugs
+        name: Box of Shotgun Slugs (12g)
         amount: 12
       - id: CMMagazineRifleM4SPR
+        name: M4SPR Magazine (10x24mm)
         amount: 24
       - id: CMMagazineSMGM63
+        name: M63 HV Magazine (10x20mm)
         amount: 24
       - id: CMMagazineRifleM54C
+        name: M54C Magazine (10x24mm)
         amount: 24
     - name: Sidearms
       entries:
       - id: RMCWeaponPistolM77Empty
+        name: M77 Combat Pistol
         amount: 4
       - id: RMCWeaponRevolverM44Empty
+        name: M44 Combat Revolver
         amount: 4
       - id: CMWeaponPistolM1984Empty
+        name: M1984 Service Pistol
         amount: 4
     - name: Sidearm Ammunition
       entries:
       - id: CMMagazinePistolM77AP
+        name: M77 AP Magazine (9mm)
         amount: 20
       - id: RMCSpeedLoaderM44
+        name: M44 Speedloader (.44)
         amount: 20
       - id: CMMagazinePistolM1984
+        name: M1984 Magazine (9mm)
         amount: 20
       - id: RMCMagazinePistolM1984AP
-        amount: 20 # TODO RMC14 M1984 HP magazine
+        name: M1984 AP Magazine
+        amount: 8
+      #- id: M1984HPMag
+      #  name: M9184 HP Magazine (9mm)
+      #  amount: 8
       - id: CMMagazinePistolMK80
-        amount: 20
+        name: MK80 Magazine
+        amount: 16
     - name: Attachments
       entries:
       - id: RMCAttachmentRailFlashlight
+        name: Rail Flashlight
         amount: 8
       - id: RMCAttachmentFlashlightGrip
+        name: Underbarrel Flashlight Grip
         amount: 4
         recommended: true
     - name: Utilities
       entries:
       - id: CMM11Knife
+        name: M11 Throwing Knife
         amount: 18
       - id: RMCM5Bayonet
+        name: M5 Bayonet
         amount: 4
       - id: RMCPackFlareCAS
+        name: M89-S Signal Flare Pack
         amount: 2
       - id: CMPackFlare
+        name: M94 Marking Flare pack
         amount: 20
         recommended: true
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleIntel
-  name: essential intel set
-  description: Contains a crowbar, fultons, an intel detector, and binoculars.
+  name: Essential Intel Set
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Tools/intel_detector.rsi
-    state: datadetector
+    sprite: _RMC14/Objects/Tools/crowbar.rsi
+    state: icon
   - type: CMVendorBundle
     bundle:
     - CMCrowbar
@@ -300,7 +419,7 @@
 - type: entity
   parent: RMCKitBase
   id: RMCKitIntel
-  name: field intelligence support kit
+  name: Field Intelligence Support Kit
   components:
   - type: Storage
     maxItemSize: Huge

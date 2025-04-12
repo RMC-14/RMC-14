@@ -1,4 +1,5 @@
-# Base Vender
+# BASE VENDOR
+
 - type: entity
   parent: VendingMachine
   id: CMVendor
@@ -117,8 +118,8 @@
 - type: vendingMachineInventory
   id: CMVendomat
 
+# HOT DRINKS VENDORS
 
-# Coffee
 - type: entity
   parent: CMVendor
   id: CMVendorCoffee
@@ -134,12 +135,27 @@
 - type: vendingMachineInventory
   id: CMVendorCoffee
   startingInventory:
-    DrinkHotCoffee: 25
-    DrinkTeacup: 25
-    DrinkHotCoco: 25
+    DrinkHotCoffee: 25 # $1.5
+    DrinkTeacup: 25 # $3
+    DrinkHotCoco: 25 # $15
+    #IceCup #Contraband
 
+- type: entity
+  parent: CMVendorCoffee
+  id: RMCVendorCoffeeSimple
+  name: Hot Coffee Machine
+  components:
+  - type: VendingMachine
+    pack: RMCVendorCoffeeSimple
 
-# Snack
+- type: vendingMachineInventory
+  id: RMCVendorCoffeeSimple
+  startingInventory:
+    DrinkHotCoffee: 40
+    DrinkHotCoco: 25 #Contraband
+
+# HOT FOODS VENDORS
+
 - type: entity
   parent: CMVendor
   id: CMVendorSnack
@@ -165,8 +181,23 @@
     RMCFoodSnackCHUNK: 6
     RMCFoodSnackBarcaridine: 6
 
+- type: entity
+  parent: CMVendorSnack
+  id: RMCVendorSnackSimple
+  suffix: Packaged Only
+  components:
+  - type: VendingMachine
+    pack: RMCVendorSnackSimple
 
-# Cola
+- type: vendingMachineInventory
+  id: RMCVendorSnackSimple
+  startingInventory:
+    RMCFoodSnackCheeseburgerPackaged: 40
+    RMCFoodSnackBurritoPackaged: 40
+    RMCFoodSnackHotdogPackaged: 40
+
+# BOBDA VENDORS
+
 - type: entity
   parent: CMVendor
   id: CMVendorCola
@@ -204,8 +235,30 @@
     # NON BOBDA
     CMDrinkCanCola: 10
 
+- type: entity
+  parent: CMVendorCola
+  id: RMCVendorColaResearch
+  description: A softdrink vendor provided by Bobda Soda Company, Havana. This one is bound to the Research Budget card and doesn't require swiping
+  suffix: Research
+  components:
+  - type: VendingMachine
+    pack: RMCVendorColaResearch
 
-# Cigarettes
+- type: vendingMachineInventory
+  id: RMCVendorColaResearch
+  startingInventory:
+    CMDrinkCanBobdaClassic: 10
+    CMDrinkCanBobdaCherry: 10
+    CMDrinkCanBobdaLime: 10
+    CMDrinkCanBobdaGrape: 10
+    CMDrinkCanBobdaBlue: 10
+    CMDrinkCanBobdaPeach: 10
+    CMDrinkCanBobdaCranberry: 10
+    CMDrinkCanBobdaVanilla: 10
+    CMDrinkCanBobdaPineapple: 10
+
+# CIGARETTE VENDORS
+
 - type: entity
   parent: CMVendor
   id: CMVendorCigs
@@ -226,14 +279,97 @@
     RMCLighter: 25
     RMCZippo: 10
 
+- type: entity
+  parent: CMVendorCigs
+  id: RMCVendorCigsFree
+  suffix: Free
+  components:
+  - type: VendingMachine
+    pack: RMCVendorCigsFree
 
-# Security
+- type: vendingMachineInventory
+  id: RMCVendorCigsFree
+  startingInventory:
+    #ElectroGoldCigPack: 99
+    RMCCigarettePackLuckySloths: 99
+    #TradingCardCigPack: 99
+    #LadyFingerCigPack: 99
+    RMCCigarettePackWeYaGold: 99
+    #EmeraldGreenCigPack: 99
+    #ArcturianAceCigPack: 99
+    RMCCigarettePackExecutiveSelect: 99
+    RMCCigarCase: 99
+    RMCTarbackTube: 99
+    RMCTarbackCase: 99
+    CMExecutiveSelectMatchbook: 99
+    CMExecutiveWEYAMatchbook: 99
+    CMElectroMatchbook: 99
+    CMBrownMatchBook: 99
+    RMCMatchboxFull: 99
+    RMCLighter: 99
+    RMCZippo: 99
+
+- type: entity
+  parent: CMVendorCigs
+  id: RMCVendorCigsElectro
+  name: Electro Brand Cigarette Machine
+  description: An Electro brand cigarette vending machine. Comes with Lucky Sloths, Lady Fingers, Electro Golds of course, and a few smaller brands you've barely heard of.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/electro_cigs.rsi
+  - type: VendingMachine
+    pack: RMCVendorCigsElectro
+
+- type: vendingMachineInventory
+  id: RMCVendorCigsElectro
+  startingInventory:
+    #ElectroGoldCigPack: 20
+    RMCCigarettePackLuckySloths: 20
+    #LadyFingerCigPack: 20
+    #SpiritCigPack: 10
+    #SpiritYellowCigPack: 10
+    RMCTarbackTube: 10
+    RMCMatchboxFull: 5
+    CMElectroMatchbook: 5
+    CMBrownMatchBook: 10
+    RMCLighter: 20
+    RMCZippo: 10
+    #BlueZippo: 5
+
+- type: entity
+  parent: CMVendorCigs
+  id: RMCVendorCigsWeYa
+  name: Weston-Yamada Brand Cigarette Machine
+  description: A Weston-Yamada Brand cigarette vending machine, looks like a We-Ya Gold pack. Comes with Emerald Greens, We-Ya Golds of course, Arcturian Aces, and some Three Suns Empire brand you've barely heard of. Executive Selects are still out of stock due to shipping issues...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/weya_cigs.rsi
+  - type: VendingMachine
+    pack: RMCVendorCigsWeYa
+
+- type: vendingMachineInventory
+  id: RMCVendorCigsWeYa
+  startingInventory:
+    RMCCigarettePackWeYaGold: 15
+    #EmeraldGreenCigPack: 30
+    #ArcturianAceCigPack: 10
+    #BalajiImperialCigPack: 10
+    RMCCigarettePackExecutiveSelect: 0 #Random between 0-2
+    RMCMatchboxFull: 5
+    CMExecutiveSelectMatchbook: 10
+    #BalajiImperialMatchbook: 10
+    CMExecutiveWEYAMatchbook: 10
+    RMCLighter: 20
+    #BlackZippo: 5
+    RMCZippoExec: 1
+
+# SECURITY VENDORS
+
 - type: entity
   parent: CMVendor
   id: CMVendorSec
   name: SecTech
   description: A security equipment vendor.
-  suffix: Military Police
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/sec.rsi
@@ -249,28 +385,37 @@
   startingInventory: # TODO RMC14
     RMCHandcuffs: 8
     RMCZipties: 10
+    #Legcuffs: 3
     RMCGrenadeFlashBang: 4
     RMCWeaponTaser: 4
-    # Pepper spray 4
+    #PepperSpray: 4
+    #InvestigationPepperSpray: 4
     CMStunbaton: 4
     RMCFlashlight: 4
-    CMBeltSecurityMP: 10
     CMFlash: 5
-    RMCBoxDonut: 12
-    # Evidence box 6
+    RMCFoodDonut: 12
+    #EvidenceBox: 6
     CMArmorHelmetM10MP: 6
+    #PeakedMPCap: 6
     CMHeadCapMP: 6
     CMJumpsuitMP: 2
+    CMBeltSecurityMP: 6
     CMHeadBeretRed: 6
     CMGlassesSecurity: 3
     CMHeadset: 6
+    #RegulationTape: 5
+    #TapeRecorder: 3
+    #ClueScanner: 3
+    #Camera: 8
+    #CameraFilm: 8
+    RMCSunglasses: 2 #Contraband
+    RMCBoxDonut: 2 #Contraband
 
 - type: entity
   parent: CMVendor
   id: RMCVendorSecArmory
   name: Riot Tech
-  description: A Police Riot equipment vendor.
-  suffix: Military Police
+  description: A security riot equipment vendor.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/sec.rsi
@@ -284,18 +429,21 @@
 - type: vendingMachineInventory
   id: RMCVendorRiot
   startingInventory: # TODO RMC14
-    Zipties: 40
+    RMCZipties: 40
     RMCGrenadeFlashBang: 20
+    #RMCGrenadeTearGas: 40
     RMCMagazineSMGM63Rubber: 40
-    ##RMCGrenadeTearGas: 40
     RMCMagazinePistolM1984Rubber: 40
     RMCMagazinePistolM77Rubber: 40
     RMCMagazineRifleM54CRubber: 40
     RMCMagazineRifleM4SPRRubber: 40
     CMArmorHelmetM10MP: 8
-    ##RMCBreachingChargeRiot: 6
+    RMCExplosiveBreachingCharge: 6 #Replace with Riot Breaching Charges
+    RMCSunglasses: 2 #Contraband - inherited from SecTech
+    RMCBoxDonut: 2 #Contraband
 
-# Senior Enlisted Advisor
+# SEA VENDOR
+
 - type: entity
   parent: CMVendor
   id: CMVendorSEA
@@ -323,16 +471,17 @@
     CMShellShotgunBeanbag: 20
     CMFirstAidKitFilled: 2
     CMBurnAidKitFilled: 2
-    #MedkitRadiationFilled: 1 #firstaid rad 1
-    # Crew Monitor
+    #RadiationMedkit: 1
+    CMHeadset: 6
+    #CrewMonitor: 1
 
+# BOTANY VENDORS
 
-# Nutriments
 - type: entity
   parent: CMVendor
   id: CMVendorNutri
   name: NutriMax
-  description: A plant nutrient vendor.
+  description: A plant nutrients vendor.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/nutri.rsi
@@ -350,9 +499,9 @@
     PestSpray: 20
     Syringe: 5
     PlantBag: 5
+    #AmmoniaBottle: 10 #Premium
+    #DiethylamineBottle: 5 #Premium
 
-
-# Seeds
 - type: entity
   parent: CMVendor
   id: CMVendorSeeds
@@ -398,16 +547,22 @@
     PumpkinSeeds: 3
     # CherrySeed: 3
     RiceSeeds: 3
+    #LibertyMycelium: 1 #Contraband
+    #MessaTearSeeds: 1 #Contraband
+    AmbrosiaVulgarisSeeds: 1 #Contraband
+    NettleSeeds: 1 #Contraband
+    LingzhiSeeds: 1 #ReishiMycelium #Contraband
+    #WaterFlower: 1 #Premium
     GarlicSeeds: 3
     OnionSeeds: 3
 
+# DINNERWARE
 
-# Dinnerware
 - type: entity
   parent: CMVendor
   id: CMVendorDinnerware
   name: Dinnerware
-  description: A kitchen and restaraunt equipment vendor.
+  description: A kitchen and restaurant equipment vendor.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/dinnerware.rsi
@@ -419,19 +574,19 @@
   startingInventory:
     # TODO RMC14 Tray: 8
     RMCFork: 6
-    RMCSpoon: 4
-    RMCKitchenKnife: 5
+    RMCKitchenKnifeChef: 3
     DrinkGlass: 8
     ClothingOuterApronChef: 2
     RMCCondimentSmallSalt: 4
     RMCCondimentSmallPepper: 4
     RMCCondimentEnzyme: 1
     RMCCondiment: 8
+    RMCSpoon: 2 #Contraband
+    RMCKitchenKnife: 2 #Contraband
+    RMCRollingPin: 2 #Contraband
+    RMCKitchenKnifeButcher: 2 #Contraband
     FoodPlateTin: 5
     FoodBowlBig: 10
-    RMCKitchenKnifeButcher: 1
-    RMCKitchenKnifeChef: 3
-    RMCRollingPin: 4
     PairedChopsticks: 4
     FoodPlate: 10
     FoodPlateSmall: 10
@@ -452,6 +607,7 @@
     DrinkMugRed: 2
 
 # BODA
+
 - type: entity
   parent: CMVendor
   id: CMVendorSodaSoviet
@@ -467,9 +623,56 @@
   id: CMVendorSodaSoviet
   startingInventory:
     CMDrinkCanBoda: 30
+    CMDrinkCanBodaPlyus: 20 #Contraband
 
+# REC-VEND - This is a vending machine as opposed to the vendor in general.yml
 
-# Ingridients
+- type: entity
+  parent: CMVendor
+  id: RMCVendorRecVend
+  name: Rec-Vend
+  description: Contains Weston-Yamada approved recreational items, like Walkmans and Cards.
+  suffix: Vending Machine
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/walkman.rsi
+  - type: VendingMachine
+    pack: RMCVendorRecVend
+
+- type: vendingMachineInventory
+  id: RMCVendorRecVend
+  startingInventory:
+    #Pop1Cassette: 10
+    #HipHopCassette: 10
+    #NamCassette: 10
+    #OceanCassette: 10
+    #Pop3Cassette: 10
+    #Pop4Cassette: 10
+    #Pop2Cassette: 10
+    #HeavyMetalCassette: 10
+    #HairMetalCassette: 10
+    #IndieCassette: 10
+    #Walkman: 50
+    #CassettePouch: 15
+    #Deck: 5
+    #UnoDeck: 5
+    #Camera: 5
+    #CameraFilm: 10
+    #Notepad: 5
+    #Toner: 5
+    #ColonialGruntsPaper: 15
+    d20Dice: 10
+    CMPen: 10
+    #BluePen: 10
+    #RedPen: 10
+    CMPenFountain: 3
+    #TradingCardCigPack: 20
+    #TradingCardPack: 20
+    #TradingCard: 50
+    #ToySword: 2 #Contraband
+
+# INGREDIENTS VENDOR
+
 - type: entity
   parent: CMVendor
   id: CMVendorIngredients
@@ -492,7 +695,6 @@
     RMCCondimentEnzyme: 12
     ReagentContainerFlour: 12
     RMCCondimentSugar: 12
-    RMCCondimentCornOil: 12
     RMCCondimentSmallSalt: 12
     RMCCondimentSmallPepper: 12
     # TODO RMC14 Mint 12
@@ -514,3 +716,5 @@
     FoodOnion: 12
     FoodGarlic: 12
     ReagentContainerRice: 12
+
+#TODO RMC14 UPP CO Uniform Vendor

@@ -1,9 +1,9 @@
-# SPECIALIST
+# GEAR VENDOR
 
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechSWSGear
-  name: ColMarTech squad weapons specialist gear rack
+  name: ColMarTech Squad Weapons Specialist Gear Rack
   description: An automated gear rack for Squad Weapons Specialists.
   components:
   - type: RMCVendorSpecialist
@@ -18,53 +18,93 @@
     pointsType: Specialist
     sections:
     - name: Weapons Specialist Sets
-      takeOne: SquadSpecKit
+      choices: { SquadSpecKit: 1 }
       sharedSpecLimit: 2 # 2 as requested until Pyro is added
       entries:
       - id: RMCDemoSpecEquipmentCase
+        name: Demolitionist Set
       - id: RMCGrenadeSpecEquipmentCase
-      #  points: 0
+        name: Heavy Grenadier Set
       #- id: PyroSet
-      #  points: 0
+      #  name: Pyro Set
       - id: RMCScoutSpecEquipmentCase
+        name: Scout Set
       - id: CMSniperEquipmentCase
+        name: Sniper Set
+        recommended: true
         linkedEntries:
         - RMCAntiMaterielEquipmentCase
       - id: RMCAntiMaterielEquipmentCase
+        name: Anti-Materiel Sniper Set
+        recommended: true
         linkedEntries:
         - CMSniperEquipmentCase
     - name: Extra Scout Ammunition
       entries:
       - id: RMCMagazineRifleM4SPRA19Impact
+        name: A19 High Velocity Impact Magazine (10x24mm)
         points: 40
       - id: RMCMagazineRifleM4SPRA19Incendiary
+        name: A19 High Velocity Incendiary Magazine (10x24mm)
         points: 40
       - id: RMCMagazineRifleM4SPRA19
+        name: A19 High Velocity Magazine (10x24mm)
         points: 40
     - name: Extra Sniper Ammunition
       entries:
       - id: CMMagazineSniperM96SFlak
+        name: M96S Flak Magazine (10x28mm)
         points: 40
       - id: CMMagazineSniperM96SIncendiary
+        name: M96S Incendiary Magazine (10x28mm)
         points: 40
       - id: CMMagazineSniperM96S
+        name: M96S Marksman Magazine (10x28mm Caseless)
         points: 40
       - id: RMCMagazineSniperXM43E1AntiMateriel
+        name: XM43E1 Marksman Magazine (10x99mm Caseless)
         points: 40
     - name: Extra Demolitionist Ammunition
       entries:
       - id: RMCRocket84mmAntiArmor
+        name: 84mm Anti-Armor Rocket
         points: 40
       - id: RMCRocket84mm
+        name: 84mm High-Explosive Rocket
         points: 40
-    #- id: 84mmWhitePhosphorusRocket
-    #  points: 40
+      #- id: 84mmWhitePhosphorusRocket
+      #  name: 84mm White-Phosphorus Rocket
+      #  points: 40
     - name: Extra Grenades
       entries:
       - id: CMGrenadeHighExplosive
-        name: M40 HEDP Blast Grenades (x6)
+        name: M40 HEDP Grenades x6
         points: 40
         spawn: 6
+      - id: RMCGrenadeIncendiary
+        name: M40 HIDP Incendiary Grenades x6
+        points: 40
+        spawn: 6
+      #- id: CCDPGrenades
+      #  name: M40 CCDP Chemical Compound Grenades x6
+      #  points: 40
+      #  spawn: 6
+      - id: RMC40MMGrenadeM74AGMF
+        name: M74 AGM-F Fragmentation Grenades x6
+        points: 40
+        spawn: 6
+      - id: RMC40MMGrenadeM74AGMI
+        name: M74 AGM-I Incendiary Grenades x6
+        points: 40
+        spawn: 6
+      - id: RMC40MMGrenadeM74AGMS
+        name: M74 AGM-S Smoke Grenades x6
+        points: 20
+        spawn: 6
+      #- id: G2 Electric Grenades
+      #  name: G2 Electroshock Grenade Pack x6
+      #  points: 40
+      #  spawn: 6
       - id: CMGrenadeFrag # TODO RMC14 hefa and smoke temporarily until normal options are coded
         name: M40 HEFA Frag Grenades (x6)
         points: 40
@@ -73,34 +113,24 @@
         name: M40 HSDP Smoke Grenades (x6)
         points: 20
         spawn: 6
-      - id: RMCGrenadeIncendiary
-        name: M40 HIDP Incendiary Grenades (x6)
-        points: 40
-        spawn: 6
-    #- id: M40HPDPWhitePhosphorusGrenadesx6
-    #  points: 40
-      - id: RMC40MMGrenadeM74AGMF
-        points: 40
-        spawn: 6
-      - id: RMC40MMGrenadeM74AGMI
-        points: 40
-        spawn: 6
-      - id: RMC40MMGrenadeM74AGMS
-        points: 20
-        spawn: 6
-    - name: Extra Flamethrower Tanks
-      entries: [ ]
-    #- id: LargeIncineratorTank
-    #  points: 40
-    #- id: LargeIncineratorTankB GreenFlame
-    #  points: 40
-    #- id: LargeIncineratorTankX BlueFlame
-    #  points: 40
+    #- name: Extra Flamethrower Tanks
+    #  entries:
+    #  - id: LargeIncineratorTank
+    #    name: Large Incinerator Tank
+    #    points: 40
+    #  - id: LargeIncineratorTankB
+    #    name: Large Incinerator Tank (B) (Green Flame)
+    #    points: 40
+    #  - id: LargeIncineratorTankX
+    #    name: Large Incinerator Tank (X) (Blue Flame)
+    #    points: 40
+
+# EQUIPMENT VENDOR
 
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechSWSEquipment
-  name: ColMarTech squad weapons specialist equipment rack
+  name: ColMarTech Squad Weapons Specialist Equipment Rack
   description: An automated rack hooked up to a colossal storage of Squad Weapons Specialist standard-issue equipment.
   components:
   - type: AccessReader
@@ -116,131 +146,210 @@
       takeAll: CMStandard
       entries:
       - id: CMVendorBundleWeaponsSpecialistApparel
+        name: Standard Marine Apparel
+        mandatory: true
       - id: CMMRE
+        name: MRE
+        mandatory: true
       #- id: CMMap # TODO: Make a map
+      #  name: Map
+      #  mandatory: true
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
       - id: CMBackpackMarine
+        name: Backpack
       - id: CMSatchelMarine
+        name: Satchel
         recommended: true
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
       - id: RMCBeltUtilityGeneral
+        name: G8-A General Utility Pouch
+        recommended: true
       - id: CMBeltMarine
+        name: M276 Ammo Load Rig
       - id: RMCBeltHolsterPistol
-      - id: RMCBeltHolsterRevolver
-      - id: RMCBeltHolsterSMG
+        name: M276 General Pistol Holster Rig
+        recommended: true
       - id: RMCBeltHolsterSMGPouch
-    #- id: RMCBeltHolsterFlareGun
+        name: M276 M63 Holster Rig
+      #- id: M10HolsterRig
+      #  name: M276 M10 Holster Rig
+      - id: RMCBeltHolsterRevolver
+        name: M276 General Revolver Holster Rig
+      #- id: RMCBeltHolsterFlareGun
+      #  name: M276 M82F Holster Rig
       - id: RMCM276ShotgunShellLoadingRig
+        name: M276 Shotgun Shell Loading Rig
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
       - id: RMCPouchFirstAidInjectors
-        name: first-aid pouch (refillable injectors)
+        name: First-Aid Pouch (Refillable Injectors)
         recommended: true
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+        name: First-Aid Pouch (Gauze, Ointment) # TODO RMC14 splints comma
         recommended: true
       - id: RMCPouchFirstAidPills
-        name: first-aid pouch (pills)
+        name: First-Aid Pouch (Pill Packets)
         recommended: true
       - id: RMCPouchFlareFilled
-        name: Flare pouch (Full)
+        name: Flare Pouch (Full)
       - id: RMCPouchMagazine
+        name: Magazine Pouch
         recommended: true
       - id: RMCPouchShotgun
-#        recommended: true
+        name: Shotgun Shell Pouch
+        recommended: true
       - id: RMCPouchMagazinePistolLarge
-      - id: RMCPouchGeneralMedium
+        name: Large Pistol Magazine Pouch
+      - id: RMCPouchGeneral
+        name: Medium General Pouch
       - id: RMCPouchPistol
-      #- id: CMSlingPouch
+        name: Pistol Pouch
+      #- id: RMCPouchSling
+      #  name: Sling Pouch
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBrown
+        name: Brown Webbing Vest
         recommended: true
       - id: CMWebbingBlack
-      - id: CMWebbing
-      - id: CMWebbingPouch
+        name: Black Webbing Vest
       - id: CMWebbingHolster
+        name: Shoulder Holster
+      - id: CMWebbing
+        name: Webbing
+      - id: RMCWebbingBlackSmall
+        name: Black Webbing
+      - id: CMWebbingPouch
+        name: Drop Pouch
     - name: Mask
       choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
+        name: Gas Mask
       - id: CMMaskCoif
-      - id: RMCMaskRebreather
+        name: Heat Absorbent Coif
     - name: Restricted Firearms
       entries:
       - id: RMCGunCasePistolMK80
+        name: MK80 Pistol
         points: 15
       - id: RMCGunCasePistolSmart
+        name: SU-6 Smart Pistol
         points: 15
     - name: Sidearm Ammunition
       entries:
+      #- id: M10HVExt
+      #  name: M10 HV extended magazine (10x20mm)
+      #  points: 10
+      #- id: M10HVDrum
+      #  name: M10 HV drum magazine (10x20mm)
+      #  points: 15
+      #- id: M44HeavySpeedloader
+      #  name: M44 Heavy Speed Loader (.44)
+      #  points: 10
       - id: RMCSpeedLoader44Marksman
+        name: M44 Marksman Speed Loader (.44)
         points: 10
+      #- id: M1984HPMag
+      #  name: M1984 HP Magazine
+      #  points: 5
+      - id: RMCMagazinePistolM1984AP
+        name: M1984 AP Magazine
+        points: 5
       - id: CMMagazinePistolMK80
+        name: MK80 Magazine
         points: 5
       - id: RMCMagazinePistolSU6
+        name: SU-6 Smartpistol Magazine (.45)
         points: 10
     - name: Clothing Items
       entries:
       - id: RMCScabbardMacheteFilled
-        name: machete scabbard (Full)
+        name: Machete Scabbard (Full)
         points: 6
       - id: RMCPouchMacheteFilled
-        name: machete pouch (Full)
+        name: Machete Pouch (Full)
         points: 15
       - id: RMCBackpackRTO
+        name: UNMC Radio Telephone Pack
         points: 15
       - id: RMCPouchFuelTank
+        name: Fuel Tank Strap Pouch
         points: 5
-    #- id: CMWeldingGoggles
+      #- id: RMCWeldingGoggles
+      #  name: Welding Goggles
+      #  points: 3
       - id: RMCPouchGeneralLarge
+        name: Large General Pouch
         points: 10
       - id: CMBeltUtilityCombat
+        name: M276 Pattern Combat Toolbelt Rig
         points: 15
       - id: RMCPouchAutoinjectorFill
-        name: autoinjector pouch (Full)
+        name: Autoinjector Pouch (Full)
         points: 15
     - name: Utilities
       entries:
       - id: CMRollerBedSpawnFolded
+        name: Roller Bed
         points: 5
       - id: RMCFulton20
+        name: Fulton Device Stack
         points: 5
       - id: CMFireExtinguisherPortable
+        name: Fire Extinguisher (Portable)
         points: 5
       - id: RMCMotionDetector
+        name: Motion Detector
+        points: 10
+      - id: RMCIntelDetector
+        name: Data Detector
         points: 10
       - id: RMCWhistle
+        name: Whistle
         points: 5
-    - name: Binoculars
-      entries:
       - id: RMCBinoculars
+        name: Binoculars
         points: 5
+      - id: RMCRangefinder
+        name: Range Finder
+        points: 10
       - id: RMCLaserDesignator
+        name: Laser Designator
         points: 15
-    - name: Helmet Optics
-      entries: [ ]
-    #- id: CMMedicalHelmetOptic
-    #- id: CMWeldingVisor
+    #- name: Helmet Optics
+    #  entries:
+    #  - id: CMMedicalHelmetOptic
+    #    name: Medical Helmet Optic
+    #    points: 15
+    #  - id: CMWeldingVisor
+    #    name: Welding Visor
+    #    points: 5
     - name: Pamphlets
       entries:
       - id: CMPamphletJTAC
+        name: JTAC Pamphlet
         points: 15
       - id: CMPamphletEngineer
+        name: Engineering Pamphlet
         points: 15
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer
+        name: Engineering Radio Encryption Key
         points: 5
       - id: CMEncryptionKeyIntel
+        name: Intel Radio Encryption Key
         points: 5
       - id: CMEncryptionKeyJTAC
+        name: JTAC Radio Encryption Key
         points: 5
       - id: CMEncryptionKeyRequisition
+        name: Supply Radio Encryption Key
         points: 5

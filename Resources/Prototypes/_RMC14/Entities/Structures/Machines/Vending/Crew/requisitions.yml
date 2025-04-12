@@ -1,12 +1,10 @@
-# REQUISITIONS
-
 # ARMAMENTS VENDOR
 
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCargoGuns
-  name: ColMarTech automated armaments vendor
-  description: An automated supply rack hooked up to a big storage of various firearms and explosives. Can be accessed by the Requisitions Officer and Cargo Techs.
+  name: ColMarTech Automated Armaments Vendor
+  description: An automated supply rack hooked up to a big storage of various firearms, explosives, load carrying equipment and other miscellaneous items. Can be accessed by the Quartermaster and Cargo Technicians.
   components:
   - type: AccessReader
     access:
@@ -18,304 +16,488 @@
     - name: Primary firearms
       entries:
       - id: WeaponShotgunM42A2
+        name: M42A2 Pump Shotgun
         amount: 30
       - id: WeaponSMGM63
+        name: M63 Submachinegun
         amount: 60
       - id: WeaponRifleM54C
+        name: M54C Assault Rifle MK2
         amount: 60
       - id: WeaponRifleM4SPR
+        name: M4SPR Battle Rifle
         amount: 20
     - name: Sidearms
       entries:
+      #- id: M10AutoPistol
+      #  name: M10 Auto Pistol
+      #  amount: 50
       - id: RMCWeaponPistolM77
+        name: M77 Combat Pistol
         amount: 50
       - id: RMCWeaponRevolverM44
+        name: M44 Combat Revolver
         amount: 50
       - id: CMWeaponPistolM1984
+        name: M1984 Service Pistol
         amount: 50
       #- id: CMWeaponFlareM82F
+      #  name: M82F Flare Gun
       #  amount: 20
     - name: Restricted Firearms
       entries:
       - id: RMCGunCasePistolMK80
+        name: MK80 Pistol
         amount: 4
       - id: RMCGunCasePistolSmart
+        name: SU-6 Smart Pistol
         amount: 3
       - id: RMCMOU53Case
+        name: MOU-53 Shotgun
         amount: 2
       - id: RMCCaseXM88
+        name: XM88 Heavy Rifle
         amount: 3
       - id: RMCGunCaseRifleM54CE2
+        name: M54CE2 Heavy Assault Rifle
         amount: 3
       - id: RMCM54CMK1Case
+        name: M54C Assault Rifle MK1
         amount: 3
       #- id: M56D Heavy Machine Gun
+      #  name: M56D Heavy Machine Gun
       #  amount: 2
       #- id: M2C Heavy Machine Gun
+      #  name: M2C Heavy Machine Gun
       #  amount: 2
       - id: RMCCaseFlamer
+        name: M34 Incinerator Unit
         amount: 2
       - id: RMCM79Case
+        name: M79 Grenade Launcher
         amount: 3
       - id: RMCXM51Case
+        name: XM51 Breaching Scattergun
         amount: 3
     - name: Explosives
       entries:
       - id: CMGrenadeFragOld
+        name: M15 Fragmentation Grenade
         amount: 2
       #- id: M20 Claymore Anti-Personnel Mine
+      #  name: M20 Claymore Anti-Personnel Mine
       #  amount: 4
       - id: CMGrenadeHighExplosive
+        name: M40 HEDP Grenade
         amount: 25
       - id: RMCGrenadeIncendiary
+        name: M40 HIDP Incendiary Grenade
         amount: 4
-      #- id: M40 HPDP White Phosphorus Smoke Grenade
+      #- id: M40 CCDP Chemical Compound Smoke Grenade
+      #  name: M40 CCDP Chemical Compound Smoke Grenade
       #  amount: 4
       - id: CMGrenadeSmoke
+        name: M40 HSDP Smoke Grenade
         amount: 5
       - id: RMC40MMGrenadeM74AGMF
+        name: M74 AGM-Frag Airburst Grenade
         amount: 4
       - id: RMC40MMGrenadeM74AGMI
+        name: M74 AGM-Incendiary Airburst Grenade
         amount: 4
       - id: RMC40MMGrenadeM74AGMS
+        name: M74 AGM-Smoke Airburst Grenade
         amount: 4
       - id: RMCStarShellM74AGMS
+        name: M74 AGM-Star Shell
         amount: 2
       - id: RMCHornetShellM74AGMS
+        name: M74 AGM-Hornet Shell
         amount: 4
+      #- id: ElectricGrenade
+      #  name: G2 Electroshock Grenade
+      #  amount: 5
       - id: RMCBatonSlugHIRR
+        name: M40 HIRR Baton Slug
         amount: 8
       #- id: M40 MFHS Metal Foam Grenade
+      #  name: M40 MFHS Metal Foam Grenade
       #  amount: 6
       - id: RMCExplosivePlastic
+        name: Plastic Explosives
         amount: 3
       - id: RMCExplosiveBreachingCharge
+        name: Breaching Charge
         amount: 2
     - name: Webbings
       entries:
-      - id: CMWebbingBrown
-        amount: 2
       - id: CMWebbingBlack
+        name: Black Webbing Vest
         amount: 2
-      - id: CMWebbing
-        amount: 5
-      - id: CMWebbingPouch
+      - id: CMWebbingBrown
+        name: Brown Webbing Vest
         amount: 2
       - id: CMWebbingHolster
+        name: Shoulder Holster
         amount: 2
+      - id: CMWebbing
+        name: Webbing
+        amount: 5
+      - id: RMCWebbingBlackSmall
+        name: Black Webbing
+        amount: 5
       - id: CMWebbingKnivesFilled
+        name: Knife Webbing
         amount: 1
-      - id: RMCOuterClothingExternalWebbing
+      - id: CMWebbingPouch
+        name: Drop Pouch
         amount: 2
+      - id: RMCOuterClothingExternalWebbing
+        name: External Webbing
+        amount: 5
     - name: Backpacks
       entries:
       - id: CMBackpackMarine
+        name: Lightweight IMP Backpack
         amount: 15
       - id: RMCScabbardShotgun
+        name: Shotgun Scabbard
         amount: 10
       - id: RMCBackpackFlamer
+        name: Pyrotechnician G4-1 Fueltank
         amount: 2
       - id: CMBackpackWelder
+        name: Technician Welderpack
         amount: 2
       - id: CMBackpackMortar
+        name: Mortar Shell Backpack
         amount: 1
       - id: RMCSatchelWelder
+        name: Technician Welder-Satchel
         amount: 5
       - id: RMCBackpackAmmo
+        name: IMP Ammo Rack
         amount: 2
       - id: RMCBackpackRTO
+        name: Radio Telephone Pack
         amount: 2
       #- id: Parachute
+      #  name: Parachute
       #  amount: 20
       - id: RMCSatchelGrenadeSpec
+        name: Grenade Satchel
         amount: 2
     - name: Belts
       entries:
       - id: RMCBeltUtilityGeneral
+        name: G8-A General Utility Pouch
         amount: 2
       - id: CMBeltMarine
+        name: M276 Ammo Load Rig
         amount: 15
       - id: RMCBeltHolsterPistol
+        name: M276 General Pistol Holster Rig
         amount: 10
       - id: CMBeltKnifeFilled
-        name: M276 Knife Rig (Full)
-        amount: 5
-      - id: RMCBeltHolsterSMG
+        name: M276 Knife Rig
         amount: 5
       - id: RMCBeltHolsterSMGPouch
+        name: M276 M63 Holster Rig
         amount: 5
+      #- id: M10 Holster Rig
+      #  name: M10 Holster Rig
+      #  amount: 5
       - id: RMCBeltGrenade
+        name: M276 M40 Grenade Rig
         amount: 2
       - id: RMCBeltHolsterRevolver
+        name: M726 General Revolver Holster Rig
         amount: 5
       #- id: M276 M82F Holster Rig
+      #  name: M276 M82F Holster Rig
       #  amount: 2
       - id: RMCM276ShotgunShellLoadingRig
+        name: M276 Shotgun Shell Loading Rig
         amount: 10
       - id: CMBeltMortar
+        name: M276 Mortar Operator Belt
         amount: 2
     - name: Pouches
       entries:
       - id: RMCPouchAutoinjector
+        name: Autoinjector Pouch
         amount: 1
       - id: RMCPouchMedkit
+        name: Medical Kit Pouch
         amount: 2
       - id: RMCPouchFirstAidInjectors
+        name: First-Aid Pouch (Full)
         amount: 5
       - id: RMCPouchFirstResponder
-        name: First Responder Pouch (Empty)
+        name: First Responder Pouch
         amount: 2
       - id: RMCPouchSyringe
+        name: Syringe Pouch
         amount: 2
       - id: RMCPouchToolsFill
         name: Tools Pouch (Full)
         amount: 2
       - id: RMCPouchConstruction
+        name: Construction Pouch
         amount: 2
       - id: RMCPouchElectronics
+        name: Electronics Pouch
         amount: 2
       - id: RMCPouchExplosive
+        name: Explosive Pouch
         amount: 2
       - id: RMCPouchFlareFilled
-        name: flare pouch (Full)
+        name: Flare Pouch (Full)
         amount: 5
       - id: RMCPouchDocumentSmall
+        name: Document Pouch
         amount: 2
       #- id: RMCPouchSling
+      #  name: Sling Pouch
       #  amount: 2
       - id: RMCPouchMacheteFilled
-        name: machete pouch (Full)
+        name: Machete Pouch (Full)
         amount: 1
       - id: RMCPouchBayonet
-        name: Bayonet Sheath (Full)
+        name: Bayonet Pouch
         amount: 2
       - id: RMCPouchGeneralMedium
+        name: Medium General Pouch
         amount: 2
       - id: RMCPouchMagazine
+        name: Magazine Pouch
         amount: 5
       - id: RMCPouchShotgun
+        name: Shotgun Shell Pouch
         amount: 5
       - id: RMCPouchPistol
+        name: Sidearm Pouch
         amount: 5
       - id: RMCPouchMagazinePistolLarge
+        name: Large Pistol Magazine Pouch
         amount: 5
       - id: RMCPouchFuelTank
+        name: Fuel Tank Strap Pouch
         amount: 4
       - id: RMCPouchGeneralLarge
+        name: Large General Pouch
         amount: 1
       - id: RMCPouchMagazineLarge
+        name: Large Magazine Pouch
         amount: 1
       - id: RMCPouchShotgunLarge
+        name: Large Shotgun Shell Pouch
         amount: 1
     - name: Miscellaneous
       entries:
       - id: RMCFlashlight # Combat Flashlight
-        amount: 5
+        name: Flashlight
+        amount: 8
       - id: CMEntrenchingTool
+        name: Entrenching Tool
         amount: 4
       - id: CMMaskGas
+        name: Gas Mask
         amount: 10
       - id: RMCPackFlareCAS
+        name: M89-S Signal Flare Pack
         amount: 2
       - id: CMPackFlare
+        name: M94 Marking Flare Pack
         amount: 10
       - id: RMCScabbardMacheteFilled
+        name: Machete Scabbard (Full)
         amount: 6
       #- id: MB-6 Folding Barricades (x3)
-      #   amount: 3
+      #  name: MB-6 Folding Barricades (x3)
+      #  amount: 3
       - id: RMCMotionDetector
+        name: Motion Detector
         amount: 4
       - id: RMCIntelDetector
+        name: Data Detector
         amount: 4
       - id: RMCBinoculars
+        name: Binoculars
         amount: 2
       - id: RMCRangefinder
+        name: Rangefinder
         amount: 1
       - id: RMCLaserDesignator
+        name: Laser Designator
         amount: 1
-      #- id: Welding Goggles
+      #- id: RMCWeldingGoggles
+      #  name: Welding Goggles
       #  amount: 3
       - id: CMFireExtinguisherPortable
+        name: Fire Extinguisher (Portable)
         amount: 3
       - id: RMCPowerCellHigh
+        name: High-Capacity Power Cell
         amount: 1
       - id: RMCFulton20
+        name: Fulton Device Stack
         amount: 1
       #- id: Sentry Gun Network Laptop
-      #   amount: 4
+      #  name: Sentry Gun Network Laptop
+      #  amount: 4
       - id: CMPamphletJTAC
+        name: JTAC Pamphlet
         amount: 1
       - id: CMPamphletEngineer
+        name: Engineering Pamphlet
         amount: 1
       #- id: Powerloader Certification
+      #  name: Powerloader Certification
       #  amount: 1
       #- id: Spare PDT/L Battle Buddy Kit
+      #  name: Spare PDT/L Battle Buddy Kit
       #  amount: 4
       - id: RMCPowerCellCrap
-        amount: 10
+        name: We-Ya brand rechargeable mini-battery
+        amount: 3
       - id: RMCMagazineSMGNailgun
+        name: Nailgun Magazine (7x45mm)
         amount: 4
-    - name: Explosive Boxes
+    - name: Explosives Boxes
       hasBoxes: true
       entries:
       - id: CMPacketGrenadeFragOldFilled
-        name: M15 fragmentation grenade packet
+        name: M15 Fragmentation Grenade Packet
         box: CMGrenadeFragOld
         boxAmount: 3
         boxSlots: 3
       - id: CMPacketGrenadeHighExplosiveFilled
-        name: M40 HEDP grenade packet
+        name: M40 HEDP Grenade Packet
         box: CMGrenadeHighExplosive
         boxAmount: 3
         boxSlots: 3
+      #- id: HEDPBox
+      #  name: M40 HEDP Grenade Box
+      #  box: HEDPBox
+      #  boxAmount: 25
+      #  boxSlots: 25
       - id: RMCPacketGrenadeIncendiaryFilled
-        name: M40 HIDP grenade packet
+        name: M40 HIDP Grenade Packet
         box: RMCGrenadeIncendiary
         boxAmount: 3
         boxSlots: 3
+      #- id: HIDPBox
+      #  name: M40 HIDP Grenade Box
+      #  box: HIDPBox
+      #  boxAmount: 25
+      #  boxSlots: 25
+      #- id: M40 CCDP Grenade Packet
+      #  name: M40 CCDP Grenade Packet
+      #  box: CCDPPacket
+      #  boxAmount: 3
+      #  boxSlots: 3
+      #- id: M40 CCDP Grenade Box
+      #  name: M40 CCDP Grenade Box
+      #  box: CCDPBox
+      #  boxAmount: 25
+      #  boxSlots: 25
       - id: RMCPacketGrenadeSmokeFilled
-        name: M40 HSDP grenade packet
+        name: M40 HSDP Grenade Packet
         box: CMGrenadeSmoke
         boxAmount: 3
         boxSlots: 3
+      #- id: MetalFoamGrenadePacket
+      #  name: M40 MFHS Grenade Packet
+      #  box: MetalFoamGrenadePacket
+      #  boxAmount: 3
+      #  boxSlots: 3
+      - id: RMCPacketGrenadeBatonSlugHIRRFilled
+        name: M40 HIRR Baton Slug Packet
+        box: RMCBatonSlugHIRR
+        boxAmount: 3
+        boxSlots: 3
       - id: RMCPacketGrenadeM74AGMFFilled
-        name: M74AGM-F grenade packet
+        name: M74 AGM-F Grenade Packet
         box: RMC40MMGrenadeM74AGMF
         boxAmount: 3
         boxSlots: 3
+      #- id: AGM-F Box
+      #  name: M74 AGM-F Grenade Box
+      #  box: AGM-F Box
+      #  boxAmount: 25
+      #  boxSlots: 25
       - id: RMCPacketGrenadeM74AGMIFilled
-        name: M74AGM-I grenade packet
+        name: M74 AGM-I Grenade Packet
         box: RMC40MMGrenadeM74AGMI
         boxAmount: 3
         boxSlots: 3
+      #- id: AGM-I Box
+      #  name: M74 AGMI-I Grenade Box
+      #  box: AGM-I Box
+      #  boxAmount: 25
+      #  boxSlots: 25
       - id: RMCPacketGrenadeM74AGMSFilled
-        name: M74AGM-S grenade packet
+        name: M74 AGM-S Smoke Grenade Packet
         box: RMC40MMGrenadeM74AGMS
         boxAmount: 3
         boxSlots: 3
       - id: RMCPacketGrenadeM74AGMSStarShellFilled
-        name: M74AGM-S Starshell grenade packet
+        name: M74 AGM-S Star Shell Packet
         box: RMCStarShellM74AGMS
         boxAmount: 3
         boxSlots: 3
       - id: RMCPacketGrenadeM74AGMSHornetFilled
-        name: M74AGM-S Hornet grenade packet
+        name: M74 AGM-H Hornet Shell Packet
         box: RMCHornetShellM74AGMS
         boxAmount: 3
         boxSlots: 3
-      - id: RMCPacketGrenadeBatonSlugHIRRFilled
-        name: HIRR Baton Slug packet
-        box: RMCBatonSlugHIRR
-        boxAmount: 3
-        boxSlots: 3
+      #- id: G2ElectricGrenadePacket
+      #  name: G2 Electroshock grenade packet
+      #  box: G2ElectricGrenadePacket
+      #  boxAmount: 3
+      #  boxSlots: 3
+      #- id: M20MineBox
+      #  name: M20 mine box
+      #  box: M20MineBox
+      #  boxAmount: 5
+      #  boxSlots: 5
+    - name: Other Boxes
+      hasBoxes: true
+      entries:
+      - id: RMCBoxFlashlights #Replace with combat flashlight
+        name: Box of Flashlights
+        box: RMCFlashlight
+        boxAmount: 8
+        boxSlots: 8
+      - id: RMCBoxPackFlare
+        name: Box of M94 Marking Flare Packs
+        box: CMPackFlare
+        boxAmount: 10
+        boxSlots: 10
+      - id: RMCBoxPackFlareCAS
+        name: Box of M89 Signal Flare Packs
+        box: RMCPackFlareCAS
+        boxAmount: 10
+        boxSlots: 10
+      #- id: HighCapCellBox
+      #  name: Box of High-Capacity Power Cells
+      #  box: HighCapCell
+      #  boxAmount: 8
+      #  boxSlots: 8
+      - id: RMCBoxMagazineSMGNailgun
+        name: Nailgun Magazine Box (7x45mm)
+        box: RMCMagazineSMGNailgun
+        boxAmount: 10
+        boxSlots: 10
 
-#AMMUNITION VENDOR
+# AMMUNITION VENDOR
 
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCargoAmmo
-  name: ColMarTech automated munition vendor
-  description: An automated supply rack hooked up to a big storage of various ammunition types. Can be accessed by the Requisitions Officer and Cargo Techs.
+  name: ColMarTech Automated Munition Vendor
+  description: An automated supply rack hooked up to a big storage of various ammunition types. Can be accessed by the Quartermaster and Cargo Technicians.
   components:
   - type: AccessReader
     access:
@@ -324,89 +506,136 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/ammo.rsi
   - type: CMAutomatedVendor
     sections:
-    - name: Regular ammunition
+    - name: Regular Ammunition
       entries:
       - id: RMCBoxShotgunBuckshot
+        name: Box Of Buckshot Shells
         amount: 56
       - id: RMCBoxShotgunFlechette
+        name: Box Of Flechette Shells
         amount: 56
       - id: RMCBoxShotgunSlugs
+        name: Box Of Shotgun Slugs
         amount: 56
       - id: RMCBoxShotgunBreaching
+        name: Box Of Breaching Slugs
         amount: 4
       - id: CMMagazineRifleM4SPR
+        name: M4SPR Magazine (10x24mm)
         amount: 60
       - id: CMMagazineRifleM54C
+        name: M54C MK2 Magazine (10x24mm)
         amount: 100
       - id: CMMagazineSMGM63
+        name: M63 HV Magazine (10x20mm)
         amount: 100
+      #- id: M10Magazine
+      #  name: M10 HV magazine (10x20mm)
+      #  amount: 100
       - id: RMCSpeedLoaderM44
+        name: M44 Speed Loader (.44)
         amount: 80
       - id: CMMagazinePistolM1984
+        name: M1984 Magazine (9mm)
         amount: 100
-    - name: Armor-piercing ammunition
+    - name: Armor-Piercing Ammunition
       entries:
       - id: CMMagazinePistolM77AP
+        name: M77 AP Magazine (9mm)
         amount: 50
       - id: CMMagazineRifleM4SPRAP
+        name: M4SPR AP Magazine (10x24mm)
         amount: 16
       - id: CMMagazineSMGM63AP
+        name: M63 AP Magazine (10x20mm)
         amount: 12
       - id: CMMagazineRifleM54CAP
+        name: M54C MK2 AP Magazine (10x24mm)
         amount: 10
       - id: RMCMagazinePistolM1984AP
+        name: M1984 AP Magazine (9mm)
         amount: 2
-    - name: Extended ammunition
+    - name: Extended Ammunition
       entries:
+      #- id: M10HVExtMag
+      #  name: M10 HV Extended Magazine (10x20mm)
+      #  amount: 10
+      #- id: M10HVDrumMag
+      #  name: M10 HV Drum Magazine (10x20)
+      #  amount: 8
       - id: CMMagazineSMGM63Ext
+        name: M63 Extended Magazine (10x20mm)
         amount: 10
+      #- id: M4SPRExtMag
+      #  name: M4SPR Extended Magazine (10x24mm)
+      #  amount: 10
       - id: CMMagazineRifleM54CExt
+        name: M54C MK2 Extended Magazine (10x24mm)
         amount: 8
-    - name: Special ammunition
+    - name: Special Ammunition
       entries:
       - id: RMCPowerCellSmartgun
+        name: ML66 9V Battery
         amount: 4
       - id: RMCMagazineSmartGun
+        name: ML66 Smart Gun Drum
         amount: 4
       #- id: M44 Heavy Speed Loader (.44)
+      #  name: M44 Heavy Speed Loader (.44)
       #  amount: 10
       - id: RMCSpeedLoader44Marksman
+        name: M44 Marksman Speed Loader (.44)
         amount: 16 # TODO RMC14 6 once heavy is in
-      #- id: M4A3 HP Magazine (9mm)
+      #- id: M1984 HP Magazine (9mm)
+      #  name: M1984 HP Magazine (9mm)
       #  amount: 2
       - id: CMMagazineRifleM54CE2HT
+        name: M54CE2 Holo Target Rounds (10x24mm)
         amount: 2
       - id: RMCBox458SOCOM
+        name: Box Of .458 SOCOM Rounds (.458 SOCOM)
         amount: 4
-    - name: Restricted firearm ammunition
+    - name: Restricted Firearm Ammunition
       entries:
       - id: CMMagazinePistolMK80
+        name: MK80 Magazine
         amount: 11
       - id: RMCMagazinePistolSU6
+        name: SU-6 Smartpistol Magazine (.45)
         amount: 13
       - id: RMCTankFlamer
+        name: M34 Incinerator Tank
         amount: 3
       - id: CMMagazineRifleM54CE2
+        name: M54CE2 Box Magazine (10x24mm)
         amount: 3
       - id: CMMagazineRifleM54CMK1
+        name: M54C MK1 Magazine (10x24mm)
         amount: 5
       - id: CMMagazineRifleM54CMK1AP
+        name: M54C MK1 AP Magazine (10x24mm)
         amount: 2
       #- id: M56D Drum Magazine
+      #  name: M56D Drum Magazine
       #  amount: 2
       #- id: M2C Box Magazine
+      #  name: M2C Box Magazine
       #  amount: 2
       - id: RMCMagazineShotgunXM51
+        name: XM51 Magazine (16g)
         amount: 3
     - name: Magazine Boxes
       hasBoxes: true
       entries:
-#      - name: Magazine Box (M10 x 22)
-#        box: RMCMagazine10
-#      - name: Magazine Box (Ext M10 x 14)
-#        box: RMCMagazineExtended10
-#      - name: Magazine Box (Drum M10 x 12)
-#        box: RMCMagazineDrum10
+      #- id: M10Mags
+      #  name: Magazine Box (M10 x 22)
+      #  box: RMCMagazine10
+      #- id: M10ExtMags
+      #  name: Magazine Box (Ext M10 x 14)
+      #  box: RMCMagazineExtended10
+      #- id: M10DrumMags
+      #  name: Magazine Box (Drum M10 x 12)
+      #  box: RMCMagazineDrum10
       - id: RMCBoxMagazineSMGM63
         name: Magazine Box (M63 x 12)
         box: CMMagazineSMGM63
@@ -431,35 +660,39 @@
 #      - name: Magazine Box (AP M1984 x 16)
 #        box: CMMagazinePistolM1984AP
 #      - name: Magazine Box (HP M1984 x 16)
-#        box: CMMagazineSMGM63
+#        box: M1984HPMagBox
       - id: RMCBoxMagazineRifleM4SPR
         name: Magazine Box (M4SPR x 16)
         box: CMMagazineRifleM4SPR
       - id: RMCBoxMagazineRifleM4SPRAP
         name: Magazine Box (AP M4SPR x 16)
         box: CMMagazineRifleM4SPRAP
-#      - name: Magazine Box (M54CE2 x 8)
-#        box: RMCCrateMagazineRifleM54CE2
-#      - name: Magazine Box (M54CE2 Holo-Target x 8)
-#        box: CMMagazineSMGM63
-#      - name: Magazine Box (M54C MK1 x 8)
-#        box: CMMagazineSMGM63
-#      - name: Magazine Box (M54C MK1 AP x 8)
-#        box: CMMagazineSMGM63
+      #- id: M4SPRExtMagBox
+      #  name: Magazine Box (Ext M4SPR x 16)
+      #  box: M4SPRExtMagBox
+      #- id: M54CE2MagBox
+      #- name: Magazine Box (M54CE2 x 8)
+      #  box: RMCCrateMagazineRifleM54CE2
+      #- name: Magazine Box (M54CE2 Holo-Target x 8)
+      #  box: M43CE2HoloMagBox
+      #- name: Magazine Box (M54C MK1 x 8)
+      #  box: M54CMK1MagBox
+      #- name: Magazine Box (M54C MK1 AP x 8)
+      #  box: M54CMK1APMagBox
       - id: RMCBoxShellsBuckshot
-        name: Magazine Box (Buckshot x 100)
+        name: Shotgun Shell Box (Buckshot x 100)
         box: RMCBoxShotgunBuckshot
         boxAmount: 4
       - id: RMCBoxShellsFlechette
-        name: Magazine Box (Flechette x 100)
+        name: Shotgun Shell Box (Flechette x 100)
         box: RMCBoxShotgunFlechette
         boxAmount: 4
       - id: RMCBoxShellsSlugs
-        name: Magazine Box (Slugs x 100)
+        name: Shotgun Shell Box (Slugs x 100)
         box: RMCBoxShotgunSlugs
         boxAmount: 4
       - id: RMCBoxShellsBreaching
-        name: Magazine Box (16g) (Breaching x 120)
+        name: Shotgun Shell Box (16g) (Breaching x 120)
         box: RMCBoxShotgunBreaching
         boxAmount: 4
       - id: RMCBoxMagazinePistolM77AP
@@ -471,60 +704,68 @@
       - id: RMCBoxMagazinePistolMK80
         name: Magazine Box (MK80 x 16)
         box: CMMagazinePistolMK80
-#      - name: Magazine Box (XM51 x 8)
-#        box: RMCMagazineShotgunXM51
-#      - name: Magazine Box (.458 SOCOM x 300) # TODO RMC14
-#        box: RMCBox458SOCOM
-#      - name: Magazine Box (M2C x 8)
-#        box: CMMagazineSMGM63
-#      - name: Magazine Box (M56B x 8)
-#        box: CMMagazineSMGM63
-#      - name: Magazine Box (M56D x 8)
-#        box: CMMagazineSMGM63
+      #- id: XM51MagBox
+      #  name: Magazine Box (XM51 x 8)
+      #  box: RMCMagazineShotgunXM51
+      #- id: SOCOMBox
+      #  name: Rounds Box (.458 SOCOM x 300) # TODO RMC14
+      #  box: RMCBox458SOCOM
+      #- id: M2CMagBox
+      #  name: Ammo Box (M2C x 8)
+      #  box: M2CMag
+      #- id: SGDrumBox
+      #  name: Drum Box (ML66A x 8)
+      #  box: RMCMagazineSmartGun
+      #- id: M56DDrumBox
+      #  name: Drum Box Box (M56D x 8)
+      #  box: M56DDrum
       - id: RMCBoxMagazineRevolverM44
-        name: Magazine Box (M44 x 16)
+        name: Speed Loaders Box (M44 x 16)
         box: RMCSpeedLoaderM44
       - id: RMCBoxMagazineRevolverM44Marksman
-        name: Magazine Box (Marksman M44 x 16)
+        name: Speed Loaders Box (Marksman M44 x 16)
         box: RMCSpeedLoader44Marksman
-#      - name: Magazine Box (Heavy M44 x 16)
-#        box: CMMagazineSMGM63
-#      - name: Magazine Box (UT-Napthal Fuel x 8)
-#        box: CMMagazineSMGM63
+      #- id: HeavySpeedLoaderBox
+      #- name: Speed Loaders Box (Heavy M44 x 16)
+      #  box: RMCSpeedLoader44Heavy
+      #- id: FlamerTankBox
+      #- name: Flamer Tank Box (UT-Napthal Fuel x 8)
+      #  box: RMCTankFlamer
     - name: Ammunition Boxes
       hasBoxes: true
       entries:
       - id: RMCBoxBulletsSMG
-        name: SMG HV ammunition box (10x20mm) (M63)
+        name: SMG HV Ammunition Box (10x20mm) (M63)
         box: CMMagazineSMGM63
         boxSlots: 13 # 600 / 48, yes we loose half a mag to the void
       - id: RMCBoxBulletsSMGAP
-        name: SMG ammunition box (10x20mm AP) (M63)
+        name: SMG AP Ammunition Box (10x20mm AP) (M63)
         box: CMMagazineSMGM63AP
         boxSlots: 13 # 600 / 48, yes we loose half a mag to the void
       - id: RMCBoxBulletsRifle
-        name: rifle ammunition box (10x24mm) (M4SPR)
+        name: Rifle Ammunition Box (10x24mm) (M4SPR)
         box: CMMagazineRifleM4SPR
         boxSlots: 24 # 600 / 25
       - id: RMCBoxBulletsRifleAP
-        name: rifle ammunition box (10x24mm AP) (M4SPR)
+        name: Rifle AP Ammunition Box (10x24mm AP) (M4SPR)
         box: CMMagazineRifleM4SPRAP
         boxSlots: 24 # 600 / 25
       - id: RMCBoxBulletsRifle
-        name: rifle ammunition box (10x24mm) (M54C)
+        name: Rifle Ammunition Box (10x24mm) (M54C)
         box: CMMagazineRifleM54C
         boxSlots: 15 # 600 / 40
       - id: RMCBoxBulletsRifleAP
-        name: rifle ammunition box (10x24mm AP) (M54C)
+        name: Rifle AP Ammunition Box (10x24mm AP) (M54C)
         box: CMMagazineRifleM54CAP
         boxSlots: 15 # 600 / 40
- #ATTACHMENTS VENDOR
+
+# ATTACHMENTS VENDOR
 
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCargoAttachments
-  name: Aegis Armaments attachments vendor
-  description: An automated supply rack hooked up to a big storage of weapons attachments. Can be accessed by the Requisitions Officer and Cargo Techs.
+  name: Aegis Armaments Attachments Vendor
+  description: An automated supply rack hooked up to a big storage of weapons attachments. Can be accessed by the Quartermaster and Cargo Technicians.
   components:
   - type: AccessReader
     access:
@@ -536,77 +777,112 @@
     - name: Barrel
       entries:
       - id: RMCAttachmentExtendedBarrel
+        name: Extended Barrel
         amount: 7
       - id: RMCM5Bayonet
+        name: M5 Bayonet
         amount: 11
       - id: RMCAttachmentRecoilCompensator
+        name: Recoil Compensator
         amount: 7
       - id: RMCAttachmentSuppressor
+        name: Suppressor
         amount: 7
+      #- id: ShotgunChoke
+      #  name: Shotgun Choke
+      #  amount: 5
     - name: Rail
       entries:
       - id: RMCAttachmentB8SmartScope
+        name: B8 Smart-Scope
         amount: 4
       - id: RMCAttachmentMagneticHarness
+        name: Magnetic Harness
         amount: 9
       - id: RMCAttachmentRailFlashlight
+        name: Rail Flashlight
         amount: 11
       - id: RMCAttachmentS42xTelescopicMiniscope
+        name: S4 2x Telescopic Mini-Scope
         amount: 5
       - id: RMCAttachmentS5RedDotSight
+        name: S5 Red-Dot Sight
         amount: 10
       - id: RMCAttachmentS6ReflexSight
+        name: S6 Reflex Sight
         amount: 10
       - id: RMCAttachmentS84xTelescopicScope
+        name: S8 4x Telescopic Scope
         amount: 5
     - name: Underbarrel
       entries:
       - id: RMCAttachmentAngledGrip
+        name: Angled Grip
         amount: 7
       - id: RMCAttachmentBipod
+        name: Bipod
         amount: 7
       - id: RMCAttachmentBurstFireAssembly
+        name: Burst Fire Assembly
         amount: 5
       - id: RMCAttachmentGyroscopicStabilizer
+        name: Gyroscopic Stabilizer
         amount: 5
       - id: RMCAttachmentLaserSight
+        name: Laser Sight
         amount: 10
       - id: RMCAttachmentMiniFlamethrower
+        name: Mini Flamethrower
         amount: 5
       #- id: RMCAttachmentXMVESG1FlamerNozzle
+      #  name: XM-VESG-1 Flamer Nozzle
       #  amount: 5
       - id: RMCAttachmentU7UnderbarrelShotgun
+        name: U7 Underbarrel Shotgun
         amount: 5
       - id: RMCAttachmentUnderbarrelExtinguisher
+        name: Underbarrel Extinguisher
         amount: 5
+      - id: RMCAttachmentFlashlightGrip
+        name: Underbarrel Flashlight Grip
+        amount: 10
       - id: RMCAttachmentU1GrenadeLauncher
+        name: Underslung Grenade Launcher
         amount: 10
       - id: RMCAttachmentVerticalGrip
+        name: Vertical Grip
         amount: 10
     - name: Stock
       entries:
       - id: RMCAttachmentM42A2WoodenStock
+        name: M42 Wooden Stock
         amount: 5
       - id: RMCAttachmentM63ArmBrace
+        name: M63 Arm Brace
         amount: 5
       - id: RMCAttachmentM63StockCollapsible
+        name: M63 Folding Stock
         amount: 5
       - id: RMCAttachmentM63Stock
+        name: M63 Stock
         amount: 5
       - id: RMCAttachmentM54CStockSolid
+        name: M54C Solid Stock
         amount: 5
       - id: RMCAttachmentM54CStockCollapsible
+        name: M54C Folding Stock
         amount: 5
       - id: RMCAttachmentM44MagnumSharpshooterStock
+        name: M44 Magnum Sharpshooter Stock
         amount: 5
 
-#UNIFORM VENDOR
+# UNIFORM VENDOR
 
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCargoUniform
-  name: ColMarTech surplus uniform vendor
-  description: An automated supply rack hooked up to a big storage of standard marine uniforms. Can be accessed by the Requisitions Officer and Cargo Techs.
+  name: ColMarTech Surplus Uniform Vendor
+  description: An automated supply rack hooked up to a big storage of standard marine uniforms. Can be accessed by the Quartermaster and Cargo Technicians.
   components:
   - type: AccessReader
     access:
@@ -617,87 +893,243 @@
     sections:
     - name: Uniform
       entries:
-      - id: CMBackpackMarine
-        amount: 20
-      - id: CMBootsBlack
-        amount: 20
-      - id: CMBeltMarine
-        amount: 10
-      - id: RMCM276ShotgunShellLoadingRig
-        amount: 10
-      - id: CMSatchelMarine
-        amount: 20
       - id: JumpsuitMarine
+        name: UNMC Uniform
         amount: 20
+      - id: CMJumpsuitMarineEngineer
+        name: UNMC Combat Technician Uniform
+        amount: 5
+      - id: CMJumpsuitMarineMedic
+        name: UNMC Hospital Corpsman uniform
+        amount: 5
+    - name: Boots
+      entries:
+      - id: CMBootsBlack
+        name: Marine Combat Boots
+        amount: 20
+      - id: CMBootsBrown
+        name: Marine Brown Combat Boots
+        amount: 5
+      #- id: CMBootsJungle
+      #  name: Marine Jungle Combat Boots
+      #  amount: 5
+      #- id: CMBootsGrey
+      #  name: Marine Grey Combat Boots
+      #  amount: 5
+      #- id: CMBootsUrban
+      #  name: Marine Urban Combat Boots
+      #  amount: 5
+    - name: Backpacks
+      entries:
+      - id: CMBackpackMarine
+        name: Lightweight IMP Backpack
+        amount: 20
+      - id: CMSatchelMarine
+        name: UNMC Satchel
+        amount: 20
+      #- id: MarineChestrig
+      #  name: UNMC Chestrig
+      #  amount: 10
+      - id: CMBackpackMarineTech
+        name: UNMC Technician Backpack
+        amount: 10
+      - id: CMSatchelMarineTech
+        name: UNMC Technician Chestrig
+        amount: 10
+      - id: CMBackpackMedical
+        name: UNMC Corpsman Backpack
+        amount: 10
+      - id: CMSatchelMedical
+        name: UNMC Corpsman Satchel
+        amount: 10
     - name: Armor
       entries:
       - id: ArmorHelmetM10
+        name: M10 Pattern Marine Helmet
         amount: 20
       - id: CMArmorHelmetM10Tech
+        name: M10 Pattern Technician Helmet
         amount: 20
       - id: CMArmorHelmetM10Medic
+        name: M10 Pattern Corpsman Helmet
         amount: 20
       - id: RMCArmorM3MediumCarrier
-        amount: 15
+        name: M3 Pattern Carrier Marine Armor
+        amount: 20
       - id: RMCArmorM3MediumPadded
-        amount: 15
+        name: M3 Pattern Padded Marine Armor
+        amount: 20
       - id: RMCArmorM3MediumPadless
-        amount: 15
+        name: M3 Pattern Padless Marine Armor
+        amount: 20
       - id: RMCArmorM3MediumRidged
-        amount: 15
+        name: M3 Pattern Ridged Marine Armor
+        amount: 20
       - id: RMCArmorM3MediumSkull
-        amount: 15
+        name: M3 Pattern Skull Marine Armor
+        amount: 20
       - id: RMCArmorM3MediumSmooth
+        name: M4 Pattern Smooth Marine Armor
         amount: 15
       - id: RMCArmorM3HeavyPadded
+        name: M3-EOD Pattern Heavy Armor
         amount: 10
       - id: RMCArmorM3LightPadded
+        name: M3-L Pattern Light Armor
         amount: 10
     - name: Gloves
       entries:
-      - id: CMHandsBrown
-        amount: 40
       - id: CMHandsBlackMarine
+        name: Marine Combat Gloves
         amount: 40
+      #- id: NonSquadGloves #Gloves that don't adopt squad color
+      #  name: Marine Black Combat Gloves
+      #  amount: 40
+      #- id: CMHandsBrownMarine
+      #  name: Marine Brown Combat Gloves
+      #  amount: 20
+      #- id: CMHandsGreyMarine
+      #  name: Marine Grey Combat Gloves
+      #  amount: 20
     - name: Radio
       entries:
-      - id: CMHeadset
-        amount: 5
       - id: CMEncryptionKeyAlpha
+        name: Alpha Squad Radio Encryption Key
         amount: 5
       - id: CMEncryptionKeyBravo
+        name: Bravo Squad Radio Encryption Key
         amount: 5
       - id: CMEncryptionKeyCharlie
+        name: Charlie Squad Radio Encryption Key
         amount: 5
       - id: CMEncryptionKeyDelta
+        name: Delta Squad Radio Encryption Key
         amount: 5
       - id: CMEncryptionKeyEcho
+        name: Echo Squad Radio Encryption Key
         amount: 5
       - id: CMEncryptionKeyFoxtrot
         amount: 5
       - id: CMEncryptionKeyEngineer
+        name: Engineering Radio Encryption Key
         amount: 5
       - id: CMEncryptionKeyIntel
+        name: Intel Radio Encryption Key
         amount: 5
       - id: CMEncryptionKeyJTAC
+        name: JTAC Radio Encryption Key
         amount: 5
       - id: CMEncryptionKeyMedical
+        name: Medical Radio Encryption Key
         amount: 5
       #- id: Sentry Gun Network Encryption Key
+      #  name: Sentry Gun Network Encryption Key
       #  amount: 8
+      - id: RMCHeadsetShip
+        name: Marine Radio Headset
+        amount: 5
       - id: CMEncryptionKeyRequisition
+        name: Supply Radio Encryption Key
         amount: 5
     - name: Masks
       entries:
       - id: CMMaskGas
+        name: Gas Mask
         amount: 20
       - id: CMMaskCoif
+        name: Heat Absorbent Coif
         amount: 10
-      - id: RMCMaskRebreather
-        amount: 20
     - name: Miscellaneous
       entries:
       - id: BedrollFolded
+        name: Bedroll
         amount: 30
       - id: RMCM5CameraGear
+        name: M5 Camera Gear
         amount: 3
+
+# TRAINING WEAPONS VENDOR
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechTraining
+  name: ColMarTech Automated Training Weapons Rack
+  description: An automated weapon rack hooked up to a big storage of standard-issue weapons and non-lethal ammunition.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
+  - type: CMAutomatedVendor
+    sections:
+    - name: Primary Firearms
+      entries:
+      - id: WeaponRifleM4SPR
+        name: M4SPR Battle Rifle
+        amount: 10
+      - id: WeaponShotgunM42A2
+        name: M42A2 Pump Shotgun
+        amount: 15
+      - id: WeaponSMGM63
+        name: M63 Submachine Gun
+        amount: 30
+      - id: WeaponRifleM54C
+        name: M54C Assault Rifle MK2
+        amount: 30
+        recommended: true
+    - name: Primary Nonlethal Ammunition
+      entries:
+      - id: RMCBoxShotgunBeanbag
+        name: Box of Beanbag Shells (12g)
+        amount: 15
+      - id: RMCMagazineRifleM4SPRRubber
+        name: M4SPR Rubber Magazine (10x24mm)
+        amount: 15
+      - id: RMCMagazineSMGM63Rubber
+        name: M63 Rubber Magazine (10x20mm)
+        amount: 25
+      - id: RMCMagazineRifleM54CRubber
+        name: M54C Rubber Magazine (10x24mm)
+        amount: 25
+    - name: Sidearms
+      entries:
+      - id: RMCWeaponPistolM77Empty
+        name: M77 Combat Pistol
+        amount: 25
+      - id: CMWeaponPistolM1984Empty
+        name: M1984 Service Pistol
+        amount: 25
+    - name: Sidearm Nonlethal Ammunition
+      entries:
+      - id: RMCMagazinePistolM77Rubber
+        name: M77 Rubber Magazine (9mm)
+        amount: 25
+      - id: RMCMagazinePistolM1984Rubber
+        name: M1984 Rubber Magazine (9mm)
+        amount: 25
+    - name: Attachments
+      entries:
+      - id: RMCAttachmentRailFlashlight
+        name: Rail Flashlight
+        amount: 25
+        recommended: true
+      - id: RMCAttachmentFlashlightGrip
+        name: Underbarrel Flashlight Grip
+        amount: 10
+        recommended: true
+      - id: RMCAttachmentU1GrenadeLauncher
+        name: Underslung Grenade Launcher
+        amount: 25
+    - name: Utilities
+      entries:
+      - id: RMCGrenadeTraining
+        name: M07 Training Grenade
+        amount: 15
+      #- id: RMCGrenadeRubber
+      #  name: M15 Rubber Pellet Grenade
+      #  amount: 10
+      - id: RMCM5Bayonet
+        name: M5 Bayonet
+        amount: 25
+      - id: CMPackFlare
+        name: M94 Marking Flare Pack
+        amount: 10
+        recommended: true

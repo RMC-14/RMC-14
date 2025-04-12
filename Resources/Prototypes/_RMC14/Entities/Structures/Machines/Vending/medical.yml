@@ -1,4 +1,4 @@
-# MEDICAL
+# SUPPLY LINK FOR MEDICAL VENDORS
 
 - type: entity
   id: CMMedilinkSupplyPort
@@ -15,6 +15,9 @@
     drawdepth: FloorObjects
   - type: CMMedicalSupplyLink
 
+# RESTOCK CARTS FOR MEDICAL VENDORS TODO restock carts
+
+# MEDICAL VENDOR
 
 - type: entity
   parent: ColMarTechBaseAnchorable
@@ -43,9 +46,9 @@
     - CMTricordrazine
     - CMEpinephrine
     - CMInaprovaline
-#    - CMOxycodone # TODO RMC14
-#    - CMTramadol # TODO RMC14
-#    - CMPeridaxon # TODO RMC14
+    #- CMOxycodone TODO RMC14
+    #- CMTramadol TODO RMC14
+    #- CMPeridaxon TODO RMC14
     whitelist:
       components:
       - Hypospray
@@ -58,88 +61,126 @@
     - name: Field supplies
       entries:
       - id: CMBurnKit10
-        amount: 6
+        name: Burn Kit
+        amount: 10
       - id: CMTraumaKit10
-        amount: 6
+        name: Trauma Kit
+        amount: 10
       - id: CMOintment10
-        amount: 6
+        name: Ointment
+        amount: 10
       - id: CMGauze10
-        amount: 6
-#      - id: CMSplints10 # TODO RMC14
-#        amount: 6
+        name: Roll of Gauze
+        amount: 10
+      #- id: CMSplints10 # TODO RMC14
+      #  name: Splints
+      #  amount: 10
     - name: Autoinjectors
       entries:
       - id: CMBicaridineAutoInjector
-        amount: 3
+        name: Autoinjector (Bicaridine)
+        amount: 5
       - id: CMDexalinPlusAutoInjector
-        amount: 3
+        name: Autoinjector (Dexalin+)
+        amount: 5
       - id: CMEpinephrineAutoInjector
-        amount: 3
+        name: Autoinjector (Epinephrine)
+        amount: 5
       - id: CMInaprovalineAutoInjector
-        amount: 3
+        name: Autoinjector (Inaprovaline)
+        amount: 5
       - id: CMKelotaneAutoInjector
-        amount: 3
-#      - id: CMOxycodoneAutoinjector # TODO RMC14
-#        amount: 3
-#      - id: CMTramadolAutoinjector # TODO RMC14
-#        amount: 3
+        name: Autoinjector (Kelotane)
+        amount: 5
+      #- id: CMOxycodoneAutoinjector # TODO RMC14
+      #  name: Autoinjector (Oxycodone)
+      #  amount: 5
+      #- id: CMTramadolAutoinjector # TODO RMC14
+      #  name: Autoinjector (Tramadol)
+      #  amount: 5
       - id: CMTricordrazineAutoInjector
-        amount: 3
-    - name: Liquid bottles
+        name: Autoinjector (Tricord)
+        amount: 5
+    - name: Liquid Bottles
       entries:
       - id: CMBottleBicaridine
+        name: Bottle (Bicaridine)
         amount: 3
       - id: CMBottleDylovene
+        name: Bottle (Dylovene)
         amount: 3
       - id: CMBottleDexalin
+        name: Bottle (Dexalin)
         amount: 3
       - id: CMBottleInaprovaline
+        name: Bottle (Inaprovaline)
         amount: 3
       - id: CMBottleKelotane
+        name: Bottle (Kelotane)
         amount: 3
-#      - id: CMBottleOxycodone # TODO RMC14
-#        amount: 3
-#      - id: CMBottlePeridaxon # TODO RMC14
-#        amount: 3
-#      - id: CMBottleTramadol # TODO RMC14
-#        amount: 3
-    - name: Pill bottles
+      #- id: CMBottleOxycodone # TODO RMC14
+      #  name: Bottle (Oxycodone)
+      #  amount: 3
+      #- id: CMBottlePeridaxon # TODO RMC14
+      #  name: Bottle (Peridaxon)
+      #  amount: 3
+      #- id: CMBottleTramadol # TODO RMC14
+      #  name: Bottle (Tramadol)
+      #  amount: 3
+    - name: Pill Bottles
       entries:
       - id: CMPillCanisterBicaridine
-        amount: 2
+        name: Pill Bottle (Bicaridine)
+        amount: 4
       - id: CMPillCanisterDexalin
-        amount: 2
+        name: Pill Bottle (Dexalin)
+        amount: 4
       - id: CMPillCanisterDylovene
-        amount: 2
+        name: Pill Bottle (Dylovene)
+        amount: 4
       - id: CMPillCanisterInaprovaline
-        amount: 2
+        name: Pill Bottle (Inaprovaline)
+        amount: 4
       - id: CMPillCanisterKelotane
-        amount: 2
-#      - id: CMPillCanisterPeridaxon # TODO RMC14
-#        amount: 2
-#      - id: CMPillCanisterTramadol # TODO RMC14
-#        amount: 2
-    - name: Medical utilities
+        name: Pill Bottle (Kelotane)
+        amount: 4
+      #- id: CMPillCanisterPeridaxon # TODO RMC14
+      #  name: Pill Bottle (Peridaxon)
+      #  amount: 3
+      #- id: CMPillCanisterTramadol # TODO RMC14
+      #  name: Pill Bottle (Tramadol)
+      #  amount: 4
+    - name: Medical Utilities
       entries:
       - id: CMDefibrillator
+        name: Emergency Defibrillator
         amount: 3
       - id: CMSurgicalLine
+        name: Surgical Line
         amount: 2
       - id: CMSynthGraft
+        name: Synth-Graft
         amount: 2
       - id: CMHyposprayFilledTricord
-        amount: 2
+        name: Hypospray
+        amount: 3
       - id: CMHealthAnalyzer
+        name: Health Analyzer
         amount: 5
       - id: CMBeltMedical
+        name: M276 Pattern Medical Storage Rig
         amount: 2
       - id: RMCGlassesMedicalHUDGlasses
+        name: Medical HUD Glasses
         amount: 3
       - id: CMStasisBagFolded
-        amount: 2
+        name: Stasis Bag
+        amount: 3
       - id: CMSyringe
+        name: Syringe
         amount: 7
 
+# CHEMISTRY VENDOR
 
 - type: entity
   parent: CMVendorMedical
@@ -157,6 +198,15 @@
   - type: CMSolutionRefiller
     current: 1200
     max: 1200
+    reagents:
+    - CMBicaridine
+    - CMDylovene
+    - CMDexalin
+    - CMInaprovaline
+    - CMKelotane
+    #- CMOxycodone TODO RMC14
+    #- CMPeridaxon TODO RMC14
+    #- CMTramadol TODO RMC14
     whitelist:
       tags:
       - Bottle
@@ -165,42 +215,54 @@
     - name: Liquid bottles
       entries:
       - id: CMBottleBicaridine
+        name: Bicaridine Bottle
         amount: 6
       - id: CMBottleDylovene
+        name: Dylovene Bottle
         amount: 6
       - id: CMBottleDexalin
+        name: Dexalin Bottle
         amount: 6
       - id: CMBottleInaprovaline
+        name: Inaprovaline Bottle
         amount: 6
       - id: CMBottleKelotane
+        name: Kelotane Bottle
         amount: 6
-    #      - id: CMBottleOxycodone # TODO RMC14
-    #        amount: 6
-    #      - id: CMBottlePeridaxon # TODO RMC14
-    #        amount: 6
-    #      - id: CMBottleTramadol # TODO RMC14
-    #        amount: 6
+      #- id: CMBottleOxycodone # TODO RMC14
+      #  name: Oxycodone Bottle
+      #  amount: 6
+      #- id: CMBottlePeridaxon # TODO RMC14
+      #  name: Peridaxon Bottle
+      #  amount: 6
+      #- id: CMBottleTramadol # TODO RMC14
+      #  name: Tramadol Bottle
+      #  amount: 6
     - name: Miscellaneous
       entries:
       - id: CMBeaker
-        name: Beaker (60 units)
+        name: Beaker (60 Units)
         amount: 3
       - id: CMBeakerLarge
-        name: Beaker, Large (120 units)
+        name: Beaker, Large (120 Units)
         amount: 3
       - id: RMCBoxPillCanister
+        name: Box of Pill Bottles
         amount: 2
       - id: RMCDropper
+        name: Dropper
         amount: 3
       - id: CMSyringe
+        name: Syringe
         amount: 7
 
+# MARINE MEDICAL VENDOR
 
 - type: entity
   parent: ColMarTechBaseAnchorable
   id: ColMarTechMarineMedical
   name: ColMarTech MarineMed
-  description: Medical Pharmaceutical dispenser with basic medical supplies for marines.
+  description: Medical pharmaceutical dispenser with basic medical supplies for marines.
   components:
   - type: Fixtures
     fixtures:
@@ -227,7 +289,7 @@
     rechargeCooldown: 4
     reagents:
     - CMTricordrazine
-#    - CMTramadol # TODO RMC14
+    #- CMTramadol TODO RMC14
     whitelist:
       components:
       - Hypospray
@@ -236,22 +298,90 @@
     - name: Autoinjectors
       entries:
       - id: CMTricordrazineAutoInjectorNoSkill
+        name: First-Aid Autoinjector
         amount: 5
-    #- id: CMPainStopAutoinjector
+      #- id: CMPainStopAutoinjector
+      #  name: Pain-Stop Autoinjector
+      #  amount: 5
     - name: Devices
       entries:
       - id: CMHealthAnalyzer
+        name: Health Analyzer
         amount: 3
     - name: Field Supplies
       entries:
       - id: CMFireExtinguisherPortable
+        name: Fire Extinguisher (Portable)
         amount: 5
       - id: CMOintment10
-        amount: 7
+        name: Ointment
+        amount: 8
       - id: CMGauze10
-        amount: 7
-#      - id: CMMedicalSplints5
-#        amount: 7
+        name: Roll of Gauze
+        amount: 8
+      #- id: CMMedicalSplints5
+      #  name: Splints
+      #  amount: 8
+
+# BLOOD VENDOR
+
+- type: entity
+  parent: ColMarTechBaseAnchorable
+  id: CMVendorBlood
+  name: MM Blood Dispenser
+  description: The MarineMed brand blood dispensary is the premier, top-of-the-line blood dispenser of 2105! Get yours today! #dont update year, that`s a joke from cm13
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/blood.rsi
+    snapCardinals: true
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "normal-unshaded"
+      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+      shader: unshaded
+    - state: "panel"
+      visible: false
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: ApcPowerReceiver
+    needsPower: false # TODO RMC14
+    powerLoad: 0
+  - type: AccessReader
+    access:
+    - [ "CMAccessMedical" ]
+  - type: CMAutomatedVendor
+    hackable: true
+    sections:
+    - name: Blood Packs
+      entries:
+      - id: CMBloodPackFull #Temporary until blood types are ported
+        name: Full Blood Pack
+        amount: 30
+      #- id: RMCBloodPackA+Full
+      #  name: A+ Blood Pack
+      #  amount: 5
+      #- id: RMCBloodPackA-Full
+      #  name: A- Blood Pack
+      #  amount: 5
+      #- id: RMCBloodPackB+Full
+      #  name: B+ Blood Pack
+      #  amount: 5
+      #- id: RMCBloodPackB-Full
+      #  name: B- Blood Pack
+      #  amount: 5
+      #- id: RMCBloodPackO+Full
+      #  name: O+ Blood Pack
+      #  amount: 5
+      #- id: RMCBloodPackO-Full
+      #  name: O- Blood Pack
+      #  amount: 5
+    - name: Miscellaneous
+      entries:
+      - id: CMBloodPack
+        name: Empty Blood Pack
+        amount: 5
+
+# NANOMED VENDOR
 
 - type: entity
   parent: ColMarTechBaseAnchorable
@@ -284,7 +414,9 @@
     rechargeCooldown: 4
     reagents:
     - CMTricordrazine
-#    - CMTramadol # TODO RMC14
+    #- CMTramadol TODO RMC14
+    - CMBicaridine
+    - CMKelotane
     whitelist:
       components:
       - Hypospray
@@ -293,54 +425,98 @@
     sections:
     - name: Supplies
       entries:
-      # - id: CMPainStopAutoinjector
-      #   amount: 2
       - id: CMTricordrazineAutoInjectorNoSkill
+        name: First-Aid Autoinjector
         amount: 2
+      #- id: CMPainStopAutoinjector
+      #  name: Pain-Stop Autoinjector
+      #  amount: 2
       - id: CMGauze10
+        name: Roll of Gauze
         amount: 4
       - id: CMOintment10
+        name: Ointment
         amount: 4
-      # - id: CMMedicalSplints5
-      #   amount: 4
+      #- id: CMMedicalSplints5
+      #  name: Medical Splints
+      #  amount: 4
     - name: Utility
       entries:
       - id: CMHealthAnalyzer
-        amount: 3
+        name: HF2 Health Analyzer
+        amount: 2
 
 - type: entity
-  parent: ColMarTechBaseAnchorable
-  id: CMVendorBlood
-  name: MM Blood Dispenser
-  description: The Marine Med Brand Blood Pack Dispensary is the premier, top-of-the-line blood dispenser of 2105! Get yours today! #dont update year, that`s a joke from cm13
+  parent: RMCNanoMed
+  id: RMCNanoMedLimited
+  description: A wall-mounted medical equipment dispenser. This version is more limited than standard UNMC NanoMeds.
+  suffix: Limited
+  components:
+  - type: CMSolutionRefiller
+    current: 150
+    max: 150
+    recharge: 125 # TODO RMC14 auto-restock items as well if round is >= 20 minutes in
+    rechargeCooldown: 4
+    reagents:
+    - CMTricordrazine
+    #- CMTramadol TODO RMC14
+    whitelist:
+      components:
+      - Hypospray
+
+- type: entity
+  parent: RMCNanoMed
+  id: RMCBobdaMed
+  name: BobdaMed
+  description: In Bobdaland (Trademark pending), one is never more than 6ft away from canned Havana goodness. Drink a Bobda today! For a full selection of Bobda products please visit a licensed retailer or vending machine. Also doubles as basic first aid station.
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Machines/VendingMachines/blood.rsi
-    snapCardinals: true
-    layers:
-    - state: "off"
-      map: ["enum.VendingMachineVisualLayers.Base"]
-    - state: "normal-unshaded"
-      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
-      shader: unshaded
-    - state: "panel"
-      visible: false
-      map: ["enum.WiresVisualLayers.MaintenancePanel"]
-  - type: ApcPowerReceiver
-    needsPower: false # TODO RMC14
-    powerLoad: 0
-  - type: AccessReader
-    access:
-    - [ "CMAccessMedical" ]
+    drawdepth: WallMountedItems
+    sprite: _RMC14/Structures/Machines/VendingMachines/bobda_med.rsi
   - type: CMAutomatedVendor
     hackable: true
     sections:
-    - name: Blood Packs
+    - name: Supplies
       entries:
-      - id: CMBloodPackFull
-        amount: 30
-    - name: Miscellaneous
+      - id: CMTricordrazineAutoInjectorNoSkill
+        name: First-Aid Autoinjector
+        amount: 2
+      #- id: CMPainStopAutoinjector
+      #  name: Pain-Stop Autoinjector
+      #  amount: 2
+      - id: CMGauze10
+        name: Roll of Gauze
+        amount: 4
+      - id: CMOintment10
+        name: Ointment
+        amount: 4
+      #- id: CMMedicalSplints5
+      #  name: Medical Splints
+      #  amount: 4
+    - name: Utility
       entries:
-      - id: CMBloodPack
-        amount: 5
-        name: empty blood pack
+      - id: CMHealthAnalyzer
+        name: HF2 Health Analyzer
+        amount: 2
+    - name: Bobda
+      entries:
+      - id: CMDrinkCanBobdaClassic
+        name: Bobda Classic
+        amount: 1
+      - id: CMDrinkCanBobdaClassicDiet
+        name: Diet Bobda Classic
+        amount: 1
+      - id: CMDrinkCanBobdaCranberry
+        name: Bobda Cranberry
+        amount: 1
+      - id: CMDrinkCanBobdaCranberryDiet
+        name: Diet Bobda Cranberry
+        amount: 1
+      - id: CMDrinkCanBobdaGrape
+        name: Bobda Grape
+        amount: 1
+      - id: CMDrinkCanBobdaGrapeDiet
+        name: Diet Bobda Grape
+        amount: 1
+
+

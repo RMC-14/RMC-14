@@ -1,9 +1,9 @@
-# SQUAD PREPARATION
+# WEAPONS VENDOR
 
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechGuns
-  name: ColMarTech automated weapons rack
+  name: ColMarTech Automated Weapons Rack
   description: An automated weapon rack hooked up to a big storage of standard-issue weapons.
   components:
   - type: AccessReader
@@ -16,76 +16,107 @@
     - "CMAccessMarinePrep"
     hackable: true
     sections:
-    - name: Primary firearms
+    - name: Primary Firearms
       entries:
       - id: WeaponRifleM4SPR
-        amount: 10
+        name: M4SPR Battle Rifle
+        amount: 5
       - id: WeaponShotgunM42A2
-        amount: 15
+        name: M42A2 Pump Shotgun
+        amount: 10
       - id: WeaponSMGM63
-        amount: 30
+        name: M63 Submachine Gun
+        amount: 10
       - id: WeaponRifleM54C
-        amount: 30
+        name: M54C Assault Rifle MK2
+        amount: 15
         recommended: true
-    - name: Primary ammunition
+    - name: Primary Ammunition
       entries:
       - id: RMCBoxShotgunFlechette
-        amount: 4
+        name: Box of Flechette Shells (12g)
+        amount: 3
       - id: RMCBoxShotgunBuckshot
-        amount: 10
+        name: Box of Buckshot Shells (12g)
+        amount: 5
       - id: RMCBoxShotgunSlugs
-        amount: 10
+        name: Box of Shotgun Slugs (12g)
+        amount: 5
       - id: CMMagazineRifleM4SPR
+        name: M4SPR Magazine (10x24mm)
         amount: 15
       - id: CMMagazineSMGM63
-        amount: 25
+        name: M63 HV Magazine (10x20mm)
+        amount: 15
       - id: CMMagazineRifleM54C
-        amount: 25
+        name: M54C Magazine (10x24mm)
+        amount: 15
     - name: Sidearms
       entries:
-      - id: RMCWeaponPistolM77Empty
-        amount: 25
-      - id: RMCWeaponRevolverM44Empty
-        amount: 25
-      - id: CMWeaponPistolM1984Empty
-        amount: 25
-      #- id: WeaponFlareM82F
+      #- id: RMCWeaponPistolM10Empty
+      #  name: M10 Auto Pistol
       #  amount: 10
+      - id: RMCWeaponPistolM77Empty
+        name: M77 Combat Pistol
+        amount: 10
+      - id: RMCWeaponRevolverM44Empty
+        name: M44 Combat Revolver
+        amount: 10
+      - id: CMWeaponPistolM1984Empty
+        name: M1984 Service Pistol
+        amount: 10
+      #- id: WeaponFlareM82F
+      #  name: M82F Flare Gun
+      #  amount: 5
     - name: Sidearm ammunition
       entries:
+      #- id: RMCMagazinePistolM10
+      #  name: M10 HV magazine (10x20mm)
+      #  amount: 10
       - id: CMMagazinePistolM77AP
-        amount: 25
+        name: M77 AP Magazine (9mm)
+        amount: 10
       - id: RMCSpeedLoaderM44
-        amount: 20
+        name: M44 Speedloader (.44)
+        amount: 10
       - id: CMMagazinePistolM1984
-        amount: 25
+        name: M1984 Magazine (9mm)
+        amount: 10
     - name: Attachments
       entries:
       - id: RMCAttachmentM63StockCollapsible
-        amount: 10
+        name: M63 Folding Stock
+        amount: 5
       - id: RMCAttachmentM54CStockCollapsible
-        amount: 10
+        name: M54C Folding Stock
+        amount: 5
       - id: RMCAttachmentRailFlashlight
-        amount: 25
+        name: Rail Flashlight
+        amount: 10
         recommended: true
       - id: RMCAttachmentFlashlightGrip
-        amount: 10
+        name: Underbarrel Flashlight Grip
+        amount: 5
         recommended: true
       - id: RMCAttachmentU1GrenadeLauncher
-        amount: 25
+        name: Underslung Grenade Launcher
+        amount: 10
     - name: Utilities
       entries:
       - id: RMCM5Bayonet
-        amount: 25
-      - id: CMPackFlare
+        name: M5 Bayonet
         amount: 10
+      - id: CMPackFlare
+        name: M94 Marking Flare Pack
+        amount: 5
         recommended: true
 
+# UNIFORM VENDOR
 
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechSurplus
-  name: ColMarTech surplus uniform vendor
+  name: ColMarTech Surplus Uniform Vendor
   description: An automated rack hooked up to a small storage of standard marine uniforms.
   components:
   - type: AccessReader
@@ -101,99 +132,155 @@
     - name: Standard Equipment
       entries:
       - id: CMBootsBlack
+        name: Marine Combat Boots
         amount: 15
       - id: CMBootsBrown
+        name: Marine Brown Combat Boots
         amount: 15
+      #- id: RMCBootsGrey
+      #  name: Marine Grey Combat Boots
+      #  amount: 15
       - id: JumpsuitMarine
-        amount: 15
-      - id: CMHandsBrown
+        name: UNMC Uniform
         amount: 15
       - id: CMHandsBlackMarine
+        name: Marine Combat Gloves
         amount: 15
-      - id: CMHeadset
+      #- id: RMCHandsMarineBrown
+      #  name: Marine Brown Combat Gloves
+      #  amount: 15
+      #- id: RMCHandsMarineBlack
+      #  name: Marine Black Combat Gloves
+      #  amount: 15
+      #- id: RMCHandsMarineGrey
+      #  name: Marine Grey Combat Gloves
+      #  amount: 15
+      - id: RMCHeadsetShip
+        name: Marine Radio Headset
         amount: 15
       - id: ArmorHelmetM10
+        name: M10 Pattern Marine Helmet
         amount: 15
     - name: Webbings
       entries:
       - id: CMWebbingBrown
+        name: Brown Webbing Vest
         amount: 1
       - id: CMWebbingBlack
+        name: Black Webbing Vest
         amount: 1
       - id: CMWebbing
+        name: Webbing
+        amount: 2
+      - id: RMCWebbingBlackSmall
+        name: Black Webbing
         amount: 2
       - id: CMWebbingPouch
+        name: Drop Pouch
         amount: 1
       - id: CMWebbingHolster
+        name: Shoulder Holster
         amount: 1
     - name: Armor
       entries:
       - id: RMCArmorM3MediumCarrier
+        name: M3 Pattern Carrier Marine Armor
         amount: 15
       - id: RMCArmorM3MediumPadded
+        name: M3 Pattern Padded Marine Armor
         amount: 15
       - id: RMCArmorM3MediumPadless
+        name: M3 Pattern Padless Marine Armor
         amount: 15
       - id: RMCArmorM3MediumRidged
+        name: M3 Pattern Ridged Marine Armor
         amount: 15
       - id: RMCArmorM3MediumSkull
+        name: M3 Pattern Skull Marine Armor
         amount: 15
       - id: RMCArmorM3MediumSmooth
+        name: M3 Pattern Smooth Marine Armor
         amount: 15
       - id: RMCArmorM3HeavyPadded
+        name: M3-EOD Pattern Heavy Armor
         amount: 10
       - id: RMCArmorM3LightPadded
+        name: M3-L Pattern Light Armor
         amount: 10
     - name: Backpack
       entries:
       - id: CMBackpackMarine
+        name: Lightweight IMP Backpack
         amount: 15
       - id: CMBackpackMarineTech
+        name: Technician Backpack
         amount: 15
       - id: CMBackpackMedical
+        name: Medical Backpack
         amount: 15
       - id: CMSatchelMarine
+        name: UNMC Satchel
         amount: 15
-#      - id: Marine Chestrig
-#        amount: 15
+      #- id: Marine Chestrig
+      #  name: UNMC Chestrig
+      #  amount: 15
       - id: CMSatchelMarineTech
+        name: UNMC Technical Satchel
         amount: 15
       - id: RMCSatchelWelderChestrig
+        name: UNMC Technical Chestrig
         amount: 15
       - id: CMSatchelMedical
+        name: Medical Satchel
         amount: 15
       - id: RMCScabbardShotgun
+        name: Shotgun Scabbard
         amount: 5
     - name: Restricted Backpacks
       entries:
       - id: CMBackpackWelder
+        name: UNMC Technician Welderpack
         amount: 1
       - id: RMCSatchelWelder
+        name: Technician Welder-Satchel
         amount: 2
       - id: RMCBackpackRTO
+        name: Radio Telephone Backpack
         amount: 1
     - name: Belts
       entries:
       - id: CMBeltMarine
+        name: M276 Pattern Ammo Load Rig
         amount: 15
       - id: RMCBeltGrenade
+        name: M276 Pattern M40 Grenade Rig
         amount: 10
       - id: RMCM276ShotgunShellLoadingRig
+        name: M276 Pattern Shotgun Shell Loading Rig
         amount: 15
       - id: RMCBeltHolsterPistol
-        amount: 15
-      - id: RMCBeltHolsterRevolver
+        name: M276 Pattern General Pistol Holster Rig
         amount: 15
       - id: RMCBeltHolsterSMG
+        name: M276 Pattern M63 Holster Rig
         amount: 15
       - id: RMCBeltHolsterSMGPouch
+        name: M276 Pattern M63 Holster Rig And Pouch
         amount: 10
-#      - id: M276 Pattern M82F Holster Rig
-#        amount: 5
+      #- id: RMCBeltHolsterM10
+      #  name: M276 Pattern M10 holster Rig And Pouch
+      #  amount: 10
+      - id: RMCBeltHolsterRevolver
+        name: M276 Pattern General Revolver Holster Rig
+        amount: 15
+      #- id: M276 Pattern M82F Holster Rig
+      #  name: M276 Pattern M82F Holster Rig
+      #  amount: 5
       - id: CMBeltKnifeFilled
         name: M276 Knife Rig (Full)
         amount: 15
       - id: RMCBeltUtilityGeneral
+        name: M276 G8-A General Utility Pouch
         amount: 15
     - name: Pouches
       entries:
@@ -210,88 +297,131 @@
         name: Flare Pouch (Full)
         amount: 15
       - id: RMCPouchDocumentSmall
+        name: Small Document Pouch
         amount: 15
       - id: RMCPouchMagazine
+        name: Magazine Pouch
         amount: 15
       - id: RMCPouchShotgun
+        name: Shotgun Shell Pouch
         amount: 15
       - id: RMCPouchGeneralMedium
+        name: Medium General Pouch
         amount: 15
       - id: RMCPouchMagazinePistol
+        name: Pistol Magazine Pouch
         amount: 15
       - id: RMCPouchPistol
+        name: Pistol Pouch
         amount: 15
     - name: Restricted Pouches
       entries:
       - id: RMCPouchConstruction
+        name: Construction Pouch
         amount: 1
       - id: RMCPouchExplosive
+        name: Explosive Pouch
         amount: 1
       - id: RMCPouchFirstResponder
         name: First Responder Pouch (Empty)
-        amount: 2
+        amount: 3
       - id: RMCPouchMagazinePistolLarge
+        name: Large Pistol Magazine Pouch
         amount: 2
       - id: RMCPouchTools
+        name: Tools Pouch
         amount: 1
-#      - id: Sling Pouch
-#        amount: 1
+      #- id: RMCPouchSling
+      #  name: Sling Pouch
+      #  amount: 1
     - name: Mask
       entries:
       - id: CMMaskGas
+        name: Gas Mask
         amount: 15
       - id: CMMaskCoif
+        name: Heat Absorbent Coif
         amount: 10
       - id: RMCMaskRebreather
+        name: Rebreather
         amount: 10
     - name: Miscellaneous
       entries:
       - id: RMCGogglesBallistic
+        name: Ballistic goggles
         amount: 10
       - id: RMCGogglesBallisticSquad
+        name: Advanced Ballistic goggles
         amount: 10
       - id: RMCGogglesM1A1Ballistic
+        name: M1A1 Ballistic goggles
         amount: 10
       - id: RMCGogglesPrescriptionBallistic
+        name: Prescription ballistic goggles
         amount: 10
       - id: RMCGlassesMarineRpg
+        name: Marine RPG glasses
         amount: 10
       - id: RMCGlassesMarineRpgOld
+        name: Old Marine RPG glasses
         amount: 10
       - id: RMCHelmetGarbGasmask
-        name: M5 integrated gas mask
+        name: M5 Integrated Gas Mask
         amount: 10
       - id: RMCHelmetGarbNetting
-        name: M10 helmet netting
+        name: M10 Helmet Netting
         amount: 10
       - id: RMCHelmetGarbRainCover
-        name: M10 helmet rain cover
+        name: M10 Helmet Rain Cover
         amount: 10
       - id: RMCHelmetGarbGunOil
-        name: firearm lubricant
+        name: Firearm Lubricant
         amount: 15
-#      - id: Marine Flair
-#        amount: 15
-#      - id: Falling Falcons Shoulder Patch
-#        amount: 15
-#      - id: Marine Shoulder Patch
-#        amount: 15
+      #- id: Attachable Dogtags
+      #  name: Attachable Dogtags
+      #  amount: 15
+      #- id: UNMC Flair
+      #  name: UNMC Flair
+      #  amount: 15
+      #- id: Falling Falcons Shoulder Patch
+      #  name: Falling Falcons Shoulder Patch
+      #  amount: 15
+      #- id: Falling Falcons UN Shoulder Patch
+      #  name: Falling Falcons UN Shoulder Patch
+      #  amount: 15
+      #- id: UNMC Large Chest Patch
+      #  name: UNMC Large Chest Patch
+      #  amount: 15
+      #- id: UNMC Shoulder Patch
+      #  name: UNMC Shoulder Patch
+      #  amount: 15
+      #- id: United Nations Shoulder patch
+      #  name: United Nations Shoulder patch
+      #  amount: 10
+      #- id: United Nations Flag Shoulder patch
+      #  name: United Nations Flag Shoulder patch
+      #  amount: 10
       - id: BedrollFolded
+        name: Bedroll
         amount: 20
       - id: RMCM5CameraGear
+        name: M5 Camera Gear
         amount: 10
-    - name: Optics
-      entries: [ ]
-#      - id: Advanced Medical Optic (CORPSMAN ONLY)
-#        amount: 4
-#      - id: Squad Optic
-#        amount: 15
+    #- name: Optics
+    #  entries:
+    #  - id: RMCVisorMedicalAdvanced
+    #    name: Advanced Medical Optic (CORPSMAN ONLY)
+    #    amount: 4
+    #  - id: RMCVisorSquad
+    #    name: Squad Optic
+    #    amount: 15
 
+# AMMUNITION VENDOR
 
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechMunitions
-  name: ColMarTech automated munition squad vendor
+  name: ColMarTech Automated Munition Squad Vendor
   description: An automated supply rack hooked up to a small storage of various ammunition types. Can be accessed by any Marine Rifleman.
   components:
   - type: AccessReader
@@ -309,51 +439,81 @@
     - name: Armor-Piercing Ammunition
       entries:
       - id: CMMagazineRifleM4SPRAP
+        name: M4SPR AP Magazine (10x24mm)
         amount: 4
       - id: CMMagazineSMGM63AP
+        name: M63 AP Magazine (10x20mm)
         amount: 3
       - id: CMMagazineRifleM54CAP
+        name: M54C AP Magazine (10x24mm)
         amount: 3
     - name: Extended Ammunition
       entries:
+      #- id: RMCMagazineM4SPRExt
+      #  name: M4SPR Extended Magazine (10x24mm)
+      #  amount: 2
       - id: CMMagazineSMGM63Ext
+        name: M63 Extended Magazine (10x20mm)
         amount: 2
       - id: CMMagazineRifleM54CExt
+        name: M54C Extended Magazine (10x24mm)
         amount: 2
+      #- id: RMCMagazineM10Ext
+      #  name: M10 HV extended magazine (10x20mm)
+      #  amount: 5
+      #- id: RMCMagazineM10Drum
+      #  name: M10 HV drum magazine (10x20mm)
+      #  amount: 5
     - name: Special Ammunition
       entries:
       - id: RMCMagazineSmartGun
+        name: ML66A Smart Gun Drum
         amount: 1
       #- id: CMSpeedLoaderM44Heavy
+      #  name: M44 Heavy Speed Loader (.44)
       #  amount: 2
       - id: RMCSpeedLoader44Marksman
+        name: M44 Marksman Speed Loader (.44)
+        amount: 2
+      - id: RMCMagazinePistolM1984AP
+        name: M1984 AP Magazine
         amount: 2
     - name: Restricted Firearm Ammunition
       entries:
       - id: CMMagazinePistolMK80
-        amount: 6
+        name: MK80 Magazine
+        amount: 5
       - id: RMCMagazinePistolSU6
-        amount: 6
+        name: SU-6 Smartpistol Magazine (.45)
+        amount: 5
       - id: RMCTankFlamer
+        name: M34 Incinerator Tank
         amount: 3
       #- id: CMMagazineDrumM56D
+      #  name: M56D Drum Magazine
       #  amount: 2
       #- id: CMMagazineBoxM2C
+      #  name: M2C Box Magazine
       #  amount: 2
       - id: RMCBoxShotgunBreaching
+        name: Mox of Breaching Shells (16g)
         amount: 2
       - id: RMCBatonSlugHIRR
+        name: HIRR Baton Slugs
         amount: 6
       - id: RMCStarShellM74AGMS
+        name: M74 AGM-S Star Shell
         amount: 4
       - id: RMCHornetShellM74AGMS
+        name: M74 AGM-H Hornet Shell
         amount: 4
 
+# UTILITIES VENDOR
 
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechUtilities
-  name: ColMarTech automated utilities squad vendor
+  name: ColMarTech Automated Utilities Squad Vendor
   description: An automated supply rack hooked up to a small storage of various utilities and tools. Can be accessed by any Marine Rifleman.
   components:
   - type: AccessReader
@@ -371,69 +531,92 @@
     - name: Food
       entries:
       - id: CMMRE
+        name: MRE
         amount: 5
       - id: RMCBoxMRE
+        name: MRE Box
         amount: 1
     - name: Tools
       entries:
       - id: CMEntrenchingTool
+        name: Entrenching Tool (ET)
         amount: 2
       - id: CMScrewdriver
+        name: Screwdriver
         amount: 5
       - id: CMWirecutter
+        name: Wirecutters
         amount: 5
       - id: CMCrowbar
+        name: Crowbar
         amount: 5
       - id: CMWrench
+        name: Wrench
         amount: 5
       - id: CMMultitool
+        name: Multitool
         amount: 1
       - id: CMWelder
+        name: ME3 hand welder
         amount: 1
-    - name: Flare and light
+    - name: Flare and Light
       entries:
-#      #  amount: 1
       - id: RMCFlashlight # Combat Flashlight
         amount: 5
-#      #- id: RMCBoxFlashlights
-#      #  amount: 1
+      - id: RMCBoxFlashlights
+        name: Box of Flashlight
+        amount: 1
       - id: RMCBoxPackFlare
+        name: Box of Flares
         amount: 1
       - id: CMPackFlare
+        name: M94 Marking Flare Pack
         amount: 10
       - id: RMCPackFlareCAS
+        name: M89-S Signal Flare Pack
         amount: 1
     - name: Miscellaneous
       entries:
       - id: RMCEngineerKit
+        name: Engineer Kit
         amount: 1
       #- id: CMMap
+      #  name: Map
       #  amount: 5
       - id: CMFireExtinguisher
+        name: Extinguisher
         amount: 5
       - id: CMFireExtinguisherPortable
+        name: Fire Extinguisher (Portable)
         amount: 1
       - id: CMRollerBedSpawnFolded
+        name: Roller Bed
         amount: 1
       - id: RMCScabbardMacheteFilled
-        name: machete scabbard (Full)
+        name: Machete Scabbard (Full)
         amount: 5
       - id: RMCBinoculars
+        name: Binoculars
         amount: 1
       #- id: CMFoldingBarricadesMB6x3
+      #  name: MB-6 Folding Barricades (x3)
       #  amount: 2
       #- id: CMSparePDTLBattleBuddyKit
+      #  name: Spare PDT/L Battle Buddy Kit
       #  amount: 3
       - id: RMCPowerCellCrap
-        amount: 2
+        name: WeYa brand rechargeable mini-battery
+        amount: 3
       - id: RMCMagazineSMGNailgun
-        amount: 2
+        name: Nailgun Magazine (7x45mm)
+        amount: 4
 
+# ATTACHMENTS VENDOR
 
 - type: entity
   parent: ColMarTechBase
   id: CMVendorAttachments
-  name: Aegis Armaments squad attachments vendor
+  name: Aegis Armaments Squad Attachments Vendor
   description: An automated supply rack hooked up to a small storage of weapons attachments. Can be accessed by any Marine Rifleman.
   components:
   - type: AccessReader
@@ -451,56 +634,313 @@
     - name: Barrel
       entries:
       - id: RMCAttachmentExtendedBarrel
+        name: Extended Barrel
         amount: 3
       - id: RMCAttachmentRecoilCompensator
+        name: Recoil Compensator
         amount: 3
       - id: RMCAttachmentSuppressor
+        name: Suppressor
         amount: 3
+      #- id: RMCAttachmentShotgunChoke
+      #  name: Shotgun Choke
+      #  amount: 2
     - name: Rail
       entries:
       - id: RMCAttachmentB8SmartScope
+        name: B8 Smart-Scope
         amount: 2
       - id: RMCAttachmentMagneticHarness
-        amount: 5
+        name: Magnetic Harness
+        amount: 4
       - id: RMCAttachmentS42xTelescopicMiniscope
+        name: S4 2x Telescopic Mini-Scope
         amount: 2
       - id: RMCAttachmentS5RedDotSight
-        amount: 4
+        name: S5 Red-Dot Sight
+        amount: 3
       - id: RMCAttachmentS6ReflexSight
-        amount: 4
+        name: S6 Reflex Sight
+        amount: 3
       - id: RMCAttachmentS84xTelescopicScope
+        name: S8 4x Telescopic Scope
         amount: 2
     - name: Underbarrel
       entries:
       - id: RMCAttachmentAngledGrip
+        name: Angled Grip
         amount: 3
       - id: RMCAttachmentBipod
+        name: Bipod
         amount: 3
       - id: RMCAttachmentBurstFireAssembly
+        name: Burst Fire Assembly
         amount: 2
       - id: RMCAttachmentGyroscopicStabilizer
+        name: Gyroscopic Stabilizer
         amount: 2
       - id: RMCAttachmentLaserSight
+        name: Laser Sigh
         amount: 3
       - id: RMCAttachmentMiniFlamethrower
+        name: Mini Flamethrower
         amount: 2
-#      - id: CMAttachmentXMVESG1FlamerNozzle
-#        amount: 2
+      #- id: CMAttachmentXMVESG1FlamerNozzle
+      #  name: XM-VESG-1 Flamer Nozzle
+      #  amount: 2
       - id: RMCAttachmentU7UnderbarrelShotgun
+        name: U7 Underbarrel Shotgun
         amount: 2
       - id: RMCAttachmentUnderbarrelExtinguisher
+        name: Underbarrel Extinguisher
         amount: 2
       - id: RMCAttachmentVerticalGrip
+        name: Vertical Grip
         amount: 3
     - name: Stock
       entries:
       - id: RMCAttachmentM42A2WoodenStock
+        name: M42 Wooden Stock
         amount: 2
       - id: RMCAttachmentM63ArmBrace
+        name: M63 Arm Brace
         amount: 2
       - id: RMCAttachmentM63Stock
+        name: M63 Stock
         amount: 2
       - id: RMCAttachmentM54CStockSolid
+        name: M54C Solid Stock
         amount: 2
       - id: RMCAttachmentM44MagnumSharpshooterStock
+        name: M44 Magnum Sharpshooter Stock
         amount: 2
+
+# CIVILIAN CLOTHING VENDOR
+
+- type: entity
+  parent: ColMarTechBase
+  id: RMCVendorCivilianClothing
+  name: Personal Civilian Clothing Storage Unit
+  description: The vendor where all of your personal civilian clothing is stored while you are on-duty.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/snowflake.rsi
+  - type: CMAutomatedVendor
+    pointsType: Specialist
+    hackable: true
+    sections:
+    - name: Shirts and Uniforms
+      entries:
+      #- id: Clothing
+      #  name: White T-Shirt and Brown Jeans
+      #  points: 12
+      #- id: Clothing
+      #  name: Gray T-Shirt and Blue Jeans
+      #  points: 12
+      #- id: Clothing
+      #  name: Red T-Shirt and Black Jeans
+      #  points: 12
+      #- id: jumpsuit
+      #  name: Frontier Jumpsuit
+      #  points: 12
+      #- id: jumpsuit
+      #  name: UN Grey Jumpsuit
+      #  points: 12
+      #- id: jumpsuit
+      #  name: UN Brown Jumpsuit
+      #  points: 12
+      #- id: jumpsuit
+      #  name: UN Green Utility Uniform
+      #  points: 12
+      #- id: jumpsuit
+      #  name: Grey Utilities
+      #  points: 12
+      #- id: jumpsuit
+      #  name: Grey Utilities and Blue Jeans
+      #  points: 12
+      #- id: jumpsuit
+      #  name: Blue Utilities and Brown Jeans
+      #  points: 12
+      #- id: jumpsuit
+      #  name: White Service Uniform
+      #  points: 12
+      #- id: jumpsuit
+      #  name: Steward Clothes
+      #  points: 12
+      #- id: jumpsuit
+      #  name: Red Dress Skirt
+      #  points: 12
+      - id: CMJumpsuitLiaisonBlue
+        name: Blue Suit Pants
+        points: 12
+      - id: CMJumpsuitLiaisonBrown
+        name: Brown Suit Pants
+        points: 12
+      - id: CMJumpsuitLiaisonCorporateFormal
+        name: White Suit Pants
+        points: 12
+      #- id: jumpsuit
+      #  name: Average Joe Uniform
+      #  points: 36
+    - name: Glasses
+      entries:
+      - id: RMCGlassesMarineRpg
+        name: Marine RPG Glasses
+        points: 12
+      - id: RMCSunglasses
+        name: Sunglasses
+        points: 12
+    - name: Shoes
+      entries:
+      - id: CMBootsBlack
+        name: Boots
+        points: 12
+      - id: RMCShoesBlack
+        name: Shoes, Black
+        points: 12
+      - id: RMCShoesBlue
+        name: Shoes, Blue
+        points: 12
+      - id: RMCShoesBrown
+        name: Shoes, Brown
+        points: 12
+      - id: RMCShoesGreen
+        name: Shoes, Green
+        points: 12
+      - id: RMCShoesPurple
+        name: Shoes, Purple
+        points: 12
+      - id: RMCShoesRed
+        name: Shoes, Red
+        points: 12
+      - id: RMCShoesWhite
+        name: Shoes, White
+        points: 12
+      - id: RMCShoesYellow
+        name: Shoes, Yellow
+        points: 12
+    - name: Headwear
+      entries:
+      #- id: beanie
+      #  name: Beanie
+      #  points: 12
+      - id: CMHeadBeretEngineer
+        name: Beret, Engineering
+        points: 12
+      #- id: beret
+      #  name: Beret, Purple
+      #  points: 12
+      - id: CMHeadBeretRed
+        name: Beret, Red
+        points: 12
+      - id: RMCHeadBeret
+        name: Beret, Standard
+        points: 12
+      - id: CMHeadBeretTan
+        name: Beret, Tan
+        points: 12
+      - id: RMCHeadBeretGreen
+        name: Beret, Green
+        points: 12
+      #- id: beret
+      #  name: Beret, Black
+      #  points: 12
+      #- id: beret
+      #  name: Beret, White
+      #  points: 12
+      #- id: hat
+      #  name: Ushanka
+      #  points: 12
+      #- id: hat
+      #  name: Cap
+      #  points: 12
+    - name: Suit
+      entries:
+      #- id: Suit
+      #  name: Bomber Jacket, Brown
+      #  points: 12
+      #- id: Suit
+      #  name: Bomber Jacket, Black
+      #  points: 12
+      - id: RMCOuterClothingExternalWebbing
+        name: External Webbing
+        points: 12
+      #- id: Suit
+      #  name: Utility Vest
+      #  points: 12
+      - id: RMCHazardVest
+        name: Hazard Vest(Orange)
+        points: 12
+      - id: RMCHazardVestBlue
+        name: Hazard Vest(Blue)
+        points: 12
+      - id: RMCHazardVestYellow
+        name: Hazard Vest(Yellow)
+        points: 12
+      - id: RMCHazardVestBlack
+        name: Hazard Vest(Black)
+        points: 12
+      - id: RMCCoatService
+        name: UNMC Service Jacket
+        points: 12
+      #- id: Suit
+      #  name: Windbreaker, Brown
+      #  points: 12
+      #- id: Suit
+      #  name: Windbreaker, Grey
+      #  points: 12
+      #- id: Suit
+      #  name: Windbreaker, Green
+      #  points: 12
+      #- id: Suit
+      #  name: Windbreaker, First Responder
+      #  points: 12
+      #- id: Suit
+      #  name: Windbreaker, Exploration
+      #  points: 12
+      - id: RMCJacketCorporateBlack
+        name: Black Suit Jacket
+        points: 12
+      - id: RMCJacketCorporateBrown
+        name: Brown Suit Jacket
+        points: 12
+      - id: RMCJacketCorporateBlue
+        name: Blue Suit Jacket
+        points: 12
+      #- id: Suit
+      #  name: Brown Vest
+      #  points: 12
+      #- id: Suit
+      #  name: Tan Vest
+      #  points: 12
+      #- id: Suit
+      #  name: Grey Vest
+      #  points: 12
+    - name: Backpack
+      entries:
+      - id: CMBackpackEngineer
+        name: Backpack, Industrial
+        points: 12
+      - id: CMSatchel
+        name: Satchel, Leather
+        points: 12
+      - id: ClothingBackpackSatchelMedical
+        name: Satchel, Medical
+        points: 12
+    - name: Other
+      entries:
+      #- id: armband
+      #  name: Red Armband
+      #  points: 6
+      #- id: armband
+      #  name: Purple Armband
+      #  points: 6
+      #- id: armband
+      #  name: Yellow Armband
+      #  points: 6
+      #- id: armband
+      #  name: Green Armband
+      #  points: 6
+      - id: CMHandsWhiteDress
+        name: Dress Gloves
+        points: 6

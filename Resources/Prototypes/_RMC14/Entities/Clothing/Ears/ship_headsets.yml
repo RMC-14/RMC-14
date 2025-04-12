@@ -203,6 +203,12 @@
       - CMEncryptionKeyMPO
 
 - type: entity
+  parent: CMHeadsetCMP
+  id: RMCHeadsetMW
+  name: marine Military Warden radio headset
+  description: It seems oddly similar to the CMPs'... Smells like donuts too.
+
+- type: entity
   parent: RMCHeadsetShip
   id: CMHeadsetCMP
   name: marine chief MP radio headset

@@ -89,6 +89,16 @@
           False: { visible: false }
 
 - type: entity
+  parent: RMCWeaponFlamer
+  id: RMCWeaponFlamerExtinguisher
+  suffix: Extinguisher
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentUnderbarrelExtinguisher
+
+- type: entity
   parent: BaseItem
   id: RMCTankFlamer
   name: incinerator tank
