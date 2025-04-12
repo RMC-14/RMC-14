@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: CyberTropic
   changes:
-  - message: Strange plants on LV now emit light.
-    type: Fix
-  id: 1070
-  time: '2024-12-06T00:03:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5029
-- author: CyberTropic
-  changes:
   - message: Fixed some pryable shutters in Kutjevo that led out of the AO and into
       space.
     type: Fix
@@ -5364,5 +5357,12 @@
   id: 1572
   time: '2025-04-12T05:57:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6117
+- author: Vermidia
+  changes:
+  - message: Fixed acider's exploding and healers sacrificing leaving behind bodies.
+    type: Fix
+  id: 1573
+  time: '2025-04-12T05:58:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6115
 Name: RMC14
 Order: -1
