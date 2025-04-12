@@ -277,6 +277,8 @@ entities:
       data:
         chunkSize: 4
     - type: GasTileOverlay
+    - type: BecomesStation
+      id: AdminFax
     - type: RadiationGridResistance
     - type: AreaGrid
       labels: {}
