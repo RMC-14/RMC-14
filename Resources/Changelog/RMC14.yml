@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Fixed some pryable shutters in Kutjevo that led out of the AO and into
-      space.
-    type: Fix
-  id: 1071
-  time: '2024-12-06T00:02:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5039
 - author: DummeHytteOst
   changes:
   - message: Basic, green and white fires, no longer emit a basic white light, they
@@ -5364,5 +5356,14 @@
   id: 1573
   time: '2025-04-12T05:58:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6115
+- author: VictorJob
+  changes:
+  - message: adds unique animation for CAS Flare
+    type: Add
+  - message: change Flare's animation
+    type: Tweak
+  id: 1574
+  time: '2025-04-12T06:06:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6077
 Name: RMC14
 Order: -1
