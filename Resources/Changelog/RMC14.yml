@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed auto punctuation causing messages like "Lol" to not sanitize
-    type: Fix
-  id: 1067
-  time: '2024-12-06T00:00:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5045
 - author: Rainbeon
   changes:
   - message: You can now freely switch hands and wield/unwield while deploying and
@@ -5366,5 +5359,12 @@
   id: 1569
   time: '2025-04-12T05:42:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6123
+- author: DummeHytteOst
+  changes:
+  - message: Adjusted some stocks melee dmg to their intended values (10 > 5).
+    type: Fix
+  id: 1570
+  time: '2025-04-12T05:46:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6124
 Name: RMC14
 Order: -1
