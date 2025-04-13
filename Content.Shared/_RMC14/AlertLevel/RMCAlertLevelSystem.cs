@@ -137,7 +137,7 @@ public sealed class RMCAlertLevelSystem : EntitySystem
         var unlockQuery = EntityQueryEnumerator<RMCUnlockOnAlertLevelComponent, LockComponent>();
         while (unlockQuery.MoveNext(out var uid, out var unlock, out var lockComp))
         {
-            if (unlock.Level == level)
+            if (unlock.Level <= level)
                 _lock.Unlock(uid, null, lockComp);
             else
                 _lock.Lock(uid, null, lockComp);
@@ -149,7 +149,7 @@ public sealed class RMCAlertLevelSystem : EntitySystem
             if (unlock.Id != podDoor.Id)
                 continue;
 
-            if (unlock.Level == level)
+            if (unlock.Level <= level)
                 _door.TryOpen(uid, door);
             else
                 _door.TryClose(uid, door);
