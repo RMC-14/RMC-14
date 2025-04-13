@@ -83,6 +83,10 @@ namespace Content.Server.Database
                 .Property(p => p.XenoPostfix)
                 .HasDefaultValue(string.Empty);
 
+            modelBuilder.Entity<Profile>()
+                .Property(p => p.AutoItemName)
+                .HasDefaultValue(true);
+
             modelBuilder.Entity<Antag>()
                 .HasIndex(p => new {HumanoidProfileId = p.ProfileId, p.AntagName})
                 .IsUnique();
@@ -537,6 +541,7 @@ namespace Content.Server.Database
         public bool PlaytimePerks { get; set; } = true;
         public string XenoPrefix { get; set; } = string.Empty;
         public string XenoPostfix { get; set; } = string.Empty;
+        public bool AutoItemName { get; set; } = true;
     }
 
     public class Job

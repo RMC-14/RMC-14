@@ -522,6 +522,16 @@ namespace Content.Client.Lobby.UI
             SpeciesInfoButton.OnPressed += OnSpeciesInfoButtonPressed;
 
             // RMC14
+
+            #region AutoItemName
+
+            AutoItemNameButton.OnPressed += args =>
+            {
+                SetAutoItemName(args.Button.Pressed);
+            };
+
+            #endregion
+
             void SetItemName(RMCNamedItemType type, string itemName)
             {
                 Profile = Profile?.WithNamedItems(new SharedRMCNamedItems
@@ -868,6 +878,7 @@ namespace Content.Client.Lobby.UI
             UpdateHairPickers();
             UpdateCMarkingsHair();
             UpdateCMarkingsFacialHair();
+            UpdateAutoItemName();
             UpdateNamedItems();
             UpdatePlaytimePerks();
             UpdateXenoPrefix();
@@ -1362,6 +1373,12 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
+        private void SetAutoItemName(bool autoItemName)
+        {
+            Profile = Profile?.WithAutoItemName(autoItemName);
+            SetDirty();
+        }
+
         private void SetXenoPrefix(string prefix)
         {
             Profile = Profile?.WithXenoPrefix(prefix);
@@ -1701,6 +1718,11 @@ namespace Content.Client.Lobby.UI
 
             Markings.CurrentEyeColor = Profile.Appearance.EyeColor;
             EyeColorPicker.SetData(Profile.Appearance.EyeColor);
+        }
+
+        private void UpdateAutoItemName()
+        {
+            AutoItemNameButton.Pressed = Profile?.AutoItemName ?? true;
         }
 
         private void UpdateNamedItems()
