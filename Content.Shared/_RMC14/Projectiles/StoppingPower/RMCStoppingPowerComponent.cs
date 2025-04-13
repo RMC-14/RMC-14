@@ -67,9 +67,12 @@ public sealed partial class RMCStoppingPowerComponent : Component
     [DataField, AutoNetworkedField]
     public bool RequiresAimedShot = true;
 
+    [DataField, AutoNetworkedField]
+    public int FocusedCounter = 0;
+
     /// <summary>
-    ///     If stopping power requires focused to not be this to activate.
+    ///     If stopping power requires focused to be above a certain thereshold to activate.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public int? FocusedCounterThreshold = 1;
+    public int? FocusedCounterThreshold = 2;
 }

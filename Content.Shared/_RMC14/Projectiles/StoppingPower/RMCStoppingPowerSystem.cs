@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared._RMC14.Projectiles.Aimed;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Weapons.Ranged.AimedShot;
 using Content.Shared._RMC14.Weapons.Ranged.AimedShot.FocusedShooting;
 using Content.Shared._RMC14.Xenonids.Fortify;
 using Content.Shared.Camera;
@@ -27,12 +28,21 @@ public sealed class RMCStoppingPowerSystem : EntitySystem
     {
         SubscribeLocalEvent<RMCStoppingPowerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<RMCStoppingPowerComponent, ProjectileHitEvent>(OnStoppingPowerHit);
+        SubscribeLocalEvent<RMCStoppingPowerComponent, ShotByAimedShotEvent>(OnShotByAimedShot);
     }
 
     private void OnMapInit(Entity<RMCStoppingPowerComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.ShotFrom = _transform.GetMoverCoordinates(ent);
         Dirty(ent);
+    }
+
+    private void OnShotByAimedShot(Entity<RMCStoppingPowerComponent> ent, ref ShotByAimedShotEvent args)
+    {
+        if (!TryComp<RMCFocusedShootingComponent>(args.Gun, out var focused))
+            return;
+
+        ent.Comp.FocusedCounter = focused.FocusCounter;
     }
 
     /// <summary>
@@ -46,10 +56,7 @@ public sealed class RMCStoppingPowerSystem : EntitySystem
         if (ent.Comp.RequiresAimedShot && !TryComp<AimedProjectileComponent>(ent, out var aimedShot))
             return;
 
-        // TODO Clean up by storing the focused counter somewhere on the bullet. Currently it has to try to get the previous state because this effect happens
-        // After focused updates
-        if (ent.Comp.FocusedCounterThreshold != null && TryComp<AimedProjectileComponent>(ent, out aimedShot) &&
-            TryComp<RMCFocusedShootingComponent>(aimedShot.Source, out var focused) && focused.FocusCounter == ent.Comp.FocusedCounterThreshold)
+        if (ent.Comp.FocusedCounterThreshold != null && ent.Comp.FocusedCounter < ent.Comp.FocusedCounterThreshold)
             return;
 
         var stoppingPower = (float)Math.Min(Math.Ceiling(args.Damage.GetTotal().Float() / ent.Comp.StoppingPowerDivider), ent.Comp.MaxStoppingPower);

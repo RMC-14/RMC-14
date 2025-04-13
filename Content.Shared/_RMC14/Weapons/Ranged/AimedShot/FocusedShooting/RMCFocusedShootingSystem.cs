@@ -19,13 +19,12 @@ public sealed class RMCFocusedShootingSystem : EntitySystem
     {
         var focusCounter = ent.Comp.FocusCounter;
 
-        if (args.Target != ent.Comp.CurrentTarget || ent.Comp.FocusCounter >= 2)
+        if (args.Target != ent.Comp.CurrentTarget || ent.Comp.FocusCounter > 2)
             focusCounter = 0;
 
         if (TryComp(ent, out TargetingLaserComponent? targetingLaser))
         {
-
-            if (focusCounter == 1)
+            if (focusCounter == 2)
                 targetingLaser.CurrentLaserColor = ent.Comp.LaserColor;
             else
                 targetingLaser.CurrentLaserColor = targetingLaser.LaserColor;
@@ -33,7 +32,7 @@ public sealed class RMCFocusedShootingSystem : EntitySystem
             Dirty(ent, targetingLaser);
         }
 
-        if (focusCounter < 1 || args.TargetedEffect != TargetedEffects.Targeted)
+        if (focusCounter < 2 || args.TargetedEffect != TargetedEffects.Targeted)
             return;
 
         args.TargetedEffect = TargetedEffects.TargetedIntense;
@@ -41,7 +40,6 @@ public sealed class RMCFocusedShootingSystem : EntitySystem
         if (args.DirectionEffect == DirectionTargetedEffects.DirectionTargeted)
             args.DirectionEffect = DirectionTargetedEffects.DirectionTargetedIntense;
     }
-
     /// <summary>
     ///     Change the focus counter when an aimed shot is performed.
     /// </summary>
@@ -52,7 +50,12 @@ public sealed class RMCFocusedShootingSystem : EntitySystem
         var user = _transform.GetParentUid(ent);
         var focusing = EnsureComp<RMCFocusingComponent>(user);
 
-        if (currentTarget != args.Target)
+        if (currentTarget == args.Target)
+        {
+            if (ent.Comp.FocusCounter > 2)
+                focusCounter = 0;
+        }
+        else
         {
             if (ent.Comp.CurrentTarget != null)
                 focusing.OldTarget = focusing.FocusTarget;
@@ -64,7 +67,7 @@ public sealed class RMCFocusedShootingSystem : EntitySystem
         focusing.FocusTarget = args.Target;
         Dirty(user, focusing);
 
-        ent.Comp.FocusCounter = Math.Min((focusCounter + 1) % 3, 2);
+        ent.Comp.FocusCounter = Math.Min(focusCounter + 1, 3);
         Dirty(ent);
     }
 }
