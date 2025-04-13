@@ -34,6 +34,7 @@
     - name: Handgun Case
       choices: { CMGunCase: 1 }
       entries:
+      - id: RMCGunCasePistolMK80 # Non-Parity
       - id: RMCGunCasePistolM77
       - id: RMCGunCasePistolM44
       - id: RMCGunCasePistolM1984
@@ -99,6 +100,7 @@
       - id: CMHandsBlackMarine
       - id: CMHeadsetCMP
       - id: CMBootsBlackFilled
+      - id: RMCBoxZiptie # Non-Parity
     - name: Armor
       takeAll: CMArmor
       entries:
@@ -107,6 +109,7 @@
     - name: Handgun Case
       choices: { CMGunCase: 1 }
       entries:
+      - id: RMCGunCasePistolMK80 # Non-Parity
       - id: RMCGunCasePistolM77
       - id: RMCGunCasePistolM44
       - id: RMCGunCasePistolM1984

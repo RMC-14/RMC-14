@@ -286,6 +286,18 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/warden/urban.rsi
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,5,1 # 2 slots + ziptie box
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-not-ziptie-box
+      blacklist:
+        tags:
+        - RMCBoxZipties
+      whitelist: null
+      count: 2
 
 - type: entity
   parent: CMArmorM2MP
@@ -302,6 +314,18 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/wo/urban.rsi
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,5,1 # 2 slots + ziptie box
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-not-ziptie-box
+      blacklist:
+        tags:
+        - RMCBoxZipties
+      whitelist: null
+      count: 2
 
 #Officer armors
 - type: entity
@@ -340,7 +364,7 @@
   - type: Storage
     maxItemSize: Small
     grid:
-    - 0,0,5,1 # 3 slots
+    - 0,0,7,1 # 3 slots + ziptie box
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/jungle.rsi

@@ -285,6 +285,7 @@
   id: RMCVendorRiot
   startingInventory: # TODO RMC14
     Zipties: 40
+    RMCBoxZiptie: 4 # Non-Parity
     RMCGrenadeFlashBang: 20
     RMCMagazineSMGM63Rubber: 40
     ##RMCGrenadeTearGas: 40
