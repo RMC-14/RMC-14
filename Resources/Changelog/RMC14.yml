@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added Chances Claim, Also known as LV522, expect it be available soon!
-    type: Add
-  id: 1079
-  time: '2024-12-09T01:23:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5062
 - author: Rainbeon
   changes:
   - message: Increased Crusher Stomp's outer radius, so it is no longer much smaller
@@ -5338,5 +5331,13 @@
   id: 1581
   time: '2025-04-14T02:06:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6111
+- author: Vermidia
+  changes:
+  - message: Fixed Parasites not having different rank titles. Larva also now have
+      different titles.
+    type: Fix
+  id: 1582
+  time: '2025-04-14T02:07:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6136
 Name: RMC14
 Order: -1
