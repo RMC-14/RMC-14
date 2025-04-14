@@ -33,3 +33,13 @@
     layers:
     - state: doorctrl
       map: [ "enum.RMCPodDoorButtonLayers.Animation" ]
+
+- type: entity
+  parent: RMCPodDoorButton
+  id: RMCPodDoorButtonWeYa
+  name: button
+  suffix: locked, weya
+  description: A remote control-switch for a door.
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessWeYa" ] ]

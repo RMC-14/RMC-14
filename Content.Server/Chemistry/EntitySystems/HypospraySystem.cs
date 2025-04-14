@@ -1,6 +1,5 @@
 using System.Linq;
 using Content.Server.Body.Components;
-using Content.Server.Interaction;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
@@ -25,7 +24,6 @@ public sealed class HypospraySystem : SharedHypospraySystem
 {
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly InteractionSystem _interaction = default!;
 
     public override void Initialize()
     {
@@ -34,6 +32,8 @@ public sealed class HypospraySystem : SharedHypospraySystem
         SubscribeLocalEvent<HyposprayComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<HyposprayComponent, MeleeHitEvent>(OnAttack);
         SubscribeLocalEvent<HyposprayComponent, UseInHandEvent>(OnUseInHand);
+
+        // RMC14
         SubscribeLocalEvent<HyposprayComponent, HyposprayDoAfterEvent>(OnHyposprayDoAfter);
     }
 

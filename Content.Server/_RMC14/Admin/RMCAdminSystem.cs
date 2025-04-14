@@ -13,6 +13,7 @@ using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.Database;
+using Content.Shared.GameTicking;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
@@ -92,7 +93,22 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
         _admin.UpdatePlayerList(player);
 
         if (mobUid != null)
+        {
+            EnsureComp<RMCAdminSpawnedComponent>(mobUid.Value);
             _transform.SetCoordinates(mobUid.Value, coords.Value);
+
+            var spawnEv = new PlayerSpawnCompleteEvent(
+                mobUid.Value,
+                player,
+                ev.JobId,
+                true,
+                true,
+                0,
+                default,
+                profile
+            );
+            RaiseLocalEvent(mobUid.Value, spawnEv, true);
+        }
 
         _adminLog.Add(LogType.RMCSpawnJob, $"{ToPrettyString(user)} spawned {ToPrettyString(mobUid)} as job {jobName}");
     }

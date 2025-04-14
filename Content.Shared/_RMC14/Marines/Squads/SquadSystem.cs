@@ -507,6 +507,12 @@ public sealed class SquadSystem : EntitySystem
 
     public void UpdateSquadTitle(EntityUid marine)
     {
+        if (TryComp<SquadNameOverrideComponent>(marine, out var overrideComp))
+        {
+            MarineSetTitle(marine, Loc.GetString(overrideComp.Name));
+            return;
+        }
+
         var ev = new GetMarineSquadNameEvent();
         RaiseLocalEvent(marine, ref ev);
 

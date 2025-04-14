@@ -340,7 +340,7 @@
   - type: Storage
     maxItemSize: Huge
     grid:
-    - 0,0,9,1
+    - 0,0,17,1
     whitelist:
       components:
       - MortarShell
@@ -355,7 +355,7 @@
         components:
         - Gun
     - popup: rmc-storage-limit-max-shells
-      count: 4
+      count: 8
       whitelist:
         components:
         - MortarShell

@@ -27,6 +27,7 @@ public sealed class SquadInfoBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         _window = this.CreateWindow<SquadInfoWindow>();
         Refresh();
     }

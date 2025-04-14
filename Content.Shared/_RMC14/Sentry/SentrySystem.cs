@@ -38,7 +38,7 @@ public sealed class SentrySystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly FixtureSystem _fixture = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCInteractionSystem _rmcInteraction = default!;
     [Dependency] private readonly SharedRMCNPCSystem _rmcNpc = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;

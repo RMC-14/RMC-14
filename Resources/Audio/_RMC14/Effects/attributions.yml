@@ -3,10 +3,30 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/effects/bamf.ogg"
 
+- files: ["flag_lowering.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/7160623f129489cd9ac55f49089bb6164b729f26/sound/effects/flag_lowering.ogg"
+
+- files: ["flag_raised.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/7160623f129489cd9ac55f49089bb6164b729f26/sound/effects/flag_raised.ogg"
+
+- files: ["flag_raising.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/7160623f129489cd9ac55f49089bb6164b729f26/sound/effects/flag_raising.ogg"
+
 - files: ["hit_on_shattered_glass.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/effects/hit_on_shattered_glass.ogg"
+
+- files: ["laser_cannon.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/effects/pred_vision.ogg"
 
 - files: ["motion_detector.ogg"] # This is marked as no copyright but the workflow breaks
   license: "CC-BY-SA-3.0"

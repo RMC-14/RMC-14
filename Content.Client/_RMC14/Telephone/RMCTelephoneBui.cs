@@ -14,6 +14,7 @@ public sealed class RMCTelephoneBui(EntityUid owner, Enum uiKey) : BoundUserInte
 
     protected override void Open()
     {
+        base.Open();
         _window = this.CreateWindow<TelephoneWindow>();
 
         if (EntMan.TryGetComponent(Owner, out MetaDataComponent? metaData))

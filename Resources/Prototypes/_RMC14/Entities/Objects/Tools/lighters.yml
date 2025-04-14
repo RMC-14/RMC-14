@@ -1,7 +1,21 @@
 - type: entity
+  abstract: true
+  parent: FlippoLighter
+  id: RMCLighterBase
+  components:
+  - type: Item
+    size: Tiny
+    sprite: Objects/Tools/lighters.rsi
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
+  - type: RMCLighter
+
+- type: entity
   name: zippo lighter
   description: A fancy steel Zippo lighter. Ignite in style.
-  parent: FlippoLighter
+  parent: RMCLighterBase
   id: RMCZippo
   components:
   - type: Sprite
@@ -27,11 +41,41 @@
     slots:
     - suitstorage
   - type: RMCLighter
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/Zippos/zippo.rsi
+      state: helmet
+
+- type: entity
+  name: We-Ya executive zippo lighter
+  description: A remarkable Zippo lighter embellished in the Company's black and gold shade.
+  parent: RMCZippo
+  id: RMCZippoExec
+  components:
+  - type: Sprite
+    sprite:  _RMC14/Objects/Tools/Lighters/execzippo.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/Zippos/execzippo.rsi
+      state: helmet
+
+- type: entity
+  name: golden zippo lighter
+  description: A gold-anodized Zippo lighter. Ostentatious, but it certainly stands out.
+  parent: RMCZippo
+  id: RMCZippoGold
+  components:
+  - type: Sprite
+    sprite:  _RMC14/Objects/Tools/Lighters/goldzippo.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/Zippos/goldzippo.rsi
+      state: helmet
 
 - type: entity
   name: cheap lighter
   description: A cheap-as-free lighter.
-  parent: RMCZippo
+  parent: RMCLighterBase
   id: RMCLighter
   components:
   - type: Item
@@ -98,21 +142,7 @@
           lighter_u_on: ""
         open:
           lighter_u_on: ""
-
-- type: entity
-  name: We-Ya executive zippo lighter
-  description: A remarkable Zippo lighter embellished in the Company's black and gold shade.
-  parent: RMCZippo
-  id: RMCZippoExec
-  components:
-  - type: Sprite
-    sprite:  _RMC14/Objects/Tools/Lighters/execzippo.rsi
-
-- type: entity
-  name: golden zippo lighter
-  description: A gold-anodized Zippo lighter. Ostentatious, but it certainly stands out.
-  parent: RMCZippo
-  id: RMCZippoGold
-  components:
-  - type: Sprite
-    sprite:  _RMC14/Objects/Tools/Lighters/goldzippo.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/cheap_lighter.rsi
+      state: helmet
