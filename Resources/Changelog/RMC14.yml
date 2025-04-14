@@ -1,35 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: Fixed tunnels renaming, they are now only renamable by a xeno of drone
-      evolution and from the same hive
-    type: Fix
-  - message: Tunnels' default name is now in parity
-    type: Fix
-  - message: Mapped tunnels are properly named and associated to the hive
-    type: Fix
-  - message: Fixed xenos going into tunnels while unable to move
-    type: Fix
-  - message: Fixed involuntary regurgitation from leaving marines in tunnels
-    type: Fix
-  - message: Fixed burrowers being moved from explosives
-    type: Fix
-  - message: Fixed burrowers from being set on fire while burrowed
-    type: Fix
-  - message: Fixed burrower stomp range from being too large, (range of 4 now, used
-      to be a range of 6)
-    type: Fix
-  - message: Add Tunnels to the tactical maps
-    type: Fix
-  - message: Burrowers now are visible to fellow xenos in night vision
-    type: Fix
-  - message: Xenos cannot drop items while in tunnels
-    type: Fix
-  - message: Xenos cannot use actions while in tunnels
-    type: Fix
-  id: 1075
-  time: '2024-12-08T03:48:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5006
 - author: Vermidia
   changes:
   - message: Fixed Vanguard Prae's blitz having an 11 sec cooldown from the time of
@@ -5363,5 +5332,12 @@
   id: 1577
   time: '2025-04-12T10:29:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6112
+- author: Vermidia
+  changes:
+  - message: Resin Surge properly works on doors again.
+    type: Fix
+  id: 1578
+  time: '2025-04-14T01:40:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6146
 Name: RMC14
 Order: -1
