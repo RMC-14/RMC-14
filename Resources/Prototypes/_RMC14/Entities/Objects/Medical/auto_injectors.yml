@@ -201,7 +201,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Medical/auto_injectors.rsi
     layers:
-    - state: tricord # TODO fix this
+    - state: tramadol
       map: ["enum.SolutionContainerLayers.Fill"]
   - type: MedicallyUnskilledDoAfter
     min: 0
@@ -212,10 +212,10 @@
         reagents:
         - ReagentId: CMTramadol
           Quantity: 15
-  - type: SolutionContainerVisuals # TODO fix this
+  - type: SolutionContainerVisuals
     maxFillLevels: 1
-    emptySpriteName: tricord0
-    fillBaseName: tricord
+    emptySpriteName: tramadol0
+    fillBaseName: tramadol
     changeColor: false
   - type: CMRefillableSolution
     reagents:
