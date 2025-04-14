@@ -1,183 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed marine base movement speed being 10% too slow.
-    type: Fix
-  id: 1061
-  time: '2024-12-04T01:07:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5043
-- author: CyberTropic
-  changes:
-  - message: Fixed evac shuttles landing offset from game grid.
-    type: Fix
-  id: 1062
-  time: '2024-12-04T06:44:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5048
-- author: Vermidia
-  changes:
-  - message: Fixed xeno AOE abilities hitting devoured marines
-    type: Fix
-  id: 1063
-  time: '2024-12-04T06:45:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5046
-- author: Vermidia
-  changes:
-  - message: Fixed Dancer Praetorian's dodge double speed buff counting downed marines.
-    type: Fix
-  id: 1064
-  time: '2024-12-05T23:55:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5058
-- author: Rainbeon
-  changes:
-  - message: Halved the speed bonus Frenzy gives while pulling to more closely match
-      CM13. This means overall pulling speeds are reduced by ~10% total.
-    type: Fix
-  id: 1065
-  time: '2024-12-05T23:56:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5057
-- author: Rainbeon
-  changes:
-  - message: Fixed Resin Hole Acid Traps not triggering when a Marine stands up after
-      being dragged in.
-    type: Fix
-  id: 1066
-  time: '2024-12-05T23:57:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5008
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed auto punctuation causing messages like "Lol" to not sanitize
-    type: Fix
-  id: 1067
-  time: '2024-12-06T00:00:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5045
-- author: Rainbeon
-  changes:
-  - message: You can now freely switch hands and wield/unwield while deploying and
-      using a Bipod.
-    type: Tweak
-  id: 1068
-  time: '2024-12-06T00:01:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5052
-- author: Rainbeon
-  changes:
-  - message: The buttons for choosing resin structures for Drone castes are now much
-      more responsive. It will now immediately select the option you click on, instead
-      of cancelling if you drag your mouse away before letting go of the mouse button.
-    type: Tweak
-  id: 1069
-  time: '2024-12-06T00:00:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5050
-- author: CyberTropic
-  changes:
-  - message: Strange plants on LV now emit light.
-    type: Fix
-  id: 1070
-  time: '2024-12-06T00:03:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5029
-- author: CyberTropic
-  changes:
-  - message: Fixed some pryable shutters in Kutjevo that led out of the AO and into
-      space.
-    type: Fix
-  id: 1071
-  time: '2024-12-06T00:02:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5039
-- author: DummeHytteOst
-  changes:
-  - message: Basic, green and white fires, no longer emit a basic white light, they
-      emit their own unique color of light.
-    type: Add
-  id: 1072
-  time: '2024-12-06T00:27:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5026
-- author: MetalSage
-  changes:
-  - message: Added flashlight boxes and crafting them with cardboard sheets.
-    type: Add
-  id: 1073
-  time: '2024-12-06T00:26:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4994
-- author: Rainbeon
-  changes:
-  - message: Fixed Burrowed Larva not registering as a new entity on the round end
-      summary.
-    type: Fix
-  id: 1074
-  time: '2024-12-06T04:18:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5064
-- author: blueDev2
-  changes:
-  - message: Fixed tunnels renaming, they are now only renamable by a xeno of drone
-      evolution and from the same hive
-    type: Fix
-  - message: Tunnels' default name is now in parity
-    type: Fix
-  - message: Mapped tunnels are properly named and associated to the hive
-    type: Fix
-  - message: Fixed xenos going into tunnels while unable to move
-    type: Fix
-  - message: Fixed involuntary regurgitation from leaving marines in tunnels
-    type: Fix
-  - message: Fixed burrowers being moved from explosives
-    type: Fix
-  - message: Fixed burrowers from being set on fire while burrowed
-    type: Fix
-  - message: Fixed burrower stomp range from being too large, (range of 4 now, used
-      to be a range of 6)
-    type: Fix
-  - message: Add Tunnels to the tactical maps
-    type: Fix
-  - message: Burrowers now are visible to fellow xenos in night vision
-    type: Fix
-  - message: Xenos cannot drop items while in tunnels
-    type: Fix
-  - message: Xenos cannot use actions while in tunnels
-    type: Fix
-  id: 1075
-  time: '2024-12-08T03:48:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5006
-- author: Vermidia
-  changes:
-  - message: Fixed Vanguard Prae's blitz having an 11 sec cooldown from the time of
-      the AOE slash instead of the time from the initial dash.
-    type: Fix
-  id: 1076
-  time: '2024-12-08T03:50:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5076
-- author: Whisper
-  changes:
-  - message: Added Consumes-the-Petrol, Lenny Dugs, Kael 'Shark' Voss figurine.
-    type: Add
-  id: 1077
-  time: '2024-12-09T00:30:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5083
-- author: Vermidia
-  changes:
-  - message: Fixed matchboxes not being tiny, and tarback tubes, and cigar cases not
-      being small.
-    type: Fix
-  - message: Fixed handfuls, cigpacks, and matchboxes not fitting in helmets.
-    type: Fix
-  id: 1078
-  time: '2024-12-09T00:32:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5071
-- author: noctyrnal
-  changes:
-  - message: Added Chances Claim, Also known as LV522, expect it be available soon!
-    type: Add
-  id: 1079
-  time: '2024-12-09T01:23:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5062
-- author: Rainbeon
-  changes:
-  - message: Increased Crusher Stomp's outer radius, so it is no longer much smaller
-      than it is supposed to be.
-    type: Fix
-  id: 1080
-  time: '2024-12-09T05:59:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5089
-- author: Vermidia
-  changes:
   - message: Fixed xeno auto regurgitation stunning.
     type: Fix
   id: 1081
@@ -5357,5 +5180,163 @@
   id: 1563
   time: '2025-04-07T05:49:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5337
+- author: Vermidia
+  changes:
+  - message: Fixed rare cases where too many lines could be made lagging the server
+      to death.
+    type: Fix
+  id: 1564
+  time: '2025-04-12T05:05:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6114
+- author: exincore
+  changes:
+  - message: Hybrisa window shutters no longer obstruct vision while closed.
+    type: Fix
+  - message: The Basira-Armstrong bolt-action hunting rifle is no longer a double-barrel
+      shotgun and can no longer accept nor fire shotgun shells.
+    type: Fix
+  id: 1565
+  time: '2025-04-12T05:09:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6105
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added being able to click on a flamer in hand to eject its tank.
+    type: Add
+  id: 1566
+  time: '2025-04-12T05:30:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6122
+- author: AverageNotDoingAnythingEnjoyer
+  changes:
+  - message: Added a lot of missing props, med vendors, metal, and buttons to Chance's
+      Claim.
+    type: Add
+  - message: Fixed reactor control room pod doors in Chance's Claim being corrodible.
+    type: Fix
+  - message: Replaced some old placeholder guns in Chance's Claim with CMB revolvers
+      and basira-armstrong hunting rifles.
+    type: Tweak
+  id: 1567
+  time: '2025-04-12T05:34:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6120
+- author: AverageNotDoingAnythingEnjoyer
+  changes:
+  - message: Replaced some placeholder guns in Kutjevo Refinery with the intended
+      gun.
+    type: Tweak
+  id: 1568
+  time: '2025-04-12T05:35:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6133
+- author: J C Denton
+  changes:
+  - message: Remapped the admin fax machines area.
+    type: Tweak
+  id: 1569
+  time: '2025-04-12T05:42:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6123
+- author: DummeHytteOst
+  changes:
+  - message: Adjusted some stocks melee dmg to their intended values (10 > 5).
+    type: Fix
+  id: 1570
+  time: '2025-04-12T05:46:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6124
+- author: Ian321
+  changes:
+  - message: Fixed Intelligence Officers not having pilot access.
+    type: Fix
+  id: 1571
+  time: '2025-04-12T05:56:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6101
+- author: Dutch-VanDerLinde
+  changes:
+  - message: You can now toggle helmet accessories by pressing E or using a verb on
+      it.
+    type: Add
+  id: 1572
+  time: '2025-04-12T05:57:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6117
+- author: Vermidia
+  changes:
+  - message: Fixed acider's exploding and healers sacrificing leaving behind bodies.
+    type: Fix
+  id: 1573
+  time: '2025-04-12T05:58:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6115
+- author: VictorJob
+  changes:
+  - message: adds unique animation for CAS Flare
+    type: Add
+  - message: change Flare's animation
+    type: Tweak
+  id: 1574
+  time: '2025-04-12T06:06:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6077
+- author: CyberTropic
+  changes:
+  - message: Added dynamic weather events.
+    type: Add
+  id: 1575
+  time: '2025-04-12T06:07:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6135
+- author: CyberTropic
+  changes:
+  - message: Added more LV624 inserts.
+    type: Add
+  id: 1576
+  time: '2025-04-12T06:08:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6138
+- author: Ian321
+  changes:
+  - message: '"Spawn here as job" now also sets the respective icon.'
+    type: Tweak
+  id: 1577
+  time: '2025-04-12T10:29:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6112
+- author: Vermidia
+  changes:
+  - message: Resin Surge properly works on doors again.
+    type: Fix
+  id: 1578
+  time: '2025-04-14T01:40:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6146
+- author: Vermidia
+  changes:
+  - message: Fixed AMR normal shots having stopping power.
+    type: Fix
+  - message: Fixed AMR first shots doing stun/knockback.
+    type: Fix
+  id: 1579
+  time: '2025-04-14T02:01:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6145
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Roundstart larva now spawn inside dead colonists and need to burst out
+    type: Add
+  id: 1580
+  time: '2025-04-14T02:05:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6085
+- author: noctyrnal
+  changes:
+  - message: Changes the appearance of the We-Ya Whiteout Commandos. If you can see
+      these new sprites, you fucked up.
+    type: Tweak
+  id: 1581
+  time: '2025-04-14T02:06:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6111
+- author: Vermidia
+  changes:
+  - message: Fixed Parasites not having different rank titles. Larva also now have
+      different titles.
+    type: Fix
+  id: 1582
+  time: '2025-04-14T02:07:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6136
+- author: Dygon
+  changes:
+  - message: Flare packs can now directly transfer their content to a flare pouch.
+    type: Add
+  id: 1583
+  time: '2025-04-14T03:28:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6144
 Name: RMC14
 Order: -1

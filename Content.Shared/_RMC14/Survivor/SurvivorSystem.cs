@@ -102,7 +102,7 @@ public sealed class SurvivorSystem : EntitySystem
                 return;
         }
 
-        Log.Error($"Couldn't equip {ToPrettyString(spawn)} on {ToPrettyString(mob)}");
+        Log.Warning($"Couldn't equip {ToPrettyString(spawn)} on {ToPrettyString(mob)}");
         QueueDel(spawn);
     }
 }
