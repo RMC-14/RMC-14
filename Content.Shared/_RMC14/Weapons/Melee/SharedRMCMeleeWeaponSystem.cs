@@ -86,13 +86,13 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
         var comp = ent.Comp;
 
         args.BonusDamage = _skills.ApplyMeleeSkillModifier(args.User, args.BonusDamage);
-        var combinedDamage = args.BaseDamage + args.BonusDamage;
+        var totalDamage = args.BaseDamage + args.BonusDamage;
 
         foreach (var hit in args.HitEntities)
         {
             if (_whitelist.IsValid(comp.Whitelist, hit))
             {
-                var damage = combinedDamage * comp.Multiplier;
+                var damage = totalDamage * comp.Multiplier;
                 args.BonusDamage += damage;
                 break;
             }
