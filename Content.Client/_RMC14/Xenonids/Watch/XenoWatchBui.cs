@@ -1,6 +1,8 @@
 ﻿using Content.Client._RMC14.Xenonids.UI;
 using Content.Shared._RMC14.Attachable.Components;
+using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared._RMC14.Xenonids.Watch;
+using Content.Shared.Damage;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -61,16 +63,20 @@ public sealed class XenoWatchBui : BoundUserInterface
             var control = new XenoChoiceControl();
             control.Set(xeno.Name, texture);
             control.Button.OnPressed += _ => SendPredictedMessage(new XenoWatchBuiMsg(xeno.Entity));
+            Logger.Debug(xeno.Health.ToString());
+            Logger.Debug(xeno.Plasma.ToString());
+            control.SetHealth(xeno.Health);
+            control.SetPlasma(xeno.Plasma);
+            control.SetEvo(xeno.Evo);
             _window.XenoContainer.AddChild(control);
+            UpdateList();
         }
-
     }
 
     protected override void Dispose(bool disposing)
     {
         if (disposing)
             _window?.Dispose();
-
     }
 
     private XenoWatchWindow EnsureWindow()
@@ -111,7 +117,7 @@ public sealed class XenoWatchBui : BoundUserInterface
     {
         if (_window is not { Disposed: false })
             return;
-;
+
         foreach (var child in _window.XenoContainer.Children)
         {
             if (child is not XenoChoiceControl control)
@@ -123,8 +129,6 @@ public sealed class XenoWatchBui : BoundUserInterface
                 control.Visible = control.NameLabel.GetMessage()?.Contains(args.Text, StringComparison.OrdinalIgnoreCase) ?? false;
         }
     }
-
-
 
 
     private void OnButtonToggled(BaseButton.ButtonEventArgs args)

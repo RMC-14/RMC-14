@@ -1,4 +1,5 @@
-﻿using Robust.Shared.Prototypes;
+﻿using Content.Shared.FixedPoint;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Xenonids.Watch;
@@ -10,7 +11,7 @@ public enum XenoWatchUIKey : byte
 }
 
 [Serializable, NetSerializable]
-public readonly record struct Xeno(NetEntity Entity, string Name, EntProtoId? Id);
+public readonly record struct Xeno(NetEntity Entity, string Name, EntProtoId? Id, float Health, float Plasma, int Evo);
 
 [Serializable, NetSerializable]
 public sealed class XenoWatchBuiState(List<Xeno> xenos, int burrowedLarva) : BoundUserInterfaceState

@@ -1,13 +1,22 @@
-﻿using Content.Server.Chat.Systems;
+﻿using System.Linq;
+using Content.Server.Chat.Systems;
 using Content.Server.Popups;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Watch;
+using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
+using Content.Shared._RMC14.CCVar;
+using Robust.Shared.Configuration;
+using Robust.Shared.Timing;
 using static Content.Server.Chat.Systems.ChatSystem;
 
 namespace Content.Server._RMC14.Xenonids.Watch;
@@ -22,9 +31,16 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
     [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
 
     private EntityQuery<ActorComponent> _actorQuery;
     private EntityQuery<XenoWatchedComponent> _xenoWatchedQuery;
+
+    private TimeSpan _maxProcessTime;
+    private TimeSpan _nextUpdateTime;
+    private TimeSpan _updateEvery;
 
     private readonly Dictionary<ICommonSession, ICChatRecipientData> _recipients = new();
 
@@ -40,8 +56,32 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
 
         SubscribeLocalEvent<XenoWatchingComponent, ComponentRemove>(OnWatchingRemove);
         SubscribeLocalEvent<XenoWatchingComponent, EntityTerminatingEvent>(OnWatchingRemove);
+        SubscribeLocalEvent<XenoComponent, WatchInfoUpdateEvent>(UpdateInfo);
 
         SubscribeLocalEvent<ExpandICChatRecipientsEvent>(OnExpandRecipients);
+
+        Subs.CVar(_config, RMCCVars.RMCXenoWatchUpdateEverySeconds, v => _updateEvery = TimeSpan.FromSeconds(v), true);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var time = _timing.CurTime;
+        if (time < _nextUpdateTime)
+            return;
+
+        _nextUpdateTime = time + _updateEvery;
+        var query = EntityQueryEnumerator<XenoComponent, HiveMemberComponent, MetaDataComponent>();
+        while (query.MoveNext(out var uid, out _, out var member, out var metaData))
+        {
+            if (TryComp<XenoComponent>(uid, out var comp))
+            {
+                if (comp.Refresh)
+                    RaiseLocalEvent(uid, new WatchInfoUpdateEvent());
+            }
+        }
+
     }
 
     private void OnWatchedRemove<T>(Entity<XenoWatchedComponent> ent, ref T args)
@@ -119,12 +159,73 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
             if (_mobState.IsDead(uid))
                 continue;
 
-            xenos.Add(new Xeno(GetNetEntity(uid), Name(uid, metaData), metaData.EntityPrototype?.ID));
+            xenos.Add(new Xeno(GetNetEntity(uid), Name(uid, metaData), metaData.EntityPrototype?.ID, 0, 0, 0));
         }
 
         xenos.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name));
 
         _ui.SetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos, hive.Comp.BurrowedLarva));
+    }
+
+    private void UpdateInfo(Entity<XenoComponent> ent, ref WatchInfoUpdateEvent args)
+    {
+        if (_hive.GetHive(ent.Owner) is not {} hive)
+            return;
+
+        var xenos = new List<Xeno>();
+        var query = EntityQueryEnumerator<XenoComponent, HiveMemberComponent, MetaDataComponent>();
+        while (query.MoveNext(out var uid, out _, out var member, out var metaData))
+        {
+            if (uid == ent.Owner || member.Hive != hive.Owner)
+                continue;
+
+            if (_mobState.IsDead(uid))
+                continue;
+            int evo = 0;
+
+            if (TryComp<XenoEvolutionComponent>(uid, out var evoComp))
+            {
+                evo = (int)evoComp.Points;
+            }
+
+            xenos.Add(new Xeno(GetNetEntity(uid), Name(uid, metaData), metaData.EntityPrototype?.ID, GetHealthPercentage(uid), GetPlasmaPercentage(uid), evo));
+        }
+
+        xenos.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name));
+
+        _ui.SetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos, hive.Comp.BurrowedLarva));
+    }
+
+    private float GetHealthPercentage(EntityUid uid)
+    {
+        FixedPoint2 critical;
+        FixedPoint2 damage;
+        float percentage = 0;
+        if (TryComp<DamageableComponent>(uid, out var damageableComponent))
+        {
+            if (TryComp<MobThresholdsComponent>(uid, out var threshold))
+            {
+                critical =  threshold.Thresholds.FirstOrDefault(kvp => kvp.Value == MobState.Critical).Key;
+                damage = damageableComponent.TotalDamage;
+                percentage = (((float)critical - (float)damage)/ ((float)critical / 100))/100 ; // i want the value to be between 0 and 1
+            }
+        }
+        return percentage;
+    }
+
+    private float GetPlasmaPercentage(EntityUid uid)
+    {
+        float maxplasma;
+        float currentplasma;
+        float percentage = 0;
+        if (TryComp<XenoPlasmaComponent>(uid, out var plasmaComponent))
+        {
+            maxplasma = plasmaComponent.MaxPlasma;
+            currentplasma = (float)plasmaComponent.Plasma;
+            percentage = ((maxplasma - (maxplasma - currentplasma))/(maxplasma/100))/100;
+        }
+
+        return percentage;
     }
 
     public override void Watch(Entity<HiveMemberComponent?, ActorComponent?, EyeComponent?> watcher, Entity<HiveMemberComponent?> toWatch)
