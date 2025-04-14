@@ -246,8 +246,11 @@ public abstract class SharedCMInventorySystem : EntitySystem
                     if(!_container.TryGetContainer(ent, itemSlot.Key, out var container))
                         continue;
 
-                    if(_container.Insert(entity, container))
+                    if (_container.Insert(entity, container))
+                    {
                         insertSound = itemSlot.Value.InsertSound;
+                        args.Handled = true;
+                    }
                 }
             }
         }
