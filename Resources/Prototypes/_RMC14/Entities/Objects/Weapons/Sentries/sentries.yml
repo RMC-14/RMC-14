@@ -135,7 +135,7 @@
   - tasks:
     - !type:HTNPrimitiveTask
       operator: !type:UtilityOperator
-        proto: RMCNearbyGunXenos
+        proto: RMCNearbyGun
 
     - !type:HTNPrimitiveTask
       preconditions:
@@ -155,16 +155,14 @@
       services:
       - !type:UtilityService
         id: RangedService
-        proto: RMCNearbyGunXenos
+        proto: RMCNearbyGun
         key: Target
 
 - type: utilityQuery
-  id: RMCNearbyGunXenos
+  id: RMCNearbyGun
   query:
   - !type:NearbyHostilesQuery
   considerations:
-  - !type:TargetXenoCon
-    curve: !type:BoolCurve
   - !type:TargetIsNotDeadCon
     curve: !type:BoolCurve
   - !type:TargetDistanceCon
@@ -277,6 +275,18 @@
     - WeYa
   - type: UserIFF
     faction: FactionWeYa
+
+- type: entity
+  parent: RMCSentryMini
+  id: RMCSentryMiniSPP # TODO RMC14: Replace with the real one.
+  name: SPP SDS-R8 light sentry
+  description: A compact version of the SPP defense sentry SDS-R7. Designed for deployment in the field.
+  components:
+  - type: NpcFactionMember
+    factions:
+    - SPP
+  - type: UserIFF
+    faction: FactionSPP
 
 - type: entity
   parent: RMCSentry
