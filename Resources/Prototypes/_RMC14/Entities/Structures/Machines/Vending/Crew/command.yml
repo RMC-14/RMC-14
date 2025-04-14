@@ -823,7 +823,6 @@
       choices: { CMWeapon: 1 }
       entries:
       - id: RMCGunCaseRevolverRSh9
-      - id: RMCGunCasePistolMK80 # Non-Parity
       - id: RMCGunCasePistolM77
       - id: RMCGunCasePistolM44
       - id: RMCGunCasePistolM1984

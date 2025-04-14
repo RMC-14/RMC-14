@@ -34,7 +34,6 @@
     - name: Handgun Case
       choices: { CMGunCase: 1 }
       entries:
-      - id: RMCGunCasePistolMK80 # Non-Parity
       - id: RMCGunCasePistolM77
       - id: RMCGunCasePistolM44
       - id: RMCGunCasePistolM1984
@@ -109,7 +108,6 @@
     - name: Handgun Case
       choices: { CMGunCase: 1 }
       entries:
-      - id: RMCGunCasePistolMK80 # Non-Parity
       - id: RMCGunCasePistolM77
       - id: RMCGunCasePistolM44
       - id: RMCGunCasePistolM1984
