@@ -1,5 +1,7 @@
 using System.Numerics;
 using Content.Client.Chat.Managers;
+using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Xenonids.HiveLeader;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Speech;
@@ -269,6 +271,16 @@ namespace Content.Client.Chat.UI
             //We'll be honest. *Yes* this is hacky. Doing this in a cleaner way would require a bottom-up refactor of how saycode handles sending chat messages. -Myr
             bubbleHeader.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleHeader", fontColor));
             bubbleContent.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleContent", fontColor));
+
+            var entityManager = IoCManager.Resolve<IEntityManager>();
+            var senderUid = entityManager.GetEntity(message.SenderEntity);
+
+            //RMC14 If the speaker is a squad leader or a hive leader and speaks in normal speech, use the command style.
+            if (speechStyleClass == "sayBox" &&
+                (entityManager.HasComponent<SquadLeaderComponent>(senderUid) || entityManager.HasComponent<HiveLeaderComponent>(senderUid)))
+            {
+                speechStyleClass = "commanderSpeech";
+            }
 
             //As for below: Some day this could probably be converted to xaml. But that is not today. -Myr
             var mainPanel = new PanelContainer

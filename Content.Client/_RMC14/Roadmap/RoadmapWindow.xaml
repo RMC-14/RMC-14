@@ -46,6 +46,7 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Firearms skill" Text="Each marine role has a different firearms skill. This impacts how accurate they are with guns" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Medical skill" Text="Allows more advanced medical procedures and increases their overall speed" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno Queen" Text="Head caste of the xenonids" />
+                    <controls:RoadmapItem ItemState="Complete" HeaderText="Specialist's AMR Kit" Text="Anti-materiel rifle that deals high burst damage and briefly stuns the target." />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Mess Technician" Text="Shipside Kitchen role" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="LV-759 Hybrisa Prospera planet" Text="A large city map from cmss13 by Zenith, mikoka wei, Drathek, Nanu, Cuberound, Almings, Crowford, Blundir, dimdimich1996, being ported to RMC-14 by Noctyrn." />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Oppressor Praetorian strain" />
@@ -105,7 +106,6 @@
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Autodoc and body scanners" Text="Automatically but very inefficiently treats marines in the medbay." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Vehicles, the tank and the ARC" Text="Driveable vehicles such as the colony van, which can be repaired. The tank unlocks at 200 players for the marines." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Mounted Weapons" Text="Mounted heavy machine guns are placeable machine guns with a high ammo count, usually placed behind barricades" />
-                    <controls:RoadmapItem ItemState="Planned" HeaderText="Specialist's AMR Kit" Text="Anti-materiel rifle that deals high burst damage and briefly stuns the target." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Specialist's Pyrotechnician Kit" Text="Flamethrower with special kinds of fuel." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Weather" Text="Depends on the planet map: rain on LV, sandstorms on Solaris, etc." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Fire missions" Text="A second way for dropships to attack, where instead of shooting directly at a flare or laser they move in a direction away from it and shoot their weapons to each side. This method of attack takes camera offset into account and is much more effective at clearing an area." />

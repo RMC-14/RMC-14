@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Areas;
 
@@ -7,7 +7,7 @@ namespace Content.Shared._RMC14.Areas;
 public sealed partial class RoofingEntityComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
-    public int Range;
+    public float Range;
 
     [DataField, AutoNetworkedField]
     public bool CanCAS;

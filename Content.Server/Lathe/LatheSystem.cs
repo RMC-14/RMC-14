@@ -6,25 +6,24 @@ using Content.Server.Fluids.EntitySystems;
 using Content.Server.Lathe.Components;
 using Content.Server.Materials;
 using Content.Server.Popups;
-using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Stack;
 using Content.Shared.Atmos;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
-using Content.Shared.UserInterface;
 using Content.Shared.Database;
-using Content.Shared.Emag.Components;
 using Content.Shared.Emag.Systems;
-using Content.Shared.Examine;
+using Content.Shared.Item;
 using Content.Shared.Lathe;
 using Content.Shared.Lathe.Prototypes;
 using Content.Shared.Materials;
+using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.ReagentSpeed;
 using Content.Shared.Research.Components;
 using Content.Shared.Research.Prototypes;
+using Content.Shared.UserInterface;
 using JetBrains.Annotations;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
@@ -53,6 +52,9 @@ namespace Content.Server.Lathe
         [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
         [Dependency] private readonly StackSystem _stack = default!;
         [Dependency] private readonly TransformSystem _transform = default!;
+
+        // RMC14
+        [Dependency] private readonly IComponentFactory _compFactory = default!;
 
         /// <summary>
         /// Per-tick cache
@@ -199,7 +201,17 @@ namespace Content.Server.Lathe
             var recipe = component.Queue.First();
             component.Queue.RemoveAt(0);
 
-            var time = _reagentSpeed.ApplySpeed(uid, recipe.CompleteTime) * component.TimeMultiplier;
+            // RMC14
+            var recipeTime = recipe.CompleteTime;
+            if (_proto.TryIndex(recipe.Result, out var result) &&
+                result.TryGetComponent(out ItemComponent? item, _compFactory) &&
+                _proto.TryIndex(item.Size, out var size))
+            {
+                recipeTime = size.LatheTime;
+            }
+
+            var time = _reagentSpeed.ApplySpeed(uid, recipeTime) * component.TimeMultiplier;
+            //
 
             var lathe = EnsureComp<LatheProducingComponent>(uid);
             lathe.StartTime = _timing.CurTime;
@@ -383,6 +395,13 @@ namespace Content.Server.Lathe
                 var count = 0;
                 for (var i = 0; i < args.Quantity; i++)
                 {
+                    if (component.Queue.Count >= component.MaxQueue)
+                    {
+                        var msg = $"The {Name(uid)} has queued the maximum number of operations. Please wait for completion of current operation.";
+                        _popup.PopupCursor(msg, args.Actor, PopupType.MediumCaution);
+                        break;
+                    }
+
                     if (TryAddToQueue(uid, recipe, component))
                         count++;
                     else

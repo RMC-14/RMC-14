@@ -69,7 +69,7 @@
     plasmaRegenOnWeeds: 7
   - type: XenoAcid
   - type: CMArmor
-    armor: 20
+    xenoArmor: 20
     explosionArmor: 20
   - type: XenoDevour
   - type: XenoZoom

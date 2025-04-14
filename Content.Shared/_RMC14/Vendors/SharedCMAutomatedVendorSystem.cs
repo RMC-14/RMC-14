@@ -81,6 +81,9 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         var vendors = EntityQueryEnumerator<CMAutomatedVendorComponent>();
         while (vendors.MoveNext(out var uid, out var vendor))
         {
+            if (!vendor.Scaling)
+                continue;
+
             var changed = false;
             foreach (var section in vendor.Sections)
             {
@@ -388,6 +391,12 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 while (specVendors.MoveNext(out var vendorId, out _))
                 {
                     var specVendorComponent = EnsureComp<RMCVendorSpecialistComponent>(vendorId);
+                    foreach (var linkedEntry in args.LinkedEntries)
+                    {
+                        specVendorComponent.GlobalSharedVends.TryGetValue(linkedEntry, out var linkedCount);
+                        maxAmongVendors += linkedCount;
+                    }
+
                     if (specVendorComponent.GlobalSharedVends.TryGetValue(args.Entry, out vendCount))
                     {
                         if (vendCount > maxAmongVendors)
@@ -459,7 +468,8 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                             continue;
 
                         vendorEntry.Amount -= GetBoxRemoveAmount(entry);
-                        entry.Amount--;
+                        Dirty(vendor);
+                        AmountUpdated(vendor, vendorEntry);
                         foundEntry = true;
                         break;
                     }
@@ -467,9 +477,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                     if (foundEntry)
                         break;
                 }
-
-                if (foundEntry)
-                    Dirty(vendor);
             }
             else
             {

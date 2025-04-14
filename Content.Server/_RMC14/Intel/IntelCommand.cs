@@ -19,4 +19,10 @@ public sealed class IntelCommand : ToolshedCommand
     {
         Sys<IntelSystem>().AddPoints(-points);
     }
+
+    [CommandImplementation("spawnintel")]
+    public async void SpawnIntel()
+    {
+        Sys<IntelSystem>().RunSpawners();
+    }
 }

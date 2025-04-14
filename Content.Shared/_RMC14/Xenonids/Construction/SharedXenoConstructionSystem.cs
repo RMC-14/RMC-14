@@ -44,6 +44,12 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using static Content.Shared.Physics.CollisionGroup;
+using Content.Shared.Tiles;
+using Content.Shared._RMC14.Xenonids.Announce;
+using Content.Shared._RMC14.Dropship;
+using Content.Shared.Damage;
+using Content.Shared._RMC14.Rules;
+using Content.Shared.Destructible;
 
 
 namespace Content.Shared._RMC14.Xenonids.Construction;
@@ -59,7 +65,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedDestructibleSystem _destruction = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
@@ -142,8 +147,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         SubscribeLocalEvent<XenoAnnounceStructureDestructionComponent, DestructionEventArgs>(OnXenoStructureDestruction);
 
         SubscribeLocalEvent<DeleteXenoResinOnHitComponent, ProjectileHitEvent>(OnDeleteXenoResinHit);
-
-        SubscribeLocalEvent<DropshipHijackStartEvent>(OnDropshipHijackStart);
 
         Subs.BuiEvents<XenoConstructionComponent>(XenoChooseStructureUI.Key, subs =>
         {
@@ -234,6 +237,12 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 _popup.PopupClient("These weeds are too strong to plant a node on!", oldWeeds, xeno, PopupType.SmallCaution);
                 return;
             }
+        }
+
+        if (args.LimitDistance && !_xenoWeeds.HasWeedsNearby((gridUid, grid), coordinates))
+        {
+            _popup.PopupClient("We can only plant weed nodes near other weed nodes our hive owns!", xeno, xeno, PopupType.SmallCaution);
+            return;
         }
 
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
@@ -646,6 +655,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         {
             var undamagedStructureMessage = Loc.GetString("rmc-xeno-construction-repair-structure-no-damage-failure", ("struct", xenoStructure.Owner));
             _popup.PopupClient(undamagedStructureMessage, xenoStructure.Owner.ToCoordinates(), user);
+            return;
         }
 
         if (!InRangePopup(user, xenoStructureTransform.Coordinates, xeno.OrderConstructionRange.Float()))
@@ -716,11 +726,16 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private void OnWeedStructureRepair(Entity<XenoWeedsComponent> weedsStructure, ref XenoStructureRepairedEvent args)
     {
         var (ent, comp) = weedsStructure;
+
+        var spreaderComp = EnsureComp<XenoWeedsSpreadingComponent>(ent);
+        spreaderComp.SpreadAt = _timing.CurTime;
+        Dirty(ent, spreaderComp);
+
         foreach (var weed in comp.Spread)
         {
-            var weedSpreaderComp = new XenoWeedsSpreadingComponent();
-            weedSpreaderComp.SpreadAt = _timing.CurTime;
-            AddComp(weed, weedSpreaderComp);
+            spreaderComp = EnsureComp<XenoWeedsSpreadingComponent>(weed);
+            spreaderComp.SpreadAt = _timing.CurTime;
+            Dirty(weed, spreaderComp);
         }
     }
 
@@ -760,15 +775,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             QueueDel(args.Target);
     }
 
-    private void OnDropshipHijackStart(ref DropshipHijackStartEvent ev)
-    {
-        var hiveStructures = EntityQueryEnumerator<HiveConstructionLimitedComponent, TransformComponent>();
-        while (hiveStructures.MoveNext(out var hiveStructure, out _, out var transformComp))
-        {
-            if (transformComp.ParentUid != ev.Dropship && _planet.IsOnPlanet(hiveStructure.ToCoordinates()))
-                _destruction.DestroyEntity(hiveStructure);
-        }
-    }
+
     public FixedPoint2? GetStructurePlasmaCost(EntProtoId prototype)
     {
         if (_prototype.TryIndex(prototype, out var buildChoice) &&

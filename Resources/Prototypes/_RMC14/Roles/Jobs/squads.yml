@@ -90,6 +90,7 @@
     minimapBackground:
      sprite: _RMC14/Interface/map_blips.rsi
      state: background_foxtrot
+    canSupplyDrop: false
 
 - type: entity
   parent: SquadBase

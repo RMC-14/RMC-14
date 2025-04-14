@@ -1,0 +1,168 @@
+﻿# LV624
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertLV624Armory
+  name: Armory
+  suffix: Insert LV624
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/LV624/armory_looted.yml"
+      probability: 0.10
+    - spawn: "/Maps/_RMC14/Inserts/LV624/armory_extra.yml"
+      probability: 0.10
+    - spawn: "/Maps/_RMC14/Inserts/LV624/armory_cheese.yml"
+      probability: 0.10
+    clearEntities: true
+    clearDecals: true
+    
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertLV624Gym
+  name: Gym
+  suffix: Insert LV624
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/LV624/gym_alternate.yml"
+      probability: 0.30
+    - spawn: "/Maps/_RMC14/Inserts/LV624/gym_pool.yml"
+      probability: 0.20
+    clearEntities: true
+    clearDecals: true
+
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertLV624NexusCenter
+  name: Nexus Barricaded
+  suffix: Insert LV624
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/LV624/nexuscenter_barricaded.yml"
+      probability: 0.3
+    clearEntities: true
+    clearDecals: true
+    
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertLV624SandtempleSE
+  name: Sandtemple LZ1
+  suffix: Insert LV624
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/LV624/sandtemple-se.yml"
+      probability: 0.25
+    clearEntities: true
+    clearDecals: true
+    
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertLV624SandtempleJungle
+  name: Sandtemple Jungle
+  suffix: Insert LV624
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/LV624/sandtemple-jungle.yml"
+      probability: 0.25
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: true
+    
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertLV624CargoSpecial1
+  name: Cargo Special Mines
+  suffix: Insert LV624
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/LV624/cargospecial_mines.yml"
+      probability: 0.1
+    clearEntities: true
+    clearDecals: true
+    
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertLV624CargoSpecial2
+  name: Cargo Special Weapons
+  suffix: Insert LV624
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/LV624/cargospecial_weapons.yml"
+      probability: 0.1
+    clearEntities: true
+    clearDecals: true
+    
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertLV624CargoSpecial3
+  name: Cargo Special Gear
+  suffix: Insert LV624
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/LV624/cargospecial_gear.yml"
+      probability: 0.1
+      offset: -2,-3
+    clearEntities: true
+    clearDecals: true
+    
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertLV624Hydro
+  name: Hydro Destroyed
+  suffix: Insert LV624
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/LV624/hydro_destroyed.yml"
+      probability: 0.3
+    clearEntities: true
+    clearDecals: true
+    
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertLV624Bridge
+  name: Bridge
+  suffix: Insert LV624
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/LV624/bridge_east.yml"
+      probability: 0.1
+    - spawn: "/Maps/_RMC14/Inserts/LV624/bridge_restored.yml"
+      probability: 0.1
+    clearEntities: true
+    clearDecals: true
+    
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertLV624CentralCaves
+  name: Central Caves
+  suffix: Insert LV624
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/LV624/centralcaves_T.yml"
+      probability: 0.1
+    - spawn: "/Maps/_RMC14/Inserts/LV624/centralcaves_qc.yml"
+      probability: 0.1
+    clearEntities: true
+    clearDecals: true
+        
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertLV624Medbay
+  name: Medbay
+  suffix: Insert LV624
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/LV624/medbay_destroyed.yml"
+      probability: 0.1
+    clearEntities: true
+    clearDecals: true

@@ -49,7 +49,7 @@ public abstract partial class SharedToolSystem : EntitySystem
     private void OnDoAfter(EntityUid uid, ToolComponent tool, ToolDoAfterEvent args)
     {
         if (!args.Cancelled)
-            PlayToolSound(uid, tool, args.User);
+            PlayToolSound(uid, tool, args.User, args.Predicted);
 
         var ev = args.WrappedEvent;
         ev.DoAfter = args.DoAfter;
@@ -88,12 +88,15 @@ public abstract partial class SharedToolSystem : EntitySystem
         args.PushMessage(message);
     }
 
-    public void PlayToolSound(EntityUid uid, ToolComponent tool, EntityUid? user)
+    public void PlayToolSound(EntityUid uid, ToolComponent tool, EntityUid? user, bool predicted = true)
     {
         if (tool.UseSound == null)
             return;
 
-        _audioSystem.PlayPredicted(tool.UseSound, uid, user);
+        if (predicted)
+            _audioSystem.PlayPredicted(tool.UseSound, uid, user);
+        else if (_net.IsServer)
+            _audioSystem.PlayPvs(tool.UseSound, uid);
     }
 
     /// <summary>
@@ -160,7 +163,8 @@ public abstract partial class SharedToolSystem : EntitySystem
         out DoAfterId? id,
         float fuel = 0,
         ToolComponent? toolComponent = null,
-        DuplicateConditions duplicateCondition = DuplicateConditions.None)
+        DuplicateConditions duplicateCondition = DuplicateConditions.None,
+        bool predicted = true)
     {
         id = null;
         if (!Resolve(tool, ref toolComponent, false))
@@ -176,7 +180,7 @@ public abstract partial class SharedToolSystem : EntitySystem
         if(ev.Handled)
             delay = ev.Delay;
 
-        var toolEvent = new ToolDoAfterEvent(fuel, doAfterEv, GetNetEntity(target));
+        var toolEvent = new ToolDoAfterEvent(fuel, doAfterEv, GetNetEntity(target)) { Predicted = predicted };
         var doAfterArgs = new DoAfterArgs(EntityManager, user, delay / toolComponent.SpeedModifier, toolEvent, tool, target: target, used: tool)
         {
             BreakOnDamage = true,
@@ -292,6 +296,9 @@ public abstract partial class SharedToolSystem : EntitySystem
 
         [DataField("wrappedEvent")]
         public DoAfterEvent WrappedEvent = default!;
+
+        [DataField]
+        public bool Predicted = true;
 
         private ToolDoAfterEvent()
         {

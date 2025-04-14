@@ -1,14 +1,33 @@
 - type: entity
   name: bible
   description: Apply to head repeatedly.
-  parent: Bible
+  parent: BaseStorageItem
   id: RMCBible
   components:
-  - type: Bible
-    damageOnUntrainedUse: ## What a non-chaplain takes when attempting to heal someone
-      groups:
-        Burn: 15
   - type: Sprite
     sprite: _RMC14/Objects/Misc/bible.rsi
+    state: icon
   - type: Item
     sprite: _RMC14/Objects/Misc/bible.rsi
+  - type: UseDelay
+    delay: 10.0
+  - type: MeleeWeapon
+    soundHit:
+      collection: Punch
+    damage:
+      types:
+        Holy: 25
+        Blunt: 1
+  - type: Clothing
+    slots:
+    - Belt
+  - type: Storage
+    grid:
+    - 0,0,0,1
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: Tag
+    tags:
+    - Book

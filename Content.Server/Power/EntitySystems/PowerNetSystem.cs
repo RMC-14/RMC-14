@@ -329,6 +329,9 @@ namespace Content.Server.Power.EntitySystems
             var enumerator = AllEntityQuery<ApcPowerReceiverComponent>();
             while (enumerator.MoveNext(out var uid, out var apcReceiver))
             {
+                if (_rmcPowerReceiverQuery.HasComp(uid))
+                    continue;
+
                 var powered = !apcReceiver.PowerDisabled
                               && (!apcReceiver.NeedsPower
                                   || MathHelper.CloseToPercent(apcReceiver.NetworkLoad.ReceivingPower,
@@ -380,9 +383,6 @@ namespace Content.Server.Power.EntitySystems
 
                 metadata ??= MetaData(uid);
                 if (Paused(uid, metadata))
-                    continue;
-
-                if (_rmcPowerReceiverQuery.HasComp(uid))
                     continue;
 
                 apcReceiver.Recalculate = false;

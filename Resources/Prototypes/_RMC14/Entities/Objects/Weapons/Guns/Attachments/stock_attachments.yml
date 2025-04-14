@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: RMCAttachableBase
   id: RMCStockAttachmentBase
@@ -61,11 +61,6 @@
   - type: AttachableWieldDelayMods
     modifiers:
       - delay: 0.4
-  - type: AttachableWeaponMeleeMods
-    modifiers:
-    - bonusDamage:
-        types:
-          Blunt: 10
   - type: AttachableWeaponRangedMods
     modifiers:
     - conditions:
@@ -102,11 +97,6 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentMOU53Stock
-  - type: AttachableWeaponMeleeMods
-    modifiers:
-    - bonusDamage:
-        types:
-          Blunt: 10
   - type: AttachableSpeedMods
     modifiers:
     - conditions:
@@ -128,6 +118,56 @@
       accuracyAddMult: -0.1
       recoilFlat: 2
       scatterFlat: 2
+
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentType23Stock
+  name: Type 23 standard stock
+  description: A stamped wooden stock designed to absorb the ridiculous kick the 8 Gauge shotgun causes when fired. Not recommended to remove.
+  components:
+  - type: Sprite
+    state: type23_stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentType23Stock
+  - type: AttachableWieldDelayMods
+    modifiers:
+      - delay: 0.3
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.2
+      recoilFlat: -2
+      scatterFlat: -6
+    - conditions:
+        unwieldedOnly: true
+      accuracyAddMult: -0.05
+      recoilFlat: -1
+      scatterFlat: -2
+
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentType71Stock
+  name: Type 71 Stock
+  description: This isn't supposed to be separated from the gun, how'd this happen?
+  components:
+  - type: Sprite
+    state: type71_stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentType71Stock
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 15
 
 - type: entity
   parent: RMCStockAttachmentBase
@@ -186,6 +226,23 @@
   components:
   - type: Sprite
     state: db-stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentDoubleBarrelShotgunStock
+  - type: AttachableWieldDelayMods
+    modifiers: []
+
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentHJRA12Back
+  name: HJRA12 Breach
+  description: Unremovable HJRA12 Breach
+  components:
+  - type: Sprite
+    state: hjra_breech
   - type: AttachableVisuals
     suffix: ""
   - type: Tag
@@ -389,6 +446,11 @@
     - conditions:
         activeOnly: true
       delay: 0.2
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 5
   - type: AttachableWeaponRangedMods
     modifiers:
     - conditions:
@@ -594,6 +656,11 @@
     - conditions:
         activeOnly: true
       delay: 0.4
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 10
   - type: AttachableWeaponRangedMods
     modifiers:
     - conditions:
@@ -728,11 +795,6 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentXM88Stock
-  - type: AttachableWeaponMeleeMods
-    modifiers:
-    - bonusDamage:
-        types:
-          Blunt: 5
   - type: AttachableSpeedMods
     modifiers:
     - conditions:
@@ -777,11 +839,37 @@
     tags:
     - RMCAttachmentStock
     - RMCAttachmentHG3712Stock
-  - type: AttachableWeaponMeleeMods
-    modifiers:
-    - bonusDamage:
-        types:
-          Blunt: 10
+
+- type: entity
+  parent: RMCStockAttachmentBase
+  id: RMCAttachmentHuntingStock
+  name: Basira-Armstrong stock
+  description: The non-detachable stock of a Basira-Armstrong hunting rifle
+  components:
+  - type: Sprite
+    state: huntingstock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentHG3712Stock
+
+- type: entity
+  parent: RMCAttachableBase
+  id: RMCAttachmentSSG45Stock
+  name: SSG45 solid stock
+  description: Intergrated into the SSG45. You shouldn't have this.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
+    state: ssg45_stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentSSG45Stock
 
 - type: Tag
   id: RMCAttachmentHG3712Stock
@@ -845,3 +933,18 @@
 
 - type: Tag
   id: RMCAttachmentM54C2StockCollapsible
+
+- type: Tag
+  id: RMCAttachmentHuntingStock
+
+- type: Tag
+  id: RMCAttachmentHJRA12Back
+
+- type: Tag
+  id: RMCAttachmentType23Stock
+
+- type: Tag
+  id: RMCAttachmentType71Stock
+
+- type: Tag
+  id: RMCAttachmentSSG45Stock

@@ -233,7 +233,11 @@ public sealed class SensorTowerSystem : EntitySystem
         }
 
         var ev = new SensorTowerDestroyDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, user, tower.Comp.DestroyDelay, ev, tower, tower, user);
+        var doAfter = new DoAfterArgs(EntityManager, user, tower.Comp.DestroyDelay, ev, tower, tower, user)
+        {
+            ForceVisible = true,
+        };
+
         if (_doAfter.TryStartDoAfter(doAfter))
         {
             _popup.PopupClient($"You start wrenching apart the {Name(tower)}'s panels and reaching inside it!", tower, user, PopupType.Medium);

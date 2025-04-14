@@ -129,6 +129,9 @@
       entries:
       - id: RMCArmorXM4
       - id: RMCArmorM3LightVariants
+    - name: Jacket
+      choices: { CMCoat: 1 }
+      entries:
       - id: RMCCoatService
     - name: Backpack
       choices: { CMBag: 1 }
@@ -143,6 +146,9 @@
       entries:
       - id: RMCArmorHelmetM12Intel
         recommended: true
+    - name: Hat
+      choices: { CMHat: 1 }
+      entries:
       - id: RMCHeadBeretGreen
       - id: CMHeadBeretTan
       - id: CMHeadCapOfficer

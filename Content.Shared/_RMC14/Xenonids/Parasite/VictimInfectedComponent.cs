@@ -151,4 +151,10 @@ public sealed partial class VictimInfectedComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan BurstDoAfterDelay = TimeSpan.FromSeconds(3);
+
+    /// <summary>
+    /// How long larva is invincible after bursting
+    /// </summary>
+    [DataField]
+    public TimeSpan LarvaInvincibilityTime = TimeSpan.FromSeconds(1);
 }

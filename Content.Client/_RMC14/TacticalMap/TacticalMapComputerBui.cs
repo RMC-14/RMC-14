@@ -21,8 +21,8 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
         base.Open();
         Window = this.CreatePopOutableWindow<TacticalMapWindow>();
 
-        TabContainer.SetTabTitle(Window.MapTab, "Map");
-        TabContainer.SetTabVisible(Window.MapTab, true);
+        TabContainer.SetTabTitle(Window.Wrapper.MapTab, "Map");
+        TabContainer.SetTabVisible(Window.Wrapper.MapTab, true);
 
         var computer = EntMan.GetComponentOrNull<TacticalMapComputerComponent>(Owner);
         var skills = EntMan.System<SkillsSystem>();
@@ -30,23 +30,23 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
             _player.LocalEntity is { } player &&
             skills.HasSkill(player, computer.Skill, computer.SkillLevel))
         {
-            TabContainer.SetTabTitle(Window.CanvasTab, "Canvas");
-            TabContainer.SetTabVisible(Window.CanvasTab, true);
+            TabContainer.SetTabTitle(Window.Wrapper.CanvasTab, "Canvas");
+            TabContainer.SetTabVisible(Window.Wrapper.CanvasTab, true);
         }
         else
         {
-            TabContainer.SetTabVisible(Window.CanvasTab, false);
+            TabContainer.SetTabVisible(Window.Wrapper.CanvasTab, false);
         }
 
         if (computer != null &&
             EntMan.TryGetComponent(computer.Map, out AreaGridComponent? areaGrid))
         {
-            Window.UpdateTexture((computer.Map.Value, areaGrid));
+            Window.Wrapper.UpdateTexture((computer.Map.Value, areaGrid));
         }
 
         Refresh();
 
-        Window.UpdateCanvasButton.OnPressed += _ => SendPredictedMessage(new TacticalMapUpdateCanvasMsg(Window.Canvas.Lines));
+        Window.Wrapper.UpdateCanvasButton.OnPressed += _ => SendPredictedMessage(new TacticalMapUpdateCanvasMsg(Window.Wrapper.Canvas.Lines));
     }
 
     public void Refresh()
@@ -55,26 +55,26 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
             return;
 
         var lineLimit = EntMan.System<TacticalMapSystem>().LineLimit;
-        Window.SetLineLimit(lineLimit);
+        Window.Wrapper.SetLineLimit(lineLimit);
         UpdateBlips();
 
         if (EntMan.TryGetComponent(Owner, out TacticalMapComputerComponent? computer))
         {
-            Window.LastUpdateAt = computer.LastAnnounceAt;
-            Window.NextUpdateAt = computer.NextAnnounceAt;
+            Window.Wrapper.LastUpdateAt = computer.LastAnnounceAt;
+            Window.Wrapper.NextUpdateAt = computer.NextAnnounceAt;
         }
 
-        Window.Map.Lines.Clear();
+        Window.Wrapper.Map.Lines.Clear();
 
         var lines = EntMan.GetComponentOrNull<TacticalMapLinesComponent>(Owner);
         if (lines != null)
-            Window.Map.Lines.AddRange(lines.MarineLines);
+            Window.Wrapper.Map.Lines.AddRange(lines.MarineLines);
 
         if (_refreshed)
             return;
 
         if (lines != null)
-            Window.Canvas.Lines.AddRange(lines.MarineLines);
+            Window.Wrapper.Canvas.Lines.AddRange(lines.MarineLines);
 
         _refreshed = true;
     }
@@ -86,7 +86,7 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
 
         if (!EntMan.TryGetComponent(Owner, out TacticalMapComputerComponent? computer))
         {
-            Window.UpdateBlips(null);
+            Window.Wrapper.UpdateBlips(null);
             return;
         }
 
@@ -98,6 +98,6 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
             blips[i++] = blip;
         }
 
-        Window.UpdateBlips(blips);
+        Window.Wrapper.UpdateBlips(blips);
     }
 }

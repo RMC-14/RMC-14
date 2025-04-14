@@ -203,6 +203,7 @@ public abstract class SharedMortarSystem : EntitySystem
         {
             BreakOnMove = true,
             BreakOnHandChange = true,
+            ForceVisible = true,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))

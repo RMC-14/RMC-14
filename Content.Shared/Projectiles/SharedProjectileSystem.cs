@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared._RMC14.Projectiles.Penetration;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Camera;
@@ -169,16 +170,20 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         {
             _guns.PlayImpactSound(target, modifiedDamage, component.SoundHit, component.ForceSound, filter, projectile);
 
-            if (!ourBody.LinearVelocity.IsLengthZero())
-            {
-                var direction = ourBody.LinearVelocity.Normalized();
-                if (!float.IsNaN(direction.X))
-                    _sharedCameraRecoil.KickCamera(target, direction);
-            }
+            // if (!ourBody.LinearVelocity.IsLengthZero())
+            // {
+            //     var direction = ourBody.LinearVelocity.Normalized();
+            //     if (!float.IsNaN(direction.X))
+            //         _sharedCameraRecoil.KickCamera(target, direction);
+            // }
         }
 
         component.ProjectileSpent = true;
         Dirty(uid, component);
+
+        // RMC14
+        var additionalHits = new AfterProjectileHitEvent(projectile, target);
+        RaiseLocalEvent(uid, ref additionalHits);
 
         if (!predicted && component.DeleteOnCollide && (_net.IsServer || IsClientSide(uid)))
             QueueDel(uid);

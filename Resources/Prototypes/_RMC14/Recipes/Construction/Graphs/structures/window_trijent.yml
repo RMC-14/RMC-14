@@ -45,9 +45,8 @@
       - !type:EntityAnchored {}
       steps:
       - tool: Screwing
-        doAfter: 2
       - tool: Prying
-        doAfter: 2
+      - tool: Screwing
 
 # Hangar
 
@@ -98,9 +97,8 @@
       - !type:EntityAnchored {}
       steps:
       - tool: Screwing
-        doAfter: 2
       - tool: Prying
-        doAfter: 2
+      - tool: Screwing
 
 # Bunker
 
@@ -151,6 +149,5 @@
       - !type:EntityAnchored {}
       steps:
       - tool: Screwing
-        doAfter: 2
       - tool: Prying
-        doAfter: 2
+      - tool: Screwing
