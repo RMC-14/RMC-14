@@ -45,6 +45,7 @@ public sealed class XenoNameSystem : SharedXenoNameSystem
             name.Prefix = profile.XenoPrefix;
             name.Number = _available.Count == 0 ? _random.Next(1, 1000) : _random.PickAndTake(_available);
             name.Postfix = profile.XenoPostfix;
+            name.QueenName = profile.QueenName;
             _nameModifier.RefreshNameModifiers(xeno);
             RemCompDeferred<AssignXenoNameComponent>(xeno);
         }

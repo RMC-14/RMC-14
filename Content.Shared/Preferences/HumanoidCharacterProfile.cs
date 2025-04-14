@@ -148,6 +148,9 @@ namespace Content.Shared.Preferences
         public bool PlaytimePerks { get; private set; } = true;
 
         [DataField]
+        public bool QueenName { get; private set; } = true;
+
+        [DataField]
         public string XenoPrefix { get; private set; } = string.Empty;
 
         [DataField]
@@ -171,6 +174,7 @@ namespace Content.Shared.Preferences
             Dictionary<string, RoleLoadout> loadouts,
             SharedRMCNamedItems namedItems,
             bool playtimePerks,
+            bool queenName,
             string xenoPrefix,
             string xenoPostfix)
         {
@@ -206,6 +210,7 @@ namespace Content.Shared.Preferences
 
             NamedItems = namedItems;
             PlaytimePerks = playtimePerks;
+            QueenName = queenName;
             XenoPrefix = xenoPrefix;
             XenoPostfix = xenoPostfix;
         }
@@ -229,6 +234,7 @@ namespace Content.Shared.Preferences
                 new Dictionary<string, RoleLoadout>(other.Loadouts),
                 other.NamedItems,
                 other.PlaytimePerks,
+                other.QueenName,
                 other.XenoPrefix,
                 other.XenoPostfix)
         {
@@ -364,6 +370,12 @@ namespace Content.Shared.Preferences
         {
             return new(this) { PlaytimePerks = playtimePerks };
         }
+
+        public HumanoidCharacterProfile WithQueenName(bool queenName)
+        {
+            return new(this) { QueenName = queenName };
+        }
+
 
         public HumanoidCharacterProfile WithXenoPrefix(string prefix)
         {
@@ -545,6 +557,7 @@ namespace Content.Shared.Preferences
             if (NamedItems != other.NamedItems) return false;
             if (ArmorPreference != other.ArmorPreference) return false;
             if (PlaytimePerks != other.PlaytimePerks) return false;
+            if (QueenName != other.QueenName) return false;
             if (XenoPrefix != other.XenoPrefix) return false;
             if (XenoPostfix != other.XenoPostfix) return false;
             return Appearance.MemberwiseEquals(other.Appearance);
@@ -869,6 +882,7 @@ namespace Content.Shared.Preferences
             hashCode.Add((int)PreferenceUnavailable);
             hashCode.Add(NamedItems);
             hashCode.Add(PlaytimePerks);
+            hashCode.Add(QueenName);
             hashCode.Add(XenoPrefix);
             hashCode.Add(XenoPostfix);
             return hashCode.ToHashCode();
