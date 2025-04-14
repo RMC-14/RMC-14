@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Increased Crusher Stomp's outer radius, so it is no longer much smaller
-      than it is supposed to be.
-    type: Fix
-  id: 1080
-  time: '2024-12-09T05:59:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5089
 - author: Vermidia
   changes:
   - message: Fixed xeno auto regurgitation stunning.
@@ -5339,5 +5331,12 @@
   id: 1582
   time: '2025-04-14T02:07:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6136
+- author: Dygon
+  changes:
+  - message: Flare packs can now directly transfer their content to a flare pouch.
+    type: Add
+  id: 1583
+  time: '2025-04-14T03:28:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6144
 Name: RMC14
 Order: -1
