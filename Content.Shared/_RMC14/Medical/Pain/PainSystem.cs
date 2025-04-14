@@ -118,13 +118,13 @@ public sealed partial class PainSystem : EntitySystem
     {
         var maxPainReductionModificatorStrength = FixedPoint2.Zero;
         var painIncrease = FixedPoint2.Zero;
-        if (comp.PainModificators.Count != 0) // get max pain reduction, sum pain increase
-        {
-            var painIncreaseList = comp.PainModificators.Where(mod => mod.Type == PainModificatorType.PainIncrease);
-            var painReductions = comp.PainModificators.Where(mod => mod.Type == PainModificatorType.PainReduction);
+        var painIncreases = comp.PainModificators.Where(mod => mod.Type == PainModificatorType.PainIncrease);
+        var painReductions = comp.PainModificators.Where(mod => mod.Type == PainModificatorType.PainReduction);
+        // get max pain reduction, sum pain increase
+        if (painIncreases.Any())
+            painIncrease = painIncreases.Select(mod => mod.EffectStrength).Sum();
+        if (painReductions.Any())
             maxPainReductionModificatorStrength = painReductions.Max(mod => mod.EffectStrength);
-            painIncrease = painIncreaseList.Select(mod => mod.EffectStrength).Sum();
-        }
 
         var realCurrentPain = comp.CurrentPain + painIncrease;
         // Pain reduction effectiveness linear decreases as the pain goes up

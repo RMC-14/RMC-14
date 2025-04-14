@@ -6,6 +6,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Utility;
+using Content.Shared.FixedPoint;
 using static Robust.Shared.Utility.SpriteSpecifier;
 
 namespace Content.Shared._RMC14.Xenonids.Parasite;
@@ -100,6 +101,12 @@ public sealed partial class VictimInfectedComponent : Component
 
     [DataField]
     public int BurstWarningStart = 6;
+
+    [DataField]
+    public FixedPoint2 WeakChestBurstPain = FixedPoint2.New(25);
+
+    [DataField]
+    public FixedPoint2 StrongChestBurstPain = FixedPoint2.New(100);
 
     [DataField]
     public float ShakesChance = 0.08f;
