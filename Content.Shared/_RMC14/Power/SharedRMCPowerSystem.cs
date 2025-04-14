@@ -12,6 +12,9 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Content.Shared.Power;
+using Content.Shared.Power.Components;
+using Content.Shared.Power.EntitySystems;
 using Content.Shared.PowerCell;
 using Content.Shared.Tools.Systems;
 using Content.Shared.UserInterface;
@@ -37,6 +40,7 @@ public abstract class SharedRMCPowerSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedPowerReceiverSystem _powerReceiver = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedRMCSpriteSystem _sprite = default!;
@@ -48,12 +52,14 @@ public abstract class SharedRMCPowerSystem : EntitySystem
     private readonly HashSet<MapId> _reactorsUpdated = new();
 
     private EntityQuery<RMCApcComponent> _apcQuery;
+    private EntityQuery<AppearanceComponent> _appearanceQuery;
     private EntityQuery<RMCAreaPowerComponent> _areaPowerQuery;
     private EntityQuery<RMCPowerReceiverComponent> _powerReceiverQuery;
 
     public override void Initialize()
     {
         _apcQuery = GetEntityQuery<RMCApcComponent>();
+        _appearanceQuery = GetEntityQuery<AppearanceComponent>();
         _areaPowerQuery = GetEntityQuery<RMCAreaPowerComponent>();
         _powerReceiverQuery = GetEntityQuery<RMCPowerReceiverComponent>();
 
@@ -711,6 +717,9 @@ public abstract class SharedRMCPowerSystem : EntitySystem
     protected void UpdateApcChannel(Entity<RMCApcComponent> apc, Entity<RMCAreaPowerComponent> area, RMCPowerChannel channel, bool on)
     {
         ref var apcChannel = ref apc.Comp.Channels[(int) channel];
+        if (apcChannel.On == on)
+            return;
+
         if (apcChannel.Button == RMCApcButtonState.Auto ||
             (apcChannel.Button == RMCApcButtonState.On && on) ||
             (apcChannel.Button == RMCApcButtonState.Off && !on))
@@ -760,6 +769,27 @@ public abstract class SharedRMCPowerSystem : EntitySystem
     {
         var mapId = _transform.GetMapId(ent.Owner);
         _reactorsUpdated.Add(mapId);
+    }
+
+    protected void UpdateReceiverPower(EntityUid receiver, ref PowerChangedEvent ev)
+    {
+        SharedApcPowerReceiverComponent? receiverComp = null;
+        if (!_powerReceiver.ResolveApc(receiver, ref receiverComp))
+            return;
+
+        if (receiverComp.Powered == ev.Powered)
+            return;
+
+        if (!receiverComp.NeedsPower)
+            return;
+
+        receiverComp.Powered = ev.Powered;
+        Dirty(receiver, receiverComp);
+
+        RaiseLocalEvent(receiver, ref ev);
+
+        if (_appearanceQuery.TryComp(receiver, out var appearance))
+            _appearance.SetData(receiver, PowerDeviceVisuals.Powered, ev.Powered, appearance);
     }
 
     public override void Update(float frameTime)
@@ -849,15 +879,18 @@ public abstract class SharedRMCPowerSystem : EntitySystem
 
                 if (receiver != null)
                 {
+                    receiver.Area = area;
+                    Dirty(update, receiver);
+
+                    var ev = new PowerChangedEvent(IsAreaPowered((area, area), receiver.Channel), 0);
+                    UpdateReceiverPower(update, ref ev);
+
                     if (GetAreaReceivers(area, receiver.Channel).Add(update))
                     {
                         receiver.LastLoad = GetNewPowerLoad((update, receiver));
                         area.Comp.Load[(int) receiver.Channel] += receiver.LastLoad;
                         Dirty(area);
                     }
-
-                    receiver.Area = area;
-                    Dirty(update, receiver);
                 }
             }
         }

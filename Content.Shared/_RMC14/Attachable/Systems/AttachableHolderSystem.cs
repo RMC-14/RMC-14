@@ -15,6 +15,7 @@ using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee.Events;
@@ -60,7 +61,7 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, GotEquippedHandEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GotUnequippedHandEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GunRefreshModifiersEvent>(RelayEvent,
-            after: new[] { typeof(WieldableSystem) });
+            after: new[] { typeof(SharedWieldableSystem) });
         SubscribeLocalEvent<AttachableHolderComponent, BeforeRangedInteractEvent>(OnAttachableHolderBeforeRangedInteract,
             before: [typeof(SharedStorageSystem)]);
         SubscribeLocalEvent<AttachableHolderComponent, InteractUsingEvent>(OnAttachableHolderInteractUsing);
@@ -84,6 +85,7 @@ public sealed class AttachableHolderSystem : EntitySystem
         SubscribeLocalEvent<AttachableHolderComponent, GetFireModesEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GetDamageFalloffEvent>(RelayEvent);
         SubscribeLocalEvent<AttachableHolderComponent, GetWeaponAccuracyEvent>(RelayEvent);
+        SubscribeLocalEvent<AttachableHolderComponent, DroppedEvent>(RelayEvent);
 
 
         CommandBinds.Builder

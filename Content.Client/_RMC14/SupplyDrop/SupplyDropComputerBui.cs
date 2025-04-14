@@ -11,6 +11,7 @@ public sealed class SupplyDropComputerBui(EntityUid owner, Enum uiKey) : BoundUs
 
     protected override void Open()
     {
+        base.Open();
         _window = this.CreateWindow<SupplyDropWindow>();
         _window.Longitude.OnValueChanged +=
             args => SendPredictedMessage(new SupplyDropComputerLongitudeBuiMsg((int)args.Value));

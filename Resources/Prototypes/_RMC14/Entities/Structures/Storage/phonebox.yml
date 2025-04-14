@@ -27,6 +27,7 @@
   - type: ItemSlots
   - type: InteractionOutline
   - type: Physics
+    bodyType: Static
   - type: Fixtures
     fixtures:
       fix1:
@@ -89,6 +90,7 @@
   - type: Appearance
   - type: InteractionOutline
   - type: Physics
+    bodyType: Static
   - type: Fixtures
     fixtures:
       fix1:

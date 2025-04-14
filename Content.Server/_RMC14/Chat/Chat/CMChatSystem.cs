@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using Content.Server.Chat.Managers;
-using Content.Server.Speech.Components;
 using Content.Server.Speech.EntitySystems;
+using Content.Server.Speech.Prototypes;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids;

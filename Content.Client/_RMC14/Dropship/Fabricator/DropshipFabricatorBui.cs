@@ -28,6 +28,7 @@ public sealed class DropshipFabricatorBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         _window = new DropshipFabricatorWindow();
         _window.OnClose += Close;
 

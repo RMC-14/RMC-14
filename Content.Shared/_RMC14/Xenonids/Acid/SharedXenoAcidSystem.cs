@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -70,7 +70,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     private void OnXenoCorrosiveAcid(Entity<XenoAcidComponent> xeno, ref XenoCorrosiveAcidEvent args)
     {
         if (xeno.Owner != args.Performer ||
-            !CheckCorrodiblePopups(xeno, args.Target, out var time))
+            !CheckCorrodiblePopups(xeno, args.Target, out var time, out var _))
         {
             return;
         }
@@ -101,7 +101,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         if (args.Handled || args.Cancelled || args.Target is not { } target)
             return;
 
-        if (!CheckCorrodiblePopups(xeno, target, out var _))
+        if (!CheckCorrodiblePopups(xeno, target, out var _, out var mult))
             return;
 
         if (args.PlasmaCost != 0 && !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
@@ -115,12 +115,13 @@ public abstract class SharedXenoAcidSystem : EntitySystem
 
         args.Handled = true;
 
-        ApplyAcid(args.AcidId, target, args.Dps, args.ExpendableLightDps, args.Time);
+        ApplyAcid(args.AcidId, target, args.Dps, args.ExpendableLightDps, args.Time * mult);
     }
 
-    private bool CheckCorrodiblePopups(Entity<XenoAcidComponent> xeno, EntityUid target, out TimeSpan time)
+    private bool CheckCorrodiblePopups(Entity<XenoAcidComponent> xeno, EntityUid target, out TimeSpan time, out float mult)
     {
         time = TimeSpan.Zero;
+        mult = 1;
         if (!TryComp(target, out CorrodibleComponent? corrodible) ||
             !corrodible.IsCorrodible)
         {
@@ -141,6 +142,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         }
 
         time = corrodible.TimeToApply;
+        mult = corrodible.MeltTimeMult;
 
         return true;
     }

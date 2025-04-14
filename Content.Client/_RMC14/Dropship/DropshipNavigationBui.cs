@@ -25,6 +25,7 @@ public sealed class DropshipNavigationBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         OpenWindow();
     }
 

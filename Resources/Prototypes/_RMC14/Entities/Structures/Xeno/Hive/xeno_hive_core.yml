@@ -57,6 +57,7 @@
     spawns: XenoHiveWeedsCore
     level: 3
     blockOtherWeeds: true
+    spreadsOnSemiWeedable: true
   - type: GhostRole
     name: roles-lesser-drone-name
     description: roles-lesser-drone-description
@@ -69,7 +70,7 @@
   - type: HiveConstructionLimited
     id: HiveCoreXeno
   - type: RoofingEntity
-    range: 10
+    range: 11.848 #rounded to 3 decimals
   - type: EvolutionBonus
   - type: WarpPoint
     location: hive core
@@ -79,6 +80,9 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: core
+  - type: RMCAlternateSprite
+    normalSprite: _RMC14/Structures/Xenos/hive_structures.rsi
+    alternateSprite: _RMC14/Structures/Xenos/hive_structures_old.rsi
 
 - type: entity
   id: HiveCoreXenoConstructionNode
@@ -89,9 +93,9 @@
   components:
   - type: Sprite
     color: '#FFFFFFAA'
+    sprite: _RMC14/Structures/Xenos/hive_structures.rsi
     layers:
-    - sprite: _RMC14/Structures/Xenos/hive_structures.rsi
-      state: core
+    - state: core
     - sprite: _RMC14/Interface/xeno_hud.rsi
       state: xeno_structure_node_indicator
       scale: 0.8, 0.8
@@ -111,6 +115,9 @@
     id: HiveCoreXeno
   - type: WarpPoint
     location: hive core
+  - type: RMCAlternateSprite
+    normalSprite: _RMC14/Structures/Xenos/hive_structures.rsi
+    alternateSprite: _RMC14/Structures/Xenos/hive_structures_old.rsi
 
 
 - type: entity
@@ -143,7 +150,7 @@
   - type: HivePylon
   - type: XenoWeedsSpreading
   - type: RoofingEntity
-    range: 7
+    range: 8.463 #rounded to 3 decimals
     canOrbitalBombard: true
   - type: XenoWeeds
     range: 5
@@ -163,3 +170,6 @@
     id: HivePylonXeno
   - type: WarpPoint
     location: hive pylon
+  - type: RMCAlternateSprite
+    normalSprite: _RMC14/Structures/Xenos/hive_structures.rsi
+    alternateSprite: _RMC14/Structures/Xenos/hive_structures_old.rsi

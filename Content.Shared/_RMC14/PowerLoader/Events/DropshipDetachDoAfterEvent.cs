@@ -1,18 +1,11 @@
-using Content.Shared.DoAfter;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._RMC14.PowerLoader;
+namespace Content.Shared._RMC14.PowerLoader.Events;
 
 [Serializable, NetSerializable]
-public sealed partial class DropshipDetachDoAfterEvent : SimpleDoAfterEvent
+public sealed partial class DropshipDetachDoAfterEvent : DropshipDoAfterEvent
 {
-    public NetEntity ContainerEntity;
-
-    public NetEntity ContainedEntity;
-
-    public DropshipDetachDoAfterEvent(NetEntity containerEntity, NetEntity containedEntity)
+    public DropshipDetachDoAfterEvent(NetEntity container, NetEntity contained, string slot) : base(container, contained, slot)
     {
-        ContainerEntity = containerEntity;
-        ContainedEntity = containedEntity;
     }
 }

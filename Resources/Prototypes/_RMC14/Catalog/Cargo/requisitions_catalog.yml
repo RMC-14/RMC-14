@@ -188,7 +188,11 @@
       - cost: 10000
         crate: RMCCrateGrenadesHighExplosiveBox
       - cost: 10000
+        crate: RMCCrateGrenadesBoxHEFA
+      - cost: 10000
         crate: RMCCrateGrenadesAirburstFragBox
+      - cost: 10000
+        crate: RMCCrateBoxAGMI
       - cost: 4000
         crate: RMCCrateGrenadesAirburstFrag
       - cost: 4000
@@ -309,6 +313,8 @@
         crate: RMCCrateMagazineM96SFlak
       - cost: 3000
         crate: RMCCrateMagazineM96SIncendiary
+      - cost: 3000
+        crate: RMCCrateMagazineXM43E1Standard
       - cost: 3000
         crate: RMCCrateM5DemoSpecMixed
       - cost: 3000

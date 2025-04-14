@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Animation;
 using Content.Shared._RMC14.Xenonids.Crest;
@@ -82,6 +83,7 @@ public sealed class XenoHeadbuttSystem : EntitySystem
         xeno.Comp.Charge = diff;
         Dirty(xeno);
 
+        EnsureComp<RMCObstacleSlamImmuneComponent>(xeno);
         _throwing.TryThrow(xeno, diff, 10);
     }
 
@@ -118,7 +120,7 @@ public sealed class XenoHeadbuttSystem : EntitySystem
             finalDamage.ExclusiveAdd(xeno.Comp.CrestedDamageReduction);
         }
 
-        var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage, armorPiercing: xeno.Comp.AP);
+        var damage = _damageable.TryChangeDamage(targetId, xeno.Comp.Damage, armorPiercing: xeno.Comp.AP, origin: xeno, tool: xeno);
         if (damage?.GetTotal() > FixedPoint2.Zero)
         {
             var filter = Filter.Pvs(targetId, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);

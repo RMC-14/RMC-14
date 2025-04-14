@@ -20,6 +20,7 @@ public sealed class TechControlConsoleBui(EntityUid owner, Enum uiKey) : BoundUs
 
     protected override void Open()
     {
+        base.Open();
         _window = this.CreateWindow<TechControlConsoleWindow>();
         Refresh();
     }

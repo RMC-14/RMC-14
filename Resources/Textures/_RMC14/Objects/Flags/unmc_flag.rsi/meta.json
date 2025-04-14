@@ -8,10 +8,10 @@
     },
     "states": [
       {
-        "name": "unmc_icon"
+        "name": "icon"
       },
       {
-        "name": "unmc_deploy",
+        "name": "deploy",
         "delays": [
           [
             0.5,

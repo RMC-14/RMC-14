@@ -34,7 +34,7 @@ public sealed class XenoSmackdownSystem : EntitySystem
             _standing.IsDown(ent)))
                 continue;
 
-            var myDamage = _damageable.TryChangeDamage(ent, xeno.Comp.Damage);
+            var myDamage = _damageable.TryChangeDamage(ent, xeno.Comp.Damage, origin: xeno, tool: xeno);
             if (myDamage?.GetTotal() > FixedPoint2.Zero)
             {
                 var filter = Filter.Pvs(ent, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);
