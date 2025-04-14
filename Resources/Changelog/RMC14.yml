@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed matchboxes not being tiny, and tarback tubes, and cigar cases not
-      being small.
-    type: Fix
-  - message: Fixed handfuls, cigpacks, and matchboxes not fitting in helmets.
-    type: Fix
-  id: 1078
-  time: '2024-12-09T00:32:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5071
 - author: noctyrnal
   changes:
   - message: Added Chances Claim, Also known as LV522, expect it be available soon!
@@ -5340,5 +5330,13 @@
   id: 1580
   time: '2025-04-14T02:05:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6085
+- author: noctyrnal
+  changes:
+  - message: Changes the appearance of the We-Ya Whiteout Commandos. If you can see
+      these new sprites, you fucked up.
+    type: Tweak
+  id: 1581
+  time: '2025-04-14T02:06:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6111
 Name: RMC14
 Order: -1
