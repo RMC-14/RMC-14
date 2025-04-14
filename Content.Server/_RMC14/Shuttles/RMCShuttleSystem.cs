@@ -47,39 +47,22 @@ public sealed class RMCShuttleSystem : SharedRMCShuttleSystem
     private void BeforeFTLStarted(Entity<RMCSpawnEntityOnFTLStartComponent> ent, ref BeforeFTLStartedEvent args)
     {
         var uid = args.FTLEntity;
-        var manager = args.Manager;
         var grid = args.Grid;
-        var xform = args.Xform;
 
-        if (!Resolve(uid, ref manager, ref grid, ref xform) || xform.MapUid == null)
+        if (!Resolve(uid, ref grid))
             return;
 
-        var tiles = new HashSet<Vector2i>();
-        if (TryComp(uid, out MapGridComponent? shuttleGrid))
+        var enumerator = _mapSystem.GetAllTilesEnumerator(uid, grid);
+        while (enumerator.MoveNext(out var tile))
         {
-            var enumerator = _mapSystem.GetAllTilesEnumerator(uid, shuttleGrid);
-            while (enumerator.MoveNext(out var tile))
-            {
-                tiles.Add(tile.Value.GridIndices);
-            }
-        }
+            if(!TryComp(uid, out MapGridComponent? mapGrid))
+                return;
 
-        foreach (var fixture in manager.Fixtures.Values)
-        {
-            if (!fixture.Hard)
-                continue;
-
-            foreach (var tile in tiles)
-            {
-                if(!TryComp(uid, out MapGridComponent? mapGrid))
-                    return;
-
-                var mapCoords = _mapSystem.GridTileToWorld(uid, mapGrid, tile);
-                ent.Comp.Coordinates.Add(mapCoords);
-            }
+            var mapCoords = _mapSystem.GridTileToWorld(uid, mapGrid, tile.Value.GridIndices);
+            ent.Comp.Coordinates.Add(mapCoords);
         }
     }
 }
 
 [ByRefEvent]
-public record struct BeforeFTLStartedEvent(EntityUid FTLEntity, FixturesComponent? Manager = null, MapGridComponent? Grid = null, TransformComponent? Xform = null);
+public record struct BeforeFTLStartedEvent(EntityUid FTLEntity, MapGridComponent? Grid = null);
