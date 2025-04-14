@@ -10,11 +10,14 @@ namespace Content.Shared._RMC14.Medical.Pain
     public sealed partial class PainComponent : Component
     {
         /// <summary>
-        /// Sum of pain increacing factors at the moment
+        /// Pain value derived from overall damage to the body without modificators.
         /// </summary>
         [ViewVariables]
         public FixedPoint2 CurrentPain = FixedPoint2.Zero;
 
+        /// <summary>
+        /// Pain value with all modificators and limited to 100.
+        /// </summary>
         [ViewVariables]
         public FixedPoint2 CurrentPainPercentage = FixedPoint2.Zero;
 

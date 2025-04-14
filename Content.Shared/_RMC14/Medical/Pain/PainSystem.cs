@@ -93,7 +93,7 @@ public sealed partial class PainSystem : EntitySystem
         _alerts.ShowAlert(uid, pain.Alert, (short)pain.CurrentPainLevel);
     }
 
-    public void AddPainReductionModificator(EntityUid uid, PainModificator mod, PainComponent? pain = null)
+    public void AddPainModificator(EntityUid uid, PainModificator mod, PainComponent? pain = null)
     {
         if (!Resolve(uid, ref pain))
             return;
@@ -102,10 +102,10 @@ public sealed partial class PainSystem : EntitySystem
         UpdateCurrentPainPercentage(pain);
         Dirty(uid, pain);
 
-        Timer.Spawn(mod.Duration, () => RemovePainReductionModificator(uid, mod, pain));
+        Timer.Spawn(mod.Duration, () => RemovePainModificator(uid, mod, pain));
     }
 
-    private void RemovePainReductionModificator(EntityUid uid, PainModificator mod, PainComponent? pain = null)
+    private void RemovePainModificator(EntityUid uid, PainModificator mod, PainComponent? pain = null)
     {
         if (!Resolve(uid, ref pain))
             return;
@@ -116,15 +116,20 @@ public sealed partial class PainSystem : EntitySystem
     }
     private void UpdateCurrentPainPercentage(PainComponent comp)
     {
-        var maxModificatorStrength = FixedPoint2.Zero;
-        if (comp.PainModificators.Count != 0)
+        var maxPainReductionModificatorStrength = FixedPoint2.Zero;
+        var painIncrease = FixedPoint2.Zero;
+        if (comp.PainModificators.Count != 0) // get max pain reduction, sum pain increase
         {
-            maxModificatorStrength = comp.PainModificators.Max(mod => mod.EffectStrength);
+            var painIncreaseList = comp.PainModificators.Where(mod => mod.Type == PainModificatorType.PainIncrease);
+            var painReductions = comp.PainModificators.Where(mod => mod.Type == PainModificatorType.PainReduction);
+            maxPainReductionModificatorStrength = painReductions.Max(mod => mod.EffectStrength);
+            painIncrease = painIncreaseList.Select(mod => mod.EffectStrength).Sum();
         }
 
+        var realCurrentPain = comp.CurrentPain + painIncrease;
         // Pain reduction effectiveness linear decreases as the pain goes up
-        var newPainReduction = FixedPoint2.Max(0, -comp.CurrentPain * comp.PainReductionDecreaceRate + maxModificatorStrength);
-        comp.CurrentPainPercentage = FixedPoint2.Clamp(comp.CurrentPain - newPainReduction, 0, 100);
+        var newPainReduction = FixedPoint2.Max(0, -realCurrentPain * comp.PainReductionDecreaceRate + maxPainReductionModificatorStrength);
+        comp.CurrentPainPercentage = FixedPoint2.Clamp(realCurrentPain - newPainReduction, 0, 100);
     }
 
     private void UpdateCurrentPain(PainComponent comp, Dictionary<string, FixedPoint2> damageDict)
@@ -152,6 +157,7 @@ public sealed partial class PainSystem : EntitySystem
                 newCurrentPain += comp.AirlossPainMultiplier * damageDict[type];
             }
         }
+
         comp.CurrentPain = newCurrentPain;
     }
 
