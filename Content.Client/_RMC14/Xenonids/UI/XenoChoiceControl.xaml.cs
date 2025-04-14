@@ -15,6 +15,7 @@ public partial class XenoChoiceControl : Control
     {
         RobustXamlLoader.Load(this);
         Plasma.ForegroundStyleBoxOverride = new StyleBoxFlat(Color.LightSkyBlue);
+        Health.ForegroundStyleBoxOverride = new StyleBoxFlat(Color.LimeGreen);
     }
 
     public void Set(string name, Texture? texture)
