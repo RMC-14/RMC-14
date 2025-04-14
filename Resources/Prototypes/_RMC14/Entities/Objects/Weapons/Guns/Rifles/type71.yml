@@ -54,6 +54,7 @@
           - RMCMagazineRifleType71
           - RMCMagazineRifleType71AP
           - RMCMagazineRifleType71HEAP
+        startingItem: RMCMagazineRifleType71AP
   - type: GunDamageModifier
     multiplier: 1
   - type: AttachableHolder
@@ -101,6 +102,44 @@
   - type: Tag
     tags:
     - RMCWeaponRifleType71
+
+- type: entity
+  parent: RMCWeaponRifleType71
+  name: Type 71-F assault rifle
+  id: RMCWeaponRifleType71Flamer
+  description: This appears to be a less common variant of the Type 71 with an integrated flamethrower that seems especially powerful.
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+          - RMCAttachmentBarrelCharger
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentType71Stock
+        whitelist:
+          tags:
+          - RMCAttachmentType71Stock
+      rmc-aslot-underbarrel:
+        locked: true
+        startingAttachable: RMCAttachmentMiniFlamethrower
+        whitelist:
+          tags:
+          - RMCAttachmentFlamer
 
 - type: entity
   parent: CMMagazineRifleBase
