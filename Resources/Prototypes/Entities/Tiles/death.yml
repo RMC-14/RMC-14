@@ -24,7 +24,7 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.85,-0.85,0.85,0.85"
+          bounds: "-1,-1,1,1"
         layer:
         - SlipLayer
         mask:
@@ -35,4 +35,4 @@
     tags:
     - HideContextMenu
   - type: TimedDespawn
-    lifetime: 10
+    lifetime: 30
