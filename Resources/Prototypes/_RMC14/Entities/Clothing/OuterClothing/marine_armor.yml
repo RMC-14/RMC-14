@@ -364,7 +364,7 @@
   - type: Storage
     maxItemSize: Small
     grid:
-    - 0,0,7,1 # 3 slots + ziptie box
+    - 0,0,5,1 # 3 slots
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/jungle.rsi
