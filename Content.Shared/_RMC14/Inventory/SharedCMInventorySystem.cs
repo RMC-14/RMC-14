@@ -229,7 +229,9 @@ public abstract class SharedCMInventorySystem : EntitySystem
     /// </summary>
     private void OnInteractUsing(Entity<CMItemSlotsComponent> ent, ref InteractUsingEvent args)
     {
-        if(!TryComp(args.Used, out ItemSlotsComponent? usedStorage) || !TryComp(ent, out ItemSlotsComponent? storage))
+        if(!TryComp(args.Used, out ItemSlotsComponent? usedStorage) ||
+           !TryComp(ent, out ItemSlotsComponent? storage) ||
+           args.Handled)
             return;
 
         SoundSpecifier? insertSound = null;
