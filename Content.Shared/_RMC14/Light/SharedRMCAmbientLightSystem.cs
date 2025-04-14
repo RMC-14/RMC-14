@@ -5,37 +5,15 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Light;
 
-public sealed class RMCLightAnimationSystem : EntitySystem
+public sealed class SharedRMCAmbientLightSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
 
-    public void SetColor(Entity<RMCLightAnimationComponent> ent, string colorHex, TimeSpan duration)
-    {
-        var mapLight = EnsureComp<MapLightComponent>(ent);
 
-        ent.Comp.Colors = [mapLight.AmbientLightColor, Color.FromHex(colorHex, Color.Black)];
-        ent.Comp.Duration = duration;
-        ent.Comp.StartTime = _timing.CurTime;
 
-        Dirty(ent);
-    }
 
-    public void SetColor(Entity<RMCLightAnimationComponent> ent, List<string> colorHexes, TimeSpan duration)
-    {
-        if (colorHexes.Count == 0 || duration <= TimeSpan.Zero)
-            return;
-
-        var mapLight = EnsureComp<MapLightComponent>(ent);
-
-        ent.Comp.Colors = colorHexes.Select(hex => Color.FromHex(hex, Color.Black)).ToList();
-        ent.Comp.Duration = duration;
-        ent.Comp.StartTime = _timing.CurTime;
-
-        Dirty(ent);
-    }
-
-    public Color GetColor(Entity<RMCLightAnimationComponent> ent, TimeSpan curTime)
+    public Color GetColor(Entity<RMCAmbientLightComponent> ent, TimeSpan curTime)
     {
         //TODO: Doublecheck all this
         if (ent.Comp.Colors.Count == 0 || ent.Comp.Duration <= TimeSpan.Zero)
@@ -61,28 +39,33 @@ public sealed class RMCLightAnimationSystem : EntitySystem
         return color;
     }
 
-    public void ClearComponent(Entity<RMCLightAnimationComponent> ent)
+    /*public void ClearComponent(Entity<RMCAmbientLightComponent> ent)
     {
         ent.Comp.Colors.Clear();
         ent.Comp.Duration = TimeSpan.Zero;
         ent.Comp.StartTime = _timing.CurTime;
+        ent.Comp.Running = false;
         Dirty(ent);
-    }
+    }*/
 
     public override void Update(float frameTime)
     {
         if (_net.IsClient)
             return;
 
-        var lightQuery = EntityQueryEnumerator<RMCLightAnimationComponent, MapLightComponent>();
+        var lightQuery = EntityQueryEnumerator<RMCAmbientLightComponent, MapLightComponent>();
         var curTime = _timing.CurTime;
 
         while (lightQuery.MoveNext(out var uid, out var animComponent, out var lightComponent))
         {
+            if (!animComponent.Running)
+                continue;
+
             if (curTime>= animComponent.EndTime)
             {
                 lightComponent.AmbientLightColor = animComponent.Colors[^1];
-                ClearComponent((uid, animComponent));
+                animComponent.Running = false;
+                Dirty(uid, lightComponent);
                 continue;
             }
 

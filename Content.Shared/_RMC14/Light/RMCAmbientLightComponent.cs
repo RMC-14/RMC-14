@@ -3,8 +3,11 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._RMC14.Light;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class RMCLightAnimationComponent : Component
+public sealed partial class RMCAmbientLightComponent : Component
 {
+    [DataField, AutoNetworkedField]
+    public bool Running;
+
     [DataField, AutoNetworkedField]
     public TimeSpan Duration;
 
