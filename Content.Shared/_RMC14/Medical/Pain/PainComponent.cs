@@ -33,7 +33,7 @@ namespace Content.Shared._RMC14.Medical.Pain
         public TimeSpan NextEffectUpdateTime = new(0);
 
         [ViewVariables, Access(typeof(PainSystem))]
-        public List<PainReductionModificator> PainReductionModificators = [];
+        public List<PainModificator> PainModificators = [];
 
         [DataField]
         public FixedPoint2 PainReductionDecreaceRate = FixedPoint2.New(0.25);
@@ -51,22 +51,30 @@ namespace Content.Shared._RMC14.Medical.Pain
         public FixedPoint2 AirlossPainMultiplier = FixedPoint2.Zero;
 
         [DataField(required: true, serverOnly: true)]
-        public List<EntityEffect> PainLevels = new(0);
+        public List<EntityEffect> PainLevels = [];
 
         [DataField]
         public ProtoId<AlertPrototype> Alert = "Pain";
     }
 
     [DataDefinition]
-    public sealed partial class PainReductionModificator
+    public sealed partial class PainModificator
     {
         public TimeSpan Duration;
         public FixedPoint2 EffectStrength;
+        public PainModificatorType Type;
 
-        public PainReductionModificator(TimeSpan duration, FixedPoint2 strength)
+        public PainModificator(TimeSpan duration, FixedPoint2 strength, PainModificatorType type)
         {
             Duration = duration;
             EffectStrength = strength;
+            Type = type;
         }
+    }
+
+    public enum PainModificatorType : byte
+    {
+        PainReduction,
+        PainIncrease,
     }
 }

@@ -93,33 +93,33 @@ public sealed partial class PainSystem : EntitySystem
         _alerts.ShowAlert(uid, pain.Alert, (short)pain.CurrentPainLevel);
     }
 
-    public void AddPainReductionModificator(EntityUid uid, PainReductionModificator mod, PainComponent? pain = null)
+    public void AddPainReductionModificator(EntityUid uid, PainModificator mod, PainComponent? pain = null)
     {
         if (!Resolve(uid, ref pain))
             return;
 
-        pain.PainReductionModificators.Add(mod);
+        pain.PainModificators.Add(mod);
         UpdateCurrentPainPercentage(pain);
         Dirty(uid, pain);
 
         Timer.Spawn(mod.Duration, () => RemovePainReductionModificator(uid, mod, pain));
     }
 
-    private void RemovePainReductionModificator(EntityUid uid, PainReductionModificator mod, PainComponent? pain = null)
+    private void RemovePainReductionModificator(EntityUid uid, PainModificator mod, PainComponent? pain = null)
     {
         if (!Resolve(uid, ref pain))
             return;
 
-        pain.PainReductionModificators.Remove(mod);
+        pain.PainModificators.Remove(mod);
         UpdateCurrentPainPercentage(pain);
         Dirty(uid, pain);
     }
     private void UpdateCurrentPainPercentage(PainComponent comp)
     {
         var maxModificatorStrength = FixedPoint2.Zero;
-        if (comp.PainReductionModificators.Count != 0)
+        if (comp.PainModificators.Count != 0)
         {
-            maxModificatorStrength = comp.PainReductionModificators.Max(mod => mod.EffectStrength);
+            maxModificatorStrength = comp.PainModificators.Max(mod => mod.EffectStrength);
         }
 
         // Pain reduction effectiveness linear decreases as the pain goes up

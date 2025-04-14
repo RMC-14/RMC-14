@@ -17,7 +17,7 @@ public sealed partial class DecreasePain : EntityEffect
     {
         var scale = (args as EntityEffectReagentArgs)?.Scale ?? 1;
         var painSystem = args.EntityManager.EntitySysManager.GetEntitySystem<PainSystem>();
-        var modificator = new PainReductionModificator(TimeSpan.FromSeconds(StatusLifeTime * scale.Float()), Strength);
+        var modificator = new PainModificator(TimeSpan.FromSeconds(StatusLifeTime * scale.Float()), Strength, PainModificatorType.PainReduction);
         if (args.EntityManager.TryGetComponent(args.TargetEntity, out PainComponent? pain))
             painSystem.AddPainReductionModificator(args.TargetEntity, modificator, pain);
     }

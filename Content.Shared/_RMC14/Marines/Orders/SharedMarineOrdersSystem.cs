@@ -196,7 +196,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
 
         if (comp is HoldOrderComponent hold && TryComp<PainComponent>(receiver, out var pain))
         {
-            var mod = new PainReductionModificator(duration, hold.PainModifier * multiplier);
+            var mod = new PainModificator(duration, hold.PainModifier * multiplier, PainModificatorType.PainReduction);
             _pain.AddPainReductionModificator(receiver, mod, pain);
         }
         _movementSpeed.RefreshMovementSpeedModifiers(receiver);
