@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed Vanguard Prae's blitz having an 11 sec cooldown from the time of
-      the AOE slash instead of the time from the initial dash.
-    type: Fix
-  id: 1076
-  time: '2024-12-08T03:50:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5076
 - author: Whisper
   changes:
   - message: Added Consumes-the-Petrol, Lenny Dugs, Kael 'Shark' Voss figurine.
@@ -5339,5 +5331,14 @@
   id: 1578
   time: '2025-04-14T01:40:26.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6146
+- author: Vermidia
+  changes:
+  - message: Fixed AMR normal shots having stopping power.
+    type: Fix
+  - message: Fixed AMR first shots doing stun/knockback.
+    type: Fix
+  id: 1579
+  time: '2025-04-14T02:01:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6145
 Name: RMC14
 Order: -1
