@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed xeno auto regurgitation stunning.
-    type: Fix
-  id: 1081
-  time: '2024-12-09T05:58:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5088
-- author: CyberTropic
-  changes:
-  - message: Added M272 pattern knife vest.
-    type: Add
-  - message: Fixed Requisitions not being able to buy webbing vests and shoulder holsters.
-    type: Fix
-  id: 1082
-  time: '2024-12-09T06:01:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5085
 - author: DrSmugleaf
   changes:
   - message: Fixed fire damage not piercing armor.
@@ -5338,5 +5322,20 @@
   id: 1583
   time: '2025-04-14T03:28:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6144
+- author: Dygon
+  changes:
+  - message: Weapon attachment damage now accounts for the user's melee skill level
+      and any other melee damage modifiers.
+    type: Fix
+  id: 1584
+  time: '2025-04-15T00:09:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6156
+- author: noctyrn
+  changes:
+  - message: Fixes weed wall overlays.
+    type: Tweak
+  id: 1585
+  time: '2025-04-15T00:10:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6157
 Name: RMC14
 Order: -1
