@@ -26,18 +26,12 @@ public sealed class RMCAmbientLightSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        // SubscribeLocalEvent<RMCAmbientLightSystem, ComponentGetState>(OnLightGetState);
         _console.RegisterCommand("rmclight",
             Loc.GetString("cmd-rmclight-desc"),
             Loc.GetString("cmd-rmclight-help"),
             RMCLight,
-            WeatherCompletion);
+            RMCLightCompletion);
     }
-
-    // private void OnLightGetState(EntityUid uid, RMCAmbientLightSystem component, ref ComponentGetState args)
-    // {
-    //     args.State = new WeatherComponentState(component.Weather);
-    // }
 
     [AdminCommand(AdminFlags.Fun)]
     private void RMCLight(IConsoleShell shell, string argStr, string[] args)
@@ -47,9 +41,6 @@ public sealed class RMCAmbientLightSystem : EntitySystem
             shell.WriteError(Loc.GetString("cmd-weather-error-no-arguments"));
             return;
         }
-
-        // if (!int.TryParse(args[0], out var mapInt))
-        //     return;
 
         if (!EntityUid.TryParse(args[0], out var gridUid))
             return;
@@ -71,7 +62,6 @@ public sealed class RMCAmbientLightSystem : EntitySystem
             return;
         var colors = colorDataset.Values.ToList();
 
-
         //Time parsing
         TimeSpan duration = TimeSpan.FromSeconds(30);
         if (args.Length == 3)
@@ -86,43 +76,17 @@ public sealed class RMCAmbientLightSystem : EntitySystem
             }
         }
 
-        SetColor((gridUid, rmcLight), colors, duration);
+        _sharedLightSystem.SetColor((gridUid, rmcLight), colors, duration);
     }
 
-    public void SetColor(Entity<RMCAmbientLightComponent> ent, string colorHex, TimeSpan duration)
+    private CompletionResult RMCLightCompletion(IConsoleShell shell, string[] args)
     {
-        var mapLight = EnsureComp<MapLightComponent>(ent);
-
-        ent.Comp.Colors = [mapLight.AmbientLightColor, Color.FromHex(colorHex, Color.Black)];
-        ent.Comp.Duration = duration;
-        ent.Comp.StartTime = _timing.CurTime;
-        ent.Comp.Running = true;
-
-        Dirty(ent);
-    }
-
-    public void SetColor(Entity<RMCAmbientLightComponent> ent, List<string> colorHexes, TimeSpan duration)
-    {
-        if (colorHexes.Count == 0 || duration <= TimeSpan.Zero)
-            return;
-
-        var mapLight = EnsureComp<MapLightComponent>(ent);
-
-        ent.Comp.Colors = colorHexes.Select(hex => Color.FromHex(hex, Color.Black)).ToList();
-        ent.Comp.Duration = duration;
-        ent.Comp.StartTime = _timing.CurTime;
-        ent.Comp.Running = true;
-
-        Dirty(ent);
-    }
-
-    private CompletionResult WeatherCompletion(IConsoleShell shell, string[] args)
-    {
-        if (args.Length == 1)
-            return CompletionResult.FromHintOptions(CompletionHelper.MapIds(EntityManager), "Map Id");
-
-        var a = CompletionHelper.PrototypeIDs<DatasetPrototype>(true, _prototype);
-        var b = a.Concat(new[] { new CompletionOption("null", Loc.GetString("cmd-weather-null")) });
-        return CompletionResult.FromHintOptions(b, Loc.GetString("cmd-weather-hint"));
+        return args.Length switch
+        {
+            1 => CompletionResult.FromHintOptions(CompletionHelper.Components<MapGridComponent>(args[0], _entityManager), "Grid Id"),
+            2 => CompletionResult.FromHintOptions(CompletionHelper.PrototypeIDs<DatasetPrototype>(true, _prototype), Loc.GetString("ColorSequence")),
+            3 => CompletionResult.FromHint(Loc.GetString("duration")),
+            _ => CompletionResult.Empty,
+        };
     }
 }

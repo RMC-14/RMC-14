@@ -1,5 +1,5 @@
 - type: dataset
-  id: WarmSunsetColorProgression 
+  id: RMCColorSequenceSunsetWarm
   values:
   - "#e3a979"
   - "#e29658"
@@ -13,7 +13,7 @@
   - "#000000"
 
 - type: dataset
-  id: ColdSunsetColorProgression 
+  id: RMCColorSequenceSunsetCold
   values:
   - "#a8c3cf"
   - "#7a9abb"
@@ -27,7 +27,7 @@
   - "#000000"
 
 - type: dataset
-  id: SunriseColorProgression 
+  id: RMCColorSequenceSunrise
   values:
   - "#000000"
   - "#040712"
@@ -38,7 +38,7 @@
   - "#b97034"
 
 - type: dataset
-  id: LightningColorProgression
+  id: RMCColorSequenceLightning
   values:
   - "#000000" 
   - "#161624" 
@@ -52,3 +52,33 @@
   - "#161624" 
   - "#000000"
 
+- type: dataset
+  id: RMCColorSequenceLightningSharpPeak
+  values:
+  - "#000000"
+  - "#100c24"
+  - "#302d60"
+  - "#6a67c8"
+  - "#aab8ff"
+  - "#FFFFFF"
+  - "#d8e0ff"
+  - "#9fa8f0"
+  - "#555299"
+  - "#201d40"
+  - "#000000"
+
+- type: dataset
+  id: RMCColorSequenceLightningFlicker
+  values:
+  - "#000000"
+  - "#161624"
+  - "#38356e"
+  - "#7a77d9"
+  - "#e0e8ff"
+  - "#a0a8ff"
+  - "#FFFFFF"
+  - "#b9c8ff"
+  - "#7a77d9"
+  - "#38356e"
+  - "#000000"
+  

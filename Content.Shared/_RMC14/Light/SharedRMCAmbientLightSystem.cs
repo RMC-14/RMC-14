@@ -10,12 +10,8 @@ public sealed class SharedRMCAmbientLightSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
 
-
-
-
     public Color GetColor(Entity<RMCAmbientLightComponent> ent, TimeSpan curTime)
     {
-        //TODO: Doublecheck all this
         if (ent.Comp.Colors.Count == 0 || ent.Comp.Duration <= TimeSpan.Zero)
             return Color.Black;
         if (ent.Comp.Colors.Count == 1)
@@ -39,14 +35,40 @@ public sealed class SharedRMCAmbientLightSystem : EntitySystem
         return color;
     }
 
-    /*public void ClearComponent(Entity<RMCAmbientLightComponent> ent)
+    public void SetColor(Entity<RMCAmbientLightComponent> ent, string colorHex, TimeSpan duration)
     {
+        if (_net.IsClient)
+            return;
+
+        var mapLight = EnsureComp<MapLightComponent>(ent);
+
         ent.Comp.Colors.Clear();
-        ent.Comp.Duration = TimeSpan.Zero;
+        ent.Comp.Colors.AddRange([mapLight.AmbientLightColor, Color.FromHex(colorHex, Color.Black)]);
+        ent.Comp.Duration = duration;
         ent.Comp.StartTime = _timing.CurTime;
-        ent.Comp.Running = false;
+        ent.Comp.Running = true;
+
         Dirty(ent);
-    }*/
+    }
+
+    public void SetColor(Entity<RMCAmbientLightComponent> ent, List<string> colorHexes, TimeSpan duration)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (colorHexes.Count == 0 || duration <= TimeSpan.Zero)
+            return;
+
+        var mapLight = EnsureComp<MapLightComponent>(ent);
+
+        ent.Comp.Colors.Clear();
+        ent.Comp.Colors.AddRange(colorHexes.Select(hex => Color.FromHex(hex, Color.Black)).ToList());
+        ent.Comp.Duration = duration;
+        ent.Comp.StartTime = _timing.CurTime;
+        ent.Comp.Running = true;
+
+        Dirty(ent);
+    }
 
     public override void Update(float frameTime)
     {
@@ -61,10 +83,11 @@ public sealed class SharedRMCAmbientLightSystem : EntitySystem
             if (!animComponent.Running)
                 continue;
 
-            if (curTime>= animComponent.EndTime)
+            if (curTime >= animComponent.EndTime)
             {
                 lightComponent.AmbientLightColor = animComponent.Colors[^1];
                 animComponent.Running = false;
+                Dirty(uid, animComponent);
                 Dirty(uid, lightComponent);
                 continue;
             }
