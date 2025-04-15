@@ -23,7 +23,6 @@ public sealed class RMCChemicalDispenserBui : BoundUserInterface
     private readonly ContainerSystem _container;
     private readonly SolutionContainerSystem _solution;
     private readonly List<(Button Button, FixedPoint2 Amount)> _dispenseButtons = new();
-    private readonly List<(Button Button, FixedPoint2 Amount)> _beakerButtons = new();
 
     public RMCChemicalDispenserBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
@@ -95,7 +94,6 @@ public sealed class RMCChemicalDispenserBui : BoundUserInterface
                 beakerButton.OnPressed += _ =>
                     SendPredictedMessage(new RMCChemicalDispenserBeakerBuiMsg(setting));
                 _window.BeakerContainer.AddChild(beakerButton);
-                _beakerButtons.Add((beakerButton, setting));
             }
         }
 
