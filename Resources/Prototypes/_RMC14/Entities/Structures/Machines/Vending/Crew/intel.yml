@@ -47,11 +47,15 @@
         points: 10
       - id: RMCMagazinePistolSU6
         points: 10
-    - name: Personal Sidearm
+    - name: Restricted Firearms
       entries:
       - id: RMCGunCasePistolMK80
         points: 15
       - id: RMCGunCasePistolSmart
+        points: 15
+    - name: Restricted Gear
+      entries:
+      - id: CMBeltUtilityCombatFilled
         points: 15
     - name: Pouches
       entries:
