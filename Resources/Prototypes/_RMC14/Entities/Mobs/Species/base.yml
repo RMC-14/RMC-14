@@ -184,7 +184,7 @@
       - !type:PainLevel
         level: 4
     - !type:TemporaryBlurryVision
-      blur: 3
+      blur: 2
       time: 4
       conditions:
       - !type:PainLevel
@@ -217,7 +217,7 @@
       - !type:PainLevel
         level: 5
     - !type:TemporaryBlurryVision
-        blur: 5
+        blur: 2
         time: 4
         conditions:
         - !type:PainLevel
@@ -282,7 +282,7 @@
         - !type:PainLevel
           level: 6
     - !type:TemporaryBlurryVision
-        blur: 5
+        blur: 2
         time: 4
         conditions:
         - !type:PainLevel
