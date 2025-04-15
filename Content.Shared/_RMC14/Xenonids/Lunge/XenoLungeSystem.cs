@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Weapons.Ranged.Homing;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Coordinates;
 using Content.Shared.Mobs.Systems;
@@ -44,6 +45,7 @@ public sealed class XenoLungeSystem : EntitySystem
 
         SubscribeLocalEvent<XenoLungeComponent, XenoLungeActionEvent>(OnXenoLungeAction);
         SubscribeLocalEvent<XenoLungeComponent, ThrowDoHitEvent>(OnXenoLungeHit);
+        SubscribeLocalEvent<XenoLungeComponent, LandEvent>(OnXenoLungeEnd);
 
         SubscribeLocalEvent<XenoLungeStunnedComponent, PullStoppedMessage>(OnXenoLungeStunnedPullStopped);
     }
@@ -75,7 +77,13 @@ public sealed class XenoLungeSystem : EntitySystem
         Dirty(xeno);
 
         EnsureComp<RMCObstacleSlamImmuneComponent>(xeno);
-        _throwing.TryThrow(xeno, diff, 30, animated: false);
+        //throw speed has to be slightly less than homing speed, otherwise if the target is running away the throw won't connect
+        _throwing.TryThrow(xeno, diff, 27, animated: false);
+
+        var homingProjectile = EnsureComp<HomingProjectileComponent>(xeno);
+        homingProjectile.Target = args.Target;
+        homingProjectile.ProjectileSpeed = 30;
+        Dirty(xeno, homingProjectile);
 
         if (!_physicsQuery.TryGetComponent(xeno, out var physics))
             return;
@@ -101,6 +109,12 @@ public sealed class XenoLungeSystem : EntitySystem
 
         ApplyLungeHitEffects(xeno, args.Target);
     }
+
+    private void OnXenoLungeEnd(Entity<XenoLungeComponent> xeno, ref LandEvent args)
+    {
+        RemComp<HomingProjectileComponent>(xeno);
+    }
+
 
     private bool ApplyLungeHitEffects(Entity<XenoLungeComponent> xeno, EntityUid targetId)
     {
