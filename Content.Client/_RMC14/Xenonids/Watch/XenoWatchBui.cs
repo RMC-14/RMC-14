@@ -50,6 +50,14 @@ public sealed class XenoWatchBui : BoundUserInterface
         _window.XenoContainer.DisposeAllChildren();
 
 
+        _window.SetTier1Count(s.TierOne);
+        _window.SetTier2Count(s.TierTwo);
+        _window.SetTier3Count(s.TierThree);
+        _window.SetTier2Slots(s.TierTwoSlots);
+        _window.SetTier3Slots(s.TierThreeSlots);
+        _window.SetXenoCount(s.XenoCount);
+
+
         foreach (var xeno in s.Xenos)
         {
 
@@ -63,8 +71,8 @@ public sealed class XenoWatchBui : BoundUserInterface
             var control = new XenoChoiceControl();
             control.Set(xeno.Name, texture);
             control.Button.OnPressed += _ => SendPredictedMessage(new XenoWatchBuiMsg(xeno.Entity));
-            Logger.Debug(xeno.Health.ToString());
-            Logger.Debug(xeno.Plasma.ToString());
+            //Logger.Debug(xeno.Health.ToString());
+            //Logger.Debug(xeno.Plasma.ToString());
             control.SetHealth(xeno.Health);
             control.SetPlasma(xeno.Plasma);
             control.SetEvo(xeno.Evo);
