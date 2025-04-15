@@ -36,6 +36,7 @@
       Brute:
         collection: XenoResinBreak
   - type: XenoConstruct
+  - type: XenoDestroyWeedNodes
   - type: RMCWallExplosionDeletable
   - type: DestroyedByExplosionType
   - type: NpcFactionMember

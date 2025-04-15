@@ -2,7 +2,6 @@ using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Areas;
-using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Sentry;
@@ -44,12 +43,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using static Content.Shared.Physics.CollisionGroup;
-using Content.Shared.Tiles;
-using Content.Shared._RMC14.Xenonids.Announce;
-using Content.Shared._RMC14.Dropship;
-using Content.Shared.Damage;
-using Content.Shared._RMC14.Rules;
-using Content.Shared.Destructible;
 
 
 namespace Content.Shared._RMC14.Xenonids.Construction;
@@ -117,7 +110,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         _xenoTunnelQuery = GetEntityQuery<XenoTunnelComponent>();
         _xenoWeedsQuery = GetEntityQuery<XenoWeedsComponent>();
 
-        SubscribeLocalEvent<XenoConstructComponent, MapInitEvent>(OnConstructMapInit);
+        SubscribeLocalEvent<XenoDestroyWeedNodesComponent, MapInitEvent>(OnConstructMapInit);
 
         SubscribeLocalEvent<XenoConstructionComponent, XenoPlantWeedsActionEvent>(OnXenoPlantWeedsAction);
 
@@ -186,14 +179,18 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var msg = Loc.GetString(comp.MessageID, ("location", locationName), ("structureName", structureName), ("destructionVerb", comp.DestructionVerb));
         _announce.AnnounceToHive(ent.Owner, hive, msg, color: comp.MessageColor);
     }
-    private void OnConstructMapInit(Entity<XenoConstructComponent> ent, ref MapInitEvent args)
+
+    private void OnConstructMapInit(Entity<XenoDestroyWeedNodesComponent> ent, ref MapInitEvent args)
     {
-        if (!ent.Comp.DestroyWeedNodes)
+        if (!ent.Comp.Enabled)
             return;
 
         var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(ent);
         while (anchored.MoveNext(out var uid))
         {
+            if (uid == ent.Owner)
+                continue;
+
             if (TerminatingOrDeleted(uid) || EntityManager.IsQueuedForDeletion(uid))
                 continue;
 
