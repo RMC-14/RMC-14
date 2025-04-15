@@ -54449,7 +54449,7 @@ entities:
     - type: Transform
       pos: 3.5,128.5
       parent: 1
-- proto: CMVendorMedical
+- proto: CMVendorMedicalAllAccess
   entities:
   - uid: 6490
     components:
