@@ -1,18 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed fire damage not piercing armor.
-    type: Fix
-  - message: Fixed fire not spreading through doors.
-    type: Fix
-  - message: Fixed being set on fire not dealing bonus initial damage equal to the
-      intensity of the fire.
-    type: Fix
-  id: 1083
-  time: '2024-12-09T09:52:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5090
-- author: DrSmugleaf
-  changes:
   - message: Fixed Burrower being able to acid and perform other do-afters while burrowing.
     type: Fix
   id: 1084
@@ -5337,5 +5325,14 @@
   id: 1585
   time: '2025-04-15T00:10:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6157
+- author: Sigil
+  changes:
+  - message: Shootable attachments are now predicted.
+    type: Fix
+  - message: The masterkey can be used for PBs.
+    type: Fix
+  id: 1586
+  time: '2025-04-15T00:26:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6097
 Name: RMC14
 Order: -1
