@@ -244,3 +244,31 @@
       amount: 2
     - id: RMCBoxShotgunBreaching
       amount: 1
+
+#M11 auto pistol
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazinePistolM11
+  name: Magazine box (M11, 22x regular mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazinePistolM11
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazinePistolM11Ext
+  name: Magazine box (M11, 14x extended mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazinePistolM11Ext
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateBoxMagazinePistolM11Drum
+  name: Magazine box (M11, 12x drum mags)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxMagazinePistolM11Drum
