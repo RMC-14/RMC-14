@@ -5,9 +5,13 @@
   components:
   - type: StorageFill
     contents:
+    - id: RMCWeaponPistolHoldout
     - id: CMCrowbar
-    - id: DrinkDrGibbCan
-    - id: DrinkFourteenLokoCan
+    - id: RMCBoxPizzaVegetable
+    - id: RMCBoxPizzaMushroom
+    - id: RMCBoxPizzaMeat
+    - id: CMDrinkCanDrGibb
+    # ThirteenLoko
   - type: IgnoreContentsSize
     items:
       tags:
@@ -21,3 +25,13 @@
   - type: StorageFill
     contents:
     - id: CMSheetMetal20
+
+- type: entity
+  parent: CMSatchelMarine
+  id: RMCSatchelHEFAFill
+  suffix: HEFA, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFrag
+      amount: 6

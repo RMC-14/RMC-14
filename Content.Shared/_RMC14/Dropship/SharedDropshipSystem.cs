@@ -45,10 +45,14 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         SubscribeLocalEvent<DropshipWeaponPointComponent, MapInitEvent>(OnAttachmentPointMapInit);
         SubscribeLocalEvent<DropshipWeaponPointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
+        SubscribeLocalEvent<DropshipWeaponPointComponent, ExaminedEvent>(OnAttachmentExamined);
 
         SubscribeLocalEvent<DropshipUtilityPointComponent, MapInitEvent>(OnAttachmentPointMapInit);
         SubscribeLocalEvent<DropshipUtilityPointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
-        SubscribeLocalEvent<DropshipWeaponPointComponent, ExaminedEvent>(OnAttachmentExamined);
+
+        SubscribeLocalEvent<DropshipEnginePointComponent, MapInitEvent>(OnAttachmentPointMapInit);
+        SubscribeLocalEvent<DropshipEnginePointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
+        SubscribeLocalEvent<DropshipEnginePointComponent, ExaminedEvent>(OnEngineExamined);
 
         Subs.BuiEvents<DropshipNavigationComputerComponent>(DropshipNavigationUiKey.Key,
             subs =>
@@ -74,11 +78,12 @@ public abstract class SharedDropshipSystem : EntitySystem
             if (TerminatingOrDeleted(uid))
                 continue;
 
-            if (HasComp<DropshipWeaponPointComponent>(uid))
+            if (HasComp<DropshipWeaponPointComponent>(uid) ||
+                HasComp<DropshipEnginePointComponent>(uid) ||
+                HasComp<DropshipUtilityPointComponent>(uid))
+            {
                 ent.Comp.AttachmentPoints.Add(uid);
-
-            if (HasComp<DropshipUtilityPointComponent>(uid))
-                ent.Comp.AttachmentPoints.Add(uid);
+            }
         }
 
         var ev = new DropshipMapInitEvent();
@@ -204,7 +209,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         _popup.PopupEntity("There are no available dropships! Wait a moment.", user, user, PopupType.LargeCaution);
     }
 
-    private void OnAttachmentPointMapInit(Entity<DropshipWeaponPointComponent> ent, ref MapInitEvent args)
+    private void OnAttachmentPointMapInit<TComp, TEvent>(Entity<TComp> ent, ref TEvent args) where TComp : IComponent?
     {
         if (_net.IsClient)
             return;
@@ -216,28 +221,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         }
     }
 
-    private void OnAttachmentPointMapInit(Entity<DropshipUtilityPointComponent> ent, ref MapInitEvent args)
-    {
-        if (_net.IsClient)
-            return;
-
-        if (TryGetGridDropship(ent, out var dropship))
-        {
-            dropship.Comp.AttachmentPoints.Add(ent);
-            Dirty(dropship);
-        }
-    }
-
-    private void OnAttachmentPointRemove<T>(Entity<DropshipWeaponPointComponent> ent, ref T args)
-    {
-        if (TryGetGridDropship(ent, out var dropship))
-        {
-            dropship.Comp.AttachmentPoints.Remove(ent);
-            Dirty(dropship);
-        }
-    }
-
-    private void OnAttachmentPointRemove<T>(Entity<DropshipUtilityPointComponent> ent, ref T args)
+    private void OnAttachmentPointRemove<TComp, TEvent>(Entity<TComp> ent, ref TEvent args) where TComp : IComponent?
     {
         if (TryGetGridDropship(ent, out var dropship))
         {
@@ -250,10 +234,10 @@ public abstract class SharedDropshipSystem : EntitySystem
     {
         using (args.PushGroup(nameof(DropshipWeaponPointComponent)))
         {
-            if (TryGetPointContained(ent, ent.Comp.WeaponContainerSlotId, out var weapon))
-                args.PushText(Loc.GetString("rmc-dropship-weapons-point-gun", ("weapon", weapon)));
+            if (TryGetAttachmentContained(ent, ent.Comp.WeaponContainerSlotId, out var weapon))
+                args.PushText(Loc.GetString("rmc-dropship-attached", ("attachment", weapon)));
 
-            if (TryGetPointContained(ent, ent.Comp.AmmoContainerSlotId, out var ammo))
+            if (TryGetAttachmentContained(ent, ent.Comp.AmmoContainerSlotId, out var ammo))
             {
                 args.PushText(Loc.GetString("rmc-dropship-weapons-point-ammo", ("ammo", ammo)));
 
@@ -264,6 +248,15 @@ public abstract class SharedDropshipSystem : EntitySystem
                         ("max", (ammoComp.MaxRounds))));
                 }
             }
+        }
+    }
+
+    private void OnEngineExamined(Entity<DropshipEnginePointComponent> ent, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(DropshipWeaponPointComponent)))
+        {
+            if (TryGetAttachmentContained(ent, ent.Comp.ContainerId, out var attachment))
+                args.PushText(Loc.GetString("rmc-dropship-attached", ("attachment", attachment)));
         }
     }
 
@@ -476,8 +469,8 @@ public abstract class SharedDropshipSystem : EntitySystem
         return true;
     }
 
-    private bool TryGetPointContained(
-        Entity<DropshipWeaponPointComponent> point,
+    private bool TryGetAttachmentContained(
+        EntityUid point,
         string containerId,
         out EntityUid contained)
     {

@@ -76,6 +76,13 @@ public sealed class RangefinderSystem : EntitySystem
                 comp.SwitchModeUseDelay);
         }
 
+        if (comp.TargetDelay > TimeSpan.Zero)
+        {
+            _useDelay.SetLength(rangefinder.Owner,
+                comp.TargetDelay,
+                comp.TargetUseDelay);
+        }
+
         Dirty(rangefinder);
         UpdateAppearance(rangefinder);
     }
@@ -125,7 +132,7 @@ public sealed class RangefinderSystem : EntitySystem
             return;
         }
 
-        if (!_area.CanCAS(coordinates))
+        if (!_area.CanCAS(coordinates) || (rangefinder.Comp.Mode == Designator && !_area.CanLase(coordinates)))
         {
             msg = Loc.GetString("rmc-laser-designator-not-cas");
             _popup.PopupClient(msg, coordinates, user, PopupType.SmallCaution);
@@ -178,6 +185,8 @@ public sealed class RangefinderSystem : EntitySystem
                 position += offset;
 
             rangefinder.Comp.LastTarget = position;
+            rangefinder.Comp.LastCoords = mapCoords;
+
             Dirty(rangefinder);
 
             _ui.OpenUi(rangefinder.Owner, RangefinderUiKey.Key, args.User);
@@ -239,6 +248,9 @@ public sealed class RangefinderSystem : EntitySystem
             return;
 
         var nextMode = rangefinder.Comp.Mode == RangefinderMode.Rangefinder ? Designator : RangefinderMode.Rangefinder;
+        if (nextMode == Designator && !rangefinder.Comp.CanDesignate)
+            return;
+
         args.Verbs.Add(new AlternativeVerb
         {
             Priority = 100,
@@ -306,10 +318,10 @@ public sealed class RangefinderSystem : EntitySystem
     {
         if (TryComp(rangefinder, out UseDelayComponent? useDelay))
         {
-            if (_useDelay.IsDelayed((rangefinder, useDelay)))
+            if (_useDelay.IsDelayed((rangefinder, useDelay), rangefinder.Comp.TargetUseDelay))
                 return;
 
-            _useDelay.TryResetDelay(rangefinder, component: useDelay);
+            _useDelay.TryResetDelay(rangefinder, component: useDelay, id: rangefinder.Comp.TargetUseDelay);
         }
 
         var ev = new LaserDesignatorDoAfterEvent(GetNetCoordinates(coordinates));

@@ -1,20 +1,22 @@
-﻿using Content.Shared._RMC14.NPC;
-using Content.Shared.Examine;
-using Content.Shared.Interaction.Events;
-using Content.Shared.Actions;
-using Content.Shared._RMC14.Xenonids.Rest;
+using Content.Shared._RMC14.NPC;
+using Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
+using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
+using Content.Shared._RMC14.Xenonids.Egg;
+using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
+using Content.Shared._RMC14.Xenonids.Rest;
+using Content.Shared.Actions;
+using Content.Shared.Examine;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Popups;
+using Content.Shared.Stunnable;
+using Content.Shared.Throwing;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
-using Content.Shared._RMC14.Xenonids.Egg;
-using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
-using Content.Shared.Throwing;
-using Content.Shared.Stunnable;
-using Content.Shared._RMC14.Xenonids.Leap;
 
 namespace Content.Shared._RMC14.Xenonids.Parasite;
 
@@ -229,7 +231,7 @@ public abstract partial class SharedXenoParasiteSystem
 
     private void CheckCannibalize(Entity<ParasiteAIComponent> para)
     {
-        if (_cmHands.TryGetHolder(para, out var _))
+        if (_rmcHands.TryGetHolder(para, out var _))
             return;
 
         if (HasComp<ThrownItemComponent>(para))
@@ -243,7 +245,7 @@ public abstract partial class SharedXenoParasiteSystem
 
             // Ignore those that are dead, not active, or already are being deleted - plus a ton of other things
             if (TerminatingOrDeleted(parasite) || EntityManager.IsQueuedForDeletion(parasite) || _mobState.IsDead(parasite) ||
-                parasite.Comp.Mode != ParasiteMode.Active || _cmHands.TryGetHolder(parasite, out var _) ||
+                parasite.Comp.Mode != ParasiteMode.Active || _rmcHands.TryGetHolder(parasite, out var _) ||
                 HasComp<ThrownItemComponent>(parasite) || HasComp<StunnedComponent>(parasite))
                 continue;
 
@@ -254,7 +256,7 @@ public abstract partial class SharedXenoParasiteSystem
             return;
 
         // Get Eaten
-        _popup.PopupCoordinates(Loc.GetString("rmc-xeno-parasite-ai-eaten", ("parasite", para)), _transform.GetMoverCoordinates(para), Popups.PopupType.SmallCaution);
+        _popup.PopupCoordinates(Loc.GetString("rmc-xeno-parasite-ai-eaten", ("parasite", para)), _transform.GetMoverCoordinates(para), PopupType.SmallCaution);
         QueueDel(para);
     }
 
@@ -272,9 +274,13 @@ public abstract partial class SharedXenoParasiteSystem
                 return;
         }
 
-        EnsureComp<ParasiteTiredOutComponent>(para);
+        foreach (var eggmorpher in _entityLookup.GetEntitiesInRange<EggMorpherComponent>(_transform.GetMoverCoordinates(para), para.Comp.RangeCheck))
+        {
+            if (eggmorpher.Comp.CurParasites < eggmorpher.Comp.MaxParasites)
+                return;
+        }
 
-        // TODO RMC14 eggmorpher
+        EnsureComp<ParasiteTiredOutComponent>(para);
     }
 
     private void OnParasiteAIMapInit(Entity<ParasiteTiredOutComponent> dead, ref MapInitEvent args)

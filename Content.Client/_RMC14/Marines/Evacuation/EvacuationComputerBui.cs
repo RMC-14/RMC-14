@@ -11,6 +11,7 @@ public sealed class EvacuationComputerBui(EntityUid owner, Enum uiKey) : BoundUs
 
     protected override void Open()
     {
+        base.Open();
         _window = this.CreateWindow<EvacuationComputerWindow>();
 
         _window.DoorButton.Visible = false; // TODO RMC14

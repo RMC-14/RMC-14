@@ -67,13 +67,22 @@ public abstract class SharedXenoNameSystem : EntitySystem
             prefix = "XX";
 
         var postfix = ent.Comp.Postfix;
-        if (postfix.Length > 0)
-            postfix = $"-{postfix}";
 
         var number = ent.Comp.Number;
-        args.AddModifier("rmc-xeno-name", extraArgs: [("rank", rank), ("prefix", prefix), ("number", number), ("postfix", postfix)]);
 
-        if (_mind.TryGetMind(ent, out var _, out var mind))
+        if (HasComp<XenoOmitNumberComponent>(ent))
+        {
+            args.AddModifier("rmc-xeno-name", extraArgs: [("rank", rank), ("prefix", prefix), ("postfix", postfix)]);
+        }
+        else
+        {
+            if (postfix.Length > 0)
+                postfix = $"-{postfix}";
+
+            args.AddModifier("rmc-xeno-name-number", extraArgs: [("rank", rank), ("prefix", prefix), ("number", number), ("postfix", postfix)]);
+        }
+
+        if (_mind.TryGetMind(ent, out _, out var mind))
             mind.CharacterName = args.GetModifiedName();
     }
 

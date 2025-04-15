@@ -41,8 +41,8 @@
             - !type:SpawnPrototype
               prototype: CMSheetMetal1
           steps:
-            - tool: Screwing
-              doAfter: 1
+            - tool: Anchoring
+              doAfter: 0
 
     - node: stool
       entity: RMCStool
@@ -52,8 +52,8 @@
             - !type:SpawnPrototype
               prototype: CMSheetMetal1
           steps:
-            - tool: Screwing
-              doAfter: 1
+            - tool: Anchoring
+              doAfter: 0
 
     - node: chairComfy
       entity: CMChairComfy
@@ -63,8 +63,8 @@
             - !type:SpawnPrototype
               prototype: CMSheetMetal1
           steps:
-            - tool: Screwing
-              doAfter: 1
+            - tool: Anchoring
+              doAfter: 0
 
     - node: chairOfficeDark
       entity: CMChairOfficeDark
@@ -74,8 +74,8 @@
             - !type:SpawnPrototype
               prototype: CMSheetMetal1
           steps:
-            - tool: Screwing
-              doAfter: 1
+            - tool: Anchoring
+              doAfter: 0
 
     - node: chairOfficeWhite
       entity: CMChairOfficeWhite
@@ -85,5 +85,5 @@
             - !type:SpawnPrototype
               prototype: CMSheetMetal1
           steps:
-            - tool: Screwing
-              doAfter: 1
+            - tool: Anchoring
+              doAfter: 0

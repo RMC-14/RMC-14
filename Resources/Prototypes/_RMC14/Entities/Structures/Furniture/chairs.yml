@@ -22,7 +22,6 @@
     anchored: false
   - type: Physics
     bodyType: Static
-  - type: Anchorable
   - type: Construction
     graph: CMSeat
     node: chair
@@ -59,7 +58,6 @@
     anchored: true
   - type: Physics
     bodyType: Static
-  - type: Anchorable
   - type: Construction
     graph: CMSeat
     node: chairComfy

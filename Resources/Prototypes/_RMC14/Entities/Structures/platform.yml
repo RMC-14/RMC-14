@@ -14,7 +14,60 @@
     delay: 0.25
 
 - type: entity
+  abstract: true
+  id: CMPlatformBaseBroken
+  name: destroyed platform
+  description: A square metal surface resting on four legs. It has been destroyed.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/platforms.rsi
+  - type: InteractionOutline
+  - type: Clickable
+
+- type: entity
+  abstract: true
   parent: CMPlatformBase
+  id: CMPlatformBaseDestructible
+  components:
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 150 # Excessive damage
+        behaviors:
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:ChangeConstructionNodeBehavior
+            node: platformBroken
+          - !type:DoActsBehavior
+            acts: ["Breakage"]
+
+- type: entity
+  parent: CMPlatformBaseBroken
+  id: CMPlatformBroken
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Physics
+    canCollide: false
+  - type: Sprite
+    state: platform_broken
+  - type: Construction
+    graph: CMPlatformBaseDestructible
+    node: platformBroken
+
+- type: entity
+  parent: CMPlatformBaseDestructible
   id: CMPlatform
   name: platform
   description: A square metal surface resting on four legs.
@@ -37,9 +90,12 @@
         - TableLayer
   - type: Sprite
     state: platform
+  - type: Construction
+    graph: CMPlatformBaseDestructible
+    node: start
 
 - type: entity
-  parent: CMPlatformBase
+  parent: CMPlatformBaseDestructible
   id: CMPlatformCorner
   name: platform
   description: A square metal surface resting on four legs.
@@ -74,7 +130,7 @@
   - type: Climbable
 
 - type: entity
-  parent: CMPlatformBase
+  parent: CMPlatformBaseDestructible
   id: RMCPlatformCornerSmall
   name: platform
   description: A square metal surface resting on four legs.
@@ -165,6 +221,19 @@
   components:
   - type: Sprite
     state: kutjevo_platform
+  - type: Construction
+    graph: RMCPlatformKutjevoDestructible
+    node: start
+
+- type: entity
+  parent: CMPlatformBroken
+  id: RMCPlatformKutjevoBroken
+  components:
+  - type: Sprite
+    state: kutjevo_platform_broken
+  - type: Construction
+    graph: RMCPlatformKutjevoDestructible
+    node: platformBroken
 
 - type: entity
   parent: RMCPlatformCornerSmall
@@ -183,6 +252,9 @@
   components:
   - type: Sprite
     state: kutjevo_platform_sm
+  - type: Construction
+    graph: RMCPlatformKutjevoDestructible
+    node: start
 
 - type: entity
   parent: CMPlatformCorner
@@ -228,6 +300,21 @@
   components:
   - type: Sprite
     state: shiva
+  - type: Construction
+    graph: RMCPlatformShivaDestructible
+    node: start
+
+- type: entity
+  parent: CMPlatformBroken
+  id: RMCPlatformShivaBroken
+  name: destroyed rubber cord platform
+  description: Reliable steel and a polymer rubber substitute. Doesn't crack under cold weather. It has been destroyed.
+  components:
+  - type: Sprite
+    state: shiva_broken
+  - type: Construction
+    graph: RMCPlatformShivaDestructible
+    node: platformBroken
 
 - type: entity
   parent: RMCPlatformCornerSmall
@@ -246,6 +333,33 @@
   components:
   - type: Sprite
     state: strata_metalplatform
+  - type: Construction
+    graph: RMCPlatformStrataDestructible
+    node: start
+
+- type: entity
+  parent: CMPlatformBroken
+  id: RMCPlatformStrataBroken
+  components:
+  - type: Sprite
+    state: strata_metalplatform_broken
+  - type: Construction
+    graph: RMCPlatformStrataDestructible
+    node: platformBroken
+
+- type: entity
+  parent: RMCPlatformStrata
+  id: RMCPlatformStrataStair
+  components:
+  - type: Sprite
+    state: strata_metalplatform_stair
+
+- type: entity
+  parent: RMCPlatformStrata
+  id: RMCPlatformStrataStairAlt
+  components:
+  - type: Sprite
+    state: strata_metalplatform_stair_alt
 
 - type: entity
   parent: RMCPlatformCornerSmall
@@ -258,6 +372,68 @@
 
 - type: entity
   parent: CMPlatform
+  id: RMCPlatformStrataTwo
+  name: raised metal edge
+  description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: strata_metalplatform2
+  - type: Construction
+    graph: RMCPlatformStrata2Destructible
+    node: start
+
+- type: entity
+  parent: CMPlatformBroken
+  id: RMCPlatformStrata2Broken
+  components:
+  - type: Sprite
+    state: strata_metalplatform2_broken
+  - type: Construction
+    graph: RMCPlatformStrata2Destructible
+    node: platformBroken
+
+- type: entity
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformStrataTwoCornerSmall
+  name: raised metal corner
+  description: A raised level of metal, often used to elevate areas above others. This is the corner.
+  components:
+  - type: Sprite
+    state: strata_metalplatform_deco2
+
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformStrataThree
+  name: raised metal edge
+  description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: strata_metalplatform3
+  - type: Construction
+    graph: RMCPlatformStrata3Destructible
+    node: start
+
+- type: entity
+  parent: CMPlatformBroken
+  id: RMCPlatformStrata3Broken
+  components:
+  - type: Sprite
+    state: strata_metalplatform3_broken
+  - type: Construction
+    graph: RMCPlatformStrata3Destructible
+    node: platformBroken
+
+- type: entity
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformStrataThreeCornerSmall
+  name: raised metal corner
+  description: A raised level of metal, often used to elevate areas above others. This is the corner.
+  components:
+  - type: Sprite
+    state: strata_metalplatform_deco3
+
+- type: entity
+  parent: CMPlatform
   id: RMCPlatformKutjevoRock
   name: raised rock edge
   description: A collection of stones and rocks that provide ample grappling and vaulting opportunity. Indicates a change in elevation. You could probably climb it.
@@ -266,6 +442,21 @@
     state: kutjevo_rock
   - type: Physics
     bodyType: Static
+  - type: Construction
+    graph: RMCPlatformKutjevoRockDestructible
+    node: start
+
+- type: entity
+  parent: CMPlatformBroken
+  id: RMCPlatformKutjevoRockBroken
+  name: destroyed raised rock edge
+  description: A collection of stones and rocks that provide ample grappling and vaulting opportunity. Indicates a change in elevation. You could probably climb it. It has been destroyed.
+  components:
+  - type: Sprite
+    state: kutjevo_rock_broken
+  - type: Construction
+    graph: RMCPlatformKutjevoRockDestructible
+    node: platformBroken
 
 - type: entity
   parent: RMCPlatformCornerSmall
@@ -286,6 +477,21 @@
   components:
   - type: Sprite
     state: strata_platform
+  - type: Construction
+    graph: RMCPlatformStrataRockDestructible
+    node: start
+
+- type: entity
+  parent: CMPlatformBroken
+  id: RMCPlatformStrataRockBroken
+  name: destroyed ice rock edge
+  description: A solid chunk of desolate rocks and ice. Looks like you could climb it with some difficulty. It has been destroyed.
+  components:
+  - type: Sprite
+    state: strata_platform_broken
+  - type: Construction
+    graph: RMCPlatformStrataRockDestructible
+    node: platformBroken
 
 - type: entity
   parent: RMCPlatformCornerSmall
@@ -295,3 +501,216 @@
   components:
   - type: Sprite
     state: strata_platform_deco
+
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformHybrisaEdge
+  name: raised metal edge
+  description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: hybrisametal
+  - type: Construction
+    graph: RMCPlatformHybrisaDestructible
+    node: start
+
+- type: entity
+  parent: CMPlatformBroken
+  id: RMCPlatformHybrisaEdgeBroken
+  components:
+  - type: Sprite
+    state: hybrisametal_broken
+  - type: Construction
+    graph: RMCPlatformHybrisaDestructible
+    node: platformBroken
+
+- type: entity
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformHybrisaEdgeCornerSmall
+  name: raised metal corner
+  description: A raised level of metal, often used to elevate areas above others. This is the corner.
+  components:
+  - type: Sprite
+    state: hybrisametal_deco
+
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformHybrisa
+  name: raised metal platform
+  description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: hybrisaplatform
+  - type: Construction
+    graph: RMCPlatformHybrisa2Destructible
+    node: start
+
+- type: entity
+  parent: CMPlatformBroken
+  id: RMCPlatformHybrisaBroken
+  components:
+  - type: Sprite
+    state: hybrisametal_broken
+  - type: Construction
+    graph: RMCPlatformHybrisa2Destructible
+    node: platformBroken
+
+- type: entity
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformHybrisaCornerSmall
+  name: raised metal corner
+  description: A raised level of metal, often used to elevate areas above others. This is the corner.
+  components:
+  - type: Sprite
+    state: hybrisaplatform_deco
+
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformHybrisaTwo
+  name: raised metal platform
+  description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: hybrisaplatform2
+  - type: Construction
+    graph: RMCPlatformHybrisa3Destructible
+    node: start
+
+- type: entity
+  parent: CMPlatformBroken
+  id: RMCPlatformHybrisa2Broken
+  components:
+  - type: Sprite
+    state: hybrisaplatform2_broken
+  - type: Construction
+    graph: RMCPlatformHybrisa3Destructible
+    node: platformBroken
+
+- type: entity
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformHybrisaTwoCornerSmall
+  name: raised metal corner
+  description: A raised level of metal, often used to elevate areas above others. This is the corner.
+  components:
+  - type: Sprite
+    state: hybrisaplatform_deco2
+
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformHybrisaThree
+  name: raised metal platform
+  description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: hybrisaplatform3
+  - type: Construction
+    graph: RMCPlatformHybrisa4Destructible
+    node: start
+
+- type: entity
+  parent: CMPlatformBroken
+  id: RMCPlatformHybrisa3Broken
+  components:
+  - type: Sprite
+    state: hybrisaplatform3_broken
+  - type: Construction
+    graph: RMCPlatformHybrisa4Destructible
+    node: platformBroken
+
+- type: entity
+  parent: CMPlatformCorner
+  id: RMCPlatformHybrisaThreeCorner
+  name: raised metal platform
+  description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: hybrisaplatform3_corner
+
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformHybrisaThreeStair
+  name: raised metal platform
+  description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: hybrisaplatform3_stair
+
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformHybrisaThreeStairAlt
+  name: raised metal platform
+  description: A raised level of metal, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: hybrisaplatform3_stair_alt
+
+- type: entity
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformHybrisaThreeCornerSmall
+  name: raised metal corner
+  description: A raised level of metal, often used to elevate areas above others. This is the corner.
+  components:
+  - type: Sprite
+    state: hybrisaplatform_deco3
+
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformHybrisaRock
+  name: raised rock edges
+  description: A collection of stones and rocks that provide ample grappling and vaulting opportunity. Indicates a change in elevation. You could probably climb it.
+  components:
+  - type: Sprite
+    state: kutjevo_rockdark
+  - type: Construction
+    graph: RMCPlatformHybrisaRockDestructible
+    node: start
+
+- type: entity
+  parent: CMPlatformBroken
+  id: RMCPlatformHybrisaRockBroken
+  components:
+  - type: Sprite
+    state: kutjevo_rockdark_broken
+  - type: Construction
+    graph: RMCPlatformHybrisaRockDestructible
+    node: platformBroken
+
+- type: entity
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformHybrisaRockCornerSmall
+  name: raised rock corner
+  description: A collection of stones and rocks that cap the edge of some conveniently 1-meter-long lengths of perfectly climbable chest high walls.
+  components:
+  - type: Sprite
+    state: kutjevo_rock_decodark
+
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformHybrisaStone
+  name: raised stone platform
+  description: A raised level of stone, often used to elevate areas above others. You could probably climb it.
+  components:
+  - type: Sprite
+    state: stone
+  - type: Construction
+    graph: RMCPlatformHybrisaStoneDestructible
+    node: start
+
+- type: entity
+  parent: CMPlatformBroken
+  id: RMCPlatformHybrisaStoneBroken
+  components:
+  - type: Sprite
+    state: stone_broken
+  - type: Construction
+    graph: RMCPlatformHybrisaStoneDestructible
+    node: platformBroken
+
+- type: entity
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformHybrisaStoneCornerSmall
+  name: raised stone corner
+  description: A raised level of stone, often used to elevate areas above others. This is the corner.
+  components:
+  - type: Sprite
+    state: stone_deco

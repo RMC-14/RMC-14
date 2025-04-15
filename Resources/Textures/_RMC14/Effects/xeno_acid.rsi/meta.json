@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/af7813ee8c36f9195a88f3b3d018af2b8833cbea/icons/mob/xenos/effects.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/af7813ee8c36f9195a88f3b3d018af2b8833cbea/icons/mob/xenos/effects.dmi, extinguish by Vermidia",
   "size": {
     "x": 32,
     "y": 32
@@ -132,6 +132,18 @@
     },
     {
       "name": "acid2-strong",
+      "delays": [
+        [
+          0.4,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "acid-extinguish",
       "delays": [
         [
           0.4,

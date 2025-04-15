@@ -474,7 +474,7 @@ public sealed partial class ExplosionSystem
                 }
 
                 // TODO EXPLOSIONS turn explosions into entities, and pass the the entity in as the damage origin.
-                _damageableSystem.TryChangeDamage(entity, damage, ignoreResistances: true);
+                _damageableSystem.TryChangeDamage(entity, damage * _damageableSystem.UniversalExplosionDamageModifier, ignoreResistances: true);
                 var ev = new ExplosionReceivedEvent(id, epicenter, damage);
                 RaiseLocalEvent(entity, ref ev);
             }
@@ -523,7 +523,8 @@ public sealed partial class ExplosionSystem
         List<(Vector2i GridIndices, Tile Tile)> damagedTiles,
         ExplosionPrototype type)
     {
-        if (_tileDefinitionManager[tileRef.Tile.TypeId] is not ContentTileDefinition tileDef)
+        if (_tileDefinitionManager[tileRef.Tile.TypeId] is not ContentTileDefinition tileDef
+            || tileDef.Indestructible)
             return;
 
         if (!CanCreateVacuum)

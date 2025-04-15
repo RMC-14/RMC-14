@@ -40,7 +40,7 @@
 - type: entity
   parent: CMHeadCap
   id: CMHeadCapSPP
-  name: SPP UL2 cap
+  name: UL2 cap
   description: SPP headgear issued to soldiers when they're not expected to face combat, and may be requested by officers and above.
   components:
   - type: Sprite
@@ -62,7 +62,7 @@
 - type: entity
   parent: CMHeadCapSPP
   id: CMHeadCapSPPBeret
-  name: SPP UL3 beret
+  name: UL3 SPP beret
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/SPP/beret.rsi

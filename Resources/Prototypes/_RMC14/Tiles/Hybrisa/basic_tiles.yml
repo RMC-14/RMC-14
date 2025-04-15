@@ -1,0 +1,476 @@
+# Planet
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetHybrisaDirt
+  name: dirt
+  sprite: /Textures/_RMC14/Tiles/hybrisa/hybrisa_0.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: RMCPlanetHybrisaDirt
+  id: RMCPlanetHybrisaShale
+  name: shale
+  sprite: /Textures/_RMC14/Tiles/hybrisa/hybrisa_1.png
+
+- type: tile
+  parent: RMCPlanetHybrisaShale
+  id: RMCPlanetHybrisaShale2
+  sprite: /Textures/_RMC14/Tiles/hybrisa/hybrisa_2.png
+  edgeSpritePriority: 0
+  edgeSprites:
+    SouthEast: /Textures/_RMC14/Tiles/hybrisa/layer1_single_edge.png
+    NorthEast: /Textures/_RMC14/Tiles/hybrisa/layer1_single_edge.png
+    NorthWest: /Textures/_RMC14/Tiles/hybrisa/layer1_single_edge.png
+    SouthWest: /Textures/_RMC14/Tiles/hybrisa/layer1_single_edge.png
+    South: /Textures/_RMC14/Tiles/hybrisa/layer1_double_edge.png
+    East: /Textures/_RMC14/Tiles/hybrisa/layer1_double_edge.png
+    North: /Textures/_RMC14/Tiles/hybrisa/layer1_double_edge.png
+    West: /Textures/_RMC14/Tiles/hybrisa/layer1_double_edge.png
+
+- type: tile
+  parent: RMCPlanetHybrisaShale2
+  id: RMCPlanetHybrisaShale3
+  sprite: /Textures/_RMC14/Tiles/hybrisa/hybrisa_3.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetHybrisaUndergroundWeedable
+  name: floor
+  sprite: /Textures/_RMC14/Tiles/hybrisa/underground.png
+
+- type: tile
+  parent: RMCPlanetHybrisaUndergroundWeedable
+  id: RMCPlanetHybrisaUnderground
+  name: unweedable floor
+  weedsSpreadable: false
+
+- type: tile
+  parent: RMCPlanetHybrisaDirt
+  id: RMCPlanetHybrisaDirtPlating
+  name: unweedable dirt
+  weedsSpreadable: false
+
+# Metal
+
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: RMCFloorHybrisaBasicBase
+  name: tiles-cm-default-basic
+
+- type: tile
+  parent: RMCFloorHybrisaBasicBase
+  id: RMCFloorHybrisaCementFlat
+  name: cement
+  sprite: /Textures/_RMC14/Tiles/hybrisa/cementflat.png
+
+- type: tile
+  parent: RMCFloorHybrisaBasicBase
+  id: RMCFloorHybrisaRampNorth
+  name: ramp
+  sprite: /Textures/_RMC14/Tiles/hybrisa/rampsmaller_north.png
+
+- type: tile
+  parent: RMCFloorHybrisaRampNorth
+  id: RMCFloorHybrisaRampEast
+  sprite: /Textures/_RMC14/Tiles/hybrisa/rampsmaller_east.png
+
+- type: tile
+  parent: RMCFloorHybrisaRampNorth
+  id: RMCFloorHybrisaRampSouth
+  sprite: /Textures/_RMC14/Tiles/hybrisa/rampsmaller_south.png
+
+- type: tile
+  parent: RMCFloorHybrisaRampNorth
+  id: RMCFloorHybrisaRampWest
+  sprite: /Textures/_RMC14/Tiles/hybrisa/rampsmaller_west.png
+
+- type: tile
+  parent: RMCFloorHybrisaBasicBase
+  id: RMCFloorHybrisaStripeRedNorth
+  name: red stripe
+  sprite: /Textures/_RMC14/Tiles/hybrisa/stripe_red_north.png
+
+- type: tile
+  parent: RMCFloorHybrisaBasicBase
+  id: RMCFloorHybrisaStripeRedSouth
+  name: red stripe
+  sprite: /Textures/_RMC14/Tiles/hybrisa/stripe_red_south.png
+
+- type: tile
+  parent: RMCFloorHybrisaBasicBase
+  id: RMCFloorHybrisaStripeRedEast
+  name: red stripe
+  sprite: /Textures/_RMC14/Tiles/hybrisa/stripe_red_east.png
+
+- type: tile
+  parent: RMCFloorHybrisaBasicBase
+  id: RMCFloorHybrisaStripeRedWest
+  name: red stripe
+  sprite: /Textures/_RMC14/Tiles/hybrisa/stripe_red_west.png
+
+- type: tile
+  parent: RMCFloorHybrisaBasicBase
+  id: RMCFloorHybrisaNSPAEmblem
+  name: metal floor
+  sprite: /Textures/_RMC14/Tiles/hybrisa/NSPAemblem.png
+
+- type: tile
+  parent: RMCFloorHybrisaNSPAEmblem
+  id: RMCFloorHybrisaNSPAEmblem64A
+  sprite: /Textures/_RMC14/Tiles/hybrisa/NSPA_emblem_concrete_2x2_a.png
+
+- type: tile
+  parent: RMCFloorHybrisaNSPAEmblem
+  id: RMCFloorHybrisaNSPAEmblem64B
+  sprite: /Textures/_RMC14/Tiles/hybrisa/NSPA_emblem_concrete_2x2_b.png
+
+- type: tile
+  parent: RMCFloorHybrisaNSPAEmblem
+  id: RMCFloorHybrisaNSPAEmblem64C
+  sprite: /Textures/_RMC14/Tiles/hybrisa/NSPA_emblem_concrete_2x2_c.png
+
+- type: tile
+  parent: RMCFloorHybrisaNSPAEmblem
+  id: RMCFloorHybrisaNSPAEmblem64D
+  sprite: /Textures/_RMC14/Tiles/hybrisa/NSPA_emblem_concrete_2x2_d.png
+
+- type: tile
+  parent: RMCFloorHybrisaNSPAEmblem
+  id: RMCFloorHybrisaMarshallEmblem
+  sprite: /Textures/_RMC14/Tiles/hybrisa/marshallsemblem.png
+
+- type: tile
+  parent: RMCFloorHybrisaNSPAEmblem
+  id: RMCFloorHybrisaMarshallEmblem64A
+  sprite: /Textures/_RMC14/Tiles/hybrisa/marshallsemblem_concrete_2x2_a.png
+
+- type: tile
+  parent: RMCFloorHybrisaNSPAEmblem
+  id: RMCFloorHybrisaMarshallEmblem64B
+  sprite: /Textures/_RMC14/Tiles/hybrisa/marshallsemblem_concrete_2x2_b.png
+
+- type: tile
+  parent: RMCFloorHybrisaNSPAEmblem
+  id: RMCFloorHybrisaMarshallEmblem64C
+  sprite: /Textures/_RMC14/Tiles/hybrisa/marshallsemblem_concrete_2x2_c.png
+
+- type: tile
+  parent: RMCFloorHybrisaNSPAEmblem
+  id: RMCFloorHybrisaMarshallEmblem64D
+  sprite: /Textures/_RMC14/Tiles/hybrisa/marshallsemblem_concrete_2x2_d.png
+
+# Road
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetHybrisaAsphalt
+  name: asphalt
+  sprite: /Textures/_RMC14/Tiles/hybrisa/asphalt_old.png
+
+- type: tile
+  parent: RMCPlanetHybrisaAsphalt
+  id: RMCPlanetHybrisaAsphaltLines3
+  sprite: /Textures/_RMC14/Tiles/hybrisa/asphalt_old_roadlines3.png
+
+- type: tile
+  parent: RMCPlanetHybrisaAsphalt
+  id: RMCPlanetHybrisaAsphaltLines4
+  sprite: /Textures/_RMC14/Tiles/hybrisa/asphalt_old_roadlines4.png
+
+- type: tile
+  parent: RMCPlanetHybrisaAsphalt
+  id: RMCPlanetHybrisaAsphaltLinesRed
+  sprite: /Textures/_RMC14/Tiles/hybrisa/warning_red_floor.png
+
+- type: tile
+  parent: RMCPlanetHybrisaAsphalt
+  id: RMCPlanetHybrisaAsphaltLinesYellow
+  sprite: /Textures/_RMC14/Tiles/hybrisa/warning_yellow_floor.png
+
+- type: tile
+  parent: RMCPlanetHybrisaAsphalt
+  id: RMCPlanetHybrisaAsphaltSidewalkNorth
+  sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalkcenter_1.png
+
+- type: tile
+  parent: RMCPlanetHybrisaAsphalt
+  id: RMCPlanetHybrisaAsphaltSidewalkSouth
+  sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalkcenter_2.png
+
+- type: tile
+  parent: RMCPlanetHybrisaAsphalt
+  id: RMCPlanetHybrisaAsphaltSidewalkWest
+  sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalkcenter_3.png
+
+- type: tile
+  parent: RMCPlanetHybrisaAsphalt
+  id: RMCPlanetHybrisaAsphaltSidewalkEast
+  sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalkcenter_4.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetHybrisaCement
+  name: cement
+  sprite: /Textures/_RMC14/Tiles/hybrisa/cement1.png
+
+- type: tile
+  parent: RMCPlanetHybrisaCement
+  id: RMCPlanetHybrisaCement2
+  sprite: /Textures/_RMC14/Tiles/hybrisa/cement2.png
+
+- type: tile
+  parent: RMCPlanetHybrisaCement
+  id: RMCPlanetHybrisaCement3
+  sprite: /Textures/_RMC14/Tiles/hybrisa/cement3.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: RMCPlanetHybrisaSidewalk
+  name: sidewalk
+  sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalkfull.png
+
+- type: tile
+  parent: RMCPlanetHybrisaSidewalk
+  id: RMCPlanetHybrisaSidewalkSouth
+  sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalk_1.png
+
+- type: tile
+  parent: RMCPlanetHybrisaSidewalk
+  id: RMCPlanetHybrisaSidewalkNorth
+  sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalk_2.png
+
+- type: tile
+  parent: RMCPlanetHybrisaSidewalk
+  id: RMCPlanetHybrisaSidewalkEast
+  sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalk_3.png
+
+- type: tile
+  parent: RMCPlanetHybrisaSidewalk
+  id: RMCPlanetHybrisaSidewalkWest
+  sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalk_4.png
+
+- type: tile
+  parent: RMCPlanetHybrisaSidewalk
+  id: RMCPlanetHybrisaSidewalkSouthEast
+  sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalk_5.png
+
+- type: tile
+  parent: RMCPlanetHybrisaSidewalk
+  id: RMCPlanetHybrisaSidewalkSouthWest
+  sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalk_6.png
+
+- type: tile
+  parent: RMCPlanetHybrisaSidewalk
+  id: RMCPlanetHybrisaSidewalkNorthEast
+  sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalk_7.png
+
+- type: tile
+  parent: RMCPlanetHybrisaSidewalk
+  id: RMCPlanetHybrisaSidewalkNorthWest
+  sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalk_8.png
+
+- type: tile
+  parent: RMCPlanetHybrisaSidewalk
+  id: RMCPlanetHybrisaSidewalkCornerNorthEast
+  sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalkcorner_1.png
+
+- type: tile
+  parent: RMCPlanetHybrisaSidewalk
+  id: RMCPlanetHybrisaSidewalkCornerNorthWest
+  sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalkcorner_2.png
+
+- type: tile
+  parent: RMCPlanetHybrisaSidewalk
+  id: RMCPlanetHybrisaSidewalkCornerSouthEast
+  sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalkcorner_3.png
+
+- type: tile
+  parent: RMCPlanetHybrisaSidewalk
+  id: RMCPlanetHybrisaSidewalkCornerSouthWest
+  sprite: /Textures/_RMC14/Tiles/hybrisa/sidewalkcorner_4.png
+
+# Engineer
+
+- type: tile
+  parent: RMCFloorHybrisaBasicBase
+  id: RMCFloorHybrisaEngineerShip
+  name: strange metal floor
+  sprite: /Textures/_RMC14/Tiles/hybrisa/floor.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipPlating
+  sprite: /Textures/_RMC14/Tiles/hybrisa/plating.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShip1
+  sprite: /Textures/_RMC14/Tiles/hybrisa/engineer_metalfloor_1.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShip2
+  sprite: /Textures/_RMC14/Tiles/hybrisa/engineer_metalfloor_2.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShip3
+  sprite: /Textures/_RMC14/Tiles/hybrisa/engineer_metalfloor_3.png
+  variants: 4
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShip4
+  sprite: /Textures/_RMC14/Tiles/hybrisa/engineer_metalfloor_4.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShip5
+  sprite: /Textures/_RMC14/Tiles/hybrisa/engineer_floor_5.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipOuterHull1
+  sprite: /Textures/_RMC14/Tiles/hybrisa/outerhull_1.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipOuterHull2
+  sprite: /Textures/_RMC14/Tiles/hybrisa/outerhull_2.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipOuterHull3
+  sprite: /Textures/_RMC14/Tiles/hybrisa/outerhull_3.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipOuterHull4
+  sprite: /Textures/_RMC14/Tiles/hybrisa/outerhull_4.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipOuterHull5
+  sprite: /Textures/_RMC14/Tiles/hybrisa/outerhull_5.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipOuterHull6
+  sprite: /Textures/_RMC14/Tiles/hybrisa/outerhull_6.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipOuterHull7
+  sprite: /Textures/_RMC14/Tiles/hybrisa/outerhull_7.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipOuterHull8
+  sprite: /Textures/_RMC14/Tiles/hybrisa/outerhull_8.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipPillarN1
+  sprite: /Textures/_RMC14/Tiles/hybrisa/eng_pillar1.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipPillarN2
+  sprite: /Textures/_RMC14/Tiles/hybrisa/eng_pillar2.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipPillarN3
+  sprite: /Textures/_RMC14/Tiles/hybrisa/eng_pillar3.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipPillarN4
+  sprite: /Textures/_RMC14/Tiles/hybrisa/eng_pillar4.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipPillarS1
+  sprite: /Textures/_RMC14/Tiles/hybrisa/eng_pillarsouth1.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipPillarS2
+  sprite: /Textures/_RMC14/Tiles/hybrisa/eng_pillarsouth2.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipPillarS3
+  sprite: /Textures/_RMC14/Tiles/hybrisa/eng_pillarsouth3.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipPillarS4
+  sprite: /Textures/_RMC14/Tiles/hybrisa/eng_pillarsouth4.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipPillarE1
+  sprite: /Textures/_RMC14/Tiles/hybrisa/eng_pillareast1.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipPillarE2
+  sprite: /Textures/_RMC14/Tiles/hybrisa/eng_pillareast2.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipPillarE3
+  sprite: /Textures/_RMC14/Tiles/hybrisa/eng_pillareast3.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipPillarE4
+  sprite: /Textures/_RMC14/Tiles/hybrisa/eng_pillareast4.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipPillarW1
+  sprite: /Textures/_RMC14/Tiles/hybrisa/eng_pillarwest1.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipPillarW2
+  sprite: /Textures/_RMC14/Tiles/hybrisa/eng_pillarwest2.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipPillarW3
+  sprite: /Textures/_RMC14/Tiles/hybrisa/eng_pillarwest3.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipPillarW4
+  sprite: /Textures/_RMC14/Tiles/hybrisa/eng_pillarwest4.png
+
+- type: tile
+  parent: RMCFloorHybrisaEngineerShip
+  id: RMCFloorHybrisaEngineerShipLight
+  sprite: /Textures/_RMC14/Tiles/hybrisa/engineerlight.png

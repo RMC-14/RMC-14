@@ -1,4 +1,3 @@
-# TODO Helmet accessories
 # TODO Recreational
 # TODO Miscellaneous
 
@@ -8,9 +7,10 @@
   points: 7
   groups:
   - MarineLeatherBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -19,15 +19,17 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMDropshipCrewChief
   points: 7
   groups:
   - MarineLeatherBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -36,15 +38,17 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMPilotDropship
   points: 7
   groups:
   - MarineLeatherBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -53,15 +57,17 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMPilotGunship
   points: 7
   groups:
   - MarineLeatherBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -70,15 +76,17 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMIntelOfficer
   points: 7
   groups:
   - MarineBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -87,17 +95,20 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 # Command
 - type: roleLoadout
   id: JobCMCommandingOfficer
   points: 7
   groups:
+  - CommandingOfficerIDRMC
   - MarineLeatherBackpack
   - CommandingOfficerRoleSpecificRMC
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -106,15 +117,17 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMExecutiveOfficer
   points: 7
   groups:
   - MarineLeatherBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -123,15 +136,17 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMStaffOfficer
   points: 7
   groups:
   - MarineBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -140,6 +155,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 # Engineering
 - type: roleLoadout
@@ -147,9 +163,10 @@
   points: 7
   groups:
   - MarineTechnicianBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -158,15 +175,17 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMMaintTech
   points: 7
   groups:
   - MarineTechnicianBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -175,15 +194,17 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMOrdnanceTech
   points: 7
   groups:
   - MarineTechnicianBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -192,6 +213,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 # Squad Roles
 - type: roleLoadout
@@ -199,9 +221,10 @@
   points: 7
   groups:
   - MarineTechnicianBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -210,15 +233,17 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMFireteamLeader
   points: 7
   groups:
   - MarineBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -227,15 +252,17 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMHospitalCorpsman
   points: 7
   groups:
   - MarineMedicBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -244,15 +271,17 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMRifleman
   points: 7
   groups:
   - MarineBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -261,15 +290,17 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMSmartGunOperator
   points: 7
   groups:
   - MarineBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -278,15 +309,17 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMSquadLeader
   points: 7
   groups:
   - MarineBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -295,15 +328,17 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMWeaponsSpecialist
   points: 7
   groups:
   - MarineBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -312,6 +347,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 # Medical
 - type: roleLoadout
@@ -319,9 +355,10 @@
   points: 7
   groups:
   - MarineLeatherBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -330,15 +367,17 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMDoctor
   points: 7
   groups:
   - MarineBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -347,15 +386,17 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMNurse
   points: 7
   groups:
   - MarineBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -364,15 +405,17 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMResearcher
   points: 7
   groups:
   - MarineLeatherBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -381,6 +424,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 # Military Police
 - type: roleLoadout
@@ -388,9 +432,10 @@
   points: 7
   groups:
   - MarineSecurityBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -399,15 +444,17 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMMilitaryPolice
   points: 7
   groups:
   - MarineSecurityBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -416,15 +463,17 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMMilitaryWarden
   points: 7
   groups:
   - MarineSecurityBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -433,6 +482,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 # Other
 - type: roleLoadout
@@ -440,9 +490,10 @@
   points: 7
   groups:
   - MarineLeatherBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -451,15 +502,17 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMLiaison
   points: 7
   groups:
   - MarineLeatherBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -468,15 +521,17 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMMessTech
   points: 7
   groups:
   - MarineBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -485,15 +540,17 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMSeniorEnlistedAdvisor
   points: 7
   groups:
   - MarineBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -502,6 +559,7 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 # Requsitions
 - type: roleLoadout
@@ -509,9 +567,10 @@
   points: 7
   groups:
   - MarineTechnicianBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -520,15 +579,17 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins
 
 - type: roleLoadout
   id: JobCMQuartermaster
   points: 7
   groups:
   - MarineTechnicianBackpack
+  - HeadwearRMC
   - EyewearRMC
   - MasksRMC
-  - HeadwearRMC
+  - HelmetGarbsRMC
   - PaperworkRMC
   - PlushiesRMC
   - WeaponsRMC
@@ -537,3 +598,4 @@
   - FoodSweetsRMC
   - FoodPackagedRMC
   - FoodHealthyRMC
+  - RMCLoadoutGroupPins

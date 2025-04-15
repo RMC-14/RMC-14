@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
@@ -37,6 +37,7 @@
     tier: 2
     hudOffset: -0.15,0.05
     unlockAt: 540 # 9 minutes
+    restHealMultiplier:  1.5
   - type: XenoLight
   - type: XenoDevolve
     devolvesTo:
@@ -50,8 +51,8 @@
     explosionArmor: 20
   - type: XenoEvolution
     max: 500
-#    evolvesTo:
-#    - CMXenoRavager
+    evolvesTo:
+    - CMXenoRavager
   - type: XenoLeap
     plasmaCost: 20
     delay: 0
@@ -101,3 +102,5 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: lurker
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.2

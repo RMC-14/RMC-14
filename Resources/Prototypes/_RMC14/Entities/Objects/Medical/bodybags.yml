@@ -8,6 +8,7 @@
     size: Small
   - type: Sprite
     sprite: _RMC14/Objects/Medical/bodybags.rsi
+    drawdepth: Mobs
     layers:
     - state: bodybag_closed
       map: ["unfoldedLayer", "enum.StorageVisualLayers.Base"]
@@ -92,6 +93,15 @@
     containers:
       entity_storage: !type:Container
       paper_label: !type:ContainerSlot
+  - type: Buckle
+    buckleDelay: 0
+    clickUnbuckle: false
+  - type: BuckleWhitelist
+    whitelist:
+      components:
+      - MedevacStretcher
+      tags:
+      - CMRollerItem
 
 - type: entity
   parent: CMBodyBag
@@ -136,7 +146,7 @@
       components:
       - MedevacStretcher
       tags:
-      - CMRollerBed
+      - CMRollerItem
 
 - type: entity
   parent: CMStasisBag

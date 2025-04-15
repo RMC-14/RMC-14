@@ -7,6 +7,7 @@ using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
+using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Network;
@@ -18,6 +19,7 @@ namespace Content.Shared._RMC14.Chemistry;
 public abstract class SharedRMCChemistrySystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -38,6 +40,13 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
 
         SubscribeLocalEvent<RMCToggleableSolutionTransferComponent, MapInitEvent>(OnToggleableSolutionTransferMapInit);
         SubscribeLocalEvent<RMCToggleableSolutionTransferComponent, GetVerbsEvent<AlternativeVerb>>(OnToggleableSolutionTransferVerbs);
+
+        SubscribeLocalEvent<RMCSolutionTransferWhitelistComponent, SolutionTransferAttemptEvent>(OnTransferWhitelistAttempt);
+
+        SubscribeLocalEvent<NoMixingReagentsComponent, ExaminedEvent>(OnNoMixingReagentsExamined);
+        SubscribeLocalEvent<NoMixingReagentsComponent, SolutionTransferAttemptEvent>(OnNoMixingReagentsTransferAttempt);
+
+        SubscribeLocalEvent<RMCEmptySolutionComponent, GetVerbsEvent<AlternativeVerb>>(OnEmptySolutionGetVerbs);
 
         Subs.BuiEvents<RMCChemicalDispenserComponent>(RMCChemicalDispenserUi.Key,
             subs =>
@@ -135,6 +144,72 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
         });
     }
 
+    private void OnTransferWhitelistAttempt(Entity<RMCSolutionTransferWhitelistComponent> ent, ref SolutionTransferAttemptEvent args)
+    {
+        if (ent.Owner == args.From)
+        {
+            if (_entityWhitelist.IsWhitelistFail(ent.Comp.SourceWhitelist, args.To))
+                args.Cancel(Loc.GetString(ent.Comp.Popup));
+        }
+        else
+        {
+            if (_entityWhitelist.IsWhitelistFail(ent.Comp.TargetWhitelist, args.From))
+                args.Cancel(Loc.GetString(ent.Comp.Popup));
+        }
+    }
+
+    private void OnNoMixingReagentsExamined(Entity<NoMixingReagentsComponent> ent, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(NoMixingReagentsComponent)))
+        {
+            args.PushMarkup(Loc.GetString("rmc-fuel-examine-cant-mix"));
+        }
+    }
+
+    private void OnNoMixingReagentsTransferAttempt(Entity<NoMixingReagentsComponent> ent, ref SolutionTransferAttemptEvent args)
+    {
+        var tankSolution = args.FromSolution.Comp.Solution;
+        var targetSolution = args.ToSolution.Comp.Solution;
+        if (targetSolution.Contents.Count > 1)
+        {
+            args.Cancel(Loc.GetString("rmc-fuel-cant-mix"));
+            return;
+        }
+
+        foreach (var content in targetSolution.Contents)
+        {
+            if (tankSolution.Volume > FixedPoint2.Zero &&
+                !tankSolution.ContainsReagent(content.Reagent))
+            {
+                args.Cancel(Loc.GetString("rmc-fuel-cant-mix"));
+                return;
+            }
+        }
+    }
+
+    private void OnEmptySolutionGetVerbs(Entity<RMCEmptySolutionComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanAccess || !args.CanComplexInteract)
+            return;
+
+        if (!_solution.TryGetSolution(ent.Owner, ent.Comp.Solution, out var solutionEnt, out _) ||
+            solutionEnt.Value.Comp.Solution.Volume <= FixedPoint2.Zero)
+        {
+            return;
+        }
+
+        args.Verbs.Add(new AlternativeVerb
+        {
+            Text = Loc.GetString("rmc-empty-solution-verb"),
+            Act = () =>
+            {
+                if (_solution.TryGetSolution(ent.Owner, ent.Comp.Solution, out solutionEnt, out _))
+                    _solution.RemoveAllSolution(solutionEnt.Value);
+            },
+            Priority = 1,
+        });
+    }
+
     private void OnChemicalDispenserSettingMsg(Entity<RMCChemicalDispenserComponent> ent, ref RMCChemicalDispenserDispenseSettingBuiMsg args)
     {
         if (!ent.Comp.Settings.Contains(args.Amount))
@@ -222,6 +297,9 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
         var dispensers = EntityQueryEnumerator<RMCChemicalDispenserComponent>();
         while (dispensers.MoveNext(out var dispenserId, out var dispenserComp))
         {
+            if (dispenserComp.Network != storage.Comp.Network)
+                continue;
+
             dispenserComp.Energy = energy;
             Dirty(dispenserId, dispenserComp);
         }

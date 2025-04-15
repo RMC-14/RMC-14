@@ -1,0 +1,116 @@
+- type: entity
+  parent: ClothingNeckLGBTPin
+  id: RMCClothingNeckLGBTPin
+  components:
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/pride_pins.rsi
+      state: lgbt
+
+- type: entity
+  parent: ClothingNeckAromanticPin
+  id: RMCClothingNeckAromanticPin
+  components:
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/pride_pins.rsi
+      state: aro
+
+- type: entity
+  parent: ClothingNeckAsexualPin
+  id: RMCClothingNeckAsexualPin
+  components:
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/pride_pins.rsi
+      state: ace
+
+- type: entity
+  parent: ClothingNeckBisexualPin
+  id: RMCClothingNeckBisexualPin
+  components:
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/pride_pins.rsi
+      state: bi
+
+- type: entity
+  parent: ClothingNeckGayPin
+  id: RMCClothingNeckGayPin
+  components:
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/pride_pins.rsi
+      state: gay
+
+- type: entity
+  parent: ClothingNeckIntersexPin
+  id: RMCClothingNeckIntersexPin
+  components:
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/pride_pins.rsi
+      state: inter
+
+- type: entity
+  parent: ClothingNeckLesbianPin
+  id: RMCClothingNeckLesbianPin
+  components:
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/pride_pins.rsi
+      state: les
+
+- type: entity
+  parent: ClothingNeckNonBinaryPin
+  id: RMCClothingNeckNonBinaryPin
+  components:
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/pride_pins.rsi
+      state: non
+
+- type: entity
+  parent: ClothingNeckPansexualPin
+  id: RMCClothingNeckPansexualPin
+  components:
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/pride_pins.rsi
+      state: pan
+
+- type: entity
+  parent: ClothingNeckOmnisexualPin
+  id: RMCClothingNeckOmnisexualPin
+  components:
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/pride_pins.rsi
+      state: omni
+
+- type: entity
+  parent: ClothingNeckTransPin
+  id: RMCClothingNeckTransPin
+  components:
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/pride_pins.rsi
+      state: trans
+
+- type: entity
+  parent: ClothingNeckAutismPin
+  id: RMCClothingNeckAutismPin
+  components:
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/pride_pins.rsi
+      state: autism
+
+- type: entity
+  parent: ClothingNeckGoldAutismPin
+  id: RMCClothingNeckGoldAutismPin
+  components:
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/pride_pins.rsi
+      state: gold_autism

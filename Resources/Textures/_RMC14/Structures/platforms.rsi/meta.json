@@ -1,7 +1,7 @@
 ﻿{
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/c67c5213507a19e10e252ef2898d94354c0709bf/icons/obj/structures/props/platforms.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/obj/structures/props/platforms.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -44,7 +44,31 @@
       "directions": 4
     },
     {
+      "name": "strata_metalplatform_stair",
+      "directions": 4
+    },
+    {
+      "name": "strata_metalplatform_stair_alt",
+      "directions": 4
+    },
+    {
       "name": "strata_metalplatform_deco",
+      "directions": 4
+    },
+    {
+      "name": "strata_metalplatform2",
+      "directions": 4
+    },
+    {
+      "name": "strata_metalplatform_deco2",
+      "directions": 4
+    },
+    {
+      "name": "strata_metalplatform3",
+      "directions": 4
+    },
+    {
+      "name": "strata_metalplatform_deco3",
       "directions": 4
     },
     {
@@ -112,6 +136,130 @@
     },
     {
       "name": "shiva_deco",
+      "directions": 4
+    },
+    {
+      "name": "kutjevo_rockdark",
+      "directions": 4
+    },
+    {
+      "name": "kutjevo_rock_decodark",
+      "directions": 4
+    },
+    {
+      "name": "hybrisametal",
+      "directions": 4
+    },
+    {
+      "name": "hybrisametal_deco",
+      "directions": 4
+    },
+    {
+      "name": "hybrisaplatform",
+      "directions": 4
+    },
+    {
+      "name": "hybrisaplatform_deco",
+      "directions": 4
+    },
+    {
+      "name": "hybrisaplatform2",
+      "directions": 4
+    },
+    {
+      "name": "hybrisaplatform_deco2",
+      "directions": 4
+    },
+    {
+      "name": "hybrisaplatform3",
+      "directions": 4
+    },
+    {
+      "name": "hybrisaplatform3_stair",
+      "directions": 4
+    },
+    {
+      "name": "hybrisaplatform3_stair_alt",
+      "directions": 4
+    },
+    {
+      "name": "hybrisaplatform3_corner",
+      "directions": 4
+    },
+    {
+      "name": "hybrisaplatform_deco3",
+      "directions": 4
+    },
+    {
+      "name": "engineer_platform",
+      "directions": 4
+    },
+    {
+      "name": "engineer_platform_deco",
+      "directions": 4
+    },
+    {
+      "name": "platform_broken",
+      "directions": 4
+    },
+    {
+      "name": "kutjevo_platform_broken",
+      "directions": 4
+    },
+    {
+      "name": "hunter_platform_broken",
+      "directions": 4
+    },
+    {
+      "name": "hybrisaplatform3_broken",
+      "directions": 4
+    },
+    {
+      "name": "hybrisaplatform2_broken",
+      "directions": 4
+    },
+    {
+      "name": "strata_metalplatform2_broken",
+      "directions": 4
+    },
+    {
+      "name": "hybrisaplatform_broken",
+      "directions": 4
+    },
+    {
+      "name": "hybrisametal_broken",
+      "directions": 4
+    },
+    {
+      "name": "strata_metalplatform3_broken",
+      "directions": 4
+    },
+    {
+      "name": "kutjevo_rockdark_broken",
+      "directions": 4
+    },
+    {
+      "name": "sandstone_broken",
+      "directions": 4
+    },
+    {
+      "name": "stone_broken",
+      "directions": 4
+    },
+    {
+      "name": "kutjevo_rock_broken",
+      "directions": 4
+    },
+    {
+      "name": "strata_platform_broken",
+      "directions": 4
+    },
+    {
+      "name": "shiva_broken",
+      "directions": 4
+    },
+    {
+      "name": "strata_metalplatform_broken",
       "directions": 4
     }
   ]

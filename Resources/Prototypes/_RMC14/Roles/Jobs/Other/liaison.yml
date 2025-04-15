@@ -7,6 +7,20 @@
   - !type:TotalDepartmentsTimeRequirement
     group: CMDepartmentsHuman
     time: 36000 # 10 hours
+  ranks:
+    RMCRankWeYaExecutiveSpecialist:
+    - !type:RoleTimeRequirement
+      role: CMJobLiaison
+      time: 630000 # 175 hours
+    RMCRankWeYaSeniorExecutive:
+    - !type:RoleTimeRequirement
+      role: CMJobLiaison
+      time: 252000 # 70 hours
+    RMCRankWeYaExecutive:
+    - !type:RoleTimeRequirement
+      role: CMJobLiaison
+      time: 90000 # 25 hours
+    RMCRankWeYaJuniorExecutive: []
   playTimeTracker: CMJobLiaison
   startingGear: CMGearLiaison
   icon: "CMJobIconLiaison"
@@ -31,7 +45,7 @@
     state: cl
   minimapBackground:
    sprite: _RMC14/Interface/map_blips.rsi
-   state: background_civillian
+   state: background_goon
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -43,7 +57,11 @@
     - type: CMVendorUser
       points: 50
     - type: JobPrefix
-      prefix: "CL"
+      prefix: cm-job-prefix-liaison
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: cl
 
 - type: startingGear
   id: CMGearLiaison
@@ -61,10 +79,7 @@
   - type: SpawnPoint
     job_id: CMLiaison
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: corp_liaison
+    state: cl_spawn
 
 - type: playTimeTracker
   id: CMJobLiaison

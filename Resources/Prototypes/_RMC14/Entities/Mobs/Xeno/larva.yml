@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoUndeveloped
   - CMXenoFlammable
@@ -32,6 +32,7 @@
     emoteSounds: Larva
   - type: XenoLight
   - type: XenoPlasma
+    plasma: 10
     maxPlasma: 10
     plasmaRegenOnWeeds: 0.1
   - type: XenoEvolution
@@ -58,9 +59,11 @@
         - SmallMobLayer
   - type: Flammable
     canResistFire: false
+  - type: IgnoreBlockPullingDead
   - type: MovementSpeedModifier
     baseWalkSpeed: 3.7
     baseSprintSpeed: 6.7
+  - type: RestrictEvolveOffWeeds
   - type: Speech
     speechSounds: XenonidLarva
     allowedEmotes: [ "XenoRoar" ]
@@ -73,6 +76,15 @@
   - type: Tag
     tags:
     - RMCXenoLarva
+  - type: RMCBuckleOffset
+    offset: 0, 0
+  - type: XenoRankNames
+    rankNames:
+      0: rmc-xeno-young-larva
+      2: rmc-xeno-mature-larva
+      3: rmc-xeno-elder-larva
+      4: rmc-xeno-elder-larva
+      5: rmc-xeno-elder-larva
 
 # For surgeries/failed incubations
 - type: entity
@@ -85,6 +97,3 @@
       sprite: _RMC14/Mobs/Xenonids/Larva/larva.rsi
       noRot: true
       state: embryo
-
-- type: Tag
-  id: RMCXenoLarva

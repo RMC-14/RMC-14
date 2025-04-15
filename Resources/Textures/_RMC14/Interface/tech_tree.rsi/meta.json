@@ -1,0 +1,122 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f2471a869df29217d88a8106850ba107ff0020c8/icons/effects/techtree/tech.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "misc"
+    },
+    {
+      "name": "background"
+    },
+    {
+      "name": "xeno_background"
+    },
+    {
+      "name": "upgrade"
+    },
+    {
+      "name": "unknown"
+    },
+    {
+      "name": "marine"
+    },
+    {
+      "name": "combat_plates"
+    },
+    {
+      "name": "medic_qol"
+    },
+    {
+      "name": "engi_kit"
+    },
+    {
+      "name": "weapon"
+    },
+    {
+      "name": "railgun"
+    },
+    {
+      "name": "friendly_xeno"
+    },
+    {
+      "name": "ltb"
+    },
+    {
+      "name": "ammo"
+    },
+    {
+      "name": "implants"
+    },
+    {
+      "name": "stimulants"
+    },
+    {
+      "name": "budget_ds"
+    },
+    {
+      "name": "budget_req"
+    },
+    {
+      "name": "cryotroops"
+    },
+    {
+      "name": "ob_he"
+    },
+    {
+      "name": "ob_incend"
+    },
+    {
+      "name": "ob_cluster"
+    },
+    {
+      "name": "nuke"
+    },
+    {
+      "name": "xeno"
+    },
+    {
+      "name": "frenzy"
+    },
+    {
+      "name": "weed_reinforcement"
+    },
+    {
+      "name": "boiler_glob"
+    },
+    {
+      "name": "build_distro"
+    },
+    {
+      "name": "jelly"
+    },
+    {
+      "name": "endurance"
+    },
+    {
+      "name": "beacon"
+    },
+    {
+      "name": "acid_blood"
+    },
+    {
+      "name": "overshield"
+    },
+    {
+      "name": "unused"
+    },
+    {
+      "name": "background_locked"
+    },
+    {
+      "name": "xeno_background_locked"
+    },
+    {
+      "name": "\u002Blines"
+    }
+  ]
+}

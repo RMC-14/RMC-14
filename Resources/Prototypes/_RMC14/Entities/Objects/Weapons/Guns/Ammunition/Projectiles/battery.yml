@@ -18,7 +18,7 @@
       params:
         volume: 5
   - type: StaminaDamageOnCollide
-    damage: 45
+    damage: 60
   - type: Projectile
     damage:
       types:

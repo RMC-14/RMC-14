@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: CMBaseWeaponRifle
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   name: M54C assault rifle MK2
   id: WeaponRifleM54C
   description: The standard issue rifle of the Marines. Commonly carried by most combat personnel. Uses 10x24mm caseless ammunition.
@@ -50,6 +50,8 @@
           - CMMagazineRifleM54C
           - CMMagazineRifleM54CAP
           - CMMagazineRifleM54CExt
+          - RMCMagazineRifleM54CIncendiary
+          - RMCMagazineRifleM54CHEAP
   - type: GunDamageModifier
     multiplier: 1.1
   - type: AttachableHolder
@@ -88,6 +90,8 @@
           - RMCAttachmentU1GrenadeLauncher
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentVerticalGrip
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.75, 0.00
@@ -101,6 +105,9 @@
       Snow: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
       Classic: _RMC14/Objects/Weapons/Guns/Rifles/m54c/classic.rsi
       Urban: _RMC14/Objects/Weapons/Guns/Rifles/m54c/urban.rsi
+  - type: Tag
+    tags:
+    - RMCWeaponRifleM54CMK2
 
 - type: entity
   parent: CMMagazineRifleBase
@@ -158,6 +165,60 @@
 
 - type: entity
   parent: CMMagazineRifleM54C
+  id: RMCMagazineRifleM54CIncendiary
+  name: "M54C Incendiary magazine (10x24mm)"
+  suffix: Incendiary
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleM54CIncendiary
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmIncendiary
+    proto: RMCCartridgeRifle10x24mmIncendiary
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#771A10"
+#  - type: RefillableByBulletBox no bullet box for it yet
+#    bulletType: RMCBoxBulletsRifleAP
+
+- type: entity
+  parent: CMMagazineRifleM54C
+  id: RMCMagazineRifleM54CHEAP
+  name: "M54C HEAP magazine (10x24mm)"
+  suffix: HEAP
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - CMMagazineRifleM54CAP
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmHEAP
+    proto: RMCCartridgeRifle10x24mmHEAP
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#9C9A19"
+#  - type: RefillableByBulletBox
+#    bulletType: RMCBoxBulletsRifleAP
+
+- type: entity
+  parent: CMMagazineRifleM54C
   id: CMMagazineRifleM54CExt
   name: "M54C extended magazine (10x24mm)"
   components:
@@ -212,6 +273,32 @@
     proto: BulletRifle10x24mmAP
 
 - type: entity
+  parent: CMCartridgeRifle10x24mm
+  id: RMCCartridgeRifle10x24mmIncendiary
+  name: AP cartridge (10x24mm)
+  description: An armor piercing 10x24mm cartridge. Fits in 10x24mm AP magazines.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifle10x24mmIncendiary
+  - type: CartridgeAmmo
+    proto: RMCBulletRifle10x24mmIncendiary
+
+- type: entity
+  parent: CMCartridgeRifle10x24mm
+  id: RMCCartridgeRifle10x24mmHEAP
+  name: HEAP cartridge (10x24mm)
+  description: An armor piercing 10x24mm cartridge. Fits in 10x24mm HEAP magazines.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifle10x24mmHEAP
+  - type: CartridgeAmmo
+    proto: RMCBulletRifle10x24mmHEAP
+
+- type: entity
   parent: RMCBaseBullet
   id: BulletRifle10x24mm
   categories: [ HideSpawnMenu ]
@@ -247,11 +334,52 @@
   - type: CMArmorPiercing
     amount: 40
 
+- type: entity
+  parent: BulletRifle10x24mm
+  id: RMCBulletRifle10x24mmIncendiary
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 33
+  - type: CMArmorPiercing
+    amount: 5
+  - type: IgniteOnProjectileHit
+
+- type: entity
+  parent: BulletRifle10x24mm
+  id: RMCBulletRifle10x24mmHEAP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 55
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 24
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 7
+      falloff: 4
+  - type: CMArmorPiercing
+    amount: 40
+
+- type: Tag
+  id: RMCWeaponRifleM54CMK2
+
 - type: Tag
   id: CMMagazineRifleM54C
 
 - type: Tag
   id: CMMagazineRifleM54CAP
+
+- type: Tag
+  id: RMCMagazineRifleM54CIncendiary
+
+- type: Tag
+  id: RMCMagazineRifleM54CHEAP
 
 - type: Tag
   id: CMMagazineRifleM54CExt
@@ -261,3 +389,9 @@
 
 - type: Tag
   id: CMCartridgeRifle10x24mmAP
+
+- type: Tag
+  id: RMCCartridgeRifle10x24mmIncendiary
+
+- type: Tag
+  id: RMCCartridgeRifle10x24mmHEAP

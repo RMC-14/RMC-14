@@ -14,7 +14,7 @@
             amount: 1
         steps:
           - tool: Anchoring
-            doAfter: 1
+            doAfter: 0
     - node: MetalReinforced
       edges:
       - to: start
@@ -27,7 +27,7 @@
             amount: 1
         steps:
           - tool: Anchoring
-            doAfter: 1
+            doAfter: 0
     - node: Wood
       edges:
       - to: start
@@ -37,7 +37,7 @@
             amount: 1
         steps:
           - tool: Anchoring
-            doAfter: 1
+            doAfter: 0
     - node: WoodCarpet
       edges:
       - to: start
@@ -50,5 +50,5 @@
           #   amount: 1
         steps:
           - tool: Anchoring
-            doAfter: 1
+            doAfter: 0
 

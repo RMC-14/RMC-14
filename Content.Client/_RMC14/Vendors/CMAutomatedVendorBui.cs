@@ -39,6 +39,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         _window = new CMAutomatedVendorWindow();
         _window.OnClose += Close;
         _window.Title = EntMan.GetComponentOrNull<MetaDataComponent>(Owner)?.EntityName ?? "ColMarTech Vendor";
@@ -86,13 +87,17 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                         uiEntry.Texture.Textures = SpriteComponent.GetPrototypeTextures(entity, _resource)
                             .Select(o => o.Default)
                             .ToList();
+                        if(entity.TryGetComponent<SpriteComponent>("Sprite", out var entitySprites))
+                        {
+                            uiEntry.Texture.Modulate = entitySprites.AllLayers.First().Color;
+                        }
                         uiEntry.Panel.Button.Label.Text = entry.Name?.Replace("\\n", "\n") ?? entity.Name;
 
                         var name = entity.Name;
                         var color = CMAutomatedVendorPanel.DefaultColor;
                         var borderColor = CMAutomatedVendorPanel.DefaultBorderColor;
                         var hoverColor = CMAutomatedVendorPanel.DefaultBorderColor;
-                        if (section.TakeAll != null)
+                        if (section.TakeAll != null || section.TakeOne != null)
                         {
                             name = $"Mandatory: {name}";
                             color = Color.FromHex("#251A0C");
@@ -127,7 +132,21 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
 
                         var sectionI = sectionIndex;
                         var entryI = entryIndex;
-                        uiEntry.Panel.Button.OnPressed += _ => OnButtonPressed(sectionI, entryI);
+                        var linkedEntryIndexes = new List<int>();
+
+                        foreach (var linkedEntry in entry.LinkedEntries)
+                        {
+                            var linkedEntryIndex = 0;
+                            foreach (var vendorEntry in section.Entries)
+                            {
+                                if(vendorEntry.Id == linkedEntry)
+                                    linkedEntryIndexes.Add(linkedEntryIndex);
+
+                                linkedEntryIndex++;
+                            }
+                        }
+
+                        uiEntry.Panel.Button.OnPressed += _ => OnButtonPressed(sectionI, entryI, linkedEntryIndexes);
                     }
 
                     uiSection.Entries.AddChild(uiEntry);
@@ -144,9 +163,9 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
         _window.OpenCentered();
     }
 
-    private void OnButtonPressed(int sectionIndex, int entryIndex)
+    private void OnButtonPressed(int sectionIndex, int entryIndex, List<int> linkedEntryIndexes)
     {
-        var msg = new CMVendorVendBuiMsg(sectionIndex, entryIndex);
+        var msg = new CMVendorVendBuiMsg(sectionIndex, entryIndex, linkedEntryIndexes);
         SendMessage(msg);
     }
 
@@ -218,6 +237,12 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                 {
                     var takeAll = user?.TakeAll;
                     if (takeAll != null && takeAll.Contains((takeAllId, entry.Id)))
+                        disabled = true;
+                }
+                if (section.TakeOne is { } takeOneId)
+                {
+                    var takeOne = user?.TakeOne;
+                    if (takeOne != null && takeOne.Contains(takeOneId))
                         disabled = true;
                 }
 
@@ -302,7 +327,14 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                 }
             }
         }
-
+        else if (section.TakeOne != null)
+        {
+            var takeOne = user?.TakeOne;
+            if (takeOne == null || !takeOne.Contains(section.TakeOne))
+            {
+                name.AddText(" (TAKE ONE)");
+            }
+        }
         else if (section.Choices is { } choices)
         {
             if (user == null)

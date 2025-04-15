@@ -1,6 +1,6 @@
 - type: entity
-  parent: CMBaseWeaponRifle
-  name: AR10 Assault Rifle
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
+  name: AR10 assault rifle
   id: WeaponRifleAR10
   description: An earlier version of the more widespread M16 rifle. Considered to be the father of the 20th century rifle. How one of these ended up here is a mystery of its own. It is chambered in 7.62x51mm.
   suffix: Filled
@@ -61,6 +61,7 @@
     accuracyMultiplier: 1.4
     accuracyMultiplierUnwielded: 0.5
   - type: AttachableHolder
+    randomAttachmentChance: 0.1
     slots:
       rmc-aslot-barrel:
         whitelist:
@@ -69,6 +70,11 @@
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentSuppressor
           - RMCM5Bayonet
+        random:
+        - RMCAttachmentSuppressor
+        - RMCM5Bayonet
+        - RMCAttachmentRecoilCompensator
+        - RMCAttachmentExtendedBarrel
       rmc-aslot-rail:
         whitelist:
           tags:
@@ -78,6 +84,10 @@
           - RMCAttachmentS6ReflexSight
           - RMCAttachmentS84xTelescopicScope
           - RMCAttachmentS42xTelescopicMiniscope
+        random:
+        - RMCAttachmentS5RedDotSight
+        - RMCAttachmentS6ReflexSight
+        - RMCAttachmentS42xTelescopicMiniscope
       rmc-aslot-underbarrel:
         whitelist:
           tags:
@@ -85,8 +95,12 @@
           - RMCAttachmentBipod
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentGyroscopicStabilizer
-          - RMCAttachmentLaserSight      
+          - RMCAttachmentLaserSight
           - RMCAttachmentVerticalGrip
+        random:
+        - RMCAttachmentAngledGrip
+        - RMCAttachmentVerticalGrip
+        - RMCAttachmentBipod
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.75, 0.00

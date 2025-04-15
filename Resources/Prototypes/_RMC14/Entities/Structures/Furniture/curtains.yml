@@ -4,6 +4,8 @@
   name: curtain
   abstract: true
   components:
+  - type: InteractionOutline
+  - type: Clickable
   - type: Destructible
     thresholds:
     - trigger:
@@ -41,6 +43,18 @@
     - state: closed
       color: "#B8F5E3"
       map: ["enum.DoorVisualLayers.Base"]
+
+- type: entity
+  parent: RMCCurtainMedical
+  id: RMCCurtainMedicalOpen
+  suffix: Open
+  components:
+  - type: Physics
+    canCollide: false
+  - type: Occluder
+    enabled: false
+  - type: Door
+    state: Open
 
 - type: entity
   parent: RMCCurtainBase

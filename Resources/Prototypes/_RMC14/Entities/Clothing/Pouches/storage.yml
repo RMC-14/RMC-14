@@ -67,30 +67,6 @@
     - id: RMCSpaceCash1000
     - id: RMCSpaceCash1000 # TODO RMC14 tape recorder
 
-
-# Fuel Tank Pouch
-- type: entity
-  parent: [RMCPouchOpenClosed, RMCPouchStorage]
-  id: RMCPouchFuelTank
-  name: fuel tank strap pouch
-  description: Two ring straps to loop around M240-pattern napalm tanks. Handle with care.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Pouches/fueltank.rsi
-  - type: Storage
-    grid:
-    - 0,0,3,1 #2 slots
-    whitelist:
-      tags:
-      - FireExtinguisher
-      # - TODO RMC14 M240
-  - type: FixedItemSizeStorage
-  - type: IgnoreContentsSize
-    items:
-      tags:
-      - FireExtinguisher
-      # - TODO RMC14 M240
-
 # Survival Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
@@ -292,6 +268,14 @@
       - CMMagazinePistol
       - RMCMagazineRevolver
 
+- type: entity
+  parent: RMCPouchMagazinePistol
+  id: RMCPouchMagazinePistolFilledMateba
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 4
 
 # Large Pistol Magazine Pouch
 - type: entity
@@ -351,26 +335,23 @@
       tags:
       - RMCShellShotgun
 
-
-# Expolosives Pouch
 - type: entity
-  parent: [RMCPouchOpenClosed, RMCPouchStorage]
-  id: RMCPouchExplosive
-  name: explosive pouch
-  description: It can carry grenades, plastic explosives, mine boxes, and other explosives.
+  parent: RMCPouchShotgunLarge
+  id: RMCPouchShotgunLargeBeanbag
   components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Pouches/large_explosive.rsi
-  - type: Storage
-    maxItemSize: Normal
-    grid:
-    - 0,0,11,1 #6 slots
-    whitelist:
-      tags:
-      - Grenade
-      - RMCExplosiveBreachingCharge
-  - type: FixedItemSizeStorage
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBeanbag
+      amount: 7
 
+- type: entity
+  parent: RMCPouchShotgunLarge
+  id: RMCPouchShotgunLargeSlugs
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunSlugs
+      amount: 7
 
 # Large Documents Pouch
 - type: entity
@@ -382,16 +363,20 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/document.rsi
   - type: Storage
+    quickInsert: true
+    areaInsert: true
+    quickInsertCooldown: 0
     maxItemSize: Normal
     grid:
-    - 0,0,21,1 #21 slots
+    - 0,0,13,5 #21 slots
     whitelist:
       tags:
       - Document
       - Folder
       - Write
+      - RMCIntelItem
   - type: FixedItemSizeStorage
-    size: 1,2
+  - type: Dumpable
 
 
 # Small Documents Pouch
@@ -403,7 +388,7 @@
   components:
   - type: Storage
     grid:
-    - 0,0,7,1 #7 slots
+    - 0,0,13,1 #7 slots
 
 
 # Flare Pouch
@@ -472,11 +457,13 @@
     - 0,0,11,1 #6 slots
     whitelist:
       tags:
+      - RMCCircuitboard
       - PowerCell
-#      - # TODO RMC14 the rest of the owl idk theres a lot check cm13
+#      - # TODO RMC14 6 different stock parts
       components:
       - ComputerBoard
       - MachineBoard
+      - SmartGunBattery
   - type: FixedItemSizeStorage
 
 - type: entity
@@ -486,46 +473,66 @@
   components:
   - type: StorageFill
     contents:
+    - id: CMAPCElectronics
+      amount: 3
     - id: RMCPowerCellHigh
       amount: 3
 
-
-# Construction Pouch
+# Engineer Kit Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
-  id: RMCPouchConstruction
-  name: construction pouch
-  description: It's designed to hold construction materials - glass/metal sheets, metal rods, barbed wire, cable coil, and empty sandbags. It also has two hooks for an entrenching tool and light replacer.
+  id: RMCPouchEngineerKit
+  name: engineer kit pouch
+  description: It's specifically made to hold engineering items. Requires engineering skills to use effectively.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Pouches/construction.rsi
+    sprite: _RMC14/Objects/Clothing/Pouches/engineerpouch.rsi
   - type: Storage
     maxItemSize: Normal
     grid:
-    - 0,0,5,1 #3 slots
+    - 0,0,11,1 #6 slots
     whitelist:
       tags:
-      - Sheet
-      - RodMetal1
+      - RMCCircuitboard
+      - Flashlight
+      - RMCWeldingGoggle
+      # - TODO RMC14 RMCAnalyzer
+      # - TODO RMC14 RMCDemoScanner
+      # - TODO RMC14 RMCReagentScanner
       - CableCoil
+      - PowerCell
+      # - TODO RMC14 RMCAssembly
+      # - TODO RMC14 RMCStockParts
+      - RMCExplosiveBreachingCharge
+      # - TODO RMC14 RMCSynthResetKey
       components:
-      - BarbedWire
-      - FloorTile
-      - EntrenchingTool
-      - EmptySandbag
-      - LightReplacer
+      - TrayScanner
+      - ComputerBoard
+      - MachineBoard
+  - type: StorageStoreSkillRequired
+    entries:
+    - whitelist:
+        tags:
+        - RMCCircuitboard
+        - Flashlight
+        - RMCWeldingGoggle
+        # - TODO RMC14 RMCAnalyzer
+        # - TODO RMC14 RMCDemoScanner
+        # - TODO RMC14 RMCReagentScanner
+        - CableCoil
+        - PowerCell
+        # - TODO RMC14 RMCAssembly
+        # - TODO RMC14 RMCStockParts
+        - RMCExplosiveBreachingCharge
+        # - TODO RMC14 RMCSynthResetKey
+        components:
+        - TrayScanner
+        - ComputerBoard
+        - MachineBoard
+      skills:
+        all:
+          RMCSkillEngineer: 2
   - type: FixedItemSizeStorage
-
-- type: entity
-  parent: RMCPouchConstruction
-  id: RMCPouchConstructionFillLowGrade
-  suffix: Low grade full
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMSheetPlasteel30
-    - id: CMSheetMetal50
-    - id: BarbedWire15
 
 
 # Tools Pouch

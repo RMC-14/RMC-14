@@ -1,4 +1,4 @@
-﻿- type: entity # TODO RMC14 sound
+- type: entity # TODO RMC14 sound
   id: XenoWeeds
   name: weeds
   description: Weird black weeds...
@@ -93,6 +93,7 @@
       Brute:
         collection: XenoResinBreak
   - type: ExplosionRandomResistance
+  - type: DeletedByWeedKiller
 #  - type: Physics
 #    bodyType: Static
 #  - type: FootstepModifier
@@ -121,6 +122,8 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: XenoConstructionPlasmaCost
+    plasma: 215
 
 - type: entity # TODO RMC14 sound
   parent: XenoWeeds
@@ -135,12 +138,16 @@
     range: 7
     spawns: XenoHiveWeeds
     level: 3
+    speedMultiplierOutsider: 0.338
+    speedMultiplierOutsiderArmor: 0.4856
     blockOtherWeeds: true
+    spreadsOnSemiWeedable: true
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
     drawdepth: FloorTiles
     layers:
     - state: hive_weed0
+  - type: HiveWeeds
   - type: IconSmooth
     key: cm_xeno_weeds
     base: hive_weed
@@ -183,6 +190,32 @@
         hive_weed14: ""
     - 0:
         hive_weed15: ""
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: XenoHiveWeeds
+  id: XenoHiveWeedsCluster
+  components:
+  - type: XenoWeeds
+    range: 6
+    spawns: XenoHiveWeedsCluster
+    level: 3
+
+- type: entity
+  parent: XenoHiveWeeds
+  id: XenoHiveWeedsCore
+  components:
+  - type: XenoWeeds
+    range: 8
+    spawns: XenoHiveWeedsCore
+    level: 3
 
 - type: entity # TODO RMC14 sound
   parent: XenoHiveWeeds
@@ -206,6 +239,7 @@
         acts: [ "Destruction" ]
   - type: XenoConstructionPlasmaCost
     plasma: 75
+
 - type: entity
   id: XenoWeedsWall
   name: weeds
@@ -232,8 +266,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
     drawdepth: Objects
-    layers:
-    - state: weedwall
+#    layers:
+#    - state: weedwall
   - type: IconSmooth
     key: cm_xeno_weeds_walls
     base: weedwall
@@ -269,6 +303,8 @@
     spawns: XenoHardyWeeds
     spreadsOnSemiWeedable: true
     fruitGrowthMultiplier: 0.8
+    speedMultiplierOutsider: 0.508
+    speedMultiplierOutsiderArmor: 0.6177
   - type: Destructible
     thresholds:
     - trigger:

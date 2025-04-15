@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   save: false
   parent: BaseMobSpecies
   id: CMBaseMobSpeciesOrganic
@@ -63,6 +63,8 @@
     - Pacified
     - StaminaModifier
     - Flashed
+    - Dazed
+    - Blinded
   - type: Blindable
   - type: Tag
     tags:
@@ -143,6 +145,8 @@
         type: SquadInfoBui
       enum.DialogUiKey.Key:
         type: DialogBui
+      enum.ViewIntelObjectivesUI.Key:
+        type: ViewIntelObjectivesBui
   - type: Infectable
   - type: Tackleable
   - type: Tackle
@@ -247,6 +251,39 @@
             sprite: _RMC14/Effects/xeno_spray_acid.rsi
             state: human_acid_enhanced
             visible: true
+      enum.HookedVisuals.Hooked:
+        hooked:
+          True: { visible: true }
+          False: { visible: false }
+      enum.TargetedVisuals.Targeted:
+        targeted:
+          None:
+            visible: false
+          Spotted:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: spotter_lockon
+            visible: true
+          Targeted:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: sniper_lockon
+            visible: true
+          TargetedIntense:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: sniper_lockon_intense
+            visible: true
+      enum.TargetedVisuals.TargetedDirection:
+        targetedDirection:
+          True: { visible: true}
+          False: { visible: false}
+      enum.TargetedVisuals.TargetedDirectionIntense:
+        targetedDirectionIntense:
+          True: { visible: true }
+          False: { visible: false }
+      enum.FocusedVisuals.Focused:
+        focused:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Spottable
   - type: ActiveInputMover
   - type: DropItemsOnRest
   - type: UserBlockShootingInsideContainers
@@ -270,6 +307,7 @@
       - CanBeSupplyDropped
   - type: NewPlayerLabel
   - type: MarineMapTracked
+  - type: RMCSetPose
   - type: Evasion
   - type: CanBeFirePatted
   - type: FirePatter
@@ -278,3 +316,26 @@
       - Xeno
   - type: RMCPickupDroppedItems
   - type: CommendationReceiver
+  - type: RMCSpeciesSlowdownModifier
+    slowMultiplier: 0.66
+    superSlowMultiplier: 0.33
+  - type: RMCHandEmotes
+  - type: RMCBuckleDrawDepth
+  - type: RMCObstacleSlamming
+  - type: AllowPullWhileDeadAndInfected
+  - type: DamageOnPulledWhileCrit
+    damage:
+      types:
+        Asphyxiation: 1.6
+    pullerWhitelist:
+      components:
+      - Xeno # TODO RMC14 not allied xenos
+  - type: IgnoreInteractionRange
+    whitelist:
+      components:
+      - OverwatchConsole
+      tags:
+      - RMCDropshipEnginePoint
+    range: 2
+  - type: RMCArmorModifier
+    meleeArmorModifier: 5

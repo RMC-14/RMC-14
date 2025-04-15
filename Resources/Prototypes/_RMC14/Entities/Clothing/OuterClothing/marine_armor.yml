@@ -8,7 +8,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/standard/padded/jungle.rsi
   - type: CMArmor
-    armor: 20
+    melee: 20
+    bullet: 20
     bio: 20
     explosionArmor: 15
   - type: RMCArmorSpeedTier
@@ -136,7 +137,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/b12/jungle.rsi
   - type: CMArmor
-    armor: 25
+    melee: 25
     bio: 25
     explosionArmor: 20
   - type: ItemCamouflage
@@ -156,7 +157,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/eod/padded/jungle.rsi
   - type: CMArmor
-    armor: 25
+    melee: 25
+    bullet: 35
     bio: 25
     explosionArmor: 35
   - type: RMCArmorSpeedTier
@@ -326,12 +328,37 @@
   parent: CMArmorM2MP
   id: RMCArmorM3CO
   name: M3 pattern commanding officer armor
-  description: A robust, well-polished suit of armor for the Commanding Officer. Custom-made to fit its owner with special straps to operate a smartgun. Show those Marines who's really in charge.
+  description: A robust, well-polished suit of armor for the Commanding Officer. Custom-made to fit its owner with special straps to operate a smart gun. Show those Marines who's really in charge.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co.rsi
   - type: CMArmor
-    armor: 30
+    bullet: 30
+    bio: 20
+    explosionArmor: 15
+  - type: SmartGunArmor
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,5,1 # 3 slots
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/co/urban.rsi
+
+- type: entity
+  parent: CMArmorM2MP
+  id: RMCArmorM3General
+  name: M3 pattern general officer armor
+  description: A well-crafted suit of M3 Pattern Armor with a gold shine. It looks very expensive, but shockingly fairly easy to carry and wear.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/ceremonial.rsi
+  - type: CMArmor
+    bullet: 30
     bio: 20
     explosionArmor: 15
   - type: SmartGunArmor
@@ -351,7 +378,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/g4/jungle.rsi
   - type: CMArmor
-    armor: 25
+    melee: 25
+    bullet: 25
     bio: 15
     explosionArmor: 40
   - type: Corrodible
@@ -398,7 +426,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/light/padded/jungle.rsi
   - type: CMArmor
-    armor: 15
+    melee: 15
+    bullet: 15
     bio: 15
     explosionArmor: 20
   - type: RMCArmorSpeedTier
@@ -542,7 +571,7 @@
     walkModifier: .725
     sprintModifier: .725
   - type: CMArmor
-    armor: 25
+    melee: 25
   - type: Tag
     tags:
       - RMCScoutArmor
@@ -563,7 +592,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/vl.rsi
   - type: CMArmor
-    armor: 15
+    melee: 15
+    bullet: 30
     bio: 15
     explosionArmor: 10
   - type: Storage
@@ -600,7 +630,10 @@
     equipDelay: 1
     unequipDelay: 0.5
   - type: CMArmor
-    armor: 0 # CLOTHING_ARMOR_NONE
+    melee: 0 # CLOTHING_ARMOR_NONE
+    bullet: 0
+    bio: 0
+    explosionArmor: 0
   - type: RMCArmorSpeedTier
     speedTier: super light
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_SUPER_LIGHT
@@ -653,6 +686,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/jungle.rsi
   - type: Corrodible
     isCorrodible: false
+  - type: CMArmor
+    bio: 25
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/m35/jungle.rsi
@@ -672,6 +707,8 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/jungle.rsi
   - type: Corrodible
     isCorrodible: false
+  - type: CMArmor
+    bio: 25
   - type: RMCArmorSpeedTier
     speedTier: light
   - type: ClothingSpeedModifier # light armor speed
@@ -681,6 +718,7 @@
     whitelist:
       components:
       - SniperWhitelist
+      - SpotterWhitelist
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/jungle.rsi
@@ -688,6 +726,15 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/ghillie/urban.rsi
+  - type: SquadArmor
+    layer: Armor
+    slot: OUTERCLOTHING
+    rsi:
+      sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: snpr-armor
+    leaderRsi:
+      sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: snpr-armor
 
 # Smart Gun
 - type: entity
@@ -702,6 +749,8 @@
     maxItemSize: Small
     grid:
     - 0,0,3,1 # 2 slots
+  - type: CMArmor
+    explosionArmor: 20
   - type: RMCArmorSpeedTier
     speedTier: light
   - type: ClothingSpeedModifier
@@ -727,7 +776,8 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/jungle.rsi
   - type: CMArmor
-    armor: 25
+    melee: 25
+    bullet: 20
     bio: 15
     explosionArmor: 20
   - type: RMCArmorSpeedTier
@@ -746,3 +796,35 @@
       Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/snow.rsi
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m2/mp/urban.rsi
+
+- type: entity
+  parent: CMArmorM4
+  id: RMCArmorXM4
+  name: XM4 pattern intel armor
+  description: Tougher than steel, quieter than whispers, the XM4 Intel Armor provides capable protection combined with an experimental integrated motion tracker. It took an R&D team a weekend to develop and costs more than the Chinook Station... probably. When worn, uniform accessories such as webbing cannot be attached due to the motion sensors occupying the clips.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/io/jungle.rsi
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,9,1 # 5 slots
+  - type: ClothingBlockWebbing
+  - type: ClothingRequireEquipped
+    denyReason: rmc-intel-not-intel-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformIntel
+  - type: MotionDetector
+    handToggleable: false
+  - type: ToggleableMotionDetector
+    slots:
+    - OUTERCLOTHING
+    batteryDrain: 0
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/OuterClothing/Armor/io/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/OuterClothing/Armor/io/desert.rsi
+      Snow: _RMC14/Objects/Clothing/OuterClothing/Armor/io/snow.rsi
+      Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/io/classic.rsi
+      Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/io/urban.rsi

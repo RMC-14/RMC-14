@@ -279,7 +279,7 @@
   - type: CMArmorPiercing
     amount: 25
   - type: RMCProjectileAccuracy
-    accuracy: 95
+    accuracy: 105
   - type: IgniteOnProjectileHit
 
 - type: Tag

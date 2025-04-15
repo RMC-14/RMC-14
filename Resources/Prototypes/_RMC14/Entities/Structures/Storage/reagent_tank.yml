@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   parent: [StorageTank, StructureWheeled]
   id: RMCTankReagentEmpty
   name: reagent tank
@@ -49,30 +49,31 @@
   - type: Corrodible
     timeToApply: 4
     structure: true
+  - type: Tag
+    tags:
+    - RMCTankReagent
+    - Structure
 
 - type: entity
   parent: RMCTankReagentEmpty
   id: RMCTankReagentWater
-  name: water tank
-  description: A water tank, holds water.
-  suffix: full
+  suffix: Water
   components:
-  - type: Sprite
-    layers:
-    - state: watertank
   - type: SolutionContainerManager
     solutions:
       tank:
         reagents:
         - ReagentId: Water
           Quantity: 1000
+  - type: Label
+    currentLabel: reagent-name-water
 
 - type: entity
   parent: RMCTankReagentEmpty
   id: RMCTankReagentFuel
   name: fuel tank
-  description: A fuel tank, for holding welding fuel.
-  suffix: full
+  description: A fuel tank, normally used to hold welding fuel. It's painted red with explosive warning labels.
+  suffix: Fuel
   components:
   - type: Sprite
     layers:
@@ -103,3 +104,15 @@
     weldingDamage:
       types:
         Heat: 100
+  - type: Label
+    currentLabel: reagent-name-welding-fuel
+  - type: Tag
+    tags:
+    - RMCTankFuel
+    - RMCTankReagent
+
+- type: Tag
+  id: RMCTankFuel
+
+- type: Tag
+  id: RMCTankReagent

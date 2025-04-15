@@ -39,6 +39,22 @@
 - type: entity
   abstract: true
   parent: RMCUniformBase
+  id: RMCAlternateFoldableUniformBase
+  components:
+  - type: RMCClothingFoldable
+    types:
+    - name: rmc-jacket-verb
+      prefix: jacket
+      priority: 0
+    - name: rmc-sleeves-verb
+      prefix: sleeves
+      priority: 1
+      blacklistedPrefix: jacket
+      blacklistPopup: rmc-sleeves-cannot
+
+- type: entity
+  abstract: true
+  parent: RMCUniformBase
   id: RMCUniformSuitCoordsBase
   components:
   - type: SuitSensor
@@ -52,4 +68,5 @@
   id: RMCMarineUniformBase
   components:
   - type: CMArmor
-    armor: 10
+    bullet: 10
+    melee: 10

@@ -4,6 +4,7 @@ using Content.Shared.Roles;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Rules;
 
@@ -98,7 +99,17 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public EntProtoId? LandingZoneGas = "RMCLandingZoneGas";
 
     [DataField]
-    public ProtoId<JobPrototype> SurvivorJob = "CMSurvivor";
+    public ProtoId<JobPrototype> CivilianSurvivorJob = "CMSurvivor";
+
+    [DataField]
+    public List<(ProtoId<JobPrototype> Job, int Amount)> SurvivorJobs =
+    [
+        ("CMSurvivorEngineer", 4),
+        ("CMSurvivorDoctor", 3),
+        ("CMSurvivorSecurity", 2),
+        ("CMSurvivorCorporate", 2),
+        ("CMSurvivor", -1),
+    ];
 
     [DataField]
     public TimeSpan AresGreetingDelay = TimeSpan.FromSeconds(5);
@@ -138,4 +149,13 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 
     [DataField]
     public TimeSpan RoundEndCheckDelay = TimeSpan.FromMinutes(1);
+
+    [DataField]
+    public ResPath Thunderdome = new("/Maps/_RMC14/thunderdome.yml");
+
+    [DataField]
+    public ProtoId<JobPrototype> XenoSurvivorCorpseJob = "CMSurvivor";
+
+    [DataField]
+    public TimeSpan XenoSurvivorCorpseBurstDelay = TimeSpan.FromSeconds(0);
 }

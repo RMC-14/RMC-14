@@ -1,0 +1,427 @@
+﻿- type: entity
+  parent: RMCBaseWindowFrame
+  id: RMCWindowFrameHybrisa
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/hybrisa_frame.rsi
+    state: strata_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/hybrisa_frame.rsi
+    state: strata_frame0
+  - type: IconSmooth
+    key: walls
+    base: strata_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowHybrisa
+    node: windowFrameHybrisa
+
+- type: entity
+  parent: RMCWindowFrameColonyReinforced
+  id: RMCWindowFrameHybrisaReinforced
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/hybrisa_frame.rsi
+    state: strata_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/hybrisa_frame.rsi
+    state: strata_frame0
+  - type: IconSmooth
+    key: walls
+    base: strata_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowHybrisaReinforced
+    node: windowFrameHybrisaReinforced
+
+- type: entity
+  parent: CMBaseWindow
+  id: RMCWindowHybrisa
+  name: window
+  description: A glass window inside a wall frame.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/hybrisa_window.rsi
+    state: strata_window0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/hybrisa_window.rsi
+    state: strata_window0
+  - type: IconSmooth
+    key: walls
+    base: strata_window
+    mode: CardinalFlags
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 40
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameHybrisa
+  - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
+  - type: Construction
+    graph: RMCWindowHybrisa
+    node: windowHybrisa
+
+- type: entity
+  parent: CMBaseWindow
+  id: RMCWindowHybrisaReinforced
+  name: reinforced window
+  description: A glass window. Light refracts incorrectly when looking through. It looks rather strong. Might take a few good hits to shatter it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/hybrisa_window.rsi
+    state: strata_window0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/hybrisa_window.rsi
+    state: strata_window0
+  - type: IconSmooth
+    key: walls
+    base: strata_window
+    mode: CardinalFlags
+  - type: Repairable
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameHybrisa
+  - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
+  - type: Construction
+    graph: RMCWindowHybrisa
+    node: windowHybrisa
+
+- type: entity
+  parent: CMBaseWindowIndestructible
+  id: RMCWindowHybrisaHull
+  name: hull window
+  description: A glass window. Light refracts incorrectly when looking through. It looks rather strong. No way to get through here.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/hybrisa_window.rsi
+    state: strata_window0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/hybrisa_window.rsi
+    state: strata_window0
+  - type: IconSmooth
+    key: walls
+    base: strata_window
+    mode: CardinalFlags
+
+# Medical
+
+- type: entity
+  parent: RMCWindowFrameHybrisaReinforced
+  id: RMCWindowFrameHybrisaMedicalReinforced
+  suffix: medical
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/hybrisa_frame_medical.rsi
+    state: strata_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/hybrisa_frame_medical.rsi
+    state: strata_frame0
+  - type: IconSmooth
+    key: walls
+    base: strata_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowHybrisaMedicalReinforced
+    node: windowFrameHybrisaMedicalReinforced
+
+- type: entity
+  parent: RMCWindowHybrisaReinforced
+  id: RMCWindowHybrisaMedicalReinforced
+  suffix: medical
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/hybrisa_window_medical.rsi
+    state: strata_window0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/hybrisa_window_medical.rsi
+    state: strata_window0
+  - type: IconSmooth
+    key: walls
+    base: strata_window
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowHybrisaMedicalReinforced
+    node: windowHybrisaMedicalReinforced
+
+# Engineering
+
+- type: entity
+  parent: RMCWindowFrameHybrisaReinforced
+  id: RMCWindowFrameHybrisaEngiReinforced
+  suffix: engineering
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/hybrisa_frame_engineering.rsi
+    state: strata_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/hybrisa_frame_engineering.rsi
+    state: strata_frame0
+  - type: IconSmooth
+    key: walls
+    base: strata_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowHybrisaEngiReinforced
+    node: windowFrameHybrisaEngiReinforced
+
+- type: entity
+  parent: RMCWindowHybrisaReinforced
+  id: RMCWindowHybrisaEngiReinforced
+  suffix: engineering
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/hybrisa_window_engineering.rsi
+    state: strata_window0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/hybrisa_window_engineering.rsi
+    state: strata_window0
+  - type: IconSmooth
+    key: walls
+    base: strata_window
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowHybrisaEngiReinforced
+    node: windowHybrisaEngiReinforced
+
+# Office
+
+- type: entity
+  parent: RMCWindowFrameHybrisaReinforced
+  id: RMCWindowFrameHybrisaOfficeReinforced
+  suffix: office
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/hybrisa_frame_office.rsi
+    state: strata_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/hybrisa_frame_office.rsi
+    state: strata_frame0
+  - type: IconSmooth
+    key: walls
+    base: strata_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowHybrisaOfficeReinforced
+    node: windowFrameHybrisaOfficeReinforced
+
+- type: entity
+  parent: RMCWindowHybrisaReinforced
+  id: RMCWindowHybrisaOfficeReinforced
+  suffix: office
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/hybrisa_window_office.rsi
+    state: strata_window0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/hybrisa_window_office.rsi
+    state: strata_window0
+  - type: IconSmooth
+    key: walls
+    base: strata_window
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowHybrisaOfficeReinforced
+    node: windowHybrisaOfficeReinforced
+
+# Space Port
+
+- type: entity
+  parent: RMCWindowFrameHybrisa
+  id: RMCWindowFrameHybrisaSpacePort
+  suffix: space port
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/hybrisa_spaceport_frame.rsi
+    state: prison_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/hybrisa_spaceport_frame.rsi
+    state: prison_frame0
+  - type: IconSmooth
+    key: walls
+    base: prison_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowHybrisaSpacePort
+    node: windowFrameHybrisaSpacePort
+
+- type: entity
+  parent: RMCWindowHybrisa
+  id: RMCWindowHybrisaSpacePort
+  suffix: space port
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/spaceport_window.rsi
+    state: prison_window0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/spaceport_window.rsi
+    state: prison_window0
+  - type: IconSmooth
+    key: walls
+    base: prison_window
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowHybrisaSpacePort
+    node: windowHybrisaSpacePort
+
+- type: entity
+  parent: RMCWindowFrameHybrisaReinforced
+  id: RMCWindowFrameHybrisaSpacePortReinforced
+  suffix: space port
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/hybrisa_spaceport_frame.rsi
+    state: prison_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/hybrisa_spaceport_frame.rsi
+    state: prison_frame0
+  - type: IconSmooth
+    key: walls
+    base: prison_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowHybrisaSpacePortReinforced
+    node: windowFrameHybrisaSpacePortReinforced
+
+- type: entity
+  parent: RMCWindowHybrisaReinforced
+  id: RMCWindowHybrisaSpacePortReinforced
+  suffix: space port
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/rspaceport_window.rsi
+    state: prison_window0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/rspaceport_window.rsi
+    state: prison_window0
+  - type: IconSmooth
+    key: walls
+    base: prison_window
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowHybrisaSpacePortReinforced
+    node: windowHybrisaSpacePortReinforced
+
+- type: entity
+  parent: RMCWindowFrameHybrisaReinforced
+  id: RMCWindowFrameHybrisaSpacePortCell
+  suffix: space port
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/hybrisa_spaceport_frame.rsi
+    state: prison_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/hybrisa_spaceport_frame.rsi
+    state: prison_frame0
+  - type: IconSmooth
+    key: walls
+    base: prison_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowHybrisaSpacePortCell
+    node: windowFrameHybrisaSpacePortCell
+
+- type: entity
+  parent: RMCWindowHybrisaReinforced
+  id: RMCWindowHybrisaSpacePortCell
+  suffix: space port
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/spaceport_cellwindow.rsi
+    state: prison_window0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/spaceport_cellwindow.rsi
+    state: prison_window0
+  - type: IconSmooth
+    key: walls
+    base: prison_window
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowHybrisaSpacePortCell
+    node: windowHybrisaSpacePortCell
+
+# Research
+
+- type: entity
+  parent: RMCWindowFrameHybrisaReinforced
+  id: RMCWindowFrameHybrisaResearchReinforced
+  suffix: research
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/hybrisa_frame_research.rsi
+    state: strata_frame0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/hybrisa_frame_research.rsi
+    state: strata_frame0
+  - type: IconSmooth
+    key: walls
+    base: strata_frame
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowHybrisaResearchReinforced
+    node: windowFrameHybrisaResearchReinforced
+
+- type: entity
+  parent: RMCWindowHybrisaReinforced
+  id: RMCWindowHybrisaResearchReinforced
+  suffix: research
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/hybrisa_window_research.rsi
+    state: strata_window0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/hybrisa_window_research.rsi
+    state: strata_window0
+  - type: IconSmooth
+    key: walls
+    base: strata_window
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowHybrisaResearchReinforced
+    node: windowHybrisaResearchReinforced

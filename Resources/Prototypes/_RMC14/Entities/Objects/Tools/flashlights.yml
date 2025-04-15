@@ -52,12 +52,14 @@
   - type: Clothing
     quickEquip: false
     slots:
+    - belt
     - suitstorage
+  - type: NoHandsInteractionBlocked
 
 - type: entity
-  parent: RMCBoxMagazineBase
+  parent: RMCBoxMagazineSupplyBase
   id: RMCBoxFlashlightsEmpty
-  name: box of flashlights
+  name: box of flashlights (x8)
   description: A box of flashlights to brighten your day!
   components:
   - type: Construction
@@ -73,32 +75,18 @@
         tags:
         - Flashlight
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     layers:
-    - state: flashlightbox_deployed
-      map: [ "un_lid" ]
-      visible: false
-    - state: magaz_flashlight
+    - state: supply_box
+      color: "#887b67"
+    - state: supply_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: flashlightbox
+      color: "#b2bdc4"
+    - state: supply_box_flashlight
+      color: "#e0d5c2"
+    - state: supply_lid_closed
       map: [ "lid" ]
+      color: "#887b67"
   - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.DeployableItemVisuals.Deployed:
-        lid:
-          True: { visible: false }
-          False: { visible: true }
-        un_lid:
-          True: { visible: true }
-          False: { visible: false }
-      enum.CMItemSlotsLayers.Fill:
-        enum.CMItemSlotsLayers.Fill:
-          Empty: { state: magaz_flashlight, visible: false }
-          Low: { state: magaz_flashlight_1, visible: true }
-          Medium: { state: magaz_flashlight_2, visible: true }
-          High: { state: magaz_flashlight_3, visible: true }
-          Full: { state: magaz_flashlight, visible: true }
 
 - type: entity
   parent: RMCBoxFlashlightsEmpty

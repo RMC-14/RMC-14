@@ -1,0 +1,41 @@
+- type: entity
+  parent: RMCBaseEffect
+  id: RMCEffectEmoteBase
+  abstract: true
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 20
+  - type: Sprite
+    offset: 0, 0.65
+    sprite: _RMC14/Effects/emotes.rsi
+    noRot: true
+    drawdepth: Effects
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  parent: RMCEffectEmoteBase
+  id: RMCEffectFistbump
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: emote_fistbump
+
+- type: entity
+  parent: RMCEffectEmoteBase
+  id: RMCEffectHighfive
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: emote_highfive
+
+- type: entity
+  parent: RMCEffectEmoteBase
+  id: RMCEffectTailswipe
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: emote_tailswipe

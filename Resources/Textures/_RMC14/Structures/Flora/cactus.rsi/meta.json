@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0525b5ada7da1afcd9b260e76d5fea01500d9c8d/icons/obj/structures/props/natural/vegetation/dam.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "cactus_3"
+    },
+    {
+      "name": "cactus_4"
+    },
+    {
+      "name": "cactus_7"
+    },
+    {
+      "name": "cactus_8"
+    },
+    {
+      "name": "cacti_1"
+    },
+    {
+      "name": "cacti_2"
+    },
+    {
+      "name": "cacti_7"
+    },
+    {
+      "name": "cacti_8"
+    },
+    {
+      "name": "cacti_9"
+    },
+    {
+      "name": "cacti_10"
+    },
+    {
+      "name": "cacti_11"
+    },
+    {
+      "name": "cacti_12"
+    }
+  ]
+}

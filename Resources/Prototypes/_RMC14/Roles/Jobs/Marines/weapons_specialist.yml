@@ -7,7 +7,17 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMSquad
-    time: 18000 # 5 hours
+    time: 36000 # 10 hours
+  ranks:
+    RMCRankSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobWeaponsSpecialist
+      time: 252000 # 70 hours
+    RMCRankCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobWeaponsSpecialist
+      time: 36000 # 10 hours
+    RMCRankLanceCorporal: []
   startingGear: CMGearWeaponsSpecialist
   dummyStartingGear: CMGearWeaponsSpecialistEquipped
   icon: "CMJobIconWeaponsSpecialist"
@@ -15,7 +25,7 @@
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - WeaponSpec
-  overwatchSortPriority: -3
+  overwatchSortPriority: -4
   overwatchShowName: true
   overwatchRoleName: Specialist
   minimapIcon:
@@ -42,7 +52,11 @@
         Specialist: 120
     - type: SquadArmorWearer
     - type: JobPrefix
-      prefix: "Spc"
+      prefix: cm-job-prefix-weapons-specialist
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: spec
 
 - type: startingGear
   id: CMGearWeaponsSpecialist
@@ -71,10 +85,7 @@
   - type: SpawnPoint
     job_id: CMWeaponsSpecialist
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: weapons_specialist
+    state: spec_spawn
 
 - type: entity
   parent: CMSpawnPointWeaponsSpecialist
@@ -84,6 +95,8 @@
   - type: SquadSpawner
     squad: SquadAlpha
     role: CMWeaponsSpecialist
+  - type: Sprite
+    state: spec_spawn_alpha
 
 - type: entity
   parent: CMSpawnPointWeaponsSpecialist
@@ -93,6 +106,8 @@
   - type: SquadSpawner
     squad: SquadBravo
     role: CMWeaponsSpecialist
+  - type: Sprite
+    state: spec_spawn_bravo
 
 - type: entity
   parent: CMSpawnPointWeaponsSpecialist
@@ -102,6 +117,8 @@
   - type: SquadSpawner
     squad: SquadCharlie
     role: CMWeaponsSpecialist
+  - type: Sprite
+    state: spec_spawn_charlie
 
 - type: entity
   parent: CMSpawnPointWeaponsSpecialist
@@ -111,4 +128,22 @@
   - type: SquadSpawner
     squad: SquadDelta
     role: CMWeaponsSpecialist
+  - type: Sprite
+    state: spec_spawn_delta
 
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCWeaponsSpecialist
+  components:
+  - type: GhostRole
+    name: cm-job-name-weapons-specialist
+    description: cm-job-description-weapons-specialist
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    raffle:
+      settings: default
+    job: CMWeaponsSpecialist
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobWeaponsSpecialist
+      time: 1

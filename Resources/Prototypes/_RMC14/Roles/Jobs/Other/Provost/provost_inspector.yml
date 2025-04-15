@@ -1,0 +1,114 @@
+﻿- type: job
+  parent: CMJobBase
+  id: CMProvostInspector
+  name: rmc-job-name-provost-inspector
+  description: rmc-job-description-provost-inspector
+  playTimeTracker: CMJobProvostInspector
+  ranks:
+    RMCRankProvostInspector: []
+  startingGear: RMCGearProvostInspector
+  icon: RMCJobIconProvostInspector
+  joinNotifyCrew: false
+  accessGroups:
+  - ShipMasterAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 3
+        RMCSkillEndurance: 3
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillPolice: 2
+    - type: JobPrefix
+      prefix: rmc-job-prefix-provost-inspector
+  hidden: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerProvostInspector
+  name: provost spawner inspector
+  suffix: Spawner, Player, Medium Law Understanding
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCRandomHumanoidProvostInspector
+
+- type: entity
+  id: RMCRandomHumanoidProvostInspector
+  name: provost ghost role inspector
+  suffix: Role, Player, Medium Law Understanding
+  components:
+  - type: Sprite
+    sprite: Markers/cross.rsi
+    state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCProvostInspector
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCProvostInspector
+  components:
+  - type: GhostRole
+    name: rmc-ghost-role-information-provost-inspector-name
+    description: rmc-ghost-role-information-provost-inspector-description
+    rules: ghost-role-information-nonantagonist-rules
+    raffle:
+      settings: short
+  - type: Loadout
+    prototypes: [ RMCGearProvostInspector ]
+  - type: Skills
+    skills:
+      RMCSkillCqc: 3
+      RMCSkillEndurance: 3
+      RMCSkillFirearms: 1
+      RMCSkillFireman: 2
+      RMCSkillMeleeWeapons: 1
+      RMCSkillPolice: 2
+
+- type: startingGear
+  id: RMCGearProvostInspector
+  equipment:
+    head: RMCHeadBeretProvostSenior
+    eyes: CMGlassesSecurity
+    ears: RMCHeadsetProvost
+    jumpsuit: CMJumpsuitProvostSenior
+    outerClothing: RMCProvostJacketFilled
+    gloves: CMHandsBlackMarine # TODO RMC14 black gloves
+    shoes: CMBootsBlackFilled
+    id: RMCIDCardProvostInspector
+    belt: CMBeltSecurityMPFilled
+    back: CMSatchelSecurityFilledProvost
+    #    pocket1: # TODO RMC14 tape recorder
+    pocket2: RMCPouchGeneralLarge # TODO RMC14 3 listening devices
+
+- type: playTimeTracker
+  id: CMJobProvostInspector
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconProvostInspector
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_pva
+
+- type: entity
+  parent: CMIDCardGold # TODO RMC14 provost id
+  id: RMCIDCardProvostInspector
+  name: provost inspector ID card
+  description: Issued to members of the Provost Office.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+  - type: PresetIdCard
+    job: CMProvostInspector

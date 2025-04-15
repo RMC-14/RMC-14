@@ -1,4 +1,5 @@
 ﻿using Content.Shared.Damage;
+using Content.Shared.Physics;
 using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 
@@ -28,4 +29,7 @@ public sealed partial class RMCIgniteOnCollideComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityWhitelist? ArmorWhitelist;
+
+    [DataField, AutoNetworkedField]
+    public CollisionGroup Collision = CollisionGroup.FullTileLayer;
 }

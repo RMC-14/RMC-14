@@ -20,6 +20,8 @@
       entries:
       - id: CMJumpsuitLiaisonBlack
         amount: 1
+      - id: RMCJumpsuitLiaisonBlackSuitskirt
+        amount: 1
       - id: CMJumpsuitLiaisonBlue
         amount: 1
       - id: CMJumpsuitLiaisonBrown
@@ -29,6 +31,8 @@
       - id: CMJumpsuitLiaison
         amount: 1
       - id: CMJumpsuitLiaisonCharcoal
+        amount: 1
+      - id: RMCJumpsuitLiaisonCharcoalSuitskirt
         amount: 1
       - id: CMJumpsuitLiaisonFormal
         amount: 1
@@ -42,6 +46,8 @@
         amount: 1
 #      - id: OrangeOutfit
       - id: CMJumpsuitLiaisonField
+        amount: 1
+      - id: RMCJumpsuitLiaisonFieldSuitskirt
         amount: 1
       - id: CMJumpsuitLiaisonOutingRed
         amount: 1
@@ -93,6 +99,8 @@
     - name: Glasses
       entries:
       - id: RMCGlassesMarineRpg #Placeholder
+        amount: 1
+      - id: RMCGlassesMarineRpgOld #Placeholder
         amount: 1
       - id: RMCSunglassesBig
         amount: 1

@@ -53,6 +53,9 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: Construction
+    graph: RMCWindowDirectional
+    node: windowDirectional
 
 - type: entity
   id: CMWindowReinforcedDirectional
@@ -93,6 +96,9 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: Construction
+    graph: RMCWindowDirectional
+    node: windowReinforcedDirectional
 
 - type: entity
   id: CMWindowTintedDirectional

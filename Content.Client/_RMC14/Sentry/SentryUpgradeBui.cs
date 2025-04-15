@@ -33,6 +33,7 @@ public sealed class SentryUpgradeBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         _menu = new SentryUpgradeMenu();
         _menu.OnClose += Close;
 

@@ -383,3 +383,8 @@
     sprite: _RMC14/Objects/Medical/Surgery/bone_gel.rsi
     state: bone-gel
   - type: CMBoneGel
+
+- type: entity
+  parent: CMBoneGel
+  id: RMCBoneGelEmpty
+  suffix: Empty # TODO RMC14

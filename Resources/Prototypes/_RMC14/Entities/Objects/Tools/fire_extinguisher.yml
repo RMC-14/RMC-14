@@ -12,6 +12,9 @@
   - type: Spray
     transferAmount: 5
     sprayedPrototype: RMCExtinguisherSpray
+    vaporAmount: 3
+    sprayDistance: 5
+    sprayVelocity: 5
   - type: SolutionContainerManager
     solutions:
       spray:

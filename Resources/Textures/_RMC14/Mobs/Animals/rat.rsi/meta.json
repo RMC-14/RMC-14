@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/icons/mob/animal.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon-0"
+    },
+    {
+      "name": "icon-1"
+    },
+    {
+      "name": "icon-2"
+    },
+    {
+      "name": "icon-3"
+    },
+    {
+      "name": "rat-0",
+      "directions": 4
+    },
+    {
+      "name": "rat-1",
+      "directions": 4
+    },
+    {
+      "name": "rat-2",
+      "directions": 4
+    },
+    {
+      "name": "rat-3",
+      "directions": 4
+    },
+    {
+      "name": "dead-0"
+    },
+    {
+      "name": "dead-1"
+    },
+    {
+      "name": "dead-2"
+    },
+    {
+      "name": "dead-3"
+    },
+    {
+      "name": "splat-0"
+    },
+    {
+      "name": "splat-1"
+    },
+    {
+      "name": "splat-2"
+    },
+    {
+      "name": "splat-3"
+    }
+  ]
+}

@@ -214,3 +214,19 @@
   - type: Sprite
     state: p_stair_solo_cap
     color: "#6b675e"
+
+- type: entity
+  parent: RMCStairs
+  id: RMCHybrisaStairs
+  components:
+  - type: Sprite
+    state: rampbottom
+    color: "#a6aeab"
+
+- type: entity
+  parent: RMCStairs
+  id: RMCHybrisaStairsPerspective
+  components:
+  - type: Sprite
+    state: p_stair_full
+    color: "#6e6e6e"

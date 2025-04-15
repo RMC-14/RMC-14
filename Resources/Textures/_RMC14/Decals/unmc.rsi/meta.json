@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Original high-res image by KittenColony, edited by SG6732",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "unmc1"
+    },
+    {
+      "name": "unmc2"
+    },
+    {
+      "name": "unmc3"
+    },
+    {
+      "name": "unmc4"
+    },
+    {
+      "name": "unmc5"
+    },
+    {
+      "name": "unmc6"
+    },
+    {
+      "name": "unmc7"
+    },
+    {
+      "name": "unmc8"
+    },
+    {
+      "name": "unmc9"
+    }
+  ]
+}

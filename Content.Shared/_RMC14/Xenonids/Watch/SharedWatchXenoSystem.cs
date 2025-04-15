@@ -38,8 +38,6 @@ public abstract class SharedWatchXenoSystem : EntitySystem
 
     private void OnXenoWatchBui(Entity<XenoComponent> xeno, ref XenoWatchBuiMsg args)
     {
-        _ui.CloseUi(xeno.Owner, XenoWatchUIKey.Key, args.Actor);
-
         if (!TryGetEntity(args.Target, out var target))
             return;
 

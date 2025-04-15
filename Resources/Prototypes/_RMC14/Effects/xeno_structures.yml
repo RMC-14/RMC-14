@@ -8,6 +8,8 @@
     drawdepth: Effects
     sprite: /Textures/_RMC14/Effects/xeno_structure_animations.rsi
     layers:
+    - sprite: /Textures/_RMC14/Effects/xeno_secrete.rsi
+      state: secrete_base
     - map: ["enum.XenoConstructionVisualLayers.Animation"]
   - type: TimedDespawn
     lifetime: 5.0
@@ -23,6 +25,8 @@
   components:
   - type: Sprite
     layers:
+    - sprite: /Textures/_RMC14/Effects/xeno_secrete.rsi
+      state: secrete_base
     - map: ["enum.XenoConstructionVisualLayers.Animation"]
       state: thick
 
@@ -33,6 +37,8 @@
   components:
   - type: Sprite
     layers:
+    - sprite: /Textures/_RMC14/Effects/xeno_secrete.rsi
+      state: secrete_base
     - map: ["enum.XenoConstructionVisualLayers.Animation"]
       state: thickmembrane
 
@@ -43,6 +49,8 @@
   components:
   - type: Sprite
     layers:
+    - sprite: /Textures/_RMC14/Effects/xeno_secrete.rsi
+      state: secrete_base
     - map: ["enum.XenoConstructionVisualLayers.Animation"]
       state: thickdoor
 
@@ -53,6 +61,8 @@
   components:
   - type: Sprite
     layers:
+    - sprite: /Textures/_RMC14/Effects/xeno_secrete.rsi
+      state: secrete_base
     - map: ["enum.XenoConstructionVisualLayers.Animation"]
       state: wall
 
@@ -63,6 +73,8 @@
   components:
   - type: Sprite
     layers:
+    - sprite: /Textures/_RMC14/Effects/xeno_secrete.rsi
+      state: secrete_base
     - map: ["enum.XenoConstructionVisualLayers.Animation"]
       state: membrane
 
@@ -73,5 +85,33 @@
   components:
   - type: Sprite
     layers:
+    - sprite: /Textures/_RMC14/Effects/xeno_secrete.rsi
+      state: secrete_base
     - map: ["enum.XenoConstructionVisualLayers.Animation"]
       state: door
+
+- type: entity
+  parent: RMCBaseEffectXenoStructure
+  id: RMCEffectXenoStickyResin
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: /Textures/_RMC14/Effects/xeno_secrete.rsi
+    layers:
+    - state: secrete_base
+
+- type: entity
+  parent: RMCEffectXenoStickyResin
+  id: RMCEffectXenoFastResin
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: RMCBaseEffectXenoStructure
+  id: RMCEffectXenoWeedsSource
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: /Textures/_RMC14/Effects/alert.rsi
+    layers:
+    - state: alert_greyscale
+      color: "#A800FF7F"

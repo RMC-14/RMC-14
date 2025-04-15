@@ -181,6 +181,9 @@ public sealed class ChatUIController : UIController
     public event Action<ChatChannel, int?>? UnreadMessageCountsUpdated;
     public event Action<ChatMessage>? MessageAdded;
 
+    private readonly List<MsgDeleteChatMessagesBy> _deleteMessages = new();
+    private int? _deletingHistoryIndex;
+
     public override void Initialize()
     {
         _sawmill = Logger.GetSawmill("chat");
@@ -488,8 +491,9 @@ public sealed class ChatUIController : UIController
 
         if (existing.Count > SpeechBubbleCap)
         {
-            // Get the oldest to start fading fast.
-            var last = existing[0];
+            // Get the next speech bubble to fade
+            // Any speech bubbles before it are already fading
+            var last = existing[^(SpeechBubbleCap + 1)];
             last.FadeNow();
         }
     }
@@ -614,6 +618,41 @@ public sealed class ChatUIController : UIController
     public override void FrameUpdate(FrameEventArgs delta)
     {
         UpdateQueuedSpeechBubbles(delta);
+
+        try
+        {
+            var time = _timing.CurTime;
+            if (_deletingHistoryIndex != null)
+            {
+                for (var i = _deletingHistoryIndex.Value; i >= 0; i--)
+                {
+                    if (i >= History.Count)
+                        continue;
+
+                    // This will delete messages from an entity even if different players were the author.
+                    // Usages of the erase admin verb should be rare enough that this does not matter.
+                    // Otherwise the client would need to know that one entity has multiple author players,
+                    // or the server would need to track when and which entities a player sent messages as.
+                    var (_, h) = History[i];
+                    if (_deleteMessages.Any(msg => h.SenderKey == msg.Key || msg.Entities.Contains(h.SenderEntity)))
+                        History.RemoveAt(i);
+
+                    if (_timing.CurTime > time + TimeSpan.FromMilliseconds(8.33))
+                    {
+                        _deletingHistoryIndex = i;
+                        return;
+                    }
+                }
+
+                _deleteMessages.Clear();
+                _deletingHistoryIndex = null;
+                Repopulate();
+            }
+        }
+        catch (Exception e)
+        {
+            Logger.Error($"Error deleting chat history:\n{e}");
+        }
     }
 
     private void UpdateQueuedSpeechBubbles(FrameEventArgs delta)
@@ -925,12 +964,8 @@ public sealed class ChatUIController : UIController
 
     public void OnDeleteChatMessagesBy(MsgDeleteChatMessagesBy msg)
     {
-        // This will delete messages from an entity even if different players were the author.
-        // Usages of the erase admin verb should be rare enough that this does not matter.
-        // Otherwise the client would need to know that one entity has multiple author players,
-        // or the server would need to track when and which entities a player sent messages as.
-        History.RemoveAll(h => h.Msg.SenderKey == msg.Key || msg.Entities.Contains(h.Msg.SenderEntity));
-        Repopulate();
+        _deleteMessages.Add(msg);
+        _deletingHistoryIndex = History.Count - 1;
     }
 
     public void RegisterChat(ChatBox chat)

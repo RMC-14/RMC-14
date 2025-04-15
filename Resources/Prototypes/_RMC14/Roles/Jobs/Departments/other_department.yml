@@ -7,7 +7,6 @@
   roles:
 #  - CMSilicon # TODO RMC14
 #  - CMAndroid # TODO RMC14
-  - CMSeniorEnlistedAdvisor
   - CMLiaison
   - CMCorrespondent
   - CMMessTech

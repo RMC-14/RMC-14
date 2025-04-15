@@ -69,6 +69,10 @@
   - type: IgnorePredictionHide
   - type: GunIgnorePrediction
   - type: AssistedReloadWeapon
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/explosive_mouse.rsi
+      state: all
 
 # 84mm HE
 - type: entity

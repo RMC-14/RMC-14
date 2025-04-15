@@ -14,9 +14,12 @@ rmc-xeno-construction-no-map-resin-hole = The ground isn't solid
 rmc-xeno-construction-must-have-weeds-resin-hole = Resin holes must be built on weeds.
 rmc-xeno-construction-blocked-resin-hole = There's something built here already.
 rmc-xeno-construction-similar-too-close-resin-hole = There are other resin holes nearby!
+rmc-xeno-construction-dead-body = The body is in the way!
+
+rmc-xeno-construction-structure-destroyed = A {$structureName} has been {$destructionVerb} at {$location}!
+rmc-xeno-construction-resin-hole-destroyed = We sense one of our Hive's {$structureName} traps at {$location} has been {$destructionVerb}!
 
 cm-xeno-construction-resin-hole-burned-down = We sense one of our Hive's {$type} traps at {$location} has been burnt!
-cm-xeno-construction-resin-hole-destroyed = We sense one of our Hive's {$type} traps at {$location} has been destroyed!
 rmc-xeno-construction-resin-hole-activate = We sense one of our Hive's {$type} traps at {$location} has been triggered!
 rmc-xeno-construction-resin-hole-no-acid = We can't secrete any acid into the resin hole!
 rmc-xeno-construction-resin-hole-good-acid = It already has good acid in.
@@ -71,3 +74,22 @@ rmc-xeno-construction-tunnel-examine = The pheromone scent reads: {$tunnelName}
 
 rmc-xeno-construction-tunnel-fill = You start collapsing the tunnel!
 rmc-xeno-construction-tunnel-fill-xeno-drop = The tunnel suddenly collapses, forcing you out!
+
+rmc-xeno-order-construction-structure-designated =  Hive: A new {$construct} construction has been designated at {$area}!
+rmc-xeno-order-construction-limited-structure-designated = We designate a new {$construct} construction. ({$remainCount}/{$maxCount} remaining)
+
+rmc-xeno-construction-repair-structure-start-attempt = We begin adding the plasma to the {$struct} to repair it.
+rmc-xeno-construction-repair-structure-success = We have successfully repaired the {$struct}.
+rmc-xeno-construction-repair-structure-no-damage-failure = The {$struct} is in good condition, you don't need to repair it.
+rmc-xeno-construction-repair-structure-insufficient-plasma-warn = The {$struct} requires {$remainingPlasma} more plasma to repair it.
+
+rmc-xeno-construction-egg-morpher-no-parasites = There are no parasites in the egg morpher!
+rmc-xeno-construction-egg-morpher-attempt-insert-non-parasite = You can't put that in the egg morpher!
+rmc-xeno-construction-egg-morpher-already-full = This egg morpher is already full!
+
+rmc-xeno-egg-morpher-return-self = {CAPITALIZE($parasite)} crawls into the egg morpher.
+
+rmc-xeno-construction-egg-morpher-examine = Sheltering: {$cur_paras}/{$max_paras} parasites.
+
+rmc-xeno-construction-recovery-node-heal-target = We feel a warm aura envelop us.
+rmc-xeno-construction-recovery-node-heal-other = {CAPITALIZE(THE($target))} glows as a warm aura envelops them.

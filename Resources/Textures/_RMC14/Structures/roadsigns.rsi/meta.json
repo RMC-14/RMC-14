@@ -1,0 +1,35 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/props/industrial/hybrisa_lattice.dmi",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "roadsign_1"
+    },
+    {
+      "name": "roadsign_2"
+    },
+    {
+      "name": "roadsign_3"
+    },
+    {
+      "name": "roadsign_4"
+    },
+    {
+      "name": "roadsign_alt_1"
+    },
+    {
+      "name": "roadsign_alt_2"
+    },
+    {
+      "name": "roadsign_alt_3"
+    },
+    {
+      "name": "roadsign_alt_4"
+    }
+  ]
+}
