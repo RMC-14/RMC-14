@@ -73,9 +73,9 @@ public sealed class XenoWatchBui : BoundUserInterface
             control.Button.OnPressed += _ => SendPredictedMessage(new XenoWatchBuiMsg(xeno.Entity));
             //Logger.Debug(xeno.Health.ToString());
             //Logger.Debug(xeno.Plasma.ToString());
-            control.SetHealth(xeno.Health);
-            control.SetPlasma(xeno.Plasma);
-            control.SetEvo(xeno.Evo);
+            control.SetHealth((float)xeno.Health);
+            control.SetPlasma((float)xeno.Plasma);
+            control.SetEvo((int)xeno.Evo);
             _window.XenoContainer.AddChild(control);
             UpdateList();
         }

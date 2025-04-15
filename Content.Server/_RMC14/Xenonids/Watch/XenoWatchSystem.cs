@@ -173,17 +173,13 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
         if (_hive.GetHive(ent.Owner) is not {} hive)
             return;
 
-        float tier2slots = 0;
-        float tier3slots = 0;
-        int tier3amount = 0;
-        int tier2amount = 0;
+        FixedPoint2 tier2Slots = 0;
+        FixedPoint2 tier3Slots = 0;
+        int tier3Amount = 0;
+        int tier2Amount = 0;
         int xenocount = 0;
 
-        float total = 0;
-
-
-        _hive.TryGetTierLimit((hive, hive.Comp), 3 , out var tier3ratio);
-        _hive.TryGetTierLimit((hive, hive.Comp), 2 , out var tier2ratio);
+        FixedPoint2 total = 0;
 
         var xenos = new List<Xeno>();
         var query = EntityQueryEnumerator<XenoComponent, HiveMemberComponent, MetaDataComponent>();
@@ -200,66 +196,71 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
             {
                 if (comp.CountedInSlots)
                 {
-                    total++;
+                    total = total + 1;
                     xenocount++;
                 }
 
-                if(comp.Tier == 3 )
-                    tier3amount++;
-                else if (comp.Tier == 2)
-                    tier2amount++;
+                switch (comp.Tier)
+                {
+                    case 2:
+                        tier2Amount++;
+                        break;
+                    case 3:
+                        tier3Amount++;
+                        break;
+                }
             }
 
-            int evo = 0;
+            FixedPoint2 evo = 0;
 
             if (TryComp<XenoEvolutionComponent>(uid, out var evoComp))
             {
-                evo = (int)evoComp.Points;
+                evo = evoComp.Points;
             }
 
             xenos.Add(new Xeno(GetNetEntity(uid), Name(uid, metaData), metaData.EntityPrototype?.ID, GetHealthPercentage(uid), GetPlasmaPercentage(uid), evo));
         }
 
-        int tier1count = xenocount - tier2amount - tier3amount;
+        int tier1count = xenocount - tier2Amount - tier3Amount;
 
         var burrowed = Math.Sqrt(hive.Comp.BurrowedLarva * hive.Comp.BurrowedLarvaSlotFactor);
         var burrowedweight = Math.Min(burrowed, hive.Comp.BurrowedLarva);
-        total = xenocount + (float) burrowedweight;
+        total = xenocount +  burrowedweight;
 
-        tier2slots = (total * 0.5f) - tier2amount;
-        tier3slots = (total * 0.2f) - tier3amount;
+        tier2Slots = (total * 0.5f) - tier2Amount;
+        tier3Slots = (total * 0.2f) - tier3Amount;
 
         xenos.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name));
 
-        _ui.SetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos, hive.Comp.BurrowedLarva,xenocount,tier1count,tier2amount,tier2slots,tier3amount,tier3slots));
+        _ui.SetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos, hive.Comp.BurrowedLarva,xenocount,tier1count,tier2Amount,tier2Slots,tier3Amount,tier3Slots));
     }
 
-    private float GetHealthPercentage(EntityUid uid)
+    private FixedPoint2 GetHealthPercentage(EntityUid uid)
     {
         FixedPoint2 critical;
         FixedPoint2 damage;
-        float percentage = 0;
+        FixedPoint2 percentage = 0;
         if (TryComp<DamageableComponent>(uid, out var damageableComponent))
         {
             if (TryComp<MobThresholdsComponent>(uid, out var threshold))
             {
                 critical =  threshold.Thresholds.FirstOrDefault(kvp => kvp.Value == MobState.Critical).Key;
                 damage = damageableComponent.TotalDamage;
-                percentage = (((float)critical - (float)damage)/ ((float)critical / 100))/100 ; // i want the value to be between 0 and 1
+                percentage = ((critical - damage)/ (critical / 100))/100 ; // i want the value to be between 0 and 1
             }
         }
         return percentage;
     }
 
-    private float GetPlasmaPercentage(EntityUid uid)
+    private FixedPoint2 GetPlasmaPercentage(EntityUid uid)
     {
-        float maxplasma;
-        float currentplasma;
-        float percentage = 0;
+        FixedPoint2 maxplasma;
+        FixedPoint2 currentplasma;
+        FixedPoint2 percentage = 0;
         if (TryComp<XenoPlasmaComponent>(uid, out var plasmaComponent))
         {
             maxplasma = plasmaComponent.MaxPlasma;
-            currentplasma = (float)plasmaComponent.Plasma;
+            currentplasma = plasmaComponent.Plasma;
             percentage = ((maxplasma - (maxplasma - currentplasma))/(maxplasma/100))/100;
         }
 
