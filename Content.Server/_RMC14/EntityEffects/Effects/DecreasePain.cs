@@ -24,6 +24,6 @@ public sealed partial class DecreasePain : EntityEffect
 
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return null;
+        return Loc.GetString("reagent-effect-guidebook-decrease-pain", ("chance", Probability), ("amount", (int)Strength));
     }
 }

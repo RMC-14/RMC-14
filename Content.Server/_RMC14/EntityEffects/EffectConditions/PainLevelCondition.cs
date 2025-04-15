@@ -22,6 +22,6 @@ public sealed partial class PainLevel : EntityEffectCondition
 
     public override string GuidebookExplanation(IPrototypeManager prototype)
     {
-        return "aboba";
+        return "";
     }
 }
