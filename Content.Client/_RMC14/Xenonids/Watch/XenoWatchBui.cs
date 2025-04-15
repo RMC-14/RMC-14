@@ -24,8 +24,7 @@ public sealed class XenoWatchBui : BoundUserInterface
     private XenoWatchWindow? _window;
 
     private readonly SpriteSystem _sprite;
-    private readonly HashSet<int> _selectedTiers = new HashSet<int>();
-    private readonly HashSet<string> _selectedButtons = new HashSet<string>();
+    private bool Update = true;
 
 
     public XenoWatchBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
@@ -50,6 +49,7 @@ public sealed class XenoWatchBui : BoundUserInterface
         _window.XenoContainer.DisposeAllChildren();
 
 
+
         _window.SetTier1Count(s.TierOne);
         _window.SetTier2Count(s.TierTwo);
         _window.SetTier3Count(s.TierThree);
@@ -57,6 +57,13 @@ public sealed class XenoWatchBui : BoundUserInterface
         _window.SetTier3Slots(s.TierThreeSlots);
         _window.SetXenoCount(s.XenoCount);
 
+
+        _window.XenoPrototypes["CMXenoCrusher"] = 0;
+
+        foreach (var id in _window.XenoPrototypes)
+        {
+            _window.XenoPrototypes[id.Key] = 0;
+        }
 
         foreach (var xeno in s.Xenos)
         {
@@ -76,6 +83,12 @@ public sealed class XenoWatchBui : BoundUserInterface
             control.SetHealth((float)xeno.Health);
             control.SetPlasma((float)xeno.Plasma);
             control.SetEvo((int)xeno.Evo);
+
+            var id = xeno.Id ?? "";
+
+            if (_window.XenoPrototypes.ContainsKey(id))
+                _window.XenoPrototypes[id]++;
+
             _window.XenoContainer.AddChild(control);
             UpdateList();
         }
@@ -116,6 +129,7 @@ public sealed class XenoWatchBui : BoundUserInterface
         _window.Queen.OnToggled += OnButtonToggled;
         _window.Parasite.OnToggled += OnButtonToggled;
         _window.Lesser.OnToggled += OnButtonToggled;
+        _window.Larva.OnToggled += OnButtonToggled;
 
         _window.OpenCentered();
         return _window;
@@ -125,6 +139,11 @@ public sealed class XenoWatchBui : BoundUserInterface
     {
         if (_window is not { Disposed: false })
             return;
+
+        if (string.IsNullOrWhiteSpace(args.Text))
+            Update = true;
+
+        Update = false;
 
         foreach (var child in _window.XenoContainer.Children)
         {
@@ -181,6 +200,8 @@ public sealed class XenoWatchBui : BoundUserInterface
         switch (args.Button.Name)
         {
             case "Tier0":
+                _window.Larva.Pressed = args.Button.Pressed;
+                _window._buttons["Larva"] = _window.Larva.Pressed;
                 _window.Lesser.Pressed = args.Button.Pressed;
                 _window._buttons["Lesser"] = _window.Lesser.Pressed;
                 _window.Parasite.Pressed = args.Button.Pressed;
@@ -249,8 +270,15 @@ public sealed class XenoWatchBui : BoundUserInterface
                 continue;
             if (control.Button.Name is null)
                 break;
-            control.Visible = IsXenoVisible(control) || !dontshowall;
+            if (Update)
+                control.Visible = IsXenoVisible(control) || !dontshowall;
+
+            control.EvoPoints.Visible = _window.ShowEvo.Pressed;
+
         }
+
+        _window.SetXenoButtonValues();
+
     }
 
     private bool IsXenoVisible(XenoChoiceControl control)
@@ -268,14 +296,17 @@ public sealed class XenoWatchBui : BoundUserInterface
 
         foreach (string name in _window._buttons.Keys )
         {
-            if(xenoname.Contains(name, StringComparison.OrdinalIgnoreCase) && _window._buttons[name]) //fix lesser appearing on t1 because part of its name is "drone"
+            if (xenoname.Contains(name, StringComparison.OrdinalIgnoreCase) && _window._buttons[name])
+            {
+                //fix lesser appearing on t1 because part of its name is "drone"
                 if (name.Contains("Drone", StringComparison.OrdinalIgnoreCase))
                 {
                     if (!xenoname.Contains("Lesser", StringComparison.OrdinalIgnoreCase))
                         value = true;
                 }
                 else
-                        value = true;
+                    value = true;
+            }
         }
         return value;
     }

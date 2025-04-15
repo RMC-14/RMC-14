@@ -38,7 +38,6 @@
                         </BoxContainer>
         </CollapsibleBody>
         </Collapsible>
-
         <TabContainer>
         <BoxContainer Name="Tiers" Orientation="Horizontal">
             <Button Name="Tier4" Text="Tier 4" ToggleMode="True" Access="Public"/>
@@ -72,11 +71,12 @@
                     <Button Name="Runner" Text="Runner: 0" ToggleMode="True" Access="Public"/>
                 </BoxContainer>
                 <BoxContainer>
+                    <Button Name="Larva" Text="Larva: 0" ToggleMode="True" Access="Public" Pressed="False"/>
                     <Button Name="Parasite" Text="Parasite: 0" ToggleMode="True" Access="Public"/>
                     <Button Name="Lesser" Text="Lesser Drone: 0" ToggleMode="True" Access="Public"/>
                 </BoxContainer>
                 <BoxContainer Orientation="Horizontal" Margin="5 0 0 0">
-                    <CheckBox Name="ShowEvo" Text=" Show Evo"></CheckBox>
+                    <CheckBox Name="ShowEvo" Text=" Show Evo" Access="Public"></CheckBox>
                 </BoxContainer>
             </BoxContainer>
         </TabContainer>

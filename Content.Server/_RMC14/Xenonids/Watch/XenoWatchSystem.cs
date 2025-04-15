@@ -178,6 +178,7 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
         int tier3Amount = 0;
         int tier2Amount = 0;
         int xenocount = 0;
+        int larvacount = 0;
 
         FixedPoint2 total = 0;
 
@@ -200,6 +201,9 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
                     xenocount++;
                 }
 
+                if (metaData.EntityPrototype?.ID == "CMXenoLarva")
+                    larvacount++;
+
                 switch (comp.Tier)
                 {
                     case 2:
@@ -221,7 +225,7 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
             xenos.Add(new Xeno(GetNetEntity(uid), Name(uid, metaData), metaData.EntityPrototype?.ID, GetHealthPercentage(uid), GetPlasmaPercentage(uid), evo));
         }
 
-        int tier1count = xenocount - tier2Amount - tier3Amount;
+        int tier1count = xenocount - tier2Amount - tier3Amount - larvacount;
 
         var burrowed = Math.Sqrt(hive.Comp.BurrowedLarva * hive.Comp.BurrowedLarvaSlotFactor);
         var burrowedweight = Math.Min(burrowed, hive.Comp.BurrowedLarva);
@@ -245,6 +249,8 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
             if (TryComp<MobThresholdsComponent>(uid, out var threshold))
             {
                 critical =  threshold.Thresholds.FirstOrDefault(kvp => kvp.Value == MobState.Critical).Key;
+                if(critical == 0)
+                    return percentage;
                 damage = damageableComponent.TotalDamage;
                 percentage = ((critical - damage)/ (critical / 100))/100 ; // i want the value to be between 0 and 1
             }
@@ -261,6 +267,8 @@ public sealed class XenoWatchSystem : SharedWatchXenoSystem
         {
             maxplasma = plasmaComponent.MaxPlasma;
             currentplasma = plasmaComponent.Plasma;
+            if (maxplasma == 0)
+                return percentage;
             percentage = ((maxplasma - (maxplasma - currentplasma))/(maxplasma/100))/100;
         }
 
