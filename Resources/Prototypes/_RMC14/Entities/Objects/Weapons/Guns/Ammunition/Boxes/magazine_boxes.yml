@@ -1503,7 +1503,7 @@
     - state: rifle_ammo_full_mags_color
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#727e90"
-    - state: smg_box_63
+    - state: pistol_box_11
       color: "#ffcb26"
     - state: smg_box_marking
       color: "#7c4c1b"
@@ -1551,10 +1551,10 @@
     - state: rifle_ammo_full_mags_color
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#727e90"
-    - state: smg_box_63
+    - state: pistol_box_11
       color: "#ffcb26"
     - state: smg_box_marking
-      color: "#7c4c1b"
+      color: "#df7126"
     - state: smg_lid
       map: [ "lid" ]
       color: "#727e90"
@@ -1599,10 +1599,10 @@
     - state: rifle_ammo_full_mags_color
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#727e90"
-    - state: smg_box_63
+    - state: pistol_box_11
       color: "#ffcb26"
     - state: smg_box_marking
-      color: "#7c4c1b"
+      color: "#9badb7"
     - state: smg_lid
       map: [ "lid" ]
       color: "#727e90"
