@@ -680,6 +680,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnHiveConstructionRepairDoAfter(Entity<RepairableXenoStructureComponent> xenoStructure, ref XenoRepairStructureDoAfterEvent args)
     {
+        if (args.Handled || args.Cancelled)
+            return;
+
         var user = args.User;
         var plasmaLeft = xenoStructure.Comp.PlasmaCost - xenoStructure.Comp.StoredPlasma;
         if (!TryComp(user, out XenoConstructionComponent? xeno) ||
@@ -692,6 +695,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
+        args.Handled = true;
         if (!InRangePopup(user, xenoStructureTransform.Coordinates, xeno.OrderConstructionRange.Float()))
             return;
 
