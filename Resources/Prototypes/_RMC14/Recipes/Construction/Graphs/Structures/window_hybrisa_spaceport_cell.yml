@@ -1,12 +1,12 @@
 - type: constructionGraph
   parent: RMC
-  id: RMCWindowHybrisaResearchReinforced
+  id: RMCWindowHybrisaSpacePortReinforced
   start: start
   graph:
   - node: start # not currently buildable
 
-  - node: windowFrameHybrisaResearchReinforced
-    entity: RMCWindowFrameHybrisaResearchReinforced
+  - node: windowFrameHybrisaSpacePortReinforced
+    entity: RMCWindowFrameHybrisaSpacePortReinforced
     edges:
     - to: start
       completed:
@@ -19,27 +19,28 @@
       steps:
       - tool: Anchoring
         doAfter: 2
+        duplicateConditions: All
 
-    - to: windowHybrisaResearchReinforced
+    - to: windowHybrisaSpacePortReinforced
       completed:
       - !type:SnapToGrid
         southRotation: true
       conditions:
       - !type:EntityAnchored {}
       steps:
-      - material: CMGlassReinforced
+      - material: CMGlass
         amount: 2
         doAfter: 2
 
-  - node: windowHybrisaResearchReinforced
-    entity: RMCWindowHybrisaResearchReinforced
+  - node: windowHybrisaSpacePortReinforced
+    entity: RMCWindowHybrisaSpacePortReinforced
     edges:
-    - to: windowFrameHybrisaResearchReinforced
+    - to: windowFrameHybrisaSpacePortReinforced
       completed:
       - !type:SnapToGrid
         southRotation: true
       - !type:SpawnPrototype
-        prototype: CMSheetGlassReinforced1
+        prototype: CMSheetGlass1
         amount: 2
       conditions:
       - !type:EntityAnchored {}

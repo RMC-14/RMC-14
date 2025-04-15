@@ -1,12 +1,12 @@
 - type: constructionGraph
   parent: RMC
-  id: RMCWindowAI
+  id: RMCWindowHybrisaReinforced
   start: start
   graph:
   - node: start # not currently buildable
 
-  - node: windowFrameAI
-    entity: RMCWindowFrameAI
+  - node: windowFrameHybrisaReinforced
+    entity: RMCWindowFrameHybrisaReinforced
     edges:
     - to: start
       completed:
@@ -19,8 +19,9 @@
       steps:
       - tool: Anchoring
         doAfter: 2
+        duplicateConditions: All
 
-    - to: windowAIReinforced
+    - to: windowHybrisaReinforced
       completed:
       - !type:SnapToGrid
         southRotation: true
@@ -31,10 +32,10 @@
         amount: 2
         doAfter: 2
 
-  - node: windowAIReinforced
-    entity: RMCWindowAIReinforced
+  - node: windowHybrisaReinforced
+    entity: RMCWindowHybrisaReinforced
     edges:
-    - to: windowFrameAI
+    - to: windowFrameHybrisaReinforced
       completed:
       - !type:SnapToGrid
         southRotation: true

@@ -19,6 +19,7 @@
       steps:
       - tool: Anchoring
         doAfter: 2
+        duplicateConditions: All
 
     - to: windowWood
       completed:

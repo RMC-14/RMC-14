@@ -75,14 +75,19 @@
       steps:
       - tool: Welding
         doAfter: 6
+        duplicateConditions: All
       - tool: Screwing
         doAfter: 6
+        duplicateConditions: All
       - tool: Cutting
         doAfter: 6
+        duplicateConditions: All
       - tool: Anchoring
         doAfter: 6
+        duplicateConditions: All
       - tool: Prying
         doAfter: 6
+        duplicateConditions: All
 
   - node: reinforcedWall
     entity: CMWallReinforced
@@ -95,11 +100,16 @@
       steps:
       - tool: Welding
         doAfter: 6
+        duplicateConditions: All
       - tool: Screwing
         doAfter: 6
+        duplicateConditions: All
       - tool: Cutting
         doAfter: 6
+        duplicateConditions: All
       - tool: Anchoring
         doAfter: 6
+        duplicateConditions: All
       - tool: Prying
         doAfter: 6
+        duplicateConditions: All

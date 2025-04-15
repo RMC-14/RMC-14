@@ -1,12 +1,12 @@
 - type: constructionGraph
   parent: RMC
-  id: RMCWindowStrataReinforced
+  id: RMCWindowKutjevo
   start: start
   graph:
   - node: start # not currently buildable
 
-  - node: windowFrameStrataReinforced
-    entity: RMCWindowFrameStrataReinforced
+  - node: windowFrameKutjevo
+    entity: RMCWindowFrameKutjevo
     edges:
     - to: start
       completed:
@@ -19,27 +19,28 @@
       steps:
       - tool: Anchoring
         doAfter: 2
+        duplicateConditions: All
 
-    - to: windowStrataReinforced
+    - to: windowKutjevo
       completed:
       - !type:SnapToGrid
         southRotation: true
       conditions:
       - !type:EntityAnchored {}
       steps:
-      - material: CMGlassReinforced
+      - material: CMGlass
         amount: 2
         doAfter: 2
 
-  - node: windowStrataReinforced
-    entity: RMCWindowStrataReinforced
+  - node: windowKutjevo
+    entity: RMCWindowKutjevo
     edges:
-    - to: windowFrameStrataReinforced
+    - to: windowFrameKutjevo
       completed:
       - !type:SnapToGrid
         southRotation: true
       - !type:SpawnPrototype
-        prototype: CMSheetGlassReinforced1
+        prototype: CMSheetGlass1
         amount: 2
       conditions:
       - !type:EntityAnchored {}

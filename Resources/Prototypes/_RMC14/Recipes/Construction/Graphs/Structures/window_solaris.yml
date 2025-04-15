@@ -1,12 +1,12 @@
 - type: constructionGraph
   parent: RMC
-  id: RMCWindowKutjevo
+  id: RMCWindowSolaris
   start: start
   graph:
   - node: start # not currently buildable
 
-  - node: windowFrameKutjevo
-    entity: RMCWindowFrameKutjevo
+  - node: windowFrameSolaris
+    entity: RMCWindowFrameSolaris
     edges:
     - to: start
       completed:
@@ -19,8 +19,9 @@
       steps:
       - tool: Anchoring
         doAfter: 2
+        duplicateConditions: All
 
-    - to: windowKutjevo
+    - to: windowSolaris
       completed:
       - !type:SnapToGrid
         southRotation: true
@@ -31,10 +32,10 @@
         amount: 2
         doAfter: 2
 
-  - node: windowKutjevo
-    entity: RMCWindowKutjevo
+  - node: windowSolaris
+    entity: CMWindowSolaris
     edges:
-    - to: windowFrameKutjevo
+    - to: windowFrameSolaris
       completed:
       - !type:SnapToGrid
         southRotation: true

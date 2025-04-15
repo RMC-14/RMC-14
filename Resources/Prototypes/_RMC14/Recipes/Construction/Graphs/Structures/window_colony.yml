@@ -1,12 +1,12 @@
 - type: constructionGraph
   parent: RMC
-  id: RMCWindowColonyReinforced
+  id: RMCWindowColony
   start: start
   graph:
   - node: start # not currently buildable
 
-  - node: windowFrameColonyReinforced
-    entity: RMCWindowFrameColonyReinforced
+  - node: windowFrameColony
+    entity: RMCWindowFrameColony
     edges:
     - to: start
       completed:
@@ -19,27 +19,28 @@
       steps:
       - tool: Anchoring
         doAfter: 2
+        duplicateConditions: All
 
-    - to: windowColonyReinforced
+    - to: windowColony
       completed:
       - !type:SnapToGrid
         southRotation: true
       conditions:
       - !type:EntityAnchored {}
       steps:
-      - material: CMGlassReinforced
+      - material: CMGlass
         amount: 2
         doAfter: 2
 
-  - node: windowColonyReinforced
-    entity: CMWindowWhiteColonyReinforced
+  - node: windowColony
+    entity: CMWindowWhiteColony
     edges:
-    - to: windowFrameColonyReinforced
+    - to: windowFrameColony
       completed:
       - !type:SnapToGrid
         southRotation: true
       - !type:SpawnPrototype
-        prototype: CMSheetGlassReinforced1
+        prototype: CMSheetGlass1
         amount: 2
       conditions:
       - !type:EntityAnchored {}

@@ -1,12 +1,12 @@
 - type: constructionGraph
   parent: RMC
-  id: RMCWindowColony
+  id: RMCWindowStrata
   start: start
   graph:
   - node: start # not currently buildable
 
-  - node: windowFrameColony
-    entity: RMCWindowFrameColony
+  - node: windowFrameStrata
+    entity: RMCWindowFrameStrata
     edges:
     - to: start
       completed:
@@ -19,8 +19,9 @@
       steps:
       - tool: Anchoring
         doAfter: 2
+        duplicateConditions: All
 
-    - to: windowColony
+    - to: windowStrata
       completed:
       - !type:SnapToGrid
         southRotation: true
@@ -31,10 +32,10 @@
         amount: 2
         doAfter: 2
 
-  - node: windowColony
-    entity: CMWindowWhiteColony
+  - node: windowStrata
+    entity: RMCWindowStrata
     edges:
-    - to: windowFrameColony
+    - to: windowFrameStrata
       completed:
       - !type:SnapToGrid
         southRotation: true

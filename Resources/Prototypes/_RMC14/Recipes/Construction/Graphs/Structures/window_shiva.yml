@@ -1,12 +1,12 @@
 - type: constructionGraph
   parent: RMC
-  id: RMCWindowHybrisaEngiReinforced
+  id: RMCWindowShiva
   start: start
   graph:
   - node: start # not currently buildable
 
-  - node: windowFrameHybrisaEngiReinforced
-    entity: RMCWindowFrameHybrisaEngiReinforced
+  - node: windowFrameShiva
+    entity: RMCWindowFrameShiva
     edges:
     - to: start
       completed:
@@ -19,27 +19,28 @@
       steps:
       - tool: Anchoring
         doAfter: 2
+        duplicateConditions: All
 
-    - to: windowHybrisaEngiReinforced
+    - to: windowShiva
       completed:
       - !type:SnapToGrid
         southRotation: true
       conditions:
       - !type:EntityAnchored {}
       steps:
-      - material: CMGlassReinforced
+      - material: CMGlass
         amount: 2
         doAfter: 2
 
-  - node: windowHybrisaEngiReinforced
-    entity: RMCWindowHybrisaEngiReinforced
+  - node: windowShiva
+    entity: CMWindowShiva
     edges:
-    - to: windowFrameHybrisaEngiReinforced
+    - to: windowFrameShiva
       completed:
       - !type:SnapToGrid
         southRotation: true
       - !type:SpawnPrototype
-        prototype: CMSheetGlassReinforced1
+        prototype: CMSheetGlass1
         amount: 2
       conditions:
       - !type:EntityAnchored {}

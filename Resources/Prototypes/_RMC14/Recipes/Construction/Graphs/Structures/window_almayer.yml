@@ -1,12 +1,12 @@
 - type: constructionGraph
   parent: RMC
-  id: RMCWindowCorsatReinforced
+  id: RMCWindowAlmayer
   start: start
   graph:
   - node: start # not currently buildable
 
-  - node: windowFrameCorsatReinforced
-    entity: RMCWindowFrameCorsatReinforced
+  - node: windowFrameAlmayer
+    entity: RMCWindowFrameAlmayer
     edges:
     - to: start
       completed:
@@ -19,8 +19,9 @@
       steps:
       - tool: Anchoring
         doAfter: 2
+        duplicateConditions: All
 
-    - to: windowCorsatReinforced
+    - to: windowAlmayerReinforced
       completed:
       - !type:SnapToGrid
         southRotation: true
@@ -31,10 +32,10 @@
         amount: 2
         doAfter: 2
 
-  - node: windowCorsatReinforced
-    entity: RMCWindowCorsatReinforced
+  - node: windowAlmayerReinforced
+    entity: CMWindowReinforcedAlmayer
     edges:
-    - to: windowFrameCorsatReinforced
+    - to: windowFrameAlmayer
       completed:
       - !type:SnapToGrid
         southRotation: true

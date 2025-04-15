@@ -74,6 +74,7 @@
           steps:
             - tool: Anchoring
               doAfter: 5
+              duplicateConditions: All
 
     - node: Reinforced
       entity: CMTableReinforced
@@ -86,8 +87,10 @@
           steps:
             - tool: Welding
               doAfter: 5
+              duplicateConditions: All
             - tool: Anchoring
               doAfter: 5
+              duplicateConditions: All
 
     - node: Wood
       entity: CMTableWooden
@@ -100,6 +103,7 @@
           steps:
             - tool: Anchoring
               doAfter: 5
+              duplicateConditions: All
 
     - node: PoorWood
       entity: CMTableWoodenPoor
@@ -112,6 +116,7 @@
           steps:
             - tool: Anchoring
               doAfter: 5
+              duplicateConditions: All
 
     - node: FancyWood
       entity: CMTableWoodenFancy
@@ -124,6 +129,7 @@
           steps:
             - tool: Anchoring
               doAfter: 5
+              duplicateConditions: All
 
     - node: Gambling
       entity: CMTableWoodenGambling
@@ -136,6 +142,7 @@
           steps:
             - tool: Anchoring
               doAfter: 5
+              duplicateConditions: All
 
     - node: Almayer
       entity: CMTableAlmayer
@@ -148,3 +155,4 @@
           steps:
             - tool: Anchoring
               doAfter: 5
+              duplicateConditions: All

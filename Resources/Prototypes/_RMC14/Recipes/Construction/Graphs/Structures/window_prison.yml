@@ -1,12 +1,12 @@
 - type: constructionGraph
   parent: RMC
-  id: RMCWindowWhite
+  id: RMCWindowPrison
   start: start
   graph:
   - node: start # not currently buildable
 
-  - node: windowFrameWhite
-    entity: RMCWindowFrameWhite
+  - node: windowFramePrison
+    entity: RMCWindowFramePrison
     edges:
     - to: start
       completed:
@@ -19,8 +19,20 @@
       steps:
       - tool: Anchoring
         doAfter: 2
+        duplicateConditions: All
 
-    - to: windowWhiteReinforced
+    - to: windowPrison
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - material: CMGlass
+        amount: 2
+        doAfter: 2
+
+    - to: windowPrisonReinforced
       completed:
       - !type:SnapToGrid
         southRotation: true
@@ -31,10 +43,27 @@
         amount: 2
         doAfter: 2
 
-  - node: windowWhiteReinforced
-    entity: CMWindowReinforcedWhite
+  - node: windowPrison
+    entity: RMCWindowPrison
     edges:
-    - to: windowFrameWhite
+    - to: windowFramePrison
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      - !type:SpawnPrototype
+        prototype: CMSheetGlass1
+        amount: 2
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - tool: Screwing
+      - tool: Prying
+      - tool: Screwing
+
+  - node: windowPrisonReinforced
+    entity: RMCWindowPrisonReinforced
+    edges:
+    - to: windowFramePrison
       completed:
       - !type:SnapToGrid
         southRotation: true

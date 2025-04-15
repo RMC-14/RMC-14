@@ -1,12 +1,12 @@
 - type: constructionGraph
   parent: RMC
-  id: RMCWindowPrison
+  id: RMCWindowHybrisaOfficeReinforced
   start: start
   graph:
   - node: start # not currently buildable
 
-  - node: windowFramePrison
-    entity: RMCWindowFramePrison
+  - node: windowFrameHybrisaOfficeReinforced
+    entity: RMCWindowFrameHybrisaOfficeReinforced
     edges:
     - to: start
       completed:
@@ -19,19 +19,9 @@
       steps:
       - tool: Anchoring
         doAfter: 2
+        duplicateConditions: All
 
-    - to: windowPrison
-      completed:
-      - !type:SnapToGrid
-        southRotation: true
-      conditions:
-      - !type:EntityAnchored {}
-      steps:
-      - material: CMGlass
-        amount: 2
-        doAfter: 2
-
-    - to: windowPrisonReinforced
+    - to: windowHybrisaOfficeReinforced
       completed:
       - !type:SnapToGrid
         southRotation: true
@@ -42,27 +32,10 @@
         amount: 2
         doAfter: 2
 
-  - node: windowPrison
-    entity: RMCWindowPrison
+  - node: windowHybrisaOfficeReinforced
+    entity: RMCWindowHybrisaOfficeReinforced
     edges:
-    - to: windowFramePrison
-      completed:
-      - !type:SnapToGrid
-        southRotation: true
-      - !type:SpawnPrototype
-        prototype: CMSheetGlass1
-        amount: 2
-      conditions:
-      - !type:EntityAnchored {}
-      steps:
-      - tool: Screwing
-      - tool: Prying
-      - tool: Screwing
-
-  - node: windowPrisonReinforced
-    entity: RMCWindowPrisonReinforced
-    edges:
-    - to: windowFramePrison
+    - to: windowFrameHybrisaOfficeReinforced
       completed:
       - !type:SnapToGrid
         southRotation: true
