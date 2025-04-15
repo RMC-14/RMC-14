@@ -8,8 +8,8 @@ rmc-ghost-name-spp-leader = SPP Leader
 rmc-job-description-spp-leader = The commander of the SPP force, the SPP Leader is charged with executing whatever mission the SPP have assigned the squad. They are equipped with mostly standard issue SPP equipment, though the Leader wears similar armor to the SPP Specialist.
 rmc-job-prefix-spp-leader = SL
 
-rmc-job-name-spp-specialist = Specialists
-rmc-ghost-name-spp-specialist = SPP Specialists
+rmc-job-name-spp-specialist = Specialist
+rmc-ghost-name-spp-specialist = SPP Specialist
 rmc-job-description-spp-specialist = SPP Specialists are better trained and armed than their standard counterpart. Equipped with special heavy SPP armor that is capable of withstanding a significant amount of damage, SPP Specialists are not to be taken lightly by even the most robust of marines.
 rmc-job-prefix-spp-specialist = Spc
 
