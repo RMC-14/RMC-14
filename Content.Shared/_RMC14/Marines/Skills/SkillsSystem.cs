@@ -545,6 +545,6 @@ public sealed class SkillsSystem : EntitySystem
     {
         var skill = GetSkill(user, _meleeSkill);
 
-        return damage* (1 + 0.25 * skill);
+        return damage * (1 + 0.25 * skill);
     }
 }
