@@ -115,7 +115,6 @@ public sealed class XenoLungeSystem : EntitySystem
         RemComp<HomingProjectileComponent>(xeno);
     }
 
-
     private bool ApplyLungeHitEffects(Entity<XenoLungeComponent> xeno, EntityUid targetId)
     {
         // TODO RMC14 lag compensation
