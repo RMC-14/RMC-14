@@ -1,3 +1,13 @@
+- files: ["bullet_impact1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/bullets/bullet_impact1.ogg"
+
+- files: ["bullet_impact2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/bullets/bullet_impact2.ogg"
+
 - files: ["energy_impact1.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
@@ -7,6 +17,26 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/84432f5145e065e49a93f781cc7cf58d46f055a3/sound/bullets/energy_miss1.ogg"
+
+- files: ["impact_flesh_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/bullets/impact_flesh_1.ogg"
+
+- files: ["impact_flesh_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/bullets/impact_flesh_2.ogg"
+
+- files: ["impact_flesh_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/bullets/impact_flesh_3.ogg"
+
+- files: ["impact_flesh_4.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/bullets/impact_flesh_4.ogg"
 
 - files: ["shield_break_c1.ogg"]
   license: "CC-BY-SA-3.0"

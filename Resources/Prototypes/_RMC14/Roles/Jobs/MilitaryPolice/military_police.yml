@@ -45,6 +45,10 @@
     - type: JobPrefix
       prefix: cm-job-prefix-militarypolice
     - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: mp
 
 - type: startingGear
   id: CMGearMilitaryPolice
