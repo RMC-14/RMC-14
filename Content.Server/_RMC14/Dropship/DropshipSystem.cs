@@ -44,6 +44,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
     [Dependency] private readonly DoorSystem _door = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private readonly PhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly ShuttleSystem _shuttle = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
@@ -296,8 +297,12 @@ public sealed class DropshipSystem : SharedDropshipSystem
         var destTransform = Transform(destination);
         var destCoords = _transform.GetMoverCoordinates(destination, destTransform);
         var rotation = destTransform.LocalRotation;
+
         if (TryComp(dropshipId, out PhysicsComponent? physics))
+        {
+            _physics.SetLocalCenter(dropshipId.Value, physics, Vector2.Zero);
             destCoords = destCoords.Offset(-physics.LocalCenter);
+        }
 
         destCoords = destCoords.Offset(new Vector2(-0.5f, -0.5f));
 
