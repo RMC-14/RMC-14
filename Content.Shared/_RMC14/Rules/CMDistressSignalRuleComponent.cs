@@ -2,21 +2,21 @@
 using Content.Shared.Radio;
 using Content.Shared.Roles;
 using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Utility;
 
-namespace Content.Server._RMC14.Rules;
+namespace Content.Shared._RMC14.Rules;
 
-[RegisterComponent, AutoGenerateComponentPause]
-[Access(typeof(CMDistressSignalRuleSystem))]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
 public sealed partial class CMDistressSignalRuleComponent : Component
 {
     [DataField]
-    public List<EntProtoId> SquadIds = ["SquadAlpha", "SquadBravo", "SquadCharlie", "SquadDelta"];
+    public List<EntProtoId> SquadIds = new() { "SquadAlpha", "SquadBravo", "SquadCharlie", "SquadDelta" };
 
     [DataField]
-    public List<EntProtoId> ExtraSquadIds = ["SquadIntel"];
+    public List<EntProtoId> ExtraSquadIds = new() { "SquadIntel" };
 
     [DataField]
     public Dictionary<EntProtoId, EntityUid> Squads = new();
@@ -102,14 +102,14 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public ProtoId<JobPrototype> CivilianSurvivorJob = "CMSurvivor";
 
     [DataField]
-    public List<(ProtoId<JobPrototype> Job, int Amount)> SurvivorJobs =
-    [
+    public List<(ProtoId<JobPrototype> Job, int Amount)> SurvivorJobs = new()
+    {
         ("CMSurvivorEngineer", 4),
         ("CMSurvivorDoctor", 3),
         ("CMSurvivorSecurity", 2),
         ("CMSurvivorCorporate", 2),
         ("CMSurvivor", -1),
-    ];
+    };
 
     [DataField]
     public TimeSpan AresGreetingDelay = TimeSpan.FromSeconds(5);

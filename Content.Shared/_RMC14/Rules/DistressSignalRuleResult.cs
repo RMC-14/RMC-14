@@ -1,4 +1,4 @@
-﻿namespace Content.Server._RMC14.Rules;
+﻿namespace Content.Shared._RMC14.Rules;
 
 public enum DistressSignalRuleResult
 {

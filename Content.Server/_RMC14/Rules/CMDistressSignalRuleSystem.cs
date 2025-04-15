@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Numerics;
 using Content.Server._RMC14.Commendations;
 using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.MapInsert;
@@ -110,7 +111,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
@@ -655,7 +655,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     continue;
                 }
 
-                if (!_mapLoader.TryLoadGrid(dropshipMap, ships[shipIndex], out var shipGrids))
+                if (!_mapLoader.TryLoadGrid(dropshipMap, ships[shipIndex], out var shipGrids, offset: new Vector2(shipIndex * 100, shipIndex * 100)))
                 {
                     shipIndex++;
 
@@ -670,7 +670,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     shipIndex = 0;
 
                 var computers = EntityQueryEnumerator<DropshipNavigationComputerComponent, TransformComponent>();
-                var launched = false;
                 while (computers.MoveNext(out var computerId, out var computer, out var xform))
                 {
                     if (xform.GridUid != shipGrids.Value)
@@ -679,12 +678,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     if (!_dropship.FlyTo((computerId, computer), destinationId, null, startupTime: 1f, hyperspaceTime: 1f))
                         continue;
 
-                    launched = true;
                     break;
                 }
-
-                if (launched)
-                    break;
             }
 
             var marineFactions = EntityQueryEnumerator<MarineIFFComponent>();
