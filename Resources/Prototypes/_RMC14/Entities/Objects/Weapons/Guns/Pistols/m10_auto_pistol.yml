@@ -16,14 +16,22 @@
     baseFireModes:
     - FullAuto
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m10/jungle.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m11.rsi
     layers:
-    - state: bolt-open
-      map: [ "enum.GunVisualLayers.Base" ]
+    - state: base
+    - state: camo
+      map: [ "enum.ItemCamouflageLayers.Layer" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
+  - type: ItemCamouflage
+    colors:
+      Jungle: "#ccd08d"
+      Desert: "#ffd2a6"
+      Snow: "#ddcbc9"
+      Classic: "#c7e7d9"
+      Urban: "#acb8c7"
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m10/jungle.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m11.rsi
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1
   - type: GunDamageModifier
@@ -66,13 +74,6 @@
       rmc-aslot-barrel: 0.6, 0.05
       rmc-aslot-rail: -0.05, 0.11
       rmc-aslot-underbarrel: 0.31, -0.25
-  - type: ItemCamouflage
-    camouflageVariations:
-      Jungle: _RMC14/Objects/Weapons/Guns/Pistols/m10/jungle.rsi
-      Desert: _RMC14/Objects/Weapons/Guns/Pistols/m10/desert.rsi
-      Classic: _RMC14/Objects/Weapons/Guns/Pistols/m10/classic.rsi
-      Snow: _RMC14/Objects/Weapons/Guns/Pistols/m10/snow.rsi
-      Urban: _RMC14/Objects/Weapons/Guns/Pistols/m10/urban.rsi
   #- type: Tag
    # id: RMCWeaponPistolM11
 
