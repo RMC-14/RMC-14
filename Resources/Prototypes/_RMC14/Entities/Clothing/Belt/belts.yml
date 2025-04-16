@@ -1145,6 +1145,14 @@
     - belt
   - type: Item
     size: Large
+    grid:
+    - 0,0,8,1 # should be 9 slots
+    whitelist:
+      tags:
+      - RMCMagazinePistolM11
+      - RMCMagazinePistolM11Ext
+      - RMCMagazinePistolM11Drum
+      - RMCWeaponPistolM11
   - type: ContainerContainer
     containers:
       pouch: !type:ContainerSlot
