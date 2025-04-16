@@ -129,6 +129,18 @@ entities:
     - type: MapLight
     - type: Roof
       data: {}
+    - type: RMCWeatherCycle
+      minTimeBetweenEvents: 1200
+      weatherEvents:
+      - name: Snow
+        duration: 600
+        weatherType: RMCStrataClearsky
+      - name: Snowstorm
+        duration: 360
+        weatherType: RMCStrataSnowing
+      - name: Blizzard
+        duration: 240
+        weatherType: RMCStrataBlizzard
     - type: LoadedMap
     - type: MapGrid
       chunks:
@@ -126224,9 +126236,6 @@ entities:
     - type: Transform
       pos: 116.5,150.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        gun_magazine: !type:ContainerSlot {}
   - uid: 15917
     components:
     - type: Transform
