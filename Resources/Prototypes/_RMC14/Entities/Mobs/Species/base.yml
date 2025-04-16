@@ -340,3 +340,4 @@
   - type: RMCArmorModifier
     meleeArmorModifier: 5
   - type: RMCMobCollision
+  - type: RMCRest
