@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - RMCXenoSpeechSounds
+  - RMCXenoMobCollision
   id: CMXenoQueen
   name: Queen
   description: A huge, looming alien creature. The biggest and the baddest.

@@ -24,7 +24,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.25
-        density: 185
+        density: 0
         restitution: 0.0
         layer:
         - BulletImpassable
@@ -339,3 +339,4 @@
     range: 2
   - type: RMCArmorModifier
     meleeArmorModifier: 5
+  - type: RMCMobCollision
