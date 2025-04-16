@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: [ CMBaseWeaponRifle, RMCBaseAttachableHolder ]
+  parent: [ CMBaseWeaponRifle, RMCBaseAttachableHolder, RMCBaseWeaponMagazineVisuals ]
   name: Basira-Armstrong bolt-action hunting rifle
   id: RMCWeaponBoltActionRifle
   description: Named after its eccentric designers, the Basira-Armstrong is a cheap but reliable civilian bolt-action rifle frequently found in the outer colonies. Despite its legally-mandated limited magazine capacity, its light weight and legendary accuracy makes it popular among hunters and competitive shooters.

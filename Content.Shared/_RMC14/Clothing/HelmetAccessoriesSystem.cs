@@ -44,7 +44,13 @@ public sealed class HelmetAccessoriesSystem : EntitySystem
 
     private void OnToggled(Entity<HelmetAccessoryComponent> ent, ref ItemToggledEvent args)
     {
-        _item.VisualsChanged(Transform(ent).ParentUid);
+        if (!TryComp(ent, out TransformComponent? xform) ||
+            TerminatingOrDeleted(xform.ParentUid))
+        {
+            return;
+        }
+
+        _item.VisualsChanged(xform.ParentUid);
     }
 
     private void OnGetEquipmentVisuals(Entity<HelmetAccessoryHolderComponent> ent, ref GetEquipmentVisualsEvent args)

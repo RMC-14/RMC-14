@@ -1,111 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Fixed Burrowed Larva not registering as a new entity on the round end
-      summary.
-    type: Fix
-  id: 1074
-  time: '2024-12-06T04:18:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5064
-- author: blueDev2
-  changes:
-  - message: Fixed tunnels renaming, they are now only renamable by a xeno of drone
-      evolution and from the same hive
-    type: Fix
-  - message: Tunnels' default name is now in parity
-    type: Fix
-  - message: Mapped tunnels are properly named and associated to the hive
-    type: Fix
-  - message: Fixed xenos going into tunnels while unable to move
-    type: Fix
-  - message: Fixed involuntary regurgitation from leaving marines in tunnels
-    type: Fix
-  - message: Fixed burrowers being moved from explosives
-    type: Fix
-  - message: Fixed burrowers from being set on fire while burrowed
-    type: Fix
-  - message: Fixed burrower stomp range from being too large, (range of 4 now, used
-      to be a range of 6)
-    type: Fix
-  - message: Add Tunnels to the tactical maps
-    type: Fix
-  - message: Burrowers now are visible to fellow xenos in night vision
-    type: Fix
-  - message: Xenos cannot drop items while in tunnels
-    type: Fix
-  - message: Xenos cannot use actions while in tunnels
-    type: Fix
-  id: 1075
-  time: '2024-12-08T03:48:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5006
-- author: Vermidia
-  changes:
-  - message: Fixed Vanguard Prae's blitz having an 11 sec cooldown from the time of
-      the AOE slash instead of the time from the initial dash.
-    type: Fix
-  id: 1076
-  time: '2024-12-08T03:50:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5076
-- author: Whisper
-  changes:
-  - message: Added Consumes-the-Petrol, Lenny Dugs, Kael 'Shark' Voss figurine.
-    type: Add
-  id: 1077
-  time: '2024-12-09T00:30:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5083
-- author: Vermidia
-  changes:
-  - message: Fixed matchboxes not being tiny, and tarback tubes, and cigar cases not
-      being small.
-    type: Fix
-  - message: Fixed handfuls, cigpacks, and matchboxes not fitting in helmets.
-    type: Fix
-  id: 1078
-  time: '2024-12-09T00:32:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5071
-- author: noctyrnal
-  changes:
-  - message: Added Chances Claim, Also known as LV522, expect it be available soon!
-    type: Add
-  id: 1079
-  time: '2024-12-09T01:23:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5062
-- author: Rainbeon
-  changes:
-  - message: Increased Crusher Stomp's outer radius, so it is no longer much smaller
-      than it is supposed to be.
-    type: Fix
-  id: 1080
-  time: '2024-12-09T05:59:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5089
-- author: Vermidia
-  changes:
-  - message: Fixed xeno auto regurgitation stunning.
-    type: Fix
-  id: 1081
-  time: '2024-12-09T05:58:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5088
-- author: CyberTropic
-  changes:
-  - message: Added M272 pattern knife vest.
-    type: Add
-  - message: Fixed Requisitions not being able to buy webbing vests and shoulder holsters.
-    type: Fix
-  id: 1082
-  time: '2024-12-09T06:01:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5085
-- author: DrSmugleaf
-  changes:
-  - message: Fixed fire damage not piercing armor.
-    type: Fix
-  - message: Fixed fire not spreading through doors.
-    type: Fix
-  - message: Fixed being set on fire not dealing bonus initial damage equal to the
-      intensity of the fire.
-    type: Fix
-  id: 1083
-  time: '2024-12-09T09:52:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5090
 - author: DrSmugleaf
   changes:
   - message: Fixed Burrower being able to acid and perform other do-afters while burrowing.
@@ -5364,5 +5257,82 @@
   id: 1576
   time: '2025-04-12T06:08:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6138
+- author: Ian321
+  changes:
+  - message: '"Spawn here as job" now also sets the respective icon.'
+    type: Tweak
+  id: 1577
+  time: '2025-04-12T10:29:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6112
+- author: Vermidia
+  changes:
+  - message: Resin Surge properly works on doors again.
+    type: Fix
+  id: 1578
+  time: '2025-04-14T01:40:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6146
+- author: Vermidia
+  changes:
+  - message: Fixed AMR normal shots having stopping power.
+    type: Fix
+  - message: Fixed AMR first shots doing stun/knockback.
+    type: Fix
+  id: 1579
+  time: '2025-04-14T02:01:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6145
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Roundstart larva now spawn inside dead colonists and need to burst out
+    type: Add
+  id: 1580
+  time: '2025-04-14T02:05:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6085
+- author: noctyrnal
+  changes:
+  - message: Changes the appearance of the We-Ya Whiteout Commandos. If you can see
+      these new sprites, you fucked up.
+    type: Tweak
+  id: 1581
+  time: '2025-04-14T02:06:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6111
+- author: Vermidia
+  changes:
+  - message: Fixed Parasites not having different rank titles. Larva also now have
+      different titles.
+    type: Fix
+  id: 1582
+  time: '2025-04-14T02:07:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6136
+- author: Dygon
+  changes:
+  - message: Flare packs can now directly transfer their content to a flare pouch.
+    type: Add
+  id: 1583
+  time: '2025-04-14T03:28:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6144
+- author: Dygon
+  changes:
+  - message: Weapon attachment damage now accounts for the user's melee skill level
+      and any other melee damage modifiers.
+    type: Fix
+  id: 1584
+  time: '2025-04-15T00:09:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6156
+- author: noctyrn
+  changes:
+  - message: Fixes weed wall overlays.
+    type: Tweak
+  id: 1585
+  time: '2025-04-15T00:10:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6157
+- author: Sigil
+  changes:
+  - message: Shootable attachments are now predicted.
+    type: Fix
+  - message: The masterkey can be used for PBs.
+    type: Fix
+  id: 1586
+  time: '2025-04-15T00:26:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6097
 Name: RMC14
 Order: -1
