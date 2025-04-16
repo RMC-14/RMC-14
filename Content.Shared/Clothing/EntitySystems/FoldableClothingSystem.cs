@@ -66,10 +66,7 @@ public sealed class FoldableClothingSystem : EntitySystem
             // Or at the very least it should stash the old layers and restore them when unfolded.
             // TODO CLOTHING fix this.
             if (ent.Comp.FoldedHideLayers != null && TryComp<HideLayerClothingComponent>(ent.Owner, out var hideLayerComp))
-            {
                 hideLayerComp.Slots = ent.Comp.FoldedHideLayers;
-                _clothingSystem.CheckEquipmentForLayerHide(ent.Owner, Transform(ent.Owner).ParentUid); // RMC14
-            }
 
         }
         else
@@ -86,11 +83,7 @@ public sealed class FoldableClothingSystem : EntitySystem
             // TODO CLOTHING fix this.
             if (ent.Comp.UnfoldedHideLayers != null &&
                 TryComp<HideLayerClothingComponent>(ent.Owner, out var hideLayerComp))
-            {
                 hideLayerComp.Slots = ent.Comp.UnfoldedHideLayers;
-                _clothingSystem.CheckEquipmentForLayerHide(ent.Owner, Transform(ent.Owner).ParentUid); // RMC14
-            }
-
         }
     }
 }
