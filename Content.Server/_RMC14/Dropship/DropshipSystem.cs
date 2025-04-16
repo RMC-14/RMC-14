@@ -77,7 +77,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         SubscribeLocalEvent<DropshipComponent, FTLRequestEvent>(OnRefreshUI);
         SubscribeLocalEvent<DropshipComponent, FTLStartedEvent>(OnFTLStarted);
         SubscribeLocalEvent<DropshipComponent, FTLCompletedEvent>(OnFTLCompleted);
-        SubscribeLocalEvent<DropshipComponent, FTLUpdatedEvent>(OnRefreshUI);
+        SubscribeLocalEvent<DropshipComponent, FTLUpdatedEvent>(OnFTLUpdated);
 
         SubscribeLocalEvent<DropshipInFlyByComponent, FTLCompletedEvent>(OnInFlyByFTLCompleted);
 
@@ -151,6 +151,17 @@ public sealed class DropshipSystem : SharedDropshipSystem
             var ev = new DropshipHijackLandedEvent(map);
             RaiseLocalEvent(ref ev);
         }
+    }
+
+    private void OnFTLUpdated(Entity<DropshipComponent> ent, ref FTLUpdatedEvent args)
+    {
+        if (TryComp(ent, out FTLComponent? ftl))
+        {
+            ent.Comp.State = ftl.State;
+            Dirty(ent);
+        }
+
+        RefreshUI();
     }
 
     private void OnRefreshUI<T>(Entity<DropshipComponent> ent, ref T args)
