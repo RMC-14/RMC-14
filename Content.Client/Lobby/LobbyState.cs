@@ -200,7 +200,7 @@ namespace Content.Client.Lobby
                 Lobby!.ObserveButton.Disabled = false;
 
                 // RMC14
-                Lobby.ReadyButton.AddStyleClass("OpenRight");
+                Lobby.ReadyButton.AddStyleClass("OpenLeft");
             }
             else
             {
@@ -212,7 +212,7 @@ namespace Content.Client.Lobby
                 Lobby!.ObserveButton.Disabled = true;
 
                 // RMC14
-                Lobby.ReadyButton.RemoveStyleClass("OpenRight");
+                Lobby.ReadyButton.RemoveStyleClass("OpenLeft");
             }
 
             if (_gameTicker.ServerInfoBlob != null)
