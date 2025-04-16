@@ -13,9 +13,8 @@ public sealed partial class MarineControlComputerComponent : Component
     [DataField, AutoNetworkedField]
     public bool CanEvacuate;
 
-    // TODO make new sound for this
-    // [DataField, AutoNetworkedField]
-    // public SoundSpecifier? EvacuationStartSound = new SoundSpecifier("/Audio/_RMC14/Announcements/ARES/evacuation_start.ogg", AudioParams.Default.WithVolume(-5));
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? EvacuationStartSound = new SoundPathSpecifier("/Audio/_RMC14/Announcements/ARES/evacuate.ogg", AudioParams.Default.WithVolume(-5));
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier? EvacuationCancelledSound = new SoundPathSpecifier("/Audio/_RMC14/Announcements/ARES/evacuate_cancelled.ogg", AudioParams.Default.WithVolume(-5));
