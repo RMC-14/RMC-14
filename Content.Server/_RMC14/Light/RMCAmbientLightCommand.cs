@@ -26,6 +26,11 @@ public sealed class RMCAmbientLightSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+        _console.RegisterCommand("rmclightsequence",
+            Loc.GetString("cmd-rmclight-desc"),
+            Loc.GetString("cmd-rmclight-help"),
+            RMCLightSequence,
+            RMCLightSequenceCompletion);
         _console.RegisterCommand("rmclight",
             Loc.GetString("cmd-rmclight-desc"),
             Loc.GetString("cmd-rmclight-help"),
@@ -33,8 +38,63 @@ public sealed class RMCAmbientLightSystem : EntitySystem
             RMCLightCompletion);
     }
 
+
+
     [AdminCommand(AdminFlags.Fun)]
     private void RMCLight(IConsoleShell shell, string argStr, string[] args)
+    {
+        if (args.Length < 2)
+        {
+            shell.WriteError(Loc.GetString("cmd-weather-error-no-arguments"));
+            return;
+        }
+
+        if (!EntityUid.TryParse(args[0], out var gridUid))
+            return;
+
+        _entityManager.EnsureComponent<RMCAmbientLightComponent>(gridUid, out var rmcLight);
+
+        //Color Proto parsing
+        Color colorHex = default;
+        if (!args[1].Equals("null"))
+        {
+            if (!Color.TryParse(args[1], out colorHex))
+            {
+                shell.WriteError(Loc.GetString("cmd-weather-error-unknown-proto"));
+                return;
+            }
+        }
+
+        //Time parsing
+        var duration = TimeSpan.FromSeconds(30);
+        if (args.Length == 3)
+        {
+            if (int.TryParse(args[2], out var durationInt))
+            {
+                duration = TimeSpan.FromSeconds(durationInt);
+            }
+            else
+            {
+                shell.WriteError(Loc.GetString("cmd-weather-error-wrong-time"));
+            }
+        }
+
+        _sharedLightSystem.SetColor((gridUid, rmcLight), colorHex, duration);
+    }
+
+    private CompletionResult RMCLightCompletion(IConsoleShell shell, string[] args)
+    {
+        return args.Length switch
+        {
+            1 => CompletionResult.FromHintOptions(CompletionHelper.Components<MapGridComponent>(args[0], _entityManager), "Grid Id"),
+            2 => CompletionResult.FromHintOptions(CompletionHelper.PrototypeIDs<DatasetPrototype>(true, _prototype), Loc.GetString("ColorHex")),
+            3 => CompletionResult.FromHint(Loc.GetString("duration")),
+            _ => CompletionResult.Empty,
+        };
+    }
+
+    [AdminCommand(AdminFlags.Fun)]
+    private void RMCLightSequence(IConsoleShell shell, string argStr, string[] args)
     {
         if (args.Length < 2)
         {
@@ -63,7 +123,7 @@ public sealed class RMCAmbientLightSystem : EntitySystem
         var colors = colorDataset.Values.ToList();
 
         //Time parsing
-        TimeSpan duration = TimeSpan.FromSeconds(30);
+        var duration = TimeSpan.FromSeconds(30);
         if (args.Length == 3)
         {
             if (int.TryParse(args[2], out var durationInt))
@@ -79,7 +139,7 @@ public sealed class RMCAmbientLightSystem : EntitySystem
         _sharedLightSystem.SetColor((gridUid, rmcLight), colors, duration);
     }
 
-    private CompletionResult RMCLightCompletion(IConsoleShell shell, string[] args)
+    private CompletionResult RMCLightSequenceCompletion(IConsoleShell shell, string[] args)
     {
         return args.Length switch
         {

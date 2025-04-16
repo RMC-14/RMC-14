@@ -35,7 +35,7 @@ public sealed class SharedRMCAmbientLightSystem : EntitySystem
         return color;
     }
 
-    public void SetColor(Entity<RMCAmbientLightComponent> ent, string colorHex, TimeSpan duration)
+    public void SetColor(Entity<RMCAmbientLightComponent> ent, Color colorHex, TimeSpan duration)
     {
         if (_net.IsClient)
             return;
@@ -43,7 +43,7 @@ public sealed class SharedRMCAmbientLightSystem : EntitySystem
         var mapLight = EnsureComp<MapLightComponent>(ent);
 
         ent.Comp.Colors.Clear();
-        ent.Comp.Colors.AddRange([mapLight.AmbientLightColor, Color.FromHex(colorHex, Color.Black)]);
+        ent.Comp.Colors.AddRange([mapLight.AmbientLightColor, colorHex]);
         ent.Comp.Duration = duration;
         ent.Comp.StartTime = _timing.CurTime;
         ent.Comp.Running = true;
