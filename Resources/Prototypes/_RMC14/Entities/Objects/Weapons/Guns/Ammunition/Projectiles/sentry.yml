@@ -44,3 +44,122 @@
     thresholds:
     - range: 22
       falloff: 10
+
+
+- type: entity
+  parent: RMC40MMGrenadeM74AGMF
+  id: RMCBulletSentryFire
+  name: Flaming Ball
+  description: Uh What? This shouldn't be seen
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/grenade_launcher.rsi
+    layers:
+    - state: baton_slug
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+    proto: RMCBulletSentryFireProjectile
+  - type: Tag
+    tags:
+    - Grenade
+
+- type: entity
+  parent: RMC40MMGrenadeM74AGMF
+  id: RMC40MMGrenadeM74AGMI
+  name: M74 AGM-I 40mm Incendiary Grenade
+  description: M74 - Airburst Grenade Munition - Incendiary. This grenade must be launched with a grenade launcher, and detonates once it reaches its destination. It disperses jagged shrapnel in a cone in front of itself, tearing through sinews and armor alike. Dispersion pattern is optimized against large target. Suffers from overpenetration on a direct hit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/grenade_launcher.rsi
+    layers:
+    - state: grenade_m74_airburst_i
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+    proto: RMCAirBurstProjectileIncendiary
+  - type: Tag
+    tags:
+    - Grenade
+    - LauncherCompatibleGrenade
+    - RMCAirburstGrenade
+    - RMCGrenadeAGMI
+
+#- type: entity
+#  parent: RMCBaseBullet
+#  id: RMCBulletSentryFireProjectile
+#  name: Flaming Shrapnel
+#  categories: [ HideSpawnMenu ]
+#  components:
+#  - type: Sprite
+#    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/shotgun_projectiles.rsi
+#    layers:
+#    - state: beanbag
+#      shader: unshaded
+#  - type: Projectile
+#    impactEffect: BulletImpactEffect
+#    damage:
+#      types:
+#        Heat: 35
+#    soundHit:
+#      path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
+#  - type: CMArmorPiercing
+#    amount: 0
+#  - type: IgniteOnProjectileHit
+#  - type: PointLight
+#    enabled: true
+#    color: "#ff4300"
+#    radius: 1.5
+#    energy: 0.5
+#  - type: RMCProjectileAccuracy
+#    accuracy: 100
+#    thresholds:
+#    - range: 5
+#      falloff: 33
+
+- type: entity
+  parent: RMCBaseBullet
+  id: RMCBulletSentryFireProjectile
+  name: Flaming Ball
+  description: Huh? You shouldn't be able to see this...
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TriggerOnFixedDistanceStop
+    delay: 0
+  - type: IgnorePredictionHide
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/grenade_launcher.rsi
+    layers:
+    - state: baton_slug_active
+      shader: unshaded
+  - type: Projectile
+    deleteOnCollide: True
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Heat: 35
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
+  - type: RMCProjectileAccuracy
+    accuracy: 100
+    thresholds:
+    - range: 5
+      falloff: 10
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: ScatteringGrenade
+    spreadAngle: 45
+    directHitTrigger: true
+    fillPrototype: RMCBatonSlugHIRR
+    capacity: 1
+    distance: 1
+  - type: IgnoreArc
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.45,0.15,0.15"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
