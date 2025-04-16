@@ -1,6 +1,8 @@
 using System.Linq;
+using Content.Shared.Dataset;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Light;
@@ -9,6 +11,7 @@ public sealed class SharedRMCAmbientLightSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     public Color GetColor(Entity<RMCAmbientLightComponent> ent, TimeSpan curTime)
     {
@@ -35,6 +38,15 @@ public sealed class SharedRMCAmbientLightSystem : EntitySystem
         return color;
     }
 
+    public List<Color> ProcessPrototype(ProtoId<DatasetPrototype> protoId)
+    {
+        var colorList = new List<Color>();
+        DatasetPrototype? colorDataset = null;
+        if (!_prototype.TryIndex(protoId, out colorDataset))
+            return colorList;
+        return colorDataset.Values.Select(hex => Color.FromHex(hex, Color.Black)).ToList();
+    }
+
     public void SetColor(Entity<RMCAmbientLightComponent> ent, Color colorHex, TimeSpan duration)
     {
         if (_net.IsClient)
@@ -51,18 +63,18 @@ public sealed class SharedRMCAmbientLightSystem : EntitySystem
         Dirty(ent);
     }
 
-    public void SetColor(Entity<RMCAmbientLightComponent> ent, List<string> colorHexes, TimeSpan duration)
+    public void SetColor(Entity<RMCAmbientLightComponent> ent, List<Color> colorList, TimeSpan duration)
     {
         if (_net.IsClient)
             return;
 
-        if (colorHexes.Count == 0 || duration <= TimeSpan.Zero)
+        if (colorList.Count == 0 || duration <= TimeSpan.Zero)
             return;
 
         var mapLight = EnsureComp<MapLightComponent>(ent);
 
         ent.Comp.Colors.Clear();
-        ent.Comp.Colors.AddRange(colorHexes.Select(hex => Color.FromHex(hex, Color.Black)).ToList());
+        ent.Comp.Colors.AddRange(colorList);
         ent.Comp.Duration = duration;
         ent.Comp.StartTime = _timing.CurTime;
         ent.Comp.Running = true;

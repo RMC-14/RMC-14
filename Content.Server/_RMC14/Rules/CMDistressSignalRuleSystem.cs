@@ -37,6 +37,7 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Item;
+using Content.Shared._RMC14.Light;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.HyperSleep;
@@ -141,6 +142,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly MapInsertSystem _mapInsert = default!;
     [Dependency] private readonly SharedDestructibleSystem _destruction = default!;
     [Dependency] private readonly IntelSystem _intel = default!;
+    [Dependency] private readonly SharedRMCAmbientLightSystem _rmcAmbientLight = default!;
 
 
     private readonly HashSet<string> _operationNames = new();
@@ -1168,6 +1170,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         {
             EnsureComp<DeletedByWeedKillerComponent>(uid);
         }
+
+        var rmcAmbientComp = EnsureComp<RMCAmbientLightComponent>(rule.Comp.XenoMap);
+        var ambientLightEffectComp = EnsureComp<RMCAmbientLightEffectsComponent>(rule.Comp.XenoMap);
+
+        var colorSequence = _rmcAmbientLight.ProcessPrototype(ambientLightEffectComp.Sunset);
+        var duration = TimeSpan.FromSeconds(ambientLightEffectComp.SunsetDuration);
+        _rmcAmbientLight.SetColor((rule.Comp.XenoMap, rmcAmbientComp), colorSequence, duration);
 
         return true;
     }

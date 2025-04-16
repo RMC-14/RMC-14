@@ -120,7 +120,7 @@ public sealed class RMCAmbientLightSystem : EntitySystem
 
         if (colorDataset == null)
             return;
-        var colors = colorDataset.Values.ToList();
+        var colors = colorDataset.Values.Select(hex => Color.FromHex(hex, Color.Black)).ToList();
 
         //Time parsing
         var duration = TimeSpan.FromSeconds(30);
