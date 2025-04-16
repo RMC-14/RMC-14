@@ -1602,7 +1602,7 @@
     - state: pistol_box_11
       color: "#ffcb26"
     - state: smg_box_marking
-      color: "#9badb7"
+      color: "#fbf296"
     - state: smg_lid
       map: [ "lid" ]
       color: "#727e90"
