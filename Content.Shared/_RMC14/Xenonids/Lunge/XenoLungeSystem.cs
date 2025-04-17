@@ -33,6 +33,7 @@ public sealed class XenoLungeSystem : EntitySystem
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly MobStateSystem _mob = default!;
+    [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ThrownItemComponent> _thrownItemQuery;
@@ -74,7 +75,7 @@ public sealed class XenoLungeSystem : EntitySystem
         xeno.Comp.Charge = diff;
         Dirty(xeno);
 
-        EnsureComp<RMCObstacleSlamImmuneComponent>(xeno);
+        _rmcObstacleSlamming.MakeImmune(xeno);
         _throwing.TryThrow(xeno, diff, 30, animated: false);
 
         if (!_physicsQuery.TryGetComponent(xeno, out var physics))

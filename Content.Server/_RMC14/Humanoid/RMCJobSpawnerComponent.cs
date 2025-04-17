@@ -10,6 +10,6 @@ public sealed partial class RMCJobSpawnerComponent : Component
     [DataField(required: true)]
     public ProtoId<JobPrototype>? Job;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public bool Loadout = true;
 }
