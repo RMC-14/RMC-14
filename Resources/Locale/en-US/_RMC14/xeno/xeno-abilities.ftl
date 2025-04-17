@@ -21,7 +21,7 @@ rmc-xeno-acid-increase-user = You feel your acid reserves increase!
 cm-xeno-choose-resin-structure = Choose Resin Structure
 cm-xeno-order-construction = Build Structure
 cm-xeno-too-close-to-other-node = This is too close to {THE($target)}!
-cm-xeno-requires-more-plasma = {THE($construction)} requires {$plasma} more plasma.
+cm-xeno-requires-more-plasma = {CAPITALIZE(THE($construction))} requires {$plasma} more plasma.
 cm-xeno-construction-plasma-left = A {$construction} construction is designated here. It requires [color=cyan]{$plasma}[/color] more plasma.
 cm-xeno-cant-reach-there = You can't reach there!
 cm-xeno-cant-build-in-self = You can't build structures that close!
