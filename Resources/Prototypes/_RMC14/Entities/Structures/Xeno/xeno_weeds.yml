@@ -266,8 +266,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
     drawdepth: Objects
-    layers:
-    - state: weedwall
+#    layers:
+#    - state: weedwall
   - type: IconSmooth
     key: cm_xeno_weeds_walls
     base: weedwall
