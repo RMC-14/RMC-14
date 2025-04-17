@@ -102,7 +102,7 @@ public sealed class SharedRMCAmbientLightSystem : EntitySystem
                 Dirty(uid, lightComponent);
                 continue;
             }
-fd
+
             var targetColor = GetColor((uid, animComponent), curTime);
             lightComponent.AmbientLightColor = targetColor;
             Dirty(uid, lightComponent);

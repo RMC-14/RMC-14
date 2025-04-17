@@ -129,6 +129,8 @@ entities:
     - type: MapLight
     - type: Roof
       data: {}
+    - type: RMCAmbientLightEffects
+      sunset: RMCColorSequenceSunsetCold
     - type: LoadedMap
     - type: MapGrid
       chunks:
