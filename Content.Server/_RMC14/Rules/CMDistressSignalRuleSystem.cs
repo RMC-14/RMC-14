@@ -143,7 +143,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly SharedDestructibleSystem _destruction = default!;
     [Dependency] private readonly IntelSystem _intel = default!;
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
-    [Dependency] private readonly SharedRMCAmbientLightSystem _rmcAmbientLight = default!;
+    [Dependency] private readonly RMCAmbientLightSystem _rmcAmbientLight = default!;
 
 
     private readonly HashSet<string> _operationNames = new();

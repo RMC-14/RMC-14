@@ -7,7 +7,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Light;
 
-public sealed class SharedRMCAmbientLightSystem : EntitySystem
+public sealed class RMCAmbientLightSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;

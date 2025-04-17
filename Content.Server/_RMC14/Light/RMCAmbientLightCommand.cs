@@ -6,14 +6,13 @@ using Content.Shared._RMC14.Light;
 using Content.Shared.Dataset;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Light;
 
-public sealed class RMCAmbientLightSystem : EntitySystem
+public sealed class RMCAmbientLightCommand : EntitySystem
 {
     [Dependency] private readonly IConsoleHost _console = default!;
-    [Dependency] private readonly SharedRMCAmbientLightSystem _sharedLightSystem = default!;
+    [Dependency] private readonly RMCAmbientLightSystem _lightSystem = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
@@ -31,8 +30,6 @@ public sealed class RMCAmbientLightSystem : EntitySystem
             RMCLight,
             RMCLightCompletion);
     }
-
-
 
     [AdminCommand(AdminFlags.Fun)]
     private void RMCLight(IConsoleShell shell, string argStr, string[] args)
@@ -73,7 +70,7 @@ public sealed class RMCAmbientLightSystem : EntitySystem
             }
         }
 
-        _sharedLightSystem.SetColor((gridUid, rmcLight), colorHex, duration);
+        _lightSystem.SetColor((gridUid, rmcLight), colorHex, duration);
     }
 
     private CompletionResult RMCLightCompletion(IConsoleShell shell, string[] args)
@@ -130,7 +127,7 @@ public sealed class RMCAmbientLightSystem : EntitySystem
             }
         }
 
-        _sharedLightSystem.SetColor((gridUid, rmcLight), colors, duration);
+        _lightSystem.SetColor((gridUid, rmcLight), colors, duration);
     }
 
     private CompletionResult RMCLightSequenceCompletion(IConsoleShell shell, string[] args)
