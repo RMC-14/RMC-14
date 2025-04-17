@@ -18,6 +18,14 @@
       Urban: _RMC14/Objects/Clothing/Uniforms/Marine/standard/urban.rsi
 
 - type: entity
+  parent: JumpsuitMarine
+  id: JumpsuitMarineRoyal # TODO RMC14 sprite
+  suffix: Filled, Royal
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbingPouchRoyal
+
+- type: entity
   parent: RMCMarineUniformBase
   id: CMJumpsuitMarineFormal
   name: formal marine uniform
