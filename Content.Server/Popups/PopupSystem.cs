@@ -1,3 +1,5 @@
+using Content.Shared._RMC14.Stealth;
+using Content.Shared._RMC14.Xenonids.Invisibility;
 using Content.Shared.Popups;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
@@ -138,6 +140,10 @@ namespace Content.Server.Popups
 
             if (recipient != null)
             {
+                // RMC14 Don't show popups to other's while invisible.
+                if(HasComp<EntityActiveInvisibleComponent>(recipient) || HasComp<XenoActiveInvisibleComponent>(recipient))
+                    return;
+
                 // Don't send to recipient, since they predicted it locally
                 var filter = Filter.PvsExcept(recipient.Value, entityManager: EntityManager);
                 RaiseNetworkEvent(new PopupEntityEvent(message, type, GetNetEntity(uid)), filter);
