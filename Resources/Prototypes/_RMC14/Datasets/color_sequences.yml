@@ -38,21 +38,6 @@
   - "#b97034"
 
 - type: dataset
-  id: RMCColorSequenceLightning
-  values:
-  - "#000000" 
-  - "#161624" 
-  - "#38356e" 
-  - "#7a77d9" 
-  - "#b9c8ff" 
-  - "#eef3ff" 
-  - "#b9c8ff" 
-  - "#7a77d9" 
-  - "#38356e" 
-  - "#161624" 
-  - "#000000"
-
-- type: dataset
   id: RMCColorSequenceLightningSharpPeak
   values:
   - "#000000"
