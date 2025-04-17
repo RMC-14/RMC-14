@@ -36,6 +36,7 @@
     lifetime: 1.5
   - type: Sprite
     color: "#00FFFF"
+    state: plasma_overlay
 
 - type: entity
   parent: RMCEffectHeal
