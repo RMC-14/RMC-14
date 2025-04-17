@@ -29,6 +29,16 @@
 
 - type: entity
   parent: RMCEffectHeal
+  id: RMCEffectHealPlasma
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 1.5
+  - type: Sprite
+    color: "#00FFFF"
+
+- type: entity
+  parent: RMCEffectHeal
   id: RMCEffectHealHealer
   categories: [ HideSpawnMenu ]
   components:
