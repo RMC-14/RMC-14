@@ -41,8 +41,7 @@ public sealed class SharedRMCAmbientLightSystem : EntitySystem
     public List<Color> ProcessPrototype(ProtoId<DatasetPrototype> protoId)
     {
         var colorList = new List<Color>();
-        DatasetPrototype? colorDataset = null;
-        if (!_prototype.TryIndex(protoId, out colorDataset))
+        if (!_prototype.TryIndex(protoId, out var colorDataset))
             return colorList;
         return colorDataset.Values.Select(hex => Color.FromHex(hex, Color.Black)).ToList();
     }
@@ -58,7 +57,7 @@ public sealed class SharedRMCAmbientLightSystem : EntitySystem
         ent.Comp.Colors.AddRange([mapLight.AmbientLightColor, colorHex]);
         ent.Comp.Duration = duration;
         ent.Comp.StartTime = _timing.CurTime;
-        ent.Comp.Running = true;
+        ent.Comp.IsAnimating = true;
 
         Dirty(ent);
     }
@@ -77,7 +76,7 @@ public sealed class SharedRMCAmbientLightSystem : EntitySystem
         ent.Comp.Colors.AddRange(colorList);
         ent.Comp.Duration = duration;
         ent.Comp.StartTime = _timing.CurTime;
-        ent.Comp.Running = true;
+        ent.Comp.IsAnimating = true;
 
         Dirty(ent);
     }
@@ -92,18 +91,18 @@ public sealed class SharedRMCAmbientLightSystem : EntitySystem
 
         while (lightQuery.MoveNext(out var uid, out var animComponent, out var lightComponent))
         {
-            if (!animComponent.Running)
+            if (!animComponent.IsAnimating)
                 continue;
 
             if (curTime >= animComponent.EndTime)
             {
                 lightComponent.AmbientLightColor = animComponent.Colors[^1];
-                animComponent.Running = false;
+                animComponent.IsAnimating = false;
                 Dirty(uid, animComponent);
                 Dirty(uid, lightComponent);
                 continue;
             }
-
+fd
             var targetColor = GetColor((uid, animComponent), curTime);
             lightComponent.AmbientLightColor = targetColor;
             Dirty(uid, lightComponent);

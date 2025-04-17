@@ -6,7 +6,7 @@ namespace Content.Shared._RMC14.Light;
 public sealed partial class RMCAmbientLightComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public bool Running;
+    public bool IsAnimating;
 
     [DataField, AutoNetworkedField]
     public TimeSpan Duration;

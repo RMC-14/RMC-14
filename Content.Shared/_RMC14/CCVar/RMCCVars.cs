@@ -423,4 +423,10 @@ public sealed class RMCCVars : CVars
     /// </summary>
     public static readonly CVarDef<bool> RMCUseAlternateSprites =
         CVarDef.Create("rmc.use_alternate_sprites", false, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<int> RMCSunsetDuration =
+        CVarDef.Create("rmc.lighting_sunset_duration", 280, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCSunriseDuration =
+        CVarDef.Create("rmc.lighting_sunrise_duration", 280, CVar.REPLICATED | CVar.SERVER);
 }

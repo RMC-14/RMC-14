@@ -1,10 +1,6 @@
-﻿using System.Diagnostics;
-using Content.Server.Administration;
+﻿using Content.Server.Administration;
 using Content.Shared.Administration;
-using Content.Shared.Weather;
 using Robust.Shared.Console;
-using Robust.Shared.GameStates;
-using Robust.Shared.Map;
 using System.Linq;
 using Content.Shared._RMC14.Light;
 using Content.Shared.Dataset;
@@ -17,11 +13,9 @@ namespace Content.Server._RMC14.Light;
 public sealed class RMCAmbientLightSystem : EntitySystem
 {
     [Dependency] private readonly IConsoleHost _console = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedRMCAmbientLightSystem _sharedLightSystem = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {

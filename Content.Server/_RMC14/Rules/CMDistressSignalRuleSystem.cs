@@ -162,6 +162,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private bool _useCarryoverVoting;
     private TimeSpan _hijackStunTime = TimeSpan.FromSeconds(5);
     private bool _landingZoneMiasmaEnabled;
+    private TimeSpan _sunsetDuration;
+    private TimeSpan _sunriseDuration;
 
     private readonly List<MapId> _almayerMaps = [];
     private readonly List<EntityUid> _marineList = [];
@@ -219,6 +221,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         Subs.CVar(_config, RMCCVars.RMCPlanetMapVoteExcludeLast, v => _mapVoteExcludeLast = v, true);
         Subs.CVar(_config, RMCCVars.RMCUseCarryoverVoting, v => _useCarryoverVoting = v, true);
         Subs.CVar(_config, RMCCVars.RMCLandingZoneMiasmaEnabled, v => _landingZoneMiasmaEnabled = v, true);
+        Subs.CVar(_config, RMCCVars.RMCSunsetDuration, v => _sunsetDuration = TimeSpan.FromSeconds(v), true);
+        Subs.CVar(_config, RMCCVars.RMCSunriseDuration, v => _sunriseDuration = TimeSpan.FromSeconds(v), true);
 
         ReloadPrototypes();
     }
@@ -1172,11 +1176,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         }
 
         var rmcAmbientComp = EnsureComp<RMCAmbientLightComponent>(rule.Comp.XenoMap);
-        var ambientLightEffectComp = EnsureComp<RMCAmbientLightEffectsComponent>(rule.Comp.XenoMap);
-
-        var colorSequence = _rmcAmbientLight.ProcessPrototype(ambientLightEffectComp.Sunset);
-        var duration = TimeSpan.FromSeconds(ambientLightEffectComp.SunsetDuration);
-        _rmcAmbientLight.SetColor((rule.Comp.XenoMap, rmcAmbientComp), colorSequence, duration);
+        var rmcAmbientEffectComp = EnsureComp<RMCAmbientLightEffectsComponent>(rule.Comp.XenoMap);
+        var colorSequence = _rmcAmbientLight.ProcessPrototype(rmcAmbientEffectComp.Sunset);
+        _rmcAmbientLight.SetColor((rule.Comp.XenoMap, rmcAmbientComp), colorSequence, _sunsetDuration);
 
         return true;
     }
@@ -1630,6 +1632,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         switch (rule.Result)
         {
             case DistressSignalRuleResult.MajorMarineVictory:
+                var rmcAmbientComp = EnsureComp<RMCAmbientLightComponent>(rule.XenoMap);
+                var rmcAmbientEffectComp = EnsureComp<RMCAmbientLightEffectsComponent>(rule.XenoMap);
+                var colorSequence = _rmcAmbientLight.ProcessPrototype(rmcAmbientEffectComp.Sunrise);
+                _rmcAmbientLight.SetColor((rule.XenoMap, rmcAmbientComp), colorSequence, _sunriseDuration);
+
                 var ares = _ares.EnsureARES();
                 _marineAnnounce.AnnounceRadio(ares,
                     "Bioscan complete. No unknown lifeform signature detected.",

@@ -11,11 +11,5 @@ public sealed partial class RMCAmbientLightEffectsComponent : Component
     public ProtoId<DatasetPrototype> Sunset = "RMCColorSequenceSunsetWarm";
 
     [DataField, AutoNetworkedField]
-    public float SunsetDuration = 280;
-
-    [DataField, AutoNetworkedField]
     public ProtoId<DatasetPrototype> Sunrise = "RMCColorSequenceSunrise";
-
-    [DataField, AutoNetworkedField]
-    public float SunriseDuration = 280;
 }
