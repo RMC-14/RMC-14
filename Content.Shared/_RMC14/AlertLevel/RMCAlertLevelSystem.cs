@@ -9,6 +9,8 @@ using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Ghost;
 using Content.Shared.Lock;
+using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Storage.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -22,6 +24,7 @@ public sealed class RMCAlertLevelSystem : EntitySystem
     [Dependency] private readonly ARESSystem _ares = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoorSystem _door = default!;
+    [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly LockSystem _lock = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -138,9 +141,16 @@ public sealed class RMCAlertLevelSystem : EntitySystem
         while (unlockQuery.MoveNext(out var uid, out var unlock, out var lockComp))
         {
             if (unlock.Level <= level)
+            {
                 _lock.Unlock(uid, null, lockComp);
+            }
             else
+            {
+                SharedEntityStorageComponent? entityStorageComp = null;
+                if (_entityStorage.ResolveStorage(uid, ref entityStorageComp))
+                    _entityStorage.CloseStorage(uid, entityStorageComp); // Close a locker before locking it.
                 _lock.Lock(uid, null, lockComp);
+            }
         }
 
         var openQuery = EntityQueryEnumerator<RMCOpenOnAlertLevelComponent, DoorComponent, RMCPodDoorComponent>();
