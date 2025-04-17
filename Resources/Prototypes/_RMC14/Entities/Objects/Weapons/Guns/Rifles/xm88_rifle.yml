@@ -9,6 +9,9 @@
     layers:
     - state: icon
       map: [ "enum.GunVisualLayers.Base" ]
+    - sprite: _RMC14/Areas/areas.rsi
+      state: blank
+      map: [ "enum.GunVisualLayers.MagUnshaded" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88/desert.rsi
   - type: Gun

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoUndeveloped
   - CMXenoFlammable
@@ -78,6 +78,13 @@
     - RMCXenoLarva
   - type: RMCBuckleOffset
     offset: 0, 0
+  - type: XenoRankNames
+    rankNames:
+      0: rmc-xeno-young-larva
+      2: rmc-xeno-mature-larva
+      3: rmc-xeno-elder-larva
+      4: rmc-xeno-elder-larva
+      5: rmc-xeno-elder-larva
 
 # For surgeries/failed incubations
 - type: entity
