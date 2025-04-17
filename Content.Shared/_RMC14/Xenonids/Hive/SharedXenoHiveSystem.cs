@@ -314,12 +314,12 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         SetHiveBurrowedLarva(hive, hive.Comp.BurrowedLarva + amount);
     }
 
-    public void SetHiveBurrowedLarva(Entity<HiveComponent> hive, int larva)
+    private void SetHiveBurrowedLarva(Entity<HiveComponent> hive, int larva)
     {
         hive.Comp.BurrowedLarva = larva;
         Dirty(hive);
 
-        var ev = new BurrowedLarvaChangedEvent(hive);
+        var ev = new BurrowedLarvaChangedEvent(larva);
         RaiseLocalEvent(hive, ref ev, true);
     }
 

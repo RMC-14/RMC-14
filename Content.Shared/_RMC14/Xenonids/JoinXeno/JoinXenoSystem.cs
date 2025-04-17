@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Actions;
 using Content.Shared.GameTicking;
+using Content.Shared.GameTicking.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 
@@ -13,12 +14,11 @@ public sealed class JoinXenoSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
-    [Dependency] private readonly SharedRMCGameTickerSystem _gameTicker = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedRMCGameTickerSystem _rmcGameTicker = default!;
 
-    public int BurrowedLarva { get; private set; }
+    public int ClientBurrowedLarva { get; private set; }
 
     public override void Initialize()
     {
@@ -37,12 +37,13 @@ public sealed class JoinXenoSystem : EntitySystem
             SubscribeLocalEvent<RMCPlayerJoinedLobbyEvent>(OnPlayerJoinedLobby);
             SubscribeLocalEvent<BurrowedLarvaChangedEvent>(OnBurrowedLarvaChanged);
             SubscribeNetworkEvent<JoinBurrowedLarvaRequest>(OnJoinBurrowedLarva);
+            SubscribeNetworkEvent<BurrowedLarvaStatusRequest>(OnBurrowedLarvaStatusRequest);
         }
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
-        BurrowedLarva = 0;
+        ClientBurrowedLarva = 0;
         SendLarvaStatus(null);
     }
 
@@ -80,7 +81,13 @@ public sealed class JoinXenoSystem : EntitySystem
 
     private void OnBurrowedLarvaStatus(BurrowedLarvaStatusEvent ev)
     {
-        BurrowedLarva = ev.Larva;
+        ClientBurrowedLarva = ev.Larva;
+
+        if (_net.IsServer)
+            return;
+
+        var changedEv = new BurrowedLarvaChangedEvent(ev.Larva);
+        RaiseLocalEvent(ref changedEv);
     }
 
     private void OnPlayerJoinedLobby(ref RMCPlayerJoinedLobbyEvent ev)
@@ -90,15 +97,7 @@ public sealed class JoinXenoSystem : EntitySystem
 
     private void OnBurrowedLarvaChanged(ref BurrowedLarvaChangedEvent ev)
     {
-        var query = EntityQueryEnumerator<CMDistressSignalRuleComponent>();
-        while (query.MoveNext(out var comp))
-        {
-            if (comp.Hive != ev.Hive.Owner)
-                continue;
-
-            BurrowedLarva = ev.Hive.Comp.BurrowedLarva;
-            SendLarvaStatus(null);
-        }
+        SendLarvaStatus(null);
     }
 
     private void OnJoinBurrowedLarva(JoinBurrowedLarvaRequest msg, EntitySessionEventArgs args)
@@ -118,21 +117,48 @@ public sealed class JoinXenoSystem : EntitySystem
                 continue;
             }
 
-            _gameTicker.PlayerJoinGame(args.SenderSession);
+            _rmcGameTicker.PlayerJoinGame(args.SenderSession);
             break;
         }
     }
 
-    private void SendLarvaStatus(ICommonSession? player)
+    private void OnBurrowedLarvaStatusRequest(BurrowedLarvaStatusRequest msg, EntitySessionEventArgs args)
+    {
+        SendLarvaStatus(args.SenderSession);
+    }
+
+    private void SendLarvaStatus(ICommonSession? to)
     {
         if (_net.IsClient)
             return;
 
-        var statusEv = new BurrowedLarvaStatusEvent(BurrowedLarva);
-        if (player == null)
-            RaiseNetworkEvent(statusEv);
-        else
-            RaiseNetworkEvent(statusEv, player);
+        var query = EntityQueryEnumerator<ActiveGameRuleComponent, CMDistressSignalRuleComponent, GameRuleComponent>();
+        while (query.MoveNext(out _, out var comp, out _))
+        {
+            if (!TryComp(comp.Hive, out HiveComponent? hive))
+                continue;
+
+            var statusEv = new BurrowedLarvaStatusEvent(hive.BurrowedLarva);
+            if (to != null)
+            {
+                RaiseNetworkEvent(statusEv, to);
+                return;
+            }
+
+            var filter = Filter.Empty()
+                .AddWhere(s =>
+                    _rmcGameTicker.PlayerGameStatuses.GetValueOrDefault(s.UserId) != PlayerGameStatus.JoinedGame);
+            RaiseNetworkEvent(statusEv, filter);
+        }
+    }
+
+    public void RequestBurrowedLarvaStatus()
+    {
+        if (_net.IsServer)
+            return;
+
+        var ev = new BurrowedLarvaStatusRequest();
+        RaiseNetworkEvent(ev);
     }
 
     public void ClientJoinLarva()

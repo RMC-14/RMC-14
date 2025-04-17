@@ -201,6 +201,7 @@ namespace Content.Client.Lobby
 
                 // RMC14
                 Lobby.ReadyButton.AddStyleClass("OpenLeft");
+                Lobby.JoinXenoButton.Visible = true;
             }
             else
             {
@@ -213,6 +214,7 @@ namespace Content.Client.Lobby
 
                 // RMC14
                 Lobby.ReadyButton.RemoveStyleClass("OpenLeft");
+                Lobby.JoinXenoButton.Visible = false;
             }
 
             if (_gameTicker.ServerInfoBlob != null)
