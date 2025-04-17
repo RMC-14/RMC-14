@@ -24,7 +24,8 @@ public sealed class XenoWatchBui : BoundUserInterface
     private XenoWatchWindow? _window;
 
     private readonly SpriteSystem _sprite;
-    private bool Update = true;
+    private bool UsingBar = false;
+    private string BarText = "";
 
 
     public XenoWatchBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
@@ -137,13 +138,13 @@ public sealed class XenoWatchBui : BoundUserInterface
 
     private void OnSearchBarChanged(LineEditEventArgs args)
     {
+
+        BarText = args.Text;
         if (_window is not { Disposed: false })
             return;
 
         if (string.IsNullOrWhiteSpace(args.Text))
-            Update = true;
-
-        Update = false;
+            UsingBar = false;
 
         foreach (var child in _window.XenoContainer.Children)
         {
@@ -155,6 +156,7 @@ public sealed class XenoWatchBui : BoundUserInterface
             else
                 control.Visible = control.NameLabel.GetMessage()?.Contains(args.Text, StringComparison.OrdinalIgnoreCase) ?? false;
         }
+        UsingBar = true;
     }
 
 
@@ -270,8 +272,12 @@ public sealed class XenoWatchBui : BoundUserInterface
                 continue;
             if (control.Button.Name is null)
                 break;
-            if (Update)
+
+            if (UsingBar)
+                control.Visible = control.NameLabel.GetMessage()?.Contains(BarText, StringComparison.OrdinalIgnoreCase) ?? false;
+            else
                 control.Visible = IsXenoVisible(control) || !dontshowall;
+
 
             control.EvoPoints.Visible = _window.ShowEvo.Pressed;
 
