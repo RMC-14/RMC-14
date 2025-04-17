@@ -25,6 +25,9 @@ public sealed partial class DropshipComponent : Component
     public SoundSpecifier GeneralQuartersSound = new SoundPathSpecifier("/Audio/_RMC14/Announcements/ARES/GQfullcall.ogg");
 
     [DataField, AutoNetworkedField]
+    public SoundSpecifier UnidentifledlifesignsSound = new SoundPathSpecifier("/Audio/_RMC14/Announcements/ARES/unidentified_lifesigns.ogg");
+
+    [DataField, AutoNetworkedField]
     public bool Locked;
 
     [DataField, AutoNetworkedField]
