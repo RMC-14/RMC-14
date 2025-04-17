@@ -93,4 +93,3 @@
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
-    squad: SquadPMC

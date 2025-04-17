@@ -56,7 +56,6 @@
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
-    squad: SquadSPP
 
 - type: startingGear
   id: RMCGearSPPEngineer
