@@ -68,6 +68,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
     private TimeSpan _flyByTime;
     private TimeSpan _hijackTravelTime;
 
+    private EntityUid _dropshipId;
+    private bool _hijack;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -134,6 +137,32 @@ public sealed class DropshipSystem : SharedDropshipSystem
             var ev = new DropshipLaunchedFromWarshipEvent(ent);
             RaiseLocalEvent(ent, ref ev, true);
         }
+
+        if (!_hijack)
+        {
+            int xenoCount = 0;
+            string dropshipName = string.Empty;
+            var dropship = EnsureComp<DropshipComponent>(_dropshipId);
+            var xenoQuery = EntityQueryEnumerator<XenoComponent, MobStateComponent, TransformComponent>();
+            while (xenoQuery.MoveNext(out var uid, out _, out var mobState, out var xform))
+            {
+                if (xform.GridUid == _dropshipId && mobState.CurrentState != MobState.Dead)
+                {
+                    xenoCount++;
+                    if (string.IsNullOrEmpty(dropshipName) && _area.TryGetArea(uid, out _, out var areaProto))
+                        dropshipName = areaProto.Name;
+                }
+            }
+
+            if (xenoCount > 0)
+            {
+                _alertLevelSystem.Set(RMCAlertLevels.Red, _dropshipId, false, false);
+                _marineAnnounce.AnnounceToMarines(Loc.GetString("rmc-announcement-unidentified-lifesigns",
+                    ("name", dropshipName),
+                    ("count", xenoCount)),
+                    dropship.UnidentifledlifesignsSound);
+            }
+        }
     }
 
     private void OnFTLCompleted(Entity<DropshipComponent> ent, ref FTLCompletedEvent args)
@@ -195,7 +224,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
     {
         base.FlyTo(computer, destination, user, hijack, startupTime, hyperspaceTime);
 
+        _hijack = hijack;
         var dropshipId = Transform(computer).GridUid;
+        _dropshipId = dropshipId ?? EntityUid.Invalid;
         if (!TryComp(dropshipId, out ShuttleComponent? shuttleComp))
         {
             Log.Warning($"Tried to launch {ToPrettyString(computer)} outside of a shuttle.");
@@ -330,33 +361,6 @@ public sealed class DropshipSystem : SharedDropshipSystem
             // Add 10 seconds to compensate for the arriving times
             dropship.HijackLandAt = _timing.CurTime + TimeSpan.FromSeconds(hyperspaceTime.Value) + TimeSpan.FromSeconds(10);
             Dirty(dropshipId.Value, dropship);
-        }
-        else
-        {
-            Timer.Spawn(TimeSpan.FromSeconds(10), () =>  // TODO RMC14: Check for locked dropship by queen and friendliness of xenos onboard
-            {
-                int xenoCount = 0;
-                string dropshipName = string.Empty;
-                var xenoQuery = EntityQueryEnumerator<XenoComponent, MobStateComponent, TransformComponent>();
-                while (xenoQuery.MoveNext(out var uid, out _, out var mobState, out var xform))
-                {
-                    if (xform.GridUid == dropshipId && mobState.CurrentState != MobState.Dead)
-                    {
-                        xenoCount++;
-                        if (string.IsNullOrEmpty(dropshipName) && _area.TryGetArea(uid, out _, out var areaProto))
-                            dropshipName = areaProto.Name;
-                    }
-                }
-
-                if (xenoCount > 0)
-                {
-                    _alertLevelSystem.Set(RMCAlertLevels.Red, dropshipId.Value, false, false);
-                    _marineAnnounce.AnnounceToMarines(Loc.GetString("rmc-announcement-unidentified-lifesigns",
-                        ("name", dropshipName),
-                        ("count", xenoCount)),
-                        dropship.UnidentifledlifesignsSound);
-                }
-            });
         }
 
         _adminLog.Add(LogType.RMCDropshipLaunch,
