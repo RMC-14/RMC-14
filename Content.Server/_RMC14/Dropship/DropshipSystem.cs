@@ -138,7 +138,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
             RaiseLocalEvent(ent, ref ev, true);
         }
 
-        if (!_hijack)
+        if (!_hijack) // TODO RMC14: Check for locked dropship by queen and friendliness of xenos onboard
         {
             int xenoCount = 0;
             string dropshipName = string.Empty;
