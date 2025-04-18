@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken/modified from cm-ss13 at https://github.com/cmss13-devs/cmss13/commit/9ff2072285d9668073b5bd2219d2ebac0f5281b5, https://github.com/cmss13-devs/cmss13/blob/07455a5f3986b610e7ccdc3096cad1d914fca2f9/icons/obj/items/weapons/guns/guns_by_map/desert/guns_obj.dmi",
+  "copyright": "Taken/modified from cm-ss13 at https://github.com/cmss13-devs/cmss13/commit/9ff2072285d9668073b5bd2219d2ebac0f5281b5, https://github.com/cmss13-devs/cmss13/blob/07455a5f3986b610e7ccdc3096cad1d914fca2f9/icons/obj/items/weapons/guns/guns_by_map/desert/guns_obj.dmi, mag animation by VictorJob",
   "size": {
     "x": 32,
     "y": 32
