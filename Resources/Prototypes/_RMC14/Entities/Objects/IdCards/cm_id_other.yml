@@ -24,11 +24,48 @@
 
 - type: entity
   parent: CMIDCardSilver
+  id: CMIDCardColonistDoctor
+  name: doctor colonist ID card
+  components:
+  - type: PresetIdCard
+    job: CMSurvivorDoctor
+
+- type: entity
+  parent: CMIDCardLanyard
+  id: CMIDCardColonistEngineer
+  name: engineer colonist ID card
+  components:
+  - type: PresetIdCard
+    job: CMSurvivorEngineer
+
+- type: entity
+  parent: CMIDCardLanyard
+  id: CMIDCardColonistSecurity
+  name: security colonist ID card
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/id.rsi
+    state: plain
+  - type: Clothing
+    sprite: _RMC14/Objects/CMIDs/id.rsi
+  - type: PresetIdCard
+    job: CMSurvivorSecurity
+
+- type: entity
+  parent: CMIDCardSilver
   id: CMIDCardLiaison
   name: liaison ID card
   components:
   - type: PresetIdCard
     job: CMLiaison
+
+- type: entity
+  parent: CMIDCardLiaison
+  id: CMIDCardLiaisonColony
+  name: liaison ID card
+  components:
+  - type: PresetIdCard
+    job: CMSurvivorCorporate
 
 - type: entity
   parent: CMIDCardLiaison

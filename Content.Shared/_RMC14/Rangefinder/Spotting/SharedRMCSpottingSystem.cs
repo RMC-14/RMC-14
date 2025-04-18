@@ -56,7 +56,7 @@ public abstract partial class SharedRMCSpottingSystem : EntitySystem
         if(!TryComp(ent, out TargetingComponent? targeting))
             return;
 
-        _targeting.StopTargeting(ent, args.Target, targeting);
+        _targeting.StopTargeting((ent, targeting), args.Target);
     }
 
     /// <summary>

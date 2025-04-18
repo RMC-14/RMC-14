@@ -45,6 +45,7 @@
       Brute:
         collection: XenoMove
   - type: XenoConstruct
+    destroyWeedNodes: false
   - type: RMCNightVisionVisible
     priority: -1
     transparency: 0.2

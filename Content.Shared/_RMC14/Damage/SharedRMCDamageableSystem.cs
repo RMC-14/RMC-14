@@ -39,6 +39,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly MobThresholdSystem _mobThresholds = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
@@ -52,6 +53,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
 
+    private static readonly ProtoId<DamageTypePrototype> LethalDamageType = "Asphyxiation";
     private readonly HashSet<ProtoId<DamageTypePrototype>> _bruteTypes = new();
     private readonly HashSet<ProtoId<DamageTypePrototype>> _burnTypes = new();
     private readonly List<string> _types = [];
@@ -303,8 +305,15 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
 
     private void OnActiveDamageOnPulledDevoured(Entity<ActiveDamageOnPulledWhileCritComponent> ent, ref XenoTargetDevouredAttemptEvent args)
     {
+        if (_mobThresholds.TryGetDeadThreshold(ent.Owner, out var mobThreshold) && TryComp<DamageableComponent>(ent, out var damageable))
+        {
+            var lethalAmountOfDamage = mobThreshold.Value - damageable.TotalDamage;
+            var type = _prototypes.Index<DamageTypePrototype>(LethalDamageType);
+            var damage = new DamageSpecifier(type, lethalAmountOfDamage);
+            _damageable.TryChangeDamage(ent.Owner, damage, true);
+        }
+
         args.Cancelled = true;
-        _mobState.ChangeMobState(ent, MobState.Dead);
     }
 
     public DamageSpecifier DistributeHealing(Entity<DamageableComponent?> damageable, ProtoId<DamageGroupPrototype> groupId, FixedPoint2 amount, DamageSpecifier? equal = null)

@@ -186,11 +186,17 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private void OnFlareSignalDropped(Entity<FlareSignalComponent> ent, ref DroppedEvent args)
     {
+        if (!IsFlareLit(ent))
+            return;
+
         StartTrackingActiveFlare(ent, args.User);
     }
 
     private void OnFlareSignalThrown(Entity<FlareSignalComponent> ent, ref ThrownEvent args)
     {
+        if (!IsFlareLit(ent))
+            return;
+
         StartTrackingActiveFlare(ent, args.User);
     }
 

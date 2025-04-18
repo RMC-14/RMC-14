@@ -34,6 +34,9 @@
     soundGunshot:
       collection: RMCFlamerShoot
   - type: ShootUseDelay
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -46,6 +49,11 @@
           components:
           - RMCFlamerTank
   - type: Wieldable
+  - type: WieldableSpeedModifiers
+    base: 0.5
+    light: 0.69
+    medium: 0.75
+    heavy: 0.806
   - type: GunRequiresWield
   - type: RMCFlamerAmmoProvider
   - type: MagazineVisuals
@@ -72,6 +80,7 @@
       sprite: _RMC14/Interface/MousePointer/flamer_mouse.rsi
       state: all
   - type: RMCIgniter
+  - type: RMCAmmoEject
   - type: GenericVisualizer
     visuals:
       enum.RMCFlamerVisualLayers.Strip:

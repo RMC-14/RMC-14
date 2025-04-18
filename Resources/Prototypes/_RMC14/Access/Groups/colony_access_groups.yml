@@ -43,14 +43,14 @@
   tags:
   - CMAccessColonyPublic
   - CMAccessColonyEngineering
+  - CMAccessColonyLogistics
 
 - type: accessGroup
   id: ColonistSec
   tags:
   - CMAccessColonyPublic
-  - CMAccessColonyEngineering
-  - CMAccessColonyLogistics
-  - CMAccessColonyResearch
+  - CMAccessColonyBrig
+  - CMAccessColonyCommand
 
 - type: accessGroup
   id: ColonistMedical
@@ -59,3 +59,10 @@
   - CMAccessColonyResearch
   - CMAccessColonyMedbay
   - CMAccessColonyChem
+
+- type: accessGroup
+  id: ColonistCorporate
+  tags:
+  - CMAccessColonyPublic
+  - CMAccessColonyCommand
+  - RMCAccessWeYa # TODO RMC14 weya colonial, weya exec
