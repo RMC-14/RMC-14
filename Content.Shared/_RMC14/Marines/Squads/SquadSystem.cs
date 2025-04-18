@@ -95,7 +95,7 @@ public sealed class SquadSystem : EntitySystem
         SubscribeLocalEvent<SquadLeaderComponent, EntityTerminatingEvent>(OnSquadLeaderTerminating);
         SubscribeLocalEvent<SquadLeaderComponent, GetMarineIconEvent>(OnSquadLeaderGetMarineIcon, after: [typeof(SharedMarineSystem)]);
 
-        SubscribeLocalEvent<SquadLeaderHeadsetComponent, EncryptionChannelsChangedEvent>(OnSquadLeaderHeadsetChannelsChanged);
+        SubscribeLocalEvent<SquadLeaderHeadsetComponent, EncryptionChannelsChangedEvent>(OnSquadLeaderHeadsetChannelsChanged, before: [typeof(SharedHeadsetSystem)]);
         SubscribeLocalEvent<SquadLeaderHeadsetComponent, EntityTerminatingEvent>(OnSquadLeaderHeadsetTerminating);
 
         SubscribeLocalEvent<AssignSquadComponent, MapInitEvent>(OnAssignSquadMapInit);

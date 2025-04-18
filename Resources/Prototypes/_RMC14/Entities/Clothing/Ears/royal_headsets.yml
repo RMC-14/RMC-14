@@ -10,7 +10,9 @@
     containers:
       key_slots:
       - RMCEncryptionKeyRoyalMarine
-  - type: Headset
+  - type: RMCHeadset
+    channels:
+    - RoyalMarine
     radioTextIncrease: 2
 
 - type: entity
@@ -20,9 +22,8 @@
   components:
   - type: EncryptionKey
     channels:
-    - RoyalMarine
     - MarineCommand
     - MarineCommon
     defaultChannel: RoyalMarine
   - type: Sprite
-    state: stripped_key
+    state: sl_key

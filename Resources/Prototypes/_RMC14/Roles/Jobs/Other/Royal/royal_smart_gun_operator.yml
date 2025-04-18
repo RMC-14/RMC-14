@@ -33,7 +33,7 @@
 
 - type: entity
   id: RMCRandomHumanoidRoyalSmartGunOperator
-  name: royal marines smart gun operator role
+  name: royal marine smart gun operator role
   suffix: Role
   components:
   - type: Sprite

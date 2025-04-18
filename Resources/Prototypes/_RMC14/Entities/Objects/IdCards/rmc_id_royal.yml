@@ -1,7 +1,7 @@
 ﻿- type: entity
   parent: CMIDCardStandardDogtag
   id: RMCDogtagRoyalSmartGunOperator
-  name: Royal Marines SGO's dogtags
+  name: Royal Marine SGO's dogtags
   components:
   - type: PresetIdCard
     job: CMRoyalSmartGunOperator

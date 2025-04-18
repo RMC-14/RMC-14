@@ -1,13 +1,16 @@
-﻿using Content.Shared.Verbs;
+﻿using Content.Shared.Radio;
+using Content.Shared.Radio.EntitySystems;
+using Content.Shared.Verbs;
 
 namespace Content.Shared._RMC14.Radio;
 
-public sealed class SharedRMCRadioFilterSystem : EntitySystem
+public sealed class RMCRadioSystem : EntitySystem
 {
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<RMCHeadsetComponent, EncryptionChannelsChangedEvent>(OnHeadsetEncryptionChannelsChanged, before: [typeof(SharedHeadsetSystem)]);
         SubscribeLocalEvent<RMCRadioFilterComponent, GetVerbsEvent<AlternativeVerb>>(OnGetAltVerbs);
 
         Subs.BuiEvents<RMCRadioFilterComponent>(RMCRadioFilterUI.Key,
@@ -15,6 +18,14 @@ public sealed class SharedRMCRadioFilterSystem : EntitySystem
             {
                 subs.Event<RMCRadioFilterBuiMsg>(OnRadioFilterBuiMsg);
             });
+    }
+
+    private void OnHeadsetEncryptionChannelsChanged(Entity<RMCHeadsetComponent> ent, ref EncryptionChannelsChangedEvent args)
+    {
+        foreach (var channel in ent.Comp.Channels)
+        {
+            args.Component.Channels.Add(channel);
+        }
     }
 
     private void OnGetAltVerbs(Entity<RMCRadioFilterComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)

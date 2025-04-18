@@ -9,7 +9,7 @@
       key_slots: !type:Container
   - type: Headset
   - type: EncryptionKeyHolder
-    keySlots: 4
+    keySlots: 4 # TODO RMC14 3 when intrinsic channels are all done
   - type: Clothing
     slots:
     - ears
