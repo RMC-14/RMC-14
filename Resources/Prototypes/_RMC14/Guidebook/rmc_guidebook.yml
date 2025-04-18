@@ -26,7 +26,6 @@
   - RMCGuideRoleCombatTechnician
   - RMCGuideCommunicationsTowers
   - RMCGuideRoleMaintenanceTechnician
-  - RMCGuideSurvivor
 
 - type: guideEntry
   parent: RMC
