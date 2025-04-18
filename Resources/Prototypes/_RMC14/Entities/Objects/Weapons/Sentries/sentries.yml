@@ -485,15 +485,15 @@
       state: mini_uac_sentry_handheld
   - type: Icon
     sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
-    state: mini_uac_sentry_handheld
+    state: Mini uac_flamer_handheld
   - type: Appearance
   - type: GenericVisualizer
     visuals:
       enum.SentryLayers.Layer:
         sentry:
-          Item: { state: mini_uac_sentry_handheld }
-          Off: { state: mini_uac_sentry_noammo }
-          On: { state: mini_uac_sentry_on }
+          Item: { state: Mini uac_flamer_handheld }
+          Off: { state: Mini uac_flamer_noammo }
+          On: { state: Mini uac_flamer_on }
   - type: Gun
     fireRate: 1
   - type: Destructible
@@ -545,7 +545,18 @@
     fireRate: .33
   - type: Icon
     sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
-    state: normal_uac_sentry_handheld
+    state: Normal uac_flamer_handheld
+  - type: GenericVisualizer
+    visuals:
+      enum.SentryLayers.Layer:
+        base:
+          Item: { state: "", visible: false }
+          Off: { state: defense_base_off, visible: true }
+          On: { state: defense_base, visible: true }
+        sentry:
+          Item: { state: Normal uac_flamer_handheld }
+          Off: { state: Normal uac_flamer_noammo }
+          On: { state: Normal uac_flamer_on }
   - type: NpcFactionMember
     factions:
     - UNMC
@@ -570,10 +581,10 @@
     - map: [ "base" ]
       state: defense_base_off
     - map: [ "sentry" ]
-      state: dmr_uac_sentry_handheld
+      state: Plasma uac_flamer_handheld
   - type: Icon
     sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
-    state: dmr_uac_sentry_handheld
+    state: Plasma uac_flamer_handheld
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -583,9 +594,9 @@
           Off: { state: defense_base_off, visible: true }
           On: { state: defense_base, visible: true }
         sentry:
-          Item: { state: dmr_uac_sentry_handheld }
-          Off: { state: dmr_uac_sentry_noammo }
-          On: { state: dmr_uac_sentry_on }
+          Item: { state: Plasma uac_flamer_handheld }
+          Off: { state: Plasma uac_flamer_noammo }
+          On: { state: Plasma uac_flamer_on }
   - type: Gun
     fireRate: 0.14
   - type: Destructible

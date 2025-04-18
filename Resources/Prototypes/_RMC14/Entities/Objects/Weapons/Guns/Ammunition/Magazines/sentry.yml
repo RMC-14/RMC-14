@@ -70,7 +70,12 @@
     capacity: 100
     cycleable: false
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/un12g.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/sentry_flametank.rsi
+    layers:
+    - state: flametank
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: flametank_strip
+      color: "#EE6515"
 
 - type: entity
   parent: BaseMagazineRifle
@@ -90,7 +95,12 @@
     capacity: 100
     cycleable: false
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/un12g.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/sentry_flametank.rsi
+    layers:
+    - state: flametank
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: flametank_strip
+      color: "#00b8ff"
   
 - type: entity
   parent: BaseMagazineRifle
@@ -110,8 +120,13 @@
     capacity: 100
     cycleable: false
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/un12g.rsi
-
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/sentry_flametank.rsi
+    layers:
+    - state: flametank
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: flametank_strip
+      color: "#832828"
+# "00b8ff" (blue fire napalm x), for mini it should be "EE6515" (normal ut fuel), for plasma do "832828" (phosporus color since thats the smoke)
 - type: Tag
   id: RMCMagazineSentry
 
