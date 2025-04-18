@@ -159,9 +159,9 @@
   - type: IgniteOnProjectileHit
   - type: IgnorePredictionHide
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/firesentry_projectile.rsi
     layers:
-    - state: bullet
+    - state: pulse0
       shader: unshaded
   - type: Projectile
     deleteOnCollide: True
@@ -203,9 +203,9 @@
   - type: IgniteOnProjectileHit
   - type: IgnorePredictionHide
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/firesentry_projectile.rsi
     layers:
-    - state: bullet
+    - state: pulse0
       shader: unshaded
   - type: TileFire
     id: RMCTileFireBlue
@@ -249,9 +249,9 @@
   - type: IgniteOnProjectileHit
   - type: IgnorePredictionHide
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/firesentry_projectile.rsi
     layers:
-    - state: bullet
+    - state: pulse0
       shader: unshaded
   - type: Projectile
     deleteOnCollide: True

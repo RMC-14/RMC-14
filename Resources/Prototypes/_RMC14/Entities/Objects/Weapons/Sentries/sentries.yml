@@ -496,6 +496,7 @@
           On: { state: Mini uac_flamer_on }
   - type: Gun
     fireRate: 1
+    projectileSpeed: 20.0
   - type: Destructible
     thresholds:
     - trigger:
@@ -543,6 +544,7 @@
   components:
   - type: Gun
     fireRate: .33
+    projectileSpeed: 20.0
   - type: Icon
     sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
     state: Normal uac_flamer_handheld
@@ -599,6 +601,7 @@
           On: { state: Plasma uac_flamer_on }
   - type: Gun
     fireRate: 0.14
+    projectileSpeed: 20.0
   - type: Destructible
     thresholds:
     - trigger:
