@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Xenonids.ClawSharpness;
@@ -17,5 +17,6 @@ public enum XenoClawType
 {
     Normal,
     Sharp,
-    VerySharp
+    VerySharp,
+    ImpossiblySharp //For receiver component on things that should be unbreakable
 }
