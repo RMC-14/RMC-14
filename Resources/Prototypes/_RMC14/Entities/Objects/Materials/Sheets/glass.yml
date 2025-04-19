@@ -70,6 +70,17 @@
 
 - type: entity
   parent: CMSheetGlass
+  id: CMSheetGlass25
+  suffix: "25"
+  components:
+   - type: Sprite
+     state: glass_2
+   - type: Stack
+     stackType: CMGlass
+     count: 25
+
+- type: entity
+  parent: CMSheetGlass
   id: CMSheetGlass30
   suffix: "30"
   components:
