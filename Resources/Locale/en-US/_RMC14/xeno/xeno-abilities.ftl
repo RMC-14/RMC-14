@@ -140,6 +140,7 @@ cm-xeno-charge-spit-expire = Our spits are back to normal.
 
 # Turn Invisible
 cm-xeno-invisibility-expire = We feel our invisibility end!
+rmc-xeno-invisibility-expire-bump = We bumped into someone and lost our invisibility!
 
 # Ovipositor
 cm-xeno-ovipositor-attach = We start attaching to the ovipositor.
