@@ -104,3 +104,5 @@
       state: lurker
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.2
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT2
