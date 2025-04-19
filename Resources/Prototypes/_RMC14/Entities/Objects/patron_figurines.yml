@@ -1272,3 +1272,14 @@
     state: fast-paws_chip
   - type: PatronFigurine
     id: c5f5b62a-5206-4948-9745-e4d9bbb87764
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronHaileyMorgan
+  name: Hailey Morgan figurine
+  description: "\"Oh my gawd, bestie, I loooove your outfit.\""
+  components:
+  - type: Sprite
+    state: hailey_morgan
+  - type: PatronFigurine
+    id: a26fad54-176e-4b70-9dff-567af81b6c11

@@ -37,6 +37,7 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Item;
+using Content.Shared._RMC14.Light;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.HyperSleep;
@@ -141,6 +142,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly MapInsertSystem _mapInsert = default!;
     [Dependency] private readonly SharedDestructibleSystem _destruction = default!;
     [Dependency] private readonly IntelSystem _intel = default!;
+    [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
+    [Dependency] private readonly RMCAmbientLightSystem _rmcAmbientLight = default!;
 
 
     private readonly HashSet<string> _operationNames = new();
@@ -160,6 +163,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private bool _useCarryoverVoting;
     private TimeSpan _hijackStunTime = TimeSpan.FromSeconds(5);
     private bool _landingZoneMiasmaEnabled;
+    private TimeSpan _sunsetDuration;
+    private TimeSpan _sunriseDuration;
 
     private readonly List<MapId> _almayerMaps = [];
     private readonly List<EntityUid> _marineList = [];
@@ -217,6 +222,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         Subs.CVar(_config, RMCCVars.RMCPlanetMapVoteExcludeLast, v => _mapVoteExcludeLast = v, true);
         Subs.CVar(_config, RMCCVars.RMCUseCarryoverVoting, v => _useCarryoverVoting = v, true);
         Subs.CVar(_config, RMCCVars.RMCLandingZoneMiasmaEnabled, v => _landingZoneMiasmaEnabled = v, true);
+        Subs.CVar(_config, RMCCVars.RMCSunsetDuration, v => _sunsetDuration = TimeSpan.FromSeconds(v), true);
+        Subs.CVar(_config, RMCCVars.RMCSunriseDuration, v => _sunriseDuration = TimeSpan.FromSeconds(v), true);
 
         ReloadPrototypes();
     }
@@ -296,7 +303,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 return true;
             }
 
-            NetUserId? SpawnXeno(List<NetUserId> list, EntProtoId ent)
+            NetUserId? SpawnXeno(List<NetUserId> list, EntProtoId ent, bool doBurst = false)
             {
                 var playerId = _random.PickAndTake(list);
                 if (!_player.TryGetSessionById(playerId, out var player))
@@ -307,7 +314,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
                 ev.PlayerPool.Remove(player);
                 GameTicker.PlayerJoinGame(player);
-                var xenoEnt = SpawnXenoEnt(ent);
+                var xenoEnt = SpawnXenoEnt(ent, player, doBurst);
 
                 if (!_mind.TryGetMind(playerId, out var mind))
                     mind = _mind.CreateMind(playerId);
@@ -424,13 +431,43 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 return playerId;
             }
 
-            EntityUid SpawnXenoEnt(EntProtoId ent)
+            EntityUid SpawnXenoEnt(EntProtoId ent, ICommonSession player, bool doBurst = false)
             {
                 var leader = _prototypes.TryIndex(ent, out var proto) &&
                              proto.TryGetComponent(out XenoComponent? xeno, _compFactory) &&
                              xeno.SpawnAtLeaderPoint;
 
                 var point = _random.Pick(leader ? xenoLeaderSpawnPoints : xenoSpawnPoints);
+
+                if (doBurst)
+                {
+                    var profile = GameTicker.GetPlayerProfile(player);
+                    var coordinates = _transform.GetMoverCoordinates(point);
+                    var corpseMob = _stationSpawning.SpawnPlayerMob(coordinates, comp.XenoSurvivorCorpseJob, profile, null);
+
+                    var spawnEv = new PlayerSpawnCompleteEvent( // for ranks and such
+                        corpseMob,
+                        player,
+                        comp.XenoSurvivorCorpseJob,
+                        false,
+                        true,
+                        0,
+                        default,
+                        profile
+                    );
+
+                    RaiseLocalEvent(corpseMob, spawnEv, true);
+
+                    var victimInfected = EnsureComp<VictimInfectedComponent>(corpseMob);
+                    _parasite.SetBurstSpawn((corpseMob, victimInfected), ent);
+                    _parasite.SetHive((corpseMob, victimInfected), comp.Hive);
+                    _parasite.SpawnLarva((corpseMob, victimInfected), out var newXeno);
+                    _parasite.SetBurstDelay((corpseMob, victimInfected), comp.XenoSurvivorCorpseBurstDelay);
+
+                    _xeno.MakeXeno(newXeno);
+                    return newXeno;
+                }
+
                 var xenoEnt = SpawnAtPosition(ent, point.ToCoordinates());
 
                 _xeno.MakeXeno(xenoEnt);
@@ -539,7 +576,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 var list = xenoCandidates[i];
                 while (list.Count > 0 && selectedXenos < totalXenos)
                 {
-                    if (SpawnXeno(list, comp.LarvaEnt) != null)
+                    if (SpawnXeno(list, comp.LarvaEnt, true) != null)
                         selectedXenos++;
                 }
             }
@@ -1169,6 +1206,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             EnsureComp<DeletedByWeedKillerComponent>(uid);
         }
 
+        var rmcAmbientComp = EnsureComp<RMCAmbientLightComponent>(rule.Comp.XenoMap);
+        var rmcAmbientEffectComp = EnsureComp<RMCAmbientLightEffectsComponent>(rule.Comp.XenoMap);
+        var colorSequence = _rmcAmbientLight.ProcessPrototype(rmcAmbientEffectComp.Sunset);
+        _rmcAmbientLight.SetColor((rule.Comp.XenoMap, rmcAmbientComp), colorSequence, _sunsetDuration);
+
         return true;
     }
 
@@ -1621,6 +1663,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         switch (rule.Result)
         {
             case DistressSignalRuleResult.MajorMarineVictory:
+                var rmcAmbientComp = EnsureComp<RMCAmbientLightComponent>(rule.XenoMap);
+                var rmcAmbientEffectComp = EnsureComp<RMCAmbientLightEffectsComponent>(rule.XenoMap);
+                var colorSequence = _rmcAmbientLight.ProcessPrototype(rmcAmbientEffectComp.Sunrise);
+                _rmcAmbientLight.SetColor((rule.XenoMap, rmcAmbientComp), colorSequence, _sunriseDuration);
+
                 var ares = _ares.EnsureARES();
                 _marineAnnounce.AnnounceRadio(ares,
                     "Bioscan complete. No unknown lifeform signature detected.",

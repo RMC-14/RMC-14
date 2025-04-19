@@ -130,5 +130,7 @@
     layers:
     - state: closed
       map: ["enum.DoorVisualLayers.Base"]
+  - type: Door
+    occludes: false
   - type: Occluder
     enabled: false

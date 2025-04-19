@@ -75,7 +75,7 @@
     pocket1: RMCPouchAutoinjectorFill
     pocket2: RMCPouchConstructionFillFull
   inhand:
-  - RMCToolWebbingSmallFilled
+    - RMCToolWebbingSmallFilled
 
 - type: playTimeTracker
   id: CMJobSPPEngineer
