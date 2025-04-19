@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMJobBase
   id: RMCSPPRifleman
-  name: rmc-job-name-spp-soldier
+  name: RMCSPPRifleman
   description: rmc-job-description-spp-soldier
   playTimeTracker: CMJobSPPRifleman
   ranks:
@@ -42,7 +42,7 @@
   id: RMCSPPRifleman
   components:
   - type: GhostRole
-    name: rmc-ghost-name-spp-soldier
+    name: RMCSPPRifleman
     description: rmc-job-description-spp-soldier
     rules: rmc-ghost-role-information-spp-rules
     reregister: false

@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMJobBase
   id: RMCSPPSpecialist
-  name: rmc-job-name-spp-specialist
+  name: RMCSPPSpecialist
   description: rmc-job-description-spp-specialist
   playTimeTracker: CMJobSPPSpecialist
   ranks:
@@ -51,7 +51,7 @@
   id: RMCSPPSpecialist
   components:
   - type: GhostRole
-    name: rmc-ghost-name-spp-specialist
+    name: RMCSPPSpecialist
     description: rmc-job-description-spp-specialist
     rules: rmc-ghost-role-information-spp-rules
     reregister: false

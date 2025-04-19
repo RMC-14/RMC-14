@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMJobBase
   id: RMCSPPLeader
-  name: rmc-job-name-spp-leader
+  name: RMCSPPLeader
   description: rmc-job-description-spp-leader
   playTimeTracker: CMJobSPPLeader
   ranks:
@@ -61,7 +61,7 @@
   id: RMCSPPLeader
   components:
   - type: GhostRole
-    name: rmc-ghost-name-spp-leader
+    name: RMCSPPLeader
     description: rmc-job-description-spp-leader
     rules: rmc-ghost-role-information-spp-rules
     reregister: false

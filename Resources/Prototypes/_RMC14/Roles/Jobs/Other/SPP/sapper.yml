@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMJobBase
   id: RMCSPPEngineer
-  name: rmc-job-name-spp-engineer
+  name: RMCSPPEngineer
   description: rmc-job-description-spp-engineer
   playTimeTracker: CMJobSPPEngineer
   ranks:
@@ -48,7 +48,7 @@
   id: RMCSPPEngineer
   components:
   - type: GhostRole
-    name: rmc-ghost-name-spp-engineer
+    name: RMCSPPEngineer
     description: rmc-job-description-spp-engineer
     rules: rmc-ghost-role-information-spp-rules
     reregister: false
