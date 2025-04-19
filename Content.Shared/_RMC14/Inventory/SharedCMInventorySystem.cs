@@ -18,6 +18,7 @@ using Content.Shared.Verbs;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Whitelist;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Input.Binding;
@@ -81,6 +82,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
         SubscribeLocalEvent<CMItemSlotsComponent, ItemSlotEjectAttemptEvent>(OnSlotsEjectAttempt);
         SubscribeLocalEvent<CMItemSlotsComponent, EntInsertedIntoContainerMessage>(OnSlotsEntInsertedIntoContainer);
         SubscribeLocalEvent<CMItemSlotsComponent, EntRemovedFromContainerMessage>(OnSlotsEntRemovedFromContainer);
+        SubscribeLocalEvent<CMItemSlotsComponent, InteractUsingEvent>(OnInteractUsing);
 
         SubscribeLocalEvent<CMHolsterComponent, GetVerbsEvent<AlternativeVerb>>(OnHolsterGetAltVerbs);
         SubscribeLocalEvent<CMHolsterComponent, AfterAutoHandleStateEvent>(OnHolsterComponentHandleState);
@@ -220,6 +222,42 @@ public abstract class SharedCMInventorySystem : EntitySystem
         {
             args.Cancelled = true;
         }
+    }
+
+    /// <summary>
+    ///     Try to transfer contents from ItemSlots of one entity to the ItemSlots of another.
+    /// </summary>
+    private void OnInteractUsing(Entity<CMItemSlotsComponent> ent, ref InteractUsingEvent args)
+    {
+        if(!TryComp(args.Used, out ItemSlotsComponent? usedStorage) ||
+           !TryComp(ent, out ItemSlotsComponent? storage) ||
+           args.Handled)
+            return;
+
+        SoundSpecifier? insertSound = null;
+
+        foreach (var usedStorageItemSlot in usedStorage.Slots)
+        {
+            if(!_container.TryGetContainer(args.Used, usedStorageItemSlot.Key, out var usedContainer))
+                continue;
+
+            foreach (var entity in usedContainer.ContainedEntities)
+            {
+                foreach (var itemSlot in storage.Slots)
+                {
+                    if(!_container.TryGetContainer(ent, itemSlot.Key, out var container))
+                        continue;
+
+                    if (_container.Insert(entity, container))
+                    {
+                        insertSound = itemSlot.Value.InsertSound;
+                        args.Handled = true;
+                    }
+                }
+            }
+        }
+
+        _audio.PlayPredicted(insertSound, ent, args.User);
     }
 
     protected void OnSlotsEntInsertedIntoContainer(Entity<CMItemSlotsComponent> ent, ref EntInsertedIntoContainerMessage args)
