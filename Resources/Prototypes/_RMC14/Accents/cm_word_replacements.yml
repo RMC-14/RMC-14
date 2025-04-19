@@ -113,7 +113,12 @@
     cm-chatsan-word-rat: cm-chatsan-replacement-rat
     cm-chatsan-word-rats: cm-chatsan-replacement-rats
     cm-chatsan-word-mouse: cm-chatsan-replacement-mouse
-    cm-chatsan-word-mice: cm-chatsan-replacement-mice
+    cm-chatsan-word-mice: cm-chatsan-replacement-
+    cm-chatsan-word-feroxi: cm-chatsan-replacement-feroxi
+    cm-chatsan-word-feroxis: cm-chatsan-replacement-feroxi
+    cm-chatsan-word-shark: cm-chatsan-replacement-shark
+    cm-chatsan-word-sharks: cm-chatsan-replacement-sharks
+    cm-chatsan-word-fish: cm-chatsan-replacement-fish
     cm-chatsan-word-laser: cm-chatsan-replacement-laser
     cm-chatsan-word-lazer: cm-chatsan-replacement-lazer
     cm-chatsan-word-flamer: cm-chatsan-replacement-flamer
