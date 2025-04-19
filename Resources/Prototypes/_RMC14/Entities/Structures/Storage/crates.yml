@@ -101,7 +101,7 @@
     virtualLeft: RMCVirtualCrateLeft
   - type: RMCCanBeFultoned
   - type: ReceiverXenoClaws
-    minimumClawStrength: VerySharp
+    minimumClawStrength: ImpossiblySharp
 
 - type: entity
   parent: RMCCrateBase
