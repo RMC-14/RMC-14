@@ -1,0 +1,95 @@
+# Gunner
+- type: job
+  parent: CMJobBase
+  id: RMCPMCGunner
+  name: rmc-job-name-pmc-gunner
+  description: rmc-ghost-role-information-pmc-description
+  playTimeTracker: RMCJobPMCGunner
+  ranks:
+    RMCRankWeYaSupportSpecialist: []
+  startingGear: RMCJobPMCGunner
+  icon: RMCJobIconPMCGunner
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillSmartGun: 1
+        RMCSkillEndurance: 3
+        RMCSkillJtac: 1
+    - type: SquadArmorWearer
+
+- type: playTimeTracker
+  id: RMCJobPMCGunner
+
+- type: startingGear
+  id: RMCJobPMCGunner
+  equipment:
+    id: RMCIDCardPMC
+    ears: RMCHeadsetDistressPMC
+    jumpsuit: RMCJumpsuitVeteranPMC
+    outerClothing: CMArmorM4PMCSmartGunHarness
+    gloves: RMCHandsVeteranPMC
+    head: ArmorHelmetPMCGunner
+    shoes: RMCBootsPMCFilled
+    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava (leader)
+    suitstorage: RMCSmartGunWhiteOut
+    pocket1: RMCPouchFirstAidPMCFill
+    pocket2: RMCPouchDrumPMCFill
+    belt: RMCBeltSmartGunOperatorPistolPMCFilled
+    eyes: RMCGlassesSmartGunSight
+  inhand:
+  - RMCWebbingPMCGunner
+  storage:
+    outerClothing:
+    - CMMagazinePistolMK80
+    - CMMagazinePistolMK80
+    head:
+    - CMGauze10
+    - CMGauze10
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconPMCGunner
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: pmc_sg
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidPMCGunner
+  name: weya pmc ghost role gunner
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCPMCGunner
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCPMCGunner
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-pmc-gunner
+    description: rmc-ghost-role-information-pmc-description
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    job: RMCPMCGunner
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial

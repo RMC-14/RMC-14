@@ -70,4 +70,43 @@
     - id: CMPillCanisterInaprovaline
       amount: 1
     - id: CMPillCanisterTramadol
-    # TODO RMC14 and peridaxon
+      amount: 1
+    # TODO RMC14 alkysine and peridaxon
+
+- type: entity
+  parent: CMBeltMedicBag
+  id: RMCBeltMedicBagPMC
+  name: WY-TM625 pattern medical bag
+  description: The WY-TM625 is the standard load-bearing equipment of the W-Y security forces. This configuration mounts a duffel bag filled with a range of injectors and light medical supplies, and is common among medics.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/medicbag/snow-urban.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/medicbag/snow-urban.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: RMCBeltMedicBagPMC
+  id: RMCBeltMedicBagPMCFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMTraumaKit10
+    - id: CMTraumaKit10
+    - id: CMBurnKit10
+    - id: CMBurnKit10
+    - id: CMEpinephrineAutoInjector
+    - id: CMDexalinPlusAutoInjector
+    - id: CMOxycodoneAutoInjector
+    - id: CMPillCanisterBicaridine
+    - id: CMPillCanisterDexalin
+    - id: CMPillCanisterDylovene
+    - id: CMPillCanisterKelotane
+    - id: CMPillCanisterInaprovaline
+    - id: CMPillCanisterTramadol
+    # TODO RMC: splint nano
+    - id: CMHealthAnalyzer
+    # TODO RMC: imidazoline pills
+    # TODO RMC: alkysine pills

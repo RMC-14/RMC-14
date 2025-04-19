@@ -588,7 +588,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: tremor
     event: !type:XenoStompActionEvent
-    useDelay: 45
+    useDelay: 30
 
 - type: entity
   parent: ActionXenoBase
