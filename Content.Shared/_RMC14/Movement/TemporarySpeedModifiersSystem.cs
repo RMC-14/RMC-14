@@ -75,7 +75,7 @@ public sealed class TemporarySpeedModifiersSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Calculate the multiplier to use for the speed modifier, the modifier entered should be the same as the one in CM13..
+    ///     Calculate the multiplier to use for the speed modifier.
     /// </summary>
     /// <param name="uid">The entity whose speed is being modified.</param>
     /// <param name="modifier">The speed modifier value, positive values are a slow, negative values are a buff</param>
