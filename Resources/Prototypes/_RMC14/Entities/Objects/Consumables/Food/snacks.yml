@@ -19,7 +19,7 @@
   - type: Item
     sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
     heldPrefix: packet
-    size: Tiny
+    size: Small
   - type: Extractable
     grindableSolutionName: food
   - type: InjectableSolution
@@ -29,26 +29,43 @@
 
 - type: entity
   parent: RMCFoodSnackBase
-  id: RMCFoodSnackBarcaridine
-  name: Barcaridine bar
-  description: A classic bar of chocolate that smells like the medical bay. 'Chocolate helps the pain go away.'
+  id: RMCFoodSnackTaco
+  name: Taco
+  description: Take a bite!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/taco.rsi
+    state: taco
+  - type: Item
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 7
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackBarcardine
+  name: Barcardine Bar
+  description: A bar of chocolate, it smells like the medical bay. "Chocolate helps the pain go away."
   components:
   - type: Sprite
     state: barcardine
   - type: Item
-    size: Tiny
   - type: SpawnItemsOnUse
     items:
-      - id: RMCFoodPacketBarcaridineTrash
-      - id: RMCFoodSnackBarcaridineBar
+      - id: RMCFoodPacketBarcardineTrash
+      - id: RMCFoodSnackBarcardineBar
     sound:
       path: /Audio/Effects/unwrap.ogg
 
 - type: entity
   parent: RMCFoodSnackBase
-  id: RMCFoodSnackBarcaridineBar
-  name: Barcaridine bar
-  description: A classic bar of chocolate that smells like the medical bay. 'Chocolate helps the pain go away.'
+  id: RMCFoodSnackBarcardineBar
+  name: Barcardine Bar
+  description: A bar of chocolate, it smells like the medical bay. "Chocolate helps the pain go away."
   components:
   - type: FlavorProfile
     flavors:
@@ -65,20 +82,19 @@
         - ReagentId: Nutriment
           Quantity: 4
         - ReagentId: CocoaPowder
-          Quantity: 3
-        - ReagentId: CMBicaridine
-          Quantity: 2 # Given that the overdose rate is a lot higher, I doubt this will cause issues, you'd need to eat more than 15 bars.
+          Quantity: 2
+        - ReagentId: CMBicaridine #Will need to be replaced with Tramadol when pain is added
+          Quantity: 1
 
 - type: entity
   parent: RMCFoodSnackBase
   id: RMCFoodSnackBoonie
-  name: Boonie bars
-  description: Two delicious bars of minty chocolate. 'Sometimes things are just... out of reach.'
+  name: Boonie Bars
+  description: Two delicious bars of minty chocolate. "Sometimes things are just... out of reach."
   components:
   - type: Sprite
     state: boonie
   - type: Item
-    size: Tiny
   - type: SpawnItemsOnUse
     items:
       - id: RMCFoodPacketBoonieTrash
@@ -89,8 +105,8 @@
 - type: entity
   parent: RMCFoodSnackBase
   id: RMCFoodSnackBoonieBar
-  name: Boonie bars
-  description: Two delicious bars of minty chocolate. 'Sometimes things are just... out of reach.'
+  name: Boonie Bars
+  description: Two delicious bars of minty chocolate. "Sometimes things are just... out of reach."
   components:
   - type: FlavorProfile
     flavors:
@@ -112,25 +128,30 @@
 - type: entity
   parent: RMCFoodSnackBase
   id: RMCFoodSnackCHUNK
-  name: CHUNK bar
-  description: A bar of the CHUNK brand chocolate. The densest chocolate permitted to exist according to federal law. We are legally required to ask you not to use this blunt object for anything other than nutrition.
+  name: CHUNK box
+  description: A bar of "The CHUNK" brand chocolate. "The densest chocolate permitted to exist according to federal law. We are legally required to ask you not to use this blunt object for anything other than nutrition."
   components:
   - type: Sprite
     state: chunk
   - type: Item
-    size: Tiny
   - type: SpawnItemsOnUse
     items:
       - id: RMCFoodPacketCHUNKTrash
       - id: RMCFoodSnackCHUNKBar
     sound:
       path: /Audio/Effects/unwrap.ogg
+  - type: MeleeWeapon # True horror comes from improvisation.
+    damage:
+      types:
+        Blunt: 15
+    soundHit:
+      collection: MetalThud
 
 - type: entity
   parent: RMCFoodSnackBase
   id: RMCFoodSnackCHUNKBar
-  name: CHUNK bar
-  description: A bar of the CHUNK brand chocolate. The densest chocolate permitted to exist according to federal law. We are legally required to ask you not to use this blunt object for anything other than nutrition.
+  name: CHUNK box
+  description: A bar of "The CHUNK" brand chocolate. "The densest chocolate permitted to exist according to federal law. We are legally required to ask you not to use this blunt object for anything other than nutrition."
   components:
   - type: FlavorProfile
     flavors:
@@ -138,7 +159,6 @@
   - type: Sprite
     state: chunk-o
   - type: Item
-    size: Normal
   - type: SolutionContainerManager
     solutions:
       food:
@@ -151,32 +171,38 @@
   - type: MeleeWeapon # True horror comes from improvisation.
     damage:
       types:
-        Blunt: 5
+        Blunt: 15
     soundHit:
       collection: MetalThud
 
 - type: entity
   parent: RMCFoodSnackBase
   id: RMCFoodSnackHUNK
-  name: HUNK bar
-  description: A 'crate' of chocolate according to the marketing. The HUNK, an earlier version of the CHUNK bar, was discontinued after several class action lawsuits related to broken teeth.
+  name: HUNK crate
+  description: A 'crate', as the marketing called it, of "The HUNK" brand chocolate. An early version of the CHUNK box, the HUNK bar was hit by a class action lawsuit and forced to go into bankruptcy and get bought out by the Company when hundreds of customers had their teeth crack from simply attempting to eat the bar.
   components:
   - type: Sprite
     state: hunk
   - type: Item
-    size: Large
+    size: Normal
   - type: SpawnItemsOnUse
     items:
       - id: RMCFoodPacketHUNKTrash
       - id: RMCFoodSnackHUNKBar
     sound:
       path: /Audio/Effects/unwrap.ogg
+  - type: MeleeWeapon # You could legitimately use this as a strong melee weapon. That horrifies me.
+    damage:
+      types:
+        Blunt: 35
+    soundHit:
+      collection: MetalThud
 
 - type: entity
   parent: RMCFoodSnackBase
   id: RMCFoodSnackHUNKBar
-  name: HUNK bar
-  description: A 'crate' of chocolate according to the marketing. The HUNK, an earlier version of the CHUNK bar, was discontinued after several class action lawsuits related to broken teeth.
+  name: HUNK crate
+  description: A 'crate', as the marketing called it, of "The HUNK" brand chocolate. An early version of the CHUNK box, the HUNK bar was hit by a class action lawsuit and forced to go into bankruptcy and get bought out by the Company when hundreds of customers had their teeth crack from simply attempting to eat the bar.
   components:
   - type: FlavorProfile
     flavors:
@@ -185,7 +211,7 @@
   - type: Sprite
     state: hunk-o
   - type: Item
-    size: Large
+    size: Normal
   - type: SolutionContainerManager
     solutions:
       food:
@@ -206,9 +232,35 @@
 
 - type: entity
   parent: RMCFoodSnackBase
+  id: RMCFoodSnackCandy
+  name: Candy
+  description: Nougat, love it or hate it.
+  components:
+  - type: FlavorProfile
+    flavors:
+    - sugary
+  - type: Sprite
+    state: candy
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 1
+        - ReagentId: Sugar
+          Quantity: 3
+  - type: Item
+    size: Tiny
+  - type: Food
+    trash:
+    - RMCFoodPacketCandyTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
   id: RMCFoodSnackKeplarCrisps
-  name: Keplar crisps
-  description: They're disturbingly good! Now with 0% trans fat and added genuine sea salts.
+  name: Keplar Crisps
+  description: "'They're disturbingly good!' Now with 0% trans fat and added genuine sea salts."
   components:
   - type: FlavorProfile
     flavors:
@@ -233,8 +285,8 @@
 - type: entity
   parent: RMCFoodSnackBase
   id: RMCFoodSnackKeplarFlamehotCrisps
-  name: Keplar Flamehot crisps
-  description: They're disturbingly good! Due to an exceptionally well-timed ad campaign with the release of Kepler Flamehot in 2165, the Kepler brand was able to overtake other confectionary Weston products by quarter three of that year. Contains 0% trans fat.
+  name: Keplar Flamehot
+  description: "'They're disturbingly good!' Due to an exceptionally well-timed ad campaign with the release of Keplar Flamehot in 2165, the Keplar brand was able to overtake other confectionary Weston products by quarter three of that year. Contains 0% trans fat."
   components:
   - type: FlavorProfile
     flavors:
@@ -249,9 +301,9 @@
         maxVol: 20
         reagents:
         - ReagentId: Nutriment
-          Quantity: 4
+          Quantity: 8
         - ReagentId: TableSalt
-          Quantity: 4
+          Quantity: 16
         - ReagentId: Hotsauce
           Quantity: 8
   - type: Item
@@ -262,8 +314,8 @@
 - type: entity
   parent: RMCFoodSnackBase
   id: RMCFoodSnackChipsPepper
-  name: pepper chips
-  description: Premium high-quality chips, now with 0% trans fat. Now with added black pepper! Packaged by We-Ya.
+  name: Weston-Yamada Pepper Chips
+  description: Premium high-quality chips, now with 0% trans fat and added black pepper.
   components:
   - type: FlavorProfile
     flavors:
@@ -277,7 +329,7 @@
         maxVol: 10
         reagents:
         - ReagentId: Nutriment
-          Quantity: 6
+          Quantity: 3
         - ReagentId: Blackpepper
           Quantity: 1
   - type: Item
@@ -285,13 +337,62 @@
     trash:
     - RMCFoodPacketPepperChipsTrash
 
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackChips
+  name: Chips
+  description: Commander Riker's What-The-Crisps
+  components:
+  - type: FlavorProfile
+    flavors:
+      - potatoes
+      - peppery
+  - type: Sprite
+    state: chips
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 3
+        - ReagentId: Blackpepper
+          Quantity: 1
+  - type: Item
+  - type: Food
+    trash:
+    - RMCFoodPacketChipsTrash
+
+- type: entity
+  parent: RMCFoodSnackBase
+  id: RMCFoodSnackPopcorn
+  name: Popcorn
+  description: Buttery movie theater-style popcorn. Now to find a move to watch while eating it.
+  components:
+  - type: FlavorProfile
+    flavors:
+      - buttery
+  - type: Sprite
+    state: popcorn
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: Cellulose # 13 is PlantMatter
+          Quantity: 2
+  - type: Item
+  - type: Food
+    trash:
+    - RMCFoodPacketPopcornTrash
+
 # Packaged Hot Foods
 
 - type: entity
   parent: RMCFoodSnackBase
   id: RMCFoodSnackCheeseburgerPackaged
-  name: packaged cheeseburger
-  description: A soggy microwavable cheeseburger. There's no time given for how long to cook it. Packaged by We-Ya.
+  name: Packaged Cheeseburger
+  description: A soggy microwavable burger. There's no time given for how long to cook it. Packaged by the Weston-Yamada Corporation.
   components:
   - type: Sprite
     state: burger
@@ -306,8 +407,8 @@
 - type: entity
   parent: RMCFoodSnackBase
   id: RMCFoodSnackCheeseburger
-  name: packaged cheeseburger
-  description: A soggy microwavable cheeseburger. There's no time given for how long to cook it. Packaged by We-Ya.
+  name: Packaged Cheeseburger
+  description: A soggy microwavable burger. There's no time given for how long to cook it. Packaged by the Weston-Yamada Corporation.
   components:
   - type: FlavorProfile
     flavors:
@@ -332,8 +433,8 @@
 - type: entity
   parent: RMCFoodSnackBase
   id: RMCFoodSnackBurritoPackaged
-  name: packaged burrito
-  description: A hard microwavable burrito. There's no time given on how long to cook it. Packaged by We-Ya.
+  name: Packaged Burrito
+  description: A hard microwavable burrito. There's no time given on how long to cook it. Packaged by the Weston-Yamada Corporation.
   components:
   - type: Sprite
     state: packaged-burrito
@@ -349,8 +450,8 @@
 - type: entity
   parent: RMCFoodSnackBase
   id: RMCFoodSnackBurrito
-  name: packaged burrito
-  description: A hard microwavable burrito. There's no time given on how long to cook it. Packaged by We-Ya.
+  name: Packaged Burrito
+  description: A hard microwavable burrito. There's no time given on how long to cook it. Packaged by the Weston-Yamada Corporation.
   components:
   - type: FlavorProfile
     flavors:
@@ -372,8 +473,8 @@
 - type: entity
   parent: RMCFoodSnackBase
   id: RMCFoodSnackHotdogPackaged
-  name: packaged hotdog
-  description: A singular, squishy, room temperature hot dog. There's no time given for how long to cook it, so you assume its probably good to go. Packaged by We-Ya.
+  name: Packaged Hotdog
+  description: A singular squishy, room temperature, hot dog. There's no time given for how long to cook it, so you assume its probably good to go. Packaged by the Weston-Yamada Corporation.
   components:
   - type: Sprite
     state: packaged-hotdog
@@ -388,8 +489,8 @@
 - type: entity
   parent: RMCFoodSnackBase
   id: RMCFoodSnackHotdog
-  name: packaged hotdog
-  description: A singular, squishy, room temperature hot dog. There's no time given for how long to cook it, so you assume its probably good to go. Packaged by We-Ya.
+  name: Packaged Hotdog
+  description: A singular squishy, room temperature, hot dog. There's no time given for how long to cook it, so you assume its probably good to go. Packaged by the Weston-Yamada Corporation.
   components:
   - type: FlavorProfile
     flavors:
@@ -405,9 +506,9 @@
         maxVol: 10
         reagents:
         - ReagentId: Nutriment
-          Quantity: 3
-        - ReagentId: Protein
           Quantity: 2
+        - ReagentId: Protein
+          Quantity: 1
         - ReagentId: TableSalt
           Quantity: 2
 
@@ -428,10 +529,8 @@
       food:
         maxVol: 10
         reagents:
-        - ReagentId: Nutriment
-          Quantity: 6
-        - ReagentId: TableSalt
-          Quantity: 1
+        - ReagentId: Nutriment # 4 nutriment and 4 meat protein
+          Quantity: 8
   - type: Item
   - type: Food
     trash:
@@ -443,7 +542,7 @@
   categories: [ HideSpawnMenu ]
   parent: BaseItem
   id: RMCFoodPacketTrash
-  description: This place is crawling with trash.
+  description: This is rubbish.
   abstract: true
   components:
   - type: Sprite
@@ -451,7 +550,7 @@
   - type: Item
     sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
     heldPrefix: packet
-    size: Tiny
+    size: Small
   - type: Tag
     tags:
     - Trash
@@ -463,9 +562,9 @@
 - type: entity
   categories: [ HideSpawnMenu ]
   parent: RMCFoodPacketTrash
-  id: RMCFoodPacketBarcaridineTrash
-  name: barcaridine wrapper
-  description: An empty wrapper from a barcaridine bar. You notice the inside has several medical labels. You're not sure if you care or not about that.
+  id: RMCFoodPacketBarcardineTrash
+  name: barcardine bar wrapper
+  description: An empty wrapper from a barcardine bar. You notice the inside has several medical labels. You're not sure if you care or not about that.
   components:
   - type: Sprite
     state: barcardine_trash
@@ -475,6 +574,7 @@
   parent: RMCFoodPacketTrash
   id: RMCFoodPacketBoonieTrash
   name: boonie bar wrapper
+  description: A minty green wrapper. Reminds you of another terrible decision involving minty green, but you can't remember what...
   components:
   - type: Sprite
     state: boonie_trash
@@ -502,8 +602,17 @@
 - type: entity
   categories: [ HideSpawnMenu ]
   parent: RMCFoodPacketTrash
+  id: RMCFoodPacketCandyTrash
+  name: Candy
+  components:
+  - type: Sprite
+    state: candy_trash
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: RMCFoodPacketTrash
   id: RMCFoodPacketKeplerCrispsTrash
-  name: empty chips
+  name: Keplar wrapper
   components:
   - type: Sprite
     state: kepler_chips_trash
@@ -512,7 +621,7 @@
   categories: [ HideSpawnMenu ]
   parent: RMCFoodPacketTrash
   id: RMCFoodPacketKeplerCrispsFlamehotTrash
-  name: empty flamehot crisps
+  name: Keplar Flamehot wrapper
   components:
   - type: Sprite
     state: kepler_chips_flame_trash
@@ -521,7 +630,8 @@
   categories: [ HideSpawnMenu ]
   parent: RMCFoodPacketTrash
   id: RMCFoodPacketPepperChipsTrash
-  name: empty pepper chips
+  name: Weston-Yamada Pepper Chips
+  description: An oily empty bag that once held Weston-Yamada Pepper Chips.
   components:
   - type: Sprite
     state: wy_chips_pepper_trash
@@ -529,9 +639,27 @@
 - type: entity
   categories: [ HideSpawnMenu ]
   parent: RMCFoodPacketTrash
+  id: RMCFoodPacketChipsTrash
+  name: Chips
+  components:
+  - type: Sprite
+    state: chips_trash
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: RMCFoodPacketTrash
+  id: RMCFoodPacketPopcornTrash
+  name: Popcorn
+  components:
+  - type: Sprite
+    state: popcorn_trash
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: RMCFoodPacketTrash
   id: RMCFoodPacketCheeseburgerTrash
-  name: burger wrapper
-  description: A greasy plastic film that once held a Cheeseburger. Packaged by We-Ya.
+  name: Burger wrapper
+  description: A greasy plastic film that once held a Cheeseburger. Packaged by the Weston-Yamada Corporation.
   components:
   - type: Sprite
     state: burger_trash
@@ -540,8 +668,8 @@
   categories: [ HideSpawnMenu ]
   parent: RMCFoodPacketTrash
   id: RMCFoodPacketBurritoTrash
-  name: burrito wrapper
-  description: A foul-smelling plastic film that once held a microwave burrito. Packaged by We-Ya.
+  name: Burrito wrapper
+  description: A foul-smelling plastic film that once held a microwave burrito. Packaged by the Weston-Yamada Corporation.
   components:
   - type: Sprite
     state: burrito_trash
@@ -550,8 +678,8 @@
   categories: [ HideSpawnMenu ]
   parent: RMCFoodPacketTrash
   id: RMCFoodPacketHotdogTrash
-  name: hotdog wrapper
-  description: A musty plastic film that once held a hotdog. Packaged by We-Ya.
+  name: Hotdog wrapper
+  description: A musty plastic film that once held a hotdog. Packaged by the Weston-Yamada Corporation.
   components:
   - type: Sprite
     state: hotdog_trash
@@ -560,7 +688,7 @@
   categories: [ HideSpawnMenu ]
   parent: RMCFoodPacketTrash
   id: RMCFoodPacketEATBarTrash
-  name: MEAT bar wrapper
+  name: EAT bar wrapper
   components:
   - type: Sprite
     state: eat

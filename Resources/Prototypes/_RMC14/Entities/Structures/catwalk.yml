@@ -52,12 +52,16 @@
   components:
   - type: Sprite
     state: ai_catwalk
+  - type: Icon
+    state: ai_catwalk
 
 - type: entity
   parent: CMCatwalk
   id: RMCCatwalkAIWhite
   components:
   - type: Sprite
+    state: w_ai_catwalk
+  - type: Icon
     state: w_ai_catwalk
 
 - type: entity
@@ -66,12 +70,16 @@
   components:
   - type: Sprite
     state: shiva_catwalk
+  - type: Icon
+    state: shiva_catwalk
 
 - type: entity
   parent: CMCatwalk
   id: CMCatwalkPrison
   components:
   - type: Sprite
+    state: prison_catwalk
+  - type: Icon
     state: prison_catwalk
 
 - type: entity
@@ -80,12 +88,16 @@
   components:
   - type: Sprite
     state: kutjevo_catwalk
+  - type: Icon
+    state: kutjevo_catwalk
 
 - type: entity
   parent: CMCatwalk
   id: RMCCatwalkStrata
   components:
   - type: Sprite
+    state: strata_catwalk
+  - type: Icon
     state: strata_catwalk
 
 - type: entity
@@ -95,6 +107,8 @@
   components:
   - type: Sprite
     state: solidgrate1
+  - type: Icon
+    state: solidgrate1
 
 - type: entity
   parent: CMCatwalk
@@ -103,6 +117,8 @@
   components:
   - type: Sprite
     state: latticefull
+  - type: Icon
+    state: latticefull
 
 - type: entity
   parent: CMCatwalk
@@ -110,6 +126,8 @@
   name: solid metal grate
   components:
   - type: Sprite
+    state: solidgrate5
+  - type: Icon
     state: solidgrate5
 
 # Monorail

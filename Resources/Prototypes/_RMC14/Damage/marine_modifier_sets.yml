@@ -35,6 +35,15 @@
     Cold: 1.15
     Caustic: 1.15
 
+#Used in Snow Barricades
+- type: damageModifierSet
+  id: CMSnowBarricade
+  coefficients:
+    Heat: 0.6
+    Blunt: 0.3
+    Slash: 0.3
+    Piercing: 0.3
+
 - type: damageModifierSet
   id: CMBloodlossHuman
   coefficients:
