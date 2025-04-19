@@ -71,7 +71,7 @@
       amount: 1
     - id: CMPillCanisterTramadol
       amount: 1
-    # TODO RMC14 alkysine and peridaxon
+    # TODO RMC14 1 pill canister of peridaxon
 
 - type: entity
   parent: CMBeltMedicBag
