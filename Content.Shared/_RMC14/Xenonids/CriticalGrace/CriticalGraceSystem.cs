@@ -31,8 +31,8 @@ public sealed partial class CriticalGraceSystem : EntitySystem
             return;
         }
 
-        //If already crit can't crit gracee
-        if (_mobState.IsCritical(ent))
+        //If already crit/dead can't crit gracee
+        if (!_mobState.IsAlive(ent))
             return;
 
         var grace = EnsureComp<InCriticalGraceComponent>(ent);
