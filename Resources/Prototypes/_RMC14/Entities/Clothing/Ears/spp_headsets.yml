@@ -39,13 +39,16 @@
   longRange: true
 
 - type: entity
-  abstract: true
   parent: CMEncryptionKey
   id: RMCEncryptionKeySPP
   name: SPP radio encryption key
   components:
   - type: Sprite
     state: upp_key
+  - type: EncryptionKey
+    channels:
+    - SPP
+    defaultChannel: SPP
 
 - type: entity
   parent: RMCEncryptionKeySPP
@@ -88,12 +91,13 @@
 - type: entity
   parent: RMCHeadsetIcons
   id: RMCHeadsetSPP
-  name: SPP-CMD headset
+  name: SPP headset
   components:
   - type: ContainerFill
     containers:
       key_slots:
       - CMEncryptionKeyColony
+      - RMCEncryptionKeySPP
 
 - type: entity
   parent: RMCHeadsetIcons
@@ -103,8 +107,8 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - RMCEncryptionKeySPPCommand
       - CMEncryptionKeyColony
+      - RMCEncryptionKeySPPCommand
 
 - type: entity
   parent: RMCHeadsetIcons
@@ -114,8 +118,8 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - RMCEncryptionKeySPPEngineer
       - CMEncryptionKeyColony
+      - RMCEncryptionKeySPPEngineer
 
 - type: entity
   parent: RMCHeadsetIcons
@@ -125,5 +129,5 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - RMCEncryptionKeySPPMedic
       - CMEncryptionKeyColony
+      - RMCEncryptionKeySPPMedic

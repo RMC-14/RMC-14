@@ -1,0 +1,103 @@
+﻿- type: job
+  parent: CMJobBase
+  id: RMCSPPMedic
+  name: rmc-job-name-spp-medic
+  description: rmc-job-description-spp-medic
+  playTimeTracker: CMJobSPPMedic
+  ranks:
+    RMCRankSPPMladshiySerzhant: []
+  startingGear: RMCGearSPPMedic
+  icon: RMCJobIconSPPMedic
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  - HospitalCorpsman
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillJtac: 1
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-medic
+    - type: UserIFF
+      faction: FactionSPP
+  hidden: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerSPPMedic
+  name: spp spawner medic
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCRandomHumanoidSPPMedic
+
+- type: entity
+  id: RMCRandomHumanoidSPPMedic
+  name: spp ghost role medic
+  suffix: Role, Player
+  components:
+  - type: Sprite
+    sprite: Markers/cross.rsi
+    state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSPPMedic
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCSPPMedic
+  components:
+  - type: GhostRole
+    name: rmc-ghost-role-name-spp-medic
+    description: rmc-job-description-spp-medic
+    rules: rmc-ghost-role-information-spp-rules
+    raffle:
+      settings: short
+    job: RMCSPPMedic
+  - type: Skills
+    skills:
+      RMCSkillFirearms: 1
+      RMCSkillFireman: 1
+      RMCSkillJtac: 1
+      RMCSkillMedical: 2
+      RMCSkillSurgery: 1
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearSPPMedic
+  equipment:
+    head: CMHeadCapSPP
+    ears: RMCHeadsetSPPMedic
+    eyes: RMCGlassesMedicalHUDGlasses
+    jumpsuit: CMJumpsuitSPPMedic
+    outerClothing: RMCArmorSPPSupport
+    gloves: RMCHandsVeteranSPP
+    shoes: CMBootsBlackFilled
+    suitstorage: WeaponSMGMP5 # TODO RMC14 : Replace with Bizon SMG
+    id: RMCIDSPPMedic
+    belt: CMBeltMedicBagFilled
+    back: RMCSatchelSPPMedic
+    pocket1: RMCPouchMedkitFillSPP
+    pocket2: RMCPouchMagazineLargeMP5
+
+- type: playTimeTracker
+  id: CMJobSPPMedic
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPMedic
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: upp_med

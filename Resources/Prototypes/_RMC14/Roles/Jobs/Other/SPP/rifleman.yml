@@ -1,0 +1,93 @@
+﻿- type: job
+  parent: CMJobBase
+  id: RMCSPPRifleman
+  name: rmc-job-name-spp-soldier
+  description: rmc-job-description-spp-soldier
+  playTimeTracker: CMJobSPPRifleman
+  ranks:
+    RMCRankSPPRyadovoy: []
+  startingGear: RMCGearSPPRifleman
+  icon: RMCJobIconSPPRifleman
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-soldier
+    - type: UserIFF
+      faction: FactionSPP
+  hidden: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerSPPRifleman
+  name: spp spawner rifleman
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCRandomHumanoidSPPRifleman
+
+- type: entity
+  id: RMCRandomHumanoidSPPRifleman
+  name: spp ghost role rifleman
+  suffix: Role, Player
+  components:
+  - type: Sprite
+    sprite: Markers/cross.rsi
+    state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSPPRifleman
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCSPPRifleman
+  components:
+  - type: GhostRole
+    name: rmc-ghost-role-name-spp-soldier
+    description: rmc-job-description-spp-soldier
+    rules: rmc-ghost-role-information-spp-rules
+    raffle:
+      settings: short
+    job: RMCSPPRifleman
+  - type: Skills
+    skills:
+      RMCSkillFirearms: 1
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearSPPRifleman
+  equipment:
+    head: ArmorHelmetSPP
+    ears: RMCHeadsetSPP
+    jumpsuit: CMJumpsuitSPP
+    outerClothing: RMCArmorSPPRifleman
+    gloves: RMCHandsVeteranSPP
+    shoes: CMBootsBlackFilled
+    suitstorage: RMCWeaponRifleType71
+    id: RMCIDSPPRifleman
+    belt: RMCType71BeltFilled
+    back: RMCSatchelSPPRifleman
+    pocket1: RMCPouchAutoinjectorFill
+    pocket2: RMCPouchExplosiveFilledSPP
+
+- type: playTimeTracker
+  id: CMJobSPPRifleman
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPRifleman
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: upp_pvt

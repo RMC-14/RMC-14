@@ -18,6 +18,11 @@
     - state: welded
       visible: false
       map: ["enum.WeldableLayers.BaseWelded"]
+    - state: paper
+      visible: false
+      sprite: Structures/Storage/closet_labels.rsi
+      offset: "-0.065,0"
+      map: [ "enum.PaperLabelVisuals.Layer" ]
   - type: Appearance
   - type: LockVisuals
   - type: EntityStorageVisuals
@@ -80,30 +85,42 @@
 
 - type: entity
   parent: CMLockerBase
-  id: RMCLockerGunBlue
-  name: riot control equipment Cabinet
+  id: RMCLockerGunBase
+  name: gun cabinet
+  description: It's an immobile card-locked storage unit.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/armorylocker.rsi
   - type: AccessReader
     access: [["CMAccessArmory"]]
+  - type: InsertBlacklist
+    blacklist:
+      components:
+      - Xeno
+      - Marine
 
 - type: entity
-  parent: CMLockerBase
+  parent: RMCLockerGunBase
+  id: RMCLockerGunBlue
+  name: riot control equipment Cabinet
+  components:
+  - type: RMCUnlockOnAlertLevel
+    level: Blue
+
+- type: entity
+  parent: RMCLockerGunBase
   id: RMCLockerGun
   name: gun cabinet
   description: It's an immobile card-locked storage unit.
   suffix: Colony
   components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Storage/Lockers/armorylocker.rsi
   - type: AccessReader
     access: [["CMAccessColonyArmory"]]
   - type: Destructible
     thresholds: []
 
 - type: entity
-  parent: RMCLockerGun
+  parent: RMCLockerGunBase
   id: RMCLockerGunRed
   name: red alert gun cabinet
   components:

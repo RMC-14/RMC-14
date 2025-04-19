@@ -56,6 +56,9 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
         if (HasComp<RMCObstacleSlamImmuneComponent>(user))
             return;
 
+        if (HasComp<RMCObstacleSlamCauserImmuneComponent>(obstacle))
+            return;
+
         if (!TryComp<PhysicsComponent>(user, out var body) || !TryComp<PhysicsComponent>(obstacle, out var bodyObstacle))
             return;
 

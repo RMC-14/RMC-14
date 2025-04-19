@@ -55,10 +55,6 @@
   - type: MagazineAmmoProvider
     autoEject: true
   - type: RMCAmmoEject
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
-    zeroVisible: true
   - type: Appearance
   - type: RMCNameItemOnVend
     item: PrimaryGun
@@ -79,6 +75,15 @@
     accuracyMultiplier: 1
     accuracyMultiplierUnwielded: 0.65
   - type: GunGroupPenalty
+
+- type: entity
+  abstract: true
+  id: RMCBaseWeaponMagazineVisuals
+  components:
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
 
 - type: entity
   parent: BaseMagazineRifle
