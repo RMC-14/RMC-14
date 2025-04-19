@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added Vertical Cargo Containers
-    type: Add
-  - message: Added Barrels
-    type: Add
-  - message: Added Missing Shiva Props
-    type: Add
-  id: 1097
-  time: '2024-12-13T16:30:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5119
 - author: Dutch-VanDerLinde
   changes:
   - message: Added marine loadouts!
@@ -5352,5 +5341,12 @@
   id: 1599
   time: '2025-04-19T08:08:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6141
+- author: Tunguso4ka
+  changes:
+  - message: Added Skrells - new amphibious humanoid species.
+    type: Add
+  id: 1600
+  time: '2025-04-19T08:16:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6052
 Name: RMC14
 Order: -1
