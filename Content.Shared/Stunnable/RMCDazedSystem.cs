@@ -11,6 +11,8 @@ public sealed class RMCDazedSystem : EntitySystem
 
     public override void Initialize()
     {
+        base.Initialize();
+
         SubscribeLocalEvent<RMCDazedComponent, DazedEvent>(OnDazed);
     }
 
@@ -19,13 +21,14 @@ public sealed class RMCDazedSystem : EntitySystem
     ///     cooldown isn't higher already.
     /// </summary>
     /// <seealso cref="RMCDazeableActionComponent"/>
-    private void OnDazed(EntityUid uid, RMCDazedComponent component, DazedEvent args)
+    private void OnDazed(EntityUid uid, RMCDazedComponent component, ref DazedEvent args)
     {
         foreach (var (actionId, _) in _actions.GetActions(uid))
         {
             if (TryComp(actionId, out RMCDazeableActionComponent? dazeable))
             {
-                _actions.SetIfBiggerCooldown(actionId, args.Duration * dazeable.DurationMultiplier);
+                var newCooldownDuration = args.Duration * dazeable.DurationMultiplier;
+                _actions.SetIfBiggerCooldown(actionId, newCooldownDuration);
             }
         }
     }
@@ -38,13 +41,14 @@ public sealed class RMCDazedSystem : EntitySystem
         if (time <= TimeSpan.Zero)
             return false;
 
-        if (HasComp<RMCDazedComponent>(uid) || !_statusEffect.TryAddStatusEffect<RMCDazedComponent>(uid, "Dazed", time, refresh))
-            return false;
+        if (_statusEffect.TryAddStatusEffect<RMCDazedComponent>(uid, "Dazed", time, refresh, status))
+        {
+            var ev = new DazedEvent(time);
+            RaiseLocalEvent(uid, ref ev);
+            return true;
+        }
 
-        var ev = new DazedEvent(time);
-        RaiseLocalEvent(uid, ref ev);
-
-        return true;
+        return false;
     }
 }
 
