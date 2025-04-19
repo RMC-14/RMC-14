@@ -95,3 +95,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armored_vest.rsi # TODO RCM14 someone should make a better sprite for this
+  - type: CMArmor
+    melee: 0
+    bullet: 10
