@@ -9,6 +9,7 @@ using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Storage;
+using Content.Shared.Verbs;
 
 namespace Content.Server._RMC14.NamedItems;
 
@@ -31,6 +32,9 @@ public sealed class RMCNamedItemSystem : EntitySystem
 
         SubscribeLocalEvent<RMCNamedItemComponent, RMCArmorVariantCreatedEvent>(OnArmorVariantCreated);
         SubscribeLocalEvent<RMCNamedItemComponent, RefreshNameModifiersEvent>(OnItemRefreshNameModifiers);
+
+        SubscribeLocalEvent<RMCNameItemOnVendComponent, GetVerbsEvent<AlternativeVerb>>(AddNameVerb);
+
     }
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
@@ -41,10 +45,14 @@ public sealed class RMCNamedItemSystem : EntitySystem
         var user = EnsureComp<RMCUserNamedItemsComponent>(ev.Mob);
         var named = ev.Profile.NamedItems;
         user.Names = new SharedRMCNamedItems(named.PrimaryGunName, named.SidearmName, named.HelmetName, named.ArmorName, named.SentryName);
+        user.NameOnDispense = ev.Profile.AutoItemName;
     }
 
     private void OnAutomatedVenderUser(Entity<RMCUserNamedItemsComponent> ent, ref RMCAutomatedVendedUserEvent args)
     {
+        if (!ent.Comp.NameOnDispense)
+            return;
+
         if (_nameItemOnVendQuery.TryComp(args.Item, out var itemComp) &&
             TryNameItem(ent, (args.Item, itemComp)))
         {
@@ -60,6 +68,25 @@ public sealed class RMCNamedItemSystem : EntitySystem
             }
         }
     }
+
+private void AddNameVerb(EntityUid uid, RMCNameItemOnVendComponent component, GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanInteract || !args.CanAccess || args.User == null || !TryComp<RMCUserNamedItemsComponent>(args.User, out var userNamedItem))
+            return;
+
+        if (!_nameItemOnVendQuery.TryComp(uid, out var itemComp)|| !TryNameItem((args.User, userNamedItem), (uid, itemComp), true) || HasComp<RMCNamedItemComponent>(uid))
+            return;
+
+        var verb = new AlternativeVerb()
+        {
+            Act = () => TryNameItem((args.User, userNamedItem), (uid, itemComp)),
+            IconEntity = GetNetEntity(uid),
+            Text = Loc.GetString("named-item-verb-text"),
+            Message = Loc.GetString("named-item-verb-message")
+        };
+        args.Verbs.Add(verb);
+    }
+
 
     private void OnSentryUpgraded(Entity<RMCNameItemOnVendComponent> ent, ref SentryUpgradedEvent args)
     {
@@ -90,7 +117,7 @@ public sealed class RMCNamedItemSystem : EntitySystem
         args.AddModifier("rmc-patron-named-item", extraArgs: ("name", ent.Comp.Name));
     }
 
-    private bool TryNameItem(Entity<RMCUserNamedItemsComponent> ent, Entity<RMCNameItemOnVendComponent> item)
+    private bool TryNameItem(Entity<RMCUserNamedItemsComponent> ent, Entity<RMCNameItemOnVendComponent> item, bool CheckOnly = false)
     {
         var names = ent.Comp.Names;
         string? name;
@@ -98,23 +125,28 @@ public sealed class RMCNamedItemSystem : EntitySystem
         {
             case RMCNamedItemType.PrimaryGun:
                 name = names.PrimaryGunName;
-                ent.Comp.Names = names with { PrimaryGunName = null };
+                if (!CheckOnly)
+                    ent.Comp.Names = names with { PrimaryGunName = null };
                 break;
             case RMCNamedItemType.Sidearm:
                 name = names.SidearmName;
-                ent.Comp.Names = names with { SidearmName = null };
+                if (!CheckOnly)
+                    ent.Comp.Names = names with { SidearmName = null };
                 break;
             case RMCNamedItemType.Helmet:
                 name = names.HelmetName;
-                ent.Comp.Names = names with { HelmetName = null };
+                if (!CheckOnly)
+                    ent.Comp.Names = names with { HelmetName = null };
                 break;
             case RMCNamedItemType.Armor:
                 name = names.ArmorName;
-                ent.Comp.Names = names with { ArmorName = null };
+                if (!CheckOnly)
+                    ent.Comp.Names = names with { ArmorName = null };
                 break;
             case RMCNamedItemType.Sentry:
                 name = names.SentryName;
-                ent.Comp.Names = names with { SentryName = null };
+                if (!CheckOnly)
+                    ent.Comp.Names = names with { SentryName = null };
                 break;
             default:
                 Log.Error($"Unknown named item type found by {ToPrettyString(ent)}: {item}");
@@ -124,9 +156,11 @@ public sealed class RMCNamedItemSystem : EntitySystem
 
         if (name == null)
             return false;
-
-        NameItem(ent, item, name);
-        item.Comp.Name = name;
+        if (!CheckOnly)
+        {
+            NameItem(ent, item, name);
+            item.Comp.Name = name;
+        }
         return true;
     }
 
