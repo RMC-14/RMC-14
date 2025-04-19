@@ -290,7 +290,7 @@
       - id: RMCAttachmentUnderbarrelExtinguisher
         points: 15
       - id: RMCAttachmentMiniFlamethrower
-        points: 15 
+        points: 15
       - id: RMCAttachmentU1GrenadeLauncher
         points: 5
     - name: Barrel Attachments
@@ -421,11 +421,18 @@
       #- id: CMSatchelCommandSecure # TODO RMC14 Secure Satchel (ID LOCK)
       - id: RMCBackpackRTO
       - id: CMSatchelMarineIntel
+    - name: Armor
+      choices: { CMArmor: 1 }
+      entries:
+      - id: RMCArmorM3CO
+      - id: RMCArmorM3LCO
+    - name: Helmet
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: CMArmorHelmetM11CCO
     - name: Combat Equipment
       takeAll: CMCombatEquipment
       entries:
-      - id: RMCArmorM3CO
-      - id: CMArmorHelmetM11CCO
       - id: CMHandsInsulated
       - id: CMBootsBlackFilled
     - name: Accessories
@@ -892,7 +899,7 @@
       - id: ClothingEyesGlassesMeson # TODO change to CM13 engi goggles.
       - id: RMCNailgunTactical
       # TODO KN5500/2 PDA
-     
+
     - name: Uniform
       jobs:
       - CMChiefEngineer
@@ -939,7 +946,7 @@
       - id: RMCBeltUtilityGeneral
       - id: CMBeltUtilityFilled
         name: M276 pattern toolbelt rig (Full)
-       
+
     - name: Pouches
       jobs:
       - CMChiefEngineer
@@ -1257,14 +1264,14 @@
         recommended: true
       - id: CMWebbing
     - name: Spare Equipment
-      jobs: 
+      jobs:
       - CMCMO
       entries:
       - id: CMHeadsetMedical
         amount: 15
       - id: CMHeadsetResearcher
         amount: 15
-        
+
 
     # ////////////////////////////////////
     # Auxiliary Support Officer
@@ -1312,7 +1319,7 @@
       - id: CMHeadCapPeakedService
         recommended: true
       - id: CMHeadBeretTan
-        recommended: true  
+        recommended: true
     - name: Combat Equipment
       jobs:
       - CMAuxiliarySupportOfficer
