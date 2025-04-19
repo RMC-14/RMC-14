@@ -1,5 +1,6 @@
 ﻿using Content.Server._RMC14.Announce;
 using Content.Server.GameTicking;
+using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -44,6 +45,9 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
     {
         if (!ev.LateJoin || !HasComp<MarineComponent>(ev.Mob))
+            return;
+
+        if (HasComp<RMCAdminSpawnedComponent>(ev.Mob))
             return;
 
         if (ev.JobId is not { } jobId ||

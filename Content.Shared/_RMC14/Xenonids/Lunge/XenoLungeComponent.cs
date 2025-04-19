@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: CMGuidebookActionXenoBase
   abstract: true
   components:
@@ -155,7 +155,6 @@
     event: !type:XenoPlantWeedsActionEvent
       plasmaCost: 125
       prototype: XenoHardyWeedsSource
-      useOnSemiWeedable: true
     useDelay: 120
 
 # For healer drone

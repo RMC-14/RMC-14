@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: CMBaseWeaponRifle
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   name: M59A prototype rifle
   id: WeaponRifleM59A
   description: A prototype M59A, an experimental rifle platform built to outperform the standard M54C. Back issue only. Uses standard MK1 & MK2 rifle magazines.
