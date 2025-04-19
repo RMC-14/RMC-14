@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: Add medevac utility system to dropships and medevac stretchers.
-    type: Add
-  - message: Added being able to buckle stasis bags to roller beds and medevac stretchers.
-      Pulling a stasis bag without a roller bed will now correctly result in a movement
-      speed penalty.
-    type: Add
-  id: 1100
-  time: '2024-12-13T17:09:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3844
 - author: MetalSage
   changes:
   - message: Added visual effects when you heal Marines
@@ -5358,5 +5347,25 @@
   id: 1602
   time: '2025-04-19T08:43:55.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6113
+- author: BramvanZijp
+  changes:
+  - message: The MP riot control locker will now unlock automatically if the alert
+      level is set to blue or above.
+    type: Add
+  - message: Marines can no longer go into gun safes, nor be locked in them by an
+      unluckily timed alert level change.
+    type: Remove
+  - message: MP armory gun safes can now once again be locked/unlocked manually, requiring
+      armory access to do so.
+    type: Tweak
+  - message: Fixed alert level locked safes/doors only opening on their exact target
+      alert level, but not above it, such as red alert safes closing on delta.
+    type: Fix
+  - message: Fixed alert level locked safes locking while still being open if the
+      alert level drops, they now close first.
+    type: Fix
+  id: 1603
+  time: '2025-04-19T09:13:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6152
 Name: RMC14
 Order: -1
