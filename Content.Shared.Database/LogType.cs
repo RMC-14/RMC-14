@@ -460,6 +460,11 @@ public enum LogType
     /// </summary>
     AntagSelection = 99,
 
+    /// <summary>
+    /// Logs related to botany, such as planting and harvesting crops
+    /// </summary>
+    Botany = 100,
+
     RMCMarineAnnounce = 10000,
     RMCXenoAnnounce = RMCMarineAnnounce + 1,
     RMCNamedItem = RMCMarineAnnounce + 2,

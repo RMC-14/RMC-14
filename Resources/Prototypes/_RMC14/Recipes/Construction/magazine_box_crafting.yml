@@ -589,6 +589,13 @@
         amount: 1
         doAfter: 0.25
 
+    # M16
+    - to: RMCBoxMagazineRifleM16Empty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
     # M1984
     - to: RMCBoxMagazinePistolM1984Empty
       steps:
@@ -746,6 +753,10 @@
     entity: RMCBoxMagazineRifleM4SPRAPEmpty
   - node: RMCBoxMagazineRifleM4SPRExtEmpty
     entity: RMCBoxMagazineRifleM4SPRExtEmpty
+
+  # M16
+  - node: RMCBoxMagazineRifleM16Empty
+    entity: RMCBoxMagazineRifleM16Empty
 
   # M1984
   - node: RMCBoxMagazinePistolM1984Empty

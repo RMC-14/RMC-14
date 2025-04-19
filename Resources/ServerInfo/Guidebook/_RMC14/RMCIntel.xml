@@ -18,7 +18,7 @@
 
   <Box>
     <GuideEntityEmbed Entity="CMGuidebookRoleSurvivor" />
-    <GuideEntityEmbed Entity="RMCHumanCorpseColonistBurst" />
+    <GuideEntityEmbed Entity="RMCGuidebookCorpseColonistBurst" />
   </Box>
 
   - Survivors award points the first time they arrive on the warship.

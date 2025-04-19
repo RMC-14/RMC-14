@@ -179,8 +179,11 @@ public abstract class SharedEvacuationSystem : EntitySystem
         var offset = new Vector2(_index * 50, _index * 50);
         _index++;
 
-        if (!_mapLoader.TryLoadGrid(_map.Value, spawn, out var result, offset: offset))
+        if (!_mapSystem.MapExists(_map) ||
+            !_mapLoader.TryLoadGrid(_map.Value, spawn, out var result, offset: offset))
+        {
             return;
+        }
 
         var grid = result.Value;
         var xform = Transform(ent);
