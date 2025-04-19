@@ -134,6 +134,7 @@
     plasma: 215
   - type: RMCDeleteAnchoredOnInit
     enabled: true
+  - type: QueenEyeVision
 
 - type: entity # TODO RMC14 sound
   parent: XenoWeeds

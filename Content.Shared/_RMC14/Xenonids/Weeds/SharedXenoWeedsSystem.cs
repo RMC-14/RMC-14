@@ -322,7 +322,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         return GetWeedsOnFloor(grid, coordinates, sourceOnly) != null;
     }
 
-    public EntityUid? GetWeedsOnFloor(Entity<MapGridComponent> grid, EntityCoordinates coordinates, bool sourceOnly = false)
+    public Entity<XenoWeedsComponent>? GetWeedsOnFloor(Entity<MapGridComponent> grid, EntityCoordinates coordinates, bool sourceOnly = false)
     {
         var position = _mapSystem.LocalToTile(grid, grid, coordinates);
         var enumerator = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, position);
@@ -333,7 +333,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
                 continue;
 
             if (!sourceOnly || weeds.IsSource)
-                return anchored;
+                return (anchored.Value, weeds);
         }
 
         return null;

@@ -339,5 +339,6 @@
     range: 2
   - type: RMCArmorModifier
     meleeArmorModifier: 5
+  - type: MobCollision
   - type: RMCMobCollision
   - type: RMCRest

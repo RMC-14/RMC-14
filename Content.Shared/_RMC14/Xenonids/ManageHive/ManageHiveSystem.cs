@@ -29,7 +29,7 @@ public sealed class ManageHiveSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
-    [Dependency] private readonly SharedWatchXenoSystem _watchXeno = default!;
+    [Dependency] private readonly SharedXenoWatchSystem _xenoWatch = default!;
     [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
@@ -230,7 +230,7 @@ public sealed class ManageHiveSystem : EntitySystem
     private bool CanDevolveTargetPopup(Entity<ManageHiveComponent> manage, out Entity<XenoDevolveComponent> watched)
     {
         watched = default;
-        if (!_watchXeno.TryGetWatched(manage.Owner, out var watchedId) ||
+        if (!_xenoWatch.TryGetWatched(manage.Owner, out var watchedId) ||
             watchedId == manage.Owner)
         {
             _popup.PopupEntity("You must overwatch the xeno you want to de-evolve.", manage, manage, PopupType.MediumCaution);

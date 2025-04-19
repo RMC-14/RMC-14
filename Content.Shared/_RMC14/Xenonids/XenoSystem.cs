@@ -11,6 +11,7 @@ using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.HiveLeader;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -37,6 +38,7 @@ using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Stunnable;
 using Content.Shared.Tools.Systems;
 using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Melee.Events;
@@ -53,8 +55,10 @@ public sealed class XenoSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly HiveLeaderSystem _hiveLeader = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThresholds = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
@@ -64,6 +68,7 @@ public sealed class XenoSystem : EntitySystem
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly WeldableSystem _weldable = default!;
@@ -118,6 +123,10 @@ public sealed class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, CanDragEvent>(OnXenoCanDrag);
         SubscribeLocalEvent<XenoComponent, BuckleAttemptEvent>(OnXenoBuckleAttempt);
         SubscribeLocalEvent<XenoComponent, DamageStateCritBeforeDamageEvent>(OnXenoBeforeCritDamage, before: [typeof(SharedXenoPheromonesSystem)]);
+        SubscribeLocalEvent<XenoComponent, GetVisMaskEvent>(OnXenoGetVisMask);
+        // SubscribeLocalEvent<XenoComponent, CMDisarmEvent>(OnLeaderDisarmed,
+        //     before: [typeof(SharedHandsSystem), typeof(StaminaSystem)],
+        //     after: [typeof(TackleSystem)]);
 
         Subs.CVar(_config, RMCCVars.CMXenoDamageDealtMultiplier, v => _xenoDamageDealtMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMXenoDamageReceivedMultiplier, v => _xenoDamageReceivedMultiplier = v, true);
@@ -148,6 +157,8 @@ public sealed class XenoSystem : EntitySystem
         {
             _status.TryAddStatusEffect(xeno, "Muted", _xenoSpawnMuteDuration, true, "Muted");
         }
+
+        _eye.RefreshVisibilityMask(xeno.Owner);
     }
 
     private void OnXenoGetAdditionalAccess(Entity<XenoComponent> xeno, ref GetAccessTagsEvent args)
@@ -187,7 +198,9 @@ public sealed class XenoSystem : EntitySystem
         if ((_xenoFriendlyQuery.HasComp(target) && _hive.FromSameHive(xeno.Owner, target)) ||
             _mobState.IsDead(target))
         {
-            args.Cancel();
+            if (!args.Disarm)
+                args.Cancel();
+
             return;
         }
 
@@ -295,6 +308,31 @@ public sealed class XenoSystem : EntitySystem
         //Don't take bleedout damage on fire or on weeds
         args.Damage.ClampMax(0);
     }
+
+    private void OnXenoGetVisMask(Entity<XenoComponent> ent, ref GetVisMaskEvent args)
+    {
+        args.VisibilityMask |= (int) ent.Comp.Visibility;
+    }
+
+    // private void OnLeaderDisarmed(Entity<XenoComponent> ent, ref CMDisarmEvent args)
+    // {
+    //     if (args.Handled)
+    //         return;
+    //
+    //     if (!_hive.FromSameHive(ent.Owner, args.User))
+    //         return;
+    //
+    //     if (!_hiveLeader.IsLeader(args.User, out var leader))
+    //         return;
+    //
+    //     if (_hiveLeader.IsLeader(ent.Owner, out _))
+    //         return;
+    //
+    //     if (HasComp<XenoEvolutionGranterComponent>(ent))
+    //         return;
+    //
+    //     _stun.TryParalyze(ent, leader.FriendlyStunTime, true);
+    // }
 
     private void UpdateXenoSpeedMultiplier(float speed)
     {
@@ -428,10 +466,10 @@ public sealed class XenoSystem : EntitySystem
                 if (!_affectableQuery.TryComp(uid, out var affectable) ||
                     !affectable.OnXenoWeeds)
                 {
-                    if (_xenoPlasmaQuery.TryComp(uid, out var plasma))
+                    if (_xenoPlasmaQuery.TryComp(uid, out var plasmaComp))
                     {
-                        var amount = FixedPoint2.Max(plasma.PlasmaRegenOffWeeds * plasma.MaxPlasma / 100 / 2, 0.01);
-                        _xenoPlasma.RegenPlasma((uid, plasma), amount);
+                        var amount = FixedPoint2.Max(plasmaComp.PlasmaRegenOffWeeds * plasmaComp.MaxPlasma / 100 / 2, 0.01);
+                        _xenoPlasma.RegenPlasma((uid, plasmaComp), amount);
                     }
 
                     continue;

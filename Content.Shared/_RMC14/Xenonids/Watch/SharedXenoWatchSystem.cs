@@ -5,27 +5,27 @@ using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Watch;
 
-public abstract class SharedWatchXenoSystem : EntitySystem
+public abstract class SharedXenoWatchSystem : EntitySystem
 {
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<XenoComponent, XenoWatchActionEvent>(OnXenoWatchAction);
-        SubscribeLocalEvent<XenoComponent, MoveInputEvent>(OnXenoMoveInput);
+        SubscribeLocalEvent<XenoWatchingComponent, MoveInputEvent>(OnXenoMoveInput);
 
-        Subs.BuiEvents<XenoComponent>(XenoWatchUIKey.Key, subs =>
-        {
-            subs.Event<XenoWatchBuiMsg>(OnXenoWatchBui);
-        });
+        Subs.BuiEvents<XenoComponent>(XenoWatchUIKey.Key,
+            subs =>
+            {
+                subs.Event<XenoWatchBuiMsg>(OnXenoWatchBui);
+            });
     }
 
-    private void OnXenoMoveInput(Entity<XenoComponent> xeno, ref MoveInputEvent args)
+    private void OnXenoMoveInput(Entity<XenoWatchingComponent> xeno, ref MoveInputEvent args)
     {
         if (!args.HasDirectionalMovement)
             return;
@@ -73,5 +73,12 @@ public abstract class SharedWatchXenoSystem : EntitySystem
 
         watched = watching.Comp.Watching.Value;
         return true;
+    }
+
+    public void SetWatching(Entity<XenoWatchingComponent?> watching, EntityUid target)
+    {
+        watching.Comp = EnsureComp<XenoWatchingComponent>(watching);
+        watching.Comp.Watching = target;
+        Dirty(watching);
     }
 }

@@ -437,6 +437,9 @@
   id: RMCMagazineSmartGunirradiated
 
 - type: Tag
+  id: RMCMagazineSmartGunHT
+
+- type: Tag
   id: CMCartridgeSmartGun10x30mm
 
 - type: Tag

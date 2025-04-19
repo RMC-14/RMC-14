@@ -9,6 +9,7 @@ using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Egg;
+using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Weeds;
@@ -52,25 +53,26 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogs = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly QueenEyeSystem _queenEye = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly TagSystem _tags = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly XenoNestSystem _xenoNest = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
-    [Dependency] private readonly TagSystem _tags = default!;
 
     private static readonly ImmutableArray<Direction> Directions = Enum.GetValues<Direction>()
         .Where(d => d != Direction.Invalid)
@@ -105,6 +107,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         _xenoTunnelQuery = GetEntityQuery<XenoTunnelComponent>();
 
         SubscribeLocalEvent<XenoConstructionComponent, XenoPlantWeedsActionEvent>(OnXenoPlantWeedsAction);
+        SubscribeLocalEvent<XenoConstructionComponent, XenoExpandWeedsActionEvent>(OnXenoExpandWeedsAction);
 
         SubscribeLocalEvent<XenoConstructionComponent, XenoChooseStructureActionEvent>(OnXenoChooseStructureAction);
 
@@ -203,6 +206,69 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (_net.IsServer)
         {
             var weeds = Spawn(args.Prototype, coordinates);
+            _adminLogs.Add(LogType.RMCXenoPlantWeeds, $"Xeno {ToPrettyString(xeno):xeno} planted weeds {ToPrettyString(weeds):weeds} at {coordinates}");
+            _hive.SetSameHive(xeno.Owner, weeds);
+        }
+
+        _audio.PlayPredicted(xeno.Comp.BuildSound, coordinates, xeno);
+    }
+
+    private void OnXenoExpandWeedsAction(Entity<XenoConstructionComponent> xeno, ref XenoExpandWeedsActionEvent args)
+    {
+        var coordinates = args.Target;
+        if (_transform.GetGrid(coordinates) is not { } gridUid ||
+            !TryComp(gridUid, out MapGridComponent? gridComp))
+        {
+            return;
+        }
+
+        if (_queenEye.IsInQueenEye(xeno.Owner) &&
+            !_queenEye.CanSeeTarget(xeno.Owner, coordinates))
+        {
+            return;
+        }
+
+        var grid = new Entity<MapGridComponent>(gridUid, gridComp);
+        var existing = _xenoWeeds.GetWeedsOnFloor(grid, coordinates);
+        if (existing is { Comp.IsSource: true })
+        {
+            _popup.PopupClient(Loc.GetString("cm-xeno-weeds-source-already-here"), xeno.Owner, xeno.Owner);
+            return;
+        }
+
+        if (existing == null)
+        {
+            var hasAdjacent = false;
+            foreach (var direction in _rmcMap.CardinalDirections)
+            {
+                if (!_rmcMap.HasAnchoredEntityEnumerator<XenoWeedsComponent>(coordinates))
+                    continue;
+
+                hasAdjacent = true;
+                break;
+            }
+
+            if (!hasAdjacent)
+            {
+                // TODO RMC14
+            }
+        }
+
+        var toSpawn = existing == null ? args.Expand : args.Source;
+        var tile = _mapSystem.CoordinatesToTile(gridUid, gridComp, coordinates);
+        if (!_xenoWeeds.CanSpreadWeedsPopup(grid, tile, xeno, false, true))
+            return;
+
+        if (!_xenoWeeds.CanPlaceWeedsPopup(xeno, grid, coordinates, false))
+            return;
+
+        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
+            return;
+
+        args.Handled = true;
+        if (_net.IsServer)
+        {
+            var weeds = Spawn(toSpawn, coordinates);
             _adminLogs.Add(LogType.RMCXenoPlantWeeds, $"Xeno {ToPrettyString(xeno):xeno} planted weeds {ToPrettyString(weeds):weeds} at {coordinates}");
             _hive.SetSameHive(xeno.Owner, weeds);
         }
@@ -824,8 +890,11 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return false;
         }
 
-        if (!InRangePopup(xeno, target, xeno.Comp.BuildRange.Float()))
+        if (xeno.Comp.BuildRange > 0 &&
+            !InRangePopup(xeno, target, xeno.Comp.BuildRange.Float()))
+        {
             return false;
+        }
 
         if (!TileSolidAndNotBlocked(target))
         {
