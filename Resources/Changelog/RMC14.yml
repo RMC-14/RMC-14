@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: MetalSage
-  changes:
-  - message: Added visual effects when you heal Marines
-    type: Add
-  id: 1101
-  time: '2024-12-13T17:10:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5007
 - author: Dutch-VanDerLinde
   changes:
   - message: Added a hotkey to pick up recently dropped items. The key is R by default.
@@ -5367,5 +5360,12 @@
   id: 1603
   time: '2025-04-19T09:13:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6152
+- author: Dygon
+  changes:
+  - message: Evacuation can now be authorized while on red or delta alert.
+    type: Tweak
+  id: 1604
+  time: '2025-04-19T09:54:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5496
 Name: RMC14
 Order: -1
