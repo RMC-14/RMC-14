@@ -2,7 +2,7 @@ using Content.Shared._RMC14.Actions;
 using Content.Shared.Actions;
 using Content.Shared.StatusEffect;
 
-namespace Content.Shared.Stunnable;
+namespace Content.Shared._RMC14.Stun;
 
 public sealed class RMCDazedSystem : EntitySystem
 {
@@ -12,6 +12,7 @@ public sealed class RMCDazedSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCDazedComponent, DazedEvent>(OnDazed);
+        SubscribeLocalEvent<RMCDazedComponent, ComponentShutdown>(OnDazedEnd);
     }
 
     /// <summary>
@@ -19,13 +20,26 @@ public sealed class RMCDazedSystem : EntitySystem
     ///     cooldown isn't higher already.
     /// </summary>
     /// <seealso cref="RMCDazeableActionComponent"/>
-    private void OnDazed(EntityUid uid, RMCDazedComponent component, DazedEvent args)
+    private void OnDazed(Entity<RMCDazedComponent> ent, ref DazedEvent args)
     {
-        foreach (var (actionId, _) in _actions.GetActions(uid))
+        foreach (var (actionId, _) in _actions.GetActions(ent))
         {
             if (TryComp(actionId, out RMCDazeableActionComponent? dazeable))
             {
-                _actions.SetIfBiggerCooldown(actionId, args.Duration * dazeable.DurationMultiplier);
+                _actions.SetEnabled(actionId, false);
+                _actions.SetCharges(actionId, 0);
+            }
+        }
+    }
+
+    private void OnDazedEnd(Entity<RMCDazedComponent> ent, ref ComponentShutdown args)
+    {
+        foreach (var (actionId, _) in _actions.GetActions(ent))
+        {
+            if (TryComp(actionId, out RMCDazeableActionComponent? dazeable))
+            {
+                _actions.SetEnabled(actionId, true);
+                _actions.SetCharges(actionId, null);
             }
         }
     }
