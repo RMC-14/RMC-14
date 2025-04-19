@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added Tactical Wraps. They can be found in uniform vendors in prep rooms,
-      or in requisitions.
-    type: Add
-  id: 1094
-  time: '2024-12-13T14:14:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5111
-- author: Dutch-VanDerLinde
-  changes:
-  - message: CMO, ASO, CE, CMP, and QM now have access to the senior officer vendor,
-      each job getting unique contents in the vendor.
-    type: Add
-  id: 1095
-  time: '2024-12-13T14:16:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5106
 - author: DrSmugleaf
   changes:
   - message: Fixed Queen screech not stunning parasites.
@@ -5340,5 +5324,19 @@
   id: 1596
   time: '2025-04-19T06:52:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6153
+- author: QuietlyWhisper
+  changes:
+  - message: Added Hailey Morgan figurine.
+    type: Add
+  id: 1597
+  time: '2025-04-19T06:54:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6182
+- author: Whisper
+  changes:
+  - message: Updated guidebook with more controls.
+    type: Add
+  id: 1598
+  time: '2025-04-19T06:53:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6183
 Name: RMC14
 Order: -1
