@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xenos not being able to turn off flashlights and other sources
-      of light by clicking on them.
-    type: Fix
-  id: 1103
-  time: '2024-12-13T18:19:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5123
 - author: MACMAN2003
   changes:
   - message: Added camouflaged variants of marine weapons, armor, and equipment.
@@ -5367,5 +5359,12 @@
   id: 1605
   time: '2025-04-19T10:07:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5972
+- author: Vermidia
+  changes:
+  - message: Fixed critical grace activating if you were already in crit.
+    type: Fix
+  id: 1606
+  time: '2025-04-19T11:36:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6188
 Name: RMC14
 Order: -1
