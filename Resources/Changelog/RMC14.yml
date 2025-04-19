@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: TsjipTsjip
-  changes:
-  - message: Correspondent microphone can no longer be used to play MIDI files.
-    type: Remove
-  id: 1099
-  time: '2024-12-13T17:11:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4949
 - author: blueDev2
   changes:
   - message: Add medevac utility system to dropships and medevac stretchers.
@@ -5350,5 +5343,20 @@
   id: 1601
   time: '2025-04-19T08:27:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6185
+- author: Vermidia
+  changes:
+  - message: Add eggsac carrier strain, who can generate eggs and plant them off hive
+      weeds.
+    type: Add
+  - message: Fixed player parasites having 1 sec too short leap time (1 > 2 seconds).
+    type: Fix
+  - message: AI parasites now instant leap, but only try to leap every 5 seconds while
+      active.
+    type: Fix
+  - message: Fixed eggs not becoming fragile eggs off weeds.
+    type: Fix
+  id: 1602
+  time: '2025-04-19T08:43:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6113
 Name: RMC14
 Order: -1
