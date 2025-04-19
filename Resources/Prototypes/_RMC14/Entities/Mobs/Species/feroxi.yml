@@ -69,7 +69,7 @@
       - map: [ "pocket1" ]
       - map: [ "pocket2" ]
       - map: [ "clownedon" ] # Dynamically generated
-        sprite: "Effects/creampie.rsi"
+        sprite: "_RMC14/Effects/creampie.rsi"
         state: "creampie_feroxi"
         visible: false
       - map: [ "acided" ]
