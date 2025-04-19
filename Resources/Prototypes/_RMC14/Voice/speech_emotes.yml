@@ -172,7 +172,27 @@
     - whined!
     - whining.
 
-
-
-
-
+- type: emote
+  id: Gnash
+  name: rmc-emote-name-gnash
+  category: Vocal
+  availiable: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatmessages: ["rmc-emote-gnash"]
+  chatTriggers:
+    - gnash
+    - gnashes
+    - gnashes.
+    - gnashes!
+    - gnash.
+    - gnash!
+    - gnashes teeth
+    - gnashes their teeth
+    - gnashes her teeth
+    - gnashes his teeth
+    - gnashes its teeth
