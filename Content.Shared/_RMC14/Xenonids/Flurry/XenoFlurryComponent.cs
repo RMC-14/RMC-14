@@ -16,6 +16,9 @@ public sealed partial class XenoFlurryComponent : Component
     public float Range = 2;
 
     [DataField, AutoNetworkedField]
+    public int? MaxTargets = 4;
+
+    [DataField, AutoNetworkedField]
     public int HealAmount = 30;
 
     [DataField, AutoNetworkedField]

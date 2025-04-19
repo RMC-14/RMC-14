@@ -79,7 +79,9 @@ public sealed class XenoFlurrySystem : EntitySystem
         RaiseLocalEvent(xeno, ref ev);
         damage += ev.Damage;
 
+        var hits = 0;
         EntityUid? hitEnt = null;
+
         foreach (var victim in mobs)
         {
             if (!_interaction.InRangeUnobstructed(xeno.Owner, victim, xeno.Comp.Range + 0.5f))
@@ -87,6 +89,8 @@ public sealed class XenoFlurrySystem : EntitySystem
 
             if (hitEnt == null)
                 hitEnt = victim;
+
+            hits++;
 
             var change = _damage.TryChangeDamage(victim, damage, origin: xeno, tool: xeno);
 
@@ -101,6 +105,9 @@ public sealed class XenoFlurrySystem : EntitySystem
 
             SpawnAttachedTo(xeno.Comp.HealEffect, xeno.Owner.ToCoordinates());
             _xenoHeal.CreateHealStacks(xeno, xeno.Comp.HealAmount, xeno.Comp.HealDelay, xeno.Comp.HealCharges, xeno.Comp.HealDelay);
+
+            if (xeno.Comp.MaxTargets != null && hits >= xeno.Comp.MaxTargets)
+                break;
         }
 
         if (hitEnt != null)
