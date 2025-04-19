@@ -987,7 +987,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             if (distress.ForceEndAt != null && Timing.CurTime >= distress.ForceEndAt)
             {
-                EndRound(distress, DistressSignalRuleResult.MinorXenoVictory);
+                EndRound(distress, DistressSignalRuleResult.MinorXenoVictory, "rmc-distress-signal-minorxenovictory-timeout");
                 continue;
             }
 
@@ -1149,7 +1149,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (_xenoEvolution.HasLiving<XenoComponent>(4))
                     EndRound(distress, DistressSignalRuleResult.MinorMarineVictory);
                 else
-                    EndRound(distress, DistressSignalRuleResult.MajorMarineVictory);
+                    EndRound(distress, DistressSignalRuleResult.MajorMarineVictory, "rmc-distress-signal-majormarinevictory-timeout");
             }
         }
     }
@@ -1423,7 +1423,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         base.AppendRoundEndText(uid, component, gameRule, ref args);
 
         var result = component.Result ??= DistressSignalRuleResult.None;
-        args.AddLine($"{Loc.GetString($"cm-distress-signal-{result.ToString().ToLower()}")}");
+        if (component.CustomRoundEndMessage != null)
+            args.AddLine($"{Loc.GetString(component.CustomRoundEndMessage)}");
+        else
+            args.AddLine($"{Loc.GetString($"cm-distress-signal-{result.ToString().ToLower()}")}");
 
         var commendations = _commendation.GetCommendations();
         var marineAwards = commendations.Where(c => c.Type == CommendationType.Medal).ToArray();
@@ -1505,7 +1508,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             if (_xenoEvolution.HasLiving<XenoComponent>(4))
                 EndRound(component, DistressSignalRuleResult.MinorMarineVictory);
             else
-                EndRound(component, DistressSignalRuleResult.MajorMarineVictory);
+                EndRound(component, DistressSignalRuleResult.MajorMarineVictory, "rmc-distress-signal-majormarinevictory-timeout");
         }
     }
 
@@ -1640,7 +1643,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             EnsureComp<ThunderdomeMapComponent>(mapEnt.Value);
     }
 
-    private void EndRound(CMDistressSignalRuleComponent rule, DistressSignalRuleResult result)
+    private void EndRound(CMDistressSignalRuleComponent rule, DistressSignalRuleResult result, LocId? customMessage = null)
     {
         // you might be wondering what this check is doing here
         // the answer is simple
@@ -1659,6 +1662,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             return;
 
         rule.Result = result;
+        rule.CustomRoundEndMessage = customMessage;
         switch (rule.Result)
         {
             case DistressSignalRuleResult.MajorMarineVictory:

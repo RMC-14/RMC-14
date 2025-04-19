@@ -161,4 +161,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
 
     [DataField]
     public TimeSpan? ForceEndAt;
+
+    [DataField]
+    public LocId? CustomRoundEndMessage;
 }
