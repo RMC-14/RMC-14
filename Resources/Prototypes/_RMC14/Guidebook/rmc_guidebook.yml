@@ -14,6 +14,7 @@
   - RMCMedical
   - RMCRequisitions
   - RMCIntel
+  - RMCSurvivor
 
 - type: guideEntry
   parent: RMC
@@ -84,3 +85,10 @@
   priority: 7
   name: "Intel"
   text: "/ServerInfo/Guidebook/_RMC14/RMCIntel.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: RMCSurvivor
+  priority: 8
+  name: "Survivor"
+  text: "/ServerInfo/Guidebook/_RMC14/NewPlayerGuide/RMCSurvivor.xml"
