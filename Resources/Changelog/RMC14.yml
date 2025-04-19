@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added marine loadouts!
-    type: Add
-  id: 1098
-  time: '2024-12-13T17:07:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5063
 - author: TsjipTsjip
   changes:
   - message: Correspondent microphone can no longer be used to play MIDI files.
@@ -5348,5 +5341,14 @@
   id: 1600
   time: '2025-04-19T08:16:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6052
+- author: Vermidia
+  changes:
+  - message: Fixed Fight or Flight not curing daze.
+    type: Fix
+  - message: Dazed disabled actions is now clearer.
+    type: Tweak
+  id: 1601
+  time: '2025-04-19T08:27:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6185
 Name: RMC14
 Order: -1
