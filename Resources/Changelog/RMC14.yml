@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Queen screech not stunning parasites.
-    type: Fix
-  id: 1096
-  time: '2024-12-13T14:26:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5118
 - author: noctyrnal
   changes:
   - message: Added Vertical Cargo Containers
@@ -5338,5 +5331,26 @@
   id: 1598
   time: '2025-04-19T06:53:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6183
+- author: Whisper
+  changes:
+  - message: Added the armor vest to MP, IO, and Corpsmen equipment vendors. It has
+      no movement speed modifier, minimal armor, and no armor light. It does not protect
+      against sentinel slowing spit stuns, and comes with two storage slots.
+    type: Add
+  - message: Parasites no longer have a chance to be a ghost role, no longer allowing
+      you to bypass intentional role cooldowns.
+    type: Fix
+  - message: Hazard vests and jackets can no longer hold items in the suit storage
+      slot. Armor or armored vests must be used instead. Survivors retain the ability
+      to put items in the suit storage slot regardless of it being restricted.
+    type: Tweak
+  - message: Restructured the MP vendor. You can now also take both a beret and helmet.
+    type: Tweak
+  - message: A few minor SOP clarifications. Major change includes all civilians are
+      free to deploy at their discretion.
+    type: Tweak
+  id: 1599
+  time: '2025-04-19T08:08:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6141
 Name: RMC14
 Order: -1
