@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added Mentor Help, used to ask questions about the game. Press F1 to
-      access it.
-    type: Add
-  id: 1093
-  time: '2024-12-13T14:15:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5084
 - author: noctyrnal
   changes:
   - message: Added Tactical Wraps. They can be found in uniform vendors in prep rooms,
@@ -5341,5 +5333,12 @@
   id: 1595
   time: '2025-04-19T06:47:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6160
+- author: BramvanZijp
+  changes:
+  - message: The RTO Backpack is now marked as recommended for FTLs and SLs.
+    type: Tweak
+  id: 1596
+  time: '2025-04-19T06:52:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6153
 Name: RMC14
 Order: -1
