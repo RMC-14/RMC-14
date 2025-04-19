@@ -86,6 +86,12 @@ rmc-xeno-steelcrest-description = You trade your tail sweep and a small amount o
    - Soak in damage for 6 seconds for a small heal that also refreshes your tail slam.
 rmc-xeno-steelcrest-popup = This one, like my will, is indomitable. It will become my steel crest against all that defy me.
 
+rmc-xeno-maid-name = Cat Maid
+rmc-xeno-maid-description = You trade your dignity.
+    You gain the ability to:
+    - Cause mental anguish in friends and foes alike.
+rmc-xeno-maid-popup = Rawr :3
+
 rmc-xeno-eggsac-name = Eggsac
 rmc-xeno-eggsac-description = You trade your ability to store parasites and make resin traps for stronger pheromones, more egg storage, and the ability to produce eggs.
    You gain the ability to:

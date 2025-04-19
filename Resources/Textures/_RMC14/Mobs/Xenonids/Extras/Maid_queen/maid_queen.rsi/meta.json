@@ -8,31 +8,35 @@
   },
   "states": [
     {
-      "name": "maid_rest_0"
-    },
-    {
-      "name": "maid_rest_1"
-    },
-    {
-      "name": "maid_rest_2"
-    },
-    {
-      "name": "maid_rest_3"
-    },
-    {
-      "name": "maid_walk_0",
+      "name": "queen_parasite_right",
       "directions": 4
     },
     {
-      "name": "maid_walk_1",
+      "name": "queen_rest_0"
+    },
+    {
+      "name": "queen_rest_1"
+    },
+    {
+      "name": "queen_rest_2"
+    },
+    {
+      "name": "queen_rest_3"
+    },
+    {
+      "name": "queen_walk_0",
       "directions": 4
     },
     {
-      "name": "maid_walk_2",
+      "name": "queen_walk_1",
       "directions": 4
     },
     {
-      "name": "maid_walk_3",
+      "name": "queen_walk_2",
+      "directions": 4
+    },
+    {
+      "name": "queen_walk_3",
       "directions": 4
     },
     {
@@ -49,31 +53,27 @@
       "name": "crit"
     },
     {
-      "name": "maid_downed_0"
+      "name": "queen_downed_0"
     },
     {
-      "name": "maid_downed_1"
+      "name": "queen_downed_1"
     },
     {
-      "name": "maid_downed_2"
+      "name": "queen_downed_2"
     },
     {
-      "name": "maid_downed_3"
+      "name": "queen_downed_3"
     },
     {
-      "name": "maid_egg_left",
+      "name": "queen_egg_left",
       "directions": 4
     },
     {
-      "name": "maid_egg_right",
+      "name": "queen_egg_right",
       "directions": 4
     },
     {
-      "name": "maid_parasite_left",
-      "directions": 4
-    },
-    {
-      "name": "maid_parasite_right",
+      "name": "queen_parasite_left",
       "directions": 4
     }
   ]
