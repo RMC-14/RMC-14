@@ -141,6 +141,8 @@ entities:
       - name: Blizzard
         duration: 240
         weatherType: RMCStrataBlizzard
+    - type: RMCAmbientLightEffects
+      sunset: RMCColorSequenceSunsetCold
     - type: LoadedMap
     - type: MapGrid
       chunks:

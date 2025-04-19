@@ -37,6 +37,7 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Item;
+using Content.Shared._RMC14.Light;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.HyperSleep;
@@ -142,6 +143,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly SharedDestructibleSystem _destruction = default!;
     [Dependency] private readonly IntelSystem _intel = default!;
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
+    [Dependency] private readonly RMCAmbientLightSystem _rmcAmbientLight = default!;
 
 
     private readonly HashSet<string> _operationNames = new();
@@ -161,6 +163,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private bool _useCarryoverVoting;
     private TimeSpan _hijackStunTime = TimeSpan.FromSeconds(5);
     private bool _landingZoneMiasmaEnabled;
+    private TimeSpan _sunsetDuration;
+    private TimeSpan _sunriseDuration;
 
     private readonly List<MapId> _almayerMaps = [];
     private readonly List<EntityUid> _marineList = [];
@@ -218,6 +222,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         Subs.CVar(_config, RMCCVars.RMCPlanetMapVoteExcludeLast, v => _mapVoteExcludeLast = v, true);
         Subs.CVar(_config, RMCCVars.RMCUseCarryoverVoting, v => _useCarryoverVoting = v, true);
         Subs.CVar(_config, RMCCVars.RMCLandingZoneMiasmaEnabled, v => _landingZoneMiasmaEnabled = v, true);
+        Subs.CVar(_config, RMCCVars.RMCSunsetDuration, v => _sunsetDuration = TimeSpan.FromSeconds(v), true);
+        Subs.CVar(_config, RMCCVars.RMCSunriseDuration, v => _sunriseDuration = TimeSpan.FromSeconds(v), true);
 
         ReloadPrototypes();
     }
@@ -1200,6 +1206,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             EnsureComp<DeletedByWeedKillerComponent>(uid);
         }
 
+        var rmcAmbientComp = EnsureComp<RMCAmbientLightComponent>(rule.Comp.XenoMap);
+        var rmcAmbientEffectComp = EnsureComp<RMCAmbientLightEffectsComponent>(rule.Comp.XenoMap);
+        var colorSequence = _rmcAmbientLight.ProcessPrototype(rmcAmbientEffectComp.Sunset);
+        _rmcAmbientLight.SetColor((rule.Comp.XenoMap, rmcAmbientComp), colorSequence, _sunsetDuration);
+
         return true;
     }
 
@@ -1652,6 +1663,11 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         switch (rule.Result)
         {
             case DistressSignalRuleResult.MajorMarineVictory:
+                var rmcAmbientComp = EnsureComp<RMCAmbientLightComponent>(rule.XenoMap);
+                var rmcAmbientEffectComp = EnsureComp<RMCAmbientLightEffectsComponent>(rule.XenoMap);
+                var colorSequence = _rmcAmbientLight.ProcessPrototype(rmcAmbientEffectComp.Sunrise);
+                _rmcAmbientLight.SetColor((rule.XenoMap, rmcAmbientComp), colorSequence, _sunriseDuration);
+
                 var ares = _ares.EnsureARES();
                 _marineAnnounce.AnnounceRadio(ares,
                     "Bioscan complete. No unknown lifeform signature detected.",
