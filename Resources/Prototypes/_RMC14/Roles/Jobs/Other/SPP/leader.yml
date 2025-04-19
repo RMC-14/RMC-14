@@ -1,13 +1,13 @@
 ﻿- type: job
   parent: CMJobBase
   id: RMCSPPLeader
-  name: rmc-job-name-spp-leader
+  name: RMCSPPLeader
   description: rmc-job-description-spp-leader
   playTimeTracker: CMJobSPPLeader
   ranks:
     RMCRankSPPSerzhant: []
   startingGear: RMCGearSPPLeader
-  icon: RMCJobIconSPPLeader
+  icon: "RMCJobIconSPPLeader"
   joinNotifyCrew: false
   accessGroups:
   - Colonist
@@ -32,33 +32,27 @@
         RMCSkillMedical: 1
         RMCSkillVehicles: 1
         RMCSkillPolice: 1
+    - type: MarineOrders
+    - type: SquadArmorWearer
+      leader: true
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: upp_sl_a
+    - type: RMCPointing
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-leader
-    - type: UserIFF
-      faction: FactionSPP
   hidden: true
 
 - type: entity
   parent: MarkerBase
-  id: RMCSpawnerSPPLeader
-  name: spp spawner leader
+  id: RMCRandomHumanoidSPPLeader
+  name: spp ghost role leader
   suffix: Spawner, Player
   components:
   - type: Sprite
     layers:
     - state: red
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCRandomHumanoidSPPLeader
-
-- type: entity
-  id: RMCRandomHumanoidSPPLeader
-  name: spp ghost role leader
-  suffix: Role, Player
-  components:
-  - type: Sprite
-    sprite: Markers/cross.rsi
-    state: red
   - type: RandomHumanoidSpawner
     settings: RMCSPPLeader
 
@@ -67,27 +61,13 @@
   id: RMCSPPLeader
   components:
   - type: GhostRole
-    name: rmc-ghost-role-name-spp-leader
+    name: RMCSPPLeader
     description: rmc-job-description-spp-leader
     rules: rmc-ghost-role-information-spp-rules
-    raffle:
-      settings: short
     reregister: false
     job: RMCSPPLeader
-  - type: Skills
-    skills:
-      RMCSkillConstruction: 2
-      RMCSkillCqc: 1
-      RMCSkillEndurance: 2
-      RMCSkillEngineer: 2
-      RMCSkillFirearms: 1
-      RMCSkillFireman: 1
-      RMCSkillIntel: 1
-      RMCSkillJtac: 2
-      RMCSkillLeadership: 1
-      RMCSkillMedical: 1
-      RMCSkillVehicles: 1
-      RMCSkillPolice: 1
+    raffle:
+      settings: short
   - type: GhostRoleApplySpecial
 
 - type: startingGear
@@ -95,12 +75,13 @@
   equipment:
     head: CMHeadCapSPPBeret
     ears: RMCHeadsetSPPCommand
+    ears2: RMCM5CameraGear
     jumpsuit: CMJumpsuitSPP
     outerClothing: RMCArmorSPPRifleman
     gloves: RMCHandsVeteranSPP
     shoes: CMBootsBlackFilled
-    suitstorage: RMCWeaponRifleType71FilledAP
-    id: RMCIDSPPLeader
+    suitstorage: RMCWeaponRifleType71
+    id: RMCIDSPP
     belt: CMM77BeltFilled # TODO RMC14 : Replace with T73, NP92 or Revolver
     back: RMCSatchelSPPRifleman
     pocket1: RMCPouchAutoinjectorFill

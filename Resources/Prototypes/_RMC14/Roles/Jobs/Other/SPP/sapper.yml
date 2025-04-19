@@ -1,13 +1,13 @@
 ﻿- type: job
   parent: CMJobBase
   id: RMCSPPEngineer
-  name: rmc-job-name-spp-engineer
+  name: RMCSPPEngineer
   description: rmc-job-description-spp-engineer
   playTimeTracker: CMJobSPPEngineer
   ranks:
     RMCRankSPPMladshiySerzhant: []
   startingGear: RMCGearSPPEngineer
-  icon: RMCJobIconSPPEngineer
+  icon: "RMCJobIconSPPEngineer"
   joinNotifyCrew: false
   accessGroups:
   - Colonist
@@ -26,33 +26,20 @@
         RMCSkillFireman: 1
         RMCSkillJtac: 1
         RMCSkillVehicles: 1
+    - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-engineer
-    - type: UserIFF
-      faction: FactionSPP
   hidden: true
 
 - type: entity
   parent: MarkerBase
-  id: RMCSpawnerSPPEngineer
-  name: spp spawner engineer
+  id: RMCRandomHumanoidSPPEngineer
+  name: spp ghost role engineer
   suffix: Spawner, Player
   components:
   - type: Sprite
     layers:
     - state: red
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCRandomHumanoidSPPEngineer
-
-- type: entity
-  id: RMCRandomHumanoidSPPEngineer
-  name: spp ghost role engineer
-  suffix: Role, Player
-  components:
-  - type: Sprite
-    sprite: Markers/cross.rsi
-    state: red
   - type: RandomHumanoidSpawner
     settings: RMCSPPEngineer
 
@@ -61,20 +48,13 @@
   id: RMCSPPEngineer
   components:
   - type: GhostRole
-    name: rmc-ghost-role-name-spp-engineer
+    name: RMCSPPEngineer
     description: rmc-job-description-spp-engineer
     rules: rmc-ghost-role-information-spp-rules
+    reregister: false
+    job: RMCSPPEngineer
     raffle:
       settings: short
-    job: RMCSPPEngineer
-  - type: Skills
-    skills:
-      RMCSkillConstruction: 2
-      RMCSkillEngineer: 3
-      RMCSkillFirearms: 1
-      RMCSkillFireman: 1
-      RMCSkillJtac: 1
-      RMCSkillVehicles: 1
   - type: GhostRoleApplySpecial
 
 - type: startingGear
@@ -89,7 +69,7 @@
     gloves: RMCHandsVeteranInsulated
     shoes: CMBootsBlackFilled
     suitstorage: RMCWeaponRifleType71Flamer
-    id: RMCIDSPPSapper
+    id: RMCIDSPP
     belt: RMCType71BeltFilled
     back: RMCSatchelSPPWelderEngineer
     pocket1: RMCPouchAutoinjectorFill

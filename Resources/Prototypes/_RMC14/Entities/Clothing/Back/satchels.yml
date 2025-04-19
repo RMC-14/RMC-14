@@ -495,4 +495,16 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMMRE # TODO : Needs hacked MD and SPP sentry
+    - id: CMMRE
+    - id: RMCMotionDetector # TODO RMC14: hacked MD
+    - id: RMCSentryMiniSPP
+
+- type: entity
+  parent: CMSatchelMarineMedic
+  id: RMCSatchelPMCMedic
+  description: pmc medic combat pack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/PMC/medic.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}

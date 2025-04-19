@@ -89,7 +89,15 @@
     defaultChannel: SPP
 
 - type: entity
+  abstract: true
   parent: RMCHeadsetIcons
+  id: RMCHeadsetSPPAbstract
+  components:
+  - type: GrantSquadLeaderTracker
+  - type: GrantTacMapAlert
+
+- type: entity
+  parent: RMCHeadsetSPPAbstract
   id: RMCHeadsetSPP
   name: SPP headset
   components:
@@ -100,7 +108,7 @@
       - RMCEncryptionKeySPP
 
 - type: entity
-  parent: RMCHeadsetIcons
+  parent: RMCHeadsetSPPAbstract
   id: RMCHeadsetSPPCommand
   name: SPP-CMD headset
   components:
@@ -111,7 +119,7 @@
       - RMCEncryptionKeySPPCommand
 
 - type: entity
-  parent: RMCHeadsetIcons
+  parent: RMCHeadsetSPPAbstract
   id: RMCHeadsetSPPEngineer
   name: SPP-CCT headset
   components:
@@ -122,7 +130,7 @@
       - RMCEncryptionKeySPPEngineer
 
 - type: entity
-  parent: RMCHeadsetIcons
+  parent: RMCHeadsetSPPAbstract
   id: RMCHeadsetSPPMedic
   name: SPP-MED headset
   components:

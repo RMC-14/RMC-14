@@ -7,11 +7,9 @@
   id: RMCXeno
   hostile:
   - UNMC
-
-- type: npcFaction
-  id: SPP
-  hostile:
-  - RMCXeno
+  - SPP
+  - WeYa
+  - Survivor
 
 - type: npcFaction
   id: RMCDumb
@@ -19,3 +17,20 @@
   - UNMC
   - RMCXeno
   - SPP
+  - WeYa
+  - Survivor
+
+- type: npcFaction
+  id: SPP
+  hostile:
+  - RMCXeno
+
+- type: npcFaction
+  id: WeYa
+  hostile:
+  - RMCXeno
+
+- type: npcFaction
+  id: Survivor
+  hostile:
+  - RMCXeno
