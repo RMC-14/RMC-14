@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Added carryover planet voting system from 13.
-    type: Add
-  id: 1091
-  time: '2024-12-13T12:28:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5067
 - author: MetalSage
   changes:
   - message: Welding goggles added.
@@ -5336,5 +5329,17 @@
   id: 1593
   time: '2025-04-19T06:02:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6148
+- author: J C Denton
+  changes:
+  - message: Shiva's Snowball now has more props.
+    type: Add
+  - message: 'Replaced some placeholder guns in Shiva''s with their intended gun:
+      Basira rifles, Spearhead revlvers, HG 37-12 pump shotguns, and Type 23 shotguns.'
+    type: Tweak
+  - message: Fixed Shiva's LZ-2 Bio-lab shutters not being connected to buttons.
+    type: Fix
+  id: 1594
+  time: '2025-04-19T06:42:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6164
 Name: RMC14
 Order: -1
