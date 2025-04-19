@@ -41,7 +41,6 @@ public sealed class XenoCollisionSystem : EntitySystem
         SubscribeLocalEvent<StunFriendlyXenoOnStepComponent, XenoRestEvent>(OnStunUpdated);
         SubscribeLocalEvent<StunFriendlyXenoOnStepComponent, StunnedEvent>(OnStunUpdated);
         SubscribeLocalEvent<StunFriendlyXenoOnStepComponent, StatusEffectEndedEvent>(OnStunUpdated);
-        SubscribeLocalEvent<StunFriendlyXenoOnStepComponent, StatusEffectEndedEvent>(OnStunUpdated);
         SubscribeLocalEvent<StunFriendlyXenoOnStepComponent, XenoOvipositorChangedEvent>(OnStunUpdated);
     }
 
