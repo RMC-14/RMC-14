@@ -1,5 +1,4 @@
-using Content.Shared._RMC14.Stealth;
-using Content.Shared._RMC14.Xenonids.Invisibility;
+using Content.Server._RMC14.Popups;
 using Content.Shared.Popups;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
@@ -14,6 +13,7 @@ namespace Content.Server.Popups
         [Dependency] private readonly IPlayerManager _player = default!;
         [Dependency] private readonly IConfigurationManager _cfg = default!;
         [Dependency] private readonly SharedTransformSystem _transform = default!;
+        [Dependency] private readonly RMCPopupSystem _rmcPopup = default!;
 
         public override void PopupCursor(string? message, PopupType type = PopupType.Small)
         {
@@ -140,8 +140,8 @@ namespace Content.Server.Popups
 
             if (recipient != null)
             {
-                // RMC14 Don't show popups to other's while invisible.
-                if(HasComp<EntityActiveInvisibleComponent>(recipient) || HasComp<XenoActiveInvisibleComponent>(recipient))
+                // RMC14 Check if popups should be shown to nearby players.
+                if(_rmcPopup.ShouldPopup(recipient.Value))
                     return;
 
                 // Don't send to recipient, since they predicted it locally
