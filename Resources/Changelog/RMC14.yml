@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: MetalSage
-  changes:
-  - message: Welding goggles added.
-    type: Add
-  id: 1092
-  time: '2024-12-13T12:29:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5075
 - author: DrSmugleaf
   changes:
   - message: Added Mentor Help, used to ask questions about the game. Press F1 to
@@ -5341,5 +5334,12 @@
   id: 1594
   time: '2025-04-19T06:42:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6164
+- author: Dygon
+  changes:
+  - message: Sentry projectiles now home in on their target.
+    type: Fix
+  id: 1595
+  time: '2025-04-19T06:47:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6160
 Name: RMC14
 Order: -1
