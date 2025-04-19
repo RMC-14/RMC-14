@@ -1,4 +1,5 @@
 using System.Globalization;
+using Content.Server._RMC14.Announce;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.Ghost;
@@ -50,6 +51,7 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
     [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly MarinePresenceAnnounceSystem _marinePresenceAnnounce = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -238,6 +240,8 @@ public sealed class CryostorageSystem : SharedCryostorageSystem
             _stationRecords.RemoveRecord(key, stationRecords);
         }
 
+        _marinePresenceAnnounce.AnnounceEarlyLeave(ent, recordId, station, jobName); // RMC14
+        return; // RMC14
         _chatSystem.DispatchStationAnnouncement(station.Value,
             Loc.GetString(
                 "earlyleave-cryo-announcement",

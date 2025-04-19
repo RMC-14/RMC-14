@@ -9,3 +9,5 @@
   - CMExecutiveOfficer
   - CMStaffOfficer
   primary: false
+  departmentRadio: MarineCommand
+  headOfDepartment: CMCommandingOfficer
