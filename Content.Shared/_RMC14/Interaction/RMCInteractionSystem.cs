@@ -41,7 +41,7 @@ public sealed class RMCInteractionSystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private void OnContainerIsInsertingAttemptEvent(Entity<InsertBlacklistComponent> ent, ref ContainerIsInsertingAttemptEvent args)
+    private void OnInsertBlacklistContainerIsInsertingAttempt(Entity<InsertBlacklistComponent> ent, ref ContainerIsInsertingAttemptEvent args)
     {
         if (args.Cancelled || ent.Comp.Blacklist is not { } blacklist)
             return;
