@@ -137,13 +137,6 @@ public sealed class XenoLungeSystem : EntitySystem
         }
 
         _pulling.TryStartPull(xeno, targetId);
-
-        if (_net.IsServer &&
-            HasComp<MarineComponent>(targetId))
-        {
-            SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());
-        }
-
         return true;
     }
 

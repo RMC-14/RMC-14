@@ -18,8 +18,5 @@ public sealed partial class XenoLungeComponent : Component
     public TimeSpan StunTime = TimeSpan.FromSeconds(4);
 
     [DataField, AutoNetworkedField]
-    public EntProtoId Effect = "CMEffectGrab";
-
-    [DataField, AutoNetworkedField]
     public Vector2? Charge;
 }
