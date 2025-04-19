@@ -18,6 +18,9 @@ public sealed partial class TileFireComponent : Component
     [DataField, AutoNetworkedField]
     public float PatExtinguishMultiplier = 1;
 
+    [DataField, AutoNetworkedField]
+    public float AcidSprayExtinguishMultiplier = 1;
+
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan SpawnedAt;
 
