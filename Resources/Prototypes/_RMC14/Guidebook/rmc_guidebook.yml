@@ -26,6 +26,7 @@
   - RMCGuideRoleCombatTechnician
   - RMCGuideCommunicationsTowers
   - RMCGuideRoleMaintenanceTechnician
+  - RMCGuideRoleSGO
 
 - type: guideEntry
   parent: RMC
@@ -84,3 +85,10 @@
   priority: 7
   name: "Intel"
   text: "/ServerInfo/Guidebook/_RMC14/RMCIntel.xml"
+
+- type: guideEntry # made by GoodShowOldChap
+  parent: RMC
+  id: RMCGuideRoleSGO
+  priority: 9
+  name: "Smart Gun Operator"
+  text: "/ServerInfo/Guidebook/_RMC14/NewPlayerGuide/RMCGuideRoleSGO.xml"

@@ -15,11 +15,20 @@
   New to RMC-14, SS14, or have no CM13 experience? Be careful! A lot of mechanics and values are not the same as SS14.
   - [textlink="New player guide!" link="RMCGuideNewPlayer"]
 
-  Have some experience? Check out these guidebook pages!
+
+
+  ## Have some experience? Check out these guidebook pages!
+
+  ### Marines
+  [bold]Roles[/bold]
   - [textlink="Medical" link="RMCMedical"]
-  - [textlink="Medicines" link="RMCMedicine"]
   - [textlink="Requisitions" link="RMCRequisitions"]
-  - [textlink="Communications towers and sensor towers" link="RMCGuideCommunicationsTowers"]
   - [textlink="Combat Technician" link="RMCGuideRoleCombatTechnician"]
   - [textlink="Maintenance Technician" link="RMCGuideRoleMaintenanceTechnician"]
+  - [textlink="Smart Gun Operator" link="RMCGuideRoleSGO"]
+
+  [bold]Structures[/bold]
+  - [textlink="Communications towers and sensor towers" link="RMCGuideCommunicationsTowers"]
+
+  ### Xenonid
 </Document>
