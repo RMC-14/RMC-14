@@ -14,7 +14,7 @@
   - When wounds are treated, the marine will begin to passively heal, very slowly.
   - Treating wounds will also stop any bleeding.
   - Using medicine will speed up damage healing.
-  - [textlink="Medicines" link="CMMedicine"]
+  - [textlink="Medicines" link="RMCMedicine"]
 
   ##Items that treat {wounds}
   - Trauma and burn kits will treat all wounds when used, and provide minor bonus healing.
