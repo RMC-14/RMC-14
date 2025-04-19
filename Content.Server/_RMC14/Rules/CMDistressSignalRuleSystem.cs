@@ -161,6 +161,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private bool _useCarryoverVoting;
     private TimeSpan _hijackStunTime = TimeSpan.FromSeconds(5);
     private bool _landingZoneMiasmaEnabled;
+    private TimeSpan _forceEndHijackTime;
 
     private readonly List<MapId> _almayerMaps = [];
     private readonly List<EntityUid> _marineList = [];
@@ -218,6 +219,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         Subs.CVar(_config, RMCCVars.RMCPlanetMapVoteExcludeLast, v => _mapVoteExcludeLast = v, true);
         Subs.CVar(_config, RMCCVars.RMCUseCarryoverVoting, v => _useCarryoverVoting = v, true);
         Subs.CVar(_config, RMCCVars.RMCLandingZoneMiasmaEnabled, v => _landingZoneMiasmaEnabled = v, true);
+        Subs.CVar(_config, RMCCVars.RMCForceEndHijackTimeMinutes, v => _forceEndHijackTime = TimeSpan.FromMinutes(v), true);
 
         ReloadPrototypes();
     }
@@ -826,7 +828,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 DistressSignalRuleResult.MajorMarineVictory => -1,
                 DistressSignalRuleResult.MinorMarineVictory => -1,
                 DistressSignalRuleResult.MajorXenoVictory => 1,
-                DistressSignalRuleResult.MinorXenoVictory => 0, // hijack but all xenos die
+                DistressSignalRuleResult.MinorXenoVictory => 0, // hijack but all xenos die or timeout happens
                 DistressSignalRuleResult.AllDied => 0,
                 null => 0,
                 _ => throw new ArgumentOutOfRangeException(),
@@ -869,6 +871,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private void OnDropshipHijackLanded(ref DropshipHijackLandedEvent ev)
     {
         var rules = QueryActiveRules();
+        var time = Timing.CurTime;
         while (rules.MoveNext(out _, out var rule, out _))
         {
             if (rule.HijackSongPlayed)
@@ -876,6 +879,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             rule.HijackSongPlayed = true;
             _audio.PlayGlobal(rule.HijackSong, Filter.Broadcast(), true);
+            rule.ForceEndAt = time + _forceEndHijackTime;
             break;
         }
 
@@ -980,6 +984,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 continue;
 
             distress.NextCheck ??= Timing.CurTime + distress.CheckEvery;
+
+            if (distress.ForceEndAt != null && Timing.CurTime >= distress.ForceEndAt)
+            {
+                EndRound(distress, DistressSignalRuleResult.MinorXenoVictory);
+                continue;
+            }
 
             var hijack = false;
             var dropshipQuery = EntityQueryEnumerator<DropshipComponent>();
