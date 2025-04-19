@@ -1,4 +1,4 @@
-namespace Content.Shared.Stunnable;
+namespace Content.Shared._RMC14.Stun;
 
 /// <summary>
 ///     Having this component prevents being dazed again.
