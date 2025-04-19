@@ -1,0 +1,6 @@
+- type: soundCollection
+  id: RMCShatter
+  files:
+  - /Audio/_RMC14/Effects/Glassbr1.ogg
+  - /Audio/_RMC14/Effects/Glassbr2.ogg
+  - /Audio/_RMC14/Effects/Glassbr3.ogg

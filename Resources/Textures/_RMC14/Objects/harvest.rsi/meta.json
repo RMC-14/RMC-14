@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/800f3950414b25174f1e81278dfe1cde4fbbf281/icons/obj/items/harvest.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "berrypile"
+    },
+    {
+      "name": "chilipepper"
+    },
+    {
+      "name": "eggplant"
+    },
+    {
+      "name": "icepepper"
+    },
+    {
+      "name": "soybeans"
+    },
+    {
+      "name": "amanita"
+    },
+    {
+      "name": "angel"
+    },
+    {
+      "name": "libertycap"
+    },
+    {
+      "name": "plumphelmet"
+    },
+    {
+      "name": "chanterelle"
+    },
+    {
+      "name": "carrot"
+    },
+    {
+      "name": "potato"
+    },
+    {
+      "name": "corn"
+    },
+    {
+      "name": "cornBig"
+    },
+    {
+      "name": "poppy"
+    },
+    {
+      "name": "potato_battery"
+    },
+    {
+      "name": "sunflower"
+    },
+    {
+      "name": "logs"
+    },
+    {
+      "name": "glowshroom"
+    },
+    {
+      "name": "tomato"
+    },
+    {
+      "name": "ambrosiavulgaris"
+    },
+    {
+      "name": "whitebeet"
+    },
+    {
+      "name": "grass"
+    },
+    {
+      "name": "watermelon"
+    },
+    {
+      "name": "apple"
+    },
+    {
+      "name": "goldapple",
+      "delays": [
+        [
+          1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "lime"
+    },
+    {
+      "name": "lemon"
+    },
+    {
+      "name": "orange"
+    },
+    {
+      "name": "poisonberrypile"
+    },
+    {
+      "name": "sugarcane"
+    },
+    {
+      "name": "bloodtomato"
+    },
+    {
+      "name": "cocoapod"
+    },
+    {
+      "name": "tile_grass"
+    },
+    {
+      "name": "deathberrypile"
+    },
+    {
+      "name": "bluetomato"
+    },
+    {
+      "name": "glowberrypile"
+    },
+    {
+      "name": "walkingmushroom"
+    },
+    {
+      "name": "grapes"
+    },
+    {
+      "name": "cabbage"
+    },
+    {
+      "name": "pumpkin"
+    },
+    {
+      "name": "greengrapes"
+    },
+    {
+      "name": "killertomato"
+    },
+    {
+      "name": "corncob"
+    },
+    {
+      "name": "berrypilefarart"
+    },
+    {
+      "name": "wheat"
+    },
+    {
+      "name": "ambrosiadeus"
+    },
+    {
+      "name": "spawner"
+    },
+    {
+      "name": "bluespacetomato",
+      "delays": [
+        [
+          2.5,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "harebell"
+    },
+    {
+      "name": "reishi"
+    },
+    {
+      "name": "cherry"
+    },
+    {
+      "name": "kudzupod"
+    },
+    {
+      "name": "plastellium"
+    },
+    {
+      "name": ""
+    },
+    {
+      "name": "rice"
+    },
+    {
+      "name": "mtear"
+    },
+    {
+      "name": "shand"
+    },
+    {
+      "name": "peanut"
+    },
+    {
+      "name": "banana"
+    },
+    {
+      "name": "banana_peel"
+    },
+    {
+      "name": "nettle"
+    },
+    {
+      "name": "deathnettle"
+    }
+  ]
+}

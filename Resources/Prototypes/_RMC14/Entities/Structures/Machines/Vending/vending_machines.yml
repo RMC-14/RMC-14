@@ -1,4 +1,4 @@
-# Base Vender
+# Base Vendor
 - type: entity
   parent: VendingMachine
   id: CMVendor
@@ -154,16 +154,16 @@
 - type: vendingMachineInventory
   id: CMVendorSnack
   startingInventory: # TODO RMC14
-    RMCFoodSnackCheeseburgerPackaged: 12
-    RMCFoodSnackBurritoPackaged: 12
-    RMCFoodSnackHotdogPackaged: 12
+    RMCFoodSnackPackagedCheeseburgerWrapped: 12
+    RMCFoodSnackPackagedBurritoWrapped: 12
+    RMCFoodSnackPackagedHotdogWrapped: 12
     RMCFoodSnackKeplarCrisps: 12
     RMCFoodSnackKeplarFlamehotCrisps: 12
     RMCFoodSnackChipsPepper: 12
     RMCFoodSnackEATBar: 12
     RMCFoodSnackBoonie: 6
     RMCFoodSnackCHUNK: 6
-    RMCFoodSnackBarcaridine: 6
+    RMCFoodSnackBarcardine: 6
 
 
 # Cola

@@ -10,3 +10,9 @@
   - type: FlavorProfile
     flavors:
     - nutriment
+  - type: Extractable
+    grindableSolutionName: food
+  - type: InjectableSolution
+    solution: food
+  - type: DrawableSolution
+    solution: food
