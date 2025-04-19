@@ -160,7 +160,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         announcement ??= "rmc-announcement-ares-message";
         message = Loc.GetString(announcement, ("message", FormattedMessage.EscapeText(message)));
 
-        AnnounceToMarines(message, sound ?? AresAnnouncementSound);
+        AnnounceToMarines(message, sound);
         _adminLogs.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(source):player} ARES announced message: {message}");
     }
 

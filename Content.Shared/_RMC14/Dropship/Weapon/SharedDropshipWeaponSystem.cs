@@ -186,11 +186,17 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private void OnFlareSignalDropped(Entity<FlareSignalComponent> ent, ref DroppedEvent args)
     {
+        if (!IsFlareLit(ent))
+            return;
+
         StartTrackingActiveFlare(ent, args.User);
     }
 
     private void OnFlareSignalThrown(Entity<FlareSignalComponent> ent, ref ThrownEvent args)
     {
+        if (!IsFlareLit(ent))
+            return;
+
         StartTrackingActiveFlare(ent, args.User);
     }
 
@@ -1036,7 +1042,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                                 chain,
                                 flight.Fire.Range,
                                 flight.Fire.Intensity,
-                                flight.Fire.Duration
+                                flight.Fire.Duration,
+                                out _
                             );
                         }
                     }
@@ -1052,7 +1059,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                                     chain,
                                     flight.Fire.Range,
                                     flight.Fire.Intensity,
-                                    flight.Fire.Duration
+                                    flight.Fire.Duration,
+                                    out _
                                 );
                             }
                         }

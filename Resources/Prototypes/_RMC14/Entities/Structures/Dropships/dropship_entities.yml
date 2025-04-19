@@ -53,6 +53,8 @@
   name: engine system attach point
   description: A place where heavy equipment can be installed with a powerloader.
   components:
+  - type: Transform
+    anchored: false
   - type: Sprite
     sprite: _RMC14/Objects/dropship_attachments.rsi
     layers:
@@ -64,6 +66,7 @@
     sprite: _RMC14/Objects/dropship_attachments.rsi
     state: "fuel_base"
   - type: Physics
+    bodyType: Static
     canCollide: false
   - type: Occluder
     enabled: false

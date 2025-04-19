@@ -28,10 +28,13 @@ public sealed class CMPoweredLightSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (!_pointLight.TryGetLight(ent, out var pointLight) ||
-            !pointLight.Enabled)
-        {
+        if (IsOff(ent))
             args.Cancelled = true;
-        }
+    }
+
+    public bool IsOff(EntityUid light)
+    {
+        return !_pointLight.TryGetLight(light, out var pointLight) ||
+               !pointLight.Enabled;
     }
 }

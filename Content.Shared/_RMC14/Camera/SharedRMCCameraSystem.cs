@@ -50,19 +50,25 @@ public abstract class SharedRMCCameraSystem : EntitySystem
 
     private void OnCameraMapInit(Entity<RMCCameraComponent> ent, ref MapInitEvent args)
     {
-        if (!ent.Comp.Rename)
-            return;
-
         if (ent.Comp.Id is { } id)
             _refresh.Add(id);
 
-        if (!_area.TryGetArea(ent, out _, out var areaProto))
-            return;
+        if (ent.Comp.Rename)
+        {
+            if (!_area.TryGetArea(ent, out _, out var areaProto))
+                return;
 
-        var areaName = areaProto.Name;
-        var count = _cameraNames.GetValueOrDefault(areaName);
-        _metaData.SetEntityName(ent, $"{areaName} #{++count}");
-        _cameraNames[areaName] = count;
+            var areaName = areaProto.Name;
+            var count = _cameraNames.GetValueOrDefault(areaName);
+            _metaData.SetEntityName(ent, $"{areaName} #{++count}");
+            _cameraNames[areaName] = count;
+        }
+        else
+        {
+            var name = Name(ent);
+            var count = _cameraNames.GetValueOrDefault(name);
+            _cameraNames[name] = count;
+        }
     }
 
     private void OnCameraRemove(Entity<RMCCameraComponent> ent, ref ComponentRemove args)

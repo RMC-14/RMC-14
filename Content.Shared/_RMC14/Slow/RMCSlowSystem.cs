@@ -62,6 +62,9 @@ public sealed class RMCSlowSystem : EntitySystem
 
     public bool TrySuperSlowdown(EntityUid ent, TimeSpan duration, bool refresh = true, bool ignoreDurationModifier = false)
     {
+        if (_timing.ApplyingState)
+            return false;
+
         if (!TryComp<RMCSpeciesSlowdownModifierComponent>(ent, out var slow))
             return false;
 

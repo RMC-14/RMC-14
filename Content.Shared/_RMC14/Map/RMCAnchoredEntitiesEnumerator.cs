@@ -10,12 +10,14 @@ public struct RMCAnchoredEntitiesEnumerator(
     DirectionFlag facing = DirectionFlag.None
 ) : IDisposable
 {
+    private AnchoredEntitiesEnumerator _enumerator = enumerator;
+
     // ReSharper disable once CollectionNeverUpdated.Local
     public static readonly RMCAnchoredEntitiesEnumerator Empty = new(default!, AnchoredEntitiesEnumerator.Empty);
 
     public bool MoveNext(out EntityUid uid)
     {
-        while (enumerator.MoveNext(out var uidNullable))
+        while (_enumerator.MoveNext(out var uidNullable))
         {
             if (facing == DirectionFlag.None)
             {
@@ -36,6 +38,6 @@ public struct RMCAnchoredEntitiesEnumerator(
 
     public void Dispose()
     {
-        enumerator.Dispose();
+        _enumerator.Dispose();
     }
 }

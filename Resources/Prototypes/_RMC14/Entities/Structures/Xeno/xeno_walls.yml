@@ -30,7 +30,6 @@
     xenoDamage:
       types:
         Slash: 225
-  - type: XenoConstructReinforce
 
 - type: entity
   parent: WallXenoResin

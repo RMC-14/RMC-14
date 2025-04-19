@@ -102,7 +102,7 @@ public sealed class XenoPierceSystem : EntitySystem
 
                 hits++;
 
-                var change = _damage.TryChangeDamage(ent, xeno.Comp.Damage, origin: xeno, armorPiercing: xeno.Comp.AP);
+                var change = _damage.TryChangeDamage(ent, xeno.Comp.Damage, origin: xeno, armorPiercing: xeno.Comp.AP, tool: xeno);
 
                 if (change?.GetTotal() > FixedPoint2.Zero)
                 {
