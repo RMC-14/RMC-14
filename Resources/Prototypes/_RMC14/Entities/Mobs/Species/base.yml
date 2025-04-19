@@ -337,4 +337,6 @@
       tags:
       - RMCDropshipEnginePoint
     range: 2
-
+  - type: RMCArmorModifier
+    meleeArmorModifier: 5
+  - type: RMCObstacleSlamCauserImmune

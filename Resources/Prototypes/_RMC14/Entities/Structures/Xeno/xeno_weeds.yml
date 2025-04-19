@@ -190,6 +190,14 @@
         hive_weed14: ""
     - 0:
         hive_weed15: ""
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity
   parent: XenoHiveWeeds
@@ -258,8 +266,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
     drawdepth: Objects
-    layers:
-    - state: weedwall
+#    layers:
+#    - state: weedwall
   - type: IconSmooth
     key: cm_xeno_weeds_walls
     base: weedwall

@@ -93,6 +93,7 @@
   - type: Tag
     tags:
     - RMCMagazineXM43E1
+    - CMMagazineSniper
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:

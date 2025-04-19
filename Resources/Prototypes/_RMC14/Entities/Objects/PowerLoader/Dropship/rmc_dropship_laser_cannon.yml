@@ -2,7 +2,7 @@
   parent: RMCDropshipAttachmentWeapon
   id: RMCDropshipAttachmentLaserCannon
   name: LWU-6B Laser Cannon
-  description: State of the art technology recently acquired by the USCM, it fires a battery-fed pulsed laser beam at near lightspeed setting on fire everything it touches. Moving this will require some sort of lifter. Accepts the BTU-17/LW Hi-Cap Laser Batteries.
+  description: State of the art technology recently acquired by the UNMC, it fires a battery-fed pulsed laser beam at near lightspeed setting on fire everything it touches. Moving this will require some sort of lifter. Accepts the BTU-17/LW Hi-Cap Laser Batteries.
   components:
   - type: Sprite
     layers:
@@ -60,7 +60,7 @@
     fire:
       type: RMCTileFireLaser
       range: 3
-      intensity: 55
+      intensity: 75
       duration: 5
       total: 16
     deleteOnEmpty: true

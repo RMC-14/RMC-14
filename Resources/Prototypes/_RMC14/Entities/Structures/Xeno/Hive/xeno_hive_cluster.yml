@@ -44,6 +44,9 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: cluster
+  - type: RMCAlternateSprite
+    normalSprite: _RMC14/Structures/Xenos/hive_cluster.rsi
+    alternateSprite: _RMC14/Structures/Xenos/hive_cluster_old.rsi
 
 
 - type: entity
@@ -54,9 +57,9 @@
   components:
   - type: Sprite
     color: '#FFFFFFAA'
+    sprite: _RMC14/Structures/Xenos/hive_cluster.rsi
     layers:
-    - sprite: _RMC14/Structures/Xenos/hive_cluster.rsi
-      state: hive_cluster_idle
+    - state: hive_cluster_idle
     - sprite: _RMC14/Interface/xeno_hud.rsi
       state: xeno_structure_node_indicator
       scale: 0.8, 0.8
@@ -77,3 +80,6 @@
     id: HiveClusterXeno
   - type: WarpPoint
     location: hive cluster
+  - type: RMCAlternateSprite
+    normalSprite: _RMC14/Structures/Xenos/hive_cluster.rsi
+    alternateSprite: _RMC14/Structures/Xenos/hive_cluster_old.rsi

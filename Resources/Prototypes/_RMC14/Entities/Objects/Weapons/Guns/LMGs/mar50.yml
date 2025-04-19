@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: CMBaseWeaponRifle
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   name: MAR-50 light machine gun
   id: RMCWeaponMar50LMG
   description: A cheap, reliable LMG chambered in 7.62x39mm. Commonly found in the hands of slightly better funded criminals.

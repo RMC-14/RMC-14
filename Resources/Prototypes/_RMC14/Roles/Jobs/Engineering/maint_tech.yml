@@ -44,6 +44,13 @@
         RMCSkillPowerLoader: 2
     - type: JobPrefix
       prefix: cm-job-prefix-maint-tech
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: mt
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_shipside
 
 - type: startingGear
   id: CMGearMaintTech
