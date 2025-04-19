@@ -2,6 +2,7 @@ using System.IO;
 using System.Linq;
 using System.Numerics;
 using Content.Client._RMC14.NamedItems;
+using Content.Client.GameTicking.Managers;
 using Content.Client.Humanoid;
 using Content.Client.Lobby.UI.Loadouts;
 using Content.Client.Lobby.UI.Roles;
@@ -56,6 +57,7 @@ namespace Content.Client.Lobby.UI
         private readonly MarkingManager _markingManager;
         private readonly JobRequirementsManager _requirements;
         private readonly LobbyUIController _controller;
+        private readonly ClientGameTicker _clientGameTicker; // RMC14
 
         private readonly SpriteSystem _sprite;
 
@@ -122,7 +124,8 @@ namespace Content.Client.Lobby.UI
             IPrototypeManager prototypeManager,
             IResourceManager resManager,
             JobRequirementsManager requirements,
-            MarkingManager markings)
+            MarkingManager markings,
+            ClientGameTicker clientGameTicker)
         {
             RobustXamlLoader.Load(this);
             _sawmill = logManager.GetSawmill("profile.editor");
@@ -136,7 +139,9 @@ namespace Content.Client.Lobby.UI
             _resManager = resManager;
             _requirements = requirements;
             _controller = UserInterfaceManager.GetUIController<LobbyUIController>();
+            _clientGameTicker = clientGameTicker;
             _sprite = _entManager.System<SpriteSystem>();
+
             ImportButton.OnPressed += args =>
             {
                 ImportProfile();
@@ -1001,10 +1006,16 @@ namespace Content.Client.Lobby.UI
                     JobList.AddChild(category);
                 }
 
-                var jobs = department.Roles.Select(jobId => _prototypeManager.Index(jobId))
+                var selectedPlanet = _clientGameTicker.SelectedPlanet;
+
+                var jobs = department.Roles // RMC14 map-based jobs
+                    .Select(jobId => _prototypeManager.Index(jobId))
                     .Where(job => job.SetPreference)
                     .Where(job => !job.Hidden)
                     .ToArray();
+
+                if (selectedPlanet != null) // RMMC14
+                    jobs = jobs.Where(job => job.AvailableOnPlanets == null || job.AvailableOnPlanets.Contains(selectedPlanet)).ToArray();
 
                 Array.Sort(jobs, JobUIComparer.Instance);
 
