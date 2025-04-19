@@ -3,6 +3,7 @@
   parent:
   - BaseMob
   - MobDamageable
+  - MobPolymorphable
   - MobCombat
   - StripableInventoryBase
   id: BaseMobSpecies
@@ -18,16 +19,10 @@
     - map: [ "enum.HumanoidVisualLayers.LArm" ]
     - map: [ "enum.HumanoidVisualLayers.RLeg" ]
     - map: [ "enum.HumanoidVisualLayers.LLeg" ]
-    - shader: StencilClear
-      sprite: Mobs/Species/Human/parts.rsi #PJB on stencil clear being on the left leg: "...this is 'fine'" -https://github.com/space-wizards/space-station-14/pull/12217#issuecomment-1291677115
-      # its fine, but its still very stupid that it has to be done like this instead of allowing sprites to just directly insert a stencil clear.
-      # sprite refactor when
-      state: l_leg
-    - shader: StencilMask
-      map: ["enum.HumanoidVisualLayers.StencilMask"]
-      sprite: Mobs/Customization/masking_helpers.rsi
-      state: unisex_full
-      visible: false
+    - map: [ "enum.HumanoidVisualLayers.Underwear" ]
+    - map: [ "enum.HumanoidVisualLayers.Undershirt" ]
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
     - map: ["jumpsuit"]
     - map: ["enum.HumanoidVisualLayers.LFoot"]
     - map: ["enum.HumanoidVisualLayers.RFoot"]
@@ -36,12 +31,12 @@
     - map: [ "gloves" ]
     - map: [ "shoes" ]
     - map: [ "ears" ]
-    - map: [ "outerClothing" ]
-    - map: [ "enum.SquadArmorLayers.Armor" ]
-    - map: ["enum.WebbingVisualLayers.Base"]
     - map: [ "eyes" ]
     - map: [ "belt" ]
-    - map: [ "neck" ]
+    - map: [ "outerClothing" ]
+    - map: [ "enum.SquadArmorLayers.Armor" ]
+    - map: [ "enum.WebbingVisualLayers.Base" ]
+    - map: [ "enum.MedalVisualLayers.Base" ]
     - map: [ "back" ]
     - map: [ "id" ]
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
@@ -50,8 +45,10 @@
     - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
     - map: [ "enum.HumanoidVisualLayers.Tail" ]
     - map: [ "mask" ]
+    - map: [ "neck" ] # RMC14 re-arrange neck slot
     - map: [ "head" ]
     - map: [ "enum.SquadArmorLayers.Helmet" ]
+    - map: [ "enum.VisorVisualLayers.Base" ]
     - map: [ "pocket1" ]
     - map: [ "pocket2" ]
     - map: ["enum.HumanoidVisualLayers.Handcuffs"]
@@ -64,6 +61,24 @@
       state: "creampie_human"
       visible: false
     - map: [ "acided" ]
+    - map: [ "hooked" ]
+      sprite: "_RMC14/Effects/xeno_spray_acid.rsi"
+      state: hooked
+      visible: false
+    - map: [ "enum.NewPlayerLayers.Layer" ]
+      visible: false
+    - map: [ "focused" ]
+      sprite: _RMC14/Interface/xeno_hud.rsi
+      state: hudeye
+      visible: false
+    - map: [ "targetedDirection" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_direction
+      visible: false
+    - map: [ "targetedDirectionIntense" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_intense_direction
+      visible: false
   - type: DamageVisuals
     thresholds: [ 10, 20, 30, 50, 70, 100 ]
     targetLayers:
@@ -146,6 +161,9 @@
     - Pacified
     - StaminaModifier
     - Flashed
+    - RadiationProtection
+    - Drowsiness
+    - Adrenaline
   - type: Body
     prototype: Human
     requiredLegs: 2
@@ -153,7 +171,7 @@
   - type: IdExaminable
   - type: Hands
   - type: ComplexInteraction
-  - type: Internals
+#  - type: Internals
   - type: FloatingVisuals
   - type: Climbing
   - type: Cuffable
@@ -176,10 +194,10 @@
   - type: SleepEmitSound
   - type: SSDIndicator
   - type: StandingState
-  - type: Fingerprint
   - type: Dna
   - type: MindContainer
     showExamineInfo: true
+  - type: CanEnterCryostorage
   - type: InteractionPopup
     successChance: 1
     interactSuccessString: hugging-success-generic
@@ -193,8 +211,6 @@
   - type: Stripping
   - type: UserInterface
     interfaces:
-      enum.VoiceMaskUIKey.Key:
-        type: VoiceMaskBoundUserInterface
       enum.HumanoidMarkingModifierKey.Key:
         type: HumanoidMarkingModifierBoundUserInterface
       enum.StrippingUiKey.Key:
@@ -222,6 +238,9 @@
     - CanPilot
     - FootstepSound
     - DoorBumpOpener
+    - AnomalyHost
+  - type: MobGibbedByExplosionType
+  - type: RMCCanBeFultoned
 
 - type: entity
   save: false
@@ -248,7 +267,7 @@
         Heat: -0.07
       groups:
         Brute: -0.07
-
+  - type: Fingerprint
   - type: Blindable
   # Other
   - type: Temperature
@@ -262,6 +281,11 @@
     heatDamage:
       types:
         Heat: 1.5 #per second, scales with temperature & other constants
+  - type: TemperatureSpeed
+    thresholds:
+      293: 0.8
+      280: 0.6
+      260: 0.4
   - type: ThermalRegulator
     metabolismHeat: 800
     radiatedHeat: 100
@@ -269,7 +293,7 @@
     sweatHeatRegulation: 2000
     shiveringHeatRegulation: 2000
     normalBodyTemperature: 310.15
-    thermalRegulationTemperatureThreshold: 25
+    thermalRegulationTemperatureThreshold: 2
   - type: Perishable
   - type: Butcherable
     butcheringType: Spike # TODO human.
@@ -311,14 +335,10 @@
     - map: [ "enum.HumanoidVisualLayers.LArm" ]
     - map: [ "enum.HumanoidVisualLayers.RLeg" ]
     - map: [ "enum.HumanoidVisualLayers.LLeg" ]
-    - shader: StencilClear
-      sprite: Mobs/Species/Human/parts.rsi
-      state: l_leg
-    - shader: StencilMask
-      map: ["enum.HumanoidVisualLayers.StencilMask"]
-      sprite: Mobs/Customization/masking_helpers.rsi
-      state: unisex_full
-      visible: false
+    - map: ["enum.HumanoidVisualLayers.Undershirt"]
+    - map: ["enum.HumanoidVisualLayers.Underwear"]
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
     - map: ["jumpsuit"]
     - map: ["enum.HumanoidVisualLayers.LFoot"]
     - map: ["enum.HumanoidVisualLayers.RFoot"]
@@ -332,12 +352,11 @@
     - map: [ "gloves" ]
     - map: [ "shoes" ]
     - map: [ "ears" ]
-    - map: [ "outerClothing" ]
-    - map: ["enum.WebbingVisualLayers.Base"]
     - map: [ "eyes" ]
     - map: [ "belt" ]
     - map: [ "id" ]
-    - map: [ "neck" ]
+    - map: [ "outerClothing" ]
+    - map: [ "enum.WebbingVisualLayers.Base" ]
     - map: [ "back" ]
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
     - map: [ "enum.HumanoidVisualLayers.Hair" ]
@@ -345,9 +364,11 @@
     - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
     - map: [ "enum.HumanoidVisualLayers.Tail" ]
     - map: [ "mask" ]
+    - map: [ "neck" ] # RMC14 re-arrange neck slot
     - map: [ "head" ]
     - map: [ "pocket1" ]
     - map: [ "pocket2" ]
+    - map: [ "enum.MedalVisualLayers.Base" ]
   - type: Appearance
   - type: HumanoidAppearance
     species: Human

@@ -1,0 +1,18 @@
+- type: entity
+  abstract: true
+  id: RMCConstructibleMachine
+  components:
+  - type: Machine
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: Construction
+    graph: CMMachineFrame
+    node: machine
+    containers:
+    - machine_parts
+    - machine_board
+  - type: LightningTarget
+    priority: 1
+

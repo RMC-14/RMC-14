@@ -1,0 +1,14 @@
+- type: entity
+  name: Box of handcuffs
+  parent: RMCBoxCardboard
+  id: RMCBoxHandcuffs
+  description: A box full of handcuffs
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCHandcuffs
+        amount: 7
+  - type: Sprite
+    state: handcuff
+
+

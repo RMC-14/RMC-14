@@ -1,20 +1,20 @@
 ﻿- type: entity
-  parent: CMCrateAmmo
-  id: CMCrateMagazineM96SMixed
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineM96SMixed
   name: M96S Sniper Mixed Magazine Crate (marksman x2, flak x2, incendiary x2)
   components:
   - type: StorageFill
     contents:
     - id: CMMagazineSniperM96S
       amount: 2
-    - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
+    - id: CMMagazineSniperM96SFlak
       amount: 2
-    - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SIncendiary
+    - id: CMMagazineSniperM96SIncendiary
       amount: 2
 
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateMagazineM96SStandard
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineM96SStandard
   name: M96S Sniper Standard Magazine Crate (x5)
   components:
   - type: StorageFill
@@ -23,27 +23,37 @@
       amount: 5
 
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateMagazineM96SFlak
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineM96SFlak
   name: M96S Sniper Flak Magazine Crate (x5)
   components:
   - type: StorageFill
     contents:
-    - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
+    - id: CMMagazineSniperM96SFlak
       amount: 5
 
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateMagazineM96SIncendiary
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineM96SIncendiary
   name: M96S Sniper Incendiary Magazine Crate (x5)
   components:
   - type: StorageFill
     contents:
-    - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SIncendiary
+    - id: CMMagazineSniperM96SIncendiary
       amount: 5
 
 - type: entity
-  parent: CMCrateAmmo
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineXM43E1Standard
+  name: XM43E1 Anti-Materiel Sniper Standard Magazine Crate (x3)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSniperXM43E1AntiMateriel
+      amount: 3
+
+- type: entity
+  parent: RMCCrateAmmo
   id: RMCCrateM5DemoSpecMixed
   name: M5-ATL Mixed Crate (HE x2, AP x1) # TODO RMC14 replace 1 HE with WP
   components:
@@ -55,7 +65,7 @@
       amount: 1
 
 - type: entity
-  parent: CMCrateAmmo
+  parent: RMCCrateAmmo
   id: RMCCrateM5DemoSpecHighExplosive
   name: M5-ATL High Explosives Crate (HE x3)
   components:
@@ -65,7 +75,7 @@
       amount: 3
 
 - type: entity
-  parent: CMCrateAmmo
+  parent: RMCCrateAmmo
   id: RMCCrateM5DemoSpecAntiArmor
   name: M5-ATL Anti-Armor Crate (AP x3)
   components:
@@ -76,7 +86,7 @@
 
 # TODO RMC14 M5 84mm White Phosphorous
 #- type: entity
-#  parent: CMCrateAmmo
+#  parent: RMCCrateAmmo
 #  id: RMCCrateM5DemoSpecWhitePhosphorous
 #  name: M5-ATL White Phosphorous Crate (HE x3)
 #  components:
@@ -86,7 +96,7 @@
 #      amount: 3
 
 - type: entity
-  parent: CMCrateAmmo
+  parent: RMCCrateAmmo
   id: RMCCrateMagazineM4SPRCustomMixed
   name: M4SPR Scout Mixed Magazine Crate (regular x2, incendiary x2, impact x2)
   components:
@@ -94,13 +104,13 @@
     contents:
     - id: RMCMagazineRifleM4SPRA19
       amount: 2
-    - id: RMCMagazineRifleM4SPRA19 # TODO rmc14 RMCMagazineRifleM4SPRA19Impact
+    - id: RMCMagazineRifleM4SPRA19Impact
       amount: 2
-    - id: RMCMagazineRifleM4SPRA19 # TODO rmc14 RMCMagazineRifleM4SPRA19Incendiary
+    - id: RMCMagazineRifleM4SPRA19Incendiary
       amount: 2
 
 - type: entity
-  parent: CMCrateAmmo
+  parent: RMCCrateAmmo
   id: RMCCrateMagazineM4SPRCustomStandard
   name: M4SPR Scout Magazine Crate (x5)
   components:
@@ -110,21 +120,21 @@
       amount: 5
 
 - type: entity
-  parent: CMCrateAmmo
+  parent: RMCCrateAmmo
   id: RMCCrateMagazineM4SPRCustomImpact
   name: M4SPR Scout Impact Magazine Crate (x3)
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazineRifleM4SPRA19 # TODO rmc14 CMMagazineSniperM96SFlak
+    - id: RMCMagazineRifleM4SPRA19Impact
       amount: 3
 
 - type: entity
-  parent: CMCrateAmmo
-  id: CMCrateMagazineM4SPRCustomIncendiary
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineM4SPRCustomIncendiary
   name: M4SPR Scout Incendiary Magazine Crate (x3)
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazineRifleM4SPRA19 # TODO rmc14 CMMagazineSniperM96SIncendiary
+    - id: RMCMagazineRifleM4SPRA19Incendiary
       amount: 3

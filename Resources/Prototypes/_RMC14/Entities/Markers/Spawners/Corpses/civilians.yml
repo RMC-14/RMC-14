@@ -1,0 +1,129 @@
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpsePrisoner
+  name: Corpse Spawner - Prisoner
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpsePrisoner
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseChef
+  name: Corpse Spawner - Chef
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseChef
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseDoctor
+  name: Corpse Spawner - Doctor
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseDoctor
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseEngineer
+  name: Corpse Spawner - Engineer
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseEngineer
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseScientist
+  name: Corpse Spawner - Scientist
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseScientist
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseMiner
+  name: Corpse Spawner - Shaft Miner
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseMiner
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseSecurity
+  name: Corpse Spawner - Security Officer
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseSecurity
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseDeputy
+  name: Corpse Spawner - Bureau Deputy
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseDeputy
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseLiaison
+  name: Corpse Spawner - Corporate Liaison
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseLiaison
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpsePrisonGuard
+  name: Corpse Spawner - Prison Guard
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpsePrisonGuard
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseColonist
+  name: Corpse Spawner - Colonist
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseColonist
+
+- type: entity
+  parent: RMCSpawnerCorpseColonist
+  id: RMCSpawnerCorpseColonistBust
+  name: Corpse Spawner - Colonist
+  suffix: RMC14, Burst
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseColonistBurst
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseColonistKutjevo
+  name: Corpse Spawner - Colonist Kutjevo
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseColonistKutjevo
+
+- type: entity
+  parent: RMCSpawnerCorpseColonist
+  id: RMCSpawnerCorpseColonistKutjevoBust
+  name: Corpse Spawner - Colonist Kutjevo
+  suffix: RMC14, Burst
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseColonistKutjevoBurst
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseWeYaGoon
+  name: Corpse Spawner - We-Ya Goon
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseWeYaGoon
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseWeYaGoonKutjevo
+  name: Corpse Spawner - We-Ya Goon Kutjevo
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseWeYaGoonKutjevo

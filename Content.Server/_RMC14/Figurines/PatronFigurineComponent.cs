@@ -4,6 +4,6 @@
 [Access(typeof(FigurineSystem))]
 public sealed partial class PatronFigurineComponent : Component
 {
-    [DataField(required: true), AutoNetworkedField]
+    [DataField(required: true)]
     public string Id;
 }

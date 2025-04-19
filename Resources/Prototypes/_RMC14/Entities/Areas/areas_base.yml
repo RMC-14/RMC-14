@@ -1,13 +1,12 @@
 ﻿# PORTING CHEATSHEET
 # 0: Block nothing
-# 1: Block mortar, lasing, medevac
+# 1: Block mortar placement, lasing, medevac
 # 2: Block CAS signals, supply drops, fultoning, mortar fire
 # 3: Block CAS
 # 4: Block OB
 
 - type: entity
   abstract: true
-  parent: MarkerBase
   id: RMCAreaBase
   name: area
   suffix: Area
@@ -20,8 +19,19 @@
     anchored: true
   - type: Sprite
     sprite: _RMC14/Areas/areas.rsi
-    state: blank
+    state: unknown
+  - type: Marker
+  - type: Clickable
+  - type: InteractionOutline
   - type: Area
+    CAS: true
+    fulton: true
+    lasing: true
+    mortarPlacement: true
+    mortarFire: true
+    medevac: true
+    OB: true
+    supplyDrop: true
   - type: PlacementReplacement
     key: rmc_areas
 
@@ -98,7 +108,7 @@
   name: protection 3
   components:
   - type: Area
-    cas: false
+    CAS: false
 
 - type: entity
   parent: RMCAreaProtectionThree

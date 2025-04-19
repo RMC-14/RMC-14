@@ -1,6 +1,8 @@
+using Content.Shared._RMC14.Tools;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.DoAfter;
+using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Maps;
@@ -31,7 +33,9 @@ public abstract partial class SharedToolSystem : EntitySystem
     [Dependency] private   readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private   readonly TileSystem _tiles = default!;
     [Dependency] private   readonly TurfSystem _turfs = default!;
-    [Dependency] protected readonly SharedSolutionContainerSystem SolutionContainer = default!;
+
+    public const string CutQuality = "Cutting";
+    public const string PulseQuality = "Pulsing";
 
     public override void Initialize()
     {
@@ -39,12 +43,13 @@ public abstract partial class SharedToolSystem : EntitySystem
         InitializeTile();
         InitializeWelder();
         SubscribeLocalEvent<ToolComponent, ToolDoAfterEvent>(OnDoAfter);
+        SubscribeLocalEvent<ToolComponent, ExaminedEvent>(OnExamine);
     }
 
     private void OnDoAfter(EntityUid uid, ToolComponent tool, ToolDoAfterEvent args)
     {
         if (!args.Cancelled)
-            PlayToolSound(uid, tool, args.User);
+            PlayToolSound(uid, tool, args.User, args.Predicted);
 
         var ev = args.WrappedEvent;
         ev.DoAfter = args.DoAfter;
@@ -55,12 +60,43 @@ public abstract partial class SharedToolSystem : EntitySystem
             RaiseLocalEvent((object) ev);
     }
 
-    public void PlayToolSound(EntityUid uid, ToolComponent tool, EntityUid? user)
+    private void OnExamine(Entity<ToolComponent> ent, ref ExaminedEvent args)
+    {
+        // If the tool has no qualities, exit early
+        if (ent.Comp.Qualities.Count == 0)
+            return;
+
+        var message = new FormattedMessage();
+
+        // Create a list to store tool quality names
+        var toolQualities = new List<string>();
+
+        // Loop through tool qualities and add localized names to the list
+        foreach (var toolQuality in ent.Comp.Qualities)
+        {
+            if (_protoMan.TryIndex<ToolQualityPrototype>(toolQuality ?? string.Empty, out var protoToolQuality))
+            {
+                toolQualities.Add(Loc.GetString(protoToolQuality.Name));
+            }
+        }
+
+        // Combine the qualities into a single string and localize the final message
+        var qualitiesString = string.Join(", ", toolQualities);
+
+        // Add the localized message to the FormattedMessage object
+        message.AddMarkupPermissive(Loc.GetString("tool-component-qualities", ("qualities", qualitiesString)));
+        args.PushMessage(message);
+    }
+
+    public void PlayToolSound(EntityUid uid, ToolComponent tool, EntityUid? user, bool predicted = true)
     {
         if (tool.UseSound == null)
             return;
 
-        _audioSystem.PlayPredicted(tool.UseSound, uid, user);
+        if (predicted)
+            _audioSystem.PlayPredicted(tool.UseSound, uid, user);
+        else if (_net.IsServer)
+            _audioSystem.PlayPvs(tool.UseSound, uid);
     }
 
     /// <summary>
@@ -115,6 +151,7 @@ public abstract partial class SharedToolSystem : EntitySystem
     /// the event that this tool-use cancelled an existing DoAfter</param>
     /// <param name="fuel">Amount of fuel that should be taken from the tool.</param>
     /// <param name="toolComponent">The tool component.</param>
+    /// <param name="duplicateCondition">Condition to check for duplicates on.</param>
     /// <returns>Returns true if any interaction takes place.</returns>
     public bool UseTool(
         EntityUid tool,
@@ -125,7 +162,9 @@ public abstract partial class SharedToolSystem : EntitySystem
         DoAfterEvent doAfterEv,
         out DoAfterId? id,
         float fuel = 0,
-        ToolComponent? toolComponent = null)
+        ToolComponent? toolComponent = null,
+        DuplicateConditions duplicateCondition = DuplicateConditions.None,
+        bool predicted = true)
     {
         id = null;
         if (!Resolve(tool, ref toolComponent, false))
@@ -134,14 +173,22 @@ public abstract partial class SharedToolSystem : EntitySystem
         if (!CanStartToolUse(tool, user, target, fuel, toolQualitiesNeeded, toolComponent))
             return false;
 
-        var toolEvent = new ToolDoAfterEvent(fuel, doAfterEv, GetNetEntity(target));
+        // RMC14
+        var ev = new RMCToolUseEvent(user, delay);
+
+        RaiseLocalEvent(tool, ref ev);
+        if(ev.Handled)
+            delay = ev.Delay;
+
+        var toolEvent = new ToolDoAfterEvent(fuel, doAfterEv, GetNetEntity(target)) { Predicted = predicted };
         var doAfterArgs = new DoAfterArgs(EntityManager, user, delay / toolComponent.SpeedModifier, toolEvent, tool, target: target, used: tool)
         {
             BreakOnDamage = true,
             BreakOnMove = true,
             BreakOnWeightlessMove = false,
             NeedHand = tool != user,
-            AttemptFrequency = fuel > 0 ? AttemptFrequency.EveryTick : AttemptFrequency.Never
+            AttemptFrequency = fuel > 0 ? AttemptFrequency.EveryTick : AttemptFrequency.Never,
+            DuplicateCondition = duplicateCondition,
         };
 
         _doAfterSystem.TryStartDoAfter(doAfterArgs, out id);
@@ -162,6 +209,7 @@ public abstract partial class SharedToolSystem : EntitySystem
     /// will be directed at the tool target.</param>
     /// <param name="fuel">Amount of fuel that should be taken from the tool.</param>
     /// <param name="toolComponent">The tool component.</param>
+    /// <param name="duplicateCondition">Condition to check for duplicates on.</param>
     /// <returns>Returns true if any interaction takes place.</returns>
     public bool UseTool(
         EntityUid tool,
@@ -171,7 +219,8 @@ public abstract partial class SharedToolSystem : EntitySystem
         string toolQualityNeeded,
         DoAfterEvent doAfterEv,
         float fuel = 0,
-        ToolComponent? toolComponent = null)
+        ToolComponent? toolComponent = null,
+        DuplicateConditions duplicateCondition = DuplicateConditions.None)
     {
         return UseTool(tool,
             user,
@@ -247,6 +296,9 @@ public abstract partial class SharedToolSystem : EntitySystem
 
         [DataField("wrappedEvent")]
         public DoAfterEvent WrappedEvent = default!;
+
+        [DataField]
+        public bool Predicted = true;
 
         private ToolDoAfterEvent()
         {

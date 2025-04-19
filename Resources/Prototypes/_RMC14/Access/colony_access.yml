@@ -27,6 +27,10 @@
   id: CMAccessColonyCommand
   name: cm-access-colony-command
 
+- type: accessLevel
+  id: CMAccessColonyArmory
+  name: rmc-access-colony-armory
+
 # this is used to allow colony doctors into their chem but not marine chem
 - type: accessLevel
   id: CMAccessColonyChem

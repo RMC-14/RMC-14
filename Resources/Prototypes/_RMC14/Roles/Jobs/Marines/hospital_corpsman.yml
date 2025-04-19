@@ -11,46 +11,69 @@
   - !type:DepartmentTimeRequirement
     department: CMSquad
     time: 3600 # 1 hour
+  ranks:
+    RMCRankCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobHospitalCorpsman
+      time: 252000 # 70 hours
+    RMCRankLanceCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobHospitalCorpsman
+      time: 36000 # 10 hours
+    RMCRankPrivateFirstClass: []
   startingGear: CMGearHospitalCorpsman
+  dummyStartingGear: CMGearHospitalCorpsmanEquipped
   icon: "CMJobIconHospitalCorpsman"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - HospitalCorpsman
-  overwatchSortPriority: -1
+  overwatchSortPriority: -2
   overwatchRoleName: Hospital Corpsmen
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: medic
+  roleWeight: 1
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillJtac: 1
         RMCSkillMedical: 2
         RMCSkillSurgery: 1
     - type: CMVendorUser
       points: 45
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: cm-job-prefix-hospital-corpsman
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: medic
 
 - type: startingGear
   id: CMGearHospitalCorpsman
   equipment:
-    back: CMSatchelMarineMedic
     id: CMDogtagHospitalCorpsman
 
 - type: startingGear
   id: CMGearHospitalCorpsmanEquipped
   equipment:
     jumpsuit: CMJumpsuitMarineMedic
-    back: CMSatchelMarineMedic
     shoes: CMBootsBlackFilled
-    gloves: CMHandsBlackMarine
-    eyes: RMCGlassesMedicalHUDGlasses
+    gloves: RMCHandsLatexMarine
     head: CMArmorHelmetM10Medic
-    outerClothing: CMArmorM3Medium
+    outerClothing: RMCArmorM3MediumVariants
     id: CMDogtagHospitalCorpsman
     ears: CMHeadsetAlphaMedic
     belt: CMBeltMedicBagFilled
+
+- type: playTimeTracker
+  id: CMJobHospitalCorpsman
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -60,11 +83,65 @@
   - type: SpawnPoint
     job_id: CMHospitalCorpsman
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: hospital_corpsman
+    state: marine_spawn
 
-- type: playTimeTracker
-  id: CMJobHospitalCorpsman
+- type: entity
+  parent: CMSpawnPointHospitalCorpsman
+  id: CMSpawnPointHospitalCorpsmanAlpha
+  suffix: Alpha
+  components:
+  - type: SquadSpawner
+    squad: SquadAlpha
+    role: CMHospitalCorpsman
+  - type: Sprite
+    state: marine_spawn_alpha
 
+- type: entity
+  parent: CMSpawnPointHospitalCorpsman
+  id: CMSpawnPointHospitalCorpsmanBravo
+  suffix: Bravo
+  components:
+  - type: SquadSpawner
+    squad: SquadBravo
+    role: CMHospitalCorpsman
+  - type: Sprite
+    state: marine_spawn_bravo
+
+- type: entity
+  parent: CMSpawnPointHospitalCorpsman
+  id: CMSpawnPointHospitalCorpsmanCharlie
+  suffix: Charlie
+  components:
+  - type: SquadSpawner
+    squad: SquadCharlie
+    role: CMHospitalCorpsman
+  - type: Sprite
+    state: marine_spawn_charlie
+
+- type: entity
+  parent: CMSpawnPointHospitalCorpsman
+  id: CMSpawnPointHospitalCorpsmanDelta
+  suffix: Delta
+  components:
+  - type: SquadSpawner
+    squad: SquadDelta
+    role: CMHospitalCorpsman
+  - type: Sprite
+    state: marine_spawn_delta
+
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCHospitalCorpsman
+  components:
+  - type: GhostRole
+    name: cm-job-name-hospital-corpsman
+    description: cm-job-description-hospital-corpsman
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    raffle:
+      settings: default
+    job: CMHospitalCorpsman
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobHospitalCorpsman
+      time: 1

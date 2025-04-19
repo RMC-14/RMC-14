@@ -17,7 +17,7 @@
 
 
 - type: entity
-  parent: ColMarTechBase
+  parent: ColMarTechBaseAnchorable
   id: CMVendorMedical
   name: We-Ya-Med Plus
   description: Medical pharmaceutical dispenser. Provided by We-Ya Pharmaceuticals Division(TM).
@@ -49,9 +49,11 @@
     whitelist:
       components:
       - Hypospray
+      - Vial
       tags:
       - Bottle
   - type: CMAutomatedVendor # TODO RMC14 different ui style
+    hackable: true
     sections:
     - name: Field supplies
       entries:
@@ -125,7 +127,7 @@
         amount: 2
       - id: CMSynthGraft
         amount: 2
-      - id: CMHypospray # TODO RMC14 full of tricordrazine
+      - id: CMHyposprayFilledTricord
         amount: 2
       - id: CMHealthAnalyzer
         amount: 5
@@ -146,7 +148,7 @@
   description: Medical chemistry dispenser. Provided by We-Ya Pharmaceuticals Division(TM).
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Machines/VendingMachines/med.rsi
+    sprite: _RMC14/Structures/Machines/VendingMachines/chem.rsi
     layers:
     - state: "off"
     - state: "normal-unshaded"
@@ -186,16 +188,16 @@
       - id: CMBeakerLarge
         name: Beaker, Large (120 units)
         amount: 3
-      - id: CMBoxPillCanister
+      - id: RMCBoxPillCanister
         amount: 2
-      - id: Dropper # TODO RMC14 cm dropper
+      - id: RMCDropper
         amount: 3
       - id: CMSyringe
         amount: 7
 
 
 - type: entity
-  parent: ColMarTechBase
+  parent: ColMarTechBaseAnchorable
   id: ColMarTechMarineMedical
   name: ColMarTech MarineMed
   description: Medical Pharmaceutical dispenser with basic medical supplies for marines.
@@ -231,9 +233,10 @@
       - Hypospray
   - type: CMAutomatedVendor
     sections:
-#    - name: Autoinjectors
-#      entries: [ ]
-    #- id: CMFirstAidInjector
+    - name: Autoinjectors
+      entries:
+      - id: CMTricordrazineAutoInjectorNoSkill
+        amount: 5
     #- id: CMPainStopAutoinjector
     - name: Devices
       entries:
@@ -241,7 +244,7 @@
         amount: 3
     - name: Field Supplies
       entries:
-      - id: CMFireExtinguisher # TODO RMC14 portable
+      - id: CMFireExtinguisherPortable
         amount: 5
       - id: CMOintment10
         amount: 7
@@ -251,7 +254,62 @@
 #        amount: 7
 
 - type: entity
-  parent: ColMarTechBase
+  parent: ColMarTechBaseAnchorable
+  id: RMCNanoMed
+  name: NanoMed
+  description: A wall-mounted medical equipment dispenser.
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.38,-0.5,0.35,0.5"
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        density: 200
+        hard: false
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _RMC14/Structures/Machines/VendingMachines/nanomed.rsi
+    layers:
+    - state: "off"
+    - state: "normal-unshaded"
+  - type: CMSolutionRefiller
+    current: 250
+    max: 250
+    recharge: 125 # TODO RMC14 auto-restock items as well if round is >= 20 minutes in
+    rechargeCooldown: 4
+    reagents:
+    - CMTricordrazine
+#    - CMTramadol # TODO RMC14
+    whitelist:
+      components:
+      - Hypospray
+  - type: CMAutomatedVendor
+    hackable: true
+    sections:
+    - name: Supplies
+      entries:
+      # - id: CMPainStopAutoinjector
+      #   amount: 2
+      - id: CMTricordrazineAutoInjectorNoSkill
+        amount: 2
+      - id: CMGauze10
+        amount: 4
+      - id: CMOintment10
+        amount: 4
+      # - id: CMMedicalSplints5
+      #   amount: 4
+    - name: Utility
+      entries:
+      - id: CMHealthAnalyzer
+        amount: 3
+
+- type: entity
+  parent: ColMarTechBaseAnchorable
   id: CMVendorBlood
   name: MM Blood Dispenser
   description: The Marine Med Brand Blood Pack Dispensary is the premier, top-of-the-line blood dispenser of 2105! Get yours today! #dont update year, that`s a joke from cm13
@@ -275,6 +333,7 @@
     access:
     - [ "CMAccessMedical" ]
   - type: CMAutomatedVendor
+    hackable: true
     sections:
     - name: Blood Packs
       entries:

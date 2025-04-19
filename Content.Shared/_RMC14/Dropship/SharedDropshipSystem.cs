@@ -1,16 +1,19 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.CCVar;
-using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Dropship.AttachmentPoint;
+using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Marines.Announce;
+using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
+using Content.Shared.Examine;
 using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
-using Robust.Shared.Audio;
 using Robust.Shared.Configuration;
+using Robust.Shared.Containers;
 using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Dropship;
@@ -19,6 +22,7 @@ public abstract class SharedDropshipSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -27,14 +31,28 @@ public abstract class SharedDropshipSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     private TimeSpan _dropshipInitialDelay;
+    private TimeSpan _hijackInitialDelay;
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<DropshipComponent, MapInitEvent>(OnDropshipMapInit);
+
         SubscribeLocalEvent<DropshipNavigationComputerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<DropshipNavigationComputerComponent, ActivatableUIOpenAttemptEvent>(OnUIOpenAttempt);
         SubscribeLocalEvent<DropshipNavigationComputerComponent, AfterActivatableUIOpenEvent>(OnNavigationOpen);
 
         SubscribeLocalEvent<DropshipTerminalComponent, ActivateInWorldEvent>(OnDropshipTerminalActivateInWorld);
+
+        SubscribeLocalEvent<DropshipWeaponPointComponent, MapInitEvent>(OnAttachmentPointMapInit);
+        SubscribeLocalEvent<DropshipWeaponPointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
+        SubscribeLocalEvent<DropshipWeaponPointComponent, ExaminedEvent>(OnAttachmentExamined);
+
+        SubscribeLocalEvent<DropshipUtilityPointComponent, MapInitEvent>(OnAttachmentPointMapInit);
+        SubscribeLocalEvent<DropshipUtilityPointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
+
+        SubscribeLocalEvent<DropshipEnginePointComponent, MapInitEvent>(OnAttachmentPointMapInit);
+        SubscribeLocalEvent<DropshipEnginePointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
+        SubscribeLocalEvent<DropshipEnginePointComponent, ExaminedEvent>(OnEngineExamined);
 
         Subs.BuiEvents<DropshipNavigationComputerComponent>(DropshipNavigationUiKey.Key,
             subs =>
@@ -49,6 +67,27 @@ public abstract class SharedDropshipSystem : EntitySystem
             });
 
         Subs.CVar(_config, RMCCVars.RMCDropshipInitialDelayMinutes, v => _dropshipInitialDelay = TimeSpan.FromMinutes(v), true);
+        Subs.CVar(_config, RMCCVars.RMCDropshipHijackInitialDelayMinutes, v => _hijackInitialDelay = TimeSpan.FromMinutes(v), true);
+    }
+
+    private void OnDropshipMapInit(Entity<DropshipComponent> ent, ref MapInitEvent args)
+    {
+        var children = Transform(ent).ChildEnumerator;
+        while (children.MoveNext(out var uid))
+        {
+            if (TerminatingOrDeleted(uid))
+                continue;
+
+            if (HasComp<DropshipWeaponPointComponent>(uid) ||
+                HasComp<DropshipEnginePointComponent>(uid) ||
+                HasComp<DropshipUtilityPointComponent>(uid))
+            {
+                ent.Comp.AttachmentPoints.Add(uid);
+            }
+        }
+
+        var ev = new DropshipMapInitEvent();
+        RaiseLocalEvent(ent, ref ev);
     }
 
     private void OnMapInit(Entity<DropshipNavigationComputerComponent> ent, ref MapInitEvent args)
@@ -101,6 +140,9 @@ public abstract class SharedDropshipSystem : EntitySystem
         }
 
         if (!TryDropshipLaunchPopup(ent, user, false))
+            return;
+
+        if (!TryDropshipHijackPopup(ent, user, false))
             return;
 
         var userTransform = Transform(user);
@@ -167,32 +209,77 @@ public abstract class SharedDropshipSystem : EntitySystem
         _popup.PopupEntity("There are no available dropships! Wait a moment.", user, user, PopupType.LargeCaution);
     }
 
+    private void OnAttachmentPointMapInit<TComp, TEvent>(Entity<TComp> ent, ref TEvent args) where TComp : IComponent?
+    {
+        if (_net.IsClient)
+            return;
+
+        if (TryGetGridDropship(ent, out var dropship))
+        {
+            dropship.Comp.AttachmentPoints.Add(ent);
+            Dirty(dropship);
+        }
+    }
+
+    private void OnAttachmentPointRemove<TComp, TEvent>(Entity<TComp> ent, ref TEvent args) where TComp : IComponent?
+    {
+        if (TryGetGridDropship(ent, out var dropship))
+        {
+            dropship.Comp.AttachmentPoints.Remove(ent);
+            Dirty(dropship);
+        }
+    }
+
+    private void OnAttachmentExamined(Entity<DropshipWeaponPointComponent> ent, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(DropshipWeaponPointComponent)))
+        {
+            if (TryGetAttachmentContained(ent, ent.Comp.WeaponContainerSlotId, out var weapon))
+                args.PushText(Loc.GetString("rmc-dropship-attached", ("attachment", weapon)));
+
+            if (TryGetAttachmentContained(ent, ent.Comp.AmmoContainerSlotId, out var ammo))
+            {
+                args.PushText(Loc.GetString("rmc-dropship-weapons-point-ammo", ("ammo", ammo)));
+
+                if (TryComp(ammo, out DropshipAmmoComponent? ammoComp))
+                {
+                    args.PushText(Loc.GetString("rmc-dropship-weapons-rounds-left",
+                        ("current", ammoComp.Rounds),
+                        ("max", (ammoComp.MaxRounds))));
+                }
+            }
+        }
+    }
+
+    private void OnEngineExamined(Entity<DropshipEnginePointComponent> ent, ref ExaminedEvent args)
+    {
+        using (args.PushGroup(nameof(DropshipWeaponPointComponent)))
+        {
+            if (TryGetAttachmentContained(ent, ent.Comp.ContainerId, out var attachment))
+                args.PushText(Loc.GetString("rmc-dropship-attached", ("attachment", attachment)));
+        }
+    }
+
     private void OnDropshipNavigationLaunchMsg(Entity<DropshipNavigationComputerComponent> ent,
         ref DropshipNavigationLaunchMsg args)
     {
-        _ui.CloseUi(ent.Owner, DropshipNavigationUiKey.Key, args.Actor);
+        var user = args.Actor;
+        _ui.CloseUi(ent.Owner, DropshipNavigationUiKey.Key, user);
 
         if (!TryGetEntity(args.Target, out var destination))
         {
-            Log.Warning($"{ToPrettyString(args.Actor)} tried to launch to invalid dropship destination {args.Target}");
+            Log.Warning($"{ToPrettyString(user)} tried to launch to invalid dropship destination {args.Target}");
             return;
         }
 
-        if (!TryComp(destination, out DropshipDestinationComponent? destinationComp))
+        if (!HasComp<DropshipDestinationComponent>(destination))
         {
             Log.Warning(
                 $"{ToPrettyString(args.Actor)} tried to launch to invalid dropship destination {ToPrettyString(destination)}");
             return;
         }
 
-        if (destinationComp.Ship != null)
-        {
-            Log.Warning(
-                $"{ToPrettyString(args.Actor)} tried to launch to occupied dropship destination {ToPrettyString(destination)}");
-            return;
-        }
-
-        FlyTo(ent, destination.Value, args.Actor);
+        FlyTo(ent, destination.Value, user);
     }
 
     private void OnHijackerDestinationChosenMsg(Entity<DropshipNavigationComputerComponent> ent,
@@ -220,6 +307,9 @@ public abstract class SharedDropshipSystem : EntitySystem
             var dropship = EnsureComp<DropshipComponent>(xform.ParentUid);
             dropship.Crashed = true;
             Dirty(xform.ParentUid, dropship);
+
+            var ev = new DropshipHijackStartEvent(xform.ParentUid);
+            RaiseLocalEvent(ref ev);
         }
     }
 
@@ -256,8 +346,27 @@ public abstract class SharedDropshipSystem : EntitySystem
         var roundDuration = _gameTicker.RoundDuration();
         if (roundDuration < _dropshipInitialDelay)
         {
-            var minutesLeft = Math.Max(1, (int) (_dropshipInitialDelay- roundDuration).TotalMinutes);
+            var minutesLeft = Math.Max(1, (int)(_dropshipInitialDelay - roundDuration).TotalMinutes);
             var msg = Loc.GetString("rmc-dropship-pre-flight-fueling", ("minutes", minutesLeft));
+
+            if (predicted)
+                _popup.PopupClient(msg, computer, user, PopupType.MediumCaution);
+            else
+                _popup.PopupEntity(msg, computer, user, PopupType.MediumCaution);
+
+            return false;
+        }
+
+        return true;
+    }
+
+    protected bool TryDropshipHijackPopup(EntityUid computer, Entity<DropshipHijackerComponent?> user, bool predicted)
+    {
+        var roundDuration = _gameTicker.RoundDuration();
+        if (HasComp<DropshipHijackerComponent>(user) && roundDuration < _hijackInitialDelay)
+        {
+            var minutesLeft = Math.Max(1, (int)(_hijackInitialDelay - roundDuration).TotalMinutes);
+            var msg = Loc.GetString("rmc-dropship-pre-hijack", ("minutes", minutesLeft));
 
             if (predicted)
                 _popup.PopupClient(msg, computer, user, PopupType.MediumCaution);
@@ -272,8 +381,7 @@ public abstract class SharedDropshipSystem : EntitySystem
 
     public bool TryDesignatePrimaryLZ(
         EntityUid actor,
-        EntityUid lz
-        )
+        EntityUid lz)
     {
         if (!HasComp<DropshipDestinationComponent>(lz))
         {
@@ -287,8 +395,8 @@ public abstract class SharedDropshipSystem : EntitySystem
             return false;
         }
 
-        if (HasComp<AlmayerComponent>(_transform.GetGrid(lz)) ||
-            HasComp<AlmayerComponent>(_transform.GetMap(lz)))
+        if (!HasComp<RMCPlanetComponent>(_transform.GetGrid(lz)) &&
+            !HasComp<RMCPlanetComponent>(_transform.GetMap(lz)))
         {
             Log.Warning($"{ToPrettyString(actor)} tried to designate entity {ToPrettyString(lz)} on the warship as primary LZ!");
             return false;
@@ -319,10 +427,61 @@ public abstract class SharedDropshipSystem : EntitySystem
         var landingZoneQuery = EntityQueryEnumerator<DropshipDestinationComponent, MetaDataComponent, TransformComponent>();
         while (landingZoneQuery.MoveNext(out var uid, out _, out var metaData, out var xform))
         {
-            if (HasComp<AlmayerComponent>(xform.ParentUid) || HasComp<AlmayerComponent>(xform.MapUid))
+            if (!HasComp<RMCPlanetComponent>(xform.ParentUid) &&
+                !HasComp<RMCPlanetComponent>(xform.MapUid))
+            {
                 continue;
+            }
 
             yield return (uid, metaData);
         }
+    }
+
+    public bool TryGetGridDropship(EntityUid ent, out Entity<DropshipComponent> dropship)
+    {
+        if (TryComp(ent, out TransformComponent? xform) &&
+            xform.GridUid is { } grid &&
+            !TerminatingOrDeleted(grid) &&
+            TryComp(xform.GridUid, out DropshipComponent? dropshipComp))
+        {
+            dropship = (grid, dropshipComp);
+            return true;
+        }
+
+        dropship = default;
+        return false;
+    }
+
+    public bool IsWeaponAttached(Entity<DropshipWeaponComponent?> weapon)
+    {
+        if (!Resolve(weapon, ref weapon.Comp, false) ||
+            !TryGetGridDropship(weapon, out var dropship))
+        {
+            return false;
+        }
+
+        if (!_container.TryGetContainingContainer((weapon, null), out var container) ||
+            !dropship.Comp.AttachmentPoints.Contains(container.Owner))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool TryGetAttachmentContained(
+        EntityUid point,
+        string containerId,
+        out EntityUid contained)
+    {
+        contained = default;
+        if (!_container.TryGetContainer(point, containerId, out var container) ||
+            container.ContainedEntities.Count == 0)
+        {
+            return false;
+        }
+
+        contained = container.ContainedEntities[0];
+        return true;
     }
 }

@@ -1,4 +1,4 @@
-﻿- type: entity # TODO RMC14 sound
+- type: entity # TODO RMC14 sound
   id: XenoWeeds
   name: weeds
   description: Weird black weeds...
@@ -24,10 +24,9 @@
         density: 1000
         hard: false
   - type: XenoWeeds
+    level: 1
   - type: Clickable
-  - type: EdgeSpreader
-    id: XenoWeeds
-  - type: ActiveEdgeSpreader
+  - type: XenoWeedsSpreading
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
     drawdepth: FloorTiles
@@ -89,6 +88,12 @@
   - type: ImmuneToUnarmed
   - type: CMIconSmooth
     smooth: true
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: XenoResinBreak
+  - type: ExplosionRandomResistance
+  - type: DeletedByWeedKiller
 #  - type: Physics
 #    bodyType: Static
 #  - type: FootstepModifier
@@ -117,6 +122,8 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: XenoConstructionPlasmaCost
+    plasma: 215
 
 - type: entity # TODO RMC14 sound
   parent: XenoWeeds
@@ -128,14 +135,19 @@
     - Wall
   components:
   - type: XenoWeeds
+    range: 7
     spawns: XenoHiveWeeds
-  - type: EdgeSpreader
-    id: XenoWeeds
+    level: 3
+    speedMultiplierOutsider: 0.338
+    speedMultiplierOutsiderArmor: 0.4856
+    blockOtherWeeds: true
+    spreadsOnSemiWeedable: true
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
     drawdepth: FloorTiles
     layers:
     - state: hive_weed0
+  - type: HiveWeeds
   - type: IconSmooth
     key: cm_xeno_weeds
     base: hive_weed
@@ -178,11 +190,38 @@
         hive_weed14: ""
     - 0:
         hive_weed15: ""
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity
+  parent: XenoHiveWeeds
+  id: XenoHiveWeedsCluster
+  components:
+  - type: XenoWeeds
+    range: 6
+    spawns: XenoHiveWeedsCluster
+    level: 3
+
+- type: entity
+  parent: XenoHiveWeeds
+  id: XenoHiveWeedsCore
+  components:
+  - type: XenoWeeds
+    range: 8
+    spawns: XenoHiveWeedsCore
+    level: 3
 
 - type: entity # TODO RMC14 sound
   parent: XenoHiveWeeds
   id: XenoHiveWeedsSource
   name: hive weed node
+  description: A weird, pulsating node
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
@@ -198,6 +237,8 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: XenoConstructionPlasmaCost
+    plasma: 75
 
 - type: entity
   id: XenoWeedsWall
@@ -225,8 +266,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
     drawdepth: Objects
-    layers:
-    - state: weedwall
+#    layers:
+#    - state: weedwall
   - type: IconSmooth
     key: cm_xeno_weeds_walls
     base: weedwall
@@ -250,6 +291,39 @@
     priority: -1
     transparency: 0.2
 
-- type: edgeSpreader
-  id: XenoWeeds
-  updatesPerSecond: 2
+# Gardener's weeds
+- type: entity # TODO RMC14 sound
+  parent: XenoWeeds
+  id: XenoHardyWeeds
+  components:
+  - type: Sprite
+    color: "#a1a1a1"
+  - type: XenoWeeds
+    level: 2
+    spawns: XenoHardyWeeds
+    spreadsOnSemiWeedable: true
+    fruitGrowthMultiplier: 0.8
+    speedMultiplierOutsider: 0.508
+    speedMultiplierOutsiderArmor: 0.6177
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+- type: entity # TODO RMC14 sound
+  parent: XenoHardyWeeds
+  id: XenoHardyWeedsSource
+  name: hardy weed node
+  description: A weird, pulsating node
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
+    drawdepth: FloorTiles
+    color: "#a1a1a1"
+    layers:
+    - state: weed0
+    - state: constructionnode

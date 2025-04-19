@@ -1,4 +1,4 @@
-using Content.Client._RMC14.Mapping;
+using Content.Client.Mapping;
 using Content.Client.Markers;
 using JetBrains.Annotations;
 using Robust.Client.Graphics;
@@ -23,7 +23,7 @@ internal sealed class MappingClientSideSetupCommand : LocalizedCommands
         {
             _entitySystemManager.GetEntitySystem<MarkerSystem>().MarkersVisible = true;
             _lightManager.Enabled = false;
-            shell.ExecuteCommand(ShowSubFloorForever.CommandName);
+            shell.ExecuteCommand("showsubfloor");
             IoCManager.Resolve<IStateManager>().RequestStateChange<MappingState>();
         }
     }

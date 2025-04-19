@@ -9,6 +9,15 @@ public enum MarineCommunicationsComputerUI
 }
 
 [Serializable, NetSerializable]
+public sealed class MarineCommunicationsOpenMapMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
+public sealed class MarineCommunicationsEchoSquadMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
+public sealed class MarineCommunicationsOverwatchMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
 public sealed class MarineCommunicationsComputerMsg(string text) : BoundUserInterfaceMessage
 {
     public readonly string Text = text;

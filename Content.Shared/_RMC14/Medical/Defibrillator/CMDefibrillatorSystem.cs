@@ -1,4 +1,5 @@
 ﻿using Content.Shared.Damage;
+using Content.Shared.Examine;
 using Content.Shared.Medical;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
@@ -14,7 +15,17 @@ public sealed class CMDefibrillatorSystem : EntitySystem
     {
         SubscribeLocalEvent<DamageableComponent, TargetDefibrillatedEvent>(OnTargetDefibrillated);
         SubscribeLocalEvent<RMCDefibrillatorAudioComponent, EntityTerminatingEvent>(OnDefibrillatorAudioTerminating);
+        SubscribeLocalEvent<CMDefibrillatorBlockedComponent, ExaminedEvent>(OnNoDefibExamine);
     }
+
+    private void OnNoDefibExamine(Entity<CMDefibrillatorBlockedComponent> ent, ref ExaminedEvent args)
+    {
+        if (!ent.Comp.ShowOnExamine)
+            return;
+
+        args.PushMarkup(Loc.GetString(ent.Comp.Examine, ("victim", ent)));
+    }
+
 
     private void OnTargetDefibrillated(Entity<DamageableComponent> ent, ref TargetDefibrillatedEvent args)
     {

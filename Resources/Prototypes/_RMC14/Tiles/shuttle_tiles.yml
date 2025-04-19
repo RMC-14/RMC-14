@@ -3,6 +3,7 @@
   parent: CMTileBase
   id: CMShuttleTileBase
   name: tiles-cm-floor
+  canPlaceTunnel: false
 
 - type: tile
   parent: CMShuttleTileBase

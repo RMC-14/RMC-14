@@ -8,7 +8,7 @@ namespace Content.Shared._RMC14.Xenonids.Projectile.Bone;
 public sealed partial class SlowedByBoneChipsComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public float Multiplier = 0.5f;
+    public float Multiplier = 0.66f;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan ExpiresAt;

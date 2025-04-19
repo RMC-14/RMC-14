@@ -6,18 +6,171 @@
   components:
   - type: Item
     size: Small
+    heldPrefix: binoculars
   - type: Sprite
     sprite: _RMC14/Objects/Devices/binoculars.rsi
     state: binoculars
   - type: Scope
     useInHand: true
-    allowMovement: true
-    delay: 0
-    zoom: 1.6 # same stats of 4x telescopic scope
-    offset: 14
+    zoomLevels:
+    - zoom: 1.6
+      offset: 14
+      allowMovement: true
+      doAfter: 0
   - type: Tag
     tags:
     - Binoculars
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
+  - type: Appearance
+  - type: ItemCamouflage
+    states:
+      Jungle: binoculars
+      Desert: d_binoculars
+      Snow: s_binoculars
+      Classic: c_binoculars
+      Urban: u_binoculars
+
+- type: entity
+  parent: RMCBinoculars
+  id: RMCBinocularsCiv
+  name: binoculars
+  description: A pair of binoculars.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/binoculars.rsi
+    state: binoculars_civ
+  - type: ItemCamouflage
+    states:
+
+- type: entity
+  parent: RMCBinoculars
+  id: RMCRangefinder
+  name: rangefinder
+  description: "A pair of binoculars with a rangefinding function. Click a tile to acquire it's coordinates."
+  components:
+  - type: Item
+    heldPrefix: rangefinder
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/binoculars.rsi
+    layers:
+    - state: rangefinder
+      map: [ "enum.ItemCamouflageLayers.Layer" ]
+    - map: [ "light" ]
+  - type: Rangefinder
+  - type: UseDelay
+    delay: 0
+  - type: UserInterface
+    interfaces:
+      enum.RangefinderUiKey.Key:
+        type: RangefinderBui
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.RangefinderLayers.Layer:
+        light:
+          Rangefinder: { state: laser_range }
+          Designator: { state: laser_cas }
+          Spotter: { state: laser_spotter }
+  - type: ItemCamouflage
+    states:
+      Jungle: rangefinder
+      Desert: d_rangefinder
+      Snow: s_rangefinder
+      Classic: c_rangefinder
+      Urban: u_rangefinder
+
+- type: entity
+  parent: RMCRangefinder
+  id: RMCLaserDesignator
+  name: laser designator
+  description: "A laser designator with two modes: target marking for CAS with IR laser and rangefinding. Click a tile to target something."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/binoculars.rsi
+    layers:
+    - state: rangefinder
+    - state: laser_cas
+  - type: Rangefinder
+    mode: Designator
+    canDesignate: true
+
+- type: entity
+  parent: RMCRangefinder
+  id: RMCLaserDesignatorSpotter
+  name: spotter's laser designator
+  description: "A specially-designed laser designator, issued to UNMC spotters, with two modes: target marking for CAS with IR laser and rangefinding. Click a tile to target something. Additionally, a trained spotter can laze targets for a UNMC marksman, increasing the speed of target acquisition. A targeting beam will connect the binoculars to the target, but it may inherit the user's cloak, if possible."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/binoculars.rsi
+    layers:
+    - state: rangefinder
+    - state: laser_cas
+    - state: spotter_overlay
+  - type: Rangefinder
+    mode: Designator
+    canDesignate: true
+  - type: Corrodible
+    isCorrodible: false
+  - type: Spotting
+  - type: TargetingLaser
+    laserColor: orange
+    currentLaserColor: orange
+    laserAlpha: 0.2
+    gradualAlpha: false
+
+- type: entity
+  parent: RMCLaserDesignator
+  id: RMCLaserDesignatorScout
+  name: scout laser designator
+  description: "An improved laser designator, issued to UNMC scouts, with two modes: target marking for CAS with IR laser and rangefinding. Click a tile to target something."
+  components:
+  - type: Rangefinder
+    delay: 3
+  - type: Corrodible
+    isCorrodible: false
+
+- type: entity
+  id: RMCRangefinderTarget
+  name: laser
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Effects/laser.rsi
+    state: laser_target_coordinate
+    drawdepth: Effects
+  - type: PointLight
+    enabled: true
+    radius: 3
+
+- type: entity
+  parent: RMCRangefinderTarget
+  id: RMCLaserDesignatorTarget
+  description: It's a laser to designate artillery targets, get away from it!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Effects/laser.rsi
+    state: laser_target2
+  - type: LaserDesignatorTarget
+
+- type: entity
+  id: RMCLaserDropshipTarget
+  name: blinking laser
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Effects/laser.rsi
+    state: laser_target3
+    drawdepth: Effects
+  - type: PointLight
+    enabled: true
+    radius: 3
+  - type: TimedDespawn
+    lifetime: 1
 
 - type: Tag
   id: Binoculars

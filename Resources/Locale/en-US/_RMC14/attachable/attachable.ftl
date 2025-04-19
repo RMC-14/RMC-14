@@ -50,6 +50,7 @@ rmc-attachable-examine-condition-blacklist-comps = the holder [bold]lacks {$comp
 rmc-attachable-examine-condition-blacklist-sizes = the holder [bold]is not[/bold] one of the following sizes: [bold]{$sizes}[/bold]
 rmc-attachable-examine-condition-blacklist-tags = the holder [bold]lacks {$tagNumber}[/bold] of the following tags: [bold]{$tags}[/bold]
 
+rmc-attachable-examine-ranged-accuracy = [color={$colour}]{$sign}{$accuracy}[/color] accuracy multiplier.
 rmc-attachable-examine-ranged-scatter = [color={$colour}]{$sign}{$scatter}[/color] degrees of scatter.
 rmc-attachable-examine-ranged-burst-scatter = [color={$colour}]{$sign}{$burstScatterMult}[/color] burst scatter multiplier.
 rmc-attachable-examine-ranged-shots-per-burst = [color={$colour}]{$sign}{$shots}[/color] burst shots.
@@ -57,6 +58,7 @@ rmc-attachable-examine-ranged-fire-delay = [color={$colour}]{$sign}{TOSTRING($fi
 rmc-attachable-examine-ranged-recoil = [color={$colour}]{$sign}{$recoil}[/color] recoil.
 rmc-attachable-examine-ranged-damage = [color={$colour}]{$sign}{$damage}[/color] ranged damage multiplier.
 rmc-attachable-examine-ranged-projectile-speed = [color={$colour}]{$sign}{$projectileSpeed}[/color] projectile speed.
+rmc-attachable-examine-ranged-damage-falloff = [color={$colour}]{$sign}{$falloff}[/color] falloff multiplier.
 
 rmc-attachable-examine-melee-damage = [color={$colour}]{$sign}{$damage}[/color] melee damage.
 

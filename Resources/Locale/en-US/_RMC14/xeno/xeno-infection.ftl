@@ -21,4 +21,7 @@ rmc-xeno-infection-insanepain-five = IT'S TEARING YOU APART!
 rmc-xeno-infection-burst-soon = {CAPITALIZE($victim)} starts shaking violently!
 rmc-xeno-infection-burst-soon-self = You feel something crawling through your insides!
 
+rmc-xeno-infection-burst-now-victim = You feel something ripping up your insides!
+rmc-xeno-infection-burst-now-xeno = We start bursting out of {THE($victim)}'s chest!
+
 rmc-xeno-infected-bursted = {CAPITALIZE(SUBJECT($victim))} {CONJUGATE-HAVE($victim)} a giant hole in {POSS-ADJ($victim)} chest!

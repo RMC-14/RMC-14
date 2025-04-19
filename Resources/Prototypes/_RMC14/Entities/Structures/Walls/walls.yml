@@ -12,6 +12,8 @@
   - type: Tag
     tags:
     - Wall
+  - type: ReceiverXenoClaws
+    maxHealth: 3000
   - type: Destructible
     thresholds:
     - trigger:
@@ -71,6 +73,9 @@
   - type: Tag
     tags:
     - Wall
+  - type: ReceiverXenoClaws
+    maxHealth: 9000
+    minimumClawStrength: VerySharp
   - type: Destructible
     thresholds:
     - trigger:
@@ -90,7 +95,10 @@
 
 - type: entity
   parent: CMBaseWall
+  name: reinforced wall
   id: CMWallSuperReinforced
+  description: A huge chunk of reinforced metal used to separate rooms. Looks very robust.
+  suffix: Super Reinforced
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/rwall.rsi
@@ -99,6 +107,9 @@
   - type: Tag
     tags:
     - Wall
+  - type: ReceiverXenoClaws
+    maxHealth: 9000
+    minimumClawStrength: VerySharp
   - type: Destructible
     thresholds:
     - trigger:
@@ -114,6 +125,8 @@
 - type: entity
   parent: CMWallReinforced
   id: CMWallReinforcedAlmayer
+  name: reinforced hull
+  description: A reinforced metal wall used to separate rooms and make up the ship.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/almayer_black.rsi
@@ -127,6 +140,8 @@
 - type: entity
   parent: CMWallReinforced
   id: CMWallReinforcedAlmayerWhite
+  name: reinforced hull
+  description: A reinforced metal wall used to separate rooms and make up the ship.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/almayer_white.rsi
@@ -136,6 +151,21 @@
   - type: IconSmooth
     key: walls
     base: wall
+
+- type: entity
+  parent: CMWallReinforced
+  id: CMWallReinforcedAlmayerAI
+  name: reinforced hull
+  description: A reinforced metal wall used to isolate potentially dangerous areas.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/almayer_aicore.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/almayer_aicore.rsi
+    state: reinforced
+  - type: IconSmooth
+    key: walls
+    base: aiwall
 
 # Indestructible
 - type: entity
@@ -158,6 +188,8 @@
 - type: entity
   parent: CMWallReinforcedHeavy
   id: CMWallReinforcedHeavyAlmayer
+  name: heavy reinforced hull
+  description: A highly reinforced metal wall used to separate rooms and make up the ship. It would take a great impact to weaken this wall.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/almayer_black.rsi
@@ -171,7 +203,8 @@
 - type: entity
   parent: CMWallReinforcedHeavy
   id: CMWallReinforcedHeavyAlmayerWhite
-  name: ultra reinforced hull
+  name: heavy reinforced hull
+  description: A highly reinforced metal wall used to separate rooms and make up the ship. It would take a great impact to weaken this wall.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/almayer_white.rsi
@@ -181,6 +214,21 @@
   - type: IconSmooth
     key: walls
     base: wall
+
+- type: entity
+  parent: CMWallReinforcedHeavy
+  id: CMWallReinforcedHeavyAlmayerAI
+  name: heavy reinforced hull
+  description: An extremely reinforced metal wall used to isolate potentially dangerous areas. Looks virtually indestructible.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/almayer_aicore.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/almayer_aicore.rsi
+    state: hull
+  - type: IconSmooth
+    key: walls
+    base: aiwall
 
 # TODO RMC14 temp hull, breakable only after hijack
 
@@ -247,6 +295,8 @@
   - type: Tag
     tags:
     - Wall
+  - type: ReceiverXenoClaws
+    maxHealth: 3000
   - type: Destructible
     thresholds:
     - trigger:
@@ -274,6 +324,8 @@
   - type: Tag
     tags:
     - Wall
+  - type: ReceiverXenoClaws
+    maxHealth: 3000
   - type: Destructible
     thresholds:
     - trigger:
@@ -336,3 +388,182 @@
     state: wall_broke
   - type: Occluder
     enabled: false
+
+# Containment
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallContainment
+  name: cell wall
+  description : A metal wall used to separate rooms and make up the ship
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/containment.rsi
+    state: containment_wall_south
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/containment.rsi
+    state: containment_wall_south
+
+- type: entity
+  parent: RMCWallContainment
+  id: RMCWallContainmentCorner
+  components:
+  - type: Sprite
+    state: containment_wall_corner
+  - type: Icon
+    state: containment_wall_corner
+
+- type: entity
+  parent: RMCWallContainment
+  id: RMCWallContainmentWest
+  components:
+  - type: Sprite
+    state: containment_wall_w
+  - type: Icon
+    state: containment_wall_w
+
+- type: entity
+  parent: RMCWallContainment
+  id: RMCWallContainmentEast
+  components:
+  - type: Sprite
+    state: containment_wall_e
+  - type: Icon
+    state: containment_wall_e
+
+- type: entity
+  parent: RMCWallContainment
+  id: RMCWallContainmentNorth
+  components:
+  - type: Sprite
+    state: containment_wall_n
+  - type: Icon
+    state: containment_wall_n
+
+- type: entity
+  parent: RMCWallContainment
+  id: RMCWallContainmentConnect1
+  components:
+  - type: Sprite
+    state: containment_wall_connect_e
+  - type: Icon
+    state: containment_wall_connect_e
+
+- type: entity
+  parent: RMCWallContainment
+  id: RMCWallContainmentConnect2
+  components:
+  - type: Sprite
+    state: containment_wall_connect3
+  - type: Icon
+    state: containment_wall_connect3
+
+- type: entity
+  parent: RMCWallContainment
+  id: RMCWallContainmentConnect3
+  components:
+  - type: Sprite
+    state: containment_wall_connect_w
+  - type: Icon
+    state: containment_wall_connect_w
+
+- type: entity
+  parent: RMCWallContainment
+  id: RMCWallContainmentConnect4
+  components:
+  - type: Sprite
+    state: containment_wall_connect_w2
+  - type: Icon
+    state: containment_wall_connect_w2
+
+- type: entity
+  parent: RMCWallContainment
+  id: RMCWallContainmentConnect5
+  components:
+  - type: Sprite
+    state: containment_wall_connect_e2
+  - type: Icon
+    state: containment_wall_connect_e2
+
+- type: entity
+  parent: RMCWallContainment
+  id: RMCWallContainmentConnect6
+  components:
+  - type: Sprite
+    state: containment_wall_connect_s1
+  - type: Icon
+    state: containment_wall_connect_s1
+
+- type: entity
+  parent: RMCWallContainment
+  id: RMCWallContainmentConnect7
+  components:
+  - type: Sprite
+    state: containment_wall_connect_s2
+  - type: Icon
+    state: containment_wall_connect_s2
+
+- type: entity
+  parent: RMCWallContainment
+  id: RMCWallContainmentWindow
+  name: cell window
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/containment.rsi
+    state: containment_window_h
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/containment.rsi
+    state: containment_window_h
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCWallContainmentWindow
+  id: RMCWallContainmentWindow2
+  components:
+  - type: Sprite
+    state: containment_window
+  - type: Icon
+    state: containment_window
+
+# Hunter Walls
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallHunter
+  name: hunter wall
+  description: Nigh indestructible walls that make up the hull of a hunter ship.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hunter.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hunter.rsi
+    state: metal
+  - type: Tag
+    tags:
+    - Wall
+  - type: IconSmooth
+    key: walls
+    base: metal
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallHunterDegraded
+  name: degraded hunter wall
+  description: Ancient beyond measure, these walls make up the hull of a vessel of non human origin. Despite this, they can be felled with plastic explosives like any other opaque blocker.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/hunter_degraded.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/hunter_degraded.rsi
+    state: metal
+  - type: IconSmooth
+    key: walls
+    base: metal
+  - type: Tag
+    tags:
+    - Wall
+  - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
+  - type: Corrodible
+    isCorrodible: true

@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Item;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
@@ -96,7 +97,12 @@ public abstract class SharedItemSystem : EntitySystem
         if (args.Handled)
             return;
 
-        args.Handled = _handsSystem.TryPickup(args.User, uid, animateUser: false);
+        if (_handsSystem.TryPickup(args.User, uid, animateUser: false))
+        {
+            args.Handled = true;
+            var ev = new ItemPickedUpEvent(args.User, uid);
+            RaiseLocalEvent(uid, ref ev, true);
+        }
     }
 
     private void AddPickupVerb(EntityUid uid, ItemComponent component, GetVerbsEvent<InteractionVerb> args)
@@ -115,8 +121,8 @@ public abstract class SharedItemSystem : EntitySystem
 
         // if the item already in a container (that is not the same as the user's), then change the text.
         // this occurs when the item is in their inventory or in an open backpack
-        Container.TryGetContainingContainer(args.User, out var userContainer);
-        if (Container.TryGetContainingContainer(args.Target, out var container) && container != userContainer)
+        Container.TryGetContainingContainer((args.User, null, null), out var userContainer);
+        if (Container.TryGetContainingContainer((args.Target, null, null), out var container) && container != userContainer)
             verb.Text = Loc.GetString("pick-up-verb-get-data-text-inventory");
         else
             verb.Text = Loc.GetString("pick-up-verb-get-data-text");
@@ -126,6 +132,9 @@ public abstract class SharedItemSystem : EntitySystem
 
     private void OnExamine(EntityUid uid, ItemComponent component, ExaminedEvent args)
     {
+        if (component.Size == "Invalid")
+            return;
+
         // show at end of message generally
         args.PushMarkup(Loc.GetString("item-component-on-examine-size",
             ("size", GetItemSizeLocale(component.Size))), priority: -1);

@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/ec4ab3ab5734c5388a95f723d1c98b178519d0ae/icons/turf/escapepods.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "wall0",
+      "directions": 4
+    },
+    {
+      "name": "wall1",
+      "directions": 4
+    },
+    {
+      "name": "wall2",
+      "directions": 4
+    },
+    {
+      "name": "wall3",
+      "directions": 4
+    },
+    {
+      "name": "wall4",
+      "directions": 4
+    },
+    {
+      "name": "wall5",
+      "directions": 4
+    },
+    {
+      "name": "wall6",
+      "directions": 4
+    },
+    {
+      "name": "wall7",
+      "directions": 4
+    },
+    {
+      "name": "wall8",
+      "directions": 4
+    },
+    {
+      "name": "wall9",
+      "directions": 4
+    },
+    {
+      "name": "wall10",
+      "directions": 4
+    },
+    {
+      "name": "wall11",
+      "directions": 4
+    },
+    {
+      "name": "wall12",
+      "directions": 4
+    },
+    {
+      "name": "wall13",
+      "directions": 4
+    },
+    {
+      "name": "wall14",
+      "directions": 4
+    },
+    {
+      "name": "wall15",
+      "directions": 4
+    }
+  ]
+}

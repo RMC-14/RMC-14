@@ -1,5 +1,5 @@
-using Content.Client._RMC14.Attachable.Systems;
 using System.Numerics;
+using Content.Client._RMC14.Attachable.Systems;
 using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Attachable.Components;
@@ -63,4 +63,10 @@ public sealed partial class AttachableVisualsComponent : Component
 
     [DataField, AutoNetworkedField]
     public Vector2 Offset;
+
+    [DataField]
+    public string? LastSlotId;
+
+    [DataField]
+    public string? LastSuffix;
 }

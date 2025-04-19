@@ -1,7 +1,7 @@
 # FOOD
 
 - type: entity
-  parent: ColMarTechBase
+  parent: ColMarTechBaseAnchorable
   id: ColMarTechFood
   name: ColMarTech food vendor
   description: Marine Food Vendor, containing standard military Prepared Meals.
@@ -9,9 +9,23 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/food.rsi
   - type: CMAutomatedVendor
+    hackable: true
     sections:
+    - name: Festive Meals
+      holidays:
+      - FestiveSeason
+      entries:
+      - id: RMCMarinePreparedMealCookies
+        amount: 25
+      - id: RMCMarinePreparedMealGingerbread
+        amount: 25
+      - id: RMCMarinePreparedMealFruitcake
+        amount: 25
     - name: Prepared Meals
       entries:
+      - id: CMMRE
+        name: UNMC Meal Ready to Eat
+        amount: 15
       - id: CMMarinePreparedMealChicken
         amount: 15
       - id: CMMarinePreparedMealCornbread
@@ -31,6 +45,7 @@
       - id: CMCanteen
         amount: 10
       - id: CMMetalFlask
+        name: metal flask (empty)
         amount: 10
       - id: CMMarineFlask
         amount: 5
@@ -38,7 +53,7 @@
         amount: 5
 
 - type: entity
-  parent: ColMarTechBase
+  parent: ColMarTechBaseAnchorable
   id: CMVendorBooze
   name: Booze-O-Mat
   description: A technological marvel, supposedly able to mix just the mixture you'd like to drink the moment you ask for one.
@@ -53,39 +68,44 @@
     - [ "CMAccessKitchen" ]
     - [ "CMAccessColonyPublic" ]
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessKitchen"
+    - "CMAccessColonyPublic"
+    hackable: true
+    scaling: false
     sections:
     - name: Alcohol
       entries:
-      - id: DrinkAleBottleFull
-        amount: 6
-      - id: DrinkBeerBottleFull
-        amount: 6
-      - id: DrinkGrenadineBottleFull
+#      - id: DrinkAleBottleFull
+#        amount: 6
+#      - id: DrinkBeerBottleFull
+#        amount: 6
+#      - id: DrinkGrenadineBottleFull
+#        amount: 5
+#      - id: DrinkTequilaBottleFull
+#        amount: 5
+      - id: RMCDrinkAlcoholRum
+        amount: 27 # TODO RMC14 5
+      - id: RMCDrinkAlcoholCognac
         amount: 5
-      - id: DrinkTequilaBottleFull
+      - id: RMCDrinkAlcoholWhiskey
         amount: 5
-      - id: DrinkRumBottleFull
+      - id: RMCDrinkAlcoholPurpleWine
         amount: 5
-      - id: DrinkCognacBottleFull
-        amount: 5
-      - id: DrinkWhiskeyBottleFull
-        amount: 5
-      - id: DrinkWineBottleFull
-        amount: 5
-      - id: DrinkMelonLiquorBottleFull
+      - id: RMCDrinkAlcoholMelonLiquor
         amount: 2
-      - id: DrinkVermouthBottleFull
-        amount: 5
-      - id: DrinkGinBottleFull
-        amount: 5
-      - id: DrinkAbsintheBottleFull
+#      - id: DrinkVermouthBottleFull
+#        amount: 5
+      - id: RMCDrinkAlcoholGin
+        amount: 10 # TODO RMC14 5
+      - id: RMCDrinkAlcoholAbsinthe
         amount: 2
-      - id: DrinkBlueCuracaoBottleFull
-        amount: 2
-      - id: DrinkVodkaBottleFull
-        amount: 5
-      - id: DrinkCoffeeLiqueurBottleFull
-        amount: 5
+#      - id: DrinkBlueCuracaoBottleFull
+#        amount: 2
+      - id: RMCDrinkAlcoholVodka
+        amount: 12 # TODO RMC14 5
+#      - id: DrinkCoffeeLiqueurBottleFull
+#        amount: 5
     - name: Craft Beers
       entries: []
     - name: Non-Alcohol
@@ -107,6 +127,7 @@
     - name: Containers
       entries:
       - id: CMMetalFlask
+        name: metal flask (empty)
         amount: 5
       - id: DrinkGlass
         amount: 30
@@ -114,7 +135,7 @@
         amount: 5
 
 - type: entity
-  parent: ColMarTechBase
+  parent: ColMarTechBaseAnchorable
   id: CMVendorChess
   name: Chess-o-mat
   description: In 2143 Red Star Drinks, a SPP-CA (Colony Administration) affiliated corporation ran a promotional sweepstakes for drinkers who had found special codes on the inside of the caps of a limited run of Red Star Vodka, shipping them a Chess-O-Mat with unlimited refills.
@@ -125,6 +146,7 @@
     - state: "off"
     - state: "normal-unshaded"
   - type: CMAutomatedVendor
+    hackable: true
     sections:
     - name: Chess
       entries:

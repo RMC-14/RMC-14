@@ -38,13 +38,22 @@
         settings: short
     - type: Loadout
       prototypes: [ RMCGearPMCStandard ]
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 1
+        RMCSkillEndurance: 3
 
 - type: startingGear
   id: RMCGearPMCStandard
   equipment:
     # head: /obj/item/clothing/head/helmet/marine/veteran/pmc
     eyes: CMGlassesSecurity
-    back: CMBackpack # /obj/item/storage/backpack/lightpack
+    back: RMCSatchelLightpack
     gloves: RMCHandsVeteranPMC
     jumpsuit: RMCJumpsuitVeteranPMC
     # outerClothing: /obj/item/clothing/suit/storage/marine/veteran/pmc/light
@@ -52,4 +61,4 @@
     id: RMCIDCardPMC
     ears: RMCHeadsetDistressPMC
     pocket1: RMCPouchFirstAidSplintsGauzeOintment
-    pocket2: CMWeaponPistolM77
+    pocket2: RMCWeaponPistolM77

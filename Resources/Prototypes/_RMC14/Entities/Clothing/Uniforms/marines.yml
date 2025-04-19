@@ -1,180 +1,188 @@
 ﻿# Marines
+
 - type: entity
-  parent: RMCUniformBase
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: JumpsuitMarine
-  name: Marine uniform
+  name: UNMC uniform
   description: Standard-issue Marine uniform. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/standard.rsi
-    state: null
-    layers:
-    - state: icon
-    - map: [ "enum.WebbingVisualLayers.Base" ]
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/standard.rsi
-  - type: SuitSensor
-    controlsLocked: true
-    randomMode: false
-    mode: SensorCords
-  - type: Tag
-    tags:
-    - ClothMade
-    - WhitelistChameleon
-  - type: WebbingClothing
-  - type: UserInterface
-    interfaces:
-      enum.StorageUiKey.Key:
-        type: StorageBoundUserInterface
-  - type: CMArmor
-    armor: 10
-
-# ComTech
-- type: entity
-  parent: JumpsuitMarine
-  id: CMJumpsuitMarineEngineer
-  name: Marine ComTech uniform
-  description: Standard-issue Marine combat technician fatigues. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/engineer.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/engineer.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/standard/jungle.rsi
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/Marine/standard/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/Marine/standard/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/Marine/standard/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/Marine/standard/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/Marine/standard/urban.rsi
 
 - type: entity
-  parent: JumpsuitMarine
+  parent: RMCMarineUniformBase
   id: CMJumpsuitMarineFormal
   name: formal marine uniform
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Marine/formal.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/formal.rsi
+
+# ComTech
+- type: entity
+  parent: JumpsuitMarine
+  id: CMJumpsuitMarineEngineer
+  name: UNMC ComTech uniform
+  description: Standard-issue Marine combat technician fatigues. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/engineer/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/Marine/engineer/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/Marine/engineer/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/Marine/engineer/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/Marine/engineer/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/Marine/engineer/urban.rsi
 
 # Hospital Corpsman
 - type: entity
   parent: JumpsuitMarine
   id: CMJumpsuitMarineMedic
-  name: Marine corpsman uniform
+  name: UNMC corpsman uniform
   description: Standard-issue Marine hospital corpsman fatigues. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/medic.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/medic.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/medic/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/Marine/medic/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/Marine/medic/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/Marine/medic/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/Marine/medic/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/Marine/medic/urban.rsi
 
 # RTO / FTL
 - type: entity
   parent: JumpsuitMarine
   id: CMJumpsuitMarineRTO
-  name: marine radio telephone operator uniform
+  name: UNMC radio telephone operator uniform
   description: Standard-issue RTO fatigues. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/rto.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/rto.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/rto/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/Marine/rto/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/Marine/rto/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/Marine/rto/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/Marine/rto/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/Marine/rto/urban.rsi
 
 # Sniper
 - type: entity
   parent: JumpsuitMarine
   id: CMJumpsuitMarineSniper
-  name: marine snipet uniform
+  name: UNMC snipet uniform
 
 # Tanker
 - type: entity
-  parent: JumpsuitMarine
+  parent: RMCMarineUniformBase
   id: CMJumpsuitMarineTanker
-  name: marine tanker uniform
+  name: UNMC tanker uniform
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/tanker.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/tanker.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Marine/tanker/jungle.rsi
+
+# Supply
 
 # Quartermaster / RO
 - type: entity
-  parent: JumpsuitMarine
+  parent: RMCMarineUniformBase
   id: CMJumpsuitQM
-  name: quartermaster uniform
-  description: Standard-issue quartermaster uniform.
+  name: quartermaster suit
+  description: A nicely-fitting military suit for a quartermaster. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/ro.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/ro.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Supply/ro.rsi
 
 # Cargotech
 - type: entity
-  parent: JumpsuitMarine
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitCargoTech
   name: cargo technician uniform
   description: A standard-issue cargo tech uniform.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/cargo_tech.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/cargo_tech.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Supply/cargo_tech.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-pants-verb-unfold
+    foldVerbText: rmc-pants-verb-fold
 
 # MessTech / Chef
 - type: entity
-  parent: JumpsuitMarine
+  parent: RMCMarineUniformBase
   id: CMJumpsuitMessTech
-  name: mess technician uniform
-  description: Standard-issue Mess Technician uniform.
+  name: UNMC Mess Technician uniform
+  description: Standard-issue Mess Technician uniform. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/chef.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/chef.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Supply/chef.rsi
+
+# Engineering
 
 # Chief Engineer / EC
 - type: entity
-  parent: JumpsuitMarine
+  parent: RMCMarineUniformBase
   id: CMJumpsuitChiefEngineer
   name: chief engineer uniform
-  description: Standard-issue Chief Engineer uniform.
+  description: A uniform for a military engineer. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/ec.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/ec.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Engineering/ec.rsi
+  - type: CMArmor
+    bio: 15
 
 # Ordnance Technician / OT
 - type: entity
-  parent: JumpsuitMarine
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: CMJumpsuitOrdnanceTech
-  name: ordnance technician uniform
-  description: Standard-issue Ordnance Technician uniform.
+  name: ordnance engineer uniform
+  description: A uniform for a professional bomb maker. It has shards of light Kevlar to help protect against stabbing weapons, bullets, and shrapnel from explosions. Padded with extra plates to take the brunt force of an explosion.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/ot.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/ot.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Engineering/ot.rsi
+  - type: CMArmor
+    explosionArmor: 10
 
 # Maintenance Technician / MT
 - type: entity
-  parent: JumpsuitMarine
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: CMJumpsuitMaintTech
-  name: maintenance technician uniform
-  description: Standard-issue Maintenance Technician uniform.
+  name: engineer uniform
+  description: A uniform for a military engineer. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/mt.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/mt.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Engineering/mt.rsi
+  - type: CMArmor
+    bio: 10
+
+# Command
 
 # Commanding Officer / CO
 - type: entity
-  parent: JumpsuitMarine
+  parent: RMCMarineUniformBase
   id: CMJumpsuitCO
   name: commanding officer uniform
   description: Standard-issue Commanding Officer uniform.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/CO/standard.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/CO/standard.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard/jungle.rsi
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/Command/CO/standard/urban.rsi
 
 - type: entity
   parent: CMJumpsuitCO
@@ -183,9 +191,9 @@
   description: Standard-issue commanding officer uniform.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/CO/formal_black.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/CO/formal_black.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/formal_black.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: entity
   parent: CMJumpsuitCO
@@ -194,79 +202,127 @@
   description: Standard-issue commanding officer uniform.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/CO/formal_white.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/CO/formal_white.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/formal_white.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: entity
   parent: CMJumpsuitCO
   id: CMJumpsuitCOService
-  name: commanding officer uniform
-  description: Standard-issue commanding officer uniform.
+  name: commanding officer's dress shirt
+  description: The shirt and tie of a two-piece Navy service dress uniform for high-ranking officers. Wear with style and substance.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/CO/service.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/CO/service.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/service.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+# Executive officer
+
+- type: entity
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  id: CMJumpsuitXOFormal
+  name: marine formal service uniform
+  description: A formal service uniform typically worn by marines of the UNMC. Still practicable while still being more formal than the standard service uniform.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/formal_service.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
 
 # Officer
 - type: entity
-  parent: JumpsuitMarine
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitBO
-  name: officer uniform
-  description: Standard-issue officer uniform.
+  name: marine service uniform
+  description: A service uniform worn by members of the UNMC. Do the corps proud. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/bo.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/bo.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/bo.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+
+- type: entity
+  parent: CMJumpsuitBO
+  id: CMJumpsuitOperations
+  name: marine operations uniform
+  description: An operations uniform worn by members of the UNMC. Do the corps proud. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/boiler/jungle.rsi
+  - type: FoldableClothing
+    foldedEquippedPrefix: sleeves
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/boiler/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/boiler/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/boiler/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/boiler/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/boiler/urban.rsi
+
+# Auxiliary
+# IO
+- type: entity
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  id: RMCUniformIntel
+  name: marine intelligence officer uniform
+  description: Tighter than a vice. Slicker than beard oil. Covered from head to toe in pouches, pockets, bags, straps, and belts. Clearly, you are not only the most intelligent of intelligence officers, but the most fashionable as well. This suit took an entire R&D team five days to develop. It is more expensive than the entire Almayer... probably.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/intel/jungle.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Uniforms/intel/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Uniforms/intel/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Uniforms/intel/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Uniforms/intel/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Uniforms/intel/urban.rsi
+  - type: Tag
+    tags:
+    - RMCUniformIntel
+
+- type: Tag
+  id: RMCUniformIntel
 
 # Pilot
 - type: entity
-  parent: JumpsuitMarine
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
   id: CMJumpsuitPilot
   name: pilot officer bodysuit
   description: A bodysuit worn by pilot officers of the marines, and is meant for survival in inhospitable conditions. Fly the marines onwards to glory. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/pilot.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/pilot.rsi
-
-# IO
-- type: entity
-  parent: JumpsuitMarine
-  id: CMJumpsuitIO
-  name: marine intelligence officer uniform
-  description: Tighter than a vice. Slicker than beard oil. Covered from head to toe in pouches, pockets, bags, straps, and belts. Clearly, you are not only the most intelligent of intelligence officers, but the most fashionable as well. This suit took an entire R&D team five days to develop. It is more expensive than the entire Almayer... probably.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/io.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/io.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot/jungle.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
 
 # Dropship Crew Chief
 - type: entity
-  parent: JumpsuitMarine
+  parent: CMJumpsuitPilot
   id: CMJumpsuitDCC
   name: dropship crew chief bodysuit
   description: A bodysuit worn by dropship crew chiefs of the UNMC, and is meant for survival in inhospitable conditions. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/crewchief.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/crewchief.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/crewchief.rsi
+
+# Civilian
 
 # Tshirts
 - type: entity
-  parent: JumpsuitMarine
+  parent: RMCMarineUniformBase
   id: CMJumpsuitTShirtWhite
   name: white tshirt
   description: Simple pair of tshirt and pants.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/T-shirt/white.rsi
-  - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/T-shirt/white.rsi
 
 - type: entity
@@ -276,8 +332,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/T-shirt/red.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/T-shirt/red.rsi
 
 - type: entity
   parent: CMJumpsuitTShirtWhite
@@ -286,17 +340,41 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/T-shirt/gray.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/T-shirt/gray.rsi
+
+# Survivors
 
 # Colonist
 - type: entity
-  parent: JumpsuitMarine
+  parent: RMCMarineUniformBase
   id: CMJumpsuitColonist
   name: colonist uniform
   description: A stylish gray-green jumpsuit - standard issue for colonists.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/colonist.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/colonist.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/colonist.rsi
+
+# Marine
+- type: entity
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  id: CMJumpsuitSurvivorMarine
+  name: UNMC uniform
+  description: Torn, Burned and blood stained. This uniform has seen much more than you could possibly imagine.
+  suffix: FORECON
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/recon_marine.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+
+# High Command
+
+# General
+- type: entity
+  parent: RMCMarineUniformBase
+  id: CMJumpsuitGeneral
+  name: general's uniform
+  description: A uniform worn by a fleet general. It comes in a shade of deep black, and has a light shimmer to it. The weave looks strong enough to provide some light protections.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/general.rsi

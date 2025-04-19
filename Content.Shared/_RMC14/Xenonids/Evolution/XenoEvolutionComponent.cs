@@ -1,4 +1,4 @@
-﻿using Content.Shared.Actions;
+using Content.Shared.Actions;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -24,6 +24,9 @@ public sealed partial class XenoEvolutionComponent : Component
     public List<EntProtoId> EvolvesToWithoutPoints = new();
 
     [DataField, AutoNetworkedField]
+    public List<EntProtoId> Strains = new();
+
+    [DataField, AutoNetworkedField]
     public TimeSpan EvolutionDelay = TimeSpan.FromSeconds(3);
 
     [DataField, AutoNetworkedField]
@@ -33,7 +36,10 @@ public sealed partial class XenoEvolutionComponent : Component
     public FixedPoint2 Max;
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 PointsPerSecond = 1;
+    public FixedPoint2 PointsPerSecond = 0.5;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 EarlyPointsPerSecond = 1;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan LastPointsAt;
@@ -49,4 +55,7 @@ public sealed partial class XenoEvolutionComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool GotPopup;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan EvolutionJitterDuration = TimeSpan.FromSeconds(10);
 }

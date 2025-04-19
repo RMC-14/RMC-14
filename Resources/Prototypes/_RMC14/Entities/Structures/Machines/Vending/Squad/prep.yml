@@ -12,6 +12,9 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessMarinePrep"
+    hackable: true
     sections:
     - name: Primary firearms
       entries:
@@ -26,11 +29,11 @@
         recommended: true
     - name: Primary ammunition
       entries:
-      - id: CMBoxShotgunFlechette
+      - id: RMCBoxShotgunFlechette
         amount: 4
-      - id: CMBoxShotgunBuckshot
+      - id: RMCBoxShotgunBuckshot
         amount: 10
-      - id: CMBoxShotgunSlugs
+      - id: RMCBoxShotgunSlugs
         amount: 10
       - id: CMMagazineRifleM4SPR
         amount: 15
@@ -40,11 +43,11 @@
         amount: 25
     - name: Sidearms
       entries:
-      - id: CMWeaponPistolM77
+      - id: RMCWeaponPistolM77Empty
         amount: 25
-      - id: RMCWeaponRevolverM44
+      - id: RMCWeaponRevolverM44Empty
         amount: 25
-      - id: CMWeaponPistolM1984
+      - id: CMWeaponPistolM1984Empty
         amount: 25
       #- id: WeaponFlareM82F
       #  amount: 10
@@ -91,6 +94,9 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessMarinePrep"
+    hackable: true
     sections:
     - name: Standard Equipment
       entries:
@@ -116,27 +122,27 @@
         amount: 1
       - id: CMWebbing
         amount: 2
-#      - id: Drop Pouch
-#        amount: 1
-#      - id: Shoulder Holster
-#        amount: 1
+      - id: CMWebbingPouch
+        amount: 1
+      - id: CMWebbingHolster
+        amount: 1
     - name: Armor
       entries:
-#      - id: M3 Pattern Carrier Marine Armor
-#        amount: 15
-#      - id: M3 Pattern Padded Marine Armor
-#        amount: 15
-#      - id: M3 Pattern Padless Marine Armor
-#        amount: 15
-#      - id: M3 Pattern Ridged Marine Armor
-#        amount: 15
-#      - id: M3 Pattern Skull Marine Armor
-#        amount: 15
-#      - id: M3 Pattern Smooth Marine Armor
-#        amount: 15
-      - id: CMArmorM3Heavy
+      - id: RMCArmorM3MediumCarrier
+        amount: 15
+      - id: RMCArmorM3MediumPadded
+        amount: 15
+      - id: RMCArmorM3MediumPadless
+        amount: 15
+      - id: RMCArmorM3MediumRidged
+        amount: 15
+      - id: RMCArmorM3MediumSkull
+        amount: 15
+      - id: RMCArmorM3MediumSmooth
+        amount: 15
+      - id: RMCArmorM3HeavyPadded
         amount: 10
-      - id: CMArmorM3Light
+      - id: RMCArmorM3LightPadded
         amount: 10
     - name: Backpack
       entries:
@@ -156,39 +162,39 @@
         amount: 15
       - id: CMSatchelMedical
         amount: 15
-#      - id: Shotgun Scabbard
-#        amount: 5
+      - id: RMCScabbardShotgun
+        amount: 5
     - name: Restricted Backpacks
       entries:
       - id: CMBackpackWelder
         amount: 1
       - id: RMCSatchelWelder
         amount: 2
-#      - id: Radio Telephone Backpack
-#        amount: 1
+      - id: RMCBackpackRTO
+        amount: 1
     - name: Belts
       entries:
       - id: CMBeltMarine
         amount: 15
       - id: RMCBeltGrenade
         amount: 10
-#      - id: M276 Pattern Shotgun Shell Loading Rig
-#        amount: 15
-#      - id: M276 Pattern General Pistol Holster Rig
-#        amount: 15
-#      - id: M276 Pattern M63 Holster Rig
-#        amount: 15
-#      - id: M276 Pattern M63 Holster Rig And Pouch
-#        amount: 10
-#      - id: M276 Pattern M44 Holster Rig
-#        amount: 15
+      - id: RMCM276ShotgunShellLoadingRig
+        amount: 15
+      - id: RMCBeltHolsterPistol
+        amount: 15
+      - id: RMCBeltHolsterRevolver
+        amount: 15
+      - id: RMCBeltHolsterSMG
+        amount: 15
+      - id: RMCBeltHolsterSMGPouch
+        amount: 10
 #      - id: M276 Pattern M82F Holster Rig
 #        amount: 5
       - id: CMBeltKnifeFilled
         name: M276 Knife Rig (Full)
         amount: 15
-#      - id: M276 G8-A General Utility Pouch
-#        amount: 15
+      - id: RMCBeltUtilityGeneral
+        amount: 15
     - name: Pouches
       entries:
       - id: RMCPouchBayonet
@@ -236,11 +242,13 @@
         amount: 15
       - id: CMMaskCoif
         amount: 10
-#      - id: Rebreather
-#        amount: 10
+      - id: RMCMaskRebreather
+        amount: 10
     - name: Miscellaneous
       entries:
       - id: RMCGogglesBallistic
+        amount: 10
+      - id: RMCGogglesBallisticSquad
         amount: 10
       - id: RMCGogglesM1A1Ballistic
         amount: 10
@@ -248,14 +256,20 @@
         amount: 10
       - id: RMCGlassesMarineRpg
         amount: 10
-#      - id: M5 Integrated Gas Mask
-#        amount: 10
-#      - id: M10 Helmet Netting
-#        amount: 10
-#      - id: M10 Helmet Rain Cover
-#        amount: 10
-#      - id: Firearm Lubricant
-#        amount: 15
+      - id: RMCGlassesMarineRpgOld
+        amount: 10
+      - id: RMCHelmetGarbGasmask
+        name: M5 integrated gas mask
+        amount: 10
+      - id: RMCHelmetGarbNetting
+        name: M10 helmet netting
+        amount: 10
+      - id: RMCHelmetGarbRainCover
+        name: M10 helmet rain cover
+        amount: 10
+      - id: RMCHelmetGarbGunOil
+        name: firearm lubricant
+        amount: 15
 #      - id: Marine Flair
 #        amount: 15
 #      - id: Falling Falcons Shoulder Patch
@@ -264,6 +278,8 @@
 #        amount: 15
       - id: BedrollFolded
         amount: 20
+      - id: RMCM5CameraGear
+        amount: 10
     - name: Optics
       entries: [ ]
 #      - id: Advanced Medical Optic (CORPSMAN ONLY)
@@ -281,9 +297,14 @@
   - type: AccessReader
     access:
     - [ "CMAccessMarinePrep" ]
+    - [ "CMAccessRequisitions" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_ammo.rsi
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessMarinePrep"
+    - "CMAccessRequisitions"
+    hackable: true
     sections:
     - name: Armor-Piercing Ammunition
       entries:
@@ -313,20 +334,20 @@
         amount: 6
       - id: RMCMagazinePistolSU6
         amount: 6
-      #- id: CMIncineratorTankM240
-      #  amount: 3
+      - id: RMCTankFlamer
+        amount: 3
       #- id: CMMagazineDrumM56D
       #  amount: 2
       #- id: CMMagazineBoxM2C
       #  amount: 2
-      #- id: Box of Breaching Shells (16g)
-      #  amount: 2
-      #- id: CMBatonSlugsHIRR
-      #  amount: 6
-      #- id: CMStarShellN74AGMS
-      #  amount: 4
-      #- id: CMHornetShellM74AGMS
-      #  amount: 4
+      - id: RMCBoxShotgunBreaching
+        amount: 2
+      - id: RMCBatonSlugHIRR
+        amount: 6
+      - id: RMCStarShellM74AGMS
+        amount: 4
+      - id: RMCHornetShellM74AGMS
+        amount: 4
 
 
 - type: entity
@@ -338,15 +359,20 @@
   - type: AccessReader
     access:
     - [ "CMAccessMarinePrep" ]
+    - [ "CMAccessRequisitions" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessMarinePrep"
+    - "CMAccessRequisitions"
+    hackable: true
     sections:
     - name: Food
       entries:
       - id: CMMRE
         amount: 5
-      - id: CMBoxMRE
+      - id: RMCBoxMRE
         amount: 1
     - name: Tools
       entries:
@@ -369,18 +395,18 @@
 #      #  amount: 1
       - id: RMCFlashlight # Combat Flashlight
         amount: 5
-#      #- id: CMBoxFlashlights
+#      #- id: RMCBoxFlashlights
 #      #  amount: 1
-      - id: CMBoxPackFlare
+      - id: RMCBoxPackFlare
         amount: 1
       - id: CMPackFlare
         amount: 10
-#      #- id: CMSignalFlarePackM89S
-#      #  amount: 1
+      - id: RMCPackFlareCAS
+        amount: 1
     - name: Miscellaneous
       entries:
-      #- id: CMEngineerKit
-      #  amount: 1
+      - id: RMCEngineerKit
+        amount: 1
       #- id: CMMap
       #  amount: 5
       - id: CMFireExtinguisher
@@ -389,8 +415,9 @@
         amount: 1
       - id: CMRollerBedSpawnFolded
         amount: 1
-#      - id: CMScabbardMacheteFull
-#        amount: 5
+      - id: RMCScabbardMacheteFilled
+        name: machete scabbard (Full)
+        amount: 5
       - id: RMCBinoculars
         amount: 1
       #- id: CMFoldingBarricadesMB6x3
@@ -398,6 +425,8 @@
       #- id: CMSparePDTLBattleBuddyKit
       #  amount: 3
       - id: RMCPowerCellCrap
+        amount: 2
+      - id: RMCMagazineSMGNailgun
         amount: 2
 
 
@@ -410,9 +439,14 @@
   - type: AccessReader
     access:
     - [ "CMAccessMarinePrep" ]
+    - [ "CMAccessRequisitions" ]
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
   - type: CMAutomatedVendor
+    access:
+    - "CMAccessMarinePrep"
+    - "CMAccessRequisitions"
+    hackable: true
     sections: # TODO RMC14
     - name: Barrel
       entries:
@@ -430,8 +464,8 @@
         amount: 5
       - id: RMCAttachmentS42xTelescopicMiniscope
         amount: 2
-#      - id: RMCAttachmentS5RedDotSight # UNCOMMENT THIS WHEN ACCURACY IS IMPLEMENTED
-#        amount: 4
+      - id: RMCAttachmentS5RedDotSight
+        amount: 4
       - id: RMCAttachmentS6ReflexSight
         amount: 4
       - id: RMCAttachmentS84xTelescopicScope
@@ -448,14 +482,14 @@
         amount: 2
       - id: RMCAttachmentLaserSight
         amount: 3
-#      - id: CMAttachmentMiniFlamethrower
-#        amount: 2
+      - id: RMCAttachmentMiniFlamethrower
+        amount: 2
 #      - id: CMAttachmentXMVESG1FlamerNozzle
 #        amount: 2
       - id: RMCAttachmentU7UnderbarrelShotgun
         amount: 2
-#      - id: CMAttachmentUnderbarrelExtinguisher
-#        amount: 2
+      - id: RMCAttachmentUnderbarrelExtinguisher
+        amount: 2
       - id: RMCAttachmentVerticalGrip
         amount: 3
     - name: Stock

@@ -1,0 +1,50 @@
+- type: emoteSounds
+  id: RMCBaseHumanoidSounds
+  abstract: true
+  params:
+    variation: 0.125
+  sounds:
+    Snore:
+      collection: Snores
+    Whistle:
+      collection: Whistles
+
+- type: emoteSounds
+  parent: RMCBaseHumanoidSounds
+  id: RMCBaseMaleSounds
+  abstract: true
+  sounds:
+    Sneeze:
+      collection: MaleSneezes
+    Cough:
+      collection: MaleCoughs
+    Yawn:
+      collection: MaleYawn
+    Sigh:
+      collection: MaleSigh
+    Crying:
+      collection: MaleCry
+    Gasp:
+      collection: MaleGasp
+    DefaultDeathgasp:
+      collection: MaleDeathGasp
+
+- type: emoteSounds
+  parent: RMCBaseHumanoidSounds
+  id: RMCBaseFemaleSounds
+  abstract: true
+  sounds:
+    Sneeze:
+      collection: FemaleSneezes
+    Cough:
+      collection: FemaleCoughs
+    Yawn:
+      collection: FemaleYawn
+    Sigh:
+      collection: FemaleSigh
+    Crying:
+      collection: FemaleCry
+    Gasp:
+      collection: FemaleGasp
+    DefaultDeathgasp:
+      collection: FemaleDeathGasp

@@ -16,7 +16,9 @@ public sealed class RMCDiscordManager : IPostInjectInit
 
     private DiscordSocketClient _client = default!;
     private ulong _adminChannelId;
-    private ITextChannel _adminChannel = default!;
+    private ulong _mentorChannelId;
+    private ITextChannel? _adminChannel;
+    private ITextChannel? _mentorChannel;
 
     private ISawmill _sawmill = default!;
     private Task _discordThread = default!;
@@ -85,9 +87,13 @@ public sealed class RMCDiscordManager : IPostInjectInit
         await _client.LoginAsync(TokenType.Bot, _config.GetCVar(RMCCVars.RMCDiscordToken));
         await _client.StartAsync();
 
-        _adminChannelId = _config.GetCVar(RMCCVars.RMCDiscordAdminChatChannel);
+        _adminChannelId = (ulong) _config.GetCVar(RMCCVars.RMCDiscordAdminChatChannel);
         if (_adminChannelId != 0)
             _adminChannel = (ITextChannel) await _client.GetChannelAsync(_adminChannelId);
+
+        _mentorChannelId = (ulong) _config.GetCVar(RMCCVars.RMCDiscordMentorChatChannel);
+        if (_mentorChannelId != 0)
+            _mentorChannel = (ITextChannel) await _client.GetChannelAsync(_mentorChannelId);
 
         while (_running)
         {
@@ -97,7 +103,19 @@ public sealed class RMCDiscordManager : IPostInjectInit
                 {
                     while (_chatMessages.TryDequeue(out var msg))
                     {
-                        await _adminChannel.SendMessageAsync(FormatDiscordMessage(msg));
+                        switch (msg.Type)
+                        {
+                            case RMCDiscordMessageType.Admin:
+                                if (_adminChannel != null)
+                                    await _adminChannel.SendMessageAsync(FormatDiscordMessage(msg));
+
+                                break;
+                            case RMCDiscordMessageType.Mentor:
+                                if (_mentorChannel != null)
+                                    await _mentorChannel.SendMessageAsync(FormatDiscordMessage(msg));
+
+                                break;
+                        }
                     }
                 }
 
@@ -122,6 +140,9 @@ public sealed class RMCDiscordManager : IPostInjectInit
         if (msg.Channel.Id == _adminChannelId)
             type = RMCDiscordMessageType.Admin;
 
+        if (msg.Channel.Id == _mentorChannelId)
+            type = RMCDiscordMessageType.Mentor;
+
         if (type == null)
             return;
 
@@ -134,7 +155,7 @@ public sealed class RMCDiscordManager : IPostInjectInit
         Interlocked.Exchange(ref _ready, 1);
     }
 
-    public ConcurrentQueue<RMCDiscordMessage> GetDiscordAdminMessages()
+    public ConcurrentQueue<RMCDiscordMessage> GetDiscordMessages()
     {
         return _discordMessages;
     }
@@ -142,6 +163,11 @@ public sealed class RMCDiscordManager : IPostInjectInit
     public void SendDiscordAdminMessage(string author, string message)
     {
         _chatMessages.Enqueue(new RMCDiscordMessage(author, message, RMCDiscordMessageType.Admin));
+    }
+
+    public void SendDiscordMentorMessage(string author, string message)
+    {
+        _chatMessages.Enqueue(new RMCDiscordMessage(author, message, RMCDiscordMessageType.Mentor));
     }
 
     private string FormatDiscordMessage(RMCDiscordMessage msg)

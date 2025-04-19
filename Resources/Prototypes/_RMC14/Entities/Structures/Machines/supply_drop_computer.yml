@@ -1,0 +1,84 @@
+﻿- type: entity
+  parent: RMCCommunicationsConsoleBase
+  id: RMCSupplyDropConsole
+  name: supply drop console
+  description: An old-fashioned computer hooked into the nearby Supply Drop system.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: security_cam
+  - type: InteractionOutline
+  - type: ActivatableUI
+    key: enum.SupplyDropComputerUi.Key
+  - type: UserInterface
+    interfaces:
+      enum.SupplyDropComputerUi.Key:
+        type: SupplyDropComputerBui
+  - type: SupplyDropComputer
+    squad: SquadEcho
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  abstract: true
+  parent: MarkerBase
+  id: RMCSupplyDropPadBase
+  name: supply drop pad
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 50
+        mask:
+        - MachineLayer
+        hard: false
+  - type: SupplyDropPad
+
+- type: entity
+  parent: RMCSupplyDropPadBase
+  id: RMCSupplyDropPadAlpha
+  suffix: Alpha
+  components:
+  - type: SupplyDropPad
+    squad: SquadAlpha
+
+- type: entity
+  parent: RMCSupplyDropPadBase
+  id: RMCSupplyDropPadBravo
+  suffix: Bravo
+  components:
+  - type: SupplyDropPad
+    squad: SquadBravo
+
+- type: entity
+  parent: RMCSupplyDropPadBase
+  id: RMCSupplyDropPadCharlie
+  suffix: Charlie
+  components:
+  - type: SupplyDropPad
+    squad: SquadCharlie
+
+- type: entity
+  parent: RMCSupplyDropPadBase
+  id: RMCSupplyDropPadDelta
+  suffix: Delta
+  components:
+  - type: SupplyDropPad
+    squad: SquadDelta
+
+- type: entity
+  parent: RMCSupplyDropPadBase
+  id: RMCSupplyDropPadEcho
+  suffix: Echo
+  components:
+  - type: SupplyDropPad
+    squad: SquadEcho

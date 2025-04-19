@@ -2,6 +2,10 @@
   parent: KitchenMicrowave
   id: CMMicrowave
   components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
   - type: ApcPowerReceiver
     needsPower: false # TODO RMC14
     powerLoad: 0

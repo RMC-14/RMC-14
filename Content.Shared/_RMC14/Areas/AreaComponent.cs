@@ -1,4 +1,5 @@
-﻿using Robust.Shared.GameStates;
+﻿using Content.Shared._RMC14.WeedKiller;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Areas;
 
@@ -16,7 +17,10 @@ public sealed partial class AreaComponent : Component
     public bool Lasing;
 
     [DataField, AutoNetworkedField]
-    public bool Mortar;
+    public bool MortarPlacement;
+
+    [DataField, AutoNetworkedField]
+    public bool MortarFire;
 
     [DataField, AutoNetworkedField]
     public bool Medevac;
@@ -56,7 +60,7 @@ public sealed partial class AreaComponent : Component
     public double HijackEvacuationWeight;
 
     [DataField, AutoNetworkedField]
-    public AreaHijackEvacuationType? HijackEvacuationType;
+    public AreaHijackEvacuationType HijackEvacuationType = AreaHijackEvacuationType.None;
 
     [DataField, AutoNetworkedField]
     public string? PowerNet;
@@ -66,4 +70,18 @@ public sealed partial class AreaComponent : Component
 
     [DataField, AutoNetworkedField]
     public int ZLevel;
+
+    [DataField, AutoNetworkedField]
+    public bool LandingZone;
+
+    [DataField, AutoNetworkedField]
+    [Access(typeof(AreaSystem), typeof(WeedKillerSystem))]
+    public string? LinkedLz;
+
+    [DataField, AutoNetworkedField]
+    [Access(typeof(AreaSystem), typeof(WeedKillerSystem))]
+    public bool WeedKilling;
+
+    [DataField, AutoNetworkedField]
+    public bool RetrieveItemObjective;
 }

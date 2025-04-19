@@ -1,0 +1,59 @@
+﻿- type: entity
+  parent: RMCBaseDoorInvincible
+  id: RMCAirlockEvacuation
+  name: Evacuation Airlock PL-6
+  description: It opens and closes.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49" # don't want this colliding with walls or they won't close
+        density: 100
+        mask:
+        - FullTileMask
+        layer:
+        - FullTileLayer # TODO RMC14 AirlockLayer when not bolted (in evac)
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/escape_pod_door.rsi
+  - type: EvacuationDoor
+  - type: Corrodible
+    isCorrodible: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: Airlock
+    powered: true
+
+- type: entity
+  parent: RMCBaseDoorInvincible
+  id: RMCAirlockLifeboat
+  name: lifeboat docking hatch
+  description: A heavyset bulkhead for a lifeboat.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.49,-0.49,1.49,0.49"
+        density: 100
+        mask:
+        - FullTileMask
+        layer:
+        - FullTileLayer # TODO RMC14 AirlockLayer when not bolted (in evac)
+  - type: Sprite
+    sprite: _RMC14/Structures/Lifeboat/lifeboat_doors.rsi
+  - type: EvacuationDoor
+  - type: Corrodible
+    isCorrodible: true
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: Airlock
+    powered: true

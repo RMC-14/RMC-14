@@ -1,38 +1,31 @@
 # CMO
 - type: entity
-  parent: JumpsuitMarine
+  parent: RMCMarineUniformBase
   id: CMJumpsuitCMO
   name: chief medical officer's jumpsuit
   description: It's a jumpsuit worn by those with the experience to be Chief Medical Officer. It provides minor biological protection.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/cmo.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/cmo.rsi
 
 # Research
 - type: entity
-  parent: JumpsuitMarine
+  parent: RMCMarineUniformBase
   id: CMJumpsuitResearch
   name: reseacher clothes
   description: A simple set of civilian clothes worn by researchers.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/research.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/research.rsi
-
 
 # Scrubs
 - type: entity
-  parent: JumpsuitMarine
+  parent: RMCMarineUniformBase
   id: CMScrubsBlue
   name: blue medical scrubs
-  description: They're made of a special fiber that provides minor protection against biohazards. These are in blue
+  description: They're made of a special fiber that provides minor protection against biohazards. These are in blue.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/blue.rsi
-  - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/blue.rsi
 
 - type: entity
@@ -43,8 +36,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/green.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/green.rsi
 
 - type: entity
   parent: CMScrubsBlue
@@ -54,27 +45,39 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/purple.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/purple.rsi
     
 - type: entity
   parent: CMScrubsBlue
   id: CMScrubsOrange
   name: orange medical scrubs
-  description: It's made of a special fiber that provides minor protection against biohazards. This one is in dark orange.
+  description: It's made of a special fiber that provides minor protection against biohazards. This one is in prisoner orange.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/orange.rsi
-  - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/orange.rsi
 
 - type: entity
   parent: CMScrubsBlue
-  id: CMScrubsNurse
-  name: nurse scrubs
-  description: Standard-issue nurse scrubs.
+  id: RMCScrubsLightBlue
+  name: light blue medical scrubs
+  description: It's made of a special fiber that provides minor protection against biohazards. This one is in light blue.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/nurse.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/nurse.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/lightblue.rsi
+
+- type: entity
+  parent: CMScrubsBlue
+  id: RMCScrubsOlive
+  name: olive medical scrubs
+  description: It's made of a special fiber that provides minor protection against biohazards. This one is in olive green.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/olive.rsi
+
+- type: entity
+  parent: CMScrubsBlue
+  id: RMCScrubsGrey
+  name: grey medical scrubs
+  description: It's made of a special fiber that provides minor protection against biohazards. This one is in mundane grey.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Scrubs/grey.rsi

@@ -1,30 +1,30 @@
 - type: entity
-  id: CMCrateMedicalSurgery
+  id: RMCCrateMedicalSurgery
   parent: CMCrateSecureSurgery
-  name: surgery crate(anesthetic,surgeon gear)
+  name: surgery crate (tray,anesthetics,surgeon gear)
   components:
   - type: StorageFill
     contents:
       - id: RMCSurgicalTray
       - id: CMMaskGasMedical
       - id: CMScrubsGreen
-      - id: CMBoxSterileMask
-      - id: CMBoxLatexGloves
+      - id: RMCBoxSterileMask
+      - id: RMCBoxLatexGloves
       - id: CMAnestheticTankFilled
 
 - type: entity
-  id: CMCrateMedicalBodyBag
-  parent: CMCrateMedical
+  id: RMCCrateMedicalBodyBag
+  parent: RMCCrateMedical
   name: body bag crate (x28)
   components:
   - type: StorageFill
     contents:
-      - id: CMBoxBodyBag
+      - id: RMCBoxBodyBag
         amount: 4
 
 - type: entity
-  id: CMCrateMedicalStasisBag
-  parent: CMCrateMedical
+  id: RMCCrateMedicalStasisBag
+  parent: RMCCrateMedical
   name: stasis bag crate (x3)
   components:
   - type: StorageFill
@@ -33,8 +33,8 @@
         amount: 3
 
 - type: entity
-  id: CMCrateMedicalFirstAid
-  parent: CMCrateMedical
+  id: RMCCrateMedicalFirstAid
+  parent: RMCCrateMedical
   name: first aid kit crate (x2 each)
   components:
   - type: StorageFill
@@ -51,15 +51,15 @@
         amount: 2
 
 - type: entity
-  id: CMCrateMedicalFilled
-  parent: CMCrateMedical
+  id: RMCCrateMedicalFilled
+  parent: RMCCrateMedical
   name: medical crate
   suffix: Filled
   components:
   - type: StorageFill
     contents: # TODO RMC14 missing bottles
-      - id: CMBoxPillCanister
-      - id: CMBoxSyringe
+      - id: RMCBoxPillCanister
+      - id: RMCBoxSyringe
       - id: CMBottleInaprovaline
       - id: CMBottleDylovene
       - id: CMBottleBicaridine
@@ -75,13 +75,13 @@
       # - id: CMPillCanisterPeridaxon
 
 - type: entity
-  id: CMCrateMedicalPill
-  parent: CMCrateMedical
+  id: RMCCrateMedicalPill
+  parent: RMCCrateMedical
   name: pill bottle crate (x2 each)
   components:
   - type: StorageFill
     contents: # TODO RMC14 missing pill bottles
-      - id: CMBoxPillCanister
+      - id: RMCBoxPillCanister
         amount: 2
       - id: CMPillCanisterInaprovaline
         amount: 2

@@ -8,6 +8,8 @@
     state: paper_bin0
     drawdepth: SmallObjects
     noRot: true
+  - type: Item
+    size: Normal
   - type: ItemMapper
     sprite: _RMC14/Objects/Misc/paper.rsi
     mapLayers:
@@ -16,6 +18,8 @@
           tags:
           - Document
           - Write
+  - type: Bin
+    maxItems: 30
   - type: InteractedBlacklist
     blacklist:
       components:
@@ -67,6 +71,48 @@
   components:
   - type: Bin
     initialContents:
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    whitelist:
+      tags:
+      - Document
+      - Write
+
+- type: entity
+  parent: CMPaperBin
+  id: CMPaperBin30
+  suffix: 30
+  components:
+  - type: Bin
+    initialContents:
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
+    - CMPaper
     - CMPaper
     - CMPaper
     - CMPaper

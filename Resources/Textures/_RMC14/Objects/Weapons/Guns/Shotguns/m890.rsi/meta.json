@@ -1,24 +1,25 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/4047c473d4d2f3e58e68efdec5aa95d0676bf4d1/icons/obj/items/weapons/guns/guns_by_faction/uscm.dmi, https://github.com/cmss13-devs/cmss13/blob/106c92cdf232ebc12c9d7a2feb23956c6755496f/icons/mob/humans/onmob/items_lefthand_1.dmi, https://github.com/cmss13-devs/cmss13/blob/4047c473d4d2f3e58e68efdec5aa95d0676bf4d1/icons/mob/humans/onmob/items_righthand_1.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7cb618c69b75873f3ce893022fe08d1233b3152d/icons/obj/items/weapons/guns/guns_by_map/desert/guns_obj.dmi, https://github.com/cmss13-devs/cmss13/blob/106c92cdf232ebc12c9d7a2feb23956c6755496f/icons/mob/humans/onmob/items_lefthand_1.dmi, https://github.com/cmss13-devs/cmss13/blob/4047c473d4d2f3e58e68efdec5aa95d0676bf4d1/icons/mob/humans/onmob/items_righthand_1.dmi",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
-      "name": "base"
+      "name": "icon"
     },
     {
-      "name": "icon"
+      "name": "wielded-inhand-left",
+      "directions": 4
     },
     {
       "name": "inhand-left",
       "directions": 4
     },
     {
-      "name": "wielded-inhand-left",
+      "name": "wielded-inhand-right",
       "directions": 4
     },
     {
@@ -26,7 +27,14 @@
       "directions": 4
     },
     {
-      "name": "wielded-inhand-right",
+      "name": "base"
+    },
+    {
+      "name": "equipped-BACKPACK",
+      "directions": 4
+    },
+    {
+      "name": "equipped-SUITSTORAGE",
       "directions": 4
     }
   ]

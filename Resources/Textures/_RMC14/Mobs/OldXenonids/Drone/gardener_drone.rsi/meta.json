@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/bb00705387c77af87cf86b948e6b34441c60300c/icons/mob/xenonids/drone.dmi, https://github.com/cmss13-devs/cmss13/blob/02ee6571eb4a9eef93237bf4725b59331d2fc226/icons/mob/xenos/drone_strain_overlays.dmi",
+  "size": {
+    "x": 48,
+    "y": 48
+  },
+  "states": [
+    {
+      "name": "alive",
+      "directions": 4
+    },
+    {
+      "name": "sleeping"
+    },
+    {
+      "name": "crit"
+    },
+    {
+      "name": "dead"
+    },
+    {
+      "name": "drone_walk_3",
+      "directions": 4
+    },
+    {
+      "name": "drone_walk_2",
+      "directions": 4
+    },
+    {
+      "name": "drone_walk_1",
+      "directions": 4
+    },
+    {
+      "name": "drone_walk_0",
+      "directions": 4
+    },
+    {
+      "name": "drone_rest_3"
+    },
+    {
+      "name": "drone_rest_2"
+    },
+    {
+      "name": "drone_rest_1"
+    },
+    {
+      "name": "drone_rest_0"
+    },
+    {
+      "name": "drone_downed_3"
+    },
+    {
+      "name": "drone_downed_2"
+    },
+    {
+      "name": "drone_downed_1"
+    },
+    {
+      "name": "drone_downed_0"
+    },
+    {
+      "name": "drone_dissection"
+    },
+    {
+      "name": "gardener_walk",
+      "directions": 4
+    },
+    {
+      "name": "gardener_rest"
+    },
+    {
+      "name": "gardener_downed"
+    },
+    {
+      "name": "gardener_dead"
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/9dd2c0d0a1c21e3c9bddbad1321c63fd886f61cf/icons/obj/structures/machinery/ares.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "processor",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "processor_off"
+    },
+    {
+      "name": "bio_processor",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "bio_processor_off"
+    },
+    {
+      "name": "apollo_processor",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "apollo_processor_off"
+    },
+    {
+      "name": "substrate",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "substrate_off"
+    },
+    {
+      "name": "console",
+      "directions": 4
+    },
+    {
+      "name": "cpu",
+      "delays": [
+        [
+          0.5,
+          0.2,
+          2
+        ]
+      ]
+    },
+    {
+      "name": "cpu_off"
+    },
+    {
+      "name": "int_processor",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "int_processor_off"
+    }
+  ]
+}

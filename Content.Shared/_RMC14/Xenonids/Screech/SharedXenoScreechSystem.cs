@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
 using Content.Shared.Examine;
@@ -19,14 +20,15 @@ public sealed class XenoScreechSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
 
+    private readonly HashSet<Entity<MarineComponent>> _marines = new();
+    private readonly HashSet<Entity<XenoParasiteComponent>> _parasites = new();
+
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<XenoScreechComponent, XenoScreechActionEvent>(OnXenoScreechAction);
     }
-
-    private readonly HashSet<Entity<MarineComponent>> _receivers = new();
 
     private void OnXenoScreechAction(Entity<XenoScreechComponent> xeno, ref XenoScreechActionEvent args)
     {
@@ -50,49 +52,45 @@ public sealed class XenoScreechSystem : EntitySystem
         if (_net.IsServer)
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
 
-        _receivers.Clear();
-        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.StunRange, _receivers);
+        _marines.Clear();
+        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.StunRange, _marines);
 
-        foreach (var receiver in _receivers)
+        foreach (var receiver in _marines)
         {
-            if (_mobState.IsDead(receiver))
-                continue;
-
-            if (!_examineSystem.InRangeUnOccluded(xeno.Owner, receiver.Owner))
-                continue;
-
-            if (TryComp(xeno, out XenoComponent? xenoComp) &&
-                TryComp(receiver, out XenoComponent? targetXeno) &&
-                xenoComp.Hive == targetXeno.Hive)
-            {
-                continue;
-            }
-
-            _stun.TryStun(receiver, xeno.Comp.StunTime, false);
+            Stun(xeno, receiver, xeno.Comp.StunTime, true);
         }
 
-        _receivers.Clear();
-        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.ParalyzeRange, _receivers);
+        _marines.Clear();
+        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.ParalyzeRange, _marines);
 
-        foreach (var receiver in _receivers)
+        foreach (var receiver in _marines)
         {
-            if (_mobState.IsDead(receiver))
-                continue;
+            Stun(xeno, receiver, xeno.Comp.ParalyzeTime, false);
+        }
 
-            if (!_examineSystem.InRangeUnOccluded(xeno.Owner, receiver.Owner))
-                continue;
+        _parasites.Clear();
+        _entityLookup.GetEntitiesInRange(xform.Coordinates, xeno.Comp.ParasiteStunRange, _parasites);
 
-            if (TryComp(xeno, out XenoComponent? xenoComp) &&
-                TryComp(receiver, out XenoComponent? targetXeno) &&
-                xenoComp.Hive == targetXeno.Hive)
-            {
-                continue;
-            }
-
-            _stun.TryParalyze(receiver, xeno.Comp.ParalyzeTime, true);
+        foreach (var receiver in _parasites)
+        {
+            Stun(xeno, receiver, xeno.Comp.ParasiteStunTime, true);
         }
 
         if (_net.IsServer)
             SpawnAttachedTo(xeno.Comp.Effect, xeno.Owner.ToCoordinates());
+    }
+
+    private void Stun(EntityUid xeno, EntityUid receiver, TimeSpan time, bool stun)
+    {
+        if (_mobState.IsDead(receiver))
+            return;
+
+        if (!_examineSystem.InRangeUnOccluded(xeno, receiver))
+            return;
+
+        if (stun)
+            _stun.TryStun(receiver, time, true);
+        else
+            _stun.TryParalyze(receiver, time, true);
     }
 }

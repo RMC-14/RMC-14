@@ -1,0 +1,133 @@
+# Corporate Liaison
+# TODO Add Clothing options as they become ported
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechWardrobeCorp
+  name: Corporate Liaison's Personal Wardrobe
+  description: A wardrobe containing all the clothes an executive would ever need.
+  suffix: Corp
+  components:
+  - type: AccessReader
+    access: [["RMCAccessWeYa"]] # TODO Add Access (Survivor, Trainee, All Executive & WeYa)
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/corp_wardrobe.rsi
+    layers:
+    - state: "base"
+      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded", "enum.VendingMachineVisualLayers.Base" ]
+  - type: CMAutomatedVendor
+    sections:
+    - name: Suits
+      entries:
+      - id: CMJumpsuitLiaisonBlack
+        amount: 1
+      - id: RMCJumpsuitLiaisonBlackSuitskirt
+        amount: 1
+      - id: CMJumpsuitLiaisonBlue
+        amount: 1
+      - id: CMJumpsuitLiaisonBrown
+        amount: 1
+      - id: CMJumpsuitLiaisonCorporateFormal
+        amount: 1
+      - id: CMJumpsuitLiaison
+        amount: 1
+      - id: CMJumpsuitLiaisonCharcoal
+        amount: 1
+      - id: RMCJumpsuitLiaisonCharcoalSuitskirt
+        amount: 1
+      - id: CMJumpsuitLiaisonFormal
+        amount: 1
+      - id: CMJumpsuitLiaisonBlazer
+        amount: 1
+      - id: CMJumpsuitLiaisonSuspenders
+        amount: 1
+#      - id: LiaisonsSkirt
+#      - id: TraineesUniform
+      - id: CMJumpsuitLiaisonIvy
+        amount: 1
+#      - id: OrangeOutfit
+      - id: CMJumpsuitLiaisonField
+        amount: 1
+      - id: RMCJumpsuitLiaisonFieldSuitskirt
+        amount: 1
+      - id: CMJumpsuitLiaisonOutingRed
+        amount: 1
+      - id: CMJumpsuitLiaisonOuting
+        amount: 1
+#      - id: PinkWorkwear
+#      - id: GreenWorkwear
+    - name: Coat
+      entries:
+      - id: RMCJacketCorporateBlack
+        amount: 1
+      - id: RMCJacketCorporateKhaki
+        amount: 1
+      - id: RMCJacketCorporateBrown
+        amount: 1
+      - id: RMCJacketCorporateBlue
+        amount: 1
+      - id: RMCJacketCorporateFormal
+        amount: 1
+#      - id: GreyBomberJacket
+#        amount: 1
+#      - id: RedBomberJacket
+#        amount: 1
+#      - id: KhakiBomberJacket
+#        amount: 1
+#      - id: BrownBomberJacket
+#        amount: 1
+#      - id: BlackBomberJacket
+#        amount: 1
+#      - id: LiaisonsWinterCoat
+#        amount: 1
+#      - id: Labcoat
+#        amount: 1
+#      - id: Grey Vest
+#        amount: 1
+#      - id: Brown Vest
+#        amount: 1
+#      - id: Tan Vest
+#        amount: 1
+#    - name: Ties
+#      entries:
+#      - id: BlackTie
+#      - id: RedTie
+#      - id: PurpleTie
+#      - id: BlueTie
+#      - id: GreenTie
+#      - id: GoldTie
+#      - id: SpecialTie
+    - name: Glasses
+      entries:
+      - id: RMCGlassesMarineRpg #Placeholder
+        amount: 1
+      - id: RMCGlassesMarineRpgOld #Placeholder
+        amount: 1
+      - id: RMCSunglassesBig
+        amount: 1
+      - id: RMCGlassesAviators
+        amount: 1
+      - id: RMCSunglasses
+        amount: 1
+#      - id: Prescription Sunglasses
+      - id: RMCHipsterGlasses
+        amount: 1
+    - name: Gloves
+      entries:
+      - id: CMHandsBrown #Placeholder
+        amount: 1
+#      - id: BlackGloves
+#      - id: DressGloves
+    - name: Shoes
+      entries:
+      - id: RMCShoesLaceup
+        amount: 1
+      - id: RMCShoesLaceupBrown
+        amount: 1
+      - id: RMCShoesBlack
+        amount: 1
+#      - id: CorporateBoots
+#    - name: Hats
+#      entries:
+#      - id: BlackBeret
+#      - id: WhiteBeret
+#      - id: Fedora

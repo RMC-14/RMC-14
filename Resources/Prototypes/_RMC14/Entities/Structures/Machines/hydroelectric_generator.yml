@@ -1,0 +1,12 @@
+- type: entity
+  parent: CMBaseStructure
+  id: RMCHydroElectricGenerator
+  name: Hydro Electric Generator
+  description: A high-power hydroelectric generator.
+  components:
+  - type: Sprite
+    drawdepth: Objects
+    sprite: _RMC14/Structures/Machines/hydro_tray.rsi
+    state: hydro_tray
+  - type: Corrodible
+    isCorrodible: false

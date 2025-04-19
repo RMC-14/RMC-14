@@ -1,4 +1,5 @@
-﻿using Content.Shared.Mobs;
+﻿using System.Numerics;
+using Content.Shared.Mobs;
 using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -21,7 +22,9 @@ public enum OverwatchConsoleUI
 }
 
 [Serializable, NetSerializable]
-public sealed class OverwatchConsoleBuiState(List<OverwatchSquad> squads, Dictionary<NetEntity, List<OverwatchMarine>> marines) : BoundUserInterfaceState
+public sealed class OverwatchConsoleBuiState(
+    List<OverwatchSquad> squads,
+    Dictionary<NetEntity, List<OverwatchMarine>> marines) : BoundUserInterfaceState
 {
     public readonly List<OverwatchSquad> Squads = squads;
     public readonly Dictionary<NetEntity, List<OverwatchMarine>> Marines = marines;
@@ -32,6 +35,9 @@ public sealed class OverwatchConsoleSelectSquadBuiMsg(NetEntity squad) : BoundUs
 {
     public readonly NetEntity Squad = squad;
 }
+
+[Serializable, NetSerializable]
+public sealed class OverwatchViewTacticalMapBuiMsg : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
 public sealed class OverwatchConsoleTakeOperatorBuiMsg : BoundUserInterfaceMessage;
@@ -58,6 +64,9 @@ public sealed class OverwatchConsoleShowHiddenBuiMsg(bool show) : BoundUserInter
 }
 
 [Serializable, NetSerializable]
+public sealed class OverwatchConsoleTransferMarineBuiMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
 public sealed class OverwatchConsoleWatchBuiMsg(NetEntity target) : BoundUserInterfaceMessage
 {
     public readonly NetEntity Target = target;
@@ -71,16 +80,88 @@ public sealed class OverwatchConsoleHideBuiMsg(NetEntity target, bool hide) : Bo
 }
 
 [Serializable, NetSerializable]
-public readonly record struct OverwatchSquad(NetEntity Id, string Name, Color Color);
+public sealed class OverwatchConsolePromoteLeaderBuiMsg(NetEntity target) : BoundUserInterfaceMessage
+{
+    public readonly NetEntity Target = target;
+}
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleSupplyDropLongitudeBuiMsg(int longitude) : BoundUserInterfaceMessage
+{
+    public readonly int Longitude = longitude;
+}
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleSupplyDropLatitudeBuiMsg(int latitude) : BoundUserInterfaceMessage
+{
+    public readonly int Latitude = latitude;
+}
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleSupplyDropLaunchBuiMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleSupplyDropSaveBuiMsg(int longitude, int latitude) : BoundUserInterfaceMessage
+{
+    public readonly int Longitude = longitude;
+    public readonly int Latitude = latitude;
+}
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleLocationCommentBuiMsg(int index, string comment) : BoundUserInterfaceMessage
+{
+    public readonly int Index = index;
+    public readonly string Comment = comment;
+}
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleOrbitalLongitudeBuiMsg(int longitude) : BoundUserInterfaceMessage
+{
+    public readonly int Longitude = longitude;
+}
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleOrbitalLatitudeBuiMsg(int latitude) : BoundUserInterfaceMessage
+{
+    public readonly int Latitude = latitude;
+}
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleOrbitalLaunchBuiMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleOrbitalSaveBuiMsg(int longitude, int latitude) : BoundUserInterfaceMessage
+{
+    public readonly int Longitude = longitude;
+    public readonly int Latitude = latitude;
+}
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleOrbitalCommentBuiMsg(int index, string comment) : BoundUserInterfaceMessage
+{
+    public readonly int Index = index;
+    public readonly string Comment = comment;
+}
+
+[Serializable, NetSerializable]
+public sealed class OverwatchConsoleSendMessageBuiMsg(string message) : BoundUserInterfaceMessage
+{
+    public readonly string Message = message;
+}
+
+[Serializable, NetSerializable]
+public record struct OverwatchSquad(NetEntity Id, string Name, Color Color, NetEntity? Leader, bool CanSupplyDrop);
 
 [Serializable, NetSerializable]
 public readonly record struct OverwatchMarine(
-    NetEntity Marine,
+    NetEntity Id,
     NetEntity Camera,
     string Name,
     MobState State,
     bool SSD,
     ProtoId<JobPrototype>? Role,
     bool Deployed,
-    OverwatchLocation Location
+    OverwatchLocation Location,
+    string AreaName,
+    Vector2? LeaderDistance
 );

@@ -1,20 +1,27 @@
 ﻿using System.Numerics;
+using System.Runtime.InteropServices;
 using Content.Server.Administration.Logs;
 using Content.Server.Cargo.Components;
 using Content.Server.Chat.Systems;
 using Content.Server.Storage.EntitySystems;
 using Content.Shared._RMC14.CCVar;
-using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Requisitions;
 using Content.Shared._RMC14.Requisitions.Components;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Chasm;
+using Content.Shared.Coordinates;
 using Content.Shared.Database;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Random.Helpers;
 using Content.Shared.UserInterface;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using static Content.Shared._RMC14.Requisitions.Components.RequisitionsElevatorMode;
 
@@ -24,29 +31,38 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
 {
     [Dependency] private readonly IAdminLogManager _adminLogs = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private readonly ChasmSystem _chasm = default!;
+    [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly EntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly PhysicsSystem _physics = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ChatSystem _chatSystem = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     private static readonly EntProtoId AccountId = "RMCASRSAccount";
-    private const string PaperRequisitionInvoice = "RMCPaperRequisitionInvoice";
+    private static readonly EntProtoId PaperRequisitionInvoice = "RMCPaperRequisitionInvoice";
+    private static readonly EntProtoId<IFFFactionComponent> MarineFaction = "FactionMarine";
 
-    private int _starting;
+    private EntityQuery<ChasmComponent> _chasmQuery;
+    private EntityQuery<ChasmFallingComponent> _chasmFallingQuery;
     private int _gain;
+    private int _freeCratesXenoDivider;
+
+    private readonly HashSet<Entity<MobStateComponent>> _toPit = new();
 
     public override void Initialize()
     {
         base.Initialize();
 
+        _chasmQuery = GetEntityQuery<ChasmComponent>();
+        _chasmFallingQuery = GetEntityQuery<ChasmFallingComponent>();
+
         SubscribeLocalEvent<RequisitionsComputerComponent, MapInitEvent>(OnComputerMapInit);
         SubscribeLocalEvent<RequisitionsComputerComponent, BeforeActivatableUIOpenEvent>(OnComputerBeforeActivatableUIOpen);
-
-        SubscribeLocalEvent<RequisitionsElevatorComponent, EntityUnpausedEvent>(OnElevatorUnpaused);
 
         Subs.BuiEvents<RequisitionsComputerComponent>(RequisitionsUIKey.Key, subs =>
         {
@@ -54,20 +70,14 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
             subs.Event<RequisitionsPlatformMsg>(OnPlatform);
         });
 
-        Subs.CVar(_config, RMCCVars.RMCRequisitionsStartingBalance, v => _starting = v, true);
         Subs.CVar(_config, RMCCVars.RMCRequisitionsBalanceGain, v => _gain = v, true);
+        Subs.CVar(_config, RMCCVars.RMCRequisitionsFreeCratesXenoDivider, v => _freeCratesXenoDivider = v, true);
     }
 
     private void OnComputerMapInit(Entity<RequisitionsComputerComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.Account = GetAccount();
         Dirty(ent);
-    }
-
-    private void OnElevatorUnpaused(Entity<RequisitionsElevatorComponent> ent, ref EntityUnpausedEvent args)
-    {
-        if (ent.Comp.ToggledAt is { } at)
-            ent.Comp.ToggledAt = at + args.PausedTime;
     }
 
     private void OnComputerBeforeActivatableUIOpen(Entity<RequisitionsComputerComponent> computer, ref BeforeActivatableUIOpenEvent args)
@@ -168,71 +178,6 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         return (newAccount, newAccountComp);
     }
 
-    private Entity<RequisitionsElevatorComponent>? GetElevator(Entity<RequisitionsComputerComponent> computer)
-    {
-        var elevators = new List<Entity<RequisitionsElevatorComponent, TransformComponent>>();
-        var query = EntityQueryEnumerator<RequisitionsElevatorComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out var elevator, out var xform))
-        {
-            elevators.Add((uid, elevator, xform));
-        }
-
-        if (elevators.Count == 0)
-            return null;
-
-        if (elevators.Count == 1)
-            return elevators[0];
-
-        var computerCoords = _transform.GetMapCoordinates(computer);
-        Entity<RequisitionsElevatorComponent>? closest = null;
-        var closestDistance = float.MaxValue;
-        foreach (var (uid, elevator, xform) in elevators)
-        {
-            var elevatorCoords = _transform.GetMapCoordinates(uid, xform);
-            if (computerCoords.MapId != elevatorCoords.MapId)
-                continue;
-
-            var distance = (elevatorCoords.Position - computerCoords.Position).LengthSquared();
-            if (closestDistance > distance)
-            {
-                closestDistance = distance;
-                closest = (uid, elevator);
-            }
-        }
-
-        if (closest == null)
-            return elevators[0];
-
-        return closest;
-    }
-
-    private bool IsFull(Entity<RequisitionsElevatorComponent> elevator)
-    {
-        var side = elevator.Comp.Radius * 2 + 1;
-        return elevator.Comp.Orders.Count >= side * side;
-    }
-
-    private void SendUIState(Entity<RequisitionsComputerComponent> computer)
-    {
-        var elevator = GetElevator(computer);
-        var mode = elevator?.Comp.NextMode ?? elevator?.Comp.Mode;
-        var busy = elevator?.Comp.Busy ?? false;
-        var balance = CompOrNull<RequisitionsAccountComponent>(computer.Comp.Account)?.Balance ?? 0;
-        var full = elevator != null && IsFull(elevator.Value);
-
-        var state = new RequisitionsBuiState(mode, busy, balance, full);
-        _ui.SetUiState(computer.Owner, RequisitionsUIKey.Key, state);
-    }
-
-    private void SendUIStateAll()
-    {
-        var query = EntityQueryEnumerator<RequisitionsComputerComponent>();
-        while (query.MoveNext(out var uid, out var computer))
-        {
-            SendUIState((uid, computer));
-        }
-    }
-
     private void UpdateRailings(Entity<RequisitionsElevatorComponent> elevator, RequisitionsRailingMode mode)
     {
         var coordinates = _transform.GetMapCoordinates(elevator);
@@ -284,7 +229,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
     private void SetUILastInteracted(Entity<RequisitionsComputerComponent> computerEnt)
     {
         var query = EntityQueryEnumerator<RequisitionsComputerComponent>();
-        while (query.MoveNext(out var uid, out var otherComputer))
+        while (query.MoveNext(out _, out var otherComputer))
         {
             otherComputer.IsLastInteracted = false;
         }
@@ -336,8 +281,6 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         if (gearMode != null)
             UpdateGears(elevator, gearMode.Value);
 
-        Console.WriteLine(mode);
-        Console.WriteLine(nextMode);
         RequisitionsRailingMode? railingMode = (mode, nextMode) switch
         {
             (Lowered, _) => RequisitionsRailingMode.Raised,
@@ -360,9 +303,11 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
             var coordinates = _transform.GetMoverCoordinates(elevator);
             var xOffset = comp.Radius;
             var yOffset = comp.Radius;
+            int remainingDeliveries = GetElevatorCapacity(elevator);
             foreach (var order in comp.Orders)
             {
                 var crate = SpawnAtPosition(order.Crate, coordinates.Offset(new Vector2(xOffset, yOffset)));
+                remainingDeliveries--;
 
                 foreach (var prototype in order.Entities)
                 {
@@ -384,6 +329,34 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
             }
 
             comp.Orders.Clear();
+
+            var query = EntityQueryEnumerator<RequisitionsCustomDeliveryComponent>();
+
+            while (query.MoveNext(out var entityUid, out _))
+            {
+                // If elevator is full, abort and break out of the loop. Any remaining custom deliveries will be on
+                // the next elevator shipment.
+                if (remainingDeliveries <= 0)
+                    break;
+
+                // Remove the component so it doesn't get "delivered" again next elevator cycle.
+                RemCompDeferred<RequisitionsCustomDeliveryComponent>(entityUid);
+
+                // Teleport to the spot.
+                _transform.SetCoordinates(entityUid, coordinates.Offset(new Vector2(xOffset, yOffset)));
+                remainingDeliveries--; // Decrement available delivery slots count.
+
+                // Update the next spot to teleport to.
+                yOffset--;
+                if (yOffset < -comp.Radius)
+                {
+                    yOffset = comp.Radius;
+                    xOffset--;
+                }
+
+                if (xOffset < -comp.Radius)
+                    xOffset = comp.Radius;
+            }
         }
     }
 
@@ -392,8 +365,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         var account = GetAccount();
         var entities = _lookup.GetEntitiesIntersecting(elevator);
         var soldAny = false;
-        var bureaucraticRewards = 0;
-        var logisticRecycleRewards = 0;
+        var rewards = 0;
         foreach (var entity in entities)
         {
             if (entity == elevator.Comp.Audio)
@@ -402,27 +374,48 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
             if (HasComp<CargoSellBlacklistComponent>(entity))
                 continue;
 
-            bureaucraticRewards += SubmitInvoices(entity);
+            rewards += SubmitInvoices(entity);
 
             if (TryComp(entity, out RequisitionsCrateComponent? crate))
             {
-                logisticRecycleRewards += crate.Reward;
+                rewards += crate.Reward;
                 soldAny = true;
             }
 
             QueueDel(entity);
         }
 
-        if (bureaucraticRewards > 0)
-            SendUIFeedback(Loc.GetString("requisition-paperwork-reward-message", ("amount", bureaucraticRewards)));
+        if (rewards > 0)
+            SendUIFeedback(Loc.GetString("requisition-paperwork-reward-message", ("amount", rewards)));
 
-        account.Comp.Balance += bureaucraticRewards;
-        account.Comp.Balance += logisticRecycleRewards;
+        account.Comp.Balance += rewards;
 
         if (soldAny)
             Dirty(account);
 
         return soldAny;
+    }
+
+    private void GetCrateWeight(Entity<RequisitionsAccountComponent> account, Dictionary<EntProtoId, float> crates, out Entity<RequisitionsComputerComponent> computer)
+    {
+        // TODO RMC14 price scaling
+        computer = default;
+        var computers = EntityQueryEnumerator<RequisitionsComputerComponent>();
+        while (computers.MoveNext(out var uid, out var comp))
+        {
+            if (comp.Account != account)
+                continue;
+
+            computer = (uid, comp);
+            foreach (var category in comp.Categories)
+            {
+                foreach (var entry in category.Entries)
+                {
+                    if (crates.ContainsKey(entry.Crate))
+                        crates[entry.Crate] = 10000f / entry.Cost;
+                }
+            }
+        }
     }
 
     public override void Update(float frameTime)
@@ -434,16 +427,6 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         var accounts = EntityQueryEnumerator<RequisitionsAccountComponent>();
         while (accounts.MoveNext(out var uid, out var account))
         {
-            if (!account.Started)
-            {
-                account.Started = true;
-                var marines = Count<MarineComponent>();
-                account.Balance = _starting + marines * account.StartingDollarsPerMarine;
-                Dirty(uid, account);
-
-                updateUI = true;
-            }
-
             if (time > account.NextGain)
             {
                 account.NextGain = time + account.GainEvery;
@@ -452,78 +435,165 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
 
                 updateUI = true;
             }
+
+            var xenos = _xeno.GetGroundXenosAlive();
+            var randomCrates = CollectionsMarshal.AsSpan(account.RandomCrates);
+            foreach (ref var pool in randomCrates)
+            {
+                if (pool.Next == default)
+                    pool.Next = time + pool.Every;
+
+                if (pool.Next >= time)
+                    continue;
+
+                var crates = Math.Max(0, Math.Sqrt((float) xenos / _freeCratesXenoDivider));
+
+                if (crates < pool.Minimum && pool.Given < pool.MinimumFor)
+                    crates = pool.Minimum;
+
+                pool.Next = time + pool.Every;
+                pool.Given++;
+                pool.Fraction = crates - (int) crates;
+
+                if (pool.Fraction >= 1)
+                {
+                    var add = (int) pool.Fraction;
+                    pool.Fraction = pool.Fraction - add;
+                    crates += add;
+                }
+
+                if (crates < 1)
+                    continue;
+
+                var crateCosts = new Dictionary<EntProtoId, float>();
+                foreach (var choice in pool.Choices)
+                {
+                    crateCosts[choice] = 0;
+                }
+
+                if (crateCosts.Count == 0)
+                    continue;
+
+                GetCrateWeight((uid, account), crateCosts, out var computer);
+                if (computer == default)
+                    continue;
+
+                if (GetElevator(computer) is not { } elevator)
+                    continue;
+
+                for (var i = 0; i < crates; i++)
+                {
+                    var crate = _random.Pick(crateCosts);
+                    elevator.Comp.Orders.Add(new RequisitionsEntry { Crate = crate });
+                }
+            }
         }
 
         var elevators = EntityQueryEnumerator<RequisitionsElevatorComponent>();
         while (elevators.MoveNext(out var uid, out var elevator))
         {
-            if (time > elevator.ToggledAt + elevator.ToggleDelay)
-            {
-                elevator.ToggledAt = null;
-                elevator.Busy = false;
-                Dirty(uid, elevator);
-                SendUIStateAll();
-                continue;
-            }
+            if (ProcessElevator((uid, elevator)))
+                updateUI = true;
 
-            if (elevator.ToggledAt == null)
+            if (!_chasmQuery.TryComp(uid, out var chasm))
                 continue;
 
-            TryPlayAudio((uid, elevator));
-
-            var delay = elevator.NextMode == Raising ? elevator.RaiseDelay : elevator.LowerDelay;
-            if (elevator.Mode == Preparing &&
-                elevator.NextMode != null &&
-                time > elevator.ToggledAt + delay)
-            {
-                SetMode((uid, elevator), elevator.NextMode.Value, null);
+            if (time < elevator.NextChasmCheck)
                 continue;
-            }
 
-            if (elevator.Mode == Lowering || elevator.Mode == Raising)
+            elevator.NextChasmCheck = time + elevator.ChasmCheckEvery;
+
+            if (_net.IsClient)
+                continue;
+
+            if (elevator.Mode != Raised && elevator.Mode != Preparing)
             {
-                var startDelay = delay + elevator.NextMode switch
+                _toPit.Clear();
+                _lookup.GetEntitiesInRange(uid.ToCoordinates(), elevator.Radius + 0.25f, _toPit);
+
+                foreach (var toPit in _toPit)
                 {
-                    Lowering => elevator.LowerDelay,
-                    Raising => elevator.RaiseDelay,
-                    _ => TimeSpan.Zero
-                };
+                    if (_chasmFallingQuery.HasComp(toPit))
+                        continue;
 
-                var moveDelay= startDelay + elevator.Mode switch
-                {
-                    Lowering => elevator.LowerDelay,
-                    Raising => elevator.RaiseDelay,
-                    _ => TimeSpan.Zero
-                };
-
-                if (time > elevator.ToggledAt + moveDelay)
-                {
-                    elevator.Audio = null;
-
-                    var mode = elevator.Mode switch
-                    {
-                        Raising => Raised,
-                        Lowering => Lowered,
-                        _ => elevator.Mode
-                    };
-                    SetMode((uid, elevator), mode, elevator.NextMode);
-
-                    SpawnOrders((uid, elevator));
-
-                    updateUI = true;
-                    continue;
-                }
-
-                if (elevator.Mode == Lowering &&
-                    time > elevator.ToggledAt + delay)
-                {
-                    if (Sell((uid, elevator)))
-                        updateUI = true;
+                    _chasm.StartFalling(uid, chasm, toPit);
+                    _audio.PlayEntity(chasm.FallingSound, toPit, uid);
                 }
             }
         }
 
         if (updateUI)
             SendUIStateAll();
+    }
+
+    private bool ProcessElevator(Entity<RequisitionsElevatorComponent> ent)
+    {
+        var time = _timing.CurTime;
+        var elevator = ent.Comp;
+        if (time > elevator.ToggledAt + elevator.ToggleDelay)
+        {
+            elevator.ToggledAt = null;
+            elevator.Busy = false;
+            Dirty(ent);
+            SendUIStateAll();
+            return false;
+        }
+
+        if (elevator.ToggledAt == null)
+            return false;
+
+        TryPlayAudio(ent);
+
+        var delay = elevator.NextMode == Raising ? elevator.RaiseDelay : elevator.LowerDelay;
+        if (elevator.Mode == Preparing &&
+            elevator.NextMode != null &&
+            time > elevator.ToggledAt + delay)
+        {
+            SetMode(ent, elevator.NextMode.Value, null);
+            return false;
+        }
+
+        if (elevator.Mode != Lowering && elevator.Mode != Raising)
+            return false;
+
+        var startDelay = delay + elevator.NextMode switch
+        {
+            Lowering => elevator.LowerDelay,
+            Raising => elevator.RaiseDelay,
+            _ => TimeSpan.Zero,
+        };
+
+        var moveDelay = startDelay + elevator.Mode switch
+        {
+            Lowering => elevator.LowerDelay,
+            Raising => elevator.RaiseDelay,
+            _ => TimeSpan.Zero,
+        };
+
+        if (time > elevator.ToggledAt + moveDelay)
+        {
+            elevator.Audio = null;
+
+            var mode = elevator.Mode switch
+            {
+                Raising => Raised,
+                Lowering => Lowered,
+                _ => elevator.Mode,
+            };
+            SetMode(ent, mode, elevator.NextMode);
+
+            SpawnOrders(ent);
+
+            return true;
+        }
+
+        if (elevator.Mode == Lowering &&
+            time > elevator.ToggledAt + delay)
+        {
+            if (Sell(ent))
+                return true;
+        }
+
+        return false;
     }
 }

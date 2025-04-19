@@ -67,6 +67,7 @@
     amount: 0.25
   - !type:PlantAdjustWater
     amount: 0.7
+  intensity: 0.2
 
 - type: reagent
   id: BaseJuice

@@ -28,6 +28,10 @@
     size: Normal
     sprite: _RMC14/Objects/Materials/Sheets/glass.rsi
   - type: Appearance
+  - type: Tag
+    tags:
+    - Sheet
+    - RMCGlass
 
 - type: entity
   parent: CMSheetGlassBase

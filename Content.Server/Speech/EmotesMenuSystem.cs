@@ -1,4 +1,5 @@
-﻿using Content.Server.Chat.Systems;
+﻿using Content.Server._RMC14.Emote;
+using Content.Server.Chat.Systems;
 using Content.Shared.Chat;
 using Robust.Shared.Prototypes;
 
@@ -8,6 +9,7 @@ public sealed partial class EmotesMenuSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private readonly RMCEmoteSystem _rmcEmote = default!;
 
     public override void Initialize()
     {
@@ -23,6 +25,9 @@ public sealed partial class EmotesMenuSystem : EntitySystem
             return;
 
         if (!_prototypeManager.TryIndex(msg.ProtoId, out var proto) || proto.ChatTriggers.Count == 0)
+            return;
+
+        if (!_rmcEmote.TryEmote(player.Value))
             return;
 
         _chat.TryEmoteWithChat(player.Value, msg.ProtoId);

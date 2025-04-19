@@ -1,0 +1,22 @@
+- type: randomHumanoidSettings
+  id: RMCCorpse
+  components:
+  - type: RandomHumanoidAppearance
+  - type: Damageable
+    damage:
+      types:
+        Bloodloss: 36
+        Asphyxiation: 44
+        Slash: 77
+        Blunt: 43
+#  - type: Loadout # it seems that cm-ss13 doesnt use this loadout
+#    prototypes: [ RMCGearCorpse ]
+
+- type: startingGear
+  id: RMCGearCorpse
+  equipment:
+    jumpsuit: CMJumpsuitColonist
+    back: CMSatchel
+    id: CMIDCardColonist
+    ears: CMHeadsetColony
+# TODO RMC14 random equipment and weapon

@@ -1,8 +1,10 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
   id: CMXenoRavager
   name: Ravager
   description: A huge, nasty red alien with enormous scythed claws.
@@ -28,13 +30,15 @@
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
-    #    - ActionXenoCharge
-    #    - ActionXenoEmpower
-    #    - ActionXenoScissorCut
+    - ActionXenoAssault
+    - ActionXenoEmpower
+    - ActionXenoScissorCut
     - ActionXenoDevolve
     tier: 3
     hudOffset: 0,0.1
     unlockAt: 900 # 15 minutes
+    standHealingMultiplier: 0.66
+  - type: XenoHeavy
   - type: XenoDevolve
     devolvesTo:
     - CMXenoLurker
@@ -44,17 +48,24 @@
     maxPlasma: 300
     plasmaRegenOnWeeds: 5
   - type: CMArmor
-    armor: 25
+    xenoArmor: 25
     explosionArmor: 80
+  - type: XenoClaws
+    clawType: VerySharp
   - type: MeleeWeapon
     attackRate: 1.05
     damage:
       groups:
         Brute: 45
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 54
   - type: Tackle
-    threshold: 4
-    stun: 9
+    max: 5
     chance: 0.35
+    stunMin: 4
+    stunMax: 5
   - type: Flammable
     damage:
       types:
@@ -68,6 +79,7 @@
         density: 185
         mask:
         - MobMask
+        - BarbedBarricade
         layer:
         - MobLayer
       fix2:
@@ -80,5 +92,56 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
-#  - type: RMCXenoDamageVisuals # TODO RMC14
-#    prefix: ravager
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.6125
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.6675
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.445
+      whitelist:
+        components:
+        - XenoHeavy
+  - type: RMCSize
+    size: Big
+  - type: RMCXenoDamageVisuals
+    prefix: ravager
+  - type: RMCFireArmorDebuffModifier
+    debuffModifier: 1.2
+  - type: PlasmaFrenzy
+  - type: RMCImmuneToFireTileDamage
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: ravager
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.7
+  - type: TantrumSpeedBuff
+  - type: XenoShield
+  - type: XenoLeap
+    delay: 0
+    knockdownTime: 0
+    range: 5
+    moveDelayTime: 0
+    plasmaCost: 25
+    leapSound: /Audio/_RMC14/Xeno/alien_pounce.ogg
+    destroyObjects: true
+  - type: XenoCruelty
+  - type: XenoEmpower
+    damageIncreasePer:
+      groups:
+        Brute: 2
+    damageTailIncreasePer:
+      groups:
+        Brute: 2.4
+    leapDamage:
+      groups:
+        Brute: 45
+  - type: XenoScissorCut
+    damage:
+      types:
+        Slash: 40

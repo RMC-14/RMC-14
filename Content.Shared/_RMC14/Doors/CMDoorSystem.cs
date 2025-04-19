@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Access.Systems;
 using Content.Shared.Directions;
@@ -7,6 +7,7 @@ using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Content.Shared.Prying.Components;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Map.Enumerators;
 using Robust.Shared.Network;
@@ -22,7 +23,7 @@ public sealed class CMDoorSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private EntityQuery<DoorComponent> _doorQuery;
@@ -37,6 +38,8 @@ public sealed class CMDoorSystem : EntitySystem
         SubscribeLocalEvent<CMDoubleDoorComponent, DoorStateChangedEvent>(OnDoorStateChanged);
 
         SubscribeLocalEvent<RMCDoorButtonComponent, ActivateInWorldEvent>(OnButtonActivateInWorld);
+
+        SubscribeLocalEvent<RMCPodDoorComponent, BeforePryEvent>(OnPodDoorBeforePry);
     }
 
     private void OnDoorStateChanged(Entity<CMDoubleDoorComponent> door, ref DoorStateChangedEvent args)
@@ -70,11 +73,11 @@ public sealed class CMDoorSystem : EntitySystem
             return;
 
         button.Comp.LastUse = time;
-        var buttonName = Name(button);
+        var buttonName = button.Comp.Id ?? Name(button);
         var buttonTransform = Transform(button);
 
         var doors = EntityQueryEnumerator<RMCPodDoorComponent, DoorComponent, TransformComponent, MetaDataComponent>();
-        while (doors.MoveNext(out var door, out _, out var doorComp, out var doorTransform, out var metaData))
+        while (doors.MoveNext(out var door, out var podDoor, out var doorComp, out var doorTransform, out var metaData))
         {
             if (TerminatingOrDeleted(door))
                 continue;
@@ -82,7 +85,8 @@ public sealed class CMDoorSystem : EntitySystem
             if (buttonTransform.MapID != doorTransform.MapID)
                 continue;
 
-            if (buttonName != metaData.EntityName)
+            var id = podDoor.Id ?? metaData.EntityName;
+            if (buttonName != id)
                 continue;
 
             if (doorComp.State == DoorState.Open)
@@ -95,8 +99,24 @@ public sealed class CMDoorSystem : EntitySystem
             }
         }
 
+        var selfMsg = Loc.GetString("rmc-door-button-pressed-self", ("button", button));
+        var othersMsg = Loc.GetString("rmc-door-button-pressed-others", ("user", user), ("button", button));
+        _popup.PopupPredicted(selfMsg, othersMsg, user, user);
+
         if (_net.IsServer)
             RaiseNetworkEvent(new RMCPodDoorButtonPressedEvent(GetNetEntity(button)), Filter.PvsExcept(button));
+    }
+
+    private void OnPodDoorBeforePry(Entity<RMCPodDoorComponent> ent, ref BeforePryEvent args)
+    {
+        if (TryComp(ent, out DoorComponent? door) && door.State != DoorState.Closed)
+        {
+            args.Cancelled = true;
+            return;
+        }
+
+        if (_rmcPower.IsPowered(ent))
+            args.Cancelled = true;
     }
 
     private AnchoredEntitiesEnumerator? GetAdjacentEnumerator(Entity<CMDoubleDoorComponent> ent)
@@ -143,6 +163,7 @@ public sealed class CMDoorSystem : EntitySystem
 
                 var sound = door.OpenSound;
                 door.OpenSound = null;
+                door.Partial = false;
                 _doors.StartOpening(anchored.Value, door);
                 door.OpenSound = sound;
             }
@@ -172,6 +193,7 @@ public sealed class CMDoorSystem : EntitySystem
 
                 var sound = door.CloseSound;
                 door.CloseSound = null;
+                door.Partial = false;
                 _doors.StartClosing(anchored.Value, door);
                 door.CloseSound = sound;
             }

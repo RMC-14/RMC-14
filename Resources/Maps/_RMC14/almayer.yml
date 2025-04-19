@@ -1,6 +1,6 @@
-# This file is a duplicate of the Savannah. The actual Almayer map file is currently considered private content by RMC14, along with the map file for LV624.
+# This file is a duplicate of the Savannah. The actual Almayer map file is currently considered private content by RMC14.
 # This file is to serve as a solution for a test fail that would result from the lack of its existence otherwise.
-# If you wish for this file, or LV624, to be public you may recreate them yourself and PR it to the repo.
+# If you wish for this file to be public you may recreate them yourself and PR it to the repo.
 meta:
   format: 6
   postmapinit: false
@@ -7051,7 +7051,7 @@ entities:
     - type: Transform
       pos: 27.5,-4.5
       parent: 1
-- proto: CMCigarettePackLuckySloths
+- proto: RMCCigarettePackLuckySloths
   entities:
   - uid: 7980
     components:
@@ -7953,7 +7953,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: -28.5,0.5
       parent: 1
-- proto: CMHandcuffs
+- proto: RMCHandcuffs
   entities:
   - uid: 7853
     components:

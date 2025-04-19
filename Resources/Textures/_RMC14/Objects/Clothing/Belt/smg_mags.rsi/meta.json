@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/168c8a79a3d858a8c531ff7ed0bc3033e47d1d16/icons/obj/items/clothing/belts.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "weapon"
+    },
+    {
+      "name": "half"
+    },
+    {
+      "name": "full"
+    },
+    {
+      "name": "m63"
+    },
+    {
+      "name": "d_m63"
+    },
+    {
+      "name": "s_m63"
+    }
+  ]
+}

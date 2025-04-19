@@ -1,8 +1,10 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
   id: CMXenoCrusher
   name: Crusher
   description: A huge alien with an enormous armored crest.
@@ -33,8 +35,10 @@
     - ActionXenoDefensiveShield
     - ActionXenoDevolve
     tier: 3
-    hudOffset: 0,0.375
+    hudOffset: -0.15,0.1
     unlockAt: 900 # 15 minutes
+    standHealingMultiplier: 0.66
+  - type: XenoHeavy
   - type: XenoDevolve
     devolvesTo:
     - CMXenoWarrior
@@ -43,6 +47,7 @@
     damage:
       types:
         Blunt: 65
+    selfEffect: CMEffectSelfStomp
   - type: XenoCharge
     damage:
       types:
@@ -54,20 +59,52 @@
     maxPlasma: 400
     plasmaRegenOnWeeds: 4
   - type: CMArmor
-    armor: 30
+    xenoArmor: 30
     explosionArmor: 100
+  - type: XenoClaws
+    clawType: VerySharp
   - type: MeleeWeapon
     damage:
       groups:
         Brute: 40
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 48
   - type: CrusherShield
   - type: XenoShield
+  - type: XenoMeleeSlow
+    slowTime: 2
   - type: Tackle
-    threshold: 5
-    stun: 5
     chance: 0.25
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.66
     baseSprintSpeed: 3
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.68
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.755
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.5275
+      whitelist:
+        components:
+        - XenoHeavy
+  - type: XenoBrutalize
+  - type: RMCSize
+    size: Immobile
   - type: RMCXenoDamageVisuals
     prefix: crusher
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: crusher
+  - type: StunOnExplosionReceived
+    weak: false
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.7
+  - type: TantrumSpeedBuff

@@ -1,7 +1,7 @@
 ﻿- type: entity
   id: RMCSmokeAcid
   name: acid gas
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Transform
     anchored: true
@@ -14,16 +14,16 @@
           !type:PhysShapeAabb
           bounds: "-0.4,-0.4,0.4,0.4"
         mask:
-        - ItemMask
+        - MobMask
         layer:
-        - SlipLayer
+        - MidImpassable
   - type: Occluder
   - type: Sprite
     sprite: _RMC14/Effects/smoke.rsi
     state: smoke2
     color: "#62821D"
   - type: TimedDespawn
-    lifetime: 10
+    lifetime: 12
   - type: Tag
     tags:
     - HideContextMenu
@@ -33,27 +33,152 @@
     id: RMCSmokeAcid
   - type: EvenSmoke
     spawn: RMCSmokeAcid
-    range: 2
+    range: 3
   - type: DamageOverTime
-    damage:
-      groups:
-        Burn: 20
+    affectsDead: false
+    affectsInfectedNested: false
+    armorPiercingDamage:
       types:
+        Heat: 20
         Asphyxiation: 3
+    damage:
+      types:
+        Heat: 35
     barricadeDamage:
       types:
-        Heat: 11.5
+        Heat: 8.5
+    whitelist:
+      components:
+      - Marine
+  - type: DeleteOnExplosion # so this is supposed to be random depending on the explosion severity but uhhh hahAHAHA help
+
+- type: entity
+  id: RMCSmokeNeurotoxin
+  name: neurotoxin gas
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        mask:
+        - MobMask
+        layer:
+        - MidImpassable
+  - type: Occluder
+  - type: Sprite
+    sprite: _RMC14/Effects/smoke.rsi
+    state: smoke2
+    color: "#FFBF58"
+  - type: TimedDespawn
+    lifetime: 12
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: Appearance
+  - type: ActiveEdgeSpreader
+  - type: EdgeSpreader
+    id: RMCSmokeNeurotoxin
+  - type: EvenSmoke
+    spawn: RMCSmokeNeurotoxin
+    range: 4
+  - type: NeurotoxinInjector
+    neuroPerSecond: 6
+    affectsDead: false
+    affectsInfectedNested: false
+    toxinDamage:
+        groups:
+          Toxin: 2
+    oxygenDamage:
+        types:
+          Asphyxiation: 150
+    coughDamage:
+        groups:
+          Brute: 5
+  - type: DamageOverTime
+    affectsDead: false
+    affectsInfectedNested: false
+    damage:
+      types:
+        Asphyxiation: 5
+    whitelist:
+      components:
+      - Marine
+  - type: DeleteOnExplosion
+  
+- type: entity
+  id: RMCSmokeRunner
+  name: acid smoke
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        hard: false
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        mask:
+        - MobMask
+        layer:
+        - MidImpassable
+  - type: Occluder
+  - type: Sprite
+    sprite: _RMC14/Effects/smoke.rsi
+    state: smoke2
+    color: "#86B028"
+  - type: TimedDespawn
+    lifetime: 2
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: Appearance
+  - type: DeleteOnExplosion
+
 
 - type: entity
   parent: RMCSmokeAcid
   id: RMCSmokeAcidShroud
   name: acid gas
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: EvenSmoke
     spawn: RMCSmokeAcidShroud
     range: 1
 
+- type: entity
+  parent: RMCSmokeNeurotoxin
+  id: RMCSmokeNeurotoxinShroud
+  name: neurotoxin gas
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EvenSmoke
+    spawn: RMCSmokeNeurotoxinShroud
+    range: 1
+
+- type: entity
+  parent: RMCSmokeAcid
+  id: RMCSmokeAcidDeathcloud
+  name: acid gas
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: EvenSmoke
+    spawn: RMCSmokeAcidDeathcloud
+    range: 2
+
 - type: edgeSpreader
   id: RMCSmokeAcid
+  updatesPerSecond: 2
+
+- type: edgeSpreader
+  id: RMCSmokeNeurotoxin
   updatesPerSecond: 2

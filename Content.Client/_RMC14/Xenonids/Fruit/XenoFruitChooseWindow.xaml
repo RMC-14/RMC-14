@@ -1,0 +1,12 @@
+﻿<cc:XenoFruitChooseWindow
+    xmlns="https://spacestation14.io"
+    xmlns:cc="clr-namespace:Content.Client._RMC14.Xenonids.Fruit"
+    Title="{Loc rmc-xeno-fruit-ui-title}"
+    MinSize="300 300">
+    <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
+        <BoxContainer Orientation="Vertical">
+            <Label Name="FruitCountLabel" Access="Public" Text="" />
+            <BoxContainer Orientation="Vertical" Name="FruitContainer" Access="Public" />
+        </BoxContainer>
+    </ScrollContainer>
+</cc:XenoFruitChooseWindow>

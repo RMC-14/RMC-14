@@ -1,5 +1,5 @@
-﻿- type: entity
-  parent: RMCBaseWindowFrame
+- type: entity
+  parent: RMCWindowFrameColonyReinforced
   id: RMCWindowFrameCorsatReinforced
   components:
   - type: Sprite
@@ -62,6 +62,30 @@
           - !type:ChangeConstructionNodeBehavior
             node: windowFrameCorsatReinforced
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: Construction
     graph: RMCWindowCorsatReinforced
     node: windowCorsatReinforced
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameColonyReinforced
+    sound:
+      collection: WindowShatter
+
+- type: entity
+  parent: CMBaseWindow
+  id: RMCWindowCorsatResearchHull
+  name: hull window
+  description: A glass window. Something tells you this one is somehow indestructible.
+  components:
+  - type: Corrodible
+    isCorrodible: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/corsat_rwindow_r.rsi
+    state: paddedresearch_rwindow0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/corsat_rwindow_r.rsi
+    state: paddedresearch_rwindow0
+  - type: IconSmooth
+    key: walls
+    base: paddedresearch_rwindow
+    mode: CardinalFlags

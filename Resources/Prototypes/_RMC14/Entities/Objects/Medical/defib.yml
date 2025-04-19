@@ -21,7 +21,8 @@
           False: { visible: false }
   - type: Item
     size: Normal
-    sprite: Objects/Specific/Medical/defib.rsi
+    sprite: _RMC14/Objects/Medical/defib.rsi
+    heldPrefix: defib
   - type: Speech
     speechVerb: Robotic
   - type: ItemToggle
@@ -30,6 +31,7 @@
     soundDeactivate:
       path: /Audio/_RMC14/Medical/defib_safetyOff.ogg
   - type: Defibrillator
+    zapDelay: 0
     doAfterDuration: 6.25
     allowDoAfterMovement: false
     canDefibCrit: false
@@ -38,8 +40,8 @@
     - Burn: -12
     - Toxin: -12
     zapHeal:
-      types:
-        Asphyxiation: -200
+      groups:
+        Airloss: -400
     zapSound:
       path: /Audio/_RMC14/Medical/defib_release.ogg
       params:
@@ -74,11 +76,13 @@
 
 - type: entity
   id: CMDefibrillator
-  parent: [CMBaseDefibrillator, RMCPowerCellSlot]
+  parent: [CMBaseDefibrillator, RMCPowerCellSlotUnremovable]
   suffix: RMC14
   components:
   - type: PowerCellDraw
-    useRate: 100
+    enabled: false
+    useRate: 66
+  - type: RMCPowerUsageDisplay
 
 - type: entity
   id: CMDefibrillatorEmpty

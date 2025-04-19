@@ -18,13 +18,16 @@
   - type: Speech
     speechSounds: Lizard
     speechVerb: Reptilian
+    allowedEmotes: ['Thump']
+  - type: BodyEmotes
+    soundsId: ReptilianBodyEmotes
   - type: TypingIndicator
     proto: lizard
   - type: Vocal
     sounds:
-      Male: MaleReptilian
-      Female: FemaleReptilian
-      Unsexed: MaleReptilian
+      Male: RMCMaleReptilian
+      Female: RMCFemaleReptilian
+      Unsexed: RMCUnisexReptilian
   - type: Wagging
   - type: MeleeWeapon
     soundHit:

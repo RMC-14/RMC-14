@@ -1,0 +1,118 @@
+﻿- type: entity
+  parent: [StorageTank, StructureWheeled]
+  id: RMCTankReagentEmpty
+  name: reagent tank
+  description: A reagent tank, typically used to store large quantities of chemicals.
+  suffix: Empty
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/reagent_tank.rsi
+    layers:
+    - state: tank_normal
+    - state: tn_color-1
+    - state: tn_color-1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+    - state: t_inactive
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 155
+        mask:
+        - MachineMask
+        layer:
+        - MobMask
+        - BulletImpassable
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Appearance
+  - type: SolutionContainerVisuals
+    maxFillLevels: 2
+    fillBaseName: tn_color-
+  - type: DetailedExaminableSolution
+    solution: tank
+  - type: RMCToggleableSolutionTransfer
+    solution: tank
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 1000
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
+  - type: Tag
+    tags:
+    - RMCTankReagent
+    - Structure
+
+- type: entity
+  parent: RMCTankReagentEmpty
+  id: RMCTankReagentWater
+  suffix: Water
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        reagents:
+        - ReagentId: Water
+          Quantity: 1000
+  - type: Label
+    currentLabel: reagent-name-water
+
+- type: entity
+  parent: RMCTankReagentEmpty
+  id: RMCTankReagentFuel
+  name: fuel tank
+  description: A fuel tank, normally used to hold welding fuel. It's painted red with explosive warning labels.
+  suffix: Fuel
+  components:
+  - type: Sprite
+    layers:
+    - state: weldtank
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 1000
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 60
+  - type: ReagentTank
+    tankType: Fuel
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:SolutionExplosionBehavior
+        solution: tank
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DamageOnToolInteract
+    tools: Welding
+    weldingDamage:
+      types:
+        Heat: 100
+  - type: Label
+    currentLabel: reagent-name-welding-fuel
+  - type: Tag
+    tags:
+    - RMCTankFuel
+    - RMCTankReagent
+
+- type: Tag
+  id: RMCTankFuel
+
+- type: Tag
+  id: RMCTankReagent

@@ -19,13 +19,14 @@
   - type: PaperLabelType
   - type: ActivatableUI
     key: enum.PaperUiKey.Key
-    requireHands: false
+    requiresComplex: false
   - type: UserInterface
     interfaces:
       enum.PaperUiKey.Key:
         type: PaperBoundUserInterface
   - type: Item
     size: Tiny
+    heldPrefix: paper
   - type: Tag
     tags:
     - Document
@@ -34,10 +35,11 @@
   - type: Appearance
   - type: PaperVisuals
   - type: Flammable
+    intensity: 10
     fireSpread: true
     canResistFire: false
     alwaysCombustible: true
-    canExtinguish: false # Mwahaha! Let the world burn because of one piece of paper!
+    canExtinguish: true # Mwahaha! Let the world burn because of one piece of paper!
     damage:
       types:
         Heat: 1
@@ -78,6 +80,10 @@
   - type: EmitSoundOnLand
     sound:
       path: /Audio/_RMC14/Handling/paper_drop.ogg
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 - type: entity
   abstract: true

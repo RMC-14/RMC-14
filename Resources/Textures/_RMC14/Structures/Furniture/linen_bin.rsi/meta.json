@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from CM-SS13 at commit https://github.com/cmss13-devs/cmss13/blob/5a2359bab582e18b3b432539733be04204148a5e/icons/obj/structures/structures.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "linenbin_full"
+    },
+    {
+      "name": "linenbin_half"
+    },
+    {
+      "name": "linenbin_empty"
+    }
+  ]
+}

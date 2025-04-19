@@ -14,6 +14,7 @@ using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Physics.Components;
@@ -34,6 +35,7 @@ public sealed partial class ClimbSystem : VirtualController
     [Dependency] private readonly FixtureSystem _fixtureSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfterSystem = default!;
+    [Dependency] private readonly SharedContainerSystem _containers = default!;
     [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
@@ -149,6 +151,10 @@ public sealed partial class ClimbSystem : VirtualController
         if (args.Handled)
             return;
 
+        // If already climbing then don't show outlines.
+        if (TryComp(args.Dragged, out ClimbingComponent? climbing) && climbing.IsClimbing)
+            return;
+
         var canVault = args.User == args.Dragged
             ? CanVault(component, args.User, uid, out _)
             : CanVault(component, args.User, args.Dragged, uid, out _);
@@ -246,6 +252,18 @@ public sealed partial class ClimbSystem : VirtualController
             return;
 
         if (!Resolve(climbable, ref comp, false))
+            return;
+
+        var selfEvent = new SelfBeforeClimbEvent(uid, user, (climbable, comp));
+        RaiseLocalEvent(uid, selfEvent);
+
+        if (selfEvent.Cancelled)
+            return;
+
+        var targetEvent = new TargetBeforeClimbEvent(uid, user, (climbable, comp));
+        RaiseLocalEvent(climbable, targetEvent);
+
+        if (targetEvent.Cancelled)
             return;
 
         if (!ReplaceFixtures(uid, climbing, fixtures))
@@ -355,34 +373,26 @@ public sealed partial class ClimbSystem : VirtualController
             return;
         }
 
-        if (args.OurFixture.Contacts.Count > 1)
+        foreach (var contact in args.OurFixture.Contacts.Values)
         {
-            foreach (var contact in args.OurFixture.Contacts.Values)
+            if (!contact.IsTouching)
+                continue;
+
+            var otherEnt = contact.OtherEnt(uid);
+            var (otherFixtureId, otherFixture) = contact.OtherFixture(uid);
+
+            // TODO: Remove this on engine.
+            if (args.OtherEntity == otherEnt && args.OtherFixtureId == otherFixtureId)
+                continue;
+
+            if (otherFixture is { Hard: true } &&
+                _climbableQuery.HasComp(otherEnt))
             {
-                if (!contact.IsTouching)
-                    continue;
-
-                var otherEnt = contact.EntityA;
-                var otherFixture = contact.FixtureA;
-                var otherFixtureId = contact.FixtureAId;
-                if (uid == contact.EntityA)
-                {
-                    otherEnt = contact.EntityB;
-                    otherFixture = contact.FixtureB;
-                    otherFixtureId = contact.FixtureBId;
-                }
-
-                if (args.OtherEntity == otherEnt && args.OtherFixtureId == otherFixtureId)
-                    continue;
-
-                if (otherFixture is { Hard: true } &&
-                    _climbableQuery.HasComp(otherEnt))
-                {
-                    return;
-                }
+                return;
             }
         }
 
+        // TODO: Is this even needed anymore?
         foreach (var otherFixture in args.OurFixture.Contacts.Keys)
         {
             // If it's the other fixture then ignore em
@@ -449,6 +459,12 @@ public sealed partial class ClimbSystem : VirtualController
             return false;
         }
 
+        if (_containers.IsEntityInContainer(user))
+        {
+            reason = Loc.GetString("comp-climbable-cant-reach");
+            return false;
+        }
+
         reason = string.Empty;
         return true;
     }
@@ -481,6 +497,12 @@ public sealed partial class ClimbSystem : VirtualController
 
         if (!_interactionSystem.InRangeUnobstructed(user, target, component.Range, predicate: Ignored)
             || !_interactionSystem.InRangeUnobstructed(user, dragged, component.Range, predicate: Ignored))
+        {
+            reason = Loc.GetString("comp-climbable-cant-reach");
+            return false;
+        }
+
+        if (_containers.IsEntityInContainer(user) || _containers.IsEntityInContainer(dragged))
         {
             reason = Loc.GetString("comp-climbable-cant-reach");
             return false;

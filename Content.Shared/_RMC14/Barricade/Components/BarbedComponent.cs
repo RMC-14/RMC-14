@@ -28,6 +28,9 @@ public sealed partial class BarbedComponent : Component
 
     [DataField]
     public TimeSpan CutTime = TimeSpan.FromSeconds(1);
+
+    [DataField]
+    public string FixtureId = "fix1";
 }
 
 [NetSerializable, Serializable]

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/311e8f06c0eae7c6a0ab71ba04943c93c55850eb/icons/obj/items/chemistry.dmi, https://github.com/cmss13-devs/cmss13/blob/ca94d2e8715b73103fa9f213be53d343359b4107/icons/obj/items/reagentfillings.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/311e8f06c0eae7c6a0ab71ba04943c93c55850eb/icons/obj/items/chemistry.dmi, https://github.com/cmss13-devs/cmss13/blob/ca94d2e8715b73103fa9f213be53d343359b4107/icons/obj/items/reagentfillings.dmi, https://github.com/cmss13-devs/cmss13/blob/8d3eabd2575fcb859ab4320a298cdbc185910f6f/icons/mob/humans/onmob/inhands/items/bottles_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/8d3eabd2575fcb859ab4320a298cdbc185910f6f/icons/mob/humans/onmob/inhands/items/bottles_lefthand.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -90,6 +90,38 @@
     },
     {
       "name": "bottle-4-5"
+    },
+    {
+      "name": "1-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "1-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "2-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "2-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "3-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "3-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "4-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "4-inhand-right",
+      "directions": 4
     }
   ]
 }

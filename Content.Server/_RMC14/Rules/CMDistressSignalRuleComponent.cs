@@ -1,8 +1,10 @@
 ﻿using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared.Radio;
 using Content.Shared.Roles;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Rules;
 
@@ -14,10 +16,10 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public List<EntProtoId> SquadIds = ["SquadAlpha", "SquadBravo", "SquadCharlie", "SquadDelta"];
 
     [DataField]
-    public Dictionary<EntProtoId, EntityUid> Squads = new();
+    public List<EntProtoId> ExtraSquadIds = ["SquadIntel"];
 
     [DataField]
-    public Dictionary<ProtoId<JobPrototype>, int> NextSquad = new();
+    public Dictionary<EntProtoId, EntityUid> Squads = new();
 
     [DataField]
     public EntityUid XenoMap;
@@ -47,6 +49,9 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     [DataField]
     public EntProtoId<IFFFactionComponent> MarineFaction = "FactionMarine";
 
+    [DataField]
+    public EntProtoId<IFFFactionComponent> SurvivorFaction = "FactionSurvivor";
+
     [DataField, AutoPausedField]
     public TimeSpan? QueenDiedCheck;
 
@@ -54,7 +59,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public TimeSpan QueenDiedDelay = TimeSpan.FromMinutes(10);
 
     [DataField]
-    public DistressSignalRuleResult Result;
+    public DistressSignalRuleResult? Result;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan? NextCheck;
@@ -62,10 +67,10 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     [DataField]
     public TimeSpan CheckEvery = TimeSpan.FromSeconds(5);
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public TimeSpan? AbandonedAt;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public TimeSpan AbandonedDelay = TimeSpan.FromMinutes(5);
 
     [DataField]
@@ -74,19 +79,83 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     [DataField]
     public bool HijackSongPlayed;
 
+    [DataField]
+    public SoundSpecifier MajorMarineAudio = new SoundCollectionSpecifier("RMCMarineMajor");
+
+    [DataField]
+    public SoundSpecifier MinorMarineAudio = new SoundCollectionSpecifier("RMCMarineMinor");
+
+    [DataField]
+    public SoundSpecifier MajorXenoAudio = new SoundCollectionSpecifier("RMCXenoMajor");
+
+    [DataField]
+    public SoundSpecifier MinorXenoAudio = new SoundCollectionSpecifier("RMCXenoMinor");
+
     // TODO RMC14
     // [DataField]
-    // public SoundSpecifier MajorMarineAudio = new SoundCollectionSpecifier("CMMarineMajor");
-    //
-    // [DataField]
-    // public SoundSpecifier MinorMarineAudio = new SoundCollectionSpecifier("CMMarineMinor");
-    //
-    // [DataField]
-    // public SoundSpecifier MajorXenoAudio = new SoundCollectionSpecifier("CMXenoMajor");
-    //
-    // [DataField]
-    // public SoundSpecifier MinorXenoAudio = new SoundCollectionSpecifier("CMXenoMinor");
-    //
-    // [DataField]
     // public SoundSpecifier AllDiedAudio = new SoundCollectionSpecifier("CMAllDied");
+
+    [DataField]
+    public EntProtoId? LandingZoneGas = "RMCLandingZoneGas";
+
+    [DataField]
+    public ProtoId<JobPrototype> CivilianSurvivorJob = "CMSurvivor";
+
+    [DataField]
+    public List<(ProtoId<JobPrototype> Job, int Amount)> SurvivorJobs =
+    [
+        ("CMSurvivorEngineer", 4),
+        ("CMSurvivorDoctor", 3),
+        ("CMSurvivorSecurity", 2),
+        ("CMSurvivorCorporate", 2),
+        ("CMSurvivor", -1),
+    ];
+
+    [DataField]
+    public TimeSpan AresGreetingDelay = TimeSpan.FromSeconds(5);
+
+    [DataField]
+    public SoundSpecifier AresGreetingAudio = new SoundPathSpecifier("/Audio/_RMC14/Announcements/ARES/ares_online.ogg");
+
+    [DataField]
+    public bool AresGreetingDone;
+
+    [DataField]
+    public TimeSpan AresMapDelay = TimeSpan.FromSeconds(20);
+
+    [DataField]
+    public bool AresMapDone;
+
+    [DataField]
+    public TimeSpan? StartTime;
+
+    [DataField]
+    public bool ScalingDone;
+
+    [DataField]
+    public double Scale = 1;
+
+    [DataField]
+    public double MaxScale = 1;
+
+    [DataField]
+    public TimeSpan? EndAtAllClear;
+
+    [DataField]
+    public TimeSpan AllClearEndDelay = TimeSpan.FromMinutes(3);
+
+    [DataField]
+    public ProtoId<RadioChannelPrototype> AllClearChannel = "MarineCommand";
+
+    [DataField]
+    public TimeSpan RoundEndCheckDelay = TimeSpan.FromMinutes(1);
+
+    [DataField]
+    public ResPath Thunderdome = new("/Maps/_RMC14/thunderdome.yml");
+
+    [DataField]
+    public ProtoId<JobPrototype> XenoSurvivorCorpseJob = "CMSurvivor";
+
+    [DataField]
+    public TimeSpan XenoSurvivorCorpseBurstDelay = TimeSpan.FromSeconds(0);
 }

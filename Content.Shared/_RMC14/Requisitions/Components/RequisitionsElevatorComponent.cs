@@ -5,7 +5,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Requisitions.Components;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
 [Access(typeof(SharedRequisitionsSystem))]
 public sealed partial class RequisitionsElevatorComponent : Component
 {
@@ -38,7 +38,7 @@ public sealed partial class RequisitionsElevatorComponent : Component
 
     public EntityUid? Audio;
 
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan? ToggledAt;
 
     [DataField]
@@ -65,12 +65,18 @@ public sealed partial class RequisitionsElevatorComponent : Component
     public object? LoweringAnimation;
 
     public object? RaisingAnimation;
+
+    [DataField]
+    public TimeSpan ChasmCheckEvery = TimeSpan.FromSeconds(0.5);
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    public TimeSpan NextChasmCheck;
 }
 
 [Serializable, NetSerializable]
 public enum RequisitionsElevatorLayers
 {
-    Base
+    Base,
 }
 
 [Serializable, NetSerializable]
@@ -80,5 +86,5 @@ public enum RequisitionsElevatorMode
     Raised,
     Lowering,
     Raising,
-    Preparing
+    Preparing,
 }

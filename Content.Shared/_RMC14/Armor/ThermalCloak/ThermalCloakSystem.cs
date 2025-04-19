@@ -1,21 +1,29 @@
 using Content.Shared._RMC14.Chemistry;
-using Content.Shared._RMC14.Stealth;
-using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared._RMC14.NightVision;
+using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared._RMC14.Xenonids.Devour;
+using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.Actions;
-using Content.Shared.Whitelist;
+using Content.Shared.Coordinates;
+using Content.Shared.Explosion.Components;
+using Content.Shared.Explosion.Components.OnTrigger;
+using Content.Shared.Explosion.EntitySystems;
+using Content.Shared.Humanoid;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Mobs;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
-using Content.Shared.Interaction.Events;
-using Content.Shared.Explosion.Components.OnTrigger;
-using Robust.Shared.Timing;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Armor.ThermalCloak;
 
@@ -25,10 +33,13 @@ namespace Content.Shared._RMC14.Armor.ThermalCloak;
 public sealed class ThermalCloakSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedHumanoidAppearanceSystem _humanoidSystem = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     public override void Initialize()
     {
@@ -40,9 +51,12 @@ public sealed class ThermalCloakSystem : EntitySystem
         SubscribeLocalEvent<ThermalCloakComponent, GotUnequippedEvent>(OnUnequipped);
 
         SubscribeLocalEvent<EntityActiveInvisibleComponent, VaporHitEvent>(OnVaporHit);
+        SubscribeLocalEvent<EntityActiveInvisibleComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<EntityActiveInvisibleComponent, XenoDevouredEvent>(OnDevour);
+        SubscribeLocalEvent<EntityActiveInvisibleComponent, XenoParasiteInfectEvent>(OnParasiteInfect);
 
         SubscribeLocalEvent<GunComponent, AttemptShootEvent>(OnAttemptShoot);
-        SubscribeLocalEvent<ExplodeOnTriggerComponent, UseInHandEvent>(OnTimerUse);
+        SubscribeLocalEvent<CancelUseWithCloakComponent, UseInHandEvent>(OnTimerUse, before: [typeof(SharedTriggerSystem)]);
         SubscribeLocalEvent<UncloakOnHitComponent, ProjectileHitEvent>(OnAcidProjectile);
     }
 
@@ -76,6 +90,9 @@ public sealed class ThermalCloakSystem : EntitySystem
 
     private void OnEquipped(Entity<ThermalCloakComponent> ent, ref GotEquippedEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (!_inventory.InSlotWithFlags((ent, null, null), SlotFlags.BACK))
             return;
 
@@ -87,6 +104,9 @@ public sealed class ThermalCloakSystem : EntitySystem
 
     private void OnUnequipped(Entity<ThermalCloakComponent> ent, ref GotUnequippedEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (_inventory.InSlotWithFlags((ent, null, null), SlotFlags.BACK))
             return;
 
@@ -103,6 +123,7 @@ public sealed class ThermalCloakSystem : EntitySystem
         {
             var activeInvisibility = EnsureComp<EntityActiveInvisibleComponent>(user);
             activeInvisibility.Opacity = ent.Comp.Opacity;
+            Dirty(user, activeInvisibility);
 
             ent.Comp.Enabled = true;
             turnInvisible.Enabled = true;
@@ -121,9 +142,15 @@ public sealed class ThermalCloakSystem : EntitySystem
 
             turnInvisible.UncloakTime = _timing.CurTime; // Just in case
 
+            ToggleLayers(user, ent.Comp.CloakedHideLayers, false);
+            SpawnCloakEffects(user, ent.Comp.CloakEffect);
+
             var popupOthers = Loc.GetString("rmc-cloak-activate-others", ("user", user));
             _popup.PopupPredicted(Loc.GetString("rmc-cloak-activate-self"), popupOthers, user, user, PopupType.Medium);
-            _audio.PlayPvs(ent.Comp.CloakSound, user);
+
+            if (_net.IsServer)
+                _audio.PlayPvs(ent.Comp.CloakSound, user);
+
             return;
         }
 
@@ -162,22 +189,27 @@ public sealed class ThermalCloakSystem : EntitySystem
                 _popup.PopupPredicted(Loc.GetString("rmc-cloak-deactivate-self"), popupOthers, user, user, PopupType.Medium);
             }
 
+            ToggleLayers(user, ent.Comp.CloakedHideLayers, true);
+            SpawnCloakEffects(user, ent.Comp.UncloakEffect);
+
             if (ent.Comp.HideNightVision)
-               EnsureComp<RMCNightVisionVisibleComponent>(user);
+                EnsureComp<RMCNightVisionVisibleComponent>(user);
 
             if (ent.Comp.BlockFriendlyFire)
                 RemCompDeferred<EntityIFFComponent>(user);
 
             RemCompDeferred<EntityActiveInvisibleComponent>(user);
-            _audio.PlayPvs(ent.Comp.UncloakSound, user);
+
+            if (_net.IsServer)
+                _audio.PlayPvs(ent.Comp.UncloakSound, user);
         }
     }
 
     public void TrySetInvisibility(EntityUid uid, bool enabling, bool forced, ThermalCloakComponent? component = null)
     {
         var cloak = FindWornCloak(uid);
-        if(cloak.HasValue)
-            SetInvisibility(cloak.Value, uid, false, true);
+        if (cloak.HasValue)
+            SetInvisibility(cloak.Value, uid, enabling, forced);
     }
 
     private void OnAttemptShoot(Entity<GunComponent> ent, ref AttemptShootEvent args)
@@ -194,7 +226,7 @@ public sealed class ThermalCloakSystem : EntitySystem
         }
     }
 
-    private void OnTimerUse(Entity<ExplodeOnTriggerComponent> ent, ref UseInHandEvent args)
+    private void OnTimerUse(Entity<CancelUseWithCloakComponent> ent, ref UseInHandEvent args)
     {
         if (args.Handled || !TryComp<EntityTurnInvisibleComponent>(args.User, out var comp))
             return;
@@ -203,14 +235,9 @@ public sealed class ThermalCloakSystem : EntitySystem
         {
             args.Handled = true;
 
-            var popup = Loc.GetString("rmc-cloak-attempt-prime");
+            var popup = Loc.GetString(ent.Comp.CancelMessage);
             _popup.PopupClient(popup, args.User, args.User, PopupType.SmallCaution);
         }
-    }
-
-    private void OnVaporHit(Entity<EntityActiveInvisibleComponent> ent, ref VaporHitEvent args)
-    {
-        TrySetInvisibility(ent.Owner, false, true);
     }
 
     private void OnAcidProjectile(Entity<UncloakOnHitComponent> ent, ref ProjectileHitEvent args)
@@ -218,7 +245,30 @@ public sealed class ThermalCloakSystem : EntitySystem
         TrySetInvisibility(args.Target, false, true);
     }
 
-    private Entity<ThermalCloakComponent>? FindWornCloak(EntityUid player)
+    private void OnVaporHit(Entity<EntityActiveInvisibleComponent> ent, ref VaporHitEvent args)
+    {
+        TrySetInvisibility(ent.Owner, false, true);
+    }
+
+    private void OnMobStateChanged(Entity<EntityActiveInvisibleComponent> ent, ref MobStateChangedEvent args)
+    {
+        if (args.NewMobState != MobState.Dead)
+            return;
+
+        TrySetInvisibility(ent.Owner, false, true);
+    }
+
+    private void OnDevour(Entity<EntityActiveInvisibleComponent> ent, ref XenoDevouredEvent args)
+    {
+        TrySetInvisibility(ent.Owner, false, true);
+    }
+
+    private void OnParasiteInfect(Entity<EntityActiveInvisibleComponent> ent, ref XenoParasiteInfectEvent args)
+    {
+        TrySetInvisibility(ent.Owner, false, true);
+    }
+
+    public Entity<ThermalCloakComponent>? FindWornCloak(EntityUid player)
     {
         var slots = _inventory.GetSlotEnumerator(player, SlotFlags.BACK);
         while (slots.MoveNext(out var slot))
@@ -228,5 +278,24 @@ public sealed class ThermalCloakSystem : EntitySystem
         }
 
         return null;
+    }
+
+    private void ToggleLayers(EntityUid equipee, HashSet<HumanoidVisualLayers> layers, bool showLayers)
+    {
+        foreach (HumanoidVisualLayers layer in layers)
+        {
+            _humanoidSystem.SetLayerVisibility(equipee, layer, showLayers);
+        }
+    }
+
+    public void SpawnCloakEffects(EntityUid user, EntProtoId cloakProtoId)
+    {
+        if (_net.IsClient)
+            return;
+
+        var coordinates = _transform.GetMapCoordinates(user);
+        var rotation = _transform.GetWorldRotation(user);
+
+        Spawn(cloakProtoId, coordinates, rotation: rotation);
     }
 }

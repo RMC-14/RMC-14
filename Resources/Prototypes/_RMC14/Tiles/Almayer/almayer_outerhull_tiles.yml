@@ -1,0 +1,46 @@
+﻿- type: tile
+  parent: CMTileBase
+  id: CMFloorOuterHull
+  name: tiles-rmc-outer-hull
+  sprite: /Textures/_RMC14/Tiles/almayer/outerhull.png
+
+- type: tile
+  parent: CMTileBase
+  id: CMFloorOuterHullSouth
+  name: tiles-rmc-outer-hull
+  sprite: /Textures/_RMC14/Tiles/almayer/outerhull_dir_0.png
+
+- type: tile
+  parent: CMFloorOuterHull
+  id: CMFloorOuterHullEast
+  sprite: /Textures/_RMC14/Tiles/almayer/outerhull_dir_2.png
+
+- type: tile
+  parent: CMFloorOuterHull
+  id: CMFloorOuterHullNorth
+  sprite: /Textures/_RMC14/Tiles/almayer/outerhull_dir_1.png
+
+- type: tile
+  parent: CMFloorOuterHull
+  id: CMFloorOuterHullWest
+  sprite: /Textures/_RMC14/Tiles/almayer/outerhull_dir_3.png
+
+- type: tile
+  parent: CMFloorOuterHull
+  id: CMFloorOuterHullNorthEast
+  sprite: /Textures/_RMC14/Tiles/almayer/outerhull_dir_6.png
+
+- type: tile
+  parent: CMFloorOuterHull
+  id: CMFloorOuterHullNorthWest
+  sprite: /Textures/_RMC14/Tiles/almayer/outerhull_dir_7.png
+
+- type: tile
+  parent: CMFloorOuterHull
+  id: CMFloorOuterHullSouthEast
+  sprite: /Textures/_RMC14/Tiles/almayer/outerhull_dir_4.png
+
+- type: tile
+  parent: CMFloorOuterHull
+  id: CMFloorOuterHullSouthWest
+  sprite: /Textures/_RMC14/Tiles/almayer/outerhull_dir_5.png

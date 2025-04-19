@@ -3,5 +3,5 @@
 namespace Content.Shared._RMC14.Pulling;
 
 [RegisterComponent, NetworkedComponent]
-[Access(typeof(CMPullingSystem))]
+[Access(typeof(RMCPullingSystem))]
 public sealed partial class BlockPullingDeadActiveComponent : Component;

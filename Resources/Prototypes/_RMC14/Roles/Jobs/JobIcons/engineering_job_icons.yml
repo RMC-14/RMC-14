@@ -1,20 +1,20 @@
-- type: statusIcon
+- type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconChiefEngineer
   icon:
-    sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_ce
 
-- type: statusIcon
+- type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconOrdnanceTech
   icon:
-    sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_ot
 
-- type: statusIcon
+- type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconMaintTech
   icon:
-    sprite: /Textures/_RMC14/Interface/cm_job_icons.rsi
+    sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_mt

@@ -1,27 +1,39 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/9eae4bfbf06bf2007f7ffeb5ac77028fe712ff1a/icons/mob/xenonids/larva.dmi, embryo sprite by Vermidia",
+  "copyright": "Sprites by @aleksh and @.sigma_draconis.",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
-      "name": "alive",
-      "directions": 4
+      "name": "dead"
+    },
+    {
+      "name": "embryo"
+    },
+    {
+      "name": "larva_downed_0"
+    },
+    {
+      "name": "larva_downed_1"
+    },
+    {
+      "name": "larva_downed_2"
+    },
+    {
+      "name": "larva_downed_3"
     },
     {
       "name": "sleeping"
     },
     {
+      "name": "alive",
+      "directions": 4
+    },
+    {
       "name": "crit"
-    },
-    {
-      "name": "dead"
-    },
-    {
-      "name": "embryo"
     }
   ]
 }

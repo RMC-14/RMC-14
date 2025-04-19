@@ -1,4 +1,4 @@
-﻿#nullable enable
+#nullable enable
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Presets;
 using Content.Shared.CCVar;
@@ -9,6 +9,7 @@ using Robust.Shared.GameObjects;
 namespace Content.IntegrationTests.Tests.GameRules;
 
 [TestFixture]
+[Ignore("Nukeops is not enabled in RMC14")]
 public sealed class FailAndStartPresetTest
 {
     [TestPrototypes]
@@ -36,7 +37,7 @@ public sealed class FailAndStartPresetTest
 - type: entity
   id: TestRule
   parent: BaseGameRule
-  noSpawn: true
+  categories: [ GameRules ]
   components:
   - type: GameRule
     minPlayers: 0
@@ -45,7 +46,7 @@ public sealed class FailAndStartPresetTest
 - type: entity
   id: TestRuleTenPlayers
   parent: BaseGameRule
-  noSpawn: true
+  categories: [ GameRules ]
   components:
   - type: GameRule
     minPlayers: 10
@@ -73,8 +74,8 @@ public sealed class FailAndStartPresetTest
         server.System<TestRuleSystem>().Run = true;
 
         Assert.That(server.CfgMan.GetCVar(CCVars.GridFill), Is.False);
-        Assert.That(server.CfgMan.GetCVar(CCVars.GameLobbyFallbackEnabled), Is.False);
-        Assert.That(server.CfgMan.GetCVar(CCVars.GameLobbyDefaultPreset), Is.EqualTo("CMDistressSignal"));
+        Assert.That(server.CfgMan.GetCVar(CCVars.GameLobbyFallbackEnabled), Is.True);
+        Assert.That(server.CfgMan.GetCVar(CCVars.GameLobbyDefaultPreset), Is.EqualTo("secret"));
         server.CfgMan.SetCVar(CCVars.GridFill, true);
         server.CfgMan.SetCVar(CCVars.GameLobbyFallbackEnabled, false);
         server.CfgMan.SetCVar(CCVars.GameLobbyDefaultPreset, "TestPreset");
@@ -112,8 +113,8 @@ public sealed class FailAndStartPresetTest
 
         ticker.SetGamePreset((GamePresetPrototype?) null);
         server.CfgMan.SetCVar(CCVars.GridFill, false);
-        server.CfgMan.SetCVar(CCVars.GameLobbyFallbackEnabled, false);
-        server.CfgMan.SetCVar(CCVars.GameLobbyDefaultPreset, "CMDistressSignal");
+        server.CfgMan.SetCVar(CCVars.GameLobbyFallbackEnabled, true);
+        server.CfgMan.SetCVar(CCVars.GameLobbyDefaultPreset, "secret");
         server.System<TestRuleSystem>().Run = false;
         await pair.CleanReturnAsync();
     }

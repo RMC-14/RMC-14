@@ -1,7 +1,5 @@
 ﻿- type: entity
-  parent:
-  - RMCAreaBase
-  - RMCAreaGlass
+  parent: RMCAreaBase
   id: RMCAreaFiorina
   name: Fiorina Orbital Penitentiary - Science Annex
   suffix: Fiorina Area
@@ -11,42 +9,71 @@
     state: fiorina
   - type: Area
     buildSpecial: true
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
     minimapColor: '#6C6767D8'
+    weatherEnabled: false
 
 - type: entity
-  parent:
-  - RMCAreaFiorina
-  - RMCAreaMax
+  parent: RMCAreaFiorina
   id: RMCAreaFiorinaOob
   name: Fiorina - Out Of Bounds
   components:
   - type: Sprite
     state: oob
   - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
     resinAllowed: false
-    avoidBioscan: False
-    noTunnel: True
-    unweedable: False
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: true
 
 - type: entity
-  parent:
-  - RMCAreaFiorina
-  - RMCAreaProtectionMetal
+  parent: RMCAreaFiorina
   id: RMCAreaFiorinaMaintenance
   name: Fiorina - Maintenance
   components:
   - type: Sprite
     state: maints
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
 
 - type: entity
-  parent:
-  - RMCAreaFiorina
-  - RMCAreaUndergroundMetalBlockCAS
+  parent: RMCAreaFiorina
   id: RMCAreaFiorinaTumor
   name: Fiorina - Resin Tumor
   components:
   - type: Sprite
     state: tumor0
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
 
 - type: entity
   parent: RMCAreaFiorinaTumor
@@ -112,27 +139,40 @@
     minimapColor: '#812DA2EE'
 
 - type: entity
-  parent:
-  - RMCAreaFiorina
-  - RMCAreaGlass
+  parent: RMCAreaFiorina
   id: RMCAreaFiorinaLz
   name: Fiorina - LZ
   components:
   - type: Sprite
     state: lz
   - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    landingZone: true
     minimapColor: '#EBE5E5E3'
-    resinAllowed: false
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaFiorinaLz
   id: RMCAreaFiorinaLzNearLzI
   name: Fiorina - LZ1 Aux Port
+  components:
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaFiorinaLz
   id: RMCAreaFiorinaLzNearLzII
   name: Fiorina - LZ2 Prison Port
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaFiorinaLz
@@ -158,7 +198,7 @@
   - type: Sprite
     state: shuttle
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaShuttleDrop2
@@ -168,17 +208,25 @@
   - type: Sprite
     state: shuttle2
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz2
 
 - type: entity
-  parent:
-  - RMCAreaFiorina
-  - RMCAreaGlass
+  parent: RMCAreaFiorina
   id: RMCAreaFiorinaStation
   name: Fiorina - Station Interior
   components:
   - type: Sprite
     state: station0
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaFiorinaStation
@@ -189,6 +237,19 @@
     state: station1
 
 - type: entity
+  parent: RMCAreaFiorinaStationLowsec
+  id: RMCAreaFiorinaStationLowsecShowersLaundry
+  name: Fiorina - Low Security Showers & Laundry
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaFiorinaStationLowsec
+  id: RMCAreaFiorinaStationLowsecEast
+  name: Fiorina - Low Security Eastside
+
+- type: entity
   parent: RMCAreaFiorinaStation
   id: RMCAreaFiorinaStationPowerRing
   name: Fiorina - Engineering Ring
@@ -197,14 +258,31 @@
     state: power0
   - type: Area
     minimapColor: '#C19504E7'
+    linkedLz: dropship_lz2, dropship_lz1
+
+- type: entity
+  parent: RMCAreaFiorinaStationPowerRing
+  id: RMCAreaFiorinaStationPowerRingReactor
+  name: Fiorina - Engineering Reactor
+  components:
+  - type: Area
+    linkedLz: null
 
 - type: entity
   parent: RMCAreaFiorinaStation
   id: RMCAreaFiorinaStationDisco
-  name: Fiorina - Disco Storage
+  name: Fiorina - West Disco Storage
   components:
   - type: Sprite
     state: disco
+
+- type: entity
+  parent: RMCAreaFiorinaStationDisco
+  id: RMCAreaFiorinaStationDiscoEastDisco
+  name: Fiorina - East Disco Storage
+  components:
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaFiorinaStation
@@ -213,6 +291,8 @@
   components:
   - type: Sprite
     state: police_line
+  - type: Area
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaFiorinaStation
@@ -223,6 +303,7 @@
     state: security_hub
   - type: Area
     minimapColor: '#A22D2DEE'
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaFiorinaStationSecurity
@@ -305,6 +386,27 @@
     minimapColor: '#812DA2EE'
 
 - type: entity
+  parent: RMCAreaFiorinaStationResearchCells
+  id: RMCAreaFiorinaStationResearchCellsWest
+  name: Fiorina - West Research Cellblock
+
+- type: entity
+  parent: RMCAreaFiorinaStationResearchCells
+  id: RMCAreaFiorinaStationResearchCellsEast
+  name: Fiorina - East Research Cellblock
+  components:
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaFiorinaStationResearchCells
+  id: RMCAreaFiorinaStationResearchCellsBasketball
+  name: Fiorina - Basketball Court
+  components:
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
   parent: RMCAreaFiorinaStation
   id: RMCAreaFiorinaStationTelecomm
   name: Fiorina - Communications Relay
@@ -313,7 +415,7 @@
     sprite: _RMC14/Areas/areas.rsi
     state: ass_line
   - type: Area
-    resinAllowed: false
+    linkedLz: dropship_lz1
 
 - type: entity
   parent: RMCAreaFiorinaStationTelecomm
@@ -329,6 +431,9 @@
   parent: RMCAreaFiorinaStationTelecomm
   id: RMCAreaFiorinaStationTelecommLz1Tram
   name: Fiorina - LZ1 Aux Port Communications Relay
+  components:
+  - type: Area
+    landingZone: true
 
 - type: entity
   parent: RMCAreaFiorinaStationTelecomm
@@ -339,13 +444,22 @@
   parent: RMCAreaFiorinaStationTelecomm
   id: RMCAreaFiorinaStationTelecommLz2Engineering
   name: Fiorina - Engineering Secondary Communications Relay
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaFiorinaStationTelecomm
   id: RMCAreaFiorinaStationTelecommLz2North
   name: Fiorina - LZ2 North Communications Relay
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaFiorinaStationTelecomm
   id: RMCAreaFiorinaStationTelecommLz2Maint
   name: Fiorina - Backup Communications Relay
+  components:
+  - type: Area
+    linkedLz: dropship_lz2

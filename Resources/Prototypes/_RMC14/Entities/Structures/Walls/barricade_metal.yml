@@ -1,8 +1,19 @@
 - type: entity
   abstract: true
+  categories: [ HideSpawnMenu ]
+  id: RMCBarricadeUpgradeBase
+  components:
+  - type: RMCConstructionUpgrade
+  - type: Sprite
+    sprite: _RMC14/Interface/barricade_upgrades.rsi
+
+- type: entity
+  abstract: true
   parent: CMBaseStructureCorrodible
   id: CMBarricadeBase
   components:
+  - type: Corrodible
+    structure: false
   - type: Rotatable
   - type: Appearance
   - type: Fixtures
@@ -17,6 +28,7 @@
         layer:
         - TableLayer
         - LowImpassable
+        - BarricadeImpassable
   - type: RotationDrawDepth
     southDrawDepth: OverMobs
   - type: Barricade
@@ -41,13 +53,58 @@
             visible: false
   - type: DamageMultiplierFlags
     flags: Breaching
+  - type: InvulnerabilityTime
+    whitelist:
+      components:
+      - Xeno
+    hitsToInvulnerability: 3
+  - type: UserInterface
+    interfaces:
+      enum.RMCConstructionUpgradeUiKey.Key:
+        type: RMCConstructionUpgradeBui
+
+- type: entity
+  parent: RMCBarricadeUpgradeBase
+  id: RMCExplosiveUpgrade
+  name: composite upgrade (++Explosive, ++Projectile, ++Fire)
+  components:
+  - type: RMCConstructionUpgrade
+    upgradedPopup: rmc-construction-upgrade-explosive
+    upgradedEntity: CMBarricadeExplosive
+  - type: Sprite
+    state: explosive
+
+- type: entity
+  parent: RMCBarricadeUpgradeBase
+  id: RMCBiohazardUpgrade
+  name: biohazard upgrade (+Burn)
+  components:
+  - type: RMCConstructionUpgrade
+    upgradedPopup: rmc-construction-upgrade-burn
+    upgradedEntity: CMBarricadeBurn
+  - type: Sprite
+    state: burn
+
+- type: entity
+  parent: RMCBarricadeUpgradeBase
+  id: RMCBruteUpgrade
+  name: reinforced upgrade (+Brute)
+  components:
+  - type: RMCConstructionUpgrade
+    upgradedPopup: rmc-construction-upgrade-brute
+    upgradedEntity: CMBarricadeBrute
+  - type: Sprite
+    state: brute
+
+- type: Tag
+  id: RMCMetalBarricade
 
 # Metal Barricade Tree
 - type: entity
   parent: CMBarricadeBase
   id: CMBarricadeMetal
   name: metal barricade
-  description: A metal barricade that keeps the unwanted out. Upgradable with metal, plasteel, or metal rods for different attributes. Repair with a welder.
+  description: A sturdy and easily assembled barricade made of metal plates, often used for quick fortifications. Use a blowtorch to repair.
   components:
   - type: Climbable
   - type: Anchorable
@@ -67,7 +124,16 @@
     messagePerceivedByOthers: fence-rattle-success
     interactSuccessSound:
       collection: FenceRattle
-  - type: Repairable
+  - type: RMCRepairable
+    heal: 200
+    skill: RMCSkillConstruction
+    delay: 10
+    fuelUsed: 2
+    repairableDamageLimit: 340
+  - type: NailgunRepairable
+    # cm13 max_health%: 0.3, 0.45
+    repairMetal: 135
+    repairPlasteel: 200
   - type: Destructible
     thresholds:
     - trigger:
@@ -97,13 +163,17 @@
   - type: Construction
     graph: BarricadeMetalGraph
     node: nodeMetal
+  - type: RMCConstructionUpgradeTarget
+    upgrades: ["RMCExplosiveUpgrade", "RMCBiohazardUpgrade", "RMCBruteUpgrade"]
+  - type: Tag
+    tags:
+    - RMCMetalBarricade
 
 # Metal Barricade Upgrades
 - type: entity
   parent: CMBarricadeMetal
   id: CMBarricadeBurn
-  name: anti-biohazard barricade
-  description: A barricade incredibly resistant to corrosive and fire damage but breaks easier. Repair with a welder.
+  suffix: Biohazard
   components:
     - type: Sprite
       sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
@@ -120,15 +190,13 @@
       trackAllDamage: true
       damageOverlay:
         sprite: _RMC14/Structures/Walls/Barricades/burn_barricade_cracks.rsi
-    - type: Construction
-      graph: BarricadeMetalGraph
-      node: nodeBurnUpgrade
+    - type: RMCConstructionUpgradeTarget
+      upgrades: null
 
 - type: entity
   parent: CMBarricadeMetal
   id: CMBarricadeBrute
-  name: reinforced barricade
-  description: A heavy-duty barricade reinforced with metal and resistant against thrashing. Repair with a welder.
+  suffix: Reinforced
   components:
     - type: Sprite
       sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
@@ -145,15 +213,13 @@
       trackAllDamage: true
       damageOverlay:
         sprite: _RMC14/Structures/Walls/Barricades/brute_barricade_cracks.rsi
-    - type: Construction
-      graph: BarricadeMetalGraph
-      node: nodeBruteUpgrade
+    - type: RMCConstructionUpgradeTarget
+      upgrades: null
 
 - type: entity
   parent: CMBarricadeMetal
   id: CMBarricadeExplosive
-  name: blast-resistant barricade
-  description: An blast-resistant barricade made out of the same stuff in EODs. Repair with a welder.
+  suffix: Composite
   components:
     - type: Sprite
       sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
@@ -169,9 +235,8 @@
       trackAllDamage: true
       damageOverlay:
         sprite: _RMC14/Structures/Walls/Barricades/explosive_barricade_cracks.rsi
-    - type: Construction
-      graph: BarricadeMetalGraph
-      node: nodeExplosiveUpgrade
+    - type: RMCConstructionUpgradeTarget
+      upgrades: null
 
 # Turnstile (not sure how to make a one-way door so for now it is a glorified fence)
 - type: entity
@@ -188,7 +253,6 @@
       - map: [ "acided" ]
     - type: Damageable
       damageContainer: Inorganic
-      damageModifierSet: Metallic
     - type: Destructible
       thresholds:
       - trigger:
@@ -234,15 +298,19 @@
       - state: handrail_a_0
       - map: [ "acided" ]
     - type: Physics
-    - type: Repairable
+    - type: RMCRepairable
+      heal: 200
+      skill: RMCSkillConstruction
+      delay: 10
+      fuelUsed: 2
     - type: Damageable
-      damageContainer: Inorganic
-      damageModifierSet: Metallic
+      damageContainer: StructuralMarine
+      damageModifierSet: StructuralMarine
     - type: Destructible
       thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 100
+          damage: 30
         behaviors:
         - !type:PlaySoundBehavior
           sound:
@@ -302,6 +370,85 @@
       graph: BarricadeHandrailGraph
       node: nodeHandrail
 
+- type: entity
+  parent: RMCBarricadeHandrail
+  id: RMCBarricadeWireRail
+  components:
+    - type: Sprite
+      layers:
+      - state: wire_rail
+      - map: [ "acided" ]
+    - type: Construction
+      graph: BarricadeHandrailGraph
+      node: nodeHandrail
+
+- type: entity
+  parent: RMCBarricadeHandrail
+  id: RMCBarricadeHybrisa
+  components:
+    - type: Sprite
+      layers:
+      - state: handrail_hybrisa
+      - map: [ "acided" ]
+    - type: Construction
+      graph: BarricadeHandrailGraph
+      node: nodeHandrail
+
+- type: entity
+  parent: RMCBarricadeHandrail
+  id: RMCBarricadeHybrisaCenterRoad
+  components:
+    - type: Sprite
+      layers:
+      - state: centerroadbarrier2
+      - map: [ "acided" ]
+    - type: Construction
+      graph: BarricadeHandrailGraph
+      node: nodeHandrail
+
+- type: entity
+  parent: RMCBarricadeHybrisaCenterRoad
+  id: RMCBarricadeHybrisaCenterRoadDouble
+  suffix: Double
+  components:
+    - type: Sprite
+      offset: 0,-0.15
+      layers:
+      - state: centerroadbarrier1
+      - map: [ "acided" ]
+
+
+- type: entity
+  parent: RMCBarricadeHandrail
+  id: RMCBarricadeHybrisaPlasticRoadBarrier
+  name: plastic road barrier
+  components:
+    - type: Sprite
+      layers:
+      - state: plasticroadbarrierred
+      - map: [ "acided" ]
+    - type: Construction
+      graph: BarricadeHandrailGraph
+      node: nodeHandrail
+
+- type: entity
+  parent: RMCBarricadeHybrisaPlasticRoadBarrier
+  id: RMCBarricadeHybrisaPlasticRoadBarrierBlue
+  components:
+    - type: Sprite
+      layers:
+      - state: plasticroadbarrierblue
+      - map: [ "acided" ]
+
+- type: entity
+  parent: RMCBarricadeHybrisaPlasticRoadBarrier
+  id: RMCBarricadeHybrisaPlasticRoadBarrierBlack
+  components:
+    - type: Sprite
+      layers:
+      - state: plasticroadbarrierblack
+      - map: [ "acided" ]
+
 # Metal Barricade Doors
 - type: entity
   parent: CMBarricadeBase
@@ -322,7 +469,16 @@
       map: ["enum.DoorVisualLayers.Base"]
     - map: [ "acided" ]
     drawdepth: WallTops
-  - type: Repairable
+  - type: RMCRepairable
+    heal: 200
+    skill: RMCSkillConstruction
+    delay: 10
+    fuelUsed: 2
+    repairableDamageLimit: 300
+  - type: NailgunRepairable
+    # cm13 max_health%: 0.3, 0.45
+    repairMetal: 120
+    repairPlasteel: 180
   - type: Destructible
     thresholds:
     - trigger:
@@ -390,73 +546,3 @@
       - Xeno
   - type: UseDelay
     delay: 0.3
-
-- type: entity
-  parent: CMBarricadeMetalDoor
-  id: CMBarricadePlasteelDoor
-  name: folding plasteel barricade
-  description: A tough folding plasteel barricade stronger than its metal counterpart. Can be closed and opened at a moment's notice. Repair with a welder.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
-    layers:
-    - state: plasteel
-      map: ["enum.DoorVisualLayers.Base"]
-    - map: [ "acided" ]
-    drawdepth: WallTops
-  - type: Repairable
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 800
-      behaviors:
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          CMSheetPlasteel1:
-            min: 4
-            max: 4
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-  - type: GenericVisualizer
-    visuals:
-      enum.BarbedWireVisualLayers.Wire:
-        barbWired:
-          UnWired: { state: plasteel_closed_wire, visible: false }
-          WiredClosed: { state: plasteel_wire, visible: true }
-          WiredOpen: { state: plasteel_closed_wire, visible: true }
-      enum.SprayAcidedVisuals.Acided:
-        acided:
-          True:
-            sprite: _RMC14/Effects/xeno_spray_acid.rsi
-            state: acid
-            visible: true
-          False:
-            visible: false
-  - type: Door
-    openSpriteState: plasteel_closed
-    closedSpriteState: plasteel
-    canPry: false
-    occludes: false
-    changeAirtight: false
-    bumpOpen: false
-    clickOpen: true
-    canCrush: false
-    closeTimeOne: 0
-    closeTimeTwo: 0
-    openTimeOne: 0
-    openTimeTwo: 0
-    openingAnimationTime: 0
-    closingAnimationTime: 0
-    # Allow you to close barricades while people are standing on them or multiple are wrenched in the same tile
-    performCollisionCheck: false
-    openSound:
-      path: /Audio/Items/ratchet.ogg
-    closeSound:
-      path: /Audio/Items/ratchet.ogg
-  - type: Construction
-    graph: BarricadePlasteelDoorGraph
-    node: nodeBarricadePlasteelDoor

@@ -187,6 +187,7 @@ binds:
 - function: OpenCharacterMenu
   type: State
   key: C
+  mod1: Shift
 - function: OpenEmotesMenu
   type: State
   key: Y
@@ -269,6 +270,16 @@ binds:
   type: State
   key: MouseMiddle
   canFocus: true
+- function: RotateObjectClockwise
+  type: State
+  key: R
+- function: RotateObjectCounterclockwise
+  type: State
+  key: R
+  mod1: Shift
+- function: FlipObject
+  type: State
+  key: F
 - function: TextCursorLeft
   type: State
   key: Left
@@ -455,8 +466,8 @@ binds:
 - function: OpenDecalSpawnWindow
   type: State
   key: F8
-- function: OpenScoreboardWindow
-  type: State
+- function: ToggleRoundEndSummaryWindow
+  type: Toggle
   key: F9
 - function: OpenSandboxWindow
   type: State
@@ -489,15 +500,19 @@ binds:
 - function: ArcadeUp
   type: State
   key: Up
+  priority: -1
 - function: ArcadeDown
   type: State
   key: Down
+  priority: -1
 - function: ArcadeLeft
   type: State
   key: Left
+  priority: -1
 - function: ArcadeRight
   type: State
   key: Right
+  priority: -1
 - function: Arcade1
   type: State
   key: Space
@@ -540,10 +555,6 @@ binds:
 - function: Hotbar9
   type: State
   key: Num9
-
-
-
-# RMC14
 - function: MappingUnselect
   type: State
   key: MouseRight
@@ -574,6 +585,10 @@ binds:
   type: State
   key: MouseRight
   canFocus: true
+
+
+
+# RMC14
 - function: RMCActivateAttachableRail
   type: State
   key: G
@@ -611,3 +626,9 @@ binds:
 - function: CMXenoWideSwing
   type: State
   key: Space
+- function: RMCPickUpDroppedItems
+  type: State
+  key: R
+- function: RMCInteractWithOtherHand
+  type: State
+  key: C

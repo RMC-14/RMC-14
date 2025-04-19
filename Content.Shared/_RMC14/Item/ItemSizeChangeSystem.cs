@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Attachable.Systems;
+using Content.Shared._RMC14.Explosion;
 using Content.Shared.Item;
 using Robust.Shared.Prototypes;
 
@@ -15,8 +16,10 @@ public sealed partial class ItemSizeChangeSystem : EntitySystem
     {
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
-        SubscribeLocalEvent<ItemSizeChangeComponent, MapInitEvent>(OnMapInit,
+        SubscribeLocalEvent<ItemSizeChangeComponent, MapInitEvent>(OnItemSizeChangeMapInit,
             before: new[] { typeof(AttachableHolderSystem) });
+
+        SubscribeLocalEvent<ChangeItemSizeOnTimerTriggerComponent, RMCActiveTimerTriggerEvent>(OnChangeItemSizeOnTimerTrigger);
 
         InitItemSizes();
     }
@@ -27,6 +30,17 @@ public sealed partial class ItemSizeChangeSystem : EntitySystem
             return;
 
         InitItemSizes();
+    }
+
+    private void OnItemSizeChangeMapInit(Entity<ItemSizeChangeComponent> item, ref MapInitEvent args)
+    {
+        InitItem(item);
+        RefreshItemSizeModifiers((item.Owner, item.Comp));
+    }
+
+    private void OnChangeItemSizeOnTimerTrigger(Entity<ChangeItemSizeOnTimerTriggerComponent> ent, ref RMCActiveTimerTriggerEvent args)
+    {
+        _itemSystem.SetSize(ent, ent.Comp.Size);
     }
 
     private void InitItemSizes()
@@ -42,12 +56,6 @@ public sealed partial class ItemSizeChangeSystem : EntitySystem
         }
 
         _sortedSizes.Sort();
-    }
-
-    private void OnMapInit(Entity<ItemSizeChangeComponent> item, ref MapInitEvent args)
-    {
-        InitItem(item);
-        RefreshItemSizeModifiers((item.Owner, item.Comp));
     }
 
     public void RefreshItemSizeModifiers(Entity<ItemSizeChangeComponent?> item)

@@ -1,7 +1,8 @@
 ﻿- type: entity
+  parent: RMCBaseEffect
   # Just fades out with no movement animation
   id: CMEffectPunch
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: TimedDespawn
     lifetime: 0.4
@@ -15,12 +16,13 @@
     - HideContextMenu
 
 - type: entity
+  parent: RMCBaseEffect
   # Just fades out with no movement animation
   id: CMEffectGrab
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: TimedDespawn
-    lifetime: 1.6
+    lifetime: 1
   - type: Sprite
     sprite: _RMC14/Effects/attacks.rsi
     noRot: true

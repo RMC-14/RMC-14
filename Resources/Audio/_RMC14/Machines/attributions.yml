@@ -33,6 +33,21 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/machines/click.ogg"
 
+- files: ["escape_pod_warmup.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/effects/escape_pod_warmup.ogg"
+
+- files: ["escape_pod_launch.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/effects/escape_pod_launch.ogg"
+
+- files: ["fuel_pump_active.ogg", "fuel_pump_idle.ogg"]
+  license: "CC-BY-SA-4.0"
+  copyright: "Recorded and mixed by exincore"
+  source: "https://github.com/RMC-14/RMC-14/pull/6056"
+
 - files: ["suitlight_on.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
@@ -47,3 +62,43 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/handling/putting_on_armor1.ogg"
+
+- files: ["print.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/521e3ec58dcf4ab78571f3e651e9d967989c79e9/sound/machines/print.ogg"
+
+- files: ["keyboard1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/1ed1c734f77b7c4fe6ff069547963e0184624650/sound/machines/keyboard1.ogg"
+
+- files: ["keyboard2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/1ed1c734f77b7c4fe6ff069547963e0184624650/sound/machines/keyboard2.ogg"
+
+- files: ["keyboard3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/1ed1c734f77b7c4fe6ff069547963e0184624650/sound/machines/keyboard3.ogg"
+
+- files: ["flare_activate_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/d6f6755a2cc2e4d1f997dc04ce784f0d9cfc11c3/sound/handling/flare_activate_2.ogg"
+
+- files: ["hydraulics_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/machines/hydraulics_1.ogg"
+
+- files: ["hydraulics_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/machines/hydraulics_2.ogg"
+
+- files: ["hydraulics_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/d3d6bb77f88d63c4fbac64596f154306cd099b1f/sound/machines/hydraulics_3.ogg"

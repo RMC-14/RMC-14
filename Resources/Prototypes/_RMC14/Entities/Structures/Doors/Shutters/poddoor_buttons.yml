@@ -7,8 +7,9 @@
     snap:
     - Wallmount
   components:
-  - type: Transform
-    anchored: true
+  - type: Physics
+    bodyType: Static
+    canCollide: false
   - type: Sprite
     drawdepth: SmallObjects
     sprite: _RMC14/Objects/door_button.rsi
@@ -20,3 +21,25 @@
   - type: WallMount
     arc: 360
   - type: RMCDoorButton
+
+- type: entity
+  parent: RMCPodDoorButton
+  id: RMCPodDoorButtonBigRed
+  name: button
+  description: A remote control-switch for a door.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/door_button_br.rsi
+    layers:
+    - state: doorctrl
+      map: [ "enum.RMCPodDoorButtonLayers.Animation" ]
+
+- type: entity
+  parent: RMCPodDoorButton
+  id: RMCPodDoorButtonWeYa
+  name: button
+  suffix: locked, weya
+  description: A remote control-switch for a door.
+  components:
+  - type: AccessReader
+    access: [ [ "RMCAccessWeYa" ] ]

@@ -35,6 +35,11 @@
   description: Sheets made out of metal. They have been dubbed Metal Sheets.
   suffix: Filled
   components:
+    - type: RMCConstructionUpgradeItem
+      whitelist:
+        tags:
+        - RMCMetalBarricade
+        - RMCPlasteelBarricade
     - type: Material
     - type: PhysicalComposition
       materialComposition:
@@ -66,6 +71,17 @@
 
 - type: entity
   parent: CMSheetMetal
+  id: CMSheetMetal20
+  suffix: "20"
+  components:
+    - type: Sprite
+      state: metal_3
+    - type: Stack
+      stackType: CMSteel
+      count: 20
+
+- type: entity
+  parent: CMSheetMetal
   id: CMSheetMetal30
   suffix: "30"
   components:
@@ -74,6 +90,17 @@
     - type: Stack
       stackType: CMSteel
       count: 30
+
+- type: entity
+  parent: CMSheetMetal
+  id: CMSheetMetal40
+  suffix: "40"
+  components:
+    - type: Sprite
+      state: metal_3
+    - type: Stack
+      stackType: CMSteel
+      count: 40
 
 - type: entity
   parent: CMSheetMetal
@@ -97,6 +124,17 @@
       stackType: CMSteel
       count: 1
 
+- type: entity
+  parent: CMSheetMetal
+  id: CMSheetMetal2
+  suffix: "2"
+  components:
+    - type: Sprite
+      state: metal
+    - type: Stack
+      stackType: CMSteel
+      count: 2
+
 # Plasteel
 
 - type: material
@@ -112,7 +150,7 @@
   name: plasteel
   icon: { sprite: /Textures/_RMC14/Objects/Materials/Sheets/plasteel.rsi, state: plasteel }
   spawn: CMSheetPlasteel
-  maxCount: 40
+  maxCount: 50
 
 - type: entity
   parent: CMSheetMetalBase
@@ -157,6 +195,29 @@
 
 - type: entity
   parent: CMSheetPlasteel
+  id: CMSheetPlasteel15
+  name: plasteel
+  suffix: "15"
+  components:
+    - type: Sprite
+      state: plasteel_2
+    - type: Stack
+      stackType: CMPlasteel
+      count: 15
+
+- type: entity
+  parent: CMSheetPlasteel
+  id: CMSheetPlasteel20
+  suffix: "20"
+  components:
+    - type: Sprite
+      state: plasteel_2
+    - type: Stack
+      stackType: CMPlasteel
+      count: 20
+
+- type: entity
+  parent: CMSheetPlasteel
   id: CMSheetPlasteel30
   name: plasteel
   suffix: "30"
@@ -178,6 +239,18 @@
     - type: Stack
       stackType: CMPlasteel
       count: 40
+
+- type: entity
+  parent: CMSheetPlasteel
+  id: CMSheetPlasteel50
+  name: plasteel
+  suffix: "50"
+  components:
+    - type: Sprite
+      state: plasteel_2
+    - type: Stack
+      stackType: CMPlasteel
+      count: 50
 
 - type: entity
   parent: CMSheetPlasteel

@@ -31,6 +31,9 @@ public sealed class CMExamineSystem : EntitySystem
 
     private void OnIdExamined(Entity<IdExaminableComponent> ent, ref ExaminedEvent args)
     {
+        if (HasComp<BlockIdExamineComponent>(args.Examiner))
+            return;
+
         using (args.PushGroup(nameof(CMExamineSystem), 1))
         {
             if (_idExaminable.GetInfo(ent) is { } info)

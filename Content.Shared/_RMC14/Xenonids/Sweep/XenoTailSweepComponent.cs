@@ -1,4 +1,4 @@
-﻿using Content.Shared.Damage;
+using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -14,7 +14,7 @@ public sealed partial class XenoTailSweepComponent : Component
     public FixedPoint2 PlasmaCost = 10;
 
     [DataField, AutoNetworkedField]
-    public float Range = 1.25f;
+    public float Range = 1.5f;
 
     [DataField]
     public DamageSpecifier? Damage;

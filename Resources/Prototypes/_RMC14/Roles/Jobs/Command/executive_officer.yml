@@ -7,15 +7,24 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMCommand
-    time: 18000 # 5 hours
+    time: 36000 # 10 hours
+  ranks:
+    RMCRankCaptain: []
   weight: 5
-  startingGear: CMGearStaffOfficer
+  startingGear: CMGearExecutiveOfficer
   icon: "CMJobIconExecutiveOfficer"
   requireAdminNotify: true
   joinNotifyCrew: true
   supervisors: cm-job-supervisors-co
   accessGroups:
   - MarineMain
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: xo
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -38,17 +47,35 @@
         RMCSkillSurgery: 1
         RMCSkillVehicles: 1
     - type: MarineOrders
+    - type: CMVendorUser
+      points: 120
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-executive-officer
+    - type: ViewIntelObjectives
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: xo
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_command
 
 - type: startingGear
   id: CMGearExecutiveOfficer
   equipment:
     jumpsuit: CMJumpsuitBO
-    back: CMSatchel
     shoes: RMCShoesLaceup
-    head: CMHeadCap
-    outerClothing: CMCoatOfficer
+    head: CMHeadCapPeakedService
+    outerClothing: RMCCoatService
     id: CMIDCardExecutiveOfficer
     ears: CMHeadsetSeniorCommand
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchGeneralLarge
+  storage:
+    pocket1:
+    - RMCRangefinder
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -58,10 +85,8 @@
   - type: SpawnPoint
     job_id: CMExecutiveOfficer
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: executive_officer
+    state: xo_spawn
 
 - type: playTimeTracker
   id: CMJobExecutiveOfficer
+  isHumanoid: true

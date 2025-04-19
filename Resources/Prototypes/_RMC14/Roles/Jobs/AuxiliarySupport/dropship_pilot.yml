@@ -8,18 +8,28 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsDropship
     time: 7200 # 2 hours
+  ranks:
+    RMCRankSecondLT: []
   startingGear: CMGearPilotDropship
   icon: "CMJobIconPilotDropship"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - Pilot
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: pilot
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillIntel: 1
         RMCSkillJtac: 2
         RMCSkillLeadership: 1
@@ -29,12 +39,24 @@
         RMCSkillPowerLoader: 2
         RMCSkillSurgery: 1
     - type: MarineOrders
+    - type: CMVendorUser
+      points: 45
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-dropship-pilot
+    - type: ViewIntelObjectives
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: pilot
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_command
 
 - type: startingGear
   id: CMGearPilotDropship
   equipment:
     jumpsuit: CMJumpsuitPilot
-    back: CMSatchel
     shoes: CMBootsBlackFilled
     id: CMIDCardPilotDropship
     ears: CMHeadsetPilot
@@ -47,10 +69,8 @@
   - type: SpawnPoint
     job_id: CMPilotDropship
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: pilot
+    state: po_spawn
 
 - type: playTimeTracker
   id: CMJobPilotDropship
+  isHumanoid: true

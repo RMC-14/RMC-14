@@ -5,18 +5,42 @@
   description: cm-job-description-squad-leader
   playTimeTracker: CMJobSquadLeader
   requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobHospitalCorpsman
+    time: 3600 # 1 hour
+  - !type:RoleTimeRequirement
+    role: CMJobCombatTech
+    time: 3600 # 1 hour
+  - !type:RoleTimeRequirement
+    role: CMJobFireteamLeader
+    time: 18000 # 5 hours
   - !type:DepartmentTimeRequirement
     department: CMSquad
     time: 36000 # 10 hours
+  ranks:
+    RMCRankGunnerySergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 252000 # 70 hours
+    RMCRankStaffSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 36000 # 10 hours
+    RMCRankSergeant: []
   startingGear: CMGearSquadLeader
+  dummyStartingGear: CMGearSquadLeaderEquipped
   icon: "CMJobIconSquadLeader"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
   accessGroups:
   - SquadLeader
-  overwatchSortPriority: -5
+  overwatchSortPriority: -6
   overwatchShowName: true
   overwatchRoleName: Squad Leader
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: leader
+  roleWeight: 1
   special:
   - !type:AddComponentSpecial
     components:
@@ -33,29 +57,42 @@
         RMCSkillLeadership: 1
         RMCSkillMedical: 1
         RMCSkillVehicles: 1
+        RMCSkillPolice: 1
     - type: CMVendorUser
       points: 45
     - type: MarineOrders
     - type: SquadArmorWearer
       leader: true
+    - type: SquadLeader
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-squad-leader
+    - type: ViewIntelObjectives
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: leader
 
 - type: startingGear
   id: CMGearSquadLeader
   equipment:
-    back: CMSatchelMarine
     id: CMDogtagSquadLeader
 
 - type: startingGear
   id: CMGearSquadLeaderEquipped
   equipment:
     jumpsuit: JumpsuitMarine
-    back: CMSatchelMarine
     shoes: CMBootsBlackFilled
     head: CMArmorHelmetM11
-    outerClothing: CMArmorM3Medium
+    outerClothing: CMArmorB12
     gloves: CMHandsBlackMarine
     id: CMDogtagSquadLeader
     ears: CMHeadsetAlphaLeader
+
+- type: playTimeTracker
+  id: CMJobSquadLeader
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -65,10 +102,65 @@
   - type: SpawnPoint
     job_id: CMSquadLeader
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: squad_leader
+    state: leader_spawn
 
-- type: playTimeTracker
-  id: CMJobSquadLeader
+- type: entity
+  parent: CMSpawnPointSquadLeader
+  id: CMSpawnPointSquadLeaderAlpha
+  suffix: Alpha
+  components:
+  - type: SquadSpawner
+    squad: SquadAlpha
+    role: CMSquadLeader
+  - type: Sprite
+    state: leader_spawn_alpha
+
+- type: entity
+  parent: CMSpawnPointSquadLeader
+  id: CMSpawnPointSquadLeaderBravo
+  suffix: Bravo
+  components:
+  - type: SquadSpawner
+    squad: SquadBravo
+    role: CMSquadLeader
+  - type: Sprite
+    state: leader_spawn_bravo
+
+- type: entity
+  parent: CMSpawnPointSquadLeader
+  id: CMSpawnPointSquadLeaderCharlie
+  suffix: Charlie
+  components:
+  - type: SquadSpawner
+    squad: SquadCharlie
+    role: CMSquadLeader
+  - type: Sprite
+    state: leader_spawn_charlie
+
+- type: entity
+  parent: CMSpawnPointSquadLeader
+  id: CMSpawnPointSquadLeaderDelta
+  suffix: Delta
+  components:
+  - type: SquadSpawner
+    squad: SquadDelta
+    role: CMSquadLeader
+  - type: Sprite
+    state: leader_spawn_delta
+
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCSquadLeader
+  components:
+  - type: GhostRole
+    name: cm-job-name-squad-leader
+    description: cm-job-description-squad-leader
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    raffle:
+      settings: default
+    job: CMSquadLeader
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 1

@@ -3,9 +3,9 @@ using Content.Server.DoAfter;
 using Content.Server.Popups;
 using Content.Server.Storage.Components;
 using Content.Server.Temperature.Components;
+using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Medical.Scanner;
-using Content.Shared._RMC14.Medical.Stasis;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
@@ -25,6 +25,7 @@ public sealed class HealthScannerSystem : EntitySystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly DoAfterSystem _doAfter = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly RMCHandsSystem _rmcHands = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -49,8 +50,8 @@ public sealed class HealthScannerSystem : EntitySystem
         }
 
         var delay = _skills.GetDelay(args.User, scanner);
-        var ev = new HealthScannerDoAfterEvent(GetNetEntity(target));
-        var doAfter = new DoAfterArgs(EntityManager, args.User, delay, ev, scanner, null, scanner)
+        var ev = new HealthScannerDoAfterEvent();
+        var doAfter = new DoAfterArgs(EntityManager, args.User, delay, ev, scanner, target, scanner)
         {
             BreakOnMove = true,
             AttemptFrequency = AttemptFrequency.EveryTick
@@ -68,8 +69,10 @@ public sealed class HealthScannerSystem : EntitySystem
     private void OnDoAfterAttempt(Entity<HealthScannerComponent> ent, ref DoAfterAttemptEvent<HealthScannerDoAfterEvent> args)
     {
         var doAfter = args.DoAfter.Args;
-        var targetEntity = GetEntity(args.Event.Scanned);
-        if (!CanUseHealthScannerPopup(ent, doAfter.User, ref targetEntity))
+        if (doAfter.Target is not { } target)
+            return;
+
+        if (!CanUseHealthScannerPopup(ent, doAfter.User, ref target))
         {
             args.Cancel();
             return;
@@ -82,7 +85,7 @@ public sealed class HealthScannerSystem : EntitySystem
 
     private void OnDoAfter(Entity<HealthScannerComponent> scanner, ref HealthScannerDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled)
+        if (args.Cancelled || args.Handled || args.Target is not { } target)
             return;
 
         args.Handled = true;
@@ -90,7 +93,8 @@ public sealed class HealthScannerSystem : EntitySystem
         if (TryComp(scanner, out UseDelayComponent? useDelay))
             _useDelay.TryResetDelay((scanner, useDelay));
 
-        scanner.Comp.Target = GetEntity(args.Scanned);
+        scanner.Comp.Target = target;
+        Dirty(scanner);
 
         _audio.PlayPvs(scanner.Comp.Sound, scanner);
         _ui.OpenUi(scanner.Owner, HealthScannerUIKey.Key, args.User);
@@ -104,7 +108,7 @@ public sealed class HealthScannerSystem : EntitySystem
     /// <returns></returns>
     private bool CanUseHealthScannerPopup(Entity<HealthScannerComponent> scanner, EntityUid user, ref EntityUid target)
     {
-        if (HasComp<CMStasisBagComponent>(target) && TryComp(target, out EntityStorageComponent? entityStorage))
+        if (HasComp<HealthScannableContainerComponent>(target) && TryComp(target, out EntityStorageComponent? entityStorage))
         {
             foreach (var entity in entityStorage.Contents.ContainedEntities)
             {
@@ -158,6 +162,9 @@ public sealed class HealthScannerSystem : EntitySystem
             scanner.Comp.Target = null;
             return;
         }
+
+        if (!_rmcHands.TryGetHolder(scanner, out _))
+            return;
 
         FixedPoint2 blood = 0;
         FixedPoint2 maxBlood = 0;

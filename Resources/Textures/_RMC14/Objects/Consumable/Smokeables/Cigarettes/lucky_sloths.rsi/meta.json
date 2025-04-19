@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/items/cigarettes.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "closed"
+    },
+    {
+      "name": "open"
+    },
+    {
+      "name": "cig1"
+    },
+    {
+      "name": "cig2"
+    },
+    {
+      "name": "cig3"
+    },
+    {
+      "name": "cig4"
+    },
+	{
+      "name": "cig5"
+    },
+    {
+      "name": "cig6"
+    },
+    {
+      "name": "cig7"
+    },
+	{
+      "name": "cig8"
+    },
+	{
+      "name": "cig9"
+    },
+	{
+      "name": "cig10"
+    },
+	 {
+      "name": "cig11"
+    },
+    {
+      "name": "cig12"
+    },
+    {
+      "name": "cig13"
+    },
+    {
+      "name": "cig14"
+    },
+	{
+      "name": "cig15"
+    },
+    {
+      "name": "cig16"
+    },
+    {
+      "name": "cig17"
+    },
+	{
+      "name": "cig18"
+    },
+	{
+      "name": "cig19"
+    },
+	{
+      "name": "cig20"
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+- type: entity
+  parent: CMDoubleDoorCommandGlass
+  id: CMDoubleDoorCommandGlassLocked
+  suffix: Command, Glass, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessCommand" ] ]
+
+- type: entity
+  parent: CMDoubleDoorCommandSolid
+  id: CMDoubleDoorCommandSolidLocked
+  suffix: Command, Solid, Locked
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessCommand" ] ]

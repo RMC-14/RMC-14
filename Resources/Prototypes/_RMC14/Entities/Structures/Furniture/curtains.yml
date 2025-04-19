@@ -4,6 +4,8 @@
   name: curtain
   abstract: true
   components:
+  - type: InteractionOutline
+  - type: Clickable
   - type: Destructible
     thresholds:
     - trigger:
@@ -17,7 +19,7 @@
 #          MaterialCloth1: # TODO RMC cloth
 #            min: 1
 #            max: 2
-        
+
 - type: entity
   parent: RMCCurtainBase
   id: RMCCurtainGreen
@@ -43,6 +45,18 @@
       map: ["enum.DoorVisualLayers.Base"]
 
 - type: entity
+  parent: RMCCurtainMedical
+  id: RMCCurtainMedicalOpen
+  suffix: Open
+  components:
+  - type: Physics
+    canCollide: false
+  - type: Occluder
+    enabled: false
+  - type: Door
+    state: Open
+
+- type: entity
   parent: RMCCurtainBase
   id: RMCCurtainShower
   name: shower curtain
@@ -53,6 +67,18 @@
     layers:
     - state: closed
       map: ["enum.DoorVisualLayers.Base"]
+
+- type: entity
+  parent: RMCCurtainShower
+  id: RMCCurtainShowerOpen
+  suffix: Open
+  components:
+  - type: Physics
+    canCollide: false
+  - type: Occluder
+    enabled: false
+  - type: Door
+    state: Open
 
 - type: entity
   parent: RMCCurtainBase

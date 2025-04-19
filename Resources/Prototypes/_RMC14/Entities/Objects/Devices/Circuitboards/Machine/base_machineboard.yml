@@ -5,6 +5,9 @@
   abstract: true
   suffix: Machine Board
   components:
-    - type: Sprite
-      sprite: _RMC14/Objects/Misc/module.rsi
-      state: id_mod
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/module.rsi
+    state: id_mod
+  - type: Tag
+    tags:
+    - RMCCircuitboard

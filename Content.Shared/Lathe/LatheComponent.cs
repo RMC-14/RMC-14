@@ -1,4 +1,4 @@
-using Content.Shared.Construction.Prototypes;
+using Content.Shared.Lathe.Prototypes;
 using Content.Shared.Research.Prototypes;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -10,16 +10,16 @@ namespace Content.Shared.Lathe
     public sealed partial class LatheComponent : Component
     {
         /// <summary>
-        /// All of the recipes that the lathe has by default
+        /// All of the recipe packs that the lathe has by default
         /// </summary>
         [DataField]
-        public List<ProtoId<LatheRecipePrototype>> StaticRecipes = new();
+        public List<ProtoId<LatheRecipePackPrototype>> StaticPacks = new();
 
         /// <summary>
-        /// All of the recipes that the lathe is capable of researching
+        /// All of the recipe packs that the lathe is capable of researching
         /// </summary>
         [DataField]
-        public List<ProtoId<LatheRecipePrototype>> DynamicRecipes = new();
+        public List<ProtoId<LatheRecipePackPrototype>> DynamicPacks = new();
 
         /// <summary>
         /// The lathe's construction queue
@@ -33,12 +33,27 @@ namespace Content.Shared.Lathe
         [DataField]
         public SoundSpecifier? ProducingSound;
 
+        [DataField]
+        public string? ReagentOutputSlotId;
+
+        /// <summary>
+        /// The default amount that's displayed in the UI for selecting the print amount.
+        /// </summary>
+        [DataField, AutoNetworkedField]
+        public int DefaultProductionAmount = 1;
+
         #region Visualizer info
         [DataField]
         public string? IdleState;
 
         [DataField]
         public string? RunningState;
+
+        [DataField]
+        public string? UnlitIdleState;
+
+        [DataField]
+        public string? UnlitRunningState;
         #endregion
 
         /// <summary>
@@ -60,6 +75,10 @@ namespace Content.Shared.Lathe
         [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
         public float MaterialUseMultiplier = 1;
         #endregion
+
+        // RMC14
+        [DataField, AutoNetworkedField]
+        public int MaxQueue = 6;
     }
 
     public sealed class LatheGetRecipesEvent : EntityEventArgs
@@ -68,7 +87,7 @@ namespace Content.Shared.Lathe
 
         public bool getUnavailable;
 
-        public List<ProtoId<LatheRecipePrototype>> Recipes = new();
+        public HashSet<ProtoId<LatheRecipePrototype>> Recipes = new();
 
         public LatheGetRecipesEvent(EntityUid lathe, bool forced)
         {

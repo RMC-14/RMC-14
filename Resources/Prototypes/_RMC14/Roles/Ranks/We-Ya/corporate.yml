@@ -1,0 +1,49 @@
+- type: rank
+  id: RMCRankWeYaJuniorExecutive
+  name: Junior Executive
+  prefix: Jr. Exec.
+
+- type: rank
+  id: RMCRankWeYaExecutive
+  name: Executive
+  prefix: Exec.
+
+- type: rank
+  id: RMCRankWeYaSeniorExecutive
+  name: Senior Executive
+  prefix: Sr. Exec.
+
+- type: rank
+  id: RMCRankWeYaExecutiveSpecialist
+  name: Executive Specialist
+  prefix: Exec. Spc.
+
+- type: rank
+  id: RMCRankWeYaExecutiveSupervisor
+  name: Executive Supervisor
+  prefix: Exec. Spvsr.
+
+- type: rank
+  id: RMCRankWeYaAssistantManager
+  name: Assistant Manager
+  prefix: Assis. Mng.
+
+- type: rank
+  id: RMCRankWeYaDivisionManager
+  name: Division Manager
+  prefix: Div. Mng.
+
+- type: rank
+  id: RMCRankWeYaChiefExecutive
+  name: Chief Executive
+  prefix: Chief. Exec.
+
+- type: rank
+  id: RMCRankWeYaDeputyDirector
+  name: Deputy Director
+  prefix: Dep. Director
+
+- type: rank
+  id: RMCRankWeYaDirector
+  name: Director
+  prefix: Director

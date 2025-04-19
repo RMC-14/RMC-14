@@ -1,4 +1,6 @@
-﻿using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Aura;
+using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared.Coordinates;
@@ -8,6 +10,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Xenonids.Lifesteal;
@@ -18,6 +21,10 @@ public sealed class XenoLifestealSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedRMCEmoteSystem _rmcEmote = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly SharedAuraSystem _aura = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _targets = new();
 
@@ -41,6 +48,9 @@ public sealed class XenoLifestealSystem : EntitySystem
         if (!args.IsHit)
             return;
 
+        if (!_xeno.CanHeal(xeno.Owner))
+            return;
+
         var found = false;
         foreach (var hit in args.HitEntities)
         {
@@ -62,6 +72,9 @@ public sealed class XenoLifestealSystem : EntitySystem
 
         if (!found)
             return;
+
+        if (xeno.Comp.Emote is { } emote)
+            _rmcEmote.TryEmoteWithChat(xeno, emote, cooldown: xeno.Comp.EmoteCooldown);
 
         if (!_damageableQuery.TryComp(xeno, out var damageable))
             return;
@@ -98,7 +111,7 @@ public sealed class XenoLifestealSystem : EntitySystem
 
         var amount = -FixedPoint2.Clamp(total * lifesteal, xeno.Comp.MinHeal, xeno.Comp.MaxHeal);
         var heal = _rmcDamageable.DistributeTypes(xeno.Owner, amount);
-        _damageable.TryChangeDamage(xeno, heal, true);
+        _damageable.TryChangeDamage(xeno, heal, true, origin: xeno, tool: xeno);
 
         if (lifesteal >= xeno.Comp.MaxPercentage)
         {
@@ -108,6 +121,10 @@ public sealed class XenoLifestealSystem : EntitySystem
 
             var selfMsg = Loc.GetString("rmc-lifesteal-more-self");
             _popup.PopupClient(selfMsg, xeno, xeno);
+            _aura.GiveAura(xeno, xeno.Comp.AuraColor, TimeSpan.FromSeconds(1));
+
+            if (_net.IsServer && xeno.Comp.MaxEffect is { } effect)
+                SpawnAttachedTo(effect, xeno.Owner.ToCoordinates());
         }
     }
 }

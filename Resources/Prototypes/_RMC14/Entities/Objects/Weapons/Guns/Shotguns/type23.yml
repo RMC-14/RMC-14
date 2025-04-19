@@ -1,0 +1,83 @@
+﻿- type: entity
+  parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
+  name: Type 23 riot shotgun
+  id: RMCWeaponShotgunType23
+  description: As SPP soldiers frequently reported being outmatched by enemy combatants, SPP High Command commissioned a large amount of Type 23 shotguns, originally used for quelling defector colony riots. This slow semi-automatic shotgun chambers 8 gauge, and packs a mean punch.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/type23.rsi
+    layers:
+    - state: icon
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/type23.rsi
+  - type: Gun
+    shotsPerBurst: 1
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_small.ogg
+  - type: ShootUseDelay
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 5
+    recoilUnwielded: 5
+    scatterWielded: 14
+    scatterUnwielded: 30
+    baseFireRate: 0.4
+    burstScatterMult: 5
+  - type: BallisticAmmoProvider
+    capacity: 5 # One in chamber 4 in tube we don't have chambering yet
+    whitelist:
+      tags: #Heavy shells
+      - RMCShellShotgunHeavyBuckshot
+      - RMCShellShotgunHeavySlugs
+      - RMCShellShotgunHeavyFlechette
+      - RMCShellShotgunIncendiaryHeavyBuckshot
+      - RMCShellShotgunHeavyBeanbag
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1
+    accuracyMultiplierUnwielded: 0.5
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentRecoilCompensator
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-stock:
+        startingAttachable: RMCAttachmentType23Stock
+        whitelist:
+          tags:
+          - RMCAttachmentType23Stock
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentFlamer
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentBurstFireAssembly #TODO RMC14 Needs to be able to shoot 3 shells at once when this is on /similar to custombuilt etc...
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.81, 0.06
+      rmc-aslot-rail: -0.07, 0.125
+      rmc-aslot-stock: -0.5, 0.06
+      rmc-aslot-underbarrel: 0.4, -0.28
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: Tag
+    tags:
+    - RMCWeaponShotgunType23
+    - RMCWeaponShotgun
+
+- type: Tag
+  id: RMCWeaponShotgunType23

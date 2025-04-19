@@ -1,4 +1,10 @@
-﻿namespace Content.Shared._RMC14.Rules;
+﻿using Robust.Shared.GameStates;
 
-[RegisterComponent]
-public sealed partial class RMCPlanetComponent : Component;
+namespace Content.Shared._RMC14.Rules;
+
+[RegisterComponent, NetworkedComponent]
+public sealed partial class RMCPlanetComponent : Component
+{
+    [DataField]
+    public Vector2i Offset;
+}

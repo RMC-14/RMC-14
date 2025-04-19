@@ -1,6 +1,6 @@
 - type: entity
   parent: CMBaseStructureCorrodible
-  id: RMCShutterBase
+  id: RMCShutterBaseIndestructible
   abstract: true
   name: shutters
   description: That looks like it doesn't open easily.
@@ -33,7 +33,7 @@
     containers:
       board: !type:Container
   - type: Door
-    openDrawDepth: BlastDoors
+    openDrawDepth: Walls
     closedDrawDepth: BlastDoors
     bumpOpen: false
     clickOpen: false
@@ -63,14 +63,36 @@
     mode: NoSprite
   - type: Airtight
   - type: Occluder
+  - type: MinimapColor
+    color: "#451e5eb8"
+  - type: WallMount
+    arc: 360
+  - type: ApcPowerReceiver
+  - type: RMCPowerReceiver
+    idleLoad: 1
+    activeLoad: 20
+    channel: Environment
+  - type: RMCOpenOnAlertLevel
+
+- type: entity
+  parent: RMCShutterBaseIndestructible
+  id: RMCShutterBase
+  abstract: true
+  components:
+  - type: Door
+    canPry: true
   - type: RMCWallExplosionDeletable
-  # TODO RMC14 Add linkable buttons and open/close logic to the shutters, thanks
+  - type: DestroyedByExplosionType
+    threshold: 1
 
 - type: entity
   parent: RMCShutterBase
   id: RMCShutterAlmayer
   components:
   - type: RMCPodDoor
+  - type: Clickable
+  - type: InteractionOutline
+
 
 - type: entity
   parent: RMCShutterAlmayer
@@ -86,4 +108,29 @@
   - type: Airtight
     airBlocked: false
   - type: RadiationBlocker
+    enabled: false
+
+- type: entity
+  parent: RMCShutterAlmayer
+  id: RMCShutterHybrisa
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Shutters/Hybrisa/hybrisa_shutter.rsi
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+
+- type: entity
+  parent: RMCShutterAlmayer
+  id: RMCShutterHybrisaWindow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Shutters/Hybrisa/window_shutter.rsi
+    drawdepth: BlastDoors
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+  - type: Door
+    occludes: false
+  - type: Occluder
     enabled: false

@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   id: XenoBaseProjectile
   name: projectile
@@ -21,16 +21,27 @@
         mask:
         - Impassable
         - BulletImpassable
+        - XenoProjectileImpassable
   - type: Projectile
     impactEffect: XenoProjectileImpactEffect
     damage: {}
-  - type: TimedDespawn
-    lifetime: 0.2
   - type: XenoProjectile
+  - type: ProjectileMaxRange
+    max: 7
+  - type: RMCProjectileAccuracy
+    accuracy: 165
 
 - type: entity
+  abstract: true
+  id: XenoSpitImpactSounds
+  components:
+  - type: Projectile
+    soundHit:
+      path: /Audio/_RMC14/Xeno/acid_impact1.ogg
+
+- type: entity
+  parent: [XenoSpitImpactSounds, XenoBaseProjectile]
   id: XenoSpitProjectile
-  parent: XenoBaseProjectile
   name: spit
   categories:
   - HideSpawnMenu
@@ -38,18 +49,19 @@
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
     layers:
-    - state: neurotoxin
+    - state: xeno_acid_weak
       shader: unshaded
   - type: Projectile
     impactEffect: null
     damage:
-      groups:
-        Burn: 20 # TODO RMC14 damage fall-off and higher at close range
+      types:
+        Heat: 20 # TODO RMC14 damage fall-off and higher at close range
   - type: CMArmorPiercing
     amount: 10
   - type: XenoProjectile
     deleteOnFriendlyXeno: true
-  - type: UncloakOnHit
+  - type: RMCProjectileAccuracy
+    accuracy: 110
 
 - type: entity
   parent: XenoSpitProjectile
@@ -60,30 +72,30 @@
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
     layers:
-    - state: neurotoxin
+    - state: xeno_acid_strong
       shader: unshaded
   - type: Projectile
     impactEffect: null
     damage:
-      groups:
-        Burn: 30 # TODO RMC14 damage fall-off and higher at close range
+      types:
+        Heat: 30 # TODO RMC14 damage fall-off and higher at close range
   - type: ModifyTargetOnHit
     add:
     - type: UserAcided
       armorPiercing: 40
       damage:
-        groups:
-          Burn: 1
+        types:
+          Heat: 1
       duration: 20
     whitelist:
       components:
       - Marine
-  - type: TimedDespawn
-    lifetime: 0.18
+  - type: ProjectileMaxRange
+    max: 6
 
 - type: entity
   id: XenoSlowingSpitProjectile
-  parent: XenoBaseProjectile
+  parent: [XenoSpitImpactSounds, XenoBaseProjectile]
   name: slowing spit
   categories:
   - HideSpawnMenu
@@ -97,10 +109,37 @@
     armorResistsKnockdown: true
   - type: XenoProjectile
     deleteOnFriendlyXeno: true
+  - type: DrainOnHit
+  - type: ProjectileMaxRange
+    max: 6
+
+- type: entity
+  id: XenoQueenNeuroSpitProjectile
+  parent: [XenoSpitImpactSounds, XenoBaseProjectile]
+  name: neurotoxic spit
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: neurotoxin
+      shader: unshaded
+  - type: XenoSlowingSpitProjectile
+    armorResistsKnockdown: false
+    slow: 0
+    paralyze: 4
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: true
+  - type: ProjectileMaxRange
+    max: 4
+  - type: RMCProjectileAccuracy
+    accuracy: 125
+
 
 - type: entity
   id: XenoScatteredSpitProjectile
-  parent: XenoBaseProjectile
+  parent: [XenoSpitImpactSounds, XenoBaseProjectile]
   name: scattered spit
   categories:
   - HideSpawnMenu
@@ -116,6 +155,8 @@
     armorResistsKnockdown: false
   - type: XenoProjectile
     deleteOnFriendlyXeno: true
+  - type: ProjectileMaxRange
+    max: 4
 
 - type: entity
   id: XenoBoneChipsProjectile
@@ -130,10 +171,9 @@
     - state: bonechips
       shader: unshaded
   - type: XenoSlowingSpitProjectile
+    superSlow: false
     slow: 5
     paralyze: 0
-  - type: TimedDespawn
-    lifetime: 0.2
   - type: Projectile
     impactEffect: null
     damage:
@@ -141,6 +181,10 @@
         Slash: 10
   - type: XenoProjectile
     deleteOnFriendlyXeno: false
+  - type: ProjectileMaxRange
+    max: 4
+  - type: RMCProjectileAccuracy
+    accuracy: 135
 
 - type: entity
   parent: XenoBaseProjectile
@@ -168,9 +212,26 @@
     popupType: LargeCaution
   - type: ProjectileMaxRange
     max: 10
+  - type: XenoSlowingSpitProjectile
+    slow: 0
+    paralyze: 4
+    armorResistsKnockdown: false
+  - type: ModifyTargetOnHit
+    add:
+    - type: UserAcided
+      armorPiercing: 40
+      damage:
+        types:
+          Heat: 1
+      duration: 20
+    whitelist:
+      components:
+      - Marine
+  - type: RMCProjectileAccuracy
+    accuracy: 95
 
 - type: entity
-  parent: XenoBombardAcidProjectile
+  parent: XenoBaseProjectile
   id: XenoBombardNeurotoxinProjectile
   name: glob of neurotoxin gas
   categories:
@@ -181,3 +242,178 @@
     layers:
     - state: neuro_glob
       shader: unshaded
+  - type: TimedDespawn
+    lifetime: 10
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: false
+  - type: SmokeOnTrigger
+    smokePrototype: RMCSmokeNeurotoxin
+    duration: 30
+    spreadAmount: 50
+  - type: SpawnOnTerminate
+    spawn: RMCSmokeNeurotoxin
+    popup: rmc-glob-land
+    popupType: LargeCaution
+  - type: ProjectileMaxRange
+    max: 10
+  - type: XenoSlowingSpitProjectile
+    slow: 0
+    paralyze: 4
+    armorResistsKnockdown: false
+  - type: NeurotoxinInjector
+    neuroPerSecond: 5
+    injectInContact: false
+    affectsDead: false
+    affectsInfectedNested: false
+    toxinDamage:
+        groups:
+          Toxin: 2
+    oxygenDamage:
+        types:
+          Asphyxiation: 150
+    coughDamage:
+        groups:
+          Brute: 5
+  - type: RMCProjectileAccuracy
+    accuracy: 95
+
+- type: entity
+  parent: XenoSpitProjectile
+  id: XenoAcidBallSpitProjectile
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: xeno_acid_normal
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Heat: 25
+  - type: ApplyAcidStacks
+    damage:
+      types:
+        Heat: 30
+  - type: RMCProjectileAccuracy
+    accuracy: 110
+  - type: ProjectileMaxRange
+    max: 3
+
+- type: entity
+  parent: XenoAcidBallSpitProjectile
+  id: XenoSpitProjectilePraetorian
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: xeno_acid_strong
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Heat: 30
+  - type: XenoProjectileShieldOnHit
+  - type: PreventCollideWithDead
+  - type: RMCProjectileAccuracy
+    accuracy: 160
+  - type: ProjectileMaxRange
+    max: 7
+
+- type: entity
+  parent: XenoSpitProjectile
+  id: XenoSpitProjectilePraetorianWarden
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: xeno_acid_strong
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Heat: 30
+
+- type: entity
+  id: XenoAcidBallProjectile
+  name: acid ball
+  description: A small, pulsating ball of gas.
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Clickable
+  - type: Physics
+    bodyType: Dynamic
+    linearDamping: 0
+    angularDamping: 0
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+        - XenoProjectileImpassable
+      fix2:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        hard: true
+        mask:
+        - Impassable
+        - BarricadeImpassable
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_acid_ball.rsi
+    layers:
+    - state: neuro_nade
+      shader: unshaded
+  - type: Projectile
+    deleteOnCollide: false
+    damage: {}
+  - type: TriggerOnFixedDistanceStop
+    delay: 1
+  - type: ProjectileGrenade
+    fillPrototype: XenoAcidBallSpitProjectile
+    capacity: 14
+  - type: ProjectileMaxRange
+    max: 5
+    delete: false
+  - type: ClusterLimitHits
+    limit: 4
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+
+- type: entity
+  parent: XenoBaseProjectile
+  id: XenoOppressorTailHook
+  name: tail hook
+  categories:
+  - HideSpawnMenu
+  components:
+  - type: Sprite
+    sprite: _RMC14/Effects/beam.rsi
+    state: oppressor_tail_hook
+    drawDepth: Effects # Draws above mobs
+  - type: ProjectileMaxRange
+    max: 3.5
+  - type: PreventCollideWithDead
+  - type: Projectile
+    impactEffect: null
+    damage:
+      types:
+        Slash: 40
+  - type: XenoProjectile
+    deleteOnFriendlyXeno: false
+  - type: RMCProjectileAccuracy
+    accuracy: 185
+  - type: XenoHookOnHit
+ 

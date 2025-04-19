@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Xenonids.Damage;
+using Content.Shared._RMC14.Xenonids.Damage;
 using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.Xenonids.Damage;

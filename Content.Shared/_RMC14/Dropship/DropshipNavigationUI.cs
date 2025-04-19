@@ -5,8 +5,9 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Dropship;
 
 [Serializable, NetSerializable]
-public sealed class DropshipNavigationDestinationsBuiState(List<Destination> destinations) : BoundUserInterfaceState
+public sealed class DropshipNavigationDestinationsBuiState(NetEntity? flyBy, List<Destination> destinations) : BoundUserInterfaceState
 {
+    public readonly NetEntity? FlyBy = flyBy;
     public readonly List<Destination> Destinations = destinations;
 }
 

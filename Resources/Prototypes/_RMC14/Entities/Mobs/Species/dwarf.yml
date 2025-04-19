@@ -14,9 +14,9 @@
     scale: 1, 0.8
   - type: Vocal
     sounds:
-      Male: RMCMaleHuman
-      Unsexed: RMCMaleHuman #sorry fem-leaning enbies
-      Female: RMCFemaleHuman
+      Male: RMCMaleDwarf
+      Unsexed: RMCMaleDwarf #sorry fem-leaning enbies
+      Female: RMCFemaleDwarf
   - type: ReplacementAccent
     accent: dwarf
   - type: Speech

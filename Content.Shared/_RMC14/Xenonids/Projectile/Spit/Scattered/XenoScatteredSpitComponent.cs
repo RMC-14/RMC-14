@@ -25,5 +25,5 @@ public sealed partial class XenoScatteredSpitComponent : Component
     public int MaxProjectiles = 5;
 
     [DataField, AutoNetworkedField]
-    public Angle MaxDeviation = Angle.FromDegrees(60);
+    public Angle MaxDeviation = Angle.FromDegrees(45);
 }

@@ -1,8 +1,10 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
+  - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
   id: CMXenoWarrior
   name: Warrior
   description: A beefy alien with an armored carapace.
@@ -33,8 +35,10 @@
     - ActionXenoFling
     - ActionXenoDevolve
     tier: 2
-    hudOffset: 0,0.25
+    hudOffset: -0.15,0.25
     unlockAt: 540 # 9 minutes
+    restHealMultiplier:  1.4
+  - type: XenoLight
   - type: XenoDevolve
     devolvesTo:
     - CMXenoDefender
@@ -50,20 +54,45 @@
     maxPlasma: 0
     plasmaRegenOnWeeds: 0
   - type: XenoEvolution
-    max: 540
+    max: 500
     evolvesTo:
     - CMXenoCrusher
-#    - CMXenoPraetorian
+    - CMXenoPraetorian
   - type: CMArmor
-    armor: 20
+    xenoArmor: 20
     explosionArmor: 40
+  - type: XenoClaws
+    clawType: Sharp
   - type: MeleeWeapon
     damage:
       groups:
         Brute: 35
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 48
   - type: Tackle
-    threshold: 4
-    stun: 5
+    max: 4
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.4525
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.5025
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.3625
+      whitelist:
+        components:
+        - XenoHeavy
   - type: XenoLifesteal
   - type: RMCXenoDamageVisuals
     prefix: warrior
+  - type: TacticalMapIcon
+    icon:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: warrior
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.2

@@ -7,3 +7,9 @@
   id: RMCXeno
   hostile:
   - UNMC
+
+- type: npcFaction
+  id: RMCDumb
+  hostile:
+  - UNMC
+  - RMCXeno

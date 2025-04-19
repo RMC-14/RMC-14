@@ -1,0 +1,108 @@
+- type: entity
+  id: HiveEggMorpherXeno
+  parent: BaseHiveStructure
+  name: Egg Morpher
+  description: A disgusting biomass generator that reeks of rotting flesh. Capable of producing parasites on its own.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/hive_structures.rsi
+    layers:
+      - state: eggmorph
+        map: ["enum.EggmorpherOverlayLayers.Base"]
+      - state: eggmorph_0
+        map: ["enum.EggmorpherOverlayLayers.Overlay"]
+        visible: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        layer:
+        - BulletImpassable
+        restitution: 0.3
+        friction: 0.2
+      xeno_egg:
+        shape:
+          !type:PhysShapeCircle
+          radius: 1.5
+        hard: false
+        mask:
+        - MobLayer
+  - type: CollisionWake
+    enabled: false
+  - type: Appearance
+  - type: StepTrigger
+    requiredTriggeredSpeed: 0
+    intersectRatio: 0.5
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 75
+  - type: EggMorpher
+  - type: HiveConstructionRequiresHiveWeeds
+  - type: HiveConstructionRequiresSpace
+  - type: HiveConstructionRequiresHiveCore
+  - type: HiveConstructionLimited
+    id: HiveEggMorpherXeno
+  - type: UserInterface
+    interfaces:
+      enum.XenoReserveParasiteChangeUI.Key:
+        type: ReserveParasitesBoundUserInterface
+      enum.XenoParasiteGhostUI.Key:
+        type: XenoParasiteGhostBui
+        requireInputValidation: false
+  - type: RMCAlternateSprite
+    normalSprite: _RMC14/Structures/Xenos/hive_structures.rsi
+    alternateSprite: _RMC14/Structures/Xenos/hive_structures_old.rsi
+
+- type: entity
+  id: HiveEggMorpherXenoConstructionNode
+  parent: BaseHiveStructureNode
+  name: Egg Morpher
+  description: A disgusting biomass generator that reeks of rotting flesh. Looks like a marker for something.
+  suffix: Construction
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/hive_structures.rsi
+    layers:
+    - state: eggmorph
+      color: '#FFFFFFAA'
+    - state: eggmorph_3
+      color: '#FFFFFFAA'
+    - sprite: _RMC14/Interface/xeno_hud.rsi
+      state: xeno_structure_node_indicator
+      scale: 0.8, 0.8
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: HiveConstructionNode
+    initialPlasmaCost: 400
+    plasmaCost: 450
+    spawn: HiveEggMorpherXeno
+  - type: HiveConstructionRequiresHiveCore
+  - type: HiveConstructionRequiresHiveWeeds
+  - type: HiveConstructionRequiresSpace
+  - type: HiveConstructionLimited
+    id: HiveEggMorpherXeno
+  - type: WarpPoint
+    location: egg morpher
+  - type: RMCAlternateSprite
+    normalSprite: _RMC14/Structures/Xenos/hive_structures.rsi
+    alternateSprite: _RMC14/Structures/Xenos/hive_structures_old.rsi

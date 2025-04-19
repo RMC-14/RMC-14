@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared._RMC14.Interaction;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Rotatable;
@@ -17,6 +18,7 @@ namespace Content.Shared.Interaction
     {
         [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
         [Dependency] private readonly SharedTransformSystem _transform = default!;
+        [Dependency] private readonly RMCInteractionSystem _rmcInteraction = default!;
 
         /// <summary>
         /// Tries to rotate the entity towards the target rotation. Returns false if it needs to keep rotating.
@@ -30,6 +32,8 @@ namespace Content.Shared.Interaction
         {
             if (!Resolve(uid, ref xform))
                 return true;
+
+            _rmcInteraction.TryCapWorldRotation((uid, null, xform), ref goalRotation);
 
             // If we have a max rotation speed then do that.
             // We'll rotate even if we can't shoot, looks better.

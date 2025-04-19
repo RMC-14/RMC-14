@@ -15,10 +15,14 @@ public sealed partial class LimitedStorageComponent : Component
     [Serializable, NetSerializable]
     public partial struct Limit()
     {
+        [DataField]
         public int Count = 1;
 
+        [DataField]
+        public EntityWhitelist? Blacklist = new();
+
         [DataField(required: true)]
-        public EntityWhitelist Whitelist;
+        public EntityWhitelist? Whitelist = new();
 
         [DataField(required: true)]
         public LocId Popup;

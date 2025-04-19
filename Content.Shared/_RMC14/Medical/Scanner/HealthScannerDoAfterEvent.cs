@@ -4,13 +4,4 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Medical.Scanner;
 
 [Serializable, NetSerializable]
-public sealed partial class HealthScannerDoAfterEvent : SimpleDoAfterEvent
-{
-    [DataField]
-    public NetEntity Scanned;
-
-    public HealthScannerDoAfterEvent(NetEntity scanned)
-    {
-        Scanned = scanned;
-    }
-}
+public sealed partial class HealthScannerDoAfterEvent : SimpleDoAfterEvent;

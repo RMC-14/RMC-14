@@ -1,4 +1,4 @@
-﻿namespace Content.Shared._RMC14.Storage;
+namespace Content.Shared._RMC14.Storage;
 
 /// <summary>
 /// Used to set visibility on open and closed layers when empty, open, or closed.
@@ -17,4 +17,10 @@ public sealed partial class CMStorageVisualizerComponent : Component
     /// </summary>
     [DataField]
     public string? StorageOpen;
+
+    /// <summary>
+    /// Sprite layer name of the empty state.
+    /// </summary>
+    [DataField]
+    public string? StorageEmpty;
 }

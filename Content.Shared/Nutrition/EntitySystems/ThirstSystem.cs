@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Alert;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
@@ -8,7 +9,6 @@ using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Shared.Nutrition.EntitySystems;
 
@@ -22,26 +22,18 @@ public sealed class ThirstSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _movement = default!;
     [Dependency] private readonly SharedJetpackSystem _jetpack = default!;
 
-    [ValidatePrototypeId<StatusIconPrototype>]
+    [ValidatePrototypeId<SatiationIconPrototype>]
     private const string ThirstIconOverhydratedId = "ThirstIconOverhydrated";
 
-    [ValidatePrototypeId<StatusIconPrototype>]
+    [ValidatePrototypeId<SatiationIconPrototype>]
     private const string ThirstIconThirstyId = "ThirstIconThirsty";
 
-    [ValidatePrototypeId<StatusIconPrototype>]
+    [ValidatePrototypeId<SatiationIconPrototype>]
     private const string ThirstIconParchedId = "ThirstIconParched";
-
-    private StatusIconPrototype? _thirstIconOverhydrated = null;
-    private StatusIconPrototype? _thirstIconThirsty = null;
-    private StatusIconPrototype? _thirstIconParched = null;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        DebugTools.Assert(_prototype.TryIndex(ThirstIconOverhydratedId, out _thirstIconOverhydrated) &&
-                          _prototype.TryIndex(ThirstIconThirstyId, out _thirstIconThirsty) &&
-                          _prototype.TryIndex(ThirstIconParchedId, out _thirstIconParched));
 
         SubscribeLocalEvent<ThirstComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovespeed);
         SubscribeLocalEvent<ThirstComponent, MapInitEvent>(OnMapInit);
@@ -69,6 +61,7 @@ public sealed class ThirstSystem : EntitySystem
 
     private void OnRefreshMovespeed(EntityUid uid, ThirstComponent component, RefreshMovementSpeedModifiersEvent args)
     {
+        return; // RMC14 no thirst in 13, so no slowdown from it here
         // TODO: This should really be taken care of somewhere else
         if (_jetpack.IsUserFlying(uid))
             return;
@@ -109,7 +102,8 @@ public sealed class ThirstSystem : EntitySystem
             component.ThirstThresholds[ThirstThreshold.Dead],
             component.ThirstThresholds[ThirstThreshold.OverHydrated]
         );
-        Dirty(uid, component);
+
+        EntityManager.DirtyField(uid, component, nameof(ThirstComponent.CurrentThirst));
     }
 
     private bool IsMovementThreshold(ThirstThreshold threshold)
@@ -128,26 +122,28 @@ public sealed class ThirstSystem : EntitySystem
         }
     }
 
-    public bool TryGetStatusIconPrototype(ThirstComponent component, out StatusIconPrototype? prototype)
+    public bool TryGetStatusIconPrototype(ThirstComponent component, [NotNullWhen(true)] out SatiationIconPrototype? prototype)
     {
         switch (component.CurrentThirstThreshold)
         {
             case ThirstThreshold.OverHydrated:
-                prototype = _thirstIconOverhydrated;
-                return true;
+                _prototype.TryIndex(ThirstIconOverhydratedId, out prototype);
+                break;
 
             case ThirstThreshold.Thirsty:
-                prototype = _thirstIconThirsty;
-                return true;
+                _prototype.TryIndex(ThirstIconThirstyId, out prototype);
+                break;
 
             case ThirstThreshold.Parched:
-                prototype = _thirstIconParched;
-                return true;
+                _prototype.TryIndex(ThirstIconParchedId, out prototype);
+                break;
 
             default:
                 prototype = null;
-                return false;
+                break;
         }
+
+        return prototype != null;
     }
 
     private void UpdateEffects(EntityUid uid, ThirstComponent component)

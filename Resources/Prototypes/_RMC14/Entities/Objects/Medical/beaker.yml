@@ -11,6 +11,38 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpillBehavior
+        solution: beaker
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DamageOnLand
+    damage: {}
+  - type: DamageOtherOnHit
+    damage: {}
+  - type: DamageOnHighSpeedImpact
+    minimumSpeed: 2
+    damage: {}
+
+- type: entity
+  parent: BaseBeakerMetallic
+  id: RMCBeakerBaseMetallic
+  abstract: true
+  components:
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
         damage: 5
       behaviors:
       - !type:PlaySoundBehavior
@@ -20,12 +52,6 @@
             volume: -4
       - !type:SpillBehavior
         solution: beaker
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          CMShardGlass:
-            min: 1
-            max: 1
-        transferForensics: true
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
 
@@ -37,6 +63,14 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Medical/beaker.rsi
+    layers:
+    - state: beaker
+    - state: beaker1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+    - state: lid_beaker
+      map: ["enum.OpenableVisuals.Layer"]
+      visible: false
   - type: Item
     size: Small
     sprite: _RMC14/Objects/Medical/beaker.rsi
@@ -47,10 +81,27 @@
     solutions:
       beaker:
         maxVol: 60
+  - type: Openable
+    opened: true
+    closeable: true
+    examineText: rmc-bottle-closed
+    openVerbText: rmc-bottle-remove-lid
+    closeVerbText: rmc-bottle-put-lid
+    sound: null
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: {visible: false}
+          False: {visible: true}
   - type: Spillable
     solution: beaker
   - type: StaticPrice
     price: 10
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 - type: entity
   parent: CMBeakerBase
@@ -65,6 +116,9 @@
     - state: beakerlarge1
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: false
+    - state: lid_beakerlarge
+      map: ["enum.OpenableVisuals.Layer"]
+      visible: false
   - type: Item
     sprite: _RMC14/Objects/Medical/large_beaker.rsi
   - type: SolutionContainerManager
@@ -74,10 +128,87 @@
   - type: SolutionContainerVisuals
     maxFillLevels: 5
     fillBaseName: beakerlarge
+  - type: Openable
+    opened: true
+    closeable: true
+    examineText: rmc-bottle-closed
+    openVerbText: rmc-bottle-remove-lid
+    closeVerbText: rmc-bottle-put-lid
+    sound: null
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: {visible: false}
+          False: {visible: true}
   - type: Spillable
     solution: beaker
   - type: StaticPrice
     price: 20
+
+- type: entity
+  parent: RMCBeakerBaseMetallic
+  id: RMCBeakerHighCapacity
+  name: high-capacity beaker
+  description: A beaker with an enlarged holding capacity, made with blue-tinted plexiglass in order to withstand greater pressure. Can hold up to 300 units.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/high_capacity_beaker.rsi
+    layers:
+    - state: beakerbluespace
+    - state: beakerbluespace1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+    - state: lid_beakerbluespace
+      map: ["enum.OpenableVisuals.Layer"]
+      visible: false
+  - type: Item
+    sprite: _RMC14/Objects/Medical/high_capacity_beaker.rsi
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 300
+  - type: SolutionContainerVisuals
+    maxFillLevels: 5
+    fillBaseName: beakerbluespace
+  - type: SolutionTransfer
+    transferAmount: 100
+    maxTransferAmount: 300
+    canChangeTransferAmount: true
+    transferAmounts:
+    - 5
+    - 10
+    - 15
+    - 20
+    - 25
+    - 30
+    - 40
+    - 60
+    - 80
+    - 100
+    - 120
+    - 300
+  - type: Openable
+    opened: true
+    closeable: true
+    examineText: rmc-bottle-closed
+    openVerbText: rmc-bottle-remove-lid
+    closeVerbText: rmc-bottle-put-lid
+    sound: null
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: {visible: false}
+          False: {visible: true}
+  - type: Spillable
+    solution: beaker
+  - type: StaticPrice
+    price: 20
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 # Minitank /obj/item/reagent_container/glass/minitank
 - type: entity
@@ -107,11 +238,15 @@
     solution: beaker
   - type: StaticPrice
     price: 20
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - none
 
 # Pressurised Canister /obj/item/reagent_container/glass/pressurized_canister
 - type: entity
   parent: CMBeakerBase
-  id: CMPressurizedCanister
+  id: RMCPressurizedCanister
   name: pressurized canister
   description: A pressurized container. The inner part of a pressurized reagent canister pouch. Only compatible with its pouch, machinery or a storage tank.
   components:
@@ -132,14 +267,147 @@
   - type: SolutionContainerVisuals
     maxFillLevels: 1
     fillBaseName: can
-  - type: Spillable
-    solution: beaker
   - type: StaticPrice
     price: 40
   - type: Tag
     tags:
     - PressurizedCanister
     - ChemDispensable
+  - type: DrainableSolution
+    solution: beaker
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - none
+
+- type: entity
+  parent: RMCPressurizedCanister
+  id: RMCPressurizedCanisterBicaridine
+  suffix: Bicaridine
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 480
+        reagents:
+        - ReagentId: CMBicaridine
+          Quantity: 480
+
+- type: entity
+  parent: RMCPressurizedCanister
+  id: RMCPressurizedCanisterKelotane
+  suffix: Kelotane
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 480
+        reagents:
+        - ReagentId: CMKelotane
+          Quantity: 480
+
+- type: entity
+  parent: RMCPressurizedCanister
+  id: RMCPressurizedCanisterTricordrazineRevival
+  suffix: Tricordrazine - Revival
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 480
+        reagents:
+        - ReagentId: CMEpinephrine
+          Quantity: 160
+        - ReagentId: CMInaprovaline
+          Quantity: 160
+        - ReagentId: CMTricordrazine
+          Quantity: 160
+
+- type: entity
+  parent: RMCPressurizedCanister
+  id: RMCPressurizedCanisterTricordrazine
+  suffix: Tricordrazine
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 480
+        reagents:
+        - ReagentId: CMTricordrazine
+          Quantity: 480
 
 - type: Tag
   id: PressurizedCanister
+
+- type: entity
+  parent: CMBeakerBase
+  id: RMCVial
+  name: vial
+  description: A small glass vial. Can hold up to 30 units.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Chemistry/vials.rsi
+    layers:
+    - state: vial
+    - state: vial1
+      map: ["enum.SolutionContainerLayers.Fill"]
+    - state: vial-lid
+      map: ["enum.OpenableVisuals.Layer"]
+      visible: false
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Chemistry/vials.rsi
+  - type: SolutionContainerVisuals
+    maxFillLevels: 6
+    fillBaseName: vial
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 30
+  - type: SolutionTransfer
+    transferAmount: 5
+    maxTransferAmount: 30
+    canChangeTransferAmount: true
+    transferAmounts:
+    - 5
+    - 10
+    - 15
+    - 25
+    - 30
+  - type: Spillable
+    solution: beaker
+  - type: Openable
+    opened: true
+    closeable: true
+    examineText: rmc-bottle-closed
+    openVerbText: rmc-bottle-remove-lid
+    closeVerbText: rmc-bottle-put-lid
+    sound: null
+  - type: GenericVisualizer
+    visuals:
+      enum.OpenableVisuals.Opened:
+        enum.OpenableVisuals.Layer:
+          True: {visible: false}
+          False: {visible: true}
+  - type: Vial
+  - type: StaticPrice
+    price: 10
+
+- type: entity
+  parent: RMCVial
+  id: RMCVialTricordrazine
+  name: tricordrazine vial
+  description: A small glass vial. Can hold up to 30 units. Contains Tricordrazine, a weak general use medicine for treating damage.
+  suffix: Filled, Tricordrazine
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 30
+        reagents:
+        - ReagentId: CMTricordrazine
+          Quantity: 30
+  - type: CMRefillableSolution
+    solution: beaker
+    reagents:
+      CMTricordrazine: 30

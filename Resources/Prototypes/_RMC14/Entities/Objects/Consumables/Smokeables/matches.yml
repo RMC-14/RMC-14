@@ -1,15 +1,83 @@
 - type: entity
   name: match box
-  parent: Matchbox
-  id: CMMatchbox
+  description: A small box of 'Space-Proof' premium matches.
+  parent: [ SmallboxItem, BaseBagOpenClose ]
+  id: RMCMatchbox
   components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/matchbox_drop.ogg
+  - type: Matchbox
+  - type: Sprite
+    sprite:  _RMC14/Objects/Consumable/Smokeables/Matchboxes/matchbox.rsi
+    layers:
+    - state: matchbox
+    - state: matchbox-0
+      map: ["enum.StorageFillLayers.Fill"]
+      visible: false
+  - type: Item
+    sprite: Objects/Tools/matches.rsi
+    heldPrefix: matchbox
+    size: Tiny
+  - type: Clothing
+    slots:
+    - belt
+  - type: StorageFillVisualizer
+    maxFillLevels: 7
+    fillBaseName: matchbox
   - type: Storage
     grid:
-    - 0,0,2,1
+    - 0,0,13,1
     whitelist:
       tags:
       - Matchstick
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        enum.StorageFillLayers.Fill:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Tag
+    tags:
+    - Trash
+  - type: SpaceGarbage
   - type: InteractedBlacklist
     blacklist:
       components:
       - Xeno
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/matches/matches.rsi
+      state: helmet
+
+- type: entity
+  name: match box
+  parent: RMCMatchbox
+  id: RMCMatchboxFull
+  suffix: Full
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMatchstick
+      amount: 14
+
+- type: entity
+  name: match
+  description: A simple match stick, used for lighting fine smokables.
+  parent: Matchstick
+  id: RMCMatchstick
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Matches/match.rsi
+    state: match_unlit
+
+- type: entity
+  name: paper match
+  description: A simple match stick, used for lighting fine smokables.
+  parent: RMCMatchstick
+  id: RMCMatchstickPaper
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Matches/paper.rsi
+    state: match_unlit

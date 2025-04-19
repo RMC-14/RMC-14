@@ -3,5 +3,5 @@
 namespace Content.Shared._RMC14.Explosion;
 
 [RegisterComponent, NetworkedComponent]
-[Access(typeof(SharedCMExplosionSystem))]
+[Access(typeof(SharedRMCExplosionSystem))]
 public sealed partial class RMCWallExplosionDeletableComponent : Component;

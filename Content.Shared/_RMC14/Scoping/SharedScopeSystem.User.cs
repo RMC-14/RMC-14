@@ -33,6 +33,9 @@ public partial class SharedScopeSystem
 
     private void OnMoveInput(Entity<ScopingComponent> ent, ref MoveInputEvent args)
     {
+        if (!args.HasDirectionalMovement)
+            return;
+
         if (!ent.Comp.AllowMovement)
             UserStopScoping(ent);
     }

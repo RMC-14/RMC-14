@@ -1,6 +1,8 @@
-﻿using Content.Shared._RMC14.Prototypes;
+﻿using Content.Shared._RMC14.Marines.Roles.Ranks;
+using Content.Shared._RMC14.Prototypes;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
+using Robust.Shared.Utility;
 
 // ReSharper disable CheckNamespace
 namespace Content.Shared.Roles;
@@ -35,4 +37,22 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
 
     [DataField]
     public readonly string? OverwatchRoleName;
+
+    [DataField]
+    public readonly Dictionary<ProtoId<RankPrototype>, HashSet<JobRequirement>?>? Ranks;
+
+    [DataField]
+    public SpriteSpecifier.Rsi? MinimapIcon;
+
+    [DataField]
+    public SpriteSpecifier.Rsi? MinimapBackground;
+
+    [DataField]
+    public float RoleWeight;
+
+    [DataField]
+    public ProtoId<StartingGearPrototype>? DummyStartingGear { get; private set; }
+
+    [DataField]
+    public LocId? Greeting;
 }

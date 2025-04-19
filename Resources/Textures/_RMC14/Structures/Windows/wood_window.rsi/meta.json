@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/6c8f3153bb8846baa74e413b3ed8d3355aebcea3/icons/turf/walls/windows.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "wood_window0"
+    },
+    {
+      "name": "wood_window1"
+    },
+    {
+      "name": "wood_window2"
+    },
+    {
+      "name": "wood_window3"
+    },
+    {
+      "name": "wood_window4"
+    },
+    {
+      "name": "wood_window5"
+    },
+    {
+      "name": "wood_window6"
+    },
+    {
+      "name": "wood_window7"
+    },
+    {
+      "name": "wood_window8"
+    },
+    {
+      "name": "wood_window9"
+    },
+    {
+      "name": "wood_window10"
+    },
+    {
+      "name": "wood_window11"
+    },
+    {
+      "name": "wood_window12"
+    },
+    {
+      "name": "wood_window13"
+    },
+    {
+      "name": "wood_window14"
+    },
+    {
+      "name": "wood_window15"
+    }
+  ]
+}

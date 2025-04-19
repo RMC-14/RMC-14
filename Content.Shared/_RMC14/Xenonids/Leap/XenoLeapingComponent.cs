@@ -1,4 +1,4 @@
-﻿using Robust.Shared.Audio;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -22,7 +22,7 @@ public sealed partial class XenoLeapingComponent : Component
     public TimeSpan LeapEndTime;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan MoveDelayTime = TimeSpan.FromSeconds(.7);
+    public TimeSpan MoveDelayTime;
 
     [DataField, AutoNetworkedField]
     public bool KnockedDown;
@@ -32,4 +32,7 @@ public sealed partial class XenoLeapingComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool KnockdownRequiresInvisibility;
+
+    [DataField, AutoNetworkedField]
+    public bool DestroyObjects;
 }

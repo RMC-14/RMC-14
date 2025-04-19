@@ -1,5 +1,4 @@
-﻿using Content.Shared._RMC14.Marines.Skills;
-using Content.Shared._RMC14.Medical.Surgery.Conditions;
+﻿using Content.Shared._RMC14.Medical.Surgery.Conditions;
 using Content.Shared._RMC14.Medical.Surgery.Steps;
 using Content.Shared._RMC14.Medical.Surgery.Tools;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -48,7 +47,7 @@ public abstract partial class SharedCMSurgerySystem
                     TryComp(tool, out CMSurgeryToolComponent? toolComp) &&
                     toolComp.EndSound != null)
                 {
-                    _audio.PlayEntity(toolComp.EndSound, args.User, tool);
+                    _audio.PlayPvs(toolComp.EndSound, tool);
                 }
             }
         }
@@ -167,9 +166,7 @@ public abstract partial class SharedCMSurgerySystem
 
     private void OnCutLarvaRootsStep(Entity<CMSurgeryCutLarvaRootsStepComponent> ent, ref CMSurgeryStepEvent args)
     {
-        if (TryComp(args.Body, out VictimInfectedComponent? infected) &&
-            infected.BurstAt > _timing.CurTime &&
-            infected.SpawnedLarva == null)
+        if (TryComp(args.Body, out VictimInfectedComponent? infected) && !infected.IsBursting)
         {
             infected.RootsCut = true;
         }
@@ -180,9 +177,8 @@ public abstract partial class SharedCMSurgerySystem
         if (!TryComp(args.Body, out VictimInfectedComponent? infected) || !infected.RootsCut)
             args.Cancelled = true;
 
-        // The larva has fully developed and surgery is now impossible
-        // TODO: Surgery should still be possible, but the fully developed larva should escape while also saving the hosts life
-        if (infected != null && infected.SpawnedLarva != null)
+        // The larva is bursting
+        if (infected != null && infected.IsBursting)
             args.Cancelled = true;
     }
 
@@ -190,7 +186,8 @@ public abstract partial class SharedCMSurgerySystem
     {
         var user = args.Actor;
         if (GetEntity(args.Entity) is not { Valid: true } body ||
-            !IsSurgeryValid(body, args.Part, args.Surgery, args.Step, out var surgery, out var part, out var step))
+            GetEntity(args.Part) is not { Valid: true } targetPart ||
+            !IsSurgeryValid(body, targetPart, args.Surgery, args.Step, out var surgery, out var part, out var step))
         {
             return;
         }
@@ -209,9 +206,9 @@ public abstract partial class SharedCMSurgerySystem
             foreach (var tool in validTools)
             {
                 if (TryComp(tool, out CMSurgeryToolComponent? toolComp) &&
-                    toolComp.EndSound != null)
+                    toolComp.StartSound != null)
                 {
-                    _audio.PlayEntity(toolComp.StartSound, user, tool);
+                    _audio.PlayPvs(toolComp.StartSound, tool);
                 }
             }
         }
@@ -219,10 +216,11 @@ public abstract partial class SharedCMSurgerySystem
         if (TryComp(body, out TransformComponent? xform))
             _rotateToFace.TryFaceCoordinates(user, _transform.GetMapCoordinates(body, xform).Position);
 
-        var ev = new CMSurgeryDoAfterEvent(GetNetEntity(part), args.Surgery, args.Step);
-        var doAfter = new DoAfterArgs(EntityManager, user, 2, ev, body, body)
+        var ev = new CMSurgeryDoAfterEvent(args.Surgery, args.Step);
+        var doAfter = new DoAfterArgs(EntityManager, user, 2, ev, body, part)
         {
-            BreakOnMove = true
+            BreakOnMove = true,
+            TargetEffect = "RMCEffectHealBusy",
         };
         _doAfter.TryStartDoAfter(doAfter);
     }

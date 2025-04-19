@@ -14,7 +14,9 @@
   - type: SpaceGarbage
   - type: Clothing
     sprite: Objects/Consumable/Smokeables/Cigarettes/cigarette.rsi
-    slots: [ mask ]
+    slots:
+    - mask
+    - ears
     equippedPrefix: unlit
   - type: Item
     size: Tiny
@@ -132,7 +134,7 @@
 - type: entity
   id: CigaretteDylovene
   parent: SoakedCigarette
-  name: Urinal Cake Disolver
+  name: Urinal Cake Dissolver
   components:
   - type: SolutionContainerManager
     solutions:
@@ -201,7 +203,7 @@
         reagents:
           - ReagentId: Nicotine
             Quantity: 10
-          - ReagentId: Bicaridine
+          - ReagentId: CMBicaridine
             Quantity: 10
 
 - type: entity

@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Weapons.Ranged;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
 using Content.Shared.Examine;
 using Content.Shared.Hands;
@@ -13,6 +14,9 @@ public abstract partial class SharedGunSystem
     private void OnExamine(EntityUid uid, GunComponent component, ExaminedEvent args)
     {
         if (!args.IsInDetailsRange || !component.ShowExamineText)
+            return;
+
+        if (HasComp<XenoComponent>(args.Examiner))
             return;
 
         using (args.PushGroup(nameof(GunComponent)))
@@ -32,6 +36,9 @@ public abstract partial class SharedGunSystem
     private void OnAltVerb(EntityUid uid, GunComponent component, GetVerbsEvent<AlternativeVerb> args)
     {
         if (!args.CanAccess || !args.CanInteract || component.SelectedMode == component.AvailableModes)
+            return;
+
+        if (HasComp<XenoComponent>(args.User))
             return;
 
         var nextMode = GetNextMode(component);
@@ -62,7 +69,7 @@ public abstract partial class SharedGunSystem
         return modes[(index + 1) % modes.Count];
     }
 
-    private void SelectFire(EntityUid uid, GunComponent component, SelectiveFire fire, EntityUid? user = null)
+    public void SelectFire(EntityUid uid, GunComponent component, SelectiveFire fire, EntityUid? user = null)
     {
         if (component.SelectedMode == fire)
             return;

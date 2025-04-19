@@ -1,6 +1,4 @@
-﻿using System.Numerics;
 using Content.Shared.Damage;
-using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -15,11 +13,14 @@ public sealed partial class XenoPunchComponent : Component
     public DamageSpecifier Damage = new();
 
     [DataField, AutoNetworkedField]
-    public float Range = 5;
+    public float Range = 1; // 1 tile from start
 
     [DataField, AutoNetworkedField]
     public EntProtoId Effect = "CMEffectPunch";
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/_RMC14/Xeno/alien_claw_block.ogg");
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan SlowDuration = TimeSpan.FromSeconds(5);
 }

@@ -1,4 +1,6 @@
-﻿using Content.Shared._RMC14.Armor;
+using System.Linq;
+using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Fortify;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared._RMC14.Xenonids.Sweep;
@@ -15,6 +17,7 @@ public sealed class XenoCrestSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly CMArmorSystem _armor = default!;
 
     public override void Initialize()
     {
@@ -43,8 +46,22 @@ public sealed class XenoCrestSystem : EntitySystem
 
         args.Handled = true;
 
+        if (TryComp<RMCSizeComponent>(xeno, out var size))
+        {
+            if (!xeno.Comp.Lowered)
+            {
+                xeno.Comp.OriginalSize = size.Size;
+                size.Size = xeno.Comp.CrestSize;
+            }
+            else
+                size.Size = xeno.Comp.OriginalSize ?? RMCSizes.Xeno;
+            Dirty(xeno.Owner, size);
+        }
+
         xeno.Comp.Lowered = !xeno.Comp.Lowered;
         Dirty(xeno);
+
+        _armor.UpdateArmorValue((xeno, null));
 
         _movementSpeed.RefreshMovementSpeedModifiers(xeno);
         _appearance.SetData(xeno, XenoVisualLayers.Crest, xeno.Comp.Lowered);
@@ -65,12 +82,12 @@ public sealed class XenoCrestSystem : EntitySystem
     private void OnXenoCrestGetArmor(Entity<XenoCrestComponent> xeno, ref CMGetArmorEvent args)
     {
         if (xeno.Comp.Lowered)
-            args.Armor += xeno.Comp.Armor;
+            args.XenoArmor += xeno.Comp.Armor;
     }
 
     private void OnXenoCrestBeforeStatusAdded(Entity<XenoCrestComponent> xeno, ref BeforeStatusEffectAddedEvent args)
     {
-        if (xeno.Comp.Lowered && args.Key == xeno.Comp.ImmuneToStatus)
+        if (xeno.Comp.Lowered && xeno.Comp.ImmuneToStatuses.Contains(args.Key))
             args.Cancelled = true;
     }
 

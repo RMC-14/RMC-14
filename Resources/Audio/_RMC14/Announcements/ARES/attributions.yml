@@ -1,4 +1,39 @@
+- files: ["ares_online.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/14c5cbb3b77f7ce43e5571355784cb4abcd021ea/sound/AI/ares_online.ogg"
+
+- files: ["bioscan.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/AI/bioscan.ogg"
+
+- files: ["dropship_emergency.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/AI/dropship_emergency.ogg"
+
+- files: ["evacuate_cancelled.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/AI/evacuate_cancelled.ogg"
+
+- files: ["evacuation_complete.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/AI/evacuation_complete.ogg"
+
+- files: ["evacuation_confirmed.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/AI/evacuation_confirmed.ogg"
+
 - files: ["hijack.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "cmss13"
-  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/AI/hijack.ogg"
+  source: "https://github.com/cmss13-devs/cmss13/21e6447cc08aea502f671c819fdbcecbb85e6028master/sound/AI/hijack.ogg"
+
+- files: ["GQfullcall.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/e6c579f4d6d2e117cd8a7021fe6ac773bd897cd6master/sound/effects/GQfullcall.ogg"

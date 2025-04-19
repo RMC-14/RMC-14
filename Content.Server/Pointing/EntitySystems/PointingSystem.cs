@@ -1,6 +1,8 @@
 using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Pointing.Components;
+using Content.Shared._RMC14.Pointing;
+using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Eye;
@@ -14,6 +16,7 @@ using Content.Shared.Popups;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
+using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
 using Robust.Shared.GameStates;
 using Robust.Shared.Input.Binding;
@@ -27,6 +30,7 @@ namespace Content.Server.Pointing.EntitySystems
     [UsedImplicitly]
     internal sealed class PointingSystem : SharedPointingSystem
     {
+        [Dependency] private readonly IConfigurationManager _config = default!;
         [Dependency] private readonly IReplayRecordingManager _replay = default!;
         [Dependency] private readonly IMapManager _mapManager = default!;
         [Dependency] private readonly IPlayerManager _playerManager = default!;
@@ -37,10 +41,11 @@ namespace Content.Server.Pointing.EntitySystems
         [Dependency] private readonly VisibilitySystem _visibilitySystem = default!;
         [Dependency] private readonly SharedMindSystem _minds = default!;
         [Dependency] private readonly SharedTransformSystem _transform = default!;
+        [Dependency] private readonly SharedMapSystem _map = default!;
         [Dependency] private readonly IAdminLogManager _adminLogger = default!;
         [Dependency] private readonly ExamineSystemShared _examine = default!;
 
-        private static readonly TimeSpan PointDelay = TimeSpan.FromSeconds(2f);
+        private TimeSpan _pointDelay = TimeSpan.FromSeconds(0.5f);
 
         /// <summary>
         ///     A dictionary of players to the last time that they
@@ -70,8 +75,13 @@ namespace Content.Server.Pointing.EntitySystems
         }
 
         // TODO: FOV
-        private void SendMessage(EntityUid source, IEnumerable<ICommonSession> viewers, EntityUid pointed, string selfMessage,
-            string viewerMessage, string? viewerPointedAtMessage = null)
+        private void SendMessage(
+            EntityUid source,
+            IEnumerable<ICommonSession> viewers,
+            EntityUid pointed,
+            string selfMessage,
+            string viewerMessage,
+            string? viewerPointedAtMessage = null)
         {
             var netSource = GetNetEntity(source);
 
@@ -124,7 +134,7 @@ namespace Content.Server.Pointing.EntitySystems
             }
 
             if (_pointers.TryGetValue(session, out var lastTime) &&
-                _gameTiming.CurTime < lastTime + PointDelay)
+                _gameTiming.CurTime < lastTime + _pointDelay)
             {
                 return false;
             }
@@ -148,7 +158,10 @@ namespace Content.Server.Pointing.EntitySystems
             var mapCoordsPointed = _transform.ToMapCoordinates(coordsPointed);
             _rotateToFaceSystem.TryFaceCoordinates(player, mapCoordsPointed.Position);
 
-            var arrow = EntityManager.SpawnEntity("PointingArrow", coordsPointed);
+            var arrowEv = new RMCSpawnPointingArrowEvent("PointingArrow", coordsPointed);
+            RaiseLocalEvent(player, ref arrowEv);
+
+            var arrow = arrowEv.Spawned ?? EntityManager.SpawnEntity(arrowEv.Arrow, coordsPointed);
 
             if (TryComp<PointingArrowComponent>(arrow, out var pointing))
             {
@@ -223,8 +236,8 @@ namespace Content.Server.Pointing.EntitySystems
 
                 if (_mapManager.TryFindGridAt(mapCoordsPointed, out var gridUid, out var grid))
                 {
-                    position = $"EntId={gridUid} {grid.WorldToTile(mapCoordsPointed.Position)}";
-                    tileRef = grid.GetTileRef(grid.WorldToTile(mapCoordsPointed.Position));
+                    position = $"EntId={gridUid} {_map.WorldToTile(gridUid, grid, mapCoordsPointed.Position)}";
+                    tileRef = _map.GetTileRef(gridUid, grid, _map.WorldToTile(gridUid, grid, mapCoordsPointed.Position));
                 }
 
                 var tileDef = _tileDefinitionManager[tileRef?.Tile.TypeId ?? 0];
@@ -257,6 +270,8 @@ namespace Content.Server.Pointing.EntitySystems
             CommandBinds.Builder
                 .Bind(ContentKeyFunctions.Point, new PointerInputCmdHandler(TryPoint))
                 .Register<PointingSystem>();
+
+            Subs.CVar(_config, CCVars.PointingCooldownSeconds, v => _pointDelay = TimeSpan.FromSeconds(v), true);
         }
 
         private void OnPointAttempt(PointingAttemptEvent ev, EntitySessionEventArgs args)

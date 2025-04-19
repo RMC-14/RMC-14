@@ -16,7 +16,6 @@ namespace Content.Client._RMC14.Xenonids.Pheromones;
 [UsedImplicitly]
 public sealed class XenoPheromonesBui : BoundUserInterface
 {
-    [Dependency] private readonly IEntityManager _entities = default!;
     [Dependency] private readonly IClyde _displayManager = default!;
     [Dependency] private readonly IInputManager _inputManager = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
@@ -24,6 +23,7 @@ public sealed class XenoPheromonesBui : BoundUserInterface
 
     private readonly SpriteSystem _sprite;
     private readonly TransformSystem _transform;
+    private readonly SharedXenoPheromonesSystem _pheros;
 
     [ViewVariables]
     private XenoPheromonesMenu? _xenoPheromonesMenu;
@@ -34,8 +34,9 @@ public sealed class XenoPheromonesBui : BoundUserInterface
     {
         IoCManager.InjectDependencies(this);
 
-        _sprite = _entities.System<SpriteSystem>();
-        _transform = _entities.System<TransformSystem>();
+        _sprite = EntMan.System<SpriteSystem>();
+        _transform = EntMan.System<TransformSystem>();
+        _pheros = EntMan.System<SharedXenoPheromonesSystem>();
     }
 
     protected override void Open()
@@ -68,28 +69,37 @@ public sealed class XenoPheromonesBui : BoundUserInterface
             helpButton.AddChild(helpTexture);
             parent.AddChild(helpButton);
 
-            AddPheromonesButton(XenoPheromones.Frenzy, parent);
-            AddPheromonesButton(XenoPheromones.Warding, parent);
-            AddPheromonesButton(XenoPheromones.Recovery, parent);
+            AddPheromonesButton(XenoPheromones.Frenzy, parent, Owner);
+            AddPheromonesButton(XenoPheromones.Warding, parent, Owner);
+            AddPheromonesButton(XenoPheromones.Recovery, parent, Owner);
         }
 
         var vpSize = _displayManager.ScreenSize;
         var pos = _inputManager.MouseScreenPosition.Position / vpSize;
-        if (_player.LocalEntity is { } ent)
+
+        if (EntMan.TryGetComponent<EyeComponent>(Owner, out var eyeComp) &&
+            eyeComp.Target != null)
+            pos = _eye.WorldToScreen(_transform.GetMapCoordinates((EntityUid)eyeComp.Target).Position) / vpSize;
+
+        else if (_player.LocalEntity is { } ent)
             pos = _eye.WorldToScreen(_transform.GetMapCoordinates(ent).Position) / vpSize;
 
         _xenoPheromonesMenu.OpenCenteredAt(pos);
     }
 
-    private void AddPheromonesButton(XenoPheromones pheromone, RadialContainer parent)
+    private void AddPheromonesButton(XenoPheromones pheromone, RadialContainer parent, EntityUid owner)
     {
         var name = pheromone.ToString().ToLowerInvariant();
+        var suffix = _pheros.GetPheroSuffix((owner, null));
+
+        if (suffix != null)
+            suffix = "_" + suffix;
 
         var texture = new TextureRect
         {
             VerticalAlignment = Control.VAlignment.Center,
             HorizontalAlignment = Control.HAlignment.Center,
-            Texture = _sprite.Frame0(new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_pheromones.rsi"), name)),
+            Texture = _sprite.Frame0(new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_pheromones.rsi"), name + suffix)),
             TextureScale = new Vector2(2f, 2f),
         };
 

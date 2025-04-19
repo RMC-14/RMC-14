@@ -1,0 +1,34 @@
+- files: ["dog_bark1.ogg"]
+  license: "CC0-1.0"
+  copyright: "Original sound by https://freesound.org/people/abhisheky948/sounds/625497/"
+  source: "https://freesound.org/people/abhisheky948/sounds/625497/"
+
+  files: ["dog_bark2.ogg"]
+  license: "CC0-1.0"
+  copyright: "Original sound by https://freesound.org/people/michael_grinnell/sounds/464400/"
+  source: "https://freesound.org/people/michael_grinnell/sounds/464400/"
+
+  files: ["dog_bark3.ogg"]
+  license: "CC0-1.0"
+  copyright: "Original sound by https://freesound.org/people/Geoff-Bremner-Audio/sounds/688201/"
+  source: "https://freesound.org/people/Geoff-Bremner-Audio/sounds/688201/"
+
+- files: ["dog_growl1.ogg", "dog_growl2.ogg", "dog_growl3.ogg"]
+  license: "CC0-1.0"
+  copyright: "Original sound by https://freesound.org/people/Glitchedtones/sounds/372533/ - cut out three clips of dog growling, cleaned up, converted to ogg"
+  source: "https://freesound.org/people/Glitchedtones/sounds/372533/"
+
+- files: ["dog_snarl1.ogg", "dog_snarl2.ogg", "dog_snarl3.ogg"]
+  license: "CC0-1.0"
+  copyright: "Original sound by https://freesound.org/people/strongbot/sounds/341090/ - cut out three clips of dog snarling, cleaned up, converted to ogg"
+  source: "https://freesound.org/people/strongbot/sounds/341090/"
+
+  files: ["dog_whine.ogg"]
+  license: "CC0-1.0"
+  copyright: "Original sound by https://freesound.org/people/Sruddi1/sounds/34878/ - cleaned up, converted to ogg"
+  source: "https://freesound.org/people/Sruddi1/sounds/34878/"
+
+
+
+
+

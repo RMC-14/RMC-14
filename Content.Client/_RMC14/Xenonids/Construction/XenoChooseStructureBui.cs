@@ -1,4 +1,4 @@
-﻿using Content.Client._RMC14.Xenonids.UI;
+using Content.Client._RMC14.Xenonids.UI;
 using Content.Shared._RMC14.Xenonids.Construction;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
@@ -28,6 +28,7 @@ public sealed class XenoChooseStructureBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         _window = new XenoChooseStructureWindow();
         _window.OnClose += Close;
 
@@ -42,6 +43,7 @@ public sealed class XenoChooseStructureBui : BoundUserInterface
 
                 var control = new XenoChoiceControl();
                 control.Button.Group = group;
+                control.Button.Mode = 0;
 
                 var name = structure.Name;
                 if (_xenoConstruction.GetStructurePlasmaCost(structureId) is { } cost)

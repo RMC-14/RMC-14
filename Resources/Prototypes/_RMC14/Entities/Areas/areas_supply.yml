@@ -1,0 +1,35 @@
+﻿- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaSupply
+
+- type: entity
+  parent: RMCAreaSupply
+  id: RMCAreaSupplyStation
+  name: Supply Shuttle
+  components:
+  - type: Sprite
+    state: shuttle3
+
+- type: entity
+  parent: RMCAreaSupply
+  id: RMCAreaSupplyDock
+  name: Supply Shuttle
+  components:
+  - type: Sprite
+    state: shuttle3
+
+- type: entity
+  parent: RMCAreaSupply
+  id: RMCAreaSupplyStationVehicle
+  name: Vehicle ASRS
+  components:
+  - type: Sprite
+    state: shuttle3
+
+- type: entity
+  parent: RMCAreaSupply
+  id: RMCAreaSupplyDockVehicle
+  name: Vehicle ASRS
+  components:
+  - type: Sprite
+    state: shuttle3

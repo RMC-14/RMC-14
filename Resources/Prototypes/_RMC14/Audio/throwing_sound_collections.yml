@@ -1,0 +1,7 @@
+﻿- type: soundCollection
+  id: RMCThrowing
+  files:
+  - /Audio/_RMC14/Effects/Throwing/swoosh1.ogg
+  - /Audio/_RMC14/Effects/Throwing/swoosh2.ogg
+  - /Audio/_RMC14/Effects/Throwing/swoosh3.ogg
+  - /Audio/_RMC14/Effects/Throwing/swoosh4.ogg

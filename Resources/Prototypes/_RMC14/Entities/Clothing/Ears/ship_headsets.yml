@@ -18,10 +18,24 @@
     state: generic_headset
   - type: Item
     size: Small
-
+  - type: ClothingLimit
+    id: CMHeadset
+  - type: RMCRadioFilter
+  - type: UserInterface
+    interfaces:
+      enum.RMCRadioFilterUI.Key:
+        type: RMCRadioFilterBui
+  - type: HeadsetMultiBroadcast
 
 - type: entity
+  abstract: true
   parent: CMHeadset
+  id: RMCHeadsetIcons
+  components:
+  - type: GrantMarineIcons
+
+- type: entity
+  parent: RMCHeadsetIcons
   id: RMCHeadsetShip
   name: marine radio headset
   description: A standard military radio headset. Bulkier than combat models.
@@ -30,7 +44,8 @@
     containers:
       key_slots:
       - CMEncryptionKeyCommon
-
+  - type: GrantMarineIcons
+  - type: GrantTacMapAlert
 
 - type: entity
   parent: RMCHeadsetShip
@@ -45,6 +60,18 @@
       key_slots:
       - CMEncryptionKeyCommon
       - CMEncryptionKeyCE
+  - type: RMCRadioFilter
+    disabledChannels:
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+  - type: HeadsetMultiBroadcast
+    cooldown: 60
+  - type: Headset
+    radioTextIncrease: 3
 
 - type: entity
   parent: RMCHeadsetShip
@@ -59,6 +86,18 @@
       key_slots:
       - CMEncryptionKeyCommon
       - CMEncryptionKeyCMO
+  - type: RMCRadioFilter
+    disabledChannels:
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+  - type: HeadsetMultiBroadcast
+    cooldown: 60
+  - type: Headset
+    radioTextIncrease: 3
 
 - type: entity
   parent: RMCHeadsetShip
@@ -135,6 +174,19 @@
       key_slots:
       - CMEncryptionKeyCommon
       - RMCEncryptionKeyQuartermaster
+  - type: RMCRadioFilter
+    disabledChannels:
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineMedical
+  - type: HeadsetMultiBroadcast
+    cooldown: 60
+  - type: Headset
+    radioTextIncrease: 3
 
 - type: entity
   parent: RMCHeadsetShip
@@ -163,6 +215,16 @@
       key_slots:
       - CMEncryptionKeyCommon
       - CMEncryptionKeyCMP
+  - type: RMCRadioFilter
+    disabledChannels:
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+  - type: Headset
+    radioTextIncrease: 3
 
 - type: entity
   parent: RMCHeadsetShip
@@ -177,6 +239,10 @@
       key_slots:
       - CMEncryptionKeyCommon
       - RMCEncryptionKeyMarineCommand
+  - type: HeadsetMultiBroadcast
+    cooldown: 60
+  - type: Headset
+    radioTextIncrease: 3
 
 - type: entity
   parent: RMCHeadsetMarineCommand
@@ -200,9 +266,13 @@
       key_slots:
       - CMEncryptionKeyCommon
       - CMEncryptionKeyPilot
+  - type: HeadsetMultiBroadcast
+    cooldown: 60
+  - type: Headset
+    radioTextIncrease: 3
 
 - type: entity
-  parent: RMCHeadsetShip
+  parent: RMCHeadsetMarine
   id: CMHeadsetIntel
   name: marine intel radio headset
   description: Used by Intelligence Officers.
@@ -212,6 +282,16 @@
       key_slots:
       - CMEncryptionKeyIntel
       - CMEncryptionKeyIntelOfficer
+  - type: RMCRadioFilter
+    disabledChannels:
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+  - type: Headset
+    radioTextIncrease: 3
 
 - type: entity
   parent: RMCHeadsetShip
@@ -252,6 +332,29 @@
       key_slots:
       - CMEncryptionKeyCommon
       - RMCEncryptionKeySeniorCommand
+  - type: HeadsetMultiBroadcast
+    cooldown: 60
+  - type: Headset
+    radioTextIncrease: 3
+
+- type: entity
+  parent: RMCHeadsetShip
+  id: CMHeadsetHighCommand
+  name: UNMC high command headset
+  description: Issued only to high command staff.
+  components:
+  - type: Sprite
+    state: mco_headset
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
+      - RMCEncryptionKeySeniorCommand
+      - RMCEncryptionKeyHighCommand
+  - type: HeadsetMultiBroadcast
+    cooldown: 60
+  - type: Headset
+    radioTextIncrease: 3
 
 - type: entity
   parent: CMHeadsetSeniorCommand
@@ -266,3 +369,7 @@
       key_slots:
       - CMEncryptionKeyCommon
       - RMCEncryptionKeySeniorCommand
+  - type: HeadsetMultiBroadcast
+    cooldown: 60
+  - type: Headset
+    radioTextIncrease: 3

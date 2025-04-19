@@ -1,0 +1,84 @@
+- type: entity
+  id: CMTarbackCigar
+  parent: Cigar
+  name: tarback cigar
+  description: "Tarbacks by Reisland Tobacco. The Surgeon General has declared that smoking Tarbacks can be hazardous to one’s health. Reisland Tobacco has declared that the Surgeon General is a bitch. Rolled in Columbia."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigars/tarback.rsi
+    state: unlit-icon
+  - type: Tag
+    tags:
+      - Cigar
+      - Trash
+  - type: Clothing
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigars/tarback.rsi
+    slots: [ mask ]
+    equippedPrefix: unlit
+  - type: Item
+    size: Tiny
+    sprite: Objects/Consumable/Smokeables/Cigars/cigar.rsi
+    heldPrefix: unlit
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/cigar.rsi
+      state: helmet
+
+- type: entity
+  id: CMTarbackCigarSpent
+  parent: CMTarbackCigar
+  suffix: spent
+  components:
+  - type: Sprite
+    state: burnt-icon
+  - type: Smokable
+    state: Burnt
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 20
+  - type: Tag
+    tags:
+      - Cigar
+      - Trash
+      - Burnt
+
+- type: entity
+  id: RMCTarbackTube
+  parent: BaseStorageItem
+  name: tarback tube
+  description: A single Tarback cigar in a protective metal tube. About as low-end as you can get. Rolled in Columbia.
+  components:
+  - type: Item
+    size: Small
+  - type: Clothing
+    slots:
+    - belt
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigars/tarback_tube.rsi
+    state: tarbacktube_empty
+    layers:
+    - state: tarbacktube_empty
+      map: ["openLayer", "emptyLayer"]
+    - state:  tarbacktube
+      map: ["closedLayer"]
+      visible: false
+  - type: Storage
+    grid:
+    - 0,0,0,1
+    whitelist:
+      tags:
+      -  Cigar
+      -  Trash
+  - type: StorageFill
+    contents:
+    - id: CMTarbackCigar
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer
+    storageEmpty: emptyLayer
+  - type: Appearance
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno

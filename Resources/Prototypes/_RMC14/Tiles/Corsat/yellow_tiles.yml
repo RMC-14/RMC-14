@@ -1,0 +1,65 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorCorsatYellowBase
+  name: tiles-cm-default-yellow
+
+- type: tile
+  parent: CMFloorCorsatYellowBase
+  id: CMFloorCorsatYellow0
+  sprite: /Textures/_RMC14/Tiles/corsat/yellow_0.png
+
+- type: tile
+  parent: CMFloorCorsatYellowBase
+  id: CMFloorCorsatYellow1
+  sprite: /Textures/_RMC14/Tiles/corsat/yellow_1.png
+
+- type: tile
+  parent: CMFloorCorsatYellowBase
+  id: CMFloorCorsatYellow2
+  sprite: /Textures/_RMC14/Tiles/corsat/yellow_2.png
+
+- type: tile
+  parent: CMFloorCorsatYellowBase
+  id: CMFloorCorsatYellow3
+  sprite: /Textures/_RMC14/Tiles/corsat/yellow_3.png
+
+- type: tile
+  parent: CMFloorCorsatYellowBase
+  id: CMFloorCorsatYellow4
+  sprite: /Textures/_RMC14/Tiles/corsat/yellow_4.png
+
+- type: tile
+  parent: CMFloorCorsatYellowBase
+  id: CMFloorCorsatYellow5
+  sprite: /Textures/_RMC14/Tiles/corsat/yellow_5.png
+
+- type: tile
+  parent: CMFloorCorsatYellowBase
+  id: CMFloorCorsatYellow6
+  sprite: /Textures/_RMC14/Tiles/corsat/yellow_6.png
+
+- type: tile
+  parent: CMFloorCorsatYellowBase
+  id: CMFloorCorsatYellow7
+  sprite: /Textures/_RMC14/Tiles/corsat/yellow_7.png
+
+- type: tile
+  parent: CMFloorCorsatYellowBase
+  id: CMFloorCorsatYellowCorner0
+  sprite: /Textures/_RMC14/Tiles/corsat/yellowcorner_0.png
+
+- type: tile
+  parent: CMFloorCorsatYellowBase
+  id: CMFloorCorsatYellowCorner1
+  sprite: /Textures/_RMC14/Tiles/corsat/yellowcorner_1.png
+
+- type: tile
+  parent: CMFloorCorsatYellowBase
+  id: CMFloorCorsatYellowCorner2
+  sprite: /Textures/_RMC14/Tiles/corsat/yellowcorner_2.png
+
+- type: tile
+  parent: CMFloorCorsatYellowBase
+  id: CMFloorCorsatYellowCorner3
+  sprite: /Textures/_RMC14/Tiles/corsat/yellowcorner_3.png

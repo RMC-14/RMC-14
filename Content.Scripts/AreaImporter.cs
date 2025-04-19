@@ -59,6 +59,19 @@ public class AreaImporter
             var rsi = new Rsi();
             string? areaName = null;
             var isDefault = true;
+
+            void SetAreaComp(AreaField key, bool value)
+            {
+                var keyStr = key.ToString();
+                for (var i = area.Count - 1; i >= 0; i--)
+                {
+                    if (area[i].Key == keyStr)
+                        area.RemoveAt(i);
+                }
+
+                area.Add((keyStr, value.ToString().ToLowerInvariant()));
+            }
+
             while (lines.TryPeek(out var next) && !next.StartsWith(areaPrefix))
             {
                 lines.Dequeue();
@@ -98,6 +111,8 @@ public class AreaImporter
                 const string canBuildSpecial = "can_build_special =";
                 const string isResinAllowed = "is_resin_allowed =";
                 const string resinConstructionAllowed = "resin_construction_allowed =";
+                const string landingZone = "is_landing_zone =";
+                const string linkedLz = "linked_lz =";
                 if (TryExtract(name, out var result))
                 {
                     areaName = result.Replace("\\improper", "").Replace("\"", "").Trim();
@@ -105,8 +120,15 @@ public class AreaImporter
                 else if (TryExtract(icon, out result))
                 {
                     isDefault = false;
+                    var rsiPath = result.Replace(".dmi", ".rsi").Replace("icons/turf/", "").Replace("'", "");
+                    rsiPath = rsiPath switch
+                    {
+                        "area_shiva.rsi" => "areas_shiva.rsi",
+                        _ => rsiPath,
+                    };
+
                     rsi = new Rsi(
-                        new ResPath($"_RMC14/Areas/{result.Replace(".dmi", ".rsi")}"),
+                        new ResPath($"_RMC14/Areas/{rsiPath}"),
                         rsi.RsiState
                     );
                 }
@@ -115,34 +137,84 @@ public class AreaImporter
                     isDefault = false;
                     rsi = new Rsi(
                         rsi.RsiPath,
-                        result
+                        result.ToLowerInvariant()
                     );
                 }
                 else if (TryExtract(ceiling, out result))
                 {
-                    var parent = result switch
+                    switch (result)
                     {
-                        "CEILING_NO_PROTECTION" => "RMCAreaProtectionZero",
-                        "CEILING_NONE" => "RMCAreaNone",
-                        "CEILING_GLASS" => "RMCAreaGlass",
-                        "CEILING_PROTECTION_TIER_1" => "RMCAreaProtectionOne",
-                        "CEILING_METAL" => "RMCAreaProtectionMetal",
-                        "CEILING_PROTECTION_TIER_2" => "RMCAreaProtectionTwo",
-                        "CEILING_UNDERGROUND_ALLOW_CAS" => "RMCAreaUndergroundAllowCAS",
-                        "CEILING_UNDERGROUND_METAL_ALLOW_CAS" => "RMCAreaUndergroundMetalAllowCAS",
-                        "CEILING_PROTECTION_TIER_3" => "RMCAreaProtectionThree",
-                        "CEILING_UNDERGROUND_BLOCK_CAS" => "RMCAreaUndergroundBlockCAS",
-                        "CEILING_UNDERGROUND_METAL_BLOCK_CAS" => "RMCAreaUndergroundMetalBlockCAS",
-                        "CEILING_PROTECTION_TIER_4" => "RMCAreaProtectionFour",
-                        "CEILING_DEEP_UNDERGROUND" => "RMCAreaDeepUnderground",
-                        "CEILING_DEEP_UNDERGROUND_METAL" => "RMCAreaDeepUndergroundMetal",
-                        "CEILING_REINFORCED_METAL" => "RMCAreaReinforcedMetal",
-                        "CEILING_RESIN" => "RMCAreaResin",
-                        "CEILING_MAX" => "RMCAreaMax",
-                        _ => "# TODO RMC14 areas",
-                    };
-
-                    parents.Add(parent);
+                        case "CEILING_NO_PROTECTION":
+                        case "CEILING_NONE":
+                        case "CEILING_GLASS":
+                            isDefault = false;
+                            SetAreaComp(AreaField.CAS, true);
+                            SetAreaComp(AreaField.fulton, true);
+                            SetAreaComp(AreaField.mortarPlacement, true);
+                            SetAreaComp(AreaField.mortarFire, true);
+                            SetAreaComp(AreaField.lasing, true);
+                            SetAreaComp(AreaField.medevac, true);
+                            SetAreaComp(AreaField.OB, true);
+                            SetAreaComp(AreaField.supplyDrop, true);
+                            break;
+                        case "CEILING_PROTECTION_TIER_1":
+                        case "CEILING_METAL":
+                            isDefault = false;
+                            SetAreaComp(AreaField.CAS, true);
+                            SetAreaComp(AreaField.fulton, true);
+                            SetAreaComp(AreaField.mortarPlacement, false);
+                            SetAreaComp(AreaField.mortarFire, true);
+                            SetAreaComp(AreaField.lasing, false);
+                            SetAreaComp(AreaField.medevac, false);
+                            SetAreaComp(AreaField.OB, true);
+                            SetAreaComp(AreaField.supplyDrop, true);
+                            break;
+                        case "CEILING_PROTECTION_TIER_2":
+                        case "CEILING_UNDERGROUND_METAL_ALLOW_CAS":
+                        case "CEILING_UNDERGROUND_ALLOW_CAS":
+                            isDefault = false;
+                            SetAreaComp(AreaField.CAS, true);
+                            SetAreaComp(AreaField.fulton, false);
+                            SetAreaComp(AreaField.mortarPlacement, false);
+                            SetAreaComp(AreaField.mortarFire, false);
+                            SetAreaComp(AreaField.lasing, false);
+                            SetAreaComp(AreaField.medevac, false);
+                            SetAreaComp(AreaField.OB, true);
+                            SetAreaComp(AreaField.supplyDrop, false);
+                            break;
+                        case "CEILING_PROTECTION_TIER_3":
+                        case "CEILING_UNDERGROUND_BLOCK_CAS":
+                        case "CEILING_UNDERGROUND_METAL_BLOCK_CAS":
+                            isDefault = false;
+                            SetAreaComp(AreaField.CAS, false);
+                            SetAreaComp(AreaField.fulton, false);
+                            SetAreaComp(AreaField.lasing, false);
+                            SetAreaComp(AreaField.mortarPlacement, false);
+                            SetAreaComp(AreaField.mortarFire, false);
+                            SetAreaComp(AreaField.medevac, false);
+                            SetAreaComp(AreaField.OB, true);
+                            SetAreaComp(AreaField.supplyDrop, false);
+                            break;
+                        case "CEILING_PROTECTION_TIER_4":
+                        case "CEILING_DEEP_UNDERGROUND":
+                        case "CEILING_DEEP_UNDERGROUND_METAL":
+                        case "CEILING_REINFORCED_METAL":
+                        case "CEILING_RESIN":
+                        case "CEILING_MAX":
+                            isDefault = false;
+                            SetAreaComp(AreaField.CAS, false);
+                            SetAreaComp(AreaField.fulton, false);
+                            SetAreaComp(AreaField.lasing, false);
+                            SetAreaComp(AreaField.mortarPlacement, false);
+                            SetAreaComp(AreaField.mortarFire, false);
+                            SetAreaComp(AreaField.medevac, false);
+                            SetAreaComp(AreaField.OB, false);
+                            SetAreaComp(AreaField.supplyDrop, false);
+                            break;
+                        default:
+                            Console.WriteLine($"Found unknown ceiling {ceiling}");
+                            break;
+                    }
                 }
                 else if (TryExtract(powerNet, out result))
                 {
@@ -183,9 +255,18 @@ public class AreaImporter
                 else if (TryExtract(flagsArea, out result))
                 {
                     isDefault = false;
-                    area.Add((nameof(AreaComponent.AvoidBioscan), result.Contains("AREA_AVOID_BIOSCAN").ToString()));
-                    area.Add((nameof(AreaComponent.NoTunnel), result.Contains("AREA_NOTUNNEL").ToString()));
-                    area.Add((nameof(AreaComponent.Unweedable), result.Contains("AREA_UNWEEDABLE").ToString()));
+                    area.Add((
+                        nameof(AreaComponent.AvoidBioscan),
+                        result.Contains("AREA_AVOID_BIOSCAN").ToString().ToLowerInvariant()
+                    ));
+                    area.Add((
+                        nameof(AreaComponent.NoTunnel),
+                        result.Contains("AREA_NOTUNNEL").ToString().ToLowerInvariant()
+                    ));
+                    area.Add((
+                        nameof(AreaComponent.Unweedable),
+                        result.Contains("AREA_UNWEEDABLE").ToString().ToLowerInvariant()
+                    ));
                 }
                 else if (TryExtract(canBuildSpecial, out result))
                 {
@@ -201,6 +282,16 @@ public class AreaImporter
                 {
                     isDefault = false;
                     area.Add((nameof(AreaComponent.ResinConstructionAllowed), result.ToLowerInvariant()));
+                }
+                else if (TryExtract(landingZone, out result))
+                {
+                    isDefault = false;
+                    area.Add((nameof(AreaComponent.LandingZone), result.ToLowerInvariant()));
+                }
+                else if (TryExtract(linkedLz, out result))
+                {
+                    isDefault = false;
+                    area.Add((nameof(AreaComponent.LinkedLz), result.ToLowerInvariant()));
                 }
             }
 
@@ -265,9 +356,13 @@ public class AreaImporter
                     var areaComp = new YamlMappingNode();
                     areaComp.Add("type", "Area");
 
-                    foreach (var (key, value) in area.Comp)
+                    foreach (var tuple in area.Comp)
                     {
-                        areaComp.Add(CamelCaseNamingConvention.Instance.Apply(key), value);
+                        var (key, value) = tuple;
+                        if (!key.All(char.IsUpper))
+                            key = CamelCaseNamingConvention.Instance.Apply(key);
+
+                        areaComp.Add(key, value);
                     }
 
                     components.Add(areaComp);
@@ -311,6 +406,20 @@ public class AreaImporter
         Rsi Rsi,
         bool IsDefault
     );
+
+    public enum AreaField
+    {
+        // ReSharper disable InconsistentNaming
+        CAS,
+        fulton,
+        lasing,
+        mortarPlacement,
+        mortarFire,
+        medevac,
+        OB,
+        supplyDrop,
+        // ReSharper restore InconsistentNaming
+    }
 
     private const string Colors = @"";
 

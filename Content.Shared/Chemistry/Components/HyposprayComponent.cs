@@ -11,11 +11,6 @@ public sealed partial class HyposprayComponent : Component
     [DataField]
     public string SolutionName = "hypospray";
 
-    // TODO: This should be on clumsycomponent.
-    [DataField]
-    [ViewVariables(VVAccess.ReadWrite)]
-    public float ClumsyFailChance = 0.5f;
-
     [DataField]
     [ViewVariables(VVAccess.ReadWrite)]
     public FixedPoint2 TransferAmount = FixedPoint2.New(5);
@@ -30,6 +25,14 @@ public sealed partial class HyposprayComponent : Component
     [AutoNetworkedField]
     [DataField(required: true)]
     public bool OnlyAffectsMobs = false;
+
+    /// <summary>
+    /// If this can draw from containers in mob-only mode.
+    /// </summary>
+    [AutoNetworkedField]
+    [DataField]
+    public bool CanContainerDraw = true;
+
 
     /// <summary>
     /// Whether or not the hypospray is able to draw from containers or if it's a single use

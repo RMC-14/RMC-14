@@ -44,4 +44,5 @@
     containers:
       storagebase: !type:Container
         ents: []
+  - type: StoreAfterFailedInteract
 

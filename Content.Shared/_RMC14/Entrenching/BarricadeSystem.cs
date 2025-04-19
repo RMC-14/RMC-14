@@ -1,3 +1,5 @@
+using Content.Shared._RMC14.Barricade.Components;
+using Content.Shared._RMC14.Construction;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
@@ -29,6 +31,7 @@ public sealed class BarricadeSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private readonly RMCConstructionSystem _rmcConstruction = default!;
 
     private EntityQuery<BarricadeComponent> _barricadeQuery;
 
@@ -92,13 +95,16 @@ public sealed class BarricadeSystem : EntitySystem
 
         if (!TryComp(args.Target, out BarricadeSandbagComponent? barricade))
             return;
-        var full = Spawn(barricade.Material, EntityManager.GetCoordinates(args.Coordinates));
+        var full = Spawn(barricade.Material, GetCoordinates(args.Coordinates));
 
         var bagsSalvaged = barricade.MaxMaterial;
         if (bagsSalvaged <= 0 && TryComp(full, out FullSandbagComponent? fullSandbag))
             bagsSalvaged = fullSandbag.StackRequired;
         if (TryComp(args.Target, out DamageableComponent? damageable))
             bagsSalvaged -= Math.Max((int) damageable.TotalDamage / barricade.MaterialLossDamageInterval - 1, 0);
+
+        if (TryComp(args.Target, out BarbedComponent? barbed) && barbed.IsBarbed)
+            Spawn(barbed.Spawn, GetCoordinates(args.Coordinates));
 
         Del(args.Target);
 
@@ -277,7 +283,7 @@ public sealed class BarricadeSystem : EntitySystem
         {
             BreakOnMove = true,
             NeedHand = true,
-            BreakOnHandChange = true
+            BreakOnHandChange = true,
         };
 
         _doAfter.TryStartDoAfter(doAfter);
@@ -420,6 +426,11 @@ public sealed class BarricadeSystem : EntitySystem
             {
                 return false;
             }
+        }
+
+        if (!_rmcConstruction.CanBuildAt(coordinates, full.Comp.Builds, out _, true))
+        {
+            return false;
         }
 
         return true;

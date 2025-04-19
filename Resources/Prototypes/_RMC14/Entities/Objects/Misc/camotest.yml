@@ -1,0 +1,17 @@
+﻿- type: entity
+  parent: CMCrowbar
+  id: Test
+  name: jungle camo test
+  description: junjle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/camotest/jungle.rsi
+    state: icon
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Misc/camotest/jungle.rsi
+      Desert: _RMC14/Objects/Misc/camotest/desert.rsi
+      Snow: _RMC14/Objects/Misc/camotest/snow.rsi
+      Classic: _RMC14/Objects/Misc/camotest/classic.rsi
+      Urban: _RMC14/Objects/Misc/camotest/urban.rsi
