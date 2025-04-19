@@ -22,6 +22,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private static readonly string[] MedalNames =
     [
@@ -205,13 +206,13 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         ent.Comp.LastToggle = time;
 
         // TODO RMC14 evacuation start sound
-        _evacuation.ToggleEvacuation(null, ent.Comp.EvacuationCancelledSound);
+        _evacuation.ToggleEvacuation(null, ent.Comp.EvacuationCancelledSound, _transform.GetMap(ent.Owner));
         RefreshComputers();
     }
 
     private void RefreshComputers()
     {
-        var canEvacuate = _evacuation.IsEvacuationInProgress();
+        var canEvacuate = _alertLevel.IsRedOrDeltaAlert() || _evacuation.IsEvacuationEnabled();
         var evacuationEnabled = _evacuation.IsEvacuationEnabled();
         var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
         while (computers.MoveNext(out var uid, out var computer))
