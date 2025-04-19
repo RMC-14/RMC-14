@@ -48,8 +48,6 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/HazardVests/orange.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/HazardVests/orange.rsi
-  - type: AllowSuitStorage
-    allowedWhitelist: RMCAllowSuitStorageClothingHazardVest
 
 - type: entity
   parent: RMCHazardVest

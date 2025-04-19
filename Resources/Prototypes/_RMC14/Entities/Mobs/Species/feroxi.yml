@@ -10,7 +10,6 @@
     - Snout
     - HeadTop
     - HeadSide
-    speciesId: feroxi
   - type: Icon
     sprite: _RMC14/Mobs/Feroxi/parts.rsi
     state: full
