@@ -1,0 +1,108 @@
+﻿- type: job
+  parent: CMJobBase
+  id: RMCSPPEngineer
+  name: rmc-job-name-spp-engineer
+  description: rmc-job-description-spp-engineer
+  playTimeTracker: CMJobSPPEngineer
+  ranks:
+    RMCRankSPPMladshiySerzhant: []
+  startingGear: RMCGearSPPEngineer
+  icon: RMCJobIconSPPEngineer
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  - CombatTech
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 3
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillJtac: 1
+        RMCSkillVehicles: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-engineer
+    - type: UserIFF
+      faction: FactionSPP
+  hidden: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerSPPEngineer
+  name: spp spawner engineer
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCRandomHumanoidSPPEngineer
+
+- type: entity
+  id: RMCRandomHumanoidSPPEngineer
+  name: spp ghost role engineer
+  suffix: Role, Player
+  components:
+  - type: Sprite
+    sprite: Markers/cross.rsi
+    state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSPPEngineer
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCSPPEngineer
+  components:
+  - type: GhostRole
+    name: rmc-ghost-role-name-spp-engineer
+    description: rmc-job-description-spp-engineer
+    rules: rmc-ghost-role-information-spp-rules
+    raffle:
+      settings: short
+    job: RMCSPPEngineer
+  - type: Skills
+    skills:
+      RMCSkillConstruction: 2
+      RMCSkillEngineer: 3
+      RMCSkillFirearms: 1
+      RMCSkillFireman: 1
+      RMCSkillJtac: 1
+      RMCSkillVehicles: 1
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearSPPEngineer
+  equipment:
+    head: ArmorHelmetSPPEngineer
+    ears: RMCHeadsetSPPEngineer
+    eyes: RMCWeldingGoggles
+    mask: CMMaskGas
+    jumpsuit: CMJumpsuitSPPEngi
+    outerClothing: RMCArmorSPPRifleman
+    gloves: RMCHandsVeteranInsulated
+    shoes: CMBootsBlackFilled
+    suitstorage: RMCWeaponRifleType71Flamer
+    id: RMCIDSPPSapper
+    belt: RMCType71BeltFilled
+    back: RMCSatchelSPPWelderEngineer
+    pocket1: RMCPouchAutoinjectorFill
+    pocket2: RMCPouchConstructionFillFull
+  inhand:
+    - RMCToolWebbingSmallFilled
+
+- type: playTimeTracker
+  id: CMJobSPPEngineer
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPEngineer
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: upp_sapper

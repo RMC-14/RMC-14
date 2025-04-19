@@ -9,7 +9,13 @@
   - UNMC
 
 - type: npcFaction
+  id: SPP
+  hostile:
+  - RMCXeno
+
+- type: npcFaction
   id: RMCDumb
   hostile:
   - UNMC
   - RMCXeno
+  - SPP

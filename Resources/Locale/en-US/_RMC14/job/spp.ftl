@@ -3,24 +3,29 @@
                                              You are allowed to remember knowledge about the game in general, such as how to cook, how to use objects, etc.
                                              You are absolutely [color=red]NOT[/color] allowed to remember, say, the name, appearance, etc. of your previous character.
 
-CMSPPLeader = SPP Starshiy Serzhant
-rmc-job-description-spp-leader = ""
+rmc-ghost-role-name-spp-leader = SPP Leader
+rmc-job-name-spp-leader = SPP Starshiy Serzhant
+rmc-job-description-spp-leader = The commander of the SPP force, the SPP Leader is charged with executing whatever mission the SPP have assigned the squad.
 rmc-job-prefix-spp-leader = SL
 
-CMSPPSpecialist = SPP Serzhant
-rmc-job-description-spp-specialist = ""
+rmc-ghost-role-name-spp-specialist = SPP Specialist
+rmc-job-name-spp-specialist = SPP Serzhant
+rmc-job-description-spp-specialist = The heavy weaponry of an SPP squad, packing great firepower and heavy-duty armour.
 rmc-job-prefix-spp-specialist = Spc
 
-CMSPPSoldier = SPP Ryadovoy
-rmc-job-description-spp-soldier = ""
+rmc-ghost-role-name-spp-soldier = SPP Enlisted
+rmc-job-name-spp-soldier = SPP Conscript
+rmc-job-description-spp-soldier = Enlisted or conscripted into the armed forces, these Standard SPP soldiers are the core and brunt of the SPP forces.
 rmc-job-prefix-spp-soldier = Sol
 
-CMSPPEngineer = SPP MSzht Engineer
-rmc-job-description-spp-engineer = ""
+rmc-ghost-role-name-spp-engineer = SPP Sapper
+rmc-job-name-spp-engineer = SPP MSzht Engineer
+rmc-job-description-spp-engineer = These combat sappers are the SPP equivalent of the UNMC's squad engineers. Trained to setup field fortifications and breach into hostile defences.
 rmc-job-prefix-spp-engineer = Sap
 
-CMSPPMedic = SPP MSzht Medic
-rmc-job-description-spp-medic = ""
+rmc-ghost-role-name-spp-medic = SPP Medic
+rmc-job-name-spp-medic = SPP MSzht Medic
+rmc-job-description-spp-medic = These trained soldiers have access to an array of standard issued SPP medical items akin to their UNMC counterparts. Combat is not their focus.
 rmc-job-prefix-spp-medic = Med
 
 CMSPPMilitaryPolice = SPP Politsiya
