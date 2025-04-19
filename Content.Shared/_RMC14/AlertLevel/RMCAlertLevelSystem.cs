@@ -75,6 +75,11 @@ public sealed class RMCAlertLevelSystem : EntitySystem
         return alert.Comp.Level;
     }
 
+    public bool IsRedOrDeltaAlert()
+    {
+        return Get() == RMCAlertLevels.Red || Get() ==  RMCAlertLevels.Delta;
+    }
+
     public void Set(RMCAlertLevels level, EntityUid? user, bool playSound = true, bool sendAnnouncement = true)
     {
         var ent = EnsureAlertLevel();
