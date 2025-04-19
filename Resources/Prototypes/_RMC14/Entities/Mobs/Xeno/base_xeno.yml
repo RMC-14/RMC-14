@@ -446,6 +446,7 @@
       - XenoFruit
   - type: ParalyzeOnPullAttempt
   - type: FirePatter
+    stacks: 5
   - type: RMCHandEmotes
 
 - type: entity
