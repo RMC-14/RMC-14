@@ -362,7 +362,7 @@ public sealed class XenoSystem : EntitySystem
             return;
         }
 
-        _damageable.TryChangeDamage(xeno, heal, true);
+        _damageable.TryChangeDamage(xeno, heal, true, origin: xeno);
     }
 
     public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target, bool hitNonMarines = false)

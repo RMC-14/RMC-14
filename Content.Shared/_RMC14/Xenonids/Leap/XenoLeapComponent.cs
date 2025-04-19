@@ -15,7 +15,7 @@ public sealed partial class XenoLeapComponent : Component
     public FixedPoint2 PlasmaCost = FixedPoint2.Zero;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan Delay = TimeSpan.FromSeconds(1);
+    public TimeSpan Delay = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 Range = 6;

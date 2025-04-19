@@ -113,6 +113,9 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
             {
                 int Sorting(OverwatchMarine marine)
                 {
+                    if (squad.Leader == marine.Id)
+                        return 1000;
+
                     if (marine.Role is not { } role)
                         return 0;
 
@@ -231,8 +234,16 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 var canSupplyDrop = EntMan.HasComponent<SupplyDropComputerComponent>(Owner) && squad.CanSupplyDrop;
                 TabContainer.SetTabVisible(monitor.SupplyDrop, canSupplyDrop);
 
-                monitor.MessageSquadContainer.Visible = EntMan.TryGetComponent(Owner, out OverwatchConsoleComponent? overwatch) &&
-                                                        overwatch.CanMessageSquad;
+                if (EntMan.TryGetComponent(Owner, out OverwatchConsoleComponent? overwatch))
+                {
+                    TabContainer.SetTabVisible(monitor.OrbitalBombardment, overwatch.CanOrbitalBombardment);
+                    monitor.MessageSquadContainer.Visible = overwatch.CanMessageSquad;
+                }
+                else
+                {
+                    TabContainer.SetTabVisible(monitor.OrbitalBombardment, false);
+                    monitor.MessageSquadContainer.Visible = false;
+                }
 
                 _squadViews[squad.Id] = monitor;
                 Window.SquadViewContainer.AddChild(monitor);
@@ -371,7 +382,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     };
 
                     promoteButton.OnPressed += _ =>
-                        SendPredictedMessage(new OverwatchConsolePromoteLeaderBuiMsg(marine.Id));
+                        SendPredictedMessage(new OverwatchConsolePromoteLeaderBuiMsg(marine.Id, squad.LeaderIcon));
 
                     var hide = CreatePanel(50);
                     hideButton.Margin = margin;

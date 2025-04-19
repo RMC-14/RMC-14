@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Line;
 using Content.Shared._RMC14.Pulling;
@@ -15,7 +16,6 @@ using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
-using Robust.Shared.Physics.Systems;
 
 namespace Content.Shared._RMC14.Xenonids.Abduct;
 
@@ -25,7 +25,6 @@ public sealed partial class XenoAbductSystem : EntitySystem
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
     [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly XenoHookSystem _hook = default!;
@@ -42,7 +41,8 @@ public sealed partial class XenoAbductSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
 
-    private readonly HashSet<EntityUid> abductEnts = new();
+    private readonly HashSet<EntityUid> _abductEnts = new();
+
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoAbductComponent, XenoAbductActionEvent>(OnXenoAbduct);
@@ -68,7 +68,7 @@ public sealed partial class XenoAbductSystem : EntitySystem
         }
 
         var duct = new XenoAbductDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.DoafterTime, duct, xeno, null)
+        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.DoafterTime, duct, xeno)
         {
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
@@ -122,10 +122,10 @@ public sealed partial class XenoAbductSystem : EntitySystem
 
         foreach (var tile in xeno.Comp.Tiles)
         {
-            abductEnts.Clear();
-            _lookup.GetEntitiesInRange(tile.ToCoordinates(), xeno.Comp.TileRadius, abductEnts);
+            _abductEnts.Clear();
+            _lookup.GetEntitiesInRange(tile.ToCoordinates(), xeno.Comp.TileRadius, _abductEnts);
 
-            foreach (var ent in abductEnts)
+            foreach (var ent in _abductEnts)
             {
                 //Can't grab if:
                 //Not human, not harmable
@@ -193,6 +193,7 @@ public sealed partial class XenoAbductSystem : EntitySystem
                 _stutter.DoStutter(ent, dazeTime, true);
                 _stun.TryParalyze(ent, stunTime, true);
 
+                EnsureComp<RMCObstacleSlamImmuneComponent>(ent);
                 _throwing.TryThrow(ent, diff, 10, user: xeno);
             }
         }

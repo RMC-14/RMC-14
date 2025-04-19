@@ -94,3 +94,12 @@ rmc-xeno-vampire-description = You lose all of your abilities and you forefeit a
   - A special AoE Tail Jab to knock talls away, doing more damage with direct hits and even more damage and a stun if they smack into walls.
   - Execute unconscious talls with a headbite to heal your wounds.
 rmc-xeno-vampire-popup = Show no mercy! Slaughter them all!
+
+rmc-xeno-eggsac-name = Eggsac
+rmc-xeno-eggsac-description = You trade your ability to store parasites and make resin traps for stronger pheromones, more egg storage, and the ability to produce eggs.
+   You gain the ability to:
+   - Place eggs from slightly farther away.
+   - Put eggs on non-hive weeds. You can have 4 sustained this way at once, and they will last awhile while you're near and not long if you're far.
+   - Sustained Eggs will convert into normal eggs upon touching hive weeds, and cannot produce sentient parasites.
+   - Use plasma over time to make eggs.
+rmc-xeno-eggsac-popup = An egg is always an adventure; the next one may be different.
