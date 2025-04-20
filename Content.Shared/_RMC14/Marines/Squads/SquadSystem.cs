@@ -55,6 +55,7 @@ public sealed class SquadSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedRMCBanSystem _rmcBan = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
+    [Dependency] private readonly IEntityManager _entMan = default!;
 
     private static readonly ProtoId<JobPrototype> SquadLeaderJob = "CMSquadLeader";
     private static readonly ProtoId<JobPrototype> IntelOfficerJob = "CMIntelOfficer";
@@ -753,5 +754,16 @@ public sealed class SquadSystem : EntitySystem
         }
 
         _membersToUpdate.Clear();
+    }
+
+    public bool TryGetMemberSquadColor(EntityUid entity, out Color color)
+    {
+        color = default;
+
+        if (!_entMan.TryGetComponent<SquadMemberComponent>(entity, out var comp))
+            return false;
+
+        color = comp.BackgroundColor;
+        return true;
     }
 }

@@ -17,6 +17,7 @@ using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Screens;
 using Content.Client.UserInterface.Systems.Chat.Widgets;
 using Content.Client.UserInterface.Systems.Gameplay;
+using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
@@ -60,6 +61,7 @@ public sealed class ChatUIController : UIController
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IReplayRecordingManager _replayRecording = default!;
     [Dependency] private readonly StaffHelpUIController _staffHelpUI = default!;
+    [Dependency] private readonly SquadSystem _squad = default!;
 
     [UISystemDependency] private readonly ExamineSystem? _examine = default;
     [UISystemDependency] private readonly GhostSystem? _ghost = default;
@@ -896,7 +898,18 @@ public sealed class ChatUIController : UIController
         {
             var grammar = _ent.GetComponentOrNull<GrammarComponent>(_ent.GetEntity(msg.SenderEntity));
             if (grammar != null && grammar.ProperNoun == true)
-                msg.WrappedMessage = SharedChatSystem.InjectTagInsideTag(msg, "Name", "color", GetNameColor(SharedChatSystem.GetStringInsideTag(msg, "Name")));
+            {
+                // RMC change to color the chat message name by the squad they're in, otherwise use the default.
+                if (_squad.TryGetMemberSquadColor(_ent.GetEntity(msg.SenderEntity), out Color squadColor))
+                {
+                    string color = squadColor.ToHex();
+                    msg.WrappedMessage = SharedChatSystem.InjectTagInsideTag(msg, "Name", "color", color);
+                }
+                else
+                {
+                    msg.WrappedMessage = SharedChatSystem.InjectTagInsideTag(msg, "Name", "color", GetNameColor(SharedChatSystem.GetStringInsideTag(msg, "Name")));
+                }
+            }
         }
 
         // Color any codewords for minds that have roles that use them
