@@ -1,16 +1,17 @@
 ﻿- type: job
   parent: CMJobBase
   id: RMCSPPSpecialist
-  name: rmc-job-name-spp-specialist
+  name: RMCSPPSpecialist
   description: rmc-job-description-spp-specialist
   playTimeTracker: CMJobSPPSpecialist
   ranks:
     RMCRankSPPSerzhant: []
   startingGear: RMCGearSPPSpecialist
-  icon: RMCJobIconSPPSpecialist
+  icon: "RMCJobIconSPPSpecialist"
   joinNotifyCrew: false
   accessGroups:
   - Colonist
+  - HospitalCorpsman
   special:
   - !type:AddComponentSpecial
     components:
@@ -28,33 +29,20 @@
         RMCSkillJtac: 1
         RMCSkillMeleeWeapons: 1
         RMCSkillSpecialistWeapons: 1
+    - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-specialist
-    - type: UserIFF
-      faction: FactionSPP
   hidden: true
 
 - type: entity
   parent: MarkerBase
-  id: RMCSpawnerSPPSpecialist
-  name: spp spawner specialist
+  id: RMCRandomHumanoidSPPSpecialist
+  name: spp ghost role specialist
   suffix: Spawner, Player
   components:
   - type: Sprite
     layers:
     - state: red
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCRandomHumanoidSPPSpecialist
-
-- type: entity
-  id: RMCRandomHumanoidSPPSpecialist
-  name: spp ghost role specialist
-  suffix: Role, Player
-  components:
-  - type: Sprite
-    sprite: Markers/cross.rsi
-    state: red
   - type: RandomHumanoidSpawner
     settings: RMCSPPSpecialist
 
@@ -63,23 +51,13 @@
   id: RMCSPPSpecialist
   components:
   - type: GhostRole
-    name: rmc-ghost-role-name-spp-specialist
+    name: RMCSPPSpecialist
     description: rmc-job-description-spp-specialist
     rules: rmc-ghost-role-information-spp-rules
+    reregister: false
+    job: RMCSPPSpecialist
     raffle:
       settings: short
-    job: RMCSPPSpecialist
-  - type: Skills
-    skills:
-      RMCSkillCqc: 1
-      RMCSkillConstruction: 1
-      RMCSkillEndurance: 2
-      RMCSkillEngineer: 1
-      RMCSkillFirearms: 1
-      RMCSkillFireman: 1
-      RMCSkillJtac: 1
-      RMCSkillMeleeWeapons: 1
-      RMCSkillSpecialistWeapons: 1
   - type: GhostRoleApplySpecial
 
 - type: startingGear
@@ -92,7 +70,7 @@
     gloves: RMCHandsVeteranSPP
     shoes: CMBootsBlackFilled
     suitstorage: RMCWeaponLMGM60 # TODO RMC14 : Replace with PKP
-    id: RMCIDSPPSpecialist
+    id: RMCIDSPP
     belt: CMM77BeltFilled # TODO RMC14 : Replace with T73, NP92 or Revolver
     back: RMCSatchelSPPRifleman
     pocket1: RMCPouchAutoinjectorFill

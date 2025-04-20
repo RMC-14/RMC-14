@@ -1,13 +1,13 @@
 ﻿- type: job
   parent: CMJobBase
   id: RMCSPPMedic
-  name: rmc-job-name-spp-medic
+  name: RMCSPPMedic
   description: rmc-job-description-spp-medic
   playTimeTracker: CMJobSPPMedic
   ranks:
     RMCRankSPPMladshiySerzhant: []
   startingGear: RMCGearSPPMedic
-  icon: RMCJobIconSPPMedic
+  icon: "RMCJobIconSPPMedic"
   joinNotifyCrew: false
   accessGroups:
   - Colonist
@@ -25,33 +25,20 @@
         RMCSkillJtac: 1
         RMCSkillMedical: 2
         RMCSkillSurgery: 1
+    - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-medic
-    - type: UserIFF
-      faction: FactionSPP
   hidden: true
 
 - type: entity
   parent: MarkerBase
-  id: RMCSpawnerSPPMedic
-  name: spp spawner medic
+  id: RMCRandomHumanoidSPPMedic
+  name: spp ghost role medic
   suffix: Spawner, Player
   components:
   - type: Sprite
     layers:
     - state: red
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCRandomHumanoidSPPMedic
-
-- type: entity
-  id: RMCRandomHumanoidSPPMedic
-  name: spp ghost role medic
-  suffix: Role, Player
-  components:
-  - type: Sprite
-    sprite: Markers/cross.rsi
-    state: red
   - type: RandomHumanoidSpawner
     settings: RMCSPPMedic
 
@@ -60,19 +47,13 @@
   id: RMCSPPMedic
   components:
   - type: GhostRole
-    name: rmc-ghost-role-name-spp-medic
+    name: RMCSPPMedic
     description: rmc-job-description-spp-medic
     rules: rmc-ghost-role-information-spp-rules
+    reregister: false
+    job: RMCSPPMedic
     raffle:
       settings: short
-    job: RMCSPPMedic
-  - type: Skills
-    skills:
-      RMCSkillFirearms: 1
-      RMCSkillFireman: 1
-      RMCSkillJtac: 1
-      RMCSkillMedical: 2
-      RMCSkillSurgery: 1
   - type: GhostRoleApplySpecial
 
 - type: startingGear
@@ -80,13 +61,14 @@
   equipment:
     head: CMHeadCapSPP
     ears: RMCHeadsetSPPMedic
+    ears2: RMCM5CameraGear
     eyes: RMCGlassesMedicalHUDGlasses
     jumpsuit: CMJumpsuitSPPMedic
     outerClothing: RMCArmorSPPSupport
     gloves: RMCHandsVeteranSPP
     shoes: CMBootsBlackFilled
     suitstorage: WeaponSMGMP5 # TODO RMC14 : Replace with Bizon SMG
-    id: RMCIDSPPMedic
+    id: RMCIDSPP
     belt: CMBeltMedicBagFilled
     back: RMCSatchelSPPMedic
     pocket1: RMCPouchMedkitFillSPP

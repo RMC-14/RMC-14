@@ -152,15 +152,3 @@
   - type: FactionFrequencies
     channels:
     - Colony
-
-- type: entity
-  id: FactionSPP
-  components:
-  - type: IFFFaction
-  - type: FactionFrequencies
-    channels:
-    - SPP
-    - SPPCommand
-    - SPPEngi
-    - SPPMed
-    - SPPCCT

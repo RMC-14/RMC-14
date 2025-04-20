@@ -176,14 +176,14 @@
   id: Gnash
   name: rmc-emote-name-gnash
   category: Vocal
-  availiable: false
+  available: false
   whitelist:
     components:
     - Vocal
   blacklist:
     components:
     - BorgChassis
-  chatmessages: ["rmc-emote-gnash"]
+  chatMessages: ["rmc-emote-gnash"]
   chatTriggers:
     - gnash
     - gnashes
@@ -217,7 +217,7 @@
     - angers
     - angers.
     - angers!
-    
+
 - type: emote
   id: RMCSkrellPeep
   name: rmc-emote-name-peep

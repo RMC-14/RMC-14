@@ -33,7 +33,7 @@ rmc-xeno-valkyrie-name = Valkyrie
 rmc-xeno-valkyrie-description = You trade your tail stab, spit, acid ball, acid spray, corrosive acid, and some speed to gain some armor and frontline support abilities.
    You gain the ability to:
    - Break the strongest of walls and other reinforced structures with your slash attack, and emit strong pheromones.
-   - Extinguish friend or capture alike with your tail, or knock away explosives and down enemies with your High Gallop. 
+   - Extinguish friend or capture alike with your tail, or knock away explosives and down enemies with your High Gallop.
    - Heal you and your allies for every slash, gaining fury, then enrage yourself and ally for more armor and healing.
    - Rejuvenate a group all at once with a rallying shriek, removing their ailments.
    - Retrieve endangered, knocked-down or resting allies and pull them to your location.
@@ -91,6 +91,15 @@ rmc-xeno-maid-description = You trade your dignity.
     You gain the ability to:
     - Cause mental anguish in friends and foes alike.
 rmc-xeno-maid-popup = Rawr :3
+
+rmc-xeno-vampire-name = Vampire
+rmc-xeno-vampire-description = You lose all of your abilities and you forefeit a chunk of your health and damage in exchange for a large amount of armor, a little bit of movement speed, increased attack speed, and brand new abilities that make you an assassin.
+  You gain the ability to:
+  - Rush on your opponent to disorient them.
+  - Flurry to unleash a forward cleave that can hit and slow three talls and heal you for every tall you hit.
+  - A special AoE Tail Jab to knock talls away, doing more damage with direct hits and even more damage and a stun if they smack into walls.
+  - Execute unconscious talls with a headbite to heal your wounds.
+rmc-xeno-vampire-popup = Show no mercy! Slaughter them all!
 
 rmc-xeno-eggsac-name = Eggsac
 rmc-xeno-eggsac-description = You trade your ability to store parasites and make resin traps for stronger pheromones, more egg storage, and the ability to produce eggs.

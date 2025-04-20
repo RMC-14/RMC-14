@@ -10,7 +10,6 @@
     - Snout
     - HeadTop
     - HeadSide
-    speciesId: feroxi
   - type: Icon
     sprite: _RMC14/Mobs/Feroxi/parts.rsi
     state: full
@@ -69,7 +68,7 @@
       - map: [ "pocket1" ]
       - map: [ "pocket2" ]
       - map: [ "clownedon" ] # Dynamically generated
-        sprite: "RMC14/Effects/creampie.rsi"
+        sprite: "_RMC14/Effects/creampie.rsi"
         state: "creampie_feroxi"
         visible: false
       - map: [ "acided" ]

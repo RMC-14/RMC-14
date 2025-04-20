@@ -1,88 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed xenos not being able to turn off flashlights and other sources
-      of light by clicking on them.
-    type: Fix
-  id: 1103
-  time: '2024-12-13T18:19:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5123
-- author: MACMAN2003
-  changes:
-  - message: Added camouflaged variants of marine weapons, armor, and equipment.
-    type: Add
-  id: 1104
-  time: '2024-12-13T18:38:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5054
-- author: DrSmugleaf
-  changes:
-  - message: Fixed medals not always showing above backpacks and other clothing items.
-    type: Fix
-  id: 1105
-  time: '2024-12-13T19:09:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5124
-- author: noctyrnal
-  changes:
-  - message: Shiva has recieved a parity update.
-    type: Add
-  id: 1106
-  time: '2024-12-13T21:54:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5127
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed loadouts not spawning your selected items in your bag.
-    type: Fix
-  id: 1107
-  time: '2024-12-13T21:55:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5128
-- author: DrSmugleaf
-  changes:
-  - message: Fixed OBs not being able to be loaded.
-    type: Fix
-  - message: Fixed one dropship weapon not being usable.
-    type: Fix
-  - message: Fixed Chance's Claim blue rock tiles being weedable.
-    type: Fix
-  - message: Fixed Chance's Claim areas next to LZ being weedable early.
-    type: Fix
-  - message: Fixed medevac sometimes not giving correct feedback with popups.
-    type: Fix
-  - message: Fixed not being able to pick up some items dispensed from vendors.
-    type: Fix
-  id: 1108
-  time: '2024-12-13T22:07:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5129
-- author: Rainbeon
-  changes:
-  - message: Fully overhauled wield speeds to be more in line with CM13.
-    type: Tweak
-  - message: SMGs, XM88, and the M4SPR (normal and Scout variant) no longer have any
-      wield slowdown specifically when wearing armor.
-    type: Tweak
-  - message: Grenade Launchers, Rocket Launchers, Smartguns, Sniper Rifles, and the
-      M54CE2 Heavy Rifle now move at a fixed speed of 2.5 m/s when wielded, regardless
-      of worn armor.
-    type: Tweak
-  - message: All other weapons are now faster when wielded while wearing armor, but
-      slower when not wearing armor.
-    type: Tweak
-  id: 1109
-  time: '2024-12-16T03:04:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5150
-- author: DummeHytteOst
-  changes:
-  - message: Fixed being able to acid the command tablet.
-    type: Fix
-  id: 1110
-  time: '2024-12-16T03:04:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5157
-- author: Vermidia
-  changes:
-  - message: Fixed squad vend pistols starting with mags. This doesn't affect cases.
-    type: Fix
-  id: 1111
-  time: '2024-12-21T13:16:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5183
 - author: Vermidia
   changes:
   - message: Fixed barricades and sentries healing extra on weld if they had both
@@ -5367,5 +5283,88 @@
   id: 1605
   time: '2025-04-19T10:07:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5972
+- author: Vermidia
+  changes:
+  - message: Fixed critical grace activating if you were already in crit.
+    type: Fix
+  id: 1606
+  time: '2025-04-19T11:36:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6188
+- author: N0lim
+  changes:
+  - message: Fixed lesser drones being able to plant new weed nodes in 6x6 area instead
+      of 5x5 from other nodes.
+    type: Fix
+  id: 1607
+  time: '2025-04-20T01:59:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6170
+- author: Dygon
+  changes:
+  - message: Invisible entities no longer show popups to nearby players.
+    type: Fix
+  id: 1608
+  time: '2025-04-20T02:00:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6173
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added the vampire lurker strain. A new strain that turns lurker into
+      a silent assassin, with abilities that can heal itself.
+    type: Add
+  id: 1609
+  time: '2025-04-20T02:02:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6108
+- author: Vermidia
+  changes:
+  - message: Fixed xenos from being able to destroy crates with melee.
+    type: Fix
+  - message: Fixed dragging crates not slowing you down.
+    type: Fix
+  id: 1610
+  time: '2025-04-20T02:04:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6139
+- author: paige404
+  changes:
+  - message: Particularly large-snouted members of their species should now be able
+      to fit their noses into their gas masks.
+    type: Fix
+  id: 1611
+  time: '2025-04-20T06:53:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5965
+- author: Vermidia
+  changes:
+  - message: Fixed rounds not ending 25 minutes after hijack begins. (It's a xeno
+      minor)
+    type: Fix
+  - message: Changed some round end texts.
+    type: Tweak
+  id: 1612
+  time: '2025-04-20T08:35:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6177
+- author: Magicocity1
+  changes:
+  - message: Added the M13 Automatic Pistol, get it from your weapon vendor today!
+    type: Add
+  - message: Added a M276 belt variant for the M13.
+    type: Add
+  - message: Added magazine boxes for the M13, the brighter the trim the greater the
+      magazine capacity!
+    type: Add
+  id: 1613
+  time: '2025-04-20T08:39:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6163
+- author: to4no_fix
+  changes:
+  - message: Reworked announcements about latejoin and earlyleave of Marines. Late
+      joining of CO/XO/SEA is accompanied by a large announcement with a sound signal.
+      SEA has its own sound signal. Late joining of the head of department (squad
+      leader) is accompanied by a message on the radio channel of the department (squad
+      radio channel) and the radio channel of Almaer. Late joining of an ordinary
+      employee of the department (squad) is accompanied by a message on the radio
+      channel of the department (squad). At early leave, an announcement occurs according
+      to the same logic, only without a large announcement.
+    type: Tweak
+  id: 1614
+  time: '2025-04-20T10:13:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6014
 Name: RMC14
 Order: -1
