@@ -14,9 +14,10 @@
   - RMCChemicals
   - RMCGuideMarineRoles
   - RMCGuideMarineStructures
-  - RMCGuideXenonidRoles
-  - RMCGuideXenonidStructures
-  - RMCSurvivor
+#  - RMCGuideXenonidRoles
+#  - RMCGuideXenonidStructures
+  - RMCGuideFood
+  - RMCGuideDrinks
 
 
 - type: guideEntry
@@ -35,6 +36,7 @@
   name: "Marine Roles"
   text: "/ServerInfo/Guidebook/_RMC14/RMC14.xml"
   children:
+  - RMCSurvivor
   - RMCMedical
   - RMCRequisitions
   - RMCIntel
@@ -51,6 +53,19 @@
   text: "/ServerInfo/Guidebook/_RMC14/RMC14.xml"
   children:
   - RMCGuideCommunicationsTowers
+
+# cooking
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideFood
+  name: "Cooking Recipes"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideFood.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideDrinks
+  name: "Drink Recipes"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideDrinks.xml"
 
 # Xenonid roles
 - type: guideEntry
