@@ -1,0 +1,77 @@
+﻿- type: job
+  parent: CMJobBase
+  id: CMRoyalSmartGunOperator
+  name: CMRoyalSmartGunOperator
+  description: rmc-job-description-royal-smart-gun-operator
+  playTimeTracker: CMJobRoyalSmartGunOperator
+  ranks:
+    RMCRankLanceCorporal: [ ]
+  startingGear: RMCGearRoyalSmartGunOperator
+  icon: CMJobIconEmpty
+  joinNotifyCrew: false
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 1
+        RMCSkillEngineer: 1
+        RMCSkillEndurance: 3
+        RMCSkillMedical: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillJtac: 1
+        RMCSkillSmartGun: 1
+        RMCSkillVehicles: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-royal-smart-gun-operator
+  hasIcon: false
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidRoyalSmartGunOperator
+  name: royal marine smart gun operator role
+  suffix: Role
+  components:
+  - type: Sprite
+    sprite: Markers/cross.rsi
+    state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCRoyalSmartGunOperator
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCRoyalSmartGunOperator
+  components:
+  - type: RMCJobSpawner
+    job: CMRoyalSmartGunOperator
+
+- type: startingGear
+  id: RMCGearRoyalSmartGunOperator
+  equipment:
+    head: RMCHeadRoyalHelmetBallistic
+    eyes: RMCGlassesSmartGunSight
+    ears: RMCHeadsetRoyalMarine
+    jumpsuit: JumpsuitMarineRoyal # TOOD RMC14 royal marines commando uniform
+    outerClothing: RMCArmorRoyalHarnessFilled
+    gloves: RMCHandsVeteranRoyalMarine
+    shoes: RMCBootsRoyalFilled
+    suitstorage: RMCSmartGunRoyal
+    id: RMCDogtagRoyalSmartGunOperator
+    belt: RMCMK80BeltFilled # TODO RMC14 L905 gunbelt
+    back: RMCSatchelLightpackFilledRoyal # TODO RMC14 lightweight rmc backpack
+    pocket1: RMCPouchGeneralLargeFilledSmartGunDrums
+    pocket2: RMCPouchMedkitFillRoyal
+
+- type: playTimeTracker
+  id: CMJobRoyalSmartGunOperator
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconRoyalSmartGunOperator
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: rmc_smart_gun_operator

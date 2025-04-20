@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMProvostInspector
-  name: rmc-job-name-provost-inspector
+  name: CMProvostInspector
   description: rmc-job-description-provost-inspector
   playTimeTracker: CMJobProvostInspector
   ranks:
@@ -27,19 +27,6 @@
   hidden: true
 
 - type: entity
-  parent: MarkerBase
-  id: RMCSpawnerProvostInspector
-  name: provost spawner inspector
-  suffix: Spawner, Player, Medium Law Understanding
-  components:
-  - type: Sprite
-    layers:
-    - state: red
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCRandomHumanoidProvostInspector
-
-- type: entity
   id: RMCRandomHumanoidProvostInspector
   name: provost ghost role inspector
   suffix: Role, Player, Medium Law Understanding
@@ -51,25 +38,11 @@
     settings: RMCProvostInspector
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCSettingsGhostRole
   id: RMCProvostInspector
   components:
-  - type: GhostRole
-    name: rmc-ghost-role-information-provost-inspector-name
-    description: rmc-ghost-role-information-provost-inspector-description
-    rules: ghost-role-information-nonantagonist-rules
-    raffle:
-      settings: short
-  - type: Loadout
-    prototypes: [ RMCGearProvostInspector ]
-  - type: Skills
-    skills:
-      RMCSkillCqc: 3
-      RMCSkillEndurance: 3
-      RMCSkillFirearms: 1
-      RMCSkillFireman: 2
-      RMCSkillMeleeWeapons: 1
-      RMCSkillPolice: 2
+  - type: RMCJobSpawner
+    job: CMProvostInspector
 
 - type: startingGear
   id: RMCGearProvostInspector

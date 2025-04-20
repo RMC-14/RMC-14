@@ -246,7 +246,7 @@
   id: ActionXenoDodge
   parent: ActionXenoBase
   name: Dodge (200)
-  description: Gain a speed boost for 7 seconds. Your speed is doubled near standing enemies.
+  description: Gain a speed boost for 7 seconds and move through allies and enemies unimpeded. Your speed is doubled near standing enemies.
   components:
   - type: InstantAction
     itemIconStyle: NoItem

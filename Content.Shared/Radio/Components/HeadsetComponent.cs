@@ -15,10 +15,4 @@ public sealed partial class HeadsetComponent : Component
 
     [DataField("requiredSlot")]
     public SlotFlags RequiredSlot = SlotFlags.EARS;
-
-    /// <summary>
-    ///     RMC14 determines how much larger the radio message size will be.
-    /// </summary>
-    [DataField]
-    public int? RadioTextIncrease { get; set; } = 0;
 }

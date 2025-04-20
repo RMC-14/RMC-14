@@ -31,20 +31,6 @@
     grid:
     - 0,0,3,1 #4 slots
 
-
-# Large General Pouch
-- type: entity
-  parent: RMCPouchGeneral
-  id: RMCPouchGeneralLarge
-  name: large general pouch
-  description: A general-purpose pouch used to carry more differently sized items.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Pouches/large_drop.rsi
-  - type: Storage
-    grid:
-    - 0,0,5,1 #6 slot
-
 - type: entity
   parent: RMCPouchGeneralLarge
   id: RMCPouchGeneralLargeBureauObserverFill

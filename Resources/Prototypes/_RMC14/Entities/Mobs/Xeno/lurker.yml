@@ -1,10 +1,11 @@
-- type: entity
+﻿- type: entity
   abstract: true
   parent:
   - CMXenoDeveloped
   - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
   id: RMCXenoLurkerBase
   name: Lurker
   description: A beefy, fast alien with sharp claws.
