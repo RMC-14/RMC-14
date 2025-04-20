@@ -348,3 +348,4 @@
   - type: RMCMobCollision
   - type: RMCRest
   - type: StunOnExplosionReceived
+    weak: true
