@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Added festive meals!
-    type: Add
-  id: 1113
-  time: '2024-12-21T13:21:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5177
 - author: MACMAN2003
   changes:
   - message: Roundstart guns are now appropriately camouflaged.
@@ -5512,5 +5505,12 @@
   id: 1615
   time: '2025-04-20T14:07:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6196
+- author: VictorJob
+  changes:
+  - message: Added animations for parasite
+    type: Add
+  id: 1616
+  time: '2025-04-20T15:34:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6168
 Name: RMC14
 Order: -1
