@@ -59,8 +59,8 @@
   ## Working in intelligence
 
   <Box>
-    <GuideEntityEmbed Entity="CMGuidebookRoleASO" />
-    <GuideEntityEmbed Entity="CMGuidebookRoleIO" />
+    <GuideEntityEmbed Entity="RMCGuidebookRoleASO" />
+    <GuideEntityEmbed Entity="RMCGuidebookRoleIO" />
     <GuideEntityEmbed Entity="CMGuidebookRoleYou" />
   </Box>
 

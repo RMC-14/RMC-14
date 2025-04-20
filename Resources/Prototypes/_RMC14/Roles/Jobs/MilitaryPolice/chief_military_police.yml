@@ -92,3 +92,13 @@
 - type: playTimeTracker
   id: CMJobChiefMP
   isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleCMP
+  name: The Chief MP
+  description: The Chief of Military Police.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: chief_military_police

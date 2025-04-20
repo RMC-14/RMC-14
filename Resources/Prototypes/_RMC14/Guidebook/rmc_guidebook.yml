@@ -39,6 +39,7 @@
   - RMCGuideRoleCombatTechnician
   - RMCGuideRoleMaintenanceTechnician
   - RMCGuideRoleSGO
+  - RMCGuideCommandRoles
 
 # marine structures
 - type: guideEntry
@@ -131,6 +132,14 @@
   name: "Smart Gun Operator"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleSGO.xml"
 
+- type: guideEntry # made by teatotaltemplar
+  parent: RMC
+  id: RMCGuideCommandRoles
+  priority: 10
+  name: "Who is in Command?"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideCommandRoles.xml"
+
+# Chemistry stuff
 - type: guideEntry
   parent: RMC
   id: RMCChemicals
