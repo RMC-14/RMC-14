@@ -417,7 +417,7 @@
         box: RMCMagazineExtended11
       - id: RMCBoxMagazinePistolM13Drum
         name: Magazine Box (Drum M13 x 12)
-        box: RMCMagazineDrum13
+        box: RMCMagazineDrumM13
       - id: RMCBoxMagazineSMGM63
         name: Magazine Box (M63 x 12)
         box: CMMagazineSMGM63
