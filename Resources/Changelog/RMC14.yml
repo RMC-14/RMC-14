@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Added trash bag in Maintenance Technician set.
-    type: Add
-  id: 1115
-  time: '2024-12-21T13:19:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5178
 - author: FungiFellow
   changes:
   - message: Gave D18 an Additional Mag and Disabled Auto-Eject
@@ -5509,5 +5502,14 @@
   id: 1617
   time: '2025-04-20T16:39:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6200
+- author: DrSmugleaf
+  changes:
+  - message: Added XO and CL stamps. This also fixes the color for some stamps.
+    type: Add
+  - message: Fixed the rangefinder being usable on the Almayer.
+    type: Fix
+  id: 1618
+  time: '2025-04-20T17:47:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6202
 Name: RMC14
 Order: -1
