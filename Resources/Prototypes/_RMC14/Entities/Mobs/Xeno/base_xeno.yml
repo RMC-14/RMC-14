@@ -358,6 +358,7 @@
   - type: RMCArmorModifier
   - type: RMCObstacleSlamCauserImmune
   - type: RMCMobCollisionMass
+  - type: XenoRankNames
 
 - type: entity
   abstract: true
