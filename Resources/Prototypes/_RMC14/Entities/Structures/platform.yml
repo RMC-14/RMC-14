@@ -59,6 +59,7 @@
     - Wall
   components:
   - type: Physics
+    canCollide: false
   - type: Sprite
     state: platform_broken
   - type: Construction

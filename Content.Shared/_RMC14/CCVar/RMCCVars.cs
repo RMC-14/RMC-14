@@ -244,13 +244,13 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.power_load_multiplier", 0.01f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCMarinesPerSurvivor =
-        CVarDef.Create("rmc.marines_per_survivor", 20, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.marines_per_survivor", 15, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCSurvivorsMinimum =
         CVarDef.Create("rmc.survivors_minimum", 2, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCSurvivorsMaximum =
-        CVarDef.Create("rmc.survivors_maximum", 6, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.survivors_maximum", 7, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCSpawnerMaxCorpses =
         CVarDef.Create("rmc.spawner_max_corpses", 100, CVar.REPLICATED | CVar.SERVER);
@@ -423,4 +423,13 @@ public sealed class RMCCVars : CVars
     /// </summary>
     public static readonly CVarDef<bool> RMCUseAlternateSprites =
         CVarDef.Create("rmc.use_alternate_sprites", false, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<int> RMCSunsetDuration =
+        CVarDef.Create("rmc.lighting_sunset_duration", 280, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCSunriseDuration =
+        CVarDef.Create("rmc.lighting_sunrise_duration", 280, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<int> RMCForceEndHijackTimeMinutes =
+        CVarDef.Create("rmc.force_hijack_end_time_minutes", 25, CVar.REPLICATED | CVar.SERVER);
 }

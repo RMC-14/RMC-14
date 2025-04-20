@@ -27,16 +27,17 @@
       preset: RMCSurvivorPresetSecurity
     - type: RMCSurvivor
     - type: MotionDetectorTracked
-    - type: UserIFF
-      faction: FactionSurvivor
+    - type: NpcFactionMember
+      factions:
+      - Survivor
     - type: IntelRescueSurvivorObjective
 
 - type: startingGear
   id: RMCGearSurvivorSecurity
   equipment:
-#    head: # TODO RMC14
+    head: RMCArmorHelmetSecurity
     eyes: CMGlassesSecurity
-    jumpsuit: ClothingUniformJumpsuitSec # TODO RMC14 /obj/item/clothing/under/rank/security
+    jumpsuit: RMCJumpsuitCivilianSecurity
     outerClothing: RMCArmorVestWeYa
     gloves: RMCHandsVeteran
     shoes: RMCShoesJackboots

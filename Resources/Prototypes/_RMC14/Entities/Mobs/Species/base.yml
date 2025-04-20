@@ -212,6 +212,10 @@
       whitelist:
         tags:
         - BodyBag
+    - multiplier: 0.645
+      whitelist:
+        components:
+        - ResistLocker #Lockers/Crates
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -339,3 +343,4 @@
     range: 2
   - type: RMCArmorModifier
     meleeArmorModifier: 5
+  - type: RMCObstacleSlamCauserImmune

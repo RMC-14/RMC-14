@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: CMBaseWeaponRifle
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   name: XM40 assault rifle
   id: RMCWeaponRifleXM40
   description: One of the experimental predecessors to the M54C line that never saw widespread adoption beyond elite marine units. Of the rifles in the UNMC inventory that are still in production, this is the only one to feature an integrated suppressor. It can accept M54C MK2 magazines, but also features its own proprietary magazine system. Extremely lethal in burstfire mode.
