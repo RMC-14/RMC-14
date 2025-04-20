@@ -411,7 +411,7 @@
       entries:
       - id: RMCBoxMagazinePistolM13
         name: Magazine Box (M13 x 22)
-        box: RMCMagazine11
+        box: RMCMagazineM11
       - id: RMCBoxMagazinePistolM13Ext
         name: Magazine Box (Ext M13 x 14)
         box: RMCMagazineExtendedM11
