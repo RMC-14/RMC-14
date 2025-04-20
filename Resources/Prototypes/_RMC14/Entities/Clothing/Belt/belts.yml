@@ -1170,6 +1170,7 @@
   - type: CMHolster
     whitelist:
       tags:
+      - RMCWeaponPistolM13
   - type: CMItemSlots
 
 - type: entity
