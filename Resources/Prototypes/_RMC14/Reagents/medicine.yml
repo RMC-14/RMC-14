@@ -12,6 +12,7 @@
       - !type:EqualHealthChange
         damage:
         - Toxin: -2
+        - Genetic: -1 # TODO RMC14 remove once other meds are in for genetic damage
       - !type:GenericStatusEffect
         key: SeeingRainbows
         component: SeeingRainbows

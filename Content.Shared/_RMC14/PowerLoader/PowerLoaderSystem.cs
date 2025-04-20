@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Weapon;
@@ -41,6 +42,7 @@ public sealed class PowerLoaderSystem : EntitySystem
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedDropshipSystem _dropship = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
@@ -401,7 +403,7 @@ public sealed class PowerLoaderSystem : EntitySystem
 
     private void OnDropshipAttach(Entity<DropshipEnginePointComponent> ent, ref DropshipAttachDoAfterEvent args)
     {
-        if (!TryGetPointContainer(args, out var user, out var container, out var contained, out var slot))
+        if (!TryGetPointContainer(args, out var user, out _, out var contained, out var slot))
             return;
 
         InsertPoint(user, contained, slot);
@@ -516,24 +518,28 @@ public sealed class PowerLoaderSystem : EntitySystem
         [NotNullWhen(true)] out ContainerSlot? slot)
     {
         slot = null;
-        var point = target.Comp;
         if (!Resolve(user, ref user.Comp, false))
-        {
             return false;
-        }
+
         string slotId;
         string msg;
         if (HasComp<DropshipWeaponComponent>(used))
         {
-            slotId = point.WeaponContainerSlotId;
+            slotId = target.Comp.WeaponContainerSlotId;
             msg = Loc.GetString("rmc-power-loader-occupied-weapon");
         }
         else if (HasComp<DropshipAmmoComponent>(used))
         {
-            slotId = point.AmmoContainerSlotId;
+            if (_transform.GetGrid(target.Owner) is { } grid &&
+                _dropship.IsInFlight(grid))
+            {
+                return false;
+            }
+
+            slotId = target.Comp.AmmoContainerSlotId;
             msg = Loc.GetString("rmc-power-loader-occupied-ammo");
 
-            if (!_container.TryGetContainer(target, point.WeaponContainerSlotId, out var weaponContainer) ||
+            if (!_container.TryGetContainer(target, target.Comp.WeaponContainerSlotId, out var weaponContainer) ||
                 weaponContainer.ContainedEntities.Count == 0)
             {
                 msg = Loc.GetString("rmc-power-loader-ammo-no-weapon");

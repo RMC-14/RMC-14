@@ -266,3 +266,16 @@
   - type: XenoActionPlasma
     cost: 300
 
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoQueenEye
+  name: Enter Eye Form
+  description: Look around any area with weeds remotely. You can use infinite range abilities while in this form, and build resin from afar.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: queen_eye
+    event: !type:QueenEyeActionEvent
+    useDelay: 0.25

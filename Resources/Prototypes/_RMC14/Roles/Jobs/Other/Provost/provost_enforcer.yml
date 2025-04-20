@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMProvostEnforcer
-  name: rmc-job-name-provost-enforcer
+  name: CMProvostEnforcer
   description: rmc-job-description-provost-enforcer
   playTimeTracker: CMJobProvostEnforcer
   ranks:
@@ -27,19 +27,6 @@
   hidden: true
 
 - type: entity
-  parent: MarkerBase
-  id: RMCSpawnerProvostEnforcer
-  name: provost spawner enforcer
-  suffix: Spawner, Player, Given Objective
-  components:
-  - type: Sprite
-    layers:
-    - state: red
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCRandomHumanoidProvostEnforcer
-
-- type: entity
   id: RMCRandomHumanoidProvostEnforcer
   name: provost ghost role enforcer
   suffix: Role, Player, Given Objective
@@ -51,25 +38,11 @@
     settings: RMCProvostEnforcer
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCSettingsGhostRole
   id: RMCProvostEnforcer
   components:
-  - type: GhostRole
-    name: rmc-ghost-role-information-provost-enforcer-name
-    description: rmc-ghost-role-information-provost-enforcer-description
-    rules: ghost-role-information-nonantagonist-rules
-    raffle:
-      settings: short
-  - type: Loadout
-    prototypes: [ RMCGearProvostEnforcer ]
-  - type: Skills
-    skills:
-      RMCSkillCqc: 3
-      RMCSkillEndurance: 3
-      RMCSkillFirearms: 1
-      RMCSkillFireman: 2
-      RMCSkillMeleeWeapons: 1
-      RMCSkillPolice: 2
+  - type: RMCJobSpawner
+    job: CMProvostEnforcer
 
 - type: startingGear
   id: RMCGearProvostEnforcer

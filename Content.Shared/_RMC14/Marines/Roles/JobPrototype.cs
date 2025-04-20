@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Prototypes;
+using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 using Robust.Shared.Utility;
@@ -55,4 +56,10 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
 
     [DataField]
     public LocId? Greeting;
+
+    /// <summary>
+    /// RMC14 for arrival notification sound if <see cref="JoinNotifyCrew"/> true.
+    /// </summary>
+    [DataField]
+    public SoundSpecifier LatejoinArrivalSound { get; private set; } = new SoundPathSpecifier("/Audio/_RMC14/Announcements/ARES/sound_misc_boatswain.ogg");
 }
