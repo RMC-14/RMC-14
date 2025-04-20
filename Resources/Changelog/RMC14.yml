@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Fully overhauled wield speeds to be more in line with CM13.
-    type: Tweak
-  - message: SMGs, XM88, and the M4SPR (normal and Scout variant) no longer have any
-      wield slowdown specifically when wearing armor.
-    type: Tweak
-  - message: Grenade Launchers, Rocket Launchers, Smartguns, Sniper Rifles, and the
-      M54CE2 Heavy Rifle now move at a fixed speed of 2.5 m/s when wielded, regardless
-      of worn armor.
-    type: Tweak
-  - message: All other weapons are now faster when wielded while wearing armor, but
-      slower when not wearing armor.
-    type: Tweak
-  id: 1109
-  time: '2024-12-16T03:04:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5150
 - author: DummeHytteOst
   changes:
   - message: Fixed being able to acid the command tablet.
@@ -5361,5 +5344,15 @@
   id: 1611
   time: '2025-04-20T06:53:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5965
+- author: Vermidia
+  changes:
+  - message: Fixed rounds not ending 25 minutes after hijack begins. (It's a xeno
+      minor)
+    type: Fix
+  - message: Changed some round end texts.
+    type: Tweak
+  id: 1612
+  time: '2025-04-20T08:35:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6177
 Name: RMC14
 Order: -1
