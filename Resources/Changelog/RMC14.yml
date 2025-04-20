@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed OBs not being able to be loaded.
-    type: Fix
-  - message: Fixed one dropship weapon not being usable.
-    type: Fix
-  - message: Fixed Chance's Claim blue rock tiles being weedable.
-    type: Fix
-  - message: Fixed Chance's Claim areas next to LZ being weedable early.
-    type: Fix
-  - message: Fixed medevac sometimes not giving correct feedback with popups.
-    type: Fix
-  - message: Fixed not being able to pick up some items dispensed from vendors.
-    type: Fix
-  id: 1108
-  time: '2024-12-13T22:07:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5129
 - author: Rainbeon
   changes:
   - message: Fully overhauled wield speeds to be more in line with CM13.
@@ -5370,5 +5353,13 @@
   id: 1610
   time: '2025-04-20T02:04:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6139
+- author: paige404
+  changes:
+  - message: Particularly large-snouted members of their species should now be able
+      to fit their noses into their gas masks.
+    type: Fix
+  id: 1611
+  time: '2025-04-20T06:53:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5965
 Name: RMC14
 Order: -1
