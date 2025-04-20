@@ -348,4 +348,4 @@
   - type: RMCMobCollision
   - type: RMCRest
   - type: StunOnExplosionReceived
-    weak: true
+    weak: true # TODO should also blind and cause hearing loss
