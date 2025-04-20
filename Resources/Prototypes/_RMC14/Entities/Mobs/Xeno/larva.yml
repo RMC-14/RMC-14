@@ -5,6 +5,9 @@
   id: CMXenoLarva
   name: Larva
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleDrone
   - type: GhostRole
     name: cm-job-name-xeno-larva
   - type: Sprite

@@ -101,6 +101,9 @@
   parent: CMXenoDroneBase
   id: CMXenoDrone
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleDrone
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Drone/drone.rsi
   - type: Xeno
