@@ -39,7 +39,6 @@ public sealed class XenoEmpowerSystem : EntitySystem
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
     [Dependency] private readonly SharedAuraSystem _aura = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
-    [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly DamageableSystem _damagable = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
@@ -209,7 +208,6 @@ public sealed class XenoEmpowerSystem : EntitySystem
         var diff = target.Position - origin.Position;
         diff = diff.Normalized() * xeno.Comp.FlingDistance;
 
-        _rmcObstacleSlamming.MakeImmune(args.Hit);
         _throwing.TryThrow(args.Hit, diff, 10);
     }
 

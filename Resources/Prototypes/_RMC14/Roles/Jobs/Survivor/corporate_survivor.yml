@@ -34,8 +34,9 @@
       preset: RMCSurvivorPresetCorporate
     - type: RMCSurvivor
     - type: MotionDetectorTracked
-    - type: UserIFF
-      faction: FactionSurvivor
+    - type: NpcFactionMember
+      factions:
+      - WeYa
     - type: IntelRescueSurvivorObjective
 
 - type: startingGear

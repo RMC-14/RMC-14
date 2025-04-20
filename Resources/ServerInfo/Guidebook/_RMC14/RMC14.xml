@@ -1,5 +1,5 @@
 ﻿<Document>
-  #RMC-14 Guidebook
+  # RMC-14 Guidebook
 
   Welcome to RMC-14.
 
@@ -19,7 +19,7 @@
   - [textlink="Medical" link="RMCMedical"]
   - [textlink="Medicines" link="RMCMedicine"]
   - [textlink="Requisitions" link="RMCRequisitions"]
-  - [textlink="Communications towers and senor towers" link="RMCGuideCommunicationsTowers"]
+  - [textlink="Communications towers and sensor towers" link="RMCGuideCommunicationsTowers"]
   - [textlink="Combat Technician" link="RMCGuideRoleCombatTechnician"]
   - [textlink="Maintenance Technician" link="RMCGuideRoleMaintenanceTechnician"]
   - [textlink="Survivor" link="RMCSurvivor"]

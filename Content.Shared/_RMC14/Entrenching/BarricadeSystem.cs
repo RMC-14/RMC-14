@@ -34,6 +34,7 @@ public sealed class BarricadeSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
+    [Dependency] private readonly RMCConstructionSystem _rmcConstruction = default!;
 
     private EntityQuery<BarricadeComponent> _barricadeQuery;
 

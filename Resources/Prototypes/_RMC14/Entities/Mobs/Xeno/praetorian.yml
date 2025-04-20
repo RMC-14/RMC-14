@@ -211,6 +211,7 @@
     - type: RMCSlowdown
     - type: RMCSuperSlowdown
     - type: RMCRooted
+    - type: RMCDazed
   - type: XenoHighGallop
 
 - type: entity
