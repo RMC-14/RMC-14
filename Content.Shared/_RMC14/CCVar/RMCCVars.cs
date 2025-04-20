@@ -423,4 +423,8 @@ public sealed class RMCCVars : CVars
     /// </summary>
     public static readonly CVarDef<bool> RMCUseAlternateSprites =
         CVarDef.Create("rmc.use_alternate_sprites", false, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<string> RMCChatColorMode =
+        CVarDef.Create("rmc.chat_color_mode", "SquadName", CVar.CLIENTONLY | CVar.ARCHIVE);
+
 }
