@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: MACMAN2003
-  changes:
-  - message: Added camouflaged variants of marine weapons, armor, and equipment.
-    type: Add
-  id: 1104
-  time: '2024-12-13T18:38:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5054
 - author: DrSmugleaf
   changes:
   - message: Fixed medals not always showing above backpacks and other clothing items.
@@ -5366,5 +5359,13 @@
   id: 1606
   time: '2025-04-19T11:36:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6188
+- author: N0lim
+  changes:
+  - message: Fixed lesser drones being able to plant new weed nodes in 6x6 area instead
+      of 5x5 from other nodes.
+    type: Fix
+  id: 1607
+  time: '2025-04-20T01:59:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6170
 Name: RMC14
 Order: -1
