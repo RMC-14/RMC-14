@@ -357,6 +357,7 @@
     offset: 0, 0.5
   - type: RMCArmorModifier
   - type: RMCObstacleSlamCauserImmune
+  - type: RMCMobCollisionMass
 
 - type: entity
   abstract: true
@@ -489,6 +490,7 @@
   id: RMCXenoMobCollision
   components:
   - type: MobCollision
+    minimumSpeedModifier: 0.25
   - type: RMCMobCollision
 
 - type: speechVerb
