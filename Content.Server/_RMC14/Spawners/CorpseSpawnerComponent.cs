@@ -7,6 +7,6 @@ namespace Content.Server._RMC14.Spawners;
 [Access(typeof(RMCSpawnerSystem))]
 public sealed partial class CorpseSpawnerComponent : Component
 {
-    [DataField(required: true), AutoNetworkedField]
+    [DataField(required: true)]
     public ProtoId<RandomHumanoidSettingsPrototype> Spawn;
 }

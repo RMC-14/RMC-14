@@ -137,3 +137,51 @@
 
 - type: Tag
   id: RMCSquadIntel
+
+- type: entity
+  parent: SquadBase
+  id: SquadSPP
+  name: SPP
+  components:
+  - type: SquadTeam
+    color: "#9b0612"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    radio: SPP
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_spp
+    canSupplyDrop: false
+    group: SPP
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: upp_sl_a
+
+- type: entity
+  parent: SquadBase
+  id: SquadPMC
+  name: PMC
+  components:
+  - type: SquadTeam
+    color: "#C0C0C0"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    radio: WEYA
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_pmc
+    canSupplyDrop: false
+    group: WeYa
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: pmc_ld

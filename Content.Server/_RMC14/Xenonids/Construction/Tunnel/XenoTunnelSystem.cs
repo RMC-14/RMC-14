@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Stun;
@@ -32,8 +33,6 @@ namespace Content.Server._RMC14.Xenonids.Construction.Tunnel;
 
 public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 {
-    //private const string TunnelPrototypeId = "XenoTunnel";
-
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityManager _entities = default!;
@@ -572,9 +571,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
     private void OnCollapseTunnelFinish(Entity<XenoTunnelComponent> xenoTunnel, ref XenoCollapseTunnelDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled)
-        {
             return;
-        }
 
         CollapseTunnel(xenoTunnel);
     }
@@ -605,16 +602,12 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
     /// <param name="xenoTunnel"></param>
     private void CollapseTunnel(Entity<XenoTunnelComponent> xenoTunnel)
     {
-        var hiveTuple = Hive.GetHive(xenoTunnel.Owner);
-        if (hiveTuple is not null && TryGetHiveTunnelName(xenoTunnel, out var tunnelName))
-        {
-            var hiveComp = hiveTuple.Value.Comp;
-            hiveComp.HiveTunnels.Remove(tunnelName);
-        }
+        if (Hive.GetHive(xenoTunnel.Owner) is { } hive && TryGetHiveTunnelName(xenoTunnel, out var tunnelName))
+            hive.Comp.HiveTunnels.Remove(tunnelName);
 
         if (_container.TryGetContainer(xenoTunnel.Owner, XenoTunnelComponent.ContainedMobsContainerId, out var mobContainer))
         {
-            foreach (var mob in mobContainer.ContainedEntities)
+            foreach (var mob in mobContainer.ContainedEntities.ToArray())
             {
                 RemoveFromTunnel(mob, mobContainer.Owner);
                 _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-fill-xeno-drop"), mob, mob);
@@ -623,6 +616,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 
         QueueDel(xenoTunnel.Owner);
     }
+
     private void OnInTunnel(Entity<InXenoTunnelComponent> tunneledXeno, ref ComponentInit args)
     {
         DisableAllAbilities(tunneledXeno.Owner);

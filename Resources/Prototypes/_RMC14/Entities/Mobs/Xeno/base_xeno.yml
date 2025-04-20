@@ -182,7 +182,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.40
-        density: 185
+        density: 0
         layer:
         - BulletImpassable
   - type: Xeno
@@ -385,7 +385,7 @@
     autoAttack: true
     widePrimary: true
     altDisarm: true
-    angle: 60
+    angle: 0
     soundHit:
       collection: RCMXenoClaw
     animation: RMCWeaponArcXenoClaw
@@ -447,6 +447,7 @@
       - XenoFruit
   - type: ParalyzeOnPullAttempt
   - type: FirePatter
+    stacks: 5
   - type: RMCHandEmotes
 
 - type: entity
@@ -482,6 +483,13 @@
   components:
   - type: Speech
     speechSounds: Xenonid
+
+- type: entity
+  abstract: true
+  id: RMCXenoMobCollision
+  components:
+  - type: MobCollision
+  - type: RMCMobCollision
 
 - type: speechVerb
   id: Xeno

@@ -40,6 +40,7 @@ public sealed partial class XenoAbductSystem : EntitySystem
     [Dependency] private readonly SharedStutteringSystem _stutter = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
 
     private readonly HashSet<EntityUid> _abductEnts = new();
 
@@ -193,7 +194,7 @@ public sealed partial class XenoAbductSystem : EntitySystem
                 _stutter.DoStutter(ent, dazeTime, true);
                 _stun.TryParalyze(ent, stunTime, true);
 
-                EnsureComp<RMCObstacleSlamImmuneComponent>(ent);
+                _rmcObstacleSlamming.MakeImmune(ent);
                 _throwing.TryThrow(ent, diff, 10, user: xeno);
             }
         }

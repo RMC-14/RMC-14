@@ -16,6 +16,8 @@
   - RMCGuideMarineStructures
   - RMCGuideXenonidRoles
   - RMCGuideXenonidStructures
+  - RMCSurvivor
+
 
 - type: guideEntry
   parent: RMC
@@ -124,6 +126,13 @@
   priority: 7
   name: "Intel"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCIntel.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: RMCSurvivor
+  priority: 8
+  name: "Survivor"
+  text: "/ServerInfo/Guidebook/_RMC14/NewPlayerGuide/RMCSurvivor.xml"
 
 - type: guideEntry # made by GoodShowOldChap
   parent: RMC

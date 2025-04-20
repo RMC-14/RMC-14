@@ -83,8 +83,8 @@
         amount: 5
       - id: CMAPCElectronics
         amount: 6
-#      - id: CMAutolatheMachineCircuitboard
-#        amount: 2 # TODO RMC14
+      - id: CMAutolatheMachineCircuitboard
+        amount: 2
       - id: TelecomServerCircuitboard
         amount: 1
       - id: CrewMonitoringComputerCircuitboard

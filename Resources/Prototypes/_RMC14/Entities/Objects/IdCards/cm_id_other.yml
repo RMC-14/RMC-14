@@ -21,6 +21,8 @@
   components:
   - type: PresetIdCard
     job: CMSurvivor
+  - type: ItemIFF
+    faction: FactionSurvivor
 
 - type: entity
   parent: CMIDCardSilver
@@ -29,6 +31,8 @@
   components:
   - type: PresetIdCard
     job: CMSurvivorDoctor
+  - type: ItemIFF
+    faction: FactionSurvivor
 
 - type: entity
   parent: CMIDCardLanyard
@@ -37,6 +41,8 @@
   components:
   - type: PresetIdCard
     job: CMSurvivorEngineer
+  - type: ItemIFF
+    faction: FactionSurvivor
 
 - type: entity
   parent: CMIDCardLanyard
@@ -50,12 +56,16 @@
     sprite: _RMC14/Objects/CMIDs/id.rsi
   - type: PresetIdCard
     job: CMSurvivorSecurity
+  - type: ItemIFF
+    faction: FactionSurvivor
 
 - type: entity
   parent: CMIDCardSilver
   id: CMIDCardLiaison
   name: liaison ID card
   components:
+  - type: ItemIFF
+    faction: FactionWeYa
   - type: PresetIdCard
     job: CMLiaison
 
@@ -136,14 +146,22 @@
   id: RMCIDCardPMC
   name: PMC holo-badge
   description: A corporate holo-badge. It has a unique uncapped bottom.
-
-- type: entity
-  parent: RMCIDCardPMC
-  id: RMCIDCardPMCColony
   components:
+  - type: ItemIFF
+    faction: FactionWeYa
   - type: Access
     groups:
     - Colony
+    - RMCWeYa
+
+- type: entity
+  id: FactionWeYa
+  components:
+  - type: IFFFaction
+  - type: FactionFrequencies
+    channels:
+    - Colony
+    - WEYA
 
 - type: entity
   parent: CMIDCardLanyard
