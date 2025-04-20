@@ -169,6 +169,7 @@
     lifetime: 3.0
 
 - type: entity
+  parent: RMCBaseEffect
   id: XenoAcidExtinguishEffect
   description: It's cold...
   categories: [ HideSpawnMenu ]
