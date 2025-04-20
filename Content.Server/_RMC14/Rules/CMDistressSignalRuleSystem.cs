@@ -52,6 +52,7 @@ using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.WeedKiller;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction;
+using Content.Shared._RMC14.Xenonids.Construction.FloorResin;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Evolution;
@@ -1677,6 +1678,18 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             _hive.SetHive(weeds, hive);
         }
 
+        var resinSlowdown = EntityQueryEnumerator<ResinSlowdownModifierComponent>();
+        while (resinSlowdown.MoveNext(out var uid, out _))
+        {
+            _hive.SetHive(uid, hive);
+        }
+
+        var resinSpeedup = EntityQueryEnumerator<ResinSpeedupModifierComponent>();
+        while (resinSpeedup.MoveNext(out var uid, out _))
+        {
+            _hive.SetHive(uid, hive);
+        }
+
         var tunnelQuery = EntityQueryEnumerator<XenoTunnelComponent>();
         var tunnels = new List<EntityUid>();
 
@@ -1687,7 +1700,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         // Replace all pre-mapped tunnels with a new tunnel with name and associated with the hive
         foreach (var tunnel in tunnels)
         {
-            _xenoTunnel.TryPlaceTunnel(hive, null, tunnel.ToCoordinates(), out _);
+            if (_xenoTunnel.TryPlaceTunnel(hive, null, tunnel.ToCoordinates(), out var newTunnel))
+                RemCompDeferred<DeletedByWeedKillerComponent>(newTunnel.Value);
+
             QueueDel(tunnel);
         }
     }
