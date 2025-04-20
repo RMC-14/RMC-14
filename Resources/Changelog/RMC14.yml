@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: FungiFellow
-  changes:
-  - message: Gave D18 an Additional Mag and Disabled Auto-Eject
-    type: Tweak
-  id: 1116
-  time: '2024-12-21T13:20:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5184
-- author: Vermidia
-  changes:
-  - message: Add sensor tower tacmap icon
-    type: Add
-  id: 1117
-  time: '2024-12-21T13:24:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5161
 - author: Vermidia
   changes:
   - message: Fixed being able to melee faster with guns by switching between them
@@ -5511,5 +5497,19 @@
   id: 1618
   time: '2025-04-20T17:47:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6202
+- author: Vermidia
+  changes:
+  - message: Fixed normal xeno ranks not showing up.
+    type: Fix
+  id: 1619
+  time: '2025-04-20T23:37:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6203
+- author: Vermidia
+  changes:
+  - message: Fixed parasites attempting to jump while held.
+    type: Fix
+  id: 1620
+  time: '2025-04-20T23:37:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6204
 Name: RMC14
 Order: -1
