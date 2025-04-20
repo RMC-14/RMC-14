@@ -346,7 +346,7 @@
         amount: 80
       - id: CMMagazinePistolM1984
         amount: 100
-      - id: RMCMagazinePistolM11
+      - id: RMCMagazinePistolM13
         amount: 100
     - name: Armor-piercing ammunition
       entries:
@@ -366,9 +366,9 @@
         amount: 10
       - id: CMMagazineRifleM54CExt
         amount: 8
-      - id: RMCMagazinePistolM11Ext
+      - id: RMCMagazinePistolM13Ext
         amount: 10
-      - id: RMCMagazinePistolM11Drum
+      - id: RMCMagazinePistolM13Drum
         amount: 8
     - name: Special ammunition
       entries:
@@ -409,12 +409,15 @@
     - name: Magazine Boxes
       hasBoxes: true
       entries:
-      - name: Magazine Box (M11 x 22)
+      - id: RMCBoxMagazinePistolM13
+        name: Magazine Box (M13 x 22)
         box: RMCMagazine11
-      - name: Magazine Box (Ext M11 x 14)
+      - id: RMCBoxMagazinePistolM13Ext
+        name: Magazine Box (Ext M13 x 14)
         box: RMCMagazineExtended11
-      - name: Magazine Box (Drum M11 x 12)
-        box: RMCMagazineDrum11
+      - id: RMCBoxMagazinePistolM13Drum
+        name: Magazine Box (Drum M13 x 12)
+        box: RMCMagazineDrum13
       - id: RMCBoxMagazineSMGM63
         name: Magazine Box (M63 x 12)
         box: CMMagazineSMGM63

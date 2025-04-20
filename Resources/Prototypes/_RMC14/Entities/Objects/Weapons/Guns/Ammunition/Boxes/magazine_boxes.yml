@@ -1484,16 +1484,16 @@
         tags:
         - RMCMagazineSMGNailgun
 
-# m11 auto pistol
-# M11 REG
+# M13 auto pistol
+# M13 REG
 - type: entity
   parent: RMCBoxMagazineSMGBase
-  id: RMCBoxMagazinePistolM11Empty
-  name: magazine box (M11 x 22)
+  id: RMCBoxMagazinePistolM13Empty
+  name: magazine box (M13 x 22)
   components:
   - type: Construction
     graph: RMCBoxMagazine
-    node: RMCBoxMagazinePistolM11Empty
+    node: RMCBoxMagazinePistolM13Empty
   - type: Sprite
     layers:
     - state: smg_box
@@ -1518,30 +1518,30 @@
     slot:
       whitelist:
         tags:
-        - RMCMagazinePistolM11
+        - RMCMagazinePistolM13
 
 - type: entity
-  parent: RMCBoxMagazinePistolM11Empty
-  id: RMCBoxMagazinePistolM11
+  parent: RMCBoxMagazinePistolM13Empty
+  id: RMCBoxMagazinePistolM13
   suffix: Full
   components:
   - type: CMItemSlots
-    startingItem: RMCMagazinePistolM11
+    startingItem: RMCMagazinePistolM13
     count: 22
     slot:
       whitelist:
         tags:
-        - RMCMagazinePistolM11
+        - RMCMagazinePistolM13
 
-#M11 Extended
+#M13 Extended
 - type: entity
   parent: RMCBoxMagazineSMGBase
-  id: RMCBoxMagazinePistolM11ExtEmpty
-  name: magazine box (M11Ext x 14)
+  id: RMCBoxMagazinePistolM13ExtEmpty
+  name: magazine box (M13Ext x 14)
   components:
   - type: Construction
     graph: RMCBoxMagazine
-    node: RMCBoxMagazinePistolM11Empty
+    node: RMCBoxMagazinePistolM13Empty
   - type: Sprite
     layers:
     - state: smg_box
@@ -1566,30 +1566,30 @@
     slot:
       whitelist:
         tags:
-        - RMCMagazinePistolM11Ext
+        - RMCMagazinePistolM13Ext
 
 - type: entity
-  parent: RMCBoxMagazinePistolM11ExtEmpty
-  id: RMCBoxMagazinePistolM11Ext
+  parent: RMCBoxMagazinePistolM13ExtEmpty
+  id: RMCBoxMagazinePistolM13Ext
   suffix: Full
   components:
   - type: CMItemSlots
-    startingItem: RMCMagazinePistolM11Ext
+    startingItem: RMCMagazinePistolM13Ext
     count: 14
     slot:
       whitelist:
         tags:
-        - RMCMagazinePistolM11Ext
+        - RMCMagazinePistolM13Ext
 
-#M11 Drum
+#M13 Drum
 - type: entity
   parent: RMCBoxMagazineSMGBase
-  id: RMCBoxMagazinePistolM11DrumEmpty
-  name: magazine box (M11Drum x 12)
+  id: RMCBoxMagazinePistolM13DrumEmpty
+  name: magazine box (M13Drum x 12)
   components:
   - type: Construction
     graph: RMCBoxMagazine
-    node: RMCBoxMagazinePistolM11DrumEmpty
+    node: RMCBoxMagazinePistolM13DrumEmpty
   - type: Sprite
     layers:
     - state: smg_box
@@ -1614,17 +1614,17 @@
     slot:
       whitelist:
         tags:
-        - RMCMagazinePistolM11Drum
+        - RMCMagazinePistolM13Drum
 
 - type: entity
-  parent: RMCBoxMagazinePistolM11DrumEmpty
-  id: RMCBoxMagazinePistolM11Drum
+  parent: RMCBoxMagazinePistolM13DrumEmpty
+  id: RMCBoxMagazinePistolM13Drum
   suffix: Full
   components:
   - type: CMItemSlots
-    startingItem: RMCMagazinePistolM11Drum
+    startingItem: RMCMagazinePistolM13Drum
     count: 12
     slot:
       whitelist:
         tags:
-        - RMCMagazinePistolM11Drum
+        - RMCMagazinePistolM13Drum

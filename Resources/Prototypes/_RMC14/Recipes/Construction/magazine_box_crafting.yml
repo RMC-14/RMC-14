@@ -589,20 +589,20 @@
         amount: 1
         doAfter: 0.25
 
-    # M11 Auto Pistol
-    - to: RMCBoxMagazinePistolM11Empty
+    # M13 Auto Pistol
+    - to: RMCBoxMagazinePistolM13Empty
       steps:
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 0.25
 
-    - to: RMCBoxMagazinePistolM11Ext
+    - to: RMCBoxMagazinePistolM13Ext
       steps:
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 0.25
 
-    - to: RMCBoxMagazinePistolM11Drum
+    - to: RMCBoxMagazinePistolM13Drum
       steps:
       - material: RMCSheetCardboard
         amount: 1

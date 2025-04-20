@@ -1,4 +1,4 @@
-# m54c
+﻿# m54c
 - type: entity
   parent: RMCCrateAmmo
   id: RMCCrateBoxMagazineRifleM54C
@@ -245,30 +245,30 @@
     - id: RMCBoxShotgunBreaching
       amount: 1
 
-#M11 auto pistol
+#M13 auto pistol
 - type: entity
   parent: RMCCrateAmmo
-  id: RMCCrateBoxMagazinePistolM11
-  name: Magazine box (M11, 22x regular mags)
+  id: RMCCrateBoxMagazinePistolM13
+  name: Magazine box (M13, 22x regular mags)
   components:
   - type: StorageFill
     contents:
-    - id: RMCBoxMagazinePistolM11
+    - id: RMCBoxMagazinePistolM13
 
 - type: entity
   parent: RMCCrateAmmo
-  id: RMCCrateBoxMagazinePistolM11Ext
-  name: Magazine box (M11, 14x extended mags)
+  id: RMCCrateBoxMagazinePistolM13Ext
+  name: Magazine box (M13, 14x extended mags)
   components:
   - type: StorageFill
     contents:
-    - id: RMCBoxMagazinePistolM11Ext
+    - id: RMCBoxMagazinePistolM13Ext
 
 - type: entity
   parent: RMCCrateAmmo
-  id: RMCCrateBoxMagazinePistolM11Drum
-  name: Magazine box (M11, 12x drum mags)
+  id: RMCCrateBoxMagazinePistolM13Drum
+  name: Magazine box (M13, 12x drum mags)
   components:
   - type: StorageFill
     contents:
-    - id: RMCBoxMagazinePistolM11Drum
+    - id: RMCBoxMagazinePistolM13Drum
