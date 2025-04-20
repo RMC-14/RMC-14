@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: MACMAN2003
-  changes:
-  - message: Roundstart guns are now appropriately camouflaged.
-    type: Fix
-  - message: The staff officer vendor now vends camouflaged items.
-    type: Fix
-  - message: The cap that the loadout gives is now camouflaged.
-    type: Fix
-  id: 1114
-  time: '2024-12-21T13:21:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5130
 - author: Tunguso4ka
   changes:
   - message: Added trash bag in Maintenance Technician set.
@@ -5512,5 +5501,13 @@
   id: 1616
   time: '2025-04-20T15:34:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6168
+- author: DrSmugleaf
+  changes:
+  - message: Added a 25 hour Queen playtime requirement for giving out jellies because
+      if I have to delete one more dogshit jelly from the database I am going to die.
+    type: Tweak
+  id: 1617
+  time: '2025-04-20T16:39:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6200
 Name: RMC14
 Order: -1
