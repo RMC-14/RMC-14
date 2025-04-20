@@ -270,7 +270,7 @@
   parent: ActionXenoBase
   id: ActionXenoQueenEye
   name: Enter Eye Form
-  description: Look around any area with weeds remotely. You can use infinite range abilities while in this form.
+  description: Look around any area with weeds remotely. You can use infinite range abilities while in this form, and build resin from afar.
   components:
   - type: InstantAction
     itemIconStyle: NoItem

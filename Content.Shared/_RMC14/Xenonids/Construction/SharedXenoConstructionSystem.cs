@@ -1,4 +1,4 @@
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Areas;
@@ -431,7 +431,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var ev = new XenoOrderConstructionDoAfterEvent(args.StructureId, GetNetCoordinates(target));
         var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.OrderConstructionDelay, ev, xeno)
         {
-            BreakOnMove = true
+            BreakOnMove = true,
         };
 
         _doAfter.TryStartDoAfter(doAfter);
@@ -890,8 +890,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return false;
         }
 
-        if (xeno.Comp.BuildRange > 0 &&
-            !InRangePopup(xeno, target, xeno.Comp.BuildRange.Float()))
+        var ev = new XenoConstructionRangeEvent(xeno.Comp.BuildRange);
+        RaiseLocalEvent(xeno, ref ev);
+        if (ev.Range > 0 &&
+            !InRangePopup(xeno, target, ev.Range.Float()))
         {
             return false;
         }
