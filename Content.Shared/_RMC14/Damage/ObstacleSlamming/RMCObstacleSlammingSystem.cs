@@ -1,19 +1,18 @@
-using Content.Shared.Effects;
-using Robust.Shared.Audio.Systems;
-using Robust.Shared.Physics.Events;
-using Robust.Shared.Player;
-using Robust.Shared.Timing;
-using Content.Shared.Damage;
-using Content.Shared._RMC14.Stun;
-using Content.Shared.Damage.Prototypes;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Network;
-using Content.Shared.Coordinates;
-using Content.Shared.Throwing;
-using Robust.Shared.Physics.Systems;
 using System.Numerics;
+using Content.Shared._RMC14.Stun;
+using Content.Shared.Coordinates;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
+using Content.Shared.Effects;
 using Content.Shared.Popups;
+using Content.Shared.Throwing;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Systems;
+using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Damage.ObstacleSlamming;
 
@@ -38,8 +37,6 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<RMCObstacleSlammingComponent, ThrowDoHitEvent>(HandleCollide);
-
-        SubscribeLocalEvent<RMCObstacleSlamImmuneComponent, MapInitEvent>(OnImmuneMapInit);
     }
 
     private void HandleCollide(Entity<RMCObstacleSlammingComponent> ent, ref ThrowDoHitEvent args)
@@ -114,10 +111,11 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void OnImmuneMapInit(Entity<RMCObstacleSlamImmuneComponent> ent, ref MapInitEvent args)
+    public void MakeImmune(EntityUid uid)
     {
-        ent.Comp.ExpireAt = _timing.CurTime + ent.Comp.ExpireIn;
-        Dirty(ent);
+        var comp = EnsureComp<RMCObstacleSlamImmuneComponent>(uid);
+        comp.ExpireAt = _timing.CurTime + comp.ExpireIn;
+        Dirty(uid, comp);
     }
 
     public override void Update(float frameTime)
@@ -127,7 +125,6 @@ public sealed class RMCObstacleSlammingSystem : EntitySystem
         _queuedImmuneEntities.Clear();
 
         var query = EntityQueryEnumerator<RMCObstacleSlamImmuneComponent>();
-
         while (query.MoveNext(out var uid, out var comp))
         {
             if (comp.ExpireAt != null && comp.ExpireAt.Value > _timing.CurTime)

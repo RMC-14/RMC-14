@@ -88,6 +88,10 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         SubscribeLocalEvent<TacticalMapTrackedComponent, MapInitEvent>(OnTrackedMapInit);
         SubscribeLocalEvent<TacticalMapTrackedComponent, MobStateChangedEvent>(OnTrackedMobStateChanged);
+        SubscribeLocalEvent<TacticalMapTrackedComponent, RoleAddedEvent>(OnTrackedChanged);
+        SubscribeLocalEvent<TacticalMapTrackedComponent, MindAddedMessage>(OnTrackedChanged);
+        SubscribeLocalEvent<TacticalMapTrackedComponent, SquadMemberUpdatedEvent>(OnTrackedChanged);
+        SubscribeLocalEvent<TacticalMapTrackedComponent, EntParentChangedMessage>(OnTrackedChanged);
 
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, ComponentRemove>(OnActiveRemove);
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, EntityTerminatingEvent>(OnActiveRemove);
@@ -219,6 +223,14 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             return;
 
         UpdateActiveTracking(ent, args.NewMobState);
+    }
+
+    private void OnTrackedChanged<T>(Entity<TacticalMapTrackedComponent> ent, ref T args)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        UpdateActiveTracking(ent);
     }
 
     private void OnActiveRemove<T>(Entity<ActiveTacticalMapTrackedComponent> ent, ref T args)

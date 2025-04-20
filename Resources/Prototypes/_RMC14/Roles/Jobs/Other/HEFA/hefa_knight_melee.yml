@@ -23,6 +23,8 @@
   components:
   - type: Loadout
     prototypes: [ RMCGearHEFAShrapnelswornMelee ]
+  - type: RMCJobSpawner
+    loadout: false
 
 - type: startingGear
   id: RMCGearHEFAShrapnelswornMelee

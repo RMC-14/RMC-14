@@ -56,7 +56,7 @@
   suffix: Leader
   description:
   components:
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 2
 
 - type: entity
@@ -73,7 +73,7 @@
       - RMCEncryptionKeyLiaison
   - type: GrantMarineIcons
   - type: GrantTacMapAlert
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 3
 
 # For Duke's Dozen/Freelancer

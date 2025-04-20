@@ -56,5 +56,5 @@
 - type: localizedDataset
   id: CMFortunes
   values:
-    prefix: fortune-cookie-
+    prefix: rmc-fortune-
     count: 380

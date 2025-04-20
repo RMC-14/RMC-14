@@ -34,8 +34,7 @@ public sealed class RMCConstructionUpgradeBui : BoundUserInterface
     protected override void Open()
     {
         base.Open();
-        _menu = new RMCConstructionUpgradeMenu();
-        _menu.OnClose += Close;
+        _menu = this.CreateWindow<RMCConstructionUpgradeMenu>();
 
         if (EntMan.TryGetComponent(Owner, out RMCConstructionUpgradeTargetComponent? upgradeComp) &&
             upgradeComp.Upgrades is { } upgrades)
@@ -71,11 +70,5 @@ public sealed class RMCConstructionUpgradeBui : BoundUserInterface
         var pos = _eye.WorldToScreen(_transform.GetMapCoordinates(Owner).Position) / vpSize;
 
         _menu.OpenCenteredAt(pos);
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        if (disposing)
-            _menu?.Dispose();
     }
 }
