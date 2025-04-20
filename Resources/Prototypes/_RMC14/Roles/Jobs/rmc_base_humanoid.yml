@@ -1,5 +1,4 @@
 ﻿- type: randomHumanoidSettings
-  abstract: true
   parent: EventHumanoid
   id: RMCSettingsGhostRole
   components:

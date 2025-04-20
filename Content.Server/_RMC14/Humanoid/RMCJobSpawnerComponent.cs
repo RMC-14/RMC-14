@@ -7,7 +7,7 @@ namespace Content.Server._RMC14.Humanoid;
 [Access(typeof(RMCHumanoidSystem))]
 public sealed partial class RMCJobSpawnerComponent : Component
 {
-    [DataField(required: true)]
+    [DataField]
     public ProtoId<JobPrototype>? Job;
 
     [DataField]
