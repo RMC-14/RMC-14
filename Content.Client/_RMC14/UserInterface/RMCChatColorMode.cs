@@ -3,5 +3,6 @@ public enum RMCChatColorMode
 {
     SquadName,
     SquadSpeech,
+    SquadNameAndSpeech,
     Off
 }

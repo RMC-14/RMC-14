@@ -913,6 +913,11 @@ public sealed class ChatUIController : UIController
                     msg.WrappedMessage = SharedChatSystem.InjectTagInsideTag(msg, "BubbleContent", "color", squadColor.ToHex());
                     msg.WrappedMessage = SharedChatSystem.InjectTagInsideTag(msg, "Name", "color", GetNameColor(SharedChatSystem.GetStringInsideTag(msg, "Name")));
                 }
+                else if (colorMode == RMCChatColorMode.SquadNameAndSpeech.ToString() && squad.TryGetMemberSquadColor(_ent.GetEntity(msg.SenderEntity), out squadColor))
+                {
+                    msg.WrappedMessage = SharedChatSystem.InjectTagInsideTag(msg, "BubbleContent", "color", squadColor.ToHex());
+                    msg.WrappedMessage = SharedChatSystem.InjectTagInsideTag(msg, "Name", "color", squadColor.ToHex());
+                }
                 else
                 {
                     msg.WrappedMessage = SharedChatSystem.InjectTagInsideTag(msg, "Name", "color", GetNameColor(SharedChatSystem.GetStringInsideTag(msg, "Name")));
