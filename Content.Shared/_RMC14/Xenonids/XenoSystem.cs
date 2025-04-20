@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Medical.Scanner;
 using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Tackle;
 using Content.Shared._RMC14.Vendors;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Devour;
@@ -23,6 +24,7 @@ using Content.Shared.Buckle.Components;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
 using Content.Shared.DragDrop;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
@@ -124,9 +126,9 @@ public sealed class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, BuckleAttemptEvent>(OnXenoBuckleAttempt);
         SubscribeLocalEvent<XenoComponent, DamageStateCritBeforeDamageEvent>(OnXenoBeforeCritDamage, before: [typeof(SharedXenoPheromonesSystem)]);
         SubscribeLocalEvent<XenoComponent, GetVisMaskEvent>(OnXenoGetVisMask);
-        // SubscribeLocalEvent<XenoComponent, CMDisarmEvent>(OnLeaderDisarmed,
-        //     before: [typeof(SharedHandsSystem), typeof(StaminaSystem)],
-        //     after: [typeof(TackleSystem)]);
+        SubscribeLocalEvent<XenoComponent, CMDisarmEvent>(OnLeaderDisarmed,
+            before: [typeof(SharedHandsSystem), typeof(StaminaSystem)],
+            after: [typeof(TackleSystem)]);
 
         Subs.CVar(_config, RMCCVars.CMXenoDamageDealtMultiplier, v => _xenoDamageDealtMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMXenoDamageReceivedMultiplier, v => _xenoDamageReceivedMultiplier = v, true);
@@ -314,25 +316,25 @@ public sealed class XenoSystem : EntitySystem
         args.VisibilityMask |= (int) ent.Comp.Visibility;
     }
 
-    // private void OnLeaderDisarmed(Entity<XenoComponent> ent, ref CMDisarmEvent args)
-    // {
-    //     if (args.Handled)
-    //         return;
-    //
-    //     if (!_hive.FromSameHive(ent.Owner, args.User))
-    //         return;
-    //
-    //     if (!_hiveLeader.IsLeader(args.User, out var leader))
-    //         return;
-    //
-    //     if (_hiveLeader.IsLeader(ent.Owner, out _))
-    //         return;
-    //
-    //     if (HasComp<XenoEvolutionGranterComponent>(ent))
-    //         return;
-    //
-    //     _stun.TryParalyze(ent, leader.FriendlyStunTime, true);
-    // }
+    private void OnLeaderDisarmed(Entity<XenoComponent> ent, ref CMDisarmEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (!_hive.FromSameHive(ent.Owner, args.User))
+            return;
+
+        if (!_hiveLeader.IsLeader(args.User, out var leader))
+            return;
+
+        if (_hiveLeader.IsLeader(ent.Owner, out _))
+            return;
+
+        if (HasComp<XenoEvolutionGranterComponent>(ent))
+            return;
+
+        _stun.TryParalyze(ent, leader.FriendlyStunTime, true);
+    }
 
     private void UpdateXenoSpeedMultiplier(float speed)
     {

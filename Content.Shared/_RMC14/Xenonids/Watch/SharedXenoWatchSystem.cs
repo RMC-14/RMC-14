@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Xenonids.Hive;
+﻿using Content.Shared._RMC14.Xenonids.Eye;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Movement.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -34,6 +35,8 @@ public abstract class SharedXenoWatchSystem : EntitySystem
             Unwatch(xeno.Owner, _player.LocalSession);
         else if (TryComp(xeno, out ActorComponent? actor))
             Unwatch(xeno.Owner, actor.PlayerSession);
+        else if (TryComp(xeno, out QueenEyeComponent? eye) && TryComp(eye.Queen, out ActorComponent? eyeActor))
+            Unwatch(xeno.Owner, eyeActor.PlayerSession);
     }
 
     private void OnXenoWatchBui(Entity<XenoComponent> xeno, ref XenoWatchBuiMsg args)

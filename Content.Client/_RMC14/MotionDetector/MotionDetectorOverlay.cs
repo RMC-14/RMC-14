@@ -16,7 +16,7 @@ public sealed class MotionDetectorOverlay : Overlay
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
     private TimeSpan _last;
-    private readonly List<(Vector2 Pos, Texture Tex)> _blips = new();
+    private readonly List<(Vector2 Pos, bool QueenEye)> _blips = new();
 
     private readonly MotionDetectorOverlaySystem _motionDetector;
     private readonly SpriteSystem _sprite;

@@ -1192,7 +1192,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         var tunnels = EntityQueryEnumerator<XenoTunnelComponent>();
         while (tunnels.MoveNext(out var uid, out _))
         {
-            EnsureComp<DeletedByWeedKillerComponent>(uid);
+            RemCompDeferred<DeletedByWeedKillerComponent>(uid);
         }
 
         return true;

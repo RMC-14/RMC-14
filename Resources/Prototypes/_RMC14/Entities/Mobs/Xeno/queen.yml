@@ -269,3 +269,5 @@
   - type: QueenEye
   - type: MotionDetectorTracked
     isQueenEye: true
+  - type: Visibility
+    visibility: 32770

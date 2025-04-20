@@ -29,6 +29,7 @@ public sealed class RMCMovementSystem : EntitySystem
             ent.Comp.FixtureShape,
             ent.Comp.FixtureId,
             hard: false,
+            collisionLayer: (int) ent.Comp.FixtureLayer,
             collisionMask: (int) ent.Comp.FixtureLayer,
             body: body
         );

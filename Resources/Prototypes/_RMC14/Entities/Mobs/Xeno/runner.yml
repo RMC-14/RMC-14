@@ -34,7 +34,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.35
-        density: 185
+        density: 85
         mask:
         - Impassable
         - HighImpassable
@@ -46,7 +46,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.40
-        density: 185
+        density: 85
         layer:
         - BulletImpassable
   - type: XenoLight
@@ -113,7 +113,7 @@
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.1
   - type: MobCollision
-    minimumSpeedModifier: 0.15
+    minimumSpeedModifier: 0.1
 
 - type: entity
   parent: CMXenoRunnerBase

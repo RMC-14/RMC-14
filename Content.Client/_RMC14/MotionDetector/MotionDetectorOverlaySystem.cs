@@ -35,7 +35,7 @@ public sealed class MotionDetectorOverlaySystem : EntitySystem
         _overlay.RemoveOverlay<MotionDetectorOverlay>();
     }
 
-    public void DrawBlips<T>(DrawingHandleWorld handle, ref TimeSpan last, List<(Vector2 Pos, Texture Tex)> blips, Texture texture, Texture queenEyeTexture) where T : IComponent, IDetectorComponent
+    public void DrawBlips<T>(DrawingHandleWorld handle, ref TimeSpan last, List<(Vector2 Pos, bool QueenEye)> blips, Texture texture, Texture queenEyeTexture) where T : IComponent, IDetectorComponent
     {
         if (_player.LocalEntity is not { } player)
             return;
@@ -93,13 +93,13 @@ public sealed class MotionDetectorOverlaySystem : EntitySystem
                     var diff = blip.Coordinates.Position - new Vector2(0.5f, 0.5f) - playerCoords.Position;
                     Cap(ref diff.X, vpWidth);
                     Cap(ref diff.Y, vpHeight);
-                    blips.Add((diff, blip.QueenEye ? queenEyeTexture : texture));
+                    blips.Add((diff, blip.QueenEye));
                 }
             }
 
             foreach (var diff in blips)
             {
-                handle.DrawTexture(diff.Tex, playerCoords.Position + diff.Pos);
+                handle.DrawTexture(diff.QueenEye ? queenEyeTexture : texture, playerCoords.Position + diff.Pos);
             }
         }
     }

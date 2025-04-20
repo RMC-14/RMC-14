@@ -384,7 +384,7 @@
     autoAttack: true
     widePrimary: true
     altDisarm: true
-    angle: 60
+    angle: 0
     soundHit:
       collection: RCMXenoClaw
     animation: RMCWeaponArcXenoClaw

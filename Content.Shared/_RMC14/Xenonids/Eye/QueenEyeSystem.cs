@@ -55,6 +55,8 @@ public sealed class QueenEyeSystem : EntitySystem
         SubscribeLocalEvent<QueenEyeActionComponent, GetVisMaskEvent>(OnQueenEyeActionGetVisMask);
         SubscribeLocalEvent<QueenEyeActionComponent, XenoWatchEvent>(OnQueenEyeActionWatch);
         SubscribeLocalEvent<QueenEyeActionComponent, XenoUnwatchEvent>(OnQueenEyeActionUnwatch);
+
+        SubscribeLocalEvent<QueenEyeComponent, XenoUnwatchEvent>(OnQueenEyeUnwatch);
     }
 
     private void OnQueenEyeActionMapInit(Entity<QueenEyeActionComponent> ent, ref MapInitEvent args)
@@ -86,7 +88,9 @@ public sealed class QueenEyeSystem : EntitySystem
         ent.Comp.Eye = SpawnAtPosition(ent.Comp.Spawn, ent.Owner.ToCoordinates());
         Dirty(ent);
 
-        EnsureComp<QueenEyeComponent>(ent.Comp.Eye.Value);
+        var eyeComp = EnsureComp<QueenEyeComponent>(ent.Comp.Eye.Value);
+        eyeComp.Queen = ent;
+        Dirty(ent.Comp.Eye.Value, eyeComp);
 
         _eye.SetPvsScale((ent, eye), ent.Comp.EyePvsScale);
         _eye.SetTarget(ent, ent.Comp.Eye, eye);
@@ -119,6 +123,14 @@ public sealed class QueenEyeSystem : EntitySystem
             return;
 
         RemCompDeferred<XenoWatchingComponent>(eye);
+    }
+
+    private void OnQueenEyeUnwatch(Entity<QueenEyeComponent> ent, ref XenoUnwatchEvent args)
+    {
+        if (ent.Comp.Queen is not { } queen)
+            return;
+
+        _eye.SetTarget(queen, ent);
     }
 
     /// <param name="expansionSize">How much to expand the bounds before to find vision intersecting it. Makes this the largest vision size + 1 tile.</param>

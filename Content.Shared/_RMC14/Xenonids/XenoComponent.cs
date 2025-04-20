@@ -91,5 +91,5 @@ public sealed partial class XenoComponent : Component
     public EmoteSoundsPrototype? Sounds;
 
     [DataField, AutoNetworkedField]
-    public VisibilityFlags Visibility;
+    public VisibilityFlags Visibility = VisibilityFlags.Xeno;
 }

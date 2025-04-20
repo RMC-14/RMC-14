@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   save: false
   parent: BaseMobSpecies
   id: CMBaseMobSpeciesOrganic
@@ -116,7 +116,7 @@
   - type: MeleeWeapon
     soundHit:
       collection: Punch
-    angle: 30
+    angle: 0
     animation: WeaponArcFist
     attackRate: 1
     damage:
