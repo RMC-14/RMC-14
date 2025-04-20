@@ -31,6 +31,7 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Marines.Squads;
 
@@ -574,7 +575,7 @@ public sealed class SquadSystem : EntitySystem
         return member.Comp.Squad is { } memberSquad && memberSquad == squad;
     }
 
-    public void PromoteSquadLeader(Entity<SquadMemberComponent?> toPromote, EntityUid user)
+    public void PromoteSquadLeader(Entity<SquadMemberComponent?> toPromote, EntityUid user, SpriteSpecifier.Rsi icon)
     {
         if (HasComp<SquadLeaderComponent>(toPromote))
             return;
@@ -624,6 +625,7 @@ public sealed class SquadSystem : EntitySystem
         }
 
         var newLeader = EnsureComp<SquadLeaderComponent>(toPromote);
+        newLeader.Icon = icon;
         if (!EnsureComp(toPromote, out MarineOrdersComponent orders))
         {
             orders.Intrinsic = false;
