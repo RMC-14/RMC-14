@@ -189,7 +189,7 @@ public abstract partial class SharedXenoParasiteSystem
             return;
         }
 
-        if (para.Comp.Mode == ParasiteMode.Active && currentTime >= para.Comp.NextJump)
+        if (para.Comp.Mode == ParasiteMode.Active && currentTime >= para.Comp.NextJump && !_container.IsEntityInContainer(para))
         {
             if (!HasComp<StunnedComponent>(para))
             {
