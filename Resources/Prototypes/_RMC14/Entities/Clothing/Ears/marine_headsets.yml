@@ -463,7 +463,7 @@
       - RMCEncryptionKeyQuebec
       - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 3
 
 - type: entity
@@ -478,7 +478,7 @@
       - RMCEncryptionKeyQuebec
       - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 2
 
 - type: entity
