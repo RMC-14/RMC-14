@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared.Coordinates;
 using Content.Shared.Mind;
@@ -9,6 +10,7 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Threading;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Eye;
 
@@ -21,6 +23,7 @@ public sealed class QueenEyeSystem : EntitySystem
     [Dependency] private readonly SharedMoverController _mover = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IParallelManager _parallel = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedXenoWatchSystem _xenoWatch = default!;
 
@@ -55,6 +58,7 @@ public sealed class QueenEyeSystem : EntitySystem
         SubscribeLocalEvent<QueenEyeActionComponent, GetVisMaskEvent>(OnQueenEyeActionGetVisMask);
         SubscribeLocalEvent<QueenEyeActionComponent, XenoWatchEvent>(OnQueenEyeActionWatch);
         SubscribeLocalEvent<QueenEyeActionComponent, XenoUnwatchEvent>(OnQueenEyeActionUnwatch);
+        SubscribeLocalEvent<QueenEyeActionComponent, XenoOvipositorChangedEvent>(OnQueenEyeOvipositorChanged);
 
         SubscribeLocalEvent<QueenEyeComponent, XenoUnwatchEvent>(OnQueenEyeUnwatch);
     }
@@ -123,6 +127,17 @@ public sealed class QueenEyeSystem : EntitySystem
             return;
 
         RemCompDeferred<XenoWatchingComponent>(eye);
+    }
+
+    private void OnQueenEyeOvipositorChanged(Entity<QueenEyeActionComponent> ent, ref XenoOvipositorChangedEvent args)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        if (args.Attached)
+            return;
+
+        RemoveQueenEye(ent);
     }
 
     private void OnQueenEyeUnwatch(Entity<QueenEyeComponent> ent, ref XenoUnwatchEvent args)
@@ -208,7 +223,7 @@ public sealed class QueenEyeSystem : EntitySystem
         if (_net.IsServer)
             QueueDel(target);
 
-        RemCompDeferred<RelayInputMoverComponent>(ent);
+        RemComp<RelayInputMoverComponent>(ent);
 
         var ev = new QueenEyeActionUpdated(ent);
         RaiseLocalEvent(ent, ref ev);
