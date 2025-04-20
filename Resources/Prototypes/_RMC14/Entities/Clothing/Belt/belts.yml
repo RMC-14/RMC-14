@@ -1148,6 +1148,7 @@
     - belt
   - type: Item
     size: Large
+  - type: Storage
     grid:
     - 0,0,8,1 # should be 9 slots
     whitelist:
