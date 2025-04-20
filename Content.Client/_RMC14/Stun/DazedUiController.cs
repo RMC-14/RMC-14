@@ -1,9 +1,9 @@
-using Content.Shared.Stunnable;
+using Content.Shared._RMC14.Stun;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Player;
 
-namespace Content.Client._RMC14.Dazed;
+namespace Content.Client._RMC14.Stun;
 
 public sealed class DazedUiController : EntitySystem
 {
@@ -23,7 +23,7 @@ public sealed class DazedUiController : EntitySystem
         SubscribeLocalEvent<LocalPlayerDetachedEvent>(OnPlayerDetached);
 
         SubscribeLocalEvent<RMCDazedComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<RMCDazedComponent, ComponentShutdown>(OnShutdown);
+        SubscribeNetworkEvent<DazedComponentShutdownEvent>(OnLocalPlayerDazedShutdown);
     }
 
     private void OnPlayerAttach(LocalPlayerAttachedEvent args)
@@ -45,16 +45,13 @@ public sealed class DazedUiController : EntitySystem
         if (ent == _playerManager.LocalEntity)
         {
             _overlay.IsEnabled = true;
-             if (!_overlayManager.HasOverlay<DazedOverlay>())
+            if (!_overlayManager.HasOverlay<DazedOverlay>())
                 _overlayManager.AddOverlay(_overlay);
         }
     }
 
-    private void OnShutdown(Entity<RMCDazedComponent> ent, ref ComponentShutdown args)
+    private void OnLocalPlayerDazedShutdown(DazedComponentShutdownEvent args)
     {
-        if (ent == _playerManager.LocalEntity)
-        {
-             _overlay.IsEnabled = false;
-        }
+         _overlay.IsEnabled = false;
     }
 }

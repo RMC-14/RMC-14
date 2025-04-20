@@ -1,13 +1,18 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared.Actions;
 using Content.Shared.StatusEffect;
+using Robust.Shared.Network;
+using Robust.Shared.Player;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Stun;
 
 public sealed class RMCDazedSystem : EntitySystem
 {
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffect = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
 
     public override void Initialize()
     {
@@ -26,7 +31,7 @@ public sealed class RMCDazedSystem : EntitySystem
     {
         foreach (var (actionId, _) in _actions.GetActions(ent))
         {
-            if (TryComp(actionId, out RMCDazeableActionComponent? dazeable))
+            if (TryComp(actionId, out RMCDazeableActionComponent? _))
             {
                 _actions.SetEnabled(actionId, false);
                 _actions.SetCharges(actionId, 0);
@@ -38,11 +43,17 @@ public sealed class RMCDazedSystem : EntitySystem
     {
         foreach (var (actionId, _) in _actions.GetActions(ent))
         {
-            if (TryComp(actionId, out RMCDazeableActionComponent? dazeable))
+            if (TryComp(actionId, out RMCDazeableActionComponent? _))
             {
                 _actions.SetEnabled(actionId, true);
                 _actions.SetCharges(actionId, null);
             }
+        }
+
+        if (_net.IsServer && _playerManager.TryGetSessionByEntity(ent.Owner, out var session))
+        {
+            var ev = new DazedComponentShutdownEvent();
+            RaiseNetworkEvent(ev, session.Channel);
         }
     }
 
@@ -70,3 +81,6 @@ public sealed class RMCDazedSystem : EntitySystem
 /// </summary>
 [ByRefEvent]
 public record struct DazedEvent(TimeSpan Duration);
+
+[NetSerializable, Serializable]
+public sealed class DazedComponentShutdownEvent: EntityEventArgs;
