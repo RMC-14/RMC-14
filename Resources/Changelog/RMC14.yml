@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed squad vend pistols starting with mags. This doesn't affect cases.
-    type: Fix
-  id: 1111
-  time: '2024-12-21T13:16:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5183
-- author: Vermidia
-  changes:
   - message: Fixed barricades and sentries healing extra on weld if they had both
       burn and brute damage
     type: Fix
@@ -5359,5 +5352,19 @@
   id: 1613
   time: '2025-04-20T08:39:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6163
+- author: to4no_fix
+  changes:
+  - message: Reworked announcements about latejoin and earlyleave of Marines. Late
+      joining of CO/XO/SEA is accompanied by a large announcement with a sound signal.
+      SEA has its own sound signal. Late joining of the head of department (squad
+      leader) is accompanied by a message on the radio channel of the department (squad
+      radio channel) and the radio channel of Almaer. Late joining of an ordinary
+      employee of the department (squad) is accompanied by a message on the radio
+      channel of the department (squad). At early leave, an announcement occurs according
+      to the same logic, only without a large announcement.
+    type: Tweak
+  id: 1614
+  time: '2025-04-20T10:13:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6014
 Name: RMC14
 Order: -1
