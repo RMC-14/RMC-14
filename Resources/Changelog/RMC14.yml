@@ -1,32 +1,4 @@
 ﻿Entries:
-- author: MACMAN2003
-  changes:
-  - message: Added camouflaged variants of marine weapons, armor, and equipment.
-    type: Add
-  id: 1104
-  time: '2024-12-13T18:38:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5054
-- author: DrSmugleaf
-  changes:
-  - message: Fixed medals not always showing above backpacks and other clothing items.
-    type: Fix
-  id: 1105
-  time: '2024-12-13T19:09:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5124
-- author: noctyrnal
-  changes:
-  - message: Shiva has recieved a parity update.
-    type: Add
-  id: 1106
-  time: '2024-12-13T21:54:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5127
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed loadouts not spawning your selected items in your bag.
-    type: Fix
-  id: 1107
-  time: '2024-12-13T21:55:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5128
 - author: DrSmugleaf
   changes:
   - message: Fixed OBs not being able to be loaded.
@@ -5366,5 +5338,37 @@
   id: 1606
   time: '2025-04-19T11:36:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6188
+- author: N0lim
+  changes:
+  - message: Fixed lesser drones being able to plant new weed nodes in 6x6 area instead
+      of 5x5 from other nodes.
+    type: Fix
+  id: 1607
+  time: '2025-04-20T01:59:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6170
+- author: Dygon
+  changes:
+  - message: Invisible entities no longer show popups to nearby players.
+    type: Fix
+  id: 1608
+  time: '2025-04-20T02:00:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6173
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added the vampire lurker strain. A new strain that turns lurker into
+      a silent assassin, with abilities that can heal itself.
+    type: Add
+  id: 1609
+  time: '2025-04-20T02:02:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6108
+- author: Vermidia
+  changes:
+  - message: Fixed xenos from being able to destroy crates with melee.
+    type: Fix
+  - message: Fixed dragging crates not slowing you down.
+    type: Fix
+  id: 1610
+  time: '2025-04-20T02:04:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6139
 Name: RMC14
 Order: -1
