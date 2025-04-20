@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed being able to melee faster with guns by switching between them
-    type: Fix
-  id: 1118
-  time: '2024-12-21T13:23:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5162
-- author: Vermidia
-  changes:
   - message: Fixed xeno abilities that move a target not breaking pulls.
     type: Fix
   id: 1119
@@ -5511,5 +5504,27 @@
   id: 1620
   time: '2025-04-20T23:37:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6204
+- author: DrSmugleaf
+  changes:
+  - message: Fixed autoinjector inhand error sprites.
+    type: Fix
+  - message: Fixed marines and xenos lighting others on fire when trying to pat them
+      out.
+    type: Fix
+  - message: Fixed magazine box crafting not working.
+    type: Fix
+  - message: Fixed admin area SPP name.
+    type: Fix
+  - message: Fixed a bug where fireman carry would delete you.
+    type: Fix
+  - message: Fixed deoiviing while in Queen eye getting you stuck in Queen eye.
+    type: Fix
+  - message: Fixed M13 belt working inconsistently.
+    type: Fix
+  - message: Fixed your ghost while observing being layered under mobs.
+    type: Fix
+  id: 1621
+  time: '2025-04-20T23:44:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6205
 Name: RMC14
 Order: -1
