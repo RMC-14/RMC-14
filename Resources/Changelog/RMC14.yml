@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: Fixed being able to acid the command tablet.
-    type: Fix
-  id: 1110
-  time: '2024-12-16T03:04:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5157
 - author: Vermidia
   changes:
   - message: Fixed squad vend pistols starting with mags. This doesn't affect cases.
@@ -5354,5 +5347,17 @@
   id: 1612
   time: '2025-04-20T08:35:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6177
+- author: Magicocity1
+  changes:
+  - message: Added the M13 Automatic Pistol, get it from your weapon vendor today!
+    type: Add
+  - message: Added a M276 belt variant for the M13.
+    type: Add
+  - message: Added magazine boxes for the M13, the brighter the trim the greater the
+      magazine capacity!
+    type: Add
+  id: 1613
+  time: '2025-04-20T08:39:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6163
 Name: RMC14
 Order: -1
