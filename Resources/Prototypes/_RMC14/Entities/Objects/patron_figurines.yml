@@ -1289,7 +1289,6 @@
   id: RMCFigurinePatronOsbornCheeseballCurry
   name: Osborn 'Cheeseball' Curry figurine
   description: "Under the figurine, a text is engraved that reads:\n\n\"In the silence, I hear them crawl...\"\n\"From the shadows, we answer the call…\"\n\"One shot... one kill...\"\n\"Another queen falls...\"\n\n\"We wombo combo, in the dark we reign,\"\n\"The stars above, watchin’ in vain.\"\n\"Through fire and ash, through blood and bone,\"\n\"We stand as brothers, in this war we own.\"\n\nA souvenir for my brotha Pip, may this figurine bring you comfort in your darkest hours.\nLet it be a reminder of our friendship, even in the most remote and lonely corners of the world.\n\nATTENTION: DO NOT LICK, DOES NOT TASTE LIKE ORANGE!"
-
   components:
   - type: Sprite
     state: osborn_cheeseball_curry
