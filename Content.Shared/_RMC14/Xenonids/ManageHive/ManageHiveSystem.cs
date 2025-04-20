@@ -10,6 +10,7 @@ using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chat;
 using Content.Shared.Database;
+using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Popups;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
@@ -26,6 +27,7 @@ public sealed class ManageHiveSystem : EntitySystem
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly ISharedPlaytimeManager _playtime = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
@@ -120,6 +122,21 @@ public sealed class ManageHiveSystem : EntitySystem
             !TryComp(ent, out ActorComponent? giverActor))
         {
             return;
+        }
+
+        try
+        {
+            var playTimes = _playtime.GetPlayTimes(giverActor.PlayerSession);
+            if (!playTimes.TryGetValue(ent.Comp.PlayTime, out var time) ||
+                time < ent.Comp.JellyRequiredTime)
+            {
+                _popup.PopupCursor($"You don't have the time required to hand out jellies ({(int) ent.Comp.JellyRequiredTime.TotalHours} hours)", ent, PopupType.LargeCaution);
+                return;
+            }
+        }
+        catch
+        {
+            // ignored
         }
 
         if (!_xenoPlasma.HasPlasmaPopup(ent.Owner, ent.Comp.JellyPlasmaCost, false))
