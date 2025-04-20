@@ -119,6 +119,8 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         elevator.Comp.Orders.Add(order);
         SendUIStateAll();
         _adminLogs.Add(LogType.RMCRequisitionsBuy, $"{ToPrettyString(args.Actor):actor} bought requisitions crate {order.Name} with crate {order.Crate} for {order.Cost}");
+        var ev = new RequisitionsBuyEvent(actor, order);
+        RaiseLocalEvent(actor, ev, true);
     }
 
     private void OnPlatform(Entity<RequisitionsComputerComponent> computer, ref RequisitionsPlatformMsg args)
