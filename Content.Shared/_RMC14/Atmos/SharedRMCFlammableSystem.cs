@@ -330,7 +330,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         patter.LastPat = time;
         Dirty(user, patter);
 
-        Pat(ent.Owner);
+        Pat(ent.Owner, patter.Stacks);
 
         _audio.PlayPredicted(patter.Sound, user, user);
         _popup.PopupClient($"You try to put out the fire on {Name(ent)}!", ent, user, PopupType.SmallCaution);
@@ -377,7 +377,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     {
     }
 
-    public virtual void Pat(Entity<FlammableComponent?> flammable)
+    public virtual void Pat(Entity<FlammableComponent?> flammable, int stacks)
     {
     }
 

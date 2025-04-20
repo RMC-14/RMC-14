@@ -1,7 +1,7 @@
 - type: guideEntry
   id: Chemicals
   name: guide-entry-chemicals
-  text: "/ServerInfo/Guidebook/_RMC14/RMCChemicals.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/Chemicals/RMCChemicals.xml"
   children:
   - Elements
   - Medicine

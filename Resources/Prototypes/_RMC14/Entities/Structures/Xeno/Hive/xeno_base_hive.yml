@@ -23,7 +23,6 @@
     priority: -1
     transparency: 0.2
   - type: XenoConstruct
-    destroyWeedNodes: false
   - type: MeleeReceivedMultiplier
     otherMultiplier: 8.2
   - type: XenoAnnounceStructureDestruction

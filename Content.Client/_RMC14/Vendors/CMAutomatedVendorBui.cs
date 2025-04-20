@@ -9,6 +9,7 @@ using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Client.ResourceManagement;
+using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -40,8 +41,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
     protected override void Open()
     {
         base.Open();
-        _window = new CMAutomatedVendorWindow();
-        _window.OnClose += Close;
+        _window = this.CreateWindow<CMAutomatedVendorWindow>();
         _window.Title = EntMan.GetComponentOrNull<MetaDataComponent>(Owner)?.EntityName ?? "ColMarTech Vendor";
         _window.ReagentsBar.ForegroundStyleBoxOverride = new StyleBoxFlat(Color.FromHex("#AF7F38"));
 
@@ -57,10 +57,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                 {
                     foreach (var job in section.Jobs)
                     {
-                        if (!_job.MindHasJobWithId(mindId, job.Id))
-                            validJob = false;
-                        else
-                            validJob = true;
+                        validJob = _job.MindHasJobWithId(mindId, job.Id);
                     }
                 }
 
@@ -157,10 +154,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
         }
 
         _window.Search.OnTextChanged += OnSearchChanged;
-
         Refresh();
-
-        _window.OpenCentered();
     }
 
     private void OnButtonPressed(int sectionIndex, int entryIndex, List<int> linkedEntryIndexes)
@@ -291,12 +285,6 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
         _window.ReagentsBar.MaxValue = max.Int();
         _window.ReagentsBar.SetAsRatio((refiller.Current / refiller.Max).Float());
         _window.ReagentsLabel.Text = $"{current.Int()} units";
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        if (disposing)
-            _window?.Dispose();
     }
 
     protected override void ReceiveMessage(BoundUserInterfaceMessage message)
