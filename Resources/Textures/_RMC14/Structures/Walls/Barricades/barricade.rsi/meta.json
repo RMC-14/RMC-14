@@ -173,6 +173,10 @@
     {
       "name": "centerroadbarrier2",
       "directions": 4
+    },
+    {
+      "name": "snow",
+      "directions": 4
     }
   ]
 }

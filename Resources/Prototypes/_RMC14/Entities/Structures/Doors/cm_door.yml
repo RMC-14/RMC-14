@@ -2,7 +2,8 @@
   abstract: true
   parent: BaseStructure
   id: RMCBaseDoorInvincible
-  name: door
+  name: Door
+  description: It opens and closes.
   placement:
     mode: SnapgridCenter
   components:
@@ -102,7 +103,7 @@
   abstract: true
   parent: RMCBaseDoorInvincible
   id: CMBaseDoor
-  name: door
+  name: Door
   placement:
     mode: SnapgridCenter
   components:

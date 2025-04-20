@@ -1,0 +1,18 @@
+- type: constructionGraph
+  parent: RMC
+  id: BarricadeSnowGraph
+  start: start
+  graph:
+  - node: start
+    actions:
+    - !type:DeleteEntity
+    edges:
+    - to: nodeSnow
+      completed:
+      - !type:SnapToGrid
+      steps:
+      - material: RMCSnow
+        amount: 3
+        doAfter: 3
+  - node: nodeSnow
+    entity: RMCBarricadeSnow

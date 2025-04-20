@@ -248,6 +248,25 @@
 
 - type: construction
   parent: RMC
+  name: Snow Barricade
+  id: RMCBarricadeSnow
+  graph: BarricadeSnowGraph
+  startNode: start
+  targetNode: nodeSnow
+  category: construction-category-cm-structures
+  description: A makeshift snow barricade.
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  icon:
+    sprite: _RMC14/Structures/Walls/Barricades/barricade.rsi
+    state: snow
+  conditions:
+  - !type:TileNotBlocked
+  - !type:TileBarricadeClear
+
+- type: construction
+  parent: RMC
   name: Turnstile
   id: CMBarricadeTurnstile
   graph: BarricadeTurnstileGraph

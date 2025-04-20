@@ -222,3 +222,40 @@
   components:
   - type: Stack
     count: 1
+
+#Snow
+- type: material
+  id: RMCSnow
+  stackEntity: RMCSnowPile
+  name: materials-snow
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/snow.rsi, state: snow }
+  color: "#966F33"
+  price: 0.05
+
+- type: stack
+  id: RMCSnow
+  name: snow pile
+  icon: { sprite: _RMC14/Objects/Materials/snow.rsi, state: snow }
+  spawn: RMCSnowPile
+  maxCount: 25
+
+- type: entity
+  parent: BaseItem
+  id: RMCSnowPile
+  name: snow pile
+  description: Some snow pile.
+  components:
+  - type: Item
+    size: Large
+  - type: Sprite
+    sprite: _RMC14/Objects/Materials/snow.rsi
+    layers:
+    - state: snow
+    - map: [ "acided" ]
+  - type: Stack
+    stackType: RMCSnow
+    count: 1
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno

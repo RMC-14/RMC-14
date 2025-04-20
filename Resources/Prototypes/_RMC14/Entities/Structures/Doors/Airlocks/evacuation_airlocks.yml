@@ -2,7 +2,6 @@
   parent: RMCBaseDoorInvincible
   id: RMCAirlockEvacuation
   name: Evacuation Airlock PL-6
-  description: It opens and closes.
   placement:
     mode: SnapgridCenter
   components:
