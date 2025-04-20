@@ -292,7 +292,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
     {
         var range = 5;
         var position = _mapSystem.LocalToTile(grid, grid, coordinates);
-        var checkArea = new Box2(position.X - range, position.Y - range, position.X + range, position.Y + range);
+        var checkArea = new Box2(position.X - range + 1, position.Y - range + 1, position.X + range, position.Y + range);
         var enumerable = _mapSystem.GetLocalAnchoredEntities(grid, grid, checkArea);
 
         foreach (var anchored in enumerable)

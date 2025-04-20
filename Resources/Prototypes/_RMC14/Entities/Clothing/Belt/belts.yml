@@ -1128,6 +1128,52 @@
     - id: RMCWeaponPistolCOD50WinterWyvern
 
 - type: entity
+  parent: ClothingBeltBase # Can't have storage slots on this one
+  id: RMCBeltHolsterM13
+  name: M276 pattern M13 holster rig
+  description: Special issue variant of the M276 designed to holster the M13 automatic pistol and 8 spare mags.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_smg.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m13
+      map: [ "enum.CMItemSlotsLayers.Fill" ] # This one's fine to use the CMItemSlots visualizer
+      visible: false
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_smg.rsi
+    slots:
+    - suitStorage
+    - belt
+  - type: Item
+    size: Large
+  - type: Storage
+    grid:
+    - 0,0,8,1 # should be 9 slots
+    whitelist:
+      tags:
+      - RMCMagazinePistolM13
+      - RMCMagazinePistolM13Ext
+      - RMCMagazinePistolM13Drum
+      - RMCWeaponPistolM13
+  - type: ContainerContainer
+    containers:
+      pouch: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      pouch:
+        name: M13 holster
+        whitelist:
+          tags:
+          - RMCWeaponPistolM13
+  - type: CMHolster
+    whitelist:
+      tags:
+      - RMCWeaponPistolM13
+  - type: CMItemSlots
+
+- type: entity
   parent: CMBeltMarine
   id: RMCM17BeltFilled
   suffix: Filled

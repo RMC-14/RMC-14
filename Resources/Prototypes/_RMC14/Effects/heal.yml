@@ -77,3 +77,21 @@
     lifetime: 3
   - type: Sprite
     color: "#D9F500"
+
+- type: entity
+  parent: RMCEffectHeal
+  id: RMCEffectHealFlurry
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 1
+  - type: Sprite
+    color: "#00BE6F"
+
+- type: entity
+  parent: RMCEffectHeal
+  id: RMCEffectHealHeadbite
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 3
