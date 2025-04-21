@@ -11,7 +11,7 @@
       effects:
       - !type:EqualHealthChange
         damage:
-        - Toxin: -2
+        - Toxin: -1
         - Genetic: -1 # TODO RMC14 remove once other meds are in for genetic damage
       - !type:GenericStatusEffect
         key: SeeingRainbows
@@ -37,9 +37,9 @@
           min: 50
         damage:
           groups:
-            Brute: 1
-            Burn: 1
-            Toxin: 3
+            Brute: 0.5
+            Burn: 0.5
+            Toxin: 1.5
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
@@ -64,66 +64,56 @@
       effects:
       - !type:GenericStatusEffect
         key: Drunk
-        time: 3
+        time: 1.5
         type: Remove
       - !type:GenericStatusEffect
         key: Jitter
-        time: 3
+        time: 1.5
         type: Remove
       - !type:GenericStatusEffect
         key: ForcedSleep
-        time: 3
+        time: 1.5
         type: Remove
       - !type:GenericStatusEffect
         key: Stutter
-        time: 3
+        time: 1.5
         type: Remove
       - !type:GenericStatusEffect
         key: SlurredSpeech
-        time: 3
+        time: 1.5
         type: Remove
       - !type:GenericStatusEffect
         key: Drowsiness
-        time: 3
+        time: 1.5
         type: Remove
       - !type:AdjustReagent
+        conditions:
+        - !type:ReagentThreshold
+          reagent: RMCEthanol
+          min: 0.75
         reagent: RMCEthanol
-        amount: -1.5
+        amount: -0.75
       - !type:AdjustReagent
         conditions:
         - !type:ReagentThreshold
-          reagent: RMCEthanol
-          min: 1
-        reagent: RMCEthanol
-        amount: -1
-      - !type:AdjustReagent
-        conditions:
-        - !type:ReagentThreshold
-          reagent: RMCEthanol
-          min: 1
-        reagent: CMEthylredoxrazine
-        amount: -1
-      - !type:AdjustReagent
-        conditions:
-        - !type:ReagentThreshold
-          reagent: RMCEthanol
-          min: 1
-        reagent: Water
-        amount: 2
+          reagent: Ethanol
+          min: 0.75
+        reagent: Ethanol
+        amount: -0.75
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 30
         damage:
           groups:
-            Toxin: 1.5
+            Toxin: 0.75
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 50
         damage:
           groups:
-            Toxin: 4.5
+            Toxin: 2.25
 
 - type: reagent
   parent: [ CMReagentMedicine, Arithrazine ]
@@ -138,7 +128,7 @@
       effects:
       - !type:EqualHealthChange
         damage:
-        - Toxin: -1
+        - Toxin: -0.25
       - !type:HealthChange
         damage:
           groups:
@@ -149,7 +139,7 @@
           min: 15
         damage:
           groups:
-            Brute: 1
+            Brute: 0.5
       - !type:ChemHealEyeDamage
         conditions:
         - !type:ReagentThreshold
@@ -162,7 +152,7 @@
           min: 25
         damage:
           groups:
-            Brute: 2.5
+            Brute: 1.25
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
@@ -186,7 +176,7 @@
       effects:
       - !type:EqualHealthChange
         damage:
-        - Brute: -1
+        - Brute: -0.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -200,8 +190,8 @@
           min: 50
         damage:
           groups:
-            Burn: 5
-            Toxin: 2
+            Burn: 2.5
+            Toxin: 1
 
 # TODO RMC14 other effects (remove toxic reagents)
 - type: reagent
@@ -219,16 +209,17 @@
         - !type:Temperature
           max: 170
         damage:
-        - Brute: -3.5
-        - Burn: -3.5
-        - Toxin: -6
+        - Brute: -1 # bonus 0.5, neogenetic 0.5
+        - Burn: -1 # bonus 0.5, anticorrosive 0.5
+        - Toxin: -1.5 # bonus 0.5, antitoxic 1
+        - Airloss: -0.5 # bonus 0.5
       - !type:HealthChange
         conditions:
         - !type:Temperature
           max: 170
         damage:
           types:
-            Cellular: -2.25
+            Cellular: -1 # bonus 0.5, anticancerogenic 0.5
 
 - type: reagent
   parent: [ CMReagentMedicine, Dermaline ]
@@ -243,7 +234,7 @@
       effects:
       - !type:EqualHealthChange
         damage:
-        - Burn: -1.5
+        - Burn: -0.75
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -258,11 +249,11 @@
           min: 25
         damage:
           groups:
-            Brute: 7.5
-            Toxin: 7.5
+            Brute: 3.75
+            Toxin: 3.75
 
-# TODO implement CMLexorin
-# TODO Dexalin should remove 2 lexorin
+# TODO implement RMCLexorin
+# TODO Dexalin should remove 1 lexorin
 - type: reagent
   parent: [ CMReagentMedicine, Dexalin ]
   id: CMDexalin
@@ -276,25 +267,25 @@
       effects:
       - !type:EqualHealthChange
         damage:
-        - Airloss: -2
+        - Airloss: -1
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 30
         damage:
           groups:
-            Toxin: 1
+            Toxin: 0.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 50
         damage:
           groups:
-            Brute: 2
-            Toxin: 4
+            Brute: 1
+            Toxin: 2
 
-# TODO implement CMLexorin
-# TODO DexalinPlus should remove 3 lexorin
+# TODO implement RMCLexorin
+# TODO DexalinPlus should remove 1.5 lexorin
 - type: reagent
   parent: [ CMReagentMedicine, DexalinPlus ]
   id: CMDexalinPlus
@@ -314,15 +305,15 @@
           min: 15
         damage:
           groups:
-            Toxin: 1.5
+            Toxin: 0.75
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 25
         damage:
           groups:
-            Brute: 3
-            Toxin: 6
+            Brute: 1.5
+            Toxin: 3
 
 # TODO RMC14 injected only
 # TODO implement opiate receptor deficency
@@ -362,7 +353,7 @@
           min: 10.5
         damage:
           groups:
-            Toxin: 0.19
+            Toxin: 0.38
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
@@ -440,7 +431,7 @@
       effects:
       - !type:EqualHealthChange
         damage:
-        - Burn: -1
+        - Burn: -0.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -455,8 +446,8 @@
           min: 50
         damage:
           groups:
-            Brute: 5
-            Toxin: 5
+            Brute: 2.5
+            Toxin: 2.5
 
 - type: reagent
   parent: [ CMReagentMedicine, Leporazine ]
@@ -476,7 +467,7 @@
         conditions:
         - !type:ReagentThreshold
           min: 30
-        paralyzeTime: 30
+        paralyzeTime: 20
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
@@ -500,21 +491,21 @@
       effects:
       - !type:EqualHealthChange
         damage:
-        - Brute: -0.5
-        - Burn: -0.5
-        - Toxin: -1
+        - Brute: -0.25
+        - Burn: -0.25
+        - Toxin: -0.5
       - !type:HealthChange
         damage:
-          Airloss: -0.5
+          Airloss: -0.25
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 30
         damage:
           groups:
-            Brute: 0.25
-            Burn: 0.25
-            Toxin: 0.5
+            Brute: 0.25 # anticorrosive 0.25
+            Burn: 0.25 # neogenetic 0.25
+            Toxin: 0.38 # anticorrosive 0.25, oxygenating 0.125
       - !type:ChemHealEyeDamage
         conditions:
         - !type:ReagentThreshold
@@ -527,9 +518,9 @@
           min: 50
         damage:
           groups:
-            Brute: 3
-            Burn: 2.5
-            Toxin: 4.5
+            Brute: 1.5 # anticorrosive 1.25, oxygenating 0.25
+            Burn: 1.25 # neogenetic 1.25
+            Toxin: 2.25 # neogenetic 0.5, anticorrosive 1.25, oxygenating 0.5
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
@@ -553,7 +544,7 @@
       effects:
       - !type:EqualHealthChange
         damage:
-        - Brute: -1.5
+        - Brute: -0.75
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -567,8 +558,8 @@
           min: 25
         damage:
           groups:
-            Burn: 7.5
-            Toxin: 3
+            Burn: 3.75
+            Toxin: 0.75
 
 # TODO RMC14 progressive eye healing ??? (for chemical eye damage healing is alrealdy progressive)
 # TODO RMC14 brain damage over 50u
@@ -585,22 +576,23 @@
       metabolismRate: 0.1
       effects:
       - !type:ChemHealEyeDamage
+        probability: 0.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 30
         damage:
           groups:
-            Toxin: 1
+            Toxin: 0.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
           min: 50
         damage:
           groups:
-            Brute: 1
-            Burn: 1
-            Toxin: 3
+            Brute: 0.5
+            Burn: 0.5
+            Toxin: 1.5
 
 - type: reagent
   parent: [ CMReagentMedicine, CMCryoxadone ]
@@ -617,16 +609,16 @@
         - !type:Temperature
           max: 170
         damage:
-        - Toxin: -11.25
-        - Brute: -11.25
-        - Burn: -15
+        - Toxin: -6
+        - Brute: -4.5
+        - Burn: -4.5
       - !type:HealthChange
         conditions:
         - !type:Temperature
           max: 170
         damage:
           types:
-            Cellular: -3.75
+            Cellular: -3
 
 # TODO add liver and brain damage
 - type: reagent
@@ -655,7 +647,7 @@
           min: 60
         damage:
           groups:
-            Toxin: 0.25
+            Toxin: 0.5
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -691,7 +683,7 @@
           min: 30
         damage:
           groups:
-            Toxin: 0.63
+            Toxin: 1.25
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -727,7 +719,7 @@
           min: 20
         damage:
           groups:
-            Toxin: 1
+            Toxin: 2
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
