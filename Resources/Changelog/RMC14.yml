@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added scarves to loadouts.
-    type: Add
-  id: 1123
-  time: '2024-12-21T13:39:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5151
 - author: DummeHytteOst
   changes:
   - message: Fixed lockers/closets having more HP than intended.
@@ -5528,5 +5521,12 @@
   id: 1625
   time: '2025-04-21T01:20:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6209
+- author: DrSmugleaf
+  changes:
+  - message: Fixed sitting next to someone pushing you away
+    type: Fix
+  id: 1626
+  time: '2025-04-21T01:38:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6210
 Name: RMC14
 Order: -1
