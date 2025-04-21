@@ -71,14 +71,3 @@
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
-
-- type: entity
-  parent: RMCRandomHumanoidWeYaLawyer
-  id: RMCBeaconWeYaLawyer
-  name: corporate lawyer
-  description: A beacon which sends the Corporate Affairs Division an encoded message informing them of your request for a Corporate Lawyer, required when a contract signee breaks one of their clauses.
-  components:
-  - type: Sprite
-    layers:
-    - sprite: Objects/Devices/communication.rsi
-      state: old-radio
