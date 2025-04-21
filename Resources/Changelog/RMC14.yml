@@ -1,30 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed xeno abilities that move a target not breaking pulls.
-    type: Fix
-  id: 1119
-  time: '2024-12-21T13:23:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5168
-- author: Vermidia
-  changes:
-  - message: Fixed mini sentries being unable to be hit with spit
-    type: Fix
-  - message: Fixed sniper sentries not having a slightly faster deploy time and shotgun
-      sentries not having a faster undeploy time.
-    type: Fix
-  id: 1120
-  time: '2024-12-21T13:24:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5169
-- author: MACMAN2003
-  changes:
-  - message: Demolition specialists no longer get two M5-ATLs
-    type: Fix
-  id: 1121
-  time: '2024-12-21T13:35:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5167
-- author: Vermidia
-  changes:
   - message: Fixed scouts being able to prime smoke and incendiary nades while cloaked
     type: Fix
   id: 1122
@@ -5526,5 +5502,28 @@
   id: 1621
   time: '2025-04-20T23:44:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6205
+- author: DrSmugleaf
+  changes:
+  - message: Fixed not being able to authorize evacuation during hijack or red alert.
+    type: Fix
+  - message: Reworded overwatch console squad message chat message to be clearer.
+    type: Tweak
+  id: 1622
+  time: '2025-04-21T00:16:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6208
+- author: Magicocity1
+  changes:
+  - message: Fixed M13's vending with a magazine in them.
+    type: Fix
+  id: 1623
+  time: '2025-04-21T00:17:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6206
+- author: CyberTropic
+  changes:
+  - message: Fixed hybrisa rain opacity.
+    type: Fix
+  id: 1624
+  time: '2025-04-21T00:17:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6207
 Name: RMC14
 Order: -1
