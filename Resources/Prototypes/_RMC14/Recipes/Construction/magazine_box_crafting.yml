@@ -347,7 +347,7 @@
   startNode: start
   targetNode: RMCBoxMagazinePistolM13DrumEmpty
   category: construction-category-cm-box-magazine
-  description: A magazine box that can contain M13 drums.
+  description: A magazine box that can contain drum M13 mags.
   icon:
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
     state: smg_box
