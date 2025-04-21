@@ -102,5 +102,5 @@
     contents:
     - id: CMBicaridineAutoInjector
     - id: CMKelotaneAutoInjector
-    #- id: CMTramadolAutoInjector
+    - id: CMTramadolAutoInjector
     - id: CMEmergencyAutoInjector

@@ -133,7 +133,7 @@
     - id: CMHealthAnalyzer
     - id: CMPillCanisterBicaridine
     - id: CMPillCanisterKelotane
-    #    - id: CMPillCanisterTramadol # TODO RMC14
+    - id: CMPillCanisterTramadol
     - id: CMGauze10
     - id: CMBurnKit10
 #    - id: CMSplints5 # TODO RMC14
@@ -151,8 +151,8 @@
     - id: CMScalpel
     - id: CMHemostat
     - id: CMRetractor
-    - id: CMOxycodoneAutoInjector # TODO RMC14
-    - id: CMOxycodoneAutoInjector # TODO RMC14
+    - id: CMOxycodoneAutoInjector
+    - id: CMOxycodoneAutoInjector
 
 - type: entity
   parent: CMFirstAidKit
