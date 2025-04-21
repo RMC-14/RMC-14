@@ -279,6 +279,9 @@
     quickEquip: false
     slots:
     - none
+  - type: RemoveComponents
+    components:
+    - type: Drink
 
 - type: entity
   parent: RMCPressurizedCanister

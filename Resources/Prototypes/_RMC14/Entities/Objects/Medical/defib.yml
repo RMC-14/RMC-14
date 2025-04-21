@@ -39,6 +39,7 @@
     - Brute: -12
     - Burn: -12
     - Toxin: -12
+    - Genetic: -12
     zapHeal:
       groups:
         Airloss: -400

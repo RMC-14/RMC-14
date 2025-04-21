@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.DoAfter;
 using Content.Shared.Inventory;
@@ -106,10 +105,14 @@ public sealed partial class ClothingComponent : Component
 public sealed class ClothingComponentState : ComponentState
 {
     public string? EquippedPrefix;
+    public string? InSlot;
+    public SlotFlags? InSlotFlag;
 
-    public ClothingComponentState(string? equippedPrefix)
+    public ClothingComponentState(string? equippedPrefix, string? inSlot, SlotFlags? inSlotFlag)
     {
         EquippedPrefix = equippedPrefix;
+        InSlot = inSlot;
+        InSlotFlag = inSlotFlag;
     }
 }
 

@@ -76,6 +76,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_warhead1
+    drawdepth: SmallObjects
   - type: OrbitalCannonWarhead
   - type: Clickable
   - type: InteractionOutline

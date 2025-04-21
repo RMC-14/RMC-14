@@ -43,9 +43,7 @@ public sealed class XenoPheromonesBui : BoundUserInterface
     {
         base.Open();
 
-        _xenoPheromonesMenu = new XenoPheromonesMenu();
-        _xenoPheromonesMenu.OnClose += Close;
-
+        _xenoPheromonesMenu = this.CreateWindow<XenoPheromonesMenu>();
         var parent = _xenoPheromonesMenu.FindControl<RadialContainer>("Main");
 
         if (EntMan.HasComponent<XenoComponent>(Owner))
@@ -114,11 +112,5 @@ public sealed class XenoPheromonesBui : BoundUserInterface
 
         button.AddChild(texture);
         parent.AddChild(button);
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        if (disposing)
-            _xenoPheromonesMenu?.Dispose();
     }
 }

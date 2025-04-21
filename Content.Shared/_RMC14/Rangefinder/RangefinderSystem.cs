@@ -111,17 +111,17 @@ public sealed class RangefinderSystem : EntitySystem
         if (delay < rangefinder.Comp.MinimumDelay)
             delay = rangefinder.Comp.MinimumDelay;
 
-        if (rangefinder.Comp.Mode == RangefinderMode.Rangefinder)
-        {
-            TryTarget(rangefinder, user, delay, coordinates);
-            return;
-        }
-
         var grid = _transform.GetGrid(coordinates);
         if (!HasComp<RMCPlanetComponent>(grid))
         {
             msg = Loc.GetString("rmc-laser-designator-not-surface");
             _popup.PopupClient(msg, coordinates, user, PopupType.SmallCaution);
+            return;
+        }
+
+        if (rangefinder.Comp.Mode == RangefinderMode.Rangefinder)
+        {
+            TryTarget(rangefinder, user, delay, coordinates);
             return;
         }
 

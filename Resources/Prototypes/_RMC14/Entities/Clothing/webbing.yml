@@ -504,3 +504,14 @@
     - id: CMMRE # TODO RMC14: PMC CFR ration
     - id: RMCGrenadeBlastM12
     - id: RMCPowerCellSmartgun
+
+- type: entity
+  parent: CMWebbingPouch
+  id: CMWebbingPouchRoyal
+  suffix: Filled, Royal
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMMaskGas # TODO RMC14 l7 gasmask
+      - id: RMCHeadRoyalBeret
+      - id: CMMRE # TODO RMC14 TSE ORP ration

@@ -17,5 +17,5 @@
     - MarineFoxtrot
     - MarineRequisition
     - MarineJTAC
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 3
