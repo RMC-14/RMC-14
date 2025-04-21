@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared.Actions;
+using Content.Shared.Speech.EntitySystems;
 using Content.Shared.StatusEffect;
 
 namespace Content.Shared._RMC14.Stun;
@@ -8,6 +9,7 @@ public sealed class RMCDazedSystem : EntitySystem
 {
     [Dependency] private readonly StatusEffectsSystem _statusEffect = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly SharedStutteringSystem _stutter = default!;
 
     public override void Initialize()
     {
@@ -44,7 +46,7 @@ public sealed class RMCDazedSystem : EntitySystem
         }
     }
 
-    public bool TryDaze(EntityUid uid, TimeSpan time, bool refresh = false, StatusEffectsComponent? status = null)
+    public bool TryDaze(EntityUid uid, TimeSpan time, bool refresh = false, StatusEffectsComponent? status = null, bool stutter = false)
     {
         if (!Resolve(uid, ref status, false))
             return false;
@@ -54,6 +56,9 @@ public sealed class RMCDazedSystem : EntitySystem
 
         if (HasComp<RMCDazedComponent>(uid) || !_statusEffect.TryAddStatusEffect<RMCDazedComponent>(uid, "Dazed", time, refresh))
             return false;
+
+        if (stutter)
+            _stutter.DoStutter(uid, time, true);
 
         var ev = new DazedEvent(time);
         RaiseLocalEvent(uid, ref ev);
