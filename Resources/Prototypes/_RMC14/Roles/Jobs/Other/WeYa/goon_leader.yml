@@ -39,10 +39,10 @@
   equipment:
     id: RMCIDCardPMC
     ears: RMCHeadsetDistressPMCLeader
-    jumpsuit: RMCJumpsuitVeteranPMC
+    jumpsuit: RMCJumpsuitVeteranPMCCorporate
     outerClothing: CMArmorM4PMCCorporate # TODO RMC14: corporate/lead
     gloves: RMCHandsVeteranPMC
-    head: ArmorHelmetPMC
+    head: ArmorHelmetPMCCorporate
     shoes: RMCBootsPMCFilled
     back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
     belt: CMM77BeltFilled # TODO RMC14: PMC re-sprite
