@@ -33,8 +33,8 @@
     sections:
     - name: Incentives
       entries:
-      #- id: /obj/item/handheld_distress_beacon/bodyguard
-      #  points: 50
+      - id: RMCBeaconWeYaGoon
+        points: 50
       - id: RMCBeaconWeYaLawyer
         points: 50
       #- id: /obj/item/implanter/neurostim
