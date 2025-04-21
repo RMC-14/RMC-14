@@ -78,7 +78,7 @@
         amount: 3
       - id: CMKelotaneAutoInjector
         amount: 3
-      - id: CMOxycodoneAutoinjector
+      - id: CMOxycodoneAutoInjector
         amount: 3
       - id: CMTramadolAutoinjector
         amount: 3
@@ -98,7 +98,7 @@
         amount: 3
       - id: CMBottleOxycodone
         amount: 3
-      - id: CMBottlePeridaxon
+      # - id: CMBottlePeridaxon
         amount: 3
       - id: CMBottleTramadol
         amount: 3
@@ -114,8 +114,8 @@
         amount: 2
       - id: CMPillCanisterKelotane
         amount: 2
-      - id: CMPillCanisterPeridaxon
-        amount: 2
+      # - id: CMPillCanisterPeridaxon
+      #  amount: 2
       - id: CMPillCanisterTramadol
         amount: 2
     - name: Medical utilities
@@ -182,7 +182,7 @@
         amount: 6
       - id: CMBottleOxycodone
         amount: 6
-      - id: CMBottlePeridaxon
+      # - id: CMBottlePeridaxon
         amount: 6
       - id: CMBottleTramadol
         amount: 6
