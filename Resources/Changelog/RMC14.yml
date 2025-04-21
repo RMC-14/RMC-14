@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed scouts being able to prime smoke and incendiary nades while cloaked
-    type: Fix
-  id: 1122
-  time: '2024-12-21T13:37:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5159
 - author: noctyrnal
   changes:
   - message: Added scarves to loadouts.
@@ -5525,5 +5518,15 @@
   id: 1624
   time: '2025-04-21T00:17:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6207
+- author: DrSmugleaf
+  changes:
+  - message: Fixed default names for Research and CL quarters airlocks.
+    type: Fix
+  - message: Fixed duplicated tables on the Almayer, incorrect disposal tubes, incorrect
+      tiles, and some rotated props.
+    type: Fix
+  id: 1625
+  time: '2025-04-21T01:20:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6209
 Name: RMC14
 Order: -1
