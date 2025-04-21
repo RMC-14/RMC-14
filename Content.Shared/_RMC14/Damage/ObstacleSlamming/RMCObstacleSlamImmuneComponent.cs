@@ -11,7 +11,7 @@ namespace Content.Shared._RMC14.Damage.ObstacleSlamming;
 public sealed partial class RMCObstacleSlamImmuneComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public TimeSpan ExpireIn = TimeSpan.FromSeconds(1);
+    public TimeSpan ExpireIn = TimeSpan.FromSeconds(2);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
     public TimeSpan? ExpireAt;
