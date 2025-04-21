@@ -24,7 +24,7 @@
           min: 30
         damage:
           groups:
-            Toxin: 0.5
+            Toxin: 0.5 # antihallucinogenic property
       - !type:ChemHealEyeDamage
         conditions:
         - !type:ReagentThreshold
@@ -368,7 +368,7 @@
           min: 20
         damage:
           groups:
-            Airloss: 3
+            Airloss: 1.5
 
 # TODO heart damage over 100u
 # TODO RMC14 allow breathing in crit instead of reducing asphyxiation
@@ -654,7 +654,7 @@
           min: 100
         damage:
           groups:
-            Airloss: 3
+            Airloss: 1.5
 
 # TODO add liver and brain damage
 - type: reagent
@@ -690,7 +690,7 @@
           min: 50
         damage:
           groups:
-            Airloss: 3
+            Airloss: 1.5
 
 # TODO add liver and brain damage
 - type: reagent
@@ -726,4 +726,4 @@
           min: 30
         damage:
           groups:
-            Airloss: 3
+            Airloss: 1.5
