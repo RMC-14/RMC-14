@@ -37,7 +37,7 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
 
     private static readonly ProtoId<DamageTypePrototype> StructuralDamage = "Structural";
-    public static readonly ProtoId<StatusEffectPrototype> FlashedKey = "Flashed";
+    private static readonly ProtoId<StatusEffectPrototype> FlashedKey = "Flashed";
     private static readonly ProtoId<StatusEffectPrototype> BlindKey = "Blinded";
 
     private readonly HashSet<Entity<RMCWallExplosionDeletableComponent>> _walls = new();
