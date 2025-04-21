@@ -559,7 +559,7 @@
         damage:
           groups:
             Burn: 3.75
-            Toxin: 0.75
+            Toxin: 1.5
 
 # TODO RMC14 progressive eye healing ??? (for chemical eye damage healing is alrealdy progressive)
 # TODO RMC14 brain damage over 50u
