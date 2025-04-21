@@ -35,8 +35,8 @@
       entries:
       #- id: /obj/item/handheld_distress_beacon/bodyguard
       #  points: 50
-      #- id: /obj/item/handheld_distress_beacon/lawyer
-      #  points: 50
+      - id: RMCBeaconWeYaLawyer
+        points: 50
       #- id: /obj/item/implanter/neurostim
       #  points: 30
       #- id: /obj/item/reagent_container/hypospray/autoinjector/ultrazine/liaison

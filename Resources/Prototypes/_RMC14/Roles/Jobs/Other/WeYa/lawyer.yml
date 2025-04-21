@@ -1,0 +1,84 @@
+# Corporate Layer
+- type: job
+  parent: CMJobBase
+  id: RMCWeYaLawyer
+  name: rmc-job-title-corporate-executive-specialist
+  description: rmc-ghost-role-information-corporate-executive-specialist-description
+  playTimeTracker: RMCJobWeYaLawyer
+  ranks:
+    RMCRankWeYaLegalSpecialist: []
+  startingGear: RMCJobWeYaLawyer
+  icon: CMJobIconLiaison
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillCqc: 0
+        RMCSkillFirearms: 0
+        RMCSkillEndurance: 0
+        RMCSkillVehicles: 1
+
+- type: playTimeTracker
+  id: RMCJobWeYaLawyer
+
+- type: startingGear
+  id: RMCJobWeYaLawyer
+  equipment:
+    id: RMCIDCardPMC
+    ears: RMCHeadsetDistressPMC
+    jumpsuit: CMJumpsuitLiaisonBlue
+    # TODO RMC14 "neck: blue tie"
+    outerClothing: RMCJacketCorporateBlue
+    back: CMSatchel
+    shoes: RMCShoesLaceup
+    # TODO RMC14 "pocket1: tape recorder"
+    # TODO RMC14 "pocket2: blue notepad"
+  storage:
+    back:
+    - CMClipboard
+    - CMPenClicky
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidWeYaLawyer
+  name: weya corporate ghost role lawyer
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCWeYaLawyer
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCWeYaLawyer
+  components:
+  - type: GhostRole
+    name: rmc-ghost-role-information-corporate-executive-specialist-name
+    description: rmc-ghost-role-information-corporate-executive-specialist-description
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    job: RMCWeYaLawyer
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: entity
+  parent: RMCRandomHumanoidWeYaLawyer
+  id: RMCBeaconWeYaLawyer
+  name: corporate lawyer
+  description: A beacon which sends the Corporate Affairs Division an encoded message informing them of your request for a Corporate Lawyer, required when a contract signee breaks one of their clauses.
+  components:
+  - type: Sprite
+    layers:
+    - sprite: Objects/Devices/communication.rsi
+      state: old-radio
