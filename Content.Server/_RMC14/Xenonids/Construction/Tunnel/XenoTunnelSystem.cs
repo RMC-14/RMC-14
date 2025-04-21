@@ -20,6 +20,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Maps;
 using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
@@ -74,6 +75,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         SubscribeLocalEvent<XenoTunnelComponent, InteractUsingEvent>(OnFillTunnel);
         SubscribeLocalEvent<XenoTunnelComponent, XenoCollapseTunnelDoAfterEvent>(OnCollapseTunnelFinish);
         SubscribeLocalEvent<XenoTunnelComponent, EntityTerminatingEvent>(OnDeleteTunnel);
+        SubscribeLocalEvent<XenoTunnelComponent, EntInsertedIntoContainerMessage>(OnTunnelEntInserted);
 
         SubscribeLocalEvent<XenoTunnelComponent, ContainerIsInsertingAttemptEvent>(OnInsertEntityIntoTunnel);
 
@@ -393,7 +395,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             return;
         }
 
-        var mobContainer = _container.EnsureContainer<Container>(xenoTunnel.Owner, XenoTunnelComponent.ContainedMobsContainerId);
+        var mobContainer = _container.EnsureContainer<Container>(destinationTunnel, XenoTunnelComponent.ContainedMobsContainerId);
         if (mobContainer.Count >= xenoTunnel.Comp.MaxMobs)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-full-xeno-failure"), traversingXeno, traversingXeno);
@@ -456,7 +458,6 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 
 
         _container.Insert(enteringEntity, mobContainer);
-        EnsureComp<InXenoTunnelComponent>(enteringEntity);
         _ui.OpenUi(ent, SelectDestinationTunnelUI.Key, enteringEntity);
 
         args.Handled = true;
@@ -478,7 +479,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         if (_transform.GetMap(startingTunnel) != _transform.GetMap(destinationXenoTunnel.Owner))
             return;
 
-        var mobContainer = _container.EnsureContainer<Container>(ent, XenoTunnelComponent.ContainedMobsContainerId);
+        var mobContainer = _container.EnsureContainer<Container>(destinationXenoTunnel, XenoTunnelComponent.ContainedMobsContainerId);
         if (mobContainer.Count >= comp.MaxMobs)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-full-xeno-failure"), traversingXeno, traversingXeno);
@@ -599,6 +600,20 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         }
     }
 
+    private void OnTunnelEntInserted(Entity<XenoTunnelComponent> xenoTunnel, ref EntInsertedIntoContainerMessage args)
+    {
+        if (!HasComp<MobStateComponent>(args.Entity))
+            return;
+
+        if (!_mobState.IsAlive(args.Entity))
+        {
+            RemoveFromTunnel(args.Entity, xenoTunnel);
+        }
+
+        EnsureComp<InXenoTunnelComponent>(args.Entity);
+
+    }
+
     /// <summary>
     /// Delete a tunnel and remove anything within it. CALLING DEL OR QUEUEDEL DIRECTLY ON THE TUNNEL IS NOT RECOMMENDED.
     /// </summary>
@@ -645,7 +660,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             return;
         }
 
-        if (!_container.TryGetContainingContainer(tunneledXeno, out var mobContainer))
+        if (!_container.TryGetContainingContainer((tunneledXeno, null, null), out var mobContainer))
         {
             return;
         }
@@ -657,7 +672,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
     private void OnRegurgitateInTunnel(Entity<InXenoTunnelComponent> tunneledXeno, ref RegurgitateEvent args)
     {
         var regurgitated = _entities.GetEntity(args.NetRegurgitated);
-        if (!_container.TryGetContainingContainer(tunneledXeno, out var mobContainer))
+        if (!_container.TryGetContainingContainer((tunneledXeno, null, null), out var mobContainer))
         {
             return;
         }
