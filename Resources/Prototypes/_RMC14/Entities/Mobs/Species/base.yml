@@ -347,5 +347,4 @@
   - type: MobCollision
   - type: RMCMobCollision
   - type: RMCRest
-  - type: StunOnExplosionReceived
-    weak: true # TODO should also blind and cause hearing loss
+  - type: StunOnExplosionReceived # TODO should also cause hearing loss
