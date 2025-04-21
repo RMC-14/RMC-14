@@ -33,6 +33,8 @@
         amount: 50
       - id: CMWeaponPistolM1984
         amount: 50
+      - id: RMCWeaponPistolM13
+        amount: 50
       #- id: CMWeaponFlareM82F
       #  amount: 20
     - name: Restricted Firearms
@@ -344,6 +346,8 @@
         amount: 80
       - id: CMMagazinePistolM1984
         amount: 100
+      - id: RMCMagazinePistolM13
+        amount: 100
     - name: Armor-piercing ammunition
       entries:
       - id: CMMagazinePistolM77AP
@@ -361,6 +365,10 @@
       - id: CMMagazineSMGM63Ext
         amount: 10
       - id: CMMagazineRifleM54CExt
+        amount: 8
+      - id: RMCMagazinePistolM13Ext
+        amount: 10
+      - id: RMCMagazinePistolM13Drum
         amount: 8
     - name: Special ammunition
       entries:
@@ -401,12 +409,15 @@
     - name: Magazine Boxes
       hasBoxes: true
       entries:
-#      - name: Magazine Box (M10 x 22)
-#        box: RMCMagazine10
-#      - name: Magazine Box (Ext M10 x 14)
-#        box: RMCMagazineExtended10
-#      - name: Magazine Box (Drum M10 x 12)
-#        box: RMCMagazineDrum10
+      - id: RMCBoxMagazinePistolM13
+        name: Magazine Box (M13 x 22)
+        box: RMCMagazinePistolM13
+      - id: RMCBoxMagazinePistolM13Ext
+        name: Magazine Box (Ext M13 x 14)
+        box: RMCMagazinePistolM13Ext
+      - id: RMCBoxMagazinePistolM13Drum
+        name: Magazine Box (Drum M13 x 12)
+        box: RMCMagazinePistolM13Drum
       - id: RMCBoxMagazineSMGM63
         name: Magazine Box (M63 x 12)
         box: CMMagazineSMGM63

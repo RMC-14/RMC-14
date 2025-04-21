@@ -106,7 +106,7 @@ public sealed class XenoResinHoleSystem : SharedXenoResinHoleSystem
             return;
         }
 
-        if (_xenoWeeds.GetWeedsOnFloor((gridId, grid), location, true) is EntityUid weeds)
+        if (_xenoWeeds.GetWeedsOnFloor((gridId, grid), location, true) is { } weeds)
         {
             var ev = new XenoPlaceResinHoleDestroyWeedSourceDoAfterEvent(args.Prototype, args.PlasmaCost);
             var doAfterArgs = new DoAfterArgs(EntityManager, xeno.Owner, args.DestroyWeedSourceDelay, ev, xeno.Owner, weeds)

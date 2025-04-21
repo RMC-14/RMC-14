@@ -157,18 +157,12 @@
   - type: LaserDesignatorTarget
 
 - type: entity
+  parent: RMCRangefinderTarget
   id: RMCLaserDropshipTarget
   name: blinking laser
   components:
-  - type: Transform
-    anchored: true
   - type: Sprite
-    sprite: _RMC14/Effects/laser.rsi
     state: laser_target3
-    drawdepth: Effects
-  - type: PointLight
-    enabled: true
-    radius: 3
   - type: TimedDespawn
     lifetime: 1
 

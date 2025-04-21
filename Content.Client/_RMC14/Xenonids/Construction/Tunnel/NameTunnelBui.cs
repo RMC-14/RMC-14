@@ -1,12 +1,11 @@
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
-using Robust.Client.UserInterface.Controls;
 
 namespace Content.Client._RMC14.Xenonids.Construction.Tunnel;
 
 [UsedImplicitly]
-public sealed class NameTunnelBui(EntityUid owner, Enum key) : BoundUserInterface(owner, key)
+public sealed partial class NameTunnelBui(EntityUid owner, Enum key) : BoundUserInterface(owner, key)
 {
     private NameTunnelWindow? _window;
 
@@ -16,11 +15,9 @@ public sealed class NameTunnelBui(EntityUid owner, Enum key) : BoundUserInterfac
 
         _window = this.CreateWindow<NameTunnelWindow>();
 
-        _window.OpenCentered();
-
         var tunnelInput = _window.TunnelName;
 
-        _window.SubmitButton.OnPressed += (BaseButton.ButtonEventArgs args) =>
+        _window.SubmitButton.OnPressed += _ =>
         {
             var tunnelName = tunnelInput.Text.Trim();
             if (tunnelName.Length == 0)

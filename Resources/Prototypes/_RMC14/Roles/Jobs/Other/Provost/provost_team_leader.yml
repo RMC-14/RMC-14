@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMProvostTeamLeader
-  name: rmc-job-name-provost-team-leader
+  name: CMProvostTeamLeader
   description: rmc-job-description-provost-team-leader
   playTimeTracker: CMJobProvostTeamLeader
   ranks:
@@ -16,37 +16,23 @@
     components:
     - type: Skills
       skills:
-        RMCSkillConstruction: 2
         RMCSkillCqc: 2
-        RMCSkillEndurance: 2
-        RMCSkillEngineer: 2
-        RMCSkillExecution: 1
-        RMCSkillFirearms: 1
-        RMCSkillFireman: 2
-        RMCSkillIntel: 1
-        RMCSkillJtac: 3
-        RMCSkillLeadership: 2
-        RMCSkillMedical: 1
-        RMCSkillMeleeWeapons: 1
-        RMCSkillOverwatch: 1
         RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillLeadership: 2
+        RMCSkillOverwatch: 1
+        RMCSkillEndurance: 2
+        RMCSkillJtac: 3
+        RMCSkillMedical: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillIntel: 1
+        RMCSkillFirearms: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-provost-team-leader
     - type: MarineOrders
   hidden: true
-
-- type: entity
-  parent: MarkerBase
-  id: RMCSpawnerProvostTeamLeader
-  name: provost spawner team leader
-  suffix: Spawner, Player
-  components:
-  - type: Sprite
-    layers:
-    - state: red
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCRandomHumanoidProvostTeamLeader
 
 - type: entity
   id: RMCRandomHumanoidProvostTeamLeader
@@ -60,42 +46,11 @@
     settings: RMCProvostTeamLeader
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCSettingsGhostRole
   id: RMCProvostTeamLeader
   components:
-  - type: GhostRole
-    name: rmc-ghost-role-information-provost-team-leader-name
-    description: rmc-ghost-role-information-provost-team-leader-description
-    rules: ghost-role-information-nonantagonist-rules
-    raffle:
-      settings: short
-  - type: Loadout
-    prototypes: [ RMCGearProvostTeamLeader ]
-  - type: Skills
-    skills:
-      RMCSkillConstruction: 2
-      RMCSkillCqc: 1
-      RMCSkillEndurance: 5
-      RMCSkillEngineer: 2
-      RMCSkillExecution: 1
-      RMCSkillFirearms: 1
-      RMCSkillFireman: 2
-      RMCSkillIntel: 2
-      RMCSkillJtac: 4
-      RMCSkillLeadership: 3
-      RMCSkillMedical: 3
-      RMCSkillMeleeWeapons: 1
-      RMCSkillOverwatch: 1
-      RMCSkillPolice: 2
-      RMCSkillPowerLoader: 2
-      RMCSkillSmartGun: 1
-      RMCSkillVehicles: 2
-  - type: MarineOrders
-  - type: DemoSpecWhitelist
-  - type: GrenadeSpecWhitelist
-  - type: ScoutWhitelist
-  - type: SniperWhitelist
-  - type: PyroWhitelist
+  - type: RMCJobSpawner
+    job: CMProvostTeamLeader
 
 - type: startingGear
   id: RMCGearProvostTeamLeader

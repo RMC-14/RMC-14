@@ -127,3 +127,13 @@
 - type: playTimeTracker
   id: CMJobCommandingOfficer
   isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleCO
+  name: The Commanding Officer
+  description: The Commanding Officer.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: commanding_officer

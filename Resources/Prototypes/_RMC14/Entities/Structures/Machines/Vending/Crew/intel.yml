@@ -33,7 +33,7 @@
         points: 10
       - id: CMMagazineSMGM63Ext
         points: 10
-      - id: CMMagazineRifleM54C
+      - id: CMMagazineRifleM54CAP
         points: 10
       - id: CMMagazineRifleM54CExt
         points: 10
@@ -47,11 +47,15 @@
         points: 10
       - id: RMCMagazinePistolSU6
         points: 10
-    - name: Personal Sidearm
+    - name: Restricted Firearms
       entries:
       - id: RMCGunCasePistolMK80
         points: 15
       - id: RMCGunCasePistolSmart
+        points: 15
+    - name: Restricted Gear
+      entries:
+      - id: CMBeltUtilityCombatFilled
         points: 15
     - name: Pouches
       entries:
@@ -129,6 +133,7 @@
       entries:
       - id: RMCArmorXM4
       - id: RMCArmorM3LightVariants
+      - id: RMCArmorVestIO
     - name: Jacket
       choices: { CMCoat: 1 }
       entries:
