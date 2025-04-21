@@ -10,7 +10,7 @@ public sealed partial class StunOnExplosionReceivedComponent : Component
     public bool Weak;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan BlindTime = TimeSpan.FromSeconds(6);
+    public TimeSpan BlindTime = TimeSpan.FromSeconds(8);
 
     [DataField, AutoNetworkedField]
     public TimeSpan BlurTime = TimeSpan.FromSeconds(5);
