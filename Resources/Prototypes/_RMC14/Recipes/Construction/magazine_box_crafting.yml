@@ -308,6 +308,52 @@
   iconColor: "#727e90"
   objectType: Item
 
+# M13
+- type: construction
+  parent: RMC
+  name: Magazine Box (M13 Reg)
+  id: RMCBoxMagazinePistolM13Empty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazinePistolM13Empty
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain regular M13 mags.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: smg_box
+  iconColor: "#7c4c1b"
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: Magazine Box (M13 Ext)
+  id: RMCBoxMagazinePistolM13ExtEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazinePistolM13ExtEmpty
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain extended M13 mags.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: smg_box
+  iconColor: "#7c4c1b"
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: Magazine Box (M13 Drum)
+  id: RMCBoxMagazinePistolM13DrumEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazinePistolM13DrumEmpty
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain M13 drums.
+  icon:
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    state: smg_box
+  iconColor: "#7c4c1b"
+  objectType: Item
+
 # Nailgun
 - type: construction
   parent: RMC
