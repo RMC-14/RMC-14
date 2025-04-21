@@ -642,13 +642,13 @@
         amount: 1
         doAfter: 0.25
 
-    - to: RMCBoxMagazinePistolM13Ext
+    - to: RMCBoxMagazinePistolM13ExtEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
         doAfter: 0.25
 
-    - to: RMCBoxMagazinePistolM13Drum
+    - to: RMCBoxMagazinePistolM13DrumEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
