@@ -28,6 +28,7 @@ using Content.Shared.Wall;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Vendors;
 
@@ -50,6 +51,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedWebbingSystem _webbing = default!;
     [Dependency] private readonly SharedRMCHolidaySystem _rmcHoliday = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
 
     // TODO RMC14 make this a prototype
     public const string SpecialistPoints = "Specialist";
@@ -161,6 +163,19 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     {
         if (args.Cancelled)
             return;
+
+        if (TryComp<RMCVendorUserRechargeComponent>(args.User, out var recharge) &&
+            TryComp<CMVendorUserComponent>(args.User, out var vendorUser))
+        {
+            var ticks = (_gameTiming.CurTime - recharge.LastUpdate) / recharge.TimePerUpdate;
+            var points = (int)Math.Floor(ticks * recharge.PointsPerUpdate);
+            if (points > 0)
+            {
+                vendorUser.Points = Math.Min(recharge.MaxPoints, vendorUser.Points + points);
+                recharge.LastUpdate = _gameTiming.CurTime;
+                DirtyEntity(args.User);
+            }
+        }
 
         if (HasComp<BypassInteractionChecksComponent>(args.User))
             return;
