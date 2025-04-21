@@ -129,7 +129,7 @@
       effects:
       - !type:EqualHealthChange
         damage:
-        - Toxin: -0.25
+        - Toxin: -0.5
       - !type:HealthChange
         damage:
           groups:
