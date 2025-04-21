@@ -99,7 +99,7 @@
       - id: CMBottleOxycodone
         amount: 3
       # - id: CMBottlePeridaxon
-        amount: 3
+      #  amount: 3
       - id: CMBottleTramadol
         amount: 3
     - name: Pill bottles
