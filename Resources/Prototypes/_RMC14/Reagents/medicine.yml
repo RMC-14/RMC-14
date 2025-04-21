@@ -46,7 +46,8 @@
           min: 50
         key: ForcedSleep
         component: ForcedSleeping
-        time: 30
+        probability: 0.05
+        time: 10
         refresh: true
         type: Add
 
@@ -159,8 +160,9 @@
           min: 25
         key: ForcedSleep
         component: ForcedSleeping
+        probability: 0.05
         refresh: true
-        time: 30
+        time: 10
         type: Add
 
 - type: reagent
@@ -474,7 +476,8 @@
           min: 50
         key: ForcedSleep
         component: ForcedSleeping
-        time: 30
+        probability: 0.05
+        time: 10
         refresh: true
         type: Add
 
@@ -527,7 +530,8 @@
           min: 50
         key: ForcedSleep
         component: ForcedSleeping
-        time: 30
+        probability: 0.05
+        time: 10
         refresh: true
         type: Add
 
