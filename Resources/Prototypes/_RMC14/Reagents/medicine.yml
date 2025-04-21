@@ -373,7 +373,6 @@
             Airloss: 1.5
 
 # TODO heart damage over 100u
-# TODO RMC14 allow breathing in crit instead of reducing asphyxiation
 - type: reagent
   parent: [ CMReagentMedicine, Inaprovaline ]
   id: CMInaprovaline
