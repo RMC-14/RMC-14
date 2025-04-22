@@ -34,8 +34,8 @@
   suffix: Spawner, Player, Hostile
   components:
   - type: Sprite
-    sprite: _RMC14/Markers/landmarks.rsi
-    state: pmc_spawn
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_freelancer.rsi
+    state: icon
   - type: RandomHumanoidSpawner
     settings: RMCFreelancerStandard
 
@@ -45,8 +45,8 @@
   suffix: Spawner, Player, Friendly
   components:
   - type: Sprite
-    sprite: _RMC14/Markers/landmarks.rsi
-    state: pmc_spawn
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_freelancer.rsi
+    state: icon
   - type: RandomHumanoidSpawner
     settings: RMCFreelancerStandardFriendly
 

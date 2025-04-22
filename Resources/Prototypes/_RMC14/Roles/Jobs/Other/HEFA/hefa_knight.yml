@@ -1,8 +1,9 @@
-﻿- type: job
+﻿# HEFA Shrapnelsworn
+- type: job
   parent: CMJobBase
-  id: CMHEFAShrapnelsworn
-  name: CMHEFAShrapnelsworn
-  description: cm-job-description-hefa-shrapnelsworn
+  id: RMCHEFAShrapnelsworn
+  name: rmc-job-name-hefa-grandmaster
+  description: rmc-ghost-name-hefa-friendly-shrapnelsworn
   playTimeTracker: CMJobHEFAShrapnelsworn
   ranks:
     RMCRankHEFASer: []
@@ -22,36 +23,62 @@
         RMCSkillEndurance: 2
         RMCSkillJtac: 1
         RMCSkillFirearms: 1
-    - type: JobPrefix
-      prefix: cm-job-prefix-hefa-shrapnelsworn
     - type: GrenadeSpecWhitelist
   hasIcon: false
   hidden: true
 
 - type: entity
-  parent: MarkerBase
-  id: RMCSpawnerHEFAShrapnelsworn
-  name: hefa shrapnelsworn spawner
-  suffix: Spawner
+  id: RMCRandomHumanoidHEFAShrapnelswornHostile
+  name: hefa ghost role grandmaster
+  suffix: Spawner, Player, Hostile
   components:
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCRandomHumanoidHEFAShrapnelsworn
-
-- type: entity
-  id: RMCRandomHumanoidHEFAShrapnelsworn
-  name: hefa shrapnelsworn ghost role
-  suffix: Role
-  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/m40hefa.rsi
+    state: icon
   - type: RandomHumanoidSpawner
     settings: RMCHEFAShrapnelsworn
 
+- type: entity
+  id: RMCRandomHumanoidHEFAShrapnelswornFriendly
+  name: hefa ghost role grandmaster
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/m40hefa.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCHEFAShrapnelswornFriendly
+
 - type: randomHumanoidSettings
-  parent: RMCSettingsGhostRole
+  parent: EventHumanoid
   id: RMCHEFAShrapnelsworn
   components:
-  - type: RMCJobSpawner
-    job: CMHEFAShrapnelsworn
+  - type: GhostRole
+    name: rmc-ghost-name-hefa-hostile-grandmaster
+    description: rmc-ghost-role-information-hefa-hostile-description
+    rules: rmc-ghost-role-information-hefa-rules
+    reregister: false
+    job: RMCHEFAShrapnelsworn
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+  - type: RandomMetadata
+    nameSegments:
+    - RMCNamesHEFA
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCHEFAShrapnelswornFriendly
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-hefa-friendly-grandmaster
+    description: rmc-ghost-role-information-hefa-friendly-description
+    rules: rmc-ghost-role-information-hefa-rules
+    reregister: false
+    job: RMCHEFAShrapnelsworn
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
   - type: RandomMetadata
     nameSegments:
     - RMCNamesHEFA
@@ -73,3 +100,65 @@
 
 - type: playTimeTracker
   id: CMJobHEFAShrapnelsworn
+
+# Melee
+
+- type: job
+  parent: RMCHEFAShrapnelsworn
+  id: RMCHEFAShrapnelswornMelee
+  name: rmc-job-name-hefa-shrapnelsworn
+  playTimeTracker: CMJobHEFAShrapnelswornMelee
+  startingGear: RMCGearHEFAShrapnelswornMelee
+
+- type: playTimeTracker
+  id: CMJobHEFAShrapnelswornMelee
+
+- type: randomHumanoidSettings
+  parent: RMCHEFAShrapnelsworn
+  id: RMCHEFAShrapnelswornMelee
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-hefa-hostile-shrapnelsworn
+    job: RMCHEFAShrapnelswornMelee
+
+- type: randomHumanoidSettings
+  parent: RMCHEFAShrapnelswornFriendly
+  id: RMCHEFAShrapnelswornMeleeFriendly
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-hefa-friendly-shrapnelsworn
+    job: RMCHEFAShrapnelswornMelee
+
+- type: entity
+  parent: RMCRandomHumanoidHEFAShrapnelswornHostile
+  id: RMCRandomHumanoidHEFAShrapnelswornMeleeHostile
+  name: hefa ghost role shrapnelsworn
+  suffix: Spawner, Player, Hostile
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCHEFAShrapnelswornMelee
+
+- type: entity
+  parent: RMCRandomHumanoidHEFAShrapnelswornFriendly
+  id: RMCRandomHumanoidHEFAShrapnelswornMeleeFriendly
+  name: hefa ghost role shrapnelsworn
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCHEFAShrapnelswornMeleeFriendly
+
+- type: startingGear
+  id: RMCGearHEFAShrapnelswornMelee
+  equipment:
+    head: RMCArmorHelmetHEFA
+    jumpsuit: RMCJumpsuitHEFA
+    outerClothing: RMCArmorMercenaryHEFA
+    gloves: CMHandsBlackMarine
+    shoes: CMBootsBlack
+    id: RMCIDCardHEFAShrapnelsworn
+    belt: RMCBeltGrenadeHEFA
+    back: RMCSatchelHEFAFill
+    pocket1: RMCPouchFirstAidERTFill
+    pocket2: RMCPouchExplosiveFilledHEFA
+  inhand:
+  - RMCSwordHEFA
