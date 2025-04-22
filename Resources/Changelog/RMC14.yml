@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Added medical kit pouch to corpsman gear rack and requisitions.
-    type: Add
-  id: 1134
-  time: '2024-12-22T05:25:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3545
 - author: MACMAN2003
   changes:
   - message: Added the CO's M59A prototype rifle.
@@ -5530,5 +5523,14 @@
   id: 1636
   time: '2025-04-22T23:33:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6215
+- author: to4no_fix
+  changes:
+  - message: The dropship system now automatically scans for xenomorphs on board after
+      take off. If any are detected (excluding corpses), a Red Alert is set and marines
+      are notified with a global announcement.
+    type: Add
+  id: 1637
+  time: '2025-04-22T23:37:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6184
 Name: RMC14
 Order: -1
