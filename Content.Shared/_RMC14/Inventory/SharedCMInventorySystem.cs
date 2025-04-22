@@ -231,6 +231,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
     {
         if(!TryComp(args.Used, out ItemSlotsComponent? usedStorage) ||
            !TryComp(ent, out ItemSlotsComponent? storage) ||
+           !HasComp<StorageComponent>(ent) ||
            args.Handled)
             return;
 
@@ -241,18 +242,33 @@ public abstract class SharedCMInventorySystem : EntitySystem
             if(!_container.TryGetContainer(args.Used, usedStorageItemSlot.Key, out var usedContainer))
                 continue;
 
-            foreach (var entity in usedContainer.ContainedEntities)
+            foreach (var itemSlot in storage.Slots)
             {
-                foreach (var itemSlot in storage.Slots)
-                {
-                    if(!_container.TryGetContainer(ent, itemSlot.Key, out var container))
-                        continue;
+                if(!_container.TryGetContainer(ent, itemSlot.Key, out var container))
+                    continue;
 
-                    if (_container.Insert(entity, container))
+                if(_storage.CanInsert(ent.Owner, args.Used, args.User, out _))
+                {
+                    // If the container fits, break the loop and insert the container.
+                    if (_container.Insert(args.Used, container))
                     {
                         insertSound = itemSlot.Value.InsertSound;
                         args.Handled = true;
+                        break;
                     }
+                }
+
+                // If the container does not fit, check if the entities in the container do.
+                foreach (var entity in usedContainer.ContainedEntities)
+                {
+                    if (!_storage.CanInsert(ent.Owner, entity, args.User, out _))
+                        continue;
+
+                    if (!_container.Insert(entity, container))
+                        continue;
+
+                    insertSound = itemSlot.Value.InsertSound;
+                    args.Handled = true;
                 }
             }
         }
