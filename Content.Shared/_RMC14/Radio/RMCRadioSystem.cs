@@ -23,7 +23,7 @@ public sealed class RMCRadioSystem : EntitySystem
     private void OnHeadsetEncryptionChannelsChanged(Entity<RMCHeadsetComponent> ent, ref EncryptionChannelsChangedEvent args)
     {
         // prevent adding channels and therefore ActiveRadioComponent before map initialized
-        if (MetaData(ent).EntityLifeStage < EntityLifeStage.MapInitialized)
+        if (LifeStage(ent) < EntityLifeStage.MapInitialized)
             return;
 
         foreach (var channel in ent.Comp.Channels)
