@@ -1,6 +1,11 @@
 # base
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  id: RMCEventHumanoid
+  components:
+  - type: RandomHumanoidAppearance
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
   id: RMCRandomHumanoidBase
   components:
   - type: GhostRolePreventCryoSleep

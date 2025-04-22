@@ -91,7 +91,7 @@
     settings: RMCPMCMedic
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCPMCMedic
   components:
   - type: GhostRole
