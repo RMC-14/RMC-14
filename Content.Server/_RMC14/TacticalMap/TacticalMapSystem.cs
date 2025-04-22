@@ -608,7 +608,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         {
             foreach (var init in _toInit)
             {
-                if (!init.Comp.Running)
+                if (!init.Comp.Running || LifeStage(init) < EntityLifeStage.MapInitialized)
                     continue;
 
                 var wasActive = HasComp<ActiveTacticalMapTrackedComponent>(init);
