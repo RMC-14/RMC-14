@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: MetalSage
-  changes:
-  - message: Added engineering kit
-    type: Add
-  id: 1131
-  time: '2024-12-22T03:19:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4992
 - author: Rainbeon
   changes:
   - message: Fixed the Scout's M4SPR custom battle rifle being referred to by the
@@ -5525,5 +5518,14 @@
   id: 1633
   time: '2025-04-22T23:28:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6235
+- author: noctyrnal
+  changes:
+  - message: Added the General's Armoured Beret for High Command General.
+    type: Add
+  - message: The "General's" clothing has been resprited.
+    type: Tweak
+  id: 1634
+  time: '2025-04-22T23:30:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6229
 Name: RMC14
 Order: -1
