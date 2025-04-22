@@ -76,6 +76,7 @@
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
+    squad: SquadFreelancer
 
 - type: randomHumanoidSettings
   parent: EventHumanoid
@@ -90,6 +91,7 @@
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
+    squad: SquadFreelancer
 
 - type: startingGear
   id: RMCGearFreelancerLeader

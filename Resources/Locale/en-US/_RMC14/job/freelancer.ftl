@@ -8,12 +8,12 @@ rmc-ghost-role-information-freelancer-hostile-description = Ransack the UNS ship
 
 rmc-ghost-name-freelancer-hostile-standard = Mercenary Rifleman (Hostile)
 rmc-ghost-name-freelancer-friendly-standard = Mercenary Rifleman (Friendly)
-rmc-job-name-freelancer-standard = Freelance Mercenary
+rmc-job-name-freelancer-standard = Mercenary
 
 rmc-ghost-name-freelancer-hostile-medic = Mercenary Medic (Hostile)
 rmc-ghost-name-freelancer-friendly-medic = Mercenary Medic (Friendly)
-rmc-job-name-freelancer-medic = Freelance Medic
+rmc-job-name-freelancer-medic = Medic
 
 rmc-ghost-name-freelancer-hostile-leader = Mercenary Leader (Hostile)
 rmc-ghost-name-freelancer-friendly-leader = Mercenary Leader (Friendly)
-rmc-job-name-freelancer-leader = Freelance Leader
+rmc-job-name-freelancer-leader = Leader

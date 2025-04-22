@@ -10,7 +10,7 @@
 
 - type: rank
   id: RMCRankFLLeader
-  name: Lead
+  name: Leader
   prefix: Warlord
 
 - type: rank
