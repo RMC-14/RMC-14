@@ -66,6 +66,22 @@
           6: { state: "dogtag_6" }
           7: { state: "dogtag_7" }
           8: { state: "dogtag_8" }
+          9: { state: "dogtag_9" }
+          10: { state: "dogtag_10" }
+          11: { state: "dogtag_11" }
+          12: { state: "dogtag_12" }
+          13: { state: "dogtag_13" }
+          14: { state: "dogtag_14" }
+          15: { state: "dogtag_15" }
+          16: { state: "dogtag_16" }
+          17: { state: "dogtag_17" }
+          18: { state: "dogtag_18" }
+          19: { state: "dogtag_19" }
+          20: { state: "dogtag_20" }
+          21: { state: "dogtag_21" }
+          22: { state: "dogtag_22" }
+          23: { state: "dogtag_23" }
+          24: { state: "dogtag_24" }
 
 - type: entity
   id: RMCDogtagProp

@@ -11,7 +11,7 @@ public sealed partial class InformationTagsComponent : Component
     public List<InfoTagInfo> Tags = new();
 
     [DataField, AutoNetworkedField]
-    public int MaxDisplayTags = 8;
+    public int MaxDisplayTags = 24;
 }
 
 [Serializable, NetSerializable]

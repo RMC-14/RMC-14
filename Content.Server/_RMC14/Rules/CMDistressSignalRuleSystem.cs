@@ -1447,6 +1447,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         if (fallen != string.Empty)
         {
+            args.AddLine(string.Empty);
             string memorium = Loc.GetString("rmc-distress-signal-fallen", ("fallen", fallen));
             args.AddLine(memorium);
         }
