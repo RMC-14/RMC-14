@@ -1,5 +1,8 @@
+using Content.Shared._RMC14.Slow;
+using Content.Shared.Clothing;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
@@ -12,10 +15,13 @@ public sealed class TemporarySpeedModifiersSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedSystem = default!;
     [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<TemporarySpeedModifiersComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovement);
+
+        SubscribeLocalEvent<ClothingSpeedModifierComponent, RMCMovementSpeedRefreshedEvent>(OnRMCRefreshMovement);
     }
 
     private void OnRefreshMovement(Entity<TemporarySpeedModifiersComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
@@ -27,6 +33,24 @@ public sealed class TemporarySpeedModifiersSystem : EntitySystem
 
             args.ModifySpeed(modifier.Walk, modifier.Sprint);
         }
+    }
+
+    private void OnRMCRefreshMovement(Entity<ClothingSpeedModifierComponent> ent, ref RMCMovementSpeedRefreshedEvent args)
+    {
+        if (!_container.TryGetContainingContainer((ent, null, null), out var wearer))
+            return;
+
+        if (!TryComp(wearer.Owner, out MovementSpeedModifierComponent? movement))
+            return;
+
+        if (!HasComp<RMCSlowdownComponent>(wearer.Owner) && !HasComp<RMCSuperSlowdownComponent>(wearer.Owner))
+            return;
+
+        // Modify the slowdown the clothing applies based on the wearers current movement speed.
+        // Slowed entities get a reduced slow effect from clothing while fast entities get an increased slow effect.
+        var newModifier = 1 - (1 - args.SprintModifier) * (movement.CurrentSprintSpeed / movement.BaseSprintSpeed);
+        args.WalkModifier = newModifier;
+        args.SprintModifier = newModifier;
     }
 
     public override void Update(float frameTime)
@@ -86,6 +110,16 @@ public sealed class TemporarySpeedModifiersSystem : EntitySystem
         if (!Resolve(uid, ref movement))
             return null;
 
-        return 1 / (Math.Max(1 / movement.CurrentSprintSpeed * 10 + modifier, MaxSpeedModifier) / 10) / movement.CurrentSprintSpeed;
+        var currentSpeed = movement.CurrentSprintSpeed;
+        var baseSpeed = movement.BaseSprintSpeed;
+
+        var currentSpeedModifier = 1 / (Math.Max(1 / currentSpeed * 10 + modifier, MaxSpeedModifier) / 10) / movement.CurrentSprintSpeed;
+        var baseSpeedModifier = 1 / (Math.Max(1 / baseSpeed * 10 + modifier, MaxSpeedModifier) / 10) / movement.BaseSprintSpeed;
+
+        // Apply the lowest of the two values.
+        return Math.Min(currentSpeedModifier, baseSpeedModifier);
     }
 }
+
+[ByRefEvent]
+public record struct RMCMovementSpeedRefreshedEvent(float WalkModifier, float SprintModifier);
