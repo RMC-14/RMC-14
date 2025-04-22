@@ -39,6 +39,7 @@ using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Item;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines.Dogtags;
 using Content.Shared._RMC14.Marines.HyperSleep;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Rules;
@@ -142,6 +143,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly SharedDestructibleSystem _destruction = default!;
     [Dependency] private readonly IntelSystem _intel = default!;
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
+    [Dependency] private readonly DogtagsSystem _dogtags = default!;
 
 
     private readonly HashSet<string> _operationNames = new();
@@ -1414,6 +1416,21 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         var result = component.Result ??= DistressSignalRuleResult.None;
         args.AddLine($"{Loc.GetString($"cm-distress-signal-{result.ToString().ToLower()}")}");
+
+        var memorialQuery = EntityQueryEnumerator<RMCMemorialComponent>();
+        string fallen = string.Empty;
+
+        while (memorialQuery.MoveNext(out var mUid, out var memorial))
+        {
+            fallen += _dogtags.MemorialNamesList((mUid, memorial));
+        }
+
+        if (fallen != string.Empty)
+        {
+            string memorium = Loc.GetString("rmc-distress-signal-fallen", ("fallen", fallen));
+            args.AddLine(memorium);
+        }
+
 
         var commendations = _commendation.GetCommendations();
         var marineAwards = commendations.Where(c => c.Type == CommendationType.Medal).ToArray();

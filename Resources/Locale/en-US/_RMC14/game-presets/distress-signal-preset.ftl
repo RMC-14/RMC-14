@@ -14,5 +14,9 @@ rmc-distress-signal-next-map-title = Next Planet Map
 rmc-distress-signal-next-map-tie = Tie for map vote! Picking... {$picked}
 rmc-distress-signal-next-map-win = {$winner} won the map vote!
 
+rmc-distress-signal-fallen = In Flanders fields...
+ In memoriam of our fallen soldiers: 
+ {$fallen}
+
 cm-distress-signal-medals = Medal Awards:
 cm-distress-signal-jellies = Royal Jelly Awards:

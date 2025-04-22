@@ -28,6 +28,9 @@
     {
       "name": "equipped-IDCARD",
       "directions": 4
+    },
+    {
+      "name": "dogtag_ground"
     }
   ]
 }
