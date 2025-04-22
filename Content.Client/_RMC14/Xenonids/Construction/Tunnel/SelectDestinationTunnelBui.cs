@@ -1,24 +1,14 @@
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using JetBrains.Annotations;
-using OpenToolkit.GraphicsLibraryFramework;
+using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Content.Client._RMC14.Xenonids.Construction.Tunnel;
 [UsedImplicitly]
-public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
+public sealed partial class SelectDestinationTunnelBui(EntityUid ent, Enum key) : BoundUserInterface(ent, key)
 {
     private SelectDestinationTunnelWindow? _window;
     private NetEntity? _selectedTunnel;
-    private IEntityManager _entManager;
-    public SelectDestinationTunnelBui(EntityUid ent, Enum key) : base(ent, key)
-    {
-        _entManager = IoCManager.Resolve<IEntityManager>();
-    }
 
     protected override void UpdateState(BoundUserInterfaceState state)
     {
@@ -35,8 +25,8 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
 
         foreach (var (name, netTunnel) in newState.HiveTunnels)
         {
-            var tunnel = _entManager.GetEntity(netTunnel);
-            if (tunnel == this.Owner)
+            var tunnel = EntMan.GetEntity(netTunnel);
+            if (tunnel == Owner)
             {
                 continue;
             }
@@ -54,21 +44,18 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
     {
         base.Open();
 
-        _window = new SelectDestinationTunnelWindow();
-        _window.OnClose += Close;
-        _window.OpenCentered();
-
+        _window = this.CreateWindow<SelectDestinationTunnelWindow>();
         _window.SelectButton.Disabled = true;
 
-        _window.SelectableTunnels.OnItemSelected += (ItemList.ItemListSelectedEventArgs args) =>
+        _window.SelectableTunnels.OnItemSelected += (args) =>
         {
             _window.SelectButton.Disabled = false;
 
-            ItemList.Item newSelectedItem = args.ItemList[args.ItemIndex];
-            _selectedTunnel = (NetEntity)newSelectedItem.Metadata!;
+            var newSelectedItem = args.ItemList[args.ItemIndex];
+            _selectedTunnel = (NetEntity) newSelectedItem.Metadata!;
         };
 
-        _window.SelectButton.OnButtonDown += (BaseButton.ButtonEventArgs args) =>
+        _window.SelectButton.OnButtonDown += (args) =>
         {
 
             if (_selectedTunnel is null)
@@ -85,13 +72,5 @@ public sealed partial class SelectDestinationTunnelBui : BoundUserInterface
     private void GoToTunnel(NetEntity destinationTunnel)
     {
         SendMessage(new TraverseXenoTunnelMessage(destinationTunnel));
-    }
-    protected override void Dispose(bool disposing)
-    {
-        base.Dispose(disposing);
-        if (!disposing)
-            return;
-
-        _window?.Dispose();
     }
 }

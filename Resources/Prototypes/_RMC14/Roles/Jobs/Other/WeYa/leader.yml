@@ -1,0 +1,117 @@
+# Leader
+- type: job
+  parent: CMJobBase
+  id: RMCPMCLeader
+  name: rmc-job-name-pmc-leader
+  description: rmc-ghost-role-information-pmc-description
+  playTimeTracker: RMCJobPMCLeader
+  ranks:
+    RMCRankWeYaTeamLeader: []
+  startingGear: RMCJobPMCLeader
+  icon: RMCJobIconPMCLeader
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillCqc: 2
+        RMCSkillLeadership: 1
+        RMCSkillOverwatch: 1
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 3
+        RMCSkillJtac: 2
+    - type: MarineOrders
+    - type: SquadArmorWearer
+      leader: true
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: pmc_ld
+    - type: RMCPointing
+
+- type: startingGear
+  id: RMCJobPMCLeader
+  equipment:
+    id: RMCIDCardPMC
+    ears: RMCHeadsetDistressPMCLeader
+    jumpsuit: RMCJumpsuitVeteranPMCLeader
+    outerClothing: CMArmorM4PMCLeader
+    gloves: RMCHandsVeteranPMC
+    head: ArmorHelmetPMCOfficer
+    shoes: RMCBootsPMCFilled
+    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava (leader)
+    eyes: RMCGlassesMedicalHUDGlasses
+    back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
+    belt: RMCMK80BeltFilled # TODO RMC14: PMC re-sprite
+    suitstorage: RMCWeaponRifleM54C2
+    pocket1: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
+    pocket2: RMCPouchFirstAidPMCFill
+  inhand:
+  - RMCWebbingPMC
+  storage:
+    back:
+    - CMStunbaton
+    - CMCrowbar # TODO RMC14: tactical prybar
+    - RMCRangefinder
+    - CMMRE # TODO RMC14: PMC CFR ration
+    - RMCGrenadeBlastM12
+    - RMCExplosivePlastic
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+    outerClothing:
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+    pocket1:
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+
+
+- type: playTimeTracker
+  id: RMCJobPMCLeader
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconPMCLeader
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: pmc_ld
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidPMCLeader
+  name: weya pmc ghost role leader
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCPMCLeader
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCPMCLeader
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-pmc-leader
+    description: rmc-ghost-role-information-pmc-description
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    job: RMCPMCLeader
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial

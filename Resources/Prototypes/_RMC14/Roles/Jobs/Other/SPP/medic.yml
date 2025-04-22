@@ -1,0 +1,85 @@
+﻿- type: job
+  parent: CMJobBase
+  id: RMCSPPMedic
+  name: RMCSPPMedic
+  description: rmc-job-description-spp-medic
+  playTimeTracker: CMJobSPPMedic
+  ranks:
+    RMCRankSPPMladshiySerzhant: []
+  startingGear: RMCGearSPPMedic
+  icon: "RMCJobIconSPPMedic"
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  - HospitalCorpsman
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillJtac: 1
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-medic
+  hidden: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSPPMedic
+  name: spp ghost role medic
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSPPMedic
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCSPPMedic
+  components:
+  - type: GhostRole
+    name: RMCSPPMedic
+    description: rmc-job-description-spp-medic
+    rules: rmc-ghost-role-information-spp-rules
+    reregister: false
+    job: RMCSPPMedic
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearSPPMedic
+  equipment:
+    head: CMHeadCapSPP
+    ears: RMCHeadsetSPPMedic
+    ears2: RMCM5CameraGear
+    eyes: RMCGlassesMedicalHUDGlasses
+    jumpsuit: CMJumpsuitSPPMedic
+    outerClothing: RMCArmorSPPSupport
+    gloves: RMCHandsVeteranSPP
+    shoes: CMBootsBlackFilled
+    suitstorage: WeaponSMGMP5 # TODO RMC14 : Replace with Bizon SMG
+    id: RMCIDSPP
+    belt: CMBeltMedicBagFilled
+    back: RMCSatchelSPPMedic
+    pocket1: RMCPouchMedkitFillSPP
+    pocket2: RMCPouchMagazineLargeMP5
+
+- type: playTimeTracker
+  id: CMJobSPPMedic
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPMedic
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: upp_med

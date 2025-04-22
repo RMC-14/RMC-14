@@ -589,6 +589,24 @@
         amount: 1
         doAfter: 0.25
 
+    # M13 Auto Pistol
+    - to: RMCBoxMagazinePistolM13Empty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
+    - to: RMCBoxMagazinePistolM13Ext
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
+    - to: RMCBoxMagazinePistolM13Drum
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
     # M16
     - to: RMCBoxMagazineRifleM16Empty
       steps:
@@ -753,6 +771,14 @@
     entity: RMCBoxMagazineRifleM4SPRAPEmpty
   - node: RMCBoxMagazineRifleM4SPRExtEmpty
     entity: RMCBoxMagazineRifleM4SPRExtEmpty
+
+  # M13
+  - node: RMCBoxMagazinePistolM13Empty
+    entity: RMCBoxMagazinePistolM13Empty
+  - node: RMCBoxMagazinePistolM13Ext
+    entity: RMCBoxMagazinePistolM13Ext
+  - node: RMCBoxMagazinePistolM13Drum
+    entity: RMCBoxMagazinePistolM13Drum
 
   # M16
   - node: RMCBoxMagazineRifleM16Empty

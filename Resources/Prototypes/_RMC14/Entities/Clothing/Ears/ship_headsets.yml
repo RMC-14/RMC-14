@@ -9,7 +9,7 @@
       key_slots: !type:Container
   - type: Headset
   - type: EncryptionKeyHolder
-    keySlots: 4
+    keySlots: 4 # TODO RMC14 3 when intrinsic channels are all done
   - type: Clothing
     slots:
     - ears
@@ -70,7 +70,7 @@
     - MarineFoxtrot
   - type: HeadsetMultiBroadcast
     cooldown: 60
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 3
 
 - type: entity
@@ -96,7 +96,7 @@
     - MarineFoxtrot
   - type: HeadsetMultiBroadcast
     cooldown: 60
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 3
 
 - type: entity
@@ -185,7 +185,7 @@
     - MarineMedical
   - type: HeadsetMultiBroadcast
     cooldown: 60
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 3
 
 - type: entity
@@ -223,7 +223,7 @@
     - MarineDelta
     - MarineEcho
     - MarineFoxtrot
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 3
 
 - type: entity
@@ -241,7 +241,7 @@
       - RMCEncryptionKeyMarineCommand
   - type: HeadsetMultiBroadcast
     cooldown: 60
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 3
 
 - type: entity
@@ -268,7 +268,7 @@
       - CMEncryptionKeyPilot
   - type: HeadsetMultiBroadcast
     cooldown: 60
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 3
 
 - type: entity
@@ -290,7 +290,7 @@
     - MarineDelta
     - MarineEcho
     - MarineFoxtrot
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 3
 
 - type: entity
@@ -334,7 +334,7 @@
       - RMCEncryptionKeySeniorCommand
   - type: HeadsetMultiBroadcast
     cooldown: 60
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 3
 
 - type: entity
@@ -353,7 +353,7 @@
       - RMCEncryptionKeyHighCommand
   - type: HeadsetMultiBroadcast
     cooldown: 60
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 3
 
 - type: entity
@@ -371,5 +371,5 @@
       - RMCEncryptionKeySeniorCommand
   - type: HeadsetMultiBroadcast
     cooldown: 60
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 3

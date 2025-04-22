@@ -6,6 +6,7 @@
   - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
   id: CMXenoRunnerBase
   name: Runner
   description: A small red alien that looks like it could run fairly quickly...
@@ -33,7 +34,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.35
-        density: 185
+        density: 85
         mask:
         - Impassable
         - HighImpassable
@@ -45,7 +46,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.40
-        density: 185
+        density: 85
         layer:
         - BulletImpassable
   - type: XenoLight
@@ -111,6 +112,8 @@
     baseSprintSpeed: 10
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.1
+  - type: MobCollision
+    minimumSpeedModifier: 0.1
 
 - type: entity
   parent: CMXenoRunnerBase

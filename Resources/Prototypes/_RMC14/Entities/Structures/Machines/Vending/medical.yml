@@ -18,17 +18,16 @@
 
 - type: entity
   parent: ColMarTechBaseAnchorable
-  id: CMVendorMedical
+  id: CMVendorMedicalAllAccess
   name: We-Ya-Med Plus
   description: Medical pharmaceutical dispenser. Provided by We-Ya Pharmaceuticals Division(TM).
+  suffix: All Access
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/med.rsi
     layers:
     - state: "off"
     - state: "normal-unshaded"
-  - type: AccessReader
-    access: [["CMAccessMedical"]]
   - type: CMSolutionRefiller
     current: 600
     max: 600
@@ -140,6 +139,13 @@
       - id: CMSyringe
         amount: 7
 
+- type: entity
+  parent: CMVendorMedicalAllAccess
+  id: CMVendorMedical
+  suffix: ""
+  components:
+  - type: AccessReader
+    access: [["CMAccessMedical"]]
 
 - type: entity
   parent: CMVendorMedical

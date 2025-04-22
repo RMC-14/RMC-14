@@ -38,6 +38,7 @@ public sealed class XenoHeadbuttSystem : EntitySystem
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ThrownItemComponent> _thrownItemQuery;
@@ -83,7 +84,7 @@ public sealed class XenoHeadbuttSystem : EntitySystem
         xeno.Comp.Charge = diff;
         Dirty(xeno);
 
-        EnsureComp<RMCObstacleSlamImmuneComponent>(xeno);
+        _rmcObstacleSlamming.MakeImmune(xeno);
         _throwing.TryThrow(xeno, diff, 10);
     }
 

@@ -452,3 +452,66 @@
     contents:
       - id: CMM11Knife
         amount: 5
+
+- type: entity
+  parent: CMWebbingBlack
+  id: RMCWebbingPMC
+  suffix: PMC, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGauze10
+    - id: CMGauze10
+    # - id: CMSplint5
+    - id: CMFireExtinguisherPortable
+    - id: CMHealthAnalyzer
+
+- type: entity
+  parent: CMWebbingBlack
+  id: RMCWebbingPMCEngineer
+  suffix: PMC, Engineer, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMRE # TODO RMC14: PMC CFR ration
+    - id: RMCRangefinder
+    - id: RMCGrenadeBlastM12
+    - id: RMCTelescopicBaton
+    - id: RMCHandcuffs
+
+- type: entity
+  parent: CMWebbingBlack
+  id: RMCWebbingPMCMedic
+  suffix: PMC, Medic, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMRE # TODO RMC14: PMC CFR ration
+    - id: CMMRE # TODO RMC14: PMC CFR ration
+    - id: CMCrowbar # TODO RMC14: tactical prybar
+    - id: RMCGrenadeBlastM12
+    - id: RMCExplosivePlastic
+
+- type: entity
+  parent: CMWebbingBlack
+  id: RMCWebbingPMCGunner
+  suffix: PMC, Gunner, Filled
+  components:
+  - type: StorageFill
+    contents:
+    # - id: CMSplint5
+    - id: CMFireExtinguisherPortable
+    - id: CMMRE # TODO RMC14: PMC CFR ration
+    - id: RMCGrenadeBlastM12
+    - id: RMCPowerCellSmartgun
+
+- type: entity
+  parent: CMWebbingPouch
+  id: CMWebbingPouchRoyal
+  suffix: Filled, Royal
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMMaskGas # TODO RMC14 l7 gasmask
+      - id: RMCHeadRoyalBeret
+      - id: CMMRE # TODO RMC14 TSE ORP ration
