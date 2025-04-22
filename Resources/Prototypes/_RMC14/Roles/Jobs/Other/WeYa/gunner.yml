@@ -34,7 +34,6 @@
   hidden: true
 
 - type: entity
-  parent: MarkerBase
   id: RMCRandomHumanoidPMCGunner
   name: weya pmc ghost role gunner
   suffix: Spawner, Player
