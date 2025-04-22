@@ -185,6 +185,7 @@
     - ActionXenoResinSurge
     - ActionXenoTransferPlasma
     - ActionXenoDevolve
+  - type: XenoRegen
     critHealMultiplier: 0.3465  # 5% increased regeneration
     standHealingMultiplier: 0.42
     restHealMultiplier: 1.05
