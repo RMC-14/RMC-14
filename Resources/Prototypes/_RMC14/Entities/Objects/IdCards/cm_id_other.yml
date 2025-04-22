@@ -83,9 +83,7 @@
   name: executive corporate specialist ID card
   components:
   - type: PresetIdCard
-    job: null
-  - type: IdCard
-    jobTitle: rmc-job-title-corporate-executive-specialist
+    job: RMCCorporateExecutiveSpecialist
 
 - type: entity
   parent: CMIDCardLiaison
@@ -93,9 +91,7 @@
   name: executive corporate supervisor ID card
   components:
   - type: PresetIdCard
-    job: null
-  - type: IdCard
-    jobTitle: rmc-job-title-corporate-executive-supervisor
+    job: RMCCorporateExecutiveSupervisor
 
 - type: entity
   parent: CMIDCardLiaison
