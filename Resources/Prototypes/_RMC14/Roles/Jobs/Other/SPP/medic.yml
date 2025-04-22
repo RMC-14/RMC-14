@@ -31,7 +31,6 @@
   hidden: true
 
 - type: entity
-  parent: MarkerBase
   id: RMCRandomHumanoidSPPMedicHostile
   name: spp ghost role medic
   suffix: Spawner, Player, Hostile
@@ -43,7 +42,6 @@
     settings: RMCSPPMedic
 
 - type: entity
-  parent: MarkerBase
   id: RMCRandomHumanoidSPPMedicFriendly
   name: spp ghost role medic
   suffix: Spawner, Player, Friendly

@@ -32,7 +32,6 @@
   hidden: true
 
 - type: entity
-  parent: MarkerBase
   id: RMCRandomHumanoidSPPEngineerHostile
   name: spp ghost role engineer
   suffix: Spawner, Player, Hostile
@@ -44,7 +43,6 @@
     settings: RMCSPPEngineer
 
 - type: entity
-  parent: MarkerBase
   id: RMCRandomHumanoidSPPEngineerFriendly
   name: spp ghost role engineer
   suffix: Spawner, Player, Friendly
