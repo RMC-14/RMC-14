@@ -73,18 +73,18 @@ public sealed class DogtagsSystem : EntitySystem
         if (HasComp<XenoComponent>(args.Examiner) || memorial.Comp.Names.Count == 0)
             return;
 
-        string text = Loc.GetString("rmc-memorial-start") + " " + MemorialNamesList(memorial);
+        string text = Loc.GetString("rmc-memorial-start") + " " + MemorialNamesFormat(memorial.Comp.Names);
 
         args.PushMarkup(text, -5);
     }
 
-    public string MemorialNamesList(Entity<RMCMemorialComponent> memorial)
+    public string MemorialNamesFormat(List<string> memorialnames)
     {
         string list = "";
         int count = 1;
-        foreach (var name in memorial.Comp.Names)
+        foreach (var name in memorialnames)
         {
-            if (count == memorial.Comp.Names.Count)
+            if (count == memorialnames.Count)
                 list += name + ".";
             else
                 list += name + ", ";

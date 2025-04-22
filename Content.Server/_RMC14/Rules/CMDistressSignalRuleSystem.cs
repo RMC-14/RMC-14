@@ -1438,17 +1438,17 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             args.AddLine($"{Loc.GetString($"cm-distress-signal-{result.ToString().ToLower()}")}");
 
         var memorialQuery = EntityQueryEnumerator<RMCMemorialComponent>();
-        string fallen = string.Empty;
+        List<string> fallen = new();
 
-        while (memorialQuery.MoveNext(out var mUid, out var memorial))
+        while (memorialQuery.MoveNext(out var memorial))
         {
-            fallen += _dogtags.MemorialNamesList((mUid, memorial));
+            fallen.AddRange(memorial.Names);
         }
 
-        if (fallen != string.Empty)
+        if (fallen.Count != 0)
         {
             args.AddLine(string.Empty);
-            string memorium = Loc.GetString("rmc-distress-signal-fallen", ("fallen", fallen));
+            string memorium = Loc.GetString("rmc-distress-signal-fallen", ("fallen", _dogtags.MemorialNamesFormat(fallen)));
             args.AddLine(memorium);
         }
 
