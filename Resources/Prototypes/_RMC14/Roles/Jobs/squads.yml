@@ -185,3 +185,27 @@
     leaderIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: pmc_ld
+
+- type: entity
+  parent: SquadBase
+  id: SquadFreelancer
+  name: Freelancer
+  components:
+  - type: SquadTeam
+    color: "#4559F5"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    radio: Colony
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_free
+    canSupplyDrop: false
+    group: Freelancer
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: free_sl
