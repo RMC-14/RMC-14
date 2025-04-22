@@ -36,6 +36,12 @@
     sprite: Clothing/Ears/Headsets/base.rsi
 
 - type: entity
+  parent: ClothingHeadsetGrey
+  id: ClothingHeadsetPrison
+  name: prisoner headset
+  description: A headset used in brig.
+
+- type: entity
   parent: ClothingHeadset
   id: ClothingHeadsetCargo
   name: cargo headset
