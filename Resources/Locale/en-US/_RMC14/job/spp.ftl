@@ -3,8 +3,8 @@
                                              You are allowed to remember knowledge about the game in general, such as how to cook, how to use objects, etc.
                                              You are absolutely [color=red]NOT[/color] allowed to remember, say, the name, appearance, etc. of your previous character.
 
-rmc-ghost-role-information-spp-friendly-description = You are a soldier of the Socialist's Progressive People, a powerful socialist state that rivals the United Nations! Render assistance towards the UN Forces, Listen to your superior officers.
-rmc-ghost-role-information-spp-hostile-description = You are a soldier of the Socialist's Progressive People, a powerful socialist state that rivals the United Nations! Eliminate the UN Forces to ensure the SPP presence in this sector is continued. Listen to your superior officers and take over the main UNS vessel at all costs.
+rmc-ghost-role-information-spp-friendly-description = Render assistance towards the UN Forces, Listen to your superior officers.
+rmc-ghost-role-information-spp-hostile-description = Eliminate the UN Forces to ensure the SPP presence in this sector is continued. Listen to your superior officers and take over the main UNS vessel at all costs.
 
 rmc-ghost-name-spp-hostile-leader = SPP Squad Leader (Hostile)
 rmc-ghost-name-spp-friendly-leader = SPP Squad Leader (Friendly)

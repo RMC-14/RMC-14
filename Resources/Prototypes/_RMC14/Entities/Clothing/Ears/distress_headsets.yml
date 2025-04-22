@@ -87,3 +87,11 @@
     containers:
       key_slots:
       - RMCEncryptionKeyDukes
+  - type: GrantMarineIcons
+
+- type: entity
+  parent: RMCHeadsetDistressDukes
+  id: RMCHeadsetDistressDukesLeader
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 3

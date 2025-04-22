@@ -117,7 +117,7 @@
   - type: GhostRole
     name: rmc-ghost-name-pmc-standard
     description: rmc-ghost-role-information-pmc-description
-    rules: ghost-role-information-nonantagonist-rules
+    rules: rmc-ghost-role-information-pmc-rules
     reregister: false
     job: RMCPMCStandardSSG45
     raffle:
@@ -183,7 +183,7 @@
   - type: GhostRole
     name: rmc-ghost-name-pmc-standard
     description: rmc-ghost-role-information-pmc-description
-    rules: ghost-role-information-nonantagonist-rules
+    rules: rmc-ghost-role-information-pmc-rules
     reregister: false
     job: RMCPMCStandardM54C2
     raffle:
