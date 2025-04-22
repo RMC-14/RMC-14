@@ -15,7 +15,7 @@ public sealed class RMCGameRuleExtrasSystem : EntitySystem
     [Dependency] private readonly CommendationSystem _commendation = default!;
 
     /// <summary>
-    /// Shows names from memorials in the round end text. Returns true if there was any fallen to list.
+    /// Shows names from memorials in the round end text. Returns true if there was any fallen listed.
     /// </summary>
     /// <param name="endEvent"></param>
     /// <returns></returns>
