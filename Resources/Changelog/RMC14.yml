@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed a few medical pouches not being able to store pill bottles
-    type: Fix
-  - message: Fixed medical rig starting with ointment and not burn kits
-    type: Fix
-  id: 1136
-  time: '2024-12-22T10:11:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5195
-- author: Vermidia
-  changes:
   - message: Fixed defender's fortify and toggle crest sharing a cooldown.
     type: Fix
   - message: Fixed headbutt not doing reduced damage and having less range with crest
@@ -5534,5 +5525,21 @@
   id: 1638
   time: '2025-04-22T23:39:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/5617
+- author: Vermidia
+  changes:
+  - message: Information tags put into the memorial now show up at round end.
+    type: Add
+  - message: You can no longer strip dogtags off of people.
+    type: Fix
+  - message: You can take off info tags from dogtags in your hand if their owner no
+      longer exists, which will leave the dogtag behind on the ground to mark where
+      they died.
+    type: Add
+  - message: Info tags now look different from dogtags, and have sprites depending
+      on how many are joined.
+    type: Tweak
+  id: 1639
+  time: '2025-04-22T23:41:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6237
 Name: RMC14
 Order: -1
