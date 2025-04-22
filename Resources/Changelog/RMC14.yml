@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: Fixed lockers/closets having more HP than intended.
-    type: Fix
-  id: 1124
-  time: '2024-12-21T13:43:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5141
 - author: Vermidia
   changes:
   - message: Powerloader sprites inhand are now different depending on what was picked
@@ -5528,5 +5521,16 @@
   id: 1626
   time: '2025-04-21T01:38:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6210
+- author: Dygon
+  changes:
+  - message: Transferring contents between containers with item slots now adheres
+      to whitelists.
+    type: Fix
+  - message: Containers with item slots will now prioritize inserting themselves into
+      another container before attempting to insert their contents.
+    type: Fix
+  id: 1627
+  time: '2025-04-22T08:53:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6213
 Name: RMC14
 Order: -1
