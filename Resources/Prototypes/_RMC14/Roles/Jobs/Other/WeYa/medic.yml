@@ -31,6 +31,33 @@
         RMCSkillSurgery: 1
         RMCSkillEndurance: 3
     - type: SquadArmorWearer
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidPMCMedic
+  name: weya pmc ghost role medic
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCPMCMedic
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCPMCMedic
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-pmc-medic
+    description: rmc-ghost-role-information-pmc-description
+    rules: rmc-ghost-role-information-pmc-rules
+    reregister: false
+    job: RMCPMCMedic
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+    squad: SquadPMC
 
 - type: startingGear
   id: RMCJobPMCMedic
@@ -77,29 +104,3 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: pmc_md
-
-- type: entity
-  parent: MarkerBase
-  id: RMCRandomHumanoidPMCMedic
-  name: weya pmc ghost role medic
-  suffix: Spawner, Player
-  components:
-  - type: Sprite
-    layers:
-    - state: red
-  - type: RandomHumanoidSpawner
-    settings: RMCPMCMedic
-
-- type: randomHumanoidSettings
-  parent: EventHumanoid
-  id: RMCPMCMedic
-  components:
-  - type: GhostRole
-    name: rmc-ghost-name-pmc-medic
-    description: rmc-ghost-role-information-pmc-description
-    rules: ghost-role-information-nonantagonist-rules
-    reregister: false
-    job: RMCPMCMedic
-    raffle:
-      settings: short
-  - type: GhostRoleApplySpecial

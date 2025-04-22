@@ -9,29 +9,23 @@ rmc-ghost-role-information-spp-hostile-description = You are a soldier of the So
 rmc-ghost-name-spp-hostile-leader = SPP Squad Leader (Hostile)
 rmc-ghost-name-spp-friendly-leader = SPP Squad Leader (Friendly)
 rmc-job-name-spp-leader = Starshiy Serzhant
-rmc-job-prefix-spp-leader = SL
 
 rmc-ghost-name-spp-hostile-specialist = SPP Squad Specialist (Hostile)
 rmc-ghost-name-spp-friendly-specialist = SPP Squad Specialist (Friendly)
 rmc-job-name-spp-specialist = Serzhant
-rmc-job-prefix-spp-specialist = Spc
 
 rmc-ghost-name-spp-hostile-rifleman = SPP Squad Conscript (Hostile)
 rmc-ghost-name-spp-friendly-rifleman = SPP Squad Conscript (Friendly)
 rmc-job-name-spp-rifleman = Conscript
-rmc-job-prefix-spp-soldier = Sol
 
 rmc-ghost-name-spp-hostile-engineer = SPP Squad Sapper (Hostile)
 rmc-ghost-name-spp-friendly-engineer = SPP Squad Sapper (Friendly)
 rmc-job-name-spp-engineer = MSzht Engineer
-rmc-job-prefix-spp-engineer = Sap
 
 rmc-ghost-name-spp-hostile-medic = SPP Squad Medic (Hostile)
 rmc-ghost-name-spp-friendly-medic = SPP Squad Medic (Friendly)
 rmc-job-name-spp-medic = MSzht Medic
-rmc-job-prefix-spp-medic = Med
 
 rmc-ghost-name-spp-hostile-mp = SPP Military Police (Hostile)
 rmc-ghost-name-spp-friendly-mp = SPP Military Police (Friendly)
 rmc-job-name-spp-mp = Politsiya
-rmc-job-prefix-spp-military-police = MP

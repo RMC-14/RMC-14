@@ -33,6 +33,33 @@
         RMCSkillJtac: 1
     - type: SniperWhitelist
     - type: SquadArmorWearer
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidPMCSniper
+  name: weya pmc ghost role sniper
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCPMCSniper
+
+- type: randomHumanoidSettings
+  parent: EventHumanoid
+  id: RMCPMCSniper
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-pmc-sniper
+    description: rmc-ghost-role-information-pmc-description
+    rules: rmc-ghost-role-information-pmc-rules
+    reregister: false
+    job: RMCPMCSniper
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+    squad: SquadPMC
 
 - type: startingGear
   id: RMCJobPMCSniper
@@ -72,7 +99,6 @@
     - RMCMagazineSniperXM43E1AntiMateriel
     - RMCMagazineSniperXM43E1AntiMateriel
 
-
 - type: playTimeTracker
   id: RMCJobPMCSniper
 
@@ -82,29 +108,3 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: pmc_spec
-
-- type: entity
-  parent: MarkerBase
-  id: RMCRandomHumanoidPMCSniper
-  name: weya pmc ghost role sniper
-  suffix: Spawner, Player
-  components:
-  - type: Sprite
-    layers:
-    - state: red
-  - type: RandomHumanoidSpawner
-    settings: RMCPMCSniper
-
-- type: randomHumanoidSettings
-  parent: EventHumanoid
-  id: RMCPMCSniper
-  components:
-  - type: GhostRole
-    name: rmc-ghost-name-pmc-sniper
-    description: rmc-ghost-role-information-pmc-description
-    rules: ghost-role-information-nonantagonist-rules
-    reregister: false
-    job: RMCPMCSniper
-    raffle:
-      settings: short
-  - type: GhostRoleApplySpecial

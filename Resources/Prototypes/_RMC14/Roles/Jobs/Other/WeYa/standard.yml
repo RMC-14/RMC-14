@@ -29,19 +29,16 @@
         RMCSkillEngineer: 1
         RMCSkillEndurance: 5
     - type: SquadArmorWearer
-
-- type: playTimeTracker
-  id: RMCJobPMCStandardM63B2
+  hidden: true
 
 - type: entity
-  parent: MarkerBase
   id: RMCRandomHumanoidPMCStandardM63B2
-  name: weya pmc ghost role standard m63b2
-  suffix: Spawner, Player
+  name: weya pmc ghost role standard
+  suffix: Spawner, Player, M63B2
   components:
   - type: Sprite
-    layers:
-    - state: red
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
   - type: RandomHumanoidSpawner
     settings: RMCPMCStandardM63B2
 
@@ -52,12 +49,13 @@
   - type: GhostRole
     name: rmc-ghost-name-pmc-standard
     description: rmc-ghost-role-information-pmc-description
-    rules: ghost-role-information-nonantagonist-rules
+    rules: rmc-ghost-role-information-pmc-rules
     reregister: false
     job: RMCPMCStandardM63B2
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
+    squad: SquadPMC
 
 - type: startingGear
   id: RMCJobPMCStandardM63B2
@@ -101,18 +99,14 @@
   playTimeTracker: RMCJobPMCStandardSSG45
   startingGear: RMCJobPMCStandardSSG45
 
-- type: playTimeTracker
-  id: RMCJobPMCStandardSSG45
-
 - type: entity
-  parent: MarkerBase
   id: RMCRandomHumanoidPMCStandardSSG45
-  name: weya pmc ghost role standard ssg45
-  suffix: Spawner, Player
+  name: weya pmc ghost role standard
+  suffix: Spawner, Player, SSG45
   components:
   - type: Sprite
-    layers:
-    - state: red
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
   - type: RandomHumanoidSpawner
     settings: RMCPMCStandardSSG45
 
@@ -129,6 +123,7 @@
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
+    squad: SquadPMC
 
 - type: startingGear
   id: RMCJobPMCStandardSSG45
@@ -170,18 +165,14 @@
   playTimeTracker: RMCJobPMCStandardM54C2
   startingGear: RMCJobPMCStandardM54C2
 
-- type: playTimeTracker
-  id: RMCJobPMCStandardM54C2
-
 - type: entity
-  parent: MarkerBase
   id: RMCRandomHumanoidPMCStandardM54C2
-  name: weya pmc ghost role standard m54c2
-  suffix: Spawner, Player
+  name: weya pmc ghost role standard
+  suffix: Spawner, Player, M54C2
   components:
   - type: Sprite
-    layers:
-    - state: red
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
   - type: RandomHumanoidSpawner
     settings: RMCPMCStandardM54C2
 
@@ -198,6 +189,7 @@
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
+    squad: SquadPMC
 
 - type: startingGear
   id: RMCJobPMCStandardM54C2
@@ -232,7 +224,15 @@
     - CMMagazineRifleM54CAP
     - CMMagazineRifleM54CAP
 
-# Shared
+- type: playTimeTracker
+  id: RMCJobPMCStandardM63B2
+
+- type: playTimeTracker
+  id: RMCJobPMCStandardM54C2
+
+- type: playTimeTracker
+  id: RMCJobPMCStandardSSG45
+
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconPMCStandard

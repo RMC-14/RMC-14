@@ -21,8 +21,6 @@
       skills:
         RMCSkillFirearms: 1
     - type: SquadArmorWearer
-    - type: JobPrefix
-      prefix: rmc-job-prefix-spp-soldier
   hidden: true
 
 - type: entity
