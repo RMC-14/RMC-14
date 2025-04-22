@@ -4,14 +4,14 @@
   cost: 2
   storage:
     back:
-    - FoodSnackChocolateBar
+    - RMCFoodSnackChocolateBar
 
 - type: loadout
   id: CookieRMC
   cost: 2
   storage:
     back:
-    - FoodBakedCookie
+    - RMCFoodSnackCookie
 
 - type: loadout
   id: FortuneCookieRMC
@@ -25,7 +25,7 @@
   cost: 2
   storage:
     back:
-    - RMCFoodDonut
+    - RMCFoodSnackDonut
 
 # Food (packaged)
 - type: loadout
@@ -33,7 +33,7 @@
   cost: 2
   storage:
     back:
-    - FoodSnackSus
+    - RMCFoodSnackSosjerky
 
 - type: loadout
   id: MeatBarRMC
@@ -54,21 +54,21 @@
   cost: 2
   storage:
     back:
-    - RMCFoodSnackBurritoPackaged
+    - RMCFoodSnackPackagedBurritoWrapped
 
 - type: loadout
   id: CheeseburgerRMC
   cost: 2
   storage:
     back:
-    - RMCFoodSnackCheeseburgerPackaged
+    - RMCFoodSnackPackagedCheeseburgerWrapped
 
 - type: loadout
   id: HotdogRMC
   cost: 2
   storage:
     back:
-    - RMCFoodSnackHotdogPackaged
+    - RMCFoodSnackPackagedHotdogWrapped
 
 - type: loadout
   id: PepperChipsRMC

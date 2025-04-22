@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0525b5ada7da1afcd9b260e76d5fea01500d9c8d/icons/obj/items/food/condiments.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0525b5ada7da1afcd9b260e76d5fea01500d9c8d/icons/obj/items/food/condiments.dmi, https://github.com/cmss13-devs/cmss13/blob/800f3950414b25174f1e81278dfe1cde4fbbf281/icons/mob/humans/onmob/inhands/items/food_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/800f3950414b25174f1e81278dfe1cde4fbbf281/icons/mob/humans/onmob/inhands/items/food_righthand.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -69,6 +69,30 @@
     },
     {
       "name": "oliveoil"
+    },
+    {
+      "name": "flour-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "sugar-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "rice-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "flour-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "sugar-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "rice-inhand-right",
+      "directions": 4
     }
   ]
 }

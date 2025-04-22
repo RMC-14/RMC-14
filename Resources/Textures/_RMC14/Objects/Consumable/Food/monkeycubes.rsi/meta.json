@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/800f3950414b25174f1e81278dfe1cde4fbbf281/icons/obj/items/food/monkeycubes.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "monkeycubewrap"
+    },
+    {
+      "name": "monkeycube"
+    },
+    {
+      "name": "mousecube"
+    }
+  ]
+}
