@@ -1,7 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
-using Content.Server._RMC14.Commendations;
 using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.MapInsert;
 using Content.Server._RMC14.Marines;
@@ -41,7 +40,6 @@ using Content.Shared._RMC14.Item;
 using Content.Shared._RMC14.Light;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines;
-using Content.Shared._RMC14.Marines.Dogtags;
 using Content.Shared._RMC14.Marines.HyperSleep;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Rules;
@@ -99,7 +97,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IBanManager _bans = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly CommendationSystem _commendation = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly ContainerSystem _containers = default!;
@@ -146,7 +143,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly IntelSystem _intel = default!;
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
     [Dependency] private readonly RMCAmbientLightSystem _rmcAmbientLight = default!;
-    [Dependency] private readonly DogtagsSystem _dogtags = default!;
+    [Dependency] private readonly RMCGameRuleExtrasSystem _gameRulesExtras = default!;
 
 
     private readonly HashSet<string> _operationNames = new();
@@ -1437,49 +1434,15 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         else
             args.AddLine($"{Loc.GetString($"cm-distress-signal-{result.ToString().ToLower()}")}");
 
-        var memorialQuery = EntityQueryEnumerator<RMCMemorialComponent>();
-        List<string> fallen = new();
+        args.AddLine(string.Empty);
 
-        while (memorialQuery.MoveNext(out var memorial))
-        {
-            fallen.AddRange(memorial.Names);
-        }
-
-        if (fallen.Count != 0)
-        {
+        if (_gameRulesExtras.MemorialEntry(ref args))
             args.AddLine(string.Empty);
-            string memorium = Loc.GetString("rmc-distress-signal-fallen", ("fallen", _dogtags.MemorialNamesFormat(fallen)));
-            args.AddLine(memorium);
-        }
 
-
-        var commendations = _commendation.GetCommendations();
-        var marineAwards = commendations.Where(c => c.Type == CommendationType.Medal).ToArray();
-        if (marineAwards.Length > 0)
-        {
+        if (_gameRulesExtras.MarineAwards(ref args))
             args.AddLine(string.Empty);
-            args.AddLine(Loc.GetString("cm-distress-signal-medals"));
-            foreach (var award in marineAwards)
-            {
-                // TODO RMC14 rank
-                args.AddLine($"{award.Receiver} is awarded the {award.Name}: '{award.Text}'");
-            }
 
-            args.AddLine(string.Empty);
-        }
-
-        var xenoAwards = commendations.Where(c => c.Type == CommendationType.Jelly).ToArray();
-        if (xenoAwards.Length > 0)
-        {
-            args.AddLine(string.Empty);
-            args.AddLine(Loc.GetString("cm-distress-signal-jellies"));
-            foreach (var award in xenoAwards)
-            {
-                args.AddLine($"{award.Receiver} is awarded the {award.Name}: '{award.Text}' by {award.Giver}");
-            }
-
-            args.AddLine(string.Empty);
-        }
+        _gameRulesExtras.XenoAwards(ref args);
     }
 
     protected override void ActiveTick(EntityUid uid, CMDistressSignalRuleComponent component, GameRuleComponent gameRule, float frameTime)
