@@ -103,9 +103,7 @@
   name: interstellar commerce bureau liaison ID card
   components:
   - type: PresetIdCard
-    job: null
-  - type: IdCard
-    jobTitle: rmc-job-title-interstellar-commerce-bureau-liaison
+    job: RMCICBLiaison
 
 - type: entity
   parent: CMIDCardBase

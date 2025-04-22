@@ -1,22 +1,42 @@
-﻿- type: entity
-  parent: MarkerBase
-  id: RMCSpawnerICBLiaison
-  name: interstellar commerce bureau liaison spawner
-  suffix: Spawner
-  components:
-  - type: Sprite
-    layers:
-    - state: red
-    - sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi
-      state: icon
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCRandomHumanoidICBLiaison
+﻿# ICB Liaison
+- type: job
+  parent: CMJobBase
+  id: RMCICBLiaison
+  name: rmc-job-name-icb
+  description: rmc-ghost-role-information-icb-description
+  playTimeTracker: RMCJobICBLiaison
+  ranks:
+    RMCRankICBCorporateLiaison: [ ]
+  startingGear: RMCGearICBLiaison
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  accessGroups:
+  - RMCAccessWeYa
+  - CMAccessCommand
+  - CMAccessResearch
+  - CMAccessMedical
+  - CMAccessMedPrep
+  - CMAccessColonyPublic
+  - CMAccessColonyResearch
+  - CMAccessColonyEngineering
+  - CMAccessColonyLogistics
+  - CMAccessColonyBrig
+  - CMAccessColonyMedbay
+#  - TODO RMC14 WeYa flight
+  - CMAccessColonyCommand
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillVehicles: 1
+  hasIcon: false
+  hidden: true
 
 - type: entity
   id: RMCRandomHumanoidICBLiaison
   name: interstellar commerce bureau liaison ghost role
-  suffix: Role
+  suffix: Spawner, Player, Neutral
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi
@@ -29,18 +49,14 @@
   id: RMCICBLiaison
   components:
   - type: GhostRole
-    name: rmc-ghost-role-information-interstellar-commerce-bureau-liaison-name
-    description: rmc-ghost-role-information-interstellar-commerce-bureau-liaison-description
-    rules: ghost-role-information-nonantagonist-rules
+    name: rmc-ghost-name-icb
+    description: rmc-ghost-role-information-icb-description
+    rules: rmc-ghost-role-information-icb-rules
+    reregister: false
+    job: RMCICBLiaison
     raffle:
       settings: short
-  - type: Loadout
-    prototypes: [ RMCGearICBLiaison ]
-  - type: Skills
-    skills:
-      RMCSkillVehicles: 1
-  - type: JobPrefix
-    prefix: rmc-ghost-role-information-interstellar-commerce-bureau-liaison-job-prefix
+  - type: GhostRoleApplySpecial
 
 - type: startingGear
   id: RMCGearICBLiaison
@@ -59,3 +75,6 @@
     suitStorage: RMCFlashlight
   inhand:
   - CMClipboard
+
+- type: playTimeTracker
+  id: RMCJobICBLiaison
