@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: Rainbeon
-  changes:
-  - message: Fixed the Scout's M4SPR custom battle rifle being referred to by the
-      wrong name in the WS vendor and equipment case.
-    type: Fix
-  id: 1132
-  time: '2024-12-22T03:21:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5192
-- author: Rainbeon
-  changes:
-  - message: Fixed Fire Extinguishers not removing the acid effect on Marines when
-      spraying them.
-    type: Fix
-  id: 1133
-  time: '2024-12-22T05:25:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5194
 - author: Vermidia
   changes:
   - message: Added medical kit pouch to corpsman gear rack and requisitions.
@@ -5527,5 +5511,24 @@
   id: 1634
   time: '2025-04-22T23:30:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6229
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed vamp lurker tail jab not doing 50 damage (was 35)
+    type: Fix
+  - message: Fixed vamp lurker tail jab slowing the lurker
+    type: Fix
+  - message: Wall slamming a marine with tail jab will now stun and slow them for
+      0.5 seconds
+    type: Tweak
+  id: 1635
+  time: '2025-04-22T23:32:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6225
+- author: DummeHytteOst
+  changes:
+  - message: Weeds and nodes now have their intended .333 damage reduction multiplier.
+    type: Fix
+  id: 1636
+  time: '2025-04-22T23:33:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6215
 Name: RMC14
 Order: -1
