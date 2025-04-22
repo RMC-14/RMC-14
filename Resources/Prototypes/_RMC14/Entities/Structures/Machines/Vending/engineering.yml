@@ -79,20 +79,20 @@
     sections:
     - name: Circuitboards
       entries:
-      - id: FireAlarmElectronics
-        amount: 5
+#     - id: FireAlarmElectronics
+#       amount: 5
       - id: CMAPCElectronics
         amount: 6
       - id: CMAutolatheMachineCircuitboard
         amount: 2
-      - id: TelecomServerCircuitboard
-        amount: 1
-      - id: CrewMonitoringComputerCircuitboard
-        amount: 2
-      - id: IDComputerCircuitboard
-        amount: 2
-      - id: StationRecordsComputerCircuitboard
-        amount: 2
+#     - id: TelecomServerCircuitboard
+#       amount: 1
+#     - id: CrewMonitoringComputerCircuitboard
+#       amount: 2
+#     - id: IDComputerCircuitboard
+#       amount: 2
+#     - id: StationRecordsComputerCircuitboard
+#       amount: 2
 #     - id: Supply ordering console
 #     - id: Reserach data terminal
 #     - id: CMPortableGeneratorPacmanMachineCircuitBoard
