@@ -96,7 +96,7 @@
     settings: RMCPMCSniper
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCPMCSniper
   components:
   - type: GhostRole

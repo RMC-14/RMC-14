@@ -46,7 +46,7 @@
     settings: RMCPMCStandardM63B2
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCPMCStandardM63B2
   components:
   - type: GhostRole
@@ -117,7 +117,7 @@
     settings: RMCPMCStandardSSG45
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCPMCStandardSSG45
   components:
   - type: GhostRole
@@ -186,7 +186,7 @@
     settings: RMCPMCStandardM54C2
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCPMCStandardM54C2
   components:
   - type: GhostRole

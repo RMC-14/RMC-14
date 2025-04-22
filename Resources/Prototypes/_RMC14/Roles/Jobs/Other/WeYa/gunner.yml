@@ -81,7 +81,7 @@
     settings: RMCPMCGunner
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCPMCGunner
   components:
   - type: GhostRole
