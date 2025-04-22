@@ -38,8 +38,8 @@
   suffix: Spawner, Player, Hostile
   components:
   - type: Sprite
-    layers:
-    - state: red
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
   - type: RandomHumanoidSpawner
     settings: RMCSPPEngineer
 
@@ -50,8 +50,8 @@
   suffix: Spawner, Player, Friendly
   components:
   - type: Sprite
-    layers:
-    - state: red
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: spp_spawn
   - type: RandomHumanoidSpawner
     settings: RMCSPPEngineerFriendly
 
