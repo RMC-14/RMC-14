@@ -19,7 +19,6 @@
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 50
-
     baseFireModes:
     - FullAuto
   - type: Sprite
