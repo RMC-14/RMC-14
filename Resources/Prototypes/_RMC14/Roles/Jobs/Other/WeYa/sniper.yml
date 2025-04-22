@@ -87,7 +87,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidPMCSniper
   name: weya pmc ghost role sniper
-  suffix: Spawner, Player
+  suffix: We-Ya PMC
   components:
   - type: Sprite
     layers:

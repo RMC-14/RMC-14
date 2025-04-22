@@ -66,7 +66,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidPMCDirector
   name: weya pmc ghost role director
-  suffix: Spawner, Player
+  suffix: We-Ya PMC
   components:
   - type: Sprite
     layers:
