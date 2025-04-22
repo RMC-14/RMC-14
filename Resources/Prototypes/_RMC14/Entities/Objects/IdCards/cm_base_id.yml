@@ -1,4 +1,4 @@
-﻿# dogtag base, you should be able to remove one of the tags for the memorial later
+# dogtag base, you should be able to remove one of the tags for the memorial later
 - type: entity
   parent: [Clothing, CMIDCardBase]
   id: CMIDCardStandardDogtag
@@ -33,6 +33,7 @@
           False: { state: "dogtag" }
   - type: Corrodible
     isCorrodible: false
+  - type: RMCUnstrippable
 
 
 - type: entity
@@ -44,9 +45,54 @@
   - type: Item
     size: Tiny
   - type: Sprite
-    sprite: _RMC14/Objects/CMIDs/dogtags.rsi
-    state: dogtag_taken
+    sprite: _RMC14/Objects/CMIDs/infotags.rsi
+    layers:
+        - state: dogtag_1
+          map: ["enum.InfoTagVisuals.Number"]
   - type: InformationTags
+  - type: Corrodible
+    isCorrodible: false
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.InfoTagVisuals.Number:
+        enum.InfoTagVisuals.Number:
+          0: { state: "dogtag_0" }
+          1: { state: "dogtag_1" }
+          2: { state: "dogtag_2" }
+          3: { state: "dogtag_3" }
+          4: { state: "dogtag_4" }
+          5: { state: "dogtag_5" }
+          6: { state: "dogtag_6" }
+          7: { state: "dogtag_7" }
+          8: { state: "dogtag_8" }
+          9: { state: "dogtag_9" }
+          10: { state: "dogtag_10" }
+          11: { state: "dogtag_11" }
+          12: { state: "dogtag_12" }
+          13: { state: "dogtag_13" }
+          14: { state: "dogtag_14" }
+          15: { state: "dogtag_15" }
+          16: { state: "dogtag_16" }
+          17: { state: "dogtag_17" }
+          18: { state: "dogtag_18" }
+          19: { state: "dogtag_19" }
+          20: { state: "dogtag_20" }
+          21: { state: "dogtag_21" }
+          22: { state: "dogtag_22" }
+          23: { state: "dogtag_23" }
+          24: { state: "dogtag_24" }
+
+- type: entity
+  id: RMCDogtagProp
+  name: dog tag
+  description: A fallen marine's dog tag, no body in sight.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/dogtags.rsi
+    state: dogtag_ground
+  - type: Corrodible
+    isCorrodible: false
 
 # generic id bases, they get their information replaced by the job.
 - type: entity

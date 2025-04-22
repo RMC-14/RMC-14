@@ -47,3 +47,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/25a9173171b88e311cc6be1c6a15930b86f2cbff/sound/misc/attention_jingle.ogg"
+
+- files: ["unidentified_lifesigns.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/14c5cbb3b77f7ce43e5571355784cb4abcd021ea/sound/AI/unidentified_lifesigns.ogg"

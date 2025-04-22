@@ -1,31 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Added medical kit pouch to corpsman gear rack and requisitions.
-    type: Add
-  id: 1134
-  time: '2024-12-22T05:25:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/3545
-- author: MACMAN2003
-  changes:
-  - message: Added the CO's M59A prototype rifle.
-    type: Add
-  - message: Gave the ML66A smart gun the option to disable its IFF.
-    type: Add
-  id: 1135
-  time: '2024-12-22T05:37:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4880
-- author: Vermidia
-  changes:
-  - message: Fixed a few medical pouches not being able to store pill bottles
-    type: Fix
-  - message: Fixed medical rig starting with ointment and not burn kits
-    type: Fix
-  id: 1136
-  time: '2024-12-22T10:11:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5195
-- author: Vermidia
-  changes:
   - message: Fixed defender's fortify and toggle crest sharing a cooldown.
     type: Fix
   - message: Fixed headbutt not doing reduced damage and having less range with crest
@@ -5530,5 +5505,41 @@
   id: 1636
   time: '2025-04-22T23:33:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6215
+- author: to4no_fix
+  changes:
+  - message: The dropship system now automatically scans for xenomorphs on board after
+      take off. If any are detected (excluding corpses), a Red Alert is set and marines
+      are notified with a global announcement.
+    type: Add
+  id: 1637
+  time: '2025-04-22T23:37:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6184
+- author: Dygon
+  changes:
+  - message: Evacuation doors(pods, lifeboats) are now unable to be pryed open while
+      locked.
+    type: Fix
+  - message: Being outside the docking area when a lifeboat has left will now instantly
+      kill you.
+    type: Fix
+  id: 1638
+  time: '2025-04-22T23:39:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5617
+- author: Vermidia
+  changes:
+  - message: Information tags put into the memorial now show up at round end.
+    type: Add
+  - message: You can no longer strip dogtags off of people.
+    type: Fix
+  - message: You can take off info tags from dogtags in your hand if their owner no
+      longer exists, which will leave the dogtag behind on the ground to mark where
+      they died.
+    type: Add
+  - message: Info tags now look different from dogtags, and have sprites depending
+      on how many are joined.
+    type: Tweak
+  id: 1639
+  time: '2025-04-22T23:41:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6237
 Name: RMC14
 Order: -1
