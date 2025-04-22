@@ -12,6 +12,7 @@ using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Slow;
 using Content.Shared.Throwing;
 using Content.Shared._RMC14.Xenonids.Stab;
+using Content.Shared._RMC14.Damage.ObstacleSlamming;
 
 namespace Content.Shared._RMC14.Xenonids.TailJab;
 
@@ -28,6 +29,7 @@ public sealed class XenoTailJabSystem : EntitySystem
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoRotateSystem _rotate = default!;
+    [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
 
     public override void Initialize()
     {
@@ -62,7 +64,8 @@ public sealed class XenoTailJabSystem : EntitySystem
         }
 
         _rmcMelee.DoLunge(xeno, target);
-        _rmcSlow.TrySlowdown(xeno, xeno.Comp.SlowdownTime);
+        _rmcSlow.TrySlowdown(target, xeno.Comp.SlowdownTime);
+        _rmcObstacleSlamming.ApplyBonuses(target, xeno.Comp.WallSlamStunTime, xeno.Comp.WallSlamSlowdownTime);
 
         var origin = _transform.GetMoverCoordinates(xeno);
         var targetCoords = _transform.GetMoverCoordinates(target);

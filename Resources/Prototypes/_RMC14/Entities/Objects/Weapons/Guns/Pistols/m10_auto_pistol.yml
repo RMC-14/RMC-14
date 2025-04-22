@@ -13,10 +13,16 @@
     availableModes:
     - FullAuto
   - type: RMCSelectiveFire
-    scatterWielded: 12
-    scatterUnwielded: 13
+    scatterWielded: 14
+    scatterUnwielded: 16
     baseFireRate: 10
     burstScatterMult: 4
+    modifiers:
+      FullAuto:
+        maxScatterModifier: 16
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 50
     baseFireModes:
     - FullAuto
   - type: Sprite
