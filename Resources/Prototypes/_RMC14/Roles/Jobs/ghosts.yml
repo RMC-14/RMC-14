@@ -48,7 +48,7 @@
         Arms: 0.25
         Legs: 0.25
       Feroxi:
-        Head: 0.5
+        Head: 0.25
         HeadTop: 0.75
         HeadSide: 0.25
         Chest: 0.5
@@ -56,14 +56,14 @@
         Arms: 0.25
         Legs: 0.25
       Rodentia:
-        Head: 1
+        Head: 0.25
         HeadTop: 1
         HeadSide: 1
         Tail: 1
         Arms: 1
         Legs: 1
       Vulpkanin:
-        Head: 0.5
+        Head: 0.25
         HeadTop: 0.5
         Chest: 0.25
         Tail: 0.5
