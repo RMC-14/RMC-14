@@ -1,16 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Powerloader sprites inhand are now different depending on what was picked
-      up.
-    type: Add
-  - message: You can now transfer ammo between dropship ammo boxes with a powerloader.
-    type: Add
-  id: 1125
-  time: '2024-12-21T13:45:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5156
-- author: Vermidia
-  changes:
   - message: Fixed acid spit having the same sprite as neuro spits
     type: Fix
   - message: Added the missing ability for mature queens to use neurotoxin (like sentinels
@@ -5532,5 +5522,17 @@
   id: 1627
   time: '2025-04-22T08:53:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6213
+- author: Vermidia
+  changes:
+  - message: Fixed tunnels blocking travel if they were too full. They now block travel
+      if the destination tunnel is too full.
+    type: Fix
+  - message: Fixed dead parasites getting stuck in tunnels.
+    type: Fix
+  - message: Non-hivemembers can now examine tunnels to see if they contain something.
+    type: Fix
+  id: 1628
+  time: '2025-04-22T23:23:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6231
 Name: RMC14
 Order: -1
