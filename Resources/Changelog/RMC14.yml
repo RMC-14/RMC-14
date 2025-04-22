@@ -1,48 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed acid spit having the same sprite as neuro spits
-    type: Fix
-  - message: Added the missing ability for mature queens to use neurotoxin (like sentinels
-      but doesn't care about armor) or acid (spitter charged spit) spits.
-    type: Add
-  id: 1126
-  time: '2024-12-21T13:48:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5068
-- author: blueDev2
-  changes:
-  - message: Added Healer, a drone strain that can use up it's own health to heal
-      allied xenos. They can also instantly sacrifice themselves to heal an allied
-      xeno by 75% of their current health.
-    type: Add
-  id: 1127
-  time: '2024-12-21T14:10:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4947
-- author: DummeHytteOst
-  changes:
-  - message: Fixed extinguisher spray going into disposal.
-    type: Fix
-  id: 1128
-  time: '2024-12-22T01:05:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5188
-- author: Rainbeon
-  changes:
-  - message: You now receive a popup when others pat out fire on you.
-    type: Add
-  - message: Everyone else now receives a popup when a fire is patted out on others,
-      too.
-    type: Add
-  id: 1129
-  time: '2024-12-22T01:04:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5186
-- author: blueDev2
-  changes:
-  - message: Add Hive Whisperer strain of Hivelord, a Xeno able to create resin structures
-      from a distance.
-    type: Add
-  id: 1130
-  time: '2024-12-22T01:17:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4926
 - author: MetalSage
   changes:
   - message: Added engineering kit
@@ -5534,5 +5490,40 @@
   id: 1628
   time: '2025-04-22T23:23:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6231
+- author: Vermidia
+  changes:
+  - message: Fixed Ravager's empower range being too small (4 > 5.078)
+    type: Fix
+  id: 1629
+  time: '2025-04-22T23:27:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6242
+- author: MetalSage
+  changes:
+  - message: The XM51 case no longer holds 8 of any item.
+    type: Fix
+  id: 1630
+  time: '2025-04-22T23:26:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6241
+- author: Dygon
+  changes:
+  - message: Invisible snipers now have their mob collision disabled.
+    type: Fix
+  id: 1631
+  time: '2025-04-22T23:27:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6236
+- author: SigmaTheDragon
+  changes:
+  - message: Fixed floating pixels in two Eggsac Carrier sprites.
+    type: Fix
+  id: 1632
+  time: '2025-04-22T23:29:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6233
+- author: Dygon
+  changes:
+  - message: Fixed shooting with the M13 auto pistol having too much scatter.
+    type: Fix
+  id: 1633
+  time: '2025-04-22T23:28:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6235
 Name: RMC14
 Order: -1
