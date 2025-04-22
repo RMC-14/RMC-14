@@ -15,9 +15,9 @@
     burstScatterMult: 4
     modifiers:
       FullAuto:
-        maxScatterModifier: 8
+        maxScatterModifier: 16
         useBurstScatterMult: true
-        unwieldedScatterMultiplier: 3
+        unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 50
 
     baseFireModes:
