@@ -227,7 +227,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void OnTrackedChanged<T>(Entity<TacticalMapTrackedComponent> ent, ref T args)
     {
-        if (_timing.ApplyingState)
+        if (_timing.ApplyingState || TerminatingOrDeleted(ent))
             return;
 
         UpdateActiveTracking(ent);
