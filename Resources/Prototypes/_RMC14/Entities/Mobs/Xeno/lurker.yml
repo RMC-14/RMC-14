@@ -158,7 +158,7 @@
     throwRange: 0.5
     damage:
       groups:
-        Brute: 35
+        Brute: 50
   - type: XenoFlurry
     damage:
       groups:
