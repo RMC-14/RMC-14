@@ -3,18 +3,11 @@ using Content.Server.Humanoid.Systems;
 using Content.Shared._RMC14.Humanoid.Markings;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
-using Content.Shared.Humanoid.Prototypes;
-using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Robust.Shared.Serialization;
 
 namespace Content.Server._RMC14.Humanoid.Markings;
 
-/// <summary>
-/// Adds an action to toggle wagging animation for tails markings that supporting this
-/// </summary>
-public sealed class WaggingSystem : EntitySystem
+public sealed class RMCRandomMarkingsSystem : EntitySystem
 {
     [Dependency] private readonly HumanoidAppearanceSystem _humanoidAppearance = default!;
     [Dependency] private readonly MarkingManager _markings = default!;
