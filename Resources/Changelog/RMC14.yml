@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: MACMAN2003
-  changes:
-  - message: Added the CO's M59A prototype rifle.
-    type: Add
-  - message: Gave the ML66A smart gun the option to disable its IFF.
-    type: Add
-  id: 1135
-  time: '2024-12-22T05:37:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/4880
 - author: Vermidia
   changes:
   - message: Fixed a few medical pouches not being able to store pill bottles
@@ -5532,5 +5523,16 @@
   id: 1637
   time: '2025-04-22T23:37:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6184
+- author: Dygon
+  changes:
+  - message: Evacuation doors(pods, lifeboats) are now unable to be pryed open while
+      locked.
+    type: Fix
+  - message: Being outside the docking area when a lifeboat has left will now instantly
+      kill you.
+    type: Fix
+  id: 1638
+  time: '2025-04-22T23:39:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5617
 Name: RMC14
 Order: -1
