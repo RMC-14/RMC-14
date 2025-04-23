@@ -1,26 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed defender's fortify and toggle crest sharing a cooldown.
-    type: Fix
-  - message: Fixed headbutt not doing reduced damage and having less range with crest
-      lowered, and not having lower knockback normally.
-    type: Fix
-  - message: Fixed headbutt not having slight armor piercing.
-    type: Fix
-  - message: Fixed defender's explosion armor from fortify being applied differently
-      than other similar explosion armor increasing abilities. (Damage from explosions
-      may be slightly higher).
-    type: Fix
-  - message: Defenders can now attack structures while fortified. They can attack
-      mobs using their tail "slam" (tail stab but renamed).
-    type: Fix
-  - message: Added steelcrest defender. They can move and headbutt while fortified
-      at the cost of less armor from it.
-    type: Add
-  id: 1137
-  time: '2024-12-22T10:50:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5158
 - author: paige404
   changes:
   - message: The Rodentia species are now enlisted in the marines.
@@ -5541,5 +5519,24 @@
   id: 1639
   time: '2025-04-22T23:41:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6237
+- author: DrSmugleaf
+  changes:
+  - message: 'Fixed 4 performance issues: One with long rounds getting worse as entities
+      outside your vision that were colliding before exiting it keep having their
+      collision computed for the rest of the round, one when applying large XenoComponent
+      states, one with leftover colliding dead mobs having part of their collision
+      still ran despite being dead, and one with the client running code over the
+      actions of all entities on the screen, instead of just your own.'
+    type: Fix
+  - message: Fixed parasites leaving you blinded after they fall off. Some things
+      are too soul to be true, even in 13.
+    type: Fix
+  - message: Fixed We-Ya PMCs not having unique suffixes on the entity spawn menu.
+    type: Fix
+  - message: Fixed getting stuck in the dropship after unbuckling on inner seats.
+    type: Fix
+  id: 1640
+  time: '2025-04-23T00:02:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6244
 Name: RMC14
 Order: -1
