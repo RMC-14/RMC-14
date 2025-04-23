@@ -535,8 +535,6 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
                 var victimComp = EnsureComp<VictimInfectedComponent>(infectedVictim);
                 SetHive((infectedVictim, victimComp), _hive.GetHive(uid)?.Owner);
 
-                _status.TryAddStatusEffect(infectedVictim, "TemporaryBlindness", para.ParalyzeTime, true, "TemporaryBlindness");
-
                 // TODO RMC14 also do damage to the parasite
                 EnsureComp<ParasiteSpentComponent>(uid);
 

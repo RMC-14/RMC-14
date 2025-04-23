@@ -63,6 +63,7 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: RadiationGridResistance
+    - type: RMCSpawnEntityOnFTLStart
 - proto: CMLightFixtureAlwaysPowered
   entities:
   - uid: 116
