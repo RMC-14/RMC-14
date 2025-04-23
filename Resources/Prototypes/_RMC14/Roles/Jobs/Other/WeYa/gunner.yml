@@ -64,7 +64,7 @@
   equipment:
     id: RMCIDCardPMC
     ears: RMCHeadsetDistressPMC
-    jumpsuit: RMCJumpsuitVeteranPMC
+    jumpsuit: RMCJumpsuitVeteranPMCGunner
     outerClothing: CMArmorM4PMCSmartGunHarness
     gloves: RMCHandsVeteranPMC
     head: ArmorHelmetPMCGunner
@@ -75,8 +75,6 @@
     pocket2: RMCPouchDrumPMCFill
     belt: RMCBeltSmartGunOperatorPistolPMCFilled
     eyes: RMCGlassesSmartGunSight
-  inhand:
-  - RMCWebbingPMCGunner
   storage:
     outerClothing:
     - CMMagazinePistolMK80

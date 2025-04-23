@@ -78,8 +78,6 @@
     suitstorage: RMCXM43E1AntiMaterielRifle # TODO RMC14: PMC re-sprite
     pocket1: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
     pocket2: RMCPouchFirstAidPMCFill
-  inhand:
-  - RMCWebbingPMC
   storage:
     back:
     - CMCrowbar # TODO RMC14: tactical prybar

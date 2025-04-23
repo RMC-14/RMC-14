@@ -73,8 +73,6 @@
     pocket1: RMCPouchFirstAidPMCFill
     pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
     suitstorage: RMCWeaponSMGM63B2
-  inhand:
-  - RMCWebbingPMC
   storage:
     back:
     - RMCGrenadeBlastM12
@@ -141,8 +139,6 @@
     pocket1: RMCPouchFirstAidPMCFill
     pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
     suitstorage: WeaponRifleSSG45
-  inhand:
-  - RMCWebbingPMC
   storage:
     back:
     - RMCGrenadeBlastM12
@@ -207,8 +203,6 @@
     pocket1: RMCPouchFirstAidPMCFill
     pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
     suitstorage: RMCWeaponRifleM54C2
-  inhand:
-  - RMCWebbingPMC
   storage:
     back:
     - RMCGrenadeBlastM12

@@ -76,8 +76,6 @@
     back: RMCBackpackWelderPMC
     pocket1: RMCPouchToolsSocFill
     pocket2: RMCPouchConstructionFillFull
-  inhand:
-  - RMCWebbingPMCEngineer
   storage:
     belt:
     - RMCMagazineRifleSSG45Extended

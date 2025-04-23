@@ -64,7 +64,7 @@
   equipment:
     id: RMCIDCardPMC
     ears: RMCHeadsetDistressPMC
-    jumpsuit: RMCJumpsuitVeteranPMC
+    jumpsuit: RMCJumpsuitVeteranPMCMedic
     outerClothing: CMArmorM4PMCLight
     gloves: RMCHandsVeteranPMC
     head: ArmorHelmetPMC
@@ -76,8 +76,6 @@
     suitstorage: RMCWeaponSMGM63B2
     pocket1: RMCPouchMedkitPMCFilled
     pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
-  inhand:
-  - RMCWebbingPMCMedic
   storage:
     outerClothing:
     - CMMagazineSMGM63Ext

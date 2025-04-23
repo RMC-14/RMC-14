@@ -85,8 +85,6 @@
     suitstorage: RMCWeaponRifleM54C2
     pocket1: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
     pocket2: RMCPouchFirstAidPMCFill
-  inhand:
-  - RMCWebbingPMC
   storage:
     back:
     - CMStunbaton
