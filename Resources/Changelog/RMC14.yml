@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: paige404
-  changes:
-  - message: The Rodentia species are now enlisted in the marines.
-    type: Add
-  id: 1138
-  time: '2024-12-22T11:33:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5174
 - author: DrSmugleaf
   changes:
   - message: Added new xeno sprites by Aleksh and Sigma Draconis.
@@ -5538,5 +5531,12 @@
   id: 1640
   time: '2025-04-23T00:02:27.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6244
+- author: MetalSage
+  changes:
+  - message: Fixed stuck in raised rock edges on Hybrisa
+    type: Fix
+  id: 1641
+  time: '2025-04-23T00:45:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6239
 Name: RMC14
 Order: -1
