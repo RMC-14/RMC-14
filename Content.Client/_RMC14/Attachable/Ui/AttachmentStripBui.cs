@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Attachable;
+using Robust.Client.UserInterface;
 
 namespace Content.Client._RMC14.Attachable.Ui;
 
@@ -10,7 +11,7 @@ public sealed class AttachmentStripBui(EntityUid owner, Enum uiKey) : BoundUserI
     {
         base.Open();
 
-        _menu = new AttachableHolderStripMenu();
+        _menu = this.CreateWindow<AttachableHolderStripMenu>();
 
         var metaQuery = EntMan.GetEntityQuery<MetaDataComponent>();
         if (metaQuery.TryGetComponent(Owner, out var metadata))
@@ -26,9 +27,6 @@ public sealed class AttachmentStripBui(EntityUid owner, Enum uiKey) : BoundUserI
         if (state is not AttachableHolderStripUserInterfaceState msg)
             return;
 
-        if (_menu == null)
-            return;
-
-        _menu.UpdateMenu(msg.AttachableSlots, slotId => SendMessage(new AttachableHolderDetachMessage(slotId)));
+        _menu?.UpdateMenu(msg.AttachableSlots, slotId => SendMessage(new AttachableHolderDetachMessage(slotId)));
     }
 }

@@ -13,6 +13,7 @@ ui-options-function-cm-holster-tertiary = Unholster tertiary
 ui-options-function-cm-holster-quaternary = Unholster quaternary
 ui-options-function-rmc-pick-up-dropped-items = Pick up dropped items
 ui-options-function-rmc-interact-with-other-hand = Interact with other hand
+ui-options-function-rmc-rest = Rest
 
 ui-options-header-rmc-xeno = Xeno
 

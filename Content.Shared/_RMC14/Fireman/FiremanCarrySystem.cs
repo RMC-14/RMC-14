@@ -333,10 +333,9 @@ public sealed class FiremanCarrySystem : EntitySystem
                     continue;
                 }
 
-                var parent = CompOrNull<TransformComponent>(carrier)?.ParentUid ??
-                             _transform.GetMoverCoordinates(target).EntityId;
+                var parent = _transform.GetMoverCoordinates(target).EntityId;
                 if (target == parent)
-                    parent = _transform.GetMoverCoordinates(target).EntityId;
+                    continue;
 
                 _transform.SetParent(target, parent);
             }

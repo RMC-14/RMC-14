@@ -38,7 +38,7 @@
     settings: RMCSPPRifleman
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCSPPRifleman
   components:
   - type: GhostRole
