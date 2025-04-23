@@ -70,7 +70,7 @@ public sealed class XenoRoleSystem : EntitySystem
             UpdateRank(ev.Mob, ev.Player, job, ev.Profile);
     }
 
-    private void OnRoundRestartCleanup(ref RoundRestartCleanupEvent ev)
+    private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
         _toUpdate.Clear();
     }
