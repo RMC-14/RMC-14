@@ -94,6 +94,8 @@
       Brute:
         collection: XenoResinBreak
   - type: ExplosionRandomResistance
+    min: 0.06
+    max: 0.3
   - type: DeletedByWeedKiller
   - type: RMCDeleteAnchoredOnInit
     enabled: false
