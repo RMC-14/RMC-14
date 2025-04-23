@@ -47,11 +47,7 @@ public sealed class RequisitionsBui(EntityUid owner, Enum uiKey) : BoundUserInte
 
     private void UpdateState(RequisitionsBuiState uiState)
     {
-        if (_window == null)
-        {
-            _window = new RequisitionsWindow();
-            _window.OnClose += Close;
-        }
+        _window ??= this.CreateWindow<RequisitionsWindow>();
 
         var platformLabel = "No platform";
         var platformButtonLabel = "No platform";
