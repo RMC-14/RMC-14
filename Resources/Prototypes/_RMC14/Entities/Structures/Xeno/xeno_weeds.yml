@@ -93,7 +93,7 @@
     soundGroups:
       Brute:
         collection: XenoResinBreak
-  - type: ExplosionRandomResistance
+  - type: ExplosionRandomResistance #the change from .02-.1 to .06-.3 is to account for the damagemodifierset
     min: 0.06
     max: 0.3
   - type: DeletedByWeedKiller
@@ -247,7 +247,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 11
+        damage: 11 #choose 11 since the NODE_HEALTH_HIVE of 30 in cm13 doesn't seem to actually be used anywhere
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
