@@ -34,3 +34,8 @@
   id: Survivor
   hostile:
   - RMCXeno
+
+- type: npcFaction
+  id: RoyalMarines
+  hostile:
+  - RMCXeno

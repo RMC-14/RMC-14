@@ -209,3 +209,27 @@
     leaderIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: free_sl
+
+- type: entity
+  parent: SquadBase
+  id: SquadRoyalMarines
+  name: Royal Marines
+  components:
+  - type: SquadTeam
+    color: "#3D6F43"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    radio: RoyalMarine
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_twe
+    canSupplyDrop: false
+    group: Freelancer
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: rmc_teamleader
