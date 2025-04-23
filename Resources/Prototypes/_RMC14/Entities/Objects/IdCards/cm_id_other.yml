@@ -185,4 +185,4 @@
   name: synth ID card
   components:
   - type: PresetIdCard
-    job: RMCSynthetic
+    job: RMCJobSynthetic

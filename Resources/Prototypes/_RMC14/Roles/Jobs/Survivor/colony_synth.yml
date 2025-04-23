@@ -1,5 +1,5 @@
 - type: job
-  parent: RMCSynthetic
+  parent: RMCJobSynthetic
   id: RMCJobSyntheticColony
   name: rmc-job-name-synth-colony
   description: rmc-job-description-synth-colony
