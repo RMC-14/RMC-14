@@ -68,7 +68,7 @@
   equipment:
     head: RMCHeadBeretProvostSenior
     eyes: CMGlassesSecurity
-    ears: CMHeadsetHighCommand
+    ears: RMCHeadsetHighCommandProvostLead
     jumpsuit: CMJumpsuitProvostSenior
     outerClothing: RMCArmorProvostSeniorFilled
     gloves: CMHandsBlackMarine # TODO RMC14 black gloves

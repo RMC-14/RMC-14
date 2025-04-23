@@ -16,7 +16,7 @@ rmc-ghost-name-corp-provost-deputy-marshal = Provost Deputy Marshal (Friendly)
 rmc-job-name-corp-provost-deputy-marshal = Provost Deputy Marshal
 
 rmc-ghost-name-corp-provost-enforcer = Provost Enforcer (Friendly)
-rmc-job-name-corp-provost-enforcer = Provost Enforcer
+rmc-job-name-corp-provost-enforcer = Enforcer
 
 rmc-ghost-name-corp-provost-inspector = Provost Inspector (Friendly)
 rmc-job-name-corp-provost-inspector = Provost Inspector
@@ -25,4 +25,4 @@ rmc-ghost-name-corp-provost-marshal = Provost Marshal (Friendly)
 rmc-job-name-corp-provost-marshal = Provost Marshal
 
 rmc-ghost-name-corp-provost-team-leader = Provost Team Leader (Friendly)
-rmc-job-name-corp-provost-team-leader = Provost Team Leader
+rmc-job-name-corp-provost-team-leader = Team Leader
