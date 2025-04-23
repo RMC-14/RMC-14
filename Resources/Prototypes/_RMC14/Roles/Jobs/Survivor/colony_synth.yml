@@ -1,11 +1,11 @@
 - type: job
   parent: RMCSynthetic
-  id: RMCSyntheticColony
+  id: RMCJobSyntheticColony
   name: rmc-job-name-synth-colony
   description: rmc-job-description-synth-colony
   playTimeTracker: RMCJobSynthColony
   ranks:
-    RMCRankSynthetic: []
+    RMCRankSyntheticColonist: []
   startingGear: RMCGearSyntheticColonist
   supervisors: cm-job-supervisors-colonists
   accessGroups:
@@ -55,7 +55,7 @@
 #  name: synthetic colonist spawn point
 #  components:
 #  - type: SpawnPoint
-#    job_id: RMCSyntheticColony
+#    job_id: RMCJobSyntheticColony
 #  - type: Sprite
 #    state: syn_spawn
 

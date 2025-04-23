@@ -1,10 +1,14 @@
 - type: job
   parent: CMJobBase
-  id: RMCSynthetic
+  id: RMCJobSynthetic
   name: rmc-job-name-synth
   description: rmc-job-description-synth
   playTimeTracker: RMCJobSynth
   ranks:
+    RMCRankSyntheticMG:
+    - !type:RoleTimeRequirement
+      role: RMCJobSynthetic
+      time: 252000 # 70 hours
     RMCRankSynthetic: []
   startingGear: RMCGearSynthetic
   icon: "RMCJobIconSynth"
@@ -74,7 +78,7 @@
 #  name: synthetic spawn point
 #  components:
 #  - type: SpawnPoint
-#    job_id: RMCSynthetic
+#    job_id: RMCJobSynthetic
 #  - type: Sprite
 #    state: syn_spawn
 
