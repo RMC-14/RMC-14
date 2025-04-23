@@ -33,7 +33,7 @@
     sprite: _RMC14/Objects/CMIDs/provost.rsi
     state: provost
   - type: RandomHumanoidSpawner
-    settings: RMCProvostAdvisor
+    settings: RMCProvostChiefInspector
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
