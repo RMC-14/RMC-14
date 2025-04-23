@@ -127,7 +127,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 33
+        damage: 11
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -245,7 +245,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 33
+        damage: 11
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -339,6 +339,14 @@
     layers:
     - state: weed0
     - state: constructionnode
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 11
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: Tag
   id: XenoWeedTile
