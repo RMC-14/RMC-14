@@ -65,7 +65,7 @@
     settings: RMCSPPLeaderFriendly
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCSPPLeader
   components:
   - type: GhostRole

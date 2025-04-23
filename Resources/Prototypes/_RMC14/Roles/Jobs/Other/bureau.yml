@@ -27,7 +27,7 @@
       settings: RMCBureauMarshal
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCBureauMarshal
   components:
     - type: GhostRole
@@ -102,7 +102,7 @@
       settings: RMCBureauDeputy
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCBureauDeputy
   components:
     - type: GhostRole

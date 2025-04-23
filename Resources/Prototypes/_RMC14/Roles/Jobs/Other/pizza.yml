@@ -33,7 +33,7 @@
     settings: RMCPizzaDeliveryBoy
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCPizzaDeliveryBoy
   components:
   - type: GhostRole

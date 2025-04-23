@@ -55,7 +55,7 @@
     settings: RMCSPPSpecialistFriendly
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCSPPSpecialist
   components:
   - type: GhostRole

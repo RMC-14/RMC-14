@@ -52,7 +52,7 @@
     settings: RMCSPPEngineerFriendly
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCSPPEngineer
   components:
   - type: GhostRole
