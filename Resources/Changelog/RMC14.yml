@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Added new xeno sprites by Aleksh and Sigma Draconis.
-    type: Add
-  id: 1139
-  time: '2024-12-22T14:20:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5200
-- author: DrSmugleaf
-  changes:
   - message: Added Commanding Officer medals and Queen jellies. These are permanent
       commendations given by either role to players in appreciation of their work
       in the round. These will be displayed at round-end, and can be viewed with the
@@ -5538,5 +5531,17 @@
   id: 1641
   time: '2025-04-23T00:45:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6239
+- author: DrSmugleaf
+  changes:
+  - message: Fixed an error that would make your client stutter and flicker.
+    type: Fix
+  - message: Fixed WeYa PMCs not having WeYa IFF.
+    type: Fix
+  - message: Reverted weed resistance fix until it accounts for weed explosion resistance
+      and total health.
+    type: Fix
+  id: 1642
+  time: '2025-04-23T04:20:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6247
 Name: RMC14
 Order: -1
