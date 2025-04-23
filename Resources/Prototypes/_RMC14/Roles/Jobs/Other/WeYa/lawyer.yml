@@ -59,7 +59,7 @@
     settings: RMCWeYaLawyer
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCWeYaLawyer
   components:
   - type: GhostRole

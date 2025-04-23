@@ -74,7 +74,7 @@
     settings: RMCWeYaGoon
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCWeYaGoon
   components:
   - type: GhostRole
