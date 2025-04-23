@@ -44,7 +44,7 @@
 - type: entity
   id: RMCRandomHumanoidProvostDeputyMarshal
   name: provost ghost role deputy marshal
-  suffix: Spawner, Player, Friendly, Low Law Understanding
+  suffix: Spawner, Player, Friendly, Whitelisted COs
   components:
   - type: Sprite
     sprite: _RMC14/Objects/CMIDs/provost.rsi

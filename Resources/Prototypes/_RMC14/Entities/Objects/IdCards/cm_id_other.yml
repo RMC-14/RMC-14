@@ -224,9 +224,25 @@
     job: RMCProvostChiefInspector
 
 - type: entity
-  parent: RMCIDCardProvost # TODO RMC14 provost id
+  parent: RMCIDCardProvost
   id: RMCIDCardProvostDeputyMarshal
   name: provost deputy marshal ID card
   components:
   - type: PresetIdCard
     job: RMCProvostDeputyMarshal
+
+- type: entity
+  parent: RMCIDCardProvost
+  id: RMCIDCardProvostInspector
+  name: provost inspector ID card
+  components:
+  - type: PresetIdCard
+    job: RMCProvostInspector
+
+- type: entity
+  parent: RMCIDCardProvost
+  id: RMCIDCardProvostMarshal
+  name: provost marshal ID card
+  components:
+  - type: PresetIdCard
+    job: RMCProvostMarshal
