@@ -43,7 +43,7 @@
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
-  id: RMCProvostDeputyMarshal
+  id: RMCProvostMarshal
   components:
   - type: GhostRole
     name: rmc-ghost-name-corp-provost-deputy-marshal
