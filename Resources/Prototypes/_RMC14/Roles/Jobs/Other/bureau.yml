@@ -11,7 +11,7 @@
   icon: "RMCJobIconBureauMarshal"
   joinNotifyCrew: false
   accessGroups:
-  - Colonist
+  - ShipMasterAccess
   special:
   - !type:AddComponentSpecial
     components:
@@ -93,7 +93,7 @@
   icon: "RMCJobIconBureauDeputy"
   joinNotifyCrew: false
   accessGroups:
-  - Colonist
+  - ShipMasterAccess
   special:
   - !type:AddComponentSpecial
     components:
