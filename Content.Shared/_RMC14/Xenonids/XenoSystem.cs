@@ -466,7 +466,7 @@ public sealed class XenoSystem : EntitySystem
                 continue;
 
             xeno.NextRegenTime = time + xeno.RegenCooldown;
-            DirtyField(uid, xeno, nameof(XenoRegenComponent));
+            DirtyField(uid, xeno, nameof(XenoRegenComponent.NextRegenTime));
 
             if (!xeno.HealOffWeeds)
             {
