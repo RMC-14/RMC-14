@@ -1320,3 +1320,14 @@
     state: osborn_cheeseball_curry
   - type: PatronFigurine
     id: 245a7cc3-33dc-4008-bed7-7af5d63cddd4
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronGregorCain
+  name: Gregor Cain figurine
+  description: ""
+  components:
+  - type: Sprite
+    state: gregor_cain
+  - type: PatronFigurine
+    id: 8fdc1c0b-262a-4281-b864-a41b9ba2790d
