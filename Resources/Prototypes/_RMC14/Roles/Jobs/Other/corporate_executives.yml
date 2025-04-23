@@ -72,7 +72,7 @@
   id: RMCCorporateExecutiveSpecialist
   name: rmc-job-name-corp-exec-specialist
   description: rmc-ghost-role-information-corp-exec-description
-  playTimeTracker: RMCJobCorporateExecutivSpecialist
+  playTimeTracker: RMCJobCorporateExecutiveSpecialist
   ranks:
     RMCRankWeYaExecutiveSpecialist: [ ]
   startingGear: RMCGearCorporateExecutiveSpecialist
