@@ -1,4 +1,4 @@
-﻿# ICB Liaison
+# Bureau Liaison
 - type: job
   parent: CMJobBase
   id: RMCICBLiaison
@@ -51,7 +51,7 @@
   - type: GhostRole
     name: rmc-ghost-name-icb
     description: rmc-ghost-role-information-icb-description
-    rules: rmc-ghost-role-information-icb-rules
+    rules: rmc-ghost-role-information-bureau-rules
     reregister: false
     job: RMCICBLiaison
     raffle:

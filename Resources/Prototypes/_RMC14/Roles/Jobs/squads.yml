@@ -229,7 +229,31 @@
       sprite: _RMC14/Interface/map_blips.rsi
       state: background_twe
     canSupplyDrop: false
-    group: Freelancer
+    group: Royal Marines
     leaderIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: rmc_teamleader
+
+- type: entity
+  parent: SquadBase
+  id: SquadProvost
+  name: Provost
+  components:
+  - type: SquadTeam
+    color: "#990218"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    radio: Provost
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_twe
+    canSupplyDrop: false
+    group: Provost
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: hudsquad_pvl

@@ -175,3 +175,58 @@
   parent: CMIDCardBase
   id: RMCIDCardFreelancer
   name: freelancer ID card
+
+- type: entity
+  parent: CMIDCardGold
+  id: RMCIDCardProvost
+  abstract: true
+  name: provost ID card
+  description: Issued to members of the Provost Office.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+
+- type: entity
+  parent: RMCIDCardProvost
+  id: RMCIDCardProvostAdvisor
+  name: provost advisor ID card
+  components:
+  - type: PresetIdCard
+    job: RMCProvostAdvisor
+
+- type: entity
+  parent: RMCIDCardProvost
+  id: RMCIDCardProvostEnforcer
+  name: provost enforcer ID card
+  components:
+  - type: PresetIdCard
+    job: RMCProvostEnforcer
+
+- type: entity
+  parent: RMCIDCardProvost
+  id: RMCIDCardProvostTeamLeader
+  name: provost team leader ID card
+  components:
+  - type: PresetIdCard
+    job: RMCProvostTeamLeader
+
+- type: entity
+  parent: RMCIDCardProvost
+  id: RMCIDCardProvostChiefInspector
+  name: provost chief inspector ID card
+  components:
+  - type: PresetIdCard
+    job: RMCProvostChiefInspector
+
+- type: entity
+  parent: RMCIDCardProvost # TODO RMC14 provost id
+  id: RMCIDCardProvostDeputyMarshal
+  name: provost deputy marshal ID card
+  components:
+  - type: PresetIdCard
+    job: RMCProvostDeputyMarshal

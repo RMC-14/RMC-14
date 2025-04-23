@@ -1,8 +1,8 @@
 ﻿- type: job
   parent: CMJobBase
-  id: CMProvostDeputyMarshal
-  name: CMProvostDeputyMarshal
-  description: rmc-job-description-provost-deputy-marshal
+  id: RMCProvostDeputyMarshal
+  name: rmc-job-name-corp-provost-deputy-marshal
+  description: rmc-ghost-role-information-provost-description
   playTimeTracker: CMJobProvostDeputyMarshal
   ranks:
     RMCRankProvostDeputyMarshal: []
@@ -33,8 +33,6 @@
         RMCSkillPowerLoader: 2
         RMCSkillSmartGun: 1
         RMCSkillVehicles: 2
-    - type: JobPrefix
-      prefix: rmc-job-prefix-provost-deputy-marshal
     - type: MarineOrders
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
@@ -46,20 +44,27 @@
 - type: entity
   id: RMCRandomHumanoidProvostDeputyMarshal
   name: provost ghost role deputy marshal
-  suffix: Role, Whitelisted COs
+  suffix: Spawner, Player, Friendly, Low Law Understanding
   components:
   - type: Sprite
-    sprite: Markers/cross.rsi
-    state: red
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
   - type: RandomHumanoidSpawner
     settings: RMCProvostDeputyMarshal
 
 - type: randomHumanoidSettings
-  parent: RMCSettingsGhostRole
+  parent: RMCEventHumanoid
   id: RMCProvostDeputyMarshal
   components:
-  - type: RMCJobSpawner
-    job: CMProvostDeputyMarshal
+  - type: GhostRole
+    name: rmc-job-name-corp-provost-deputy-marshal
+    description: rmc-ghost-role-information-provost-description
+    rules: rmc-ghost-role-information-provost-rules
+    reregister: false
+    job: RMCProvostDeputyMarshal
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
 
 - type: startingGear
   id: RMCGearProvostDeputyMarshal
@@ -79,19 +84,3 @@
 
 - type: playTimeTracker
   id: CMJobProvostDeputyMarshal
-
-- type: entity
-  parent: CMIDCardGold # TODO RMC14 provost id
-  id: RMCIDCardProvostDeputyMarshal
-  name: provost deputy marshal ID card
-  description: Issued to members of the Provost Office.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/CMIDs/provost.rsi
-    state: provost
-  - type: Clothing
-    slots:
-    - idcard
-    sprite: _RMC14/Objects/CMIDs/provost.rsi
-  - type: PresetIdCard
-    job: CMProvostDeputyMarshal

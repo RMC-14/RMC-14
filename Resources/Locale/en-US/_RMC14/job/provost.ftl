@@ -1,27 +1,28 @@
-﻿CMProvostAdvisor = Provost Advisor
-rmc-job-description-provost-advisor = You do not hold any direct authority yourself, you are expected to ensure Marine Law is correctly handled.
-rmc-job-prefix-provost-advisor = PvA
+﻿rmc-ghost-role-information-provost-rules = You are a [color=red][bold]Provost Member[/bold][/color]. You are not hostile to any faction.
+                                             You don't remember any of your previous life, and you don't remember anything you learned as a ghost.
+                                             You are allowed to remember knowledge about the game in general, such as how to cook, how to use objects, etc.
+                                             You are absolutely [color=red]NOT[/color] allowed to remember, say, the name, appearance, etc. of your previous character.
 
-CMProvostChiefInspector = Provost Chief Inspector
-rmc-job-description-provost-chief-inspector = You are the final word on Marine Law in your area of operations.
-rmc-job-prefix-provost-chief-inspector = PvCI
+rmc-ghost-role-information-provost-description = Enforce marine law, turn to your superiors for guidance. Authority is tied to your chain of command.
+rmc-ghost-role-information-provost-squad-description = Ensure compliance with marine law, quell riots and protect any Provost Officials.
 
-CMProvostDeputyMarshal = Provost Deputy Marshal
-rmc-job-description-provost-deputy-marshal = ""
-rmc-job-prefix-provost-deputy-marshal = PvDM
+rmc-ghost-name-corp-provost-advisor = Provost Advisor (Friendly)
+rmc-job-name-corp-provost-advisor = Provost Advisor
 
-CMProvostEnforcer = Provost Enforcer
-rmc-job-description-provost-enforcer = Lowest ranking Provost member. Follow the objectives given to you by your Provost leader.
-rmc-job-prefix-provost-enforcer = PvE
+rmc-ghost-name-corp-provost-chief = Provost Chief Inspector (Friendly)
+rmc-job-name-corp-provost-chief = Provost Chief Inspector
 
-CMProvostInspector = Provost Inspector
-rmc-job-description-provost-inspector = "You are the final word on Marine Law in your area of operations."
-rmc-job-prefix-provost-inspector = PvI
+rmc-ghost-name-corp-provost-deputy-marshal = Provost Deputy Marshal (Friendly)
+rmc-job-name-corp-provost-deputy-marshal = Provost Deputy Marshal
 
-CMProvostMarshal = Provost Marshal
-rmc-job-description-provost-marshal = ""
-rmc-job-prefix-provost-marshal = PvM
+rmc-ghost-name-corp-provost-enforcer = Provost Enforcer (Friendly)
+rmc-job-name-corp-provost-enforcer = Provost Enforcer
 
-CMProvostTeamLeader = Provost Team Leader
-rmc-job-description-provost-team-leader = Lead your Squad of Provost enforcers and follow the objectives given.
-rmc-job-prefix-provost-team-leader = PvTML
+rmc-ghost-name-corp-provost-inspector = Provost Inspector (Friendly)
+rmc-job-name-corp-provost-inspector = Provost Inspector
+
+rmc-ghost-name-corp-provost-marshal = Provost Marshal (Friendly)
+rmc-job-name-corp-provost-marshal = Provost Marshal
+
+rmc-ghost-name-corp-provost-team-leader = Provost Team Leader (Friendly)
+rmc-job-name-corp-provost-team-leader = Provost Team Leader

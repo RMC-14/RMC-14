@@ -5,6 +5,7 @@ rmc-ghost-role-information-bureau-rules = You are a [color=cyan][bold]Bureau mem
 
 rmc-ghost-role-information-bureau-marshal-description = Get your instructions from the CMB Office and carry out your orders. Do not enforce or override Marine Law on a Marine Ship unless requested.
 rmc-ghost-role-information-bureau-observer-description = Monitor and Document the treatment of sapient beings within the UNS Ship. Ensure the rights of sapient beings are being followed, and provide medical treatment where needed.
+rmc-ghost-role-information-icb-description = Oversee trade operations, enforce regulations, and investigate potential smuggling or black market activity. You are expected to collaborate with CMB deputies and ensure compliance with interstellar trade laws.
 
 rmc-ghost-name-bureau-marshal = Bureau Marshal (Friendly)
 rmc-job-name-bureau-marshal = Bureau Marshal
@@ -14,3 +15,6 @@ rmc-job-name-bureau-deputy = Bureau Deputy
 
 rmc-ghost-name-bureau-observer = Interstellar Sapient-Life Rights Observer (Friendly)
 rmc-job-name-bureau-observer = Interstellar Sapient-Life Rights Observer
+
+rmc-ghost-name-icb = Interstellar Commerce Bureau Liaison (Friendly)
+rmc-job-name-icb = Interstellar Commerce Bureau Liaison

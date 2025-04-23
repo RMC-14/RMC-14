@@ -17,11 +17,13 @@
   id: RMCRankWeYaExecutiveSpecialist
   name: Executive Specialist
   prefix: Exec. Spc.
+  paygrade: WYC5
 
 - type: rank
   id: RMCRankWeYaExecutiveSupervisor
   name: Executive Supervisor
   prefix: Exec. Spvsr.
+  paygrade: WYC6
 
 - type: rank
   id: RMCRankWeYaAssistantManager
