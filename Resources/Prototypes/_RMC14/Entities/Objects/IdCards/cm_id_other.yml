@@ -128,12 +128,18 @@
   id: RMCIDCardMarshal
   name: bureau marshal gold badge
   description: A coveted gold badge signifying that the wearer is one of the few CMB Marshals patroling the outer rim. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
+  components:
+  - type: PresetIdCard
+    job: RMCBureauMarshal
 
 - type: entity
   parent: CMIDCardSilver
   id: RMCIDCardDeputy
   name: bureau deputy silver badge
   description: The silver badge which represents that the wearer is a Bureau Deputy. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
+  components:
+  - type: PresetIdCard
+    job: RMCBureauDeputy
 
 - type: entity
   parent: CMIDCardSilver
@@ -160,10 +166,10 @@
 - type: entity
   parent: CMIDCardLanyard
   id: RMCIDCardBureauObserver
-  name: ID card
+  name: bureau observer ID card
   components:
-  - type: IdCard
-    jobTitle: rmc-job-title-bureau-observer
+  - type: PresetIdCard
+    job: RMCBureauObserver
 
 - type: entity
   parent: CMIDCardBase

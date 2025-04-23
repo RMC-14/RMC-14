@@ -39,3 +39,8 @@
   id: RoyalMarines
   hostile:
   - RMCXeno
+
+- type: npcFaction
+  id: Bureau
+  hostile:
+  - RMCXeno
