@@ -13,3 +13,6 @@ rmc-job-name-synth = UNMC Synthetic
 rmc-job-description-synth = Support and assist the UNMC Departments and Personnel.
 rmc-job-prefix-synth = SYN
 RMCJobSynthetic = Synthetic
+
+rmc-job-name-synth-colony = Colony Synthetic
+rmc-job-description-synth-colony = Support and assist the Colony Personnel.

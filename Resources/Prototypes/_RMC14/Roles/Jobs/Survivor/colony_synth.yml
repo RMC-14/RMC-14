@@ -1,65 +1,46 @@
 - type: job
-  parent: CMJobBase
-  id: RMCSynthetic
-  name: rmc-job-name-synth
-  description: rmc-job-description-synth
-  playTimeTracker: RMCJobSynth
+  parent: RMCSynthetic
+  id: RMCSyntheticColony
+  name: rmc-job-name-synth-colony
+  description: rmc-job-description-synth-colony
+  playTimeTracker: RMCJobSynthColony
   ranks:
     RMCRankSynthetic: []
-  startingGear: RMCGearSynthetic
-  icon: "RMCJobIconSynth"
-  requireAdminNotify: true
-  joinNotifyCrew: true
-  whitelisted: true
-  supervisors: cm-job-supervisors-co
+  startingGear: RMCGearSyntheticColonist
+  supervisors: cm-job-supervisors-colonists
   accessGroups:
-  - ShipMasterAccess
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: synth
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_shipside
-  roleWeight: 0.25
+  - Colonist
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
-        RMCSkillCqc: 5
+        RMCSkillCqc: 3
         RMCSkillEngineer: 4
         RMCSkillConstruction: 3
         # RMCSkillFirearms: 2 -- Synths cant use firearms why the fuck do they get the highest skill??
         RMCSkillOverwatch: 1
-        RMCSkillMedical: 4
-        RMCSkillSurgery: 3
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
         RMCSkillResearch: 1
         RMCSkillMeleeWeapons: 2
         RMCSkillPilot: 2
         RMCSkillPolice: 2
-        RMCSkillFireman: 5
+        RMCSkillFireman: 3
         RMCSkillPowerLoader: 2
         RMCSkillVehicles: 2
-        RMCSkillJTAC: 3
-        RMCSkillIntel: 2
+        RMCSkillJTAC: 1
+        RMCSkillIntel: 1
         RMCSkillDomestics: 2
-        RMCSkillNavigations: 1
-    - type: MarineOrders
 #    - type: DemoSpecWhitelist -- THEY CAN USE EVERY SPEC TOO???
 #    - type: GrenadeSpecWhitelist
 #    - type: ScoutWhitelist
 #    - type: SniperWhitelist
 #    - type: PyroWhitelist
-    - type: JobPrefix
-      prefix: rmc-job-prefix-synth
-    - type: TacticalMapIcon
-      icon:
-        sprite: _RMC14/Interface/map_blips.rsi
-        state: synth
   hidden: true
 
 - type: startingGear
-  id: RMCGearSynthetic
+  id: RMCGearSyntheticColonist
   equipment:
     jumpsuit: RMCJumpsuitSynthetic
     gloves: CMHandsInsulated
@@ -70,14 +51,14 @@
 
 #- type: entity
 #  parent: CMSpawnPointJobBase
-#  id: RMCSpawnPointSynth
-#  name: synthetic spawn point
+#  id: RMCSpawnPointSynthColonist
+#  name: synthetic colonist spawn point
 #  components:
 #  - type: SpawnPoint
-#    job_id: RMCSynthetic
+#    job_id: RMCSyntheticColony
 #  - type: Sprite
 #    state: syn_spawn
 
 - type: playTimeTracker
-  id: RMCJobSynth
+  id: RMCJobSynthColony
   isHumanoid: true
