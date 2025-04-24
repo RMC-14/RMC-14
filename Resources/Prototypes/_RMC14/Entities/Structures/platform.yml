@@ -714,3 +714,34 @@
   components:
   - type: Sprite
     state: stone_deco
+    
+- type: entity
+  parent: CMPlatform
+  id: RMCPlatformSandstone
+  name: sandstone platform
+  description: A raised level of metal, often used to elevate areas above others, or construct bridges. You could probably climb it.
+  components:
+  - type: Sprite
+    state: sandstone
+  - type: Construction
+    graph: RMCPlatformKutjevoDestructible
+    node: start
+
+- type: entity
+  parent: CMPlatformBroken
+  id: RMCPlatformSandstoneBroken
+  components:
+  - type: Sprite
+    state: sandstone_broken
+  - type: Construction
+    graph: RMCPlatformKutjevoDestructible
+    node: platformBroken
+
+- type: entity
+  parent: RMCPlatformCornerSmall
+  id: RMCPlatformSandstoneCornerSmall
+  name: sandstone platform corner
+  description: The corner of what appears to be raised piece of metal, often used to imply the illusion of elevation in non-Euclidean 2d spaces. But you don't know that, you're just a spaceman with a rifle.
+  components:
+  - type: Sprite
+    state: sandstone_deco
