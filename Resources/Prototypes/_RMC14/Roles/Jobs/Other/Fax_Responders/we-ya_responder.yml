@@ -1,0 +1,74 @@
+- type: job
+  parent: CMJobBase
+  id: RMCWeYaResponder
+  name: rmc-job-name-WeYa-Responder
+  description: rmc-ghost-role-information-WeYa-responder-description
+  playTimeTracker: RMCJobWeYaResponder
+  ranks:
+    RMCRankWeYaExecutive: []
+  startingGear: RMCGearWeYaResponder
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  accessGroups:
+  - ShipMasterAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillIntel: 1
+        RMCSkillJtac: 3
+        RMCSkillMedical: 2
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillSurgery: 1
+        RMCSkillVehicles: 2
+  hasIcon: false
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidWeYaResponder
+  name: WeYa responder ghost role
+  suffix: Spawner, Player, Fax Responder
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/fax_machine.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCWeYaResponder
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCWeYaResponder
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-WeYa-responder
+    description: rmc-ghost-role-information-WeYa-responder-description
+    rules: rmc-ghost-role-information-responder-rules
+    reregister: false
+    job: RMCWeYaResponder
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearWeYaResponder
+  equipment:
+    ears: RMCHeadsetDistressWeYaColony # TODO RMC14 tape recorder
+    back: CMSatchel
+    jumpsuit: CMJumpsuitLiaisonBlue
+    outerClothing: RMCJacketCorporateBlue
+    shoes: RMCShoesLaceup
+    id: RMCIDCardExecutiveCorporateSpecialist
+    pocket2: CMClipboard # TODO RMC14 notepad
+  inhand:
+  - CMPaper
+
+
+- type: playTimeTracker
+  id: RMCJobWeYaResponder
