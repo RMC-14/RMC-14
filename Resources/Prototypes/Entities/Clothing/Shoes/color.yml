@@ -71,7 +71,6 @@
     sprite: Clothing/Shoes/color.rsi
     layers:
     - state: icon
-
       color: "#0089EF"
     - state: soles-icon
   - type: Item
@@ -277,10 +276,3 @@
       - state: equipped-FEET
         color: "#9C0DE1"
       - state: soles-equipped-FEET
-
-# Prison Shoes
-- type: entity
-  parent: ClothingShoesColorWhite
-  id: ClothingShoesPrison
-  name: prisoner shoes
-  description: Given out at brig.

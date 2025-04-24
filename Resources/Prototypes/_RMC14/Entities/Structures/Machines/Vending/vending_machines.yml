@@ -263,11 +263,10 @@
     CMJumpsuitMP: 2
     CMHeadBeretRed: 6
     CMGlassesSecurity: 3
-    # CMHeadset: 6
     RMCScrubsPrisonMedsec: 4
     RMCScrubsPrisonMaxsec : 2
-    ClothingHeadsetPrison : 6
-    ClothingShoesPrison : 6
+    RMCHeadsetPrisoner : 6
+    RMCShoesPrisoner : 6
 
 - type: entity
   parent: CMVendor
