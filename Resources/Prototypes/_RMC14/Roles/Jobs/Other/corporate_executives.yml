@@ -11,7 +11,7 @@
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
   accessGroups:
-  - RMCAccessWeYa
+  - RMCWeYa
   - CMAccessCommand
   - CMAccessResearch
   - CMAccessMedical
@@ -79,7 +79,7 @@
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
   accessGroups:
-  - RMCAccessWeYa
+  - RMCWeYa
   - CMAccessCommand
   - CMAccessResearch
   - CMAccessMedical

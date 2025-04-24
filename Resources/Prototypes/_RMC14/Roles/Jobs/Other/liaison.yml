@@ -27,7 +27,7 @@
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-we-ya
   access:
-  - RMCAccessWeYa
+  - RMCWeYa
   - CMAccessCommand
   - CMAccessResearch
   - CMAccessMedical
