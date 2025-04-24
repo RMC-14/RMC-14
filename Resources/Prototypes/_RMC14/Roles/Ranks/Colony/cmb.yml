@@ -52,3 +52,8 @@
   id: RMCRankIHROObserver
   name: Interstellar Human Rights Observer
   prefix: "Obsv."
+
+- type: rank
+  id: RMCRankCMBResponder
+  name: CMB Communications Officer
+  prefix: "Comm."

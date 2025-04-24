@@ -1,0 +1,73 @@
+- type: job
+  parent: CMJobBase
+  id: RMCFreePressResponder
+  name: rmc-job-name-free-press-responder
+  description: rmc-ghost-role-information-free-press-responder-description
+  playTimeTracker: RMCJobFreePressResponder
+  ranks:
+    RMCRankCivilian: []
+  startingGear: RMCGearFreePressResponder
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  accessGroups:
+  - ShipMasterAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillIntel: 1
+        RMCSkillJtac: 3
+        RMCSkillMedical: 2
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillSurgery: 1
+        RMCSkillVehicles: 2
+  hasIcon: false
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidFreePressResponder
+  name: FreePress responder ghost role
+  suffix: Spawner, Player, Fax Responder
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/fax_machine.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCFreePressResponder
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCFreePressResponder
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-free-press-responder
+    description: rmc-ghost-role-information-free-press-responder-description
+    rules: rmc-ghost-role-information-responder-rules
+    reregister: false
+    job: RMCFreePressResponder
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearFreePressResponder
+  equipment:
+    jumpsuit: CMJumpsuitBO
+    shoes: RMCShoesLaceup
+    head: RMCHeadCapFlippable
+    id: CMIDCardStaffOfficer
+    ears: CMHeadsetHighCommand
+    back: CMSatchel
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchDocument
+
+
+- type: playTimeTracker
+  id: RMCJobFreePressResponder

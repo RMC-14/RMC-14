@@ -1,8 +1,8 @@
 - type: job
   parent: CMJobBase
   id: RMCSPPResponder
-  name: rmc-job-name-SPP-Responder
-  description: rmc-ghost-role-information-SPP-responder-description
+  name: rmc-job-name-spp-responder
+  description: rmc-ghost-role-information-spp-responder-description
   playTimeTracker: RMCJobSPPResponder
   ranks:
     RMCRankSPPMladshiyLeytenant: []
@@ -47,8 +47,8 @@
   id: RMCSPPResponder
   components:
   - type: GhostRole
-    name: rmc-ghost-name-SPP-responder
-    description: rmc-ghost-role-information-SPP-responder-description
+    name: rmc-ghost-name-spp-responder
+    description: rmc-ghost-role-information-spp-responder-description
     rules: rmc-ghost-role-information-responder-rules
     reregister: false
     job: RMCSPPResponder

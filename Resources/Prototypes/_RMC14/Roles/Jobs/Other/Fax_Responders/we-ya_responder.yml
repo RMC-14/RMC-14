@@ -1,11 +1,11 @@
 - type: job
   parent: CMJobBase
   id: RMCWeYaResponder
-  name: rmc-job-name-WeYa-Responder
-  description: rmc-ghost-role-information-WeYa-responder-description
+  name: rmc-job-name-weya-responder
+  description: rmc-ghost-role-information-weya-responder-description
   playTimeTracker: RMCJobWeYaResponder
   ranks:
-    RMCRankWeYaExecutive: []
+    RMCRankWeYaExecutiveSpecialist: []
   startingGear: RMCGearWeYaResponder
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
@@ -47,8 +47,8 @@
   id: RMCWeYaResponder
   components:
   - type: GhostRole
-    name: rmc-ghost-name-WeYa-responder
-    description: rmc-ghost-role-information-WeYa-responder-description
+    name: rmc-ghost-name-weya-responder
+    description: rmc-ghost-role-information-weya-responder-description
     rules: rmc-ghost-role-information-responder-rules
     reregister: false
     job: RMCWeYaResponder

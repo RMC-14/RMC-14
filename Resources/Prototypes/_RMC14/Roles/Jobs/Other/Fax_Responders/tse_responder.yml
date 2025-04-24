@@ -1,8 +1,8 @@
 - type: job
   parent: CMJobBase
   id: RMCTSEResponder
-  name: rmc-job-name-TSE-Responder
-  description: rmc-ghost-role-information-TSE-responder-description
+  name: rmc-job-name-tse-responder
+  description: rmc-ghost-role-information-tse-responder-description
   playTimeTracker: RMCJobTSEResponder
   ranks:
     RMCRankTSELieutenant: []
@@ -47,8 +47,8 @@
   id: RMCTSEResponder
   components:
   - type: GhostRole
-    name: rmc-ghost-name-TSE-responder
-    description: rmc-ghost-role-information-TSE-responder-description
+    name: rmc-ghost-name-tse-responder
+    description: rmc-ghost-role-information-tse-responder-description
     rules: rmc-ghost-role-information-responder-rules
     reregister: false
     job: RMCTSEResponder

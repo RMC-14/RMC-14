@@ -1,11 +1,11 @@
 - type: job
   parent: CMJobBase
   id: RMCUNMCResponder
-  name: rmc-job-name-UNMC-Responder
-  description: rmc-ghost-role-information-UNMC-responder-description
+  name: rmc-job-name-unmc-responder
+  description: rmc-ghost-role-information-unmc-responder-description
   playTimeTracker: RMCJobUNMCResponder
   ranks:
-    RMCRankFirstLT: []
+    RMCRankFirstLT: [] #goes to O4
   startingGear: RMCGearUNMCResponder
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
