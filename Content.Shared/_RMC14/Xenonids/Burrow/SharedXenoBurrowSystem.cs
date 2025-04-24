@@ -234,6 +234,8 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
             if (!CanTunnelPopup(burrower, target, out var distance))
                 return;
             var duration = new TimeSpan(0, 0, (int)distance);
+            if (duration < burrower.Comp.MinimumTunnelTime)
+                duration = burrower.Comp.MinimumTunnelTime;
             var moveEv = new XenoBurrowMoveDoAfter(_entities.GetNetCoordinates(target));
             var moveDoAfterArgs = new DoAfterArgs(_entities, burrower, duration, moveEv, burrower) { RequireCanInteract = false, DuplicateCondition = DuplicateConditions.SameEvent };
 

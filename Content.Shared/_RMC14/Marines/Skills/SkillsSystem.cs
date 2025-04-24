@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.Flash;
 using Content.Shared.Interaction;
@@ -82,7 +83,7 @@ public sealed class SkillsSystem : EntitySystem
         if (skill <= 0)
             return;
 
-        args.Damage *= 1 + 0.25 * skill;
+        args.Damage = ApplyMeleeSkillModifier(args.User, args.Damage);
     }
 
     private void OnAttemptHyposprayUse(Entity<MedicallyUnskilledDoAfterComponent> ent, ref AttemptHyposprayUseEvent args)
@@ -390,11 +391,11 @@ public sealed class SkillsSystem : EntitySystem
                 ent.Comp.Skills.TryGetValue(requiredSkill, out var level) &&
                 level >= requiredLevel)
             {
-                return false;
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 
     public bool HasAnySkills(Entity<SkillsComponent?> ent, List<Skill> anyRequired)
@@ -538,5 +539,12 @@ public sealed class SkillsSystem : EntitySystem
             multiplier = definitionComp.DelayMultipliers[^1];
 
         return multiplier;
+    }
+
+    public DamageSpecifier ApplyMeleeSkillModifier(EntityUid user, DamageSpecifier damage)
+    {
+        var skill = GetSkill(user, _meleeSkill);
+
+        return damage * (1 + 0.25 * skill);
     }
 }

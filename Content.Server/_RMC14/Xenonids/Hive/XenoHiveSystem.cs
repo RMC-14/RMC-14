@@ -1,5 +1,6 @@
 ﻿using Content.Server._RMC14.Announce;
 using Content.Server.GameTicking;
+using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -46,6 +47,9 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
         if (!ev.LateJoin || !HasComp<MarineComponent>(ev.Mob))
             return;
 
+        if (HasComp<RMCAdminSpawnedComponent>(ev.Mob))
+            return;
+
         if (ev.JobId is not { } jobId ||
             !_prototypes.TryIndex(jobId, out JobPrototype? job) ||
             job.RoleWeight < 0)
@@ -69,8 +73,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
                 continue;
 
             hive.LateJoinMarines -= lateJoinsPer;
-            hive.BurrowedLarva++;
-            Dirty(uid, hive);
+            IncreaseBurrowedLarva((uid, hive), 1);
         }
     }
 

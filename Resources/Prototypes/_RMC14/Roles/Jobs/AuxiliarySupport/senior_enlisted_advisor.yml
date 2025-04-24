@@ -37,6 +37,8 @@
   icon: "CMJobIconSEA"
   requireAdminNotify: true
   joinNotifyCrew: true
+  latejoinArrivalSound:
+    path: /Audio/_RMC14/Announcements/ARES/attention_jingle.ogg
   supervisors: cm-job-supervisors-co
   whitelisted: true
   accessGroups:
@@ -79,6 +81,13 @@
     - type: SeeNewPlayers
     - type: ViewIntelObjectives
     - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: sea
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_medical
 
 - type: startingGear
   id: CMGearSeniorEnlistedAdvisor

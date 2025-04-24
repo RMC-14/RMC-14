@@ -1,11 +1,16 @@
-﻿using Content.Shared._RMC14.Xenonids.Devour;
+﻿using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Xenonids.Devour;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
+using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Network;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Invisibility;
@@ -13,14 +18,27 @@ namespace Content.Shared._RMC14.Xenonids.Invisibility;
 public sealed class XenoInvisibilitySystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
 
+    private readonly HashSet<EntityUid> _contacts = new();
+
+    private EntityQuery<MarineComponent> _marineQuery;
+    private EntityQuery<MobCollisionComponent> _mobCollisionQuery;
+    private EntityQuery<XenoComponent> _xenoQuery;
+
     public override void Initialize()
     {
+        _marineQuery = GetEntityQuery<MarineComponent>();
+        _mobCollisionQuery = GetEntityQuery<MobCollisionComponent>();
+        _xenoQuery = GetEntityQuery<XenoComponent>();
+
         SubscribeLocalEvent<XenoTurnInvisibleComponent, XenoTurnInvisibleActionEvent>(OnXenoTurnInvisibleAction);
 
         SubscribeLocalEvent<XenoActiveInvisibleComponent, ComponentRemove>(OnXenoActiveInvisibleRemove);
@@ -45,7 +63,7 @@ public sealed class XenoInvisibilitySystem : EntitySystem
             var active = EnsureComp<XenoActiveInvisibleComponent>(xeno);
             active.ExpiresAt = _timing.CurTime + xeno.Comp.Duration;
             active.FullCooldown = xeno.Comp.FullCooldown;
-            active.SpeedMultiplier = xeno.Comp.SpeedMultiplier; 
+            active.SpeedMultiplier = xeno.Comp.SpeedMultiplier;
 
             //Half a second cooldown to prevent double clicks
             StartCooldown((xeno, active), xeno.Comp.ToggleLockoutTime, true);
@@ -68,7 +86,7 @@ public sealed class XenoInvisibilitySystem : EntitySystem
         {
             if (!_xeno.CanAbilityAttackTarget(xeno, entity))
                 return;
-        
+
             RemoveInvisibility(xeno, xeno.Comp.FullCooldown);
             break;
         }
@@ -137,8 +155,44 @@ public sealed class XenoInvisibilitySystem : EntitySystem
         var activeQuery = EntityQueryEnumerator<XenoActiveInvisibleComponent>();
         while (activeQuery.MoveNext(out var uid, out var active))
         {
-            if (active.ExpiresAt > time)
+            if (active.ExpiresAt <= time)
+            {
+                RemoveInvisibility((uid, active), active.FullCooldown);
                 continue;
+            }
+
+            if (!_mobCollisionQuery.TryComp(uid, out var collision) ||
+                !collision.Colliding)
+            {
+                continue;
+            }
+
+            _contacts.Clear();
+            _physics.GetContactingEntities(uid, _contacts);
+
+            var collidingEnemy = false;
+            foreach (var contact in _contacts)
+            {
+                if (_hive.FromSameHive(uid, contact))
+                    continue;
+
+                if (!_marineQuery.HasComp(uid) && !_xenoQuery.HasComp(contact))
+                    continue;
+
+                collidingEnemy = true;
+            }
+
+            if (!collidingEnemy)
+                continue;
+
+            if (!active.DidPopup)
+            {
+                active.DidPopup = true;
+                Dirty(uid, active);
+
+                if (_net.IsServer)
+                    _popup.PopupEntity(Loc.GetString("rmc-xeno-invisibility-expire-bump"), uid, uid, PopupType.MediumCaution);
+            }
 
             RemoveInvisibility((uid, active), active.FullCooldown);
         }

@@ -39,6 +39,10 @@
         RMCSkillFireman: 1
     - type: JobPrefix
       prefix: cm-job-prefix-messtech
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: mst
 
 - type: startingGear
   id: CMGearMessTech

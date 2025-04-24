@@ -1,0 +1,106 @@
+﻿- type: job
+  parent: CMJobBase
+  id: CMSurvivor
+  name: cm-job-name-survivor
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivor
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 18000 # 5 hours
+  - !type:RoleTimeRequirement
+    role: CMJobCombatTech
+    time: 18000 # 5 hours
+  - !type:RoleTimeRequirement
+    role: CMJobHospitalCorpsman
+    time: 18000 # 5 hours
+  ranks:
+    RMCRankCivilian: []
+  startingGear: RMCGearSurvivor
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-nobody
+  accessGroups:
+  - Colonist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetCivilian
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Survivor
+    - type: IntelRescueSurvivorObjective
+  greeting: rmc-job-greeting-survivor
+  hasIcon: false
+
+- type: startingGear
+  id: RMCGearSurvivor
+  equipment:
+    jumpsuit: CMJumpsuitColonist
+    back: RMCSatchelCivilianFill
+    shoes: RMCShoesBlack
+    id: CMIDCardColonist
+    ears: CMHeadsetColony
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchGeneral
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSurvivor
+  name: survivor spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
+
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleSurvivor
+  name: Survivor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: survivor
+
+- type: playTimeTracker
+  id: CMJobSurvivor
+  isHumanoid: true
+
+- type: entity
+  id: RMCSurvivorPresetCivilian
+  name: civilian survivor preset
+  components:
+  - type: SurvivorPreset
+    randomGear:
+    - [ RMCGrenadeMolotov ]
+    - [ CMPackFlare ]
+    - [ WeaponNailgun ]
+    - [ RMCFireAxe ]
+    - [ CMWelder ] # TODO RMC14 industrial welder
+    - [ CMAdvFirstAidKitFilled ]
+    randomWeapon:
+    - [ RMCWeaponPistolB92FS, RMCMagazinePistolB92FS ]
+    - [ RMCWeaponRevolverSpearhead, RMCSpeedLoader357Hollowpoint ]
+    - [ RMCWeaponPistolMK45, RMCMagazinePistolMK45 ]
+    - [ CMWeaponPistolM1984, CMMagazinePistolM1984 ]
+    # TODO RMC14 S&W .38 model 37 revolver
+    primaryWeapons:
+    - [ CMBeltMarineHunting, RMCWeaponBoltActionRifle ]
+    #    - [ CMBeltMarineHunting, RMCWeaponBoltActionRifle ] # TODO RMC14 uzi
+    - [ CMBeltMarineBuckshot, RMCWeaponShotgunHG3712 ]
+    - [ CMBeltMarineAR10, WeaponRifleAR10 ]
+    primaryWeaponChance: 0.6

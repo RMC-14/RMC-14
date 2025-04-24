@@ -9,6 +9,7 @@ using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Client.ResourceManagement;
+using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -40,8 +41,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
     protected override void Open()
     {
         base.Open();
-        _window = new CMAutomatedVendorWindow();
-        _window.OnClose += Close;
+        _window = this.CreateWindow<CMAutomatedVendorWindow>();
         _window.Title = EntMan.GetComponentOrNull<MetaDataComponent>(Owner)?.EntityName ?? "ColMarTech Vendor";
         _window.ReagentsBar.ForegroundStyleBoxOverride = new StyleBoxFlat(Color.FromHex("#AF7F38"));
 
@@ -57,10 +57,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                 {
                     foreach (var job in section.Jobs)
                     {
-                        if (!_job.MindHasJobWithId(mindId, job.Id))
-                            validJob = false;
-                        else
-                            validJob = true;
+                        validJob = _job.MindHasJobWithId(mindId, job.Id);
                     }
                 }
 
@@ -87,6 +84,10 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                         uiEntry.Texture.Textures = SpriteComponent.GetPrototypeTextures(entity, _resource)
                             .Select(o => o.Default)
                             .ToList();
+                        if(entity.TryGetComponent<SpriteComponent>("Sprite", out var entitySprites))
+                        {
+                            uiEntry.Texture.Modulate = entitySprites.AllLayers.First().Color;
+                        }
                         uiEntry.Panel.Button.Label.Text = entry.Name?.Replace("\\n", "\n") ?? entity.Name;
 
                         var name = entity.Name;
@@ -128,7 +129,21 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
 
                         var sectionI = sectionIndex;
                         var entryI = entryIndex;
-                        uiEntry.Panel.Button.OnPressed += _ => OnButtonPressed(sectionI, entryI);
+                        var linkedEntryIndexes = new List<int>();
+
+                        foreach (var linkedEntry in entry.LinkedEntries)
+                        {
+                            var linkedEntryIndex = 0;
+                            foreach (var vendorEntry in section.Entries)
+                            {
+                                if(vendorEntry.Id == linkedEntry)
+                                    linkedEntryIndexes.Add(linkedEntryIndex);
+
+                                linkedEntryIndex++;
+                            }
+                        }
+
+                        uiEntry.Panel.Button.OnPressed += _ => OnButtonPressed(sectionI, entryI, linkedEntryIndexes);
                     }
 
                     uiSection.Entries.AddChild(uiEntry);
@@ -139,15 +154,12 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
         }
 
         _window.Search.OnTextChanged += OnSearchChanged;
-
         Refresh();
-
-        _window.OpenCentered();
     }
 
-    private void OnButtonPressed(int sectionIndex, int entryIndex)
+    private void OnButtonPressed(int sectionIndex, int entryIndex, List<int> linkedEntryIndexes)
     {
-        var msg = new CMVendorVendBuiMsg(sectionIndex, entryIndex);
+        var msg = new CMVendorVendBuiMsg(sectionIndex, entryIndex, linkedEntryIndexes);
         SendMessage(msg);
     }
 
@@ -273,12 +285,6 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
         _window.ReagentsBar.MaxValue = max.Int();
         _window.ReagentsBar.SetAsRatio((refiller.Current / refiller.Max).Float());
         _window.ReagentsLabel.Text = $"{current.Int()} units";
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        if (disposing)
-            _window?.Dispose();
     }
 
     protected override void ReceiveMessage(BoundUserInterfaceMessage message)

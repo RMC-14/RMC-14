@@ -10,7 +10,8 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/veteran.rsi
   - type: CMArmor
-    armor: 40
+    melee: 40
+    bullet: 40
     explosionArmor: 20
   - type: Insulated
 

@@ -201,7 +201,7 @@
     back: CMSatchel
     shoes: RMCShoesLaceup
     eyes: RMCGlassesAviators
-    id: CMIDCardLiaison
+    id: CMIDCardLiaisonColony
     ears: RMCHeadsetDistressWeYa
 #    belt: /obj/item/storage/belt/gun/m4a3/mod88
   storage:
@@ -251,14 +251,14 @@
   id: RMCCorpseColonistBurst
   components:
   - type: VictimBurst
-  
+
 - type: randomHumanoidSettings
   parent: RMCCorpse
   id: RMCCorpseColonistKutjevo
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseColonistKutjevo, RMCGearCorpseColonistKutjevoDrysuit ]
-    
+
 - type: startingGear
   id: RMCGearCorpseColonistKutjevo
   parent: RMCGearCorpseColonist
@@ -267,7 +267,7 @@
     head: ArmorHelmetPMCKutjevo
     mask: RMCMaskKutjevoRespirator
     jumpsuit: RMCJumpsuitKutjevoJumper
-    
+
 - type: startingGear
   id: RMCGearCorpseColonistKutjevoDrysuit
   parent: RMCGearCorpseColonistKutjevo
@@ -279,6 +279,24 @@
   id: RMCCorpseColonistKutjevoBurst
   components:
   - type: VictimBurst
+
+# Guidebook Colonist
+- type: entity
+  id: RMCGuidebookCorpseColonistBurst
+  parent: MobHuman
+  name: Dead Colonist
+  categories: [ DoNotMap, HideSpawnMenu ]
+  components:
+  - type: VictimBurst
+  - type: Loadout
+    prototypes: [ RMCGearCorpseColonist ]
+  - type: Damageable
+    damage:
+      types:
+        Bloodloss: 36
+        Asphyxiation: 44
+        Slash: 77
+        Blunt: 43
 
 # We-Ya Goon
 - type: randomHumanoidSettings
@@ -297,7 +315,7 @@
     back: CMBackpackMarine
     gloves: RMCHandsVeteran
     shoes: RMCBootsCorporate
-    id: RMCIDCardPMCColony
+    id: RMCIDCardPMC
     ears: CMHeadsetColony
     pocket1: RMCPouchFirstAidInjectors
   storage:

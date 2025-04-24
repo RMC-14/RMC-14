@@ -414,7 +414,7 @@
     color: green
 
 - type: entity
-  parent: RMCBaseFigurinePatron
+  parent: [ RMCBaseFigurinePatron, CMCanteenBase ]
   id: RMCFigurinePatronNesartOnan
   name: Nesart Onan figurine
   description: "Blood loss is no joke! Come get some gauze from your local medbay today!"
@@ -430,6 +430,19 @@
     solutions:
       drink:
         maxVol: 30
+        reagents:
+        - ReagentId: IceCream
+          Quantity: 30
+  - type: SolutionTransfer
+    transferAmount: 30
+    maxTransferAmount: 30
+    canChangeTransferAmount: true
+    transferAmounts:
+    - 5
+    - 10
+    - 15
+    - 25
+    - 30
   - type: Damageable
     damageContainer: Inorganic
   - type: Destructible
@@ -1249,3 +1262,72 @@
       params:
         volume: 5
         maxDistance: 1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronFast-pawsChip
+  name: Fast-paws Chip figurine
+  components:
+  - type: Sprite
+    state: fast-paws_chip
+  - type: PatronFigurine
+    id: c5f5b62a-5206-4948-9745-e4d9bbb87764
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronHaileyMorgan
+  name: Hailey Morgan figurine
+  description: "\"Oh my gawd, bestie, I loooove your outfit.\""
+  components:
+  - type: Sprite
+    state: hailey_morgan
+  - type: PatronFigurine
+    id: a26fad54-176e-4b70-9dff-567af81b6c11
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronOsbornCheeseballCurry
+  name: Osborn 'Cheeseball' Curry figurine
+  description: "Under the figurine, a text is engraved that reads:
+
+
+    \"In the silence, I hear them crawl...\"
+
+    \"From the shadows, we answer the call…\"
+
+    \"One shot... one kill...\"
+
+    \"Another queen falls...\"
+
+
+    \"We wombo combo, in the dark we reign,\"
+
+    \"The stars above, watchin’ in vain.\"
+
+    \"Through fire and ash, through blood and bone,\"
+
+    \"We stand as brothers, in this war we own.\"
+
+
+    A souvenir for my brotha Pip, may this figurine bring you comfort in your darkest hours.
+
+    Let it be a reminder of our friendship, even in the most remote and lonely corners of the world.
+
+
+    ATTENTION: DO NOT LICK, DOES NOT TASTE LIKE ORANGE!"
+  components:
+  - type: Sprite
+    state: osborn_cheeseball_curry
+  - type: PatronFigurine
+    id: 245a7cc3-33dc-4008-bed7-7af5d63cddd4
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronGregorCain
+  name: Gregor Cain figurine
+  description: ""
+  components:
+  - type: Sprite
+    state: gregor_cain
+  - type: PatronFigurine
+    id: 8fdc1c0b-262a-4281-b864-a41b9ba2790d

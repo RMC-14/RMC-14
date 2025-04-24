@@ -1,32 +1,35 @@
-using System.Linq;
+﻿using System.Linq;
 using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Medical.Surgery.Steps;
-using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Xenonids;
-using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Slowing;
 using Content.Shared.Alert;
+using Content.Shared.Armor;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
-using Content.Shared.Destructible;
 using Content.Shared.Explosion;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Movement.Components;
 using Content.Shared.Preferences;
 using Content.Shared.Rounding;
 using Content.Shared.Weapons.Melee;
+using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.Manager;
 
 namespace Content.Shared._RMC14.Armor;
 
 public sealed class CMArmorSystem : EntitySystem
 {
     [Dependency] private readonly AlertsSystem _alerts = default!;
+    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly ISerializationManager _serializationManager = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> ArmorGroup = "Brute";
@@ -66,6 +69,9 @@ public sealed class CMArmorSystem : EntitySystem
 
         SubscribeLocalEvent<InventoryComponent, RMCEquipAttemptEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, RefreshArmorSpeedTierEvent>(_inventory.RelayEvent);
+
+        SubscribeLocalEvent<RMCAllowSuitStorageUserWhitelistComponent, GotEquippedEvent>(OnAllowSuitStorageUserWhitelistGotEquipped);
+        SubscribeLocalEvent<RMCAllowSuitStorageUserWhitelistComponent, GotUnequippedEvent>(OnAllowSuitStorageUserWhitelistGotUnequipped);
     }
 
     private void OnMapInit(Entity<CMArmorComponent> armored, ref MapInitEvent args)
@@ -265,26 +271,29 @@ public sealed class CMArmorSystem : EntitySystem
             }
         }
 
+        //Default modifier
+        var mod = EnsureComp<RMCArmorModifierComponent>(ent);
+
         args.Damage = new DamageSpecifier(args.Damage);
         if (!HasComp<XenoComponent>(ent))
         {
             if (HasComp<RMCBulletComponent>(args.Tool))
             {
-                Resist(args.Damage, ev.Bullet, ArmorGroup);
+                Resist(args.Damage, ev.Bullet, ArmorGroup, mod.RangedArmorModifier);
             }
             else if (HasComp<MeleeWeaponComponent>(args.Tool))
             {
-                Resist(args.Damage, ev.Melee, ArmorGroup);
+                Resist(args.Damage, ev.Melee, ArmorGroup, mod.MeleeArmorModifier);
             }
-            Resist(args.Damage, ev.Bio, BioGroup);
+            Resist(args.Damage, ev.Bio, BioGroup, mod.RangedArmorModifier);
         }
         else
         {
-            Resist(args.Damage, ev.XenoArmor, ArmorGroup);
+            Resist(args.Damage, ev.XenoArmor, ArmorGroup, mod.RangedArmorModifier);
         }
     }
 
-    private void Resist(DamageSpecifier damage, int armor, ProtoId<DamageGroupPrototype> group)
+    private void Resist(DamageSpecifier damage, int armor, ProtoId<DamageGroupPrototype> group, int mult)
     {
         armor = Math.Max(armor, 0);
         if (armor <= 0)
@@ -305,14 +314,15 @@ public sealed class CMArmorSystem : EntitySystem
         var newDamage = damage.GetTotal();
         if (newDamage != FixedPoint2.Zero && newDamage < armor * 2)
         {
-            var damageWithArmor = FixedPoint2.Max(0, newDamage * 4 - armor);
+
+            var damageWithArmor = FixedPoint2.Max(0, newDamage * mult - armor);
 
             foreach (var type in types)
             {
                 if (damage.DamageDict.TryGetValue(type, out var amount) &&
                     amount > FixedPoint2.Zero)
                 {
-                    damage.DamageDict[type] = amount * damageWithArmor / (newDamage * 4);
+                    damage.DamageDict[type] = amount * damageWithArmor / (newDamage * mult);
                 }
             }
         }
@@ -362,10 +372,47 @@ public sealed class CMArmorSystem : EntitySystem
         RaiseLocalEvent(user.Owner, ref ev);
 
         user.Comp.SpeedTier = ev.SpeedTier;
+
+        var speed = user.Comp.SpeedTier switch
+        {
+            "light" => 0.483f,
+            "medium" => 0.526f,
+            "heavy" => 0.565f,
+            _ => 0.35f,
+        };
+
+        if (!TryComp(user, out MobCollisionComponent? mobCollision))
+            return;
+
+        mobCollision.MinimumSpeedModifier = speed;
+        Dirty(user, mobCollision);
     }
 
     private void OnRefreshArmorSpeedTier(Entity<RMCArmorSpeedTierComponent> armor, ref InventoryRelayedEvent<RefreshArmorSpeedTierEvent> args)
     {
         args.Args.SpeedTier = armor.Comp.SpeedTier;
+    }
+
+    private void OnAllowSuitStorageUserWhitelistGotEquipped(Entity<RMCAllowSuitStorageUserWhitelistComponent> ent, ref GotEquippedEvent args)
+    {
+        if (!_entityWhitelist.IsWhitelistPass(ent.Comp.User, args.Equipee))
+        {
+            var comp = EnsureComp<AllowSuitStorageComponent>(ent);
+            comp.Whitelist = _serializationManager.CreateCopy(ent.Comp.DefaultWhitelist, notNullableOverride: true);
+            Dirty(ent, comp);
+            return;
+        }
+
+        if (!_prototypes.TryIndex(ent.Comp.AllowedWhitelist, out var allowed))
+            return;
+
+        EntityManager.AddComponents(ent, allowed);
+    }
+
+    private void OnAllowSuitStorageUserWhitelistGotUnequipped(Entity<RMCAllowSuitStorageUserWhitelistComponent> ent, ref GotUnequippedEvent args)
+    {
+        var comp = EnsureComp<AllowSuitStorageComponent>(ent);
+        comp.Whitelist = _serializationManager.CreateCopy(ent.Comp.DefaultWhitelist, notNullableOverride: true);
+        Dirty(ent, comp);
     }
 }

@@ -1,0 +1,57 @@
+﻿<Document>
+  [color=#5f698a]█    █ █▄ █[/color] [head=2][bold]UNITED NATIONS MARINE CORPS[/bold][/head]\n
+  [color=#5f698a]▀ ▄▀ █ ▀█ [/color]
+
+  #Know your betters
+  ##A guide to command staff and department heads
+
+  So, you're awake, you're fed, you're dressed, and you're armed. You've made it to briefing and now you're wondering who to suck up to for that medal or promotion. Here's a rundown on the brass so you can get to kissing ass:
+  <Box>
+    <GuideEntityEmbed Entity="RMCGuidebookRoleCO"/>
+  </Box>
+  -The [bold]Commanding Officer[/bold] (commonly referred to as CO) is running the show. They will tell the other officers what to do so they can tell YOU what to do.
+  -The position of CO is held only by those who have proven their courage, loyalty, and competence. They have supreme authority aboard this vessel, and answer only to High Command.
+  \n
+  <Box>
+    <GuideEntityEmbed Entity="RMCGuidebookRoleXO"/>
+  </Box>
+  -The [bold]Executive Officer[/bold] (or XO) is second to the Commanding Officer. If the CO is the brain, the XO is the hand.
+  \n
+  <Box>
+    <GuideEntityEmbed Entity="RMCGuidebookRoleSO"/>
+  </Box>
+  -A [bold]Staff Officer[/bold] (or SO) coordinates with the squad leaders and relays orders and intel to the XO and CO. They run overwatch on the squad and can see through the camera on your helmet (which you ARE wearing, aren't you?).
+  \n
+  <Box>
+    <GuideEntityEmbed Entity="RMCGuidebookRoleCMP"/>
+  </Box>
+  -The [bold]Chief of Military Police[/bold] oversees the Military Police and ensures that marine law is observed and enforced.
+  \n
+  <Box>
+    <GuideEntityEmbed Entity="RMCGuidebookRoleCMO"/>
+  </Box>
+  -The [bold]Chief Medical Officer[/bold] oversees the Medbay and ensures the medical staff are operating efficiently and that research is being conducted safely and ethically.
+  \n
+  <Box>
+    <GuideEntityEmbed Entity="RMCGuidebookRoleASO"/>
+  </Box>
+  -The [bold]Auxiliary Support Officer[/bold] oversees the Hangar, Intel, Requisitions, and Engineering departments. While Req and Engineering have their own section head, the ASO has direct authority over them.
+  \n
+  <Box>
+    <GuideEntityEmbed Entity="RMCGuidebookRoleCE"/>
+  </Box>
+  -The [bold]Chief Engineer[/bold] oversees the Maintenance and Ordnance Technicians.
+  \n
+  <Box>
+    <GuideEntityEmbed Entity="RMCGuidebookRoleQM"/>
+  </Box>
+  -The [bold]Quartermaster[/bold] operates the requisitions department and oversees the Cargo Technicians. While not a commissioned officer, the QM is one of the highest ranking enlisted aboard and warrants a spot on this list.
+  <Box>
+  Refer to the Chain of Command to learn the pecking order and remember:
+  </Box>
+  <Box>
+    [bold]SALUTE![/bold]
+  </Box>
+
+  ### Guide by teatotaltemplar
+</Document>

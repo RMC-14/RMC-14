@@ -30,7 +30,7 @@
   startingGear: CMGearASO
   icon: "CMJobIconASO"
   requireAdminNotify: true
-  joinNotifyCrew: true
+  joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
   accessGroups:
   - ASO
@@ -67,6 +67,13 @@
       prefix: cm-job-prefix-aso
     - type: ViewIntelObjectives
     - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: aso
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_command
 
 - type: startingGear
   id: CMGearASO
@@ -98,7 +105,7 @@
 
 - type: entity
   parent: CMGuidebookRole
-  id: CMGuidebookRoleASO
+  id: RMCGuidebookRoleASO
   name: Auxiliary Support Officer
   categories: [ HideSpawnMenu ]
   components:

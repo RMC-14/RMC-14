@@ -189,6 +189,9 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
 
     private void OnEmptySolutionGetVerbs(Entity<RMCEmptySolutionComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
+        if (!args.CanAccess || !args.CanComplexInteract)
+            return;
+
         if (!_solution.TryGetSolution(ent.Owner, ent.Comp.Solution, out var solutionEnt, out _) ||
             solutionEnt.Value.Comp.Solution.Volume <= FixedPoint2.Zero)
         {
@@ -227,7 +230,6 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
         }
 
         _solution.SplitSolution(solutionEnt.Value, args.Amount);
-        Log.Info(solutionEnt.Value.Comp.Solution.Volume.ToString());
         DispenserUpdated(ent);
     }
 

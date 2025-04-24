@@ -17,5 +17,8 @@ public sealed partial class SurvivorPresetComponent : Component
     public List<List<EntProtoId>> PrimaryWeapons = new();
 
     [DataField, AutoNetworkedField]
+    public List<List<List<EntProtoId>>> RandomGearOther = new();
+
+    [DataField, AutoNetworkedField]
     public float PrimaryWeaponChance = 0.6f;
 }

@@ -54,6 +54,13 @@
       prefix: cm-job-prefix-executive-officer
     - type: ViewIntelObjectives
     - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: xo
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_command
 
 - type: startingGear
   id: CMGearExecutiveOfficer
@@ -83,3 +90,13 @@
 - type: playTimeTracker
   id: CMJobExecutiveOfficer
   isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleXO
+  name: The Executive Officer
+  description: The Executive Officer.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: executive_officer

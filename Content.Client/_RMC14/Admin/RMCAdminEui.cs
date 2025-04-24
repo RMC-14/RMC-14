@@ -128,7 +128,7 @@ public sealed class RMCAdminEui : BaseEui
 
     private void OnCreateHiveClosed()
     {
-        _createHiveWindow?.Dispose();
+        _createHiveWindow?.Close();
         _createHiveWindow = null;
     }
 
@@ -136,7 +136,7 @@ public sealed class RMCAdminEui : BaseEui
     {
         var msg = new RMCAdminCreateHiveMsg(args.Text);
         SendMessage(msg);
-        _createHiveWindow?.Dispose();
+        _createHiveWindow?.Close();
     }
 
     public override void HandleState(EuiStateBase state)
@@ -223,6 +223,6 @@ public sealed class RMCAdminEui : BaseEui
 
     public override void Closed()
     {
-        _adminWindow.Dispose();
+        _adminWindow.Close();
     }
 }
