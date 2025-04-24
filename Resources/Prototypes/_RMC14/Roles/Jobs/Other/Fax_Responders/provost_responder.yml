@@ -66,7 +66,7 @@
     outerClothing: RMCProvostJacket
     gloves: CMHandsBlackMarine
     shoes: CMBootsBlackFilled
-    id: RMCIDCardProvostAdvisor
+    id: RMCIDCardProvostResponder
     belt: CMBeltSecurityMP
     back: CMSatchelSecurity
     pocket1: RMCPouchDocument
@@ -75,3 +75,19 @@
 
 - type: playTimeTracker
   id: RMCJobProvostResponder
+
+- type: entity
+  parent: CMIDCardGold
+  id: RMCIDCardProvostResponder
+  name: provost responder ID card
+  description: Issued to members of the Provost Marshal Office.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+  - type: PresetIdCard
+    job: RMCProvostResponder

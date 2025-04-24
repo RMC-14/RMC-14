@@ -62,7 +62,7 @@
     jumpsuit: CMJumpsuitBO
     shoes: RMCShoesLaceup
     head: RMCHeadCapFlippable
-    id: CMIDCardStaffOfficer
+    id: RMCIDCardCMBResponder
     ears: CMHeadsetHighCommand
     back: CMSatchel
     pocket1: RMCPouchGeneralLarge
@@ -71,3 +71,18 @@
 
 - type: playTimeTracker
   id: RMCJobCMBResponder
+
+- type: entity
+  parent: CMIDCardSilver
+  id: RMCIDCardCMBResponder
+  name: CMB Communications Officer ID card
+  description: Issued to the fax operators of CMB Regional Command. Represents a commitment to upholding the law.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/silver_id.rsi
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/silver_id.rsi
+  - type: PresetIdCard
+    job: RMCCMBResponder

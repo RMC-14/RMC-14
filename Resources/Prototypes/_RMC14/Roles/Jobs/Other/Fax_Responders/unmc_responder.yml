@@ -62,7 +62,7 @@
     jumpsuit: CMJumpsuitBO
     shoes: RMCShoesLaceup
     head: RMCHeadCapFlippable
-    id: CMIDCardStaffOfficer
+    id: RMCIDCardUNMCResponder
     ears: CMHeadsetHighCommand
     back: CMSatchel
     pocket1: RMCPouchGeneralLarge
@@ -71,3 +71,18 @@
 
 - type: playTimeTracker
   id: RMCJobUNMCResponder
+
+- type: entity
+  parent: CMIDCardGold
+  id: RMCIDCardUNMCResponder
+  name: UNMC Communications Officer ID card
+  description: Issued to the fax operators of UNMC Regional Command.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/gold_id.rsi
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/gold_id.rsi
+  - type: PresetIdCard
+    job: RMCUNMCResponder

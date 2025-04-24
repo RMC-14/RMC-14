@@ -55,5 +55,5 @@
 
 - type: rank
   id: RMCRankCMBResponder
-  name: CMB Communications Officer
-  prefix: "Comm."
+  name: Communications Officer
+  prefix: "Com. Off."

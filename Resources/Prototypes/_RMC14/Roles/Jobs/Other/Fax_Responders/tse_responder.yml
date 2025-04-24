@@ -62,7 +62,7 @@
     jumpsuit: CMJumpsuitBO
     shoes: RMCBootsRoyal
     head: RMCHeadRoyalBeret
-    id: CMIDCardStaffOfficer
+    id: RMCIDCardTSEResponder
     ears: RMCHeadsetRoyalMarine #Need to make headset with all UNMC channels; double check parity
     back: CMSatchel
     pocket1: RMCPouchGeneralLarge
@@ -71,3 +71,18 @@
 
 - type: playTimeTracker
   id: RMCJobTSEResponder
+
+- type: entity
+  parent: CMIDCardSilver
+  id: RMCIDCardTSEResponder
+  name: TSE Communications Officer ID card
+  description: A mass produced indentification card, imprinted with the logo of the Three Suns Empire.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/silver_id.rsi
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/silver_id.rsi
+  - type: PresetIdCard
+    job: RMCTSEResponder

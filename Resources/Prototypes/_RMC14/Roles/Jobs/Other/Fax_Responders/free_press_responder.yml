@@ -33,7 +33,7 @@
 
 - type: entity
   id: RMCRandomHumanoidFreePressResponder
-  name: FreePress responder ghost role
+  name: Free Press responder ghost role
   suffix: Spawner, Player, Fax Responder
   components:
   - type: Sprite
@@ -62,7 +62,7 @@
     jumpsuit: CMJumpsuitBO
     shoes: RMCShoesLaceup
     head: RMCHeadCapFlippable
-    id: CMIDCardStaffOfficer
+    id: RMCIDCardFreePressResponder
     ears: CMHeadsetHighCommand
     back: CMSatchel
     pocket1: RMCPouchGeneralLarge
@@ -71,3 +71,18 @@
 
 - type: playTimeTracker
   id: RMCJobFreePressResponder
+
+- type: entity
+  parent: CMIDCardSilver
+  id: RMCIDCardFreePressResponder
+  name: Free Press ID card
+  description: A common ID card. This one seems to be well traveled.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/silver_id.rsi
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/silver_id.rsi
+  - type: PresetIdCard
+    job: RMCFreePressResponder

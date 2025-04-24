@@ -64,11 +64,25 @@
     jumpsuit: CMJumpsuitLiaisonBlue
     outerClothing: RMCJacketCorporateBlue
     shoes: RMCShoesLaceup
-    id: RMCIDCardExecutiveCorporateSpecialist
+    id: RMCIDCardWeYaResponder
     pocket2: CMClipboard # TODO RMC14 notepad
   inhand:
   - CMPaper
 
-
 - type: playTimeTracker
   id: RMCJobWeYaResponder
+
+- type: entity
+  parent: CMIDCardGold
+  id: RMCIDCardWeYaResponder
+  name: We-Ya Communications Executive ID card
+  description: A fancy, faux gold plated ID card. One of many given to Weston-Yamada's army of fax operators.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/gold_id.rsi
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/gold_id.rsi
+  - type: PresetIdCard
+    job: RMCWeYaResponder
