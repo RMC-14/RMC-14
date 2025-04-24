@@ -36,27 +36,45 @@
     - name: Extra Scout Ammunition
       entries:
       - id: RMCMagazineRifleM4SPRA19Impact
+        name: A19 HV high impact magazine (10x24mm) (3)
         points: 40
+        spawn: 3
       - id: RMCMagazineRifleM4SPRA19Incendiary
+        name: A19 HV incendiary magazine (10x24mm) (3)
         points: 40
+        spawn: 3
       - id: RMCMagazineRifleM4SPRA19
+        name: A19 HV magazine (10x24mm) (5)
         points: 40
+        spawn: 5
     - name: Extra Sniper Ammunition
       entries:
       - id: CMMagazineSniperM96SFlak
+        name: M96S flak magazine (10x28mm) (5)
         points: 40
+        spawn: 5
       - id: CMMagazineSniperM96SIncendiary
+        name: M96S incendiary magazine (10x28mm) (5)
         points: 40
+        spawn: 5
       - id: CMMagazineSniperM96S
+        name: M96S marksman magazine (10x28mm) (5)
         points: 40
+        spawn: 5
       - id: RMCMagazineSniperXM43E1AntiMateriel
+        name: XM43E1 marksman magazine (10x99mm) (3)
         points: 40
+        spawn: 3
     - name: Extra Demolitionist Ammunition
       entries:
       - id: RMCRocket84mmAntiArmor
+        name: 84mm anti armor rocket (3)
         points: 40
+        spawn: 3
       - id: RMCRocket84mm
+        name: 84mm high explosive rocket (3)
         points: 40
+        spawn: 3
     #- id: 84mmWhitePhosphorusRocket
     #  points: 40
     - name: Extra Grenades
