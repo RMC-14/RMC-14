@@ -3,7 +3,7 @@
   id: RMCJobSyntheticColony
   name: rmc-job-name-synth-colony
   description: rmc-job-description-synth-colony
-  playTimeTracker: RMCJobSynthColony
+  playTimeTracker: RMCJobSyntheticColony
   ranks:
     RMCRankSyntheticMG:
     - !type:RoleTimeRequirement
@@ -79,5 +79,5 @@
 #    state: syn_spawn
 
 - type: playTimeTracker
-  id: RMCJobSynthColony
+  id: RMCJobSyntheticColony
   isHumanoid: true
