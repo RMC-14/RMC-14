@@ -525,7 +525,7 @@ namespace Content.Client.Lobby.UI
 
             #region AutoItemName
 
-            AutoItemNameButton.OnPressed += args =>
+            NamedItems.AutoItemNameButton.OnPressed += args =>
             {
                 SetAutoItemName(args.Button.Pressed);
             };
@@ -1722,7 +1722,7 @@ namespace Content.Client.Lobby.UI
 
         private void UpdateAutoItemName()
         {
-            AutoItemNameButton.Pressed = Profile?.AutoItemName ?? true;
+            NamedItems.AutoItemNameButton.Pressed = Profile?.AutoItemName ?? true;
         }
 
         private void UpdateNamedItems()

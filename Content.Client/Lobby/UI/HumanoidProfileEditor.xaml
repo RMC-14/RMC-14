@@ -178,11 +178,6 @@
                 </BoxContainer>
                 <BoxContainer Name="NamedItemsTab" Orientation="Vertical" Margin="10">
                     <!-- Named Items -->
-                    <BoxContainer Orientation="Horizontal">
-                        <Label Text="{Loc 'humanoid-profile-editor-enable-auto-name-item'}" />
-                        <Control HorizontalExpand="True"/>
-                        <Button Name="AutoItemNameButton" Pressed="True" ToggleMode="True" Text="{Loc 'humanoid-profile-editor-enable'}" HorizontalAlignment="Right" />
-                    </BoxContainer>
                     <namedItems:NamedItemsPicker Name="NamedItems" />
                 </BoxContainer>
             </TabContainer>
