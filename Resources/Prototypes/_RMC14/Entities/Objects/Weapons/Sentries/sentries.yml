@@ -200,8 +200,6 @@
   - type: NpcFactionMember
     factions:
     - UNMC
-  - type: UserIFF
-    faction: FactionMarine
 
 - type: entity
   parent: RMCSentry
@@ -275,8 +273,6 @@
   - type: NpcFactionMember
     factions:
     - WeYa
-  - type: UserIFF
-    faction: FactionWeYa
 
 - type: entity
   parent: RMCSentryMini
@@ -287,8 +283,6 @@
   - type: NpcFactionMember
     factions:
     - SPP
-  - type: UserIFF
-    faction: FactionSPP
 
 - type: entity
   parent: RMCSentry

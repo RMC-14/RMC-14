@@ -7,7 +7,6 @@ using Content.Server.Storage.EntitySystems;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Requisitions;
 using Content.Shared._RMC14.Requisitions.Components;
-using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chasm;
 using Content.Shared.Coordinates;
@@ -45,7 +44,6 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
 
     private static readonly EntProtoId AccountId = "RMCASRSAccount";
     private static readonly EntProtoId PaperRequisitionInvoice = "RMCPaperRequisitionInvoice";
-    private static readonly EntProtoId<IFFFactionComponent> MarineFaction = "FactionMarine";
 
     private EntityQuery<ChasmComponent> _chasmQuery;
     private EntityQuery<ChasmFallingComponent> _chasmFallingQuery;

@@ -188,7 +188,6 @@
   - type: RMCSize
     size: Humanoid
   - type: AffectableByWeeds
-  - type: UserIFF
   - type: UserLimitHits
   - type: MovementIgnoreGravity
   - type: MovementSpeedModifier

@@ -2,6 +2,22 @@
   id: UNMC
   hostile:
   - RMCXeno
+  channels:
+  - MarineCommand
+  - MarineMedical
+  - MarineEngineer
+  - MarineMilitaryPolice
+#    - TODO RMC14 sentry
+  - MarineAlpha
+  - MarineBravo
+  - MarineCharlie
+  - MarineDelta
+  - MarineEcho
+  - MarineFoxtrot
+  - MarineRequisition
+  - MarineJTAC
+  - MarineIntel
+  - WEYA
 
 - type: npcFaction
   id: RMCXeno
@@ -24,13 +40,24 @@
   id: SPP
   hostile:
   - RMCXeno
+  channels:
+  - SPP
+  - SPPCommand
+  - SPPEngi
+  - SPPMed
+  - SPPCCT
 
 - type: npcFaction
   id: WeYa
   hostile:
   - RMCXeno
+  channels:
+  - Colony
+  - WEYA
 
 - type: npcFaction
   id: Survivor
   hostile:
   - RMCXeno
+  channels:
+  - Colony

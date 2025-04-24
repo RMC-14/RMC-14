@@ -693,7 +693,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             var marineFactions = EntityQueryEnumerator<MarineIFFComponent>();
             while (marineFactions.MoveNext(out var iffId, out _))
             {
-                _gunIFF.SetUserFaction(iffId, comp.MarineFaction);
+                _gunIFF.SetUserFactions(iffId, [comp.MarineFaction]);
             }
 
             var faxes = EntityQueryEnumerator<FaxMachineComponent>();
@@ -782,7 +782,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             }
 
             var faction = HasComp<RMCSurvivorComponent>(ev.SpawnResult.Value) ? comp.SurvivorFaction : comp.MarineFaction;
-            _gunIFF.SetUserFaction(ev.SpawnResult.Value, faction);
+            _gunIFF.SetUserFactions(ev.SpawnResult.Value, [faction]);
             return;
         }
     }

@@ -11,6 +11,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
+using Content.Shared.NPC.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Radio;
@@ -36,6 +37,7 @@ public sealed class CommunicationsTowerSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedRMCPowerSystem _rmcPower = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly NpcFactionSystem _faction = default!;
 
     private readonly Dictionary<EntProtoId, List<Entity<CommunicationsTowerSpawnerComponent>>> _spawners = new();
 
@@ -147,11 +149,9 @@ public sealed class CommunicationsTowerSystem : EntitySystem
         if (ent.Comp.State == CommunicationsTowerState.Broken)
             return;
 
-        if (_gunIFF.TryGetUserFaction(args.User, out var faction) &&
-            _prototypes.TryIndex(faction, out var factionProto) &&
-            factionProto.TryGetComponent(out FactionFrequenciesComponent? frequencies, _compFactory))
+        if (_gunIFF.TryGetUserFactions(args.User, out var factions))
         {
-            ent.Comp.Channels.UnionWith(frequencies.Channels);
+            ent.Comp.Channels.UnionWith(_faction.GetFrequencies(factions));
             Dirty(ent);
         }
 

@@ -4,11 +4,12 @@ using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Requisitions;
 using Content.Shared._RMC14.Requisitions.Components;
 using Content.Shared._RMC14.Vendors;
-using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.NPC.Components;
+using Content.Shared.NPC.Prototypes;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
 using Robust.Shared.Configuration;
@@ -97,7 +98,7 @@ public sealed class ScalingSystem : EntitySystem
         return (scalingId, scalingComp);
     }
 
-    public void TryStartScaling(EntProtoId<IFFFactionComponent> faction)
+    public void TryStartScaling(ProtoId<NpcFactionPrototype> faction)
     {
         var scaling = EnsureScaling();
         if (scaling.Comp.Started)
@@ -107,10 +108,11 @@ public sealed class ScalingSystem : EntitySystem
         Dirty(scaling);
 
         var marineCount = _marineScalingBonus;
-        var marines = EntityQueryEnumerator<UserIFFComponent, ActorComponent>();
+        var marines = EntityQueryEnumerator<NpcFactionMemberComponent, ActorComponent>();
         while (marines.MoveNext(out var marineId, out var userIFF, out _))
         {
-            if (userIFF.Faction != faction)
+            var factions = userIFF.Factions;
+            if (!factions.Contains(faction))
                 continue;
 
             if (!_mind.TryGetMind(marineId, out var mindId, out _) ||

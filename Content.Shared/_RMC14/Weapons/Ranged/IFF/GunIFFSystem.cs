@@ -2,6 +2,10 @@ using Content.Shared._RMC14.Attachable.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
 using Content.Shared.Inventory;
+using Content.Shared.NPC.Components;
+using Content.Shared.NPC.Prototypes;
+using Content.Shared.NPC.Systems;
+using Content.Shared.Singularity.EntitySystems;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Containers;
 using Robust.Shared.Physics.Events;
@@ -13,14 +17,15 @@ public sealed class GunIFFSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly NpcFactionSystem _faction = default!;
 
-    private EntityQuery<UserIFFComponent> _userIFFQuery;
+    private EntityQuery<NpcFactionMemberComponent> _userIFFQuery;
 
     public override void Initialize()
     {
-        _userIFFQuery = GetEntityQuery<UserIFFComponent>();
+        _userIFFQuery = GetEntityQuery<NpcFactionMemberComponent>();
 
-        SubscribeLocalEvent<UserIFFComponent, GetIFFFactionEvent>(OnUserIFFGetFaction);
+        SubscribeLocalEvent<NpcFactionMemberComponent, GetIFFFactionEvent>(OnUserIFFGetFaction);
         SubscribeLocalEvent<InventoryComponent, GetIFFFactionEvent>(OnInventoryIFFGetFaction);
         SubscribeLocalEvent<HandsComponent, GetIFFFactionEvent>(OnHandsIFFGetFaction);
         SubscribeLocalEvent<ItemIFFComponent, InventoryRelayedEvent<GetIFFFactionEvent>>(OnItemIFFGetFaction);
@@ -29,14 +34,14 @@ public sealed class GunIFFSystem : EntitySystem
         SubscribeLocalEvent<ProjectileIFFComponent, PreventCollideEvent>(OnProjectileIFFPreventCollide);
     }
 
-    private void OnUserIFFGetFaction(Entity<UserIFFComponent> ent, ref GetIFFFactionEvent args)
+    private void OnUserIFFGetFaction(Entity<NpcFactionMemberComponent> ent, ref GetIFFFactionEvent args)
     {
-        args.Faction ??= ent.Comp.Faction;
+        args.Factions ??= ent.Comp.Factions;
     }
 
     private void OnInventoryIFFGetFaction(Entity<InventoryComponent> ent, ref GetIFFFactionEvent args)
     {
-        if (args.Faction != null)
+        if (args.Factions != null)
             return;
 
         _inventory.RelayEvent(ent, ref args);
@@ -44,7 +49,7 @@ public sealed class GunIFFSystem : EntitySystem
 
     private void OnHandsIFFGetFaction(Entity<HandsComponent> ent, ref GetIFFFactionEvent args)
     {
-        if (args.Faction != null)
+        if (args.Factions != null)
             return;
 
         foreach (var (_, hand) in ent.Comp.Hands)
@@ -53,14 +58,15 @@ public sealed class GunIFFSystem : EntitySystem
                 continue;
 
             RaiseLocalEvent(held, ref args);
-            if (args.Faction != null)
+            if (args.Factions != null)
                 break;
         }
     }
 
     private void OnItemIFFGetFaction(Entity<ItemIFFComponent> ent, ref InventoryRelayedEvent<GetIFFFactionEvent> args)
     {
-        args.Args.Faction ??= ent.Comp.Faction;
+        if (ent.Comp.Faction is { } faction)
+            args.Args.Factions ??= new([faction]);
     }
 
     private void OnGunIFFAmmoShot(Entity<GunIFFComponent> ent, ref AmmoShotEvent args)
@@ -82,44 +88,46 @@ public sealed class GunIFFSystem : EntitySystem
     private void OnProjectileIFFPreventCollide(Entity<ProjectileIFFComponent> ent, ref PreventCollideEvent args)
     {
         if (args.Cancelled ||
-            ent.Comp.Faction is not { } faction)
+            ent.Comp.Factions is not { } factions)
         {
             return;
         }
 
-        if (ent.Comp.Enabled && IsInFaction(args.OtherEntity, faction))
+        if (ent.Comp.Enabled && IsInFaction(args.OtherEntity, factions))
             args.Cancelled = true;
 
-        if (HasComp<EntityIFFComponent>(args.OtherEntity) && IsInFaction(args.OtherEntity, faction))
+        if (HasComp<EntityIFFComponent>(args.OtherEntity) && IsInFaction(args.OtherEntity, factions))
             args.Cancelled = true;
     }
 
-    public bool TryGetUserFaction(Entity<UserIFFComponent?> user, out EntProtoId<IFFFactionComponent> faction)
+    public bool TryGetUserFactions(Entity<NpcFactionMemberComponent?> user, out HashSet<ProtoId<NpcFactionPrototype>> factions)
     {
-        faction = default;
+        factions = [];
         if (!_userIFFQuery.Resolve(user, ref user.Comp, false) ||
-            user.Comp.Faction is not { } userFaction)
+            user.Comp.Factions is not { } userFaction)
             return false;
 
-        faction = userFaction;
+        factions = userFaction;
         return true;
     }
 
-    public bool IsInFaction(Entity<UserIFFComponent?> user, EntProtoId<IFFFactionComponent> faction)
+    public bool IsInFaction(Entity<NpcFactionMemberComponent?> user, HashSet<ProtoId<NpcFactionPrototype>> factions)
     {
         if (!_userIFFQuery.Resolve(user, ref user.Comp, false))
             return false;
 
         var ev = new GetIFFFactionEvent(null, SlotFlags.IDCARD);
         RaiseLocalEvent(user, ref ev);
-        return ev.Faction == faction;
+        if (ev.Factions is not { } eventFactions)
+            return false;
+
+        return factions.Overlaps(eventFactions);
     }
 
-    public void SetUserFaction(Entity<UserIFFComponent?> user, EntProtoId<IFFFactionComponent> faction)
+    public void SetUserFactions(Entity<NpcFactionMemberComponent?> user, HashSet<ProtoId<NpcFactionPrototype>> factions)
     {
-        user.Comp = EnsureComp<UserIFFComponent>(user);
-        user.Comp.Faction = faction;
-        Dirty(user);
+        _faction.ClearFactions(user);
+        _faction.AddFactions(user, factions);
     }
 
     public void SetIFFState(EntityUid ent, bool enabled)
@@ -155,22 +163,23 @@ public sealed class GunIFFSystem : EntitySystem
         var ev = new GetIFFFactionEvent(null, SlotFlags.IDCARD);
         RaiseLocalEvent(owner, ref ev);
 
-        if (ev.Faction is not { } id)
+        if (ev.Factions is not { } id)
             return;
 
+        var friendly = _faction.GetFriendlyFactions(id);
         foreach (var projectile in args.FiredProjectiles)
         {
             var iff = EnsureComp<ProjectileIFFComponent>(projectile);
-            iff.Faction = id;
+            iff.Factions = friendly;
             iff.Enabled = enabled;
             Dirty(projectile, iff);
         }
     }
 
-    public void GiveAmmoIFF(EntityUid uid, EntProtoId<IFFFactionComponent>? faction, bool enabled)
+    public void GiveAmmoIFF(EntityUid uid, HashSet<ProtoId<NpcFactionPrototype>> factions, bool enabled)
     {
         var projectileIFFComponent = EnsureComp<ProjectileIFFComponent>(uid);
-        projectileIFFComponent.Faction = faction;
+        projectileIFFComponent.Factions = factions;
         projectileIFFComponent.Enabled = enabled;
     }
 }

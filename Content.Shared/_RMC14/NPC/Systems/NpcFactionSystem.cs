@@ -1,12 +1,18 @@
 using System.Collections.Frozen;
+using System.Linq;
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Prototypes;
+using Content.Shared.Radio;
+using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 
 // ReSharper disable CheckNamespace
 namespace Content.Shared.NPC.Systems;
 
 public sealed partial class NpcFactionSystem : EntitySystem
 {
+    [Dependency] private readonly INetManager _net = default!;
+
     public FrozenDictionary<string, FactionData> GetFactions()
     {
         return _factions;
@@ -85,9 +91,51 @@ public sealed partial class NpcFactionSystem : EntitySystem
         var query = AllEntityQuery<NpcFactionMemberComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            comp.FriendlyFactions.Clear();
-            comp.HostileFactions.Clear();
             RefreshFactions((uid, comp));
+            Dirty(uid, comp);
         }
+
+        if (_net.IsServer)
+            RaiseNetworkEvent(new RefreshFactionDataEvent(_factions.ToDictionary()));
+    }
+
+    public HashSet<ProtoId<NpcFactionPrototype>> GetFriendlyFactions(HashSet<ProtoId<NpcFactionPrototype>> sources)
+    {
+        HashSet<ProtoId<NpcFactionPrototype>> friendly = new(sources);
+
+        foreach (var source in sources.ToList())
+        {
+            if (!_factions.TryGetValue(source, out var sourceFaction))
+            {
+                Log.Error($"Unable to find faction {source}");
+                continue;
+            }
+            friendly.UnionWith(sourceFaction.Friendly);
+        }
+
+        return friendly;
+    }
+
+    public HashSet<ProtoId<RadioChannelPrototype>> GetFrequencies(HashSet<ProtoId<NpcFactionPrototype>> sources)
+    {
+        HashSet<ProtoId<RadioChannelPrototype>> frequencies = [];
+
+        foreach (var source in sources.ToList())
+        {
+            if (!_proto.TryIndex(source, out var sourceFaction))
+            {
+                Log.Error($"Unable to find faction {source}");
+                continue;
+            }
+            frequencies.UnionWith(sourceFaction.Channels);
+        }
+
+        return frequencies;
+    }
+
+    public void OnRefreshFactionData(RefreshFactionDataEvent args)
+    {
+        if (_net.IsClient)
+            _factions = args.Factions.ToFrozenDictionary();
     }
 }

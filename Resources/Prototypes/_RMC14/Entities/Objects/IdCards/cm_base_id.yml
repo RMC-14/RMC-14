@@ -22,7 +22,7 @@
     fullNameLocId: cm-access-dogtags-component-owner-full-name-job-title-text
     canMicrowave: false
   - type: ItemIFF
-    faction: FactionMarine
+    faction: UNMC
   - type: TakeableTags
   - type: Appearance
   - type: GenericVisualizer
@@ -122,7 +122,7 @@
     tags:
     - DoorBumpOpener
   - type: ItemIFF
-    faction: FactionMarine
+    faction: UNMC
 
 - type: entity
   parent: CMIDCardBase
@@ -168,33 +168,3 @@
     slots:
     - idcard
     sprite: _RMC14/Objects/CMIDs/lanyard.rsi
-
-- type: entity
-  id: FactionMarine
-  components:
-  - type: IFFFaction
-  - type: FactionFrequencies
-    channels:
-    - MarineCommand
-    - MarineMedical
-    - MarineEngineer
-    - MarineMilitaryPolice
-#    - TODO RMC14 sentry
-    - MarineAlpha
-    - MarineBravo
-    - MarineCharlie
-    - MarineDelta
-    - MarineEcho
-    - MarineFoxtrot
-    - MarineRequisition
-    - MarineJTAC
-    - MarineIntel
-    - WEYA
-
-- type: entity
-  id: FactionSurvivor
-  components:
-  - type: IFFFaction
-  - type: FactionFrequencies
-    channels:
-    - Colony

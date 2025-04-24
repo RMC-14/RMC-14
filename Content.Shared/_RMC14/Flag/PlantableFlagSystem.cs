@@ -8,6 +8,7 @@ using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
+using Content.Shared.NPC.Components;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
@@ -80,14 +81,14 @@ public sealed class PlantableFlagSystem : EntitySystem
         if (_combatMode.IsInCombatMode(args.User))
         {
             sound = ent.Comp.RaisedCombatSound;
-            if (TryComp(args.User, out UserIFFComponent? userIff) &&
-                userIff.Faction != null)
+            if (TryComp(args.User, out NpcFactionMemberComponent? userIff) &&
+                userIff.Factions is { } factions)
             {
                 var allies = 0;
-                var inRange = _entityLookup.GetEntitiesInRange<UserIFFComponent>(args.User.ToCoordinates(), ent.Comp.AlliesRange);
+                var inRange = _entityLookup.GetEntitiesInRange<NpcFactionMemberComponent>(args.User.ToCoordinates(), ent.Comp.AlliesRange);
                 foreach (var inRangeEnt in inRange)
                 {
-                    if (userIff.Faction == inRangeEnt.Comp.Faction)
+                    if (factions.Overlaps(inRangeEnt.Comp.Factions))
                         allies++;
 
                     if (allies >= ent.Comp.AlliesRequired)

@@ -54,7 +54,7 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
         {
             if (TryComp(ent.Owner, out ProjectileIFFComponent? grenadeIFFComponent))
             {
-                _gunIFF.GiveAmmoIFF(args.ContentUid, grenadeIFFComponent.Faction, grenadeIFFComponent.Enabled);
+                _gunIFF.GiveAmmoIFF(args.ContentUid, grenadeIFFComponent.Factions, grenadeIFFComponent.Enabled);
             }
         }
 

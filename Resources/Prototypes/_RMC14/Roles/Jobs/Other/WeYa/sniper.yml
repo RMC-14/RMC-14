@@ -108,6 +108,3 @@
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
-  - type: NpcFactionMember
-    factions:
-    - WeYa

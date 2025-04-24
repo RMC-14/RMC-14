@@ -1,4 +1,4 @@
-using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared.NPC.Prototypes;
 using Content.Shared.Radio;
 using Content.Shared.Roles;
 using Robust.Shared.Audio;
@@ -47,10 +47,10 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public EntProtoId LarvaEnt = "CMXenoLarva";
 
     [DataField]
-    public EntProtoId<IFFFactionComponent> MarineFaction = "FactionMarine";
+    public ProtoId<NpcFactionPrototype> MarineFaction = "UNMC";
 
     [DataField]
-    public EntProtoId<IFFFactionComponent> SurvivorFaction = "FactionSurvivor";
+    public ProtoId<NpcFactionPrototype> SurvivorFaction = "Survivor";
 
     [DataField, AutoPausedField]
     public TimeSpan? QueenDiedCheck;

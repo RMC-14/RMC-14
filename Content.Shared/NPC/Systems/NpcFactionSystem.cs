@@ -26,6 +26,7 @@ public sealed partial class NpcFactionSystem : EntitySystem
 
         SubscribeLocalEvent<NpcFactionMemberComponent, ComponentStartup>(OnFactionStartup);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnProtoReload);
+        SubscribeNetworkEvent<RefreshFactionDataEvent>(OnRefreshFactionData); // RMC14: This system is undercooked....
 
         InitializeException();
         RefreshFactions();
