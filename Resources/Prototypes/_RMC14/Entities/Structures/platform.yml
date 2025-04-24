@@ -724,7 +724,7 @@
   - type: Sprite
     state: sandstone
   - type: Construction
-    graph: RMCPlatformKutjevoDestructible
+    graph: RMCPlatformSandstoneDestructible
     node: start
 
 - type: entity
@@ -734,7 +734,7 @@
   - type: Sprite
     state: sandstone_broken
   - type: Construction
-    graph: RMCPlatformKutjevoDestructible
+    graph: RMCPlatformSandstoneDestructible
     node: platformBroken
 
 - type: entity
