@@ -30,6 +30,9 @@ public sealed partial class NpcFactionSystem : EntitySystem
 
         InitializeException();
         RefreshFactions();
+
+        if (_net.IsClient) // RMC14: Sync factions on connect.
+            RaiseNetworkEvent(new RefreshFactionDataEvent());
     }
 
     private void OnProtoReload(PrototypesReloadedEventArgs obj)

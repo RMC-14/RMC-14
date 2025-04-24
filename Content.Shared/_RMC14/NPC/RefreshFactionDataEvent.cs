@@ -6,9 +6,9 @@ namespace Content.Shared.NPC.Prototypes;
 [Serializable, NetSerializable]
 public sealed partial class RefreshFactionDataEvent : EntityEventArgs
 {
-    public readonly Dictionary<string, FactionData> Factions;
+    public Dictionary<string, FactionData>? Factions;
 
-    public RefreshFactionDataEvent(Dictionary<string, FactionData> factions)
+    public RefreshFactionDataEvent(Dictionary<string, FactionData>? factions = null)
     {
         Factions = factions;
     }

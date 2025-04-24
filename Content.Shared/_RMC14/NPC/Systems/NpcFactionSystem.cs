@@ -135,7 +135,10 @@ public sealed partial class NpcFactionSystem : EntitySystem
 
     public void OnRefreshFactionData(RefreshFactionDataEvent args)
     {
-        if (_net.IsClient)
-            _factions = args.Factions.ToFrozenDictionary();
+        if (_net.IsClient && args.Factions is { } factions)
+            _factions = factions.ToFrozenDictionary();
+
+        if (_net.IsServer && args.Factions == null)
+            RealRefreshFactions();
     }
 }
