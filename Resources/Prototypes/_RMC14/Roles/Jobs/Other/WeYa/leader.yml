@@ -54,7 +54,7 @@
     settings: RMCPMCLeader
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCPMCLeader
   components:
   - type: GhostRole

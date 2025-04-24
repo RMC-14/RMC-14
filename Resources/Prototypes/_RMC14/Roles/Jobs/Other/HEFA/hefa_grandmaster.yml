@@ -50,7 +50,7 @@
     settings: RMCHEFAShrapnelswornFriendly
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCHEFAShrapnelsworn
   components:
   - type: GhostRole
@@ -67,7 +67,7 @@
     - RMCNamesHEFA
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCHEFAShrapnelswornFriendly
   components:
   - type: GhostRole

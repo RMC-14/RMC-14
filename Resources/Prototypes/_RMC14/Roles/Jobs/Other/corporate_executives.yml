@@ -37,7 +37,7 @@
     settings: RMCCorporateExecutiveSupervisor
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCCorporateExecutiveSupervisor
   components:
   - type: GhostRole
@@ -108,7 +108,7 @@
     settings: RMCCorporateExecutiveSpecialist
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCCorporateExecutiveSpecialist
   components:
   - type: GhostRole
