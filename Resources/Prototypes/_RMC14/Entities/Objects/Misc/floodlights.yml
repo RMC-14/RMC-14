@@ -26,7 +26,7 @@
   - type: PointLight
     enabled: true
     radius: 6
-    netsync: false
+    netsync: true
     energy: 5
     offset: "0, 0"
     color: "#ECFFFF"
@@ -62,6 +62,8 @@
         layer:
         - WallLayer
   - type: Appearance
+  - type: RMCReactorPoweredLight
+  - type: PreventAttackLightOff
 
 - type: entity
   parent: BaseStructure
@@ -196,12 +198,31 @@
         shape:
           !type:PhysShapeAabb
           bounds: "-0.4,-0.4,0.4,0.4"
-        density: 50
-        mask:
-        - HighImpassable
+        density: 0
   - type: Corrodible
     isCorrodible: false
   - type: Appearance
+
+- type: entity
+  parent: RMCLZFloodlight
+  id: RMCLZSmallFloodlight
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Objects/Misc/Lights/floodlight.rsi
+    layers:
+      - state: smallfloodon
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 50
+        mask:
+        - MachineMask
+        layer:
+        - WallLayer
 
 # Engineer Ship Light
 
