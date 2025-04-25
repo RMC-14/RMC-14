@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Chat;
+using Content.Shared.Inventory;
 using Content.Shared.Mobs;
 using Content.Shared.StatusEffect;
 using Robust.Shared.Prototypes;
@@ -11,6 +12,7 @@ public abstract class SharedDeafnessSystem : EntitySystem
     [Dependency] private readonly StatusEffectsSystem _statusEffect = default!;
     [Dependency] private readonly SharedCMChatSystem _chat = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
 
     public ProtoId<StatusEffectPrototype> DeafKey = "Deaf";
 
@@ -47,12 +49,15 @@ public abstract class SharedDeafnessSystem : EntitySystem
             RemCompDeferred<ActiveDeafenWhileCritComponent>(ent);
     }
 
-    public bool TryDeafen(EntityUid uid, TimeSpan time, bool refresh = false, StatusEffectsComponent? status = null, bool force = false)
+    public bool TryDeafen(EntityUid uid, TimeSpan time, bool refresh = false, StatusEffectsComponent? status = null, bool ignoreProtection = false)
     {
         if (!Resolve(uid, ref status, false))
             return false;
 
         if (time <= TimeSpan.Zero)
+            return false;
+
+        if (!ignoreProtection && HasEarProtection(uid))
             return false;
 
         if (!HasComp<DeafComponent>(uid)) // First time being deafened
@@ -61,13 +66,27 @@ public abstract class SharedDeafnessSystem : EntitySystem
             _chat.ChatMessageToOne(msg, uid);
         }
 
-        if (!_statusEffect.TryAddStatusEffect<DeafComponent>(uid, DeafKey, time, refresh, force: force))
+        if (!_statusEffect.TryAddStatusEffect<DeafComponent>(uid, DeafKey, time, refresh))
             return false;
 
         var ev = new RMCDeafenedEvent(time);
         RaiseLocalEvent(uid, ref ev);
 
         return true;
+    }
+
+    public bool HasEarProtection(EntityUid uid)
+    {
+        if (_inventory.TryGetContainerSlotEnumerator(uid, out var slots))
+        {
+            while (slots.NextItem(out var containedEntity, out _))
+            {
+                if (HasComp<RMCEarProtectionComponent>(containedEntity))
+                    return false;
+            }
+        }
+
+        return HasComp<RMCEarProtectionComponent>(uid);
     }
 
     public override void Update(float frameTime)
@@ -82,7 +101,7 @@ public abstract class SharedDeafnessSystem : EntitySystem
             if (comp.AddAt < time)
             {
                 comp.AddAt = time + comp.Every;
-                TryDeafen(uid, comp.Add, true, status);
+                TryDeafen(uid, comp.Add, true, status, ignoreProtection: true);
             }
         }
     }
