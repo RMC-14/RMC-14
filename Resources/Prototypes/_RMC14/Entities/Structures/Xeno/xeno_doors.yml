@@ -85,10 +85,9 @@
   - type: ExplosionResistance
     damageCoefficient: 7.5 # Doors take 15x explosive damage, resin doors reduce that by 50%
   - type: XenoConstruct
-    destroyWeedNodes: false
   - type: ResinDoor
   - type: AllowWeedSpread
-  - type: XenoConstructReinforce
+  - type: ResinSurgeReinforcable
 
 - type: entity
   parent: DoorXenoResin

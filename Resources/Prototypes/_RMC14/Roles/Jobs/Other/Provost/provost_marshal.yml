@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMProvostMarshal
-  name: rmc-job-name-provost-marshal
+  name: CMProvostMarshal
   description: rmc-job-description-provost-marshal
   playTimeTracker: CMJobProvostMarshal
   ranks:
@@ -43,67 +43,12 @@
     - type: PyroWhitelist
   hidden: true
 
-- type: entity
-  parent: MarkerBase
-  id: RMCSpawnerProvostMarshal
-  name: provost spawner marshal
-  suffix: Spawner, Admin, Low Law Understanding or Lower Rank
-  components:
-  - type: Sprite
-    layers:
-    - state: red
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCRandomHumanoidProvostMarshal
-
-- type: entity
-  id: RMCRandomHumanoidProvostMarshal
-  name: provost ghost role marshal
-  suffix: Role, Admin, Low Law Understanding or Lower Rank
-  components:
-  - type: Sprite
-    sprite: Markers/cross.rsi
-    state: red
-  - type: RandomHumanoidSpawner
-    settings: RMCProvostMarshal
-
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCSettingsGhostRole
   id: RMCProvostMarshal
   components:
-  - type: GhostRole
-    name: rmc-ghost-role-information-provost-marshal-name
-    description: rmc-ghost-role-information-provost-marshal-description
-    rules: ghost-role-information-nonantagonist-rules
-    raffle:
-      settings: short
-  - type: Loadout
-    prototypes: [ RMCGearProvostMarshal ]
-  - type: Skills
-    skills:
-      RMCSkillConstruction: 2
-      RMCSkillCqc: 1
-      RMCSkillEndurance: 5
-      RMCSkillEngineer: 2
-      RMCSkillExecution: 1
-      RMCSkillFirearms: 1
-      RMCSkillFireman: 2
-      RMCSkillIntel: 2
-      RMCSkillJtac: 4
-      RMCSkillLeadership: 3
-      RMCSkillMedical: 3
-      RMCSkillMeleeWeapons: 1
-      RMCSkillOverwatch: 1
-      RMCSkillPolice: 2
-      RMCSkillPowerLoader: 2
-      RMCSkillSmartGun: 1
-      RMCSkillVehicles: 2
-  - type: MarineOrders
-  - type: DemoSpecWhitelist
-  - type: GrenadeSpecWhitelist
-  - type: ScoutWhitelist
-  - type: SniperWhitelist
-  - type: PyroWhitelist
+  - type: RMCJobSpawner
+    job: CMProvostMarshal
 
 - type: startingGear
   id: RMCGearProvostMarshal

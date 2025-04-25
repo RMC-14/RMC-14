@@ -1,0 +1,78 @@
+﻿- type: job
+  parent: CMJobBase
+  id: RMCSPPRifleman
+  name: RMCSPPRifleman
+  description: rmc-job-description-spp-soldier
+  playTimeTracker: CMJobSPPRifleman
+  ranks:
+    RMCRankSPPRyadovoy: []
+  startingGear: RMCGearSPPRifleman
+  icon: "RMCJobIconSPPRifleman"
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-soldier
+  hidden: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSPPRifleman
+  name: spp ghost role rifleman
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSPPRifleman
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCSPPRifleman
+  components:
+  - type: GhostRole
+    name: RMCSPPRifleman
+    description: rmc-job-description-spp-soldier
+    rules: rmc-ghost-role-information-spp-rules
+    reregister: false
+    job: RMCSPPRifleman
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearSPPRifleman
+  equipment:
+    head: ArmorHelmetSPP
+    ears: RMCHeadsetSPP
+    jumpsuit: CMJumpsuitSPP
+    outerClothing: RMCArmorSPPRifleman
+    gloves: RMCHandsVeteranSPP
+    shoes: CMBootsBlackFilled
+    suitstorage: RMCWeaponRifleType71
+    id: RMCIDSPP
+    belt: RMCType71BeltFilled
+    back: RMCSatchelSPPRifleman
+    pocket1: RMCPouchAutoinjectorFill
+    pocket2: RMCPouchExplosiveFilledSPP
+
+- type: playTimeTracker
+  id: CMJobSPPRifleman
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPRifleman
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: upp_pvt

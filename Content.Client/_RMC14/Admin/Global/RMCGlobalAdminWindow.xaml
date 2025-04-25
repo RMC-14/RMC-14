@@ -37,6 +37,10 @@
                 <tacticalMap:TacticalMapControl Name="TacticalMap" Access="Public"
                                                 Stretch="Keep" TextureScale="3 3" />
             </BoxContainer>
+            <ScrollContainer Name="FactionsTab" Access="Public" HScrollEnabled="False" VScrollEnabled="True">
+                <BoxContainer Name="Factions" Access="Public" Orientation="Vertical"
+                              HorizontalExpand="True" VerticalExpand="True" />
+            </ScrollContainer>
         </TabContainer>
         <Button Name="RefreshButton" Access="Public" Text="Refresh" HorizontalExpand="True" />
     </BoxContainer>

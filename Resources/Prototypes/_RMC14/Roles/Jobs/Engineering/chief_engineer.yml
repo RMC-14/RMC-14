@@ -18,7 +18,7 @@
   startingGear: CMGearChiefEngineer
   icon: "CMJobIconChiefEngineer"
   requireAdminNotify: true
-  joinNotifyCrew: true
+  joinNotifyCrew: false
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - CMCE
@@ -83,3 +83,13 @@
 - type: playTimeTracker
   id: CMJobChiefEngineer
   isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleCE
+  name: The CE
+  description: The Chief Engineer.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: chief_engineer

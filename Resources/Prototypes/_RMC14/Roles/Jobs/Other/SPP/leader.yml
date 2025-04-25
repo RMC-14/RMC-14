@@ -1,0 +1,103 @@
+﻿- type: job
+  parent: CMJobBase
+  id: RMCSPPLeader
+  name: RMCSPPLeader
+  description: rmc-job-description-spp-leader
+  playTimeTracker: CMJobSPPLeader
+  ranks:
+    RMCRankSPPSerzhant: []
+  startingGear: RMCGearSPPLeader
+  icon: "RMCJobIconSPPLeader"
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  - HospitalCorpsman
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 1
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillIntel: 1
+        RMCSkillJtac: 2
+        RMCSkillLeadership: 1
+        RMCSkillMedical: 1
+        RMCSkillVehicles: 1
+        RMCSkillPolice: 1
+    - type: MarineOrders
+    - type: SquadArmorWearer
+      leader: true
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: upp_sl_a
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-leader
+  hidden: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSPPLeader
+  name: spp ghost role leader
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSPPLeader
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCSPPLeader
+  components:
+  - type: GhostRole
+    name: RMCSPPLeader
+    description: rmc-job-description-spp-leader
+    rules: rmc-ghost-role-information-spp-rules
+    reregister: false
+    job: RMCSPPLeader
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearSPPLeader
+  equipment:
+    head: CMHeadCapSPPBeret
+    ears: RMCHeadsetSPPCommand
+    ears2: RMCM5CameraGear
+    jumpsuit: CMJumpsuitSPP
+    outerClothing: RMCArmorSPPRifleman
+    gloves: RMCHandsVeteranSPP
+    shoes: CMBootsBlackFilled
+    suitstorage: RMCWeaponRifleType71
+    id: RMCIDSPP
+    belt: CMM77BeltFilled # TODO RMC14 : Replace with T73, NP92 or Revolver
+    back: RMCSatchelSPPRifleman
+    pocket1: RMCPouchAutoinjectorFill
+    pocket2: RMCPouchFuelTankFilledExtinguisher
+  storage:
+    back:
+    - RMCBoxZiptie
+    - RMCMagazineRifleType71AP
+    - RMCMagazineRifleType71AP
+
+- type: playTimeTracker
+  id: CMJobSPPLeader
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPLeader
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: upp_sl

@@ -46,6 +46,35 @@
       key_slots:
       - CMEncryptionKeyCommon
       - RMCEncryptionKeyLiaison
+  - type: GrantMarineIcons
+  - type: GrantSquadLeaderTracker
+  - type: GrantTacMapAlert
+
+- type: entity
+  parent: RMCHeadsetDistressPMC
+  id: RMCHeadsetDistressPMCLeader
+  suffix: Leader
+  description:
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 2
+
+- type: entity
+  parent: CMHeadset
+  id: RMCHeadsetDistressPMCDirector
+  name: PMC headset
+  description: A special headset used by corporate personnel.
+  suffix: Director
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
+      - RMCEncryptionKeyLiaison
+  - type: GrantMarineIcons
+  - type: GrantTacMapAlert
+  - type: RMCHeadset
+    radioTextIncrease: 3
 
 # For Duke's Dozen/Freelancer
 - type: entity

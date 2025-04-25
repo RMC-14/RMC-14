@@ -33,7 +33,7 @@ rmc-xeno-valkyrie-name = Valkyrie
 rmc-xeno-valkyrie-description = You trade your tail stab, spit, acid ball, acid spray, corrosive acid, and some speed to gain some armor and frontline support abilities.
    You gain the ability to:
    - Break the strongest of walls and other reinforced structures with your slash attack, and emit strong pheromones.
-   - Extinguish friend or capture alike with your tail, or knock away explosives and down enemies with your High Gallop. 
+   - Extinguish friend or capture alike with your tail, or knock away explosives and down enemies with your High Gallop.
    - Heal you and your allies for every slash, gaining fury, then enrage yourself and ally for more armor and healing.
    - Rejuvenate a group all at once with a rallying shriek, removing their ailments.
    - Retrieve endangered, knocked-down or resting allies and pull them to your location.
@@ -85,3 +85,21 @@ rmc-xeno-steelcrest-description = You trade your tail sweep and a small amount o
    - Headbutt while fortified. Headbutt doesn't lose damage and keeps it's higher range with high knockback.
    - Soak in damage for 6 seconds for a small heal that also refreshes your tail slam.
 rmc-xeno-steelcrest-popup = This one, like my will, is indomitable. It will become my steel crest against all that defy me.
+
+rmc-xeno-vampire-name = Vampire
+rmc-xeno-vampire-description = You lose all of your abilities and you forfeit a chunk of your health and damage in exchange for a large amount of armor, a little bit of movement speed, increased attack speed, and brand new abilities that make you an assassin.
+  You gain the ability to:
+  - Rush on your opponent to disorient them.
+  - Flurry to unleash a forward cleave that can hit and slow three talls and heal you for every tall you hit.
+  - A special AoE Tail Jab to knock talls away, doing more damage with direct hits and even more damage and a stun if they smack into walls.
+  - Execute unconscious talls with a headbite to heal your wounds.
+rmc-xeno-vampire-popup = Show no mercy! Slaughter them all!
+
+rmc-xeno-eggsac-name = Eggsac
+rmc-xeno-eggsac-description = You trade your ability to store parasites and make resin traps for stronger pheromones, more egg storage, and the ability to produce eggs.
+   You gain the ability to:
+   - Place eggs from slightly farther away.
+   - Put eggs on non-hive weeds. You can have 4 sustained this way at once, and they will last awhile while you're near and not long if you're far.
+   - Sustained Eggs will convert into normal eggs upon touching hive weeds, and cannot produce sentient parasites.
+   - Use plasma over time to make eggs.
+rmc-xeno-eggsac-popup = An egg is always an adventure; the next one may be different.

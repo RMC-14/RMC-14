@@ -49,6 +49,8 @@
         amount: 25
       - id: CMWeaponPistolM1984Empty
         amount: 25
+      - id: RMCWeaponPistolM13Empty
+        amount: 25
       #- id: WeaponFlareM82F
       #  amount: 10
     - name: Sidearm ammunition
@@ -58,6 +60,8 @@
       - id: RMCSpeedLoaderM44
         amount: 20
       - id: CMMagazinePistolM1984
+        amount: 25
+      - id: RMCMagazinePistolM13
         amount: 25
     - name: Attachments
       entries:
@@ -328,6 +332,10 @@
       #  amount: 2
       - id: RMCSpeedLoader44Marksman
         amount: 2
+      - id: RMCMagazinePistolM13Ext
+        amount: 6
+      - id: RMCMagazinePistolM13Drum
+        amount: 6
     - name: Restricted Firearm Ammunition
       entries:
       - id: CMMagazinePistolMK80

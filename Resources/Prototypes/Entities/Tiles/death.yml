@@ -1,0 +1,38 @@
+- type: entity
+  id: FloorDeathEntity
+  name: death
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Transform
+    anchored: true
+  - type: DamageOnCollide
+    damageDead: false
+    damage:
+      groups:
+        Brute: 5000
+    whitelist:
+      components:
+        - MobState
+    ignoreResistances: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1,-1,1,1"
+        layer:
+        - SlipLayer
+        mask:
+        - ItemMask
+        density: 1000
+        hard: false
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: TimedDespawn
+    lifetime: 30
