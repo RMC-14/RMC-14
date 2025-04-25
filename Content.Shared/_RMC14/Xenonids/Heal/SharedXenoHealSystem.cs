@@ -305,12 +305,15 @@ public abstract class SharedXenoHealSystem : EntitySystem
 
         _jitter.DoJitter(target, TimeSpan.FromSeconds(1), true, 80, 8, true);
 
-        if(_net.IsServer)
-         SpawnAttachedTo(args.HealEffect, target.ToCoordinates());
-
         var corpsePosition = _transform.GetMoverCoordinates(ent);
 
-        // TODO: Gib the healing xeno here
+        if (_net.IsServer)
+        {
+            SpawnAttachedTo(args.HealEffect, target.ToCoordinates());
+
+            // TODO: Gib the healing xeno here
+            QueueDel(ent);
+        }
 
         if (!TryComp(ent, out XenoEnergyComponent? xenoEnergyComp) ||
             !_xenoEnergy.HasEnergy((ent, xenoEnergyComp), xenoEnergyComp.Max))
@@ -319,11 +322,9 @@ public abstract class SharedXenoHealSystem : EntitySystem
         }
 
         if (GetHiveCore(ent))
-            SacraficialHealRespawn(ent, args.RespawnDelay);
+            SacrificialHealRespawn(ent, args.RespawnDelay);
         else
-            SacraficialHealRespawn(ent, args.RespawnDelay, true, corpsePosition);
-
-        QueueDel(ent);
+            SacrificialHealRespawn(ent, args.RespawnDelay, true, corpsePosition);
     }
 
     public void Heal(EntityUid target, FixedPoint2 amount)
@@ -357,7 +358,7 @@ public abstract class SharedXenoHealSystem : EntitySystem
     {
     }
 
-    protected virtual void SacraficialHealRespawn(EntityUid xeno, TimeSpan time, bool atCorpse = false, EntityCoordinates? corpse = null)
+    protected virtual void SacrificialHealRespawn(EntityUid xeno, TimeSpan time, bool atCorpse = false, EntityCoordinates? corpse = null)
     {
     }
 

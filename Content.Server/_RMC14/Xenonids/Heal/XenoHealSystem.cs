@@ -20,7 +20,7 @@ public sealed partial class XenoHealSystem : SharedXenoHealSystem
         _chat.TrySendInGameICMessage(xeno, Loc.GetString("rmc-xeno-for-the-hive-announce"), InGameICChatType.Speak, false);
     }
 
-    protected override void SacraficialHealRespawn(EntityUid xeno, TimeSpan time, bool atCorpse = false, EntityCoordinates? corpse = null)
+    protected override void SacrificialHealRespawn(EntityUid xeno, TimeSpan time, bool atCorpse = false, EntityCoordinates? corpse = null)
     {
         _xenoRespawn.RespawnXeno(xeno, time, atCorpse, corpse);
     }
