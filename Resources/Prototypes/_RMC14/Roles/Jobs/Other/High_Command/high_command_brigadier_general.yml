@@ -1,13 +1,13 @@
 - type: job
   parent: CMJobBase
-  id: RMCBrigadierGeneral
-  name: rmc-job-name-brigadier-general
-  description: rmc-job-description-brigadier-general
-  playTimeTracker: RMCJobBrigadierGeneral
+  id: RMCUNMCBrigadierGeneral
+  name: rmc-job-name-unmc-brigadier-general
+  description: rmc-job-description-unmc-brigadier-general
+  playTimeTracker: RMCJobUNMCBrigadierGeneral
   ranks:
     RMCRankBrigadierGeneral: []
-  startingGear: RMCGearBrigadierGeneral
-  icon: RMCJobIconBrigadierGeneral
+  startingGear: RMCGearUNMCBrigadierGeneral
+  icon: "RMCJobIconUNMCBrigadierGeneral"
   joinNotifyCrew: false
   accessGroups:
   - ShipMasterAccess
@@ -37,15 +37,16 @@
   hidden: true
 
 - type: startingGear
-  id: RMCGearBrigadierGeneral
+  id: RMCGearUNMCBrigadierGeneral
   equipment:
     jumpsuit: CMJumpsuitGeneral
     outerClothing: RMCCoatJacketGeneral
     shoes: RMCBootsCBRN
     head: RMCHeadCapGeneral
-    id: RMCIDCardBrigadierGeneral
+    id: RMCIDCardUNMCBrigadierGeneral
     ears: CMHeadsetHighCommand
-    eyes: RMCSunglassesBig
+    eyes: RMCSunglasses
+    gloves: RMCHandsVeteranCBRN
     back: CMSatchel
     belt: RMCMatebaBeltLuxuriousFilled
     pocket1: RMCPouchGeneralLarge
@@ -55,7 +56,7 @@
 
 - type: entity
   parent: IDCardStandard # Deliberately parenting off of upstream ID card cause it needs to work with admin access configurator.
-  id: RMCIDCardBrigadierGeneral
+  id: RMCIDCardUNMCBrigadierGeneral
   name: brigadier general ID card
   suffix: Admin
   description: Issued to the top brass of the UNMC. Premium, sleek, built to last.
@@ -81,11 +82,11 @@
     - CMAccessXeno
 
 - type: playTimeTracker
-  id: RMCJobBrigadierGeneral
+  id: RMCJobUNMCBrigadierGeneral
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconBrigadierGeneral
+  id: RMCJobIconUNMCBrigadierGeneral
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_general
