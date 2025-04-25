@@ -18,11 +18,11 @@ rmc-ui-link-discord-account-already-linked = [bold]Your account is already linke
 rmc-ui-link-discord-account-open-channel = Open channel
 
 rmc-ui-named-items = Named Items
-rmc-ui-named-items-displayed-as = Will be displayed as 'Your Custom Name' M54C Assault Rifle, for example.
-  By default, the name will be applied upon dispensing the item, though this can be disabled.
-  You can also apply the name manually by right clicking the item, and selecting Apply Custom Name.
-  Only one item can be named per category, regardless if it is applied manually or automatically.
-  Make sure the name you choose doesn't violate the rules, if you aren't sure, ask in AHelp! (F1)
+rmc-ui-named-items-displayed-as = The custom name is inserted in front of the regular item name; 'Your Custom Name' M54C Assault Rifle MK2, for example.
+  The name will be applied automatically when dispensing an item of that category, however you can disable that here.
+  Alternatively, you can always apply the name manually by right clicking the item, and selecting Apply Custom Name.
+  You can only name one item per category, regardless if the name is applied manually or due to being dispensed.
+  Make sure the name you choose doesn't violate the server rules. If you aren't sure, ask an admin via AHelp! (F1)
 rmc-ui-named-primary-gun = Primary Gun Name
 rmc-ui-named-sidearm = Sidearm Name
 rmc-ui-named-helmet = Helmet Name
