@@ -74,18 +74,21 @@ public sealed class DeafnessSystem : SharedDeafnessSystem
             if (!_statusEffects.TryGetTime(player, DeafKey, out var time))
                 continue;
 
-            var lastsFor = (float)(time.Value.Item2 - time.Value.Item1).TotalSeconds;
-            var timeDone = (float)(curTime - time.Value.Item1).TotalSeconds;
-            var timeLeft = (float)(time.Value.Item2 - curTime).TotalSeconds;
+            var statusTime = time.Value;
+
+            var lastsFor = (float)(statusTime.Item2 - statusTime.Item1).TotalSeconds;
+            var timeLeft = (float)(statusTime.Item2 - curTime).TotalSeconds;
+
+            var timeDone = statusTime.Item2.TotalSeconds;
 
             var volume = 0f;
 
             var fadeOutDuration = Math.Clamp(lastsFor * 0.35f, 0.2f, 2f);
             var fadeInDuration = Math.Clamp(lastsFor * 0.15f, 0.1f, 1f);
 
-            if (timeDone <= 1f) // Fade out during first second of deafness
+            if (timeDone <= 2f) // Fade out during two seconds of deafness
             {
-                var fadeOut = 1f - timeLeft / fadeOutDuration;
+                var fadeOut = 2f - timeLeft / fadeOutDuration;
                 volume = fadeOut * _originalVolume;
             }
             else if (timeLeft <= 1f) // Fade in during last second of deafness
