@@ -18,18 +18,10 @@ public abstract class SharedDeafnessSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<DeafComponent, RMCDeafenedEvent>(OnDeafened);
-
         SubscribeLocalEvent<DeafenWhileCritComponent, StatusEffectEndedEvent>(OnCanHear);
         SubscribeLocalEvent<DeafenWhileCritComponent, MobStateChangedEvent>(OnDeafenWhileCritMobState);
 
         SubscribeLocalEvent<ActiveDeafenWhileCritComponent, MobStateChangedEvent>(OnActiveDeafenWhileCritMobState);
-    }
-
-    private void OnDeafened(Entity<DeafComponent> ent, ref RMCDeafenedEvent args)
-    {
-        var msg = Loc.GetString("rmc-deaf-start");
-        _chat.ChatMessageToOne(msg, ent.Owner);
     }
 
     private void OnCanHear(Entity<DeafenWhileCritComponent> ent, ref StatusEffectEndedEvent args)
@@ -63,14 +55,17 @@ public abstract class SharedDeafnessSystem : EntitySystem
         if (time <= TimeSpan.Zero)
             return false;
 
-        if (!HasComp<DeafComponent>(uid))
+        if (!HasComp<DeafComponent>(uid)) // First time being deafened
         {
-            var ev = new RMCDeafenedEvent(time);
-            RaiseLocalEvent(uid, ref ev);
+            var msg = Loc.GetString("rmc-deaf-start");
+            _chat.ChatMessageToOne(msg, uid);
         }
 
         if (!_statusEffect.TryAddStatusEffect<DeafComponent>(uid, DeafKey, time, refresh, force: force))
             return false;
+
+        var ev = new RMCDeafenedEvent(time);
+        RaiseLocalEvent(uid, ref ev);
 
         return true;
     }
