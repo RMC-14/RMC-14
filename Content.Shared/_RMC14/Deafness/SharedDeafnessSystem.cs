@@ -82,7 +82,7 @@ public abstract class SharedDeafnessSystem : EntitySystem
             while (slots.NextItem(out var containedEntity, out _))
             {
                 if (HasComp<RMCEarProtectionComponent>(containedEntity))
-                    return false;
+                    return true;
             }
         }
 
