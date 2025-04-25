@@ -68,7 +68,7 @@
     gloves: CMHandsBlackMarine
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostResponder
-    belt: CMBeltSecurityMP
+    belt: CMClipboard
     back: CMSatchelSecurity
     pocket1: RMCPouchDocument
     pocket2: RMCPouchGeneralLarge

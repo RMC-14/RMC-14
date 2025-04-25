@@ -64,8 +64,9 @@
     shoes: RMCBootsRoyal
     head: RMCHeadRoyalBeret
     id: RMCIDCardTSEResponder
-    ears: RMCHeadsetRoyalMarine #Need to make headset with all UNMC channels; double check parity
+    ears: RMCHeadsetRoyalMarine
     back: CMSatchel
+    belt: CMClipboard
     pocket1: RMCPouchGeneralLarge
     pocket2: RMCPouchDocument
 

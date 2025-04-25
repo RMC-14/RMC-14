@@ -67,6 +67,7 @@
     id: RMCIDCardCMBResponder
     ears: RMCHeadsetDistressBureau
     back: CMSatchel
+    belt: CMClipboard
     pocket1: RMCPouchGeneralLarge
     pocket2: RMCPouchDocument
 

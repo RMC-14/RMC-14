@@ -67,6 +67,7 @@
     id: RMCIDCardFreePressResponder
     ears: CMHeadsetReporter
     back: CMSatchel
+    belt: CMClipboard
     pocket1: RMCPouchGeneralLarge
     pocket2: RMCPouchDocument
 

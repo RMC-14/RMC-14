@@ -67,6 +67,7 @@
     id: RMCIDCardCLFResponder
     ears: CMHeadsetColony
     back: CMSatchel
+    belt: CMClipboard
     pocket1: RMCPouchGeneralLarge
     pocket2: RMCPouchDocument
 

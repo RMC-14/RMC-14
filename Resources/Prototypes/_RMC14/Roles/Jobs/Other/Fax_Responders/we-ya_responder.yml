@@ -62,6 +62,7 @@
   equipment:
     ears: RMCHeadsetDistressPMCDirector
     back: CMSatchel
+    belt: CMClipboard
     head: ArmorHelmetPMC
     jumpsuit: CMJumpsuitLiaisonBlack
     outerClothing: RMCJacketCorporateFormal
