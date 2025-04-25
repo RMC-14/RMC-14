@@ -25,7 +25,7 @@
     settings: RMCICBLiaison
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCICBLiaison
   components:
   - type: GhostRole

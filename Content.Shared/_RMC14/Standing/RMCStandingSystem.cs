@@ -9,6 +9,7 @@ using Content.Shared.Item;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Pulling.Events;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Robust.Shared.Containers;
@@ -43,6 +44,7 @@ public sealed class RMCStandingSystem : EntitySystem
 
         SubscribeLocalEvent<RMCRestComponent, StoodEvent>(OnRestStood);
         SubscribeLocalEvent<RMCRestComponent, StandAttemptEvent>(OnRestStandAttempt);
+        SubscribeLocalEvent<RMCRestComponent, StartPullAttemptEvent>(OnRestStartPullAttempt);
 
         CommandBinds.Builder
             .Bind(CMKeyFunctions.RMCRest,
@@ -176,6 +178,17 @@ public sealed class RMCStandingSystem : EntitySystem
     {
         if (ent.Comp.Resting)
             args.Cancel();
+    }
+
+    private void OnRestStartPullAttempt(Entity<RMCRestComponent> ent, ref StartPullAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (args.Puller != ent.Owner)
+            return;
+
+        args.Cancel();
     }
 
     public void SetRest(Entity<RMCRestComponent?> rest, bool resting)

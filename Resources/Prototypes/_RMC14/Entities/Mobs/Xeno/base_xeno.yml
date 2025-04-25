@@ -186,6 +186,7 @@
         layer:
         - BulletImpassable
   - type: Xeno
+  - type: XenoRegen
   - type: UserInterface
     interfaces:
       enum.XenoEvolutionUIKey.Key:
