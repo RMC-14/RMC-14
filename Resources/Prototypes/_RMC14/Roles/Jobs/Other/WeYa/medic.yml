@@ -82,7 +82,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidPMCMedic
   name: weya pmc ghost role medic
-  suffix: Spawner, Player
+  suffix: We-Ya PMC
   components:
   - type: Sprite
     layers:
@@ -103,3 +103,6 @@
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
+  - type: NpcFactionMember
+    factions:
+    - WeYa

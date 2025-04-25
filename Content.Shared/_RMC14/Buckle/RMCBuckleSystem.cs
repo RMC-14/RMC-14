@@ -48,7 +48,7 @@ public sealed class RMCBuckleSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (ent.Comp.Buckled && CompOrNull<BuckleComponent>(args.Entity) is { Buckled: true })
+        if (ent.Comp.Buckled)
             args.Cancelled = true;
     }
 

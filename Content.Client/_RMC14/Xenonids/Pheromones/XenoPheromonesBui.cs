@@ -56,7 +56,7 @@ public sealed class XenoPheromonesBui : BoundUserInterface
                 TextureScale = new Vector2(2f, 2f),
             };
 
-            var helpButton = new RadialMenuTextureButton()
+            var helpButton = new RadialMenuTextureButton
             {
                 StyleClasses = { "RadialMenuButton" },
                 SetSize = new Vector2(64, 64),
@@ -101,7 +101,7 @@ public sealed class XenoPheromonesBui : BoundUserInterface
             TextureScale = new Vector2(2f, 2f),
         };
 
-        var button = new RadialMenuTextureButton()
+        var button = new RadialMenuTextureButton
         {
             StyleClasses = { "RadialMenuButton" },
             SetSize = new Vector2(64, 64),
