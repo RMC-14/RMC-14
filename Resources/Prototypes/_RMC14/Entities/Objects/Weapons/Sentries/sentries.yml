@@ -476,6 +476,7 @@
   name: UN 45-FM mini sentry
   description: The Mini Flamethrower Sentry Gun automatically tracks and fires upon any target that is wearing an ID not hooked up to the Almayer's systems. Just like the UA 571-C Sentry gun, this sentry has IFF but the fire that lingers doesn't. 
   components:
+  - type: RMCFireProjectile
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
     drawdepth: Mobs
@@ -542,6 +543,7 @@
   name: UN 55-FA Assault Sentry Flamer
   description: The Flamethrower Sentry Gun automatically tracks and fires upon any target that is wearing an ID not hooked up to the Almayer's systems. Just like the UA 571-C Sentry gun, this sentry has IFF but the fire that lingers doesn't.
   components:
+  - type: RMCFireProjectile
   - type: Gun
     fireRate: .33
     projectileSpeed: 20.0
@@ -575,6 +577,7 @@
   name: UN 60-FP Plasma Sentry
   description: The Plasma Flamethrower Sentry Gun automatically tracks and fires upon any target that is wearing an ID not hooked up to the Almayer's systems. Just like the UA 571-C Sentry gun, this sentry has IFF but the phosphorus that lingers doesn't.
   components:
+  - type: RMCFireProjectile
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
     drawdepth: Mobs
