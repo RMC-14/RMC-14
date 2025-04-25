@@ -21,8 +21,8 @@ rmc-ui-named-items = Named Items
 rmc-ui-named-items-displayed-as = Will be displayed as 'Your Custom Name' M54C Assault Rifle, for example.
   By default, the name will be applied upon dispensing the item, though this can be disabled.
   You can also apply the name manually by right clicking the item, and selecting Apply Custom Name.
-  Make sure the name you choose doesn't violate the rules.
-  If you aren't sure, ask in AHelp! (F1)
+  Only one item can be named per category, regardless if it is applied manually or automatically.
+  Make sure the name you choose doesn't violate the rules, if you aren't sure, ask in AHelp! (F1)
 rmc-ui-named-primary-gun = Primary Gun Name
 rmc-ui-named-sidearm = Sidearm Name
 rmc-ui-named-helmet = Helmet Name
