@@ -4,9 +4,13 @@ rmc-ghost-role-information-responder-rules = You are a [color=red][bold]Fax Resp
                                              You don't remember any of your previous life, and you don't remember anything you learned as a ghost.
                                              You are allowed to remember knowledge about the game in general, such as how to cook, how to use objects, etc.
                                              You are absolutely [color=red]NOT[/color] allowed to remember, say, the name, appearance, etc. of your previous character.
-                                             You are acting on behalf of RMC Staff, and should be EXTREMLY careful with wording when writing faxes.
-                                             Unless otherwise stated by staff, you are not intended to have a impact on the round. Do not order anyone to break server rules, or marine law, in your faxes without approval.
+                                             You are acting on behalf of server staff, and should be EXTREMLY careful with wording when writing faxes.
+                                             Fax Responders cannot make decisions that would drastically alter the round's flow, such as activating ERTs or overriding staff decisions without their input. Do not order anyone to break server rules. Always use AHELP if you're unsure whether your action requires staff involvement.
                                              If you are ever in doubt, or recieve a fax that requires admin attention, do not hesitate to Ahelp.
+                                             Only call the marines by telephone if you have an EXCEPTIONAL reason. Your primary method of communication must always be the fax machine.
+                                             Do NOT use your radio to transmit under any circumstances. It is for listening only, not for communication.
+                                             Do NOT use the Overwatch console to interfere with squads or send messages. It is solely for observation.
+                                             Do NOT abuse the authority of this role. Misuse of your powers or failure to meet expectations will result in removal, or worse.
 
 
 #UNMC fax responder
