@@ -260,7 +260,7 @@ rmc-xeno-apply-salve-target-full-health-failure = {$target_xeno} is already at f
 rmc-xeno-apply-salve-self = We regurgitate our vital fluids and some plasma to create a regenerative resin salve and apply it to {$target_xeno}'s wounds. We feel weakened...
 rmc-xeno-apply-salve-target = {$healer_xeno} covers our wounds with a regenerative resin salve. We feel reinvigorated!
 
-# Sacrafical Heal
+# Sacrificial Heal
 rmc-xeno-sacrifice-heal-will-respawn = We have gained enough energy! We will be reborn when we sacrifice ourself!
 
 rmc-xeno-sacrifice-heal-target-not-xeno-failure = The target cannot be healed!
@@ -273,6 +273,7 @@ rmc-xeno-sacrifice-heal-target-full-health-failure = {$target_xeno} is already a
 
 rmc-xeno-sacrifice-heal-target-announcement = {$healer_xeno} sacrifices itself to heal {$target_xeno}!
 rmc-xeno-sacrifice-heal-target-enviorment = {$healer_xeno} explodes in a deluge of regenerative resin salve, covering {$target_xeno} in it!
+rmc-xeno-sacrifice-heal-announce = ;OUR SISTER WILL NOT DIE!!!
 
 # Dodge
 rmc-xeno-dodge-self = We can now weave through our enemies!
