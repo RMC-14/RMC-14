@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: RMCUNMCResponder
   name: rmc-job-name-unmc-responder
-  description: rmc-ghost-role-information-unmc-responder-description
+  description: rmc-job-description-unmc-responder
   playTimeTracker: RMCJobUNMCResponder
   ranks:
     RMCRankFirstLT: [] #goes to O4
@@ -47,8 +47,8 @@
   id: RMCUNMCResponder
   components:
   - type: GhostRole
-    name: rmc-ghost-name-unmc-responder
-    description: rmc-ghost-role-information-unmc-responder-description
+    name: rmc-job-name-unmc-responder
+    description: rmc-ghost-role-information-responder-description
     rules: rmc-ghost-role-information-responder-rules
     reregister: false
     job: RMCUNMCResponder
@@ -60,6 +60,7 @@
   id: RMCGearUNMCResponder
   equipment:
     jumpsuit: CMJumpsuitBO
+    outerClothing: CMCoatXOFormal
     shoes: RMCShoesLaceup
     head: RMCHeadCapFlippable
     id: RMCIDCardUNMCResponder
@@ -67,10 +68,6 @@
     back: CMSatchel
     pocket1: RMCPouchGeneralLarge
     pocket2: RMCPouchDocument
-
-
-- type: playTimeTracker
-  id: RMCJobUNMCResponder
 
 - type: entity
   parent: CMIDCardGold
@@ -86,3 +83,7 @@
     sprite: _RMC14/Objects/CMIDs/gold_id.rsi
   - type: PresetIdCard
     job: RMCUNMCResponder
+
+- type: playTimeTracker
+  id: RMCJobUNMCResponder
+

@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: RMCProvostResponder
   name: rmc-job-name-provost-responder
-  description: rmc-ghost-role-information-provost-responder-description
+  description: rmc-job-description-provost-responder
   playTimeTracker: RMCJobProvostResponder
   ranks:
     RMCRankFirstLT: []
@@ -47,8 +47,8 @@
   id: RMCProvostResponder
   components:
   - type: GhostRole
-    name: rmc-ghost-name-provost-responder
-    description: rmc-ghost-role-information-provost-responder-description
+    name: rmc-job-name-provost-responder
+    description: rmc-ghost-role-information-responder-description
     rules: rmc-ghost-role-information-responder-rules
     reregister: false
     job: RMCProvostResponder
@@ -59,11 +59,11 @@
 - type: startingGear
   id: RMCGearProvostResponder
   equipment:
-    head: RMCHeadBeretProvostSenior
+    head: RMCHeadBeretProvost
     eyes: CMGlassesSecurity
     ears: RMCHeadsetProvost
-    jumpsuit: CMJumpsuitProvostSenior
-    outerClothing: RMCProvostJacket
+    jumpsuit: CMJumpsuitProvost
+    outerClothing: RMCProvostCommandJacket
     gloves: CMHandsBlackMarine
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostResponder
@@ -71,10 +71,6 @@
     back: CMSatchelSecurity
     pocket1: RMCPouchDocument
     pocket2: RMCPouchGeneralLarge
-
-
-- type: playTimeTracker
-  id: RMCJobProvostResponder
 
 - type: entity
   parent: CMIDCardGold
@@ -91,3 +87,7 @@
     sprite: _RMC14/Objects/CMIDs/provost.rsi
   - type: PresetIdCard
     job: RMCProvostResponder
+
+- type: playTimeTracker
+  id: RMCJobProvostResponder
+

@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: RMCWeYaResponder
   name: rmc-job-name-weya-responder
-  description: rmc-ghost-role-information-weya-responder-description
+  description: rmc-job-description-weya-responder
   playTimeTracker: RMCJobWeYaResponder
   ranks:
     RMCRankWeYaExecutiveSpecialist: []
@@ -47,8 +47,8 @@
   id: RMCWeYaResponder
   components:
   - type: GhostRole
-    name: rmc-ghost-name-weya-responder
-    description: rmc-ghost-role-information-weya-responder-description
+    name: rmc-job-name-weya-responder
+    description: rmc-ghost-role-information-responder-description
     rules: rmc-ghost-role-information-responder-rules
     reregister: false
     job: RMCWeYaResponder
@@ -59,18 +59,14 @@
 - type: startingGear
   id: RMCGearWeYaResponder
   equipment:
-    ears: RMCHeadsetDistressWeYaColony # TODO RMC14 tape recorder
+    ears: RMCHeadsetDistressPMCDirector
     back: CMSatchel
-    jumpsuit: CMJumpsuitLiaisonBlue
-    outerClothing: RMCJacketCorporateBlue
+    jumpsuit: CMJumpsuitLiaisonBlack
+    outerClothing: RMCJacketCorporateFormal
     shoes: RMCShoesLaceup
     id: RMCIDCardWeYaResponder
-    pocket2: CMClipboard # TODO RMC14 notepad
-  inhand:
-  - CMPaper
-
-- type: playTimeTracker
-  id: RMCJobWeYaResponder
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchDocument
 
 - type: entity
   parent: CMIDCardGold
@@ -86,3 +82,6 @@
     sprite: _RMC14/Objects/CMIDs/gold_id.rsi
   - type: PresetIdCard
     job: RMCWeYaResponder
+
+- type: playTimeTracker
+  id: RMCJobWeYaResponder
