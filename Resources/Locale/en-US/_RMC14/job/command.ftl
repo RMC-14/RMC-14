@@ -21,3 +21,7 @@ CMJobExecutiveOfficer = Executive Officer
 
 # Admin only right now.
 cm-job-name-high-command = High Command
+
+# Admin only brig gen.
+rmc-job-name-brigadier-general = High Command
+rmc-job-description-brigadier-general = "High Command. Congrats, your a Brigadier General!"

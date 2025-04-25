@@ -9,6 +9,7 @@
   startingGear: RMCGearProvostResponder
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
+  supervisors: cm-job-supervisors-staff
   accessGroups:
   - ShipMasterAccess
   special:
