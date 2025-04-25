@@ -72,12 +72,15 @@ public sealed class DeafnessSystem : SharedDeafnessSystem
                 continue;
 
             if (!_statusEffects.TryGetTime(player, DeafKey, out var time))
-                return;
-
-            _audio.SetMasterGain(0f);
+                continue;
 
             var lastsFor = (float)(time.Value.Item2 - time.Value.Item1).TotalSeconds;
             var timeDone = (float)(curTime - time.Value.Item1).TotalSeconds;
+
+            if (lastsFor < 0.3f) // So the audio doesn't immediately stop when you get the effect, needs to last atleast 0.3 seconds
+                continue;
+
+            _audio.SetMasterGain(0f);
 
             if (lastsFor - timeDone <= 1.5f)
             {
