@@ -53,6 +53,7 @@ public sealed class XenoWatchBui : BoundUserInterface
             control.Button.OnPressed += _ => SendPredictedMessage(new XenoWatchBuiMsg(xeno.Entity));
 
             _window.XenoContainer.AddChild(control);
+
         }
     }
 
@@ -82,4 +83,6 @@ public sealed class XenoWatchBui : BoundUserInterface
                 control.Visible = control.NameLabel.GetMessage()?.Contains(args.Text, StringComparison.OrdinalIgnoreCase) ?? false;
         }
     }
+
+
 }
