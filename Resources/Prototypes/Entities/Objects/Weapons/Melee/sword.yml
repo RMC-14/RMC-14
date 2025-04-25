@@ -63,7 +63,7 @@
   - type: MeleeWeapon
     damage:
       types:
-        Slash: 15
+        Slash: 45
     soundHit:
         path: /Audio/Weapons/bladeslice.ogg
   - type: Item
