@@ -5,7 +5,7 @@
   description: rmc-job-description-cmb-responder
   playTimeTracker: RMCJobCMBResponder
   ranks:
-    RMCRankCMBResponder: []
+    RMCRankCMBDeputy: []
   startingGear: RMCGearCMBResponder
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
