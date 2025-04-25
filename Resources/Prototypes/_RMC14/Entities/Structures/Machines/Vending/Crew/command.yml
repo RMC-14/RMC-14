@@ -290,7 +290,7 @@
       - id: RMCAttachmentUnderbarrelExtinguisher
         points: 15
       - id: RMCAttachmentMiniFlamethrower
-        points: 15 
+        points: 15
       - id: RMCAttachmentU1GrenadeLauncher
         points: 5
     - name: Barrel Attachments
@@ -327,7 +327,10 @@
         points: 5
       - id: RMCFlashlight
         points: 1
-       #TODO Synthetic Reset Key
+      - id: RMCFlashlight
+        points: 1
+      - id: RMCSynthResetKey
+        points: 10
 
 # Commanding Officer #
 
@@ -892,7 +895,7 @@
       - id: ClothingEyesGlassesMeson # TODO change to CM13 engi goggles.
       - id: RMCNailgunTactical
       # TODO KN5500/2 PDA
-     
+
     - name: Uniform
       jobs:
       - CMChiefEngineer
@@ -939,7 +942,7 @@
       - id: RMCBeltUtilityGeneral
       - id: CMBeltUtilityFilled
         name: M276 pattern toolbelt rig (Full)
-       
+
     - name: Pouches
       jobs:
       - CMChiefEngineer
@@ -1037,7 +1040,8 @@
       entries:
       - id: CMHeadsetEngineer
         amount: 15
-      # TODO 15 Synthetic Reset Key
+      - id: RMCSynthResetKey
+        amount: 15
     # ////////////////////////////////////
     # Quartermaster
     # ////////////////////////////////////
@@ -1257,14 +1261,14 @@
         recommended: true
       - id: CMWebbing
     - name: Spare Equipment
-      jobs: 
+      jobs:
       - CMCMO
       entries:
       - id: CMHeadsetMedical
         amount: 15
       - id: CMHeadsetResearcher
         amount: 15
-        
+
 
     # ////////////////////////////////////
     # Auxiliary Support Officer
@@ -1312,7 +1316,7 @@
       - id: CMHeadCapPeakedService
         recommended: true
       - id: CMHeadBeretTan
-        recommended: true  
+        recommended: true
     - name: Combat Equipment
       jobs:
       - CMAuxiliarySupportOfficer

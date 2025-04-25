@@ -4,6 +4,7 @@ using Content.Server.Speech.EntitySystems;
 using Content.Server.Speech.Prototypes;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chat;
 using Content.Shared.Inventory;
@@ -47,7 +48,7 @@ public sealed class CMChatSystem : SharedCMChatSystem
             if (data.Observer)
                 continue;
 
-            if (HasComp<XenoComponent>(session.AttachedEntity))
+            if (HasComp<XenoComponent>(session.AttachedEntity) && !HasComp<SynthComponent>(session.AttachedEntity))
                 _toRemove.Add(session);
         }
 
@@ -66,7 +67,7 @@ public sealed class CMChatSystem : SharedCMChatSystem
             if (data.Observer)
                 continue;
 
-            if (!HasComp<XenoComponent>(session.AttachedEntity))
+            if (!HasComp<XenoComponent>(session.AttachedEntity) && !HasComp<SynthComponent>(session.AttachedEntity))
                 _toRemove.Add(session);
         }
 

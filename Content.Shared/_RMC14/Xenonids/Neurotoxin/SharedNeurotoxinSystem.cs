@@ -22,6 +22,7 @@ using Robust.Shared.Timing;
 using Content.Shared.Projectiles;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Synth;
 
 namespace Content.Shared._RMC14.Xenonids.Neurotoxin;
 
@@ -143,7 +144,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
         {
             neuro.NeurotoxinAmount -= frameTime * neuro.DepletionPerSecond;
 
-            if(neuro.NeurotoxinAmount <= 0)
+            if(neuro.NeurotoxinAmount <= 0 || HasComp<SynthComponent>(uid))
             {
                 RemCompDeferred<NeurotoxinComponent>(uid);
                 continue;
