@@ -66,6 +66,7 @@
     head: ClothingHeadHatFedoraBrown
     id: RMCIDCardFreePressResponder
     ears: CMHeadsetReporter
+    eyes: RMCSunglasses
     back: CMSatchel
     belt: CMClipboard
     pocket1: RMCPouchGeneralLarge

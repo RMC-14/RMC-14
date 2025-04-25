@@ -65,6 +65,7 @@
     head: RMCHeadRoyalBeret
     id: RMCIDCardTSEResponder
     ears: RMCHeadsetRoyalMarine
+    eyes: RMCSunglasses
     back: CMSatchel
     belt: CMClipboard
     pocket1: RMCPouchGeneralLarge

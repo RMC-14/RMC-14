@@ -66,6 +66,7 @@
     head: RMCHeadCapFlippable
     id: RMCIDCardUNMCResponder
     ears: CMHeadsetHighCommand
+    eyes: RMCSunglasses
     back: CMSatchel
     belt: CMClipboard
     pocket1: RMCPouchGeneralLarge
