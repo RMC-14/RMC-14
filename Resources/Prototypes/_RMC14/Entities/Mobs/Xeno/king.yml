@@ -128,3 +128,11 @@
       types:
         Heat: 0
   - type: RMCImmuneToFireTileDamage
+  - type: StunFriendlyXenoOnStep
+  - type: XenoRankNames
+    rankNames:
+      2: rmc-xeno-mature-king
+      3: rmc-xeno-mature-king
+      4: rmc-xeno-mature-king
+      5: rmc-xeno-mature-king
+  
