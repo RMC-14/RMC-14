@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed scarves blocking feeding someone pills.
-    type: Fix
-  id: 1143
-  time: '2024-12-22T21:49:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5208
-- author: Vermidia
-  changes:
-  - message: Fixed Medical Kit pouch being called a revival pouch in the corpsman
-      vendor
-    type: Fix
-  id: 1144
-  time: '2024-12-22T21:50:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5206
 - author: DrSmugleaf
   changes:
   - message: Fixed rounds never ending.
@@ -5481,5 +5466,21 @@
   id: 1645
   time: '2025-04-26T03:01:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6282
+- author: Vermidia
+  changes:
+  - message: Fixed Healer sacrifice not gibbing if you didn't have max transferred
+      health.
+    type: Fix
+  id: 1646
+  time: '2025-04-26T03:03:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6281
+- author: Dygon
+  changes:
+  - message: Resting will now interrupt and prevent the use of all actions with a
+      DoAfter.
+    type: Fix
+  id: 1647
+  time: '2025-04-26T03:02:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6280
 Name: RMC14
 Order: -1
