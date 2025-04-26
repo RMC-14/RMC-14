@@ -1,5 +1,6 @@
 - type: entity
-  id: RMCMorgueBase 
+  id: RMCMorgueBase
+  abstract: true
   components:
   - type: Damageable
     damageContainer: StructuralMarine
@@ -19,10 +20,19 @@
       Brute:
         path:
           "/Audio/_RMC14/Structures/metalhit.ogg"
+  - type: InsertBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: Fixtures
+    fixtures:
+      fix1:
+        layer:
+        - HalfWallLayer #used for now so bullets pass over
 
 - type: entity
-  parent: Morgue
-  id: [ CMMorgue, RMCMorgueBase ]
+  parent: [ Morgue, RMCMorgueBase ]
+  id: CMMorgue
   name: morgue
   description: Used to store bodies until someone fetches them.
   components:
@@ -57,16 +67,12 @@
           HasContents: {visible: true}
           HasMob: {visible: true}
           HasSoul: {visible: true}
-  - type: InsertBlacklist
-    blacklist:
-      components:
-      - Xeno
   - type: Anchorable
     flags: None
 
 - type: entity
-  parent: Crematorium
-  id: [ CMCrematorium, RMCMorgueBase]
+  parent: [ Crematorium, RMCMorgueBase ]
+  id: CMCrematorium
   name: crematorium
   description: A human incinerator. Works well on barbecue nights.
   components:
@@ -99,7 +105,3 @@
         enum.CrematoriumVisualLayers.LightContent:
           True: { visible: true }
           False: { visible: false }
-  - type: InsertBlacklist
-    blacklist:
-      components:
-      - Xeno
