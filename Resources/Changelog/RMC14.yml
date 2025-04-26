@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Rainbeon
   changes:
-  - message: Fixed Boiler globs phasing through resin walls, membranes, and doors.
-    type: Fix
-  id: 1146
-  time: '2024-12-23T03:21:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5215
-- author: Rainbeon
-  changes:
   - message: Fixed the Hivelord Resin Whisperer's Remote Build being too restrictive
       on Line of Sight. You now only need to see any tiny part of a tile to remote
       build on it, similar to CM13.
@@ -5482,5 +5475,12 @@
   id: 1648
   time: '2025-04-26T03:08:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6277
+- author: Ian321
+  changes:
+  - message: Sentries will no longer shoot at walls.
+    type: Fix
+  id: 1649
+  time: '2025-04-26T03:14:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6224
 Name: RMC14
 Order: -1
