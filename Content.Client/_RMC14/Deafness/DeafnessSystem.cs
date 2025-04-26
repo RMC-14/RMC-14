@@ -1,3 +1,4 @@
+using Content.Client.Popups;
 using Content.Shared._RMC14.Deafness;
 using Content.Shared.CCVar;
 using Content.Shared.StatusEffect;
@@ -16,6 +17,7 @@ public sealed class DeafnessSystem : SharedDeafnessSystem
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
 
     private float _originalVolume = 0.5f;
 
@@ -78,8 +80,7 @@ public sealed class DeafnessSystem : SharedDeafnessSystem
 
             var lastsFor = (float)(statusTime.Item2 - statusTime.Item1).TotalSeconds;
             var timeLeft = (float)(statusTime.Item2 - curTime).TotalSeconds;
-
-            var timeDone = statusTime.Item2.TotalSeconds;
+            var timeDone = (float)(curTime - statusTime.Item1).TotalSeconds;
 
             var volume = 0f;
 
@@ -88,7 +89,7 @@ public sealed class DeafnessSystem : SharedDeafnessSystem
 
             if (timeDone <= 2f) // Fade out during two seconds of deafness
             {
-                var fadeOut = 2f - timeLeft / fadeOutDuration;
+                var fadeOut = 1f - timeDone / fadeOutDuration;
                 volume = fadeOut * _originalVolume;
             }
             else if (timeLeft <= 1f) // Fade in during last second of deafness
@@ -97,6 +98,7 @@ public sealed class DeafnessSystem : SharedDeafnessSystem
                 volume = fadeIn * _originalVolume;
             }
 
+            volume = Math.Max(0f, volume); // prevents negative volume
             _audio.SetMasterGain(volume);
         }
     }
