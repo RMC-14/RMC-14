@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed Patreon named items perk not being applied to items in cases.
-    type: Fix
-  id: 1151
-  time: '2024-12-25T00:42:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5224
 - author: Vermidia
   changes:
   - message: Fixed arachnids not making sounds for some emotes
@@ -5482,5 +5475,12 @@
   id: 1653
   time: '2025-04-26T03:44:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6249
+- author: Magicocity1
+  changes:
+  - message: Fixed the pilot vendor not having M13 autopistols.
+    type: Fix
+  id: 1654
+  time: '2025-04-26T03:47:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6275
 Name: RMC14
 Order: -1
