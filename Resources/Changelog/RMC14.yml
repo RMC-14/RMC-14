@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed revival mix not showing up as revival mix in the corpsman vend
-    type: Fix
-  - message: Fixed CMO, SEA, and Nurses/Doctors not being able to get a medical kit
-      pouch from their vends.
-    type: Fix
-  id: 1150
-  time: '2024-12-24T02:21:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5222
 - author: DrSmugleaf
   changes:
   - message: Fixed Patreon named items perk not being applied to items in cases.
@@ -5483,5 +5473,14 @@
   id: 1652
   time: '2025-04-26T03:39:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6172
+- author: DummeHytteOst
+  changes:
+  - message: Hive and normal nodes health have been reduced from 33 to 11.
+    type: Fix
+  - message: Hardy nodes health have been increased from 10 to 11.
+    type: Fix
+  id: 1653
+  time: '2025-04-26T03:44:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6249
 Name: RMC14
 Order: -1
