@@ -20,6 +20,9 @@
     whitelist:
       components:
       - Marine
+    blacklist:
+      components:
+      - RMCMPStunImmune
 
 # TODO RMC14: Actually implement the telescopic baton
 - type: entity
