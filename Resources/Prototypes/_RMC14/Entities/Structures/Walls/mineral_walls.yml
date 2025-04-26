@@ -1,8 +1,8 @@
 - type: entity
-  parent: CMWallMetal
+  parent: CMWallReinforced
   id: RMCWallSandstone
   name: sandstone wall
-  description: A heavy wall of sandstone.
+  description: A wall with sandstone plating.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/stone.rsi
@@ -14,17 +14,34 @@
   - type: IconSmooth
     key: walls
     base: stone
+ 
+- type: entity
+  parent: RMCWallSandstone
+  id: RMCWallSandstoneTemple
+  name: sandstone temple wall
+  description: A heavy wall of sandstone.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/stone.rsi
+    state: stone
+    color: "#b29082"
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/stone.rsi
+    state: stone
+  - type: IconSmooth
+    key: walls
+    base: stone
 
 - type: entity
-  parent: CMWallRock
-  id: RMCWallSandstoneRuned
-  name: runed sandstone wall
+  parent: RMCWallSandstone
+  id: RMCWallSandstoneTempleRuned
+  name: runed sandstone temple wall
   description: A heavy wall of sandstone, with elegant carvings and runes inscribed upon its face.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/runedstone.rsi
     state: runedstone
-    color: "#c6a480"
+    color: "#b29082"
   - type: Icon
     sprite: _RMC14/Structures/Walls/runedstone.rsi
     state: runedstone
