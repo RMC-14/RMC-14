@@ -548,6 +548,7 @@
     - ActionXenoAcidShroud
     cooldown: 20
     onPerform: false
+  - type: ActionBlockIfResting
 
 - type: entity
   parent: ActionXenoBase
