@@ -1,4 +1,4 @@
-﻿# Plasma
+# Plasma
 cm-xeno-not-enough-plasma = We don't have enough plasma!
 
 # Energy
@@ -261,7 +261,7 @@ rmc-xeno-apply-salve-self = We regurgitate our vital fluids and some plasma to c
 rmc-xeno-apply-salve-target = {$healer_xeno} covers our wounds with a regenerative resin salve. We feel reinvigorated!
 
 # Sacrificial Heal
-rmc-xeno-sacrifice-heal-will-respawn = We have gained enough energy! We will be reborn when we sacrifice ourself!
+rmc-xeno-sacrifice-heal-will-respawn = We have transferred enough health! We will be reborn when we sacrifice ourself!
 
 rmc-xeno-sacrifice-heal-target-not-xeno-failure = The target cannot be healed!
 rmc-xeno-sacrifice-heal-target-self-failure = We can't heal ourself!
