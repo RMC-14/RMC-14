@@ -496,4 +496,5 @@ public enum LogType
     RMCSpawnJob = RMCMarineAnnounce + 28,
     RMCGunShot = RMCMarineAnnounce + 29,
     RMCSetPose = RMCMarineAnnounce + 30,
+    RMCDropshipWeapon = RMCMarineAnnounce + 31,
 }

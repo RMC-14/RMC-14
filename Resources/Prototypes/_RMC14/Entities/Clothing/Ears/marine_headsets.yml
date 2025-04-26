@@ -31,7 +31,7 @@
       - CMEncryptionKeyAlpha
       - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 3
 
 - type: entity
@@ -46,7 +46,7 @@
       - CMEncryptionKeyAlpha
       - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 2
 
 - type: entity
@@ -103,7 +103,7 @@
       - CMEncryptionKeyBravo
       - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 3
 
 - type: entity
@@ -118,7 +118,7 @@
       - CMEncryptionKeyBravo
       - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 2
 
 - type: entity
@@ -175,7 +175,7 @@
       - CMEncryptionKeyCharlie
       - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 3
 
 - type: entity
@@ -190,7 +190,7 @@
       - CMEncryptionKeyCharlie
       - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 2
 
 - type: entity
@@ -247,7 +247,7 @@
       - CMEncryptionKeyDelta
       - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 3
 
 - type: entity
@@ -262,7 +262,7 @@
       - CMEncryptionKeyDelta
       - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 2
 
 - type: entity
@@ -319,7 +319,7 @@
       - CMEncryptionKeyEcho
       - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 3
 
 - type: entity
@@ -334,7 +334,7 @@
       - CMEncryptionKeyEcho
       - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 2
 
 - type: entity
@@ -391,7 +391,7 @@
       - CMEncryptionKeyFoxtrot
       - CMEncryptionKeyCommon
       - CMEncryptionKeySquadLeader
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 3
 
 - type: entity
@@ -406,7 +406,7 @@
       - CMEncryptionKeyFoxtrot
       - CMEncryptionKeyCommon
       - CMEncryptionKeyJTAC
-  - type: Headset
+  - type: RMCHeadset
     radioTextIncrease: 2
 
 - type: entity

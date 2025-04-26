@@ -88,7 +88,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidPMCEngineer
   name: weya pmc ghost role engineer
-  suffix: Spawner, Player
+  suffix: We-Ya PMC
   components:
   - type: Sprite
     layers:
@@ -97,7 +97,7 @@
     settings: RMCPMCEngineer
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCPMCEngineer
   components:
   - type: GhostRole
@@ -109,3 +109,6 @@
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
+  - type: NpcFactionMember
+    factions:
+    - WeYa

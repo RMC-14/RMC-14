@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 using Content.Shared._RMC14.Medical.Surgery;
 using Content.Shared._RMC14.Medical.Surgery.Steps;
 using Content.Shared._RMC14.Weapons.Ranged;
@@ -13,6 +13,7 @@ using Content.Shared.Explosion;
 using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Movement.Components;
 using Content.Shared.Preferences;
 using Content.Shared.Rounding;
 using Content.Shared.Weapons.Melee;
@@ -108,6 +109,8 @@ public sealed class CMArmorSystem : EntitySystem
 
     private void OnGetArmor(Entity<CMArmorComponent> armored, ref CMGetArmorEvent args)
     {
+        args.ExplosionArmor += armored.Comp.ExplosionArmor;
+
         if (HasComp<XenoComponent>(armored))
         {
             args.XenoArmor += armored.Comp.XenoArmor;
@@ -122,6 +125,8 @@ public sealed class CMArmorSystem : EntitySystem
 
     private void OnGetArmorRelayed(Entity<CMArmorComponent> armored, ref InventoryRelayedEvent<CMGetArmorEvent> args)
     {
+        args.Args.ExplosionArmor += armored.Comp.ExplosionArmor;
+
         if (HasComp<XenoComponent>(armored))
         {
             args.Args.XenoArmor += armored.Comp.XenoArmor;
@@ -371,6 +376,20 @@ public sealed class CMArmorSystem : EntitySystem
         RaiseLocalEvent(user.Owner, ref ev);
 
         user.Comp.SpeedTier = ev.SpeedTier;
+
+        var speed = user.Comp.SpeedTier switch
+        {
+            "light" => 0.483f,
+            "medium" => 0.526f,
+            "heavy" => 0.565f,
+            _ => 0.35f,
+        };
+
+        if (!TryComp(user, out MobCollisionComponent? mobCollision))
+            return;
+
+        mobCollision.MinimumSpeedModifier = speed;
+        Dirty(user, mobCollision);
     }
 
     private void OnRefreshArmorSpeedTier(Entity<RMCArmorSpeedTierComponent> armor, ref InventoryRelayedEvent<RefreshArmorSpeedTierEvent> args)

@@ -647,7 +647,7 @@ entities:
     - type: Transform
       pos: 7.2955246,8.470513
       parent: 1
-- proto: RMCMagazineSMGP90
+- proto: CMMagazineSMGM63
   entities:
   - uid: 62
     components:
@@ -733,7 +733,7 @@ entities:
     - type: Transform
       pos: 7.5,6.5
       parent: 1
-- proto: RMCWeaponRifleXM40
+- proto: WeaponRifleM54C
   entities:
   - uid: 74
     components:
@@ -745,54 +745,18 @@ entities:
     - type: Transform
       pos: 10.5,6.5
       parent: 1
-- proto: RMCWeaponSMGP90
+- proto: WeaponSMGM63
   entities:
   - uid: 60
     components:
     - type: Transform
       pos: 7.5,8.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        gun_magazine: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        gun_chamber: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        rmc-aslot-barrel: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: null
-        rmc-aslot-rail: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: null
   - uid: 61
     components:
     - type: Transform
       pos: 6.5,6.5
       parent: 1
-    - type: ContainerContainer
-      containers:
-        gun_magazine: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        gun_chamber: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        rmc-aslot-barrel: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: null
-        rmc-aslot-rail: !type:ContainerSlot
-          showEnts: False
-          occludes: False
-          ent: null
 - proto: RMCWindowFrameColony
   entities:
   - uid: 3

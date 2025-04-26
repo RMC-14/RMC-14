@@ -36,6 +36,7 @@
       Brute:
         collection: XenoResinBreak
   - type: XenoConstruct
+  - type: RMCDeleteAnchoredOnInit
   - type: RMCWallExplosionDeletable
   - type: DestroyedByExplosionType
   - type: NpcFactionMember

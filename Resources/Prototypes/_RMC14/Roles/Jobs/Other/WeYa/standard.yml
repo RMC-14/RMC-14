@@ -37,7 +37,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidPMCStandardM63B2
   name: weya pmc ghost role standard m63b2
-  suffix: Spawner, Player
+  suffix: We-Ya PMC
   components:
   - type: Sprite
     layers:
@@ -46,7 +46,7 @@
     settings: RMCPMCStandardM63B2
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCPMCStandardM63B2
   components:
   - type: GhostRole
@@ -58,6 +58,9 @@
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
+  - type: NpcFactionMember
+    factions:
+    - WeYa
 
 - type: startingGear
   id: RMCJobPMCStandardM63B2
@@ -108,7 +111,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidPMCStandardSSG45
   name: weya pmc ghost role standard ssg45
-  suffix: Spawner, Player
+  suffix: We-Ya PMC
   components:
   - type: Sprite
     layers:
@@ -117,7 +120,7 @@
     settings: RMCPMCStandardSSG45
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCPMCStandardSSG45
   components:
   - type: GhostRole
@@ -129,6 +132,9 @@
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
+  - type: NpcFactionMember
+    factions:
+    - WeYa
 
 - type: startingGear
   id: RMCJobPMCStandardSSG45
@@ -177,7 +183,7 @@
   parent: MarkerBase
   id: RMCRandomHumanoidPMCStandardM54C2
   name: weya pmc ghost role standard m54c2
-  suffix: Spawner, Player
+  suffix: We-Ya PMC
   components:
   - type: Sprite
     layers:
@@ -186,7 +192,7 @@
     settings: RMCPMCStandardM54C2
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCPMCStandardM54C2
   components:
   - type: GhostRole
@@ -198,6 +204,9 @@
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
+  - type: NpcFactionMember
+    factions:
+    - WeYa
 
 - type: startingGear
   id: RMCJobPMCStandardM54C2

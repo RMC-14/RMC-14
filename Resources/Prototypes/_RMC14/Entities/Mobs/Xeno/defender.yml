@@ -6,6 +6,7 @@
   - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
   id: CMXenoDefenderBase
   name: Defender
   description: An alien with an armored crest.

@@ -87,6 +87,7 @@ public abstract class ClothingSystem : EntitySystem
     {
         component.InSlot = args.Slot;
         component.InSlotFlag = args.SlotFlags;
+        Dirty(uid, component);
 
         if ((component.Slots & args.SlotFlags) == SlotFlags.NONE)
             return;
@@ -111,17 +112,23 @@ public abstract class ClothingSystem : EntitySystem
 
         component.InSlot = null;
         component.InSlotFlag = null;
+        Dirty(uid, component);
     }
 
     private void OnGetState(EntityUid uid, ClothingComponent component, ref ComponentGetState args)
     {
-        args.State = new ClothingComponentState(component.EquippedPrefix);
+        args.State = new ClothingComponentState(component.EquippedPrefix, component.InSlot, component.InSlotFlag);
     }
 
     private void OnHandleState(EntityUid uid, ClothingComponent component, ref ComponentHandleState args)
     {
         if (args.Current is not ClothingComponentState state)
             return;
+
+        // RMC14
+        component.InSlot = state.InSlot;
+        component.InSlotFlag = state.InSlotFlag;
+        // RMC14
 
         SetEquippedPrefix(uid, state.EquippedPrefix, component);
     }
