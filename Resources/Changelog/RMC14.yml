@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed messages when failing to heal something as a healer drone showing
-      the target's numerical id instead of their name.
-    type: Fix
-  - message: Fixed rounds not ending automatically but actually.
-    type: Fix
-  id: 1148
-  time: '2024-12-23T03:27:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5216
 - author: Vermidia
   changes:
   - message: Fixed Healer drone pheromones not being the same strength as warden prae
@@ -5482,5 +5472,16 @@
   id: 1650
   time: '2025-04-26T03:15:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6199
+- author: MetalSage
+  changes:
+  - message: Added the Tesla Coil Sentry, an automated defense structure that targets
+      enemies and applies debuffs like stun, slow, and daze.
+    type: Add
+  - message: Added the Dazed effect with a visual overlay, applied by sources like
+      the Tesla Coil.
+    type: Add
+  id: 1651
+  time: '2025-04-26T03:22:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6195
 Name: RMC14
 Order: -1
