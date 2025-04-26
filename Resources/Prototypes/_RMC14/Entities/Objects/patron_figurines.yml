@@ -1331,3 +1331,14 @@
     state: gregor_cain
   - type: PatronFigurine
     id: 8fdc1c0b-262a-4281-b864-a41b9ba2790d
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronJessieFirstDaily
+  name: Jessie 'First' Daily figurine
+  description: "\"Charlies never die.\" Smells like pinesap and sawdust."
+  components:
+  - type: Sprite
+    state: jessie_first_daily
+  - type: PatronFigurine
+    id: af9cfb55-9570-4029-ac0f-a87d1def10d7
