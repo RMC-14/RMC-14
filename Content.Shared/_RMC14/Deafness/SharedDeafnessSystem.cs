@@ -73,7 +73,7 @@ public abstract class SharedDeafnessSystem : EntitySystem
         return true;
     }
 
-    public void DoEarLossPopups(EntityUid uid, bool end, bool showInChat = true)
+    public void DoEarLossPopups(EntityUid uid, bool end, bool showInChat = false)
     {
         var msg = Loc.GetString(end ? "rmc-deaf-end" : "rmc-deaf-start");
 
@@ -83,7 +83,7 @@ public abstract class SharedDeafnessSystem : EntitySystem
             _chat.ChatMessageToOne(chatMessage, uid);
         }
 
-        _popup.PopupClient(msg, uid, uid, PopupType.MediumCaution);
+        _popup.PopupEntity(msg, uid, uid, PopupType.MediumCaution);
     }
 
     public bool HasEarProtection(EntityUid uid)
