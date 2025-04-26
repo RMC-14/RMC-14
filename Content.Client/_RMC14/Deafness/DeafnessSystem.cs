@@ -1,4 +1,3 @@
-using Content.Client.Popups;
 using Content.Shared._RMC14.Deafness;
 using Content.Shared.CCVar;
 using Content.Shared.StatusEffect;
@@ -17,7 +16,6 @@ public sealed class DeafnessSystem : SharedDeafnessSystem
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
 
     private float _originalVolume = 0.5f;
 
