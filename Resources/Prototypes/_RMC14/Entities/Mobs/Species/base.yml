@@ -350,3 +350,4 @@
   - type: RMCMobCollision
   - type: RMCRest
   - type: DeafenWhileCrit
+  - type: StunOnExplosionReceived

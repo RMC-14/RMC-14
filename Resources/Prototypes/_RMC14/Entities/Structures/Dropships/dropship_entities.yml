@@ -60,6 +60,8 @@
     layers:
     - state: "fuel_base"
       map: [ "enum.DropshipPointVisualsLayers.AttachedUtility"]
+      rotation: 180
+      visible: false
     - state: "fuel_base"
       map: [ "enum.DropshipPointVisualsLayers.AttachmentBase"]
   - type: Icon
