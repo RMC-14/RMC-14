@@ -83,7 +83,7 @@ public abstract class SharedDeafnessSystem : EntitySystem
             _chat.ChatMessageToOne(chatMessage, uid);
         }
 
-        _popup.PopupEntity(msg, uid, uid, PopupType.MediumCaution);
+        _popup.PopupPredicted(msg, uid, uid, PopupType.MediumCaution);
     }
 
     public bool HasEarProtection(EntityUid uid)
