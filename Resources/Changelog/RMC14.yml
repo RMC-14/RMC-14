@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed rounds never ending.
-    type: Fix
-  - message: Added Cyril 'Cloves' Culkins figurine.
-    type: Add
-  id: 1145
-  time: '2024-12-22T23:45:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5212
 - author: Rainbeon
   changes:
   - message: Fixed Boiler globs phasing through resin walls, membranes, and doors.
@@ -5482,5 +5473,14 @@
   id: 1647
   time: '2025-04-26T03:02:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6280
+- author: CyberTropic
+  changes:
+  - message: Added missing entities, tiles, props, tall grass to LV624.
+    type: Add
+  - message: Added unroofed area at the underground lake.
+    type: Add
+  id: 1648
+  time: '2025-04-26T03:08:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6277
 Name: RMC14
 Order: -1
