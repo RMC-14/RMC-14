@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Chat;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
+using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -13,6 +14,7 @@ public abstract class SharedDeafnessSystem : EntitySystem
     [Dependency] private readonly SharedCMChatSystem _chat = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public ProtoId<StatusEffectPrototype> DeafKey = "Deaf";
 
@@ -31,8 +33,7 @@ public abstract class SharedDeafnessSystem : EntitySystem
         if (args.Key != DeafKey)
             return;
 
-        var msg = Loc.GetString("rmc-deaf-end");
-        _chat.ChatMessageToOne(msg, ent.Owner);
+        DoEarLossPopups(ent.Owner, true);
     }
 
     private void OnDeafenWhileCritMobState(Entity<DeafenWhileCritComponent> ent, ref MobStateChangedEvent args)
@@ -61,10 +62,7 @@ public abstract class SharedDeafnessSystem : EntitySystem
             return false;
 
         if (!HasComp<DeafComponent>(uid)) // First time being deafened
-        {
-            var msg = Loc.GetString("rmc-deaf-start");
-            _chat.ChatMessageToOne(msg, uid);
-        }
+            DoEarLossPopups(uid, false);
 
         if (!_statusEffect.TryAddStatusEffect<DeafComponent>(uid, DeafKey, time, refresh))
             return false;
@@ -73,6 +71,19 @@ public abstract class SharedDeafnessSystem : EntitySystem
         RaiseLocalEvent(uid, ref ev);
 
         return true;
+    }
+
+    public void DoEarLossPopups(EntityUid uid, bool end, bool showInChat = true)
+    {
+        var msg = Loc.GetString(end ? "rmc-deaf-end" : "rmc-deaf-start");
+
+        if (showInChat)
+        {
+            var chatMessage = Loc.GetString("rmc-deaf-chat-color", ("message", msg));
+            _chat.ChatMessageToOne(chatMessage, uid);
+        }
+
+        _popup.PopupClient(msg, uid, uid, PopupType.MediumCaution);
     }
 
     public bool HasEarProtection(EntityUid uid)
