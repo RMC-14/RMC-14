@@ -62,4 +62,11 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
     /// </summary>
     [DataField]
     public SoundSpecifier LatejoinArrivalSound { get; private set; } = new SoundPathSpecifier("/Audio/_RMC14/Announcements/ARES/sound_misc_boatswain.ogg");
+
+    /// <summary>
+    /// This field logically identifies the level in the Marine command hierarchy when delegating the Operation Commander's authority.
+    /// A value of 0 implies that is not a Marine or Marine is not eligible to assume Operation Commander's authority.
+    /// </summary>
+    [DataField]
+    public int MarineAuthorityLevel { get; private set; } = 0;
 }

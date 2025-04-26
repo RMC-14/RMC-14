@@ -39,6 +39,7 @@
   joinNotifyCrew: true
   latejoinArrivalSound:
     path: /Audio/_RMC14/Announcements/ARES/attention_jingle.ogg
+  marineAuthorityLevel: 5
   supervisors: cm-job-supervisors-co
   whitelisted: true
   accessGroups:
