@@ -5303,7 +5303,7 @@
   url: https://github.com/RMC-14/RMC-14/pull/6215
 - author: to4no_fix
   changes:
-  - message: The dropship system now automatically scans for xenomorphs on board after
+  - message: The dropship system now automatically scans for xenonids on board after
       take off. If any are detected (excluding corpses), a Red Alert is set and marines
       are notified with a global announcement.
     type: Add
