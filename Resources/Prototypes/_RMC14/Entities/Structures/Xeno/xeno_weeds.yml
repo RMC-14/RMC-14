@@ -247,7 +247,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 11
+        damage: 11 # TODO RMC14 30 after it finishes spreading
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
