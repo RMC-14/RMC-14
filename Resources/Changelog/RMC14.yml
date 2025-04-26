@@ -1,14 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: Fixed Healer drone pheromones not being the same strength as warden prae
-      pheromones.
-    type: Fix
-  id: 1149
-  time: '2024-12-23T04:08:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5219
-- author: Vermidia
-  changes:
   - message: Fixed revival mix not showing up as revival mix in the corpsman vend
     type: Fix
   - message: Fixed CMO, SEA, and Nurses/Doctors not being able to get a medical kit
@@ -5483,5 +5475,13 @@
   id: 1651
   time: '2025-04-26T03:22:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6195
+- author: BramvanZijp
+  changes:
+  - message: Fixed Engine Coolers & Fuel Enhancers sprite being inverted when attached
+      to a dropship.
+    type: Fix
+  id: 1652
+  time: '2025-04-26T03:39:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6172
 Name: RMC14
 Order: -1
