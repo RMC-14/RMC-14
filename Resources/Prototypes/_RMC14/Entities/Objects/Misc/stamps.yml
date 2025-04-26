@@ -184,3 +184,16 @@
     stampedName: stamp-component-stamped-name-cm-provost
     stampedColor: "#cb0000"
     stampState: "paper_stamp-provost"
+
+- type: entity
+  parent: CMStampBase
+  id: CMStampCLF
+  name: colonial liberation front rubber stamp
+  suffix: Admin
+  components:
+  - type: Sprite
+    state: stamp-clf
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-clf
+    stampedColor: "#cb0000"
+    stampState: "paper_stamp-clf"
