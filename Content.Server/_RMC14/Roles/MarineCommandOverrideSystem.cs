@@ -16,8 +16,8 @@ using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared.Inventory;
 using Content.Shared.Access.Components;
 using Content.Shared.Access;
-using System.Linq;
-using Content.Shared.Dataset;
+using Content.Shared.Roles.Jobs;
+using System.Globalization;
 
 namespace Content.Server._RMC14.Roles;
 
@@ -30,9 +30,12 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
     [Dependency] private readonly ARESSystem _ares = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedRankSystem _rankSystem = default!;
+    [Dependency] private readonly SharedJobSystem _jobs = default!;
 
 
-    private const int AuthorityThreshold = 13;
+    private EntityUid _commander = default;
+    private const int SeniorAuthoritylevel = 13; // Corresponds to the level of authority of a staff officer
+    private bool _accessesAdded = false;
     private TimeSpan? _adaptationTimerEndTime;
     private TimeSpan? _initialTimerEndTime;
 
@@ -79,10 +82,10 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
         var query = EntityQueryEnumerator<MarineComponent, OriginalRoleComponent, MobStateComponent, MindContainerComponent>();
         while (query.MoveNext(out var uid, out var _, out var originalRole, out var _, out var _))
         {
-            if (HasInvalidRank(uid)) // the player has an invalid rank
+            if (_rankSystem.HasInvalidRank(uid, "RMCRankPrivate")) // the player has an invalid rank. the privates are not ready yet...
                 continue;
 
-            if (IsInAnyCryostorage(uid)) // the player is in cryostorage
+            if (HasComp<CryostorageContainedComponent>(uid))  // the player is in cryostorage
                 continue;
 
             if (originalRole.Job == null || !_prototypes.TryIndex(originalRole.Job.Value, out JobPrototype? jobProto))
@@ -91,7 +94,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
             if (jobProto.MarineAuthorityLevel == 0)
                 continue;
 
-            if (jobProto.MarineAuthorityLevel >= AuthorityThreshold)
+            if (jobProto.MarineAuthorityLevel >= SeniorAuthoritylevel)
             {
                 return; // Senior command found, no need to announce anything.
             }
@@ -117,10 +120,10 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
         {
             var mind = CompOrNull<MindComponent>(mindContainer.Mind);
 
-            if (HasInvalidRank(uid)) // the player has an invalid rank
+            if (_rankSystem.HasInvalidRank(uid, "RMCRankPrivate")) // the player has an invalid rank. the privates are not ready yet...
                 continue;
 
-            if (IsInAnyCryostorage(uid)) // the player is in cryostorage
+            if (HasComp<CryostorageContainedComponent>(uid)) // the player is in cryostorage
                 continue;
 
             if (originalRole.Job == null || !_prototypes.TryIndex(originalRole.Job.Value, out JobPrototype? jobProto))
@@ -129,7 +132,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
             if (jobProto.MarineAuthorityLevel == 0)
                 continue;
 
-            if (jobProto.MarineAuthorityLevel >= AuthorityThreshold) // Senior command found
+            if (jobProto.MarineAuthorityLevel >= SeniorAuthoritylevel) // Senior command found
             {
                 _marineAnnounce.AnnounceARES(ares, Loc.GetString("rmc-marine-command-override-senior-command-found"));
                 return;
@@ -150,76 +153,50 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
 
         if (candidates.Count == 0) // No candidates found
         {
-            _marineAnnounce.AnnounceARES(ares, Loc.GetString("rmc-marine-command-override-no-сandidates-found"));
+            _marineAnnounce.AnnounceARES(ares, Loc.GetString("rmc-marine-command-override-no-candidates-found"));
             return;
         }
 
         if (candidates.Count == 1 && HasValidIdTag(candidates[0], out var finalIdTag) && finalIdTag != null)
         {
             TryAddRequiredAccess(finalIdTag.Value, new HashSet<ProtoId<AccessGroupPrototype>> { new ProtoId<AccessGroupPrototype>("MarineMain") });
+            _commander = candidates[0];
         }
 
         if (candidates.Count > 1)
         {
-            EntityUid commander;
+            var highestRankCandidates = _rankSystem.GetEntitiesWithHighestRank(candidates, "RMCMarineRankHierarchy");
 
-
-            _rankSystem.GetEntitiesWithHighestRank(candidates, "RMCMarineRankHierarchy");
-
-
-
-            if (!_prototypes.TryIndex<DatasetPrototype>("RMCMarineRankHierarchy", out var rankHierarchy))
-                return;
-
-            // Получаем список всех рангов и их старшинства
-            var rankOrder = rankHierarchy.Values.ToList();
-
-            // Словарь для хранения текущих сущностей с их рангами
-            Dictionary<EntityUid, int> rankScores = new Dictionary<EntityUid, int>();
-
-            // Сравниваем и находим сущности с самыми высокими рангами
-            int highestRank = -1;
-
-            foreach (var candidate in candidates)
+            if (highestRankCandidates == null) // All entities have invalid rank (in this case it is impossible) or an empty dataset was passed
             {
-                if (!TryComp<RankComponent>(candidate, out var rankComp) || rankComp.Rank == null)
-                    continue;
-
-                if (!_prototypes.TryIndex<RankPrototype>(rankComp.Rank, out var rankProto))
-                    continue;
-
-                // Определяем старшинство ранга
-                int rankIndex = rankOrder.IndexOf(rankProto.ID);
-                if (rankIndex == -1)
-                    continue;
-
-                // Сохраняем старшинство для кандидата
-                rankScores[candidate] = rankIndex;
-
-                if (rankIndex > highestRank)
-                    highestRank = rankIndex;
+                _marineAnnounce.AnnounceARES(ares, Loc.GetString("rmc-marine-command-override-no-candidates-found"));
+                return;
             }
 
-            // Отбираем кандидатов с самым высоким рангом
-            var highestRankCandidates = rankScores.Where(pair => pair.Value == highestRank).Select(pair => pair.Key).ToList();
-
-            // Если несколько кандидатов с одинаковым самым высоким рангом, продолжаем с ними
             if (highestRankCandidates.Count == 1 && HasValidIdTag(highestRankCandidates[0], out var idTag) && idTag != null)
             {
                 TryAddRequiredAccess(idTag.Value, new HashSet<ProtoId<AccessGroupPrototype>> { new ProtoId<AccessGroupPrototype>("MarineMain") });
-                commander = highestRankCandidates[0];
+                _commander = highestRankCandidates[0];
             }
-            else
+            else // If there are multiple candidates with the same highest rank, continue with them
             {
-                // Если несколько кандидатов, нужно решить, что делать дальше
+                //
             }
-
-            _marineAnnounce.AnnounceARES(ares,
-                Loc.GetString("rmc-latejoin-arrival-announcement-special",
-                ("character", fullRankName)),
-                null,
-                null);
         }
+
+        TryComp<OriginalRoleComponent>(_commander, out var roleComp);
+        string jobName = string.Empty;
+        if (roleComp != null && roleComp.Job != null && _prototypes.TryIndex(roleComp.Job.Value, out JobPrototype? protoJob))
+            jobName = protoJob.LocalizedName;
+
+        string announceText = Loc.GetString("rmc-marine-command-override-commander-chosen",
+            ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName)),
+            ("character", _rankSystem.GetSpeakerFullRankName(_commander) ?? Name(_commander)));
+
+        if (_accessesAdded)
+            announceText = $"{announceText}\n{Loc.GetString("rmc-marine-command-override-access-added")}";
+
+        _marineAnnounce.AnnounceARES(ares, announceText, null, null);
 
     }
 
@@ -267,29 +244,6 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
         // If the level is less than the current maximum, we don’t add
     }
 
-    private bool IsInAnyCryostorage(EntityUid target)
-    {
-        var cryoQuery = EntityQueryEnumerator<CryostorageContainedComponent>();
-        while (cryoQuery.MoveNext(out var _, out var comp))
-        {
-            if (comp.Cryostorage != null && comp.Cryostorage == target)
-                return true;
-        }
-
-        return false;
-    }
-
-    private bool HasInvalidRank(EntityUid entity)
-    {
-        if (!_entMan.TryGetComponent<RankComponent>(entity, out var rankComp))
-            return true;
-
-        if (rankComp.Rank == null)
-            return true;
-
-        return rankComp.Rank == "RMCRankPrivate"; // the privates are not ready yet...
-    }
-
     private bool HasValidIdTag(EntityUid entity, out EntityUid? idTag)
     {
         idTag = null;
@@ -307,7 +261,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
             return true;
         }
 
-        return false;
+        return false; // Player removed his ID to avoid being selected or lost his ID
     }
 
     private bool TryAddRequiredAccess(EntityUid idCard, HashSet<ProtoId<AccessGroupPrototype>> requiredGroups)
@@ -315,33 +269,38 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
         if (!_entMan.TryGetComponent<AccessComponent>(idCard, out var accessComp))
             return false;
 
-        // Проверим, содержатся ли все требуемые группы
+        var initialAccesses = new HashSet<ProtoId<AccessLevelPrototype>>(accessComp.Tags);
         var accessGroups = accessComp.Groups;
 
-        // Список групп, которых не хватает
+        // List of groups that are missing
         var missingGroups = new HashSet<ProtoId<AccessGroupPrototype>>();
 
         foreach (var requiredGroup in requiredGroups)
         {
             if (!accessGroups.Contains(requiredGroup))
             {
-                missingGroups.Add(requiredGroup); // Добавляем отсутствующие группы в Set
+                missingGroups.Add(requiredGroup); // Add missing groups to Set
             }
         }
 
         if (missingGroups.Count == 0)
             return true;
 
-        // Добавляем доступы, составляющие упущенные группы
+        // Adding accesses that make up missing groups
         foreach (var group in missingGroups)
         {
             if (!_prototypes.TryIndex<AccessGroupPrototype>(group, out var groupProto))
                 continue;
 
-            accessComp.Tags.UnionWith(groupProto.Tags); // Также добавляем теги
+            accessComp.Tags.UnionWith(groupProto.Tags);
+
+            if (!initialAccesses.SetEquals(accessComp.Tags))
+            {
+                _accessesAdded = true;
+            }
         }
 
-        Dirty(idCard, accessComp); // Уведомим, что компонент изменился
+        Dirty(idCard, accessComp);
 
         return true;
     }
