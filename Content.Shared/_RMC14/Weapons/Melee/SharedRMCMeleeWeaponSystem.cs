@@ -73,7 +73,7 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
 
         foreach (var hit in args.HitEntities)
         {
-            if (_whitelist.CheckBoth(hit, ent.Comp.Blacklist, ent.Comp.Whitelist))
+            if (_whitelist.IsValid(ent.Comp.Whitelist, hit))
                 _stun.TryParalyze(hit, ent.Comp.Duration, true);
         }
     }

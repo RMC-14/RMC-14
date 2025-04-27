@@ -12,7 +12,4 @@ public sealed partial class StunOnHitComponent : Component
 
     [DataField(required: true), AutoNetworkedField]
     public EntityWhitelist Whitelist = new();
-
-    [DataField, AutoNetworkedField]
-    public EntityWhitelist Blacklist = new();
 }
