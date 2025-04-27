@@ -64,6 +64,17 @@
     graph: RMCBed
     node: bedDingy
 
+- type: entity
+  parent: CMBed
+  id: RMCBedAlien
+  name: alien bed
+  suffix: Alien
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/bed.rsi
+    state: alien_bed
+  - type: Construction
+
 # Bedroll
 
 - type: entity
