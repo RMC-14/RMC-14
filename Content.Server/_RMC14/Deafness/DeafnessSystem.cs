@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Server._RMC14.Chat.Chat;
+using Content.Server.Radio;
 using Content.Shared._RMC14.Deafness;
 using Content.Shared.Chat;
 using Robust.Shared.Random;
@@ -16,7 +17,16 @@ public sealed class DeafnessSystem : SharedDeafnessSystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<DeafComponent, RadioReceiveAttemptEvent>(OnRadioReceiveAttempt);
         SubscribeLocalEvent<DeafComponent, ChatMessageOverrideInVoiceRangeEvent>(OnOverrideInVoiceRange);
+    }
+
+    private void OnRadioReceiveAttempt(Entity<DeafComponent> ent, ref RadioReceiveAttemptEvent args)
+    {
+        if (args.RadioReceiver != ent.Owner)
+            return;
+
+        args.Cancelled = true;
     }
 
     private void OnOverrideInVoiceRange(Entity<DeafComponent> ent, ref ChatMessageOverrideInVoiceRangeEvent args)
