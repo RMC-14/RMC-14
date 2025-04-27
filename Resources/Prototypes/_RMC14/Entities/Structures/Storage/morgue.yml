@@ -24,12 +24,10 @@
     blacklist:
       components:
       - Xeno
-  - type: Fixtures
-    fixtures:
-      fix1:
-        layer:
-        - HalfWallLayer #used for now so bullets pass over
-
+  - type: ReceiverXenoClaws 
+    maxHealth: 100
+    minimumClawStrength: Normal
+    HitsToDestroy: 4 # todo allow only xenos to do melee damage to this, without forcing a limit, choose 4 hits or "25"dmg, since thats on the low end of what xenos can do.
 - type: entity
   parent: [ Morgue, RMCMorgueBase ]
   id: CMMorgue
