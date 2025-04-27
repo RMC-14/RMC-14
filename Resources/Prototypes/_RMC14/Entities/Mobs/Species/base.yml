@@ -353,3 +353,4 @@
     whitelist:
       components:
       - Xeno
+  - type: StunOnExplosionReceived

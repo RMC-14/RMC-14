@@ -546,8 +546,9 @@
     id: ActionXenoBombard
     ids:
     - ActionXenoAcidShroud
-    cooldown: 20
+    cooldown: 30
     onPerform: false
+  - type: ActionBlockIfResting
 
 - type: entity
   parent: ActionXenoBase
