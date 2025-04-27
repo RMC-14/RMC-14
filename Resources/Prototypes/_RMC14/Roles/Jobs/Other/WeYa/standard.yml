@@ -56,7 +56,6 @@
       settings: short
   - type: GhostRoleApplySpecial
     squad: SquadPMC
-  - type: RMCMPStunImmune
 
 - type: startingGear
   id: RMCJobPMCStandardM63B2
