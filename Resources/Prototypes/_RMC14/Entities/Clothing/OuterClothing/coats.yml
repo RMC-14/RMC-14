@@ -536,7 +536,7 @@
 - type: entity
   parent: RMCBaseJacket
   id: CMUtilityVestSynth
-  name: synthethic utility vest
+  name: synthetic utility vest
   description: A leather utility vest worn by synthetic UNMC personnel. The vest is rather lightweight but has a few pockets for carrying small items. It is not very protective, but it is a good choice for the Synthetics who want to look stylish while working.
   components:
   - type: Sprite
