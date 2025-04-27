@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Sentry;
 using Content.Shared._RMC14.Xenonids.Announce;
@@ -33,6 +34,7 @@ using Content.Shared.Projectiles;
 using Content.Shared.Prototypes;
 using Content.Shared.Tag;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
@@ -65,6 +67,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly QueenEyeSystem _queenEye = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly TagSystem _tags = default!;
@@ -93,6 +96,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
+
+    private float _densityThreshold;
 
     public override void Initialize()
     {
@@ -136,6 +141,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         SubscribeLocalEvent<DeleteXenoResinOnHitComponent, ProjectileHitEvent>(OnDeleteXenoResinHit);
 
+        SubscribeLocalEvent<XenoConstructComponent, MapInitEvent>(OnXenoConstructMapInit);
+        SubscribeLocalEvent<XenoConstructComponent, ComponentRemove>(OnXenoConstructRemoved);
+
         Subs.BuiEvents<XenoConstructionComponent>(XenoChooseStructureUI.Key,
             subs =>
             {
@@ -149,6 +157,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             });
 
         UpdatesAfter.Add(typeof(SharedPhysicsSystem));
+
+        Subs.CVar(_config, RMCCVars.RMCParasiteSpawnInitialDelayMinutes, v => _densityThreshold = v, true);
     }
 
     private void OnXenoStructureDestruction(Entity<XenoAnnounceStructureDestructionComponent> ent, ref DestructionEventArgs args)
@@ -309,6 +319,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 return;
 
             var cost = upgradeable.Comp.Cost;
+
+            if (_area.TryGetArea(snapped, out var area, out _))
+                cost = GetDensityCost(area.Value, xeno, cost);
+
             if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, cost))
                 return;
 
@@ -373,15 +387,25 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var coordinates = GetCoordinates(args.Coordinates);
         if (!coordinates.IsValid(EntityManager) ||
             !xeno.Comp.CanBuild.Contains(args.StructureId) ||
-            !CanSecreteOnTilePopup(xeno, args.StructureId, GetCoordinates(args.Coordinates), true, true))
+            !CanSecreteOnTilePopup(xeno, args.StructureId, GetCoordinates(args.Coordinates), true, true) ||
+            !_area.TryGetArea(GetCoordinates(args.Coordinates), out var area, out _))
         {
             return;
         }
 
-        if (GetStructurePlasmaCost(args.StructureId) is { } cost &&
-            !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, cost))
+        if (GetStructurePlasmaCost(args.StructureId) is { } baseCost)
         {
-            return;
+            var cost = baseCost;
+            if (area.Value.Comp.ResinConstructCount != 0 && !area.Value.Comp.Unweedable)
+            {
+                if(_prototype.TryIndex(args.StructureId, out var structure) &&
+                   structure.TryGetComponent(out XenoConstructionPlasmaCostComponent? plasmaCost, _compFactory) &&
+                   plasmaCost.ScalingCost)
+                    cost = GetDensityCost(area.Value, xeno, cost);
+            }
+
+            if(!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, cost))
+                return;
         }
 
         args.Handled = true;
@@ -806,6 +830,24 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             QueueDel(args.Target);
     }
 
+    private void OnXenoConstructMapInit(Entity<XenoConstructComponent> ent, ref MapInitEvent args)
+    {
+        if(!_area.TryGetArea(ent, out var area , out _))
+            return;
+
+        area.Value.Comp.ResinConstructCount++;
+        Dirty(area.Value);
+    }
+
+    private void OnXenoConstructRemoved(Entity<XenoConstructComponent> ent, ref ComponentRemove args)
+    {
+        if(!_area.TryGetArea(ent, out var area , out _))
+            return;
+
+        area.Value.Comp.ResinConstructCount--;
+        Dirty(area.Value);
+    }
+
 
     public FixedPoint2? GetStructurePlasmaCost(EntProtoId prototype)
     {
@@ -1185,5 +1227,18 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         }
 
         return true;
+    }
+
+    private FixedPoint2 GetDensityCost(Entity<AreaComponent> area, Entity<XenoConstructionComponent> xeno, FixedPoint2 cost)
+    {
+        var density = area.Comp.ResinConstructCount / area.Comp.BuildableTiles;
+        if (density >= _densityThreshold)
+            cost = Math.Ceiling(cost.Float() * (density + xeno.Comp.DensityConstructionCostModifier) * xeno.Comp.DensityConstructionCostMultiplier);
+
+        // Don't make the cost higher than the max plasma.
+        if(TryComp(xeno, out XenoPlasmaComponent? plasma) && cost > plasma.MaxPlasma)
+            cost = plasma.MaxPlasma;
+
+        return cost;
     }
 }

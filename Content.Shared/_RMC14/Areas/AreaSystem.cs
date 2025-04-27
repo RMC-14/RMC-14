@@ -3,7 +3,9 @@ using System.Linq;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.GameStates;
 using Content.Shared._RMC14.Warps;
+using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared.Coordinates;
+using Content.Shared.Damage;
 using Content.Shared.GameTicking;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
@@ -294,6 +296,21 @@ public sealed class AreaSystem : EntitySystem
         return area.Value.Comp.SupplyDrop;
     }
 
+    private void UpdateBuildableTiles(Entity<AreaGridComponent> grid, EntProtoId<AreaComponent> areaProto, EntityUid? anchored = null)
+    {
+        foreach (var (area, uid) in grid.Comp.AreaEntities)
+        {
+            if (areaProto != area || !TryComp(uid, out AreaComponent? areaComp))
+                continue;
+
+            if (HasComp<XenoConstructComponent>(anchored))
+                areaComp.ResinConstructCount++;
+
+            areaComp.BuildableTiles++;
+            Dirty(uid, areaComp);
+        }
+    }
+
     public override void Update(float frameTime)
     {
         try
@@ -322,6 +339,12 @@ public sealed class AreaSystem : EntitySystem
                         {
                             areaGrid.Colors[pos] = minimapColor.Color;
                             found = true;
+
+                            if (areaGrid.Areas.TryGetValue(pos, out var areaProto))
+                            {
+                                if (HasComp<DamageableComponent>(anchored))
+                                    UpdateBuildableTiles((ent,areaGrid), areaProto, anchored);
+                            }
                         }
 
                         if (_areaLabelQuery.HasComp(anchored))
@@ -339,13 +362,16 @@ public sealed class AreaSystem : EntitySystem
                     }
 
                     if (areaGrid.Areas.TryGetValue(pos, out var area) &&
-                        area.TryGet(out var areaComp, _prototypes, _compFactory) &&
-                        areaComp.MinimapColor != default)
+                        area.TryGet(out var areaComp, _prototypes, _compFactory))
                     {
-                        areaGrid.Colors[pos] = areaComp.MinimapColor.WithAlpha(0.5f);
-                        continue;
-                    }
+                        UpdateBuildableTiles((ent, areaGrid), area);
 
+                        if (areaComp.MinimapColor != default)
+                        {
+                            areaGrid.Colors[pos] = areaComp.MinimapColor.WithAlpha(0.5f);
+                            continue;
+                        }
+                    }
                     areaGrid.Colors[pos] = Color.FromHex("#6c6767d8");
                 }
 
