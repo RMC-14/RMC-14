@@ -46,11 +46,9 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/flashbang.rsi
   - type: RMCStunOnTrigger
-    filters:
-    - stun: 2.5
-      whitelist:
-        skills:
-          RMCSkillPolice: 2
+    range: 7
+  - type: FlashOnTrigger
+    range: 7
   - type: SoundOnTrigger
     sound:
       path: "/Audio/Effects/flash_bang.ogg"

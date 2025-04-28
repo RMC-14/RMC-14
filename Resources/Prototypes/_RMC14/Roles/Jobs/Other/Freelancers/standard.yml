@@ -27,7 +27,7 @@
     settings: RMCFreelancerStandard
 
 - type: randomHumanoidSettings
-  parent: RMCEventHumanoid
+  parent: EventHumanoid
   id: RMCFreelancerStandard
   components:
   - type: GhostRole

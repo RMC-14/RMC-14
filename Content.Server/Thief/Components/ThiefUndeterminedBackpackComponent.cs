@@ -22,18 +22,11 @@ public sealed partial class ThiefUndeterminedBackpackComponent : Component
     public List<int> SelectedSets = new();
 
     [DataField]
-    public SoundCollectionSpecifier ApproveSound = new SoundCollectionSpecifier("storageRustle");
+    public SoundSpecifier ApproveSound = new SoundPathSpecifier("/Audio/Effects/rustle1.ogg");
 
     /// <summary>
     /// Max number of sets you can select.
     /// </summary>
     [DataField]
     public int MaxSelectedSets = 2;
-
-    /// <summary>
-    /// What entity all the spawned items will appear inside of
-    /// If null, will instead drop on the ground.
-    /// </summary>
-    [DataField]
-    public EntProtoId? SpawnedStoragePrototype;
 }

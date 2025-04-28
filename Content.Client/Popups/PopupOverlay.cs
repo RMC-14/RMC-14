@@ -85,7 +85,7 @@ public sealed class PopupOverlay : Overlay
 
         foreach (var popup in _popup.WorldLabels)
         {
-            var mapPos = _transform.ToMapCoordinates(popup.InitialPos);
+            var mapPos = popup.InitialPos.ToMap(_entManager, _transform);
 
             if (mapPos.MapId != args.MapId)
                 continue;

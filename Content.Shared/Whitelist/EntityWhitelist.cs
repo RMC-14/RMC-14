@@ -1,4 +1,3 @@
-using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Item;
 using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
@@ -11,9 +10,6 @@ namespace Content.Shared.Whitelist;
 ///     Does not whitelist by prototypes, since that is undesirable; you're better off just adding a tag to all
 ///     entity prototypes that need to be whitelisted, and checking for that.
 /// </summary>
-/// <remarks>
-///     Do not add more conditions like itemsize to the whitelist, this should stay as lightweight as possible!
-/// </remarks>
 /// <code>
 /// whitelist:
 ///   tags:
@@ -34,6 +30,12 @@ public sealed partial class EntityWhitelist
     ///     Component names that are allowed in the whitelist.
     /// </summary>
     [DataField] public string[]? Components;
+    // TODO yaml validation
+
+    /// <summary>
+    ///     Mind Role Prototype names that are allowed in the whitelist.
+    /// </summary>
+    [DataField] public string[]? MindRoles;
     // TODO yaml validation
 
     /// <summary>
@@ -58,8 +60,4 @@ public sealed partial class EntityWhitelist
     /// </summary>
     [DataField]
     public bool RequireAll;
-
-    // RMC14
-    [DataField]
-    public Dictionary<EntProtoId<SkillDefinitionComponent>, int>? Skills;
 }

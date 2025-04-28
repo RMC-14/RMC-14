@@ -26,7 +26,7 @@
           cost: 2
         - proto: CloningPodMachineCircuitboard
           cost: 2
-        - proto: ChemistryBottleCognizine
+        - proto: CognizineChemistryBottle
         - proto: FoodBoxDonkpocketCarp
           prob: 0.5
         - proto: CrateSalvageEquipment
@@ -45,7 +45,7 @@
           cost: 2
         - proto: NuclearBombKeg
           cost: 5
-        - proto: ChemistryBottleOmnizine
+        - proto: OmnizineChemistryBottle
           prob: 0.5
         - proto: PortableGeneratorPacman
           cost: 2

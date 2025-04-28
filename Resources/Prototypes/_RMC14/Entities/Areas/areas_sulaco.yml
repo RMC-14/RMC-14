@@ -21,7 +21,6 @@
     medevac: false
     OB: false
     supplyDrop: false
-    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaShuttleDrop1

@@ -305,7 +305,7 @@ public sealed class MotionDetectorSystem : EntitySystem
                 if (tracked.Comp.LastMove < time - detector.MoveTime)
                     continue;
 
-                detector.Blips.Add(new Blip(_transform.GetMapCoordinates(tracked), tracked.Comp.IsQueenEye));
+                detector.Blips.Add(_transform.GetMapCoordinates(tracked));
             }
 
             UpdateAppearance((uid, detector));

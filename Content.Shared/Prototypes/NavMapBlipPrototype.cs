@@ -3,7 +3,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Prototypes;
 
-[Prototype]
+[Prototype("navMapBlip")]
 public sealed partial class NavMapBlipPrototype : IPrototype
 {
     [ViewVariables]

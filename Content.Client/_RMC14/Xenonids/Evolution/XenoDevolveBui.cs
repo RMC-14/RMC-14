@@ -2,7 +2,6 @@
 using Content.Shared._RMC14.Xenonids.Evolution;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
-using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Xenonids.Evolution;
@@ -25,26 +24,35 @@ public sealed class XenoDevolveBui : BoundUserInterface
     protected override void Open()
     {
         base.Open();
+        _window = new XenoDevolveWindow();
+        _window.OnClose += Close;
 
-        _window = this.CreateWindow<XenoDevolveWindow>();
-        if (!EntMan.TryGetComponent(Owner, out XenoDevolveComponent? xeno))
-            return;
-
-        foreach (var devolvesTo in xeno.DevolvesTo)
+        if (EntMan.TryGetComponent(Owner, out XenoDevolveComponent? xeno))
         {
-            if (!_prototype.TryIndex(devolvesTo, out var evolution))
-                return;
-
-            var control = new XenoChoiceControl();
-            control.Set(evolution.Name, _sprite.Frame0(evolution));
-
-            control.Button.OnPressed += _ =>
+            foreach (var devolvesTo in xeno.DevolvesTo)
             {
-                SendPredictedMessage(new XenoDevolveBuiMsg(devolvesTo));
-                Close();
-            };
+                if (!_prototype.TryIndex(devolvesTo, out var evolution))
+                    return;
 
-            _window.DevolutionsContainer.AddChild(control);
+                var control = new XenoChoiceControl();
+                control.Set(evolution.Name, _sprite.Frame0(evolution));
+
+                control.Button.OnPressed += _ =>
+                {
+                    SendPredictedMessage(new XenoDevolveBuiMsg(devolvesTo));
+                    Close();
+                };
+
+                _window.DevolutionsContainer.AddChild(control);
+            }
         }
+
+        _window.OpenCentered();
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+            _window?.Dispose();
     }
 }

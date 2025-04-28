@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Content.Server._RMC14.Rules;
 using Content.Server._RMC14.Xenonids.Hive;
 using Content.Server.Administration;
 using Content.Server.Administration.Managers;
@@ -15,8 +16,6 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Administration;
 using Content.Shared.Eui;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.NPC.Prototypes;
-using Content.Shared.NPC.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Reflection;
 using Robust.Shared.Utility;
@@ -69,7 +68,6 @@ public sealed class RMCAdminEui : BaseEui
     public static RMCAdminEuiState CreateState(IEntityManager entities, Guid tacticalMapLines)
     {
         var squadSys = entities.System<SquadSystem>();
-        var factionSys = entities.System<NpcFactionSystem>();
         var hives = new List<Hive>();
         var hiveQuery = entities.EntityQueryEnumerator<HiveComponent, MetaDataComponent>();
         while (hiveQuery.MoveNext(out var uid, out _, out var metaData))
@@ -118,11 +116,7 @@ public sealed class RMCAdminEui : BaseEui
         var rmcAdmin = entities.System<RMCAdminSystem>();
         var history = rmcAdmin.LinesDrawn.Reverse().Select(l => (l.Id, l.Actor, l.Round)).ToList();
         var lines = rmcAdmin.LinesDrawn.FirstOrDefault(l => l.Item1 == tacticalMapLines);
-
-        var allFactions = factionSys.GetFactions();
-        var dummy = allFactions.GetValueOrDefault("RMCDumb", new FactionData());
-        var factions = allFactions.Where((x) => dummy.Hostile.Contains(x.Key)).ToDictionary();
-        return new RMCAdminEuiState(hives, squads, xenos, marines, history, lines, factions);
+        return new RMCAdminEuiState(hives, squads, xenos, marines, history, lines);
     }
 
     public override EuiStateBase GetNewState()
@@ -161,7 +155,6 @@ public sealed class RMCAdminEui : BaseEui
             state.Marines,
             state.TacticalMapHistory,
             state.TacticalMapLines,
-            state.Factions,
             specialistSkills,
             points,
             extraPoints

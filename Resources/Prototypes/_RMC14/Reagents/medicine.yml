@@ -13,7 +13,6 @@
       - !type:EqualHealthChange
         damage:
         - Toxin: -1
-        - Genetic: -1 # TODO RMC14 remove once other meds are in for genetic damage
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -91,18 +90,18 @@
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
-          min: 15
+          min: 7.5
         damage:
           groups:
             Brute: 0.5
       - !type:Jitter
         conditions:
         - !type:ReagentThreshold
-          min: 25
+          min: 12.5
       - !type:PopupMessage
         conditions:
         - !type:ReagentThreshold
-          min: 25
+          min: 12.5
         type: Local
         visualType: Medium
         messages: [ "generic-reagent-effect-nauseous" ]
@@ -110,7 +109,7 @@
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold
-          min: 25
+          min: 12.5
         key: Drunk
         component: Drunk
         time: 30
@@ -122,14 +121,14 @@
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
-          min: 15
+          min: 7.5
         damage:
           groups:
             Brute: 0.25
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
-          min: 25
+          min: 12.5
         damage:
           groups:
             Brute: 0.62

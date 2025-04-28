@@ -77,7 +77,6 @@
   - type: XenoFriendly
   - type: Damageable
     damageContainer: StructuralXeno
-    damageModifierSet: null # TODO RMC14 weed resists once explosion resist and health is accounted for
   - type: Destructible
     thresholds:
     - trigger:
@@ -95,14 +94,6 @@
         collection: XenoResinBreak
   - type: ExplosionRandomResistance
   - type: DeletedByWeedKiller
-  - type: RMCDeleteAnchoredOnInit
-    enabled: false
-    whitelist:
-      tags:
-      - XenoWeedTile
-  - type: Tag
-    tags:
-    - XenoWeedTile
 #  - type: Physics
 #    bodyType: Static
 #  - type: FootstepModifier
@@ -127,15 +118,12 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 33 # TODO RMC14 11
+        damage: 33
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: XenoConstructionPlasmaCost
     plasma: 215
-  - type: RMCDeleteAnchoredOnInit
-    enabled: true
-  - type: QueenEyeVision
 
 - type: entity # TODO RMC14 sound
   parent: XenoWeeds
@@ -245,7 +233,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 33 # TODO RMC14 30
+        damage: 33
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -278,8 +266,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_weeds.rsi
     drawdepth: Objects
-#    layers:
-#    - state: weedwall
+    layers:
+    - state: weedwall
   - type: IconSmooth
     key: cm_xeno_weeds_walls
     base: weedwall
@@ -339,6 +327,3 @@
     layers:
     - state: weed0
     - state: constructionnode
-
-- type: Tag
-  id: XenoWeedTile

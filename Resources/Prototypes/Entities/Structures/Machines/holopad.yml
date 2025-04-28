@@ -13,7 +13,10 @@
           !type:PhysShapeCircle
           radius: 0.25
         mask:
-        - Impassable
+        - SubfloorMask
+        layer:
+        - LowImpassable
+        hard: false
   - type: ApcPowerReceiver
     powerLoad: 300
   - type: StationAiVision

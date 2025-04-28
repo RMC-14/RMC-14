@@ -14,8 +14,6 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
-using Robust.Shared.Network;
-using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -33,10 +31,6 @@ public abstract class SharedActionsSystem : EntitySystem
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
-
-    // RMC14
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
 
     public override void Initialize()
     {
@@ -81,56 +75,31 @@ public abstract class SharedActionsSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        var time = GameTiming.CurTime;
-        // RMC14
-        if (_net.IsClient)
-        {
-            if (_player.LocalEntity is not { } ent)
-                return;
-
-            if (!TryComp(ent, out ActionsComponent? actions))
-                return;
-
-            foreach (var action in actions.Actions)
-            {
-                if (!TryGetActionData(action, out var actionComp))
-                    continue;
-
-                if (IsCooldownActive(actionComp, time) || !ShouldResetCharges(actionComp))
-                    continue;
-
-                ResetCharges(action, dirty: true, action: actionComp);
-            }
-
-            return;
-        }
-        // RMC14
-
         var worldActionQuery = EntityQueryEnumerator<WorldTargetActionComponent>();
         while (worldActionQuery.MoveNext(out var uid, out var action))
         {
-            if (IsCooldownActive(action, time) || !ShouldResetCharges(action))
+            if (IsCooldownActive(action) || !ShouldResetCharges(action))
                 continue;
 
-            ResetCharges(uid, dirty: true, action: action);
+            ResetCharges(uid, dirty: true);
         }
 
         var instantActionQuery = EntityQueryEnumerator<InstantActionComponent>();
         while (instantActionQuery.MoveNext(out var uid, out var action))
         {
-            if (IsCooldownActive(action, time) || !ShouldResetCharges(action))
+            if (IsCooldownActive(action) || !ShouldResetCharges(action))
                 continue;
 
-            ResetCharges(uid, dirty: true, action: action);
+            ResetCharges(uid, dirty: true);
         }
 
         var entityActionQuery = EntityQueryEnumerator<EntityTargetActionComponent>();
         while (entityActionQuery.MoveNext(out var uid, out var action))
         {
-            if (IsCooldownActive(action, time) || !ShouldResetCharges(action))
+            if (IsCooldownActive(action) || !ShouldResetCharges(action))
                 continue;
 
-            ResetCharges(uid, dirty: true, action: action);
+            ResetCharges(uid, dirty: true);
         }
     }
 
@@ -393,9 +362,9 @@ public abstract class SharedActionsSystem : EntitySystem
         Dirty(actionId.Value, action);
     }
 
-    public void ResetCharges(EntityUid? actionId, bool update = false, bool dirty = false, BaseActionComponent? action = null)
+    public void ResetCharges(EntityUid? actionId, bool update = false, bool dirty = false)
     {
-        if ((actionId == null || action == null) && !TryGetActionData(actionId, out action))
+        if (!TryGetActionData(actionId, out var action))
             return;
 
         action.Charges = action.MaxCharges;

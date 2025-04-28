@@ -12,7 +12,6 @@ using Content.Shared.Tag;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Delivery;
 
@@ -30,9 +29,6 @@ public abstract class SharedDeliverySystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly NameModifierSystem _nameModifier = default!;
-
-    private static readonly ProtoId<TagPrototype> TrashTag = "Trash";
-    private static readonly ProtoId<TagPrototype> RecyclableTag = "Recyclable";
 
     public override void Initialize()
     {
@@ -133,7 +129,7 @@ public abstract class SharedDeliverySystem : EntitySystem
         ent.Comp.IsOpened = true;
         _appearance.SetData(ent, DeliveryVisuals.IsTrash, ent.Comp.IsOpened);
 
-        _tag.AddTags(ent, TrashTag, RecyclableTag);
+        _tag.AddTags(ent, "Trash", "Recyclable");
         EnsureComp<SpaceGarbageComponent>(ent);
         RemComp<StealTargetComponent>(ent); // opened mail should not count for the objective
 

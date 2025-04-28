@@ -11,7 +11,7 @@ namespace Content.Shared.Chemistry.Reaction
     /// <summary>
     /// Prototype for chemical reaction definitions
     /// </summary>
-    [Prototype]
+    [Prototype("reaction")]
     public sealed partial class ReactionPrototype : IPrototype, IComparable<ReactionPrototype>
     {
         [ViewVariables]

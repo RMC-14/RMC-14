@@ -28,7 +28,5 @@
     - state: icon
       color: green
   - type: HandTeleporter
-    allowPortalsOnDifferentGrids: true
-    allowPortalsOnDifferentMaps: true
     firstPortalPrototype: PortalGatewayBlue
     secondPortalPrototype: PortalGatewayOrange

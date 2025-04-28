@@ -15,7 +15,7 @@
     - state: fuel
     - state: wires
   - type: Item
-    sprite: Objects/Weapons/Bombs/ied.rsi
+    sprite: Objects/Consumable/Drinks/cola.rsi
   - type: OnUseTimerTrigger
     delay: 5
     examinable: false

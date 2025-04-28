@@ -47,11 +47,6 @@ public sealed class XenoEggRoleSystem : EntitySystem
             subs.Event<XenoParasiteGhostBuiMsg>(OnEggMorpherGhostBuiChosen);
         });
 
-        Subs.BuiEvents<ParasiteAIComponent>(XenoParasiteGhostUI.Key, subs =>
-        {
-            subs.Event<XenoParasiteGhostBuiMsg>(OnParasiteGhostBuiChosen);
-        });
-
         Subs.CVar(_config, RMCCVars.RMCParasiteSpawnInitialDelayMinutes, v => _parasiteSpawnDelay = TimeSpan.FromMinutes(v), true);
     }
 
@@ -104,19 +99,6 @@ public sealed class XenoEggRoleSystem : EntitySystem
             session != null)
         {
             _ghostRole.GhostRoleInternalCreateMindAndTransfer(session, parasite.Value, parasite.Value);
-        }
-    }
-
-    private void OnParasiteGhostBuiChosen(Entity<ParasiteAIComponent> ent, ref XenoParasiteGhostBuiMsg args)
-    {
-        var user = args.Actor;
-
-        if (!SharedChecks(ent, user))
-            return;
-
-        if (_actor.TryGetSession(user, out var session) && session != null)
-        {
-            _ghostRole.GhostRoleInternalCreateMindAndTransfer(session, ent.Owner, ent.Owner);
         }
     }
 

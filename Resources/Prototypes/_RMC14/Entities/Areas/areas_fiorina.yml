@@ -156,7 +156,6 @@
     supplyDrop: true
     landingZone: true
     minimapColor: '#EBE5E5E3'
-    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaFiorinaLz
@@ -226,7 +225,6 @@
     medevac: true
     OB: true
     supplyDrop: true
-    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaFiorinaStation

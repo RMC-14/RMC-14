@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   parent: BaseItem
   id: XenoEgg
   name: egg
@@ -52,6 +52,14 @@
         !type:DamageTrigger
         damage: 80
       behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          XenoEggDestroyed:
+            min: 1
+            max: 1
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_RMC14/Xeno/alien_egg_burst.ogg
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
     - trigger:
@@ -76,16 +84,12 @@
   - type: RequireProjectileTarget
   - type: XenoInhandSprite
     stateName: egg
-  - type: StatusEffects # For jitter to work
-    allowed:
-    - Electrocution
-
 
 - type: entity
   parent: BaseItem
   categories: [ HideSpawnMenu ]
   id: XenoEggDestroyed
-  name: destroyed egg
+  name: egg
   description: A mess of... something.
   placement:
     mode: SnapgridCenter
@@ -145,21 +149,3 @@
   - type: RequireProjectileTarget
   - type: WhitelistPickupBy
   - type: DestroyedXenoEgg
-
-- type: entity
-  parent: XenoEggDestroyed
-  categories: [ HideSpawnMenu ]
-  id: XenoEggDestroyedFragile
-  name: fragile egg
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Xenos/xeno_egg_fragile.rsi
-
-- type: entity
-  parent: XenoEggDestroyed
-  categories: [ HideSpawnMenu ]
-  id: XenoEggDestroyedFragileSustained
-  name: fragile egg
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Xenos/xeno_egg_fragile_eggsac.rsi

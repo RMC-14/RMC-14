@@ -244,12 +244,10 @@
       amount: 2
     - id: RMCBeltXM51
   - type: RemoveOnlyStorage
-    whitelist: 
+    blacklist:
       tags:
-      - RMCAttachmentXM51Stock
-      - RMCWeaponShotgunXM51
-      - RMCMagazineShotgunXM51
-      - RMCXM51Holster
+      - RMCBoxShotgunBreaching
+    whitelist: null
 
 # MOU53
 - type: entity

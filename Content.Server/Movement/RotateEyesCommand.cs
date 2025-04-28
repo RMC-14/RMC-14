@@ -28,15 +28,14 @@ public sealed class RotateEyesCommand : IConsoleCommand
         }
 
         var count = 0;
-        var query = entManager.EntityQueryEnumerator<InputMoverComponent>();
-        while (query.MoveNext(out var uid, out var mover))
+
+        foreach (var mover in entManager.EntityQuery<InputMoverComponent>(true))
         {
             if (mover.TargetRelativeRotation.Equals(rotation))
                 continue;
 
             mover.TargetRelativeRotation = rotation;
-
-            entManager.Dirty(uid, mover);
+            entManager.Dirty(mover);
             count++;
         }
 

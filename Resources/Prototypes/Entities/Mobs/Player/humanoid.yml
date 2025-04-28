@@ -14,14 +14,6 @@
     - type: MindShield
     - type: AntagImmune
 
-- type: randomHumanoidSettings
-  id: EventHumanoidCentcomm
-  parent: EventHumanoidMindShielded
-  components:
-  - type: AutoImplant
-    implants:
-    - DeathRattleImplantCentcomm
-
 ## Death Squad
 
 - type: entity
@@ -36,13 +28,12 @@
       nameSegments:
         - NamesMilitaryFirstLeader
         - NamesMilitaryLast
-      nameFormat: name-format-ert
     - type: RandomHumanoidSpawner
       settings: DeathSquad
 
 - type: randomHumanoidSettings
   id: DeathSquad
-  parent: EventHumanoidCentcomm
+  parent: EventHumanoidMindShielded
   randomizeName: false
   components:
     - type: GhostRole
@@ -60,7 +51,6 @@
       nameSegments:
         - NamesMilitaryFirstLeader
         - NamesMilitaryLast
-      nameFormat: name-format-ert
 
 
 ## ERT Leader
@@ -77,13 +67,12 @@
       nameSegments:
       - NamesMilitaryFirstLeader
       - NamesMilitaryLast
-      nameFormat: name-format-ert
     - type: RandomHumanoidSpawner
       settings: ERTLeader
 
 - type: randomHumanoidSettings
   id: ERTLeader
-  parent: EventHumanoidCentcomm
+  parent: EventHumanoidMindShielded
   randomizeName: false
   components:
     - type: GhostRole
@@ -100,7 +89,6 @@
       nameSegments:
       - NamesMilitaryFirstLeader
       - NamesMilitaryLast
-      nameFormat: name-format-ert
 
 - type: entity
   id: RandomHumanoidSpawnerERTLeaderEVA
@@ -167,7 +155,6 @@
       nameSegments:
       - NamesMilitaryFirst
       - NamesMilitaryLast
-      nameFormat: name-format-ert
     - type: RandomHumanoidSpawner
       settings: ERTChaplain
 
@@ -187,7 +174,6 @@
       nameSegments:
       - NamesMilitaryFirst
       - NamesMilitaryLast
-      nameFormat: name-format-ert
     - type: Loadout
       prototypes: [ ERTChaplainGear ]
       roleLoadout: [ RoleSurvivalExtended ]
@@ -235,7 +221,6 @@
       nameSegments:
       - NamesMilitaryFirst
       - NamesMilitaryLast
-      nameFormat: name-format-ert
     - type: RandomHumanoidSpawner
       settings: ERTJanitor
 
@@ -254,7 +239,6 @@
       nameSegments:
       - NamesMilitaryFirst
       - NamesMilitaryLast
-      nameFormat: name-format-ert
     - type: Loadout
       prototypes: [ ERTJanitorGear ]
       roleLoadout: [ RoleSurvivalExtended ]
@@ -301,7 +285,6 @@
       nameSegments:
       - NamesMilitaryFirst
       - NamesMilitaryLast
-      nameFormat: name-format-ert
     - type: RandomHumanoidSpawner
       settings: ERTEngineer
 
@@ -320,7 +303,6 @@
       nameSegments:
       - NamesMilitaryFirst
       - NamesMilitaryLast
-      nameFormat: name-format-ert
     - type: Loadout
       prototypes: [ ERTEngineerGear ]
       roleLoadout: [ RoleSurvivalExtended ]
@@ -367,7 +349,6 @@
       nameSegments:
       - NamesMilitaryFirst
       - NamesMilitaryLast
-      nameFormat: name-format-ert
     - type: RandomHumanoidSpawner
       settings: ERTSecurity
 
@@ -386,7 +367,6 @@
       nameSegments:
       - NamesMilitaryFirst
       - NamesMilitaryLast
-      nameFormat: name-format-ert
     - type: Loadout
       prototypes: [ ERTSecurityGear ]
       roleLoadout: [ RoleSurvivalExtended ]
@@ -456,7 +436,6 @@
       nameSegments:
       - NamesMilitaryFirst
       - NamesMilitaryLast
-      nameFormat: name-format-ert
     - type: RandomHumanoidSpawner
       settings: ERTMedical
 
@@ -475,7 +454,6 @@
       nameSegments:
       - NamesMilitaryFirst
       - NamesMilitaryLast
-      nameFormat: name-format-ert
     - type: Loadout
       prototypes: [ ERTMedicalGear ]
       roleLoadout: [ RoleSurvivalExtended ]
@@ -522,7 +500,7 @@
 
 - type: randomHumanoidSettings
   id: CBURNAgent
-  parent: EventHumanoidCentcomm
+  parent: EventHumanoidMindShielded
   components:
     - type: Loadout
       prototypes: [CBURNGear]
@@ -537,7 +515,6 @@
       nameSegments:
       - NamesMilitaryFirst
       - NamesMilitaryLast
-      nameFormat: name-format-ert
 
 ## Central Command
 
@@ -553,7 +530,7 @@
 
 - type: randomHumanoidSettings
   id: CentcomOfficial
-  parent: EventHumanoidCentcomm
+  parent: EventHumanoidMindShielded
   components:
     - type: GhostRole
       name: ghost-role-information-centcom-official-name
@@ -619,7 +596,6 @@
       nameSegments:
       - NamesFirst
       - NamesLast
-      nameFormat: name-format-standard
 
 - type: randomHumanoidSettings
   id: Cluwne

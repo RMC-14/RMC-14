@@ -3,12 +3,10 @@ using Content.Client.ContextMenu.UI;
 using Content.Shared.Verbs;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface.Controls;
-using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.Utility;
 using Robust.Shared.GameObjects;
 using Robust.Shared.IoC;
 using Robust.Shared.Maths;
-using Robust.Shared.Utility;
 
 namespace Content.Client.Verbs.UI
 {
@@ -29,17 +27,7 @@ namespace Content.Client.Verbs.UI
 
         public VerbMenuElement(Verb verb) : base(verb.Text)
         {
-            TooltipSupplier = sender =>
-            {
-                var label = new RichTextLabel();
-                label.SetMessage(FormattedMessage.FromMarkupOrThrow(verb.Message ?? verb.Text));
-
-                var tooltip = new Tooltip();
-                tooltip.GetChild(0).Children.Clear();
-                tooltip.GetChild(0).Children.Add(label);
-
-                return tooltip;
-            };
+            ToolTip = verb.Message;
             Disabled = verb.Disabled;
             Verb = verb;
 

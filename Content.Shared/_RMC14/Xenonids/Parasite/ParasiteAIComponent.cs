@@ -1,4 +1,4 @@
-using Robust.Shared.GameStates;
+﻿using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Xenonids.Parasite;
@@ -8,7 +8,7 @@ namespace Content.Shared._RMC14.Xenonids.Parasite;
 public sealed partial class ParasiteAIComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public ParasiteMode Mode = ParasiteMode.Idle;
+    public ParasiteMode Mode = ParasiteMode.Active;
 
     [DataField]
     public TimeSpan NextActiveTime;
@@ -48,12 +48,6 @@ public sealed partial class ParasiteAIComponent : Component
 
     [DataField]
     public float CannibalizeCheck = 0.5f;
-
-    [DataField]
-    public TimeSpan JumpTime = TimeSpan.FromSeconds(5);
-
-    [DataField]
-    public TimeSpan? NextJump;
 }
 
 [Serializable, NetSerializable]

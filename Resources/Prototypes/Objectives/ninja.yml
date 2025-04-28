@@ -9,7 +9,8 @@
     issuer: objective-issuer-spiderclan
   - type: RoleRequirement
     roles:
-    - NinjaRole
+      mindRoles:
+      - NinjaRole
 
 - type: entity
   parent: BaseNinjaObjective

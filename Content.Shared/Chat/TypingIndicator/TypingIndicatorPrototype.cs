@@ -7,7 +7,7 @@ namespace Content.Shared.Chat.TypingIndicator;
 /// <summary>
 ///     Prototype to store chat typing indicator visuals.
 /// </summary>
-[Prototype]
+[Prototype("typingIndicator")]
 public sealed partial class TypingIndicatorPrototype : IPrototype
 {
     [IdDataField]

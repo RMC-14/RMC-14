@@ -21,7 +21,6 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
-using Content.Server._RMC14.Announce;
 
 namespace Content.Server.GameTicking
 {
@@ -30,7 +29,6 @@ namespace Content.Server.GameTicking
         [Dependency] private readonly IAdminManager _adminManager = default!;
         [Dependency] private readonly SharedJobSystem _jobs = default!;
         [Dependency] private readonly AdminSystem _admin = default!;
-        [Dependency] private readonly MarinePresenceAnnounceSystem _marinePresenceAnnounce = default!;
 
         [ValidatePrototypeId<EntityPrototype>]
         public const string ObserverPrototypeName = "MobObserver";
@@ -100,9 +98,6 @@ namespace Content.Server.GameTicking
                 if (job == null)
                 {
                     var playerSession = _playerManager.GetSessionById(netUser);
-                    var evNoJobs = new NoJobsAvailableSpawningEvent(playerSession); // Used by gamerules to wipe their antag slot, if they got one
-                    RaiseLocalEvent(evNoJobs);
-
                     _chatManager.DispatchServerMessage(playerSession, Loc.GetString("job-not-available-wait-in-lobby"));
                 }
                 else
@@ -214,9 +209,6 @@ namespace Content.Server.GameTicking
                     JoinAsObserver(player);
                 }
 
-                var evNoJobs = new NoJobsAvailableSpawningEvent(player); // Used by gamerules to wipe their antag slot, if they got one
-                RaiseLocalEvent(evNoJobs);
-
                 _chatManager.DispatchServerMessage(player,
                     Loc.GetString("game-ticker-player-no-jobs-available-when-joining"));
                 return;
@@ -245,7 +237,7 @@ namespace Content.Server.GameTicking
             var jobName = _jobs.MindTryGetJobName(newMind);
             _admin.UpdatePlayerList(player);
 
-            if (lateJoin && !silent && false) // RMC14
+            if (lateJoin && !silent)
             {
                 if (jobPrototype.JoinNotifyCrew)
                 {
@@ -320,8 +312,6 @@ namespace Content.Server.GameTicking
                 station,
                 character);
             RaiseLocalEvent(mob, aev, true);
-
-            _marinePresenceAnnounce.AnnounceLateJoin(lateJoin, silent, mob, jobId, jobName, jobPrototype); // RMC14
         }
 
         public void Respawn(ICommonSession player)
@@ -437,7 +427,7 @@ namespace Content.Server.GameTicking
                 // Ideally engine would just spawn them on grid directly I guess? Right now grid traversal is handling it during
                 // update which means we need to add a hack somewhere around it.
                 var spawn = _robustRandom.Pick(_possiblePositions);
-                var toMap = _transform.ToMapCoordinates(spawn);
+                var toMap = spawn.ToMap(EntityManager, _transform);
 
                 if (_mapManager.TryFindGridAt(toMap, out var gridUid, out _))
                 {

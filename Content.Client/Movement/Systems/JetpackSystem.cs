@@ -49,17 +49,13 @@ public sealed class JetpackSystem : SharedJetpackSystem
 
         // TODO: Please don't copy-paste this I beg
         // make a generic particle emitter system / actual particles instead.
-        var query = EntityQueryEnumerator<ActiveJetpackComponent, TransformComponent>();
+        var query = EntityQueryEnumerator<ActiveJetpackComponent>();
 
-        while (query.MoveNext(out var uid, out var comp, out var xform))
+        while (query.MoveNext(out var uid, out var comp))
         {
-            if (_transform.InRange(xform.Coordinates, comp.LastCoordinates, comp.MaxDistance))
-            {
-                if (_timing.CurTime < comp.TargetTime)
-                    continue;
-            }
+            if (_timing.CurTime < comp.TargetTime)
+                continue;
 
-            comp.LastCoordinates = _transform.GetMoverCoordinates(xform.Coordinates);
             comp.TargetTime = _timing.CurTime + TimeSpan.FromSeconds(comp.EffectCooldown);
 
             CreateParticles(uid);

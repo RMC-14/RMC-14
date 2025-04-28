@@ -18,7 +18,6 @@ using Content.Shared.Examine;
 using Content.Shared.GameTicking;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
-using Content.Shared.Prying.Components;
 using Content.Shared.UserInterface;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -31,7 +30,6 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Evacuation;
 
@@ -80,7 +78,6 @@ public abstract class SharedEvacuationSystem : EntitySystem
 
         SubscribeLocalEvent<EvacuationDoorComponent, BeforeDoorOpenedEvent>(OnEvacuationDoorBeforeOpened);
         SubscribeLocalEvent<EvacuationDoorComponent, BeforeDoorClosedEvent>(OnEvacuationDoorBeforeClosed);
-        SubscribeLocalEvent<EvacuationDoorComponent, BeforePryEvent>(OnEvacuationDoorBeforePry);
 
         SubscribeLocalEvent<EvacuationComputerComponent, ExaminedEvent>(OnEvacuationComputerExamined);
         SubscribeLocalEvent<EvacuationComputerComponent, ActivatableUIOpenAttemptEvent>(OnEvacuationComputerUIOpenAttempt);
@@ -104,8 +101,7 @@ public abstract class SharedEvacuationSystem : EntitySystem
 
     private void OnDropshipHijackLanded(ref DropshipHijackLandedEvent ev)
     {
-        var evacuationProgress = EnsureComp<EvacuationProgressComponent>(ev.Map);
-        evacuationProgress.DropShipCrashed = true;
+        EnsureComp<EvacuationProgressComponent>(ev.Map);
 
         var doors = EntityQueryEnumerator<EvacuationDoorComponent>();
         while (doors.MoveNext(out var uid, out var door))
@@ -217,12 +213,6 @@ public abstract class SharedEvacuationSystem : EntitySystem
     {
         if (ent.Comp.Locked)
             args.PerformCollisionCheck = false;
-    }
-
-    private void OnEvacuationDoorBeforePry(Entity<EvacuationDoorComponent> ent, ref BeforePryEvent args)
-    {
-        if (ent.Comp.Locked)
-            args.Cancelled = true;
     }
 
     private void OnEvacuationComputerExamined(Entity<EvacuationComputerComponent> ent, ref ExaminedEvent args)
@@ -422,30 +412,32 @@ public abstract class SharedEvacuationSystem : EntitySystem
         return _rmcPower.IsAreaPowered(area, RMCPowerChannel.Equipment);
     }
 
-    public void ToggleEvacuation(SoundSpecifier? startSound, SoundSpecifier? cancelSound, EntityUid? map)
+    public void ToggleEvacuation(SoundSpecifier? startSound, SoundSpecifier? cancelSound)
     {
-        DebugTools.Assert(map != null);
-
-        var progress = EnsureComp<EvacuationProgressComponent>(map.Value);
-
-        progress.Enabled = !progress.Enabled;
-        Dirty(map.Value, progress);
-
-        if (progress.Enabled)
+        var query = EntityQueryEnumerator<EvacuationProgressComponent>();
+        while (query.MoveNext(out var uid, out var progress))
         {
-            _marineAnnounce.AnnounceARES(
-                null,
-                "Attention. Emergency. All personnel must evacuate immediately.",
-                startSound
-            );
-            var ev = new EvacuationEnabledEvent();
-            RaiseLocalEvent(map.Value, ref ev, true);
-        }
-        else
-        {
-            _marineAnnounce.AnnounceARES(null, "Evacuation has been cancelled.", cancelSound);
-            var ev = new EvacuationDisabledEvent();
-            RaiseLocalEvent(map.Value, ref ev, true);
+            progress.Enabled = !progress.Enabled;
+            Dirty(uid, progress);
+
+            if (progress.Enabled)
+            {
+                _marineAnnounce.AnnounceARES(
+                    null,
+                    "Attention. Emergency. All personnel must evacuate immediately.",
+                    startSound
+                );
+                var ev = new EvacuationEnabledEvent();
+                RaiseLocalEvent(uid, ref ev, true);
+            }
+            else
+            {
+                _marineAnnounce.AnnounceARES(null, "Evacuation has been cancelled.", cancelSound);
+                var ev = new EvacuationDisabledEvent();
+                RaiseLocalEvent(uid, ref ev, true);
+            }
+
+            break;
         }
     }
 
@@ -497,10 +489,6 @@ public abstract class SharedEvacuationSystem : EntitySystem
         var query = EntityQueryEnumerator<EvacuationProgressComponent>();
         while (query.MoveNext(out var uid, out var progress))
         {
-            //Only start fueling once the dropship has crashed into the Almayer
-            if (!progress.DropShipCrashed)
-                return;
-
             if (!progress.StartAnnounced)
             {
                 progress.StartAnnounced = true;

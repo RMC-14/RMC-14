@@ -127,12 +127,9 @@
     maxCharge: 2000
     startingCharge: 0
   - type: ApcPowerReceiverBattery
-    idleLoad: 5
+    idlePowerUse: 5
     batteryRechargeRate: 200
     batteryRechargeEfficiency: 1.225
   - type: ApcPowerReceiver
     powerLoad: 5
   - type: ExtensionCableReceiver
-  - type: HTN
-    rootTask:
-      task: EnergyTurretCompound

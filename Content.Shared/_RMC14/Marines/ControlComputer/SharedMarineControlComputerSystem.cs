@@ -1,7 +1,6 @@
 ﻿using Content.Shared._RMC14.AlertLevel;
 using Content.Shared._RMC14.Commendations;
 using Content.Shared._RMC14.Dialog;
-using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Evacuation;
 using Content.Shared._RMC14.Survivor;
 using Content.Shared.Database;
@@ -23,7 +22,6 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private static readonly string[] MedalNames =
     [
@@ -38,8 +36,6 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         SubscribeLocalEvent<EvacuationEnabledEvent>(OnRefreshComputers);
         SubscribeLocalEvent<EvacuationDisabledEvent>(OnRefreshComputers);
         SubscribeLocalEvent<EvacuationProgressEvent>(OnRefreshComputers);
-        SubscribeLocalEvent<DropshipHijackStartEvent>(OnRefreshComputers);
-        SubscribeLocalEvent<RMCAlertLevelChangedEvent>(OnRefreshComputers);
 
         SubscribeLocalEvent<MarineControlComputerComponent, BeforeActivatableUIOpenEvent>(OnComputerBeforeUIOpen);
         SubscribeLocalEvent<MarineControlComputerComponent, MarineControlComputerMedalMarineEvent>(OnComputerMedalMarine);
@@ -209,16 +205,13 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         ent.Comp.LastToggle = time;
 
         // TODO RMC14 evacuation start sound
-        _evacuation.ToggleEvacuation(null, ent.Comp.EvacuationCancelledSound, _transform.GetMap(ent.Owner));
+        _evacuation.ToggleEvacuation(null, ent.Comp.EvacuationCancelledSound);
         RefreshComputers();
     }
 
     private void RefreshComputers()
     {
-        if (_net.IsClient)
-            return;
-
-        var canEvacuate = _alertLevel.IsRedOrDeltaAlert() || _evacuation.IsEvacuationEnabled();
+        var canEvacuate = _evacuation.IsEvacuationInProgress();
         var evacuationEnabled = _evacuation.IsEvacuationEnabled();
         var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
         while (computers.MoveNext(out var uid, out var computer))

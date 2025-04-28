@@ -1,4 +1,4 @@
-using Robust.Shared.GameStates;
+﻿using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -12,9 +12,6 @@ public sealed partial class TakeableTagsComponent : Component
 
     [DataField]
     public EntProtoId InfoTag = "RMCInformationDogtag";
-
-    [DataField]
-    public EntProtoId FallenTag = "RMCDogtagProp";
 }
 
 [Serializable, NetSerializable]

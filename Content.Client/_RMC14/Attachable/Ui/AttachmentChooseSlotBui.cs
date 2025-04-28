@@ -1,22 +1,25 @@
 using Content.Shared._RMC14.Attachable;
-using Robust.Client.UserInterface;
 
 namespace Content.Client._RMC14.Attachable.Ui;
 
-public sealed class AttachmentChooseSlotBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed class AttachmentChooseSlotBui : BoundUserInterface
 {
     [ViewVariables]
     private AttachableHolderChooseSlotMenu? _menu;
+
+    public AttachmentChooseSlotBui(EntityUid owner, Enum uiKey) : base(owner, uiKey) { }
 
     protected override void Open()
     {
         base.Open();
 
-        _menu = this.CreateWindow<AttachableHolderChooseSlotMenu>();
+        _menu = new AttachableHolderChooseSlotMenu(this);
 
         var metaQuery = EntMan.GetEntityQuery<MetaDataComponent>();
         if (metaQuery.TryGetComponent(Owner, out var metadata))
             _menu.Title = metadata.EntityName;
+
+        _menu.OpenCentered();
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -29,11 +32,15 @@ public sealed class AttachmentChooseSlotBui(EntityUid owner, Enum uiKey) : Bound
         if (_menu == null)
             return;
 
-        _menu.UpdateMenu(msg.AttachableSlots,
-            slotId =>
-            {
-                SendMessage(new AttachableHolderAttachToSlotMessage(slotId));
-                _menu.Close();
-            });
+        _menu.UpdateMenu(msg.AttachableSlots);
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+        if (!disposing)
+            return;
+
+        _menu?.Dispose();
     }
 }

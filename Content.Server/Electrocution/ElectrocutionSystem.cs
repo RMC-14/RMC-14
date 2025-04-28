@@ -62,8 +62,6 @@ public sealed class ElectrocutionSystem : SharedElectrocutionSystem
     [ValidatePrototypeId<DamageTypePrototype>]
     private const string DamageType = "Shock";
 
-    private static readonly ProtoId<TagPrototype> WindowTag = "Window";
-
     // Multiply and shift the log scale for shock damage.
     private const float RecursiveDamageMultiplier = 0.75f;
     private const float RecursiveTimeMultiplier = 0.8f;
@@ -141,7 +139,7 @@ public sealed class ElectrocutionSystem : SharedElectrocutionSystem
             {
                 foreach (var entity in _entityLookup.GetLocalEntitiesIntersecting(tileRef.Value, flags: LookupFlags.StaticSundries))
                 {
-                    if (_tag.HasTag(entity, WindowTag))
+                    if (_tag.HasTag(entity, "Window"))
                         return false;
                 }
             }

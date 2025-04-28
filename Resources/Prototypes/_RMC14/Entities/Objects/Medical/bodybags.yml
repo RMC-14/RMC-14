@@ -102,8 +102,6 @@
       - MedevacStretcher
       tags:
       - CMRollerItem
-  - type: Foldable
-    fitIntoEntityStorage: true
 
 - type: entity
   parent: CMBodyBag

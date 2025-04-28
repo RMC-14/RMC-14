@@ -34,6 +34,8 @@
     - type: Damageable
       damageContainer: StructuralInorganic
       damageModifierSet: PerforatedMetallic
+    - type: PowerConsumer
+      showInMonitor: false
     - type: Electrified
       requirePower: true
       noWindowInTile: true

@@ -66,7 +66,6 @@
     tags:
     - DoorBumpOpener
     - Bot
-    - Unimplantable
   - type: MobState
     allowedStates:
       - Alive
@@ -209,7 +208,7 @@
     description: ghost-role-information-honkbot-description
     rules: ghost-role-information-freeagent-rules
     mindRoles:
-    - MindRoleGhostRoleFreeAgentHarmless
+    - MindRoleGhostRoleFreeAgent
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
@@ -243,7 +242,7 @@
     description: ghost-role-information-jonkbot-description
     rules: ghost-role-information-freeagent-rules
     mindRoles:
-    - MindRoleGhostRoleFreeAgentHarmless
+    - MindRoleGhostRoleFreeAgent
     raffle:
       settings: default
   - type: InteractionPopup
@@ -380,7 +379,7 @@
     description: ghost-role-information-mimebot-description
     rules: ghost-role-information-freeagent-rules
     mindRoles:
-    - MindRoleGhostRoleFreeAgentHarmless
+    - MindRoleGhostRoleFreeAgent
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
@@ -452,7 +451,6 @@
     - DoorBumpOpener
     - FootstepSound
     - Bot
-    - Unimplantable
   - type: ActiveRadio
     channels:
     - Common

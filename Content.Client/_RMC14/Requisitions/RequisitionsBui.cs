@@ -21,7 +21,8 @@ public sealed class RequisitionsBui(EntityUid owner, Enum uiKey) : BoundUserInte
     protected override void Open()
     {
         base.Open();
-        _window = this.CreateWindow<RequisitionsWindow>();
+        _window = new RequisitionsWindow();
+        _window.OnClose += Close;
 
         _window.MainView.OrderItemsButton.OnPressed += _ => ShowView(_window, _window.OrderCategoriesView);
         _window.MainView.ViewRequestsButton.OnPressed += _ => { };
@@ -31,12 +32,13 @@ public sealed class RequisitionsBui(EntityUid owner, Enum uiKey) : BoundUserInte
         _window.OrderCategoriesView.SearchMenuButton.OnPressed += _ => ShowView(_window, _window.OrderSearchView);
 
         _window.OrderSearchView.BackButton.OnPressed += _ => ShowView(_window, _window.OrderCategoriesView);
-        _window.OrderSearchView.SearchBar.OnTextChanged += _ =>
-        {
+        _window.OrderSearchView.SearchBar.OnTextChanged += _ => {
             UpdateItemSearch(_window.OrderSearchView.SearchBar.Text);
         };
 
         _window.CategoryView.BackButton.OnPressed += _ => ShowView(_window, _window.OrderCategoriesView);
+
+        _window.OpenCentered();
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -47,7 +49,11 @@ public sealed class RequisitionsBui(EntityUid owner, Enum uiKey) : BoundUserInte
 
     private void UpdateState(RequisitionsBuiState uiState)
     {
-        _window ??= this.CreateWindow<RequisitionsWindow>();
+        if (_window == null)
+        {
+            _window = new RequisitionsWindow();
+            _window.OnClose += Close;
+        }
 
         var platformLabel = "No platform";
         var platformButtonLabel = "No platform";
@@ -197,7 +203,7 @@ public sealed class RequisitionsBui(EntityUid owner, Enum uiKey) : BoundUserInte
             return;
 
         var state = State as RequisitionsBuiState;
-        for (var catIndex = 0; catIndex < computer.Categories.Count; catIndex++)
+        for (int catIndex = 0; catIndex < computer.Categories.Count; catIndex++)
         {
             var entryCount = 0;
             var category = computer.Categories[catIndex];
@@ -241,5 +247,11 @@ public sealed class RequisitionsBui(EntityUid owner, Enum uiKey) : BoundUserInte
         order.Button.Disabled = state == null ||
                                 state.Balance < order.Cost ||
                                 state.Full;
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+            _window?.Dispose();
     }
 }

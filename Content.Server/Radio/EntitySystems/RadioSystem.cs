@@ -5,7 +5,6 @@ using Content.Server.Power.Components;
 using Content.Server.Radio.Components;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Squads;
-using Content.Shared._RMC14.Radio;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chat;
 using Content.Shared.Database;
@@ -128,12 +127,13 @@ public sealed class RadioSystem : EntitySystem
             : message;
 
         // RMC14 increase font size
-        var radioFontSize = speech.FontSize;
+        int radioFontSize = speech.FontSize;
         if (TryComp<WearingHeadsetComponent>(messageSource, out var wearingHeadset) &&
-            TryComp<RMCHeadsetComponent>(wearingHeadset.Headset, out var headsetComp))
+            TryComp<HeadsetComponent>(wearingHeadset.Headset, out var headsetComp))
         {
             radioFontSize += headsetComp.RadioTextIncrease ?? 0;
         }
+
 
         var wrappedMessage = Loc.GetString(speech.Bold ? "chat-radio-message-wrap-bold" : "chat-radio-message-wrap",
             ("color", channel.Color),

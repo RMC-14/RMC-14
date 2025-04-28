@@ -208,6 +208,7 @@ public sealed class XenoEmpowerSystem : EntitySystem
         var diff = target.Position - origin.Position;
         diff = diff.Normalized() * xeno.Comp.FlingDistance;
 
+        EnsureComp<RMCObstacleSlamImmuneComponent>(args.Hit);
         _throwing.TryThrow(args.Hit, diff, 10);
     }
 

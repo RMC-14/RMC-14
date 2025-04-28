@@ -1,5 +1,4 @@
 using System.Numerics;
-using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Marines.Orders;
@@ -724,9 +723,6 @@ public sealed class CMGunSystem : EntitySystem
             user = (container.Owner, hands);
             return true;
         }
-
-        if (container != null && TryComp(container.Owner, out AttachableHolderComponent? holder) && holder.SupercedingAttachable == gun)
-            return TryGetGunUser(container.Owner, out user);
 
         user = default;
         return false;

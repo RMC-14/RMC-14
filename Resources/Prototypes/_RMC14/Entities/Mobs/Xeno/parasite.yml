@@ -2,14 +2,14 @@
   parent:
   - CMXenoUndeveloped
   - CMXenoFlammable
-  id: CMXenoParasite
+  id: CMXenoParasite # TODO RMC14 slowly die off weeds
   name: Parasite
   components:
   - type: GhostRole
     name: cm-job-name-xeno-parasite
-    prob: 0
+    prob: 0.25
     raffle:
-      settings: parasiteTimeRequirement
+      settings: timeRequirement
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Parasite/parasite.rsi
   - type: MobState
@@ -87,7 +87,6 @@
   - type: RMCSize
     size: Small
   - type: ParasiteAI
-  - type: SleepNPC
   - type: CanEscapeInventory
     baseResistTime: 1
   - type: HTN

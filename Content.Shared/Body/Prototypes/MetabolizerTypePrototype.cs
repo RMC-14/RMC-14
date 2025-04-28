@@ -2,7 +2,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Body.Prototypes
 {
-    [Prototype]
+    [Prototype("metabolizerType")]
     public sealed partial class MetabolizerTypePrototype : IPrototype
     {
         [IdDataField]

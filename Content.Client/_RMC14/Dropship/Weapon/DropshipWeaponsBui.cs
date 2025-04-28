@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using Content.Client._RMC14.UserInterface;
 using Content.Client.Eye;
 using Content.Client.UserInterface.ControlExtensions;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
@@ -17,16 +16,16 @@ using MedevacComponent = Content.Shared._RMC14.Dropship.Utility.Components.Medev
 namespace Content.Client._RMC14.Dropship.Weapon;
 
 [UsedImplicitly]
-public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
+public sealed class DropshipWeaponsBui : BoundUserInterface
 {
+    private DropshipWeaponsWindow? _window;
+
     private readonly ContainerSystem _container;
     private readonly EyeLerpingSystem _eyeLerping;
     private readonly DropshipSystem _system;
     private readonly DropshipWeaponSystem _weaponSystem;
 
     private EntityUid? _oldEye;
-
-    protected override DropshipWeaponsWindow? Window { get; set; }
 
     public DropshipWeaponsBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
@@ -39,43 +38,46 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
     protected override void Open()
     {
         base.Open();
-        Window = this.CreatePopOutableWindow<DropshipWeaponsWindow>();
+        _window = new DropshipWeaponsWindow();
+        _window.OnClose += Close;
 
-        Window.OffsetUpButton.Text = "^";
-        Window.OffsetUpButton.OnPressed += _ =>
+        _window.OffsetUpButton.Text = "^";
+        _window.OffsetUpButton.OnPressed += _ =>
             SendPredictedMessage(new DropshipTerminalWeaponsAdjustOffsetMsg(Direction.North));
 
-        Window.OffsetLeftButton.Text = "<";
-        Window.OffsetLeftButton.OnPressed += _ =>
+        _window.OffsetLeftButton.Text = "<";
+        _window.OffsetLeftButton.OnPressed += _ =>
             SendPredictedMessage(new DropshipTerminalWeaponsAdjustOffsetMsg(Direction.West));
 
-        Window.OffsetRightButton.Text = ">";
-        Window.OffsetRightButton.OnPressed += _ =>
+        _window.OffsetRightButton.Text = ">";
+        _window.OffsetRightButton.OnPressed += _ =>
             SendPredictedMessage(new DropshipTerminalWeaponsAdjustOffsetMsg(Direction.East));
 
-        Window.OffsetDownButton.Text = "v";
-        Window.OffsetDownButton.OnPressed += _ =>
+        _window.OffsetDownButton.Text = "v";
+        _window.OffsetDownButton.OnPressed += _ =>
             SendPredictedMessage(new DropshipTerminalWeaponsAdjustOffsetMsg(Direction.South));
 
-        Window.ResetOffsetButton.OnPressed += _ =>
+        _window.ResetOffsetButton.OnPressed += _ =>
             SendPredictedMessage(new DropshipTerminalWeaponsResetOffsetMsg());
 
-        Window.ScreenOne.TopRow.Refresh();
-        Window.ScreenOne.LeftRow.Refresh();
-        Window.ScreenOne.RightRow.Refresh();
-        Window.ScreenOne.BottomRow.Refresh();
+        _window.ScreenOne.TopRow.Refresh();
+        _window.ScreenOne.LeftRow.Refresh();
+        _window.ScreenOne.RightRow.Refresh();
+        _window.ScreenOne.BottomRow.Refresh();
 
-        Window.ScreenTwo.TopRow.Refresh();
-        Window.ScreenTwo.LeftRow.Refresh();
-        Window.ScreenTwo.RightRow.Refresh();
-        Window.ScreenTwo.BottomRow.Refresh();
+        _window.ScreenTwo.TopRow.Refresh();
+        _window.ScreenTwo.LeftRow.Refresh();
+        _window.ScreenTwo.RightRow.Refresh();
+        _window.ScreenTwo.BottomRow.Refresh();
 
         Refresh();
+
+        _window.OpenCentered();
     }
 
     public void Refresh()
     {
-        if (Window == null)
+        if (_window is not { Disposed: false })
             return;
 
         if (EntMan.TryGetComponent(Owner, out DropshipTerminalWeaponsComponent? terminal))
@@ -89,10 +91,10 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
 
     private void RefreshButtons()
     {
-        if (Window == null)
+        if (_window is not { Disposed: false })
             return;
 
-        foreach (var button in Window.Panel.GetControlOfType<DropshipWeaponsButton>())
+        foreach (var button in _window.GetControlOfType<DropshipWeaponsButton>())
         {
             button.Refresh();
         }
@@ -100,13 +102,13 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
 
     private void SetScreen(bool first, Screen compScreen)
     {
-        if (Window == null ||
+        if (_window is not { Disposed: false } ||
             !EntMan.TryGetComponent(Owner, out DropshipTerminalWeaponsComponent? terminal))
         {
             return;
         }
 
-        var screen = first ? Window.ScreenOne : Window.ScreenTwo;
+        var screen = first ? _window.ScreenOne : _window.ScreenTwo;
         static DropshipWeaponsButtonData ButtonAction(string suffix, Action<ButtonEventArgs> onPressed)
         {
             return new DropshipWeaponsButtonData($"rmc-dropship-weapons-{suffix}", onPressed);
@@ -471,5 +473,13 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         utility.TryGetValue(0, out utilityOne);
         utility.TryGetValue(1, out utilityTwo);
         utility.TryGetValue(2, out utilityThree);
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+
+        if (disposing)
+            _window?.Dispose();
     }
 }

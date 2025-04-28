@@ -3,7 +3,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared.StatusEffect
 {
-    [Prototype]
+    [Prototype("statusEffect")]
     public sealed partial class StatusEffectPrototype : IPrototype
     {
         [IdDataField]

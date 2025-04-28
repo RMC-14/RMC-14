@@ -1,7 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
-using Content.Shared._RMC14.Attachable.Systems;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Random;
 using Content.Shared._RMC14.Weapons.Ranged.Flamer;
@@ -89,7 +88,6 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] private   readonly INetConfigurationManager _netConfig = default!;
 
     // RMC14
-    [Dependency] private readonly AttachableHolderSystem _attachableHolder = default!;
     [Dependency] private readonly SharedRMCFlamerSystem _flamer = default!;
 
     private const float InteractNextFire = 0.3f;
@@ -180,9 +178,6 @@ public abstract partial class SharedGunSystem : EntitySystem
 
     public bool TryGetGun(EntityUid entity, out EntityUid gunEntity, [NotNullWhen(true)] out GunComponent? gunComp)
     {
-        if(_attachableHolder.TryGetInhandSupercedingGun(entity, out gunEntity, out gunComp))
-            return true;
-
         gunEntity = default;
         gunComp = null;
 
@@ -413,14 +408,26 @@ public abstract partial class SharedGunSystem : EntitySystem
             }
         }
 
-        // Shoot confirmed - sounds also played here in case it's invalid (e.g. cartridge already spent).
-        List<EntityUid>? projectiles = null;
-        var userImpulse = false;
-        if (Timing.IsFirstTimePredicted)
+        void CleanupClient()
         {
-            projectiles = Shoot(gunUid, gun, ev.Ammo, fromCoordinates, toCoordinates.Value, out userImpulse, user, throwItems: attemptEv.ThrowItems, predictedProjectiles, userSession);
+            foreach (var (ent, _) in ev.Ammo)
+            {
+                if (ent == null)
+                    continue;
+
+                if (_netManager.IsServer || IsClientSide(ent.Value))
+                    Del(ent);
+            }
         }
 
+        if (!Timing.IsFirstTimePredicted)
+        {
+            CleanupClient();
+            return null;
+        }
+
+        // Shoot confirmed - sounds also played here in case it's invalid (e.g. cartridge already spent).
+        var projectiles = Shoot(gunUid, gun, ev.Ammo, fromCoordinates, toCoordinates.Value, out var userImpulse, user, throwItems: attemptEv.ThrowItems, predictedProjectiles, userSession);
         var shotEv = new GunShotEvent(user, ev.Ammo, fromCoordinates, toCoordinates.Value);
         RaiseLocalEvent(gunUid, ref shotEv);
 
@@ -432,16 +439,6 @@ public abstract partial class SharedGunSystem : EntitySystem
 
         DirtyField(gunUid, gun, nameof(GunComponent.BurstActivated));
         Dirty(gunUid, gun);
-
-        foreach (var (ent, _) in ev.Ammo)
-        {
-            if (ent == null)
-                continue;
-
-            if (IsClientSide(ent.Value))
-                Del(ent);
-        }
-
         return projectiles;
     }
 

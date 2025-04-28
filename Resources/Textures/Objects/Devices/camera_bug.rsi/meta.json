@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "created by pofitlo, in-hands by SeamLesss (GitHub)",
+  "copyright": "created by pofitlo",
   "size": {
     "x": 32,
     "y": 32
@@ -9,14 +9,6 @@
   "states": [
     {
       "name": "camera_bug"
-    },
-    {
-      "name": "inhand-left",
-      "directions": 4
-    },
-    {
-      "name": "inhand-right",
-      "directions": 4
     }
   ]
 }

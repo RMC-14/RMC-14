@@ -11,7 +11,4 @@ public sealed partial class HiveLeaderComponent : Component
 
     [DataField, AutoNetworkedField]
     public string PheromonesContainerId = "rmc_hive_leader_pheromones";
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan FriendlyStunTime = TimeSpan.FromSeconds(1.25);
 }

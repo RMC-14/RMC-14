@@ -23,7 +23,7 @@ namespace Content.Shared.Maps
                 return null;
 
             mapManager ??= IoCManager.Resolve<IMapManager>();
-            var pos = entityManager.System<SharedTransformSystem>().ToMapCoordinates(coordinates);
+            var pos = coordinates.ToMap(entityManager, entityManager.System<SharedTransformSystem>());
             if (!mapManager.TryFindGridAt(pos, out _, out var grid))
                 return null;
 

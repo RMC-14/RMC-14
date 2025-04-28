@@ -9,8 +9,6 @@ using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Ghost;
 using Content.Shared.Lock;
-using Content.Shared.Storage.Components;
-using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -24,7 +22,6 @@ public sealed class RMCAlertLevelSystem : EntitySystem
     [Dependency] private readonly ARESSystem _ares = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedDoorSystem _door = default!;
-    [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly LockSystem _lock = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -73,11 +70,6 @@ public sealed class RMCAlertLevelSystem : EntitySystem
             return null;
 
         return alert.Comp.Level;
-    }
-
-    public bool IsRedOrDeltaAlert()
-    {
-        return Get() == RMCAlertLevels.Red || Get() ==  RMCAlertLevels.Delta;
     }
 
     public void Set(RMCAlertLevels level, EntityUid? user, bool playSound = true, bool sendAnnouncement = true)
@@ -145,17 +137,10 @@ public sealed class RMCAlertLevelSystem : EntitySystem
         var unlockQuery = EntityQueryEnumerator<RMCUnlockOnAlertLevelComponent, LockComponent>();
         while (unlockQuery.MoveNext(out var uid, out var unlock, out var lockComp))
         {
-            if (unlock.Level <= level)
-            {
+            if (unlock.Level == level)
                 _lock.Unlock(uid, null, lockComp);
-            }
             else
-            {
-                SharedEntityStorageComponent? entityStorageComp = null;
-                if (_entityStorage.ResolveStorage(uid, ref entityStorageComp))
-                    _entityStorage.CloseStorage(uid, entityStorageComp); // Close a locker before locking it.
                 _lock.Lock(uid, null, lockComp);
-            }
         }
 
         var openQuery = EntityQueryEnumerator<RMCOpenOnAlertLevelComponent, DoorComponent, RMCPodDoorComponent>();
@@ -164,7 +149,7 @@ public sealed class RMCAlertLevelSystem : EntitySystem
             if (unlock.Id != podDoor.Id)
                 continue;
 
-            if (unlock.Level <= level)
+            if (unlock.Level == level)
                 _door.TryOpen(uid, door);
             else
                 _door.TryClose(uid, door);
@@ -175,8 +160,5 @@ public sealed class RMCAlertLevelSystem : EntitySystem
         {
             _appearance.SetData(uid, RMCAlertLevelsVisuals.Alert, level);
         }
-
-        var ev = new RMCAlertLevelChangedEvent(ent.Comp.Level);
-        RaiseLocalEvent(ent, ref ev, true);
     }
 }

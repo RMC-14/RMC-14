@@ -6,7 +6,16 @@
     sprite: /Textures/Clothing/OuterClothing/Misc/black_hoodie.rsi
     state: icon
   content:
-  - ClothingBackpackChameleonFill
+  - ChameleonPDA
+  - ClothingUniformJumpsuitChameleon
+  - ClothingOuterChameleon
+  - ClothingNeckChameleon
+  - ClothingMaskGasChameleon
+  - ClothingHeadHatChameleon
+  - ClothingEyesChameleon
+  - ClothingHeadsetChameleon
+  - ClothingShoesChameleon
+  - BarberScissors
   - ChameleonProjector
   - FakeMindShieldImplanter
   - AgentIDCard
@@ -38,7 +47,7 @@
   content:
   - StorageImplanter
   - DnaScramblerImplanter
-  - ChemistryBottleEphedrine
+  - EphedrineChemistryBottle
   - SoapOmega
   - Syringe
   - DrinkShaker
@@ -67,8 +76,8 @@
     sprite: Objects/Tanks/anesthetic.rsi
     state: icon
   content:
-  - ChemistryBottleNocturine
-  - ChemistryBottleNocturine
+  - NocturineChemistryBottle
+  - NocturineChemistryBottle
   - HypopenBox
   - NitrousOxideTankFilled
 

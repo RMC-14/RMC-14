@@ -51,11 +51,11 @@ public sealed class RMCFlammableSystem : SharedRMCFlammableSystem
         _flammable.Extinguish(flammable, flammable);
     }
 
-    public override void Pat(Entity<FlammableComponent?> flammable, int stacks)
+    public override void Pat(Entity<FlammableComponent?> flammable)
     {
         if (!Resolve(flammable, ref flammable.Comp, false))
             return;
 
-        _flammable.AdjustFireStacks(flammable, stacks, flammable);
+        _flammable.AdjustFireStacks(flammable, flammable.Comp.ResistStacks, flammable);
     }
 }

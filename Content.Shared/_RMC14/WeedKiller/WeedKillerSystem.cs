@@ -57,14 +57,7 @@ public sealed class WeedKillerSystem : EntitySystem
         if (ev.Dropship.Comp.Destination is not { } destination)
             return;
 
-        var coordinates = destination.ToCoordinates();
-        if (!_area.TryGetArea(coordinates, out var lzArea, out _) ||
-            string.IsNullOrWhiteSpace(lzArea.Value.Comp.LinkedLz))
-        {
-            return;
-        }
-
-        CreateWeedKiller(ev.Dropship, coordinates);
+        CreateWeedKiller(ev.Dropship, destination.ToCoordinates());
     }
 
     public void CreateWeedKiller(EntityUid dropship, EntityCoordinates coordinates)

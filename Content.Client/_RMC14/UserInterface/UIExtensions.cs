@@ -1,5 +1,4 @@
 ﻿using Content.Client.UserInterface.ControlExtensions;
-using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using static Robust.Client.UserInterface.Controls.FloatSpinBox;
@@ -28,16 +27,7 @@ public static class UIExtensions
     {
         var window = bui.CreateDisposableControl<T>();
         window.SetBui(bui);
-
-        if (IoCManager.Resolve<IEntityManager>().System<UserInterfaceSystem>().TryGetPosition(bui.Owner, bui.UiKey, out var position))
-        {
-            window.Open(position);
-        }
-        else
-        {
-            window.OpenCentered();
-        }
-
+        window.OpenCentered();
         return window;
     }
 }

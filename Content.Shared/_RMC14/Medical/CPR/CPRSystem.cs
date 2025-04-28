@@ -1,11 +1,13 @@
 using Content.Shared._RMC14.Marines;
 using Content.Shared.Atmos.Rotting;
+using Content.Shared.Clothing.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Inventory;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -20,6 +22,7 @@ public sealed class CPRSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popups = default!;
@@ -93,7 +96,7 @@ public sealed class CPRSystem : EntitySystem
 
         // TODO RMC14 move this value to a component
         var selfPopup = Loc.GetString("cm-cpr-self-perform", ("target", target), ("seconds", 7));
-        _popups.PopupEntity(selfPopup, target, performer, PopupType.Medium);
+        _popups.PopupEntity(selfPopup, target, performer);
 
         var othersPopup = Loc.GetString("cm-cpr-other-perform", ("performer", performer), ("target", target));
         var othersFilter = Filter.Pvs(performer).RemoveWhereAttachedEntity(e => e == performer);
@@ -128,11 +131,11 @@ public sealed class CPRSystem : EntitySystem
                 return;
 
             var selfPopup = Loc.GetString("cm-cpr-self-perform-fail-received-too-recently", ("target", target));
-            _popups.PopupEntity(selfPopup, target, performer, PopupType.MediumCaution);
+            _popups.PopupEntity(selfPopup, target, performer, PopupType.SmallCaution);
 
             var othersPopup = Loc.GetString("cm-cpr-other-perform-fail", ("performer", performer), ("target", target));
             var othersFilter = Filter.Pvs(performer).RemoveWhereAttachedEntity(e => e == performer);
-            _popups.PopupEntity(othersPopup, performer, othersFilter, true, PopupType.MediumCaution);
+            _popups.PopupEntity(othersPopup, performer, othersFilter, true, PopupType.SmallCaution);
         }
     }
 
@@ -192,11 +195,11 @@ public sealed class CPRSystem : EntitySystem
             return true;
 
         var selfPopup = Loc.GetString("cm-cpr-self-start-perform", ("target", target));
-        _popups.PopupEntity(selfPopup, target, performer, PopupType.Medium);
+        _popups.PopupEntity(selfPopup, target, performer);
 
         var othersPopup = Loc.GetString("cm-cpr-other-start-perform", ("performer", performer), ("target", target));
         var othersFilter = Filter.Pvs(performer).RemoveWhereAttachedEntity(e => e == performer);
-        _popups.PopupEntity(othersPopup, performer, othersFilter, true, PopupType.Medium);
+        _popups.PopupEntity(othersPopup, performer, othersFilter, true);
 
         return true;
     }

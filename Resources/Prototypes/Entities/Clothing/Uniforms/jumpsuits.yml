@@ -477,7 +477,7 @@
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitPrisoner
   name: prisoner jumpsuit
-  description: A jumpsuit used for prisoners. It has suit sensors automatically enabled at all times.
+  description: Busted.
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpsuit/color.rsi

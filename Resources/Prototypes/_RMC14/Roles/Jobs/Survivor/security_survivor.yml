@@ -27,9 +27,8 @@
       preset: RMCSurvivorPresetSecurity
     - type: RMCSurvivor
     - type: MotionDetectorTracked
-    - type: NpcFactionMember
-      factions:
-      - Survivor
+    - type: UserIFF
+      faction: FactionSurvivor
     - type: IntelRescueSurvivorObjective
 
 - type: startingGear

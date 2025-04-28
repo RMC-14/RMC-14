@@ -148,17 +148,6 @@
           32:
             sprite: Mobs/Species/Vox/displacement.rsi
             state: shoes
-  - type: Hands
-    leftHandDisplacement:
-      sizeMaps:
-        32:
-          sprite: Mobs/Species/Vox/displacement.rsi
-          state: hand_l
-    rightHandDisplacement:
-      sizeMaps:
-        32:
-          sprite: Mobs/Species/Vox/displacement.rsi
-          state: hand_r
 
 - type: entity
   parent: BaseSpeciesDummy
@@ -209,14 +198,3 @@
           32:
             sprite: Mobs/Species/Vox/displacement.rsi
             state: shoes
-  - type: Hands
-    leftHandDisplacement:
-      sizeMaps:
-        32:
-          sprite: Mobs/Species/Vox/displacement.rsi
-          state: hand_l
-    rightHandDisplacement:
-      sizeMaps:
-        32:
-          sprite: Mobs/Species/Vox/displacement.rsi
-          state: hand_r

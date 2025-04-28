@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Pipebomb sprites made by girthquake. Inhands by TiniestShark (github)",
+  "copyright": "Pipebomb sprites made by girthquake",
   "size": {
     "x": 32,
     "y": 32
@@ -26,14 +26,6 @@
           0.2
         ]
       ]
-    },
-    {
-      "name": "inhand-left",
-      "directions": 4
-    },
-    {
-      "name": "inhand-right",
-      "directions": 4
     }
   ]
 }

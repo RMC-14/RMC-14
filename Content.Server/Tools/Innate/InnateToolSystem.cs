@@ -8,7 +8,6 @@ using Content.Shared.Interaction.Components;
 using Content.Shared.Storage;
 using Content.Shared.Tag;
 using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Server.Tools.Innate;
@@ -22,8 +21,6 @@ public sealed class InnateToolSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _robustRandom = default!;
     [Dependency] private readonly SharedHandsSystem _sharedHandsSystem = default!;
     [Dependency] private readonly TagSystem _tagSystem = default!;
-
-    private static readonly ProtoId<TagPrototype> InnateDontDeleteTag = "InnateDontDelete";
 
     public override void Initialize()
     {
@@ -79,7 +76,7 @@ public sealed class InnateToolSystem : EntitySystem
     {
         foreach (var tool in component.ToolUids)
         {
-            if (_tagSystem.HasTag(tool, InnateDontDeleteTag))
+            if (_tagSystem.HasTag(tool, "InnateDontDelete"))
             {
                 RemComp<UnremoveableComponent>(tool);
             }
