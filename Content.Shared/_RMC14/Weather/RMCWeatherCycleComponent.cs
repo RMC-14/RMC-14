@@ -13,6 +13,9 @@ public sealed partial class RMCWeatherCycleComponent : Component
     public List<RMCWeatherEventComponent> WeatherEvents = new();
 
     [DataField, AutoNetworkedField]
+    public RMCWeatherEventComponent? CurrentEvent;
+
+    [DataField, AutoNetworkedField]
     public TimeSpan MinTimeBetweenEvents;
 
     [DataField, AutoNetworkedField]
@@ -33,6 +36,18 @@ public sealed partial class RMCWeatherCycleComponent : Component
 
         [DataField, AutoNetworkedField]
         public ProtoId<WeatherPrototype> WeatherType;
+
+        [DataField, AutoNetworkedField]
+        public float LightningChance = 0.0f;
+
+        [DataField, AutoNetworkedField]
+        public TimeSpan LightningDuration = TimeSpan.FromSeconds(2);
+
+        [DataField, AutoNetworkedField]
+        public TimeSpan LightningCooldown = TimeSpan.FromSeconds(5);
+
+        [DataField, AutoNetworkedField]
+        public List<string> LightningEffects = ["RMCColorSequenceLightningSharpPeak", "RMCColorSequenceLightningFlicker"];
     }
 }
 

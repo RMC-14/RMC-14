@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Light;
 using Content.Shared.Light.Components;
 using Content.Shared.Light.EntitySystems;
 using Content.Shared.Weather;
@@ -21,6 +22,7 @@ public sealed class RMCWeatherSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly RMCAmbientLightSystem _rmcLight = default!;
 
     private EntityQuery<BlockWeatherComponent> _blockQuery;
 
@@ -37,7 +39,11 @@ public sealed class RMCWeatherSystem : EntitySystem
         if (ent.Comp.WeatherEvents.Count <= 0)
             return;
 
+        EnsureComp<RMCAmbientLightComponent>(ent);
+        EnsureComp<RMCAmbientLightEffectsComponent>(ent);
+
         ent.Comp.LastEventCooldown = _random.Next(ent.Comp.MinTimeBetweenEvents);
+
     }
 
     public bool CanWeatherAffectArea(EntityUid uid, MapGridComponent grid, TileRef tileRef, RoofComponent? roofComp = null)
@@ -59,6 +65,20 @@ public sealed class RMCWeatherSystem : EntitySystem
         return true;
     }
 
+    public void HandleWeatherEffects(Entity<RMCWeatherCycleComponent, RMCAmbientLightComponent> ent)
+    {
+        if (ent.Comp1.CurrentEvent.HasValue)
+        {
+            var currentEvent = ent.Comp1.CurrentEvent.Value;
+            if (currentEvent.LightningChance > 0 && currentEvent.LightningEffects.Count > 0)
+            {
+                var lightningEffect = _rmcLight.ProcessPrototype(_random.Pick(currentEvent.LightningEffects));
+                var lightningDuration = currentEvent.LightningDuration;
+                _rmcLight.SetColor((ent, ent.Comp2), lightningEffect, lightningDuration);
+            }
+        }
+    }
+
     public override void Update(float frameTime)
     {
         if (_net.IsClient)
@@ -76,6 +96,7 @@ public sealed class RMCWeatherSystem : EntitySystem
                 _proto.TryIndex(weatherPick.WeatherType, out var weatherProto);
                 var endTime = _timing.CurTime + weatherPick.Duration;
 
+                cycle.CurrentEvent = weatherPick;
                 _weather.SetWeather(Transform(uid).MapID, weatherProto, endTime);
 
                 var minTimeVariance = (-cycle.MinTimeVariance * 0.5) + _random.Next(cycle.MinTimeVariance);
