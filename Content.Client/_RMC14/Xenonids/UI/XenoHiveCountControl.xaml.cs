@@ -14,9 +14,9 @@ public sealed partial class XenoHiveCountControl : Control
     public XenoHiveCountControl()
     {
         RobustXamlLoader.Load(this);
-        ModulateSelfOverride = Color.Purple;
+        //ModulateSelfOverride = Color.Purple;
     }
-
+/*
     public void SetInfo(string name, int count)
     {
         XenoName.Text = name;
@@ -32,6 +32,7 @@ public sealed partial class XenoHiveCountControl : Control
             (false) => Color.LightPink
         };
     }
+    */
 }
 
 

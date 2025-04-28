@@ -14,6 +14,7 @@ public sealed partial class XenoWatchWindow : DefaultWindow
     {
         RobustXamlLoader.Load(this);
 
+        /*
         for (int idx = 0; idx < 2; idx++)
         {
             var control = new XenoTierRow();
@@ -34,7 +35,7 @@ public sealed partial class XenoWatchWindow : DefaultWindow
         controll.AddXeno(3, "Hivelord");
         controll.AddXeno(3, "Burrower");
         RowContainer.AddChild(controll);
-
+*/
     }
 }
 

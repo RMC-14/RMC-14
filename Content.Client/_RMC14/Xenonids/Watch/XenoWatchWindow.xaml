@@ -2,8 +2,9 @@
     xmlns="https://spacestation14.io"
     xmlns:cc="clr-namespace:Content.Client._RMC14.Xenonids.Watch"
     Title="{Loc cm-xeno-watch}"
-    MinSize="300 400">
-    <BoxContainer Orientation="Vertical">
+    MinSize="500 600">
+    <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True">
         <!-- Hive Info -->
         <Collapsible>
             <CollapsibleHeading Name="HiveInfo" Title="General Hive Information"/>
@@ -16,10 +17,10 @@
             </CollapsibleBody>
         </Collapsible>
         <!-- Hive Counts -->
-        <Collapsible>
-            <CollapsibleHeading Name="HiveCounts" Title="Hive Counts"/>
-            <CollapsibleBody>
-                <BoxContainer  Name="RowContainer"  HorizontalAlignment="Center" Orientation="Vertical" Margin="0 0 2 0"/>
+        <Collapsible HorizontalExpand="True">
+            <CollapsibleHeading Name="HiveCounts" Title="Hive Counts" HorizontalExpand="True"/>
+            <CollapsibleBody HorizontalExpand="True" MinWidth="600">
+                <BoxContainer  Name="RowContainer"  HorizontalExpand="True" HorizontalAlignment="Center" Orientation="Vertical" Margin="0 0 2 0" Access="Public" MinWidth="600"/>
             </CollapsibleBody>
         </Collapsible>
         <!-- Xeno List -->
@@ -36,5 +37,6 @@
                 </BoxContainer>
             </CollapsibleBody>
         </Collapsible>
-    </BoxContainer>
+        </BoxContainer>
+        </ScrollContainer>
 </cc:XenoWatchWindow>

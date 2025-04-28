@@ -11,21 +11,23 @@ public sealed partial class XenoTierRow : Control
     public XenoTierRow()
     {
         RobustXamlLoader.Load(this);
+        //TierButton.OnPressed += _ =>
     }
 
     public void SetInfo(float slots, int tier)
     {
         TierButton.Text = $"Tier {tier}";
+        TierButton.Name = $"Tier {tier}";
         SlotsLeft.Text = $"Slots left: {slots}";
     }
-
+/*
     public void AddXeno(int count, string name)
     {
         var control = new XenoHiveCountControl();
         control.XenoName.Text = name;
         control.Count.Text = count.ToString();
-        //control.XenoName.OnPressed += _ =>
+        //control.XenoName.OnPressed += _ =>;
         XenosContainer.AddChild(control);
     }
-
+*/
 }

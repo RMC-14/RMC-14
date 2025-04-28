@@ -4,10 +4,12 @@
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls">
     <BoxContainer Orientation="Horizontal">
     <BoxContainer Orientation="Vertical" Access="Public" Margin="-2 0 -2 0">
-        <Button Name="XenoName" Text="Name" Access="Public"  ToggleMode="True" MinWidth="70" StyleClasses="ButtonSquare" ModulateSelfOverride="Purple"/>
+        <BoxContainer Name="XenoButton" Access="Public"/>
         <Label Name="Count" Text="0" Access="Public" Align="Center"/>
         <cc:HSeparator/>
     </BoxContainer>
         <cc:HSeparator/>
     </BoxContainer>
 </ui:XenoHiveCountControl>
+
+<!-- <Button Name="XenoName" Text="Name" Access="Public"  ToggleMode="True" MinWidth="70" StyleClasses="ButtonSquare" ModulateSelfOverride="Purple"/> -->
