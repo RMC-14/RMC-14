@@ -10,6 +10,9 @@
   name: Ravager
   description: A huge, nasty red alien with enormous scythed claws.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleRavager
   - type: GhostRole
     name: cm-job-name-xeno-ravager
   - type: Sprite
