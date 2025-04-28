@@ -87,6 +87,7 @@
   - RMCGuideRolePraetorian
   - RMCGuideRoleRavager
   - RMCGuideRoleBoiler
+  - RMCGuideRoleQueen
 
 # Xenonid structures
 - type: guideEntry
@@ -265,13 +266,20 @@
   name: "Boiler Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleBoiler.xml"
 
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideRoleQueen
+  priority: 24
+  name: "Queen Guide"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleQueen.xml"
+
 # Chemistry stuff
 - type: guideEntry
   parent: RMC
   id: RMCChemicals
   name: guide-entry-chemicals
   text: "/ServerInfo/Guidebook/_RMC14/Chemicals/RMCChemicals.xml"
-  priority: 24
+  priority: 25
   children:
   #  - RMCElements
   - RMCMedicine
