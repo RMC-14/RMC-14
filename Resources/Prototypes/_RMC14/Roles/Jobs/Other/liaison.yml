@@ -27,19 +27,7 @@
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-we-ya
   access:
-  - RMCWeYa
-  - CMAccessCommand
-  - CMAccessResearch
-  - CMAccessMedical
-  - CMAccessMedPrep
-  - CMAccessColonyPublic
-  - CMAccessColonyResearch
-  - CMAccessColonyEngineering
-  - CMAccessColonyLogistics
-  - CMAccessColonyBrig
-  - CMAccessColonyMedbay
-#  - TODO RMC14 WeYa flight
-  - CMAccessColonyCommand
+  - RMCWeYaExecColony
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: cl
