@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: SG6732
-  changes:
-  - message: Made the attachment points for the M59 better match with the sprite.
-      No more floating magnetic harnesses.
-    type: Fix
-  id: 1160
-  time: '2025-01-05T01:39:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5295
 - author: blueDev2
   changes:
   - message: Fixed healer drone sometimes leaving behind an alive drone body on sacrifice.
@@ -5474,5 +5466,12 @@
   id: 1662
   time: '2025-04-28T23:24:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6287
+- author: Dygon
+  changes:
+  - message: The kill area outside the docking bay doesn't despawn anymore.
+    type: Tweak
+  id: 1663
+  time: '2025-04-28T23:28:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6253
 Name: RMC14
 Order: -1
