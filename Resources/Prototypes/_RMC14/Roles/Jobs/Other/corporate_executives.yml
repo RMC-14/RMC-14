@@ -75,11 +75,7 @@
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
   accessGroups:
-  - RMCWeYa
-  - CMAccessCommand
-  - CMAccessResearch
-  - CMAccessMedical
-  - CMAccessMedPrep
+  - RMCWeYaExec
   special:
   - !type:AddComponentSpecial
     components:
