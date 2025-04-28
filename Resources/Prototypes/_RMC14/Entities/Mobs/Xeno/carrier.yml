@@ -11,9 +11,6 @@
   description: A strange-looking alien creature. It carries a number of scuttling jointed crablike creatures.
   abstract: true
   components:
-  - type: GuideHelp
-    guides:
-    - RMCGuideRoleCarrier
   - type: GhostRole
     name: cm-job-name-xeno-carrier
   - type: MobState
@@ -108,6 +105,9 @@
   parent: RMCXenoCarrierBase
   id: CMXenoCarrier
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCarrier
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Carrier/carrier.rsi
     layers:
