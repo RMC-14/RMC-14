@@ -158,7 +158,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         UpdatesAfter.Add(typeof(SharedPhysicsSystem));
 
-        Subs.CVar(_config, RMCCVars.RMCParasiteSpawnInitialDelayMinutes, v => _densityThreshold = v, true);
+        Subs.CVar(_config, RMCCVars.RMCResinConstructionDensityCostIncreaseThreshold, v => _densityThreshold = v, true);
     }
 
     private void OnXenoStructureDestruction(Entity<XenoAnnounceStructureDestructionComponent> ent, ref DestructionEventArgs args)

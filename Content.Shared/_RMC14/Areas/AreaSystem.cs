@@ -296,7 +296,7 @@ public sealed class AreaSystem : EntitySystem
         return area.Value.Comp.SupplyDrop;
     }
 
-    private void UpdateBuildableTiles(Entity<AreaGridComponent> grid, EntProtoId<AreaComponent> areaProto, EntityUid? anchored = null)
+    private void AddBuildableTile(Entity<AreaGridComponent> grid, EntProtoId<AreaComponent> areaProto, EntityUid? anchored = null)
     {
         foreach (var (area, uid) in grid.Comp.AreaEntities)
         {
@@ -343,7 +343,7 @@ public sealed class AreaSystem : EntitySystem
                             if (areaGrid.Areas.TryGetValue(pos, out var areaProto))
                             {
                                 if (HasComp<DamageableComponent>(anchored))
-                                    UpdateBuildableTiles((ent,areaGrid), areaProto, anchored);
+                                    AddBuildableTile((ent,areaGrid), areaProto, anchored);
                             }
                         }
 
@@ -364,7 +364,7 @@ public sealed class AreaSystem : EntitySystem
                     if (areaGrid.Areas.TryGetValue(pos, out var area) &&
                         area.TryGet(out var areaComp, _prototypes, _compFactory))
                     {
-                        UpdateBuildableTiles((ent, areaGrid), area);
+                        AddBuildableTile((ent, areaGrid), area);
 
                         if (areaComp.MinimapColor != default)
                         {
