@@ -170,9 +170,8 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
             return;
         }
 
-        if (candidates.Count == 1 && HasValidIdTag(candidates[0], out var finalIdTag) && finalIdTag != null)
+        if (candidates.Count == 1)
         {
-            TryAddRequiredAccess(finalIdTag.Value, new HashSet<ProtoId<AccessGroupPrototype>> { new ProtoId<AccessGroupPrototype>("MarineMain") });
             _commander = candidates[0];
         }
 
@@ -186,9 +185,8 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
                 return;
             }
 
-            if (highestRankCandidates.Count == 1 && HasValidIdTag(highestRankCandidates[0], out var idTag) && idTag != null)
+            if (highestRankCandidates.Count == 1)
             {
-                TryAddRequiredAccess(idTag.Value, new HashSet<ProtoId<AccessGroupPrototype>> { new ProtoId<AccessGroupPrototype>("MarineMain") });
                 _commander = highestRankCandidates[0];
             }
             else // If there are multiple candidates with the same highest rank, continue with them
@@ -201,9 +199,8 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
                     return;
                 }
 
-                if (highestSquadCandidates.Count == 1 && HasValidIdTag(highestSquadCandidates[0], out var squadidTag) && squadidTag != null)
+                if (highestSquadCandidates.Count == 1)
                 {
-                    TryAddRequiredAccess(squadidTag.Value, new HashSet<ProtoId<AccessGroupPrototype>> { new ProtoId<AccessGroupPrototype>("MarineMain") });
                     _commander = highestSquadCandidates[0];
                 }
 
@@ -214,6 +211,9 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
                 }
             }
         }
+
+        if (HasValidIdTag(_commander, out var finalIdTag) && finalIdTag != null)
+            TryAddRequiredAccess(finalIdTag.Value, new HashSet<ProtoId<AccessGroupPrototype>> { new ProtoId<AccessGroupPrototype>("MarineMain") });
 
         TryComp<OriginalRoleComponent>(_commander, out var roleComp);
         string jobName = string.Empty;
