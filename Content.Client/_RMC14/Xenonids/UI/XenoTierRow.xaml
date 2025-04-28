@@ -6,7 +6,7 @@
         <BoxContainer Align="Center">
             <Button Name="TierButton" Text="Tier" StyleClasses="ButtonSquare" Access="Public" ToggleMode="True"  ModulateSelfOverride="Purple" />
         </BoxContainer>
-        <Label Name="SlotsLeft" Text="0 Remaining Slots" Access="Public" Align="Center"></Label>
+        <Label Name="SlotsLeft" Text="0 Remaining Slots" Access="Public" Align="Center" Visible="False"></Label>
         <BoxContainer Name="XenosContainer" Align="Center" Orientation="Horizontal" Access="Public">
             <cc:HSeparator/>
         </BoxContainer>
