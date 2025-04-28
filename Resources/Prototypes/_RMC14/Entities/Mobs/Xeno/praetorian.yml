@@ -11,9 +11,6 @@
   name: Praetorian
   description: A huge, looming beast of an alien.
   components:
-  - type: GuideHelp
-    guides:
-    - RMCGuideRolePraetorian
   - type: GhostRole
     name: cm-job-name-xeno-praetorian
   - type: Sprite
@@ -126,6 +123,9 @@
   parent: CMXenoPraetorianBase
   id: CMXenoPraetorian
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRolePraetorian
   - type: XenoSprayAcid
     barricadeDamage:
       types:
