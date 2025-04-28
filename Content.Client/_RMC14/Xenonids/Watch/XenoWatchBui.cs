@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Linq;
 using Content.Client._RMC14.Xenonids.UI;
 using Content.Shared._RMC14.Xenonids;
