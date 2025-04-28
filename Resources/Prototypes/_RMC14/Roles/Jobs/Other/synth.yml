@@ -45,11 +45,11 @@
         RMCSkillDomestics: 2
         RMCSkillNavigations: 1
     - type: MarineOrders
-#    - type: DemoSpecWhitelist -- THEY CAN USE EVERY SPEC TOO???
-#    - type: GrenadeSpecWhitelist
-#    - type: ScoutWhitelist
-#    - type: SniperWhitelist
-#    - type: PyroWhitelist
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-synth
     - type: TacticalMapIcon
