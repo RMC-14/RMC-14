@@ -29,6 +29,17 @@ public partial class XenoChoiceControl : Control
         Texture.Texture = texture;
     }
 
+    public void SetHealth(float health)
+    {
+        Health.Value = health;
+        if (health < 0)
+            Health.BackgroundStyleBoxOverride = new StyleBoxFlat(Color.Red);
+        else
+            Health.BackgroundStyleBoxOverride = new StyleBoxFlat(Color.Gray);
+
+        Health.Visible = true;
+    }
+
     public void SetPlasma(float plasma)
     {
         Plasma.Value = plasma;

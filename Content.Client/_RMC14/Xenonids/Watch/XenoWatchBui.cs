@@ -112,10 +112,16 @@ public sealed class XenoWatchBui : BoundUserInterface
 
             var control = new XenoChoiceControl();
             control.Set(xeno.Name, texture);
+            control.SetHealth((float)xeno.Health);
+            control.SetPlasma((float)xeno.Plasma);
+            control.SetEvo((int)xeno.Evo);
+
             control.Button.OnPressed += _ => SendPredictedMessage(new XenoWatchBuiMsg(xeno.Entity));
+
 
             _window.XenoContainer.AddChild(control);
         }
+        UpdateList();
     }
 
     private XenoWatchWindow EnsureWindow()
