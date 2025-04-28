@@ -111,6 +111,18 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
         _adaptationTimerEndTime = _gameTiming.CurTime + TimeSpan.FromMinutes(1);
     }
 
+    /// <summary>
+    /// Selects a marine to act as the interim operation commander when no senior command is present.
+    /// The selection process filters candidates by their authority level, living status, valid ID, readiness
+    /// and prioritizes them by:
+    /// 1. Highest rank according to the marine rank hierarchy.
+    /// 2. Highest squad according to the marine squad hierarchy.
+    /// 3. If multiple candidates are still tied, selects one randomly.
+    /// If no valid candidates are found, an appropriate ARES announcement is made.
+    /// </summary>
+    /// <remarks>
+    ///  We will skip the sleep check since it has only been a couple of minutes and this is not a normal situation for senior roles to fall asleep and we hope he will return soon.
+    /// </remarks>
     private void CommanderSelection()
     {
         var ares = _ares.EnsureARES();
@@ -181,7 +193,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
             }
             else // If there are multiple candidates with the same highest rank, continue with them
             {
-                var highestSquadCandidates = _squadSystem.GetEntitiesWithHighestSquad(highestRankCandidates, "RMCMarineSquadRankHierarchy");
+                var highestSquadCandidates = _squadSystem.GetEntitiesWithHighestSquad(highestRankCandidates, "RMCMarineSquadHierarchy");
 
                 if (highestSquadCandidates == null) // All entities have invalid squad (in this case it is impossible) or an empty dataset was passed
                 {
@@ -219,6 +231,9 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
 
     }
 
+    /// <summary>
+    /// Attempts to add an entity to the list of commander candidates, keeping only those with the highest marine authority level.
+    /// </summary>
     private void TryAddCandidate(EntityUid entity, List<EntityUid> candidates)
     {
         if (!TryComp<OriginalRoleComponent>(entity, out var originalRole) || originalRole.Job == null)
@@ -263,6 +278,9 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
         // If the level is less than the current maximum, we don’t add
     }
 
+    /// <summary>
+    /// Checks if the entity has a valid ID card matching its name and returns it.
+    /// </summary>
     private bool HasValidIdTag(EntityUid entity, out EntityUid? idTag)
     {
         idTag = null;
@@ -283,6 +301,9 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
         return false; // Player removed his ID to avoid being selected or lost his ID
     }
 
+    /// <summary>
+    /// Adds missing access to an ID card if necessary.
+    /// </summary>
     private bool TryAddRequiredAccess(EntityUid idCard, HashSet<ProtoId<AccessGroupPrototype>> requiredGroups)
     {
         if (!_entMan.TryGetComponent<AccessComponent>(idCard, out var accessComp))

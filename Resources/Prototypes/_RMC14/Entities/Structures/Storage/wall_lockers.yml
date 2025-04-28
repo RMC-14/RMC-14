@@ -22,7 +22,6 @@
     whitelist:
       tags:
       - CommandTablet
-      # command headset
   - type: AccessReader
     access: [["CMAccessCommand"]]
 
@@ -43,4 +42,4 @@
   table: !type:AllSelector
     children:
     - id: RMCTabletCO
-
+    - id: CMHeadsetSeniorCommand
