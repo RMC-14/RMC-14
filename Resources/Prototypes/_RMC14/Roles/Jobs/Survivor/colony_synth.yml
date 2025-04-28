@@ -47,11 +47,11 @@
         RMCSkillJtac: 1
         RMCSkillIntel: 1
         RMCSkillDomestics: 2
-#    - type: DemoSpecWhitelist -- THEY CAN USE EVERY SPEC TOO???
-#    - type: GrenadeSpecWhitelist
-#    - type: ScoutWhitelist
-#    - type: SniperWhitelist
-#    - type: PyroWhitelist
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
     - type: TacticalMapIcon
       icon:
         sprite: _RMC14/Interface/map_blips.rsi
