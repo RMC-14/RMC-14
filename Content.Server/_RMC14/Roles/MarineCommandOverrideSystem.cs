@@ -2,7 +2,6 @@ using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Roles;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Roles;
-using Content.Server.GameTicking;
 using Robust.Shared.Prototypes;
 using Content.Server.GameTicking.Events;
 using Robust.Shared.Timing;
@@ -16,8 +15,10 @@ using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared.Inventory;
 using Content.Shared.Access.Components;
 using Content.Shared.Access;
-using Content.Shared.Roles.Jobs;
 using System.Globalization;
+using Content.Shared._RMC14.Marines.Squads;
+using Robust.Shared.Random;
+using Content.Shared.Random.Helpers;
 
 namespace Content.Server._RMC14.Roles;
 
@@ -30,7 +31,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
     [Dependency] private readonly ARESSystem _ares = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedRankSystem _rankSystem = default!;
-    [Dependency] private readonly SharedJobSystem _jobs = default!;
+    [Dependency] private readonly SquadSystem _squadSystem = default!;
 
 
     private EntityUid _commander = default;
@@ -180,7 +181,25 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
             }
             else // If there are multiple candidates with the same highest rank, continue with them
             {
-                //
+                var highestSquadCandidates = _squadSystem.GetEntitiesWithHighestSquad(highestRankCandidates, "RMCMarineSquadRankHierarchy");
+
+                if (highestSquadCandidates == null) // All entities have invalid squad (in this case it is impossible) or an empty dataset was passed
+                {
+                    _marineAnnounce.AnnounceARES(ares, Loc.GetString("rmc-marine-command-override-no-candidates-found"));
+                    return;
+                }
+
+                if (highestSquadCandidates.Count == 1 && HasValidIdTag(highestSquadCandidates[0], out var squadidTag) && squadidTag != null)
+                {
+                    TryAddRequiredAccess(squadidTag.Value, new HashSet<ProtoId<AccessGroupPrototype>> { new ProtoId<AccessGroupPrototype>("MarineMain") });
+                    _commander = highestSquadCandidates[0];
+                }
+
+                if (highestSquadCandidates.Count > 1) // TODO RMC14: First we try to pick players with the most playing time and only then we pick randomly from the rest
+                {
+                    var random = IoCManager.Resolve<IRobustRandom>();
+                    _commander = random.Pick(highestSquadCandidates); // Select a random candidate from the list of candidates with the same highest rank and squad
+                }
             }
         }
 

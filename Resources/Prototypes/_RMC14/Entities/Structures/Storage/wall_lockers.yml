@@ -22,6 +22,7 @@
     whitelist:
       tags:
       - CommandTablet
+      # command headset
   - type: AccessReader
     access: [["CMAccessCommand"]]
 

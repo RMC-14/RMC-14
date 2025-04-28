@@ -183,6 +183,9 @@ public abstract class SharedRankSystem : EntitySystem
                 highestRank = rankIndex;
         }
 
+        if (highestRank == -1) // No valid ranks found
+            return null;
+
         result = rankScores
             .Where(pair => pair.Value == highestRank)
             .Select(pair => pair.Key)
