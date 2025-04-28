@@ -1,29 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fix rementoring as an active mentors ending you duplicate messages.
-    type: Fix
-  id: 1154
-  time: '2024-12-25T06:16:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5228
-- author: Rainbeon
-  changes:
-  - message: Taking a Xeno ghost role that previously belonged to someone else no
-      longer causes your ghost to commit identity theft.
-    type: Fix
-  - message: Fixed the Queen's ghost staying immature forever. It will now update
-      correctly to change into the playtime rank when she matures.
-    type: Fix
-  id: 1155
-  time: '2024-12-26T10:50:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5233
-- author: DrSmugleaf
-  changes:
-  - message: Added a search bar to the player list for medals and jellies.
-    type: Tweak
-  id: 1156
-  time: '2024-12-26T10:50:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5230
 - author: Vermidia
   changes:
   - message: Fixed carrier parasite overlays and parasite mask sprites. The trap sprite
@@ -5476,5 +5451,27 @@
   id: 1656
   time: '2025-04-28T23:08:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6296
+- author: MetalSage
+  changes:
+  - message: Fixed inability to take admin roles and foxtrot roles
+    type: Fix
+  id: 1657
+  time: '2025-04-28T23:10:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6293
+- author: MetalSage
+  changes:
+  - message: Now the queen does not stun xenomorphs on her ovipositor, when resting,
+      or even after her death.
+    type: Fix
+  id: 1658
+  time: '2025-04-28T23:10:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6292
+- author: noctyrnal
+  changes:
+  - message: The M13 has received new sprites.
+    type: Tweak
+  id: 1659
+  time: '2025-04-28T23:09:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6297
 Name: RMC14
 Order: -1
