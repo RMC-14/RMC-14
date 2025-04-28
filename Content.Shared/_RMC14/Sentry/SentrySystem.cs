@@ -537,6 +537,17 @@ public sealed class SentrySystem : EntitySystem
         }
     }
 
+    public bool TrySetMode(Entity<SentryComponent> sentry, SentryMode mode)
+    {
+        if (sentry.Comp.Mode == mode)
+            return false;
+
+        sentry.Comp.Mode = mode;
+        UpdateState(sentry);
+        Dirty(sentry, sentry.Comp);
+        return true;
+    }
+
     public override void Update(float frameTime)
     {
         if (_net.IsClient)

@@ -109,6 +109,8 @@ public sealed class CMArmorSystem : EntitySystem
 
     private void OnGetArmor(Entity<CMArmorComponent> armored, ref CMGetArmorEvent args)
     {
+        args.ExplosionArmor += armored.Comp.ExplosionArmor;
+
         if (HasComp<XenoComponent>(armored))
         {
             args.XenoArmor += armored.Comp.XenoArmor;
@@ -123,6 +125,8 @@ public sealed class CMArmorSystem : EntitySystem
 
     private void OnGetArmorRelayed(Entity<CMArmorComponent> armored, ref InventoryRelayedEvent<CMGetArmorEvent> args)
     {
+        args.Args.ExplosionArmor += armored.Comp.ExplosionArmor;
+
         if (HasComp<XenoComponent>(armored))
         {
             args.Args.XenoArmor += armored.Comp.XenoArmor;
