@@ -18,6 +18,8 @@
     - type: Skills
       skills:
         RMCSkillVehicles: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pizza
   hasIcon: false
   hidden: true
 

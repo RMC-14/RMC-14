@@ -35,6 +35,8 @@
         sprite: _RMC14/Interface/cm_job_icons.rsi
         state: hudsquad_pvl
     - type: RMCPointing
+    - type: JobPrefix
+      prefix: rmc-job-prefix-provost-team-leader
   hidden: true
 
 - type: entity

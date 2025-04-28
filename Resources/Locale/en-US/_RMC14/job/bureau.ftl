@@ -9,12 +9,16 @@ rmc-ghost-role-information-icb-description = Oversee trade operations, enforce r
 
 rmc-ghost-name-bureau-marshal = Bureau Marshal (Friendly)
 rmc-job-name-bureau-marshal = Bureau Marshal
+rmc-job-prefix-bureau-marshal = CMB MAR
 
 rmc-ghost-name-bureau-deputy = Bureau Deputy (Friendly)
 rmc-job-name-bureau-deputy = Bureau Deputy
+rmc-job-prefix-bureau-deputy = CMB DEP
 
 rmc-ghost-name-bureau-observer = Interstellar Sapient-Life Rights Observer (Friendly)
 rmc-job-name-bureau-observer = Interstellar Sapient-Life Rights Observer
+rmc-job-prefix-bureau-observer = OBS
 
 rmc-ghost-name-icb = Interstellar Commerce Bureau Liaison (Friendly)
 rmc-job-name-icb = Interstellar Commerce Bureau Liaison
+rmc-job-prefix-icb = ICB

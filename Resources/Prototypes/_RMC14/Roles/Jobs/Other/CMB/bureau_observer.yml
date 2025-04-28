@@ -24,6 +24,8 @@
         RMCSkillMedical: 3
         RMCSkillSurgery: 2
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-bureau-observer
   hidden: true
 
 - type: entity

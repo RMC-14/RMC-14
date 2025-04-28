@@ -7,6 +7,8 @@ rmc-ghost-role-information-corp-exec-description = You are to provide essential 
 
 rmc-ghost-name-corp-exec-specialist = Corporate Executive Specialist (Neutral)
 rmc-job-name-corp-exec-specialist = Corporate Executive Specialist
+rmc-job-prefix-corp-exec-specialist = EXEC SPC
 
 rmc-ghost-name-corp-exec-supervisor = Corporate Executive Supervisor (Neutral)
 rmc-job-name-corp-exec-supervisor = Corporate Executive Supervisor
+rmc-job-prefix-corp-exec-supervisor = EXEC SPR

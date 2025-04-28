@@ -22,6 +22,8 @@
         RMCSkillFireman: 2
         RMCSkillMeleeWeapons: 1
         RMCSkillPolice: 2
+    - type: JobPrefix
+      prefix: rmc-job-prefix-provost-inspector
   hidden: true
 
 - type: entity

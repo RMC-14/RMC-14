@@ -7,3 +7,4 @@ rmc-ghost-role-information-pizza-description = Your job is to deliver your pizza
 
 rmc-ghost-name-pizza = Pizza Deliverer (Neutral)
 rmc-job-name-pizza = Pizza Deliverer
+rmc-job-prefix-pizza = PIZZA

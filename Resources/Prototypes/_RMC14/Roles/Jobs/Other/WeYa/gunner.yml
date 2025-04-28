@@ -31,6 +31,8 @@
         RMCSkillEndurance: 3
         RMCSkillJtac: 1
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-gunner
   hidden: true
 
 - type: entity

@@ -7,3 +7,4 @@ rmc-ghost-role-information-rmc-description = Ensure the survival of the UNS ship
 
 rmc-ghost-name-rmc-sgo = Royal Marines SGO (Friendly)
 rmc-job-name-rmc-sgo = Royal Marines SGO
+rmc-job-prefix-rmc-sgo = RMC SG

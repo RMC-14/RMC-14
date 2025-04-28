@@ -1,4 +1,4 @@
-﻿# HEFA Shrapnelsworn
+﻿# HEFA Granmdmaster
 - type: job
   parent: CMJobBase
   id: RMCHEFAShrapnelsworn
@@ -24,6 +24,8 @@
         RMCSkillJtac: 1
         RMCSkillFirearms: 1
     - type: GrenadeSpecWhitelist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-hefa-grandmaster
   hasIcon: false
   hidden: true
 

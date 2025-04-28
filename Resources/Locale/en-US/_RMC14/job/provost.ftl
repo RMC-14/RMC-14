@@ -8,21 +8,28 @@ rmc-ghost-role-information-provost-squad-description = Ensure compliance with ma
 
 rmc-ghost-name-corp-provost-advisor = Provost Advisor (Friendly)
 rmc-job-name-corp-provost-advisor = Provost Advisor
+rmc-job-prefix-provost-advisor = PvA
 
 rmc-ghost-name-corp-provost-chief = Provost Chief Inspector (Friendly)
 rmc-job-name-corp-provost-chief = Provost Chief Inspector
+rmc-job-prefix-provost-chief = PvCI
 
 rmc-ghost-name-corp-provost-deputy-marshal = Provost Deputy Marshal (Friendly)
 rmc-job-name-corp-provost-deputy-marshal = Provost Deputy Marshal
+rmc-job-prefix-provost-deputy-marshal = PvDM
 
 rmc-ghost-name-corp-provost-enforcer = Provost Enforcer (Friendly)
 rmc-job-name-corp-provost-enforcer = Enforcer
+rmc-job-prefix-provost-enforcer = PvE
 
 rmc-ghost-name-corp-provost-inspector = Provost Inspector (Friendly)
 rmc-job-name-corp-provost-inspector = Provost Inspector
+rmc-job-prefix-provost-inspector = PvI
 
 rmc-ghost-name-corp-provost-marshal = Provost Marshal (Friendly)
 rmc-job-name-corp-provost-marshal = Provost Marshal
+rmc-job-prefix-provost-marshal = PvM
 
 rmc-ghost-name-corp-provost-team-leader = Provost Team Leader (Friendly)
 rmc-job-name-corp-provost-team-leader = Team Leader
+rmc-job-prefix-provost-team-leader = PvTML

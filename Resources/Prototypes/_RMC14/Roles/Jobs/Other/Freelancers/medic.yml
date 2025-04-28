@@ -28,6 +28,8 @@
         RMCSkillMedical: 2
         RMCSkillSurgery: 2
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-freelancer-medic
   hidden: true
 
 - type: entity

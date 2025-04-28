@@ -23,6 +23,8 @@
         RMCSkillMeleeWeapons: 1
         RMCSkillPolice: 2
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-provost-advisor
   hidden: true
 
 - type: entity

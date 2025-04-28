@@ -33,6 +33,8 @@
         RMCSkillJtac: 1
     - type: SniperWhitelist
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-sniper
   hidden: true
 
 - type: entity

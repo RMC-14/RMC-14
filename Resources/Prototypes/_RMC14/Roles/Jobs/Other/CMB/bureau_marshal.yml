@@ -33,6 +33,8 @@
         RMCSkillEndurance: 3
         RMCSkillJtac: 3
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-bureau-marshal
     - type: RMCPointing
     - type: MarineOrders
   hidden: true

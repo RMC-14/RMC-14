@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMJobBase
   id: RMCProvostMarshal
-  name: rmc-job-name-corp-provost-deputy-marshal
+  name: rmc-job-name-corp-provost-marshal
   description: rmc-ghost-role-information-provost-description
   playTimeTracker: CMJobProvostMarshal
   ranks:
@@ -39,6 +39,8 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-provost-marshal
   hidden: true
 
 - type: randomHumanoidSettings
@@ -46,7 +48,7 @@
   id: RMCProvostMarshal
   components:
   - type: GhostRole
-    name: rmc-ghost-name-corp-provost-deputy-marshal
+    name: rmc-ghost-name-corp-provost-marshal
     description: rmc-ghost-role-information-provost-description
     rules: rmc-ghost-role-information-provost-rules
     reregister: false

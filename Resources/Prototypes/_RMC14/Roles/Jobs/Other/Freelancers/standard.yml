@@ -26,6 +26,8 @@
         RMCSkillEngineer: 1
         RMCSkillEndurance: 2
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-freelancer-standard
   hidden: true
 
 - type: entity

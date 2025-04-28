@@ -18,6 +18,8 @@
     - type: Skills
       skills:
         RMCSkillVehicles: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-corp-exec-supervisor
   hasIcon: false
   hidden: true
 
@@ -85,6 +87,8 @@
         RMCSkillEndurance: 2
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-corp-exec-specialist
   hasIcon: false
   hidden: true
 

@@ -34,6 +34,8 @@
     - type: MarineOrders
     - type: SquadArmorWearer
       leader: true
+    - type: JobPrefix
+      prefix: rmc-job-prefix-freelancer-leader
     - type: SquadLeader
       icon:
         sprite: _RMC14/Interface/cm_job_icons.rsi

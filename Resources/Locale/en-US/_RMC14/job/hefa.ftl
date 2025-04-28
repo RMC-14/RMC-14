@@ -9,8 +9,10 @@ rmc-ghost-role-information-hefa-hostile-description = You and your fellow brothe
 rmc-ghost-name-hefa-hostile-grandmaster = HEFA Grandmaster (Hostile)
 rmc-ghost-name-hefa-friendly-grandmaster = HEFA Grandmaster (Friendly)
 rmc-job-name-hefa-grandmaster = HEFA Grandmaster
+rmc-job-prefix-hefa-grandmaster = OHEFA
 
 rmc-ghost-name-hefa-hostile-shrapnelsworn = HEFA Shrapnelsworn (Hostile)
 rmc-ghost-name-hefa-friendly-shrapnelsworn = HEFA Shrapnelsworn (Friendly)
 rmc-job-name-hefa-shrapnelsworn = HEFA Shrapnelsworn
+rmc-job-prefix-hefa-shrapnelsworn = OHEFA
 

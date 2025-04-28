@@ -27,6 +27,8 @@
         RMCSkillJtac: 1
         RMCSkillVehicles: 1
     - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-engineer
   hidden: true
 
 - type: entity

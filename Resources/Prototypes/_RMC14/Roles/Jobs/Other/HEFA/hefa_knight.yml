@@ -6,6 +6,11 @@
   name: rmc-job-name-hefa-shrapnelsworn
   playTimeTracker: CMJobHEFAShrapnelswornMelee
   startingGear: RMCGearHEFAShrapnelswornMelee
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: JobPrefix
+      prefix: rmc-job-prefix-hefa-shrapnelsworn
 
 - type: randomHumanoidSettings
   parent: RMCHEFAShrapnelsworn

@@ -39,6 +39,8 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-provost-deputy-marshal
   hidden: true
 
 - type: entity
