@@ -12,6 +12,7 @@
   - type: ConditionalSpawner
     prototypes:
     - RMCRandomHumanoidCorporateExecutiveSpecialist
+  - type: RMCTrackable
 
 - type: entity
   id: RMCRandomHumanoidCorporateExecutiveSpecialist

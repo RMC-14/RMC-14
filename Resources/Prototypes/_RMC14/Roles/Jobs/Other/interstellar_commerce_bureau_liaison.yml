@@ -12,6 +12,7 @@
   - type: ConditionalSpawner
     prototypes:
     - RMCRandomHumanoidICBLiaison
+  - type: RMCTrackable
 
 - type: entity
   id: RMCRandomHumanoidICBLiaison

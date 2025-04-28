@@ -12,6 +12,7 @@
   - type: ConditionalSpawner
     prototypes:
     - RMCRandomHumanoidBureauObserver
+  - type: RMCTrackable
 
 - type: entity
   id: RMCRandomHumanoidBureauObserver
