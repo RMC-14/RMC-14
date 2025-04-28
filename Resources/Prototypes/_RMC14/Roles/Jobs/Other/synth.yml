@@ -29,7 +29,7 @@
         RMCSkillCqc: 5
         RMCSkillEngineer: 4
         RMCSkillConstruction: 3
-        # RMCSkillFirearms: 2 -- Synths cant use firearms why the fuck do they get the highest skill??
+        RMCSkillFirearms: 2
         RMCSkillOverwatch: 1
         RMCSkillMedical: 4
         RMCSkillSurgery: 3
