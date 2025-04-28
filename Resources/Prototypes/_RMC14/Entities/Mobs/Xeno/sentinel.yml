@@ -10,7 +10,7 @@
   name: Sentinel
   description: A slithery, spitting kind of alien.
   components:
-   - type: GuideHelp
+  - type: GuideHelp
     guides:
     - RMCGuideRoleSentinel
   - type: GhostRole
