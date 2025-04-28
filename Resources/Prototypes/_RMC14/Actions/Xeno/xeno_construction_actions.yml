@@ -98,6 +98,15 @@
   - type: RMCDazeableAction
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoOrderConstruction
+  name: Order Construction
+  description: Starts construction of an important hive structure.
+  components:
+    - type: Sprite
+      state: morph_resin
+
+- type: entity
   id: ActionXenoResinHole
   parent: ActionXenoBase
   name: Plant Resin Hole (200)
