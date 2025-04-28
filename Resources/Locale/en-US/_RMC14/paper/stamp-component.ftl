@@ -5,6 +5,9 @@ stamp-component-stamped-name-cm-marine = Marine High Command
 stamp-component-stamped-name-cm-cmb = Colony Marshal Bureau
 stamp-component-stamped-name-cm-provost = Provost Marshal Office
 stamp-component-stamped-name-cm-clf = Colonial Liberation Front
+stamp-component-stamped-name-cm-spp = Socialist Progressive Peoples
+stamp-component-stamped-name-cm-free-press = Free Press
+stamp-component-stamped-name-cm-tse = Three Suns Empire
 
 stamp-component-stamped-name-cm-xo = Executive Officer
 stamp-component-stamped-name-cm-co = Commanding Officer

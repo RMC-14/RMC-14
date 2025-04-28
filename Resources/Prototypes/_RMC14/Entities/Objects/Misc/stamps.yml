@@ -195,5 +195,44 @@
     state: stamp-clf
   - type: Stamp
     stampedName: stamp-component-stamped-name-cm-clf
-    stampedColor: "#cb0000"
+    stampedColor: "#6B6B6B"
     stampState: "paper_stamp-clf"
+
+- type: entity
+  parent: CMStampBase
+  id: CMStampSPP
+  name: socialist progressive peoples rubber stamp
+  suffix: Admin
+  components:
+  - type: Sprite
+    state: stamp-spp
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-spp
+    stampedColor: "#A70707"
+    stampState: "paper_stamp-spp"
+
+- type: entity
+  parent: CMStampBase
+  id: CMStampTSE
+  name: three suns empire rubber stamp
+  suffix: Admin
+  components:
+  - type: Sprite
+    state: stamp-tse
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-tse
+    stampedColor: "#BE601B"
+    stampState: "paper_stamp-tse"
+
+- type: entity
+  parent: CMStampBase
+  id: CMStampFreePress
+  name: free press rubber stamp
+  suffix: Admin
+  components:
+  - type: Sprite
+    state: stamp-free-press
+  - type: Stamp
+    stampedName: stamp-component-stamped-name-cm-free-press
+    stampedColor: "#EBEBEB"
+    stampState: "paper_stamp-free-press"
