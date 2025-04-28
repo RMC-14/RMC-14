@@ -121,7 +121,7 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
     /// If no valid candidates are found, an appropriate ARES announcement is made.
     /// </summary>
     /// <remarks>
-    ///  We will skip the sleep check since it has only been a couple of minutes and this is not a normal situation for senior roles to fall asleep and we hope he will return soon.
+    ///  We will skip the sleep check for the senior commanders since it has only been a couple of minutes and this is not a normal situation for senior roles to fall asleep and we hope he will return soon.
     /// </remarks>
     private void CommanderSelection()
     {
