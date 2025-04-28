@@ -8,6 +8,9 @@
   name: Queen
   description: A huge, looming alien creature. The biggest and the baddest.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleQueen
   - type: GhostRole
     name: cm-job-name-xeno-queen
   - type: Sprite
