@@ -4,8 +4,8 @@
   abstract: true
   components:
   - type: HideLayerClothing
-    slots:
-    - Snout
+    layers:
+      Snout: Mask
     hideOnToggle: true
 
 - type: entity
@@ -307,3 +307,4 @@
     sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_red.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Keffiyeh/keffiyeh_red.rsi
+    

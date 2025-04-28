@@ -24,6 +24,9 @@ public enum CollisionGroup
     InteractImpassable = 1 << 7, // 128 Blocks interaction/InRangeUnobstructed
     // Y dis door passable when all the others impassable / collision.
     DoorPassable       = 1 << 8, // 256 Allows door to close over top, Like blast doors over conveyors for disposals rooms/cargo.
+
+    // RMC14
+    MobCollision = 1 << 24,
     BarbedBarricade = 1 << 25,
     BarricadeImpassable = 1 << 26,
     XenoProjectileImpassable = 1 << 27,

@@ -344,12 +344,15 @@
 - type: vendingMachineInventory
   id: CMVendorNutri
   startingInventory:
-    EZNutrientChemistryBottle: 35
-    Left4ZedChemistryBottle: 25
-    RobustHarvestChemistryBottle: 15
+    ChemistryBottleEZNutrient: 35
+    ChemistryBottleLeft4Zed: 25
+    ChemistryBottleRobustHarvest: 15
     PestSpray: 20
     Syringe: 5
     PlantBag: 5
+    HydroponicsToolSpade: 3
+    HydroponicsToolHatchet: 3
+    HydroponicsToolScythe: 3
 
 
 # Seeds
@@ -404,52 +407,103 @@
 
 # Dinnerware
 - type: entity
-  parent: CMVendor
+  parent: ColMarTechBaseAnchorable
   id: CMVendorDinnerware
   name: Dinnerware
   description: A kitchen and restaraunt equipment vendor.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/dinnerware.rsi
-  - type: VendingMachine
-    pack: CMVendorDinnerware
-
-- type: vendingMachineInventory
-  id: CMVendorDinnerware
-  startingInventory:
-    # TODO RMC14 Tray: 8
-    RMCFork: 6
-    RMCSpoon: 4
-    RMCKitchenKnife: 5
-    DrinkGlass: 8
-    ClothingOuterApronChef: 2
-    RMCCondimentSmallSalt: 4
-    RMCCondimentSmallPepper: 4
-    RMCCondimentEnzyme: 1
-    RMCCondiment: 8
-    FoodPlateTin: 5
-    FoodBowlBig: 10
-    RMCKitchenKnifeButcher: 1
-    RMCKitchenKnifeChef: 3
-    RMCRollingPin: 4
-    PairedChopsticks: 4
-    FoodPlate: 10
-    FoodPlateSmall: 10
-    FoodPlateMuffinTin: 5
-    FoodKebabSkewer: 5
-    CMBeaker: 5
-    CMBeakerLarge: 5
-    Pitcher: 2
-    DrinkMug: 5
-    DrinkMugBlack: 2
-    DrinkMugBlue: 2
-    DrinkMugGreen: 2
-    DrinkMugHeart: 1
-    DrinkMugMetal: 2
-    DrinkMugMoebius: 1
-    DrinkMugOne: 1
-    DrinkMugRainbow: 2
-    DrinkMugRed: 2
+    snapCardinals: true
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "normal-unshaded"
+      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+      shader: unshaded
+    - state: "panel"
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: ApcPowerReceiver
+    needsPower: false # TODO RMC14
+    powerLoad: 0
+  - type: Appearance
+  - type: LitOnPowered
+  - type: Wires
+    boardName: wires-board-name-vendingmachine
+    layoutId: Vending
+  - type: WiresPanel
+  - type: WiresVisuals
+  - type: CMAutomatedVendor
+    scaling: false
+    sections:
+    - name: Products
+      entries:
+      - id: RMCFork
+        amount: 6
+      - id: RMCSpoon
+        amount: 4
+      - id: RMCKitchenKnife
+        amount: 5
+      - id: DrinkShaker
+        amount: 5
+      - id: DrinkGlass
+        amount: 8
+      - id: ClothingOuterApronChef
+        amount: 2
+      - id: RMCCondimentSmallSalt
+        amount: 4
+      - id: RMCCondimentSmallPepper
+        amount: 4
+      - id: RMCCondimentEnzyme
+        amount: 1
+      - id: RMCCondiment
+        amount: 8
+      - id: FoodPlateTin
+        amount: 5
+      - id: FoodBowlBig
+        amount: 10
+      - id: RMCKitchenKnifeButcher
+        amount: 1
+      - id: RMCKitchenKnifeChef
+        amount: 3
+      - id: RMCRollingPin
+        amount: 4
+      - id: PairedChopsticks
+        amount: 4
+      - id: FoodPlate
+        amount: 10
+      - id: FoodPlateSmall
+        amount: 10
+      - id: FoodPlateMuffinTin
+        amount: 5
+      - id: FoodKebabSkewer
+        amount: 5
+      - id: CMBeaker
+        amount: 5
+      - id: CMBeakerLarge
+        amount: 5
+      - id: Pitcher
+        amount: 2
+      - id: DrinkMug
+        amount: 5
+      - id: DrinkMugBlack
+        amount: 2
+      - id: DrinkMugBlue
+        amount: 2
+      - id: DrinkMugGreen
+        amount: 2
+      - id: DrinkMugHeart
+        amount: 1
+      - id: DrinkMugMetal
+        amount: 2
+      - id: DrinkMugMoebius
+        amount: 1
+      - id: DrinkMugOne
+        amount: 1
+      - id: DrinkMugRainbow
+        amount: 2
+      - id: DrinkMugRed
+        amount: 2
 
 # BODA
 - type: entity
@@ -471,46 +525,79 @@
 
 # Ingridients
 - type: entity
-  parent: CMVendor
+  parent: CMVendorDinnerware
   id: CMVendorIngredients
   name: Galley Auxiliary Storage Requisition System
   description: A vending machine meant to be use for cooks.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/snack.rsi
-  - type: VendingMachine
-    pack: CMVendorIngredient
-
-- type: vendingMachineInventory
-  id: CMVendorIngredient
-  startingInventory:
-    FoodContainerEgg: 12
-    FoodMeatFish: 12
-    FoodMeat: 24
-    DrinkMilkCarton: 24
-    DrinkSoyMilkCarton: 12
-    RMCCondimentEnzyme: 12
-    ReagentContainerFlour: 12
-    RMCCondimentSugar: 12
-    RMCCondimentCornOil: 12
-    RMCCondimentSmallSalt: 12
-    RMCCondimentSmallPepper: 12
+  - type: CMAutomatedVendor
+    scaling: false
+    sections:
+    - name: Products
+      entries:
+      - id: FoodContainerEgg
+        amount: 12
+      - id: FoodMeatFish
+        amount: 12
+      - id: FoodMeat
+        amount: 24
+      - id: DrinkMilkCarton
+        amount: 24
+      - id: DrinkSoyMilkCarton
+        amount: 12
+      - id: RMCCondimentEnzyme
+        amount: 12
+      - id: ReagentContainerFlour
+        amount: 12
+      - id: RMCCondimentSugar
+        amount: 12
+      - id: RMCCondimentCornOil
+        amount: 12
+      - id: RMCCondimentSmallSalt
+        amount: 12
+      - id: RMCCondimentSmallPepper
+        amount: 12
     # TODO RMC14 Mint 12
-    FoodApple: 12
-    FoodBanana: 12
-    FoodMushroom: 12
-    FoodCherry: 12
-    FoodChiliPepper: 12
-    FoodCabbage: 12
-    FoodCarrot: 12
-    FoodCorn: 12
-    FoodEggplant: 12
-    FoodLemon: 12
-    FoodLime: 12
-    FoodOrange: 12
-    FoodPotato: 12
-    FoodTomato: 12
+      - id: FoodApple
+        amount: 12
+      - id: FoodBanana
+        amount: 12
+      - id: FoodMushroom
+        amount: 12
+      - id: FoodCherry
+        amount: 12
+      - id: FoodChiliPepper
+        amount: 12
+      - id: FoodCabbage
+        amount: 12
+      - id: FoodCarrot
+        amount: 12
+      - id: FoodCorn
+        amount: 12
+      - id: FoodEggplant
+        amount: 12
+      - id: FoodLemon
+        amount: 12
+      - id: FoodLime
+        amount: 12
+      - id: FoodOrange
+        amount: 12
+      - id: FoodPotato
+        amount: 12
+      - id: FoodTomato
+        amount: 12
     # TODO RMC14 Whitebeet 12
-    FoodOnion: 12
-    FoodGarlic: 12
-    ReagentContainerRice: 12
+      - id: FoodOnion
+        amount: 12
+      - id: FoodOnionRed
+        amount: 12
+      - id: FoodGarlic
+        amount: 12
+      - id: ReagentContainerRice
+        amount: 12
+      - id: ReagentContainerOliveoil
+        amount: 12
+      - id: FoodCondimentBottleVinegar
+        amount: 12

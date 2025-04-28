@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Barricade.Components;
+using Content.Shared._RMC14.Construction;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
@@ -11,6 +12,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using static Content.Shared.Physics.CollisionGroup;
 
 namespace Content.Shared._RMC14.Entrenching;
@@ -25,6 +27,8 @@ public sealed class BarricadeSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly RMCConstructionSystem _rmcConstruction = default!;
     [Dependency] private readonly SharedStackSystem _stack = default!;
     [Dependency] private readonly ITileDefinitionManager _tiles = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -212,14 +216,12 @@ public sealed class BarricadeSystem : EntitySystem
     private void OnFullActivateInWorld(Entity<FullSandbagComponent> full, ref ActivateInWorldEvent args)
     {
         if (args.Handled || !TryComp(args.User, out TransformComponent? transform))
-        {
             return;
-        }
 
         var coordinates = _transform.GetMoverCoordinates(args.User, transform);
         var direction = transform.LocalRotation.GetCardinalDir();
-        if (Build(full, args.User, coordinates, direction))
-            args.Handled = true;
+        if (Build(full, args.User, coordinates, direction, out var handled))
+            args.Handled = handled;
     }
 
     private void OnFullAfterInteract(Entity<FullSandbagComponent> full, ref AfterInteractEvent args)
@@ -228,8 +230,8 @@ public sealed class BarricadeSystem : EntitySystem
             return;
 
         var direction = transform.LocalRotation.GetCardinalDir();
-        if (Build(full, args.User, args.ClickLocation, direction))
-            args.Handled = true;
+        if (Build(full, args.User, args.ClickLocation, direction, out var handled))
+            args.Handled = handled;
     }
 
     private void OnFullBuildDoAfter(Entity<FullSandbagComponent> full, ref SandbagBuildDoAfterEvent args)
@@ -328,19 +330,23 @@ public sealed class BarricadeSystem : EntitySystem
         return true;
     }
 
-    private bool Build(Entity<FullSandbagComponent> full, EntityUid user, EntityCoordinates coordinates, Direction direction)
+    private bool Build(Entity<FullSandbagComponent> full, EntityUid user, EntityCoordinates coordinates, Direction direction, out bool handled)
     {
+        handled = false;
         if (!_mapManager.TryFindGridAt(_transform.ToMapCoordinates(coordinates), out var gridId, out var gridComp) ||
-            !coordinates.TryGetTileRef(out var tile) ||
-            !CanBuild(full, (gridId, gridComp), user, tile.Value, direction))
+            !coordinates.TryGetTileRef(out var tile))
         {
             return false;
         }
 
+        handled = true;
+        if (!CanBuild(full, (gridId, gridComp), user, tile.Value, direction))
+            return false;
+
         var ev = new SandbagBuildDoAfterEvent(GetNetCoordinates(coordinates), direction);
         var doAfter = new DoAfterArgs(EntityManager, user, full.Comp.BuildDelay, ev, full, full)
         {
-            BreakOnMove = true
+            BreakOnMove = true,
         };
 
         _doAfter.TryStartDoAfter(doAfter);
@@ -424,6 +430,15 @@ public sealed class BarricadeSystem : EntitySystem
             {
                 return false;
             }
+        }
+
+        var name = _prototype.TryIndex(full.Comp.Builds, out var builds) ? builds.Name : Name(full);
+        if (!_rmcConstruction.CanBuildAt(coordinates, name, out var popupStr))
+        {
+            if (popup)
+                _popup.PopupClient(popupStr, user, user, PopupType.SmallCaution);
+
+            return false;
         }
 
         return true;
