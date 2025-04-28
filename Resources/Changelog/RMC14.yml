@@ -1,15 +1,6 @@
 ﻿Entries:
 - author: Vermidia
   changes:
-  - message: 'Fixed Healer salve healing over 10 seconds: It now heals over 5 seconds.'
-    type: Fix
-  - message: Fixed Healer salve cooldown being 1 second instead of 0.5 seconds.
-    type: Fix
-  id: 1158
-  time: '2024-12-26T23:55:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5232
-- author: Vermidia
-  changes:
   - message: Added many more inhands for various items (mostly medical ones)
     type: Add
   id: 1159
@@ -5469,5 +5460,13 @@
   id: 1660
   time: '2025-04-28T23:22:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6298
+- author: MetalSage
+  changes:
+  - message: The name of the current planet map is now included in the server status
+      information (visible in server browsers/external tools).
+    type: Add
+  id: 1661
+  time: '2025-04-28T23:23:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6291
 Name: RMC14
 Order: -1
