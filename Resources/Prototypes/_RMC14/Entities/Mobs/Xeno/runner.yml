@@ -11,6 +11,9 @@
   name: Runner
   description: A small red alien that looks like it could run fairly quickly...
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleRunner
   - type: GhostRole
     name: cm-job-name-xeno-runner
   - type: Sprite
