@@ -17,6 +17,6 @@
   - Senior Enlisted Advisor
   - Warden
   - Military Police
-  - The most senior Squad Leader, if equal in rank, then by squad seniority (Alpha, Bravo, Charlie, Delta, Intelligence, Echo, Foxtrot)
-  - The most senior squad military personnel, if equal in rank, then by squad seniority (Alpha, Bravo, Charlie, Delta, Intelligence, Echo, Foxtrot)
+  - The most senior Squad Leader by rank, if equal in rank, then by squad seniority (Alpha, Bravo, Charlie, Delta, Intelligence, Echo, Foxtrot)
+  - The most senior squad personnel by rank, if equal in rank, then by squad seniority (Alpha, Bravo, Charlie, Delta, Intelligence, Echo, Foxtrot)
 </Document>
