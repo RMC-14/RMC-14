@@ -1,24 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed arachnids not making sounds for some emotes
-    type: Fix
-  id: 1152
-  time: '2024-12-25T05:35:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5226
-- author: DrSmugleaf
-  changes:
-  - message: Fixed northern Solaris having incorrect areas, fixes north-most comms
-      tower not being able to be powered.
-    type: Fix
-  - message: Added an initial delay of 40 minutes before the Queen can call down a
-      dropship or hijack one that is on the landing zone.
-    type: Add
-  - message: Landing zone turrets now start despawning at 20 minutes instead of 15.
-    type: Tweak
-  id: 1153
-  time: '2024-12-25T05:58:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5227
 - author: DrSmugleaf
   changes:
   - message: Fix rementoring as an active mentors ending you duplicate messages.
@@ -5482,5 +5462,19 @@
   id: 1654
   time: '2025-04-26T03:47:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6275
+- author: MetalSage
+  changes:
+  - message: Now you can't get into the tunnels if you're too far away from them.
+    type: Fix
+  id: 1655
+  time: '2025-04-28T23:08:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6295
+- author: MetalSage
+  changes:
+  - message: Correcting the inability of the larva to crawl out of the body
+    type: Fix
+  id: 1656
+  time: '2025-04-28T23:08:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6296
 Name: RMC14
 Order: -1
