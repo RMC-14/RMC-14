@@ -10,9 +10,6 @@
   name: Lurker
   description: A beefy, fast alien with sharp claws.
   components:
-  - type: GuideHelp
-    guides:
-    - RMCGuideRoleLurker
   - type: GhostRole
     name: cm-job-name-xeno-lurker
   - type: Sprite
@@ -103,6 +100,9 @@
   id: CMXenoLurker
   suffix: Base
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleLurker
   - type: XenoLeap
     plasmaCost: 20
     delay: 0
