@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Added many more inhands for various items (mostly medical ones)
-    type: Add
-  id: 1159
-  time: '2025-01-05T01:38:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5296
 - author: SG6732
   changes:
   - message: Made the attachment points for the M59 better match with the sprite.
@@ -5468,5 +5461,18 @@
   id: 1661
   time: '2025-04-28T23:23:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6291
+- author: DummeHytteOst
+  changes:
+  - message: Xenonids can destroy morgues & crematoriums.
+    type: Add
+  - message: You can now climb morgues & crematoriums.
+    type: Add
+  - message: Morgues are no longer unachorable.
+    type: Fix
+  - message: You can now damage hospital dividers, primarily found on hybrisa.
+    type: Fix
+  id: 1662
+  time: '2025-04-28T23:24:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6287
 Name: RMC14
 Order: -1
