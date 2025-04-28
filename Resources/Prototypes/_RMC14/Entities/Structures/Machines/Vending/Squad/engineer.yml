@@ -22,10 +22,10 @@
     - name: Handheld Defense
       takeOne: CMHandheldDefense
       entries:
-    #    CM21STeslaCoil
     #    CMJIMAPlantedFlag
     #    CMUA42FSentryFlamer
       - id: RMCSentry
+      - id: RMCTesla
     - name: Handheld Defense Upgrade
       choices: { CMHandheldDefenseUpgrade: 1 }
       entries:
