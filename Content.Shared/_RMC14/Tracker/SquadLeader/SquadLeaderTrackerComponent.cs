@@ -1,4 +1,5 @@
 ﻿using Content.Shared.Alert;
+using Content.Shared.Roles;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -22,5 +23,8 @@ public sealed partial class SquadLeaderTrackerComponent : Component
     public FireteamData Fireteams = new();
 
     [DataField, AutoNetworkedField]
-    public SquadLeaderTrackerMode Mode = SquadLeaderTrackerMode.SquadLeader;
+    public ProtoId<JobPrototype> Mode;
+
+    [DataField, AutoNetworkedField]
+    public List<ProtoId<JobPrototype>> TrackableRoles = new();
 }
