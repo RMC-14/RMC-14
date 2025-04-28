@@ -5,7 +5,6 @@ using Content.Shared.Body.Part;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
-using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using static Robust.Client.UserInterface.Control;
@@ -51,12 +50,22 @@ public sealed class CMSurgeryBui : BoundUserInterface
             Update(s);
     }
 
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+
+        if (disposing)
+            _window?.Dispose();
+
+        _system.OnRefresh -= RefreshUI;
+    }
+
     private void Update(CMSurgeryBuiState state)
     {
         if (_window == null)
         {
-            _window = this.CreateWindow<CMSurgeryWindow>();
-            _window.OnClose += () => _system.OnRefresh -= RefreshUI;
+            _window = new CMSurgeryWindow();
+            _window.OnClose += Close;
             _window.Title = "Surgery";
 
             _window.PartsButton.OnPressed += _ =>
@@ -413,13 +422,13 @@ public sealed class CMSurgeryBui : BoundUserInterface
     {
         Parts,
         Surgeries,
-        Steps,
+        Steps
     }
 
     private enum StepStatus
     {
         Next,
         Complete,
-        Incomplete,
+        Incomplete
     }
 }

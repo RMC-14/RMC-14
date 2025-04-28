@@ -47,14 +47,7 @@ public sealed partial class GuideReagentGroupEmbed : BoxContainer, IDocumentTag
             return false;
         }
 
-        var includeUpstream = false;
-        if (args.TryGetValue("IncludeUpstream", out var includeUpstreamStr) &&
-            bool.TryParse(includeUpstreamStr, out var include))
-        {
-            includeUpstream = include;
-        }
-
-        var prototypes = (includeUpstream ? _prototype.EnumeratePrototypes<ReagentPrototype>() : _prototype.EnumerateCM<ReagentPrototype>())
+        var prototypes = _prototype.EnumerateCM<ReagentPrototype>()
             .Where(p => p.Group.Equals(group)).OrderBy(p => p.LocalizedName);
         foreach (var reagent in prototypes)
         {

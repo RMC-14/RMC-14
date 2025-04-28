@@ -218,48 +218,75 @@
 
         - to: TableFancyBlack
           steps:
-            - material: FloorCarpetBlack
-              amount: 1
+            - tag: CarpetBlack
+              name: black carpet
+              icon:
+                sprite: Objects/Tiles/tile.rsi
+                state: carpet-black
 
         - to: TableFancyBlue
           steps:
-            - material: FloorCarpetBlue
-              amount: 1
+            - tag: CarpetBlue
+              name: blue carpet
+              icon:
+                sprite: Objects/Tiles/tile.rsi
+                state: carpet-blue
 
         - to: TableFancyCyan
           steps:
-            - material: FloorCarpetCyan
-              amount: 1
+            - tag: CarpetCyan
+              name: cyan carpet
+              icon:
+                sprite: Objects/Tiles/tile.rsi
+                state: carpet-cyan
 
         - to: TableFancyGreen
           steps:
-            - material: FloorCarpetGreen
-              amount: 1
+            - tag: CarpetGreen
+              name: green carpet
+              icon:
+                sprite: Objects/Tiles/tile.rsi
+                state: carpet-green
 
         - to: TableFancyOrange
           steps:
-            - material: FloorCarpetOrange
-              amount: 1
+            - tag: CarpetOrange
+              name: orange carpet
+              icon:
+                sprite: Objects/Tiles/tile.rsi
+                state: carpet-orange
 
         - to: TableFancyPurple
           steps:
-            - material: FloorCarpetPurple
-              amount: 1
+            - tag: CarpetPurple
+              name: purple carpet
+              icon:
+                sprite: Objects/Tiles/tile.rsi
+                state: carpet-purple
 
         - to: TableFancyPink
           steps:
-            - material: FloorCarpetPink
-              amount: 1
+            - tag: CarpetPink
+              name: pink carpet
+              icon:
+                sprite: Objects/Tiles/tile.rsi
+                state: carpet-pink
 
         - to: TableFancyRed
           steps:
-            - material: FloorCarpetRed
-              amount: 1
+            - tag: CarpetRed
+              name: red carpet
+              icon:
+                sprite: Objects/Tiles/tile.rsi
+                state: carpet-red
 
         - to: TableFancyWhite
           steps:
-            - material: FloorCarpetWhite
-              amount: 1
+            - tag: CarpetWhite
+              name: white carpet
+              icon:
+                sprite: Objects/Tiles/tile.rsi
+                state: carpet-white
 
     - node: TableCarpet
       entity: TableCarpet

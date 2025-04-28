@@ -29,7 +29,9 @@ public sealed class DropshipFabricatorBui : BoundUserInterface
     protected override void Open()
     {
         base.Open();
-        _window = this.CreateWindow<DropshipFabricatorWindow>();
+        _window = new DropshipFabricatorWindow();
+        _window.OnClose += Close;
+
         _window.EquipmentLabel.SetMarkupPermissive(Loc.GetString("rmc-dropship-fabricator-equipment"));
         _window.AmmoLabel.SetMarkupPermissive(Loc.GetString("rmc-dropship-fabricator-ammo"));
 
@@ -70,6 +72,8 @@ public sealed class DropshipFabricatorBui : BoundUserInterface
             else
                 _window.AmmoContainer.AddChild(container);
         }
+
+        _window.OpenCentered();
     }
 
     public void Refresh()
@@ -79,5 +83,13 @@ public sealed class DropshipFabricatorBui : BoundUserInterface
 
         if (EntMan.TryGetComponent(Owner, out DropshipFabricatorComponent? fabricator))
             _window.PointsLabel.Text = Loc.GetString("rmc-dropship-fabricator-points", ("points", fabricator.Points));
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+
+        if (disposing)
+            _window?.Dispose();
     }
 }

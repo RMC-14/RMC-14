@@ -1,12 +1,11 @@
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization;
 
 namespace Content.Shared.NPC.Prototypes;
 
 /// <summary>
 /// Contains data about this faction's relations with other factions.
 /// </summary>
-[Prototype]
+[Prototype("npcFaction")]
 public sealed partial class NpcFactionPrototype : IPrototype
 {
     [ViewVariables]
@@ -23,7 +22,6 @@ public sealed partial class NpcFactionPrototype : IPrototype
 /// <summary>
 /// Cached data for the faction prototype. Is modified at runtime, whereas the prototype is not.
 /// </summary>
-[Serializable, NetSerializable]
 public record struct FactionData
 {
     [ViewVariables]

@@ -73,7 +73,8 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
                 continue;
 
             hive.LateJoinMarines -= lateJoinsPer;
-            IncreaseBurrowedLarva((uid, hive), 1);
+            hive.BurrowedLarva++;
+            Dirty(uid, hive);
         }
     }
 

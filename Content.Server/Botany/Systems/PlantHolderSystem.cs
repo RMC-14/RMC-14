@@ -23,9 +23,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Content.Server.Labels.Components;
-using Content.Shared.Administration.Logs;
 using Content.Shared.Containers.ItemSlots;
-using Content.Shared.Database;
 
 namespace Content.Server.Botany.Systems;
 
@@ -44,14 +42,10 @@ public sealed class PlantHolderSystem : EntitySystem
     [Dependency] private readonly RandomHelperSystem _randomHelper = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
 
 
     public const float HydroponicsSpeedMultiplier = 1f;
     public const float HydroponicsConsumptionMultiplier = 2f;
-
-    private static readonly ProtoId<TagPrototype> HoeTag = "Hoe";
-    private static readonly ProtoId<TagPrototype> PlantSampleTakerTag = "PlantSampleTaker";
 
     public override void Initialize()
     {
@@ -194,9 +188,6 @@ public sealed class PlantHolderSystem : EntitySystem
                 CheckLevelSanity(uid, component);
                 UpdateSprite(uid, component);
 
-                if (seed.PlantLogImpact != null)
-                    _adminLogger.Add(LogType.Botany, seed.PlantLogImpact.Value, $"{ToPrettyString(args.User):player} planted  {Loc.GetString(seed.Name):seed} at Pos:{Transform(uid).Coordinates}.");
-
                 return;
             }
 
@@ -206,7 +197,7 @@ public sealed class PlantHolderSystem : EntitySystem
             return;
         }
 
-        if (_tagSystem.HasTag(args.Used, HoeTag))
+        if (_tagSystem.HasTag(args.Used, "Hoe"))
         {
             args.Handled = true;
             if (component.WeedLevel > 0)
@@ -246,7 +237,7 @@ public sealed class PlantHolderSystem : EntitySystem
             return;
         }
 
-        if (_tagSystem.HasTag(args.Used, PlantSampleTakerTag))
+        if (_tagSystem.HasTag(args.Used, "PlantSampleTaker"))
         {
             args.Handled = true;
             if (component.Seed == null)

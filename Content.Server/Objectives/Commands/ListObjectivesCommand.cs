@@ -5,7 +5,6 @@ using Content.Shared.Mind;
 using Content.Shared.Objectives.Systems;
 using Robust.Server.Player;
 using Robust.Shared.Console;
-using Robust.Shared.Player;
 
 namespace Content.Server.Objectives.Commands
 {
@@ -19,13 +18,8 @@ namespace Content.Server.Objectives.Commands
 
         public override void Execute(IConsoleShell shell, string argStr, string[] args)
         {
-            ICommonSession? player;
-            if (args.Length > 0)
-                _players.TryGetSessionByUsername(args[0], out player);
-            else
-                player = shell.Player;
-
-            if (player == null)
+            var player = shell.Player;
+            if (player == null || !_players.TryGetSessionByUsername(args[0], out player))
             {
                 shell.WriteError(LocalizationManager.GetString("shell-target-player-does-not-exist"));
                 return;

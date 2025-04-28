@@ -1,6 +1,5 @@
 ﻿using System.Numerics;
 using Content.Shared._RMC14.CCVar;
-using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
 using Content.Shared.Interaction.Events;
@@ -18,7 +17,6 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
 {
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly INetConfigurationManager _netConfig = default!;
-    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -85,14 +83,11 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
 
         var comp = ent.Comp;
 
-        args.BonusDamage = _skills.ApplyMeleeSkillModifier(args.User, args.BonusDamage);
-        var totalDamage = args.BaseDamage + args.BonusDamage;
-
         foreach (var hit in args.HitEntities)
         {
             if (_whitelist.IsValid(comp.Whitelist, hit))
             {
-                var damage = totalDamage * comp.Multiplier;
+                var damage = args.BaseDamage * comp.Multiplier;
                 args.BonusDamage += damage;
                 break;
             }

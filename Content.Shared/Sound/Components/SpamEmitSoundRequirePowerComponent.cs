@@ -5,4 +5,6 @@ namespace Content.Shared.Sound.Components;
 /// on the powered state of the entity.
 /// </summary>
 [RegisterComponent]
-public sealed partial class SpamEmitSoundRequirePowerComponent : Component;
+public sealed partial class SpamEmitSoundRequirePowerComponent : Component
+{
+}

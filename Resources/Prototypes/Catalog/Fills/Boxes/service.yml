@@ -23,11 +23,11 @@
     contents:
     - id: PaperAgrichemManual
     - id: ChemistryEmptyBottle01
-    - id: ChemistryBottlePotassium
-    - id: ChemistryBottlePhosphorus
-    - id: ChemistryBottleNitrogen
-    - id: ChemistryBottleHydrogen
-    - id: ChemistryBottleEthanol
+    - id: PotassiumChemistryBottle
+    - id: PhosphorusChemistryBottle
+    - id: NitrogenChemistryBottle
+    - id: HydrogenChemistryBottle
+    - id: EthanolChemistryBottle
     - id: RadiumChemistryVial
     - id: ChlorineChemistryVial
   - type: Sprite

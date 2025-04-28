@@ -1,7 +1,8 @@
-using Content.Shared.Atmos;
+﻿using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Atmos.Piping.Binary.Components;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Localizations;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 
@@ -11,13 +12,17 @@ namespace Content.Client.Atmos.UI;
 /// Initializes a <see cref="GasPressurePumpWindow"/> and updates it when new server messages are received.
 /// </summary>
 [UsedImplicitly]
-public sealed class GasPressurePumpBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed class GasPressurePumpBoundUserInterface : BoundUserInterface
 {
     [ViewVariables]
     private const float MaxPressure = Atmospherics.MaxOutputPressure;
 
     [ViewVariables]
     private GasPressurePumpWindow? _window;
+
+    public GasPressurePumpBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+    {
+    }
 
     protected override void Open()
     {
@@ -30,7 +35,7 @@ public sealed class GasPressurePumpBoundUserInterface(EntityUid owner, Enum uiKe
         Update();
     }
 
-    public override void Update()
+    public void Update()
     {
         if (_window == null)
             return;
@@ -47,9 +52,7 @@ public sealed class GasPressurePumpBoundUserInterface(EntityUid owner, Enum uiKe
 
     private void OnToggleStatusButtonPressed()
     {
-        if (_window is null)
-            return;
-
+        if (_window is null) return;
         SendPredictedMessage(new GasPressurePumpToggleStatusMessage(_window.PumpStatus));
     }
 

@@ -230,6 +230,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
         }
 
         _solution.SplitSolution(solutionEnt.Value, args.Amount);
+        Log.Info(solutionEnt.Value.Comp.Solution.Volume.ToString());
         DispenserUpdated(ent);
     }
 

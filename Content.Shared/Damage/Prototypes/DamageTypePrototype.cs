@@ -5,7 +5,7 @@ namespace Content.Shared.Damage.Prototypes
     /// <summary>
     ///     A single damage type. These types are grouped together in <see cref="DamageGroupPrototype"/>s.
     /// </summary>
-    [Prototype]
+    [Prototype("damageType")]
     public sealed partial class DamageTypePrototype : IPrototype
     {
         [IdDataField]

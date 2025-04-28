@@ -1,4 +1,4 @@
-using Content.Shared.Clothing.EntitySystems;
+﻿using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;

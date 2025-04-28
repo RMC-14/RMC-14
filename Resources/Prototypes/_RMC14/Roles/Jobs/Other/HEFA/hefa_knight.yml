@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMHEFAShrapnelsworn
-  name: CMHEFAShrapnelsworn
+  name: cm-job-name-hefa-shrapnelsworn
   description: cm-job-description-hefa-shrapnelsworn
   playTimeTracker: CMJobHEFAShrapnelsworn
   ranks:
@@ -47,11 +47,30 @@
     settings: RMCHEFAShrapnelsworn
 
 - type: randomHumanoidSettings
-  parent: RMCSettingsGhostRole
+  parent: EventHumanoid
   id: RMCHEFAShrapnelsworn
   components:
-  - type: RMCJobSpawner
-    job: CMHEFAShrapnelsworn
+  - type: GhostRole
+    name: rmc-ghost-role-information-hefa-shrapnelsworn-name
+    description: rmc-ghost-role-information-hefa-shrapnelsworn-description
+    rules: ghost-role-information-default-rules
+    raffle:
+      settings: short
+  - type: Loadout
+    prototypes: [ RMCGearHEFAShrapnelsworn ]
+  - type: Skills
+    skills:
+      RMCSkillFireman: 1
+      RMCSkillCqc: 1
+      RMCSkillConstruction: 1
+      RMCSkillEngineer: 1
+      RMCSkillMeleeWeapons: 1
+      RMCSkillEndurance: 2
+      RMCSkillJtac: 1
+      RMCSkillFirearms: 1
+  - type: JobPrefix
+    prefix: cm-job-prefix-hefa-shrapnelsworn
+  - type: GrenadeSpecWhitelist
   - type: RandomMetadata
     nameSegments:
     - RMCNamesHEFA

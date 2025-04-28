@@ -1,1 +1,1 @@
-﻿bodyburn-text-others = {CAPITALIZE(THE($name))} burns to ash!
+﻿bodyburn-text-others = {$name} burns to ash!

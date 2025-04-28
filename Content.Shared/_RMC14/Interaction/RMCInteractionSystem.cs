@@ -16,7 +16,7 @@ public sealed class RMCInteractionSystem : EntitySystem
     {
         SubscribeLocalEvent<InteractedBlacklistComponent, GettingInteractedWithAttemptEvent>(OnBlacklistInteractionAttempt);
         SubscribeLocalEvent<NoHandsInteractionBlockedComponent, GettingInteractedWithAttemptEvent>(OnNoHandsInteractionAttempt);
-        SubscribeLocalEvent<InsertBlacklistComponent, ContainerIsInsertingAttemptEvent>(OnInsertBlacklistContainerIsInsertingAttempt);
+        SubscribeLocalEvent<InsertBlacklistComponent, ContainerGettingInsertedAttemptEvent>(OnInsertBlacklistContainerInsertedAttempt);
         SubscribeLocalEvent<IgnoreInteractionRangeComponent, InRangeOverrideEvent>(OnInRangeOverride);
     }
 
@@ -41,7 +41,7 @@ public sealed class RMCInteractionSystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private void OnInsertBlacklistContainerIsInsertingAttempt(Entity<InsertBlacklistComponent> ent, ref ContainerIsInsertingAttemptEvent args)
+    private void OnInsertBlacklistContainerInsertedAttempt(Entity<InsertBlacklistComponent> ent, ref ContainerGettingInsertedAttemptEvent args)
     {
         if (args.Cancelled || ent.Comp.Blacklist is not { } blacklist)
             return;

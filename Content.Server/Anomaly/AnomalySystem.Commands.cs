@@ -44,10 +44,10 @@ public sealed partial class AnomalySystem
         if (!NetEntity.TryParse(args[0], out var uidNet) || !TryGetEntity(uidNet, out var uid))
             return;
 
-        if (!TryComp<AnomalyComponent>(uid, out var anomaly))
+        if (!HasComp<AnomalyComponent>(uid))
             return;
 
-        StartSupercriticalEvent((uid.Value, anomaly));
+        StartSupercriticalEvent(uid.Value);
     }
 
     private CompletionResult GetAnomalyCompletion(IConsoleShell shell, string[] args)

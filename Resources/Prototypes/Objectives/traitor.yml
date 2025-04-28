@@ -7,7 +7,8 @@
     issuer: objective-issuer-syndicate
   - type: RoleRequirement
     roles:
-    - TraitorRole
+      mindRoles:
+      - TraitorRole
 
 - type: entity
   abstract: true

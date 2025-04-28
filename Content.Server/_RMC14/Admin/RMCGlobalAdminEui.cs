@@ -5,7 +5,6 @@ using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared.Administration;
 using Content.Shared.Eui;
-using Content.Shared.NPC.Systems;
 
 namespace Content.Server._RMC14.Admin;
 
@@ -15,7 +14,6 @@ public sealed class RMCGlobalAdminEui : BaseEui
     [Dependency] private readonly IEntityManager _entities = default!;
 
     private readonly SquadSystem _squad;
-    private readonly NpcFactionSystem _faction;
 
     private Guid _tacticalMapLines;
 
@@ -23,7 +21,6 @@ public sealed class RMCGlobalAdminEui : BaseEui
     {
         IoCManager.InjectDependencies(this);
         _squad = _entities.System<SquadSystem>();
-        _faction = _entities.System<NpcFactionSystem>();
     }
 
     public override void Opened()
@@ -62,29 +59,6 @@ public sealed class RMCGlobalAdminEui : BaseEui
             case RMCAdminRequestTacticalMapHistory history:
             {
                 _tacticalMapLines = history.Id;
-                StateDirty();
-                break;
-            }
-            case RMCAdminFactionMsg factionChange:
-            {
-                switch (factionChange.Type)
-                {
-                    case RMCAdminFactionMsgType.Friendly:
-                    {
-                        _faction.RealMakeFriendly(factionChange.Left, factionChange.Right);
-                        break;
-                    }
-                    case RMCAdminFactionMsgType.Neutral:
-                    {
-                        _faction.RealMakeNeutral(factionChange.Left, factionChange.Right);
-                        break;
-                    }
-                    case RMCAdminFactionMsgType.Hostile:
-                    {
-                        _faction.RealMakeHostile(factionChange.Left, factionChange.Right);
-                        break;
-                    }
-                }
                 StateDirty();
                 break;
             }

@@ -5,7 +5,6 @@
   - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
-  - RMCXenoMobCollision
   id: CMXenoWarrior
   name: Warrior
   description: A beefy alien with an armored carapace.
@@ -38,7 +37,6 @@
     tier: 2
     hudOffset: -0.15,0.25
     unlockAt: 540 # 9 minutes
-  - type: XenoRegen
     restHealMultiplier:  1.4
   - type: XenoLight
   - type: XenoDevolve

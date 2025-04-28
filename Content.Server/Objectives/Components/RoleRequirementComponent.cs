@@ -1,6 +1,5 @@
 using Content.Server.Objectives.Systems;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Generic;
+using Content.Shared.Whitelist;
 
 namespace Content.Server.Objectives.Components;
 
@@ -11,9 +10,6 @@ namespace Content.Server.Objectives.Components;
 [RegisterComponent, Access(typeof(RoleRequirementSystem))]
 public sealed partial class RoleRequirementComponent : Component
 {
-    /// <summary>
-    /// Mind role component whitelist.
-    /// </summary>
-    [DataField(required: true, customTypeSerializer: typeof(CustomHashSetSerializer<string, ComponentNameSerializer>))]
-    public HashSet<string> Roles = new();
+    [DataField(required: true), ViewVariables(VVAccess.ReadWrite)]
+    public EntityWhitelist Roles = new();
 }

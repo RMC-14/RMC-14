@@ -125,7 +125,7 @@
     - id: HydroponicsToolMiniHoe
     - id: HydroponicsToolSpade
     - id: HydroponicsToolClippers
-    - id: ChemistryBottleRobustHarvest
+    - id: RobustHarvestChemistryBottle
 
 - type: entity
   id: ClothingBeltSheathFilled
@@ -165,11 +165,11 @@
   components:
   - type: StorageFill
     contents:
-      - id: ChemistryBottleEpinephrine
+      - id: EpinephrineChemistryBottle
         amount: 2
-      - id: ChemistryBottleEphedrine
+      - id: EphedrineChemistryBottle
         amount: 2
-      - id: ChemistryBottleOmnizine
+      - id: OmnizineChemistryBottle
       - id: MedkitCombatFilled
 
 - type: entity

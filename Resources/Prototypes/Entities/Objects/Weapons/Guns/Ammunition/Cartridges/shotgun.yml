@@ -73,7 +73,7 @@
 
 - type: entity
   id: ShellShotgun
-  name: shell (.50 pellet)
+  name: shell (.50)
   parent: [ BaseShellShotgun, BaseSecurityContraband ]
   components:
   - type: Sprite

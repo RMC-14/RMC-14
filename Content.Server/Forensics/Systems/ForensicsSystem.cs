@@ -138,11 +138,6 @@ namespace Content.Server.Forensics
             {
                 dest.Fingerprints.Add(print);
             }
-
-            foreach (var residue in src.Residues)
-            {
-                dest.Residues.Add(residue);
-            }
         }
 
         public List<string> GetSolutionsDNA(EntityUid uid)

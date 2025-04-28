@@ -51,7 +51,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
+        damage: 50
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
@@ -100,8 +100,6 @@
     virtualRight: RMCVirtualCrateRight
     virtualLeft: RMCVirtualCrateLeft
   - type: RMCCanBeFultoned
-  - type: ReceiverXenoClaws
-    minimumClawStrength: ImpossiblySharp
 
 - type: entity
   parent: RMCCrateBase

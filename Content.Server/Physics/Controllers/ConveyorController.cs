@@ -1,7 +1,8 @@
+using Content.Server.DeviceLinking.Events;
 using Content.Server.DeviceLinking.Systems;
 using Content.Server.Materials;
+using Content.Server.Power.Components;
 using Content.Shared.Conveyor;
-using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Destructible;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
@@ -9,6 +10,7 @@ using Content.Shared.Physics.Controllers;
 using Content.Shared.Power;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Collision.Shapes;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 
 namespace Content.Server.Physics.Controllers;
@@ -18,6 +20,7 @@ public sealed class ConveyorController : SharedConveyorController
     [Dependency] private readonly FixtureSystem _fixtures = default!;
     [Dependency] private readonly DeviceLinkSystem _signalSystem = default!;
     [Dependency] private readonly MaterialReclaimerSystem _materialReclaimer = default!;
+    [Dependency] private readonly SharedBroadphaseSystem _broadphase = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
@@ -37,7 +40,7 @@ public sealed class ConveyorController : SharedConveyorController
     {
         _signalSystem.EnsureSinkPorts(uid, component.ReversePort, component.ForwardPort, component.OffPort);
 
-        if (PhysicsQuery.TryComp(uid, out var physics))
+        if (TryComp<PhysicsComponent>(uid, out var physics))
         {
             var shape = new PolygonShape();
             shape.SetAsBox(0.55f, 0.55f);
@@ -54,7 +57,7 @@ public sealed class ConveyorController : SharedConveyorController
         if (MetaData(uid).EntityLifeStage >= EntityLifeStage.Terminating)
             return;
 
-        if (!PhysicsQuery.TryComp(uid, out var physics))
+        if (!TryComp<PhysicsComponent>(uid, out var physics))
             return;
 
         _fixtures.DestroyFixture(uid, ConveyorFixture, body: physics);
@@ -84,11 +87,13 @@ public sealed class ConveyorController : SharedConveyorController
 
         else if (args.Port == component.ForwardPort)
         {
+            AwakenEntities(uid, component);
             SetState(uid, ConveyorState.Forward, component);
         }
 
         else if (args.Port == component.ReversePort)
         {
+            AwakenEntities(uid, component);
             SetState(uid, ConveyorState.Reverse, component);
         }
     }
@@ -103,10 +108,8 @@ public sealed class ConveyorController : SharedConveyorController
 
         component.State = state;
 
-        if (state != ConveyorState.Off)
-        {
-            WakeConveyed(uid);
-        }
+        if (TryComp<PhysicsComponent>(uid, out var physics))
+            _broadphase.RegenerateContacts((uid, physics));
 
         UpdateAppearance(uid, component);
         Dirty(uid, component);
@@ -114,29 +117,29 @@ public sealed class ConveyorController : SharedConveyorController
 
     /// <summary>
     /// Awakens sleeping entities on the conveyor belt's tile when it's turned on.
-    /// Need this as we might activate under CollisionWake entities and need to forcefully check them.
+    /// Fixes an issue where non-hard/sleeping entities refuse to wake up + collide if a belt is turned off and on again.
     /// </summary>
-    protected override void AwakenConveyor(Entity<TransformComponent?> ent)
+    private void AwakenEntities(EntityUid uid, ConveyorComponent component)
     {
-        if (!XformQuery.Resolve(ent.Owner, ref ent.Comp))
-            return;
+        var xformQuery = GetEntityQuery<TransformComponent>();
+        var bodyQuery = GetEntityQuery<PhysicsComponent>();
 
-        var xform = ent.Comp;
+        if (!xformQuery.TryGetComponent(uid, out var xform))
+            return;
 
         var beltTileRef = xform.Coordinates.GetTileRef(EntityManager, MapManager);
 
         if (beltTileRef != null)
         {
-            Intersecting.Clear();
-            Lookup.GetLocalEntitiesIntersecting(beltTileRef.Value.GridUid, beltTileRef.Value.GridIndices, Intersecting, 0f, flags: LookupFlags.Dynamic | LookupFlags.Sundries | LookupFlags.Approximate);
+            var intersecting = Lookup.GetLocalEntitiesIntersecting(beltTileRef.Value, 0f);
 
-            foreach (var entity in Intersecting)
+            foreach (var entity in intersecting)
             {
-                if (!PhysicsQuery.TryGetComponent(entity, out var physics))
+                if (!bodyQuery.TryGetComponent(entity, out var physics))
                     continue;
 
                 if (physics.BodyType != BodyType.Static)
-                    PhysicsSystem.WakeBody(entity, body: physics);
+                    Physics.WakeBody(entity, body: physics);
             }
         }
     }

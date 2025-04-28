@@ -3,6 +3,7 @@ using Content.Client._RMC14.UserInterface;
 using Content.Shared._RMC14.Intel.Tech;
 using Content.Shared.FixedPoint;
 using JetBrains.Annotations;
+using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.Utility;
@@ -12,6 +13,8 @@ namespace Content.Client._RMC14.Intel;
 [UsedImplicitly]
 public sealed class TechControlConsoleBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
+    [Dependency] private readonly IResourceCache _resourceCache = default!;
+
     private TechControlConsoleWindow? _window;
     private TechControlConsoleOptionWindow? _optionWindow;
 
@@ -85,7 +88,7 @@ public sealed class TechControlConsoleBui(EntityUid owner, Enum uiKey) : BoundUs
             _optionWindow = null;
         }
 
-        _optionWindow = this.CreateWindow<TechControlConsoleOptionWindow>();
+        _optionWindow = new TechControlConsoleOptionWindow();
         _optionWindow.OnClose += () => _optionWindow = null;
         _optionWindow.Title = option.Name;
         _optionWindow.CurrentPointsLabel.Text = $"Tech points: {points.Double():F1}";
@@ -114,5 +117,6 @@ public sealed class TechControlConsoleBui(EntityUid owner, Enum uiKey) : BoundUs
             _optionWindow.Close();
         };
         _optionWindow.PurchaseButton.Disabled = !canPurchase;
+        _optionWindow.OpenCentered();
     }
 }

@@ -5,7 +5,7 @@ namespace Content.Shared.Procedural.Loot;
 /// <summary>
 /// Spawned inside of a salvage mission.
 /// </summary>
-[Prototype]
+[Prototype("salvageLoot")]
 public sealed partial class SalvageLootPrototype : IPrototype
 {
     [IdDataField] public string ID { get; private set; } = default!;

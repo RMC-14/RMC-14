@@ -43,13 +43,5 @@ namespace Content.Server.Administration.Commands
 
             _entities.System<MindSystem>().ControlMob(player.UserId, target.Value);
         }
-
-        public CompletionResult GetCompletion(IConsoleShell shell, string[] args)
-        {
-            if (args.Length != 1)
-                return CompletionResult.Empty;
-
-            return CompletionResult.FromOptions(CompletionHelper.NetEntities(args[0], entManager: _entities));
-        }
     }
 }

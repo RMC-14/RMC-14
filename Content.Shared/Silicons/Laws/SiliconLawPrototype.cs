@@ -77,7 +77,7 @@ public partial class SiliconLaw : IComparable<SiliconLaw>, IEquatable<SiliconLaw
 /// <summary>
 /// This is a prototype for a law governing the behavior of silicons.
 /// </summary>
-[Prototype]
+[Prototype("siliconLaw")]
 [Serializable, NetSerializable]
 public sealed partial class SiliconLawPrototype : SiliconLaw, IPrototype
 {

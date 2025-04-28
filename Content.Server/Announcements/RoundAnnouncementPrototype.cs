@@ -6,7 +6,7 @@ namespace Content.Server.Announcements;
 /// <summary>
 /// Used for any announcements on the start of a round.
 /// </summary>
-[Prototype]
+[Prototype("roundAnnouncement")]
 public sealed partial class RoundAnnouncementPrototype : IPrototype
 {
     [IdDataField]

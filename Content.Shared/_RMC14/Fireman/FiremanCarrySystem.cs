@@ -32,8 +32,6 @@ public sealed class FiremanCarrySystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
-    private readonly List<(EntityUid Target, EntityUid Carrier)> _toReparent = new();
-
     public override void Initialize()
     {
         SubscribeLocalEvent<FiremanCarriableComponent, CanDragEvent>(OnCarriableCanDrag);
@@ -110,9 +108,6 @@ public sealed class FiremanCarrySystem : EntitySystem
             return;
 
         if (!TryComp(user, out CanFiremanCarryComponent? carrier))
-            return;
-
-        if (_transform.IsParentOf(Transform(ent.Owner), user))
             return;
 
         ent.Comp.BeingCarried = true;
@@ -225,7 +220,7 @@ public sealed class FiremanCarrySystem : EntitySystem
 
     private void OnCarrierPullStopped(Entity<CanFiremanCarryComponent> ent, ref PullStoppedMessage args)
     {
-        if (ent.Owner == args.PullerUid)
+        if (ent.Owner == args.PullerUid && ent.Comp.Carrying == args.PulledUid)
             StopPull(ent, args.PulledUid);
     }
 
@@ -299,7 +294,9 @@ public sealed class FiremanCarrySystem : EntitySystem
                 target.Comp.BeingCarried = false;
                 Dirty(target);
 
-                _toReparent.Add((target, user));
+                var parent = CompOrNull<TransformComponent>(user)?.ParentUid ??
+                             _transform.GetMoverCoordinates(target).EntityId;
+                _transform.SetParent(target, parent);
             }
 
             _standing.Stand(target);
@@ -312,37 +309,5 @@ public sealed class FiremanCarrySystem : EntitySystem
         return _rmcPulling.IsBeingPulled(target, out var user) &&
                TryComp(user, out CanFiremanCarryComponent? carrier) &&
                carrier.AggressiveGrab;
-    }
-
-    public override void Update(float frameTime)
-    {
-        try
-        {
-            foreach (var (target, carrier) in _toReparent)
-            {
-                if (TerminatingOrDeleted(target))
-                    continue;
-
-                if (TerminatingOrDeleted(carrier))
-                {
-                    var coordinates = _transform.GetMoverCoordinates(target);
-                    if (TerminatingOrDeleted(coordinates.EntityId))
-                        continue;
-
-                    _transform.SetCoordinates(target, coordinates);
-                    continue;
-                }
-
-                var parent = _transform.GetMoverCoordinates(target).EntityId;
-                if (target == parent)
-                    continue;
-
-                _transform.SetParent(target, parent);
-            }
-        }
-        finally
-        {
-            _toReparent.Clear();
-        }
     }
 }

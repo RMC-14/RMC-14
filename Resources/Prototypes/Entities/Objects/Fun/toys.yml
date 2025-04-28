@@ -358,9 +358,7 @@
     speechVerb: Reptilian # for pais (In the secret stash)
   - type: Tag
     tags:
-    - ClothMade
-    - Payload
-    - PlushieLizard
+      - PlushieLizard
 
 - type: entity
   parent: PlushieLizard
@@ -791,8 +789,6 @@
   components:
   - type: Sprite
     state: plushie_snake
-  - type: Item
-    heldPrefix: plushiesnake
   - type: EmitSoundOnUse
     sound:
       path: /Audio/Items/Toys/rattle.ogg
@@ -816,13 +812,6 @@
     wideAnimationRotation: 180
     soundHit:
       path: /Audio/Items/Toys/rattle.ogg
-  - type: Clothing
-    quickEquip: false
-    equippedPrefix: plushiesnake
-    slots:
-    - NECK
-  - type: Speech
-    speechVerb: Reptilian # for pais (In the secret stash)
 
 - type: entity
   parent: BasePlushie

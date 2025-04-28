@@ -25,7 +25,7 @@
     settings: RMCBureauObserver
 
 - type: randomHumanoidSettings
-  parent: RMCEventHumanoid
+  parent: EventHumanoid
   id: RMCBureauObserver
   components:
   - type: GhostRole

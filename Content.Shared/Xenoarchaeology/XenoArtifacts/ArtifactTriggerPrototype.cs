@@ -8,7 +8,7 @@ namespace Content.Shared.Xenoarchaeology.XenoArtifacts;
 /// <summary>
 /// This is a prototype for...
 /// </summary>
-[Prototype]
+[Prototype("artifactTrigger")]
 [DataDefinition]
 public sealed partial class ArtifactTriggerPrototype : IPrototype
 {

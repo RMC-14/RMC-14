@@ -1,29 +1,35 @@
 using Content.Shared._RMC14.Chemistry.ChemMaster;
 using JetBrains.Annotations;
-using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 
 namespace Content.Client._RMC14.Chemistry.PillBottle;
 
 [UsedImplicitly]
-public sealed class RMCChangePillBottleColorBui(EntityUid owner, Enum key) : BoundUserInterface(owner, key)
+public sealed partial class RMCChangePillBottleColorBui : BoundUserInterface
 {
     private RMCChangePillBottleColorWindow? _window;
     private List<string> _selectableColorNames = new();
+    private int _selectedColor = -1;
+    public RMCChangePillBottleColorBui(EntityUid owner, Enum key) : base(owner, key)
+    {
+    }
 
     protected override void Open()
     {
         base.Open();
-        _window = this.CreateWindow<RMCChangePillBottleColorWindow>();
+        _window = new RMCChangePillBottleColorWindow(this);
+        _window.OnClose += Close;
+        _window.OpenCentered();
 
         var colorNames = Enum.GetNames<PillbottleColor>();
 
-        _selectableColorNames = new List<string>(colorNames);
+        _selectableColorNames = new(colorNames);
 
         var searchBar = _window.SearchBar;
         var colorList = _window.SelectableColors;
 
         colorList.OnItemSelected += OnPillbottleColorSelect;
+        colorList.OnItemDeselected += OnPillbottleColorDeselect;
 
         searchBar.OnTextChanged += (_) => UpdatePillbottleColorsList(searchBar.Text);
         UpdatePillbottleColorsList();
@@ -33,11 +39,16 @@ public sealed class RMCChangePillBottleColorBui(EntityUid owner, Enum key) : Bou
     {
         var newSelectedColor = (PillbottleColor)args.ItemList[args.ItemIndex].Metadata!;
 
-        if (newSelectedColor is var newColor)
+        if (newSelectedColor is { } newColor)
         {
             ChangeColor(newColor);
             Close();
         }
+    }
+
+    private void OnPillbottleColorDeselect(ItemList.ItemListDeselectedEventArgs args)
+    {
+
     }
 
     private void UpdatePillbottleColorsList(string? filter = null)
@@ -49,8 +60,9 @@ public sealed class RMCChangePillBottleColorBui(EntityUid owner, Enum key) : Bou
         var colorList = _window.SelectableColors;
         colorList.Clear();
 
-        foreach (var colorName in _selectableColorNames)
+        for (var i = 0; i < _selectableColorNames.Count; i++)
         {
+            var colorName = _selectableColorNames[i];
             if (!string.IsNullOrEmpty(filter) &&
                 !colorName.ToLowerInvariant().Contains(filter.Trim().ToLowerInvariant()))
             {
@@ -60,7 +72,7 @@ public sealed class RMCChangePillBottleColorBui(EntityUid owner, Enum key) : Bou
             ItemList.Item listEntry = new(colorList)
             {
                 Text = colorName.Replace('_', ' '),
-                Metadata = (byte) Enum.Parse<PillbottleColor>(colorName, false),
+                Metadata = (Byte)Enum.Parse<PillbottleColor>(colorName, false),
             };
 
             colorList.Add(listEntry);
@@ -70,5 +82,14 @@ public sealed class RMCChangePillBottleColorBui(EntityUid owner, Enum key) : Bou
     private void ChangeColor(PillbottleColor newColor)
     {
         SendMessage(new ChangePillBottleColorMessage(newColor));
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+        if (!disposing)
+            return;
+
+        _window?.Dispose();
     }
 }

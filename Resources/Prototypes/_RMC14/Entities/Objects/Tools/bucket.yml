@@ -55,12 +55,9 @@
     solution: bucket
   - type: ExaminableSolution
     solution: bucket
-  - type: FitsInDispenser
-    solution: bucket
   - type: Tag
     tags:
-    - Bucket
-    - ChemDispensable
+      - Bucket
   - type: PhysicalComposition
     materialComposition:
       RMCPlastic: 50

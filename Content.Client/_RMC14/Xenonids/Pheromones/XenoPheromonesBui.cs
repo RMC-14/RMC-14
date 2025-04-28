@@ -43,7 +43,9 @@ public sealed class XenoPheromonesBui : BoundUserInterface
     {
         base.Open();
 
-        _xenoPheromonesMenu = this.CreateWindow<XenoPheromonesMenu>();
+        _xenoPheromonesMenu = new XenoPheromonesMenu();
+        _xenoPheromonesMenu.OnClose += Close;
+
         var parent = _xenoPheromonesMenu.FindControl<RadialContainer>("Main");
 
         if (EntMan.HasComponent<XenoComponent>(Owner))
@@ -56,7 +58,7 @@ public sealed class XenoPheromonesBui : BoundUserInterface
                 TextureScale = new Vector2(2f, 2f),
             };
 
-            var helpButton = new RadialMenuTextureButton
+            var helpButton = new RadialMenuTextureButton()
             {
                 StyleClasses = { "RadialMenuButton" },
                 SetSize = new Vector2(64, 64),
@@ -101,7 +103,7 @@ public sealed class XenoPheromonesBui : BoundUserInterface
             TextureScale = new Vector2(2f, 2f),
         };
 
-        var button = new RadialMenuTextureButton
+        var button = new RadialMenuTextureButton()
         {
             StyleClasses = { "RadialMenuButton" },
             SetSize = new Vector2(64, 64),
@@ -112,5 +114,11 @@ public sealed class XenoPheromonesBui : BoundUserInterface
 
         button.AddChild(texture);
         parent.AddChild(button);
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+            _xenoPheromonesMenu?.Dispose();
     }
 }

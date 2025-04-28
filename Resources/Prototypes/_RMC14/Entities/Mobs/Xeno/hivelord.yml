@@ -6,7 +6,6 @@
   - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
-  - RMCXenoMobCollision
   id: CMXenoHivelordBase
   name: Hivelord
   description: A builder of really big hives.

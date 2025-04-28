@@ -9,7 +9,6 @@
     layers:
     - state: camera_bug
   - type: Item
-    sprite: Objects/Devices/camera_bug.rsi
   - type: ActivatableUI
     requireActiveHand: false
     inHandsOnly: true

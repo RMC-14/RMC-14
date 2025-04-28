@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 using System.Numerics;
 using Content.Client.Administration.Managers;
 using Content.Client.ContextMenu.UI;
@@ -149,7 +149,7 @@ public sealed class MappingState : GameplayStateBase
     {
         Deselect();
 
-        var coords = _transform.ToMapCoordinates(args.Coordinates);
+        var coords = args.Coordinates.ToMap(_entityManager, _transform);
         if (_verbs.TryGetEntityMenuEntities(coords, out var entities))
             _entityMenuController.OpenRootMenu(entities);
 

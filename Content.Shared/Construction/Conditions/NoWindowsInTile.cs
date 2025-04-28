@@ -1,8 +1,7 @@
-using Content.Shared.Maps;
+﻿using Content.Shared.Maps;
 using Content.Shared.Tag;
 using JetBrains.Annotations;
 using Robust.Shared.Map;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Construction.Conditions
 {
@@ -10,8 +9,6 @@ namespace Content.Shared.Construction.Conditions
     [DataDefinition]
     public sealed partial class NoWindowsInTile : IConstructionCondition
     {
-        private static readonly ProtoId<TagPrototype> WindowTag = "Window";
-
         public bool Condition(EntityUid user, EntityCoordinates location, Direction direction)
         {
             var entManager = IoCManager.Resolve<IEntityManager>();
@@ -20,7 +17,7 @@ namespace Content.Shared.Construction.Conditions
 
             foreach (var entity in location.GetEntitiesInTile(LookupFlags.Static))
             {
-                if (tagSystem.HasTag(entity, WindowTag))
+                if (tagSystem.HasTag(entity, "Window"))
                     return false;
             }
 

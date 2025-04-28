@@ -52,7 +52,7 @@ public sealed class ClientAlertsSystem : AlertsSystem
         if (args.Current is not AlertComponentState cast)
             return;
 
-        alerts.Comp.Alerts = new(cast.Alerts);
+        alerts.Comp.Alerts = cast.Alerts;
 
         UpdateHud(alerts);
     }

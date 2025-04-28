@@ -6,7 +6,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared.Construction.Prototypes;
 
-[Prototype]
+[Prototype("construction")]
 public sealed partial class ConstructionPrototype : IPrototype
 {
     [DataField("conditions")] private List<IConstructionCondition> _conditions = new();

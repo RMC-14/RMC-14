@@ -23,8 +23,6 @@ public abstract class SharedChameleonClothingSystem : EntitySystem
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] protected readonly SharedUserInterfaceSystem UI = default!;
 
-    private static readonly ProtoId<TagPrototype> WhitelistChameleonTag = "WhitelistChameleon";
-
     public override void Initialize()
     {
         base.Initialize();
@@ -126,7 +124,7 @@ public abstract class SharedChameleonClothingSystem : EntitySystem
             return false;
 
         // check if it is marked as valid chameleon target
-        if (!proto.TryGetComponent(out TagComponent? tag, _factory) || !_tag.HasTag(tag, WhitelistChameleonTag))
+        if (!proto.TryGetComponent(out TagComponent? tag, _factory) || !_tag.HasTag(tag, "WhitelistChameleon"))
             return false;
 
         if (requiredTag != null && !_tag.HasTag(tag, requiredTag))

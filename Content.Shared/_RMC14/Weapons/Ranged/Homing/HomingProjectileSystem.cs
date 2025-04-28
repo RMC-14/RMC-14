@@ -11,8 +11,6 @@ public sealed class HomingProjectileSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
 
-    private readonly List<EntityUid> _toRemove = new();
-
     public override void Initialize()
     {
         SubscribeLocalEvent<HomingProjectileComponent, StartCollideEvent>(OnStartCollide);
@@ -46,30 +44,24 @@ public sealed class HomingProjectileSystem : EntitySystem
     /// </summary>
     public override void Update(float frameTime)
     {
-        _toRemove.Clear();
         var query = EntityQueryEnumerator<HomingProjectileComponent>();
+
         while (query.MoveNext(out var projectile, out var component))
         {
             if(!TryComp(projectile, out PhysicsComponent? physics))
-                continue;
+                return;
 
             // Get the map coordinates and the direction
             var target = component.Target;
             var targetCoords = _transform.GetMapCoordinates(target, Transform(target));
             var projectileCoords = _transform.GetMapCoordinates(projectile, Transform(projectile));
-            if (targetCoords.MapId != projectileCoords.MapId)
-            {
-                _toRemove.Add(projectile);
-                continue;
-            }
-
             var direction = targetCoords.Position - projectileCoords.Position;
 
             // Remove the homing component once the projectile gets close to it's target.
             if (_transform.InRange(Transform(projectile).Coordinates, Transform(target).Coordinates, 1f))
             {
-                _toRemove.Add(projectile);
-                continue;
+                RemComp<HomingProjectileComponent>(projectile);
+                return;
             }
 
             // Get the velocity of the target and the projectile
@@ -81,22 +73,10 @@ public sealed class HomingProjectileSystem : EntitySystem
 
             _physics.SetLinearVelocity(projectile, newLinear, body: physics);
 
-            if (!TryComp(projectile, out ProjectileComponent? projectileComponent))
-                continue;
+            if(!TryComp(projectile, out ProjectileComponent? projectileComponent))
+                return;
 
             _transform.SetWorldRotationNoLerp(projectile, direction.ToWorldAngle() + projectileComponent.Angle);
-        }
-
-        try
-        {
-            foreach (var remove in _toRemove)
-            {
-                RemComp<HomingProjectileComponent>(remove);
-            }
-        }
-        finally
-        {
-            _toRemove.Clear();
         }
     }
 }

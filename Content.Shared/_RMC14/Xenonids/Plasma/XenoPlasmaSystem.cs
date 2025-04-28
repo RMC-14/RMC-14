@@ -86,7 +86,7 @@ public sealed class XenoPlasmaSystem : EntitySystem
         {
             BreakOnMove = true,
             DistanceThreshold = args.Range,
-            TargetEffect = "RMCEffectHealPlasma",
+            TargetEffect = "RMCEffectHealBusy",
         };
 
         _doAfter.TryStartDoAfter(doAfter);

@@ -3,7 +3,6 @@ using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Coordinates;
-using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Pulling.Systems;
@@ -20,7 +19,6 @@ namespace Content.Shared._RMC14.Xenonids.Lunge;
 
 public sealed class XenoLungeSystem : EntitySystem
 {
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
@@ -35,7 +33,6 @@ public sealed class XenoLungeSystem : EntitySystem
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly MobStateSystem _mob = default!;
-    [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ThrownItemComponent> _thrownItemQuery;
@@ -47,7 +44,6 @@ public sealed class XenoLungeSystem : EntitySystem
 
         SubscribeLocalEvent<XenoLungeComponent, XenoLungeActionEvent>(OnXenoLungeAction);
         SubscribeLocalEvent<XenoLungeComponent, ThrowDoHitEvent>(OnXenoLungeHit);
-        SubscribeLocalEvent<XenoLungeComponent, LandEvent>(OnXenoLungeLand);
 
         SubscribeLocalEvent<XenoLungeStunnedComponent, PullStoppedMessage>(OnXenoLungeStunnedPullStopped);
     }
@@ -76,10 +72,9 @@ public sealed class XenoLungeSystem : EntitySystem
         diff = diff.Normalized() * xeno.Comp.Range;
 
         xeno.Comp.Charge = diff;
-        xeno.Comp.Target = args.Target;
         Dirty(xeno);
 
-        _rmcObstacleSlamming.MakeImmune(xeno);
+        EnsureComp<RMCObstacleSlamImmuneComponent>(xeno);
         _throwing.TryThrow(xeno, diff, 30, animated: false);
 
         if (!_physicsQuery.TryGetComponent(xeno, out var physics))
@@ -101,28 +96,10 @@ public sealed class XenoLungeSystem : EntitySystem
         if (!_mob.IsAlive(xeno) || HasComp<StunnedComponent>(xeno))
         {
             xeno.Comp.Charge = null;
-            xeno.Comp.Target = null;
             return;
         }
 
         ApplyLungeHitEffects(xeno, args.Target);
-    }
-
-    private void OnXenoLungeLand(Entity<XenoLungeComponent> ent, ref LandEvent args)
-    {
-        if (ent.Comp.Charge == null && ent.Comp.Target == null)
-            return;
-
-        var target = ent.Comp.Target;
-        ent.Comp.Charge = null;
-        ent.Comp.Target = null;
-        Dirty(ent);
-
-        if (target == null || _pulling.IsPulling(ent))
-            return;
-
-        if (_interaction.InRangeUnobstructed(ent.Owner, target.Value))
-            ApplyLungeHitEffects(ent, target.Value);
     }
 
     private bool ApplyLungeHitEffects(Entity<XenoLungeComponent> xeno, EntityUid targetId)
@@ -160,6 +137,13 @@ public sealed class XenoLungeSystem : EntitySystem
         }
 
         _pulling.TryStartPull(xeno, targetId);
+
+        if (_net.IsServer &&
+            HasComp<MarineComponent>(targetId))
+        {
+            SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());
+        }
+
         return true;
     }
 

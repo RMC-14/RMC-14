@@ -1,4 +1,3 @@
-using Content.Shared._RMC14.Standing;
 using Content.Shared.Inventory;
 using Content.Shared.Movement.Components;
 using Robust.Shared.Timing;
@@ -19,19 +18,6 @@ namespace Content.Shared.Movement.Systems
 
             var ev = new RefreshMovementSpeedModifiersEvent();
             RaiseLocalEvent(uid, ev);
-
-            if (TryComp(uid, out RMCRestComponent? rest) && rest.Resting)
-            {
-                var walk = rest.RestingSpeed;
-                if (ev.WalkSpeedModifier != 0)
-                    walk = rest.RestingSpeed / ev.WalkSpeedModifier;
-
-                var sprint = rest.RestingSpeed;
-                if (ev.SprintSpeedModifier != 0)
-                    sprint = rest.RestingSpeed / ev.SprintSpeedModifier;
-
-                ev.ModifySpeed(walk, sprint);
-            }
 
             if (MathHelper.CloseTo(ev.WalkSpeedModifier, move.WalkSpeedModifier) &&
                 MathHelper.CloseTo(ev.SprintSpeedModifier, move.SprintSpeedModifier))

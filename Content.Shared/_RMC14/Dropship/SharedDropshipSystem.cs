@@ -11,7 +11,6 @@ using Content.Shared.Examine;
 using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
-using Content.Shared.Shuttles.Systems;
 using Content.Shared.UserInterface;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
@@ -484,13 +483,5 @@ public abstract class SharedDropshipSystem : EntitySystem
 
         contained = container.ContainedEntities[0];
         return true;
-    }
-
-    public bool IsInFlight(Entity<DropshipComponent?> dropship)
-    {
-        if (!Resolve(dropship, ref dropship.Comp, false))
-            return false;
-
-        return dropship.Comp.State == FTLState.Travelling || dropship.Comp.State == FTLState.Arriving;
     }
 }

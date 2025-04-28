@@ -16,7 +16,6 @@
     maxDifficulty: 2.5
   - type: AntagSelection
     agentName: thief-round-end-agent-name
-    selectionTime: IntraPlayerSpawn
     definitions:
     - prefRoles: [ Thief ]
       max: 3
@@ -62,6 +61,5 @@
         nameSegments:
         - NamesWizardFirst
         - NamesWizardLast
-        nameFormat: name-format-wizard
       mindRoles:
       - MindRoleWizard

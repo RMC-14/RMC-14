@@ -1398,8 +1398,3 @@
   id: zombiecocktail
   flavorType: Complex
   description: flavor-complex-zombiecocktail
-
-- type: flavor
-  id: bacchusblessing
-  flavorType: Complex
-  description: flavor-complex-bacchus-blessing

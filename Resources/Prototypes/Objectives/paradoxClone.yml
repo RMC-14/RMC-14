@@ -9,10 +9,8 @@
     issuer: objective-issuer-paradox
   - type: RoleRequirement
     roles:
-    - ParadoxCloneRole
-  - type: Tag
-    tags:
-    - ParadoxCloneObjectiveBlacklist # don't copy the objectives from other clones
+      mindRoles:
+      - ParadoxCloneRole
 
 - type: entity
   parent: [BaseParadoxCloneObjective, BaseLivingObjective]

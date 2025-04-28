@@ -7,7 +7,7 @@ namespace Content.Shared.Random;
 /// <summary>
 /// Linter-friendly version of weightedRandom for Ore prototypes.
 /// </summary>
-[Prototype]
+[Prototype("weightedRandomOre")]
 public sealed partial class WeightedRandomOrePrototype : IWeightedRandomPrototype
 {
     [IdDataField]

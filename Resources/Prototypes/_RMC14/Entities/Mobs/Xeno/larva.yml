@@ -5,9 +5,6 @@
   id: CMXenoLarva
   name: Larva
   components:
-  - type: GuideHelp
-    guides:
-    - RMCGuideRoleDrone
   - type: GhostRole
     name: cm-job-name-xeno-larva
   - type: Sprite
@@ -31,9 +28,8 @@
     hudOffset: -0.1,0.25
     tier: 0
     unlockAt: 0
-    emoteSounds: Larva
-  - type: XenoRegen
     healOffWeeds: true
+    emoteSounds: Larva
   - type: XenoLight
   - type: XenoPlasma
     plasma: 10

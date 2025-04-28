@@ -1,42 +1,88 @@
-<cc:XenoWatchWindow
+﻿<cc:XenoWatchWindow
     xmlns="https://spacestation14.io"
     xmlns:cc="clr-namespace:Content.Client._RMC14.Xenonids.Watch"
     Title="{Loc cm-xeno-watch}"
-    MinSize="500 600" SetSize="500 1000">
-    <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
-    <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-        <!-- Hive Info -->
-        <Collapsible>
-            <CollapsibleHeading Name="HiveInfo" Title="General Hive Information"/>
-            <CollapsibleBody>
-                <BoxContainer Orientation="Vertical">
-                    <Label Name="XenoCount" Access="Public" Text="Total Sisters: 0" HorizontalAlignment="Center" />
-                    <Label Name="BurrowedLarvaLabel" Access="Public" Text="Burrowed Larva: 0" HorizontalAlignment="Center" />
-                    <Label Name="Evolution" Access="Public" Text="Evolution Rate: 0" HorizontalAlignment="Center" Visible="False"/>
-                </BoxContainer>
-            </CollapsibleBody>
+    MinSize="300 400">
+    <BoxContainer Orientation="Vertical" Margin="2 0 2 4">
+            <Collapsible Margin="0 0 0 0 ">
+                <CollapsibleHeading>
+                    <Label Name="Collapsabletop" Text="Info" Margin="20 0 0 0"/>
+                </CollapsibleHeading>
+                <CollapsibleBody Margin="20 0 0 0">
+                        <BoxContainer Orientation="Vertical">
+                            <BoxContainer Name="Info" Orientation="Horizontal"  VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <GridContainer Rows="3" VSeparationOverride="10" Margin="10 5 0 0">
+                                <BoxContainer>
+                                    <Label Name="Tier3Label" Access="Public" Text="Tier 3 count: 33" />
+                                </BoxContainer>
+                                <BoxContainer>
+                                    <Label Name="Tier2Label" Access="Public" Text="Tier 2 count: 12" />
+                                </BoxContainer>
+                                <BoxContainer>
+                                    <Label Name="Tier1Label" Access="Public" Text="Tier 1 count: 54" />
+                                </BoxContainer>
+                            </GridContainer>
+                            <GridContainer Rows="3" VSeparationOverride="10" Margin="30 5 0 0">
+                                <BoxContainer>
+                                    <Label Name="Tier3SlotsLabel" Access="Public" Text="Tier 3 slots: 0" />
+                                </BoxContainer>
+                                <BoxContainer>
+                                    <Label Name="Tier2SlotsLabel" Access="Public" Text="Tier 2 slots: 33" />
+                                </BoxContainer>
+                                <BoxContainer>
+                                    <Label Name="XenoCountLabel" Access="Public" Text="Xeno count: 1" />
+                                </BoxContainer>
+                            </GridContainer>
+                        </BoxContainer>
+                        <Label Name="BurrowedLarvaLabel" Access="Public" Text="Burrowed Larva: 0" />
+                        </BoxContainer>
+        </CollapsibleBody>
         </Collapsible>
-        <!-- Hive Counts -->
-        <Collapsible HorizontalExpand="True">
-            <CollapsibleHeading Name="HiveCounts" Title="Hive Counts" HorizontalExpand="True"/>
-            <CollapsibleBody HorizontalExpand="True" MinWidth="600">
-                <BoxContainer  Name="RowContainer"  HorizontalExpand="True" HorizontalAlignment="Center" Orientation="Vertical" Margin="0 0 2 0" Access="Public" MinWidth="600"/>
-            </CollapsibleBody>
-        </Collapsible>
-        <!-- Xeno List -->
-        <Collapsible BodyVisible="True" VerticalExpand="True" MinHeight="200">
-            <CollapsibleHeading Name="XenoHive" Title="Hive Xenoid List" Access="Public"/>
-            <CollapsibleBody Name="XenoCollapsableBody" Access="Public" VerticalExpand="True" MinHeight="200">
-                <BoxContainer Orientation="Vertical" VerticalExpand="True">
-                    <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
-                        <BoxContainer Orientation="Vertical" Name="XenoContainer" Access="Public"/>
-                    </ScrollContainer>
-                    <BoxContainer>
-                        <LineEdit Name="SearchBar" Access="Public" HorizontalExpand="True"/>
-                    </BoxContainer>
-                </BoxContainer>
-            </CollapsibleBody>
-        </Collapsible>
+        <TabContainer>
+        <BoxContainer Name="Tiers" Orientation="Horizontal">
+            <Button Name="Tier4" Text="Tier 4" ToggleMode="True" Access="Public"/>
+                <Button Name="Tier3" Text="Tier 3" ToggleMode="True" Access="Public"/>
+                <Button Name="Tier2" Text="Tier 2" ToggleMode="True" Access="Public"/>
+                <Button Name="Tier1" Text="Tier 1" ToggleMode="True" Access="Public"/>
+                <Button Name="Tier0" Text="Tier 0" ToggleMode="True" Access="Public"/>
         </BoxContainer>
+            <BoxContainer Name="Castes" Orientation="Vertical">
+                <BoxContainer>
+                    <Button Name="Queen" Text="Queen" ToggleMode="True" Access="Public"/>
+                </BoxContainer>
+                <BoxContainer>
+                <Button Name="Ravager" Text="Ravager: 0" ToggleMode="True" Access="Public"/>
+                <Button Name="Boiler" Text="Boiler: 0" ToggleMode="True" Access="Public"/>
+                <Button Name="Praetorian" Text="Praetorian: 0" ToggleMode="True" Access="Public"/>
+                <Button Name="Crusher" Text="Crusher: 0" ToggleMode="True" Access="Public"/>
+                </BoxContainer>
+                <BoxContainer>
+                    <Button Name="Spitter" Text="Spitter: 0" ToggleMode="True" Access="Public"/>
+                    <Button Name="Warrior" Text="Warrior: 0" ToggleMode="True" Access="Public"/>
+                    <Button Name="Lurker" Text="Lurker: 0" ToggleMode="True" Access="Public"/>
+                    <Button Name="Hivelord" Text="Hivelord: 0" ToggleMode="True" Access="Public"/>
+                    <Button Name="Carrier" Text="Carrier: 0" ToggleMode="True" Access="Public"/>
+                    <Button Name="Burrower" Text="Burrower: 0" ToggleMode="True" Access="Public"/>
+                </BoxContainer>
+                <BoxContainer>
+                    <Button Name="Drone" Text="Drone: 0" ToggleMode="True" Access="Public"/>
+                    <Button Name="Defender" Text="Defender: 0" ToggleMode="True" Access="Public"/>
+                    <Button Name="Sentinel" Text="Sentinel: 0" ToggleMode="True" Access="Public"/>
+                    <Button Name="Runner" Text="Runner: 0" ToggleMode="True" Access="Public"/>
+                </BoxContainer>
+                <BoxContainer>
+                    <Button Name="Larva" Text="Larva: 0" ToggleMode="True" Access="Public" Pressed="False"/>
+                    <Button Name="Parasite" Text="Parasite: 0" ToggleMode="True" Access="Public"/>
+                    <Button Name="Lesser" Text="Lesser Drone: 0" ToggleMode="True" Access="Public"/>
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" Margin="5 0 0 0">
+                    <CheckBox Name="ShowEvo" Text=" Show Evo" Access="Public"></CheckBox>
+                </BoxContainer>
+            </BoxContainer>
+        </TabContainer>
+        <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
+            <BoxContainer Orientation="Vertical" Name="XenoContainer" Access="Public" />
         </ScrollContainer>
+        <LineEdit Name="SearchBar" Access="Public" />
+    </BoxContainer>
 </cc:XenoWatchWindow>

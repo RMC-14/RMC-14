@@ -3,5 +3,5 @@
     xmlns:controls="clr-namespace:Content.Client._RMC14.Admin"
     StyleClasses="ButtonSquare"
     HorizontalExpand="True">
-    <Label Name="TransformName" Access="Public" Align="Center" />
+    <Label Name="TransformName" Access="Public" />
 </controls:RMCTransformButton>

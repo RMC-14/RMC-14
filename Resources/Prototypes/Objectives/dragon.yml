@@ -9,7 +9,8 @@
     issuer: objective-issuer-dragon
   - type: RoleRequirement
     roles:
-    - DragonRole
+      mindRoles:
+      - DragonRole
 
 - type: entity
   parent: BaseDragonObjective

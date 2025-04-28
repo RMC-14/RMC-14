@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMProvostAdvisor
-  name: CMProvostAdvisor
+  name: rmc-job-name-provost-advisor
   description: rmc-job-description-provost-advisor
   playTimeTracker: CMJobProvostAdvisor
   ranks:
@@ -27,6 +27,19 @@
   hidden: true
 
 - type: entity
+  parent: MarkerBase
+  id: RMCSpawnerProvostAdvisor
+  name: provost spawner advisor
+  suffix: Spawner, Player, Low Law Understanding
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCRandomHumanoidProvostAdvisor
+
+- type: entity
   id: RMCRandomHumanoidProvostAdvisor
   name: provost ghost role advisor
   suffix: Role, Player, Low Law Understanding
@@ -38,11 +51,25 @@
     settings: RMCProvostAdvisor
 
 - type: randomHumanoidSettings
-  parent: RMCSettingsGhostRole
+  parent: EventHumanoid
   id: RMCProvostAdvisor
   components:
-  - type: RMCJobSpawner
-    job: CMProvostAdvisor
+  - type: GhostRole
+    name: rmc-ghost-role-information-provost-advisor-name
+    description: rmc-ghost-role-information-provost-advisor-description
+    rules: ghost-role-information-nonantagonist-rules
+    raffle:
+      settings: short
+  - type: Loadout
+    prototypes: [ RMCGearProvostAdvisor ]
+  - type: Skills
+    skills:
+      RMCSkillCqc: 3
+      RMCSkillEndurance: 3
+      RMCSkillFirearms: 1
+      RMCSkillFireman: 2
+      RMCSkillMeleeWeapons: 1
+      RMCSkillPolice: 2
 
 - type: startingGear
   id: RMCGearProvostAdvisor

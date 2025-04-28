@@ -30,8 +30,6 @@ public sealed class XenoDodgeSystem : EntitySystem
 
         SubscribeLocalEvent<XenoActiveDodgeComponent, RefreshMovementSpeedModifiersEvent>(OnActiveDodgeRefresh);
         SubscribeLocalEvent<XenoActiveDodgeComponent, ComponentRemove>(OnActiveDodgeRemove);
-        SubscribeLocalEvent<XenoActiveDodgeComponent, AttemptMobCollideEvent>(OnActiveDodgeAttemptMobCollide);
-        SubscribeLocalEvent<XenoActiveDodgeComponent, AttemptMobTargetCollideEvent>(OnActiveDodgeAttemptMobTargetCollide);
     }
 
     private void OnXenoActionDodge(Entity<XenoDodgeComponent> xeno, ref XenoDodgeActionEvent args)
@@ -74,16 +72,6 @@ public sealed class XenoDodgeSystem : EntitySystem
                     _actions.SetToggled(actionId, false);
             }
         }
-    }
-
-    private void OnActiveDodgeAttemptMobCollide(Entity<XenoActiveDodgeComponent> ent, ref AttemptMobCollideEvent args)
-    {
-        args.Cancelled = true;
-    }
-
-    private void OnActiveDodgeAttemptMobTargetCollide(Entity<XenoActiveDodgeComponent> ent, ref AttemptMobTargetCollideEvent args)
-    {
-        args.Cancelled = true;
     }
 
     public override void Update(float frameTime)

@@ -6,6 +6,6 @@ namespace Content.Server._RMC14.Xenonids;
 [Access(typeof(XenoRoleSystem))]
 public sealed partial class XenoDisconnectedComponent : Component
 {
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan At;
 }

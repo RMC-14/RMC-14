@@ -1,16 +1,19 @@
 ﻿using Content.Client.Message;
 using Content.Shared._RMC14.Dropship;
 using JetBrains.Annotations;
-using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 
 namespace Content.Client._RMC14.Dropship;
 
 [UsedImplicitly]
-public sealed class DropshipHijackerBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed class DropshipHijackerBui : BoundUserInterface
 {
     [ViewVariables]
     private DropshipHijackerWindow? _window;
+
+    public DropshipHijackerBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
+    {
+    }
 
     protected override void Open()
     {
@@ -25,12 +28,20 @@ public sealed class DropshipHijackerBui(EntityUid owner, Enum uiKey) : BoundUser
             Set(s);
     }
 
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+            _window?.Dispose();
+    }
+
     private void Set(DropshipHijackerBuiState s)
     {
         if (_window == null)
         {
-            _window = this.CreateWindow<DropshipHijackerWindow>();
+            _window = new DropshipHijackerWindow();
+            _window.OnClose += Close;
             _window.Header.SetMarkup("[bold]Where to 'land'?[/bold]");
+            _window.OpenCentered();
         }
 
         _window.Destinations.DisposeAllChildren();
@@ -47,7 +58,6 @@ public sealed class DropshipHijackerBui(EntityUid owner, Enum uiKey) : BoundUser
                 SendPredictedMessage(new DropshipHijackerDestinationChosenBuiMsg(id));
                 Close();
             };
-
             _window.Destinations.AddChild(button);
         }
     }

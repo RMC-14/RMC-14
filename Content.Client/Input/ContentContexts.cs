@@ -145,7 +145,6 @@ namespace Content.Client.Input
             human.AddFunction(CMKeyFunctions.CMHolsterQuaternary);
             human.AddFunction(CMKeyFunctions.RMCPickUpDroppedItems);
             human.AddFunction(CMKeyFunctions.RMCInteractWithOtherHand);
-            human.AddFunction(CMKeyFunctions.RMCRest);
 
             //Xeno
             human.AddFunction(CMKeyFunctions.CMXenoWideSwing);

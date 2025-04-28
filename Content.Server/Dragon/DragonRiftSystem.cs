@@ -13,7 +13,6 @@ using Robust.Shared.Serialization.Manager;
 using System.Numerics;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Dragon;
@@ -34,18 +33,9 @@ public sealed class DragonRiftSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<DragonRiftComponent, ComponentGetState>(OnGetState);
         SubscribeLocalEvent<DragonRiftComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<DragonRiftComponent, AnchorStateChangedEvent>(OnAnchorChange);
         SubscribeLocalEvent<DragonRiftComponent, ComponentShutdown>(OnShutdown);
-    }
-
-    private void OnGetState(Entity<DragonRiftComponent> ent, ref ComponentGetState args)
-    {
-        args.State = new DragonRiftComponentState
-        {
-            State = ent.Comp.State,
-        };
     }
 
     public override void Update(float frameTime)

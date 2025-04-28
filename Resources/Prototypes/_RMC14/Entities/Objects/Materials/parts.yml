@@ -86,7 +86,6 @@
   - type: StackPrice
     price: 15
   - type: RMCRefinable
-    amount: 2
     spawn:
     - id: CMSheetPlasteel1
 

@@ -1,19 +1,19 @@
-﻿using System.Linq;
-using Content.Server.Administration.Notes;
+﻿using Content.Server.Administration.Notes;
 using Content.Shared.Administration;
-using Robust.Server.Player;
 using Robust.Shared.Console;
 
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.ViewNotes)]
-public sealed class OpenAdminNotesCommand : LocalizedCommands
+public sealed class OpenAdminNotesCommand : IConsoleCommand
 {
     public const string CommandName = "adminnotes";
 
-    public override string Command => CommandName;
+    public string Command => CommandName;
+    public string Description => "Opens the admin notes panel.";
+    public string Help => $"Usage: {Command} <notedPlayerUserId OR notedPlayerUsername>";
 
-    public override async void Execute(IConsoleShell shell, string argStr, string[] args)
+    public async void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         if (shell.Player is not { } player)
         {
@@ -33,27 +33,17 @@ public sealed class OpenAdminNotesCommand : LocalizedCommands
 
                 if (dbGuid == null)
                 {
-                    shell.WriteError(Loc.GetString("cmd-adminnotes-wrong-target", ("user", args[0])));
+                    shell.WriteError($"Unable to find {args[0]} netuserid");
                     return;
                 }
 
                 notedPlayer = dbGuid.UserId;
                 break;
             default:
-                shell.WriteError(Loc.GetString("cmd-adminnotes-args-error"));
+                shell.WriteError($"Invalid arguments.\n{Help}");
                 return;
         }
 
         await IoCManager.Resolve<IAdminNotesManager>().OpenEui(player, notedPlayer);
-    }
-
-    public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)
-    {
-        if (args.Length != 1)
-            return CompletionResult.Empty;
-
-        var playerMgr = IoCManager.Resolve<IPlayerManager>();
-        var options = playerMgr.Sessions.Select(c => c.Name).OrderBy(c => c).ToArray();
-        return CompletionResult.FromHintOptions(options, Loc.GetString("cmd-adminnotes-hint"));
     }
 }

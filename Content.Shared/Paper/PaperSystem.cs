@@ -11,7 +11,6 @@ using Content.Shared.UserInterface;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using static Content.Shared.Paper.PaperComponent;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Paper;
 
@@ -27,9 +26,6 @@ public sealed class PaperSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly CMExamineSystem _rmcExamine = default!;
     [Dependency] private readonly RMCUserInterfaceSystem _rmcUI = default!;
-
-    private static readonly ProtoId<TagPrototype> WriteIgnoreStampsTag = "WriteIgnoreStamps";
-    private static readonly ProtoId<TagPrototype> WriteTag = "Write";
 
     public override void Initialize()
     {
@@ -114,8 +110,8 @@ public sealed class PaperSystem : EntitySystem
             return;
 
         // only allow editing if there are no stamps or when using a cyberpen
-        var editable = entity.Comp.StampedBy.Count == 0 || _tagSystem.HasTag(args.Used, WriteIgnoreStampsTag);
-        if (_tagSystem.HasTag(args.Used, WriteTag))
+        var editable = entity.Comp.StampedBy.Count == 0 || _tagSystem.HasTag(args.Used, "WriteIgnoreStamps");
+        if (_tagSystem.HasTag(args.Used, "Write"))
         {
             if (editable)
             {
@@ -194,10 +190,8 @@ public sealed class PaperSystem : EntitySystem
         {
             SetContent(entity, args.Text);
 
-            var paperStatus = string.IsNullOrWhiteSpace(args.Text) ? PaperStatus.Blank : PaperStatus.Written;
-
             if (TryComp<AppearanceComponent>(entity, out var appearance))
-                _appearance.SetData(entity, PaperVisuals.Status, paperStatus, appearance);
+                _appearance.SetData(entity, PaperVisuals.Status, PaperStatus.Written, appearance);
 
             if (TryComp(entity, out MetaDataComponent? meta))
                 _metaSystem.SetEntityDescription(entity, "", meta);
@@ -237,26 +231,6 @@ public sealed class PaperSystem : EntitySystem
         }
         return true;
     }
-
-    /// <summary>
-    ///     Copy any stamp information from one piece of paper to another.
-    /// </summary>
-    public void CopyStamps(Entity<PaperComponent?> source, Entity<PaperComponent?> target)
-    {
-        if (!Resolve(source, ref source.Comp) || !Resolve(target, ref target.Comp))
-            return;
-
-        target.Comp.StampedBy = new List<StampDisplayInfo>(source.Comp.StampedBy);
-        target.Comp.StampState = source.Comp.StampState;
-        Dirty(target);
-
-        if (TryComp<AppearanceComponent>(target, out var appearance))
-        {
-            // delete any stamps if the stamp state is null
-            _appearance.SetData(target, PaperVisuals.Stamp, target.Comp.StampState ?? "", appearance);
-        }
-    }
-
 
     public void SetContent(Entity<PaperComponent> entity, string content)
     {
