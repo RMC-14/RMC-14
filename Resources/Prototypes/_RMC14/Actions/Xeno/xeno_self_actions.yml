@@ -35,6 +35,14 @@
     event: !type:XenoWatchActionEvent
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoWatch
+  name: Watch Xenonid
+  components:
+    - type: Sprite
+      state: watch_xeno
+
+- type: entity
   id: ActionXenoPheromones
   parent: ActionXenoBase
   name: Emit Pheromones (35) # TODO RMC14 proper plasma costs
@@ -47,6 +55,15 @@
       state: emit_pheromones
     event: !type:XenoPheromonesActionEvent
     useDelay: 0.33
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoPheromones
+  name: Emit Pheromones
+  description: Gives a buff to nearby xenonids.
+  components:
+  - type: Sprite
+    state: emit_pheromones
 
 - type: entity
   id: ActionXenoHide
@@ -152,6 +169,15 @@
       state: grow_ovipositor
     event: !type:XenoGrowOvipositorActionEvent
   - type: XenoGrowOvipositorAction
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoGrowOvipositor
+  name: Grow Ovipositor
+  description: Become immobile and start laying eggs which will produce parasites.
+  components:
+    - type: Sprite
+      state: grow_ovipositor
 
 - type: entity
   id: ActionXenoTurnInvisible
