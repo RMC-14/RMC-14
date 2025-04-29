@@ -233,6 +233,14 @@
     cost: 10
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoHeadbutt
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: headbutt
+
+- type: entity
   id: ActionXenoTailSweep
   parent: ActionXenoBase
   name: Tail Sweep (10) # TODO RMC14 proper plasma costs
@@ -246,6 +254,14 @@
     event: !type:XenoTailSweepActionEvent
     useDelay: 15
   - type: RMCDazeableAction
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoTailSweep
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: tail_sweep
 
 - type: entity
   id: ActionXenoSlowingSpit
