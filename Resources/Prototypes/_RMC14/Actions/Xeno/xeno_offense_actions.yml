@@ -551,6 +551,15 @@
   - type: ActionBlockIfResting
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoBombard
+  name: Bombard
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: bombard
+
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoToggleGasType
   name: Toggle Gas Type
