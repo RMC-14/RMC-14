@@ -83,6 +83,8 @@
       - map: [ "enum.HumanoidVisualLayers.LLeg" ]
       - map: [ "enum.HumanoidVisualLayers.Underwear" ]
       - map: [ "enum.HumanoidVisualLayers.Undershirt" ]
+      - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
+      - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
       - map: ["jumpsuit"]
       - map: ["enum.HumanoidVisualLayers.LFoot"]
       - map: ["enum.HumanoidVisualLayers.RFoot"]
@@ -91,11 +93,11 @@
       - map: [ "gloves" ]
       - map: [ "shoes" ]
       - map: [ "ears" ]
+      - map: [ "eyes" ]
+      - map: [ "belt" ]
       - map: [ "outerClothing" ]
       - map: [ "enum.WebbingVisualLayers.Base" ]
       - map: [ "enum.MedalVisualLayers.Base" ]
-      - map: [ "eyes" ]
-      - map: [ "belt" ]
       - map: [ "enum.HumanoidVisualLayers.Tail" ] # Mentioned in moth code: This needs renaming lol.
       - map: [ "neck" ]
       - map: [ "back" ]
@@ -119,6 +121,7 @@
         visible: false
   - type: Inventory
     templateId: arachnid
+    speciesId: arachnid
 
 
 - type: entity
@@ -128,6 +131,8 @@
   components:
   - type: HumanoidAppearance
     species: Arachnid
+  - type: Inventory
+    speciesId: arachnid
 
 
 #>88w88<

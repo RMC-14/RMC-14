@@ -2,7 +2,7 @@
   abstract: true
   id: RMCPrefabBase
   name: prefabricated structure
-  description: This structure is made of metal support rods and robust poly-kevlon plastics. A derivative of the stuff used in UA ballistics vests, UNMC and SPP uniforms. The loose walls roll with each gust of wind.
+  description: This structure is made of metal support rods and robust poly-kevlon plastics. A derivative of the stuff used in UN ballistics vests, UNMC and SPP uniforms. The loose walls roll with each gust of wind.
   placement:
     mode: SnapgridCenter
   components:
@@ -31,7 +31,7 @@
   abstract: true
   id: RMCPrefabBaseTop
   name: prefabricated structure
-  description: This structure is made of metal support rods and robust poly-kevlon plastics. A derivative of the stuff used in UA ballistics vests, UNMC and SPP uniforms. The loose walls roll with each gust of wind.
+  description: This structure is made of metal support rods and robust poly-kevlon plastics. A derivative of the stuff used in UN ballistics vests, UNMC and SPP uniforms. The loose walls roll with each gust of wind.
   placement:
     mode: SnapgridCenter
   components:

@@ -1,0 +1,66 @@
+﻿- type: entity
+  parent: RMCDropshipAttachmentWeapon
+  id: RMCDropshipAttachmentLaserCannon
+  name: LWU-6B Laser Cannon
+  description: State of the art technology recently acquired by the UNMC, it fires a battery-fed pulsed laser beam at near lightspeed setting on fire everything it touches. Moving this will require some sort of lifter. Accepts the BTU-17/LW Hi-Cap Laser Batteries.
+  components:
+  - type: Sprite
+    layers:
+    - state: laser_beam
+      offset: 0.5, 0.5
+  - type: DropshipFabricatorPrintable
+    cost: 500
+  - type: DropshipWeapon
+    abbreviation: LZR
+    fireDelay: 5
+    fireInTransport: true
+    skills:
+      all:
+        RMCSkillPilot: 1
+    weaponAttachedSprite:
+      sprite: _RMC14/Objects/dropship_attachments.rsi
+      state: laser_beam_installed
+    ammoEmptyAttachedSprite:
+      sprite: _RMC14/Objects/dropship_attachments.rsi
+      state: laser_beam_loaded
+    ammoAttachedSprite:
+      sprite: _RMC14/Objects/dropship_attachments.rsi
+      state: laser_beam_loaded
+
+- type: entity
+  parent: RMCDropshipAttachmentAmmo
+  id: RMCDropshipAttachmentAmmoLaserCannon
+  name: BTU-17/LW Hi-Cap Laser Battery
+  description: A high-capacity laser battery used to power laser beam weapons.  Can be loaded into the LWU-6B Laser Cannon.
+  components:
+  - type: Sprite
+    layers:
+    - state: laser_battery_10
+      map: [ "enum.DropshipAmmoVisuals.Fill"]
+  - type: DropshipFabricatorPrintable
+    category: Ammo
+    cost: 200
+  - type: DropshipAmmo
+    ammoType: laser_battery
+    rounds: 100
+    maxRounds: 100
+    roundsPerShot: 10
+    shotsPerVolley: 10
+    targetSpread: 1
+    bulletSpread: 0
+    travelTime: 1
+    weapon: RMCDropshipAttachmentLaserCannon
+    soundEveryShots: 1
+    soundCockpit: /Audio/Machines/phasein.ogg
+    soundMarker: /Audio/_RMC14/Binoculars/nightvision.ogg
+    soundImpact:
+      path: /Audio/_RMC14/Effects/laser_cannon.ogg
+      params:
+        volume: -6
+    fire:
+      type: RMCTileFireLaser
+      range: 3
+      intensity: 75
+      duration: 5
+      total: 16
+    deleteOnEmpty: true

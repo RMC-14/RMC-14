@@ -13,3 +13,8 @@
   - type: Item
     sprite: _RMC14/Objects/Chemistry/dropper.rsi
     size: Tiny
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
+    

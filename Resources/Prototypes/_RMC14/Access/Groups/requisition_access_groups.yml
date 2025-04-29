@@ -14,11 +14,6 @@
   id: CMCargoTech
   tags:
   - CMAccessRequisitions
-  - CMAccessAlpha
-  - CMAccessBravo
-  - CMAccessCharlie
-  - CMAccessDelta
-  - CMAccessMarinePrep
 
 - type: accessGroup
   id: MessTech

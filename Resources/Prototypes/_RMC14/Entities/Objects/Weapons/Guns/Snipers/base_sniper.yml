@@ -1,6 +1,6 @@
 ﻿- type: entity
   abstract: true
-  parent: CMBaseWeaponRifle
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: RMCBaseWeaponSniperRifle
   components:
   - type: Gun
@@ -24,6 +24,16 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/sniper_mouse.rsi
       state: all
+  - type: AimedShot
+  - type: TargetingLaser
+  - type: GunToggleableLaser
+    settings:
+    - icon:
+        sprite: _RMC14/Actions/marine_sniper_actions.rsi
+        state: sniper_toggle_laser_on
+    - icon:
+        sprite: _RMC14/Actions/marine_sniper_actions.rsi
+        state: sniper_toggle_laser_off
 
 - type: entity
   parent: CMBaseCartridgeRifle

@@ -5,6 +5,7 @@
   - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
   id: CMXenoSpitter
   name: Spitter
   description: A gross, oozing alien of some kind.
@@ -67,7 +68,7 @@
       groups:
         Brute: 36
   - type: CMArmor
-    armor: 15
+    xenoArmor: 15
     explosionArmor: 20
   - type: MeleeWeapon
     damage:
@@ -103,3 +104,5 @@
       sprite: _RMC14/Interface/map_blips.rsi
       state: spitter
   - type: AcidTrap
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.2

@@ -3,6 +3,11 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/weapons/alien_claw_swipe.ogg"
 
+- files: ["alien_knockdown.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/weapons/alien_knockdown.ogg"
+
 - files: ["gun_mortar_fire.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"

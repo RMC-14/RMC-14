@@ -1,0 +1,36 @@
+﻿- type: rank
+  id: RMCRankCivilian
+  name: Civilian
+  prefix: Civ.
+  malePrefix: Mr.
+  femalePrefix: Ms.
+
+- type: rank
+  id: RMCRankCivilianNurse
+  name: Nurse
+  prefix: Nrs.
+
+- type: rank
+  id: RMCRankCivilianDoctor
+  name: Doctor
+  prefix: Dr.
+
+- type: rank
+  id: RMCRankCivilianProfessor
+  name: Professor
+  prefix: Prof.
+
+- type: rank
+  id: RMCRankCivilianRepresentative
+  name: Representative
+  prefix: Rep.
+
+- type: rank
+  id: RMCRankCivilianOfficer
+  name: Officer
+  prefix: Off.
+
+- type: rank
+  id: RMCRankCivilianSeniorOfficer
+  name: Senior Officer
+  prefix: Sr. Off.

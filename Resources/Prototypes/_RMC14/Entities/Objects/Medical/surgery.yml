@@ -9,6 +9,10 @@
   - type: Item
     size: Small
   - type: CMSurgeryTool
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 # Retractor
 - type: entity
@@ -379,3 +383,8 @@
     sprite: _RMC14/Objects/Medical/Surgery/bone_gel.rsi
     state: bone-gel
   - type: CMBoneGel
+
+- type: entity
+  parent: CMBoneGel
+  id: RMCBoneGelEmpty
+  suffix: Empty # TODO RMC14

@@ -42,9 +42,6 @@ public sealed partial class XenoResinHoleComponent : Component
     [DataField]
     public float ParasiteActivationRange = 0.5f;
 
-    [DataField]
-    public float TotalHealth = 10f;
-
     //    [DataField] used but emulated through step trigger range being very low
     //    public float FluidActivationRange = 1.5f;
 

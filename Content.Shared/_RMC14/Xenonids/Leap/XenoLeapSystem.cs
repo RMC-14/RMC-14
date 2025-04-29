@@ -1,17 +1,20 @@
-﻿using System.Numerics;
+using System.Numerics;
+using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Invisibility;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Coordinates;
+using Content.Shared.Damage;
 using Content.Shared.DoAfter;
+using Content.Shared.Effects;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
+using Content.Shared.Jittering;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
-using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Pulling.Events;
@@ -24,6 +27,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Leap;
@@ -48,6 +52,10 @@ public sealed class XenoLeapSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private readonly DamageableSystem _damagable = default!;
+    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
+    [Dependency] private readonly RMCCameraShakeSystem _cameraShake = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
 
@@ -116,7 +124,12 @@ public sealed class XenoLeapSystem : EntitySystem
         args.Handled = true;
 
         leaping.KnockdownRequiresInvisibility = xeno.Comp.KnockdownRequiresInvisibility;
+        leaping.DestroyObjects = xeno.Comp.DestroyObjects;
         leaping.MoveDelayTime = xeno.Comp.MoveDelayTime;
+        leaping.Damage = xeno.Comp.Damage;
+        leaping.HitEffect = xeno.Comp.HitEffect;
+        leaping.TargetJitterTime = xeno.Comp.TargetJitterTime;
+        leaping.TargetCameraShakeStrength = xeno.Comp.TargetCameraShakeStrength;
 
         if (xeno.Comp.PlasmaCost > FixedPoint2.Zero &&
             !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.PlasmaCost))
@@ -169,7 +182,7 @@ public sealed class XenoLeapSystem : EntitySystem
         {
             if (!_xeno.CanAbilityAttackTarget(xeno, entity))
                 return;
-        
+
             if (TryComp<SlowedDownComponent>(xeno, out var root) && root.SprintSpeedModifier == 0f)
             {
                 RemComp<SlowedDownComponent>(xeno);
@@ -208,6 +221,21 @@ public sealed class XenoLeapSystem : EntitySystem
     {
         if (xeno.Comp.KnockedDown)
             return false;
+
+        if (xeno.Comp.DestroyObjects && TryComp<XenoLeapDestroyOnPassComponent>(target, out var destroy))
+        {
+            if (_net.IsServer)
+            {
+                for (int i = 0; i < destroy.Amount; i++)
+                {
+                    if (destroy.SpawnPrototype != null)
+                        SpawnAtPosition(destroy.SpawnPrototype, target.ToCoordinates());
+                }
+                QueueDel(target);
+            }
+            _physics.SetCanCollide(target, false, force: true);
+            return false;
+        }
 
         if (!HasComp<MobStateComponent>(target) || _mobState.IsIncapacitated(target))
             return false;
@@ -254,6 +282,22 @@ public sealed class XenoLeapSystem : EntitySystem
             if (_net.IsServer)
                 _stun.TryParalyze(target, xeno.Comp.ParalyzeTime, true);
         }
+
+        if (xeno.Comp.HitEffect != null)
+        {
+            if (_net.IsServer)
+                SpawnAttachedTo(xeno.Comp.HitEffect, target.ToCoordinates());
+        }
+
+        var damage = _damagable.TryChangeDamage(target, xeno.Comp.Damage, origin: xeno, tool: xeno);
+        if (damage?.GetTotal() > FixedPoint2.Zero)
+        {
+            var filter = Filter.Pvs(target, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);
+            _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { target }, filter);
+        }
+
+        _jitter.DoJitter(target, xeno.Comp.TargetJitterTime, false);
+        _cameraShake.ShakeCamera(target, 2, xeno.Comp.TargetCameraShakeStrength);
 
         var ev = new XenoLeapHitEvent(xeno, target);
         RaiseLocalEvent(xeno, ref ev);

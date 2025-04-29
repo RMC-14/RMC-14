@@ -1,0 +1,87 @@
+﻿- type: job
+  parent: CMJobBase
+  id: CMProvostAdvisor
+  name: CMProvostAdvisor
+  description: rmc-job-description-provost-advisor
+  playTimeTracker: CMJobProvostAdvisor
+  ranks:
+    RMCRankProvostAdvisor: []
+  startingGear: RMCGearProvostAdvisor
+  icon: RMCJobIconProvostAdvisor
+  joinNotifyCrew: false
+  accessGroups:
+  - ShipMasterAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 3
+        RMCSkillEndurance: 3
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillPolice: 2
+    - type: JobPrefix
+      prefix: rmc-job-prefix-provost-advisor
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidProvostAdvisor
+  name: provost ghost role advisor
+  suffix: Role, Player, Low Law Understanding
+  components:
+  - type: Sprite
+    sprite: Markers/cross.rsi
+    state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCProvostAdvisor
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCProvostAdvisor
+  components:
+  - type: RMCJobSpawner
+    job: CMProvostAdvisor
+
+- type: startingGear
+  id: RMCGearProvostAdvisor
+  equipment:
+    head: RMCHeadBeretProvostSenior
+    eyes: CMGlassesSecurity
+    ears: RMCHeadsetProvost
+    jumpsuit: CMJumpsuitProvostSenior
+    outerClothing: RMCProvostJacketFilled
+    gloves: CMHandsBlackMarine # TODO RMC14 black gloves
+    shoes: CMBootsBlackFilled
+    id: RMCIDCardProvostAdvisor
+    belt: CMBeltSecurityMPFilled
+    back: CMSatchelSecurityFilledProvost
+#    pocket1: # TODO RMC14 tape recorder
+    pocket2: RMCPouchGeneralLarge # TODO RMC14 3 listening devices
+
+- type: playTimeTracker
+  id: CMJobProvostAdvisor
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconProvostAdvisor
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_pva
+
+- type: entity
+  parent: CMIDCardGold # TODO RMC14 provost id
+  id: RMCIDCardProvostAdvisor
+  name: provost advisor ID card
+  description: Issued to members of the Provost Office.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+  - type: PresetIdCard
+    job: CMProvostAdvisor

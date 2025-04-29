@@ -1,10 +1,11 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
   id: CMXenoCrusher
   name: Crusher
   description: A huge alien with an enormous armored crest.
@@ -37,6 +38,8 @@
     tier: 3
     hudOffset: -0.15,0.1
     unlockAt: 900 # 15 minutes
+  - type: XenoRegen
+    standHealingMultiplier: 0.66
   - type: XenoHeavy
   - type: XenoDevolve
     devolvesTo:
@@ -47,7 +50,6 @@
       types:
         Blunt: 65
     selfEffect: CMEffectSelfStomp
-    effect: CMEffectStomp
   - type: XenoCharge
     damage:
       types:
@@ -59,7 +61,7 @@
     maxPlasma: 400
     plasmaRegenOnWeeds: 4
   - type: CMArmor
-    armor: 30
+    xenoArmor: 30
     explosionArmor: 100
   - type: XenoClaws
     clawType: VerySharp
@@ -75,7 +77,6 @@
   - type: XenoShield
   - type: XenoMeleeSlow
     slowTime: 2
-    effect: RMCEffectCrusherSlow
   - type: Tackle
     chance: 0.25
   - type: MovementSpeedModifier
@@ -106,3 +107,6 @@
       state: crusher
   - type: StunOnExplosionReceived
     weak: false
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.7
+  - type: TantrumSpeedBuff

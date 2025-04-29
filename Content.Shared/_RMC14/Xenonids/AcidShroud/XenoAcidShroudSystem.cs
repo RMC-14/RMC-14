@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Xenonids.GasToggle;
+using Content.Shared.Actions;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 
@@ -13,6 +14,7 @@ public sealed class XenoAcidShroudSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoAcidShroudComponent, XenoAcidShroudActionEvent>(OnAcidShroudAction);
+        SubscribeLocalEvent<XenoAcidShroudComponent, DoAfterAttemptEvent<XenoAcidShroudDoAfterEvent>>(OnAcidShroudDoAfterAttempt);
         SubscribeLocalEvent<XenoAcidShroudComponent, XenoAcidShroudDoAfterEvent>(OnAcidShroudDoAfter);
         SubscribeLocalEvent<XenoAcidShroudComponent, XenoGasToggleActionEvent>(OnToggleType);
     }
@@ -26,15 +28,32 @@ public sealed class XenoAcidShroudSystem : EntitySystem
             BreakOnMove = true,
         };
         _doAfter.TryStartDoAfter(doAfter);
+
+        _rmcActions.DisableSharedCooldownEvents(args.Action.Owner, ent);
+    }
+
+    private void OnAcidShroudDoAfterAttempt(Entity<XenoAcidShroudComponent> ent, ref DoAfterAttemptEvent<XenoAcidShroudDoAfterEvent> args)
+    {
+        if (args.Event.Target is { } action &&
+            TryComp(action, out InstantActionComponent? actionComponent) &&
+            !actionComponent.Enabled)
+        {
+            _rmcActions.EnableSharedCooldownEvents(action, ent);
+            args.Cancel();
+        }
     }
 
     private void OnAcidShroudDoAfter(Entity<XenoAcidShroudComponent> ent, ref XenoAcidShroudDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled || args.Target is not { } action)
+        if (args.Target is not { } action)
+            return;
+        _rmcActions.EnableSharedCooldownEvents(action, ent);
+        if (args.Cancelled || args.Handled)
             return;
 
         args.Handled = true;
         SpawnAtPosition(ent.Comp.Spawn, ent.Owner.ToCoordinates());
+
         _rmcActions.ActivateSharedCooldown(action, ent);
     }
 

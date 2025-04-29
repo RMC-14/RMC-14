@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: BaseStructure
   id: CMBaseStructure
   abstract: true
@@ -36,6 +36,7 @@
       Brute:
         collection: XenoResinBreak
   - type: XenoConstruct
+  - type: RMCDeleteAnchoredOnInit
   - type: RMCWallExplosionDeletable
   - type: DestroyedByExplosionType
   - type: NpcFactionMember
@@ -51,6 +52,7 @@
     hitsToInvulnerability: 3
   - type: DamageMultiplierFlags
     flags: Breaching
+  - type: DeletedByWeedKiller
 
 - type: entity
   id: CMCorrodible
@@ -96,6 +98,8 @@
   - type: RMCDropshipBlocked
   - type: MinimapColor
     color: "#ebe5e5ee"
+  - type: IsRoof
+  - type: SunShadowCast
 
 - type: entity
   abstract: true
@@ -122,6 +126,7 @@
   - type: Corrodible
     isCorrodible: true
     structure: true
+    meltTimeMult: 3
   - type: Clickable
   - type: RMCWallExplosionDeletable
   - type: DestroyedByExplosionType
@@ -156,6 +161,10 @@
     flags:
     - Turf
     - Xeno
+  - type: ResinSurgeReinforcable
+  - type: Tag
+    tags:
+    - SpreaderIgnore
 
 # Invisible Wall
 

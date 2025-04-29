@@ -1,4 +1,4 @@
-﻿using Robust.Shared.Audio;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -24,12 +24,6 @@ public sealed partial class XenoCleaveComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId RootEffect = "CMEffectPunch";
-
-    [DataField, AutoNetworkedField]
-    public EntProtoId RootStatusEffect = "RMCEffectFreezeVanguardRootBase";
-
-    [DataField, AutoNetworkedField]
-    public EntProtoId RootStatusEffectBuffed = "RMCEffectFreezeVanguardRootBuffed";
 
     [DataField, AutoNetworkedField]
     public EntProtoId FlingEffect = "RMCEffectSlam";

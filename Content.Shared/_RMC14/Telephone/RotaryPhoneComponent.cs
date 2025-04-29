@@ -7,7 +7,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._RMC14.Telephone;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(SharedTelephoneSystem))]
+[Access(typeof(SharedRMCTelephoneSystem))]
 public sealed partial class RotaryPhoneComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -32,7 +32,7 @@ public sealed partial class RotaryPhoneComponent : Component
     public SoundSpecifier? VoicemailSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Phone/voicemail.ogg", AudioParams.Default.WithVolume(-3));
 
     [DataField, AutoNetworkedField]
-    public EntProtoId<TelephoneComponent> PhoneId = "RMCTelephone";
+    public EntProtoId<RMCTelephoneComponent> PhoneId = "RMCTelephone";
 
     [DataField, AutoNetworkedField]
     public string ContainerId = "rmc_rotary_phone_telephone";

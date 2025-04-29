@@ -14,4 +14,7 @@ public sealed partial class ReagentPrototype
 
     [DataField]
     public FixedPoint2 Intensity;
+
+    [DataField]
+    public FixedPoint2 Duration;
 }

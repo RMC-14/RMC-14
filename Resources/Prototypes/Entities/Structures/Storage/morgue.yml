@@ -38,7 +38,7 @@
   - type: EntityStorage
     isCollidableWhenOpen: true
     showContents: false
-    capacity: 1
+    capacity: 30
     enteringOffset: 0, -1
     closeSound:
       path: /Audio/Items/deconstruct.ogg
@@ -115,7 +115,7 @@
   - type: EntityStorage
     isCollidableWhenOpen: true
     showContents: false
-    capacity: 1
+    capacity: 30
     enteringOffset: 0, -1
     closeSound:
       path: /Audio/Items/deconstruct.ogg

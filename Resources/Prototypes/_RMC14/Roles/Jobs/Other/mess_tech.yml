@@ -4,6 +4,16 @@
   name: cm-job-name-messtech
   description: cm-job-description-messtech
   playTimeTracker: CMJobMessTech
+  ranks:
+    RMCRankLanceCorporal:
+    - !type:RoleTimeRequirement
+      role: CMJobMessTech
+      time: 252000 # 70 hours
+    RMCRankPrivateFirstClass:
+    - !type:RoleTimeRequirement
+      role: CMJobMessTech
+      time: 36000 # 10 hours
+    RMCRankPrivate: []
   startingGear: CMGearMessTech
   icon: "CMJobIconMessTech"
   joinNotifyCrew: false
@@ -28,8 +38,11 @@
         RMCSkillFirearms: 2
         RMCSkillFireman: 1
     - type: JobPrefix
-      prefix: "MST"
-  hidden: true # TODO RMC14
+      prefix: cm-job-prefix-messtech
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: mst
 
 - type: startingGear
   id: CMGearMessTech
@@ -41,7 +54,7 @@
     shoes: CMBootsBlack
     id: CMIDCardMessTech
     ears: CMHeadsetChef
-#    belt: TODO RMC14 M276 Pattern General Pistol Holster Rig Filled
+    belt: RMCM1984BeltFilled
     pocket1: RMCPouchGeneralMedium
 
 - type: entity
@@ -52,10 +65,7 @@
   - type: SpawnPoint
     job_id: CMMessTech
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: mess_tech
+    state: chef_spawn
 
 - type: playTimeTracker
   id: CMJobMessTech

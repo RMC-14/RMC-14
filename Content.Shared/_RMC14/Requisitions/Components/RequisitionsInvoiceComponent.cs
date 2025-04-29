@@ -8,7 +8,7 @@ namespace Content.Shared._RMC14.Requisitions.Components;
 public sealed partial class RequisitionsInvoiceComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public int Reward = 300;
+    public int Reward = 100;
 
     [DataField]
     public EntProtoId PaperOutput = "RMCPaperRequisitionInvoice";

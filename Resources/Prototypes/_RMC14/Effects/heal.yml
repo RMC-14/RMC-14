@@ -1,9 +1,10 @@
 ﻿- type: entity
+  parent: RMCBaseEffect
   id: RMCEffectHeal
   categories: [ HideSpawnMenu ]
   components:
   - type: TimedDespawn
-    lifetime: 3
+    lifetime: 2
   - type: Sprite
     drawdepth: Effects
     sprite: _RMC14/Effects/heal.rsi
@@ -28,6 +29,17 @@
 
 - type: entity
   parent: RMCEffectHeal
+  id: RMCEffectHealPlasma
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 1.5
+  - type: Sprite
+    color: "#00FFFF"
+    state: plasma_overlay
+
+- type: entity
+  parent: RMCEffectHeal
   id: RMCEffectHealHealer
   categories: [ HideSpawnMenu ]
   components:
@@ -41,6 +53,8 @@
   id: RMCEffectHealSacrifice
   categories: [ HideSpawnMenu ]
   components:
+  - type: TimedDespawn
+    lifetime: 3
   - type: Sprite
     color: "#44253D"
 
@@ -49,6 +63,8 @@
   id: RMCEffectHealAilments
   categories: [ HideSpawnMenu ]
   components:
+  - type: TimedDespawn
+    lifetime: 3
   - type: Sprite
     color: "#F5007A"
 
@@ -57,13 +73,25 @@
   id: RMCEffectHealQueen
   categories: [ HideSpawnMenu ]
   components:
+  - type: TimedDespawn
+    lifetime: 3
   - type: Sprite
     color: "#D9F500"
 
 - type: entity
   parent: RMCEffectHeal
-  id: RMCEffectHealSoak
+  id: RMCEffectHealFlurry
   categories: [ HideSpawnMenu ]
   components:
+  - type: TimedDespawn
+    lifetime: 1
   - type: Sprite
-    color: "#AD1313"
+    color: "#00BE6F"
+
+- type: entity
+  parent: RMCEffectHeal
+  id: RMCEffectHealHeadbite
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 3

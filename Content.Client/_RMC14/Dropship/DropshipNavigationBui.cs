@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.Dropship;
 using Content.Shared.Shuttles.Systems;
 using JetBrains.Annotations;
+using Robust.Client.UserInterface;
 using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Dropship;
@@ -25,6 +26,7 @@ public sealed class DropshipNavigationBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         OpenWindow();
     }
 
@@ -43,21 +45,12 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         }
     }
 
-    protected override void Dispose(bool disposing)
-    {
-        if (disposing)
-        {
-            _window?.Close();
-            _window?.Dispose();
-        }
-    }
-
     private void OpenWindow()
     {
         if (_window != null)
             return;
 
-        _window = new DropshipNavigationWindow();
+        _window = this.CreateWindow<DropshipNavigationWindow>();
         _window.OnClose += OnClose;
         SetFlightHeader("Flight Controls");
         SetDoorHeader("Lockdown");
@@ -86,8 +79,6 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         };
 
         _window.LockdownButton.Button.OnPressed += _ => SendPredictedMessage(new DropshipLockdownMsg());
-
-        _window.OpenCentered();
         _entities.System<DropshipSystem>().Uis.Add(this);
     }
 

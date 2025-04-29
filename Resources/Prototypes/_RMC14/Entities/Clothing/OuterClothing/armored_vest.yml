@@ -1,7 +1,7 @@
 ﻿- type: entity
-  parent: RMCBaseArmor
+  parent: [RMCAllowSuitStorageClothingArmorVest, RMCBaseArmor]
   id: RMCArmorVest
-  name: armored vest
+  name: armor vest
   description: An armored vest that protects against some damage.
   components:
   - type: Sprite
@@ -12,7 +12,89 @@
     walkModifier: 0.725
     sprintModifier: 0.725
   - type: CMArmor
-    armor: 15 # TODO RMC14 20 bullet
+    melee: 15
+    bullet: 20
     bio: 20
     explosionArmor: 10
   - type: CMHardArmor
+
+- type: entity
+  parent: RMCArmorVest
+  id: RMCArmorVestWeYa
+  name: We-Ya security armor vest
+  description: An armored vest that protects against some damage. This one has a Weston-Yamada corporate badge.
+
+- type: entity
+  parent: RMCArmorVestWeYa
+  id: RMCArmorSecurity
+  name: security armor vest
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/security_armor.rsi
+
+# MP Armor vest - No slowdown, no general protection
+- type: entity
+  parent: [ClothingOuterBase, RMCAllowSuitStorageClothingArmorMP, BaseStorageItem]
+  id: RMCArmorVestMP
+  name: MP armor vest
+  description: A type of body armor designed for protection against internal threats. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against cuts, explosions or bio-threats. Not recommend for direct combat or for deployment use against hostiles.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/mp_armored_vest.rsi # TODO RCM14 someone should make a better sprite for this
+  - type: CMArmor
+    melee: 0
+    bullet: 20
+    bio: 0
+    explosionArmor: 0
+  - type: Item
+    size: Huge
+  - type: CMDefibrillatorBlocked
+    popup: cm-defib-take-off-armor
+    showOnExamine: false
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: Clothing
+    equipSound:
+      path: /Audio/_RMC14/Machines/armor_equip.ogg
+  - type: PlaytimeMedalHolder
+  - type: StoreAfterFailedInteract
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,3,1 # 2 slots
+  - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - MRE
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+
+# mild melee armor
+- type: entity
+  parent: RMCArmorVestMP
+  id: RMCArmorVestIO
+  name: intel armor vest
+  description: A type of body armor designed for mobility. It absorbs the impact of firearm projectiles, while retaining ease of movement. Does not protect against explosions, or bio-threats. Not recommend for direct combat.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armored_vest.rsi # TODO RCM14 someone should make a better sprite for this
+  - type: CMArmor
+    melee: 10
+    bullet: 10
+    bio: 0
+    explosionArmor: 0
+
+- type: entity
+  parent: RMCArmorVestMP
+  id: RMCArmorVestMedic
+  name: corpsman armor vest
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armored_vest.rsi # TODO RCM14 someone should make a better sprite for this
+  - type: CMArmor
+    melee: 0
+    bullet: 10

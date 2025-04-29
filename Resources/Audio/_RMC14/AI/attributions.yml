@@ -1,0 +1,34 @@
+- files: ["code_blue_elevated.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/AI/code_blue_elevated.ogg"
+
+- files: ["code_blue_lowered.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/AI/code_blue_lowered.ogg"
+
+- files: ["code_green.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/AI/code_green.ogg"
+
+- files: ["code_red_elevated.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/AI/code_red_elevated.ogg"
+
+- files: ["code_red_lowered.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/AI/code_red_lowered.ogg"
+
+- files: ["commandreport.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/AI/commandreport.ogg"
+
+- files: ["announce.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/misc/interference.ogg"

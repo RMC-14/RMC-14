@@ -102,3 +102,30 @@
   components:
   - type: Sprite
     state: fort_biceps
+
+- type: entity
+  parent: RMCBaseLandingSign
+  id: RMCHybrisaProsperaSign
+  name: Hybrisa Prospera welcome sign
+  description: A large sign that reads 'Welcome to Hybrisa Prospera', The Weston Yamada 'Wings' and logo adorn the sign, as well as some information about the colony.
+  components:
+  - type: Sprite
+    state: hybrisa_sign
+
+- type: entity
+  parent: RMCBaseLandingSign
+  id: RMCHybrisaProsperaMedicalSign
+  name: Hybrisa Prospera - Emergency Medical Landing Zone one sign
+  description: A large sign that reads 'Emergency Medical - HBP - LZ - 01'.
+  components:
+  - type: Sprite
+    state: hybrisamedical_sign
+
+- type: entity
+  parent: RMCBaseLandingSign
+  id: RMCHybrisaProsperaMiningSign
+  name: Hybrisa Prospera - Weston-Yamada Tartarus Mining - Landing Zone two sign
+  description: A large sign that reads 'WEYA - TMCC Mining - HBP - LZ - 01' The Tartarus Mining logo is adorns the sign.
+  components:
+  - type: Sprite
+    state: hybrisamining_sign

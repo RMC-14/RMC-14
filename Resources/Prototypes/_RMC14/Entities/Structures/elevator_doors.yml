@@ -1,0 +1,32 @@
+﻿- type: entity
+  id: RMCElevatorDoorBroken
+  name: broken elevator door
+  description: completely broken, the elevator is not going to work.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 190
+        layer:
+        - MobMask
+  - type: Sprite
+    sprite: _RMC14/Structures/elevator_doors.rsi
+    state: elevator_left
+  - type: Clickable
+  - type: InteractionOutline
+
+- type: entity
+  parent: RMCElevatorDoorBroken
+  id: RMCElevatorDoorBrokenRight
+  components:
+  - type: Sprite
+    state: elevator_right

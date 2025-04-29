@@ -3,6 +3,7 @@
   - CMXenoDeveloped
   - CMXenoTail
   - RMCXenoSpeechSounds
+  - RMCXenoMobCollision
   id: CMXenoQueen
   name: Queen
   description: A huge, looming alien creature. The biggest and the baddest.
@@ -21,6 +22,18 @@
     - map: [ "enum.XenoInhandVisualLayers.Left" ]
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
+    - map: [ "focused" ]
+      sprite: _RMC14/Interface/xeno_hud.rsi
+      state: hudeye
+      visible: false
+    - map: [ "targetedDirection" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_direction
+      visible: false
+    - map: [ "targetedDirectionIntense" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_intense_direction
       visible: false
   - type: MobState
     allowedStates:
@@ -65,21 +78,28 @@
   - type: XenoHeavy
   - type: XenoAcid
   - type: XenoConstruction
+    buildDelay: 2
     canBuild:
     - WallXenoResin
     - WallXenoMembrane
     - DoorXenoResin
+    - XenoStickyResin
+    - XenoFastResin
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
+    - HiveEggMorpherXenoConstructionNode
+    - HiveClusterXenoConstructionNode
+    - HiveRecoveryNodeXenoConstructionNode
   - type: XenoDevour
   - type: XenoPheromones
     pheromonesMultiplier: 4
+    pheroSuffix: queen
   - type: XenoPlasma
     plasma: 1000
     maxPlasma: 1000
     plasmaRegenOnWeeds: 4
   - type: CMArmor
-    armor: 25
+    xenoArmor: 25
     explosionArmor: 100
   - type: XenoWordQueen
   - type: XenoGut
@@ -219,8 +239,35 @@
   - type: CommendationGiver
   - type: XenoInhands
     prefix: queen
+  - type: XenoOmitNumber
+  - type: RMCFireArmorDebuffModifier
+    debuffModifier: 1.4
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 1.4
+  - type: QueenEyeAction
+  - type: StunFriendlyXenoOnStep
 
 - type: entity
   id: XenoLeaderPheromoneRelay
   components:
   - type: XenoPheromones
+
+- type: entity
+  parent: StationAiHolo
+  id: RMCQueenEye
+  name: queen eye
+  description: It seems to be a visual projection of someone.
+  categories: [ HideSpawnMenu, DoNotMap ]
+  components:
+  - type: Sprite
+    color: "#a800a8"
+    sprite: _RMC14/Effects/xeno_eye.rsi
+    layers:
+    - state: hologram
+  - type: Eye
+    drawFov: false
+  - type: QueenEye
+  - type: MotionDetectorTracked
+    isQueenEye: true
+  - type: Visibility
+    layer: 32770

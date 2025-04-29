@@ -61,6 +61,8 @@
           Acid3: {state: trapacid3}
   - type: Appearance
   - type: XenoResinHole
+  - type: XenoAnnounceStructureDestruction
+    messageID: rmc-xeno-construction-resin-hole-destroyed
   - type: Damageable
     damageContainer: StructuralXeno
   - type: Destructible
@@ -85,5 +87,5 @@
   - type: Corrodible
     isCorrodible: false
   - type: XenoConstruct
-    destroyWeeds: false
   - type: RequireProjectileTarget
+  - type: DeletedByWeedKiller

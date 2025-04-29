@@ -6,6 +6,7 @@ using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.NightVision;
 
@@ -13,6 +14,7 @@ public sealed class NightVisionOverlay : Overlay
 {
     [Dependency] private readonly IEntityManager _entity = default!;
     [Dependency] private readonly IPlayerManager _players = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     private readonly ContainerSystem _container;
     private readonly TransformSystem _transform;
@@ -20,6 +22,7 @@ public sealed class NightVisionOverlay : Overlay
 
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
+    private readonly ShaderInstance _shader;
     private readonly List<NightVisionRenderEntry> _entries = new();
 
     public NightVisionOverlay()
@@ -29,6 +32,8 @@ public sealed class NightVisionOverlay : Overlay
         _container = _entity.System<ContainerSystem>();
         _transform = _entity.System<TransformSystem>();
         _xenoQuery = _entity.GetEntityQuery<XenoComponent>();
+
+        _shader = _prototype.Index<ShaderPrototype>("RMCNightVision").Instance().Duplicate();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -67,6 +72,20 @@ public sealed class NightVisionOverlay : Overlay
         }
 
         handle.SetTransform(Matrix3x2.Identity);
+
+        if (!nightVision.Green)
+            return;
+
+        if (ScreenTexture == null || args.Viewport.Eye == null)
+            return;
+
+        _shader.SetParameter("renderScale", args.Viewport.RenderScale * args.Viewport.Eye.Scale);
+        _shader.SetParameter("SCREEN_TEXTURE", ScreenTexture);
+
+        var worldHandle = args.WorldHandle;
+        worldHandle.UseShader(_shader);
+        worldHandle.DrawRect(args.WorldBounds, Color.White);
+        worldHandle.UseShader(null);
     }
 
     private static int SortPriority(NightVisionRenderEntry x, NightVisionRenderEntry y)

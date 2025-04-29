@@ -8,7 +8,10 @@
   - !type:DepartmentTimeRequirement
     department: CMSquad
     time: 18000 # 5 hours
+  ranks:
+    RMCRankSecondLT: []
   startingGear: CMGearIntelOfficer
+  dummyStartingGear: RMCGearIntelOfficerEquipped
   icon: "CMJobIconIntelOfficer"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-aso
@@ -24,27 +27,58 @@
     - type: Skills
       skills:
         RMCSkillCqc: 1
+        RMCSkillEndurance: 1
         RMCSkillEngineer: 2
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
         RMCSkillIntel: 2
         RMCSkillJtac: 2
-        RMCSkillLeadership: 2
+        RMCSkillLeadership: 1
         RMCSkillMeleeWeapons: 1
         RMCSkillOverwatch: 1
         RMCSkillResearch: 1
+    - type: CMVendorUser
+      points: 45
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
-      prefix: "IO"
-  hidden: true # TODO RMC14
+      prefix: cm-job-prefix-intel
+    - type: ViewIntelObjectives
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadIntel
+    - type: SquadArmorWearer
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: io
+    - type: SquadNameOverride
+      name: cm-job-name-intel
 
 - type: startingGear
   id: CMGearIntelOfficer
   equipment:
-    jumpsuit: CMJumpsuitIO
+    jumpsuit: RMCUniformIntel
     shoes: CMBootsBlackFilled
     id: CMIDCardIntelOfficer
+
+- type: startingGear
+  id: RMCGearIntelOfficerEquipped
+  equipment:
+    jumpsuit: RMCUniformIntel
+    back: CMSatchelMarineIntel
+    shoes: CMBootsBlackFilled
+    head: RMCArmorHelmetM12Intel
+    outerClothing: RMCArmorXM4
+    gloves: CMHandsInsulated
+    id: CMIDCardIntelOfficer
+    ears: CMHeadsetIntel
+    belt: RMCMK80BeltFilled
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchDocument
+  inhand:
+    - RMCBinoculars
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -54,10 +88,16 @@
   - type: SpawnPoint
     job_id: CMIntelOfficer
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: intel_officer
+    state: io_spawn
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleIO
+  name: Intelligence Officer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: intel_officer
 
 - type: playTimeTracker
   isHumanoid: true

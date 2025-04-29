@@ -125,6 +125,18 @@
   description: These synth-leather boots seem high quality when first worn, but quickly detoriate, especially in the environments the corporate security members these are issued to operate in. Still, better than nothing.
 
 
+# SPP
+- type: entity
+  parent: CMBootsBrown
+  id: RMCBootsSPP
+  name: military combat boots
+
+- type: entity
+  parent: [RMCItemSlotM5Bayonet, RMCBootsSPP] # TODO RMC14 SPP Bayonet
+  id: RMCBootsSPPFilled
+  suffix: Filled
+
+
 # PMC
 - type: entity
   parent: CMBootsBlack
@@ -174,12 +186,12 @@
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/cbrn.rsi
 
 
-# Royal Marines
+# Royal Crown Marines
 - type: entity
   parent: CMBootsBlack
   id: RMCBootsRoyal
   name: L10 pattern combat boots
-  description: Standard issue combat boots for combat scenarios or combat situations. Used by the threa sun empires royal marines commando units.
+  description: Standard issue combat boots for combat scenarios or combat situations. Used by the Three Sun Empire's Royal Crown Marines.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/rmc.rsi
@@ -189,4 +201,4 @@
 - type: entity
   parent: [RMCItemSlotM5Bayonet, RMCBootsRoyal]
   id: RMCBootsRoyalFilled
-  suffix: Filled
+  suffix: Filled # TODO RMC14 L5 bayonet

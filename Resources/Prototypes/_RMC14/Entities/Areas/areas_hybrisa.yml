@@ -1,0 +1,2588 @@
+﻿- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaLv759
+  name: LV-759 Hybrisa Prospera
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/hybrisareas.rsi
+    state: hybrisa
+  - type: Area
+    buildSpecial: true
+    powerNet: ground
+    minimapColor: '#91BDCFE7'
+
+- type: entity
+  parent: RMCAreaLv759
+  id: RMCAreaLv759Indoors
+  name: Hybrisa - Indoors
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaLv759
+  id: RMCAreaLv759Outdoors
+  name: Hybrisa - Outdoors
+  components:
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv759
+  id: RMCAreaLv759Oob
+  name: Out Of Bounds
+  components:
+  - type: Sprite
+    state: oob
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
+    minimapColor: '#3A3A3AFF'
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaLv759
+  id: RMCAreaLv759Bunker
+  name: Out Of Bounds
+  components:
+  - type: Sprite
+    state: oob
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
+    minimapColor: '#3A3A3AFF'
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaLv759Bunker
+  id: RMCAreaLv759BunkerGonzo
+  name: Gonzo's hide-out
+  components:
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
+    minimapColor: '#3A3A3AFF'
+
+- type: entity
+  parent: RMCAreaLv759Bunker
+  id: RMCAreaLv759BunkerCheckpoint
+  name: Checkpoint & Hidden Bunker - Entrance
+  components:
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
+    minimapColor: '#3A3A3AFF'
+
+- type: entity
+  parent: RMCAreaLv759Outdoors
+  id: RMCAreaLv759OutdoorsLandingZone1
+  name: Nova Medica Hospital Complex - Emergency Response - Landing Zone One
+  components:
+  - type: Sprite
+    state: medical_lz1
+  - type: Area
+    resinAllowed: false
+    landingZone: true
+    minimapColor: '#EBE5E5E3'
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    linkedLz: dropship_lz1
+
+- type: entity
+  abstract: true
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsLandingZone1
+
+- type: entity
+  parent: RMCAreaLv759IndoorsLandingZone1
+  id: RMCAreaLv759IndoorsLandingZone1FlightControlRoom
+  name: Nova Medica Hospital Complex - Emergency Response - Landing Zone One - Flight Control Room
+  components:
+  - type: Sprite
+    state: hybrisa
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+    landingZone: true
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaLv759IndoorsLandingZone1
+  id: RMCAreaLv759IndoorsLandingZone1Lz1Console
+  name: Nova Medica Hospital Complex - Emergency Response - Landing Zone One - Dropship Alamo Console
+  components:
+  - type: Sprite
+    state: hybrisa
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+    landingZone: true
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaLv759Outdoors
+  id: RMCAreaLv759OutdoorsLandingZone2
+  name: KMCC Interstellar Freight Hub - Landing Zone Two
+  components:
+  - type: Sprite
+    state: mining_lz2
+  - type: Area
+    resinAllowed: false
+    landingZone: true
+    minimapColor: '#EBE5E5E3'
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    linkedLz: dropship_lz2
+
+- type: entity
+  abstract: true
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsLandingZone2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsLandingZone2
+  id: RMCAreaLv759IndoorsLandingZone2KmccHubFlightControlRoom
+  name: KMCC Interstellar Freight Hub - Flight Control Room
+  components:
+  - type: Sprite
+    state: hybrisa
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsLandingZone2
+  id: RMCAreaLv759IndoorsLandingZone2KmccHubSecurity
+  name: KMCC Interstellar Freight Hub - Security Checkpoint Office
+  components:
+  - type: Sprite
+    state: security_checkpoint
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsLandingZone2
+  id: RMCAreaLv759IndoorsLandingZone2KmccHubLoungeNorth
+  name: KMCC Interstellar Freight Hub - Passenger Departures - Lounge North
+  components:
+  - type: Sprite
+    state: hybrisa
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsLandingZone2
+  id: RMCAreaLv759IndoorsLandingZone2KmccHubFuel
+  name: KMCC Interstellar Freight Hub - Fuel Storage & Maintenance - North
+  components:
+  - type: Sprite
+    state: hybrisa
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsLandingZone2
+  id: RMCAreaLv759IndoorsLandingZone2KmccHubLoungeSouth
+  name: KMCC Interstellar Freight Hub - Passenger Departures - Lounge South
+  components:
+  - type: Sprite
+    state: hybrisa
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsLandingZone2
+  id: RMCAreaLv759IndoorsLandingZone2KmccHubLoungeHallway
+  name: KMCC Interstellar Freight Hub - Passenger Departures - Hallway
+  components:
+  - type: Sprite
+    state: hybrisa
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsLandingZone2
+  id: RMCAreaLv759IndoorsLandingZone2KmccHubSouthOffice
+  name: KMCC Interstellar Freight Hub - Passenger Departures - South Office
+  components:
+  - type: Sprite
+    state: hybrisa
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsLandingZone2
+  id: RMCAreaLv759IndoorsLandingZone2KmccHubMaintenance
+  name: KMCC Interstellar Freight Hub - Passenger Departures - Maintenance
+  components:
+  - type: Sprite
+    state: hybrisa
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+    linkedLz: dropship_lz2
+
+- type: entity
+  abstract: true
+  parent: RMCAreaLv759IndoorsLandingZone2
+  id: RMCAreaLv759IndoorsLandingZone2KmccHub
+
+- type: entity
+  parent: RMCAreaLv759IndoorsLandingZone2KmccHub
+  id: RMCAreaLv759IndoorsLandingZone2KmccHubLz2Console
+  name: KMCC Interstellar Freight Hub - Dropship Normandy Console
+  components:
+  - type: Sprite
+    state: hybrisa
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsLandingZone2
+  id: RMCAreaLv759IndoorsLandingZone2KmccHubCargo
+  name: KMCC Interstellar Freight Hub - Cargo Processing Center
+  components:
+  - type: Sprite
+    state: mining_cargo
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+    minimapColor: '#91BDCFE7'
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsLandingZone2
+  id: RMCAreaLv759IndoorsLandingZone2KmccHubMaintenanceNorth
+  name: KMCC Interstellar Freight Hub - Cargo Processing Center - Maintenance
+  components:
+  - type: Sprite
+    state: mining
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: false
+    mortarFire: true
+    lasing: false
+    medevac: false
+    OB: true
+    supplyDrop: true
+    minimapColor: '#91BDCFE7'
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759OutdoorsLandingZone2
+  id: RMCAreaLv759OutdoorsLandingZone2KmccHubCargoEntranceSouth
+  name: KMCC Interstellar Freight Hub - Cargo Processing Center - Main Entrance & South Unloading Platform
+  components:
+  - type: Sprite
+    state: mining
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    minimapColor: '#6C6767D8'
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsDerelictShip
+  name: Derelict Ship
+  components:
+  - type: Sprite
+    state: derelictship
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
+    minimapColor: '#390192EE'
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsCaves
+  name: Caves
+  components:
+  - type: Sprite
+    state: caves_plateau
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+    minimapColor: '#390192EE'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCaves
+  id: RMCAreaLv759IndoorsCavesWyResearchComplexEntrance
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - North Main Entrance
+  components:
+  - type: Sprite
+    state: wylab
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+    minimapColor: '#390192EE'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCaves
+  id: RMCAreaLv759IndoorsCavesWestCaves
+  name: Caverns - West
+  components:
+  - type: Sprite
+    state: caves_west
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+    minimapColor: '#390192EE'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCaves
+  id: RMCAreaLv759IndoorsCavesElectricFence1
+  name: Electrical Fence - West Caves
+  components:
+  - type: Sprite
+    state: power0
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCaves
+  id: RMCAreaLv759IndoorsCavesElectricFence2
+  name: Electrical Fence - East Caves
+  components:
+  - type: Sprite
+    state: power0
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCaves
+  id: RMCAreaLv759IndoorsCavesElectricFence3
+  name: Electrical Fence - Central Caves
+  components:
+  - type: Sprite
+    state: power0
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCaves
+  id: RMCAreaLv759IndoorsCavesCommsTower
+  name: Comms Tower - Central Caves
+  components:
+  - type: Sprite
+    state: power0
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCaves
+  id: RMCAreaLv759IndoorsCavesSensoryTower
+  name: Sensory Tower - Plateau Caves
+  components:
+  - type: Sprite
+    state: power0
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCaves
+  id: RMCAreaLv759IndoorsCavesWestCavesAlarm
+  name: Caverns - West
+  components:
+  - type: Sprite
+    state: caves_west
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+    minimapColor: '#390192EE'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCaves
+  id: RMCAreaLv759IndoorsCavesEastCaves
+  name: Caverns - East
+  components:
+  - type: Sprite
+    state: caves_east
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+    minimapColor: '#390192EE'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCavesEastCaves
+  id: RMCAreaLv759IndoorsCavesEastCavesNorth
+  name: Caverns - East
+  components:
+  - type: Sprite
+    state: caves_east
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCaves
+  id: RMCAreaLv759IndoorsCavesSouthCaves
+  name: Caverns - South
+  components:
+  - type: Sprite
+    state: caves_south
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+    minimapColor: '#390192EE'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCavesSouthCaves
+  id: RMCAreaLv759IndoorsCavesSouthCavesDerelictShip
+  name: Caverns - South
+  components:
+  - type: Sprite
+    state: caves_south
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCaves
+  id: RMCAreaLv759IndoorsCavesSouthEastCaves
+  name: Caverns - Southeast
+  components:
+  - type: Sprite
+    state: caves_southeast
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+    minimapColor: '#390192EE'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCaves
+  id: RMCAreaLv759IndoorsCavesSouthWestCaves
+  name: Caverns - Southwest
+  components:
+  - type: Sprite
+    state: caves_southwest
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+    minimapColor: '#390192EE'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCaves
+  id: RMCAreaLv759IndoorsCavesSouthWestCavesAlarm
+  name: Caverns - Southwest
+  components:
+  - type: Sprite
+    state: wylab
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+    minimapColor: '#856600EE'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCaves
+  id: RMCAreaLv759IndoorsCavesNorthWestCaves
+  name: Caverns - Northwest
+  components:
+  - type: Sprite
+    state: caves_northwest
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+    minimapColor: '#390192EE'
+
+- type: entity
+  abstract: true
+  parent: RMCAreaLv759Outdoors
+  id: RMCAreaLv759OutdoorsCaves
+
+- type: entity
+  parent: RMCAreaLv759OutdoorsCaves
+  id: RMCAreaLv759OutdoorsCavesNorthWestCavesOutdoors
+  name: Caverns - Northwest
+  components:
+  - type: Sprite
+    state: caves_northwest
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    minimapColor: '#390192EE'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCaves
+  id: RMCAreaLv759IndoorsCavesNorthEastCaves
+  name: Caverns - Northeast
+  components:
+  - type: Sprite
+    state: caves_northeast
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+    minimapColor: '#390192EE'
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCavesNorthEastCaves
+  id: RMCAreaLv759IndoorsCavesNorthEastCavesSouth
+  components:
+  - type: Area
+    linkedLz: list(dropship_lz1, dropship_lz2)
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCaves
+  id: RMCAreaLv759IndoorsCavesNorthCaves
+  name: Caverns - North
+  components:
+  - type: Sprite
+    state: caves_north
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+    minimapColor: '#390192EE'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCavesNorthCaves
+  id: RMCAreaLv759IndoorsCavesNorthCavesEast
+  components:
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCaves
+  id: RMCAreaLv759IndoorsCavesCentralCaves
+  name: Caverns - Central
+  components:
+  - type: Sprite
+    state: caves_central
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+    minimapColor: '#390192EE'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCaves
+  id: RMCAreaLv759IndoorsCavesCentralCavesNorth
+  name: Caverns - Central
+  components:
+  - type: Sprite
+    state: caves_central
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+    minimapColor: '#390192EE'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCaves
+  id: RMCAreaLv759IndoorsCavesNorthEastCavesComms
+  name: KMCC - Mining Outpost - East - Subspace-Communications
+  components:
+  - type: Sprite
+    state: comms_1
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    minimapColor: '#00B3FFE7'
+    linkedLz: list(dropship_lz1, dropship_lz2)
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCaves
+  id: RMCAreaLv759IndoorsCavesNorthEastCavesComms2
+  name: NMHC - Emergency Response - Landing Zone One - Caverns - Northeast - Subspace-Communications
+  components:
+  - type: Sprite
+    state: comms_1
+  - type: Area
+    minimapColor: '#00B3FFE7'
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaLv759Outdoors
+  id: RMCAreaLv759OutdoorsCaveplateau
+  name: Caverns - Plateau
+  components:
+  - type: Sprite
+    state: caves_plateau
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    minimapColor: '#390192EE'
+
+- type: entity
+  parent: RMCAreaLv759Outdoors
+  id: RMCAreaLv759OutdoorsColonyStreets
+  name: Colony Streets
+  components:
+  - type: Sprite
+    state: colonystreets_north
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    minimapColor: '#4E6D67AE'
+
+- type: entity
+  parent: RMCAreaLv759OutdoorsColonyStreets
+  id: RMCAreaLv759OutdoorsColonyStreetsCentralStreets
+  name: Central Street - West
+  components:
+  - type: Sprite
+    state: colonystreets_west
+
+- type: entity
+  parent: RMCAreaLv759OutdoorsColonyStreets
+  id: RMCAreaLv759OutdoorsColonyStreetsEastCentralStreet
+  name: Central Street - East
+  components:
+  - type: Sprite
+    state: colonystreets_east
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaLv759OutdoorsColonyStreets
+  id: RMCAreaLv759OutdoorsColonyStreetsEastCentralStreetLeft
+  name: Central Street - East
+  components:
+  - type: Sprite
+    state: colonystreets_east
+
+- type: entity
+  parent: RMCAreaLv759OutdoorsColonyStreets
+  id: RMCAreaLv759OutdoorsColonyStreetsSouthStreet
+  name: Colony Streets - South
+  components:
+  - type: Sprite
+    state: colonystreets_south
+
+- type: entity
+  parent: RMCAreaLv759OutdoorsColonyStreets
+  id: RMCAreaLv759OutdoorsColonyStreetsSouthEastStreet
+  name: Colony Streets - Southeast
+  components:
+  - type: Sprite
+    state: colonystreets_southeast
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759OutdoorsColonyStreets
+  id: RMCAreaLv759OutdoorsColonyStreetsSouthWestStreet
+  name: Colony Streets - Southwest - WY Checkpoint Passthrough
+  components:
+  - type: Sprite
+    state: colonystreets_southwest
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaLv759OutdoorsColonyStreets
+  id: RMCAreaLv759OutdoorsColonyStreetsSouthEastStreetComms
+  name: Colony Streets - Southeast - Subspace-Communications
+  components:
+  - type: Sprite
+    state: comms_1
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    minimapColor: '#00B3FFE7'
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759OutdoorsColonyStreets
+  id: RMCAreaLv759OutdoorsColonyStreetsNorthWestStreet
+  name: Colony Streets - Northwest
+  components:
+  - type: Sprite
+    state: colonystreets_northwest
+
+- type: entity
+  parent: RMCAreaLv759OutdoorsColonyStreets
+  id: RMCAreaLv759OutdoorsColonyStreetsNorthEastStreet
+  name: Colony Streets - Northeast
+  components:
+  - type: Sprite
+    state: colonystreets_northeast
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaLv759OutdoorsColonyStreets
+  id: RMCAreaLv759OutdoorsColonyStreetsNorthEastStreetLZ
+  name: Colony Streets - Northeast
+  components:
+  - type: Sprite
+    state: colonystreets_northeast
+  - type: Area
+    landingZone: true
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaLv759OutdoorsColonyStreets
+  id: RMCAreaLv759OutdoorsColonyStreetsNorthStreet
+  name: Colony Streets - North
+  components:
+  - type: Sprite
+    state: colonystreets_north
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsSpaceport
+  components:
+  - type: Area
+    minimapColor: '#A54B01EE'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsSpaceport
+  id: RMCAreaLv759IndoorsSpaceportHallwayNortheast
+  name: Weston-Yamada Celestia Gateway Space-Port - Hallway - Northeast
+  components:
+  - type: Sprite
+    state: wyspaceport
+
+- type: entity
+  parent: RMCAreaLv759IndoorsSpaceport
+  id: RMCAreaLv759IndoorsSpaceportHallwayNorth
+  name: Weston-Yamada Celestia Gateway Space-Port - Hallway - North
+  components:
+  - type: Sprite
+    state: wyspaceport
+
+- type: entity
+  parent: RMCAreaLv759IndoorsSpaceport
+  id: RMCAreaLv759IndoorsSpaceportHallwayNorthwest
+  name: Weston-Yamada Celestia Gateway Space-Port - Hallway - Northwest
+  components:
+  - type: Sprite
+    state: wyspaceport
+
+- type: entity
+  parent: RMCAreaLv759IndoorsSpaceport
+  id: RMCAreaLv759IndoorsSpaceportHallwayEast
+  name: Weston-Yamada Celestia Gateway Space-Port - Hallway - East
+  components:
+  - type: Sprite
+    state: wyspaceport
+
+- type: entity
+  parent: RMCAreaLv759IndoorsSpaceport
+  id: RMCAreaLv759IndoorsSpaceportHeavyequip
+  name: Weston-Yamada Celestia Gateway Space-Port - Heavy Equipment Storage
+  components:
+  - type: Sprite
+    state: wyspaceport
+
+- type: entity
+  parent: RMCAreaLv759IndoorsSpaceport
+  id: RMCAreaLv759IndoorsSpaceportEngineering
+  name: Weston-Yamada Celestia Gateway Space-Port - Fuel Storage & Processing
+  components:
+  - type: Sprite
+    state: wyspaceport
+
+- type: entity
+  parent: RMCAreaLv759IndoorsSpaceport
+  id: RMCAreaLv759IndoorsSpaceportJanitor
+  name: Weston-Yamada Celestia Gateway Space-Port - Janitorial Storage Room
+  components:
+  - type: Sprite
+    state: wyspaceport
+
+- type: entity
+  parent: RMCAreaLv759IndoorsSpaceport
+  id: RMCAreaLv759IndoorsSpaceportMaintenanceEast
+  name: Weston-Yamada Celestia Gateway Space-Port - Maintenance - East
+  components:
+  - type: Sprite
+    state: wyspaceport
+
+- type: entity
+  parent: RMCAreaLv759IndoorsSpaceport
+  id: RMCAreaLv759IndoorsSpaceportCommunicationsOffice
+  name: Weston-Yamada Celestia Gateway Space-Port - Communications & Administration Office
+  components:
+  - type: Sprite
+    state: wyspaceportadmin
+
+- type: entity
+  parent: RMCAreaLv759IndoorsSpaceport
+  id: RMCAreaLv759IndoorsSpaceportFlightControlRoom
+  name: Weston-Yamada Celestia Gateway Space-Port - Flight Control Room
+  components:
+  - type: Sprite
+    state: wyspaceportadmin
+
+- type: entity
+  parent: RMCAreaLv759IndoorsSpaceport
+  id: RMCAreaLv759IndoorsSpaceportSecurity
+  name: Weston-Yamada Celestia Gateway Space-Port - Security- Observation & Office
+  components:
+  - type: Sprite
+    state: security_checkpoint
+
+- type: entity
+  parent: RMCAreaLv759IndoorsSpaceport
+  id: RMCAreaLv759IndoorsSpaceportSecurityOffice
+  name: Weston-Yamada Celestia Gateway Space-Port - Office
+  components:
+  - type: Sprite
+    state: security_checkpoint
+
+- type: entity
+  parent: RMCAreaLv759IndoorsSpaceport
+  id: RMCAreaLv759IndoorsSpaceportCargo
+  name: Weston-Yamada Celestia Gateway Space-Port - Cargo Bay
+  components:
+  - type: Sprite
+    state: wyspaceportcargo
+
+- type: entity
+  parent: RMCAreaLv759IndoorsSpaceport
+  id: RMCAreaLv759IndoorsSpaceportCargoMaintenance
+  name: Weston-Yamada Celestia Gateway Space-Port - Cargo - Maintenance
+  components:
+  - type: Sprite
+    state: wyspaceportcargo
+
+- type: entity
+  parent: RMCAreaLv759IndoorsSpaceport
+  id: RMCAreaLv759IndoorsSpaceportBaggagehandling
+  name: Weston-Yamada Celestia Gateway Space-Port - Baggage Storage & Handling
+  components:
+  - type: Sprite
+    state: wyspaceportbaggage
+
+- type: entity
+  parent: RMCAreaLv759IndoorsSpaceport
+  id: RMCAreaLv759IndoorsSpaceportCuppajoes
+  name: Weston-Yamada Celestia Gateway Space-Port - Cuppa Joe's
+  components:
+  - type: Sprite
+    state: cuppajoes
+
+- type: entity
+  parent: RMCAreaLv759IndoorsSpaceport
+  id: RMCAreaLv759IndoorsSpaceportKitchen
+  name: Weston-Yamada Celestia Gateway Space-Port - Kitchen
+  components:
+  - type: Sprite
+    state: wyspaceportblue
+
+- type: entity
+  parent: RMCAreaLv759IndoorsSpaceport
+  id: RMCAreaLv759IndoorsSpaceportDockingBay2
+  name: 'Weston-Yamada Celestia Gateway Space-Port - Docking Bay: 2 - Refueling and Maintenance'
+  components:
+  - type: Sprite
+    state: wyspaceportblue
+
+- type: entity
+  parent: RMCAreaLv759IndoorsSpaceport
+  id: RMCAreaLv759IndoorsSpaceportDockingBay1
+  name: 'Weston-Yamada Celestia Gateway Space-Port - Docking Bay: 1'
+  components:
+  - type: Sprite
+    state: wyspaceport
+
+- type: entity
+  parent: RMCAreaLv759IndoorsSpaceport
+  id: RMCAreaLv759IndoorsSpaceportStarglider
+  name: WY-LWI StarGlider SG-200
+  components:
+  - type: Sprite
+    state: wydropship
+  - type: Area
+    minimapColor: '#6C6767D8'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsSpaceport
+  id: RMCAreaLv759IndoorsSpaceportHorizonRunner
+  name: WY-LWI Horizon Runner HR-150
+  components:
+  - type: Sprite
+    state: wydropship
+  - type: Area
+    minimapColor: '#6C6767D8'
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsGarageReception
+  name: Garage - Reception
+  components:
+  - type: Sprite
+    state: garage
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsGarageWorkshop
+  name: Garage - Workshop
+  components:
+  - type: Sprite
+    state: garage
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsGarageWorkshopStorage
+  name: Garage - Workshop - Storage Room
+  components:
+  - type: Sprite
+    state: garage
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsGarageManagersoffice
+  name: Garage - Managers Office
+  components:
+  - type: Sprite
+    state: garage
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsGarageRestroom
+  name: Garage - Restroom
+  components:
+  - type: Sprite
+    state: garage
+
+- type: entity
+  abstract: true
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsMeridian
+
+- type: entity
+  parent: RMCAreaLv759IndoorsMeridian
+  id: RMCAreaLv759IndoorsMeridianMeridianFoyer
+  name: Meridian - Foyer
+  components:
+  - type: Sprite
+    state: meridian
+
+- type: entity
+  parent: RMCAreaLv759IndoorsMeridian
+  id: RMCAreaLv759IndoorsMeridianMeridianShowroom
+  name: Meridian - Showroom
+  components:
+  - type: Sprite
+    state: meridian
+
+- type: entity
+  parent: RMCAreaLv759IndoorsMeridian
+  id: RMCAreaLv759IndoorsMeridianMeridianOffice
+  name: Meridian - Offices
+  components:
+  - type: Sprite
+    state: meridian
+
+- type: entity
+  parent: RMCAreaLv759IndoorsMeridian
+  id: RMCAreaLv759IndoorsMeridianMeridianManagersoffice
+  name: Meridian - Manager's Office
+  components:
+  - type: Sprite
+    state: meridian
+
+- type: entity
+  parent: RMCAreaLv759IndoorsMeridian
+  id: RMCAreaLv759IndoorsMeridianMeridianFactory
+  name: Meridian - Factory Floor
+  components:
+  - type: Sprite
+    state: meridian_factory
+
+- type: entity
+  parent: RMCAreaLv759IndoorsMeridian
+  id: RMCAreaLv759IndoorsMeridianMeridianRestroom
+  name: Meridian - Restroom
+  components:
+  - type: Sprite
+    state: meridian
+
+- type: entity
+  parent: RMCAreaLv759IndoorsMeridian
+  id: RMCAreaLv759IndoorsMeridianMeridianMaintenance
+  name: Meridian - Maintenance
+  components:
+  - type: Sprite
+    state: meridian
+
+- type: entity
+  parent: RMCAreaLv759IndoorsMeridian
+  id: RMCAreaLv759IndoorsMeridianMeridianMaintenanceEast
+  name: Meridian - Factory Floor - Maintenance
+  components:
+  - type: Sprite
+    state: meridian
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsApartment
+  components:
+  - type: Area
+    minimapColor: '#91BDCFE7'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsApartment
+  id: RMCAreaLv759IndoorsApartmentWestfoyer
+  name: Westhaven Apartment Complex - West - Foyer
+  components:
+  - type: Sprite
+    state: apartments
+
+- type: entity
+  parent: RMCAreaLv759IndoorsApartment
+  id: RMCAreaLv759IndoorsApartmentWesthallway
+  name: Westhaven Apartment Complex - West - Hallway
+  components:
+  - type: Sprite
+    state: apartments
+
+- type: entity
+  parent: RMCAreaLv759IndoorsApartment
+  id: RMCAreaLv759IndoorsApartmentWestbedrooms
+  name: Westhaven Apartment Complex - West - Apartments
+  components:
+  - type: Sprite
+    state: apartments
+
+- type: entity
+  parent: RMCAreaLv759IndoorsApartment
+  id: RMCAreaLv759IndoorsApartmentWestshowers
+  name: Westhaven Apartment Complex - West - Showers
+  components:
+  - type: Sprite
+    state: apartments
+
+- type: entity
+  parent: RMCAreaLv759IndoorsApartment
+  id: RMCAreaLv759IndoorsApartmentWestrestroom
+  name: Westhaven Apartment Complex - West - Restrooms
+  components:
+  - type: Sprite
+    state: apartments
+
+- type: entity
+  parent: RMCAreaLv759IndoorsApartment
+  id: RMCAreaLv759IndoorsApartmentWestentertainment
+  name: Westhaven Apartment Complex - West - Recreation Hub
+  components:
+  - type: Sprite
+    state: apartments
+
+- type: entity
+  parent: RMCAreaLv759IndoorsApartment
+  id: RMCAreaLv759IndoorsApartmentEastentrance
+  name: Westhaven Apartment Complex - East - Entrance Room
+  components:
+  - type: Sprite
+    state: apartments
+
+- type: entity
+  parent: RMCAreaLv759IndoorsApartment
+  id: RMCAreaLv759IndoorsApartmentEastfoyer
+  name: Westhaven Apartment Complex - East - Foyer
+  components:
+  - type: Sprite
+    state: apartments
+
+- type: entity
+  parent: RMCAreaLv759IndoorsApartment
+  id: RMCAreaLv759IndoorsApartmentEastrestroomsshower
+  name: Westhaven Apartment Complex - East - Restrooms & Showers
+  components:
+  - type: Sprite
+    state: apartments
+
+- type: entity
+  parent: RMCAreaLv759IndoorsApartment
+  id: RMCAreaLv759IndoorsApartmentEastbedrooms
+  name: Westhaven Apartment Complex - East - Bedrooms
+  components:
+  - type: Sprite
+    state: apartments
+
+- type: entity
+  parent: RMCAreaLv759IndoorsApartment
+  id: RMCAreaLv759IndoorsApartmentEastbedroomsstorage
+  name: Westhaven Apartment Complex - East - Bedrooms - Storage Room
+  components:
+  - type: Sprite
+    state: apartments
+
+- type: entity
+  parent: RMCAreaLv759IndoorsApartment
+  id: RMCAreaLv759IndoorsApartmentNorthfoyer
+  name: Westhaven Apartment Complex - North - Foyer
+  components:
+  - type: Sprite
+    state: apartments
+
+- type: entity
+  parent: RMCAreaLv759IndoorsApartment
+  id: RMCAreaLv759IndoorsApartmentNorthhallway
+  name: Westhaven Apartment Complex - North - Hallway
+  components:
+  - type: Sprite
+    state: apartments
+
+- type: entity
+  parent: RMCAreaLv759IndoorsApartment
+  id: RMCAreaLv759IndoorsApartmentNorthapartments
+  name: Westhaven Apartment Complex - North - Apartments
+  components:
+  - type: Sprite
+    state: apartments
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsWeyaOffice
+  name: Weston-Yamada Offices - Reception Hallway
+  components:
+  - type: Sprite
+    state: wyoffice
+  - type: Area
+    minimapColor: '#2D3FA2EE'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWeyaOffice
+  id: RMCAreaLv759IndoorsWeyaOfficeHallway
+  name: Weston-Yamada Offices - West Foyer
+  components:
+  - type: Sprite
+    state: wyoffice
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWeyaOffice
+  id: RMCAreaLv759IndoorsWeyaOfficeFloor
+  name: Weston-Yamada Offices - Main Office Floor
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWeyaOffice
+  id: RMCAreaLv759IndoorsWeyaOfficeBreakroom
+  name: Weston-Yamada Offices - Breakroom
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWeyaOffice
+  id: RMCAreaLv759IndoorsWeyaOfficeVip
+  name: Weston-Yamada Offices - Conference Room
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWeyaOffice
+  id: RMCAreaLv759IndoorsWeyaOfficePressroom
+  name: Weston-Yamada Offices - Assembly Hall
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWeyaOffice
+  id: RMCAreaLv759IndoorsWeyaOfficeSupervisor
+  name: Weston-Yamada Offices - Colony Supervisors Office
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsBar
+  name: Bar
+  components:
+  - type: Sprite
+    state: bar
+
+- type: entity
+  parent: RMCAreaLv759IndoorsBar
+  id: RMCAreaLv759IndoorsBarEntertainment
+  name: Bar - Entertainment Subsection
+
+- type: entity
+  parent: RMCAreaLv759IndoorsBar
+  id: RMCAreaLv759IndoorsBarBathroom
+  name: Bar - Restrooms
+
+- type: entity
+  parent: RMCAreaLv759IndoorsBar
+  id: RMCAreaLv759IndoorsBarMaintenance
+  name: Bar - Maintenance
+
+- type: entity
+  parent: RMCAreaLv759IndoorsBar
+  id: RMCAreaLv759IndoorsBarKitchen
+  name: Bar - Kitchen
+
+- type: entity
+  abstract: true
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsBotany
+
+- type: entity
+  parent: RMCAreaLv759IndoorsBotany
+  id: RMCAreaLv759IndoorsBotanyBotanyGreenhouse
+  name: Botany - Greenhouse
+  components:
+  - type: Sprite
+    state: botany
+
+- type: entity
+  parent: RMCAreaLv759IndoorsBotany
+  id: RMCAreaLv759IndoorsBotanyBotanyHallway
+  name: Botany - Hallway
+  components:
+  - type: Sprite
+    state: botany
+
+- type: entity
+  parent: RMCAreaLv759IndoorsBotany
+  id: RMCAreaLv759IndoorsBotanyBotanyMaintenance
+  name: Botany - Maintenance
+  components:
+  - type: Sprite
+    state: botany
+
+- type: entity
+  parent: RMCAreaLv759IndoorsBotany
+  id: RMCAreaLv759IndoorsBotanyBotanyMainroom
+  name: Botany - Main Room
+  components:
+  - type: Sprite
+    state: botany
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsHotel
+  components:
+  - type: Area
+    minimapColor: '#91BDCFE7'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsHotel
+  id: RMCAreaLv759IndoorsHotelHotelHallway
+  name: Prospera Grand Hotel - Hallway
+  components:
+  - type: Sprite
+    state: apartments
+
+- type: entity
+  parent: RMCAreaLv759IndoorsHotel
+  id: RMCAreaLv759IndoorsHotelHotelRooms
+  name: Prospera Grand Hotel - Room
+  components:
+  - type: Sprite
+    state: apartments
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsHospital
+  components:
+  - type: Sprite
+    state: medical
+  - type: Area
+    minimapColor: '#3DBF75EE'
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaLv759IndoorsHospital
+  id: RMCAreaLv759IndoorsHospitalParamedicsGarage
+  name: Nova Medica Hospital Complex - Paramedic's Garage
+
+- type: entity
+  parent: RMCAreaLv759IndoorsHospital
+  id: RMCAreaLv759IndoorsHospitalCryoRoom
+  name: Nova Medica Hospital Complex - Cryo Ward
+
+- type: entity
+  parent: RMCAreaLv759IndoorsHospital
+  id: RMCAreaLv759IndoorsHospitalEmergencyRoom
+  name: Nova Medica Hospital Complex - Emergency Room
+
+- type: entity
+  parent: RMCAreaLv759IndoorsHospital
+  id: RMCAreaLv759IndoorsHospitalReception
+  name: Nova Medica Hospital Complex - Reception
+
+- type: entity
+  parent: RMCAreaLv759IndoorsHospital
+  id: RMCAreaLv759IndoorsHospitalCmoOffice
+  name: Nova Medica Hospital Complex - Chief Medical Officer's Office
+
+- type: entity
+  parent: RMCAreaLv759IndoorsHospital
+  id: RMCAreaLv759IndoorsHospitalMaintenance
+  name: Nova Medica Hospital Complex - Subspace Communications & Electrical Systems
+  components:
+  - type: Sprite
+    state: comms_1
+  - type: Area
+    minimapColor: '#00B3FFE7'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsHospital
+  id: RMCAreaLv759IndoorsHospitalBreakRoom
+  name: Nova Medica Hospital Complex - Breakroom
+
+- type: entity
+  parent: RMCAreaLv759IndoorsHospital
+  id: RMCAreaLv759IndoorsHospitalPharmacy
+  name: Nova Medica Hospital Complex - Pharmacy & Outgoing Foyer
+
+- type: entity
+  parent: RMCAreaLv759IndoorsHospital
+  id: RMCAreaLv759IndoorsHospitalOutgoing
+  name: Nova Medica Hospital Complex - Outgoing Ward
+
+- type: entity
+  parent: RMCAreaLv759IndoorsHospital
+  id: RMCAreaLv759IndoorsHospitalCentralHallway
+  name: Nova Medica Hospital Complex - Central Hallway
+
+- type: entity
+  parent: RMCAreaLv759IndoorsHospital
+  id: RMCAreaLv759IndoorsHospitalEastHallway
+  name: Nova Medica Hospital Complex - East Hallway
+
+- type: entity
+  parent: RMCAreaLv759IndoorsHospital
+  id: RMCAreaLv759IndoorsHospitalMedicalStorage
+  name: Nova Medica Hospital Complex - Medical Storage
+
+- type: entity
+  parent: RMCAreaLv759IndoorsHospital
+  id: RMCAreaLv759IndoorsHospitalOperation
+  name: Nova Medica Hospital Complex - Operation Theatres & Observation
+
+- type: entity
+  parent: RMCAreaLv759IndoorsHospital
+  id: RMCAreaLv759IndoorsHospitalPatientWard
+  name: Nova Medica Hospital Complex - Patient Ward
+
+- type: entity
+  parent: RMCAreaLv759IndoorsHospital
+  id: RMCAreaLv759IndoorsHospitalVirology
+  name: Nova Medica Hospital Complex - Virology
+
+- type: entity
+  parent: RMCAreaLv759IndoorsHospital
+  id: RMCAreaLv759IndoorsHospitalMorgue
+  name: Nova Medica Hospital Complex - Morgue
+
+- type: entity
+  parent: RMCAreaLv759IndoorsHospital
+  id: RMCAreaLv759IndoorsHospitalIcu
+  name: Nova Medica Hospital Complex - Intensive Care Ward
+
+- type: entity
+  parent: RMCAreaLv759IndoorsHospital
+  id: RMCAreaLv759IndoorsHospitalStorage
+  name: Nova Medica Hospital Complex - Office
+
+- type: entity
+  parent: RMCAreaLv759IndoorsHospital
+  id: RMCAreaLv759IndoorsHospitalMaintenanceNorth
+  name: Nova Medica Hospital Complex - Maintenance North
+
+- type: entity
+  parent: RMCAreaLv759IndoorsHospital
+  id: RMCAreaLv759IndoorsHospitalMaintenanceSouth
+  name: Nova Medica Hospital Complex - Unisex-Restroom
+
+- type: entity
+  parent: RMCAreaLv759IndoorsHospital
+  id: RMCAreaLv759IndoorsHospitalJanitor
+  name: Nova Medica Hospital Complex - Janitors Closet
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsMiningOutpost
+  components:
+  - type: Sprite
+    state: mining
+  - type: Area
+    minimapColor: '#4D3619E7'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsMiningOutpost
+  id: RMCAreaLv759IndoorsMiningOutpostNorth
+  name: KMCC - Mining Outpost - North
+  components:
+  - type: Sprite
+    state: mining
+
+- type: entity
+  parent: RMCAreaLv759IndoorsMiningOutpost
+  id: RMCAreaLv759IndoorsMiningOutpostNorthMaint
+  name: KMCC - Mining Outpost - North - Maintenance
+  components:
+  - type: Sprite
+    state: mining
+
+- type: entity
+  parent: RMCAreaLv759IndoorsMiningOutpost
+  id: RMCAreaLv759IndoorsMiningOutpostNortheast
+  name: KMCC - Mining Outpost - Northeast
+  components:
+  - type: Sprite
+    state: mining
+  - type: Area
+    landingZone: true
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaLv759IndoorsMiningOutpost
+  id: RMCAreaLv759IndoorsMiningOutpostSouth
+  name: KMCC - Mining Outpost - Southeast
+  components:
+  - type: Sprite
+    state: mining
+
+- type: entity
+  parent: RMCAreaLv759IndoorsMiningOutpost
+  id: RMCAreaLv759IndoorsMiningOutpostVehicledeployment
+  name: KMCC - Mining Outpost - South - Vehicle Deployment
+  components:
+  - type: Sprite
+    state: mining
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsMiningOutpost
+  id: RMCAreaLv759IndoorsMiningOutpostProcessing
+  name: KMCC - Mining Outpost - South - Processing & Storage
+  components:
+  - type: Sprite
+    state: mining
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsMiningOutpost
+  id: RMCAreaLv759IndoorsMiningOutpostEast
+  name: KMCC - Mining Outpost - East
+  components:
+  - type: Sprite
+    state: mining
+  - type: Area
+    linkedLz: list(dropship_lz1, dropship_lz2)
+
+- type: entity
+  parent: RMCAreaLv759IndoorsMiningOutpost
+  id: RMCAreaLv759IndoorsMiningOutpostEastDorms
+  name: KMCC - Mining Outpost - East - Dorms
+  components:
+  - type: Sprite
+    state: mining
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsMiningOutpost
+  id: RMCAreaLv759IndoorsMiningOutpostEastDeploymentbay
+  name: KMCC - Mining Outpost - East - Deployment Bay
+  components:
+  - type: Sprite
+    state: mining
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsMiningOutpost
+  id: RMCAreaLv759IndoorsMiningOutpostEastCommand
+  name: KMCC - Mining Outpost - East - Command Center
+  components:
+  - type: Sprite
+    state: mining
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsMiningOutpost
+  id: RMCAreaLv759IndoorsMiningOutpostCargoMaint
+  name: KMCC - Mining Outpost - East - Maintenance
+  components:
+  - type: Sprite
+    state: mining
+
+- type: entity
+  abstract: true
+  parent: RMCAreaLv759Outdoors
+  id: RMCAreaLv759OutdoorsMiningOutpost
+
+- type: entity
+  parent: RMCAreaLv759OutdoorsMiningOutpost
+  id: RMCAreaLv759OutdoorsMiningOutpostSouthEntrance
+  name: KMCC - Mining Outpost - South - Vehicle Deployment Entrance
+  components:
+  - type: Sprite
+    state: mining
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    minimapColor: '#6C6767D8'
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsElecticalSystems
+  components:
+  - type: Area
+    minimapColor: '#888404E7'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsElecticalSystems
+  id: RMCAreaLv759IndoorsElecticalSystemsSubstation1
+  name: Electrical Systems - Substation One - Control Room
+  components:
+  - type: Sprite
+    state: power0
+
+- type: entity
+  parent: RMCAreaLv759IndoorsElecticalSystems
+  id: RMCAreaLv759IndoorsElecticalSystemsSubstation2
+  name: Electrical Systems - Substation Two
+  components:
+  - type: Sprite
+    state: power0
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsElecticalSystems
+  id: RMCAreaLv759IndoorsElecticalSystemsSubstation3
+  name: Electrical Systems - Substation Three
+  components:
+  - type: Sprite
+    state: power0
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsPowerPlant
+  name: Weston-Yamada DynaGrid Nexus - Central Hallway
+  components:
+  - type: Sprite
+    state: power0
+  - type: Area
+    minimapColor: '#888404E7'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsPowerPlant
+  id: RMCAreaLv759IndoorsPowerPlantHallwayEast
+  name: Weston-Yamada DynaGrid Nexus - East Hallway
+  components:
+  - type: Sprite
+    state: power0
+  - type: Area
+    minimapColor: '#888404E7'
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaLv759IndoorsPowerPlant
+  id: RMCAreaLv759IndoorsPowerPlantSouthHallway
+  name: Weston-Yamada DynaGrid Nexus - South Hallway
+
+- type: entity
+  parent: RMCAreaLv759IndoorsPowerPlant
+  id: RMCAreaLv759IndoorsPowerPlantGeothermalGenerators
+  name: Weston-Yamada DynaGrid Nexus - Geothermal Generators Room
+
+- type: entity
+  parent: RMCAreaLv759IndoorsPowerPlant
+  id: RMCAreaLv759IndoorsPowerPlantPowerStorage
+  name: Weston-Yamada DynaGrid Nexus - Power Storage Room
+
+- type: entity
+  abstract: true
+  parent: RMCAreaLv759Outdoors
+  id: RMCAreaLv759OutdoorsPowerPlant
+
+- type: entity
+  parent: RMCAreaLv759OutdoorsPowerPlant
+  id: RMCAreaLv759OutdoorsPowerPlantTransformersNorth
+  name: Weston-Yamada DynaGrid Nexus - Transformers - North
+  components:
+  - type: Area
+    minimapColor: '#91BDCFE7'
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaLv759OutdoorsPowerPlant
+  id: RMCAreaLv759OutdoorsPowerPlantTransformersSouth
+  name: Weston-Yamada DynaGrid Nexus - Transformers - South
+  components:
+  - type: Area
+    minimapColor: '#91BDCFE7'
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaLv759IndoorsPowerPlant
+  id: RMCAreaLv759IndoorsPowerPlantTransformersNorth
+  name: Weston-Yamada DynaGrid Nexus - Transformers - North
+
+- type: entity
+  parent: RMCAreaLv759IndoorsPowerPlant
+  id: RMCAreaLv759IndoorsPowerPlantTransformersSouth
+  name: Weston-Yamada DynaGrid Nexus - Transformers - South
+
+- type: entity
+  parent: RMCAreaLv759IndoorsPowerPlant
+  id: RMCAreaLv759IndoorsPowerPlantGasGenerators
+  name: Weston-Yamada DynaGrid Nexus - Gas Mixing & Storage
+
+- type: entity
+  parent: RMCAreaLv759IndoorsPowerPlant
+  id: RMCAreaLv759IndoorsPowerPlantFusionGenerators
+  name: Weston-Yamada DynaGrid Nexus - Control Center
+
+- type: entity
+  parent: RMCAreaLv759IndoorsPowerPlant
+  id: RMCAreaLv759IndoorsPowerPlantTelecomms
+  name: Weston-Yamada DynaGrid Nexus - Telecommunications
+  components:
+  - type: Sprite
+    state: comms_1
+  - type: Area
+    minimapColor: '#00B3FFE7'
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaLv759IndoorsPowerPlant
+  id: RMCAreaLv759IndoorsPowerPlantWorkersCanteen
+  name: Weston-Yamada DynaGrid Nexus - Worker's Canteen
+  components:
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaLv759IndoorsPowerPlant
+  id: RMCAreaLv759IndoorsPowerPlantWorkersCanteenKitchen
+  name: Weston-Yamada DynaGrid Nexus - Worker's Canteen - Kitchen
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsPowerPlant
+  id: RMCAreaLv759IndoorsPowerPlantEquipmentEast
+  name: Weston-Yamada DynaGrid Nexus - Equipment Storage Room - East
+
+- type: entity
+  parent: RMCAreaLv759IndoorsPowerPlant
+  id: RMCAreaLv759IndoorsPowerPlantEquipmentWest
+  name: Weston-Yamada DynaGrid Nexus - Equipment Storage Room - West
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsColonialMarshals
+  name: NSPA - Ironbridge Precinct
+  components:
+  - type: Sprite
+    state: security_hub
+  - type: Area
+    minimapColor: '#880404E7'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsPrisonersCells
+  name: NSPA - Ironbridge Precinct - Maximum Security Ward - Cells
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsPrisonersFoyer
+  name: NSPA - Ironbridge Precinct - Maximum Security Ward - Foyer
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsPrisonersRecreationArea
+  name: NSPA - Ironbridge Precinct - Maximum Security Ward - Recreation Area & Shower Room
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsGarage
+  name: NSPA - Ironbridge Precinct - Vehicle Deployment & Maintenace
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsArmoryFoyer
+  name: NSPA - Ironbridge Precinct - Armory Foyer
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsArmory
+  name: NSPA - Ironbridge Precinct - Armory
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsArmoryFiringrange
+  name: NSPA - Ironbridge Precinct - Firing Range
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsArmoryEvidenceroom
+  name: NSPA - Ironbridge Precinct - Evidence Room
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsOffice
+  name: NSPA - Ironbridge Precinct - Office
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsReception
+  name: NSPA - Ironbridge Precinct - Reception Office
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsHallwayCentral
+  name: NSPA - Ironbridge Precinct - Central Hallway
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsHallwaySouth
+  name: NSPA - Ironbridge Precinct - South Hallway
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsHallwayReception
+  name: NSPA - Ironbridge Precinct - Reception Hallway
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsHallwayNorth
+  name: NSPA - Ironbridge Precinct - North Hallway
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsHallwayNorthLocker
+  name: NSPA - Ironbridge Precinct - North Hallway - Locker Room
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsHoldingCells
+  name: NSPA - Ironbridge Precinct - Holding Cells
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsHeadOffice
+  name: NSPA - Ironbridge Precinct - Forensics Office
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsNorthOffice
+  name: NSPA - Ironbridge Precinct - North Office
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsWardensOffice
+  name: NSPA - Ironbridge Precinct - Wardens Office
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsInterrogation
+  name: NSPA - Ironbridge Precinct - Interrogation
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsPressRoom
+  name: NSPA - Ironbridge Precinct - Court Room
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsChangingRoom
+  name: NSPA - Ironbridge Precinct - Changing Room
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsRestroom
+  name: NSPA - Ironbridge Precinct - Restroom & Showers
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsSouthMaintenance
+  name: NSPA - Ironbridge Precinct - Maintenance - South
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsNorthMaintenance
+  name: NSPA - Ironbridge Precinct - Maintenance - North
+
+- type: entity
+  parent: RMCAreaLv759IndoorsColonialMarshals
+  id: RMCAreaLv759IndoorsColonialMarshalsSouthwestMaintenance
+  name: NSPA - Ironbridge Precinct - Maintenance - Southwest
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsJacksSurplus
+  name: Jack's Military Surplus
+  components:
+  - type: Sprite
+    state: jacks
+  - type: Area
+    minimapColor: '#91BDCFE7'
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsRecyclingPlant
+  name: Weston-Yamada - Resource Recovery Facility
+  components:
+  - type: Sprite
+    state: recycling
+  - type: Area
+    minimapColor: '#91BDCFE7'
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaLv759IndoorsRecyclingPlant
+  id: RMCAreaLv759IndoorsRecyclingPlantGarage
+  name: Weston-Yamada - Resource Recovery Facility - Garage
+  components:
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaLv759IndoorsRecyclingPlant
+  id: RMCAreaLv759IndoorsRecyclingPlantSyntheticStorage
+  name: Synthetic Storage
+  components:
+  - type: Sprite
+    state: synthetic
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsRecyclingPlantOffice
+  name: Weston-Yamada - Resource Recovery Facility - Office
+  components:
+  - type: Sprite
+    state: recycling
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsRecyclingPlantWasteDisposalIncinerator
+  name: Weston-Yamada - Resource Recovery Facility - Waste Disposal Incinerating Room
+  components:
+  - type: Sprite
+    state: recycling
+  - type: Area
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsSouthPublicRestroom
+  name: Public Restroom - South
+  components:
+  - type: Sprite
+    state: restroom
+  - type: Area
+    minimapColor: '#91BDCFE7'
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsSouthwestPublicRestroom
+  name: Public Restroom - Southwest
+  components:
+  - type: Sprite
+    state: restroom
+  - type: Area
+    minimapColor: '#91BDCFE7'
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsCasino
+  name: Night Gold Casino
+  components:
+  - type: Sprite
+    state: nightgold
+  - type: Area
+    minimapColor: '#91BDCFE7'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCasino
+  id: RMCAreaLv759IndoorsCasinoCasinoOffice
+  name: Night Gold Casino - Managers Office
+  components:
+  - type: Sprite
+    state: nightgold
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCasino
+  id: RMCAreaLv759IndoorsCasinoCasinoRestroom
+  name: Night Gold Casino - Restroom
+  components:
+  - type: Sprite
+    state: nightgold
+
+- type: entity
+  parent: RMCAreaLv759IndoorsCasino
+  id: RMCAreaLv759IndoorsCasinoCasinoVault
+  name: Night Gold Casino - Vault
+  components:
+  - type: Sprite
+    state: nightgold
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsPizzaria
+  name: Pizza Galaxy - Outpost Zeta
+  components:
+  - type: Sprite
+    state: pizza
+  - type: Area
+    minimapColor: '#91BDCFE7'
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsTcommsNorthwest
+  name: Telecommunications Substation - West
+  components:
+  - type: Sprite
+    state: comms_1
+  - type: Area
+    minimapColor: '#00B3FFE7'
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsWeymart
+  name: Weymart
+  components:
+  - type: Sprite
+    state: weymart
+  - type: Area
+    minimapColor: '#91BDCFE7'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWeymart
+  id: RMCAreaLv759IndoorsWeymartBackrooms
+  name: Weymart - Backrooms
+  components:
+  - type: Sprite
+    state: weymartbackrooms
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWeymart
+  id: RMCAreaLv759IndoorsWeymartMaintenance
+  name: Weymart - Maintenance
+  components:
+  - type: Sprite
+    state: weymartbackrooms
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsWySecurity
+  components:
+  - type: Area
+    minimapColor: '#880404E7'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWySecurity
+  id: RMCAreaLv759IndoorsWySecurityCheckpointNortheast
+  name: Weston-Yamada Security Checkpoint - North East
+  components:
+  - type: Sprite
+    state: security_checkpoint_northeast
+  - type: Area
+    landingZone: true
+    linkedLz: dropship_lz1
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWySecurity
+  id: RMCAreaLv759IndoorsWySecurityCheckpointEast
+  name: Weston-Yamada Security Checkpoint - East
+  components:
+  - type: Sprite
+    state: security_checkpoint_east
+  - type: Area
+    linkedLz: list(dropship_lz1, dropship_lz2)
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWySecurity
+  id: RMCAreaLv759IndoorsWySecurityCheckpointCentral
+  name: Weston-Yamada Security Checkpoint - Central
+  components:
+  - type: Sprite
+    state: security_checkpoint_central
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWySecurity
+  id: RMCAreaLv759IndoorsWySecurityCheckpointWest
+  name: Weston-Yamada Security Checkpoint - West
+  components:
+  - type: Sprite
+    state: security_checkpoint_west
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWySecurity
+  id: RMCAreaLv759IndoorsWySecurityCheckpointNorthwest
+  name: Weston-Yamada Security Checkpoint - North West
+  components:
+  - type: Sprite
+    state: security_checkpoint_northwest
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsHobosecret
+  name: Hidden Hobo Haven
+  components:
+  - type: Sprite
+    state: hobo
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsWyResearchComplex
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex
+  components:
+  - type: Sprite
+    state: wylab
+  - type: Area
+    minimapColor: '#856600EE'
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: true
+    supplyDrop: false
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexMedicalAnnex
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Medical Annex Building
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexReception
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Reception & Administration
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexCargo
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Requisitions & Cargo
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexResearchanddevelopment
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Technology Research & Development Lab
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexMainlabs
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Advanced Chemical Testing & Research Lab
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexXenobiology
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Advanced Xenobiology Lab
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexWeaponresearchlab
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Advanced Weapon Research Lab
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexWeaponresearchlabtesting
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Advanced Weapon Research Lab - Weapons Testing Range
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexXenoarcheology
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Xenoarcheology Research Lab
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexVehicledeploymentbay
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Vehicle Deployment & Maintenance Bay
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexJanitor
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Janitorial Supplies Storage
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexCafeteria
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Cafeteria
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexCafeteriakitchen
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Cafeteria - Kitchen
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexDormsfoyer
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Dorms Foyer
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexDormsbedroom
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Dorms
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexSecuritycommand
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Security Command Center & Deployment
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexSecurityarmory
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Armory
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexHangarbay
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Hangar Bay
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexHangarbayshuttle
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Hangar Bay - Weston-Yamada PMC ERT Shuttle
+  components:
+  - type: Sprite
+    state: wylab
+  - type: Area
+    minimapColor: '#6C6767D8'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexHallwaynorth
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - North Hallway
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexHallwaynorthexit
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - North Hallway - Personnel Exit East
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexHallwayeast
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Hallway East
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexHallwaycentral
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Central Hallway
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexHallwaysouthwest
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - South West Hallway
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexHallwaysoutheast
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - South East Hallway
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexSoutheastexit
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - South East Maintenace & Emergency Exit
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexChangingroom
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Locker Room
+  components:
+  - type: Sprite
+    state: wylab
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWyResearchComplex
+  id: RMCAreaLv759IndoorsWyResearchComplexHeadResearchOffice
+  name: Weston-Yamada - Advanced Bio-Genomic Research Complex - Head of Research's Office
+  components:
+  - type: Sprite
+    state: wylab

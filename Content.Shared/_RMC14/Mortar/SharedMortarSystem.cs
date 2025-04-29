@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Camera;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Explosion;
@@ -10,7 +10,9 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Chat;
 using Content.Shared.Construction.Components;
 using Content.Shared.Coordinates;
+using Content.Shared.Damage;
 using Content.Shared.Database;
+using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
@@ -45,7 +47,7 @@ public abstract class SharedMortarSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -69,6 +71,8 @@ public abstract class SharedMortarSystem : EntitySystem
         SubscribeLocalEvent<MortarComponent, ExaminedEvent>(OnMortarExamined);
         SubscribeLocalEvent<MortarComponent, ActivatableUIOpenAttemptEvent>(OnMortarActivatableUIOpenAttempt);
         SubscribeLocalEvent<MortarComponent, CombatModeShouldHandInteractEvent>(OnMortarShouldInteract);
+        SubscribeLocalEvent<MortarComponent, DestructionEventArgs>(OnMortarDestruction);
+        SubscribeLocalEvent<MortarComponent, BeforeDamageChangedEvent>(OnMortarBeforeDamageChanged);
 
         SubscribeLocalEvent<MortarCameraShellComponent, MortarShellLandEvent>(OnMortarCameraShellLand);
 
@@ -79,6 +83,20 @@ public abstract class SharedMortarSystem : EntitySystem
                 subs.Event<MortarDialBuiMsg>(OnMortarDialBui);
                 subs.Event<MortarViewCamerasMsg>(OnMortarViewCameras);
             });
+    }
+
+    private void OnMortarBeforeDamageChanged(Entity<MortarComponent> ent, ref BeforeDamageChangedEvent args)
+    {
+        if (!ent.Comp.Deployed) // cannot destroy in item form
+            args.Cancelled = true;
+    }
+
+    private void OnMortarDestruction(Entity<MortarComponent> mortar, ref DestructionEventArgs args)
+    {
+        if (!mortar.Comp.Deployed || _net.IsClient)
+            return;
+
+        SpawnAtPosition(mortar.Comp.Drop, mortar.Owner.ToCoordinates());
     }
 
     private void OnMortarUseInHand(Entity<MortarComponent> mortar, ref UseInHandEvent args)
@@ -185,6 +203,7 @@ public abstract class SharedMortarSystem : EntitySystem
         {
             BreakOnMove = true,
             BreakOnHandChange = true,
+            ForceVisible = true,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))

@@ -7,5 +7,5 @@ namespace Content.Shared._RMC14.Medical.Refill;
 public sealed partial class RMCRefillSolutionOnStoreComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public string ContainerId = "pressurized_reagent_canister";
+    public string SolutionId = "tank";
 }

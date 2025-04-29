@@ -70,6 +70,7 @@
 - type: entity
   parent: CMDoubleDoorMedicalGlass
   id: CMDoubleDoorResearchGlassLocked
+  name: Research Airlock
   suffix: Research, Glass, Locked
   components:
   - type: AccessReader

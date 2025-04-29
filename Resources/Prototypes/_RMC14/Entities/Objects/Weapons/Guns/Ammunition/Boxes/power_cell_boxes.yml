@@ -1,0 +1,27 @@
+﻿- type: entity
+  parent: RMCBoxMagazineSupplyBase
+  id: RMCBoxMagazinePowerCellsHigh
+  name: box of high-capacity power cells (x8)
+  description: A box of High-Capacity Power Cells to keep your electronics going all night long!
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxMagazinePowerCellsHigh
+  - type: Sprite
+    layers:
+    - state: supply_box
+      color: "#887b67"
+    - state: supply_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#b2bdc4"
+    - state: supply_box_powercell
+      color: "#e0d5c2"
+    - state: supply_lid_closed
+      map: [ "lid" ]
+      color: "#887b67"
+  - type: CMItemSlots
+    count: 8
+    slot:
+      whitelist:
+        tags:
+        - RMCPowerCellHigh

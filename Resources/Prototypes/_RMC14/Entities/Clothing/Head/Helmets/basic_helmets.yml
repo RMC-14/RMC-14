@@ -7,13 +7,38 @@
   components:
   - type: Item
     size: Normal
-  - type: Storage #hopefully in the future someone smarter than me can add storage(?) for integrated things like netting, HUD, etc. but for now this is for hiding snacks
+    storedRotation: 0
+  - type: Storage
     maxItemSize: Tiny
     grid:
-    - 0,0,3,1 # TODO RMC14 7, but 2 slots are reserved for garbs
+    - 0,0,7,1 # 4 slots, only 2 can fit useful items (meds, cigarettes)
     blacklist:
       tags:
       - Pouch
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-cant-fit
+      count: 2
+      whitelist:
+        components:
+        - RMCFlask
+        - CMScalpel
+        - Figurine
+        tags:
+#       - TODO RMC14 cards
+        - Slice
+#       - TODO RMC14 glasses (eyewear)
+#       - TODO RMC14 walkman and casettes
+        - Pen
+        - Crayon
+        - RMCHandful
+        - Flashlight
+        - Brutepack
+        - CMOintment
+        - CMAutoInjector
+        - PillPacket
+        - Syringe
+        - Pill
   - type: ContainerContainer
     containers:
       storagebase: !type:Container
@@ -36,6 +61,7 @@
       - CMScalpel
       - Figurine
       - Matchbox
+      - HelmetAccessory
       tags:
       - CigPack
       - Cigarette
@@ -43,7 +69,6 @@
       - Slice
 #      - TODO RMC14 glasses (eyewear)
 #      - TODO RMC14 walkman and casettes
-#      - TODO RMC14 helmet garb
       - Pen
       - Crayon
       - RMCHandful
@@ -58,6 +83,7 @@
       components:
       - Xeno
   - type: Appearance
+  - type: HelmetAccessoryHolder
 
 - type: entity
   parent: RMCHelmetBase
@@ -65,7 +91,8 @@
   abstract: true
   components:
   - type: CMArmor
-    armor: 20
+    melee: 20
+    bullet: 20
     explosionArmor: 10
   - type: RMCBulkyArmor
   - type: OverwatchCamera
@@ -95,33 +122,3 @@
     - HeadSide
     unfoldedHideLayers: []
   - type: HideLayerClothing
-
-# riot
-- type: entity
-  parent: [RMCHelmetBase, RMCFoldableHelmetBase]
-  id: ArmorHelmetRiot
-  name: riot helmet
-  description: It's a helmet specifically designed to protect against close range attacks. It covers your ears.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/riot.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/riot.rsi
-  - type: CMArmor
-    armor: 20 # 30 melee, 10 bullet
-    explosionArmor: 0
-  - type: CMHardArmor
-
-- type: entity
-  parent: ArmorHelmetRiot
-  id: ArmorHelmetRiotOld
-  description: BA scarred riot helmet covered in cobwebs. It still protects your ears.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/old_riot.rsi
-    layers:
-    - state: icon
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/old_riot.rsi
-    equipDelay: 2
-    unequipDelay: 2

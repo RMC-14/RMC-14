@@ -14,6 +14,8 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -31,6 +33,10 @@ public abstract class SharedActionsSystem : EntitySystem
     [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+
+    // RMC14
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
 
     public override void Initialize()
     {
@@ -75,31 +81,56 @@ public abstract class SharedActionsSystem : EntitySystem
     {
         base.Update(frameTime);
 
+        var time = GameTiming.CurTime;
+        // RMC14
+        if (_net.IsClient)
+        {
+            if (_player.LocalEntity is not { } ent)
+                return;
+
+            if (!TryComp(ent, out ActionsComponent? actions))
+                return;
+
+            foreach (var action in actions.Actions)
+            {
+                if (!TryGetActionData(action, out var actionComp))
+                    continue;
+
+                if (IsCooldownActive(actionComp, time) || !ShouldResetCharges(actionComp))
+                    continue;
+
+                ResetCharges(action, dirty: true, action: actionComp);
+            }
+
+            return;
+        }
+        // RMC14
+
         var worldActionQuery = EntityQueryEnumerator<WorldTargetActionComponent>();
         while (worldActionQuery.MoveNext(out var uid, out var action))
         {
-            if (IsCooldownActive(action) || !ShouldResetCharges(action))
+            if (IsCooldownActive(action, time) || !ShouldResetCharges(action))
                 continue;
 
-            ResetCharges(uid, dirty: true);
+            ResetCharges(uid, dirty: true, action: action);
         }
 
         var instantActionQuery = EntityQueryEnumerator<InstantActionComponent>();
         while (instantActionQuery.MoveNext(out var uid, out var action))
         {
-            if (IsCooldownActive(action) || !ShouldResetCharges(action))
+            if (IsCooldownActive(action, time) || !ShouldResetCharges(action))
                 continue;
 
-            ResetCharges(uid, dirty: true);
+            ResetCharges(uid, dirty: true, action: action);
         }
 
         var entityActionQuery = EntityQueryEnumerator<EntityTargetActionComponent>();
         while (entityActionQuery.MoveNext(out var uid, out var action))
         {
-            if (IsCooldownActive(action) || !ShouldResetCharges(action))
+            if (IsCooldownActive(action, time) || !ShouldResetCharges(action))
                 continue;
 
-            ResetCharges(uid, dirty: true);
+            ResetCharges(uid, dirty: true, action: action);
         }
     }
 
@@ -362,9 +393,9 @@ public abstract class SharedActionsSystem : EntitySystem
         Dirty(actionId.Value, action);
     }
 
-    public void ResetCharges(EntityUid? actionId, bool update = false, bool dirty = false)
+    public void ResetCharges(EntityUid? actionId, bool update = false, bool dirty = false, BaseActionComponent? action = null)
     {
-        if (!TryGetActionData(actionId, out var action))
+        if ((actionId == null || action == null) && !TryGetActionData(actionId, out action))
             return;
 
         action.Charges = action.MaxCharges;
@@ -543,6 +574,7 @@ public abstract class SharedActionsSystem : EntitySystem
         if (!ValidateEntityTargetBase(user,
                 target,
                 comp.Whitelist,
+                comp.Blacklist,
                 comp.CheckCanInteract,
                 comp.CanTargetSelf,
                 comp.CheckCanAccess,
@@ -557,6 +589,7 @@ public abstract class SharedActionsSystem : EntitySystem
     private bool ValidateEntityTargetBase(EntityUid user,
         EntityUid? targetEntity,
         EntityWhitelist? whitelist,
+        EntityWhitelist? blacklist,
         bool checkCanInteract,
         bool canTargetSelf,
         bool checkCanAccess,
@@ -566,6 +599,9 @@ public abstract class SharedActionsSystem : EntitySystem
             return false;
 
         if (_whitelistSystem.IsWhitelistFail(whitelist, target))
+            return false;
+
+        if (_whitelistSystem.IsBlacklistPass(blacklist, target))
             return false;
 
         if (checkCanInteract && !_actionBlockerSystem.CanInteract(user, target))
@@ -642,6 +678,7 @@ public abstract class SharedActionsSystem : EntitySystem
         var entityValidated = ValidateEntityTargetBase(user,
             entity,
             comp.Whitelist,
+            null,
             comp.CheckCanInteract,
             comp.CanTargetSelf,
             comp.CheckCanAccess,
@@ -683,6 +720,9 @@ public abstract class SharedActionsSystem : EntitySystem
 
             if (!action.RaiseOnUser && action.Container != null && !HasComp<MindComponent>(action.Container))
                 target = action.Container.Value;
+
+            if (action.RaiseOnAction)
+                target = actionId;
 
             RaiseLocalEvent(target, (object) actionEvent, broadcast: true);
             handled = actionEvent.Handled;
@@ -817,6 +857,9 @@ public abstract class SharedActionsSystem : EntitySystem
 
         if (action.AttachedEntity != null)
             RemoveAction(action.AttachedEntity.Value, actionId, action: action);
+
+        if (action.StartDelay && action.UseDelay != null)
+            SetCooldown(actionId, action.UseDelay.Value);
 
         DebugTools.AssertOwner(performer, comp);
         comp ??= EnsureComp<ActionsComponent>(performer);

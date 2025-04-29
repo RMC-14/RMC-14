@@ -2,14 +2,19 @@ using System.Numerics;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Camera;
 using Content.Shared.CCVar;
+using Content.Shared.Construction.Components;
 using Content.Shared.Database;
 using Content.Shared.Friction;
 using Content.Shared.Gravity;
+using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Melee;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
+using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
@@ -41,8 +46,15 @@ public sealed class ThrowingSystem : EntitySystem
     [Dependency] private readonly SharedCameraRecoilSystem _recoil = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IConfigurationManager _configManager = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+
+    // TODO RMC14
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly RotateToFaceSystem _rotateToFace = default!;
+
+    private readonly SoundSpecifier _throwSound = new SoundCollectionSpecifier("RMCThrowing");
 
     public override void Initialize()
     {
@@ -62,7 +74,8 @@ public sealed class ThrowingSystem : EntitySystem
         bool recoil = true,
         bool animated = true,
         bool playSound = true,
-        bool doSpin = true)
+        bool doSpin = true,
+        bool unanchor = false)
     {
         var thrownPos = _transform.GetMapCoordinates(uid);
         var mapPos = _transform.ToMapCoordinates(coordinates);
@@ -70,7 +83,7 @@ public sealed class ThrowingSystem : EntitySystem
         if (mapPos.MapId != thrownPos.MapId)
             return;
 
-        TryThrow(uid, mapPos.Position - thrownPos.Position, baseThrowSpeed, user, pushbackRatio, friction, compensateFriction: compensateFriction, recoil: recoil, animated: animated, playSound: playSound, doSpin: doSpin);
+        TryThrow(uid, mapPos.Position - thrownPos.Position, baseThrowSpeed, user, pushbackRatio, friction, compensateFriction: compensateFriction, recoil: recoil, animated: animated, playSound: playSound, doSpin: doSpin, unanchor: unanchor);
     }
 
     /// <summary>
@@ -83,6 +96,7 @@ public sealed class ThrowingSystem : EntitySystem
     /// <param name="friction">friction value used for the distance calculation. If set to null this defaults to the standard tile values</param>
     /// <param name="compensateFriction">True will adjust the throw so the item stops at the target coordinates. False means it will land at the target and keep sliding.</param>
     /// <param name="doSpin">Whether spin will be applied to the thrown entity.</param>
+    /// <param name="unanchor">If true and the thrown entity has <see cref="AnchorableComponent"/>, unanchor the thrown entity</param>
     public void TryThrow(EntityUid uid,
         Vector2 direction,
         float baseThrowSpeed = 10.0f,
@@ -93,7 +107,9 @@ public sealed class ThrowingSystem : EntitySystem
         bool recoil = true,
         bool animated = true,
         bool playSound = true,
-        bool doSpin = true)
+        bool doSpin = true,
+        bool unanchor = false,
+        bool rotate = true)
     {
         var physicsQuery = GetEntityQuery<PhysicsComponent>();
         if (!physicsQuery.TryGetComponent(uid, out var physics))
@@ -110,7 +126,7 @@ public sealed class ThrowingSystem : EntitySystem
             baseThrowSpeed,
             user,
             pushbackRatio,
-            friction, compensateFriction: compensateFriction, recoil: recoil, animated: animated, playSound: playSound, doSpin: doSpin);
+            friction, compensateFriction: compensateFriction, recoil: recoil, animated: animated, playSound: playSound, doSpin: doSpin, unanchor: unanchor, rotate: rotate);
     }
 
     /// <summary>
@@ -123,6 +139,7 @@ public sealed class ThrowingSystem : EntitySystem
     /// <param name="friction">friction value used for the distance calculation. If set to null this defaults to the standard tile values</param>
     /// <param name="compensateFriction">True will adjust the throw so the item stops at the target coordinates. False means it will land at the target and keep sliding.</param>
     /// <param name="doSpin">Whether spin will be applied to the thrown entity.</param>
+    /// <param name="unanchor">If true and the thrown entity has <see cref="AnchorableComponent"/>, unanchor the thrown entity</param>
     public void TryThrow(EntityUid uid,
         Vector2 direction,
         PhysicsComponent physics,
@@ -136,16 +153,18 @@ public sealed class ThrowingSystem : EntitySystem
         bool recoil = true,
         bool animated = true,
         bool playSound = true,
-        bool doSpin = true)
+        bool doSpin = true,
+        bool unanchor = false,
+        bool rotate = true)
     {
         if (baseThrowSpeed <= 0 || direction == Vector2Helpers.Infinity || direction == Vector2Helpers.NaN || direction == Vector2.Zero || friction < 0)
             return;
 
+        if (unanchor && HasComp<AnchorableComponent>(uid))
+            _transform.Unanchor(uid);
+
         if ((physics.BodyType & (BodyType.Dynamic | BodyType.KinematicController)) == 0x0)
-        {
-            Log.Warning($"Tried to throw entity {ToPrettyString(uid)} but can't throw {physics.BodyType} bodies!");
             return;
-        }
 
         // Allow throwing if this projectile only acts as a projectile when shot, otherwise disallow
         if (projectileQuery.TryGetComponent(uid, out var proj) && !proj.OnlyCollideWhenShot)
@@ -221,6 +240,15 @@ public sealed class ThrowingSystem : EntitySystem
         {
             // _recoil.KickCamera(user.Value, -direction * 0.04f);
             var localPos = Vector2.Transform(transform.LocalPosition + direction, _transform.GetInvWorldMatrix(transform));
+
+            if (rotate)
+            {
+                _rotateToFace.TryFaceCoordinates(user.Value, _transform.ToMapCoordinates(transform.Coordinates.Offset(direction)).Position);
+
+                if (_net.IsServer)
+                    _audio.PlayPvs(_throwSound, user.Value);
+            }
+
             localPos = transform.LocalRotation.RotateVec(localPos);
             _melee.DoLunge(user.Value, user.Value, Angle.Zero, localPos, null, predicted: false);
         }

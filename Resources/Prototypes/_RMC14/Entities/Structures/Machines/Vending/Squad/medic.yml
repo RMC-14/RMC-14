@@ -103,11 +103,14 @@
     #    CMM40HPDPWhitePhosphorusPacketx3grenades: 18P
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
-    #    CMM74AGMFragAirburstPacketx3airburstgrenades: 20P
-    #    CMM74AGMIncendiaryAirburstPacketx3airburstgrenades: 20P
-    #    CMM74AGMSmokeAirburstPacketx3airburstgrenades: 10P
-    #    CMM74AGMHornetAirburstPacketx3airburstgrenades: 20P
-    #    CMM20MineBoxx4mines: 20P
+      - id: RMCPacketGrenadeM74AGMFFilled
+        points: 20
+      - id: RMCPacketGrenadeM74AGMIFilled
+        points: 20
+      - id: RMCPacketGrenadeM74AGMSFilled
+        points: 10
+      - id: RMCPacketGrenadeM74AGMSHornetFilled
+        points: 20
     - name: Primary Ammunition
       entries:
       - id: CMMagazineRifleM4SPRAP
@@ -136,13 +139,14 @@
         points: 16
     - name: Restricted Firearms
       entries:
-      - id: RMCMK80Case
+      - id: RMCGunCasePistolMK80
         points: 8
-      - id: RMCSmartPistolCase
+      - id: RMCGunCasePistolSmart
         points: 12
     - name: Clothing Items
       entries:
       - id: RMCPouchMacheteFilled
+        name: machete pouch (Full)
         points: 8
       - id: RMCBackpackRTO
         points: 15
@@ -207,6 +211,7 @@
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
+      - id: RMCArmorVestMedic
       - id: RMCArmorM3LightVariants
         name: light armor
       - id: RMCArmorM3MediumVariants
@@ -214,6 +219,12 @@
         recommended: true
       - id: RMCArmorM3HeavyVariants
         name: heavy armor
+    - name: Helmet
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: CMArmorHelmetM10Medic
+      - id: RMCArmorHelmetM10MedicWhite
+        recommended: true
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
@@ -224,9 +235,9 @@
       choices: { CMBelt: 1 }
       entries:
       - id: CMBeltMedicBagFilled
-        name: m276 lifesaver bag (full)
+        name: M276 lifesaver bag (Full)
       - id: CMBeltMedicalFilled
-        name: m276 medical storage rig (full)
+        name: M276 medical storage rig (Full)
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
@@ -249,6 +260,7 @@
       - id: RMCPouchReagentCanister
         name: Pressurized Reagent Canister Pouch\n(EMPTY)
       - id: RMCPouchVialFill
+        name: vial pouch (Full)
       - id: RMCPouchMedical
       - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)

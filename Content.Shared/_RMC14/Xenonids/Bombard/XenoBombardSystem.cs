@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Xenonids.GasToggle;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -29,6 +30,7 @@ public sealed class XenoBombardSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoBombardComponent, XenoBombardActionEvent>(OnBombard);
+        SubscribeLocalEvent<XenoBombardComponent, DoAfterAttemptEvent<XenoBombardDoAfterEvent>>(OnBombardDoAfterAttempt);
         SubscribeLocalEvent<XenoBombardComponent, XenoBombardDoAfterEvent>(OnBombardDoAfter);
         SubscribeLocalEvent<XenoBombardComponent, XenoGasToggleActionEvent>(OnToggleType);
     }
@@ -55,6 +57,7 @@ public sealed class XenoBombardSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.Delay, ev, ent, args.Action) { BreakOnMove = true };
         if (_doAfter.TryStartDoAfter(doAfter))
         {
+            _rmcActions.DisableSharedCooldownEvents(args.Action.Owner, ent);
             var selfMessage = Loc.GetString("rmc-glob-start-self");
             _popup.PopupClient(selfMessage, ent, ent);
 
@@ -63,9 +66,23 @@ public sealed class XenoBombardSystem : EntitySystem
         }
     }
 
+    private void OnBombardDoAfterAttempt(Entity<XenoBombardComponent> ent, ref DoAfterAttemptEvent<XenoBombardDoAfterEvent> args)
+    {
+        if (args.Event.Target is { } action &&
+            TryComp(action, out InstantActionComponent? actionComponent) &&
+            !actionComponent.Enabled)
+        {
+            _rmcActions.EnableSharedCooldownEvents(action, ent);
+            args.Cancel();
+        }
+    }
+
     private void OnBombardDoAfter(Entity<XenoBombardComponent> ent, ref XenoBombardDoAfterEvent args)
     {
-        if (args.Cancelled || args.Handled || args.Target is not { } action)
+        if (args.Target is not { } action)
+            return;
+        _rmcActions.EnableSharedCooldownEvents(action, ent);
+        if (args.Cancelled || args.Handled)
             return;
 
         args.Handled = true;
@@ -89,6 +106,7 @@ public sealed class XenoBombardSystem : EntitySystem
 
         _gun.ShootProjectile(projectile, direction, Vector2.Zero, ent, ent, speed: 7.5f);
         _audio.PlayEntity(ent.Comp.ShootSound, ent, ent);
+
         _rmcActions.ActivateSharedCooldown(action, ent);
 
         var selfMessage = Loc.GetString("rmc-glob-shoot-self");

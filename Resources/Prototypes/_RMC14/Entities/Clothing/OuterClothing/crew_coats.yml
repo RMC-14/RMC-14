@@ -81,3 +81,51 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/HazardVests/black.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/HazardVests/black.rsi
+
+# Labcoats + Medical Apron
+- type: entity
+  parent: [RMCAllowSuitStorageClothingLabcoat, RMCBaseJacketButtonable]
+  id: RMCLabcoat
+  name: labcoat
+  description: A suit that protects against minor chemical spills.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/labcoat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/labcoat.rsi
+  - type: CMArmor
+    bio: 15
+
+- type: entity
+  parent: [RMCBaseJacketButtonableOpened, RMCLabcoat]
+  id: RMCLabcoatOpened
+  name: labcoat
+
+- type: entity
+  parent: RMCLabcoat
+  id: RMCLabcoatCMO
+  name: chief medical officer's labcoat
+  description: A green sleek long labcoat, designed to distinguish a higher ranking medical personnel. Fabric has a better protection against chemical hazards.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/cmolabcoat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/cmolabcoat.rsi
+  - type: CMArmor
+    bio: 20
+
+- type: entity
+  parent: [RMCBaseJacketButtonableOpened, RMCLabcoatCMO]
+  id: RMCLabcoatCMOOpened
+  name: chief medical officer's labcoat
+
+- type: entity
+  parent: [RMCAllowSuitStorageClothingChefApron, ClothingOuterBase]
+  id: RMCMedicalApron
+  name: medical apron
+  description: A basic and sterile white apron, good for surgical and, of course, other medical practices.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/medicalapron.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/medicalapron.rsi

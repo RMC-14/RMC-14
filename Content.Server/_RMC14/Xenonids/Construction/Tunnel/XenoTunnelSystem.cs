@@ -1,11 +1,10 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Content.Server.Administration.Logs;
-using Content.Server.Players;
-using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction;
-using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -20,7 +19,10 @@ using Content.Shared.DoAfter;
 using Content.Shared.Hands;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Maps;
 using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
@@ -32,25 +34,24 @@ namespace Content.Server._RMC14.Xenonids.Construction.Tunnel;
 
 public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 {
-    //private const string TunnelPrototypeId = "XenoTunnel";
-
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityManager _entities = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
-    [Dependency] private readonly SharedXenoResinHoleSystem _xenoResinHole = default!;
     [Dependency] private readonly SharedXenoConstructionSystem _xenoConstruct = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly PlayerSystem _player = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
-    public int NextTempTunnelId
-    { get; private set; }
+    [Dependency] private readonly SharedMapSystem _map = default!;
+
+    public int NextTempTunnelId { get; private set; }
+
     public override void Initialize()
     {
         base.Initialize();
@@ -71,7 +72,11 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 
         SubscribeLocalEvent<XenoTunnelComponent, GetVerbsEvent<ActivationVerb>>(OnGetRenameVerb);
         SubscribeLocalEvent<XenoTunnelComponent, InteractUsingEvent>(OnFillTunnel);
-        SubscribeLocalEvent<XenoTunnelComponent, XenoCollapseTunnelDoAfterEvent>(OnColapseTunnelFinish);
+        SubscribeLocalEvent<XenoTunnelComponent, XenoCollapseTunnelDoAfterEvent>(OnCollapseTunnelFinish);
+        SubscribeLocalEvent<XenoTunnelComponent, EntityTerminatingEvent>(OnDeleteTunnel);
+        SubscribeLocalEvent<XenoTunnelComponent, EntInsertedIntoContainerMessage>(OnTunnelEntInserted);
+
+        SubscribeLocalEvent<XenoTunnelComponent, ContainerIsInsertingAttemptEvent>(OnInsertEntityIntoTunnel);
 
         SubscribeLocalEvent<InXenoTunnelComponent, RegurgitateEvent>(OnRegurgitateInTunnel);
         SubscribeLocalEvent<InXenoTunnelComponent, ComponentInit>(OnInTunnel);
@@ -99,22 +104,23 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         }
 
         if (_transform.GetGrid(location) is not { } gridId ||
-            !TryComp(gridId, out MapGridComponent? grid))
+            !TryComp(gridId, out MapGridComponent? grid) ||
+            HasComp<AlmayerComponent>(gridId))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-area"), xenoBuilder, xenoBuilder);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-area-tunnel"), xenoBuilder, xenoBuilder);
             return;
         }
 
         if (!_xenoPlasma.HasPlasmaPopup(xenoBuilder.Owner, args.PlasmaCost, false))
             return;
 
-        if (!Area.TryGetArea(location, out var area, out _, out _) || area.NoTunnel)
+        if (!Area.TryGetArea(location, out var area, out _) || area.Value.Comp.NoTunnel)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-area"), xenoBuilder, xenoBuilder);
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-area-tunnel"), xenoBuilder, xenoBuilder);
             return;
         }
 
-        if (_xenoWeeds.GetWeedsOnFloor((gridId, grid), location, true) is EntityUid weedSource)
+        if (_xenoWeeds.GetWeedsOnFloor((gridId, grid), location, true) is { } weedSource)
         {
             XenoPlaceResinTunnelDestroyWeedSourceDoAfterEvent weedRemovalEv = new()
             {
@@ -191,6 +197,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-resin-tunnel-create-tunnel"), xenoBuilder.Owner, xenoBuilder.Owner);
         args.Handled = true;
     }
+
     private void OnFinishCreateTunnel(Entity<XenoComponent> xenoBuilder, ref XenoDigTunnelDoAfter args)
     {
         if (args.Cancelled)
@@ -276,6 +283,9 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 
     private void OnGetInteractVerbs(Entity<XenoTunnelComponent> xenoTunnel, ref GetVerbsEvent<InteractionVerb> args)
     {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
         var user = args.User;
         var target = args.Target;
         var interactVerb = new InteractionVerb()
@@ -290,6 +300,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 
         args.Verbs.Add(interactVerb);
     }
+
     private void OnInteract(Entity<XenoTunnelComponent> xenoTunnel, ref InteractHandEvent args)
     {
         var (ent, comp) = xenoTunnel;
@@ -366,6 +377,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 
         args.Handled = true;
     }
+
     private void OnMoveThroughTunnel(Entity<XenoTunnelComponent> xenoTunnel, ref TraverseXenoTunnelMessage args)
     {
         var (ent, comp) = xenoTunnel;
@@ -385,7 +397,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             return;
         }
 
-        var mobContainer = _container.EnsureContainer<Container>(xenoTunnel.Owner, XenoTunnelComponent.ContainedMobsContainerId);
+        var mobContainer = _container.EnsureContainer<Container>(destinationTunnel, XenoTunnelComponent.ContainedMobsContainerId);
         if (mobContainer.Count >= xenoTunnel.Comp.MaxMobs)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-full-xeno-failure"), traversingXeno, traversingXeno);
@@ -417,6 +429,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         };
         _doAfter.TryStartDoAfter(doAfterArgs);
     }
+
     private void OnAttemptMoveInTunnel(Entity<XenoTunnelComponent> xenoTunnel, ref ContainerRelayMovementEntityEvent args)
     {
         _transform.PlaceNextTo(args.Entity, xenoTunnel.Owner);
@@ -447,7 +460,6 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 
 
         _container.Insert(enteringEntity, mobContainer);
-        EnsureComp<InXenoTunnelComponent>(enteringEntity);
         _ui.OpenUi(ent, SelectDestinationTunnelUI.Key, enteringEntity);
 
         args.Handled = true;
@@ -469,7 +481,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
         if (_transform.GetMap(startingTunnel) != _transform.GetMap(destinationXenoTunnel.Owner))
             return;
 
-        var mobContainer = _container.EnsureContainer<Container>(ent, XenoTunnelComponent.ContainedMobsContainerId);
+        var mobContainer = _container.EnsureContainer<Container>(destinationXenoTunnel, XenoTunnelComponent.ContainedMobsContainerId);
         if (mobContainer.Count >= comp.MaxMobs)
         {
             _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-full-xeno-failure"), traversingXeno, traversingXeno);
@@ -484,6 +496,9 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 
     private void OnGetRenameVerb(Entity<XenoTunnelComponent> xenoTunnel, ref GetVerbsEvent<ActivationVerb> args)
     {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
         if (!HasComp<XenoComponent>(args.User))
             return;
 
@@ -505,6 +520,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             args.Verbs.Add(renameTunnelVerb);
         }
     }
+
     private void GetAllAvailableTunnels(Entity<XenoTunnelComponent> destinationXenoTunnel, ref OpenBoundInterfaceMessage args)
     {
         var hive = Hive.GetHive(destinationXenoTunnel.Owner);
@@ -526,6 +542,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 
         _ui.SetUiState(destinationXenoTunnel.Owner, SelectDestinationTunnelUI.Key, newState);
     }
+
     private void OnFillTunnel(Entity<XenoTunnelComponent> xenoTunnel, ref InteractUsingEvent args)
     {
         if (args.Handled)
@@ -557,35 +574,65 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             _doAfter.TryStartDoAfter(doAfterArgs);
         }
     }
-    private void OnColapseTunnelFinish(Entity<XenoTunnelComponent> xenoTunnel, ref XenoCollapseTunnelDoAfterEvent args)
+
+    private void OnCollapseTunnelFinish(Entity<XenoTunnelComponent> xenoTunnel, ref XenoCollapseTunnelDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled)
-        {
             return;
+
+        CollapseTunnel(xenoTunnel);
+    }
+
+    private void OnDeleteTunnel(Entity<XenoTunnelComponent> xenoTunnel, ref EntityTerminatingEvent args)
+    {
+        CollapseTunnel(xenoTunnel);
+    }
+
+    private void OnInsertEntityIntoTunnel(Entity<XenoTunnelComponent> xenoTunnel, ref ContainerIsInsertingAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (args.Container.ID != XenoTunnelComponent.ContainedMobsContainerId)
+            return;
+
+        if (!HasComp<XenoComponent>(args.EntityUid) ||
+            !_mobState.IsAlive(args.EntityUid))
+        {
+            args.Cancel();
+        }
+    }
+
+    private void OnTunnelEntInserted(Entity<XenoTunnelComponent> xenoTunnel, ref EntInsertedIntoContainerMessage args)
+    {
+        if (!HasComp<MobStateComponent>(args.Entity))
+            return;
+
+        if (!_mobState.IsAlive(args.Entity))
+        {
+            RemoveFromTunnel(args.Entity, xenoTunnel);
         }
 
-        ColapseTunnel(xenoTunnel);
+        EnsureComp<InXenoTunnelComponent>(args.Entity);
+
     }
+
     /// <summary>
     /// Delete a tunnel and remove anything within it. CALLING DEL OR QUEUEDEL DIRECTLY ON THE TUNNEL IS NOT RECOMMENDED.
     /// </summary>
     /// <param name="xenoTunnel"></param>
-    private void ColapseTunnel(Entity<XenoTunnelComponent> xenoTunnel)
+    private void CollapseTunnel(Entity<XenoTunnelComponent> xenoTunnel)
     {
-        var mobContainer = _container.EnsureContainer<Container>(xenoTunnel.Owner, XenoTunnelComponent.ContainedMobsContainerId);
+        if (Hive.GetHive(xenoTunnel.Owner) is { } hive && TryGetHiveTunnelName(xenoTunnel, out var tunnelName))
+            hive.Comp.HiveTunnels.Remove(tunnelName);
 
-        var tempMobList = new List<EntityUid>(mobContainer.ContainedEntities);
-        var hiveTuple = Hive.GetHive(xenoTunnel.Owner);
-        if (hiveTuple is not null && TryGetHiveTunnelName(xenoTunnel, out var tunnelName))
+        if (_container.TryGetContainer(xenoTunnel.Owner, XenoTunnelComponent.ContainedMobsContainerId, out var mobContainer))
         {
-            var hiveComp = hiveTuple.Value.Comp;
-            hiveComp.HiveTunnels.Remove(tunnelName);
-        }
-
-        foreach (var mob in tempMobList)
-        {
-            RemoveFromTunnel(mob, mobContainer.Owner);
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-fill-xeno-drop"), mob, mob);
+            foreach (var mob in mobContainer.ContainedEntities.ToArray())
+            {
+                RemoveFromTunnel(mob, mobContainer.Owner);
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-tunnel-fill-xeno-drop"), mob, mob);
+            }
         }
 
         QueueDel(xenoTunnel.Owner);
@@ -613,7 +660,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             return;
         }
 
-        if (!_container.TryGetContainingContainer(tunneledXeno, out var mobContainer))
+        if (!_container.TryGetContainingContainer((tunneledXeno, null, null), out var mobContainer))
         {
             return;
         }
@@ -625,7 +672,7 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
     private void OnRegurgitateInTunnel(Entity<InXenoTunnelComponent> tunneledXeno, ref RegurgitateEvent args)
     {
         var regurgitated = _entities.GetEntity(args.NetRegurgitated);
-        if (!_container.TryGetContainingContainer(tunneledXeno, out var mobContainer))
+        if (!_container.TryGetContainingContainer((tunneledXeno, null, null), out var mobContainer))
         {
             return;
         }
@@ -650,6 +697,20 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
             _popup.PopupEntity(Loc.GetString(popupType), user, user, PopupType.SmallCaution);
             return false;
         }
+
+        if (Transform(user).GridUid is not EntityUid gridId ||
+            !TryComp(gridId, out MapGridComponent? gridComp))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-tile-tunnel"), user, user, PopupType.SmallCaution);
+            return false;
+        }
+        var tileRef = _map.GetTileRef(gridId, gridComp, coords);
+        if (!tileRef.GetContentTileDefinition().CanPlaceTunnel)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-bad-tile-tunnel"), user, user, PopupType.SmallCaution);
+            return false;
+        }
+
         return true;
     }
 

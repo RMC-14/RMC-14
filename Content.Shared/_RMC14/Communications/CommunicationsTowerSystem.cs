@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Dialog;
+using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Power;
 using Content.Shared._RMC14.Tools;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
@@ -27,6 +28,7 @@ public sealed class CommunicationsTowerSystem : EntitySystem
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly IntelSystem _intel = default!;
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -184,12 +186,21 @@ public sealed class CommunicationsTowerSystem : EntitySystem
 
         Dirty(ent);
         UpdateAppearance(ent);
+
+        if (ent.Comp.State == CommunicationsTowerState.On)
+            _intel.RestoreColonyCommunications();
     }
 
     private void OnTowerPowerChangedEvent(Entity<CommunicationsTowerComponent> ent, ref PowerChangedEvent args)
     {
         if (ent.Comp.State != CommunicationsTowerState.On)
             return;
+
+        if (args.Powered)
+        {
+            _intel.RestoreColonyCommunications();
+            return;
+        }
 
         ent.Comp.State = CommunicationsTowerState.Off;
         Dirty(ent);
