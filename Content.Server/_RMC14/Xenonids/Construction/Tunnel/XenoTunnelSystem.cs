@@ -283,6 +283,9 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 
     private void OnGetInteractVerbs(Entity<XenoTunnelComponent> xenoTunnel, ref GetVerbsEvent<InteractionVerb> args)
     {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
         var user = args.User;
         var target = args.Target;
         var interactVerb = new InteractionVerb()
@@ -493,6 +496,9 @@ public sealed partial class XenoTunnelSystem : SharedXenoTunnelSystem
 
     private void OnGetRenameVerb(Entity<XenoTunnelComponent> xenoTunnel, ref GetVerbsEvent<ActivationVerb> args)
     {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
         if (!HasComp<XenoComponent>(args.User))
             return;
 
