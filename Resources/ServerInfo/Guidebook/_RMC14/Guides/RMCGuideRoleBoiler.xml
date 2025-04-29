@@ -11,8 +11,8 @@
   Becoming the ultimate ranged warrior of the Hive. It is now slow and large and returns to being a supportive role on the frontline, being able to stall any marine push with its globs and attains upgraded acid spray, corrosive acid and tail stab toxin.
   
   <Box>
-    <GuideEntityEmbed Entity="XenoBombardAcidProjectile"/>
-    <GuideEntityEmbed Entity="XenoBombardNeurotoxinProjectile"/>
+    <GuideEntityEmbed Entity="CMGuidebookXenoBombardAcidProjectile"/>
+    <GuideEntityEmbed Entity="CMGuidebookXenoBombardNeurotoxinProjectile"/>
   </Box>\n
   
   Its acidic globs is capable to killing off any hosts caught within while its neurotoxin variant spreads further and will weaken any hosts allowing for capture.
