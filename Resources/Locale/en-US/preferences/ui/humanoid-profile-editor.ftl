@@ -25,6 +25,7 @@ humanoid-profile-editor-reset-button = Reset
 humanoid-profile-editor-spawn-priority-label = Spawn priority:
 humanoid-profile-editor-preferred-squad-label = Preferred squad:
 humanoid-profile-editor-preferred-armor-label = Preferred armor:
+humanoid-profile-editor-preferred-playtime-rank = Preferred rank:
 humanoid-profile-editor-enable-playtime-perks = Enable playtime perks:
 humanoid-profile-editor-xeno-prefix = Xeno prefix:
 humanoid-profile-editor-xeno-prefix-tooltip = 2 letters, or 3 if you have 124 hours in xeno roles. You cannot have a postfix with a 3 letter prefix.
@@ -46,6 +47,11 @@ humanoid-profile-editor-guidebook-button-tooltip = Click for more info
 humanoid-profile-editor-preference-spawn-priority-none = None
 humanoid-profile-editor-preference-spawn-priority-arrivals = Arrivals
 humanoid-profile-editor-preference-spawn-priority-cryosleep = Cryosleep
+
+# Playtime rank preference
+rank-preference-high = High
+rank-preference-medium = Middle
+rank-preference-low = Low
 
 humanoid-profile-editor-jobs-amount-in-department-tooltip = Jobs in the {$departmentName} department
 humanoid-profile-editor-department-jobs-label = {$departmentName} jobs
