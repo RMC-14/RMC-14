@@ -102,6 +102,7 @@
   id: CMGuidebookActionXenoOrderConstruction
   name: Order Construction
   description: Starts construction of an important hive structure.
+  categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
       state: morph_resin
