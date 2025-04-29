@@ -527,6 +527,14 @@
     useDelay: 18
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoStomp
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: stomp
+
+- type: entity
   id: ActionXenoCharge
   parent: ActionXenoBase
   name: Charge (20)
@@ -541,6 +549,14 @@
     range: 9
     useDelay: 14
     checkCanAccess: false
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoCharge
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: ready_charge
 
 - type: entity
   parent: ActionXenoBase
