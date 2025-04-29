@@ -114,6 +114,12 @@ namespace Content.Shared.Preferences
         public ArmorPreference ArmorPreference { get; private set; }
 
         /// <summary>
+        /// When spawning in, decides what type of rank to give. (Also dependent on playtime)
+        /// </summary>
+        [DataField]
+        public RankPreference RankPreference { get; private set; }
+
+        /// <summary>
         /// When spawning into a squad role, what squad is preferred.
         /// </summary>
         [DataField]
@@ -163,6 +169,7 @@ namespace Content.Shared.Preferences
             HumanoidCharacterAppearance appearance,
             SpawnPriorityPreference spawnPriority,
             ArmorPreference armorPreference,
+            RankPreference rankPreference,
             EntProtoId<SquadTeamComponent>? squadPreference,
             Dictionary<ProtoId<JobPrototype>, JobPriority> jobPriorities,
             PreferenceUnavailableMode preferenceUnavailable,
@@ -183,6 +190,7 @@ namespace Content.Shared.Preferences
             Appearance = appearance;
             SpawnPriority = spawnPriority;
             ArmorPreference = armorPreference;
+            RankPreference = rankPreference;
             SquadPreference = squadPreference;
             _jobPriorities = jobPriorities;
             PreferenceUnavailable = preferenceUnavailable;
@@ -221,6 +229,7 @@ namespace Content.Shared.Preferences
                 other.Appearance.Clone(),
                 other.SpawnPriority,
                 other.ArmorPreference,
+                other.RankPreference,
                 other.SquadPreference,
                 new Dictionary<ProtoId<JobPrototype>, JobPriority>(other.JobPriorities),
                 other.PreferenceUnavailable,
@@ -353,6 +362,11 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterProfile WithArmorPreference(ArmorPreference armorPreference)
         {
             return new(this) { ArmorPreference = armorPreference };
+        }
+
+        public HumanoidCharacterProfile WithRankPreference(RankPreference rankPreference)
+        {
+            return new(this) { RankPreference = rankPreference };
         }
 
         public HumanoidCharacterProfile WithSquadPreference(EntProtoId<SquadTeamComponent>? squadPreference)
@@ -544,6 +558,7 @@ namespace Content.Shared.Preferences
             if (FlavorText != other.FlavorText) return false;
             if (NamedItems != other.NamedItems) return false;
             if (ArmorPreference != other.ArmorPreference) return false;
+            if (RankPreference != other.RankPreference) return false;
             if (PlaytimePerks != other.PlaytimePerks) return false;
             if (XenoPrefix != other.XenoPrefix) return false;
             if (XenoPostfix != other.XenoPostfix) return false;
@@ -694,6 +709,16 @@ namespace Content.Shared.Preferences
             };
 
             ArmorPreference = armorPreference;
+
+            RankPreference rankPreference = RankPreference switch
+            {
+                RankPreference.High => RankPreference.High,
+                RankPreference.Middle => RankPreference.Middle,
+                RankPreference.Low => RankPreference.Low,
+                _ => RankPreference.High // Invalid enum values.
+            };
+
+            RankPreference = rankPreference;
 
             if (!prototypeManager.TryIndex(SquadPreference, out var squad) ||
                 !squad.TryGetComponent(out SquadTeamComponent? team, compFactory) ||
@@ -865,6 +890,7 @@ namespace Content.Shared.Preferences
             hashCode.Add(Appearance);
             hashCode.Add((int)SpawnPriority);
             hashCode.Add((int)ArmorPreference);
+            hashCode.Add((int)RankPreference);
             hashCode.Add(SquadPreference);
             hashCode.Add((int)PreferenceUnavailable);
             hashCode.Add(NamedItems);

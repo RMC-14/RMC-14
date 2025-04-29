@@ -380,6 +380,20 @@ namespace Content.Client.Lobby.UI
 
             #endregion ArmorPreference
 
+            #region PlaytimeRankPreference
+
+            PlaytimeRankButton.AddItem(Loc.GetString("rank-preference-high"), 0);
+            PlaytimeRankButton.AddItem(Loc.GetString("rank-preference-medium"), 1);
+            PlaytimeRankButton.AddItem(Loc.GetString("rank-preference-low"), 2);
+
+            PlaytimeRankButton.OnItemSelected += args =>
+            {
+                PlaytimeRankButton.SelectId(args.Id);
+                SetRankPreference((RankPreference) args.Id);
+            };
+
+            #endregion PlaytimeRankPreference
+
             #region SquadPreference
 
             SquadPreferenceButton.AddItem(Loc.GetString("loadout-none"), 0);
@@ -863,6 +877,7 @@ namespace Content.Client.Lobby.UI
             UpdateSkinColor();
             UpdateSpawnPriorityControls();
             UpdateArmorPreferenceControls();
+            UpdatePlaytimeRankPreferenceControls();
             UpdateSquadPreferenceControls();
             UpdateAgeEdit();
             UpdateEyePickers();
@@ -1353,6 +1368,12 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
+        private void SetRankPreference(RankPreference newRankPreference)
+        {
+            Profile = Profile?.WithRankPreference(newRankPreference);
+            SetDirty();
+        }
+
         private void SetSquadPreference(EntProtoId<SquadTeamComponent>? newSquadPreference)
         {
             Profile = Profile?.WithSquadPreference(newSquadPreference);
@@ -1577,6 +1598,16 @@ namespace Content.Client.Lobby.UI
             }
 
             ArmorPreferenceButton.SelectId((int) Profile.ArmorPreference);
+        }
+
+        private void UpdatePlaytimeRankPreferenceControls()
+        {
+            if (Profile == null)
+            {
+                return;
+            }
+
+            PlaytimeRankButton.SelectId((int) Profile.RankPreference);
         }
 
         private void UpdateSquadPreferenceControls()

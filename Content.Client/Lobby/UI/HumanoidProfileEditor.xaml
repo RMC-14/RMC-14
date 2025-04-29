@@ -65,6 +65,12 @@
                                     <Control HorizontalExpand="True"/>
                                     <OptionButton Name="ArmorPreferenceButton" HorizontalAlignment="Right" />
                                 </BoxContainer>
+                                <!-- Playtime Ranks-->
+                                <BoxContainer HorizontalExpand="True">
+                                    <Label Text="{Loc 'humanoid-profile-editor-preferred-playtime-rank'}" />
+                                    <Control HorizontalExpand="True"/>
+                                    <OptionButton Name="PlaytimeRankButton" HorizontalAlignment="Right"/>
+                                </BoxContainer>
                                 <!-- Playtime Perks -->
                                 <BoxContainer HorizontalExpand="True">
                                     <Label Text="{Loc 'humanoid-profile-editor-enable-playtime-perks'}" />

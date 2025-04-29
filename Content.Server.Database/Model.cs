@@ -534,6 +534,7 @@ namespace Content.Server.Database
         public RMCNamedItems? NamedItems { get; set; }
         public RMCSquadPreference? SquadPreference { get; set; }
         public string ArmorPreference { get; set; } = null!;
+        public string RankPreference { get; set; } = null!;
         public bool PlaytimePerks { get; set; } = true;
         public string XenoPrefix { get; set; } = string.Empty;
         public string XenoPostfix { get; set; } = string.Empty;
