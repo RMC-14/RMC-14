@@ -425,4 +425,4 @@
   description: A simple uniform made for Synthetic crewmembers
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/synthetic.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/Synthetic/synthetic_support.rsi
