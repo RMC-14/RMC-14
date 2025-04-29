@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Repairable;
+using Content.Shared._RMC14.StatusEffect;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -25,6 +26,7 @@ public abstract class SharedSynthSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedStackSystem _stack = default!;
+    [Dependency] private readonly RMCStatusEffectSystem _rmcStatusEffects = default!;
 
     public override void Initialize()
     {
@@ -52,6 +54,9 @@ public abstract class SharedSynthSystem : EntitySystem
 
         if (ent.Comp.RemoveComponents != null)
             EntityManager.RemoveComponents(ent.Owner, ent.Comp.RemoveComponents);
+
+        if (ent.Comp.StunResistance != null)
+            _rmcStatusEffects.GiveStunResistance(ent.Owner, ent.Comp.StunResistance.Value);
     }
 
     private void OnMeleeAttempted(Entity<SynthComponent> ent, ref AttackAttemptEvent args)
@@ -140,6 +145,7 @@ public abstract class SharedSynthSystem : EntitySystem
                     _popup.PopupPredicted(selfMsg, othersMsg, user, user);
                 }
             }
+            else
             {
                 _popup.PopupClient(Loc.GetString("rmc-repairable-not-damaged", ("target", synth)), user, user, PopupType.SmallCaution);
             }

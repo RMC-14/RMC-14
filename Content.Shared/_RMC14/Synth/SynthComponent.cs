@@ -18,6 +18,12 @@ public sealed partial class SynthComponent : Component
     [DataField]
     public ComponentRegistry? RemoveComponents;
 
+    /// <summary>
+    /// The final stun duration (after endurance skill) is divided by this number.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float? StunResistance = 2.5f;
+
     [DataField, AutoNetworkedField]
     public bool CanUseGuns = false;
 

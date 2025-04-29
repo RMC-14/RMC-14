@@ -186,3 +186,12 @@
   components:
   - type: PresetIdCard
     job: RMCJobSynthetic
+
+- type: entity
+  parent: RMCIDCardSynth
+  id: RMCIDCardSynthColony
+  name: synth ID card
+  suffix: Survivor
+  components:
+  - type: PresetIdCard
+    job: RMCJobSyntheticColony

@@ -104,7 +104,7 @@
     jumpsuit: RMCJumpsuitSynthetic
     gloves: CMHandsInsulated
     shoes: RMCShoesWhite
-    id: RMCIDCardSynth
+    id: RMCIDCardSynthColony
     ears: RMCHeadsetSynth
     belt: CMBeltUtilityFilled
 
