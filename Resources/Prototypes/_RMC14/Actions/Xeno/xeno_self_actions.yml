@@ -228,6 +228,14 @@
     event: !type:XenoTurnInvisibleActionEvent
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoTurnInvisible
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: lurker_invisibility
+
+- type: entity
   id: ActionXenoDefensiveShield
   parent: ActionXenoBase
   name: Defensive Shield (50)
