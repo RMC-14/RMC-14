@@ -1,13 +1,17 @@
 <Document>
-  Playing as a Sentinel
-
+  #Sentinel, Tier 1
+  <Box>
+    <GuideEntityEmbed Entity="CMXenoSentinel"/>
+  </Box>\n
+  ##Playing as a Sentinel
   You are relatively fragile and ranged. Use your spits to disrupt talls on the frontline and transport hosts, you can also catch alone marines with your paralyzing slash and scattered spit.
+  ##Abilities:
+  - [bold]Slowing Spit[/bold]: Glob a spit that slows talls and drains their chemicals, if they have no armor it will stun them down.
+  <GuideEntityEmbed Entity="CMGuidebookActionXenoSpit"/>
 
-  Abilities:
+  - [bold]Scattered Spit[/bold]: Glob spits in a shotgun like fashion that briefly knocks down talls, very useful for any talls that are pushing.
+  <GuideEntityEmbed Entity="CMGuidebookActionXenoScatteredSpit"/>
 
-  Slowing Spit: Glob a spit that slows talls and drains their chemicals, if they have no armor it will stun them down.
-
-  Scattered Spit: Glob spits in a shotgun like fashion that briefly knocks down talls, very useful for any talls that are pushing.
-
-  Paralyzing Slash: Empowers your next attack or tailstab to inject neurotoxin which will make them fall over after a brief period of time.
+  - [bold]Paralyzing Slash[/bold]: Empowers your next attack or tailstab to inject neurotoxin which will make them fall over after a brief period of time.
+  <GuideEntityEmbed Entity="CMGuidebookActionXenoCripplingStrike"/>
 </Document>
