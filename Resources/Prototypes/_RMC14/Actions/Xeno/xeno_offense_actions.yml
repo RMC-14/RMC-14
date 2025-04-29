@@ -207,6 +207,14 @@
     checkCanAccess: false
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoAssault
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: charge
+
+- type: entity
   parent: ActionXenoLeap
   id: ActionXenoDash
   name: Dash (40)
