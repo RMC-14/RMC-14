@@ -1,3 +1,5 @@
+using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.BlurredVision;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
 using Content.Shared.Body.Systems;
@@ -5,7 +7,10 @@ using Content.Shared.Coordinates;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Explosion;
 using Content.Shared.FixedPoint;
+using Content.Shared.Flash.Components;
+using Content.Shared.Inventory;
 using Content.Shared.Standing;
+using Content.Shared.StatusEffect;
 using Content.Shared.Sticky.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
@@ -28,8 +33,12 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
+    [Dependency] private readonly RMCDazedSystem _dazed = default!;
+    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
 
     private static readonly ProtoId<DamageTypePrototype> StructuralDamage = "Structural";
+    private static readonly ProtoId<StatusEffectPrototype> FlashedKey = "Flashed";
+    private static readonly ProtoId<StatusEffectPrototype> BlindKey = "Blinded";
 
     private readonly HashSet<Entity<RMCWallExplosionDeletableComponent>> _walls = new();
 
@@ -98,6 +107,43 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
             factor *= 0.5;
 
         _sizeStun.TryGetSize(ent, out var size);
+
+        var pos = _transform.GetWorldPosition(ent);
+        var dir = pos - args.Epicenter.Position;
+        if (dir.IsLengthZero())
+            dir = _random.NextVector2();
+
+        dir = dir.Normalized(); // TODO RMC14 size-based throw ranges and speeds
+
+        // Humanoid calcuations
+        if (size == RMCSizes.Humanoid)
+        {
+            var ev = new CMGetArmorEvent(SlotFlags.OUTERCLOTHING | SlotFlags.INNERCLOTHING);
+            RaiseLocalEvent(ent, ref ev);
+
+            var bombArmorMult = (100 - ev.ExplosionArmor) * 0.01;
+            var severity = factor * 5;
+
+            _statusEffects.TryAddStatusEffect<FlashedComponent>(ent, FlashedKey, ent.Comp.BlindTime * bombArmorMult, true);
+
+            var knockdownValue = severity * 0.1;
+            var knockoutValue = damage.Double() * 0.1;
+
+            var knockdownMinusArmor = Math.Max(knockdownValue * bombArmorMult, 1);
+            var knockdownTime = TimeSpan.FromSeconds(knockdownMinusArmor);
+            _stun.TryParalyze(ent, knockdownTime, false);
+
+            var knockoutMinusArmor = Math.Max(knockoutValue * bombArmorMult * 0.5, 0.5);
+            var knockoutTime = TimeSpan.FromSeconds(knockoutMinusArmor);
+            _stun.TryParalyze(ent, knockoutTime, false);
+
+            _dazed.TryDaze(ent, knockoutTime * 2, stutter: true);
+            _statusEffects.TryAddStatusEffect<RMCBlindedComponent>(ent, BlindKey, ent.Comp.BlurTime, false);
+
+            _throwing.TryThrow(ent, dir, (float)severity);
+            return;
+        }
+
         if (factor > 0 && ent.Comp.Weak)
         {
             var stunTime = TimeSpan.FromSeconds(factor / 2.5);
@@ -112,12 +158,6 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
             else
                 _slow.TrySlowdown(ent, TimeSpan.FromSeconds(factor / 3));
 
-            var pos = _transform.GetWorldPosition(ent);
-            var dir = pos - args.Epicenter.Position;
-            if (dir.IsLengthZero())
-                dir = _random.NextVector2();
-
-            dir = dir.Normalized(); // TODO RMC14 size-based throw ranges and speeds
             _throwing.TryThrow(ent, dir, 5);
         }
         else if (factor > 10)

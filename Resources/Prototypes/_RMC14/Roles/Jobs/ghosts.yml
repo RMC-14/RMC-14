@@ -2,6 +2,7 @@
 - type: randomHumanoidSettings
   id: RMCEventHumanoid
   components:
+  - type: GhostTakeoverAvailable
   - type: RandomHumanoidAppearance
   - type: RMCRandomMarkings
     markings:

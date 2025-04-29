@@ -163,6 +163,8 @@
   query:
   - !type:NearbyHostilesQuery
   considerations:
+  - !type:TargetIsNotConstructCon
+    curve: !type:BoolCurve
   - !type:TargetIsNotDeadCon
     curve: !type:BoolCurve
   - !type:TargetDistanceCon
