@@ -146,6 +146,14 @@
     useDelay: 0.25
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoResinWalker
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: toggle_speed
+
+- type: entity
   id: ActionXenoZoom
   parent: ActionXenoBase
   name: Toggle Long-Range Sight
