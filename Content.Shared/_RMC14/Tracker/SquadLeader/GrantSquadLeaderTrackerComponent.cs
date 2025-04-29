@@ -13,7 +13,10 @@ public sealed partial class GrantSquadLeaderTrackerComponent : Component, ICloth
     public SlotFlags Slots { get; set; } = SlotFlags.EARS;
 
     [DataField, AutoNetworkedField]
-    public ProtoId<JobPrototype> DefaultMode;
+    public ProtoId<JobPrototype>? DefaultRole;
+
+    [DataField, AutoNetworkedField]
+    public List<SquadLeaderTrackerMode> ExtraModes = new();
 
     [DataField, AutoNetworkedField]
     public List<ProtoId<JobPrototype>> TrackableRoles= new();

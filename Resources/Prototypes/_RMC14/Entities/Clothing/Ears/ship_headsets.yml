@@ -72,6 +72,11 @@
     cooldown: 60
   - type: RMCHeadset
     radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    trackableRoles:
+    - CMSquadLeader
+    extraModes:
+    - PrimaryLandingZone
 
 - type: entity
   parent: RMCHeadsetShip
@@ -112,6 +117,10 @@
       key_slots:
       - CMEncryptionKeyCommon
       - CMEncryptionKeyEngineer
+  - type: GrantSquadLeaderTracker
+    defaultRole: CMChiefEngineer
+    trackableRoles:
+    - CMChiefEngineer
 
 - type: entity
   parent: RMCHeadsetShip
@@ -126,6 +135,10 @@
       key_slots:
       - CMEncryptionKeyCommon
       - CMEncryptionKeyRequisition
+  - type: GrantSquadLeaderTracker
+    defaultRole: CMQuartermaster
+    trackableRoles:
+    - CMQuartermaster
 
 - type: entity
   parent: CMHeadsetRequisition
@@ -146,6 +159,10 @@
       key_slots:
       - CMEncryptionKeyCommon
       - CMEncryptionKeyMedical
+  - type: GrantSquadLeaderTracker
+    defaultRole: CMCMO
+    trackableRoles:
+    - CMCMO
 
 - type: entity
   parent: RMCHeadsetShip
@@ -160,6 +177,10 @@
       key_slots:
       - CMEncryptionKeyCommon
       - CMEncryptionKeyResearcher
+  - type: GrantSquadLeaderTracker
+    defaultRole: CMCMO
+    trackableRoles:
+    - CMCMO
 
 - type: entity
   parent: RMCHeadsetShip
@@ -201,6 +222,27 @@
       key_slots:
       - CMEncryptionKeyCommon
       - CMEncryptionKeyMPO
+  - type: GrantSquadLeaderTracker
+    defaultRole: CMChiefMP
+    trackableRoles:
+    - CMChiefMP
+    - CMMilitaryWarden
+
+- type: entity
+  parent: CMHeadsetMPO
+  id: RMCHeadsetMPHonor
+  name: marine honor guard radio headset
+  description: This is used by members of the marine honor guard.
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 2
+  - type: GrantSquadLeaderTracker
+    defaultRole: CMCommandingOfficer
+    trackableRoles:
+    - CMCommandingOfficer
+    - CMExecutiveOfficer
+    - CMChiefMP
+    - CMMilitaryWarden
 
 - type: entity
   parent: RMCHeadsetShip
@@ -225,6 +267,27 @@
     - MarineFoxtrot
   - type: RMCHeadset
     radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultRole: CMCommandingOfficer
+    trackableRoles:
+    - CMCommandingOfficer
+    - CMExecutiveOfficer
+    - CMAuxiliarySupportOfficer
+    - CMMilitaryWarden
+
+- type: entity
+  parent: CMHeadsetCMP
+  id: RMCHeadsetMW
+  name: marine military warden radio headset
+  description: It seems oddly similar to the CMPs'... Smells like donuts too.
+  components:
+  - type: GrantSquadLeaderTracker
+    defaultRole: CMCommandingOfficer
+    trackableRoles:
+    - CMCommandingOfficer
+    - CMExecutiveOfficer
+    - CMAuxiliarySupportOfficer
+    - CMChiefMP
 
 - type: entity
   parent: RMCHeadsetShip
@@ -270,6 +333,10 @@
     cooldown: 60
   - type: RMCHeadset
     radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultRole: CMAuxiliarySupportOfficer
+    trackableRoles:
+    - CMAuxiliarySupportOfficer
 
 - type: entity
   parent: RMCHeadsetMarine
@@ -292,6 +359,14 @@
     - MarineFoxtrot
   - type: RMCHeadset
     radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultRole: CMCommandingOfficer
+    trackableRoles:
+    - CMAuxiliarySupportOfficer
+    - CMSquadLeader
+    - CMFireteamLeader
+    extraModes:
+    - PrimaryLandingZone
 
 - type: entity
   parent: RMCHeadsetShip
@@ -306,6 +381,12 @@
       key_slots:
       - CMEncryptionKeyCommon
       - RMCEncryptionKeyLiaison
+  - type: GrantSquadLeaderTracker
+    defaultRole: RMCPMCDirector
+    trackableRoles:
+    - RMCPMCDirector
+    - RMCPMCLeader
+    - CMLiaison
 
 - type: entity
   parent: RMCHeadsetShip
@@ -355,6 +436,17 @@
     cooldown: 60
   - type: RMCHeadset
     radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultRole: CMProvostMarshal
+    trackableRoles:
+    - CMProvostMarshal
+    - CMProvostDeputyMarshal
+    - CMProvostChiefInspector
+    - CMProvostInspector
+    - CMProvostTeamLeader
+    - CMProvostAdvisor
+    - CMCommandingOfficer
+    - CMExecutiveOfficer
 
 - type: entity
   parent: CMHeadsetSeniorCommand
@@ -373,3 +465,9 @@
     cooldown: 60
   - type: RMCHeadset
     radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    trackableRoles:
+    - CMCommandingOfficer
+    - CMExecutiveOfficer
+    - CMChiefMP
+    - CMRifleman

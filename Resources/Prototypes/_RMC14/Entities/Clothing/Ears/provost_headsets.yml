@@ -19,3 +19,12 @@
     - MarineJTAC
   - type: RMCHeadset
     radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultRole: CMProvostTeamLeader
+    trackableRoles:
+    - CMProvostMarshal
+    - CMProvostDeputyMarshal
+    - CMProvostChiefInspector
+    - CMProvostInspector
+    - CMProvostTeamLeader
+    - CMProvostAdvisor

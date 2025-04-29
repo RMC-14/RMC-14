@@ -23,10 +23,13 @@ public sealed partial class SquadLeaderTrackerComponent : Component
     public FireteamData Fireteams = new();
 
     [DataField, AutoNetworkedField]
-    public ProtoId<JobPrototype> Mode;
+    public ProtoId<JobPrototype>? Role;
 
     [DataField, AutoNetworkedField]
     public EntityUid? Target;
+
+    [DataField, AutoNetworkedField]
+    public List<SquadLeaderTrackerMode> ExtraModes = new();
 
     [DataField, AutoNetworkedField]
     public List<ProtoId<JobPrototype>> TrackableRoles = new();

@@ -6,4 +6,4 @@ namespace Content.Shared._RMC14.Tracker.SquadLeader;
 
 [DataRecord]
 [Serializable, NetSerializable]
-public sealed record SquadLeaderTrackerChangeModeEvent(ProtoId<JobPrototype> Role);
+public sealed record SquadLeaderTrackerChangeModeEvent(ProtoId<JobPrototype>? Role, SquadLeaderTrackerMode? Mode = null);

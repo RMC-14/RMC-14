@@ -15,6 +15,36 @@ rmc-squad-info-unassigned = [font size=16][bold]Unassigned[/bold][/font]
 rmc-squad-info-fireteam = [font size=16][bold]Fireteam {$fireteam}[/bold][/font]
 rmc-squad-info-tracking-selection = Tracking Selection
 rmc-squad-info-tracking-choose = Choose a new tracking target.
-rmc-squad-info-squad-leader = Squad Leader
-rmc-squad-info-fireteam-leader = Fireteam Leader
 rmc-squad-info-change-tracker = Change Tracker
+
+rmc-squad-info-CMCommandingOfficer = Commanding Officer
+rmc-squad-info-CMExecutiveOfficer = Executive Officer
+rmc-squad-info-CMAuxiliarySupportOfficer = Auxiliary Support Officer
+rmc-squad-info-CMChiefMP = Chief Military Police
+rmc-squad-info-CMChiefEngineer = Chief Engineer
+rmc-squad-info-CMCMO = Chief Medical Officer
+rmc-squad-info-CMPilotDropship = Dropship Pilot
+rmc-squad-info-CMPilotGunship = Gunship Pilot
+rmc-squad-info-CMSeniorEnlistedAdvisor = Senior Enlisted Advisor
+rmc-squad-info-CMQuartermaster = Quartermaster
+rmc-squad-info-CMMilitaryWarden = Military Warden
+rmc-squad-info-CMSquadLeader = Squad Leader
+rmc-squad-info-CMFireteamLeader = Fireteam Leader
+rmc-squad-info-CMNurse = Nurse
+rmc-squad-info-CMCargoTech = Cargo Technician
+rmc-squad-info-CMRifleman = Rifleman
+
+rmc-squad-info-RMCPMCDirector = PMC Director
+rmc-squad-info-RMCPMCLeader = PMC Leader
+rmc-squad-info-CMLiaison = Liaison
+
+rmc-squad-info-CMProvostMarshal = Provost Marshal
+rmc-squad-info-CMProvostDeputyMarshal = Provost Deputy Marshal
+rmc-squad-info-CMProvostChiefInspector = Provost Chief Inspector
+rmc-squad-info-CMProvostInspector = Provost Inspector
+rmc-squad-info-CMProvostTeamLeader = Provost Team Leader
+rmc-squad-info-CMProvostAdvisor = Provost Advisor
+
+rmc-squad-info-RMCSPPLeader = SPP Leader
+
+rmc-squad-info-PrimaryLandingZone = Primary Landing Zone

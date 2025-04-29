@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Dialog;
+using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Roles;
 using Content.Shared.Administration.Logs;
@@ -9,6 +10,7 @@ using Content.Shared.Inventory.Events;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Tracker.SquadLeader;
 
@@ -104,7 +106,9 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
         var leaderTracker = EnsureComp<SquadLeaderTrackerComponent>(args.Equipee);
         leaderTracker.TrackableRoles = ent.Comp.TrackableRoles;
-        leaderTracker.Mode = ent.Comp.DefaultMode;
+        leaderTracker.ExtraModes = ent.Comp.ExtraModes;
+        if(ent.Comp.DefaultRole != null)
+            leaderTracker.Role = ent.Comp.DefaultRole.Value;
         Dirty(args.Equipee, leaderTracker);
     }
 
@@ -145,28 +149,51 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
     {
         var tracker = ent.Comp;
         var options = new List<DialogOption> { };
-        EntityUid? tracked = null;
+        var trackingOptions = new List<EntityUid> { };
 
         // Try to find all entities that fit the selected role.
         var query = EntityQueryEnumerator<RMCTrackableComponent, OriginalRoleComponent>();
-        while (query.MoveNext(out var trackableUid, out var trackable, out var originalRole))
+        while (query.MoveNext(out var trackableUid, out _, out var originalRole))
         {
             if (originalRole.Job != args.Role)
                 continue;
 
             // Populate the dialogue window with all trackable entities of the selected role.
-            options.Add(new DialogOption(
-                Loc.GetString("rmc-squad-info-tracking-target-name", ("target", Name(trackableUid))),
+            options.Add(new DialogOption(Name(trackableUid),
                 new LeaderTrackerSelectTargetEvent(GetNetEntity(trackableUid))
             ));
 
-            tracked = trackableUid;
+            trackingOptions.Add(trackableUid);
         }
+
+        if (TryComp(ent, out SquadMemberComponent? squadMember))
+        {
+            var index = 0;
+            // Remove targets that are not in the same squad as the tracking entity.
+            while (index < trackingOptions.Count)
+            {
+                if (TryComp(trackingOptions[index], out SquadMemberComponent? targetSquadMember) &&
+                    squadMember.Squad != targetSquadMember.Squad &&
+                    !HasComp<SquadLeaderComponent>(ent))
+                {
+                    options.RemoveAt(index);
+                    trackingOptions.RemoveAt(index);
+                    continue;
+                }
+                index++;
+            }
+        }
+
         switch (options.Count)
         {
             // Set the target directly without first needing to confirm as there is only 1 or no target.
             case <= 1:
-                tracker.Target = tracked;
+                if(trackingOptions.TryGetValue(0, out var target))
+                    tracker.Target = target;
+                else
+                {
+                    tracker.Target = null;
+                }
                 break;
             // There are multiple entities of the selected role, open a new ui window to select which entity should be tracked.
             case > 1:
@@ -179,7 +206,20 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
                 break;
         }
 
-        tracker.Mode = args.Role;
+        if(args.Mode != null)
+        {
+            if (args.Mode == SquadLeaderTrackerMode.PrimaryLandingZone)
+            {
+                var landingZoneQuery = EntityQueryEnumerator<PrimaryLandingZoneComponent>();
+                while (landingZoneQuery.MoveNext(out var landingZoneUid, out _))
+                {
+                    tracker.Target = landingZoneUid;
+                    break;
+                }
+            }
+        }
+
+        tracker.Role = args.Role;
         Dirty(ent);
     }
 
@@ -301,6 +341,14 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
             options.Add(new DialogOption(
                 Loc.GetString("rmc-squad-info-" + role),
                 new SquadLeaderTrackerChangeModeEvent(role)
+            ));
+        }
+
+        foreach (var option in ent.Comp.ExtraModes)
+        {
+            options.Add(new DialogOption(
+                Loc.GetString("rmc-squad-info-" + option),
+                new SquadLeaderTrackerChangeModeEvent(null, option)
             ));
         }
 
@@ -466,7 +514,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
             if (_squadMemberQuery.TryComp(uid, out var squadMember) && squadMember.Squad is { } squad)
             {
-                if (_fireteamMemberQuery.TryComp(uid, out var fireteamMember) && tracker.Mode == FireteamLeader)
+                if (_fireteamMemberQuery.TryComp(uid, out var fireteamMember) && tracker.Role == FireteamLeader)
                 {
                     var fireteamIndex = fireteamMember.Fireteam;
                     if (fireteamIndex >= 0 &&
@@ -475,13 +523,15 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
                         fireteam.TryGetValue(squad, out var leader))
                     {
                         UpdateDirection((uid, tracker), leader);
-                        break;
+                        continue;
                     }
                 }
-                else if(tracker.Mode == SquadLeader && _squadLeaders.TryGetValue(squad, out var squadLeader))
+                else if(tracker.Role == SquadLeader &&
+                        _squadLeaders.TryGetValue(squad, out var squadLeader)&&
+                        !HasComp<SquadLeaderComponent>(uid))
                 {
                     UpdateDirection((uid, tracker), squadLeader);
-                    break;
+                    continue;
                 }
             }
 
@@ -489,14 +539,14 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
             if (tracker.Target != null)
             {
                 UpdateDirection((uid, tracker), _transform.GetMapCoordinates(tracker.Target.Value));
-                break;
+                continue;
             }
 
             // If the tracker is not tracking an entity, try to find a new target.
             var trackableQuery = EntityQueryEnumerator<RMCTrackableComponent, OriginalRoleComponent>();
             while (trackableQuery.MoveNext(out var trackableUid, out _, out var originalRole))
             {
-                if (originalRole.Job != tracker.Mode)
+                if (originalRole.Job != tracker.Role)
                     continue;
 
                 tracker.Target = trackableUid;
