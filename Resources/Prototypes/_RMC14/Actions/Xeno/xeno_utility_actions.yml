@@ -94,6 +94,14 @@
   - type: ActionBlockIfResting
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoRetrieve
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: retrieve
+
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoAidHeal
   name: Aid Xenonid Healing (100 plasma, 100+ health reserves)
@@ -251,6 +259,14 @@
     useDelay: 10
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoTailFountain
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: prae_tail_fountain
+
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoTantrum
   name: Tantrum (100 plasma, 75 fury)
@@ -265,6 +281,14 @@
     checkCanAccess: false
     range: 8
     useDelay: 7
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoTantrum
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: warden_heal
 
 - type: entity
   parent: ActionXenoBase
@@ -283,6 +307,14 @@
     cost: 75
   - type: XenoActionPlasma
     cost: 300
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoFightOrFlight
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: screech
 
 - type: entity
   parent: ActionXenoBase
