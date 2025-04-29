@@ -95,10 +95,11 @@
   id: RMCGuideXenonidStructures
   name: "Xenonid Structures"
   text: "/ServerInfo/Guidebook/_RMC14/RMC14.xml"
-#  children:
-#  - Put something here someday
+  children:
+  - RMCGuideHiveStructures
+  - RMCGuideResinHoles
 
-
+  
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleRifleman
@@ -274,13 +275,27 @@
   name: "Queen Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleQueen.xml"
 
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideCommunicationsTowers
+  priority: 25
+  name: "Hive Structures Guide"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideHiveStructures.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideCommunicationsTowers
+  priority: 26
+  name: "Resin Holes Guide"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideResinHoles.xml"
+
 # Chemistry stuff
 - type: guideEntry
   parent: RMC
   id: RMCChemicals
   name: guide-entry-chemicals
   text: "/ServerInfo/Guidebook/_RMC14/Chemicals/RMCChemicals.xml"
-  priority: 25
+  priority: 27
   children:
   #  - RMCElements
   - RMCMedicine
