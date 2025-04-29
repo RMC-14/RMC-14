@@ -235,6 +235,14 @@
     range: 16
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionRetrieveEgg
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: retrieve_egg
+
+- type: entity
   id: ActionXenoThrowParasite
   parent: ActionXenoBase
   name: Throw Parasite
@@ -253,6 +261,14 @@
     useDelay: 0
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionThrowParasite
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: throw_parasite
+
+- type: entity
   id: ActionXenoParasiteReserve
   parent: ActionXenoBase
   name: Set Parasite Reserve
@@ -265,6 +281,14 @@
       state: reserve_parasite
     event: !type:XenoReserveParasiteActionEvent
     useDelay: 1
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionSetParasiteReserve
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: reserve_parasite
 
 - type: entity
   parent: ActionXenoBase
