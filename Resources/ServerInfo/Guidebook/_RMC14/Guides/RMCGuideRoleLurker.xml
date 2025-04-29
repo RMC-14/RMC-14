@@ -1,21 +1,18 @@
 <Document>
   #Lurker, Tier 2
-  <Box>
-    <GuideEntityEmbed Entity="CMXenoLurker"/>
-  </Box>\n
- ## Playing as a Lurker
+  <GuideEntityEmbed Entity="CMXenoLurker"/>
+  ##Playing as a Lurker
   What you lose in speed is gained in health and invisibility, being capable to quickly drag off talls from the frontline and backline to capture. 
 
   To execute the Lurker combo you must first be invisible and then leap onto your target, time your slash to hit after your leap connects and then use Crippling Strike to drag them off and tackle or continue with a burst of damage.
 
   Remember to monitor your invisibility as it could run out at a inopportune time, you are also not 100% invisible so stick to low light conditions.
+  
   ##Abilities:
   - [bold]Pounce[/bold]: Leap at a target pinning them to the ground only if invisible, this stun is longer than a runner but will root you onto your target unless you slash after.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoPounce"/>
-
   - [bold]Turn Invisible[/bold]: Become partially invisible, your movement speed is increased but if you attack or pounce your invisibility will wear off.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoTurnInvisible"/>
-
   - [bold]Crippling Strike[/bold]: The next target you slash will do more damage and slow them down.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoCripplingStrike"/>
 </Document>
