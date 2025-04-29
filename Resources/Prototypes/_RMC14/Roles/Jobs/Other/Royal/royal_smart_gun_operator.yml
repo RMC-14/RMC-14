@@ -7,7 +7,7 @@
   ranks:
     RMCRankLanceCorporal: [ ]
   startingGear: RMCGearRoyalSmartGunOperator
-  icon: CMJobIconEmpty
+  icon: RMCJobIconRoyalSmartGunOperator
   joinNotifyCrew: false
   special:
   - !type:AddComponentSpecial
@@ -28,7 +28,6 @@
         RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-royal-smart-gun-operator
-  hasIcon: false
   hidden: true
 
 - type: entity
