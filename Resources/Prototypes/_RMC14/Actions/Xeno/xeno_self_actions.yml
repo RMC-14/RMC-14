@@ -96,6 +96,14 @@
     useDelay: 2
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoToggleCrestDefence
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: crest_defense
+
+- type: entity
   id: ActionXenoFortify
   parent: ActionXenoBase
   name: Fortify
@@ -108,6 +116,14 @@
       state: fortify
     event: !type:XenoFortifyActionEvent
     useDelay: 5
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoFortify
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: fortify
 
 - type: entity
   id: ActionXenoFortifySteelcrest
@@ -144,7 +160,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionToggleLongRangeSight
+  id: CMGuidebookActionXenoToggleLongRangeSight
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -244,7 +260,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionRetrieveEgg
+  id: CMGuidebookActionXenoRetrieveEgg
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -270,7 +286,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionThrowParasite
+  id: CMGuidebookActionXenoThrowParasite
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -292,7 +308,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionSetParasiteReserve
+  id: CMGuidebookActionXenoSetParasiteReserve
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
