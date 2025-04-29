@@ -1,7 +1,7 @@
 <Document>
   #Ravager Tier 3
   <Box>
-    <GuideEntityEmbed Entity="CMXenoPraetorian"/>
+    <GuideEntityEmbed Entity="CMXenoRavager"/>
   </Box>\n
   ##Playing as a Ravager
   You don't need to hide anymore.
