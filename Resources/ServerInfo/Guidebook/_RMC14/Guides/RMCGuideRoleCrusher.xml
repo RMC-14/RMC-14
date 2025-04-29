@@ -13,11 +13,11 @@
   - [bold][color=green]PASSIVE[/color][/bold]: Your slashes reduce ability cooldowns and slow down enemies.
 
   - [bold]Charge[/bold]: Click on a tile to charge at, after a do-after you will bash anybody in the way dealing massive damage to them and reducing your charge cooldown.
-  <GuideEntityEmbed Entity="CMGuidebookActionCharge"/>
+  <GuideEntityEmbed Entity="CMGuidebookActionXenoCharge"/>
 
   - [bold]Stomp[/bold]: Stomp on the ground in a AOE that stuns all targets nearby briefly, when used directly atop a downed target will inflict heavy damage.
-  <GuideEntityEmbed Entity="CMGuidebookActionStomp"/>
+  <GuideEntityEmbed Entity="CMGuidebookActionXenoStomp"/>
 
   - [bold]Defensive Shield[/bold]: Gain a temporary shield that blocks and reduces damage, it also has a short timer of high explosive invulnerability.
-  <GuideEntityEmbed Entity="CMGuidebookActionDefensiveShield"/>
+  <GuideEntityEmbed Entity="CMGuidebookActionXenoDefensiveShield"/>
 </Document>
