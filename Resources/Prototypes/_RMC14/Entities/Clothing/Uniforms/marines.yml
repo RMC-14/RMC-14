@@ -418,6 +418,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Synthetic/outdated_synth.rsi
 
+- type: entity
   parent: RMCMarineUniformBase
   id: RMCJumpsuitSynthetic
   name: UNMC Support Uniform
