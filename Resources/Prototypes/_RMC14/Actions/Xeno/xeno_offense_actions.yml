@@ -771,6 +771,14 @@
     useDelay: 30
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoTremor
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: tremor
+
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoForTheHive
   name: For The Hive!
