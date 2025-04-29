@@ -171,6 +171,7 @@
   id: CMGuidebookActionXenoLeader
   name: Choose Leaders
   description: Promotes and demotes xenonid leaders, or watches them. Promoting a xeno to leader will make them emit your pheromones around themselves.
+  categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
       state: xeno_lead
