@@ -231,7 +231,6 @@
     accuracy: 95
 
 - type: entity
-  parent: XenoBaseProjectile
   id: CMGuidebookXenoBombardAcidProjectile
   name: Acid Glob
   categories: [ HideSpawnMenu ]
@@ -290,7 +289,6 @@
     accuracy: 95
 
 - type: entity
-  parent: XenoBaseProjectile
   id: CMGuidebookXenoBombardNeurotoxinProjectile
   name: Neurotoxin Glob
   categories: [ HideSpawnMenu ]
