@@ -1,0 +1,15 @@
+<Document>
+  Plant resin hole: Resin holes can be filled by any xeno with corrosive acid or gas, such as a boiler.
+
+  Weak acid trap: Filled by lesser drones, drones, and sentinels. This trap will do minimal damage and will NOT stun.
+
+  Normal acid trap: Filled by base praetorian, spitter, queen, and hivelord. Does a decent amount of damage with 2 second stun.
+
+  Strong acid traps: Filled by burrowers, has a 4 second stun and has high damage.
+
+  Neurotoxin gas trap: Filled by a boiler with the neurotoxin gas type selected, sprays out neurotoxin gas which gives them debuffs that disorient, stun and damage
+
+  Acid gas trap: Filled by boilers with acid gas selected, sprays out acid gas which does high damage to marines.
+
+  Parasite trap: Stuns a marine for 2 seconds when they step on it. The parasite will then jump out and infect the marine. Filled by any caste that can pick up a parasite, however most commonly made by carriers.
+</Document>
