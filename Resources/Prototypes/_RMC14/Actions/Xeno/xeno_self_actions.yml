@@ -38,6 +38,7 @@
   parent: CMGuidebookActionXenoBase
   id: CMGuidebookActionXenoWatch
   name: Watch Xenonid
+  categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
       state: watch_xeno
@@ -61,6 +62,7 @@
   id: CMGuidebookActionXenoPheromones
   name: Emit Pheromones
   description: Gives a buff to nearby xenonids.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     state: emit_pheromones
@@ -175,6 +177,7 @@
   id: CMGuidebookActionXenoGrowOvipositor
   name: Grow Ovipositor
   description: Become immobile and start laying eggs which will produce parasites.
+  categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
       state: grow_ovipositor
