@@ -1,8 +1,6 @@
 <Document>
   #Burrower, Tier 2
-  <Box>
-    <GuideEntityEmbed Entity="CMXenoBurrower"/>
-  </Box>\n
+  <GuideEntityEmbed Entity="CMXenoBurrower"/>
   ##Playing as a Burrower
   Use your resin holes to fill them with a special type of acid that stuns any marines that enter a tile around it, this can be paired with stomp and multiple traps to easily capture talls on the frontline and backline. Burrowers can also make tunnels that allow easy transportation of hosts from the frontline to nests however they suffer from a slow plasma gain, it is suggested to work around recovery pheromones.
 
