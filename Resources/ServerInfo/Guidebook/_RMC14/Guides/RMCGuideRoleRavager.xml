@@ -1,8 +1,6 @@
 <Document>
   #Ravager Tier 3
-  <Box>
-    <GuideEntityEmbed Entity="CMXenoRavager"/>
-  </Box>\n
+  <GuideEntityEmbed Entity="CMXenoRavager"/>
   ##Playing as a Ravager
   You don't need to hide anymore.
 
@@ -11,15 +9,13 @@
   Their passive include having their slash damage increased based on the amount of targets they currently empower from, being fire-proof and explosion-resistant.
 
   Your first activation of Empower will grant shield, on the second activation for every target nearby you, gain extra shield. It is suggested that you quickly Empower twice once nearby marines before unleashing the rest of your attacks.
+  
   ##Abilities:
   - [bold][color=green]PASSIVE[/color][/bold]: Immune to fire damage, however will still catch on fire and lose armor from green fire.
-
   - [bold]Empower[/bold]: On first activation, grant shield points, on second activation for every target in your line of sight and near you, gain extra shield. Empowering from 3 or more targets will make you super empowered, upgrading your other abilities.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoEmpower"/>
-
   - [bold]Assault[/bold]: Lunge towards your direction, if super empowered you will fling, knock down and slash any target you hit. Slashing any targets will reduce this ability's cooldown.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoAssault"/>
-
   - [bold]Scissor Cut[/bold]: Slash in a 1x4 line damaging anybody inside, if super empowered whoever hit will be slowed.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoScissorCut"/>
 </Document>
