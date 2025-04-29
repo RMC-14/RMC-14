@@ -188,16 +188,22 @@
 
 - type: entity
   parent: XenoBaseProjectile
-  id: XenoBombardAcidProjectile
-  name: glob of acid gas
-  categories:
-  - HideSpawnMenu
+  id: CMGuidebookXenoBombardAcidProjectile
+  name: Acid Glob
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
     layers:
     - state: acid_glob
       shader: unshaded
+  
+- type: entity
+  parent: CMGuidebookXenoBombardAcidProjectile
+  id: XenoBombardAcidProjectile
+  name: glob of acid gas
+  categories:
+  - HideSpawnMenu
+  components:
   - type: TimedDespawn
     lifetime: 10
   - type: XenoProjectile
