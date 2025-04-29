@@ -8,15 +8,15 @@
 
   They are also efficent cap carriers, as they can tackle and keep down talls to bring them to a nest.
   ##Abilities:
-  [bold]Headbutt[/bold]: Launches you into the target dealing low damage and knocking them back, if your crest is lowered then it will knock them back further.
+  - [bold]Headbutt[/bold]: Launches you into the target dealing low damage and knocking them back, if your crest is lowered then it will knock them back further.
    <GuideEntityEmbed Entity="CMGuidebookActionXenoHeadbutt"/>
 
-  [bold]Tail Sweep[/bold]: Spin around and uses your tail to cause all targets within a one tile range around you be knocked down and thrown, deals a small amount of damage.
+  - [bold]Tail Sweep[/bold]: Spin around and uses your tail to cause all targets within a one tile range around you be knocked down and thrown, deals a small amount of damage.
    <GuideEntityEmbed Entity="CMGuidebookActionXenoTailSweep"/>
 
-  [bold]Toggle Crest Defence[/bold]: Lowering your crest will increase your armor pool and make you immune to most forms of stun such as shotgun and grenades, however this will slow you down.
+  - [bold]Toggle Crest Defence[/bold]: Lowering your crest will increase your armor pool and make you immune to most forms of stun such as shotgun and grenades, however this will slow you down.
    <GuideEntityEmbed Entity="CMGuidebookActionXenoToggleCrestDefence"/>
 
-  [bold]Fortify[/bold]: Locks you into a tile increasing your armor pool heavily and granting explosive resistance at the cost of being immobile. 
+  - [bold]Fortify[/bold]: Locks you into a tile increasing your armor pool heavily and granting explosive resistance at the cost of being immobile. 
   <GuideEntityEmbed Entity="CMGuidebookActionXenoFortify"/>
 </Document>
