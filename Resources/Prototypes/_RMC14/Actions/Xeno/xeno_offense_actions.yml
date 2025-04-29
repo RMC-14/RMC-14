@@ -184,6 +184,14 @@
   - type: RMCDazeableAction
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoPounce
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: pounce
+
+- type: entity
   parent: ActionXenoLeap
   id: ActionXenoAssault
   name: Assault (25)
@@ -430,6 +438,14 @@
     useDelay: 10
   - type: XenoActionPlasma
     cost: 20
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoCripplingStrike
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: lurker_inject_neuro
 
 - type: entity
   id: ActionXenoBoneChips
