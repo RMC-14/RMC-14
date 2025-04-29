@@ -21,5 +21,5 @@ jobs:
       with:
         schema: .github/Schemas/rga.yml
         path_pattern: .*attributions.ya?ml$
-        validators_path: RobustToolbox/Schemas/rga_validators.py
-        validators_requirements: RobustToolbox/Schemas/rga_requirements.txt
+        validators_path: .github/Schemas/rga_validators.py
+        validators_requirements: .github/Schemas/rga_requirements.txt
