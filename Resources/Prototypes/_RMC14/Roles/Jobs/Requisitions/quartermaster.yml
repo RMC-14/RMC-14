@@ -85,3 +85,13 @@
 - type: playTimeTracker
   id: CMJobQuartermaster
   isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleQM
+  name: The QM
+  description: The Quartermaster.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: quartermaster

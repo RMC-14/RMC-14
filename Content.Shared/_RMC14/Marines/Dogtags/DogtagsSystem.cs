@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Medical.Defibrillator;
+using Content.Shared._RMC14.Medical.Defibrillator;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -14,6 +14,8 @@ using Content.Shared.Verbs;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared.Coordinates;
 
 namespace Content.Shared._RMC14.Marines.Dogtags;
 
@@ -71,18 +73,24 @@ public sealed class DogtagsSystem : EntitySystem
         if (HasComp<XenoComponent>(args.Examiner) || memorial.Comp.Names.Count == 0)
             return;
 
-        string text = Loc.GetString("rmc-memorial-start") + " ";
-        int count = 1;
-        foreach(var name in memorial.Comp.Names)
-        {
-            if (count == memorial.Comp.Names.Count)
-                text += name + ".";
-            else
-                text += name + ", ";
-            count++;
-        }
+        string text = Loc.GetString("rmc-memorial-start") + " " + MemorialNamesFormat(memorial.Comp.Names);
 
         args.PushMarkup(text, -5);
+    }
+
+    public string MemorialNamesFormat(List<string> memorialnames)
+    {
+        string list = "";
+        int count = 1;
+        foreach (var name in memorialnames)
+        {
+            if (count == memorialnames.Count)
+                list += name + ".";
+            else
+                list += name + ", ";
+            count++;
+        }
+        return list;
     }
 
     private void GetRelayedTags(Entity<TakeableTagsComponent> tags, ref InventoryRelayedEvent<GetVerbsEvent<EquipmentVerb>> args)
@@ -90,19 +98,44 @@ public sealed class DogtagsSystem : EntitySystem
         OnGetVerbTags(tags, ref args.Args);
     }
 
-    private bool CanTakeTags(EntityUid wearer, EntityUid taker)
+    private bool CanTakeTags(Entity<TakeableTagsComponent> tags, EntityUid wearer, EntityUid taker, out bool equipped, out string reason)
     {
+        equipped = true;
+        reason = "";
+
         if (wearer == taker)
+        {
+            if (_hands.IsHolding(taker, tags))
+            {
+                if (TryComp<IdCardOwnerComponent>(tags, out var cardOwner) && Exists(cardOwner.Id))
+                {
+                    if(cardOwner.Id == taker)
+                        reason = Loc.GetString("rmc-dogtags-still-exists-self");
+                    else
+                        reason = Loc.GetString("rmc-dogtags-still-exists");
+                    return false;
+                }
+                equipped = false;
+                return true;
+            }
+
             return false;
+        }
 
         if (!_mob.IsDead(wearer))
+        {
+            reason = Loc.GetString("rmc-dogtags-still-alive");
             return false;
+        }
 
         if (!_rotting.IsRotten(wearer) &&
             !HasComp<CMDefibrillatorBlockedComponent>(wearer) &&
             !HasComp<VictimBurstComponent>(wearer) &&
             !_skills.HasSkill(taker, Skill, SkillRequired))
+        {
+            reason = Loc.GetString("rmc-dogtags-can-be-saved");
             return false;
+        }
 
         return true;
     }
@@ -119,13 +152,13 @@ public sealed class DogtagsSystem : EntitySystem
         var wearer = Transform(tags).ParentUid;
         var user = args.User;
 
-        if (!CanTakeTags(wearer, user))
+        if (!CanTakeTags(tags, wearer, user, out var equipped, out _))
             return;
 
         var verb = new EquipmentVerb()
         {
             Icon = new SpriteSpecifier.Texture(new("/Textures/_RMC14/Interface/VerbIcons/dogtag.png")),
-            Text = Loc.GetString("rmc-dogtags-take"),
+            Text = Loc.GetString("rmc-dogtags-take")
         };
 
         verb.Act = () => TakeTags(tags, user, wearer);
@@ -141,14 +174,11 @@ public sealed class DogtagsSystem : EntitySystem
             return;
         }
 
-        if (!_mob.IsDead(wearer))
+        if (!CanTakeTags(tags, wearer, user, out var equipped, out var reason))
         {
-            _popup.PopupClient(Loc.GetString("rmc-dogtags-still-alive"), user);
+            _popup.PopupClient(reason, user);
             return;
         }
-
-        if (!CanTakeTags(wearer, user))
-            return;
 
         if (!_interaction.InRangeAndAccessible(user, wearer))
             return;
@@ -159,10 +189,21 @@ public sealed class DogtagsSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var tag = SpawnNextToOrDrop(tags.Comp.InfoTag, wearer);
-		Dirty(tags);
+        if (!equipped)
+        {
+            var prop = SpawnAtPosition(tags.Comp.FallenTag, user.ToCoordinates());
+            if (TryComp<IdCardComponent>(tags, out var id))
+            {
+                CopyComp(tags.Owner, prop, tags.Comp);
+                CopyComp(tags.Owner, prop, id);
+            }
+            QueueDel(tags);
+        }
 
-		var comp = EnsureComp<InformationTagsComponent>(tag);
+        var tag = SpawnNextToOrDrop(tags.Comp.InfoTag, wearer);
+        Dirty(tags);
+
+        var comp = EnsureComp<InformationTagsComponent>(tag);
         GetTagInformation(tags, out var name, out var job, out var blood);
         InfoTagInfo tagInfo = new InfoTagInfo()
         {
@@ -193,6 +234,7 @@ public sealed class DogtagsSystem : EntitySystem
             _popup.PopupEntity(Loc.GetString(tagsJoinedString), args.User, args.User);
 
             targTags.Tags.AddRange(tags.Comp.Tags);
+            _appearance.SetData(args.Target.Value, InfoTagVisuals.Number, Math.Min(targTags.Tags.Count, targTags.MaxDisplayTags));
             QueueDel(tags);
         }
         else if (TryComp<RMCMemorialComponent>(args.Target, out var memorial))

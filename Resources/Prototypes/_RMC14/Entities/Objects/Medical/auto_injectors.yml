@@ -16,6 +16,7 @@
   - type: Item
     size: Small
     sprite: null
+    inhandVisuals: { }
   - type: Hypospray
     solutionName: pen
     injectSound: /Audio/_RMC14/Medical/hypospray.ogg

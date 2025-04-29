@@ -49,7 +49,7 @@
         amount: 25
       - id: CMWeaponPistolM1984Empty
         amount: 25
-      - id: RMCWeaponPistolM13
+      - id: RMCWeaponPistolM13Empty
         amount: 25
       #- id: WeaponFlareM82F
       #  amount: 10

@@ -94,3 +94,13 @@
 - type: playTimeTracker
   id: CMJobCMO
   isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleCMO
+  name: The CMO
+  description: The Chief Medical Officer.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: chief_medical_officer

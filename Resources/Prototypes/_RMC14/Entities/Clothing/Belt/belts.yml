@@ -1128,21 +1128,26 @@
     - id: RMCWeaponPistolCOD50WinterWyvern
 
 - type: entity
-  parent: ClothingBeltBase # Can't have storage slots on this one
+  parent: CMBeltMarine
   id: RMCBeltHolsterM13
   name: M276 pattern M13 holster rig
-  description: Special issue variant of the M276 designed to holster the M13 automatic pistol and 8 spare mags.
+  description: Special issue variant of the M276 designed to holster a M13 automatic pistol and 8 spare mags.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/holster_smg.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/holster_autopistol.rsi
     layers:
     - state: icon
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: m13
-      map: [ "enum.CMItemSlotsLayers.Fill" ] # This one's fine to use the CMItemSlots visualizer
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      offset: -0.34375, -0.15625
       visible: false
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/holster_smg.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/holster_autopistol.rsi
     slots:
     - suitStorage
     - belt
@@ -1150,28 +1155,32 @@
     size: Large
   - type: Storage
     grid:
-    - 0,0,8,1 # should be 9 slots
+    - 0,0,17,1 # should be 9 slots
     whitelist:
       tags:
       - RMCMagazinePistolM13
       - RMCMagazinePistolM13Ext
       - RMCMagazinePistolM13Drum
       - RMCWeaponPistolM13
-  - type: ContainerContainer
-    containers:
-      pouch: !type:ContainerSlot
-  - type: ItemSlots
-    slots:
-      pouch:
-        name: M13 holster
-        whitelist:
-          tags:
-          - RMCWeaponPistolM13
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        tags:
+        - RMCWeaponPistolM13
+    - popup: rmc-storage-limit-max-mags
+      count: 8
+      whitelist:
+        tags:
+        - RMCMagazinePistolM13
+        - RMCMagazinePistolM13Ext
+        - RMCMagazinePistolM13Drum
   - type: CMHolster
     whitelist:
       tags:
       - RMCWeaponPistolM13
-  - type: CMItemSlots
+  - type: ItemCamouflage
+    camouflageVariations: { }
 
 - type: entity
   parent: CMBeltMarine
