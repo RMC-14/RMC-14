@@ -18,6 +18,14 @@
     checkCanInteract: false
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoCorrosiveAcid
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: corrosive_acid
+
+- type: entity
   parent: ActionXenoAcidNormal
   id: ActionXenoAcidWeak
   name: Weak Corrosive Acid (75)  # TODO RMC14 proper plasma costs
@@ -322,6 +330,13 @@
     range: 15
   - type: ActionBlockIfResting
 
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoSprayAcid
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: spray_acid
 
 - type: entity
   parent: ActionXenoSprayAcid
@@ -553,7 +568,6 @@
 - type: entity
   parent: CMGuidebookActionXenoBase
   id: CMGuidebookActionXenoBombard
-  name: Bombard
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -578,6 +592,14 @@
     useDelay: 1
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoToggleGasType
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: shift_spit_acid_glob
+
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoAcidShroud
   name: Acid Shroud
@@ -597,6 +619,14 @@
     - ActionXenoSprayAcidBoiler
     cooldown: 30
     onPerform: false
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoAcidShroud
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: acid_shroud
 
 - type: entity
   id: ActionXenoTremor
