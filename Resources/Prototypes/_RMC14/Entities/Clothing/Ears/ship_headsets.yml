@@ -44,7 +44,6 @@
     containers:
       key_slots:
       - CMEncryptionKeyCommon
-  - type: GrantMarineIcons
   - type: GrantTacMapAlert
 
 - type: entity
