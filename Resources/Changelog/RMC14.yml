@@ -1,84 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed arachnids not making sounds for some emotes
-    type: Fix
-  id: 1152
-  time: '2024-12-25T05:35:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5226
-- author: DrSmugleaf
-  changes:
-  - message: Fixed northern Solaris having incorrect areas, fixes north-most comms
-      tower not being able to be powered.
-    type: Fix
-  - message: Added an initial delay of 40 minutes before the Queen can call down a
-      dropship or hijack one that is on the landing zone.
-    type: Add
-  - message: Landing zone turrets now start despawning at 20 minutes instead of 15.
-    type: Tweak
-  id: 1153
-  time: '2024-12-25T05:58:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5227
-- author: DrSmugleaf
-  changes:
-  - message: Fix rementoring as an active mentors ending you duplicate messages.
-    type: Fix
-  id: 1154
-  time: '2024-12-25T06:16:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5228
-- author: Rainbeon
-  changes:
-  - message: Taking a Xeno ghost role that previously belonged to someone else no
-      longer causes your ghost to commit identity theft.
-    type: Fix
-  - message: Fixed the Queen's ghost staying immature forever. It will now update
-      correctly to change into the playtime rank when she matures.
-    type: Fix
-  id: 1155
-  time: '2024-12-26T10:50:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5233
-- author: DrSmugleaf
-  changes:
-  - message: Added a search bar to the player list for medals and jellies.
-    type: Tweak
-  id: 1156
-  time: '2024-12-26T10:50:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5230
-- author: Vermidia
-  changes:
-  - message: Fixed carrier parasite overlays and parasite mask sprites. The trap sprite
-      for parasites has been changed aswell.
-    type: Fix
-  - message: Xenonids that can carry eggs and parasites now have inhand sprites for
-      them.
-    type: Add
-  id: 1157
-  time: '2024-12-26T23:54:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5238
-- author: Vermidia
-  changes:
-  - message: 'Fixed Healer salve healing over 10 seconds: It now heals over 5 seconds.'
-    type: Fix
-  - message: Fixed Healer salve cooldown being 1 second instead of 0.5 seconds.
-    type: Fix
-  id: 1158
-  time: '2024-12-26T23:55:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5232
-- author: Vermidia
-  changes:
-  - message: Added many more inhands for various items (mostly medical ones)
-    type: Add
-  id: 1159
-  time: '2025-01-05T01:38:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5296
-- author: SG6732
-  changes:
-  - message: Made the attachment points for the M59 better match with the sprite.
-      No more floating magnetic harnesses.
-    type: Fix
-  id: 1160
-  time: '2025-01-05T01:39:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5295
 - author: blueDev2
   changes:
   - message: Fixed healer drone sometimes leaving behind an alive drone body on sacrifice.
@@ -5482,5 +5402,76 @@
   id: 1654
   time: '2025-04-26T03:47:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6275
+- author: MetalSage
+  changes:
+  - message: Now you can't get into the tunnels if you're too far away from them.
+    type: Fix
+  id: 1655
+  time: '2025-04-28T23:08:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6295
+- author: MetalSage
+  changes:
+  - message: Correcting the inability of the larva to crawl out of the body
+    type: Fix
+  id: 1656
+  time: '2025-04-28T23:08:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6296
+- author: MetalSage
+  changes:
+  - message: Fixed inability to take admin roles and foxtrot roles
+    type: Fix
+  id: 1657
+  time: '2025-04-28T23:10:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6293
+- author: MetalSage
+  changes:
+  - message: Now the queen does not stun xenomorphs on her ovipositor, when resting,
+      or even after her death.
+    type: Fix
+  id: 1658
+  time: '2025-04-28T23:10:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6292
+- author: noctyrnal
+  changes:
+  - message: The M13 has received new sprites.
+    type: Tweak
+  id: 1659
+  time: '2025-04-28T23:09:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6297
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed resting cancelling the evolution do-after.
+    type: Fix
+  id: 1660
+  time: '2025-04-28T23:22:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6298
+- author: MetalSage
+  changes:
+  - message: The name of the current planet map is now included in the server status
+      information (visible in server browsers/external tools).
+    type: Add
+  id: 1661
+  time: '2025-04-28T23:23:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6291
+- author: DummeHytteOst
+  changes:
+  - message: Xenonids can destroy morgues & crematoriums.
+    type: Add
+  - message: You can now climb morgues & crematoriums.
+    type: Add
+  - message: Morgues are no longer unachorable.
+    type: Fix
+  - message: You can now damage hospital dividers, primarily found on hybrisa.
+    type: Fix
+  id: 1662
+  time: '2025-04-28T23:24:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6287
+- author: Dygon
+  changes:
+  - message: The kill area outside the docking bay doesn't despawn anymore.
+    type: Tweak
+  id: 1663
+  time: '2025-04-28T23:28:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6253
 Name: RMC14
 Order: -1

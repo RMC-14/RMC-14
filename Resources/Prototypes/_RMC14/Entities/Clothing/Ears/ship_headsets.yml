@@ -471,3 +471,19 @@
     - CMExecutiveOfficer
     - CMChiefMP
     - CMRifleman
+
+- type: entity
+  parent: CMHeadsetSeniorCommand
+  id: RMCHeadsetSynth
+  name: marine synth headset
+  description: Issued only to UNMC synthetics.
+  components:
+  - type: Sprite
+    state: ms_headset
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
+      - RMCEncryptionKeyMarineCommand
+  - type: HeadsetMultiBroadcast
+    cooldown: 60
