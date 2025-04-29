@@ -15,8 +15,11 @@ public sealed class RMCStatusEffectSystem : EntitySystem
 
     public override void Initialize()
     {
+        base.Initialize();
+
         SubscribeLocalEvent<SkillsComponent, RMCStatusEffectTimeEvent>(OnSkillsStatusEffectTime);
         SubscribeLocalEvent<XenoComponent, RMCStatusEffectTimeEvent>(OnXenoStatusEffectTime);
+        SubscribeLocalEvent<RMCStunResistanceComponent, RMCStatusEffectTimeEvent>(OnStunResistanceStatusEffectTime);
     }
 
     private void OnSkillsStatusEffectTime(Entity<SkillsComponent> ent, ref RMCStatusEffectTimeEvent args)
@@ -31,9 +34,6 @@ public sealed class RMCStatusEffectSystem : EntitySystem
         var skill = (endurance - 1) * 0.08;
         var multiplier = 1 - skill; // TODO RMC14 hunter/synthetic/monkey/zombie/human hero multiplier
         args.Duration *= multiplier;
-
-        if (TryComp<RMCStunResistanceComponent>(ent, out var resistance))
-            args.Duration /= resistance.Resistance; // Put this here because this divisor needs to run after the skills check
     }
 
     private void OnXenoStatusEffectTime(Entity<XenoComponent> ent, ref RMCStatusEffectTimeEvent args)
@@ -42,6 +42,14 @@ public sealed class RMCStatusEffectSystem : EntitySystem
             return;
 
         args.Duration *= 0.667;
+    }
+
+    private void OnStunResistanceStatusEffectTime(Entity<RMCStunResistanceComponent> ent, ref RMCStatusEffectTimeEvent args)
+    {
+        if (args.Key != Knockdown && args.Key != Stun)
+            return;
+
+        args.Duration /= ent.Comp.Resistance;
     }
 
     public void GiveStunResistance(EntityUid target, float resistance)

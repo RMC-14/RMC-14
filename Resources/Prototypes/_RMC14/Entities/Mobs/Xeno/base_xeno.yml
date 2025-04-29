@@ -279,6 +279,7 @@
       components:
       - Xeno
       - Infectable
+      - Synth
   - type: BlockPullingDead
   - type: XenoFriendly
   - type: Undisposable
@@ -292,7 +293,7 @@
   - type: UserLimitHits
   - type: MovementIgnoreGravity
   - type: DisableConstruction
-  - type: XenoAnnounceDeath # TODO RMC14 announce location of death (area)
+  - type: XenoAnnounceDeath
     message: cm-xeno-death
     color: "#459A62"
   - type: ExplosionResistance
