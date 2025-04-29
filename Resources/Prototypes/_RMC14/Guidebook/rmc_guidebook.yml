@@ -95,7 +95,11 @@
   id: RMCGuideXenonidStructures
   name: "Xenonid Structures"
   text: "/ServerInfo/Guidebook/_RMC14/RMC14.xml"
+  children:
+  - RMCGuideHiveStructures
+  - RMCGuideResinHoles
 
+  
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleRifleman
