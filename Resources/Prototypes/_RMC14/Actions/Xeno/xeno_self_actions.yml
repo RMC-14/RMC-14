@@ -218,6 +218,14 @@
     useDelay: 26
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoDefensiveShield
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: empower
+
+- type: entity
   id: ActionXenoRetrieveEgg
   parent: ActionXenoBase
   name: Retrieve Egg
