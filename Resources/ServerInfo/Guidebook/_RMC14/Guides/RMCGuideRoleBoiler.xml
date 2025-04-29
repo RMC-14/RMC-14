@@ -1,10 +1,7 @@
 <Document>
   #Boiler, Tier 3
-  <Box>
-    <GuideEntityEmbed Entity="CMXenoBoiler"/>
-  </Box>\n
+  <GuideEntityEmbed Entity="CMXenoBoiler"/>
   ##Playing as a Boiler
-  
   Becoming the ultimate ranged warrior of the Hive with your signature bombard capable of stalling any marines. It is now slow, large and returns to being a supportive role on the frontline, attaining a upgraded acid spray, corrosive acid and tail stab toxin.
   <Box>
     <GuideEntityEmbed Entity="CMGuidebookXenoBombardAcidProjectile"/>
@@ -13,38 +10,28 @@
   Its [color=green]acidic[/color] globs is capable to killing off any hosts caught within while its [color=yellow]neurotoxin[/color] variant spreads further and will weaken any hosts allowing for capture.
 
   Due to high acid reserves, the Boiler glows in the dark making it seen by any marine easily, this also makes the Boiler incredibly vulnerable to [color=red]fire[/color].
-  <Box>
-    <GuideEntityEmbed Entity="RMCTileFire"/>
-  </Box>\n
+  <GuideEntityEmbed Entity="RMCTileFire"/>
   ##Door tech
-  
   To safely use bombard you can stand behind a closed resin door and charge your bombard, make sure to aim outside in the path of the door, now hover your mouse over the door and press [color=yellow][bold][keybind="ActivateItemInWorld"][/bold][/color] when the bombard is almost done, if timed then the resin door will open letting your glob pass through!
   <Box>
     <GuideEntityEmbed Entity="CMGuidebookActionXenoBombard"/>
     <GuideEntityEmbed Entity="DoorXenoResin"/>
   </Box>\n
   [bold]##Abilities[/bold]
-  
   - [bold][color=#E61919]PASSIVE[/color][/bold]: Vulnerable to fire and glows in the dark.
-
   - [bold]Strong Corrosive Acid[/bold]: Secretes a glob of acid on items to be dissolved, can be used on multiple items at a time.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoCorrosiveAcid"/>
-
   - [bold]Toggle Long Range Sight[/bold]: Do-after to look further in the direction you are facing
   <GuideEntityEmbed Entity="CMGuidebookActionXenoToggleLongRangeSight"/>
-
   - [bold]Bombard[/bold]: Prepare to fire, either a acidic or neurotoxic glob which will go past your aimed position.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoBombard"/>
-
   - [bold]Toggle Gas Type[/bold]: Toggles between Acid Or Neurotoxin.
   -Acid: Will burn targets and barricades.
   -Neurotoxin: Cripples and weakens targets, has a larger cloud range.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoToggleGasType"/>
-
   - [bold]Spray Acid[/bold]: Sprays acid along the ground in a line, covering any barricades and stunning marines caught in its path.
   -Will also extinguish any sisters if they are on fire. If used on a tall affected by Charged Spit, will upgrade the spit and stun them.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoSprayAcid"/>
-
   - [bold]Acid Shroud[/bold]: Create a cloud of acid around you, disables other abilities, used in last resort.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoAcidShroud"/>
 </Document>
