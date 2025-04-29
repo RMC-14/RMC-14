@@ -37,6 +37,10 @@
         collection: XenoResinBreak
   - type: XenoConstruct
   - type: RMCDeleteAnchoredOnInit
+    whitelist:
+      tags:
+      - XenoWeedTile
+      - XenoWeedNode
   - type: RMCWallExplosionDeletable
   - type: DestroyedByExplosionType
   - type: NpcFactionMember
