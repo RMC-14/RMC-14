@@ -122,6 +122,14 @@
     useDelay: 1
   - type: RMCDazeableAction
 
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoPlantResinHole
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: place_trap
+
 # For gardener drone
 - type: entity
   id: ActionXenoFruitChoose
@@ -192,6 +200,14 @@
       state: build_tunnel
     useDelay: 300
 
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoDigTunnel
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: build_tunnel
+
 # For lesser drone
 - type: entity
   id: ActionLesserDronePlantWeeds
@@ -207,6 +223,14 @@
     event: !type:XenoPlantWeedsActionEvent
       limitDistance: true
     useDelay: 1
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoPlantWeeds
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: plant_weeds
 
 - type: entity
   parent: ActionXenoBase
