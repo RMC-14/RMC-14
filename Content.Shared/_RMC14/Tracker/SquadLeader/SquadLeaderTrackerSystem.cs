@@ -6,10 +6,8 @@ using Content.Shared.Alert;
 using Content.Shared.Database;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
-using Content.Shared.Roles;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Tracker.SquadLeader;
@@ -35,6 +33,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
     private EntityQuery<FireteamMemberComponent> _fireteamMemberQuery;
     private EntityQuery<OriginalRoleComponent> _originalRoleQuery;
     private EntityQuery<SquadLeaderTrackerComponent> _squadLeaderTrackerQuery;
+    private EntityQuery<SquadMemberComponent> _squadMemberQuery;
 
     private const string SquadLeader = "CMSquadLeader";
     private const string FireteamLeader = "CMFireteamLeader";
@@ -46,6 +45,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
         _fireteamMemberQuery = GetEntityQuery<FireteamMemberComponent>();
         _originalRoleQuery = GetEntityQuery<OriginalRoleComponent>();
         _squadLeaderTrackerQuery = GetEntityQuery<SquadLeaderTrackerComponent>();
+        _squadMemberQuery = GetEntityQuery<SquadMemberComponent>();
 
         SubscribeLocalEvent<SquadMemberAddedEvent>(OnSquadMemberAdded);
         SubscribeLocalEvent<SquadMemberRemovedEvent>(OnSquadMemberRemoved);
@@ -57,6 +57,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
         SubscribeLocalEvent<SquadLeaderTrackerComponent, ComponentRemove>(OnRemove);
         SubscribeLocalEvent<SquadLeaderTrackerComponent, SquadLeaderTrackerClickedEvent>(OnSquadLeaderTrackerClicked);
         SubscribeLocalEvent<SquadLeaderTrackerComponent, SquadLeaderTrackerChangeModeEvent>(OnSquadLeaderTrackerChangeMode);
+        SubscribeLocalEvent<SquadLeaderTrackerComponent, LeaderTrackerSelectTargetEvent>(OnLeaderTrackerSelectTargetEvent);
 
         Subs.BuiEvents<SquadLeaderTrackerComponent>(SquadLeaderTrackerUI.Key,
             subs =>
@@ -142,7 +143,49 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
     private void OnSquadLeaderTrackerChangeMode(Entity<SquadLeaderTrackerComponent> ent, ref SquadLeaderTrackerChangeModeEvent args)
     {
-        ent.Comp.Mode = args.Role;
+        var tracker = ent.Comp;
+        var options = new List<DialogOption> { };
+        EntityUid? tracked = null;
+
+        // Try to find all entities that fit the selected role.
+        var query = EntityQueryEnumerator<RMCTrackableComponent, OriginalRoleComponent>();
+        while (query.MoveNext(out var trackableUid, out var trackable, out var originalRole))
+        {
+            if (originalRole.Job != args.Role)
+                continue;
+
+            // Populate the dialogue window with all trackable entities of the selected role.
+            options.Add(new DialogOption(
+                Loc.GetString("rmc-squad-info-tracking-target-name", ("target", Name(trackableUid))),
+                new LeaderTrackerSelectTargetEvent(GetNetEntity(trackableUid))
+            ));
+
+            tracked = trackableUid;
+        }
+        switch (options.Count)
+        {
+            // Set the target directly without first needing to confirm as there is only 1 or no target.
+            case <= 1:
+                tracker.Target = tracked;
+                break;
+            // There are multiple entities of the selected role, open a new ui window to select which entity should be tracked.
+            case > 1:
+                _dialog.OpenOptions(
+                    ent,
+                    Loc.GetString("rmc-squad-info-tracking-selection"),
+                    options,
+                    Loc.GetString("rmc-squad-info-tracking-choose")
+                );
+                break;
+        }
+
+        tracker.Mode = args.Role;
+        Dirty(ent);
+    }
+
+    private void OnLeaderTrackerSelectTargetEvent(Entity<SquadLeaderTrackerComponent> ent, ref LeaderTrackerSelectTargetEvent args)
+    {
+        ent.Comp.Target = GetEntity(args.Target);
         Dirty(ent);
     }
 
@@ -376,6 +419,12 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
         }
     }
 
+    private void UpdateDirection(Entity<SquadLeaderTrackerComponent> ent, MapCoordinates coordinates)
+    {
+        var severity = _tracker.GetAlertSeverity(ent.Owner, coordinates);
+        _alerts.ShowAlert(ent.Owner, ent.Comp.Alert, severity);
+    }
+
     public override void Update(float frameTime)
     {
         if (_net.IsClient)
@@ -407,17 +456,17 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
         }
 
         var time = _timing.CurTime;
-        var query = EntityQueryEnumerator<SquadLeaderTrackerComponent, SquadMemberComponent>();
-        while (query.MoveNext(out var uid, out var tracker, out var squadMember))
+        var query = EntityQueryEnumerator<SquadLeaderTrackerComponent>();
+        while (query.MoveNext(out var uid, out var tracker))
         {
             if (time < tracker.UpdateAt)
                 continue;
 
             tracker.UpdateAt = time + tracker.UpdateEvery;
 
-            if (_fireteamMemberQuery.TryComp(uid, out var fireteamMember) && tracker.Mode == FireteamLeader)
+            if (_squadMemberQuery.TryComp(uid, out var squadMember) && squadMember.Squad is { } squad)
             {
-                if (squadMember.Squad is { } squad)
+                if (_fireteamMemberQuery.TryComp(uid, out var fireteamMember) && tracker.Mode == FireteamLeader)
                 {
                     var fireteamIndex = fireteamMember.Fireteam;
                     if (fireteamIndex >= 0 &&
@@ -425,34 +474,34 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
                         _fireteamLeaders[fireteamIndex] is { } fireteam &&
                         fireteam.TryGetValue(squad, out var leader))
                     {
-                        var severity = _tracker.GetAlertSeverity(uid, leader);
-                        _alerts.ShowAlert(uid, tracker.Alert, severity);
+                        UpdateDirection((uid, tracker), leader);
                         break;
                     }
                 }
-            }
-            else if(tracker.Mode == SquadLeader)
-            {
-                if (squadMember.Squad is { } squad)
+                else if(tracker.Mode == SquadLeader && _squadLeaders.TryGetValue(squad, out var squadLeader))
                 {
-                    if (_squadLeaders.TryGetValue(squad, out var squadLeader))
-                    {
-                        var severity = _tracker.GetAlertSeverity(uid, squadLeader);
-                        _alerts.ShowAlert(uid, tracker.Alert, severity);
-                        break;
-                    }
+                    UpdateDirection((uid, tracker), squadLeader);
+                    break;
                 }
             }
 
-            var query2 = EntityQueryEnumerator<RMCTrackableComponent>();
-            while (query2.MoveNext(out var trackableUid, out var trackable))
+            // If the tracker is tracking an entity, point towards the target.
+            if (tracker.Target != null)
             {
-                if (_originalRoleQuery.Comp(trackableUid).Job != tracker.Mode)
+                UpdateDirection((uid, tracker), _transform.GetMapCoordinates(tracker.Target.Value));
+                break;
+            }
+
+            // If the tracker is not tracking an entity, try to find a new target.
+            var trackableQuery = EntityQueryEnumerator<RMCTrackableComponent, OriginalRoleComponent>();
+            while (trackableQuery.MoveNext(out var trackableUid, out _, out var originalRole))
+            {
+                if (originalRole.Job != tracker.Mode)
                     continue;
 
-                var severity = _tracker.GetAlertSeverity(uid, _transform.GetMapCoordinates(trackableUid));
-                _alerts.ShowAlert(uid, tracker.Alert, severity);
-                return;
+                tracker.Target = trackableUid;
+                UpdateDirection((uid, tracker), _transform.GetMapCoordinates(tracker.Target.Value));
+                break;
             }
 
             _alerts.ShowAlert(uid, tracker.Alert, TrackerSystem.CenterSeverity);
