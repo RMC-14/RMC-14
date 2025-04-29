@@ -222,6 +222,14 @@
     checkCanAccess: false
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoDash
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: prae_dash
+
+- type: entity
   id: ActionXenoHeadbutt
   parent: ActionXenoBase
   name: Headbutt (10) # TODO RMC14 proper plasma costs
@@ -306,6 +314,14 @@
   - type: ActionBlockIfResting
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoScatteredSpit
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: acid_shotgun
+
+- type: entity
   id: ActionXenoSpit
   parent: ActionXenoBase
   name: Xeno Spit (25) # TODO RMC14 proper plasma costs
@@ -323,6 +339,14 @@
   - type: ActionBlockIfResting
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoSpit
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: xeno_spit
+
+- type: entity
   id: ActionXenoChargeSpit
   parent: ActionXenoBase
   name: Charge Spit (50) # TODO RMC14 proper plasma costs
@@ -337,6 +361,14 @@
     useDelay: 12
   - type: XenoActionPlasma
     cost: 50
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoChargeSpit
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: charge_spit
 
 - type: entity
   parent: ActionXenoBase
@@ -408,6 +440,14 @@
   - type: ActionBlockIfResting
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoAcidBall
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: prae_acid_ball
+
+- type: entity
   id: ActionXenoParalyzingSlash
   parent: ActionXenoBase
   name: Paralyzing Slash (50) # TODO RMC14 proper plasma costs
@@ -463,6 +503,14 @@
     range: 15
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoBoneChips
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: runner_bonespur
+
+- type: entity
   id: ActionXenoPunch
   parent: ActionXenoBase
   name: Punch
@@ -478,6 +526,14 @@
     useDelay: 4.5
     deselectOnMiss: false
   - type: XenoOffensiveAction
+  
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoPunch
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: punch
 
 - type: entity
   id: ActionXenoFling
@@ -498,6 +554,14 @@
   - type: RMCDazeableAction
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoFling
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: fling
+
+- type: entity
   id: ActionXenoLunge
   parent: ActionXenoBase
   name: Lunge
@@ -514,6 +578,14 @@
     deselectOnMiss: false
   - type: XenoOffensiveAction
   - type: RMCDazeableAction
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoLunge
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: lunge
 
 - type: entity
   id: ActionXenoScreech
@@ -892,6 +964,14 @@
   - type: ActionBlockIfResting
   - type: XenoActionPlasma
     cost: 25
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoScissorCut
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: rav_scissor_cut
 
 - type: entity
   parent: ActionXenoBase
