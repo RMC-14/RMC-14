@@ -28,7 +28,7 @@
     settings: RMCFreelancerLeader
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCFreelancerLeader
   components:
   - type: GhostRole

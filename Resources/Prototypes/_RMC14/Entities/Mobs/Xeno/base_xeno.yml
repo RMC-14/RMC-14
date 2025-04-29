@@ -186,6 +186,7 @@
         layer:
         - BulletImpassable
   - type: Xeno
+  - type: XenoRegen
   - type: UserInterface
     interfaces:
       enum.XenoEvolutionUIKey.Key:
@@ -357,6 +358,8 @@
     offset: 0, 0.5
   - type: RMCArmorModifier
   - type: RMCObstacleSlamCauserImmune
+  - type: RMCMobCollisionMass
+  - type: XenoRankNames
 
 - type: entity
   abstract: true
@@ -447,7 +450,7 @@
       - XenoFruit
   - type: ParalyzeOnPullAttempt
   - type: FirePatter
-    stacks: 5
+    stacks: -5
   - type: RMCHandEmotes
 
 - type: entity
@@ -489,6 +492,7 @@
   id: RMCXenoMobCollision
   components:
   - type: MobCollision
+    minimumSpeedModifier: 0.25
   - type: RMCMobCollision
 
 - type: speechVerb

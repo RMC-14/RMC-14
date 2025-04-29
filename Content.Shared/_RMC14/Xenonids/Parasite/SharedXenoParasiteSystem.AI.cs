@@ -189,7 +189,7 @@ public abstract partial class SharedXenoParasiteSystem
             return;
         }
 
-        if (para.Comp.Mode == ParasiteMode.Active && currentTime >= para.Comp.NextJump)
+        if (para.Comp.Mode == ParasiteMode.Active && currentTime >= para.Comp.NextJump && !_container.IsEntityInContainer(para))
         {
             if (!HasComp<StunnedComponent>(para))
             {
@@ -247,9 +247,12 @@ public abstract partial class SharedXenoParasiteSystem
         if (!TryComp<XenoComponent>(para, out var xeno) || !xeno.Initialized)
             return;
 
-        if (!TryComp<InstantActionComponent>(xeno.Actions[para.Comp.RestAction], out var instant))
+        var actions = xeno.Actions;
+        if (!actions.TryGetValue(para.Comp.RestAction, out var action))
             return;
 
+        if (!TryComp<InstantActionComponent>(action, out var instant))
+            return;
 
         _action.PerformAction(para, null, xeno.Actions[para.Comp.RestAction], instant, instant.Event, _timing.CurTime);
     }

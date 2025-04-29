@@ -434,7 +434,7 @@ public sealed class RMCCVars : CVars
         CVarDef.Create("rmc.force_hijack_end_time_minutes", 25, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<float> RMCMovementPenCapSubtract =
-        CVarDef.Create("rmc.movement_pen_cap_subtract", 1f, CVar.REPLICATED | CVar.SERVER);
+        CVarDef.Create("rmc.movement_pen_cap_subtract", 0.8f, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<bool> RMCMovementBigXenosCancelMovement =
         CVarDef.Create("rmc.movement_big_xenos_cancel_movement", true, CVar.REPLICATED | CVar.SERVER);

@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.CCVar;
@@ -55,7 +56,7 @@ public abstract class SharedMobCollisionSystem : EntitySystem
     // RMC14
     [Dependency] private readonly RMCSizeStunSystem _rmcSizeStun = default!;
 
-    private EntityQuery<MarineComponent> _marineQuery;
+    private EntityQuery<RMCMobCollisionMassComponent> _rmcMobCollisionMassQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
 
     private float _penCapSubtract;
@@ -85,7 +86,7 @@ public abstract class SharedMobCollisionSystem : EntitySystem
         UpdatesBefore.Add(typeof(SharedPhysicsSystem));
 
         // RMC14
-        _marineQuery = GetEntityQuery<MarineComponent>();
+        _rmcMobCollisionMassQuery = GetEntityQuery<RMCMobCollisionMassComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
         Subs.CVar(CfgManager, RMCCVars.RMCMovementPenCapSubtract, v => _penCapSubtract = v, true);
         Subs.CVar(CfgManager, RMCCVars.RMCMovementBigXenosCancelMovement, v => _bigXenosCancelMovement = v, true);
@@ -300,8 +301,12 @@ public abstract class SharedMobCollisionSystem : EntitySystem
             // Big mob push smaller mob, needs fine-tuning and potentially another co-efficient.
             if (_massDiffCap > 0f)
             {
+                var mass = otherPhysics.FixturesMass;
+                if (_rmcMobCollisionMassQuery.TryComp(other, out var otherCollision))
+                    mass = otherCollision.Mass;
+
                 var modifier = Math.Clamp(
-                    otherPhysics.FixturesMass / ourMass,
+                    mass / ourMass,
                     1f / _massDiffCap,
                     _massDiffCap);
 
@@ -320,7 +325,8 @@ public abstract class SharedMobCollisionSystem : EntitySystem
             direction += mobMovement;
             contactCount++;
 
-            if (userIsXeno &&
+            if (_bigXenosCancelMovement &&
+                userIsXeno &&
                 userSize >= RMCSizes.Big &&
                 _xenoQuery.HasComp(other) &&
                 _rmcSizeStun.TryGetSize(other, out var otherSize) &&
