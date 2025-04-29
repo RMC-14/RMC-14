@@ -487,3 +487,11 @@
       - RMCEncryptionKeyMarineCommand
   - type: HeadsetMultiBroadcast
     cooldown: 60
+  - type: GrantSquadLeaderTracker
+    defaultRole: CMSquadLeader
+    trackableRoles:
+    - CMCommandingOfficer
+    - CMExecutiveOfficer
+    - CMSquadLeader
+    extraModes:
+    - PrimaryLandingZone
