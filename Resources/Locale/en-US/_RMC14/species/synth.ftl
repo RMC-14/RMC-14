@@ -1,5 +1,7 @@
 rmc-species-name-synth = Synthetic
 
+rmc-species-synth-programming-prevents-use = Your programming prevents you from using {THE($tool)}!
+
 rmc-species-synth-generation-first = First Generation
 rmc-species-synth-generation-second = Second Generation
 rmc-species-synth-generation-third = Third Generation

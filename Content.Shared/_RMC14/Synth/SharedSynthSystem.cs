@@ -69,7 +69,11 @@ public abstract class SharedSynthSystem : EntitySystem
         if (ent.Comp.CanUseMeleeWeapons)
             return;
 
+        if (args.Weapon == null)
+            return;
+
         args.Cancel();
+        DoSynthUnableToUsePopup(ent, args.Weapon.Value.Owner);
     }
 
     private void OnShotAttempted(Entity<SynthComponent> ent, ref ShotAttemptedEvent args)
@@ -78,6 +82,7 @@ public abstract class SharedSynthSystem : EntitySystem
             return;
 
         args.Cancel();
+        DoSynthUnableToUsePopup(ent, args.Used);
     }
 
     private void OnSleepAttempt(Entity<SynthComponent> ent, ref TryingToSleepEvent args)
@@ -228,6 +233,12 @@ public abstract class SharedSynthSystem : EntitySystem
             return false;
 
         return true;
+    }
+
+    public void DoSynthUnableToUsePopup(EntityUid synth, EntityUid tool)
+    {
+        var msg = Loc.GetString("rmc-species-synth-programming-prevents-use", ("user", synth), ("tool", tool));
+        _popup.PopupClient(msg, synth, synth, PopupType.SmallCaution);
     }
 }
 
