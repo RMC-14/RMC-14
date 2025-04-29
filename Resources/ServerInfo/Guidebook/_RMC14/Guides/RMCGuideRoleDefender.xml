@@ -1,5 +1,5 @@
 ﻿<Document>
-  #Burrower, Tier 2
+  #Defender, Tier 1
   <Box>
     <GuideEntityEmbed Entity="CMXenoDefender"/>
   </Box>\n
