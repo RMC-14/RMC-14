@@ -313,6 +313,14 @@
   - type: ActionBlockIfResting
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoBurrow
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: burrow
+
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoSoak
   name: Soak (20)
