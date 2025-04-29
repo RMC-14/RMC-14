@@ -43,12 +43,15 @@ public sealed class CMChatSystem : SharedCMChatSystem
     {
         _toRemove.Clear();
 
+        if (HasComp<SynthComponent>(ent))
+            return; // Xenos can understand synth speech
+
         foreach (var (session, data) in args.Recipients)
         {
             if (data.Observer)
                 continue;
 
-            if (HasComp<XenoComponent>(session.AttachedEntity) && !HasComp<SynthComponent>(session.AttachedEntity))
+            if (HasComp<XenoComponent>(session.AttachedEntity))
                 _toRemove.Add(session);
         }
 
