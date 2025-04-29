@@ -418,3 +418,10 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Synthetic/outdated_synth.rsi
 
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitSynthetic
+  name: UNMC Support Uniform
+  description: A simple uniform made for Synthetic crewmembers
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/synthetic.rsi
