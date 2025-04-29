@@ -32,6 +32,7 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-provost-team-leader
     - type: MarineOrders
+    - type: RMCTrackable
   hidden: true
 
 - type: entity

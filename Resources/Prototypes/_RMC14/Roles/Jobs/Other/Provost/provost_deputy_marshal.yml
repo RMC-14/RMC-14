@@ -41,6 +41,7 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: RMCTrackable
   hidden: true
 
 - type: entity

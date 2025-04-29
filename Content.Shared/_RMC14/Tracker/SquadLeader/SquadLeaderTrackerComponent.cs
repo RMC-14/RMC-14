@@ -26,5 +26,8 @@ public sealed partial class SquadLeaderTrackerComponent : Component
     public ProtoId<JobPrototype> Mode;
 
     [DataField, AutoNetworkedField]
+    public EntityUid? Target;
+
+    [DataField, AutoNetworkedField]
     public List<ProtoId<JobPrototype>> TrackableRoles = new();
 }

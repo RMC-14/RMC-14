@@ -15,6 +15,7 @@
   - type: ConditionalSpawner
     prototypes:
     - RMCRandomHumanoidFreelancerLeader
+  - type: RMCTrackable
 
 - type: entity
   id: RMCRandomHumanoidFreelancerLeader
