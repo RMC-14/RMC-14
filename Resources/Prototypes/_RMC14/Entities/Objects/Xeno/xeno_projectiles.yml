@@ -188,23 +188,16 @@
 
 - type: entity
   parent: XenoBaseProjectile
-  id: CMGuidebookXenoBombardAcidProjectile
-  name: Acid Glob
-  categories: [ HideSpawnMenu ]
+  id: XenoBombardAcidProjectile
+  name: glob of acid gas
+  categories:
+  - HideSpawnMenu
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
     layers:
     - state: acid_glob
       shader: unshaded
-  
-- type: entity
-  parent: CMGuidebookXenoBombardAcidProjectile
-  id: XenoBombardAcidProjectile
-  name: glob of acid gas
-  categories:
-  - HideSpawnMenu
-  components:
   - type: TimedDespawn
     lifetime: 10
   - type: XenoProjectile
@@ -239,23 +232,28 @@
 
 - type: entity
   parent: XenoBaseProjectile
-  id: CMGuidebookXenoBombardNeurotoxinProjectile
-  name: Neurotoxin Glob
+  id: CMGuidebookXenoBombardAcidProjectile
+  name: Acid Glob
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
     layers:
-    - state: neuro_glob
-      shader: unshaded    
+    - state: acid_glob
+      shader: unshaded
 
 - type: entity
-  parent: CMGuidebookXenoBombardNeurotoxinProjectile
+  parent: XenoBaseProjectile
   id: XenoBombardNeurotoxinProjectile
   name: glob of neurotoxin gas
   categories:
   - HideSpawnMenu
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: neuro_glob
+      shader: unshaded  
   - type: TimedDespawn
     lifetime: 10
   - type: XenoProjectile
@@ -290,6 +288,18 @@
           Brute: 5
   - type: RMCProjectileAccuracy
     accuracy: 95
+
+- type: entity
+  parent: XenoBaseProjectile
+  id: CMGuidebookXenoBombardNeurotoxinProjectile
+  name: Neurotoxin Glob
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
+    layers:
+    - state: neuro_glob
+      shader: unshaded
 
 - type: entity
   parent: XenoSpitProjectile
