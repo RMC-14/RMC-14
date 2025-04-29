@@ -1,0 +1,20 @@
+<Document>
+  #Valkyrie, Tier 3
+  <GuideEntityEmbed Entity="CMXenoValkyrie"/>
+  ##Playing as a Valkyrie
+  Your whole arsenal of abilities change upon choosing this strain. You will be able to heal upon hitting any non-xeno living creature. You additionally receive a fury reservoir which is needed for the activation of certain Abilities. You will loose your Tail Stab in exchange for another Ability namely Water Fountain.
+
+  ##Abilities:
+  - [bold]Tail Fountain[/bold]: Its a single target extinguish with a relatively short cooldown which can be used to put out fires on both Xenos and Marines. Useful for saving near death Xenos or captures from fire.
+  <GuideEntityEmbed Entity="CMGuidebookActionXenoTailFountain"/>
+  - [bold]Tantrum[/bold]: Used on a sister, to enhance your and their defense temporarily. Additionally it doubles the healing you get on target hit. Exceptions to this are Ravager and Crusher as they get a speed buff instead during the duration of Tantrum.
+  <GuideEntityEmbed Entity="CMGuidebookActionXenoTantrum"/>
+  - [bold]High Gallop[/bold]: Stomps on Marines and grenades. Marines will be temporarily stunned on the ground. Grenades can be thrown back a couple of Tiles in the direction of your cursor upon Ability usage.
+  <GuideEntityEmbed Entity="CMGuidebookActionXenoHighGallop"/>
+  - [bold]Fight or Flight[/bold]: Upon usage, it will remove any debuffs from fellow Xenos, including stun, slow and daze. Its effective range can further be enhanced by having the same amount of fury you need for this ability left upon usage. Due to its hefty costs in fury, plasma and long cooldown, it is advised to use it sparingly.
+  <GuideEntityEmbed Entity="CMGuidebookActionXenoFightOrFlight"/>
+  - [bold]Retrieve[/bold]:Saves Xenos from a distance by dragging them into safety. This uses half of your fury to reel in a Xeno in dire need of help. It may not work on certain caste while they stand up - mainly Queen and Crusher - meaning they need to lay down or be in critical health.
+  <GuideEntityEmbed Entity="CMGuidebookActionXenoRetrieve"/>
+  - [bold]Emit Pheromones[/bold]: Emits one of the three pheromones, strength of said pheromone is dependant on caste and does not stack with pheromones of the same type.
+  <GuideEntityEmbed Entity="CMGuidebookActionXenoPheromones"/>
+</Document>
