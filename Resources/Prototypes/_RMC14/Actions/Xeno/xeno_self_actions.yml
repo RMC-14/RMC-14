@@ -414,6 +414,14 @@
   - type: ActionBlockIfResting
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoEmpower
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: rav_empower
+
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoGenerateEggs
   name: Generate Eggs (50)
