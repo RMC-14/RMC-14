@@ -253,7 +253,7 @@
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
     layers:
     - state: neuro_glob
-      shader: unshaded  
+      shader: unshaded
   - type: TimedDespawn
     lifetime: 10
   - type: XenoProjectile
