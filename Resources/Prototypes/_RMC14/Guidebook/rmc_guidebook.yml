@@ -99,7 +99,7 @@
   - RMCGuideHiveStructures
   - RMCGuideResinHoles
 
-  
+
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleRifleman
@@ -277,14 +277,14 @@
 
 - type: guideEntry
   parent: RMC
-  id: RMCGuideCommunicationsTowers
+  id: RMCGuideHiveStructures
   priority: 25
   name: "Hive Structures Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideHiveStructures.xml"
 
 - type: guideEntry
   parent: RMC
-  id: RMCGuideCommunicationsTowers
+  id: RMCGuideResinHoles
   priority: 26
   name: "Resin Holes Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideResinHoles.xml"
