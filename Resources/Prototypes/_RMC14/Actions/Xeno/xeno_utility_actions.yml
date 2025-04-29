@@ -13,6 +13,14 @@
     range: 2
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoTransferPlasma
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: transfer_plasma
+
+- type: entity
   id: ActionXenoHealerDroneTransferPlasma
   parent: ActionXenoBase
   name: Transfer plasma (100) # TODO RMC14 proper plasma costs
