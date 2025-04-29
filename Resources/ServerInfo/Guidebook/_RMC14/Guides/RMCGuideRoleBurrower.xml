@@ -10,16 +10,12 @@
   ##Abilities:
   - [bold]Plant Weeds[/bold]: Places a resin node which spreads weeds across a large area.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoPlantWeeds"/>
-
   - [bold][textlink="Plant Resin Hole" link="RMCGuideResinHoles"][/bold]: Places a hole on weeds which can then be filled by burrowers special acid by clicking on it with a empty hand, it can also be hidden under debris such as wooden planks or metal sheets.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoPlantResinHole"/>
-
   - [bold]Tremor[/bold]: Causes targets in a large area around you to fall to the ground, works through walls and useful for escaping or capturing talls.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoTremor"/>
-
   - [bold]Dig Tunnel[/bold]: Dig a tunnel which can act as a fast travel point, you can also rename tunnels.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoDigTunnel"/>
-
   - [bold]Burrow[/bold]: Burrow underground and wait for a short time, after which you can emerge by clicking on any tile around you to start unburrowing, if you unburrow ontop of a tall it will stun them for a long amount of time allowing you to capture them if alone and behind cades, this ability works through walls and the unburrow time is dependant on how far you click away.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoBurrow"/>
 </Document>
