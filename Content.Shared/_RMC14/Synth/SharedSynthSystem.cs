@@ -12,6 +12,7 @@ using Content.Shared.Popups;
 using Content.Shared.Stacks;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
@@ -27,6 +28,7 @@ public abstract class SharedSynthSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedStackSystem _stack = default!;
     [Dependency] private readonly RMCStatusEffectSystem _rmcStatusEffects = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     public override void Initialize()
     {
@@ -193,12 +195,18 @@ public abstract class SharedSynthSystem : EntitySystem
         if (!args.CanReach)
             return;
 
+        if (args.Target == null)
+            return;
+
+        if (!_whitelist.CheckBoth(args.Target, ent.Comp.Blacklist, ent.Comp.Whitelist))
+            return; // Whitelist is so you dont get the popup by clicking on a random object
+
         if (HasComp<SynthComponent>(args.Target) && !ent.Comp.Reversed)
             args.Handled = true;
         else if (!HasComp<SynthComponent>(args.Target) && ent.Comp.Reversed)
             args.Handled = true;
 
-        if (args.Handled && args.Target != null && HasComp<MarineComponent>(args.Target))
+        if (args.Handled)
         {
             var msg = Loc.GetString(ent.Comp.Popup, ("user", args.User), ("used", args.Used), ("target", args.Target));
             _popup.PopupClient(msg, args.User, args.User, PopupType.SmallCaution);

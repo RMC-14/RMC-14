@@ -85,6 +85,9 @@
     useRate: 66
   - type: RMCPowerUsageDisplay
   - type: UseOnSynthBlocked
+    whitelist:
+      components:
+        - Marine
 
 - type: entity
   id: CMDefibrillatorEmpty
@@ -146,6 +149,9 @@
   - type: UseOnSynthBlocked
     reversed: true
     popup: rmc-species-synth-reset-key-invalid
+    whitelist:
+      components:
+        - Marine
   - type: Item
     size: Normal
     sprite: _RMC14/Objects/Devices/reset_key.rsi

@@ -1,3 +1,4 @@
+using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Synth;
@@ -11,4 +12,10 @@ public sealed partial class UseOnSynthBlockedComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Reversed = false;
+
+    [DataField, AutoNetworkedField]
+    public EntityWhitelist? Whitelist;
+
+    [DataField, AutoNetworkedField]
+    public EntityWhitelist? Blacklist;
 }
