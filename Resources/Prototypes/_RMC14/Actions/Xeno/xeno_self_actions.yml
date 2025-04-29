@@ -82,6 +82,14 @@
     useDelay: 0.5
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoHide
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: xenohide
+
+- type: entity
   id: ActionXenoToggleCrest
   parent: ActionXenoBase
   name: Toggle Crest Defense
