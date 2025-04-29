@@ -35,6 +35,14 @@
   - type: RMCDazeableAction
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoChooseResinStructure
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: place_resin
+
+- type: entity
   id: ActionXenoSecreteStructure
   parent: ActionXenoBase
   name: Secrete Resin
@@ -55,6 +63,14 @@
     checkWeeds: true
     canUpgrade: true
   - type: RMCDazeableAction
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoSecereteResin
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: secrete_resin
 
 - type: entity
   id: ActionXenoCoerceResin
