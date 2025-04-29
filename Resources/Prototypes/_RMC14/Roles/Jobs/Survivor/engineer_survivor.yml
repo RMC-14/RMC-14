@@ -70,3 +70,21 @@
     randomGearOther:
     -
       - [ CMBeltUtilityFilled ]
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorEngineer
+  name: engineer survivor ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorEngineer
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorEngineer
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorEngineer
