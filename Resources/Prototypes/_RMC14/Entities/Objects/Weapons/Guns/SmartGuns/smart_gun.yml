@@ -324,7 +324,7 @@
     proto: CMCartridgeSmartGun10x30mm
     capacity: 500
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/jungle.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -346,8 +346,6 @@
     proto: RMCCartridgeSmartGun10x30mmirradiated
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun_deplated.rsi
-  - type: ItemCamouflage
-    camouflageVariations: { }
 
 - type: entity
   parent: RMCMagazineSmartGun
@@ -359,8 +357,6 @@
       tags:
       - RMCCartridgeSmartGun10x30mmHT
     proto: RMCCartridgeSmartGun10x30mmHT
-  - type: ItemCamouflage
-    camouflageVariations: { }
 
 - type: entity
   parent: CMBaseCartridgeRifle
