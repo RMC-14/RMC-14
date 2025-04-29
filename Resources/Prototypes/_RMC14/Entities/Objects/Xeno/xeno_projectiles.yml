@@ -238,16 +238,22 @@
 
 - type: entity
   parent: XenoBaseProjectile
-  id: XenoBombardNeurotoxinProjectile
-  name: glob of neurotoxin gas
-  categories:
-  - HideSpawnMenu
+  id: CMGuidebookXenoBombardNeurotoxinProjectile
+  name: Neurotoxin Glob
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
     layers:
     - state: neuro_glob
-      shader: unshaded
+      shader: unshaded    
+
+- type: entity
+  parent: CMGuidebookXenoBombardNeurotoxinProjectile
+  id: XenoBombardNeurotoxinProjectile
+  name: glob of neurotoxin gas
+  categories:
+  - HideSpawnMenu
+  components:
   - type: TimedDespawn
     lifetime: 10
   - type: XenoProjectile
