@@ -28,11 +28,11 @@
   <GuideEntityEmbed Entity="CMGuidebookActionXenoPlantResinHole"/>
 
   - [bold]Throw Parasite[/bold]: If your hand is empty this will retrieve a parasite from your storage which is the main use, if you already have a parasite then it will throw one.
-  <GuideEntityEmbed Entity="CMGuidebookActionThrowParasite"/>
+  <GuideEntityEmbed Entity="CMGuidebookActionXenoThrowParasite"/>
 
   - [bold]Retrieve Egg[/bold]: Retrieves a egg once the ability is used.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoRetrieveEgg"/>
 
   - [bold]Set Parasite Reserve[/bold]: Sets a reserve on how many parasites you want to not let become controlled by other players, this helps for when you are low on parasites, and dont want those last few to jump out of your storage when you need them.
-  <GuideEntityEmbed Entity="CMGuidebookActionSetParasiteReserve"/>
+  <GuideEntityEmbed Entity="CMGuidebookActionXenoSetParasiteReserve"/>
 </Document>
