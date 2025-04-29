@@ -143,6 +143,14 @@
     useDelay: 0.2
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionToggleLongRangeSight
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: toggle_long_range
+
+- type: entity
   id: ActionXenoWordQueen
   parent: ActionXenoBase
   name: Word of the Queen (50) # TODO RMC14 proper plasma costs
