@@ -3,10 +3,8 @@
   <GuideEntityEmbed Entity="CMXenoBurrower"/>
   ##Playing as a Burrower
   Use your resin holes to fill them with a special type of acid that stuns any marines that enter a tile around it, this can be paired with stomp and multiple traps to easily capture talls on the frontline and backline. Burrowers can also make tunnels that allow easy transportation of hosts from the frontline to nests however they suffer from a slow plasma gain, it is suggested to work around recovery pheromones.
-
   ##How to capture
   To capture on the backlines, attempt to place your resin holes underneath any debris to hide them and fill them with acid. Once your traps are in place, stand behind a wall near them and lure a marine close enough so that you can tremor and drag them into the trap while tackling them.
-  
   ##Abilities:
   - [bold]Plant Weeds[/bold]: Places a resin node which spreads weeds across a large area.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoPlantWeeds"/>
