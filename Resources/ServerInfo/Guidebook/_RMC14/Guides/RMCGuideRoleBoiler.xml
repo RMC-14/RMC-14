@@ -1,14 +1,18 @@
 <Document>
 
-  #So, you've ascended to the throne of the Hive!
+  ##Boiler, Tier 3
   
   <Box>
     <GuideEntityEmbed Entity="CMXenoBoiler"/>
   </Box>\n
   
-  Playing as a Boiler
+  #Playing as a Boiler
 
-  Becoming the ultimate ranged warrior of the Hive. It is now slow and large and returns to being a supportive role on the frontline, being able to stall any marine push with its globs and attains upgraded acid spray, corrosive acid and tail stab toxin.
+  <Box>
+    <GuideEntityEmbed Entity="CMGuidebookActionXenoBombard"/>
+  </Box>\n
+
+  Becoming the ultimate ranged warrior of the Hive with your signature bombard capable of stalling any marines. It is now slow and large and returns to being a supportive role on the frontline, attaining a upgraded acid spray, corrosive acid and tail stab toxin.
   
   <Box>
     <GuideEntityEmbed Entity="CMGuidebookXenoBombardAcidProjectile"/>
@@ -23,23 +27,33 @@
     <GuideEntityEmbed Entity="RMCTileFire"/>
   </Box>\n
 
+  #Door tech
+
+  To safely use bombard you can stand behind a closed resin door and charge your bombard, make sure to aim outside in the path of the door, now hover your mouse over the door and press E when the bombard is almost done, if timed then the resin door will open letting your glob pass through!
+
+  <Box>
+    <GuideEntityEmbed Entity="DoorXenoResin"/>
+  </Box>\n
+
   Abilities:
 
-  Strong Corrosive Acid: Secretes a glob of acid on items to be dissolved, can be used on multiple items at a time.
+  - [bold][color=#E61919]PASSIVE[/color][/bold]: Vulnerable to fire and glows in the dark.
 
-  Toggle Long Range Sight:
+  - [bold]Strong Corrosive Acid[/bold]: Secretes a glob of acid on items to be dissolved, can be used on multiple items at a time.
 
-  Bombard: Prepare to fire, either a acidic or neurotoxic glob which will go past your aimed position.
+  - [bold]Toggle Long Range Sight[/bold]: Do-after to look further in the direction you are facing
 
-  Toggle Gas Type: Toggles between Acid Or Neurotoxin.
+  - [bold]Bombard[/bold]: Prepare to fire, either a acidic or neurotoxic glob which will go past your aimed position.
+
+  - [bold]Toggle Gas Type[/bold]: Toggles between Acid Or Neurotoxin.
 
   Acid: Will burn targets and barricades.
 
   Neurotoxin: Cripples and weakens targets, has a larger cloud range.
 
-  Spray Acid: Sprays acid along the ground in a line, covering any barricades and dealing damage to talls.
+  - [bold]Spray Acid[/bold]: Sprays acid along the ground in a line, covering any barricades and stunning marines caught in its path.
 
   Will also extinguish any sisters if they are on fire. If used on a tall affected by Charged Spit, will upgrade the spit and stun them.
 
-  Acid Shroud: Create a cloud of acid around you, disables other abilities, used in last resort.
+  - [bold]Acid Shroud[/bold]: Create a cloud of acid around you, disables other abilities, used in last resort.
 </Document>
