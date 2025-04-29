@@ -56,6 +56,49 @@
       icon:
         sprite: _RMC14/Interface/map_blips.rsi
         state: synth
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 52.5 # 35 base damage, this is because they have melee weapons 2
+    - type: Synth
+      welderDamageToRepair:
+        types:
+          Blunt: -15
+          Piercing: -15
+          Slash: -15
+      cableCoilDamageToRepair:
+        types:
+          Caustic: -15
+          Heat: -15
+          Shock: -15
+          Cold: -15
+      addComponents:
+      # TODO darksight instead of night vision
+      - type: NightVision
+        innate: true
+      - type: EyeProtection
+      - type: WoundableUntreatable
+      - type: Insulated
+      removeComponents:
+      - type: CMSurgeryTarget
+      - type: Infectable
+      - type: Hunger
+      - type: Thirst
+      - type: Perishable
+      - type: ThermalRegulator
+      - type: Stamina
+      - type: DamageForceSay
+      - type: Dna
+      - type: InjectableSolution
+      - type: IVDripTarget
   hidden: true
 
 - type: startingGear
