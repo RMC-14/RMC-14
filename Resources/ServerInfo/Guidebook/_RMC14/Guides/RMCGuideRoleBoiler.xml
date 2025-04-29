@@ -3,7 +3,7 @@
   <Box>
     <GuideEntityEmbed Entity="CMXenoBoiler"/>
   </Box>\n
-  ##Playing as a Boiler
+  ##Playing as a Boiler\n
   Becoming the ultimate ranged warrior of the Hive with your signature bombard capable of stalling any marines. It is now slow, large and returns to being a supportive role on the frontline, attaining a upgraded acid spray, corrosive acid and tail stab toxin.
   <Box>
     <GuideEntityEmbed Entity="CMGuidebookXenoBombardAcidProjectile"/>
@@ -21,7 +21,7 @@
     <GuideEntityEmbed Entity="CMGuidebookActionXenoBombard"/>
     <GuideEntityEmbed Entity="DoorXenoResin"/>
   </Box>\n
-  ##Abilities:
+  ##Abilities:\n
   - [bold][color=#E61919]PASSIVE[/color][/bold]: Vulnerable to fire and glows in the dark.
 
   - [bold]Strong Corrosive Acid[/bold]: Secretes a glob of acid on items to be dissolved, can be used on multiple items at a time.
