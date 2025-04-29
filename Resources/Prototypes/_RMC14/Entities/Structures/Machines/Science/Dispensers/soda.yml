@@ -7,6 +7,7 @@
   - type: Transform
     anchored: true
   - type: Sprite
+    drawdepth: SmallObjects
     sprite: _RMC14/Structures/Machines/Science/small_dispensers.rsi
     snapCardinals: true
     layers:
