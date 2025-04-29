@@ -963,6 +963,14 @@
   - type: ActionBlockIfResting
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoHighGallop
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: stomp
+
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoScissorCut
   name: Scissor Cut (25)
