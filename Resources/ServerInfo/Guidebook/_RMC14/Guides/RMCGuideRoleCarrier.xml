@@ -1,19 +1,38 @@
 <Document>
-  Playing as a Carrier
-
+  #Carrier, Tier 2
+  <Box>
+    <GuideEntityEmbed Entity="CMXenoCarrier"/>
+  </Box>\n
+  ##Playing as a Carrier
   Your ability to store 16 parasites and 8 eggs makes you adept at managing the hive and its captures, you can also stay around the frontline with your pheromones to directly infect any talls getting dragged in by other sisters or stay on the backline by placing resin traps hidden under items and filled with parasites to catch unsuspecting victims.
 
   Carriers also have the best tackle out of any Xenonid caste which makes them good at keeping down hosts to then infect them with a parasite.
 
-  Abilities:
+  Remember to boost your parasite production, plot down Egg Morphers on hive weeds and collect parasites from them, remember to ask Queen since they are limited!
+  <GuideEntityEmbed Entity="HiveEggMorpherXeno"/>
+  ##Parasites
+  Parasites will die if not inside an egg or carried a carrier, if a parasite is on the floor or held by another non carrier sister, it will die after some time unless controlled. Parasites will climb into eggs or resin holes automatically if standing above one.
+  <Box>
+    <GuideEntityEmbed Entity="XenoEgg"/>
+    <GuideEntityEmbed Entity="CMXenoParasite"/>
+    <GuideEntityEmbed Entity="XenoResinHole"/>
+  </Box>\n
+  ##Abilities:
+  - [bold]Emit Pheromones[/bold]: Emits one of the three pheromones, strength of said pheromone is dependant on caste and does not stack with pheromones of the same type.
+  <GuideEntityEmbed Entity="CMGuidebookActionXenoPheromones"/>
 
-  Emit Pheromones: Emits one of the three pheromones, strength of said pheromone is dependant on caste and does not stack with pheromones of the same type.
+  - [bold]Plant Weeds[/bold]: Places a resin node which spreads weeds across a large area.
+  <GuideEntityEmbed Entity="CMGuidebookActionXenoPlantWeeds"/>
 
-  Plant Resin Node: Places a resin node which spreads weeds across a large area.
+  - [bold][textlink="Plant Resin Hole" link="RMCGuideResinHoles"][/bold]: Places a hole on weeds which can then be filled by clicking on it with a parasite, it can also be hidden under debris such as wooden planks or metal sheets.
+  <GuideEntityEmbed Entity="CMGuidebookActionXenoPlantResinHole"/>
 
-  Plant Resin Hole: Places a hole on weeds which can then be filled by clicking on it with a parasite, it can also be hidden under debris such as wooden planks or metal sheets.
+  - [bold]Throw Parasite[/bold]: If your hand is empty this will retrieve a parasite from your storage which is the main use, if you already have a parasite then it will throw one.
+  <GuideEntityEmbed Entity="CMGuidebookActionThrowParasite"/>
 
-  Throw Parasite: If your hand is empty this will retrieve a parasite from your storage which is the main use, if you already have a parasite then it will throw one.
+  - [bold]Retrieve Egg[/bold]: Retrieves a egg once the ability is used.
+  <GuideEntityEmbed Entity="CMGuidebookActionXenoRetrieveEgg"/>
 
-  Retrieve Egg: Retrieves a egg once the ability is used
+  - [bold]Set Parasite Reserve[/bold]: Sets a reserve on how many parasites you want to not let become controlled by other players, this helps for when you are low on parasites, and dont want those last few to jump out of your storage when you need them.
+  <GuideEntityEmbed Entity="CMGuidebookActionSetParasiteReserve"/>
 </Document>
