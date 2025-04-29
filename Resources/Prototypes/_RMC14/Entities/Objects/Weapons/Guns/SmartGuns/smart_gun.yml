@@ -333,13 +333,6 @@
   - type: Clothing
     slots:
     - suitStorage
-  - type: ItemCamouflage
-    camouflageVariations:
-      Jungle: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/jungle.rsi
-      Desert: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/desert.rsi
-      Snow: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/snow.rsi
-      Classic: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/classic.rsi
-      Urban: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/SmartGuns/magazine_smart_gun/urban.rsi
 
 - type: entity
   parent: RMCMagazineSmartGun

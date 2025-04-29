@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-4.0",
-  "copyright": "Sprites by cephalo222 on Discord",
+  "license": "CC-BY-SA-3.0",
+  "copyright": "mag-1 Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/168c8a79a3d858a8c531ff7ed0bc3033e47d1d16/icons/obj/items/weapons/guns/ammo_by_faction/colony.dmi, base by github noctyrnal",
   "size": {
     "x": 32,
     "y": 32
