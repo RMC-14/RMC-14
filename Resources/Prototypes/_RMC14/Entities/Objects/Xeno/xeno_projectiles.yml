@@ -190,6 +190,7 @@
   parent: XenoBaseProjectile
   id: CMGuidebookXenoBombardAcidProjectile
   name: Acid Glob
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
@@ -240,6 +241,7 @@
   parent: XenoBaseProjectile
   id: CMGuidebookXenoBombardNeurotoxinProjectile
   name: Neurotoxin Glob
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
