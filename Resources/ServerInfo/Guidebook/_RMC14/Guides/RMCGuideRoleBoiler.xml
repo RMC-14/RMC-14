@@ -21,7 +21,7 @@
     <GuideEntityEmbed Entity="CMGuidebookActionXenoBombard"/>
     <GuideEntityEmbed Entity="DoorXenoResin"/>
   </Box>\n
-  #Abilities:
+  ##Abilities:
   - [bold][color=#E61919]PASSIVE[/color][/bold]: Vulnerable to fire and glows in the dark.
 
   - [bold]Strong Corrosive Acid[/bold]: Secretes a glob of acid on items to be dissolved, can be used on multiple items at a time.
