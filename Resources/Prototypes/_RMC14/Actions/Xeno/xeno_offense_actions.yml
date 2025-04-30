@@ -851,6 +851,14 @@
     cost: 50
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoPierce
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: prae_pierce
+
+- type: entity
   parent: ActionXenoDash
   id: ActionXenoBlitz
   name: Blitz (50)
@@ -883,6 +891,14 @@
     cooldown: 12
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoCleaveRoot
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: prae_cleave_root
+
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoCleaveFling
   name: Cleave Fling
@@ -904,6 +920,14 @@
     ids:
     - ActionXenoCleaveRoot
     cooldown: 12
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoCleaveFling
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: prae_cleave_fling
 
 #- type: entity
 #  parent: ActionXenoBase
