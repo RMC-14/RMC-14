@@ -540,7 +540,7 @@
 - type: entity
   parent: RMCBaseSentry
   id: RMCSentryFire
-  name: UN 55-FA Assault Sentry Flamer
+  name: UN 55-FA assault sentry flamer
   description: The Flamethrower Sentry Gun automatically tracks and fires upon any target that is wearing an ID not hooked up to the Almayer's systems. Just like the UA 571-C Sentry gun, this sentry has IFF but the fire that lingers doesn't.
   components:
   - type: RMCFireProjectile
@@ -574,7 +574,7 @@
 - type: entity
   parent: RMCSentry
   id: RMCSentrySniperFire
-  name: UN 60-FP Plasma Sentry
+  name: UN 60-FP plasma sentry
   description: The Plasma Flamethrower Sentry Gun automatically tracks and fires upon any target that is wearing an ID not hooked up to the Almayer's systems. Just like the UA 571-C Sentry gun, this sentry has IFF but the phosphorus that lingers doesn't.
   components:
   - type: RMCFireProjectile
