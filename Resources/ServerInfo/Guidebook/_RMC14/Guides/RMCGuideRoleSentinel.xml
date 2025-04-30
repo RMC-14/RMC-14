@@ -8,9 +8,9 @@
   
   ##Abilities:
   - [bold]Slowing Spit[/bold]: Glob a spit that slows talls and drains their chemicals, if they have no armor it will stun them down.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoSpit"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoSpit"/>
   - [bold]Scattered Spit[/bold]: Glob spits in a shotgun like fashion that briefly knocks down talls, very useful for any talls that are pushing.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoScatteredSpit"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoScatteredSpit"/>
   - [bold]Paralyzing Slash[/bold]: Empowers your next attack or tailstab to inject neurotoxin which will make them fall over after a brief period of time.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoCripplingStrike"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoCripplingStrike"/>
 </Document>

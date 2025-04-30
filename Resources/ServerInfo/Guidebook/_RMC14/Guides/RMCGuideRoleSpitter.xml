@@ -12,12 +12,12 @@
   
   ##Abilities:
   - [bold]Acid Spit[bold]: Glob acid to deal damage to any targets.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoSpit"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoSpit"/>
   - [bold]Charge Spit[/bold]: Grants you extra movement speed and armor and empowers your next spit, which will do extra damage but will be shorter in range. Additionally, it will spatter the target in acid.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoChargeSpit"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoChargeSpit"/>
   - [bold]Spray Acid[/bold]: Sprays acid along the ground in a line, covering any barricades and dealing damage to talls.
   - Will also extinguish any sisters if they are on fire. If used on a tall affected by Charged Spit, will upgrade the spit and stun them.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoSprayAcid"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoSprayAcid"/>
   - [bold]Corrosive Acid[/bold]: Secretes a glob of acid on items to be dissolved, can be used on multiple items at a time.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoCorrosiveAcid"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoCorrosiveAcid"/>
 </Document>

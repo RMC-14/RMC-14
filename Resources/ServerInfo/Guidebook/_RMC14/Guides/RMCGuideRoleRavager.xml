@@ -17,9 +17,9 @@
   ##Abilities:
   - [bold][color=green]PASSIVE[/color][/bold]: Immune to fire damage, however will still catch on fire and lose armor from green fire.
   - [bold]Empower[/bold]: On first activation, grant shield points, on second activation for every target in your line of sight and near you, gain extra shield and slash damage. Empowering from 3 or more targets will make you super empowered, upgrading your other abilities.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoEmpower"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoEmpower"/>
   - [bold]Assault[/bold]: Lunge towards your direction, if super empowered you will fling, knock down and slash any target you hit. Slashing any targets will reduce this ability's cooldown.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoAssault"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoAssault"/>
   - [bold]Scissor Cut[/bold]: Slash in a 2x4 line damaging anybody inside, if super empowered whoever hit will be slowed.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoScissorCut"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoScissorCut"/>
 </Document>

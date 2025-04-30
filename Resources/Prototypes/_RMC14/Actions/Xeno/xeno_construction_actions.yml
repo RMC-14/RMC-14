@@ -36,7 +36,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoChooseResinStructure
+  id: RMCGuidebookActionXenoChooseResinStructure
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -66,7 +66,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoSecreteResin
+  id: RMCGuidebookActionXenoSecreteResin
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -115,7 +115,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoOrderConstruction
+  id: RMCGuidebookActionXenoOrderConstruction
   name: Order Construction
   description: Starts construction of an important hive structure.
   categories: [ HideSpawnMenu ]
@@ -140,7 +140,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoPlantResinHole
+  id: RMCGuidebookActionXenoPlantResinHole
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -218,7 +218,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoDigTunnel
+  id: RMCGuidebookActionXenoDigTunnel
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -242,7 +242,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoPlantWeeds
+  id: RMCGuidebookActionXenoPlantWeeds
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite

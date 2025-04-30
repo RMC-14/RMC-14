@@ -11,7 +11,7 @@
   - For beginners, becoming a drone is recommended. Drones are responsible for building the hive defenses.
 
   <Box>
-    <GuideEntityEmbed Entity="CMGuidebookActionXenoEvolve"/>
+    <GuideEntityEmbed Entity="RMCGuidebookActionXenoEvolve"/>
     <GuideEntityEmbed Entity="CMXenoDrone"/>
   </Box>\n
 
@@ -26,7 +26,7 @@
   - Another important job of the Drone is to plant weeds.
   - Weeds allow us to rest to regain our health and energy!
   - We can also only construct the hive on weeds.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoRest"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoRest"/>
   <Box>
     <GuideEntityEmbed Entity="XenoWeeds"/>
     <GuideEntityEmbed Entity="XenoWeedsSource"/>

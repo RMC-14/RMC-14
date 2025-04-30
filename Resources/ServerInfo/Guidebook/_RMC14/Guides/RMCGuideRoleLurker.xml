@@ -10,9 +10,9 @@
   
   ##Abilities:
   - [bold]Pounce[/bold]: Leap at a target pinning them to the ground only if invisible, this stun is longer than a runner but will root you onto your target unless you slash after.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoPounce"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoPounce"/>
   - [bold]Turn Invisible[/bold]: Become partially invisible, your movement speed is increased but if you attack or pounce your invisibility will wear off.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoTurnInvisible"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoTurnInvisible"/>
   - [bold]Crippling Strike[/bold]: The next target you slash will do more damage and slow them down.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoCripplingStrike"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoCripplingStrike"/>
 </Document>

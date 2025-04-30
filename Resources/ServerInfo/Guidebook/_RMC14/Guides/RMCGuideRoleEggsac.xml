@@ -10,11 +10,11 @@
   
   ##Abilities:
   - [bold]Emit Pheromones[/bold]: Emits one of the three pheromones, strength of said pheromone is dependant on caste and does not stack with pheromones of the same type.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoPheromones"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoPheromones"/>
   - [bold]Plant Weeds[/bold]: Places a resin node which spreads weeds across a large area.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoPlantWeeds"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoPlantWeeds"/>
   - [bold]Retrieve Egg[/bold]: Retrieves a egg once the ability is used
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoRetrieveEgg"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoRetrieveEgg"/>
   - [bold]Generate Eggs[/bold]: Produces eggs over time with a passive plasma consumption
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoGenerateEggs"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoGenerateEggs"/>
 </Document>

@@ -19,7 +19,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoCorrosiveAcid
+  id: RMCGuidebookActionXenoCorrosiveAcid
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -185,7 +185,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoPounce
+  id: RMCGuidebookActionXenoPounce
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -208,7 +208,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoAssault
+  id: RMCGuidebookActionXenoAssault
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -231,7 +231,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoDash
+  id: RMCGuidebookActionXenoDash
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -258,7 +258,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoHeadbutt
+  id: RMCGuidebookActionXenoHeadbutt
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -281,7 +281,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoTailSweep
+  id: RMCGuidebookActionXenoTailSweep
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -323,7 +323,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoScatteredSpit
+  id: RMCGuidebookActionXenoScatteredSpit
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -348,7 +348,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoSpit
+  id: RMCGuidebookActionXenoSpit
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -372,7 +372,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoChargeSpit
+  id: RMCGuidebookActionXenoChargeSpit
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -396,7 +396,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoSprayAcid
+  id: RMCGuidebookActionXenoSprayAcid
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -449,7 +449,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoAcidBall
+  id: RMCGuidebookActionXenoAcidBall
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -489,7 +489,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoCripplingStrike
+  id: RMCGuidebookActionXenoCripplingStrike
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -512,7 +512,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoBoneChips
+  id: RMCGuidebookActionXenoBoneChips
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -537,7 +537,7 @@
   
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoPunch
+  id: RMCGuidebookActionXenoPunch
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -563,7 +563,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoFling
+  id: RMCGuidebookActionXenoFling
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -589,7 +589,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoLunge
+  id: RMCGuidebookActionXenoLunge
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -640,7 +640,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoStomp
+  id: RMCGuidebookActionXenoStomp
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -664,7 +664,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoCharge
+  id: RMCGuidebookActionXenoCharge
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -695,7 +695,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoBombard
+  id: RMCGuidebookActionXenoBombard
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -721,7 +721,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoToggleGasType
+  id: RMCGuidebookActionXenoToggleGasType
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -750,7 +750,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoAcidShroud
+  id: RMCGuidebookActionXenoAcidShroud
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -772,7 +772,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoTremor
+  id: RMCGuidebookActionXenoTremor
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -852,7 +852,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoPierce
+  id: RMCGuidebookActionXenoPierce
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -892,7 +892,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoCleaveRoot
+  id: RMCGuidebookActionXenoCleaveRoot
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -923,7 +923,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoCleaveFling
+  id: RMCGuidebookActionXenoCleaveFling
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -988,7 +988,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoHighGallop
+  id: RMCGuidebookActionXenoHighGallop
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -1015,7 +1015,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoScissorCut
+  id: RMCGuidebookActionXenoScissorCut
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -1041,7 +1041,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoTailSeize
+  id: RMCGuidebookActionXenoTailSeize
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -1067,7 +1067,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoAbduct
+  id: RMCGuidebookActionXenoAbduct
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -1093,7 +1093,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoTailLash
+  id: RMCGuidebookActionXenoTailLash
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -1121,7 +1121,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoDislocate
+  id: RMCGuidebookActionXenoDislocate
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -1165,7 +1165,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoFlurry
+  id: RMCGuidebookActionXenoFlurry
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -1192,7 +1192,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoHeadbite
+  id: RMCGuidebookActionXenoHeadbite
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite

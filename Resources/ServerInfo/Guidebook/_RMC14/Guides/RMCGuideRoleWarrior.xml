@@ -13,9 +13,9 @@
   ##Abilities:
   - [bold][color=green]PASSIVE[/color][/bold]: Your slashes and abilities have lifesteal, granting you health upon hit.
   - [bold]Fling[/bold]: Fling a target backwards 3 tiles and damage them, will also stun for a bit.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoFling"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoFling"/>
   - [bold]Lunge[/bold]: Lunge towards a target and grab them, dragging will leave you VERY vulnerable and slow you down so be sure to know when to stop dragging.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoLunge"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoLunge"/>
   - [bold]Punch[/bold]: Punches the target, dealing a hefty amount of damage as well as knocking them back a tile.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoPunch"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoPunch"/>
 </Document>

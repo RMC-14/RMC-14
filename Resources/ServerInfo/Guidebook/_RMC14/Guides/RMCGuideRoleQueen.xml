@@ -10,24 +10,24 @@
   #Now what?
   First we must choose our hive location, this is not that all important and selecting where you spawn as your hive location will do. Once you have found a hive location follow the steps.
   <Box>
-    <GuideEntityEmbed Entity="CMGuidebookActionXenoOrderConstruction"/>
+    <GuideEntityEmbed Entity="RMCGuidebookActionXenoOrderConstruction"/>
     <GuideEntityEmbed Entity="HiveCoreXeno"/>
-    <GuideEntityEmbed Entity="CMGuidebookActionXenoPheromones"/>
+    <GuideEntityEmbed Entity="RMCGuidebookActionXenoPheromones"/>
   </Box>\n
 
   - Use your Order Construction ability to create a hive core and then fill it with your plasma.
   - You can emit recovery pheremones to gain plasma to fill the hivecore, remember your pheromones are the strongest in the hive! 
   <Box>
     <GuideEntityEmbed Entity="XenoHiveWeeds"/>
-    <GuideEntityEmbed Entity="CMGuidebookActionXenoGrowOvipositor"/>
+    <GuideEntityEmbed Entity="RMCGuidebookActionXenoGrowOvipositor"/>
   </Box>\n
 
   - Once filled, move ontop of the new hive weeds emitted from the hivecore then grow your ovipositor.
 
   Well done, you have successfully grown your ovipositor to allow for your children to gain evolution and thrive, now you can set hive leaders which will emit the same pheros you are.
   <Box>
-    <GuideEntityEmbed Entity="CMGuidebookActionXenoWatch"/>
-    <GuideEntityEmbed Entity="CMGuidebookActionXenoLeader"/>
+    <GuideEntityEmbed Entity="RMCGuidebookActionXenoWatch"/>
+    <GuideEntityEmbed Entity="RMCGuidebookActionXenoLeader"/>
   </Box>\n
 
   - Use the Watch xeno ability to find the xeno you wish to promote to leader.

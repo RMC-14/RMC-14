@@ -14,7 +14,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoRest
+  id: RMCGuidebookActionXenoRest
   name: Rest
   description: Lie down to regenerate health more quickly while on weeds.
   categories: [ HideSpawnMenu ]
@@ -36,7 +36,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoWatch
+  id: RMCGuidebookActionXenoWatch
   name: Watch Xenonid
   categories: [ HideSpawnMenu ]
   components:
@@ -59,7 +59,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoPheromones
+  id: RMCGuidebookActionXenoPheromones
   name: Emit Pheromones
   description: Gives a buff to nearby xenonids.
   categories: [ HideSpawnMenu ]
@@ -83,7 +83,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoHide
+  id: RMCGuidebookActionXenoHide
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -105,7 +105,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoToggleCrestDefence
+  id: RMCGuidebookActionXenoToggleCrestDefence
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -127,7 +127,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoFortify
+  id: RMCGuidebookActionXenoFortify
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -155,7 +155,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoResinWalker
+  id: RMCGuidebookActionXenoResinWalker
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -176,7 +176,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoToggleLongRangeSight
+  id: RMCGuidebookActionXenoToggleLongRangeSight
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -214,7 +214,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoGrowOvipositor
+  id: RMCGuidebookActionXenoGrowOvipositor
   name: Grow Ovipositor
   description: Become immobile and start laying eggs which will produce parasites.
   categories: [ HideSpawnMenu ]
@@ -237,7 +237,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoTurnInvisible
+  id: RMCGuidebookActionXenoTurnInvisible
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -259,7 +259,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoDefensiveShield
+  id: RMCGuidebookActionXenoDefensiveShield
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -284,7 +284,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoRetrieveEgg
+  id: RMCGuidebookActionXenoRetrieveEgg
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -310,7 +310,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoThrowParasite
+  id: RMCGuidebookActionXenoThrowParasite
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -332,7 +332,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoSetParasiteReserve
+  id: RMCGuidebookActionXenoSetParasiteReserve
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -386,7 +386,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoBurrow
+  id: RMCGuidebookActionXenoBurrow
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -423,7 +423,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoEmpower
+  id: RMCGuidebookActionXenoEmpower
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -444,7 +444,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoGenerateEggs
+  id: RMCGuidebookActionXenoGenerateEggs
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite

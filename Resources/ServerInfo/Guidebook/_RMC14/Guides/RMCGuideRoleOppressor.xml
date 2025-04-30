@@ -16,11 +16,11 @@
   - 1 person will drag them in front of you and slow them.
   - 2 people will drag them in front of you, slow them, daze them and briefly root them.
   - 3 or more people will drag them in front of you, slow them and briefly stun them.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoAbduct"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoAbduct"/>
   - [bold]Dislocate[/bold]: A powerful punch, similar to the warrior's punch. Deals armor piercing damage, more if your enemy is slowed. Will also root slowed targets. Reduces other ability cooldowns.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoDislocate"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoDislocate"/>
   - [bold]Tail Lash[/bold]: Knock marines back in a 2x3 area in front of you and slow them. Take note that this ability has a wind up.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoTailLash"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoTailLash"/>
   - [bold]Tail Seize[/bold]: The Oppressor has a unique tail stab, instead called Tail Seize. It has a range of 3 tiles - however, it deals no damage, instead pulling the target in towards you and slowing them upon their arrival.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoTailSeize"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoTailSeize"/>
 </Document>

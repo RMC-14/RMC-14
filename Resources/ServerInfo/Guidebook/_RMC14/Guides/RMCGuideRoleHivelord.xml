@@ -8,19 +8,19 @@
   
   ##Abilities:
   - [bold]Plant Weeds[/bold]: Places a resin node which spreads weeds across a large area.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoPlantWeeds"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoPlantWeeds"/>
   - [bold]Choose Resin Structure[/bold]: Chooses what resin structure to make, to then be used by Secrete Resin.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoChooseResinStructure"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoChooseResinStructure"/>
   - [bold]Secrete Resin[/bold]: Secretes the chosen resin structure on any tile you click.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoSecreteResin"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoSecreteResin"/>
   - [bold]Order Construction[/bold]: Orders the construction of a hive structure.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoOrderConstruction"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoOrderConstruction"/>
   - [bold]Transfer Plasma[/bold]: Transfers plasma from yourself to a sister, upgraded.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoTransferPlasma"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoTransferPlasma"/>
   - [bold]Corrosive Acid[/bold]: Secretes a glob of acid on items to be dissolved, can be used on multiple items at a time.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoCorrosiveAcid"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoCorrosiveAcid"/>
   - [bold]Emit Pheromones[/bold]: Emits one of the three pheromones, strength of said pheromone is dependant on caste and does not stack with pheromones of the same type.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoPheromones"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoPheromones"/>
   - [bold]Resin Walker[/bold]: Grants you increased speed when on resin, however will quickly drain your plasma.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoResinWalker"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoResinWalker"/>
 </Document>

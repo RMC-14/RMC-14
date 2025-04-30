@@ -14,7 +14,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoTransferPlasma
+  id: RMCGuidebookActionXenoTransferPlasma
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -95,7 +95,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoRetrieve
+  id: RMCGuidebookActionXenoRetrieve
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -184,7 +184,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoLeader
+  id: RMCGuidebookActionXenoLeader
   name: Choose Leaders
   description: Promotes and demotes xenonid leaders, or watches them. Promoting a xeno to leader will make them emit your pheromones around themselves.
   categories: [ HideSpawnMenu ]
@@ -260,7 +260,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoTailFountain
+  id: RMCGuidebookActionXenoTailFountain
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -284,7 +284,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoTantrum
+  id: RMCGuidebookActionXenoTantrum
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
@@ -310,7 +310,7 @@
 
 - type: entity
   parent: CMGuidebookActionXenoBase
-  id: CMGuidebookActionXenoFightOrFlight
+  id: RMCGuidebookActionXenoFightOrFlight
   categories: [ HideSpawnMenu ]
   components:
     - type: Sprite
