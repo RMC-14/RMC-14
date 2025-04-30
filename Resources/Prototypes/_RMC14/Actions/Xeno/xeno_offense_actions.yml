@@ -1058,6 +1058,14 @@
   - type: ActionBlockIfResting
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoAbduct
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: abduct
+
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoTailLash
   name: Tail Lash (80)
@@ -1074,6 +1082,14 @@
     deselectOnMiss: false
     checkCanAccess: false
   - type: ActionBlockIfResting
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoTailLash
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: prae_tail_lash
 
 - type: entity
   id: ActionXenoDislocate
@@ -1096,6 +1112,14 @@
     cost: 55
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoDislocate
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: dislocate
+
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoTailJab
   name: Tail Jab
@@ -1113,7 +1137,7 @@
     deselectOnMiss: false
   - type: ActionBlockIfResting
   - type: XenoOffensiveAction
-
+  
 - type: entity
   parent: ActionXenoBase
   id: ActionXenoFlurry
@@ -1130,6 +1154,14 @@
     checkCanAccess: false
     range: 15
   - type: ActionBlockIfResting
+
+  - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoFlurry
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: rav_spike
 
 - type: entity
   parent: ActionXenoBase
@@ -1149,3 +1181,11 @@
     deselectOnMiss: false
   - type: ActionBlockIfResting
   - type: XenoOffensiveAction
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoHeadbite
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: headbite
