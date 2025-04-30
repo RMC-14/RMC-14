@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: Fixed metal rods not fitting in the construction rig.
-    type: Fix
-  id: 1162
-  time: '2025-01-05T01:43:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5272
 - author: CyberTropic
   changes:
   - message: Added holiday vendor system.
@@ -5504,5 +5497,12 @@
   id: 1664
   time: '2025-04-30T00:47:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6304
+- author: DrSmugleaf
+  changes:
+  - message: Fixed melee weapons not having a thrust attack.
+    type: Fix
+  id: 1665
+  time: '2025-04-30T01:06:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6305
 Name: RMC14
 Order: -1
