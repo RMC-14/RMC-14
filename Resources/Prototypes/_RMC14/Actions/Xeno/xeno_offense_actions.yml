@@ -1163,7 +1163,7 @@
     range: 15
   - type: ActionBlockIfResting
 
-  - type: entity
+- type: entity
   parent: CMGuidebookActionXenoBase
   id: CMGuidebookActionXenoFlurry
   categories: [ HideSpawnMenu ]
