@@ -1,3 +1,4 @@
+using Content.Server.Body.Components;
 using Content.Server.Body.Systems;
 using Content.Shared._RMC14.Humanoid;
 using Content.Shared._RMC14.Synth;
@@ -18,11 +19,15 @@ public sealed class SynthSystem : SharedSynthSystem
     {
         base.MakeSynth(ent);
 
-        _damageable.SetDamageModifierSetId(ent, ent.Comp.NewDamageModifier);
+        if (TryComp<DamageableComponent>(ent.Owner, out var damageable))
+            _damageable.SetDamageModifierSetId(ent.Owner, ent.Comp.NewDamageModifier, damageable);
 
-        // This makes it so the synth doesn't take bloodloss damage.
-        _bloodstream.SetBloodLossThreshold(ent, 0f);
-        _bloodstream.ChangeBloodReagent(ent, ent.Comp.NewBloodReagent);
+        if (TryComp<BloodstreamComponent>(ent.Owner, out var bloodstream)) // These TryComps are so tests don't fail
+        {
+            // This makes it so the synth doesn't take bloodloss damage.
+            _bloodstream.SetBloodLossThreshold(ent.Owner, 0f, bloodstream);
+            _bloodstream.ChangeBloodReagent(ent.Owner, ent.Comp.NewBloodReagent, bloodstream);
+        }
 
         var repOverrideComp = EnsureComp<RMCHumanoidRepresentationOverrideComponent>(ent);
         repOverrideComp.Species = ent.Comp.SpeciesName;
