@@ -5,6 +5,7 @@
   You have given up your ability to store parasites, you can store 12 eggs, produce eggs with your eggsac, place 4 eggs off hive weeds that decay slower if you are near, and your pheromones have been strengthened
   
   Eggsac Carriers are specialised for egg production and can keep the hive supplied when queen isn't making eggs
+  
   ##Abilities:
   - [bold]Emit Pheromones[/bold]: Emits one of the three pheromones, strength of said pheromone is dependant on caste and does not stack with pheromones of the same type.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoPheromones"/>
