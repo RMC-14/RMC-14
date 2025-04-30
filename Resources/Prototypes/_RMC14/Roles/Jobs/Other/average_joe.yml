@@ -48,9 +48,14 @@
     gloves: CMHandsInsulated
     shoes: RMCShoesWhite
     id: RMCIDCardSynth
-    ears: RMCHeadsetSynth
+    ears: CMHeadsetEngineer
     belt: CMBeltUtilityFilled
-#   suitstorage: RMCK92MaintenanceJack TODO RMC14: Create maintenance jack and add it to the Average Joe starting gear
+   #suitstorage: RMCK92MaintenanceJack TODO RMC14: Create maintenance jack and add it to the Average Joe starting gear
+    pocket1: RMCPouchSling
+    pocket2: RMCPouchConstructionFillFull
+  #storage:
+    #pocket1:
+    # TODO RMC14: ARES PDA for the average joes thats attached to the sling pouch
 
 #- type: entity
 #  parent: CMSpawnPointJobBase
@@ -63,5 +68,5 @@
 #    state: syn_spawn
 
 - type: playTimeTracker
-  id: RMCJobSynthetic
+  id: RMCJobAverageJoe
   isHumanoid: true
