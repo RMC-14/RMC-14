@@ -12,7 +12,7 @@
   <GuideEntityEmbed Entity="CMGuidebookActionXenoPierce"/>
   - [bold]Blitz[/bold]: Charge through enemies with a range of 4 tiles. Upon stopping, activate again to do an AoE slash in a 3x3 tile range, otherwise the ability will activate automatically after a 3 second delay. If the AoE slash hits, it will instantly regenerate your shield.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoDash"/>
-  - [bold]Root[/bold]: Immobilises your target for 1 to 2.5 seconds in the ground, making them a sitting duck. Shares cooldown with Fling.
+  - [bold]Root[/bold]: Immobillizes your target for shortly into the ground, making them a sitting duck. Shares cooldown with Fling.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoCleaveRoot"/>
   - [bold]Fling[/bold]: Flings your target away from you, sending them flying backwards. Shares cooldown with Root.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoCleaveFling"/>
