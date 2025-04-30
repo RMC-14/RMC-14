@@ -1,4 +1,4 @@
-﻿<cc:XenoWatchWindow
+<cc:XenoWatchWindow
     xmlns="https://spacestation14.io"
     xmlns:cc="clr-namespace:Content.Client._RMC14.Xenonids.Watch"
     Title="{Loc cm-xeno-watch}"

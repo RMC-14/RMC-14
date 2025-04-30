@@ -1,4 +1,4 @@
-﻿<ui:XenoChoiceControl
+<ui:XenoChoiceControl
     xmlns="https://spacestation14.io"
     xmlns:ui="clr-namespace:Content.Client._RMC14.Xenonids.UI"
     xmlns:style="clr-namespace:Content.Client.Stylesheets">

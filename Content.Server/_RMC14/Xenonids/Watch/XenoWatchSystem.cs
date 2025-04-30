@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Server.Chat.Systems;
 using Content.Server.Popups;
 using Content.Shared._RMC14.Xenonids;
