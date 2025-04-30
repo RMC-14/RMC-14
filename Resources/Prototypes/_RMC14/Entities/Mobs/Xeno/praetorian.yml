@@ -155,6 +155,9 @@
   id: RMCXenoPraetorianValkyrie
   suffix: Valkyrie
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleValkyrie
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Praetorian/valkyrie_praetorian.rsi
   - type: Xeno
@@ -222,6 +225,9 @@
   id: RMCXenoPraetorianDancer
   suffix: Dancer
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleDancer
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Praetorian/dancer_praetorian.rsi
   - type: Xeno
@@ -257,6 +263,9 @@
   id: RMCXenoPraetorianVanguard
   suffix: Vanguard
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleVanguard
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Praetorian/vanguard_praetorian.rsi
   - type: MobThresholds
@@ -305,6 +314,9 @@
   id: RMCXenoPraetorianOppressor
   suffix: Oppressor
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleOppressor
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Praetorian/oppressor_praetorian.rsi
   - type: Xeno
