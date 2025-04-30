@@ -1,4 +1,5 @@
-﻿using Content.Shared.GameTicking;
+﻿using Content.Shared._RMC14.Armor;
+using Content.Shared.GameTicking;
 using Content.Shared.Inventory;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
@@ -20,7 +21,7 @@ public sealed class SurvivorSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<EquipSurvivorPresetComponent, PlayerSpawnCompleteEvent>(OnPresetPlayerSpawnComplete);
+        SubscribeLocalEvent<EquipSurvivorPresetComponent, PlayerSpawnCompleteEvent>(OnPresetPlayerSpawnComplete, after: [typeof(CMArmorSystem)]);
     }
 
     private void OnPresetPlayerSpawnComplete(Entity<EquipSurvivorPresetComponent> ent, ref PlayerSpawnCompleteEvent args)
