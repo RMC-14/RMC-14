@@ -16,7 +16,7 @@
   - [bold]Order Construction[/bold]: Orders the construction of a hive structure.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoOrderConstruction"/>
   - [bold]Transfer Plasma[/bold]: Transfers plasma from yourself to a sister, upgraded.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoFortify"/>
+  <GuideEntityEmbed Entity="CMGuidebookActionXenoTransferPlasma"/>
   - [bold]Corrosive Acid[/bold]: Secretes a glob of acid on items to be dissolved, can be used on multiple items at a time.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoCorrosiveAcid"/>
   - [bold]Emit Pheromones[/bold]: Emits one of the three pheromones, strength of said pheromone is dependant on caste and does not stack with pheromones of the same type.
