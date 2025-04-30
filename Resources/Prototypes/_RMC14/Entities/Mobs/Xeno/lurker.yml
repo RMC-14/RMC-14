@@ -126,6 +126,9 @@
   id: RMCXenoLurkerVampire
   suffix: Vampire
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleVampire
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Lurker/vampire_lurker.rsi
   - type: Xeno
