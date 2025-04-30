@@ -9,7 +9,6 @@
 
   #Now what?
   First we must choose our hive location, this is not that all important and selecting where you spawn as your hive location will do. Once you have found a hive location follow the steps.
-
   <Box>
     <GuideEntityEmbed Entity="CMGuidebookActionXenoOrderConstruction"/>
     <GuideEntityEmbed Entity="HiveCoreXeno"/>
@@ -18,17 +17,14 @@
 
   - Use your Order Construction ability to create a hive core and then fill it with your plasma.
   - You can emit recovery pheremones to gain plasma to fill the hivecore, remember your pheromones are the strongest in the hive! 
-
   <Box>
     <GuideEntityEmbed Entity="XenoHiveWeeds"/>
     <GuideEntityEmbed Entity="CMGuidebookActionXenoGrowOvipositor"/>
   </Box>\n
 
   - Once filled, move ontop of the new hive weeds emitted from the hivecore then grow your ovipositor.
-  - Remember to stand still whhile growing your ovipositor.
 
   Well done, you have successfully grown your ovipositor to allow for your children to gain evolution and thrive, now you can set hive leaders which will emit the same pheros you are.
-
   <Box>
     <GuideEntityEmbed Entity="CMGuidebookActionXenoWatch"/>
     <GuideEntityEmbed Entity="CMGuidebookActionXenoLeader"/>
@@ -38,19 +34,20 @@
   - Once watching them, use the Choose leader ability to promote them to a leader, remember you can only have a max of 4.
   - Now press a movement key to return back to normal view, and emit a pheromone for your leaders, recovery for now will do.
 
-  Now you have some time to relax until skytalls land, with this you can draw a tacmap for your children or continue reading.
+  Now you have some time to relax until skytalls land, with this you can draw a tacmap or enter your Queen eye.
 
-  #What to do when skytalls come
+  ##Queen eye
+  This form is only usable while in ovi, during it you ascend to a plane above, able to monitor and secrete resin anywhere your weeds are. 
 
+  This can be used to scout enemy locations and build up the hive with resin.
+
+  ##What to do when skytalls come
   - War Queen
 
-  This strategy is to exit ovi when skytalls appear and roam around the map using your scream and neurospit to attack the talls, this brings great risk as all your children will likely gather around you making explosives very dangerous. To be a good war queen you must consider that wherever you go, the entire hive will follow, so with this do not lead your hive into extremely open ground or through fire and skybooms. Another tip for new war queens is to NEVER drag by yourself, you are the slowest at dragging talls and should leave it for others to drag talls that you scream or neurospit such as runners. As the war queen the biggest threat to you is a boomtuber that can kill you very easily, make sure to position around a boomtuber or target them during a scream attack. Second tip is to know that if you aren't screaming you might as well be in ovi, do not wait around for the most perfect scream.
+  In the case that you must get up to help aid the battle, make sure to be ready to neurospit and scream at any moment. Fighting at the frontline as a Queen involves the use of your frenzy pheromones and neurospit to drag lone marines, if there is a big group of marines then you can scream onto them, your biggest threat is the boomtuber so make sure to position around them.
 
-  Remember that xenos fight best in choked spaces and fortified ground, do not attempt to fight in open ground. If you war queen for too long you might have to enter ovi again to replenish your eggs and parasites which feed the birthing of new larva.
-
-  Two rules to follow as war queen or even as a xeno, don't die for a cap and don't die for ground.
+  Remember that Xenos fight best in choked spaces and fortified ground, do not attempt to fight in open ground.
 
   - Ovi Queen
   This strategy is to stay on ovi for preferably the whole duration of the fight, while on ovi your hive leaders will be able to emit your pheromones the whole way through which are 4x as strong, you can also remotely heal your children to aid them in battle and you will constantly give evolution and eggs.
-
 </Document>
