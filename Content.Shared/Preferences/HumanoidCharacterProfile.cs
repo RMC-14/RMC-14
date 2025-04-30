@@ -198,8 +198,6 @@ namespace Content.Shared.Preferences
             ArmorPreference = armorPreference;
             SquadPreference = squadPreference;
             _jobPriorities = jobPriorities;
-            _preferredJobVariants = preferredJobVariants;
-            PreferenceUnavailable = preferenceUnavailable;
             _antagPreferences = antagPreferences;
             _traitPreferences = traitPreferences;
             _loadouts = loadouts;
@@ -222,6 +220,7 @@ namespace Content.Shared.Preferences
             PlaytimePerks = playtimePerks;
             XenoPrefix = xenoPrefix;
             XenoPostfix = xenoPostfix;
+            _preferredJobVariants = preferredJobVariants;
         }
 
         /// <summary>Copy constructor</summary>
@@ -725,6 +724,21 @@ namespace Content.Shared.Preferences
             };
 
             ArmorPreference = armorPreference;
+
+            var jobVariants = new Dictionary<ProtoId<JobPrototype>, ProtoId<JobPrototype>>(PreferredJobVariants
+                .Where(p =>
+                    prototypeManager.TryIndex<JobPrototype>(p.Value, out _) && // Validate the prototype
+                    prototypeManager.TryIndex<JobPrototype>(p.Key, out var job) &&
+                    job.JobVariantsPerPlanet is not null
+                )
+            );
+
+            _preferredJobVariants.Clear();
+
+            foreach (var (job, variant) in jobVariants)
+            {
+                _preferredJobVariants.Add(job, variant);
+            }
 
             if (!prototypeManager.TryIndex(SquadPreference, out var squad) ||
                 !squad.TryGetComponent(out SquadTeamComponent? team, compFactory) ||

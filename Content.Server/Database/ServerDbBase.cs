@@ -209,6 +209,8 @@ namespace Content.Server.Database
             if (Enum.TryParse<ArmorPreference>(profile.ArmorPreference, true, out var armorVal))
                 armorPreference = armorVal;
 
+            var jobVariants = profile.Jobs.ToDictionary(j => new ProtoId<JobPrototype>(j.JobName), j => (ProtoId<JobPrototype>) j.PreferredVariant);
+
             var gender = sex == Sex.Male ? Gender.Male : Gender.Female;
             if (Enum.TryParse<Gender>(profile.Gender, true, out var genderVal))
                 gender = genderVal;
@@ -288,7 +290,8 @@ namespace Content.Server.Database
                 },
                 profile.PlaytimePerks,
                 profile.XenoPrefix,
-                profile.XenoPostfix
+                profile.XenoPostfix,
+                jobVariants
             );
         }
 
@@ -323,10 +326,15 @@ namespace Content.Server.Database
             profile.PreferenceUnavailable = (DbPreferenceUnavailableMode) humanoid.PreferenceUnavailable;
 
             profile.Jobs.Clear();
-            profile.Jobs.AddRange(
+            profile.Jobs.AddRange( // RMC14 job variants
                 humanoid.JobPriorities
                     .Where(j => j.Value != JobPriority.Never)
-                    .Select(j => new Job {JobName = j.Key, Priority = (DbJobPriority) j.Value})
+                    .Select(j => new Job
+                    {
+                        JobName = j.Key,
+                        Priority = (DbJobPriority)j.Value,
+                        PreferredVariant = humanoid.PreferredJobVariants.TryGetValue(j.Key, out var variant) ? variant : variant,
+                    })
             );
 
             profile.Antags.Clear();

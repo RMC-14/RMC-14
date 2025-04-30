@@ -121,10 +121,6 @@ namespace Content.Server.Database
                 .HasIndex(j => new { j.ProfileId, j.JobName })
                 .IsUnique();
 
-            modelBuilder.Entity<Job>()
-                .Property(j => j.PreferredVariant)
-                .HasDefaultValue(null);
-
             modelBuilder.Entity<AssignedUserId>()
                 .HasIndex(p => p.UserName)
                 .IsUnique();

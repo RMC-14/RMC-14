@@ -3,6 +3,7 @@
   id: CMSurvivor
   name: cm-job-name-base-survivor
   description: cm-job-description-survivor
+  playTimeTracker: CMJobBaseSurvivor
   jobVariantsPerPlanet:
     RMCPlanetLV624:
     - CMCivilianSurvivor
@@ -59,6 +60,10 @@
     - CMSurvivorSecurity
     - CMSurvivorCorporate
   hidden: false
+
+- type: playTimeTracker
+  id: CMJobBaseSurvivor
+  isHumanoid: true
 
 - type: entity
   parent: CMSpawnPointJobBase

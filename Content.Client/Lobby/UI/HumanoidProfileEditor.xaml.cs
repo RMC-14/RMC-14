@@ -1139,6 +1139,8 @@ namespace Content.Client.Lobby.UI
                                 ReloadPreview();
                                 SetDirty();
                             };
+
+                            jobContainer.AddChild(jobVariantsSelector);
                         }
                     }
 
