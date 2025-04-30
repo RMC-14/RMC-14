@@ -21,6 +21,7 @@ using Content.Shared.Weapons.Melee;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Armor;
 
@@ -31,6 +32,7 @@ public sealed class CMArmorSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly ISerializationManager _serializationManager = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> ArmorGroup = "Brute";
@@ -426,6 +428,9 @@ public sealed class CMArmorSystem : EntitySystem
 
     private void OnAllowSuitStorageUserWhitelistGotUnequipped(Entity<RMCAllowSuitStorageUserWhitelistComponent> ent, ref GotUnequippedEvent args)
     {
+        if (_timing.ApplyingState)
+            return;
+
         var comp = EnsureComp<AllowSuitStorageComponent>(ent);
         comp.Whitelist = _serializationManager.CreateCopy(ent.Comp.DefaultWhitelist, notNullableOverride: true);
         Dirty(ent, comp);
@@ -433,6 +438,9 @@ public sealed class CMArmorSystem : EntitySystem
 
     private void OnAllowSuitStorageWhitelistEquipped(Entity<RMCAllowSuitStorageUserWhitelistComponent> ent, EntityUid user)
     {
+        if (_timing.ApplyingState)
+            return;
+
         if (!_entityWhitelist.IsWhitelistPass(ent.Comp.User, user))
         {
             var comp = EnsureComp<AllowSuitStorageComponent>(ent);
