@@ -13,7 +13,7 @@
   <GuideEntityEmbed Entity="CMGuidebookActionXenoHighGallop"/>
   - [bold]Fight or Flight[/bold]: Upon usage, it will remove any debuffs from fellow Xenos, including stun, slow and daze. Its effective range can further be enhanced by having the same amount of fury you need for this ability left upon usage. Due to its hefty costs in fury, plasma and long cooldown, it is advised to use it sparingly.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoFightOrFlight"/>
-  - [bold]Retrieve[/bold]:Saves Xenos from a distance by dragging them into safety. This uses half of your fury to reel in a Xeno in dire need of help. It may not work on certain caste while they stand up - mainly Queen and Crusher - meaning they need to lay down or be in critical health.
+  - [bold]Retrieve[/bold]: Saves Xenos from a distance by dragging them into safety. This uses half of your fury to reel in a Xeno in dire need of help. It may not work on certain caste while they stand up - mainly Queen and Crusher - meaning they need to lay down or be in critical health.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoRetrieve"/>
   - [bold]Emit Pheromones[/bold]: Emits one of the three pheromones, strength of said pheromone is dependant on caste and does not stack with pheromones of the same type.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoPheromones"/>
