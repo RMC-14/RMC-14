@@ -64,7 +64,7 @@
 - type: entity
   parent: RMCSurvivorPresetCivilian
   id: RMCSurvivorPresetEngineer
-  name: engineer survivor preset
+  name: engineer colonist preset
   components:
   - type: SurvivorPreset
     randomGearOther:
@@ -74,7 +74,7 @@
 - type: entity
   parent: MarkerBase
   id: RMCRandomHumanoidSurvivorEngineer
-  name: engineer survivor ghost role
+  name: engineer colonist ghost role
   components:
   - type: Sprite
     layers:

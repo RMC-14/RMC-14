@@ -72,12 +72,12 @@
 - type: entity
   parent: RMCSurvivorPresetCivilian
   id: RMCSurvivorPresetCorporate
-  name: corporate survivor preset # TODO RMC14 random research notes
+  name: corporate colonist preset # TODO RMC14 random research notes
 
 - type: entity
   parent: MarkerBase
   id: RMCRandomHumanoidSurvivorCorporate
-  name: corporate survivor ghost role
+  name: corporate colonist ghost role
   components:
   - type: Sprite
     layers:

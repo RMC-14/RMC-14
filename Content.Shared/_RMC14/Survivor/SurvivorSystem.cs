@@ -1,4 +1,5 @@
-﻿using Content.Shared.Inventory;
+﻿using Content.Shared.GameTicking;
+using Content.Shared.Inventory;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Network;
@@ -19,10 +20,10 @@ public sealed class SurvivorSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<EquipSurvivorPresetComponent, MapInitEvent>(OnPresetMapInit);
+        SubscribeLocalEvent<EquipSurvivorPresetComponent, PlayerSpawnCompleteEvent>(OnPresetPlayerSpawnComplete);
     }
 
-    private void OnPresetMapInit(Entity<EquipSurvivorPresetComponent> ent, ref MapInitEvent args)
+    private void OnPresetPlayerSpawnComplete(Entity<EquipSurvivorPresetComponent> ent, ref PlayerSpawnCompleteEvent args)
     {
         ApplyPreset(ent, ent.Comp.Preset);
     }

@@ -68,7 +68,7 @@
 - type: entity
   parent: RMCSurvivorPresetCivilian
   id: RMCSurvivorPresetSecurity
-  name: security survivor preset
+  name: security colonist preset
   components:
   - type: SurvivorPreset
     primaryWeapons:
@@ -80,7 +80,7 @@
 - type: entity
   parent: MarkerBase
   id: RMCRandomHumanoidSurvivorSecurity
-  name: security survivor ghost role
+  name: security colonist ghost role
   components:
   - type: Sprite
     layers:

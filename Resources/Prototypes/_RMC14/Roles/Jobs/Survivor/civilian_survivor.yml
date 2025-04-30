@@ -82,7 +82,8 @@
 
 - type: entity
   id: RMCSurvivorPresetCivilian
-  name: civilian survivor preset
+  name: civilian colonist preset
+  categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
     randomGear:
@@ -108,7 +109,7 @@
 - type: entity
   parent: MarkerBase
   id: RMCRandomHumanoidSurvivorCivilian
-  name: civilian survivor ghost role
+  name: civilian colonist ghost role
   components:
   - type: Sprite
     layers:

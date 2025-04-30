@@ -63,7 +63,7 @@
 - type: entity
   parent: RMCSurvivorPresetCivilian
   id: RMCSurvivorPresetDoctor
-  name: doctor survivor preset
+  name: doctor colonist preset
   components:
   - type: SurvivorPreset
     randomGearOther:
@@ -82,7 +82,7 @@
 - type: entity
   parent: MarkerBase
   id: RMCRandomHumanoidSurvivorDoctor
-  name: doctor survivor ghost role
+  name: doctor colonist ghost role
   components:
   - type: Sprite
     layers:
