@@ -44,7 +44,6 @@
     containers:
       key_slots:
       - CMEncryptionKeyCommon
-  - type: GrantMarineIcons
   - type: GrantTacMapAlert
 
 - type: entity
@@ -374,9 +373,25 @@
   - type: RMCHeadset
     radioTextIncrease: 3
 
+- type: entity
+  parent: CMHeadsetSeniorCommand
+  id: RMCHeadsetSynth
+  name: marine synth headset
+  description: Issued only to UNMC synthetics.
+  components:
+  - type: Sprite
+    state: ms_headset
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
+      - RMCEncryptionKeyMarineCommand
+  - type: HeadsetMultiBroadcast
+    cooldown: 60
+    
 # Prisoner headset
 - type: entity
   parent: RMCHeadsetShip
   id: RMCHeadsetPrisoner
   name: prisoner headset
-  description: Headset provided to prisoners in brig.
+  description: Headset provided to prisoners as directed by marine law.

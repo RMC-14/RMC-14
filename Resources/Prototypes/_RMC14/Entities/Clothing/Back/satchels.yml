@@ -186,8 +186,8 @@
 - type: entity
   parent: CMSatchel
   id: CMSatchelMarine
-  name: Marine satchel
-  description: A heavy-duty satchel carried by some Marine soldiers and support personnel.
+  name: UNMC satchel
+  description: A heavy-duty satchel carried by some UNMC soldiers and support personnel.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/standard/jungle-desert-classic.rsi
