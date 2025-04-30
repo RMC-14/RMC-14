@@ -246,8 +246,6 @@
   components:
   - type: PresetIdCard
     job: RMCProvostMarshal
-  - type: IdCard
-    jobTitle: rmc-job-title-freelancer
 
 - type: entity
   parent: CMIDCardGold
