@@ -146,6 +146,15 @@
         "name": "paper_stamp-clf"
     },
     {
+        "name": "paper_stamp-spp"
+    },
+    {
+        "name": "paper_stamp-tse"
+    },
+    {
+        "name": "paper_stamp-free-press"
+    },
+    {
       "name": "stamp-hos"
     },
     {
@@ -183,6 +192,18 @@
     },
     {
       "name": "stamp-cmb"
+    },
+    {
+        "name": "stamp-clf"
+    },
+    {
+        "name": "stamp-spp"
+    },
+    {
+        "name": "stamp-tse"
+    },
+    {
+        "name": "stamp-free-press"
     },
     {
       "name": "stamp-intaff"

@@ -150,7 +150,7 @@
   parent: CMStampBase
   id: CMStampMarine
   name: marine rubber stamp
-  suffix: Admin
+  suffix: Admin, unmc
   components:
   - type: Sprite
     state: stamp-marine
@@ -163,7 +163,7 @@
   parent: CMStampBase
   id: CMStampCMB
   name: colony marshal bureau rubber stamp
-  suffix: Admin
+  suffix: Admin, cmb
   components:
   - type: Sprite
     state: stamp-cmb
@@ -176,7 +176,7 @@
   parent: CMStampBase
   id: CMStampProvost
   name: provost rubber stamp
-  suffix: Admin
+  suffix: Admin, provost
   components:
   - type: Sprite
     state: stamp-provost # update sprite
@@ -187,9 +187,9 @@
 
 - type: entity
   parent: CMStampBase
-  id: CMStampCLF
+  id: RMCStampCLF
   name: colonial liberation front rubber stamp
-  suffix: Admin
+  suffix: Admin, CLF
   components:
   - type: Sprite
     state: stamp-clf
@@ -200,9 +200,9 @@
 
 - type: entity
   parent: CMStampBase
-  id: CMStampSPP
+  id: RMCStampSPP
   name: socialist progressive peoples rubber stamp
-  suffix: Admin
+  suffix: Admin, SPP
   components:
   - type: Sprite
     state: stamp-spp
@@ -213,9 +213,9 @@
 
 - type: entity
   parent: CMStampBase
-  id: CMStampTSE
+  id: RMCStampTSE
   name: three suns empire rubber stamp
-  suffix: Admin
+  suffix: Admin, TSE
   components:
   - type: Sprite
     state: stamp-tse
@@ -226,13 +226,13 @@
 
 - type: entity
   parent: CMStampBase
-  id: CMStampFreePress
+  id: RMCStampFreePress
   name: free press rubber stamp
-  suffix: Admin
+  suffix: Admin, press
   components:
   - type: Sprite
     state: stamp-free-press
   - type: Stamp
     stampedName: stamp-component-stamped-name-cm-free-press
-    stampedColor: "#EBEBEB"
+    stampedColor: "#1e5bd2"
     stampState: "paper_stamp-free-press"
