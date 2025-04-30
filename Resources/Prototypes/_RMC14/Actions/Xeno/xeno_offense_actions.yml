@@ -1145,7 +1145,7 @@
     deselectOnMiss: false
   - type: ActionBlockIfResting
   - type: XenoOffensiveAction
-  
+
 - type: entity
   parent: ActionXenoBase
   id: ActionXenoFlurry
