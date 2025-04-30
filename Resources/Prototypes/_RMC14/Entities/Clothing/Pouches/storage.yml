@@ -318,6 +318,10 @@
     items:
       tags:
       - RMCShellShotgun
+  - type: Tag
+    tags:
+    - Pouch
+    - RMCPouchShotgunShells
 
 
 # Large Shotgun Shell Pouch
@@ -672,3 +676,6 @@
     contents:
     - id: RMCMagazineSmartGunirradiated
       amount: 3
+
+- type: Tag
+  id: RMCPouchShotgunShells

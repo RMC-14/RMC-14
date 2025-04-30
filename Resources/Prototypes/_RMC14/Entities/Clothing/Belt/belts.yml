@@ -90,6 +90,24 @@
       Classic: _RMC14/Objects/Clothing/Belt/shotgun/jungle-classic.rsi
 
 - type: entity
+  parent: RMCM276ShotgunShellLoadingRig
+  id: RMCM276ShotgunShellLoadingRigFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 2
+    - id: CMShellShotgunSlugs
+      amount: 3
+    - id: CMShellShotgunFlechette
+      amount: 3
+    - id: CMShellShotgunIncendiary
+      amount: 3
+    - id: CMShellShotgunIncendiaryBuckshot
+      amount: 3
+
+- type: entity
   parent: CMBeltBaseStorage
   id: CMBeltUtility
   name: M276 pattern toolbelt rig
