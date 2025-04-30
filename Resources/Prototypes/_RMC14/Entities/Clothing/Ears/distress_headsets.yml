@@ -12,7 +12,7 @@
 
 # For Bureau Marshals
 - type: entity
-  parent: CMHeadset
+  parent: RMCHeadsetIcons
   id: RMCHeadsetDistressBureau
   name: bureau earpiece
   description: A sleek headset used by The Colonial Marshal Bureau, crafted in Sol. Low profile and comfortable. No one is above the law.
@@ -24,7 +24,7 @@
 
 # For WeYa civilians
 - type: entity
-  parent: CMHeadset
+  parent: RMCHeadsetIcons
   id: RMCHeadsetDistressWeYa
   name: WeYa corporate headset
   description: A headset commonly worn by WeYa corporate personnel.
@@ -36,7 +36,7 @@
 
 # For WeYa PMC
 - type: entity
-  parent: CMHeadset
+  parent: RMCHeadsetIcons
   id: RMCHeadsetDistressPMC
   name: PMC headset
   description: A special headset used by corporate personnel.
@@ -60,7 +60,7 @@
     radioTextIncrease: 2
 
 - type: entity
-  parent: CMHeadset
+  parent: RMCHeadsetIcons
   id: RMCHeadsetDistressPMCDirector
   name: PMC headset
   description: A special headset used by corporate personnel.
@@ -78,7 +78,7 @@
 
 # For Duke's Dozen/Freelancer
 - type: entity
-  parent: CMHeadset
+  parent: RMCHeadsetIcons
   id: RMCHeadsetDistressDukes
   name: Duke's Dozen headset
   description: A special headset used by small groups of trained operatives. Or terrorists.
