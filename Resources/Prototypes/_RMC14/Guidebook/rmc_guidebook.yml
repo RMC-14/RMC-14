@@ -80,11 +80,16 @@
   - RMCGuideRoleWarrior
   - RMCGuideRoleSpitter
   - RMCGuideRoleLurker
+  - RMCGuideRoleVampire
   - RMCGuideRoleHivelord
   - RMCGuideRoleBurrower
   - RMCGuideRoleCarrier
+  - RMCGuideRoleEggsac
   - RMCGuideRoleCrusher
   - RMCGuideRolePraetorian
+  - RMCGuideRoleOppressor
+  - RMCGuideRoleValkyrie
+  - RMCGuideRoleVanguard
   - RMCGuideRoleRavager
   - RMCGuideRoleBoiler
   - RMCGuideRoleQueen
@@ -289,13 +294,48 @@
   name: "Resin Holes Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideResinHoles.xml"
 
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideRoleValkyrie
+  priority: 27
+  name: "Valkyrie Guide"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleValkyrie.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideRoleOppressor
+  priority: 26=8
+  name: "Oppressor Guide"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleOppressor.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideRoleVanguard
+  priority: 29
+  name: "Vanguard Guide"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleVanguard.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideRoleEggsac
+  priority: 30
+  name: "Eggsac Guide"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleEggsac.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideRoleVampire
+  priority: 31
+  name: "Vampire Guide"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleVampire.xml"
+
 # Chemistry stuff
 - type: guideEntry
   parent: RMC
   id: RMCChemicals
   name: guide-entry-chemicals
   text: "/ServerInfo/Guidebook/_RMC14/Chemicals/RMCChemicals.xml"
-  priority: 27
+  priority: 32
   children:
   #  - RMCElements
   - RMCMedicine
