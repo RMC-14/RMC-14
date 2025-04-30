@@ -108,7 +108,7 @@ public sealed class XenoSystem : EntitySystem
         _xenoRecoveryQuery = GetEntityQuery<XenoRecoveryPheromonesComponent>();
         _victimInfectedQuery = GetEntityQuery<VictimInfectedComponent>();
 
-        SubscribeLocalEvent<XenoComponent, MapInitEvent>(OnXenoMapInit);
+        SubscribeLocalEvent<XenoComponent, MapInitEvent>(OnXenoMapInit, before: [typeof(SharedXenoPheromonesSystem)]);
         SubscribeLocalEvent<XenoComponent, GetAccessTagsEvent>(OnXenoGetAdditionalAccess);
         SubscribeLocalEvent<XenoComponent, NewXenoEvolvedEvent>(OnNewXenoEvolved);
         SubscribeLocalEvent<XenoComponent, XenoDevolvedEvent>(OnXenoDevolved);
@@ -124,11 +124,13 @@ public sealed class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, RMCIgniteEvent>(OnXenoIgnite);
         SubscribeLocalEvent<XenoComponent, CanDragEvent>(OnXenoCanDrag);
         SubscribeLocalEvent<XenoComponent, BuckleAttemptEvent>(OnXenoBuckleAttempt);
-        SubscribeLocalEvent<XenoComponent, DamageStateCritBeforeDamageEvent>(OnXenoBeforeCritDamage, before: [typeof(SharedXenoPheromonesSystem)]);
         SubscribeLocalEvent<XenoComponent, GetVisMaskEvent>(OnXenoGetVisMask);
         SubscribeLocalEvent<XenoComponent, CMDisarmEvent>(OnLeaderDisarmed,
             before: [typeof(SharedHandsSystem), typeof(StaminaSystem)],
             after: [typeof(TackleSystem)]);
+
+        SubscribeLocalEvent<XenoRegenComponent, MapInitEvent>(OnXenoRegenMapInit, before: [typeof(SharedXenoPheromonesSystem)]);
+        SubscribeLocalEvent<XenoRegenComponent, DamageStateCritBeforeDamageEvent>(OnXenoRegenBeforeCritDamage, before: [typeof(SharedXenoPheromonesSystem)]);
 
         Subs.CVar(_config, RMCCVars.CMXenoDamageDealtMultiplier, v => _xenoDamageDealtMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMXenoDamageReceivedMultiplier, v => _xenoDamageReceivedMultiplier = v, true);
@@ -148,9 +150,6 @@ public sealed class XenoSystem : EntitySystem
                 xeno.Comp.Actions[actionId] = newAction;
             }
         }
-
-        xeno.Comp.NextRegenTime = _timing.CurTime + xeno.Comp.RegenCooldown;
-        Dirty(xeno);
 
         if (!MathHelper.CloseTo(_xenoSpeedMultiplier, 1))
             _movementSpeed.RefreshMovementSpeedModifiers(xeno);
@@ -302,15 +301,6 @@ public sealed class XenoSystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private void OnXenoBeforeCritDamage(Entity<XenoComponent> ent, ref DamageStateCritBeforeDamageEvent args)
-    {
-        if (!_rmcFlammable.IsOnFire(ent.Owner) || (!ent.Comp.HealOffWeeds && !_weeds.IsOnWeeds(ent.Owner)))
-            return;
-
-        //Don't take bleedout damage on fire or on weeds
-        args.Damage.ClampMax(0);
-    }
-
     private void OnXenoGetVisMask(Entity<XenoComponent> ent, ref GetVisMaskEvent args)
     {
         args.VisibilityMask |= (int) ent.Comp.Visibility;
@@ -336,6 +326,21 @@ public sealed class XenoSystem : EntitySystem
         _stun.TryParalyze(ent, leader.FriendlyStunTime, true);
     }
 
+    private void OnXenoRegenMapInit(Entity<XenoRegenComponent> ent, ref MapInitEvent args)
+    {
+        ent.Comp.NextRegenTime = _timing.CurTime + ent.Comp.RegenCooldown;
+        Dirty(ent);
+    }
+
+    private void OnXenoRegenBeforeCritDamage(Entity<XenoRegenComponent> ent, ref DamageStateCritBeforeDamageEvent args)
+    {
+        if (!_rmcFlammable.IsOnFire(ent.Owner) || (!ent.Comp.HealOffWeeds && !_weeds.IsOnWeeds(ent.Owner)))
+            return;
+
+        //Don't take bleedout damage on fire or on weeds
+        args.Damage.ClampMax(0);
+    }
+
     private void UpdateXenoSpeedMultiplier(float speed)
     {
         _xenoSpeedMultiplier = speed;
@@ -352,7 +357,7 @@ public sealed class XenoSystem : EntitySystem
         EnsureComp<XenoComponent>(xeno);
     }
 
-    private FixedPoint2 GetWeedsHealAmount(Entity<XenoComponent> xeno)
+    private FixedPoint2 GetWeedsHealAmount(Entity<XenoRegenComponent> xeno)
     {
         if (!_mobThresholdsQuery.TryComp(xeno, out var thresholds) ||
             !_mobThresholds.TryGetIncapThreshold(xeno, out var threshold, thresholds))
@@ -454,14 +459,14 @@ public sealed class XenoSystem : EntitySystem
     public override void Update(float frameTime)
     {
         var time = _timing.CurTime;
-        var query = EntityQueryEnumerator<XenoComponent>();
+        var query = EntityQueryEnumerator<XenoRegenComponent>();
         while (query.MoveNext(out var uid, out var xeno))
         {
             if (time < xeno.NextRegenTime)
                 continue;
 
             xeno.NextRegenTime = time + xeno.RegenCooldown;
-            Dirty(uid, xeno);
+            DirtyField(uid, xeno, nameof(XenoRegenComponent.NextRegenTime));
 
             if (!xeno.HealOffWeeds)
             {

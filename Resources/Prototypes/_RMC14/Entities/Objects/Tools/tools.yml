@@ -177,3 +177,24 @@
     - type: Item
       size: Normal
       sprite: _RMC14/Objects/Tools/hand_labeler.rsi
+
+- type: entity
+  parent: Shovel
+  id: RMCShovel
+  suffix: RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/shovel.rsi
+    state: icon
+  - type: Item
+    size: Normal
+    sprite: _RMC14/Objects/Tools/shovel.rsi
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - Suitstorage
+  - type: UseDelay
+    delay: 0.25
+  - type: Appearance
+  - type: XenoTunnelFiller
+  - type: Shovel

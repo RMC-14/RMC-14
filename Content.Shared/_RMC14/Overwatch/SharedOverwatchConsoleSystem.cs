@@ -547,7 +547,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         var players = Filter.Empty().AddInRange(coordinates, 12, _player, EntityManager);
         players.RemoveWhereAttachedEntity(HasComp<XenoComponent>);
 
-        var userMsg = $"[bold][color=#6685F5]Message '{message}' sent to all Marines of squad '{Name(squad.Value)}'.[/color][/bold]";
+        var userMsg = $"[bold][color=#6685F5]'{Name(squad.Value)}' squad message sent: '{message}'.[/color][/bold]";
         var author = CompOrNull<ActorComponent>(args.Actor)?.PlayerSession.UserId;
         _rmcChat.ChatMessageToMany(userMsg, userMsg, players, ChatChannel.Local, author: author);
     }
