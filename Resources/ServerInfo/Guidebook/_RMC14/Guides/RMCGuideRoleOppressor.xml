@@ -1,6 +1,6 @@
 <Document>
   #Oppressor, Tier 3
-  <GuideEntityEmbed Entity="CMXenoOppressor"/>
+  <GuideEntityEmbed Entity="RMCXenoOppressor"/>
   ##Playing as a Oppressor
   You are now specialized in being the Queen of Fishing. Firstly let's see what's changed from your Base form. Trade a portion of your speed, a bit of slash damage, slight loss in armor, and acid abilities to become a bulwark of the Queen that gains stun resistance from grenades. Your slashes deal increased damage to prone targets, and you gain a lash that knocks over and flings opponents in front of you as well as a two abilities that can pull in marines.
 
@@ -13,10 +13,10 @@
   - 2 people will drag them in front of you, slow them, daze them and briefly root them.
   - 3 or more people will drag them in front of you, slow them and briefly stun them.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoAbduct"/>
-  - [bold]Dislocate: A powerful punch, similar to the warrior's punch. Deals 20 armor piercing damage, 40 if your enemy is slowed. Will also root slowed targets. Reduces other ability cooldowns by 5 seconds.
+  - [bold]Dislocate[/bold]: A powerful punch, similar to the warrior's punch. Deals 20 armor piercing damage, 40 if your enemy is slowed. Will also root slowed targets. Reduces other ability cooldowns by 5 seconds.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoDislocate"/>
-  - [bold]Tail Lash: Knock marines back in a 2x3 area in front of you and slow them. Take note that this ability has a wind up.
+  - [bold]Tail Lash[/bold]: Knock marines back in a 2x3 area in front of you and slow them. Take note that this ability has a wind up.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoTailLash"/>
-  - [bold]Tail Seize: The Oppressor has a unique tail stab, instead called Tail Seize. It has a range of 3 tiles - however, it deals no damage, instead pulling the target in towards you and slowing them for 0.5 seconds upon their arrival.
+  - [bold]Tail Seize[/bold]: The Oppressor has a unique tail stab, instead called Tail Seize. It has a range of 3 tiles - however, it deals no damage, instead pulling the target in towards you and slowing them for 0.5 seconds upon their arrival.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoTailSeize"/>
 </Document>
