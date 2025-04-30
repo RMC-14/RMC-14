@@ -614,17 +614,20 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     if (!ev.Profiles.TryGetValue(id, out var profile))
                         continue;
 
-                    if (_prototypes.TryIndex<JobPrototype>(comp.CivilianSurvivorJob, out var survJob))
+                    if (profile.JobPriorities.TryGetValue(job, out var priority) && priority > JobPriority.Never)
                     {
-                        // Players with the preferred variant get high priority
-                        // Players with the none variant get medium priority
-                        // Players with another preferred variant get low priority
-                        if (GetPreferredJobVariant(profile, survJob, out var preferredVariant) && preferredVariant.ID == job)
-                            players[(int)JobPriority.High].Add(id);
-                        else if (preferredVariant == null)
-                            players[(int)JobPriority.Medium].Add(id);
-                        else
-                            players[(int)JobPriority.Low].Add(id);
+                        if (_prototypes.TryIndex<JobPrototype>(comp.CivilianSurvivorJob, out var survJob))
+                        {
+                            // Players with the preferred variant get high priority
+                            // Players with the none variant get medium priority
+                            // Players with another preferred variant get low priority
+                            if (GetPreferredJobVariant(profile, survJob, out var preferredVariant) && preferredVariant.ID == job)
+                                players[(int)JobPriority.High].Add(id);
+                            else if (preferredVariant == null)
+                                players[(int)JobPriority.Medium].Add(id);
+                            else
+                                players[(int)JobPriority.Low].Add(id);
+                        }
                     }
                 }
             }

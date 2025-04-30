@@ -677,7 +677,9 @@ namespace Content.Server.Database.Migrations.Postgres
 
                     b.Property<string>("PreferredVariant")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("text")
+                        .HasDefaultValue("")
                         .HasColumnName("preferred_variant");
 
                     b.Property<int>("Priority")

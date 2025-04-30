@@ -329,11 +329,15 @@ namespace Content.Server.Database
             profile.Jobs.AddRange( // RMC14 job variants
                 humanoid.JobPriorities
                     .Where(j => j.Value != JobPriority.Never)
-                    .Select(j => new Job
+                    .Select(j =>
                     {
-                        JobName = j.Key,
-                        Priority = (DbJobPriority)j.Value,
-                        PreferredVariant = humanoid.PreferredJobVariants.TryGetValue(j.Key, out var variant) ? variant : variant,
+                        humanoid.PreferredJobVariants.TryGetValue(j.Key, out var variant);
+                        return new Job
+                        {
+                            JobName = j.Key,
+                            Priority = (DbJobPriority)j.Value,
+                            PreferredVariant = variant
+                        };
                     })
             );
 

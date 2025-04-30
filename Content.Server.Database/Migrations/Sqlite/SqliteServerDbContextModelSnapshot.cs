@@ -640,7 +640,9 @@ namespace Content.Server.Database.Migrations.Sqlite
 
                     b.Property<string>("PreferredVariant")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
+                        .HasDefaultValue("")
                         .HasColumnName("preferred_variant");
 
                     b.Property<int>("Priority")
