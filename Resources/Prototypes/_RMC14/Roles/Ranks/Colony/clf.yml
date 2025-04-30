@@ -6,9 +6,4 @@
 - type: rank
   id: RMCRankCLFRebelCommander
   name: Rebel Commander
-  prefix: CMDR.
-
-- type: rank
-  id: RMCRankCLFRebelResponder
-  name: Rebel Information Correspondent
-  prefix: REBINFO.
+  prefix: REBC.

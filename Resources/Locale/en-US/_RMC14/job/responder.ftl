@@ -32,6 +32,7 @@ rmc-job-description-free-press-responder = "You are a promiment regional editor,
 #CLF fax responder
 rmc-job-name-clf-responder = CLF Information Correspondent
 rmc-job-description-clf-responder = "You are a member of a regional CLF cell. Inform and recieve information from local cells."
+rmc-job-prefix-clf-responder = INFO
 
 #SPP fax responder
 rmc-job-name-spp-responder = SPP Communications Officer

@@ -5,7 +5,7 @@
   description: rmc-job-description-clf-responder
   playTimeTracker: RMCJobCLFResponder
   ranks:
-    RMCRankCLFRebelResponder: []
+    RMCRankCLFRebelCommander: []
   startingGear: RMCGearCLFResponder
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
@@ -29,6 +29,8 @@
         RMCSkillPowerLoader: 1
         RMCSkillSurgery: 1
         RMCSkillVehicles: 2
+    - type: JobPrefix
+      prefix: rmc-job-prefix-clf-responder
   hasIcon: false
   hidden: true
 
