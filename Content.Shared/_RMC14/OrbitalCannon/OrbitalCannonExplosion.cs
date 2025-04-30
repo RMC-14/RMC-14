@@ -49,4 +49,7 @@ public sealed partial class OrbitalCannonExplosion
 
     [DataField]
     public bool CheckProtectionPer;
+
+    [DataField]
+    public EntProtoId? ExplosionEffect;
 }

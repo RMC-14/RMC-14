@@ -135,7 +135,7 @@
   - tasks:
     - !type:HTNPrimitiveTask
       operator: !type:UtilityOperator
-        proto: RMCNearbyGunXenos
+        proto: RMCNearbyGun
 
     - !type:HTNPrimitiveTask
       preconditions:
@@ -155,15 +155,15 @@
       services:
       - !type:UtilityService
         id: RangedService
-        proto: RMCNearbyGunXenos
+        proto: RMCNearbyGun
         key: Target
 
 - type: utilityQuery
-  id: RMCNearbyGunXenos
+  id: RMCNearbyGun
   query:
   - !type:NearbyHostilesQuery
   considerations:
-  - !type:TargetXenoCon
+  - !type:TargetIsNotConstructCon
     curve: !type:BoolCurve
   - !type:TargetIsNotDeadCon
     curve: !type:BoolCurve
@@ -265,6 +265,30 @@
     deployDelay: 0.75
     undeployDelay: 0.75
     upgrades: null
+
+- type: entity
+  parent: RMCSentryMini
+  id: RMCSentryMiniWeYa
+  name: We-Ya 512-M mini sentry
+  description: A compact version of the UNMC defenses. Designed for quick deployment of the associated type in the field. This one has been modified for use by the mercenaries employed by Weston-Yamada.
+  components:
+  - type: NpcFactionMember
+    factions:
+    - WeYa
+  - type: UserIFF
+    faction: FactionWeYa
+
+- type: entity
+  parent: RMCSentryMini
+  id: RMCSentryMiniSPP # TODO RMC14: Replace with the real one.
+  name: SPP SDS-R8 light sentry
+  description: A compact version of the SPP defense sentry SDS-R7. Designed for deployment in the field.
+  components:
+  - type: NpcFactionMember
+    factions:
+    - SPP
+  - type: UserIFF
+    faction: FactionSPP
 
 - type: entity
   parent: RMCSentry

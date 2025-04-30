@@ -561,6 +561,25 @@
   - FoodHealthyRMC
   - RMCLoadoutGroupPins
 
+- type: roleLoadout
+  id: JobRMCSynthetic
+  points: 7
+  groups:
+  - MarineBackpack
+  - HeadwearRMC
+  - EyewearRMC
+  - MasksRMC
+  - HelmetGarbsRMC
+  - PaperworkRMC
+  - PlushiesRMC
+  - WeaponsRMC
+  - CannedDrinksRMC
+  - FlasksRMC
+  - FoodSweetsRMC
+  - FoodPackagedRMC
+  - FoodHealthyRMC
+  - RMCLoadoutGroupPins
+
 # Requsitions
 - type: roleLoadout
   id: JobCMCargoTech

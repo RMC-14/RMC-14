@@ -1,11 +1,12 @@
-- type: entity
+﻿- type: entity
+  abstract: true
   parent:
   - CMXenoDeveloped
-  - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
-  id: CMXenoLurker
+  - RMCXenoMobCollision
+  id: RMCXenoLurkerBase
   name: Lurker
   description: A beefy, fast alien with sharp claws.
   components:
@@ -37,6 +38,7 @@
     tier: 2
     hudOffset: -0.15,0.05
     unlockAt: 540 # 9 minutes
+  - type: XenoRegen
     restHealMultiplier:  1.5
   - type: XenoLight
   - type: XenoDevolve
@@ -53,16 +55,6 @@
     max: 500
     evolvesTo:
     - CMXenoRavager
-  - type: XenoLeap
-    plasmaCost: 20
-    delay: 0
-    moveDelayTime: 1.5
-    knockdownTime: 5
-    leapSound: /Audio/_RMC14/Xeno/alien_pounce.ogg
-    knockdownRequiresInvisibility: true
-    unrootOnMelee: true
-  - type: XenoTurnInvisible
-  - type: XenoCripplingStrike
   - type: XenoMeleeSlow
     requiresKnockDown: true
   - type: XenoClaws
@@ -72,10 +64,6 @@
     damage:
       groups:
         Brute: 35
-  - type: XenoTailStab
-    tailDamage:
-      groups:
-        Brute: 42
   - type: Tackle
     stunMin: 2
     stunMax: 6
@@ -104,3 +92,98 @@
       state: lurker
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.2
+
+- type: entity
+  parent:
+  - CMXenoTail
+  - RMCXenoLurkerBase
+  id: CMXenoLurker
+  suffix: Base
+  components:
+  - type: XenoLeap
+    plasmaCost: 20
+    delay: 0
+    moveDelayTime: 1.5
+    knockdownTime: 5
+    leapSound: /Audio/_RMC14/Xeno/alien_pounce.ogg
+    knockdownRequiresInvisibility: true
+    unrootOnMelee: true
+  - type: XenoTurnInvisible
+  - type: XenoCripplingStrike
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 42
+  - type: XenoEvolution
+    strains:
+    - RMCXenoLurkerVampire
+
+- type: entity
+  parent: RMCXenoLurkerBase
+  id: RMCXenoLurkerVampire
+  suffix: Vampire
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Lurker/vampire_lurker.rsi
+  - type: Xeno
+    role: CMXenoLurker
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoWatch
+    - ActionXenoRush
+    - ActionXenoFlurry
+    - ActionXenoTailJab
+    - ActionXenoHeadbite
+    - ActionXenoDevolve
+    hidden: true
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      390: Critical
+      490: Dead
+  - type: XenoLeap
+    delay: 0
+    range: 4
+    moveDelayTime: 0
+    knockdownTime: 0
+    leapSound: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+    hitEffect: RMCEffectExtraSlash
+    targetJitterTime: 1
+    targetCameraShakeStrength: 1
+    damage:
+      groups:
+        Brute: 40
+  - type: XenoTailJab
+    attackEffect: RMCEffectTailHit
+    throwRange: 0.5
+    damage:
+      groups:
+        Brute: 50
+  - type: XenoFlurry
+    damage:
+      groups:
+        Brute: 35
+  - type: XenoHeadbite
+    damage:
+      groups:
+        Brute: 60
+  - type: MeleeWeapon
+    attackRate: 0.93
+    damage:
+      groups:
+        Brute: 30
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3
+    baseSprintSpeed: 6
+  - type: XenoStrain
+    name: rmc-xeno-vampire-name
+    description: rmc-xeno-vampire-description
+    popup: rmc-xeno-vampire-popup
+  - type: CMArmor
+    xenoArmor: 20
+    explosionArmor: 20
+  - type: XenoPlasma
+    plasma: 0
+    maxPlasma: 0
+    plasmaRegenOnWeeds: 0

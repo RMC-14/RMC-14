@@ -79,33 +79,40 @@
     sections:
     - name: Circuitboards
       entries:
-      - id: FireAlarmElectronics
-        amount: 5
+#     - id: RMCFireAlarmCircuitboard
+#       amount: 5
       - id: CMAPCElectronics
         amount: 6
-#      - id: CMAutolatheMachineCircuitboard
-#        amount: 2 # TODO RMC14
-      - id: TelecomServerCircuitboard
-        amount: 1
-      - id: CrewMonitoringComputerCircuitboard
+      - id: CMAutolatheMachineCircuitboard
         amount: 2
-      - id: IDComputerCircuitboard
-        amount: 2
-      - id: StationRecordsComputerCircuitboard
-        amount: 2
-#     - id: Supply ordering console
-#     - id: Reserach data terminal
-#     - id: CMPortableGeneratorPacmanMachineCircuitBoard
-#       amount: 5
+#     - id: RMCTelecomServerCircuitboard
+#       amount: 1
+#     - id: RMCCrewMonitoringCircuitboard
+#       amount: 2
+#     - id: RMCIDComputerConsoleCircuitboard
+#       amount: 2
+#     - id: RMCSecurityRecordsCircuitboard
+#       amount: 2
+#     - id: RMCSupplyOrderingCircuitboard
+#       amount: 2
+#     - id: RMCReserachDataTerminalCircuitboard
+#       amount: 2
+#     - id: RMCPacmanGeneratorCircuitboard
+#       amount: 1
       - id: CMSMESMachineCircuitboard
         amount: 2
-#     - id: Air alarm
-#     - id: security camera monitor
+#     - id: RMCAirAlarmCircuitboard
+#       amount: 2
+#     - id: RMCSecurityCameraMonitorCircuitboard
+#       amount: 2
       - id: RMCCircuitboardTelevision
         amount: 4
-#     - id: station alerts
-#     - id: arcade
-#     - id: atmospheric monitor
+#     - id: RMCStationAlertsConsoleCircuitboard
+#       amount: 2
+#     - id: RMCArcadeCircuitboard
+#       amount: 2
+#     - id: RMCAtmosphericConsoleCircuitboard
+#       amount: 2
 
 
 # Electronics

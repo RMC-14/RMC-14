@@ -27,6 +27,7 @@ public sealed class XenoChargeSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -95,7 +96,7 @@ public sealed class XenoChargeSystem : EntitySystem
         xeno.Comp.Charge = diff;
         Dirty(xeno);
 
-        EnsureComp<RMCObstacleSlamImmuneComponent>(xeno);
+        _rmcObstacleSlamming.MakeImmune(xeno);
         _throwing.TryThrow(xeno, diff, xeno.Comp.Strength, animated: false);
     }
 
