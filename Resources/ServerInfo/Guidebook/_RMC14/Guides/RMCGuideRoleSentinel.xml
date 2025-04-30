@@ -2,7 +2,9 @@
   #Sentinel, Tier 1
   <GuideEntityEmbed Entity="CMXenoSentinel"/>
   ##Playing as a Sentinel
-  You are relatively fragile and ranged. Use your spits to disrupt talls on the frontline and transport hosts, you can also catch alone marines with your paralyzing slash and scattered spit.
+  You are relatively fragile and ranged. Use your spits to disrupt talls on the frontline and transport hosts.
+  
+  You can also capture marines that are alone by scatter spitting them and slashing them with paralyzing slash, wait for them to drop and then tackle them.
   
   ##Abilities:
   - [bold]Slowing Spit[/bold]: Glob a spit that slows talls and drains their chemicals, if they have no armor it will stun them down.

@@ -3,6 +3,8 @@
   <GuideEntityEmbed Entity="CMXenoBoiler"/>
   ##Playing as a Boiler
   Becoming the ultimate ranged warrior of the Hive with your signature bombard capable of stalling any marines. It is now slow, large and returns to being a supportive role on the frontline, attaining a upgraded acid spray, corrosive acid and tail stab toxin.
+  
+  Make sure to always stay behind other sisters as you are weak alone, always melt green flares so that you do not get killed instantly by skyspit fire.
   <Box>
     <GuideEntityEmbed Entity="CMGuidebookXenoBombardAcidProjectile"/>
     <GuideEntityEmbed Entity="CMGuidebookXenoBombardNeurotoxinProjectile"/>
