@@ -1040,6 +1040,14 @@
   - type: ActionBlockIfResting
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoTailSeize
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: tail_seize
+
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoAbduct
   name: Abduct (180)
