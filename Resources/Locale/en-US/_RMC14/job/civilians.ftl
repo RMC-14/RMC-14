@@ -16,3 +16,9 @@ RMCJobSynthetic = Synthetic
 
 rmc-job-name-synth-colony = Colony Synthetic
 rmc-job-description-synth-colony = Support and assist the Colony Personnel.
+
+rmc-job-name-average-joe = Average Joe
+rmc-job-description-average-joe = You're a cheaper alternative to Weston Yamada's more advanced synthetics. Perform basic maintenance around the ship but don't outshine the marines at their job.
+
+rmc-job-name-colony-joe = Colony Average Joe
+rmc-job-description-colony-joe = You're a cheaper alternative to Weston Yamada's more advanced synthetics. Support colony personnel and ensure their safety.

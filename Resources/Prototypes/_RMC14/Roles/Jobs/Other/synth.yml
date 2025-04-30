@@ -5,7 +5,11 @@
   description: rmc-job-description-synth
   playTimeTracker: RMCJobSynthetic
   ranks:
-    RMCRankMasterSergeant: [ ]
+    RMCRankMasterGunnerySergeant:
+    - !type:RoleTimeRequirement
+      role: RMCJobSynthetic
+      time: 630000 # 175 hours
+    RMCRankMasterSergeant: []
   startingGear: RMCGearSynthetic
   icon: "RMCJobIconSynth"
   requireAdminNotify: true
