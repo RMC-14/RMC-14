@@ -9,11 +9,11 @@
   ##Abilities:
   - [bold][color=green]PASSIVE[/color][/bold]: You are granted a shield that perfectly blocks one attack and rapidly decays after you're hit. The shield recharges while out of combat.
   - [bold]Pierce[/bold]: Stab through your enemies with your tail against tall hosts. If you hit two people with your pierce, your shield is instantly recharged. This ability does a slight extra damage than normal slash. The ability also has slight AP (armor piercing).
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoPierce"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoPierce"/>
   - [bold]Blitz[/bold]: Charge through enemies with a range of 4 tiles. Upon stopping, activate again to do an AoE slash in a 3x3 tile range, otherwise the ability will activate automatically after a 3 second delay. If the AoE slash hits, it will instantly regenerate your shield.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoDash"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoDash"/>
   - [bold]Root[/bold]: Immobillizes your target for shortly into the ground, making them a sitting duck. Shares cooldown with Fling.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoCleaveRoot"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoCleaveRoot"/>
   - [bold]Fling[/bold]: Flings your target away from you, sending them flying backwards. Shares cooldown with Root.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoCleaveFling"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoCleaveFling"/>
 </Document>

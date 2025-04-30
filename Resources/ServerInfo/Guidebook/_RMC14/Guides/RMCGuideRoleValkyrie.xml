@@ -9,7 +9,7 @@
   ##Abilities:
   - [bold][color=green]PASSIVE[/color][/bold]: Your slashes lifesteal and heal any sisters nearby you during the attack, this amount is boosted during Tantrum.
   - [bold]Tail Fountain[/bold]: Its a single target extinguish with a relatively short cooldown which can be used to put out fires on both Xenos and Marines. Useful for saving near death Xenos or captures from fire.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoTailFountain"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoTailFountain"/>
   - [bold]Tantrum[/bold]: Used on a sister, to enhance your and their defense temporarily. Additionally it doubles the healing you get on target hit. Exceptions to this are Ravager and Crusher as they get a speed buff instead during the duration of Tantrum.
   <GuideEntityEmbed Entity="RMCGuidebookActionXenoTantrum"/>
   - [bold]High Gallop[/bold]: Stomps on Marines and grenades. Marines will be temporarily stunned on the ground. Grenades can be thrown back a couple of Tiles in the direction of your cursor upon Ability usage.
