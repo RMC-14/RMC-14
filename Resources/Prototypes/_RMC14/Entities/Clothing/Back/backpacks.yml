@@ -117,7 +117,7 @@
   parent: CMBackpack
   id: CMBackpackMarine
   name: lightweight IMP backpack
-  description: The standard-issue pack of the Marine forces. Designed to lug gear into the battlefield.
+  description: The standard-issue pack of the UNMC forces. Designed to lug gear into the battlefield.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/standard/jungle-desert-classic.rsi
@@ -132,8 +132,8 @@
 - type: entity
   parent: CMBackpackMarine
   id: CMBackpackMarineMedic
-  name: Marine corpsman backpack
-  description: A standard-issue backpack worn by Marine medics.
+  name: UNMC corpsman backpack
+  description: A standard-issue backpack worn by UNMC medics.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/medic/jungle-desert-classic.rsi
@@ -148,8 +148,8 @@
 - type: entity
   parent: CMBackpackMarine
   id: CMBackpackMarineTech
-  name: Marine technician backpack
-  description: A standard-issue backpack worn by Marine technicians.
+  name: UNMC technician backpack
+  description: A standard-issue backpack worn by UNMC technicians.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/Marines/tech/jungle-desert-classic.rsi
@@ -165,7 +165,7 @@
 - type: entity
   parent: CMBackpack
   id: CMBackpackMortar
-  name: Marine mortar shell backpack
+  name: UNMC mortar shell backpack
   description: A backpack specifically designed to hold ammunition for the M402 mortar.
   components:
   - type: Sprite
@@ -240,7 +240,7 @@
   parent: CMBackpack
   id: RMCBackpackAmmo
   name: IMP ammo rack
-  description: A bare IMP frame with buckles designed to hold multiple ammo cans, but can fit any cumbersome box thanks to Marine ingenuity. Helps you lug around extra rounds or supplies.
+  description: A bare IMP frame with buckles designed to hold multiple ammo cans, but can fit any cumbersome box thanks to UNMC ingenuity. Helps you lug around extra rounds or supplies.
   components:
   - type: Item
     size: Huge
