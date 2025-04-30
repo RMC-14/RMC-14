@@ -15,7 +15,7 @@ using NpgsqlTypes;
 namespace Content.Server.Database.Migrations.Postgres
 {
     [DbContext(typeof(PostgresServerDbContext))]
-    [Migration("20250430192809_SurvivorJobVariants")]
+    [Migration("20250430203838_SurvivorJobVariants")]
     partial class SurvivorJobVariants
     {
         /// <inheritdoc />

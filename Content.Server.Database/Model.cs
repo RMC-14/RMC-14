@@ -547,7 +547,7 @@ namespace Content.Server.Database
 
         public string JobName { get; set; } = null!;
         public DbJobPriority Priority { get; set; }
-        public string PreferredVariant { get; set; } = null!;
+        public string PreferredVariant { get; set; } = string.Empty;
     }
 
     public enum DbJobPriority

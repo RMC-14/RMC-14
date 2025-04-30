@@ -1110,9 +1110,10 @@ namespace Content.Client.Lobby.UI
 
                                 jobVariantsSelector.AddItem(proto.LocalizedName, i + 1);
 
-                                if (Profile?.PreferredJobVariants.Equals(variants[i].Id) == true)
+                                if (Profile != null && Profile.PreferredJobVariants.TryGetValue(job.ID, out var selectedVariant))
                                 {
-                                    jobVariantsSelector.SelectId(i + 1);
+                                    if (selectedVariant.Id == variants[i].Id)
+                                        jobVariantsSelector.SelectId(i + 1);
                                 }
                             }
 
