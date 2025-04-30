@@ -5,12 +5,10 @@ using Content.Shared._RMC14.Projectiles.StoppingPower;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Weapons.Ranged.AimedShot.FocusedShooting;
-using Content.Shared.Atmos.Components;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Projectiles;
 using Content.Shared.StatusEffect;
-using Content.Shared.Stunnable;
 
 namespace Content.Shared._RMC14.Projectiles.Aimed;
 

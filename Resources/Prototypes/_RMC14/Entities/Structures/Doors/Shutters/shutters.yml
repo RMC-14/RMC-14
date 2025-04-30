@@ -93,6 +93,60 @@
   - type: Clickable
   - type: InteractionOutline
 
+- type: entity
+  parent: RMCShutterAlmayer
+  id: RMCShutterAlmayerCL
+  name: corporate liaison privacy shutters
+
+- type: entity
+  parent: RMCShutterAlmayerCL
+  id: RMCShutterAlmayerCLDoor
+  suffix: Quarter Office Door
+  components:
+  - type: RMCPodDoor
+    id: cl_office_door
+
+- type: entity
+  parent: RMCShutterAlmayerCL
+  id: RMCShutterAlmayerCLOfficeWindows
+  suffix: Quarter Office Windows
+  components:
+  - type: RMCPodDoor
+    id: cl_office_windows
+
+- type: entity
+  parent: RMCShutterAlmayerCL
+  id: RMCShutterAlmayerCLQuarterMaintenance
+  suffix: Quarter Maintenance
+  components:
+  - type: RMCPodDoor
+    id: cl_quarter_maintenance
+
+- type: entity
+  parent: RMCShutterAlmayerCL
+  id: RMCShutterAlmayerCLQuarterDoor
+  suffix: Quarter Door
+  components:
+  - type: RMCPodDoor
+    id: cl_quarter_door
+
+- type: entity
+  parent: RMCShutterAlmayerCL
+  id: RMCShutterAlmayerCLQuarterWindows
+  suffix: Quarter Windows
+  components:
+  - type: RMCPodDoor
+    id: cl_quarter_windows
+
+- type: entity
+  parent: RMCShutterAlmayer
+  id: RMCShutterAlmayerAntiTheft
+  name: anti-theft shutters
+
+- type: entity
+  parent: RMCShutterAlmayer
+  id: RMCShutterAlmayerUniformVendors
+  name: uniform vendor shutters
 
 - type: entity
   parent: RMCShutterAlmayer

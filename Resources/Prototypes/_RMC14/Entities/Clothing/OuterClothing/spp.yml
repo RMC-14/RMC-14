@@ -24,6 +24,15 @@
 
 - type: entity
   parent: RMCArmorSPP
+  id: RMCArmorSPPRifleman
+  suffix: Filled, Rifleman
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBinoculars
+
+- type: entity
+  parent: RMCArmorSPP
   id: RMCArmorSPPSupport
   name: UL6 personal armor
   description: Standard body armor of the SPP military, the UL6 (Union Light MK6) is a light body armor, slightly weaker than the M3 pattern body armor in service with the UNMC, specialized towards ballistics protection. This set of personal armor lacks the iconic neck piece and some of the armor in favor of user mobility.
@@ -101,6 +110,20 @@
   - type: Storage
     grid:
     - 0,0,5,1 # 3 slots
+
+- type: entity
+  parent: RMCArmorSPPHeavy
+  id: RMCArmorSPPHeavySpecialist
+  suffix: Filled, Specialist, M60
+  components:
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCMagazineLMGM60
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineLMGM60
+      amount: 3
 
 # SPP coats
 - type: entity

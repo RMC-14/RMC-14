@@ -1,12 +1,15 @@
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Aura;
+using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Fruit.Components;
 using Content.Shared._RMC14.Xenonids.Fruit.Events;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared._RMC14.Xenonids.Plasma;
-using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
@@ -26,6 +29,7 @@ using Content.Shared.Maps;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
@@ -36,14 +40,10 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using static Content.Shared.Physics.CollisionGroup;
-using Content.Shared.Movement.Components;
-using Content.Shared._RMC14.Xenonids.Hive;
-using Content.Shared._RMC14.Marines;
-using Content.Shared._RMC14.Aura;
-using Robust.Shared.Spawners;
 
 namespace Content.Shared._RMC14.Xenonids.Fruit;
 
@@ -292,7 +292,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         // TODO: check if weeds belong to our hive
         var weed = _xenoWeeds.GetWeedsOnFloor((gridId, grid), target);
 
-        if(checkWeeds && weed != null && !_hive.FromSameHive(xeno.Owner, weed.Value))
+        if (checkWeeds && weed != null && !_hive.FromSameHive(xeno.Owner, weed.Value.Owner))
         {
             popup = Loc.GetString("rmc-xeno-fruit-wrong-hive");
             return false;

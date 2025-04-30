@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   save: false
   parent: BaseMobSpecies
   id: CMBaseMobSpeciesOrganic
@@ -24,7 +24,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.25
-        density: 185
+        density: 0
         restitution: 0.0
         layer:
         - BulletImpassable
@@ -116,7 +116,7 @@
   - type: MeleeWeapon
     soundHit:
       collection: Punch
-    angle: 30
+    angle: 0
     animation: WeaponArcFist
     attackRate: 1
     damage:
@@ -212,6 +212,10 @@
       whitelist:
         tags:
         - BodyBag
+    - multiplier: 0.645
+      whitelist:
+        components:
+        - ResistLocker #Lockers/Crates
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -311,6 +315,7 @@
   - type: Evasion
   - type: CanBeFirePatted
   - type: FirePatter
+    stacks: -10
     blacklist:
       components:
       - Xeno
@@ -339,3 +344,8 @@
     range: 2
   - type: RMCArmorModifier
     meleeArmorModifier: 5
+  - type: RMCObstacleSlamCauserImmune
+  - type: MobCollision
+  - type: RMCMobCollision
+  - type: RMCRest
+  - type: StunOnExplosionReceived # TODO should also cause hearing loss

@@ -148,6 +148,18 @@
   - type: RMCDazeableAction
 
 - type: entity
+  id: ActionXenoRush
+  parent: ActionXenoLeap
+  name: Rush
+  description: Jump towards a given location and slash the enemy you hit, shaking their screen.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    event: !type:XenoLeapActionEvent
+    useDelay: 6
+    checkCanAccess: false
+
+- type: entity
   parent: ActionXenoLeap
   id: ActionXenoPounce
   name: Pounce (20) # TODO RMC14 proper plasma costs
@@ -534,8 +546,9 @@
     id: ActionXenoBombard
     ids:
     - ActionXenoAcidShroud
-    cooldown: 20
+    cooldown: 30
     onPerform: false
+  - type: ActionBlockIfResting
 
 - type: entity
   parent: ActionXenoBase
@@ -588,7 +601,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: tremor
     event: !type:XenoStompActionEvent
-    useDelay: 45
+    useDelay: 30
 
 - type: entity
   parent: ActionXenoBase
@@ -792,6 +805,7 @@
   - type: ActionBlockIfResting
   - type: XenoActionPlasma
     cost: 25
+
 - type: entity
   parent: ActionXenoBase
   id: ActionXenoTailSeize
@@ -840,7 +854,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: prae_tail_lash
     event: !type:XenoTailLashActionEvent
-    range: 15 
+    range: 15
     useDelay: 13
     deselectOnMiss: false
     checkCanAccess: false
@@ -866,3 +880,57 @@
   - type: XenoActionPlasma
     cost: 55
 
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoTailJab
+  name: Tail Jab
+  description: Jab an enemy in a 2.5 tile range, doing high damage and slowing them.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: prae_pierce
+    event: !type:XenoTailJabActionEvent
+    range: 2.5
+    useDelay: 7
+    checkCanAccess: false
+    deselectOnMiss: false
+  - type: ActionBlockIfResting
+  - type: XenoOffensiveAction
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoFlurry
+  name: Flurry
+  description: An attack that has a range of 1x3 tiles, dealing damage per target and healing you.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_spike
+    event: !type:XenoFlurryActionEvent
+    useDelay: 3
+    checkCanAccess: false
+    range: 15
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoHeadbite
+  name: Headbite
+  description: Instantly kills unconscious targets and heals you for 150 HP.
+  components:
+  - type: EntityTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: headbite
+    event: !type:XenoHeadbiteActionEvent
+    range: 1.5
+    useDelay: 10
+    checkCanAccess: false
+    deselectOnMiss: false
+  - type: ActionBlockIfResting
+  - type: XenoOffensiveAction

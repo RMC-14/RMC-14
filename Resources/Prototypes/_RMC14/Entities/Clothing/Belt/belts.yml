@@ -749,8 +749,8 @@
     layers:
     - state: icon
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: m63
-      map: [ "enum.CMItemSlotsLayers.Fill" ] # This one's fine to use the CMItemSlots visualizer
+      state: m63 # TODO RMC14 per-gun underlay
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
       visible: false
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/holster_smg.rsi
@@ -771,10 +771,12 @@
         whitelist:
           tags:
           - RMCWeaponSMGM63
+          - RMCWeaponSMGM63B2
   - type: CMHolster
     whitelist:
       tags:
       - RMCWeaponSMGM63
+      - RMCWeaponSMGM63B2
   - type: CMItemSlots
   - type: Tag
     tags:
@@ -852,6 +854,7 @@
     whitelist:
       tags:
       - RMCWeaponSMGM63
+      - RMCWeaponSMGM63B2
       - CMMagazineSmg
   - type: FixedItemSizeStorage
   - type: LimitedStorage
@@ -1123,3 +1126,132 @@
     - id: RMCMagazinePistolD50WinterWyvernHIAP
       amount: 2
     - id: RMCWeaponPistolCOD50WinterWyvern
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCBeltHolsterM13
+  name: M276 pattern M13 holster rig
+  description: Special issue variant of the M276 designed to holster a M13 automatic pistol and 8 spare mags.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_autopistol.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m13
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      offset: -0.34375, -0.15625
+      visible: false
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_autopistol.rsi
+    slots:
+    - suitStorage
+    - belt
+  - type: Item
+    size: Large
+  - type: Storage
+    grid:
+    - 0,0,17,1 # should be 9 slots
+    whitelist:
+      tags:
+      - RMCMagazinePistolM13
+      - RMCMagazinePistolM13Ext
+      - RMCMagazinePistolM13Drum
+      - RMCWeaponPistolM13
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        tags:
+        - RMCWeaponPistolM13
+    - popup: rmc-storage-limit-max-mags
+      count: 8
+      whitelist:
+        tags:
+        - RMCMagazinePistolM13
+        - RMCMagazinePistolM13Ext
+        - RMCMagazinePistolM13Drum
+  - type: CMHolster
+    whitelist:
+      tags:
+      - RMCWeaponPistolM13
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCM17BeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleM16
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCType71BeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleType71
+      amount: 5
+
+- type: entity
+  parent: RMCBeltSmartGunOperatorPistol
+  id: RMCBeltSmartGunOperatorPistolPMC
+  name: WY-TM410 pattern smargunner sidearm rig
+  description: A special pattern of We-Ya made combat belt, designed to carry smartgun ammunition and a sidearm.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator_pistol_wy.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m1984 # TODO RMC14 per-gun underlay
+      offset: 0.15625, 0.0
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      visible: false
+    - sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator_pistol_wy.rsi
+      state: icon-front
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator_pistol_wy.rsi
+
+- type: entity
+  parent: RMCBeltSmartGunOperatorPistolPMC
+  id: RMCBeltSmartGunOperatorPistolPMCFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMK80
+    - id: CMMagazinePistolMK80
+      amount: 2
+    - id: RMCMagazineSmartGunirradiated
+      amount: 2
+
+- type: entity
+  parent: RMCBeltHolsterSMG
+  id: RMCBeltHolsterSMGFilledSMGM63B2
+  suffix: Filled, SMGM63B2
+  components:
+  - type: ItemSlots
+    slots:
+      pouch:
+        name: M63 holster
+        startingItem: RMCWeaponSMGM63B2
+        insertSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_sheathe.ogg # TODO RMC14 sounds
+        ejectSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_draw.ogg
+        whitelist:
+          tags:
+          - RMCWeaponSMGM63
+          - RMCWeaponSMGM63B2

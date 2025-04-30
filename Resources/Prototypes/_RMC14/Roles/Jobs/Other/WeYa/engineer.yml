@@ -1,0 +1,114 @@
+# Corporate Technician
+- type: job
+  parent: CMJobBase
+  id: RMCPMCEngineer
+  name: rmc-job-name-pmc-engineer
+  description: rmc-ghost-role-information-pmc-description
+  playTimeTracker: RMCJobPMCEngineer
+  ranks:
+    RMCRankWeYaCorporateTechnician: []
+  startingGear: RMCJobPMCEngineer
+  icon: RMCJobIconPMCEngineer
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 3
+        RMCSkillEngineer: 4
+        RMCSkillMedical: 1
+        RMCSkillEndurance: 3
+        RMCSkillJtac: 2
+        RMCSkillCqc: 1
+        RMCSkillPowerLoader: 2
+    - type: SquadArmorWearer
+
+- type: startingGear
+  id: RMCJobPMCEngineer
+  equipment:
+    id: RMCIDCardPMC
+    head: ArmorHelmetPMCEngineer
+    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava
+    ears: RMCHeadsetDistressPMC
+    jumpsuit: RMCJumpsuitMercenaryEngineer
+    outerClothing: RMCArmorM4PMCEngineer
+    belt: CMBeltMarine
+    gloves: RMCHandsVeteranPMC
+    shoes: RMCBootsPMCFilled
+    suitstorage: WeaponRifleSSG45
+    back: RMCBackpackWelderPMC
+    pocket1: RMCPouchToolsSocFill
+    pocket2: RMCPouchConstructionFillFull
+  inhand:
+  - RMCWebbingPMCEngineer
+  storage:
+    belt:
+    - RMCMagazineRifleSSG45Extended
+    - RMCMagazineRifleSSG45Extended
+    - RMCMagazineRifleSSG45AP
+    - RMCMagazineRifleSSG45AP
+    - RMCMagazineRifleSSG45AP
+    outerClothing:
+    - RMCExplosiveBreachingCharge
+    - MetalFoamGrenade # TODO RMC14: This is upstream version
+    back:
+    - RMCSentryMiniWeYa
+    - RMCSentryMiniWeYa
+    - CMSheetMetal50
+    - CMSandbagEmpty50
+    - CMSheetPlasteel50
+    - RMCExplosivePlastic
+    - RMCExplosivePlastic
+    pocket1:
+    - CMWelder
+    - CMEntrenchingTool
+    - CMLightReplacer
+
+- type: playTimeTracker
+  id: RMCJobPMCEngineer
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconPMCEngineer
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: pmc_ct
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidPMCEngineer
+  name: weya pmc ghost role engineer
+  suffix: We-Ya PMC
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCPMCEngineer
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCPMCEngineer
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-pmc-engineer
+    description: rmc-ghost-role-information-pmc-description
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    job: RMCPMCEngineer
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+  - type: NpcFactionMember
+    factions:
+    - WeYa
