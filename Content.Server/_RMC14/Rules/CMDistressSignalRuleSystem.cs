@@ -342,10 +342,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             // TODO RMC14 remove defaulting to civ survivor spawners
             foreach (var (job, spawners) in survivorSpawners)
             {
-                if (job == comp.CivilianSurvivorJob)
+                if (job == comp.BaseSurvivorJob)
                     continue;
 
-                if (survivorSpawners.TryGetValue(comp.CivilianSurvivorJob, out var civSpawners))
+                if (survivorSpawners.TryGetValue(comp.BaseSurvivorJob, out var civSpawners))
                 {
                     spawners.AddRange(civSpawners);
                 }
@@ -361,7 +361,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             {
                 stop = false;
                 if (!survivorSpawnersLeft.TryGetValue(job, out var jobSpawnersLeft) &&
-                    !survivorSpawnersLeft.TryGetValue(comp.CivilianSurvivorJob, out jobSpawnersLeft))
+                    !survivorSpawnersLeft.TryGetValue(comp.BaseSurvivorJob, out jobSpawnersLeft))
                 {
                     stop = true;
                     return null;
@@ -608,15 +608,15 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 foreach (var (job, players) in survivorCandidates)
                 {
                     var id = player.UserId;
-                    if (!IsAllowed(id, comp.CivilianSurvivorJob) || !IsAllowed(id, job))
+                    if (!IsAllowed(id, comp.BaseSurvivorJob) || !IsAllowed(id, job))
                         continue;
 
                     if (!ev.Profiles.TryGetValue(id, out var profile))
                         continue;
 
-                    if (profile.JobPriorities.TryGetValue(job, out var priority) && priority > JobPriority.Never)
+                    if (profile.JobPriorities.TryGetValue(comp.BaseSurvivorJob, out var priority) && priority > JobPriority.Never)
                     {
-                        if (_prototypes.TryIndex<JobPrototype>(comp.CivilianSurvivorJob, out var survJob))
+                        if (_prototypes.TryIndex<JobPrototype>(comp.BaseSurvivorJob, out var survJob))
                         {
                             // Players with the preferred variant get high priority
                             // Players with the none variant get medium priority

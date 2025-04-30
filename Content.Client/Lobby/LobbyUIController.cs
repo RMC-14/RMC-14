@@ -444,7 +444,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
 
         if (_sharedDistressSignal.GetPreferredJobVariant(profile, job, out var jobVariant) && jobVariant.StartingGear != null)
         {
-            if (_prototypeManager.TryIndex(job.StartingGear, out var newGear))
+            if (_prototypeManager.TryIndex(jobVariant.StartingGear, out var newGear))
                 gear = newGear;
         }
 
