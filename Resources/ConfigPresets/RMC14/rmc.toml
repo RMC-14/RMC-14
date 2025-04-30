@@ -120,10 +120,6 @@ privacy_policy_link = "https://wiki.rouny-ss14.com/wiki/Privacy_Policy"
 privacy_policy_identifier = "rmc14"
 privacy_policy_version = "2025-04-12"
 
-# This is the address and port the status server binds to.
-# The port is by default set based on net.port so it will follow what you set there.
-bind = "*:1212"
-
 [tips]
 dataset = "CM_Tips"
 login_dataset = "CM_Tips"

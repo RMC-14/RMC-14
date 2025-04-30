@@ -403,8 +403,8 @@
 #      #  amount: 1
       - id: RMCFlashlight # Combat Flashlight
         amount: 5
-#      #- id: RMCBoxFlashlights
-#      #  amount: 1
+      - id: RMCBoxFlashlights
+        amount: 1
       - id: RMCBoxPackFlare
         amount: 1
       - id: CMPackFlare
