@@ -34,18 +34,18 @@
   </Box>\n
 
   - Our final goal is to protect the Queen and plant her eggs so our hive may grow!
-  - Eggs can be placed on weeds, and contain parasites.
+  - Eggs can be placed on hive weeds, and contain parasites.
   - Parasites can be extracted from the eggs, but be wary that parasites have short lifespans away from the weeds!
 
   <Box>
     <GuideEntityEmbed Entity="CMXenoQueen"/>
     <GuideEntityEmbed Entity="XenoEgg"/>
-    <GuideEntityEmbed Entity="XenoWeeds"/>
+    <GuideEntityEmbed Entity="XenoHiveWeeds"/>
     <GuideEntityEmbed Entity="CMXenoParasite"/>
   </Box>\n
 
   - When a parasite is placed on a living host, a new larva will be born! Rejoice!
-  - Hosts that hold the growing larva are very precious, and should be secured to a resin wall as soon as possible.
+  - Hosts that hold the growing larva are very precious, and should be secured to a resin wall supported by hive weeds as soon as possible.
   <Box>
     <GuideEntityEmbed Entity="RMCGuidebookCorpseColonistBurst"/>
     <GuideEntityEmbed Entity="CMXenoLarva"/>
