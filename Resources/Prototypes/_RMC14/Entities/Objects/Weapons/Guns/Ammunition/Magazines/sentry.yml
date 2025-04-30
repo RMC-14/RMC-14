@@ -52,8 +52,92 @@
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/un12g.rsi
 
 
+- type: entity
+  parent: BaseMagazineRifle
+  id: RMCMagazineSentryFire
+  name: "Sentry Incinerator Fuel Tank"
+  description: "A fuel tank of Ultra Thick Napthal Fuel, used in the UA 45-FM. Contains 100 units of fuel."
+  components:
+  - type: Tag
+    tags:
+    - RMCMagazineSentryShotgun
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCBulletSentryFire
+    proto: RMCBulletSentryFire
+    capacity: 100
+    cycleable: false
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/sentry_flametank.rsi
+    layers:
+    - state: flametank
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: flametank_strip
+      color: "#EE6515"
+
+- type: entity
+  parent: BaseMagazineRifle
+  id: RMCMagazineSentryFireBlue
+  name: "Sentry Incinerator Fuel Tank"
+  description: "A fuel tank of usually Ultra Thick Napthal Fuel, a sticky combustible liquid chemical, used in the UA 55-FA."
+  components:
+  - type: Tag
+    tags:
+    - RMCMagazineSentryShotgun
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCBulletSentryFireBlue
+    proto: RMCBulletSentryFireBlue
+    capacity: 100
+    cycleable: false
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/sentry_flametank.rsi
+    layers:
+    - state: flametank
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: flametank_strip
+      color: "#00b8ff"
+  
+- type: entity
+  parent: BaseMagazineRifle
+  id: RMCMagazineSentryFireSmoke
+  name: "Sentry Incinerator Fuel Tank"
+  description: "A fuel tank of compressed Ultra Thick Napthal Fuel, used in the UA 60-FP."
+  components:
+  - type: Tag
+    tags:
+    - RMCMagazineSentryShotgun
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCBulletSentryFireSmoke
+    proto: RMCBulletSentryFireSmoke
+    capacity: 100
+    cycleable: false
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/sentry_flametank.rsi
+    layers:
+    - state: flametank
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: flametank_strip
+      color: "#832828"
+# "00b8ff" (blue fire napalm x), for mini it should be "EE6515" (normal ut fuel), for plasma do "832828" (phosporus color since thats the smoke)
 - type: Tag
   id: RMCMagazineSentry
 
 - type: Tag
   id: RMCMagazineSentryShotgun
+
+- type: Tag
+  id: RMCMagazineSentryFire
+
+- type: Tag
+  id: RMCMagazineSentryFireBlue
+
+- type: Tag
+  id: RMCMagazineSentryFireSmoke

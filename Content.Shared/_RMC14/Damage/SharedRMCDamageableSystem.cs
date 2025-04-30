@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Pheromones;
+using Content.Shared._RMC14.Projectiles;
 using Content.Shared.Armor;
 using Content.Shared.Blocking;
 using Content.Shared.Chat.Prototypes;
@@ -65,6 +66,9 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
     private EntityQuery<VictimInfectedComponent> _victimInfectedQuery;
     private EntityQuery<XenoNestedComponent> _xenoNestedQuery;
 
+    private EntityQuery<RMCFireProjectileComponent> _fireProjectileQuery;
+
+    private EntityQuery<RMCFireProjectileImmuneComponent> _fireProjectileImmuneQuery;
     public override void Initialize()
     {
         _barricadeQuery = GetEntityQuery<BarricadeComponent>();
@@ -423,6 +427,10 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
 
     private void DoDamage(Entity<DamageOverTimeComponent> damageEnt, EntityUid target, DamageSpecifier damage, bool ignoreResistances = false)
     {
+        if (_fireProjectileImmuneQuery.HasComp(target)){ //&& _fireProjectileQuery.HasComp(damageEnt)){
+            _damageable.TryChangeDamage(target, damage * 0, ignoreResistances);
+            return;
+        } //fireprojectile and target fireprojectile immune below line damage * 0 ...
         if (damageEnt.Comp.Multipliers is { } multipliers)
         {
             foreach (var multiplier in multipliers)
