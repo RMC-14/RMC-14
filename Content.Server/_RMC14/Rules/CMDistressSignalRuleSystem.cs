@@ -614,10 +614,17 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     if (!ev.Profiles.TryGetValue(id, out var profile))
                         continue;
 
-                    if (profile.JobPriorities.TryGetValue(job, out var priority) &&
-                        priority > JobPriority.Never)
+                    if (_prototypes.TryIndex<JobPrototype>(comp.CivilianSurvivorJob, out var survJob))
                     {
-                        players[(int) priority].Add(id);
+                        // Players with the preferred variant get high priority
+                        // Players with the none variant get medium priority
+                        // Players with another preferred variant get low priority
+                        if (GetPreferredJobVariant(profile, survJob, out var preferredVariant) && preferredVariant.ID == job)
+                            players[(int)JobPriority.High].Add(id);
+                        else if (preferredVariant == null)
+                            players[(int)JobPriority.Medium].Add(id);
+                        else
+                            players[(int)JobPriority.Low].Add(id);
                     }
                 }
             }
@@ -1727,6 +1734,21 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             QueueDel(tunnel);
         }
+    }
+
+    public bool GetPreferredJobVariant(HumanoidCharacterProfile profile, JobPrototype job, [NotNullWhen(true)] out JobPrototype? variant)
+    {
+        if (profile.PreferredJobVariants.TryGetValue(job.ID, out var newVariant))
+        {
+            if (_prototypes.TryIndex<JobPrototype>(newVariant, out var final))
+            {
+                variant = final;
+                return true;
+            }
+        }
+
+        variant = null;
+        return false;
     }
 
     private void UnpowerFaxes(MapId map)

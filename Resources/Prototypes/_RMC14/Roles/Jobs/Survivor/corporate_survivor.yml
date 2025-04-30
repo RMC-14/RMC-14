@@ -38,6 +38,7 @@
       factions:
       - WeYa
     - type: IntelRescueSurvivorObjective
+  hidden: true
 
 - type: startingGear
   id: RMCGearSurvivorCorporate

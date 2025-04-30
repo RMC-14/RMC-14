@@ -1008,14 +1008,10 @@ namespace Content.Client.Lobby.UI
 
                 var selectedPlanet = _clientGameTicker.SelectedPlanet;
 
-                var jobs = department.Roles // RMC14 map-based jobs
-                    .Select(jobId => _prototypeManager.Index(jobId))
+                var jobs = department.Roles.Select(jobId => _prototypeManager.Index(jobId))
                     .Where(job => job.SetPreference)
                     .Where(job => !job.Hidden)
                     .ToArray();
-
-                if (selectedPlanet != null) // RMMC14
-                    jobs = jobs.Where(job => job.AvailableOnPlanets == null || job.AvailableOnPlanets.Contains(selectedPlanet)).ToArray();
 
                 Array.Sort(jobs, JobUIComparer.Instance);
 
@@ -1086,6 +1082,65 @@ namespace Content.Client.Lobby.UI
                         VerticalAlignment = VAlignment.Center,
                         Margin = new Thickness(3f, 3f, 0f, 0f),
                     };
+
+                    var variants = new List<ProtoId<JobPrototype>>();
+
+                    if (job.JobVariantsPerPlanet != null && selectedPlanet != null)
+                    {
+                        if (job.JobVariantsPerPlanet.TryGetValue(selectedPlanet, out var variantList))
+                        {
+                            var jobVariantsSelector = new OptionButton()
+                            {
+                                HorizontalAlignment = HAlignment.Right,
+                                VerticalAlignment = VAlignment.Center,
+                                Margin = new Thickness(3f, 3f, 0f, 0f),
+                            };
+
+                            jobVariantsSelector.AddItem(Loc.GetString("loadout-none"), 0);
+
+                            for (var i = 0; i < variantList.Count; i++)
+                            {
+                                var variantId = variantList.ElementAt(i);
+                                var proto = _prototypeManager.Index(variantId);
+
+                                if (proto == null)
+                                    continue;
+
+                                variants.Add(variantId);
+
+                                jobVariantsSelector.AddItem(proto.LocalizedName, i + 1);
+
+                                if (Profile?.PreferredJobVariants.Equals(variants[i].Id) == true)
+                                {
+                                    jobVariantsSelector.SelectId(i + 1);
+                                }
+                            }
+
+                            jobVariantsSelector.OnItemSelected += args =>
+                            {
+                                jobVariantsSelector.SelectId(args.Id);
+
+                                if (args.Id == 0)
+                                {
+                                    Profile = Profile?.WithJobVariant(job.ID, null);
+                                    JobOverride = null;
+                                    return;
+                                }
+
+                                var jobProtoId = variants[args.Id - 1];
+                                var jobProto = _prototypeManager.Index(jobProtoId);
+
+                                if (jobProto == null)
+                                    return;
+
+                                Profile = Profile?.WithJobVariant(job.ID, jobProtoId);
+                                JobOverride = jobProto;
+
+                                ReloadPreview();
+                                SetDirty();
+                            };
+                        }
+                    }
 
                     var collection = IoCManager.Instance!;
                     var protoManager = collection.Resolve<IPrototypeManager>();

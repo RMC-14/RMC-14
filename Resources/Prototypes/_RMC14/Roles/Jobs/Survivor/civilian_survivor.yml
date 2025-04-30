@@ -1,6 +1,6 @@
 ﻿- type: job
   parent: CMJobBase
-  id: CMSurvivor
+  id: CMCivilianSurvivor
   name: cm-job-name-survivor
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivor
@@ -41,6 +41,7 @@
     - type: IntelRescueSurvivorObjective
   greeting: rmc-job-greeting-survivor
   hasIcon: false
+  hidden: true
 
 - type: startingGear
   id: RMCGearSurvivor
@@ -55,11 +56,11 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: CMSpawnPointSurvivor
-  name: survivor spawn point
+  id: CMSpawnPointSurvivorCivilian
+  name: civilian survivor spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSurvivor
+    job_id: CMCivilianSurvivor
   - type: Sprite # TODO: Replace with landmark sprite
     layers:
     - sprite: Markers/jobs.rsi

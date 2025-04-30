@@ -8,6 +8,7 @@ using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences.Loadouts;
+using Content.Shared.Resist;
 using Content.Shared.Roles;
 using Content.Shared.Traits;
 using Robust.Shared.Collections;
@@ -45,6 +46,12 @@ namespace Content.Shared.Preferences
                 SharedGameTicker.FallbackOverflowJob, JobPriority.High
             }
         };
+
+        /// <summary>
+        /// Job variants we prefer for the inital job.
+        /// </summary>
+        [DataField]
+        private Dictionary<ProtoId<JobPrototype>, ProtoId<JobPrototype>> _preferredJobVariants = new();
 
         /// <summary>
         /// Antags we have opted in to.
@@ -125,6 +132,11 @@ namespace Content.Shared.Preferences
         public IReadOnlyDictionary<ProtoId<JobPrototype>, JobPriority> JobPriorities => _jobPriorities;
 
         /// <summary>
+        /// <see cref="_preferredJobVariants"/>
+        /// </summary>
+        public IReadOnlyDictionary<ProtoId<JobPrototype>, ProtoId<JobPrototype>> PreferredJobVariants => _preferredJobVariants;
+
+        /// <summary>
         /// <see cref="_antagPreferences"/>
         /// </summary>
         public IReadOnlySet<ProtoId<AntagPrototype>> AntagPreferences => _antagPreferences;
@@ -172,7 +184,8 @@ namespace Content.Shared.Preferences
             SharedRMCNamedItems namedItems,
             bool playtimePerks,
             string xenoPrefix,
-            string xenoPostfix)
+            string xenoPostfix,
+            Dictionary<ProtoId<JobPrototype>, ProtoId<JobPrototype>> preferredJobVariants)
         {
             Name = name;
             FlavorText = flavortext;
@@ -185,6 +198,7 @@ namespace Content.Shared.Preferences
             ArmorPreference = armorPreference;
             SquadPreference = squadPreference;
             _jobPriorities = jobPriorities;
+            _preferredJobVariants = preferredJobVariants;
             PreferenceUnavailable = preferenceUnavailable;
             _antagPreferences = antagPreferences;
             _traitPreferences = traitPreferences;
@@ -230,7 +244,8 @@ namespace Content.Shared.Preferences
                 other.NamedItems,
                 other.PlaytimePerks,
                 other.XenoPrefix,
-                other.XenoPostfix)
+                other.XenoPostfix,
+                new Dictionary<ProtoId<JobPrototype>, ProtoId<JobPrototype>>(other.PreferredJobVariants))
         {
         }
 
@@ -428,6 +443,21 @@ namespace Content.Shared.Preferences
             };
         }
 
+        public HumanoidCharacterProfile WithJobVariant(ProtoId<JobPrototype> jobId, ProtoId<JobPrototype>? variant)
+        {
+            var dictionary = new Dictionary<ProtoId<JobPrototype>, ProtoId<JobPrototype>>(_preferredJobVariants);
+
+            if (variant == null)
+                dictionary.Remove(jobId);
+            else
+                dictionary[jobId] = variant.Value;
+
+            return new(this)
+            {
+                _preferredJobVariants = dictionary,
+            };
+        }
+
         public HumanoidCharacterProfile WithPreferenceUnavailable(PreferenceUnavailableMode mode)
         {
             return new(this) { PreferenceUnavailable = mode };
@@ -547,6 +577,7 @@ namespace Content.Shared.Preferences
             if (PlaytimePerks != other.PlaytimePerks) return false;
             if (XenoPrefix != other.XenoPrefix) return false;
             if (XenoPostfix != other.XenoPostfix) return false;
+            if (!_preferredJobVariants.SequenceEqual(other._preferredJobVariants)) return false;
             return Appearance.MemberwiseEquals(other.Appearance);
         }
 
@@ -871,6 +902,7 @@ namespace Content.Shared.Preferences
             hashCode.Add(PlaytimePerks);
             hashCode.Add(XenoPrefix);
             hashCode.Add(XenoPostfix);
+            hashCode.Add(_preferredJobVariants);
             return hashCode.ToHashCode();
         }
 

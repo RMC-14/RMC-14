@@ -1,0 +1,75 @@
+﻿- type: job
+  parent: CMCivilianSurvivor
+  id: CMSurvivor
+  name: cm-job-name-base-survivor
+  description: cm-job-description-survivor
+  jobVariantsPerPlanet:
+    RMCPlanetLV624:
+    - CMCivilianSurvivor
+    - CMSurvivorDoctor
+    - CMSurvivorEngineer
+    - CMSurvivorSecurity
+    - CMSurvivorCorporate
+    RMCPlanetSolaris:
+    - CMCivilianSurvivor
+    - CMSurvivorDoctor
+    - CMSurvivorEngineer
+    - CMSurvivorSecurity
+    - CMSurvivorCorporate
+    RMCPlanetShiva:
+    - CMCivilianSurvivor
+    - CMSurvivorDoctor
+    - CMSurvivorEngineer
+    - CMSurvivorSecurity
+    - CMSurvivorCorporate
+    RMCPlanetFiorina:
+    - CMCivilianSurvivor
+    - CMSurvivorDoctor
+    - CMSurvivorEngineer
+    - CMSurvivorSecurity
+    - CMSurvivorCorporate
+    RMCPlanetTrijent:
+    - CMCivilianSurvivor
+    - CMSurvivorDoctor
+    - CMSurvivorEngineer
+    - CMSurvivorSecurity
+    - CMSurvivorCorporate
+    RMCPlanetVaradero:
+    - CMCivilianSurvivor
+    - CMSurvivorDoctor
+    - CMSurvivorEngineer
+    - CMSurvivorSecurity
+    - CMSurvivorCorporate
+    RMCPlanetKutjevo:
+    - CMCivilianSurvivor
+    - CMSurvivorDoctor
+    - CMSurvivorEngineer
+    - CMSurvivorSecurity
+    - CMSurvivorCorporate
+    RMCPlanetChances:
+    - CMCivilianSurvivor
+    - CMSurvivorDoctor
+    - CMSurvivorEngineer
+    - CMSurvivorSecurity
+    - CMSurvivorCorporate
+    RMCPlanetHybrisa:
+    - CMCivilianSurvivor
+    - CMSurvivorDoctor
+    - CMSurvivorEngineer
+    - CMSurvivorSecurity
+    - CMSurvivorCorporate
+  hidden: false
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSurvivor
+  name: survivor spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor

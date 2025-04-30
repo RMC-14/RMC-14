@@ -29,6 +29,6 @@ public sealed partial class RMCPlanetMapPrototypeComponent : Component
         ("CMSurvivorDoctor", 3),
         ("CMSurvivorSecurity", 2),
         ("CMSurvivorCorporate", 2),
-        ("CMSurvivor", -1),
+        ("CMCivilianSurvivor", -1),
     };
 }

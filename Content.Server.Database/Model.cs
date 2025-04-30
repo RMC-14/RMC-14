@@ -121,6 +121,10 @@ namespace Content.Server.Database
                 .HasIndex(j => new { j.ProfileId, j.JobName })
                 .IsUnique();
 
+            modelBuilder.Entity<Job>()
+                .Property(j => j.PreferredVariant)
+                .HasDefaultValue(null);
+
             modelBuilder.Entity<AssignedUserId>()
                 .HasIndex(p => p.UserName)
                 .IsUnique();
@@ -547,6 +551,7 @@ namespace Content.Server.Database
 
         public string JobName { get; set; } = null!;
         public DbJobPriority Priority { get; set; }
+        public string PreferredVariant { get; set; } = null!;
     }
 
     public enum DbJobPriority

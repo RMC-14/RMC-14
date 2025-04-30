@@ -27,6 +27,7 @@
       factions:
       - Survivor
     - type: IntelRescueSurvivorObjective
+  hidden: true
 
 - type: startingGear
   id: RMCGearSurvivorEngineer
