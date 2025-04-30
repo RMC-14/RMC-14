@@ -163,6 +163,9 @@
   id: RMCXenoCarrierEggsac
   suffix: Eggsac
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleEggsac
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Carrier/eggsac_carrier.rsi
     layers:
