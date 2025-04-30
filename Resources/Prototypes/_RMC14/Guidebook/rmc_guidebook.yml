@@ -93,6 +93,7 @@
   - RMCGuideRoleRavager
   - RMCGuideRoleBoiler
   - RMCGuideRoleQueen
+  - RMCGuideRoleParasite
 
 # Xenonid structures
 - type: guideEntry
@@ -329,13 +330,20 @@
   name: "Vampire Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleVampire.xml"
 
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideRoleParasite
+  priority: 32
+  name: "Parasite Guide"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleParasite.xml"
+
 # Chemistry stuff
 - type: guideEntry
   parent: RMC
   id: RMCChemicals
   name: guide-entry-chemicals
   text: "/ServerInfo/Guidebook/_RMC14/Chemicals/RMCChemicals.xml"
-  priority: 32
+  priority: 33
   children:
   #  - RMCElements
   - RMCMedicine
