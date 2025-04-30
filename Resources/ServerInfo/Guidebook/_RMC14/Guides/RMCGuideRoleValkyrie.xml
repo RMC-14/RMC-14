@@ -4,7 +4,10 @@
   ##Playing as a Valkyrie
   Your whole arsenal of abilities change upon choosing this strain. You will be able to heal upon hitting any non-xeno living creature. You additionally receive a fury reservoir which is needed for the activation of certain Abilities. You will loose your Tail Stab in exchange for another Ability namely Water Fountain.
 
+  Stick behind your sisters as Valkyrie, you play a supportive role with your pheromones and retrieve, if your sisters are stunned from a SADAR shot then use your Fight or Flight to save them. 
+  
   ##Abilities:
+  - [bold][color=green]PASSIVE[/color][/bold]: Your slashes lifesteal and heal any sisters nearby you during the attack, this amount is boosted during Tantrum.
   - [bold]Tail Fountain[/bold]: Its a single target extinguish with a relatively short cooldown which can be used to put out fires on both Xenos and Marines. Useful for saving near death Xenos or captures from fire.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoTailFountain"/>
   - [bold]Tantrum[/bold]: Used on a sister, to enhance your and their defense temporarily. Additionally it doubles the healing you get on target hit. Exceptions to this are Ravager and Crusher as they get a speed buff instead during the duration of Tantrum.
