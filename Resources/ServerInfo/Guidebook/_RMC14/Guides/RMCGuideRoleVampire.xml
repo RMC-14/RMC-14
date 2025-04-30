@@ -8,10 +8,10 @@
   - [bold]Rush[/bold]: A four-tile pounce that causes your targets screen to shake. This ability does not stun them.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoPounce"/>
   - [bold]Flurry[/bold]: An attack that has a range of 1x3 tiles, dealing 30 damage per target and healing you for 30 HP. A short slow is also applied to you upon landing it. 
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoPierce"/>
+  <GuideEntityEmbed Entity="CMGuidebookActionXenoFlurry"/>
   - [bold]Tail Jab[/bold]: An attack dealing 50 damage to the target, alongside pushing the target back. If they impact an obstacle such as a wall, window, door or barricade, they will take more damage and will temporarily be stunned.
   - For utility can instantly break windows
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoBombard"/>
+  <GuideEntityEmbed Entity="CMGuidebookActionXenoPierce"/>
   - [bold]Headbite[/bold]: A high-damage attack that bypasses all armor, instantly killing your target and healing you for 150 HP. Requires your target to be unconscious and adjacent to you, and has a windup before it will hit them.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoHeadbite"/>
 </Document>
