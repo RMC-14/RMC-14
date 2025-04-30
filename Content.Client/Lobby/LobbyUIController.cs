@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Client._RMC14.LinkAccount;
+using Content.Shared._RMC14.Rules;
 using Content.Client.GameTicking.Managers;
 using Content.Client.Guidebook;
 using Content.Client.Humanoid;
@@ -48,7 +49,8 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     [UISystemDependency] private readonly StationSpawningSystem _spawn = default!;
     [UISystemDependency] private readonly GuidebookSystem _guide = default!;
     [UISystemDependency] private readonly CMArmorSystem _armorSystem = default!;
-    [UISystemDependency] private readonly ClientGameTicker _clientGameTicker = default!; // RMC14
+    [UISystemDependency] private readonly ClientGameTicker _clientGameTicker = default!;
+    [UISystemDependency] private readonly SharedCMDistressSignalSystem _sharedDistressSignal = default!; // RMC14
 
     private CharacterSetupGui? _characterSetup;
     private HumanoidProfileEditor? _profileEditor;
@@ -439,6 +441,12 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
 
         if (!_prototypeManager.TryIndex(job.StartingGear, out var gear))
             return;
+
+        if (_sharedDistressSignal.GetPreferredJobVariant(profile, job, out var jobVariant) && jobVariant.StartingGear != null)
+        {
+            if (_prototypeManager.TryIndex(job.StartingGear, out var newGear))
+                gear = newGear;
+        }
 
         _prototypeManager.TryIndex(job.DummyStartingGear, out var dummyGear);
 
