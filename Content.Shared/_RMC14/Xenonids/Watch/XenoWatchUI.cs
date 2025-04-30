@@ -11,7 +11,7 @@ public enum XenoWatchUIKey : byte
 }
 
 [Serializable, NetSerializable]
-public readonly record struct Xeno(NetEntity Entity, string Name, EntProtoId? Id, FixedPoint2 Health, FixedPoint2 Plasma, FixedPoint2 Evo);
+public readonly record struct Xeno(NetEntity Entity, string Name, EntProtoId? Id, FixedPoint2 Health, FixedPoint2 Plasma, int Evo);
 
 [Serializable, NetSerializable]
 public sealed class XenoWatchBuiState(List<Xeno> xenos, int burrowedLarva, int xenoCount, FixedPoint2 tierTwoSlots ,FixedPoint2 tierThreeSlots) : BoundUserInterfaceState
