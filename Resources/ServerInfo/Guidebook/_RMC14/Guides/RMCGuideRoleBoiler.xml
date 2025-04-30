@@ -14,7 +14,7 @@
   ##Door tech
   To safely use bombard you can stand behind a closed resin door and charge your bombard, make sure to aim outside in the path of the door, now hover your mouse over the door and press [color=yellow][bold][keybind="ActivateItemInWorld"][/bold][/color] when the bombard is almost done, if timed then the resin door will open letting your glob pass through!
   <GuideEntityEmbed Entity="DoorXenoResin"/>
-  ##Abilities
+  ##Abilities:
   - [bold][color=#E61919]PASSIVE[/color][/bold]: Vulnerable to fire and glows in the dark.
   - [bold]Strong Corrosive Acid[/bold]: Secretes a glob of acid on items to be dissolved, can be used on multiple items at a time.
   <GuideEntityEmbed Entity="CMGuidebookActionXenoCorrosiveAcid"/>
