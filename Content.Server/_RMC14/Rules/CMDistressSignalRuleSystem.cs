@@ -144,7 +144,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
     [Dependency] private readonly RMCAmbientLightSystem _rmcAmbientLight = default!;
     [Dependency] private readonly RMCGameRuleExtrasSystem _gameRulesExtras = default!;
-
+    [Dependency] private readonly SharedCMDistressSignalSystem _sharedDistressSignal = default!;
 
     private readonly HashSet<string> _operationNames = new();
     private readonly HashSet<string> _operationPrefixes = new();
@@ -621,7 +621,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                             // Players with the preferred variant get high priority
                             // Players with the none variant get medium priority
                             // Players with another preferred variant get low priority
-                            if (GetPreferredJobVariant(profile, survJob, out var preferredVariant) && preferredVariant.ID == job)
+                            if (_sharedDistressSignal.GetPreferredJobVariant(profile, survJob, out var preferredVariant) && preferredVariant.ID == job)
                                 players[(int)JobPriority.High].Add(id);
                             else if (preferredVariant == null)
                                 players[(int)JobPriority.Medium].Add(id);
@@ -1737,21 +1737,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             QueueDel(tunnel);
         }
-    }
-
-    public bool GetPreferredJobVariant(HumanoidCharacterProfile profile, JobPrototype job, [NotNullWhen(true)] out JobPrototype? variant)
-    {
-        if (profile.PreferredJobVariants.TryGetValue(job.ID, out var newVariant))
-        {
-            if (_prototypes.TryIndex<JobPrototype>(newVariant, out var final))
-            {
-                variant = final;
-                return true;
-            }
-        }
-
-        variant = null;
-        return false;
     }
 
     private void UnpowerFaxes(MapId map)
