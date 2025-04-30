@@ -225,9 +225,6 @@
   id: RMCXenoPraetorianDancer
   suffix: Dancer
   components:
-  - type: GuideHelp
-    guides:
-    - RMCGuideRoleDancer
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Praetorian/dancer_praetorian.rsi
   - type: Xeno
