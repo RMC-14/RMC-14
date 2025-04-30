@@ -1,6 +1,6 @@
 <Document>
   #Vanguard, Tier 3
-  <GuideEntityEmbed Entity="CMXenoVanguard"/>
+  <GuideEntityEmbed Entity="RMCXenoVanguard"/>
   ##Playing as a Vanguard
   Firstly let's see what's changed from your Base form. You lose a portion of your health but you are now slightly faster than your base form. You also trade your corrosive acid and spit to get a regenerating shield that perfectly blocks one attack, which recharges out of combat. Gain the ability to use pierce that penetrates through opponents, also instantly recharging your shield if you hit 2 targets. You also gain cleave, which has two states: Root, which'll immobilise a target; Fling, which'll fling a target away from you. Your dash has changed as well now it has an AoE slash after you dash by activating your dash again you can do the AoE slash.
 
