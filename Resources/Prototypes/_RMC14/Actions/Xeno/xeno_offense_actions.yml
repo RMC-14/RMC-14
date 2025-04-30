@@ -933,3 +933,20 @@
     deselectOnMiss: false
   - type: ActionBlockIfResting
   - type: XenoOffensiveAction
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoRend
+  name: Rend
+  description: Claw at enemies around you.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_eviscerate
+    event: !type:XenoRendActionEvent
+    useDelay: 2.5
+  - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 50

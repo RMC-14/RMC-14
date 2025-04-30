@@ -32,7 +32,7 @@
     - ActionXenoRegurgitate
     - ActionXenoWatch
     - ActionXenoTailStab
-# Rend
+    - ActionXenoRend
 # Doom
 # Destroy
 # Bulwark
@@ -135,4 +135,8 @@
       3: rmc-xeno-mature-king
       4: rmc-xeno-mature-king
       5: rmc-xeno-mature-king
+  - type: XenoRend
+    damage:
+      groups:
+        Brute: 25
   

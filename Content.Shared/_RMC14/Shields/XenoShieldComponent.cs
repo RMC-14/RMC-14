@@ -1,6 +1,7 @@
-﻿using Content.Shared.FixedPoint;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Shields;
 
@@ -30,4 +31,14 @@ public sealed partial class XenoShieldComponent : Component
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier ShieldImpact = new SoundCollectionSpecifier("RMCShieldImpact", AudioParams.Default.WithVolume(-4));
+}
+
+[Serializable, NetSerializable]
+public enum RMCShieldVisuals
+{
+    Base,
+    Current,
+    Max,
+    Active,
+    Prefix
 }
