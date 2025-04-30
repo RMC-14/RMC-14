@@ -441,3 +441,11 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: lay_egg
     event: !type:XenoGenerateEggsActionEvent
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: CMGuidebookActionXenoGenerateEggs
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      state: lay_egg
