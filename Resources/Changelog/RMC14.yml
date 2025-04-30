@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: Fixed healer drone sometimes leaving behind an alive drone body on sacrifice.
-    type: Fix
-  id: 1161
-  time: '2025-01-05T01:42:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5277
 - author: DummeHytteOst
   changes:
   - message: Fixed metal rods not fitting in the construction rig.
@@ -5473,5 +5466,43 @@
   id: 1663
   time: '2025-04-28T23:28:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6253
+- author: DrSmugleaf
+  changes:
+  - message: Added CLF Cell Commander, CLF Soldier, and colonist admin ghost roles.
+    type: Add
+  - message: Fixed defender headbutt, crusher charge, and some other sources of pushing
+      you, giving you a concussion IRL. This took hours to fix and it's finally gone.
+    type: Fix
+  - message: Fixed some colonist roles not being able to equip a gun into suit storage
+      after spawning without re-equipping their suit first. This also fixes them sometimes
+      spawning with less items than intended. Thanks to Fritz Vohlkson for the detailed
+      bug report.
+    type: Fix
+  - message: Fixed nurses not having fireman carry skill level 1.
+    type: Fix
+  - message: Fixed alcohol bottles not being able to transfer solution.
+    type: Fix
+  - message: Fixed resin doors deleting non-node weeds.
+    type: Fix
+  - message: Fixed bookshelfs being a void.
+    type: Fix
+  - message: Fixed the automated utilities squad vendor not having boxes of flashlights.
+    type: Fix
+  - message: Fixed unbarbed folding barricades not being climbable.
+    type: Fix
+  - message: Fixed some cases of item names and descriptions having Marine instead
+      of UNMC.
+    type: Fix
+  - message: Fixed some ERT headsets not letting the player see job icons.
+    type: Fix
+  - message: Fixed the Royal SGO not having a job icon.
+    type: Fix
+  - message: Removed useless actions from the admin ghost.
+    type: Fix
+  - message: Disabled Incendiary OB until we figure out why its crashing the server.
+    type: Tweak
+  id: 1664
+  time: '2025-04-30T00:47:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6304
 Name: RMC14
 Order: -1
