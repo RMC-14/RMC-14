@@ -7,6 +7,8 @@ using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.NPC.Components;
+using Content.Shared.NPC.Systems;
 using Content.Shared.Stunnable;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -28,6 +30,7 @@ public sealed class TeslaCoilSystem : EntitySystem
     [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly RMCDazedSystem _dazed = default!;
     [Dependency] private readonly SentrySystem _sentrySystem = default!;
+    [Dependency] private readonly NpcFactionSystem _faction = default!;
 
 
     private readonly HashSet<EntityUid> _potentialTargets = new();
@@ -40,7 +43,7 @@ public sealed class TeslaCoilSystem : EntitySystem
 
         var time = _timing.CurTime;
         var teslaQuery =
-            EntityQueryEnumerator<RMCTeslaCoilComponent, SentryComponent, TransformComponent, UserIFFComponent>();
+            EntityQueryEnumerator<RMCTeslaCoilComponent, SentryComponent, TransformComponent, NpcFactionMemberComponent>();
         while (teslaQuery.MoveNext(out var uid,
                    out var teslaComp,
                    out var sentryComp,
@@ -56,7 +59,7 @@ public sealed class TeslaCoilSystem : EntitySystem
             _potentialTargets.Clear();
             _validTargets.Clear();
 
-            var coilFactionId = coilFactionComp.Faction;
+            var friendlies = _faction.GetFriendlyFactions(coilFactionComp.Factions);
 
             _entityLookup.GetEntitiesInRange(xform.Coordinates, teslaComp.Range, _potentialTargets, LookupFlags.Uncontained);
 
@@ -84,9 +87,9 @@ public sealed class TeslaCoilSystem : EntitySystem
                 {
                     var targetFactionEvent = new GetIFFFactionEvent(null, SlotFlags.IDCARD);
                     RaiseLocalEvent(targetUid, ref targetFactionEvent);
-                    var targetFactionId = targetFactionEvent.Faction;
+                    var targetFactionId = targetFactionEvent.Factions;
 
-                    if (coilFactionId != null && (targetFactionId == null || targetFactionId != coilFactionId))
+                    if (targetFactionId != null && !friendlies.Overlaps(targetFactionId))
                         isValidTarget = true;
                 }
 
