@@ -7,7 +7,7 @@
   ranks:
     RMCRankCMBMarshal:
     - !type:RoleTimeRequirement
-      role: RMCJobUNMCResponder
+      role: RMCJobCMBResponder
       time: 90000 # 25 hours
     RMCRankCMBDeputy: []
   startingGear: RMCGearCMBResponder
