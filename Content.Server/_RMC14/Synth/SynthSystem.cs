@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Synth;
 using Content.Shared.Body.Organ;
 using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
+using Content.Shared.Body.Components;
 using Content.Shared.Damage;
 
 namespace Content.Server._RMC14.Synth;
