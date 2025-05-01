@@ -71,7 +71,7 @@
     - ActionXenoManageHive
 #    - ActionXenoRoyalJelly
 #    - ActionXenoMarkResin
-    tier: 0
+    tier: 4
     bypassTierCount: true
     unlockAt: 0
     hudOffset: -0.1,0

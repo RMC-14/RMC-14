@@ -2,12 +2,41 @@
     xmlns="https://spacestation14.io"
     xmlns:cc="clr-namespace:Content.Client._RMC14.Xenonids.Watch"
     Title="{Loc cm-xeno-watch}"
-    MinSize="300 400">
-    <BoxContainer Orientation="Vertical">
-        <Label Name="BurrowedLarvaLabel" Access="Public" Text="Burrowed Larva: 0" />
-        <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
-            <BoxContainer Orientation="Vertical" Name="XenoContainer" Access="Public" />
+    MinSize="500 600" SetSize="500 1000">
+    <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
+    <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+        <!-- Hive Info -->
+        <Collapsible>
+            <CollapsibleHeading Name="HiveInfo" Title="General Hive Information"/>
+            <CollapsibleBody>
+                <BoxContainer Orientation="Vertical">
+                    <Label Name="XenoCount" Access="Public" Text="Total Sisters: 0" HorizontalAlignment="Center" />
+                    <Label Name="BurrowedLarvaLabel" Access="Public" Text="Burrowed Larva: 0" HorizontalAlignment="Center" />
+                    <Label Name="Evolution" Access="Public" Text="Evolution Rate: 0" HorizontalAlignment="Center" Visible="False"/>
+                </BoxContainer>
+            </CollapsibleBody>
+        </Collapsible>
+        <!-- Hive Counts -->
+        <Collapsible HorizontalExpand="True">
+            <CollapsibleHeading Name="HiveCounts" Title="Hive Counts" HorizontalExpand="True"/>
+            <CollapsibleBody HorizontalExpand="True" MinWidth="600">
+                <BoxContainer  Name="RowContainer"  HorizontalExpand="True" HorizontalAlignment="Center" Orientation="Vertical" Margin="0 0 2 0" Access="Public" MinWidth="600"/>
+            </CollapsibleBody>
+        </Collapsible>
+        <!-- Xeno List -->
+        <Collapsible BodyVisible="True" VerticalExpand="True" MinHeight="200">
+            <CollapsibleHeading Name="XenoHive" Title="Hive Xenoid List" Access="Public"/>
+            <CollapsibleBody Name="XenoCollapsableBody" Access="Public" VerticalExpand="True" MinHeight="200">
+                <BoxContainer Orientation="Vertical" VerticalExpand="True">
+                    <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
+                        <BoxContainer Orientation="Vertical" Name="XenoContainer" Access="Public"/>
+                    </ScrollContainer>
+                    <BoxContainer>
+                        <LineEdit Name="SearchBar" Access="Public" HorizontalExpand="True"/>
+                    </BoxContainer>
+                </BoxContainer>
+            </CollapsibleBody>
+        </Collapsible>
+        </BoxContainer>
         </ScrollContainer>
-        <LineEdit Name="SearchBar" Access="Public" />
-    </BoxContainer>
 </cc:XenoWatchWindow>

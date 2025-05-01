@@ -13,6 +13,8 @@ public partial class XenoChoiceControl : Control
     public XenoChoiceControl()
     {
         RobustXamlLoader.Load(this);
+        Plasma.ForegroundStyleBoxOverride = new StyleBoxFlat(Color.LightSkyBlue);
+        Health.ForegroundStyleBoxOverride = new StyleBoxFlat(Color.LimeGreen);
     }
 
     public void Set(string name, Texture? texture)
@@ -26,4 +28,28 @@ public partial class XenoChoiceControl : Control
         NameLabel.SetMessage(msg);
         Texture.Texture = texture;
     }
+
+    public void SetHealth(float health)
+    {
+        Health.Value = health;
+        if (health < 0)
+            Health.BackgroundStyleBoxOverride = new StyleBoxFlat(Color.Red);
+        else
+            Health.BackgroundStyleBoxOverride = new StyleBoxFlat(Color.Gray);
+
+        Health.Visible = true;
+    }
+
+    public void SetPlasma(float plasma)
+    {
+        Plasma.Value = plasma;
+        Plasma.Visible = true;
+    }
+
+    public void SetEvo(int evo)
+    {
+        EvoPoints.Text = $"Evo: {evo}";
+        EvoPoints.Visible = true;
+    }
+
 }
