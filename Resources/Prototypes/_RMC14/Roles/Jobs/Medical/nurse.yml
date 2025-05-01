@@ -35,6 +35,7 @@
         RMCSkillFirearms: 0
         RMCSkillMedical: 3
         RMCSkillSurgery: 1
+        RMCSkillFireman: 1
     - type: RMCUserBulkyArmorIncapable
     - type: JobPrefix
       prefix: cm-job-prefix-nurse

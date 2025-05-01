@@ -284,7 +284,7 @@
 - type: vendingMachineInventory
   id: RMCVendorRiot
   startingInventory: # TODO RMC14
-    Zipties: 40
+    RMCZipties: 40
     RMCGrenadeFlashBang: 20
     RMCMagazineSMGM63Rubber: 40
     ##RMCGrenadeTearGas: 40

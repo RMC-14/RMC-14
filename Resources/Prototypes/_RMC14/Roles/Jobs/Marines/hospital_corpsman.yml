@@ -83,7 +83,7 @@
   - type: SpawnPoint
     job_id: CMHospitalCorpsman
   - type: Sprite
-    state: marine_spawn
+    state: medic_spawn
 
 - type: entity
   parent: CMSpawnPointHospitalCorpsman
@@ -94,7 +94,7 @@
     squad: SquadAlpha
     role: CMHospitalCorpsman
   - type: Sprite
-    state: marine_spawn_alpha
+    state: medic_spawn_alpha
 
 - type: entity
   parent: CMSpawnPointHospitalCorpsman
@@ -105,7 +105,7 @@
     squad: SquadBravo
     role: CMHospitalCorpsman
   - type: Sprite
-    state: marine_spawn_bravo
+    state: medic_spawn_bravo
 
 - type: entity
   parent: CMSpawnPointHospitalCorpsman
@@ -116,7 +116,7 @@
     squad: SquadCharlie
     role: CMHospitalCorpsman
   - type: Sprite
-    state: marine_spawn_charlie
+    state: medic_spawn_charlie
 
 - type: entity
   parent: CMSpawnPointHospitalCorpsman
@@ -127,7 +127,7 @@
     squad: SquadDelta
     role: CMHospitalCorpsman
   - type: Sprite
-    state: marine_spawn_delta
+    state: medic_spawn_delta
 
 - type: randomHumanoidSettings
   parent: RMCRandomHumanoidBase

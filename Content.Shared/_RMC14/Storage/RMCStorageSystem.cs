@@ -94,7 +94,8 @@ public sealed class RMCStorageSystem : EntitySystem
     private void OnStorageFillItem(Entity<StorageComponent> storage, ref CMStorageItemFillEvent args)
     {
         var tries = 0;
-        while (!_storage.CanInsert(storage, args.Item, null, out var reason) &&
+        // Ignore stackables because SharedStorageSystem.OnAttemptInsert does not stack items.
+        while (!_storage.CanInsert(storage, args.Item, null, out var reason, ignoreStacks: true) &&
                reason == "comp-storage-insufficient-capacity" &&
                tries < 3)
         {

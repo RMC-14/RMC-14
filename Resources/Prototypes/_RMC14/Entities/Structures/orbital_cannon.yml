@@ -29,6 +29,9 @@
   - type: Clickable
   - type: InteractionOutline
   - type: OrbitalCannon
+    warheadTypes:
+    - RMCOrbitalCannonWarheadExplosive
+    - RMCOrbitalCannonWarheadCluster
   - type: Appearance
   - type: GenericVisualizer # TODO RMC14 animations
     visuals:
@@ -129,7 +132,7 @@
     prototypes:
     - RMCOrbitalCannonWarheadExplosive
     - RMCOrbitalCannonWarheadCluster
-    - RMCOrbitalCannonWarheadIncendiary
+#    - RMCOrbitalCannonWarheadIncendiary # TODO RMC14 incend
 
 - type: entity
   parent: MarkerBase
@@ -199,6 +202,7 @@
       delayPer: 0.4
       spread: 12
       checkProtectionPer: true
+      explosionEffect: RMCExplosionEffectClusterOB
   - type: WarpPoint
     location: 1 orbital bombardment
 
@@ -283,3 +287,25 @@
   - type: Tag
     tags:
     - HideContextMenu
+
+# Effects
+- type: entity
+  id: RMCExplosionEffectClusterOB
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 2.5
+  - type: CMExplosionEffect
+    explosion: null
+    shockWave: RMCExplosionEffectClusterOBShockWave
+
+- type: entity
+  id: RMCExplosionEffectClusterOBShockWave
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 1
+  - type: RMCExplosionShockWave
+    falloffPower: 50
+    sharpness: 25
+    width: 0.7
