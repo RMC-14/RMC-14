@@ -198,6 +198,7 @@ public sealed class RMCProjectileSystem : EntitySystem
             delta.Length() > 0)
         {
             coordinates = coordinates.Offset(delta.Normalized() / -2);
+
             if (HasComp<RMCFireProjectileComponent>(ent)){
                 coordinates = coordinates.Offset(delta.Normalized()); // Apparently that works...
             }

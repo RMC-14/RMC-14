@@ -45,58 +45,6 @@
     - range: 22
       falloff: 10
 
-
-- type: entity
-  parent: RMC40MMGrenadeM74AGMF
-  id: RMCBulletSentryFire
-  name: Flaming Ball
-  description: Uh What? This shouldn't be seen
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/grenade_launcher.rsi
-    layers:
-    - state: baton_slug
-  - type: CartridgeAmmo
-    deleteOnSpawn: true
-    proto: RMCBulletSentryFireProjectile
-  - type: Tag
-    tags:
-    - Grenade
-
-- type: entity
-  parent: RMC40MMGrenadeM74AGMF
-  id: RMCBulletSentryFireBlue
-  name: Flaming Ball
-  description: Uh What? This shouldn't be seen
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/grenade_launcher.rsi
-    layers:
-    - state: baton_slug
-  - type: CartridgeAmmo
-    deleteOnSpawn: true
-    proto: RMCBulletSentryFireProjectileBlue
-  - type: Tag
-    tags:
-    - Grenade
-
-- type: entity
-  parent: RMC40MMGrenadeM74AGMF
-  id: RMCBulletSentryFireSmoke
-  name: Flaming Ball
-  description: Uh What? This shouldn't be seen
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/grenade_launcher.rsi
-    layers:
-    - state: baton_slug
-  - type: CartridgeAmmo
-    deleteOnSpawn: true
-    proto: RMCBulletSentryFireProjectileSmoke
-  - type: Tag
-    tags:
-    - Grenade
-
 #- type: entity
 #  parent: RMC40MMGrenadeM74AGMF
 #  id: RMC40MMGrenadeM74AGMI

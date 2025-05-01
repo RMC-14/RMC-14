@@ -555,6 +555,7 @@
         - BulletImpassable
         hard: false
   - type: Sentry
+    homingShots: false
     deployDelay: 0.75
     undeployDelay: 0.75
     upgrades: null
@@ -591,6 +592,7 @@
   - type: UserIFF
     faction: FactionMarine
   - type: Sentry
+    homingShots: false
     upgrades: ["RMCSentryMiniFire", "RMCSentrySniperFire"]
     startingMagazine: RMCMagazineSentryFireBlue
     magazineTag: RMCMagazineSentryFireBlue
@@ -649,6 +651,7 @@
       AggroVisionRadius: !type:Single
         11.0
   - type: Sentry
+    homingShots: false
     deployDelay: 2
     upgrades: null
     startingMagazine: RMCMagazineSentryFireSmoke

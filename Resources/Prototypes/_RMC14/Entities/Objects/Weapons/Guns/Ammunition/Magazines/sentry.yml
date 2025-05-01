@@ -65,8 +65,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - RMCBulletSentryFire
-    proto: RMCBulletSentryFire
+      - RMCBulletSentryFireProjectile
+    proto: RMCBulletSentryFireProjectile
     capacity: 100
     cycleable: false
   - type: Sprite
@@ -90,8 +90,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - RMCBulletSentryFireBlue
-    proto: RMCBulletSentryFireBlue
+      - RMCBulletSentryFireProjectileBlue
+    proto: RMCBulletSentryFireProjectileBlue
     capacity: 100
     cycleable: false
   - type: Sprite
@@ -115,8 +115,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - RMCBulletSentryFireSmoke
-    proto: RMCBulletSentryFireSmoke
+      - RMCBulletSentryFireProjectileSmoke
+    proto: RMCBulletSentryFireProjectileSmoke
     capacity: 100
     cycleable: false
   - type: Sprite
