@@ -1,0 +1,88 @@
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechCrewSynthetic
+  name: ColMarTech Synthetic Equipment Rack
+  description: An automated rack hooked up to a colossal storage of various equipment. Can be accessed only by synthetic units.
+  components:
+  - type: AccessReader
+    access:
+    - [ "RMCAccessSynth" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCJobSynthetic
+    sections:
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      # /obj/item/coin/marine/synth
+      # /obj/item/device/defibrillator/synthetic
+      - id: RMCHeadsetSynth
+    - name: Uniform
+      choices: { CMUniform: 1 }
+      entries:
+      - id: RMCJumpsuitSynthetic
+        # /obj/item/clothing/under/rank/synthetic/old
+      - id: JumpsuitMarine
+      - id: CMJumpsuitMarineMedic
+    - name: Webbing
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBrown
+        recommended: true
+      - id: CMWebbingBlack
+        recommended: true
+      - id: CMWebbingPouch
+      - id: CMWebbing
+      - id: CMWebbingHolster
+    - name: Shoes
+      choices: { RMCShoes: 1 }
+      entries:
+      - id: RMCShoesWhite
+      - id: CMBootsBlackFilled
+    - name: Helmet
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: RMCHardhatOrange
+        name: orange hard hat
+      - id: ClothingHeadHatWelding
+      # /obj/item/clothing/head/cmcap/flap
+#    - name: Suit
+#      choices: { CMSuit: 1 }
+#      entries:
+    # - id: CMUtilityVestSynth
+    # /obj/item/clothing/suit/storage/marine/light/synvest/grey
+    # /obj/item/clothing/suit/storage/marine/light/synvest/dgrey
+    # /obj/item/clothing/suit/storage/marine/light/synvest/jungle
+    # /obj/item/clothing/suit/storage/marine/light/synvest/snow
+    # /obj/item/clothing/suit/storage/marine/light/synvest/desert
+    - name: Gloves
+      choices: { CMGloves: 1 }
+      entries:
+      - id: CMHandsInsulated
+      - id: CMHandsBlackMarine
+      - id: CMHandsLatex
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: RMCSmartpack
+        name: S-V42 smartpack, blue
+      - id: RMCSmartpackBlack
+        name: S-V42 smartpack, black
+      - id: RMCSmartpackGreen
+        name: S-V42 smartpack, green
+      - id: RMCSmartpackTan
+        name: S-V42 smartpack, tan
+      - id: RMCSmartpackWhite
+        name: S-V42 smartpack, white
+      - id: RMCSmartpackA1
+        name: S-V42A1 smartpack, blue
+      - id: RMCSmartpackA1Black
+        name: S-V42A1 smartpack, black
+      - id: RMCSmartpackA1Green
+        name: S-V42A1 smartpack, green
+      - id: RMCSmartpackA1Tan
+        name: S-V42A1 smartpack, tan
+      - id: RMCSmartpackA1White
+        name: S-V42A1 smartpack, white
