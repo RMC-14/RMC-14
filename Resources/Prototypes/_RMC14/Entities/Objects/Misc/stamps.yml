@@ -150,7 +150,7 @@
   parent: CMStampBase
   id: CMStampMarine
   name: marine rubber stamp
-  suffix: Admin, unmc
+  suffix: Admin, UNMC
   components:
   - type: Sprite
     state: stamp-marine
@@ -163,7 +163,7 @@
   parent: CMStampBase
   id: CMStampCMB
   name: colony marshal bureau rubber stamp
-  suffix: Admin, cmb
+  suffix: Admin, CMB
   components:
   - type: Sprite
     state: stamp-cmb
@@ -176,7 +176,7 @@
   parent: CMStampBase
   id: CMStampProvost
   name: provost rubber stamp
-  suffix: Admin, provost
+  suffix: Admin, Provost
   components:
   - type: Sprite
     state: stamp-provost # update sprite
