@@ -1,0 +1,84 @@
+﻿- type: job
+  parent: CMJobBase
+  id: CMCLFSoldier
+  name: CMCLFSoldier
+  description: rmc-job-description-clf-soldier
+  playTimeTracker: CMJobCLFSoldier
+  ranks:
+    RMCRankLanceCorporal: [ ]
+  startingGear: RMCGearCLFSoldier
+  icon: RMCJobIconCLFSoldier
+  joinNotifyCrew: false
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillPolice: 2
+        RMCSkillFireman: 1
+        RMCSkillConstruction: 1
+        RMCSkillEngineer: 1
+        RMCSkillMedical: 1
+        RMCSkillVehicles: 1
+        RMCSkillEndurance: 1
+        RMCSkillJtac: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-clf-soldier
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidCLFSoldier
+  name: clf soldier role
+  suffix: Role
+  components:
+  - type: Sprite
+    sprite: Markers/cross.rsi
+    state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCCLFSoldier
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCCLFSoldier
+  components:
+  - type: RMCJobSpawner
+    job: CMCLFSoldier
+
+- type: startingGear
+  id: RMCGearCLFSoldier
+  equipment:
+    head: RMCArmorHelmetSecurity
+    mask: RMCM5Bayonet # TODO RMC14
+    ears: RMCHeadsetDistressDukes
+    jumpsuit: JumpsuitMarine # TOOD RMC14
+    outerClothing: RMCArmorVestNone
+    gloves: ClothingHandsGlovesLeather
+    shoes: RMCShoesBrown
+    id: RMCIDCardCLFSoldier
+    belt: RMCM276ShotgunShellLoadingRigFill # TODO RMC14
+    back: RMCWeaponShotgunHG3712
+    pocket1: RMCFlashlight
+    pocket2: RMCPouchFirstAidInjectors
+  inhand:
+  - WeaponSMGM63 # TODO RMC14
+  - CMMagazineSMGM63 # TODO RMC14
+
+- type: playTimeTracker
+  id: CMJobCLFSoldier
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCLFSoldier
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: clf_mil
+
+- type: entity
+  parent: CMIDCardBase
+  id: RMCIDCardCLFSoldier
+  name: clf soldier's ID card
+  components:
+  - type: PresetIdCard
+    job: CMCLFSoldier

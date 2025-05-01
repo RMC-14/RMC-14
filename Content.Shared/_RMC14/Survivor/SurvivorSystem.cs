@@ -1,4 +1,7 @@
-﻿using Content.Shared.Inventory;
+﻿using Content.Shared._RMC14.Armor;
+using Content.Shared.GameTicking;
+using Content.Shared.Inventory;
+using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -18,10 +21,10 @@ public sealed class SurvivorSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<EquipSurvivorPresetComponent, MapInitEvent>(OnPresetMapInit);
+        SubscribeLocalEvent<EquipSurvivorPresetComponent, PlayerSpawnCompleteEvent>(OnPresetPlayerSpawnComplete, after: [typeof(CMArmorSystem)]);
     }
 
-    private void OnPresetMapInit(Entity<EquipSurvivorPresetComponent> ent, ref MapInitEvent args)
+    private void OnPresetPlayerSpawnComplete(Entity<EquipSurvivorPresetComponent> ent, ref PlayerSpawnCompleteEvent args)
     {
         ApplyPreset(ent, ent.Comp.Preset);
     }
@@ -91,10 +94,13 @@ public sealed class SurvivorSystem : EntitySystem
             var backs = _inventory.GetSlotEnumerator(mob, SlotFlags.BACK);
             while (backs.MoveNext(out var back))
             {
-                if (back.ContainedEntity is not { } backpack)
+                if (back.ContainedEntity is not { } backpack ||
+                    !TryComp(backpack, out StorageComponent? storage))
+                {
                     continue;
+                }
 
-                if (_storage.Insert(backpack, spawn, out _))
+                if (_storage.Insert(backpack, spawn, out _, storageComp: storage))
                     return;
             }
 

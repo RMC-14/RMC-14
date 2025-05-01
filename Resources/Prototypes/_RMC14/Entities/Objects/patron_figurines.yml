@@ -94,7 +94,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronIanthaAtikson
   name: Iantha Atikson
-  description: This Figurine of a Quartermaster, despite it's inanimate nature, seems to stare back at you with cold, refined calculation. That glossy look in those fake eyes make you feel uncomfortable, and you get the impression that you're just another number to her.
+  description: A figurine of an ASO. A sense of mental exhaustion fills your mind and clouds your vision, and you swear you could see paperwork on the back of your eyelids. Was she... always facing toward you?
   components:
   - type: Sprite
     state: Iantha_Atikson

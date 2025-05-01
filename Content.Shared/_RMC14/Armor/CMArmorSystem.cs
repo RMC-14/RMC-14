@@ -11,6 +11,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Explosion;
 using Content.Shared.FixedPoint;
+using Content.Shared.GameTicking;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Movement.Components;
@@ -20,6 +21,7 @@ using Content.Shared.Weapons.Melee;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Armor;
 
@@ -30,14 +32,21 @@ public sealed class CMArmorSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly ISerializationManager _serializationManager = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> ArmorGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BioGroup = "Burn";
     private static readonly int MaxXenoArmor = 55;
 
+    private EntityQuery<RMCAllowSuitStorageUserWhitelistComponent> _rmcAllowSuitStorageUserWhitelistQuery;
+
     public override void Initialize()
     {
+        _rmcAllowSuitStorageUserWhitelistQuery = GetEntityQuery<RMCAllowSuitStorageUserWhitelistComponent>();
+
+        SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
+
         SubscribeLocalEvent<CMArmorComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<CMArmorComponent, ComponentRemove>(OnRemove);
         SubscribeLocalEvent<CMArmorComponent, DamageModifyEvent>(OnDamageModify);
@@ -72,6 +81,21 @@ public sealed class CMArmorSystem : EntitySystem
 
         SubscribeLocalEvent<RMCAllowSuitStorageUserWhitelistComponent, GotEquippedEvent>(OnAllowSuitStorageUserWhitelistGotEquipped);
         SubscribeLocalEvent<RMCAllowSuitStorageUserWhitelistComponent, GotUnequippedEvent>(OnAllowSuitStorageUserWhitelistGotUnequipped);
+    }
+
+    private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
+    {
+        if (!TryComp(ev.Mob, out InventoryComponent? inventory))
+            return;
+
+        var slots = _inventory.GetSlotEnumerator((ev.Mob, inventory));
+        while (slots.MoveNext(out var slot))
+        {
+            if (!_rmcAllowSuitStorageUserWhitelistQuery.TryComp(slot.ContainedEntity, out var whitelist))
+                continue;
+
+            OnAllowSuitStorageWhitelistEquipped((slot.ContainedEntity.Value, whitelist), ev.Mob);
+        }
     }
 
     private void OnMapInit(Entity<CMArmorComponent> armored, ref MapInitEvent args)
@@ -399,7 +423,25 @@ public sealed class CMArmorSystem : EntitySystem
 
     private void OnAllowSuitStorageUserWhitelistGotEquipped(Entity<RMCAllowSuitStorageUserWhitelistComponent> ent, ref GotEquippedEvent args)
     {
-        if (!_entityWhitelist.IsWhitelistPass(ent.Comp.User, args.Equipee))
+        OnAllowSuitStorageWhitelistEquipped(ent, args.Equipee);
+    }
+
+    private void OnAllowSuitStorageUserWhitelistGotUnequipped(Entity<RMCAllowSuitStorageUserWhitelistComponent> ent, ref GotUnequippedEvent args)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        var comp = EnsureComp<AllowSuitStorageComponent>(ent);
+        comp.Whitelist = _serializationManager.CreateCopy(ent.Comp.DefaultWhitelist, notNullableOverride: true);
+        Dirty(ent, comp);
+    }
+
+    private void OnAllowSuitStorageWhitelistEquipped(Entity<RMCAllowSuitStorageUserWhitelistComponent> ent, EntityUid user)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        if (!_entityWhitelist.IsWhitelistPass(ent.Comp.User, user))
         {
             var comp = EnsureComp<AllowSuitStorageComponent>(ent);
             comp.Whitelist = _serializationManager.CreateCopy(ent.Comp.DefaultWhitelist, notNullableOverride: true);
@@ -411,12 +453,5 @@ public sealed class CMArmorSystem : EntitySystem
             return;
 
         EntityManager.AddComponents(ent, allowed);
-    }
-
-    private void OnAllowSuitStorageUserWhitelistGotUnequipped(Entity<RMCAllowSuitStorageUserWhitelistComponent> ent, ref GotUnequippedEvent args)
-    {
-        var comp = EnsureComp<AllowSuitStorageComponent>(ent);
-        comp.Whitelist = _serializationManager.CreateCopy(ent.Comp.DefaultWhitelist, notNullableOverride: true);
-        Dirty(ent, comp);
     }
 }

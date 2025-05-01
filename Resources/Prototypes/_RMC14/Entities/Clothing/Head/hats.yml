@@ -343,7 +343,7 @@
   parent: CMHeadCap
   id: CMHeadCapCMO
   name: chief medical officer's peaked cap
-  description: A peaked cap given to high-ranking civilian medical officers. Looks just a touch silly.
+  description: A peaked cap given to high-ranking medical officers. Looks just a touch silly.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/cmo_cap.rsi
