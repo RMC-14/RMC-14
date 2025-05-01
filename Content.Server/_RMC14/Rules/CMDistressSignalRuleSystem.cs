@@ -353,8 +353,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 if (SelectedPlanetMap.Value.Comp.SurvivorJobs != null)
                     comp.SurvivorJobs = SelectedPlanetMap.Value.Comp.SurvivorJobs;
 
-                if (SelectedPlanetMap.Value.Comp.SurvivorJobInserts != null)
-                    comp.SurvivorJobInserts = SelectedPlanetMap.Value.Comp.SurvivorJobInserts;
+                comp.SurvivorJobInserts = SelectedPlanetMap.Value.Comp.SurvivorJobInserts;
+                comp.SurvivorJobOverrides = SelectedPlanetMap.Value.Comp.SurvivorJobOverrides;
             }
 
             var survivorSpawnersLeft = new Dictionary<ProtoId<JobPrototype>, List<EntityUid>>();
@@ -656,10 +656,24 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     if (!ev.Profiles.TryGetValue(id, out var profile))
                         continue;
 
-                    if (profile.JobPriorities.TryGetValue(job, out var priority) &&
-                        priority > JobPriority.Never)
+                    if (comp.SurvivorJobOverrides != null)
+                    { // Override the job
+                        foreach (var (originalJob, overrideJob) in comp.SurvivorJobOverrides)
+                        {
+                            if (profile.JobPriorities.TryGetValue(originalJob, out var priority) &&
+                                priority > JobPriority.Never && overrideJob == job)
+                            {
+                                players[(int)priority].Add(id);
+                            }
+                        }
+                    }
+                    else
                     {
-                        players[(int) priority].Add(id);
+                        if (profile.JobPriorities.TryGetValue(job, out var priority) &&
+                            priority > JobPriority.Never)
+                        {
+                            players[(int)priority].Add(id);
+                        }
                     }
                 }
             }

@@ -16,24 +16,19 @@
     state: private
   greeting: rmc-job-greeting-forecon
   playTimeTracker: RMCSurvivorForecon
+  hidden: true
 
 - type: startingGear
   id: RMCGearForeconBase
   equipment:
     jumpsuit: RMCJumpsuitSurvivorMarineDropPouch
-    back: CMSatchelMarine
+    back: RMCSatchelMarineForeconSurvivorFill
     shoes: CMBootsBlackFilled
-    outerClothing: RMCOuterClothingExternalWebbing
+    outerClothing: RMCOuterClothingExternalWebbingForeconSurvivorFill
     id: CMIDCardStandardDogtag
     ears: RMCHeadsetForecon
     pocket1: RMCPouchFirstAidInjectors
     pocket2: RMCPouchFirstAidSplintsGauzeOintment
-  storage:
-    outerClothing:
-    - CMCrowbar
-    - RMCFlashlight
-    back:
-    - RMCRadioHandheldColony
 
 - type: playTimeTracker
   id: RMCSurvivorForecon
@@ -44,8 +39,8 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
-    randomGear:
-    - [ CMHeadCap ] # TODO durag and grey beanie
+    randomClothing: # TODO durag and grey beanie
+    - [ CMHeadCap ]
     - [ RMCBoonieTan ]
     - [ ArmorHelmetM10 ]
     randomGearOther:

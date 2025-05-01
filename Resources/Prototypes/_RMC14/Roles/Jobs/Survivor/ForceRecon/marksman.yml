@@ -36,6 +36,8 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForeconMarksman
     - type: ScoutWhitelist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-forecon
   hidden: true
 
 - type: playTimeTracker

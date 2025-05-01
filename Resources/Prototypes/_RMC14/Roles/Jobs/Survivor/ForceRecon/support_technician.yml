@@ -35,6 +35,8 @@
         - RMCSquadFORECON
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForeconNoPistol
+    - type: JobPrefix
+      prefix: rmc-job-prefix-forecon
   hidden: true
 
 - type: playTimeTracker
@@ -45,21 +47,10 @@
   parent: RMCGearForeconBase
   id: RMCGearForeconSupportTech
   equipment:
-    outerClothing: RMCOuterClothingExternalWebbing
     eyes: RMCWeldingGoggles
-    back: RMCSatchelMarineLogisticsBig
+    back: RMCSatchelMarineLogisticsBigForeconSurvivorFill
     gloves: CMHandsInsulated
     belt: CMBeltUtilityFilled
-  storage:
-    outerClothing:
-    - CMCrowbar
-    - RMCFlashlight
-    back:
-    - RMCRadioHandheldColony
-    - CMFireExtinguisherPortable
-    - CMDefibrillator
-    - RMCPouchMedkitFillAdvanced
-    - CMHealthAnalyzer
 
 - type: entity
   parent: CMSpawnPointJobBase

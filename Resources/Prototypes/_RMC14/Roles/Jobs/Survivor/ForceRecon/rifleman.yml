@@ -27,6 +27,8 @@
       whitelist:
         tags:
         - RMCSquadFORECON
+    - type: JobPrefix
+      prefix: rmc-job-prefix-forecon
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForecon
   hidden: true

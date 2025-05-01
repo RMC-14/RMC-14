@@ -35,6 +35,8 @@
         - RMCSquadFORECON
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForeconNoPistol
+    - type: JobPrefix
+      prefix: rmc-job-prefix-forecon
   hidden: true
 
 - type: playTimeTracker

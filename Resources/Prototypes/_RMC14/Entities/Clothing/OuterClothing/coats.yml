@@ -530,3 +530,14 @@
     contents:
     - id: CMFlash
     - id: RMCHandcuffs
+
+- type: entity
+  parent: RMCBaseJacketButtonable
+  id: RMCJacketWindbreaker
+  name: green windbreaker
+  description: A green windbreaker.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/windbreaker.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/windbreaker.rsi

@@ -36,13 +36,15 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForeconNoPrimary
     - type: SniperWhitelist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-forecon
   hidden: true
 
 - type: startingGear
   parent: RMCGearForeconBase
   id: RMCGearForeconSniper
   equipment:
-    outerClothing: RMCArmorUDEPForecon
+    outerClothing: RMCArmorUDEPForeconFilled
     # todo sniper facepaint
 
 - type: playTimeTracker

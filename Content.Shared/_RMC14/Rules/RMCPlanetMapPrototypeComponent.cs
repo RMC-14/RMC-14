@@ -31,4 +31,12 @@ public sealed partial class RMCPlanetMapPrototypeComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public Dictionary<ProtoId<JobPrototype>, List<(ProtoId<JobPrototype> Insert, int Amount)>>? SurvivorJobInserts;
+
+    /// <summary>
+    /// Will override a preferred job to another
+    /// Useful for FORECON so any survivor preference will be overriden to FORECON survivor
+    /// Basically, if security survivor is overriden by forecon survivor, it will be as if sec survivor: high is forecon survivor: high
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public Dictionary<ProtoId<JobPrototype>, ProtoId<JobPrototype>>? SurvivorJobOverrides;
 }

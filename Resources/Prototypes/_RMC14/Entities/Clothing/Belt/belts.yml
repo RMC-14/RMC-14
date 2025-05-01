@@ -1017,6 +1017,17 @@
     - id: RMCWeaponRevolverMateba
 
 - type: entity
+  parent: RMCMatebaBelt
+  id: RMCMatebaBeltForeconFilled
+  suffix: Filled, Forecon
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMateba
+      amount: 3
+    - id: RMCWeaponRevolverMateba
+
+- type: entity
   parent: RMCBeltHolsterPistol
   id: RMCMK80BeltFilled
   suffix: Filled
