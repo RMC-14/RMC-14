@@ -1,5 +1,5 @@
 ﻿- type: localizedDataset
   id: RMCNamesHEFA
   values:
-    prefix: rmc-hefa-name-
+    prefix: rmc-name-hefa-
     count: 49

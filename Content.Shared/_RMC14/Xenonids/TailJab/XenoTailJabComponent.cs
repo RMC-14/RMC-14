@@ -30,5 +30,11 @@ public sealed partial class XenoTailJabComponent : Component
     public TimeSpan SlowdownTime = TimeSpan.FromSeconds(0.5);
 
     [DataField, AutoNetworkedField]
+    public TimeSpan WallSlamSlowdownTime = TimeSpan.FromSeconds(0.5);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan WallSlamStunTime = TimeSpan.FromSeconds(0.5);
+
+    [DataField, AutoNetworkedField]
     public float ThrowRange = 0.25f;
 }

@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Item;
 using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
@@ -57,4 +58,8 @@ public sealed partial class EntityWhitelist
     /// </summary>
     [DataField]
     public bool RequireAll;
+
+    // RMC14
+    [DataField]
+    public Dictionary<EntProtoId<SkillDefinitionComponent>, int>? Skills;
 }

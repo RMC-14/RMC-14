@@ -78,7 +78,6 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, PullStartedMessage>(OnFrenzyPullStarted, after: [typeof(RMCPullingSystem)] );
         SubscribeLocalEvent<XenoFrenzyPheromonesComponent, PullStoppedMessage>(OnFrenzyPullStopped, after: [typeof(RMCPullingSystem)] );
 
-
         SubscribeLocalEvent<XenoActivePheromonesComponent, MobStateChangedEvent>(OnActiveMobStateChanged);
 
         Subs.BuiEvents<XenoPheromonesComponent>(XenoPheromonesUI.Key, subs =>
@@ -169,7 +168,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         if (_rmcFlammable.IsOnFire(warding.Owner))
             return;
 
-        if (!TryComp<XenoComponent>(warding, out var xeno) || (!xeno.HealOffWeeds && !_weeds.IsOnWeeds(warding.Owner)))
+        if (!TryComp<XenoRegenComponent>(warding, out var xeno) || (!xeno.HealOffWeeds && !_weeds.IsOnWeeds(warding.Owner)))
         {
             var damageReduct = _rmcDamageable.DistributeHealing(warding.Owner, warding.Comp.CritDamageGroup, warding.Comp.Multiplier * 0.25);
             args.Damage -= damageReduct;
@@ -273,7 +272,7 @@ public abstract class SharedXenoPheromonesSystem : EntitySystem
         if (newWardMult > warding.Multiplier)
             return false;
 
-        if ((TryComp<XenoComponent>(ent, out var xeno) && xeno.HealOffWeeds) || !_weeds.IsOnWeeds(ent))
+        if ((TryComp<XenoRegenComponent>(ent, out var xeno) && xeno.HealOffWeeds) || !_weeds.IsOnWeeds(ent))
             return false;
 
         return true;

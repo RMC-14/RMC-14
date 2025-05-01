@@ -1,9 +1,11 @@
 using System.Numerics;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
-using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Coordinates;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Flash;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
@@ -11,6 +13,7 @@ using Content.Shared.Standing;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
@@ -25,6 +28,8 @@ public sealed class RMCSizeStunSystem : EntitySystem
 
     [Dependency] private readonly RMCDazedSystem _dazed = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private readonly SharedFlashSystem _flash = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
@@ -37,6 +42,8 @@ public sealed class RMCSizeStunSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+
+    private readonly HashSet<Entity<MarineComponent>> _marines = new();
 
     public override void Initialize()
     {
@@ -194,22 +201,57 @@ public sealed class RMCSizeStunSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var query = _entityLookup.GetEntitiesInRange(ent, ent.Comp.Range);
-        var stunTime = TimeSpan.FromSeconds(ent.Comp.Duration);
-
-        foreach (var entity in query)
+        _marines.Clear();
+        _entityLookup.GetEntitiesInRange(ent.Owner.ToCoordinates(), ent.Comp.Range, _marines);
+        foreach (var target in _marines)
         {
-            if (HasComp<XenoComponent>(entity))
-                continue;
+            if (ent.Comp.Filters != null)
+            {
+                var passedFilter = false;
+                foreach (var filter in ent.Comp.Filters)
+                {
+                    if (_entityWhitelist.IsWhitelistFail(filter.Whitelist, target))
+                        continue;
 
-            var transform = Transform(entity);
-            if (!_random.Prob(ent.Comp.Probability) || !_interaction.InRangeUnobstructed(ent, transform.Coordinates, ent.Comp.Range))
-                continue;
+                    var probability = filter.Probability ?? ent.Comp.Probability;
+                    var range = filter.Range ?? ent.Comp.Range;
+                    var stun = filter.Stun ?? ent.Comp.Stun;
+                    var flash = filter.Flash ?? ent.Comp.Flash;
+                    var flashAdditionalStunTime = filter.FlashAdditionalStunTime ?? ent.Comp.FlashAdditionalStunTime;
+                    Stun(ent, target, args.User, probability, range, stun, flash, flashAdditionalStunTime);
+                    passedFilter = true;
+                    break;
+                }
 
-            _stun.TryStun(entity, stunTime, true);
-            _stun.TryKnockdown(entity, stunTime, true);
+                if (passedFilter)
+                    continue;
+            }
+
+            Stun(
+                ent,
+                target,
+                args.User,
+                ent.Comp.Probability,
+                ent.Comp.Range,
+                ent.Comp.Stun,
+                ent.Comp.Flash,
+                ent.Comp.FlashAdditionalStunTime
+            );
         }
 
         args.Handled = true;
+    }
+
+    private void Stun(Entity<RMCStunOnTriggerComponent> ent, EntityUid target, EntityUid? user, float probability, float range, TimeSpan stun, TimeSpan flash, TimeSpan flashAdditionalStunTime)
+    {
+        var coordinates = Transform(target).Coordinates;
+        if (!_random.Prob(probability) || !_interaction.InRangeUnobstructed(ent, coordinates, range))
+            return;
+
+        if (_flash.Flash(target, user, ent, (float) flash.TotalMilliseconds, displayPopup: false))
+            stun += flashAdditionalStunTime;
+
+        _stun.TryStun(target, stun, true);
+        _stun.TryKnockdown(target, stun, true);
     }
 }

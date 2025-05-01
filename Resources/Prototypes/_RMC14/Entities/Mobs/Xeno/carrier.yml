@@ -1,10 +1,11 @@
-- type: entity
+﻿- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
   id: RMCXenoCarrierBase
   name: Carrier
   description: A strange-looking alien creature. It carries a number of scuttling jointed crablike creatures.
@@ -211,4 +212,4 @@
     distance: 2.5
   - type: XenoGenerateEggs
   - type: XenoEggSustainer
-    
+

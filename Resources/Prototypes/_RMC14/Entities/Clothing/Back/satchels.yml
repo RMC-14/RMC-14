@@ -186,8 +186,8 @@
 - type: entity
   parent: CMSatchel
   id: CMSatchelMarine
-  name: Marine satchel
-  description: A heavy-duty satchel carried by some Marine soldiers and support personnel.
+  name: UNMC satchel
+  description: A heavy-duty satchel carried by some UNMC soldiers and support personnel.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Marines/standard/jungle-desert-classic.rsi
@@ -436,6 +436,21 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack.rsi
+
+- type: entity
+  parent: RMCSatchelLightpack
+  id: RMCSatchelLightpackFilledRoyal
+  suffix: Filled, Royal
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMFirstAidKitFilled
+    - id: RMCPowerCellSmartgun
+    - id: RMCMagazineSmartGunHT
+      amount: 2
+    - id: RMCPacketGrenadeIncendiaryFilled # TODO RMC14 R2175
+    - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175
+    - id: CMPackFlare
 
 - type: entity
   parent: RMCSatchelWelder

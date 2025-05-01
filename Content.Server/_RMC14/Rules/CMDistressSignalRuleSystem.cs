@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Server._RMC14.Commendations;
+using System.Numerics;
 using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.MapInsert;
 using Content.Server._RMC14.Marines;
@@ -52,6 +52,7 @@ using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.WeedKiller;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction;
+using Content.Shared._RMC14.Xenonids.Construction.FloorResin;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Evolution;
@@ -96,7 +97,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IBanManager _bans = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly CommendationSystem _commendation = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly ContainerSystem _containers = default!;
@@ -111,7 +111,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
@@ -144,6 +143,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly IntelSystem _intel = default!;
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
     [Dependency] private readonly RMCAmbientLightSystem _rmcAmbientLight = default!;
+    [Dependency] private readonly RMCGameRuleExtrasSystem _gameRulesExtras = default!;
 
 
     private readonly HashSet<string> _operationNames = new();
@@ -663,7 +663,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     continue;
                 }
 
-                if (!_mapLoader.TryLoadGrid(dropshipMap, ships[shipIndex], out var shipGrids))
+                if (!_mapLoader.TryLoadGrid(dropshipMap, ships[shipIndex], out var shipGrids, offset: new Vector2(shipIndex * 100, shipIndex * 100)))
                 {
                     shipIndex++;
 
@@ -678,7 +678,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     shipIndex = 0;
 
                 var computers = EntityQueryEnumerator<DropshipNavigationComputerComponent, TransformComponent>();
-                var launched = false;
                 while (computers.MoveNext(out var computerId, out var computer, out var xform))
                 {
                     if (xform.GridUid != shipGrids.Value)
@@ -687,12 +686,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     if (!_dropship.FlyTo((computerId, computer), destinationId, null, startupTime: 1f, hyperspaceTime: 1f))
                         continue;
 
-                    launched = true;
                     break;
                 }
-
-                if (launched)
-                    break;
             }
 
             var marineFactions = EntityQueryEnumerator<MarineIFFComponent>();
@@ -1213,7 +1208,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         var tunnels = EntityQueryEnumerator<XenoTunnelComponent>();
         while (tunnels.MoveNext(out var uid, out _))
         {
-            EnsureComp<DeletedByWeedKillerComponent>(uid);
+            RemCompDeferred<DeletedByWeedKillerComponent>(uid);
         }
 
         var rmcAmbientComp = EnsureComp<RMCAmbientLightComponent>(rule.Comp.XenoMap);
@@ -1439,33 +1434,15 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         else
             args.AddLine($"{Loc.GetString($"cm-distress-signal-{result.ToString().ToLower()}")}");
 
-        var commendations = _commendation.GetCommendations();
-        var marineAwards = commendations.Where(c => c.Type == CommendationType.Medal).ToArray();
-        if (marineAwards.Length > 0)
-        {
-            args.AddLine(string.Empty);
-            args.AddLine(Loc.GetString("cm-distress-signal-medals"));
-            foreach (var award in marineAwards)
-            {
-                // TODO RMC14 rank
-                args.AddLine($"{award.Receiver} is awarded the {award.Name}: '{award.Text}'");
-            }
+        args.AddLine(string.Empty);
 
+        if (_gameRulesExtras.MemorialEntry(ref args))
             args.AddLine(string.Empty);
-        }
 
-        var xenoAwards = commendations.Where(c => c.Type == CommendationType.Jelly).ToArray();
-        if (xenoAwards.Length > 0)
-        {
+        if (_gameRulesExtras.MarineAwards(ref args))
             args.AddLine(string.Empty);
-            args.AddLine(Loc.GetString("cm-distress-signal-jellies"));
-            foreach (var award in xenoAwards)
-            {
-                args.AddLine($"{award.Receiver} is awarded the {award.Name}: '{award.Text}' by {award.Giver}");
-            }
 
-            args.AddLine(string.Empty);
-        }
+        _gameRulesExtras.XenoAwards(ref args);
     }
 
     protected override void ActiveTick(EntityUid uid, CMDistressSignalRuleComponent component, GameRuleComponent gameRule, float frameTime)
@@ -1712,6 +1689,18 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             _hive.SetHive(weeds, hive);
         }
 
+        var resinSlowdown = EntityQueryEnumerator<ResinSlowdownModifierComponent>();
+        while (resinSlowdown.MoveNext(out var uid, out _))
+        {
+            _hive.SetHive(uid, hive);
+        }
+
+        var resinSpeedup = EntityQueryEnumerator<ResinSpeedupModifierComponent>();
+        while (resinSpeedup.MoveNext(out var uid, out _))
+        {
+            _hive.SetHive(uid, hive);
+        }
+
         var tunnelQuery = EntityQueryEnumerator<XenoTunnelComponent>();
         var tunnels = new List<EntityUid>();
 
@@ -1722,7 +1711,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         // Replace all pre-mapped tunnels with a new tunnel with name and associated with the hive
         foreach (var tunnel in tunnels)
         {
-            _xenoTunnel.TryPlaceTunnel(hive, null, tunnel.ToCoordinates(), out _);
+            if (_xenoTunnel.TryPlaceTunnel(hive, null, tunnel.ToCoordinates(), out var newTunnel))
+                RemCompDeferred<DeletedByWeedKillerComponent>(newTunnel.Value);
+
             QueueDel(tunnel);
         }
     }

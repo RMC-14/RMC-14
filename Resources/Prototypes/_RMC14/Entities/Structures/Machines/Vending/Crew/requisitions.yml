@@ -411,13 +411,13 @@
       entries:
       - id: RMCBoxMagazinePistolM13
         name: Magazine Box (M13 x 22)
-        box: RMCMagazineM11
+        box: RMCMagazinePistolM13
       - id: RMCBoxMagazinePistolM13Ext
         name: Magazine Box (Ext M13 x 14)
-        box: RMCMagazineExtendedM11
+        box: RMCMagazinePistolM13Ext
       - id: RMCBoxMagazinePistolM13Drum
         name: Magazine Box (Drum M13 x 12)
-        box: RMCMagazineDrumM13
+        box: RMCMagazinePistolM13Drum
       - id: RMCBoxMagazineSMGM63
         name: Magazine Box (M63 x 12)
         box: CMMagazineSMGM63
@@ -618,6 +618,7 @@
   id: ColMarTechCargoUniform
   name: ColMarTech surplus uniform vendor
   description: An automated supply rack hooked up to a big storage of standard marine uniforms. Can be accessed by the Requisitions Officer and Cargo Techs.
+  suffix: Requisitions
   components:
   - type: AccessReader
     access:

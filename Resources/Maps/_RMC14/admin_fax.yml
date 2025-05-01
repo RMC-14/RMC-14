@@ -10974,7 +10974,7 @@ entities:
   - uid: 1612
     components:
     - type: MetaData
-      name: UPP Communications Officer
+      name: SPP Communications Officer
     - type: Transform
       pos: 10.469939,-30.343363
       parent: 2

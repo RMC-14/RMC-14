@@ -49,7 +49,7 @@
         amount: 25
       - id: CMWeaponPistolM1984Empty
         amount: 25
-      - id: RMCWeaponPistolM13
+      - id: RMCWeaponPistolM13Empty
         amount: 25
       #- id: WeaponFlareM82F
       #  amount: 10
@@ -403,8 +403,8 @@
 #      #  amount: 1
       - id: RMCFlashlight # Combat Flashlight
         amount: 5
-#      #- id: RMCBoxFlashlights
-#      #  amount: 1
+      - id: RMCBoxFlashlights
+        amount: 1
       - id: RMCBoxPackFlare
         amount: 1
       - id: CMPackFlare

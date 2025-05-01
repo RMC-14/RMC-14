@@ -1,10 +1,11 @@
-- type: entity
+﻿- type: entity
   abstract: true
   parent:
   - CMXenoDeveloped
   - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
   id: RMCXenoLurkerBase
   name: Lurker
   description: A beefy, fast alien with sharp claws.
@@ -37,6 +38,7 @@
     tier: 2
     hudOffset: -0.15,0.05
     unlockAt: 540 # 9 minutes
+  - type: XenoRegen
     restHealMultiplier:  1.5
   - type: XenoLight
   - type: XenoDevolve
@@ -157,7 +159,7 @@
     throwRange: 0.5
     damage:
       groups:
-        Brute: 35
+        Brute: 50
   - type: XenoFlurry
     damage:
       groups:
