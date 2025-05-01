@@ -55,7 +55,6 @@
     - id: RMCRadioHandheldColony
     - id: CMFireExtinguisherPortable
     - id: CMDefibrillator
-    - id: RMCPouchMedkitFillAdvanced
     - id: CMHealthAnalyzer
 
 - type: entity

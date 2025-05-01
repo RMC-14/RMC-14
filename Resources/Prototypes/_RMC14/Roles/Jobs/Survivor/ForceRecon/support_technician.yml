@@ -34,7 +34,7 @@
         tags:
         - RMCSquadFORECON
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetForeconNoPistol
+      preset: RMCSurvivorPresetForeconSupportTech
     - type: JobPrefix
       prefix: rmc-job-prefix-forecon
   hidden: true
@@ -61,3 +61,13 @@
     job_id: RMCSurvivorForeconSupportTech
   - type: Sprite
     state: spec_spawn
+
+- type: entity
+  parent: RMCSurvivorPresetForeconNoPistol
+  id: RMCSurvivorPresetForeconSupportTech
+  name: forecon survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomGear:
+    - [ RMCPouchMedkitFillAdvanced ]
