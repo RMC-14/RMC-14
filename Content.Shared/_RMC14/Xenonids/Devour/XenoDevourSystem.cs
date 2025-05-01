@@ -29,7 +29,6 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Xenonids.Devour;
@@ -51,8 +50,6 @@ public sealed class XenoDevourSystem : EntitySystem
     [Dependency] private readonly SharedMeleeWeaponSystem _meleeWeapon = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly MeleeSoundSystem _meleeSound = default!;
-    [Dependency] private readonly IPrototypeManager _protoManager = default!;
 
     private EntityQuery<DevouredComponent> _devouredQuery;
     private EntityQuery<XenoDevourComponent> _xenoDevourQuery;
