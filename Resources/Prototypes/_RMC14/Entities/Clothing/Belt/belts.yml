@@ -915,9 +915,9 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCWeaponSMGM63ExtendedFilled
+    - id: CMMagazineSMGM63Ext
       amount: 2
-    - id: WeaponSMGM63
+    - id: RMCWeaponSMGM63ExtendedFilled
 
 - type: entity
   parent: CMBeltBaseStorage
