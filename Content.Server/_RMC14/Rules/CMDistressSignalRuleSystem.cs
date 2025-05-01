@@ -656,24 +656,29 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     if (!ev.Profiles.TryGetValue(id, out var profile))
                         continue;
 
+                    var overriden = false;
+
                     if (comp.SurvivorJobOverrides != null)
                     { // Override the job
                         foreach (var (originalJob, overrideJob) in comp.SurvivorJobOverrides)
                         {
-                            if (profile.JobPriorities.TryGetValue(originalJob, out var priority) &&
-                                priority > JobPriority.Never && overrideJob == job)
+                            if (profile.JobPriorities.TryGetValue(originalJob, out var originalPriority) &&
+                                originalPriority > JobPriority.Never && overrideJob == job)
                             {
-                                players[(int)priority].Add(id);
+                                players[(int)originalPriority].Add(id);
+                                overriden = true;
+                                break;
                             }
                         }
                     }
-                    else
+
+                    if (overriden)
+                        continue;
+
+                    if (profile.JobPriorities.TryGetValue(job, out var priority) &&
+                        priority > JobPriority.Never)
                     {
-                        if (profile.JobPriorities.TryGetValue(job, out var priority) &&
-                            priority > JobPriority.Never)
-                        {
-                            players[(int)priority].Add(id);
-                        }
+                        players[(int)priority].Add(id);
                     }
                 }
             }
