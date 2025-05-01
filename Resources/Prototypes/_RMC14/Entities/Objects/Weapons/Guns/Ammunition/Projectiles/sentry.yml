@@ -239,3 +239,12 @@
         mask:
         - Impassable
         - BulletImpassable
+
+- type: Tag
+  id: RMCBulletSentryFireProjectile
+
+- type: Tag
+  id: RMCBulletSentryFireProjectileBlue
+
+- type: Tag
+  id: RMCBulletSentryFireProjectileSmoke
