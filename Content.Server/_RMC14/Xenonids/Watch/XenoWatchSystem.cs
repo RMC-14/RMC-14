@@ -165,7 +165,7 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
 
         xenos.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name));
 
-        _ui.SetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos, hive.Comp.BurrowedLarva,0,0,0));
+        _ui.SetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos, hive.Comp.BurrowedLarva,hive.Comp.BurrowedLarvaSlotFactor,0,0,0));
     }
 
     private void UpdateInfo(Entity<XenoComponent> ent, ref WatchInfoUpdateEvent args)
@@ -173,18 +173,15 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
         if (_hive.GetHive(ent.Owner) is not {} hive)
             return;
 
-        FixedPoint2 tier2Slots = 0;
-        FixedPoint2 tier3Slots = 0;
         short tier3Amount = 0;
         var tier2Amount = 0;
         var xenocount = 0;
         var larvacount = 0;
 
-        FixedPoint2 total = 0;
 
         var xenos = new List<Xeno>();
         var query = EntityQueryEnumerator<XenoComponent, HiveMemberComponent, MetaDataComponent>();
-        while (query.MoveNext(out var uid, out _, out var member, out var metaData))
+        while (query.MoveNext(out var uid, out var comp, out var member, out var metaData))
         {
             if (uid == ent.Owner || member.Hive != hive.Owner)
                 continue;
@@ -192,12 +189,8 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
             if (_mobState.IsDead(uid))
                 continue;
 
-            if (TryComp<XenoComponent>(uid, out var comp))
-            {
-
                 if (comp.CountedInSlots)
                 {
-                    total += 1;
                     xenocount++;
                 }
 
@@ -213,7 +206,7 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
                         tier3Amount++;
                         break;
                 }
-            }
+
 
             FixedPoint2 evo = 0;
 
@@ -225,16 +218,8 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
             xenos.Add(new Xeno(GetNetEntity(uid), Name(uid, metaData), metaData.EntityPrototype?.ID, GetHealthPercentage(uid), GetPlasmaPercentage(uid), evo));
         }
 
-        var burrowed = Math.Sqrt(hive.Comp.BurrowedLarva * hive.Comp.BurrowedLarvaSlotFactor);
-        var burrowedweight = Math.Min(burrowed, hive.Comp.BurrowedLarva);
-        total = xenocount +  burrowedweight;
 
-        tier2Slots = (total * 0.5f) - tier2Amount;
-        tier3Slots = (total * 0.2f) - tier3Amount;
-
-        xenos.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name));
-
-        _ui.SetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos, hive.Comp.BurrowedLarva,xenocount,tier2Slots,tier3Slots));
+        _ui.SetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos, hive.Comp.BurrowedLarva,hive.Comp.BurrowedLarvaSlotFactor,xenocount,tier2Amount,tier3Amount));
     }
 
     private FixedPoint2 GetHealthPercentage(EntityUid uid)
@@ -250,7 +235,7 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
                 if(critical == 0)
                     return percentage;
                 damage = damageableComponent.TotalDamage;
-                percentage = ((critical - damage)/ (critical / 100))/100 ; // i want the value to be between 0 and 1
+                percentage = (critical - damage)/ (critical); // i want the value to be between 0 and 1
             }
         }
         return percentage;
@@ -267,7 +252,7 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
             currentplasma = plasmaComponent.Plasma;
             if (maxplasma == 0)
                 return percentage;
-            percentage = ((maxplasma - (maxplasma - currentplasma))/(maxplasma/100))/100;
+            percentage = currentplasma / maxplasma;
         }
 
         return percentage;

@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Strain;
 using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared._RMC14.Xenonids.Weeds;
+using Content.Shared.FixedPoint;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -109,16 +110,25 @@ public sealed class XenoWatchBui : BoundUserInterface
         if (state is not XenoWatchBuiState s)
             return;
 
-
         _window = EnsureWindow();
         _window.BurrowedLarvaLabel.Text = $"Burrowed Larva: {s.BurrowedLarva}";
         _window.XenoCount.Text = $"Total Sisters: {s.XenoCount}";
         _window.XenoContainer.DisposeAllChildren();
 
+        //s.Xenos.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name)); testing this seems like i dont need it? might use sorting later tho
+
         foreach (var key in XenoCounts.Keys)
         {
             XenoCounts[key] = 0;
         }
+
+        var burrowed = Math.Sqrt(s.BurrowedLarva * s.BurrowedLarvaSlotFactor);
+        FixedPoint2 burrowedweight = Math.Min(burrowed, s.BurrowedLarva);
+        var total = s.XenoCount + burrowedweight;
+
+
+        var tier2Slots = (total * 0.5f) - s.TierTwoAmount;
+        var tier3Slots = (total * 0.2f) - s.TierThreeAmount;
 
 
         foreach (var xeno in s.Xenos)
@@ -155,8 +165,8 @@ public sealed class XenoWatchBui : BoundUserInterface
 
             var slots = row.Tier switch
             {
-                2 => s.TierTwoSlots,
-                3 => s.TierThreeSlots,
+                2 => tier2Slots,
+                3 => tier3Slots,
                 _ => 0
             };
             if (row.Tier is (2 or 3))

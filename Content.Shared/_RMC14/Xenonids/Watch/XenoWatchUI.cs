@@ -14,13 +14,14 @@ public enum XenoWatchUIKey : byte
 public readonly record struct Xeno(NetEntity Entity, string Name, EntProtoId? Id, FixedPoint2 Health, FixedPoint2 Plasma, FixedPoint2 Evo);
 
 [Serializable, NetSerializable]
-public sealed class XenoWatchBuiState(List<Xeno> xenos, int burrowedLarva, int xenoCount, FixedPoint2 tierTwoSlots ,FixedPoint2 tierThreeSlots) : BoundUserInterfaceState
+public sealed class XenoWatchBuiState(List<Xeno> xenos, int burrowedLarva, int burrowedLarvaSlotFactor, int xenoCount, int tierTwoAmount, int tierThreeAmount ) : BoundUserInterfaceState
 {
     public readonly List<Xeno> Xenos = xenos;
     public readonly int BurrowedLarva = burrowedLarva;
+    public readonly int BurrowedLarvaSlotFactor = burrowedLarvaSlotFactor;
     public readonly int XenoCount = xenoCount;
-    public readonly FixedPoint2 TierTwoSlots = tierTwoSlots;
-    public readonly FixedPoint2 TierThreeSlots = tierThreeSlots;
+    public readonly int TierTwoAmount = tierTwoAmount;
+    public readonly int TierThreeAmount = tierThreeAmount;
 }
 
 [Serializable, NetSerializable]
