@@ -3,7 +3,7 @@
     xmlns:cc="clr-namespace:Content.Client._RMC14.Xenonids.Watch"
     xmlns:ui="clr-namespace:Content.Client._RMC14.Xenonids.UI"
     Title="{Loc cm-xeno-watch}"
-    MinSize="500 600" SetSize="500 1000">
+    MinSize="500 600">
     <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
     <BoxContainer Orientation="Vertical" HorizontalExpand="True">
         <!-- Hive Info -->
@@ -13,7 +13,7 @@
                 <BoxContainer Orientation="Vertical">
                     <Label Name="XenoCount" Access="Public" Text="Total Sisters: 0" HorizontalAlignment="Center" />
                     <Label Name="BurrowedLarvaLabel" Access="Public" Text="Burrowed Larva: 0" HorizontalAlignment="Center" />
-                    <Label Name="Evolution" Access="Public" Text="Evolution Rate: 0" HorizontalAlignment="Center" Visible="False"/>
+                    <Label Name="Evolution" Access="Public" Text="Evolution Rate: 0" HorizontalAlignment="Center" />
                 </BoxContainer>
             </CollapsibleBody>
         </Collapsible>
@@ -25,9 +25,9 @@
             </CollapsibleBody>
         </Collapsible>
         <!-- Xeno List -->
-        <Collapsible BodyVisible="True" VerticalExpand="True" MinHeight="200">
+        <Collapsible BodyVisible="True" VerticalExpand="True">
             <CollapsibleHeading Name="XenoHive" Title="Hive Xenoid List" Access="Public"/>
-            <CollapsibleBody Name="XenoCollapsableBody" Access="Public" VerticalExpand="True" MinHeight="200">
+            <CollapsibleBody Name="XenoCollapsableBody" Access="Public" VerticalExpand="True">
                 <BoxContainer Orientation="Vertical" VerticalExpand="True">
                     <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
                         <BoxContainer Orientation="Vertical" Name="XenoContainer" Access="Public"/>

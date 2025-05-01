@@ -6,13 +6,12 @@ namespace Content.Client._RMC14.Xenonids.UI;
 
 [GenerateTypedNameReferences]
 [Virtual]
-
 public sealed partial class XenoTierRow : Control
 {
-    public int Tier { get; set; }
     public XenoTierRow()
     {
         RobustXamlLoader.Load(this);
+        //TierButton.OnPressed += _ =>
     }
 
     public void SetInfo(float slots, int tier)
@@ -21,4 +20,14 @@ public sealed partial class XenoTierRow : Control
         TierButton.Name = $"Tier {tier}";
         SlotsLeft.Text = $"Slots left: {slots}";
     }
+/*
+    public void AddXeno(int count, string name)
+    {
+        var control = new XenoHiveCountControl();
+        control.XenoName.Text = name;
+        control.Count.Text = count.ToString();
+        //control.XenoName.OnPressed += _ =>;
+        XenosContainer.AddChild(control);
+    }
+*/
 }

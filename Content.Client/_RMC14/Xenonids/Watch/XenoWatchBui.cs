@@ -1,10 +1,8 @@
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Linq;
 using Content.Client._RMC14.Xenonids.UI;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Strain;
 using Content.Shared._RMC14.Xenonids.Watch;
-using Content.Shared._RMC14.Xenonids.Weeds;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -23,14 +21,10 @@ public sealed class XenoWatchBui : BoundUserInterface
 
     private static readonly Comparer<EntityPrototype> EntityComparer =
         Comparer<EntityPrototype>.Create(static (a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
-
     private static readonly Color XenoColor = Color.FromHex("#800080");
     private static readonly Color XenoHighlightColor = Color.FromHex("#9E379E");
-
     private SortedDictionary<int, SortedSet<EntityPrototype>> tiers = new();
     private Dictionary<string, bool> ShownXenos = new();
-    private Dictionary<string, int> XenoCounts = new();
-
     private bool UsingSearchBar = false;
 
     [ViewVariables]
@@ -61,7 +55,7 @@ public sealed class XenoWatchBui : BoundUserInterface
             {
                 xenos = new SortedSet<EntityPrototype>(EntityComparer);
                 tiers.Add(xeno.Tier, xenos);
-            }
+            } ;
 
             xenos.Add(entity);
         }
@@ -72,15 +66,11 @@ public sealed class XenoWatchBui : BoundUserInterface
                 continue;
 
             var row = new XenoTierRow();
-
-            if (tier == 2 || tier == 3)
-                row.SlotsLeft.Visible = true;
-
             row.TierButton.OnToggled += OnTierToggled;
             row.SetInfo(0, tier);
-            row.Tier = tier;
             foreach (var xeno in xenos)
             {
+                //row.AddXeno(0, xeno.Name);
 
                 var xenocontrol = new XenoHiveCountControl();
                 var xenobutton = new Button();
@@ -96,7 +86,6 @@ public sealed class XenoWatchBui : BoundUserInterface
 
                 row.XenosContainer.AddChild(xenocontrol);
                 ShownXenos.Add(xeno.Name, false);
-                XenoCounts.Add(xeno.Name, 0);
             }
             _window.RowContainer.AddChild(row);
         }
@@ -110,14 +99,7 @@ public sealed class XenoWatchBui : BoundUserInterface
 
         _window = EnsureWindow();
         _window.BurrowedLarvaLabel.Text = $"Burrowed Larva: {s.BurrowedLarva}";
-        _window.XenoCount.Text = $"Total Sisters: {s.XenoCount}";
         _window.XenoContainer.DisposeAllChildren();
-
-        foreach (var key in XenoCounts.Keys)
-        {
-            XenoCounts[key] = 0;
-        }
-
 
         foreach (var xeno in s.Xenos)
         {
@@ -127,13 +109,6 @@ public sealed class XenoWatchBui : BoundUserInterface
             {
                 texture = _sprite.Frame0(evolution);
             }
-
-            if (XenoCounts.ContainsKey(xeno.Name))
-            {
-                XenoCounts[xeno.Name]++;
-                //Logger.Debug("Xenocount is going up");
-            }
-
 
             var control = new XenoChoiceControl();
             control.Set(xeno.Name, texture);
@@ -145,46 +120,6 @@ public sealed class XenoWatchBui : BoundUserInterface
 
 
             _window.XenoContainer.AddChild(control);
-        }
-
-        foreach (var control in _window.RowContainer.Children)
-        {
-            if (control is not XenoTierRow row)
-                continue;
-
-            var slots = row.Tier switch
-            {
-                2 => s.TierTwoSlots,
-                3 => s.TierThreeSlots,
-                _ => 0
-            };
-            if (row.Tier is (2 or 3))
-            {
-                row.SlotsLeft.Text = $"Slots left: {slots}";
-            }
-
-            foreach (var child in row.XenosContainer.Children)
-            {
-                if (child is not XenoHiveCountControl hive)
-                    continue;
-
-                string name = "";
-
-                foreach (var button in hive.XenoButton.Children)
-                {
-                    if (button is not Button xenobutton)
-                        continue;
-
-                    name  = xenobutton.Text ?? "";
-                }
-
-                if (XenoCounts.TryGetValue(name, out var count))
-                {
-                  //Logger.Debug($"This is running, count value is {count}");
-                  hive.Count.Text = $"{count}";
-                }
-            }
-
         }
         UpdateList();
     }
@@ -234,7 +169,7 @@ public sealed class XenoWatchBui : BoundUserInterface
             args.Button.ModulateSelfOverride = UpdateButtonColor(ShownXenos[name]);
         }
 
-        //Logger.Debug(name);
+        Logger.Debug(name);
         ClearSearchBar();
         UpdateList();
     }
