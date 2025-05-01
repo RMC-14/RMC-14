@@ -86,3 +86,53 @@
         name: S-V42A1 smartpack, tan
       - id: RMCSmartpackA1White
         name: S-V42A1 smartpack, white
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries:
+      - id: RMCBeltUtilityGeneral
+      - id: CMBeltMedicBagFilled
+        name: M276 pattern lifesaver bag (Full)
+      - id: CMBeltMedicalFilled
+        name: M276 medical storage rig (Full)
+      - id: CMBeltUtilityFilled
+        name: M276 Toolbelt Rig (Full)
+    - name: Pouches
+      choices: { CMPouch: 2 }
+      entries:
+      - id: RMCPouchAutoinjector
+      - id: RMCPouchConstruction
+      - id: RMCPouchDocument
+      - id: RMCPouchElectronicsFill
+        name: electronics pouch (Full)
+      - id: RMCPouchFirstAidInjectors
+        name: first-aid pouch (refillable injectors)
+      - id: RMCPouchFirstAidSplintsGauzeOintment
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+      - id: RMCPouchFirstAidPills
+        name: first-aid pouch (pills)
+      - id: RMCPouchFlareFilled
+        name: Flare pouch (Full)
+      - id: RMCPouchGeneralLarge
+      - id: RMCPouchSling
+      - id: RMCPouchMedical
+      - id: RMCPouchMedkit
+      - id: RMCPouchReagentCanisterTricordrazineRevival
+        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
+#     - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
+#       name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
+      - id: RMCPouchReagentCanisterBicaridine
+        name: Pressurized Reagent Canister Pouch\n(Bicaridine)
+      - id: RMCPouchReagentCanisterKelotane
+        name: Pressurized Reagent Canister Pouch\n(Kelotane)
+      - id: RMCPouchReagentCanisterTricordrazine
+        name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
+      - id: RMCPouchReagentCanister
+        name: Pressurized Reagent Canister Pouch\n(EMPTY)
+      - id: RMCPouchToolsFill
+        name: tools pouch (Full)
+      - id: RMCPouchMacheteFilled
+        name: machete pouch (Full)
+    - name: Pouches
+      choices: { CMMask: 1 }
+      entries:
+      - id: CMMaskSterile
