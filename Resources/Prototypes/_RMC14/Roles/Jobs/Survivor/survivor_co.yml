@@ -4,7 +4,7 @@
   name: rmc-job-name-survivor-co
   description: rmc-job-description-survivor-co
   playTimeTracker: RMCJobSurvivorCO
-  startingGear: RMCGearSurvivor
+  startingGear: CMGearCommandingOfficer
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-nobody
   whitelisted: true
