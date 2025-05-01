@@ -1,6 +1,7 @@
-<cc:XenoWatchWindow
+﻿<ui:XenoWatchWindow
     xmlns="https://spacestation14.io"
     xmlns:cc="clr-namespace:Content.Client._RMC14.Xenonids.Watch"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.Xenonids.UI"
     Title="{Loc cm-xeno-watch}"
     MinSize="500 600" SetSize="500 1000">
     <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
@@ -39,4 +40,4 @@
         </Collapsible>
         </BoxContainer>
         </ScrollContainer>
-</cc:XenoWatchWindow>
+</ui:XenoWatchWindow>
