@@ -1,0 +1,84 @@
+﻿- type: job
+  parent: CMJobBase
+  id: CMCLFCellCommander
+  name: CMCLFCellCommander
+  description: rmc-job-description-clf-cell-commander
+  playTimeTracker: CMJobCLFCellCommander
+  ranks:
+    RMCRankLanceCorporal: [ ]
+  startingGear: RMCGearCLFCellCommander
+  icon: RMCJobIconCLFCellCommander
+  joinNotifyCrew: false
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 2
+        RMCSkillEngineer: 2
+        RMCSkillCqc: 2
+        RMCSkillLeadership: 3
+        RMCSkillOverwatch: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillPolice: 2
+        RMCSkillFireman: 3
+        RMCSkillPowerLoader: 1
+        RMCSkillVehicles: 2
+        RMCSkillEndurance: 5
+        RMCSkillJtac: 4
+        RMCSkillSmartGun: 1
+        RMCSkillExecution: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-clf-cell-commander
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidCLFCellCommander
+  name: clf cell commander role
+  suffix: Role
+  components:
+  - type: Sprite
+    sprite: Markers/cross.rsi
+    state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCCLFCellCommander
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCCLFCellCommander
+  components:
+  - type: RMCJobSpawner
+    job: CMCLFCellCommander
+
+- type: startingGear
+  id: RMCGearCLFCellCommander
+  equipment:
+    head: RMCArmorHelmetMercenaryMiner
+    ears: RMCHeadsetDistressDukes
+    jumpsuit: JumpsuitMarine # TOOD RMC14
+    outerClothing: RMCCoatMilitiaHarness
+    gloves: CMHandsBlackMarine
+    shoes: CMBootsBlackFilled # TODO RMC14
+    suitstorage: RMCSmartGun
+    id: RMCIDCardCLFCellCommander # TODO RMC14
+    belt: RMCMatebaBeltFilled # TODO RMC14
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchFirstAidInjectors
+
+- type: playTimeTracker
+  id: CMJobCLFCellCommander
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCLFCellCommander
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: clf_cellcom
+
+- type: entity
+  parent: CMIDCardBase
+  id: RMCIDCardCLFCellCommander
+  name: clf cell commander's ID card
+  components:
+  - type: PresetIdCard
+    job: CMCLFCellCommander

@@ -73,7 +73,7 @@
           True: { visible: true }
           False: { visible: false }
   - type: RMCChemicalDispenser
-    network: RMCDispenserChem
+    network: RMCChemDispenserGround
   - type: Machine
     board: CMCircuitboardDispenserChem
   - type: RequiresSkill

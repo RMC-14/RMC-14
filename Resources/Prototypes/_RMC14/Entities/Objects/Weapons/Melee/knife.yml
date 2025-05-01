@@ -6,6 +6,8 @@
     whitelist:
       components:
       - Xeno
+  - type: MeleeWeapon
+    angle: 0
 
 - type: entity
   parent: [ RMCBaseMeleeWeapon, BaseKnife, RMCAttachableBase ]
