@@ -239,7 +239,7 @@ public sealed class XenoDevourSystem : EntitySystem
                     LogImpact.Medium,
                     $"{ToPrettyString(devoured):actor} attacked while devoured by {ToPrettyString(container.Owner):subject} with {weapon} and dealt {damage.GetTotal():damage} damage");
 
-        //TODO Gib chance on very low health
+        //TODO RMC14 Gib chance on very low health based on remaining health.
     }
 
     private void OnXenoCanDropTarget(Entity<XenoDevourComponent> xeno, ref CanDropTargetEvent args)
