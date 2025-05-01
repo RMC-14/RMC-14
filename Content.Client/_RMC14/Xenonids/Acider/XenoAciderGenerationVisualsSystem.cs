@@ -26,9 +26,9 @@ public sealed class XenoAciderGenerationVisualsSystem : VisualizerSystem<XenoAci
 
         string layerState = "acid";
 
-        if (AppearanceSystem.TryGetData(uid, XenoHealerVisuals.Downed, out bool downed) && downed)
+        if (AppearanceSystem.TryGetData(uid, XenoAcidGeneratingVisuals.Downed, out bool downed) && downed)
             layerState += "_downed";
-        else if (AppearanceSystem.TryGetData(uid, XenoHealerVisuals.Resting, out bool resting) && resting)
+        else if (AppearanceSystem.TryGetData(uid, XenoAcidGeneratingVisuals.Resting, out bool resting) && resting)
             layerState += "_rest";
 
         sprite.LayerSetState(layer, layerState);
