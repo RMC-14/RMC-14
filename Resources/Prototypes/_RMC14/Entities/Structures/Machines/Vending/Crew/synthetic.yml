@@ -136,3 +136,48 @@
       choices: { CMMask: 1 }
       entries:
       - id: CMMaskSterile
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechCrewSyntheticGear
+  name: ColMarTech Synthetic Auxiliary Gear Rack
+  description: An automated gear rack hooked up to a colossal storage of various medical and engineering supplies. Can be accessed only by synthetic units.
+  components:
+  - type: AccessReader
+    access:
+    - [ "RMCAccessSynth" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/gear.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCJobSynthetic
+    sections:
+    - name: Engineer Supplies
+      entries:
+      # /obj/item/circuitboard/airlock - 2 Points
+      - id: CMAPCElectronics
+        points: 2
+      - id: CMEntrenchingTool
+        points: 2
+      - id: RMCPowerCellHigh
+        points: 3
+      - id: CMLightReplacer
+        points: 2
+      - id: CMSheetMetal10
+        name: metal x10
+        points: 5
+      - id: CMMultitool
+        points: 4
+      - id: CMSheetPlasteel10
+        name: plasteel x10
+        points: 7
+      - id: CMSandbagEmpty25
+        name: sandbags x25
+        points: 7
+      - id: RMCExplosivePlastic
+        points: 3
+      # /obj/item/tool/weldpack/minitank - 4 Points
+      - id: RMCEngineerKit
+        points: 1
+      - id: CMCrowbar # TODO RMC14: tactical prybar
+        points: 5
