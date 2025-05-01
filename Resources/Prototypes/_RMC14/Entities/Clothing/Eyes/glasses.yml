@@ -120,8 +120,6 @@
       path: /Audio/_RMC14/Machines/click.ogg
       params:
         variation: 0.250
-  - type: ToggleClothing
-    action: RMCActionToggleMedhud
   - type: ComponentToggler
     components:
     - type: NightVisionItem

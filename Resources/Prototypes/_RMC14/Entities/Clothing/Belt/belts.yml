@@ -1282,6 +1282,23 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_nailgun.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: nailgun_tac
+      map: [ "nailguntactical_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: nailgun_compact
+      map: [ "nailguncompact_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: nailgun
+      map: [ "nailgun_fill" ]
+    - state: icon-front
+      map: [ "holstered" ]
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/holster_nailgun.rsi
   - type: Storage # holds up to 2 mags plus gun
@@ -1291,6 +1308,8 @@
     whitelist:
       components:
       - Nailgun
+      tags:
+      - RMCMagazineSMGNailgun
   - type: FixedItemSizeStorage
   - type: LimitedStorage
     limits:

@@ -201,9 +201,9 @@
       # /obj/item/storage/firstaid/rad - 6 Points
     - name: Medical Supplies
       entries:
-      - id: CMBurnKit
+      - id: CMBurnKit1
         points: 2
-      - id: CMTraumaKit
+      - id: CMTraumaKit1
         points: 2
       - id: RMCMedevacStretcher
         points: 6
@@ -289,7 +289,7 @@
 
 - type: entity
   parent: ColMarTechBase
-  id: ColMarTechCrewSyntheticGear
+  id: WeYaExperimentalToolsVendor
   name: We-Ya Experimental Tools Vendor
   description: A smaller vendor hooked up to a cache of specially provisioned, experimental tools and equipment provided by the We-Ya Research and Development Division(TM). Handle with care.
   components:
@@ -298,19 +298,18 @@
     access:
     - [ "RMCAccessSynth" ]
   - type: Sprite
-    sprite: _RMC14/Structures/Machines/VendingMachines/robotics.rsi
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/experimental.rsi
   - type: CMAutomatedVendor
     jobs:
     - RMCJobSynthetic
     sections:
     - name: Experimental Tools
       entries:
-      - id: RMCFlashlightPen
       # autocompressor - 15 Points
       # breaching hammer - 15 Points
       - id: RMCDefibrillatorCompact
         points: 15
-      - id: RMCNailgunCompact
+      - id: RMCVendorBundleCompactNailgunKit
         points: 15
       # backpack firefighting watertank - 15 Points
       # crew monitor - 15 Points
