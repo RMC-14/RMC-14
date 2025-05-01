@@ -66,6 +66,7 @@
     belt: RMCMatebaBeltForeconFilled
     outerClothing: RMCJacketWindbreakerForeconFilled
     back: RMCSatchelMarineForeconSurvivorCommanderFill
+    id: CMIDCardGold
 
 - type: entity
   parent: CMSpawnPointJobBase

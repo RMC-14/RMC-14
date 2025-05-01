@@ -532,7 +532,7 @@
     - id: RMCHandcuffs
 
 - type: entity
-  parent: RMCBaseJacketButtonable
+  parent: [RMCAllowSuitStorageClothingExternalWebbing, RMCBaseJacketButtonable]
   id: RMCJacketWindbreaker
   name: green windbreaker
   description: A green windbreaker.
