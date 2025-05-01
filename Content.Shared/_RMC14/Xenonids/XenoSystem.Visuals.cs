@@ -7,7 +7,7 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Xenonids;
 
-public partial class XenoSystem
+public sealed partial class XenoSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
