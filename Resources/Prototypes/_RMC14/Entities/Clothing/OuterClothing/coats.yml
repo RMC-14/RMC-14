@@ -541,3 +541,6 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/windbreaker.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/windbreaker.rsi
+  - type: FoldableClothing
+    foldedEquippedPrefix: jacket
+    foldedHeldPrefix: jacket

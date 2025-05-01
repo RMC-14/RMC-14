@@ -69,11 +69,11 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: CMSpawnPointCommandingOfficer
+  id: CMSpawnPointForeconCommander
   name: commanding officer spawn point
   components:
   - type: SpawnPoint
-    job_id: CMCommandingOfficer
+    job_id: RMCSurvivorForeconCommander
   - type: Sprite
     state: co_spawn
 
