@@ -39,7 +39,7 @@ public sealed class SurvivorSystem : EntitySystem
             var gear = _random.Pick(comp.RandomClothing);
             foreach (var item in gear)
             {
-                Equip(mob, item);
+                Equip(mob, item, false);
             }
         }
 
