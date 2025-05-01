@@ -717,7 +717,7 @@ public sealed class SquadSystem : EntitySystem
     /// <param name="entities">List of entities to be compared.</param>
     /// <param name="squadHierarchyId">ID of the dataset prototype with the order of squad precedence determined by the index. A non-empty <see cref="DatasetPrototype.Values"/> is expected.</param>
     /// <returns>
-    /// List of entities with the highest rank. May be null if no entity has a valid rank. Will also return null and an error if the method is passed a dataset with empty values.
+    /// List of entities with the highest squad. May be null if no entity has a valid squad. Will also return null and an error if the method is passed a dataset with empty values.
     /// </returns>
     public List<EntityUid>? GetEntitiesWithHighestSquad(List<EntityUid> entities, ProtoId<DatasetPrototype> squadHierarchyId)
     {

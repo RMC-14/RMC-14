@@ -19,6 +19,8 @@ using System.Globalization;
 using Content.Shared._RMC14.Marines.Squads;
 using Robust.Shared.Random;
 using Content.Shared.Random.Helpers;
+using System.Linq;
+using Content.Server.Players.PlayTimeTracking;
 
 namespace Content.Server._RMC14.Roles;
 
@@ -32,10 +34,12 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedRankSystem _rankSystem = default!;
     [Dependency] private readonly SquadSystem _squadSystem = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly PlayTimeTrackingManager _playtimeManager = default!;
 
 
     private EntityUid _commander = default;
-    private const int SeniorAuthoritylevel = 13; // Corresponds to the level of authority of a staff officer
+    private const int SeniorAuthoritylevel = 14; // Corresponds to the level of authority of a executive officer
     private bool _accessesAdded = false;
     private TimeSpan? _adaptationTimerEndTime;
     private TimeSpan? _initialTimerEndTime;
@@ -116,8 +120,8 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
     /// The selection process filters candidates by their authority level, living status, valid ID, readiness
     /// and prioritizes them by:
     /// 1. Highest rank according to the marine rank hierarchy.
-    /// 2. Highest squad according to the marine squad hierarchy.
-    /// 3. If multiple candidates are still tied, selects one randomly.
+    /// 2. Highest squad according to the marine squad hierarchy. We additionally check whether this is a staff officer and if yes then we choose the most experienced in time otherwise random.
+    /// 3. If multiple candidates are still tied, we choose the most experienced one in time, otherwise random.
     /// If no valid candidates are found, an appropriate ARES announcement is made.
     /// </summary>
     /// <remarks>
@@ -193,21 +197,25 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
             {
                 var highestSquadCandidates = _squadSystem.GetEntitiesWithHighestSquad(highestRankCandidates, "RMCMarineSquadHierarchy");
 
-                if (highestSquadCandidates == null) // All entities have invalid squad (in this case it is impossible) or an empty dataset was passed
+                if (highestSquadCandidates == null) // All entities have invalid squad or an empty dataset was passed
                 {
-                    _marineAnnounce.AnnounceARES(ares, Loc.GetString("rmc-marine-command-override-no-candidates-found"));
-                    return;
+                    if (HasStaffOfficer(highestRankCandidates))
+                        _commander = PickMostExperiencedEntityOrRandom(highestRankCandidates);
+                    else
+                    {
+                        _marineAnnounce.AnnounceARES(ares, Loc.GetString("rmc-marine-command-override-no-candidates-found"));
+                        return;
+                    }
                 }
 
-                if (highestSquadCandidates.Count == 1)
+                if (highestSquadCandidates != null && highestSquadCandidates.Count == 1)
                 {
                     _commander = highestSquadCandidates[0];
                 }
 
-                if (highestSquadCandidates.Count > 1) // TODO RMC14: First we try to pick players with the most playing time and only then we pick randomly from the rest
+                if (highestSquadCandidates != null && highestSquadCandidates.Count > 1)
                 {
-                    var random = IoCManager.Resolve<IRobustRandom>();
-                    _commander = random.Pick(highestSquadCandidates); // Select a random candidate from the list of candidates with the same highest rank and squad
+                    _commander = PickMostExperiencedEntityOrRandom(highestSquadCandidates); // We choose among all entities with the same highest level of authority, squad and rank
                 }
             }
         }
@@ -343,6 +351,53 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
         Dirty(idCard, accessComp);
 
         return true;
+    }
+
+    private bool HasStaffOfficer(List<EntityUid> entities)
+    {
+        foreach (var entity in entities)
+        {
+            if (!_entMan.TryGetComponent(entity, out OriginalRoleComponent? roleComp) && roleComp == null)
+                continue;
+
+            if (roleComp.Job == "CMStaffOfficer")
+                return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Returns the entity with the most playtime in their original job, or picks randomly if tied or unavailable.
+    /// </summary>
+    private EntityUid PickMostExperiencedEntityOrRandom(List<EntityUid> entities)
+    {
+        var candidates = new List<(EntityUid Entity, TimeSpan Time)>();
+
+        foreach (var entity in entities)
+        {
+            if (!_entMan.TryGetComponent(entity, out OriginalRoleComponent? roleComp) || roleComp == null)
+                continue;
+
+            if (roleComp.Job == null || !_prototypes.TryIndex<JobPrototype>(roleComp.Job.Value, out var job))
+                continue;
+
+            if (!_entMan.TryGetComponent(entity, out MindComponent? mindComp) || mindComp == null || mindComp.Session == null)
+                continue;
+
+            if (_playtimeManager.TryGetTrackerTime(mindComp.Session, job.PlayTimeTracker, out var roleTime))
+            {
+                candidates.Add((entity, roleTime.Value));
+            }
+        }
+
+        if (candidates.Count == 0)
+            return _random.Pick(entities); // fallback
+
+        var maxTime = candidates.Max(c => c.Time);
+        var topCandidates = candidates.Where(c => c.Time == maxTime).Select(c => c.Entity).ToList();
+
+        return _random.Pick(topCandidates);
     }
 
 
