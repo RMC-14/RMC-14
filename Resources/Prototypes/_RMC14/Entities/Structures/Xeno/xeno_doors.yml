@@ -88,6 +88,8 @@
   - type: ResinDoor
   - type: AllowWeedSpread
   - type: ResinSurgeReinforcable
+  - type: RMCDeleteAnchoredOnInit
+    whitelist: { }
 
 - type: entity
   parent: DoorXenoResin

@@ -77,7 +77,7 @@
   - type: XenoFriendly
   - type: Damageable
     damageContainer: StructuralXeno
-    damageModifierSet: null # TODO RMC14 weed resists once explosion resist and health is accounted for
+    damageModifierSet: Weed
   - type: Destructible
     thresholds:
     - trigger:
@@ -94,6 +94,8 @@
       Brute:
         collection: XenoResinBreak
   - type: ExplosionRandomResistance
+    min: 0.06
+    max: 0.3
   - type: DeletedByWeedKiller
   - type: RMCDeleteAnchoredOnInit
     enabled: false
@@ -127,7 +129,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 33 # TODO RMC14 11
+        damage: 11
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -135,7 +137,14 @@
     plasma: 215
   - type: RMCDeleteAnchoredOnInit
     enabled: true
+    whitelist:
+      tags:
+      - XenoWeedNode
+      - XenoWeedTile
   - type: QueenEyeVision
+  - type: Tag
+    tags:
+    - XenoWeedNode
 
 - type: entity # TODO RMC14 sound
   parent: XenoWeeds
@@ -245,7 +254,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 33 # TODO RMC14 30
+        damage: 11 # TODO RMC14 30 after it finishes spreading
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -339,6 +348,17 @@
     layers:
     - state: weed0
     - state: constructionnode
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 11
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: Tag
   id: XenoWeedTile
+
+- type: Tag
+  id: XenoWeedNode
