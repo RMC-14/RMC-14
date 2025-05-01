@@ -248,7 +248,7 @@
       # /obj/item/reagent_container/hypospray/autoinjector/empty/small - 1 Point
       # /obj/item/reagent_container/hypospray/autoinjector/empty/medium - 2 Points
       # /obj/item/reagent_container/hypospray/autoinjector/empty/large - 4 Points
-      - id: CMBaseDefibrillator
+      - id: CMDefibrillator
         points: 4
         # mandatory: true, TODO allow vendors to mark entries as mandatory
       - id: CMHealthAnalyzer
@@ -286,3 +286,53 @@
         points: 2
       - id: RMCFlashlightPen
         points: 2
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechCrewSyntheticGear
+  name: We-Ya Experimental Tools Vendor
+  description: A smaller vendor hooked up to a cache of specially provisioned, experimental tools and equipment provided by the We-Ya Research and Development Division(TM). Handle with care.
+  components:
+  # TODO RMC14 : Use a token instead of access
+  - type: AccessReader
+    access:
+    - [ "RMCAccessSynth" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/robotics.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCJobSynthetic
+    sections:
+    - name: Experimental Tools
+      entries:
+      - id: RMCFlashlightPen
+      # autocompressor - 15 Points
+      # breaching hammer - 15 Points
+      - id: RMCDefibrillatorCompact
+        points: 15
+      - id: RMCNailgunCompact
+        points: 15
+      # backpack firefighting watertank - 15 Points
+      # crew monitor - 15 Points
+      - id: RMCGlassesExperimentalMeson
+        points: 15
+      # maintenance jack - 15 Points
+      # portable dialysis machine - 15 Points
+      - id: RMCTelescopicBaton
+        points: 15
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleCompactNailgunKit
+  name: compact nailgun kit
+  description: Contains a compact nailgun, two magazines and a nailgun holster.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/nailgun_compact.rsi
+    state: icon
+  - type: CMVendorBundle
+    bundle:
+    - RMCNailgunCompact
+    - RMCMagazineSMGNailgun
+    - RMCMagazineSMGNailgun
+    - RMCBeltHolsterNailgun
