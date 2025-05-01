@@ -23,6 +23,7 @@
       choices: { CMUniform: 1 }
       entries:
       - id: RMCJumpsuitSynthetic
+        # mandatory: true, TODO allow vendors to mark entries as mandatory
         # /obj/item/clothing/under/rank/synthetic/old
       - id: JumpsuitMarine
       - id: CMJumpsuitMarineMedic
@@ -32,7 +33,6 @@
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbingBlack
-        recommended: true
       - id: CMWebbingPouch
       - id: CMWebbing
       - id: CMWebbingHolster
@@ -40,6 +40,7 @@
       choices: { RMCShoes: 1 }
       entries:
       - id: RMCShoesWhite
+        recommended: true
       - id: CMBootsBlackFilled
     - name: Helmet
       choices: { CMHelmet: 1 }
@@ -52,6 +53,7 @@
 #      choices: { CMSuit: 1 }
 #      entries:
     # - id: CMUtilityVestSynth
+       # recommended: true
     # /obj/item/clothing/suit/storage/marine/light/synvest/grey
     # /obj/item/clothing/suit/storage/marine/light/synvest/dgrey
     # /obj/item/clothing/suit/storage/marine/light/synvest/jungle
@@ -61,6 +63,7 @@
       choices: { CMGloves: 1 }
       entries:
       - id: CMHandsInsulated
+        recommended: true
       - id: CMHandsBlackMarine
       - id: CMHandsLatex
     - name: Backpack
@@ -68,6 +71,7 @@
       entries:
       - id: RMCSmartpack
         name: S-V42 smartpack, blue
+        recommended: true
       - id: RMCSmartpackBlack
         name: S-V42 smartpack, black
       - id: RMCSmartpackGreen
@@ -120,6 +124,7 @@
         name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
 #     - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
 #       name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
+#        recommended: true
       - id: RMCPouchReagentCanisterBicaridine
         name: Pressurized Reagent Canister Pouch\n(Bicaridine)
       - id: RMCPouchReagentCanisterKelotane
@@ -181,3 +186,103 @@
         points: 1
       - id: CMCrowbar # TODO RMC14: tactical prybar
         points: 5
+    - name: Firstaid Kits
+      entries:
+      - id: CMAdvFirstAidKitFilled
+        points: 12
+      - id: CMFirstAidKitFilled
+        points: 5
+      - id: CMBurnAidKitFilled
+        points: 6
+      - id: CMToxinAidKitFilled
+        points: 6
+      - id: CMFirstAidO2KitFilled
+        points: 6
+      # /obj/item/storage/firstaid/rad - 6 Points
+    - name: Medical Supplies
+      entries:
+      - id: CMBurnKit
+        points: 2
+      - id: CMTraumaKit
+        points: 2
+      - id: RMCMedevacStretcher
+        points: 6
+      # /obj/item/stack/medical/splint - 1 Point
+      - id: CMRollerBed
+        points: 4
+      - id: CMStasisBag
+        points: 6
+      - id: CMMiniTank
+        points: 6
+      - id: CMMiniTank
+        points: 6
+      - id: CMBloodPackFull
+        points: 5
+      - id: CMPortableSurgicalBed
+        points: 10
+      - id: CMPillCanisterBicaridine
+        points: 5
+        recommended: true
+      - id: CMPillCanisterDexalin
+        points: 5
+      - id: CMPillCanisterDylovene
+        points: 5
+      - id: CMPillCanisterInaprovaline
+        points: 5
+      - id: CMPillCanisterKelotane
+        points: 5
+      # /obj/item/storage/pill_bottle/peridaxon - 5 Points
+      # /obj/item/storage/pill_bottle/tramadol - 5 Points
+      - id: CMBicaridineAutoInjector
+        points: 1
+      - id: CMDexalinPlusAutoInjector
+        points: 1
+      - id: CMEpinephrineAutoInjector
+        points: 1
+      - id: CMKelotaneAutoInjector
+        points: 1
+      # /obj/item/reagent_container/hypospray/autoinjector/oxycodone - 2 Points
+      # /obj/item/reagent_container/hypospray/autoinjector/tramadol - 1 Point
+      - id: CMTricordrazineAutoInjector
+        points: 1
+      # /obj/item/reagent_container/hypospray/autoinjector/empty/small - 1 Point
+      # /obj/item/reagent_container/hypospray/autoinjector/empty/medium - 2 Points
+      # /obj/item/reagent_container/hypospray/autoinjector/empty/large - 4 Points
+      - id: CMBaseDefibrillator
+        points: 4
+        # mandatory: true, TODO allow vendors to mark entries as mandatory
+      - id: CMHealthAnalyzer
+        points: 4
+      - id: CMSurgicalLine
+        points: 4
+      - id: CMSynthGraft
+        points: 4
+    - name: Other Supplies
+      entries:
+      - id: RMCBinoculars
+        points: 5
+      - id: RMCRangefinder
+        points: 8
+      - id: RMCLaserDesignator
+        points: 12
+        recommended: true
+      - id: RMCIntelDetector
+        points: 5
+      - id: RMCFlashlight
+        points: 1
+        recommended: true
+      - id: RMCFulton
+        points: 5
+      - id: RMCMotionDetector
+        points: 5
+      - id: RMCSprayBottleSpaceCleaner
+        points: 2
+      - id: RMCWhistle
+        points: 5
+      - id: RMCScabbardMacheteFilled
+        name: machete scabbard (Full)
+        points: 2
+      - id: ClothingNeckStethoscope
+        points: 2
+      - id: RMCFlashlightPen
+        points: 2
