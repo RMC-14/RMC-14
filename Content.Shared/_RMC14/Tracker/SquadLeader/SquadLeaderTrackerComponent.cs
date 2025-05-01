@@ -13,6 +13,30 @@ public sealed partial class SquadLeaderTrackerComponent : Component
     [DataField, AutoNetworkedField]
     public ProtoId<AlertPrototype> Alert = "SquadTracker";
 
+    /// <summary>
+    /// The tracker alerts that should be displayed based on the targeted role.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public Dictionary<ProtoId<JobPrototype>, ProtoId<AlertPrototype>> RoleTrackerAlerts = new()
+    {
+        {"CMCommandingOfficer", "SquadTrackerCommandingOfficer"},
+        {"CMExecutiveOfficer", "SquadTrackerExecutiveOfficer"},
+        {"CMChiefMP", "SquadTrackerChiefMilitaryPolice"},
+        {"CMSquadLeader", "SquadTracker"},
+        {"CMFireteamLeader", "SquadTracker"},
+        {"CMLiaison", "SquadTrackerCorporateLiaison"},
+        {"RMCPMCLeader", "SquadTrackerPMCTeamLeader"},
+    };
+
+    /// <summary>
+    /// The tracker alert that should be displayed.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public Dictionary<SquadLeaderTrackerMode, ProtoId<AlertPrototype>> ExtraModeTrackerAlerts = new()
+    {
+        {SquadLeaderTrackerMode.PrimaryLandingZone, "SquadTrackerLandingZone"},
+    };
+
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan UpdateAt;
 

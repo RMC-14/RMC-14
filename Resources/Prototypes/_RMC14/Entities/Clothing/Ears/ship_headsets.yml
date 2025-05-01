@@ -282,7 +282,7 @@
   description: It seems oddly similar to the CMPs'... Smells like donuts too.
   components:
   - type: GrantSquadLeaderTracker
-    defaultRole: CMCommandingOfficer
+    defaultRole: CMChiefMP
     trackableRoles:
     - CMCommandingOfficer
     - CMExecutiveOfficer
@@ -360,7 +360,7 @@
   - type: RMCHeadset
     radioTextIncrease: 3
   - type: GrantSquadLeaderTracker
-    defaultRole: CMCommandingOfficer
+    defaultRole: CMAuxiliarySupportOfficer
     trackableRoles:
     - CMAuxiliarySupportOfficer
     - CMSquadLeader
@@ -488,7 +488,7 @@
   - type: HeadsetMultiBroadcast
     cooldown: 60
   - type: GrantSquadLeaderTracker
-    defaultRole: CMSquadLeader
+    defaultRole: CMCommandingOfficer
     trackableRoles:
     - CMCommandingOfficer
     - CMExecutiveOfficer
