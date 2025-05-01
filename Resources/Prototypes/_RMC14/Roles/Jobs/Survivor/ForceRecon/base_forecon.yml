@@ -40,7 +40,7 @@
   components:
   - type: SurvivorPreset
     randomClothing: # TODO durag and grey beanie
-    - [ CMHeadCap ]
+    - [ RMCHeadCapFlippable ]
     - [ RMCBoonieTan ]
     - [ ArmorHelmetM10 ]
     randomGearOther:

@@ -911,11 +911,11 @@
 - type: entity
   parent: RMCBeltHolsterSMGPouch
   id: RMCHolsterSMGPouchFilledExtended
-  suffix: Filled
+  suffix: Filled, Extended Mag
   components:
   - type: StorageFill
     contents:
-    - id: CMMagazineSMGM63Ext
+    - id: RMCWeaponSMGM63ExtendedFilled
       amount: 2
     - id: WeaponSMGM63
 
