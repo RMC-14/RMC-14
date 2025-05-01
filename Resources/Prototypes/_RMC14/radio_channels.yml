@@ -141,7 +141,7 @@
 - type: radioChannel
   id: MarineForecon
   name: chat-radio-forecon
-  keycode: "p"
+  keycode: "e"
   frequency: 1724
   color: "#32CD32"
   longRange: true

@@ -15,6 +15,7 @@
     sprite: _RMC14/Interface/map_blips.rsi
     state: private
   greeting: rmc-job-greeting-forecon
+  playTimeTracker: RMCSurvivorForecon
 
 - type: startingGear
   id: RMCGearForeconBase
@@ -34,6 +35,9 @@
     back:
     - RMCRadioHandheldColony
 
+- type: playTimeTracker
+  id: RMCSurvivorForecon
+
 - type: entity
   id: RMCSurvivorPresetForeconNoPrimary
   name: forecon no primary survivor preset
@@ -45,7 +49,8 @@
     - [ RMCBoonieTan ]
     - [ ArmorHelmetM10 ]
     randomGearOther:
-    - [ RMCCigarettePackLuckySloths ]
+    -
+      - [ RMCCigarettePackLuckySloths ]
     # todo walkman and casette
     # todo deck of cards
     randomWeapon:
@@ -73,4 +78,5 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
-    randomWeapon: []
+    randomWeapon:
+    - []
