@@ -70,3 +70,13 @@
     - id: RMCDrinkAlcoholDavenport
     - id: RMCZippoGold
     - id: CMTarbackCigar
+
+- type: entity
+  parent: CMSatchelMarine
+  id: RMCSatchelMarineForeconSurvivorSmartgunOperatorFill
+  suffix: FORECON CO, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: RMCPowerCellSmartgun

@@ -48,13 +48,7 @@
   id: RMCGearForeconSmartgunOperator
   equipment:
     belt: RMCBeltSmartGunOperatorPistolForeconFilled
-  storage:
-    outerClothing:
-    - CMCrowbar
-    - RMCFlashlight
-    back:
-    - RMCRadioHandheldColony
-    - RMCPowerCellSmartgun
+    back: RMCSatchelMarineForeconSurvivorSmartgunOperatorFill
 
 - type: entity
   parent: CMSpawnPointJobBase
