@@ -1,0 +1,71 @@
+- type: job
+  parent: RMCSurvivorForeconBase
+  id: RMCSurvivorForeconSupportTech
+  name: rmc-job-name-forecon-support-tech
+  playTimeTracker: RMCJobSurvivorSupportTechForecon
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: engi
+  startingGear: RMCGearForeconSupportTech
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 1
+        RMCSkillConstruction: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillCqc: 1
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillJtac: 1
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 1
+        RMCSkillEndurance: 2
+        RMCSkillLeadership: 0
+        RMCSkillVehicles: 0
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: engi
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadFORECON
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetForeconNoPistol
+  hidden: true
+
+- type: playTimeTracker
+  id: RMCJobSurvivorSupportTechForecon
+  isHumanoid: true
+
+- type: startingGear
+  parent: RMCGearForeconBase
+  id: RMCGearForeconSupportTech
+  equipment:
+    eyes: RMCWeldingGoggles
+    back: RMCSatchelMarineLogisticsBig
+    gloves: CMHandsInsulated
+    belt: CMBeltUtilityFilled
+  storage:
+    outerClothing:
+    - CMCrowbar
+    - RMCFlashlight
+    back:
+    - RMCRadioHandheldColony
+    - CMFireExtinguisherPortable
+    - CMDefibrillator
+    - RMCPouchMedkitFillAdvanced
+    - CMHealthAnalyzer
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointForeconSupportTech
+  name: forecon support tech spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorForeconSupportTech
+  - type: Sprite
+    state: spec_spawn

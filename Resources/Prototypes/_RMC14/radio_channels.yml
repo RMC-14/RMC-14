@@ -137,6 +137,15 @@
   longRange: true
   tower: true
 
+# Marine Special Forces
+- type: radioChannel
+  id: MarineForecon
+  name: chat-radio-forecon
+  keycode: "p"
+  frequency: 1724
+  color: "#32CD32"
+  longRange: true
+
 # Non Marine
 - type: radioChannel
   id: Colony

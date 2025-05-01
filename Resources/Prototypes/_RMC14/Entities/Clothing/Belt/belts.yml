@@ -492,6 +492,17 @@
   id: RMCSmartGunSidearmHolster
 
 - type: entity
+  parent: RMCBeltSmartGunOperatorPistol
+  id: RMCBeltSmartGunOperatorPistolForeconFilled
+  suffix: Filled, Forecon
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM1984
+      amount: 2
+    - id: CMWeaponPistolM1984
+
+- type: entity
   parent: CMBeltMarine
   id: RMCBeltGrenade
   name: M276 pattern M40 grenade rig
@@ -896,6 +907,17 @@
 
 - type: Tag
   id: RMCSMGPouchHolster
+
+- type: entity
+  parent: RMCBeltHolsterSMGPouch
+  id: RMCHolsterSMGPouchFilledExtended
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineSMGM63Ext
+      amount: 2
+    - id: WeaponSMGM63
 
 - type: entity
   parent: CMBeltBaseStorage

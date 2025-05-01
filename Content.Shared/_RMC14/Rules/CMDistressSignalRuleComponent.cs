@@ -112,6 +112,9 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     };
 
     [DataField]
+    public Dictionary<ProtoId<JobPrototype>, List<(ProtoId<JobPrototype> Insert, int Amount)>>? SurvivorJobInserts;
+
+    [DataField]
     public TimeSpan AresGreetingDelay = TimeSpan.FromSeconds(5);
 
     [DataField]

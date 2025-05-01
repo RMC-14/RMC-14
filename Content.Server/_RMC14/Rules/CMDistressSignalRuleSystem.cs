@@ -348,6 +348,15 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 }
             }
 
+            if (SelectedPlanetMap != null)
+            {
+                if (SelectedPlanetMap.Value.Comp.SurvivorJobs != null)
+                    comp.SurvivorJobs = SelectedPlanetMap.Value.Comp.SurvivorJobs;
+
+                if (SelectedPlanetMap.Value.Comp.SurvivorJobInserts != null)
+                    comp.SurvivorJobInserts = SelectedPlanetMap.Value.Comp.SurvivorJobInserts;
+            }
+
             var survivorSpawnersLeft = new Dictionary<ProtoId<JobPrototype>, List<EntityUid>>();
             foreach (var (job, jobSpawners) in survivorSpawners)
             {
@@ -373,6 +382,42 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     {
                         stop = true;
                         return null;
+                    }
+                }
+
+                var spawnAsJob = job;
+
+                if (comp.SurvivorJobInserts != null)
+                {
+                    var insertSuccess = false;
+
+                    if (comp.SurvivorJobInserts.TryGetValue(job, out var insert))
+                    {
+                        for (var i = 0; i < insert.Count; i++)
+                        {
+                            var (insertJob, amount) = insert[i];
+
+                            if (amount == -1)
+                            {
+                                spawnAsJob = insertJob;
+                                insertSuccess = true;
+                                break;
+                            }
+
+                            if (amount <= 0)
+                                continue;
+
+                            insert[i] = (insertJob, amount - 1);
+                            spawnAsJob = insertJob; // Override the original job with the insert
+                            insertSuccess = true;
+                            break;
+                        }
+                    }
+
+                    if (!insertSuccess)
+                    {
+                        stop = true;
+                        return null; // All insert slots are filled, do not allow job
                     }
                 }
 
@@ -407,7 +452,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
                 var profile = GameTicker.GetPlayerProfile(player);
                 var coordinates = _transform.GetMoverCoordinates(spawner);
-                var survivorMob = _stationSpawning.SpawnPlayerMob(coordinates, job, profile, null);
+                var survivorMob = _stationSpawning.SpawnPlayerMob(coordinates, spawnAsJob, profile, null);
 
                 if (!_mind.TryGetMind(playerId, out var mind))
                     mind = _mind.CreateMind(playerId);
@@ -415,14 +460,14 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 RemCompDeferred<TacticalMapUserComponent>(survivorMob);
                 _mind.TransferTo(mind.Value, survivorMob);
 
-                _roles.MindAddJobRole(mind.Value, jobPrototype: job);
+                _roles.MindAddJobRole(mind.Value, jobPrototype: spawnAsJob);
 
                 _playTimeTracking.PlayerRolesChanged(player);
 
                 var spawnEv = new PlayerSpawnCompleteEvent(
                     survivorMob,
                     player,
-                    job,
+                    spawnAsJob,
                     false,
                     true,
                     0,

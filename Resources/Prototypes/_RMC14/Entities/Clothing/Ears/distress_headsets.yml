@@ -87,3 +87,16 @@
     containers:
       key_slots:
       - RMCEncryptionKeyDukes
+
+- type: entity
+  parent: RMCHeadsetShip
+  id: RMCHeadsetForecon
+  name: Force Recon headset
+  description: A headset given to FORECON marines.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
+      - RMCEncryptionKeyMarineCommand
+      - RMCEncryptionKeyFORECON

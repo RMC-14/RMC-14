@@ -1,0 +1,76 @@
+- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorForeconBase
+  name: rmc-job-name-forecon
+  description: rmc-job-description-forecon
+  ranks:
+    RMCRankSergeant: []
+  supervisors: cm-job-supervisors-co
+  accessGroups:
+  - ColonistEngi
+  joinNotifyCrew: false
+  startingGear: RMCGearForeconBase
+  hasIcon: false
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: private
+  greeting: rmc-job-greeting-forecon
+
+- type: startingGear
+  id: RMCGearForeconBase
+  equipment:
+    jumpsuit: RMCJumpsuitSurvivorMarineDropPouch
+    back: CMSatchelMarine
+    shoes: CMBootsBlackFilled
+    outerClothing: RMCOuterClothingExternalWebbing
+    id: CMIDCardStandardDogtag
+    ears: RMCHeadsetForecon
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchFirstAidSplintsGauzeOintment
+  storage:
+    outerClothing:
+    - CMCrowbar
+    - RMCFlashlight
+    back:
+    - RMCRadioHandheldColony
+
+- type: entity
+  id: RMCSurvivorPresetForeconNoPrimary
+  name: forecon no primary survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomGear:
+    - [ CMHeadCap ] # TODO durag and grey beanie
+    - [ RMCBoonieTan ]
+    - [ ArmorHelmetM10 ]
+    randomGearOther:
+    - [ RMCCigarettePackLuckySloths ]
+    # todo walkman and casette
+    # todo deck of cards
+    randomWeapon:
+    - [ RMCM1984BeltFilled ]
+    - [ RMCM1984BeltFilled ]
+    - [ RMCM1984BeltFilled ]
+    - [ RMCHolsterSMGPouchFilledExtended ]
+    - [ RMCMotionDetector ]
+
+- type: entity
+  parent: RMCSurvivorPresetForeconNoPrimary
+  id: RMCSurvivorPresetForecon
+  name: forecon survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    primaryWeapons:
+    - [ CMMagazineRifleM4SPR, CMMagazineRifleM4SPR, WeaponRifleM4SPRFilled ]
+    primaryWeaponChance: 1
+
+- type: entity
+  parent: RMCSurvivorPresetForecon
+  id: RMCSurvivorPresetForeconNoPistol
+  name: forecon survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomWeapon: []
