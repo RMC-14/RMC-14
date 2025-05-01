@@ -97,8 +97,7 @@
   - type: ContainerFill
     containers:
       key_slots:
-      - CMEncryptionKeyCommon
-      - RMCEncryptionKeyMarineCommand
+      - RMCEncryptionKeyFORECON
   - type: GrantSquadLeaderTracker
   - type: GrantTacMapAlert
   - type: RMCHeadset

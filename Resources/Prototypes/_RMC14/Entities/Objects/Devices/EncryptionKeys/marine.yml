@@ -114,7 +114,19 @@
   components:
   - type: EncryptionKey
     channels:
-    - MarineForecon
+    - MarineCommand
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineEngineer
+    - MarineMedical
+    - MarineRequisition
+    - MarineJTAC
+    - MarineIntel
+    - MarineCommon
     defaultChannel: MarineForecon
   - type: Sprite
     state: sl_key
