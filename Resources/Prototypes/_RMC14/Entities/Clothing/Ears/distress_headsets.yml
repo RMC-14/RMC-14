@@ -49,11 +49,11 @@
   - type: GrantMarineIcons
   - type: GrantTacMapAlert
   - type: GrantSquadLeaderTracker
-    defaultRole: RMCPMCLeader
-    trackableRoles:
-    - RMCPMCDirector
-    - RMCPMCLeader
-    - CMLiaison
+    defaultMode: LeaderPmc
+    trackerModes:
+    - DirectorPmc
+    - LeaderPmc
+    - CorporateLiaison
 
 - type: entity
   parent: RMCHeadsetDistressPMC
@@ -81,11 +81,11 @@
   - type: RMCHeadset
     radioTextIncrease: 3
   - type: GrantSquadLeaderTracker
-    defaultRole: RMCPMCDirector
-    trackableRoles:
-    - RMCPMCDirector
-    - RMCPMCLeader
-    - CMLiaison
+    defaultMode: DirectorPmc
+    trackerModes:
+    - DirectorPmc
+    - LeaderPmc
+    - CorporateLiaison
 
 # For Duke's Dozen/Freelancer
 - type: entity

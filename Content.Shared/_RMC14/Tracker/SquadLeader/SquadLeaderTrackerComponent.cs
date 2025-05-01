@@ -17,23 +17,45 @@ public sealed partial class SquadLeaderTrackerComponent : Component
     /// The tracker alerts that should be displayed based on the targeted role.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public Dictionary<ProtoId<JobPrototype>, ProtoId<AlertPrototype>> RoleTrackerAlerts = new()
+    public Dictionary<SquadLeaderTrackerMode, ProtoId<JobPrototype>> RoleTrackers = new()
     {
-        {"CMCommandingOfficer", "SquadTrackerCommandingOfficer"},
-        {"CMExecutiveOfficer", "SquadTrackerExecutiveOfficer"},
-        {"CMChiefMP", "SquadTrackerChiefMilitaryPolice"},
-        {"CMSquadLeader", "SquadTracker"},
-        {"CMFireteamLeader", "SquadTracker"},
-        {"CMLiaison", "SquadTrackerCorporateLiaison"},
-        {"RMCPMCLeader", "SquadTrackerPMCTeamLeader"},
+        {SquadLeaderTrackerMode.CommandingOfficer, "CMCommandingOfficer"},
+        {SquadLeaderTrackerMode.ExecutiveOfficer, "CMExecutiveOfficer}"},
+        {SquadLeaderTrackerMode.AuxiliarySupportOfficer, "CMAuxiliarySupportOfficer"},
+        {SquadLeaderTrackerMode.ChiefMilitaryPolice, "CMChiefMP"},
+        {SquadLeaderTrackerMode.ChiefEngineer, "CMChiefEngineer"},
+        {SquadLeaderTrackerMode.ChiefMedicalOfficer, "CMChiefMedicalOfficer"},
+        {SquadLeaderTrackerMode.SeniorEnlistedAdvisor, "CMSeniorEnlistedAdvisor"},
+        {SquadLeaderTrackerMode.Quartermaster, "CMQuartermaster"},
+        {SquadLeaderTrackerMode.MilitaryWarden, "CMMilitaryWarden"},
+        {SquadLeaderTrackerMode.SquadLeader, "CMSquadLeader"},
+        {SquadLeaderTrackerMode.FireteamLeader, "CMFireTeamLeader"},
+        {SquadLeaderTrackerMode.Rifleman, "CMRifleman"},
+        {SquadLeaderTrackerMode.DirectorPmc, "RMCPMCDirector"},
+        {SquadLeaderTrackerMode.LeaderPmc, "RMCPMCLeader"},
+        {SquadLeaderTrackerMode.CorporateLiaison, "CMLiaison"},
+        {SquadLeaderTrackerMode.ProvostMarshal, "CMProvostMarshal"},
+        {SquadLeaderTrackerMode.ProvostDeputyMarshal, "CMProvostDeputyMarshal"},
+        {SquadLeaderTrackerMode.ProvostChiefInspector, "CMProvostChiefInspector"},
+        {SquadLeaderTrackerMode.ProvostInspector, "CMProvostInspector"},
+        {SquadLeaderTrackerMode.ProvostTeamLeader, "CMProvostTeamLeader"},
+        {SquadLeaderTrackerMode.ProvostAdvisor, "CMProvostAdvisor"},
+        {SquadLeaderTrackerMode.LeaderSpp, "RMCSPPLeader"},
     };
 
     /// <summary>
     /// The tracker alert that should be displayed.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public Dictionary<SquadLeaderTrackerMode, ProtoId<AlertPrototype>> ExtraModeTrackerAlerts = new()
+    public Dictionary<SquadLeaderTrackerMode, ProtoId<AlertPrototype>> TrackerAlerts = new()
     {
+        {SquadLeaderTrackerMode.CommandingOfficer, "SquadTrackerCommandingOfficer"},
+        {SquadLeaderTrackerMode.ExecutiveOfficer, "SquadTrackerExecutiveOfficer"},
+        {SquadLeaderTrackerMode.ChiefMilitaryPolice, "SquadTrackerChiefMilitaryPolice"},
+        {SquadLeaderTrackerMode.SquadLeader, "SquadTracker"},
+        {SquadLeaderTrackerMode.FireteamLeader, "SquadTracker"},
+        {SquadLeaderTrackerMode.CorporateLiaison, "SquadTrackerCorporateLiaison"},
+        {SquadLeaderTrackerMode.LeaderPmc, "SquadTrackerPMCTeamLeader"},
         {SquadLeaderTrackerMode.PrimaryLandingZone, "SquadTrackerLandingZone"},
     };
 
@@ -47,14 +69,12 @@ public sealed partial class SquadLeaderTrackerComponent : Component
     public FireteamData Fireteams = new();
 
     [DataField, AutoNetworkedField]
-    public ProtoId<JobPrototype>? Role;
+    public SquadLeaderTrackerMode? Mode;
 
     [DataField, AutoNetworkedField]
     public EntityUid? Target;
 
     [DataField, AutoNetworkedField]
-    public List<SquadLeaderTrackerMode> ExtraModes = new();
+    public HashSet<SquadLeaderTrackerMode> TrackerModes = new();
 
-    [DataField, AutoNetworkedField]
-    public List<ProtoId<JobPrototype>> TrackableRoles = new();
 }

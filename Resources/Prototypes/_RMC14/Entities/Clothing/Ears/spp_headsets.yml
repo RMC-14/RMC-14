@@ -94,9 +94,9 @@
   id: RMCHeadsetSPPAbstract
   components:
   - type: GrantSquadLeaderTracker
-    defaultRole: RMCSPPLeader
-    trackableRoles:
-    - RMCSPPLeader
+    defaultMode: LeaderSpp
+    trackerModes:
+    - LeaderSpp
   - type: GrantTacMapAlert
 
 - type: entity

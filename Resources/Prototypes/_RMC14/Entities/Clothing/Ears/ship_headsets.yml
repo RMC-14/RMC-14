@@ -73,9 +73,8 @@
   - type: RMCHeadset
     radioTextIncrease: 3
   - type: GrantSquadLeaderTracker
-    trackableRoles:
-    - CMSquadLeader
-    extraModes:
+    trackerModes:
+    - SquadLeader
     - PrimaryLandingZone
 
 - type: entity
@@ -118,9 +117,9 @@
       - CMEncryptionKeyCommon
       - CMEncryptionKeyEngineer
   - type: GrantSquadLeaderTracker
-    defaultRole: CMChiefEngineer
-    trackableRoles:
-    - CMChiefEngineer
+    defaultMode: ChiefEngineer
+    trackerModes:
+    - ChiefEngineer
 
 - type: entity
   parent: RMCHeadsetShip
@@ -136,9 +135,9 @@
       - CMEncryptionKeyCommon
       - CMEncryptionKeyRequisition
   - type: GrantSquadLeaderTracker
-    defaultRole: CMQuartermaster
-    trackableRoles:
-    - CMQuartermaster
+    defaultMode: Quartermaster
+    trackerModes:
+    - Quartermaster
 
 - type: entity
   parent: CMHeadsetRequisition
@@ -160,9 +159,9 @@
       - CMEncryptionKeyCommon
       - CMEncryptionKeyMedical
   - type: GrantSquadLeaderTracker
-    defaultRole: CMCMO
-    trackableRoles:
-    - CMCMO
+    defaultMode: ChiefMedicalOfficer
+    trackerModes:
+    - ChiefMedicalOfficer
 
 - type: entity
   parent: RMCHeadsetShip
@@ -178,9 +177,9 @@
       - CMEncryptionKeyCommon
       - CMEncryptionKeyResearcher
   - type: GrantSquadLeaderTracker
-    defaultRole: CMCMO
-    trackableRoles:
-    - CMCMO
+    defaultMode: ChiefMedicalOfficer
+    trackerModes:
+    - ChiefMedicalOfficer
 
 - type: entity
   parent: RMCHeadsetShip
@@ -223,10 +222,10 @@
       - CMEncryptionKeyCommon
       - CMEncryptionKeyMPO
   - type: GrantSquadLeaderTracker
-    defaultRole: CMChiefMP
-    trackableRoles:
-    - CMChiefMP
-    - CMMilitaryWarden
+    defaultMode: ChiefMilitaryPolice
+    trackerModes:
+    - ChiefMilitaryPolice
+    - MilitaryWarden
 
 - type: entity
   parent: CMHeadsetMPO
@@ -237,12 +236,12 @@
   - type: RMCHeadset
     radioTextIncrease: 2
   - type: GrantSquadLeaderTracker
-    defaultRole: CMCommandingOfficer
-    trackableRoles:
-    - CMCommandingOfficer
-    - CMExecutiveOfficer
-    - CMChiefMP
-    - CMMilitaryWarden
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - ChiefMilitaryPolice
+    - MilitaryWarden
 
 - type: entity
   parent: RMCHeadsetShip
@@ -268,12 +267,12 @@
   - type: RMCHeadset
     radioTextIncrease: 3
   - type: GrantSquadLeaderTracker
-    defaultRole: CMCommandingOfficer
-    trackableRoles:
-    - CMCommandingOfficer
-    - CMExecutiveOfficer
-    - CMAuxiliarySupportOfficer
-    - CMMilitaryWarden
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - AuxiliarySupportOfficer
+    - MilitaryWarden
 
 - type: entity
   parent: CMHeadsetCMP
@@ -282,12 +281,12 @@
   description: It seems oddly similar to the CMPs'... Smells like donuts too.
   components:
   - type: GrantSquadLeaderTracker
-    defaultRole: CMChiefMP
-    trackableRoles:
-    - CMCommandingOfficer
-    - CMExecutiveOfficer
-    - CMAuxiliarySupportOfficer
-    - CMChiefMP
+    defaultMode: ChiefMilitaryPolice
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - AuxiliarySupportOfficer
+    - ChiefMilitaryPolice
 
 - type: entity
   parent: RMCHeadsetShip
@@ -334,9 +333,9 @@
   - type: RMCHeadset
     radioTextIncrease: 3
   - type: GrantSquadLeaderTracker
-    defaultRole: CMAuxiliarySupportOfficer
-    trackableRoles:
-    - CMAuxiliarySupportOfficer
+    defaultMode: AuxiliarySupportOfficer
+    trackerModes:
+    - AuxiliarySupportOfficer
 
 - type: entity
   parent: RMCHeadsetMarine
@@ -360,12 +359,11 @@
   - type: RMCHeadset
     radioTextIncrease: 3
   - type: GrantSquadLeaderTracker
-    defaultRole: CMAuxiliarySupportOfficer
-    trackableRoles:
-    - CMAuxiliarySupportOfficer
-    - CMSquadLeader
-    - CMFireteamLeader
-    extraModes:
+    defaultMode: AuxiliarySupportOfficer
+    trackerModes:
+    - AuxiliarySupportOfficer
+    - SquadLeader
+    - FireteamLeader
     - PrimaryLandingZone
 
 - type: entity
@@ -382,11 +380,11 @@
       - CMEncryptionKeyCommon
       - RMCEncryptionKeyLiaison
   - type: GrantSquadLeaderTracker
-    defaultRole: RMCPMCDirector
-    trackableRoles:
-    - RMCPMCDirector
-    - RMCPMCLeader
-    - CMLiaison
+    defaultMode: DirectorPmc
+    trackerModes:
+    - DirectorPmc
+    - LeaderPmc
+    - CorporateLiaison
 
 - type: entity
   parent: RMCHeadsetShip
@@ -437,16 +435,16 @@
   - type: RMCHeadset
     radioTextIncrease: 3
   - type: GrantSquadLeaderTracker
-    defaultRole: CMProvostMarshal
-    trackableRoles:
-    - CMProvostMarshal
-    - CMProvostDeputyMarshal
-    - CMProvostChiefInspector
-    - CMProvostInspector
-    - CMProvostTeamLeader
-    - CMProvostAdvisor
-    - CMCommandingOfficer
-    - CMExecutiveOfficer
+    defaultMode: ProvostMarshal
+    trackerModes:
+    - ProvostMarshal
+    - ProvostDeputyMarshal
+    - ProvostChiefInspector
+    - ProvostInspector
+    - ProvostTeamLeader
+    - ProvostAdvisor
+    - CommandingOfficer
+    - ExecutiveOfficer
 
 - type: entity
   parent: CMHeadsetSeniorCommand
@@ -466,11 +464,12 @@
   - type: RMCHeadset
     radioTextIncrease: 3
   - type: GrantSquadLeaderTracker
-    trackableRoles:
-    - CMCommandingOfficer
-    - CMExecutiveOfficer
-    - CMChiefMP
-    - CMRifleman
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - ChiefMilitaryPolice
+    - Rifleman
 
 - type: entity
   parent: CMHeadsetSeniorCommand
@@ -488,10 +487,9 @@
   - type: HeadsetMultiBroadcast
     cooldown: 60
   - type: GrantSquadLeaderTracker
-    defaultRole: CMCommandingOfficer
-    trackableRoles:
-    - CMCommandingOfficer
-    - CMExecutiveOfficer
-    - CMSquadLeader
-    extraModes:
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - SquadLeader
     - PrimaryLandingZone

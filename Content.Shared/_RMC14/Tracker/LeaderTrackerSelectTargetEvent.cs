@@ -1,9 +1,7 @@
-using Content.Shared.Roles;
-using Robust.Shared.Prototypes;
+using Content.Shared._RMC14.Tracker.SquadLeader;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Tracker;
 
-[DataRecord]
 [Serializable, NetSerializable]
-public sealed record LeaderTrackerSelectTargetEvent(NetEntity Target, ProtoId<JobPrototype>? Role);
+public sealed record LeaderTrackerSelectTargetEvent(NetEntity Target, SquadLeaderTrackerMode Mode);

@@ -3,12 +3,11 @@
   id: RMCHeadsetMarine
   components:
   - type: GrantSquadLeaderTracker
-    defaultRole: CMSquadLeader
-    trackableRoles:
-    - CMSquadLeader
-    - CMFireteamLeader
-    - CMSeniorEnlistedAdvisor
-    extraModes:
+    defaultMode: SquadLeader
+    trackerModes:
+    - SquadLeader
+    - FireteamLeader
+    - SeniorEnlistedAdvisor
     - PrimaryLandingZone
 
 # Alpha
@@ -41,13 +40,12 @@
   - type: RMCHeadset
     radioTextIncrease: 3
   - type: GrantSquadLeaderTracker
-    defaultRole: CMCommandingOfficer
-    trackableRoles:
-    - CMCommandingOfficer
-    - CMExecutiveOfficer
-    - CMSquadLeader
-    - CMFireteamLeader
-    extraModes:
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - SquadLeader
+    - FireteamLeader
     - PrimaryLandingZone
 
 - type: entity
@@ -122,13 +120,12 @@
   - type: RMCHeadset
     radioTextIncrease: 3
   - type: GrantSquadLeaderTracker
-    defaultRole: CMCommandingOfficer
-    trackableRoles:
-    - CMCommandingOfficer
-    - CMExecutiveOfficer
-    - CMSquadLeader
-    - CMFireteamLeader
-    extraModes:
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - SquadLeader
+    - FireteamLeader
     - PrimaryLandingZone
 
 - type: entity
@@ -203,13 +200,12 @@
   - type: RMCHeadset
     radioTextIncrease: 3
   - type: GrantSquadLeaderTracker
-    defaultRole: CMCommandingOfficer
-    trackableRoles:
-    - CMCommandingOfficer
-    - CMExecutiveOfficer
-    - CMSquadLeader
-    - CMFireteamLeader
-    extraModes:
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - SquadLeader
+    - FireteamLeader
     - PrimaryLandingZone
 
 - type: entity
@@ -284,13 +280,12 @@
   - type: RMCHeadset
     radioTextIncrease: 3
   - type: GrantSquadLeaderTracker
-    defaultRole: CMCommandingOfficer
-    trackableRoles:
-    - CMCommandingOfficer
-    - CMExecutiveOfficer
-    - CMSquadLeader
-    - CMFireteamLeader
-    extraModes:
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - SquadLeader
+    - FireteamLeader
     - PrimaryLandingZone
 
 - type: entity
@@ -380,13 +375,12 @@
   - type: RMCHeadset
     radioTextIncrease: 2
   - type: GrantSquadLeaderTracker
-    defaultRole: CMCommandingOfficer
-    trackableRoles:
-    - CMCommandingOfficer
-    - CMExecutiveOfficer
-    - CMSquadLeader
-    - CMFireteamLeader
-    extraModes:
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - SquadLeader
+    - FireteamLeader
     - PrimaryLandingZone
 
 - type: entity
@@ -461,13 +455,12 @@
   - type: RMCHeadset
     radioTextIncrease: 2
   - type: GrantSquadLeaderTracker
-    defaultRole: CMCommandingOfficer
-    trackableRoles:
-    - CMCommandingOfficer
-    - CMExecutiveOfficer
-    - CMSquadLeader
-    - CMFireteamLeader
-    extraModes:
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - SquadLeader
+    - FireteamLeader
     - PrimaryLandingZone
 
 - type: entity
