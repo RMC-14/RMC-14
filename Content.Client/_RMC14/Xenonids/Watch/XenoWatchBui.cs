@@ -32,6 +32,7 @@ public sealed class XenoWatchBui : BoundUserInterface
     private Dictionary<string, int> XenoCounts = new();
 
     private bool UsingSearchBar = false;
+    private string SearchBarText = string.Empty;
 
     [ViewVariables]
     private XenoWatchWindow? _window;
@@ -108,6 +109,7 @@ public sealed class XenoWatchBui : BoundUserInterface
         if (state is not XenoWatchBuiState s)
             return;
 
+
         _window = EnsureWindow();
         _window.BurrowedLarvaLabel.Text = $"Burrowed Larva: {s.BurrowedLarva}";
         _window.XenoCount.Text = $"Total Sisters: {s.XenoCount}";
@@ -142,7 +144,6 @@ public sealed class XenoWatchBui : BoundUserInterface
             control.SetEvo((int)xeno.Evo);
 
             control.Button.OnPressed += _ => SendPredictedMessage(new XenoWatchBuiMsg(xeno.Entity));
-
 
             _window.XenoContainer.AddChild(control);
         }
@@ -204,8 +205,11 @@ public sealed class XenoWatchBui : BoundUserInterface
         if (_window is not { Disposed: false })
             return;
 
+        SearchBarText = args.Text;
+
         foreach (var child in _window.XenoContainer.Children)
         {
+
             if (child is not XenoChoiceControl control)
                 continue;
 
@@ -302,22 +306,29 @@ public sealed class XenoWatchBui : BoundUserInterface
         if (_window is not { Disposed: false })
             return;
 
-        if (!UsingSearchBar)
-        {
-            foreach (var child in _window.XenoContainer.Children)
+        foreach (var child in _window.XenoContainer.Children)
             {
                 if (child is not XenoChoiceControl control)
                     continue;
 
-                if (!ShownXenos.ContainsValue(true))
+                if (UsingSearchBar)
                 {
-                    control.Visible = true;
-                    continue;
+                    control.Visible =
+                        control.NameLabel.GetMessage()?.Contains(SearchBarText, StringComparison.OrdinalIgnoreCase) ?? false;
                 }
+                else
+                {
+                    if (!ShownXenos.ContainsValue(true))
+                    {
+                        control.Visible = true;
+                        continue;
+                    }
 
-                if (ShownXenos.TryGetValue(control.NameLabel.GetMessage() ?? "", out var xeno))
-                    control.Visible = xeno;
+                    if (ShownXenos.TryGetValue(control.NameLabel.GetMessage() ?? "", out var xeno))
+                    {
+                        control.Visible = xeno;
+                    }
+                }
             }
-        }
     }
 }
