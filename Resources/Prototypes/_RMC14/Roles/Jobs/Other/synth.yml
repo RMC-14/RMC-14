@@ -1,0 +1,83 @@
+- type: job
+  parent: CMJobBase
+  id: RMCJobSynthetic
+  name: rmc-job-name-synth
+  description: rmc-job-description-synth
+  playTimeTracker: RMCJobSynthetic
+  ranks:
+    RMCRankMasterSergeant: [ ]
+  startingGear: RMCGearSynthetic
+  icon: "RMCJobIconSynth"
+  requireAdminNotify: true
+  joinNotifyCrew: true
+  whitelisted: true
+  supervisors: cm-job-supervisors-co
+  accessGroups:
+  - ShipMasterAccess
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: synth
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_shipside
+  roleWeight: 0.25
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 5
+        RMCSkillEngineer: 4
+        RMCSkillConstruction: 3
+        RMCSkillFirearms: 2
+        RMCSkillOverwatch: 1
+        RMCSkillMedical: 4
+        RMCSkillSurgery: 3
+        RMCSkillResearch: 1
+        RMCSkillMeleeWeapons: 2
+        RMCSkillPilot: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 5
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 2
+        RMCSkillJtac: 3
+        RMCSkillIntel: 2
+        RMCSkillDomestics: 2
+        RMCSkillNavigations: 1
+    - type: MarineOrders
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-synth
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: synth
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSynthetic
+  equipment:
+    jumpsuit: RMCJumpsuitSynthetic
+    gloves: CMHandsInsulated
+    shoes: RMCShoesWhite
+    id: RMCIDCardSynth
+    ears: RMCHeadsetSynth
+    belt: CMBeltUtilityFilled
+
+#- type: entity
+#  parent: CMSpawnPointJobBase
+#  id: RMCSpawnPointSynth
+#  name: synthetic spawn point
+#  components:
+#  - type: SpawnPoint
+#    job_id: RMCJobSynthetic
+#  - type: Sprite
+#    state: syn_spawn
+
+- type: playTimeTracker
+  id: RMCJobSynthetic
+  isHumanoid: true

@@ -137,7 +137,14 @@
     plasma: 215
   - type: RMCDeleteAnchoredOnInit
     enabled: true
+    whitelist:
+      tags:
+      - XenoWeedNode
+      - XenoWeedTile
   - type: QueenEyeVision
+  - type: Tag
+    tags:
+    - XenoWeedNode
 
 - type: entity # TODO RMC14 sound
   parent: XenoWeeds
@@ -352,3 +359,6 @@
 
 - type: Tag
   id: XenoWeedTile
+
+- type: Tag
+  id: XenoWeedNode

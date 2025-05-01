@@ -178,3 +178,11 @@
   components:
   - type: IdCard
     jobTitle: rmc-job-title-freelancer
+
+- type: entity
+  parent: CMIDCardGold
+  id: RMCIDCardSynth
+  name: synth ID card
+  components:
+  - type: PresetIdCard
+    job: RMCJobSynthetic

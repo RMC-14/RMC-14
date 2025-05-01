@@ -721,6 +721,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
             NeedHand = false,
             BreakOnDamage = false,
             BreakOnMove = false,
+            BreakOnRest = false,
             Hidden = true,
             CancelDuplicate = true,
             BlockDuplicate = true,
