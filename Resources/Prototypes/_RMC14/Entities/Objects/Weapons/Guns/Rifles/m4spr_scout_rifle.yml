@@ -77,7 +77,7 @@
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentLaserSight
           - RMCAttachmentVerticalGrip
-          - RMCAttachmentUnderbarrelShotgun
+          - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentExtinguisher
   - type: ItemSlots
     slots:

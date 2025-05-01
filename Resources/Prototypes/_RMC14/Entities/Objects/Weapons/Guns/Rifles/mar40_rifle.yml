@@ -98,11 +98,12 @@
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentExtinguisher
           - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentFlamer
         random:
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentGyroscopicStabilizer
-          - RMCAttachmentExtinguisher
-          - RMCAttachmentFlamer
+          - RMCAttachmentUnderbarrelExtinguisher
+          - RMCAttachmentMiniFlamethrower
           - RMCAttachmentBipod
           - RMCAttachmentBurstFireAssembly
   - type: AttachableHolderVisuals
