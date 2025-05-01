@@ -8,6 +8,10 @@
     tags:
     - Sidearm
     - RMCWeaponPistolM13
+  - type: Gun
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
   - type: RMCSelectiveFire
     scatterWielded: 14
     scatterUnwielded: 16

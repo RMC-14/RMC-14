@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using Content.Server.Storage.Components;
+using Content.Shared._RMC14.Storage; // RMC14
 using Content.Shared.Item;
 using Content.Shared.Prototypes;
 using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Whitelist; // RMC14
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 
@@ -82,11 +84,16 @@ namespace Content.IntegrationTests.Tests
             await using var pair = await PoolManager.GetServerClient();
             var server = pair.Server;
 
+            // RMC14: respect IgnoreContentsSizeComponent
+            var testMap = await pair.CreateTestMap();
+            var mapCoordinates = testMap.MapCoords;
+
             var entMan = server.ResolveDependency<IEntityManager>();
             var protoMan = server.ResolveDependency<IPrototypeManager>();
             var compFact = server.ResolveDependency<IComponentFactory>();
             var id = compFact.GetComponentName(typeof(StorageFillComponent));
 
+            var entityWhitelistSys = entMan.System<EntityWhitelistSystem>(); // RMC14
             var itemSys = entMan.System<SharedItemSystem>();
 
             var allSizes = protoMan.EnumeratePrototypes<ItemSizePrototype>().ToList();
@@ -100,6 +107,7 @@ namespace Content.IntegrationTests.Tests
                         continue;
 
                     StorageComponent? storage = null;
+                    IgnoreContentsSizeComponent? ignoreContentsSize = null; // RMC14
                     ItemComponent? item = null;
                     var size = 0;
                     await server.WaitAssertion(() =>
@@ -110,6 +118,7 @@ namespace Content.IntegrationTests.Tests
                             return;
                         }
 
+                        proto.TryGetComponent("IgnoreContentsSize", out ignoreContentsSize); // RMC14
                         proto.TryGetComponent("Item", out item);
                         size = GetFillSize(fill, false, protoMan, itemSys);
                     });
@@ -146,13 +155,22 @@ namespace Content.IntegrationTests.Tests
                         if (!protoMan.TryIndex<EntityPrototype>(entry.PrototypeId, out var fillItem))
                             continue;
 
+                        EntityUid? entryUid = null; // RMC14
                         ItemComponent? entryItem = null;
                         await server.WaitPost(() =>
                         {
                             fillItem.TryGetComponent("Item", out entryItem);
+
+                            // RMC14
+                            if (ignoreContentsSize != null)
+                                entryUid = entMan.Spawn(entry.PrototypeId, mapCoordinates);
                         });
 
                         if (entryItem == null)
+                            continue;
+
+                        // RMC14: respect IgnoreContentsSizeComponent
+                        if (entryUid is { } uid && entityWhitelistSys.IsWhitelistPass(ignoreContentsSize?.Items, uid))
                             continue;
 
                         Assert.That(protoMan.Index(entryItem.Size).Weight,

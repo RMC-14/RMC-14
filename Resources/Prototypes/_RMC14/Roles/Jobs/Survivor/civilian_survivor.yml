@@ -82,7 +82,8 @@
 
 - type: entity
   id: RMCSurvivorPresetCivilian
-  name: civilian survivor preset
+  name: civilian colonist preset
+  categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
     randomGear:
@@ -104,3 +105,21 @@
     - [ CMBeltMarineBuckshot, RMCWeaponShotgunHG3712 ]
     - [ CMBeltMarineAR10, WeaponRifleAR10 ]
     primaryWeaponChance: 0.6
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorCivilian
+  name: civilian colonist ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorCivilian
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorCivilian
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivor
