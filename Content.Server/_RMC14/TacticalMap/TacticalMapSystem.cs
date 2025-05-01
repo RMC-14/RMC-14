@@ -88,6 +88,10 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         SubscribeLocalEvent<TacticalMapTrackedComponent, MapInitEvent>(OnTrackedMapInit);
         SubscribeLocalEvent<TacticalMapTrackedComponent, MobStateChangedEvent>(OnTrackedMobStateChanged);
+        SubscribeLocalEvent<TacticalMapTrackedComponent, RoleAddedEvent>(OnTrackedChanged);
+        SubscribeLocalEvent<TacticalMapTrackedComponent, MindAddedMessage>(OnTrackedChanged);
+        SubscribeLocalEvent<TacticalMapTrackedComponent, SquadMemberUpdatedEvent>(OnTrackedChanged);
+        SubscribeLocalEvent<TacticalMapTrackedComponent, EntParentChangedMessage>(OnTrackedChanged);
 
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, ComponentRemove>(OnActiveRemove);
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, EntityTerminatingEvent>(OnActiveRemove);
@@ -219,6 +223,14 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             return;
 
         UpdateActiveTracking(ent, args.NewMobState);
+    }
+
+    private void OnTrackedChanged<T>(Entity<TacticalMapTrackedComponent> ent, ref T args)
+    {
+        if (_timing.ApplyingState || TerminatingOrDeleted(ent))
+            return;
+
+        UpdateActiveTracking(ent);
     }
 
     private void OnActiveRemove<T>(Entity<ActiveTacticalMapTrackedComponent> ent, ref T args)
@@ -383,6 +395,9 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             RemCompDeferred<ActiveTacticalMapTrackedComponent>(tracked);
             return;
         }
+
+        if (LifeStage(tracked) < EntityLifeStage.MapInitialized)
+            return;
 
         if (EnsureComp<ActiveTacticalMapTrackedComponent>(tracked, out var active))
             return;
@@ -596,6 +611,9 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         {
             foreach (var init in _toInit)
             {
+                if (!init.Comp.Running)
+                    continue;
+
                 var wasActive = HasComp<ActiveTacticalMapTrackedComponent>(init);
                 UpdateActiveTracking(init);
 

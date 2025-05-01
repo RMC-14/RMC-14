@@ -280,6 +280,24 @@
   components:
   - type: VictimBurst
 
+# Guidebook Colonist
+- type: entity
+  id: RMCGuidebookCorpseColonistBurst
+  parent: MobHuman
+  name: Dead Colonist
+  categories: [ DoNotMap, HideSpawnMenu ]
+  components:
+  - type: VictimBurst
+  - type: Loadout
+    prototypes: [ RMCGearCorpseColonist ]
+  - type: Damageable
+    damage:
+      types:
+        Bloodloss: 36
+        Asphyxiation: 44
+        Slash: 77
+        Blunt: 43
+
 # We-Ya Goon
 - type: randomHumanoidSettings
   parent: RMCCorpse
@@ -297,7 +315,7 @@
     back: CMBackpackMarine
     gloves: RMCHandsVeteran
     shoes: RMCBootsCorporate
-    id: RMCIDCardPMCColony
+    id: RMCIDCardPMC
     ears: CMHeadsetColony
     pocket1: RMCPouchFirstAidInjectors
   storage:

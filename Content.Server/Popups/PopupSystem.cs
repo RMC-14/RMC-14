@@ -1,3 +1,4 @@
+using Content.Server._RMC14.Popups;
 using Content.Shared.Popups;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
@@ -12,6 +13,7 @@ namespace Content.Server.Popups
         [Dependency] private readonly IPlayerManager _player = default!;
         [Dependency] private readonly IConfigurationManager _cfg = default!;
         [Dependency] private readonly SharedTransformSystem _transform = default!;
+        [Dependency] private readonly RMCPopupSystem _rmcPopup = default!;
 
         public override void PopupCursor(string? message, PopupType type = PopupType.Small)
         {
@@ -138,6 +140,10 @@ namespace Content.Server.Popups
 
             if (recipient != null)
             {
+                // RMC14 Check if popups should be shown to nearby players.
+                if(!_rmcPopup.ShouldPopup(recipient.Value))
+                    return;
+
                 // Don't send to recipient, since they predicted it locally
                 var filter = Filter.PvsExcept(recipient.Value, entityManager: EntityManager);
                 RaiseNetworkEvent(new PopupEntityEvent(message, type, GetNetEntity(uid)), filter);
@@ -147,6 +153,20 @@ namespace Content.Server.Popups
                 // With no recipient, send to everyone (in PVS range)
                 RaiseNetworkEvent(new PopupEntityEvent(message, type, GetNetEntity(uid)));
             }
+        }
+
+        public override void PopupPredicted(string? message, EntityUid uid, EntityUid? recipient, Filter filter, bool recordReplay, PopupType type = PopupType.Small)
+        {
+            if (message == null)
+                return;
+
+            if (recipient != null)
+            {
+                // Don't send to recipient, since they predicted it locally
+                filter = filter.RemovePlayerByAttachedEntity(recipient.Value);
+            }
+
+            RaiseNetworkEvent(new PopupEntityEvent(message, type, GetNetEntity(uid)), filter, recordReplay);
         }
 
         public override void PopupPredicted(string? recipientMessage, string? othersMessage, EntityUid uid, EntityUid? recipient, PopupType type = PopupType.Small)

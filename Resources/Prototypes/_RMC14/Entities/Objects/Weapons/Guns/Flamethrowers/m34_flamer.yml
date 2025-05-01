@@ -34,6 +34,9 @@
     soundGunshot:
       collection: RMCFlamerShoot
   - type: ShootUseDelay
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -77,6 +80,7 @@
       sprite: _RMC14/Interface/MousePointer/flamer_mouse.rsi
       state: all
   - type: RMCIgniter
+  - type: RMCAmmoEject
   - type: GenericVisualizer
     visuals:
       enum.RMCFlamerVisualLayers.Strip:

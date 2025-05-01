@@ -47,7 +47,7 @@
   - When a parasite is placed on a living host, a new larva will be born! Rejoice!
   - Hosts that hold the growing larva are very precious, and should be secured to a resin wall as soon as possible.
   <Box>
-    <GuideEntityEmbed Entity="SalvageHumanCorpse"/>
+    <GuideEntityEmbed Entity="RMCGuidebookCorpseColonistBurst"/>
     <GuideEntityEmbed Entity="CMXenoLarva"/>
   </Box>\n
 

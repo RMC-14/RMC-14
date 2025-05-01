@@ -132,6 +132,10 @@
         whitelist:
           tags:
           - RMCWeaponShotgun
+  - type: Tag
+    tags:
+    - Scabbard
+    - RMCShotgunScabbard
 
 - type: entity
   parent: RMCScabbardBase
@@ -178,6 +182,9 @@
     containers:
       item:
       - RMCCeremonialSword
+
+- type: Tag
+  id: RMCShotgunScabbard
 
 - type: Tag
   id: RMCCeremonialScabbard

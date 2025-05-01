@@ -2,7 +2,7 @@
   parent: [ BaseMachinePowered, RMCConstructibleMachine ]
   id: RMCTelevision
   name: television set
-  description: It produces items using metal and glass.
+  description: An old TV hooked up to a video cassette recorder, you can even use it to time shift WOW.
   components:
   - type: Transform
     anchored: true

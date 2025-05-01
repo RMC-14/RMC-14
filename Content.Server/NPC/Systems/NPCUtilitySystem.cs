@@ -10,6 +10,7 @@ using Content.Server.Nutrition.EntitySystems;
 using Content.Server.Storage.Components;
 using Content.Shared._RMC14.Interaction;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
@@ -28,6 +29,7 @@ using Content.Shared.NPC.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Standing;
+using Content.Shared.Stunnable;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Turrets;
 using Content.Shared.Weapons.Melee;
@@ -370,6 +372,10 @@ public sealed class NPCUtilitySystem : EntitySystem
                         return 1f;
                     return 0f;
                 }
+            case TargetIsStunnedCon:
+                {
+                    return HasComp<StunnedComponent>(targetUid) ? 1f : 0f;
+                }
             case TurretTargetingCon:
                 {
                     if (!TryComp<TurretTargetSettingsComponent>(owner, out var turretTargetSettings) ||
@@ -385,6 +391,10 @@ public sealed class NPCUtilitySystem : EntitySystem
             case TargetXenoCon:
             {
                 return HasComp<XenoComponent>(targetUid) ? 1f : 0f;
+            }
+            case TargetIsNotConstructCon:
+            {
+                return HasComp<XenoConstructComponent>(targetUid) ? 0f : 1f;
             }
             case CanFaceCon:
             {

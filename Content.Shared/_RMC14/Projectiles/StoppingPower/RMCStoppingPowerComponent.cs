@@ -60,4 +60,19 @@ public sealed partial class RMCStoppingPowerComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityCoordinates? ShotFrom;
+
+    /// <summary>
+    ///     If updating stopping power requires aimed shot
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool RequiresAimedShot = true;
+
+    [DataField, AutoNetworkedField]
+    public int FocusedCounter = 0;
+
+    /// <summary>
+    ///     If stopping power requires focused to be above a certain thereshold to activate.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int? FocusedCounterThreshold = 2;
 }
