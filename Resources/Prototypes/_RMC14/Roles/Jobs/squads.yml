@@ -189,7 +189,7 @@
 - type: entity
   parent: SquadBase
   id: SquadFORECON
-  name: Reconnaissance
+  name: Recon # ToDO change to Reconnaissance, currently the ID name will be cut off
   components:
   - type: SquadTeam
     color: "#32CD32"

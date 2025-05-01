@@ -65,9 +65,9 @@
 - type: entity
   parent: RMCSurvivorPresetForeconNoPistol
   id: RMCSurvivorPresetForeconSupportTech
-  name: forecon survivor preset
+  name: forecon support technician survivor preset
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
     randomGear:
-    - [ RMCPouchMedkitFillAdvanced ]
+    - [ CMAdvFirstAidKitFilled ]

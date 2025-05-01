@@ -532,7 +532,7 @@
     - id: RMCHandcuffs
 
 - type: entity
-  parent: [RMCBaseJacketButtonable, RMCAllowSuitStorageClothingExternalWebbing]
+  parent: RMCOuterClothingExternalWebbing
   id: RMCJacketWindbreaker
   name: green windbreaker
   description: A green windbreaker.
@@ -546,6 +546,11 @@
     - state: jacket-icon
       map: ["foldedLayer"]
       visible: false
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-button-up-verb
+    foldVerbText: rmc-unbutton-verb
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/windbreaker.rsi
   - type: FoldableClothing
