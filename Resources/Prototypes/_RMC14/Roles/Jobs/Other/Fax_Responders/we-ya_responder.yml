@@ -5,6 +5,14 @@
   description: rmc-job-description-weya-responder
   playTimeTracker: RMCJobWeYaResponder
   ranks:
+    RMCRankWeYaAssistantManager:
+    - !type:RoleTimeRequirement
+      role: RMCJobWeYaResponder
+      time: 252000 # 70 hours
+    RMCRankWeYaExecutiveSupervisor:
+    - !type:RoleTimeRequirement
+      role: RMCJobWeYaResponder
+      time: 36000 # 10 hours
     RMCRankWeYaExecutiveSpecialist: []
   startingGear: RMCGearWeYaResponder
   icon: "CMJobIconEmpty"

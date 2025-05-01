@@ -5,7 +5,15 @@
   description: rmc-job-description-spp-responder
   playTimeTracker: RMCJobSPPResponder
   ranks:
-    RMCRankSPPMladshiyLeytenant: []
+    RMCRankSPPMayjor:
+    - !type:RoleTimeRequirement
+      role: RMCJobSPPResponder
+      time: 252000 # 70 hours
+    RMCRankSPPKapitan:
+    - !type:RoleTimeRequirement
+      role: RMCJobSPPResponder
+      time: 36000 # 10 hours
+    RMCRankSPPStarshiyLeytenant: []
   startingGear: RMCGearSPPResponder
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false

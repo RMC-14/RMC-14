@@ -5,6 +5,10 @@
   description: rmc-job-description-cmb-responder
   playTimeTracker: RMCJobCMBResponder
   ranks:
+    RMCRankCMBMarshal:
+    - !type:RoleTimeRequirement
+      role: RMCJobUNMCResponder
+      time: 90000 # 25 hours
     RMCRankCMBDeputy: []
   startingGear: RMCGearCMBResponder
   icon: "CMJobIconEmpty"

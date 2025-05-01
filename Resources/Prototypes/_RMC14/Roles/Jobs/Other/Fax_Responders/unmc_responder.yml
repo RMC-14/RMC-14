@@ -5,7 +5,15 @@
   description: rmc-job-description-unmc-responder
   playTimeTracker: RMCJobUNMCResponder
   ranks:
-    RMCRankFirstLT: [] #goes to O4
+    RMCRankMajor:
+    - !type:RoleTimeRequirement
+      role: RMCJobUNMCResponder
+      time: 252000 # 70 hours
+    RMCRankCaptain:
+    - !type:RoleTimeRequirement
+      role: RMCJobUNMCResponder
+      time: 36000 # 10 hours
+    RMCRankFirstLT: []
   startingGear: RMCGearUNMCResponder
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false

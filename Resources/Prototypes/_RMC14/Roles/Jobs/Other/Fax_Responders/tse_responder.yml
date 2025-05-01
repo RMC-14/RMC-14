@@ -5,6 +5,14 @@
   description: rmc-job-description-tse-responder
   playTimeTracker: RMCJobTSEResponder
   ranks:
+    RMCRankTSEMajor:
+    - !type:RoleTimeRequirement
+      role: RMCJobTSEResponder
+      time: 252000 # 70 hours
+    RMCRankTSECaptain:
+    - !type:RoleTimeRequirement
+      role: RMCJobTSEResponder
+      time: 36000 # 10 hours
     RMCRankTSELieutenant: []
   startingGear: RMCGearTSEResponder
   icon: "CMJobIconEmpty"
