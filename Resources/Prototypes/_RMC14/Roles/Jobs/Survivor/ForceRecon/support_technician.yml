@@ -45,6 +45,7 @@
   parent: RMCGearForeconBase
   id: RMCGearForeconSupportTech
   equipment:
+    outerClothing: RMCOuterClothingExternalWebbing
     eyes: RMCWeldingGoggles
     back: RMCSatchelMarineLogisticsBig
     gloves: CMHandsInsulated
