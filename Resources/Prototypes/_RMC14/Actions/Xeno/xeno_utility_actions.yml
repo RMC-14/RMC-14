@@ -279,3 +279,17 @@
       state: queen_eye
     event: !type:QueenEyeActionEvent
     useDelay: 0.25
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoBulwarkOfTheHive
+  name: Bulwark Of The Hive
+  description: Grants all hivemembers around you a temporary shield that blocks 200 damage for 10 seconds. While their shield is up, hivemembers can only take damage up to 10% of their health at a time.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: soak
+    event: !type:XenoBulwarkOfTheHiveActionEvent
+    useDelay: 60

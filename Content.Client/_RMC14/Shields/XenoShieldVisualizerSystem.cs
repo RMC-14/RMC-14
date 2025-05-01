@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Shields;
+using Content.Shared.FixedPoint;
 using Robust.Client.GameObjects;
 
 namespace Content.Client._RMC14.Shields
@@ -21,8 +22,8 @@ namespace Content.Client._RMC14.Shields
             }
 
             if (!AppearanceSystem.TryGetData<string>(uid, RMCShieldVisuals.Prefix, out var prefix) ||
-                !AppearanceSystem.TryGetData<float>(uid, RMCShieldVisuals.Current, out var curr) ||
-                !AppearanceSystem.TryGetData<float>(uid, RMCShieldVisuals.Max, out var max))
+                !AppearanceSystem.TryGetData<FixedPoint2>(uid, RMCShieldVisuals.Current, out var curr) ||
+                !AppearanceSystem.TryGetData<double>(uid, RMCShieldVisuals.Max, out var max))
                 return;
 
             var percent = curr / max;

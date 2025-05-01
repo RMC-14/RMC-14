@@ -35,7 +35,7 @@
     - ActionXenoRend
 # Doom
 # Destroy
-# Bulwark
+    - ActionXenoBulwarkOfTheHive
     - ActionXenoPheromones
     tier: 0
     bypassTierCount: true
@@ -139,4 +139,5 @@
     damage:
       groups:
         Brute: 25
+  - type: XenoBulwarkOfTheHive
   
