@@ -460,7 +460,6 @@
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz1
-    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaLv522IndoorsLoneBuildings

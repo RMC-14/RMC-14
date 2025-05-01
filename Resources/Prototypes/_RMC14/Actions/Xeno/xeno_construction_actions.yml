@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: CMGuidebookActionXenoBase
   abstract: true
   components:
@@ -47,7 +47,7 @@
       state: secrete_resin
     event: !type:XenoSecreteStructureActionEvent
     deselectOnMiss: false
-    range: 20
+    range: 0
     repeat: true
     checkCanAccess: false
   - type: XenoConstructionAction
@@ -155,7 +155,6 @@
     event: !type:XenoPlantWeedsActionEvent
       plasmaCost: 125
       prototype: XenoHardyWeedsSource
-      useOnSemiWeedable: true
     useDelay: 120
 
 # For healer drone
@@ -198,3 +197,19 @@
     event: !type:XenoPlantWeedsActionEvent
       limitDistance: true
     useDelay: 1
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoExpandWeeds
+  name: Expand Weeds (50) # TODO RMC14 proper plasma costs
+  description: Expand existing weeds or turn a weed tile into a node.
+  components:
+  - type: WorldTargetAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: plant_weeds
+    event: !type:XenoExpandWeedsActionEvent
+    useDelay: 0.5
+  - type: XenoActionPlasma
+    cost: 50

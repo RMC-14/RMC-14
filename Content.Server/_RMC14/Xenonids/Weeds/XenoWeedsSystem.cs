@@ -133,7 +133,7 @@ public sealed class XenoWeedsSystem : SharedXenoWeedsSystem
                 if (diff.X >= weeds.Range || diff.Y >= weeds.Range)
                     break;
 
-                if (!CanPlaceWeedsPopup(grid, neighbor, null, weeds.SpreadsOnSemiWeedable))
+                if (!CanSpreadWeedsPopup(grid, neighbor, null, weeds.SpreadsOnSemiWeedable))
                     continue;
 
                 if (weedsToReplace != null)

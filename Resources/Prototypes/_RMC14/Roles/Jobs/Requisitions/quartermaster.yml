@@ -22,7 +22,7 @@
   startingGear: CMGearQuartermaster
   icon: "CMJobIconQuartermaster"
   requireAdminNotify: true
-  joinNotifyCrew: true
+  joinNotifyCrew: false
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - CMQM
@@ -85,3 +85,13 @@
 - type: playTimeTracker
   id: CMJobQuartermaster
   isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleQM
+  name: The QM
+  description: The Quartermaster.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: quartermaster
