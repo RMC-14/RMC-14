@@ -174,9 +174,8 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
             return;
 
         short tier3Amount = 0;
-        var tier2Amount = 0;
-        var xenocount = 0;
-        var larvacount = 0;
+        short tier2Amount = 0;
+        short xenocount = 0;
 
 
         var xenos = new List<Xeno>();
@@ -193,9 +192,6 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
                 {
                     xenocount++;
                 }
-
-                if (metaData.EntityPrototype?.ID == "CMXenoLarva")
-                    larvacount++;
 
                 switch (comp.Tier)
                 {
