@@ -228,7 +228,7 @@
   parent: CMStampBase
   id: RMCStampFreePress
   name: free press rubber stamp
-  suffix: Admin, press
+  suffix: Admin, Press
   components:
   - type: Sprite
     state: stamp-free-press
