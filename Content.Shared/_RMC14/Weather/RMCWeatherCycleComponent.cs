@@ -47,7 +47,7 @@ public sealed partial class RMCWeatherCycleComponent : Component
         public TimeSpan LightningCooldown = TimeSpan.FromSeconds(5);
 
         [DataField, AutoNetworkedField]
-        public List<string> LightningEffects = ["RMCColorSequenceLightningSharpPeak", "RMCColorSequenceLightningFlicker"];
+        public List<string> LightningEffects = new(){"RMCColorSequenceLightningSharpPeak", "RMCColorSequenceLightningFlicker"};
     }
 }
 

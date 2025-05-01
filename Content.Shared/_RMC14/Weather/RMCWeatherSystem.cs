@@ -65,18 +65,22 @@ public sealed class RMCWeatherSystem : EntitySystem
         return true;
     }
 
-    public void HandleWeatherEffects(Entity<RMCWeatherCycleComponent, RMCAmbientLightComponent> ent)
+    public void HandleWeatherEffects(Entity<RMCWeatherCycleComponent> ent)
     {
-        if (ent.Comp1.CurrentEvent.HasValue)
-        {
-            var currentEvent = ent.Comp1.CurrentEvent.Value;
-            if (currentEvent.LightningChance > 0 && currentEvent.LightningEffects.Count > 0)
-            {
-                var lightningEffect = _rmcLight.ProcessPrototype(_random.Pick(currentEvent.LightningEffects));
-                var lightningDuration = currentEvent.LightningDuration;
-                _rmcLight.SetColor((ent, ent.Comp2), lightningEffect, lightningDuration);
-            }
-        }
+        if (ent.Comp.CurrentEvent == null)
+            return;
+
+        if (ent.Comp.CurrentEvent.LightningChance <= 0 || ent.Comp.CurrentEvent.LightningEffects.Count <= 0)
+            return;
+
+        EnsureComp<RMCAmbientLightComponent>(ent, out var lightComp);
+
+        if (lightComp.IsAnimating)
+            return;
+
+        var lightningEffect = _rmcLight.ProcessPrototype(_random.Pick(ent.Comp.CurrentEvent.LightningEffects));
+        var lightningDuration = ent.Comp.CurrentEvent.LightningDuration;
+        _rmcLight.SetColor((ent, lightComp), lightningEffect, lightningDuration);
     }
 
     public override void Update(float frameTime)
@@ -90,6 +94,7 @@ public sealed class RMCWeatherSystem : EntitySystem
         {
             cycle.LastEventCooldown -= TimeSpan.FromSeconds(frameTime);
 
+            // Process whether to start a weather event
             if(cycle.LastEventCooldown <= TimeSpan.Zero)
             {
                 var weatherPick = _random.Pick(cycle.WeatherEvents);
@@ -101,6 +106,17 @@ public sealed class RMCWeatherSystem : EntitySystem
 
                 var minTimeVariance = (-cycle.MinTimeVariance * 0.5) + _random.Next(cycle.MinTimeVariance);
                 cycle.LastEventCooldown = weatherPick.Duration + cycle.MinTimeBetweenEvents + minTimeVariance;
+            }
+
+            // Process effects for ongoing weather event
+            if (cycle.CurrentEvent != null)
+            {
+                cycle.CurrentEvent.LightningCooldown -= TimeSpan.FromSeconds(frameTime);
+                if (cycle.CurrentEvent.LightningCooldown <= TimeSpan.Zero)
+                {
+                    HandleWeatherEffects((uid, cycle));
+                    cycle.CurrentEvent.LightningCooldown = TimeSpan.FromSeconds(5);
+                }
             }
         }
     }
