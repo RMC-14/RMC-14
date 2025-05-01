@@ -188,7 +188,7 @@
 - type: entity
   parent: CMStampBase
   id: RMCStampCLF
-  name: colonial liberation front rubber stamp
+  name: colony liberation front rubber stamp
   suffix: Admin, CLF
   components:
   - type: Sprite
