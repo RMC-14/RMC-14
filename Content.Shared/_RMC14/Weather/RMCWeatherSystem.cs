@@ -3,9 +3,11 @@ using Content.Shared._RMC14.Light;
 using Content.Shared.Light.Components;
 using Content.Shared.Light.EntitySystems;
 using Content.Shared.Weather;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -23,6 +25,7 @@ public sealed class RMCWeatherSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly RMCAmbientLightSystem _rmcLight = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     private EntityQuery<BlockWeatherComponent> _blockQuery;
 
@@ -81,6 +84,10 @@ public sealed class RMCWeatherSystem : EntitySystem
         var lightningEffect = _rmcLight.ProcessPrototype(_random.Pick(ent.Comp.CurrentEvent.LightningEffects));
         var lightningDuration = ent.Comp.CurrentEvent.LightningDuration;
         _rmcLight.SetColor((ent, lightComp), lightningEffect, lightningDuration);
+
+        var sound = ent.Comp.CurrentEvent.LightningSound;
+        if (sound != null)
+            _audio.PlayGlobal(_audio.ResolveSound(sound), Filter.BroadcastMap(Transform(ent).MapID), true);
     }
 
     public override void Update(float frameTime)
@@ -115,7 +122,7 @@ public sealed class RMCWeatherSystem : EntitySystem
                 if (cycle.CurrentEvent.LightningCooldown <= TimeSpan.Zero)
                 {
                     HandleWeatherEffects((uid, cycle));
-                    cycle.CurrentEvent.LightningCooldown = TimeSpan.FromSeconds(5);
+                    cycle.CurrentEvent.LightningCooldown = cycle.CurrentEvent.LightningCooldownDuration;
                 }
             }
         }

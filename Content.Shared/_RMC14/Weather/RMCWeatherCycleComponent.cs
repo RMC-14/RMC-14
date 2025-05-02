@@ -1,4 +1,5 @@
 ﻿using Content.Shared.Weather;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -12,7 +13,7 @@ public sealed partial class RMCWeatherCycleComponent : Component
     [DataField]
     public List<RMCWeatherEvent> WeatherEvents = new();
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public RMCWeatherEvent? CurrentEvent;
 
     [DataField, AutoNetworkedField]
@@ -45,10 +46,16 @@ public sealed partial class RMCWeatherEvent
     public TimeSpan LightningDuration = TimeSpan.FromSeconds(2);
 
     [DataField]
-    public TimeSpan LightningCooldown = TimeSpan.FromSeconds(5);
+    public TimeSpan LightningCooldown;
+
+    [DataField]
+    public TimeSpan LightningCooldownDuration = TimeSpan.FromSeconds(5);
 
     [DataField]
     public List<string> LightningEffects = new(){"RMCColorSequenceLightningSharpPeak", "RMCColorSequenceLightningFlicker"};
+
+    [DataField]
+    public SoundSpecifier? LightningSound = new SoundCollectionSpecifier("RMCThunder");
 }
 
 
