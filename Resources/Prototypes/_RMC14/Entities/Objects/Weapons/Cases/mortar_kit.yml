@@ -48,7 +48,9 @@
       amount: 3
     - id: CMWrench
     - id: RMCRangefinder
-      amount: 2
+      amount: 1
+    - id: RMCLaserDesignator
+      amount: 1
 
 
 - type: entity
