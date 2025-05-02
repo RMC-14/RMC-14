@@ -18,6 +18,7 @@
     tags:
     - Sidearm
     - RMCRevolver
+    - RMCMateba
   - type: Corrodible
     isCorrodible: false
   - type: RevolverAmmoProvider
