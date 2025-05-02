@@ -71,6 +71,8 @@ rmc-xeno-construction-default-area-name = Unknown
 
 rmc-xeno-construction-failed-tunnel-rename = Tunnel names must be unique!
 rmc-xeno-construction-tunnel-examine = The pheromone scent reads: {$tunnelName}
+rmc-xeno-construction-tunnel-examine-not-xeno-empty = [color=purple][italic]It's a dark abyss...[/italic][/color]
+rmc-xeno-construction-tunnel-examine-not-xeno = [color=purple][italic]It's a dark abyss with a few little...lights...almost like something is watching.[/italic][/color]
 
 rmc-xeno-construction-tunnel-fill = You start collapsing the tunnel!
 rmc-xeno-construction-tunnel-fill-xeno-drop = The tunnel suddenly collapses, forcing you out!

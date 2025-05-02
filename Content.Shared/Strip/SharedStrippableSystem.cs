@@ -21,6 +21,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Strip.Components;
 using Content.Shared.Verbs;
 using Robust.Shared.Utility;
+using Content.Shared._RMC14.Clothing;
 
 namespace Content.Shared.Strip;
 
@@ -274,6 +275,12 @@ public abstract class SharedStrippableSystem : EntitySystem
         if (!_inventorySystem.CanUnequip(user, target, slot, out var reason))
         {
             _popupSystem.PopupCursor(Loc.GetString(reason));
+            return false;
+        }
+
+        if (HasComp<RMCUnstrippableComponent>(slotItem))
+        {
+            _popupSystem.PopupCursor(Loc.GetString("rmc-unstrippable", ("item", slotItem), ("owner", Identity.Entity(target, EntityManager))));
             return false;
         }
 

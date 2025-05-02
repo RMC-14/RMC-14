@@ -63,7 +63,7 @@
 - type: entity
   parent: RMCSurvivorPresetCivilian
   id: RMCSurvivorPresetDoctor
-  name: doctor survivor preset
+  name: doctor colonist preset
   components:
   - type: SurvivorPreset
     randomGearOther:
@@ -78,3 +78,21 @@
       - [ CMFirstAidKitFilledRobust ]
       - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust ]
       - [ RMCGlassesMedicalHUDGlasses, CMFirstAidKitFilledRobust, CMFirstAidKitSurgeryFilled ]
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSurvivorDoctor
+  name: doctor colonist ghost role
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSurvivorDoctor
+
+- type: randomHumanoidSettings
+  parent: RMCSettingsGhostRole
+  id: RMCSurvivorDoctor
+  components:
+  - type: RMCJobSpawner
+    job: CMSurvivorDoctor

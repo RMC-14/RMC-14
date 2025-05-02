@@ -244,8 +244,9 @@
     - none
 
 # Pressurised Canister /obj/item/reagent_container/glass/pressurized_canister
+# BaseBeaker has DrinkComponent which is undesirable. Most of BaseBeaker is overriden anyway.
 - type: entity
-  parent: CMBeakerBase
+  parent: BaseItem
   id: RMCPressurizedCanister
   name: pressurized canister
   description: A pressurized container. The inner part of a pressurized reagent canister pouch. Only compatible with its pouch, machinery or a storage tank.
@@ -279,9 +280,57 @@
     quickEquip: false
     slots:
     - none
-  - type: RemoveComponents
-    components:
-    - type: Drink
+  # components from original parents
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpillBehavior
+        solution: beaker
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: MeleeWeapon
+    soundNoDamage:
+      path: "/Audio/Effects/Fluids/splat.ogg"
+    damage:
+      types:
+        Blunt: 0
+  - type: MixableSolution
+    solution: beaker
+  - type: FitsInDispenser
+    solution: beaker
+  - type: RefillableSolution
+    solution: beaker
+  - type: ExaminableSolution
+    solution: beaker
+  - type: DrawableSolution
+    solution: beaker
+  - type: InjectableSolution
+    solution: beaker
+  - type: SolutionTransfer
+    canChangeTransferAmount: true
+  - type: SolutionItemStatus
+    solution: beaker
+  - type: UserInterface
+    interfaces:
+      enum.TransferAmountUiKey.Key:
+        type: TransferAmountBoundUserInterface
+  - type: Appearance
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Glass
+  - type: DnaSubstanceTrace
 
 - type: entity
   parent: RMCPressurizedCanister

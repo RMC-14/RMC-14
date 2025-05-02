@@ -41,11 +41,14 @@ public sealed class XenoRoleSystem : EntitySystem
     private TimeSpan _rankFourTime;
     private TimeSpan _rankFiveTime;
 
+    private readonly List<Entity<XenoComponent>> _toUpdate = new();
+
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
         SubscribeLocalEvent<XenoComponent, PlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<XenoComponent, PlayerDetachedEvent>(OnPlayerDetached);
@@ -67,28 +70,15 @@ public sealed class XenoRoleSystem : EntitySystem
             UpdateRank(ev.Mob, ev.Player, job, ev.Profile);
     }
 
+    private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
+    {
+        _toUpdate.Clear();
+    }
+
     private void OnPlayerAttached(Entity<XenoComponent> xeno, ref PlayerAttachedEvent args)
     {
         RemCompDeferred<XenoDisconnectedComponent>(xeno);
-
-        if (!_mind.TryGetMind(args.Player.UserId, out var mind))
-            return;
-
-        if (_hive.GetHive(xeno.Owner) is {} hive)
-            _pvsOverride.AddForceSend(hive, args.Player);
-
-        _role.MindAddJobRole(mind.Value, jobPrototype: xeno.Comp.Role);
-        _playTime.PlayerRolesChanged(args.Player);
-
-        try
-        {
-            var profile = _gameTicker.GetPlayerProfile(args.Player);
-            UpdateRank(xeno, args.Player, xeno.Comp.Role, profile);
-        }
-        catch (Exception e)
-        {
-            Log.Error($"Error setting xeno rank for {ToPrettyString(xeno)}:\n{e}");
-        }
+        _toUpdate.Add(xeno);
     }
 
     private void OnPlayerDetached(Entity<XenoComponent> xeno, ref PlayerDetachedEvent args)
@@ -165,6 +155,55 @@ public sealed class XenoRoleSystem : EntitySystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        try
+        {
+            for (var i = _toUpdate.Count - 1; i >= 0; i--)
+            {
+                var removed = false;
+                try
+                {
+                    var xeno = _toUpdate[i];
+                    if (TerminatingOrDeleted(xeno))
+                    {
+                        removed = true;
+                        _toUpdate.RemoveAt(i);
+                    }
+
+                    if (!TryComp(xeno, out ActorComponent? actor))
+                        continue;
+
+                    var player = actor.PlayerSession;
+                    if (!_mind.TryGetMind(player.UserId, out var mind))
+                        continue;
+
+                    if (_hive.GetHive(xeno.Owner) is { } hive)
+                        _pvsOverride.AddForceSend(hive, player);
+
+                    _role.MindAddJobRole(mind.Value, jobPrototype: xeno.Comp.Role);
+                    _playTime.PlayerRolesChanged(player);
+
+                    try
+                    {
+                        var profile = _gameTicker.GetPlayerProfile(player);
+                        UpdateRank(xeno, player, xeno.Comp.Role, profile);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Error($"Error setting xeno rank for {ToPrettyString(xeno)}:\n{e}");
+                    }
+                }
+                finally
+                {
+                    if (!removed)
+                        _toUpdate.RemoveAt(i);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Error processing list of xenos to update:\n{e}");
+        }
 
         var time = _timing.CurTime;
         var disconnectedQuery = EntityQueryEnumerator<XenoDisconnectedComponent>();
