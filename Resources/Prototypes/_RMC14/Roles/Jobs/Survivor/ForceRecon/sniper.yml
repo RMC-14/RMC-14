@@ -7,6 +7,7 @@
     sprite: _RMC14/Interface/map_blips.rsi
     state: spec
   startingGear: RMCGearForeconSniper
+  icon: "RMCJobIconForeconSniper"
   special:
   - !type:AddComponentSpecial
     components:
@@ -60,3 +61,10 @@
     job_id: RMCSurvivorForeconSniper
   - type: Sprite
     state: spec_spawn
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconForeconSniper
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_spec_sniper

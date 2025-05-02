@@ -7,6 +7,7 @@
     sprite: _RMC14/Interface/map_blips.rsi
     state: spec
   startingGear: RMCGearForeconBase
+  icon: "CMJobIconWeaponsSpecialist"
   special:
   - !type:AddComponentSpecial
     components:
