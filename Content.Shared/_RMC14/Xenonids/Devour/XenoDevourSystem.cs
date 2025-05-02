@@ -24,6 +24,7 @@ using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee;
+using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -144,6 +145,9 @@ public sealed class XenoDevourSystem : EntitySystem
         if (args.Target == null)
             return;
 
+        if (_container.TryGetContainingContainer((ent, null), out var container) && args.Target == container.Owner)
+            DevouredHandleBreakout(ent);
+
         if (!HasComp<UsableWhileDevouredComponent>(args.Target))
             args.Cancelled = true;
     }
@@ -157,11 +161,6 @@ public sealed class XenoDevourSystem : EntitySystem
     {
         if (!HasComp<UsableWhileDevouredComponent>(args.Used))
             args.Cancel();
-    }
-
-    private void OnDevouredAttackAttempt(Entity<DevouredComponent> devoured, ref AttackAttemptEvent args)
-    {
-        args.Cancel();
     }
 
     private void OnDevouredPickupAttempt(Entity<DevouredComponent> ent, ref PickupAttemptEvent args)
@@ -184,6 +183,11 @@ public sealed class XenoDevourSystem : EntitySystem
         args.Cancel();
     }
 
+    private void OnDevouredAttackAttempt(Entity<DevouredComponent> devoured, ref AttackAttemptEvent args)
+    {
+        args.Cancel();
+    }
+
     private void OnDevouredShotAttempted(Entity<DevouredComponent> devoured, ref ShotAttemptedEvent args)
     {
         if (!HasComp<GunUsableWhileDevouredComponent>(args.Used))
@@ -195,6 +199,16 @@ public sealed class XenoDevourSystem : EntitySystem
         if (!args.HasDirectionalMovement || !_timing.IsFirstTimePredicted)
             return;
 
+        DevouredHandleBreakout(devoured);
+    }
+
+    private void OnDevouredAttack(Entity<DevouredComponent> devoured, ref AttackEvent args)
+    {
+        DevouredHandleBreakout(devoured);
+    }
+
+    private void DevouredHandleBreakout(Entity<DevouredComponent> devoured)
+    {
         if (_timing.CurTime < devoured.Comp.NextDevouredAttackTimeAllowed)
             return;
 
