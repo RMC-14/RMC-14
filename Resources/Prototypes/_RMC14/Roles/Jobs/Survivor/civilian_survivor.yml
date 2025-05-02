@@ -39,6 +39,7 @@
       factions:
       - Survivor
     - type: IntelRescueSurvivorObjective
+    - type: RMCRibbon
   greeting: rmc-job-greeting-survivor
   hasIcon: false
 
