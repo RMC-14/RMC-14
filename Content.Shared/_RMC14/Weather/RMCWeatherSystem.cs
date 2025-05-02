@@ -80,8 +80,10 @@ public sealed class RMCWeatherSystem : EntitySystem
             return;
 
         EnsureComp<RMCAmbientLightComponent>(ent, out var lightComp);
+        EnsureComp<MapLightComponent>(ent, out var mapLightComp);
 
-        if (lightComp.IsAnimating)
+        //Since lightning animation runs from Black to Black, we don't run it if the lighting is different
+        if (lightComp.IsAnimating || mapLightComp.AmbientLightColor != Color.Black)
             return;
 
         var lightningEffect = _rmcLight.ProcessPrototype(_random.Pick(ent.Comp.CurrentEvent.LightningEffects));
