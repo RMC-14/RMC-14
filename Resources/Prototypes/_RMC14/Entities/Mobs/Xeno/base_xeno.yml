@@ -338,8 +338,8 @@
   - type: BlockIdExamine
   - type: NoStunOnExit
   - type: RMCSpeciesSlowdownModifier
-    slowMultiplier: 0.87
-    superSlowMultiplier: 0.75
+    slowModifier: 0.75
+    superSlowModifier: 1.5
     durationMultiplier: 0.666
   - type: RMCCanBeFultoned
   - type: CMArmor
