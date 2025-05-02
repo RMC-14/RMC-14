@@ -29,6 +29,7 @@ public sealed class XenoWatchBui : BoundUserInterface
     private static readonly Color XenoColor = Color.FromHex("#800080");
     private static readonly Color XenoHighlightColor = Color.FromHex("#9E379E");
 
+
     private SortedDictionary<int, SortedSet<EntityPrototype>> tiers = new();
     private Dictionary<string, bool> ShownXenos = new();
     private Dictionary<string, int> XenoCounts = new();
@@ -89,7 +90,8 @@ public sealed class XenoWatchBui : BoundUserInterface
                 var xenobutton = new Button();
 
                 xenobutton.Text = xeno.Name;
-                xenobutton.Name = xeno.Name;
+                xenobutton.Name = xeno.Name.Replace(" ","");
+                Logger.Debug($"Name is {xenobutton.Name}");
                 xenobutton.ToggleMode = true;
                 xenobutton.ModulateSelfOverride = Color.Purple;
                 xenobutton.AddStyleClass("ButtonSquare");
@@ -98,8 +100,10 @@ public sealed class XenoWatchBui : BoundUserInterface
                 xenocontrol.XenoButton.AddChild(xenobutton);
 
                 row.XenosContainer.AddChild(xenocontrol);
-                ShownXenos.Add(xeno.Name, false);
-                XenoCounts.Add(xeno.Name, 0);
+                ShownXenos.Add(xeno.Name.Replace(" ",""), false);
+                //Logger.Debug($"Added xeno {xeno.Name.Replace(" ","")} to shownxenos");
+                XenoCounts.Add(xeno.Name.Replace(" ",""), 0);
+                //Logger.Debug($"Added xeno {xeno.Name.Replace(" ","")} to Xenocounts");
             }
             _window.RowContainer.AddChild(row);
         }
@@ -147,9 +151,9 @@ public sealed class XenoWatchBui : BoundUserInterface
                 texture = _sprite.Frame0(evolution);
             }
 
-            if (XenoCounts.ContainsKey(xeno.Name))
+            if (XenoCounts.ContainsKey(xeno.Name.Replace(" ","")))
             {
-                XenoCounts[xeno.Name]++;
+                XenoCounts[xeno.Name.Replace(" ","")]++;
                 //Logger.Debug("Xenocount is going up");
             }
 
@@ -163,6 +167,9 @@ public sealed class XenoWatchBui : BoundUserInterface
                 control.SetLeader(iconTexture);
 
             control.Button.OnPressed += _ => SendPredictedMessage(new XenoWatchBuiMsg(xeno.Entity));
+            control.HealButton.OnPressed += OnHealPressed;
+            control.PlasmaButton.OnPressed += OnPlasmaPressed;
+            control.NameLabel.SetWidth = _window.Width - 300;
 
             _window.XenoContainer.AddChild(control);
         }
@@ -195,7 +202,7 @@ public sealed class XenoWatchBui : BoundUserInterface
                     if (button is not Button xenobutton)
                         continue;
 
-                    name  = xenobutton.Text ?? "";
+                    name  = xenobutton.Name ?? "";
                 }
 
                 if (XenoCounts.TryGetValue(name, out var count))
@@ -250,7 +257,11 @@ public sealed class XenoWatchBui : BoundUserInterface
     private void OnButtonToggled(BaseButton.ButtonEventArgs args)
     {
         string name = args.Button.Name ?? string.Empty; // button name is emtpy, what i need is the text
-
+        if (name == string.Empty)
+        {
+            Logger.Debug("Button is empty");
+            return;
+        }
         if (ShownXenos.ContainsKey(name))
         {
             ShownXenos[name] = !ShownXenos[name];
@@ -262,6 +273,7 @@ public sealed class XenoWatchBui : BoundUserInterface
         UpdateList();
     }
 
+
     private void OnTierToggled(BaseButton.ButtonEventArgs args)
     {
         args.Button.ModulateSelfOverride = UpdateButtonColor(args.Button.Pressed);
@@ -270,7 +282,7 @@ public sealed class XenoWatchBui : BoundUserInterface
         {
             foreach (var xeno in tiers[number])
             {
-                ShownXenos[xeno.Name] = args.Button.Pressed;
+                ShownXenos[xeno.Name.Replace(" ", "")] = args.Button.Pressed;
                 //Logger.Debug(xeno.Name);
             }
         }
@@ -306,10 +318,25 @@ public sealed class XenoWatchBui : BoundUserInterface
         }
     }
 
+    private void OnHealPressed(BaseButton.ButtonEventArgs args)
+    {
+        Logger.Debug("Heal button pressed");
+        args.Button.ModulateSelfOverride = Color.FromHex("#236C40");
+    }
+
+    private void OnPlasmaPressed(BaseButton.ButtonEventArgs args)
+    {
+        //dont know how queen plasma trasnfer works yet
+        Logger.Debug("Plasma button pressed");
+        args.Button.ModulateSelfOverride = Color.FromHex("#1576BE");
+    }
+
     private Color UpdateButtonColor(bool state)
     {
         return state ? XenoHighlightColor : XenoColor;
     }
+
+
 
     private void ClearSearchBar()
     {
@@ -343,7 +370,9 @@ public sealed class XenoWatchBui : BoundUserInterface
                         continue;
                     }
 
-                    if (ShownXenos.TryGetValue(control.NameLabel.GetMessage() ?? "", out var xeno))
+                    var label = control.NameLabel.GetMessage() ?? string.Empty;
+
+                    if (ShownXenos.TryGetValue(label.Replace(" ","") ?? "", out var xeno))
                     {
                         control.Visible = xeno;
                     }
