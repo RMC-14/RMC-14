@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Added holiday vendor system.
-    type: Add
-  id: 1163
-  time: '2025-01-05T01:50:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5297
 - author: DummeHytteOst
   changes:
   - message: Added the ability to change the xeno wide swing keybind, in the options.
@@ -5504,5 +5497,16 @@
   id: 1665
   time: '2025-04-30T01:06:27.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6305
+- author: Dygon
+  changes:
+  - message: Slow and super slow effects are now significantly more effective against
+      xenonids.
+    type: Fix
+  - message: The effectiveness of slow and super slow effects now scales with the
+      speed of the affected entity.
+    type: Fix
+  id: 1666
+  time: '2025-05-02T22:20:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6017
 Name: RMC14
 Order: -1
