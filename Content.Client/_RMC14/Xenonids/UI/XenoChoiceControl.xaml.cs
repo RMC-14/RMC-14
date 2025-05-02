@@ -10,11 +10,14 @@ namespace Content.Client._RMC14.Xenonids.UI;
 [Virtual]
 public partial class XenoChoiceControl : Control
 {
+    private static readonly Color LeaderColor = Color.FromHex("#FFBF00");
+
     public XenoChoiceControl()
     {
         RobustXamlLoader.Load(this);
         Plasma.ForegroundStyleBoxOverride = new StyleBoxFlat(Color.LightSkyBlue);
         Health.ForegroundStyleBoxOverride = new StyleBoxFlat(Color.LimeGreen);
+        LeaderBox.ModulateSelfOverride = LeaderColor;
     }
 
     public void Set(string name, Texture? texture)
@@ -27,6 +30,14 @@ public partial class XenoChoiceControl : Control
     {
         NameLabel.SetMessage(msg);
         Texture.Texture = texture;
+    }
+
+    public void SetLeader(Texture? texture)
+    {
+        LeaderStar.Texture = texture;
+        LeaderStar.Visible = true;
+        LeaderBox.Visible = true;
+        LeaderBar.Visible = true;
     }
 
     public void SetHealth(float health)

@@ -1,4 +1,4 @@
-﻿﻿using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
 using Content.Client._RMC14.Xenonids.UI;
 using Content.Shared._RMC14.Xenonids;
@@ -12,6 +12,7 @@ using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 using static Robust.Client.UserInterface.Controls.LineEdit;
 
 namespace Content.Client._RMC14.Xenonids.Watch;
@@ -115,12 +116,18 @@ public sealed class XenoWatchBui : BoundUserInterface
         _window.XenoCount.Text = $"Total Sisters: {s.XenoCount}";
         _window.XenoContainer.DisposeAllChildren();
 
+        var icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_watch.rsi"), "hudxenoleader");
+        var iconTexture = _sprite.Frame0(icon);
+
         //s.Xenos.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name)); testing this seems like i dont need it? might use sorting later tho
+
+        var xenolist = s.Xenos.OrderByDescending(a => a.Leader);
 
         foreach (var key in XenoCounts.Keys)
         {
             XenoCounts[key] = 0;
         }
+
 
         var burrowed = Math.Sqrt(s.BurrowedLarva * s.BurrowedLarvaSlotFactor);
         FixedPoint2 burrowedweight = Math.Min(burrowed, s.BurrowedLarva);
@@ -131,7 +138,7 @@ public sealed class XenoWatchBui : BoundUserInterface
         var tier3Slots = (total * 0.2f) - s.TierThreeAmount;
 
 
-        foreach (var xeno in s.Xenos)
+        foreach (var xeno in xenolist)
         {
             Texture? texture = null;
             if (xeno.Id != null &&
@@ -152,6 +159,8 @@ public sealed class XenoWatchBui : BoundUserInterface
             control.SetHealth((float)xeno.Health);
             control.SetPlasma((float)xeno.Plasma);
             control.SetEvo((int)xeno.Evo);
+            if (xeno.Leader)
+                control.SetLeader(iconTexture);
 
             control.Button.OnPressed += _ => SendPredictedMessage(new XenoWatchBuiMsg(xeno.Entity));
 

@@ -2,8 +2,11 @@
      xmlns="https://spacestation14.io"
      xmlns:ui="clr-namespace:Content.Client._RMC14.Xenonids.UI"
      xmlns:style="clr-namespace:Content.Client.Stylesheets">
-    <BoxContainer Orientation="Vertical">
+    <BoxContainer Orientation="Vertical" Margin="0 0 0 3">
         <BoxContainer Orientation="Horizontal">
+            <BoxContainer MaxWidth="10" Name="LeaderBar" SetWidth="5" Access="Public" Visible="False">
+                <Button Name="LeaderBox" Access="Public"></Button>
+            </BoxContainer>
             <Button Name="Button" Access="Public"
                     HorizontalExpand="True" VerticalExpand="False"
                     StyleClasses="ButtonSquare" Margin="0">
@@ -12,6 +15,9 @@
                     <TextureRect Name="Texture" Access="Public"
                                  HorizontalExpand="False" VerticalExpand="False"
                                  Margin="1"/>
+                    <TextureRect Name="LeaderStar" Access="Public"
+                                 HorizontalExpand="False" VerticalExpand="False" VerticalAlignment="Bottom"
+                                 Margin="-32 0 0 4" Visible="False"/>
                     <Control MinWidth="5"/>
                     <RichTextLabel Name="NameLabel" Access="Public" VerticalAlignment="Center"/>
                 </BoxContainer>

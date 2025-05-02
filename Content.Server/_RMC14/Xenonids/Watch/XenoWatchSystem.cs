@@ -5,6 +5,7 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.HiveLeader;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared.Damage;
@@ -182,11 +183,15 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
         var query = EntityQueryEnumerator<XenoComponent, HiveMemberComponent, MetaDataComponent>();
         while (query.MoveNext(out var uid, out var comp, out var member, out var metaData))
         {
+            bool leader = false;
             if (uid == ent.Owner || member.Hive != hive.Owner)
                 continue;
 
             if (_mobState.IsDead(uid))
                 continue;
+
+            if(TryComp<HiveLeaderComponent>(uid, out var leaderComp))
+                leader = true;
 
                 if (comp.CountedInSlots)
                 {
@@ -211,7 +216,7 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
                 evo = evoComp.Points;
             }
 
-            xenos.Add(new Xeno(GetNetEntity(uid), Name(uid, metaData), metaData.EntityPrototype?.ID, GetHealthPercentage(uid), GetPlasmaPercentage(uid), evo));
+            xenos.Add(new Xeno(GetNetEntity(uid), Name(uid, metaData), metaData.EntityPrototype?.ID, GetHealthPercentage(uid), GetPlasmaPercentage(uid), evo, leader));
         }
 
 
@@ -223,6 +228,7 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
         FixedPoint2 critical;
         FixedPoint2 damage;
         FixedPoint2 percentage = 0;
+
         if (TryComp<DamageableComponent>(uid, out var damageableComponent))
         {
             if (TryComp<MobThresholdsComponent>(uid, out var threshold))
