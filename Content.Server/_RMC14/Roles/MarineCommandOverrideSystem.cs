@@ -1,41 +1,42 @@
-using Content.Shared._RMC14.Marines;
-using Content.Shared._RMC14.Roles;
-using Content.Shared.Mobs.Components;
-using Content.Shared.Roles;
-using Robust.Shared.Prototypes;
-using Content.Server.GameTicking.Events;
-using Robust.Shared.Timing;
-using Content.Shared._RMC14.ARES;
+using System.Globalization;
+using System.Linq;
 using Content.Server._RMC14.Marines;
+using Content.Server.GameTicking.Events;
+using Content.Server.Players.PlayTimeTracking;
+using Content.Shared._RMC14.ARES;
+using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
+using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Roles;
+using Content.Shared.Access;
+using Content.Shared.Access.Components;
+using Content.Shared.Bed.Cryostorage;
+using Content.Shared.GameTicking;
+using Content.Shared.Inventory;
+using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
-using Content.Shared.Mind;
-using Content.Shared.Bed.Cryostorage;
-using Content.Shared._RMC14.Marines.Roles.Ranks;
-using Content.Shared.Inventory;
-using Content.Shared.Access.Components;
-using Content.Shared.Access;
-using System.Globalization;
-using Content.Shared._RMC14.Marines.Squads;
-using Robust.Shared.Random;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Random.Helpers;
-using System.Linq;
-using Content.Server.Players.PlayTimeTracking;
+using Content.Shared.Roles;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Roles;
 
 public sealed partial class MarineCommandOverrideSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly ARESSystem _ares = default!;
     [Dependency] private readonly IEntityManager _entMan = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
-    [Dependency] private readonly ARESSystem _ares = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private readonly PlayTimeTrackingManager _playtimeManager = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedRankSystem _rankSystem = default!;
     [Dependency] private readonly SquadSystem _squadSystem = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly PlayTimeTrackingManager _playtimeManager = default!;
 
 
     private EntityUid _commander = default;
@@ -48,11 +49,17 @@ public sealed partial class MarineCommandOverrideSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<RoundStartingEvent>(OnRoundStarted);
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundCleanup);
     }
 
     private void OnRoundStarted(RoundStartingEvent ev)
     {
         _initialTimerEndTime = _gameTiming.CurTime + TimeSpan.FromMinutes(2);
+    }
+    private void OnRoundCleanup(RoundRestartCleanupEvent ev)
+    {
+        _adaptationTimerEndTime = null;
+        _initialTimerEndTime = null;
     }
 
     public override void Update(float frameTime)
