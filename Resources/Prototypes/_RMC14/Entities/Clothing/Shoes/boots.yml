@@ -38,6 +38,7 @@
   name: marine combat boots
   description: Standard issue combat boots for combat scenarios or combat situations. All combat, all the time.
   components:
+  - type: RMCBulkyArmor
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/black.rsi
     layers:
