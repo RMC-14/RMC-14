@@ -45,13 +45,13 @@ public sealed class RMCAmbientLightCommand : EntitySystem
 
         _entityManager.EnsureComponent<RMCAmbientLightComponent>(gridUid, out var rmcLight);
 
-        //Color Proto parsing
+        //Color string parsing
         Color colorHex = default;
         if (!args[1].Equals("null"))
         {
             if (!Color.TryParse(args[1], out colorHex))
             {
-                shell.WriteError(Loc.GetString("cmd-weather-error-invalid-hex"));
+                shell.WriteError("Invalid color, pick a color from the list or enter a hex code in format #RRGGBB");
                 return;
             }
         }
