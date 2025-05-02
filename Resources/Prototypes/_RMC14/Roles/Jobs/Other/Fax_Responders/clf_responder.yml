@@ -31,6 +31,7 @@
         RMCSkillVehicles: 2
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-responder
+    - type: RMCRibbon
   hasIcon: false
   hidden: true
 

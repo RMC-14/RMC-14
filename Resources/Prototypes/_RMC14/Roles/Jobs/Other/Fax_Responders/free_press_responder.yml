@@ -29,6 +29,7 @@
         RMCSkillPowerLoader: 1
         RMCSkillSurgery: 1
         RMCSkillVehicles: 2
+    - type: RMCRibbon
   hasIcon: false
   hidden: true
 
