@@ -68,7 +68,7 @@
 - type: startingGear
   id: RMCGearUNMCResponder
   equipment:
-    jumpsuit: CMJumpsuitBO
+    jumpsuit: CMJumpsuitXOFormal
     outerClothing: CMCoatXOFormal
     shoes: RMCShoesLaceup
     head: RMCHeadCapFlippable
