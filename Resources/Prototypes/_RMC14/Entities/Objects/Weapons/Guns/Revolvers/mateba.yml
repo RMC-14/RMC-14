@@ -55,7 +55,7 @@
           - RMCAttachmentMatebaStandard
           - RMCAttachmentMatebaMarksman
           - RMCAttachmentMatebaSnubNose
-          - RMCAttachmentBarrelCharger d
+          - RMCAttachmentBarrelCharger
       rmc-aslot-rail:
         whitelist:
           tags:
