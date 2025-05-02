@@ -31,7 +31,7 @@
       - RMCCartridgeRevolverMatebaHIAP
       - RMCCartridgeRevolverMatebaHighImpact
       - RMCCartridgeRevolverMateba
-    proto: RMCCartridgeRevolverMateba
+    proto: RMCCartridgeRevolverMatebaHighImpact
     capacity: 6
     chambers: [ True, True, True, True, True, True ]
     ammoSlots: [ null, null, null, null, null, null ]
@@ -54,7 +54,7 @@
           - RMCAttachmentMatebaStandard
           - RMCAttachmentMatebaMarksman
           - RMCAttachmentMatebaSnubNose
-          - RMCAttachmentBarrelCharger
+          - RMCAttachmentBarrelCharger d
       rmc-aslot-rail:
         whitelist:
           tags:
