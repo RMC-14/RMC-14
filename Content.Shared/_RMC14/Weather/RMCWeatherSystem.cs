@@ -76,6 +76,9 @@ public sealed class RMCWeatherSystem : EntitySystem
         if (ent.Comp.CurrentEvent.LightningChance <= 0 || ent.Comp.CurrentEvent.LightningEffects.Count <= 0)
             return;
 
+        if (!_random.Prob(ent.Comp.CurrentEvent.LightningChance))
+            return;
+
         EnsureComp<RMCAmbientLightComponent>(ent, out var lightComp);
 
         if (lightComp.IsAnimating)
@@ -86,8 +89,7 @@ public sealed class RMCWeatherSystem : EntitySystem
         _rmcLight.SetColor((ent, lightComp), lightningEffect, lightningDuration);
 
         var sound = ent.Comp.CurrentEvent.LightningSound;
-        if (sound != null)
-            _audio.PlayGlobal(_audio.ResolveSound(sound), Filter.BroadcastMap(Transform(ent).MapID), true);
+        _audio.PlayGlobal(_audio.ResolveSound(sound), Filter.BroadcastMap(Transform(ent).MapID), true);
     }
 
     public override void Update(float frameTime)

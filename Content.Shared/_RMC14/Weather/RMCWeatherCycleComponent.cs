@@ -40,7 +40,7 @@ public sealed partial class RMCWeatherEvent
     public ProtoId<WeatherPrototype> WeatherType;
 
     [DataField]
-    public float LightningChance = 1.0f;
+    public float LightningChance = 0.0f;
 
     [DataField]
     public TimeSpan LightningDuration = TimeSpan.FromSeconds(2);
@@ -55,7 +55,7 @@ public sealed partial class RMCWeatherEvent
     public List<string> LightningEffects = new(){"RMCColorSequenceLightningSharpPeak", "RMCColorSequenceLightningFlicker"};
 
     [DataField]
-    public SoundSpecifier? LightningSound = new SoundCollectionSpecifier("RMCThunder");
+    public SoundSpecifier LightningSound = new SoundCollectionSpecifier("RMCThunder");
 }
 
 
