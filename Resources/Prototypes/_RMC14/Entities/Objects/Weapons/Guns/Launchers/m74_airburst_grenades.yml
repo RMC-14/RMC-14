@@ -312,7 +312,7 @@
     radius: 2.0
     energy: 7.0
   - type: IgniteOnProjectileHit
-    stacks: 2
+    intensity: 2
 
 - type: entity
   parent: RMCBaseBullet

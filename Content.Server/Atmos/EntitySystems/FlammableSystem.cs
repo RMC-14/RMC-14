@@ -425,7 +425,7 @@ namespace Content.Server.Atmos.EntitySystems
             _stunSystem.TryParalyze(uid, flammable.ResistDuration, true, force: true);
 
             // TODO FLAMMABLE: Make this not use TimerComponent...
-            uid.SpawnTimer(2000, () =>
+            uid.SpawnTimer(1000, () =>
             {
                 flammable.Resisting = false;
                 Dirty(uid, flammable);
