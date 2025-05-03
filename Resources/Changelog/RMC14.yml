@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Fixed nailgun not accepting repair materials.
-    type: Fix
-  id: 1165
-  time: '2025-01-05T01:53:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5270
 - author: Whisper
   changes:
   - message: Added Hexathele Hasselti, Fae Petrovic, Kasumi, Muz, and Kipped Kipper
@@ -5510,5 +5503,12 @@
   id: 1667
   time: '2025-05-03T21:29:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/4536
+- author: Vermidia
+  changes:
+  - message: Fixed grenade launchers being able to shoot past 7 tiles.
+    type: Fix
+  id: 1668
+  time: '2025-05-03T21:34:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6338
 Name: RMC14
 Order: -1
