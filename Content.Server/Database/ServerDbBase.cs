@@ -54,6 +54,7 @@ namespace Content.Server.Database
                     .ThenInclude(l => l.Groups)
                     .ThenInclude(group => group.Loadouts)
                 .Include(p => p.Profiles).ThenInclude(p => p.NamedItems)
+                .Include(p => p.Profiles).ThenInclude(h => h.Ranks)
                 .Include(p => p.Profiles).ThenInclude(p => p.SquadPreference)
                 .AsSplitQuery()
                 .SingleOrDefaultAsync(p => p.UserId == userId.UserId, cancel);
@@ -106,6 +107,7 @@ namespace Content.Server.Database
                 .Include(p => p.Loadouts)
                     .ThenInclude(l => l.Groups)
                     .ThenInclude(group => group.Loadouts)
+                .Include(p => p.Ranks)
                 .Include(p => p.NamedItems)
                 .Include(p => p.SquadPreference)
                 .AsSplitQuery()
@@ -197,7 +199,7 @@ namespace Content.Server.Database
             var jobs = profile.Jobs.ToDictionary(j => new ProtoId<JobPrototype>(j.JobName), j => (JobPriority) j.Priority);
             var antags = profile.Antags.Select(a => new ProtoId<AntagPrototype>(a.AntagName));
             var traits = profile.Traits.Select(t => new ProtoId<TraitPrototype>(t.TraitName));
-            var ranks = profile.Rank.ToDictionary(r => new ProtoId<JobPrototype>(r.JobName), r => r.Priority);
+            var ranks = profile.Ranks.ToDictionary(r => new ProtoId<JobPrototype>(r.JobName), r => r.Priority);
 
             var sex = Sex.Male;
             if (Enum.TryParse<Sex>(profile.Sex, true, out var sexVal))
@@ -343,8 +345,8 @@ namespace Content.Server.Database
                         .Select(t => new Trait {TraitName = t})
             );
 
-            profile.Rank.Clear();
-            profile.Rank.AddRange(
+            profile.Ranks.Clear();
+            profile.Ranks.AddRange(
                 humanoid.RankPreferences
                     .Select(r => new Rank {JobName = r.Key, Priority = r.Value })
                 );

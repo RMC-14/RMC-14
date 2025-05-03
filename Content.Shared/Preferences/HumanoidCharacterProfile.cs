@@ -369,9 +369,10 @@ namespace Content.Shared.Preferences
             return new(this) { ArmorPreference = armorPreference };
         }
 
-        public HumanoidCharacterProfile WithRankPreference(IEnumerable<KeyValuePair<ProtoId<JobPrototype>, int>> rankPreferences)
+        public HumanoidCharacterProfile WithRankPreference(ProtoId<JobPrototype> jobId, int rankPriority)
         {
-            var dictionary = new Dictionary<ProtoId<JobPrototype>, int>(rankPreferences);
+            var dictionary = new Dictionary<ProtoId<JobPrototype>, int>(_rankPreferences);
+            dictionary[jobId] = rankPriority;
 
             return new(this) { _rankPreferences = dictionary };
         }

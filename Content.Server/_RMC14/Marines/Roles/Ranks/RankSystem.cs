@@ -70,17 +70,20 @@ public sealed class RankSystem : SharedRankSystem
         if (!rankPreferences.TryGetValue(ev.JobId, out int rankPreference))
             skipPreferenceEvaluation = true;
 
-        for (int i = 1; i < jobPrototype.Ranks.Count; i++)
+        // We offset this because our rank preference has 1 more element because 0 is reserved for Auto.
+        for (int i = 1; i <= jobPrototype.Ranks.Count; i++)
         {
-            var rank = jobPrototype.Ranks.ElementAt(i);
+            var rank = jobPrototype.Ranks.ElementAt(i - 1); // We have to counter the offset here to make sure we grab the right equivilant rank without the offset for Auto.
             var failed = false;
             var jobRequirements = rank.Value;
 
             if (_prototypes.TryIndex<RankPrototype>(rank.Key, out var rankPrototype) && rankPrototype != null)
             {
-                // We can't really havea an enum here to explain the values because there can in theory be infinite values. 0 is reserved for auto which skips the whole rank preference system entirely.
-                // We may also check profile.RankPreference directly with jobPrototype.Ranks.Count for the sole reason that Auto is reserved at 0 and thus offsets all succeeding values by 1.
-                if (rankPreference != 0 && rankPreference != jobPrototype.Ranks.Count && !skipPreferenceEvaluation)
+                // We can't really havea an enum here to explain the values because there can in theory be infinite values.
+                // 0 is reserved for auto which skips the whole rank preference system entirely.
+                // (i != jobPrototype.Ranks.Count) makes sure that we at the very least select the default rank
+                // even if the client manages to somehow set their rank preference to something higher than what they have unlocked on the server.
+                if (!skipPreferenceEvaluation && rankPreference != 0 && i != jobPrototype.Ranks.Count)
                 {
                     if (rankPreference != i) failed = true;
                 }

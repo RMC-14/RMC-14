@@ -1162,6 +1162,7 @@ namespace Content.Client.Lobby.UI
             }
 
             UpdateJobPriorities();
+            UpdatePlaytimeRankPreferenceControls();
         }
 
         private void OpenLoadout(JobPrototype? jobProto, RoleLoadout roleLoadout, RoleLoadoutPrototype roleLoadoutProto)
@@ -1402,13 +1403,11 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
-        private void SetRankPreference(string jobId, int index)
+        private void SetRankPreference(string jobId, int rankPriority)
         {
             var protoJobId = new ProtoId<JobPrototype>(jobId);
 
-            var newRankPreference = new Dictionary<ProtoId<JobPrototype>, int>();
-
-            Profile = Profile?.WithRankPreference(newRankPreference);
+            Profile = Profile?.WithRankPreference(jobId, rankPriority);
             SetDirty();
         }
 
@@ -1642,6 +1641,15 @@ namespace Content.Client.Lobby.UI
         {
             foreach (var (jobID, optionsButton) in _rankPriorities)
             {
+                if (!_prototypeManager.TryIndex(jobID, out JobPrototype? job) || job == null)
+                    continue;
+
+                if (job.Ranks == null)
+                    continue;
+
+                if (optionsButton == null)
+                    continue;
+
                 var preferences = Profile?.RankPreferences.GetValueOrDefault(jobID, 0) ?? 0;
                 optionsButton.Select(preferences);
             }
