@@ -426,3 +426,12 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Synthetic/synthetic_support.rsi
+
+# Purely used by RMC14\Roles\Jobs\Other\average_joe.yml
+- type: entity
+  parent: CMJumpsuitAverageJoe
+  id: CMJumpsuitAverageJoeWebbing
+  categories: [ HideSpawnMenu ]
+  components:
+- type: WebbingClothing
+  startingWebbing: CMWebbingPouch

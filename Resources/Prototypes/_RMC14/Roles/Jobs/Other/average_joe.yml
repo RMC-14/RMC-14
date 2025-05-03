@@ -44,7 +44,7 @@
 - type: startingGear
   id: RMCGearAverageJoe
   equipment:
-    jumpsuit: CMJumpsuitAverageJoe
+    jumpsuit: CMJumpsuitAverageJoeWebbing
     gloves: CMHandsInsulated
     shoes: RMCShoesWhite
     id: RMCIDCardSynth
