@@ -22,6 +22,7 @@ public sealed partial class RMCStorageEjectHandComponent : Component
 public enum RMCStorageEjectState : byte
 {
     Last,
+    First,
     Unequip,
-    Open,
+    Open
 }

@@ -110,7 +110,7 @@ public sealed class RMCHandsSystem : EntitySystem
 
         AlternativeVerb switchStorageVerb = new()
         {
-            Text = "Switch Storage Drawing Method",
+            Text = Loc.GetString("rmc-storage-hand-switch"),
             Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/flip.svg.192dpi.png")),
             Priority = -2,
             Act = () =>
@@ -121,6 +121,7 @@ public sealed class RMCHandsSystem : EntitySystem
                 var popup = ent.Comp.State switch
                 {
                     RMCStorageEjectState.Last => "rmc-storage-hand-eject-last-item",
+                    RMCStorageEjectState.First => "rmc-storage-hand-eject-first-item",
                     RMCStorageEjectState.Unequip => "rmc-storage-hand-eject-unequips",
                     RMCStorageEjectState.Open => "rmc-storage-hand-eject-open",
                     _ => string.Empty
@@ -215,13 +216,32 @@ public sealed class RMCHandsSystem : EntitySystem
             }
         }
 
-        if (!_rmcStorage.TryGetLastItem((item, storage), out var last))
+        EntityUid? pickUpItem = null;
+        if (eject.State == RMCStorageEjectState.Last)
         {
-            _popup.PopupClient(Loc.GetString("rmc-storage-nothing-left", ("storage", item)), user, user);
-            return true;
+            if (!_rmcStorage.TryGetLastItem((item, storage), out var last))
+            {
+                _popup.PopupClient(Loc.GetString("rmc-storage-nothing-left", ("storage", item)), user, user);
+                return true;
+            }
+
+            pickUpItem = last;
+        }
+        else if (eject.State == RMCStorageEjectState.First)
+        {
+            if (!_rmcStorage.TryGetFirstItem((item, storage), out var first))
+            {
+                _popup.PopupClient(Loc.GetString("rmc-storage-nothing-left", ("storage", item)), user, user);
+                return true;
+            }
+
+            pickUpItem = first;
         }
 
-        _hands.TryPickupAnyHand(user, last);
+        if (pickUpItem == null)
+            return false;
+
+        _hands.TryPickupAnyHand(user, pickUpItem.Value);
         return true;
     }
 }
