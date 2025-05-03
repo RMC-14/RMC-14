@@ -83,6 +83,9 @@ public sealed class XenoRoleSystem : EntitySystem
 
     private void OnPlayerDetached(Entity<XenoComponent> xeno, ref PlayerDetachedEvent args)
     {
+        if(TerminatingOrDeleted(xeno))
+            return;
+
         var disconnected = EnsureComp<XenoDisconnectedComponent>(xeno);
         disconnected.At = _timing.CurTime;
 
