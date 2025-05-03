@@ -43,7 +43,7 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
     /// Should this job have rank preferences appear in the preferences menu?
     /// </summary>
     [DataField("setRankPreference")]
-    public bool SetRankPreference { get; private set; } = true;
+    public bool SetRankPreference { get; private set; } = false;
 
     [DataField]
     public readonly Dictionary<ProtoId<RankPrototype>, HashSet<JobRequirement>?>? Ranks;

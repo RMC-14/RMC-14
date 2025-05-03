@@ -3,6 +3,7 @@
   id: CMJobBase
   isCM: true
   canBeAntag: false
+  setRankPreference: true
 
 - type: job
   abstract: true
@@ -28,6 +29,7 @@
   - CMAccessXeno
   hasIcon: false
   hidden: true
+  setRankPreference: false
 
 - type: entity
   parent: MarkerBase
