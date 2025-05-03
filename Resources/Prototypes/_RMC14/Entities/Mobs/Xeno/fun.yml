@@ -160,7 +160,7 @@
     prefix: lesser
   - type: XenoEggSustainer
     maxSustainedEggs: 1
-    sustainedEggsRanger: 7
+    sustainedEggsRange: 7
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
