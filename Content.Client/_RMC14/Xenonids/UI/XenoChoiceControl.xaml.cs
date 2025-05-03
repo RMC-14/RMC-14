@@ -42,6 +42,13 @@ public partial class XenoChoiceControl : Control
         Texture.Texture = texture;
     }
 
+    public void SetName(string name)
+    {
+        Button.Name = name.Replace(" ","");
+
+        //Logger.Debug($"Just set the name of a choicecontrol to {Button.Name}");
+    }
+
     public void SetLeader(Texture? texture)
     {
         LeaderStar.Texture = texture;

@@ -66,7 +66,6 @@ public sealed class XenoWatchBui : BoundUserInterface
                 xenos = new SortedSet<EntityPrototype>(EntityComparer);
                 tiers.Add(xeno.Tier, xenos);
             }
-
             xenos.Add(entity);
         }
 
@@ -90,8 +89,8 @@ public sealed class XenoWatchBui : BoundUserInterface
                 var xenobutton = new Button();
 
                 xenobutton.Text = xeno.Name;
-                xenobutton.Name = xeno.Name.Replace(" ","");
-                Logger.Debug($"Name is {xenobutton.Name}");
+                xenobutton.Name = xeno.Name.Replace(" ", "");
+                //Logger.Debug($"Name is {xenobutton.Name}");
                 xenobutton.ToggleMode = true;
                 xenobutton.ModulateSelfOverride = Color.Purple;
                 xenobutton.AddStyleClass("ButtonSquare");
@@ -100,13 +99,24 @@ public sealed class XenoWatchBui : BoundUserInterface
                 xenocontrol.XenoButton.AddChild(xenobutton);
 
                 row.XenosContainer.AddChild(xenocontrol);
-                ShownXenos.Add(xeno.Name.Replace(" ",""), false);
+                ShownXenos.Add(xeno.Name.Replace(" ", ""), false);
                 //Logger.Debug($"Added xeno {xeno.Name.Replace(" ","")} to shownxenos");
-                XenoCounts.Add(xeno.Name.Replace(" ",""), 0);
+                XenoCounts.Add(xeno.Name.Replace(" ", ""), 0);
                 //Logger.Debug($"Added xeno {xeno.Name.Replace(" ","")} to Xenocounts");
             }
             _window.RowContainer.AddChild(row);
         }
+
+        foreach (var key in XenoCounts.Keys)
+        {
+            Logger.Debug($"Xenocount Key: {key}");
+        }
+
+        foreach (var key in ShownXenos.Keys)
+        {
+            Logger.Debug($"ShownXeno Key: {key}");
+        }
+
 
     }
 
@@ -151,18 +161,41 @@ public sealed class XenoWatchBui : BoundUserInterface
                 texture = _sprite.Frame0(evolution);
             }
 
-            if (XenoCounts.ContainsKey(xeno.Name.Replace(" ","")))
-            {
-                XenoCounts[xeno.Name.Replace(" ","")]++;
-                //Logger.Debug("Xenocount is going up");
-            }
+            //Logger.Debug($"NACME OF XENO IS{xeno.Name}");
+
+
 
 
             var control = new XenoChoiceControl();
             control.Set(xeno.Name, texture);
+
+
+            foreach (var xenokey in ShownXenos.Keys)
+            {
+                var name = control.NameLabel.GetMessage()??"EmptyString";
+                name = name.Replace(" ", "");
+                if (name.Contains(xenokey))
+                {
+                        if ((name.Contains("Lesser")) == (xenokey.Contains("Lesser")) )
+                            control.SetName(xenokey);
+                }
+            }
+
+            string value = control.Button.Name ?? "";
+            Logger.Debug($"Control.button.name = {value}");
+            if (XenoCounts.ContainsKey(value))
+            {
+                XenoCounts[value] += 1;
+                Logger.Debug($"Xenocount is going up on xeno {value}");
+            }
+
+
+            //control.SetName(value.ToString());
+
             control.SetHealth((float)xeno.Health);
             control.SetPlasma((float)xeno.Plasma);
             control.SetEvo((int)xeno.Evo);
+
             if (xeno.Leader)
                 control.SetLeader(iconTexture);
 
@@ -207,16 +240,15 @@ public sealed class XenoWatchBui : BoundUserInterface
                     if (button is not Button xenobutton)
                         continue;
 
-                    name  = xenobutton.Name ?? "";
+                    name  = xenobutton.Text??"";
                 }
 
-                if (XenoCounts.TryGetValue(name, out var count))
+                if (XenoCounts.TryGetValue(name.Replace(" ","")??"", out var count))
                 {
                   //Logger.Debug($"This is running, count value is {count}");
                   hive.Count.Text = $"{count}";
                 }
             }
-
         }
         UpdateList();
     }
@@ -282,12 +314,11 @@ public sealed class XenoWatchBui : BoundUserInterface
     private void OnTierToggled(BaseButton.ButtonEventArgs args)
     {
         args.Button.ModulateSelfOverride = UpdateButtonColor(args.Button.Pressed);
-
         if (args.Button.Name != null && int.TryParse(args.Button.Name.Split()[1], out var number)) // get the tier number frmo the button name
         {
             foreach (var xeno in tiers[number])
             {
-                ShownXenos[xeno.Name.Replace(" ", "")] = args.Button.Pressed;
+                ShownXenos[xeno.Name.Replace(" ","")] = args.Button.Pressed;
                 //Logger.Debug(xeno.Name);
             }
         }
@@ -300,7 +331,6 @@ public sealed class XenoWatchBui : BoundUserInterface
     {
         if (_window is not { Disposed: false })
             return;
-
         foreach (var child in _window.RowContainer.Children)
         {
             if (child is not XenoTierRow control)
@@ -309,7 +339,6 @@ public sealed class XenoWatchBui : BoundUserInterface
             {
                 if (xenocountchild is not XenoHiveCountControl countControl)
                     continue;
-
                 foreach (var button in countControl.XenoButton.Children)
                 {
                     if (button is not Button xenobutton)
@@ -362,10 +391,11 @@ public sealed class XenoWatchBui : BoundUserInterface
                         continue;
                     }
 
-                    var label = control.NameLabel.GetMessage() ?? string.Empty;
+                    control.Visible = false;
 
-                    if (ShownXenos.TryGetValue(label.Replace(" ","") ?? "", out var xeno))
+                    if (ShownXenos.TryGetValue(control.Button.Name ?? "", out var xeno)) // this only works with xeno names, but not with real player on xenos
                     {
+                        //Logger.Debug($"Control name is {control.Button.Name}, the label is '{control.NameLabel.GetMessage()}' and bool is {(xeno ? "true" : "false")}");
                         control.Visible = xeno;
                     }
                 }
