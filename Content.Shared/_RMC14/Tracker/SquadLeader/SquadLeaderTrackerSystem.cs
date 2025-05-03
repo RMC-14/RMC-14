@@ -502,7 +502,10 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
         if (ent.Comp.Mode != null)
         {
             if (ent.Comp.TrackerAlerts.TryGetValue(ent.Comp.Mode.Value, out var newAlert))
-                alert = newAlert + squad;
+                alert = newAlert;
+
+            if (ent.Comp.Mode == SquadLeaderTrackerMode.SquadLeader)
+                alert += squad;
         }
 
         if (coordinates != null)
