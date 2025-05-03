@@ -197,6 +197,7 @@ namespace Content.Server.Database
             var jobs = profile.Jobs.ToDictionary(j => new ProtoId<JobPrototype>(j.JobName), j => (JobPriority) j.Priority);
             var antags = profile.Antags.Select(a => new ProtoId<AntagPrototype>(a.AntagName));
             var traits = profile.Traits.Select(t => new ProtoId<TraitPrototype>(t.TraitName));
+            var ranks = profile.Rank.ToDictionary(r => new ProtoId<JobPrototype>(r.JobName), r => r.Priority);
 
             var sex = Sex.Male;
             if (Enum.TryParse<Sex>(profile.Sex, true, out var sexVal))
@@ -208,10 +209,6 @@ namespace Content.Server.Database
             var armorPreference = ArmorPreference.Random;
             if (Enum.TryParse<ArmorPreference>(profile.ArmorPreference, true, out var armorVal))
                 armorPreference = armorVal;
-
-            var rankPreference = RankPreference.High;
-            if (Enum.TryParse<RankPreference>(profile.RankPreference, true, out var rankVal))
-                rankPreference = rankVal;
 
             var gender = sex == Sex.Male ? Gender.Male : Gender.Female;
             if (Enum.TryParse<Gender>(profile.Gender, true, out var genderVal))
@@ -276,7 +273,7 @@ namespace Content.Server.Database
                 ),
                 spawnPriority,
                 armorPreference,
-                rankPreference,
+                ranks,
                 squadPreference,
                 jobs,
                 (PreferenceUnavailableMode)profile.PreferenceUnavailable,
@@ -322,7 +319,6 @@ namespace Content.Server.Database
             profile.SkinColor = appearance.SkinColor.ToHex();
             profile.SpawnPriority = (int) humanoid.SpawnPriority;
             profile.ArmorPreference = humanoid.ArmorPreference.ToString();
-            profile.RankPreference = humanoid.RankPreference.ToString();
             profile.SquadPreference = new RMCSquadPreference { Squad = humanoid.SquadPreference };
             profile.Markings = markings;
             profile.Slot = slot;
@@ -346,6 +342,12 @@ namespace Content.Server.Database
                 humanoid.TraitPreferences
                         .Select(t => new Trait {TraitName = t})
             );
+
+            profile.Rank.Clear();
+            profile.Rank.AddRange(
+                humanoid.RankPreferences
+                    .Select(r => new Rank {JobName = r.Key, Priority = r.Value })
+                );
 
             profile.Loadouts.Clear();
 

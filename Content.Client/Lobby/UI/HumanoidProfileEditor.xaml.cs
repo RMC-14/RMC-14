@@ -12,6 +12,7 @@ using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.Guidebook;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.LinkAccount;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.NamedItems;
 using Content.Shared._RMC14.Prototypes;
@@ -38,6 +39,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.ContentPack;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Toolshed.TypeParsers;
 using Robust.Shared.Utility;
 using Direction = Robust.Shared.Maths.Direction;
 
@@ -96,6 +98,8 @@ namespace Content.Client.Lobby.UI
         private List<SpeciesPrototype> _species = new();
 
         private List<(string, RequirementsSelector)> _jobPriorities = new();
+
+        private List<(string, OptionButton)> _rankPriorities = new();
 
         private readonly Dictionary<string, BoxContainer> _jobCategories;
 
@@ -379,20 +383,6 @@ namespace Content.Client.Lobby.UI
             };
 
             #endregion ArmorPreference
-
-            #region PlaytimeRankPreference
-
-            PlaytimeRankButton.AddItem(Loc.GetString("rank-preference-high"), 0);
-            PlaytimeRankButton.AddItem(Loc.GetString("rank-preference-medium"), 1);
-            PlaytimeRankButton.AddItem(Loc.GetString("rank-preference-low"), 2);
-
-            PlaytimeRankButton.OnItemSelected += args =>
-            {
-                PlaytimeRankButton.SelectId(args.Id);
-                SetRankPreference((RankPreference) args.Id);
-            };
-
-            #endregion PlaytimeRankPreference
 
             #region SquadPreference
 
@@ -949,6 +939,7 @@ namespace Content.Client.Lobby.UI
             JobList.DisposeAllChildren();
             _jobCategories.Clear();
             _jobPriorities.Clear();
+            _rankPriorities.Clear();
             var firstCategory = true;
 
             // Get all displayed departments
@@ -1120,9 +1111,52 @@ namespace Content.Client.Lobby.UI
                         };
                     }
 
+                    var rankOptions = new OptionButton()
+                    {
+                        Name = Loc.GetString("rank-options-button"),
+                        HorizontalAlignment = HAlignment.Right,
+                        VerticalAlignment = VAlignment.Center,
+                        Margin = new Thickness(3f, 3f, 0f, 0f)
+                    };
+
+                    // If the job has ranks we will add the options as buttons.
+                    if (job.Ranks != null)
+                    {
+                        if (job.Ranks.Count <= 1) rankOptions.Disabled = true;
+
+                        rankOptions.AddItem("Auto");
+
+                        foreach (var rank in job.Ranks)
+                        {
+                            if (_prototypeManager.TryIndex(rank.Key, out RankPrototype? rankPrototype) && rankPrototype != null)
+                            {
+                                rankOptions.AddItem(rankPrototype.Name);
+                                var jobRequirements = rank.Value;
+
+                                if (jobRequirements != null)
+                                {
+                                    if (!_requirements.CheckRoleRequirements(jobRequirements, Profile, out _)) rankOptions.SetItemDisabled(rankOptions.ItemCount - 1, true);
+                                }
+                            }
+                        }
+
+                        rankOptions.OnItemSelected += args =>
+                        {
+                            rankOptions.SelectId(args.Id);
+                            SetRankPreference(job.ID, args.Id); // args.Id does NOT match the order assigned in job.Ranks because we added "Auto" as a selectable option which takes up 0. This will have to be taken into account when working with it.
+                        };
+                    }
+                    // Else if the job does not contain ranks we do not show it (Xenos as an example).
+                    else
+                    {
+                        rankOptions.Visible = false;
+                    }
+
                     _jobPriorities.Add((job.ID, selector));
+                    _rankPriorities.Add((job.ID, rankOptions));
                     jobContainer.AddChild(selector);
                     jobContainer.AddChild(loadoutWindowBtn);
+                    jobContainer.AddChild(rankOptions);
                     category.AddChild(jobContainer);
                 }
             }
@@ -1368,8 +1402,12 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
-        private void SetRankPreference(RankPreference newRankPreference)
+        private void SetRankPreference(string jobId, int index)
         {
+            var protoJobId = new ProtoId<JobPrototype>(jobId);
+
+            var newRankPreference = new Dictionary<ProtoId<JobPrototype>, int>();
+
             Profile = Profile?.WithRankPreference(newRankPreference);
             SetDirty();
         }
@@ -1602,12 +1640,11 @@ namespace Content.Client.Lobby.UI
 
         private void UpdatePlaytimeRankPreferenceControls()
         {
-            if (Profile == null)
+            foreach (var (jobID, optionsButton) in _rankPriorities)
             {
-                return;
+                var preferences = Profile?.RankPreferences.GetValueOrDefault(jobID, 0) ?? 0;
+                optionsButton.Select(preferences);
             }
-
-            PlaytimeRankButton.SelectId((int) Profile.RankPreference);
         }
 
         private void UpdateSquadPreferenceControls()

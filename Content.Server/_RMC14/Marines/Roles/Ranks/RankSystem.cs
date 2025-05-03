@@ -5,8 +5,8 @@ using Content.Shared.Chat;
 using Content.Shared.GameTicking;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Robust.Shared.Prototypes;
+using System.Linq;
 
 namespace Content.Server._RMC14.Marines.Roles.Ranks;
 
@@ -52,6 +52,8 @@ public sealed class RankSystem : SharedRankSystem
             playTimes ??= new Dictionary<string, TimeSpan>();
         }
 
+        bool skipPreferenceEvaluation = false;
+
         var profile = ev.Player != null ?
             _preferences.GetPreferences(ev.Player.UserId).SelectedCharacter as HumanoidCharacterProfile
             : HumanoidCharacterProfile.RandomWithSpecies();
@@ -59,28 +61,35 @@ public sealed class RankSystem : SharedRankSystem
         if (profile == null)
             return;
 
-        int rankCount = jobPrototype.Ranks.Count;
-        bool skipFirst = false;
+        var rankPreferences = profile.RankPreferences != null ?
+            profile.RankPreferences : HumanoidCharacterProfile.RandomWithSpecies().RankPreferences;
 
-        foreach (var rank in jobPrototype.Ranks)
+        if (rankPreferences == null)
+            return;
+
+        if (!rankPreferences.TryGetValue(ev.JobId, out int rankPreference))
+            skipPreferenceEvaluation = true;
+
+        for (int i = 1; i < jobPrototype.Ranks.Count; i++)
         {
+            var rank = jobPrototype.Ranks.ElementAt(i);
             var failed = false;
             var jobRequirements = rank.Value;
 
             if (_prototypes.TryIndex<RankPrototype>(rank.Key, out var rankPrototype) && rankPrototype != null)
             {
+                // We can't really havea an enum here to explain the values because there can in theory be infinite values. 0 is reserved for auto which skips the whole rank preference system entirely.
+                // We may also check profile.RankPreference directly with jobPrototype.Ranks.Count for the sole reason that Auto is reserved at 0 and thus offsets all succeeding values by 1.
+                if (rankPreference != 0 && rankPreference != jobPrototype.Ranks.Count && !skipPreferenceEvaluation)
+                {
+                    if (rankPreference != i) failed = true;
+                }
+
                 if (jobRequirements != null)
                 {
                     foreach (var req in jobRequirements)
                     {
-                        if (profile.RankPreference == RankPreference.Low)
-                            failed = true;
-                        else if (profile.RankPreference == RankPreference.Middle && rankCount > 2 && !skipFirst)
-                        {
-                            skipFirst = true;
-                            failed = true;
-                        }
-                        else if (!req.Check(_entityManager, _prototypes, ev.Profile, playTimes, out _))
+                        if (!req.Check(_entityManager, _prototypes, ev.Profile, playTimes, out _))
                             failed = true;
                     }
                 }
