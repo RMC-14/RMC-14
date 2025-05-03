@@ -42,8 +42,8 @@
   description: A strange-looking alien creature. It carries a number of scuttling jointed crablike creatures. Looks... smaller.
   components:
   - type: GhostRole
-    name: cm-job-name-xeno-lesser-drone
-    description: roles-lesser-drone-description
+    name: roles-lesser-carrier-name
+    description: roles-lesser-carrier-description
     raffle:
       settings: short
   - type: Sprite
