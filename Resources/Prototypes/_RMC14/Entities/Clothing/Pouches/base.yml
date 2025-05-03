@@ -29,6 +29,7 @@
     blacklist:
       components:
       - Xeno
+  - type: StoreAfterFailedInteract
 
 
 - type: entity

@@ -107,7 +107,7 @@
                                         </PanelContainer>
                                         <BoxContainer Name="States" Access="Public" Orientation="Vertical" />
                                     </BoxContainer>
-                                    <BoxContainer Orientation="Vertical" HorizontalExpand="True" Visible="False">
+                                    <BoxContainer Orientation="Vertical" HorizontalExpand="True">
                                         <PanelContainer>
                                             <PanelContainer.PanelOverride>
                                                 <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />
@@ -120,7 +120,7 @@
                                         </PanelContainer>
                                         <BoxContainer Name="Locations" Access="Public" Orientation="Vertical" />
                                     </BoxContainer>
-                                    <BoxContainer Orientation="Vertical" HorizontalExpand="True" Visible="False">
+                                    <BoxContainer Orientation="Vertical" HorizontalExpand="True" SizeFlagsStretchRatio="0.5">
                                         <PanelContainer>
                                             <PanelContainer.PanelOverride>
                                                 <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />

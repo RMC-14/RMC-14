@@ -7,6 +7,9 @@
   roles:
 #  - CMSilicon # TODO RMC14
 #  - CMAndroid # TODO RMC14
+  - RMCJobSynthetic
   - CMLiaison
   - CMCorrespondent
   - CMMessTech
+  departmentRadio: null
+  headOfDepartment: null

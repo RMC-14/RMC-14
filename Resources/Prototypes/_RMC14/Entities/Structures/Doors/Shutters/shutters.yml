@@ -33,7 +33,7 @@
     containers:
       board: !type:Container
   - type: Door
-    openDrawDepth: BlastDoors
+    openDrawDepth: Walls
     closedDrawDepth: BlastDoors
     bumpOpen: false
     clickOpen: false
@@ -95,6 +95,61 @@
 
 - type: entity
   parent: RMCShutterAlmayer
+  id: RMCShutterAlmayerCL
+  name: corporate liaison privacy shutters
+
+- type: entity
+  parent: RMCShutterAlmayerCL
+  id: RMCShutterAlmayerCLDoor
+  suffix: Quarter Office Door
+  components:
+  - type: RMCPodDoor
+    id: cl_office_door
+
+- type: entity
+  parent: RMCShutterAlmayerCL
+  id: RMCShutterAlmayerCLOfficeWindows
+  suffix: Quarter Office Windows
+  components:
+  - type: RMCPodDoor
+    id: cl_office_windows
+
+- type: entity
+  parent: RMCShutterAlmayerCL
+  id: RMCShutterAlmayerCLQuarterMaintenance
+  suffix: Quarter Maintenance
+  components:
+  - type: RMCPodDoor
+    id: cl_quarter_maintenance
+
+- type: entity
+  parent: RMCShutterAlmayerCL
+  id: RMCShutterAlmayerCLQuarterDoor
+  suffix: Quarter Door
+  components:
+  - type: RMCPodDoor
+    id: cl_quarter_door
+
+- type: entity
+  parent: RMCShutterAlmayerCL
+  id: RMCShutterAlmayerCLQuarterWindows
+  suffix: Quarter Windows
+  components:
+  - type: RMCPodDoor
+    id: cl_quarter_windows
+
+- type: entity
+  parent: RMCShutterAlmayer
+  id: RMCShutterAlmayerAntiTheft
+  name: anti-theft shutters
+
+- type: entity
+  parent: RMCShutterAlmayer
+  id: RMCShutterAlmayerUniformVendors
+  name: uniform vendor shutters
+
+- type: entity
+  parent: RMCShutterAlmayer
   id: RMCShutterAlmayerOpen
   suffix: Open
   components:
@@ -107,4 +162,29 @@
   - type: Airtight
     airBlocked: false
   - type: RadiationBlocker
+    enabled: false
+
+- type: entity
+  parent: RMCShutterAlmayer
+  id: RMCShutterHybrisa
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Shutters/Hybrisa/hybrisa_shutter.rsi
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+
+- type: entity
+  parent: RMCShutterAlmayer
+  id: RMCShutterHybrisaWindow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Shutters/Hybrisa/window_shutter.rsi
+    drawdepth: BlastDoors
+    layers:
+    - state: closed
+      map: ["enum.DoorVisualLayers.Base"]
+  - type: Door
+    occludes: false
+  - type: Occluder
     enabled: false

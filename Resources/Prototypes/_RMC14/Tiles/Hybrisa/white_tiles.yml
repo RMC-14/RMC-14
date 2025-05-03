@@ -1,0 +1,21 @@
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: RMCFloorHybrisaWhiteBase
+  name: tiles-cm-default-white
+
+- type: tile
+  parent: RMCFloorHybrisaWhiteBase
+  id: RMCFloorHybrisaWhite
+  name: white metal tile
+  sprite: /Textures/_RMC14/Tiles/hybrisa/tilewhite.png
+
+- type: tile
+  parent: RMCFloorHybrisaWhite
+  id: RMCFloorHybrisaWhiteCheck
+  sprite: /Textures/_RMC14/Tiles/hybrisa/tilewhitecheck.png
+
+- type: tile
+  parent: RMCFloorHybrisaWhite
+  id: RMCFloorHybrisaWhiteFull
+  sprite: /Textures/_RMC14/Tiles/hybrisa/metalwhitefull.png

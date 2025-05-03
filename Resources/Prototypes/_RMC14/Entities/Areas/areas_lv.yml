@@ -63,6 +63,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv624GroundJungle
@@ -87,6 +88,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv624GroundJungle
@@ -175,6 +177,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv624GroundBarrens
@@ -197,6 +200,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv624GroundBarrens
@@ -227,6 +231,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv624GroundBarrens
@@ -447,6 +452,7 @@
     OB: true
     supplyDrop: false
     minimapColor: '#3F3C3CEF'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv624GroundCaves
@@ -503,6 +509,24 @@
   components:
   - type: Sprite
     state: away3
+    
+- type: entity
+  parent: RMCAreaLv624GroundCaves
+  id: RMCAreaLv624GroundCavesNorthCentralCavesLakeHouseTower
+  name: Lake House Communications Relay
+  components:
+  - type: Sprite
+    state: yellow
+  - type: Area
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    OB: true
+    supplyDrop: true
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaLv624GroundCaves
@@ -552,6 +576,7 @@
     medevac: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv624Lazarus
@@ -567,6 +592,7 @@
     OB: true
     supplyDrop: true
     landingZone: true
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaLv624LazarusLandingZones
@@ -610,6 +636,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaLv624Lazarus
@@ -762,6 +789,7 @@
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz1
+    weatherEnabled: true
 
 - type: entity
   parent: RMCAreaLv624Lazarus
@@ -841,6 +869,7 @@
     medevac: true
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv624

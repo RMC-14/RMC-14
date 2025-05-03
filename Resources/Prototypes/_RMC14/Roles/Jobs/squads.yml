@@ -22,6 +22,7 @@
   - type: SquadTeam
     roundStart: true
     color: "#E61919"
+    radio: MarineAlpha
     accessLevels:
     - CMAccessAlpha
     minimapBackground:
@@ -36,6 +37,7 @@
   - type: SquadTeam
     roundStart: true
     color: "#FFC32D"
+    radio: MarineBravo
     accessLevels:
     - CMAccessBravo
     minimapBackground:
@@ -50,6 +52,7 @@
   - type: SquadTeam
     roundStart: true
     color: "#C864C8"
+    radio: MarineCharlie
     accessLevels:
     - CMAccessCharlie
     minimapBackground:
@@ -64,6 +67,7 @@
   - type: SquadTeam
     roundStart: true
     color: "#4148C8"
+    radio: MarineDelta
     accessLevels:
     - CMAccessDelta
     minimapBackground:
@@ -77,6 +81,7 @@
   components:
   - type: SquadTeam
     color: "#C47A50"
+    radio: MarineFoxtrot
     accessLevels:
     - CMAccessAlpha
     - CMAccessBravo
@@ -85,6 +90,7 @@
     minimapBackground:
      sprite: _RMC14/Interface/map_blips.rsi
      state: background_foxtrot
+    canSupplyDrop: false
 
 - type: entity
   parent: SquadBase
@@ -93,6 +99,7 @@
   components:
   - type: SquadTeam
     color: "#67D692"
+    radio: MarineEcho
     accessLevels:
     - CMAccessAlpha
     - CMAccessBravo
@@ -109,6 +116,10 @@
   components:
   - type: SquadTeam
     color: "#053818"
+    blacklistedSquadArmor:
+    - Helmet
+    - Armor
+    radio: MarineIntel
     minimapBackground:
      sprite: _RMC14/Interface/map_blips.rsi
      state: background_intel
@@ -122,7 +133,55 @@
       CMSquadLeader: 0
   - type: Tag
     tags:
-    - RMCSquadEcho
+    - RMCSquadIntel
 
 - type: Tag
-  id: RMCSquadEcho
+  id: RMCSquadIntel
+
+- type: entity
+  parent: SquadBase
+  id: SquadSPP
+  name: SPP
+  components:
+  - type: SquadTeam
+    color: "#9b0612"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    radio: SPP
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_spp
+    canSupplyDrop: false
+    group: SPP
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: upp_sl_a
+
+- type: entity
+  parent: SquadBase
+  id: SquadPMC
+  name: PMC
+  components:
+  - type: SquadTeam
+    color: "#C0C0C0"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    radio: WEYA
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_pmc
+    canSupplyDrop: false
+    group: WeYa
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: pmc_ld

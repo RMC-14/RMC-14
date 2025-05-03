@@ -4,88 +4,88 @@
   cost: 1
   storage:
     back:
-    - ClothingNeckLGBTPin
+    - RMCClothingNeckLGBTPin
 
 - type: loadout
   id: RMCPinAromantic
   cost: 1
   storage:
     back:
-    - ClothingNeckAromanticPin
+    - RMCClothingNeckAromanticPin
 
 - type: loadout
   id: RMCPinAsexual
   cost: 1
   storage:
     back:
-    - ClothingNeckAsexualPin
+    - RMCClothingNeckAsexualPin
 
 - type: loadout
   id: RMCPinBisexual
   cost: 1
   storage:
     back:
-    - ClothingNeckBisexualPin
+    - RMCClothingNeckBisexualPin
 
 - type: loadout
   id: RMCPinGay
   cost: 1
   storage:
     back:
-    - ClothingNeckGayPin
+    - RMCClothingNeckGayPin
 
 - type: loadout
   id: RMCPinIntersex
   cost: 1
   storage:
     back:
-    - ClothingNeckIntersexPin
+    - RMCClothingNeckIntersexPin
 
 - type: loadout
   id: RMCPinLesbian
   cost: 1
   storage:
     back:
-    - ClothingNeckLesbianPin
+    - RMCClothingNeckLesbianPin
 
 - type: loadout
   id: RMCPinNonBinary
   cost: 1
   storage:
     back:
-    - ClothingNeckNonBinaryPin
+    - RMCClothingNeckNonBinaryPin
 
 - type: loadout
   id: RMCPinPansexual
   cost: 1
   storage:
     back:
-    - ClothingNeckPansexualPin
+    - RMCClothingNeckPansexualPin
 
 - type: loadout
   id: RMCPinOmnisexual
   cost: 1
   storage:
     back:
-    - ClothingNeckOmnisexualPin
+    - RMCClothingNeckOmnisexualPin
 
 - type: loadout
   id: RMCPinTransgender
   cost: 1
   storage:
     back:
-    - ClothingNeckTransPin
+    - RMCClothingNeckTransPin
 
 - type: loadout
   id: RMCPinAutism
   cost: 1
   storage:
     back:
-    - ClothingNeckAutismPin
+    - RMCClothingNeckAutismPin
 
 - type: loadout
   id: RMCPinAutismGold
   cost: 1
   storage:
     back:
-    - ClothingNeckGoldAutismPin
+    - RMCClothingNeckGoldAutismPin

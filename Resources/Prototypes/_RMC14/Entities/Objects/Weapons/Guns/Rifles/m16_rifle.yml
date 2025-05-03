@@ -1,5 +1,5 @@
 - type: entity
-  parent: CMBaseWeaponRifle
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: WeaponRifleM16 # TODO: Make the M16 grenadier rifle when impact nades exist
   name: M16 rifle
   description: An old, reliable design first adopted by the U.S. military in the 1960s. Something like this belongs in a museum of war history. It is chambered in 5.56x45mm.
@@ -39,7 +39,7 @@
         shotsToMaxScatter: 6
       FullAuto:
         fireDelay: 0
-        maxScatterModifier: 26
+        maxScatterModifier: 13
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 4
@@ -104,18 +104,23 @@
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentBipod
-          - RMCAttachmentBurstFireAssembly # TODO RMC14 underbarrel extinguisher, flamer, advanced flamer
+          - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer # TODO RMC14 advanced flamer
           - RMCAttachmentU1GrenadeLauncher
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentLaserSight
+          - RMCAttachmentM203GrenadeLauncher
         random:
         - RMCAttachmentAngledGrip
         - RMCAttachmentVerticalGrip
         - RMCAttachmentGyroscopicStabilizer
         - RMCAttachmentBurstFireAssembly
-        - RMCAttachmentBipod # TODO RMC14 underbarrel extinguisher
+        - RMCAttachmentBipod
+        - RMCAttachmentUnderbarrelExtinguisher
         - RMCAttachmentU7UnderbarrelShotgun
         - RMCAttachmentLaserSight
+        - RMCAttachmentM203GrenadeLauncher
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.81, -0.03

@@ -4,7 +4,7 @@
 - type: entity
   parent: BaseStorageItem
   id: CMMRE
-  name: Marine MRE
+  name: UNMC MRE
   description: A Meal, Ready-to-Eat. A single-meal combat ration designed to provide a soldier with enough nutrients for a day of strenuous work. Its expiration date is at least 20 years ahead of your combat life expectancy.
   components:
   - type: Tag
@@ -126,9 +126,9 @@
   - type: MREItem
 
 - type: entity
-  parent: RMCBoxMagazineBase
+  parent: RMCBoxMagazineSupplyBase
   id: RMCBoxMREEmpty
-  name: box of MREs
+  name: box of MREs (x12)
   description: A box of MREs. Nutritious, but not delicious.
   components:
   - type: Construction
@@ -144,25 +144,17 @@
         - MRE
   - type: Sprite
     layers:
-    - state: supply_crate
-    - state: magaz_mre
+    - state: supply_box
+      color: "#887b67"
+    - state: supply_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-    - state: supply_crate_lid
+      color: "#a69571"
+    - state: supply_box_food
+      color: "#e0d5c2"
+    - state: supply_lid_closed
       map: [ "lid" ]
-  - type: GenericVisualizer
-    visuals:
-      enum.DeployableItemVisuals.Deployed:
-        lid:
-          True: { visible: false }
-          False: { visible: true }
-      enum.CMItemSlotsLayers.Fill:
-        enum.CMItemSlotsLayers.Fill:
-          Empty: { state: magaz_mre, visible: false }
-          Low: { state: magaz_mre_1, visible: true }
-          Medium: { state: magaz_mre_2, visible: true }
-          High: { state: magaz_mre_3, visible: true }
-          Full: { state: magaz_mre, visible: true }
-    
+      color: "#887b67"
+
 - type: entity
   parent: RMCBoxMREEmpty
   id: RMCBoxMRE

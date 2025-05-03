@@ -51,3 +51,6 @@
   - type: ActiveRadio
     channels:
     - MarineCommon
+  - type: RadioSpeaker
+    channels:
+    - MarineCommon

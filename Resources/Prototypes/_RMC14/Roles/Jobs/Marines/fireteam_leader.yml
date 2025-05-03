@@ -25,7 +25,7 @@
   supervisors: cm-job-supervisors-sl
   accessGroups:
   - FTL
-  overwatchSortPriority: -4
+  overwatchSortPriority: -5
   overwatchRoleName: Fire Team Leaders
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
@@ -46,6 +46,10 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: cm-job-prefix-fireteam-leader
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: tl
 
 - type: startingGear
   id: CMGearFireteamLeader
@@ -120,3 +124,20 @@
     role: CMFireteamLeader
   - type: Sprite
     state: tl_spawn_delta
+
+- type: randomHumanoidSettings
+  parent: RMCRandomHumanoidBase
+  id: RMCFireteamLeader
+  components:
+  - type: GhostRole
+    name: cm-job-name-fireteam-leader
+    description: cm-job-description-fireteam-leader
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    raffle:
+      settings: default
+    job: CMFireteamLeader
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobFireteamLeader
+      time: 1

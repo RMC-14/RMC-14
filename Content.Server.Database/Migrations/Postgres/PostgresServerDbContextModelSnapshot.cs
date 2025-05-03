@@ -1000,6 +1000,11 @@ namespace Content.Server.Database.Migrations.Postgres
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("EntityName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("entity_name");
+
                     b.Property<int>("ProfileId")
                         .HasColumnType("integer")
                         .HasColumnName("profile_id");
@@ -2226,7 +2231,7 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasPrincipalKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK_rmc_linked_accounts_logs_player__player_id1");
+                        .HasConstraintName("FK_rmc_linked_accounts_logs_player_player_id1");
 
                     b.Navigation("Discord");
 

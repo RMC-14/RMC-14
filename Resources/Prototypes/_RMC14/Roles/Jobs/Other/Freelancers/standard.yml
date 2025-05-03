@@ -27,7 +27,7 @@
     settings: RMCFreelancerStandard
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCFreelancerStandard
   components:
   - type: GhostRole
@@ -54,5 +54,5 @@
     outerClothing: CMArmorFreelancer
     shoes: RMCBootsSPPFilled
     id: RMCIDCardFreelancer
-    ears: RMCHeadsetDistressFreelancer
+    ears: RMCHeadsetDistressDukes
     pocket1: RMCPouchFirstAidERTFill

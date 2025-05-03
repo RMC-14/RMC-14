@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Damage;
@@ -6,11 +6,13 @@ using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Medical.Scanner;
 using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Tackle;
 using Content.Shared._RMC14.Vendors;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Devour;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.HiveLeader;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -18,9 +20,12 @@ using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Access.Components;
 using Content.Shared.Actions;
+using Content.Shared.Buckle.Components;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
+using Content.Shared.DragDrop;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
@@ -32,8 +37,10 @@ using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Radio;
 using Content.Shared.Standing;
+using Content.Shared.StatusEffect;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Stunnable;
 using Content.Shared.Tools.Systems;
 using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Melee.Events;
@@ -50,8 +57,10 @@ public sealed class XenoSystem : EntitySystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly HiveLeaderSystem _hiveLeader = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThresholds = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
@@ -60,10 +69,13 @@ public sealed class XenoSystem : EntitySystem
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly WeldableSystem _weldable = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
+    [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
 
     private static readonly ProtoId<DamageTypePrototype> HeatDamage = "Heat";
 
@@ -80,6 +92,7 @@ public sealed class XenoSystem : EntitySystem
     private float _xenoDamageDealtMultiplier;
     private float _xenoDamageReceivedMultiplier;
     private float _xenoSpeedMultiplier;
+    private TimeSpan _xenoSpawnMuteDuration;
 
     public override void Initialize()
     {
@@ -95,7 +108,7 @@ public sealed class XenoSystem : EntitySystem
         _xenoRecoveryQuery = GetEntityQuery<XenoRecoveryPheromonesComponent>();
         _victimInfectedQuery = GetEntityQuery<VictimInfectedComponent>();
 
-        SubscribeLocalEvent<XenoComponent, MapInitEvent>(OnXenoMapInit);
+        SubscribeLocalEvent<XenoComponent, MapInitEvent>(OnXenoMapInit, before: [typeof(SharedXenoPheromonesSystem)]);
         SubscribeLocalEvent<XenoComponent, GetAccessTagsEvent>(OnXenoGetAdditionalAccess);
         SubscribeLocalEvent<XenoComponent, NewXenoEvolvedEvent>(OnNewXenoEvolved);
         SubscribeLocalEvent<XenoComponent, XenoDevolvedEvent>(OnXenoDevolved);
@@ -109,10 +122,20 @@ public sealed class XenoSystem : EntitySystem
         SubscribeLocalEvent<XenoComponent, MeleeHitEvent>(OnXenoMeleeHit);
         SubscribeLocalEvent<XenoComponent, HiveChangedEvent>(OnHiveChanged);
         SubscribeLocalEvent<XenoComponent, RMCIgniteEvent>(OnXenoIgnite);
+        SubscribeLocalEvent<XenoComponent, CanDragEvent>(OnXenoCanDrag);
+        SubscribeLocalEvent<XenoComponent, BuckleAttemptEvent>(OnXenoBuckleAttempt);
+        SubscribeLocalEvent<XenoComponent, GetVisMaskEvent>(OnXenoGetVisMask);
+        SubscribeLocalEvent<XenoComponent, CMDisarmEvent>(OnLeaderDisarmed,
+            before: [typeof(SharedHandsSystem), typeof(StaminaSystem)],
+            after: [typeof(TackleSystem)]);
+
+        SubscribeLocalEvent<XenoRegenComponent, MapInitEvent>(OnXenoRegenMapInit, before: [typeof(SharedXenoPheromonesSystem)]);
+        SubscribeLocalEvent<XenoRegenComponent, DamageStateCritBeforeDamageEvent>(OnXenoRegenBeforeCritDamage, before: [typeof(SharedXenoPheromonesSystem)]);
 
         Subs.CVar(_config, RMCCVars.CMXenoDamageDealtMultiplier, v => _xenoDamageDealtMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMXenoDamageReceivedMultiplier, v => _xenoDamageReceivedMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMXenoSpeedMultiplier, UpdateXenoSpeedMultiplier, true);
+        Subs.CVar(_config, RMCCVars.RMCXenoSpawnInitialMuteDurationSeconds, v => _xenoSpawnMuteDuration = TimeSpan.FromSeconds(v), true);
 
         UpdatesAfter.Add(typeof(SharedXenoPheromonesSystem));
     }
@@ -128,11 +151,15 @@ public sealed class XenoSystem : EntitySystem
             }
         }
 
-        xeno.Comp.NextRegenTime = _timing.CurTime + xeno.Comp.RegenCooldown;
-        Dirty(xeno);
-
         if (!MathHelper.CloseTo(_xenoSpeedMultiplier, 1))
             _movementSpeed.RefreshMovementSpeedModifiers(xeno);
+
+        if (xeno.Comp.MuteOnSpawn)
+        {
+            _status.TryAddStatusEffect(xeno, "Muted", _xenoSpawnMuteDuration, true, "Muted");
+        }
+
+        _eye.RefreshVisibilityMask(xeno.Owner);
     }
 
     private void OnXenoGetAdditionalAccess(Entity<XenoComponent> xeno, ref GetAccessTagsEvent args)
@@ -172,7 +199,9 @@ public sealed class XenoSystem : EntitySystem
         if ((_xenoFriendlyQuery.HasComp(target) && _hive.FromSameHive(xeno.Owner, target)) ||
             _mobState.IsDead(target))
         {
-            args.Cancel();
+            if (!args.Disarm)
+                args.Cancel();
+
             return;
         }
 
@@ -260,6 +289,58 @@ public sealed class XenoSystem : EntitySystem
         }
     }
 
+    private void OnXenoCanDrag(Entity<XenoComponent> ent, ref CanDragEvent args)
+    {
+        if (_mobState.IsDead(ent))
+            args.Handled = true;
+    }
+
+    private void OnXenoBuckleAttempt(Entity<XenoComponent> ent, ref BuckleAttemptEvent args)
+    {
+        if (HasComp<XenoComponent>(args.User) || !_mobState.IsDead(ent))
+            args.Cancelled = true;
+    }
+
+    private void OnXenoGetVisMask(Entity<XenoComponent> ent, ref GetVisMaskEvent args)
+    {
+        args.VisibilityMask |= (int) ent.Comp.Visibility;
+    }
+
+    private void OnLeaderDisarmed(Entity<XenoComponent> ent, ref CMDisarmEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (!_hive.FromSameHive(ent.Owner, args.User))
+            return;
+
+        if (!_hiveLeader.IsLeader(args.User, out var leader))
+            return;
+
+        if (_hiveLeader.IsLeader(ent.Owner, out _))
+            return;
+
+        if (HasComp<XenoEvolutionGranterComponent>(ent))
+            return;
+
+        _stun.TryParalyze(ent, leader.FriendlyStunTime, true);
+    }
+
+    private void OnXenoRegenMapInit(Entity<XenoRegenComponent> ent, ref MapInitEvent args)
+    {
+        ent.Comp.NextRegenTime = _timing.CurTime + ent.Comp.RegenCooldown;
+        Dirty(ent);
+    }
+
+    private void OnXenoRegenBeforeCritDamage(Entity<XenoRegenComponent> ent, ref DamageStateCritBeforeDamageEvent args)
+    {
+        if (!_rmcFlammable.IsOnFire(ent.Owner) || (!ent.Comp.HealOffWeeds && !_weeds.IsOnWeeds(ent.Owner)))
+            return;
+
+        //Don't take bleedout damage on fire or on weeds
+        args.Damage.ClampMax(0);
+    }
+
     private void UpdateXenoSpeedMultiplier(float speed)
     {
         _xenoSpeedMultiplier = speed;
@@ -276,7 +357,7 @@ public sealed class XenoSystem : EntitySystem
         EnsureComp<XenoComponent>(xeno);
     }
 
-    private FixedPoint2 GetWeedsHealAmount(Entity<XenoComponent> xeno)
+    private FixedPoint2 GetWeedsHealAmount(Entity<XenoRegenComponent> xeno)
     {
         if (!_mobThresholdsQuery.TryComp(xeno, out var thresholds) ||
             !_mobThresholds.TryGetIncapThreshold(xeno, out var threshold, thresholds))
@@ -293,12 +374,12 @@ public sealed class XenoSystem : EntitySystem
             multiplier = xeno.Comp.StandHealingMultiplier;
 
         var passiveHeal = threshold.Value / 65 + xeno.Comp.FlatHealing;
-        var recovery = (CompOrNull<XenoRecoveryPheromonesComponent>(xeno)?.Multiplier ?? 0) / 2;
+        var recovery = (CompOrNull<XenoRecoveryPheromonesComponent>(xeno)?.Multiplier ?? 0);
         if (!CanHeal(xeno))
             recovery = FixedPoint2.Zero;
 
         var recoveryHeal = (threshold.Value / 65) * (recovery / 2);
-        return (passiveHeal + recoveryHeal) * multiplier; // TODO RMC14 add Strain based multiplier for Gardener Drone
+        return (passiveHeal + recoveryHeal) * multiplier / 2; // TODO RMC14 add Strain based multiplier for Gardener Drone
     }
 
     public void HealDamage(Entity<DamageableComponent?> xeno, FixedPoint2 amount)
@@ -326,7 +407,7 @@ public sealed class XenoSystem : EntitySystem
             return;
         }
 
-        _damageable.TryChangeDamage(xeno, heal, true);
+        _damageable.TryChangeDamage(xeno, heal, true, origin: xeno);
     }
 
     public bool CanAbilityAttackTarget(EntityUid xeno, EntityUid target, bool hitNonMarines = false)
@@ -378,24 +459,24 @@ public sealed class XenoSystem : EntitySystem
     public override void Update(float frameTime)
     {
         var time = _timing.CurTime;
-        var query = EntityQueryEnumerator<XenoComponent>();
+        var query = EntityQueryEnumerator<XenoRegenComponent>();
         while (query.MoveNext(out var uid, out var xeno))
         {
             if (time < xeno.NextRegenTime)
                 continue;
 
             xeno.NextRegenTime = time + xeno.RegenCooldown;
-            Dirty(uid, xeno);
+            DirtyField(uid, xeno, nameof(XenoRegenComponent.NextRegenTime));
 
             if (!xeno.HealOffWeeds)
             {
                 if (!_affectableQuery.TryComp(uid, out var affectable) ||
                     !affectable.OnXenoWeeds)
                 {
-                    if (_xenoPlasmaQuery.TryComp(uid, out var plasma))
+                    if (_xenoPlasmaQuery.TryComp(uid, out var plasmaComp))
                     {
-                        var amount = FixedPoint2.Max(plasma.PlasmaRegenOffWeeds * plasma.MaxPlasma / 100 / 2, 0.01);
-                        _xenoPlasma.RegenPlasma((uid, plasma), amount);
+                        var amount = FixedPoint2.Max(plasmaComp.PlasmaRegenOffWeeds * plasmaComp.MaxPlasma / 100 / 2, 0.01);
+                        _xenoPlasma.RegenPlasma((uid, plasmaComp), amount);
                     }
 
                     continue;

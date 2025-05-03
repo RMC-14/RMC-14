@@ -1,0 +1,54 @@
+- type: rank
+  id: RMCRankCMBDeputy
+  name: CMB Deputy
+  prefix: Dep.
+
+- type: rank
+  id: RMCRankCMBMarshal
+  name: CMB Marshal
+  prefix: Marshal
+
+- type: rank
+  id: RMCRankCMBInvestigativeSynthetic
+  name: CMB Investigative Synthetic
+  prefix: Syn.
+
+- type: rank
+  id: RMCRankCMBRiotControlSynthetic
+  name: CMB Riot Control Synthetic
+  prefix: Syn.
+
+- type: rank
+  id: RMCRankCMBRiotControlOfficer
+  name: CMB Riot Control Officer
+  prefix: Off.
+
+- type: rank
+  id: RMCRankCMBMedicalTechnician
+  name: CMB Medical Technician
+  prefix: Med.
+
+- type: rank
+  id: RMCRankCMBBreachingTechnician
+  name: CMB Breaching Technician
+  prefix: Breach.
+
+- type: rank
+  id: RMCRankCMBSWATSpecialist
+  name: CMB SWAT Specialist
+  prefix: Spec.
+
+- type: rank
+  id: RMCRankICBAgent
+  name: Interstellar Commerce Bureau Agent
+  prefix: Agent
+
+- type: rank
+  id: RMCRankICBCorporateLiaison
+  name: Interstellar Commerce Bureau Corporate Liaison
+  prefix: Exec.
+
+- type: rank
+  id: RMCRankIHROObserver
+  name: Interstellar Human Rights Observer
+  prefix: "Obsv."

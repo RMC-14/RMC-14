@@ -7,7 +7,9 @@ using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
+using Content.Server.Players.RateLimiting;
 using Content.Server.Speech.Components;
+using Content.Server.Speech.Prototypes;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
@@ -244,6 +246,27 @@ public sealed partial class ChatSystem : SharedChatSystem
         // This message may have a radio prefix, and should then be whispered to the resolved radio channel
         if (checkRadioPrefix)
         {
+            var messages = _cmChat.TryMultiBroadcast(source, message);
+            if (messages != null)
+            {
+                var channelsSent = new HashSet<ProtoId<RadioChannelPrototype>>();
+                foreach (var msg in messages)
+                {
+                    if (!TryProccessRadioMessage(source, msg, out var modMsg, out var modChannel))
+                        continue;
+
+                    if (modChannel != null && channelsSent.Contains(modChannel.ID))
+                        continue;
+
+                    SendEntityWhisper(source, modMsg, range, modChannel, nameOverride, hideLog, ignoreActionBlocker);
+
+                    if (modChannel != null)
+                        channelsSent.Add(modChannel.ID);
+                }
+
+                return;
+            }
+
             if (TryProccessRadioMessage(source, message, out var modMessage, out var channel))
             {
                 SendEntityWhisper(source, modMessage, range, channel, nameOverride, hideLog, ignoreActionBlocker);
@@ -336,7 +359,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         _chatManager.ChatMessageToAll(ChatChannel.Radio, message, wrappedMessage, default, false, true, colorOverride);
         if (playSound)
         {
-            _audio.PlayGlobal(announcementSound == null ? DefaultAnnouncementSound : _audio.GetSound(announcementSound), Filter.Broadcast(), true, AudioParams.Default.WithVolume(-2f));
+            _audio.PlayGlobal(announcementSound == null ? DefaultAnnouncementSound : _audio.ResolveSound(announcementSound), Filter.Broadcast(), true, AudioParams.Default.WithVolume(-2f));
         }
         _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Global station announcement from {sender}: {message}");
     }

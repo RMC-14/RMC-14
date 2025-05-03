@@ -973,6 +973,21 @@ namespace Content.Client.Stylesheets
                     new StyleProperty("font", notoSansItalic12),
                 }),
 
+                // RMC14
+                new StyleRule(new SelectorChild(
+                    new SelectorElement(typeof(PanelContainer), new[] { "speechBox", "commanderSpeech" }, null, null),
+                    new SelectorElement(typeof(RichTextLabel), new[] { "bubbleContent" }, null, null)),
+                    new[]
+                {
+                    new StyleProperty("font", notoSansBold16),
+                }),
+
+                // RMC14
+                new StyleRule(new SelectorElement(typeof(PanelContainer), new[] {"speechBox", "commanderSpeech"}, null, null), new[]
+                {
+                    new StyleProperty(PanelContainer.StylePropertyPanel, tooltipBox)
+                }),
+
                 new StyleRule(new SelectorElement(typeof(RichTextLabel), new[] {StyleClassLabelKeyText}, null, null), new[]
                 {
                     new StyleProperty(Label.StylePropertyFont, notoSansBold12),

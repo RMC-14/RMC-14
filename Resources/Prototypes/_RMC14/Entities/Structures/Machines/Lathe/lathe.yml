@@ -34,63 +34,22 @@
     idleState: autolathe
     runningState: autolathe_n
     producingSound: /Audio/_RMC14/Machines/print.ogg
-    staticRecipes:
-    - RMCBucket
-    - CMBucketMop
-#    - Janitorial bucket (10000 metal)
-    - RMCFlashlight
-    - CMFireExtinguisher
-    - CMCrowbar
-    - CMMultitool
-    - CMTRayScanner
-    - CMWelderSmall
-    - CMScrewdriver
-    - CMWirecutter
-    - CMWrench
-    - CMHeadset
-    - CMRadioHandheld
-#    - Welding mask (3750 metal, 1250 glass)
-    - CMSheetGlassReinforced
-    - CMRodMetal
-    - RMCKitchenKnife
-#    - Tape recorder (75 metal, 37 glass)
-#    - Airlock electronics (62 metal, 62 glass)
-#    - Fire alarm electronics (62 metal, 62 glass)
-#    - Power control module (62 metal, 62 glass)
-#    - Matter cartridge (37500 metal, 18750 glass)
-    - RMCTablePartTan
-    - RMCTablePartAlmayer
-    - RMCTablePartReinforced
-    - RMCRackParts
-    - CMScalpel
-    - CMCircularSaw
-    - CMSurgicalDrill
-    - CMRetractor
-    - CMCautery
-    - CMHemostat
-    - CMBeaker
-    - CMBeakerLarge
-#    - CMDrinkingGlass (look in lathe recipes, just needs new ID)
-#    - Console screen (250 glass)
-#    - Igniter (625 metal, 62 glass)
-#    - Signaller (1250 metal, 250 glass)
-#    - Infrared sensor (1250 metal, 625 glass)
-#    - Timer (625 metal, 62 glass)
-#    - Proximity sensor (1000 metal, 250 glass)
-    - CMLightTube
-    - CMLightBulb
-#    - Glass ashtray (75 glass)
-    - CMHandLabeler
-#    - Camera assembly (875 metal, 375 glass)
-#    - Matrix assembly (9375 metal)
+    staticPacks:
+    - RMCRecipesLathe
   - type: MaterialStorage
     storage:
       CMSteel: 800
       CMGlass: 100
     whitelist:
+      components:
+      - FloorTile
       tags:
       - Metal
       - RMCGlass
+      - RMCTablePartMetal
+      - RMCRackParts
+      - RMCTablePartMetalReinforced
+      - RodMetal1
   - type: Destructible
     thresholds:
     - trigger:
@@ -116,9 +75,71 @@
         type: ResearchClientBoundUserInterface
   - type: Transform
     anchored: true
+  - type: Anchorable
+    flags: None
   - type: StaticPrice
     price: 800
   - type: Machine
     board: CMAutolatheMachineCircuitboard
   - type: Corrodible
     isCorrodible: false
+
+- type: entity
+  parent: CMAutolathe
+  id: RMCAutolatheEmpty
+  suffix: Empty
+  components:
+  - type: MaterialStorage
+    storage: {}
+
+- type: latheRecipePack
+  id: RMCRecipesLathe
+  recipes:
+  - RMCBucket
+  - CMBucketMop
+  #    - Janitorial bucket (10000 metal)
+  - RMCFlashlight
+  - CMFireExtinguisher
+  - CMCrowbar
+  - CMMultitool
+  - CMTRayScanner
+  - CMWelderSmall
+  - CMScrewdriver
+  - CMWirecutter
+  - CMWrench
+  - CMHeadset
+  - CMRadioHandheld
+  #    - Welding mask (3750 metal, 1250 glass)
+  - CMSheetGlassReinforced
+  - CMRodMetal
+  - RMCKitchenKnife
+  #    - Tape recorder (75 metal, 37 glass)
+  #    - Airlock electronics (62 metal, 62 glass)
+  #    - Fire alarm electronics (62 metal, 62 glass)
+  #    - Power control module (62 metal, 62 glass)
+  #    - Matter cartridge (37500 metal, 18750 glass)
+  - RMCTablePartTan
+  - RMCTablePartAlmayer
+  - RMCTablePartReinforced
+  - RMCRackParts
+  - CMScalpel
+  - CMCircularSaw
+  - CMSurgicalDrill
+  - CMRetractor
+  - CMCautery
+  - CMHemostat
+  - CMBeaker
+  - CMBeakerLarge
+  #    - CMDrinkingGlass (look in lathe recipes, just needs new ID)
+  #    - Console screen (250 glass)
+  #    - Igniter (625 metal, 62 glass)
+  #    - Signaller (1250 metal, 250 glass)
+  #    - Infrared sensor (1250 metal, 625 glass)
+  #    - Timer (625 metal, 62 glass)
+  #    - Proximity sensor (1000 metal, 250 glass)
+  - CMLightTube
+  - CMLightBulb
+  #    - Glass ashtray (75 glass)
+  - CMHandLabeler
+#    - Camera assembly (875 metal, 375 glass)
+#    - Matrix assembly (9375 metal)

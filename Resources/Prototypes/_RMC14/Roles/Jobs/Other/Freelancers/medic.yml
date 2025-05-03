@@ -27,7 +27,7 @@
     settings: RMCFreelancerMedic
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCFreelancerMedic
   components:
   - type: GhostRole
@@ -57,4 +57,4 @@
     outerClothing: CMArmorFreelancer
     shoes: RMCBootsSPPFilled
     id: RMCIDCardFreelancer
-    ears: RMCHeadsetDistressFreelancer
+    ears: RMCHeadsetDistressDukes

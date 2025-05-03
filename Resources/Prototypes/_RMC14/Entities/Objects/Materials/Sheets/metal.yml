@@ -207,6 +207,17 @@
 
 - type: entity
   parent: CMSheetPlasteel
+  id: CMSheetPlasteel20
+  suffix: "20"
+  components:
+    - type: Sprite
+      state: plasteel_2
+    - type: Stack
+      stackType: CMPlasteel
+      count: 20
+
+- type: entity
+  parent: CMSheetPlasteel
   id: CMSheetPlasteel30
   name: plasteel
   suffix: "30"
@@ -228,6 +239,18 @@
     - type: Stack
       stackType: CMPlasteel
       count: 40
+
+- type: entity
+  parent: CMSheetPlasteel
+  id: CMSheetPlasteel50
+  name: plasteel
+  suffix: "50"
+  components:
+    - type: Sprite
+      state: plasteel_2
+    - type: Stack
+      stackType: CMPlasteel
+      count: 50
 
 - type: entity
   parent: CMSheetPlasteel

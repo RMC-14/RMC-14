@@ -1,25 +1,18 @@
 - type: entity
   abstract: true
   parent: CMBaseStructureCorrodible
-  id: CMBaseWindow # TODO RMC14 this needs to be 2 separate entities eventually
+  id: CMBaseWindowIndestructible
   placement:
     mode: SnapgridCenter
     snap:
     - Wall
   components:
-  - type: MeleeSound
-    soundGroups:
-      Brute:
-        collection: GlassSmack
   - type: Transform
     anchored: true
   - type: Sprite
     drawdepth: Walls
   - type: PlacementReplacement
     key: walls
-  - type: Damageable
-    damageContainer: StructuralInorganic
-    damageModifierSet: Glass
   - type: Airtight
   - type: RadiationBlocker
     resistance: 2
@@ -50,7 +43,24 @@
     flags: Breaching
 
 - type: entity
-  parent: CMBaseWindow
+  abstract: true
+  parent: CMBaseWindowIndestructible
+  id: CMBaseWindow # TODO RMC14 this needs to be 2 separate entities eventually
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: GlassSmack
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Glass
+
+- type: entity
+  parent: CMBaseWindowIndestructible
   id: CMWindowReinforcedAlmayerHull
   name: hull window
   description: A glass window with a special rod matrix inside a wall frame. This one was made out of exotic materials to prevent hull breaches. No way to get through here.
@@ -118,9 +128,14 @@
   - type: Construction
     graph: RMCWindowAlmayer
     node: windowAlmayerReinforced
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameAlmayer
+    sound:
+      collection: WindowShatter
+  - type: ImmuneToUnarmed
 
 - type: entity
-  parent: CMBaseWindow
+  parent: CMBaseWindowIndestructible
   id: CMWindowReinforcedWhiteHull
   name: hull window
   description: An ultra-reinforced window designed to keep research a secure area. This one was made out of exotic materials to prevent hull breaches. No way to get through here.
@@ -188,6 +203,10 @@
   - type: Construction
     graph: RMCWindowWhite
     node: windowWhiteReinforced
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameWhite
+    sound:
+      collection: WindowShatter
 
 - type: entity
   parent: CMBaseWindow
@@ -236,6 +255,10 @@
   - type: Construction
     graph: RMCWindowColony
     node: windowColony
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameColony
+    sound:
+      collection: WindowShatter
 
 - type: entity
   parent: CMBaseWindow
@@ -287,6 +310,10 @@
   - type: Construction
     graph: RMCWindowColonyReinforced
     node: windowColonyReinforced
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameColonyReinforced
+    sound:
+      collection: WindowShatter
 
 - type: entity
   parent: CMBaseWindow
@@ -341,6 +368,10 @@
   - type: Construction
     graph: RMCWindowHunterReinforced
     node: windowHunterReinforced
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameHunterReinforced
+    sound:
+      collection: WindowShatter
 
 - type: entity
   parent: CMBaseWindow
@@ -389,6 +420,10 @@
   - type: Construction
     graph: RMCWindowWood
     node: windowWood
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameWood
+    sound:
+      collection: WindowShatter
 
 - type: entity
   parent: CMBaseWindow
@@ -440,6 +475,10 @@
   - type: Construction
     graph: RMCWindowWood
     node: windowWoodReinforced
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameWood
+    sound:
+      collection: WindowShatter
 
 - type: entity
   parent: CMBaseWindow
@@ -491,3 +530,7 @@
   - type: Construction
     graph: RMCWindowAI
     node: windowAIReinforced
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameAI
+    sound:
+      collection: WindowShatter

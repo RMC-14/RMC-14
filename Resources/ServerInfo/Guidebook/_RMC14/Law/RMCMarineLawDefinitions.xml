@@ -18,7 +18,7 @@
   - Prolonged communications outage.
   - The [color=#008000][bold]Commander[/bold][/color] deploying in the field.
 
-  If the [color=#008000][bold]Commander[/bold][/color] is rendered [bold]permanently[/bold] incapable of command, the next in the [textlink="Chain of Command" link="RMCCommandChain"] becomes the [color=#008000][bold]Commander[/bold][/color], rather than a [color=#90EE90][bold]Duty Officer[/bold][/color]. This includes but is not limited to:
+  If the [color=#008000][bold]Commander[/bold][/color] is rendered [bold]permanently[/bold] incapable of command, the next in the [textlink="Chain of Command" link="RMCCommandChain"] becomes the [color=#008000][bold]Commander[/bold][/color], rather than becoming a [color=#90EE90][bold]Duty Officer[/bold][/color]. This includes but is not limited to:
   - The [color=#008000][bold]Commander[/bold][/color] is relieved of duty due to [bold]arrest[/bold] or [bold]mutiny[/bold].
   - The [color=#008000][bold]Commander[/bold][/color] becoming [bold]unrevivable[/bold].
 
@@ -32,7 +32,9 @@
 
   [color=#8B0000][bold]Chief MP[/bold][/color]
   - The Chief of Military Police, assigned to the warship.
-  - Only transferable to a [bold]Warden[/bold] by the [color=#008000][bold]Commander[/bold][/color], if another [color=#ff000d][bold]MP[/bold][/color] is appointed to be the acting [bold]Warden[/bold].
+  - Only transferable to the [bold]Warden[/bold] by the [color=#008000][bold]Commander[/bold][/color], if another [color=#ff000d][bold]MP[/bold][/color] is appointed to be the acting [bold]Warden[/bold] in their place.
+  - An acting [bold]Warden[/bold] cannot be the acting [color=#8B0000][bold]Chief MP[/bold][/color]
+  - A deputized person may not be the acting [bold]Warden[/bold].
 
   \n
 
@@ -99,7 +101,7 @@
 
   [bold]Field Hospital[/bold]
   - Must be designated by the [color=#008000][bold]Commander[/bold][/color] or [bold]Chief Medical Officer[/bold]. It is a reinforced area, where there has been no recent combat or threats.
-  - It is the only area aside from the [bold]FOB[/bold] that the [bold]Chief Medical Officer[/bold] or [color=#008000][bold]Commander[/bold][/color] may give permission to doctors and nurse to move to.
+  - It is the only area aside from the [bold]FOB[/bold] that the [bold]Chief Medical Officer[/bold] or [color=#008000][bold]Commander[/bold][/color] may give permission to doctors and nurses to move to.
   - It must be designated as a [bold]Secure Area.[/bold]
 
   \n

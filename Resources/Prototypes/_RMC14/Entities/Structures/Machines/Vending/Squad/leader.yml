@@ -24,27 +24,29 @@
       entries:
       - id: RMCKitRifleM4SPR
       - id: RMCKitCM54C
-    #- id: CMM240PyrotechnicianSupportKit
+      - id: RMCKitPyroMini
     #- id: CMM2CHeavyMachineGun
     #- id: CMM56DHeavyMachineGun
-    #- id: CMM79GrenadeLauncher
+      - id: RMCM79Case
       - id: RMCMOU53Case
       - id: RMCCaseXM88
       - id: RMCKitEngineering
     - name: Armors
       entries:
-      - id: CMArmorM4
+      - id: RMCArmorM4Zipties
+        name: leader M4 pattern marine armor (zipties)
         points: 16
     - name: Clothing Items
       entries:
+      - id: RMCBackpackRTO
+        recommended: true
+        points: 5
       - id: RMCScabbardMacheteFilled
         name: machete scabbard (Full)
         points: 4
       - id: RMCPouchMacheteFilled
         name: machete pouch (Full)
         points: 4
-      - id: RMCBackpackRTO
-        points: 5
       - id: CMBeltUtilityCombat
         points: 15
     - name: Utilities
@@ -112,14 +114,14 @@
     #  points: 18
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
-    #- id: CMM74AGM-FragAirburstPacketx3
-    #  points: 20
-    #- id: CMM74AGM-IncendiaryAirburstPacketx3
-    #  points: 20
-    #- id: CMM74AGM-SmokeAirburstPacketx3
-    #  points: 10
-    #- id: CMM74AGM-HornetAirburstPacketx3
-    #  points: 20
+      - id: RMCPacketGrenadeM74AGMFFilled
+        points: 20
+      - id: RMCPacketGrenadeM74AGMIFilled
+        points: 20
+      - id: RMCPacketGrenadeM74AGMSFilled
+        points: 10
+      - id: RMCPacketGrenadeM74AGMSHornetFilled
+        points: 20
     #- id: CMM20MineBoxx4mines
     #  points: 20
     #- id: CMM40MFHSMetalFoamGrenade
@@ -173,21 +175,21 @@
       - id: RMCMagazinePistolSU6
         points: 6
     - name: Special Ammunition
-      entries: [ ]
-    #- id: CMM240IncineratorTankNapthal
-    #  points: 3
+      entries:
+      - id: RMCTankFlamer
+        points: 3
     #- id: CMM240IncineratorTankB-Gel
     #  points: 3
     - name: Restricted Firearms
       entries:
-    #- id: CMM240IncineratorUnit
-    #  points: 18
+      - id: RMCCaseFlamer
+        points: 18
       - id: RMCGunCasePistolMK80
         points: 8
       - id: RMCGunCasePistolSmart
         points: 12
-    #- id: CMM79GrenadeLauncher
-    #  points: 18
+      - id: RMCM79Case
+        points: 18
     - name: Radio Keys
       entries:
       - id: CMEncryptionKeyEngineer
@@ -218,10 +220,10 @@
       takeAll: CMStandard
       entries:
       - id: CMVendorBundleSquadLeaderApparel
-      - id: CMArmorB12
+      - id: RMCArmorB12Zipties
+        name: leader B12 pattern marine armor (zipties)
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
-      - id: RMCBoxZiptie
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
@@ -260,7 +262,7 @@
         recommended: true
       - id: RMCPouchFlareFilled
         name: Flare pouch (Full)
-      #- id: CMFuelTankStrapPouch
+      - id: RMCPouchFuelTank
       - id: RMCPouchGeneralLarge
         recommended: true
       #- id: CMSlingPouch
@@ -357,3 +359,68 @@
     - id: RMCPouchConstructionFillLowGrade
     - id: RMCPouchElectronicsFill
 #    - id: RMCGogglesWelding # TODO RMC14 welding goggles
+
+- type: entity
+  parent: RMCKitBase
+  id: RMCKitPyroMini
+  name: m34 pyrotechnician support kit
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,11,1
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+  - type: StorageFill
+    contents:
+    - id: RMCBackpackFlamer
+    - id: RMCWeaponFlamer
+    - id: RMCTankFlamer # TODO RMC14 +1 b gel, -1 regular
+      amount: 3 # TODO RMC14 projectile nozzle
+    - id: CMFireExtinguisherPortable
+
+- type: entity
+  parent: CMArmorB12
+  id: RMCArmorB12Zipties
+  name: leader B12 pattern marine armor
+  description: A lightweight suit of carbon fiber body armor built for quick movement. Designed in a lovely forest green. Use it to toggle the built-in flashlight. This one has a separate pouch for a ziptie box.
+  suffix: Zipties
+  components:
+  - type: Storage
+    grid:
+    - 0,0,7,1
+  - type: StorageFill
+    contents:
+    - id: RMCBoxZiptie
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-not-ziptie-box
+      blacklist:
+        tags:
+        - RMCBoxZipties
+      whitelist: null
+      count: 3
+
+- type: entity
+  parent: CMArmorM4
+  id: RMCArmorM4Zipties
+  name: leader M4 pattern marine armor
+  description: A well tinkered and crafted hybrid of Smart-Gunner mesh and M3 pattern plates. Robust, yet nimble, with room for all your pouches. This one has a separate pouch for a ziptie box.
+  suffix: Zipties
+  components:
+  - type: Storage
+    grid:
+    - 0,0,9,1
+  - type: StorageFill
+    contents:
+    - id: RMCBoxZiptie
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-not-ziptie-box
+      blacklist:
+        tags:
+        - RMCBoxZipties
+      whitelist: null
+      count: 4

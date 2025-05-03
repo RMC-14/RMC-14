@@ -2,6 +2,7 @@
 using System.Linq;
 using Content.Shared._RMC14.Marines.Skills;
 using Robust.Shared.Console;
+using Robust.Shared.Toolshed;
 using Robust.Shared.Toolshed.Errors;
 using Robust.Shared.Toolshed.Syntax;
 using Robust.Shared.Toolshed.TypeParsers;
@@ -35,7 +36,7 @@ public sealed class SkillTypeParser : TypeParser<SkillType>
         return true;
     }
 
-    public override CompletionResult TryAutocomplete(ParserContext parserContext, string? argName)
+    public override CompletionResult TryAutocomplete(ParserContext parserContext, CommandArgument? argName)
     {
         var skills = _entities.System<SkillsSystem>().SkillNames.Keys.Order(StringComparer.OrdinalIgnoreCase);
         return CompletionResult.FromHintOptions(skills, "skill");

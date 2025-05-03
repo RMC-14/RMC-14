@@ -1,13 +1,17 @@
-﻿# Plasma
-cm-xeno-not-enough-plasma = You don't have enough plasma!
+# Plasma
+cm-xeno-not-enough-plasma = We don't have enough plasma!
 
 # Energy
-rmc-xeno-not-enough-energy = Your energy reserves are insufficient!
-rmc-xeno-energy-increase-user = You feel your internal energy reserves increase!
+rmc-xeno-not-enough-energy = Our energy reserves are insufficient!
+rmc-xeno-energy-increase-user = We feel our internal energy reserves increase!
 
 # Internal Health
-rmc-xeno-not-enough-internal-health = Your health reserves are insufficient!
-rmc-xeno-internal-health-increase-user = You feel your internal health reserves increase!
+rmc-xeno-not-enough-internal-health = Our health reserves are insufficient!
+rmc-xeno-internal-health-increase-user = We feel our internal health reserves increase!
+
+# Fury
+rmc-xeno-not-enough-fury = We're not angry enough for this!
+rmc-xeno-fury-increase-user = We are overcome with rage!
 
 # Acid reserves
 rmc-xeno-not-enough-acid = Your don't have enough acid built up!
@@ -17,11 +21,15 @@ rmc-xeno-acid-increase-user = You feel your acid reserves increase!
 cm-xeno-choose-resin-structure = Choose Resin Structure
 cm-xeno-order-construction = Build Structure
 cm-xeno-too-close-to-other-node = This is too close to {THE($target)}!
-cm-xeno-requires-more-plasma = {THE($construction)} requires {$plasma} more plasma.
+cm-xeno-requires-more-plasma = {CAPITALIZE(THE($construction))} requires {$plasma} more plasma.
 cm-xeno-construction-plasma-left = A {$construction} construction is designated here. It requires [color=cyan]{$plasma}[/color] more plasma.
 cm-xeno-cant-reach-there = You can't reach there!
 cm-xeno-cant-build-in-self = You can't build structures that close!
-cm-xeno-unique-exists = There's already a {$choice} built!
+rmc-xeno-construction-unique-exists = There's already a {$choice} built!
+rmc-xeno-construction-hive-limit-met = We have reached the limit of {$choice} the hive can support!
+rmc-xeno-construction-requires-hive-weeds = {$choice} must be built on hive weeds!
+rmc-xeno-construction-requires-hive-core = The hive must have a hive core to build {$choice}!
+rmc-xeno-construction-requires-space = We need more open space to build here
 rmc-xeno-cant-build-new-yet = We can't build a new {$choice} yet!
 
 # Evolve
@@ -41,6 +49,7 @@ rmc-xeno-evolution-cant-devolve-damaged = We are too weak to deevolve, we must r
 rmc-xeno-evolution-cant-evolve-recent-queen-death-minutes = We must wait about {$minutes} minutes and {$seconds} seconds for the hive to recover from the previous Queen's death.
 rmc-xeno-evolution-cant-evolve-recent-queen-death-seconds = We must wait about {$seconds} seconds for the hive to recover from the previous Queen's death.
 rmc-xeno-evolution-cant-evolve-caste-cooldown = We cannot evolve into this caste again yet! ({$minutes} minutes and {$seconds} seconds remaining)
+rmc-xeno-evolution-failed-early-weeds = The hive hasn't developed enough yet for you to evolve off weeds!
 rmc-xeno-evolution-failed-bad-location = We can't evolve here.
 rmc-xeno-evolution-start-self = We begin to twist and contort.
 rmc-xeno-evolution-start-others = {$xeno} begins to twist and contort.
@@ -131,6 +140,7 @@ cm-xeno-charge-spit-expire = Our spits are back to normal.
 
 # Turn Invisible
 cm-xeno-invisibility-expire = We feel our invisibility end!
+rmc-xeno-invisibility-expire-bump = We bumped into someone and lost our invisibility!
 
 # Ovipositor
 cm-xeno-ovipositor-attach = We start attaching to the ovipositor.
@@ -208,7 +218,7 @@ rmc-xeno-burrow-down-failure-rest = We cannot burrow while resting!
 rmc-xeno-burrow-down-finish = We burrow ourselves into the ground.
 rmc-xeno-burrow-cooldown-finish = We can burrow again.
 rmc-xeno-burrow-down-failure-cooldown = We can't burrow yet.
-rmc-xeno-burrow-down-doafter-stop = We're busy burrowing!
+rmc-xeno-burrow-down-doafter-stop = We can't do this right now!
 
 rmc-xeno-burrow-resurface-cooldown-finish = We can now surface.
 rmc-xeno-burrow-move-cooldown-finish = We can now tunnel while burrowed.
@@ -251,8 +261,8 @@ rmc-xeno-apply-salve-target-full-health-failure = {$target_xeno} is already at f
 rmc-xeno-apply-salve-self = We regurgitate our vital fluids and some plasma to create a regenerative resin salve and apply it to {$target_xeno}'s wounds. We feel weakened...
 rmc-xeno-apply-salve-target = {$healer_xeno} covers our wounds with a regenerative resin salve. We feel reinvigorated!
 
-# Sacrafical Heal
-rmc-xeno-sacrifice-heal-will-respawn = We have gained enough energy! We will be reborn when we sacrifice ourself!
+# Sacrificial Heal
+rmc-xeno-sacrifice-heal-will-respawn = We have transferred enough health! We will be reborn when we sacrifice ourself!
 
 rmc-xeno-sacrifice-heal-target-not-xeno-failure = The target cannot be healed!
 rmc-xeno-sacrifice-heal-target-self-failure = We can't heal ourself!
@@ -264,6 +274,7 @@ rmc-xeno-sacrifice-heal-target-full-health-failure = {$target_xeno} is already a
 
 rmc-xeno-sacrifice-heal-target-announcement = {$healer_xeno} sacrifices itself to heal {$target_xeno}!
 rmc-xeno-sacrifice-heal-target-enviorment = {$healer_xeno} explodes in a deluge of regenerative resin salve, covering {$target_xeno} in it!
+rmc-xeno-sacrifice-heal-announce = ;OUR SISTER WILL NOT DIE!!!
 
 # Dodge
 rmc-xeno-dodge-self = We can now weave through our enemies!
@@ -285,3 +296,58 @@ rmc-xeno-soak-end-fail = We stop tanking incoming damage.
 rmc-xeno-soak-end-self = We feel enraged after taking in oncoming damage! Our tail slam's cooldown is reset and we heal!
 rmc-xeno-soak-end-others =  {CAPITALIZE(THE($xeno))} gets enraged after being damaged enough!
 
+# Tail Fountain
+rmc-xeno-tail-fountain-self = We use our tail to pour acid over {$target}.
+rmc-xeno-tail-fountain-others = {CAPITALIZE(THE($user))} pours acid all over {$target} using its tail.
+rmc-xeno-tail-fountain-fail = We can't extinguish that!
+rmc-xeno-tail-fountain-fail-self = We can't extinguish ourselves!
+
+# Tantrum
+rmc-xeno-tantrum-fail-self = We must enrage a sister!
+rmc-xeno-tantrum-fail-raging-self = We are already full of rage!
+rmc-xeno-tantrum-fail-not-xeno = That's not a sister!
+rmc-xeno-tantrum-fail-wrong-hive = Why would we help our enemies?!
+rmc-xeno-tantrum-fail-dead = No amount of anger can bring our sister back.
+rmc-xeno-tantrum-fail-valkyrie = We can't order another valkyrie with our rage.
+rmc-xeno-tantrum-fail-raging = {CAPITALIZE(THE($target))} is already enraged!
+rmc-xeno-tantrum-self = Our rage drives us forward, our healing and armor is increased!
+rmc-xeno-tantrum-other = We feel an overwhelming rage!
+rmc-xeno-tantrum-end = We feel ourselves calm down.
+
+# Fight or Flight
+rmc-xeno-fof-effect = Every single inch in our body moves on its own to fight!
+
+# Ravager Empower
+rmc-xeno-ravager-shield-end = We feel our shield decay!
+rmc-xeno-empower-start-self = We start empowering ourself!
+rmc-xeno-empower-start-others = {CAPITALIZE(THE($user))} starts empowering!
+rmc-xeno-ravager-empower = We feel a rush of power from the surrounding enemies!
+rmc-xeno-ravager-empower-fizzle = There were no enemies around us!
+rmc-xeno-ravager-super-empower-fade = Our glow fades away, the power leaving our form!
+# Abduct
+rmc-xeno-abduct-cancel = We relax our tail.
+rmc-xeno-abduct-no-room = We don't have any room to do our abduction!
+rmc-xeno-abduct-none = Our tail fails to catch anything!
+rmc-xeno-abduct-one = Our tail catches and slows one target!
+rmc-xeno-abduct-two = Our tail catches and roots two targets!
+rmc-xeno-abduct-more = Our tail catches and stuns {$targets} targets!
+
+# Tail Lash
+rmc-xeno-tail-lash-no-room = We don't have any room to do our tail lash!
+
+# Headbite
+rmc-xeno-headbite-others = {$xeno} grabs {$target}'s head aggressively.
+rmc-xeno-headbite-self = We grab {$target}'s head aggressively.
+rmc-xeno-headbite-warning-larva = We should not harm this host! It has a sister inside.
+rmc-xeno-headbite-warning = We can only headbite an unconscious, adjacent target!
+rmc-xeno-headbite-hit-self = We pierce {$target}'s head with our inner jaw!
+rmc-xeno-headbite-hit-others = {$xeno} pierces {$target}'s head with its inner jaw!
+
+# Produce Eggs
+rmc-xeno-produce-eggs-no-plasma = We don't have enough plasma to support forming eggs.
+rmc-xeno-produce-eggs-new-egg = We generate an egg. Now holding: {$cur_eggs} / {$max_eggs}.
+rmc-xeno-produce-eggs-start = We start forming eggs.
+
+# Eggsac Passive
+rmc-xeno-sustain-egg-decaying = We can only sustain {$max} eggs off hive weeds! Our oldest egg is decaying rapidly.
+rmc-xeno-sustain-death = {CAPITALIZE(THE($xeno))} throes as its eggsac bursts into a mess of acid!

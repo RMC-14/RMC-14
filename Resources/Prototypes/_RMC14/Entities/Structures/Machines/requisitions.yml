@@ -25,12 +25,9 @@
       - RMCCrateBoxShellsShotgunBreaching
       - RMCCrateBoxMagazineBreaching
       - RMCCrateMagazineSmartGun
-#      - RMCCrateMagazineNapalm
+      - RMCCrateMagazineNapthalUT
 #      - RMCCrateMagazineNapalmGel
 #      - RMCCrateMagazineFlamerMixed
-      - RMCCrateMortarShellHE
-      - RMCCrateMortarShellIncendiary
-      - RMCCrateMortarShellFlare
       - RMCCrateGearPackFlare
       - RMCCrateFoodMRE
       - RMCCrateFlashlights

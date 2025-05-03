@@ -7,7 +7,14 @@
         <PanelContainer.PanelOverride>
             <graphics:StyleBoxFlat BorderColor="#9B9C9F" BorderThickness="1" />
         </PanelContainer.PanelOverride>
-        <TextureRect Name="RoleIcon" Access="Public" MinWidth="64" />
+        <BoxContainer Orientation="Horizontal">
+            <Control HorizontalExpand="True" />
+            <Control>
+                <TextureRect Name="RoleBackground" Access="Public" TextureScale="2 2" Stretch="KeepCentered" />
+                <TextureRect Name="RoleIcon" Access="Public" TextureScale="2 2" Stretch="KeepCentered" />
+            </Control>
+            <Control HorizontalExpand="True" />
+        </BoxContainer>
     </PanelContainer>
     <PanelContainer HorizontalExpand="True" SizeFlagsStretchRatio="9">
         <PanelContainer.PanelOverride>

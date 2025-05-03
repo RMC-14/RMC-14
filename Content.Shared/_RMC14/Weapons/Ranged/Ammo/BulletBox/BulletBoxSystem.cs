@@ -1,16 +1,14 @@
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
-using Content.Shared.Hands.EntitySystems;
-using Robust.Shared.Network;
 
-
-namespace Content.Shared._RMC14.BulletBox;
+namespace Content.Shared._RMC14.Weapons.Ranged.Ammo.BulletBox;
 
 public sealed class BulletBoxSystem : EntitySystem
 {
@@ -18,7 +16,6 @@ public sealed class BulletBoxSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
 
     public override void Initialize()
@@ -54,7 +51,7 @@ public sealed class BulletBoxSystem : EntitySystem
         var used = new Entity<RefillableByBulletBoxComponent?, BallisticAmmoProviderComponent?>(usedId.Value, null, null);
         if (!Resolve(used, ref used.Comp1, ref used.Comp2, false))
             return;
-        
+
         args.Verbs.Add(new AlternativeVerb
         {
             Act = () =>
@@ -64,7 +61,7 @@ public sealed class BulletBoxSystem : EntitySystem
                     return;
                 //Constructs the doAfter event
                 var ev = new BulletBoxTransferDoAfterEvent(true);
-                var delay = ent.Comp.DelayTransferToBox;
+                var delay = ent.Comp.Delay;
                 var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent, ent, usedId)
                 {
                     BreakOnMove = true,
@@ -80,7 +77,7 @@ public sealed class BulletBoxSystem : EntitySystem
 
     private void OnInteractUsing(Entity<BulletBoxComponent> ent, ref InteractUsingEvent args)
     {
-        
+
         var used = new Entity<RefillableByBulletBoxComponent?, BallisticAmmoProviderComponent?>(args.Used, null, null);
         if (!Resolve(used, ref used.Comp1, ref used.Comp2, false))
             return;
@@ -92,7 +89,7 @@ public sealed class BulletBoxSystem : EntitySystem
             return;
 
         var ev = new BulletBoxTransferDoAfterEvent(false);
-        var delay = ent.Comp.DelayTransferFromBox;
+        var delay = ent.Comp.Delay;
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent, ent, args.Used)
         {
             BreakOnMove = true,
@@ -110,7 +107,7 @@ public sealed class BulletBoxSystem : EntitySystem
         args.Handled = true;
 
         var user = args.User;
-        var transfer = 0;
+        int transfer;
         var used = new Entity<RefillableByBulletBoxComponent?, BallisticAmmoProviderComponent?>(usedId, null, null);
         var transferToBox = args.ToBox;
         if (!CanTransferPopup(ent, user, ref used, transferToBox) || used.Comp2 == null)
@@ -141,7 +138,7 @@ public sealed class BulletBoxSystem : EntitySystem
         UpdateAppearance(ent);
     }
 
-    private bool CanTransferPopup(Entity<BulletBoxComponent> box, EntityUid user, ref Entity<RefillableByBulletBoxComponent?, BallisticAmmoProviderComponent?> used, bool TransferToBox)
+    private bool CanTransferPopup(Entity<BulletBoxComponent> box, EntityUid user, ref Entity<RefillableByBulletBoxComponent?, BallisticAmmoProviderComponent?> used, bool transferToBox)
     {
         if (!Resolve(used, ref used.Comp1, ref used.Comp2, false))
             return false;
@@ -152,7 +149,7 @@ public sealed class BulletBoxSystem : EntitySystem
         {
             popup = Loc.GetString("rmc-bullet-box-wrong-rounds");
         }
-        if (!TransferToBox)
+        if (!transferToBox)
         {
             if (used.Comp2.Count >= used.Comp2.Capacity)
             {

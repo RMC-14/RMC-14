@@ -1,37 +1,13 @@
 - type: entity
-  name: paper
   parent: BaseItem
-  id: Paper
-  description: 'A piece of white paper.'
+  id: BasePaper
+  abstract: true
   components:
-  - type: Sprite
-    sprite: Objects/Misc/bureaucracy.rsi
-    layers:
-    - state: paper
-    - state: paper_words
-      map: ["enum.PaperVisualLayers.Writing"]
-      visible: false
-    - state: paper_stamp-generic
-      map: ["enum.PaperVisualLayers.Stamp"]
-      visible: false
-  - type: Paper
-  - type: PaperLabelType
-  - type: ActivatableUI
-    key: enum.PaperUiKey.Key
-    requiresComplex: false
-  - type: UserInterface
-    interfaces:
-      enum.PaperUiKey.Key:
-        type: PaperBoundUserInterface
-  - type: Item
-    size: Tiny
   - type: Tag
     tags:
     - Document
     - Paper
   - type: Appearance
-  - type: FaxableObject
-  - type: PaperVisuals
   - type: Flammable
     fireSpread: true
     alwaysCombustible: true
@@ -51,9 +27,9 @@
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
-            Ash:
-              min: 1
-              max: 1
+          Ash:
+            min: 1
+            max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: Food
@@ -80,10 +56,40 @@
     whitelist:
       components:
       - Xeno
+  - type: Item
+    size: Tiny
+
+- type: entity
+  name: paper
+  parent: BasePaper
+  id: Paper
+  description: 'A piece of white paper.'
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/bureaucracy.rsi
+    layers:
+    - state: paper
+    - state: paper_words
+      map: ["enum.PaperVisualLayers.Writing"]
+      visible: false
+    - state: paper_stamp-generic
+      map: ["enum.PaperVisualLayers.Stamp"]
+      visible: false
+  - type: Paper
+  - type: PaperLabelType
+  - type: ActivatableUI
+    key: enum.PaperUiKey.Key
+    requiresComplex: false
+  - type: UserInterface
+    interfaces:
+      enum.PaperUiKey.Key:
+        type: PaperBoundUserInterface
+  - type: FaxableObject
+  - type: PaperVisuals
 
 - type: entity
   name: paper scrap
-  parent: Paper
+  parent: BasePaper
   id: PaperScrap
   description: 'A crumpled up piece of white paper.'
   components:
@@ -93,14 +99,9 @@
     - Trash
     - Paper
   - type: Sprite
+    sprite: Objects/Misc/bureaucracy.rsi
     layers:
     - state: scrap
-    - state: paper_words
-      map: ["enum.PaperVisualLayers.Writing"]
-      visible: false
-    - state: paper_stamp-generic
-      map: ["enum.PaperVisualLayers.Stamp"]
-      visible: false
 
 - type: entity
   name: office paper
@@ -203,6 +204,21 @@
     contentMargin: 16.0, 16.0, 16.0, 16.0
     headerImagePath: "/Textures/Interface/Paper/paper_heading_cargo_invoice.svg.96dpi.png"
     headerMargin: 0.0, 12.0, 0.0, 0.0
+
+- type: entity
+  id: PaperNanoTaskItem
+  parent: Paper
+  name: NanoTask item
+  description: A printed NanoTask item. Can be inserted into your PDA to add it to your tasks.
+  components:
+  - type: Tag
+    tags:
+    - Document
+    - Trash
+    - Paper
+  - type: StaticPrice
+    price: 0
+  - type: NanoTaskPrinted
 
 - type: entity
   id: PaperCargoBountyManifest
@@ -456,7 +472,7 @@
   id: BoxFolderCentCom
   name: CentComm folder
   parent: BoxFolderBase
-  suffix: DO NOT MAP
+  categories: [ DoNotMap ]
   description: CentComm's miserable little pile of secrets!
   components:
   - type: Sprite
@@ -618,7 +634,7 @@
   id: TraitorCodePaper
   name: syndicate codeword
   description: A leaked codeword to possibly get in touch with the Syndicate.
-  suffix: DO NOT MAP
+  categories: [ DoNotMap ]
   components:
   - type: TraitorCodePaper
 

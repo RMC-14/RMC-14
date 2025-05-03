@@ -1,10 +1,11 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
   id: CMXenoBoiler
   name: Boiler
   description: A huge, grotesque xenonid covered in glowing, oozing acid slime.
@@ -69,7 +70,7 @@
     plasmaRegenOnWeeds: 7
   - type: XenoAcid
   - type: CMArmor
-    armor: 20
+    xenoArmor: 20
     explosionArmor: 20
   - type: XenoDevour
   - type: XenoZoom
@@ -126,7 +127,7 @@
     size: Big
   - type: XenoDeathcloud
   - type: NeurotoxinInjector
-    neuroPerSecond: 16
+    neuroPerSecond: 20
     injectInContact: false
     affectsDead: false
     affectsInfectedNested: false

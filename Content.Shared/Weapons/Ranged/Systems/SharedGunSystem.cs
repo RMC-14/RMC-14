@@ -1,8 +1,10 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
+using Content.Shared._RMC14.Attachable.Systems;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Random;
+using Content.Shared._RMC14.Weapons.Ranged.Flamer;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
@@ -86,6 +88,10 @@ public abstract partial class SharedGunSystem : EntitySystem
     [Dependency] private   readonly IConfigurationManager _config = default!;
     [Dependency] private   readonly INetConfigurationManager _netConfig = default!;
 
+    // RMC14
+    [Dependency] private readonly AttachableHolderSystem _attachableHolder = default!;
+    [Dependency] private readonly SharedRMCFlamerSystem _flamer = default!;
+
     private const float InteractNextFire = 0.3f;
     private const double SafetyNextFire = 0.5;
     private const float EjectOffset = 0.4f;
@@ -143,7 +149,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         if (component.MeleeCooldownOnShoot && melee.NextAttack > component.NextFire)
         {
             component.NextFire = melee.NextAttack;
-            EntityManager.DirtyField(uid, component, nameof(MeleeWeaponComponent.NextAttack));
+            EntityManager.DirtyField(uid, component, nameof(GunComponent.NextFire));
         }
     }
 
@@ -174,6 +180,9 @@ public abstract partial class SharedGunSystem : EntitySystem
 
     public bool TryGetGun(EntityUid entity, out EntityUid gunEntity, [NotNullWhen(true)] out GunComponent? gunComp)
     {
+        if(_attachableHolder.TryGetInhandSupercedingGun(entity, out gunEntity, out gunComp))
+            return true;
+
         gunEntity = default;
         gunComp = null;
 
@@ -206,6 +215,21 @@ public abstract partial class SharedGunSystem : EntitySystem
         gun.ShootCoordinates = null;
         gun.Target = null;
         EntityManager.DirtyField(uid, gun, nameof(GunComponent.ShotCounter));
+    }
+
+    // RMC14 Needed to check if the attempted shot actually shot any projectiles.
+    /// <summary>
+    ///     Attempts to shoot at the target coordinates. Resets the shot counter after every shot.
+    /// </summary>
+    /// <returns>Returns a list containing all successfully shot projectiles, returns null if no projectiles have been shot</returns>
+    public List<EntityUid>? AttemptShoot(Entity<GunComponent> ent, EntityUid user, EntityCoordinates coordinates)
+    {
+        ent.Comp.ShootCoordinates = coordinates;
+        var projectiles = AttemptShoot(user, ent, ent);
+        ent.Comp.ShotCounter = 0;
+        EntityManager.DirtyField(ent.Owner, ent.Comp, nameof(GunComponent.ShotCounter));
+
+        return projectiles;
     }
 
     /// <summary>
@@ -355,10 +379,7 @@ public abstract partial class SharedGunSystem : EntitySystem
             // If they're firing an existing clip then don't play anything.
             if (shots > 0)
             {
-                if (ev.Reason != null && Timing.IsFirstTimePredicted)
-                {
-                    PopupSystem.PopupCursor(ev.Reason);
-                }
+                PopupSystem.PopupCursor(ev.Reason ?? Loc.GetString("gun-magazine-fired-empty"));
 
                 // Don't spam safety sounds at gun fire rate, play it at a reduced rate.
                 // May cause prediction issues? Needs more tweaking
@@ -392,26 +413,14 @@ public abstract partial class SharedGunSystem : EntitySystem
             }
         }
 
-        void CleanupClient()
-        {
-            foreach (var (ent, _) in ev.Ammo)
-            {
-                if (ent == null)
-                    continue;
-
-                if (_netManager.IsServer || IsClientSide(ent.Value))
-                    Del(ent);
-            }
-        }
-
-        if (!Timing.IsFirstTimePredicted)
-        {
-            CleanupClient();
-            return null;
-        }
-
         // Shoot confirmed - sounds also played here in case it's invalid (e.g. cartridge already spent).
-        var projectiles = Shoot(gunUid, gun, ev.Ammo, fromCoordinates, toCoordinates.Value, out var userImpulse, user, throwItems: attemptEv.ThrowItems, predictedProjectiles, userSession);
+        List<EntityUid>? projectiles = null;
+        var userImpulse = false;
+        if (Timing.IsFirstTimePredicted)
+        {
+            projectiles = Shoot(gunUid, gun, ev.Ammo, fromCoordinates, toCoordinates.Value, out userImpulse, user, throwItems: attemptEv.ThrowItems, predictedProjectiles, userSession);
+        }
+
         var shotEv = new GunShotEvent(user, ev.Ammo, fromCoordinates, toCoordinates.Value);
         RaiseLocalEvent(gunUid, ref shotEv);
 
@@ -423,6 +432,16 @@ public abstract partial class SharedGunSystem : EntitySystem
 
         DirtyField(gunUid, gun, nameof(GunComponent.BurstActivated));
         Dirty(gunUid, gun);
+
+        foreach (var (ent, _) in ev.Ammo)
+        {
+            if (ent == null)
+                continue;
+
+            if (IsClientSide(ent.Value))
+                Del(ent);
+        }
+
         return projectiles;
     }
 
@@ -655,7 +674,7 @@ public abstract partial class SharedGunSystem : EntitySystem
 
                         var hitName = ToPrettyString(hitEntity);
                         if (dmg != null)
-                            dmg = Damageable.TryChangeDamage(hitEntity, dmg, origin: user, tool: ent);
+                            dmg = Damageable.TryChangeDamage(hitEntity, dmg * Damageable.UniversalHitscanDamageModifier, origin: user, tool: ent);
 
                         // check null again, as TryChangeDamage returns modified damage values
                         if (dmg != null)
@@ -690,6 +709,14 @@ public abstract partial class SharedGunSystem : EntitySystem
 
                     Audio.PlayPredicted(gun.SoundGunshotModified, gunUid, user);
                     Recoil(user, mapDirection, gun.CameraRecoilScalarModified);
+                    break;
+                case RMCFlamerAmmoProviderComponent flamer:
+                    if (ent != null)
+                        _flamer.ShootFlamer((ent.Value, flamer), (gunUid, gun), user, fromCoordinates, toCoordinates);
+                    break;
+                case RMCSprayAmmoProviderComponent spray:
+                    if (ent != null)
+                        _flamer.ShootSpray((ent.Value, spray), (gunUid, gun), user, fromCoordinates, toCoordinates);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -734,6 +761,7 @@ public abstract partial class SharedGunSystem : EntitySystem
             Audio.PlayPredicted(gun.SoundGunshotModified, gunUid, user);
         }
 
+        Logs.Add(LogType.RMCGunShot, LogImpact.Low, $"{ToPrettyString(user)} shot {ToPrettyString(gunUid)} with {shotProjectiles.Count} projectiles aiming at {toCoordinates}.");
         return shotProjectiles;
     }
 
@@ -761,7 +789,6 @@ public abstract partial class SharedGunSystem : EntitySystem
         {
             var targeted = EnsureComp<TargetedProjectileComponent>(uid);
             targeted.Target = target;
-            targeted.TargetCoordinates = gun.ShootCoordinates;
             Dirty(uid, targeted);
         }
 

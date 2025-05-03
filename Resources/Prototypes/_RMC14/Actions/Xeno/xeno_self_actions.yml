@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: ActionXenoRest
   parent: ActionXenoBase
   name: Rest
@@ -94,7 +94,7 @@
   id: ActionXenoFortifySteelcrest
   parent: ActionXenoFortify
   name: Fortify
-  description: Become much slower, increasing your resistance to direct damage and explosions. Damage is greatly reduced from the direction you are facing. You count as two sizes bigger while fortified and still can attack strcutures or use tail slam, but your slashes do less damage.
+  description: Become much slower, increasing your resistance to direct damage and explosions. Damage is greatly reduced from the direction you are facing. You count as two sizes bigger while fortified and still can attack structures or use tail slam, but your slashes do less damage.
 
 - type: entity
   id: ActionXenoResinWalker
@@ -137,6 +137,7 @@
     event: !type:XenoWordQueenActionEvent
     useDelay: 10
   - type: XenoWordQueenAction
+  - type: RMCDazeableAction
 
 - type: entity
   id: ActionXenoGrowOvipositor
@@ -191,15 +192,16 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: retrieve_egg
     event: !type:XenoRetrieveEggActionEvent
+    checkCanAccess: false
     deselectOnMiss: false
     repeat: true
-    range: 30
+    range: 16
 
 - type: entity
   id: ActionXenoThrowParasite
   parent: ActionXenoBase
   name: Throw Parasite
-  description: Retrieves a parasite from your storage if you have an empty hand. Using this on a parasite on the ground will pickup all nearby parasites. Targeting a tile with a parasite in hand will throw it up to 4 tiles away, where the parasite will be stunned for 5 seconds. Using a parasite in hand will add it to your storage.[color=green]Parasites won't die due to time while you hold or carry them.[/color]
+  description: Retrieves a parasite from your storage if you have an empty hand. Using this on a parasite on the ground will pickup all nearby parasites. Targeting a tile with a parasite in hand will throw it up to 4 tiles away, where the parasite will be stunned for 5 seconds. Using a parasite in hand will add it to your storage. [color=green]Parasites won't die due to time while you hold or carry them.[/color]
   components:
   - type: WorldTargetAction
     itemIconStyle: NoItem
@@ -207,9 +209,10 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: throw_parasite
     event: !type:XenoThrowParasiteActionEvent
+    checkCanAccess: false
     deselectOnMiss: false
     repeat: true
-    range: 30
+    range: 16
     useDelay: 0
 
 - type: entity
@@ -243,7 +246,7 @@
   id: ActionXenoDodge
   parent: ActionXenoBase
   name: Dodge (200)
-  description: Gain a speed boost for 7 seconds. Your speed is doubled near standing enemies.
+  description: Gain a speed boost for 7 seconds and move through allies and enemies unimpeded. Your speed is doubled near standing enemies.
   components:
   - type: InstantAction
     itemIconStyle: NoItem
@@ -265,7 +268,7 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: burrow
     event: !type:XenoBurrowActionEvent
-    range: 15
+    range: 8
     repeat: true
     deselectOnMiss: false
     checkCanAccess: false
@@ -286,3 +289,30 @@
     event: !type:XenoSoakActionEvent
     useDelay: 17
   - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoEmpower
+  name: Empower (50)
+  description: On first activation it, gain a small amount of shield. After 6 seconds or using it again, get empowered based on surrounding enemies (max 6), gaining shield from each. If you empowered from at least 3 targets, you become Super-Empowered, gaing additional damage on melee attacks, and changing how some of your other abilities work.
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_empower
+    event: !type:XenoEmpowerActionEvent
+  - type: ActionBlockIfResting
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoGenerateEggs
+  name: Generate Eggs (50)
+  description: Generate an egg every 30 seconds, which goes into your storage. [color=cyan]Consumes 15 plasma every 2 seconds.[/color]
+  components:
+  - type: InstantAction
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: lay_egg
+    event: !type:XenoGenerateEggsActionEvent

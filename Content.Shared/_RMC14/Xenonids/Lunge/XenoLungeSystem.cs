@@ -1,12 +1,16 @@
-﻿using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Damage.ObstacleSlamming;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Coordinates;
+using Content.Shared.Interaction;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Content.Shared.Weapons.Melee;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
@@ -16,6 +20,8 @@ namespace Content.Shared._RMC14.Xenonids.Lunge;
 
 public sealed class XenoLungeSystem : EntitySystem
 {
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -28,6 +34,8 @@ public sealed class XenoLungeSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private readonly MobStateSystem _mob = default!;
+    [Dependency] private readonly RMCObstacleSlammingSystem _rmcObstacleSlamming = default!;
 
     private EntityQuery<PhysicsComponent> _physicsQuery;
     private EntityQuery<ThrownItemComponent> _thrownItemQuery;
@@ -39,6 +47,7 @@ public sealed class XenoLungeSystem : EntitySystem
 
         SubscribeLocalEvent<XenoLungeComponent, XenoLungeActionEvent>(OnXenoLungeAction);
         SubscribeLocalEvent<XenoLungeComponent, ThrowDoHitEvent>(OnXenoLungeHit);
+        SubscribeLocalEvent<XenoLungeComponent, LandEvent>(OnXenoLungeLand);
 
         SubscribeLocalEvent<XenoLungeStunnedComponent, PullStoppedMessage>(OnXenoLungeStunnedPullStopped);
     }
@@ -67,9 +76,11 @@ public sealed class XenoLungeSystem : EntitySystem
         diff = diff.Normalized() * xeno.Comp.Range;
 
         xeno.Comp.Charge = diff;
+        xeno.Comp.Target = args.Target;
         Dirty(xeno);
 
-        _throwing.TryThrow(xeno, diff, 10, animated: false);
+        _rmcObstacleSlamming.MakeImmune(xeno);
+        _throwing.TryThrow(xeno, diff, 30, animated: false);
 
         if (!_physicsQuery.TryGetComponent(xeno, out var physics))
             return;
@@ -87,12 +98,39 @@ public sealed class XenoLungeSystem : EntitySystem
 
     private void OnXenoLungeHit(Entity<XenoLungeComponent> xeno, ref ThrowDoHitEvent args)
     {
+        if (!_mob.IsAlive(xeno) || HasComp<StunnedComponent>(xeno))
+        {
+            xeno.Comp.Charge = null;
+            xeno.Comp.Target = null;
+            return;
+        }
+
         ApplyLungeHitEffects(xeno, args.Target);
+    }
+
+    private void OnXenoLungeLand(Entity<XenoLungeComponent> ent, ref LandEvent args)
+    {
+        if (ent.Comp.Charge == null && ent.Comp.Target == null)
+            return;
+
+        var target = ent.Comp.Target;
+        ent.Comp.Charge = null;
+        ent.Comp.Target = null;
+        Dirty(ent);
+
+        if (target == null || _pulling.IsPulling(ent))
+            return;
+
+        if (_interaction.InRangeUnobstructed(ent.Owner, target.Value))
+            ApplyLungeHitEffects(ent, target.Value);
     }
 
     private bool ApplyLungeHitEffects(Entity<XenoLungeComponent> xeno, EntityUid targetId)
     {
         // TODO RMC14 lag compensation
+        if (_mobState.IsDead(targetId))
+            return false;
+
         if (_physicsQuery.TryGetComponent(xeno, out var physics) &&
             _thrownItemQuery.TryGetComponent(xeno, out var thrown))
         {
@@ -106,8 +144,7 @@ public sealed class XenoLungeSystem : EntitySystem
         if (_hive.FromSameHive(xeno.Owner, targetId))
             return true;
 
-
-        if(_net.IsServer)
+        if (_net.IsServer)
         {
             _stun.TryParalyze(targetId, xeno.Comp.StunTime, true);
 
@@ -116,14 +153,13 @@ public sealed class XenoLungeSystem : EntitySystem
             Dirty(targetId, stunned);
         }
 
-        _pulling.TryStartPull(xeno, targetId);
-
-        if (_net.IsServer &&
-            HasComp<MarineComponent>(targetId))
+        if (TryComp(xeno, out MeleeWeaponComponent? melee))
         {
-            SpawnAttachedTo(xeno.Comp.Effect, targetId.ToCoordinates());
+            melee.NextAttack = _timing.CurTime;
+            Dirty(xeno, melee);
         }
 
+        _pulling.TryStartPull(xeno, targetId);
         return true;
     }
 

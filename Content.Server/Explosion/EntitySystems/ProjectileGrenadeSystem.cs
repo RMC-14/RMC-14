@@ -1,6 +1,7 @@
 ﻿using Content.Server.Explosion.Components;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared.Weapons.Ranged.Events;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
@@ -74,6 +75,13 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
                 var angleMin = segmentAngle * shootCount;
                 var angleMax = segmentAngle * (shootCount + 1);
                 angle = Angle.FromDegrees(_random.Next(angleMin, angleMax));
+
+                // RMC14
+                var ev = new FragmentIntoProjectilesEvent(contentUid, totalCount, angle, shootCount);
+                RaiseLocalEvent(uid, ref ev);
+
+                if (ev.Handled)
+                    angle = ev.Angle;
                 shootCount++;
             }
 
@@ -81,12 +89,17 @@ public sealed class ProjectileGrenadeSystem : EntitySystem
             // slightly uneven, doesn't really change much, but it looks better
             var direction = angle.ToVec().Normalized();
             var velocity = _random.NextVector2(component.MinVelocity, component.MaxVelocity);
-            _gun.ShootProjectile(contentUid, direction, velocity, uid, null);
+            _gun.ShootProjectile(contentUid, direction, velocity, uid, null, component.ProjectileSpeed);
             _spawned.Add(contentUid);
         }
 
         var clusterEv = new CMClusterSpawnedEvent(_spawned);
         RaiseLocalEvent(uid, ref clusterEv);
+        RaiseLocalEvent(uid,
+            new AmmoShotEvent
+            {
+                FiredProjectiles = _spawned,
+            });
         QueueDel(uid);
     }
 

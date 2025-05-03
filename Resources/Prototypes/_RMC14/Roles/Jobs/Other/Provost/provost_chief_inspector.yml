@@ -1,7 +1,7 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMProvostChiefInspector
-  name: rmc-job-name-provost-chief-inspector
+  name: CMProvostChiefInspector
   description: rmc-job-description-provost-chief-inspector
   playTimeTracker: CMJobProvostChiefInspector
   ranks:
@@ -27,19 +27,6 @@
   hidden: true
 
 - type: entity
-  parent: MarkerBase
-  id: RMCSpawnerProvostChiefInspector
-  name: provost spawner chief inspector
-  suffix: Spawner, Player, High Law Understanding
-  components:
-  - type: Sprite
-    layers:
-    - state: red
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCRandomHumanoidProvostChiefInspector
-
-- type: entity
   id: RMCRandomHumanoidProvostChiefInspector
   name: provost ghost role chief inspector
   suffix: Role, Player, High Law Understanding
@@ -51,34 +38,20 @@
     settings: RMCProvostChiefInspector
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCSettingsGhostRole
   id: RMCProvostChiefInspector
   components:
-  - type: GhostRole
-    name: rmc-ghost-role-information-provost-chief-inspector-name
-    description: rmc-ghost-role-information-provost-chief-inspector-description
-    rules: ghost-role-information-nonantagonist-rules
-    raffle:
-      settings: short
-  - type: Loadout
-    prototypes: [ RMCGearProvostChiefInspector ]
-  - type: Skills
-    skills:
-      RMCSkillCqc: 3
-      RMCSkillEndurance: 3
-      RMCSkillFirearms: 1
-      RMCSkillFireman: 2
-      RMCSkillMeleeWeapons: 1
-      RMCSkillPolice: 2
+  - type: RMCJobSpawner
+    job: CMProvostChiefInspector
 
 - type: startingGear
   id: RMCGearProvostChiefInspector
   equipment:
-    head: RMCHeadBeretProvostSenior # TODO RMC14 UNMC provost command beret
+    head: RMCProvostCommandBeret
     eyes: CMGlassesSecurity
     ears: RMCHeadsetProvost
     jumpsuit: CMJumpsuitProvostSenior # TODO RMC14 provost command uniform
-#    outerClothing: # TODO RMC14 provost jacket, with handcuffs and flash
+    outerClothing: RMCProvostCommandJacketFilled
     gloves: CMHandsBlackMarine # TODO RMC14 black gloves
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostChiefInspector
@@ -101,6 +74,14 @@
   parent: CMIDCardGold # TODO RMC14 provost id
   id: RMCIDCardProvostChiefInspector
   name: provost chief inspector ID card
+  description: Issued to members of the Provost Office.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
+  - type: Clothing
+    slots:
+    - idcard
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
   - type: PresetIdCard
     job: CMProvostChiefInspector

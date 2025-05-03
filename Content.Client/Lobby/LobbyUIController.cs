@@ -46,7 +46,6 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     [UISystemDependency] private readonly ClientInventorySystem _inventory = default!;
     [UISystemDependency] private readonly StationSpawningSystem _spawn = default!;
     [UISystemDependency] private readonly GuidebookSystem _guide = default!;
-    [UISystemDependency] private readonly LoadoutSystem _loadouts = default!;
     [UISystemDependency] private readonly CMArmorSystem _armorSystem = default!;
 
     private CharacterSetupGui? _characterSetup;

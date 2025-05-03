@@ -4,6 +4,6 @@
 [Access(typeof(RMCNamedItemSystem))]
 public sealed partial class RMCNamedItemComponent : Component
 {
-    [DataField, AutoNetworkedField]
+    [DataField]
     public string Name = string.Empty;
 }

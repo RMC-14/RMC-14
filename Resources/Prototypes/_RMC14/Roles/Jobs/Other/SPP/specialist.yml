@@ -1,0 +1,90 @@
+﻿- type: job
+  parent: CMJobBase
+  id: RMCSPPSpecialist
+  name: RMCSPPSpecialist
+  description: rmc-job-description-spp-specialist
+  playTimeTracker: CMJobSPPSpecialist
+  ranks:
+    RMCRankSPPSerzhant: []
+  startingGear: RMCGearSPPSpecialist
+  icon: "RMCJobIconSPPSpecialist"
+  joinNotifyCrew: false
+  accessGroups:
+  - Colonist
+  - HospitalCorpsman
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 1
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+        RMCSkillJtac: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillSpecialistWeapons: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-spp-specialist
+  hidden: true
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidSPPSpecialist
+  name: spp ghost role specialist
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCSPPSpecialist
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCSPPSpecialist
+  components:
+  - type: GhostRole
+    name: RMCSPPSpecialist
+    description: rmc-job-description-spp-specialist
+    rules: rmc-ghost-role-information-spp-rules
+    reregister: false
+    job: RMCSPPSpecialist
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearSPPSpecialist
+  equipment:
+    head: ArmorHelmetSPPHeavy
+    ears: RMCHeadsetSPP
+    jumpsuit: CMJumpsuitSPP
+    outerClothing: RMCArmorSPPHeavySpecialist
+    gloves: RMCHandsVeteranSPP
+    shoes: CMBootsBlackFilled
+    suitstorage: RMCWeaponLMGM60 # TODO RMC14 : Replace with PKP
+    id: RMCIDSPP
+    belt: CMM77BeltFilled # TODO RMC14 : Replace with T73, NP92 or Revolver
+    back: RMCSatchelSPPRifleman
+    pocket1: RMCPouchAutoinjectorFill
+    pocket2: RMCPouchExplosiveFilledC4SPP
+  storage:
+    back:
+    - RMCMotionDetector
+
+- type: playTimeTracker
+  id: CMJobSPPSpecialist
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPSpecialist
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: upp_spec

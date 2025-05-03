@@ -13,7 +13,7 @@
   - type: InteractionOutline
   - type: Clickable
   - type: IconSmooth
-    key: walls
+    key: fences
     base: fence
     mode: CardinalFlags
   - type: Damageable
@@ -44,6 +44,10 @@
   - type: RMCDropshipBlocked
   - type: MinimapColor
     color: "#8d2294ad"
+  - type: DamageOnXenoScissors
+    damage:
+      types:
+        Slash: 50
 
 - type: entity
   parent: CMBaseStructureCorrodible
@@ -56,10 +60,12 @@
   - type: Sprite
     sprite: _RMC14/Structures/fences.rsi
     state: brokenfence0
+  - type: Clickable
+  - type: InteractionOutline
   - type: PlacementReplacement
     key: walls
   - type: IconSmooth
-    key: walls
+    key: fences
     base: brokenfence
     mode: CardinalFlags
   - type: Physics
@@ -80,4 +86,52 @@
     color: "#8d2294ad"
   - type: Construction
     graph: CMFence
+    node: rmcFenceBroken
+  - type: Tag
+    tags: []
+
+- type: entity
+  parent: CMFence
+  id: RMCFenceHybrisa
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_fences.rsi
+    state: fence0
+  - type: Construction
+    graph: RMCFenceHybrisa
+    node: fenceMetal
+
+- type: entity
+  parent: RMCFenceBroken
+  id: RMCFenceHybrisaBroken
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_fences.rsi
+    state: brokenfence0
+  - type: Construction
+    graph: RMCFenceHybrisa
+    node: rmcFenceBroken
+
+- type: entity
+  parent: CMFence
+  id: RMCFenceHybrisaElectric
+  suffix: electric
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_fences_electric.rsi
+    state: fence0
+  - type: Construction
+    graph: RMCFenceHybrisaElectric
+    node: fenceMetal
+
+- type: entity
+  parent: RMCFenceBroken
+  id: RMCFenceHybrisaElectricBroken
+  suffix: electric
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_fences_electric.rsi
+    state: brokenfence0
+  - type: Construction
+    graph: RMCFenceHybrisaElectric
     node: rmcFenceBroken

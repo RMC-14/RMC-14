@@ -6,7 +6,7 @@ namespace Content.Server.Explosion.Components;
 /// <summary>
 /// Grenades that, when triggered, explode into projectiles
 /// </summary>
-[RegisterComponent, Access(typeof(ProjectileGrenadeSystem))]
+[RegisterComponent, Access(typeof(ProjectileGrenadeSystem), typeof(RMCProjectileGrenadeSystem))]
 public sealed partial class ProjectileGrenadeComponent : Component
 {
     public Container Container = default!;

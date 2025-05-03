@@ -29,6 +29,7 @@
   - type: RMCStorageEjectHand
     state: Last
   - type: RMCRefillSolutionOnStore
+  - type: RMCRefillSolutionFromContainerOnStore
 
 - type: entity
   parent: RMCPouchReagentCanister

@@ -46,7 +46,7 @@
             # Requisition
             CMQuartermaster: [1, 1]
             CMCargoTech: [4, 4]
-#            CMMessTech: [1, 1]
+            CMMessTech: [1, 1]
 
             # Marines
             CMSquadLeader: [4, 4]

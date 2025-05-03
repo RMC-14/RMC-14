@@ -158,3 +158,50 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/civilian.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/civilian.rsi
+
+# Kutjevo
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitKutjevoJumper
+  name: kutjevo jumper
+  description: A heavy-duty jumpsuit worn by the workers on Kutjevo.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/kutjevo_jumper.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/kutjevo_jumper.rsi
+
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitKutjevoDrysuit
+  name: kutjevo drysuit
+  description: A heavy-duty drysuit worn by the workers on Kutjevo.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/kutjevo_drysuit.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/kutjevo_drysuit.rsi
+
+# Security
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitCivilianSecurity
+  name: security officer's jumpsuit
+  description: It's made of a slightly sturdier material than standard jumpsuits, to allow for robust protection.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpsuit/security.rsi
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpsuit/security.rsi
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+        color: "#C12D30"
+        sprite: Clothing/Uniforms/Jumpsuit/color.rsi
+      - state: overlay-inhand-left
+      right:
+      - state: inhand-right
+        color: "#C12D30"
+        sprite: Clothing/Uniforms/Jumpsuit/color.rsi
+      - state: overlay-inhand-right

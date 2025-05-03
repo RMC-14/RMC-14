@@ -1,0 +1,44 @@
+﻿- type: entity
+  parent: RMCSpawnerHEFAShrapnelsworn
+  id: RMCSpawnerHEFAShrapnelswornMelee
+  name: hefa shrapnelsworn melee spawner
+  suffix: Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - RMCRandomHumanoidHEFAShrapnelswornMelee
+
+- type: entity
+  parent: RMCRandomHumanoidHEFAShrapnelsworn
+  id: RMCRandomHumanoidHEFAShrapnelswornMelee
+  name: hefa shrapnelsworn melee ghost role
+  suffix: Role
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCHEFAShrapnelswornMelee
+
+- type: randomHumanoidSettings
+  parent: RMCHEFAShrapnelsworn
+  id: RMCHEFAShrapnelswornMelee
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearHEFAShrapnelswornMelee ]
+  - type: RMCJobSpawner
+    loadout: false
+
+- type: startingGear
+  id: RMCGearHEFAShrapnelswornMelee
+  equipment:
+    head: RMCArmorHelmetHEFA
+    jumpsuit: RMCJumpsuitHEFA
+    outerClothing: RMCArmorMercenaryHEFA
+    gloves: CMHandsBlackMarine
+    shoes: CMBootsBlack
+    id: RMCIDCardHEFAShrapnelsworn
+    belt: RMCBeltGrenadeHEFA
+    back: RMCSatchelHEFAFill
+    pocket1: RMCPouchFirstAidERTFill
+    pocket2: RMCPouchExplosiveFilledHEFA
+  inhand:
+  - RMCSwordHEFA
+

@@ -12,7 +12,7 @@
 
 # For Bureau Marshals
 - type: entity
-  parent: CMHeadset
+  parent: RMCHeadsetIcons
   id: RMCHeadsetDistressBureau
   name: bureau earpiece
   description: A sleek headset used by The Colonial Marshal Bureau, crafted in Sol. Low profile and comfortable. No one is above the law.
@@ -24,7 +24,7 @@
 
 # For WeYa civilians
 - type: entity
-  parent: CMHeadset
+  parent: RMCHeadsetIcons
   id: RMCHeadsetDistressWeYa
   name: WeYa corporate headset
   description: A headset commonly worn by WeYa corporate personnel.
@@ -36,7 +36,7 @@
 
 # For WeYa PMC
 - type: entity
-  parent: CMHeadset
+  parent: RMCHeadsetIcons
   id: RMCHeadsetDistressPMC
   name: PMC headset
   description: A special headset used by corporate personnel.
@@ -46,15 +46,44 @@
       key_slots:
       - CMEncryptionKeyCommon
       - RMCEncryptionKeyLiaison
+  - type: GrantMarineIcons
+  - type: GrantSquadLeaderTracker
+  - type: GrantTacMapAlert
 
-# For Dutchs Dozen/Freelancer
 - type: entity
-  parent: CMHeadset
-  id: RMCHeadsetDistressFreelancer
-  name: Freelancer's headset
+  parent: RMCHeadsetDistressPMC
+  id: RMCHeadsetDistressPMCLeader
+  suffix: Leader
+  description:
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 2
+
+- type: entity
+  parent: RMCHeadsetIcons
+  id: RMCHeadsetDistressPMCDirector
+  name: PMC headset
+  description: A special headset used by corporate personnel.
+  suffix: Director
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyCommon
+      - RMCEncryptionKeyLiaison
+  - type: GrantMarineIcons
+  - type: GrantTacMapAlert
+  - type: RMCHeadset
+    radioTextIncrease: 3
+
+# For Duke's Dozen/Freelancer
+- type: entity
+  parent: RMCHeadsetIcons
+  id: RMCHeadsetDistressDukes
+  name: Duke's Dozen headset
   description: A special headset used by small groups of trained operatives. Or terrorists.
   components:
   - type: ContainerFill
     containers:
       key_slots:
-      - RMCEncryptionKeyFreelancer
+      - RMCEncryptionKeyDukes

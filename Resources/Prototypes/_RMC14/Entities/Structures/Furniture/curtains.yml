@@ -45,6 +45,18 @@
       map: ["enum.DoorVisualLayers.Base"]
 
 - type: entity
+  parent: RMCCurtainMedical
+  id: RMCCurtainMedicalOpen
+  suffix: Open
+  components:
+  - type: Physics
+    canCollide: false
+  - type: Occluder
+    enabled: false
+  - type: Door
+    state: Open
+
+- type: entity
   parent: RMCCurtainBase
   id: RMCCurtainShower
   name: shower curtain

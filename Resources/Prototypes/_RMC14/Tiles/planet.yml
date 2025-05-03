@@ -337,6 +337,21 @@
     collection: FootstepWood
 
 - type: tile
+  parent: CMPlanetMattedGrass
+  id: CMPlanetMattedGrass2
+  sprite: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_1.png
+
+- type: tile
+  parent: CMPlanetMattedGrass
+  id: CMPlanetMattedGrass3
+  sprite: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_mud.png
+
+- type: tile
+  parent: CMPlanetMattedGrass
+  id: CMPlanetMattedGrass4
+  sprite: /Textures/_RMC14/Tiles/planet/auto_strata_grass/grass_mud_alt.png
+
+- type: tile
   parent: CMPlanetBase
   id: CMPlanetRunedSandstone
   name: runed sandstone
@@ -620,6 +635,21 @@
 
 - type: tile
   parent: CMPlanetBase
+  id: RCMPlanetSnow0
+  sprite: /Textures/_RMC14/Tiles/planet/snow2/snow_b_0.png
+  variants: 8
+  placementVariants:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+
+- type: tile
+  parent: CMPlanetBase
   id: RCMPlanetSnow1
   name: snow
   sprite: /Textures/_RMC14/Tiles/planet/snow2/snow_1.png
@@ -842,8 +872,15 @@
     North: /Textures/_RMC14/Tiles/planet/auto_shale/layer1_double_edge.png
     West: /Textures/_RMC14/Tiles/planet/auto_shale/layer1_double_edge.png
   weedsSpreadable: false
+  semiWeedable: true
 
 - type: tile
   parent: RMCPlanetShale
   id: RMCPlanetShaleAlt
   sprite: /Textures/_RMC14/Tiles/planet/auto_shale/shale_2.png
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetTatami
+  name: tatami flooring
+  sprite: /Textures/_RMC14/Tiles/planet/interior/tatami.png

@@ -67,6 +67,7 @@ public sealed class RMCSuicideSystem : EntitySystem
                     BreakOnMove = true,
                     NeedHand = true,
                     BreakOnHandChange = true,
+                    ForceVisible = true,
                 };
 
                 if (_doAfter.TryStartDoAfter(doAfter))

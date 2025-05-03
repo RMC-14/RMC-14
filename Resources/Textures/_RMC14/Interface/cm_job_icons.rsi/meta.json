@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi",
+  "copyright": "github.com/cmss13-devs/cmss13/blob/56fbf11f797463f88aac015cafef04d6d99499ec/icons/mob/hud/marine_hud.dmi, upp_co upp_com upp_commed upp_comsl upp_doc upp_lt upp_med upp_mp upp_pvt upp_sapper upp_sl upp_sl_a upp_slt upp_spec upp_synth upp_vc upp_xo edited by Sigma Draconis.",
   "size": {
     "x": 16,
     "y": 16
@@ -39,6 +39,12 @@
     },
     {
       "name": "hudsquad_mp"
+    },
+    {
+      "name": "hudsquad_mortar"
+    },
+    {
+      "name": "hudsquad_load"
     },
     {
       "name": "hudsquad_mpcadet"
@@ -246,6 +252,15 @@
     },
     {
       "name": "pmc_md"
+    },
+    {
+      "name": "pmc_gun"
+    },
+    {
+      "name": "pmc_sg"
+    },
+    {
+      "name": "pmc_spec"
     },
     {
       "name": "upp_med"

@@ -1,4 +1,3 @@
-using Content.Shared._RMC14.Standing;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Rejuvenate;
@@ -61,6 +60,9 @@ public sealed class RMCSlowSystem : EntitySystem
 
     public bool TrySuperSlowdown(EntityUid ent, TimeSpan duration, bool refresh = true, bool ignoreDurationModifier = false)
     {
+        if (_timing.ApplyingState)
+            return false;
+
         if (!TryComp<RMCSpeciesSlowdownModifierComponent>(ent, out var slow))
             return false;
 

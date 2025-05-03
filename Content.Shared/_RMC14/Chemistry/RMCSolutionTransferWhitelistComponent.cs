@@ -10,6 +10,9 @@ public sealed partial class RMCSolutionTransferWhitelistComponent : Component
     [DataField, AutoNetworkedField]
     public LocId Popup;
 
-    [DataField(required: true), AutoNetworkedField]
-    public EntityWhitelist Whitelist = new();
+    [DataField, AutoNetworkedField]
+    public EntityWhitelist? SourceWhitelist;
+
+    [DataField, AutoNetworkedField]
+    public EntityWhitelist? TargetWhitelist;
 }

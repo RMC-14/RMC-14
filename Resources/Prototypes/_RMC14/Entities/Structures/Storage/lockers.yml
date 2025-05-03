@@ -18,6 +18,11 @@
     - state: welded
       visible: false
       map: ["enum.WeldableLayers.BaseWelded"]
+    - state: paper
+      visible: false
+      sprite: Structures/Storage/closet_labels.rsi
+      offset: "-0.065,0"
+      map: [ "enum.PaperLabelVisuals.Layer" ]
   - type: Appearance
   - type: LockVisuals
   - type: EntityStorageVisuals
@@ -34,6 +39,17 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/commander.rsi
+  - type: AccessReader
+    access: [["CMAccessCO"]]
+
+- type: entity
+  parent: CMLockerBase
+  id: CMLockerCommanderSecure
+  name: commanding officer's secure box
+  description: A safe for the Commanding Officer to store any equipment they need to have ready at a moment's notice. There's a note inside saying that whatever was inside it before was moved out.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/safe.rsi
   - type: AccessReader
     access: [["CMAccessCO"]]
 
@@ -69,27 +85,46 @@
 
 - type: entity
   parent: CMLockerBase
+  id: RMCLockerGunBase
+  name: gun cabinet
+  description: It's an immobile card-locked storage unit.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/armorylocker.rsi
+  - type: AccessReader
+    access: [["CMAccessArmory"]]
+  - type: InsertBlacklist
+    blacklist:
+      components:
+      - Xeno
+      - Marine
+
+- type: entity
+  parent: RMCLockerGunBase
   id: RMCLockerGunBlue
   name: riot control equipment Cabinet
   components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Storage/Lockers/armorylocker.rsi
-  - type: AccessReader
-    access: [["CMAccessArmory"]]
-
+  - type: RMCUnlockOnAlertLevel
+    level: Blue
 
 - type: entity
-  parent: CMLockerBase
+  parent: RMCLockerGunBase
+  id: RMCLockerGun
+  name: gun cabinet
+  description: It's an immobile card-locked storage unit.
+  suffix: Colony
+  components:
+  - type: AccessReader
+    access: [["CMAccessColonyArmory"]]
+  - type: Destructible
+    thresholds: []
+
+- type: entity
+  parent: RMCLockerGunBase
   id: RMCLockerGunRed
   name: red alert gun cabinet
   components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Storage/Lockers/armorylocker.rsi
-  - type: AccessReader
-    access: [["CMAccessArmory"]]
   - type: RMCUnlockOnAlertLevel
-  - type: Destructible
-    thresholds: []
 
 - type: entity
   parent: CMLockerBase
@@ -118,6 +153,16 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/medical.rsi
+  - type: AccessReader
+    access: [["CMAccessMedical"]]
+
+- type: entity
+  parent: CMLockerBase
+  id: CMLockerMedicalWhite
+  name: medical locker
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/medical_white.rsi
   - type: AccessReader
     access: [["CMAccessMedical"]]
 
@@ -190,16 +235,6 @@
     sprite: _RMC14/Structures/Storage/Lockers/cmo.rsi
   - type: AccessReader
     access: [["CMAccessCMO"]]
-
-- type: entity
-  parent: CMLockerBase
-  id: CMLockerFridge
-  name: fridge
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Storage/Lockers/fridge.rsi
-  - type: AccessReader
-    access: [["CMAccessKitchen"]]
 
 # Engineering
 - type: entity

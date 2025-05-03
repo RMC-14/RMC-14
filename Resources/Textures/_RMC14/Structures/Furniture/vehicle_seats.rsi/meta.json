@@ -34,6 +34,10 @@
     {
       "name": "chair_buckled_overlay",
       "directions": 4
+    },
+    {
+      "name": "vehicle_seat",
+      "directions": 4
     }
   ]
 }

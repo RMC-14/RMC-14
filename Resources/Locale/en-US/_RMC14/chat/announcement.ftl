@@ -33,7 +33,6 @@ rmc-announcement-ares-map = [color=#CECECE][font size=16][bold]UNS Almayer[/bold
 
 rmc-announcement-cooldown = Please allow at least {$seconds} seconds to pass between announcements
 
-
 rmc-announcement-dropship-message = [color=#CECECE][font size=16][bold]Dropship Alert[/bold][/font][/color][color=red][font size=16][bold]
 
     {$message}[/bold][/font][/color]
@@ -44,3 +43,17 @@ rmc-announcement-emergency-dropship-crash = [font size=14][bold][color=#CECECE]E
 rmc-announcement-delta = [color=#CECECE][font size=16][bold]SELF-DESTRUCT SYSTEMS ACTIVE[/bold][/font][/color][color=red][font size=16][bold]
 
      DANGER, THE EMERGENCY DESTRUCT SYSTEM IS NOW ACTIVATED. PROCEED TO THE SELF-DESTRUCT CHAMBER FOR CONTROL ROD INSERTION.[/bold][/font][/color]
+
+rmc-announcement-general-quarters = ATTENTION! GENERAL QUARTERS. ALL HANDS, MAN YOUR BATTLESTATIONS.
+
+rmc-announcement-dropship-hijack = Unscheduled dropship departure detected from operational area. Hijack likely. Shutting down autopilot.
+
+rmc-announcement-dropship-hijack-hive = The Queen has commanded the metal bird to depart for the metal hive in the sky! Rejoice!
+
+rmc-announcement-ares-command = [color=#CECECE][font size=16][bold]ARES v3.2[/bold][/font][/color][color=red][font size=16]
+
+    {$message}[/font][/color]
+
+rmc-announcement-unidentified-lifesigns = [color=#CECECE][font size=16][bold]Unidentifled lifesigns[/bold][/font][/color][color=red][font size=16][bold]
+
+    Unidentified lifesigns ({$count}) detected onboard the dropship {$name}. Recommendation: lockdown of exterior access ports, including ducting and ventilation.[/bold][/font][/color]

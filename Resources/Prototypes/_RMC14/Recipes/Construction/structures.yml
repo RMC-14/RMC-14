@@ -422,6 +422,27 @@
 
 - type: construction
   parent: RMC
+  id: RMCGrilleElectrified
+  name: grille
+  graph: RMCGrilleElectrified
+  startNode: start
+  targetNode: GrilleElectrified
+  category: construction-category-cm-structures
+  description: A dark reinforced mesh grille with warning stripes, equipped with Tesla-like coils to regulate high voltage current. It is highly electrified and dangerous when powered.
+  icon:
+    sprite: _RMC14/Structures/Walls/electric_grille.rsi
+    state: grille
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+      failIfSpace: false
+
+
+- type: construction
+  parent: RMC
   id: CMFence
   name: fence
   graph: CMFence

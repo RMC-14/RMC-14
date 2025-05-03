@@ -1,0 +1,248 @@
+- type: entity
+  id: RMCTelecomBusMainframe
+  name: Bus Mainframe
+  description: A mighty piece of hardware used to send massive amounts of data quickly.
+  placement:
+    mode: SnapgridCenter
+  components: #has no collission in 13 they have invisible walls behind it
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Corrodible
+    isCorrodible: false
+  - type: ApcPowerReceiver
+    powerLoad: 250
+    needsPower: true
+  - type: RMCPowerReceiver
+    idleLoad: 5
+    activeLoad: 10
+    channel: Equipment
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/AIStuff/telecommunication.rsi
+    layers:
+    - state: bus_off
+    - state: bus
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+
+- type: entity
+  id: RMCTelecomReceiver
+  parent: RMCTelecomBusMainframe
+  name: Subspace Receiver
+  description: This machine has a dish-like shape and green lights. It is designed to detect and process subspace radio activity.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/AIStuff/telecommunication.rsi
+    layers:
+    - state: broadcast_receiver_off
+    - state: broadcast_receiver
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  id: RMCTelecomBroadcaster #gets put ontop of stuff
+  parent: RMCTelecomBusMainframe
+  name: Subspace Broadcaster
+  description: A dish-shaped machine used to broadcast processed subspace signals.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/AIStuff/telecommunication.rsi
+    layers:
+    - state: broadcaster_off
+    - state: broadcaster
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  id: RMCTelecomRelay #gets put ontop of stuff
+  parent: RMCTelecomBusMainframe
+  name: Telecomms Relay
+  description: A mighty piece of hardware used to send massive amounts of data far away.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/AIStuff/telecommunication.rsi
+    layers:
+    - state: relay_off
+    - state: relay
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  id: RMCTelecomProcessorUnit #gets put ontop of stuff
+  parent: RMCTelecomBusMainframe
+  name: Processor Unit
+  description: This machine is used to process large quantities of information.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/AIStuff/telecommunication.rsi
+    layers:
+    - state: processor_off
+    - state: processor
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  id: RMCTelecomHub
+  parent: RMCTelecomBusMainframe
+  name: Telecommunication Hub
+  description: A mighty piece of hardware used to send/receive massive amounts of data.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/AIStuff/telecommunication.rsi
+    layers:
+    - state: hub_off
+    - state: hub
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  id: RMCTelecomOSServerBox
+  parent: RMCTelecomBusMainframe
+  name: We-Ya OS server box
+  description: We-Ya OS is a proprietary operating system used by the Company to run most all of their servers, banking, and management systems. A code leak in 2144 led some amateur hackers to believe that We-Ya OS is loosely based on the 2017 release of TempleOS. But the Company has refuted these claims.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/AIStuff/telecommunication.rsi
+    layers:
+    - state: WY_server_off
+    - state: WY_server_on
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  id: RMCTelecomBlackBox
+  parent: RMCTelecomBusMainframe
+  name: Blackbox Recorder
+  description: The blackbox recorder is a device used to record data from the ship's systems. It is designed to be tamper-proof and can withstand extreme conditions. #custom
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/AIStuff/telecommunication.rsi
+    layers:
+    - state: blackbox
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Corrodible
+    isCorrodible: true
+
+- type: entity
+  id: RMCTelecomSensorComputer
+  parent: RMCTelecomBusMainframe
+  name: sensor computer
+  description: The IBM series 10 computer retrofitted to work as a sensor computer for the ship. While somewhat dated it still serves its purpose.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/almayer_props.rsi
+    layers:
+    - state: sensor_comp1_off
+    - state: sensor_comp1
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Corrodible
+    isCorrodible: true
+
+- type: entity
+  id: RMCTelecomSensorComputer2
+  parent: RMCTelecomBusMainframe
+  name: sensor computer
+  description: The IBM series 10 computer retrofitted to work as a sensor computer for the ship. While somewhat dated it still serves its purpose.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/almayer_props.rsi
+    layers:
+    - state: sensor_comp2_off
+    - state: sensor_comp2
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Corrodible
+    isCorrodible: true
+
+- type: entity
+  id: RMCTelecomSensorComputer3
+  parent: RMCTelecomBusMainframe
+  name: sensor computer
+  description: The IBM series 10 computer retrofitted to work as a sensor computer for the ship. While somewhat dated it still serves its purpose.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/almayer_props.rsi
+    layers:
+    - state: sensor_comp3_off
+    - state: sensor_comp3
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Corrodible
+    isCorrodible: true
+
+- type: entity
+  id: RMCTelecomServerRack
+  parent: RMCTelecomBusMainframe
+  name: server rack
+  description: The server rack is a piece of hardware used to house servers and other computer equipment. It is designed to be modular and can be easily expanded or reconfigured. #custom
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/AIStuff/telecommunication.rsi
+    layers:
+    - state: rackframe
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Corrodible
+    isCorrodible: true

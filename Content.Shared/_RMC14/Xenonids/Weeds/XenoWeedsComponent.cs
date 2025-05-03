@@ -31,6 +31,13 @@ public sealed partial class XenoWeedsComponent : Component
     [DataField, AutoNetworkedField]
     public List<EntityUid> Spread = new();
 
+    /// <summary>
+    /// All anchored entities with Weedable component adjacent to this entity
+    /// are added here. 
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public List<EntityUid> LocalWeeded = new();
+
     [DataField, AutoNetworkedField]
     public TimeSpan MinRandomDelete = TimeSpan.FromSeconds(9);
 

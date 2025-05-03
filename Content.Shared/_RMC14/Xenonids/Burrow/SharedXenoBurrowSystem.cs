@@ -1,11 +1,12 @@
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Atmos;
-using Content.Shared._RMC14.NightVision;
+using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
-using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Coordinates;
+using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
@@ -18,14 +19,13 @@ using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Network;
 using Robust.Shared.Physics;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
-using System.Diagnostics.CodeAnalysis;
-using Robust.Shared.Network;
-using Robust.Shared.Physics.Components;
 
 namespace Content.Shared._RMC14.Xenonids.Burrow;
 
@@ -45,12 +45,12 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
     [Dependency] private readonly IGameTiming _time = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
 
     public override void Initialize()
     {
@@ -61,6 +61,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
         SubscribeLocalEvent<XenoBurrowComponent, PreventCollideEvent>(PreventCollision);
         SubscribeLocalEvent<XenoBurrowComponent, InteractionAttemptEvent>(PreventInteraction);
         SubscribeLocalEvent<XenoBurrowComponent, RMCIgniteAttemptEvent>(OnBurrowedCancel);
+        SubscribeLocalEvent<XenoBurrowComponent, AttackAttemptEvent>(OnBurrowedCancel);
 
         SubscribeLocalEvent<XenoBurrowComponent, XenoBurrowActionEvent>(OnBeginBurrow);
         SubscribeLocalEvent<XenoBurrowComponent, XenoBurrowDownDoAfter>(OnFinishBurrow);
@@ -233,6 +234,8 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
             if (!CanTunnelPopup(burrower, target, out var distance))
                 return;
             var duration = new TimeSpan(0, 0, (int)distance);
+            if (duration < burrower.Comp.MinimumTunnelTime)
+                duration = burrower.Comp.MinimumTunnelTime;
             var moveEv = new XenoBurrowMoveDoAfter(_entities.GetNetCoordinates(target));
             var moveDoAfterArgs = new DoAfterArgs(_entities, burrower, duration, moveEv, burrower) { RequireCanInteract = false, DuplicateCondition = DuplicateConditions.SameEvent };
 
@@ -297,6 +300,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
 
         burrower.Comp.ForcedUnburrowAt = _time.CurTime + burrower.Comp.BurrowMaxDuration;
         burrower.Comp.NextBurrowAt = _time.CurTime + burrower.Comp.BurrowCooldown;
+        _rmcPulling.TryStopAllPullsFromAndOn(burrower);
         Dirty(burrower);
 
         var ev = new BurrowedEvent(true);
@@ -412,6 +416,7 @@ public abstract class SharedXenoBurrowSystem : EntitySystem
         burrower.Comp.Tunneling = false;
         burrower.Comp.NextTunnelAt = null;
         burrower.Comp.ForcedUnburrowAt = null;
+        _rmcPulling.TryStopAllPullsFromAndOn(burrower);
         Dirty(burrower);
         if (_net.IsServer)
             _transform.SetCoordinates(burrower, _entities.GetCoordinates(args.TargetCoords));

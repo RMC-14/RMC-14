@@ -29,6 +29,9 @@
   - type: Clickable
   - type: InteractionOutline
   - type: OrbitalCannon
+    warheadTypes:
+    - RMCOrbitalCannonWarheadExplosive
+    - RMCOrbitalCannonWarheadCluster
   - type: Appearance
   - type: GenericVisualizer # TODO RMC14 animations
     visuals:
@@ -48,9 +51,11 @@
     anchored: true
   - type: Physics
     bodyType: Static
+    canCollide: false
   - type: Sprite
     sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_fuel
+    drawdepth: SmallObjects
   - type: Clickable
   - type: InteractionOutline
   - type: PowerLoaderGrabbable
@@ -70,9 +75,11 @@
     anchored: true
   - type: Physics
     bodyType: Static
+    canCollide: false
   - type: Sprite
     sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_warhead1
+    drawdepth: SmallObjects
   - type: OrbitalCannonWarhead
   - type: Clickable
   - type: InteractionOutline
@@ -86,12 +93,7 @@
   id: RMCOrbitalCannonWarheadExplosive
   name: HE orbital warhead
   components:
-  - type: Transform
-    anchored: true
-  - type: Physics
-    bodyType: Static
   - type: Sprite
-    sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_warhead_1
   - type: OrbitalCannonWarhead
     explosion: RMCOrbitalCannonExplosionExplosive
@@ -101,12 +103,7 @@
   id: RMCOrbitalCannonWarheadIncendiary
   name: incendiary orbital warhead
   components:
-  - type: Transform
-    anchored: true
-  - type: Physics
-    bodyType: Static
   - type: Sprite
-    sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_warhead_2
   - type: OrbitalCannonWarhead
     explosion: RMCOrbitalCannonExplosionIncendiary
@@ -116,12 +113,7 @@
   id: RMCOrbitalCannonWarheadCluster
   name: cluster orbital warhead
   components:
-  - type: Transform
-    anchored: true
-  - type: Physics
-    bodyType: Static
   - type: Sprite
-    sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_warhead_3
   - type: OrbitalCannonWarhead
     explosion: RMCOrbitalCannonExplosionCluster
@@ -139,8 +131,8 @@
   - type: RandomSpawner
     prototypes:
     - RMCOrbitalCannonWarheadExplosive
-#    - RMCOrbitalCannonWarheadCluster # TODO RMC14
-    - RMCOrbitalCannonWarheadIncendiary
+    - RMCOrbitalCannonWarheadCluster
+#    - RMCOrbitalCannonWarheadIncendiary # TODO RMC14 incend
 
 - type: entity
   parent: MarkerBase
@@ -198,7 +190,19 @@
   placement:
     mode: SnapgridCenter
   components:
-  - type: OrbitalCannonExplosion # TODO: RMC14
+  - type: OrbitalCannonExplosion
+    steps:
+    - type: RMCOBXenoTunnel
+      total: 6500
+      slope: 100
+      max: 350
+      delay: 1
+      times: 75
+      timesPer: 3
+      delayPer: 0.4
+      spread: 12
+      checkProtectionPer: true
+      explosionEffect: RMCExplosionEffectClusterOB
   - type: WarpPoint
     location: 1 orbital bombardment
 
@@ -235,6 +239,8 @@
   - type: Transform
     anchored: true
     rot: 90
+  - type: Physics
+    bodyType: Static
   - type: Sprite
     sprite: _RMC14/Structures/objects.rsi
     state: ob_chair
@@ -281,3 +287,25 @@
   - type: Tag
     tags:
     - HideContextMenu
+
+# Effects
+- type: entity
+  id: RMCExplosionEffectClusterOB
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 2.5
+  - type: CMExplosionEffect
+    explosion: null
+    shockWave: RMCExplosionEffectClusterOBShockWave
+
+- type: entity
+  id: RMCExplosionEffectClusterOBShockWave
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 1
+  - type: RMCExplosionShockWave
+    falloffPower: 50
+    sharpness: 25
+    width: 0.7

@@ -11,6 +11,7 @@ using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
+using Robust.Shared.Map;
 using static Content.Shared._RMC14.Webbing.WebbingTransferComponent;
 
 namespace Content.Shared._RMC14.Webbing;
@@ -29,6 +30,7 @@ public abstract class SharedWebbingSystem : EntitySystem
     {
         SubscribeLocalEvent<ClothingBlockWebbingComponent, BeingEquippedAttemptEvent>(OnBlockWebbingBeingEquippedAttempt);
 
+        SubscribeLocalEvent<WebbingClothingComponent, MapInitEvent>(OnWebbingClothingMapInit);
         SubscribeLocalEvent<WebbingClothingComponent, InteractUsingEvent>(OnWebbingClothingInteractUsing);
         SubscribeLocalEvent<WebbingClothingComponent, InventoryRelayedEvent<GetVerbsEvent<EquipmentVerb>>>(GetRelayedVerbs);
         SubscribeLocalEvent<WebbingClothingComponent, GetVerbsEvent<EquipmentVerb>>(OnWebbingClothingGetEquipmentVerbs);
@@ -55,6 +57,15 @@ public abstract class SharedWebbingSystem : EntitySystem
             args.Reason = "rmc-webbing-cannot-wear-with-webbing";
             args.Cancel();
         }
+    }
+
+    private void OnWebbingClothingMapInit(Entity<WebbingClothingComponent> ent, ref MapInitEvent args)
+    {
+        if (ent.Comp.StartingWebbing is not { } starting)
+            return;
+
+        var webbing = Spawn(starting, MapCoordinates.Nullspace);
+        Attach(ent, webbing, null, out _);
     }
 
     private void OnWebbingClothingInteractUsing(Entity<WebbingClothingComponent> clothing, ref InteractUsingEvent args)
@@ -170,7 +181,7 @@ public abstract class SharedWebbingSystem : EntitySystem
         }
     }
 
-    public bool Attach(Entity<WebbingClothingComponent> clothing, EntityUid webbing, EntityUid user, out bool handled)
+    public bool Attach(Entity<WebbingClothingComponent> clothing, EntityUid webbing, EntityUid? user, out bool handled)
     {
         handled = false;
         if (!TryComp(webbing, out WebbingComponent? webbingComp) ||
@@ -191,7 +202,9 @@ public abstract class SharedWebbingSystem : EntitySystem
                 if (HasComp<ClothingBlockWebbingComponent>(slot.ContainedEntity))
                 {
                     handled = true;
-                    _popup.PopupClient(Loc.GetString("rmc-webbing-cannot-wear-with-webbing"), webbing, user);
+
+                    if (user != null)
+                        _popup.PopupClient(Loc.GetString("rmc-webbing-cannot-wear-with-webbing"), webbing, user);
                     return false;
                 }
             }

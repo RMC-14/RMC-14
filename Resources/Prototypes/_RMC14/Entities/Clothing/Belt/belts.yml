@@ -90,6 +90,24 @@
       Classic: _RMC14/Objects/Clothing/Belt/shotgun/jungle-classic.rsi
 
 - type: entity
+  parent: RMCM276ShotgunShellLoadingRig
+  id: RMCM276ShotgunShellLoadingRigFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 2
+    - id: CMShellShotgunSlugs
+      amount: 3
+    - id: CMShellShotgunFlechette
+      amount: 3
+    - id: CMShellShotgunIncendiary
+      amount: 3
+    - id: CMShellShotgunIncendiaryBuckshot
+      amount: 3
+
+- type: entity
   parent: CMBeltBaseStorage
   id: CMBeltUtility
   name: M276 pattern toolbelt rig
@@ -158,7 +176,6 @@
       - RMCExplosiveBreachingCharge
       - RodMetal1
       - RMCNailgunCompact
-      - RMCExplosivePlastic
       #     - # TODO circuit board, stock parts
       components:
       - Welder
@@ -307,7 +324,7 @@
       - CMBurnKit
       #      - # TODO RMC14 splints
       - CMAutoInjector
-      - CMRollerBed
+      - CMRollerItem
       - BodyBag
       #      - # TODO RMC14 latex gloves
       - Hypospray
@@ -316,53 +333,6 @@
       - Defibrillator
       - Pill
   - type: FixedItemSizeStorage
-
-- type: entity
-  parent: CMBeltMedical
-  id: CMBeltMedicBag
-  name: M276 pattern lifesaver bag
-  description: The M276 is the standard load-bearing equipment of the UNMC. This configuration mounts a duffel bag filled with a range of injectors and light medical supplies, and is common among medics.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/medicbag/jungle-classic.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/medicbag/jungle-classic.rsi
-  - type: Storage
-    maxItemSize: Small
-    grid:
-    - 0,0,13,5 # 21 slots
-    whitelist:
-      tags:
-      - DiscreteHealthAnalyzer
-      - BodyBag
-      - Bottle
-      - PillCanister
-      - Syringe
-      - CMAutoInjector
-      - Brutepack
-      - CMBloodPack
-      - Gauze
-      - Ointment
-      - CMOintment
-      - CMTraumaKit
-      - CMBurnKit
-      #      - # TODO RMC14 splints
-      - RMCGlovesLatex
-      components:
-      - Defibrillator
-      - Pill
-  - type: FixedItemSizeStorage
-  - type: IgnoreContentsSize
-    items:
-      tags:
-      - PillCanister
-  - type: ItemCamouflage
-    camouflageVariations:
-      Jungle: _RMC14/Objects/Clothing/Belt/medicbag/jungle-classic.rsi
-      Snow: _RMC14/Objects/Clothing/Belt/medicbag/snow-urban.rsi
-      Desert: _RMC14/Objects/Clothing/Belt/medicbag/desert.rsi
-      Urban: _RMC14/Objects/Clothing/Belt/medicbag/snow-urban.rsi
-      Classic: _RMC14/Objects/Clothing/Belt/medicbag/jungle-classic.rsi
 
 - type: entity
   parent: CMBeltBaseStorage
@@ -388,7 +358,7 @@
   - type: Storage
     maxItemSize: Huge
     grid:
-    - 0,0,9,1
+    - 0,0,17,1
     whitelist:
       components:
       - MortarShell
@@ -403,7 +373,7 @@
         components:
         - Gun
     - popup: rmc-storage-limit-max-shells
-      count: 4
+      count: 8
       whitelist:
         components:
         - MortarShell
@@ -623,21 +593,32 @@
   description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
     layers:
     - state: icon
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: m1984 # TODO RMC14 per-gun underlay
-      map: [ "enum.CMHolsterLayers.Fill" ]
-      visible: false
-    - sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
-      state: icon-front
+      state: _m77
+      map: [ "_m77_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m1984
+      map: [ "m1984_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: mk80
+      map: [ "mk80_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: b92fs
+      map: [ "b92fs_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: highpower
+      map: [ "mk45_fill" ]
+    - state: icon-front
+      map: [ "holstered" ]
     - state: half
       map: [ "openLayer" ]
     - state: full
       map: [ "closedLayer" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
     slots:
     - suitStorage
     - belt
@@ -673,8 +654,46 @@
   - type: Tag
     tags:
     - RMCGeneralPistolHolster
+  - type: ItemMapper
+    spriteLayers:
+    - holstered
+    - _m77_fill
+    - m1984_fill
+    - mk80_fill
+    - b92fs_fill
+    - mk45_fill
+    mapLayers:
+      holstered:
+        whitelist:
+          tags:
+          - Sidearm
+      _m77_fill:
+        whitelist:
+          tags:
+          - RMCWeaponPistolM77
+      m1984_fill:
+        whitelist:
+          tags:
+          - CMWeaponPistolM1984
+      mk80_fill:
+        whitelist:
+          tags:
+          - RMCMK80
+      b92fs_fill:
+        whitelist:
+          tags:
+          - RMCb92fs
+      mk45_fill:
+        whitelist:
+          tags:
+          - RMCMK45
   - type: ItemCamouflage
-    camouflageVariations: { }
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
+      Desert: _RMC14/Objects/Clothing/Belt/holster_pistol/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Belt/holster_pistol/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
+      Urban: _RMC14/Objects/Clothing/Belt/holster_pistol/classic-jungle-urban.rsi
 
 - type: Tag
   id: RMCGeneralPistolHolster
@@ -748,14 +767,16 @@
     layers:
     - state: icon
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-      state: m63
-      map: [ "enum.CMItemSlotsLayers.Fill" ] # This one's fine to use the CMItemSlots visualizer
+      state: m63 # TODO RMC14 per-gun underlay
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
       visible: false
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/holster_smg.rsi
     slots:
     - suitStorage
     - belt
+  - type: Item
+    size: Large
   - type: ContainerContainer
     containers:
       pouch: !type:ContainerSlot
@@ -768,10 +789,12 @@
         whitelist:
           tags:
           - RMCWeaponSMGM63
+          - RMCWeaponSMGM63B2
   - type: CMHolster
     whitelist:
       tags:
       - RMCWeaponSMGM63
+      - RMCWeaponSMGM63B2
   - type: CMItemSlots
   - type: Tag
     tags:
@@ -849,6 +872,7 @@
     whitelist:
       tags:
       - RMCWeaponSMGM63
+      - RMCWeaponSMGM63B2
       - CMMagazineSmg
   - type: FixedItemSizeStorage
   - type: LimitedStorage
@@ -923,13 +947,51 @@
 
 - type: entity
   parent: RMCMatebaBelt
+  id: RMCMatebaBeltLuxurious
+  name: luxurious M276 pattern Mateba holster rig
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the powerful Mateba magnum revolver, along with five small pouches for speedloaders. This specific one is tinted black and engraved with gold, heavily customized for a high-ranking official.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/amateba_belt.rsi
+    layers:
+    - state: amateba
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      visible: false
+    - state: icon
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    slots:
+    - suitStorage
+    - belt
+    sprite: _RMC14/Objects/Clothing/Belt/amateba_belt.rsi
+
+- type: entity
+  parent: RMCMatebaBeltLuxurious
+  id: RMCMatebaBeltLuxuriousFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 2
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 3
+    - id: RMCWeaponRevolverMatebaGold
+
+- type: entity
+  parent: RMCMatebaBelt
   id: RMCMatebaBeltFilled
   suffix: Filled
   components:
   - type: StorageFill
     contents:
-    - id: RMCSpeedLoaderMateba
-      amount: 5
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 2
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 3
     - id: RMCWeaponRevolverMateba
 
 - type: entity
@@ -1069,3 +1131,145 @@
 
 - type: Tag
   id: RMCBeltSOCOM
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCD50WinterWyvernBeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolD50WinterWyvernHI
+      amount: 4
+    - id: RMCMagazinePistolD50WinterWyvernHIAP
+      amount: 2
+    - id: RMCWeaponPistolCOD50WinterWyvern
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCBeltHolsterM13
+  name: M276 pattern M13 holster rig
+  description: Special issue variant of the M276 designed to holster a M13 automatic pistol and 8 spare mags.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_autopistol.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m13
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      offset: -0.34375, -0.15625
+      visible: false
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_autopistol.rsi
+    slots:
+    - suitStorage
+    - belt
+  - type: Item
+    size: Large
+  - type: Storage
+    grid:
+    - 0,0,17,1 # should be 9 slots
+    whitelist:
+      tags:
+      - RMCMagazinePistolM13
+      - RMCMagazinePistolM13Ext
+      - RMCMagazinePistolM13Drum
+      - RMCWeaponPistolM13
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        tags:
+        - RMCWeaponPistolM13
+    - popup: rmc-storage-limit-max-mags
+      count: 8
+      whitelist:
+        tags:
+        - RMCMagazinePistolM13
+        - RMCMagazinePistolM13Ext
+        - RMCMagazinePistolM13Drum
+  - type: CMHolster
+    whitelist:
+      tags:
+      - RMCWeaponPistolM13
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCM17BeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleM16
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCType71BeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleType71
+      amount: 5
+
+- type: entity
+  parent: RMCBeltSmartGunOperatorPistol
+  id: RMCBeltSmartGunOperatorPistolPMC
+  name: WY-TM410 pattern smargunner sidearm rig
+  description: A special pattern of We-Ya made combat belt, designed to carry smartgun ammunition and a sidearm.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator_pistol_wy.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m1984 # TODO RMC14 per-gun underlay
+      offset: 0.15625, 0.0
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      visible: false
+    - sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator_pistol_wy.rsi
+      state: icon-front
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/smart_gun_operator_pistol_wy.rsi
+
+- type: entity
+  parent: RMCBeltSmartGunOperatorPistolPMC
+  id: RMCBeltSmartGunOperatorPistolPMCFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMK80
+    - id: CMMagazinePistolMK80
+      amount: 2
+    - id: RMCMagazineSmartGunirradiated
+      amount: 2
+
+- type: entity
+  parent: RMCBeltHolsterSMG
+  id: RMCBeltHolsterSMGFilledSMGM63B2
+  suffix: Filled, SMGM63B2
+  components:
+  - type: ItemSlots
+    slots:
+      pouch:
+        name: M63 holster
+        startingItem: RMCWeaponSMGM63B2
+        insertSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_sheathe.ogg # TODO RMC14 sounds
+        ejectSound: /Audio/_RMC14/Weapons/Guns/gun_pistol_draw.ogg
+        whitelist:
+          tags:
+          - RMCWeaponSMGM63
+          - RMCWeaponSMGM63B2

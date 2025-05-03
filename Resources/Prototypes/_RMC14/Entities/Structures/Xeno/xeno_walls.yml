@@ -30,7 +30,6 @@
     xenoDamage:
       types:
         Slash: 225
-  - type: XenoConstructReinforce
 
 - type: entity
   parent: WallXenoResin
@@ -169,8 +168,6 @@
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
-  - type: XenoConstruct # would be painful to use if it destroyed weeds
-    destroyWeeds: false
   - type: TimedDespawn
     lifetime: 5.0
   - type: XenoStructureUpgradeable
