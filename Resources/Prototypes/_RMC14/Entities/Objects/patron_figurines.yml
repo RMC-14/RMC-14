@@ -1356,6 +1356,17 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronBurniHeatSenira
+  name: Burni 'Heat' Senira figurine
+  description: "Every scar a mistake, and a lesson."
+  components:
+  - type: Sprite
+    state: burni_heat_senira
+  - type: PatronFigurine
+    id: 650b37cd-62d2-411b-a5f3-2991726529bd
+
+- type: entity
+  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronAustinSpectreEventide
   name: Austin 'Spectre' Eventide figurine
   description: ""
