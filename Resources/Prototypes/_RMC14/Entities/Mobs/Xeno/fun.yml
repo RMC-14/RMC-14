@@ -142,8 +142,8 @@
         Blunt: 2.5
   - type: RMCSize
     size: VerySmallXeno
-  #- type: RMCXenoDamageVisuals TODO
-  #  prefix: lesser
+  - type: RMCXenoDamageVisuals
+    prefix: lesser
   - type: TacticalMapIcon
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
