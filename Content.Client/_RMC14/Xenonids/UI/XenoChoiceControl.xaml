@@ -19,9 +19,9 @@
                                  HorizontalExpand="False" VerticalExpand="False" VerticalAlignment="Bottom"
                                  Margin="-32 0 0 4" Visible="False"/>
                     <Control MinWidth="5"/>
-                    <RichTextLabel Name="NameLabel" Access="Public" VerticalAlignment="Center" SetWidth="190"/>
+                    <RichTextLabel Name="NameLabel" Access="Public" VerticalAlignment="Center"/>
                 </BoxContainer>
-                <BoxContainer HorizontalAlignment="Right" Orientation="Vertical" Margin="0 5 0 0">
+                <BoxContainer Access="Public" Name="QueenButtons" HorizontalAlignment="Right" Orientation="Vertical" Visible="False" Margin="0 5 0 0">
                     <Button Access="Public" StyleClasses="ButtonSquare" Text="Heal" Name="HealButton"></Button>
                     <Button Access="Public" StyleClasses="ButtonSquare" Text="Transfer Plasma" Name="PlasmaButton"></Button>
                 </BoxContainer>

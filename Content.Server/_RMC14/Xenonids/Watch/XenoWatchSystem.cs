@@ -3,7 +3,9 @@ using Content.Server.Chat.Systems;
 using Content.Server.Popups;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
+using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -177,6 +179,7 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
         short tier3Amount = 0;
         short tier2Amount = 0;
         short xenocount = 0;
+        bool queen = TryComp<XenoOvipositorCapableComponent>(ent, out var ovicomp) && ovicomp.Attached;
 
 
         var xenos = new List<Xeno>();
@@ -193,20 +196,20 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
             if(TryComp<HiveLeaderComponent>(uid, out var leaderComp))
                 leader = true;
 
-                if (comp.CountedInSlots)
-                {
-                    xenocount++;
-                }
+            if (comp.CountedInSlots)
+            {
+                xenocount++;
+            }
 
-                switch (comp.Tier)
-                {
-                    case 2:
-                        tier2Amount++;
-                        break;
-                    case 3:
-                        tier3Amount++;
-                        break;
-                }
+            switch (comp.Tier)
+            {
+                case 2:
+                    tier2Amount++;
+                    break;
+                case 3:
+                    tier3Amount++;
+                    break;
+            }
 
 
             FixedPoint2 evo = 0;
@@ -220,7 +223,7 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
         }
 
 
-        _ui.SetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos, hive.Comp.BurrowedLarva,hive.Comp.BurrowedLarvaSlotFactor,xenocount,tier2Amount,tier3Amount));
+        _ui.SetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos, hive.Comp.BurrowedLarva,hive.Comp.BurrowedLarvaSlotFactor,xenocount,tier2Amount,tier3Amount,queen));
     }
 
     private FixedPoint2 GetHealthPercentage(EntityUid uid)

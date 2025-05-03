@@ -10,6 +10,8 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Strain;
+using Content.Shared._RMC14.Xenonids.Watch;
+using Content.Shared.Actions;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -50,6 +52,9 @@ public abstract class SharedXenoHealSystem : EntitySystem
     [Dependency] private readonly XenoEnergySystem _xenoEnergy = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly XenoStrainSystem _xenoStrain = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly ActionContainerSystem _actionContainer = default!;
+
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
@@ -62,6 +67,12 @@ public abstract class SharedXenoHealSystem : EntitySystem
         SubscribeLocalEvent<XenoHealComponent, XenoHealActionEvent>(OnXenoHealAction);
         SubscribeLocalEvent<XenoComponent, XenoApplySalveActionEvent>(OnXenoApplySalveAction);
         SubscribeLocalEvent<XenoComponent, XenoSacrificeHealActionEvent>(OnXenoSacrificeHealAction);
+
+        Subs.BuiEvents<XenoComponent>(XenoWatchUIKey.Key,
+            subs =>
+            {
+                subs.Event<XenoWatchBuiHealingMsg>(OnXenoBUIHealing);
+            });
     }
 
     private void OnXenoHealAction(Entity<XenoHealComponent> ent, ref XenoHealActionEvent args)
@@ -120,6 +131,27 @@ public abstract class SharedXenoHealSystem : EntitySystem
 
             if (_net.IsServer)
                 SpawnAttachedTo(ent.Comp.HealEffect, xeno.Owner.ToCoordinates());
+        }
+    }
+
+    private void OnXenoBUIHealing(Entity<XenoComponent> xeno, ref XenoWatchBuiHealingMsg args)
+    {
+        var ev = new XenoHealActionEvent();
+        if (TryGetEntity(args.Target, out var targetuid))
+        {
+            ev.Target = targetuid.Value.ToCoordinates();
+            //Logger.Debug($"Trying to heal {targetuid.Value}");
+        }
+
+        if (!TryComp<ActionsComponent>(xeno,out var actionscomp))
+            return;
+
+        foreach (var (actionID,action) in _actions.GetActions(xeno))
+        {
+            if (action.BaseEvent is XenoHealActionEvent && action.Cooldown != null)
+            {
+                _actions.PerformAction(xeno,actionscomp, actionID,action,ev, _timing.CurTime);
+            }
         }
     }
 

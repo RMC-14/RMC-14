@@ -79,7 +79,7 @@ public partial class XenoChoiceControl : Control
         if (args.SourceControl is not Button button)
             return;
 
-        Logger.Debug($"Button {button.Name} hovered");
+        //Logger.Debug($"Button {button.Name} hovered");
 
             button.ModulateSelfOverride = (button.Name) switch
             {

@@ -14,7 +14,7 @@ public enum XenoWatchUIKey : byte
 public readonly record struct Xeno(NetEntity Entity, string Name, EntProtoId? Id, FixedPoint2 Health, FixedPoint2 Plasma, FixedPoint2 Evo, bool Leader = false);
 
 [Serializable, NetSerializable]
-public sealed class XenoWatchBuiState(List<Xeno> xenos, int burrowedLarva, int burrowedLarvaSlotFactor, int xenoCount, int tierTwoAmount, int tierThreeAmount ) : BoundUserInterfaceState
+public sealed class XenoWatchBuiState(List<Xeno> xenos, int burrowedLarva, int burrowedLarvaSlotFactor, int xenoCount, int tierTwoAmount, int tierThreeAmount, bool isQueen = false ) : BoundUserInterfaceState
 {
     public readonly List<Xeno> Xenos = xenos;
     public readonly int BurrowedLarva = burrowedLarva;
@@ -22,10 +22,17 @@ public sealed class XenoWatchBuiState(List<Xeno> xenos, int burrowedLarva, int b
     public readonly int XenoCount = xenoCount;
     public readonly int TierTwoAmount = tierTwoAmount;
     public readonly int TierThreeAmount = tierThreeAmount;
+    public readonly bool IsQueen = isQueen;
 }
 
 [Serializable, NetSerializable]
 public sealed class XenoWatchBuiMsg(NetEntity target) : BoundUserInterfaceMessage
+{
+    public readonly NetEntity Target = target;
+}
+
+[Serializable, NetSerializable]
+public sealed class XenoWatchBuiHealingMsg(NetEntity target) : BoundUserInterfaceMessage
 {
     public readonly NetEntity Target = target;
 }

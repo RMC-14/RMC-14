@@ -167,9 +167,14 @@ public sealed class XenoWatchBui : BoundUserInterface
                 control.SetLeader(iconTexture);
 
             control.Button.OnPressed += _ => SendPredictedMessage(new XenoWatchBuiMsg(xeno.Entity));
-            control.HealButton.OnPressed += OnHealPressed;
-            control.PlasmaButton.OnPressed += OnPlasmaPressed;
-            control.NameLabel.SetWidth = _window.Width - 300;
+
+            control.HealButton.OnPressed += _ => SendPredictedMessage(new XenoWatchBuiHealingMsg(xeno.Entity));
+            if (s.IsQueen)
+            {
+                control.QueenButtons.Visible = true;
+                //control.PlasmaButton.OnPressed += OnPlasmaPressed;
+                control.NameLabel.SetWidth = _window.Width - 310;
+            }
 
             _window.XenoContainer.AddChild(control);
         }
@@ -259,7 +264,7 @@ public sealed class XenoWatchBui : BoundUserInterface
         string name = args.Button.Name ?? string.Empty; // button name is emtpy, what i need is the text
         if (name == string.Empty)
         {
-            Logger.Debug("Button is empty");
+            //Logger.Debug("Button is empty");
             return;
         }
         if (ShownXenos.ContainsKey(name))
@@ -316,19 +321,6 @@ public sealed class XenoWatchBui : BoundUserInterface
                 }
             }
         }
-    }
-
-    private void OnHealPressed(BaseButton.ButtonEventArgs args)
-    {
-        Logger.Debug("Heal button pressed");
-        args.Button.ModulateSelfOverride = Color.FromHex("#236C40");
-    }
-
-    private void OnPlasmaPressed(BaseButton.ButtonEventArgs args)
-    {
-        //dont know how queen plasma trasnfer works yet
-        Logger.Debug("Plasma button pressed");
-        args.Button.ModulateSelfOverride = Color.FromHex("#1576BE");
     }
 
     private Color UpdateButtonColor(bool state)

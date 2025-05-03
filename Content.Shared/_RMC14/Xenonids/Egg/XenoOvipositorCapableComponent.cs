@@ -12,6 +12,9 @@ public sealed partial class XenoOvipositorCapableComponent : Component
     public string AttachedState = "normal";
 
     [DataField, AutoNetworkedField]
+    public bool Attached  = false;
+
+    [DataField, AutoNetworkedField]
     public TimeSpan Cooldown = TimeSpan.FromSeconds(30);
 
     [DataField, AutoNetworkedField]
