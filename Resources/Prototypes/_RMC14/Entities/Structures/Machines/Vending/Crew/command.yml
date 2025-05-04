@@ -290,7 +290,7 @@
       - id: RMCAttachmentUnderbarrelExtinguisher
         points: 15
       - id: RMCAttachmentMiniFlamethrower
-        points: 15 
+        points: 15
       - id: RMCAttachmentU1GrenadeLauncher
         points: 5
     - name: Barrel Attachments
@@ -605,6 +605,7 @@
   id: RMCVendorBundleXOFormal
   name: formal uniform
   description: Contains a peaked cap, formal uniform and jacket.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/coat_formal.rsi
@@ -620,6 +621,7 @@
   id: RMCVendorBundleXOShotgun
   name: M890 tactical shotgun
   description: Contains the M890 tactical shotgun and various shells.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m890.rsi
@@ -635,6 +637,7 @@
   id: RMCVendorBundleMilitaryPoliceApparelCMP
   name: Essential Police Set
   description: Contains security HUD-glasses and a filled security belt.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses.rsi
@@ -892,7 +895,7 @@
       - id: ClothingEyesGlassesMeson # TODO change to CM13 engi goggles.
       - id: RMCNailgunTactical
       # TODO KN5500/2 PDA
-     
+
     - name: Uniform
       jobs:
       - CMChiefEngineer
@@ -939,7 +942,7 @@
       - id: RMCBeltUtilityGeneral
       - id: CMBeltUtilityFilled
         name: M276 pattern toolbelt rig (Full)
-       
+
     - name: Pouches
       jobs:
       - CMChiefEngineer
@@ -1257,14 +1260,14 @@
         recommended: true
       - id: CMWebbing
     - name: Spare Equipment
-      jobs: 
+      jobs:
       - CMCMO
       entries:
       - id: CMHeadsetMedical
         amount: 15
       - id: CMHeadsetResearcher
         amount: 15
-        
+
 
     # ////////////////////////////////////
     # Auxiliary Support Officer
@@ -1312,7 +1315,7 @@
       - id: CMHeadCapPeakedService
         recommended: true
       - id: CMHeadBeretTan
-        recommended: true  
+        recommended: true
     - name: Combat Equipment
       jobs:
       - CMAuxiliarySupportOfficer
