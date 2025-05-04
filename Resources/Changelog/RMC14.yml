@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: You can now deconstruct tableparts with a wrench.
-    type: Add
-  id: 1171
-  time: '2025-01-07T09:54:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5315
 - author: CyberTropic
   changes:
   - message: Added breakable fences.
@@ -5516,5 +5509,15 @@
   id: 1673
   time: '2025-05-04T07:11:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6335
+- author: Ian321
+  changes:
+  - message: Playing DP now requires 5 hours of DCC time, up from 2.
+    type: Tweak
+  - message: Playing GP now requires 5 hours of DP, up from 0. Existing GP time also
+      contributes to this requirement.
+    type: Tweak
+  id: 1674
+  time: '2025-05-04T07:15:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/5698
 Name: RMC14
 Order: -1
