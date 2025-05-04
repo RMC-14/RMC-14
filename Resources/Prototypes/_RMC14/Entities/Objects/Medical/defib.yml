@@ -108,7 +108,7 @@
   parent: [CMBaseDefibrillator, RMCPowerCellSlotUnremovable]
   id: RMCSynthResetKey
   name: WeYa synthetic reset key
-  description: Result of collaboration between Cybersun and Weston-Yamada, this device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It can only be used once before being reset.
+  description: This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It can only be used once before being reset.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Devices/reset_key.rsi
