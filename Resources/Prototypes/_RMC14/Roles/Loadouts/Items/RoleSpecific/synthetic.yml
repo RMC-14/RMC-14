@@ -137,6 +137,18 @@
     - RMCShoesBlack
 
 - type: loadout
+  id: ShoesBrownRMC
+  storage:
+    back:
+    - RMCShoesBrown
+
+- type: loadout
+  id: ShoesRedRMC
+  storage:
+    back:
+    - RMCShoesRed
+
+- type: loadout
   id: ShoesGreenRMC
   storage:
     back:
