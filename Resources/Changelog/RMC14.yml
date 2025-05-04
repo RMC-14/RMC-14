@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: SG6732
-  changes:
-  - message: Tweaked the M4SPR's barrel attachment point to look better with the bayonet.
-    type: Tweak
-  id: 1179
-  time: '2025-01-07T10:33:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5287
 - author: Rainbeon
   changes:
   - message: Fixed the XM88 not increasing its damage on a successful hit.
@@ -5522,5 +5515,19 @@
   id: 1681
   time: '2025-05-04T10:19:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6311
+- author: noctyrnal
+  changes:
+  - message: Faction Spawners have been heavily adjusted. They should all be more
+      consistent now.
+    type: Tweak
+  - message: Added missing content to existing faction spawners, such as icons.
+    type: Add
+  - message: Freelancers, Provost and Royal Marines now have their own squads.
+    type: Add
+  - message: Freelancers now have icons.
+    type: Add
+  id: 1682
+  time: '2025-05-04T23:32:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6250
 Name: RMC14
 Order: -1

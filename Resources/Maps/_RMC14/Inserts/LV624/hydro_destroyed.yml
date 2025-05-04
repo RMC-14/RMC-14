@@ -683,6 +683,8 @@ entities:
   entities:
   - uid: 114
     components:
+    - type: MetaData
+      name: Hydro
     - type: Transform
       pos: 9.5,7.5
       parent: 1
@@ -777,7 +779,7 @@ entities:
     - type: Transform
       pos: 0.5,8.5
       parent: 1
-- proto: Shovel
+- proto: RMCShovel
   entities:
   - uid: 43
     components:
