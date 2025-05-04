@@ -36,3 +36,9 @@ public sealed class XenoWatchBuiHealingMsg(NetEntity target) : BoundUserInterfac
 {
     public readonly NetEntity Target = target;
 }
+
+[Serializable, NetSerializable]
+public sealed class XenoWatchBuiTransferPlasmaMsg(NetEntity target) : BoundUserInterfaceMessage
+{
+    public readonly NetEntity Target = target;
+}

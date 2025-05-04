@@ -202,6 +202,7 @@ public sealed class XenoWatchBui : BoundUserInterface
             control.Button.OnPressed += _ => SendPredictedMessage(new XenoWatchBuiMsg(xeno.Entity));
 
             control.HealButton.OnPressed += _ => SendPredictedMessage(new XenoWatchBuiHealingMsg(xeno.Entity));
+            control.PlasmaButton.OnPressed += _ => SendPredictedMessage(new XenoWatchBuiTransferPlasmaMsg(xeno.Entity));
             if (s.IsQueen)
             {
                 control.QueenButtons.Visible = true;

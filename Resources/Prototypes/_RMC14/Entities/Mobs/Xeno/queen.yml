@@ -231,6 +231,7 @@
   - type: ManageHive
   - type: HiveLeaderGranter
   - type: XenoHeal
+  - type: XenoRemoteTransferPlasma
   - type: StunOnExplosionReceived
     weak: false
   - type: XenoSpit
