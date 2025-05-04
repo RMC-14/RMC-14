@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: Fixed tunnels not costing plasma when placed not on a node.
-    type: Fix
-  id: 1170
-  time: '2025-01-07T09:51:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5322
 - author: DummeHytteOst
   changes:
   - message: You can now deconstruct tableparts with a wrench.
@@ -5515,5 +5508,13 @@
   id: 1672
   time: '2025-05-04T07:02:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6316
+- author: J C Denton
+  changes:
+  - message: Destroyed Hydro insert on LV-624 now contains SSG-45s and their ammo
+      instead of the placeholder M54C.
+    type: Tweak
+  id: 1673
+  time: '2025-05-04T07:11:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6335
 Name: RMC14
 Order: -1
