@@ -83,7 +83,7 @@
   name: executive corporate specialist ID card
   components:
   - type: PresetIdCard
-    job: RMCCorporateExecutiveSpecialist
+    job: CMCorporateExecutiveSpecialist
 
 - type: entity
   parent: CMIDCardLiaison
@@ -91,7 +91,7 @@
   name: executive corporate supervisor ID card
   components:
   - type: PresetIdCard
-    job: RMCCorporateExecutiveSupervisor
+    job: CMCorporateExecutiveSupervisor
 
 - type: entity
   parent: CMIDCardLiaison
@@ -99,7 +99,7 @@
   name: interstellar commerce bureau liaison ID card
   components:
   - type: PresetIdCard
-    job: RMCICBLiaison
+    job: CMICBLiaison
 
 - type: entity
   parent: CMIDCardBase
@@ -130,7 +130,7 @@
   description: A coveted gold badge signifying that the wearer is one of the few CMB Marshals patroling the outer rim. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
   components:
   - type: PresetIdCard
-    job: RMCBureauMarshal
+    job: CMBureauMarshal
 
 - type: entity
   parent: CMIDCardSilver
@@ -139,7 +139,7 @@
   description: The silver badge which represents that the wearer is a Bureau Deputy. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
   components:
   - type: PresetIdCard
-    job: RMCBureauDeputy
+    job: CMBureauDeputy
 
 - type: entity
   parent: CMIDCardSilver
@@ -169,7 +169,7 @@
   name: bureau observer ID card
   components:
   - type: PresetIdCard
-    job: RMCBureauObserver
+    job: CMBureauObserver
 
 - type: entity
   parent: CMIDCardBase
