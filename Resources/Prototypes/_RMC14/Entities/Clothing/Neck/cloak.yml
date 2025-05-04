@@ -1,0 +1,9 @@
+# General formal Cloak
+- type: entity
+  parent: ClothingNeckBase
+  id: RMCGeneralFormalCloak
+  name: General's formal cloak
+  description: A lavish cloak and decorated only worn for special occasions.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Neck/generalformal.rsi

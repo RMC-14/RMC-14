@@ -1,0 +1,10 @@
+﻿- type: soundCollection
+  id: RMCPhoneSpeak
+  files:
+  - /Audio/_RMC14/Phone/talk_phone1.ogg
+  - /Audio/_RMC14/Phone/talk_phone2.ogg
+  - /Audio/_RMC14/Phone/talk_phone3.ogg
+  - /Audio/_RMC14/Phone/talk_phone4.ogg
+  - /Audio/_RMC14/Phone/talk_phone5.ogg
+  - /Audio/_RMC14/Phone/talk_phone6.ogg
+  - /Audio/_RMC14/Phone/talk_phone7.ogg

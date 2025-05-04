@@ -2,7 +2,7 @@
 
 # Bureau Deputy
 - type: entity
-  parent: RMCBaseJacket
+  parent: [RMCAllowSuitStorageClothingJacketMB, RMCBaseJacket]
   id: RMCCoatBureauDeputy
   name: bureau deputy jacket
   description: A thick and stylish black leather jacket with a Marshal's Deputy badge pinned to it. The back is enscribed with the powerful letters of 'DEPUTY' representing justice, authority, and protection in the outer rim. The laws of the Earth stretch beyond the Sol.
@@ -11,6 +11,11 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/deputy.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/deputy.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 15
+    bio: 10
+    explosionArmor: 10
 
 - type: entity
   parent: RMCBaseJacket
@@ -22,3 +27,33 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/marshal.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/marshal.rsi
+
+# High Command
+
+- type: entity
+  parent: RMCCoatBureauDeputy
+  id: RMCCoatJacketGeneral
+  name: general's jacket
+  description: A black trench coat with gold metallic trim. Flashy, highly protective, and over-the-top. Fit for a king - or, in this case, a General. Has quite a few pockets.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/jacket_general.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/jacket_general.rsi
+  - type: CMArmor
+    melee: 35
+    bullet: 35
+    bio: 10
+    explosionArmor: 40
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
+  - type: Storage
+    grid:
+    - 0,0,7,1 # 4 slots
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: rmc-buttons-verb-fold
+    foldVerbText: rmc-buttons-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: jacket

@@ -1,25 +1,25 @@
-using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Server.DoAfter;
 using Content.Server.Nutrition.Components;
-using Content.Shared.Nutrition;
-using Content.Shared.Nutrition.Components;
 using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
+using Content.Shared.Nutrition;
+using Content.Shared.Nutrition.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Random;
 using Robust.Shared.Containers;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Random;
 
 namespace Content.Server.Nutrition.EntitySystems;
 
 public sealed class SliceableFoodSystem : EntitySystem
 {
-    [Dependency] private readonly SolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly DoAfterSystem _doAfter = default!;
@@ -38,6 +38,12 @@ public sealed class SliceableFoodSystem : EntitySystem
     private void OnInteractUsing(Entity<SliceableFoodComponent> entity, ref InteractUsingEvent args)
     {
         if (args.Handled)
+            return;
+
+        // RMC14
+#pragma warning disable RA0002
+        if (!CompOrNull<UtensilComponent>(args.Used)?.Types.HasFlag(UtensilType.Knife) ?? true)
+#pragma warning restore RA0002
             return;
 
         var doAfterArgs = new DoAfterArgs(EntityManager,
@@ -169,7 +175,7 @@ public sealed class SliceableFoodSystem : EntitySystem
     private void OnComponentStartup(Entity<SliceableFoodComponent> entity, ref ComponentStartup args)
     {
         var foodComp = EnsureComp<FoodComponent>(entity);
-        _solutionContainer.EnsureSolution(entity.Owner, foodComp.Solution);
+        _solutionContainer.EnsureSolution(entity.Owner, foodComp.Solution, out _);
     }
 }
 

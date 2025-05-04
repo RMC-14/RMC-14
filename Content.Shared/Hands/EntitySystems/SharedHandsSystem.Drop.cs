@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared.Database;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
@@ -6,12 +7,16 @@ using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Tag;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Hands.EntitySystems;
 
 public abstract partial class SharedHandsSystem
 {
     [Dependency] private readonly TagSystem _tagSystem = default!;
+
+    private static readonly ProtoId<TagPrototype> BypassDropChecksTag = "BypassDropChecks";
+
     private void InitializeDrop()
     {
         SubscribeLocalEvent<HandsComponent, EntRemovedFromContainerMessage>(HandleEntityRemoved);
@@ -37,7 +42,7 @@ public abstract partial class SharedHandsSystem
     private bool ShouldIgnoreRestrictions(EntityUid user)
     {
         //Checks if the Entity is something that shouldn't care about drop distance or walls ie Aghost
-        return !_tagSystem.HasTag(user, "BypassDropChecks");
+        return !_tagSystem.HasTag(user, BypassDropChecksTag);
     }
 
     /// <summary>
@@ -133,7 +138,7 @@ public abstract partial class SharedHandsSystem
             RaiseLocalEvent(entity, ref ev, true);
             return true;
         }
-        
+
         // drop the item with heavy calculations from their hands and place it at the calculated interaction range position
         // The DoDrop is handle if there's no drop target
         DoDrop(uid, hand, doDropInteraction: doDropInteraction, handsComp);
@@ -141,7 +146,7 @@ public abstract partial class SharedHandsSystem
         // if there's no drop location stop here
         if (targetDropLocation == null)
             return true;
-        
+
         // otherwise, also move dropped item and rotate it properly according to grid/map
         var (itemPos, itemRot) = TransformSystem.GetWorldPositionRotation(entity);
         var origin = new MapCoordinates(itemPos, itemXform.MapID);
@@ -200,7 +205,7 @@ public abstract partial class SharedHandsSystem
     /// <summary>
     ///     Removes the contents of a hand from its container. Assumes that the removal is allowed. In general, you should not be calling this directly.
     /// </summary>
-    public virtual void DoDrop(EntityUid uid, Hand hand, bool doDropInteraction = true, HandsComponent? handsComp = null)
+    public virtual void DoDrop(EntityUid uid, Hand hand, bool doDropInteraction = true, HandsComponent? handsComp = null, bool log = true)
     {
         if (!Resolve(uid, ref handsComp))
             return;
@@ -223,6 +228,9 @@ public abstract partial class SharedHandsSystem
 
         if (doDropInteraction)
             _interactionSystem.DroppedInteraction(uid, entity);
+
+        if (log)
+            _adminLogger.Add(LogType.Drop, LogImpact.Low, $"{ToPrettyString(uid):user} dropped {ToPrettyString(entity):entity}");
 
         if (hand == handsComp.ActiveHand)
             RaiseLocalEvent(entity, new HandDeselectedEvent(uid));

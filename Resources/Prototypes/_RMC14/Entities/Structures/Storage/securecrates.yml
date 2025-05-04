@@ -1,0 +1,399 @@
+- type: entity
+  abstract: true
+  parent: BaseStructureDynamic
+  id: RMCCrateOpenableBase
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: RMCPlankWood2
+      amount: 1 # TODO RMC14 other drops
+
+- type: entity
+  parent: RMCCrateOpenableBase
+  id: RMCCrateLarge
+  name: large crate
+  description: A hefty wooden crate.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/densecrate.rsi
+    noRot: true
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: invoice
+      sprite: _RMC14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/densecrate.rsi
+    state: base
+  - type: Transform
+    noRot: true
+  - type: InteractionOutline
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.29"
+        density: 50
+        mask:
+        - SmallMobMask
+        layer:
+        - MachineLayer
+  - type: PlaceableSurface
+    isPlaceable: false
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Appearance
+  - type: PaperLabel
+    labelSlot:
+      insertVerbText: Attach Label
+      ejectVerbText: Remove Label
+      whitelist:
+        components:
+        - Paper
+  - type: ContainerContainer
+    containers:
+      paper_label: !type:ContainerSlot
+  - type: StaticPrice
+    price: 50
+  - type: ItemSlots
+
+- type: entity
+  parent: RMCCrateOpenableBase
+  id: RMCSecureCase
+  name: storage case
+  description: A black storage case.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/case.rsi
+    noRot: true
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/case.rsi
+    state: base
+  - type: Transform
+    noRot: true
+  - type: InteractionOutline
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.42,-0.42,0.4,0.15"
+        density: 50
+        mask:
+        - SmallMobMask
+        layer:
+        - MachineLayer
+  - type: PlaceableSurface
+    isPlaceable: false
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  parent: RMCSecureCase
+  id: RMCSecureCaseDouble
+  name: cases
+  description: A stack of black storage cases.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/casedouble.rsi
+    noRot: true
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/casedouble.rsi
+    state: base
+
+- type: entity
+  parent: RMCSecureCase
+  id: RMCSecureCaseSmall
+  name: small cases
+  description: Two small black storage cases.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/casesmall.rsi
+    noRot: true
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/casesmall.rsi
+    state: base
+
+- type: entity
+  parent: RMCCrateOpenableBase
+  id: RMCSecureCaseChest
+  name: chest
+  description: hefty wooden crate.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/chest.rsi
+    noRot: true
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/chest.rsi
+    state: base
+  - type: Transform
+    noRot: true
+  - type: InteractionOutline
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.42,-0.42,0.4,0.35"
+        density: 50
+        mask:
+        - SmallMobMask
+        layer:
+        - MachineLayer
+  - type: PlaceableSurface
+    isPlaceable: false
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  parent: RMCSecureCaseChest
+  id: RMCSecureCaseStrapped
+  name: secure supply crate
+  description: A hefty wooden crate.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/securecrate.rsi
+    noRot: true
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/securecrate.rsi
+    state: base
+
+- type: entity
+  parent: RMCSecureCaseChest
+  id: RMCSecureCaseMedicalBig
+  name: medical crate
+  description: A crate containing medical supplies.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/chestwhite.rsi
+    noRot: true
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/chestwhite.rsi
+    state: base
+
+- type: entity
+  parent: RMCCrateOpenableBase
+  id: RMCSmallChestYellow
+  name: small chest
+  description: A small plastic crate wrapped with securing elastic straps.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/minichest.rsi
+    noRot: true
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/minichest.rsi
+    state: base
+  - type: Transform
+    noRot: true
+  - type: InteractionOutline
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.2,-0.3,0.2,0.3"
+        density: 50
+        mask:
+        - SmallMobMask
+        layer:
+        - MachineLayer
+  - type: PlaceableSurface
+    isPlaceable: false
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+
+- type: entity
+  parent: RMCSmallChestYellow
+  id: RMCSmallChestBlue
+  name: small chest
+  description: A small plastic crate wrapped with securing elastic straps.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/minichestb.rsi
+    noRot: true
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/minichestb.rsi
+    state: base
+
+- type: entity
+  parent: RMCSmallChestYellow
+  id: RMCSmallChestRed
+  name: small chest
+  description: A small plastic crate wrapped with securing elastic straps.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/minichestc.rsi
+    noRot: true
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/minichestc.rsi
+    state: base
+
+- type: entity
+  parent: RMCSmallChestYellow
+  id: RMCSecureCaseMedicalSmall
+  name: small medcase
+  description: A small metal crate. Here, Freeman take this medkit!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/minimedcase.rsi
+    noRot: true
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/minimedcase.rsi
+    state: base
+
+- type: entity
+  parent: RMCSmallChestYellow
+  id: RMCSecureCaseAmmoMini
+  name: small ammocase
+  description: A small metal crate. Here, Freeman ammo!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/miniammo.rsi
+    noRot: true
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/miniammo.rsi
+    state: base
+
+- type: entity
+  parent: RMCSmallChestYellow
+  id: RMCCrateMini
+  name: small crate
+  description: The large supply crate's cousin, 1st removed.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/minicrate.rsi
+    noRot: true
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: invoice
+      sprite: _RMC14/Structures/Storage/Crates/labels.rsi
+      visible: false
+      map: ["enum.PaperLabelVisuals.Layer"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/minicrate.rsi
+    state: base
+
+- type: entity
+  parent: RMCCrateOpenableBase
+  id: RMCSecureCaseMini
+  name: small case
+  description: A small hard-shell case. What could be inside?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Crates/minicase.rsi
+    noRot: true
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+  - type: Icon
+    sprite: _RMC14/Structures/Storage/Crates/minicase.rsi
+    state: base
+  - type: Transform
+    noRot: true
+  - type: InteractionOutline
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.2,-0.3,0.2,0.2"
+        density: 50
+        mask:
+        - SmallMobMask
+        layer:
+        - MachineLayer
+  - type: PlaceableSurface
+    isPlaceable: false
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]

@@ -1,6 +1,8 @@
-﻿using Content.Shared.Actions;
+using Content.Shared.Actions;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Map;
+using Content.Shared.Physics;
+using Content.Shared.DoAfter;
 
 namespace Content.Server._RMC14.NPC.Components;
 
@@ -17,7 +19,7 @@ public sealed partial class NPCLeapComponent : Component
     public EntProtoId<WorldTargetActionComponent> ActionId = "ActionXenoLeap";
 
     [DataField]
-    public ushort? CurrentDoAfter;
+    public DoAfterId? CurrentDoAfter;
 
     [ViewVariables]
     public EntityCoordinates Destination;
@@ -27,6 +29,9 @@ public sealed partial class NPCLeapComponent : Component
 
     [ViewVariables(VVAccess.ReadWrite)]
     public float MaxAngleDegrees = 5;
+
+    [ViewVariables(VVAccess.ReadWrite)]
+    public CollisionGroup Mask = CollisionGroup.SmallMobMask;
 }
 
 public enum LeapStatus : byte

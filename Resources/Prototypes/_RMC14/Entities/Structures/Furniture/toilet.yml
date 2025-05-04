@@ -1,5 +1,5 @@
 - type: entity
-  parent: SeatBase
+  parent: CMSeatBase
   id: CMToiletEmpty
   name: toilet
   suffix: Empty

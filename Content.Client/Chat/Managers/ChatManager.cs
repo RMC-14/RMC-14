@@ -21,6 +21,16 @@ internal sealed class ChatManager : IChatManager
         _sawmill.Level = LogLevel.Info;
     }
 
+    public void SendAdminAlert(string message)
+    {
+        // See server-side manager. This just exists for shared code.
+    }
+
+    public void SendAdminAlert(EntityUid player, string message)
+    {
+        // See server-side manager. This just exists for shared code.
+    }
+
     public void SendMessage(string text, ChatSelectChannel channel)
     {
         var str = text.ToString();
@@ -41,6 +51,10 @@ internal sealed class ChatManager : IChatManager
 
             case ChatSelectChannel.Admin:
                 _consoleHost.ExecuteCommand($"asay \"{CommandParsing.Escape(str)}\"");
+                break;
+
+            case ChatSelectChannel.Mentor:
+                _consoleHost.ExecuteCommand($"msay \"{CommandParsing.Escape(str)}\"");
                 break;
 
             case ChatSelectChannel.Emotes:

@@ -2,6 +2,7 @@
   parent: MarkerBase
   id: RMCSpawnerRandomTools
   name: random tools spawner
+  description: This is a random tool.
   components:
     - type: Sprite
       layers:
@@ -15,4 +16,90 @@
         - CMCrowbar
         - CMWrench
         - RMCFlashlight
+      offset: 0
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerRandomToolbox
+  name: random toolbox spawner
+  description: This is a random toolbox.
+  components:
+    - type: Sprite
+      layers:
+        - sprite: _RMC14/Markers/landmarks.rsi
+          state: random_toolbox
+    - type: RandomSpawner
+      prototypes:
+        - RMCToolboxMechanicalFilled # x3
+        - RMCToolboxMechanicalFilled
+        - RMCToolboxMechanicalFilled
+        - RMCToolboxElectricalFilled # x2
+        - RMCToolboxElectricalFilled
+        - RMCToolboxMechanicalGreenFilled # x2
+        - RMCToolboxMechanicalGreenFilled
+        - RMCToolboxEmergencyFilled
+      offset: 0
+      
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerRandomPowercell
+  name: random powercell spawner
+  description: This is a random powercell.
+  components:
+    - type: Sprite
+      layers:
+        - sprite: _RMC14/Markers/landmarks.rsi
+          state: random_cell_battery
+    - type: RandomSpawner
+      prototypes:
+        - RMCPowerCellCrap
+        - RMCPowerCell # x4
+        - RMCPowerCell
+        - RMCPowerCell
+        - RMCPowerCell
+        - RMCPowerCellHigh # x4
+        - RMCPowerCellHigh
+        - RMCPowerCellHigh
+        - RMCPowerCellHigh
+        - RMCPowerCellSuper
+      chance: 0.99
+      rarePrototypes:
+        - RMCPowerCellHyper
+      rareChance: 0.01
+      offset: 0
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerRandomTechSupply
+  name: random tech supply spawner
+  description: This is a random piece of technology supplies.
+  components:
+    - type: Sprite
+      layers:
+        - sprite: _RMC14/Objects/Power/cells.rsi
+          state: cell
+    - type: RandomSpawner
+      prototypes:
+        # TODO:
+        # technology_scanner x2
+        # packageWrap x1
+        # bomb_supply x2
+        - RMCSpawnerRandomPowercell # x3
+        - RMCSpawnerRandomPowercell
+        - RMCSpawnerRandomPowercell
+        - CMFireExtinguisher
+        - CMHandsInsulated
+        - RMCCableCoil # x3
+        - RMCCableCoil
+        - RMCCableCoil
+        - RMCSpawnerRandomToolbox # x2
+        - RMCSpawnerRandomToolbox 
+        - CMBeltUtility # x2
+        - CMBeltUtility
+        - RMCSpawnerRandomTools # x5
+        - RMCSpawnerRandomTools
+        - RMCSpawnerRandomTools
+        - RMCSpawnerRandomTools
+        - RMCSpawnerRandomTools
+      chance: 0.5
       offset: 0

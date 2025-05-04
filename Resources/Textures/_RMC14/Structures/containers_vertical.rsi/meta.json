@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a69663ee8d9e3a980d486a1ee05efa44f79abc17/icons/obj/structures/props/containHorizont.dmi",
+  "size": {
+    "x": 45,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "blue_b"
+    },
+    {
+      "name": "blue_m"
+    },
+    {
+      "name": "blue_t"
+    }
+  ]
+}

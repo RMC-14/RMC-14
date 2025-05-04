@@ -1,0 +1,118 @@
+# combat technician
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidDeltaCombatTech
+  name: delta ghost role combat technician
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCDeltaCombatTech
+
+- type: randomHumanoidSettings
+  parent: [RMCCombatTech, RMCDeltaBase]
+  id: RMCDeltaCombatTech
+
+# fireteam leader
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidDeltaFireteamLeader
+  name: delta ghost role fireteam leader
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCDeltaFireteamLeader
+
+- type: randomHumanoidSettings
+  parent: [RMCFireteamLeader, RMCDeltaBase]
+  id: RMCDeltaFireteamLeader
+
+# hospital corpsman
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidDeltaHospitalCorpsman
+  name: delta ghost role hospital corpsman
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCDeltaHospitalCorpsman
+
+- type: randomHumanoidSettings
+  parent: [RMCHospitalCorpsman, RMCDeltaBase]
+  id: RMCDeltaHospitalCorpsman
+
+# rifleman
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidDeltaRifleman
+  name: delta ghost role rifleman
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCDeltaRifleman
+
+- type: randomHumanoidSettings
+  parent: [RMCRifleman, RMCDeltaBase]
+  id: RMCDeltaRifleman
+
+# smart gun operator
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidDeltaSmartGunOperator
+  name: delta ghost role smart gun operator
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCDeltaSmartGunOperator
+
+- type: randomHumanoidSettings
+  parent: [RMCSmartGunOperator, RMCDeltaBase]
+  id: RMCDeltaSmartGunOperator
+
+# squad leader
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidDeltaSquadLeader
+  name: delta ghost role squad leader
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCDeltaSquadLeader
+
+- type: randomHumanoidSettings
+  parent: [RMCSquadLeader, RMCDeltaBase]
+  id: RMCDeltaSquadLeader
+
+# weapons specialist
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidDeltaWeaponsSpecialist
+  name: delta ghost role weapons specialist
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCDeltaWeaponsSpecialist
+
+- type: randomHumanoidSettings
+  parent: [RMCWeaponsSpecialist, RMCDeltaBase]
+  id: RMCDeltaWeaponsSpecialist

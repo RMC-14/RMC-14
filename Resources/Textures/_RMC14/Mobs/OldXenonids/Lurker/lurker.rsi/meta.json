@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/mob/xenonids/lurker.dmi",
+  "size": {
+    "x": 48,
+    "y": 48
+  },
+  "states": [
+    {
+      "name": "alive",
+      "directions": 4
+    },
+    {
+      "name": "running",
+      "directions": 4
+    },
+    {
+      "name": "sleeping"
+    },
+    {
+      "name": "crit"
+    },
+    {
+      "name": "dead"
+    },
+    {
+      "name": "invisible",
+      "directions": 4
+    },
+    {
+      "name": "lurker_walk_3",
+      "directions": 4
+    },
+    {
+      "name": "lurker_walk_2",
+      "directions": 4
+    },
+    {
+      "name": "lurker_walk_1",
+      "directions": 4
+    },
+    {
+      "name": "lurker_walk_0",
+      "directions": 4
+    },
+    {
+      "name": "lurker_rest_3"
+    },
+    {
+      "name": "lurker_rest_2"
+    },
+    {
+      "name": "lurker_rest_1"
+    },
+    {
+      "name": "lurker_rest_0"
+    },
+    {
+      "name": "lurker_downed_3"
+    },
+    {
+      "name": "lurker_downed_2"
+    },
+    {
+      "name": "lurker_downed_1"
+    },
+    {
+      "name": "lurker_downed_0"
+    },
+    {
+      "name": "lurker_dissection"
+    }
+  ]
+}

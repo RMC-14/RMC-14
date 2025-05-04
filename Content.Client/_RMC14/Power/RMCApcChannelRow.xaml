@@ -1,0 +1,12 @@
+﻿<controls:RMCApcChannelRow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Power"
+    Orientation="Horizontal">
+    <RichTextLabel Name="Label" Access="Public" MinWidth="120" />
+    <RichTextLabel Name="Watts" Access="Public" />
+    <Control HorizontalExpand="True" />
+    <RichTextLabel Name="Status" Access="Public" Margin="0 0 10 0" />
+    <Button Name="Auto" Access="Public" Text="Auto" StyleClasses="OpenBoth" />
+    <Button Name="On" Access="Public" Text="On" StyleClasses="OpenBoth" />
+    <Button Name="Off" Access="Public" Text="Off" StyleClasses="OpenBoth" />
+</controls:RMCApcChannelRow>

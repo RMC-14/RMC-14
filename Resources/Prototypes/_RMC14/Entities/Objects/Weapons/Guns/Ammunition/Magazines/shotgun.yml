@@ -1,0 +1,31 @@
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineShotgunXM51
+  name: XM51 magazine (16g)
+  description: A 16 gauge pump-action shotgun magazine.
+  components:
+  - type: Tag
+    tags:
+    - RMCMagazineShotgun
+    - RMCMagazineShotgunXM51
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCShellShotgunBreaching
+    proto: RMCShellShotgunBreaching
+    capacity: 12
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/xm51.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+
+- type: Tag
+  id: RMCMagazineShotgun
+
+- type: Tag
+  id: RMCMagazineShotgunXM51

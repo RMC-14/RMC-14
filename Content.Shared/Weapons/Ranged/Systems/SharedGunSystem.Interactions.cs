@@ -69,7 +69,7 @@ public abstract partial class SharedGunSystem
         return modes[(index + 1) % modes.Count];
     }
 
-    private void SelectFire(EntityUid uid, GunComponent component, SelectiveFire fire, EntityUid? user = null)
+    public void SelectFire(EntityUid uid, GunComponent component, SelectiveFire fire, EntityUid? user = null)
     {
         if (component.SelectedMode == fire)
             return;

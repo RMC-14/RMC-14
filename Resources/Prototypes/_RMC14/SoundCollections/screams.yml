@@ -15,3 +15,29 @@
     - /Audio/_RMC14/Voice/Human/female_scream_3.ogg
     - /Audio/_RMC14/Voice/Human/female_scream_4.ogg
     - /Audio/_RMC14/Voice/Human/female_scream_5.ogg
+
+
+# TODO add this
+# - type: soundCollection
+  # id: RMCMalePreburstScreams
+  # files:
+    # - /Audio/_RMC14/Voice/Human/male_preburst1.ogg
+    # - /Audio/_RMC14/Voice/Human/male_preburst2.ogg
+    # - /Audio/_RMC14/Voice/Human/male_preburst3.ogg
+    # - /Audio/_RMC14/Voice/Human/male_preburst4.ogg
+    # - /Audio/_RMC14/Voice/Human/male_preburst5.ogg
+    # - /Audio/_RMC14/Voice/Human/male_preburst6.ogg
+    # - /Audio/_RMC14/Voice/Human/male_preburst7.ogg
+    # - /Audio/_RMC14/Voice/Human/male_preburst8.ogg
+    # - /Audio/_RMC14/Voice/Human/male_preburst9.ogg
+
+# - type: soundCollection
+  # id: RMCFemalePreburstScreams
+  # files:
+    # - /Audio/_RMC14/Voice/Human/female_preburst1.ogg
+    # - /Audio/_RMC14/Voice/Human/female_preburst2.ogg
+    # - /Audio/_RMC14/Voice/Human/female_preburst3.ogg
+    # - /Audio/_RMC14/Voice/Human/female_preburst4.ogg
+    # - /Audio/_RMC14/Voice/Human/female_preburst5.ogg
+    # - /Audio/_RMC14/Voice/Human/female_preburst6.ogg
+    # - /Audio/_RMC14/Voice/Human/female_preburst7.ogg

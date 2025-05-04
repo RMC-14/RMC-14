@@ -1,9 +1,12 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Dropship.AttachmentPoint;
+using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.PowerLoader.Events;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Coordinates;
@@ -20,6 +23,7 @@ using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
+using Content.Shared.Tag;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -28,6 +32,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using static Content.Shared.Interaction.SharedInteractionSystem;
 using static Content.Shared.Physics.CollisionGroup;
+using DropshipUtilityComponent = Content.Shared._RMC14.Dropship.Utility.Components.DropshipUtilityComponent;
 
 namespace Content.Shared._RMC14.PowerLoader;
 
@@ -37,6 +42,7 @@ public sealed class PowerLoaderSystem : EntitySystem
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedDropshipSystem _dropship = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
@@ -49,6 +55,7 @@ public sealed class PowerLoaderSystem : EntitySystem
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
 
     private EntityQuery<PowerLoaderGrabbableComponent> _powerLoaderGrabbableQuery;
 
@@ -63,18 +70,33 @@ public sealed class PowerLoaderSystem : EntitySystem
         SubscribeLocalEvent<PowerLoaderComponent, StrapAttemptEvent>(OnStrapAttempt);
         SubscribeLocalEvent<PowerLoaderComponent, StrappedEvent>(OnStrapped);
         SubscribeLocalEvent<PowerLoaderComponent, UnstrappedEvent>(OnUnstrapped);
-        SubscribeLocalEvent<PowerLoaderComponent, UserActivateInWorldEvent>(OnUserActivateInWorld);
         SubscribeLocalEvent<PowerLoaderComponent, PowerLoaderGrabDoAfterEvent>(OnGrabDoAfter);
         SubscribeLocalEvent<PowerLoaderComponent, GetUsedEntityEvent>(OnGetUsedEntity);
 
-        SubscribeLocalEvent<DropshipWeaponPointComponent, ActivateInWorldEvent>(OnPointActivateInWorld);
+        SubscribeLocalEvent<PowerLoaderComponent, UserActivateInWorldEvent>(OnPowerloaderUserGrab);
 
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, PickupAttemptEvent>(OnGrabbablePickupAttempt);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, AfterInteractEvent>(OnGrabbableAfterInteract);
-        SubscribeLocalEvent<PowerLoaderGrabbableComponent, BeforeRangedInteractEvent>(OnGrabbableBeforeRangedInteract);
-        SubscribeLocalEvent<PowerLoaderGrabbableComponent, DropshipAttachDoAfterEvent>(OnGrabbableDropshipAttach);
-        SubscribeLocalEvent<PowerLoaderGrabbableComponent, DropshipDetachDoAfterEvent>(OnGrabbableDropshipDetach);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, CombatModeShouldHandInteractEvent>(OnGrababbleShouldInteract);
+        SubscribeLocalEvent<PowerLoaderGrabbableComponent, BeforeRangedInteractEvent>(OnGrabbableBeforeRangedInteract);
+
+        // Detach events and doAfters
+        SubscribeLocalEvent<DropshipWeaponPointComponent, ActivateInWorldEvent>(OnPointActivateInWorld);
+        SubscribeLocalEvent<DropshipUtilityPointComponent, ActivateInWorldEvent>(OnPointActivateInWorld);
+        SubscribeLocalEvent<DropshipEnginePointComponent, ActivateInWorldEvent>(OnEngineActivateInWorld);
+
+        SubscribeLocalEvent<DropshipWeaponPointComponent, DropshipDetachDoAfterEvent>(OnDropshipDetach);
+        SubscribeLocalEvent<DropshipUtilityPointComponent, DropshipDetachDoAfterEvent>(OnDropshipDetach);
+        SubscribeLocalEvent<DropshipEnginePointComponent, DropshipDetachDoAfterEvent>(OnEngineDetach);
+
+        // Attach events and doAfters
+        SubscribeLocalEvent<DropshipWeaponPointComponent, GetAttachmentSlotEvent>(OnGetSlot);
+        SubscribeLocalEvent<DropshipUtilityPointComponent, GetAttachmentSlotEvent>(OnGetSlot);
+        SubscribeLocalEvent<DropshipEnginePointComponent, GetAttachmentSlotEvent>(OnGetSlot);
+
+        SubscribeLocalEvent<DropshipWeaponPointComponent, DropshipAttachDoAfterEvent>(OnDropshipAttach);
+        SubscribeLocalEvent<DropshipUtilityPointComponent, DropshipAttachDoAfterEvent>(OnDropshipAttach);
+        SubscribeLocalEvent<DropshipEnginePointComponent, DropshipAttachDoAfterEvent>(OnDropshipAttach);
 
         SubscribeLocalEvent<ActivePowerLoaderPilotComponent, PreventCollideEvent>(OnActivePilotPreventCollide);
         SubscribeLocalEvent<ActivePowerLoaderPilotComponent, KnockedDownEvent>(OnActivePilotStunned);
@@ -138,7 +160,6 @@ public sealed class PowerLoaderSystem : EntitySystem
                 _popup.PopupClient(Loc.GetString("rmc-power-loader-hands-occupied", ("mech", ent)), buckle, args.User);
 
             args.Cancelled = true;
-            return;
         }
     }
 
@@ -163,21 +184,9 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         _movementSpeed.RefreshMovementSpeedModifiers(ent);
         DeleteVirtuals(ent, buckle);
-    }
 
-    private void OnUserActivateInWorld(Entity<PowerLoaderComponent> ent, ref UserActivateInWorldEvent args)
-    {
-        if (!CanPickupPopup(ent, args.Target, out var delay))
-            return;
-
-        var ev = new PowerLoaderGrabDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, ent, delay, ev, ent, args.Target)
-        {
-            BreakOnMove = true,
-            DuplicateCondition = DuplicateConditions.SameEvent,
-        };
-
-        _doAfter.TryStartDoAfter(doAfter);
+        if (ent.Comp.DoAfter != null && _doAfter.IsRunning(ent.Comp.DoAfter.Id))
+            _doAfter.Cancel(ent.Comp.DoAfter.Id);
     }
 
     private void OnGrabDoAfter(Entity<PowerLoaderComponent> ent, ref PowerLoaderGrabDoAfterEvent args)
@@ -216,6 +225,22 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
     }
 
+    private void OnPowerloaderUserGrab(Entity<PowerLoaderComponent> ent, ref UserActivateInWorldEvent args)
+    {
+        if (!CanPickupPopup(ent, args.Target, out var delay))
+            return;
+
+        var ev = new PowerLoaderGrabDoAfterEvent();
+        var doAfter = new DoAfterArgs(EntityManager, ent, delay, ev, ent, args.Target)
+        {
+            BreakOnMove = true,
+            DuplicateCondition = DuplicateConditions.SameEvent,
+        };
+
+        if (_doAfter.TryStartDoAfter(doAfter))
+            ent.Comp.DoAfter = ev.DoAfter;
+    }
+
     private void OnPointActivateInWorld(Entity<DropshipWeaponPointComponent> ent, ref ActivateInWorldEvent args)
     {
         if (!TryComp(args.User, out PowerLoaderComponent? loader))
@@ -225,20 +250,34 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         var user = new Entity<PowerLoaderComponent?>(args.User, loader);
         var target = args.Target;
-        if (!CanDetachPopup(ref user, args.Target, out var delay, out var slot) ||
-            slot.ContainedEntity is not { } contained)
+        ContainerSlot container;
+
+        if (CanDetachPopup(ref user, ent, ent.Comp.AmmoContainerSlotId, false, out var ammoSlot) &&
+            ammoSlot.ContainedEntity != null)
+        {
+            container = ammoSlot;
+        }
+        else if (CanDetachPopup(ref user, ent, ent.Comp.WeaponContainerSlotId, true, out var weaponSlot) &&
+                 weaponSlot.ContainedEntity != null)
+        {
+            container = weaponSlot;
+        }
+        else
         {
             return;
         }
 
-        var ev = new DropshipDetachDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, args.User, delay, ev, contained, target)
-        {
-            BreakOnMove = true,
-            DuplicateCondition = DuplicateConditions.SameEvent,
-        };
+        StartPointDetach(ent, container, (user, loader), target);
+    }
 
-        _doAfter.TryStartDoAfter(doAfter);
+    private void OnPointActivateInWorld(Entity<DropshipUtilityPointComponent> ent, ref ActivateInWorldEvent args)
+    {
+        TryStartPointDetach(ent, ent.Comp.UtilitySlotId, ref args);
+    }
+
+    private void OnEngineActivateInWorld(Entity<DropshipEnginePointComponent> ent, ref ActivateInWorldEvent args)
+    {
+        TryStartPointDetach(ent, ent.Comp.ContainerId, ref args);
     }
 
     private void OnGrabbablePickupAttempt(Entity<PowerLoaderGrabbableComponent> ent, ref PickupAttemptEvent args)
@@ -310,66 +349,74 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
     }
 
-    private void OnGrabbableBeforeRangedInteract(Entity<PowerLoaderGrabbableComponent> ent, ref BeforeRangedInteractEvent args)
+    private void OnGetSlot(Entity<DropshipWeaponPointComponent> ent, ref GetAttachmentSlotEvent args)
     {
-        if (args.Target is not { } target)
+        var user = new Entity<PowerLoaderComponent?>(GetEntity(args.User), null);
+        if (!TryGetEntity(args.Used, out var used))
             return;
 
-        args.Handled = true;
-
-        var user = new Entity<PowerLoaderComponent?>(args.User, null);
-        var used = args.Used;
-        if (!CanAttachPopup(ref user, target, used, out var delay, out _))
-            return;
-
-        var ev = new DropshipAttachDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent, target, used)
+        ContainerSlot? slot;
+        if (args.BeingAttached)
         {
-            BreakOnMove = true,
-            DuplicateCondition = DuplicateConditions.SameEvent,
-        };
-        _doAfter.TryStartDoAfter(doAfter);
-    }
-
-    private void OnGrabbableDropshipAttach(Entity<PowerLoaderGrabbableComponent> ent, ref DropshipAttachDoAfterEvent args)
-    {
-        if (args.Cancelled ||
-            args.Handled ||
-            args.Target is not { } target ||
-            args.Used is not { } used)
+            args.CanUse = CanAttachPopup(ref user, ent, used.Value, out slot);
+        }
+        else
         {
-            return;
+            args.CanUse = CanDetachPopup(ref user, ent, ent.Comp.AmmoContainerSlotId, false, out slot) ||
+                          CanDetachPopup(ref user, ent, ent.Comp.WeaponContainerSlotId, false, out slot);
         }
 
-        var user = new Entity<PowerLoaderComponent?>(args.User, null);
-        if (!CanAttachPopup(ref user, target, used, out _, out var slot))
-            return;
-
-        _container.Insert(used, slot);
-
-        if (user.Comp != null)
-            SyncHands((user, user.Comp));
-
-        SyncAppearance(target);
+        if (slot != null)
+            args.SlotId = slot.ID;
     }
 
-    private void OnGrabbableDropshipDetach(Entity<PowerLoaderGrabbableComponent> ent, ref DropshipDetachDoAfterEvent args)
+    private void OnGetSlot(Entity<DropshipUtilityPointComponent> ent, ref GetAttachmentSlotEvent args)
     {
-        if (args.Cancelled || args.Handled || args.Target is not { } target)
+        TryGetSlot(ent, ent.Comp.UtilitySlotId, ref args);
+    }
+
+    private void OnGetSlot(Entity<DropshipEnginePointComponent> ent, ref GetAttachmentSlotEvent args)
+    {
+        TryGetSlot(ent, ent.Comp.ContainerId, ref args);
+    }
+
+    private void OnDropshipAttach(Entity<DropshipWeaponPointComponent> ent, ref DropshipAttachDoAfterEvent args)
+    {
+        if (!TryGetPointContainer(args, out var user, out _, out var contained, out var slot))
             return;
 
-        args.Handled = true;
+        InsertPoint(user, contained, slot);
+        SyncAppearance(ent);
+    }
 
-        var user = new Entity<PowerLoaderComponent?>(args.User, null);
-        if (!CanDetachPopup(ref user, target, out _, out var slot) ||
-            slot.ContainedEntity is not { } contained)
-        {
+    private void OnDropshipAttach(Entity<DropshipUtilityPointComponent> ent, ref DropshipAttachDoAfterEvent args)
+    {
+        if (!TryGetPointContainer(args, out var user, out var container, out var contained, out var slot))
             return;
-        }
+
+        if (TryComp(contained, out DropshipUtilityComponent? utilityComp))
+            utilityComp.AttachmentPoint = container;
+
+        InsertPoint(user, contained, slot);
+        SyncAppearance(ent, ent.Comp.UtilitySlotId);
+    }
+
+    private void OnDropshipAttach(Entity<DropshipEnginePointComponent> ent, ref DropshipAttachDoAfterEvent args)
+    {
+        if (!TryGetPointContainer(args, out var user, out _, out var contained, out var slot))
+            return;
+
+        InsertPoint(user, contained, slot);
+        SyncAppearance(ent, ent.Comp.ContainerId);
+    }
+
+    private void OnDropshipDetach(Entity<DropshipWeaponPointComponent> ent, ref DropshipDetachDoAfterEvent args)
+    {
+        if (!TryGetPointContainer(args, out var user, out _, out var contained, out var slot))
+            return;
 
         _container.Remove(contained, slot);
 
-        // TODO RMC14 partial ammo transfers between boxes, only delete if 0
         if (TryComp(contained, out DropshipAmmoComponent? ammo) &&
             ammo.Rounds < ammo.RoundsPerShot)
         {
@@ -381,19 +428,71 @@ public sealed class PowerLoaderSystem : EntitySystem
                 _popup.PopupClient(msg, buckled, PopupType.Medium);
             }
         }
-        else if (user.Comp != null)
+        else
         {
             PickUp((user, user.Comp), contained);
             SyncHands((user, user.Comp));
         }
 
-        SyncAppearance(target);
+        SyncAppearance(ent);
+    }
+
+    private void OnDropshipDetach(Entity<DropshipUtilityPointComponent> ent, ref DropshipDetachDoAfterEvent args)
+    {
+        DetachPoint(ref args);
+        SyncAppearance(ent, ent.Comp.UtilitySlotId);
+    }
+
+    private void OnEngineDetach(Entity<DropshipEnginePointComponent> ent, ref DropshipDetachDoAfterEvent args)
+    {
+        DetachPoint(ref args);
+        SyncAppearance(ent, ent.Comp.ContainerId);
     }
 
     private void OnGrababbleShouldInteract(Entity<PowerLoaderGrabbableComponent> ent, ref CombatModeShouldHandInteractEvent args)
     {
         if (!HasComp<PowerLoaderComponent>(args.User))
             args.Cancelled = true;
+    }
+
+    private void OnGrabbableBeforeRangedInteract(Entity<PowerLoaderGrabbableComponent> ent, ref BeforeRangedInteractEvent args)
+    {
+        if (args.Target is not { } target)
+            return;
+
+        args.Handled = true;
+
+        var user = new Entity<PowerLoaderComponent?>(args.User, null);
+        var used = args.Used;
+        var powerLoaderEv = new PowerLoaderInteractEvent(args.User, target, args.Used, GetBuckled(args.User).ToList());
+        RaiseLocalEvent(used, ref powerLoaderEv);
+        if (powerLoaderEv.Handled)
+            return;
+
+        var slotEv = new GetAttachmentSlotEvent(GetNetEntity(user), GetNetEntity(used));
+        RaiseLocalEvent(target, slotEv);
+        if (string.IsNullOrWhiteSpace(slotEv.SlotId))
+            return;
+
+        var slot = _container.EnsureContainer<ContainerSlot>(target, slotEv.SlotId);
+
+        if (!slotEv.CanUse)
+            return;
+
+        if (!TryComp(used, out PowerLoaderAttachableComponent? attachableComponent) ||
+            !_tag.HasAnyTag(target, attachableComponent.AttachableTypes))
+        {
+            return;
+        }
+
+        var ev = new DropshipAttachDoAfterEvent(GetNetEntity(target), GetNetEntity(used), slot.ID);
+        var doAfter = new DoAfterArgs(EntityManager, user, attachableComponent.AttachDelay, ev, target, target, used)
+        {
+            BreakOnMove = true,
+            DuplicateCondition = DuplicateConditions.SameEvent,
+        };
+        if (_doAfter.TryStartDoAfter(doAfter) && TryComp<PowerLoaderComponent>(args.User, out var loader))
+            loader.DoAfter = ev.DoAfter;
     }
 
     private void OnActivePilotPreventCollide(Entity<ActivePowerLoaderPilotComponent> ent, ref PreventCollideEvent args)
@@ -414,34 +513,33 @@ public sealed class PowerLoaderSystem : EntitySystem
 
     private bool CanAttachPopup(
         ref Entity<PowerLoaderComponent?> user,
-        EntityUid target,
+        Entity<DropshipWeaponPointComponent> target,
         EntityUid used,
-        out TimeSpan delay,
         [NotNullWhen(true)] out ContainerSlot? slot)
     {
-        delay = default;
-        slot = default;
-        if (!Resolve(user, ref user.Comp, false) ||
-            !TryComp(target, out DropshipWeaponPointComponent? point))
-        {
+        slot = null;
+        if (!Resolve(user, ref user.Comp, false))
             return false;
-        }
 
         string slotId;
         string msg;
-        if (TryComp(used, out DropshipWeaponComponent? weapon))
+        if (HasComp<DropshipWeaponComponent>(used))
         {
-            slotId = point.WeaponContainerSlotId;
-            delay = weapon.AttachDelay;
+            slotId = target.Comp.WeaponContainerSlotId;
             msg = Loc.GetString("rmc-power-loader-occupied-weapon");
         }
-        else if (TryComp(used, out DropshipAmmoComponent? ammo))
+        else if (HasComp<DropshipAmmoComponent>(used))
         {
-            slotId = point.AmmoContainerSlotId;
-            delay = ammo.AttachDelay;
+            if (_transform.GetGrid(target.Owner) is { } grid &&
+                _dropship.IsInFlight(grid))
+            {
+                return false;
+            }
+
+            slotId = target.Comp.AmmoContainerSlotId;
             msg = Loc.GetString("rmc-power-loader-occupied-ammo");
 
-            if (!_container.TryGetContainer(target, point.WeaponContainerSlotId, out var weaponContainer) ||
+            if (!_container.TryGetContainer(target, target.Comp.WeaponContainerSlotId, out var weaponContainer) ||
                 weaponContainer.ContainedEntities.Count == 0)
             {
                 msg = Loc.GetString("rmc-power-loader-ammo-no-weapon");
@@ -467,54 +565,87 @@ public sealed class PowerLoaderSystem : EntitySystem
             _popup.PopupClient(msg, target, buckled, PopupType.SmallCaution);
         }
 
-        slot = default;
+        slot = null;
         return false;
     }
 
-    private bool CanDetachPopup(
-        ref Entity<PowerLoaderComponent?> user,
+    private void CanAttachPopup(ref Entity<PowerLoaderComponent?> user,
         EntityUid target,
-        out TimeSpan delay,
+        string container,
+        EntityUid used,
         [NotNullWhen(true)] out ContainerSlot? slot)
     {
-        delay = default;
-        slot = default;
-        if (!Resolve(user, ref user.Comp, false) ||
-            !TryComp(target, out DropshipWeaponPointComponent? point))
+        slot = null;
+        if (!Resolve(user, ref user.Comp, false))
+            return;
+
+        string slotId;
+        string msg;
+        if (HasComp<DropshipUtilityComponent>(used) ||
+            HasComp<DropshipEngineComponent>(used))
+        {
+            slotId = container;
+            msg = Loc.GetString("rmc-power-loader-occupied");
+        }
+        else
+        {
+            return;
+        }
+
+        slot = _container.EnsureContainer<ContainerSlot>(target, slotId);
+        if (slot.ContainedEntity == null)
+            return;
+
+        foreach (var buckled in GetBuckled(user))
+        {
+            _popup.PopupClient(msg, target, buckled, PopupType.SmallCaution);
+        }
+
+        slot = null;
+    }
+
+    private bool CanDetachPopup(
+    ref Entity<PowerLoaderComponent?> user,
+    EntityUid target,
+    string containerId,
+    bool doPopup,
+    [NotNullWhen(true)] out ContainerSlot? slot)
+    {
+        slot = null;
+        if (!Resolve(user, ref user.Comp, false))
         {
             return false;
         }
 
         if (!HasFreeHands(user))
         {
-            var msg = Loc.GetString("rmc-power-loader-cant-grab-full", ("mech", user.Owner));
-            foreach (var buckled in GetBuckled(user))
+            if (doPopup)
             {
-                _popup.PopupClient(msg, target, buckled, PopupType.SmallCaution);
+                var msg = Loc.GetString("rmc-power-loader-cant-grab-full", ("mech", user.Owner));
+                foreach (var buckled in GetBuckled(user))
+                {
+                    _popup.PopupClient(msg, target, buckled, PopupType.SmallCaution);
+                }
             }
 
             return false;
         }
 
-        if (_container.TryGetContainer(target, point.AmmoContainerSlotId, out var ammoContainer) &&
-            ammoContainer.ContainedEntities.Count > 0)
+        if (_container.TryGetContainer(target, containerId, out var utilityContainer) &&
+            utilityContainer.ContainedEntities.Count > 0)
         {
-            slot = (ContainerSlot) ammoContainer;
-            delay = CompOrNull<DropshipAmmoComponent>(slot.ContainedEntity)?.AttachDelay ?? TimeSpan.Zero;
-        }
-        else if (_container.TryGetContainer(target, point.WeaponContainerSlotId, out var weaponContainer) &&
-                 weaponContainer.ContainedEntities.Count > 0)
-        {
-            slot = (ContainerSlot) weaponContainer;
-            delay = CompOrNull<DropshipWeaponComponent>(slot.ContainedEntity)?.AttachDelay ?? TimeSpan.Zero;
+            slot = (ContainerSlot) utilityContainer;
         }
 
         if (slot == null)
         {
-            foreach (var buckled in GetBuckled(user))
+            if (doPopup)
             {
-                var msg = Loc.GetString("rmc-power-loader-nothing-attached");
-                _popup.PopupClient(msg, user, buckled, PopupType.SmallCaution);
+                foreach (var buckled in GetBuckled(user))
+                {
+                    var msg = Loc.GetString("rmc-power-loader-nothing-attached");
+                    _popup.PopupClient(msg, user, buckled, PopupType.SmallCaution);
+                }
             }
 
             return false;
@@ -533,7 +664,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         Entity<PowerLoaderGrabbableComponent?> grabbable,
         out TimeSpan delay)
     {
-        delay = default;
+        delay = TimeSpan.Zero;
         if (!Resolve(grabbable, ref grabbable.Comp, false))
             return false;
 
@@ -621,6 +752,12 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
     }
 
+    public void TrySyncHands(Entity<PowerLoaderComponent?> loader)
+    {
+        if (Resolve(loader, ref loader.Comp, false))
+            SyncHands((loader, loader.Comp));
+    }
+
     private void DeleteVirtuals(Entity<PowerLoaderComponent> loader, EntityUid user)
     {
         var virtualContainer = _container.EnsureContainer<Container>(loader, loader.Comp.VirtualContainerId);
@@ -660,11 +797,8 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
     }
 
-    private void SyncAppearance(Entity<DropshipWeaponPointComponent?> point)
+    private void SyncAppearance(Entity<DropshipWeaponPointComponent> point)
     {
-        if (!Resolve(point, ref point.Comp, false))
-            return;
-
         if (!_container.TryGetContainer(point, point.Comp.WeaponContainerSlotId, out var weaponContainer) ||
             weaponContainer.ContainedEntities.Count == 0)
         {
@@ -711,10 +845,134 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
     }
 
+    private void SyncAppearance(EntityUid point, string container)
+    {
+        if (!_container.TryGetContainer(point, container, out var utilityContainer) ||
+            utilityContainer.ContainedEntities.Count == 0)
+        {
+            _appearance.SetData(point, DropshipUtilityVisuals.Sprite, "");
+            _appearance.SetData(point, DropshipUtilityVisuals.State, "");
+            return;
+        }
+
+        foreach (var contained in utilityContainer.ContainedEntities)
+        {
+            if (!TryComp(contained, out DropshipAttachedSpriteComponent? utility))
+                continue;
+
+            if (utility.Sprite is not { } rsi)
+                continue;
+
+            _appearance.SetData(point, DropshipUtilityVisuals.Sprite, rsi.RsiPath.ToString());
+            _appearance.SetData(point, DropshipUtilityVisuals.State, rsi.RsiState);
+            return;
+        }
+    }
+
     private void RemovePilot(Entity<ActivePowerLoaderPilotComponent> active)
     {
         _buckle.Unbuckle(active.Owner, null);
         RemCompDeferred<ActivePowerLoaderPilotComponent>(active);
+    }
+
+    private bool TryGetPointContainer(DropshipDoAfterEvent args, out Entity<PowerLoaderComponent> user, out EntityUid container, out EntityUid contained, [NotNullWhen(true)] out BaseContainer? slot)
+    {
+        user = default;
+        container = default;
+        contained = default;
+        slot = null;
+        if (args.Cancelled ||
+            args.Handled ||
+            args.Target == null)
+        {
+            return false;
+        }
+
+        if (!TryComp(args.User, out PowerLoaderComponent? powerLoaderComp))
+            return false;
+
+        args.Handled = true;
+        user = new Entity<PowerLoaderComponent>(args.User, powerLoaderComp);
+        container = GetEntity(args.Container);
+        contained = GetEntity(args.Contained);
+        slot = _container.GetContainer(container, args.Slot);
+        return true;
+    }
+
+    private void InsertPoint(Entity<PowerLoaderComponent> user, EntityUid contained, BaseContainer slot)
+    {
+        if (slot.ContainedEntities.Count > 0)
+            return;
+
+        _container.Insert(contained, slot);
+        SyncHands((user, user.Comp));
+    }
+
+    private void StartPointDetach<T>(Entity<T> ent, ContainerSlot container, Entity<PowerLoaderComponent> user, EntityUid target) where T : IComponent?
+    {
+        if (!TryComp(container.ContainedEntity, out PowerLoaderDetachableComponent? detachableComponent))
+            return;
+
+        var contained = container.ContainedEntity.Value;
+        var ev = new DropshipDetachDoAfterEvent(GetNetEntity(ent), GetNetEntity(contained), container.ID);
+        var doAfter = new DoAfterArgs(EntityManager, user, detachableComponent.DetachDelay, ev, target, target)
+        {
+            BreakOnMove = true,
+            DuplicateCondition = DuplicateConditions.SameEvent,
+        };
+
+        if (_doAfter.TryStartDoAfter(doAfter))
+            user.Comp.DoAfter = ev.DoAfter;
+    }
+
+    private void TryStartPointDetach<T>(Entity<T> ent, string container, ref ActivateInWorldEvent args) where T : IComponent?
+    {
+        if (!TryComp(args.User, out PowerLoaderComponent? loader))
+            return;
+
+        args.Handled = true;
+
+        var user = new Entity<PowerLoaderComponent?>(args.User, loader);
+        var target = args.Target;
+        if (!CanDetachPopup(ref user, ent, container, true, out var slot) ||
+            slot.ContainedEntity == null)
+        {
+            return;
+        }
+
+        StartPointDetach(ent, slot, (user, loader), target);
+    }
+
+    private void DetachPoint(ref DropshipDetachDoAfterEvent args)
+    {
+        if (!TryGetPointContainer(args, out var user, out _, out var contained, out var slot))
+            return;
+
+        if (TryComp(contained, out DropshipUtilityComponent? utilityComp))
+            utilityComp.AttachmentPoint = null;
+
+        _container.Remove(contained, slot);
+
+        PickUp((user, user.Comp), contained);
+        SyncHands((user, user.Comp));
+    }
+
+    private void TryGetSlot(EntityUid ent, string container, ref GetAttachmentSlotEvent args)
+    {
+        var user = new Entity<PowerLoaderComponent?>(GetEntity(args.User), null);
+        if (!TryGetEntity(args.Used, out var used))
+            return;
+
+        ContainerSlot? slot;
+        if (args.BeingAttached)
+            CanAttachPopup(ref user, ent, container, used.Value, out slot);
+        else
+            CanDetachPopup(ref user, ent, container, true, out slot);
+
+        if (slot == null)
+            return;
+
+        args.SlotId = slot.ID;
     }
 
     public override void Update(float frameTime)

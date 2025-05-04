@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using Content.Server.Storage.Components;
+using Content.Shared._RMC14.Storage; // RMC14
 using Content.Shared.Item;
 using Content.Shared.Prototypes;
 using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Whitelist; // RMC14
 using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 
@@ -82,11 +84,16 @@ namespace Content.IntegrationTests.Tests
             await using var pair = await PoolManager.GetServerClient();
             var server = pair.Server;
 
+            // RMC14: respect IgnoreContentsSizeComponent
+            var testMap = await pair.CreateTestMap();
+            var mapCoordinates = testMap.MapCoords;
+
             var entMan = server.ResolveDependency<IEntityManager>();
             var protoMan = server.ResolveDependency<IPrototypeManager>();
             var compFact = server.ResolveDependency<IComponentFactory>();
             var id = compFact.GetComponentName(typeof(StorageFillComponent));
 
+            var entityWhitelistSys = entMan.System<EntityWhitelistSystem>(); // RMC14
             var itemSys = entMan.System<SharedItemSystem>();
 
             var allSizes = protoMan.EnumeratePrototypes<ItemSizePrototype>().ToList();
@@ -94,14 +101,14 @@ namespace Content.IntegrationTests.Tests
 
             await Assert.MultipleAsync(async () =>
             {
-                foreach (var proto in pair.GetPrototypesWithComponent<StorageFillComponent>())
+                foreach (var (proto, fill) in pair.GetPrototypesWithComponent<StorageFillComponent>())
                 {
                     if (proto.HasComponent<EntityStorageComponent>(compFact))
                         continue;
 
                     StorageComponent? storage = null;
+                    IgnoreContentsSizeComponent? ignoreContentsSize = null; // RMC14
                     ItemComponent? item = null;
-                    StorageFillComponent fill = default!;
                     var size = 0;
                     await server.WaitAssertion(() =>
                     {
@@ -111,8 +118,8 @@ namespace Content.IntegrationTests.Tests
                             return;
                         }
 
+                        proto.TryGetComponent("IgnoreContentsSize", out ignoreContentsSize); // RMC14
                         proto.TryGetComponent("Item", out item);
-                        fill = (StorageFillComponent) proto.Components[id].Component;
                         size = GetFillSize(fill, false, protoMan, itemSys);
                     });
 
@@ -148,13 +155,22 @@ namespace Content.IntegrationTests.Tests
                         if (!protoMan.TryIndex<EntityPrototype>(entry.PrototypeId, out var fillItem))
                             continue;
 
+                        EntityUid? entryUid = null; // RMC14
                         ItemComponent? entryItem = null;
                         await server.WaitPost(() =>
                         {
                             fillItem.TryGetComponent("Item", out entryItem);
+
+                            // RMC14
+                            if (ignoreContentsSize != null)
+                                entryUid = entMan.Spawn(entry.PrototypeId, mapCoordinates);
                         });
 
                         if (entryItem == null)
+                            continue;
+
+                        // RMC14: respect IgnoreContentsSizeComponent
+                        if (entryUid is { } uid && entityWhitelistSys.IsWhitelistPass(ignoreContentsSize?.Items, uid))
                             continue;
 
                         Assert.That(protoMan.Index(entryItem.Size).Weight,
@@ -180,7 +196,7 @@ namespace Content.IntegrationTests.Tests
 
             var itemSys = entMan.System<SharedItemSystem>();
 
-            foreach (var proto in pair.GetPrototypesWithComponent<StorageFillComponent>())
+            foreach (var (proto, fill) in pair.GetPrototypesWithComponent<StorageFillComponent>())
             {
                 if (proto.HasComponent<StorageComponent>(compFact))
                     continue;
@@ -193,7 +209,6 @@ namespace Content.IntegrationTests.Tests
                     if (entStorage == null)
                         return;
 
-                    var fill = (StorageFillComponent) proto.Components[id].Component;
                     var size = GetFillSize(fill, true, protoMan, itemSys);
                     Assert.That(size, Is.LessThanOrEqualTo(entStorage.Capacity),
                         $"{proto.ID} storage fill is too large.");

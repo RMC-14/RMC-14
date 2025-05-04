@@ -1,7 +1,6 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
-using Content.Shared._RMC14.Xenonids.GasToggle;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
@@ -10,7 +9,6 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Drunk;
 using Content.Shared.Jittering;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Speech.EntitySystems;
@@ -21,6 +19,9 @@ using Robust.Shared.Player;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Shared.Projectiles;
+using Content.Shared._RMC14.Pulling;
+using Content.Shared._RMC14.Slow;
 
 namespace Content.Shared._RMC14.Xenonids.Neurotoxin;
 
@@ -40,16 +41,16 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!; //It's how this fakes movement
     [Dependency] private readonly ActionBlockerSystem _blocker = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
+    [Dependency] private readonly RMCSlowSystem _slow = default!;
 
     private readonly HashSet<Entity<MarineComponent>> _marines = new();
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<NeurotoxinComponent, RejuvenateEvent>(OnRejuvenate);
-        SubscribeLocalEvent<CoughedBloodComponent, RefreshMovementSpeedModifiersEvent>(OnCoughedBloodRefreshSpeed);
-        SubscribeLocalEvent<CoughedBloodComponent, ComponentRemove>(OnCoughedBloodRemove);
+        SubscribeLocalEvent<NeurotoxinInjectorComponent, ProjectileHitEvent>(OnProjectileHit);
     }
 
     private void OnRejuvenate(Entity<NeurotoxinComponent> ent, ref RejuvenateEvent args)
@@ -57,17 +58,36 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
         RemCompDeferred<NeurotoxinComponent>(ent);
     }
 
-    private void OnCoughedBloodRefreshSpeed(Entity<CoughedBloodComponent> victim, ref RefreshMovementSpeedModifiersEvent args)
+    private void OnProjectileHit(Entity<NeurotoxinInjectorComponent> ent, ref ProjectileHitEvent args)
     {
-        var multiplier = victim.Comp.SlowMultiplier.Float();
-        args.ModifySpeed(multiplier, multiplier);
+        if (!HasComp<MarineComponent>(args.Target))
+            return;
+
+        if (!ent.Comp.AffectsDead && _mobState.IsDead(args.Target))
+            return;
+
+        if (!ent.Comp.AffectsInfectedNested &&
+                    HasComp<XenoNestedComponent>(args.Target) &&
+                    HasComp<VictimInfectedComponent>(args.Target))
+        {
+            return;
+        }
+
+        var time = _timing.CurTime;
+
+        if (!EnsureComp<NeurotoxinComponent>(args.Target, out var neuro))
+        {
+            neuro.LastMessage = time;
+            neuro.LastAccentTime = time;
+            neuro.LastStumbleTime = time;
+        }
+
+        neuro.NeurotoxinAmount += ent.Comp.NeuroPerSecond;
+        neuro.ToxinDamage = ent.Comp.ToxinDamage;
+        neuro.OxygenDamage = ent.Comp.OxygenDamage;
+        neuro.CoughDamage = ent.Comp.CoughDamage;
     }
 
-    private void OnCoughedBloodRemove(Entity<CoughedBloodComponent> victim, ref ComponentRemove args)
-    {
-        if (!TerminatingOrDeleted(victim))
-            _movementSpeed.RefreshMovementSpeedModifiers(victim);
-    }
 
     public override void Update(float frameTime)
     {
@@ -79,6 +99,9 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
 
         while (neurotoxinInjectorQuery.MoveNext(out var uid, out var neuroGas))
         {
+            if (!neuroGas.InjectInContact)
+                continue;
+
             _marines.Clear();
             _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), 0.5f, _marines);
 
@@ -99,12 +122,18 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                     builtNeurotoxin.LastMessage = time;
                     builtNeurotoxin.LastAccentTime = time;
                     builtNeurotoxin.LastStumbleTime = time;
+                    builtNeurotoxin.NextGasInjectionAt = time;
                 }
+
+                if (time < builtNeurotoxin.NextGasInjectionAt)
+                    continue;
+
                 // TODO RMC14 blurriness added here too
-                builtNeurotoxin.NeurotoxinAmount += neuroGas.NeuroPerSecond * frameTime;
+                builtNeurotoxin.NeurotoxinAmount += neuroGas.NeuroPerSecond;
                 builtNeurotoxin.ToxinDamage = neuroGas.ToxinDamage;
                 builtNeurotoxin.OxygenDamage = neuroGas.OxygenDamage;
                 builtNeurotoxin.CoughDamage = neuroGas.CoughDamage;
+                builtNeurotoxin.NextGasInjectionAt = time + neuroGas.TimeBetweenGasInjects;
             }
         }
 
@@ -136,13 +165,14 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                 // This is how we randomly move them - by throwing
                 if (_blocker.CanMove(uid))
                 {
+                    _rmcPulling.TryStopPullsOn(uid);
                     _physics.SetLinearVelocity(uid, Vector2.Zero);
                     _physics.SetAngularVelocity(uid, 0f);
-                    _throwing.TryThrow(uid, _random.NextAngle().ToVec().Normalized(), 1, animated: false, playSound: false, doSpin: false);
+                    _throwing.TryThrow(uid, _random.NextAngle().ToVec().Normalized() / 10, 10, animated: false, playSound: false, doSpin: false);
                 }
                 _popup.PopupEntity(Loc.GetString("rmc-stumble-others", ("victim", uid)), uid, Filter.PvsExcept(uid), true, PopupType.SmallCaution);
                 _popup.PopupEntity(Loc.GetString("rmc-stumble"), uid, uid, PopupType.MediumCaution);
-                _statusEffects.TryAddStatusEffect(uid, "Muted", neuro.DazeLength * 5, true, "Muted");
+                _stutter.DoStutter(uid, neuro.DazeLength * 5, true);
                 _jitter.DoJitter(uid, neuro.StumbleJitterTime, true);
                 _statusEffects.TryAddStatusEffect<DrunkComponent>(uid, "Drunk", neuro.DizzyStrengthOnStumble, true);
                 var ev = new NeurotoxinEmoteEvent() { Emote = neuro.PainId };
@@ -151,26 +181,13 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
 
             if (_random.Prob(coughChance * frameTime))
             {
-                EnsureComp<CoughedBloodComponent>(uid, out var bloodCough);
-                bloodCough.ExpireTime = time + neuro.BloodCoughDuration;
-                _movementSpeed.RefreshMovementSpeedModifiers(uid);
+                _slow.TrySlowdown(uid, neuro.BloodCoughDuration);
                 _damage.TryChangeDamage(uid, neuro.CoughDamage); // TODO RMC-14 specifically chest damage
                 _popup.PopupEntity(Loc.GetString("rmc-bloodcough"), uid, uid, PopupType.MediumCaution);
                 var ev = new NeurotoxinEmoteEvent() { Emote = neuro.CoughId };
                 RaiseLocalEvent(uid, ev);
             }
 
-        }
-
-        var bloodCoughQuery = EntityQueryEnumerator<CoughedBloodComponent>();
-
-        while (bloodCoughQuery.MoveNext(out var uid, out var cough))
-        {
-            if (time > cough.ExpireTime)
-            {
-                RemCompDeferred<CoughedBloodComponent>(uid);
-                _movementSpeed.RefreshMovementSpeedModifiers(uid);
-            }
         }
 
     }
@@ -275,7 +292,7 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
         if (neurotoxin.NeurotoxinAmount >= 27)
         {
             // TODO RMC14 gives weldervision too
-            _statusEffects.TryAddStatusEffect(victim, "Muted", neurotoxin.DazeLength, true, "Muted");
+            _stutter.DoStutter(victim, neurotoxin.DazeLength, true);
             _damage.TryChangeDamage(victim, neurotoxin.ToxinDamage * frameTime);
             // TODO RMC14 tempoarary deafness
         }

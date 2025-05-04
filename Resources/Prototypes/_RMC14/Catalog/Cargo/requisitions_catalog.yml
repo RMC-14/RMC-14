@@ -9,6 +9,16 @@
     - name: Ammo
       entries:
       - cost: 2000
+        crate: RMCCrateBoxBulletsSMG
+      - cost: 4000
+        crate: RMCCrateBoxBulletsSMGAP
+      - cost: 2000
+        crate: RMCCrateBoxBulletsRifle
+      - cost: 4000
+        crate: RMCCrateBoxBulletsRifleAP
+      - cost: 4000
+        crate: RMCCrateBoxAmmo458
+      - cost: 2000
         crate: RMCCrateBoxMagazineRifleM54C
       - cost: 4000
         crate: RMCCrateBoxMagazineRifleM54CAP
@@ -16,6 +26,8 @@
         crate: RMCCrateBoxMagazineRifleM54CExt
 #      - cost: 2000
 #        crate: RMCCrateMagazineRifleM54CE2
+      - cost: 3000
+        crate: RMCCrateMagazineRifleM54CE2HT
       - cost: 2000
         crate: RMCCrateBoxMagazineRifleM4SPR
       - cost: 4000
@@ -26,14 +38,16 @@
         crate: RMCCrateBoxMagazineSMGM63AP
       - cost: 2000
         crate: RMCCrateBoxMagazinePistolM1984
-#      - cost: 3000 # TODO RMC14 this crate is completed but needs mags
-#        crate: RMCCrateBoxMagazinePistolM1984AP
+      - cost: 3000
+        crate: RMCCrateBoxMagazinePistolM1984AP
       - cost: 3000
         crate: RMCCrateBoxShellsShotgunSlugs
       - cost: 3000
         crate: RMCCrateBoxShellsShotgunBuckshot
       - cost: 3000
         crate: RMCCrateBoxShellsShotgunFlechette
+      - cost: 4000
+        crate: RMCCrateBoxShellsShotgunBreaching
       - cost: 2000
         crate: RMCCrateBoxMagazinePistolM77AP
       - cost: 4000
@@ -45,11 +59,17 @@
       - cost: 4000
         crate: RMCCrateBoxMagazineSmartPistol
       - cost: 2000
+        crate: RMCCrateBoxMagazineBreaching
+      - cost: 2000
+        crate: RMCCrateBoxMagazineM54CE2
+      - cost: 2000
         crate: RMCCrateBoxMagazineM44Revolver
       - cost: 3000
-        crate: RMCCrateBoxMagazineM44RevolverMarksman
+        crate: RMCCrateBoxMagazineRevolverM44Marksman
       - cost: 4000
         crate: RMCCrateBoxMagazineSentry
+      - cost: 4000
+        crate: RMCCrateMagazineNapthalUT
       - cost: 4000
         crate: RMCCrateBoxMagazineSentryShotgun
     - name: Attachments
@@ -105,6 +125,12 @@
       - cost: 2000
         crate: RMCCrateClothingWebbing
       - cost: 2000
+        crate: RMCCrateClothingWebbingVest
+      - cost: 2000
+        crate: RMCCrateClothingWebbingKnife
+      - cost: 3000
+        crate: RMCCrateClothingWebbingHolster
+      - cost: 2000
         crate: RMCCrateClothingWebbingPouch
       - cost: 3000
         crate: RMCCrateClothingOfficerOutfit
@@ -146,6 +172,8 @@
       entries:
       - cost: 3000
         crate: RMCCrateGrenadesHighExplosive
+      - cost: 4000
+        crate: RMCCrateGrenadesIncendiary
       - cost: 3000
         crate: RMCCrateGrenadesFrag
       # leaving this commented, as it is not parity, but we might want it in the future
@@ -153,8 +181,30 @@
       #  crate: RMCCrateGrenadesSmoke
       - cost: 4000
         crate: RMCCrateGrenadesFragOld
+      - cost: 3000
+        crate: RMCCratePlasticExplosives
       - cost: 4000
         crate: RMCCrateBreachingCharges
+      - cost: 10000
+        crate: RMCCrateGrenadesHighExplosiveBox
+      - cost: 10000
+        crate: RMCCrateGrenadesBoxHEFA
+      - cost: 10000
+        crate: RMCCrateGrenadesAirburstFragBox
+      - cost: 10000
+        crate: RMCCrateBoxAGMI
+      - cost: 4000
+        crate: RMCCrateGrenadesAirburstFrag
+      - cost: 4000
+        crate: RMCCrateGrenadesAirburstIncendiary
+      - cost: 3000
+        crate: RMCCrateGrenadesAirburstSmoke
+      - cost: 4000
+        crate: RMCCrateGrenadesAirburstHornet
+      - cost: 4000
+        crate: RMCCrateGrenadesAirburstStarShell
+      - cost: 1000
+        crate: RMCCrateGrenadesBatonSlug
     - name: Food
       entries:
       - cost: 1000
@@ -171,8 +221,12 @@
         crate: RMCCrateGearBinoculars
       - cost: 4000
         crate: RMCCrateGearPackFlare
+      - cost: 4000
+        crate: RMCCrateGearMotionDetector
       - cost: 6000
         crate: RMCCrateGearPackFlareCAS
+      - cost: 2000
+        crate: RMCCrateGearFulton
     - name: Medical
       entries:
       - cost: 3200
@@ -191,9 +245,11 @@
       entries:
       - cost: 6000
         crate: RMCCrateMortarKit
-      - cost: 2000
+      - cost: 1500
         crate: RMCCrateMortarShellHE
-      - cost: 2000
+      - cost: 1500
+        crate: RMCCrateMortarShellIncendiary
+      - cost: 1000
         crate: RMCCrateMortarShellFlare
 #    - name: Operations
 #      entries: []
@@ -203,6 +259,8 @@
       entries:
       - cost: 3000
         crate: RMCCrateResearchPhoron
+      - cost: 2000
+        crate: RMCCrateResearchPlastic
     - name: Restricted Equipment
       entries:
       - cost: 2000
@@ -228,13 +286,23 @@
       - cost: 10000
         crate: RMCCrateSmartGunSet
       - cost: 4000
-        crate: RMCCrateM54C
-#      - cost: 4000
-#        crate: RMCCrateM54CE2
+        crate: RMCCrateM54CE2
       - cost: 3000
         crate: RMCCrateMK80
+      - cost: 4000
+        crate: RMCCrateM54CMK1
+      - cost: 4000
+        crate: RMCCrateXM88
       - cost: 3000
         crate: RMCCrateSU6
+      - cost: 4000
+        crate: RMCCrateM34
+      - cost: 3000
+        crate: RMCCrateMOU53
+      - cost: 3000
+        crate: RMCCrateXM51
+      - cost: 4000
+        crate: RMCCrateM79
     - name: Weapons Specialist Ammo
       entries:
       - cost: 4000
@@ -245,6 +313,8 @@
         crate: RMCCrateMagazineM96SFlak
       - cost: 3000
         crate: RMCCrateMagazineM96SIncendiary
+      - cost: 3000
+        crate: RMCCrateMagazineXM43E1Standard
       - cost: 3000
         crate: RMCCrateM5DemoSpecMixed
       - cost: 3000
@@ -257,8 +327,14 @@
         crate: RMCCrateMagazineM4SPRCustomMixed
       - cost: 3000
         crate: RMCCrateMagazineM4SPRCustomStandard
-      - cost: 3000 
+      - cost: 3000
         crate: RMCCrateMagazineM4SPRCustomImpact
-#      - cost: 3000
-#        crate: RMCCrateMagazineM4SPRCustomIncendiary These ones are straight downgrades and thus shouldn't be for sale
+      - cost: 3000
+        crate: RMCCrateMagazineM4SPRCustomIncendiary
 #      - cost: 4000
+
+
+
+#        Black Market Orders
+#      - cost: 5 We-Ya Funnybucks
+#        crate: RMCCrateD18

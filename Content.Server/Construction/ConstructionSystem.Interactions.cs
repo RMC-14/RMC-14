@@ -368,7 +368,9 @@ namespace Content.Server.Construction
                         new [] { toolInsertStep.Tool },
                         new ConstructionInteractDoAfterEvent(EntityManager, interactUsing),
                         out var doAfter,
-                        toolInsertStep.Fuel);
+                        toolInsertStep.Fuel,
+                        duplicateCondition: toolInsertStep.DuplicateConditions,
+                        predicted: false);
 
                     return result && doAfter != null ? HandleResult.DoAfter : HandleResult.False;
                 }

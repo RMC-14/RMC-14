@@ -1,7 +1,7 @@
-﻿using Content.Shared._RMC14.Attachable.Systems;
+using Content.Shared._RMC14.Attachable.Systems;
+using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
 using Content.Shared.Inventory;
-using Content.Shared.NPC.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Containers;
 using Robust.Shared.Physics.Events;
@@ -14,12 +14,10 @@ public sealed class GunIFFSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
 
-    private EntityQuery<NpcFactionMemberComponent> _npcFactionMemberQuery;
     private EntityQuery<UserIFFComponent> _userIFFQuery;
 
     public override void Initialize()
     {
-        _npcFactionMemberQuery = GetEntityQuery<NpcFactionMemberComponent>();
         _userIFFQuery = GetEntityQuery<UserIFFComponent>();
 
         SubscribeLocalEvent<UserIFFComponent, GetIFFFactionEvent>(OnUserIFFGetFaction);
@@ -27,6 +25,7 @@ public sealed class GunIFFSystem : EntitySystem
         SubscribeLocalEvent<HandsComponent, GetIFFFactionEvent>(OnHandsIFFGetFaction);
         SubscribeLocalEvent<ItemIFFComponent, InventoryRelayedEvent<GetIFFFactionEvent>>(OnItemIFFGetFaction);
         SubscribeLocalEvent<GunIFFComponent, AmmoShotEvent>(OnGunIFFAmmoShot, before: [typeof(AttachableIFFSystem)]);
+        SubscribeLocalEvent<GunIFFComponent, ExaminedEvent>(OnGunIFFExamined);
         SubscribeLocalEvent<ProjectileIFFComponent, PreventCollideEvent>(OnProjectileIFFPreventCollide);
     }
 
@@ -69,6 +68,17 @@ public sealed class GunIFFSystem : EntitySystem
         GiveAmmoIFF(ent, ref args, ent.Comp.Intrinsic, ent.Comp.Enabled);
     }
 
+    private void OnGunIFFExamined(Entity<GunIFFComponent> ent, ref ExaminedEvent args)
+    {
+        if (!ent.Comp.Enabled)
+            return;
+
+        using (args.PushGroup(nameof(GunIFFComponent)))
+        {
+            args.PushMarkup(Loc.GetString("rmc-examine-text-iff"));
+        }
+    }
+
     private void OnProjectileIFFPreventCollide(Entity<ProjectileIFFComponent> ent, ref PreventCollideEvent args)
     {
         if (args.Cancelled ||
@@ -82,6 +92,17 @@ public sealed class GunIFFSystem : EntitySystem
 
         if (HasComp<EntityIFFComponent>(args.OtherEntity) && IsInFaction(args.OtherEntity, faction))
             args.Cancelled = true;
+    }
+
+    public bool TryGetUserFaction(Entity<UserIFFComponent?> user, out EntProtoId<IFFFactionComponent> faction)
+    {
+        faction = default;
+        if (!_userIFFQuery.Resolve(user, ref user.Comp, false) ||
+            user.Comp.Faction is not { } userFaction)
+            return false;
+
+        faction = userFaction;
+        return true;
     }
 
     public bool IsInFaction(Entity<UserIFFComponent?> user, EntProtoId<IFFFactionComponent> faction)
@@ -101,6 +122,15 @@ public sealed class GunIFFSystem : EntitySystem
         Dirty(user);
     }
 
+    public void SetIFFState(EntityUid ent, bool enabled)
+    {
+        if (TryComp<GunIFFComponent>(ent, out var comp))
+        {
+            comp.Enabled = enabled;
+            Dirty(ent, comp);
+        }
+    }
+
     public void GiveAmmoIFF(EntityUid gun, ref AmmoShotEvent args, bool intrinsic, bool enabled)
     {
         EntityUid owner;
@@ -108,7 +138,7 @@ public sealed class GunIFFSystem : EntitySystem
         {
             owner = gun;
         }
-        else if (_container.TryGetContainingContainer((gun, null), out var container))
+        else if (_container.TryGetOuterContainer(gun, Transform(gun), out var container))
         {
             owner = container.Owner;
         }
@@ -135,5 +165,12 @@ public sealed class GunIFFSystem : EntitySystem
             iff.Enabled = enabled;
             Dirty(projectile, iff);
         }
+    }
+
+    public void GiveAmmoIFF(EntityUid uid, EntProtoId<IFFFactionComponent>? faction, bool enabled)
+    {
+        var projectileIFFComponent = EnsureComp<ProjectileIFFComponent>(uid);
+        projectileIFFComponent.Faction = faction;
+        projectileIFFComponent.Enabled = enabled;
     }
 }

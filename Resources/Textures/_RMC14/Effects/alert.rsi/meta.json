@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/94e53869b9cdd68ab26272eabdf58f90b93ca304/icons/effects/alert.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "red2"
+    },
+    {
+      "name": "blue2"
+    },
+    {
+      "name": "blue-red2"
+    },
+    {
+      "name": "blue-red-d"
+    },
+    {
+      "name": "blue-red",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "invi"
+    },
+    {
+      "name": "blueold",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "_red",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "dark"
+    },
+    {
+      "name": "dark160"
+    },
+    {
+      "name": "dark128"
+    },
+    {
+      "name": "party",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "blue",
+      "delays": [
+        [
+          0.3,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "bluenew",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "red",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "techpod_lz_marker",
+      "delays": [
+        [
+          0.3,
+          0.1,
+          0.4,
+          0.2,
+          0.3,
+          0.1,
+          0.2,
+          0.1,
+          0.2,
+          0.1,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "alert_greyscale",
+      "delays": [
+        [
+          0.3,
+          0.1,
+          0.4,
+          0.2,
+          0.1,
+          0.2,
+          0.1,
+          0.2,
+          0.1,
+          0.2,
+          0.2
+        ]
+      ]
+    }
+  ]
+}

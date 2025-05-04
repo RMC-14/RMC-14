@@ -7,6 +7,7 @@
   - type: Tag
     tags:
     - Flare
+    - RMCFlare
   - type: ExpendableLight
     spentName: expendable-light-spent-flare-name
     spentDesc: expendable-light-spent-flare-desc
@@ -16,7 +17,9 @@
     turnOnBehaviourID: turn_on
     fadeOutBehaviourID: fade_out
     litSound:
-      path: /Audio/Items/Flare/flare_on.ogg
+      path: /Audio/_RMC14/Machines/flare_activate_2.ogg
+      params:
+        variation: 0.08
     loopedSound: /Audio/Items/Flare/flare_burn.ogg
   - type: Sprite
     sprite: _RMC14/Objects/Misc/flares.rsi
@@ -38,7 +41,7 @@
   - type: Appearance
   - type: PointLight
     enabled: false
-    color: "#FA644B"
+    color: "#FFCCCC"
     radius: 1
     energy: 5.0
     netsync: false
@@ -54,6 +57,7 @@
         maxDuration: 570
         startValue: 7.0
         endValue: 1.0
+  - type: RMCNightVisionVisibleOnIgnite
 
 - type: entity
   parent: CMFlare
@@ -61,24 +65,27 @@
   name: signal flare
   description: A green UNMC issued signal flare. The telemetry computer works on chemical reaction that releases smoke and light and thus works only while the flare is burning.
   components:
+  - type: Tag
+    tags:
+    - RMCFlareCAS
   - type: Sprite
     sprite: _RMC14/Objects/Misc/cas_flares.rsi
     layers:
     - map: [ "enum.ExpendableLightVisualLayers.Base" ]
       state: flare
     - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
-      sprite: _RMC14/Objects/Misc/flares.rsi
+      sprite: _RMC14/Objects/Misc/cas_flares.rsi
       state: flare_flame
       color: "#A7FFA7"
       visible: false
     - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
-      sprite: _RMC14/Objects/Misc/flares.rsi
+      sprite: _RMC14/Objects/Misc/cas_flares.rsi
       state: overlay
   - type: Icon
     sprite: _RMC14/Objects/Misc/cas_flares.rsi
     state: flare
   - type: PointLight
-    color: "#64FA4B"
+    color: "#AACCAA"
   - type: FlareSignal
   - type: ExpendableLight
     glowDuration: 180
@@ -96,12 +103,58 @@
       endValue: 1.0
 
 - type: entity
-  abstract: true
-  parent: RMCBoxMagazineBase
-  id: RMCBoxPackFlareBase
-  name: box of M94 flare packs
+  parent: CMFlare
+  id: RMCStarShellAsh
+  name: burning star shell ash
+  description: Bright burning ash from a Star Shell 40mm. Don't touch, or it'll burn ya'.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/flares.rsi
+    layers:
+    - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
+      sprite: _RMC14/Objects/Misc/flares.rsi
+      state: starshell_ash-on
+      color: "#A7FFA7"
+      visible: false
+    - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
+      sprite: _RMC14/Objects/Misc/flares.rsi
+      state: starshell_ash
+  - type: Icon
+    sprite: _RMC14/Objects/Misc/flares.rsi
+    state: starshell_ash
+  - type: PointLight
+    color: "#FFCCCC"
+    energy: 1.5
+  - type: ExpendableLight
+    pickupWhileOn: false
+    glowDuration: 375
+    fadeOutDuration: 30
+    spentName: expendable-light-starshell-ash-empty-name
+    spentDesc: expendable-light-starshell-ash-empty-desc
+    iconStateSpent: starshell_ash-empty
+    loopedSound: null
+  - type: LightBehaviour
+    behaviours:
+    - !type:FadeBehaviour
+      id: turn_on
+      maxDuration: 5.0
+      startValue: 2.5
+      endValue: 7.0
+    - !type:FadeBehaviour
+      id: fade_out
+      maxDuration: 375
+      startValue: 7.0
+      endValue: 1.0
+
+- type: entity
+  parent: RMCBoxMagazineSupplyBase
+  id: RMCBoxPackFlareEmpty
+  name: box of M94 flare packs (x10)
   description: A box of M94 marking flare packs, to brighten up your day.
   components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxPackFlareEmpty
   - type: Item
     size: Huge
   - type: CMItemSlots
@@ -112,28 +165,64 @@
         tags:
         - CMFlarePack
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/magazine_boxes.rsi
     layers:
-    - state: supply_crate
-    - state: magaz_flares
+    - state: supply_box
+      color: "#887b67"
+    - state: supply_ammo_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
-  - type: GenericVisualizer
-    visuals:
-      enum.CMItemSlotsLayers.Fill:
-        enum.CMItemSlotsLayers.Fill:
-          Empty: { state: magaz_flares, visible: false }
-          Low: { state: magaz_flares_1, visible: true }
-          Medium: { state: magaz_flares_2, visible: true }
-          High: { state: magaz_flares_3, visible: true }
-          Full: { state: magaz_flares, visible: true }
+      color: "#867872"
+    - state: supply_box_lightflare
+      color: "#e0d5c2"
+    - state: supply_lid_closed
+      map: [ "lid" ]
+      color: "#887b67"
 
 - type: entity
-  parent: RMCBoxPackFlareBase
+  parent: RMCBoxPackFlareEmpty
   id: RMCBoxPackFlare
   suffix: Filled
   components:
   - type: CMItemSlots
     startingItem: CMPackFlare
+
+- type: entity
+  parent: RMCBoxMagazineSupplyBase
+  id: RMCBoxPackFlareCASEmpty
+  name: box of M89-S flare packs (x10)
+  description: A box of M89 signal flare packs, to mark up the way.
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxPackFlareCASEmpty
+  - type: Item
+    size: Huge
+  - type: CMItemSlots
+    count: 10
+    slot:
+      name: FlarePack
+      whitelist:
+        tags:
+        - RMCPackFlareCAS
+  - type: Sprite
+    layers:
+    - state: supply_box
+      color: "#887b67"
+    - state: supply_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#867872"
+    - state: supply_box_casflare
+      color: "#e0d5c2"
+    - state: supply_lid_closed
+      map: [ "lid" ]
+      color: "#887b67"
+
+- type: entity
+  parent: RMCBoxPackFlareCASEmpty
+  id: RMCBoxPackFlareCAS
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCPackFlareCAS
 
 - type: entity
   abstract: true
@@ -153,7 +242,7 @@
       name: Flare
       whitelist:
         tags:
-        - Flare
+        - RMCFlare
   - type: Sprite
     sprite: _RMC14/Objects/Storage/boxes.rsi
     layers:
@@ -193,6 +282,9 @@
   description: A packet of eight M89-S Signal Marking Flares.
   suffix: Filled
   components:
+  - type: Tag
+    tags:
+    - RMCPackFlareCAS
   - type: Sprite
     layers:
     - state: m89_e
@@ -202,3 +294,16 @@
   - type: CMItemSlots
     count: 8
     startingItem: RMCFlareCAS
+    slot:
+      whitelist:
+        tags:
+        - RMCFlareCAS
+
+- type: Tag
+  id: RMCFlare
+
+- type: Tag
+  id: RMCFlareCAS
+
+- type: Tag
+  id: RMCPackFlareCAS

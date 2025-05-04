@@ -18,7 +18,7 @@
     pointsType: Specialist
     sections:
     - name: Weapons Specialist Sets
-      choices: { SquadSpecKit: 1 }
+      takeOne: SquadSpecKit
       sharedSpecLimit: 2 # 2 as requested until Pyro is added
       entries:
       - id: RMCDemoSpecEquipmentCase
@@ -28,21 +28,28 @@
       #  points: 0
       - id: RMCScoutSpecEquipmentCase
       - id: CMSniperEquipmentCase
+        linkedEntries:
+        - RMCAntiMaterielEquipmentCase
+      - id: RMCAntiMaterielEquipmentCase
+        linkedEntries:
+        - CMSniperEquipmentCase
     - name: Extra Scout Ammunition
       entries:
       - id: RMCMagazineRifleM4SPRA19Impact
         points: 40
-#      - id: RMCMagazineRifleM4SPRA19 # TODO rmc14 RMCMagazineRifleM4SPRA19Incendiary
-#        points: 40
+      - id: RMCMagazineRifleM4SPRA19Incendiary
+        points: 40
       - id: RMCMagazineRifleM4SPRA19
         points: 40
     - name: Extra Sniper Ammunition
       entries:
-#      - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
-#        points: 40
-#      - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SIncendiary
-#        points: 40
+      - id: CMMagazineSniperM96SFlak
+        points: 40
+      - id: CMMagazineSniperM96SIncendiary
+        points: 40
       - id: CMMagazineSniperM96S
+        points: 40
+      - id: RMCMagazineSniperXM43E1AntiMateriel
         points: 40
     - name: Extra Demolitionist Ammunition
       entries:
@@ -66,16 +73,21 @@
         name: M40 HSDP Smoke Grenades (x6)
         points: 20
         spawn: 6
-    #- id: M40HIDPIncendiaryGrenadesx6
-    #  points: 40
+      - id: RMCGrenadeIncendiary
+        name: M40 HIDP Incendiary Grenades (x6)
+        points: 40
+        spawn: 6
     #- id: M40HPDPWhitePhosphorusGrenadesx6
     #  points: 40
-    #- id: M74AGMFFragmentationGrenadesx6
-    #  points: 40
-    #- id: M74AGMIIncendiaryGrenadesx6
-    #  points: 40
-    #- id: M74AGMSSmokeGrenadesx6
-    #  points: 20
+      - id: RMC40MMGrenadeM74AGMF
+        points: 40
+        spawn: 6
+      - id: RMC40MMGrenadeM74AGMI
+        points: 40
+        spawn: 6
+      - id: RMC40MMGrenadeM74AGMS
+        points: 20
+        spawn: 6
     - name: Extra Flamethrower Tanks
       entries: [ ]
     #- id: LargeIncineratorTank
@@ -117,11 +129,12 @@
       entries:
       - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
-    #- id: CMM276GeneralPistolHolsterRig
-    #- id: CMM276M63HolsterRig
-    #- id: CMM276M44HolsterRig
-    #- id: CMM276M82FHolsterRig
-    #- id: CMM276ShotgunShellLoadingRig
+      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterRevolver
+      - id: RMCBeltHolsterSMG
+      - id: RMCBeltHolsterSMGPouch
+    #- id: RMCBeltHolsterFlareGun
+      - id: RMCM276ShotgunShellLoadingRig
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
@@ -150,19 +163,20 @@
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbingBlack
-      #- id: CMShoulderHolster
       - id: CMWebbing
       - id: CMWebbingPouch
+      - id: CMWebbingHolster
     - name: Mask
       choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+      - id: RMCMaskRebreather
     - name: Restricted Firearms
       entries:
-      - id: RMCMK80Case
+      - id: RMCGunCasePistolMK80
         points: 15
-      - id: RMCSmartPistolCase
+      - id: RMCGunCasePistolSmart
         points: 15
     - name: Sidearm Ammunition
       entries:
@@ -175,26 +189,33 @@
     - name: Clothing Items
       entries:
       - id: RMCScabbardMacheteFilled
+        name: machete scabbard (Full)
         points: 6
       - id: RMCPouchMacheteFilled
+        name: machete pouch (Full)
         points: 15
-    #- id: CMMarineRadioTelephonePack
-    #- id: CMFuelTankStrapPouch
+      - id: RMCBackpackRTO
+        points: 15
+      - id: RMCPouchFuelTank
+        points: 5
     #- id: CMWeldingGoggles
       - id: RMCPouchGeneralLarge
         points: 10
       - id: CMBeltUtilityCombat
         points: 15
       - id: RMCPouchAutoinjectorFill
+        name: autoinjector pouch (Full)
         points: 15
     - name: Utilities
       entries:
-      - id: CMFireExtinguisherPortable
-        points: 5
       - id: CMRollerBedSpawnFolded
         points: 5
-    #- id: CMFultonDeviceStack
-    #- id: CMMotionDetector
+      - id: RMCFulton20
+        points: 5
+      - id: CMFireExtinguisherPortable
+        points: 5
+      - id: RMCMotionDetector
+        points: 10
       - id: RMCWhistle
         points: 5
     - name: Binoculars

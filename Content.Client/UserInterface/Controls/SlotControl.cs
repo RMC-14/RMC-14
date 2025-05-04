@@ -2,11 +2,8 @@ using System.Numerics;
 using Content.Client.Cooldown;
 using Content.Client.UserInterface.Systems.Inventory.Controls;
 using Content.Shared._RMC14.IconLabel;
-using Robust.Client.Graphics;
-using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-using Robust.Client.UserInterface.Themes;
 using Robust.Shared.Input;
 using Robust.Shared.Prototypes;
 
@@ -17,6 +14,7 @@ namespace Content.Client.UserInterface.Controls
     {
         [Dependency] private readonly IEntityManager _entities = default!;
         [Dependency] private readonly IPrototypeManager _prototype = default!;
+        [Dependency] private readonly ILocalizationManager _loc = default!;
 
         public static int DefaultButtonSize = 64;
 
@@ -248,12 +246,15 @@ namespace Content.Client.UserInterface.Controls
             IconLabel.FontColorOverride = Color.White;
             if (_entities.TryGetComponent(Entity, out IconLabelComponent? iconLabel))
             {
-                if (iconLabel.LabelTextLocId is not null && Loc.TryGetString(iconLabel.LabelTextLocId, out String? labelText))
+                if (iconLabel.LabelTextLocId is not null && _loc.TryGetString(iconLabel.LabelTextLocId, out var labelText, iconLabel.LabelTextParams.ToArray()))
                 {
+                    if (labelText.Length > iconLabel.LabelMaxSize)
+                        labelText = labelText[..iconLabel.LabelMaxSize];
+
                     IconLabel.Text = labelText;
                 }
 
-                if (Color.TryFromName(iconLabel.TextColor, out Robust.Shared.Maths.Color color))
+                if (Color.TryFromName(iconLabel.TextColor, out Color color))
                 {
                     IconLabel.FontColorOverride = color;
                 }

@@ -11,7 +11,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 5
+        damage: 100
       behaviors:
       - !type:PlaySoundBehavior
         sound:
@@ -20,14 +20,15 @@
             volume: -4
       - !type:SpillBehavior
         solution: beaker
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          CMShardGlass:
-            min: 1
-            max: 1
-        transferForensics: true
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: DamageOnLand
+    damage: {}
+  - type: DamageOtherOnHit
+    damage: {}
+  - type: DamageOnHighSpeedImpact
+    minimumSpeed: 2
+    damage: {}
 
 - type: entity
   parent: BaseBeakerMetallic
@@ -51,12 +52,6 @@
             volume: -4
       - !type:SpillBehavior
         solution: beaker
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          CMShardGlass:
-            min: 1
-            max: 1
-        transferForensics: true
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
 
@@ -103,6 +98,10 @@
     solution: beaker
   - type: StaticPrice
     price: 10
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 - type: entity
   parent: CMBeakerBase
@@ -149,7 +148,7 @@
 
 - type: entity
   parent: RMCBeakerBaseMetallic
-  id: RMCBeakerHighCapacity 
+  id: RMCBeakerHighCapacity
   name: high-capacity beaker
   description: A beaker with an enlarged holding capacity, made with blue-tinted plexiglass in order to withstand greater pressure. Can hold up to 300 units.
   components:
@@ -172,6 +171,23 @@
   - type: SolutionContainerVisuals
     maxFillLevels: 5
     fillBaseName: beakerbluespace
+  - type: SolutionTransfer
+    transferAmount: 100
+    maxTransferAmount: 300
+    canChangeTransferAmount: true
+    transferAmounts:
+    - 5
+    - 10
+    - 15
+    - 20
+    - 25
+    - 30
+    - 40
+    - 60
+    - 80
+    - 100
+    - 120
+    - 300
   - type: Openable
     opened: true
     closeable: true
@@ -189,6 +205,10 @@
     solution: beaker
   - type: StaticPrice
     price: 20
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 # Minitank /obj/item/reagent_container/glass/minitank
 - type: entity
@@ -218,11 +238,16 @@
     solution: beaker
   - type: StaticPrice
     price: 20
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - none
 
 # Pressurised Canister /obj/item/reagent_container/glass/pressurized_canister
+# BaseBeaker has DrinkComponent which is undesirable. Most of BaseBeaker is overriden anyway.
 - type: entity
-  parent: CMBeakerBase
-  id: CMPressurizedCanister
+  parent: BaseItem
+  id: RMCPressurizedCanister
   name: pressurized canister
   description: A pressurized container. The inner part of a pressurized reagent canister pouch. Only compatible with its pouch, machinery or a storage tank.
   components:
@@ -243,14 +268,125 @@
   - type: SolutionContainerVisuals
     maxFillLevels: 1
     fillBaseName: can
-  - type: Spillable
-    solution: beaker
   - type: StaticPrice
     price: 40
   - type: Tag
     tags:
     - PressurizedCanister
     - ChemDispensable
+  - type: DrainableSolution
+    solution: beaker
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - none
+  # components from original parents
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpillBehavior
+        solution: beaker
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: MeleeWeapon
+    soundNoDamage:
+      path: "/Audio/Effects/Fluids/splat.ogg"
+    damage:
+      types:
+        Blunt: 0
+  - type: MixableSolution
+    solution: beaker
+  - type: FitsInDispenser
+    solution: beaker
+  - type: RefillableSolution
+    solution: beaker
+  - type: ExaminableSolution
+    solution: beaker
+  - type: DrawableSolution
+    solution: beaker
+  - type: InjectableSolution
+    solution: beaker
+  - type: SolutionTransfer
+    canChangeTransferAmount: true
+  - type: SolutionItemStatus
+    solution: beaker
+  - type: UserInterface
+    interfaces:
+      enum.TransferAmountUiKey.Key:
+        type: TransferAmountBoundUserInterface
+  - type: Appearance
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Glass
+  - type: DnaSubstanceTrace
+
+- type: entity
+  parent: RMCPressurizedCanister
+  id: RMCPressurizedCanisterBicaridine
+  suffix: Bicaridine
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 480
+        reagents:
+        - ReagentId: CMBicaridine
+          Quantity: 480
+
+- type: entity
+  parent: RMCPressurizedCanister
+  id: RMCPressurizedCanisterKelotane
+  suffix: Kelotane
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 480
+        reagents:
+        - ReagentId: CMKelotane
+          Quantity: 480
+
+- type: entity
+  parent: RMCPressurizedCanister
+  id: RMCPressurizedCanisterTricordrazineRevival
+  suffix: Tricordrazine - Revival
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 480
+        reagents:
+        - ReagentId: CMEpinephrine
+          Quantity: 160
+        - ReagentId: CMInaprovaline
+          Quantity: 160
+        - ReagentId: CMTricordrazine
+          Quantity: 160
+
+- type: entity
+  parent: RMCPressurizedCanister
+  id: RMCPressurizedCanisterTricordrazine
+  suffix: Tricordrazine
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 480
+        reagents:
+        - ReagentId: CMTricordrazine
+          Quantity: 480
 
 - type: Tag
   id: PressurizedCanister
@@ -272,14 +408,24 @@
       visible: false
   - type: Item
     size: Small
-    sprite: _RMC14/Objects/Medical/beaker.rsi
+    sprite: _RMC14/Objects/Chemistry/vials.rsi
   - type: SolutionContainerVisuals
-    maxFillLevels: 5
+    maxFillLevels: 6
     fillBaseName: vial
   - type: SolutionContainerManager
     solutions:
       beaker:
         maxVol: 30
+  - type: SolutionTransfer
+    transferAmount: 5
+    maxTransferAmount: 30
+    canChangeTransferAmount: true
+    transferAmounts:
+    - 5
+    - 10
+    - 15
+    - 25
+    - 30
   - type: Spillable
     solution: beaker
   - type: Openable

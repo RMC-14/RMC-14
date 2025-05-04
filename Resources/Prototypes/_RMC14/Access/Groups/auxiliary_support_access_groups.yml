@@ -35,6 +35,7 @@
   id: DropshipCrewChief
   tags:
   - CMAccessCrewman
+  - CMAccessCommand
   - CMAccessDropship
   - CMAccessPilot
 
@@ -43,4 +44,7 @@
   tags:
   - CMAccessCommand
   - CMAccessDropship
+  - CMAccessPilot
   - CMAccessMarinePrep
+  - CMAccessCombatTechPrep
+  - CMAccessColonyEngineering

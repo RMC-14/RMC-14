@@ -1,4 +1,5 @@
 using Content.Client._RMC14.LinkAccount;
+using Content.Client._RMC14.Lobby;
 using Content.Client.Audio;
 using Content.Client.GameTicking.Managers;
 using Content.Client.LateJoin;
@@ -6,19 +7,22 @@ using Content.Client.Lobby.UI;
 using Content.Client.Message;
 using Content.Client.UserInterface.Systems.Chat;
 using Content.Client.Voting;
+using Content.Shared.CCVar;
 using Robust.Client;
 using Robust.Client.Console;
 using Robust.Client.ResourceManagement;
+using Robust.Client.State;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
-
 
 namespace Content.Client.Lobby
 {
-    public sealed class LobbyState : Robust.Client.State.State
+    public sealed class LobbyState : State
     {
         [Dependency] private readonly IBaseClient _baseClient = default!;
+        [Dependency] private readonly IConfigurationManager _cfg = default!;
         [Dependency] private readonly IClientConsoleHost _consoleHost = default!;
         [Dependency] private readonly IEntityManager _entityManager = default!;
         [Dependency] private readonly IResourceCache _resourceCache = default!;
@@ -51,7 +55,17 @@ namespace Content.Client.Lobby
 
             _voteManager.SetPopupContainer(Lobby.VoteContainer);
             LayoutContainer.SetAnchorPreset(Lobby, LayoutContainer.LayoutPreset.Wide);
-            Lobby.ServerName.Text = _baseClient.GameInfo?.ServerName; //The eye of refactor gazes upon you...
+
+            var lobbyNameCvar = _cfg.GetCVar(CCVars.ServerLobbyName);
+            var serverName = _baseClient.GameInfo?.ServerName ?? string.Empty;
+
+            Lobby.ServerName.Text = string.IsNullOrEmpty(lobbyNameCvar)
+                ? Loc.GetString("ui-lobby-title", ("serverName", serverName))
+                : lobbyNameCvar;
+
+            var width = _cfg.GetCVar(CCVars.ServerLobbyRightPanelWidth);
+            Lobby.RightSide.SetWidth = width;
+
             UpdateLobbyUi();
 
             Lobby.CharacterPreview.CharacterSetupButton.OnPressed += OnSetupPressed;
@@ -62,6 +76,11 @@ namespace Content.Client.Lobby
             _gameTicker.InfoBlobUpdated += UpdateLobbyUi;
             _gameTicker.LobbyStatusUpdated += LobbyStatusUpdated;
             _gameTicker.LobbyLateJoinStatusUpdated += LobbyLateJoinStatusUpdated;
+
+            // RMC14
+            Lobby.JoinXenoButton.OnPressed += _ =>
+                _userInterfaceManager.GetUIController<RMCLobbyUIController>().OpenJoinXenoWindow();
+            Lobby.JoinXenoButton.AddStyleClass("OpenRight");
         }
 
         protected override void Shutdown()
@@ -125,7 +144,7 @@ namespace Content.Client.Lobby
                 return;
             }
 
-            Lobby!.StationTime.Text =  Loc.GetString("lobby-state-player-status-round-not-started");
+            Lobby!.StationTime.Text = Loc.GetString("lobby-state-player-status-round-not-started");
             string text;
 
             if (_gameTicker.Paused)
@@ -144,6 +163,10 @@ namespace Content.Client.Lobby
                 if (seconds < 0)
                 {
                     text = Loc.GetString(seconds < -5 ? "lobby-state-right-now-question" : "lobby-state-right-now-confirmation");
+                }
+                else if (difference.TotalHours >= 1)
+                {
+                    text = $"{Math.Floor(difference.TotalHours)}:{difference.Minutes:D2}:{difference.Seconds:D2}";
                 }
                 else
                 {
@@ -175,6 +198,10 @@ namespace Content.Client.Lobby
                 Lobby!.ReadyButton.ToggleMode = false;
                 Lobby!.ReadyButton.Pressed = false;
                 Lobby!.ObserveButton.Disabled = false;
+
+                // RMC14
+                Lobby.ReadyButton.AddStyleClass("OpenLeft");
+                Lobby.JoinXenoButton.Visible = true;
             }
             else
             {
@@ -184,6 +211,10 @@ namespace Content.Client.Lobby
                 Lobby!.ReadyButton.Disabled = false;
                 Lobby!.ReadyButton.Pressed = _gameTicker.AreWeReady;
                 Lobby!.ObserveButton.Disabled = true;
+
+                // RMC14
+                Lobby.ReadyButton.RemoveStyleClass("OpenLeft");
+                Lobby.JoinXenoButton.Visible = false;
             }
 
             if (_gameTicker.ServerInfoBlob != null)

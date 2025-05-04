@@ -1,4 +1,5 @@
-﻿using Content.Client.Lobby;
+﻿using Content.Client.Credits;
+using Content.Client.Lobby;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.Info;
 using Content.Shared.CCVar;
@@ -66,6 +67,9 @@ public sealed class RoadmapUIController : UIController, IOnStateEntered<LobbySta
             _window.PatreonButton.Visible = true;
             _window.PatreonButton.OnPressed += _ => _uriOpener.OpenUri(patreonLink);
         }
+
+        _window.CreditsButton.StyleClasses.Add(StyleBase.ButtonCaution);
+        _window.CreditsButton.OnPressed += _ => new CreditsWindow().OpenCentered();
 
         _window.OpenCentered();
     }

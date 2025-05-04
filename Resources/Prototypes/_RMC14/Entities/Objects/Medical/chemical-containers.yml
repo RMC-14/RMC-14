@@ -92,7 +92,7 @@
   name: jug
   suffix: carbon
   id: RMCJugCarbon
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Label
       currentLabel: reagent-name-carbon
@@ -108,7 +108,7 @@
   name: jug
   suffix: fluorine
   id: RMCJugFluorine
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Label
       currentLabel: reagent-name-fluorine
@@ -124,7 +124,7 @@
   name: jug
   suffix: chlorine
   id: RMCJugChlorine
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Label
       currentLabel: reagent-name-chlorine
@@ -140,7 +140,7 @@
   name: jug
   suffix: aluminium
   id: RMCJugAluminum
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Label
       currentLabel: reagent-name-rmc-aluminum
@@ -156,7 +156,7 @@
   name: jug
   suffix: phosphorus
   id: RMCJugPhosphorus
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Label
       currentLabel: reagent-name-phosphorus
@@ -172,7 +172,7 @@
   name: jug
   suffix: sulfur
   id: RMCJugSulfur
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Label
       currentLabel: reagent-name-sulfur
@@ -188,7 +188,7 @@
   name: jug
   suffix: silicon
   id: RMCJugSilicon
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Label
       currentLabel: reagent-name-silicon
@@ -204,7 +204,7 @@
   name: jug
   suffix: hydrogen
   id: RMCJugHydrogen
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Label
       currentLabel: reagent-name-hydrogen
@@ -220,7 +220,7 @@
   name: jug
   suffix: lithium
   id: RMCJugLithium
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Label
       currentLabel: reagent-name-lithium
@@ -236,7 +236,7 @@
   name: jug
   suffix: sodium
   id: RMCJugSodium
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Label
       currentLabel: reagent-name-sodium
@@ -252,7 +252,7 @@
   name: jug
   suffix: potassium
   id: RMCJugPotassium
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Label
       currentLabel: reagent-name-potassium
@@ -268,7 +268,7 @@
   name: jug
   suffix: radium
   id: RMCJugRadium
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Label
       currentLabel: reagent-name-radium
@@ -284,7 +284,7 @@
   name: jug
   suffix: iron
   id: RMCJugIron
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Label
       currentLabel: reagent-name-iron
@@ -300,7 +300,7 @@
   name: jug
   suffix: copper
   id: RMCJugCopper
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Label
       currentLabel: reagent-name-copper
@@ -316,7 +316,7 @@
   name: jug
   suffix: gold
   id: RMCJugGold
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Label
       currentLabel: reagent-name-gold
@@ -332,7 +332,7 @@
   name: jug
   suffix: mercury
   id: RMCJugMercury
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Label
       currentLabel: reagent-name-mercury
@@ -348,7 +348,7 @@
   name: jug
   suffix: silver
   id: RMCJugSilver
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Label
       currentLabel: reagent-name-silver
@@ -364,7 +364,7 @@
   name: jug
   suffix: ethanol
   id: RMCJugEthanol
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Label
       currentLabel: reagent-name-ethanol
@@ -380,7 +380,7 @@
   name: jug
   suffix: sugar
   id: RMCJugSugar
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Label
       currentLabel: reagent-name-sugar
@@ -396,7 +396,7 @@
   name: jug
   suffix: nitrogen
   id: RMCJugNitrogen
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Label
       currentLabel: reagent-name-nitrogen
@@ -412,7 +412,7 @@
   name: jug
   suffix: oxygen
   id: RMCJugOxygen
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Label
       currentLabel: reagent-name-oxygen
@@ -428,7 +428,7 @@
   name: jug
   suffix: water
   id: RMCJugWater
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Label
       currentLabel: reagent-name-water
@@ -444,7 +444,7 @@
   name: jug
   suffix: sulphuric acid
   id: RMCJugSulphuricAcid
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
     - type: Label
       currentLabel: reagent-name-rmc-sulphuric-acid

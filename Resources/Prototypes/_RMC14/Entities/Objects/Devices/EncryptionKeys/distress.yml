@@ -2,7 +2,7 @@
 - type: entity
   parent: CMEncryptionKey
   id: RMCEncryptionKeyBureau
-  name: bureau encryption Key
+  name: bureau encryption key
   components:
   - type: EncryptionKey
     channels:
@@ -10,6 +10,19 @@
     - MarineCommand
     - MarineMedical
     - MarineIntel
+    - Colony
+    defaultChannel: Colony
+  - type: Sprite
+    state: cap_key
+
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyDukes
+  name: duke encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommon # TODO RMC14 add Freelancer (Duke) channel
     - Colony
     defaultChannel: Colony
   - type: Sprite

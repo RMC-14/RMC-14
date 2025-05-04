@@ -6,6 +6,7 @@ namespace Content.Shared._RMC14.LinkAccount;
 public sealed record SharedRMCPatronFull(
     SharedRMCPatronTier? Tier,
     bool Linked,
+    Color? GhostColor,
     SharedRMCLobbyMessage? LobbyMessage,
     SharedRMCRoundEndShoutouts? RoundEndShoutout
 );

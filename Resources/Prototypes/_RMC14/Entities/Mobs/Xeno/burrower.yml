@@ -1,9 +1,11 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
   - CMXenoFlammable
   - RMCXenoSpeechSounds
+  - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
   id: CMXenoBurrower
   name: Burrower
   description: A beefy alien with sharp claws.
@@ -31,14 +33,16 @@
     - ActionXenoTailStab
     - ActionXenoAcidNormal
     - ActionXenoOrderConstruction
-    #    - ActionXenoDigTunnel
+    - ActionXenoDigTunnel
     - ActionXenoPlantWeeds
-    #    - ActionXenoBurrow
-    #    - ActionXenoTremor
+    - ActionXenoResinHole
+    - ActionXenoBurrow
+    - ActionXenoTremor
     - ActionXenoDevolve
     tier: 2
-    hudOffset: 0,0.56
+    hudOffset: -0.15,0.56
     unlockAt: 420 # 7 minutes
+  - type: XenoLight
   - type: XenoDevolve
     devolvesTo:
     - CMXenoDrone
@@ -48,23 +52,64 @@
     plasmaRegenOnWeeds: 4.5
   - type: XenoAcid
   - type: CMArmor
-    armor: 25
+    xenoArmor: 25
     explosionArmor: 40
   - type: XenoDevour
+  - type: XenoStomp
+    selfEffect: CMEffectSelfStomp
+    shortRange: 0
+    range: 4
+    plasmaCost: 100
+    paralyzeTime: 2
+    slows: false
+    sound: /Audio/_RMC14/Xeno/alien_footstep_charge1.ogg
+  - type: XenoBurrow
   - type: MeleeWeapon
     damage:
       groups:
         Brute: 27.5
-  - type: Tackle # min: 3, max: 5
-    threshold: 4
-    stun: 9
-    chance: 0.40
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 36
+  - type: Tackle
+    min: 3
+    max: 5
+    chance: 0.4
+    stunMin: 4
+    stunMax: 5
+  - type: TunnelRenamer
   - type: MovementSpeedModifier
     baseWalkSpeed: 2
     baseSprintSpeed: 3.5
-#  - type: RMCXenoDamageVisuals # TODO RMC14
-#    prefix: burrower
+  - type: SlowOnPull
+    slowdowns:
+    - multiplier: 0.6425
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.7125
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.4775
+      whitelist:
+        components:
+        - XenoHeavy
+  - type: RMCXenoDamageVisuals
+    prefix: burrower
   - type: TacticalMapIcon
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: burrower
+  - type: AcidTrap #Do 2 CM code they make level 3 traps at a level 2 cost
+    trapLevel: 3
+    spray: XenoAcidSprayTrapStrong
+  - type: XenoConstruction
+    canOrderConstruction:
+    - HiveCoreXenoConstructionNode
+    - HiveEggMorpherXenoConstructionNode
+    - HiveClusterXenoConstructionNode
+    - HiveRecoveryNodeXenoConstructionNode
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.2

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/8e8d26bbb4f1617ea1b1ffc17ffffca552ce8c11/icons/obj/structures/stairs",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/8e8d26bbb4f1617ea1b1ffc17ffffca552ce8c11/icons/obj/structures/stairs, rampbottom taken from https://github.com/cmss13-devs/cmss13/blob/8e8d26bbb4f1617ea1b1ffc17ffffca552ce8c11/icons/obj/structures/structures.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -21,6 +21,14 @@
     },
     {
       "name": "p_stair_right_cap",
+      "directions": 4
+    },
+    {
+      "name": "p_stair_left_cap_half",
+      "directions": 4
+    },
+    {
+      "name": "p_stair_right_cap_half",
       "directions": 4
     },
     {
@@ -44,6 +52,14 @@
       "directions": 4
     },
     {
+      "name": "p_stair_kutjevo_left_cap_half",
+      "directions": 4
+    },
+    {
+      "name": "p_stair_kutjevo_right_cap_half",
+      "directions": 4
+    },
+    {
       "name": "p_stair_kutjevo_solo_cap",
       "directions": 4
     },
@@ -64,7 +80,19 @@
       "directions": 4
     },
     {
+      "name": "p_stair_ice_left_cap_half",
+      "directions": 4
+    },
+    {
+      "name": "p_stair_ice_right_cap_half",
+      "directions": 4
+    },
+    {
       "name": "p_stair_ice_solo_cap",
+      "directions": 4
+    },
+    {
+      "name": "rampbottom",
       "directions": 4
     }
   ]

@@ -6,8 +6,10 @@
   playTimeTracker: CMJobPilotGunship
   requirements:
   - !type:TotalJobsTimeRequirement
-    group: CMJobsDropship
-    time: 7200 # 2 hours
+    group: CMJobsDropshipPilot
+    time: 18000 # 5 hours
+  ranks:
+    RMCRankSecondLT: []
   startingGear: CMGearPilotGunship
   icon: "CMJobIconPilotGunship"
   joinNotifyCrew: false
@@ -16,13 +18,18 @@
   - Pilot
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: pilot
+    state: gp
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
         RMCSkillIntel: 1
         RMCSkillJtac: 2
         RMCSkillLeadership: 1
@@ -34,12 +41,22 @@
     - type: MarineOrders
     - type: CMVendorUser
       points: 45
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-gunship-pilot
+    - type: ViewIntelObjectives
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: gp
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_command
 
 - type: startingGear
   id: CMGearPilotGunship
   equipment:
     jumpsuit: CMJumpsuitPilot
-    back: CMSatchel
     shoes: CMBootsBlackFilled
     id: CMIDCardPilotGunship
     ears: CMHeadsetPilot
@@ -52,10 +69,8 @@
   - type: SpawnPoint
     job_id: CMPilotGunship
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: pilot
+    state: po_spawn
 
 - type: playTimeTracker
   id: CMJobPilotGunship
+  isHumanoid: true

@@ -53,6 +53,7 @@
     blacklist:
       components:
       - Xeno
+  - type: NoStunOnExit
 
 - type: entity
   parent: CMHyperSleepChamber

@@ -8,6 +8,8 @@
   - !type:TotalDepartmentsTimeRequirement
     group: CMDepartmentsHuman
     time: 36000 # 10 hours
+  ranks:
+    RMCRankCivilian: []
   startingGear: CMGearCorrespondent
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
@@ -17,6 +19,10 @@
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: correspondent
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_civillian
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -24,6 +30,12 @@
       skills:
         RMCSkillFirearms: 0
         RMCSkillVehicles: 1
+    - type: JobPrefix
+      prefix: cm-job-prefix-correspondent # TODO RMC14 combat correspondent is CC
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: correspondent
   hasIcon: false
 
 - type: startingGear
@@ -36,7 +48,7 @@
     ears: CMHeadsetReporter
     #    belt: CMCamera TODO RMC14
     pocket1: RMCPouchGeneralLarge
-    pocket2: MicrophoneInstrument
+    pocket2: RMCCorrespondentMicrophone
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -46,10 +58,8 @@
   - type: SpawnPoint
     job_id: CMCorrespondent
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: combat_correspondent
+    state: marine_spawn
 
 - type: playTimeTracker
   id: CMJobCorrespondent
+  isHumanoid: true

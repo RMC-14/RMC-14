@@ -1,0 +1,66 @@
+﻿- type: entity
+  id: RMCFuelPump
+  name: fuel pump
+  description: It is a machine that pumps fuel around the ship.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-2.49,-0.49,1.49,0.49"
+        density: 100
+        mask:
+        - MachineMask
+        layer:
+        - MidImpassable
+        - LowImpassable
+  - type: InteractionOutline
+  - type: Clickable
+  - type: EvacuationPump
+    activeSound:
+      path: /Audio/_RMC14/Machines/fuel_pump_active.ogg
+  - type: ApcPowerReceiver
+  - type: RMCPowerReceiver
+    idleLoad: 5
+    activeLoad: 10
+    channel: Equipment
+  - type: Sprite
+    sprite: _RMC14/Structures/Power/fuel_pump.rsi
+    offset: -0.5,0
+    layers:
+    - state: fuelpump_off
+      map: [ "unpowered" ]
+    - state: fuelpump_off
+      map: [ "enum.EvacuationPumpLayers.Layer" ]
+      visible: false
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.EvacuationPumpLayers.Layer:
+        enum.EvacuationPumpLayers.Layer:
+          Empty: { state: fuelpump_0 }
+          TwentyFive: { state: fuelpump_25 }
+          Fifty: { state: fuelpump_50 }
+          SeventyFive: { state: fuelpump_75 }
+          Full: { state: fuelpump_100 }
+      enum.PowerDeviceVisuals.Powered:
+        enum.EvacuationPumpLayers.Layer:
+          True: { visible: true }
+          False: { visible: false }
+        unpowered:
+          True: { visible: false }
+          False: { visible: true }
+  - type: AmbientOnPowered
+  - type: AmbientSound
+    enabled: true
+    sound:
+      path: /Audio/_RMC14/Machines/fuel_pump_idle.ogg
+    range: 12
+    volume: -3

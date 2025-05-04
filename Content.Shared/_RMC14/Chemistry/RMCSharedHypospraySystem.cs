@@ -6,7 +6,6 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
-using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs.Components;
@@ -173,7 +172,7 @@ public abstract class RMCSharedHypospraySystem : EntitySystem
                 BreakOnDamage = true,
                 NeedHand = ent.Comp.NeedHand,
                 BreakOnHandChange = ent.Comp.BreakOnHandChange,
-                MovementThreshold = ent.Comp.MovementThreshold,
+                MovementThreshold = ent.Comp.MovementThreshold
             });
             return;
         }

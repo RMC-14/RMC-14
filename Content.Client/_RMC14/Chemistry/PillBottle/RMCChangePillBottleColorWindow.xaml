@@ -1,0 +1,9 @@
+<DefaultWindow
+    SetSize="300 400"
+    Margin="4 0"
+    xmlns="https://spacestation14.io">
+    <BoxContainer Orientation="Vertical">
+        <ItemList Name="SelectableColors" Access="Public" SelectMode="Single" VerticalExpand="True"  Margin ="0 4"/>
+        <LineEdit Name="SearchBar" Access="Public" Margin ="0 4"/>
+    </BoxContainer>
+</DefaultWindow>

@@ -3,6 +3,7 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Thunderdome;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared.Mobs.Components;
@@ -104,8 +105,11 @@ public sealed class BioscanSystem : EntitySystem
             if (!_mobState.IsAlive(uid, mobState))
                 continue;
 
+            if (HasComp<ThunderdomeMapComponent>(xform.MapUid))
+                continue;
+
             alive++;
-            var bioscanBlocked = _area.BioscanBlocked(uid, out var areaProto, out _);
+            var bioscanBlocked = _area.BioscanBlocked(uid, out var name);
             var mapId = xform.MapID;
             if (_warshipMaps.Contains(mapId))
             {
@@ -113,16 +117,16 @@ public sealed class BioscanSystem : EntitySystem
                 {
                     aliveShip++;
 
-                    if (areaProto != null)
-                        _warshipAreas.Add(areaProto.Name);
+                    if (name != null)
+                        _warshipAreas.Add(name);
                 }
             }
             else if (_planetMaps.Contains(mapId))
             {
                 alivePlanet++;
 
-                if (!bioscanBlocked && areaProto != null)
-                    _planetAreas.Add(areaProto.Name);
+                if (!bioscanBlocked && name != null)
+                    _planetAreas.Add(name);
             }
         }
 

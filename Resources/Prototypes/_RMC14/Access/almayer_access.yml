@@ -40,3 +40,7 @@
   id: CMAccessPress
   name: cm-access-press
 
+# synthetic
+- type: accessLevel
+  id: RMCAccessSynth
+  name: rmc-job-name-synth

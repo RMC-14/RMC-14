@@ -14,6 +14,23 @@
 
 - type: entity
   parent: CMHeadBeret
+  id: RMCHeadBeret
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret/jungle.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret/jungle.rsi
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/beret/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/beret/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/beret/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/beret/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/beret/urban.rsi
+
+- type: entity
+  parent: CMHeadBeret
   id: CMHeadBeretRed
   name: MP beret
   components:
@@ -34,8 +51,20 @@
 
 - type: entity
   parent: CMHeadBeret
-  id: CMHeadBeretWO
-  name: WO's beret
+  id: CMHeadBeretEngineer
+  name: engineering beret
+  description: A beret with the engineering insignia emblazoned on it. For engineers that are more inclined towards style than safety.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_engi.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_engi.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: CMHeadBeretCMP
+  name: UNMC Chief MP beret
+  description: A beret with the UNMC Military Police insignia emblazoned on it. It shines with the glow of corrupt authority and a smudge of doughnut.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_wo.rsi
@@ -48,19 +77,61 @@
   name: CO's beret
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret/jungle.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret/jungle.rsi
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/CO/beret/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/CO/beret/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/CO/beret/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/CO/beret/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/CO/beret/urban.rsi
 
 - type: entity
   parent: CMHeadBeret
   id: CMHeadBeretCOBlack
   name: CO's beret
+  description: A black beret with the Major insignia emblazoned on it. Its sleek black color commands power and exudes class.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_black.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_black.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: CMHeadBeretCOWhite
+  name: CO's beret
+  description: A white beret with the Major insignia emblazoned on it. Its dazzling white color commands power and exudes class.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_white.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_white.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: CMHeadBeretCOLtCol
+  name: CO's lieutenant colonel beret
+  description: A blue beret with the Lieutenant Colonel's insignia emblazoned on it. Its blue color symbolizes loyalty, confidence, and politics - the core components of a true Colonel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_ltcol.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_ltcol.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: CMHeadBeretCOCol
+  name: CO's colonel beret
+  description: A dark blue, custom-tailored beret signifying The Colonel. Definitely not an alias for a General.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_col.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_col.rsi
 
 - type: entity
   parent: CMHeadBeret
@@ -94,6 +165,7 @@
     whitelist:
       components:
       - RMCLighter
+      - HelmetAccessory
       tags:
       - Cigarette
       - Matchstick
@@ -106,6 +178,11 @@
       enum.StorageUiKey.Key:
         type: StorageBoundUserInterface
   - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      components:
+      - HelmetAccessory
+  - type: HelmetAccessoryHolder
 
 - type: entity
   parent: CMHeadCapMP
@@ -141,17 +218,57 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/cap.rsi
 
 - type: entity
-  parent: CMHeadCap
+  parent: CMHeadCapMP
+  id: RMCHeadCapFlippable
+  name: cap
+  description: Standard baseball cap.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap/jungle.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon_flipped
+      map: ["foldedLayer"]
+      visible: false
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap/jungle.rsi
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: fold-flip-verb
+    foldVerbText: fold-flip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: flipped
+    foldedHeldPrefix: flipped
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/cap/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/cap/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/cap/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/cap/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/cap/urban.rsi
+
+- type: entity
+  parent: RMCHeadCapFlippable
   id: CMHeadCapCO
   name: CO's cap
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/cap.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/cap/jungle.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/cap.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Hats/CO/cap/jungle.rsi
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/CO/cap/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/CO/cap/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/CO/cap/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/CO/cap/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/CO/cap/urban.rsi
 
 - type: entity
-  parent: CMHeadCapCO
+  parent: CMHeadCap
   id: CMHeadCapCOFormalBlack
   name: CO's formal cap
   components:
@@ -161,7 +278,7 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/formal_black.rsi
 
 - type: entity
-  parent: CMHeadCapCO
+  parent: CMHeadCap
   id: CMHeadCapCOFormalWhite
   name: CO's formal cap
   components:
@@ -182,9 +299,51 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/drill_hat.rsi
 
 - type: entity
+  parent: RMCHeadCapFlippable
+  id: CMHeadCapOfficer
+  name: UNMC officer cap
+  description: A hat usually worn by officers in the UNMC. While it provides no protection, some officers wear it in the field to make themselves more recognisable.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_officer/jungle.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_officer/jungle.rsi
+  - type: Appearance
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Hats/cap_officer/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Hats/cap_officer/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Hats/cap_officer/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Hats/cap_officer/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Hats/cap_officer/urban.rsi
+
+- type: entity
+  parent: CMHeadCap
+  id: CMHeadCapPeakedFormal
+  name: marine peaked cap
+  description: A peaked cap. Wearer may suffer the heavy weight of responsibility upon their head and shoulders.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_formal.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_formal.rsi
+
+- type: entity
+  parent: CMHeadCap
+  id: CMHeadCapPeakedService
+  name: marine service peaked cap
+  description: A peaked cap. Wearer may suffer the heavy weight of responsibility upon their head and shoulders.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_service.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/cap_peaked_service.rsi
+
+- type: entity
   parent: CMHeadCap
   id: CMHeadCapCMO
-  name: CMO's cap
+  name: chief medical officer's peaked cap
+  description: A peaked cap given to high-ranking medical officers. Looks just a touch silly.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/cmo_cap.rsi
@@ -196,7 +355,7 @@
   parent: CMHeadCap
   id: CMHeadCapSurgBlue
   name: blue surgical cap
-  description: Standard-issue surgical cap.
+  description: A cap surgeons wear during operations. Keeps their hair from tickling your internal organs.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/blue.rsi
@@ -232,3 +391,137 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/orange.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/SurgicalCap/orange.rsi
+
+# Dress blues
+- type: entity
+  parent: CMHeadBeret
+  id: CMHeadDressBlues
+  name: marine dress blues cover
+  description: The combination cover of the legendary Marine dress blues, virtually unchanged since the 19th century. The polished logo sits proudly on the white cloth.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/DressBlues/enlisted.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/DressBlues/enlisted.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: CMHeadDressBluesOfficer
+  name: marine dress blues officer cover
+  description: The combination cover of the legendary Marine dress blues, virtually unchanged since the 19th century. Features a gold stripe and silvered logo, emblematic of an officer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/DressBlues/officer.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/DressBlues/officer.rsi
+
+# The squad beret
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeretSquad
+  name: UNMC squad beret
+  description: For those who want to show pride and have nothing to lose (in their head, at least).
+  suffix: None
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/base.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/base.rsi
+  - type: RMCMapToSquad
+    map:
+      SquadAlpha: RMCHeadBeretSquadAlpha
+      SquadBravo: RMCHeadBeretSquadBravo
+      SquadCharlie: RMCHeadBeretSquadCharlie
+      SquadDelta: RMCHeadBeretSquadDelta
+      SquadEcho: RMCHeadBeretSquadEcho
+      SquadFoxtrot: RMCHeadBeretSquadFoxtrot
+      SquadIntel: RMCHeadBeretSquadIntel
+
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeretSquadAlpha
+  name: UNMC squad beret
+  description: Often found atop heads, slightly less found on those still attached.
+  suffix: Alpha
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/alpha.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/alpha.rsi
+
+- type: entity
+  parent: RMCHeadBeretSquadAlpha
+  id: RMCHeadBeretSquadBravo
+  description: It has quite a lot of debris on it, the person wearing this probably moves less than a wall.
+  suffix: Bravo
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/bravo.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/bravo.rsi
+
+- type: entity
+  parent: RMCHeadBeretSquadAlpha
+  id: RMCHeadBeretSquadCharlie
+  description: Still has some morning toast crumbs on it.
+  suffix: Charlie
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/charlie.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/charlie.rsi
+
+- type: entity
+  parent: RMCHeadBeretSquadAlpha
+  id: RMCHeadBeretSquadDelta
+  description: Hard to consider protection, but these types of people don't seek protection.
+  suffix: Delta
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/delta.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/delta.rsi
+
+- type: entity
+  parent: RMCHeadBeretSquadAlpha
+  id: RMCHeadBeretSquadEcho
+  description: Tightly Woven, as it should be.
+  suffix: Echo
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/echo.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/echo.rsi
+
+- type: entity
+  parent: RMCHeadBeretSquadAlpha
+  id: RMCHeadBeretSquadFoxtrot
+  description: Looks and feels starched, cold to the touch.
+  suffix: Foxtrot
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/foxtrot.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/foxtrot.rsi
+
+- type: entity
+  parent: RMCHeadBeretSquadAlpha
+  id: RMCHeadBeretSquadIntel
+  description: Looks more intellegent than the person wearing it.
+  suffix: Intel
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/intel.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/SquadBeret/intel.rsi
+
+- type: entity
+  parent: CMHeadBeret
+  id: RMCProvostCommandBeret
+  name: UNMC provost command beret
+  description: A beret with the UNMC Military Police insignia emblazoned on it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/pvciberet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/pvciberet.rsi

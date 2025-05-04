@@ -1,11 +1,15 @@
 ﻿using System.Linq;
+using Content.Shared._RMC14.Holiday;
 using Content.Shared._RMC14.Medical.Refill;
 using Content.Shared._RMC14.Vendors;
+using Content.Shared.Mind;
+using Content.Shared.Roles.Jobs;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Client.ResourceManagement;
+using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
@@ -21,16 +25,23 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IResourceCache _resource = default!;
 
+    private readonly SharedJobSystem _job;
+    private readonly SharedMindSystem _mind;
+    private readonly SharedRMCHolidaySystem _rmcHoliday;
+
     private CMAutomatedVendorWindow? _window;
 
     public CMAutomatedVendorBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
+        _job = EntMan.System<SharedJobSystem>();
+        _mind = EntMan.System<SharedMindSystem>();
+        _rmcHoliday = EntMan.System<SharedRMCHolidaySystem>();
     }
 
     protected override void Open()
     {
-        _window = new CMAutomatedVendorWindow();
-        _window.OnClose += Close;
+        base.Open();
+        _window = this.CreateWindow<CMAutomatedVendorWindow>();
         _window.Title = EntMan.GetComponentOrNull<MetaDataComponent>(Owner)?.EntityName ?? "ColMarTech Vendor";
         _window.ReagentsBar.ForegroundStyleBoxOverride = new StyleBoxFlat(Color.FromHex("#AF7F38"));
 
@@ -40,8 +51,28 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
             for (var sectionIndex = 0; sectionIndex < vendor.Sections.Count; sectionIndex++)
             {
                 var section = vendor.Sections[sectionIndex];
+
+                var validJob = true;
+                if (_player.LocalSession != null && _mind.TryGetMind(_player.LocalSession.UserId, out var mindId))
+                {
+                    foreach (var job in section.Jobs)
+                    {
+                        validJob = _job.MindHasJobWithId(mindId, job.Id);
+                    }
+                }
+
+                var validHoliday = section.Holidays.Count == 0;
+                foreach (var holiday in section.Holidays)
+                {
+                    if (_rmcHoliday.IsActiveHoliday(holiday))
+                        validHoliday = true;
+                }
+
                 var uiSection = new CMAutomatedVendorSection();
                 uiSection.Label.SetMessage(GetSectionName(user, section));
+
+                if (!validJob || !validHoliday)
+                    uiSection.Visible = false; // hide the section
 
                 for (var entryIndex = 0; entryIndex < section.Entries.Count; entryIndex++)
                 {
@@ -53,13 +84,17 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                         uiEntry.Texture.Textures = SpriteComponent.GetPrototypeTextures(entity, _resource)
                             .Select(o => o.Default)
                             .ToList();
-                        uiEntry.Panel.Button.Label.Text = entry.Name ?? entity.Name;
+                        if(entity.TryGetComponent<SpriteComponent>("Sprite", out var entitySprites))
+                        {
+                            uiEntry.Texture.Modulate = entitySprites.AllLayers.First().Color;
+                        }
+                        uiEntry.Panel.Button.Label.Text = entry.Name?.Replace("\\n", "\n") ?? entity.Name;
 
                         var name = entity.Name;
                         var color = CMAutomatedVendorPanel.DefaultColor;
                         var borderColor = CMAutomatedVendorPanel.DefaultBorderColor;
                         var hoverColor = CMAutomatedVendorPanel.DefaultBorderColor;
-                        if (section.TakeAll != null)
+                        if (section.TakeAll != null || section.TakeOne != null)
                         {
                             name = $"Mandatory: {name}";
                             color = Color.FromHex("#251A0C");
@@ -94,7 +129,21 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
 
                         var sectionI = sectionIndex;
                         var entryI = entryIndex;
-                        uiEntry.Panel.Button.OnPressed += _ => OnButtonPressed(sectionI, entryI);
+                        var linkedEntryIndexes = new List<int>();
+
+                        foreach (var linkedEntry in entry.LinkedEntries)
+                        {
+                            var linkedEntryIndex = 0;
+                            foreach (var vendorEntry in section.Entries)
+                            {
+                                if(vendorEntry.Id == linkedEntry)
+                                    linkedEntryIndexes.Add(linkedEntryIndex);
+
+                                linkedEntryIndex++;
+                            }
+                        }
+
+                        uiEntry.Panel.Button.OnPressed += _ => OnButtonPressed(sectionI, entryI, linkedEntryIndexes);
                     }
 
                     uiSection.Entries.AddChild(uiEntry);
@@ -105,15 +154,12 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
         }
 
         _window.Search.OnTextChanged += OnSearchChanged;
-
         Refresh();
-
-        _window.OpenCentered();
     }
 
-    private void OnButtonPressed(int sectionIndex, int entryIndex)
+    private void OnButtonPressed(int sectionIndex, int entryIndex, List<int> linkedEntryIndexes)
     {
-        var msg = new CMVendorVendBuiMsg(sectionIndex, entryIndex);
+        var msg = new CMVendorVendBuiMsg(sectionIndex, entryIndex, linkedEntryIndexes);
         SendMessage(msg);
     }
 
@@ -187,6 +233,12 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                     if (takeAll != null && takeAll.Contains((takeAllId, entry.Id)))
                         disabled = true;
                 }
+                if (section.TakeOne is { } takeOneId)
+                {
+                    var takeOne = user?.TakeOne;
+                    if (takeOne != null && takeOne.Contains(takeOneId))
+                        disabled = true;
+                }
 
                 if (entry.Points != null)
                 {
@@ -235,12 +287,6 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
         _window.ReagentsLabel.Text = $"{current.Int()} units";
     }
 
-    protected override void Dispose(bool disposing)
-    {
-        if (disposing)
-            _window?.Dispose();
-    }
-
     protected override void ReceiveMessage(BoundUserInterfaceMessage message)
     {
         switch (message)
@@ -269,7 +315,14 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
                 }
             }
         }
-
+        else if (section.TakeOne != null)
+        {
+            var takeOne = user?.TakeOne;
+            if (takeOne == null || !takeOne.Contains(section.TakeOne))
+            {
+                name.AddText(" (TAKE ONE)");
+            }
+        }
         else if (section.Choices is { } choices)
         {
             if (user == null)

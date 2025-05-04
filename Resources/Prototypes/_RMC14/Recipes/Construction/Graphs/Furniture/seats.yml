@@ -1,0 +1,89 @@
+- type: constructionGraph
+  parent: RMC
+  id: CMSeat
+  start: start
+  graph:
+    - node: start
+      actions:
+        - !type:DestroyEntity {}
+      edges:
+        - to: chair
+          steps:
+            - material: CMSteel
+              amount: 1
+              doAfter: 1
+        - to: stool
+          steps:
+            - material: CMSteel
+              amount: 1
+              doAfter: 1
+        - to: chairComfy
+          steps:
+            - material: CMSteel
+              amount: 2
+              doAfter: 1
+        - to: chairOfficeDark
+          steps:
+            - material: CMSteel
+              amount: 5
+              doAfter: 1
+        - to: chairOfficeWhite
+          steps:
+            - material: CMSteel
+              amount: 5
+              doAfter: 1
+
+    - node: chair
+      entity: CMChair
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: CMSheetMetal1
+          steps:
+            - tool: Anchoring
+              doAfter: 0
+
+    - node: stool
+      entity: RMCStool
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: CMSheetMetal1
+          steps:
+            - tool: Anchoring
+              doAfter: 0
+
+    - node: chairComfy
+      entity: CMChairComfy
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: CMSheetMetal1
+          steps:
+            - tool: Anchoring
+              doAfter: 0
+
+    - node: chairOfficeDark
+      entity: CMChairOfficeDark
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: CMSheetMetal1
+          steps:
+            - tool: Anchoring
+              doAfter: 0
+
+    - node: chairOfficeWhite
+      entity: CMChairOfficeWhite
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: CMSheetMetal1
+          steps:
+            - tool: Anchoring
+              doAfter: 0

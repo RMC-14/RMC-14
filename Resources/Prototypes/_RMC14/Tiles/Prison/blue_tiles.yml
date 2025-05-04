@@ -96,5 +96,10 @@
 
 - type: tile
   parent: CMFloorSteelPrisonBlueBase
+  id: CMFloorSteelPrisonBlueFull2
+  sprite: /Textures/_RMC14/Tiles/prison/bluefull_2.png
+
+- type: tile
+  parent: CMFloorSteelPrisonBlueBase
   id: CMFloorSteelPrisonKitchen
   sprite: /Textures/_RMC14/Tiles/prison/kitchen.png

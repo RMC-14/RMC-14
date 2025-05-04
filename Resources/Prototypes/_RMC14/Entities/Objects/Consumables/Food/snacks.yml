@@ -20,6 +20,12 @@
     sprite: _RMC14/Objects/Consumable/Food/packaged.rsi
     heldPrefix: packet
     size: Tiny
+  - type: Extractable
+    grindableSolutionName: food
+  - type: InjectableSolution
+    solution: food
+  - type: DrawableSolution
+    solution: food
 
 - type: entity
   parent: RMCFoodSnackBase
@@ -434,7 +440,7 @@
 # Trash
 
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: BaseItem
   id: RMCFoodPacketTrash
   description: This place is crawling with trash.
@@ -455,7 +461,7 @@
   - type: SpaceGarbage
 
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: RMCFoodPacketTrash
   id: RMCFoodPacketBarcaridineTrash
   name: barcaridine wrapper
@@ -465,7 +471,7 @@
     state: barcardine_trash
 
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: RMCFoodPacketTrash
   id: RMCFoodPacketBoonieTrash
   name: boonie bar wrapper
@@ -474,7 +480,7 @@
     state: boonie_trash
 
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: RMCFoodPacketTrash
   id: RMCFoodPacketCHUNKTrash
   name: chunk bar box
@@ -484,7 +490,7 @@
     state: chunk_trash
 
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: RMCFoodPacketTrash
   id: RMCFoodPacketHUNKTrash
   name: hunk bar crate
@@ -494,7 +500,7 @@
     state: hunk_trash
 
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: RMCFoodPacketTrash
   id: RMCFoodPacketKeplerCrispsTrash
   name: empty chips
@@ -503,7 +509,7 @@
     state: kepler_chips_trash
 
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: RMCFoodPacketTrash
   id: RMCFoodPacketKeplerCrispsFlamehotTrash
   name: empty flamehot crisps
@@ -512,7 +518,7 @@
     state: kepler_chips_flame_trash
 
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: RMCFoodPacketTrash
   id: RMCFoodPacketPepperChipsTrash
   name: empty pepper chips
@@ -521,7 +527,7 @@
     state: wy_chips_pepper_trash
 
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: RMCFoodPacketTrash
   id: RMCFoodPacketCheeseburgerTrash
   name: burger wrapper
@@ -531,7 +537,7 @@
     state: burger_trash
 
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: RMCFoodPacketTrash
   id: RMCFoodPacketBurritoTrash
   name: burrito wrapper
@@ -541,7 +547,7 @@
     state: burrito_trash
 
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: RMCFoodPacketTrash
   id: RMCFoodPacketHotdogTrash
   name: hotdog wrapper
@@ -551,7 +557,7 @@
     state: hotdog_trash
 
 - type: entity
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   parent: RMCFoodPacketTrash
   id: RMCFoodPacketEATBarTrash
   name: MEAT bar wrapper

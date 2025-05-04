@@ -1,10 +1,9 @@
-using Content.Shared.Clothing.Components;
+using Content.Shared._RMC14.Movement;
 using Content.Shared.Examine;
 using Content.Shared.Inventory;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Movement.Systems;
-using Content.Shared.PowerCell;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
@@ -56,8 +55,15 @@ public sealed class ClothingSpeedModifierSystem : EntitySystem
 
     private void OnRefreshMoveSpeed(EntityUid uid, ClothingSpeedModifierComponent component, InventoryRelayedEvent<RefreshMovementSpeedModifiersEvent> args)
     {
+        // RMC14
+        var ev = new RMCMovementSpeedRefreshedEvent(component.WalkModifier, component.SprintModifier);
+        RaiseLocalEvent(uid, ref ev);
+
+        var walkModifier = ev.WalkModifier;
+        var sprintModifier = ev.SprintModifier;
+
         if (_toggle.IsActivated(uid))
-            args.Args.ModifySpeed(component.WalkModifier, component.SprintModifier);
+            args.Args.ModifySpeed(walkModifier, sprintModifier);
     }
 
     private void OnClothingVerbExamine(EntityUid uid, ClothingSpeedModifierComponent component, GetVerbsEvent<ExamineVerb> args)
@@ -73,22 +79,22 @@ public sealed class ClothingSpeedModifierSystem : EntitySystem
 
         var msg = new FormattedMessage();
 
-        if (walkModifierPercentage == sprintModifierPercentage)
+        if (MathHelper.CloseTo(walkModifierPercentage, sprintModifierPercentage, 0.5f))
         {
             if (walkModifierPercentage < 0.0f)
-                msg.AddMarkup(Loc.GetString("clothing-speed-increase-equal-examine", ("walkSpeed", (int) MathF.Abs(walkModifierPercentage)), ("runSpeed", (int) MathF.Abs(sprintModifierPercentage))));
+                msg.AddMarkupOrThrow(Loc.GetString("clothing-speed-increase-equal-examine", ("walkSpeed", (int) MathF.Abs(walkModifierPercentage)), ("runSpeed", (int) MathF.Abs(sprintModifierPercentage))));
             else
-                msg.AddMarkup(Loc.GetString("clothing-speed-decrease-equal-examine", ("walkSpeed", (int) walkModifierPercentage), ("runSpeed", (int) sprintModifierPercentage)));
+                msg.AddMarkupOrThrow(Loc.GetString("clothing-speed-decrease-equal-examine", ("walkSpeed", (int) walkModifierPercentage), ("runSpeed", (int) sprintModifierPercentage)));
         }
         else
         {
             if (sprintModifierPercentage < 0.0f)
             {
-                msg.AddMarkup(Loc.GetString("clothing-speed-increase-run-examine", ("runSpeed", (int) MathF.Abs(sprintModifierPercentage))));
+                msg.AddMarkupOrThrow(Loc.GetString("clothing-speed-increase-run-examine", ("runSpeed", (int) MathF.Abs(sprintModifierPercentage))));
             }
             else if (sprintModifierPercentage > 0.0f)
             {
-                msg.AddMarkup(Loc.GetString("clothing-speed-decrease-run-examine", ("runSpeed", (int) sprintModifierPercentage)));
+                msg.AddMarkupOrThrow(Loc.GetString("clothing-speed-decrease-run-examine", ("runSpeed", (int) sprintModifierPercentage)));
             }
             if (walkModifierPercentage != 0.0f && sprintModifierPercentage != 0.0f)
             {
@@ -96,11 +102,11 @@ public sealed class ClothingSpeedModifierSystem : EntitySystem
             }
             if (walkModifierPercentage < 0.0f)
             {
-                msg.AddMarkup(Loc.GetString("clothing-speed-increase-walk-examine", ("walkSpeed", (int) MathF.Abs(walkModifierPercentage))));
+                msg.AddMarkupOrThrow(Loc.GetString("clothing-speed-increase-walk-examine", ("walkSpeed", (int) MathF.Abs(walkModifierPercentage))));
             }
             else if (walkModifierPercentage > 0.0f)
             {
-                msg.AddMarkup(Loc.GetString("clothing-speed-decrease-walk-examine", ("walkSpeed", (int) walkModifierPercentage)));
+                msg.AddMarkupOrThrow(Loc.GetString("clothing-speed-decrease-walk-examine", ("walkSpeed", (int) walkModifierPercentage)));
             }
         }
 

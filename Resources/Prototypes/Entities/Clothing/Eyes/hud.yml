@@ -13,12 +13,8 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: ShowHealthBars
-    damageContainers:
-    - Biological
-  - type: HolocardScanner # TODO RMC14 add this to RMC14 medical hud instead
   - type: ShowHealthIcons
-    damageContainers:
-    - Biological
+  - type: HolocardScanner # TODO RMC14 add this to RMC14 medical hud instead
 
 - type: entity
   parent: ClothingEyesBase
@@ -50,7 +46,7 @@
     - HudMedical
 
 - type: entity
-  parent: [ClothingEyesBase, ShowSecurityIcons, BaseSecurityCommandContraband]
+  parent: [ClothingEyesBase, ShowSecurityIcons, BaseSecurityContraband]
   id: ClothingEyesHudSecurity
   name: security hud
   description: A heads-up display that scans the humanoids in view and provides accurate data about their ID status and security records.
@@ -62,6 +58,18 @@
   - type: Tag
     tags:
     - HudSecurity
+
+- type: entity
+  parent: [ClothingEyesBase, BaseCommandContraband]
+  id: ClothingEyesHudCommand
+  name: administration hud
+  description: A heads-up display that scans the humanoids in view and provides accurate data about their ID status.
+  components:
+  - type: Sprite
+    sprite: Clothing/Eyes/Hud/command.rsi
+  - type: Clothing
+    sprite: Clothing/Eyes/Hud/command.rsi
+  - type: ShowJobIcons
 
 - type: entity
   parent: ClothingEyesBase
@@ -212,8 +220,6 @@
     sprite: Clothing/Eyes/Hud/syndagent.rsi
   - type: ShowSyndicateIcons
   - type: ShowHealthBars
-    damageContainers:
-    - Biological
 
 - type: entity
   parent: [ClothingEyesGlassesSunglasses, ShowSecurityIcons]

@@ -10,6 +10,9 @@ public sealed partial class NeurotoxinInjectorComponent : Component
     public float NeuroPerSecond;
 
     [DataField, AutoNetworkedField]
+    public TimeSpan TimeBetweenGasInjects = TimeSpan.FromSeconds(1);
+
+	[DataField, AutoNetworkedField]
     public bool AffectsDead;
 
     [DataField, AutoNetworkedField]
@@ -25,4 +28,7 @@ public sealed partial class NeurotoxinInjectorComponent : Component
 
     [DataField, AutoNetworkedField]
     public DamageSpecifier CoughDamage = new();
+
+	[DataField, AutoNetworkedField]
+	public bool InjectInContact = true;
 }

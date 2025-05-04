@@ -19,20 +19,20 @@
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
         points: 18
-    #- id: CMM40HIDPIncendiaryPacketx3
-    #  points: 18
+      - id: RMCPacketGrenadeIncendiaryFilled
+        points: 18
     #- id: CMM40HPDPWhitePhosphorusPacketx3
     #  points: 18
       - id: RMCPacketGrenadeSmokeFilled
         points: 9
-    #- id: CMM74AGMFragAirburstPacketx3
-    #  points: 20
-    #- id: CMM74AGMIncendiaryAirburstPacketx3
-    #  points: 20
-    #- id: CMM74AGMSmokeAirburstPacketx3
-    #  points: 10
-    #- id: CMM74AGMHornetAirburstPacketx3
-    #  points: 20
+      - id: RMCPacketGrenadeM74AGMFFilled
+        points: 20
+      - id: RMCPacketGrenadeM74AGMIFilled
+        points: 20
+      - id: RMCPacketGrenadeM74AGMSFilled
+        points: 10
+      - id: RMCPacketGrenadeM74AGMSHornetFilled
+        points: 20
     #- id: CMM20MineBoxx4
     #  points: 20
     #- id: CMM40MFHSMetalFoamGrenade
@@ -65,38 +65,40 @@
     #  points: 5
     - name: Restricted Firearms
       entries:
-      - id: RMCMK80Case
+      - id: RMCGunCasePistolMK80
         points: 10
-      - id: RMCSmartPistolCase
+      - id: RMCGunCasePistolSmart
         points: 15
-    #- id: CMM79GrenadeLauncher
-    #  points: 30
+      - id: RMCM79Case
+        points: 30
     - name: Armors
       entries:
       - id: CMArmorB12
         points: 30
     - name: Clothing Items
       entries:
+      - id: RMCBackpackRTO
+        recommended: true
+        points: 5
       - id: RMCScabbardMacheteFilled
+        name: machete scabbard (Full)
         points: 5
       - id: RMCPouchMacheteFilled
+        name: machete pouch (Full)
         points: 15
-    #- id: CMMarineRadioTelephonePack
-    #  points: 5
-    #- id: CMWeldingGoggles
-    #  points: 3
+      #- id: RMCWeldingGoggles
+      #  points: 3
       - id: CMBeltUtilityCombat
         points: 15
       - id: RMCPouchAutoinjectorFill
+        name: autoinjector pouch (Full)
         points: 15
       - id: CMHandsInsulated
         points: 3
-    #- id: CMNightVisionOptic
-    #  points: 30
     - name: Engineering Supplies
       entries:
-#      - id: Plastic Explosive
-#        points: 10
+      - id: RMCExplosivePlastic
+        points: 10
       - id: RMCPackFlareCAS
         points: 5
       - id: RMCExplosiveBreachingCharge
@@ -107,12 +109,13 @@
         points: 5
     - name: Utilities
       entries:
-    #- id: CMMotionDetector
-    #  points: 15
+      - id: RMCMotionDetector
+        points: 15
+        recommended: true
       - id: CMRollerBedSpawnFolded
         points: 5
-    #- id: CMFultonDeviceStack
-    #  points: 5
+      - id: RMCFulton20
+        points: 5
       - id: CMFireExtinguisherPortable
         points: 5
       - id: RMCWhistle
@@ -122,7 +125,10 @@
       - id: RMCBinoculars
         points: 5
     - name: Helmet Optics
-      entries: [ ]
+      entries:
+      - id: RMCVisorNightVision
+        points: 30
+        recommended: true
     #- id: CMMedicalHelmetOptic
     #  points: 15
     #- id: CMWeldingVisor
@@ -167,12 +173,14 @@
       - id: RMCBeltUtilityGeneral
       - id: CMBeltMarine
         recommended: true
-    #- id: CMM276GeneralPistolHolsterRig
-    #- id: CMM276M63HolsterRig
-    #- id: CMM276M44HolsterRig
-    #- id: CMM276M82FHolsterRig
-    #- id: CMM276ShotgunShellLoadingRig
+      - id: RMCBeltHolsterPistol
+      - id: RMCBeltHolsterRevolver
+      - id: RMCBeltHolsterSMG
+      - id: RMCBeltHolsterSMGPouch
+    #- id: RMCBeltHolsterFlareGun
+      - id: RMCM276ShotgunShellLoadingRig
       - id: CMBeltUtilityFilled
+        name: M276 pattern toolbelt rig (Full)
         recommended: true
       - id: RMCBeltGrenade
     - name: Pouches
@@ -189,7 +197,7 @@
       - id: RMCPouchFirstResponder
       - id: RMCPouchFlareFilled
         name: Flare pouch (Full)
-      #- id: CMFuelTankStrapPouch
+      - id: RMCPouchFuelTank
       - id: RMCPouchGeneralLarge
       #- id: CMSlingPouch
       - id: RMCPouchMagazinePistolLarge
@@ -198,21 +206,22 @@
       - id: RMCPouchPistol
       - id: RMCPouchToolsFill
         recommended: true
-        name: Tools pouch (Filled)
+        name: Tools pouch (Full)
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBlack
       - id: CMWebbingBrown
         recommended: true
-      #- id: CMShoulderHolster
       - id: CMWebbing
       - id: CMWebbingPouch
+      - id: CMWebbingHolster
     - name: Mask
       choices: { CMMask: 1 }
       entries:
       - id: CMMaskGas
       - id: CMMaskCoif
+      - id: RMCMaskRebreather
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel

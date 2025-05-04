@@ -5,7 +5,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._RMC14.Tracker.SquadLeader;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true), AutoGenerateComponentPause]
 [Access(typeof(SquadLeaderTrackerSystem))]
 public sealed partial class SquadLeaderTrackerComponent : Component
 {
@@ -15,6 +15,12 @@ public sealed partial class SquadLeaderTrackerComponent : Component
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan UpdateAt;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public TimeSpan UpdateEvery = TimeSpan.FromSeconds(1);
+
+    [DataField, AutoNetworkedField]
+    public FireteamData Fireteams = new();
+
+    [DataField, AutoNetworkedField]
+    public SquadLeaderTrackerMode Mode = SquadLeaderTrackerMode.SquadLeader;
 }

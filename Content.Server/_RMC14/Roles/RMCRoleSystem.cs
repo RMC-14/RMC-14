@@ -1,5 +1,5 @@
-﻿using Content.Server.GameTicking;
-using Content.Shared._RMC14.Roles;
+﻿using Content.Shared._RMC14.Roles;
+using Content.Shared.GameTicking;
 
 namespace Content.Server._RMC14.Roles;
 

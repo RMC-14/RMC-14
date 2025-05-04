@@ -1,0 +1,29 @@
+﻿- type: entity
+  parent: RMCHeadsetShip
+  id: RMCHeadsetRoyalMarine
+  name: royal marine headset
+  description: A sleek headset used by the Royal Marines Commando. Low profile enough to fit under their unique helmets.
+  components:
+  - type: Sprite
+    state: vai_headset
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeyRoyalMarine
+  - type: RMCHeadset
+    channels:
+    - RoyalMarine
+    radioTextIncrease: 2
+
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeyRoyalMarine
+  name: royal marine radio encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineCommand
+    - MarineCommon
+    defaultChannel: RoyalMarine
+  - type: Sprite
+    state: sl_key

@@ -1,6 +1,5 @@
 using System.Linq;
 using Content.Server._RMC14.NPC;
-using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.NPC.Queries;
 using Content.Server.NPC.Queries.Considerations;
@@ -11,8 +10,14 @@ using Content.Server.Nutrition.EntitySystems;
 using Content.Server.Storage.Components;
 using Content.Shared._RMC14.Interaction;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Construction;
+using Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
+using Content.Shared._RMC14.Xenonids.Construction.Nest;
+using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared.Atmos.Components;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.Fluids.Components;
@@ -24,7 +29,9 @@ using Content.Shared.NPC.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Content.Shared.Standing;
+using Content.Shared.Stunnable;
 using Content.Shared.Tools.Systems;
+using Content.Shared.Turrets;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -52,11 +59,12 @@ public sealed class NPCUtilitySystem : EntitySystem
     [Dependency] private readonly OpenableSystem _openable = default!;
     [Dependency] private readonly PuddleSystem _puddle = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SolutionContainerSystem _solutions = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutions = default!;
     [Dependency] private readonly WeldableSystem _weldable = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly MobThresholdSystem _thresholdSystem = default!;
+    [Dependency] private readonly TurretTargetSettingsSystem _turretTargetSettings = default!;
     [Dependency] private readonly RMCInteractionSystem _rmcInteraction = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
 
@@ -358,6 +366,24 @@ public sealed class NPCUtilitySystem : EntitySystem
 
                 return 0f;
             }
+            case TargetOnFireCon:
+                {
+                    if (TryComp(targetUid, out FlammableComponent? fire) && fire.OnFire)
+                        return 1f;
+                    return 0f;
+                }
+            case TargetIsStunnedCon:
+                {
+                    return HasComp<StunnedComponent>(targetUid) ? 1f : 0f;
+                }
+            case TurretTargetingCon:
+                {
+                    if (!TryComp<TurretTargetSettingsComponent>(owner, out var turretTargetSettings) ||
+                        _turretTargetSettings.EntityIsTargetForTurret((owner, turretTargetSettings), targetUid))
+                        return 1f;
+
+                    return 0f;
+                }
             case TargetIsNotDeadCon:
             {
                 return !_mobState.IsDead(targetUid) ? 1f : 0f;
@@ -365,6 +391,10 @@ public sealed class NPCUtilitySystem : EntitySystem
             case TargetXenoCon:
             {
                 return HasComp<XenoComponent>(targetUid) ? 1f : 0f;
+            }
+            case TargetIsNotConstructCon:
+            {
+                return HasComp<XenoConstructComponent>(targetUid) ? 0f : 1f;
             }
             case CanFaceCon:
             {
@@ -382,19 +412,29 @@ public sealed class NPCUtilitySystem : EntitySystem
             }
             case TargetInfectableCon:
             {
-                return HasComp<InfectableComponent>(targetUid) && !HasComp<VictimInfectedComponent>(targetUid) ? 1f : 0f;
+                return TryComp<InfectableComponent>(targetUid, out var infectable)
+                        && !infectable.BeingInfected
+                        && !HasComp<VictimInfectedComponent>(targetUid) ? 1f : 0f;
             }
             case TargetOpenEggCon:
             {
                 return TryComp<XenoEggComponent>(targetUid, out var egg) && egg.State == XenoEggState.Opened ? 1f : 0f;
             }
+            case TargetIsEmptyResinTrapCon:
+                {
+                    return TryComp<XenoResinHoleComponent>(targetUid, out var trap) && trap.TrapPrototype == null ? 1f : 0f;
+                }
             case TargetIsDownCon:
             {
-                return _standing.IsDown(targetUid) ? 1f : 0f;
+                return _standing.IsDown(targetUid) || HasComp<XenoNestedComponent>(targetUid) ? 1f : 0f;
             }
             case TargetIsStandingCon:
             {
-                return _standing.IsDown(targetUid) ? 0f : 1f;
+                return _standing.IsDown(targetUid) && !HasComp<XenoNestedComponent>(targetUid) ? 0f : 1f;
+            }
+            case TargetAvailibleEggMorpherCon:
+            {
+                return TryComp<EggMorpherComponent>(targetUid, out var eggmorpher) && eggmorpher.CurParasites < eggmorpher.MaxParasites ? 1f : 0f;
             }
             default:
                 throw new NotImplementedException();

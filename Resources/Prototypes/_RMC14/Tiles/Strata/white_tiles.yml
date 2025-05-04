@@ -1,0 +1,105 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorStrataWhiteBase
+  name: tiles-cm-default-white
+
+- type: tile
+  parent: CMFloorStrataWhiteBase
+  id: CMFloorStrataWhiteCyan10
+  sprite: /Textures/_RMC14/Tiles/strata/white_cyan1_0.png
+
+- type: tile
+  parent: CMFloorStrataWhiteBase
+  id: CMFloorStrataWhiteCyan11
+  sprite: /Textures/_RMC14/Tiles/strata/white_cyan1_1.png
+
+- type: tile
+  parent: CMFloorStrataWhiteBase
+  id: CMFloorStrataWhiteCyan12
+  sprite: /Textures/_RMC14/Tiles/strata/white_cyan1_2.png
+
+- type: tile
+  parent: CMFloorStrataWhiteBase
+  id: CMFloorStrataWhiteCyan13
+  sprite: /Textures/_RMC14/Tiles/strata/white_cyan1_3.png
+
+- type: tile
+  parent: CMFloorStrataWhiteBase
+  id: CMFloorStrataWhiteCyan20
+  sprite: /Textures/_RMC14/Tiles/strata/white_cyan2_0.png
+
+- type: tile
+  parent: CMFloorStrataWhiteBase
+  id: CMFloorStrataWhiteCyan21
+  sprite: /Textures/_RMC14/Tiles/strata/white_cyan2_1.png
+
+- type: tile
+  parent: CMFloorStrataWhiteBase
+  id: CMFloorStrataWhiteCyan22
+  sprite: /Textures/_RMC14/Tiles/strata/white_cyan2_2.png
+
+- type: tile
+  parent: CMFloorStrataWhiteBase
+  id: CMFloorStrataWhiteCyan23
+  sprite: /Textures/_RMC14/Tiles/strata/white_cyan2_3.png
+
+- type: tile
+  parent: CMFloorStrataWhiteBase
+  id: CMFloorStrataWhiteCyan30
+  sprite: /Textures/_RMC14/Tiles/strata/white_cyan3_0.png
+
+- type: tile
+  parent: CMFloorStrataWhiteBase
+  id: CMFloorStrataWhiteCyan31
+  sprite: /Textures/_RMC14/Tiles/strata/white_cyan3_1.png
+
+- type: tile
+  parent: CMFloorStrataWhiteBase
+  id: CMFloorStrataWhiteCyan32
+  sprite: /Textures/_RMC14/Tiles/strata/white_cyan3_2.png
+
+- type: tile
+  parent: CMFloorStrataWhiteBase
+  id: CMFloorStrataWhiteCyan33
+  sprite: /Textures/_RMC14/Tiles/strata/white_cyan3_3.png
+
+- type: tile
+  parent: CMFloorStrataWhiteBase
+  id: CMFloorStrataWhiteCyan34
+  sprite: /Textures/_RMC14/Tiles/strata/white_cyan3_4.png
+
+- type: tile
+  parent: CMFloorStrataWhiteBase
+  id: CMFloorStrataWhiteCyan35
+  sprite: /Textures/_RMC14/Tiles/strata/white_cyan3_5.png
+
+- type: tile
+  parent: CMFloorStrataWhiteBase
+  id: CMFloorStrataWhiteCyan36
+  sprite: /Textures/_RMC14/Tiles/strata/white_cyan3_6.png
+
+- type: tile
+  parent: CMFloorStrataWhiteBase
+  id: CMFloorStrataWhiteCyan37
+  sprite: /Textures/_RMC14/Tiles/strata/white_cyan3_7.png
+
+- type: tile
+  parent: CMFloorStrataWhiteBase
+  id: CMFloorStrataWhiteCyan40
+  sprite: /Textures/_RMC14/Tiles/strata/white_cyan4_0.png
+
+- type: tile
+  parent: CMFloorStrataWhiteBase
+  id: CMFloorStrataWhiteCyan41
+  sprite: /Textures/_RMC14/Tiles/strata/white_cyan4_1.png
+
+- type: tile
+  parent: CMFloorStrataWhiteBase
+  id: CMFloorStrataWhiteCyan42
+  sprite: /Textures/_RMC14/Tiles/strata/white_cyan4_2.png
+
+- type: tile
+  parent: CMFloorStrataWhiteBase
+  id: CMFloorStrataWhiteCyan43
+  sprite: /Textures/_RMC14/Tiles/strata/white_cyan4_3.png

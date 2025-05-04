@@ -1,0 +1,7 @@
+- type: emoteSounds
+  parent: [UnisexDiona, RMCMaleHuman]
+  id: RMCMaleDiona
+
+- type: emoteSounds
+  parent: [UnisexDiona, RMCFemaleHuman]
+  id: RMCFemaleDiona

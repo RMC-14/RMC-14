@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/cd8e013fd57276d2c534b81fbe50dfe5f599c51a/icons/mob/hud/actions.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "iff_toggle_on"
+    },
+    {
+      "name": "iff_toggle_off"
+    }
+  ]
+}

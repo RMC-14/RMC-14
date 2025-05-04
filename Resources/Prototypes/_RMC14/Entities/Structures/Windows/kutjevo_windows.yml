@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: RMCBaseWindowFrame
   id: RMCWindowFrameKutjevo
   components:
@@ -17,7 +17,7 @@
     node: windowFrameKutjevo
 
 - type: entity
-  parent: RMCBaseWindowFrame
+  parent: RMCWindowFrameColonyReinforced
   id: RMCWindowFrameKutjevoReinforced
   components:
   - type: Sprite
@@ -77,9 +77,14 @@
           - !type:ChangeConstructionNodeBehavior
             node: windowFrameKutjevo
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: Construction
     graph: RMCWindowKutjevo
     node: windowKutjevo
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameKutjevo
+    sound:
+      collection: WindowShatter
 
 - type: entity
   parent: CMBaseWindow
@@ -127,12 +132,17 @@
           - !type:ChangeConstructionNodeBehavior
             node: windowFrameKutjevoReinforced
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: Construction
     graph: RMCWindowKutjevoReinforced
     node: windowKutjevoReinforced
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameKutjevoReinforced
+    sound:
+      collection: WindowShatter
 
 - type: entity
-  parent: CMBaseWindow
+  parent: CMBaseWindowIndestructible
   id: RMCWindowKutjevoHull
   name: hull window
   description: A glass window. Something tells you this one is somehow indestructible.

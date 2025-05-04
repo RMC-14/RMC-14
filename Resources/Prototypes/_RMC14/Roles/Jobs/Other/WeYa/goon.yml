@@ -1,0 +1,88 @@
+# Corporate Bodyguard
+- type: job
+  parent: CMJobBase
+  id: RMCWeYaGoon
+  name: rmc-job-name-pmc-bodyguard
+  description: rmc-ghost-role-information-pmc-description
+  playTimeTracker: RMCJobWeYaGoon
+  ranks:
+    RMCRankWeYaOperator: []
+  startingGear: RMCJobWeYaGoon
+  icon: CMJobIconLiaison
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillEndurance: 2
+        RMCSkillMeleeWeapons: 1
+
+- type: playTimeTracker
+  id: RMCJobWeYaGoon
+
+- type: startingGear
+  id: RMCJobWeYaGoon
+  equipment:
+    id: RMCIDCardPMC
+    ears: RMCHeadsetDistressPMC
+    jumpsuit: RMCJumpsuitVeteranPMCCorporate
+    outerClothing: CMArmorM4PMCCorporate
+    gloves: RMCHandsVeteranPMC
+    head: ArmorHelmetPMCCorporate
+    shoes: RMCBootsPMCFilled
+    back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
+    belt: CMM77BeltFilled # TODO RMC14: PMC re-sprite
+    suitstorage: WeaponRifleM54C # TODO RMC14: Corporate re-sprite (white)
+    pocket1: RMCPouchMagazine # TODO RMC14: PMC re-sprite
+    pocket2: RMCPouchFirstAidPMCFill
+  storage:
+    back:
+    - CMStunbaton
+    - RMCZipties
+    - RMCZipties
+    - RMCZipties
+    - CMCrowbar
+    - CMMRE # TODO RMC14: PMC CFR ration
+    pocket1:
+    - CMMagazineRifleM54C
+    - CMMagazineRifleM54C
+    - CMMagazineRifleM54C
+    outerClothing:
+    - CMMagazineRifleM54CAP
+    - CMMagazineRifleM54CAP
+
+- type: entity
+  parent: MarkerBase
+  id: RMCRandomHumanoidWeYaGoon
+  name: weya corporate ghost role goon
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    layers:
+    - state: red
+  - type: RandomHumanoidSpawner
+    settings: RMCWeYaGoon
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCWeYaGoon
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-pmc-bodyguard
+    description: rmc-ghost-role-information-pmc-description
+    rules: ghost-role-information-nonantagonist-rules
+    reregister: false
+    job: RMCWeYaGoon
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial

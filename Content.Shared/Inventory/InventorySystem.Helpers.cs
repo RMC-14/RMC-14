@@ -40,7 +40,7 @@ public partial class InventorySystem
     /// </summary>
     public bool TryGetContainingSlot(Entity<TransformComponent?, MetaDataComponent?> entity, [NotNullWhen(true)] out SlotDefinition? slot)
     {
-        if (!_containerSystem.TryGetContainingContainer(entity.Owner, out var container, entity.Comp2, entity.Comp1))
+        if (!_containerSystem.TryGetContainingContainer(entity, out var container))
         {
             slot = null;
             return false;
@@ -133,6 +133,11 @@ public partial class InventorySystem
 
         if (TryGetSlotContainer(entity, "pocket2", out var pocket2, out _)
             && _containerSystem.Insert(itemToSpawn, pocket2)
+            )
+            return;
+
+        if (TryGetSlotContainer(entity, "belt", out var belt, out _)
+            && _containerSystem.Insert(itemToSpawn, belt)
             )
             return;
 

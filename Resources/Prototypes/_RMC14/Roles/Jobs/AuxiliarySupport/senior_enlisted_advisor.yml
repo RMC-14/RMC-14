@@ -1,0 +1,128 @@
+- type: job
+  parent: CMJobBase
+  id: CMSeniorEnlistedAdvisor
+  name: cm-job-name-senior-enlisted-advisor
+  description: cm-job-description-senior-enlisted-advisor
+  playTimeTracker: CMJobSeniorEnlistedAdvisor
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMSquad
+    time: 54000 # 15 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsEngineering
+    time: 36000 # 10 hours
+  - !type:DepartmentTimeRequirement
+    department: CMMilitaryPolice
+    time: 54000 # 15 hours
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 54000 # 15 hours
+  - !type:DepartmentTimeRequirement
+    department: CMCommand
+    time: 54000 # 15 hours
+  - !type:DepartmentTimeRequirement
+    department: CMRequisitions
+    time: 36000 # 10 hours
+  ranks: # TODO Selectable Ranks for SEA
+    RMCRankSergeantMajor:
+    - !type:RoleTimeRequirement
+      role: CMJobSeniorEnlistedAdvisor
+      time: 252000 # 70 hours
+    RMCRankFirstSergeant:
+    - !type:RoleTimeRequirement
+      role: CMJobSeniorEnlistedAdvisor
+      time: 36000 # 10 hours
+    RMCRankGunnerySergeant: []
+  startingGear: CMGearSeniorEnlistedAdvisor
+  icon: "CMJobIconSEA"
+  requireAdminNotify: true
+  joinNotifyCrew: true
+  latejoinArrivalSound:
+    path: /Audio/_RMC14/Announcements/ARES/attention_jingle.ogg
+  supervisors: cm-job-supervisors-co
+  whitelisted: true
+  accessGroups:
+  - MarineMain
+  minimapIcon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: sea
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_medical
+  roleWeight: 0.25
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 2
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 2
+        RMCSkillFireman: 2
+        RMCSkillIntel: 2
+        RMCSkillJtac: 3
+        RMCSkillLeadership: 2
+        RMCSkillMedical: 3
+        RMCSkillOverwatch: 1
+        RMCSkillPilot: 2
+        RMCSkillPolice: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillResearch: 1
+        RMCSkillSurgery: 2
+        RMCSkillVehicles: 2
+    - type: MarineOrders
+    - type: CMVendorUser
+      points: 45
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-senior-enlisted-advisor
+    - type: SeeNewPlayers
+    - type: ViewIntelObjectives
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: sea
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_medical
+
+- type: startingGear
+  id: CMGearSeniorEnlistedAdvisor
+  equipment:
+    jumpsuit: CMJumpsuitBO
+    shoes: CMBootsBrownFilled
+    head: CMHeadCapDrill
+    id: CMIDCardSeniorEnlistedAdvisor
+    ears: RMCHeadsetSEA
+    pocket1: CMFlash
+    pocket2: RMCPouchGeneralLarge
+  inhand:
+  - RMCBinoculars
+  - RMCWhistle
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSeniorEnlistedAdvisor
+  name: senior enlisted advisor spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSeniorEnlistedAdvisor
+  - type: Sprite
+    state: sea_spawn
+
+- type: entity
+  parent: CMGuidebookRole
+  id: CMGuidebookRoleSEA
+  name: Senior Enlisted Advisor
+  description: Mentor for the Marines!
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: senior_enlisted_advisor
+
+- type: playTimeTracker
+  id: CMJobSeniorEnlistedAdvisor
+  isHumanoid: true

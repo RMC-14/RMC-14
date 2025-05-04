@@ -1,0 +1,79 @@
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: RMCFloorKutjevoCyanBase
+  name: tiles-cm-default-cyan
+  suffix: kutjevo
+
+- type: tile
+  parent: RMCFloorKutjevoCyanBase
+  id: RMCFloorKutjevoCyan1
+  sprite: /Textures/_RMC14/Tiles/kutjevo/cyan1.png
+  
+- type: tile
+  parent: RMCFloorKutjevoCyanBase
+  id: RMCFloorKutjevoCyan2
+  sprite: /Textures/_RMC14/Tiles/kutjevo/cyan2.png
+  
+- type: tile
+  parent: RMCFloorKutjevoCyanBase
+  id: RMCFloorKutjevoCyan3_0
+  sprite: /Textures/_RMC14/Tiles/kutjevo/cyan3_0.png
+  
+- type: tile
+  parent: RMCFloorKutjevoCyanBase
+  id: RMCFloorKutjevoCyan3_1
+  sprite: /Textures/_RMC14/Tiles/kutjevo/cyan3_1.png
+  
+- type: tile
+  parent: RMCFloorKutjevoCyanBase
+  id: RMCFloorKutjevoCyan3_2
+  sprite: /Textures/_RMC14/Tiles/kutjevo/cyan3_2.png
+  
+- type: tile
+  parent: RMCFloorKutjevoCyanBase
+  id: RMCFloorKutjevoCyan3_3
+  sprite: /Textures/_RMC14/Tiles/kutjevo/cyan3_3.png
+  
+- type: tile
+  parent: RMCFloorKutjevoCyanBase
+  id: RMCFloorKutjevoCyan3_4
+  sprite: /Textures/_RMC14/Tiles/kutjevo/cyan3_4.png
+  
+- type: tile
+  parent: RMCFloorKutjevoCyanBase
+  id: RMCFloorKutjevoCyan3_5
+  sprite: /Textures/_RMC14/Tiles/kutjevo/cyan3_5.png
+  
+- type: tile
+  parent: RMCFloorKutjevoCyanBase
+  id: RMCFloorKutjevoCyan3_6
+  sprite: /Textures/_RMC14/Tiles/kutjevo/cyan3_6.png
+  
+- type: tile
+  parent: RMCFloorKutjevoCyanBase
+  id: RMCFloorKutjevoCyan3_7
+  sprite: /Textures/_RMC14/Tiles/kutjevo/cyan3_7.png
+  
+- type: tile
+  parent: RMCFloorKutjevoCyanBase
+  id: RMCFloorKutjevoCyan4_0
+  sprite: /Textures/_RMC14/Tiles/kutjevo/cyan4_0.png
+  
+- type: tile
+  parent: RMCFloorKutjevoCyanBase
+  id: RMCFloorKutjevoCyan4_1
+  sprite: /Textures/_RMC14/Tiles/kutjevo/cyan4_1.png
+  
+- type: tile
+  parent: RMCFloorKutjevoCyanBase
+  id: RMCFloorKutjevoCyan4_2
+  sprite: /Textures/_RMC14/Tiles/kutjevo/cyan4_2.png
+  
+- type: tile
+  parent: RMCFloorKutjevoCyanBase
+  id: RMCFloorKutjevoCyan4_3
+  sprite: /Textures/_RMC14/Tiles/kutjevo/cyan4_3.png
+  
+  
+

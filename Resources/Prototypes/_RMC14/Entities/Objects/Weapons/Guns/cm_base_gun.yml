@@ -1,8 +1,10 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: RMCBaseMeleeWeapon
   id: CMBaseWeaponGun
   components:
+  - type: UsableWhileDevoured
+    canUnequip: true
   - type: GunUnskilledPenalty
   - type: GunIFF
     enabled: false
@@ -22,6 +24,8 @@
     damage:
       types:
         Blunt: 5
+    soundHit:
+      collection: GenericHit
   - type: EmitSoundOnPickup
     sound:
       collection: RMCEquipGun
@@ -30,3 +34,30 @@
       collection: RMCRustleGun
   - type: Gun
     meleeCooldownOnShoot: false
+    resetOnHandSelected: false
+    burstCooldown: 0
+  - type: RMCWeaponAccuracy
+  - type: GunSkilledAccuracy
+  - type: Appearance
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/pistol_mouse.rsi
+      state: all
+  - type: InteractionActivateOnClick
+
+- type: entity
+  parent: BaseBullet
+  id: RMCBaseBullet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    layers:
+    - state: bullet
+      shader: unshaded
+  - type: BulletholeGenerator
+  - type: RMCBullet
+  - type: RMCProjectileAccuracy
+  - type: Projectile
+    soundHit:
+      path: /Audio/_RMC14/Bullets/bullet_impact1.ogg

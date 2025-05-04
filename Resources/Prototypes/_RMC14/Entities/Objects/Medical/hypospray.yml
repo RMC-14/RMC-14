@@ -27,7 +27,7 @@
     tags:
     - Hypospray
   - type: MedicallyUnskilledDoAfter
-    min: 2
+    min: 1
     doAfter: 3
   - type: ItemSlots
     slots:
@@ -56,6 +56,10 @@
     blacklist:
       components:
       - Xeno
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - suitstorage
 
 - type: Tag
   id: Hypospray

@@ -1,0 +1,9 @@
+﻿<controls:CommendationContainer
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Commendations"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
+    Orientation="Vertical">
+    <RichTextLabel Name="Title" Access="Public" />
+    <ui:BlueHorizontalSeparator />
+    <RichTextLabel Name="Description" Access="Public" />
+</controls:CommendationContainer>

@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._RMC14.Prying;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
@@ -98,6 +99,12 @@ public sealed class PryingSystem : EntitySystem
             // to be marked as handled.
             return true;
 
+        if (HasComp<RMCUserPryingRequiresToolComponent>(user))
+        {
+            _popup.PopupClient("You can't pry that with your bare hands!", target, user, PopupType.SmallCaution);
+            return true;
+        }
+
         // hand-prying is much slower
         var modifier = CompOrNull<PryingComponent>(user)?.SpeedModifier ?? unpoweredComp.PryModifier;
         return StartPry(target, user, null, modifier, out id);
@@ -136,9 +143,10 @@ public sealed class PryingSystem : EntitySystem
         RaiseLocalEvent(target, ref modEv);
         var doAfterArgs = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(modEv.BaseTime * modEv.PryTimeModifier / toolModifier), new DoorPryDoAfterEvent(), target, target, tool)
         {
-            BreakOnDamage = true,
+            BreakOnDamage = false,
             BreakOnMove = true,
             NeedHand = tool != user,
+            ForceVisible = tool == null,
         };
 
         if (tool != user && tool != null)

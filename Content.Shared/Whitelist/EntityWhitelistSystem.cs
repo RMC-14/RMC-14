@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Item;
 using Content.Shared.Tag;
 
@@ -10,6 +11,9 @@ public sealed class EntityWhitelistSystem : EntitySystem
     [Dependency] private readonly TagSystem _tag = default!;
 
     private EntityQuery<ItemComponent> _itemQuery;
+
+    // RMC14
+    [Dependency] private readonly SkillsSystem _skills = default!;
 
     public override void Initialize()
     {
@@ -46,9 +50,16 @@ public sealed class EntityWhitelistSystem : EntitySystem
     public bool IsValid(EntityWhitelist list, EntityUid uid)
     {
         if (list.Components != null)
-            EnsureRegistrations(list);
+        {
+            if (list.Registrations == null)
+            {
+                var regs = StringsToRegs(list.Components);
+                list.Registrations = new List<ComponentRegistration>();
+                list.Registrations.AddRange(regs);
+            }
+        }
 
-        if (list.Registrations != null)
+        if (list.Registrations != null && list.Registrations.Count > 0)
         {
             foreach (var reg in list.Registrations)
             {
@@ -74,6 +85,13 @@ public sealed class EntityWhitelistSystem : EntitySystem
                 ? _tag.HasAllTags(uid, list.Tags)
                 : _tag.HasAnyTag(uid, list.Tags);
         }
+
+        // RMC14
+        if (list.Skills != null)
+        {
+            return list.RequireAll ? _skills.HasAllSkills(uid, list.Skills) : _skills.HasAnySkills(uid, list.Skills);
+        }
+        // RMC14
 
         return list.RequireAll;
     }
@@ -153,7 +171,7 @@ public sealed class EntityWhitelistSystem : EntitySystem
         return IsWhitelistPassOrNull(blacklist, uid);
     }
 
-    /// <summary>                                        
+    /// <summary>
     /// Helper function to determine if Blacklist is either null or the entity is not on the list
     /// Duplicate of equivalent Whitelist function
     /// </summary>
@@ -162,24 +180,27 @@ public sealed class EntityWhitelistSystem : EntitySystem
         return IsWhitelistFailOrNull(blacklist, uid);
     }
 
-    private void EnsureRegistrations(EntityWhitelist list)
+    private List<ComponentRegistration> StringsToRegs(string[]? input)
     {
-        if (list.Components == null)
-            return;
+        var list = new List<ComponentRegistration>();
 
-        list.Registrations = new List<ComponentRegistration>();
-        foreach (var name in list.Components)
+        if (input == null || input.Length == 0)
+            return list;
+
+        foreach (var name in input)
         {
             var availability = _factory.GetComponentAvailability(name);
             if (_factory.TryGetRegistration(name, out var registration)
                 && availability == ComponentAvailability.Available)
             {
-                list.Registrations.Add(registration);
+                list.Add(registration);
             }
             else if (availability == ComponentAvailability.Unknown)
             {
-                Log.Warning($"Unknown component name {name} passed to EntityWhitelist!");
+                Log.Error($"StringsToRegs failed: Unknown component name {name} passed to EntityWhitelist!");
             }
         }
+
+        return list;
     }
 }

@@ -1,0 +1,55 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorCorsatMarkedBase
+  name: tiles-cm-default-marked
+
+- type: tile
+  parent: CMFloorCorsatMarkedBase
+  id: CMFloorCorsatMarked
+  sprite: /Textures/_RMC14/Tiles/corsat/marked.png
+
+- type: tile
+  parent: CMFloorCorsatMarkedBase
+  id: CMFloorCorsatArrowEast
+  sprite: /Textures/_RMC14/Tiles/corsat/arrow_east.png
+
+- type: tile
+  parent: CMFloorCorsatMarkedBase
+  id: CMFloorCorsatArrowNorth
+  sprite: /Textures/_RMC14/Tiles/corsat/arrow_north.png
+
+- type: tile
+  parent: CMFloorCorsatMarkedBase
+  id: CMFloorCorsatArrowSouth
+  sprite: /Textures/_RMC14/Tiles/corsat/arrow_south.png
+
+- type: tile
+  parent: CMFloorCorsatMarkedBase
+  id: CMFloorCorsatArrowWest
+  sprite: /Textures/_RMC14/Tiles/corsat/arrow_west.png
+
+- type: tile
+  parent: CMFloorCorsatMarkedBase
+  id: CMFloorCorsatCargo
+  sprite: /Textures/_RMC14/Tiles/corsat/cargo.png
+
+- type: tile
+  parent: CMFloorCorsatMarkedBase
+  id: CMFloorCorsatSigma
+  sprite: /Textures/_RMC14/Tiles/corsat/sigma.png
+
+- type: tile
+  parent: CMFloorCorsatMarkedBase
+  id: CMFloorCorsatTheta
+  sprite: /Textures/_RMC14/Tiles/corsat/theta.png
+
+- type: tile
+  parent: CMFloorCorsatMarkedBase
+  id: CMFloorCorsatGamma
+  sprite: /Textures/_RMC14/Tiles/corsat/gamma.png
+
+- type: tile
+  parent: CMFloorCorsatMarkedBase
+  id: CMFloorCorsatOmega
+  sprite: /Textures/_RMC14/Tiles/corsat/omega.png

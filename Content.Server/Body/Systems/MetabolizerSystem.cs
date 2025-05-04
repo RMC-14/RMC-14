@@ -1,4 +1,5 @@
 using Content.Server.Body.Components;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Server.Chemistry.Containers.EntitySystems;
 using Content.Shared._RMC14.Medical.Stasis;
 using Content.Shared.Administration.Logs;
@@ -25,7 +26,7 @@ namespace Content.Server.Body.Systems
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
         [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
-        [Dependency] private readonly SolutionContainerSystem _solutionContainerSystem = default!;
+        [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
         [Dependency] private readonly CMStasisBagSystem _cmStasisBag = default!;
 
         private EntityQuery<OrganComponent> _organQuery;
@@ -58,11 +59,11 @@ namespace Content.Server.Body.Systems
         {
             if (!entity.Comp.SolutionOnBody)
             {
-                _solutionContainerSystem.EnsureSolution(entity.Owner, entity.Comp.SolutionName);
+                _solutionContainerSystem.EnsureSolution(entity.Owner, entity.Comp.SolutionName, out _);
             }
             else if (_organQuery.CompOrNull(entity)?.Body is { } body)
             {
-                _solutionContainerSystem.EnsureSolution(body, entity.Comp.SolutionName);
+                _solutionContainerSystem.EnsureSolution(body, entity.Comp.SolutionName, out _);
             }
         }
 

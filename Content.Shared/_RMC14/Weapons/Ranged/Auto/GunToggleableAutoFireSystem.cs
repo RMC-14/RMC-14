@@ -12,6 +12,7 @@ using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Wieldable;
 using Content.Shared.Wieldable.Components;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Collision.Shapes;
@@ -22,6 +23,7 @@ namespace Content.Shared._RMC14.Weapons.Ranged.Auto;
 public sealed class GunToggleableAutoFireSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedGunSystem _gun = default!;
@@ -31,6 +33,7 @@ public sealed class GunToggleableAutoFireSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly CMGunSystem _rmcGun = default!;
+    [Dependency] private readonly RMCGunBatterySystem _rmcGunBattery = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -42,6 +45,7 @@ public sealed class GunToggleableAutoFireSystem : EntitySystem
     {
         SubscribeLocalEvent<GunToggleableAutoFireComponent, GetItemActionsEvent>(OnGetItemActions);
         SubscribeLocalEvent<GunToggleableAutoFireComponent, GunToggleableAutoFireActionEvent>(OnAutoFireAction);
+        SubscribeLocalEvent<GunToggleableAutoFireComponent, GunGetBatteryDrainEvent>(OnAutoFireGetBatteryDrain);
 
         SubscribeLocalEvent<ActiveGunAutoFireComponent, ComponentRemove>(OnRemove);
         SubscribeLocalEvent<ActiveGunAutoFireComponent, ItemUnwieldedEvent>(OnDoRemove);
@@ -78,6 +82,7 @@ public sealed class GunToggleableAutoFireSystem : EntitySystem
             return;
         }
 
+        _audio.PlayPredicted(ent.Comp.ToggleSound, ent, user);
         if (EnsureComp<ActiveGunAutoFireComponent>(ent, out _))
         {
             RemCompDeferred<ActiveGunAutoFireComponent>(ent);
@@ -86,6 +91,14 @@ public sealed class GunToggleableAutoFireSystem : EntitySystem
         }
 
         AutoUpdated((ent, ent), true);
+    }
+
+    private void OnAutoFireGetBatteryDrain(Entity<GunToggleableAutoFireComponent> ent, ref GunGetBatteryDrainEvent args)
+    {
+        if (!HasComp<ActiveGunAutoFireComponent>(ent))
+            return;
+
+        args.Drain += ent.Comp.BatteryDrain;
     }
 
     private void OnRemove(Entity<ActiveGunAutoFireComponent> ent, ref ComponentRemove args)
@@ -108,6 +121,7 @@ public sealed class GunToggleableAutoFireSystem : EntitySystem
             return;
 
         _actions.SetToggled(ent.Comp.Action, active);
+        _rmcGunBattery.RefreshBatteryDrain(ent.Owner);
     }
 
     public override void Update(float frameTime)

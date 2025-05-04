@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent:
   - CMXenoDeveloped
   - CMXenoTail
@@ -10,6 +10,9 @@
   components:
   - type: GhostRole
     name: cm-job-name-xeno-lesser-drone
+    description: roles-lesser-drone-description
+    raffle:
+      settings: short
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/LesserDrone/lesser_drone.rsi
   - type: MobState
@@ -29,15 +32,16 @@
     - ActionXenoTailStab
     - ActionXenoAcidWeak
     - ActionXenoPheromones
-    - ActionXenoPlantWeeds # TODO RMC14 only near other weeds for lesser drones
+    - ActionLesserDronePlantWeeds
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
-    # evasion: 10
     tier: 0
     hudOffset: -0.15,-0.03
     contributesToVictory: false
     countedInSlots: false
     unlockAt: 0
+    muteOnSpawn: true
+  - type: XenoLight
   - type: XenoAcid
   - type: XenoConstruction
     buildDelay: 4
@@ -47,6 +51,7 @@
     - DoorXenoResin
   - type: XenoDevour
   - type: XenoPheromones
+    pheroSuffix: weak
   - type: XenoPlasma
     plasma: 300
     maxPlasma: 300
@@ -55,14 +60,20 @@
     damage:
       groups:
         Brute: 20
-  - type: Tackle  # min: 4, max: 5
-    threshold: 5
-    stun: 5
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 24
+  - type: Tackle
+    min: 4
+    max: 5
   - type: WhitelistPickup
     whitelist:
       components:
       - XenoParasite
       - XenoEgg
+      - XenoFruit
+  - type: TunnelRenamer
   - type: MultiHandedHolder
     items:
     - hands: 2
@@ -76,9 +87,17 @@
   - type: XenoHiveCoreRole
   - type: RMCSize
     size: VerySmallXeno
-#  - type: RMCXenoDamageVisuals # TODO RMC14
-#    prefix: drone
+  - type: RMCXenoDamageVisuals
+    prefix: lesser
   - type: TacticalMapIcon
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: lesser_drone
+  - type: AcidTrap
+    trapLevel: 1
+    cost: 70
+    spray: XenoAcidSprayTrapWeak
+  - type: Evasion
+    evasion: 10
+  - type: XenoInhands
+    prefix: lesser

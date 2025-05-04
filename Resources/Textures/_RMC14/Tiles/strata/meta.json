@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/2718327e8fcc87862959bc58bf16416e208ac85d/icons/turf/floors/strata_floor.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "white_cyan1",
+      "directions": 4
+    },
+    {
+      "name": "white_cyan2",
+      "directions": 4
+    },
+    {
+      "name": "white_cyan3",
+      "directions": 8
+    },
+    {
+      "name": "white_cyan4",
+      "directions": 4
+    },
+    {
+      "name": "orange_cover"
+    },
+    {
+      "name": "orange_tile"
+    },
+    {
+      "name": "orange_edge1"
+    },
+    {
+      "name": "orange_edge2"
+    },
+    {
+      "name": "orange_edge3"
+    },
+    {
+      "name": "orange_edge4"
+    },
+    {
+      "name": "orange_edge5"
+    },
+    {
+      "name": "orange_edge6"
+    },
+    {
+      "name": "orange_edge7"
+    },
+    {
+      "name": "orange_edge8"
+    },
+    {
+      "name": "orange_icorner1"
+    },
+    {
+      "name": "orange_icorner2"
+    },
+    {
+      "name": "orange_icorner3"
+    },
+    {
+      "name": "orange_icorner4"
+    },
+    {
+      "name": "multi_tiles1"
+    },
+    {
+      "name": "multi_tiles2"
+    },
+    {
+      "name": "multi_tiles3"
+    },
+    {
+      "name": "multi_tiles4"
+    },
+    {
+      "name": "multi_tiles5"
+    },
+    {
+      "name": "multi_tiles6"
+    },
+	{
+      "name": "grey_multi_tiles1"
+    },
+    {
+      "name": "grey_multi_tiles2"
+    },
+    {
+      "name": "grey_multi_tiles3"
+    },
+    {
+      "name": "grey_multi_tiles4"
+    },
+    {
+      "name": "grey_multi_tiles5"
+    },
+    {
+      "name": "grey_multi_tiles6"
+    },
+    {
+      "name": "floor3"
+    },
+    {
+      "name": "yellow_1"
+    },
+    {
+      "name": "yellow_2"
+    },
+    {
+      "name": "yellow_3"
+    },
+    {
+      "name": "yellow_4"
+    },
+    {
+      "name": "yellow_5"
+    },
+    {
+      "name": "yellow_6"
+    },
+    {
+      "name": "yellow_7"
+    },
+    {
+      "name": "yellow_8"
+    },
+    {
+      "name": "yellow_corner_1"
+    },
+    {
+      "name": "yellow_corner_2"
+    },
+    {
+      "name": "yellow_corner_3"
+    },
+    {
+      "name": "yellow_corner_4"
+    },
+    {
+      "name": "blue1"
+    },
+    {
+      "name": "blue2"
+    },
+    {
+      "name": "blue_1"
+    },
+    {
+      "name": "blue_2"
+    },
+    {
+      "name": "blue_3"
+    },
+    {
+      "name": "blue_4"
+    },
+    {
+      "name": "blue_5"
+    },
+    {
+      "name": "blue_6"
+    },
+    {
+      "name": "blue_7"
+    },
+    {
+      "name": "blue_8"
+    },
+    {
+      "name": "blue_corner_1"
+    },
+    {
+      "name": "blue_corner_2"
+    },
+    {
+      "name": "blue_corner_3"
+    },
+    {
+      "name": "blue_corner_4"
+    },
+    {
+      "name": "red1"
+    },
+    {
+      "name": "red2"
+    }
+  ]
+}

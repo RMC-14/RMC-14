@@ -31,7 +31,7 @@
       - Cigarette
   - type: StorageFill
     contents:
-    - id: Cigarette
+    - id: RMCCigarette
       amount: 4
   - type: ItemCounter
     count:
@@ -52,6 +52,14 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/CigPacks/sloths.rsi
+      state: helmet
+  - type: Tag
+    tags:
+    - CigPack
+    - Trash
 
 - type: entity
   parent: CigPackBase
@@ -136,7 +144,7 @@
       - Cigarette
   - type: StorageFill
     contents:
-    - id: Cigarette
+    - id: RMCCigarette
       amount: 20
   - type: ItemCounter
     count:
@@ -171,6 +179,38 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/CigPacks/sloths.rsi
+      state: helmet
+
+- type: entity
+  parent: Cigarette
+  id: RMCCigarette
+  description: An unfiltered roll of tobacco and nicotine. Smoking this releases even more tar and soot into your mouth.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/unfiltered_roll.rsi
+    state: unlit-icon
+
+- type: entity
+  id: RMCCigaretteSpent
+  parent: RMCCigarette
+  suffix: spent
+  components:
+  - type: Sprite
+    state: burnt-icon
+  - type: Smokable
+    state: Burnt
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 20
+  - type: Tag
+    tags:
+      - Cigarette
+      - Trash
+      - Burnt
 
 - type: entity
   parent: RMCCigarettePackLuckySloths
@@ -180,6 +220,10 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/we_ya_gold_packet.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/CigPacks/weya.rsi
+      state: helmet
 
 - type: entity
   parent: RMCCigarettePackLuckySloths
@@ -189,3 +233,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Smokeables/Cigarettes/executive_select.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/CigPacks/exec.rsi
+      state: helmet

@@ -1,15 +1,20 @@
-﻿using Content.Shared._RMC14.Marines.Skills;
+﻿using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Prototypes;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
-using Content.Shared.Inventory;
+using Content.Shared.Lock;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Stunnable;
 using Content.Shared.Whitelist;
+using Robust.Shared.Containers;
+using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using static Content.Shared.Storage.StorageComponent;
 
@@ -17,21 +22,29 @@ namespace Content.Shared._RMC14.Storage;
 
 public sealed class RMCStorageSystem : EntitySystem
 {
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
+    [Dependency] private readonly LockSystem _lock = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
 
     private readonly List<EntityUid> _toRemove = new();
+    private readonly List<EntityUid> _toClose = new();
 
     private EntityQuery<StorageComponent> _storageQuery;
+
+    private readonly TimeSpan _stunStorage = TimeSpan.FromSeconds(4);
 
     public override void Initialize()
     {
@@ -46,14 +59,24 @@ public sealed class RMCStorageSystem : EntitySystem
 
         SubscribeLocalEvent<StorageCloseOnMoveComponent, GotEquippedEvent>(OnStorageEquip);
 
-        Subs.BuiEvents<StorageCloseOnMoveComponent>(StorageUiKey.Key, sub =>
+        SubscribeLocalEvent<BlockEntityStorageComponent, InsertIntoEntityStorageAttemptEvent>(OnBlockInsertIntoEntityStorageAttempt);
+
+        SubscribeLocalEvent<MarineComponent, EntGotRemovedFromContainerMessage>(OnRemovedMarineFromContainer);
+
+        SubscribeLocalEvent<StorageNestedOpenSkillRequiredComponent, StorageInteractAttemptEvent>(OnNestedSkillRequiredInteractAttempt);
+
+        SubscribeLocalEvent<RMCEntityStorageWhitelistComponent, ContainerIsInsertingAttemptEvent>(OnEntityStorageWhitelistAttempt);
+
+        SubscribeLocalEvent<EntityStorageCloseOnMapInitComponent, MapInitEvent>(OnEntityStorageClose);
+
+        Subs.BuiEvents<StorageCloseOnMoveComponent>(StorageUiKey.Key, subs =>
         {
-            sub.Event<BoundUIOpenedEvent>(OnCloseOnMoveUIOpened);
+            subs.Event<BoundUIOpenedEvent>(OnCloseOnMoveUIOpened);
         });
 
-        Subs.BuiEvents<StorageOpenComponent>(StorageUiKey.Key, sub =>
+        Subs.BuiEvents<StorageOpenComponent>(StorageUiKey.Key, subs =>
         {
-            sub.Event<BoundUIClosedEvent>(OnCloseOnMoveUIClosed);
+            subs.Event<BoundUIClosedEvent>(OnCloseOnMoveUIClosed);
         });
 
         UpdatesAfter.Add(typeof(SharedStorageSystem));
@@ -71,7 +94,8 @@ public sealed class RMCStorageSystem : EntitySystem
     private void OnStorageFillItem(Entity<StorageComponent> storage, ref CMStorageItemFillEvent args)
     {
         var tries = 0;
-        while (!_storage.CanInsert(storage, args.Item, out var reason) &&
+        // Ignore stackables because SharedStorageSystem.OnAttemptInsert does not stack items.
+        while (!_storage.CanInsert(storage, args.Item, null, out var reason, ignoreStacks: true) &&
                reason == "comp-storage-insufficient-capacity" &&
                tries < 3)
         {
@@ -105,7 +129,7 @@ public sealed class RMCStorageSystem : EntitySystem
     public bool IgnoreItemSize(Entity<StorageComponent> storage, EntityUid item)
     {
         return TryComp(storage, out IgnoreContentsSizeComponent? ignore) &&
-               _whitelist.IsValid(ignore.Items, item);
+               _entityWhitelist.IsValid(ignore.Items, item);
     }
 
     public bool OpenDoAfter(EntityUid uid, EntityUid entity, StorageComponent? storageComp = null, bool silent = false)
@@ -159,6 +183,65 @@ public sealed class RMCStorageSystem : EntitySystem
             args.Cancelled = true;
     }
 
+    private void OnStorageEquip(Entity<StorageCloseOnMoveComponent> ent, ref GotEquippedEvent args)
+    {
+        _ui.CloseUi(ent.Owner, StorageUiKey.Key, args.Equipee);
+        if (TryComp<StorageOpenComponent>(ent, out var comp))
+            comp.OpenedAt.Remove(args.Equipee);
+    }
+
+    private void OnBlockInsertIntoEntityStorageAttempt(Entity<BlockEntityStorageComponent> ent, ref InsertIntoEntityStorageAttemptEvent args)
+    {
+        if (_entityWhitelist.IsWhitelistPassOrNull(ent.Comp.Whitelist, args.Container))
+            args.Cancelled = true;
+    }
+
+    private void OnRemovedMarineFromContainer(Entity<MarineComponent> ent, ref EntGotRemovedFromContainerMessage args)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        if (TerminatingOrDeleted(ent))
+            return;
+
+        if (!HasComp<NoStunOnExitComponent>(args.Container.Owner))
+            _stun.TryStun(ent, _stunStorage, true);
+    }
+
+    private void OnNestedSkillRequiredInteractAttempt(Entity<StorageNestedOpenSkillRequiredComponent> ent, ref StorageInteractAttemptEvent args)
+    {
+        if (!_container.TryGetContainingContainer((ent, null), out var container) ||
+            !TryComp(container.Owner, out StorageComponent? parentStorage) ||
+            !parentStorage.StoredItems.ContainsKey(ent))
+        {
+            return;
+        }
+
+        if (_skills.HasSkills(args.User, ent.Comp.Skills))
+            return;
+
+        args.Cancelled = true;
+        if (args.Silent)
+            return;
+
+        var msg = Loc.GetString("rmc-storage-nested-unable", ("nested", ent), ("parent", container.Owner));
+        _popup.PopupClient(msg, ent, args.User, PopupType.SmallCaution);
+    }
+
+    private void OnEntityStorageWhitelistAttempt(Entity<RMCEntityStorageWhitelistComponent> ent, ref ContainerIsInsertingAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (!_entityWhitelist.IsWhitelistPass(ent.Comp.Whitelist, args.EntityUid))
+            args.Cancel();
+    }
+
+    private void OnEntityStorageClose(Entity<EntityStorageCloseOnMapInitComponent> ent, ref MapInitEvent args)
+    {
+        _toClose.Add(ent);
+    }
+
     private void OnCloseOnMoveUIOpened(Entity<StorageCloseOnMoveComponent> ent, ref BoundUIOpenedEvent args)
     {
         if (_timing.ApplyingState)
@@ -171,12 +254,7 @@ public sealed class RMCStorageSystem : EntitySystem
         var coordinates = GetNetCoordinates(_transform.GetMoverCoordinates(user));
         EnsureComp<StorageOpenComponent>(ent).OpenedAt[user] = coordinates;
     }
-    private void OnStorageEquip(Entity<StorageCloseOnMoveComponent> ent, ref GotEquippedEvent args)
-    {
-        _ui.CloseUi(ent.Owner, StorageUiKey.Key, args.Equipee);
-        if (TryComp<StorageOpenComponent>(ent, out var comp))
-            comp.OpenedAt.Remove(args.Equipee);
-    }
+
     private void OnCloseOnMoveUIClosed(Entity<StorageOpenComponent> ent, ref BoundUIClosedEvent args)
     {
         ent.Comp.OpenedAt.Remove(args.Actor);
@@ -193,24 +271,33 @@ public sealed class RMCStorageSystem : EntitySystem
         return false;
     }
 
-    public bool CanInsertStorageLimit(Entity<LimitedStorageComponent?, StorageComponent?> limited, EntityUid toInsert, out LocId popup)
+    private bool CanInsertStorageLimit(Entity<StorageComponent?, LimitedStorageComponent?> limited, EntityUid toInsert, out LocId popup)
     {
         popup = default;
-        if (!Resolve(limited, ref limited.Comp1, false) ||
-            !_storageQuery.Resolve(limited, ref limited.Comp2, false))
+        if (!Resolve(limited, ref limited.Comp2, false) ||
+            !_storageQuery.Resolve(limited, ref limited.Comp1, false))
         {
             return true;
         }
 
-        foreach (var limit in limited.Comp1.Limits)
+        foreach (var limit in limited.Comp2.Limits)
         {
-            if (!_whitelist.IsWhitelistPass(limit.Whitelist, toInsert))
+            if (!_entityWhitelist.IsWhitelistPassOrNull(limit.Whitelist, toInsert))
+                continue;
+
+            if (_entityWhitelist.IsBlacklistPass(limit.Blacklist, toInsert))
                 continue;
 
             var storedCount = 0;
-            foreach (var stored in limited.Comp2.StoredItems.Keys)
+            foreach (var stored in limited.Comp1.StoredItems.Keys)
             {
-                if (!_whitelist.IsWhitelistPass(limit.Whitelist, stored))
+                if (stored == toInsert)
+                    continue;
+
+                if (!_entityWhitelist.IsWhitelistPassOrNull(limit.Whitelist, stored))
+                    continue;
+
+                if (_entityWhitelist.IsBlacklistPass(limit.Blacklist, stored))
                     continue;
 
                 storedCount++;
@@ -228,14 +315,134 @@ public sealed class RMCStorageSystem : EntitySystem
         return true;
     }
 
+    private bool CanInsertStoreSkill(Entity<StorageComponent?, StorageStoreSkillRequiredComponent?> store, EntityUid toInsert, EntityUid? user, out LocId popup)
+    {
+        popup = default;
+        if (user == null)
+            return true;
+
+        if (!Resolve(store, ref store.Comp2, false) ||
+            !_storageQuery.Resolve(store, ref store.Comp1, false))
+        {
+            return true;
+        }
+
+        foreach (var entry in store.Comp2.Entries)
+        {
+            if (_entityWhitelist.IsWhitelistFail(entry.Whitelist, toInsert))
+                continue;
+
+            if (_skills.HasSkills(user.Value, entry.Skills))
+                continue;
+
+            popup = "rmc-storage-store-skill-unable";
+            return false;
+        }
+
+        return true;
+    }
+
+    public bool TryGetLastItem(Entity<StorageComponent?> storage, out EntityUid item)
+    {
+        item = default;
+        if (!Resolve(storage, ref storage.Comp, false))
+            return false;
+
+        ItemStorageLocation? lastLocation = null;
+        foreach (var (stored, location) in storage.Comp.StoredItems)
+        {
+            if (lastLocation is not { } last ||
+                last.Position.Y < location.Position.Y)
+            {
+                item = stored;
+                lastLocation = location;
+                continue;
+            }
+
+            if (last.Position.Y == location.Position.Y &&
+                last.Position.X > location.Position.X)
+            {
+                item = stored;
+                lastLocation = location;
+            }
+        }
+
+        return item != default;
+    }
+
+    public bool TryGetFirstItem(Entity<StorageComponent?> storage, out EntityUid item)
+    {
+        item = default;
+        if (!Resolve(storage, ref storage.Comp, false))
+            return false;
+
+        ItemStorageLocation? firstLocation = null;
+        foreach (var (stored, location) in storage.Comp.StoredItems)
+        {
+            if (firstLocation is not { } first ||
+                first.Position.Y > location.Position.Y)
+            {
+                item = stored;
+                firstLocation = location;
+                continue;
+            }
+
+            if (first.Position.Y == location.Position.Y &&
+                first.Position.X < location.Position.X)
+            {
+                item = stored;
+                firstLocation = location;
+            }
+        }
+
+        return item != default;
+    }
+
+    public bool CanInsert(Entity<StorageComponent?> storage, EntityUid toInsert, EntityUid? user, out LocId popup)
+    {
+        if (!CanInsertStorageLimit((storage, storage, null), toInsert, out popup))
+            return false;
+
+        if (!CanInsertStoreSkill((storage, storage, null), toInsert, user, out popup))
+            return false;
+
+        return true;
+    }
+
     public override void Update(float frameTime)
     {
+        try
+        {
+            if (_net.IsServer)
+            {
+                foreach (var toClose in _toClose)
+                {
+                    var locked = _lock.IsLocked(toClose);
+                    if (locked)
+                        _lock.Unlock(toClose, null);
+
+                    _entityStorage.OpenStorage(toClose);
+                    _entityStorage.CloseStorage(toClose);
+
+                    if (locked)
+                        _lock.Lock(toClose, null);
+                }
+            }
+        }
+        finally
+        {
+            _toClose.Clear();
+        }
+
         var removeOnlyQuery = EntityQueryEnumerator<RemoveOnlyStorageComponent>();
-        while (removeOnlyQuery.MoveNext(out var uid, out _))
+        while (removeOnlyQuery.MoveNext(out var uid, out var comp))
         {
             if (TryComp(uid, out StorageComponent? storage))
             {
-                storage.Whitelist = new EntityWhitelist();
+                if (comp.Blacklist != null)
+                    storage.Blacklist = comp.Blacklist;
+
+                storage.Whitelist = comp.Whitelist;
                 Dirty(uid, storage);
             }
 

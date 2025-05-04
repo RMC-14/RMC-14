@@ -22,7 +22,7 @@ namespace Content.Client.Stack
 
         public override void SetCount(EntityUid uid, int amount, StackComponent? component = null)
         {
-            if (!Resolve(uid, ref component))
+            if (!Resolve(uid, ref component, false))
                 return;
 
             base.SetCount(uid, amount, component);

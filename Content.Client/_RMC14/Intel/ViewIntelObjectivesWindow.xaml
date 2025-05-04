@@ -1,0 +1,65 @@
+﻿<controls:ViewIntelObjectivesWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Intel"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
+    Title="Marine Tech Tree Objectives"
+    MinSize="600 550">
+    <BoxContainer Orientation="Vertical">
+        <BoxContainer Orientation="Horizontal">
+            <RichTextLabel Text="[bold]Tech Points[/bold]" />
+            <Control HorizontalExpand="True" />
+            <RichTextLabel Text="[bold]Tier[/bold]" />
+        </BoxContainer>
+        <ui:BlueHorizontalSeparator />
+        <BoxContainer Orientation="Horizontal">
+            <RichTextLabel Name="CurrentPointsLabel" Access="Public" />
+            <Control HorizontalExpand="True" />
+            <RichTextLabel Name="CurrentTierLabel" Access="Public" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" Margin="0 15 0 0">
+            <RichTextLabel Text="[bold]Objectives[/bold]" />
+            <Control HorizontalExpand="True" />
+            <Label Name="TotalPointsLabel" Access="Public" />
+        </BoxContainer>
+        <ui:BlueHorizontalSeparator />
+        <BoxContainer Orientation="Horizontal">
+            <RichTextLabel Text="[color=#5B88B0]Documents:[/color]" MinWidth="200" />
+            <Label Name="DocumentsLabel" Access="Public" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" Visible="False"> <!-- TODO RMC14 -->
+            <RichTextLabel Text="[color=#5B88B0]Upload data:[/color]" MinWidth="200" />
+            <Label Name="UploadDataLabel" Access="Public" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal">
+            <RichTextLabel Text="[color=#5B88B0]Retrieve items:[/color]" MinWidth="200" />
+            <Label Name="RetrieveItemsLabel" Access="Public" />
+        </BoxContainer>
+        <!-- <BoxContainer Orientation="Horizontal"> -->
+        <!--     <RichTextLabel Text="[color=#5B88B0]Miscellaneous:[/color]" MinWidth="200" /> -->
+        <!--     <Label Name="MiscellaneousLabel" Access="Public" /> -->
+        <!-- </BoxContainer> -->
+        <!-- <BoxContainer Orientation="Horizontal"> -->
+        <!--     <RichTextLabel Text="[color=#5B88B0]Analyze chemicals:[/color]" MinWidth="200" /> -->
+        <!--     <Label Name="AnalyzeChemicalsLabel" Access="Public" /> -->
+        <!-- </BoxContainer> -->
+        <BoxContainer Orientation="Horizontal">
+            <RichTextLabel Text="[color=#5B88B0]Rescue survivors:[/color]" MinWidth="200" />
+            <Label Name="RescueSurvivorsLabel" Access="Public" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal">
+            <RichTextLabel Text="[color=#5B88B0]Recover corpses:[/color]" MinWidth="200" />
+            <Label Name="RecoverCorpsesLabel" Access="Public" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal">
+            <RichTextLabel Text="[color=#5B88B0]Colony communications:[/color]" MinWidth="200" />
+            <Label Name="ColonyCommunicationsLabel" Access="Public" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal">
+            <RichTextLabel Text="[color=#5B88B0]Colony power:[/color]" MinWidth="200" />
+            <Label Name="ColonyPowerLabel" Access="Public" />
+        </BoxContainer>
+        <RichTextLabel Text="[bold]Clues[/bold]" Margin="0 15 0 0" />
+        <ui:BlueHorizontalSeparator />
+        <TabContainer Name="CluesContainer" Access="Public" VerticalExpand="True" MinHeight="100" />
+    </BoxContainer>
+</controls:ViewIntelObjectivesWindow>

@@ -1,7 +1,4 @@
-﻿using Content.Shared._RMC14.Xenonids.Fortify;
-using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Damage;
-using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Rounding;
@@ -19,25 +16,7 @@ public sealed class RMCXenoDamageVisualsSystem : EntitySystem
     {
         _mobThresholdsQuery = GetEntityQuery<MobThresholdsComponent>();
 
-        SubscribeLocalEvent<RMCXenoDamageVisualsComponent, MobStateChangedEvent>(OnVisualsMobStateChanged);
-        SubscribeLocalEvent<RMCXenoDamageVisualsComponent, XenoFortifiedEvent>(OnVisualsFortified);
-        SubscribeLocalEvent<RMCXenoDamageVisualsComponent, XenoRestEvent>(OnVisualsRest);
         SubscribeLocalEvent<RMCXenoDamageVisualsComponent, DamageChangedEvent>(OnVisualsDamageChanged);
-    }
-
-    private void OnVisualsMobStateChanged(Entity<RMCXenoDamageVisualsComponent> ent, ref MobStateChangedEvent args)
-    {
-        _appearance.SetData(ent, RMCDamageVisuals.Downed, args.NewMobState != MobState.Alive);
-    }
-
-    private void OnVisualsFortified(Entity<RMCXenoDamageVisualsComponent> ent, ref XenoFortifiedEvent args)
-    {
-        _appearance.SetData(ent, RMCDamageVisuals.Fortified, args.Fortified);
-    }
-
-    private void OnVisualsRest(Entity<RMCXenoDamageVisualsComponent> ent, ref XenoRestEvent args)
-    {
-        _appearance.SetData(ent, RMCDamageVisuals.Resting, args.Resting);
     }
 
     private void OnVisualsDamageChanged(Entity<RMCXenoDamageVisualsComponent> ent, ref DamageChangedEvent args)
@@ -50,7 +29,11 @@ public sealed class RMCXenoDamageVisualsSystem : EntitySystem
 
         var damage = args.Damageable.TotalDamage.Double();
         var max = threshold.Value.Double();
-        var level = ContentHelpers.RoundToEqualLevels(damage, max, ent.Comp.States + 1);
+        int level;
+        if (damage > threshold)
+            level = ent.Comp.States + 1;
+        else
+            level = ContentHelpers.RoundToEqualLevels(damage, max, ent.Comp.States + 1);
         _appearance.SetData(ent, RMCDamageVisuals.State, level);
     }
 }

@@ -5,6 +5,10 @@
   name: closet
   description: It's a basic storage unit.
   components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Closets/standard.rsi
     layers:
@@ -15,6 +19,10 @@
     - state: welded
       visible: false
       map: ["enum.WeldableLayers.BaseWelded"]
+    - state: paper
+      visible: false
+      sprite: Structures/Storage/closet_labels.rsi
+      map: [ "enum.PaperLabelVisuals.Layer" ]
   - type: Appearance
   - type: EntityStorageVisuals
     stateBaseClosed: base
@@ -24,6 +32,29 @@
     blacklist:
       components:
       - Xeno
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
+  - type: Anchorable
+    flags:
+    - None
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -6
+  - type: EntityStorageCloseOnMapInit
 
 - type: entity
   parent: CMClosetBase
@@ -38,6 +69,33 @@
       path: /Audio/Effects/woodenclosetclose.ogg
     openSound:
       path: /Audio/Effects/woodenclosetopen.ogg
+# Colored
+- type: entity
+  parent: CMClosetBase
+  id: RMCClosetBlack
+  name: formal closet
+  description: It's a storage unit for formal clothing.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Closets/black.rsi
+
+- type: entity
+  parent: CMClosetBase
+  id: RMCClosetBlue
+  name: legal closet
+  description: It's a storage unit for courtroom apparel and items.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Closets/blue.rsi
+
+- type: entity
+  parent: CMClosetBase
+  id: RMCClosetPurple
+  name: custodial closet
+  description: It's a storage unit for janitorial clothes and gear.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Closets/purple.rsi
 
 # Utilities
 - type: entity
@@ -136,4 +194,3 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Closets/acloset.rsi
-

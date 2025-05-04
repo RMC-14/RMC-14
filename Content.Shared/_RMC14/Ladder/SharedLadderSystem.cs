@@ -1,16 +1,18 @@
-﻿using Content.Shared.Coordinates;
+﻿using System.Linq;
+using Content.Shared._RMC14.Teleporter;
+using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
 using Content.Shared.Movement.Events;
-using Content.Shared.Movement.Pulling.Components;
-using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
+using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Ladder;
 
@@ -18,15 +20,16 @@ public abstract class SharedLadderSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly PullingSystem _pulling = default!;
+    [Dependency] private readonly SharedRMCTeleporterSystem _rmcTeleporter = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private readonly HashSet<Entity<LadderComponent>> _toUpdate = new();
-    private readonly Dictionary<string, Entity<LadderComponent>> _toUpdateIds = new();
+    private readonly Dictionary<string, HashSet<Entity<LadderComponent>>> _toUpdateIds = new();
 
     private EntityQuery<ActorComponent> _actorQuery;
     private EntityQuery<LadderComponent> _ladderQuery;
@@ -55,6 +58,7 @@ public abstract class SharedLadderSystem : EntitySystem
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
         _toUpdate.Clear();
+        _toUpdateIds.Clear();
     }
 
     private void OnLadderMapInit(Entity<LadderComponent> ent, ref MapInitEvent args)
@@ -138,12 +142,6 @@ public abstract class SharedLadderSystem : EntitySystem
             return;
 
         var user = args.DoAfter.Args.User;
-        if (TryComp(user, out PullerComponent? puller) &&
-            TryComp(puller.Pulling, out PullableComponent? pullable))
-        {
-            _pulling.TryStopPull(puller.Pulling.Value, pullable, user);
-        }
-
         var target = ent.Owner.ToCoordinates();
         if (user.ToCoordinates().TryDistance(EntityManager, _transform, target, out var distance) &&
             distance > ent.Comp.Range)
@@ -155,6 +153,9 @@ public abstract class SharedLadderSystem : EntitySystem
     private void OnLadderDoAfter(Entity<LadderComponent> ent, ref LadderDoAfterEvent args)
     {
         var user = args.User;
+        if (_net.IsClient && user != _player.LocalEntity)
+            return;
+
         if (_actorQuery.TryComp(user, out var actor))
             RemoveViewer(ent, actor.PlayerSession);
 
@@ -166,7 +167,11 @@ public abstract class SharedLadderSystem : EntitySystem
         if (ent.Comp.Other is not { } other || TerminatingOrDeleted(ent.Comp.Other))
             return;
 
-        _transform.SetCoordinates(user, _transform.GetMoverCoordinates(other));
+        var coordinates = _transform.GetMapCoordinates(other);
+        if (coordinates.MapId == MapId.Nullspace)
+            return;
+
+        _transform.SetMapCoordinates(user, coordinates);
 
         var selfMessage = Loc.GetString("rmc-ladder-finish-climbing-self");
         var othersMessage = Loc.GetString("rmc-ladder-finish-climbing-others", ("user", user));
@@ -175,6 +180,8 @@ public abstract class SharedLadderSystem : EntitySystem
         ent.Comp.LastDoAfterEnt = null;
         ent.Comp.LastDoAfterId = null;
         Dirty(ent);
+
+        _rmcTeleporter.HandlePulling(user, coordinates);
     }
 
     private void OnLadderGetAltVerbs(Entity<LadderComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
@@ -183,10 +190,19 @@ public abstract class SharedLadderSystem : EntitySystem
             return;
 
         var user = args.User;
+        if (!CanWatchPopup(ent, user))
+            return;
+
         args.Verbs.Add(new AlternativeVerb
         {
             Priority = 100,
-            Act = () => Watch(user, other),
+            Act = () =>
+            {
+                if (!CanWatchPopup(ent, user))
+                    return;
+
+                Watch(user, other);
+            },
             Text = Loc.GetString("rmc-ladder-look-through"),
         });
     }
@@ -207,14 +223,18 @@ public abstract class SharedLadderSystem : EntitySystem
 
     private void OnLadderDragDropDragged(Entity<LadderComponent> ent, ref DragDropDraggedEvent args)
     {
+        var user = args.User;
         if (ent.Comp.Other is not { } other ||
-            args.User != args.Target)
+            user != args.Target)
         {
             return;
         }
 
+        if (!CanWatchPopup(ent, user))
+            return;
+
         args.Handled = true;
-        Watch(args.User, other);
+        Watch(user, other);
     }
 
     private void OnWatchingMoveInput(Entity<LadderWatchingComponent> ent, ref MoveInputEvent args)
@@ -245,7 +265,15 @@ public abstract class SharedLadderSystem : EntitySystem
         if (!Resolve(watcher, ref watcher.Comp))
             return;
 
-        _eye.SetTarget(watcher, watcher, watcher);
+        _eye.SetTarget(watcher, null);
+    }
+
+    protected bool CanWatchPopup(Entity<LadderComponent> ladder, EntityUid user)
+    {
+        if (!_interaction.InRangeUnobstructed(user, ladder.Owner, popup: true))
+            return false;
+
+        return true;
     }
 
     public override void Update(float frameTime)
@@ -266,10 +294,14 @@ public abstract class SharedLadderSystem : EntitySystem
             if (entity.Comp.Id is not { } id)
                 continue;
 
-            if (_toUpdateIds.TryGetValue(id, out var old))
-                Log.Error($"Found {ToPrettyString(entity)} with duplicate ID {id}, previous ladder: {ToPrettyString(old)}");
+            var ids = _toUpdateIds.GetOrNew(id);
+            if (ids.Count > 2)
+            {
+                var idsString = string.Join(",", ids.Select(e => ToPrettyString(e)));
+                Log.Error($"Found more than 2 ladders with id {id}, current ladder: {ToPrettyString(entity)}, previous ladders: {idsString}");
+            }
 
-            _toUpdateIds[id] = entity;
+            ids.Add(entity);
         }
 
         _toUpdate.Clear();
@@ -280,7 +312,10 @@ public abstract class SharedLadderSystem : EntitySystem
             if (ladder.Id == null)
                 continue;
 
-            if (!_toUpdateIds.TryGetValue(ladder.Id, out var toUpdate))
+            if (!_toUpdateIds.TryGetValue(ladder.Id, out var ids))
+                continue;
+
+            if (ids.FirstOrNull(e => e.Owner != uid) is not { } toUpdate)
                 continue;
 
             if (toUpdate.Owner == uid)

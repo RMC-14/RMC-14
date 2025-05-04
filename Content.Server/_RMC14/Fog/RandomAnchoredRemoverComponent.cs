@@ -15,6 +15,6 @@ public sealed partial class RandomAnchoredRemoverComponent : Component
     [DataField(required: true)]
     public EntProtoId Group = string.Empty;
 
-    [DataField(required: true), AutoNetworkedField]
+    [DataField(required: true)]
     public EntityWhitelist? Whitelist;
 }

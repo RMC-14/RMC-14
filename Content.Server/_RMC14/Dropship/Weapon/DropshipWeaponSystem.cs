@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Dropship.Weapon;
+using Content.Shared._RMC14.Dropship.Weapon;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 
@@ -33,4 +33,5 @@ public sealed class DropshipWeaponSystem : SharedDropshipWeaponSystem
 
         _viewSubscriber.RemoveViewSubscriber(target, actor.Comp.PlayerSession);
     }
+
 }

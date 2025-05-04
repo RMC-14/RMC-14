@@ -22,8 +22,12 @@
   - type: SquadTeam
     roundStart: true
     color: "#E61919"
+    radio: MarineAlpha
     accessLevels:
     - CMAccessAlpha
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_alpha
 
 - type: entity
   parent: SquadBase
@@ -33,8 +37,12 @@
   - type: SquadTeam
     roundStart: true
     color: "#FFC32D"
+    radio: MarineBravo
     accessLevels:
     - CMAccessBravo
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_bravo
 
 - type: entity
   parent: SquadBase
@@ -44,8 +52,12 @@
   - type: SquadTeam
     roundStart: true
     color: "#C864C8"
+    radio: MarineCharlie
     accessLevels:
     - CMAccessCharlie
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_charlie
 
 - type: entity
   parent: SquadBase
@@ -55,21 +67,12 @@
   - type: SquadTeam
     roundStart: true
     color: "#4148C8"
+    radio: MarineDelta
     accessLevels:
     - CMAccessDelta
-
-- type: entity
-  parent: SquadBase
-  id: SquadEcho
-  name: Echo
-  components:
-  - type: SquadTeam
-    color: "#67D692"
-    accessLevels:
-    - CMAccessAlpha
-    - CMAccessBravo
-    - CMAccessCharlie
-    - CMAccessDelta
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_delta
 
 - type: entity
   parent: SquadBase
@@ -78,8 +81,179 @@
   components:
   - type: SquadTeam
     color: "#C47A50"
+    radio: MarineFoxtrot
     accessLevels:
     - CMAccessAlpha
     - CMAccessBravo
     - CMAccessCharlie
     - CMAccessDelta
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_foxtrot
+    canSupplyDrop: false
+
+- type: entity
+  parent: SquadBase
+  id: SquadEcho
+  name: Echo
+  components:
+  - type: SquadTeam
+    color: "#67D692"
+    radio: MarineEcho
+    accessLevels:
+    - CMAccessAlpha
+    - CMAccessBravo
+    - CMAccessCharlie
+    - CMAccessDelta
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_echo
+
+- type: entity
+  parent: SquadBase
+  id: SquadIntel
+  name: Intel
+  components:
+  - type: SquadTeam
+    color: "#053818"
+    blacklistedSquadArmor:
+    - Helmet
+    - Armor
+    radio: MarineIntel
+    minimapBackground:
+     sprite: _RMC14/Interface/map_blips.rsi
+     state: background_intel
+    canSupplyDrop: false
+    maxRoles:
+      CMCombatTech: 3
+      CMHospitalCorpsman: 4
+      CMSmartGunOperator: 1 # for astor
+      CMWeaponsSpecialist: 1
+      CMFireteamLeader: 1
+      CMSquadLeader: 0
+  - type: Tag
+    tags:
+    - RMCSquadIntel
+
+- type: Tag
+  id: RMCSquadIntel
+
+- type: entity
+  parent: SquadBase
+  id: SquadSPP
+  name: SPP
+  components:
+  - type: SquadTeam
+    color: "#9b0612"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    radio: SPP
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_spp
+    canSupplyDrop: false
+    group: SPP
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: upp_sl_a
+
+- type: entity
+  parent: SquadBase
+  id: SquadPMC
+  name: PMC
+  components:
+  - type: SquadTeam
+    color: "#C0C0C0"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    radio: WEYA
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_pmc
+    canSupplyDrop: false
+    group: WeYa
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: pmc_ld
+
+- type: entity
+  parent: SquadBase
+  id: SquadFreelancer
+  name: Freelancer
+  components:
+  - type: SquadTeam
+    color: "#4559F5"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    radio: Colony
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_free
+    canSupplyDrop: false
+    group: Freelancer
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: free_sl
+
+- type: entity
+  parent: SquadBase
+  id: SquadRoyalMarines
+  name: Royal Marines
+  components:
+  - type: SquadTeam
+    color: "#3D6F43"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    radio: RoyalMarine
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_twe
+    canSupplyDrop: false
+    group: Royal Marines
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: rmc_teamleader
+
+- type: entity
+  parent: SquadBase
+  id: SquadProvost
+  name: Provost
+  components:
+  - type: SquadTeam
+    color: "#990218"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    radio: Provost
+    minimapBackground:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: background_twe
+    canSupplyDrop: false
+    group: Provost
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: hudsquad_pvl

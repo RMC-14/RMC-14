@@ -1,8 +1,12 @@
+using Content.Shared._RMC14.Stack;
+using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Explosion.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Stacks;
+using Content.Shared.Storage;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -15,7 +19,12 @@ namespace Content.Shared.Weapons.Ranged.Systems;
 public abstract partial class SharedGunSystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
 
+    // RMC14
+    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedRMCStackSystem _rmcStack = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     protected virtual void InitializeBallistic()
     {
@@ -88,30 +97,36 @@ public abstract partial class SharedGunSystem
         if (args.Handled)
             return;
 
-        if (_whitelistSystem.IsWhitelistFailOrNull(component.Whitelist, args.Used))
-            return;
+        if (TryAmmoInsert(uid, component, args.Used, args.User, args.Target, component.InsertDelay))
+            args.Handled = true;
+    }
+
+    public bool TryAmmoInsert(EntityUid uid, BallisticAmmoProviderComponent component, EntityUid ammo, EntityUid loader, EntityUid weapon, double insertDelay)
+    {
+        if (_whitelistSystem.IsWhitelistFailOrNull(component.Whitelist, ammo))
+            return false;
 
         //Prevent primed grenades or other primed ordanance from being loaded into weapons.
-        if (HasComp<ActiveTimerTriggerComponent>(args.Used))
+        if (HasComp<ActiveTimerTriggerComponent>(ammo))
         {
             Popup(
                 Loc.GetString("gun-ballistic-transfer-primed",
-                    ("ammoEntity", args.Used)),
+                    ("ammoEntity", ammo)),
                 uid,
-                args.User);
+                loader);
 
-            return;
+            return false;
         }
 
         if (GetBallisticShots(component) >= component.Capacity)
-            return;
+            return false;
 
         TimeSpan insertDelayConverted;
 
-        if (component.InsertDelay > 0)
+        if (insertDelay > 0)
         {
-            insertDelayConverted = TimeSpan.FromSeconds(component.InsertDelay);
-            _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, args.User, insertDelayConverted, new DelayedAmmoInsertDoAfterEvent(), used: args.Used, target: args.Target, eventTarget: uid)
+            insertDelayConverted = TimeSpan.FromSeconds(insertDelay);
+            _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager, loader, insertDelayConverted, new DelayedAmmoInsertDoAfterEvent(), used: ammo, target: weapon, eventTarget: uid)
             {
                 BreakOnMove = true,
                 BreakOnDamage = false,
@@ -120,9 +135,10 @@ public abstract partial class SharedGunSystem
         }
         else // If there's no custom InsertDelay on this component, immediately load the ammo in. Shotguns and mag-filling.
         {
-            ManualLoad(uid, component, args.Used, args.User);
+            ManualLoad(uid, component, ammo, loader);
         }
-        args.Handled = true;
+
+        return true;
     }
 
     /// <summary>
@@ -139,6 +155,14 @@ public abstract partial class SharedGunSystem
             Deleted(args.Target) ||
             !TryComp<BallisticAmmoProviderComponent>(args.Target, out var targetComponent) ||
             targetComponent.Whitelist == null)
+        {
+            return;
+        }
+
+        // RMC14
+        if (_container.TryGetContainingContainer((args.Target.Value, null), out var container) &&
+            container.Owner != args.User &&
+            HasComp<StorageComponent>(container.Owner))
         {
             return;
         }
@@ -194,8 +218,8 @@ public abstract partial class SharedGunSystem
         // Simulates using a single ammo entity on the other BAP, loading it in.
         void SimulateInsertAmmo(EntityUid ammo, EntityUid ammoProvider, EntityCoordinates coordinates)
         {
-            var evInsert = new InteractUsingEvent(args.User, ammo, ammoProvider, coordinates);
-            RaiseLocalEvent(ammoProvider, evInsert);
+            // We call SharedInteractionSystem to raise contact events. Checks are already done by this point.
+            _interaction.InteractUsing(args.User, ammo, ammoProvider, coordinates, checkCanInteract: false, checkCanUse: false);
         }
 
         List<(EntityUid? Entity, IShootable Shootable)> ammo = new();
@@ -277,13 +301,31 @@ public abstract partial class SharedGunSystem
 
     private void ManualLoad(EntityUid uid, BallisticAmmoProviderComponent component, EntityUid used, EntityUid user)
     {
+        if (TryComp(used, out StackComponent? stack))
+        {
+            var coordinates = _transform.GetMoverCoordinates(used);
+            var split = _rmcStack.Split((used, stack), 1, coordinates);
+            if (split != null)
+                used = split.Value;
+
+            if (CompOrNull<CartridgeAmmoComponent>(used)?.SoundInsert is { } sound)
+                Audio.PlayPredicted(sound, uid, user);
+
+            UpdateAmmoCount(uid, artificialIncrease: 1);
+
+            if (_netManager.IsClient)
+                return;
+        }
+
         // Reused function moved here.
         component.Entities.Add(used);
         Containers.Insert(used, component.Container);
+        Dirty(uid, component);
         // Not predicted so
         Audio.PlayPredicted(component.SoundInsert, uid, user);
         UpdateBallisticAppearance(uid, component);
-        Dirty(uid, component);
+        UpdateAmmoCount(uid);
+        DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.Entities));
         return;
     }
 
@@ -352,10 +394,9 @@ public abstract partial class SharedGunSystem
             !Paused(uid))
         {
             gunComp.NextFire = Timing.CurTime + TimeSpan.FromSeconds(1 / gunComp.FireRateModified);
-            Dirty(uid, gunComp);
+            DirtyField(uid, gunComp, nameof(GunComponent.NextFire));
         }
 
-        Dirty(uid, component);
         Audio.PlayPredicted(component.SoundRack, uid, user);
 
         var shots = GetBallisticShots(component);
@@ -386,7 +427,7 @@ public abstract partial class SharedGunSystem
         {
             component.UnspawnedCount = Math.Max(0, component.Capacity - component.Container.ContainedEntities.Count);
             UpdateBallisticAppearance(uid, component);
-            Dirty(uid, component);
+            DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.UnspawnedCount));
         }
     }
 
@@ -407,18 +448,19 @@ public abstract partial class SharedGunSystem
 
                 args.Ammo.Add((entity, EnsureShootable(entity)));
                 component.Entities.RemoveAt(component.Entities.Count - 1);
+                DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.Entities));
                 Containers.Remove(entity, component.Container);
             }
             else if (component.UnspawnedCount > 0)
             {
                 component.UnspawnedCount--;
+                DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.UnspawnedCount));
                 entity = Spawn(component.Proto, args.Coordinates);
                 args.Ammo.Add((entity, EnsureShootable(entity)));
             }
         }
 
         UpdateBallisticAppearance(uid, component);
-        Dirty(uid, component);
     }
 
     private void OnBallisticAmmoCount(EntityUid uid, BallisticAmmoProviderComponent component, ref GetAmmoCountEvent args)
@@ -453,21 +495,5 @@ public abstract partial class SharedGunSystem
 /// </summary>
 [Serializable, NetSerializable]
 public sealed partial class AmmoFillDoAfterEvent : SimpleDoAfterEvent
-{
-}
-
-/// <summary>
-/// DoAfter event for filling a ballistic ammo provider directly while InsertDelay > 0.
-/// </summary>
-[Serializable, NetSerializable]
-public sealed partial class DelayedAmmoInsertDoAfterEvent : SimpleDoAfterEvent
-{
-}
-
-/// <summary>
-/// DoAfter event for cycling a ballistic ammo provider while CycleDelay > 0.
-/// </summary>
-[Serializable, NetSerializable]
-public sealed partial class DelayedCycleDoAfterEvent : SimpleDoAfterEvent
 {
 }

@@ -21,8 +21,6 @@
         density: 500
         mask:
         - TabletopMachineMask
-        layer:
-        - BulletImpassable
   - type: ContainerContainer
     containers:
       charger_slot: !type:ContainerSlot
@@ -43,6 +41,7 @@
           - PowerCell
           - ProjectileBatteryAmmoProvider
           - Defibrillator
+          - Visor
           # SmartGun Battery
   - type: ItemMapper
     sprite: _RMC14/Structures/Power/recharger.rsi

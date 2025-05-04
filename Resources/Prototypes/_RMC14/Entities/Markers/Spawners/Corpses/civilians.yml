@@ -3,99 +3,88 @@
   id: RMCSpawnerCorpsePrisoner
   name: Corpse Spawner - Prisoner
   components:
-  - type: ConditionalSpawner
-    prototypes:
-      - RMCHumanCorpsePrisoner
+  - type: CorpseSpawner
+    spawn: RMCCorpsePrisoner
 
 - type: entity
   parent: RMCSpawnerCorpse
   id: RMCSpawnerCorpseChef
   name: Corpse Spawner - Chef
   components:
-  - type: ConditionalSpawner
-    prototypes:
-      - RMCHumanCorpseChef
+  - type: CorpseSpawner
+    spawn: RMCCorpseChef
 
 - type: entity
   parent: RMCSpawnerCorpse
   id: RMCSpawnerCorpseDoctor
   name: Corpse Spawner - Doctor
   components:
-  - type: ConditionalSpawner
-    prototypes:
-      - RMCHumanCorpseDoctor
+  - type: CorpseSpawner
+    spawn: RMCCorpseDoctor
 
 - type: entity
   parent: RMCSpawnerCorpse
   id: RMCSpawnerCorpseEngineer
   name: Corpse Spawner - Engineer
   components:
-  - type: ConditionalSpawner
-    prototypes:
-      - RMCHumanCorpseEngineer
+  - type: CorpseSpawner
+    spawn: RMCCorpseEngineer
 
 - type: entity
   parent: RMCSpawnerCorpse
   id: RMCSpawnerCorpseScientist
   name: Corpse Spawner - Scientist
   components:
-  - type: ConditionalSpawner
-    prototypes:
-      - RMCHumanCorpseScientist
+  - type: CorpseSpawner
+    spawn: RMCCorpseScientist
 
 - type: entity
   parent: RMCSpawnerCorpse
   id: RMCSpawnerCorpseMiner
   name: Corpse Spawner - Shaft Miner
   components:
-  - type: ConditionalSpawner
-    prototypes:
-      - RMCHumanCorpseMiner
+  - type: CorpseSpawner
+    spawn: RMCCorpseMiner
 
 - type: entity
   parent: RMCSpawnerCorpse
   id: RMCSpawnerCorpseSecurity
   name: Corpse Spawner - Security Officer
   components:
-  - type: ConditionalSpawner
-    prototypes:
-      - RMCHumanCorpseSecurity
+  - type: CorpseSpawner
+    spawn: RMCCorpseSecurity
 
 - type: entity
   parent: RMCSpawnerCorpse
   id: RMCSpawnerCorpseDeputy
   name: Corpse Spawner - Bureau Deputy
   components:
-  - type: ConditionalSpawner
-    prototypes:
-      - RMCHumanCorpseDeputy
+  - type: CorpseSpawner
+    spawn: RMCCorpseDeputy
 
 - type: entity
   parent: RMCSpawnerCorpse
   id: RMCSpawnerCorpseLiaison
   name: Corpse Spawner - Corporate Liaison
   components:
-  - type: ConditionalSpawner
-    prototypes:
-      - RMCHumanCorpseLiaison
+  - type: CorpseSpawner
+    spawn: RMCCorpseLiaison
 
 - type: entity
   parent: RMCSpawnerCorpse
   id: RMCSpawnerCorpsePrisonGuard
   name: Corpse Spawner - Prison Guard
   components:
-  - type: ConditionalSpawner
-    prototypes:
-      - RMCHumanCorpsePrisonGuard
+  - type: CorpseSpawner
+    spawn: RMCCorpsePrisonGuard
 
 - type: entity
   parent: RMCSpawnerCorpse
   id: RMCSpawnerCorpseColonist
   name: Corpse Spawner - Colonist
   components:
-  - type: ConditionalSpawner
-    prototypes:
-      - RMCHumanCorpseColonist
+  - type: CorpseSpawner
+    spawn: RMCCorpseColonist
 
 - type: entity
   parent: RMCSpawnerCorpseColonist
@@ -103,6 +92,38 @@
   name: Corpse Spawner - Colonist
   suffix: RMC14, Burst
   components:
-  - type: ConditionalSpawner
-    prototypes:
-      - RMCHumanCorpseColonistBurst
+  - type: CorpseSpawner
+    spawn: RMCCorpseColonistBurst
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseColonistKutjevo
+  name: Corpse Spawner - Colonist Kutjevo
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseColonistKutjevo
+
+- type: entity
+  parent: RMCSpawnerCorpseColonist
+  id: RMCSpawnerCorpseColonistKutjevoBust
+  name: Corpse Spawner - Colonist Kutjevo
+  suffix: RMC14, Burst
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseColonistKutjevoBurst
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseWeYaGoon
+  name: Corpse Spawner - We-Ya Goon
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseWeYaGoon
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseWeYaGoonKutjevo
+  name: Corpse Spawner - We-Ya Goon Kutjevo
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseWeYaGoonKutjevo

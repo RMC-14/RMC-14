@@ -23,6 +23,7 @@ public sealed class BreechLoadedSystem : EntitySystem
     {
         SubscribeLocalEvent<BreechLoadedComponent, AttemptShootEvent>(OnAttemptShoot);
         SubscribeLocalEvent<BreechLoadedComponent, GunShotEvent>(OnGunShot);
+        SubscribeLocalEvent<BreechLoadedComponent, RMCTryAmmoEjectEvent>(OnTryAmmoEject);
         SubscribeLocalEvent<BreechLoadedComponent, UniqueActionEvent>(OnUniqueAction);
         SubscribeLocalEvent<BreechLoadedComponent, InteractUsingEvent>(OnInteractUsing,
             before: new[] { typeof(SharedGunSystem) });
@@ -49,6 +50,15 @@ public sealed class BreechLoadedSystem : EntitySystem
         Dirty(gun);
     }
 
+    private void OnTryAmmoEject(Entity<BreechLoadedComponent> gun, ref RMCTryAmmoEjectEvent args)
+    {
+        if (gun.Comp.Open)
+            return;
+
+        _popupSystem.PopupClient(Loc.GetString("rmc-breech-loaded-closed-extract-attempt"), args.User, args.User);
+        args.Cancelled = true;
+    }
+
     private void OnUniqueAction(Entity<BreechLoadedComponent> gun, ref UniqueActionEvent args)
     {
         if (args.Handled)
@@ -69,7 +79,7 @@ public sealed class BreechLoadedSystem : EntitySystem
         //_audioSystem.PlayPredicted(sound, gun, args.UserUid, sound.Params);
         _audioSystem.PlayPredicted(sound, gun, args.UserUid);
     }
-    
+
     private void OnInteractUsing(Entity<BreechLoadedComponent> gun, ref InteractUsingEvent args)
     {
         if (gun.Comp.Open ||
@@ -78,7 +88,7 @@ public sealed class BreechLoadedSystem : EntitySystem
             ammoProviderComponent.Whitelist.Tags == null ||
             !_tagSystem.HasAnyTag(args.Used, ammoProviderComponent.Whitelist.Tags))
             return;
-        
+
         _popupSystem.PopupClient(Loc.GetString("rmc-breech-loaded-closed-load-attempt"), args.User, args.User);
         args.Handled = true;
     }

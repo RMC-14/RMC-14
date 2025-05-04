@@ -1,4 +1,5 @@
-﻿using Robust.Shared.GameStates;
+﻿using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Auto;
@@ -21,4 +22,7 @@ public sealed partial class GunToggleableAutoFireComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityUid? Action;
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier ToggleSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/click.ogg");
 }

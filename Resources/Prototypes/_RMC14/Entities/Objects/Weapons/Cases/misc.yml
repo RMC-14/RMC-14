@@ -1,0 +1,25 @@
+- type: entity
+  parent: RMCKitBase
+  id: RMCKitHonorGuard
+  name: honor guard kit
+  components:
+  - type: Item
+    size: Ginormous
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,0
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+  - type: StorageFill
+    contents:
+    # - id: RMCHeadsetMPHonor         TODO: CO tracker
+    # - id: CMPacketPillsOxycodone    TODO: Pain system
+    - id: CMPacketPillsKelotane
+    - id: CMPacketPillsBicaridine
+    - id: WeaponShotgunM890Guard
+    - id: RMCPouchGeneralLarge
+    - id: CMShellShotgunBuckshot
+    - id: CMShellShotgunBuckshot

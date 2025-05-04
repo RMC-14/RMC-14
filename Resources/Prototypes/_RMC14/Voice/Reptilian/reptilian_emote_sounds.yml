@@ -1,0 +1,15 @@
+- type: emoteSounds
+  id: RMCUnisexReptilian
+  sounds:
+    Scream:
+      path: /Audio/Voice/Reptilian/reptilian_scream.ogg
+    Laugh:
+      path: /Audio/Animals/lizard_happy.ogg
+
+- type: emoteSounds
+  parent: [RMCBaseMaleSounds, RMCUnisexReptilian]
+  id: RMCMaleReptilian
+
+- type: emoteSounds
+  parent: [RMCBaseFemaleSounds, RMCUnisexReptilian]
+  id: RMCFemaleReptilian

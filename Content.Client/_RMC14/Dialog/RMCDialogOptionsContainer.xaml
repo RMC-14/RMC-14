@@ -1,0 +1,14 @@
+﻿<controls:RMCDialogOptionsContainer
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Dialog"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
+    Margin="5" Orientation="Vertical">
+    <Control MinHeight="25" />
+    <RichTextLabel Name="Message" Access="Public" Text="[bold]What do you wish to do?[/bold]" Margin="0 0 0 5" />
+    <ui:BlueHorizontalSeparator />
+    <ScrollContainer HScrollEnabled="False" VScrollEnabled="True" HorizontalExpand="True" VerticalExpand="True" MinHeight="250" MaxHeight="500">
+        <BoxContainer Name="Options" Access="Public" Orientation="Vertical" />
+    </ScrollContainer>
+    <LineEdit Name="Search" Access="Public" PlaceHolder="Search..." />
+    <Control MinHeight="5" />
+</controls:RMCDialogOptionsContainer>

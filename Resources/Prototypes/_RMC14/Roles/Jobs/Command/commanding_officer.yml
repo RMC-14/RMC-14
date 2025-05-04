@@ -7,22 +7,44 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMSquad
+    time: 126000 # 35 hours, any roles
+  - !type:RoleTimeRequirement
+    role: CMJobSquadLeader
     time: 54000 # 15 hours
   - !type:TotalJobsTimeRequirement
     group: CMJobsEngineering
     time: 36000 # 10 hours
   - !type:DepartmentTimeRequirement
     department: CMMilitaryPolice
+    time: 108000 # 30 hours
+  - !type:RoleTimeRequirement
+    role: CMJobMilitaryWarden
+    time: 36000 # 10 hours, you need 5 to get CMP either way
+  - !type:RoleTimeRequirement
+    role: CMJobChiefMP
     time: 36000 # 10 hours
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
     time: 36000 # 10 hours
   - !type:DepartmentTimeRequirement
     department: CMCommand
-    time: 36000 # 10 hours
+    time: 72000 # 20 hours, either in SO or XO
   - !type:RoleTimeRequirement
     role: CMJobExecutiveOfficer
-    time: 36000 #10 hrs
+    time: 108000 # 30 hours, minimum time in an explicitly commander position
+  - !type:DepartmentTimeRequirement
+    department: CMRequisitions
+    time: 18000 # 5 hours
+  ranks:
+    RMCRankColonel:
+    - !type:RoleTimeRequirement
+      role: CMJobCommandingOfficer
+      time: 630000 # 175 hours
+    RMCRankLieutenantColonel:
+    - !type:RoleTimeRequirement
+      role: CMJobCommandingOfficer
+      time: 252000 # 70 hours
+    RMCRankMajor: []
   weight: 10
   startingGear: CMGearCommandingOfficer
   icon: "CMJobIconCommandingOfficer"
@@ -34,7 +56,11 @@
   - ShipMasterAccess
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: cic
+    state: co
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -61,17 +87,32 @@
     - type: MarineOrders
     - type: CMVendorUser
       points: 120
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-commanding-officer
+    - type: CommendationGiver
+    - type: ViewIntelObjectives
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: co
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_command
 
 - type: startingGear
   id: CMGearCommandingOfficer
   equipment:
-    jumpsuit: CMJumpsuitCO
-    back: CMSatchel
+    jumpsuit: CMJumpsuitBO
     shoes: CMShoesLaceupCommander
     head: CMHeadBeretCO
-    outerClothing: CMCoatOfficer
-    id: CMIDCardCommandingOfficer
+    outerClothing: RMCCoatService
     ears: CMHeadsetSeniorCommand
+    pocket1: RMCPouchCommand
+    pocket2: RMCPouchGeneralLarge
+  inhand:
+    - RMCMatebaCustomizationCase
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -81,10 +122,18 @@
   - type: SpawnPoint
     job_id: CMCommandingOfficer
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: commanding_officer
+    state: co_spawn
 
 - type: playTimeTracker
   id: CMJobCommandingOfficer
+  isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleCO
+  name: The Commanding Officer
+  description: The Commanding Officer.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: commanding_officer

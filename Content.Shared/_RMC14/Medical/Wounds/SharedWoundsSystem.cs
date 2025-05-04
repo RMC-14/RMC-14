@@ -10,6 +10,8 @@ using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Stacks;
@@ -42,6 +44,8 @@ public abstract class SharedWoundsSystem : EntitySystem
 
     public override void Initialize()
     {
+        SubscribeLocalEvent<MobStateComponent, CMBleedAttemptEvent>(OnMobStateBleedAttempt);
+
         SubscribeLocalEvent<WoundableComponent, DamageChangedEvent>(OnWoundableDamaged);
         SubscribeLocalEvent<WoundableComponent, CMBleedEvent>(OnWoundableBleed);
 
@@ -55,6 +59,12 @@ public abstract class SharedWoundsSystem : EntitySystem
 
         Subs.CVar(_config, RMCCVars.CMBloodlossMultiplier, v => _bloodlossMultiplier = v, true);
         Subs.CVar(_config, RMCCVars.CMBleedTimeMultiplier, v => _bleedTimeMultiplier = v, true);
+    }
+
+    private void OnMobStateBleedAttempt(Entity<MobStateComponent> ent, ref CMBleedAttemptEvent args)
+    {
+        if (ent.Comp.CurrentState == MobState.Dead)
+            args.Cancelled = true;
     }
 
     private void OnWoundableDamaged(Entity<WoundableComponent> ent, ref DamageChangedEvent args)
@@ -103,7 +113,8 @@ public abstract class SharedWoundsSystem : EntitySystem
 
     private void OnWoundTreaterUseInHand(Entity<WoundTreaterComponent> ent, ref UseInHandEvent args)
     {
-        StartTreatment(args.User, args.User, ent);
+        StartTreatment(args.User, args.User, ent, out var handled);
+        args.Handled = handled;
     }
 
     private void OnWoundTreaterAfterInteract(Entity<WoundTreaterComponent> ent, ref AfterInteractEvent args)
@@ -111,7 +122,8 @@ public abstract class SharedWoundsSystem : EntitySystem
         if (!args.CanReach || args.Target == null)
             return;
 
-        StartTreatment(args.User, args.Target.Value, ent);
+        StartTreatment(args.User, args.Target.Value, ent, out var handled);
+        args.Handled = handled;
     }
 
     private void OnWoundTreaterDoAfter(Entity<WoundTreaterComponent> treater, ref TreatWoundDoAfterEvent args)
@@ -125,13 +137,16 @@ public abstract class SharedWoundsSystem : EntitySystem
             return;
         }
 
-        if (!CanTreatPopup(user, target, treater, out var wounded, out var damage))
+        if (!CanTreatPopup(user, target, treater, out var wounded, out var damage, out var handled))
+        {
+            args.Handled = handled;
             return;
+        }
 
+        args.Handled = true;
         if (damage != FixedPoint2.Zero)
         {
             var total = _rmcDamageable.DistributeHealing((target, damageable), treater.Comp.Group, damage);
-
             _damageable.TryChangeDamage(target, total, true, damageable: damageable, origin: user, tool: args.Used);
         }
 
@@ -142,11 +157,11 @@ public abstract class SharedWoundsSystem : EntitySystem
             if (wound.Type != treater.Comp.Wound || wound.Treated)
                 continue;
 
-            if (treater.Comp.Treats || FixedPoint2.Abs(wound.Healed) >= wound.Damage / 2)
-            {
-                wound.Treated = true;
-                anyWounds = true;
-            }
+            if (!treater.Comp.Treats && FixedPoint2.Abs(wound.Healed) < wound.Damage / 2)
+                continue;
+
+            wound.Treated = true;
+            anyWounds = true;
         }
 
         if (anyWounds)
@@ -177,7 +192,7 @@ public abstract class SharedWoundsSystem : EntitySystem
             else if (_net.IsServer)
                 QueueDel(treater);
         }
-        else if (CanTreatPopup(user, target, treater, out _, out _, false))
+        else if (CanTreatPopup(user, target, treater, out _, out _, out _, false))
         {
             args.Repeat = true;
         }
@@ -215,8 +230,10 @@ public abstract class SharedWoundsSystem : EntitySystem
         Entity<WoundTreaterComponent> treater,
         [NotNullWhen(true)] out WoundedComponent? wounded,
         out FixedPoint2 damage,
+        out bool handle,
         bool doPopups = true)
     {
+        handle = false;
         wounded = default;
         damage = FixedPoint2.Zero;
         if (!HasComp<WoundableComponent>(target) &&
@@ -323,16 +340,16 @@ public abstract class SharedWoundsSystem : EntitySystem
         return false;
     }
 
-    private void StartTreatment(EntityUid user, EntityUid target, Entity<WoundTreaterComponent> treater)
+    private void StartTreatment(EntityUid user, EntityUid target, Entity<WoundTreaterComponent> treater, out bool handled)
     {
-        if (!CanTreatPopup(user, target, treater, out _, out var damage))
+        handled = false;
+        if (!CanTreatPopup(user, target, treater, out _, out var damage, out handled))
             return;
 
+        handled = true;
         var delay = _skills.GetDelay(user, treater);
         if (delay > TimeSpan.Zero)
-        {
             _popup.PopupClient(Loc.GetString("cm-wounds-start-fumbling", ("name", treater.Owner)), target, user);
-        }
 
         var scaling = treater.Comp.ScalingDoAfter;
         if (scaling > TimeSpan.Zero)
@@ -359,6 +376,8 @@ public abstract class SharedWoundsSystem : EntitySystem
             BreakOnHandChange = true,
             NeedHand = true,
             CancelDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameEvent,
+            TargetEffect = "RMCEffectHealBusy",
         };
         _doAfter.TryStartDoAfter(doAfter);
         _audio.PlayPredicted(treater.Comp.TreatBeginSound, user, user);

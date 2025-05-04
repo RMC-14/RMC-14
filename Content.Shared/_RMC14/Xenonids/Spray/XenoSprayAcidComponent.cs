@@ -1,4 +1,4 @@
-﻿using Content.Shared.Damage;
+using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -17,6 +17,9 @@ public sealed partial class XenoSprayAcidComponent : Component
     public FixedPoint2 PlasmaCost = 40;
 
     [DataField, AutoNetworkedField]
+    public TimeSpan DoAfter;
+
+    [DataField, AutoNetworkedField]
     public TimeSpan Delay = TimeSpan.FromSeconds(0.2);
 
     [DataField, AutoNetworkedField]
@@ -27,4 +30,7 @@ public sealed partial class XenoSprayAcidComponent : Component
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier Sound = new SoundPathSpecifier("/Audio/Effects/refill.ogg");
+
+    [DataField, AutoNetworkedField]
+    public float Range = 6;
 }

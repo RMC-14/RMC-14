@@ -5,16 +5,16 @@
   id: Almayer
   mapName: Almayer
   mapPath: /Maps/_RMC14/almayer.yml
-  minPlayers: 90
+  minPlayers: 0 # TODO RMC14 74
   maxRandomOffset: 0
   randomRotation: false
   fallback: true
   stations:
     Almayer:
-      stationProto: StandardNanotrasenStation
+      stationProto: StandardUNMCWarship
       components:
       - type: StationNameSetup
-        mapNameTemplate: 'USS Almayer'
+        mapNameTemplate: 'UNS Almayer'
       - type: StationJobs
         availableJobs:
           #Command
@@ -26,19 +26,19 @@
           #Military Police
           CMChiefMP: [1, 1]
           CMMilitaryWarden: [1, 1]
-          CMMilitaryPolice: [5, 8]
+          CMMilitaryPolice: [7, 10]
 
           #Auxiliary
           CMAuxiliarySupportOfficer: [1, 1]
-#          CMIntelOfficer: [4, 4]
+          CMIntelOfficer: [4, 4]
           CMPilotDropship: [1, 1]
           CMPilotGunship: [1, 1]
           CMDropshipCrewChief: [2, 2]
 
           #Engineering
-#          CMChiefEngineer: [1, 1]
+          CMChiefEngineer: [1, 1]
 #          CMOrdnanceTech: [3, 3]
-#          CMMaintTech: [1, 1]
+          CMMaintTech: [3, 3]
 
           #Medical
           CMCMO: [1, 1]
@@ -49,7 +49,7 @@
           #Requisition
           CMQuartermaster: [1, 1]
           CMCargoTech: [4, 4]
-#          CMMessTech: [1, 1]
+          CMMessTech: [1, 1]
 
           #Marines
           CMSquadLeader: [4, 4]

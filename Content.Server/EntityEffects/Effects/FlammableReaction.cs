@@ -1,5 +1,5 @@
-using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Database;
 using Content.Shared.EntityEffects;
 using JetBrains.Annotations;
@@ -38,7 +38,8 @@ namespace Content.Server.EntityEffects.Effects
                 reagentArgs.EntityManager.System<FlammableSystem>().AdjustFireStacks(args.TargetEntity, quantity * multiplier, flammable);
                 if (reagentArgs.Reagent != null)
                     reagentArgs.Source?.RemoveReagent(reagentArgs.Reagent.ID, reagentArgs.Quantity);
-            } else
+            }
+            else
             {
                 args.EntityManager.System<FlammableSystem>().AdjustFireStacks(args.TargetEntity, multiplier, flammable);
             }

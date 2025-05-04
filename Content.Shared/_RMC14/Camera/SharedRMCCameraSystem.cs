@@ -23,11 +23,11 @@ public abstract class SharedRMCCameraSystem : EntitySystem
     {
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
-        SubscribeLocalEvent<RMCCameraComponent, MapInitEvent>(OnCameraMapInit);
+        SubscribeLocalEvent<RMCCameraComponent, MapInitEvent>(OnCameraMapInit, after: [typeof(AreaSystem)]);
         SubscribeLocalEvent<RMCCameraComponent, ComponentRemove>(OnCameraRemove);
         SubscribeLocalEvent<RMCCameraComponent, EntityTerminatingEvent>(OnCameraTerminating);
 
-        SubscribeLocalEvent<RMCCameraComputerComponent, MapInitEvent>(OnComputerMapInit);
+        SubscribeLocalEvent<RMCCameraComputerComponent, MapInitEvent>(OnComputerMapInit, after: [typeof(AreaSystem)]);
 
         SubscribeLocalEvent<RMCCameraWatcherComponent, ComponentRemove>(OnWatcherRemove);
         SubscribeLocalEvent<RMCCameraWatcherComponent, EntityTerminatingEvent>(OnWatcherTerminating);
@@ -53,13 +53,22 @@ public abstract class SharedRMCCameraSystem : EntitySystem
         if (ent.Comp.Id is { } id)
             _refresh.Add(id);
 
-        if (!_area.TryGetArea(ent, out var areaProto, out var area))
-            return;
+        if (ent.Comp.Rename)
+        {
+            if (!_area.TryGetArea(ent, out _, out var areaProto))
+                return;
 
-        var areaName = areaProto.Name;
-        var count = _cameraNames.GetValueOrDefault(areaName);
-        _metaData.SetEntityName(ent, $"{areaName} #{++count}");
-        _cameraNames[areaName] = count;
+            var areaName = areaProto.Name;
+            var count = _cameraNames.GetValueOrDefault(areaName);
+            _metaData.SetEntityName(ent, $"{areaName} #{++count}");
+            _cameraNames[areaName] = count;
+        }
+        else
+        {
+            var name = Name(ent);
+            var count = _cameraNames.GetValueOrDefault(name);
+            _cameraNames[name] = count;
+        }
     }
 
     private void OnCameraRemove(Entity<RMCCameraComponent> ent, ref ComponentRemove args)

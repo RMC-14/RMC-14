@@ -1,0 +1,42 @@
+- type: entity
+  parent: BaseStructure
+  id: RMCLightStick
+  name: red lightstick
+  description: You can stick them in the ground.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Objects/Misc/Lights/lightstick.rsi
+    state: lightstick_spoke1
+  - type: InteractionOutline
+  - type: PointLight
+    enabled: true
+    radius: 1.65
+    energy: 5
+    netsync: false
+    color: "#FF0000"
+  - type: Appearance
+
+- type: entity
+  parent: RMCLightStick
+  id: RMCLightStickRedSmall
+  components:
+  - type: Sprite
+    state: lightstick_red_variant1
+
+- type: entity
+  parent: RMCLightStick
+  id: RMCLightStickBlueSmall
+  name: blue lightstick
+  components:
+  - type: Sprite
+    state: lightstick_blue_variant1
+  - type: PointLight
+    color: "#2D2DE3"

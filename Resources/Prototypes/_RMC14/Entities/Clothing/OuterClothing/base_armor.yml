@@ -10,6 +10,7 @@
     size: Huge
   - type: CMDefibrillatorBlocked
     popup: cm-defib-take-off-armor
+    showOnExamine: false
   - type: InteractedBlacklist
     blacklist:
       components:
@@ -17,6 +18,9 @@
   - type: Clothing
     equipSound:
       path: /Audio/_RMC14/Machines/armor_equip.ogg
+  - type: PlaytimeMedalHolder
+  - type: MoveOrderArmor
+  - type: StoreAfterFailedInteract
 
 - type: entity
   abstract: true
@@ -38,10 +42,60 @@
       - RMCMacheteScabbard
       #TODO Various holsters should fit here - 47 belt, 1984, m44, and flaregun
       - RMCSmartPistolHolster
-      #TODO motion detector
+      - RMCSMGHolster
+      - RMCSMGPouchHolster
+      - RMCGeneralPistolHolster
+      - RMCGeneralRevolverHolster
+      - RMCXM51Holster
+      - RMCDetector
+      - RMCMatebaHolster
       #TODO walkman
 
-# TODO RMC14 PMC Armor has it's own list of allowed suit storage
+- type: entity
+  abstract: true
+  id: RMCAllowSuitStorageClothingArmorVest
+  components:
+  - type: AllowSuitStorage
+    whitelist:
+      components:
+      - Gun
+      - Stunbaton
+      - BallisticAmmoProvider #Note should get all maganizes
+      tags:
+      - Handcuffs
+      - GasTank
+      - Flashlight
+      - RMCMacheteScabbard
+      - Binoculars
+      - RMCGeneralPistolHolster
+      - RMCGeneralRevolverHolster
+
+- type: entity
+  abstract: true
+  id: RMCAllowSuitStorageClothingArmorPMC
+  components:
+  - type: AllowSuitStorage
+    whitelist:
+      components:
+      - RMCLighter
+      - Bible
+      - Gun
+      - BallisticAmmoProvider #Note should get all maganizes
+      - Stunbaton
+      - CrewMonitoringConsole
+      tags:
+      - Handcuffs
+      - GasTank
+      - Flashlight
+      - DiscreteHealthAnalyzer
+      - CigPack
+      - Knife
+      - RMCG8Pouch
+      - Crowbar
+      - RMCMacheteScabbard
+      #TODO katana scabbard
+      - RMCDetector
+      #TODO walkman
 
 - type: entity
   abstract: true
@@ -58,7 +112,7 @@
       - Knife
       - RMCG8Pouch
       #TODO mines
-      #TODO motion detector
+      - RMCDetector
       #TODO walkman
 
 - type: entity
@@ -84,9 +138,39 @@
       #TODO Hailer - looks like a flash and shouts a message to halt
       #TODO Various holsters go here - instead of specific ones though MP get ALL of them - any type of gun holster
       - RMCSmartPistolHolster
-      #TODO Ceremonial Sword
-      #TODO motion detector
+      - RMCSMGHolster
+      - RMCSMGPouchHolster
+      - RMCGeneralPistolHolster
+      - RMCGeneralRevolverHolster
+      - RMCMatebaHolster
+      - RMCCeremonialSword
+      - RMCDetector
       #TODO walkman
+
+- type: entity
+  abstract: true
+  id: RMCAllowSuitStorageClothingArmorRoyal
+  components:
+  - type: AllowSuitStorage
+    whitelist:
+      components:
+      - RMCLighter
+      - Bible
+      - BallisticAmmoProvider #Note should get all maganizes
+      - Stunbaton
+      - Gun
+      tags:
+      - Handcuffs
+      - GasTank
+      - CigPack
+      - Knife
+      - Grenade
+      - Flashlight
+      - Machete
+      - RMCDetector
+      #TODO walkman
+
+# TODO: Add separate whitelists for 'safari jacket' and 'bureau deputy jacket'
 
 - type: entity
   parent: RMCBaseArmor
@@ -121,9 +205,8 @@
       - PillPacket
       - PillCanister
       - CMSurgicalCase
-  - type: WieldSlowdownCompensation
-    walk: 0.08
-    sprint: 0.136
+  - type: RMCArmorSpeedTier
+    speedTier: medium
   - type: RMCNameItemOnVend
     item: Armor
   - type: CMHardArmor
@@ -131,12 +214,14 @@
   - type: RMCMagneticArmor
   - type: SquadArmor
     layer: Armor
+    slot: OUTERCLOTHING
     rsi:
       sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
       state: std-armor
     leaderRsi:
       sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
       state: sql-armor
+  - type: RMCStorageEjectHand
 
 - type: entity
   parent: RMCBaseMarineArmor
@@ -171,10 +256,16 @@
   - type: RMCSuitLight
   - type: PointLight
     enabled: false
-    radius: 4
+    radius: 5
+    offset: 0,-0.85
+    rotation: 90
     softness: 5
     autoRot: true
     netsync: false
+    color: "#FFFFFF"
+    mask: /Textures/_RMC14/Effects/LightMasks/wide_ellipsis.png
+  - type: PointLightRotation
+    rotation: 90
   - type: HandheldLight
     addPrefix: true
     blinkingBehaviourId: blinking
@@ -183,6 +274,7 @@
       path: /Audio/_RMC14/Machines/suitlight_off.ogg
     turnOnSound:
       path: /Audio/_RMC14/Machines/suitlight_on.ogg
+  - type: NoHandsInteractionBlocked
   - type: LightBehaviour
     behaviours:
     - !type:FadeBehaviour

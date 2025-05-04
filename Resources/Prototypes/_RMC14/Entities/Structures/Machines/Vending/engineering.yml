@@ -2,36 +2,68 @@
 
 # Tools
 - type: entity
-  parent: CMVendor
+  parent: ColMarTechBaseAnchorable
   id: CMVendorTool
   name: tool storage machine
   description: A large storage machine containing various tools and devices for general repair.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/tool.rsi
-  - type: VendingMachine
-    pack: CMVendorTool
-    denyState: deny-unshaded
-    ejectState: eject-unshaded
+    layers:
+    - state: "off"
+      map: [ "enum.VendingMachineVisualLayers.Base" ]
+    - state: "normal-unshaded"
+      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+      shader: unshaded
   - type: AccessReader
     access: [["CMAccessCombatTechPrep"], ["CMAccessEngineering"], ["CMAccessColonyEngineering"]]
-
-- type: vendingMachineInventory
-  id: CMVendorTool
-  startingInventory:
-    RMCFlashlight: 4
-    ClothingHeadHatHardhatBlue: 4
-    CMHandsInsulated: 4
-    CMBeltUtility: 4
-    ClothingEyesGlassesMeson: 4
-    ClothingHeadHatWelding: 4
-    trayScanner: 4
-    CMCrowbar: 8
-    CMWelder: 8
-    CMScrewdriver: 8
-    CMWirecutter: 8
-    CMWrench: 8
-
+  - type: CMAutomatedVendor
+    access:
+    - "CMAccessCombatTechPrep"
+    - "CMAccessEngineering"
+    - "CMAccessColonyEngineering"
+    hackable: true
+    sections:
+    - name: Equipment
+      entries:
+      - id: RMCFlashlight
+        amount: 4
+      - id: RMCHardhatBlue
+        amount: 4
+      - id: CMHandsInsulated
+        amount: 4
+      - id: CMBeltUtility
+        amount: 4
+      - id: ClothingEyesGlassesMeson
+        amount: 4
+      - id: ClothingHeadHatWelding
+        amount: 4
+      - id: RMCEngineerKit
+        amount: 2
+    - name: Scanners
+      entries:
+      #Atmos scanner
+      #Demo scanner
+      #Meson scanner
+      #Reagent scanner
+      - id: CMTRayScanner
+        amount: 2
+    - name: Tools
+      entries:
+      - id: CMWelder
+        amount: 4
+      - id: CMCrowbar
+        amount: 4
+      - id: CMWelderSmall
+        amount: 2
+      - id: CMScrewdriver
+        amount: 4
+      - id: CMWirecutter
+        amount: 4
+      - id: CMWrench
+        amount: 4
+      - id: CMLightReplacer
+        amount: 4
 
 # Circuits
 - type: entity
@@ -42,21 +74,45 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/robotics.rsi
-  - type: VendingMachine
-    pack: CMVendorCircuits
-
-- type: vendingMachineInventory
-  id: CMVendorCircuits
-  startingInventory:
-    FireAlarmElectronics: 5
-    CMAPCElectronics: 6
-#    CMAutolatheMachineCircuitboard: 2 # TODO RMC14
-    TelecomServerCircuitboard: 1
-    CrewMonitoringComputerCircuitboard: 2
-    IDComputerCircuitboard: 2
-    StationRecordsComputerCircuitboard: 2
-#    CMPortableGeneratorPacmanMachineCircuitBoard: 5
-    CMSMESMachineCircuitboard: 2
+  - type: CMAutomatedVendor
+    hackable: true
+    sections:
+    - name: Circuitboards
+      entries:
+#     - id: RMCFireAlarmCircuitboard
+#       amount: 5
+      - id: CMAPCElectronics
+        amount: 6
+      - id: CMAutolatheMachineCircuitboard
+        amount: 2
+#     - id: RMCTelecomServerCircuitboard
+#       amount: 1
+#     - id: RMCCrewMonitoringCircuitboard
+#       amount: 2
+#     - id: RMCIDComputerConsoleCircuitboard
+#       amount: 2
+#     - id: RMCSecurityRecordsCircuitboard
+#       amount: 2
+#     - id: RMCSupplyOrderingCircuitboard
+#       amount: 2
+#     - id: RMCReserachDataTerminalCircuitboard
+#       amount: 2
+#     - id: RMCPacmanGeneratorCircuitboard
+#       amount: 1
+      - id: CMSMESMachineCircuitboard
+        amount: 2
+#     - id: RMCAirAlarmCircuitboard
+#       amount: 2
+#     - id: RMCSecurityCameraMonitorCircuitboard
+#       amount: 2
+      - id: RMCCircuitboardTelevision
+        amount: 4
+#     - id: RMCStationAlertsConsoleCircuitboard
+#       amount: 2
+#     - id: RMCArcadeCircuitboard
+#       amount: 2
+#     - id: RMCAtmosphericConsoleCircuitboard
+#       amount: 2
 
 
 # Electronics
@@ -68,18 +124,27 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/engivend.rsi
-  - type: VendingMachine
-    pack: CMVendorElectronics
-
-- type: vendingMachineInventory
-  id: CMVendorElectronics
-  startingInventory:
-    RMCCableCoil: 6
-    CMMultitool: 6
-    DoorElectronics: 8
-    CMAPCElectronics: 8
-    RMCPowerCellHigh: 6
-    RMCPowerCell: 14
+  - type: CMAutomatedVendor
+    hackable: true
+    sections:
+    - name: Tools
+      entries:
+      - id: RMCCableCoil
+        amount: 6
+      - id: CMMultitool
+        amount: 6
+    - name: Circuitboards
+      entries:
+      - id: DoorElectronics
+        amount: 8
+      - id: CMAPCElectronics
+        amount: 8
+    - name: Batteries
+      entries:
+      - id: RMCPowerCellHigh
+        amount: 6
+      - id: RMCPowerCell
+        amount: 14
 
 
 # Components
@@ -91,47 +156,76 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/engi.rsi
-  - type: VendingMachine
-    pack: CMVendorComponent
-
-- type: vendingMachineInventory
-  id: CMVendorComponent
-  startingInventory:
-    Igniter: 8
-    TimerTrigger: 4
-    ProximitySensor: 4
-    RemoteSignaller: 4
-    RMCBucket: 6
-    CMStockPartMatterBin: 8
-    CMStockPartManipulatorMicro: 8
-    CMStockPartCapacitor: 8
+  - type: CMAutomatedVendor
+    hackable: true
+    sections:
+    - name: Assembly Components
+      entries:
+      - id: Igniter
+        amount: 8
+      - id: TimerTrigger
+        amount: 4
+      - id: ProximitySensor
+        amount: 4
+      - id: RemoteSignaller
+        amount: 4
+    - name: Container
+      entries:
+      - id: RMCBucket
+        amount: 6
+      - id: CMBucketMop
+        amount: 2
+    - name: Stock Parts
+      entries:
+      - id: CMStockPartMatterBin
+        amount: 8
+      - id: CMStockPartManipulatorMicro
+        amount: 8
+      - id: CMStockPartCapacitor
+        amount: 8
+    #TODO Console screen, scanning module
 
 
 # Science
 - type: entity
-  parent: CMVendor
+  parent: ColMarTechBaseAnchorable
   id: CMVendorScience
   name: We-Ya SciVend
   description: Vendor containing basic equipment for your experiments.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/robotics.rsi
-  - type: VendingMachine
-    pack: CMVendorScience
-    denyState: deny-unshaded
-    ejectState: eject-unshaded
+    layers:
+    - state: "off"
+      map: [ "enum.VendingMachineVisualLayers.Base" ]
+    - state: "normal-unshaded"
+      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+      shader: unshaded
   - type: AccessReader
     access: [["CMAccessResearch"]]
-
-- type: vendingMachineInventory
-  id: CMVendorScience
-  startingInventory:
-    ClothingHeadHatHoodBioScientist: 2
-    ClothingOuterBioScientist: 2
-    CMJumpsuitResearch: 2
-    Igniter: 8
-    ProximitySensor: 4
-    RemoteSignaller: 4
+  - type: CMAutomatedVendor
+    access:
+    - "CMAccessResearch"
+    hackable: true
+    sections:
+    - name: Equipment
+      entries:
+      - id: ClothingHeadHatHoodBioScientist
+        amount: 2
+      - id: ClothingOuterBioScientist
+        amount: 2
+      - id: CMJumpsuitResearch
+        amount: 2
+    - name: Assembly Components
+      entries:
+      - id: Igniter
+        amount: 8
+      - id: ProximitySensor
+        amount: 4
+      - id: RemoteSignaller
+        amount: 4
+      # Tank transfer valve
+      # Timer
 
 
 # Robotics
@@ -141,20 +235,40 @@
   name: Robotech Deluxe
   description: All the tools you need to create your own robot army.
   components:
-  - type: VendingMachine
-    pack: CMVendorRobotics
-
-- type: vendingMachineInventory
-  id: CMVendorRobotics
-  startingInventory:
-    RMCCableCoil: 4
-    SawElectric: 2
-    CMCrowbar: 2
-    CMScalpel: 2
-    CMScrewdriver: 2
-    CMFlash: 4
-    RMCPowerCellHigh: 4
-    ProximitySensor: 4
-    RemoteSignaller: 4
-    CMHealthAnalyzer: 2
-    NitrousOxideTankFilled: 2
+  - type: CMAutomatedVendor
+    hackable: true
+    sections:
+    - name: Equipment
+      entries:
+      # Labcoat
+      - id: CMMaskGasMedical
+        amount: 2
+      # Roboticist Jumpsuit
+    - name: Tools
+      entries:
+      - id: RMCCableCoil
+        amount: 4
+      - id: SawElectric
+        amount: 2
+      - id: CMCrowbar
+        amount: 2
+      - id: CMScalpel
+        amount: 2
+      - id: CMScrewdriver
+        amount: 2
+    - name: Assembly Components
+      entries:
+      - id: CMFlash
+        amount: 4
+      - id: RMCPowerCellHigh
+        amount: 4
+      - id: ProximitySensor
+        amount: 4
+      - id: RemoteSignaller
+        amount: 4
+    - name: Miscellaneous
+      entries:
+      - id: NitrousOxideTankFilled
+        amount: 2
+      - id: CMHealthAnalyzer
+        amount: 2

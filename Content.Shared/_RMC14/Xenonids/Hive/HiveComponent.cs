@@ -1,4 +1,6 @@
-﻿using Content.Shared._RMC14.Xenonids.Construction;
+using Content.Shared._RMC14.Xenonids.Construction;
+using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -8,7 +10,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._RMC14.Xenonids.Hive;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(SharedXenoHiveSystem), typeof(SharedXenoHiveCoreSystem))]
+[Access(typeof(SharedXenoHiveSystem), typeof(SharedXenoPylonSystem), typeof(SharedXenoTunnelSystem))]
 public sealed partial class HiveComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -17,6 +19,12 @@ public sealed partial class HiveComponent : Component
         [2] = 0.5,
         [3] = 0.2,
     };
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<EntProtoId, int> FreeSlots = new() {["CMXenoHivelord"] = 1, ["CMXenoCarrier"] = 1, ["CMXenoBurrower"] = 1};
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<EntProtoId, int> HiveStructureSlots = new() { ["HiveCoreXeno"] = 1, ["HiveClusterXeno"] = 8, ["HivePylonXeno"] = 2, ["HiveEggMorpherXeno"] = 6, ["HiveRecoveryNodeXeno"] = 6 };
 
     [DataField, AutoNetworkedField]
     public Dictionary<TimeSpan, List<EntProtoId>> Unlocks = new();
@@ -34,6 +42,9 @@ public sealed partial class HiveComponent : Component
     public bool SeeThroughContainers;
 
     [DataField, AutoNetworkedField]
+    public EntityUid? CurrentQueen;
+
+    [DataField, AutoNetworkedField]
     public TimeSpan? LastQueenDeath;
 
     [DataField, AutoNetworkedField]
@@ -45,6 +56,30 @@ public sealed partial class HiveComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan NewCoreCooldown = TimeSpan.FromMinutes(5);
 
+    [DataField, AutoNetworkedField]
+    public TimeSpan PreSetupCutoff = TimeSpan.FromMinutes(20);
+
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NewCoreAt;
+
+    [DataField, AutoNetworkedField]
+    public bool HijackSurged;
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<string, EntityUid> HiveTunnels = new();
+
+    [DataField, AutoNetworkedField]
+    public int BurrowedLarva;
+
+    [DataField, AutoNetworkedField]
+    public int BurrowedLarvaSlotFactor = 4;
+
+    [DataField, AutoNetworkedField]
+    public bool LateJoinGainLarva;
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 LateJoinMarines;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId BurrowedLarvaId = "CMXenoLarva";
 }

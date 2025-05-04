@@ -18,7 +18,7 @@
       - Taser
       - Flashlight
       - CMMagazinePistol
-#      - # TODO RMC14 shotgun handfuls
+      - RMCShellShotgun
       - Taser
       components:
       - Handcuff

@@ -1,0 +1,227 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/turf/hybrisareas.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "oob"
+    },
+    {
+      "name": "base_icon"
+    },
+    {
+      "name": "hybrisa"
+    },
+    {
+      "name": "maints"
+    },
+    {
+      "name": "derelictship"
+    },
+    {
+      "name": "tumor1"
+    },
+    {
+      "name": "tumor2"
+    },
+    {
+      "name": "tumor3"
+    },
+    {
+      "name": "tumor4"
+    },
+    {
+      "name": "tumor0-deep"
+    },
+    {
+      "name": "colonystreets_north"
+    },
+    {
+      "name": "colonystreets_northwest"
+    },
+    {
+      "name": "colonystreets_northeast"
+    },
+    {
+      "name": "colonystreets_east"
+    },
+    {
+      "name": "colonystreets_southeast"
+    },
+    {
+      "name": "colonystreets_south"
+    },
+    {
+      "name": "colonystreets_southwest"
+    },
+    {
+      "name": "colonystreets_west"
+    },
+    {
+      "name": "disco"
+    },
+    {
+      "name": "police_line"
+    },
+    {
+      "name": "lz"
+    },
+    {
+      "name": "lz1"
+    },
+    {
+      "name": "lz2"
+    },
+    {
+      "name": "wardens"
+    },
+    {
+      "name": "security_hub"
+    },
+    {
+      "name": "security_checkpoint"
+    },
+    {
+      "name": "security_checkpoint_northeast"
+    },
+    {
+      "name": "security_checkpoint_east"
+    },
+    {
+      "name": "security_checkpoint_west"
+    },
+    {
+      "name": "security_checkpoint_northwest"
+    },
+    {
+      "name": "security_checkpoint_central"
+    },
+    {
+      "name": "power0"
+    },
+    {
+      "name": "wyspaceport"
+    },
+    {
+      "name": "wyspaceportblue"
+    },
+    {
+      "name": "wyspaceportadmin"
+    },
+    {
+      "name": "wyspaceportbaggage"
+    },
+    {
+      "name": "wyspaceportcargo"
+    },
+    {
+      "name": "medical"
+    },
+    {
+      "name": "caves_central"
+    },
+    {
+      "name": "caves_north"
+    },
+    {
+      "name": "caves_northwest"
+    },
+    {
+      "name": "caves_northeast"
+    },
+    {
+      "name": "caves_east"
+    },
+    {
+      "name": "caves_southeast"
+    },
+    {
+      "name": "caves_south"
+    },
+    {
+      "name": "caves_southwest"
+    },
+    {
+      "name": "caves_west"
+    },
+    {
+      "name": "weymart"
+    },
+    {
+      "name": "weymartbackrooms"
+    },
+    {
+      "name": "caves_plateau"
+    },
+    {
+      "name": "meridian"
+    },
+    {
+      "name": "meridian_factory"
+    },
+    {
+      "name": "wydropship"
+    },
+    {
+      "name": "cuppajoes"
+    },
+    {
+      "name": "comms_1"
+    },
+    {
+      "name": "pizza"
+    },
+    {
+      "name": "nightgold"
+    },
+    {
+      "name": "hobo"
+    },
+    {
+      "name": "restroom"
+    },
+    {
+      "name": "jacks"
+    },
+    {
+      "name": "mining"
+    },
+    {
+      "name": "botany"
+    },
+    {
+      "name": "wyoffice"
+    },
+    {
+      "name": "garage"
+    },
+    {
+      "name": "bar"
+    },
+    {
+      "name": "recycling"
+    },
+    {
+      "name": "synthetic"
+    },
+    {
+      "name": "apartments"
+    },
+    {
+      "name": "medical_lz1"
+    },
+    {
+      "name": "mining_lz2"
+    },
+    {
+      "name": "mining_cargo"
+    },
+    {
+      "name": "wylab"
+    }
+  ]
+}

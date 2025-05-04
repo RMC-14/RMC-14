@@ -8,6 +8,8 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
     time: 18000 # 5 hours
+  ranks:
+    RMCRankSecondLT: []
   startingGear: CMGearResearcher
   icon: "CMJobIconResearcher"
   joinNotifyCrew: false
@@ -17,6 +19,10 @@
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
     state: researcher
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_medical
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -28,13 +34,22 @@
         RMCSkillResearch: 1
         RMCSkillSurgery: 2
     - type: RMCUserBulkyArmorIncapable
+    - type: JobPrefix
+      prefix: cm-job-prefix-researcher
+    - type: ViewIntelObjectives
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: researcher
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_shipside
   hidden: true # TODO RMC14
 
 - type: startingGear
   id: CMGearResearcher
   equipment:
     jumpsuit: CMJumpsuitResearch
-    back: CMSatchel
     shoes: RMCShoesLaceup
     id: CMIDCardResearcher
     # TODO RMC14 random chemical synthesis note, syringe,
@@ -43,7 +58,6 @@
   id: CMGearResearcherEquipped
   equipment:
     jumpsuit: CMJumpsuitResearch
-    back: CMSatchelMarine
     gloves: CMHandsLatex
     shoes: RMCShoesLaceup
     id: CMIDCardResearcher
@@ -57,10 +71,8 @@
   - type: SpawnPoint
     job_id: CMResearcher
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: researcher
+    state: res_spawn
 
 - type: playTimeTracker
   id: CMJobResearcher
+  isHumanoid: true

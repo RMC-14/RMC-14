@@ -1,5 +1,3 @@
-# Senior Enlisted Advisor
-#TODO Add Choices to SEA Vendors
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechEquipmentSEA
@@ -12,6 +10,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
+    jobs:
+    - CMSeniorEnlistedAdvisor
     sections:
     - name: Standard Equipment
       takeAll: CMStandard
@@ -31,8 +31,11 @@
       entries:
       - id: RMCBeltUtilityGeneral
       - id: CMBeltUtilityFilled
+        name: M276 pattern toolbelt rig (Full)
       - id: CMBeltMedicBagFilled
+        name: M276 pattern lifesaver bag (Full)
       - id: CMBeltUtilityCombatFilled
+        name: M276 pattern combat toolbelt rig (Full)
     - name: Pouches
       choices: { CMPouches: 2 }
       entries:
@@ -40,41 +43,45 @@
       - id: RMCPouchGeneralLarge
       - id: RMCPouchMagazineLarge
       - id: RMCPouchMagazinePistolLarge
-      - id: RMCPouchShotgun #Change to Large when released
-      #Medical Kit Pouch
+      - id: RMCPouchShotgunLarge
+      - id: RMCPouchMedkit
       - id: RMCPouchPistol
       - id: RMCPouchSling
+    - name: Hat
+      choices: { CMHat: 1 }
+      entries:
+      - id: CMHeadCapDrill
+    - name: Helmet
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: ArmorHelmetM10
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
       - id: CMArmorM3VLBallistics
-      - id: CMArmorM3Light
-      - id: CMArmorM3Medium
-      #Bulletproof Vest
-      #USCM Service Jacket
+      - id: RMCArmorM3LightPadded
+      - id: RMCArmorM3MediumVariants
+    - name: Jacket
+      choices: { CMCoat: 1 }
+      entries:
+      - id: RMCCoatService
     - name: Eyewear
       choices: { CMEyewear: 1 }
       entries:
-      #Welding Goggles
+      - id: RMCWeldingGoggles
       - id: RMCGlassesMedicalHUDGlasses
       #Prescription Medical HUD Glasses
       - id: CMGlassesSecurity
       - id: RMCGlassesMarineRpg #Sunglasses Placeholder
-      #Sunglasses
+      - id: RMCSunglasses
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBrown
       - id: CMWebbingBlack
-      #Shoulder Holster
+      - id: CMWebbingHolster
       - id: CMWebbing
       - id: CMWebbingPouch
-    - name: Headwear
-      choices: { CMHeadwear: 1 }
-      entries:
-      - id: CMHeadCapDrill
-      - id: ArmorHelmetM10
-
 
 - type: entity
   parent: ColMarTechBase
@@ -88,19 +95,21 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
+    jobs:
+    - CMSeniorEnlistedAdvisor
     sections:
     - name: Personal Primary
       choices: { CMPrimary: 1 }
       entries:
-      - id: WeaponRifleM54C
+      - id: WeaponRifleM54CMK1
     - name: Ammunition
       entries:
-      - id: CMMagazineRifleM54C
+      - id: CMMagazineRifleM54CMK1
         points: 9
     - name: Gun Attachments
       choices: { CMAttachments: 1 }
       entries:
       - id: RMCAttachmentLaserSight
-      #Red-Dot Sight
+      - id: RMCAttachmentS5RedDotSight
       - id: RMCAttachmentS6ReflexSight
       - id: RMCAttachmentRailFlashlight

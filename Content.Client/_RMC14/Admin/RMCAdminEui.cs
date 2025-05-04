@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Vendors;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Strain;
 using Content.Shared.Eui;
 using Content.Shared.Humanoid.Prototypes;
 using JetBrains.Annotations;
@@ -66,6 +67,9 @@ public sealed class RMCAdminEui : BaseEui
             if (entity.Abstract || !entity.TryGetComponent(out XenoComponent? xeno, _compFactory))
                 continue;
 
+            if (entity.TryGetComponent(out XenoStrainComponent? strain, _compFactory))
+                continue;
+
             if (!tiers.TryGetValue(xeno.Tier, out var xenos))
             {
                 xenos = new SortedSet<EntityPrototype>(EntityComparer);
@@ -124,7 +128,7 @@ public sealed class RMCAdminEui : BaseEui
 
     private void OnCreateHiveClosed()
     {
-        _createHiveWindow?.Dispose();
+        _createHiveWindow?.Close();
         _createHiveWindow = null;
     }
 
@@ -132,7 +136,7 @@ public sealed class RMCAdminEui : BaseEui
     {
         var msg = new RMCAdminCreateHiveMsg(args.Text);
         SendMessage(msg);
-        _createHiveWindow?.Dispose();
+        _createHiveWindow?.Close();
     }
 
     public override void HandleState(EuiStateBase state)
@@ -144,7 +148,7 @@ public sealed class RMCAdminEui : BaseEui
         foreach (var hive in s.Hives)
         {
             var list = _adminWindow.XenoTab.HiveList;
-            list.Add(new Item(list)
+            list.Add(new ItemList.Item(list)
             {
                 Text = hive.Name,
                 Metadata = hive,
@@ -219,6 +223,6 @@ public sealed class RMCAdminEui : BaseEui
 
     public override void Closed()
     {
-        _adminWindow.Dispose();
+        _adminWindow.Close();
     }
 }

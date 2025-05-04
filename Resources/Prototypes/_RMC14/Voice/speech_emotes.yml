@@ -77,6 +77,8 @@
   chatTriggers:
     - growl
     - growls
+    - growls.
+    - growls!
     - growling
     - growled
 
@@ -98,3 +100,180 @@
     - purrs
     - purring
     - purred
+
+#Vulpkanin
+
+- type: emote
+  id: Bark
+  name: rmc-emote-name-bark
+  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-bark"]
+  chatTriggers:
+    - bark
+    - bark.
+    - bark!
+    - barks
+    - barks.
+    - barks!
+    - barked.
+    - barked!
+    - barking.
+
+- type: emote
+  id: Snarl
+  name: rmc-emote-name-snarl
+  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-snarl"]
+  chatTriggers:
+    - snarl
+    - snarl.
+    - snarl!
+    - snarls
+    - snarls.
+    - snarls!
+    - snarled.
+    - snarled!
+    - snarling.
+
+- type: emote
+  id: Whine
+  name: rmc-emote-name-whine
+  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-whine"]
+  chatTriggers:
+    - whine
+    - whine.
+    - whine!
+    - whines
+    - whines.
+    - whines!
+    - whined.
+    - whined!
+    - whining.
+
+- type: emote
+  id: Gnash
+  name: rmc-emote-name-gnash
+  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-gnash"]
+  chatTriggers:
+    - gnash
+    - gnashes
+    - gnashes.
+    - gnashes!
+    - gnash.
+    - gnash!
+    - gnashes teeth
+    - gnashes their teeth
+    - gnashes her teeth
+    - gnashes his teeth
+    - gnashes its teeth
+
+# Skrell
+- type: emote
+  id: RMCSkrellAnger
+  name: rmc-emote-name-anger
+  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-anger"]
+  chatTriggers:
+    - anger
+    - anger.
+    - anger!
+    - angers
+    - angers.
+    - angers!
+
+- type: emote
+  id: RMCSkrellPeep
+  name: rmc-emote-name-peep
+  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-peep"]
+  chatTriggers:
+    - peep
+    - peep.
+    - peep!
+    - peeps
+    - peeps.
+    - peeps!
+
+- type: emote
+  id: RMCSkrellTrill
+  name: rmc-emote-name-trill
+  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-trill"]
+  chatTriggers:
+    - trill
+    - trill.
+    - trill!
+    - trills
+    - trills.
+    - trills!
+
+- type: emote
+  id: RMCSkrellWarble
+  name: rmc-emote-name-warble
+  category: Vocal
+  available: false
+  whitelist:
+    components:
+    - Vocal
+  blacklist:
+    components:
+    - BorgChassis
+  chatMessages: ["rmc-emote-warble"]
+  chatTriggers:
+    - warble
+    - warble.
+    - warble!
+    - warbles
+    - warbles.
+    - warbles!

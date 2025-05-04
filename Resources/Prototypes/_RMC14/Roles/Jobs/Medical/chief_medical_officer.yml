@@ -8,17 +8,30 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsMedical
     time: 36000 # 10 hours
+  - !type:RoleTimeRequirement
+    role: CMJobDoctor
+    time: 18000 # 5 hours
+  ranks:
+    RMCRankFirstLT:
+    - !type:RoleTimeRequirement
+      role: CMJobCMO
+      time: 36000 # 10 hours
+    RMCRankSecondLT: []
   weight: 5
   startingGear: CMGearCMO
   icon: "CMJobIconCMO"
   requireAdminNotify: true
-  joinNotifyCrew: true
+  joinNotifyCrew: false
   supervisors: cm-job-supervisors-co
   accessGroups:
   - CMCMO
   minimapIcon:
     sprite: _RMC14/Interface/map_blips.rsi
-    state: medic
+    state: doctor
+  minimapBackground:
+   sprite: _RMC14/Interface/map_blips.rsi
+   state: background_command
+  roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
@@ -34,25 +47,33 @@
         RMCSkillPolice: 1
         RMCSkillResearch: 1
         RMCSkillSurgery: 2
-    - type: RMCUserBulkyArmorIncapable
     - type: MarineOrders
+    - type: RMCPointing
+    - type: JobPrefix
+      prefix: cm-job-prefix-cmo
+    - type: ViewIntelObjectives
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: doctor
+      background:
+        sprite: _RMC14/Interface/map_blips.rsi
+        state: background_command
 
 - type: startingGear
   id: CMGearCMO
   equipment:
     jumpsuit: CMJumpsuitCMO
-    back: CMSatchel
     shoes: ClothingShoesColorWhite
     id: CMIDCardCMO
     # TODO RMC14 random chemical synthesis note
-    ears: CMHeadsetCMO
 
 - type: startingGear
   id: CMGearCMOEquipped
   equipment:
     jumpsuit: CMJumpsuitCMO
-    outerClothing: CMCoatLong
-    back: CMSatchelMarine
+    outerClothing: RMCCoatService
     gloves: CMHandsLatex
     shoes: RMCShoesWhite
     head: CMHeadCapCMO
@@ -68,10 +89,18 @@
   - type: SpawnPoint
     job_id: CMCMO
   - type: Sprite
-    layers:
-    - sprite: Markers/jobs.rsi
-      state: green
-    - state: chief_medical_officer
+    state: cmo_spawn
 
 - type: playTimeTracker
   id: CMJobCMO
+  isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleCMO
+  name: The CMO
+  description: The Chief Medical Officer.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: chief_medical_officer

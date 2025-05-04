@@ -23,10 +23,9 @@
         volume: 8
   - type: Tag
     tags:
-      - Catwalk
+    - Catwalk
   - type: Damageable
     damageContainer: Inorganic
-    damageModifierSet: Metallic
   - type: Destructible
     thresholds:
     - trigger:
@@ -49,6 +48,20 @@
 
 - type: entity
   parent: CMCatwalk
+  id: RMCCatwalkAI
+  components:
+  - type: Sprite
+    state: ai_catwalk
+
+- type: entity
+  parent: CMCatwalk
+  id: RMCCatwalkAIWhite
+  components:
+  - type: Sprite
+    state: w_ai_catwalk
+
+- type: entity
+  parent: CMCatwalk
   id: CMCatwalkShiva
   components:
   - type: Sprite
@@ -60,6 +73,44 @@
   components:
   - type: Sprite
     state: prison_catwalk
+
+- type: entity
+  parent: CMCatwalk
+  id: RMCCatwalkKutjevo
+  components:
+  - type: Sprite
+    state: kutjevo_catwalk
+
+- type: entity
+  parent: CMCatwalk
+  id: RMCCatwalkStrata
+  components:
+  - type: Sprite
+    state: strata_catwalk
+
+- type: entity
+  parent: CMCatwalk
+  id: RMCCatwalkHybrisa
+  name: solid metal grate
+  components:
+  - type: Sprite
+    state: solidgrate1
+
+- type: entity
+  parent: CMCatwalk
+  id: RMCCatwalkHybrisaLattice
+  name: structural lattice
+  components:
+  - type: Sprite
+    state: latticefull
+
+- type: entity
+  parent: CMCatwalk
+  id: RMCCatwalkHybrisaElevator
+  name: solid metal grate
+  components:
+  - type: Sprite
+    state: solidgrate5
 
 # Monorail
 
@@ -88,7 +139,7 @@
         volume: 8
   - type: Tag
     tags:
-      - Catwalk
+    - Catwalk
 
 - type: entity
   parent: RMCMonorailStraight

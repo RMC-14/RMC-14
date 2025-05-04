@@ -1,0 +1,6 @@
+- type: soundCollection
+  id: RMCKeyboardTyping
+  files:
+    - /Audio/_RMC14/Machines/keyboard1.ogg
+    - /Audio/_RMC14/Machines/keyboard2.ogg
+    - /Audio/_RMC14/Machines/keyboard3.ogg

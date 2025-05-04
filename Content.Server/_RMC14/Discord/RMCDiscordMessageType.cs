@@ -3,4 +3,5 @@
 public enum RMCDiscordMessageType : byte
 {
     Admin,
+    Mentor,
 }

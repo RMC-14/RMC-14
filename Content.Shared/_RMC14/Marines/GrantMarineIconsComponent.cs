@@ -1,4 +1,4 @@
-﻿﻿﻿using Content.Shared.Inventory;
+﻿using Content.Shared.Inventory;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Marines;

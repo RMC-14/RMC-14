@@ -1,10 +1,12 @@
 ﻿- type: entity
   parent: AdminObserver
   id: RMCAdminObserver
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: Loadout
     prototypes: [ RMCMobAghostGear ]
+  - type: IntrinsicUI
+    uis: { }
 
 - type: startingGear
   parent: MobAghostGear

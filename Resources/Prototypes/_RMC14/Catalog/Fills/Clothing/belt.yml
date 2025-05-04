@@ -10,7 +10,7 @@
     - id: CMWelder
     - id: CMCrowbar
     - id: CMWirecutter
-#    - id: CMCableCoil30 TODO RMC14
+    - id: RMCCableCoil30
     - id: CMMultitool
 
 - type: entity
@@ -26,6 +26,7 @@
     - id: CMWirecutter
     - id: CMWelder
     - id: CMMultitool
+    - id: RMCCableCoil30
 
 - type: entity
   parent: CMBeltKnife
@@ -53,7 +54,7 @@
     - id: CMPillCanisterInaprovaline
       amount: 1
     # TODO RMC14 tramadol and perixadon pills, splint
-    - id: CMOintment10
+    - id: CMBurnKit10
       amount: 1
     - id: CMTraumaKit10
       amount: 1
@@ -65,7 +66,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMOintment10
+    - id: CMBurnKit10
       amount: 2
     - id: CMTraumaKit10
       amount: 2
@@ -96,7 +97,9 @@
     - id: CMGrenadeHighExplosive
       amount: 5
     - id: CMGrenadeFrag
-      amount: 3
+      amount: 1
+    - id: RMCGrenadeIncendiary
+      amount: 2
     # TODO Original is 3 HEDP, 2 HIDP incen, 2 airburst frag, 1 airburst incen
 
 - type: entity
@@ -109,12 +112,36 @@
     - id: CMGrenadeHighExplosive
       amount: 12
     - id: CMGrenadeFrag
-      amount: 6
+      amount: 3
+    - id: RMCGrenadeIncendiary
+      amount: 3
     # TODO Original is 6 HEDP, 3 HIDP incen, 6 airburst frag, 3 airburst incen
+
+- type: entity
+  parent: RMCBeltGrenadeLarge
+  id: RMCBeltGrenadeHEFA
+  name: M276 HEFA rig Mk. XVII
+  description: The M276 HEFA rig Mk. XVII is an upgraded version of the M276 grenade rig, with more storage capacity.
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFrag
+      amount: 17
 
 - type: entity
   parent: CMBeltSmartGunOperator
   id: CMBeltSmartGunOperatorFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSmartGun
+      amount: 2
+
+- type: entity
+  parent: RMCBeltSmartGunOperatorPistol
+  id: RMCBeltSmartGunOperatorPistolFilled
   suffix: Filled
   components:
   - type: StorageFill
@@ -131,3 +158,53 @@
     contents:
     - id: RMCMagazinePistolSU6
       amount: 6
+
+- type: entity
+  parent: CMBeltMarine
+  id: CMBeltMarineAR10
+  suffix: Filled, AR10
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleAR10
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: CMBeltMarineHunting
+  suffix: Filled, Basira Armstrong
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleHunting
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: CMBeltMarineBuckshot
+  suffix: Filled, Buckshot
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBuckshot
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: CMBeltMarineMP5
+  suffix: Filled, MP5
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineSMGMP5
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: CMBeltMarineM16
+  suffix: Filled, M16
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleM16
+      amount: 5

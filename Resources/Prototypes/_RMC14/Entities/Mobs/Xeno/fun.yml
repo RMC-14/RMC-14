@@ -1,5 +1,7 @@
 ﻿- type: entity
-  parent: CMXenoRunner
+  parent:
+  - CMXenoRunner
+  - RMCXenoCommendationReceiver
   id: RMCXenoRouny
   name: Rouny
   suffix: RMC14
@@ -8,11 +10,15 @@
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Rouny/rouny.rsi
   - type: XenoEvolution
-    max: 300
+    max: 200
     evolvesTo: [ ]
+  - type: Xeno
+    hidden: true
 
 - type: entity
-  parent: CMXenoRunner
+  parent:
+  - CMXenoRunner
+  - RMCXenoCommendationReceiver
   id: RMCXenoWehny
   name: Wehny
   description: A cruel, cruel joke made by some sick individual.
@@ -20,5 +26,7 @@
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Wehny/wehny.rsi
   - type: XenoEvolution
-    max: 300
+    max: 200
     evolvesTo: [ ]
+  - type: Xeno
+    hidden: true

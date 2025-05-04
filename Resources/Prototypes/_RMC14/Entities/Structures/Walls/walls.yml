@@ -12,6 +12,8 @@
   - type: Tag
     tags:
     - Wall
+  - type: ReceiverXenoClaws
+    maxHealth: 3000
   - type: Destructible
     thresholds:
     - trigger:
@@ -71,6 +73,9 @@
   - type: Tag
     tags:
     - Wall
+  - type: ReceiverXenoClaws
+    maxHealth: 9000
+    minimumClawStrength: VerySharp
   - type: Destructible
     thresholds:
     - trigger:
@@ -93,6 +98,7 @@
   name: reinforced wall
   id: CMWallSuperReinforced
   description: A huge chunk of reinforced metal used to separate rooms. Looks very robust.
+  suffix: Super Reinforced
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/rwall.rsi
@@ -101,6 +107,9 @@
   - type: Tag
     tags:
     - Wall
+  - type: ReceiverXenoClaws
+    maxHealth: 9000
+    minimumClawStrength: VerySharp
   - type: Destructible
     thresholds:
     - trigger:
@@ -286,6 +295,8 @@
   - type: Tag
     tags:
     - Wall
+  - type: ReceiverXenoClaws
+    maxHealth: 3000
   - type: Destructible
     thresholds:
     - trigger:
@@ -313,6 +324,8 @@
   - type: Tag
     tags:
     - Wall
+  - type: ReceiverXenoClaws
+    maxHealth: 3000
   - type: Destructible
     thresholds:
     - trigger:
@@ -376,6 +389,143 @@
   - type: Occluder
     enabled: false
 
+# Containment
+
+- type: entity
+  parent: CMBaseWallInvincible
+  id: RMCWallContainment
+  name: cell wall
+  description : A metal wall used to separate rooms and make up the ship
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/containment.rsi
+    state: containment_wall_south
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/containment.rsi
+    state: containment_wall_south
+
+- type: entity
+  parent: RMCWallContainment
+  id: RMCWallContainmentCorner
+  components:
+  - type: Sprite
+    state: containment_wall_corner
+  - type: Icon
+    state: containment_wall_corner
+
+- type: entity
+  parent: RMCWallContainment
+  id: RMCWallContainmentWest
+  components:
+  - type: Sprite
+    state: containment_wall_w
+  - type: Icon
+    state: containment_wall_w
+
+- type: entity
+  parent: RMCWallContainment
+  id: RMCWallContainmentEast
+  components:
+  - type: Sprite
+    state: containment_wall_e
+  - type: Icon
+    state: containment_wall_e
+
+- type: entity
+  parent: RMCWallContainment
+  id: RMCWallContainmentNorth
+  components:
+  - type: Sprite
+    state: containment_wall_n
+  - type: Icon
+    state: containment_wall_n
+
+- type: entity
+  parent: RMCWallContainment
+  id: RMCWallContainmentConnect1
+  components:
+  - type: Sprite
+    state: containment_wall_connect_e
+  - type: Icon
+    state: containment_wall_connect_e
+
+- type: entity
+  parent: RMCWallContainment
+  id: RMCWallContainmentConnect2
+  components:
+  - type: Sprite
+    state: containment_wall_connect3
+  - type: Icon
+    state: containment_wall_connect3
+
+- type: entity
+  parent: RMCWallContainment
+  id: RMCWallContainmentConnect3
+  components:
+  - type: Sprite
+    state: containment_wall_connect_w
+  - type: Icon
+    state: containment_wall_connect_w
+
+- type: entity
+  parent: RMCWallContainment
+  id: RMCWallContainmentConnect4
+  components:
+  - type: Sprite
+    state: containment_wall_connect_w2
+  - type: Icon
+    state: containment_wall_connect_w2
+
+- type: entity
+  parent: RMCWallContainment
+  id: RMCWallContainmentConnect5
+  components:
+  - type: Sprite
+    state: containment_wall_connect_e2
+  - type: Icon
+    state: containment_wall_connect_e2
+
+- type: entity
+  parent: RMCWallContainment
+  id: RMCWallContainmentConnect6
+  components:
+  - type: Sprite
+    state: containment_wall_connect_s1
+  - type: Icon
+    state: containment_wall_connect_s1
+
+- type: entity
+  parent: RMCWallContainment
+  id: RMCWallContainmentConnect7
+  components:
+  - type: Sprite
+    state: containment_wall_connect_s2
+  - type: Icon
+    state: containment_wall_connect_s2
+
+- type: entity
+  parent: RMCWallContainment
+  id: RMCWallContainmentWindow
+  name: cell window
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/containment.rsi
+    state: containment_window_h
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/containment.rsi
+    state: containment_window_h
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCWallContainmentWindow
+  id: RMCWallContainmentWindow2
+  components:
+  - type: Sprite
+    state: containment_window
+  - type: Icon
+    state: containment_window
+
 # Hunter Walls
 
 - type: entity
@@ -414,5 +564,6 @@
     tags:
     - Wall
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: Corrodible
     isCorrodible: true

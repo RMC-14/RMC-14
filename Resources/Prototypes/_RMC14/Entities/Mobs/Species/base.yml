@@ -16,6 +16,7 @@
         restitution: 0.0
         mask:
         - MobMask
+        - BarbedBarricade
         layer:
         - Opaque
         - XenoProjectileImpassable
@@ -23,7 +24,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.25
-        density: 185
+        density: 0
         restitution: 0.0
         layer:
         - BulletImpassable
@@ -62,6 +63,8 @@
     - Pacified
     - StaminaModifier
     - Flashed
+    - Dazed
+    - Blinded
   - type: Blindable
   - type: Tag
     tags:
@@ -72,6 +75,19 @@
   - type: RMCSuitLight
   - type: HolocardState
   - type: Hunger
+    baseDecayRate: 0.025
+    thresholds:
+      Overfed: 550
+      Okay: 400
+      Peckish: 250
+      Starving: 50
+      Dead: 0
+    hungerThresholdDecayModifiers:
+      Overfed: 1
+      Okay: 1
+      Peckish: 1
+      Starving: 1
+      Dead: 0
   - type: Thirst
     baseDecayRate: 0.01666666666
   - type: Body
@@ -89,9 +105,10 @@
   - type: Flammable
     fireSpread: false
     canResistFire: true
+    firestackFade: 1
     damage:
       types:
-        Heat: 3
+        Heat: 1
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
     normalState: Generic_mob_burning
@@ -99,7 +116,7 @@
   - type: MeleeWeapon
     soundHit:
       collection: Punch
-    angle: 30
+    angle: 0
     animation: WeaponArcFist
     attackRate: 1
     damage:
@@ -124,10 +141,15 @@
         requireInputValidation: false
       enum.TacticalMapUserUi.Key:
         type: TacticalMapUserBui
+      enum.SquadLeaderTrackerUI.Key:
+        type: SquadInfoBui
+      enum.DialogUiKey.Key:
+        type: DialogBui
+      enum.ViewIntelObjectivesUI.Key:
+        type: ViewIntelObjectivesBui
   - type: Infectable
   - type: Tackleable
   - type: Tackle
-    stun: 10
   - type: XenoNestable
   - type: Devourable
   - type: ImmuneToClothingRequiredStepTrigger
@@ -169,17 +191,35 @@
   - type: UserIFF
   - type: UserLimitHits
   - type: MovementIgnoreGravity
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.7
+    baseSprintSpeed: 5
   - type: SlowOnPull
-    multiplier: 0.6
     slowdowns:
-    - multiplier: 0.5
+    - multiplier: 0.745
       whitelist:
         components:
-        - Xeno
+        - Marine
+    - multiplier: 0.855
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.5775
+      whitelist:
+        components:
+        - XenoHeavy
+    - multiplier: 0.645
+      whitelist:
+        tags:
+        - BodyBag
+    - multiplier: 0.645
+      whitelist:
+        components:
+        - ResistLocker #Lockers/Crates
   - type: MobThresholds
     thresholds:
       0: Alive
-      125: Critical
+      150: Critical
       200: Dead
   - type: MobStateActions
     actions:
@@ -215,6 +255,39 @@
             sprite: _RMC14/Effects/xeno_spray_acid.rsi
             state: human_acid_enhanced
             visible: true
+      enum.HookedVisuals.Hooked:
+        hooked:
+          True: { visible: true }
+          False: { visible: false }
+      enum.TargetedVisuals.Targeted:
+        targeted:
+          None:
+            visible: false
+          Spotted:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: spotter_lockon
+            visible: true
+          Targeted:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: sniper_lockon
+            visible: true
+          TargetedIntense:
+            sprite: _RMC14/Effects/targeted.rsi
+            state: sniper_lockon_intense
+            visible: true
+      enum.TargetedVisuals.TargetedDirection:
+        targetedDirection:
+          True: { visible: true}
+          False: { visible: false}
+      enum.TargetedVisuals.TargetedDirectionIntense:
+        targetedDirectionIntense:
+          True: { visible: true }
+          False: { visible: false }
+      enum.FocusedVisuals.Focused:
+        focused:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Spottable
   - type: ActiveInputMover
   - type: DropItemsOnRest
   - type: UserBlockShootingInsideContainers
@@ -223,3 +296,56 @@
   - type: TacticalMapUser
     actionId: RMCActionOpenTacticalMapMarine
     marines: true
+  - type: EmoteCooldown
+  - type: FiremanCarriable
+  - type: CanFiremanCarry
+  - type: RMCSuicide
+    damage:
+      types:
+        Piercing: 100
+        Asphyxiation: 200
+  - type: RMCUserPryingRequiresTool
+  - type: BlockEntityStorage
+    whitelist:
+      components:
+      - CanBeSupplyDropped
+  - type: NewPlayerLabel
+  - type: MarineMapTracked
+  - type: RMCSetPose
+  - type: Evasion
+  - type: CanBeFirePatted
+  - type: FirePatter
+    stacks: -10
+    blacklist:
+      components:
+      - Xeno
+  - type: RMCPickupDroppedItems
+  - type: CommendationReceiver
+  - type: RMCSpeciesSlowdownModifier
+    slowModifier: 2
+    superSlowModifier: 4
+  - type: RMCHandEmotes
+  - type: RMCBuckleDrawDepth
+  - type: RMCObstacleSlamming
+  - type: AllowPullWhileDeadAndInfected
+  - type: DamageOnPulledWhileCrit
+    damage:
+      types:
+        Asphyxiation: 1.6
+    pullerWhitelist:
+      components:
+      - Xeno # TODO RMC14 not allied xenos
+  - type: IgnoreInteractionRange
+    whitelist:
+      components:
+      - OverwatchConsole
+      tags:
+      - RMCDropshipEnginePoint
+    range: 2
+  - type: RMCArmorModifier
+    meleeArmorModifier: 5
+  - type: RMCObstacleSlamCauserImmune
+  - type: MobCollision
+  - type: RMCMobCollision
+  - type: RMCRest
+  - type: StunOnExplosionReceived # TODO should also cause hearing loss

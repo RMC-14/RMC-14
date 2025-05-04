@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/f7b9367cb5c083a8c052a40dece9417031e28ffe/icons/turf/floors/desertdam_map.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "road_edge_decal1"
+    },
+    {
+      "name": "road_edge_decal2"
+    },
+    {
+      "name": "road_edge_decal3"
+    },
+    {
+      "name": "road_edge_decal4"
+    },
+    {
+      "name": "road_edge_decal5"
+    },
+    {
+      "name": "road_edge_decal6"
+    },
+    {
+      "name": "road_edge_decal7"
+    },
+    {
+      "name": "road_edge_decal8"
+    },
+    {
+      "name": "road_edge_decal9"
+    },
+    {
+      "name": "road_edge_decal10"
+    },
+    {
+      "name": "road_edge_decal11"
+    },
+    {
+      "name": "road_edge_decal12"
+    },
+    {
+      "name": "stop_decal1"
+    },
+    {
+      "name": "stop_decal2"
+    },
+    {
+      "name": "stop_decal3"
+    },
+    {
+      "name": "stop_decal4"
+    },
+    {
+      "name": "stop_decal5",
+      "directions": 4
+    }
+  ]
+}

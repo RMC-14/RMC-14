@@ -23,3 +23,12 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Storage/Briefcases/suit.rsi
+
+- type: entity
+  parent: RMCBriefcase
+  id: RMCBriefcasePaperPen
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPaper
+    - id: CMPen

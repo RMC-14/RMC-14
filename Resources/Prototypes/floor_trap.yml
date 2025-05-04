@@ -48,17 +48,17 @@
       maxIntensity: 4
     - type: DeleteOnTrigger
 
-- type: entity
-  parent: CollideFloorTrap
-  id: FloorTrapEMP
-  name: EMP floor trap
-  components:
-    - type: TriggerOnCollide
-      fixtureID: floortrap
-    - type: EmpOnTrigger
-      range: 2
-      energyConsumption: 5000
-    - type: DeleteOnTrigger
+#- type: entity
+#  parent: CollideFloorTrap
+#  id: FloorTrapEMP
+#  name: EMP floor trap
+#  components:
+#    - type: TriggerOnCollide
+#      fixtureID: floortrap
+#    - type: EmpOnTrigger
+#      range: 2
+#      energyConsumption: 5000
+#    - type: DeleteOnTrigger
 
 - type: entity
   parent: CollideFloorTrapSpawn

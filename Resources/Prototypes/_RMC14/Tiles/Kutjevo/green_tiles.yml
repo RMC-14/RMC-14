@@ -1,0 +1,79 @@
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: RMCFloorKutjevoGreenBase
+  name: tiles-cm-default-green
+  suffix: kutjevo
+
+- type: tile
+  parent: RMCFloorKutjevoGreenBase
+  id: RMCFloorKutjevoGreen1
+  sprite: /Textures/_RMC14/Tiles/kutjevo/green1.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreenBase
+  id: RMCFloorKutjevoGreen2
+  sprite: /Textures/_RMC14/Tiles/kutjevo/green2.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreenBase
+  id: RMCFloorKutjevoGreen3_0
+  sprite: /Textures/_RMC14/Tiles/kutjevo/green3_0.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreenBase
+  id: RMCFloorKutjevoGreen3_1
+  sprite: /Textures/_RMC14/Tiles/kutjevo/green3_1.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreenBase
+  id: RMCFloorKutjevoGreen3_2
+  sprite: /Textures/_RMC14/Tiles/kutjevo/green3_2.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreenBase
+  id: RMCFloorKutjevoGreen3_3
+  sprite: /Textures/_RMC14/Tiles/kutjevo/green3_3.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreenBase
+  id: RMCFloorKutjevoGreen3_4
+  sprite: /Textures/_RMC14/Tiles/kutjevo/green3_4.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreenBase
+  id: RMCFloorKutjevoGreen3_5
+  sprite: /Textures/_RMC14/Tiles/kutjevo/green3_5.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreenBase
+  id: RMCFloorKutjevoGreen3_6
+  sprite: /Textures/_RMC14/Tiles/kutjevo/green3_6.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreenBase
+  id: RMCFloorKutjevoGreen3_7
+  sprite: /Textures/_RMC14/Tiles/kutjevo/green3_7.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreenBase
+  id: RMCFloorKutjevoGreen4_0
+  sprite: /Textures/_RMC14/Tiles/kutjevo/green4_0.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreenBase
+  id: RMCFloorKutjevoGreen4_1
+  sprite: /Textures/_RMC14/Tiles/kutjevo/green4_1.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreenBase
+  id: RMCFloorKutjevoGreen4_2
+  sprite: /Textures/_RMC14/Tiles/kutjevo/green4_2.png
+  
+- type: tile
+  parent: RMCFloorKutjevoGreenBase
+  id: RMCFloorKutjevoGreen4_3
+  sprite: /Textures/_RMC14/Tiles/kutjevo/green4_3.png
+  
+  
+

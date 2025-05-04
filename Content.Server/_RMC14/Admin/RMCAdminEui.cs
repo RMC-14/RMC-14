@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Server._RMC14.Rules;
+using Content.Server._RMC14.Xenonids.Hive;
 using Content.Server.Administration;
 using Content.Server.Administration.Managers;
 using Content.Server.EUI;
@@ -15,6 +15,8 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Administration;
 using Content.Shared.Eui;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.NPC.Prototypes;
+using Content.Shared.NPC.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Reflection;
 using Robust.Shared.Utility;
@@ -30,7 +32,7 @@ public sealed class RMCAdminEui : BaseEui
 
     private readonly RMCAdminSystem _rmcAdmin;
     private readonly SharedCMAutomatedVendorSystem _automatedVendor;
-    private readonly SharedXenoHiveSystem _hive;
+    private readonly XenoHiveSystem _hive;
     private readonly MindSystem _mind;
     private readonly SquadSystem _squad;
     private readonly SharedTransformSystem _transform;
@@ -44,7 +46,7 @@ public sealed class RMCAdminEui : BaseEui
 
         _rmcAdmin = _entities.System<RMCAdminSystem>();
         _automatedVendor = _entities.System<SharedCMAutomatedVendorSystem>();
-        _hive = _entities.System<SharedXenoHiveSystem>();
+        _hive = _entities.System<XenoHiveSystem>();
         _mind = _entities.System<MindSystem>();
         _squad = _entities.System<SquadSystem>();
         _transform = _entities.System<SharedTransformSystem>();
@@ -67,6 +69,7 @@ public sealed class RMCAdminEui : BaseEui
     public static RMCAdminEuiState CreateState(IEntityManager entities, Guid tacticalMapLines)
     {
         var squadSys = entities.System<SquadSystem>();
+        var factionSys = entities.System<NpcFactionSystem>();
         var hives = new List<Hive>();
         var hiveQuery = entities.EntityQueryEnumerator<HiveComponent, MetaDataComponent>();
         while (hiveQuery.MoveNext(out var uid, out _, out var metaData))
@@ -115,7 +118,11 @@ public sealed class RMCAdminEui : BaseEui
         var rmcAdmin = entities.System<RMCAdminSystem>();
         var history = rmcAdmin.LinesDrawn.Reverse().Select(l => (l.Id, l.Actor, l.Round)).ToList();
         var lines = rmcAdmin.LinesDrawn.FirstOrDefault(l => l.Item1 == tacticalMapLines);
-        return new RMCAdminEuiState(hives, squads, xenos, marines, history, lines);
+
+        var allFactions = factionSys.GetFactions();
+        var dummy = allFactions.GetValueOrDefault("RMCDumb", new FactionData());
+        var factions = allFactions.Where((x) => dummy.Hostile.Contains(x.Key)).ToDictionary();
+        return new RMCAdminEuiState(hives, squads, xenos, marines, history, lines, factions);
     }
 
     public override EuiStateBase GetNewState()
@@ -154,6 +161,7 @@ public sealed class RMCAdminEui : BaseEui
             state.Marines,
             state.TacticalMapHistory,
             state.TacticalMapLines,
+            state.Factions,
             specialistSkills,
             points,
             extraPoints
@@ -244,14 +252,17 @@ public sealed class RMCAdminEui : BaseEui
                     _entities.TryGetEntity(changeHive.Hive.Id, out var hive))
                 {
                     _xeno.MakeXeno(target.Value);
-                    _xeno.SetHive(target.Value, hive.Value);
+                    _hive.SetHive(target.Value, hive.Value);
                 }
 
                 break;
             }
             case RMCAdminCreateHiveMsg createHive:
             {
-                _hive.CreateHive(createHive.Name);
+                var hive = _hive.CreateHive(createHive.Name);
+                // automatically set the xeno's hive to the one you just created
+                if (_entities.TryGetEntity(_target, out var target))
+                    _hive.SetHive(target.Value, hive);
                 StateDirty();
                 break;
             }
@@ -280,10 +291,7 @@ public sealed class RMCAdminEui : BaseEui
 
                 var coordinates = _transform.GetMoverCoordinates(entity);
                 var newXeno = _entities.SpawnAttachedTo(transformXeno.XenoId, coordinates);
-                if (_entities.TryGetComponent(entity, out XenoComponent? xeno))
-                    _xeno.SetHive(newXeno, xeno.Hive);
-                else if (_entities.EntityQuery<CMDistressSignalRuleComponent>().TryFirstOrDefault(out var ruleComponent))
-                    _xeno.SetHive(newXeno, ruleComponent.Hive);
+                _hive.SetSameHive(entity, newXeno);
 
                 if (_mind.TryGetMind(entity, out var mindId, out var mind))
                 {

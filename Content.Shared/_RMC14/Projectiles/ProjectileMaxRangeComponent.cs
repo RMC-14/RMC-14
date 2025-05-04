@@ -12,4 +12,7 @@ public sealed partial class ProjectileMaxRangeComponent : Component
 
     [DataField(required: true), AutoNetworkedField]
     public float Max;
+
+    [DataField, AutoNetworkedField]
+    public bool Delete = true;
 }

@@ -83,10 +83,36 @@
     offState: off
     brokenState: broken
     normalState: normal-unshaded
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: ActivatableUIBlacklist
     blacklist:
       components:
       - Xeno
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Breakage"]
+      - !type:EjectVendorItems
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
 
 - type: vendingMachineInventory
   id: CMVendomat
@@ -195,8 +221,9 @@
   id: CMVendorCigs
   startingInventory:
     RMCCigarettePackLuckySloths: 50
-    RMCTarbackCase: 15
-    Lighter: 25
+    RMCTarbackTube: 20
+    RMCMatchboxFull: 15
+    RMCLighter: 25
     RMCZippo: 10
 
 
@@ -221,8 +248,8 @@
   id: CMVendorSec
   startingInventory: # TODO RMC14
     RMCHandcuffs: 8
-    Zipties: 10
-    GrenadeFlashBang: 4
+    RMCZipties: 10
+    RMCGrenadeFlashBang: 4
     RMCWeaponTaser: 4
     # Pepper spray 4
     CMStunbaton: 4
@@ -236,8 +263,37 @@
     CMJumpsuitMP: 2
     CMHeadBeretRed: 6
     CMGlassesSecurity: 3
-    CMHeadsetMPO: 6
+    CMHeadset: 6
 
+- type: entity
+  parent: CMVendor
+  id: RMCVendorSecArmory
+  name: Riot Tech
+  description: A Police Riot equipment vendor.
+  suffix: Military Police
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/sec.rsi
+  - type: VendingMachine
+    pack: RMCVendorRiot
+    denyState: deny-unshaded
+    ejectState: eject-unshaded
+  - type: AccessReader
+    access: [["CMAccessBrig"]]
+
+- type: vendingMachineInventory
+  id: RMCVendorRiot
+  startingInventory: # TODO RMC14
+    RMCZipties: 40
+    RMCGrenadeFlashBang: 20
+    RMCMagazineSMGM63Rubber: 40
+    ##RMCGrenadeTearGas: 40
+    RMCMagazinePistolM1984Rubber: 40
+    RMCMagazinePistolM77Rubber: 40
+    RMCMagazineRifleM54CRubber: 40
+    RMCMagazineRifleM4SPRRubber: 40
+    CMArmorHelmetM10MP: 8
+    ##RMCBreachingChargeRiot: 6
 
 # Senior Enlisted Advisor
 - type: entity
@@ -259,14 +315,14 @@
 - type: vendingMachineInventory
   id: CMVendorSEA
   startingInventory: # TODO RMC14
-    #m63 rubber ammo 20
-    #pistol rubber ammo 20
-    #M77 rubber ammo 20
-    #rifle rubber ammo 20
-    #m4spr rubber ammo 20
-    #shotgun beanbag 20
+    RMCMagazineSMGM63Rubber: 20
+    RMCMagazinePistolM1984Rubber: 20
+    RMCMagazinePistolM77Rubber: 20
+    RMCMagazineRifleM54CRubber: 20
+    RMCMagazineRifleM4SPRRubber: 20
+    CMShellShotgunBeanbag: 20
     CMFirstAidKitFilled: 2
-    CMBurnAidKitFilled: 2 #firstaid fire 2
+    CMBurnAidKitFilled: 2
     #MedkitRadiationFilled: 1 #firstaid rad 1
     # Crew Monitor
 
@@ -288,12 +344,15 @@
 - type: vendingMachineInventory
   id: CMVendorNutri
   startingInventory:
-    EZNutrientChemistryBottle: 35
-    Left4ZedChemistryBottle: 25
-    RobustHarvestChemistryBottle: 15
+    ChemistryBottleEZNutrient: 35
+    ChemistryBottleLeft4Zed: 25
+    ChemistryBottleRobustHarvest: 15
     PestSpray: 20
     Syringe: 5
     PlantBag: 5
+    HydroponicsToolSpade: 3
+    HydroponicsToolHatchet: 3
+    HydroponicsToolScythe: 3
 
 
 # Seeds
@@ -342,32 +401,109 @@
     PumpkinSeeds: 3
     # CherrySeed: 3
     RiceSeeds: 3
+    GarlicSeeds: 3
+    OnionSeeds: 3
 
 
 # Dinnerware
 - type: entity
-  parent: CMVendor
+  parent: ColMarTechBaseAnchorable
   id: CMVendorDinnerware
   name: Dinnerware
   description: A kitchen and restaraunt equipment vendor.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/dinnerware.rsi
-  - type: VendingMachine
-    pack: CMVendorDinnerware
-
-- type: vendingMachineInventory
-  id: CMVendorDinnerware
-  startingInventory:
-    # TODO RMC14 Tray: 8
-    Fork: 6
-    KitchenKnife: 3
-    DrinkGlass: 8
-    CMJumpsuitMessTech: 2
-    FoodShakerSalt: 4
-    FoodShakerPepper: 4
-    FoodCondimentBottleEnzyme: 1
-
+    snapCardinals: true
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "normal-unshaded"
+      map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
+      shader: unshaded
+    - state: "panel"
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: ApcPowerReceiver
+    needsPower: false # TODO RMC14
+    powerLoad: 0
+  - type: Appearance
+  - type: LitOnPowered
+  - type: Wires
+    boardName: wires-board-name-vendingmachine
+    layoutId: Vending
+  - type: WiresPanel
+  - type: WiresVisuals
+  - type: CMAutomatedVendor
+    scaling: false
+    sections:
+    - name: Products
+      entries:
+      - id: RMCFork
+        amount: 6
+      - id: RMCSpoon
+        amount: 4
+      - id: RMCKitchenKnife
+        amount: 5
+      - id: DrinkShaker
+        amount: 5
+      - id: DrinkGlass
+        amount: 8
+      - id: ClothingOuterApronChef
+        amount: 2
+      - id: RMCCondimentSmallSalt
+        amount: 4
+      - id: RMCCondimentSmallPepper
+        amount: 4
+      - id: RMCCondimentEnzyme
+        amount: 1
+      - id: RMCCondiment
+        amount: 8
+      - id: FoodPlateTin
+        amount: 5
+      - id: FoodBowlBig
+        amount: 10
+      - id: RMCKitchenKnifeButcher
+        amount: 1
+      - id: RMCKitchenKnifeChef
+        amount: 3
+      - id: RMCRollingPin
+        amount: 4
+      - id: PairedChopsticks
+        amount: 4
+      - id: FoodPlate
+        amount: 10
+      - id: FoodPlateSmall
+        amount: 10
+      - id: FoodPlateMuffinTin
+        amount: 5
+      - id: FoodKebabSkewer
+        amount: 5
+      - id: CMBeaker
+        amount: 5
+      - id: CMBeakerLarge
+        amount: 5
+      - id: Pitcher
+        amount: 2
+      - id: DrinkMug
+        amount: 5
+      - id: DrinkMugBlack
+        amount: 2
+      - id: DrinkMugBlue
+        amount: 2
+      - id: DrinkMugGreen
+        amount: 2
+      - id: DrinkMugHeart
+        amount: 1
+      - id: DrinkMugMetal
+        amount: 2
+      - id: DrinkMugMoebius
+        amount: 1
+      - id: DrinkMugOne
+        amount: 1
+      - id: DrinkMugRainbow
+        amount: 2
+      - id: DrinkMugRed
+        amount: 2
 
 # BODA
 - type: entity
@@ -389,44 +525,79 @@
 
 # Ingridients
 - type: entity
-  parent: CMVendor
+  parent: CMVendorDinnerware
   id: CMVendorIngredients
   name: Galley Auxiliary Storage Requisition System
   description: A vending machine meant to be use for cooks.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/snack.rsi
-  - type: VendingMachine
-    pack: CMVendorIngredient
-
-- type: vendingMachineInventory
-  id: CMVendorIngredient
-  startingInventory:
-    FoodContainerEgg: 12
-    FoodMeatFish: 12
-    FoodMeat: 12
-    ReagentContainerCornmeal: 12
-    ReagentContainerRice: 12
-    ReagentContainerMayo: 12
-    ReagentContainerFlour: 12
-    ReagentContainerSugar: 12
-    ReagentContainerOliveoil: 12
-    FoodCondimentBottleEnzyme: 12
-    FoodShakerSalt: 12
-    FoodShakerPepper: 12
+  - type: CMAutomatedVendor
+    scaling: false
+    sections:
+    - name: Products
+      entries:
+      - id: FoodContainerEgg
+        amount: 12
+      - id: FoodMeatFish
+        amount: 12
+      - id: FoodMeat
+        amount: 24
+      - id: DrinkMilkCarton
+        amount: 24
+      - id: DrinkSoyMilkCarton
+        amount: 12
+      - id: RMCCondimentEnzyme
+        amount: 12
+      - id: ReagentContainerFlour
+        amount: 12
+      - id: RMCCondimentSugar
+        amount: 12
+      - id: RMCCondimentCornOil
+        amount: 12
+      - id: RMCCondimentSmallSalt
+        amount: 12
+      - id: RMCCondimentSmallPepper
+        amount: 12
     # TODO RMC14 Mint 12
-    FoodApple: 12
-    FoodBanana: 12
-    FoodMushroom: 12
-    # TODO RMC14 Cherry 12
-    FoodChiliPepper: 12
-    FoodCabbage: 12
-    FoodCarrot: 12
-    FoodCorn: 12
-    FoodEggplant: 12
-    FoodLemon: 12
-    FoodLime: 12
-    FoodOrange: 12
-    FoodPotato: 12
-    FoodTomato: 12
+      - id: FoodApple
+        amount: 12
+      - id: FoodBanana
+        amount: 12
+      - id: FoodMushroom
+        amount: 12
+      - id: FoodCherry
+        amount: 12
+      - id: FoodChiliPepper
+        amount: 12
+      - id: FoodCabbage
+        amount: 12
+      - id: FoodCarrot
+        amount: 12
+      - id: FoodCorn
+        amount: 12
+      - id: FoodEggplant
+        amount: 12
+      - id: FoodLemon
+        amount: 12
+      - id: FoodLime
+        amount: 12
+      - id: FoodOrange
+        amount: 12
+      - id: FoodPotato
+        amount: 12
+      - id: FoodTomato
+        amount: 12
     # TODO RMC14 Whitebeet 12
+      - id: FoodOnion
+        amount: 12
+      - id: FoodOnionRed
+        amount: 12
+      - id: FoodGarlic
+        amount: 12
+      - id: ReagentContainerRice
+        amount: 12
+      - id: ReagentContainerOliveoil
+        amount: 12
+      - id: FoodCondimentBottleVinegar
+        amount: 12

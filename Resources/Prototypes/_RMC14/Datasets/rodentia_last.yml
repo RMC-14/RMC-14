@@ -1,0 +1,7 @@
+# rodentia name scheme is "adjective-trait name", like "long-ears monty"
+
+- type: localizedDataset
+  id: names_rodentia_last
+  values:
+    prefix: rmc-name-rodentia-last-
+    count: 87

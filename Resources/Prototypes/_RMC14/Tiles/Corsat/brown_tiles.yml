@@ -1,0 +1,65 @@
+﻿- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: CMFloorCorsatBrownBase
+  name: tiles-cm-default-brown
+
+- type: tile
+  parent: CMFloorCorsatBrownBase
+  id: CMFloorCorsatBrown0
+  sprite: /Textures/_RMC14/Tiles/corsat/brown_0.png
+
+- type: tile
+  parent: CMFloorCorsatBrownBase
+  id: CMFloorCorsatBrown1
+  sprite: /Textures/_RMC14/Tiles/corsat/brown_1.png
+
+- type: tile
+  parent: CMFloorCorsatBrownBase
+  id: CMFloorCorsatBrown2
+  sprite: /Textures/_RMC14/Tiles/corsat/brown_2.png
+
+- type: tile
+  parent: CMFloorCorsatBrownBase
+  id: CMFloorCorsatBrown3
+  sprite: /Textures/_RMC14/Tiles/corsat/brown_3.png
+
+- type: tile
+  parent: CMFloorCorsatBrownBase
+  id: CMFloorCorsatBrown4
+  sprite: /Textures/_RMC14/Tiles/corsat/brown_4.png
+
+- type: tile
+  parent: CMFloorCorsatBrownBase
+  id: CMFloorCorsatBrown5
+  sprite: /Textures/_RMC14/Tiles/corsat/brown_5.png
+
+- type: tile
+  parent: CMFloorCorsatBrownBase
+  id: CMFloorCorsatBrown6
+  sprite: /Textures/_RMC14/Tiles/corsat/brown_6.png
+
+- type: tile
+  parent: CMFloorCorsatBrownBase
+  id: CMFloorCorsatBrown7
+  sprite: /Textures/_RMC14/Tiles/corsat/brown_7.png
+
+- type: tile
+  parent: CMFloorCorsatBrownBase
+  id: CMFloorCorsatBrownCorner0
+  sprite: /Textures/_RMC14/Tiles/corsat/browncorner_0.png
+
+- type: tile
+  parent: CMFloorCorsatBrownBase
+  id: CMFloorCorsatBrownCorner1
+  sprite: /Textures/_RMC14/Tiles/corsat/browncorner_1.png
+
+- type: tile
+  parent: CMFloorCorsatBrownBase
+  id: CMFloorCorsatBrownCorner2
+  sprite: /Textures/_RMC14/Tiles/corsat/browncorner_2.png
+
+- type: tile
+  parent: CMFloorCorsatBrownBase
+  id: CMFloorCorsatBrownCorner3
+  sprite: /Textures/_RMC14/Tiles/corsat/browncorner_3.png

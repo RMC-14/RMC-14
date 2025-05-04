@@ -1,0 +1,9 @@
+﻿- files: ["powerloader_buckle.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/183b50b774c6faef054b6f67f57ff40ecc15409f/sound/mecha/powerloader_buckle.ogg"
+
+- files: ["powerloader_buckle.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/562b51dbda5b25012e423779e980a00f303065a5/sound/mecha/powerloader_unbuckle.ogg"

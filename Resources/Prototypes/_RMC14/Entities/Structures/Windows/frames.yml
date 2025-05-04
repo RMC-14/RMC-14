@@ -31,7 +31,8 @@
         mask:
         - MachineMask
         layer:
-        - HalfWallLayer
+        - MidImpassable
+        - BulletImpassable
   - type: Destructible
     thresholds:
       - trigger:
@@ -40,14 +41,27 @@
         behaviors:
           - !type:DoActsBehavior
             acts: ["Destruction"]
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMSheetMetal1:
+                min: 2
+                max: 2
   - type: InteractionOutline
   - type: Clickable
   - type: Climbable
   - type: RMCWallExplosionDeletable
+  - type: DestroyedByExplosionType
   - type: DamageMultiplierFlags
     flags: Breaching
   - type: MinimapColor
     color: "#8d2294ad"
+  - type: ReceiverXenoClaws
+    maxHealth: 600
+    hitsToDestroy: 3
+  - type: XenoLeapDestroyOnPass
+    spawnPrototype: CMSheetMetal1
+    amount: 2
+  - type: RequireProjectileTarget
 
 - type: entity
   parent: RMCBaseWindowFrame
@@ -138,6 +152,29 @@
   - type: Construction
     graph: RMCWindowColonyReinforced
     node: windowFrameColonyReinforced
+  - type: ReceiverXenoClaws
+    hitsToDestroy: 5
+
+- type: entity
+  parent: RMCBaseWindowFrame
+  id: RMCWindowFrameHunterReinforced
+  suffix: hunter
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/Frames/colony_rframe.rsi
+    state: col_rframe0
+    color: "#aba9a9"
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/Frames/colony_rframe.rsi
+    state: col_rframe0
+    color: "#aba9a9"
+  - type: IconSmooth
+    key: walls
+    base: col_rframe
+    mode: CardinalFlags
+  - type: Construction
+    graph: RMCWindowHunterReinforced
+    node: windowFrameHunterReinforced
 
 - type: entity
   parent: RMCBaseWindowFrame
@@ -156,3 +193,5 @@
   - type: Construction
     graph: RMCWindowWood
     node: windowFrameWood
+  - type: XenoLeapDestroyOnPass
+    spawnPrototype: RMCPlankWood

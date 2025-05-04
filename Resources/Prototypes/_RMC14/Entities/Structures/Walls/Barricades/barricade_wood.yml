@@ -30,6 +30,9 @@
     damageContainer: Inorganic
     damageModifierSet: Wood
   - type: InteractionOutline
+  - type: NailgunRepairable
+    # cm13 max_health%: 1
+    repairWood: 100
   - type: Destructible
     thresholds:
     - trigger:
@@ -49,3 +52,4 @@
   - type: Construction
     graph: BarricadeWoodGraph
     node: nodeWood
+  - type: Climbable

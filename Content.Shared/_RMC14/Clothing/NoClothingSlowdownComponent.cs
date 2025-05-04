@@ -10,10 +10,10 @@ public sealed partial class NoClothingSlowdownComponent : Component
     public string Slot = "shoes";
 
     [DataField, AutoNetworkedField]
-    public float WalkModifier = 0.68f;
+    public float WalkModifier = 0.62f;
 
     [DataField, AutoNetworkedField]
-    public float SprintModifier = 0.68f;
+    public float SprintModifier = 0.62f;
 
     [DataField, AutoNetworkedField]
     public bool Active = false;

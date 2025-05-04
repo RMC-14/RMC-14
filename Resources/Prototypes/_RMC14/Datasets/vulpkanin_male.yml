@@ -1,0 +1,5 @@
+- type: localizedDataset
+  id: names_vulpkanin_male
+  values:
+    prefix: rmc-name-vulpkanin-male-
+    count: 345

@@ -1,5 +1,4 @@
 using Content.Shared.Buckle.Components;
-using Content.Shared.Cuffs.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.IdentityManagement;
@@ -15,11 +14,11 @@ public abstract partial class SharedBuckleSystem
     private void InitializeInteraction()
     {
         SubscribeLocalEvent<StrapComponent, GetVerbsEvent<InteractionVerb>>(AddStrapVerbs);
-        SubscribeLocalEvent<StrapComponent, InteractHandEvent>(OnStrapInteractHand, after: [typeof(InteractionPopupSystem)]);
+        SubscribeLocalEvent<StrapComponent, InteractHandEvent>(OnStrapInteractHand, before: [typeof(InteractionPopupSystem)]);
         SubscribeLocalEvent<StrapComponent, DragDropTargetEvent>(OnStrapDragDropTarget);
         SubscribeLocalEvent<StrapComponent, CanDropTargetEvent>(OnCanDropTarget);
 
-        SubscribeLocalEvent<BuckleComponent, InteractHandEvent>(OnBuckleInteractHand, after: [typeof(InteractionPopupSystem)]);
+        SubscribeLocalEvent<BuckleComponent, InteractHandEvent>(OnBuckleInteractHand, before: [typeof(InteractionPopupSystem)]);
         SubscribeLocalEvent<BuckleComponent, GetVerbsEvent<InteractionVerb>>(AddUnbuckleVerb);
     }
 
@@ -34,6 +33,9 @@ public abstract partial class SharedBuckleSystem
         if (!StrapCanDragDropOn(uid, args.User, uid, args.Dragged, component))
             return;
 
+        if (!XenoCheck(args.User, args.Dragged))
+            return;
+
         if (args.Dragged == args.User)
         {
             if (!TryComp(args.User, out BuckleComponent? buckle))
@@ -43,7 +45,14 @@ public abstract partial class SharedBuckleSystem
         }
         else
         {
-            var doAfterArgs = new DoAfterArgs(EntityManager, args.User, component.BuckleDoafterTime, new BuckleDoAfterEvent(), args.Dragged, args.Dragged, uid)
+            var delay = component.BuckleDoafterTime;
+            if (TryComp(args.Dragged, out BuckleComponent? buckle) &&
+                buckle.BuckleDelay != null)
+            {
+                delay = buckle.BuckleDelay.Value;
+            }
+
+            var doAfterArgs = new DoAfterArgs(EntityManager, args.User, delay, new BuckleDoAfterEvent(), args.Dragged, args.Dragged, uid)
             {
                 BreakOnMove = true,
                 BreakOnDamage = true,
@@ -84,15 +93,29 @@ public abstract partial class SharedBuckleSystem
         if (!TryComp(args.User, out BuckleComponent? buckle))
             return;
 
-        if (buckle.BuckledTo == null)
+        // Buckle self
+        if (buckle.BuckledTo == null && component.BuckleOnInteractHand && StrapHasSpace(uid, buckle, component))
+        {
             TryBuckle(args.User, args.User, uid, buckle, popup: true);
-        else if (buckle.BuckledTo == uid)
-            TryUnbuckle(args.User, args.User, buckle, popup: true);
-        else
+            args.Handled = true;
             return;
+        }
+
+        // Unbuckle self
+        if (buckle.BuckledTo == uid && TryUnbuckle(args.User, args.User, buckle, popup: true))
+        {
+            args.Handled = true;
+            return;
+        }
+
+        // Unbuckle others
+        if (component.BuckledEntities.TryFirstOrNull(out var buckled) && TryUnbuckle(buckled.Value, args.User))
+        {
+            args.Handled = true;
+            return;
+        }
 
         // TODO BUCKLE add out bool for whether a pop-up was generated or not.
-        args.Handled = true;
     }
 
     private void OnBuckleInteractHand(Entity<BuckleComponent> ent, ref InteractHandEvent args)
@@ -100,11 +123,13 @@ public abstract partial class SharedBuckleSystem
         if (args.Handled)
             return;
 
+        if (!ent.Comp.ClickUnbuckle)
+            return;
+
         if (ent.Comp.BuckledTo != null)
-            TryUnbuckle(ent!, args.User, popup: true);
+            args.Handled = TryUnbuckle(ent!, args.User, popup: true);
 
         // TODO BUCKLE add out bool for whether a pop-up was generated or not.
-        args.Handled = true;
     }
 
     private void AddStrapVerbs(EntityUid uid, StrapComponent component, GetVerbsEvent<InteractionVerb> args)

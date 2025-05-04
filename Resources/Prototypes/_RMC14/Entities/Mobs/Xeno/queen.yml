@@ -1,9 +1,11 @@
-﻿- type: entity
+- type: entity
+  abstract: true
   parent:
   - CMXenoDeveloped
   - CMXenoTail
   - RMCXenoSpeechSounds
-  id: CMXenoQueen
+  - RMCXenoMobCollision
+  id: RMCXenoQueenBase
   name: Queen
   description: A huge, looming alien creature. The biggest and the baddest.
   components:
@@ -17,6 +19,22 @@
     - map: [ "enum.XenoVisualLayers.Ovipositor" ]
       sprite: _RMC14/Mobs/Xenonids/Queen/ovipositor.rsi
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Left" ]
+      visible: false
+    - map: [ "enum.XenoInhandVisualLayers.Right" ]
+      visible: false
+    - map: [ "focused" ]
+      sprite: _RMC14/Interface/xeno_hud.rsi
+      state: hudeye
+      visible: false
+    - map: [ "targetedDirection" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_direction
+      visible: false
+    - map: [ "targetedDirectionIntense" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_intense_direction
       visible: false
   - type: MobState
     allowedStates:
@@ -51,54 +69,67 @@
     - ActionXenoChooseStructure
     - ActionXenoSecreteStructure
     - ActionXenoGrowOvipositor
-#    - ActionXenoBanishXenonid
-#    - ActionXenoReadmitXenonid
+    - ActionXenoManageHive
 #    - ActionXenoRoyalJelly
 #    - ActionXenoMarkResin
-    # Mature
-#    - ActionXenoSpit
-#    - ActionXenoToggleSpitType
-    tier: 4
+    tier: 0
     bypassTierCount: true
     unlockAt: 0
+    hudOffset: -0.1,0
+  - type: XenoHeavy
   - type: XenoAcid
   - type: XenoConstruction
+    buildDelay: 2
     canBuild:
     - WallXenoResin
     - WallXenoMembrane
     - DoorXenoResin
+    - XenoStickyResin
+    - XenoFastResin
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
+    - HiveEggMorpherXenoConstructionNode
+    - HiveClusterXenoConstructionNode
+    - HiveRecoveryNodeXenoConstructionNode
   - type: XenoDevour
   - type: XenoPheromones
     pheromonesMultiplier: 4
+    pheroSuffix: queen
   - type: XenoPlasma
     plasma: 1000
     maxPlasma: 1000
     plasmaRegenOnWeeds: 4
   - type: CMArmor
-    armor: 25
+    xenoArmor: 25
     explosionArmor: 100
   - type: XenoWordQueen
   - type: XenoGut
+  - type: XenoClaws
+    clawType: VerySharp
   - type: MeleeWeapon
     damage:
       groups:
         Brute: 40
+  - type: XenoTailStab
+    tailDamage:
+      groups:
+        Brute: 54
   - type: XenoOvipositorCapable
-  - type: Tackle # min: 2, max: 6
-    threshold: 4
-    stun: 11
+  - type: Tackle
     chance: 0.55
+    stunMin: 5
+    stunMax: 6
+  - type: TunnelRenamer
   - type: Fixtures
     fixtures:
       fix1:
         shape:
           !type:PhysShapeCircle
-          radius: 0.40
+          radius: 0.35
         density: 185
         mask:
         - MobMask
+        - BarbedBarricade
         layer:
         - MobLayer
       fix2:
@@ -113,13 +144,25 @@
     baseWalkSpeed: 1.4
     baseSprintSpeed: 2.5
   - type: SlowOnPull
-    multiplier: 0.5
+    slowdowns:
+    - multiplier: 0.505
+      whitelist:
+        components:
+        - Marine
+    - multiplier: 0.5475
+      whitelist:
+        components:
+        - XenoLight
+    - multiplier: 0.43
+      whitelist:
+        components:
+        - XenoHeavy
   - type: MobMover
   - type: FootstepModifier
     footstepSoundCollection:
       collection: XenoFootstepLarge
       params:
-        volume: -8
+        volume: -6
 #  - type: RandomSound
 #    sound:
 #      collection: XenoQueenBreath # TODO RMC14
@@ -136,6 +179,7 @@
     whitelist:
       components:
       - XenoEgg
+      - XenoFruit
   - type: XenoEvolutionGranter
   - type: XenoEvolutionCapped
     id: CMXenoQueen
@@ -153,8 +197,11 @@
     deadThreshold: 1100
     addComponents:
     - type: XenoScreech
+    - type: XenoToggleSpit
     addActions:
     - ActionXenoScreech
+    - ActionXenoSpitQueen
+    - ActionXenoToggleSpitType
   - type: RMCSize
     size: Immobile
   - type: RMCXenoDamageVisuals
@@ -174,3 +221,84 @@
     icon:
       sprite: _RMC14/Interface/map_blips.rsi
       state: xenoqueen
+    background:
+      sprite: _RMC14/Interface/map_blips.rsi
+      state: xeno_ruler
+  - type: AcidTrap
+  - type: TacticalMapLiveUpdateOnOvi
+    enabled: false
+  - type: RMCPointing
+    arrow: RMCPointingArrowBigQueen
+  - type: ManageHive
+  - type: HiveLeaderGranter
+  - type: XenoHeal
+  - type: StunOnExplosionReceived
+    weak: false
+  - type: XenoSpit
+    projectileId: XenoQueenNeuroSpitProjectile
+    plasmaCost: 50
+  - type: CommendationGiver
+  - type: XenoInhands
+    prefix: queen
+  - type: XenoOmitNumber
+  - type: RMCFireArmorDebuffModifier
+    debuffModifier: 1.4
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 1.4
+  - type: QueenEyeAction
+  - type: StunFriendlyXenoOnStep
+
+- type: entity
+  parent: RMCXenoQueenBase
+  id: CMXenoQueen
+  #components:
+  # - type: XenoEvolution #can be enabled for events like april fools.
+  #   strains:
+  #   - RMCXenoQueenMaid
+
+- type: entity
+  id: XenoLeaderPheromoneRelay
+  components:
+  - type: XenoPheromones
+
+- type: entity
+  parent: RMCXenoQueenBase
+  id: RMCXenoQueenMaid
+  suffix: Cat Maid Queen
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Extras/Maid_queen/maid_queen.rsi
+    layers:
+    - map: [ "enum.XenoVisualLayers.Base" ]
+      state: alive
+    - map: [ "enum.XenoVisualLayers.Ovipositor" ]
+      sprite: _RMC14/Mobs/Xenonids/Extras/Maid_queen/maid_ovipositor.rsi
+    - map: [ "enum.RMCDamageVisualLayers.Base" ]
+      visible: false
+  - type: XenoStrain
+    name: rmc-xeno-maid-name
+    description: rmc-xeno-maid-description
+    popup: rmc-xeno-maid-popup
+  - type: OwOAccent
+  - type: Speech
+    speechSounds: Cat
+    
+- type: entity
+  parent: StationAiHolo
+  id: RMCQueenEye
+  name: queen eye
+  description: It seems to be a visual projection of someone.
+  categories: [ HideSpawnMenu, DoNotMap ]
+  components:
+  - type: Sprite
+    color: "#a800a8"
+    sprite: _RMC14/Effects/xeno_eye.rsi
+    layers:
+    - state: hologram
+  - type: Eye
+    drawFov: false
+  - type: QueenEye
+  - type: MotionDetectorTracked
+    isQueenEye: true
+  - type: Visibility
+    layer: 32770

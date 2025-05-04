@@ -1,26 +1,24 @@
 - type: entity
-  id: RMCCrateM54C
+  id: RMCCrateM54CMK1
   parent: RMCCrateWeapons
-  name: M54C MK1 Rifle Crate (x2 MK2, x2 magazines)
+  name: M54C MK1 Rifle Crate (x2 mk1, x2 magazines)
   components:
   - type: StorageFill
     contents:
-      - id: WeaponRifleM54C
+      - id: WeaponRifleM54CMK1
         amount: 2
-      - id: CMMagazineRifleM54C
+      - id: CMMagazineRifleM54CMK1
         amount: 2
 
 - type: entity
-  id: RMCCrateM54CE2
   parent: RMCCrateWeapons
+  id: RMCCrateM54CE2
   name: M54CE2 HAR crate (HAR x2, HAR ammo box x2)
   components:
   - type: StorageFill
     contents:
-      - id: WeaponRifleM54CE2
-        amount: 2
-      - id: CMMagazineRifleM54CE2
-        amount: 2
+    - id: RMCGunCaseRifleM54CE2
+      amount: 2
 
 - type: entity
   id: RMCCrateMK80
@@ -29,8 +27,20 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCMK80Case
+    - id: RMCGunCasePistolMK80
       amount: 2
+    - id: CMMagazinePistolMK80
+      amount: 4
+
+- type: entity
+  id: RMCCrateXM88
+  parent: RMCCrateWeapons
+  name: XM88 Heavy Rifle crate (XM88 x2)
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCCaseXM88
+        amount: 2
 
 - type: entity
   parent: RMCCrateWeapons
@@ -49,5 +59,47 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCSmartPistolCase
+    - id: RMCGunCasePistolSmart
+      amount: 2
+
+- type: entity
+  parent: RMCCrateWeapons
+  id: RMCCrateM34
+  name: M34 Flamethrower Crate (M34 x2, Broiler-T Fuelback x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCCaseFlamer
+      amount: 2
+    - id: RMCBackpackFlamer
+      amount: 2
+
+- type: entity
+  id: RMCCrateMOU53
+  parent: RMCCrateWeapons
+  name: MOU-53 Break Action Shotgun Crate (x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMOU53Case
+      amount: 2
+
+- type: entity
+  parent: RMCCrateWeapons
+  id: RMCCrateXM51
+  name: XM51 Breaching Scattergun Crate (x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCXM51Case
+      amount: 2
+
+- type: entity
+  parent: RMCCrateWeapons
+  id: RMCCrateM79
+  name: M79 Grenade Launcher Crate (x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCM79Case
       amount: 2
