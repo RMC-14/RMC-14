@@ -26,8 +26,6 @@
     soundGunshot:
       collection: CMM54CShoot
     shotsPerBurst: 4
-  - type: Corrodible
-    isCorrodible: false
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto

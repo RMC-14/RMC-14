@@ -26,6 +26,8 @@
     soundGunshot:
       collection: CMM54CShoot
     shotsPerBurst: 4
+  - type: Corrodible
+    isCorrodible: false
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
@@ -77,7 +79,7 @@
           - RMCMagazineRifleM54CMK1Incendiary
         startingItem: RMCMagazineRifleM54CIncendiary
   - type: GunDamageModifier
-    multiplier: 1.15
+    multiplier: 1.1
   - type: RMCMagneticItem
   - type: AttachableHolder
     slots:
