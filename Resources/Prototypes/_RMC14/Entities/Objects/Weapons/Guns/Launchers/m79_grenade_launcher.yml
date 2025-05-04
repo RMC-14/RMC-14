@@ -18,7 +18,7 @@
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/m79_shoot.ogg
   - type: RMCSelectiveFire
-    baseFireRate: 0.833
+    baseFireRate: 0.3125
   - type: BallisticAmmoProvider
     whitelist:
       tags:

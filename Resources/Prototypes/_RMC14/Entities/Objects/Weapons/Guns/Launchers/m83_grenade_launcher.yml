@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   name: M83 grenade launcher
   parent: [ RMCBaseWeaponGrenadeLauncher ]
   id: WeaponLauncherM83
@@ -23,7 +23,7 @@
   #- type: Clothing
   #  sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m83inhands.rsi
   - type: RMCSelectiveFire
-    baseFireRate: 0.3125
+    baseFireRate: 0.833
   - type: GunUserWhitelist
     whitelist:
       components:
