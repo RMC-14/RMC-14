@@ -37,6 +37,7 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly MobThresholdSystem _threshold = default!;
 
     private EntityQuery<ActorComponent> _actorQuery;
     private EntityQuery<XenoWatchedComponent> _xenoWatchedQuery;
@@ -228,7 +229,7 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
 
     private FixedPoint2 GetHealthPercentage(EntityUid uid)
     {
-        FixedPoint2 critical;
+        FixedPoint2? critical;
         FixedPoint2 damage;
         FixedPoint2 percentage = 0;
 
@@ -236,11 +237,15 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
         {
             if (TryComp<MobThresholdsComponent>(uid, out var threshold))
             {
-                critical =  threshold.Thresholds.FirstOrDefault(kvp => kvp.Value == MobState.Critical).Key;
-                if(critical == 0)
-                    return percentage;
-                damage = damageableComponent.TotalDamage;
-                percentage = (critical - damage)/ (critical); // i want the value to be between 0 and 1
+                if (_threshold.TryGetIncapThreshold(uid, out critical))
+                {
+                    FixedPoint2 critThreshold = critical?? 0;
+                    if (critThreshold != 0)
+                    {
+                        damage = damageableComponent.TotalDamage;
+                        percentage = (critThreshold - damage) / (critThreshold); // i want the value to be between 0 and 1
+                    }
+                }
             }
         }
         return percentage;
