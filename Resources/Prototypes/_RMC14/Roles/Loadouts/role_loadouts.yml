@@ -562,13 +562,13 @@
   - RMCLoadoutGroupPins
 
 - type: roleLoadout
-  id: JobRMCSynthetic
+  id: JobRMCJobSynthetic
   points: 7
   groups:
   - SynthBackpackRMC
   - SynthHeadwearRMC
   - SynthGlassesRMC
-  - MasksRMC
+  - SynthMasksRMC
   - HelmetGarbsRMC
   - SynthUniformRMC
   - SynthSuitsRMC

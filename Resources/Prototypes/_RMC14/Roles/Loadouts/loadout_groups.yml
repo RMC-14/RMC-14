@@ -409,12 +409,6 @@
   - BoonieRMC
   - BoonieTanRMC
   - CapRMC
-  - BrownHeadbandRMC
-  - GreenHeadbandRMC
-  - GrayHeadbandRMC
-  - RedHeadbandRMC
-  - TanHeadbandRMC
-  - SquadHeadbandRMC
   - BeretEngineerRMC
   - CapMPRMC
   - CapQuartermasterRMC
@@ -452,3 +446,26 @@
   - MarineLeatherSatchel
   - MarineMedicSatchel
   - SatchelWelderRMC
+
+- type: loadoutGroup
+  id: SynthMasksRMC
+  name: rmc-loadout-group-masks
+  minLimit: 1
+  loadouts:
+  - MaskScarfSquadRMC
+  - MaskScarfRedRMC
+  - MaskScarfBlackRMC
+  - MaskScarfGrayRMC
+  - MaskScarfGreenRMC
+  - MaskScarfTanRMC
+  - TornScarfBlackRMC
+  - TornScarfDesertRMC
+  - TornScarfGreenRMC
+  - TornScarfGreyRMC
+  - TornScarfUrbanRMC
+  - TornScarfSnowRMC
+  - NeckerchiefSquadRMC
+  - NeckerchiefTanRMC
+  - NeckerchiefBlackRMC
+  - NeckerchiefGrayRMC
+  - NeckerchiefGreenRMC
