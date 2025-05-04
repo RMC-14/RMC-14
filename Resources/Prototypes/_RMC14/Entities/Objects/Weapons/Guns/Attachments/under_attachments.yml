@@ -706,6 +706,7 @@
   id: RMCAttachmentLaserLightModule
   name: MK80 laser-light module
   description: A Laser-Light module for the MK80 Service Pistol which is currently undergoing limited field testing as part of the marines' next generation pistol program. All MK80 pistols come equipped with the module.
+  suffix: DO NOT MAP
   components:
   - type: Sprite
     layers:
