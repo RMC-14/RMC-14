@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Added new xeno armor alert sprites, by Aleksh!
-    type: Add
-  - message: Fixed the armor alert not updating with different armor changing effects.
-      It also now has a different icon depending on a xenos base armor.
-    type: Fix
-  id: 1181
-  time: '2025-01-09T03:13:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5329
 - author: Whisper
   changes:
   - message: Added Kyrus, Taleryn Vogsburg figurine.
@@ -5519,5 +5509,14 @@
   id: 1683
   time: '2025-05-04T23:35:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6347
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the M890 tactical shotgun on Fiorina being a ghost item.
+    type: Fix
+  - message: Fixed the MK80 attachment spawning on Hybrisa.
+    type: Fix
+  id: 1684
+  time: '2025-05-04T23:39:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6350
 Name: RMC14
 Order: -1
