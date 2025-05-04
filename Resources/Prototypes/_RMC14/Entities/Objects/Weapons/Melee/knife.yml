@@ -150,6 +150,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Melee/co_sabre.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Weapons/Melee/co_sabre.rsi
+    size: Large
   - type: Tag
     tags:
     - RMCCeremonialSword
