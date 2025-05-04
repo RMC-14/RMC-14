@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Whisper
-  changes:
-  - message: Added Hexathele Hasselti, Fae Petrovic, Kasumi, Muz, and Kipped Kipper
-      figurines.
-    type: Add
-  id: 1166
-  time: '2025-01-05T01:58:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5247
 - author: Vermidia
   changes:
   - message: Healer drone's now have a salve overlay that runs out when the last salve's
@@ -5510,5 +5502,12 @@
   id: 1668
   time: '2025-05-03T21:34:59.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6338
+- author: CyberTropic
+  changes:
+  - message: Colony floodlights now use colony power.
+    type: Add
+  id: 1669
+  time: '2025-05-04T06:52:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6263
 Name: RMC14
 Order: -1
