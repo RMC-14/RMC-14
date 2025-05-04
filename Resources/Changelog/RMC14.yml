@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Healer drone's now have a salve overlay that runs out when the last salve's
-      duration runs out.
-    type: Add
-  id: 1167
-  time: '2025-01-05T02:02:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5250
 - author: CyberTropic
   changes:
   - message: Some glasses can now be worn in the mask slot, in addition to the eyes
@@ -5509,5 +5501,15 @@
   id: 1669
   time: '2025-05-04T06:52:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6263
+- author: noctyrnal
+  changes:
+  - message: Added synthetic vendors.
+    type: Add
+  - message: Added Experimental Meson Goggles, The Custom Nailgun Holster, Compact
+      Defib and Smartpacks. These are exclusive to UNMC Synthetics.
+    type: Add
+  id: 1670
+  time: '2025-05-04T06:55:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6320
 Name: RMC14
 Order: -1
