@@ -1273,3 +1273,87 @@
           tags:
           - RMCWeaponSMGM63
           - RMCWeaponSMGM63B2
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCBeltHolsterNailgun
+  name: customized nailgun holster
+  description: Combination of a M276 pistol holster and engineering toolbelt that have been cannibalized into a unique belt that can holster a compact nailgun and two spare nailgun magazines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_nailgun.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: nailgun_tac
+      map: [ "nailguntactical_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: nailgun_compact
+      map: [ "nailguncompact_fill" ]
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: nailgun
+      map: [ "nailgun_fill" ]
+    - state: icon-front
+      map: [ "holstered" ]
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_nailgun.rsi
+  - type: Storage # holds up to 2 mags plus gun
+    maxItemSize: Normal
+    grid:
+    - 0,0,5,1 # 3 slots
+    whitelist:
+      components:
+      - Nailgun
+      tags:
+      - RMCMagazineSMGNailgun
+  - type: FixedItemSizeStorage
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        tags:
+        - Sidearm
+    - popup: rmc-storage-limit-max-mags
+      count: 2
+      whitelist:
+        tags:
+        - RMCMagazineSMGNailgun
+  - type: CMHolster
+    whitelist:
+      components:
+      - Nailgun
+  - type: Tag
+    tags:
+    - RMCNailgunHolster
+  - type: ItemMapper
+    spriteLayers:
+    - holstered
+    - nailgun_fill
+    - nailguncompact_fill
+    - nailguntactical_fill
+    mapLayers:
+      holstered:
+        whitelist:
+          components:
+          - Nailgun
+      nailgun_fill:
+        whitelist:
+          tags:
+          - RMCWeaponSMGNailgun
+      nailguncompact_fill:
+        whitelist:
+          tags:
+          - RMCNailgunCompact
+      nailguntactical_fill:
+        whitelist:
+          tags:
+          - RMCNailgunTactical
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: Tag
+  id: RMCNailgunHolster

@@ -60,3 +60,9 @@ rmc-job-prefix-pmc-director = DIR
 rmc-ghost-name-pmc-synth = We-Ya PMC Support Synthetic (Neutral)
 rmc-job-name-pmc-synth = Support Synthetic
 rmc-job-prefix-pmc-synth = WeYa Syn
+
+rmc-job-name-pmc-bodyguard = Bodyguard
+rmc-ghost-name-pmc-bodyguard = Weston-Yamada Goon (Executive Bodyguard Detail)
+
+rmc-job-name-pmc-bodyguard-lead = Security Lead
+rmc-ghost-name-pmc-bodyguard-lead = Weston-Yamada Goon Leader (Executive Bodyguard Detail)

@@ -49,3 +49,14 @@
   id: RMCRankWeYaDirector
   name: Director
   prefix: Director
+
+# Lawyers
+- type: rank
+  id: RMCRankWeYaLegalSpecialist
+  name: Legal Specialist
+  prefix: Legal Spc.
+
+- type: rank
+  id: RMCRankWeYaLegalSupervisor
+  name: Legal Supervisor
+  prefix: Legal Spvsr.

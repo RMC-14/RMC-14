@@ -1,0 +1,337 @@
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechCrewSynthetic
+  name: ColMarTech Synthetic Equipment Rack
+  description: An automated rack hooked up to a colossal storage of various equipment. Can be accessed only by synthetic units.
+  components:
+  - type: AccessReader
+    access:
+    - [ "RMCAccessSynth" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCJobSynthetic
+    sections:
+    - name: Standard Equipment
+      takeAll: CMStandard
+      entries:
+      # /obj/item/coin/marine/synth
+      # /obj/item/device/defibrillator/synthetic
+      - id: RMCHeadsetSynth
+    - name: Uniform
+      choices: { CMUniform: 1 }
+      entries:
+      - id: RMCJumpsuitSynthetic
+        # mandatory: true, TODO allow vendors to mark entries as mandatory
+        # /obj/item/clothing/under/rank/synthetic/old
+      - id: JumpsuitMarine
+      - id: CMJumpsuitMarineMedic
+    - name: Webbing
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBrown
+        recommended: true
+      - id: CMWebbingBlack
+      - id: CMWebbingPouch
+      - id: CMWebbing
+      - id: CMWebbingHolster
+    - name: Shoes
+      choices: { RMCShoes: 1 }
+      entries:
+      - id: RMCShoesWhite
+        recommended: true
+      - id: CMBootsBlackFilled
+    - name: Helmet
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: RMCHardhatOrange
+        name: orange hard hat
+      - id: ClothingHeadHatWelding
+      # /obj/item/clothing/head/cmcap/flap
+#    - name: Suit
+#      choices: { CMSuit: 1 }
+#      entries:
+    # - id: CMUtilityVestSynth
+       # recommended: true
+    # /obj/item/clothing/suit/storage/marine/light/synvest/grey
+    # /obj/item/clothing/suit/storage/marine/light/synvest/dgrey
+    # /obj/item/clothing/suit/storage/marine/light/synvest/jungle
+    # /obj/item/clothing/suit/storage/marine/light/synvest/snow
+    # /obj/item/clothing/suit/storage/marine/light/synvest/desert
+    - name: Gloves
+      choices: { CMGloves: 1 }
+      entries:
+      - id: CMHandsInsulated
+        recommended: true
+      - id: CMHandsBlackMarine
+      - id: CMHandsLatex
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: RMCSmartpack
+        name: S-V42 smartpack, blue
+        recommended: true
+      - id: RMCSmartpackBlack
+        name: S-V42 smartpack, black
+      - id: RMCSmartpackGreen
+        name: S-V42 smartpack, green
+      - id: RMCSmartpackTan
+        name: S-V42 smartpack, tan
+      - id: RMCSmartpackWhite
+        name: S-V42 smartpack, white
+      - id: RMCSmartpackA1
+        name: S-V42A1 smartpack, blue
+      - id: RMCSmartpackA1Black
+        name: S-V42A1 smartpack, black
+      - id: RMCSmartpackA1Green
+        name: S-V42A1 smartpack, green
+      - id: RMCSmartpackA1Tan
+        name: S-V42A1 smartpack, tan
+      - id: RMCSmartpackA1White
+        name: S-V42A1 smartpack, white
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries:
+      - id: RMCBeltUtilityGeneral
+      - id: CMBeltMedicBagFilled
+        name: M276 pattern lifesaver bag (Full)
+      - id: CMBeltMedicalFilled
+        name: M276 medical storage rig (Full)
+      - id: CMBeltUtilityFilled
+        name: M276 Toolbelt Rig (Full)
+    - name: Pouches
+      choices: { CMPouch: 2 }
+      entries:
+      - id: RMCPouchAutoinjector
+      - id: RMCPouchConstruction
+      - id: RMCPouchDocument
+      - id: RMCPouchElectronicsFill
+        name: electronics pouch (Full)
+      - id: RMCPouchFirstAidInjectors
+        name: first-aid pouch (refillable injectors)
+      - id: RMCPouchFirstAidSplintsGauzeOintment
+        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
+      - id: RMCPouchFirstAidPills
+        name: first-aid pouch (pills)
+      - id: RMCPouchFlareFilled
+        name: Flare pouch (Full)
+      - id: RMCPouchGeneralLarge
+      - id: RMCPouchSling
+      - id: RMCPouchMedical
+      - id: RMCPouchMedkit
+      - id: RMCPouchReagentCanisterTricordrazineRevival
+        name: Pressurized Reagent Canister Pouch\n(Revival Mix - Tricordrazine)
+#     - id: CMPressurizedReagentCanisterPouchPeridaxonRevivalMix
+#       name: Pressurized Reagent Canister Pouch\n(Revival Mix - Peridaxon)
+#        recommended: true
+      - id: RMCPouchReagentCanisterBicaridine
+        name: Pressurized Reagent Canister Pouch\n(Bicaridine)
+      - id: RMCPouchReagentCanisterKelotane
+        name: Pressurized Reagent Canister Pouch\n(Kelotane)
+      - id: RMCPouchReagentCanisterTricordrazine
+        name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
+      - id: RMCPouchReagentCanister
+        name: Pressurized Reagent Canister Pouch\n(EMPTY)
+      - id: RMCPouchToolsFill
+        name: tools pouch (Full)
+      - id: RMCPouchMacheteFilled
+        name: machete pouch (Full)
+    - name: Pouches
+      choices: { CMMask: 1 }
+      entries:
+      - id: CMMaskSterile
+
+- type: entity
+  parent: ColMarTechBase
+  id: ColMarTechCrewSyntheticGear
+  name: ColMarTech Synthetic Auxiliary Gear Rack
+  description: An automated gear rack hooked up to a colossal storage of various medical and engineering supplies. Can be accessed only by synthetic units.
+  components:
+  - type: AccessReader
+    access:
+    - [ "RMCAccessSynth" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/gear.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCJobSynthetic
+    sections:
+    - name: Engineer Supplies
+      entries:
+      # /obj/item/circuitboard/airlock - 2 Points
+      - id: CMAPCElectronics
+        points: 2
+      - id: CMEntrenchingTool
+        points: 2
+      - id: RMCPowerCellHigh
+        points: 3
+      - id: CMLightReplacer
+        points: 2
+      - id: CMSheetMetal10
+        name: metal x10
+        points: 5
+      - id: CMMultitool
+        points: 4
+      - id: CMSheetPlasteel10
+        name: plasteel x10
+        points: 7
+      - id: CMSandbagEmpty25
+        name: sandbags x25
+        points: 7
+      - id: RMCExplosivePlastic
+        points: 3
+      # /obj/item/tool/weldpack/minitank - 4 Points
+      - id: RMCEngineerKit
+        points: 1
+      - id: CMCrowbar # TODO RMC14: tactical prybar
+        points: 5
+    - name: Firstaid Kits
+      entries:
+      - id: CMAdvFirstAidKitFilled
+        points: 12
+      - id: CMFirstAidKitFilled
+        points: 5
+      - id: CMBurnAidKitFilled
+        points: 6
+      - id: CMToxinAidKitFilled
+        points: 6
+      - id: CMFirstAidO2KitFilled
+        points: 6
+      # /obj/item/storage/firstaid/rad - 6 Points
+    - name: Medical Supplies
+      entries:
+      - id: CMBurnKit1
+        points: 2
+      - id: CMTraumaKit1
+        points: 2
+      - id: RMCMedevacStretcher
+        points: 6
+      # /obj/item/stack/medical/splint - 1 Point
+      - id: CMRollerBed
+        points: 4
+      - id: CMStasisBag
+        points: 6
+      - id: CMMiniTank
+        points: 6
+      - id: CMMiniTank
+        points: 6
+      - id: CMBloodPackFull
+        points: 5
+      - id: CMPortableSurgicalBed
+        points: 10
+      - id: CMPillCanisterBicaridine
+        points: 5
+        recommended: true
+      - id: CMPillCanisterDexalin
+        points: 5
+      - id: CMPillCanisterDylovene
+        points: 5
+      - id: CMPillCanisterInaprovaline
+        points: 5
+      - id: CMPillCanisterKelotane
+        points: 5
+      # /obj/item/storage/pill_bottle/peridaxon - 5 Points
+      # /obj/item/storage/pill_bottle/tramadol - 5 Points
+      - id: CMBicaridineAutoInjector
+        points: 1
+      - id: CMDexalinPlusAutoInjector
+        points: 1
+      - id: CMEpinephrineAutoInjector
+        points: 1
+      - id: CMKelotaneAutoInjector
+        points: 1
+      # /obj/item/reagent_container/hypospray/autoinjector/oxycodone - 2 Points
+      # /obj/item/reagent_container/hypospray/autoinjector/tramadol - 1 Point
+      - id: CMTricordrazineAutoInjector
+        points: 1
+      # /obj/item/reagent_container/hypospray/autoinjector/empty/small - 1 Point
+      # /obj/item/reagent_container/hypospray/autoinjector/empty/medium - 2 Points
+      # /obj/item/reagent_container/hypospray/autoinjector/empty/large - 4 Points
+      - id: CMDefibrillator
+        points: 4
+        # mandatory: true, TODO allow vendors to mark entries as mandatory
+      - id: CMHealthAnalyzer
+        points: 4
+      - id: CMSurgicalLine
+        points: 4
+      - id: CMSynthGraft
+        points: 4
+    - name: Other Supplies
+      entries:
+      - id: RMCBinoculars
+        points: 5
+      - id: RMCRangefinder
+        points: 8
+      - id: RMCLaserDesignator
+        points: 12
+        recommended: true
+      - id: RMCIntelDetector
+        points: 5
+      - id: RMCFlashlight
+        points: 1
+        recommended: true
+      - id: RMCFulton
+        points: 5
+      - id: RMCMotionDetector
+        points: 5
+      - id: RMCSprayBottleSpaceCleaner
+        points: 2
+      - id: RMCWhistle
+        points: 5
+      - id: RMCScabbardMacheteFilled
+        name: machete scabbard (Full)
+        points: 2
+      - id: ClothingNeckStethoscope
+        points: 2
+      - id: RMCFlashlightPen
+        points: 2
+
+- type: entity
+  parent: ColMarTechBase
+  id: WeYaExperimentalToolsVendor
+  name: We-Ya Experimental Tools Vendor
+  description: A smaller vendor hooked up to a cache of specially provisioned, experimental tools and equipment provided by the We-Ya Research and Development Division(TM). Handle with care.
+  components:
+  # TODO RMC14 : Use a token instead of access
+  - type: AccessReader
+    access:
+    - [ "RMCAccessSynth" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/experimental.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCJobSynthetic
+    sections:
+    - name: Experimental Tools
+      entries:
+      # autocompressor - 15 Points
+      # breaching hammer - 15 Points
+      - id: RMCDefibrillatorCompact
+        points: 15
+      - id: RMCVendorBundleCompactNailgunKit
+        points: 15
+      # backpack firefighting watertank - 15 Points
+      # crew monitor - 15 Points
+      - id: RMCGlassesExperimentalMeson
+        points: 15
+      # maintenance jack - 15 Points
+      # portable dialysis machine - 15 Points
+      - id: RMCTelescopicBaton
+        points: 15
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleCompactNailgunKit
+  name: compact nailgun kit
+  description: Contains a compact nailgun, two magazines and a nailgun holster.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/nailgun_compact.rsi
+    state: icon
+  - type: CMVendorBundle
+    bundle:
+    - RMCNailgunCompact
+    - RMCMagazineSMGNailgun
+    - RMCMagazineSMGNailgun
+    - RMCBeltHolsterNailgun
