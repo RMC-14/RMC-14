@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the radio telephone backpack phone on sprite appearing incorrectly.
-    type: Fix
-  - message: Added a wall-mounted telephone, expect to see it on the Almayer.
-    type: Add
-  id: 1176
-  time: '2025-01-07T10:04:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5261
-- author: DummeHytteOst
-  changes:
-  - message: You can no longer devour currently nested hosts.
-    type: Fix
-  id: 1177
-  time: '2025-01-07T10:10:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5244
 - author: Vermidia
   changes:
   - message: Fixed Praetorian spit's doing slightly less damage than intended (25
@@ -5520,5 +5504,23 @@
   id: 1678
   time: '2025-05-04T08:31:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6332
+- author: Dygon
+  changes:
+  - message: Fixed airburst grenades ricocheting off of marines or xenos when shot
+      from an underbarrel grenade launcher.
+    type: Fix
+  - message: Fixed starshell projectiles not having working IFF when shot from an
+      underbarrel grenade launcher.
+    type: Fix
+  id: 1679
+  time: '2025-05-04T10:12:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6328
+- author: Vermidia
+  changes:
+  - message: Eggmorphers and Recovery nodes now show up on the tactical map.
+    type: Add
+  id: 1680
+  time: '2025-05-04T10:13:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6345
 Name: RMC14
 Order: -1
