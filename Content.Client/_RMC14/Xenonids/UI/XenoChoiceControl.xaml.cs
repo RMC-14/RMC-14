@@ -27,7 +27,9 @@ public partial class XenoChoiceControl : Control
         PlasmaButton.ModulateSelfOverride = PlasmaColor;
         HealButton.ModulateSelfOverride = HealColor;
         PlasmaButton.OnMouseEntered += OnHovered;
+        PlasmaButton.OnMouseExited += OnStopHovering;
         HealButton.OnMouseEntered += OnHovered;
+        HealButton.OnMouseExited += OnStopHovering;
     }
 
     public void Set(string name, Texture? texture)
@@ -45,8 +47,6 @@ public partial class XenoChoiceControl : Control
     public void SetName(string name)
     {
         Button.Name = name.Replace(" ","");
-
-        //Logger.Debug($"Just set the name of a choicecontrol to {Button.Name}");
     }
 
     public void SetLeader(Texture? texture)
@@ -86,14 +86,25 @@ public partial class XenoChoiceControl : Control
         if (args.SourceControl is not Button button)
             return;
 
-        //Logger.Debug($"Button {button.Name} hovered");
-
             button.ModulateSelfOverride = (button.Name) switch
             {
                 ("HealButton") => HealHighlightColor,
                 ("PlasmaButton") => PlasmaHighlightColor,
                 _ => throw new ArgumentOutOfRangeException()
             };
+    }
+
+    public void OnStopHovering(GUIMouseHoverEventArgs args)
+    {
+        if (args.SourceControl is not Button button)
+            return;
+
+        button.ModulateSelfOverride = (button.Name) switch
+        {
+            ("HealButton") => HealColor,
+            ("PlasmaButton") => PlasmaColor,
+            _ => throw new ArgumentOutOfRangeException()
+        };
     }
 
 }

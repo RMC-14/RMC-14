@@ -90,7 +90,6 @@ public sealed class XenoWatchBui : BoundUserInterface
 
                 xenobutton.Text = xeno.Name;
                 xenobutton.Name = xeno.Name.Replace(" ", "");
-                //Logger.Debug($"Name is {xenobutton.Name}");
                 xenobutton.ToggleMode = true;
                 xenobutton.ModulateSelfOverride = Color.Purple;
                 xenobutton.AddStyleClass("ButtonSquare");
@@ -100,24 +99,11 @@ public sealed class XenoWatchBui : BoundUserInterface
 
                 row.XenosContainer.AddChild(xenocontrol);
                 ShownXenos.Add(xeno.Name.Replace(" ", ""), false);
-                //Logger.Debug($"Added xeno {xeno.Name.Replace(" ","")} to shownxenos");
                 XenoCounts.Add(xeno.Name.Replace(" ", ""), 0);
-                //Logger.Debug($"Added xeno {xeno.Name.Replace(" ","")} to Xenocounts");
+
             }
             _window.RowContainer.AddChild(row);
         }
-
-        foreach (var key in XenoCounts.Keys)
-        {
-            Logger.Debug($"Xenocount Key: {key}");
-        }
-
-        foreach (var key in ShownXenos.Keys)
-        {
-            Logger.Debug($"ShownXeno Key: {key}");
-        }
-
-
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -132,8 +118,6 @@ public sealed class XenoWatchBui : BoundUserInterface
 
         var icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/xeno_watch.rsi"), "hudxenoleader");
         var iconTexture = _sprite.Frame0(icon);
-
-        //s.Xenos.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name)); testing this seems like i dont need it? might use sorting later tho
 
         var xenolist = s.Xenos.OrderByDescending(a => a.Leader);
 
@@ -161,36 +145,28 @@ public sealed class XenoWatchBui : BoundUserInterface
                 texture = _sprite.Frame0(evolution);
             }
 
-            //Logger.Debug($"NACME OF XENO IS{xeno.Name}");
-
-
-
 
             var control = new XenoChoiceControl();
             control.Set(xeno.Name, texture);
 
 
-            foreach (var xenokey in ShownXenos.Keys)
+            foreach (var xenokey in ShownXenos.Keys) //Lesser drones are evil
             {
                 var name = control.NameLabel.GetMessage()??"EmptyString";
                 name = name.Replace(" ", "");
                 if (name.Contains(xenokey))
                 {
-                        if ((name.Contains("Lesser")) == (xenokey.Contains("Lesser")) )
-                            control.SetName(xenokey);
+                    if ((name.Contains("Lesser")) == (xenokey.Contains("Lesser")) )
+                        control.SetName(xenokey);
                 }
             }
 
             string value = control.Button.Name ?? "";
-            Logger.Debug($"Control.button.name = {value}");
             if (XenoCounts.ContainsKey(value))
             {
                 XenoCounts[value] += 1;
-                Logger.Debug($"Xenocount is going up on xeno {value}");
             }
 
-
-            //control.SetName(value.ToString());
 
             control.SetHealth((float)xeno.Health);
             control.SetPlasma((float)xeno.Plasma);
@@ -206,7 +182,6 @@ public sealed class XenoWatchBui : BoundUserInterface
             if (s.IsQueen)
             {
                 control.QueenButtons.Visible = true;
-                //control.PlasmaButton.OnPressed += OnPlasmaPressed;
                 control.NameLabel.SetWidth = _window.Width - 310;
             }
 
@@ -246,7 +221,6 @@ public sealed class XenoWatchBui : BoundUserInterface
 
                 if (XenoCounts.TryGetValue(name.Replace(" ","")??"", out var count))
                 {
-                  //Logger.Debug($"This is running, count value is {count}");
                   hive.Count.Text = $"{count}";
                 }
             }
@@ -297,7 +271,6 @@ public sealed class XenoWatchBui : BoundUserInterface
         string name = args.Button.Name ?? string.Empty; // button name is emtpy, what i need is the text
         if (name == string.Empty)
         {
-            //Logger.Debug("Button is empty");
             return;
         }
         if (ShownXenos.ContainsKey(name))
@@ -305,8 +278,6 @@ public sealed class XenoWatchBui : BoundUserInterface
             ShownXenos[name] = !ShownXenos[name];
             args.Button.ModulateSelfOverride = UpdateButtonColor(ShownXenos[name]);
         }
-
-        //Logger.Debug(name);
         ClearSearchBar();
         UpdateList();
     }
@@ -320,7 +291,6 @@ public sealed class XenoWatchBui : BoundUserInterface
             foreach (var xeno in tiers[number])
             {
                 ShownXenos[xeno.Name.Replace(" ","")] = args.Button.Pressed;
-                //Logger.Debug(xeno.Name);
             }
         }
         UpdateTierChilds();
@@ -347,7 +317,6 @@ public sealed class XenoWatchBui : BoundUserInterface
                     var name = xenobutton.Name ?? "";
                     if (name is not "")
                         xenobutton.ModulateSelfOverride = UpdateButtonColor(ShownXenos[name]);
-                    //Logger.Debug($"UpdateTier, state is now: {ShownXenos[name]}");
                 }
             }
         }
@@ -394,9 +363,8 @@ public sealed class XenoWatchBui : BoundUserInterface
 
                     control.Visible = false;
 
-                    if (ShownXenos.TryGetValue(control.Button.Name ?? "", out var xeno)) // this only works with xeno names, but not with real player on xenos
+                    if (ShownXenos.TryGetValue(control.Button.Name ?? "", out var xeno))
                     {
-                        //Logger.Debug($"Control name is {control.Button.Name}, the label is '{control.NameLabel.GetMessage()}' and bool is {(xeno ? "true" : "false")}");
                         control.Visible = xeno;
                     }
                 }
