@@ -286,23 +286,6 @@
   - OrangeRMC
   - PotatoRMC
 
-# Role Specific
-- type: loadoutGroup
-  id: CommandingOfficerRoleSpecificRMC
-  name: rmc-loadout-group-role-specific
-  minLimit: 0
-  maxLimit: 1
-  loadouts:
-  - ColBeretRMC
-  - LtColBeretRMC
-
-- type: loadoutGroup
-  id: CommandingOfficerIDRMC
-  name: rmc-loadout-group-role-specific-ID
-  loadouts:
-  - ColIDCardRMC
-  - ColNormalIDCardRMC
-
 # Pins
 - type: loadoutGroup
   id: RMCLoadoutGroupPins
@@ -323,3 +306,29 @@
   - RMCPinTransgender
   - RMCPinAutism
   - RMCPinAutismGold
+
+# Commanding Officer
+- type: loadoutGroup
+  id: CommandingOfficerRoleSpecificRMC
+  name: rmc-loadout-group-role-specific
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - ColBeretRMC
+  - LtColBeretRMC
+
+- type: loadoutGroup
+  id: CommandingOfficerIDRMC
+  name: rmc-loadout-group-role-specific-ID
+  loadouts:
+  - ColIDCardRMC
+  - ColNormalIDCardRMC
+
+# Synthetic
+- type: loadoutGroup
+  id: SynthUniformRMC
+  name: rmc-loadout-group-synthetic-uniform
+  minLimit: 0
+  maxLimit: 21
+  loadouts:
+  - ScrubsBlueRMC
