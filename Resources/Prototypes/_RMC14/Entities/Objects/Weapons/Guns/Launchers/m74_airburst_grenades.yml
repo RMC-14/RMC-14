@@ -104,6 +104,7 @@
     tags:
     - Grenade
     - LauncherCompatibleGrenade
+  - type: InheritAcid
 
 - type: entity
   parent: RMC40MMGrenadeM74AGMF
@@ -445,6 +446,7 @@
     fillPrototype: RMCBatonSlugHIRR
     capacity: 1
     distance: 1
+  - type: InheritAcid
   - type: IgnoreArc
   - type: Fixtures
     fixtures:
