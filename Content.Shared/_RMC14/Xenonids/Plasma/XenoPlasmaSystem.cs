@@ -149,7 +149,7 @@ public sealed class XenoPlasmaSystem : EntitySystem
 
         foreach (var (actionID,action) in _actions.GetActions(ent))
         {
-            if (action.BaseEvent is XenoRemoteTransferPlasmaActionEvent && action.Cooldown != null)
+            if (action.BaseEvent is XenoRemoteTransferPlasmaActionEvent)
             {
                 _actions.PerformAction(ent,actionscomp, actionID,action,ev, _timing.CurTime);
             }
