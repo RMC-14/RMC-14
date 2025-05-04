@@ -388,3 +388,10 @@
       - RMCEncryptionKeyMarineCommand
   - type: HeadsetMultiBroadcast
     cooldown: 60
+    
+# Prisoner headset
+- type: entity
+  parent: RMCHeadsetShip
+  id: RMCHeadsetPrisoner
+  name: prisoner headset
+  description: Headset provided to prisoners as directed by marine law.

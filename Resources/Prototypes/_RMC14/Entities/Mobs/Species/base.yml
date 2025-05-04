@@ -322,8 +322,8 @@
   - type: RMCPickupDroppedItems
   - type: CommendationReceiver
   - type: RMCSpeciesSlowdownModifier
-    slowMultiplier: 0.66
-    superSlowMultiplier: 0.33
+    slowModifier: 2
+    superSlowModifier: 4
   - type: RMCHandEmotes
   - type: RMCBuckleDrawDepth
   - type: RMCObstacleSlamming
