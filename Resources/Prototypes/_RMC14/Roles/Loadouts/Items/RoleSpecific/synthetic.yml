@@ -67,6 +67,12 @@
     back:
     - CMJumpsuitMP
 
+- type: loadout
+  id: DCCJumpsuitRMC
+  storage:
+    back:
+    - CMJumpsuitDCC
+
 # Civilian Jumpsuits
 - type: loadout
   id: TShirtWhiteRMC
