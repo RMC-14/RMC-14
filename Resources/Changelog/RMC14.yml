@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed Praetorian spit's doing slightly less damage than intended (25
-      > 30), and acid ball range being higher than intended (4 > 3).
-    type: Fix
-  id: 1178
-  time: '2025-01-07T10:09:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5269
 - author: SG6732
   changes:
   - message: Tweaked the M4SPR's barrel attachment point to look better with the bayonet.
@@ -5522,5 +5514,13 @@
   id: 1680
   time: '2025-05-04T10:13:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/6345
+- author: Vermidia
+  changes:
+  - message: Fixed bleedout still occurring on fire, on weeds, and to larva in most
+      cases.
+    type: Fix
+  id: 1681
+  time: '2025-05-04T10:19:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/6311
 Name: RMC14
 Order: -1
